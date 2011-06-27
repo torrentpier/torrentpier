@@ -386,7 +386,7 @@ else
                 print_confirmation(array(
 					'CONFIRM_TITLE' => ($single_report) ? $lang['DELETE_REPORT'] : $lang['DELETE_REPORTS'],
 					'QUESTION'      => ($single_report) ? $lang['DELETE_REPORT_EXPLAIN'] : $lang['DELETE_REPORTS_EXPLAIN'],
-					'FORM_ACTION'   => "report.php",,
+					'FORM_ACTION'   => "report.php",
 					'HIDDEN_FIELDS' => $hidden_fields,
 				));
 			}

@@ -32,12 +32,12 @@ if ($profiledata['user_id'] != $userdata['user_id'] && !IS_ADMIN)
 }
 
 $language = $bb_cfg['default_lang'];
-if (!file_exists(LANG_ROOT_DIR ."lang_$language/lang_admin_attach.php";))
+if (!file_exists(LANG_ROOT_DIR ."lang_$language/lang_admin_attach.php"))
 {
 	$language = $attach_config['board_lang'];
 }
 
-include(LANG_ROOT_DIR ."lang_$language/lang_admin_attach.php";);
+include(LANG_ROOT_DIR ."lang_$language/lang_admin_attach.php");
 
 $start      = request_var('start', 0);
 $sort_order = request_var('order', 'ASC');

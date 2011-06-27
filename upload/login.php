@@ -84,14 +84,14 @@ if (isset($_POST['login']))
 		}
 		if ($login_username == '' || $login_password == '')
 		{
-			$login_errors[] = 'Вы должны ввести имя и пароль';
+			$login_errors[] = $lang['ENTER_PASSWORD'];
 		}
 	}
 
 	// Captcha
 	if ($need_captcha && !CAPTCHA()->verify_code())
 	{
-		$login_errors[] = 'Вы должны правильно ввести код подтверждения';
+		$login_errors[] = $lang['CONFIRM_CODE_WRONG'];
 	}
 
 	if (!$login_errors)
@@ -102,7 +102,7 @@ if (isset($_POST['login']))
 			redirect($redirect_url);
 		}
 
-		$login_errors[] = 'Вы ввели неверное/неактивное имя пользователя или неверный пароль';
+		$login_errors[] = $lang['ERROR_LOGIN'];
 
 		$need_captcha = (!$mod_admin_login) ? CACHE('bb_login_err')->set('l_err_'. USER_IP, 1, 3600) : false;
 	}

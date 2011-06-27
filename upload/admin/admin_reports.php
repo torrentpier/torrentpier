@@ -275,7 +275,7 @@ else if (isset($_POST[POST_CAT_URL]) || isset($_GET[POST_CAT_URL]))
 						print_confirmation(array(
 							'CONFIRM_TITLE' => $lang['DELETE_REASON'],
 							'QUESTION'      => $lang['DELETE_REPORT_REASON_EXPLAIN'],
-							'FORM_ACTION'   => "admin_reports.php",,
+							'FORM_ACTION'   => "admin_reports.php",
 							'HIDDEN_FIELDS' => $hidden_fields,
 						));
 					break;
@@ -430,7 +430,7 @@ else if (isset($_POST[POST_CAT_URL]) || isset($_GET[POST_CAT_URL]))
 			print_confirmation(array(
 				'CONFIRM_TITLE' => $lang['UNINSTALL_REPORT_MODULE'],
 				'QUESTION'      => $lang['UNINSTALL_REPORT_MODULE_EXPLAIN'],
-				'FORM_ACTION'   => "admin_reports.php",,
+				'FORM_ACTION'   => "admin_reports.php",
 				'HIDDEN_FIELDS' => $hidden_fields,
 			));
 		break;

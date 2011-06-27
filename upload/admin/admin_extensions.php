@@ -58,8 +58,7 @@ $submit = (isset($_POST['submit'])) ? TRUE : FALSE;
 // Get Attachment Config
 $attach_config = array();
 
-$sql = 'SELECT *
-FROM ' . bb_ATTACH_CONFIG;
+$sql = 'SELECT * FROM '. BB_ATTACH_CONFIG;
 
 if ( !($result = DB()->sql_query($sql)) )
 {
