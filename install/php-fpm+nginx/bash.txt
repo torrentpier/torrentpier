@@ -1,0 +1,5 @@
+$ mkdir /tmp/nginx
+$ mkdir /tmp/nginx/fastcgi_temp
+$ mkdir /tmp/nginx/client_temp
+
+$ mkdir /var/log/nginx/
