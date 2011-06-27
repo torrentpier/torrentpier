@@ -27,7 +27,7 @@ if ( !defined('IN_PHPBB') )
 	exit;
 }
 
-function check_image_type(&$type, &$error, &$error_msg)
+function check_image_type(&$type, &$errors)
 {
 	global $lang;
 
@@ -50,8 +50,7 @@ function check_image_type(&$type, &$error, &$error_msg)
 			return '.png';
 			break;
 		default:
-			$error = true;
-			$error_msg = (!empty($error_msg)) ? $error_msg . '<br />' . $lang['AVATAR_FILETYPE'] : $lang['AVATAR_FILETYPE'];
+			$errors[] = $lang['AVATAR_FILETYPE'];
 			break;
 	}
 
@@ -71,10 +70,10 @@ function user_avatar_delete($avatar_type, $avatar_file)
 		}
 	}
 
-	return ", user_avatar = '', user_avatar_type = " . USER_AVATAR_NONE;
+	return array('user_avatar' => '', 'user_avatar_type' => USER_AVATAR_NONE);
 }
 
-function user_avatar_gallery($mode, &$error, &$error_msg, $avatar_filename, $avatar_category)
+function user_avatar_gallery($mode, &$errors, $avatar_filename, $avatar_category)
 {
 	global $bb_cfg;
 
@@ -92,16 +91,15 @@ function user_avatar_gallery($mode, &$error, &$error_msg, $avatar_filename, $ava
 
 	if ( file_exists(@phpbb_realpath($bb_cfg['avatar_gallery_path'] . '/' . $avatar_category . '/' . $avatar_filename)) && ($mode == 'editprofile') )
 	{
-		$return = ", user_avatar = '" . str_replace("\'", "''", $avatar_category . '/' . $avatar_filename) . "', user_avatar_type = " . USER_AVATAR_GALLERY;
+		return array('user_avatar' => str_replace("\'", "''", $avatar_category . '/' . $avatar_filename), 'user_avatar_type' => USER_AVATAR_GALLERY);
 	}
 	else
 	{
-		$return = '';
+		return '';
 	}
-	return $return;
 }
 
-function user_avatar_url($mode, &$error, &$error_msg, $avatar_filename)
+function user_avatar_url($mode, &$errors, $avatar_filename)
 {
 	global $lang;
 
@@ -114,20 +112,17 @@ function user_avatar_url($mode, &$error, &$error_msg, $avatar_filename)
 
 	if ( !preg_match("#^((ht|f)tp://)([^ \?&=\#\"\n\r\t<]*?(\.(jpg|jpeg|gif|png))$)#is", $avatar_filename) )
 	{
-		$error = true;
-		$error_msg = ( !empty($error_msg) ) ? $error_msg . '<br />' . $lang['WRONG_REMOTE_AVATAR_FORMAT'] : $lang['WRONG_REMOTE_AVATAR_FORMAT'];
+		$errors[] = $lang['WRONG_REMOTE_AVATAR_FORMAT'];
 		return;
 	}
 
-	return ( $mode == 'editprofile' ) ? ", user_avatar = '" . str_replace("\'", "''", $avatar_filename) . "', user_avatar_type = " . USER_AVATAR_REMOTE : '';
+	return array('user_avatar' => str_replace("\'", "''", $avatar_filename), 'user_avatar_type' => USER_AVATAR_REMOTE);
 
 }
 
-function user_avatar_upload($mode, $avatar_mode, &$current_avatar, &$current_type, &$error, &$error_msg, $avatar_filename, $avatar_realname, $avatar_filesize, $avatar_filetype)
+function user_avatar_upload($mode, $avatar_mode, &$current_avatar, &$current_type, &$errors, $avatar_filename, $avatar_realname, $avatar_filesize, $avatar_filetype)
 {
 	global $bb_cfg, $lang;
-
-	$avatar_sql = '';
 
 	$ini_val = ( @phpversion() >= '4.0.0' ) ? 'ini_get' : 'get_cfg_var';
 
@@ -138,8 +133,7 @@ function user_avatar_upload($mode, $avatar_mode, &$current_avatar, &$current_typ
 	{
 		if ( empty($url_ary[4]) )
 		{
-			$error = true;
-			$error_msg = ( !empty($error_msg) ) ? $error_msg . '<br />' . $lang['INCOMPLETE_URL'] : $lang['INCOMPLETE_URL'];
+			$errors[] = $lang['INCOMPLETE_URL'];
 			return;
 		}
 
@@ -148,8 +142,7 @@ function user_avatar_upload($mode, $avatar_mode, &$current_avatar, &$current_typ
 
 		if ( !($fsock = @fsockopen($url_ary[2], $port, $errno, $errstr)) )
 		{
-			$error = true;
-			$error_msg = ( !empty($error_msg) ) ? $error_msg . '<br />' . $lang['NO_CONNECTION_URL'] : $lang['NO_CONNECTION_URL'];
+			$errors[] = $lang['NO_CONNECTION_URL'];
 			return;
 		}
 
@@ -166,15 +159,14 @@ function user_avatar_upload($mode, $avatar_mode, &$current_avatar, &$current_typ
 
 		if (!preg_match('#Content-Length\: ([0-9]+)[^ /][\s]+#i', $avatar_data, $file_data1) || !preg_match('#Content-Type\: image/[x\-]*([a-z]+)[\s]+#i', $avatar_data, $file_data2))
 		{
-			$error = true;
-			$error_msg = ( !empty($error_msg) ) ? $error_msg . '<br />' . $lang['FILE_NO_DATA'] : $lang['FILE_NO_DATA'];
+			$errors[] = $lang['FILE_NO_DATA'];
 			return;
 		}
 
 		$avatar_filesize = $file_data1[1];
 		$avatar_filetype = $file_data2[1];
 
-		if ( !$error && $avatar_filesize > 0 && $avatar_filesize < $bb_cfg['avatar_filesize'] )
+		if ( !$errors && $avatar_filesize > 0 && $avatar_filesize < $bb_cfg['avatar_filesize'] )
 		{
 			$avatar_data = substr($avatar_data, strlen($avatar_data) - $avatar_filesize, $avatar_filesize);
 
@@ -196,10 +188,7 @@ function user_avatar_upload($mode, $avatar_mode, &$current_avatar, &$current_typ
 		}
 		else
 		{
-			$l_avatar_size = sprintf($lang['AVATAR_FILESIZE'], round($bb_cfg['avatar_filesize'] / 1024));
-
-			$error = true;
-			$error_msg = ( !empty($error_msg) ) ? $error_msg . '<br />' . $l_avatar_size : $l_avatar_size;
+			$errors[] = sprintf($lang['AVATAR_FILESIZE'], round($bb_cfg['avatar_filesize'] / 1024));
 		}
 	}
 	else if ( ( file_exists(@phpbb_realpath($avatar_filename)) ) && preg_match('/\.(jpg|jpeg|gif|png)$/i', $avatar_realname) )
@@ -211,17 +200,14 @@ function user_avatar_upload($mode, $avatar_mode, &$current_avatar, &$current_typ
 		}
 		else
 		{
-			$l_avatar_size = sprintf($lang['AVATAR_FILESIZE'], round($bb_cfg['avatar_filesize'] / 1024));
-
-			$error = true;
-			$error_msg = ( !empty($error_msg) ) ? $error_msg . '<br />' . $l_avatar_size : $l_avatar_size;
+			$errors[] = sprintf($lang['AVATAR_FILESIZE'], round($bb_cfg['avatar_filesize'] / 1024));
 			return;
 		}
 
 		list($width, $height, $type) = @getimagesize($avatar_filename);
 	}
 
-	if ( !($imgtype = check_image_type($avatar_filetype, $error, $error_msg)) )
+	if ( !($imgtype = check_image_type($avatar_filetype, $errors)) )
 	{
 		return;
 	}
@@ -302,18 +288,13 @@ function user_avatar_upload($mode, $avatar_mode, &$current_avatar, &$current_typ
 		}
 
 		@chmod('./' . $bb_cfg['avatar_path'] . "/$new_filename", 0777);
-
-		$avatar_sql = ( $mode == 'editprofile' ) ? ", user_avatar = '$new_filename', user_avatar_type = " . USER_AVATAR_UPLOAD : "'$new_filename', " . USER_AVATAR_UPLOAD;
+	    return array('user_avatar' => $new_filename, 'user_avatar_type' => USER_AVATAR_UPLOAD);
 	}
 	else
 	{
-		$l_avatar_size = sprintf($lang['AVATAR_IMAGESIZE'], $bb_cfg['avatar_max_width'], $bb_cfg['avatar_max_height']);
-
-		$error = true;
-		$error_msg = ( !empty($error_msg) ) ? $error_msg . '<br />' . $l_avatar_size : $l_avatar_size;
+		$errors[] = sprintf($lang['AVATAR_IMAGESIZE'], $bb_cfg['avatar_max_width'], $bb_cfg['avatar_max_height']);
+	    return '';
 	}
-
-	return $avatar_sql;
 }
 
 function display_avatar_gallery($mode, $category, $user_id, $email, $current_email, $username, $email, $new_password, $cur_password, $password_confirm, $icq, $website, $location, $user_flag, $occupation, $interests, $signature, $viewemail, $notifypm, $notifyreply, $attachsig, $hideonline, $style, $language, $timezone, $dateformat, &$session_id)

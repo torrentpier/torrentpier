@@ -167,9 +167,6 @@ if ($bb_cfg['reports_enabled'])
 else $report_list = '';
 // Report [END]
 
-$avatar_img = '';
-$avatar_img = get_avatar($userdata['user_avatar'], $userdata['user_avatar_type'], $userdata['user_allowavatar']);
-
 $template->assign_vars(array(
 	'SIMPLE_HEADER'      => !empty($gen_simple_header),
 	'IN_ADMIN'           => defined('IN_ADMIN'),
@@ -209,7 +206,7 @@ $template->assign_vars(array(
 	'LOGGED_IN'          => $logged_in,
 	'SESSION_USER_ID'    => $userdata['user_id'],
 	'THIS_USERNAME'      => $userdata['username'],
-	'AVATAR'      	     => $avatar_img,
+	'AVATAR'      	     => get_avatar($userdata['user_avatar'], $userdata['user_avatar_type'], $userdata['user_allowavatar']),
 	'SHOW_LOGIN_LINK'    => !defined('IN_LOGIN'),
 	'AUTOLOGIN_DISABLED' => !$bb_cfg['allow_autologin'],
 	'S_LOGIN_ACTION'     => BB_ROOT ."login.php",

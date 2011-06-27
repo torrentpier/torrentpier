@@ -158,8 +158,58 @@ ajax.callback.user_register = function(data){
 	</td>
 </tr>
 <!-- ENDIF -->
-
-
+<!-- IF SHOW_DATEFORMAT -->
+<tr>
+	<td>{L_DATE_FORMAT}:<h6>{L_DATE_FORMAT_EXPLAIN}</h6></td>
+	<td><input type="text" name="dateformat" value="{DATE_FORMAT}" maxlength="14" /></td>
+</tr>
+<!-- ENDIF -->
+<!-- BEGIN switch_avatar_block -->
+<tr>
+	<th colspan="2">{L_AVATAR_PANEL}</th>
+</tr>
+<tr>
+	<td colspan="2">
+		<table class="borderless bCenter w80 med">
+		<tr>
+			<td>{AVATAR_EXPLAIN}</td>
+			<td class="tCenter nowrap">
+				<p>{L_CURRENT_IMAGE}</p>
+				<p class="mrg_6">{USER_AVATAR}</p>
+				<p><label><input type="checkbox" name="avatardel" /> {L_DELETE_IMAGE}</label></p>
+			</td>
+		</tr>
+		</table>
+	</td>
+</tr>
+<!-- BEGIN switch_avatar_local_upload -->
+<tr>
+	<td>{L_UPLOAD_AVATAR_FILE}:</td>
+	<td>
+		<input type="file" name="avatar" size="40" />
+		<input type="hidden" name="MAX_FILE_SIZE" value="{AVATAR_SIZE}" />
+	</td>
+</tr>
+<!-- END switch_avatar_local_upload -->
+<!-- BEGIN switch_avatar_remote_upload -->
+<tr>
+	<td>{L_UPLOAD_AVATAR_URL}:<h6>{L_UPLOAD_AVATAR_URL_EXPLAIN}</h6></td>
+	<td><input type="text" name="avatarurl" size="44" /></td>
+</tr>
+<!-- END switch_avatar_remote_upload -->
+<!-- BEGIN switch_avatar_remote_link -->
+<tr>
+	<td>{L_LINK_REMOTE_AVATAR}:<h6>{L_LINK_REMOTE_AVATAR_EXPLAIN}</h6></td>
+	<td><input type="text" name="avatarremoteurl" size="44" /></td>
+</tr>
+<!-- END switch_avatar_remote_link -->
+<!-- BEGIN switch_avatar_local_gallery -->
+<tr>
+	<td>{L_AVATAR_GALLERY}:</td>
+	<td><input type="submit" name="avatargallery" value="{L_VIEW_AVATAR_GALLERY}" class="lite" /></td>
+</tr>
+<!-- END switch_avatar_local_gallery -->
+<!-- END switch_avatar_block -->
 <!-- ENDIF / EDIT_PROFILE -->
 
 <!-- IF SHOW_REG_AGREEMENT -->

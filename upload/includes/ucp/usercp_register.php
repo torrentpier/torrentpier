@@ -2,6 +2,8 @@
 
 if (!defined('BB_ROOT')) die(basename(__FILE__));
 
+$template->set_filenames(array('body' => 'usercp_register.tpl'));
+
 array_deep($_POST, 'trim');
 
 set_die_append_msg();
@@ -95,6 +97,8 @@ switch ($mode)
 			'user_sig'         => true,
 			'user_occ'         => true,
 			'user_interests'   => true,
+			'user_avatar'      => true,
+			'user_avatar_type' => true,
 		);
 
 		// Выбор профиля: для юзера свой, для админа любой
@@ -121,7 +125,30 @@ switch ($mode)
 		{
 			bb_die('Профиль не найден');
 		}
-		break;
+
+		include(INC_DIR . 'ucp/usercp_avatar.php');
+
+		if ( bf($pr_data['user_opt'], 'user_opt', 'allowavatar') && ( $bb_cfg['allow_avatar_upload'] || $bb_cfg['allow_avatar_local'] || $bb_cfg['allow_avatar_remote'] ) )
+		{
+			$template->assign_block_vars('switch_avatar_block', array() );
+
+			if ( $bb_cfg['allow_avatar_upload'] && file_exists(@phpbb_realpath('./' . $bb_cfg['avatar_path'])) )
+			{
+				$template->assign_block_vars('switch_avatar_block.switch_avatar_local_upload', array() );
+				$template->assign_block_vars('switch_avatar_block.switch_avatar_remote_upload', array() );
+			}
+
+			if ( $bb_cfg['allow_avatar_remote'] )
+			{
+				$template->assign_block_vars('switch_avatar_block.switch_avatar_remote_link', array() );
+			}
+
+			if ( $bb_cfg['allow_avatar_local'] && file_exists(@phpbb_realpath('./' . $bb_cfg['avatar_gallery_path'])) )
+			{
+				$template->assign_block_vars('switch_avatar_block.switch_avatar_local_gallery', array() );
+			}
+		}
+        break;
 
 	default:
 		trigger_error("invalid mode: $mode", E_USER_ERROR);
@@ -382,8 +409,6 @@ foreach ($profile_fields as $field => $can_edit)
 		$sig = isset($_POST['user_sig']) ? (string) $_POST['user_sig'] : $pr_data['user_sig'];
 		if ($submit)
 		{
-			$sig_esc = prepare_message($sig);
-
 			if (strlen($sig) > $bb_cfg['max_sig_chars'])
 			{
 				$errors[] = 'Слишком длинная подпись';
@@ -396,10 +421,10 @@ foreach ($profile_fields as $field => $can_edit)
 			{
 				$errors[] = 'Подпись может содержать только BBCode';
 			}
-			else if ($sig_esc != $pr_data['user_sig'])
+			else if ($sig != $pr_data['user_sig'])
 			{
-				$pr_data['user_sig'] = $sig_esc;
-				$db_data['user_sig'] = (string) $sig_esc;
+				$pr_data['user_sig'] = $sig;
+				$db_data['user_sig'] = (string) $sig;
 			}
 		}
 		$tp_data['USER_SIG'] = $pr_data['user_sig'];
@@ -437,6 +462,169 @@ foreach ($profile_fields as $field => $can_edit)
 			}
 		}
 		$tp_data['USER_INTERESTS'] = $pr_data['user_interests'];
+		break;
+
+	case 'user_avatar':
+	case 'user_avatar_type':
+		if( isset($_POST['avatargallery']) && !$errors )
+		{
+			$avatar_category = ( !empty($_POST['avatarcategory']) ) ? htmlspecialchars($_POST['avatarcategory']) : '';
+
+	        $dir = @opendir($bb_cfg['avatar_gallery_path']);
+
+			$avatar_images = array();
+			while( $file = @readdir($dir) )
+			{
+				if( $file != '.' && $file != '..' && !is_file($bb_cfg['avatar_gallery_path'] . '/' . $file) && !is_link($bb_cfg['avatar_gallery_path'] . '/' . $file) )
+				{
+					$sub_dir = @opendir($bb_cfg['avatar_gallery_path'] . '/' . $file);
+
+					$avatar_row_count = 0;
+					$avatar_col_count = 0;
+					while( $sub_file = @readdir($sub_dir) )
+					{
+						if( preg_match('/(\.gif$|\.png$|\.jpg|\.jpeg)$/is', $sub_file) )
+						{
+							$avatar_images[$file][$avatar_row_count][$avatar_col_count] = $sub_file;
+							$avatar_name[$file][$avatar_row_count][$avatar_col_count] = ucfirst(str_replace("_", " ", preg_replace('/^(.*)\..*$/', '\1', $sub_file)));
+
+							$avatar_col_count++;
+							if( $avatar_col_count == 5 )
+							{
+								$avatar_row_count++;
+								$avatar_col_count = 0;
+							}
+						}
+					}
+				}
+			}
+
+			@closedir($dir);
+
+			@ksort($avatar_images);
+			@reset($avatar_images);
+
+			if( empty($category) )
+			{
+				list($category, ) = each($avatar_images);
+			}
+			@reset($avatar_images);
+
+			$s_categories = '<select name="avatarcategory">';
+			while( list($key) = each($avatar_images) )
+			{
+				$selected = ( $key == $category ) ? ' selected="selected"' : '';
+				if( count($avatar_images[$key]) )
+				{
+					$s_categories .= '<option value="' . $key . '"' . $selected . '>' . ucfirst($key) . '</option>';
+				}
+			}
+			$s_categories .= '</select>';
+
+			$s_colspan = 0;
+			for($i = 0; $i < count($avatar_images[$category]); $i++)
+			{
+				$template->assign_block_vars("avatar_row", array());
+
+				$s_colspan = max($s_colspan, count($avatar_images[$category][$i]));
+
+				for($j = 0; $j < count($avatar_images[$category][$i]); $j++)
+				{
+					$template->assign_block_vars('avatar_row.avatar_column', array(
+						"AVATAR_IMAGE" => $bb_cfg['avatar_gallery_path'] . '/' . $category . '/' . $avatar_images[$category][$i][$j],
+						"AVATAR_NAME" => $avatar_name[$category][$i][$j])
+					);
+
+					$template->assign_block_vars('avatar_row.avatar_option_column', array(
+						"S_OPTIONS_AVATAR" => $avatar_images[$category][$i][$j])
+					);
+				}
+			}
+
+			$s_hidden_vars = '<input type="hidden" name="avatarcatname" value="' . $category . '" />';
+
+			$template->assign_vars(array(
+				'S_CATEGORY_SELECT' => $s_categories,
+				'S_COLSPAN' => $s_colspan,
+				'S_PROFILE_ACTION' => append_sid("profile.php?mode=$mode"),
+				'S_HIDDEN_FIELDS' => $s_hidden_vars)
+			);
+
+			$template->set_filenames(array('body' => 'usercp_avatar_gallery.tpl'));
+		}
+
+		$user_avatar_local = ( isset($_POST['avatarselect']) && !empty($_POST['submitavatar']) && $bb_cfg['allow_avatar_local'] ) ? htmlspecialchars($_POST['avatarselect']) : ( ( isset($_POST['avatarlocal'])  ) ? htmlspecialchars($_POST['avatarlocal']) : '' );
+		$user_avatar_category = ( isset($_POST['avatarcatname']) && $bb_cfg['allow_avatar_local'] ) ? htmlspecialchars($_POST['avatarcatname']) : '' ;
+
+		$user_avatar_remoteurl = ( !empty($_POST['avatarremoteurl']) ) ? trim(htmlspecialchars($_POST['avatarremoteurl'])) : '';
+		$user_avatar_upload = ( !empty($_POST['avatarurl']) ) ? trim($_POST['avatarurl']) : ( ( !empty($_FILES['avatar']) && $_FILES['avatar']['tmp_name'] != "none") ? $_FILES['avatar']['tmp_name'] : '' );
+		$user_avatar_name = ( !empty($_FILES['avatar']['name']) ) ? $_FILES['avatar']['name'] : '';
+		$user_avatar_size = ( !empty($_FILES['avatar']['size']) ) ? $_FILES['avatar']['size'] : 0;
+		$user_avatar_filetype = ( !empty($_FILES['avatar']['type']) ) ? $_FILES['avatar']['type'] : '';
+
+		$user_avatar = ( empty($user_avatar_local)) ? $pr_data['user_avatar'] : '';
+		$user_avatar_type = ( empty($user_avatar_local)) ? $pr_data['user_avatar_type'] : '';
+
+		if ( (isset($_POST['avatargallery']) || isset($_POST['submitavatar']) || isset($_POST['cancelavatar'])) && (!isset($submit)) )
+		{
+			if ( !isset($_POST['cancelavatar']))
+			{
+				$user_avatar = $user_avatar_category . '/' . $user_avatar_local;
+				$user_avatar_type = USER_AVATAR_GALLERY;
+			}
+		}
+
+		$ini_val = ( phpversion() >= '4.0.0' ) ? 'ini_get' : 'get_cfg_var';
+		$form_enctype = ( @$ini_val('file_uploads') == '0' || strtolower(@$ini_val('file_uploads') == 'off') || phpversion() == '4.0.4pl1' || !$bb_cfg['allow_avatar_upload'] || ( phpversion() < '4.0.3' && @$ini_val('open_basedir') != '' ) ) ? '' : 'enctype="multipart/form-data"';
+
+		$avatar = '';
+
+		if ( isset($_POST['avatardel']) && $mode == 'editprofile' )
+		{
+			$avatar = user_avatar_delete($pr_data['user_avatar_type'], $pr_data['user_avatar']);
+		}
+		else if ( ( !empty($user_avatar_upload) || !empty($user_avatar_name) ) && $bb_cfg['allow_avatar_upload'] )
+		{
+			if ( !empty($user_avatar_upload) )
+			{
+				$avatar_mode = (empty($user_avatar_name)) ? 'remote' : 'local';
+				$avatar = user_avatar_upload($mode, $avatar_mode, $pr_data['user_avatar'], $pr_data['user_avatar_type'], $errors, $user_avatar_upload, $user_avatar_name, $user_avatar_size, $user_avatar_filetype);
+			}
+			else if ( !empty($user_avatar_name) )
+			{
+				$errors[] = sprintf($lang['AVATAR_FILESIZE'], round($bb_cfg['avatar_filesize'] / 1024));
+			}
+		}
+		else if ( $user_avatar_remoteurl != '' && $bb_cfg['allow_avatar_remote'] )
+		{
+			user_avatar_delete($pr_data['user_avatar_type'], $pr_data['user_avatar']);
+			$avatar = user_avatar_url($mode, $errors, $user_avatar_remoteurl);
+		}
+		else if ( $user_avatar_local != '' && $bb_cfg['allow_avatar_local'] )
+		{
+			user_avatar_delete($pr_data['user_avatar_type'], $pr_data['user_avatar']);
+			$avatar = user_avatar_gallery($mode, $errors, $user_avatar_local, $user_avatar_category);
+		}
+
+        if($avatar)
+        {        	$user_avatar = $avatar['user_avatar'];
+        	$user_avatar_type = $avatar['user_avatar_type'];
+            $hidden_vars = '';
+        	foreach($_POST as $name => $key)
+        	{
+	        	$hidden_vars .= '<input type="hidden" name="'. $name .'" value="'. $key .'" />';
+        	}
+        	$tp_data['USER_AVATAR'] = get_avatar($user_avatar, $user_avatar_type) . $hidden_vars;        }
+        else
+        {        	$tp_data['USER_AVATAR'] = get_avatar($pr_data['user_avatar'], $pr_data['user_avatar_type']);        }
+	    if ($submit)
+		{
+			if ( $user_avatar != $pr_data['user_avatar'] || $user_avatar_type != $pr_data['user_avatar_type'])
+			{
+				$db_data['user_avatar'] = $avatar['user_avatar'];
+				$db_data['user_avatar_type'] = $avatar['user_avatar_type'];
+			}
+		}
 		break;
 
 	/**
@@ -534,8 +722,6 @@ if ($submit && !$errors)
 
 $template->assign_vars($tp_data);
 
-
-
 $template->assign_vars(array(
 	'PAGE_TITLE'         => ($mode == 'editprofile') ? 'Редактирование профиля'. ($adm_edit ? " :: {$pr_data['username']}" : '') : 'Регистрация',
 	'SHOW_REG_AGREEMENT' => ($mode == 'register' && !IS_ADMIN),
@@ -548,6 +734,7 @@ $template->assign_vars(array(
 
 	'TIMEZONE_SELECT'    => tz_select($user_timezone, 'user_timezone'),
 
+    'AVATAR_EXPLAIN'     => sprintf($lang['AVATAR_EXPLAIN'], $bb_cfg['avatar_max_width'], $bb_cfg['avatar_max_height'], (round($bb_cfg['avatar_filesize'] / 1024))),
 
 	'PR_USER_ID'         => $pr_data['user_id'],
 	'U_RESET_AUTOLOGIN'  => "login.php?logout=1&amp;reset_autologin=1&amp;sid={$userdata['session_id']}",
@@ -594,5 +781,8 @@ function set_pr_die_append_msg ($pr_uid)
 	');
 }
 
+require(PAGE_HEADER);
 
-print_page('usercp_register.tpl');
+$template->pparse('body');
+
+require(PAGE_FOOTER);
