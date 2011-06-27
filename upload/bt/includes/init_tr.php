@@ -5,12 +5,7 @@ if (!defined('IN_TRACKER')) die(basename(__FILE__));
 // Exit if tracker is disabled
 if ($tr_cfg['off'])
 {
-	msg_die($tr_cfg['off_reason']);
-}
-// Redirect browser
-if ($tr_cfg['browser_redirect_url'])
-{
-	browser_redirect();
+	tr_die($tr_cfg['off_reason']);
 }
 
 //
@@ -20,29 +15,24 @@ function tracker_exit ()
 {
 	global $DBS;
 
-	if (DBG_LOG)
+	if (DBG_LOG && DBG_LOG_GENTIME)
 	{
-		$gen_time       = utime() - TIMESTART;
-		$num_queries    = !empty($DBS) ? DB()->num_queries : '-';
-		$sql_inittime   = !empty($DBS) ? DB()->sql_inittime : '  --  ';
-		$sql_timetotal  = !empty($DBS) ? DB()->sql_timetotal : '  --  ';
-		$sql_init_perc  = !empty($DBS) ? round($sql_inittime*100/$gen_time) : ' - ';
-		$sql_total_perc = !empty($DBS) ? round($sql_timetotal*100/$gen_time) : ' - ';
+		if ($gen_time = utime() - TIMESTART)
+		{
+			$sql_init_perc  = round($DBS->sql_inittime*100/$gen_time);
+			$sql_total_perc = round($DBS->sql_timetotal*100/$gen_time);
 
-		$str = array();
-		$str[] = substr(time(), -4, 4);
-		$str[] = sprintf('%.4f', $gen_time);
-		$str[] = sprintf('%.4f'. LOG_SEPR .'%02d%%', $sql_inittime, $sql_init_perc);
-		$str[] = sprintf('%.4f'. LOG_SEPR .'%02d%%', $sql_timetotal, $sql_total_perc);
-		$str[] = $num_queries;
-		$str[] = sprintf('%.1f', LOADAVG);
-		$str = join(LOG_SEPR, $str) . LOG_LF;
-		dbg_log($str, '!!gentime');
+			$str = array();
+			$str[] = substr(time(), -4, 4);
+			$str[] = sprintf('%.4f', $gen_time);
+			$str[] = sprintf('%.4f'. LOG_SEPR .'%02d%%', $DBS->sql_inittime, $sql_init_perc);
+			$str[] = sprintf('%.4f'. LOG_SEPR .'%02d%%', $DBS->sql_timetotal, $sql_total_perc);
+			$str[] = $DBS->num_queries;
+			$str[] = sprintf('%.1f', sys('la'));
+			$str = join(LOG_SEPR, $str) . LOG_LF;
+			dbg_log($str, '!!gentime');
+		}
 	}
-/**!/
-	bb_log("##\n". ob_get_contents() ."\n##", 'tr_output_'. date('m-d_H'));
-#*/
-
 	exit;
 }
 
@@ -67,129 +57,105 @@ function error_exit ($msg = '')
 	tracker_exit();
 }
 
-function browser_redirect ()
-{
-	if (empty($_SERVER['HTTP_USER_AGENT'])) return;
-
-	$user_agent = strtolower($_SERVER['HTTP_USER_AGENT']);
-
-	$browser_ids = array(
-		'amaya',
-		'crawler',
-		'dillo',
-		'elinks',
-		'gecko',
-		'googlebot',
-		'ibrowse',
-		'icab',
-		'konqueror',
-		'lynx',
-		'mozilla',
-		'msie',
-		'msnbot',
-		'netpositive',
-		'omniweb',
-		'opera',
-		'safari',
-		'slurp',
-		'w3m',
-		'wget',
-	);
-
-	foreach ($browser_ids as $browser)
-	{
-		if (strpos($user_agent, $browser) !== false)
-		{
-			if (DBG_LOG)
-			{
-				dbg_log(' ', "redirect/$browser");
-
-				dbg_log(
-					TIMENOW                            . LOG_SEPR .
-					encode_ip($_SERVER['REMOTE_ADDR']) . LOG_SEPR .
-					$_SERVER['REMOTE_ADDR']            . LOG_SEPR .
-					$_SERVER['QUERY_STRING']           . LOG_SEPR .
-					$_SERVER['HTTP_USER_AGENT']        . LOG_SEPR .
-					LOG_LF,
-					"redirect/$browser.q.log"
-				);
-			}
-
-			header('Location: '. $GLOBALS['tr_cfg']['browser_redirect_url']);
-			tracker_exit();
-		}
-	}
-}
-
 // Database
 class sql_db
 {
+	var $cfg           = array();
+	var $cfg_keys      = array('dbhost', 'dbname', 'dbuser', 'dbpasswd', 'charset', 'persist');
 	var $link          = null;
 	var $result        = null;
+	var $db_server     = '';
 	var $selected_db   = null;
 
-	var $pconnect      = false;
 	var $locked        = false;
 
 	var $num_queries   = 0;
 	var $sql_starttime = 0;
 	var $sql_inittime  = 0;
 	var $sql_timetotal = 0;
+	var $sql_last_time = 0;
+	var $slow_time     = 0;
 
 	var $dbg           = array();
 	var $dbg_id        = 0;
-	var $dbg_user      = false;
+	var $dbg_enabled   = false;
 	var $cur_query     = null;
+
+	var $DBS           = array();
 
 	/**
 	* Constructor
 	*/
-	function sql_db ($cfg)
+	function sql_db ($cfg_values)
 	{
-		$this->dbg_user = (SQL_DEBUG && $cfg['dbg_user']);
-		$this->pconnect = $cfg['persist'];
+		global $DBS;
 
+		$this->cfg         = array_combine($this->cfg_keys, $cfg_values);
+		$this->dbg_enabled = sql_dbg_enabled();
+		$this->slow_time   = SQL_SLOW_QUERY_TIME;
+
+		$this->DBS['num_queries']   =& $DBS->num_queries;
+		$this->DBS['sql_inittime']  =& $DBS->sql_inittime;
+		$this->DBS['sql_timetotal'] =& $DBS->sql_timetotal;
+	}
+
+	/**
+	* Initialize connection
+	*/
+	function init ()
+	{
 		// Connect to server
-		$this->link = @$this->connect($cfg);
+		$this->link = $this->connect();
 
 		// Select database
-		$this->selected_db = @$this->select_db($cfg);
+		$this->selected_db = $this->select_db();
 
 		// Set charset
-		if ($cfg['charset'] && !@$this->sql_query("SET NAMES {$cfg['charset']}"))
+		if ($this->cfg['charset'] && !@mysql_set_charset($this->cfg['charset'], $this->link))
 		{
-			error_exit("Could not set MySQL charset '{$cfg['charset']}'");
+			if (!$this->sql_query("SET NAMES {$this->cfg['charset']}"))
+			{
+				error_exit("Could not set charset {$this->cfg['charset']}");
+			}
 		}
 
 		$this->num_queries = 0;
 		$this->sql_inittime = $this->sql_timetotal;
+		$this->DBS['sql_inittime'] += $this->sql_inittime;
 	}
 
 	/**
 	* Open connection
 	*/
-	function connect ($cfg)
+	function connect ()
 	{
 		$this->cur_query = 'connect';
 		$this->debug('start');
 
-		$connect_type = ($this->pconnect) ? 'mysql_pconnect' : 'mysql_connect';
+		$connect_type = ($this->cfg['persist']) ? 'mysql_pconnect' : 'mysql_connect';
 
-		if (!$link = $connect_type($cfg['dbhost'], $cfg['dbuser'], $cfg['dbpasswd']))
+		if (!$link = $connect_type($this->cfg['dbhost'], $this->cfg['dbuser'], $this->cfg['dbpasswd']))
 		{
 			$this->log_error();
 		}
 
-		register_shutdown_function(array(&$this, 'sql_close'));
+		register_shutdown_function(array(&$this, 'close'));
 
 		$this->debug('end');
 		$this->cur_query = null;
 
-		if (DBG_LOG) dbg_log(' ', 'DB-connect'. ($link ? '' : '-FAIL'));
+#		if (DBG_LOG) dbg_log(' ', 'DB-connect'. ($link ? '' : '-FAIL'));
 
 		if (!$link)
 		{
-			dummy_exit(1200);
+			if (function_exists('dummy_exit'))
+			{
+				dummy_exit(mt_rand(1200, 2400));
+			}
+			else
+			{
+				die;
+			}
 		}
 
 		return $link;
@@ -198,34 +164,36 @@ class sql_db
 	/**
 	* Select database
 	*/
-	function select_db ($cfg)
+	function select_db ()
 	{
 		$this->cur_query = 'select db';
 		$this->debug('start');
 
-		if (!mysql_select_db($cfg['dbname'], $this->link))
+		if (!mysql_select_db($this->cfg['dbname'], $this->link))
 		{
 			$this->log_error();
-			error_exit("Could not select database '{$cfg['dbname']}'");
+			error_exit("Could not select database '{$this->cfg['dbname']}'");
 		}
 
 		$this->debug('end');
 		$this->cur_query = null;
 
-		return $cfg['dbname'];
+		return $this->cfg['dbname'];
 	}
 
 	/**
 	* Base query method
 	*/
-	function sql_query ($query, $type = 'buffered')
+	function sql_query ($query)
 	{
+		if (!is_resource($this->link))
+		{
+			$this->init();
+		}
 		$this->cur_query = $query;
 		$this->debug('start');
 
-		$query_function = ($type === 'unbuffered') ? 'mysql_unbuffered_query' : 'mysql_query';
-
-		if (!$this->result = $query_function($query, $this->link))
+		if (!$this->result = mysql_query($query, $this->link))
 		{
 			$this->log_error();
 		}
@@ -234,6 +202,7 @@ class sql_db
 		$this->cur_query = null;
 
 		$this->num_queries++;
+		$this->DBS['num_queries']++;
 
 		return $this->result;
 	}
@@ -241,11 +210,11 @@ class sql_db
 	/**
 	* Execute query WRAPPER (with error handling)
 	*/
-	function query ($query, $err_msg = '')
+	function query ($query)
 	{
 		if (!$result = $this->sql_query($query))
 		{
-			$this->trigger_error($err_msg);
+			$this->trigger_error();
 		}
 
 		return $result;
@@ -271,33 +240,33 @@ class sql_db
 	*/
 	function affected_rows ()
 	{
-		return (is_resource($this->link)) ? mysql_affected_rows($this->link) : -1;
+		return is_resource($this->link) ? mysql_affected_rows($this->link) : -1;
 	}
 
 	/**
 	* Fetch current row
 	*/
-	function sql_fetchrow ($result, $result_type = MYSQL_ASSOC)
+	function sql_fetchrow ($result)
 	{
-		return (is_resource($result)) ? mysql_fetch_array($result, $result_type) : false;
+		return is_resource($result) ? mysql_fetch_assoc($result) : false;
 	}
 
 	/**
 	* Alias of sql_fetchrow()
 	*/
-	function fetch_next ($result, $result_type = MYSQL_ASSOC)
+	function fetch_next ($result)
 	{
-		return $this->sql_fetchrow($result, $result_type);
+		return $this->sql_fetchrow($result);
 	}
 
 	/**
 	* Fetch row WRAPPER (with error handling)
 	*/
-	function fetch_row ($query, $err_msg = '')
+	function fetch_row ($query)
 	{
 		if (!$result = $this->sql_query($query))
 		{
-			$this->trigger_error($err_msg);
+			$this->trigger_error();
 		}
 
 		return $this->sql_fetchrow($result);
@@ -306,11 +275,11 @@ class sql_db
 	/**
 	* Fetch all rows
 	*/
-	function sql_fetchrowset ($result, $result_type = MYSQL_ASSOC)
+	function sql_fetchrowset ($result)
 	{
 		$rowset = array();
 
-		while ($row = mysql_fetch_array($result, $result_type))
+		while ($row = mysql_fetch_assoc($result))
 		{
 			$rowset[] = $row;
 		}
@@ -321,11 +290,11 @@ class sql_db
 	/**
 	* Fetch all rows WRAPPER (with error handling)
 	*/
-	function fetch_rowset ($query, $err_msg = '')
+	function fetch_rowset ($query)
 	{
-		if (!$result = $this->sql_query($query, 'buffered'))
+		if (!$result = $this->sql_query($query))
 		{
-			$this->trigger_error($err_msg);
+			$this->trigger_error();
 		}
 
 		return $this->sql_fetchrowset($result);
@@ -336,6 +305,10 @@ class sql_db
 	*/
 	function escape ($v, $check_type = false)
 	{
+		if (!is_resource($this->link))
+		{
+			$this->init();
+		}
 		if (!$check_type)
 		{
 			return mysql_real_escape_string($v);
@@ -377,7 +350,7 @@ class sql_db
 	/**
 	* Close sql connection
 	*/
-	function sql_close ()
+	function close ()
 	{
 		if (is_resource($this->link))
 		{
@@ -386,7 +359,7 @@ class sql_db
 
 		$this->link = $this->selected_db = null;
 
-		if (DBG_LOG) dbg_log(str_repeat(' ', $this->num_queries), 'DB-num_queries');
+		if (DBG_LOG) dbg_log(str_repeat(' ', $this->num_queries), 'DB-num_queries-'. php_sapi_name());
 	}
 
 	/**
@@ -425,20 +398,22 @@ class sql_db
 			if (SQL_CALC_QUERY_TIME || DBG_LOG || SQL_LOG_SLOW_QUERIES)
 			{
 				$this->sql_starttime = utime();
+				$this->sql_last_time = 0;
 			}
 		}
 		else if ($mode == 'end')
 		{
 			if (SQL_CALC_QUERY_TIME || DBG_LOG || SQL_LOG_SLOW_QUERIES)
 			{
-				$cur_query_time = utime() - $this->sql_starttime;
-				$this->sql_timetotal += $cur_query_time;
+				$this->sql_last_time = utime() - $this->sql_starttime;
+				$this->sql_timetotal += $this->sql_last_time;
+				$this->DBS['sql_timetotal'] += $this->sql_last_time;
 
-				if (SQL_LOG_SLOW_QUERIES && $cur_query_time > SQL_SLOW_QUERY_TIME)
+				if (SQL_LOG_SLOW_QUERIES && $this->sql_last_time > $this->slow_time)
 				{
 					$msg  = date('m-d H:i:s') . LOG_SEPR;
-					$msg .= sprintf('%03d', round($cur_query_time));
-					$msg .= defined('LOADAVG') ? LOG_SEPR . sprintf('%.1f', LOADAVG) : '';
+					$msg .= sprintf('%03d', round($this->sql_last_time));
+					$msg .= LOG_SEPR . sprintf('%.1f', sys('la'));
 					$msg .= LOG_SEPR . str_compact($this->cur_query);
 					$msg .= LOG_SEPR .' # '. $this->query_info();
 					$msg .= LOG_SEPR . $this->debug_find_source();
@@ -484,7 +459,7 @@ class sql_db
 		{
 			if ($trace['file'] !== __FILE__)
 			{
-				$source = str_replace(BB_PATH . DIR_SEPR, '', $trace['file']) .'('. $trace['line'] .')';
+				$source = str_replace(BB_PATH . DIRECTORY_SEPARATOR, '', $trace['file']) .'('. $trace['line'] .')';
 				break;
 			}
 		}
@@ -518,42 +493,3 @@ class sql_db
 		bb_log($msg, 'sql_error_tr');
 	}
 }
-
-// Make the database connection
-function db_init ()
-{
-	if (defined('SQL_LAYER'))
-	{
-		return;
-	}
-	define('SQL_LAYER', 'mysql');
-
-	DB() = new sql_db(array(
-		'dbms'      => DBMS,
-		'dbhost'    => DBHOST,
-		'dbname'    => DBNAME,
-		'dbuser'    => DBUSER,
-		'dbpasswd'  => DBPASSWD,
-		'charset'   => DBCHARSET,
-		'collation' => DBCOLLATION,
-		'persist'   => PCONNECT,
-		'dbg_user'  => false,
-	));
-}
-
-##### LOG ##### // User req (by passkey)
-if ($log_passkey && isset($log_passkey[$_GET[$passkey_key]]))
-{
-	bb_log(
-		md5($_GET['info_hash'])           . LOG_SEPR .
-		date('His')                       . LOG_SEPR .
-		TIMENOW                           . LOG_SEPR .
-		$_SERVER['QUERY_STRING']          . LOG_SEPR .
-		$_SERVER['REMOTE_ADDR']           . LOG_SEPR .
-		@$_SERVER['HTTP_X_FORWARDED_FOR'] . LOG_SEPR .
-		@$_SERVER['HTTP_USER_AGENT']      . LOG_SEPR .
-		LOG_LF,
-		'passkey_'. $log_passkey[$_GET[$passkey_key]]
-	);
-}
-### LOG END ###
