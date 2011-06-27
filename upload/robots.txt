@@ -1,0 +1,17 @@
+User-agent: *
+Disallow: /forum/download.php
+Disallow: /forum/filelst.php
+Disallow: /forum/groupcp.php
+Disallow: /forum/login.php
+Disallow: /forum/memberlist.php
+Disallow: /forum/modcp.php
+Disallow: /forum/posting.php
+Disallow: /forum/privmsg.php
+Disallow: /forum/profile.php
+Disallow: /forum/release.php
+Disallow: /forum/viewonline.php
+Crawl-delay: 0.3
+Host: site.ru
+Clean-param: sid /forum/*.php
+
+Sitemap: http://site.ru/sitemap.php
