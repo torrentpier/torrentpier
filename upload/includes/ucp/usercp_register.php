@@ -684,7 +684,7 @@ if ($submit && !$errors)
 		}
 		else
 		{
-			$die_msg = 'Спасибо за регистрацию, учётная запись была создана<br /><br />Вы можете войти в систему, используя ваше имя и пароль';
+			$die_msg = $lang['ACCOUNT_ADDED'];
 		}
 		bb_die($die_msg);
 	}
@@ -715,7 +715,7 @@ if ($submit && !$errors)
 		}
 		else
 		{
-			bb_die('Ничего не было изменено');
+			bb_die($lang['NOTHING_HAS_CHANGED']);
 		}
 	}
 }
@@ -723,7 +723,7 @@ if ($submit && !$errors)
 $template->assign_vars($tp_data);
 
 $template->assign_vars(array(
-	'PAGE_TITLE'         => ($mode == 'editprofile') ? 'Редактирование профиля'. ($adm_edit ? " :: {$pr_data['username']}" : '') : 'Регистрация',
+	'PAGE_TITLE'         => ($mode == 'editprofile') ? $lang['EDIT_PROFILE'] . ($adm_edit ? " :: {$pr_data['username']}" : '') : $lang['REGISTER'],
 	'SHOW_REG_AGREEMENT' => ($mode == 'register' && !IS_ADMIN),
 	'ERROR_MESSAGE'      => ($errors) ? join('<br />', $errors) : '',
 	'MODE'               => $mode,

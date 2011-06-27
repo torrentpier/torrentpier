@@ -250,6 +250,11 @@ ajax.callback.view_post = function(data) {
 						onclick="user.set('tr_t_ax', this.checked ? 1 : 0);"
 					/>{L_OPEN_IN_SAME_WINDOW}
 				</label>
+				<label>
+					<input type="checkbox" <!-- IF SHOW_TIME_TOPICS -->{CHECKED}<!-- ENDIF -->
+						onclick="user.set('tr_t_t', this.checked ? 1 : 0);"
+					/>{L_SHOW_TIME_TOPICS}
+				</label>
 			</div>
 			</fieldset>
 		</td>
@@ -306,6 +311,7 @@ ajax.callback.view_post = function(data) {
 	<!-- ENDIF -->
 	<td class="row4 med tLeft">
 		<a class="{tor.DL_CLASS}<!-- IF AJAX_TOPICS --> folded2 tLink<!-- ENDIF -->" <!-- IF AJAX_TOPICS -->onclick="ajax.view_post({tor.POST_ID}, this); return false;"<!-- ENDIF --> href="{TOPIC_URL}{tor.TOPIC_ID}"><!-- IF tor.TOR_FROZEN -->{tor.TOPIC_TITLE}<!-- ELSE -->{tor.TOR_TYPE}<b>{tor.TOPIC_TITLE}</b><!-- ENDIF --></a>
+	    <!-- IF SHOW_TIME_TOPICS --><div class="tr_tm">{tor.TOPIC_TIME}</div><!-- ENDIF -->
 	</td>
 	<!-- IF SHOW_AUTHOR -->
 	<td class="row1"><a class="med" href="{TR_POSTER_URL}{tor.POSTER_ID}">{tor.USERNAME}</a></td>

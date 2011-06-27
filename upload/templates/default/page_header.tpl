@@ -475,7 +475,7 @@ important_info
      <!-- IF SHOW_BT_USERDATA --><div id="user_ratio">
       <h3>{L_BT_RATIO}</h3>
        <table cellpadding="0">
-	   <div align="center">{AVATAR}</div>
+	   <div align="center">{THIS_AVATAR}</div>
        <tr><td>{L_YOUR_RATIO}</td><td><!-- IF DOWN_TOTAL_BYTES gt MIN_DL_BYTES --><b>{USER_RATIO}</b><!-- ELSE --><b>{L_NONE}</b> (DL < {MIN_DL_FOR_RATIO})<!-- ENDIF --></td></tr>
        <tr><td>{L_DOWNLOADED}</td><td class="leechmed"><b>{DOWN_TOTAL}</b></td></tr>
        <tr><td>{L_UPLOADED}</td><td class="seedmed"><b>{UP_TOTAL}</b></td></tr>

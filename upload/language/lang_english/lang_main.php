@@ -121,7 +121,7 @@ $lang['SEARCH_LATEST'] = 'latest';
 
 $lang['REGISTER'] = 'Register';
 $lang['PROFILE'] = 'Profile';
-$lang['EDIT_PROFILE'] = 'Edit your profile';
+$lang['EDIT_PROFILE'] = 'Edit profile';
 $lang['SEARCH'] = 'Search';
 $lang['MEMBERLIST'] = 'Memberlist';
 $lang['FAQ'] = 'FAQ';
@@ -131,6 +131,7 @@ $lang['LASTPOST'] = 'Last Post';
 $lang['MODERATOR'] = 'Moderator';
 $lang['MODERATORS'] = 'Moderators';
 $lang['TERMS'] = 'Terms';
+$lang['NOTHING_HAS_CHANGED'] = 'Nothing has changed';
 
 //
 // Stats block text
@@ -1183,7 +1184,7 @@ $lang['UNSET_GOLD_TORRENT'] = 'UnMake gold';
 $lang['SET_SILVER_TORRENT'] = 'Make silver';
 $lang['UNSET_SILVER_TORRENT'] = 'UnMake gold';
 $lang['GOLD_STATUS'] = 'GOLD TORRENT! DOWNLOAD TRAFFIC DOES NOT CONSIDER!';
-$lang['SILVER_STATUS'] = 'SILVER TORRENT! DOWNLOAD TRAFFIC PARTIALLY CONSIDERED!'; 
+$lang['SILVER_STATUS'] = 'SILVER TORRENT! DOWNLOAD TRAFFIC PARTIALLY CONSIDERED!';
 // End - Gold/Silver releases
 
 $lang['SEARCH_IN_FORUMS'] = 'Search in Forums';
@@ -1265,9 +1266,9 @@ $lang['VIEWING_USER_BT_PROFILE'] = 'Viewing torrent-profile :: %s'; // %s is use
 $lang['CUR_ACTIVE_DLS'] = 'Currently active torrents';
 $lang['VIEW_TORRENT_PROFILE'] = 'Torrent-profile';
 
-$lang['PROFILE_UP_TOTAL'] = 'Total uploaded';	
+$lang['PROFILE_UP_TOTAL'] = 'Total uploaded';
 $lang['PROFILE_DOWN_TOTAL'] = 'Total downloaded';
-$lang['PROFILE_BONUS'] = 'Bonus';		
+$lang['PROFILE_BONUS'] = 'Bonus';
 $lang['PROFILE_RELEASED'] = 'Total released';
 $lang['PROFILE_RATIO'] = 'Ratio';
 $lang['PROFILE_MAX_SPEED'] = 'Speed';
@@ -1287,6 +1288,7 @@ $lang['TRACKER'] = 'Tracker';
 $lang['GALLERY'] = 'Gallery';
 $lang['OPEN_TOPICS'] = 'Open topics';
 $lang['OPEN_IN_SAME_WINDOW'] = 'open in same window';
+$lang['SHOW_TIME_TOPICS'] = 'show time of the creation topics';
 
 $lang['BT_LOW_RATIO_FUNC'] = "You can't use this option (ratio is too low)";
 $lang['BT_LOW_RATIO_FOR_DL'] = "With ratio <b>%s</b> you can't download torrents";

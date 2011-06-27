@@ -383,20 +383,12 @@ else
 					message_die(GENERAL_MESSAGE, $lang[$message] . $return_links['list'] . $return_links['index']);
 				}
 
-				$page_title = ($single_report) ? $lang['DELETE_REPORT'] : $lang['DELETE_REPORTS'];
-
-				include(PAGE_HEADER);
-				$template->set_filenames(array(
-					'confirm' => 'confirm_body.tpl')
-				);
-
-				$template->assign_vars(array(
-					'MESSAGE_TITLE' => $page_title,
-					'MESSAGE_TEXT' => ($single_report) ? $lang['DELETE_REPORT_EXPLAIN'] : $lang['DELETE_REPORTS_EXPLAIN'])
-				);
-
-				$template->pparse('confirm');
-				include(PAGE_FOOTER);
+                print_confirmation(array(
+					'CONFIRM_TITLE' => ($single_report) ? $lang['DELETE_REPORT'] : $lang['DELETE_REPORTS'],
+					'QUESTION'      => ($single_report) ? $lang['DELETE_REPORT_EXPLAIN'] : $lang['DELETE_REPORTS_EXPLAIN'],
+					'FORM_ACTION'   => "report.php",,
+					'HIDDEN_FIELDS' => $hidden_fields,
+				));
 			}
 		break;
 

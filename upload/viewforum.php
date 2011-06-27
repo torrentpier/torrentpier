@@ -1,23 +1,4 @@
 <?php
-/*
-	This file is part of TorrentPier
-
-	TorrentPier is free software: you can redistribute it and/or modify
-	it under the terms of the GNU General Public License as published by
-	the Free Software Foundation, either version 3 of the License, or
-	(at your option) any later version.
-
-	TorrentPier is distributed in the hope that it will be useful,
-	but WITHOUT ANY WARRANTY; without even the implied warranty of
-	MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-	GNU General Public License for more details.
-
-	A copy of the GPL 2.0 should have been included with the program.
-	If not, see http://www.gnu.org/licenses/
-
-	Official SVN repository and contact information can be found at
-	http://code.google.com/p/torrentpier/
- */
 
 define('IN_PHPBB',   true);
 define('BB_SCRIPT', 'forum');
@@ -100,6 +81,9 @@ if (!$is_auth['auth_view'])
 // Redirect to login page if not admin session
 $mod_redirect_url = '';
 
+// Filter by torrent status
+$tor_status = -1;  //  all by default
+
 if ($is_auth['auth_mod'])
 {
 	$redirect = isset($_POST['redirect']) ? $_POST['redirect'] : $_SERVER['REQUEST_URI'];
@@ -110,7 +94,17 @@ if ($is_auth['auth_mod'])
 	{
 		redirect($mod_redirect_url);
 	}
-
+	if (isset($_REQUEST['tst']) && $_REQUEST['tst'] != -1)
+	{
+		$tor_status = (int) $_REQUEST['tst'];
+		// reset other req values
+		unset($_REQUEST['sort'], $_REQUEST['order'], $_REQUEST[$title_match_key]);
+		$show_type_separator = false;
+	}
+    $select_tst = array_merge(array('* любой' => -1), array_flip($lang['tor_status']));
+	$template->assign_vars(array(
+		'SELECT_TST' => build_select('tst', $select_tst, $tor_status),
+	));
 	$select_st = array_merge(array('Выберите статус' => -1), array_flip($lang['tor_status']));
 	$template->assign_vars(array(
 		'SELECT_ST'  => build_select('st', $select_st, -1),
@@ -351,8 +345,14 @@ $limit_topics_time_sql = ($topic_days) ? "AND t.topic_last_post_time > ". (TIMEN
 $select_tor_sql = $join_tor_sql = '';
 $join_dl = ($bb_cfg['show_dl_status_in_forum'] && !IS_GUEST);
 
+$where_tor_sql = '';
 if ($forum_data['allow_reg_tracker'])
 {
+	if ($tor_status != -1)
+	{
+		$where_tor_sql = "AND tor.tor_status = $tor_status";
+	}
+
 	$select_tor_sql = ',
 		bt.auth_key, tor.info_hash, tor.size AS tor_size, tor.reg_time, tor.complete_count, tor.seeder_last_seen, tor.attach_id, tor.tor_status, tor.tor_type,
 		sn.seeders, sn.leechers
@@ -420,6 +420,7 @@ if ($topics_csv = join(',', $topic_ids))
 		LEFT JOIN ". BB_USERS  ." u2 ON(p2.poster_id = u2.user_id)
 			$join_tor_sql
 		WHERE t.topic_id IN($topics_csv)
+		    $where_tor_sql
 		GROUP BY t.topic_id
 		$order_sql
 	");
@@ -474,7 +475,7 @@ $template->assign_vars(array(
 	'ONLY_NEW_TOPICS_ON'  => ($only_new == ONLY_NEW_TOPICS),
 
 	'TITLE_MATCH'         => htmlCHR($title_match),
-	'SELECT_TPP'          => ($select_tpp) ? build_select('tpp', $select_tpp, $topics_per_page, null, null, 'onchange="$(\'#tpp\').submit();"') : '',
+	'SELECT_TPP'          => ($select_tpp) ? build_select('tpp', $select_tpp, $topics_per_page) : '',
 	'T_POST_NEW_TOPIC'    => ($forum_data['forum_status'] == FORUM_LOCKED) ? $lang['FORUM_LOCKED'] : $lang['POST_NEW_TOPIC'],
 	'S_AUTH_LIST'         => $u_auth,
 	'U_VIEW_FORUM'        => FORUM_URL . $forum_id,
@@ -576,6 +577,10 @@ foreach ($topic_rowset as $topic)
 unset($topic_rowset);
 
 $pg_url = FORUM_URL . $forum_id;
+$pg_url .= ($sort_value) ? "&sort=$sort_value" : '';
+$pg_url .= ($order_value) ? "&order=$order_value" : '';
+$template->assign_var('MOD_URL', $pg_url);
+$pg_url = FORUM_URL . $forum_id;
 $pg_url .= ($topic_days)  ? "&amp;topicdays=$topic_days" : '';
 $pg_url .= ($sort_value)  ? "&amp;sort=$sort_value" : '';
 $pg_url .= ($order_value) ? "&amp;order=$order_value" : '';
@@ -606,7 +611,6 @@ else
 
 $template->assign_vars(array(
 	'PAGE_URL'         => $pg_url,
-	'PAGE_URL_TPP'     => url_arg($pg_url, 'tpp', null),
 	'FOUND_TOPICS'     => $found_topics,
 
 	'AUTH_MOD'         => $is_auth['auth_mod'],

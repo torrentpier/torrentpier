@@ -644,7 +644,7 @@ if ($allowed_forums)
 		$select = "
 			SELECT
 				tor.topic_id, tor.post_id, tor.attach_id, tor.size, tor.reg_time, tor.complete_count, tor.seeder_last_seen, tor.tor_status, tor.tor_type,
-				t.topic_title, t.topic_replies, t.topic_views, sn.seeders, sn.leechers, tor.info_hash
+				t.topic_title, t.topic_time, t.topic_replies, t.topic_views, sn.seeders, sn.leechers, tor.info_hash
 		";
 		$select .= (!$hide_speed)  ? ", sn.speed_up, sn.speed_down" : '';
 		$select .= (!$hide_forum)  ? ", tor.forum_id" : '';
@@ -738,6 +738,7 @@ if ($allowed_forums)
 				'FORUM_NAME'   => ($forum_id) ? $forum_name_html[$forum_id] : '',
 				'TOPIC_ID'     => $tor['topic_id'],
 				'TOPIC_TITLE'  => wbr($tor['topic_title']),
+				'TOPIC_TIME'   => bb_date($tor['topic_time'], 'd-M-y') .' <b>&middot;</b> '. delta_time($tor['topic_time']),
 				'POST_ID'      => $tor['post_id'],
 				'POSTER_ID'    => $poster_id,
 				'USERNAME'     => isset($tor['username']) ? wbr($tor['username']) : '',
@@ -860,6 +861,7 @@ $template->assign_vars(array(
 	'TITLE_MATCH_VAL'  => $title_match_val,
 
 	'AJAX_TOPICS'      => $user->opt_js['tr_t_ax'],
+	'SHOW_TIME_TOPICS' => $user->opt_js['tr_t_t'],
 	'U_SEARCH_USER'    => "search.php?mode=searchuser&input_name=$poster_name_key",
 ));
 

@@ -28,7 +28,7 @@ $template->assign_var('S_REPORT_ACTION', append_sid("admin_reports.php"));
 if (isset($_POST['mode']) || isset($_GET['mode']))
 {
 	$mode = (isset($_POST['mode'])) ? $_POST['mode'] : $_GET['mode'];
-	
+
 	//
 	// allow multiple modes (we need this for sub-modes, e.g. the report reasons)
 	//
@@ -56,17 +56,17 @@ if ($mode == 'config')
 	if (isset($_POST['submit']))
 	{
 		$config_update = (isset($_POST['bb_cfg'])) ? $_POST['bb_cfg'] : array();
-		
+
 		bb_update_config($config_update);
 		report_modules_cache_clean();
 
 		message_die(GENERAL_MESSAGE, $lang['REPORT_CONFIG_UPDATED'] . $return_links['config'] . $return_links['index']);
 	}
 	else
-	{		
+	{
 		$template->assign_vars(array(
 			'S_HIDDEN_FIELDS' => '<input type="hidden" name="mode" value="config" />',
-			
+
 			'REPORT_SUBJECT_AUTH_ON' => ($bb_cfg['report_subject_auth']) ? ' checked="checked"' : '',
 			'REPORT_SUBJECT_AUTH_OFF' => (!$bb_cfg['report_subject_auth']) ? ' checked="checked"' : '',
 			'REPORT_MODULES_CACHE_ON' => ($bb_cfg['report_modules_cache']) ? ' checked="checked"' : '',
@@ -78,7 +78,7 @@ if ($mode == 'config')
 			'REPORT_LIST_ADMIN_OFF' => (!$bb_cfg['report_list_admin']) ? ' checked="checked"' : '',
 			'REPORT_NEW_WINDOW_ON' => ($bb_cfg['report_new_window']) ? ' checked="checked"' : '',
 			'REPORT_NEW_WINDOW_OFF' => (!$bb_cfg['report_new_window']) ? ' checked="checked"' : '',
-			
+
 			'L_CONFIGURATION_TITLE' => $lang['REPORTS'] . ': ' . $lang['CONFIGURATION'],
 			'L_CONFIGURATION_EXPLAIN' => $lang['REPORT_CONFIG_EXPLAIN'])
 		);
@@ -89,12 +89,12 @@ if ($mode == 'config')
 else if (isset($_POST[POST_CAT_URL]) || isset($_GET[POST_CAT_URL]))
 {
 	$module_id = (isset($_POST[POST_CAT_URL])) ? (int) $_POST[POST_CAT_URL] : (int) $_GET[POST_CAT_URL];
-	
+
 	if (!$report_module = report_modules('id', $module_id))
 	{
 		message_die(GENERAL_MESSAGE, $lang['REPORT_MODULE_NOT_EXISTS'] . $return_links['admin'] . $return_links['index']);
 	}
-	
+
 	switch ($mode)
 	{
 		//
@@ -105,14 +105,14 @@ else if (isset($_POST[POST_CAT_URL]) || isset($_GET[POST_CAT_URL]))
 			{
 				$module_notify = (isset($_POST['report_module_notify']) && $_POST['report_module_notify'] == 1) ? 1 : 0;
 				$module_prune = (isset($_POST['report_module_prune'])) ? (int) $_POST['report_module_prune'] : $report_module->data['report_module_prune'];
-				
+
 				$auth_write = (isset($_POST['auth_write'])) ? (int) $_POST['auth_write'] : $report_module->data['auth_write'];
 				$auth_view = (isset($_POST['auth_view'])) ? (int) $_POST['auth_view'] : $report_module->data['auth_view'];
 				$auth_notify = (isset($_POST['auth_notify'])) ? (int) $_POST['auth_notify'] : $report_module->data['auth_notify'];
 				$auth_delete = (isset($_POST['auth_delete'])) ? (int) $_POST['auth_delete'] : $report_module->data['auth_delete'];
-				
+
 				report_module_edit($module_id, $module_notify, $module_prune, $auth_write, $auth_view, $auth_notify, $auth_delete);
-				
+
 				message_die(GENERAL_MESSAGE, $lang['REPORT_MODULE_EDITED'] . $return_links['admin'] . $return_links['index']);
 			}
 			else if (isset($_POST['cancel']))
@@ -126,13 +126,13 @@ else if (isset($_POST[POST_CAT_URL]) || isset($_GET[POST_CAT_URL]))
 
 			$template->assign_vars(array(
 				'S_HIDDEN_FIELDS' => $hidden_fields,
-				
+
 				'MODULE_TITLE' => $module_info['title'],
 				'MODULE_EXPLAIN' => $module_info['explain'],
 				'MODULE_NOTIFY_ON' => ($report_module->data['report_module_notify']) ? ' checked="checked"' : '',
 				'MODULE_NOTIFY_OFF' => (!$report_module->data['report_module_notify']) ? ' checked="checked"' : '',
 				'MODULE_PRUNE' => $report_module->data['report_module_prune'],
-				
+
 				'L_EDIT_MODULE' => $lang['EDIT_REPORT_MODULE'],
 				'L_AUTH_WRITE' => $lang['WRITE'],
 				'L_AUTH_VIEW' => $lang['VIEW'],
@@ -141,7 +141,7 @@ else if (isset($_POST[POST_CAT_URL]) || isset($_GET[POST_CAT_URL]))
 				'L_AUTH_DELETE' => $lang['DELETE'],
 				'L_AUTH_DELETE_EXPLAIN' => $lang['REPORT_AUTH_DELETE_EXPLAIN'])
 			);
-			
+
 			//
 			// Authorisation selects
 			//
@@ -152,34 +152,34 @@ else if (isset($_POST[POST_CAT_URL]) || isset($_GET[POST_CAT_URL]))
 
 			print_page('report_module_edit_body.tpl');
 		break;
-		
+
 		//
 		// Report reasons
 		//
 		case 'reasons':
 			$reason_mode = (isset($modes[1])) ? $modes[1] : '';
-			
+
 			$temp_url = append_sid("admin_reports.php?mode=reasons&amp;" . POST_CAT_URL . "=$module_id");
 			$return_links['reasons'] = '<br /><br />' . sprintf($lang['CLICK_RETURN_REPORT_REASONS'], '<a href="' . $temp_url . '">', '</a>');
-			
+
 			$redirect_url = append_sid("admin/admin_reports.php?mode=reasons&" . POST_CAT_URL . "=$module_id", true);
-			
+
 			if (isset($_POST[POST_REPORT_REASON_URL]) || isset($_GET[POST_REPORT_REASON_URL]))
 			{
 				$reason_id = (isset($_POST[POST_REPORT_REASON_URL])) ? (int) $_POST[POST_REPORT_REASON_URL] : (int) $_GET[POST_REPORT_REASON_URL];
-				
+
 				switch ($reason_mode)
-				{	
+				{
 					//
 					// Edit reason
 					//
 					case 'edit':
 						$errors = array();
-						
+
 						if (isset($_POST['submit']))
 						{
 							$reason_desc = (isset($_POST['report_reason_desc'])) ? htmlspecialchars($_POST['report_reason_desc']) : '';
-							
+
 							//
 							// Validate reason desc
 							//
@@ -187,13 +187,13 @@ else if (isset($_POST[POST_CAT_URL]) || isset($_GET[POST_CAT_URL]))
 							{
 								$errors[] = $lang['REASON_DESC_EMPTY'];
 							}
-							
+
 							if (empty($errors))
 							{
 								$reason_desc = str_replace("\'", "'", $reason_desc);
-								
+
 								report_reason_edit($reason_id, $module_id, $reason_desc);
-								
+
 								message_die(GENERAL_MESSAGE, $lang['REPORT_REASON_EDITED'] . $return_links['reasons'] . $return_links['admin'] . $return_links['index']);
 							}
 						}
@@ -215,25 +215,25 @@ else if (isset($_POST[POST_CAT_URL]) || isset($_GET[POST_CAT_URL]))
 								);
 							}
 						}
-						
+
 						if (!$report_reason = report_reason_obtain($reason_id))
 						{
 							message_die(GENERAL_MESSAGE, $lang['REPORT_REASON_NOT_EXISTS'] . $return_links['reasons'] . $return_links['admin'] . $return_links['index']);
 						}
-						
+
 						if (isset($reason_desc))
 						{
 							$report_reason['report_reason_desc'] = stripslashes($reason_desc);
 						}
-						
+
 						$hidden_fields = '<input type="hidden" name="mode[]" value="reasons" /><input type="hidden" name="' . POST_CAT_URL . '" value="' . $module_id . '" />';
 						$hidden_fields .= '<input type="hidden" name="mode[]" value="edit" /><input type="hidden" name="' . POST_REPORT_REASON_URL . '" value="' . $reason_id . '" />';
-						
+
 						$template->assign_vars(array(
 							'S_HIDDEN_FIELDS' => $hidden_fields,
-							
+
 							'REASON_DESC' => $report_reason['report_reason_desc'],
-							
+
 							'L_EDIT_REASON' => $lang['EDIT_REASON'],
 							'L_REASON_DESC' => $lang['FORUM_DESC'],
 							'L_REASON_DESC_EXPLAIN' => $lang['REASON_DESC_EXPLAIN'],
@@ -243,17 +243,17 @@ else if (isset($_POST[POST_CAT_URL]) || isset($_GET[POST_CAT_URL]))
 
 						print_page('report_reason_edit_body.tpl');
 					break;
-					
+
 					//
 					// Move reason up/down
 					//
 					case 'up':
 					case 'down':
 						report_reason_move($reason_mode, $reason_id);
-						
+
 						redirect($redirect_url);
 					break;
-					
+
 					//
 					// Delete reason
 					//
@@ -261,7 +261,7 @@ else if (isset($_POST[POST_CAT_URL]) || isset($_GET[POST_CAT_URL]))
 						if (isset($_POST['confirm']))
 						{
 							report_reason_delete($reason_id);
-							
+
 							message_die(GENERAL_MESSAGE, $lang['REPORT_REASON_DELETED'] . $return_links['reasons'] . $return_links['admin'] . $return_links['index']);
 						}
 						else if (isset($_POST['cancel']))
@@ -271,21 +271,15 @@ else if (isset($_POST[POST_CAT_URL]) || isset($_GET[POST_CAT_URL]))
 
 						$hidden_fields = '<input type="hidden" name="mode[]" value="reasons" /><input type="hidden" name="' . POST_CAT_URL . '" value="' . $module_id . '" />';
 						$hidden_fields .= '<input type="hidden" name="mode[]" value="delete" /><input type="hidden" name="' . POST_REPORT_REASON_URL . '" value="' . $reason_id . '" />';
-						
-						$template->assign_vars(array(
-							'S_CONFIRM_ACTION' => append_sid("admin_reports.php"),
-							'S_HIDDEN_FIELDS' => $hidden_fields,
-							
-							'MESSAGE_TITLE' => $lang['DELETE_REASON'],
-							'MESSAGE_TEXT' => $lang['DELETE_REPORT_REASON_EXPLAIN'],
-							
-							'L_YES' => $lang['YES'],
-							'L_NO' => $lang['NO'])
-						);
 
-						print_page('confirm_body.tpl');
+						print_confirmation(array(
+							'CONFIRM_TITLE' => $lang['DELETE_REASON'],
+							'QUESTION'      => $lang['DELETE_REPORT_REASON_EXPLAIN'],
+							'FORM_ACTION'   => "admin_reports.php",,
+							'HIDDEN_FIELDS' => $hidden_fields,
+						));
 					break;
-					
+
 					default:
 						message_die(GENERAL_MESSAGE, $lang['REPORT_NOT_SUPPORTED'] . $return_links['reasons'] . $return_links['admin'] . $return_links['index']);
 					break;
@@ -300,11 +294,11 @@ else if (isset($_POST[POST_CAT_URL]) || isset($_GET[POST_CAT_URL]))
 					//
 					case 'add':
 						$errors = array();
-						
+
 						if (isset($_POST['submit']))
 						{
 							$reason_desc = (isset($_POST['report_reason_desc'])) ? htmlspecialchars($_POST['report_reason_desc']) : '';
-							
+
 							//
 							// Validate reason desc
 							//
@@ -312,13 +306,13 @@ else if (isset($_POST[POST_CAT_URL]) || isset($_GET[POST_CAT_URL]))
 							{
 								$errors[] = $lang['REASON_DESC_EMPTY'];
 							}
-							
+
 							if (empty($errors))
 							{
 								$reason_desc = str_replace("\'", "'", $reason_desc);
-								
+
 								report_reason_insert($module_id, $reason_desc);
-								
+
 								message_die(GENERAL_MESSAGE, $lang['REPORT_REASON_ADDED'] . $return_links['reasons'] . $return_links['admin'] . $return_links['index']);
 							}
 						}
@@ -340,22 +334,22 @@ else if (isset($_POST[POST_CAT_URL]) || isset($_GET[POST_CAT_URL]))
 								);
 							}
 						}
-						
+
 						$hidden_fields = '<input type="hidden" name="mode[]" value="reasons" /><input type="hidden" name="' . POST_CAT_URL . '" value="' . $module_id . '" />';
 						$hidden_fields .= '<input type="hidden" name="mode[]" value="add" />';
-						
+
 						$template->assign_vars(array(
 							'S_HIDDEN_FIELDS' => $hidden_fields,
-							
+
 							'REASON_DESC' => (isset($reason_desc)) ? stripslashes($reason_desc) : '',
-							
+
 							'L_EDIT_REASON' => $lang['ADD_REASON'],
 							'L_REASON_DESC' => $lang['FORUM_DESC'])
 						);
 
 						print_page('report_reason_edit_body.tpl');
 					break;
-					
+
 					case '':
 
 						if ($report_reasons = $report_module->reasons_obtain())
@@ -364,7 +358,7 @@ else if (isset($_POST[POST_CAT_URL]) || isset($_GET[POST_CAT_URL]))
 							{
 								$template->assign_block_vars('report_reasons', array(
 									'DESC' => $reason_desc,
-									
+
 									'U_EDIT' => append_sid("admin_reports.php?mode[]=reasons&amp;" . POST_CAT_URL . "=$module_id&amp;mode[]=edit&amp;" . POST_REPORT_REASON_URL . "=$reason_id"),
 									'U_MOVE_UP' => append_sid("admin_reports.php?mode[]=reasons&amp;" . POST_CAT_URL . "=$module_id&amp;mode[]=up&amp;" . POST_REPORT_REASON_URL . "=$reason_id"),
 									'U_MOVE_DOWN' => append_sid("admin_reports.php?mode[]=reasons&amp;" . POST_CAT_URL . "=$module_id&amp;mode[]=down&amp;" . POST_REPORT_REASON_URL . "=$reason_id"),
@@ -376,7 +370,7 @@ else if (isset($_POST[POST_CAT_URL]) || isset($_GET[POST_CAT_URL]))
 						{
 							$template->assign_block_vars('switch_no_reasons', array());
 						}
-						
+
 						$template->assign_vars(array(
 							'U_ADD_REASON' => append_sid("admin_reports.php?mode[]=reasons&amp;" . POST_CAT_URL . "=$module_id&amp;mode[]=add"),
 							'U_MODULES' => append_sid("admin_reports.php"))
@@ -384,24 +378,24 @@ else if (isset($_POST[POST_CAT_URL]) || isset($_GET[POST_CAT_URL]))
 
 						print_page('report_module_reasons_body.tpl');
 					break;
-					
+
 					default:
 						message_die(GENERAL_MESSAGE, $lang['REPORT_NOT_SUPPORTED'] . $return_links['reasons'] . $return_links['admin'] . $return_links['index']);
 					break;
 				}
 			}
 		break;
-		
+
 		//
 		// Move module up/down
 		//
 		case 'up':
 		case 'down':
 			report_module_move($mode, $module_id);
-			
+
 			redirect($redirect_url);
 		break;
-		
+
 		//
 		// Synchronize module
 		//
@@ -410,12 +404,12 @@ else if (isset($_POST[POST_CAT_URL]) || isset($_GET[POST_CAT_URL]))
 			{
 				message_die(GENERAL_MESSAGE, $lang['REPORT_NOT_SUPPORTED'] . $return_links['admin'] . $return_links['index']);
 			}
-			
+
 			$report_module->sync();
-			
+
 			message_die(GENERAL_MESSAGE, $lang['REPORT_MODULE_SYNCED'] . $return_links['admin'] . $return_links['index']);
 		break;
-		
+
 		//
 		// Uninstall module
 		//
@@ -423,7 +417,7 @@ else if (isset($_POST[POST_CAT_URL]) || isset($_GET[POST_CAT_URL]))
 			if (isset($_POST['confirm']))
 			{
 				report_module_uninstall($module_id);
-				
+
 				message_die(GENERAL_MESSAGE, $lang['REPORT_MODULE_UNINSTALLED'] . $return_links['admin'] . $return_links['index']);
 			}
 			else if (isset($_POST['cancel']))
@@ -432,18 +426,15 @@ else if (isset($_POST[POST_CAT_URL]) || isset($_GET[POST_CAT_URL]))
 			}
 
 			$hidden_fields = '<input type="hidden" name="mode" value="uninstall" /><input type="hidden" name="' . POST_CAT_URL . '" value="' . $module_id . '" />';
-			
-			$template->assign_vars(array(
-				'S_CONFIRM_ACTION' => append_sid("admin_reports.php"),
-				'S_HIDDEN_FIELDS' => $hidden_fields,
-				
-				'MESSAGE_TITLE' => $lang['UNINSTALL_REPORT_MODULE'],
-				'MESSAGE_TEXT' => $lang['UNINSTALL_REPORT_MODULE_EXPLAIN'])
-			);
 
-			print_page('confirm_body.tpl');
+			print_confirmation(array(
+				'CONFIRM_TITLE' => $lang['UNINSTALL_REPORT_MODULE'],
+				'QUESTION'      => $lang['UNINSTALL_REPORT_MODULE_EXPLAIN'],
+				'FORM_ACTION'   => "admin_reports.php",,
+				'HIDDEN_FIELDS' => $hidden_fields,
+			));
 		break;
-		
+
 		default:
 			message_die(GENERAL_MESSAGE, $lang['REPORT_NOT_SUPPORTED'] . $return_links['admin'] . $return_links['index']);
 		break;
@@ -452,12 +443,12 @@ else if (isset($_POST[POST_CAT_URL]) || isset($_GET[POST_CAT_URL]))
 else if (isset($_POST['module']) || isset($_GET['module']))
 {
 	$module_name = (isset($_POST['module'])) ? stripslashes($_POST['module']) : stripslashes($_GET['module']);
-	
+
 	if (!$report_module = report_modules_inactive('name', $module_name))
 	{
 		message_die(GENERAL_MESSAGE, $lang['REPORT_MODULE_NOT_EXISTS'] . $return_links['admin'] . $return_links['index']);
 	}
-	
+
 	switch ($mode)
 	{
 		//
@@ -468,14 +459,14 @@ else if (isset($_POST['module']) || isset($_GET['module']))
 			{
 				$module_notify = (isset($_POST['report_module_notify']) && $_POST['report_module_notify'] == 1) ? 1 : 0;
 				$module_prune = (isset($_POST['report_module_prune'])) ? (int) $_POST['report_module_prune'] : 0;
-				
+
 				$auth_write = (isset($_POST['auth_write'])) ? (int) $_POST['auth_write'] : REPORT_AUTH_USER;
 				$auth_view = (isset($_POST['auth_view'])) ? (int) $_POST['auth_view'] : REPORT_AUTH_MOD;
 				$auth_notify = (isset($_POST['auth_notify'])) ? (int) $_POST['auth_notify'] : REPORT_AUTH_MOD;
 				$auth_delete = (isset($_POST['auth_delete'])) ? (int) $_POST['auth_delete'] : REPORT_AUTH_ADMIN;
-				
+
 				report_module_install($module_notify, $module_prune, $module_name, $auth_write, $auth_view, $auth_notify, $auth_delete, false);
-				
+
 				message_die(GENERAL_MESSAGE, $lang['REPORT_MODULE_INSTALLED'] . $return_links['admin'] . $return_links['index']);
 			}
 			else if (isset($_POST['cancel']))
@@ -484,18 +475,18 @@ else if (isset($_POST['module']) || isset($_GET['module']))
 			}
 
 			$module_info = $report_module->info();
-			
+
 			$hidden_fields = '<input type="hidden" name="mode" value="install" /><input type="hidden" name="module" value="' . htmlspecialchars($module_name) . '" />';
-			
+
 			$template->assign_vars(array(
 				'S_HIDDEN_FIELDS' => $hidden_fields,
-				
+
 				'MODULE_TITLE' => $module_info['title'],
 				'MODULE_EXPLAIN' => $module_info['explain'],
 				'MODULE_NOTIFY_ON' => ($bb_cfg['report_notify']) ? ' checked="checked"' : '',
 				'MODULE_NOTIFY_OFF' => (!$bb_cfg['report_notify']) ? ' checked="checked"' : '',
 				'MODULE_PRUNE' => 0,
-				
+
 				'L_EDIT_MODULE' => $lang['INSTALL_REPORT_MODULE'],
 				'L_AUTH_WRITE' => $lang['WRITE'],
 				'L_AUTH_VIEW' => $lang['VIEW'],
@@ -504,7 +495,7 @@ else if (isset($_POST['module']) || isset($_GET['module']))
 				'L_AUTH_DELETE' => $lang['DELETE'],
 				'L_AUTH_DELETE_EXPLAIN' => $lang['REPORT_AUTH_DELETE_EXPLAIN'])
 			);
-			
+
 			//
 			// Authorisation selects
 			//
@@ -515,7 +506,7 @@ else if (isset($_POST['module']) || isset($_GET['module']))
 
 			print_page('report_module_edit_body.tpl');
 		break;
-		
+
 		default:
 			message_die(GENERAL_MESSAGE, $lang['REPORT_NOT_SUPPORTED'] . $return_links['admin'] . $return_links['index']);
 		break;
@@ -531,14 +522,14 @@ else
 			$template->assign_vars(array(
 				'L_REPORTS_TITLE' => $lang['REPORTS'] . ': ' . $lang['MODULES_REASONS'],
 				'L_REPORTS_EXPLAIN' => $lang['REPORT_ADMIN_EXPLAIN'],
-				
+
 				'L_REPORT_COUNT' => $lang['REPORTS'],
 				'L_INSTALL' => $lang['INSTALL2'])
 			);
-			
+
 			$report_counts = report_counts_obtain();
 			$report_reason_counts = report_reason_counts_obtain();
-			
+
 			//
 			// Display installed modules
 			//
@@ -547,14 +538,14 @@ else
 			{
 				$report_module =& $report_modules[$report_module_id];
 				$module_info = $report_module->info();
-				
+
 				$template->assign_block_vars('installed_modules.modules', array(
 					'L_REASONS' => sprintf($lang['REASONS'], $report_reason_counts[$report_module->id]),
-				
+
 					'MODULE_TITLE' => $module_info['title'],
 					'MODULE_EXPLAIN' => $module_info['explain'],
 					'REPORT_COUNT' => $report_counts[$report_module->id],
-					
+
 					'U_EDIT' => append_sid("admin_reports.php?mode=edit&amp;" . POST_CAT_URL . '=' . $report_module->id),
 					'U_REASONS' => append_sid("admin_reports.php?mode=reasons&amp;" . POST_CAT_URL . '=' . $report_module->id),
 					'U_MOVE_UP' => append_sid("admin_reports.php?mode=up&amp;" . POST_CAT_URL . '=' . $report_module->id),
@@ -562,7 +553,7 @@ else
 					'U_SYNC' => append_sid("admin_reports.php?mode=sync&amp;" . POST_CAT_URL . '=' . $report_module->id),
 					'U_UNINSTALL' => append_sid("admin_reports.php?mode=uninstall&amp;" . POST_CAT_URL . '=' . $report_module->id))
 				);
-				
+
 				//
 				// Display sync option if available
 				//
@@ -571,14 +562,14 @@ else
 					$template->assign_block_vars('installed_modules.modules.switch_sync', array());
 				}
 			}
-			
+
 			if (empty($report_modules))
 			{
 				$template->assign_block_vars('installed_modules.switch_no_modules', array());
 			}
-			
+
 			$report_modules_inactive = report_modules_inactive();
-			
+
 			//
 			// Display inactive modules
 			//
@@ -587,16 +578,16 @@ else
 			{
 				$report_module =& $report_modules_inactive[$key];
 				$module_info = $report_module->info();
-				
+
 				$template->assign_block_vars('inactive_modules.modules', array(
 					'MODULE_TITLE' => $module_info['title'],
 					'MODULE_EXPLAIN' => $module_info['explain'],
 					'REPORT_COUNT' => '-',
-					
+
 					'U_INSTALL' => append_sid("admin_reports.php?mode=install&amp;module=" . $report_module->data['module_name']))
 				);
 			}
-			
+
 			if (empty($report_modules_inactive))
 			{
 				$template->assign_block_vars('inactive_modules.switch_no_modules', array());
@@ -604,7 +595,7 @@ else
 
 			print_page('report_modules_body.tpl');
 		break;
-		
+
 		default:
 			message_die(GENERAL_MESSAGE, $lang['REPORT_NOT_SUPPORTED'] . $return_links['admin'] . $return_links['index']);
 		break;
