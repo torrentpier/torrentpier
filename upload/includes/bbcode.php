@@ -583,8 +583,9 @@ class bbcode
 	function init_replacements ()
 	{
 		$tpl         = $this->tpl;
-		$url_exp     = '[\w\#$%&~/.\-;:=?@\[\]+]+?';
+		$url_exp     = '[\w\#!$%&~/.\-;:=,?@а-яА-Я\[\]+]+?';
 		$img_url_exp = 'http://[^\s\?&;:=\#\"<>]+?\.(jpg|jpeg|gif|png)';
+
 		$email_exp   = '[a-z0-9&\-_.]+?@[\w\-]+\.([\w\-\.]+\.)?[\w]+';
 
 		$this->preg = array(
@@ -602,10 +603,10 @@ class bbcode
 			"#\[img\]($img_url_exp)\[/img\]#i"                    => $tpl['img'],
 			"#\[img=(left|right)\]($img_url_exp)\[/img\]\s*#i"    => $tpl['img_aligned'],
 			"#\[email\]($email_exp)\[/email\]#i"                  => '<a href="mailto:$1">$1</a>',
-			"#\[url\](https?://$url_exp)\[/url\]#i"               => '<a href="$1" class="postLink">$1</a>',
-			"#\[url\](www\.$url_exp)\[/url\]#i"                   => '<a href="http://$1" class="postLink">$1</a>',
-			"#\[url=(https?://$url_exp)\]([^?\n\t].*?)\[/url\]#i" => '<a href="$1" class="postLink">$2</a>',
-			"#\[url=(www\.$url_exp)\]([^?\n\t].*?)\[/url\]#i"     => '<a href="http://$1" class="postLink">$2</a>',
+			"#\[url\](https?://$url_exp)\[/url\]#iu"               => '<a href="$1" class="postLink">$1</a>',
+			"#\[url\](www\.$url_exp)\[/url\]#iu"                   => '<a href="http://$1" class="postLink">$1</a>',
+			"#\[url=(https?://$url_exp)\]([^?\n\t].*?)\[/url\]#iu" => '<a href="$1" class="postLink">$2</a>',
+			"#\[url=(www\.$url_exp)\]([^?\n\t].*?)\[/url\]#iu"     => '<a href="http://$1" class="postLink">$2</a>',
 		);
 
 		$this->str = array(

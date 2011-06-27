@@ -277,9 +277,8 @@ class ajax_common
 
 		$message = (string) $this->request['message'];
 		if(!trim($message)) $this->ajax_die($lang['EMPTY_MESSAGE']);
-		$message = bbcode2html(DB()->escape($message));
-        $message = str_replace('\n', '<div></div>', $message);
-		$this->response['html'] = $message;
+		$message = bbcode2html($message);
+        $this->response['html'] = $message;
 	}
 
 	function change_tor_status ()
