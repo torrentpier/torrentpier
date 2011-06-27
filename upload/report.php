@@ -1,38 +1,14 @@
 <?php
 
-/*
-	This file is part of TorrentPier
-
-	TorrentPier is free software: you can redistribute it and/or modify
-	it under the terms of the GNU General Public License as published by
-	the Free Software Foundation, either version 3 of the License, or
-	(at your option) any later version.
-
-	TorrentPier is distributed in the hope that it will be useful,
-	but WITHOUT ANY WARRANTY; without even the implied warranty of
-	MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-	GNU General Public License for more details.
-
-	A copy of the GPL 2.0 should have been included with the program.
-	If not, see http://www.gnu.org/licenses/
-
-	Official SVN repository and contact information can be found at
-	http://code.google.com/p/torrentpier/
- */
-
 define('IN_PHPBB', true);
 define('BB_SCRIPT', 'report');
 define('BB_ROOT', './');
 require(BB_ROOT ."common.php");
+require(INC_DIR ."bbcode.php");
 require(INC_DIR ."functions_report.php");
 
 // Init userdata
-$user->session_start();
-
-if (!$userdata['session_logged_in'])
-{
-	redirect(append_sid("index.php", true));
-}
+$user->session_start(array('req_login' => true));
 
 $return_links = array(
 	'index' => '<br /><br />' . sprintf($lang['CLICK_RETURN_INDEX'], '<a href="' . append_sid("index.php") . '">', '</a>'),
@@ -691,7 +667,7 @@ else
 						}
 						else if ($report_change['report_change_comment'] != '')
 						{
-							$report_change_text = sprintf($lang['REPORT_CHANGE_TEXT_COMMENT'], $report_change_status, $report_change_user, $report_change_time, $report_change['report_change_comment']);
+							$report_change_text = sprintf($lang['REPORT_CHANGE_TEXT_COMMENT'], $report_change_status, $report_change_user, $report_change_time, bbcode2html($report_change['report_change_comment']));
 						}
 						else
 						{
@@ -739,7 +715,7 @@ else
 					'REPORT_TITLE' => $report['report_title'],
 					'REPORT_AUTHOR' => $report['username'],
 					'REPORT_TIME' => bb_date($report['report_time']),
-					'REPORT_DESC' => str_replace("\n", '<br />', $report['report_desc']),
+					'REPORT_DESC' => bbcode2html($report['report_desc']),
 					'REPORT_STATUS' => $lang['REPORT_STATUS'][$report['report_status']],
 					'REPORT_STATUS_CLASS' => $report_status_classes[$report['report_status']],
 

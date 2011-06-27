@@ -490,6 +490,8 @@ class user_common
 				COOKIE_DBG,
 				'torhelp',
 				'kb_layout',
+				'explain',
+				'sql_log'
 			);
 
 			foreach ($delete_cookies as $cookie)
@@ -500,8 +502,7 @@ class user_common
 				}
 			}
 		}
-
-		if ($user_id != ANONYMOUS)
+        else
 		{
 			$c_sdata_resv = !empty($_COOKIE[COOKIE_DATA]) ? $_COOKIE[COOKIE_DATA] : null;
 			$c_sdata_curr = ($this->sessiondata) ? serialize($this->sessiondata) : '';

@@ -5,7 +5,7 @@
 	<tr>
 		<td class="row1" style="padding: 10px">
 			<span class="maintitle">{REPORT_TITLE}</span><br /><br />
-			
+
 			<!-- BEGIN switch_report_subject_deleted -->
 			<table cellspacing="1" cellpadding="4" border="0" width="90%" align="center" class="bodyline">
 				<tr>
@@ -14,7 +14,7 @@
 			</table>
 			<br />
 			<!-- END switch_report_subject_deleted -->
-			
+
 			<!-- BEGIN report_subject -->
 			<table cellspacing="1" cellpadding="4" border="0" width="90%" align="center" class="bodyline">
 				<!-- BEGIN switch_subject -->
@@ -40,7 +40,7 @@
 			</table>
 			<br />
 			<!-- END report_subject -->
-			
+
 			<table cellspacing="1" cellpadding="4" border="0" width="90%" align="center" class="bodyline">
 				<tr>
 					<td class="row2" width="25%"><span class="genmed">{L_REPORTED_BY}:</span></td>
@@ -61,10 +61,10 @@
 				<!-- END switch_report_reason -->
 				<tr>
 					<td class="row2" valign="top"><span class="gen">{L_MESSAGE}:</span></td>
-					<td class="row2"><span class="gen">{REPORT_DESC}</span></td>
+					<td class="row2"><div class="post_wrap">{REPORT_DESC}</div></td>
 				</tr>
 			</table>
-			
+
 			<br />
 
 			<table cellspacing="1" cellpadding="4" border="0" width="90%" align="center" class="bodyline">
@@ -84,7 +84,7 @@
 				</tr>
 				<!-- END switch_report_changes -->
 			</table>
-			
+
 			<br />
 		</td>
 	</tr>
@@ -94,7 +94,7 @@
 	</tr>
 	<!-- BEGIN report_changes -->
 	<tr>
-		<td class="{switch_report_changes.report_changes.ROW_CLASS}"><span class="genmed">{switch_report_changes.report_changes.TEXT}</span></td>
+		<td class="{switch_report_changes.report_changes.ROW_CLASS}"><div class="med post_wrap">{switch_report_changes.report_changes.TEXT}</div></td>
 	</tr>
 	<!-- END report_changes -->
 	<!-- END switch_report_changes -->

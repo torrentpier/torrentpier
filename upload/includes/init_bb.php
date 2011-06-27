@@ -131,13 +131,13 @@ function bb_setcookie ($name, $val, $lifetime = COOKIE_PERSIST, $httponly = fals
 
 	if (PHP_VERSION < 5.2)
 	{
-	  // HttpOnly hack by Matt Mecham [http://blog.mattmecham.com/archives/2006/09/http_only_cookies_without_php.html]
-	  $domain .= ($httponly) ? '; HttpOnly' : '';
-	  return setcookie($name, $val, $lifetime, $bb_cfg['cookie_path'], $domain, $bb_cfg['cookie_secure']);
+		// HttpOnly hack by Matt Mecham [http://blog.mattmecham.com/archives/2006/09/http_only_cookies_without_php.html]
+		$domain .= ($httponly) ? '; HttpOnly' : '';
+		return setcookie($name, $val, $lifetime, $bb_cfg['cookie_path'], $domain, $bb_cfg['cookie_secure']);
 	}
 	else
 	{
-	  return setcookie($name, $val, $lifetime, $bb_cfg['cookie_path'], $domain, $bb_cfg['cookie_secure'], $httponly);
+		return setcookie($name, $val, $lifetime, $bb_cfg['cookie_path'], $domain, $bb_cfg['cookie_secure'], $httponly);
 	}
 }
 
