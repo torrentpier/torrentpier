@@ -114,7 +114,6 @@ define('COOKIE_DATA',  $c .'data');
 define('COOKIE_FORUM', $c .'f');
 define('COOKIE_LOAD',  $c .'isl');
 define('COOKIE_MARK',  $c .'mark_read');
-define('COOKIE_TEST',  $c .'test');
 define('COOKIE_TOPIC', $c .'t');
 unset($c);
 

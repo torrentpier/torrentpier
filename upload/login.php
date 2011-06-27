@@ -50,20 +50,10 @@ if (!$redirect_url || strstr(urldecode($redirect_url), "\n") || strstr(urldecode
 	$redirect_url = "index.php";
 }
 
-if (!empty($_POST['login']) && !empty($_POST['cookie_test']))
-{
-	if (empty($_COOKIE[COOKIE_TEST]) || $_COOKIE[COOKIE_TEST] !== $_POST['cookie_test'])
-	{
-		$login_error = 'cookie';
-	}
-}
-
 $redirect_url = str_replace("&sid={$user->data['session_id']}", '', $redirect_url);
 
-if (isset($_REQUEST['admin']) && !IS_AM)
-{
-	bb_die($lang['NOT_ADMIN']);
-}
+if (isset($_REQUEST['admin']) && !IS_AM) bb_die($lang['NOT_ADMIN']);
+
 $mod_admin_login = (IS_AM && !$user->data['session_admin']);
 
 // login username & password

@@ -488,30 +488,10 @@ class user_common
 				COOKIE_DATA,
 				COOKIE_LOAD,
 				COOKIE_DBG,
-				//COOKIE_TEST, // dj_maxx: add visual confirmation to login form
 				'torhelp',
-				'phpbb2mysql_data',
 				'kb_layout',
 			);
-			// dj_maxx: add visual confirmation to login form
-			if (!defined('IN_PROFILE'))
-			{
-				$delete_cookies[] = COOKIE_TEST;
-			}
-			// end of
-		}
-		else
-		{
-			$delete_cookies = array('phpbb2mysql_data');
 
-			if (!(defined('IN_LOGIN') || defined('IN_PROFILE')))
-			{
-				$delete_cookies[] = COOKIE_TEST;
-			}
-		}
-
-		if ($delete_cookies)
-		{
 			foreach ($delete_cookies as $cookie)
 			{
 				if (isset($_COOKIE[$cookie]))
