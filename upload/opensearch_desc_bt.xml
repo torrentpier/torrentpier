@@ -1,0 +1,8 @@
+<?xml version="1.0"?>
+<OpenSearchDescription xmlns="http://a9.com/-/spec/opensearch/1.1/">
+<ShortName>TorrentPier (Tracker)</ShortName>
+<Description>TorrentPier (Tracker)</Description>
+<InputEncoding>UTF-8</InputEncoding>
+<Image height="16" width="16" type="image/x-icon">http://site.ru/favicon.ico</Image>
+<Url type="text/html" template="http://site.ru/tracker.php?submit=1&amp;o=13&amp;nm={searchTerms}"/>
+</OpenSearchDescription>

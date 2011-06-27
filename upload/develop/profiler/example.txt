@@ -1,0 +1,9 @@
+<?php
+require('profiler/profiler.php');
+$profiler = profiler::init('dbg');
+$min_time = !empty($_COOKIE['prof_min_time']) ? $_COOKIE['prof_min_time'] : '0.1%';
+$profiler->print_profile_data($min_time);
+?>
+
+$min_time - в секундах или процентах ("0.01" - секунды, "0.01%" - проценты)
+

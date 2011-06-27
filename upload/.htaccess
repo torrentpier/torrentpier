@@ -1,0 +1,15 @@
+## Set charset server
+AddDefaultCharset UTF-8
+## Set charset for php mb-functions
+php_value mbstring.internal_encoding UTF-8
+
+## RSS MOD
+RewriteEngine On
+RewriteRule ^rss.xml$ rss.php [L]
+
+## Access control
+<FilesMatch "\.(.*sql|tpl|inc|db|log)|(config|common).php$">
+deny from all
+</FilesMatch>
+
+# Copyright (c) 2008-2011, Pandora.

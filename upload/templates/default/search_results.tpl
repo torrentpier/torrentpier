@@ -1,0 +1,162 @@
+<!-- IF SEARCH_MATCHES -->
+<h1 class="pagetitle">{SEARCH_MATCHES}</h1>
+<!-- ENDIF -->
+
+<div class="nav">
+	<p style="float: left;"><a href="{U_INDEX}">{T_INDEX}</a></p>
+	<!-- IF LOGGED_IN --><p style="float: right;"><a href="#" class="small normal" onclick="setCookie('{COOKIE_MARK}', 'all_forums'); window.location.reload(); return false;">{L_MARK_ALL_FORUMS_READ}</a></p><!-- ENDIF -->
+	<div class="clear"></div>
+</div>
+
+<!-- IF DISPLAY_AS_POSTS -->
+
+<table class="topic" cellpadding="0" cellspacing="0">
+<tr>
+	<th class="thHead td1">{L_AUTHOR}</th>
+	<th class="thHead td2">{L_MESSAGE}</th>
+</tr>
+<!-- BEGIN t -->
+<tr>
+	<td colspan="2" class="td2	cat nav pad_4">
+		&nbsp;<img class="topic_icon" src="{t.TOPIC_ICON}" align="absmiddle" />&nbsp;
+		<a href="{FORUM_URL}{t.FORUM_ID}" class="med normal"><i>{t.FORUM_NAME}</i></a>
+		<em>&raquo;</em>
+		<a href="{TOPIC_URL}{t.TOPIC_ID}" class="med">{t.TOPIC_TITLE}</a>
+	</td>
+</tr>
+<!-- BEGIN p -->
+<tr class="<!-- IF t.p.ROW_NUM is even -->row1<!-- ELSE -->row2<!-- ENDIF -->">
+	<td class="poster_info td1">
+
+		<p class="nick"><a href="{PROFILE_URL}{t.p.POSTER_ID}">{t.p.POSTER_NAME}</a></p>
+		<p><img src="{SPACER}" width="{TOPIC_LEFT_COL_SPACER_WITDH}" height="<!-- IF t.p.AVATAR -->2<!-- ELSE -->30<!-- ENDIF -->" alt="" /></p>
+
+	</td>
+	<td class="message td2">
+
+		<div class="post_head">
+			<p style="float: left;<!-- IF TEXT_BUTTONS --> padding: 4px 0 3px;<!-- ELSE --> padding-top: 5px;<!-- ENDIF -->">
+				<!-- IF t.p.IS_UNREAD -->{MINIPOST_IMG_NEW}<!-- ELSE -->{MINIPOST_IMG}<!-- ENDIF -->
+				<a class="small" href="{POST_URL}{t.p.POST_ID}#{t.p.POST_ID}" title="{L_POST_LINK}">{t.p.POST_DATE}</a>
+				<!-- IF t.p.POSTED_AFTER -->
+					<span class="posted_since">({L_POSTED_AFTER} {t.p.POSTED_AFTER})</span>
+				<!-- ENDIF -->
+			</p>
+
+			<p style="float: right;<!-- IF TEXT_BUTTONS --> padding: 3px 2px 4px;<!-- ELSE --> padding: 1px 6px 2px;<!-- ENDIF -->" class="post_btn_1">
+				<!-- IF t.p.QUOTE --><a class="txtb" href="{QUOTE_URL}{t.p.POST_ID}">{QUOTE_IMG}</a>{POST_BTN_SPACER}<!-- ENDIF -->
+				<!-- IF t.p.EDIT --><a class="txtb" href="{EDIT_POST_URL}{t.p.POST_ID}">{EDIT_POST_IMG}</a>{POST_BTN_SPACER}<!-- ENDIF -->
+				<!-- IF t.p.DELETE --><a class="txtb" href="{DELETE_POST_URL}{t.p.POST_ID}">{DELETE_POST_IMG}</a>{POST_BTN_SPACER}<!-- ENDIF -->
+				<!-- IF t.p.IP --><a class="txtb" href="{IP_POST_URL}{t.p.POST_ID}&amp;t={t.TOPIC_ID}">{IP_POST_IMG}</a>{POST_BTN_SPACER}<!-- ENDIF -->
+			</p>
+			<div class="clear"></div>
+		</div>
+
+		<div class="post_wrap">
+			<div class="post_body">{t.p.MESSAGE}</div>
+		</div>
+
+	</td>
+</tr>
+<!-- END p -->
+<!-- END t -->
+<tr>
+	<td colspan="2" class="catBottom td2">&nbsp;</td>
+</tr>
+</table>
+
+<!-- ELSE / start of !DISPLAY_AS_POSTS -->
+
+<!-- IF DL_CONTROLS -->
+<form method="post" action="{DL_ACTION}">
+<!-- ENDIF -->
+
+<table class="forumline forum">
+<col class="row1">
+<col class="row1" width="25%">
+<col class="row4" width="75%">
+<col class="row1">
+<col class="row4">
+<col class="row1">
+<tr>
+	<th>&nbsp;</th>
+	<th>{L_FORUM}</th>
+	<th>{L_TOPICS}</th>
+	<th>{L_AUTHOR}</th>
+	<th>{L_REPLIES_SHORT}</th>
+	<th>{L_LASTPOST}</th>
+</tr>
+<!-- BEGIN t -->
+<tr class="tCenter">
+	<td>
+		<!-- IF DL_CONTROLS -->
+			<input type="checkbox" name="dl_topics_id_list[]" value="{t.TOPIC_ID}" />
+		<!-- ELSE -->
+			<img class="topic_icon" src="{t.TOPIC_ICON}" />
+		<!-- ENDIF -->
+	</td>
+	<td><a href="{FORUM_URL}{t.FORUM_ID}" class="gen">{t.FORUM_NAME}</a></td>
+	<td class="tLeft" style="padding: 2px 5px 3px 4px;">
+		<div class="topictitle" onmousedown="$p('tid_{t.TOPIC_ID}').className='opened'">
+			<!-- IF t.IS_UNREAD --><a href="{TOPIC_URL}{t.HREF_TOPIC_ID}{NEWEST_URL}">{ICON_NEWEST_REPLY}</a><!-- ENDIF -->
+			<!-- IF t.STATUS == MOVED --><span class="topicMoved">{L_MOVED}</span>
+				<!-- ELSEIF t.TYPE == ANNOUNCE --><span class="topicAnnounce">{L_ANNOUNCE}</span>
+				<!-- ELSEIF t.DL_CLASS --><span class="{t.DL_CLASS} iconDL">{L_DL_TOPIC}</span>
+				<!-- ELSEIF t.ATTACH and not t.DL -->{TOPIC_ATTACH_ICON}
+			<!-- ENDIF -->
+			<!-- IF t.POLL --><span class="topicPoll">{L_POLL}</span><!-- ENDIF -->
+			<a href="{TOPIC_URL}{t.TOPIC_ID}" class="topictitle"><span id="tid_{t.TOPIC_ID}">{t.TOPIC_TITLE}</span></a>
+		<!-- IF t.PAGINATION --><span class="topicPG">[{ICON_GOTOPOST}{L_GOTO_SHORT} {t.PAGINATION} ]</span><!-- ENDIF -->
+		</div>
+	</td>
+	<td class="med"><!-- IF t.TOPIC_AUTHOR_HREF --><a href="{PROFILE_URL}{t.TOPIC_AUTHOR_HREF}">{t.TOPIC_AUTHOR_NAME}</a><!-- ELSE -->{t.TOPIC_AUTHOR_NAME}<!-- ENDIF --></td>
+	<td class="small">{t.REPLIES}</td>
+	<td class="small nowrap" style="padding: 1px 4px 3px 4px;">
+		<p>{t.LAST_POST_TIME}</p>
+		<p>
+			<!-- IF t.LAST_POSTER_HREF --><a href="{PROFILE_URL}{t.LAST_POSTER_HREF}">{t.LAST_POSTER_NAME}</a><!-- ELSE -->{t.LAST_POSTER_NAME}<!-- ENDIF -->
+			<span onmousedown="$p('tid_{t.TOPIC_ID}').className='opened'"><a href="{POST_URL}{t.LAST_POST_ID}#{t.LAST_POST_ID}">{ICON_LATEST_REPLY}</a></span>
+		</p>
+	</td>
+</tr>
+<!-- END t -->
+<tr>
+	<td class="catBottom" colspan="6">
+	<!-- IF DL_CONTROLS -->
+		<input type="submit" name="dl_set_will" value="{L_DL_WILL}" class="liteoption" />
+		<input type="submit" name="dl_set_down" value="{L_DL_DOWN}" class="liteoption" />
+		<input type="submit" name="dl_set_complete" value="{L_DL_COMPLETE}" class="liteoption" />
+		<input type="submit" name="dl_set_cancel" value="{L_DL_CANCEL}" class="liteoption" />
+		<input type="hidden" name="redirect_type" value="search" />
+		<input type="hidden" name="mode" value="set_topics_dl_status" />
+	<!-- ELSE -->
+		&nbsp;
+	<!-- ENDIF -->
+	</td>
+</tr>
+</table>
+
+<!-- IF DL_CONTROLS -->
+</form>
+<!-- ENDIF -->
+
+<!-- ENDIF -->
+
+<div class="bottom_info">
+
+	<div class="nav">
+		<p style="float: left">{PAGE_NUMBER}</p>
+		<p style="float: right">{PAGINATION}</p>
+		<div class="clear"></div>
+	</div>
+
+	<div class="spacer_4"></div>
+
+	<div id="timezone">
+		<p>{LAST_VISIT_DATE}</p>
+		<p>{CURRENT_TIME}</p>
+		<p>{S_TIMEZONE}</p>
+	</div>
+	<div class="clear"></div>
+
+</div><!--/bottom_info-->

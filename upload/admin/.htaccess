@@ -1,0 +1,8 @@
+AddDefaultCharset UTF-8
+#order allow deny
+#deny from all
+#allow from 127.0.0.1
+
+<FilesMatch "xs_config.php">
+allow from all
+</FilesMatch>

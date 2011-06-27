@@ -1,0 +1,191 @@
+<?php
+
+global $bb_cfg, $page_cfg, $template, $images, $lang;
+
+$width = $height = array();
+$template_name = basename(dirname(__FILE__));
+
+$_img  = BB_ROOT . 'images/';
+$_main = BB_ROOT . basename(TEMPLATES_DIR) .'/'. $template_name .'/images/';
+$_lang = $_main . basename('lang_'. $bb_cfg['default_lang']) .'/';
+
+// post_buttons
+$images['icon_quote']          = $_lang .'icon_quote.gif';
+$images['icon_edit']           = $_lang .'icon_edit.gif';
+$images['icon_search']         = $_lang .'icon_search.gif';
+$images['icon_profile']        = $_lang .'icon_profile.gif';
+$images['icon_pm']             = $_lang .'icon_pm.gif';
+$images['icon_email']          = $_lang .'icon_email.gif';
+$images['icon_delpost']        = $_main .'icon_delete.gif';
+$images['icon_ip']             = $_lang .'icon_ip.gif';
+$images['icon_mod']            = $_main .'icon_mod.gif';
+$images['icon_www']            = $_lang .'icon_www.gif';
+$images['icon_icq']            = $_lang .'icon_icq_add.gif';
+
+// post_icons
+$images['icon_minipost']       = $_main .'icon_minipost.gif';
+$images['icon_gotopost']       = $_main .'icon_minipost.gif';
+$images['icon_minipost_new']   = $_main .'icon_minipost_new.gif';
+$images['icon_latest_reply']   = $_main .'icon_latest_reply.gif';
+$images['icon_newest_reply']   = $_main .'icon_newest_reply.gif';
+
+// forum_icons
+$images['forum']               = $_main .'folder_big.gif';
+$images['forum_new']           = $_main .'folder_new_big.gif';
+$images['forum_locked']        = $_main .'folder_locked_big.gif';
+
+// topic_icons
+$images['folder']              = $_main .'folder.gif';
+$images['folder_new']          = $_main .'folder_new.gif';
+$images['folder_hot']          = $_main .'folder_hot.gif';
+$images['folder_hot_new']      = $_main .'folder_new_hot.gif';
+$images['folder_locked']       = $_main .'folder_lock.gif';
+$images['folder_locked_new']   = $_main .'folder_lock_new.gif';
+$images['folder_sticky']       = $_main .'folder_sticky.gif';
+$images['folder_sticky_new']   = $_main .'folder_sticky_new.gif';
+$images['folder_announce']     = $_main .'folder_announce.gif';
+$images['folder_announce_new'] = $_main .'folder_announce_new.gif';
+$images['folder_dl']           = $_main .'folder_dl.gif';
+$images['folder_dl_new']       = $_main .'folder_dl_new.gif';
+$images['folder_dl_hot']       = $_main .'folder_dl_hot.gif';
+$images['folder_dl_hot_new']   = $_main .'folder_dl_hot_new.gif';
+
+// attach_icons
+$images['icon_clip']           = $_img .'icon_clip.gif';
+$images['icon_dn']             = $_img .'icon_dn.gif';
+
+// posting_icons
+$images['post_new']            = $_lang .'post.gif';
+$images['post_locked']         = $_lang .'reply-locked.gif';
+$images['reply_new']           = $_lang .'reply.gif';
+$images['reply_locked']        = $_lang .'reply-locked.gif';
+
+// pm_icons
+$images['pm_inbox']            = $_main .'msg_inbox.gif';
+$images['pm_outbox']           = $_main .'msg_outbox.gif';
+$images['pm_savebox']          = $_main .'msg_savebox.gif';
+$images['pm_sentbox']          = $_main .'msg_sentbox.gif';
+$images['pm_readmsg']          = $_main .'folder.gif';
+$images['pm_unreadmsg']        = $_main .'folder_new.gif';
+$images['pm_replymsg']         = $_lang .'reply.gif';
+$images['pm_postmsg']          = $_lang .'msg_newpost.gif';
+$images['pm_quotemsg']         = $_lang .'icon_quote.gif';
+$images['pm_editmsg']          = $_lang .'icon_edit.gif';
+$images['pm_new_msg']          = '';
+$images['pm_no_new_msg']       = '';
+
+// topic_mod_icons will be replaced with SELECT later...
+$images['topic_watch']         = '';
+$images['topic_un_watch']      = '';
+$images['topic_mod_lock']      = $_main .'topic_lock.gif';
+$images['topic_mod_unlock']    = $_main .'topic_unlock.gif';
+$images['topic_mod_split']     = $_main .'topic_split.gif';
+$images['topic_mod_move']      = $_main .'topic_move.gif';
+$images['topic_mod_delete']    = $_main .'topic_delete.gif';
+$images['topic_dl']            = $_main .'topic_dl.gif';
+$images['topic_normal']        = $_main .'topic_normal.gif';
+
+$images['voting_graphic'][0]   = $_main .'voting_bar.gif';
+$images['voting_graphic'][1]   = $_main .'voting_bar.gif';
+$images['voting_graphic'][2]   = $_main .'voting_bar.gif';
+$images['voting_graphic'][3]   = $_main .'voting_bar.gif';
+$images['voting_graphic'][4]   = $_main .'voting_bar.gif';
+$images['progress_bar']	       = $_main .'progress_bar.gif';
+$images['progress_bar_full']   = $_main .'progress_bar_full.gif';
+
+// Report
+$images['icon_report']         = $_main .'icon_report.gif';
+$images['icon_reported']       = $_main .'icon_reported.gif';
+$images['topic_mod_report']    = $_main .'topic_report.gif';
+$images['topic_mod_reported']  = $_main .'topic_reported.gif';
+// Report [END]
+
+// Vote graphic length defines the maximum length of a vote result graphic, ie. 100% = this length
+$bb_cfg['vote_graphic_length']     = 205;
+$bb_cfg['privmsg_graphic_length']  = 175;
+
+$bb_cfg['topic_left_column_witdh'] = 150;
+// Images auto-resize
+$bb_cfg['post_img_width_decr']     = 52;    // decrement for posted images width (px)
+$bb_cfg['attach_img_width_decr']   = 130;   // decrement for attach images width (px)
+
+$template->assign_vars(array(
+	'IMG' => $_main,
+
+	'TEXT_BUTTONS'        => $bb_cfg['text_buttons'],
+	'POST_BTN_SPACER'     => ($bb_cfg['text_buttons']) ? '&nbsp;' : '',
+	'TOPIC_ATTACH_ICON'   => '<img src="images/icon_clip.gif" alt="" />',
+	'ATTACHMENT_ICON'     => '<img src="images/icon_clip.gif" alt="" />',
+	'OPEN_MENU_IMG_ALT1'  => '<img src="'. $_main .'menu_open_1.gif" class="menu-alt1" alt="" />',
+
+	'TOPIC_LEFT_COL_SPACER_WITDH' => $bb_cfg['topic_left_column_witdh'] - 8,  // 8px padding
+// Images auto-resize
+	'POST_IMG_WIDTH_DECR_JS'      => $bb_cfg['topic_left_column_witdh'] + $bb_cfg['post_img_width_decr'],
+	'ATTACH_IMG_WIDTH_DECR_JS'    => $bb_cfg['topic_left_column_witdh'] + $bb_cfg['attach_img_width_decr'],
+	
+	'MAGNET_LINKS'        => $bb_cfg['magnet_links_enabled'],
+));
+
+// post_buttons
+if (!empty($page_cfg['load_tpl_vars']) AND $vars = array_flip($page_cfg['load_tpl_vars']))
+{
+	if (isset($vars['post_buttons']))
+	{
+		$template->assign_vars(array(
+			'QUOTE_IMG'       => ($bb_cfg['text_buttons']) ? $lang['REPLY_WITH_QUOTE_TXTB'] : '<img src="'. $images['icon_quote']   .'" alt="Quote" title="'. $lang['REPLY_WITH_QUOTE'] .'" />',
+			'EDIT_POST_IMG'   => ($bb_cfg['text_buttons']) ? $lang['EDIT_DELETE_POST_TXTB'] : '<img src="'. $images['icon_edit']    .'" alt="Edit" title="'. $lang['EDIT_POST'] .'" />',
+			'DELETE_POST_IMG' => ($bb_cfg['text_buttons']) ? $lang['DELETE_POST_TXTB']      : '<img src="'. $images['icon_delpost'] .'" alt="Delete" title="'. $lang['DELETE_POST'] .'" />',
+			'IP_POST_IMG'     => ($bb_cfg['text_buttons']) ? $lang['VIEW_IP_TXTB']          : '<img src="'. $images['icon_ip']      .'" alt="IP" title="'. $lang['VIEW_IP'] .'" />',
+			'MOD_POST_IMG'    => ($bb_cfg['text_buttons']) ? $lang['MODERATE_POST_TXTB']    : '<img src="'. $images['icon_mod']     .'" alt="Moderate" title="'. $lang['MODERATE_POST'] .'" />',
+
+			'QUOTE_URL'       => BB_ROOT ."posting.php?mode=quote&amp;p=",
+			'EDIT_POST_URL'   => BB_ROOT ."posting.php?mode=editpost&amp;p=",
+			'DELETE_POST_URL' => BB_ROOT ."posting.php?mode=delete&amp;p=",
+			'IP_POST_URL'     => BB_ROOT ."modcp.php?mode=ip&amp;p=",
+
+			'PROFILE_IMG'     => ($bb_cfg['text_buttons']) ? $lang['READ_PROFILE_TXTB']     : '<img src="'. $images['icon_profile'] .'" alt="Profile" title="'. $lang['READ_PROFILE'] .'" />',
+			'PM_IMG'          => ($bb_cfg['text_buttons']) ? $lang['SEND_PM_TXTB']          : '<img src="'. $images['icon_pm'] .'" alt="PM" title="'. $lang['SEND_PRIVATE_MESSAGE'] .'" />',
+			'EMAIL_IMG'       => ($bb_cfg['text_buttons']) ? $lang['SEND_EMAIL_TXTB']       : '<img src="'. $images['icon_email'] .'" alt="email" title="'. $lang['SEND_EMAIL'] .'" />',
+			'WWW_IMG'         => ($bb_cfg['text_buttons']) ? $lang['VISIT_WEBSITE_TXTB']    : '<img src="'. $images['icon_www'] .'" alt="www" title="'. $lang['VISIT_WEBSITE'] .'" />',
+			'ICQ_IMG'         => ($bb_cfg['text_buttons']) ? $lang['ICQ_TXTB']              : '<img src="'. $images['icon_icq'] .'" alt="ICQ" title="'. $lang['ICQ'] .'" />',
+
+			'EMAIL_URL'       => BB_ROOT ."profile.php?mode=email&amp;u=",
+			'FORUM_URL'       => BB_ROOT . FORUM_URL,
+			'ICQ_URL'         => 'http://wwp.icq.com/scripts/search.dll?to=',
+			'PM_URL'          => BB_ROOT . PM_URL,
+			'PROFILE_URL'     => BB_ROOT . PROFILE_URL,
+		));
+	}
+	if (isset($vars['post_icons']))
+	{
+		$template->assign_vars(array(
+			'MINIPOST_IMG'      => '<img src="'. $images['icon_minipost']     .'" class="icon1" alt="post" />',
+			'ICON_GOTOPOST'     => '<img src="'. $images['icon_gotopost']     .'" class="icon1" alt="goto" title="'. $lang['GOTO_PAGE'] .'" />',
+			'MINIPOST_IMG_NEW'  => '<img src="'. $images['icon_minipost_new'] .'" class="icon1" alt="new" />',
+			'ICON_LATEST_REPLY' => '<img src="'. $images['icon_latest_reply'] .'" class="icon2" alt="latest" title="'. $lang['VIEW_LATEST_POST'] .'" />',
+			'ICON_NEWEST_REPLY' => '<img src="'. $images['icon_newest_reply'] .'" class="icon2" alt="newest" title="'. $lang['VIEW_NEWEST_POST'] .'" />',
+		));
+	}
+	if (isset($vars['topic_icons']))
+	{
+		$template->assign_vars(array(
+			'MOVED'      => TOPIC_MOVED,
+			'ANNOUNCE'   => POST_ANNOUNCE,
+			'STICKY'     => POST_STICKY,
+			'LOCKED'     => TOPIC_LOCKED,
+			'L_MOVED'    => $lang['TOPIC_MOVED'],
+			'L_ANNOUNCE' => $lang['TOPIC_ANNOUNCEMENT'],
+			'L_DL_TOPIC' => $lang['TOPIC_DL'],
+			'L_POLL'     => $lang['TOPIC_POLL'],
+		));
+	}
+	if (isset($vars['pm_icons']))
+	{
+		$template->assign_vars(array(
+			'INBOX_IMG'      => '<img src="'. $images['pm_inbox']   .'" class="pm_box_icon" alt="" />',
+			'OUTBOX_IMG'     => '<img src="'. $images['pm_outbox']  .'" class="pm_box_icon" alt="" />',
+			'SENTBOX_IMG'    => '<img src="'. $images['pm_sentbox'] .'" class="pm_box_icon" alt="" />',
+			'SAVEBOX_IMG'    => '<img src="'. $images['pm_savebox'] .'" class="pm_box_icon" alt="" />',
+		));
+	}
+}

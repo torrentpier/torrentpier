@@ -1,0 +1,3 @@
+<Files "*.sql">
+Deny from all
+</Files>

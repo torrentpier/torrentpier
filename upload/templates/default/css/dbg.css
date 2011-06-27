@@ -1,0 +1,31 @@
+/* dbg */
+.b1 { border: 1px solid #000 !important; }
+.b2 { border: 1px solid #f00 !important; }
+.b3 { border: 1px solid #00f !important; }
+
+.bg1 { background: #FAEBD7 !important; }
+.bg2 { background: #A52A2A !important; }
+.bg3 { background: #E9967A !important; }
+
+/* -------------------------------------------------------------------
+ERROR CHECKING
+This is to determine if deprecated elements are used. If so, they should be replaced:
+1a. <font> and
+1b. <font color="xxx">...</font>: Shouldn't be used. CSS should dictate font attributes.
+2. <center>: Shouldn't be used. CSS should dictate horizontal alignment.
+3a. <div align="xxx">...</div>
+3b. <p align="xxx">...</p>
+3c. <table align="xxx">...</table>:
+Shouldn't be used. CSS should dictate horizontal alignment.
+
+font, center, div[align], p[align], table[align], font[color]
+{
+	color : #cd0000;
+	font-weight : bold;
+	background : #eecc11 url(images/warning.gif) repeat 0 0;
+	margin : 10px;
+	padding : 10px;
+	border : 2px dashed #cd0000;
+	font-size : 2em;
+}
+------------------------------------------------------------------- */

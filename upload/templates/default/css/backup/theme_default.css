@@ -1,0 +1,130 @@
+/* ================================================================ *
+     Page header
+ * ================================================================ */
+/* ---------------------------------- *
+     TopMenu, Quick Login, PM Info, Loguot..
+ * ---------------------------------- */
+.topmenu {
+	background: #EFEFEF; border: solid #CFD4D8; border-width: 1px 0px;
+	margin: 3px 4px 0; padding: 0 8px;
+}
+.topmenu a:link, .topmenu a:visited { text-decoration: none; }
+.topmenu td { padding: 4px; font-size: 11px; white-space: nowrap; }
+.new-pm { background: #FFD9B2; border-color: #CC6600; }
+.new-pm-link { color: #993300 !important; font-weight: bold; }
+/* ---------------------------------- *
+     Logo
+ * ---------------------------------- */
+#logo { padding-left: 14px; min-height: 75px; }
+	#logo h1 {
+		margin: 0 300px 0 0; padding-top: 6px;
+		font-size: 42px; font-variant: small-caps;
+	}
+	#logo h6 {
+		margin: 0 300px 0 0; padding-top: 1px; padding-bottom: 3px;
+		font-size: 14px; font-variant: small-caps;
+	}
+/* ---------------------------------- *
+     Main navigation
+ * ---------------------------------- */
+#main_nav {
+	padding: 2px 10px; margin: 0 4px;
+	border: solid #CFD4D8; border-width: 1px 0; background: #CFD4D8;
+	}
+	#main_nav b { padding: 0 4px 0 1px; }
+	#main_nav a {	color: #535F62; text-decoration: none; }
+	#main_nav a:hover, #main_nav a:active {
+		text-decoration: none !important; color: #000000;
+	}
+/* ---------------------------------- *
+     Quick Login, PM Info, Loguot..
+ * ---------------------------------- */
+#logon {
+	position: absolute; top: 6px; right: 20px;
+	font-size: 11px; line-height: 160%;
+	border: 1px solid #B4B4B4; background: #EFEFEF;
+	}
+	#logon a:link, #logon a:visited { text-decoration: none; }
+	#logon span {
+		display: block; padding: 0 1px;
+	}
+	#name_pwd {                /* Username/Password group */
+		float: left; text-align: right; margin: 5px 0 5px 6px;
+	}
+	#login_button {            /* Submit button and Autologin checkbox group */
+		float: left; margin: 4px 6px 0 0;
+	}
+	#hello_username { font-size: 12px; line-height: 160%; margin: 4px; }
+	#name_pwd input { font-size: 11px; width: 80px; }
+	#login_button input { font-size: 12px; margin-top: 1px; }
+	#logged_in_links, #logged_out_links {
+		clear: both; text-align: center;
+		margin: 0 6px 2px; padding-top: 1px !important;
+		border-top: 1px solid #B4B4B4;
+	}
+	#register_link { font-weight: bold; }
+	.new_pm {
+		top: 5px !important;
+		background-color: #FFD9B2 !important;
+		border: 3px double #CC6600 !important;
+	}
+	.new_pm #pm_info a:link,
+	.new_pm #pm_info a:visited {
+		font-size: 11px; font-weight: bold; color: #993300;
+	}
+	.unread_pm a:link,
+	.unread_pm a:visited {
+		font-size: 11px; font-weight: bold; color: #993300;
+	}
+	.new_pm big,
+	.unread_pm big { font-size: 14px; }
+/* ---------------------------------- * 
+Latest News 
+* ---------------------------------- */ 
+#latest_news { margin-bottom: 8px; } 
+#latest_news table { 
+border-collapse: collapse; 
+} 
+#latest_news h3 { padding: 0 0 3px 0; color: #333333; } 
+#latest_news td { vertical-align: top; } 
+.news_date { 
+float: right; padding: 1px 8px 1px; 
+white-space: nowrap; font-family: "Courier New",Courier,monospace; 
+color: #333333; background: #F2F2F2; border: 1px solid #B4B4B4; 
+} 
+.news_title { 
+padding: 3px 8px 2px; margin-bottom: 2px; 
+background: transparent url(../images/hr400_ltr_gradient.jpg) no-repeat left top; 
+} 
+#latest_news a { text-decoration: none; } 
+#latest_news .new a { color: #A52A2A; font-weight: bold; } 
+/* ================================================================ * 
+Page content 
+* ================================================================ */ 
+/* ---------------------------------- * 
+Sidebar 1 
+* ---------------------------------- */ 
+#sidebar1 { 
+margin-top: -8px; 
+} 
+#sidebar1 h3 { 
+padding: 0 0 4px 0; margin: 8px 0 2px 0; 
+color: #333333; text-indent: 0.5em;
+background: transparent url(../images/hr200_ltr_gradient.jpg) no-repeat left bottom;
+} 
+#sidebar1 h3 a { color: #333333; } 
+#sidebar1 h5 { padding: 2px 4px 5px; } 
+#sidebar1 ul { margin: 6px 0 0 10px; } 
+#sidebar1 li { margin-bottom: 2px; margin-left: 14px; } 
+#sidebar1 a { text-decoration: none; color: #005A88; } 
+#user_ratio { padding: 0;} /* User ratio */ 
+#user_ratio td { 
+padding: 1px 6px 1px 8px ; font-size: 11px; 
+} 
+#tr_main_cats {} /* Main tracker categories list */ 
+#tr_main_cats ul { } 
+#tr_main_cats li { 
+margin-bottom: 3px; margin-left: 11px; font-size: 11px; font-weight: bold; line-height: 110%; 
+} 
+/* ================================================================ */
+

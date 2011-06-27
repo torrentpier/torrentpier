@@ -1,0 +1,5 @@
+img {border-style: none;}
+table {border-collapse: collapse;}
+td, th {border: 1px solid #000000;}
+td {background-color: #cccccc;}
+th {background-color: #ccccff;}

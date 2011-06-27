@@ -1,0 +1,3 @@
+#include "resource.h"
+
+IDR_MAINFRAME           ICON                    "res\\XBT Tracker.ico"

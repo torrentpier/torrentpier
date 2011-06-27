@@ -1,0 +1,119 @@
+#profContainer {
+	background-color: #F5F5F5;
+}
+.profTable {
+	background: #D3D3D3;
+	width: 100%;
+	margin-bottom: 6px;
+}
+.profHead {
+	color: #000000;
+	background: #F5F5F5;
+	font-size: 11px;
+	text-align: center;
+}
+.profFile {
+	color: #F5F5F5;
+	background: #71869F;
+	font-size: 13px;
+	text-align: left;
+	letter-spacing: 1px;
+	padding: 3px 4px 4px 12px;
+}
+.profFunc {
+	color: #2C2C2C;
+	font-size: 13px;
+	background: #ECECEA;
+	padding: 1px 4px 1px 3px;
+	white-space: nowrap;
+	font-family: "Courier New", Courier, monospace;
+}
+.funcTime {
+	padding: 1px 3px 1px 3px;
+	text-align: center;
+}
+.funcName {
+	padding: 1px 4px 1px 6px;
+	font-size: 14px;
+	font-weight: bold;
+}
+.profFoot {
+	color: #000000;
+	background: #D1D7DC;
+	font-size: 11px;
+	text-align: left;
+}
+.profTD {
+	font-size: 11px;
+}
+.profRow1 {
+	background: #F4F4F4;
+}
+.profRow2 {
+	background: #F4F4F4;
+}
+.perc {
+	padding: 2px 4px 2px 6px;
+	text-align: right;
+	color: #000000;
+}
+.high1 {
+	color: #BB0000;
+}
+.high3 {
+	font-size: 11px;
+	color: #EA0000;
+	font-weight: bold;
+}
+.high5 {
+	font-size: 11px;
+	color: #FF0000;
+	font-weight: bold;
+}
+.time {
+	padding: 2px 4px 2px 4px;
+	text-align: center;
+	color: #285C30;
+	font-weight: bold;
+}
+.avg {
+	padding: 2px 2px 2px 4px;
+	font-size: 10px;
+	font-style: normal;
+	text-align: center;
+	letter-spacing: -1px;
+	color: #336633;
+}
+.hits {
+	font-size: 10px;
+	padding: 2px 4px 2px 4px;
+	text-align: center;
+	font-style: normal;
+}
+.line {
+	font-size: 10px;
+	padding: 2px 4px 2px 6px;
+	text-align: right;
+}
+.scr {
+	padding: 2px 4px 2px 4px;
+	font-size: 11px;
+	text-align: left;
+	width: 100%;
+}
+.srcOpen .srcOpen:link, .srcOpen:visited {
+	color: #000099;
+}
+font {
+	font-size: 11px;
+}
+.warningBox1 {
+	color: darkred;
+	border: 1px solid #B22222;
+	padding: 12px;
+}
+.files {
+	font-size: 12px;
+	background: #FBFBFB;
+	font-family: Courier, monospace;
+}
