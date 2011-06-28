@@ -122,7 +122,7 @@ foreach ($bb_cfg['datastore']['mc']['srv_all'] as $ds_srv)
 }
 
 // Tracker
-$bb_cfg['announce_type']      = 'xbt';             // Тип анонсера, xbt или php
+$bb_cfg['announce_type']      = 'php';             // Тип анонсера, xbt или php
 $bb_cfg['announce_interval']  = 2400;              // Announce interval (default: 1800)
 $bb_cfg['passkey_key']        = 'uk';              // Passkey key name in GET request
 $bb_cfg['ignore_reported_ip'] = false;             // Ignore IP reported by client
