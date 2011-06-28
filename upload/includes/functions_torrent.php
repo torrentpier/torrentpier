@@ -263,7 +263,7 @@ function tracker_register ($attach_id, $mode = '')
 
 	if (!$torrent = get_torrent_info($attach_id))
 	{
-		message_die(GENERAL_ERROR, 'Torrent not found');
+		bb_die('Torrent not found');
 	}
 
 	$post_id   = $torrent['post_id'];
@@ -756,9 +756,7 @@ function torrent_error_exit ($message)
 {
 	global $reg_mode, $return_message, $lang;
 
-	$err_code = GENERAL_ERROR;
 	$msg = '';
-
 	if (isset($reg_mode) && ($reg_mode == 'request' || $reg_mode == 'newtopic'))
 	{
 		if (isset($return_message))
@@ -766,12 +764,10 @@ function torrent_error_exit ($message)
 			$msg .= $return_message .'<br /><br /><hr /><br />';
 		}
 		$msg .= '<b>'. $lang['BT_REG_FAIL'] .'</b><br /><br />';
-
-		$err_code = GENERAL_MESSAGE;
 	}
-
 	$msg .= $message;
-	message_die($err_code, $msg);
+
+	bb_die($msg);
 }
 
 // bdecode: based on OpenTracker [http://whitsoftdev.com/opentracker]
