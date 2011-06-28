@@ -1,17 +1,17 @@
 User-agent: *
-Disallow: /forum/download.php
-Disallow: /forum/filelst.php
-Disallow: /forum/groupcp.php
-Disallow: /forum/login.php
-Disallow: /forum/memberlist.php
-Disallow: /forum/modcp.php
-Disallow: /forum/posting.php
-Disallow: /forum/privmsg.php
-Disallow: /forum/profile.php
-Disallow: /forum/release.php
-Disallow: /forum/viewonline.php
+Disallow: /download.php
+Disallow: /filelst.php
+Disallow: /groupcp.php
+Disallow: /login.php
+Disallow: /memberlist.php
+Disallow: /modcp.php
+Disallow: /posting.php
+Disallow: /privmsg.php
+Disallow: /profile.php
+Disallow: /release.php
+Disallow: /viewonline.php
 Crawl-delay: 0.3
 Host: site.ru
-Clean-param: sid /forum/*.php
+Clean-param: sid /*.php
 
 Sitemap: http://site.ru/sitemap.php
