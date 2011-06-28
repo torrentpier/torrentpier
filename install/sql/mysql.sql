@@ -920,7 +920,7 @@ INSERT INTO `bb_cron` VALUES (15, 1, 'Clean search results', 'clean_search_resul
 INSERT INTO `bb_cron` VALUES (16, 1, 'Tracker cleanup and dlstat', 'tr_cleanup_and_dlstat.php', 'interval', NULL, NULL, 20, '2008-05-22 20:31:41', '2008-05-22 20:46:41', '00:15:00', 0, '', 0, 0, 14);
 INSERT INTO `bb_cron` VALUES (17, 1, 'Make tracker snapshot', 'tr_make_snapshot.php', 'interval', NULL, NULL, 10, '2008-05-22 20:31:38', '2008-05-22 20:41:38', '00:10:00', 0, '', 0, 0, 16);
 INSERT INTO `bb_cron` VALUES (18, 1, 'Seeder last seen', 'tr_update_seeder_last_seen.php', 'interval', NULL, NULL, 255, '2008-05-22 19:11:55', '2008-05-22 20:11:55', '01:00:00', 0, '', 0, 0, 5);
-INSERT INTO `bb_cron` VALUES (19, 1, 'Clean torrents search options', 'clean_tor_search_options.php', 'interval', NULL, NULL, 255, '2008-05-22 19:11:58', '2008-05-23 01:11:58', '06:00:00', 0, '', 0, 0, 3);
+INSERT INTO `bb_cron` VALUES (19, 1, 'Captcha', 'captcha_gen_gc.php', 'interval', NULL, NULL, 255, '2008-05-22 19:11:58', '2008-05-23 01:11:58', '06:00:00', 0, '', 0, 0, 3);
 INSERT INTO `bb_cron` VALUES (20, 1, 'Tracker dl-complete count', 'tr_complete_count.php', 'interval', NULL, NULL, 255, '2008-05-22 19:12:01', '2008-05-23 01:12:01', '06:00:00', 0, '', 0, 0, 3);
 INSERT INTO `bb_cron` VALUES (21, 1, 'Cache garbage collector', 'cache_gc.php', 'interval', NULL, NULL, 255, '2008-05-22 19:18:13', '2008-05-22 19:23:13', '00:05:00', 0, '', 0, 0, 24);
 INSERT INTO `bb_cron` VALUES (22, 1, 'Manage Antibroot', 'bb_manage_untrusted.php', 'interval', NULL, NULL, 255, '2008-05-22 19:18:13', '2008-05-22 19:23:13', '00:10:00', 0, '', 0, 0, 24);
