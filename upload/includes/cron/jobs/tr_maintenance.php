@@ -46,7 +46,7 @@ if ($dead_tor_sql && $attach_sql)
 	// Update attach
 	DB()->query("
 		UPDATE
-			". ATTACHMENTS_DESC_TABLE ." a,
+			". BB_ATTACHMENTS_DESC ." a,
 			". BB_BT_TORRENTS ." tor
 		SET
 			a.tracker_status = 0,

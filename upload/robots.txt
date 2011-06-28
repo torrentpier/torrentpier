@@ -1,6 +1,5 @@
 User-agent: *
 Disallow: /download.php
-Disallow: /filelst.php
 Disallow: /groupcp.php
 Disallow: /login.php
 Disallow: /memberlist.php
@@ -11,7 +10,7 @@ Disallow: /profile.php
 Disallow: /release.php
 Disallow: /viewonline.php
 Crawl-delay: 0.3
-Host: site.ru
+Host: torrentpier.me
 Clean-param: sid /*.php
 
-Sitemap: http://site.ru/sitemap.php
+Sitemap: http://torrentpier.me/sitemap.php
