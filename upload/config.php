@@ -67,7 +67,7 @@ $bb_cfg['srv_overloaded_msg'] = "Извините, в данный момент 
 $dbcharset = 'utf8';
 $pconnect  = defined('IN_CRON') ? false : false;
 
-$bb_cfg['db']['db1'] = array( 'localhost', 'forum', 'user', 'user', $dbcharset, $pconnect );
+$bb_cfg['db']['db1'] = array( 'localhost', 'forum', 'user', 'pass', $dbcharset, $pconnect );
 
 
 $bb_cfg['db_alias'] = array(
@@ -258,17 +258,17 @@ $bb_cfg['topic_tpl']['rules_video']    = TEMPLATES_DIR .'topic_tpl_rules_video.h
 
 // Cookie
 $bb_cfg['cookie_domain'] = '';                     # '.yourdomain.com'
-$bb_cfg['cookie_path']   = '/forum/';              # '/forum/'
+$bb_cfg['cookie_path']   = '/';                    # '/forum/'
 $bb_cfg['cookie_secure'] = (!empty($_SERVER['HTTPS']) ? 1 : 0); # 0
 $bb_cfg['cookie_prefix'] = 'bb_';                  # 'bb_'
 
 define('COOKIE_DBG', 'bb_dbg');                    // debug cookie name
 
 // Server
-$bb_cfg['server_name'] = $_SERVER['SERVER_NAME'];  // The domain name from which this board runs
-$bb_cfg['server_port'] = $_SERVER['SERVER_PORT'];  // The port your server is running on
-$bb_cfg['script_path'] = '/forum/';                // The path where FORUM is located relative to the domain name
-$bb_cfg['sitename'] = 'TorrentPier II - Torrent Tracker';               // Name of your site
+$bb_cfg['server_name'] = 'torrentpier.me';         // The domain name from which this board runs
+$bb_cfg['server_port'] = 80;                       // The port your server is running on
+$bb_cfg['script_path'] = '/';                      // The path where FORUM is located relative to the domain name
+$bb_cfg['sitename'] = 'TorrentPier II - Torrent Tracker (see $bb_cfg[\'sitename\'] in config.php)';               // Name of your site
 
 // Server load
 $bb_cfg['max_srv_load']      = 0;                  // 0 - disable
@@ -279,7 +279,7 @@ $bb_cfg['db_backup_shell_cmd']     = '';           // '/path/to/db_backup.sh 2>&
 $bb_cfg['site_backup_shell_cmd']   = '';
 
 // GZip
-$bb_cfg['gzip_compress'] = false;                   // compress output
+$bb_cfg['gzip_compress'] = false;                  // compress output
 $bb_cfg['gzip_force']    = false;                  // always compress (don't check client compatibility)
 
 // Sessions
@@ -541,7 +541,6 @@ $bb_cfg['advert_html_path']            = $bb_cfg['html_path'] .'advert.html';  #
 
 
 // Captcha
-$bb_cfg['captcha']['name']       = 'torrentpier.me';
 $bb_cfg['captcha']['disabled']   = false;
 $bb_cfg['captcha']['secret_key'] = 'secret_key';
 $bb_cfg['captcha']['img_path']   = "./images/captcha/";  # without '/'

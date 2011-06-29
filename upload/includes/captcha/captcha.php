@@ -157,6 +157,8 @@ class captcha_kcaptcha extends captcha_common
 	// generates keystring and image
 	function gen_img ($cap_id)
 	{
+		global $bb_cfg;
+
 		// do not change without changing font files!
 		$alphabet = "0123456789abcdefghijklmnopqrstuvwxyz";
 
@@ -206,7 +208,7 @@ class captcha_kcaptcha extends captcha_common
 
 		# show credits
 		$show_credits = true; # set to false to remove credits line. Credits adds 12 pixels to image height
-		$credits = $this->cfg['name']; # if empty, HTTP_HOST will be shown
+		$credits = $bb_cfg['server_name']; # if empty, HTTP_HOST will be shown
 
 		# CAPTCHA image colors (RGB, 0-255)
 		//$foreground_color = array(0, 0, 0);
@@ -316,7 +318,7 @@ class captcha_kcaptcha extends captcha_common
 		$background=imagecolorallocate($img2, $background_color[0], $background_color[1], $background_color[2]);
 		imagefilledrectangle($img2, 0, 0, $width-1, $height-1, $background);
 		imagefilledrectangle($img2, 0, $height, $width-1, $height+12, $foreground);
-		$credits=empty($credits)?$this->cfg['name']:$credits;
+		$credits=empty($credits)?$bb_cfg['server_name']:$credits;
 		imagestring($img2, 2, $width/2-imagefontwidth(2)*strlen($credits)/2, $height-2, $credits, $background);
 
 		// periods
