@@ -57,7 +57,7 @@ $bb_cfg['css_ver'] = 1;
 
 // Increase number of revision after update
 $bb_cfg['tp_version'] = '2.0.2';
-$bb_cfg['tp_release_state'] = 'TP II r41';
+$bb_cfg['tp_release_state'] = 'TP II r43';
 $bb_cfg['tp_release_date'] = '29-06-2011';
 
 $bb_cfg['board_disabled_msg'] = 'форум временно отключен'; // 'forums temporarily disabled'; // show this msg if board has been disabled via ON/OFF trigger
@@ -67,8 +67,7 @@ $bb_cfg['srv_overloaded_msg'] = "Извините, в данный момент 
 $dbcharset = 'utf8';
 $pconnect  = defined('IN_CRON') ? false : false;
 
-$bb_cfg['db']['db1'] = array( 'localhost', 'forum', 'user', 'pass', $dbcharset, $pconnect );
-
+$bb_cfg['db']['db1'] = array('localhost', 'dbase', 'user', 'pass', $dbcharset, $pconnect);
 
 $bb_cfg['db_alias'] = array(
 // 'alias' => 'srv_name'
@@ -91,7 +90,7 @@ $bb_cfg['cache']['memcache'] = array(
 	'ds_bb_core' => array('localhost:11211', false, false),
 );
 
-$bb_cfg['cache']['mc_class'] = 'memcache_common';   //  memcache_common, memcached_common
+$bb_cfg['cache']['mc_class'] = 'memcache_common'; //  memcache_common, memcached_common
 
 # name => array( (string) type, (array) cfg )
 
@@ -105,7 +104,7 @@ $bb_cfg['cache']['engines'] = array(
 );
 
 // Datastore
-$bb_cfg['datastore_type'] = 'filecache';               // Available datastore types: mysql, sqlite, memcache, filecache
+$bb_cfg['datastore_type'] = 'filecache'; // Available datastore types: mysql, sqlite, memcache, filecache
 
 $bb_cfg['datastore']['sqlite'] = array(
 	'db_file_path' => $bb_cfg['cache']['db_dir'] . '/bb_datastore.sqlite.db',
