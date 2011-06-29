@@ -236,7 +236,7 @@ foreach ($profile_fields as $field => $can_edit)
 				{
 					$errors[] = 'Введённые пароли не совпадают';
 				}
-				$db_data['user_password'] = md5($new_pass);
+				$db_data['user_password'] = md5(md5($new_pass));
 			}
 
 			if ($mode == 'register')
@@ -250,7 +250,7 @@ foreach ($profile_fields as $field => $can_edit)
 			{
 				if (!empty($cur_pass))
 				{
-					$cur_pass_valid = ($pr_data['user_password'] === md5($cur_pass));
+					$cur_pass_valid = ($pr_data['user_password'] === md5(md5($cur_pass)));
 				}
 				if (!empty($new_pass) && !$cur_pass_valid)
 				{

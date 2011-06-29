@@ -397,7 +397,7 @@ class user_common
 		if ($username && $password)
 		{
 			$username_sql = str_replace("\\'", "''", $username);
-			$password_sql = md5($password);
+			$password_sql = md5(md5($password));
 
 			$sql = "
 				SELECT *
@@ -411,7 +411,7 @@ class user_common
 
 			if ($userdata = DB()->fetch_row($sql))
 			{
-				if (!$userdata['username'] || !$userdata['user_password'] || $userdata['user_id'] == ANONYMOUS || md5($password) !== $userdata['user_password'] || !$userdata['user_active'])
+				if (!$userdata['username'] || !$userdata['user_password'] || $userdata['user_id'] == ANONYMOUS || md5(md5($password)) !== $userdata['user_password'] || !$userdata['user_active'])
 				{
 					trigger_error('invalid userdata', E_USER_ERROR);
 				}
