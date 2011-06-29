@@ -249,6 +249,16 @@ class ajax_common
 		$this->send();
 	}
 
+	/**
+	*  Prompt for confirmation
+	*/
+	function prompt_for_confirm ($confirm_msg = 'Точно?')
+	{
+		$this->response['prompt_confirm'] = 1;
+		$this->response['confirm_msg'] = $confirm_msg;
+		$this->send();
+	}
+
     /**
 	*  Verify mod rights
 	*/
