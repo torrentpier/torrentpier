@@ -1527,6 +1527,6 @@ $lang['TRACKER_S'] = 'on tracker';
 
 // copyright
 $lang['NOTICE'] = '!ATTENTION!';
-$lang['POWERED'] = 'Powered by <a href="http://torrentpier.info">TorrentPier</a> &copy; <strong>Meithar</strong>, RoadTrain, Pandora';
-$lang['DIVE'] = 'The forum is submitted on base <a href="http://www.phpbb.com">phpBB</a> &copy; phpBB Group';
+$lang['POWERED'] = 'Powered by <a target="_blank" href="http://torrentpier.me">TorrentPier</a> &copy; <strong>Meithar</strong>';
+$lang['DIVE'] = 'The forum is submitted on base <a target="_blank" href="http://www.phpbb.com">phpBB</a> &copy; phpBB Group';
 $lang['COPY'] = 'The site does not give electronic versions of products, and is engaged only in a collecting and cataloguing of the references sent and published at a forum by our readers. If you are the legal owner of any submitted material and do not wish that the reference to him{it} was in our catalogue, contact us and we shall immediately remove her. Files for an exchange on tracker are given by users of a site, and the administration does not bear the responsibility for their maintenance. The request to not fill in the files protected by copyrights, and also files of the illegal maintenance!';

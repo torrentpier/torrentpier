@@ -1,32 +1,5 @@
 <?php
 
- /*
-	Moderator Control Panel
-
-    From this 'Control Panel' the moderator of a forum will be able to do
-    mass topic operations (locking/unlocking/moving/deleteing), and it will
-    provide an interface to do quick locking/unlocking/moving/deleting of
-    topics via the moderator operations buttons on all of the viewtopic pages.
-
-	This file is part of TorrentPier
-
-	TorrentPier is free software: you can redistribute it and/or modify
-	it under the terms of the GNU General Public License as published by
-	the Free Software Foundation, either version 3 of the License, or
-	(at your option) any later version.
-
-	TorrentPier is distributed in the hope that it will be useful,
-	but WITHOUT ANY WARRANTY; without even the implied warranty of
-	MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-	GNU General Public License for more details.
-
-	A copy of the GPL 2.0 should have been included with the program.
-	If not, see http://www.gnu.org/licenses/
-
-	Official SVN repository and contact information can be found at
-	http://code.google.com/p/torrentpier/
- */
-
 define('IN_PHPBB', true);
 define('BB_SCRIPT', 'modcp');
 define('BB_ROOT', './');

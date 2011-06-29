@@ -1,24 +1,4 @@
-<?php 
-
-/*
-	This file is part of TorrentPier
-
-	TorrentPier is free software: you can redistribute it and/or modify
-	it under the terms of the GNU General Public License as published by
-	the Free Software Foundation, either version 3 of the License, or
-	(at your option) any later version.
-
-	TorrentPier is distributed in the hope that it will be useful,
-	but WITHOUT ANY WARRANTY; without even the implied warranty of
-	MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-	GNU General Public License for more details.
-
-	A copy of the GPL 2.0 should have been included with the program.
-	If not, see http://www.gnu.org/licenses/
-
-	Official SVN repository and contact information can be found at
-	http://code.google.com/p/torrentpier/
- */
+<?php
 
 define('IN_PHPBB', true);
 define('BB_SCRIPT', 'gallery');
@@ -77,7 +57,7 @@ function paste_links($links, $thumbs = '')
 	{
 		$link = implode(' ', $links);
 		$img  = '[img]'. implode('[/img] [img]', $links) .'[/img]';
-		
+
 		if ($thumbs)
 		{
 			$thumb = '';
@@ -95,7 +75,7 @@ function paste_links($links, $thumbs = '')
 		$thumb = '[url='.$link.'][img]'. $thumbs .'[/img][/url]';
 	}
 	$spoiler = '[spoiler="'. $lang['GALLERY_SCREENSHOTS'] .'"]' . $img . '[/spoiler]';
-	
+
 	$text  = (!is_array($links)) ? '<br /><a href='. $link .' target=_blank>'. $link .'</a><br>' : '';
 	$text .= (!is_array($links)) ? '<br /><img src='. $link .' alt="'. $lang['GALLERY_YOUR_IMAGE'] .'">' : '';
 	$text .= '<br /><h4 align="left"><b>'. $lang['GALLERY_LINK_URL'] .':</b></h4><input type="text" readonly="" value="'. $link .'" size="140" onclick="f2(this);">';
@@ -109,7 +89,7 @@ function paste_links($links, $thumbs = '')
 
 	$links_all[] = $links;
 	$thumbs ? ($thumbs_all[] = $thumbs) : null;
-	
+
 	return $text;
 }
 
@@ -188,7 +168,7 @@ if ($go == 'upload')
 if ($go == 'delete' && IS_ADMIN && !empty($_GET['fn']))
 {
 	global $lang;
-	
+
 	$fn = clean_filename($_GET['fn']);
 
 	$pic  = $dir . $fn;

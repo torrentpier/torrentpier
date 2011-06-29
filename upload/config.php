@@ -162,7 +162,7 @@ $tr_cfg = array(
 $bb_cfg['show_dl_status_in_search'] = true;
 $bb_cfg['show_dl_status_in_forum']  = true;
 
-$bb_cfg['show_tor_info_in_dl_list'] = true;        // http://trac.torrentpier.com/trac/changeset/377
+$bb_cfg['show_tor_info_in_dl_list'] = true;
 $bb_cfg['allow_dl_list_names_mode'] = true;
 
 // Torrents
