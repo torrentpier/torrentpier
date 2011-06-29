@@ -65,6 +65,11 @@ ajax.callback.user_register = function(data){
 </tr>
 <!-- ENDIF -->
 <!-- BEGIN switch_bittorrent -->
+<script type="text/javascript">
+ajax.callback.gen_passkey = function(data){
+	$('#passkey').text(data.passkey);
+};
+</script>
 <tr>
 	<th colspan="2"><a name="bittorrent"></a>TorrentPier</th>
 </tr>
@@ -74,7 +79,7 @@ ajax.callback.user_register = function(data){
 </tr>
 <tr>
 	<td>{L_CURR_PASSKEY}</td>
-	<td class="med">{CURR_PASSKEY}</td>
+	<td class="med" id="passkey">{CURR_PASSKEY}</td>
 </tr>
 <!-- END switch_bittorrent -->
 <tr>

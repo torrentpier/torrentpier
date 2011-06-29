@@ -38,7 +38,7 @@ if (IS_ADMIN)
 {
 	$template->assign_vars(array(
 		'SHOW_PASSKEY'   => true,
-		'S_GEN_PASSKEY'  => "<a href=\"torrent.php?mode=gen_passkey&amp;u=". $profile_user_id .'&amp;sid='. $userdata['session_id'] .'">'. $lang['BT_GEN_PASSKEY_URL'] .'</a>',
+		'S_GEN_PASSKEY'  => '<a href="#" onclick="ajax.exec({ action: \'gen_passkey\', user_id: '. $profile_user_id .' }); return false;">'. $lang['BT_GEN_PASSKEY_URL'] .'</a>',
 		'CAN_EDIT_RATIO' => IS_SUPER_ADMIN,
 	));
 }

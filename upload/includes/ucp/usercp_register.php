@@ -105,11 +105,11 @@ switch ($mode)
 		if (IS_ADMIN && !empty($_REQUEST['u']))
 		{
 			$pr_user_id = (int) $_REQUEST['u'];
-			$adm_edit   = ($pr_user_id != $user->id);
+			$adm_edit   = ($pr_user_id != $userdata['user_id']);
 		}
 		else
 		{
-			$pr_user_id = $user->id;
+			$pr_user_id = $userdata['user_id'];
 		}
 		$profile_fields_sql = join(', ', array_keys($profile_fields));
 		$sql = "
@@ -748,7 +748,7 @@ if ($mode == 'editprofile' && $userdata['session_logged_in'])
 
 	$sql = 'SELECT auth_key
 		FROM '. BB_BT_USERS .'
-		WHERE user_id = '. $userdata['user_id'];
+		WHERE user_id = '. $pr_user_id;
 
 	if (!$result = DB()->sql_query($sql))
 	{
@@ -762,7 +762,7 @@ if ($mode == 'editprofile' && $userdata['session_logged_in'])
 		'L_GEN_PASSKEY'           => $lang['BT_GEN_PASSKEY'],
 		'L_GEN_PASSKEY_EXPLAIN'   => $lang['BT_GEN_PASSKEY_EXPLAIN'],
 		'L_GEN_PASSKEY_EXPLAIN_2' => $lang['BT_GEN_PASSKEY_EXPLAIN_2'],
-		'S_GEN_PASSKEY'           => "<a href=\"torrent.php?mode=gen_passkey&amp;u=" . $userdata['user_id'] . '&amp;sid=' . $userdata['session_id'] . '">' . $lang['BT_GEN_PASSKEY_URL'] . '</a>',
+		'S_GEN_PASSKEY'           => '<a href="#" onclick="ajax.exec({ action: \'gen_passkey\', user_id: '. $pr_user_id .' }); return false;">' . $lang['BT_GEN_PASSKEY_URL'] . '</a>',
 		'CURR_PASSKEY'            => $curr_passkey,
 	));
 }

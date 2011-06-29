@@ -241,9 +241,14 @@ ajax.callback.edit_user_profile = function(data){
 			</td>
 		</tr>
 		<!-- IF SHOW_PASSKEY -->
+		<script type="text/javascript">
+		ajax.callback.gen_passkey = function(data){
+			$('#passkey').text(data.passkey);
+		};
+		</script>
 		<tr>
 			<th><a class="med" href="#" onclick="toggle_block('gen_passkey'); return false;" class="gen">Passkey:</a></th>
-			<td>{AUTH_KEY}</td>
+			<td id="passkey">{AUTH_KEY}</td>
 		</tr>
 		<tr id="gen_passkey" style="display: none;">
 			<td colspan="2" class="med tCenter">{S_GEN_PASSKEY}</td>

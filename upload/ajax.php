@@ -24,6 +24,7 @@ switch ($ajax->action)
 	case 'view_torrent':
 	case 'mod_action':
 	case 'change_tor_status':
+	case 'gen_passkey';
 		require(INC_DIR .'functions_torrent.php');
 	break;
 
@@ -58,6 +59,8 @@ class ajax_common
 		'change_torrent'    => array('mod'),
 		'change_tor_status' => array('mod'),
 		'mod_action'        => array('mod'),
+
+        'gen_passkey'       => array('user'),
 
 		'view_post'         => array('guest'),
 		'view_message'      => array('guest'),
@@ -264,6 +267,25 @@ class ajax_common
 	function edit_user_profile ()
 	{
         require(AJAX_DIR .'edit_user_profile.php');
+	}
+
+	function gen_passkey ()
+	{
+		global $userdata, $lang;
+
+		$req_uid = (int) $this->request['user_id'];
+
+		if ($req_uid == $userdata['user_id'] || IS_ADMIN)
+		{
+			$force_generate = (IS_ADMIN);
+
+			if (!$passkey = generate_passkey($req_uid, $force_generate))
+			{
+				$this->ajax_die('Could not insert passkey');
+			}
+			tracker_rm_user($req_uid);
+			$this->response['passkey'] = $passkey;
+		}
 	}
 
 	function view_post ()
