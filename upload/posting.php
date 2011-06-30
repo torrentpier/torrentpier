@@ -292,26 +292,6 @@ if ($mode == 'newtopic' && $topic_tpl && $post_info['topic_tpl_id'])
 	require(INC_DIR .'topic_templates.php');
 }
 
-// BBCode
-if (!$bb_cfg['allow_bbcode'])
-{
-	$bbcode_on = 0;
-}
-else
-{
-	$bbcode_on = ($submit || $refresh) ? (int) empty($_POST['disable_bbcode']) : $bb_cfg['allow_bbcode'];
-}
-
-// Smilies
-if (!$bb_cfg['allow_smilies'])
-{
-	$smilies_on = 0;
-}
-else
-{
-	$smilies_on = ($submit || $refresh) ? (int) empty($_POST['disable_smilies']) : $bb_cfg['allow_smilies'];
-}
-
 // Notify
 if ($submit || $refresh)
 {
@@ -346,7 +326,7 @@ if (!IS_GUEST && $mode != 'newtopic' && ($submit || $preview || $mode == 'quote'
 {
 	if ($topic_last_read = max(intval(@$tracking_topics[$topic_id]), intval(@$tracking_forums[$forum_id])))
 	{
-		$sql = "SELECT p.*, pt.post_text, pt.bbcode_uid, u.username
+		$sql = "SELECT p.*, pt.post_text, u.username
 			FROM ". BB_POSTS ." p, ". BB_POSTS_TEXT ." pt, ". BB_USERS ." u
 			WHERE p.topic_id = ". (int) $topic_id ."
 				AND u.user_id = p.poster_id
@@ -507,15 +487,14 @@ else if ( ($submit || $confirm) && !$topic_has_new_posts )
 			$poll_title = ( isset($_POST['poll_title']) && $is_auth['auth_pollcreate'] ) ? $_POST['poll_title'] : '';
 			$poll_options = ( isset($_POST['poll_option_text']) && $is_auth['auth_pollcreate'] ) ? $_POST['poll_option_text'] : '';
 			$poll_length = ( isset($_POST['poll_length']) && $is_auth['auth_pollcreate'] ) ? $_POST['poll_length'] : '';
-			$bbcode_uid = '';
 
-			prepare_post($mode, $post_data, $bbcode_on, $smilies_on, $error_msg, $username, $bbcode_uid, $subject, $message, $poll_title, $poll_options, $poll_length);
+			prepare_post($mode, $post_data, $error_msg, $username, $subject, $message, $poll_title, $poll_options, $poll_length);
 
 			if (!$error_msg)
 			{
 				$topic_type = ( isset($post_data['topic_type']) && $topic_type != $post_data['topic_type'] && !$is_auth['auth_sticky'] && !$is_auth['auth_announce'] ) ? $post_data['topic_type'] : $topic_type;
 
-				submit_post($mode, $post_data, $return_message, $return_meta, $forum_id, $topic_id, $post_id, $poll_id, $topic_type, $bbcode_on, $smilies_on, $attach_sig, $bbcode_uid, str_replace("\'", "''", $username), str_replace("\'", "''", $subject), str_replace("\'", "''", $message), str_replace("\'", "''", $poll_title), $poll_options, $poll_length, $update_post_time);
+				submit_post($mode, $post_data, $return_message, $return_meta, $forum_id, $topic_id, $post_id, $poll_id, $topic_type, str_replace("\'", "''", $username), str_replace("\'", "''", $subject), str_replace("\'", "''", $message), str_replace("\'", "''", $poll_title), $poll_options, $poll_length, $update_post_time);
 			}
 			break;
 
@@ -676,22 +655,6 @@ else
 	{
 		$subject = ( $post_data['first_post'] ) ? $post_info['topic_title'] : $post_info['post_subject'];
 		$message = $post_info['post_text'];
-
-		if ( $mode == 'editpost' )
-		{
-			$attach_sig = $post_info['enable_sig'];
-			$bbcode_on = $post_info['enable_bbcode'];
-			$smilies_on = $post_info['enable_smilies'];
-		}
-		else
-		{
-			$attach_sig = bf($userdata['user_opt'], 'user_opt', 'attachsig');
-		}
-
-		if ( $post_info['bbcode_uid'] != '' )
-		{
-			$message = preg_replace('/\:(([a-z0-9]:)?)' . $post_info['bbcode_uid'] . '/s', '', $message);
-		}
 
 		$message = str_replace('<', '&lt;', $message);
 		$message = str_replace('>', '&gt;', $message);
@@ -877,15 +840,12 @@ if ($mode == 'editpost' && $post_data['last_post'] && !$post_data['first_post'])
 //
 // Output the data to the template
 //
-$bbcode_status = ($bb_cfg['allow_bbcode']) ? $lang['BBCODE_IS_ON'] : $lang['BBCODE_IS_OFF'];
 
 $template->assign_vars(array(
 	'USERNAME' => @$username,
 	'CAPTCHA_HTML' => (IS_GUEST) ? CAPTCHA()->get_html() : '',
 	'SUBJECT' => $subject,
 	'MESSAGE' => $message,
-	'BBCODE_STATUS' => sprintf($bbcode_status, '<a href="'."faq.php?mode=bbcode".'" target="_phpbbcode">', '</a>'),
-	'SMILIES_STATUS' => ($bb_cfg['allow_smilies']) ? $lang['SMILIES_ARE_ON'] : $lang['SMILIES_ARE_OFF'],
 
 	'L_SUBJECT' => $lang['SUBJECT'],
 	'L_MESSAGE_BODY' => $lang['MESSAGE_BODY'],
@@ -938,9 +898,6 @@ $template->assign_vars(array(
 
 	'U_VIEWTOPIC' => ( $mode == 'reply' ) ? append_sid("viewtopic.php?" . POST_TOPIC_URL . "=$topic_id&amp;postorder=desc") : '',
 
-	'S_BBCODE_CHECKED' => ( !$bbcode_on ) ? 'checked="checked"' : '',
-	'S_SMILIES_CHECKED' => ( !$smilies_on ) ? 'checked="checked"' : '',
-	'S_SIGNATURE_CHECKED' => ( $attach_sig ) ? 'checked="checked"' : '',
 	'S_NOTIFY_CHECKED' => ( $notify_user ) ? 'checked="checked"' : '',
 	'S_TYPE_TOGGLE' => $topic_type_toggle,
 	'S_TOPIC_ID' => $topic_id,

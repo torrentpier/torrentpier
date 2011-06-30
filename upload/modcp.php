@@ -542,7 +542,7 @@ switch ($mode)
 		//mpd end
 		else
 		{
-			$sql = "SELECT u.username, p.*, pt.post_text, pt.bbcode_uid, pt.post_subject, p.post_username
+			$sql = "SELECT u.username, p.*, pt.post_text, pt.post_subject, p.post_username
 				FROM " . BB_POSTS . " p, " . BB_USERS . " u, " . BB_POSTS_TEXT . " pt
 				WHERE p.topic_id = $topic_id
 					AND p.poster_id = u.user_id
@@ -575,7 +575,6 @@ switch ($mode)
 
 					$post_date = bb_date($postrow[$i]['post_time']);
 
-					$bbcode_uid = $postrow[$i]['bbcode_uid'];
 					$message = $postrow[$i]['post_text'];
 					$post_subject = ( isset($postrow[$i]['post_subject']) ) ? $postrow[$i]['post_subject'] : $topic_title;
 

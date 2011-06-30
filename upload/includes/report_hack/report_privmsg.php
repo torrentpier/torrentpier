@@ -193,7 +193,7 @@ class report_privmsg extends report_module
 	//
 	function subject_details_obtain($report_subject)
 	{
-		$sql = 'SELECT p.privmsgs_subject, p.privmsgs_from_userid, p.privmsgs_enable_bbcode, p.privmsgs_enable_smilies, pt.privmsgs_bbcode_uid, pt.privmsgs_text, u.username
+		$sql = 'SELECT p.privmsgs_subject, p.privmsgs_from_userid, p.privmsgs_enable_bbcode, p.privmsgs_enable_smilies, pt.privmsgs_text, u.username
 			FROM ' . BB_PRIVMSGS . ' p
 			INNER JOIN ' . BB_PRIVMSGS_TEXT . ' pt
 				ON pt.privmsgs_text_id = privmsgs_id

@@ -371,11 +371,11 @@ $post_order = (isset($_POST['postorder']) && $_POST['postorder'] !== 'asc') ? 'd
 $sql = "
 	SELECT
 	  u.username, u.user_id, u.user_posts, u.user_from, u.user_from_flag,
-	  u.user_regdate, u.user_rank, u.user_sig, u.user_sig_bbcode_uid,
+	  u.user_regdate, u.user_rank, u.user_sig,
 	  u.user_avatar, u.user_avatar_type, u.user_allowavatar,
 	  p.*,
 	  h.post_html, IF(h.post_html IS NULL, pt.post_text, NULL) AS post_text,
-	  pt.post_subject, pt.bbcode_uid
+	  pt.post_subject
 	FROM      ". BB_POSTS      ." p
 	LEFT JOIN ". BB_USERS      ." u  ON(u.user_id = p.poster_id)
 	LEFT JOIN ". BB_POSTS_TEXT ." pt ON(pt.post_id = p.post_id)
@@ -870,8 +870,6 @@ for($i = 0; $i < $total_posts; $i++)
 
 	$message = get_parsed_post($postrow[$i]);
 
-	$bbcode_uid = $postrow[$i]['bbcode_uid'];
-
 	$user_sig = ($bb_cfg['allow_sig'] && !$user->opt_js['h_sig'] && $postrow[$i]['enable_sig'] && $postrow[$i]['user_sig']) ? $postrow[$i]['user_sig'] : '';
 
 	if ($user_sig)
@@ -1044,7 +1042,6 @@ if ($bb_cfg['show_quick_reply'])
 		if (!IS_GUEST)
 		{
 			$template->assign_vars(array(
-				'QR_ATTACHSIG_CHECKED' => bf($userdata['user_opt'], 'user_opt', 'attachsig'),
 				'QR_NOTIFY_CHECKED'    => ($userdata['user_notify'] || $is_watching_topic),
 			));
 		}

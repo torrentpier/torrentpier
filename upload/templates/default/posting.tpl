@@ -119,30 +119,11 @@
 <tr>
 	<td class="row1 vTop pad_4" valign="top">
 		<p><b>{L_OPTIONS}</b></p>
-		<p class="small mrg_4">
-			{BBCODE_STATUS}<br />
-			{SMILIES_STATUS}<br />
-		</p>
 	</td>
 	<td class="row2">
 
-	<div class="floatL">
-		<table class="borderless">
-		<tr>
-			<td><input type="checkbox" id="disable_bbcode" name="disable_bbcode" {S_BBCODE_CHECKED} <!-- IF not $bb_cfg['allow_bbcode'] -->disabled="disabled"<!-- ENDIF --> /></td>
-			<td><label for="disable_bbcode">{L_DISABLE_BBCODE}</label></td>
-		</tr>
-		<tr>
-			<td><input type="checkbox" id="disable_smilies" name="disable_smilies" {S_SMILIES_CHECKED} <!-- IF not $bb_cfg['allow_smilies'] -->checked="checked" disabled="disabled"<!-- ENDIF --> /></td>
-			<td><label for="disable_smilies">{L_DISABLE_SMILIES}</label></td>
-		</tr>
-		</table>
-	</div>
-
 	<!-- IF IN_PM -->
 	<!-- ELSEIF LOGGED_IN -->
-	<div class="floatL">&nbsp;&nbsp;</div>
-
 	<div class="floatL">
 		<table class="borderless inline">
 		<!-- IF SHOW_UPDATE_POST_TIME -->
@@ -151,10 +132,6 @@
 			<td><label for="update_post_time">{L_UPDATE_POST_TIME}</label></td>
 		</tr>
 		<!-- ENDIF -->
-		<tr>
-			<td><input type="checkbox" id="attach_sig" name="attach_sig" {S_SIGNATURE_CHECKED} /></td>
-			<td><label for="attach_sig">{L_ATTACH_SIGNATURE}</label></td>
-		</tr>
 		<!-- IF SHOW_NOTIFY_CHECKBOX -->
 		<tr>
 			<td><input type="checkbox" id="notify" name="notify" {S_NOTIFY_CHECKED} /></td>

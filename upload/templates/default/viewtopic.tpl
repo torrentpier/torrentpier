@@ -341,25 +341,8 @@ function set_hid_chbox (id)
 </tr>
 <tr id="post_opt" class="row2">
 	<td class="td2 med tCenter pad_4">
-
-	{L_QR_DISABLE}:&nbsp;
-
-	<label><input type="checkbox" name="disable_bbcode" <!-- IF not $bb_cfg['allow_bbcode'] -->checked="checked" disabled="disabled"<!-- ENDIF --> />
-	BBCode&nbsp;</label>
-
-	<label><input type="checkbox" name="disable_smilies" <!-- IF not $bb_cfg['allow_smilies'] -->checked="checked" disabled="disabled"<!-- ENDIF --> />
-	Smilies&nbsp;</label>
-
-	&nbsp;
-
-	<label><input type="checkbox" name="attach_sig" <!-- IF QR_ATTACHSIG_CHECKED -->checked="checked"<!-- ENDIF --> <!-- IF not LOGGED_IN -->disabled="disabled"<!-- ENDIF --> />
-	{L_QR_ATTACHSIG}&nbsp;</label>
-
-	&nbsp;
-
-	<label><input type="checkbox" name="notify" <!-- IF QR_NOTIFY_CHECKED -->checked="checked"<!-- ENDIF --> <!-- IF not LOGGED_IN -->disabled="disabled"<!-- ENDIF --> />
-	{L_QR_NOTIFY}&nbsp;</label>
-
+		<label><input type="checkbox" name="notify" <!-- IF QR_NOTIFY_CHECKED -->checked="checked"<!-- ENDIF --> <!-- IF not LOGGED_IN -->disabled="disabled"<!-- ENDIF --> />
+		{L_QR_NOTIFY}&nbsp;</label>
 	</td>
 </tr>
 </table><!--/topic_quick_reply-->

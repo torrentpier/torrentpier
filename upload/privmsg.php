@@ -174,7 +174,7 @@ if ( $mode == 'read' )
 	//
 	// Major query obtains the message ...
 	//
-	$sql = "SELECT u.username AS username_1, u.user_id AS user_id_1, u2.username AS username_2, u2.user_id AS user_id_2, u.user_posts, u.user_from, u.user_email, u.user_regdate, u.user_rank, u.user_avatar, pm.*, pmt.privmsgs_bbcode_uid, pmt.privmsgs_text
+	$sql = "SELECT u.username AS username_1, u.user_id AS user_id_1, u2.username AS username_2, u2.user_id AS user_id_2, u.user_posts, u.user_from, u.user_email, u.user_regdate, u.user_rank, u.user_avatar, pm.*, pmt.privmsgs_text
 		FROM " . BB_PRIVMSGS . " pm, " . BB_PRIVMSGS_TEXT . " pmt, " . BB_USERS . " u, " . BB_USERS . " u2
 		WHERE pm.privmsgs_id = $privmsgs_id
 			AND pmt.privmsgs_text_id = pm.privmsgs_id
@@ -288,8 +288,8 @@ if ( $mode == 'read' )
 
 		$privmsg_sent_id = DB()->sql_nextid();
 
-		$sql = "INSERT INTO " . BB_PRIVMSGS_TEXT . " (privmsgs_text_id, privmsgs_bbcode_uid, privmsgs_text)
-			VALUES ($privmsg_sent_id, '" . $privmsg['privmsgs_bbcode_uid'] . "', '" . str_replace("\'", "''", addslashes($privmsg['privmsgs_text'])) . "')";
+		$sql = "INSERT INTO " . BB_PRIVMSGS_TEXT . " (privmsgs_text_id, privmsgs_text)
+			VALUES ($privmsg_sent_id, '" . str_replace("\'", "''", addslashes($privmsg['privmsgs_text'])) . "')";
 		if ( !DB()->sql_query($sql) )
 		{
 			message_die(GENERAL_ERROR, 'Could not insert private message sent text', '', __LINE__, __FILE__, $sql);
@@ -473,12 +473,6 @@ if ( $mode == 'read' )
 	$post_subject = htmlCHR($privmsg['privmsgs_subject']);
 
 	$private_message = $privmsg['privmsgs_text'];
-	$bbcode_uid = $privmsg['privmsgs_bbcode_uid'];
-
-	if ( $bbcode_uid != '' )
-	{
-		$private_message = ( $bb_cfg['allow_bbcode'] ) ? bbencode_second_pass($private_message, $bbcode_uid) : preg_replace('/\:[0-9a-z\:]+\]/si', ']', $private_message);
-	}
 
 	$orig_word = array();
 	$replacement_word = array();
@@ -490,7 +484,7 @@ if ( $mode == 'read' )
 		$private_message = preg_replace($orig_word, $replacement_word, $private_message);
 	}
 
-	$private_message = str_replace("\n", '<br />', $private_message);
+	$private_message = bbcode2html($private_message);
 
 	//
 	// Dump it to the templating engine
@@ -1027,7 +1021,7 @@ else if ( $submit || $refresh || $mode != '' )
 		{
 			if ( !$error )
 			{
-				$privmsg_message = bbcode2html($_POST['message']);
+				$privmsg_message = DB()->escape($_POST['message']);
 			}
 		}
 		else
@@ -1118,13 +1112,13 @@ else if ( $submit || $refresh || $mode != '' )
 		{
 			$privmsg_sent_id = DB()->sql_nextid();
 
-			$sql = "INSERT INTO " . BB_PRIVMSGS_TEXT . " (privmsgs_text_id, privmsgs_bbcode_uid, privmsgs_text)
-				VALUES ($privmsg_sent_id, '" . @$bbcode_uid . "', '" . str_replace("\'", "''", $privmsg_message) . "')";
+			$sql = "INSERT INTO " . BB_PRIVMSGS_TEXT . " (privmsgs_text_id, privmsgs_text)
+				VALUES ($privmsg_sent_id, '" . str_replace("\'", "''", $privmsg_message) . "')";
 		}
 		else
 		{
 			$sql = "UPDATE " . BB_PRIVMSGS_TEXT . "
-				SET privmsgs_text = '" . str_replace("\'", "''", $privmsg_message) . "', privmsgs_bbcode_uid = '$bbcode_uid'
+				SET privmsgs_text = '" . str_replace("\'", "''", $privmsg_message) . "'
 				WHERE privmsgs_text_id = $privmsg_id";
 		}
 
@@ -1188,7 +1182,6 @@ else if ( $submit || $refresh || $mode != '' )
 	}
 	else if ( $preview || $refresh || $error )
 	{
-
 		//
 		// If we're previewing or refreshing then obtain the data
 		// passed to the script, process it a little, do some checks
@@ -1265,7 +1258,7 @@ else if ( $submit || $refresh || $mode != '' )
 
 		else if ( $mode == 'edit' )
 		{
-			$sql = "SELECT pm.*, pmt.privmsgs_bbcode_uid, pmt.privmsgs_text, u.username, u.user_id
+			$sql = "SELECT pm.*, pmt.privmsgs_text, u.username, u.user_id
 				FROM " . BB_PRIVMSGS . " pm, " . BB_PRIVMSGS_TEXT . " pmt, " . BB_USERS . " u
 				WHERE pm.privmsgs_id = $privmsg_id
 					AND pmt.privmsgs_text_id = pm.privmsgs_id
@@ -1285,15 +1278,7 @@ else if ( $submit || $refresh || $mode != '' )
 
 			$privmsg_subject = $privmsg['privmsgs_subject'];
 			$privmsg_message = $privmsg['privmsgs_text'];
-			$privmsg_bbcode_uid = $privmsg['privmsgs_bbcode_uid'];
 			$privmsg_bbcode_enabled = ($privmsg['privmsgs_enable_bbcode'] == 1);
-
-			if ( $privmsg_bbcode_enabled )
-			{
-				$privmsg_message = preg_replace("/\:(([a-z0-9]:)?)$privmsg_bbcode_uid/si", '', $privmsg_message);
-			}
-
-			$privmsg_message = str_replace('<br />', "\n", $privmsg_message);
 
 			$to_username = $privmsg['username'];
 			$to_userid = $privmsg['user_id'];
@@ -1302,7 +1287,7 @@ else if ( $submit || $refresh || $mode != '' )
 		else if ( $mode == 'reply' || $mode == 'quote' )
 		{
 
-			$sql = "SELECT pm.privmsgs_subject, pm.privmsgs_date, pmt.privmsgs_bbcode_uid, pmt.privmsgs_text, u.username, u.user_id
+			$sql = "SELECT pm.privmsgs_subject, pm.privmsgs_date, pmt.privmsgs_text, u.username, u.user_id
 				FROM " . BB_PRIVMSGS . " pm, " . BB_PRIVMSGS_TEXT . " pmt, " . BB_USERS . " u
 				WHERE pm.privmsgs_id = $privmsg_id
 					AND pmt.privmsgs_text_id = pm.privmsgs_id
@@ -1326,10 +1311,6 @@ else if ( $submit || $refresh || $mode != '' )
 			if ( $mode == 'quote' )
 			{
 				$privmsg_message = $privmsg['privmsgs_text'];
-				$privmsg_bbcode_uid = $privmsg['privmsgs_bbcode_uid'];
-
-				$privmsg_message = preg_replace("/\:(([a-z0-9]:)?)$privmsg_bbcode_uid/si", '', $privmsg_message);
-				$privmsg_message = str_replace('<br />', "\n", $privmsg_message);
 
 				$msg_date =  bb_date($privmsg['privmsgs_date']);
 
@@ -1422,32 +1403,6 @@ else if ( $submit || $refresh || $mode != '' )
 	$template->assign_block_vars('switch_privmsg', array());
 	$template->assign_var('POSTING_USERNAME');
 
-	//
-	// BBCode toggle selection
-	//
-	if ( $bb_cfg['allow_bbcode'] )
-	{
-		$bbcode_status = $lang['BBCODE_IS_ON'];
-		$template->assign_block_vars('switch_bbcode_checkbox', array());
-	}
-	else
-	{
-		$bbcode_status = $lang['BBCODE_IS_OFF'];
-	}
-
-	//
-	// Smilies toggle selection
-	//
-	if ( $bb_cfg['allow_smilies'] )
-	{
-		$smilies_status = $lang['SMILIES_ARE_ON'];
-		$template->assign_block_vars('switch_smilies_checkbox', array());
-	}
-	else
-	{
-		$smilies_status = $lang['SMILIES_ARE_OFF'];
-	}
-
 	$post_a = '&nbsp;';
 	if ( $mode == 'post' )
 	{
@@ -1524,10 +1479,6 @@ else if ( $submit || $refresh || $mode != '' )
 }
 else
 {
-	//
-	// Default page
-	//
-
 	//
 	// Reset PM counters
 	//

@@ -497,10 +497,10 @@ function replace_synonyms ($text)
 	return ($syn_match && $syn_replace) ? str_replace($syn_match, $syn_replace, $text) : $text;
 }
 
-function add_search_words ($post_id, $post_message, $post_title = '', $bbcode_uid = '', $only_return_words = false)
+function add_search_words ($post_id, $post_message, $post_title = '', $only_return_words = false)
 {
 	$text  = $post_title .' '. $post_message;
-	$text  = strip_bbcode_uid($text, $bbcode_uid);
+	$text  = strip_bbcode_uid($text);
 	$words = ($text) ? extract_search_words($text) : array();
 
 	if ($only_return_words)
@@ -882,14 +882,13 @@ function bbcode2html ($text)
 	return $bbcode->bbcode2html($text);
 }
 
-function strip_bbcode_uid ($text, $bbcode_uid)
+function strip_bbcode_uid ($text)
 {
 	$text = str_replace('[tab]',   ' ',     $text);
 	$text = str_replace('&quot;',  '"',     $text);
 	$text = str_replace('code:1:', 'code:', $text);
 	$text = str_replace('list:u:', 'list:', $text);
 	$text = str_replace('list:o:', 'list:', $text);
-	$text = str_replace(":$bbcode_uid", '', $text);
 	return $text;
 }
 

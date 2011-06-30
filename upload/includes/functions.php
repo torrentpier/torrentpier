@@ -2061,18 +2061,13 @@ function smiley_sort ($a, $b)
 // CRITICAL_ERROR : Used when config data cannot be obtained, eg
 // no database connection. Should _not_ be used in 99.5% of cases
 //
-function bb_die ($msg_text, $msg_code = GENERAL_MESSAGE, $msg_title = '')
+function bb_die ($msg_text)
 {
 	if (defined('IN_AJAX'))
 	{
-		ajax_die($msg_text, $msg_code);
+		$GLOBALS['ajax']->ajax_die($msg_text);
 	}
-	message_die($msg_code, $msg_text, $msg_title);
-}
-
-function ajax_die ($msg_text, $msg_code = E_AJAX_GENERAL_ERROR)
-{
-	$GLOBALS['ajax']->ajax_die($msg_text, $msg_code);
+	message_die(GENERAL_MESSAGE, $msg_text);
 }
 
 function message_die ($msg_code, $msg_text = '', $msg_title = '', $err_line = '', $err_file = '', $sql = '')
@@ -2975,4 +2970,21 @@ function get_path_from_id ($id, $ext_id, $base_path, $first_div, $sec_div)
 	global $bb_cfg;
 	$ext = isset($bb_cfg['file_id_ext'][$ext_id]) ? $bb_cfg['file_id_ext'][$ext_id] : '';
 	return ($base_path ? "$base_path/" : '') . ($id % $sec_div) .'/'. $id . ($ext ? ".$ext" : '');
+}
+
+function send_pm($user_id, $subject, $message)
+{	$subject = DB()->escape($subject);
+	$message = DB()->escape($message);
+
+	DB()->sql_query("INSERT INTO ". BB_PRIVMSGS ." (privmsgs_type, privmsgs_subject, privmsgs_from_userid, privmsgs_to_userid, privmsgs_date, privmsgs_ip)
+		VALUES (". PRIVMSGS_NEW_MAIL .", '$subject', {$userdata['user_id']}, $user_id, ". TIMENOW .", '". USER_IP ."')");
+	$pm_id = DB()->sql_nextid();
+
+	DB()->sql_query("INSERT INTO ". BB_PRIVMSGS_TEXT ." VALUES($pm_id, '$text')");
+
+	DB()->sql_query("UPDATE ". BB_USERS ." SET
+		user_new_privmsg = user_new_privmsg + 1,
+		user_last_privmsg = ". TIMENOW .",
+		user_newest_pm_id = $pm_id
+		WHERE user_id = $user_id");
 }

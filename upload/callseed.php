@@ -55,7 +55,7 @@ function send_pm($topic_id, $t_info, $to_user_id)
 
 	$id = DB()->sql_nextid();
 
-	$sql = "INSERT INTO ". BB_PRIVMSGS_TEXT ." VALUES($id, '". make_bbcode_uid() ."', '$text')";
+	$sql = "INSERT INTO ". BB_PRIVMSGS_TEXT ." VALUES($id, '$text')";
 	if (!DB()->sql_query($sql)) {
 		$msg_error = "MSG_TEXT";
 		return;

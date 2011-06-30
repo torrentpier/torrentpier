@@ -167,8 +167,7 @@ if ($mode == 'submit' || $mode == 'refresh')
 	// get the post subject/text of each post
 	$result = DB()->query("
 		SELECT
-			pt.post_id,
-			pt.post_text, pt.bbcode_uid,
+			pt.post_id, pt.post_text,
 			IF(p.post_id = t.topic_first_post_id, t.topic_title, '') AS post_subject
 		FROM
 			". BB_POSTS_TEXT ." pt,
@@ -196,7 +195,7 @@ if ($mode == 'submit' || $mode == 'refresh')
 		// Get search words
 		$words_sql[] = array(
 			'post_id'      => (int) $row['post_id'],
-			'search_words' => add_search_words($row['post_id'], stripslashes($row['post_text']), stripslashes($row['post_subject']), $row['bbcode_uid'], true),
+			'search_words' => add_search_words($row['post_id'], stripslashes($row['post_text']), stripslashes($row['post_subject']), true),
 		);
 
 		$timer_expired = (time() > $expire_time);

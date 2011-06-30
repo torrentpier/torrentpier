@@ -20,7 +20,7 @@ array_deep($_POST, 'trim');
 $html_entities_match = array('#<#', '#>#');
 $html_entities_replace = array('&lt;', '&gt;');
 
-$message = $error_msg = $username_sql = $signature_bbcode_uid = '';
+$message = $error_msg = $username_sql = '';
 $group_moderator = $mark_list = array();
 
 $mode = isset($_REQUEST['mode']) ? $_REQUEST['mode'] : '';
@@ -216,8 +216,6 @@ if ( $mode == 'edit' || $mode == 'save' && ( isset($_POST['username']) || isset(
 		if ($signature != '')
 		{
 			$sig_length_check = preg_replace('/(\[.*?)(=.*?)\]/is', '\\1]', stripslashes($signature));
-			$signature_bbcode_uid = ($bb_cfg['allow_bbcode']) ? make_bbcode_uid() : '';
-			$signature = prepare_message($signature, $bb_cfg['allow_bbcode'], $bb_cfg['allow_smilies'], $signature_bbcode_uid);
 
 			if ( strlen($sig_length_check) > $bb_cfg['max_sig_chars'] )
 			{
@@ -523,7 +521,6 @@ if ( $mode == 'edit' || $mode == 'save' && ( isset($_POST['username']) || isset(
 					user_allow_viewonline = $allowviewonline,
 					user_notify = $notifyreply,
 					user_notify_pm = $notifypm,
-					user_sig_bbcode_uid = '$signature_bbcode_uid',
 					user_allowavatar = $user_allowavatar,
 					user_allow_pm = $user_allowpm,
 					user_lang = '" . str_replace("\'", "''", $user_lang) . "',
@@ -627,7 +624,6 @@ if ( $mode == 'edit' || $mode == 'save' && ( isset($_POST['username']) || isset(
 		$occupation = htmlspecialchars($this_userdata['user_occ']);
 		$interests = htmlspecialchars($this_userdata['user_interests']);
 
-		$signature = ($this_userdata['user_sig_bbcode_uid'] != '') ? preg_replace('#:' . $this_userdata['user_sig_bbcode_uid'] . '#si', '', $this_userdata['user_sig']) : $this_userdata['user_sig'];
 		$signature = preg_replace($html_entities_match, $html_entities_replace, $signature);
 
 		$viewemail = bf($this_userdata['user_opt'], 'user_opt', 'viewemail');

@@ -22,28 +22,10 @@
 
 if (!defined('BB_ROOT')) die(basename(__FILE__));
 
-$html_entities_match = array('#&(?!(\#[0-9]+;))#', '#<#', '#>#', '#"#');
-$html_entities_replace = array('&amp;', '&lt;', '&gt;', '&quot;');
-
-$unhtml_specialchars_match = array('#&gt;#', '#&lt;#', '#&quot;#', '#&amp;#');
-$unhtml_specialchars_replace = array('>', '<', '"', '&');
-
-//
-// This function will prepare a posted message for
-// entry into the database.
-//
-
-function unprepare_message($message)
-{
-	global $unhtml_specialchars_match, $unhtml_specialchars_replace;
-
-	return preg_replace($unhtml_specialchars_match, $unhtml_specialchars_replace, $message);
-}
-
 //
 // Prepare a message for posting
 //
-function prepare_post(&$mode, &$post_data, &$bbcode_on, &$smilies_on, &$error_msg, &$username, &$bbcode_uid, &$subject, &$message, &$poll_title, &$poll_options, &$poll_length)
+function prepare_post(&$mode, &$post_data, &$error_msg, &$username, &$subject, &$message, &$poll_title, &$poll_options, &$poll_length)
 {
 	global $bb_cfg, $userdata, $lang;
 
@@ -147,7 +129,7 @@ function prepare_post(&$mode, &$post_data, &$bbcode_on, &$smilies_on, &$error_ms
 //
 // Post a new topic/reply/poll or edit existing post/poll
 //
-function submit_post($mode, &$post_data, &$message, &$meta, &$forum_id, &$topic_id, &$post_id, &$poll_id, &$topic_type, &$bbcode_on, &$smilies_on, &$attach_sig, &$bbcode_uid, $post_username, $post_subject, $post_message, $poll_title, &$poll_options, &$poll_length, $update_post_time)
+function submit_post($mode, &$post_data, &$message, &$meta, &$forum_id, &$topic_id, &$post_id, &$poll_id, &$topic_type, $post_username, $post_subject, $post_message, $poll_title, &$poll_options, &$poll_length, $update_post_time)
 {
 	global $bb_cfg, $lang;
 	global $userdata, $post_info, $is_auth;
@@ -178,7 +160,7 @@ function submit_post($mode, &$post_data, &$message, &$meta, &$forum_id, &$topic_
 	if ($mode != 'editpost' && !empty($row['last_post_time']) && !IS_AM)
 	{
 		$sql = "
-			SELECT pt.post_text, pt.bbcode_uid
+			SELECT pt.post_text
 			FROM ". BB_POSTS ." p, ". BB_POSTS_TEXT ." pt
 			WHERE
 					$where_sql
@@ -189,7 +171,6 @@ function submit_post($mode, &$post_data, &$message, &$meta, &$forum_id, &$topic_
 
 		if ($row = DB()->fetch_row($sql))
 		{
-			$last_msg = addslashes(str_replace($row['bbcode_uid'], $bbcode_uid, $row['post_text']));
 			$last_msg = str_replace("\'", "''", $last_msg);
 
 			if ($last_msg == $post_message)
@@ -232,7 +213,7 @@ function submit_post($mode, &$post_data, &$message, &$meta, &$forum_id, &$topic_
 		");
 	}
 
-	$sql = ($mode != "editpost") ? "INSERT INTO " . BB_POSTS . " (topic_id, forum_id, poster_id, post_username, post_time, poster_ip, enable_bbcode, enable_smilies, enable_sig) VALUES ($topic_id, $forum_id, " . $userdata['user_id'] . ", '$post_username', $current_time, '". USER_IP ."', $bbcode_on, $smilies_on, $attach_sig)" : "UPDATE " . BB_POSTS . " SET post_username = '$post_username', enable_bbcode = $bbcode_on, enable_smilies = $smilies_on, enable_sig = $attach_sig" . $edited_sql . " WHERE post_id = $post_id";
+	$sql = ($mode != "editpost") ? "INSERT INTO " . BB_POSTS . " (topic_id, forum_id, poster_id, post_username, post_time, poster_ip) VALUES ($topic_id, $forum_id, " . $userdata['user_id'] . ", '$post_username', $current_time, '". USER_IP ."')" : "UPDATE " . BB_POSTS . " SET post_username = '$post_username'" . $edited_sql . " WHERE post_id = $post_id";
 	if (!DB()->sql_query($sql))
 	{
 		message_die(GENERAL_ERROR, 'Error in posting', '', __LINE__, __FILE__, $sql);
@@ -243,7 +224,7 @@ function submit_post($mode, &$post_data, &$message, &$meta, &$forum_id, &$topic_
 		$post_id = DB()->sql_nextid();
 	}
 
-	$sql = ($mode != 'editpost') ? "INSERT INTO " . BB_POSTS_TEXT . " (post_id, post_subject, bbcode_uid, post_text) VALUES ($post_id, '$post_subject', '$bbcode_uid', '$post_message')" : "UPDATE " . BB_POSTS_TEXT . " SET post_text = '$post_message', bbcode_uid = '$bbcode_uid', post_subject = '$post_subject' WHERE post_id = $post_id";
+	$sql = ($mode != 'editpost') ? "INSERT INTO " . BB_POSTS_TEXT . " (post_id, post_subject, post_text) VALUES ($post_id, '$post_subject', '$post_message')" : "UPDATE " . BB_POSTS_TEXT . " SET post_text = '$post_message', post_subject = '$post_subject' WHERE post_id = $post_id";
 	if (!DB()->sql_query($sql))
 	{
 		message_die(GENERAL_ERROR, 'Error in posting', '', __LINE__, __FILE__, $sql);
@@ -251,14 +232,12 @@ function submit_post($mode, &$post_data, &$message, &$meta, &$forum_id, &$topic_
 
 	if ($userdata['user_id'] != BOT_UID)
 	{
-		add_search_words($post_id, stripslashes($post_message), stripslashes($post_subject), $bbcode_uid);
+		add_search_words($post_id, stripslashes($post_message), stripslashes($post_subject));
 	}
 
 	update_post_html(array(
 		'post_id'        => $post_id,
 		'post_text'      => $post_message,
-		'bbcode_uid'     => $bbcode_uid,
-		'enable_smilies' => $smilies_on,
 	));
 
 	//
@@ -576,7 +555,10 @@ function user_notification($mode, &$post_data, &$topic_title, &$forum_id, &$topi
 					$emailer->from($bb_cfg['board_email']);
 					$emailer->replyto($bb_cfg['board_email']);
 
-					$topic_title = (count($orig_word)) ? preg_replace($orig_word, $replacement_word, unprepare_message($topic_title)) : unprepare_message($topic_title);
+					if(count($orig_word))
+					{
+						$topic_title = preg_replace($orig_word, $replacement_word, $topic_title);
+                    }
 
 					@reset($bcc_list_ary);
 					while (list($user_lang, $bcc_list) = each($bcc_list_ary))
@@ -666,7 +648,7 @@ function insert_post ($mode, $topic_id, $forum_id = '', $old_forum_id = '', $new
 
 	if (!$topic_id) return;
 
-	$post_username = $post_subject = $post_text = $poster_ip = $bbcode_uid = '';
+	$post_username = $post_subject = $post_text = $poster_ip = '';
 
 	$enable_bbcode = $enable_smilies = 0;
 	$enable_sig = 1;
@@ -737,8 +719,8 @@ function insert_post ($mode, $topic_id, $forum_id = '', $old_forum_id = '', $new
 	$post_id = DB()->sql_nextid();
 	$post_text = DB()->escape($post_text);
 
-	$post_text_columns = 'post_id,   post_subject,    bbcode_uid,    post_text';
-	$post_text_values = "$post_id, '$post_subject', '$bbcode_uid', '$post_text'";
+	$post_text_columns = 'post_id,   post_subject,    post_text';
+	$post_text_values = "$post_id, '$post_subject, '$post_text'";
 
 	DB()->query("INSERT INTO ". BB_POSTS_TEXT ." ($post_text_columns) VALUES ($post_text_values)");
 }
@@ -750,8 +732,7 @@ function topic_review ($topic_id)
 	// Fetch posts data
 	$review_posts = DB()->fetch_rowset("
 		SELECT
-			p.*,
-			pt.post_text, pt.bbcode_uid,
+			p.*, pt.post_text
 			IF(p.poster_id = ". ANONYMOUS .", p.post_username, u.username) AS username, u.user_id
 		FROM
 			". BB_POSTS      ." p,
