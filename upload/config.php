@@ -64,10 +64,14 @@ $bb_cfg['board_disabled_msg'] = 'форум временно отключен'; 
 $bb_cfg['srv_overloaded_msg'] = "Извините, в данный момент сервер перегружен\nПопробуйте повторить запрос через несколько минут";
 
 // Database
+$dbhost    = 'localhost';
+$dbname    = 'dbase';
+$dbuser    = 'user';
+$dbpasswd  = 'pass';
 $dbcharset = 'utf8';
-$pconnect  = defined('IN_CRON') ? false : false;
+$pconnect  = false;
 
-$bb_cfg['db']['db1'] = array('localhost', 'dbase', 'user', 'pass', $dbcharset, $pconnect);
+$bb_cfg['db']['db1'] = array($dbhost, $dbname, $dbuser, $dbpasswd, $dbcharset, $pconnect);
 
 $bb_cfg['db_alias'] = array(
 // 'alias' => 'srv_name'
@@ -113,7 +117,7 @@ $bb_cfg['datastore']['sqlite'] = array(
 $bb_cfg['datastore']['mc']['srv_all'] = array(
 	'ds_bb_core',
 );
-$bb_cfg['datastore']['mc']['srv_loc'] = 'undefined';  // должен быть определен в node_config.php
+$bb_cfg['datastore']['mc']['srv_loc'] = 'undefined';
 // создание конфига кешей
 foreach ($bb_cfg['datastore']['mc']['srv_all'] as $ds_srv)
 {
@@ -402,8 +406,8 @@ define('CRON_ALLOWED', TRIGGERS_DIR .'cron_allowed');
 define('CRON_RUNNING', TRIGGERS_DIR .'cron_running');
 
 // Cron
-// старт производится из cron.php
-$bb_cfg['cron_check_interval'] = 45;               // sec
+$bb_cfg['cron_enabled']        = true;             // При отвязки крона старт производить из cron.php
+$bb_cfg['cron_check_interval'] = 300;              // sec
 
 // News
 $bb_cfg['show_latest_news']     = true;

@@ -615,7 +615,7 @@ switch ($bb_cfg['datastore_type'])
 		$datastore = new datastore_mysql();
 }
 // Cron
-if ((empty($_POST) && !defined('IN_ADMIN') && !defined('IN_AJAX') && !defined('IN_SERVICE') && !file_exists(CRON_RUNNING) && defined('START_CRON')) || defined('FORCE_CRON') /* && !empty($_GET['cron_test_9gndjk']) */)
+if ((empty($_POST) && !defined('IN_ADMIN') && !defined('IN_AJAX') && !defined('IN_SERVICE') && !file_exists(CRON_RUNNING) && ($bb_cfg['cron_enabled'] || defined('START_CRON'))) || defined('FORCE_CRON') /* && !empty($_GET['cron_test_9gndjk']) */)
 {
 	if (TIMENOW - $bb_cfg['cron_last_check'] > $bb_cfg['cron_check_interval'])
 	{
