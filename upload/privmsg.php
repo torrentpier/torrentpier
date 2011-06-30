@@ -916,27 +916,6 @@ else if ( $save && $mark_list && $folder != 'savebox' && $folder != 'outbox' )
 }
 else if ( $submit || $refresh || $mode != '' )
 {
-	//
-	// Toggles
-	//
-	if ( !$bb_cfg['allow_bbcode'] )
-	{
-		$bbcode_on = 0;
-	}
-	else
-	{
-		$bbcode_on = ($submit || $refresh) ? (int) empty($_POST['disable_bbcode']) : $bb_cfg['allow_bbcode'];
-	}
-
-	if ( !$bb_cfg['allow_smilies'] )
-	{
-		$smilies_on = 0;
-	}
-	else
-	{
-		$smilies_on = ($submit || $refresh) ? (int) empty($_POST['disable_smilies']) : $bb_cfg['allow_smilies'];
-	}
-
 	if (IS_USER && $submit && $mode != 'edit')
 	{
 		//
@@ -1093,13 +1072,13 @@ else if ( $submit || $refresh || $mode != '' )
 				}
 			}
 
-			$sql_info = "INSERT INTO " . BB_PRIVMSGS . " (privmsgs_type, privmsgs_subject, privmsgs_from_userid, privmsgs_to_userid, privmsgs_date, privmsgs_ip, privmsgs_enable_bbcode, privmsgs_enable_smilies)
-				VALUES (" . PRIVMSGS_NEW_MAIL . ", '" . str_replace("\'", "''", $privmsg_subject) . "', " . $userdata['user_id'] . ", " . $to_userdata['user_id'] . ", $msg_time, '". USER_IP ."', $bbcode_on, $smilies_on)";
+			$sql_info = "INSERT INTO " . BB_PRIVMSGS . " (privmsgs_type, privmsgs_subject, privmsgs_from_userid, privmsgs_to_userid, privmsgs_date, privmsgs_ip)
+				VALUES (" . PRIVMSGS_NEW_MAIL . ", '" . str_replace("\'", "''", $privmsg_subject) . "', " . $userdata['user_id'] . ", " . $to_userdata['user_id'] . ", $msg_time, '". USER_IP ."')";
 		}
 		else
 		{
 			$sql_info = "UPDATE " . BB_PRIVMSGS . "
-				SET privmsgs_type = " . PRIVMSGS_NEW_MAIL . ", privmsgs_subject = '" . str_replace("\'", "''", $privmsg_subject) . "', privmsgs_from_userid = " . $userdata['user_id'] . ", privmsgs_to_userid = " . $to_userdata['user_id'] . ", privmsgs_date = $msg_time, privmsgs_ip = '". USER_IP ."', privmsgs_enable_bbcode = $bbcode_on, privmsgs_enable_smilies = $smilies_on
+				SET privmsgs_type = " . PRIVMSGS_NEW_MAIL . ", privmsgs_subject = '" . str_replace("\'", "''", $privmsg_subject) . "', privmsgs_from_userid = " . $userdata['user_id'] . ", privmsgs_to_userid = " . $to_userdata['user_id'] . ", privmsgs_date = $msg_time, privmsgs_ip = '". USER_IP ."'
 				WHERE privmsgs_id = $privmsg_id";
 		}
 
@@ -1437,8 +1416,6 @@ else if ( $submit || $refresh || $mode != '' )
 		'SUBJECT' => htmlCHR($privmsg_subject),
 		'USERNAME' => $to_username,
 		'MESSAGE' => $privmsg_message,
-		'SMILIES_STATUS' => $smilies_status,
-		'BBCODE_STATUS' => sprintf($bbcode_status, '<a href="' . append_sid("faq.php?mode=bbcode") . '" target="_phpbbcode">', '</a>'),
 		'FORUM_NAME' => $lang['PRIVATE_MESSAGE'],
 
 		'BOX_NAME' => $l_box_name,
@@ -1448,11 +1425,7 @@ else if ( $submit || $refresh || $mode != '' )
 		'SAVEBOX' => $savebox_url,
 
 		'POSTING_TYPE_TITLE' => $post_a,
-		'L_DISABLE_BBCODE' => $lang['DISABLE_BBCODE_PM'],
-		'L_DISABLE_SMILIES' => $lang['DISABLE_SMILIES_PM'],
 
-		'S_BBCODE_CHECKED' => ( !$bbcode_on ) ? ' checked="checked"' : '',
-		'S_SMILIES_CHECKED' => ( !$smilies_on ) ? ' checked="checked"' : '',
 		'S_HIDDEN_FORM_FIELDS' => $s_hidden_fields,
 		'S_POST_ACTION' => append_sid("privmsg.php"),
 

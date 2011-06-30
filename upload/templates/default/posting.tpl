@@ -115,15 +115,13 @@
 </tr>
 
 <!-- IF SHOW_VIRTUAL_KEYBOARD --><!-- INCLUDE kb.tpl --><!-- ENDIF -->
-
+<!-- IF IN_PM -->
+<!-- ELSEIF LOGGED_IN -->
 <tr>
 	<td class="row1 vTop pad_4" valign="top">
 		<p><b>{L_OPTIONS}</b></p>
 	</td>
 	<td class="row2">
-
-	<!-- IF IN_PM -->
-	<!-- ELSEIF LOGGED_IN -->
 	<div class="floatL">
 		<table class="borderless inline">
 		<!-- IF SHOW_UPDATE_POST_TIME -->
@@ -140,11 +138,9 @@
 		<!-- ENDIF -->
 		</table>
 	</div>
-	<!-- ENDIF / LOGGED_IN -->
-
 	</td>
 </tr>
-
+<!-- ENDIF / LOGGED_IN -->
 <!-- BEGIN switch_type_toggle -->
 <tr>
 	<td colspan="2" class="row2 tCenter pad_6">{S_TYPE_TOGGLE}</td>

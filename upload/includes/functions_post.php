@@ -732,7 +732,7 @@ function topic_review ($topic_id)
 	// Fetch posts data
 	$review_posts = DB()->fetch_rowset("
 		SELECT
-			p.*, pt.post_text
+			p.*, pt.post_text,
 			IF(p.poster_id = ". ANONYMOUS .", p.post_username, u.username) AS username, u.user_id
 		FROM
 			". BB_POSTS      ." p,
