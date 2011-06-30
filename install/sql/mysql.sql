@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Хост: localhost
--- Время создания: Июн 17 2008 г., 13:37
+-- Время создания: Июн 30 2011 г., 12:07
 -- Версия сервера: 5.0.51
 -- Версия PHP: 5.2.6
 
@@ -526,7 +526,7 @@ INSERT INTO `bb_config` VALUES ('board_disable', '0');
 INSERT INTO `bb_config` VALUES ('board_email', 'board_email@yourdomain.com');
 INSERT INTO `bb_config` VALUES ('board_email_form', '0');
 INSERT INTO `bb_config` VALUES ('board_email_sig', 'Thanks, The Management');
-INSERT INTO `bb_config` VALUES ('board_startdate', '1211477514');
+INSERT INTO `bb_config` VALUES ('board_startdate', '1309421220');
 INSERT INTO `bb_config` VALUES ('board_timezone', '0');
 INSERT INTO `bb_config` VALUES ('bt_add_auth_key', '1');
 INSERT INTO `bb_config` VALUES ('bt_add_comment', '');
