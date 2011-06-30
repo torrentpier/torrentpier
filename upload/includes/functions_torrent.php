@@ -465,12 +465,7 @@ function send_torrent_with_passkey ($filename)
 		}
 	}
 
-	// Redirect guests to login page
-	if (IS_GUEST)
-	{
-		$redirect_url = ($post_id) ? POST_URL . $post_id : 'index.php';
-		redirect(LOGIN_URL . $redirect_url);
-	}
+
 
 	if (!$attachment['tracker_status'])
 	{
@@ -487,7 +482,7 @@ function send_torrent_with_passkey ($filename)
 		$passkey_val = $bt_userdata['auth_key'];
 	}
 
-	if (!$passkey_val && $userdata['session_logged_in'])
+	if (!$passkey_val)
 	{
 		if ($bb_cfg['bt_gen_passkey_on_reg'])
 		{
@@ -563,20 +558,16 @@ function send_torrent_with_passkey ($filename)
 		message_die(GENERAL_ERROR, 'This is not a bencoded file');
 	}
 
-	$passkey_url = (!$userdata['session_logged_in'] || isset($_GET['no_passkey'])) ? '' : "?$passkey_key=$passkey_val&";
-	if ($passkey_url)
+	// XBTT unique passkey
+	if($bb_cfg['announce_type'] == 'xbt')
 	{
-		// XBTT unique passkey
-		if($bb_cfg['announce_type'] == 'xbt')
-	    {
-			$info_hash = pack('H*', sha1(bencode($tor['info'])));
-			$passkey = substr('00000000'. dechex($userdata['user_id']), -8) . substr(sha1($bb_cfg['torrent_pass_private_key'] .' '. $passkey_val .' '. $userdata['user_id'] .' '. $info_hash), 0, 24);
-			$announce = preg_replace('@/a[^/]*$@i', "/$passkey$0", $ann_url);
-        }
-        else
-        {
-        	$announce = strval($ann_url . $passkey_url);
-        }
+		$info_hash = pack('H*', sha1(bencode($tor['info'])));
+		$passkey = substr('00000000'. dechex($userdata['user_id']), -8) . substr(sha1($bb_cfg['torrent_pass_private_key'] .' '. $passkey_val .' '. $userdata['user_id'] .' '. $info_hash), 0, 24);
+		$announce = preg_replace('@/a[^/]*$@i', "/$passkey$0", $ann_url);
+	}
+	else
+	{
+		$announce = strval($ann_url . "?$passkey_key=$passkey_val&");
 	}
 
 	// Replace original announce url with tracker default

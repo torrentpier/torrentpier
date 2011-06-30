@@ -48,7 +48,11 @@ switch ($mode)
 			// Ограничение по времени
 			else if ($bb_cfg['new_user_reg_restricted'])
 			{
-				require(BB_PATH .'/misc/php/registration_restrict_hours.php');
+				if (in_array(date('G'), array(0,/*1,2,3,4,5,6,7,8,11,12,13,14,15,16,*/17,18,19,20,21,22,23)))
+				{
+					bb_die('В данный момент регистрация закрыта<br /><br />Вы можете зарегистрироваться с 01:00 до 17:00 MSK (сейчас '. date('G:i') .' MSK)<br /><br />Приносим извинения за это временное неудобство');
+				}
+
 			}
 			// Вывод начальной страницы с условиями регистрации
 			if (empty($_POST['reg_agreed']))
