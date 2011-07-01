@@ -117,6 +117,14 @@ if(isset($_GET['clear']) && !defined('DEMO_MODE'))
 				$data .= str_replace('{NUM}', $num_error, $lang['XS_CACHE_LOG_COUNT2']) . "<br />\n";
 			}
 		}
+
+		if(!defined('NO_XS_HEADER'))
+		{
+			$template->set_filenames(array(
+				'xs_header' => XS_TPL_PATH . 'xs_header.tpl',
+				'xs_footer' => XS_TPL_PATH . 'xs_footer.tpl',
+			));
+		}
 	}
 }
 

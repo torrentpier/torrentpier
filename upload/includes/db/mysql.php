@@ -95,7 +95,6 @@ class sql_db
 		{
 			$server = (DBG_USER) ? $this->cfg['dbhost'] : '';
 			header("HTTP/1.0 503 Service Unavailable");
-			bb_log(' ', "db_err/connect_failed_{$this->cfg['dbhost']}");
 			die("Could not connect to the server $server");
 		}
 

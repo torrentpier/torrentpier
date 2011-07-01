@@ -2974,14 +2974,17 @@ function get_path_from_id ($id, $ext_id, $base_path, $first_div, $sec_div)
 }
 
 function send_pm($user_id, $subject, $message)
-{	$subject = DB()->escape($subject);
+{	global $userdata;
+
+	$subject = DB()->escape($subject);
 	$message = DB()->escape($message);
 
 	DB()->sql_query("INSERT INTO ". BB_PRIVMSGS ." (privmsgs_type, privmsgs_subject, privmsgs_from_userid, privmsgs_to_userid, privmsgs_date, privmsgs_ip)
 		VALUES (". PRIVMSGS_NEW_MAIL .", '$subject', {$userdata['user_id']}, $user_id, ". TIMENOW .", '". USER_IP ."')");
 	$pm_id = DB()->sql_nextid();
 
-	DB()->sql_query("INSERT INTO ". BB_PRIVMSGS_TEXT ." VALUES($pm_id, '$text')");
+	DB()->sql_query("INSERT INTO " . BB_PRIVMSGS_TEXT . " (privmsgs_text_id, privmsgs_text)
+			VALUES ($privmsg_sent_id, '$message')");
 
 	DB()->sql_query("UPDATE ". BB_USERS ." SET
 		user_new_privmsg = user_new_privmsg + 1,
