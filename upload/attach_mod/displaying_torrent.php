@@ -81,8 +81,8 @@ $description   = ($comment) ? $comment : preg_replace("#.torrent$#i", '', $displ
 
 if ($tor_auth_reg || $tor_auth_del)
 {
-	$reg_tor_url   = '<a class="genmed" href="#" onclick="ajax.exec({ action: \'change_torrent\', attach_id : '. $attach_id .', type: \'reg\'}); return false;">'. $lang['BT_REG_ON_TRACKER'] .'</a>';
-	$unreg_tor_url = '<a class="genmed" href="#" onclick="ajax.exec({ action: \'change_torrent\', attach_id : '. $attach_id .', type: \'unreg\'}); return false;">'. $lang['BT_UNREG_FROM_TRACKER'] .'</a>';
+	$reg_tor_url   = '<a class="txtb" href="#" onclick="ajax.exec({ action: \'change_torrent\', attach_id : '. $attach_id .', type: \'reg\'}); return false;">'. $lang['BT_REG_ON_TRACKER'] .'</a>';
+	$unreg_tor_url = '<a class="txtb" href="#" onclick="ajax.exec({ action: \'change_torrent\', attach_id : '. $attach_id .', type: \'unreg\'}); return false;">'. $lang['BT_UNREG_FROM_TRACKER'] .'</a>';
 
 	$tracker_link = ($tor_reged) ? $unreg_tor_url : $reg_tor_url;
 }
@@ -224,7 +224,7 @@ if ($tor_reged && $tor_info)
 			// torrent status mod
 			'TOR_STATUS_TEXT' => $lang['tor_status'][$tor_info['tor_status']],
 			'TOR_STATUS_ICON' => $bb_cfg['tor_icons'][$tor_info['tor_status']],
-			'TOR_STATUS_BY'   => $cuid ? ('&nbsp;&middot;&nbsp; <a href='. PROFILE_URL . $cuid . '>' . get_username($cuid) . '</a>&nbsp; &middot;&nbsp; <i>'. delta_time($tor_info['checked_time']) .' назад</i>') : '',
+			'TOR_STATUS_BY'   => ($cuid && $is_auth['auth_mod']) ? ('&nbsp;&middot;&nbsp; <a href='. PROFILE_URL . $cuid . '>' . get_username($cuid) . '</a>&nbsp; &middot;&nbsp; <i>'. delta_time($tor_info['checked_time']) .' назад</i>') : '',
 			'TOR_STATUS_SELECT' => build_select('', array_flip($bb_cfg['change_tor_status_select']), TOR_APPROVED),
 			//end torrent status mod
 

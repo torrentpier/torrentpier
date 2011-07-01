@@ -526,7 +526,7 @@ foreach ($profile_fields as $field => $can_edit)
 			$s_categories .= '</select>';
 
 			$s_colspan = 0;
-			for($i = 0; $i < count($avatar_images[$category]); $i++)
+			for($i = 0; $i < @count($avatar_images[$category]); $i++)
 			{
 				$template->assign_block_vars("avatar_row", array());
 
@@ -729,7 +729,7 @@ $template->assign_vars($tp_data);
 $template->assign_vars(array(
 	'PAGE_TITLE'         => ($mode == 'editprofile') ? $lang['EDIT_PROFILE'] . ($adm_edit ? " :: {$pr_data['username']}" : '') : $lang['REGISTER'],
 	'SHOW_REG_AGREEMENT' => ($mode == 'register' && !IS_ADMIN),
-	'ERROR_MESSAGE'      => ($errors) ? join('<br />', $errors) : '',
+	'ERROR_MESSAGE'      => ($errors) ? join('<br />', array_unique($errors)) : '',
 	'MODE'               => $mode,
 	'EDIT_PROFILE'       => ($mode == 'editprofile'),
 	'ADM_EDIT'           => $adm_edit,

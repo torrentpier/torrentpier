@@ -262,12 +262,11 @@
 	</tr>
 	<tr class="row1">
 		<td>{L_TOR_STATUS}:</td>
-		<td<!-- IF AUTH_MOD --> style="padding: 6px 4px;"<!-- ENDIF -->>
+		<td>
 			<span id="tor-{postrow.attach.tor_reged.ATTACH_ID}-status">{postrow.attach.tor_reged.TOR_STATUS_ICON} <b>{postrow.attach.tor_reged.TOR_STATUS_TEXT}</b>
 			<!-- IF postrow.attach.tor_reged.TOR_STATUS_BY -->{postrow.attach.tor_reged.TOR_STATUS_BY}<!-- ENDIF -->
 			</span>
 			<!-- IF AUTH_MOD -->
-			<div class="spacer_6"></div>
 			<script type="text/javascript">
 				ajax.change_tor_status = function(status) {
 					ajax.exec({
@@ -283,7 +282,7 @@
 
 				<span id="tor-{postrow.attach.tor_reged.ATTACH_ID}">{postrow.attach.tor_reged.TOR_STATUS_SELECT}</span>
 
-				[ <a href="#" onclick="ajax.change_tor_status($('#tor-{postrow.attach.tor_reged.ATTACH_ID} select').val()); return false;" class="med bold nowrap">Изменить</a> ]
+				<a href="#" onclick="ajax.change_tor_status($('#tor-{postrow.attach.tor_reged.ATTACH_ID} select').val()); return false;" class="txtb">[Изменить]</a>
 
 			<!-- ENDIF -->
 		</td>

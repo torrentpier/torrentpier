@@ -92,18 +92,9 @@ if (DEBUG) {
 		</fieldset>
 	';
 }
-echo '
-	<fieldset class="med" style="padding: 2px 4px 6px;">
-	<legend>SQL</legend>
-		<label><input type="checkbox" onclick="setCookie(\'sql_log\', this.checked ? 1 : 0); window.location.reload();" '. (!empty($_COOKIE['sql_log']) ? HTML_CHECKED : '') .' />show log </label>
-		<label title="dont truncate long queries"><input type="checkbox" onclick="setCookie(\'sql_log_full\', this.checked ? 1 : 0); window.location.reload();" '. (!empty($_COOKIE['sql_log_full']) ? HTML_CHECKED : '') .' />full </label>
-		<label><input type="checkbox" onclick="setCookie(\'explain\', this.checked ? 1 : 0); window.location.reload();" '. (!empty($_COOKIE['explain']) ? HTML_CHECKED : '') .' />explain </label>
-		[
-			<a href="#" class="med" onclick="$p(\'sqlLog\').className=\'sqlLog sqlLogWrapped\'; return false;">wrap</a> &middot;
-			<a href="#sqlLog" class="med" onclick="$(\'#sqlLog\').css({ height: $(window).height()-50 });">max</a>
-		]
-	</fieldset>
-';
+
+if ($sql_log)
+{
 echo '
 </div><!-- / sqlLogHead -->
 
@@ -133,6 +124,7 @@ function fixSqlLog() {
 
 <br clear="all" />
 ';
+}
 
 if (PROFILER && !empty($_COOKIE['prof_enabled']))
 {
