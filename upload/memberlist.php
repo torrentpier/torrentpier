@@ -152,7 +152,7 @@ $template->assign_vars(array(
 ));
 
 // per-letter selection end
-$sql = "SELECT username, user_id, user_opt, user_posts, user_regdate, user_from, user_from_flag, user_website, user_email, user_icq, user_avatar, user_avatar_type, user_allowavatar
+$sql = "SELECT username, user_id, user_opt, user_posts, user_regdate, user_from, user_website, user_email, user_icq, user_avatar, user_avatar_type, user_allowavatar
          FROM ". BB_USERS ."
 		 WHERE user_id NOT IN(". EXCLUDED_USERS_CSV .")";
 if ( $username )
@@ -173,9 +173,6 @@ if ( $row = DB()->sql_fetchrow($result) )
 		$username = $row['username'];
 		$user_id = $row['user_id'];
 		$from = $row['user_from'];
-// FLAGHACK-start
-		$flag = ($row['user_from_flag'] && $row['user_from_flag'] != 'blank.gif') ? make_user_flag($row['user_from_flag']) : '';
-// FLAGHACK-end
 
 		$joined = bb_date($row['user_regdate'], $lang['DATE_FORMAT']);
 		$posts = $row['user_posts'];
@@ -212,7 +209,6 @@ if ( $row = DB()->sql_fetchrow($result) )
 			'ROW_CLASS'     => $row_class,
 			'USERNAME'      => $username,
 			'FROM'          => $from,
-			'FLAG'          => $flag,
 			'JOINED_RAW'    => $row['user_regdate'],
 			'JOINED'        => $joined,
 			'POSTS'         => $posts,

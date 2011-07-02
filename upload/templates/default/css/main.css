@@ -753,7 +753,6 @@ table.topic { width: 100%; }
 	.poster_info .nick   { margin: 0 0 4px; color: #333333; line-height: 110%; }
 	.poster_info .avatar { margin: 5px 0 4px; max-width: 100px; max-height: 100px; overflow: hidden; }
 		.avatar imgreflect        { display: block; }
-	.poster_info .flag   { margin: 4px 0; }
 	.poster_info em      { font-style: normal; color: #000000; }
 
 	table.topic, .topic .td1, .topic .td2, .topic .td3, .post_head, .post_btn_2 {

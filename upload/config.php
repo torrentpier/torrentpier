@@ -57,7 +57,7 @@ $bb_cfg['css_ver'] = 1;
 
 // Increase number of revision after update
 $bb_cfg['tp_version'] = '2.0.2';
-$bb_cfg['tp_release_state'] = 'TP II r56';
+$bb_cfg['tp_release_state'] = 'TP II r57';
 $bb_cfg['tp_release_date'] = '02-07-2011';
 
 $bb_cfg['board_disabled_msg'] = 'форум временно отключен'; // 'forums temporarily disabled'; // show this msg if board has been disabled via ON/OFF trigger
@@ -428,7 +428,6 @@ $bb_cfg['show_rank_image']    = true;
 $bb_cfg['show_poster_joined'] = true;
 $bb_cfg['show_poster_posts']  = true;
 $bb_cfg['show_poster_from']   = true;
-$bb_cfg['show_poster_flag']   = true;
 $bb_cfg['show_bot_nick']      = false;
 $bb_cfg['text_buttons']       = true;              // replace EDIT, QUOTE... images with text links
 $bb_cfg['parse_ed2k_links']   = true;              // make ed2k links clickable

@@ -1759,19 +1759,6 @@ function make_jumpbox ($selected = 0)
 	));
 }
 
-function make_user_flag($country_code)
-{
-	global $lang;
-
-	if(!defined('COUNTRIES_LANG'))
-	{
-		include(LANG_DIR . "lang_countries.php");
-	}
-
-	$title = $lang['COUNTRIES'][$country_code];
-	return "<img src=\"images/flags/{$country_code}.png\" alt=\"{$title}\" title=\"{$title}\" border=\"0\" /><br />";
-}
-
 // $mode: array(not_auth_forum1,not_auth_forum2,..) or (string) 'mode'
 function get_forum_select ($mode = 'guest', $name = POST_FORUM_URL, $selected = null, $max_length = HTML_SELECT_MAX_LENGTH, $multiple_size = null, $js = '', $all_forums_option = null)
 {

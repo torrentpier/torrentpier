@@ -18,8 +18,22 @@ ajax.init.edit_user_profile = function(params){
 ajax.callback.edit_user_profile = function(data){
 	ajax.restoreEditable(data.edit_id, data.new_value);
 };
+
+// change_user_rank
+ajax.change_user_rank = function(uid, rank_id) {
+	$('#rank-msg').html('<i class="loading-1">выполняется...</i>');
+	ajax.exec({
+		action  : 'change_user_rank',
+		user_id : uid,
+		rank_id : rank_id
+	});
+}
+ajax.callback.change_user_rank = function(data) {
+	$('#rank-msg').html(data.html);
+}
 </script>
 
+<var class="ajax-params">{action: "edit_user_profile", id: "username"}</var>
 <var class="ajax-params">{action: "edit_user_profile", id: "user_regdate"}</var>
 <var class="ajax-params">{action: "edit_user_profile", id: "user_lastvisit"}</var>
 <!-- IF IGNORE_SRV_LOAD_EDIT -->
@@ -51,10 +65,18 @@ ajax.callback.edit_user_profile = function(data){
 	<td class="row1 vTop tCenter" width="30%">
 
 		<p class="mrg_4">{AVATAR_IMG}</p>
-		<!-- IF POSTER_RANK -->
-		<p class="small mrg_4">{POSTER_RANK}</p>
+		<p class="small mrg_4">
+		<!-- IF IS_ADMIN -->
+			{RANK_SELECT}
+			<script type="text/javascript">
+			$('#rank-sel').bind('change', function(){ ajax.change_user_rank( {PROFILE_USER_ID}, $(this).val() ); });
+			</script>
+			<div id="rank-msg" class="mrg_6"></div>
+		<!-- ELSE IF POSTER_RANK -->
+			{POSTER_RANK}
 		<!-- ENDIF -->
-		<h4 class="cat border bw_TB">{L_CONTACT} {USERNAME}</h4>
+		</p>
+		<h4 class="cat border bw_TB" id="username">{L_CONTACT} <span class="editable bold">{USERNAME}</span></h4>
 
 		<table class="borderless user_contacts w100">
 		<!-- IF EMAIL_IMG -->

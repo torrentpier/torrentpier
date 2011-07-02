@@ -104,8 +104,6 @@ if ( $mode == 'edit' || $mode == 'save' && ( isset($_POST['username']) || isset(
 		$user_lang = ( $_POST['language'] != $bb_cfg['board_lang'] ) ? $_POST['language'] : '';
 		$user_timezone = ( isset($_POST['timezone']) ) ? str_replace(',', '.', doubleval($_POST['timezone'])) : $bb_cfg['board_timezone'];
 
-		$user_flag = (@$_POST['user_flag'] && $_POST['user_flag'] != 'blank.gif') ? $_POST['user_flag'] : '';
-
 		$user_template = ( @$_POST['template'] ) ? $_POST['template'] : @$bb_cfg['board_template'];
 		$user_dateformat = (!empty($_POST['dateformat']) && $_POST['dateformat'] != $bb_cfg['board_dateformat']) ? $_POST['dateformat'] : '';
 
@@ -514,7 +512,6 @@ if ( $mode == 'edit' || $mode == 'save' && ( isset($_POST['username']) || isset(
 					user_website = '" . str_replace("\'", "''", $website) . "',
 					user_occ = '" . str_replace("\'", "''", $occupation) . "',
 					user_from = '" . str_replace("\'", "''", $location) . "',
-					user_from_flag = '$user_flag',
 					user_interests = '" . str_replace("\'", "''", $interests) . "',
 					user_sig = '" . str_replace("\'", "''", $signature) . "',
 					user_opt = $user_opt,
@@ -619,7 +616,6 @@ if ( $mode == 'edit' || $mode == 'save' && ( isset($_POST['username']) || isset(
 
 		$website = htmlspecialchars($this_userdata['user_website']);
 		$location = htmlspecialchars($this_userdata['user_from']);
-		$user_flag = htmlspecialchars($this_userdata['user_from_flag']);
 
 		$occupation = htmlspecialchars($this_userdata['user_occ']);
 		$interests = htmlspecialchars($this_userdata['user_interests']);
@@ -732,10 +728,6 @@ if ( $mode == 'edit' || $mode == 'save' && ( isset($_POST['username']) || isset(
 			$s_hidden_fields .= '<input type="hidden" name="website" value="' . str_replace("\"", "&quot;", $website) . '" />';
 			$s_hidden_fields .= '<input type="hidden" name="location" value="' . str_replace("\"", "&quot;", $location) . '" />';
 
-// FLAGHACK-start
-			$s_hidden_fields .= '<input type="hidden" name="user_flag" value="' . $user_flag . '" />';
-// FLAGHACK-end
-
 			$s_hidden_fields .= '<input type="hidden" name="occupation" value="' . str_replace("\"", "&quot;", $occupation) . '" />';
 			$s_hidden_fields .= '<input type="hidden" name="interests" value="' . str_replace("\"", "&quot;", $interests) . '" />';
 			$s_hidden_fields .= '<input type="hidden" name="signature" value="' . str_replace("\"", "&quot;", $signature) . '" />';
@@ -820,42 +812,6 @@ if ( $mode == 'edit' || $mode == 'save' && ( isset($_POST['username']) || isset(
 		$ini_val = ( phpversion() >= '4.0.0' ) ? 'ini_get' : 'get_cfg_var';
 		$form_enctype = ( !@$ini_val('file_uploads') || phpversion() == '4.0.4pl1' || !$bb_cfg['allow_avatar_upload'] || ( phpversion() < '4.0.3' && @$ini_val('open_basedir') != '' ) ) ? '' : 'enctype="multipart/form-data"';
 
-		// query to get the list of flags
-		$sql = "SELECT *
-			FROM " . BB_COUNTRIES . "
-			ORDER BY country_id";
-		if(!$flags_result = DB()->sql_query($sql))
-		{
-			message_die(GENERAL_ERROR, "Couldn't obtain flags information.", "", __LINE__, __FILE__, $sql);
-		}
-		$flag_row = DB()->sql_fetchrowset($flags_result);
-		$num_flags = DB()->num_rows($flags_result);
-
-		// build the html select statement
-		if(!defined('COUNTRIES_LANG'))
-		{
-			include(LANG_DIR . "lang_countries.php");
-		}
-
-		$flag_start_image = 'blank.gif' ;
-		$selected = ( isset($user_flag) ) ? '' : HTML_SELECTED;
-		$flag_select = "<select name=\"user_flag\" onChange=\"document.images['user_flag'].src = '../images/flags/' + this.value + '.png';\" >";
-		$flag_select .= "<option value=\"blank.gif\"$selected>" . $lang['SELECT_COUNTRY'] . "</option>";
-
-		for ($i = 0; $i < $num_flags; $i++)
-		{
-			$country_code = $flag_row[$i]['country_code'];
-			$country_name = $lang['COUNTRIES'][$country_code];
-			$flag_image = $country_code . '.png';
-			$selected = ( isset( $user_flag) ) ? (($user_flag == $country_code) ? HTML_SELECTED : '' ) : '' ;
-			$flag_select .= "\t<option value=\"$country_code\"$selected>$country_name</option>";
-			if ( isset( $user_flag) && ($user_flag == $country_code))
-			{
-				$flag_start_image = $flag_image ;
-			}
-		}
-		$flag_select .= '</select>';
-
 		$template->assign_vars(array(
 			'TPL_ADMIN_USER_EDIT' => true,
 
@@ -865,9 +821,6 @@ if ( $mode == 'edit' || $mode == 'save' && ( isset($_POST['username']) || isset(
 			'OCCUPATION' => $occupation,
 			'INTERESTS' => $interests,
 			'LOCATION' => $location,
-			'L_FLAG' => $lang['COUNTRY_FLAG'],
-			'FLAG_SELECT' => $flag_select,
-			'FLAG_START' => $flag_start_image,
 
 			'WEBSITE' => $website,
 			'SIGNATURE' => str_replace('<br />', "\n", $signature),

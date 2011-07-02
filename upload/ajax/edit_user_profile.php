@@ -18,6 +18,34 @@ $value = (string) $this->request['value'];
 
 switch ($field)
 {
+	case 'username':
+		require_once(INC_DIR .'functions_validate.php');
+		$value = clean_username($value);
+		if ($err = validate_username($value))
+		{
+			$this->ajax_die(strip_tags($err));
+		}
+		$this->response['new_value'] = $this->request['value'];
+		break;
+
+	case 'user_email':
+		require_once(INC_DIR .'functions_validate.php');
+		$value = htmlCHR($value);
+		if ($err = validate_email($value))
+		{
+			$this->ajax_die($err);
+		}
+		$this->response['new_value'] = $this->request['value'];
+		break;
+
+	case 'user_website':
+		if ($value == '' || preg_match('#^https?://[a-z0-9_:;?&=/.%~\-]+$#i', $value))
+		{
+			$this->response['new_value'] = htmlCHR($value);
+		}
+		else $this->ajax_die('Поле "Сайт" может содержать только http:// ссылку');
+		break;
+
 	case 'user_regdate':
 	case 'user_lastvisit':
 		$tz = TIMENOW + (3600 * $bb_cfg['board_timezone']);

@@ -365,7 +365,6 @@ define('BB_BT_TORSTAT',           'bb_bt_torstat');
 define('BB_CATEGORIES',           'bb_categories');
 define('BB_CAPTCHA',              'bb_captcha');
 define('BB_CONFIG',               'bb_config');
-define('BB_COUNTRIES',            'bb_countries');
 define('BB_CRON',                 'bb_cron');
 define('BB_DATASTORE',            'bb_datastore');
 define('BB_DISALLOW',             'bb_disallow');

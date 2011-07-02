@@ -20,7 +20,6 @@ class user_common
 	*/
 	var $opt_js = array(
 		'only_new' => 0,     // show ony new posts or topics
-		'h_flag'   => 0,     // hide flags
 		'h_av'     => 0,     // hide avatar
 		'h_rnk_i'  => 0,     // hide rank images
 		'h_post_i' => 0,     // hide post images
@@ -231,7 +230,7 @@ class user_common
 		$login   = (int) ($this->data['user_id'] != ANONYMOUS);
 		$is_user = ($this->data['user_level'] == USER);
 		$user_id = (int) $this->data['user_id'];
-		$mod_admin_session = ($login && !$auto_created && !$is_user) ? $this->data['user_level'] : 0;
+		$mod_admin_session = ($this->data['user_level'] == ADMIN);
 
 		if (($bb_cfg['max_srv_load'] || $bb_cfg['max_reg_users_online']) && $login && $is_user && !$this->data['ignore_srv_load'])
 		{

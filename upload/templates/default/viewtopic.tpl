@@ -1,6 +1,5 @@
 <!-- IF LOGGED_IN -->
 <style type="text/css">
-<!-- IF HIDE_FLAGS -->.flag img { display: none; }<!-- ENDIF -->
 <!-- IF HIDE_AVATAR -->.avatar { display: none; }<!-- ENDIF -->
 <!-- IF HIDE_RANK_IMG -->.rank_img { display: none; }<!-- ENDIF -->
 <!-- IF HIDE_POST_IMG -->img.postImg, div.postImg-wrap { display: none; }<!-- ENDIF -->
@@ -108,11 +107,6 @@ function set_hid_chbox (id)
 			<legend>{L_HIDE_IN_TOPIC}</legend>
 			<div class="med pad_4">
 				<label>
-					<input type="checkbox" <!-- IF HIDE_FLAGS -->{CHECKED}<!-- ENDIF --><!-- IF HIDE_FLAGS_DIS -->{DISABLED}<!-- ENDIF -->
-						onclick="user.set('h_flag', this.checked ? 1 : 0);"
-					/>{L_FLAGS}
-				</label>
-				<label>
 					<input type="checkbox" <!-- IF HIDE_AVATAR -->{CHECKED}<!-- ENDIF -->
 						onclick="user.set('h_av', this.checked ? 1 : 0);"
 					/>{L_AVATARS}
@@ -190,10 +184,9 @@ function set_hid_chbox (id)
 		<!-- IF postrow.POSTER_JOINED --><p class="joined" title="{postrow.POSTER_JOINED_DATE}"><em>{L_LONGEVITY}:</em> {postrow.POSTER_JOINED}</p><!-- ENDIF -->
 		<!-- IF postrow.POSTER_POSTS --><p class="posts"><em>{L_POSTS}:</em> {postrow.POSTER_POSTS}</p><!-- ENDIF -->
 		<!-- IF postrow.POSTER_FROM --><p class="from"><em>{L_LOCATION}:</em> {postrow.POSTER_FROM}</p><!-- ENDIF -->
-		<!-- IF postrow.POSTER_FROM_FLAG --><p class="flag">{postrow.POSTER_FROM_FLAG}</p><!-- ENDIF -->
 	<!-- ENDIF -->
 
-	<p><img src="{SPACER}" width="{TOPIC_LEFT_COL_SPACER_WITDH}" height="<!-- IF postrow.POSTER_AVATAR || postrow.POSTER_FROM_FLAG || postrow.RANK_IMAGE -->2<!-- ELSE -->30<!-- ENDIF -->" border="0" alt="" /></p>
+	<p><img src="{SPACER}" width="{TOPIC_LEFT_COL_SPACER_WITDH}" height="<!-- IF postrow.POSTER_AVATAR || postrow.RANK_IMAGE -->2<!-- ELSE -->30<!-- ENDIF -->" border="0" alt="" /></p>
 
 	</td>
 	<td class="message td2" rowspan="2">
@@ -214,7 +207,7 @@ function set_hid_chbox (id)
 				<!-- IF postrow.EDIT --><a class="txtb" href="{EDIT_POST_URL}{postrow.POST_ID}">{EDIT_POST_IMG}</a>{POST_BTN_SPACER}<!-- ENDIF -->
 				<!-- IF postrow.DELETE --><a class="txtb" href="{DELETE_POST_URL}{postrow.POST_ID}">{DELETE_POST_IMG}</a>{POST_BTN_SPACER}<!-- ENDIF -->
 				<!-- IF postrow.IP --><a class="txtb" href="{IP_POST_URL}{postrow.POST_ID}&amp;t={TOPIC_ID}">{IP_POST_IMG}</a>{POST_BTN_SPACER}<!-- ENDIF -->
-				{postrow.REPORT}{POST_BTN_SPACER}
+				<!-- IF postrow.REPORT -->{postrow.REPORT}{POST_BTN_SPACER}<!-- ENDIF -->
 				<!-- IF AUTH_MOD -->
 					<!-- IF not IN_MODERATION --><a class="txtb" href="{PAGE_URL}&amp;mod=1&amp;start={PAGE_START}#{postrow.POST_ID}">{MOD_POST_IMG}</a>{POST_BTN_SPACER}<!-- ENDIF -->
 				<!-- ENDIF -->

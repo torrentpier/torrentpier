@@ -51,12 +51,22 @@ if (!$ranks = $datastore->get('ranks'))
 	$datastore->update('ranks');
 	$ranks = $datastore->get('ranks');
 }
-$poster_rank = $rank_image = '';
+$poster_rank = $rank_image = $rank_select = '';
 
 if ($user_rank = $profiledata['user_rank'] AND isset($ranks[$user_rank]))
 {
 	$rank_image = ($ranks[$user_rank]['rank_image']) ? '<img src="'. $ranks[$user_rank]['rank_image'] .'" alt="" title="" border="0" />' : '';
 	$poster_rank = $ranks[$user_rank]['rank_title'];
+}
+
+if (IS_ADMIN)
+{
+	$rank_select = array($lang['NO'] => 0);
+	foreach ($ranks as $row)
+	{
+		$rank_select[$row['rank_title']] = $row['rank_id'];
+	}
+	$rank_select = build_select('rank-sel', $rank_select, $user_rank);
 }
 
 $temp_url = append_sid("privmsg.php?mode=post&amp;" . POST_USERS_URL . "=" . $profiledata['user_id']);
@@ -145,6 +155,7 @@ $template->assign_vars(array(
 	'USER_REGDATE' 	=> bb_date($profiledata['user_regdate']),
 	'POSTER_RANK' 	=> $poster_rank,
 	'RANK_IMAGE' 	=> $rank_image,
+	'RANK_SELECT' 	=> $rank_select,
 	'POSTS_PER_DAY' => $posts_per_day,
 	'POSTS' 		=> $profiledata['user_posts'],
 	'PERCENTAGE' 	=> $percentage . '%',

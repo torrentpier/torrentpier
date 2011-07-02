@@ -448,18 +448,18 @@ function extract_search_words ($text)
 	$min_word_len    = max(2, $bb_cfg['search_min_word_len'] - 1);
 	$max_word_len    = $bb_cfg['search_max_word_len'];
 
-	$text = ' ' . str_compact(strip_tags(strtolower($text))) . ' ';
+	$text = ' ' . str_compact(strip_tags(mb_strtolower($text))) . ' ';
 	$text = str_replace(array('&#91;', '&#93;'), array('[', ']'), $text);
 
 	// HTML entities like &nbsp;
-	$text = preg_replace('/(\w*?)&#?[0-9a-z]+;(\w*?)/i', '', $text);
-	// Remove URL's
-	$text = preg_replace('#\b[a-z0-9]+://[0-9a-z\.\-]+(/[0-9a-z\?\.%_\-\+=&/]+)?#', ' ', $text);
+	$text = preg_replace('/(\w*?)&#?[0-9a-z]+;(\w*?)/iu', '', $text);
+	// Remove URL's       ((www|ftp)\.[\w\#!$%&~/.\-;:=,?@а-яА-Я\[\]+]*?)
+	$text = preg_replace('#\b[a-z0-9]+://[\w\#!$%&~/.\-;:=,?@а-яА-Я\[\]+]+(/[0-9a-z\?\.%_\-\+=&/]+)?#u', ' ', $text);
 
 	$text = strip_bbcode($text);
 
 	// Filter out characters like ^, $, &, change "it's" to "its"
-	$text = preg_replace('#\W#', ' ', $text);
+	$text = preg_replace('#[.,:;]#u', ' ', $text);
 
 	// short & long words
 	$text = preg_replace('#(?<=^|\s)(\S{1,'.$min_word_len.'}|\S{'.$max_word_len.',}|\W*)(?=$|\s)#', ' ', $text);

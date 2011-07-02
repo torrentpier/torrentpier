@@ -10,6 +10,8 @@ require(INC_DIR ."functions_report.php");
 // Init userdata
 $user->session_start(array('req_login' => true));
 
+if(!$bb_cfg['reports_enabled']) bb_die($lang['REPORTS_DISABLE']);
+
 $return_links = array(
 	'index' => '<br /><br />' . sprintf($lang['CLICK_RETURN_INDEX'], '<a href="' . append_sid("index.php") . '">', '</a>'),
 	'list' => '<br /><br />' . sprintf($lang['CLICK_RETURN_REPORT_LIST'], '<a href="' . append_sid("report.php") . '">', '</a>')

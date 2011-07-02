@@ -1437,6 +1437,7 @@ $lang['TORHELP_TITLE'] = 'Please help seeding these torrents!';
 // Reports (need to translate it!)
 //
 $lang['REPORTS'] = 'Reports';
+$lang['REPORTS_DISABLE'] = 'Reports disabled';
 $lang['NEW_REPORT'] = ' (one open)';
 $lang['NO_NEW_REPORTS'] = ': no new Reports';
 $lang['NEW_REPORTS'] = ' (%d open)';

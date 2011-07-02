@@ -174,6 +174,11 @@ $template->assign_vars(array(
 
 if(!defined('NO_XS_HEADER'))
 {
+	$template->set_filenames(array(
+		'xs_header' => XS_TPL_PATH . 'xs_header.tpl',
+		'xs_footer' => XS_TPL_PATH . 'xs_footer.tpl',
+	));
+
 	$template->preparse = 'xs_header';
 	$template->postparse = 'xs_footer';
 	$template->assign_block_vars('nav_left',array('ITEM' => '<a href="' . append_sid('xs_index.php') . '">' . $lang['XS_MENU'] . '</a>'));

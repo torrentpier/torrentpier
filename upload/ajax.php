@@ -55,6 +55,7 @@ class ajax_common
 	var $valid_actions = array(
 	//   ACTION NAME             AJAX_AUTH
 		'edit_user_profile' => array('admin'),
+        'change_user_rank'  => array('admin'),
 
 		'change_torrent'    => array('mod'),
 		'change_tor_status' => array('mod'),
@@ -279,6 +280,27 @@ class ajax_common
         require(AJAX_DIR .'edit_user_profile.php');
 	}
 
+	function change_user_rank ()
+	{
+		global $datastore;
+
+		$ranks   = $datastore->get('ranks');
+		$rank_id = intval($this->request['rank_id']);
+
+		if (!$user_id = intval($this->request['user_id']) OR !$profiledata = get_userdata($user_id))
+		{
+			$this->ajax_die("invalid user_id: $user_id");
+		}
+		if ($rank_id != 0 && !isset($ranks[$rank_id]))
+		{
+			$this->ajax_die("invalid rank_id: $rank_id");
+		}
+
+		DB()->query("UPDATE ". BB_USERS ." SET user_rank = $rank_id WHERE user_id = $user_id LIMIT 1");
+
+		$this->response['html'] = ($rank_id != 0) ? 'Присвоено звание <b>'. $ranks[$rank_id]['rank_title'] .'</b>' : 'Звание снято';
+	}
+
 	function gen_passkey ()
 	{
 		global $userdata, $lang;
@@ -287,15 +309,20 @@ class ajax_common
 
 		if ($req_uid == $userdata['user_id'] || IS_ADMIN)
 		{
-			$force_generate = (IS_ADMIN);
+			if (empty($this->request['confirmed']))
+			{
+				$msg  = "Вы уверены, что хотите создать новый passkey?";
+				$this->prompt_for_confirm($msg);
+			}
 
-			if (!$passkey = generate_passkey($req_uid, $force_generate))
+			if (!$passkey = generate_passkey($req_uid, IS_ADMIN))
 			{
 				$this->ajax_die('Could not insert passkey');
 			}
 			tracker_rm_user($req_uid);
 			$this->response['passkey'] = $passkey;
 		}
+		else $this->ajax_die($lang['NOT_AUTHORISED']);
 	}
 
 	function view_post ()

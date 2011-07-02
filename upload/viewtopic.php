@@ -370,7 +370,7 @@ $post_order = (isset($_POST['postorder']) && $_POST['postorder'] !== 'asc') ? 'd
 //
 $sql = "
 	SELECT
-	  u.username, u.user_id, u.user_posts, u.user_from, u.user_from_flag,
+	  u.username, u.user_id, u.user_posts, u.user_from,
 	  u.user_regdate, u.user_rank, u.user_sig,
 	  u.user_avatar, u.user_avatar_type, u.user_allowavatar,
 	  p.*,
@@ -584,7 +584,6 @@ $template->assign_vars(array(
 	'SHOW_BOT_NICK'       => $bb_cfg['show_bot_nick'],
 	'T_POST_REPLY'        => $reply_alt,
 
-	'HIDE_FLAGS'          => ($user->opt_js['h_flag'] && $bb_cfg['show_poster_flag']),
 	'HIDE_AVATAR'         => $user->opt_js['h_av'],
 	'HIDE_RANK_IMG'       => ($user->opt_js['h_rnk_i'] && $bb_cfg['show_rank_image']),
 	'HIDE_POST_IMG'       => $user->opt_js['h_post_i'],
@@ -592,7 +591,6 @@ $template->assign_vars(array(
 	'HIDE_SIGNATURE'      => $user->opt_js['h_sig'],
 	'SPOILER_OPENED'      => $user->opt_js['sp_op'],
 
-	'HIDE_FLAGS_DIS'      => !$bb_cfg['show_poster_flag'],
 	'HIDE_RANK_IMG_DIS'   => !$bb_cfg['show_rank_image'],
 
 	'AUTH_MOD'            => $is_auth['auth_mod'],
@@ -799,13 +797,7 @@ for($i = 0; $i < $total_posts; $i++)
 
 	$poster_from = ( $postrow[$i]['user_from'] && $postrow[$i]['user_id'] != ANONYMOUS ) ? $postrow[$i]['user_from'] : '';
 
-// FLAGHACK-start
-	$poster_from_flag = ( !$user->opt_js['h_flag'] && $postrow[$i]['user_from_flag'] && $postrow[$i]['user_id'] != ANONYMOUS ) ? make_user_flag($postrow[$i]['user_from_flag']) : "";
-// FLAGHACK-end
-
 	$poster_joined = ( $postrow[$i]['user_id'] != ANONYMOUS ) ? $lang['JOINED'] . ': ' . bb_date($postrow[$i]['user_regdate'], $lang['DATE_FORMAT']) : '';
-
-
 
 	$poster_longevity = ( $postrow[$i]['user_id'] != ANONYMOUS ) ? delta_time($postrow[$i]['user_regdate']) : '';
 
@@ -972,7 +964,6 @@ for($i = 0; $i < $total_posts; $i++)
 		'POSTER_BOT'         => ($poster_id == BOT_UID),
 		'POSTER_ID'          => $poster_id,
 		'POSTED_AFTER'       => ($prev_post_time) ? delta_time($postrow[$i]['post_time'], $prev_post_time) : '',
-		'POSTER_FROM_FLAG'   => ($bb_cfg['show_poster_flag']) ? $poster_from_flag : '',
 		'IS_UNREAD'          => is_unread($postrow[$i]['post_time'], $topic_id, $forum_id),
 		'IS_FIRST_POST'      => (!$start && ($postrow[$i]['post_id'] == $t_data['topic_first_post_id'])),
 		'MOD_CHECKBOX'       => ($moderation && ($start || defined('SPLIT_FORM_START'))),

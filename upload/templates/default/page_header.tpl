@@ -7,21 +7,13 @@
 <meta http-equiv="Content-Style-Type" content="text/css" />
 {META}
 <link rel="stylesheet" href="{STYLESHEET}?v={$bb_cfg['css_ver']}" type="text/css">
-<!-- IF DEBUG --><link rel="stylesheet" href="{DBG_CSS}" type="text/css"><!-- ENDIF -->
 <link rel="shortcut icon" href="./favicon.ico" type="image/x-icon">
 <link rel="search" type="application/opensearchdescription+xml" href="opensearch_desc.xml" title="{SITENAME} (Forum)" />
 <link rel="search" type="application/opensearchdescription+xml" href="opensearch_desc_bt.xml" title="{SITENAME} (Tracker)" />
-<!-- IF DEBUG -->
-<script type="text/javascript" src="{#BB_ROOT}misc/js/source/jquery.js"></script>
-<script type="text/javascript" src="{#BB_ROOT}misc/js/source/jquery_plugins/dimensions.js"></script>
-<script type="text/javascript" src="{#BB_ROOT}misc/js/source/jquery_plugins/json.js"></script>
-<script type="text/javascript" src="{#BB_ROOT}misc/js/source/jquery_plugins/metadata.js"></script>
-<script type="text/javascript" src="{#BB_ROOT}misc/js/source/jquery_plugins/jquery.media.js"></script>
-<script type="text/javascript" src="{#BB_ROOT}misc/js/firebug/firebug.js"></script>
-<!-- ELSE -->
+
 <script type="text/javascript" src="{#BB_ROOT}misc/js/jquery.pack.js?v={$bb_cfg['js_ver']}"></script>
-<!-- ENDIF -->
 <script type="text/javascript" src="{#BB_ROOT}misc/js/main.js?v={$bb_cfg['js_ver']}"></script>
+
 <!-- IF INCLUDE_BBCODE_JS -->
 <script type="text/javascript" src="{#BB_ROOT}misc/js/bbcode.js?v={$bb_cfg['js_ver']}"></script>
 <script type="text/javascript">

@@ -104,18 +104,6 @@
 		<input class="post" type="text" name="location" size="35" maxlength="100" value="{LOCATION}" />
 	  </td>
 	</tr>
-<!-- FLAGHACK-start -->
-	<tr>
-	  <td class="row1"><span class="gen">{L_FLAG}:</span></td>
-	  <td class="row2"><span class="small">
-	  <table>
-	  <tr>
-			<td>{FLAG_SELECT}&nbsp;&nbsp;&nbsp;&nbsp;</td>
-	  		<td><img src="../images/flags/{FLAG_START}" name="user_flag" /></td>
-		</tr></table>
-	  </span></td>
-	</tr>
-<!-- FLAGHACK-end -->
 	<tr>
 	  <td class="row1"><span class="gen">{L_OCCUPATION}</span></td>
 	  <td class="row2">

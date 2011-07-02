@@ -106,6 +106,8 @@ function report_modules($mode = 'all', $module = null)
 	static $modules;
 	static $module_names;
 
+    if(!$bb_cfg['reports_enabled']) return false;
+
 	if (!isset($modules))
 	{
 		include(INC_DIR . "report_module.php");
