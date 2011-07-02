@@ -565,7 +565,7 @@ $bf['forum_perm'] = array(
 
 $bf['user_opt'] = array(
 	'viewemail'        => 0,
-	'attachsig'        => 1,
+	'allow_sig'        => 1,
 	'allowavatar'      => 2,
 	'allow_pm'         => 3,
 	'allow_viewonline' => 4,

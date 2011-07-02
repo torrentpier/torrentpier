@@ -314,7 +314,6 @@ else
 	}
 }
 
-$attach_sig = ($submit || $refresh) ? (int) !empty($_POST['attach_sig']) : bf($userdata['user_opt'], 'user_opt', 'attachsig');
 $update_post_time = !empty($_POST['update_post_time']);
 
 execute_posting_attachment_handling();

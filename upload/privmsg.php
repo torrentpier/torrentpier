@@ -1015,10 +1015,9 @@ else if ( $submit || $refresh || $mode != '' )
 		//
 		// Has admin prevented user from sending PM's?
 		//
-		if ( !$userdata['user_allow_pm'] )
+		if ( bf($userdata['user_opt'], 'user_opt', 'allow_pm') )
 		{
-			$message = $lang['CANNOT_SEND_PRIVMSG'];
-			message_die(GENERAL_MESSAGE, $message);
+			bb_die($lang['CANNOT_SEND_PRIVMSG']);
 		}
 
 		$msg_time = time();
@@ -1307,10 +1306,9 @@ else if ( $submit || $refresh || $mode != '' )
 	//
 	// Has admin prevented user from sending PM's?
 	//
-	if ( !$userdata['user_allow_pm'] && $mode != 'edit' )
+	if ( bf($userdata['user_opt'], 'user_opt', 'allow_pm') && $mode != 'edit' )
 	{
-		$message = $lang['CANNOT_SEND_PRIVMSG'];
-		message_die(GENERAL_MESSAGE, $message);
+		$message = ($lang['CANNOT_SEND_PRIVMSG']);
 	}
 
 	//

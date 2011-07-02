@@ -31,6 +31,44 @@ ajax.change_user_rank = function(uid, rank_id) {
 ajax.callback.change_user_rank = function(data) {
 	$('#rank-msg').html(data.html);
 }
+
+ajax.user_opt = {AJAX_USER_OPT};
+
+// change_user_opt
+ajax.change_user_opt = function() {
+	ajax.exec({
+		action   : 'change_user_opt',
+		user_id  : {PROFILE_USER_ID},
+		user_opt : $.toJSON(ajax.user_opt)
+	});
+};
+ajax.callback.change_user_opt = function(data){
+	$('#user-opt-resp').html(data.resp_html);
+	$('#user-opt-save-btn').attr({ disabled: 0 });
+}
+
+$(document).ready(function(){
+	$('#user-opt').find('input[type=checkbox]').click(function(){
+		var $chbox = $(this);
+		var opt_name = $chbox.attr('name');
+		var opt_val  = $chbox.attr('checked') ? 1 : 0;
+		ajax.user_opt[opt_name] = opt_val;
+		$chbox.parents('label').toggleClass('bold');
+		$('#user-opt-save').show();
+	});
+	$('#user-opt').find('input[type=checkbox]').each(function(){
+		if (ajax.user_opt[ $(this).attr('name') ]) {
+			$(this).attr({checked: 'checked'});
+			$(this).parents('label').addClass('bold');
+		}
+	});
+	$('#user-opt-save-btn').click(function(){
+		this.disabled = 1;
+		$('#user-opt-resp').html('&nbsp;');
+		ajax.change_user_opt();
+	});
+	$('#user-opt').show();
+});
 </script>
 
 <var class="ajax-params">{action: "edit_user_profile", id: "username"}</var>
@@ -98,6 +136,32 @@ ajax.callback.change_user_rank = function(data) {
 		</tr>
 		<!-- ENDIF -->
 		</table><!--/user_contacts-->
+
+		<!-- IF IS_ADMIN -->
+		<div id="user-opt" style="display: none;">
+			<fieldset class="mrg_6">
+			<style type="text/css"> #user-opt label { display: block; } </style>
+			<legend>Юзеру <b style="color: darkred;">ЗАПРЕЩЕНО</b></legend>
+			<div class="tLeft" style="padding: 2px 6px 6px; display: block;">
+				<label><input type="checkbox" name="allowavatar"      />показывать аватар</label>
+				<label><input type="checkbox" name="allow_passkey"    />passkey</label>
+				<label><input type="checkbox" name="allow_pm"         />отправлять лс</label>
+				<label><input type="checkbox" name="allow_sig"        />показывать подпись</label>
+			</div>
+			</fieldset>
+			<div id="user-opt-save" class="hidden">
+				<p><input id="user-opt-save-btn" class="bold long" type="button" value="&nbsp;&nbsp;Сохранить&nbsp;&nbsp;" /></p>
+				<p id="user-opt-resp" class="mrg_6"></p>
+			</div>
+		</div>
+		<!-- ELSEIF USER_RESTRICTIONS -->
+		<fieldset class="mrg_6">
+		<legend>Юзеру <b style="color: darkred;">ЗАПРЕЩЕНО</b></legend>
+			<div class="tLeft" style="padding: 4px 6px 8px 2px;">
+			<ul><li>{USER_RESTRICTIONS}</li></ul>
+			</div>
+		</fieldset>
+		<!-- ENDIF -->
 
 	</td>
 	<td class="row1" valign="top" width="70%">
@@ -189,6 +253,13 @@ ajax.callback.change_user_rank = function(data) {
 
 	</td>
 </tr>
+<!-- IF SIGNATURE -->
+<tr>
+	<td class="row1" colspan="2">
+	    <div class="signature">{SIGNATURE}</div>
+	</td>
+</tr>
+<!-- ENDIF -->
 <!-- Report -->
 <!-- BEGIN switch_report_user -->
 <tr>

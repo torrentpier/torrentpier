@@ -465,16 +465,14 @@ function send_torrent_with_passkey ($filename)
 		}
 	}
 
-
-
 	if (!$attachment['tracker_status'])
 	{
 		message_die(GENERAL_ERROR, $lang['PASSKEY_ERR_TOR_NOT_REG']);
 	}
 
-	if ($userdata['session_logged_in'] && !$userdata['user_allow_passkey'])
+	if (bf($userdata['user_opt'], 'user_opt', 'allow_passkey'))
 	{
-		message_die(GENERAL_ERROR, 'Could not add passkey<br /><br />You are not authorized to use passkey');
+		message_die(GENERAL_ERROR, 'Could not add passkey');
 	}
 
 	if ($bt_userdata = get_bt_userdata($user_id))
@@ -658,7 +656,7 @@ function generate_passkey ($user_id, $force_generate = false)
 	// Check if user can change passkey
 	if (!$force_generate)
 	{
-		$sql = "SELECT user_allow_passkey
+		$sql = "SELECT user_opt
 			FROM ". BB_USERS ."
 			WHERE user_id = $user_id
 			LIMIT 1";
@@ -669,7 +667,7 @@ function generate_passkey ($user_id, $force_generate = false)
 		}
 		if ($row = DB()->sql_fetchrow($result))
 		{
-			if (!$row['user_allow_passkey'])
+			if (bf($row['user_opt'], 'user_opt', 'allow_passkey'))
 			{
 				message_die(GENERAL_MESSAGE, $lang['NOT_AUTHORISED']);
 			}

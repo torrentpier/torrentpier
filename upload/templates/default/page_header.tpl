@@ -297,8 +297,6 @@ function OpenInEditor ($file, $line)
 				<!-- ELSE -->
 					<a href="{U_PRIVATEMSGS}"><b>{L_PRIVATE_MESSAGES}: {PM_INFO}</b></a>
 				<!-- ENDIF -->
-			<!-- ELSE -->
-				<a href="{U_PRIVATEMSGS}"><b>{L_SEND_PM_TXTB}</b></a>
 			<!-- ENDIF -->
 		</td>
 	</tr>

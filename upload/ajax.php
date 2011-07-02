@@ -56,6 +56,7 @@ class ajax_common
 	//   ACTION NAME             AJAX_AUTH
 		'edit_user_profile' => array('admin'),
         'change_user_rank'  => array('admin'),
+        'change_user_opt'   => array('admin'),
 
 		'change_torrent'    => array('mod'),
 		'change_tor_status' => array('mod'),
@@ -299,6 +300,43 @@ class ajax_common
 		DB()->query("UPDATE ". BB_USERS ." SET user_rank = $rank_id WHERE user_id = $user_id LIMIT 1");
 
 		$this->response['html'] = ($rank_id != 0) ? 'Присвоено звание <b>'. $ranks[$rank_id]['rank_title'] .'</b>' : 'Звание снято';
+	}
+
+    function change_user_opt ()
+	{
+		global $userdata, $bf;
+
+		$user_id = (int) $this->request['user_id'];
+		$new_opt = bb_json_decode($this->request['user_opt']);
+
+		if (!$user_id OR !$u_data = get_userdata($user_id))
+		{
+			$this->ajax_die('invalid user_id');
+		}
+		if (!is_array($new_opt))
+		{
+			$this->ajax_die('invalid new_opt');
+		}
+
+		$user_can_change = array(
+			'hide_porn_forums',
+		);
+
+		foreach ($bf['user_opt'] as $opt_name => $opt_bit)
+		{
+			if (isset($new_opt[$opt_name]))
+			{
+				if (!IS_ADMIN && !in_array($opt_name, $user_can_change))
+				{
+					$this->ajax_die("not admin: $opt_name");
+				}
+				setbit($u_data['user_opt'], $opt_bit, !empty($new_opt[$opt_name]));
+			}
+		}
+
+		DB()->query("UPDATE ". BB_USERS ." SET user_opt = {$u_data['user_opt']} WHERE user_id = $user_id LIMIT 1");
+
+		$this->response['resp_html'] = 'сохранено';
 	}
 
 	function gen_passkey ()

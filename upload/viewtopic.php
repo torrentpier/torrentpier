@@ -372,7 +372,8 @@ $sql = "
 	SELECT
 	  u.username, u.user_id, u.user_posts, u.user_from,
 	  u.user_regdate, u.user_rank, u.user_sig,
-	  u.user_avatar, u.user_avatar_type, u.user_allowavatar,
+	  u.user_avatar, u.user_avatar_type,
+	  u.user_opt,
 	  p.*,
 	  h.post_html, IF(h.post_html IS NULL, pt.post_text, NULL) AS post_text,
 	  pt.post_subject
@@ -804,7 +805,7 @@ for($i = 0; $i < $total_posts; $i++)
 	$poster_avatar = '';
 	if ( !$user->opt_js['h_av'] && $poster_id != ANONYMOUS )
 	{
-		$poster_avatar = get_avatar($postrow[$i]['user_avatar'], $postrow[$i]['user_avatar_type'], $postrow[$i]['user_allowavatar']);
+		$poster_avatar = get_avatar($postrow[$i]['user_avatar'], $postrow[$i]['user_avatar_type'], !bf($postrow[$i]['user_opt'], 'user_opt', 'allowavatar'));
 	}
 
 	//
@@ -862,9 +863,11 @@ for($i = 0; $i < $total_posts; $i++)
 
 	$message = get_parsed_post($postrow[$i]);
 
-	$user_sig = ($bb_cfg['allow_sig'] && !$user->opt_js['h_sig'] && $postrow[$i]['enable_sig'] && $postrow[$i]['user_sig']) ? $postrow[$i]['user_sig'] : '';
+	$user_sig = ($bb_cfg['allow_sig'] && !$user->opt_js['h_sig'] && $postrow[$i]['user_sig']) ? $postrow[$i]['user_sig'] : '';
 
-	if ($user_sig)
+	if(bf($postrow[$i]['user_opt'], 'user_opt', 'allow_sig'))
+	{		$user_sig = 'Подпись удалена.';	}
+	else if ($user_sig)
 	{
 		$user_sig = bbcode2html($user_sig);
 	}

@@ -496,7 +496,6 @@ if ( $mode == 'edit' || $mode == 'save' && ( isset($_POST['username']) || isset(
 		{
 			$update_user_opt = array(
 				'viewemail',
-				'attachsig',
 			);
 			$user_opt = $this_userdata['user_opt'];
 
@@ -625,7 +624,7 @@ if ( $mode == 'edit' || $mode == 'save' && ( isset($_POST['username']) || isset(
 		$viewemail = bf($this_userdata['user_opt'], 'user_opt', 'viewemail');
 		$notifypm = $this_userdata['user_notify_pm'];
 		$notifyreply = $this_userdata['user_notify'];
-		$attachsig = bf($this_userdata['user_opt'], 'user_opt', 'attachsig');
+		$attachsig = bf($this_userdata['user_opt'], 'user_opt', 'allow_sig');
 		$allowviewonline = $this_userdata['user_allow_viewonline'];
 
 		$user_avatar = $this_userdata['user_avatar'];

@@ -413,7 +413,7 @@ foreach ($profile_fields as $field => $can_edit)
 		$sig = isset($_POST['user_sig']) ? (string) $_POST['user_sig'] : $pr_data['user_sig'];
 		if ($submit)
 		{
-			if (strlen($sig) > $bb_cfg['max_sig_chars'])
+			if (mb_strlen($sig) > $bb_cfg['max_sig_chars'])
 			{
 				$errors[] = 'Слишком длинная подпись';
 			}

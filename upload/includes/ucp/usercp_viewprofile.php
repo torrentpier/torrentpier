@@ -6,6 +6,8 @@ if ( !defined('IN_PHPBB') )
 	exit;
 }
 
+require(INC_DIR .'bbcode.php');
+
 $datastore->enqueue(array(
 	'ranks',
 ));
@@ -43,8 +45,7 @@ else
 {
 	$percentage = 0;
 }
-$avatar_img = '';
-$avatar_img = get_avatar($profiledata['user_avatar'], $profiledata['user_avatar_type'], $profiledata['user_allowavatar']);
+$avatar_img = get_avatar($profiledata['user_avatar'], $profiledata['user_avatar_type'], !bf($profiledata['user_opt'], 'user_opt', 'allowavatar'));
 
 if (!$ranks = $datastore->get('ranks'))
 {
@@ -148,6 +149,17 @@ if ($profiledata['user_level'] == ADMIN && !IS_ADMIN)
 }
 // IP Mod End
 
+$signature = ($bb_cfg['allow_sig'] && $profiledata['user_sig']) ? $profiledata['user_sig'] : '';
+
+if(bf($profiledata['user_opt'], 'user_opt', 'allow_sig'))
+{
+	$signature = 'Подпись удалена.';
+}
+else if ($signature)
+{
+	$signature = bbcode2html($signature);
+}
+
 $template->assign_vars(array(
 	'PAGE_TITLE' 	=> sprintf($lang['VIEWING_USER_PROFILE'], $profiledata['username']),
 	'USERNAME' 		=> $profiledata['username'],
@@ -195,6 +207,8 @@ $template->assign_vars(array(
 	'L_SEARCH_RELEASES' => $lang['SEARCH_USER_RELEASES'],
 
 	'S_PROFILE_ACTION'  => "profile.php",
+
+	'SIGNATURE'  => $signature,
 ));
 
 //bt
@@ -219,6 +233,25 @@ if (IS_ADMIN)
 		'U_MANAGE'      => "admin/admin_users.php?mode=edit&amp;u={$profiledata['user_id']}",
 		'U_PERMISSIONS' => "admin/admin_ug_auth.php?mode=user&amp;u={$profiledata['user_id']}",
 	));
+
+	$ajax_user_opt = bb_json_encode(array(
+		'allowavatar'      => bf($profiledata['user_opt'], 'user_opt', 'allowavatar'),
+		'allow_passkey'    => bf($profiledata['user_opt'], 'user_opt', 'allow_passkey'),
+		'allow_pm'         => bf($profiledata['user_opt'], 'user_opt', 'allow_pm'),
+		'allow_sig'        => bf($profiledata['user_opt'], 'user_opt', 'allow_sig'),
+	));
+
+	$template->assign_vars(array(
+		'EDITABLE_TPLS'    => true,
+		'AJAX_USER_OPT'    => $ajax_user_opt,
+		'EMAIL_ADDRESS'    => htmlCHR($profiledata['user_email']),
+	));
+}
+else
+{
+	$user_restrictions = array();
+
+	$template->assign_var('USER_RESTRICTIONS', join('</li><li>', $user_restrictions));
 }
 
 print_page('usercp_viewprofile.tpl');

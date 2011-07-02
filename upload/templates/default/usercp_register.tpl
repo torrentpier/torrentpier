@@ -139,10 +139,25 @@ ajax.callback.gen_passkey = function(data){
 	<td colspan="2" class="tCenter pad_12">Опция управления подписью отключена за нарушение <a href="{$bb_cfg['terms_and_conditions_url']}"><b>правил форума</b></a></td>
 </tr>
 <!-- ELSE -->
+<tr colspan="2" id="view_message" class="hidden">
+	<td colspan="2">
+	    <div class="signature"></div>
+	</td>
+</tr>
 <tr>
 	<td>Подпись:<h6>максимум {$bb_cfg['max_sig_chars']} символов</h6></td>
-	<td><textarea name="user_sig" rows="5" cols="60" style="width: 96%;">{USER_SIG}</textarea></td>
+	<td>
+		<textarea id="user_sig" name="user_sig" rows="5" cols="60" style="width: 96%;">{USER_SIG}</textarea>
+		<input type="button" value="Быстрый предпросмотр" onclick="ajax.exec({ action: 'view_message', message: $('textarea#user_sig').val() });">
+	</td>
 </tr>
+<script type="text/javascript">
+ajax.callback.view_message = function(data){
+    $('#view_message').show();
+    $('.signature').html(data.html);
+    initPostBBCode('.signature');
+};
+</script>
 <!-- ENDIF -->
 
 <!-- IF $bb_cfg['pm_notify_enabled'] -->
@@ -156,7 +171,7 @@ ajax.callback.gen_passkey = function(data){
 <!-- ENDIF -->
 <!-- IF $bb_cfg['porno_forums'] -->
 <tr>
-	<td>{$bb_cfg['lang_hide_porno_forums']}:</td>
+	<td>{L_HIDE_PORN_FORUMS}:</td>
 	<td>
 		<label><input type="radio" name="hide_porn_forums" value="1" <!-- IF HIDE_PORN_FORUMS -->checked="checked"<!-- ENDIF --> />	Да</label>&nbsp;&nbsp;
 		<label><input type="radio" name="hide_porn_forums" value="0" <!-- IF not HIDE_PORN_FORUMS -->checked="checked"<!-- ENDIF --> />	Нет</label>
