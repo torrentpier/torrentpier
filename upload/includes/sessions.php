@@ -230,7 +230,7 @@ class user_common
 		$login   = (int) ($this->data['user_id'] != ANONYMOUS);
 		$is_user = ($this->data['user_level'] == USER);
 		$user_id = (int) $this->data['user_id'];
-		$mod_admin_session = ($this->data['user_level'] == ADMIN);
+		$mod_admin_session = ($this->data['user_level'] == IS_AM);
 
 		if (($bb_cfg['max_srv_load'] || $bb_cfg['max_reg_users_online']) && $login && $is_user && !$this->data['ignore_srv_load'])
 		{
