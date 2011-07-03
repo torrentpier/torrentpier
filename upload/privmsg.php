@@ -970,11 +970,7 @@ else if ( $submit || $refresh || $mode != '' )
 			// DelUsrKeepPM
 			$to_username_sql = str_replace("\'", "''", $to_username);
 
-			$sql = "SELECT user_id, user_opt, user_email, user_lang, user_active
-				FROM " . BB_USERS . "
-				WHERE username = '$to_username_sql'";
-
-			$to_userdata = DB()->sql_fetchrow(DB()->sql_query($sql));
+			$to_userdata = get_userdata ($to_username_sql);
 
 			if (!$to_userdata || $to_userdata['user_id'] == ANONYMOUS)
 			{
@@ -1122,6 +1118,8 @@ else if ( $submit || $refresh || $mode != '' )
 			{
 				message_die(GENERAL_ERROR, 'Could not update private message new/read status for user', '', __LINE__, __FILE__, $sql);
 			}
+
+            cache_rm_user_sessions ($to_userdata['user_id']);
 
 			if ( bf($to_userdata['user_opt'], 'user_opt', 'notify_pm') && !empty($to_userdata['user_email']) && $to_userdata['user_active'] && $bb_cfg['pm_notify_enabled'] )
 			{

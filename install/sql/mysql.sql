@@ -358,6 +358,8 @@ CREATE TABLE `bb_bt_torrents` (
   `checked_user_id` mediumint(8) NOT NULL default '0',
   `checked_time` int(11) NOT NULL default '0',
   `tor_type` TINYINT(1) NOT NULL DEFAULT '0',
+  `speed_up` int(11) NOT NULL,
+  `speed_down` int(11) NOT NULL,
   PRIMARY KEY  (`info_hash`),
   UNIQUE KEY `post_id` (`post_id`),
   UNIQUE KEY `topic_id` (`topic_id`),
@@ -365,6 +367,20 @@ CREATE TABLE `bb_bt_torrents` (
   KEY `reg_time` (`reg_time`),
   KEY `forum_id` (`forum_id`),
   KEY `poster_id` (`poster_id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Структура таблицы `bb_bt_torrents_del`
+--
+
+CREATE TABLE IF NOT EXISTS `bb_bt_torrents_del` (
+  `topic_id` mediumint(8) unsigned NOT NULL,
+  `info_hash` varbinary(20) NOT NULL,
+  `is_del` tinyint(4) NOT NULL default '1',
+  `dl_percent` tinyint(4) NOT NULL default '100',
+  PRIMARY KEY  (`topic_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -384,19 +400,36 @@ CREATE TABLE `bb_bt_torstat` (
 -- --------------------------------------------------------
 
 --
+-- Структура таблицы `bb_bt_tor_dl_stat`
+--
+
+CREATE TABLE IF NOT EXISTS `bb_bt_tor_dl_stat` (
+  `topic_id` mediumint(8) unsigned NOT NULL default '0',
+  `user_id` mediumint(9) NOT NULL default '0',
+  `attach_id` mediumint(8) unsigned NOT NULL default '0',
+  `t_up_total` bigint(20) unsigned NOT NULL default '0',
+  `t_down_total` bigint(20) unsigned NOT NULL default '0',
+  `t_bonus_total` bigint(20) unsigned NOT NULL default '0',
+  PRIMARY KEY  (`topic_id`,`user_id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
 -- Структура таблицы `bb_bt_tracker`
 --
 
-CREATE TABLE `bb_bt_tracker` (
+CREATE TABLE IF NOT EXISTS `bb_bt_tracker` (
   `peer_hash` varchar(32) character set utf8 collate utf8_bin NOT NULL default '',
   `topic_id` mediumint(8) unsigned NOT NULL default '0',
+  `peer_id` varchar(20) NOT NULL,
   `user_id` mediumint(9) NOT NULL default '0',
   `ip` char(8) character set utf8 collate utf8_bin NOT NULL default '0',
-  `ipv6` varchar(32) DEFAULT NULL,
+  `ipv6` varchar(32) default NULL,
   `port` smallint(5) unsigned NOT NULL default '0',
   `seeder` tinyint(1) NOT NULL default '0',
   `releaser` tinyint(1) NOT NULL default '0',
-  `tor_type` TINYINT(1) NOT NULL DEFAULT '0',
+  `tor_type` tinyint(1) NOT NULL default '0',
   `uploaded` bigint(20) unsigned NOT NULL default '0',
   `downloaded` bigint(20) unsigned NOT NULL default '0',
   `remain` bigint(20) unsigned NOT NULL default '0',
@@ -405,11 +438,12 @@ CREATE TABLE `bb_bt_tracker` (
   `up_add` bigint(20) unsigned NOT NULL default '0',
   `down_add` bigint(20) unsigned NOT NULL default '0',
   `update_time` int(11) NOT NULL default '0',
-  `xbt_error` varchar(200) DEFAULT NULL,
-  `ul_gdc` bigint(20) unsigned NOT NULL DEFAULT '0',
-  `ul_gdc_c` mediumint(9) unsigned NOT NULL DEFAULT '0',
-  `ul_16k_c` mediumint(9) unsigned NOT NULL DEFAULT '0',
-  `ul_eq_dl` mediumint(9) unsigned NOT NULL DEFAULT '0',
+  `xbt_error` varchar(200) default NULL,
+  `ul_gdc` bigint(20) unsigned NOT NULL default '0',
+  `ul_gdc_c` mediumint(9) unsigned NOT NULL default '0',
+  `ul_16k_c` mediumint(9) unsigned NOT NULL default '0',
+  `ul_eq_dl` mediumint(9) unsigned NOT NULL default '0',
+  `complete_percent` bigint(20) NOT NULL default '0',
   PRIMARY KEY  (`peer_hash`),
   KEY `topic_id` (`topic_id`),
   KEY `user_id` (`user_id`)
@@ -510,7 +544,7 @@ CREATE TABLE `bb_config` (
 --
 
 INSERT INTO `bb_config` VALUES ('allow_autologin', '1');
-INSERT INTO `bb_config` VALUES ('allow_avatar_local', '0');
+INSERT INTO `bb_config` VALUES ('allow_avatar_local', '1');
 INSERT INTO `bb_config` VALUES ('allow_avatar_remote', '0');
 INSERT INTO `bb_config` VALUES ('allow_avatar_upload', '1');
 INSERT INTO `bb_config` VALUES ('allow_bbcode', '1');
@@ -579,7 +613,7 @@ INSERT INTO `bb_config` VALUES ('record_online_users', '2');
 INSERT INTO `bb_config` VALUES ('require_activation', '0');
 INSERT INTO `bb_config` VALUES ('sendmail_fix', '0');
 INSERT INTO `bb_config` VALUES ('site_desc', 'A _little_ text to describe your forum');
-INSERT INTO `bb_config` VALUES ('sitename', 'yourdomain.com');
+INSERT INTO `bb_config` VALUES ('sitename', 'TorrentPier II - Torrent Tracker');
 INSERT INTO `bb_config` VALUES ('smilies_path', 'images/smiles');
 INSERT INTO `bb_config` VALUES ('smtp_delivery', '0');
 INSERT INTO `bb_config` VALUES ('smtp_host', '');
@@ -602,273 +636,7 @@ INSERT INTO `bb_config` VALUES ('report_hack_count', '0');
 INSERT INTO `bb_config` VALUES ('report_notify', '0');
 INSERT INTO `bb_config` VALUES ('report_list_admin', '0');
 INSERT INTO `bb_config` VALUES ('report_new_window', '0');
-
--- --------------------------------------------------------
-
---
--- Структура таблицы `bb_countries`
---
-
-CREATE TABLE `bb_countries` (
-  `country_id` mediumint(3) NOT NULL auto_increment,
-  `country_code` varchar(3) NOT NULL default '0',
-  `country_code2` varchar(2) NOT NULL,
-  `country_code3` varchar(3) NOT NULL,
-  PRIMARY KEY  (`country_id`),
-  KEY `country_code2` (`country_code2`),
-  KEY `country_code3` (`country_code3`),
-  KEY `country_code` (`country_code`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=245 ;
-
---
--- Дамп данных таблицы `bb_countries`
---
-
-INSERT INTO `bb_countries` (`country_id`, `country_code`, `country_code2`, `country_code3`) VALUES
-(1, '036', 'AU', 'AUS'),
-(2, '040', 'AT', 'AUT'),
-(3, '031', 'AZ', 'AZE'),
-(4, '248', 'AX', 'ALA'),
-(5, '008', 'AL', 'ALB'),
-(6, '012', 'DZ', 'DZA'),
-(7, '581', 'UM', 'UMI'),
-(8, '850', 'VI', 'VIR'),
-(9, '016', 'AS', 'ASM'),
-(10, '660', 'AI', 'AIA'),
-(11, '024', 'AO', 'AGO'),
-(12, '020', 'AD', 'AND'),
-(13, '010', 'AQ', 'ATA'),
-(14, '028', 'AG', 'ATG'),
-(15, '032', 'AR', 'ARG'),
-(16, '051', 'AM', 'ARM'),
-(17, '533', 'AW', 'ABW'),
-(18, '004', 'AF', 'AFG'),
-(19, '044', 'BS', 'BHS'),
-(20, '050', 'BD', 'BGD'),
-(21, '052', 'BB', 'BRB'),
-(22, '048', 'BH', 'BHR'),
-(23, '084', 'BZ', 'BLZ'),
-(24, '112', 'BY', 'BLR'),
-(25, '056', 'BE', 'BEL'),
-(26, '204', 'BJ', 'BEN'),
-(27, '060', 'BM', 'BMU'),
-(28, '100', 'BG', 'BGR'),
-(29, '068', 'BO', 'BOL'),
-(30, '070', 'BA', 'BIH'),
-(31, '072', 'BW', 'BWA'),
-(32, '076', 'BR', 'BRA'),
-(33, '086', 'IO', 'IOT'),
-(34, '092', 'VG', 'VGB'),
-(35, '096', 'BN', 'BRN'),
-(36, '854', 'BF', 'BFA'),
-(37, '108', 'BI', 'BDI'),
-(38, '064', 'BT', 'BTN'),
-(39, '548', 'VU', 'VUT'),
-(40, '336', 'VA', 'VAT'),
-(41, '826', 'GB', 'GBR'),
-(42, '348', 'HU', 'HUN'),
-(43, '862', 'VE', 'VEN'),
-(44, '626', 'TL', 'TLS'),
-(45, '704', 'VN', 'VNM'),
-(46, '266', 'GA', 'GAB'),
-(47, '332', 'HT', 'HTI'),
-(48, '328', 'GY', 'GUY'),
-(49, '270', 'GM', 'GMB'),
-(50, '288', 'GH', 'GHA'),
-(51, '312', 'GP', 'GLP'),
-(52, '320', 'GT', 'GTM'),
-(53, '324', 'GN', 'GIN'),
-(54, '624', 'GW', 'GNB'),
-(55, '276', 'DE', 'DEU'),
-(56, '292', 'GI', 'GIB'),
-(57, '340', 'HN', 'HND'),
-(58, '344', 'HK', 'HKG'),
-(59, '308', 'GD', 'GRD'),
-(60, '304', 'GL', 'GRL'),
-(61, '300', 'GR', 'GRC'),
-(62, '268', 'GE', 'GEO'),
-(63, '316', 'GU', 'GUM'),
-(64, '208', 'DK', 'DNK'),
-(65, '180', 'CD', 'COD'),
-(66, '262', 'DJ', 'DJI'),
-(67, '212', 'DM', 'DMA'),
-(68, '214', 'DO', 'DOM'),
-(69, 'EU', 'EU', ''),
-(70, '818', 'EG', 'EGY'),
-(71, '894', 'ZM', 'ZMB'),
-(72, '732', 'EH', 'ESH'),
-(73, '716', 'ZW', 'ZWE'),
-(74, '376', 'IL', 'ISR'),
-(75, '356', 'IN', 'IND'),
-(76, '360', 'ID', 'IDN'),
-(77, '400', 'JO', 'JOR'),
-(78, '368', 'IQ', 'IRQ'),
-(79, '364', 'IR', 'IRN'),
-(80, '372', 'IE', 'IRL'),
-(81, '352', 'IS', 'ISL'),
-(82, '724', 'ES', 'ESP'),
-(83, '380', 'IT', 'ITA'),
-(84, '887', 'YE', 'YEM'),
-(85, '408', 'KP', 'PRK'),
-(86, '132', 'CV', 'CPV'),
-(87, '398', 'KZ', 'KAZ'),
-(88, '136', 'KY', 'CYM'),
-(89, '116', 'KH', 'KHM'),
-(90, '120', 'CM', 'CMR'),
-(91, '124', 'CA', 'CAN'),
-(92, '634', 'QA', 'QAT'),
-(93, '404', 'KE', 'KEN'),
-(94, '196', 'CY', 'CYP'),
-(95, '417', 'KG', 'KGZ'),
-(96, '296', 'KI', 'KIR'),
-(97, '156', 'CN', 'CHN'),
-(98, '166', 'CC', 'CCK'),
-(99, '170', 'CO', 'COL'),
-(100, '174', 'KM', 'COM'),
-(101, '188', 'CR', 'CRI'),
-(102, '384', 'CI', 'CIV'),
-(103, '192', 'CU', 'CUB'),
-(104, '414', 'KW', 'KWT'),
-(105, '418', 'LA', 'LAO'),
-(106, '428', 'LV', 'LVA'),
-(107, '426', 'LS', 'LSO'),
-(108, '430', 'LR', 'LBR'),
-(109, '422', 'LB', 'LBN'),
-(110, '434', 'LY', 'LBY'),
-(111, '440', 'LT', 'LTU'),
-(112, '438', 'LI', 'LIE'),
-(113, '442', 'LU', 'LUX'),
-(114, '480', 'MU', 'MUS'),
-(115, '478', 'MR', 'MRT'),
-(116, '450', 'MG', 'MDG'),
-(117, '175', 'YT', 'MYT'),
-(118, '446', 'MO', 'MAC'),
-(119, '807', 'MK', 'MKD'),
-(120, '454', 'MW', 'MWI'),
-(121, '458', 'MY', 'MYS'),
-(122, '466', 'ML', 'MLI'),
-(123, '462', 'MV', 'MDV'),
-(124, '470', 'MT', 'MLT'),
-(125, '504', 'MA', 'MAR'),
-(126, '474', 'MQ', 'MTQ'),
-(127, '584', 'MH', 'MHL'),
-(128, '484', 'MX', 'MEX'),
-(129, '508', 'MZ', 'MOZ'),
-(130, '498', 'MD', 'MDA'),
-(131, '492', 'MC', 'MCO'),
-(132, '496', 'MN', 'MNG'),
-(133, '500', 'MS', 'MSR'),
-(134, '104', 'MM', 'MMR'),
-(135, '516', 'NA', 'NAM'),
-(136, '520', 'NR', 'NRU'),
-(137, '524', 'NP', 'NPL'),
-(138, '562', 'NE', 'NER'),
-(139, '566', 'NG', 'NGA'),
-(140, '530', 'AN', 'ANT'),
-(141, '528', 'NL', 'NLD'),
-(142, '558', 'NI', 'NIC'),
-(143, '570', 'NU', 'NIU'),
-(144, '540', 'NC', 'NCL'),
-(145, '554', 'NZ', 'NZL'),
-(146, '578', 'NO', 'NOR'),
-(147, '784', 'AE', 'ARE'),
-(148, '512', 'OM', 'OMN'),
-(149, '162', 'CX', 'CXR'),
-(150, '184', 'CK', 'COK'),
-(151, '334', 'HM', 'HMD'),
-(152, '586', 'PK', 'PAK'),
-(153, '585', 'PW', 'PLW'),
-(154, '275', 'PS', 'PSE'),
-(155, '591', 'PA', 'PAN'),
-(156, '598', 'PG', 'PNG'),
-(157, '600', 'PY', 'PRY'),
-(158, '604', 'PE', 'PER'),
-(159, '612', 'PN', 'PCN'),
-(160, '616', 'PL', 'POL'),
-(161, '620', 'PT', 'PRT'),
-(162, '630', 'PR', 'PRI'),
-(163, '178', 'CG', 'COG'),
-(164, '638', 'RE', 'REU'),
-(165, '643', 'RU', 'RUS'),
-(166, '646', 'RW', 'RWA'),
-(167, '642', 'RO', 'ROU'),
-(168, '840', 'US', 'USA'),
-(169, '222', 'SV', 'SLV'),
-(170, '882', 'WS', 'WSM'),
-(171, '674', 'SM', 'SMR'),
-(172, '678', 'ST', 'STP'),
-(173, '682', 'SA', 'SAU'),
-(174, '748', 'SZ', 'SWZ'),
-(175, '744', 'SJ', 'SJM'),
-(176, '580', 'MP', 'MNP'),
-(177, '690', 'SC', 'SYC'),
-(178, '686', 'SN', 'SEN'),
-(179, '670', 'VC', 'VCT'),
-(180, '659', 'KN', 'KNA'),
-(181, '662', 'LC', 'LCA'),
-(182, '666', 'PM', 'SPM'),
-(183, '688', 'RS', 'SRB'),
-(184, '891', 'CS', 'SCG'),
-(185, '702', 'SG', 'SGP'),
-(186, '760', 'SY', 'SYR'),
-(187, '703', 'SK', 'SVK'),
-(188, '705', 'SI', 'SVN'),
-(189, '090', 'SB', 'SLB'),
-(190, '706', 'SO', 'SOM'),
-(191, '736', 'SD', 'SDN'),
-(192, '740', 'SR', 'SUR'),
-(193, '694', 'SL', 'SLE'),
-(194, '810', 'SU', 'SUN'),
-(195, '762', 'TJ', 'TJK'),
-(196, '764', 'TH', 'THA'),
-(197, '158', 'TW', 'TWN'),
-(198, '834', 'TZ', 'TZA'),
-(199, '768', 'TG', 'TGO'),
-(200, '772', 'TK', 'TKL'),
-(201, '776', 'TO', 'TON'),
-(202, '780', 'TT', 'TTO'),
-(203, '798', 'TV', 'TUV'),
-(204, '788', 'TN', 'TUN'),
-(205, '795', 'TM', 'TKM'),
-(206, '792', 'TR', 'TUR'),
-(207, '800', 'UG', 'UGA'),
-(208, '860', 'UZ', 'UZB'),
-(209, '804', 'UA', 'UKR'),
-(210, '858', 'UY', 'URY'),
-(211, '234', 'FO', 'FRO'),
-(212, '583', 'FM', 'FSM'),
-(213, '242', 'FJ', 'FJI'),
-(214, '608', 'PH', 'PHL'),
-(215, '246', 'FI', 'FIN'),
-(216, '238', 'FK', 'FLK'),
-(217, '250', 'FR', 'FRA'),
-(218, '254', 'GF', 'GUF'),
-(219, '258', 'PF', 'PYF'),
-(220, '260', 'TF', 'ATF'),
-(221, '191', 'HR', 'HRV'),
-(222, '140', 'CF', 'CAF'),
-(223, '148', 'TD', 'TCD'),
-(224, '499', 'ME', 'MNE'),
-(225, '203', 'CZ', 'CZE'),
-(226, '152', 'CL', 'CHL'),
-(227, '756', 'CH', 'CHE'),
-(228, '752', 'SE', 'SWE'),
-(229, '144', 'LK', 'LKA'),
-(230, '218', 'EC', 'ECU'),
-(231, '226', 'GQ', 'GNQ'),
-(232, '232', 'ER', 'ERI'),
-(233, '233', 'EE', 'EST'),
-(234, '231', 'ET', 'ETH'),
-(235, '710', 'ZA', 'ZAF'),
-(236, '410', 'KR', 'KOR'),
-(237, '239', 'GS', 'SGS'),
-(238, '388', 'JM', 'JAM'),
-(239, '392', 'JP', 'JPN'),
-(240, '074', 'BV', 'BVT'),
-(241, '574', 'NF', 'NFK'),
-(242, '654', 'SH', 'SHN'),
-(243, '796', 'TC', 'TCA'),
-(244, '876', 'WF', 'WLF');
+INSERT INTO `bb_config` VALUES ('torrent_pass_private_key', 'ikMhXDeo5g5aeBRJIt9iSHJ8aSo');
 
 -- --------------------------------------------------------
 
@@ -1144,9 +912,6 @@ CREATE TABLE `bb_posts` (
   `post_time` int(11) NOT NULL default '0',
   `poster_ip` char(32) character set utf8 collate utf8_bin NOT NULL default '',
   `post_username` varchar(25) NOT NULL default '',
-  `enable_bbcode` tinyint(1) NOT NULL default '1',
-  `enable_smilies` tinyint(1) NOT NULL default '1',
-  `enable_sig` tinyint(1) NOT NULL default '1',
   `post_edit_time` int(11) NOT NULL default '0',
   `post_edit_count` smallint(5) unsigned NOT NULL default '0',
   `post_attachment` tinyint(1) NOT NULL default '0',
@@ -1162,7 +927,7 @@ CREATE TABLE `bb_posts` (
 -- Дамп данных таблицы `bb_posts`
 --
 
-INSERT INTO `bb_posts` VALUES (1, 1, 1, 2, 972086460, '', '', 1, 1, 1, 0, 0, 0, 0);
+INSERT INTO `bb_posts` VALUES (1, 1, 1, 2, 1309421220, '', '', 0, 0, 0, 0);
 
 -- --------------------------------------------------------
 
@@ -1198,7 +963,6 @@ CREATE TABLE `bb_posts_search` (
 
 CREATE TABLE `bb_posts_text` (
   `post_id` mediumint(8) unsigned NOT NULL default '0',
-  `bbcode_uid` varchar(10) NOT NULL default '',
   `post_subject` enum('','kFpILr5') NOT NULL default '',
   `post_text` text NOT NULL,
   PRIMARY KEY  (`post_id`)
@@ -1208,7 +972,7 @@ CREATE TABLE `bb_posts_text` (
 -- Дамп данных таблицы `bb_posts_text`
 --
 
-INSERT INTO `bb_posts_text` VALUES (1, '', '', 'This is an example post in your TorrentPier installation. You may delete this post, this topic and even this forum if you like since everything seems to be working!');
+INSERT INTO `bb_posts_text` VALUES (1, '', '[list]\r\n[*]Переделан поиск по топикам с выбором типа [none, mysql, sphinx] (только в tracker.php)\r\n[*]Удалены bbcode_uid и переход на class.bbcode\r\n[*]Изменён метод и способ кеширования (cache_memcache, cache_sqlite, db_sqlite, filecache)\r\n[*]Изменён способ подключения к БД и отказ от глобальной переменной $db\r\n[*]Улучшенный дебагер\r\n[*]Полностью переписан и упрощен файл регистрации\r\n[*]Переписана капча (в том числе при быстром ответе у гостя)\r\n[*]Добавлена возможность выбора типа анонсера (xbt или php) http://animeshka.org:2710/statistic\r\n[*]Удаление файлов torrent.php и torstatus.php и перенос их функций в ajax\r\n[*]\r\n[/list]');
 
 -- --------------------------------------------------------
 
@@ -1224,8 +988,6 @@ CREATE TABLE `bb_privmsgs` (
   `privmsgs_to_userid` mediumint(8) NOT NULL default '0',
   `privmsgs_date` int(11) NOT NULL default '0',
   `privmsgs_ip` varchar(32) character set utf8 collate utf8_bin NOT NULL default '',
-  `privmsgs_enable_bbcode` tinyint(1) NOT NULL default '1',
-  `privmsgs_enable_smilies` tinyint(1) NOT NULL default '1',
   `privmsgs_reported` tinyint(1) NOT NULL default '0',
   PRIMARY KEY  (`privmsgs_id`),
   KEY `privmsgs_from_userid` (`privmsgs_from_userid`),
@@ -1240,7 +1002,6 @@ CREATE TABLE `bb_privmsgs` (
 
 CREATE TABLE `bb_privmsgs_text` (
   `privmsgs_text_id` mediumint(8) unsigned NOT NULL default '0',
-  `privmsgs_bbcode_uid` varchar(10) NOT NULL default '0',
   `privmsgs_text` text NOT NULL,
   PRIMARY KEY  (`privmsgs_text_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
@@ -1537,7 +1298,7 @@ CREATE TABLE `bb_topics` (
 -- Дамп данных таблицы `bb_topics`
 --
 
-INSERT INTO `bb_topics` VALUES (1, 1, 'Welcome to TorrentPier', 2, 972086460, 2, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 972086460);
+INSERT INTO `bb_topics` VALUES (1, 1, 'Добро пожаловать в TorrentPier II!', 2, 1309421220, 2, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 972086460);
 
 -- --------------------------------------------------------
 
@@ -1595,16 +1356,16 @@ INSERT INTO `bb_topic_templates` VALUES (14, 'sport', 'sport', 'sport', 'Sport')
 -- Структура таблицы `bb_users`
 --
 
-CREATE TABLE `bb_users` (
+CREATE TABLE IF NOT EXISTS `bb_users` (
   `user_id` mediumint(8) NOT NULL auto_increment,
   `user_active` tinyint(1) NOT NULL default '1',
   `username` varchar(25) NOT NULL default '',
   `user_password` varchar(32) character set utf8 collate utf8_bin NOT NULL default '',
   `user_session_time` int(11) NOT NULL default '0',
   `user_lastvisit` int(11) NOT NULL default '0',
-  `user_last_ip` CHAR(32) NOT NULL default '',
+  `user_last_ip` char(32) NOT NULL default '',
   `user_regdate` int(11) NOT NULL default '0',
-  `user_reg_ip` CHAR(32) NOT NULL default '',
+  `user_reg_ip` char(32) NOT NULL default '',
   `user_level` tinyint(4) NOT NULL default '0',
   `user_posts` mediumint(8) unsigned NOT NULL default '0',
   `user_timezone` decimal(5,2) NOT NULL default '0.00',
@@ -1614,11 +1375,6 @@ CREATE TABLE `bb_users` (
   `user_unread_privmsg` smallint(5) unsigned NOT NULL default '0',
   `user_last_privmsg` int(11) NOT NULL default '0',
   `user_opt` int(11) NOT NULL default '0',
-  `user_allowavatar` tinyint(1) NOT NULL default '1',
-  `user_allow_pm` tinyint(1) NOT NULL default '1',
-  `user_allow_viewonline` tinyint(1) NOT NULL default '1',
-  `user_notify` tinyint(1) NOT NULL default '1',
-  `user_notify_pm` tinyint(1) NOT NULL default '0',
   `user_rank` int(11) NOT NULL default '0',
   `user_avatar` varchar(100) NOT NULL default '',
   `user_avatar_type` tinyint(4) NOT NULL default '0',
@@ -1627,13 +1383,10 @@ CREATE TABLE `bb_users` (
   `user_website` varchar(100) NOT NULL default '',
   `user_from` varchar(100) NOT NULL default '',
   `user_sig` text NOT NULL,
-  `user_sig_bbcode_uid` varchar(10) NOT NULL default '',
   `user_occ` varchar(100) NOT NULL default '',
   `user_interests` varchar(255) NOT NULL default '',
   `user_actkey` varchar(32) NOT NULL default '',
   `user_newpasswd` varchar(32) NOT NULL default '',
-  `user_allow_passkey` tinyint(1) NOT NULL default '1',
-  `user_from_flag` varchar(3) NOT NULL default '',
   `ignore_srv_load` tinyint(1) NOT NULL default '0',
   `autologin_id` varchar(12) character set utf8 collate utf8_bin NOT NULL default '',
   `user_newest_pm_id` mediumint(8) NOT NULL default '0',
@@ -1641,15 +1394,15 @@ CREATE TABLE `bb_users` (
   KEY `username` (`username`(10)),
   KEY `user_email` (`user_email`(10)),
   KEY `user_level` (`user_level`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=3 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=15 ;
 
 --
 -- Дамп данных таблицы `bb_users`
 --
 
-INSERT INTO `bb_users` VALUES (-1, 0, 'Anonymous', 'd41d8cd98f00b204e9800998ecf8427e', 0, 0, 0, 1117103663, 0, 0, 0, 0.00, '', '', 0, 0, 0, 220, 1, 0, 1, 0, 1, 0, '', 0, '', '', '', '', '', '', '', '', '', '', 1, '', 0, '', 0);
-INSERT INTO `bb_users` VALUES (2, 1, 'admin', 'c3284d0f94606de1fd2af172aba15bf3', 1211472784, 1210263184, 0, 1117103663, 0, 1, 1, 0.00, '', '', 0, 0, 1211472803, 159, 1, 1, 1, 0, 1, 1, '', 0, 'admin@admin.com', '', '', '', '', '', '', '', '', '', 1, '', 0, 0x4f5750316d724533314b7335, 0);
-INSERT INTO `bb_users` VALUES (-746, 0, 'bot', 'd41d8cd98f00b204e9800998ecf8427e', 1117115716, 1117115634, 0, 1117114766, 0, 0, 0, 0.00, '', '', 0, 0, 0, 148, 1, 1, 1, 0, 0, 0, 'bot.gif', 1, 'bot@bot.bot', '', '', '', '', '', '', '', '', '', 1, '', 0, '', 0);
+INSERT INTO `bb_users` VALUES (-1, 0, 'Anonymous', 'd41d8cd98f00b204e9800998ecf8427e', 0, 0, '0', 1309421220, '0', 0, 5, '0.00', '', '', 0, 0, 0, 220, 0, '', 0, '', '', '', '', '', '', '', '', '', 0, '', 0);
+INSERT INTO `bb_users` VALUES (2, 1, 'admin', 'c3284d0f94606de1fd2af172aba15bf3', 0, 0, '0', 1309421220, '0', 1, 1, '+4.00', '', '', 0, 0, 0, 306, 1, '', 1, 'admin@admin.com', '', '', '', '', '', '', '', '', 0, '', 0);
+INSERT INTO `bb_users` VALUES (-746, 0, 'bot', 'd41d8cd98f00b204e9800998ecf8427e', 0, 0, '0', 1309421220, '0', 0, 0, '0.00', '', '', 0, 0, 0, 148, 0, 'bot.gif', 1, 'bot@bot.bot', '', '', '', '', '', '', '', '', 0, '', 0);
 
 -- --------------------------------------------------------
 
@@ -1759,5 +1512,91 @@ CREATE TABLE IF NOT EXISTS `sph_counter` (
   `max_doc_id` int(11) NOT NULL,
   PRIMARY KEY (`counter_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Структура таблицы `xbt_announce_log`
+--
+
+CREATE TABLE IF NOT EXISTS `xbt_announce_log` (
+  `id` int(11) NOT NULL auto_increment,
+  `ipa` int(10) unsigned NOT NULL default '0',
+  `port` int(11) NOT NULL default '0',
+  `event` int(11) NOT NULL default '0',
+  `info_hash` blob NOT NULL,
+  `peer_id` blob NOT NULL,
+  `downloaded` bigint(20) NOT NULL default '0',
+  `left0` bigint(20) NOT NULL default '0',
+  `uploaded` bigint(20) NOT NULL default '0',
+  `uid` int(11) NOT NULL default '0',
+  `mtime` int(11) NOT NULL default '0',
+  PRIMARY KEY  (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
+-- Структура таблицы `xbt_config`
+--
+
+CREATE TABLE IF NOT EXISTS `xbt_config` (
+  `name` varchar(255) NOT NULL default '',
+  `value` varchar(255) NOT NULL default '',
+  PRIMARY KEY  (`name`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+--
+-- Дамп данных таблицы `xbt_config`
+--
+
+INSERT INTO `xbt_config` (`name`, `value`) VALUES
+('torrent_pass_private_key', 'ikMhXDeo5g5aeBRJIt9iSHJ8aSo');
+
+-- --------------------------------------------------------
+
+--
+-- Структура таблицы `xbt_deny_from_hosts`
+--
+
+CREATE TABLE IF NOT EXISTS `xbt_deny_from_hosts` (
+  `begin` int(11) NOT NULL default '0',
+  `end` int(11) NOT NULL default '0'
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Структура таблицы `xbt_files_users`
+--
+
+CREATE TABLE IF NOT EXISTS `xbt_files_users` (
+  `fid` int(11) NOT NULL default '0',
+  `uid` int(11) NOT NULL default '0',
+  `active` tinyint(4) NOT NULL default '0',
+  `announced` int(11) NOT NULL default '0',
+  `completed` int(11) NOT NULL default '0',
+  `downloaded` bigint(20) NOT NULL default '0',
+  `left` bigint(20) NOT NULL default '0',
+  `uploaded` bigint(20) NOT NULL default '0',
+  `mtime` int(11) NOT NULL default '0',
+  UNIQUE KEY `fid` (`fid`,`uid`),
+  KEY `uid` (`uid`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Структура таблицы `xbt_scrape_log`
+--
+
+CREATE TABLE IF NOT EXISTS `xbt_scrape_log` (
+  `id` int(11) NOT NULL auto_increment,
+  `ipa` int(11) NOT NULL default '0',
+  `info_hash` blob,
+  `uid` int(11) NOT NULL default '0',
+  `mtime` int(11) NOT NULL default '0',
+  PRIMARY KEY  (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------

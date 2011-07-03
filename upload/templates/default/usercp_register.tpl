@@ -86,12 +86,12 @@ ajax.callback.gen_passkey = function(data){
 	<th colspan="2">{L_PROFILE_INFO}</th>
 </tr>
 <tr>
-	<td>Пол:</td>
+	<td>РџРѕР»:</td>
 	<td>
 		<select name="user_gender" id="user_gender">
-			<option value="0" <!-- IF USER_GENDER_0 -->selected="selected"<!-- ENDIF -->>&nbsp;Не определилось&nbsp;</option>
-			<option value="1" <!-- IF USER_GENDER_1 -->selected="selected"<!-- ENDIF -->>&nbsp;Мужской&nbsp;</option>
-			<option value="2" <!-- IF USER_GENDER_2 -->selected="selected"<!-- ENDIF -->>&nbsp;Женский&nbsp;</option>
+			<option value="0" <!-- IF USER_GENDER_0 -->selected="selected"<!-- ENDIF -->>&nbsp;РќРµ РѕРїСЂРµРґРµР»РёР»РѕСЃСЊ&nbsp;</option>
+			<option value="1" <!-- IF USER_GENDER_1 -->selected="selected"<!-- ENDIF -->>&nbsp;РњСѓР¶СЃРєРѕР№&nbsp;</option>
+			<option value="2" <!-- IF USER_GENDER_2 -->selected="selected"<!-- ENDIF -->>&nbsp;Р–РµРЅСЃРєРёР№&nbsp;</option>
 		</select>
 	</td>
 </tr>
