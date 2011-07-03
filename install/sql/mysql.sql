@@ -636,7 +636,7 @@ INSERT INTO `bb_config` VALUES ('report_hack_count', '0');
 INSERT INTO `bb_config` VALUES ('report_notify', '0');
 INSERT INTO `bb_config` VALUES ('report_list_admin', '0');
 INSERT INTO `bb_config` VALUES ('report_new_window', '0');
-INSERT INTO `bb_config` VALUES ('torrent_pass_private_key', 'ikMhXDeo5g5aeBRJIt9iSHJ8aSo');
+INSERT INTO `bb_config` VALUES ('torrent_pass_private_key', 'вставить_из_конфига_XBTT);
 
 -- --------------------------------------------------------
 
@@ -1394,7 +1394,7 @@ CREATE TABLE IF NOT EXISTS `bb_users` (
   KEY `username` (`username`(10)),
   KEY `user_email` (`user_email`(10)),
   KEY `user_level` (`user_level`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=15 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=3 ;
 
 --
 -- Дамп данных таблицы `bb_users`
@@ -1545,13 +1545,6 @@ CREATE TABLE IF NOT EXISTS `xbt_config` (
   `value` varchar(255) NOT NULL default '',
   PRIMARY KEY  (`name`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
-
---
--- Дамп данных таблицы `xbt_config`
---
-
-INSERT INTO `xbt_config` (`name`, `value`) VALUES
-('torrent_pass_private_key', 'ikMhXDeo5g5aeBRJIt9iSHJ8aSo');
 
 -- --------------------------------------------------------
 
