@@ -132,7 +132,7 @@ switch ($mode)
 
 		include(INC_DIR . 'ucp/usercp_avatar.php');
 
-		if ( !bf($pr_data['user_opt'], 'user_opt', 'allowavatar') && ( $bb_cfg['allow_avatar_upload'] || $bb_cfg['allow_avatar_local'] || $bb_cfg['allow_avatar_remote'] ) )
+		if ( !bf($pr_data['user_opt'], 'user_opt', 'allow_avatar') && ( $bb_cfg['allow_avatar_upload'] || $bb_cfg['allow_avatar_local'] || $bb_cfg['allow_avatar_remote'] ) )
 		{
 			$template->assign_block_vars('switch_avatar_block', array() );
 
@@ -619,8 +619,8 @@ foreach ($profile_fields as $field => $can_edit)
         	}
         	$tp_data['USER_AVATAR'] = get_avatar($user_avatar, $user_avatar_type) . $hidden_vars;        }
         else
-        {        	$tp_data['USER_AVATAR'] = get_avatar($pr_data['user_avatar'], $pr_data['user_avatar_type'], !bf($pr_data['user_opt'], 'user_opt', 'allowavatar'));        }
-	    if ($submit && !bf($pr_data['user_opt'], 'user_opt', 'allowavatar'))
+        {        	$tp_data['USER_AVATAR'] = get_avatar($pr_data['user_avatar'], $pr_data['user_avatar_type'], !bf($pr_data['user_opt'], 'user_opt', 'allow_avatar'));        }
+	    if ($submit && !bf($pr_data['user_opt'], 'user_opt', 'allow_avatar'))
 		{
 			if ( $user_avatar != $pr_data['user_avatar'] || $user_avatar_type != $pr_data['user_avatar_type'])
 			{

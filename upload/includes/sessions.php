@@ -819,21 +819,13 @@ class user_common
 	}
 
 	/**
-	*  Check if user can hide ads
-	*/
-	function hide_ads ()
-	{
-		return (bf($this->opt, 'user_opt', 'can_hide_ads') && bf($this->opt, 'user_opt', 'hide_ads'));
-	}
-
-	/**
 	*  Enqueue ads
 	*/
 	function enqueue_ads ()
 	{
 		global $datastore, $bb_cfg;
 
-		if ($bb_cfg['show_ads'] && !$this->hide_ads() && !defined('IN_ADMIN') && !defined('IN_AJAX'))
+		if ($bb_cfg['show_ads'] && !bf($this->opt, 'user_opt', 'hide_ads') && !defined('IN_ADMIN') && !defined('IN_AJAX'))
 		{
 			$datastore->enqueue('ads');
 			$this->show_ads = true;

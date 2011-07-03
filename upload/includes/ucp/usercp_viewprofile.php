@@ -45,7 +45,7 @@ else
 {
 	$percentage = 0;
 }
-$avatar_img = get_avatar($profiledata['user_avatar'], $profiledata['user_avatar_type'], !bf($profiledata['user_opt'], 'user_opt', 'allowavatar'));
+$avatar_img = get_avatar($profiledata['user_avatar'], $profiledata['user_avatar_type'], !bf($profiledata['user_opt'], 'user_opt', 'allow_avatar'));
 
 if (!$ranks = $datastore->get('ranks'))
 {
@@ -74,7 +74,6 @@ $temp_url = append_sid("privmsg.php?mode=post&amp;" . POST_USERS_URL . "=" . $pr
 $pm_img = '<a href="' . $temp_url . '"><img src="' . $images['icon_pm'] . '" alt="' . $lang['SEND_PRIVATE_MESSAGE'] . '" title="' . $lang['SEND_PRIVATE_MESSAGE'] . '" border="0" /></a>';
 
 $location = ($profiledata['user_from']) ? $profiledata['user_from'] : '';
-$location .= ($profiledata['user_from_flag'] && $profiledata['user_from_flag'] != 'blank.gif') ? '&nbsp;'. make_user_flag($profiledata['user_from_flag']) : '';
 
 $pm = '<a href="' . $temp_url . '">' . $lang['SEND_PRIVATE_MESSAGE'] . '</a>';
 
@@ -239,10 +238,13 @@ if (IS_ADMIN)
 	));
 
 	$ajax_user_opt = bb_json_encode(array(
-		'allowavatar'      => bf($profiledata['user_opt'], 'user_opt', 'allowavatar'),
+		'allow_avatar'     => bf($profiledata['user_opt'], 'user_opt', 'allow_avatar'),
+		'allow_sig'        => bf($profiledata['user_opt'], 'user_opt', 'allow_sig'),
 		'allow_passkey'    => bf($profiledata['user_opt'], 'user_opt', 'allow_passkey'),
 		'allow_pm'         => bf($profiledata['user_opt'], 'user_opt', 'allow_pm'),
-		'allow_sig'        => bf($profiledata['user_opt'], 'user_opt', 'allow_sig'),
+		'allow_post'       => bf($profiledata['user_opt'], 'user_opt', 'allow_post'),
+		'allow_post_edit'  => bf($profiledata['user_opt'], 'user_opt', 'allow_post_edit'),
+		'allow_topic'      => bf($profiledata['user_opt'], 'user_opt', 'allow_topic'),
 	));
 
 	$template->assign_vars(array(

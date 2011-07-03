@@ -152,7 +152,7 @@ $template->assign_vars(array(
 ));
 
 // per-letter selection end
-$sql = "SELECT username, user_id, user_opt, user_posts, user_regdate, user_from, user_website, user_email, user_icq, user_avatar, user_avatar_type, user_allowavatar
+$sql = "SELECT username, user_id, user_opt, user_posts, user_regdate, user_from, user_website, user_email, user_icq, user_avatar, user_avatar_type
          FROM ". BB_USERS ."
 		 WHERE user_id NOT IN(". EXCLUDED_USERS_CSV .")";
 if ( $username )
@@ -176,23 +176,8 @@ if ( $row = DB()->sql_fetchrow($result) )
 
 		$joined = bb_date($row['user_regdate'], $lang['DATE_FORMAT']);
 		$posts = $row['user_posts'];
-		$poster_avatar = false;
 
-		if ($row['user_avatar_type'] && $user_id != ANONYMOUS && $row['user_allowavatar'])
-		{
-			switch ($row['user_avatar_type'])
-			{
-				case USER_AVATAR_UPLOAD:
-					$poster_avatar = ($bb_cfg['allow_avatar_upload']) ? '<img src="'. $bb_cfg['avatar_path'] .'/'. $row['user_avatar'] .'" alt="" border="0" />' : false;
-					break;
-				case USER_AVATAR_REMOTE:
-					$poster_avatar = ($bb_cfg['allow_avatar_remote']) ? '<img src="'. $row['user_avatar'] .'" alt="" border="0" />' : false;
-					break;
-				case USER_AVATAR_GALLERY:
-					$poster_avatar = ($bb_cfg['allow_avatar_local']) ? '<img src="'. $bb_cfg['avatar_gallery_path'] .'/'. $row['user_avatar'] .'" alt="" border="0" />' : false;
-					break;
-			}
-		}
+        $poster_avatar = get_avatar($row['user_avatar'], $row['user_avatar_type'], !bf($row['user_opt'], 'user_opt', 'allow_avatar'));
 
 		$pm = '<a class="txtb" href="'. append_sid("privmsg.php?mode=post&amp;". POST_USERS_URL ."=$user_id") .'">'. $lang['SEND_PM_TXTB'] .'</a>';
 		$email = ($bb_cfg['board_email_form']) ? '<a class="txtb" href="'. append_sid("profile.php?mode=email&amp;". POST_USERS_URL ."=$user_id") .'">'. $lang['SEND_EMAIL_TXTB'] .'</a>' : false;

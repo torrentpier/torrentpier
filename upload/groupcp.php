@@ -19,22 +19,7 @@ function generate_user_info(&$row, $date_format, $group_mod, &$from, &$posts, &$
 	$joined = bb_date($row['user_regdate'], $date_format);
 	$posts = ( $row['user_posts'] ) ? $row['user_posts'] : 0;
 
-	$poster_avatar = '';
-	if ( @$row['user_avatar_type'] && $row['user_id'] != ANONYMOUS && $row['user_allowavatar'] )
-	{
-		switch( $row['user_avatar_type'] )
-		{
-			case USER_AVATAR_UPLOAD:
-				$poster_avatar = ( $bb_cfg['allow_avatar_upload'] ) ? '<img src="' . $bb_cfg['avatar_path'] . '/' . $row['user_avatar'] . '" alt="" border="0" />' : '';
-				break;
-			case USER_AVATAR_REMOTE:
-				$poster_avatar = ( $bb_cfg['allow_avatar_remote'] ) ? '<img src="' . $row['user_avatar'] . '" alt="" border="0" />' : '';
-				break;
-			case USER_AVATAR_GALLERY:
-				$poster_avatar = ( $bb_cfg['allow_avatar_local'] ) ? '<img src="' . $bb_cfg['avatar_gallery_path'] . '/' . $row['user_avatar'] . '" alt="" border="0" />' : '';
-				break;
-		}
-	}
+	$poster_avatar = get_avatar($row['user_avatar'], $row['user_avatar_type'], !bf($row['user_opt'], 'user_opt', 'allow_avatar'));
 
 	if ( bf($row['user_opt'], 'user_opt', 'viewemail') || $group_mod )
 	{

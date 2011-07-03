@@ -64,6 +64,10 @@ $is_auth = array();
 switch ($mode)
 {
 	case 'newtopic':
+	    if(bf($userdata['user_opt'], 'user_opt', 'allow_topic'))
+	    {
+	    	bb_die($lang['RULES_POST_CANNOT']);
+	    }
 		if ($topic_type == POST_ANNOUNCE)
 		{
 			$is_auth_type = 'auth_announce';
@@ -79,9 +83,17 @@ switch ($mode)
 		break;
 	case 'reply':
 	case 'quote':
+		if(bf($userdata['user_opt'], 'user_opt', 'allow_post'))
+	    {
+	    	bb_die($lang['RULES_REPLY_CANNOT']);
+	    }
 		$is_auth_type = 'auth_reply';
 		break;
 	case 'editpost':
+	    if(bf($userdata['user_opt'], 'user_opt', 'allow_post_edit'))
+	    {
+	    	bb_die($lang['RULES_EDIT_CANNOT']);
+	    }
 		$is_auth_type = 'auth_edit';
 		break;
 	case 'delete':
@@ -299,7 +311,8 @@ if ($submit || $refresh)
 }
 else
 {
-	if (!IS_GUEST && $mode != 'newtopic' && bf($userdata['user_opt'], 'user_opt', 'notify'))
+	$notify_user = bf($userdata['user_opt'], 'user_opt', 'notify');
+	if (!IS_GUEST && $mode != 'newtopic' && !$notify_user)
 	{
 		$notify_user = (int) DB()->fetch_row("
 			SELECT topic_id
@@ -307,10 +320,6 @@ else
 			WHERE topic_id = $topic_id
 			  AND user_id = ". $userdata['user_id'] ."
 		");
-	}
-	else
-	{
-		$notify_user = $userdata['user_notify'];
 	}
 }
 

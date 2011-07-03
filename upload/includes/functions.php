@@ -564,17 +564,20 @@ $bf['forum_perm'] = array(
 );
 
 $bf['user_opt'] = array(
-	'viewemail'        => 0,
-	'allow_sig'        => 1,
-	'allowavatar'      => 2,
-	'allow_pm'         => 3,
-	'allow_viewonline' => 4,
-	'notify'           => 5,
-	'notify_pm'        => 6,
-	'allow_passkey'    => 7,
-	'hide_porn_forums' => 8,
-	'can_hide_ads'     => 9,
-	'hide_ads'         => 10,
+	'viewemail'        => 0,  // Показывать e-mail
+	'allow_sig'        => 1,  // Запрет на подпись
+	'allow_avatar'     => 2,  // Запрет на аватар
+	'allow_pm'         => 3,  // Запрет на отправку ЛС
+	'allow_viewonline' => 4,  // Скрывать пребывание пользователя
+	'notify'           => 5,  // Сообщать об ответах в отслеживаемых темах
+	'notify_pm'        => 6,  // Сообщать о новых ЛС
+	'allow_passkey'    => 7,  // Запрет на добавление passkey, он же запрет на скачивание торрентов
+	'hide_porn_forums' => 8,  // Скрывать pron форумы
+	'allow_gallery'    => 9,  // Запрет на использование галереи
+	'hide_ads'         => 10, // Запрет на показ рекламы
+	'allow_topic'      => 11, // Запрет на создание новых тем
+	'allow_post'       => 12, // Запрет на отправку сообщений
+	'allow_post_edit'  => 13, // Запрет на редактирование сообщений
 );
 
 function bit2dec ($bit_num)
@@ -2905,13 +2908,13 @@ function create_magnet($infohash, $auth_key, $logged_in)
 	return '<a href="magnet:?xt=urn:btih:'. bin2hex($infohash) .'&tr='. urlencode($bb_cfg['bt_announce_url'] . $passkey_url) .'"><img src="images/magnet.png" width="12" height="12" border="0" /></a>';
 }
 
-function get_avatar ($avatar, $type, $allowavatar = true)
+function get_avatar ($avatar, $type, $allow_avatar = true)
 {
 	global $bb_cfg, $lang;
 
 	$user_avatar = '<img src="'. $bb_cfg['no_avatar'] .'" alt="" border="0" />';
 
-	if ($allowavatar)
+	if ($allow_avatar)
 	{
 		switch($type)
 		{

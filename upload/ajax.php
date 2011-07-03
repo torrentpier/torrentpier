@@ -321,18 +321,10 @@ class ajax_common
 			$this->ajax_die('invalid new_opt');
 		}
 
-		$user_can_change = array(
-			'hide_porn_forums',
-		);
-
 		foreach ($bf['user_opt'] as $opt_name => $opt_bit)
 		{
 			if (isset($new_opt[$opt_name]))
 			{
-				if (!IS_ADMIN && !in_array($opt_name, $user_can_change))
-				{
-					$this->ajax_die("not admin: $opt_name");
-				}
 				setbit($u_data['user_opt'], $opt_bit, !empty($new_opt[$opt_name]));
 			}
 		}

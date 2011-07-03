@@ -143,10 +143,13 @@ $(document).ready(function(){
 			<style type="text/css"> #user-opt label { display: block; } </style>
 			<legend>Юзеру <b style="color: darkred;">ЗАПРЕЩЕНО</b></legend>
 			<div class="tLeft" style="padding: 2px 6px 6px; display: block;">
-				<label><input type="checkbox" name="allowavatar"      />показывать аватар</label>
-				<label><input type="checkbox" name="allow_passkey"    />passkey</label>
-				<label><input type="checkbox" name="allow_pm"         />отправлять лс</label>
+				<label><input type="checkbox" name="allow_avatar"     />показывать аватар</label>
 				<label><input type="checkbox" name="allow_sig"        />показывать подпись</label>
+				<label><input type="checkbox" name="allow_passkey"    />скачивать торренты</label>
+				<label><input type="checkbox" name="allow_pm"         />отправлять лс</label>
+				<label><input type="checkbox" name="allow_post"       />отправлять сообщения</label>
+				<label><input type="checkbox" name="allow_post_edit"  />редактировать сообщения</label>
+				<label><input type="checkbox" name="allow_topic"      />создавать темы</label>
 			</div>
 			</fieldset>
 			<div id="user-opt-save" class="hidden">

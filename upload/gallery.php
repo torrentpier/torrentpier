@@ -5,15 +5,15 @@ define('BB_SCRIPT', 'gallery');
 define('BB_ROOT', './');
 require(BB_ROOT ."common.php");
 
-if (!$bb_cfg['gallery_enabled'])
-{
-	message_die(GENERAL_MESSAGE, $lang['GALLERY_DISABLED']);
-}
-
 // Start session management
 $user->session_start(array('req_login' => true));
 
+if (!$bb_cfg['gallery_enabled']) bb_die($lang['GALLERY_DISABLED']);
+
 require(LANG_DIR ."lang_gallery.php");
+
+if(bf($userdata['user_opt'], 'user_opt', 'allow_gallery'))
+{	bb_die($lang['USE_GALLERY_OFF']);}
 
 $go = isset($_GET['go']) ? $_GET['go'] : '';
 $max_size = $bb_cfg['pic_max_size'];

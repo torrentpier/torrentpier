@@ -57,7 +57,7 @@ $bb_cfg['css_ver'] = 1;
 
 // Increase number of revision after update
 $bb_cfg['tp_version'] = '2.0.2';
-$bb_cfg['tp_release_state'] = 'TP II r63';
+$bb_cfg['tp_release_state'] = 'TP II r65';
 $bb_cfg['tp_release_date'] = '03-07-2011';
 
 $bb_cfg['board_disabled_msg'] = 'форум временно отключен'; // 'forums temporarily disabled'; // show this msg if board has been disabled via ON/OFF trigger
@@ -80,8 +80,6 @@ $bb_cfg['db_alias'] = array(
 // http://www.php.net/manual/en/mysql.constants.php#mysql.client-flags
 define('DBFLAGS', NULL); // Flags: MYSQL_CLIENT_COMPRESS - Compress MySQL
 define('DBMS', 'mysql');
-define('DBCOLLATION', '');
-define('PCONNECT', false);
 
 // Cache
 $bb_cfg['cache']['pconnect'] = false;

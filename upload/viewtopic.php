@@ -805,7 +805,7 @@ for($i = 0; $i < $total_posts; $i++)
 	$poster_avatar = '';
 	if ( !$user->opt_js['h_av'] && $poster_id != ANONYMOUS )
 	{
-		$poster_avatar = get_avatar($postrow[$i]['user_avatar'], $postrow[$i]['user_avatar_type'], !bf($postrow[$i]['user_opt'], 'user_opt', 'allowavatar'));
+		$poster_avatar = get_avatar($postrow[$i]['user_avatar'], $postrow[$i]['user_avatar_type'], !bf($postrow[$i]['user_opt'], 'user_opt', 'allow_avatar'));
 	}
 
 	//

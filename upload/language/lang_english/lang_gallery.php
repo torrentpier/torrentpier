@@ -5,6 +5,7 @@
    Russian language for TorrentPier SVN
 */
 
+$lang['USE_GALLERY_OFF'] = 'You can not upload images';
 $lang['GALLERY_YOUR_IMAGE'] = 'Your image';
 $lang['GALLERY_FAILURE'] = 'Failure';
 $lang['GALLERY_LINK_URL'] = 'Link to image';
