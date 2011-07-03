@@ -27,7 +27,7 @@ $online = $online_short = array('userlist' => '');
 
 $sql = "
 	SELECT
-		u.username, u.user_id, u.user_allow_viewonline, u.user_level,
+		u.username, u.user_id, u.user_opt, u.user_level,
 		u.ignore_srv_load,
 		s.session_logged_in, s.session_ip, (s.session_time - s.session_start) AS ses_len, COUNT(s.session_id) AS sessions, COUNT(DISTINCT s.session_ip) AS ips
 	FROM ". BB_SESSIONS ." s, ". BB_USERS ." u

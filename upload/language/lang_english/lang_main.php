@@ -561,7 +561,10 @@ $lang['DATE_FORMAT_PROFILE'] = 'Date format';
 $lang['DATE_FORMAT_EXPLAIN'] = 'The syntax used is identical to the PHP <a href=\'http://www.php.net/date\' target=\'_other\'>date()</a> function.';
 $lang['SIGNATURE'] = 'Signature';
 $lang['SIGNATURE_EXPLAIN'] = 'This is a block of text that can be added to posts you make. There is a %d character limit';
+$lang['SIGNATURE_DISABLE'] = 'Signed off for violation of forum rules';
 $lang['PUBLIC_VIEW_EMAIL'] = 'Always show my e-mail address';
+
+$lang['EMAIL_EXPLAIN'] = 'At this address you will be sent to complete the registration';
 
 $lang['CURRENT_PASSWORD'] = 'Current password';
 $lang['NEW_PASSWORD'] = 'New password';
@@ -610,10 +613,12 @@ $lang['EMAIL_TAKEN'] = 'Sorry, but that e-mail address is already registered to 
 $lang['EMAIL_BANNED'] = 'Sorry, but <b>%s</b> address has been banned.';
 $lang['EMAIL_INVALID'] = 'Sorry, but this e-mail address is invalid.';
 $lang['SIGNATURE_TOO_LONG'] = 'Your signature is too long.';
+$lang['SIGNATURE_ERROR_HTML'] = 'The signature can contain only BBCode';
 $lang['FIELDS_EMPTY'] = 'You must fill in the required fields.';
 $lang['AVATAR_FILETYPE'] = 'The avatar filetype must be .jpg, .gif or .png';
 $lang['AVATAR_FILESIZE'] = 'The avatar image file size must be less than %d KB'; // The avatar image file size must be less than 6 KB
 $lang['AVATAR_IMAGESIZE'] = 'The avatar must be less than %d pixels wide and %d pixels high';
+$lang['AVATAR_DISABLE'] = 'You are not allowed to use an avatar.';
 
 $lang['WELCOME_SUBJECT'] = 'Welcome to %s Forums'; // Welcome to my.com forums
 $lang['NEW_ACCOUNT_SUBJECT'] = 'New user account';
@@ -1137,6 +1142,7 @@ $lang['BT_GEN_PASSKEY'] = 'Passkey';
 $lang['BT_GEN_PASSKEY_URL'] = 'Generate or change Passkey';
 $lang['BT_GEN_PASSKEY_EXPLAIN'] = 'Generate your personal id for torrent tracker';
 $lang['BT_GEN_PASSKEY_EXPLAIN_2'] = "<b>Warning!</b> After generating new id you'll need to <b>redownload all active torrent's!</b>";
+$lang['BT_GEN_PASSKEY_NEW'] = 'Are you sure you want to create a new passkey?';
 $lang['BT_GEN_PASSKEY_OK'] = 'New personal identifier generated';
 $lang['BT_NO_SEARCHABLE_FORUMS'] = 'No searchable forums found';
 

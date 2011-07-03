@@ -970,7 +970,7 @@ else if ( $submit || $refresh || $mode != '' )
 			// DelUsrKeepPM
 			$to_username_sql = str_replace("\'", "''", $to_username);
 
-			$sql = "SELECT user_id, user_notify_pm, user_email, user_lang, user_active
+			$sql = "SELECT user_id, user_opt, user_email, user_lang, user_active
 				FROM " . BB_USERS . "
 				WHERE username = '$to_username_sql'";
 
@@ -1123,7 +1123,7 @@ else if ( $submit || $refresh || $mode != '' )
 				message_die(GENERAL_ERROR, 'Could not update private message new/read status for user', '', __LINE__, __FILE__, $sql);
 			}
 
-			if ( $to_userdata['user_notify_pm'] && !empty($to_userdata['user_email']) && $to_userdata['user_active'] && $bb_cfg['pm_notify_enabled'] )
+			if ( bf($to_userdata['user_opt'], 'user_opt', 'notify_pm') && !empty($to_userdata['user_email']) && $to_userdata['user_active'] && $bb_cfg['pm_notify_enabled'] )
 			{
 				$script_name = preg_replace('/^\/?(.*?)\/?$/', "\\1", trim($bb_cfg['script_path']));
 				$script_name = ( $script_name != '' ) ? $script_name . '/privmsg.php' : 'privmsg.php';

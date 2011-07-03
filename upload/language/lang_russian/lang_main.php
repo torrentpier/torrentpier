@@ -566,7 +566,10 @@ $lang['DATE_FORMAT_PROFILE'] = 'Формат даты';
 $lang['DATE_FORMAT_EXPLAIN'] = 'Синтаксис идентичен функции <a href="http://www.php.net/date" target="_other">date()</a> языка PHP';
 $lang['SIGNATURE'] = 'Подпись';
 $lang['SIGNATURE_EXPLAIN'] = 'Это текст, который можно добавлять к размещаемым вами сообщениям. Длина его ограничена %d символами.';
+$lang['SIGNATURE_DISABLE'] = 'Подпись отключена за нарушение правил форума';
 $lang['PUBLIC_VIEW_EMAIL'] = 'Всегда показывать мой адрес e-mail';
+
+$lang['EMAIL_EXPLAIN'] = 'На этот адрес вам будет отправлено письмо для завершения регистрации';
 
 $lang['CURRENT_PASSWORD'] = 'Текущий пароль';
 $lang['NEW_PASSWORD'] = 'Новый пароль';
@@ -615,10 +618,12 @@ $lang['EMAIL_TAKEN'] = 'Извините, этот адрес e-mail уже за
 $lang['EMAIL_BANNED'] = 'Извините, адрес <b>%s</b> находится в чёрном списке';
 $lang['EMAIL_INVALID'] = 'Извините, этот адрес e-mail неправилен';
 $lang['SIGNATURE_TOO_LONG'] = 'Слишком длинная подпись';
+$lang['SIGNATURE_ERROR_HTML'] = 'Подпись может содержать только BBCode';
 $lang['FIELDS_EMPTY'] = 'Вы должны заполнить обязательные поля';
 $lang['AVATAR_FILETYPE'] = 'Файл аватары должен быть .jpg, .gif или .png';
 $lang['AVATAR_FILESIZE'] = 'Объём файла аватары должен быть не более %d кб';
 $lang['AVATAR_IMAGESIZE'] = 'Аватара должна быть не больше %d пикселов в ширину и %d пикселов в высоту';
+$lang['AVATAR_DISABLE'] = 'Вам запрещено использовать аватару.';
 
 $lang['WELCOME_SUBJECT'] = 'Добро пожаловать на форумы %s';
 $lang['NEW_ACCOUNT_SUBJECT'] = 'Новый пользователь';
@@ -1143,6 +1148,7 @@ $lang['BT_GEN_PASSKEY'] = 'Passkey';
 $lang['BT_GEN_PASSKEY_URL'] = 'Создать или изменить Passkey';
 $lang['BT_GEN_PASSKEY_EXPLAIN'] = 'Сгенерировать ваш личный id, который будет добавляться в торрент-файлы во время скачивания и затем использоваться трекером в качестве вашего аутентификатора.';
 $lang['BT_GEN_PASSKEY_EXPLAIN_2'] = '<b>Внимание!</b> После изменения или создания нового id вам будет необходимо <b>заново скачать все активные торренты!</b>';
+$lang['BT_GEN_PASSKEY_NEW'] = 'Вы уверены, что хотите создать новый passkey?';
 $lang['BT_GEN_PASSKEY_OK'] = 'Новый персональный идентификатор сгенеририван';
 $lang['BT_NO_SEARCHABLE_FORUMS'] = 'Доступных для поиска форумов не найдено';
 

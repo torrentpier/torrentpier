@@ -240,7 +240,7 @@ else if( isset($_GET['pane']) && $_GET['pane'] == 'right' )
 		//
 		// Get users online information.
 		//
-		$sql = "SELECT u.user_id, u.username, s.session_time AS user_session_time, u.user_allow_viewonline, s.session_logged_in, s.session_ip, s.session_start
+		$sql = "SELECT u.user_id, u.username, s.session_time AS user_session_time, u.user_opt, s.session_logged_in, s.session_ip, s.session_start
 			FROM " . BB_USERS . " u, " . BB_SESSIONS . " s
 			WHERE s.session_logged_in = 1
 				AND u.user_id = s.session_user_id
@@ -292,7 +292,7 @@ else if( isset($_GET['pane']) && $_GET['pane'] == 'right' )
 
 					$username = $onlinerow_reg[$i]['username'];
 
-					if( $onlinerow_reg[$i]['user_allow_viewonline'] )
+					if( !bf($onlinerow_reg[$i]['user_opt'], 'user_opt', 'allow_viewonline'))
 					{
 						$registered_users++;
 						$hidden = FALSE;

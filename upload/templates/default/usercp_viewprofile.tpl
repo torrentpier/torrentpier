@@ -255,7 +255,7 @@ $(document).ready(function(){
 </tr>
 <!-- IF SIGNATURE -->
 <tr>
-	<td class="row1" colspan="2">
+	<td class="row1 pad_4" colspan="2">
 	    <div class="signature">{SIGNATURE}</div>
 	</td>
 </tr>

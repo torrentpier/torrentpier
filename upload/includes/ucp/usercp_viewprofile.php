@@ -153,7 +153,11 @@ $signature = ($bb_cfg['allow_sig'] && $profiledata['user_sig']) ? $profiledata['
 
 if(bf($profiledata['user_opt'], 'user_opt', 'allow_sig'))
 {
-	$signature = 'Подпись удалена.';
+	if($profiledata['user_id'] == $userdata['user_id'])
+	{		$signature = $lang['SIGNATURE_DISABLE'];
+	}
+	else
+	{		$signature = '';	}
 }
 else if ($signature)
 {

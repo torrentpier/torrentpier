@@ -25,7 +25,7 @@ $is_auth_ary = auth(AUTH_VIEW, AUTH_LIST_ALL, $userdata);
 //
 // Get user list
 //
-$sql = "SELECT u.user_id, u.username, u.user_allow_viewonline, u.user_level, s.session_logged_in, s.session_time, s.session_ip
+$sql = "SELECT u.user_id, u.username, u.user_opt, u.user_level, s.session_logged_in, s.session_time, s.session_ip
 	FROM ".BB_USERS." u, ".BB_SESSIONS." s
 	WHERE u.user_id = s.session_user_id
 		AND s.session_time >= ".( time() - 300 ) . "
@@ -72,7 +72,7 @@ while ( $row = DB()->sql_fetchrow($result) )
 				$username = '<b class="colorGroup">' . $username . '</b>';
 			}
 
-			if ( !$row['user_allow_viewonline'] )
+			if ( bf($row['user_opt'], 'user_opt', 'allow_viewonline') )
 			{
 				$view_online = IS_AM;
 				$hidden_users++;

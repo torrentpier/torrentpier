@@ -43,7 +43,7 @@ switch ($mode)
 			// Отключение регистрации
 			if ($bb_cfg['new_user_reg_disabled'] || ($bb_cfg['reg_email_activation'] && $bb_cfg['emailer_disabled']))
 			{
-				bb_die('Регистрация новых пользователей временно отключена');
+				bb_die($lang['NEW_USER_REG_DISABLED']);
 			}
 			// Ограничение по времени
 			else if ($bb_cfg['new_user_reg_restricted'])
@@ -132,7 +132,7 @@ switch ($mode)
 
 		include(INC_DIR . 'ucp/usercp_avatar.php');
 
-		if ( bf($pr_data['user_opt'], 'user_opt', 'allowavatar') && ( $bb_cfg['allow_avatar_upload'] || $bb_cfg['allow_avatar_local'] || $bb_cfg['allow_avatar_remote'] ) )
+		if ( !bf($pr_data['user_opt'], 'user_opt', 'allowavatar') && ( $bb_cfg['allow_avatar_upload'] || $bb_cfg['allow_avatar_local'] || $bb_cfg['allow_avatar_remote'] ) )
 		{
 			$template->assign_block_vars('switch_avatar_block', array() );
 
@@ -322,6 +322,9 @@ foreach ($profile_fields as $field => $can_edit)
 		$user_opt = $pr_data['user_opt'];
 
 		$update_user_opt = array(
+		    'viewemail'        => true,
+		    'allow_viewonline' => true,
+		    'notify'           => true,
 			'notify_pm'        => true,
 			'hide_porn_forums' => true,
 		);
@@ -415,15 +418,11 @@ foreach ($profile_fields as $field => $can_edit)
 		{
 			if (mb_strlen($sig) > $bb_cfg['max_sig_chars'])
 			{
-				$errors[] = 'Слишком длинная подпись';
-			}
-			else if (preg_match('#speedtest|vkontakte|danasoft#i', $sig))
-			{
-				$errors[] = 'Подпись нарушает <a href="'. $bb_cfg['terms_and_conditions_url'] .'"><b>правила</b></a>';
+				$errors[] = $lang['SIGNATURE_TOO_LONG'];
 			}
 			else if (preg_match('#<(a|b|i|u|table|tr|td|img) #i', $sig) || preg_match('#(href|src|target|title)=#i', $sig))
 			{
-				$errors[] = 'Подпись может содержать только BBCode';
+				$errors[] = $lang['SIGNATURE_ERROR_HTML'];
 			}
 			else if ($sig != $pr_data['user_sig'])
 			{
@@ -620,8 +619,8 @@ foreach ($profile_fields as $field => $can_edit)
         	}
         	$tp_data['USER_AVATAR'] = get_avatar($user_avatar, $user_avatar_type) . $hidden_vars;        }
         else
-        {        	$tp_data['USER_AVATAR'] = get_avatar($pr_data['user_avatar'], $pr_data['user_avatar_type']);        }
-	    if ($submit)
+        {        	$tp_data['USER_AVATAR'] = get_avatar($pr_data['user_avatar'], $pr_data['user_avatar_type'], !bf($pr_data['user_opt'], 'user_opt', 'allowavatar'));        }
+	    if ($submit && !bf($pr_data['user_opt'], 'user_opt', 'allowavatar'))
 		{
 			if ( $user_avatar != $pr_data['user_avatar'] || $user_avatar_type != $pr_data['user_avatar_type'])
 			{
@@ -739,6 +738,9 @@ $template->assign_vars(array(
 	'TIMEZONE_SELECT'    => tz_select($user_timezone, 'user_timezone'),
 
     'AVATAR_EXPLAIN'     => sprintf($lang['AVATAR_EXPLAIN'], $bb_cfg['avatar_max_width'], $bb_cfg['avatar_max_height'], (round($bb_cfg['avatar_filesize'] / 1024))),
+    'SIGNATURE_EXPLAIN'  => sprintf($lang['SIGNATURE_EXPLAIN'], $bb_cfg['max_sig_chars']),
+
+    'SIG_DISALLOWED'     => bf($pr_data['user_opt'], 'user_opt', 'allow_sig'),
 
 	'PR_USER_ID'         => $pr_data['user_id'],
 	'U_RESET_AUTOLOGIN'  => "login.php?logout=1&amp;reset_autologin=1&amp;sid={$userdata['session_id']}",

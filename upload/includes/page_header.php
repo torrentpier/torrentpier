@@ -206,7 +206,7 @@ $template->assign_vars(array(
 	'LOGGED_IN'          => $logged_in,
 	'SESSION_USER_ID'    => $userdata['user_id'],
 	'THIS_USERNAME'      => $userdata['username'],
-	'THIS_AVATAR'  	     => get_avatar($userdata['user_avatar'], $userdata['user_avatar_type'], $userdata['user_allowavatar']),
+	'THIS_AVATAR'  	     => get_avatar($userdata['user_avatar'], $userdata['user_avatar_type'], !bf($userdata['user_opt'], 'user_opt', 'allowavatar')),
 	'SHOW_LOGIN_LINK'    => !defined('IN_LOGIN'),
 	'AUTOLOGIN_DISABLED' => !$bb_cfg['allow_autologin'],
 	'S_LOGIN_ACTION'     => BB_ROOT ."login.php",

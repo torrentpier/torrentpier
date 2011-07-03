@@ -866,7 +866,7 @@ for($i = 0; $i < $total_posts; $i++)
 	$user_sig = ($bb_cfg['allow_sig'] && !$user->opt_js['h_sig'] && $postrow[$i]['user_sig']) ? $postrow[$i]['user_sig'] : '';
 
 	if(bf($postrow[$i]['user_opt'], 'user_opt', 'allow_sig'))
-	{		$user_sig = 'Подпись удалена.';	}
+	{		$user_sig = $lang['SIGNATURE_DISABLE'];	}
 	else if ($user_sig)
 	{
 		$user_sig = bbcode2html($user_sig);
@@ -1036,7 +1036,7 @@ if ($bb_cfg['show_quick_reply'])
 		if (!IS_GUEST)
 		{
 			$template->assign_vars(array(
-				'QR_NOTIFY_CHECKED'    => ($userdata['user_notify'] || $is_watching_topic),
+				'QR_NOTIFY_CHECKED'    => (bf($userdata['user_opt'], 'user_opt', 'notify') || $is_watching_topic),
 			));
 		}
 	}

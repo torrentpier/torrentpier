@@ -254,8 +254,11 @@ class ajax_common
 	/**
 	*  Prompt for confirmation
 	*/
-	function prompt_for_confirm ($confirm_msg = 'Точно?')
+	function prompt_for_confirm ($confirm_msg)
 	{
+		global $lang;
+		if(!empty($confirm_msg)) $confirm_msg = $lang['CONFIRM'];
+
 		$this->response['prompt_confirm'] = 1;
 		$this->response['confirm_msg'] = $confirm_msg;
 		$this->send();
@@ -304,7 +307,7 @@ class ajax_common
 
     function change_user_opt ()
 	{
-		global $userdata, $bf;
+		global $userdata, $bf, $lang;
 
 		$user_id = (int) $this->request['user_id'];
 		$new_opt = bb_json_decode($this->request['user_opt']);
@@ -336,7 +339,7 @@ class ajax_common
 
 		DB()->query("UPDATE ". BB_USERS ." SET user_opt = {$u_data['user_opt']} WHERE user_id = $user_id LIMIT 1");
 
-		$this->response['resp_html'] = 'сохранено';
+		$this->response['resp_html'] = $lang['SAVED'];
 	}
 
 	function gen_passkey ()
@@ -349,8 +352,7 @@ class ajax_common
 		{
 			if (empty($this->request['confirmed']))
 			{
-				$msg  = "Вы уверены, что хотите создать новый passkey?";
-				$this->prompt_for_confirm($msg);
+				$this->prompt_for_confirm($lang['BT_GEN_PASSKEY_NEW']);
 			}
 
 			if (!$passkey = generate_passkey($req_uid, IS_ADMIN))

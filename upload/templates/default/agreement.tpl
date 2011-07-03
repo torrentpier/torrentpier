@@ -1,9 +1,9 @@
 
-<h1 class="pagetitle">Регистрация</h1>
+<h1 class="pagetitle">{PAGE_TITLE}</h1>
 
 <table class="forumline">
 <tr>
-	<th>{$bb_cfg['sitename']} - Условия регистрации</th>
+	<th>{SITENAME} - {REGISTRATION}</th>
 </tr>
 <tr>
 	<td class="row1">
