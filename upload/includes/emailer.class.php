@@ -161,7 +161,7 @@ class emailer
 		}
 		else
 		{
-			$this->encoding = !empty($lang['CONTENT_ENCODING']) ? trim($lang['CONTENT_ENCODING']) : $bb_cfg['email_default_charset'];
+			$this->encoding = trim($lang['CONTENT_ENCODING']);
 		}
 		$this->subject = $this->encode($this->subject);
 

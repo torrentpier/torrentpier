@@ -544,22 +544,6 @@ function make_url ($path)
 	return FULL_URL . preg_replace('#^\/?(.*?)\/?$#', '\1', $path);
 }
 
-if (STRIP_SLASHES)
-{
-	array_deep($_GET,     'stripslashes');
-	array_deep($_POST,    'stripslashes');
-	array_deep($_COOKIE,  'stripslashes');
-	array_deep($_REQUEST, 'stripslashes');
-	array_deep($_SERVER,  'stripslashes');
-	array_deep($_ENV,     'stripslashes');
-	array_deep($_FILES,   'stripslashes');
-}
-elseif (!defined('IN_AJAX'))
-{
-	array_deep($_GET,    'addslashes');
-	array_deep($_POST,   'addslashes');
-}
-
 require(INC_DIR .'functions.php');
 require(INC_DIR .'sessions.php');
 require(INC_DIR .'template.php');

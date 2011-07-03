@@ -287,7 +287,6 @@ $bb_cfg['gzip_force']    = false;                  // always compress (don't che
 
 // Sessions
 $bb_cfg['session_update_intrv']    = 180;          // sec
-
 $bb_cfg['user_session_duration']   = 1800;         // sec
 $bb_cfg['admin_session_duration']  = 6*3600;       // sec
 $bb_cfg['user_session_gc_ttl']     = 1800;         // number of seconds that a staled session entry may remain in sessions table
@@ -302,7 +301,6 @@ $bb_cfg['unique_ip']               = false;        // Deny registration of sever
 $bb_cfg['new_user_reg_restricted'] = false;
 $bb_cfg['reg_email_activation']    = false;
 
-
 // Email
 $bb_cfg['emailer_disabled']        = false;
 
@@ -313,7 +311,6 @@ $bb_cfg['email_change_disabled']   = false;        // disable changing email by 
 
 $bb_cfg['tech_admin_email']        = 'admin@' . $bb_cfg['server_name'];  // email for sending error reports
 $bb_cfg['abuse_email']             = 'abuse@' . $bb_cfg['server_name'];
-$bb_cfg['email_default_charset']   = 'UTF-8';
 
 // AJAX
 define('AJAX_HTML_DIR', BB_ROOT .'ajax/html/');
@@ -347,11 +344,6 @@ $bb_cfg['unlimited_users'] = array(
 );
 
 $bb_cfg['super_admins'] = array(
-#	user_id => 'name',
-	2 => 'admin',
-);
-
-$bb_cfg['no_form_token_users'] = array(
 #	user_id => 'name',
 	2 => 'admin',
 );
@@ -393,11 +385,8 @@ else
 }
 ini_set('error_log', LOG_DIR .'php_err.log');
 
-// Disable magic_quotes_runtime
-@set_magic_quotes_runtime(0);
-ini_set("magic_quotes_runtime", 0);
-define('STRIP_SLASHES', get_magic_quotes_gpc());
-if (STRIP_SLASHES) die('set magic_quotes off');
+// magic quotes
+if (get_magic_quotes_gpc()) die('set magic_quotes off');
 
 // Triggers
 define('BB_ENABLED',   TRIGGERS_DIR .'$on');

@@ -186,20 +186,29 @@ $(document).ready(function(){
 <!-- ENDIF -->
 </script>
 
-<!--[if lt IE 7]>
-<script type="text/javascript">
-$(document).ready(ie6_make_clickable_labels);
+<!--[if lte IE 6]><script type="text/javascript">
+$(ie6_make_clickable_labels);
 
-$(document).ready(function(){
-  	$('div.menu-sub').prepend('<iframe class="ie-fix-select-overlap"></iframe>'); // iframe for IE select box z-index issue
-  	Menu.iframeFix = true;
+$(function(){
+	$('div.menu-sub').prepend('<iframe class="ie-fix-select-overlap"></iframe>'); // iframe for IE select box z-index issue
+	Menu.iframeFix = true;
 });
-</script>
-<![endif]-->
+</script><![endif]-->
 
-<!--[if gte IE 7]><style type="text/css">input[type="checkbox"] { margin-bottom: -1px; }</style><![endif]-->
-<!--[if lte IE 6]><style type="text/css">.forumline th { height: 24px; padding: 2px 4px; }</style><![endif]-->
-<!--[if IE]><style type="text/css">.code-copy { display: block; }.post-hr   { margin: 2px auto; }</style><![endif]-->
+
+<!--[if gte IE 7]><style type="text/css">
+input[type="checkbox"] { margin-bottom: -1px; }
+</style><![endif]-->
+
+<!--[if lte IE 6]><style type="text/css">
+.forumline th { height: 24px; padding: 2px 4px; }
+.menu-sub iframe.ie-fix-select-overlap { display: none; display/**/: block; position: absolute; z-index: -1; filter: mask(); }
+</style><![endif]-->
+
+<!--[if IE]><style type="text/css">
+.post-hr { margin: 2px auto; }
+.fieldsets div > p { margin-bottom: 0; }
+</style><![endif]-->
 
 <!-- IF INCLUDE_DEVELOP_JS -->
 <script type="text/javascript" src="{#BB_ROOT}misc/js/develop.js"></script>
@@ -217,7 +226,7 @@ function OpenInEditor ($file, $line)
 </script>
 <!-- ENDIF / INCLUDE_DEVELOP_JS -->
 <style type="text/css">
-	.menu-sub, #ajax-loading, #ajax-error, var.ajax-params { display: none; }
+	.menu-sub, #ajax-loading, #ajax-error, var.ajax-params, .sp-title { display: none; }
 </style>
 </head>
 

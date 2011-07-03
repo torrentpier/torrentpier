@@ -299,7 +299,7 @@ if ($submit || $refresh)
 }
 else
 {
-	if (!IS_GUEST && $mode != 'newtopic' && bf($userdata['user_opt'], 'user_opt', 'user_notify'))
+	if (!IS_GUEST && $mode != 'newtopic' && bf($userdata['user_opt'], 'user_opt', 'notify'))
 	{
 		$notify_user = (int) DB()->fetch_row("
 			SELECT topic_id

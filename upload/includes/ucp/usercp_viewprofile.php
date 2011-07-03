@@ -234,7 +234,7 @@ if (IS_ADMIN)
 	$template->assign_vars(array(
 		'EDITABLE_TPLS' => true,
 
-		'U_MANAGE'      => "admin/admin_users.php?mode=edit&amp;u={$profiledata['user_id']}",
+		'U_MANAGE'      => "profile.php?mode=editprofile&amp;u={$profiledata['user_id']}",
 		'U_PERMISSIONS' => "admin/admin_ug_auth.php?mode=user&amp;u={$profiledata['user_id']}",
 	));
 

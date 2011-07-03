@@ -1241,12 +1241,6 @@ else if (defined('IN_TRACKER'))
 	header('Content-Type: text/plain');
 	header('Pragma: no-cache');
 
-	if (STRIP_SLASHES)
-	{
-		array_deep($_GET, 'stripslashes');
-		array_deep($_POST, 'stripslashes');
-	}
-
 	if (!defined('IN_ADMIN'))
 	{
 		// Exit if tracker is disabled via ON/OFF trigger
