@@ -636,7 +636,7 @@ INSERT INTO `bb_config` VALUES ('report_hack_count', '0');
 INSERT INTO `bb_config` VALUES ('report_notify', '0');
 INSERT INTO `bb_config` VALUES ('report_list_admin', '0');
 INSERT INTO `bb_config` VALUES ('report_new_window', '0');
-INSERT INTO `bb_config` VALUES ('torrent_pass_private_key', 'вставить_из_конфига_XBTT);
+INSERT INTO `bb_config` VALUES ('torrent_pass_private_key', 'вставить_из_конфига_XBTT');
 
 -- --------------------------------------------------------
 
