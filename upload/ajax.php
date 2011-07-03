@@ -307,7 +307,7 @@ class ajax_common
 
     function change_user_opt ()
 	{
-		global $userdata, $bf, $lang;
+		global $bf, $lang;
 
 		$user_id = (int) $this->request['user_id'];
 		$new_opt = bb_json_decode($this->request['user_opt']);
@@ -330,6 +330,9 @@ class ajax_common
 		}
 
 		DB()->query("UPDATE ". BB_USERS ." SET user_opt = {$u_data['user_opt']} WHERE user_id = $user_id LIMIT 1");
+
+        // Удаляем данные из кеша
+        cache_rm_user_sessions ($user_id);
 
 		$this->response['resp_html'] = $lang['SAVED'];
 	}

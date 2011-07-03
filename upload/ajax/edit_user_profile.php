@@ -101,4 +101,6 @@ switch ($field)
 $value_sql = DB()->escape($value, true);
 DB()->query("UPDATE $table SET $field = $value_sql WHERE user_id = $user_id LIMIT 1");
 
+cache_rm_user_sessions ($user_id);
+
 $this->response['edit_id'] = $this->request['edit_id'];

@@ -705,13 +705,15 @@ if ($submit && !$errors)
 
 			DB()->query("UPDATE ". BB_USERS ." SET $sql_args WHERE user_id = {$pr_data['user_id']} LIMIT 1");
 
-			if ($pr_data['user_id'] != $user->id)
+			if ($pr_data['user_id'] != $userdata['user_id'])
 			{
 				if ($pr_data['user_level'] == MOD && !empty($db_data['username']))
 				{
 					$datastore->update('moderators');
 				}
 			}
+
+            cache_rm_user_sessions ($pr_data['user_id']);
 
 			$die_msg = ($adm_edit) ? "Профиль <b>{$pr_data['username']}</b> был успешно изменён" : 'Ваш профиль был успешно изменён';
 			bb_die($die_msg);
