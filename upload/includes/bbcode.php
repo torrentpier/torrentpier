@@ -589,24 +589,24 @@ class bbcode
 		$email_exp   = '[a-z0-9&\-_.]+?@[\w\-]+\.([\w\-\.]+\.)?[\w]+';
 
 		$this->preg = array(
-			'#\[quote="(.+?)"\]#'                                 => $tpl['quote_username_open'],
-			'#\[spoiler="(.+?)"\]#'                               => $tpl['spoiler_title_open'],
-			'#\[list=(a|A|i|I|1)\]#'                              => '<ul type="$1">',
-			'#\[\*=(\d+)\]#'                                      => '<li value="$1">',
-			'#\[pre\](.*?)\[/pre\]#s'                             => '<pre class="post-pre">$1</pre>',
-			'#\[name=([a-zA-Z0-9_]+?)\]#'                         => '<a name="$1"></a>',
-			'#\[url=\#([a-zA-Z0-9_]+?)\](.*?)\[/url\]#'           => '<a class="postLink-name" href="#$1">$2</a>',
-			'#\[color=([\#0-9a-zA-Z]+)\]#'                        => '<span style="color: $1;">',
-			'#\[size=([1-2]?[0-9])\]#'                            => '<span style="font-size: $1px; line-height: normal;">',
-			'#\[align=(left|right|center|justify)\]#'             => '<span class="post-align" style="text-align: $1;">',
-			'#\[font="([\w\- \']+)"\]#'                           => '<span style="font-family: $1;">',
-			"#\[img\]($img_url_exp)\[/img\]#"                    => $tpl['img'],
-			"#\[img=(left|right)\]($img_url_exp)\[/img\]\s*#"    => $tpl['img_aligned'],
-			"#\[email\]($email_exp)\[/email\]#"                  => '<a href="mailto:$1">$1</a>',
-			"#\[url\](https?://$url_exp)\[/url\]#"               => '<a href="$1" class="postLink">$1</a>',
-			"#\[url\](www\.$url_exp)\[/url\]#"                   => '<a href="http://$1" class="postLink">$1</a>',
-			"#\[url=(https?://$url_exp)\]([^?\n\t].*?)\[/url\]#" => '<a href="$1" class="postLink">$2</a>',
-			"#\[url=(www\.$url_exp)\]([^?\n\t].*?)\[/url\]#"     => '<a href="http://$1" class="postLink">$2</a>',
+			'#\[quote="(.+?)"\]#i'                                 => $tpl['quote_username_open'],
+			'#\[spoiler="(.+?)"\]#i'                               => $tpl['spoiler_title_open'],
+			'#\[list=(a|A|i|I|1)\]#i'                              => '<ul type="$1">',
+			'#\[\*=(\d+)\]#i'                                      => '<li value="$1">',
+			'#\[pre\](.*?)\[/pre\]#si'                             => '<pre class="post-pre">$1</pre>',
+			'#\[name=([a-zA-Z0-9_]+?)\]#i'                         => '<a name="$1"></a>',
+			'#\[url=\#([a-zA-Z0-9_]+?)\](.*?)\[/url\]#i'           => '<a class="postLink-name" href="#$1">$2</a>',
+			'#\[color=([\#0-9a-zA-Z]+)\]#'                         => '<span style="color: $1;">',
+			'#\[size=([1-2]?[0-9])\]#i'                            => '<span style="font-size: $1px; line-height: normal;">',
+			'#\[align=(left|right|center|justify)\]#i'             => '<span class="post-align" style="text-align: $1;">',
+			'#\[font="([\w\- \']+)"\]#i'                           => '<span style="font-family: $1;">',
+			"#\[img\]($img_url_exp)\[/img\]#i"                     => $tpl['img'],
+			"#\[img=(left|right)\]($img_url_exp)\[/img\]\s*#i"     => $tpl['img_aligned'],
+			"#\[email\]($email_exp)\[/email\]#i"                   => '<a href="mailto:$1">$1</a>',
+			"#\[url\](https?://$url_exp)\[/url\]#i"                => '<a href="$1" class="postLink">$1</a>',
+			"#\[url\](www\.$url_exp)\[/url\]#i"                    => '<a href="http://$1" class="postLink">$1</a>',
+			"#\[url=(https?://$url_exp)\]([^?\n\t].*?)\[/url\]#i"  => '<a href="$1" class="postLink">$2</a>',
+			"#\[url=(www\.$url_exp)\]([^?\n\t].*?)\[/url\]#i"      => '<a href="http://$1" class="postLink">$2</a>',
 		);
 
 		$this->str = array(
@@ -825,10 +825,17 @@ class bbcode
 	*/
 	function make_url_clickable_callback ($m)
 	{
+		global $bb_cfg;
+
 		$max_len = 70;
 		$href    = $m[1];
 		$name    = (strlen($href) > $max_len) ? substr($href, 0, $max_len - 19) .'...'. substr($href, -16) : $href;
-
+        if(!preg_match("#{$bb_cfg['server_name']}#", $href))
+        {
+        	require_once(INC_DIR .'class.idna_convert.php');
+        	$IDN = new idna_convert();
+        	return '<a href="'. make_url('/redirect.php?url=') . base64_encode($IDN->encode($href)) .'" class="postLink" target="_blank">'. $name .'</a>';
+        }
 		return "<a href=\"$href\" class=\"postLink\">$name</a>";
 	}
 
