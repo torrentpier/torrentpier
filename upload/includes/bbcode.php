@@ -867,7 +867,7 @@ class bbcode
 	*/
 	function tidy ($text)
 	{
-		$text = tidy_repair_string($text, $this->tidy_cfg, 'raw');
+		$text = tidy_repair_string($text, $this->tidy_cfg, 'utf8');
 		return $text;
 	}
 }
