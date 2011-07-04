@@ -798,11 +798,12 @@ class bbcode
 			(?<![\"'=])
 			\b
 			(
-				https?://[\w\#$%&~/.\-;:=?@\[\]+]+
+				(https?://|ftp://|www\.|ftp\.)
+				[\w\#!$%&~/.\-;:=?@а-яА-Я\[\]+]+
 			)
 			(?![\"']|\[/url|\[/img|</a)
 			(?=[,!]?\s|[\)<!])
-		#xi";
+		#xiu";
 
 		// pad it with a space so we can match things at the start of the 1st line.
 		$ret = " $text ";
