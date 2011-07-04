@@ -14,22 +14,13 @@ $page_cfg['include_bbcode_js'] = true;
 function get_bbcode_tpl ()
 {
 $bbcode_tpl = array();
+
 // Quote
-/*
-<div class="q-wrap">
-	<div class="q-head"><b>Цитата:</b></div>
-	<div class="q">
-*/
 $bbcode_tpl['quote_open'] = <<<HTML
 	<div class="q-wrap">
 		<div class="q">
 HTML;
 
-/*
-	<div class="q-wrap">
-		<div class="q-head"><b>\\1</b> писал(а):</div>
-		<div class="q">
-*/
 $bbcode_tpl['quote_username_open'] = <<<HTML
 	<div class="q-wrap">
 		<div class="q" head="\\1">
@@ -53,21 +44,11 @@ $bbcode_tpl['code_close'] = <<<HTML
 HTML;
 
 // Spoiler
-/*
-	<div class="sp-wrap">
-		<div class="sp-head folded clickable">скрытый текст</div>
-		<div class="sp-body">
-*/
 $bbcode_tpl['spoiler_open'] = <<<HTML
 	<div class="sp-wrap">
 		<div class="sp-body">
 HTML;
 
-/*
-	<div class="sp-wrap">
-		<div class="sp-head folded clickable">\\1</div>
-		<div class="sp-body">
-*/
 $bbcode_tpl['spoiler_title_open'] = <<<HTML
 	<div class="sp-wrap">
 		<div class="sp-body" title="\\1">
@@ -80,7 +61,9 @@ $bbcode_tpl['spoiler_close'] = <<<HTML
 HTML;
 
 // Image
-$bbcode_tpl['img'] = '<var class="postImg" title="$1">&#10;</var>';
+$bbcode_tpl['img'] = <<<HTML
+	<var class="postImg" title="$1">&#10;</var>
+HTML;
 
 $bbcode_tpl['img_aligned'] = <<<HTML
 	<var class="postImg postImgAligned img-\\1" title="\\2">&#10;</var>
@@ -520,10 +503,10 @@ function add_search_words ($post_id, $post_message, $post_title = '', $only_retu
 
 class bbcode
 {
-	var $tpl        = array();               // шаблоны для замены тегов
-	var $smilies    = null;
-	var $found_spam = null;                  // найденные спам "слова"
-	var $del_words  = array();               // см. get_words_rate()
+	var $tpl        = array(); // шаблоны для замены тегов
+	var $smilies    = null;    // смайлы
+	var $found_spam = null;    // найденные спам "слова"
+	var $del_words  = array(); // см. get_words_rate()
 	var $tidy_cfg = array(
 				'drop-empty-paras'  => false,
 				'fix-uri'           => false,
@@ -532,7 +515,7 @@ class bbcode
 				'join-classes'      => false,
 				'join-styles'       => false,
 				'merge-divs'        => false,
-#				'merge-spans'       => false,      // нужно будет включить после обновления версии tidy
+				'merge-spans'       => false,
 				'newline'           => 'LF',
 				'output-xhtml'      => true,
 				'preserve-entities' => true,
@@ -542,7 +525,7 @@ class bbcode
 				'show-errors'       => false,
 				'show-warnings'     => false,
 				'wrap'              => 0,
-			);
+	);
 	var $block_tags = array(
 				'align',
 				'br',
@@ -552,7 +535,7 @@ class bbcode
 				'pre',
 				'quote',
 				'spoiler',
-			);
+	);
 	var $preg        = array();
 	var $str         = array();
 	var $preg_search = array();
@@ -584,7 +567,6 @@ class bbcode
 	{
 		$tpl         = $this->tpl;
 		$img_url_exp = 'http://[^\s\?&;:=\#\"<>]+?\.(jpg|jpeg|gif|png)';
-
 		$email_exp   = '[a-z0-9&\-_.]+?@[\w\-]+\.([\w\-\.]+\.)?[\w]+';
 
 		$this->preg = array(
@@ -618,7 +600,7 @@ class bbcode
 			'[/font]'    => '</span>',
 			'[tab]'      => ' ',
 			'[br]'       => "\n\n",
-			'[hr]'       => $tpl['hr'],                #  $('.post-hr').html('<hr align="left" />');
+			'[hr]'       => $tpl['hr'],
 			'[b]'        => '<span class="post-b">',
 			'[/b]'       => '</span>',
 			'[u]'        => '<span class="post-u">',
