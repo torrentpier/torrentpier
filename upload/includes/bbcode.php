@@ -507,7 +507,7 @@ class bbcode
 	var $smilies    = null;    // смайлы
 	var $found_spam = null;    // найденные спам "слова"
 	var $del_words  = array(); // см. get_words_rate()
-	var $tidy_cfg = array(
+	var $tidy_cfg   = array(
 				'drop-empty-paras'  => false,
 				'fix-uri'           => false,
 				'force-output'      => true,
@@ -669,7 +669,7 @@ class bbcode
 	{
 		$text = trim($text);
 		$text = str_replace("\r", '', $text);
-		$text = preg_replace('#[ \t]+$#m', '', $text);    // trailing spaces
+		$text = preg_replace('#[ \t]+$#m', '', $text); // trailing spaces
 		$text = preg_replace('#\n{3,}#', "\n\n", $text);
 		return $text;
 	}
@@ -771,7 +771,7 @@ class bbcode
 	{
 		global $bb_cfg;
 
-        $url_regexp = array();
+		$url_regexp = array();
 		$url_regexp[] = "#\[url\]([\w]+?://[\w\#!$%&~/.\-;:=,?@а-яА-Я\[\]+]+?)\[/url\]#isu";
 		$url_regexp[] = "#\[url\]((www|ftp)\.[\w\#!$%&~/.\-;:=,?@а-яА-Я\[\]+]+?)\[/url\]#isu";
 		$url_regexp[] = "#\[url=([\w]+?://[\w\#!$%&~/.\-;:=,?@а-яА-Я\[\]+]*?)\]([^?\n\r\t].*?)\[/url\]#isu";
@@ -807,15 +807,15 @@ class bbcode
 
 		if(mb_strlen($name, 'UTF-8'))
 		{
-			$anme = mb_substr($name, 0, $max_len - 19, 'UTF-8') .'...'. mb_substr($name, -16, 'UTF-8');
+			$name = mb_substr($name, 0, $max_len - 19, 'UTF-8') .'...'. mb_substr($name, -16, 'UTF-8');
 		}
 
-        if(!preg_match("#{$bb_cfg['server_name']}#", $href))
-        {
-        	require_once(INC_DIR .'class.idna_convert.php');
-        	$IDN = new idna_convert();
-        	return '<a href="'. make_url('/redirect.php?url=') . base64_encode($IDN->encode($href)) .'" class="postLink" target="_blank">'. $name .'</a>';
-        }
+		if(!preg_match("#{$bb_cfg['server_name']}#", $href))
+		{
+			require_once(INC_DIR .'class.idna_convert.php');
+			$IDN = new idna_convert();
+			return '<a href="'. make_url('/redirect.php?url=') . base64_encode($IDN->encode($href)) .'" class="postLink" target="_blank">'. $name .'</a>';
+		}
 		return "<a href=\"$href\" class=\"postLink\">$name</a>";
 	}
 
