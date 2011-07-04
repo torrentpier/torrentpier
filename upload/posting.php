@@ -502,7 +502,7 @@ else if ( ($submit || $confirm) && !$topic_has_new_posts )
 			{
 				$topic_type = ( isset($post_data['topic_type']) && $topic_type != $post_data['topic_type'] && !$is_auth['auth_sticky'] && !$is_auth['auth_announce'] ) ? $post_data['topic_type'] : $topic_type;
 
-				submit_post($mode, $post_data, $return_message, $return_meta, $forum_id, $topic_id, $post_id, $poll_id, $topic_type, str_replace("\'", "''", $username), str_replace("\'", "''", $subject), str_replace("\'", "''", $message), str_replace("\'", "''", $poll_title), $poll_options, $poll_length, $update_post_time);
+				submit_post($mode, $post_data, $return_message, $return_meta, $forum_id, $topic_id, $post_id, $poll_id, $topic_type, DB()->escape($username), DB()->escape($subject), DB()->escape($message), DB()->escape($poll_title), $poll_options, $poll_length, $update_post_time);
 			}
 			break;
 
@@ -561,11 +561,11 @@ else if ( ($submit || $confirm) && !$topic_has_new_posts )
 if( $refresh || isset($_POST['del_poll_option']) || $error_msg || ($submit && $topic_has_new_posts) )
 //snp end
 {
-	$username = ( !empty($_POST['username']) ) ? htmlspecialchars(trim(stripslashes($_POST['username']))) : '';
-	$subject = ( !empty($_POST['subject']) ) ? htmlspecialchars(trim(stripslashes($_POST['subject']))) : '';
-	$message = ( !empty($_POST['message']) ) ? htmlspecialchars(trim(stripslashes($_POST['message']))) : '';
+	$username = ( !empty($_POST['username']) ) ? clean_username($_POST['username']) : '';
+	$subject = ( !empty($_POST['subject']) ) ? clean_title($_POST['subject']) : '';
+	$message = ( !empty($_POST['message']) ) ? $_POST['message'] : '';
 
-	$poll_title = ( !empty($_POST['poll_title']) ) ? htmlspecialchars(trim(stripslashes($_POST['poll_title']))) : '';
+	$poll_title = ( !empty($_POST['poll_title']) ) ? clean_title($_POST['poll_title']) : '';
 	$poll_length = ( isset($_POST['poll_length']) ) ? max(0, intval($_POST['poll_length'])) : 0;
 
 	$poll_options = array();
@@ -580,66 +580,30 @@ if( $refresh || isset($_POST['del_poll_option']) || $error_msg || ($submit && $t
 			}
 			else if ( !empty($option_text) )
 			{
-				$poll_options[$option_id] = htmlspecialchars(trim(stripslashes($option_text)));
+				$poll_options[$option_id] = clean_title($option_text);
 			}
 		}
 	}
 
 	if ( $poll_add && !empty($_POST['add_poll_option_text']) )
 	{
-		$poll_options[] = htmlspecialchars(trim(stripslashes($_POST['add_poll_option_text'])));
+		$poll_options[] = clean_title($_POST['add_poll_option_text']);
 	}
 
 	if ($preview)
 	{
-		$preview_message = $msg_html = $msg_html_tidy = '';
-
-		$text = $message;
-		$text = htmlCHR($text, false, ENT_NOQUOTES);
-		$preview_message = bbcode2html($text);  // создает объект $bbcode
-
-		// ### DBG ###
-		if (0 && $user->id == 10838)
-		{
-			$text = $_POST['message'];
-			$text = htmlCHR($text, false, ENT_NOQUOTES);
-			$msg_html_tidy = $bbcode->bbcode2html($text, true);
-
-			if (1 && !empty($_COOKIE['explain']))
-			{
-				$msg_html = $bbcode->bbcode2html($text, false);
-
-				$msg_html = html_compact($msg_html, true);
-				$msg_html_tidy = html_compact($msg_html_tidy, true);
-				$preview_message = html_compact($preview_message, true);
-
-				file_write($msg_html, LOG_DIR.'before_tidy', false, true, true);
-				file_write($msg_html_tidy, LOG_DIR.'after_tidy', false, true, true);
-			}
-			$template->assign_vars(array(
-				'MSG_HTML_TIDY' => $msg_html_tidy,
-			));
-		}
-		if (IS_AM)
-		{
-			$template->assign_vars(array(
-				'SPAM_WORD' => ($bbcode->found_spam) ? '<pre>'. htmlCHR(join("\n", $bbcode->found_spam)) .'</pre>' : '',
-			));
-		}
-		if (0 && $user->id == 10838)
-		{
-			$template->assign_vars(array(
-				'PREVIEW_INPUT_SRC' => get_html_src($_POST['message']),
-				'PREVIEW_HTML_SRC'  => get_html_src($preview_message),
-			));
-		}
-		// ### DBG ###
+		$preview_subject  = $subject;
+		$preview_username = $username;
+		$preview_message  = bbcode2html($message);
 
 		$template->assign_vars(array(
-			'TPL_PREVIEW_POST'  => true,
-			'PREVIEW_MSG'       => $preview_message,
+			'TPL_PREVIEW_POST' => true,
+			'TOPIC_TITLE'    => wbr($preview_subject),
+			'POST_SUBJECT'   => $preview_subject,
+			'POSTER_NAME'    => $preview_username,
+			'POST_DATE'      => bb_date(TIMENOW),
+			'PREVIEW_MSG'    => $preview_message,
 		));
-
 	}
 }
 else
@@ -663,10 +627,6 @@ else
 	{
 		$subject = ( $post_data['first_post'] ) ? $post_info['topic_title'] : $post_info['post_subject'];
 		$message = $post_info['post_text'];
-
-		$message = str_replace('<', '&lt;', $message);
-		$message = str_replace('>', '&gt;', $message);
-		$message = str_replace('<br />', "\n", $message);
 
 		if ( $mode == 'quote' )
 		{

@@ -440,7 +440,7 @@ switch ($mode)
 				}
 				while ($row = DB()->sql_fetchrow($result));
 
-				$post_subject = trim(htmlspecialchars($_POST['subject']));
+				$post_subject = clean_title($_POST['subject']);
 				if (empty($post_subject))
 				{
 					message_die(GENERAL_MESSAGE, $lang['EMPTY_SUBJECT']);
@@ -464,7 +464,7 @@ switch ($mode)
 				DB()->sql_freeresult($result);
 
 				$sql  = "INSERT INTO " . BB_TOPICS . " (topic_title, topic_poster, topic_time, forum_id, topic_status, topic_type)
-					VALUES ('" . str_replace("\'", "''", $post_subject) . "', $first_poster, " . $topic_time . ", $new_forum_id, " . TOPIC_UNLOCKED . ", " . POST_NORMAL . ")";
+					VALUES ('" . DB()->escape($post_subject) . "', $first_poster, " . $topic_time . ", $new_forum_id, " . TOPIC_UNLOCKED . ", " . POST_NORMAL . ")";
 				if (!(DB()->sql_query($sql)))
 				{
 					message_die(GENERAL_ERROR, 'Could not insert new topic', '', __LINE__, __FILE__, $sql);

@@ -144,7 +144,7 @@ if( $mode != "" )
 				}
 			}
 			$sql = "UPDATE " . BB_RANKS . "
-				SET rank_title = '" . str_replace("\'", "''", $rank_title) . "', rank_special = $special_rank, rank_min = $min_posts, rank_image = '" . str_replace("\'", "''", $rank_image) . "'
+				SET rank_title = '" . DB()->escape($rank_title) . "', rank_special = $special_rank, rank_min = $min_posts, rank_image = '" . DB()->escape($rank_image) . "'
 				WHERE rank_id = $rank_id";
 
 			$message = $lang['RANK_UPDATED'];
@@ -152,7 +152,7 @@ if( $mode != "" )
 		else
 		{
 			$sql = "INSERT INTO " . BB_RANKS . " (rank_title, rank_special, rank_min, rank_image)
-				VALUES ('" . str_replace("\'", "''", $rank_title) . "', $special_rank, $min_posts, '" . str_replace("\'", "''", $rank_image) . "')";
+				VALUES ('" . DB()->escape($rank_title) . "', $special_rank, $min_posts, '" . DB()->escape($rank_image) . "')";
 
 			$message = $lang['RANK_ADDED'];
 		}

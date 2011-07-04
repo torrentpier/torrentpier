@@ -77,7 +77,7 @@ if (isset($report_module))
 	if (isset($_POST['submit']))
 	{
 		$report_reason = (isset($_POST['reason'])) ? (int) $_POST['reason'] : 0;
-		$report_desc = (isset($_POST['message'])) ? htmlspecialchars($_POST['message']) : '';
+		$report_desc = (isset($_POST['message'])) ? $_POST['message'] : '';
 
 		//
 		// Obtain report title if necessary
@@ -88,7 +88,7 @@ if (isset($report_module))
 		}
 		else
 		{
-			$report_title = (isset($_POST['title'])) ? htmlspecialchars($_POST['title']) : '';
+			$report_title = (isset($_POST['title'])) ? $_POST['title'] : '';
 			$report_subject_id = 0;
 		}
 
@@ -110,8 +110,8 @@ if (isset($report_module))
 		//
 		if (empty($errors))
 		{
-			$report_desc = str_replace("\'", "'", $report_desc);
-			$report_title = str_replace("\'", "'", $report_title);
+			$report_desc = DB()->escape($report_desc);
+			$report_title = clean_title($report_title);
 
 			report_insert($report_module->id, $report_subject_id, $report_reason, $report_title, $report_desc, false);
 
@@ -304,7 +304,7 @@ else
 			{
 				if (isset($_POST['confirm']))
 				{
-					$comment = (isset($_POST['comment'])) ? htmlspecialchars(str_replace("\'", "'", $_POST['comment'])) : '';
+					$comment = (isset($_POST['comment'])) ? DB()->escape($_POST['comment']) : '';
 
 					switch ($mode)
 					{

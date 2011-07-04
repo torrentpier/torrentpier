@@ -18,8 +18,8 @@ if ( isset($_POST['submit']) )
 
 	$sql = "SELECT *
 		FROM " . BB_USERS . "
-		WHERE user_email = '" . str_replace("\'", "''", $email) . "'
-			AND username = '" . str_replace("\'", "''", $username) . "'";
+		WHERE user_email = '" . DB()->escape($email) . "'
+			AND username = '" . DB()->escape($username) . "'";
 	if ( $result = DB()->sql_query($sql) )
 	{
 		if ( $row = DB()->sql_fetchrow($result) )

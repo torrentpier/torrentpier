@@ -893,7 +893,7 @@ for($i = 0; $i < $total_posts; $i++)
 	//
 	if ($user_sig)
 	{
-		$user_sig = '<br />_________________<br />' . str_replace("\n", "\n<br />\n", $user_sig);
+		$user_sig = '<br />_________________<br />'. $user_sig;
 	}
 
 	//

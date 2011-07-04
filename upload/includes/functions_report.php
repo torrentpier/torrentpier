@@ -1072,8 +1072,8 @@ function report_insert($module_id, $report_subject, $report_reason, $report_titl
 	$sql = 'INSERT INTO ' . BB_REPORTS . ' (user_id, report_time, report_module_id, report_status, report_reason_id,
 		report_subject, report_subject_data, report_title, report_desc)
 		VALUES (' . $userdata['user_id'] . ', ' . time() . ', ' . (int) $module_id . ', ' . REPORT_NEW . ', ' . (int) $report_reason . ',
-			' . (int) $report_subject . ", $report_subject_data_sql, '" . str_replace("'", "''", $report_title) . "',
-			'" . str_replace("'", "''", $report_desc) . "')";
+			' . (int) $report_subject . ", $report_subject_data_sql, '" . DB()->escape($report_title) . "',
+			'" . DB()->escape($report_desc) . "')";
 	if (!DB()->sql_query($sql))
 	{
 		message_die(GENERAL_ERROR, 'Could not insert report', '', __LINE__, __FILE__, $sql);
@@ -1185,7 +1185,7 @@ function reports_update_status($report_ids, $report_status, $comment = '', $auth
 	//
 	// Insert report status changes and update reports
 	//
-	$comment = str_replace("'", "''", $comment);
+	$comment = DB()->escape($comment);
 	foreach ($report_ids as $report_id)
 	{
 		$sql = 'INSERT INTO ' . BB_REPORTS_CHANGES . " (report_id, user_id, report_change_time, report_status, report_change_comment)

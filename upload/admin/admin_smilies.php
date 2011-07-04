@@ -121,8 +121,8 @@ if( isset($_GET['import_pack']) || isset($_POST['import_pack']) )
 					if( !empty($replace_existing) )
 					{
 						$sql = "UPDATE " . BB_SMILIES . "
-							SET smile_url = '" . str_replace("\'", "''", $smile_data[0]) . "', emoticon = '" . str_replace("\'", "''", $smile_data[1]) . "'
-							WHERE code = '" . str_replace("\'", "''", $smile_data[$j]) . "'";
+							SET smile_url = '" . DB()->escape($smile_data[0]) . "', emoticon = '" . DB()->escape($smile_data[1]) . "'
+							WHERE code = '" . DB()->escape($smile_data[$j]) . "'";
 					}
 					else
 					{
@@ -132,7 +132,7 @@ if( isset($_GET['import_pack']) || isset($_POST['import_pack']) )
 				else
 				{
 					$sql = "INSERT INTO " . BB_SMILIES . " (code, smile_url, emoticon)
-						VALUES('" . str_replace("\'", "''", $smile_data[$j]) . "', '" . str_replace("\'", "''", $smile_data[0]) . "', '" . str_replace("\'", "''", $smile_data[1]) . "')";
+						VALUES('" . DB()->escape($smile_data[$j]) . "', '" . DB()->escape($smile_data[0]) . "', '" . DB()->escape($smile_data[1]) . "')";
 				}
 
 				if( $sql != '' )
@@ -357,7 +357,7 @@ else if ( $mode != "" )
 			// Proceed with updating the smiley table.
 			//
 			$sql = "UPDATE " . BB_SMILIES . "
-				SET code = '" . str_replace("\'", "''", $smile_code) . "', smile_url = '" . str_replace("\'", "''", $smile_url) . "', emoticon = '" . str_replace("\'", "''", $smile_emotion) . "'
+				SET code = '" . DB()->escape($smile_code) . "', smile_url = '" . DB()->escape($smile_url) . "', emoticon = '" . DB()->escape($smile_emotion) . "'
 				WHERE smilies_id = $smile_id";
 			if( !($result = DB()->sql_query($sql)) )
 			{
@@ -402,7 +402,7 @@ else if ( $mode != "" )
 			// Save the data to the smiley table.
 			//
 			$sql = "INSERT INTO " . BB_SMILIES . " (code, smile_url, emoticon)
-				VALUES ('" . str_replace("\'", "''", $smile_code) . "', '" . str_replace("\'", "''", $smile_url) . "', '" . str_replace("\'", "''", $smile_emotion) . "')";
+				VALUES ('" . DB()->escape($smile_code) . "', '" . DB()->escape($smile_url) . "', '" . DB()->escape($smile_emotion) . "')";
 			$result = DB()->sql_query($sql);
 			if( !$result )
 			{

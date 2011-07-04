@@ -866,7 +866,7 @@ function username_search ($search_match)
 		$sql = "
 			SELECT username
 			FROM ". BB_USERS ."
-			WHERE username LIKE '". str_replace("\'", "''", $username_search) . "'
+			WHERE username LIKE '". DB()->escape($username_search) . "'
 				AND user_id <> ". ANONYMOUS ."
 			ORDER BY username
 			LIMIT 200

@@ -182,7 +182,6 @@ if ($var =& $_REQUEST[$title_match_key])
 {
 	if ($tmp_title_match = substr(urldecode(trim($var)), 0, $title_match_max_len))
 	{
-		$title_match_val = htmlspecialchars($tmp_title_match);
 		$title_match_sql = DB()->escape($tmp_title_match);
 		$url = url_arg($url, $title_match_key, urlencode($tmp_title_match));
 	}

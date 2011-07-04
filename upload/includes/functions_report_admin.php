@@ -196,7 +196,7 @@ function report_module_install($module_notify, $module_prune, $module_name, $aut
 	$sql = 'INSERT INTO ' . BB_REPORTS_MODULES . ' (report_module_order, report_module_notify, report_module_prune,
 		report_module_name, auth_write, auth_view, auth_notify, auth_delete)
 		VALUES(' . ($max_order + 1) . ', ' . (int) $module_notify . ', ' . (int) $module_prune . ",
-			'" . str_replace("'", "''", $module_name) . "', " . (int) $auth_write . ', ' . (int) $auth_view . ',
+			'" . DB()->escape($module_name) . "', " . (int) $auth_write . ', ' . (int) $auth_view . ',
 			' . (int) $auth_notify . ', ' . (int) $auth_delete . ')';
 	if (!DB()->sql_query($sql))
 	{
@@ -427,7 +427,7 @@ function report_reason_insert($module_id, $reason_desc)
 	// Insert reason
 	//
 	$sql = 'INSERT INTO ' . BB_REPORTS_REASONS . ' (report_module_id, report_reason_order, report_reason_desc)
-		VALUES(' . (int) $module_id . ', ' . ($max_order + 1) . ", '" . str_replace("'", "''", $reason_desc) . "')";
+		VALUES(' . (int) $module_id . ', ' . ($max_order + 1) . ", '" . DB()->escape($reason_desc) . "')";
 	if (!DB()->sql_query($sql))
 	{
 		message_die(GENERAL_ERROR, 'Could not insert report reason', '', __LINE__, __FILE__, $sql);
@@ -444,7 +444,7 @@ function report_reason_edit($reason_id, $module_id, $reason_desc)
 	$sql = 'UPDATE ' . BB_REPORTS_REASONS . '
 		SET
 			report_module_id = ' . (int) $module_id . ",
-			report_reason_desc = '" . str_replace("'", "''", $reason_desc) . "'
+			report_reason_desc = '" . DB()->escape($reason_desc) . "'
 		WHERE report_reason_id = " . (int) $reason_id;
 	if (!DB()->sql_query($sql))
 	{

@@ -231,7 +231,7 @@ if ( isset($_POST['submit']) )
 		if ( !$in_banlist )
 		{
 			$sql = "INSERT INTO " . BB_BANLIST . " (ban_email)
-				VALUES ('" . str_replace("\'", "''", $email_list[$i]) . "')";
+				VALUES ('" . DB()->escape($email_list[$i]) . "')";
 			if ( !DB()->sql_query($sql) )
 			{
 				message_die(GENERAL_ERROR, "Couldn't insert ban_email info into database", "", __LINE__, __FILE__, $sql);
@@ -262,7 +262,7 @@ if ( isset($_POST['submit']) )
 		{
 			if ( $ip_list[$i] != -1 )
 			{
-				$where_sql .= ( ( $where_sql != '' ) ? ', ' : '' ) . str_replace("\'", "''", $ip_list[$i]);
+				$where_sql .= ( ( $where_sql != '' ) ? ', ' : '' ) . DB()->escape($ip_list[$i]);
 			}
 		}
 	}
@@ -275,7 +275,7 @@ if ( isset($_POST['submit']) )
 		{
 			if ( $email_list[$i] != -1 )
 			{
-				$where_sql .= ( ( $where_sql != '' ) ? ', ' : '' ) . str_replace("\'", "''", $email_list[$i]);
+				$where_sql .= ( ( $where_sql != '' ) ? ', ' : '' ) . DB()->escape($email_list[$i]);
 			}
 		}
 	}

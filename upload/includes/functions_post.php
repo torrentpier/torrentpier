@@ -171,7 +171,7 @@ function submit_post($mode, &$post_data, &$message, &$meta, &$forum_id, &$topic_
 
 		if ($row = DB()->fetch_row($sql))
 		{
-			$last_msg = str_replace("\'", "''", $last_msg);
+			$last_msg = DB()->escape($last_msg);
 
 			if ($last_msg == $post_message)
 			{
@@ -286,7 +286,7 @@ function submit_post($mode, &$post_data, &$message, &$meta, &$forum_id, &$topic_
 		{
 			if (!empty($option_text))
 			{
-				$option_text = str_replace("\'", "''", htmlspecialchars($option_text));
+				$option_text = DB()->escape(htmlspecialchars($option_text));
 				$poll_result = ($mode == "editpost" && isset($old_poll_result[$option_id])) ? $old_poll_result[$option_id] : 0;
 
 				$sql = ($mode != "editpost" || !isset($old_poll_result[$option_id])) ? "INSERT INTO " . BB_VOTE_RESULTS . " (vote_id, vote_option_id, vote_option_text, vote_result) VALUES ($poll_id, $poll_option_id, '$option_text', $poll_result)" : "UPDATE " . BB_VOTE_RESULTS . " SET vote_option_text = '$option_text', vote_result = $poll_result WHERE vote_option_id = $option_id AND vote_id = $poll_id";

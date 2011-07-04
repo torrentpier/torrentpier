@@ -33,7 +33,7 @@ switch ($mode)
 	case 'edit_topic_title':
         $topic_id    = (int) $this->request['topic_id'];
 		$topic_title = (string) $this->request['topic_title'];
-		$new_title   = clean_topic_title($topic_title);
+		$new_title   = clean_title($topic_title);
 
 		if (!$topic_id) $this->ajax_die('invalid topic_id (empty)');
 		if ($new_title == '') $this->ajax_die('Вы должны указать заголовок сообщения');

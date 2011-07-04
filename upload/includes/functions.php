@@ -2714,7 +2714,7 @@ function bb_json_decode ($data)
 	return json_decode($data, true);
 }
 
-function clean_topic_title ($str, $replace_underscore = false)
+function clean_title ($str, $replace_underscore = false)
 {
 	$str = ($replace_underscore) ? str_replace('_', ' ', $str) : $str;
 	$str = htmlCHR(str_compact($str));

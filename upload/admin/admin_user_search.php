@@ -404,20 +404,20 @@ else
 			{
 				$total_sql .= "SELECT COUNT(user_id) AS total
 								FROM ".BB_USERS."
-									WHERE REGEXP_LIKE(username, '".str_replace("\'", "''", $username)."')
+									WHERE REGEXP_LIKE(username, '".DB()->escape($username)."')
 										AND user_id <> ".ANONYMOUS;
 
-				$select_sql .= "	WHERE REGEXP_LIKE(u.username, '".str_replace("\'", "''", $username)."')
+				$select_sql .= "	WHERE REGEXP_LIKE(u.username, '".DB()->escape($username)."')
 										AND u.user_id <> ".ANONYMOUS;
 			}
 			else
 			{
 				$total_sql .= "SELECT COUNT(user_id) AS total
 								FROM ".BB_USERS."
-									WHERE {$lower_b}username{$lower_e} $op '".str_replace("\'", "''", $username)."'
+									WHERE {$lower_b}username{$lower_e} $op '".DB()->escape($username)."'
 										AND user_id <> ".ANONYMOUS;
 
-				$select_sql .= "	WHERE {$lower_b}u.username{$lower_e} $op '".str_replace("\'", "''", $username)."'
+				$select_sql .= "	WHERE {$lower_b}u.username{$lower_e} $op '".DB()->escape($username)."'
 										AND u.user_id <> ".ANONYMOUS;
 			}
 			break;
@@ -453,20 +453,20 @@ else
 			{
 				$total_sql .= "SELECT COUNT(user_id) AS total
 								FROM ".BB_USERS."
-									WHERE REGEXP_LIKE(user_email, '".str_replace("\'", "''", $email)."')
+									WHERE REGEXP_LIKE(user_email, '".DB()->escape($email)."')
 										AND user_id <> ".ANONYMOUS;
 
-				$select_sql .= "	WHERE REGEXP_LIKE(u.user_email, '".str_replace("\'", "''", $email)."')
+				$select_sql .= "	WHERE REGEXP_LIKE(u.user_email, '".DB()->escape($email)."')
 										AND u.user_id <> ".ANONYMOUS;
 			}
 			else
 			{
 				$total_sql .= "SELECT COUNT(user_id) AS total
 								FROM ".BB_USERS."
-									WHERE {$lower_b}user_email{$lower_e} $op '".str_replace("\'", "''", $email)."'
+									WHERE {$lower_b}user_email{$lower_e} $op '".DB()->escape($email)."'
 										AND user_id <> ".ANONYMOUS;
 
-				$select_sql .= "	WHERE {$lower_b}u.user_email{$lower_e} $op '".str_replace("\'", "''", $email)."'
+				$select_sql .= "	WHERE {$lower_b}u.user_email{$lower_e} $op '".DB()->escape($email)."'
 										AND u.user_id <> ".ANONYMOUS;
 			}
 			break;
@@ -955,20 +955,20 @@ else
 			{
 				$total_sql .= "SELECT COUNT(user_id) AS total
 								FROM ".BB_USERS."
-									WHERE REGEXP_LIKE($field, '".str_replace("\'", "''", $userfield_value)."')
+									WHERE REGEXP_LIKE($field, '".DB()->escape($userfield_value)."')
 										AND user_id <> ".ANONYMOUS;
 
-				$select_sql .= "	WHERE REGEXP_LIKE(u.$field, '".str_replace("\'", "''", $userfield_value)."')
+				$select_sql .= "	WHERE REGEXP_LIKE(u.$field, '".DB()->escape($userfield_value)."')
 										AND u.user_id <> ".ANONYMOUS;
 			}
 			else
 			{
 				$total_sql .= "SELECT COUNT(user_id) AS total
 								FROM ".BB_USERS."
-									WHERE {$lower_b}$field{$lower_e} $op '".str_replace("\'", "''", $userfield_value)."'
+									WHERE {$lower_b}$field{$lower_e} $op '".DB()->escape($userfield_value)."'
 										AND user_id <> ".ANONYMOUS;
 
-				$select_sql .= "	WHERE {$lower_b}u.$field{$lower_e} $op '".str_replace("\'", "''", $userfield_value)."'
+				$select_sql .= "	WHERE {$lower_b}u.$field{$lower_e} $op '".DB()->escape($userfield_value)."'
 										AND u.user_id <> ".ANONYMOUS;
 			}
 
@@ -1025,10 +1025,10 @@ else
 
 			$total_sql .= "SELECT COUNT(user_id) AS total
 							FROM ".BB_USERS."
-								WHERE user_lang = '".str_replace("\'", "''", $language_type)."'
+								WHERE user_lang = '".DB()->escape($language_type)."'
 									AND user_id <> ".ANONYMOUS;
 
-			$select_sql .= "	WHERE u.user_lang = '".str_replace("\'", "''", $language_type)."'
+			$select_sql .= "	WHERE u.user_lang = '".DB()->escape($language_type)."'
 									AND u.user_id <> ".ANONYMOUS;
 
 			break;

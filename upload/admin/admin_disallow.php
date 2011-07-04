@@ -28,7 +28,7 @@ if( isset($_POST['add_name']) )
 	else
 	{
 		$sql = "INSERT INTO " . BB_DISALLOW . " (disallow_username)
-			VALUES('" . str_replace("\'", "''", $disallowed_user) . "')";
+			VALUES('" . DB()->escape($disallowed_user) . "')";
 		$result = DB()->sql_query( $sql );
 		if ( !$result )
 		{

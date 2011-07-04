@@ -280,7 +280,7 @@ if ( $mode == 'read' )
 		// set limits on numbers of storable posts for users ... hopefully!
 		//
 		$sql = "INSERT INTO " . BB_PRIVMSGS . " (privmsgs_type, privmsgs_subject, privmsgs_from_userid, privmsgs_to_userid, privmsgs_date, privmsgs_ip)
-			VALUES (" . PRIVMSGS_SENT_MAIL . ", '" . str_replace("\'", "''", addslashes($privmsg['privmsgs_subject'])) . "', " . $privmsg['privmsgs_from_userid'] . ", " . $privmsg['privmsgs_to_userid'] . ", " . $privmsg['privmsgs_date'] . ", '" . $privmsg['privmsgs_ip'] . "')";
+			VALUES (" . PRIVMSGS_SENT_MAIL . ", '" . DB()->escape($privmsg['privmsgs_subject']) . "', " . $privmsg['privmsgs_from_userid'] . ", " . $privmsg['privmsgs_to_userid'] . ", " . $privmsg['privmsgs_date'] . ", '" . $privmsg['privmsgs_ip'] . "')";
 		if ( !DB()->sql_query($sql) )
 		{
 			message_die(GENERAL_ERROR, 'Could not insert private message sent info', '', __LINE__, __FILE__, $sql);
@@ -289,7 +289,7 @@ if ( $mode == 'read' )
 		$privmsg_sent_id = DB()->sql_nextid();
 
 		$sql = "INSERT INTO " . BB_PRIVMSGS_TEXT . " (privmsgs_text_id, privmsgs_text)
-			VALUES ($privmsg_sent_id, '" . str_replace("\'", "''", addslashes($privmsg['privmsgs_text'])) . "')";
+			VALUES ($privmsg_sent_id, '" . DB()->escape($privmsg['privmsgs_text']) . "')";
 		if ( !DB()->sql_query($sql) )
 		{
 			message_die(GENERAL_ERROR, 'Could not insert private message sent text', '', __LINE__, __FILE__, $sql);
@@ -968,7 +968,7 @@ else if ( $submit || $refresh || $mode != '' )
 		{
 			$to_username = clean_username($_POST['username']);
 			// DelUsrKeepPM
-			$to_username_sql = str_replace("\'", "''", $to_username);
+			$to_username_sql = DB()->escape($to_username);
 
 			$to_userdata = get_userdata ($to_username_sql);
 
@@ -996,7 +996,7 @@ else if ( $submit || $refresh || $mode != '' )
 		{
 			if ( !$error )
 			{
-				$privmsg_message = DB()->escape($_POST['message']);
+				$privmsg_message = $_POST['message'];
 			}
 		}
 		else
@@ -1068,12 +1068,12 @@ else if ( $submit || $refresh || $mode != '' )
 			}
 
 			$sql_info = "INSERT INTO " . BB_PRIVMSGS . " (privmsgs_type, privmsgs_subject, privmsgs_from_userid, privmsgs_to_userid, privmsgs_date, privmsgs_ip)
-				VALUES (" . PRIVMSGS_NEW_MAIL . ", '" . str_replace("\'", "''", $privmsg_subject) . "', " . $userdata['user_id'] . ", " . $to_userdata['user_id'] . ", $msg_time, '". USER_IP ."')";
+				VALUES (" . PRIVMSGS_NEW_MAIL . ", '" . DB()->escape($privmsg_subject) . "', " . $userdata['user_id'] . ", " . $to_userdata['user_id'] . ", $msg_time, '". USER_IP ."')";
 		}
 		else
 		{
 			$sql_info = "UPDATE " . BB_PRIVMSGS . "
-				SET privmsgs_type = " . PRIVMSGS_NEW_MAIL . ", privmsgs_subject = '" . str_replace("\'", "''", $privmsg_subject) . "', privmsgs_from_userid = " . $userdata['user_id'] . ", privmsgs_to_userid = " . $to_userdata['user_id'] . ", privmsgs_date = $msg_time, privmsgs_ip = '". USER_IP ."'
+				SET privmsgs_type = " . PRIVMSGS_NEW_MAIL . ", privmsgs_subject = '" . DB()->escape($privmsg_subject) . "', privmsgs_from_userid = " . $userdata['user_id'] . ", privmsgs_to_userid = " . $to_userdata['user_id'] . ", privmsgs_date = $msg_time, privmsgs_ip = '". USER_IP ."'
 				WHERE privmsgs_id = $privmsg_id";
 		}
 
@@ -1087,12 +1087,12 @@ else if ( $submit || $refresh || $mode != '' )
 			$privmsg_sent_id = DB()->sql_nextid();
 
 			$sql = "INSERT INTO " . BB_PRIVMSGS_TEXT . " (privmsgs_text_id, privmsgs_text)
-				VALUES ($privmsg_sent_id, '" . str_replace("\'", "''", $privmsg_message) . "')";
+				VALUES ($privmsg_sent_id, '" . DB()->escape($privmsg_message) . "')";
 		}
 		else
 		{
 			$sql = "UPDATE " . BB_PRIVMSGS_TEXT . "
-				SET privmsgs_text = '" . str_replace("\'", "''", $privmsg_message) . "'
+				SET privmsgs_text = '" . DB()->escape($privmsg_message) . "'
 				WHERE privmsgs_text_id = $privmsg_id";
 		}
 
@@ -1163,14 +1163,10 @@ else if ( $submit || $refresh || $mode != '' )
 		// passed to the script, process it a little, do some checks
 		// where neccessary, etc.
 		//
-		$to_username = (isset($_POST['username']) ) ? trim(htmlspecialchars(stripslashes($_POST['username']))) : '';
+		$to_username = (isset($_POST['username']) ) ? clean_username($_POST['username']) : '';
 
-		$privmsg_subject = ( isset($_POST['subject']) ) ? trim(strip_tags(stripslashes($_POST['subject']))) : '';
+		$privmsg_subject = ( isset($_POST['subject']) ) ? clean_title($_POST['subject']) : '';
 		$privmsg_message = ( isset($_POST['message']) ) ? trim($_POST['message']) : '';
-		if ( !$preview )
-		{
-			$privmsg_message = stripslashes($privmsg_message);
-		}
 
 		//
 		// Do mode specific things
@@ -1333,8 +1329,6 @@ else if ( $submit || $refresh || $mode != '' )
 		{
 			$preview_subject = $privmsg_subject;
 		}
-
-		$preview_message = str_replace("\n", '<br />', $preview_message);
 
 		$s_hidden_fields = '<input type="hidden" name="folder" value="' . $folder . '" />';
 		$s_hidden_fields .= '<input type="hidden" name="mode" value="' . $mode . '" />';

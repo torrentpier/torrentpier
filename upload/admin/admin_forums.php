@@ -172,8 +172,8 @@ if ($mode)
 			// Create a forum in the DB
 			//
 			$cat_id = intval($_POST[POST_CAT_URL]);
-			$forum_name = str_replace("\'", "''", trim($_POST['forumname']));
-			$forum_desc = str_replace("\'", "''", trim($_POST['forumdesc']));
+			$forum_name = DB()->escape(trim($_POST['forumname']));
+			$forum_desc = DB()->escape(trim($_POST['forumdesc']));
 			$forum_status = intval($_POST['forumstatus']);
 
 			$prune_enable = isset($_POST['prune_enable']);
@@ -240,8 +240,8 @@ if ($mode)
 			//
 			$cat_id = intval($_POST[POST_CAT_URL]);
 			$forum_id = intval($_POST[POST_FORUM_URL]);
-			$forum_name = str_replace("\'", "''", trim($_POST['forumname']));
-			$forum_desc = str_replace("\'", "''", trim($_POST['forumdesc']));
+			$forum_name = DB()->escape(trim($_POST['forumname']));
+			$forum_desc = DB()->escape(trim($_POST['forumdesc']));
 			$forum_status = intval($_POST['forumstatus']);
 
 			$prune_enable = isset($_POST['prune_enable']);

@@ -39,7 +39,7 @@ if ( $row = DB()->sql_fetchrow($result) )
 			}
 		}
 
-		$sql_update_pass = ( $row['user_newpasswd'] != '' ) ? ", user_password = '" . str_replace("\'", "''", $row['user_newpasswd']) . "', user_newpasswd = ''" : '';
+		$sql_update_pass = ( $row['user_newpasswd'] != '' ) ? ", user_password = '" . DB()->escape($row['user_newpasswd']) . "', user_newpasswd = ''" : '';
 
 		$sql = "UPDATE " . BB_USERS . "
 			SET user_active = 1, user_actkey = ''" . $sql_update_pass . "

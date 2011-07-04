@@ -86,14 +86,14 @@ if( $mode != "" )
 		if( $word_id )
 		{
 			$sql = "UPDATE " . BB_WORDS . "
-				SET word = '" . str_replace("\'", "''", $word) . "', replacement = '" . str_replace("\'", "''", $replacement) . "'
+				SET word = '" . DB()->escape($word) . "', replacement = '" . DB()->escape($replacement) . "'
 				WHERE word_id = $word_id";
 			$message = $lang['WORD_UPDATED'];
 		}
 		else
 		{
 			$sql = "INSERT INTO " . BB_WORDS . " (word, replacement)
-				VALUES ('" . str_replace("\'", "''", $word) . "', '" . str_replace("\'", "''", $replacement) . "')";
+				VALUES ('" . DB()->escape($word) . "', '" . DB()->escape($replacement) . "')";
 			$message = $lang['WORD_ADDED'];
 		}
 
