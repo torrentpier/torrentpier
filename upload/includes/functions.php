@@ -1469,22 +1469,21 @@ function get_user_id ($username)
 
 function str_short ($text, $max_length, $space = ' ')
 {
-	if ($max_length && strlen($text) > $max_length)
+	if ($max_length && mb_strlen($text, 'UTF-8') > $max_length)
 	{
-		$text = mb_substr($text, 0, $max_length);
+		$text = mb_substr($text, 0, $max_length, 'UTF-8');
 
 		if ($last_space_pos = $max_length - intval(strpos(strrev($text), $space)))
 		{
 			if ($last_space_pos > round($max_length * 3/4))
 			{
 				$last_space_pos--;
-				$text = mb_substr($text, 0, $last_space_pos);
+				$text = mb_substr($text, 0, $last_space_pos, 'UTF-8');
 			}
 		}
 		$text .= '...';
 		$text = preg_replace('!&#?(\w+)?;?(\w{1,5})?\.\.\.$!', '...', $text);
 	}
-
 	return $text;
 }
 
