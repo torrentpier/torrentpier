@@ -600,13 +600,13 @@ class bbcode
 			'#\[size=([1-2]?[0-9])\]#'                            => '<span style="font-size: $1px; line-height: normal;">',
 			'#\[align=(left|right|center|justify)\]#'             => '<span class="post-align" style="text-align: $1;">',
 			'#\[font="([\w\- \']+)"\]#'                           => '<span style="font-family: $1;">',
-			"#\[img\]($img_url_exp)\[/img\]#i"                    => $tpl['img'],
-			"#\[img=(left|right)\]($img_url_exp)\[/img\]\s*#i"    => $tpl['img_aligned'],
-			"#\[email\]($email_exp)\[/email\]#i"                  => '<a href="mailto:$1">$1</a>',
-			"#\[url\](https?://$url_exp)\[/url\]#iu"               => '<a href="$1" class="postLink">$1</a>',
-			"#\[url\](www\.$url_exp)\[/url\]#iu"                   => '<a href="http://$1" class="postLink">$1</a>',
-			"#\[url=(https?://$url_exp)\]([^?\n\t].*?)\[/url\]#iu" => '<a href="$1" class="postLink">$2</a>',
-			"#\[url=(www\.$url_exp)\]([^?\n\t].*?)\[/url\]#iu"     => '<a href="http://$1" class="postLink">$2</a>',
+			"#\[img\]($img_url_exp)\[/img\]#"                    => $tpl['img'],
+			"#\[img=(left|right)\]($img_url_exp)\[/img\]\s*#"    => $tpl['img_aligned'],
+			"#\[email\]($email_exp)\[/email\]#"                  => '<a href="mailto:$1">$1</a>',
+			"#\[url\](https?://$url_exp)\[/url\]#"               => '<a href="$1" class="postLink">$1</a>',
+			"#\[url\](www\.$url_exp)\[/url\]#"                   => '<a href="http://$1" class="postLink">$1</a>',
+			"#\[url=(https?://$url_exp)\]([^?\n\t].*?)\[/url\]#" => '<a href="$1" class="postLink">$2</a>',
+			"#\[url=(www\.$url_exp)\]([^?\n\t].*?)\[/url\]#"     => '<a href="http://$1" class="postLink">$2</a>',
 		);
 
 		$this->str = array(
