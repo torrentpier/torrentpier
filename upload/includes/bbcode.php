@@ -773,11 +773,8 @@ class bbcode
 
 		$url_regexp = array();
 		$url_regexp[] = "#\[url\]([\w]+?://[\w\#!$%&~/.\-;:=,?@а-яА-Я\[\]+]+?)\[/url\]#isu";
-		$url_regexp[] = "#\[url\]((www|ftp)\.[\w\#!$%&~/.\-;:=,?@а-яА-Я\[\]+]+?)\[/url\]#isu";
 		$url_regexp[] = "#\[url=([\w]+?://[\w\#!$%&~/.\-;:=,?@а-яА-Я\[\]+]*?)\]([^?\n\r\t].*?)\[/url\]#isu";
-		$url_regexp[] = "#\[url=((www|ftp)\.[\w\#!$%&~/.\-;:=,?@а-яА-Я\[\]+]*?)\]([^?\n\r\t].*?)\[/url\]#isu";
-		$url_regexp[] = "#\[url=([\w]+?://[\w\#$%&~/.\-;:=,?@а-яА-Я\[\]+]*?(jpg|jpeg|gif|png))\]([^?\n\r\t].*?)\[/url\]#isu";
-		$url_regexp[] = "#(?<![\"'=])\b([https://|ftp://|www\.|ftp\.][\w\#!$%&~/.\-;:=,?@а-яА-Я\[\]+]+)(?![\"']|\[/url|\[/img|</a)(?=[,!]?\s|[\)<!])#xius";
+		$url_regexp[] = "#(?<![\"'=])\b([\w]+?://[\w\#!$%&~/.\-;:=,?@а-яА-Я\[\]+]+?)(?![\"']|\[/url|\[/img|</a)(?=[,!]?\s|[\)<!])#isu";
 
 		// pad it with a space so we can match things at the start of the 1st line.
 		$ret = " $text ";
@@ -803,9 +800,9 @@ class bbcode
 
 		$max_len = 70;
 		$href    = $m[1];
-		$name = empty($m[2]) ? $href : $m[2];
+		$name    = empty($m[2]) ? $href : $m[2];
 
-		if(mb_strlen($name, 'UTF-8'))
+		if(mb_strlen($name, 'UTF-8') > $max_len)
 		{
 			$name = mb_substr($name, 0, $max_len - 19, 'UTF-8') .'...'. mb_substr($name, -16, 'UTF-8');
 		}
