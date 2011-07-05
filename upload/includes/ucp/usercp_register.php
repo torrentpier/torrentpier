@@ -440,6 +440,8 @@ foreach ($profile_fields as $field => $can_edit)
 		$sig = isset($_POST['user_sig']) ? (string) $_POST['user_sig'] : $pr_data['user_sig'];
 		if ($submit)
 		{
+			$sig_esc = prepare_message($sig);
+
 			if (mb_strlen($sig) > $bb_cfg['max_sig_chars'])
 			{
 				$errors[] = $lang['SIGNATURE_TOO_LONG'];

@@ -505,9 +505,13 @@ function vdump ($var, $title = '')
 	echo '</pre>';
 }
 
-function htmlCHR ($txt, $replace_space = false)
+function htmlCHR ($txt, $double_encode = false, $quote_style = ENT_QUOTES, $charset = 'UTF-8')
 {
-	return ($replace_space) ? str_replace(' ', '&nbsp;', htmlspecialchars($txt, ENT_QUOTES)) : htmlspecialchars($txt, ENT_QUOTES);
+	if (is_array($txt))
+	{
+		log_request('htmlCHR');
+	}
+	return (string) htmlspecialchars($txt, $quote_style, $charset, $double_encode);
 }
 
 function make_url ($path)

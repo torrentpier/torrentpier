@@ -563,7 +563,7 @@ if( $refresh || isset($_POST['del_poll_option']) || $error_msg || ($submit && $t
 {
 	$username = ( !empty($_POST['username']) ) ? clean_username($_POST['username']) : '';
 	$subject = ( !empty($_POST['subject']) ) ? clean_title($_POST['subject']) : '';
-	$message = ( !empty($_POST['message']) ) ? $_POST['message'] : '';
+	$message = ( !empty($_POST['message']) ) ? prepare_message($_POST['message']) : '';
 
 	$poll_title = ( !empty($_POST['poll_title']) ) ? clean_title($_POST['poll_title']) : '';
 	$poll_length = ( isset($_POST['poll_length']) ) ? max(0, intval($_POST['poll_length'])) : 0;
@@ -594,15 +594,16 @@ if( $refresh || isset($_POST['del_poll_option']) || $error_msg || ($submit && $t
 	{
 		$preview_subject  = $subject;
 		$preview_username = $username;
-		$preview_message  = bbcode2html($message);
+		$preview_message  = htmlCHR($message, false, ENT_NOQUOTES);
+		$preview_message  = bbcode2html($preview_message);
 
 		$template->assign_vars(array(
 			'TPL_PREVIEW_POST' => true,
-			'TOPIC_TITLE'    => wbr($preview_subject),
-			'POST_SUBJECT'   => $preview_subject,
-			'POSTER_NAME'    => $preview_username,
-			'POST_DATE'      => bb_date(TIMENOW),
-			'PREVIEW_MSG'    => $preview_message,
+			'TOPIC_TITLE'      => wbr($preview_subject),
+			'POST_SUBJECT'     => $preview_subject,
+			'POSTER_NAME'      => $preview_username,
+			'POST_DATE'        => bb_date(TIMENOW),
+			'PREVIEW_MSG'      => $preview_message,
 		));
 	}
 }

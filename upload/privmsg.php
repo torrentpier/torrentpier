@@ -985,7 +985,7 @@ else if ( $submit || $refresh || $mode != '' )
 			$error_msg .= ( ( !empty($error_msg) ) ? '<br />' : '' ) . $lang['NO_TO_USER'];
 		}
 
-		$privmsg_subject = trim(strip_tags($_POST['subject']));
+		$privmsg_subject = htmlCHR($_POST['subject']);
 		if ( empty($privmsg_subject) )
 		{
 			$error = TRUE;
@@ -996,7 +996,7 @@ else if ( $submit || $refresh || $mode != '' )
 		{
 			if ( !$error )
 			{
-				$privmsg_message = $_POST['message'];
+				$privmsg_message = prepare_message($_POST['message']);
 			}
 		}
 		else
