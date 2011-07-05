@@ -18,7 +18,7 @@ $attach_id  = (int) $this->request['attach_id'];
 $new_status = (int) $this->request['status'];
 
 // Валидность статуса
-if (!isset($lang['tor_status'][$new_status]))
+if (!isset($lang['TOR_STATUS_NAME'][$new_status]))
 {
 	$this->ajax_die("Такого статуса не существует: $new_status");
 }
@@ -64,7 +64,7 @@ if ($tor['tor_status'] != TOR_NOT_APPROVED && $tor['checked_user_id'] != $userda
 {
 	if (empty($this->request['confirmed']))
 	{
-		$msg  = "Раздача имеет статус: {$lang['tor_status'][$tor['tor_status']]}\n\n";
+		$msg  = "Раздача имеет статус: {$lang['TOR_STATUS_NAME'][$tor['tor_status']]}\n\n";
 		$msg .= ($username = get_username($tor['checked_user_id'])) ? "Статус изменен: ". html_entity_decode($username) .", ". delta_time($tor['checked_time']) ." назад\n\n" : "";
 		$msg .= "Продолжить?";
 		$this->prompt_for_confirm($msg);
@@ -74,4 +74,4 @@ if ($tor['tor_status'] != TOR_NOT_APPROVED && $tor['checked_user_id'] != $userda
 change_tor_status($attach_id, $new_status);
 
 $this->response['attach_id'] = $attach_id;
-$this->response['status']    = $bb_cfg['tor_icons'][$new_status] .' '. $lang['tor_status'][$new_status];
+$this->response['status']    = $bb_cfg['tor_icons'][$new_status] .' '. $lang['TOR_STATUS_NAME'][$new_status];

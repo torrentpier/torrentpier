@@ -131,7 +131,7 @@ if ($bb_cfg['show_latest_news'] AND $news_forum_ids = $bb_cfg['latest_news_forum
 	$news_count = max($bb_cfg['latest_news_count'], 1);
 
 	$data = DB()->fetch_rowset("
-		SELECT topic_id, topic_time, topic_title
+		SELECT topic_id, topic_time, topic_title, forum_id
 		FROM ". BB_TOPICS ."
 		WHERE forum_id IN ($news_forum_ids)
 		ORDER BY topic_time DESC

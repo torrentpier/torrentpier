@@ -71,6 +71,22 @@ if (!empty($_COOKIE['explain']))
 $sql_log = !empty($_COOKIE['sql_log']) ? get_sql_log() : '';
 
 echo '
+<script type="text/javascript">
+function fixSqlLog() {
+	if ($("#sqlLog").height() > 400) {
+		$("#sqlLog").height(400);
+	}
+	$("#sqlLog div.sqlLogRow")
+		.hover(
+			function(){ $(this).addClass("sqlHover"); },
+			function(){ $(this).removeClass("sqlHover"); }
+		)
+		.click(
+			function(){ $(this).toggleClass("sqlHighlight"); }
+		)
+	;
+}
+</script>
 	<div class="sqlLogHead">
 ';
 if (PROFILER) {
@@ -102,25 +118,6 @@ echo '
 '. ($sql_log ? $sql_log : 'sql_log') .'
 '. (UA_IE ? '<br />' : '') .'
 </div><!-- / sqlLog -->
-
-<script type="text/javascript">
-
-function fixSqlLog() {
-	if ($("#sqlLog").height() > 400) {
-		$("#sqlLog").height(400);
-	}
-	$("#sqlLog div.sqlLogRow")
-		.hover(
-			function(){ $(this).addClass("sqlHover"); },
-			function(){ $(this).removeClass("sqlHover"); }
-		)
-		.click(
-			function(){ $(this).toggleClass("sqlHighlight"); }
-		)
-	;
-}
-
-</script>
 
 <br clear="all" />
 ';

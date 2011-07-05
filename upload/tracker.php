@@ -735,7 +735,7 @@ if ($allowed_forums)
 
 				'TOR_FROZEN'   => isset($bb_cfg['tor_frozen'][$tor['tor_status']]),
 				'TOR_STATUS_ICON' => $bb_cfg['tor_icons'][$tor['tor_status']],
-				'TOR_STATUS_TEXT' => $lang['tor_status'][$tor['tor_status']],
+				'TOR_STATUS_TEXT' => $lang['TOR_STATUS_NAME'][$tor['tor_status']],
 
 				'TOR_SIZE_RAW' => $size,
 				'TOR_SIZE'     => humn_size($size),

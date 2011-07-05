@@ -2,10 +2,10 @@
 <!-- IF SESSION_ADMIN -->
 
 <script type="text/javascript">
-in_moderation = false;
-in_title_edit = false;
-tte_cur_topic_id = 0;
-tte_orig_html = '';
+ajax.in_moderation    = false;
+ajax.in_title_edit    = false;
+ajax.tte_cur_topic_id = 0;
+ajax.tte_orig_html    = '';
 
 <!-- IF MODERATION_ON -->
 $(function(){
@@ -16,12 +16,12 @@ $(function(){
 	$('#show_mod_options a').click( function(){ show_forum_mod_options(); return false; } );
 
 	$('td.topic_id').click(function(){
-		if (!in_moderation) {
+		if (!ajax.in_moderation) {
 			show_forum_mod_options();
 		}
 	});
 	$('td.tt').dblclick(function(){
-		if (!in_moderation) {
+		if (!ajax.in_moderation) {
 			show_forum_mod_options();
 			$(this).dblclick();
 		}
@@ -34,12 +34,9 @@ function show_forum_mod_options ()
 	$('td.topic_id').each(function(){
 		var topic_id = $(this).attr('id');
 		var input = '<input id="sel-'+ topic_id +'" type="checkbox" value="'+ topic_id +'" class="topic-chbox" />';
-		if ($.browser.msie) {
-			$(this).html(input);
-		} else {
-			$(this).after('<td>'+input+'</td>').attr('colSpan', 1);
-			$(this).click(function(){ edit_topic_title(topic_id); });
-		}
+
+		$(this).before('<td>'+input+'</td>').attr('colSpan', 1);
+		$(this).click(function(){ edit_topic_title(topic_id); });
 		$(this).siblings('td.tt').dblclick(function(){ edit_topic_title(topic_id); });
 	});
 	$('.tt-text').addClass('folded2 tLink')
@@ -67,29 +64,29 @@ function show_forum_mod_options ()
 			$form.attr('target', '_blank');
 		}
 	});
-	in_moderation = true;
+	ajax.in_moderation = true;
 }
 
 function edit_topic_title (topic_id)
 {
-	if (in_title_edit) return false;
+	if (ajax.in_title_edit) return false;
 
 	var $tt_td = $('td#'+topic_id).siblings('td.tt');
 	var tt_text = $tt_td.find('.tt-text').text();
 
 	$tt_td.attr({id: 'tte-'+topic_id});
-	tte_cur_topic_id = topic_id;
-	tte_orig_html = $tt_td.html();
+	ajax.tte_cur_topic_id = topic_id;
+	ajax.tte_orig_html = $tt_td.html();
 
 	$tt_td.html( $('#tt-edit-tpl').html() );
 	$('.tt-edit-input', $tt_td).val(tt_text).focus();
 
-	in_title_edit = true;
+	ajax.in_title_edit = true;
 }
 
 function tte_submit (mode)
 {
-	var topic_id = tte_cur_topic_id;
+	var topic_id = ajax.tte_cur_topic_id;
 	var $tt_td = $('#tte-'+topic_id);
 	var topic_title = $('.tt-edit-input', $tt_td).val();
 
@@ -97,11 +94,11 @@ function tte_submit (mode)
 		ajax.edit_topic_title(topic_id, topic_title);
 	}
 	else {
-		$tt_td.html(tte_orig_html);
+		$tt_td.html(ajax.tte_orig_html);
 		$('.tt-text').addClass('folded2 tLink')
 			.click(function(){ ajax.view_post(topic_id, this); return false; });
 	}
-	in_title_edit = false;
+	ajax.in_title_edit = false;
 }
 
 ajax.edit_topic_title = function(topic_id, topic_title) {
@@ -151,7 +148,7 @@ ajax.callback.mod_action = function(data) {
 	}
 	if(data.topic_title) {
 		var $tt_td = $('#tte-'+data.topic_id);
-		$tt_td.html(tte_orig_html);
+		$tt_td.html(ajax.tte_orig_html);
 		$('.tt-text', $tt_td).html(data.topic_title);
 	}
 }
@@ -160,19 +157,19 @@ ajax.callback.mod_action = function(data) {
 <div id="mod-action-content" style="display: none;">
 <form id="mod-action" method="post" action="modcp.php" class="tokenized">
 	<input type="hidden" name="f" value="{FORUM_ID}" />
-	<!-- IF TORRENTS -->
 	<div class="floatL">
+	<input type="checkbox" onclick="$('.topic-chbox').attr({ checked: this.checked }); if(this.checked){$('.tt-text').addClass('hl-tt');}else{$('.tt-text').removeClass('hl-tt');}" />
+	<!-- IF TORRENTS -->
 	{SELECT_ST}
 	<input type="button" onclick="mod_action('tor_status');" value="Изменить" />
-	</div>
 	<!-- ENDIF -->
+	</div>
 	<div class="floatR">
 	<input type="submit" name="delete" value="{L_DELETE}" />
 	<input type="submit" name="move" value="{L_MOVE}" />
 	<input type="submit" name="lock" value="{L_LOCK}" />
 	<input type="submit" name="unlock" value="{L_UNLOCK}" />
 	<label><input id="in-new-window" type="checkbox" />в новом окне</label>
-
 	</div>
 </form>
 </div>

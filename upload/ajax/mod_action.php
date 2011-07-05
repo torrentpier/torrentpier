@@ -15,7 +15,7 @@ switch ($mode)
 	    $status   = (int) $this->request['status'];
 
 	    // Валидность статуса
-		if (!isset($lang['tor_status'][$status]))
+		if (!isset($lang['TOR_STATUS_NAME'][$status]))
 		{
 			$this->ajax_die("Такого статуса не существует: $new_status");
 		}
@@ -47,6 +47,14 @@ switch ($mode)
 		$topic_title_sql = DB()->escape($new_title);
 
 		DB()->query("UPDATE ". BB_TOPICS ." SET topic_title = '$topic_title_sql' WHERE topic_id = $topic_id LIMIT 1");
+
+        //Обновление кеша новостей на главной
+		$news_forums = array_flip(explode(',', $bb_cfg['latest_news_forum_id']));
+		if(isset($news_forums[$t_data['forum_id']]) && $bb_cfg['show_latest_news'])
+		{			global $datastore;
+
+			$datastore->enqueue('latest_news');
+			$datastore->update('latest_news');		}
 
         $this->response['topic_id'] = $topic_id;
 		$this->response['topic_title'] = $new_title;

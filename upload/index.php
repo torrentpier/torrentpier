@@ -312,14 +312,15 @@ if ($bb_cfg['show_latest_news'])
 			'NEWS_TOPIC_ID' => $news['topic_id'],
 			'NEWS_TITLE'    => $news['topic_title'],
 			'NEWS_TIME'     => bb_date($news['topic_time'], 'd-M'),
-			'NEWS_IS_NEW'   => $news['topic_time'] > $lastvisit,
+			'NEWS_IS_NEW'   => is_unread($news['topic_time'], $news['topic_id'], $news['forum_id']),
 		));
 	}
 }
 // Allow cron
-if (IS_ADMIN || IS_MOD)
+if (IS_AM)
 {
-	if (@file_exists(CRON_RUNNING)) {
+	if (@file_exists(CRON_RUNNING))
+	{
 		if (@file_exists(CRON_ALLOWED))
 		{
 			unlink (CRON_ALLOWED);

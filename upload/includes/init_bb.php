@@ -284,47 +284,18 @@ define('TOR_DOUBTFUL',      8);   // сомнительно
 define('TOR_CHECKING',      9);   // проверяется
 define('TOR_TMP',           10);  // временная
 
-// Названия
-$lang['tor_status'] = array(
-	TOR_TMP           => 'временная',
-	TOR_CLOSED_CPHOLD => 'закрыто правообладателем',
-	TOR_CLOSED        => 'закрыто',
-	TOR_NOT_APPROVED  => 'не проверено',
-	TOR_NEED_EDIT     => 'недооформлено',
-	TOR_NO_DESC       => 'неоформлено',
-	TOR_DUP           => 'повтор',
-	TOR_CONSUMED      => 'поглощено',
-	TOR_APPROVED      => 'проверено',
-	TOR_CHECKING      => 'проверяется',
-	TOR_DOUBTFUL      => 'сомнительно',
-);
-
-// Список доступных модераторам статусов
-$bb_cfg['change_tor_status_select'] = array(
-	TOR_CLOSED        => 'закрыто',
-	TOR_NOT_APPROVED  => 'не проверено',
-	TOR_NEED_EDIT     => 'недооформлено',
-	TOR_NO_DESC       => 'неоформлено',
-	TOR_DUP           => 'повтор',
-	TOR_CONSUMED      => 'поглощено',
-	TOR_TMP           => 'временная',
-	TOR_APPROVED      => 'проверено',
-	TOR_CHECKING      => 'проверяется',
-	TOR_DOUBTFUL      => 'сомнительно',
-);
-
 $bb_cfg['tor_icons'] = array(
-	TOR_APPROVED      => '<span class="tor-icon tor-approved">&radic;</span>',
-	TOR_CHECKING      => '<span class="tor-icon tor-checking">%</span>',
-	TOR_CLOSED        => '<span class="tor-icon tor-closed">x</span>',
-	TOR_CLOSED_CPHOLD => '<span class="tor-icon tor-closed-cp">&copy;</span>',
-	TOR_CONSUMED      => '<span class="tor-icon tor-consumed">&sum;</span>',
-	TOR_DOUBTFUL      => '<span class="tor-icon tor-approved">#</span>',
-	TOR_DUP           => '<span class="tor-icon tor-dup">D</span>',
-	TOR_NEED_EDIT     => '<span class="tor-icon tor-need-edit">?</span>',
-	TOR_NO_DESC       => '<span class="tor-icon tor-no-desc">!</span>',
-	TOR_NOT_APPROVED  => '<span class="tor-icon tor-not-approved">*</span>',
-	TOR_TMP           => '<span class="tor-icon tor-dup">T</span>',
+    TOR_NOT_APPROVED  => '<span class="tor-icon tor-not-approved">*</span>',
+    TOR_CLOSED        => '<span class="tor-icon tor-closed">x</span>',
+    TOR_APPROVED      => '<span class="tor-icon tor-approved">&radic;</span>',
+    TOR_NEED_EDIT     => '<span class="tor-icon tor-need-edit">?</span>',
+    TOR_NO_DESC       => '<span class="tor-icon tor-no-desc">!</span>',
+    TOR_DUP           => '<span class="tor-icon tor-dup">D</span>',
+    TOR_CLOSED_CPHOLD => '<span class="tor-icon tor-closed-cp">&copy;</span>',
+    TOR_CONSUMED      => '<span class="tor-icon tor-consumed">&sum;</span>',
+    TOR_DOUBTFUL      => '<span class="tor-icon tor-approved">#</span>',
+    TOR_CHECKING      => '<span class="tor-icon tor-checking">%</span>',
+    TOR_TMP           => '<span class="tor-icon tor-dup">T</span>',
 );
 
 // Запрет на скачивание

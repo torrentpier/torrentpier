@@ -101,11 +101,11 @@ if ($is_auth['auth_mod'])
 		unset($_REQUEST['sort'], $_REQUEST['order'], $_REQUEST[$title_match_key]);
 		$show_type_separator = false;
 	}
-    $select_tst = array_merge(array('* любой' => -1), array_flip($lang['tor_status']));
+    $select_tst = array_merge(array('* любой' => -1), array_flip($lang['TOR_STATUS_NAME']));
 	$template->assign_vars(array(
 		'SELECT_TST' => build_select('tst', $select_tst, $tor_status),
 	));
-	$select_st = array_merge(array('Выберите статус' => -1), array_flip($lang['tor_status']));
+	$select_st = array_merge(array($lang['TOR_STATUS_SELECT_ACTION'] => -1), array_flip($lang['TOR_STATUS_NAME']));
 	$template->assign_vars(array(
 		'SELECT_ST'  => build_select('st', $select_st, -1),
 	));

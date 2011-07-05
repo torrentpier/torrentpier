@@ -1157,14 +1157,19 @@ $lang['MAGNET'] = 'Magnet';
 //torrent status mod
 $lang['TOR_STATUS'] = 'Status';
 $lang['TOR_STATUS_SELECT_ACTION'] = 'Select status';
-$lang['TOR_STATUS_CHECKED'] = 'checked';//2
-$lang['TOR_STATUS_NOT_CHECKED'] = 'not checked';//0
-$lang['TOR_STATUS_CLOSED'] = 'closed';//1
-$lang['TOR_STATUS_D'] = 'repeat';//3
-$lang['TOR_STATUS_NOT_PERFECT'] = 'neoformleno';//4
-$lang['TOR_STATUS_PART_PERFECT'] = 'nedooformleno';//5
-$lang['TOR_STATUS_FISHILY'] = 'doubtful';//6
-$lang['TOR_STATUS_COPY'] = 'closed right';//7
+$lang['TOR_STATUS_NAME'] = array(
+    TOR_NOT_APPROVED  => 'not checked',
+    TOR_CLOSED        => 'closed',
+    TOR_APPROVED      => 'checked',
+    TOR_NEED_EDIT     => 'not formalized until',
+    TOR_NO_DESC       => 'not formalized',
+    TOR_DUP           => 'repeat',
+    TOR_CLOSED_CPHOLD => 'closed right',
+    TOR_CONSUMED      => 'absorbed',
+    TOR_DOUBTFUL      => 'doubtful',
+    TOR_CHECKING      => 'verified',
+    TOR_TMP           => 'temporary',
+);
 //end torrent status mod
 
 $lang['BT_TOPIC_TITLE'] = 'Topic title';

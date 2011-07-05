@@ -1163,14 +1163,19 @@ $lang['MAGNET'] = 'Magnet';
 //torrent status mod
 $lang['TOR_STATUS'] = 'Статус';
 $lang['TOR_STATUS_SELECT_ACTION'] = 'Выберите статус';
-$lang['TOR_STATUS_CHECKED'] = 'проверено'; // 2
-$lang['TOR_STATUS_NOT_CHECKED'] = 'не проверено';//0
-$lang['TOR_STATUS_CLOSED'] = 'закрыто';//1
-$lang['TOR_STATUS_D'] = 'повтор';//3
-$lang['TOR_STATUS_NOT_PERFECT'] = 'неоформлено';//4
-$lang['TOR_STATUS_PART_PERFECT'] = 'недооформлено';//5
-$lang['TOR_STATUS_FISHILY'] = 'сомнительно';//6
-$lang['TOR_STATUS_COPY'] = 'закрыто правообладателем';//7
+$lang['TOR_STATUS_NAME'] = array(
+    TOR_NOT_APPROVED  => 'не проверено',
+    TOR_CLOSED        => 'закрыто',
+    TOR_APPROVED      => 'проверено',
+    TOR_NEED_EDIT     => 'недооформлено',
+    TOR_NO_DESC       => 'неоформлено',
+    TOR_DUP           => 'повтор',
+    TOR_CLOSED_CPHOLD => 'закрыто правообладателем',
+    TOR_CONSUMED      => 'поглощено',
+    TOR_DOUBTFUL      => 'сомнительно',
+    TOR_CHECKING      => 'проверяется',
+    TOR_TMP           => 'временная',
+);
 //end torrent status mod
 
 $lang['BT_TOPIC_TITLE'] = 'Название темы';

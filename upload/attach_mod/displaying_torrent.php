@@ -222,10 +222,10 @@ if ($tor_reged && $tor_info)
 			'TOR_SILVER_GOLD' => $tor_type,
 
 			// torrent status mod
-			'TOR_STATUS_TEXT' => $lang['tor_status'][$tor_info['tor_status']],
+			'TOR_STATUS_TEXT' => $lang['TOR_STATUS_NAME'][$tor_info['tor_status']],
 			'TOR_STATUS_ICON' => $bb_cfg['tor_icons'][$tor_info['tor_status']],
 			'TOR_STATUS_BY'   => ($cuid && $is_auth['auth_mod']) ? ('&nbsp;&middot;&nbsp; <a href='. PROFILE_URL . $cuid . '>' . get_username($cuid) . '</a>&nbsp; &middot;&nbsp; <i>'. delta_time($tor_info['checked_time']) .' назад</i>') : '',
-			'TOR_STATUS_SELECT' => build_select('', array_flip($bb_cfg['change_tor_status_select']), TOR_APPROVED),
+			'TOR_STATUS_SELECT' => build_select('', array_flip($bb_cfg['tor_status_name']), TOR_APPROVED),
 			//end torrent status mod
 
 			'S_UPLOAD_IMAGE'  => $upload_image,
