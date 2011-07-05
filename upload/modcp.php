@@ -269,7 +269,7 @@ switch ($mode)
 
             //Обновление кеша новостей на главной
 			$news_forums = array_flip(explode(',', $bb_cfg['latest_news_forum_id']));
-			if(isset(($news_forums[$forum_id] || $news_forums[$new_forum_id])) && $bb_cfg['show_latest_news'] && $result)
+			if((isset($news_forums[$forum_id]) || isset($news_forums[$new_forum_id])) && $bb_cfg['show_latest_news'] && $result)
 			{
 				$datastore->enqueue('latest_news');
 				$atastore->update('latest_news');
