@@ -568,7 +568,7 @@ class bbcode
 		$tpl         = $this->tpl;
 		$img_url_exp = 'http://[^\s\?&;:=\#\"<>]+?\.(jpg|jpeg|gif|png)';
 		$email_exp   = '[a-z0-9&\-_.]+?@[\w\-]+\.([\w\-\.]+\.)?[\w]+';
-		$url_exp     = '[\w]+?://[\w\#!$%&~/.\-;:=,?@а-яА-Я\[\]+]+?';
+		$url_exp     = '[\w\#!$%&~/.\-;:=,?@а-яА-Я\[\]+]+?';
 
 		$this->preg = array(
 			'#\[quote="(.+?)"\]#isu'                                 => $tpl['quote_username_open'],
@@ -584,9 +584,11 @@ class bbcode
 			'#\[font="([\w\- \']+)"\]#isu'                           => '<span style="font-family: $1;">',
 			"#\[img\]($img_url_exp)\[/img\]#isu"                     => $tpl['img'],
 			"#\[img=(left|right)\]($img_url_exp)\[/img\]\s*#isu"     => $tpl['img_aligned'],
-			"#\[url\]($url_exp)\[/url\]#isu"                         => '<a href="$1" class="postLink">$1</a>',
-			"#\[url=($url_exp)\]([^?\n\r\t].*?)\[/url\]#isu"         =>	'<a href="$1" class="postLink">$2</a>',
-			"#\[email\]($email_exp)\[/email\]#isu"                   => '<a href="mailto:$1">$1</a>',
+			"#\[url\](https?://$url_exp)\[/url\]#isu"                => '<a href="$1" class="postLink">$1</a>',
+			"#\[url\](www\.$url_exp)\[/url\]#isu"                    => '<a href="http://$1" class="postLink">$1</a>',
+			"#\[url=(https?://$url_exp)\]([^?\n\t].*?)\[/url\]#isu"  => '<a href="$1" class="postLink">$2</a>',
+			"#\[url=(www\.$url_exp)\]([^?\n\t].*?)\[/url\]#isu"      => '<a href="http://$1" class="postLink">$2</a>',
+		    "#\[email\]($email_exp)\[/email\]#isu"                   => '<a href="mailto:$1">$1</a>',
 		);
 
 		$this->str = array(
@@ -774,14 +776,22 @@ class bbcode
 	{
 		global $bb_cfg;
 
-		$url_regexp = "#(?<![\"'=])\b([\w]+?://[\w\#!$%&~/.\-;:=,?@а-яА-Я\[\]+]+?)(?![\"']|\[/url|\[/img|</a)(?=[,!]?\s|[\)<!])#xiu";
+		$url_regexp = "#
+			(?<![\"'=])
+			\b
+			(
+				https?://[\w\#!$%&~/.\-;:=?@а-яА-Я\[\]+]+
+			)
+			(?![\"']|\[/url|\[/img|</a)
+			(?=[,!]?\s|[\)<!])
+		#xiu";
 
 		// pad it with a space so we can match things at the start of the 1st line.
 		$ret = " $text ";
 
 		// hide passkey
 		$ret = hide_passkey($ret);
-        print_R($ret);
+
 		// matches an "xxxx://yyyy" URL at the start of a line, or after a space.
 		$ret = preg_replace_callback($url_regexp, array(&$this, 'make_url_clickable_callback'), $ret);
 
@@ -798,7 +808,7 @@ class bbcode
 	{
 		$max_len = 70;
 		$href    = $m[1];
-		$name    = (mb_strlen($name, 'UTF-8') > $max_len) ? mb_substr($href, 0, $max_len - 19) .'...'. mb_substr($href, -16) : $href;
+		$name    = (mb_strlen($href, 'UTF-8') > $max_len) ? mb_substr($href, 0, $max_len - 19) .'...'. mb_substr($href, -16) : $href;
 
 		return "<a href=\"$href\" class=\"postLink\">$name</a>";
 	}
