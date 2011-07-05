@@ -238,6 +238,14 @@ switch ($mode)
 		{
 			$result = topic_delete($req_topics, $forum_id);
 
+		    //Обновление кеша новостей на главной
+			$news_forums = array_flip(explode(',', $bb_cfg['latest_news_forum_id']));
+			if(isset($news_forums[$forum_id]) && $bb_cfg['show_latest_news'] && $result)
+			{
+				$datastore->enqueue('latest_news');
+				$atastore->update('latest_news');
+			}
+
 			$msg = ($result) ? $lang['TOPICS_REMOVED'] : 'No topics were removed';
 			message_die(GENERAL_MESSAGE, return_msg_mcp($msg));
 		}
@@ -256,7 +264,16 @@ switch ($mode)
 
 		if ($confirmed)
 		{
-			$result = topic_move($req_topics, $_POST['new_forum'], $forum_id, isset($_POST['move_leave_shadow']), isset($_POST['insert_bot_msg']));
+			$new_forum_id = (int) $_POST['new_forum'];
+			$result = topic_move($req_topics, $new_forum_id, $forum_id, isset($_POST['move_leave_shadow']), isset($_POST['insert_bot_msg']));
+
+            //Обновление кеша новостей на главной
+			$news_forums = array_flip(explode(',', $bb_cfg['latest_news_forum_id']));
+			if(isset(($news_forums[$forum_id] || $news_forums[$new_forum_id])) && $bb_cfg['show_latest_news'] && $result)
+			{
+				$datastore->enqueue('latest_news');
+				$atastore->update('latest_news');
+			}
 
 			$msg = ($result) ? $lang['TOPICS_MOVED'] : $lang['NO_TOPICS_MOVED'];
 			message_die(GENERAL_MESSAGE, return_msg_mcp($msg));
