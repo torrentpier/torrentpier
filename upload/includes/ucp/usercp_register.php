@@ -40,6 +40,15 @@ switch ($mode)
 		}
 		if (!IS_ADMIN)
 		{
+			// Ограничение по ипу
+			if($bb_cfg['user_unique_ip'])
+			{
+				if($users = DB()->fetch_row("SELECT user_id, username FROM ". BB_USERS ." WHERE user_reg_ip = '". USER_IP ."' LIMIT 1"))
+				{
+					bb_die('С вашего IP-адреса уже зарегистрирован пользователь <a href="'. PROFILE_URL . $users['user_id'] .'"><b>'. $users['username'] .'</b></a>.<br /><br />Если Вы ранее не регистрировались на нашем трекере, обратитесь к <a href="mailto:'. $bb_cfg['tech_admin_email'] .'">Администрации</a>');
+				}
+			}
+
 			// Отключение регистрации
 			if ($bb_cfg['new_user_reg_disabled'] || ($bb_cfg['reg_email_activation'] && $bb_cfg['emailer_disabled']))
 			{
@@ -66,7 +75,8 @@ switch ($mode)
 			'username'         => true,
 			'user_password'    => true,
 			'user_email'       => true,
-			'user_timezone' => true,
+			'user_timezone'    => true,
+			'user_lang'        => true,
 		);
 
 		$pr_data = array(
@@ -74,7 +84,8 @@ switch ($mode)
 			'username'         => '',
 			'user_password'    => '',
 			'user_email'       => '',
-			'user_timezone' => $bb_cfg['board_timezone'],
+			'user_timezone'    => $bb_cfg['board_timezone'],
+			'user_lang'        => $bb_cfg['board_lang'],
 			'user_opt'         => 0,
 		);
 		break;
@@ -92,7 +103,8 @@ switch ($mode)
 		$profile_fields = array(
 			'username'         => IS_ADMIN,
 			'user_password'    => true,
-			'user_timezone' => true,
+			'user_lang'        => true,
+			'user_timezone'    => true,
 			'user_opt'         => true,
 			'user_email'       => true,      // должен быть после user_password
 			'user_icq'         => true,
@@ -301,6 +313,18 @@ foreach ($profile_fields as $field => $can_edit)
 		break;
 
 	/**
+	*  Язык (edit, reg)
+	*/
+	case 'user_lang':
+		$user_lang = isset($_POST['user_lang']) ? (string) $_POST['user_lang'] : $pr_data['user_lang'];
+		if ($submit)
+		{
+            $pr_data['user_lang'] = $user_lang;
+			$db_data['user_lang'] = $user_lang;
+		}
+		break;
+
+	/**
 	*  Часовой пояс (edit, reg)
 	*/
 	case 'user_timezone':
@@ -310,7 +334,7 @@ foreach ($profile_fields as $field => $can_edit)
 			if (isset($lang['TZ'][$user_timezone]) && $user_timezone != $pr_data['user_timezone'])
 			{
 				$pr_data['user_timezone'] = $user_timezone;
-				$db_data['user_timezone'] = (int) $user_timezone;
+				$db_data['user_timezone'] = $user_timezone;
 			}
 		}
 		break;
@@ -737,6 +761,7 @@ $template->assign_vars(array(
 	'SHOW_PASS'          => ($adm_edit || ($mode == 'register' && IS_ADMIN)),
 	'CAPTCHA_HTML'       => ($need_captcha) ? CAPTCHA()->get_html() : '',
 
+    'LANGUAGE_SELECT'    => language_select($user_lang, 'user_lang'),
 	'TIMEZONE_SELECT'    => tz_select($user_timezone, 'user_timezone'),
 
     'AVATAR_EXPLAIN'     => sprintf($lang['AVATAR_EXPLAIN'], $bb_cfg['avatar_max_width'], $bb_cfg['avatar_max_height'], (round($bb_cfg['avatar_filesize'] / 1024))),

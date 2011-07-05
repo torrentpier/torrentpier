@@ -238,7 +238,7 @@ switch ($mode)
 		{
 			$result = topic_delete($req_topics, $forum_id);
 
-		    //Обновление кеша новостей на главной
+		    //РћР±РЅРѕРІР»РµРЅРёРµ РєРµС€Р° РЅРѕРІРѕСЃС‚РµР№ РЅР° РіР»Р°РІРЅРѕР№
 			$news_forums = array_flip(explode(',', $bb_cfg['latest_news_forum_id']));
 			if(isset($news_forums[$forum_id]) && $bb_cfg['show_latest_news'] && $result)
 			{
@@ -267,7 +267,7 @@ switch ($mode)
 			$new_forum_id = (int) $_POST['new_forum'];
 			$result = topic_move($req_topics, $new_forum_id, $forum_id, isset($_POST['move_leave_shadow']), isset($_POST['insert_bot_msg']));
 
-            //Обновление кеша новостей на главной
+            //РћР±РЅРѕРІР»РµРЅРёРµ РєРµС€Р° РЅРѕРІРѕСЃС‚РµР№ РЅР° РіР»Р°РІРЅРѕР№
 			$news_forums = array_flip(explode(',', $bb_cfg['latest_news_forum_id']));
 			if(isset(($news_forums[$forum_id] || $news_forums[$new_forum_id])) && $bb_cfg['show_latest_news'] && $result)
 			{

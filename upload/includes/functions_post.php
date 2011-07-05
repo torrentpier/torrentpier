@@ -240,7 +240,7 @@ function submit_post($mode, &$post_data, &$message, &$meta, &$forum_id, &$topic_
 		'post_text'      => $post_message,
 	));
 
-    //Обновление кеша новостей на главной
+    //РћР±РЅРѕРІР»РµРЅРёРµ РєРµС€Р° РЅРѕРІРѕСЃС‚РµР№ РЅР° РіР»Р°РІРЅРѕР№
 	$news_forums = array_flip(explode(',', $bb_cfg['latest_news_forum_id']));
 	if(isset($news_forums[$forum_id]) && $bb_cfg['show_latest_news'] && $mode == 'newtopic')
 	{

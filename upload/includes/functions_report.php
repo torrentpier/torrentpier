@@ -348,7 +348,7 @@ function report_notify($mode)
 			// Obtain notification users
 			//
 			$user_level_sql = ($bb_cfg['report_list_admin']) ? '= ' . ADMIN : 'IN(' . ADMIN . ', ' . MOD . ')';
-			$sql = 'SELECT user_id, user_level, user_email, user_lang, user_timezone, user_dateformat
+			$sql = 'SELECT user_id, user_level, user_email, user_lang
 				FROM ' . BB_USERS . '
 				WHERE user_active = 1
 					AND user_level ' . $user_level_sql . '
@@ -439,7 +439,7 @@ function report_notify($mode)
 			// Obtain notification users
 			//
 			$user_level_sql = ($bb_cfg['report_list_admin']) ? '= ' . ADMIN : 'IN(' . ADMIN . ', ' . MOD . ')';
-			$sql = 'SELECT user_id, user_level, user_email, user_lang, user_dateformat, user_timezone
+			$sql = 'SELECT user_id, user_level, user_email, user_lang
 				FROM ' . BB_USERS . '
 				WHERE user_active = 1
 					AND user_level ' . $user_level_sql . '
@@ -588,7 +588,7 @@ function report_notify($mode)
 
 					$vars = array_merge($vars, array(
 						'REPORT_AUTHOR' => $userdata['username'],
-						'REPORT_TIME' => bb_date($report['report_time'], $user_info['user_dateformat'], $user_info['user_timezone']),
+						'REPORT_TIME' => bb_date($report['report_time']),
 						'REPORT_REASON' => $report_reason)
 					);
 				break;
@@ -596,7 +596,7 @@ function report_notify($mode)
 				case 'change':
 					$vars = array_merge($vars, array(
 						'REPORT_CHANGE_AUTHOR' => $report['username'],
-						'REPORT_CHANGE_TIME' => bb_date($report['report_change_time'], $user_info['user_dateformat'], $user_info['user_timezone']),
+						'REPORT_CHANGE_TIME' => bb_date($report['report_change_time']),
 						'REPORT_CHANGE_STATUS' => $lang['REPORT_STATUS'][$status],
 						'REPORT_CHANGE_COMMENT' => str_replace(array("\r\n", "\r", "\n"), ' ', $report['report_change_comment']))
 					);

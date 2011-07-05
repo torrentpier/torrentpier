@@ -621,11 +621,6 @@ class user_common
 				define('LANG_DIR', LANG_ROOT_DIR .'lang_'. $bb_cfg['default_lang'] .'/');
 			}
 
-			if ($this->data['user_dateformat'])
-			{
-				$bb_cfg['default_dateformat'] = $this->data['user_dateformat'];
-			}
-
 			if (isset($this->data['user_timezone']))
 			{
 				$bb_cfg['board_timezone'] = $this->data['user_timezone'];
@@ -633,7 +628,6 @@ class user_common
 		}
 
 		$this->data['user_lang']       = $bb_cfg['default_lang'];
-		$this->data['user_dateformat'] = $bb_cfg['default_dateformat'];
 		$this->data['user_timezone']   = $bb_cfg['board_timezone'];
 
 		if (!defined('LANG_DIR'))

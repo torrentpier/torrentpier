@@ -126,6 +126,12 @@ ajax.callback.gen_passkey = function(data){
 	</td>
 </tr>
 <!-- ENDIF -->
+<!-- IF $bb_cfg['allow_change']['language'] -->
+<tr>
+	<td>{L_BOARD_LANG}:</td>
+	<td>{LANGUAGE_SELECT}</td>
+</tr>
+<!-- ENDIF -->
 <tr>
 	<td>{L_TIMEZONE}:</td>
 	<td>{TIMEZONE_SELECT}</td>
