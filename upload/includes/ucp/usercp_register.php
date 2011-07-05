@@ -41,7 +41,7 @@ switch ($mode)
 		if (!IS_ADMIN)
 		{
 			// Ограничение по ипу
-			if($bb_cfg['user_unique_ip'])
+			if($bb_cfg['unique_ip'])
 			{
 				if($users = DB()->fetch_row("SELECT user_id, username FROM ". BB_USERS ." WHERE user_reg_ip = '". USER_IP ."' LIMIT 1"))
 				{

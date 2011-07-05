@@ -243,7 +243,7 @@ switch ($mode)
 			if(isset($news_forums[$forum_id]) && $bb_cfg['show_latest_news'] && $result)
 			{
 				$datastore->enqueue('latest_news');
-				$atastore->update('latest_news');
+				$datastore->update('latest_news');
 			}
 
 			$msg = ($result) ? $lang['TOPICS_REMOVED'] : 'No topics were removed';
@@ -272,7 +272,7 @@ switch ($mode)
 			if((isset($news_forums[$forum_id]) || isset($news_forums[$new_forum_id])) && $bb_cfg['show_latest_news'] && $result)
 			{
 				$datastore->enqueue('latest_news');
-				$atastore->update('latest_news');
+				$datastore->update('latest_news');
 			}
 
 			$msg = ($result) ? $lang['TOPICS_MOVED'] : $lang['NO_TOPICS_MOVED'];
