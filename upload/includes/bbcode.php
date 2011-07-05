@@ -809,9 +809,7 @@ class bbcode
 
 		if(!preg_match("#{$bb_cfg['server_name']}#", $href))
 		{
-			require_once(INC_DIR .'class.idna_convert.php');
-			$IDN = new idna_convert();
-			return '<a href="'. make_url('/redirect.php?url=') . base64_encode($IDN->encode($href)) .'" class="postLink" target="_blank">'. $name .'</a>';
+			return '<a href="'. make_url('/redirect.php?url=') . urlencode($href) .'" class="postLink" target="_blank">'. $name .'</a>';
 		}
 		return "<a href=\"$href\" class=\"postLink\">$name</a>";
 	}

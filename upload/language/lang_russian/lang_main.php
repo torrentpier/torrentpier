@@ -1163,6 +1163,7 @@ $lang['MAGNET'] = 'Magnet';
 //torrent status mod
 $lang['TOR_STATUS'] = 'Статус';
 $lang['TOR_STATUS_SELECT_ACTION'] = 'Выберите статус';
+$lang['TOR_STATUS_SELECT_ALL'] = 'Все статусы';
 $lang['TOR_STATUS_NAME'] = array(
     TOR_NOT_APPROVED  => 'не проверено',
     TOR_CLOSED        => 'закрыто',

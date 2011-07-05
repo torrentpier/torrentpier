@@ -1157,6 +1157,7 @@ $lang['MAGNET'] = 'Magnet';
 //torrent status mod
 $lang['TOR_STATUS'] = 'Status';
 $lang['TOR_STATUS_SELECT_ACTION'] = 'Select status';
+$lang['TOR_STATUS_SELECT_ALL'] = 'All statuses';
 $lang['TOR_STATUS_NAME'] = array(
     TOR_NOT_APPROVED  => 'not checked',
     TOR_CLOSED        => 'closed',

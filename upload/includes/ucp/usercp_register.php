@@ -45,7 +45,7 @@ switch ($mode)
 			{
 				if($users = DB()->fetch_row("SELECT user_id, username FROM ". BB_USERS ." WHERE user_reg_ip = '". USER_IP ."' LIMIT 1"))
 				{
-					bb_die('С вашего IP-адреса уже зарегистрирован пользователь <a href="'. PROFILE_URL . $users['user_id'] .'"><b>'. $users['username'] .'</b></a>.<br /><br />Если Вы ранее не регистрировались на нашем трекере, обратитесь к <a href="mailto:'. $bb_cfg['tech_admin_email'] .'">Администрации</a>');
+					bb_die(sprintf($lang['ALREADY_REG'], '<a href="'. PROFILE_URL . $users['user_id'] .'"><b>'. $users['username'] .'</b></a>', $bb_cfg['tech_admin_email']));
 				}
 			}
 

@@ -101,7 +101,7 @@ if ($is_auth['auth_mod'])
 		unset($_REQUEST['sort'], $_REQUEST['order'], $_REQUEST[$title_match_key]);
 		$show_type_separator = false;
 	}
-    $select_tst = array_merge(array('* любой' => -1), array_flip($lang['TOR_STATUS_NAME']));
+    $select_tst = array_merge(array($lang['TOR_STATUS_SELECT_ALL'] => -1), array_flip($lang['TOR_STATUS_NAME']));
 	$template->assign_vars(array(
 		'SELECT_TST' => build_select('tst', $select_tst, $tor_status),
 	));

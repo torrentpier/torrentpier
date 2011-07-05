@@ -2,15 +2,12 @@
 
 define('BB_ROOT', './');
 require(BB_ROOT .'common.php');
-require(INC_DIR .'class.idna_convert.php');
 
 $user->session_start();
 $url  = (string) request_var('url', '');
 $time = 15;
 
-$url = base64_decode($url);
-$IDN = new idna_convert();
-$url = $IDN->decode($url);
+$url = urldecode($url);
 
 if(!$url)
 {
