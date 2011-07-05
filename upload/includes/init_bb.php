@@ -507,10 +507,6 @@ function vdump ($var, $title = '')
 
 function htmlCHR ($txt, $double_encode = false, $quote_style = ENT_QUOTES, $charset = 'UTF-8')
 {
-	if (is_array($txt))
-	{
-		log_request('htmlCHR');
-	}
 	return (string) htmlspecialchars($txt, $quote_style, $charset, $double_encode);
 }
 

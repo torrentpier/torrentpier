@@ -489,11 +489,11 @@ else if ( ($submit || $confirm) && !$topic_has_new_posts )
 		case 'editpost':
 		case 'newtopic':
 		case 'reply':
-			$username = ( !empty($_POST['username']) ) ? $_POST['username'] : '';
-			$subject = ( !empty($_POST['subject']) ) ? trim($_POST['subject']) : '';
-			$message = ( !empty($_POST['message']) ) ? $_POST['message'] : '';
-			$poll_title = ( isset($_POST['poll_title']) && $is_auth['auth_pollcreate'] ) ? $_POST['poll_title'] : '';
-			$poll_options = ( isset($_POST['poll_option_text']) && $is_auth['auth_pollcreate'] ) ? $_POST['poll_option_text'] : '';
+			$username = ( !empty($_POST['username']) ) ? clean_username($_POST['username']) : '';
+			$subject = ( !empty($_POST['subject']) ) ? clean_title($_POST['subject']) : '';
+			$message = ( !empty($_POST['message']) ) ? prepare_message($_POST['message']) : '';
+			$poll_title = ( isset($_POST['poll_title']) && $is_auth['auth_pollcreate'] ) ? clean_title($_POST['poll_title']) : '';
+			$poll_options = ( isset($_POST['poll_option_text']) && $is_auth['auth_pollcreate'] ) ? clean_title($_POST['poll_option_text']) : '';
 			$poll_length = ( isset($_POST['poll_length']) && $is_auth['auth_pollcreate'] ) ? $_POST['poll_length'] : '';
 
 			prepare_post($mode, $post_data, $error_msg, $username, $subject, $message, $poll_title, $poll_options, $poll_length);
