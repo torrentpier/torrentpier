@@ -20,6 +20,7 @@ $tor_search_limit    = (IS_AM) ? 2000 : 500;
 $title_match_limit   = 700;                    // больше $tor_search_limit т.к. ищет по всем темам, а не только по раздачам
 $forum_select_size   = (UA_OPERA) ? 21 : 24;   // forum select box max rows
 $max_forum_name_len  = 60;                     // inside forum select box
+$max_forums_selected = 50;
 $title_match_max_len = 60;
 $poster_name_max_len = 25;
 $tor_colspan         = 13;                     // torrents table colspan with all columns

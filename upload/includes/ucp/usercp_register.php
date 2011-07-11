@@ -22,6 +22,7 @@ $adm_edit = false;                      // редактирование адми
 require(INC_DIR .'bbcode.php');
 require(INC_DIR .'functions_validate.php');
 require(INC_DIR .'functions_selects.php');
+require(INC_DIR .'ucp/usercp_avatar.php');
 
 $pr_data = array();   // данные редактируемого либо регистрационного профиля
 $db_data = array();   // данные для базы: регистрационные либо измененные данные юзера
@@ -145,31 +146,29 @@ switch ($mode)
 			bb_die('Профиль не найден');
 		}
 
-		include(INC_DIR . 'ucp/usercp_avatar.php');
-
 		if (!bf($pr_data['user_opt'], 'user_opt', 'allow_avatar') && ($bb_cfg['allow_avatar_upload'] || $bb_cfg['allow_avatar_local'] || $bb_cfg['allow_avatar_remote']))
 		{
-			$template->assign_block_vars('switch_avatar_block', array() );
+			$template->assign_block_vars('switch_avatar_block', array());
 
-			if ( $bb_cfg['allow_avatar_upload'] && file_exists(@phpbb_realpath('./' . $bb_cfg['avatar_path'])) )
+			if ($bb_cfg['allow_avatar_upload'] && file_exists(@phpbb_realpath('./' . $bb_cfg['avatar_path'])))
 			{
-				$template->assign_block_vars('switch_avatar_block.switch_avatar_local_upload', array() );
-				$template->assign_block_vars('switch_avatar_block.switch_avatar_remote_upload', array() );
+				$template->assign_block_vars('switch_avatar_block.switch_avatar_local_upload', array());
+				$template->assign_block_vars('switch_avatar_block.switch_avatar_remote_upload', array());
 			}
 
-			if ( $bb_cfg['allow_avatar_remote'] )
+			if ($bb_cfg['allow_avatar_remote'])
 			{
-				$template->assign_block_vars('switch_avatar_block.switch_avatar_remote_link', array() );
+				$template->assign_block_vars('switch_avatar_block.switch_avatar_remote_link', array());
 			}
 
-			if ( $bb_cfg['allow_avatar_local'] && file_exists(@phpbb_realpath('./' . $bb_cfg['avatar_gallery_path'])) )
+			if ($bb_cfg['allow_avatar_local'] && file_exists(@phpbb_realpath('./' . $bb_cfg['avatar_gallery_path'])))
 			{
-				$template->assign_block_vars('switch_avatar_block.switch_avatar_local_gallery', array() );
+				$template->assign_block_vars('switch_avatar_block.switch_avatar_local_gallery', array());
 			}
 		}
 		else
 		{
-			$template->assign_block_vars('not_avatar_block', array() );
+			$template->assign_block_vars('not_avatar_block', array());
 		}
         break;
 
@@ -477,7 +476,7 @@ foreach ($profile_fields as $field => $can_edit)
 		$skype = isset($_POST['user_skype']) ? (string) $_POST['user_skype'] : $pr_data['user_skype'];
 		if ($submit && $skype != $pr_data['user_skype'])
 		{
-			if ( !preg_match("#^[a-zA-Z0-9_.\-@,]{6,32}$#", $skype))
+			if (!preg_match("#^[a-zA-Z0-9_.\-@,]{6,32}$#", $skype))
 			{
 				$errors[] = $lang['SKYPE_ERROR'];
 			}
@@ -490,30 +489,30 @@ foreach ($profile_fields as $field => $can_edit)
 
 	case 'user_avatar':
 	case 'user_avatar_type':
-		if( isset($_POST['avatargallery']) && !$errors )
+		if(isset($_POST['avatargallery']) && !$errors)
 		{
-			$avatar_category = ( !empty($_POST['avatarcategory']) ) ? htmlspecialchars($_POST['avatarcategory']) : '';
+			$avatar_category = (!empty($_POST['avatarcategory'])) ? htmlspecialchars($_POST['avatarcategory']) : '';
 
 	        $dir = @opendir($bb_cfg['avatar_gallery_path']);
 
 			$avatar_images = array();
-			while( $file = @readdir($dir) )
+			while($file = @readdir($dir))
 			{
-				if( $file != '.' && $file != '..' && !is_file($bb_cfg['avatar_gallery_path'] . '/' . $file) && !is_link($bb_cfg['avatar_gallery_path'] . '/' . $file) )
+				if($file != '.' && $file != '..' && !is_file($bb_cfg['avatar_gallery_path'] . '/' . $file) && !is_link($bb_cfg['avatar_gallery_path'] . '/' . $file))
 				{
 					$sub_dir = @opendir($bb_cfg['avatar_gallery_path'] . '/' . $file);
 
 					$avatar_row_count = 0;
 					$avatar_col_count = 0;
-					while( $sub_file = @readdir($sub_dir) )
+					while($sub_file = @readdir($sub_dir))
 					{
-						if( preg_match('/(\.gif$|\.png$|\.jpg|\.jpeg)$/is', $sub_file) )
+						if(preg_match('/(\.gif$|\.png$|\.jpg|\.jpeg)$/is', $sub_file))
 						{
 							$avatar_images[$file][$avatar_row_count][$avatar_col_count] = $sub_file;
 							$avatar_name[$file][$avatar_row_count][$avatar_col_count] = ucfirst(str_replace("_", " ", preg_replace('/^(.*)\..*$/', '\1', $sub_file)));
 
 							$avatar_col_count++;
-							if( $avatar_col_count == 5 )
+							if($avatar_col_count == 5)
 							{
 								$avatar_row_count++;
 								$avatar_col_count = 0;
@@ -528,17 +527,17 @@ foreach ($profile_fields as $field => $can_edit)
 			@ksort($avatar_images);
 			@reset($avatar_images);
 
-			if( empty($category) )
+			if(empty($category))
 			{
-				list($category, ) = each($avatar_images);
+				list($category,) = each($avatar_images);
 			}
 			@reset($avatar_images);
 
 			$s_categories = '<select name="avatarcategory">';
-			while( list($key) = each($avatar_images) )
+			while(list($key) = each($avatar_images))
 			{
-				$selected = ( $key == $category ) ? ' selected="selected"' : '';
-				if( count($avatar_images[$key]) )
+				$selected = ($key == $category) ? ' selected="selected"' : '';
+				if(count($avatar_images[$key]))
 				{
 					$s_categories .= '<option value="' . $key . '"' . $selected . '>' . ucfirst($key) . '</option>';
 				}
@@ -577,54 +576,54 @@ foreach ($profile_fields as $field => $can_edit)
 			$template->set_filenames(array('body' => 'usercp_avatar_gallery.tpl'));
 		}
 
-		$user_avatar_local = ( isset($_POST['avatarselect']) && !empty($_POST['submitavatar']) && $bb_cfg['allow_avatar_local'] ) ? htmlspecialchars($_POST['avatarselect']) : ( ( isset($_POST['avatarlocal'])  ) ? htmlspecialchars($_POST['avatarlocal']) : '' );
-		$user_avatar_category = ( isset($_POST['avatarcatname']) && $bb_cfg['allow_avatar_local'] ) ? htmlspecialchars($_POST['avatarcatname']) : '' ;
+		$user_avatar_local = (isset($_POST['avatarselect']) && !empty($_POST['submitavatar']) && $bb_cfg['allow_avatar_local']) ? htmlspecialchars($_POST['avatarselect']) : ((isset($_POST['avatarlocal'])) ? htmlspecialchars($_POST['avatarlocal']) : '');
+		$user_avatar_category = (isset($_POST['avatarcatname']) && $bb_cfg['allow_avatar_local']) ? htmlspecialchars($_POST['avatarcatname']) : '';
 
-		$user_avatar_remoteurl = ( !empty($_POST['avatarremoteurl']) ) ? trim(htmlspecialchars($_POST['avatarremoteurl'])) : '';
-		$user_avatar_upload = ( !empty($_POST['avatarurl']) ) ? trim($_POST['avatarurl']) : ( ( !empty($_FILES['avatar']) && $_FILES['avatar']['tmp_name'] != "none") ? $_FILES['avatar']['tmp_name'] : '' );
-		$user_avatar_name = ( !empty($_FILES['avatar']['name']) ) ? $_FILES['avatar']['name'] : '';
-		$user_avatar_size = ( !empty($_FILES['avatar']['size']) ) ? $_FILES['avatar']['size'] : 0;
-		$user_avatar_filetype = ( !empty($_FILES['avatar']['type']) ) ? $_FILES['avatar']['type'] : '';
+		$user_avatar_remoteurl = (!empty($_POST['avatarremoteurl'])) ? trim(htmlspecialchars($_POST['avatarremoteurl'])) : '';
+		$user_avatar_upload = (!empty($_POST['avatarurl'])) ? trim($_POST['avatarurl']) : ((!empty($_FILES['avatar']) && $_FILES['avatar']['tmp_name'] != "none") ? $_FILES['avatar']['tmp_name'] : '');
+		$user_avatar_name = (!empty($_FILES['avatar']['name'])) ? $_FILES['avatar']['name'] : '';
+		$user_avatar_size = (!empty($_FILES['avatar']['size'])) ? $_FILES['avatar']['size'] : 0;
+		$user_avatar_filetype = (!empty($_FILES['avatar']['type'])) ? $_FILES['avatar']['type'] : '';
 
-		$user_avatar = ( empty($user_avatar_local)) ? $pr_data['user_avatar'] : '';
-		$user_avatar_type = ( empty($user_avatar_local)) ? $pr_data['user_avatar_type'] : '';
+		$user_avatar = (empty($user_avatar_local)) ? $pr_data['user_avatar'] : '';
+		$user_avatar_type = (empty($user_avatar_local)) ? $pr_data['user_avatar_type'] : '';
 
-		if ( (isset($_POST['avatargallery']) || isset($_POST['submitavatar']) || isset($_POST['cancelavatar'])) && (!isset($submit)) )
+		if ((isset($_POST['avatargallery']) || isset($_POST['submitavatar']) || isset($_POST['cancelavatar'])) && (!isset($submit)))
 		{
-			if ( !isset($_POST['cancelavatar']))
+			if (!isset($_POST['cancelavatar']))
 			{
 				$user_avatar = $user_avatar_category . '/' . $user_avatar_local;
 				$user_avatar_type = USER_AVATAR_GALLERY;
 			}
 		}
 
-		$ini_val = ( phpversion() >= '4.0.0' ) ? 'ini_get' : 'get_cfg_var';
-		$form_enctype = ( @$ini_val('file_uploads') == '0' || strtolower(@$ini_val('file_uploads') == 'off') || phpversion() == '4.0.4pl1' || !$bb_cfg['allow_avatar_upload'] || ( phpversion() < '4.0.3' && @$ini_val('open_basedir') != '' ) ) ? '' : 'enctype="multipart/form-data"';
+		$ini_val = (phpversion() >= '4.0.0') ? 'ini_get' : 'get_cfg_var';
+		$form_enctype = (@$ini_val('file_uploads') == '0' || strtolower(@$ini_val('file_uploads') == 'off') || phpversion() == '4.0.4pl1' || !$bb_cfg['allow_avatar_upload'] || (phpversion() < '4.0.3' && @$ini_val('open_basedir') != '')) ? '' : 'enctype="multipart/form-data"';
 
 		$avatar = '';
 
-		if ( isset($_POST['avatardel']) && $mode == 'editprofile' )
+		if (isset($_POST['avatardel']) && $mode == 'editprofile')
 		{
 			$avatar = user_avatar_delete($pr_data['user_avatar_type'], $pr_data['user_avatar']);
 		}
-		else if ( ( !empty($user_avatar_upload) || !empty($user_avatar_name) ) && $bb_cfg['allow_avatar_upload'] )
+		else if ((!empty($user_avatar_upload) || !empty($user_avatar_name)) && $bb_cfg['allow_avatar_upload'])
 		{
-			if ( !empty($user_avatar_upload) )
+			if (!empty($user_avatar_upload))
 			{
 				$avatar_mode = (empty($user_avatar_name)) ? 'remote' : 'local';
 				$avatar = user_avatar_upload($mode, $avatar_mode, $pr_data['user_avatar'], $pr_data['user_avatar_type'], $errors, $user_avatar_upload, $user_avatar_name, $user_avatar_size, $user_avatar_filetype);
 			}
-			else if ( !empty($user_avatar_name) )
+			else if (!empty($user_avatar_name))
 			{
 				$errors[] = sprintf($lang['AVATAR_FILESIZE'], round($bb_cfg['avatar_filesize'] / 1024));
 			}
 		}
-		else if ( $user_avatar_remoteurl != '' && $bb_cfg['allow_avatar_remote'] )
+		else if ($user_avatar_remoteurl != '' && $bb_cfg['allow_avatar_remote'])
 		{
 			user_avatar_delete($pr_data['user_avatar_type'], $pr_data['user_avatar']);
 			$avatar = user_avatar_url($mode, $errors, $user_avatar_remoteurl);
 		}
-		else if ( $user_avatar_local != '' && $bb_cfg['allow_avatar_local'] )
+		else if ($user_avatar_local != '' && $bb_cfg['allow_avatar_local'])
 		{
 			user_avatar_delete($pr_data['user_avatar_type'], $pr_data['user_avatar']);
 			$avatar = user_avatar_gallery($mode, $errors, $user_avatar_local, $user_avatar_category);
@@ -647,7 +646,7 @@ foreach ($profile_fields as $field => $can_edit)
         }
 	    if ($submit && !bf($pr_data['user_opt'], 'user_opt', 'allow_avatar'))
 		{
-			if ( $user_avatar != $pr_data['user_avatar'] || $user_avatar_type != $pr_data['user_avatar_type'])
+			if ($user_avatar != $pr_data['user_avatar'] || $user_avatar_type != $pr_data['user_avatar_type'])
 			{
 				$db_data['user_avatar'] = $avatar['user_avatar'];
 				$db_data['user_avatar_type'] = $avatar['user_avatar_type'];
@@ -691,17 +690,16 @@ if ($submit && !$errors)
 
 		if (IS_ADMIN)
 		{
-			set_pr_die_append_msg($new_user_id);
-			$die_msg = "Пользователь <b>$username</b> был успешно создан";
+			$message = $lang['ACCOUNT_ADDED'];
 		}
 		else
 		{
-			if ( $bb_cfg['require_activation'] == USER_ACTIVATION_SELF )
+			if ($bb_cfg['require_activation'] == USER_ACTIVATION_SELF)
 			{
 				$message = $lang['ACCOUNT_INACTIVE'];
 				$email_template = 'user_welcome_inactive';
 			}
-			else if ( $bb_cfg['require_activation'] == USER_ACTIVATION_ADMIN )
+			else if ($bb_cfg['require_activation'] == USER_ACTIVATION_ADMIN)
 			{
 				$message = $lang['ACCOUNT_INACTIVE_ADMIN'];
 				$email_template = 'admin_welcome_inactive';
@@ -735,7 +733,7 @@ if ($submit && !$errors)
 			$emailer->send();
 			$emailer->reset();
 
-			if ( $bb_cfg['require_activation'] == USER_ACTIVATION_ADMIN )
+			if ($bb_cfg['require_activation'] == USER_ACTIVATION_ADMIN)
 			{
 				$emailer->from($bb_cfg['board_email']);
 				$emailer->replyto($bb_cfg['board_email']);
@@ -745,8 +743,8 @@ if ($submit && !$errors)
 				$emailer->set_subject($lang['NEW_ACCOUNT_SUBJECT']);
 
 				$emailer->assign_vars(array(
-					'USERNAME' => html_entity_decode($username),
-					'EMAIL_SIG' => str_replace('<br />', "\n", "-- \n" . $bb_cfg['board_email_sig']),
+					'USERNAME'   => html_entity_decode($username),
+					'EMAIL_SIG'  => str_replace('<br />', "\n", "-- \n" . $bb_cfg['board_email_sig']),
 
 					'U_ACTIVATE' => make_url('profile.php?mode=activate&' . POST_USERS_URL . '=' . $new_user_id . '&act_key=' . $db_data['user_actkey'])
 				));
@@ -755,17 +753,15 @@ if ($submit && !$errors)
 			}
 		}
 
-		$die_msg = $die_msg . '<br /><br />' . sprintf($lang['CLICK_RETURN_INDEX'],  '<a href="' . append_sid("index.php") . '">', '</a>');
+		$message = $message . '<br /><br />' . sprintf($lang['CLICK_RETURN_INDEX'],  '<a href="' . append_sid("index.php") . '">', '</a>');
 
-		bb_die($die_msg);
+		bb_die($message);
 	}
 	/**
 	*  Редактирование
 	*/
 	else
 	{
-		set_pr_die_append_msg($pr_data['user_id']);
-
 		// если что-то было изменено
 		if ($db_data)
 		{
@@ -790,7 +786,7 @@ if ($submit && !$errors)
 					$emailer->use_template('user_activate', $pr_data['user_lang']);
 				}
 				$emailer->email_address($email);
-				$emailer->set_subject($lang['Reactivate']);
+				$emailer->set_subject($lang['REACTIVATE']);
 
 				$emailer->assign_vars(array(
 					'SITENAME'   => $bb_cfg['sitename'],
@@ -803,6 +799,7 @@ if ($submit && !$errors)
 				$emailer->reset();
 
 				$message = $lang['PROFILE_UPDATED_INACTIVE'] . '<br /><br />' . sprintf($lang['CLICK_RETURN_INDEX'],  '<a href="' . append_sid("index.php") . '">', '</a>');
+			    $user->session_end();
 			}
 			else
 			{
@@ -875,16 +872,7 @@ if ($mode == 'editprofile' && $userdata['session_logged_in'])
 {
 	$template->assign_block_vars('switch_bittorrent', array());
 
-	$sql = 'SELECT auth_key
-		FROM '. BB_BT_USERS .'
-		WHERE user_id = '. $pr_user_id;
-
-	if (!$result = DB()->sql_query($sql))
-	{
-		message_die(GENERAL_ERROR, 'Could not query users passkey', '', __LINE__, __FILE__, $sql);
-	}
-
-	$row = DB()->sql_fetchrow($result);
+	$row = DB()->fetch_row("SELECT auth_key FROM ". BB_BT_USERS ." WHERE user_id = $pr_user_id");
 	$curr_passkey = ($row['auth_key']) ? $row['auth_key'] : '';
 
 	$template->assign_vars(array(
@@ -896,19 +884,6 @@ if ($mode == 'editprofile' && $userdata['session_logged_in'])
 	));
 }
 //bt end
-
-function set_pr_die_append_msg ($pr_uid)
-{
-	global $template;
-
-	$template->assign_var('BB_DIE_APPEND_MSG', '
-		<a href="'. PROFILE_URL . $pr_uid .'" onclick="return post2url(this.href, {after_edit: 1});">Перейти к просмотру профиля</a>
-		<br /><br />
-		<a href="profile.php?mode=editprofile'. (IS_ADMIN ? "&amp;u=$pr_uid" : '') .'" onclick="return post2url(this.href, {after_edit: 1});">Вернуться к редактированию</a>
-		<br /><br />
-		<a href="index.php">Вернуться на главную страницу</a>
-	');
-}
 
 require(PAGE_HEADER);
 

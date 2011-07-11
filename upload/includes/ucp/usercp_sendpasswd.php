@@ -40,7 +40,7 @@ if ( isset($_POST['submit']) )
 			$user_password = make_rand_str(8);
 
 			$sql = "UPDATE " . BB_USERS . "
-				SET user_newpasswd = '" . md5($user_password) . "', user_actkey = '$user_actkey'
+				SET user_newpasswd = '" . md5(md5($user_password)) . "', user_actkey = '$user_actkey'
 				WHERE user_id = " . $row['user_id'];
 			if ( !DB()->sql_query($sql) )
 			{
@@ -63,8 +63,8 @@ if ( isset($_POST['submit']) )
 				'PASSWORD' => $user_password,
 				'EMAIL_SIG' => (!empty($bb_cfg['board_email_sig'])) ? str_replace('<br />', "\n", "-- \n" . $bb_cfg['board_email_sig']) : '',
 
-				'U_ACTIVATE' => $server_url . '?mode=activate&' . POST_USERS_URL . '=' . $user_id . '&act_key=' . $user_actkey)
-			);
+				'U_ACTIVATE' => make_url('profile.php?mode=activate&' . POST_USERS_URL . '=' . $user_id . '&act_key=' . $user_actkey)
+			));
 			$emailer->send();
 			$emailer->reset();
 
