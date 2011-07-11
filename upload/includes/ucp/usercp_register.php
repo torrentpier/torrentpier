@@ -309,7 +309,8 @@ foreach ($profile_fields as $field => $can_edit)
 				{
 					$errors[] = $err;
 				}
-				$pr_data['user_active'] = '';
+				$pr_data['user_active'] = 0;
+				$db_data['user_active'] = 0;
 				$db_data['user_email'] = $email;
 			}
 		}
@@ -794,7 +795,7 @@ if ($submit && !$errors)
 			if (!$pr_data['user_active'])
 			{
 				$user_actkey = make_rand_str(12);
-				$pr_data['user_actkey'] = $user_actkey;
+                $pr_data['user_actkey'] = $user_actkey;
 				$db_data['user_actkey'] = $user_actkey;
 
 				include(INC_DIR . 'emailer.class.php');
