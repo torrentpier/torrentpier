@@ -86,26 +86,16 @@ ajax.callback.gen_passkey = function(data){
 	<th colspan="2">{L_PROFILE_INFO}</th>
 </tr>
 <tr>
-	<td>Пол:</td>
-	<td>
-		<select name="user_gender" id="user_gender">
-			<option value="0" <!-- IF USER_GENDER_0 -->selected="selected"<!-- ENDIF -->>&nbsp;Не определилось&nbsp;</option>
-			<option value="1" <!-- IF USER_GENDER_1 -->selected="selected"<!-- ENDIF -->>&nbsp;Мужской&nbsp;</option>
-			<option value="2" <!-- IF USER_GENDER_2 -->selected="selected"<!-- ENDIF -->>&nbsp;Женский&nbsp;</option>
-		</select>
-	</td>
+	<td>{L_GENDER}:</td>
+	<td>{USER_GENDER}</td>
 </tr>
 <tr>
 	<td>ICQ:</td>
 	<td><input type="text" name="user_icq" size="30" maxlength="15" value="{USER_ICQ}" /></td>
 </tr>
 <tr>
-	<td>CommFort:</td>
-	<td><input type="text" name="user_commfort" size="30" maxlength="15" value="{USER_COMMFORT}" /></td>
-</tr>
-<tr>
-	<td>Skype:</td>
-	<td><input type="text" name="user_skype" size="30" maxlength="15" value="{USER_SKYPE}" /></td>
+	<td>{L_SKYPE}:</td>
+	<td><input type="text" name="user_skype" size="30" maxlength="250" value="{USER_SKYPE}" /></td>
 </tr>
 <tr>
 	<td>{L_WEBSITE}:</td>
@@ -212,52 +202,24 @@ ajax.callback.view_message = function(data){
 	<td><input type="text" name="dateformat" value="{DATE_FORMAT}" maxlength="14" /></td>
 </tr>
 <!-- ENDIF -->
-<!-- BEGIN switch_avatar_block -->
+<!-- BEGIN not_avatar_block -->
 <tr>
 	<th colspan="2">{L_AVATAR_PANEL}</th>
 </tr>
 <tr>
 	<td colspan="2">
-		<table class="borderless bCenter w80 med">
+		<table class="borderless bCenter w80">
 		<tr>
-			<td>{AVATAR_EXPLAIN}</td>
-			<td class="tCenter nowrap">
+			<td>{L_AVATAR_DISABLE}</td>
+			<td class="tCenter nowrap med">
 				<p>{L_CURRENT_IMAGE}</p>
 				<p class="mrg_6">{USER_AVATAR}</p>
-				<p><label><input type="checkbox" name="avatardel" /> {L_DELETE_IMAGE}</label></p>
 			</td>
 		</tr>
 		</table>
 	</td>
 </tr>
-<!-- BEGIN switch_avatar_local_upload -->
-<tr>
-	<td>{L_UPLOAD_AVATAR_FILE}:</td>
-	<td>
-		<input type="file" name="avatar" size="40" />
-		<input type="hidden" name="MAX_FILE_SIZE" value="{AVATAR_SIZE}" />
-	</td>
-</tr>
-<!-- END switch_avatar_local_upload -->
-<!-- BEGIN switch_avatar_remote_upload -->
-<tr>
-	<td>{L_UPLOAD_AVATAR_URL}:<h6>{L_UPLOAD_AVATAR_URL_EXPLAIN}</h6></td>
-	<td><input type="text" name="avatarurl" size="44" /></td>
-</tr>
-<!-- END switch_avatar_remote_upload -->
-<!-- BEGIN switch_avatar_remote_link -->
-<tr>
-	<td>{L_LINK_REMOTE_AVATAR}:<h6>{L_LINK_REMOTE_AVATAR_EXPLAIN}</h6></td>
-	<td><input type="text" name="avatarremoteurl" size="44" /></td>
-</tr>
-<!-- END switch_avatar_remote_link -->
-<!-- BEGIN switch_avatar_local_gallery -->
-<tr>
-	<td>{L_AVATAR_GALLERY}:</td>
-	<td><input type="submit" name="avatargallery" value="{L_VIEW_AVATAR_GALLERY}" class="lite" /></td>
-</tr>
-<!-- END switch_avatar_local_gallery -->
-<!-- END switch_avatar_block -->
+<!-- END not_avatar_block -->
 <!-- ENDIF / EDIT_PROFILE -->
 
 <!-- IF SHOW_REG_AGREEMENT -->

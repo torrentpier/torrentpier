@@ -77,6 +77,8 @@ $lang['VIEW_NEWEST_POST'] = 'Перейти к первому непрочита
 $lang['PAGE_OF'] = 'Страница <b>%d</b> из <b>%s</b>';
 
 $lang['ICQ'] = 'ICQ Number';
+$lang['SKYPE'] = 'Skype';
+$lang['SKYPE_ERROR'] = 'Вы ввели неккоректный логин';
 
 $lang['FORUM_INDEX'] = 'Список форумов %s';
 
@@ -560,6 +562,12 @@ $lang['ALWAYS_NOTIFY_EXPLAIN'] = 'Когда кто-нибудь ответит 
 
 $lang['BOARD_STYLE'] = 'Внешний вид форумов';
 $lang['BOARD_LANG'] = 'Язык';
+$lang['GENDER'] = 'Пол';
+$lang['GENDER_SELECT'] = array(
+	'Не определилось' => 0,
+	'Мужской'         => 1,
+	'Женский'         => 2
+);
 $lang['NO_THEMES'] = 'В базе нет цветовых схем';
 $lang['TIMEZONE'] = 'Часовой пояс';
 $lang['DATE_FORMAT_PROFILE'] = 'Формат даты';

@@ -468,6 +468,36 @@ if ($dl_search)
 
 if ($allowed_forums)
 {
+    // Save current search settings
+	$save_in_db = array(
+		'all_words',
+		'active',
+		'dl_cancel',
+		'dl_compl',
+		'dl_down',
+		'dl_will',
+		'forum',
+		'my',
+		'new',
+		'order',
+		'poster_id',
+		'poster_name',
+		's_not_seen',
+		'seed_exist',
+		'show_author',
+		'show_cat',
+		'show_forum',
+		'show_speed',
+		'sort',
+		'time',
+	);
+	$curr_set = array();
+	foreach ($save_in_db as $name)
+	{
+		$curr_set[${"{$name}_key"}] = ${"{$name}_val"};
+	}
+	$curr_set_sql = $db->escape(serialize($curr_set));
+
     // Text search
 	$search_match_topics_csv = '';
 

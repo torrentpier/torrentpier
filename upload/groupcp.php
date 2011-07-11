@@ -19,7 +19,7 @@ function generate_user_info(&$row, $date_format, $group_mod, &$from, &$posts, &$
 	$joined = bb_date($row['user_regdate'], $date_format);
 	$posts = ( $row['user_posts'] ) ? $row['user_posts'] : 0;
 
-	$poster_avatar = get_avatar($row['user_avatar'], $row['user_avatar_type'], !bf($row['user_opt'], 'user_opt', 'allow_avatar'));
+	//$poster_avatar = get_avatar($row['user_avatar'], $row['user_avatar_type'], !bf($row['user_opt'], 'user_opt', 'allow_avatar'));
 
 	if ( bf($row['user_opt'], 'user_opt', 'viewemail') || $group_mod )
 	{

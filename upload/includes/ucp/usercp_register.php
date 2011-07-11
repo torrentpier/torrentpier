@@ -10,7 +10,7 @@ set_die_append_msg();
 
 if (IS_ADMIN)
 {
-	$bb_cfg['reg_email_activation'] = false;
+	$bb_cfg['require_activation'] = false;
 }
 
 $can_register = (IS_GUEST || IS_ADMIN);
@@ -50,7 +50,7 @@ switch ($mode)
 			}
 
 			// Отключение регистрации
-			if ($bb_cfg['new_user_reg_disabled'] || ($bb_cfg['reg_email_activation'] && $bb_cfg['emailer_disabled']))
+			if ($bb_cfg['new_user_reg_disabled'])
 			{
 				bb_die($lang['NEW_USER_REG_DISABLED']);
 			}
@@ -101,13 +101,15 @@ switch ($mode)
 
 		// field => can_edit
 		$profile_fields = array(
-			'username'         => IS_ADMIN,
+			'username'         => (IS_ADMIN || $bb_cfg['allow_namechange']),
 			'user_password'    => true,
+			'user_email'       => true,      // должен быть после user_password
 			'user_lang'        => true,
+			'user_gender'      => true,
 			'user_timezone'    => true,
 			'user_opt'         => true,
-			'user_email'       => true,      // должен быть после user_password
 			'user_icq'         => true,
+			'user_skype'       => true,
 			'user_website'     => true,
 			'user_from'        => true,
 			'user_sig'         => true,
@@ -132,6 +134,7 @@ switch ($mode)
 			SELECT
 				user_id,
 				user_level,
+				user_active,
 				$profile_fields_sql
 			FROM ". BB_USERS ."
 			WHERE user_id = $pr_user_id
@@ -144,7 +147,7 @@ switch ($mode)
 
 		include(INC_DIR . 'ucp/usercp_avatar.php');
 
-		if ( !bf($pr_data['user_opt'], 'user_opt', 'allow_avatar') && ( $bb_cfg['allow_avatar_upload'] || $bb_cfg['allow_avatar_local'] || $bb_cfg['allow_avatar_remote'] ) )
+		if (!bf($pr_data['user_opt'], 'user_opt', 'allow_avatar') && ($bb_cfg['allow_avatar_upload'] || $bb_cfg['allow_avatar_local'] || $bb_cfg['allow_avatar_remote']))
 		{
 			$template->assign_block_vars('switch_avatar_block', array() );
 
@@ -163,6 +166,10 @@ switch ($mode)
 			{
 				$template->assign_block_vars('switch_avatar_block.switch_avatar_local_gallery', array() );
 			}
+		}
+		else
+		{
+			$template->assign_block_vars('not_avatar_block', array() );
 		}
         break;
 
@@ -286,11 +293,7 @@ foreach ($profile_fields as $field => $can_edit)
 		{
 			if ($mode == 'register')
 			{
-				if (empty($email))
-				{
-					$errors[] = 'Вы должны указать e-mail';
-				}
-				if (!$errors AND $err = validate_email($email))
+				if ($err = validate_email($email))
 				{
 					$errors[] = $err;
 				}
@@ -300,12 +303,13 @@ foreach ($profile_fields as $field => $can_edit)
 			{
 				if (!$cur_pass_valid)
 				{
-					$errors[] = 'Для изменения e-mail вы должны правильно указать текущий пароль';
+					$errors[] = $lang['CONFIRM_PASSWORD_EXPLAIN'];
 				}
 				if (!$errors AND $err = validate_email($email))
 				{
 					$errors[] = $err;
 				}
+				$pr_data['user_active'] = '';
 				$db_data['user_email'] = $email;
 			}
 		}
@@ -317,7 +321,7 @@ foreach ($profile_fields as $field => $can_edit)
 	*/
 	case 'user_lang':
 		$user_lang = isset($_POST['user_lang']) ? (string) $_POST['user_lang'] : $pr_data['user_lang'];
-		if ($submit)
+		if ($submit && $user_lang != $pr_data['user_lang'])
 		{
             $pr_data['user_lang'] = $user_lang;
 			$db_data['user_lang'] = $user_lang;
@@ -329,7 +333,7 @@ foreach ($profile_fields as $field => $can_edit)
 	*/
 	case 'user_timezone':
 		$user_timezone = isset($_POST['user_timezone']) ? (int) $_POST['user_timezone'] : $pr_data['user_timezone'];
-		if ($submit)
+		if ($submit && $user_timezone != $pr_data['user_timezone'])
 		{
 			if (isset($lang['TZ'][$user_timezone]) && $user_timezone != $pr_data['user_timezone'])
 			{
@@ -337,6 +341,19 @@ foreach ($profile_fields as $field => $can_edit)
 				$db_data['user_timezone'] = $user_timezone;
 			}
 		}
+		break;
+
+	/**
+	*  Язык (edit, reg)
+	*/
+	case 'user_gender':
+		$gender = isset($_POST['user_gender']) ? (int) $_POST['user_gender'] : $pr_data['user_gender'];
+		if ($submit && $gender != $pr_data['user_gender'])
+		{
+            $pr_data['user_gender'] = $gender;
+			$db_data['user_gender'] = $gender;
+		}
+		$tp_data['USER_GENDER'] = build_select('user_gender', $lang['GENDER_SELECT'], $pr_data['user_gender']);
 		break;
 
 	/**
@@ -372,20 +389,17 @@ foreach ($profile_fields as $field => $can_edit)
 	*/
 	case 'user_icq':
 		$icq = isset($_POST['user_icq']) ? (string) $_POST['user_icq'] : $pr_data['user_icq'];
-		if ($submit)
+		if ($submit && $icq != $pr_data['user_icq'])
 		{
-			if ($icq != $pr_data['user_icq'])
+			if ($icq == '' || preg_match('#^\d{6,15}$#', $icq))
 			{
-				if ($icq == '' || preg_match('#^\d{6,15}$#', $icq))
-				{
-					$pr_data['user_icq'] = $icq;
-					$db_data['user_icq'] = (string) $icq;
-				}
-				else
-				{
-					$pr_data['user_icq'] = '';
-					$errors[] = htmlCHR('Поле "ICQ" может содержать только номер icq');
-				}
+				$pr_data['user_icq'] = $icq;
+				$db_data['user_icq'] = (string) $icq;
+			}
+			else
+			{
+				$pr_data['user_icq'] = '';
+				$errors[] = htmlCHR('Поле "ICQ" может содержать только номер icq');
 			}
 		}
 		$tp_data['USER_ICQ'] = $pr_data['user_icq'];
@@ -397,20 +411,16 @@ foreach ($profile_fields as $field => $can_edit)
 	case 'user_website':
 		$website = isset($_POST['user_website']) ? (string) $_POST['user_website'] : $pr_data['user_website'];
 		$website = htmlCHR($website);
-		if ($submit)
+		if ($submit && $website != $pr_data['user_website'])
 		{
-			if ($website != $pr_data['user_website'])
+			if ($website == '' || preg_match('#^https?://[\w\#!$%&~/.\-;:=,?@а-яА-Я\[\]+]+$#iu', $website))
 			{
-				if ($website == '' || preg_match('#^https?://[a-z0-9_:;?&=/.%~\-]+$#i', $website))
-				{
-					$pr_data['user_website'] = $website;
-					$db_data['user_website'] = (string) $website;
-				}
-				else
-				{
-					$pr_data['user_website'] = '';
-					$errors[] = htmlCHR('Поле "Сайт" может содержать только http:// ссылку');
-				}
+				$pr_data['user_website'] = $website;
+				$db_data['user_website'] = (string) $website;
+			}
+			else
+			{
+				$errors[] = htmlCHR('Поле "Сайт" может содержать только http:// ссылку');
 			}
 		}
 		$tp_data['USER_WEBSITE'] = $pr_data['user_website'];
@@ -422,13 +432,10 @@ foreach ($profile_fields as $field => $can_edit)
 	case 'user_from':
 		$from = isset($_POST['user_from']) ? (string) $_POST['user_from'] : $pr_data['user_from'];
 		$from = htmlCHR($from);
-		if ($submit)
+		if ($submit && $from != $pr_data['user_from'])
 		{
-			if ($from != $pr_data['user_from'])
-			{
-				$pr_data['user_from'] = $from;
-				$db_data['user_from'] = (string) $from;
-			}
+			$pr_data['user_from'] = $from;
+			$db_data['user_from'] = (string) $from;
 		}
 		$tp_data['USER_FROM'] = $pr_data['user_from'];
 		break;
@@ -438,9 +445,9 @@ foreach ($profile_fields as $field => $can_edit)
 	*/
 	case 'user_sig':
 		$sig = isset($_POST['user_sig']) ? (string) $_POST['user_sig'] : $pr_data['user_sig'];
-		if ($submit)
+		if ($submit && $sig != $pr_data['user_sig'])
 		{
-			$sig_esc = prepare_message($sig);
+			$sig = prepare_message($sig);
 
 			if (mb_strlen($sig) > $bb_cfg['max_sig_chars'])
 			{
@@ -450,11 +457,9 @@ foreach ($profile_fields as $field => $can_edit)
 			{
 				$errors[] = $lang['SIGNATURE_ERROR_HTML'];
 			}
-			else if ($sig != $pr_data['user_sig'])
-			{
-				$pr_data['user_sig'] = $sig;
-				$db_data['user_sig'] = (string) $sig;
-			}
+
+			$pr_data['user_sig'] = $sig;
+			$db_data['user_sig'] = (string) $sig;
 		}
 		$tp_data['USER_SIG'] = $pr_data['user_sig'];
 		break;
@@ -465,13 +470,10 @@ foreach ($profile_fields as $field => $can_edit)
 	case 'user_occ':
 		$occ = isset($_POST['user_occ']) ? (string) $_POST['user_occ'] : $pr_data['user_occ'];
 		$occ = htmlCHR($occ);
-		if ($submit)
+		if ($submit && $occ != $pr_data['user_occ'])
 		{
-			if ($occ != $pr_data['user_occ'])
-			{
-				$pr_data['user_occ'] = $occ;
-				$db_data['user_occ'] = (string) $occ;
-			}
+			$pr_data['user_occ'] = $occ;
+			$db_data['user_occ'] = (string) $occ;
 		}
 		$tp_data['USER_OCC'] = $pr_data['user_occ'];
 		break;
@@ -482,15 +484,30 @@ foreach ($profile_fields as $field => $can_edit)
 	case 'user_interests':
 		$interests = isset($_POST['user_interests']) ? (string) $_POST['user_interests'] : $pr_data['user_interests'];
 		$interests = htmlCHR($interests);
-		if ($submit)
+		if ($submit && $interests != $pr_data['user_interests'])
 		{
-			if ($interests != $pr_data['user_interests'])
-			{
-				$pr_data['user_interests'] = $interests;
-				$db_data['user_interests'] = (string) $interests;
-			}
+			$pr_data['user_interests'] = $interests;
+			$db_data['user_interests'] = (string) $interests;
 		}
 		$tp_data['USER_INTERESTS'] = $pr_data['user_interests'];
+		break;
+
+	/**
+	*  Skype
+	*/
+	case 'user_skype':
+		$skype = isset($_POST['user_skype']) ? (string) $_POST['user_skype'] : $pr_data['user_skype'];
+		if ($submit && $skype != $pr_data['user_skype'])
+		{
+			if ( !preg_match("#^[a-zA-Z0-9_.\-@,]{6,32}$#", $skype))
+			{
+				$errors[] = $lang['SKYPE_ERROR'];
+			}
+
+			$pr_data['user_skype'] = $skype;
+			$db_data['user_skype'] = (string) $skype;
+		}
+		$tp_data['USER_SKYPE'] = $pr_data['user_skype'];
 		break;
 
 	case 'user_avatar':
@@ -636,16 +653,20 @@ foreach ($profile_fields as $field => $can_edit)
 		}
 
         if($avatar)
-        {        	$user_avatar = $avatar['user_avatar'];
+        {
+        	$user_avatar = $avatar['user_avatar'];
         	$user_avatar_type = $avatar['user_avatar_type'];
             $hidden_vars = '';
         	foreach($_POST as $name => $key)
         	{
 	        	$hidden_vars .= '<input type="hidden" name="'. $name .'" value="'. $key .'" />';
         	}
-        	$tp_data['USER_AVATAR'] = get_avatar($user_avatar, $user_avatar_type) . $hidden_vars;        }
+        	$tp_data['USER_AVATAR'] = get_avatar($user_avatar, $user_avatar_type) . $hidden_vars;
+        }
         else
-        {        	$tp_data['USER_AVATAR'] = get_avatar($pr_data['user_avatar'], $pr_data['user_avatar_type'], !bf($pr_data['user_opt'], 'user_opt', 'allow_avatar'));        }
+        {
+        	$tp_data['USER_AVATAR'] = get_avatar($pr_data['user_avatar'], $pr_data['user_avatar_type'], !bf($pr_data['user_opt'], 'user_opt', 'allow_avatar'));
+        }
 	    if ($submit && !bf($pr_data['user_opt'], 'user_opt', 'allow_avatar'))
 		{
 			if ( $user_avatar != $pr_data['user_avatar'] || $user_avatar_type != $pr_data['user_avatar_type'])
@@ -672,17 +693,18 @@ if ($submit && !$errors)
 	*/
 	if ($mode == 'register')
 	{
-		if ($bb_cfg['reg_email_activation'])
+		if ($bb_cfg['require_activation'] == USER_ACTIVATION_SELF || $bb_cfg['require_activation'] == USER_ACTIVATION_ADMIN)
 		{
-			$db_data['user_active'] = 0;
 			$user_actkey = make_rand_str(12);
+			$db_data['user_active'] = 0;
+			$db_data['user_actkey'] = $user_actkey;
 		}
 		else
 		{
 			$db_data['user_active'] = 1;
-			$user_actkey = '';
+			$db_data['user_actkey'] = '';
 		}
-		$db_data['user_regdate'] = time();
+		$db_data['user_regdate'] = TIMENOW;
 
 		$sql_args = DB()->build_array('INSERT', $db_data);
 
@@ -694,27 +716,69 @@ if ($submit && !$errors)
 			set_pr_die_append_msg($new_user_id);
 			$die_msg = "Пользователь <b>$username</b> был успешно создан";
 		}
-		else if ($bb_cfg['reg_email_activation'])
-		{
-			$email_sbj = "Добро пожаловать на сайт {$bb_cfg['sitename']}";
-
-			require(INC_DIR .'emailer.php');
-			$emailer = new emailer('user_welcome_inactive', $email_sbj, $email);
-
-			$emailer->assign_vars(array(
-				'WELCOME_MSG' => $email_sbj,
-				'USERNAME'    => html_entity_decode($username),
-				'PASSWORD'    => $new_pass,
-				'U_ACTIVATE'  => make_url("profile.php?mode=activate&u=$new_user_id&act_key=$user_actkey"),
-			));
-			$emailer->send();
-
-			$die_msg = file_get_contents(BB_PATH .'/misc/html/account_inactive.html');
-		}
 		else
 		{
-			$die_msg = $lang['ACCOUNT_ADDED'];
+			if ( $bb_cfg['require_activation'] == USER_ACTIVATION_SELF )
+			{
+				$message = $lang['ACCOUNT_INACTIVE'];
+				$email_template = 'user_welcome_inactive';
+			}
+			else if ( $bb_cfg['require_activation'] == USER_ACTIVATION_ADMIN )
+			{
+				$message = $lang['ACCOUNT_INACTIVE_ADMIN'];
+				$email_template = 'admin_welcome_inactive';
+			}
+			else
+			{
+				$message = $lang['ACCOUNT_ADDED'];
+				$email_template = 'user_welcome';
+			}
+
+			include(INC_DIR . 'emailer.class.php');
+			$emailer = new emailer($bb_cfg['smtp_delivery']);
+
+			$emailer->from($bb_cfg['board_email']);
+			$emailer->replyto($bb_cfg['board_email']);
+
+			$emailer->use_template($email_template, $user_lang);
+			$emailer->email_address($email);
+			$emailer->set_subject(sprintf($lang['WELCOME_SUBJECT'], $bb_cfg['sitename']));
+
+			$emailer->assign_vars(array(
+				'SITENAME'    => $bb_cfg['sitename'],
+				'WELCOME_MSG' => sprintf($lang['WELCOME_SUBJECT'], $bb_cfg['sitename']),
+				'USERNAME'    => html_entity_decode($username),
+				'PASSWORD'    => $password_confirm,
+				'EMAIL_SIG'   => str_replace('<br />', "\n", "-- \n" . $bb_cfg['board_email_sig']),
+
+				'U_ACTIVATE'  => make_url('profile.php?mode=activate&' . POST_USERS_URL . '=' . $user_id . '&act_key=' . $user_actkey)
+			));
+
+			$emailer->send();
+			$emailer->reset();
+
+			if ( $bb_cfg['require_activation'] == USER_ACTIVATION_ADMIN )
+			{
+				$emailer->from($bb_cfg['board_email']);
+				$emailer->replyto($bb_cfg['board_email']);
+
+				$emailer->email_address($email);
+				$emailer->use_template("admin_activate", $user_lang);
+				$emailer->set_subject($lang['NEW_ACCOUNT_SUBJECT']);
+
+				$emailer->assign_vars(array(
+					'USERNAME' => html_entity_decode($username),
+					'EMAIL_SIG' => str_replace('<br />', "\n", "-- \n" . $bb_cfg['board_email_sig']),
+
+					'U_ACTIVATE' => make_url('profile.php?mode=activate&' . POST_USERS_URL . '=' . $user_id . '&act_key=' . $user_actkey)
+				));
+				$emailer->send();
+				$emailer->reset();
+			}
 		}
+
+		$die_msg = $die_msg . '<br /><br />' . sprintf($lang['CLICK_RETURN_INDEX'],  '<a href="' . append_sid("index.php") . '">', '</a>');
+
 		bb_die($die_msg);
 	}
 	/**
@@ -727,6 +791,47 @@ if ($submit && !$errors)
 		// если что-то было изменено
 		if ($db_data)
 		{
+			if (!$pr_data['user_active'])
+			{
+				$user_actkey = make_rand_str(12);
+				$pr_data['user_actkey'] = $user_actkey;
+				$db_data['user_actkey'] = $user_actkey;
+
+				include(INC_DIR . 'emailer.class.php');
+				$emailer = new emailer($bb_cfg['smtp_delivery']);
+
+ 				$emailer->from($bb_cfg['board_email']);
+				$emailer->replyto($bb_cfg['board_email']);
+
+				if($bb_cfg['require_activation'] == USER_ACTIVATION_ADMIN)
+				{
+					$emailer->use_template("admin_activate", $pr_data['user_lang']);
+				}
+				else
+				{
+					$emailer->use_template('user_activate', $pr_data['user_lang']);
+				}
+				$emailer->email_address($email);
+				$emailer->set_subject($lang['Reactivate']);
+
+				$emailer->assign_vars(array(
+					'SITENAME'   => $bb_cfg['sitename'],
+					'USERNAME'   => html_entity_decode($username),
+					'EMAIL_SIG'  => (!empty($bb_cfg['board_email_sig'])) ? str_replace('<br />', "\n", "-- \n" . $bb_cfg['board_email_sig']) : '',
+
+					'U_ACTIVATE' => make_url("profile.php?mode=activate&u={$pr_data['user_id']}&act_key=$user_actkey"),
+				));
+				$emailer->send();
+				$emailer->reset();
+
+				$message = $lang['PROFILE_UPDATED_INACTIVE'] . '<br /><br />' . sprintf($lang['CLICK_RETURN_INDEX'],  '<a href="' . append_sid("index.php") . '">', '</a>');
+			}
+			else
+			{
+				meta_refresh(append_sid("index.php"), 10);
+				$message = $lang['PROFILE_UPDATED'] . '<br /><br />' . sprintf($lang['CLICK_RETURN_INDEX'],  '<a href="' . append_sid("index.php") . '">', '</a>');
+			}
+
 			$sql_args = DB()->build_array('UPDATE', $db_data);
 
 			DB()->query("UPDATE ". BB_USERS ." SET $sql_args WHERE user_id = {$pr_data['user_id']} LIMIT 1");
@@ -741,8 +846,19 @@ if ($submit && !$errors)
 
             cache_rm_user_sessions ($pr_data['user_id']);
 
-			$die_msg = ($adm_edit) ? "Профиль <b>{$pr_data['username']}</b> был успешно изменён" : 'Ваш профиль был успешно изменён';
-			bb_die($die_msg);
+			if($adm_edit)
+			{
+				bb_die("Профиль <b>{$pr_data['username']}</b> был успешно изменён");
+			}
+			elseif(!$pr_data['user_active'])
+			{
+				bb_die($lang['PROFILE_UPDATED_INACTIVE'] . '<br /><br />' . sprintf($lang['CLICK_RETURN_INDEX'],  '<a href="' . append_sid("index.php") . '">', '</a>'));
+			}
+			else
+			{
+				meta_refresh(append_sid("index.php"), 10);
+				bb_die($lang['PROFILE_UPDATED'] . '<br /><br /><a href="' . PROFILE_URL . $userdata['user_id'] . '">'.$lang['RETURN_PROFILE'].'</a><br /><br />' . sprintf($lang['Click_return_index'],  '<a href="' . append_sid("index.php") . '">', '</a>'));
+			}
 		}
 		else
 		{

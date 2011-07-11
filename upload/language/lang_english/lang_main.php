@@ -72,6 +72,8 @@ $lang['VIEW_NEWEST_POST'] = 'View newest post';
 $lang['PAGE_OF'] = 'Page <b>%d</b> of <b>%s</b>';
 
 $lang['ICQ'] = 'ICQ Number';
+$lang['SKYPE'] = 'Skype';
+$lang['SKYPE_ERROR'] = 'You entered an invalid login';
 
 $lang['FORUM_INDEX'] = '%s Forum Index';  // eg. sitename Forum Index, %s can be removed if you prefer
 
@@ -555,6 +557,12 @@ $lang['ALWAYS_NOTIFY_EXPLAIN'] = 'Sends an e-mail when someone replies to a topi
 
 $lang['BOARD_STYLE'] = 'Board Style';
 $lang['BOARD_LANG'] = 'Board Language';
+$lang['GENDER'] = 'Пол';
+$lang['GENDER_SELECT'] = array(
+	'Unselect' => 0,
+	'Male'     => 1,
+	'Female'   => 2
+);
 $lang['NO_THEMES'] = 'No Themes In database';
 $lang['TIMEZONE'] = 'Timezone';
 $lang['DATE_FORMAT_PROFILE'] = 'Date format';

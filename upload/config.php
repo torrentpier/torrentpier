@@ -57,8 +57,8 @@ $bb_cfg['css_ver'] = 1;
 
 // Increase number of revision after update
 $bb_cfg['tp_version'] = '2.0.2';
-$bb_cfg['tp_release_state'] = 'TP II r90';
-$bb_cfg['tp_release_date'] = '05-07-2011';
+$bb_cfg['tp_release_state'] = 'TP II r92';
+$bb_cfg['tp_release_date'] = '11-07-2011';
 
 $bb_cfg['board_disabled_msg'] = 'форум временно отключен'; // 'forums temporarily disabled'; // show this msg if board has been disabled via ON/OFF trigger
 $bb_cfg['srv_overloaded_msg'] = "Извините, в данный момент сервер перегружен\nПопробуйте повторить запрос через несколько минут";
@@ -297,7 +297,6 @@ $bb_cfg['last_visit_update_intrv'] = 3600;         // sec
 $bb_cfg['new_user_reg_disabled']   = false;        // Disable new user registrations
 $bb_cfg['unique_ip']               = false;        // Deny registration of several accounts by one ip
 $bb_cfg['new_user_reg_restricted'] = false;
-$bb_cfg['reg_email_activation']    = false;
 
 // Email
 $bb_cfg['emailer_disabled']        = false;
