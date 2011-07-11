@@ -558,7 +558,7 @@ switch ($bb_cfg['datastore_type'])
 		break;
 
 	case 'memcache':
-		$datastore = new datastore_memcache($bb_cfg['datastore']['mc']);
+		$datastore = new datastore_memcache($bb_cfg['datastore']['memcache']);
 		break;
 
 	case 'filecache':

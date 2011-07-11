@@ -141,33 +141,21 @@ class CACHES
 
 				switch ($cache_type)
 				{
-					case 'cache_memcache':
-						if (!$mc_name =& $cache_cfg[0])
+					case 'memcache':
+						if (!isset($this->obj[$cache_name]))
 						{
-							trigger_error("empty mc_name for $cache_name cache", E_USER_ERROR);
+							$cache_cfg = array(
+								'host'         => '127.0.0.1',
+								'port'         => 11211,
+								'pconnect'     => true,  // use persistent connection
+								'con_required' => true,  // exit script if can't connect
+							);
+							$this->obj[$cache_name] = new cache_memcache($cache_cfg);
 						}
-						if (!$mc_cfg =& $this->cfg['memcache'][$mc_name])
-						{
-							trigger_error("mc_cfg for $cache_name not found", E_USER_ERROR);
-						}
-						if (!isset($this->obj[$mc_name]))
-						{
-							$servers      = (array) $mc_cfg[0];
-							$pconnect     = $mc_cfg[1];
-							$con_required = $mc_cfg[2];
-
-							$this->obj[$mc_name] = new cache_memcache(array(
-								'mc_name'      => $mc_name,
-								'mc_class'     => $this->cfg['mc_class'],  // $bb_cfg['cache']['mc_class']
-								'servers'      => $servers,
-								'pconnect'     => $pconnect,               // $bb_cfg['cache']['pconnect']
-								'con_required' => $con_required,
-							));
-						}
-						$this->ref[$cache_name] =& $this->obj[$mc_name];
+						$this->ref[$cache_name] =& $this->obj[$cache_name];
 						break;
 
-					case 'cache_sqlite':
+					case 'sqlite':
 						if (!isset($this->obj[$cache_name]))
 						{
 							$cache_cfg['pconnect']     = $this->cfg['pconnect'];
@@ -263,244 +251,63 @@ class cache_common
 
 class cache_memcache extends cache_common
 {
-	var $cfg  = array(
-				'mc_class' => 'class_name',   // $bb_cfg['cache']['mc_class']
-			);
-	var $used = true;
-	var $db   = null;
+	var $used      = true;
+
+	var $cfg       = null;
+	var $memcache  = null;
+	var $connected = false;
 
 	function cache_memcache ($cfg)
 	{
-		$this->cfg = array_merge($this->cfg, $cfg);
-		$this->db = new $this->cfg['mc_class']($this->cfg);
+		global $bb_cfg;
+
+		if (!$this->is_installed())
+		{
+			die('Error: Memcached extension not installed');
+		}
+
+		$this->cfg = $cfg;
+		$this->memcache = new Memcache;
 	}
 
-	function get ($key, $get_miss_key_callback = '', $prefix = '', $ttl = 604800)
+	function connect ()
 	{
-		if (empty($key))
-		{
-			return is_array($key) ? array() : false;
-		}
-		$cached_items = array();
-		$prefix_len   = strlen($prefix);
-		$key_ary      = (array) $key;
-		$key_get      = array();
+		$connect_type = ($this->cfg['pconnect']) ? 'pconnect' : 'connect';
 
-		foreach ($key_ary as $k)
+		if (@$this->memcache->$connect_type($this->cfg['host'], $this->cfg['port']))
 		{
-			$key_get[] = $prefix . $k;
+			$this->connected = true;
 		}
 
-		// get available items
-		foreach ($this->db->get($key_get) as $k => $v)
-		{
-			$cached_items[substr($k, $prefix_len)] = $v;
-		}
+		if (DBG_LOG) dbg_log(' ', 'CACHE-connect'. ($this->connected ? '' : '-FAIL'));
 
-		// get miss items
-		if ($get_miss_key_callback AND $miss_key = array_diff($key_ary, array_keys($cached_items)))
+		if (!$this->connected && $this->cfg['con_required'])
 		{
-			foreach ($get_miss_key_callback($miss_key) as $k => $v)
-			{
-				$this->set($prefix.$k, $v, $ttl);
-				$cached_items[$k] = $v;
-			}
-		}
-		// return
-		if (is_array($key))
-		{
-			return $cached_items;
-		}
-		else
-		{
-			return isset($cached_items[$key]) ? $cached_items[$key] : false;
+			die('Could not connect to memcached server');
 		}
 	}
 
-	function set ($key, $value, $ttl = 604800, $prefix = '')
+	function get ($name)
 	{
-		return $this->db->set($prefix.$key, $value, $ttl);
+		if (!$this->connected) $this->connect();
+		return ($this->connected) ? $this->memcache->get($name) : false;
 	}
 
-	function rm ($key, $prefix = '')
+	function set ($name, $value, $ttl = 0)
 	{
-		return $this->db->rm($prefix.$key);
-	}
-}
-
-class memcache_common extends cache_dbg_common
-{
-	var $cfg = array(
-	             'mc_name'      => null,                // $bb_cfg['cache']['memcache'][ key ]
-	             'servers'      => array('host:port'),  // $bb_cfg['cache']['memcache'][ val ]
-	             'pconnect'     => false,               // $bb_cfg['cache']['pconnect']
-	             'con_required' => false,
-	             'log_name'     => 'memcache',
-	           );
-	var $engine = 'Memcache';
-	var $mc     = null;
-
-	function memcache_common ($cfg = array())
-	{
-		$this->mc = new Memcache();
-
-		$this->cfg = array_merge($this->cfg, $cfg);
-		$this->dbg_enabled = sql_dbg_enabled();
-
-		$this->init();
+		if (!$this->connected) $this->connect();
+		return ($this->connected) ? $this->memcache->set($name, $value, false, $ttl) : false;
 	}
 
-	function init ()
+	function rm ($name)
 	{
-		$this->cur_query = ($this->dbg_enabled) ? "addServer(". join(", ", (array)$this->cfg['servers']) .", ". (int) $this->cfg['pconnect'] .", ". (int) $this->cfg['con_required'] .")" : '';
-		$this->debug('start');
-
-		foreach ($this->cfg['servers'] as $srv)
-		{
-			list($host, $port) = explode(':', $srv);
-			$this->mc->addServer($host, $port, $this->cfg['pconnect']);
-		}
-		$this->mc->setCompressThreshold(5000);
-
-		$this->debug('stop');
+		if (!$this->connected) $this->connect();
+		return ($this->connected) ? $this->memcache->delete($name) : false;
 	}
 
-	function get ($key)
+	function is_installed ()
 	{
-		$this->cur_query = ($this->dbg_enabled) ? "get(". join(", ", (array)$key) .")" : '';
-		$this->debug('start');
-
-		$result = $this->mc->get($key);
-
-		if (!is_array($result))
-		{
-			// обработки ошибок нет
-			$result = array();
-		}
-
-		$this->debug('stop');
-		return $result;
-	}
-
-	function set ($key, $value, $ttl = 604800, $flag = 0)
-	{
-		$this->cur_query = ($this->dbg_enabled) ? "set($key, ". str_compact(print_r($value, true)) .")" : '';
-		$this->debug('start');
-
-		$result = $this->mc->set($key, $value, $flag, $ttl);
-
-		$this->debug('stop');
-		return $result;
-	}
-
-	function rm ($key)
-	{
-		$this->cur_query = ($this->dbg_enabled) ? "rm('$key')" : '';
-		$this->debug('start');
-
-		$result = $this->mc->delete($key, 0);
-
-		$this->debug('stop');
-		return $result;
-	}
-}
-
-class memcached_common extends cache_dbg_common
-{
-	var $cfg = array(
-	             'mc_name'      => null,                // $bb_cfg['cache']['memcache'][ key ]
-	             'servers'      => array('host:port'),  // $bb_cfg['cache']['memcache'][ val ]
-	             'pconnect'     => false,               // $bb_cfg['cache']['pconnect']
-	             'con_required' => false,
-	             'log_name'     => 'memcached',
-	           );
-	var $engine = 'Memcached';
-	var $mc     = null;
-
-	function memcached_common ($cfg = array())
-	{
-		$this->cfg = array_merge($this->cfg, $cfg);
-		$this->dbg_enabled = sql_dbg_enabled();
-
-		$persistent_id = ($this->cfg['pconnect']) ? $this->cfg['mc_name'] : '';
-
-		if ($this->dbg_enabled)
-		{
-			$pconnect = ($this->cfg['pconnect']) ? 'pcon' : 'not_pcon';
-			$con_req  = ($this->cfg['con_required']) ? 'req' : 'not_req';
-			$this->engine .= "<b class=normal>($persistent_id), $pconnect, $con_req</b>";
-		}
-
-		$this->mc = new Memcached($persistent_id);
-
-		$this->init();
-	}
-
-	function init ()
-	{
-		if (!count($this->mc->getServerList()))
-		{
-			$this->cur_query = ($this->dbg_enabled) ? "addServer(". join(", ", (array)$this->cfg['servers']) .")" : '';
-			$this->debug('start');
-
-			foreach ($this->cfg['servers'] as $srv)
-			{
-				list($host, $port) = explode(':', $srv);
-				$this->mc->addServer($host, $port);
-			}
-
-			$this->debug('stop');
-		}
-	}
-
-	function get ($key)
-	{
-		$this->cur_query = ($this->dbg_enabled) ? "get(". join(", ", (array)$key) .")" : '';
-		$this->debug('start');
-
-		$result = $this->mc->getMulti((array)$key);
-
-		if (!is_array($result))
-		{
-			$res_code = $this->mc->getResultCode();
-			$res_msg  = $this->mc->getResultMessage();
-			$err_txt  = "Memcached({$this->cfg['mc_name']})::get failed [$res_code, $res_msg]";
-
-			if ($this->cfg['con_required'])
-			{
-				trigger_error($err_txt, E_USER_ERROR);
-			}
-			else
-			{
-				bb_log(join(" ", array(date('d-m H:i:s'), $err_txt))."\n", 'mc_err');
-			}
-			$result = array();
-		}
-
-		$this->debug('stop');
-		return $result;
-	}
-
-	function set ($key, $value, $ttl = 604800, $flag = 0)
-	{
-		$this->cur_query = ($this->dbg_enabled) ? "set($key, ". str_compact(print_r($value, true)) .")" : '';
-		$this->debug('start');
-
-		$result = $this->mc->set($key, $value, $ttl);
-
-		$this->debug('stop');
-		return $result;
-	}
-
-	function rm ($key)
-	{
-		$this->cur_query = ($this->dbg_enabled) ? "rm('$key')" : '';
-		$this->debug('start');
-
-		$result = $this->mc->delete($key, 0);
-
-		$this->debug('stop');
-		return $result;
+		return class_exists('Memcache');
 	}
 }
 

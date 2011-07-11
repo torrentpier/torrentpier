@@ -275,33 +275,74 @@ class datastore_mysql extends datastore_common
 
 class datastore_memcache extends datastore_common
 {
-	var $engine = 'memcache';
-	var $cfg    = array();
+	var $cfg       = null;
+	var $memcache  = null;
+	var $connected = false;
 
 	function datastore_memcache ($cfg)
 	{
+		global $bb_cfg;
+
+		if (!$this->is_installed())
+		{
+			die('Error: Memcached extension not installed');
+		}
+
 		$this->cfg = $cfg;
+		$this->memcache = new Memcache;
 	}
 
-	function store ($item_name, $item_data)
+	function connect ()
 	{
-		$this->data[$item_name] = $item_data;
-#		bb_log(join("\t", array(date('H:i:s'), $item_name, @basename($_SERVER['REQUEST_URI'])))."\n", 'ds_store');
+		$connect_type = ($this->cfg['pconnect']) ? 'pconnect' : 'connect';
 
-		foreach ($this->cfg['srv_all'] as $ds_srv)
+		if (@$this->memcache->$connect_type($this->cfg['host'], $this->cfg['port']))
 		{
-			CACHE($ds_srv)->set($item_name, $item_data, 604800, 'ds_');
+			$this->connected = true;
+		}
+
+		if (DBG_LOG) dbg_log(' ', 'CACHE-connect'. ($this->connected ? '' : '-FAIL'));
+
+		if (!$this->connected && $this->cfg['con_required'])
+		{
+			die('Could not connect to memcached server');
+		}
+	}
+
+	function store ($title, $var)
+	{
+		if (!$this->connected) $this->connect();
+		$this->data[$title] = $var;
+		return (bool) $this->memcache->set($title, $var);
+	}
+
+	function clean ()
+	{
+		if (!$this->connected) $this->connect();
+		foreach ($this->known_items as $title => $script_name)
+		{
+			$this->memcache->delete($title);
 		}
 	}
 
 	function _fetch_from_store ()
 	{
-		if (!$items = $this->queued_items) return;
-
-		foreach (CACHE($this->cfg['srv_loc'])->get($items, '', 'ds_') as $item_name => $item_val)
+		if (!$items = $this->queued_items)
 		{
-			$this->data[$item_name] = $item_val;
+			$src = $this->_debug_find_caller('enqueue');
+			trigger_error("Datastore: item '$item' already enqueued [$src]", E_USER_ERROR);
 		}
+
+		if (!$this->connected) $this->connect();
+		foreach ($items as $item)
+		{
+			$this->data[$item] = $this->memcache->get($item);
+		}
+	}
+
+	function is_installed ()
+	{
+		return class_exists('Memcache');
 	}
 }
 
