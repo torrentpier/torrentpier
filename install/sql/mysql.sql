@@ -1377,7 +1377,9 @@ CREATE TABLE IF NOT EXISTS `bb_users` (
   `user_rank` int(11) NOT NULL default '0',
   `user_avatar` varchar(100) NOT NULL default '',
   `user_avatar_type` tinyint(4) NOT NULL default '0',
+  `user_gender` tinyint(1) NOT NULL default '0',
   `user_email` varchar(255) NOT NULL default '',
+  `user_skype` varchar(32) NOT NULL default '',
   `user_icq` varchar(15) NOT NULL default '',
   `user_website` varchar(100) NOT NULL default '',
   `user_from` varchar(100) NOT NULL default '',
@@ -1399,9 +1401,9 @@ CREATE TABLE IF NOT EXISTS `bb_users` (
 -- Дамп данных таблицы `bb_users`
 --
 
-INSERT INTO `bb_users` VALUES (-1, 0, 'Anonymous', 'd41d8cd98f00b204e9800998ecf8427e', 0, 0, '0', 1309421220, '0', 0, 5, '0.00', '', 0, 0, 0, 220, 0, '', 0, '', '', '', '', '', '', '', '', '', 0, '', 0);
-INSERT INTO `bb_users` VALUES (2, 1, 'admin', 'c3284d0f94606de1fd2af172aba15bf3', 0, 0, '0', 1309421220, '0', 1, 1, '+4.00', '', 0, 0, 0, 0, 1, '', 1, 'admin@admin.com', '', '', '', '', '', '', '', '', 0, '', 0);
-INSERT INTO `bb_users` VALUES (-746, 0, 'bot', 'd41d8cd98f00b204e9800998ecf8427e', 0, 0, '0', 1309421220, '0', 0, 0, '0.00', '', 0, 0, 0, 148, 0, 'bot.gif', 1, 'bot@bot.bot', '', '', '', '', '', '', '', '', 0, '', 0);
+INSERT INTO `bb_users` VALUES (-1, 0, 'Anonymous', 'd41d8cd98f00b204e9800998ecf8427e', 0, 0, '0', 1309421220, '0', 0, 5, '0.00', '', 0, 0, 0, 220, 0, '', 0, 0, '', '', '', '', '', '', '', '', '', '', 0, '', 0);
+INSERT INTO `bb_users` VALUES (2, 1, 'admin', 'c3284d0f94606de1fd2af172aba15bf3', 0, 0, '0', 1309421220, '0', 1, 1, '+4.00', '', 0, 0, 0, 304, 1, '', 1, 1, 'admin@admin.com', '', '', '', '', '', '', '', '', '', 0, '', 0);
+INSERT INTO `bb_users` VALUES (-746, 0, 'bot', 'd41d8cd98f00b204e9800998ecf8427e', 0, 0, '0', 1309421220, '0', 0, 0, '0.00', '', 0, 0, 0, 148, 0, 'bot.gif', 1, 0, 'bot@bot.bot', '', '', '', '', '', '', '', '', '', 0, '', 0);
 
 -- --------------------------------------------------------
 

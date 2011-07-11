@@ -598,7 +598,7 @@ $lang['SELECT_FROM_GALLERY'] = 'Select Avatar from gallery';
 $lang['VIEW_AVATAR_GALLERY'] = 'Show gallery';
 
 $lang['SELECT_AVATAR'] = 'Select avatar';
-$lang['RETURN_PROFILE'] = 'Cancel avatar';
+$lang['RETURN_PROFILE'] = 'Return to profile';
 $lang['SELECT_CATEGORY'] = 'Select category';
 
 $lang['DELETE_IMAGE'] = 'Delete Image';

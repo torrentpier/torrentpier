@@ -199,43 +199,20 @@ foreach ($profile_fields as $field => $can_edit)
 	*  Имя (edit, reg)
 	*/
 	case 'username':
-		if ($can_edit)
-		{
-			$username = !empty($_POST['username']) ? clean_username($_POST['username']) : $pr_data['username'];
-			if ($submit)
-			{
-				if ($mode == 'register')
-				{
-					if (empty($username))
-					{
-						$errors[] = 'Вы должны выбрать имя';
-					}
-					if (!$errors AND $err = validate_username($username))
-					{
-						$errors[] = $err;
-					}
+	    $username = !empty($_POST['username']) ? clean_username($_POST['username']) : $pr_data['username'];
 
-					$db_data['username'] = $username;
-				}
-				else
-				{
-					if ($username != $pr_data['username'])
-					{
-						if (!$errors AND $err = validate_username($username))
-						{
-							$errors[] = $err;
-						}
-						$db_data['username'] = $username;
-					}
-				}
-			}
-			$tp_data['CAN_EDIT_USERNAME'] = true;
-			$tp_data['USERNAME'] = $username;
-		}
-		else
+		if ($submit)
 		{
-			$tp_data['USERNAME'] = $pr_data['username'];
+			if (!$errors AND $err = validate_username($username))
+			{
+				$errors[] = $err;
+			}
+			if($can_edit && $username != $pr_data['username'] || $mode == 'register')
+			{				$pr_data['username'] = $username;
+				$db_data['username'] = $username;			}
 		}
+		$tp_data['CAN_EDIT_USERNAME'] = $can_edit;
+		$tp_data['USERNAME'] = $pr_data['username'];
 		break;
 
 	/**
@@ -749,10 +726,10 @@ if ($submit && !$errors)
 				'SITENAME'    => $bb_cfg['sitename'],
 				'WELCOME_MSG' => sprintf($lang['WELCOME_SUBJECT'], $bb_cfg['sitename']),
 				'USERNAME'    => html_entity_decode($username),
-				'PASSWORD'    => $password_confirm,
+				'PASSWORD'    => $new_pass,
 				'EMAIL_SIG'   => str_replace('<br />', "\n", "-- \n" . $bb_cfg['board_email_sig']),
 
-				'U_ACTIVATE'  => make_url('profile.php?mode=activate&' . POST_USERS_URL . '=' . $user_id . '&act_key=' . $user_actkey)
+				'U_ACTIVATE'  => make_url('profile.php?mode=activate&' . POST_USERS_URL . '=' . $new_user_id . '&act_key=' . $db_data['user_actkey'])
 			));
 
 			$emailer->send();
@@ -771,7 +748,7 @@ if ($submit && !$errors)
 					'USERNAME' => html_entity_decode($username),
 					'EMAIL_SIG' => str_replace('<br />', "\n", "-- \n" . $bb_cfg['board_email_sig']),
 
-					'U_ACTIVATE' => make_url('profile.php?mode=activate&' . POST_USERS_URL . '=' . $user_id . '&act_key=' . $user_actkey)
+					'U_ACTIVATE' => make_url('profile.php?mode=activate&' . POST_USERS_URL . '=' . $new_user_id . '&act_key=' . $db_data['user_actkey'])
 				));
 				$emailer->send();
 				$emailer->reset();
@@ -858,7 +835,7 @@ if ($submit && !$errors)
 			else
 			{
 				meta_refresh(append_sid("index.php"), 10);
-				bb_die($lang['PROFILE_UPDATED'] . '<br /><br /><a href="' . PROFILE_URL . $userdata['user_id'] . '">'.$lang['RETURN_PROFILE'].'</a><br /><br />' . sprintf($lang['Click_return_index'],  '<a href="' . append_sid("index.php") . '">', '</a>'));
+				bb_die($lang['PROFILE_UPDATED'] . '<br /><br /><a href="' . PROFILE_URL . $userdata['user_id'] . '">'.$lang['RETURN_PROFILE'].'</a><br /><br />' . sprintf($lang['CLICK_RETURN_INDEX'],  '<a href="' . append_sid("index.php") . '">', '</a>'));
 			}
 		}
 		else
