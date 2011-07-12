@@ -9,7 +9,7 @@ if (!defined('BB_ROOT')) die(basename(__FILE__));
 if (!defined('BB_SCRIPT')) define('BB_SCRIPT', 'undefined');
 
 // Exit if board is disabled via ON/OFF trigger
-if (!defined('IN_ADMIN') && !defined('IN_AJAX') && !defined('IN_SERVICE') && !IS_ADMIN)
+if (!defined('IN_ADMIN') && !defined('IN_AJAX') && !defined('IN_SERVICE'))
 {
 	if (file_exists(BB_DISABLED))
 	{
