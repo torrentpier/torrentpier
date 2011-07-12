@@ -22,7 +22,10 @@ if (!empty($template))
 
 $show_dbg_info = (DBG_USER && IS_ADMIN && !defined('IN_ADMIN'));
 
-flush();
+if(!$bb_cfg['gzip_compress'])
+{
+	flush();
+}
 
 if ($show_dbg_info)
 {

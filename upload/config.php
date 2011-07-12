@@ -57,8 +57,8 @@ $bb_cfg['css_ver'] = 1;
 
 // Increase number of revision after update
 $bb_cfg['tp_version'] = '2.0.2';
-$bb_cfg['tp_release_state'] = 'TP II r99';
-$bb_cfg['tp_release_date'] = '12-07-2011';
+$bb_cfg['tp_release_state'] = 'TP II r100';
+$bb_cfg['tp_release_date'] = '13-07-2011';
 
 $bb_cfg['board_disabled_msg'] = 'форум временно отключен'; // 'forums temporarily disabled'; // show this msg if board has been disabled via ON/OFF trigger
 $bb_cfg['srv_overloaded_msg'] = "Извините, в данный момент сервер перегружен\nПопробуйте повторить запрос через несколько минут";
@@ -72,14 +72,9 @@ $dbcharset = 'utf8';
 $pconnect  = false;
 
 $bb_cfg['db']['db1'] = array($dbhost, $dbname, $dbuser, $dbpasswd, $dbcharset, $pconnect);
-
 $bb_cfg['db_alias'] = array(
 // 'alias' => 'srv_name'
 );
-
-// http://www.php.net/manual/en/mysql.constants.php#mysql.client-flags
-define('DBFLAGS', NULL); // Flags: MYSQL_CLIENT_COMPRESS - Compress MySQL
-define('DBMS', 'mysql');
 
 // Cache
 $bb_cfg['cache']['pconnect'] = false;
@@ -267,8 +262,7 @@ $bb_cfg['db_backup_shell_cmd']     = '';           // '/path/to/db_backup.sh 2>&
 $bb_cfg['site_backup_shell_cmd']   = '';
 
 // GZip
-$bb_cfg['gzip_compress'] = false;                  // compress output
-$bb_cfg['gzip_force']    = false;                  // always compress (don't check client compatibility)
+$bb_cfg['gzip_compress'] = true;                   // compress output
 
 // Sessions
 $bb_cfg['session_update_intrv']    = 180;          // sec
@@ -287,11 +281,9 @@ $bb_cfg['new_user_reg_restricted'] = false;
 
 // Email
 $bb_cfg['emailer_disabled']        = false;
-
 $bb_cfg['topic_notify_enabled']    = true;
 $bb_cfg['pm_notify_enabled']       = true;
 $bb_cfg['groupcp_send_email']      = true;
-$bb_cfg['email_change_disabled']   = false;        // disable changing email by user
 
 $bb_cfg['tech_admin_email']        = 'admin@' . $bb_cfg['server_name'];  // email for sending error reports
 $bb_cfg['abuse_email']             = 'abuse@' . $bb_cfg['server_name'];
@@ -301,9 +293,9 @@ define('AJAX_HTML_DIR', BB_ROOT .'ajax/html/');
 define('AJAX_DIR', BB_ROOT .'ajax/');
 
 // Debug
-define('DEBUG',           false);                   // !!! "DEBUG" should be ALWAYS DISABLED on production environment !!!
+define('DEBUG',           false);                  // !!! "DEBUG" should be ALWAYS DISABLED on production environment !!!
 define('DBG_LOG',         false);
-define('DBG_TIME',        true);                  // false, true или рабочая секудна (при 3 - запись в лог будет только если текущее время кратно 3)
+define('DBG_TIME',        true);                   // false, true или рабочая секудна (при 3 - запись в лог будет только если текущее время кратно 3)
 define('DBG_LOG_GENTIME', true);
 define('DBG_LOG_ERRORS',  true);
 define('PROFILER',        false);                  // Profiler extension name, or FALSE to disable (supported: 'dbg')
@@ -314,7 +306,6 @@ define('SQL_CALC_QUERY_TIME',  true);              // for stats
 define('SQL_LOG_SLOW_QUERIES', true);
 define('SQL_SLOW_QUERY_TIME',  10);                // sec
 define('SQL_PREPEND_SRC_COMM', false);             // prepend source file(line) comment to sql query
-
 
 // Special users
 $bb_cfg['dbg_users'] = array(
@@ -379,7 +370,7 @@ define('CRON_ALLOWED', TRIGGERS_DIR .'cron_allowed');
 define('CRON_RUNNING', TRIGGERS_DIR .'cron_running');
 
 // Cron
-$bb_cfg['cron_enabled']        = false;             // При отвязки крона старт производить из cron.php
+$bb_cfg['cron_enabled']        = true;             // При отвязки крона старт производить из cron.php
 $bb_cfg['cron_check_interval'] = 300;              // sec
 
 // News
@@ -513,7 +504,6 @@ $bb_cfg['html_path']                   = BB_PATH .'/misc/html/';  #
 $bb_cfg['user_agreement_html_path']    = $bb_cfg['html_path'] .'user_agreement.html';  #
 $bb_cfg['copyright_holders_html_path'] = $bb_cfg['html_path'] .'copyright_holders.html';  #
 $bb_cfg['advert_html_path']            = $bb_cfg['html_path'] .'advert.html';  #
-
 
 // Captcha
 $bb_cfg['captcha']['disabled']   = false;

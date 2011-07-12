@@ -354,4 +354,7 @@ $template->pparse('page_header');
 
 define('PAGE_HEADER_SENT', true);
 
-flush();
+if(!$bb_cfg['gzip_compress'])
+{
+	flush();
+}

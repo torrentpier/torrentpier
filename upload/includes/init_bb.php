@@ -82,7 +82,7 @@ function compress_output ($contents)
 
 	if ($bb_cfg['gzip_compress'] && GZIP_OUTPUT_ALLOWED && !defined('NO_GZIP'))
 	{
-		if ((UA_GZIP_SUPPORTED || $bb_cfg['gzip_force']) && strlen($contents) > 2000)
+		if (UA_GZIP_SUPPORTED && strlen($contents) > 2000)
 		{
 			header('Content-Encoding: gzip');
 			$contents = gzencode($contents, 1);

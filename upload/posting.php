@@ -532,10 +532,7 @@ else if ( ($submit || $confirm) && !$topic_has_new_posts )
 			set_tracks(COOKIE_TOPIC, $tracking_topics, $topic_id);
 		}
 
-		$torrent_ext = (@$attachment_mod['posting']->extension === TORRENT_EXT || @$attachment_mod['posting']->attachment_extension_list[0] === TORRENT_EXT);
-		$torrent_attach = ($torrent_ext && defined('TORRENT_ATTACH_ID') && 1 == count($attachment_mod['posting']->attachment_list));
-
-		if ($torrent_attach && $bb_cfg['bt_newtopic_auto_reg'] && $mode == 'newtopic' && !$error_msg)
+		if (defined('TORRENT_ATTACH_ID') && $bb_cfg['bt_newtopic_auto_reg'] && !$error_msg)
 		{
 			include(INC_DIR .'functions_torrent.php');
 			tracker_register(TORRENT_ATTACH_ID, 'newtopic');

@@ -1342,7 +1342,7 @@ $lang['LOGS'] = 'Topic history';
 
 $lang['LAST_IP'] = 'Last IP:';
 $lang['REG_IP']  = 'Registration IP:';
-$lang['ALREADY_REG']   = 'With your IP-address is already registered user %s. If you have not previously registered on our tracker, mail to <a href="mailto:%s">Administrator</ a>';
+$lang['ALREADY_REG_IP'] = 'With your IP-address is already registered user %s. If you have not previously registered on our tracker, mail to <a href="mailto:%s">Administrator</ a>';
 
 //
 // That's all, Folks!

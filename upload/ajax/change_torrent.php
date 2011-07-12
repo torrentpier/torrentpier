@@ -2,8 +2,6 @@
 
 if (!defined('IN_AJAX')) die(basename(__FILE__));
 
-global $bb_cfg;
-
 global $userdata, $bb_cfg, $lang;
 
 if (!isset($this->request['attach_id']))
@@ -39,6 +37,16 @@ $torrent = DB()->fetch_row("
 	");
 
 if (!$torrent) $this->ajax_die('Invalid attach_id');
+
+if($torrent['poster_id'] == $userdata['user_id'] && !IS_AM)
+{
+    if($type == 'del_torrent' || $type == 'reg' || $type == 'unreg')
+    {    	true;    }
+    else
+    {    	$this->ajax_die($lang['ONLY_FOR_MOD']);    }}
+elseif(!IS_AM)
+{	$this->ajax_die($lang['ONLY_FOR_MOD']);}
+
 $title = $url = '';
 switch($type)
 {	case 'set_gold';

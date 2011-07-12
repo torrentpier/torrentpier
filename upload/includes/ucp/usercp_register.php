@@ -46,7 +46,7 @@ switch ($mode)
 			{
 				if($users = DB()->fetch_row("SELECT user_id, username FROM ". BB_USERS ." WHERE user_reg_ip = '". USER_IP ."' LIMIT 1"))
 				{
-					bb_die(sprintf($lang['ALREADY_REG'], '<a href="'. PROFILE_URL . $users['user_id'] .'"><b>'. $users['username'] .'</b></a>', $bb_cfg['tech_admin_email']));
+					bb_die(sprintf($lang['ALREADY_REG_IP'], '<a href="'. PROFILE_URL . $users['user_id'] .'"><b>'. $users['username'] .'</b></a>', $bb_cfg['tech_admin_email']));
 				}
 			}
 
@@ -202,7 +202,7 @@ foreach ($profile_fields as $field => $can_edit)
 
 		if ($submit)
 		{
-			if (!$errors AND $err = validate_username($username))
+			if (!$errors AND $err = validate_username($username) && $mode == 'register')
 			{
 				$errors[] = $err;
 			}

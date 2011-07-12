@@ -59,11 +59,11 @@ class ajax_common
         'change_user_rank'  => array('admin'),
         'change_user_opt'   => array('admin'),
 
-		'change_torrent'    => array('mod'),
 		'change_tor_status' => array('mod'),
 		'mod_action'        => array('mod'),
 
         'gen_passkey'       => array('user'),
+        'change_torrent'    => array('user'),
 
 		'view_post'         => array('guest'),
 		'view_message'      => array('guest'),
@@ -124,7 +124,7 @@ class ajax_common
 
 			// MOD
 			case 'mod':
-				if (!(IS_MOD || IS_ADMIN))
+				if (!IS_AM)
 				{
 					$this->ajax_die($lang['ONLY_FOR_MOD']);
 				}

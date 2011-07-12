@@ -39,7 +39,7 @@ if ($tor['tor_status'] == $new_status)
 	$this->ajax_die('Раздача имеет тот же статус');
 }
 // Запрет на изменение/присвоение CH-статуса модератором
-if ($new_status == TOR_CLOSED_CPHOLD && !(IS_ADMIN || IS_CP_HOLDER))
+if ($new_status == TOR_CLOSED_CPHOLD && !IS_ADMIN)
 {
 	$this->ajax_die('Изменение статуса невозможно');
 }
@@ -47,7 +47,7 @@ if ($new_status == TOR_CLOSED_CPHOLD && !(IS_ADMIN || IS_CP_HOLDER))
 // Права на изменение статуса
 if ($tor['tor_status'] == TOR_CLOSED_CPHOLD)
 {
-	if (!(IS_ADMIN || IS_CP_HOLDER))
+	if (!IS_ADMIN)
 	{
 		$this->verify_mod_rights($tor['forum_id']);
 	}

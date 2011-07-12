@@ -661,6 +661,13 @@ class attach_parent
 			{
 				if ($this->attachment_id_list[$i])
 				{
+					//bt
+					if ($this->attachment_extension_list[$i] === TORRENT_EXT && !defined('TORRENT_ATTACH_ID'))
+					{
+						define('TORRENT_ATTACH_ID', $this->attachment_id_list[$i]);
+					}
+					//bt end
+
 					// update entry in db if attachment already stored in db and filespace
 					$sql = 'UPDATE ' . BB_ATTACHMENTS_DESC . "
 						SET comment = '" . @attach_mod_sql_escape($this->attachment_comment_list[$i]) . "'
@@ -995,7 +1002,7 @@ class attach_parent
 				{
 					$error_msg .= '<br />';
 				}
-				$error_msg .= $lang['ALLOWED_ONLY_1ST_POST_ATTACH'];
+				$error_msg .= $lang['Allowed_only_1st_post_attach'];
 			}
 			//bt end
 
