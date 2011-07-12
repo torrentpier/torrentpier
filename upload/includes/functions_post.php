@@ -171,7 +171,7 @@ function submit_post($mode, &$post_data, &$message, &$meta, &$forum_id, &$topic_
 
 		if ($row = DB()->fetch_row($sql))
 		{
-			$last_msg = DB()->escape($last_msg);
+			$last_msg = DB()->escape($row['post_text']);
 
 			if ($last_msg == $post_message)
 			{

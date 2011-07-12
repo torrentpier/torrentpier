@@ -9,7 +9,7 @@ if (!defined('BB_ROOT')) die(basename(__FILE__));
 if (!defined('BB_SCRIPT')) define('BB_SCRIPT', 'undefined');
 
 // Exit if board is disabled via ON/OFF trigger
-if (!defined('IN_ADMIN') && !defined('IN_AJAX') && !defined('IN_SERVICE'))
+if (!defined('IN_ADMIN') && !defined('IN_AJAX') && !defined('IN_SERVICE') && !IS_ADMIN)
 {
 	if (file_exists(BB_DISABLED))
 	{
@@ -524,10 +524,6 @@ define('SQL_LAYER', 'mysql');
 
 $bb_cfg = array_merge(bb_get_config(BB_CONFIG), $bb_cfg);
 
-$bb_cfg['cookie_name']      = $bb_cfg['cookie_prefix'];
-$bb_cfg['board_dateformat'] = $bb_cfg['default_dateformat'];
-$bb_cfg['board_lang']       = $bb_cfg['default_lang'];
-
 $user = new user_common();
 $userdata =& $user->data;
 
@@ -576,7 +572,13 @@ if ((empty($_POST) && !defined('IN_ADMIN') && !defined('IN_AJAX') && !defined('I
 		// Update cron_last_check
 		bb_update_config(array('cron_last_check' => (time() + 10)));
 
-		require(CFG_DIR .'cron_cfg.php');
+		define('CRON_LOG_ENABLED', true);   // global ON/OFF
+		define('CRON_FORCE_LOG',   false);  // always log regardless of job settings
+
+		define('CRON_DIR',      INC_DIR  .'cron/');
+		define('CRON_JOB_DIR',  CRON_DIR .'jobs/');
+		define('CRON_LOG_DIR',  'cron/');            // inside LOG_DIR
+		define('CRON_LOG_FILE', 'cron');             // without ext
 
 		bb_log(date('H:i:s - ') . getmypid() .' -x-- DB-LOCK try'. LOG_LF, CRON_LOG_DIR .'cron_check');
 

@@ -7,7 +7,7 @@ class captcha_common
 {
 	var $cfg            = array();      // конфиг
 	var $can_bypass     = false;        // может обойти капчу
-	var $cap_img_total  = 100;          // количество текущих картинок
+	var $cap_img_total  = 1000;         // количество текущих картинок
 	var $new_per_minute = 10;           // сколько генерить новых, столько же будет помечаться для удаления
 	var $key_ttl        = 300;          // время жизни _code_ ключа
 	var $cap_sid_len    = 20;           // длина sid'a
@@ -89,10 +89,8 @@ class captcha_common
 
 		return '
 			<div><img src="'. $this->new_img_path .'?'. mt_rand() .'" width="120" height="72" alt="pic" /></div>
-			<div>
-				<input type="hidden" name="'. $this->cap_sid_key .'" value="'. $this->new_cap_sid .'" />
-				<input type="text" name="'. $this->new_code_key .'" value="" size="25" class="bold" />
-			</div>
+			<input type="hidden" name="'. $this->cap_sid_key .'" value="'. $this->new_cap_sid .'" />
+			<input type="text" name="'. $this->new_code_key .'" value="" size="25" class="bold" />
 		';
 	}
 

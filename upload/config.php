@@ -57,8 +57,8 @@ $bb_cfg['css_ver'] = 1;
 
 // Increase number of revision after update
 $bb_cfg['tp_version'] = '2.0.2';
-$bb_cfg['tp_release_state'] = 'TP II r96';
-$bb_cfg['tp_release_date'] = '11-07-2011';
+$bb_cfg['tp_release_state'] = 'TP II r97';
+$bb_cfg['tp_release_date'] = '12-07-2011';
 
 $bb_cfg['board_disabled_msg'] = 'форум временно отключен'; // 'forums temporarily disabled'; // show this msg if board has been disabled via ON/OFF trigger
 $bb_cfg['srv_overloaded_msg'] = "Извините, в данный момент сервер перегружен\nПопробуйте повторить запрос через несколько минут";
@@ -207,7 +207,6 @@ define('DIR_SEPR', DIRECTORY_SEPARATOR);
 define('BB_PATH',       realpath(BB_ROOT)     );  // absolute pathname to the forum root
 define('ADMIN_DIR',     BB_PATH .'/admin/'    );
 define('CACHE_DIR',     BB_PATH .'/cache/'    );
-define('CFG_DIR',       BB_PATH .'/config/'   );
 define('DEV_DIR',       BB_PATH .'/develop/'  );
 define('INC_DIR',       BB_PATH .'/includes/' );
 define('LANG_ROOT_DIR', BB_PATH .'/language/' );
@@ -380,7 +379,7 @@ define('CRON_ALLOWED', TRIGGERS_DIR .'cron_allowed');
 define('CRON_RUNNING', TRIGGERS_DIR .'cron_running');
 
 // Cron
-$bb_cfg['cron_enabled']        = true;             // При отвязки крона старт производить из cron.php
+$bb_cfg['cron_enabled']        = false;             // При отвязки крона старт производить из cron.php
 $bb_cfg['cron_check_interval'] = 300;              // sec
 
 // News

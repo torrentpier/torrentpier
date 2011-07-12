@@ -497,7 +497,7 @@ if ($allowed_forums)
 	{
 		$curr_set[${"{$name}_key"}] = ${"{$name}_val"};
 	}
-	$curr_set_sql = $db->escape(serialize($curr_set));
+	$curr_set_sql = DB()->escape(serialize($curr_set));
 
     // Text search
 	$search_match_topics_csv = '';

@@ -86,7 +86,7 @@ switch ($mode)
 			'user_password'    => '',
 			'user_email'       => '',
 			'user_timezone'    => $bb_cfg['board_timezone'],
-			'user_lang'        => $bb_cfg['board_lang'],
+			'user_lang'        => $bb_cfg['default_lang'],
 			'user_opt'         => 0,
 		);
 		break;
