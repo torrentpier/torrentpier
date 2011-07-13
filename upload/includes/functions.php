@@ -389,6 +389,75 @@ class datastore_sqlite extends datastore_common
 	}
 }
 
+class datastore_redis extends datastore_common
+{
+	var $cfg		= null;
+	var $redis		= null;
+	var $connected	= false;
+
+	function datastore_redis ($cfg)
+	{
+		global $bb_cfg;
+
+		if (!$this->is_installed())
+		{
+			die('Error: Redis extension not installed');
+		}
+
+		$this->cfg = $cfg;
+		$this->redis = new Redis();;
+	}
+
+	function connect ()
+	{
+		if (@$this->redis->connect($this->cfg['host'],$this->cfg['port']))
+		{
+			$this->connected = true;
+		}
+
+		if (!$this->connected && $this->cfg['con_required'])
+		{
+			die('Could not connect to redis server');
+		}
+	}
+
+	function store ($title, $var)
+	{
+		if (!$this->connected) $this->connect();
+		$this->data[$title] = $var;
+		return (bool) $this->redis->set($title, serialize($var));
+	}
+
+	function clean ()
+	{
+		if (!$this->connected) $this->connect();
+		foreach ($this->known_items as $title => $script_name)
+		{
+			$this->redis->del($title);
+		}
+	}
+
+	function _fetch_from_store ()
+	{
+		if (!$items = $this->queued_items)
+		{
+			$src = $this->_debug_find_caller('enqueue');
+			trigger_error("Datastore: item '$item' already enqueued [$src]", E_USER_ERROR);
+		}
+
+		if (!$this->connected) $this->connect();
+		foreach ($items as $item)
+		{
+			$this->data[$item] = unserialize($this->redis->get($item));
+		}
+	}
+
+	function is_installed ()
+	{
+		return class_exists('Redis');
+	}
+}
+
 class datastore_file extends datastore_common
 {
 	var $dir = null;

@@ -557,6 +557,10 @@ switch ($bb_cfg['datastore_type'])
 		$datastore = new datastore_memcache($bb_cfg['datastore']['memcache']);
 		break;
 
+	case 'redis':
+		$datastore = new datastore_redis($bb_cfg['datastore']['redis']);
+		break;
+
 	case 'filecache':
 		$datastore = new datastore_file($bb_cfg['cache']['db_dir'] . 'datastore/');
 		break;

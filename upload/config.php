@@ -57,8 +57,8 @@ $bb_cfg['css_ver'] = 1;
 
 // Increase number of revision after update
 $bb_cfg['tp_version'] = '2.0.2';
-$bb_cfg['tp_release_state'] = 'TP II r101';
-$bb_cfg['tp_release_date'] = '13-07-2011';
+$bb_cfg['tp_release_state'] = 'TP II r102';
+$bb_cfg['tp_release_date'] = '14-07-2011';
 
 $bb_cfg['board_disabled_msg'] = 'форум временно отключен'; // 'forums temporarily disabled'; // show this msg if board has been disabled via ON/OFF trigger
 $bb_cfg['srv_overloaded_msg'] = "Извините, в данный момент сервер перегружен\nПопробуйте повторить запрос через несколько минут";
@@ -80,7 +80,7 @@ $bb_cfg['db_alias'] = array(
 $bb_cfg['cache']['pconnect'] = false;
 $bb_cfg['cache']['db_dir']   = realpath(BB_ROOT) .'/cache/filecache/';
 
-// Available cache types: sqlite, db_sqlite, memcache, filecache
+// Available cache types: sqlite, db_sqlite, memcache, redis, filecache
 # name => array( (string) type, (array) cfg )
 $bb_cfg['cache']['engines'] = array(
 	'bb_cache'       => array('filecache',   array()),
@@ -103,6 +103,11 @@ $bb_cfg['datastore']['memcache'] = array(
 	'port'         => 11211,
 	'pconnect'     => true,  // use persistent connection
 	'con_required' => true,  // exit script if can't connect
+);
+$bb_cfg['datastore']['redis'] = array(
+	'host'         => '127.0.0.1',
+	'port'         => 6379,
+	'con_required' => true,
 );
 
 // Tracker

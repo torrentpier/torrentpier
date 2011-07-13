@@ -179,6 +179,19 @@ class CACHES
 						$this->ref[$cache_name] =& $this->obj[$cache_name];
 						break;
 
+                    case 'redis':
+                        if (!isset($this->obj[$cache_name]))
+						{
+							$cache_cfg = array(
+								'host'         => '127.0.0.1',
+								'port'         => 6379,
+								'con_required' => true,
+							);
+							$this->obj[$cache_name] = new cache_redis($cache_cfg);
+						}
+						$this->ref[$cache_name] =& $this->obj[$cache_name];
+	                    break;
+
                     case 'filecache':
                         if (!isset($this->obj[$cache_name]))
 						{
@@ -618,25 +631,73 @@ class cache_dbg_common
 	}
 }
 
-function sql_dbg_enabled ()
+class cache_redis extends cache_common
 {
-	return (SQL_DEBUG && DBG_USER && !empty($_COOKIE['sql_log']));
-}
+	var $used      = true;
 
-function short_query ($sql, $esc_html = false)
-{
-	$max_len = 2500;
-	$sql = str_compact($sql);
+	var $cfg       = null;
+	var $redis     = null;
+	var $connected = false;
 
-	if (empty($_COOKIE['sql_log_full']))
+	function cache_redis ($cfg)
 	{
-		if (strlen($sql) > $max_len)
+		global $bb_cfg;
+
+		if (!$this->is_installed())
 		{
-			$sql = substr($sql, 0, $max_len-500) .' [...cut...] '. substr($sql, -480);
+			die('Error: Redis extension not installed');
+		}
+
+		$this->cfg = $cfg;
+		$this->redis = new Redis();
+	}
+
+	function connect ()
+	{
+		if (@$this->redis->connect($this->cfg['host'], $this->cfg['port']))
+		{
+			$this->connected = true;
+		}
+
+		if (!$this->connected && $this->cfg['con_required'])
+		{
+			die('Could not connect to redis server');
 		}
 	}
 
-	return ($esc_html) ? htmlCHR($sql, true) : $sql;
+	function get ($name)
+	{
+		if (!$this->connected) $this->connect();
+		return ($this->connected) ? unserialize($this->redis->get($name)) : false;
+	}
+
+	function set ($name, $value, $ttl = 0)
+	{
+		if (!$this->connected) $this->connect();
+		if($this->redis->set($name, serialize($value)))
+		{
+			if ($ttl > 0)
+			{
+				$this->redis->expire($name, $ttl);
+			}
+			return true;
+		}
+		else
+		{
+			return false;
+		}
+	}
+
+	function rm ($name)
+	{
+		if (!$this->connected) $this->connect();
+		return ($this->connected) ? $this->redis->del($name) : false;
+	}
+
+	function is_installed ()
+	{
+		return class_exists('Redis');
+	}
 }
 
 class cache_file extends cache_common
@@ -724,6 +785,26 @@ class cache_file extends cache_common
 	}
 }
 
+function sql_dbg_enabled ()
+{
+	return (SQL_DEBUG && DBG_USER && !empty($_COOKIE['sql_log']));
+}
+
+function short_query ($sql, $esc_html = false)
+{
+	$max_len = 2500;
+	$sql = str_compact($sql);
+
+	if (empty($_COOKIE['sql_log_full']))
+	{
+		if (strlen($sql) > $max_len)
+		{
+			$sql = substr($sql, 0, $max_len-500) .' [...cut...] '. substr($sql, -480);
+		}
+	}
+
+	return ($esc_html) ? htmlCHR($sql, true) : $sql;
+}
 // Functions
 function utime ()
 {
@@ -867,7 +948,7 @@ function verify_ip ($ip)
 
 function str_compact ($str)
 {
-	return preg_replace('#\s+#', ' ', trim($str));
+	return preg_replace('#\s+#u', ' ', trim($str));
 }
 
 function make_rand_str ($len = 10)
