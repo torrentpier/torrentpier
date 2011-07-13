@@ -1002,7 +1002,7 @@ class attach_parent
 				{
 					$error_msg .= '<br />';
 				}
-				$error_msg .= $lang['Allowed_only_1st_post_attach'];
+				$error_msg .= $lang['ALLOWED_ONLY_1ST_POST_ATTACH'];
 			}
 			//bt end
 

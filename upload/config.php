@@ -57,7 +57,7 @@ $bb_cfg['css_ver'] = 1;
 
 // Increase number of revision after update
 $bb_cfg['tp_version'] = '2.0.2';
-$bb_cfg['tp_release_state'] = 'TP II r100';
+$bb_cfg['tp_release_state'] = 'TP II r101';
 $bb_cfg['tp_release_date'] = '13-07-2011';
 
 $bb_cfg['board_disabled_msg'] = 'форум временно отключен'; // 'forums temporarily disabled'; // show this msg if board has been disabled via ON/OFF trigger
@@ -408,7 +408,7 @@ $bb_cfg['posts_cache_days_keep'] = 14;
 $bb_cfg['max_post_length']       = 120000;         // bytes
 
 // Search
-$bb_cfg['search_engine_type']          = 'sphinx';  //  none, mysql, sphinx
+$bb_cfg['search_engine_type']          = 'mysql';  //  none, mysql, sphinx
 $bb_cfg['sphinx_topic_titles_host']    = '127.0.0.1';
 $bb_cfg['sphinx_topic_titles_port']    = 3312;
 $bb_cfg['disable_ft_search_in_posts']  = false;    // disable searching in post bodies

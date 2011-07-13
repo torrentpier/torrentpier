@@ -2852,7 +2852,7 @@ function get_title_match_topics ($title_match_sql, $limit = 500, $forum_ids = ar
 
 	if ($bb_cfg['search_engine_type'] == 'sphinx')
 	{
-		global $user;
+		global $user, $title_match; //$title_match - для поиска по постам и топикам (ещё не реализовано)
 
 		init_sphinx();
 
@@ -2889,7 +2889,6 @@ function get_title_match_topics ($title_match_sql, $limit = 500, $forum_ids = ar
 	}
 	else if ($bb_cfg['search_engine_type'] == 'mysql')
 	{
-		$bool_mode = (true) ? " IN BOOLEAN MODE" : '';
 		$in_forums = ($forum_ids) ? "AND forum_id IN(". join(',', $forum_ids) .")" : '';
 		$sql = "
 			SELECT topic_id
