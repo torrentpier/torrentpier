@@ -57,7 +57,7 @@ $bb_cfg['css_ver'] = 1;
 
 // Increase number of revision after update
 $bb_cfg['tp_version'] = '2.0.2';
-$bb_cfg['tp_release_state'] = 'TP II r102';
+$bb_cfg['tp_release_state'] = 'TP II r103';
 $bb_cfg['tp_release_date'] = '14-07-2011';
 
 $bb_cfg['board_disabled_msg'] = 'форум временно отключен'; // 'forums temporarily disabled'; // show this msg if board has been disabled via ON/OFF trigger
@@ -92,7 +92,7 @@ $bb_cfg['cache']['engines'] = array(
 );
 
 // Datastore
-$bb_cfg['datastore_type'] = 'filecache'; // Available datastore types: mysql, sqlite, memcache, filecache
+$bb_cfg['datastore_type'] = 'filecache'; // Available datastore types: mysql, sqlite, memcache, redis, filecache
 
 $bb_cfg['datastore']['sqlite'] = array(
 	'db_file_path' => $bb_cfg['cache']['db_dir'] . '/bb_datastore.sqlite.db',

@@ -535,7 +535,7 @@ else if ( ($submit || $confirm) && !$topic_has_new_posts )
 		if (defined('TORRENT_ATTACH_ID') && $bb_cfg['bt_newtopic_auto_reg'] && !$error_msg)
 		{
 			include(INC_DIR .'functions_torrent.php');
-			if(!get_torrent_info(TORRENT_ATTACH_ID))
+			if(!DB()->fetch_row("SELECT attach_id FROM ". BB_BT_TORRENTS ." WHERE attach_id = ". TORRENT_ATTACH_ID))
 			{
 				tracker_register(TORRENT_ATTACH_ID, 'newtopic');
 			}
