@@ -1369,7 +1369,7 @@ CREATE TABLE IF NOT EXISTS `bb_users` (
   `user_level` tinyint(4) NOT NULL default '0',
   `user_posts` mediumint(8) unsigned NOT NULL default '0',
   `user_timezone` decimal(5,2) NOT NULL default '0.00',
-  `user_lang` varchar(255) NOT NULL default '',
+  `user_lang` varchar(255) NOT NULL default 'russian',
   `user_new_privmsg` smallint(5) unsigned NOT NULL default '0',
   `user_unread_privmsg` smallint(5) unsigned NOT NULL default '0',
   `user_last_privmsg` int(11) NOT NULL default '0',
