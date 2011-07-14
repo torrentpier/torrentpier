@@ -557,7 +557,7 @@ $lang['ALWAYS_NOTIFY_EXPLAIN'] = 'Sends an e-mail when someone replies to a topi
 
 $lang['BOARD_STYLE'] = 'Board Style';
 $lang['BOARD_LANG'] = 'Board Language';
-$lang['GENDER'] = 'Пол';
+$lang['GENDER'] = 'Gender';
 $lang['GENDER_SELECT'] = array(
 	0 => 'Unselect',
 	1 => 'Male',
