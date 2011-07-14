@@ -2059,8 +2059,16 @@ function mkrealdate($day, $month, $birth_year)
 
 function realdate($date, $format = "Ymd")
 {
+	if(!$date) return;
 	return bb_date($date*86400+1, $format, 0);
 }
+
+function birthday_age($date)
+{
+	if(!$date) return;
+	return delta_time(mktime(0, 0, 0, 0, 0, realdate($date, 'Y')));
+}
+
 //
 // Pagination routine, generates
 // page number sequence

@@ -81,10 +81,11 @@ switch ($field)
 			}		}
 		else
 		{
+		    $value = 0;
 		    $next_birthday_greeting = 0;		}
 		DB()->query("UPDATE $table SET user_next_birthday_greeting = $next_birthday_greeting WHERE user_id = $user_id LIMIT 1");
 
-	    $this->response['new_value'] = $this->request['value'];
+	    $this->response['new_value']  = $this->request['value'];
 		break;
 
 	case 'user_from':

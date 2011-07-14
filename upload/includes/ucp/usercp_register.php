@@ -338,29 +338,28 @@ foreach ($profile_fields as $field => $can_edit)
 	*  Возраст (edit, reg)
 	*/
 	case 'user_birthday':
-		if($birthday = $pr_data['user_birthday'])
+		$b_day  = (isset($_POST['b_day'])) ? (int) $_POST['b_day'] : realdate($pr_data['user_birthday'], 'j');
+		$b_md   = (isset($_POST['b_md'])) ? (int) $_POST['b_md'] : realdate($pr_data['user_birthday'], 'n');
+		$b_year = (isset($_POST['b_year'])) ? (int) $_POST['b_year'] : realdate($pr_data['user_birthday'], 'Y');
+
+		if ($b_day || $b_md || $b_year)
 		{
-			$b_day  = (isset($_POST['b_day'])) ? (int) $_POST['b_day'] : realdate($pr_data['user_birthday'], 'j');
-			$b_md   = (isset($_POST['b_md'])) ? (int) $_POST['b_md'] : realdate($pr_data['user_birthday'], 'n');
-			$b_year = (isset($_POST['b_year'])) ? (int) $_POST['b_year'] : realdate($pr_data['user_birthday'], 'Y');
-			if ($b_day || $b_md || $b_year)
+			if (!checkdate($b_md, $b_day, $b_year))
 			{
-				if (!checkdate($b_md, $b_day, $b_year))
-				{
-					$errors[] = $lang['WRONG_BIRTHDAY_FORMAT'];
-				}
-				else
-				{
-					$birthday = mkrealdate($b_day, $b_md, $b_year);
-					$next_birthday_greeting = (date('md') < $b_md . (($b_day <= 9) ? '0' : '') . $b_day) ? date('Y') : date('Y')+1;
-				}
+				$errors[] = $lang['WRONG_BIRTHDAY_FORMAT'];
+				$birthday = $next_birthday_greeting = 0;
 			}
 			else
 			{
-				$birthday = 0;
-				$next_birthday_greeting = 0;
+				$birthday = mkrealdate($b_day, $b_md, $b_year);
+				$next_birthday_greeting = (date('md') < $b_md . (($b_day <= 9) ? '0' : '') . $b_day) ? date('Y') : date('Y')+1;
 			}
-        }
+		}
+		else
+		{
+			$birthday = $next_birthday_greeting = 0;
+		}
+
         if ($submit && $birthday != $pr_data['user_birthday'])
 		{
 			$pr_data['user_birthday'] = $birthday;
