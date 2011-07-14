@@ -245,6 +245,11 @@ $(document).ready(function(){
 				<th>{L_BIRTHDAY}:</th>
 				<td id="user_birthday"><b class="editable">{BIRTHDAY}</b></td>
 			</tr>
+			<tr>
+				<th>{L_AGE}:</th>
+				<td id="user_birthday"><b class="editable">{AGE}</b></td>
+			</tr>
+
 			<!-- ENDIF -->
 			<!-- BEGIN switch_upload_limits -->
 			<tr>
