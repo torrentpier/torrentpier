@@ -1982,6 +1982,85 @@ function bb_date ($gmepoch, $format = false, $tz = null)
 	return ($bb_cfg['translate_dates']) ? strtr(strtoupper($date), $lang['DATETIME']) : $date;
 }
 
+// Birthday
+// Add function mkrealdate for Birthday MOD
+// the originate php "mktime()", does not work proberly on all OS, especially when going back in time
+// before year 1970 (year 0), this function "mkrealtime()", has a mutch larger valid date range,
+// from 1901 - 2099. it returns a "like" UNIX timestamp divided by 86400, so
+// calculation from the originate php date and mktime is easy.
+// mkrealdate, returns the number of day (with sign) from 1.1.1970.
+
+function mkrealdate($day, $month, $birth_year)
+{
+	// define epoch
+	$epoch = 0;
+	// range check months
+	if ($month < 1 || $month > 12) return "error";
+	// range check days
+	switch ($month)
+	{
+		case 1: if ($day > 31) return "error"; break;
+		case 2: if ($day > 29) return "error";
+			$epoch = $epoch+31; break;
+		case 3: if ($day > 31) return "error";
+			$epoch = $epoch+59; break;
+		case 4: if ($day > 30) return "error" ;
+			$epoch = $epoch+90; break;
+		case 5: if ($day > 31) return "error";
+			$epoch = $epoch+120; break;
+		case 6: if ($day > 30) return "error";
+			$epoch = $epoch+151; break;
+		case 7: if ($day > 31) return "error";
+			$epoch = $epoch+181; break;
+		case 8: if ($day > 31) return "error";
+			$epoch = $epoch+212; break;
+		case 9: if ($day > 30) return "error";
+			$epoch = $epoch+243; break;
+		case 10: if ($day > 31) return "error";
+			$epoch = $epoch+273; break;
+		case 11: if ($day > 30) return "error";
+			$epoch = $epoch+304; break;
+		case 12: if ($day > 31) return "error";
+			$epoch = $epoch+334; break;
+	}
+	$epoch = $epoch+$day;
+	$epoch_Y = sqrt(($birth_year-1970)*($birth_year-1970));
+	$leapyear = round((($epoch_Y+2) / 4)-.5);
+	if (($epoch_Y+2)%4 == 0)
+	{// curent year is leapyear
+		$leapyear--;
+		if ($birth_year > 1970 && $month >= 3) $epoch = $epoch+1;
+		if ($birth_year < 1970 && $month < 3) $epoch = $epoch-1;
+	}
+	else if ($month == 2 && $day > 28) return "error";//only 28 days in feb.
+	//year
+	if ($birth_year > 1970)
+	{
+		$epoch = $epoch + $epoch_Y*365-1 + $leapyear;
+	}
+	else
+	{
+		$epoch = $epoch - $epoch_Y*365-1 - $leapyear;
+	}
+	return $epoch;
+}
+
+// Add function realdate for Birthday MOD
+// the originate php "date()", does not work proberly on all OS, especially when going back in time
+// before year 1970 (year 0), this function "realdate()", has a mutch larger valid date range,
+// from 1901 - 2099. it returns a "like" UNIX date format (only date, related letters may be used, due to the fact that
+// the given date value should already be divided by 86400 - leaving no time information left)
+// a input like a UNIX timestamp divided by 86400 is expected, so
+// calculation from the originate php date and mktime is easy.
+// e.g. realdate ("m d Y", 3) returns the string "1 3 1970"
+
+// UNIX users should replace this function with the below code, since this should be faster
+//
+
+function realdate($date, $format = "Ymd")
+{
+	return bb_date($date*86400+1, $format, 0);
+}
 //
 // Pagination routine, generates
 // page number sequence
@@ -2875,7 +2954,7 @@ function clean_text_match ($text, $ltrim_star = true, $remove_stopwords = false,
 
 	if (!$text_match_sql && $die_if_empty)
 	{
-		bb_die($lang['No_search_match']);
+		bb_die($lang['NO_SEARCH_MATCH']);
 	}
     return $text_match_sql;
 }

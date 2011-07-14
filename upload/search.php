@@ -337,6 +337,7 @@ if (!$items_found)
 	}
 
 	// Forum
+	$forum_selected = '';
 	if ($var =& $_REQUEST[$forum_key])
 	{
 		$forum_selected = get_id_ary($var);

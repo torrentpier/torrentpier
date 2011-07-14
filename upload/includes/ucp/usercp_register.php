@@ -107,6 +107,7 @@ switch ($mode)
 			'user_email'       => true,      // должен быть после user_password
 			'user_lang'        => true,
 			'user_gender'      => true,
+			'user_birthday'    => true,
 			'user_timezone'    => true,
 			'user_opt'         => true,
 			'user_icq'         => true,
@@ -321,7 +322,7 @@ foreach ($profile_fields as $field => $can_edit)
 		break;
 
 	/**
-	*  Язык (edit, reg)
+	*  Пол (edit, reg)
 	*/
 	case 'user_gender':
 		$gender = isset($_POST['user_gender']) ? (int) $_POST['user_gender'] : $pr_data['user_gender'];
@@ -330,7 +331,42 @@ foreach ($profile_fields as $field => $can_edit)
             $pr_data['user_gender'] = $gender;
 			$db_data['user_gender'] = $gender;
 		}
-		$tp_data['USER_GENDER'] = build_select('user_gender', $lang['GENDER_SELECT'], $pr_data['user_gender']);
+		$tp_data['USER_GENDER'] = build_select('user_gender', array_flip($lang['GENDER_SELECT']), $pr_data['user_gender']);
+		break;
+
+    /**
+	*  Возраст (edit, reg)
+	*/
+	case 'user_birthday':
+		if($birthday = $pr_data['user_birthday'])
+		{
+			$b_day  = (isset($_POST['b_day'])) ? (int) $_POST['b_day'] : realdate($pr_data['user_birthday'], 'j');
+			$b_md   = (isset($_POST['b_md'])) ? (int) $_POST['b_md'] : realdate($pr_data['user_birthday'], 'n');
+			$b_year = (isset($_POST['b_year'])) ? (int) $_POST['b_year'] : realdate($pr_data['user_birthday'], 'Y');
+			if ($b_day || $b_md || $b_year)
+			{
+				if (!checkdate($b_md, $b_day, $b_year))
+				{
+					$errors[] = $lang['WRONG_BIRTHDAY_FORMAT'];
+				}
+				else
+				{
+					$birthday = mkrealdate($b_day, $b_md, $b_year);
+					$next_birthday_greeting = (date('md') < $b_md . (($b_day <= 9) ? '0' : '') . $b_day) ? date('Y') : date('Y')+1;
+				}
+			}
+			else
+			{
+				$birthday = 0;
+				$next_birthday_greeting = 0;
+			}
+        }
+        if ($submit && $birthday != $pr_data['user_birthday'])
+		{
+			$pr_data['user_birthday'] = $birthday;
+			$db_data['user_birthday'] = (int) $birthday;
+			$db_data['user_next_birthday_greeting'] = $next_birthday_greeting;
+		}
 		break;
 
 	/**
@@ -660,6 +696,33 @@ foreach ($profile_fields as $field => $can_edit)
 	default:
 		trigger_error("invalid profile field: $field", E_USER_ERROR);
 	}
+}
+
+if($bb_cfg['birthday']['enabled'] && $mode != 'register')
+{
+	$days = array($lang['DELTA_TIME']['INTERVALS']['mon'][0] => 0);
+	for($i=1; $i<=31; $i++)
+	{
+		$days[$i] = $i;
+	}
+	$s_birthday = build_select('b_day', $days, $b_day);
+
+	$months = array($lang['DELTA_TIME']['INTERVALS']['mon'][0] => 0);
+	for($i=1; $i<=12; $i++)
+	{
+		$month = bb_date(mktime(0, 0, 0, ($i+1), 0, 0), 'F');
+		$months[$month] = $i;
+	}
+	$s_birthday .= build_select('b_md', $months, $b_md);
+
+	$year = bb_date(TIMENOW, 'Y');
+	$years = array($lang['DELTA_TIME']['INTERVALS']['year'][0] => 0);
+	for($i=$year-$bb_cfg['birthday']['max_user_age']; $i<=$year-$bb_cfg['birthday']['min_user_age']; $i++)
+	{
+		$years[$i] = $i;
+	}
+	$s_birthday .= build_select('b_year', $years, $b_year);
+	$tp_data['BIRTHDAY'] = $s_birthday;
 }
 
 // submit

@@ -89,6 +89,12 @@ ajax.callback.gen_passkey = function(data){
 	<td>{L_GENDER}:</td>
 	<td>{USER_GENDER}</td>
 </tr>
+<!-- IF BIRTHDAY -->
+<tr>
+	<td>{L_BIRTHDAY}:</td>
+	<td>{BIRTHDAY}</td>
+</tr>
+<!-- ENDIF -->
 <tr>
 	<td>ICQ:</td>
 	<td><input type="text" name="user_icq" size="30" maxlength="15" value="{USER_ICQ}" /></td>

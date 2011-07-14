@@ -9,7 +9,7 @@
    - Magnet links
    - No avatar
 */
-	
+
 if (!defined('BB_ROOT')) die(basename(__FILE__));
 
 // Advanced Report Hack
@@ -30,3 +30,8 @@ $bb_cfg['magnet_links_enabled'] = true;
 
 // No avatar
 $bb_cfg['no_avatar'] = 'images/avatars/gallery/noavatar.png';
+
+// Birthday
+$bb_cfg['birthday']['enabled']      = true;
+$bb_cfg['birthday']['max_user_age'] = 100;
+$bb_cfg['birthday']['min_user_age'] = 10;

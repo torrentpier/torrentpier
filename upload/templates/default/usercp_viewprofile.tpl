@@ -74,6 +74,13 @@ $(document).ready(function(){
 <var class="ajax-params">{action: "edit_user_profile", id: "username"}</var>
 <var class="ajax-params">{action: "edit_user_profile", id: "user_regdate"}</var>
 <var class="ajax-params">{action: "edit_user_profile", id: "user_lastvisit"}</var>
+<var class="ajax-params">{action: "edit_user_profile", id: "user_from"}</var>
+<var class="ajax-params">{action: "edit_user_profile", id: "user_website"}</var>
+<var class="ajax-params">{action: "edit_user_profile", id: "user_occ"}</var>
+<var class="ajax-params">{action: "edit_user_profile", id: "user_interests"}</var>
+<var class="ajax-params">{action: "edit_user_profile", id: "user_gender", editableType: "yesno-gender"}</var>
+<var class="ajax-params">{action: "edit_user_profile", id: "user_birthday"}</var>
+
 <!-- IF IGNORE_SRV_LOAD_EDIT -->
 <var class="ajax-params">{action: "edit_user_profile", id: "ignore_srv_load", editableType: "yesno-radio"}</var>
 <!-- ENDIF -->
@@ -206,25 +213,37 @@ $(document).ready(function(){
 			<!-- IF LOCATION -->
 			<tr>
 				<th class="vBottom">{L_LOCATION}:</th>
-				<td><b>{LOCATION}</b></td>
+				<td id="user_from"><b class="editable">{LOCATION}</b></td>
 			</tr>
 			<!-- ENDIF -->
 			<!-- IF WWW -->
 			<tr>
 				<th>{L_WEBSITE}:</th>
-				<td><b>{WWW}</b></td>
+				<td id="user_website"><b class="editable">{WWW}</b></td>
 			</tr>
 			<!-- ENDIF -->
 			<!-- IF OCCUPATION -->
 			<tr>
 				<th>{L_OCCUPATION}:</th>
-				<td><b>{OCCUPATION}</b></td>
+				<td id="user_occ"><b class="editable">{OCCUPATION}</b></td>
 			</tr>
 			<!-- ENDIF -->
 			<!-- IF INTERESTS -->
 			<tr>
 				<th>{L_INTERESTS}:</th>
-				<td><b>{INTERESTS}</b></td>
+				<td id="user_interests"><b class="editable">{INTERESTS}</b></td>
+			</tr>
+			<!-- ENDIF -->
+			<!-- IF GENDER -->
+			<tr>
+				<th>{L_GENDER}:</th>
+				<td id="user_gender"><b class="editable">{GENDER}</b></td>
+			</tr>
+			<!-- ENDIF -->
+			<!-- IF BIRTHDAY -->
+			<tr>
+				<th>{L_BIRTHDAY}:</th>
+				<td id="user_birthday"><b class="editable">{BIRTHDAY}</b></td>
 			</tr>
 			<!-- ENDIF -->
 			<!-- BEGIN switch_upload_limits -->
@@ -239,7 +258,7 @@ $(document).ready(function(){
 			<!-- IF SHOW_ACCESS_PRIVILEGE -->
 			<tr>
 				<th>{L_ACCESS}:</th>
-				<td id="ignore_srv_load">{L_ACCESS_SRV_LOAD}: <span class="editable bold">{IGNORE_SRV_LOAD}</span></td>
+				<td id="ignore_srv_load">{L_ACCESS_SRV_LOAD}: <b class="editable">{IGNORE_SRV_LOAD}</b></td>
 			</tr>
 			<!-- ENDIF -->
 			<!-- IF IS_AM -->

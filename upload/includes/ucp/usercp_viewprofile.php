@@ -198,6 +198,9 @@ $template->assign_vars(array(
 
 	'OCCUPATION' 	=> ( $profiledata['user_occ'] ) ? $profiledata['user_occ'] : '',
 	'INTERESTS' 	=> ( $profiledata['user_interests'] ) ? $profiledata['user_interests'] : '',
+	'GENDER'        => ( $profiledata['user_gender'] ) ? $lang['GENDER_SELECT'][$profiledata['user_gender']] : '',
+	'BIRTHDAY'      => ( $profiledata['user_birthday'] ) ? realdate($profiledata['user_birthday'], 'Y-m-d') : '',
+	'AGE'           => ( $profiledata['user_birthday'] ) ? bb_date(TIMENOW, 'Y') - realdate($profiledata['user_birthday'], 'Y') : '',
 	'AVATAR_IMG' 	=> $avatar_img,
 
 	'L_VIEWING_PROFILE' => sprintf($lang['VIEWING_USER_PROFILE'], $profiledata['username']),

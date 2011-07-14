@@ -254,6 +254,15 @@ function OpenInEditor ($file, $line)
 		<input type="button" class="editable-cancel" value="x" style="width: 30px;" />
 	</span>
 </div>
+<div id="editable-tpl-yesno-gender" style="display: none;">
+	<span class="editable-inputs nowrap" style="display: none;">
+		<label><input class="editable-value" type="radio" name="editable-value" value="1">{$lang['GENDER_SELECT'][1]}</label>
+		<label><input class="editable-value" type="radio" name="editable-value" value="2">{$lang['GENDER_SELECT'][2]}</label>&nbsp;
+		<label><input class="editable-value" type="radio" name="editable-value" value="0">{$lang['GENDER_SELECT'][0]}</label>
+		<input type="button" class="editable-submit" value="&raquo;" style="width: 30px; font-weight: bold;">
+		<input type="button" class="editable-cancel" value="x" style="width: 30px;">
+	</span>
+</div>
 <!-- ENDIF / EDITABLE_TPLS -->
 
 <table id="ajax-loading" cellpadding="0" cellspacing="0"><tr><td class="icon"></td><td>Loading...</td></tr></table>

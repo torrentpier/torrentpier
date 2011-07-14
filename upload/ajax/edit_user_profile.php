@@ -39,11 +39,58 @@ switch ($field)
 		break;
 
 	case 'user_website':
-		if ($value == '' || preg_match('#^https?://[a-z0-9_:;?&=/.%~\-]+$#i', $value))
+		if ($value == '' || preg_match('#^https?://[\w\#!$%&~/.\-;:=,?@Ð°-ÑÐ-Ð¯\[\]+]+$#iu', $value))
 		{
 			$this->response['new_value'] = htmlCHR($value);
 		}
-		else $this->ajax_die('Ïîëå "Ñàéò" ìîæåò ñîäåðæàòü òîëüêî http:// ññûëêó');
+		else $this->ajax_die('ÐŸÐ¾Ð»Ðµ "Ð¡Ð°Ð¹Ñ‚" Ð¼Ð¾Ð¶ÐµÑ‚ ÑÐ¾Ð´ÐµÑ€Ð¶Ð°Ñ‚ÑŒ Ñ‚Ð¾Ð»ÑŒÐºÐ¾ http:// ÑÑÑ‹Ð»ÐºÑƒ');
+		break;
+
+	case 'user_gender':
+	    if (!isset($lang['GENDER_SELECT'][$value]))
+		{
+			$this->ajax_die('error');
+		}
+		else
+		{			$this->response['new_value'] = $lang['GENDER_SELECT'][$value];		}
+		break;
+
+	case 'user_birthday':
+	    if(!$bb_cfg['birthday']['enabled']) $this->ajax_die('off');
+	    $data = explode('-', $value);
+	    $b_day  = (isset($data[2])) ? (int) $data[2] : 0;
+		$b_md   = (isset($data[1])) ? (int) $data[1] : 0;
+		$b_year = (isset($data[0])) ? (int) $data[0] : 0;
+
+		if($b_day || $b_md || $b_year)
+		{
+			if((bb_date(TIMENOW, 'Y') - $b_year) > $bb_cfg['birthday']['max_user_age'])
+			{				$this->ajax_die(sprintf($lang['BIRTHDAY_TO_HIGH'], $bb_cfg['birthday']['max_user_age']));			}
+            else if((bb_date(TIMENOW, 'Y') - $b_year) < $bb_cfg['birthday']['min_user_age'])
+			{
+				$this->ajax_die(sprintf($lang['BIRTHDAY_TO_LOW'], $bb_cfg['birthday']['min_user_age']));
+			}
+			if (!checkdate($b_md, $b_day, $b_year))
+			{
+				$this->ajax_die($lang['WRONG_BIRTHDAY_FORMAT']);
+			}
+			else
+			{
+				$value = mkrealdate($b_day, $b_md, $b_year);
+				$next_birthday_greeting = (date('md') < $b_md . (($b_day <= 9) ? '0' : '') . $b_day) ? date('Y') : date('Y')+1;
+			}		}
+		else
+		{
+		    $next_birthday_greeting = 0;		}
+		DB()->query("UPDATE $table SET user_next_birthday_greeting = $next_birthday_greeting WHERE user_id = $user_id LIMIT 1");
+
+	    $this->response['new_value'] = $this->request['value'];
+		break;
+
+	case 'user_from':
+	case 'user_occ':
+		$value = htmlCHR($value);
+		$this->response['new_value'] = $value;
 		break;
 
 	case 'user_regdate':
