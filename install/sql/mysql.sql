@@ -688,7 +688,7 @@ INSERT INTO `bb_cron` VALUES (15, 1, 'Clean search results', 'clean_search_resul
 INSERT INTO `bb_cron` VALUES (16, 1, 'Tracker cleanup and dlstat', 'tr_cleanup_and_dlstat.php', 'interval', NULL, NULL, 20, '2008-05-22 20:31:41', '2008-05-22 20:46:41', '00:15:00', 0, '', 0, 0, 14);
 INSERT INTO `bb_cron` VALUES (17, 1, 'Make tracker snapshot', 'tr_make_snapshot.php', 'interval', NULL, NULL, 10, '2008-05-22 20:31:38', '2008-05-22 20:41:38', '00:10:00', 0, '', 0, 0, 16);
 INSERT INTO `bb_cron` VALUES (18, 1, 'Seeder last seen', 'tr_update_seeder_last_seen.php', 'interval', NULL, NULL, 255, '2008-05-22 19:11:55', '2008-05-22 20:11:55', '01:00:00', 0, '', 0, 0, 5);
-INSERT INTO `bb_cron` VALUES (19, 1, 'Captcha', 'captcha_gen_gc.php', 'interval', NULL, NULL, 255, '2008-05-22 19:11:58', '2008-05-23 01:11:58', '06:00:00', 0, '', 0, 0, 3);
+INSERT INTO `bb_cron` VALUES (19, 1, 'Captcha', 'captcha_gen_gc.php', 'daily', NULL, '05:00:00', 120, '2008-05-22 19:11:58', '2008-05-23 01:11:58', NULL, 0, '', 0, 0, 3);
 INSERT INTO `bb_cron` VALUES (20, 1, 'Tracker dl-complete count', 'tr_complete_count.php', 'interval', NULL, NULL, 255, '2008-05-22 19:12:01', '2008-05-23 01:12:01', '06:00:00', 0, '', 0, 0, 3);
 INSERT INTO `bb_cron` VALUES (21, 1, 'Cache garbage collector', 'cache_gc.php', 'interval', NULL, NULL, 255, '2008-05-22 19:18:13', '2008-05-22 19:23:13', '00:05:00', 0, '', 0, 0, 24);
 INSERT INTO `bb_cron` VALUES (22, 1, 'Manage Antibroot', 'bb_manage_untrusted.php', 'interval', NULL, NULL, 255, '2008-05-22 19:18:13', '2008-05-22 19:23:13', '00:10:00', 0, '', 0, 0, 24);
@@ -1378,6 +1378,8 @@ CREATE TABLE IF NOT EXISTS `bb_users` (
   `user_avatar` varchar(100) NOT NULL default '',
   `user_avatar_type` tinyint(4) NOT NULL default '0',
   `user_gender` tinyint(1) NOT NULL default '0',
+  `user_birthday` int(11) NOT NULL default '999999',
+  `user_next_birthday_greeting` int(11) NOT NULL default '0',
   `user_email` varchar(255) NOT NULL default '',
   `user_skype` varchar(32) NOT NULL default '',
   `user_icq` varchar(15) NOT NULL default '',
@@ -1401,9 +1403,9 @@ CREATE TABLE IF NOT EXISTS `bb_users` (
 -- Дамп данных таблицы `bb_users`
 --
 
-INSERT INTO `bb_users` VALUES (-1, 0, 'Anonymous', 'd41d8cd98f00b204e9800998ecf8427e', 0, 0, '0', 1309421220, '0', 0, 5, '0.00', '', 0, 0, 0, 220, 0, '', 0, 0, '', '', '', '', '', '', '', '', '', '', 0, '', 0);
-INSERT INTO `bb_users` VALUES (2, 1, 'admin', 'c3284d0f94606de1fd2af172aba15bf3', 0, 0, '0', 1309421220, '0', 1, 1, '+4.00', '', 0, 0, 0, 304, 1, '', 1, 1, 'admin@admin.com', '', '', '', '', '', '', '', '', '', 0, '', 0);
-INSERT INTO `bb_users` VALUES (-746, 0, 'bot', 'd41d8cd98f00b204e9800998ecf8427e', 0, 0, '0', 1309421220, '0', 0, 0, '0.00', '', 0, 0, 0, 148, 0, 'bot.gif', 1, 0, 'bot@bot.bot', '', '', '', '', '', '', '', '', '', 0, '', 0);
+INSERT INTO `bb_users` VALUES (-1, 0, 'Anonymous', 'd41d8cd98f00b204e9800998ecf8427e', 0, 0, '0', 1309421220, '0', 0, 5, '0.00', '', 0, 0, 0, 220, 0, '', 0, 0, 1, 1, '', '', '', '', '', '', '', '', '', '', 0, '', 0);
+INSERT INTO `bb_users` VALUES (2, 1, 'admin', 'c3284d0f94606de1fd2af172aba15bf3', 0, 0, '0', 1309421220, '0', 1, 1, '+4.00', '', 0, 0, 0, 304, 1, '', 1, 1, 1, 1, 'admin@admin.com', '', '', '', '', '', '', '', '', '', 0, '', 0);
+INSERT INTO `bb_users` VALUES (-746, 0, 'bot', 'd41d8cd98f00b204e9800998ecf8427e', 0, 0, '0', 1309421220, '0', 0, 0, '0.00', '', 0, 0, 0, 148, 0, 'bot.gif', 1, 0, 1, 1, 'bot@bot.bot', '', '', '', '', '', '', '', '', '', 0, '', 0);
 
 -- --------------------------------------------------------
 
