@@ -569,7 +569,7 @@ $lang['GENDER_SELECT'] = array(
 	2 => 'Женский'
 );
 $lang['BIRTHDAY'] = 'День рождения';
-$lang['WRONG_BIRTHDAY_FORMAT'] = 'Дата рождения указан не верно.';
+$lang['WRONG_BIRTHDAY_FORMAT'] = 'Дата рождения указана не верно';
 $lang['AGE'] = 'Возраст';
 $lang['BIRTHDAY_TO_HIGH'] = 'Извините, сайт запрещено посещать людям старше %d лет';
 $lang['BIRTHDAY_TO_LOW'] = 'Извините, сайт запрещено посещать детям младше %d лет';

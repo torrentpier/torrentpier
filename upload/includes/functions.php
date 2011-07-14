@@ -949,7 +949,7 @@ class Date_Delta
 		60        => 'seconds',   // set granularity to "seconds" if delta less then 1 minute
 		10800     => 'minutes',   // 3 hours
 		259200    => 'hours',     // 3 days
-		15681600  => 'mday',      // 6 months + 1d+12h
+		31363200  => 'mday',      // 12 months + 1d+12h
 		311040000 => 'mon',       // 10 years
 	);
 	var $intervals = array();

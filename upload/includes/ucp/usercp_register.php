@@ -699,7 +699,7 @@ foreach ($profile_fields as $field => $can_edit)
 
 if($bb_cfg['birthday']['enabled'] && $mode != 'register')
 {
-	$days = array($lang['DELTA_TIME']['INTERVALS']['mon'][0] => 0);
+	$days = array($lang['DELTA_TIME']['INTERVALS']['mday'][0] => 0);
 	for($i=1; $i<=31; $i++)
 	{
 		$days[$i] = $i;
