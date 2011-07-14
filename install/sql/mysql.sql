@@ -1378,7 +1378,7 @@ CREATE TABLE IF NOT EXISTS `bb_users` (
   `user_avatar` varchar(100) NOT NULL default '',
   `user_avatar_type` tinyint(4) NOT NULL default '0',
   `user_gender` tinyint(1) NOT NULL default '0',
-  `user_birthday` int(11) NOT NULL default '999999',
+  `user_birthday` int(11) NOT NULL default '0',
   `user_next_birthday_greeting` int(11) NOT NULL default '0',
   `user_email` varchar(255) NOT NULL default '',
   `user_skype` varchar(32) NOT NULL default '',
