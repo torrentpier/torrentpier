@@ -10,6 +10,7 @@ set_die_append_msg();
 
 if (IS_ADMIN)
 {
+	require(LANG_ROOT_DIR ."lang_{$userdata['user_lang']}/lang_admin.php");
 	$bb_cfg['require_activation'] = false;
 }
 
@@ -49,7 +50,6 @@ switch ($mode)
 					bb_die(sprintf($lang['ALREADY_REG_IP'], '<a href="'. PROFILE_URL . $users['user_id'] .'"><b>'. $users['username'] .'</b></a>', $bb_cfg['tech_admin_email']));
 				}
 			}
-
 			// Отключение регистрации
 			if ($bb_cfg['new_user_reg_disabled'])
 			{
@@ -85,8 +85,6 @@ switch ($mode)
 			'username'         => '',
 			'user_password'    => '',
 			'user_email'       => '',
-			'user_timezone'    => $bb_cfg['board_timezone'],
-			'user_lang'        => $bb_cfg['default_lang'],
 			'user_opt'         => 0,
 		);
 		break;
@@ -102,6 +100,7 @@ switch ($mode)
 
 		// field => can_edit
 		$profile_fields = array(
+			'user_active'      => IS_ADMIN,
 			'username'         => (IS_ADMIN || $bb_cfg['allow_namechange']),
 			'user_password'    => true,
 			'user_email'       => true,      // должен быть после user_password
@@ -136,7 +135,6 @@ switch ($mode)
 			SELECT
 				user_id,
 				user_level,
-				user_active,
 				$profile_fields_sql
 			FROM ". BB_USERS ."
 			WHERE user_id = $pr_user_id
@@ -194,7 +192,19 @@ $cur_pass_valid = $adm_edit;
 foreach ($profile_fields as $field => $can_edit)
 {
 	switch ($field)
-	{
+	{	/**
+	*  Активация (edit, reg)
+	*/
+	case 'user_active':
+		$active = isset($_POST['user_active']) ? (int) $_POST['user_active'] : $pr_data['user_active'];
+		if ($submit && $active != $pr_data['user_active'] && $adm_edit)
+		{
+            $pr_data['user_active'] = $active;
+			$db_data['user_active'] = $active;
+		}
+		$tp_data['USER_ACTIVE'] = $pr_data['user_active'];
+		break;
+
 	/**
 	*  Имя (edit, reg)
 	*/
@@ -313,7 +323,7 @@ foreach ($profile_fields as $field => $can_edit)
 		$user_timezone = isset($_POST['user_timezone']) ? (int) $_POST['user_timezone'] : $pr_data['user_timezone'];
 		if ($submit && $user_timezone != $pr_data['user_timezone'])
 		{
-			if (isset($lang['TZ'][$user_timezone]) && $user_timezone != $pr_data['user_timezone'])
+			if (isset($lang['TZ'][$user_timezone]))
 			{
 				$pr_data['user_timezone'] = $user_timezone;
 				$db_data['user_timezone'] = $user_timezone;
@@ -824,6 +834,30 @@ if ($submit && !$errors)
 	*/
 	else
 	{
+		// Удаление пользователя и сообщений для админа
+		if ($userdata['user_id'] != $pr_data['user_id'] && IS_ADMIN)
+		{
+			require(INC_DIR .'functions_admin.php');
+
+			if (!empty($_POST['deleteuser']))
+			{
+				delete_user_sessions($pr_data['user_id']);
+				user_delete($pr_data['user_id'], !empty($_POST['delete_user_posts']));
+
+				if ($pr_data['user_level'] == MOD)
+				{
+					$datastore->update('moderators');
+				}
+
+				bb_die($lang['USER_DELETED']);
+			}
+			else if (!empty($_POST['delete_user_posts']))
+			{
+				post_delete('user', $pr_data['user_id']);
+				bb_die('User posts were deleted');
+			}
+		}
+
 		// если что-то было изменено
 		if ($db_data)
 		{

@@ -90,6 +90,7 @@ switch ($field)
 
 	case 'user_from':
 	case 'user_occ':
+	case 'user_interests':
 		$value = htmlCHR($value);
 		$this->response['new_value'] = $value;
 		break;

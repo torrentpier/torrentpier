@@ -10,7 +10,7 @@ $user->session_start(array('req_login' => true));
 
 if (!$bb_cfg['gallery_enabled']) bb_die($lang['GALLERY_DISABLED']);
 
-require(LANG_DIR ."lang_gallery.php");
+require(LANG_ROOT_DIR ."lang_{$userdata['user_lang']}/lang_gallery.php");
 
 if(bf($userdata['user_opt'], 'user_opt', 'allow_gallery'))
 {	bb_die($lang['USE_GALLERY_OFF']);}
