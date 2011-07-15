@@ -88,6 +88,23 @@ switch ($field)
 	    $this->response['new_value']  = $this->request['value'];
 		break;
 
+    case 'user_icq':
+		$value = (int) $value;
+		if ($value && !preg_match('#^\d{6,15}$#', $value))
+		{
+			$this->ajax_die('Поле "ICQ" может содержать только номер icq');
+		}
+		$this->response['new_value'] = $this->request['value'];
+	    break;
+
+    case 'user_skype':
+		if ($value && !preg_match("#^[a-zA-Z0-9_.\-@,]{6,32}$#", $value))
+		{
+			$this->ajax_die($lang['SKYPE_ERROR']);
+		}
+		$this->response['new_value'] = $this->request['value'];
+	    break;
+
 	case 'user_from':
 	case 'user_occ':
 	case 'user_interests':

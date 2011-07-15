@@ -660,9 +660,6 @@ function insert_post ($mode, $topic_id, $forum_id = '', $old_forum_id = '', $new
 
 	$post_username = $post_subject = $post_text = $poster_ip = '';
 
-	$enable_bbcode = $enable_smilies = 0;
-	$enable_sig = 1;
-
 	$post_time = $current_time = time();
 	$username = $userdata['username'];
 	$user_id = $userdata['user_id'];
@@ -721,8 +718,8 @@ function insert_post ($mode, $topic_id, $forum_id = '', $old_forum_id = '', $new
 		return;
 	}
 
-	$post_columns = 'topic_id,  forum_id,  poster_id,   post_username,   post_time,   poster_ip,   enable_bbcode,  enable_smilies,  enable_sig';
-	$post_values = "$topic_id, $forum_id, $poster_id, '$post_username', $post_time, '$poster_ip', $enable_bbcode, $enable_smilies, $enable_sig";
+	$post_columns = 'topic_id,  forum_id,  poster_id,   post_username,   post_time,   poster_ip';
+	$post_values = "$topic_id, $forum_id, $poster_id, '$post_username', $post_time, '$poster_ip'";
 
 	DB()->query("INSERT INTO ". BB_POSTS ." ($post_columns) VALUES ($post_values)");
 

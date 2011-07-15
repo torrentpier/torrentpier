@@ -72,12 +72,15 @@ $(document).ready(function(){
 </script>
 
 <var class="ajax-params">{action: "edit_user_profile", id: "username"}</var>
+<var class="ajax-params">{action: "edit_user_profile", id: "user_email"}</var>
 <var class="ajax-params">{action: "edit_user_profile", id: "user_regdate"}</var>
 <var class="ajax-params">{action: "edit_user_profile", id: "user_lastvisit"}</var>
 <var class="ajax-params">{action: "edit_user_profile", id: "user_from"}</var>
 <var class="ajax-params">{action: "edit_user_profile", id: "user_website"}</var>
 <var class="ajax-params">{action: "edit_user_profile", id: "user_occ"}</var>
 <var class="ajax-params">{action: "edit_user_profile", id: "user_interests"}</var>
+<var class="ajax-params">{action: "edit_user_profile", id: "user_icq"}</var>
+<var class="ajax-params">{action: "edit_user_profile", id: "user_skype"}</var>
 <var class="ajax-params">{action: "edit_user_profile", id: "user_gender", editableType: "yesno-gender"}</var>
 <var class="ajax-params">{action: "edit_user_profile", id: "user_birthday"}</var>
 
@@ -123,23 +126,38 @@ $(document).ready(function(){
 		</p>
 		<h4 class="cat border bw_TB" id="username">{L_CONTACT} <span class="editable bold">{USERNAME}</span></h4>
 
-		<table class="borderless user_contacts w100">
-		<!-- IF EMAIL_IMG -->
+		<table class="nowrap borderless user_contacts w100">
+		<!-- IF EMAIL -->
 		<tr>
 			<th>{L_EMAIL_ADDRESS}:</th>
-			<td>{EMAIL_IMG}</td>
+			<td class="tLeft med" id="user_email">{EMAIL}</td>
 		</tr>
 		<!-- ENDIF -->
-		<!-- IF PM_IMG -->
+		<!-- IF PM -->
 		<tr>
 			<th>{L_PRIVATE_MESSAGE}:</th>
-			<td>{PM_IMG}</td>
+			<td class="tLeft med">{PM}</td>
 		</tr>
 		<!-- ENDIF -->
-		<!-- IF ICQ_IMG -->
+		<!-- IF ICQ -->
 		<tr>
 			<th>{L_ICQ}:</th>
-			<td>{ICQ_IMG}</td>
+			<td class="tLeft med" id="user_icq">
+				<span class="editable">{ICQ}
+					<a href="http://www.icq.com/people/searched=1&uin={ICQ}"><img align="middle" src="http://web.icq.com/whitepages/online?icq={ICQ}&img=5"><a>
+				</span>
+			</td>
+		</tr>
+		<!-- ENDIF -->
+		<!-- IF SKYPE -->
+		<script type="text/javascript" src="http://download.skype.com/share/skypebuttons/js/skypeCheck.js"></script>
+		<tr>
+			<th>{L_SKYPE}:</th>
+			<td class="tLeft med" id="user_skype">
+				<span class="editable">{SKYPE}
+					<a href="skype:{SKYPE}"><img align="middle" src="http://mystatus.skype.com/smallicon/{SKYPE}" width="16" height="16"></a>
+				</span>
+			</td>
 		</tr>
 		<!-- ENDIF -->
 		</table><!--/user_contacts-->
@@ -219,7 +237,7 @@ $(document).ready(function(){
 			<!-- IF WWW -->
 			<tr>
 				<th>{L_WEBSITE}:</th>
-				<td id="user_website"><b class="editable">{WWW}</b></td>
+				<td id="user_website"><a href="{WWW}" class="editable">{WWW}</a></td>
 			</tr>
 			<!-- ENDIF -->
 			<!-- IF OCCUPATION -->
@@ -265,16 +283,6 @@ $(document).ready(function(){
 				<td id="ignore_srv_load">{L_ACCESS_SRV_LOAD}: <b class="editable">{IGNORE_SRV_LOAD}</b></td>
 			</tr>
 			<!-- ENDIF -->
-			<!-- IF IS_AM -->
-			<tr>
-				<th>{L_REG_IP}</th>
-				<td><b>{REG_IP}</b></td>
-			</tr>
-			<tr>
-				<th>{L_LAST_IP}</th>
-				<td><b>{LAST_IP}</b></td>
-			</tr>
-			<!-- ENDIF / SHOW_ADMIN_OPTIONS -->
 		</table><!--/user_details-->
 
 	</td>
