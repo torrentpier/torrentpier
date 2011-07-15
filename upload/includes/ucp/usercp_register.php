@@ -85,6 +85,8 @@ switch ($mode)
 			'username'         => '',
 			'user_password'    => '',
 			'user_email'       => '',
+			'user_timezone'    => $bb_cfg['board_timezone'],
+			'user_lang'        => $bb_cfg['default_lang'],
 			'user_opt'         => 0,
 		);
 		break;
@@ -309,7 +311,7 @@ foreach ($profile_fields as $field => $can_edit)
 	*/
 	case 'user_lang':
 		$user_lang = isset($_POST['user_lang']) ? (string) $_POST['user_lang'] : $pr_data['user_lang'];
-		if ($submit && $user_lang != $pr_data['user_lang'])
+		if ($submit && ($user_lang != $pr_data['user_lang'] || $mode == 'register'))
 		{
             $pr_data['user_lang'] = $user_lang;
 			$db_data['user_lang'] = $user_lang;
@@ -321,7 +323,7 @@ foreach ($profile_fields as $field => $can_edit)
 	*/
 	case 'user_timezone':
 		$user_timezone = isset($_POST['user_timezone']) ? (int) $_POST['user_timezone'] : $pr_data['user_timezone'];
-		if ($submit && $user_timezone != $pr_data['user_timezone'])
+		if ($submit && ($user_timezone != $pr_data['user_timezone'] || $mode == 'register'))
 		{
 			if (isset($lang['TZ'][$user_timezone]))
 			{
