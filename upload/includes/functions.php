@@ -2066,7 +2066,7 @@ function realdate($date, $format = "Ymd")
 function birthday_age($date)
 {
 	if(!$date) return;
-	return bb_date(mktime(11, 0, 0, realdate($date, 'm'), realdate($date, 'd'), realdate($date, 'Y')));
+	return delta_time(mktime(11, 0, 0, realdate($date, 'm'), realdate($date, 'd'), realdate($date, 'Y')));
 }
 
 //
