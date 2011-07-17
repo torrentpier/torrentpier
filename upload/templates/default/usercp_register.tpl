@@ -272,7 +272,7 @@ ajax.callback.view_message = function(data){
 </tr>
 <!-- END switch_avatar_local_gallery -->
 <!-- END switch_avatar_block -->
-<!-- IF IS_ADMIN -->
+<!-- IF IS_ADMIN && ADM_EDIT -->
 <tr>
 	<th colspan="2">{L_MANAGE_USER}</th>
 </tr>

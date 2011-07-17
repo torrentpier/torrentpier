@@ -493,7 +493,7 @@ else if ( ($submit || $confirm) && !$topic_has_new_posts )
 			$subject = ( !empty($_POST['subject']) ) ? clean_title($_POST['subject']) : '';
 			$message = ( !empty($_POST['message']) ) ? prepare_message($_POST['message']) : '';
 			$poll_title = ( isset($_POST['poll_title']) && $is_auth['auth_pollcreate'] ) ? clean_title($_POST['poll_title']) : '';
-			$poll_options = ( isset($_POST['poll_option_text']) && $is_auth['auth_pollcreate'] ) ? clean_title($_POST['poll_option_text']) : '';
+			$poll_options = ( isset($_POST['poll_option_text']) && $is_auth['auth_pollcreate'] ) ? $_POST['poll_option_text'] : '';
 			$poll_length = ( isset($_POST['poll_length']) && $is_auth['auth_pollcreate'] ) ? $_POST['poll_length'] : '';
 
 			prepare_post($mode, $post_data, $error_msg, $username, $subject, $message, $poll_title, $poll_options, $poll_length);

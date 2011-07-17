@@ -52,7 +52,7 @@ function prepare_post(&$mode, &$post_data, &$error_msg, &$username, &$subject, &
 	// Check subject
 	if (!empty($subject))
 	{
-		$subject = preg_replace('#&amp;#', '&', htmlspecialchars(trim($subject)));
+		$subject = str_replace('&amp;', '&', $subject);
 	}
 	else if ($mode == 'newtopic' || ($mode == 'editpost' && $post_data['first_post']))
 	{
@@ -76,11 +76,6 @@ function prepare_post(&$mode, &$post_data, &$error_msg, &$username, &$subject, &
 	{
 		$poll_length = (isset($poll_length)) ? max(0, intval($poll_length)) : 0;
 
-		if (!empty($poll_title))
-		{
-			$poll_title = htmlspecialchars(trim($poll_title));
-		}
-
 		if(!empty($poll_options))
 		{
 			$temp_option_text = array();
@@ -89,7 +84,7 @@ function prepare_post(&$mode, &$post_data, &$error_msg, &$username, &$subject, &
 				$option_text = trim($option_text);
 				if (!empty($option_text))
 				{
-					$temp_option_text[$option_id] = htmlspecialchars($option_text);
+					$temp_option_text[$option_id] = clean_title($option_text);
 				}
 			}
 			$option_text = $temp_option_text;
@@ -296,7 +291,7 @@ function submit_post($mode, &$post_data, &$message, &$meta, &$forum_id, &$topic_
 		{
 			if (!empty($option_text))
 			{
-				$option_text = DB()->escape(htmlspecialchars($option_text));
+				$option_text = DB()->escape(clean_title($option_text));
 				$poll_result = ($mode == "editpost" && isset($old_poll_result[$option_id])) ? $old_poll_result[$option_id] : 0;
 
 				$sql = ($mode != "editpost" || !isset($old_poll_result[$option_id])) ? "INSERT INTO " . BB_VOTE_RESULTS . " (vote_id, vote_option_id, vote_option_text, vote_result) VALUES ($poll_id, $poll_option_id, '$option_text', $poll_result)" : "UPDATE " . BB_VOTE_RESULTS . " SET vote_option_text = '$option_text', vote_result = $poll_result WHERE vote_option_id = $option_id AND vote_id = $poll_id";
