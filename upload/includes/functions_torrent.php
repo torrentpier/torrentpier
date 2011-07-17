@@ -116,7 +116,7 @@ function tracker_unregister ($attach_id, $mode = '')
     // XBTT
     if($bb_cfg['announce_type'] == 'xbt')
     {
-		$sql = 'INSERT INTO '. BB_BT_TORRENTS ."_del(topic_id, info_hash)
+		$sql = "INSERT INTO ". BB_BT_TORRENTS ."_del(topic_id, info_hash)
 			SELECT topic_id, info_hash
 			FROM ". BB_BT_TORRENTS ."
 			WHERE attach_id = $attach_id ON DUPLICATE KEY UPDATE is_del=1";
@@ -470,7 +470,7 @@ function send_torrent_with_passkey ($filename)
 		message_die(GENERAL_ERROR, $lang['PASSKEY_ERR_TOR_NOT_REG']);
 	}
 
-	if (bf($userdata['user_opt'], 'user_opt', 'allow_passkey'))
+	if (bf($userdata['user_opt'], 'user_opt', 'allow_passkey') && !IS_GUEST)
 	{
 		message_die(GENERAL_ERROR, 'Could not add passkey');
 	}

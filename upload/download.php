@@ -343,6 +343,24 @@ if ($download_mode == PHYSICAL_LINK)
 }
 else
 {
+	if(IS_GUEST && !CAPTCHA()->verify_code())
+    {
+    	global $template;
+    	$redirect_url = !empty($_POST['redirect_url']) ? $_POST['redirect_url'] : $_SERVER['HTTP_REFERER'];
+    	$message = '<form action="'. DOWNLOAD_URL . $attachment['attach_id'] .'" method="post">';
+    	$message .= $lang['CONFIRM_CODE'];
+    	$message .= '<div class="mrg_10">'. CAPTCHA()->get_html() .'</div>';
+    	$message .= '<input type="hidden" name="redirect_url" value="'. $redirect_url .'" />';
+    	$message .= '<input type="submit" class="bold" value="'. $lang['SUBMIT'] .'" /> &nbsp;';
+    	$message .= '<input type="button" class="bold" value="Вернуться обратно" onclick="document.location.href = \''. $redirect_url .'\';" />';
+    	$message .= '</form>';
+    	$template->assign_vars(array(
+    	    'ERROR_MESSAGE' => $message,
+		));
+		require(PAGE_HEADER);
+		require(PAGE_FOOTER);
+    }
+
 	if (intval($attach_config['allow_ftp_upload']))
 	{
 		// We do not need a download path, we are not downloading physically

@@ -139,8 +139,8 @@
 	<input title="Alt+Enter" type="submit" name="preview" value="{L_PREVIEW}" id="post-preview-btn" onclick="$('#post-submit').remove();" />&nbsp;&nbsp;
 	<input title="Ctrl+Enter" type="submit" name="post" class="bold" value="{L_SUBMIT}" id="post-submit-btn" />
     <input type="button" value="Быстрый предпросмотр" onclick="ajax.exec({ action: 'view_message', message: $('textarea.editor').val() });">
+    <div id="post-js-warn">Для отправки сообщений необходимo включить JavaScript</div>
 </div>
-<div id="post-js-warn">Для отправки сообщений необходимo включить JavaScript</div>
 
 <script type="text/javascript">
 function dis_submit_btn ()
