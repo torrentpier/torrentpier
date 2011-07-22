@@ -93,73 +93,6 @@ function prepare_message ($message)
 	return $message;
 }
 
-//
-// post_html_cache
-//
-function update_post_html_cache ($post_id, $post_text)
-{
-	if (CACHE('bb_post_html')->used)
-	{
-		$post_html = bbcode2html($post_text);
-		CACHE('bb_post_html')->set($post_id, $post_html, 86400, 'p_html_');
-	}
-}
-
-function rm_post_html_cache ($post_id)
-{
-	CACHE('bb_post_html')->rm("p_html_{$post_id}");
-}
-
-// $post_ids - array or int
-function get_posts_html ($post_ids)
-{
-	if (!$post_ids_csv = get_id_csv($post_ids))
-	{
-		return is_array($post_ids) ? array() : '';
-	}
-
-	return CACHE('bb_post_html')->get($post_ids, 'get_posts_html_items', 'p_html_', 86400);
-}
-
-// $post_ids - array
-function get_posts_html_items ($post_ids)
-{
-	if (!$post_ids_csv = get_id_csv($post_ids)) return array();
-
-	$items = array_fill_keys( (array)$post_ids, null );
-
-	$sql = "SELECT post_id, post_text FROM ". BB_POSTS_TEXT ." WHERE post_id IN($post_ids_csv) ORDER BY NULL";
-
-	foreach (DB('pt')->fetch_rowset($sql) as $row)
-	{
-		$items[$row['post_id']] = bbcode2html($row['post_text']);
-	}
-
-	return is_array($post_ids) ? $items : $items[$post_ids];
-}
-
-// $post_ids - array or int
-function get_posts_text ($post_ids)
-{
-	global $bb_cfg;
-
-	if (!$post_ids_csv = get_id_csv($post_ids))
-	{
-		return is_array($post_ids) ? array() : '';
-	}
-
-	$posts_text = array();
-
-	$sql = "SELECT post_id, post_text FROM ". BB_POSTS_TEXT ." WHERE post_id IN($post_ids_csv) ORDER BY NULL";
-
-	foreach (DB('pt')->fetch_rowset($sql) as $row)
-	{
-		$posts_text[$row['post_id']] = $row['post_text'];
-	}
-
-	return is_array($post_ids) ? $posts_text : $posts_text[$post_ids];
-}
-
 // Fill smiley templates (or just the variables) with smileys
 // Either in a window or inline
 function generate_smilies($mode)
@@ -548,16 +481,9 @@ class bbcode
 	*/
 	function bbcode ()
 	{
-		global $bb_cfg;
-
 		$this->tpl = get_bbcode_tpl();
 
 		$this->init_replacements();
-
-		if ($bb_cfg['tidy_cfg'])
-		{
-			$this->tidy_cfg = array_merge($this->tidy_cfg, $bb_cfg['tidy_cfg']);
-		}
 	}
 
 	/**
@@ -629,8 +555,10 @@ class bbcode
 	* bbcode2html
 	* $text должен быть уже обработан htmlCHR($text, false, ENT_NOQUOTES);
 	*/
-	function bbcode2html ($text, $do_tidy = true)
+	function bbcode2html ($text)
 	{
+		global $bb_cfg;
+
 		$text = " $text ";
 		$text = $this->clean_up($text);
 		$text = $this->spam_filter($text);
@@ -659,7 +587,7 @@ class bbcode
 		$text = $this->new_line2html($text);
 		$text = trim($text);
 
-		if ($do_tidy)
+		if ($bb_cfg['tidy_post'])
 		{
 			$text = $this->tidy($text);
 		}
@@ -848,6 +776,8 @@ class bbcode
 	*/
 	function tidy ($text)
 	{
+		if (!function_exists('tidy_repair_string')) die('(see $bb_cfg[\'tidy_post\'] in config.php)');
+
 		$text = tidy_repair_string($text, $this->tidy_cfg, 'utf8');
 		return $text;
 	}

@@ -734,16 +734,13 @@ function topic_review ($topic_id)
 	// Fetch posts data
 	$review_posts = DB()->fetch_rowset("
 		SELECT
-			p.*, pt.post_text,
+			p.*, h.post_html, IF(h.post_html IS NULL, pt.post_text, NULL) AS post_text,
 			IF(p.poster_id = ". ANONYMOUS .", p.post_username, u.username) AS username, u.user_id
-		FROM
-			". BB_POSTS      ." p,
-			". BB_POSTS_TEXT ." pt,
-			". BB_USERS      ." u
-		WHERE
-			    p.topic_id = ". (int) $topic_id ."
-			AND pt.post_id = p.post_id
-			AND u.user_id = p.poster_id
+		FROM      ". BB_POSTS      ." p
+		LEFT JOIN ". BB_USERS      ." u  ON(u.user_id = p.poster_id)
+		LEFT JOIN ". BB_POSTS_TEXT ." pt ON(pt.post_id = p.post_id)
+		LEFT JOIN ". BB_POSTS_HTML ." h  ON(h.post_id = p.post_id)
+		WHERE p.topic_id = ". (int) $topic_id ."
 		ORDER BY p.post_time DESC
 		LIMIT ". $bb_cfg['posts_per_page'] ."
 	");

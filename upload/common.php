@@ -192,16 +192,13 @@ class CACHES
 						$this->ref[$cache_name] =& $this->obj[$cache_name];
 	                    break;
 
-                    case 'filecache':
-                        if (!isset($this->obj[$cache_name]))
+					default:
+						if (!isset($this->obj[$cache_name]))
 						{
 							$this->obj[$cache_name] = new cache_file($this->cfg['db_dir'] . $cache_name .'/');
 						}
 						$this->ref[$cache_name] =& $this->obj[$cache_name];
 						break;
-
-					default:
-						trigger_error("invalid cache_type: $cache_type", E_USER_ERROR);
 				}
 			}
 		}

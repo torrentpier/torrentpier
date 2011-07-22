@@ -57,8 +57,8 @@ $bb_cfg['css_ver'] = 1;
 
 // Increase number of revision after update
 $bb_cfg['tp_version'] = '2.0.2';
-$bb_cfg['tp_release_state'] = 'TP II r118';
-$bb_cfg['tp_release_date'] = '18-07-2011';
+$bb_cfg['tp_release_state'] = 'TP II r119';
+$bb_cfg['tp_release_date'] = '22-07-2011';
 
 $bb_cfg['board_disabled_msg'] = 'форум временно отключен'; // 'forums temporarily disabled'; // show this msg if board has been disabled via ON/OFF trigger
 $bb_cfg['srv_overloaded_msg'] = "Извините, в данный момент сервер перегружен\nПопробуйте повторить запрос через несколько минут";
@@ -425,12 +425,8 @@ $bb_cfg['search_max_word_len']         = 35;
 $bb_cfg['limit_max_search_results']    = false;
 $bb_cfg['search_help_url']             = '';
 $bb_cfg['search_match_help_topic_id']  = 0;
-$bb_cfg['tidy_cfg'] = array(
-#	'hide-comments' => false,
-#	'indent'        => true,
-#	'indent-spaces' => 1,
-);
-$bb_cfg['spam_filter_file_path'] = ''; //BB_PATH .'/misc/spam_filter_words.txt';
+$bb_cfg['tidy_post']                   = true;
+$bb_cfg['spam_filter_file_path']       = ''; //BB_PATH .'/misc/spam_filter_words.txt';
 
 // Posting
 $bb_cfg['show_virtual_keyboard'] = true;
