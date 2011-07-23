@@ -57,7 +57,7 @@ $bb_cfg['css_ver'] = 1;
 
 // Increase number of revision after update
 $bb_cfg['tp_version'] = '2.0.2';
-$bb_cfg['tp_release_state'] = 'TP II r125';
+$bb_cfg['tp_release_state'] = 'TP II r126';
 $bb_cfg['tp_release_date'] = '23-07-2011';
 
 $bb_cfg['board_disabled_msg'] = 'форум временно отключен'; // 'forums temporarily disabled'; // show this msg if board has been disabled via ON/OFF trigger
@@ -65,9 +65,9 @@ $bb_cfg['srv_overloaded_msg'] = "Извините, в данный момент 
 
 // Database
 $dbhost    = 'localhost';
-$dbname    = 'dbase';
-$dbuser    = 'user';
-$dbpasswd  = 'pass';
+$dbname    = 'dbname';
+$dbuser    = 'dbuser';
+$dbpasswd  = 'dbpasswd';
 $dbcharset = 'utf8';
 $pconnect  = false;
 
@@ -390,8 +390,8 @@ $bb_cfg['ext_link_new_win']   = true;              // open external links in new
 $bb_cfg['topic_moved_days_keep'] = 7;              // remove topic moved links after xx days (or FALSE to disable)
 
 $bb_cfg['allowed_posts_per_page'] = array(15, 30, 50, 100);
-$bb_cfg['user_signature_start'] = "<br />_________________<br />";
-$bb_cfg['user_signature_end']	= "";	//Это позволит использовать html теги, которые требуют закрытия. Например <table> или <font color>
+$bb_cfg['user_signature_start'] = "<br />__________<br /><span class='signature'>";
+$bb_cfg['user_signature_end']	= "</span>";	//Это позволит использовать html теги, которые требуют закрытия. Например <table> или <font color>
 
 // Posts
 $bb_cfg['use_posts_cache']       = true;           // if you switch from ON to OFF, you need to TRUNCATE `bb_posts_html` table
