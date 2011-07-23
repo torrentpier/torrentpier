@@ -531,43 +531,8 @@ if (DBG_USER) require(INC_DIR .'functions_dev.php');
 
 $html = new html_common();
 $log_action = new log_action();
-
 $ads = new ads_common();
 
-// Initialize Datastore
-switch ($bb_cfg['datastore_type'])
-{
-	case 'sqlite':
-		$default_cfg = array(
-			'db_file_path' => '/dev/shm/bb.datastore.sqlite',
-			'table_name'   => 'datastore',
-			'table_schema' => 'CREATE TABLE datastore (
-			                     ds_title VARCHAR(255),
-			                     ds_data  TEXT,
-			                     PRIMARY KEY (ds_title)
-			                   )',
-			'pconnect'     => true,
-			'con_required' => true,
-			'log_name'     => 'DATASTORE',
-		);
-		$datastore = new datastore_sqlite(array_merge($default_cfg, $bb_cfg['datastore']['sqlite']));
-		break;
-
-	case 'memcache':
-		$datastore = new datastore_memcache($bb_cfg['datastore']['memcache']);
-		break;
-
-	case 'redis':
-		$datastore = new datastore_redis($bb_cfg['datastore']['redis']);
-		break;
-
-	case 'filecache':
-		$datastore = new datastore_file($bb_cfg['cache']['db_dir'] . 'datastore/');
-		break;
-
-	default:
-		$datastore = new datastore_mysql();
-}
 // Cron
 if ((empty($_POST) && !defined('IN_ADMIN') && !defined('IN_AJAX') && !defined('IN_SERVICE') && !file_exists(CRON_RUNNING) && ($bb_cfg['cron_enabled'] || defined('START_CRON'))) || defined('FORCE_CRON'))
 {

@@ -192,7 +192,31 @@ class CACHES
 						$this->ref[$cache_name] =& $this->obj[$cache_name];
 	                    break;
 
-					default:
+					case 'eaccelerator':
+						if (!isset($this->obj[$cache_name]))
+						{
+							$this->obj[$cache_name] = new cache_eaccelerator();
+						}
+						$this->ref[$cache_name] =& $this->obj[$cache_name];
+						break;
+
+                    case 'apc':
+						if (!isset($this->obj[$cache_name]))
+						{
+							$this->obj[$cache_name] = new cache_apc();
+						}
+						$this->ref[$cache_name] =& $this->obj[$cache_name];
+						break;
+
+					case 'xcache':
+						if (!isset($this->obj[$cache_name]))
+						{
+							$this->obj[$cache_name] = new cache_xcache();
+						}
+						$this->ref[$cache_name] =& $this->obj[$cache_name];
+						break;
+
+					default: //filecache
 						if (!isset($this->obj[$cache_name]))
 						{
 							$this->obj[$cache_name] = new cache_file($this->cfg['db_dir'] . $cache_name .'/');
@@ -697,6 +721,105 @@ class cache_redis extends cache_common
 	}
 }
 
+class cache_eaccelerator extends cache_common
+{
+	var $used = true;
+
+	function cache_eaccelerator ()
+	{
+		if (!$this->is_installed())
+		{
+			die('Error: eAccelerator extension not installed');
+		}
+	}
+
+	function get ($name)
+	{
+		return eaccelerator_get($name);
+	}
+
+	function set ($name, $value, $ttl = 0)
+	{
+		return eaccelerator_put($name, $value, $ttl);
+	}
+
+	function rm ($name)
+	{
+		return eaccelerator_rm($name);
+	}
+
+	function is_installed ()
+	{
+		return function_exists('eaccelerator_get');
+	}
+}
+
+class cache_apc extends cache_common
+{
+	var $used = true;
+
+	function cache_apc ()
+	{
+		if (!$this->is_installed())
+		{
+			die('Error: APC extension not installed');
+		}
+	}
+
+	function get ($name)
+	{
+		return apc_fetch($name);
+	}
+
+	function set ($name, $value, $ttl = 0)
+	{
+		return apc_store($name, $value, $ttl);
+	}
+
+	function rm ($name)
+	{
+		return apc_delete($name);
+	}
+
+	function is_installed ()
+	{
+		return function_exists('apc_fetch');
+	}
+}
+
+class cache_xcache extends cache_common
+{
+	var $used = true;
+
+	function cache_xcache ()
+	{
+		if (!$this->is_installed())
+		{
+			die('Error: XCache extension not installed');
+		}
+	}
+
+	function get ($name)
+	{
+		return xcache_get($name);
+	}
+
+	function set ($name, $value, $ttl = 0)
+	{
+		return xcache_set($name, $value, $ttl);
+	}
+
+	function rm ($name)
+	{
+		return xcache_unset($name);
+	}
+
+	function is_installed ()
+	{
+		return function_exists('xcache_get');
+	}
+}
+
 class cache_file extends cache_common
 {
 	var $used = true;
@@ -780,6 +903,566 @@ class cache_file extends cache_common
 
 		return;
 	}
+}
+
+/**
+* Datastore
+*/
+class datastore_common
+{
+	/**
+	* ƒиректори€ с builder-скриптами (внутри INC_DIR)
+	*/
+	var $ds_dir = 'datastore/';
+	/**
+	* √отова€ к употреблению data
+	* array('title' => data)
+	*/
+	var $data = array();
+	/**
+	* —писок элементов, которые будут извлечены из хранилища при первом же запросе get()
+	* до этого момента они став€тс€ в очередь $queued_items дл€ дальнейшего извлечени€ _fetch()'ем
+	* всех элементов одним запросом
+	* array('title1', 'title2'...)
+	*/
+	var $queued_items = array();
+
+	/**
+	* 'title' => 'builder script name' inside "includes/datastore" dir
+	*/
+	var $known_items = array(
+		'cat_forums'             => 'build_cat_forums.php',
+		'jumpbox'                => 'build_cat_forums.php',
+		'viewtopic_forum_select' => 'build_cat_forums.php',
+		'latest_news'            => 'build_cat_forums.php',
+		'ads'                    => 'build_cat_forums.php',
+		'moderators'             => 'build_moderators.php',
+		'stats'                  => 'build_stats.php',
+		'ranks'                  => 'build_ranks.php',
+		'attach_extensions'      => 'build_attach_extensions.php',
+		'smile_replacements'     => 'build_smilies.php',
+	);
+
+	/**
+	* Constructor
+	*/
+	function datastore_common () {}
+
+	/**
+	* @param  array(item1_title, item2_title...) or single item's title
+	*/
+	function enqueue ($items)
+	{
+		foreach ((array) $items as $item)
+		{
+			// игнор уже поставленного в очередь либо уже извлеченного
+			if (!in_array($item, $this->queued_items) && !isset($this->data[$item]))
+			{
+				$this->queued_items[] = $item;
+			}
+		}
+	}
+
+	function &get ($title)
+	{
+#		if (in_array(BB_SCRIPT, array('forum', 'topic', 'ajax')))  bb_log(' ', "ds/". BB_SCRIPT ."/$title");
+
+		if (!isset($this->data[$title]))
+		{
+			$this->enqueue($title);
+			$this->_fetch();
+		}
+		return $this->data[$title];
+	}
+
+	function store ($item_name, $item_data) {}
+
+	function rm ($items)
+	{
+		foreach ((array) $items as $item)
+		{
+			unset($this->data[$item]);
+		}
+	}
+
+	function update ($items)
+	{
+		if ($items == 'all')
+		{
+			$items = array_keys(array_unique($this->known_items));
+		}
+		foreach ((array) $items as $item)
+		{
+			$this->_build_item($item);
+		}
+	}
+
+	function _fetch ()
+	{
+		$this->_fetch_from_store();
+
+		foreach ($this->queued_items as $title)
+		{
+			if (!isset($this->data[$title]) || $this->data[$title] === false)
+			{
+				$this->_build_item($title);
+			}
+		}
+
+		$this->queued_items = array();
+	}
+
+	function _fetch_from_store () {}
+
+	function _build_item ($title)
+	{
+		if (!empty($this->known_items[$title]))
+		{
+			require(INC_DIR . $this->ds_dir . $this->known_items[$title]);
+		}
+		else
+		{
+			trigger_error("Unknown datastore item: $title", E_USER_ERROR);
+		}
+	}
+}
+
+class datastore_memcache extends datastore_common
+{
+	var $cfg       = null;
+	var $memcache  = null;
+	var $connected = false;
+
+	function datastore_memcache ($cfg)
+	{
+		global $bb_cfg;
+
+		if (!$this->is_installed())
+		{
+			die('Error: Memcached extension not installed');
+		}
+
+		$this->cfg = $cfg;
+		$this->memcache = new Memcache;
+	}
+
+	function connect ()
+	{
+		$connect_type = ($this->cfg['pconnect']) ? 'pconnect' : 'connect';
+
+		if (@$this->memcache->$connect_type($this->cfg['host'], $this->cfg['port']))
+		{
+			$this->connected = true;
+		}
+
+		if (DBG_LOG) dbg_log(' ', 'CACHE-connect'. ($this->connected ? '' : '-FAIL'));
+
+		if (!$this->connected && $this->cfg['con_required'])
+		{
+			die('Could not connect to memcached server');
+		}
+	}
+
+	function store ($title, $var)
+	{
+		if (!$this->connected) $this->connect();
+		$this->data[$title] = $var;
+		return (bool) $this->memcache->set($title, $var);
+	}
+
+	function clean ()
+	{
+		if (!$this->connected) $this->connect();
+		foreach ($this->known_items as $title => $script_name)
+		{
+			$this->memcache->delete($title);
+		}
+	}
+
+	function _fetch_from_store ()
+	{
+		if (!$items = $this->queued_items)
+		{
+			$src = $this->_debug_find_caller('enqueue');
+			trigger_error("Datastore: item '$item' already enqueued [$src]", E_USER_ERROR);
+		}
+
+		if (!$this->connected) $this->connect();
+		foreach ($items as $item)
+		{
+			$this->data[$item] = $this->memcache->get($item);
+		}
+	}
+
+	function is_installed ()
+	{
+		return class_exists('Memcache');
+	}
+}
+
+class datastore_sqlite extends datastore_common
+{
+	var $engine = 'SQLite';
+	var $db     = null;
+	var $cfg    = array();
+
+	function datastore_sqlite ($cfg)
+	{
+		$this->cfg = $cfg;
+		$this->db = new sqlite_common($cfg);
+	}
+
+	function store ($item_name, $item_data)
+	{
+		$this->data[$item_name] = $item_data;
+#		bb_log(join("\t", array(date('H:i:s'), $item_name, @basename($_SERVER['REQUEST_URI'])))."\n", 'ds_store');
+
+		$ds_title = sqlite_escape_string($item_name);
+		$ds_data  = sqlite_escape_string(serialize($item_data));
+
+		$result = $this->db->query("REPLACE INTO ". $this->cfg['table_name'] ." (ds_title, ds_data) VALUES ('$ds_title', '$ds_data')");
+
+		return (bool) $result;
+	}
+
+	function _fetch_from_store ()
+	{
+		if (!$items = $this->queued_items) return;
+
+		array_deep($items, 'sqlite_escape_string');
+		$items_list = join("','", $items);
+
+		$rowset = $this->db->fetch_rowset("SELECT ds_title, ds_data FROM ". $this->cfg['table_name'] ." WHERE ds_title IN('$items_list')");
+
+		$this->db->debug('start', "unserialize()");
+		foreach ($rowset as $row)
+		{
+			$this->data[$row['ds_title']] = unserialize($row['ds_data']);
+		}
+		$this->db->debug('stop');
+	}
+}
+
+class datastore_redis extends datastore_common
+{
+	var $cfg		= null;
+	var $redis		= null;
+	var $connected	= false;
+
+	function datastore_redis ($cfg)
+	{
+		global $bb_cfg;
+
+		if (!$this->is_installed())
+		{
+			die('Error: Redis extension not installed');
+		}
+
+		$this->cfg = $cfg;
+		$this->redis = new Redis();;
+	}
+
+	function connect ()
+	{
+		if (@$this->redis->connect($this->cfg['host'],$this->cfg['port']))
+		{
+			$this->connected = true;
+		}
+
+		if (!$this->connected && $this->cfg['con_required'])
+		{
+			die('Could not connect to redis server');
+		}
+	}
+
+	function store ($title, $var)
+	{
+		if (!$this->connected) $this->connect();
+		$this->data[$title] = $var;
+		return (bool) $this->redis->set($title, serialize($var));
+	}
+
+	function clean ()
+	{
+		if (!$this->connected) $this->connect();
+		foreach ($this->known_items as $title => $script_name)
+		{
+			$this->redis->del($title);
+		}
+	}
+
+	function _fetch_from_store ()
+	{
+		if (!$items = $this->queued_items)
+		{
+			$src = $this->_debug_find_caller('enqueue');
+			trigger_error("Datastore: item '$item' already enqueued [$src]", E_USER_ERROR);
+		}
+
+		if (!$this->connected) $this->connect();
+		foreach ($items as $item)
+		{
+			$this->data[$item] = unserialize($this->redis->get($item));
+		}
+	}
+
+	function is_installed ()
+	{
+		return class_exists('Redis');
+	}
+}
+
+class datastore_eaccelerator extends datastore_common
+{
+	function store ($title, $var)
+	{
+		$this->data[$title] = $var;
+		eaccelerator_put($title, $var);
+	}
+
+	function clean ()
+	{
+		foreach ($this->known_items as $title => $script_name)
+		{
+			eaccelerator_rm($title);
+		}
+	}
+
+	function _fetch_from_store ()
+	{
+		if (!$items = $this->queued_items)
+		{
+			$src = $this->_debug_find_caller('enqueue');
+			trigger_error("Datastore: item '$item' already enqueued [$src]", E_USER_ERROR);
+		}
+
+		foreach ($items as $item)
+		{
+			$this->data[$item] = eaccelerator_get($item);
+		}
+	}
+}
+
+class datastore_xcache extends datastore_common
+{
+	function store ($title, $var)
+	{
+		$this->data[$title] = $var;
+		return (bool) xcache_set($title, $var);
+	}
+
+	function clean ()
+	{
+		foreach ($this->known_items as $title => $script_name)
+		{
+			xcache_unset($title);
+		}
+	}
+
+	function _fetch_from_store ()
+	{
+		if (!$items = $this->queued_items)
+		{
+			$src = $this->_debug_find_caller('enqueue');
+			trigger_error("Datastore: item '$item' already enqueued [$src]", E_USER_ERROR);
+		}
+
+		foreach ($items as $item)
+		{
+			$this->data[$item] = xcache_get($item);
+		}
+	}
+}
+
+class datastore_apc extends datastore_common
+{
+	function store ($title, $var)
+	{
+		$this->data[$title] = $var;
+		return (bool) apc_store($title, $var);
+	}
+
+	function clean ()
+	{
+		foreach ($this->known_items as $title => $script_name)
+		{
+			apc_delete($title);
+		}
+	}
+
+	function _fetch_from_store ()
+	{
+		if (!$items = $this->queued_items)
+		{
+			$src = $this->_debug_find_caller('enqueue');
+			trigger_error("Datastore: item '$item' already enqueued [$src]", E_USER_ERROR);
+		}
+
+		foreach ($items as $item)
+		{
+			$this->data[$item] = apc_fetch($item);
+		}
+	}
+}
+
+class datastore_file extends datastore_common
+{
+	var $dir = null;
+
+	function datastore_file ($dir)
+	{
+		$this->dir = $dir;
+	}
+
+	function store ($title, $var)
+	{
+		$this->data[$title] = $var;
+
+		$filename   = $this->dir . clean_filename($title) . '.php';
+
+		$filecache = "<?php\n";
+		$filecache .= "if (!defined('BB_ROOT')) die(basename(__FILE__));\n";
+		$filecache .= '$filestore = ' . var_export($var, true) . ";\n";
+		$filecache .= '?>';
+
+		return (bool) file_write($filecache, $filename, false, true, true);
+	}
+
+	function clean ()
+	{
+		$dir = $this->dir;
+
+		if (is_dir($dir))
+		{
+			if ($dh = opendir($dir))
+			{
+				while (($file = readdir($dh)) !== false)
+				{
+					if ($file != "." && $file != "..")
+					{
+						$filename = $dir . $file;
+
+						unlink($filename);
+					}
+				}
+				closedir($dh);
+			}
+		}
+	}
+
+	function _fetch_from_store ()
+	{
+		if (!$items = $this->queued_items)
+		{
+			$src = $this->_debug_find_caller('enqueue');
+			trigger_error("Datastore: item '$item' already enqueued [$src]", E_USER_ERROR);
+		}
+
+		foreach($items as $item)
+		{
+			$filename = $this->dir . $item . '.php';
+
+			if(file_exists($filename))
+			{
+				require($filename);
+
+				$this->data[$item] = $filestore;
+			}
+		}
+	}
+}
+
+class datastore_mysql extends datastore_common
+{
+	var $engine = 'MySQL';
+
+	function store ($item_name, $item_data)
+	{
+		$this->data[$item_name] = $item_data;
+
+		$args = DB()->build_array('INSERT', array(
+			'ds_title' => (string) $item_name,
+			'ds_data'  => (string) serialize($item_data),
+		));
+		DB()->query("REPLACE INTO ". BB_DATASTORE . $args);
+	}
+
+	function _fetch_from_store ()
+	{
+		if (!$items = $this->queued_items) return;
+
+		array_deep($items, 'mysql_escape_string');
+		$items_list = join("','", $items);
+
+		$sql = "SELECT ds_title, ds_data FROM ". BB_DATASTORE ." WHERE ds_title IN('$items_list')";
+
+		foreach (DB()->fetch_rowset($sql) as $row)
+		{
+			$this->data[$row['ds_title']] = unserialize($row['ds_data']);
+		}
+	}
+}
+
+// Initialize Datastore
+switch ($bb_cfg['datastore_type'])
+{
+	case 'memcache':
+		$cache_cfg = array(
+			'host'         => '127.0.0.1',
+			'port'         => 11211,
+			'pconnect'     => true,  // use persistent connection
+			'con_required' => true,  // exit script if can't connect
+		);
+		$datastore = new datastore_memcache($cache_cfg);
+		break;
+
+	case 'sqlite':
+		$default_cfg = array(
+			'db_file_path' => '/dev/shm/bb.datastore.sqlite',
+			'table_name'   => 'datastore',
+			'table_schema' => 'CREATE TABLE datastore (
+			                     ds_title VARCHAR(255),
+			                     ds_data  TEXT,
+			                     PRIMARY KEY (ds_title)
+			                   )',
+			'pconnect'     => true,
+			'con_required' => true,
+			'log_name'     => 'DATASTORE',
+		);
+		$cache_cfg = array(
+			'db_file_path' => $bb_cfg['cache']['db_dir'] . '/bb_datastore.sqlite.db',
+			'pconnect'     => false,
+		);
+		$datastore = new datastore_sqlite(array_merge($default_cfg, $cache_cfg));
+		break;
+
+	case 'redis':
+	    $cache_cfg = array(
+			'host'         => '127.0.0.1',
+			'port'         => 6379,
+			'con_required' => true,
+		);
+		$datastore = new datastore_redis($cache_cfg);
+		break;
+
+    case 'eaccelerator':
+		$datastore = new datastore_eaccelerator();
+		break;
+
+	case 'xcache':
+		$datastore = new datastore_xcache();
+		break;
+
+	case 'apc':
+		$datastore = new datastore_apc();
+		break;
+
+	case 'filecache':
+		$datastore = new datastore_file($bb_cfg['cache']['db_dir'] . 'datastore/');
+		break;
+
+	default: //mysql
+		$datastore = new datastore_mysql();
 }
 
 function sql_dbg_enabled ()
