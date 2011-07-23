@@ -57,27 +57,38 @@ $bb_cfg['css_ver'] = 1;
 
 // Increase number of revision after update
 $bb_cfg['tp_version'] = '2.0.2';
-$bb_cfg['tp_release_state'] = 'TP II r126';
+$bb_cfg['tp_release_state'] = 'TP II r127';
 $bb_cfg['tp_release_date'] = '23-07-2011';
 
 $bb_cfg['board_disabled_msg'] = 'форум временно отключен'; // 'forums temporarily disabled'; // show this msg if board has been disabled via ON/OFF trigger
 $bb_cfg['srv_overloaded_msg'] = "Извините, в данный момент сервер перегружен\nПопробуйте повторить запрос через несколько минут";
 
 // Database
-$dbhost    = 'localhost';
-$dbname    = 'dbname';
-$dbuser    = 'dbuser';
-$dbpasswd  = 'dbpasswd';
 $dbcharset = 'utf8';
 $pconnect  = false;
 
-$bb_cfg['db']['db1'] = array($dbhost, $dbname, $dbuser, $dbpasswd, $dbcharset, $pconnect);
+// ['db']['srv_name'] => (array) srv_cfg; порядок параметров srv_cfg (хост, название базы, пользователь, пароль, charset, pconnect);
+$bb_cfg['db']['db1'] = array('localhost', 'dbase', 'user', 'pass', $dbcharset, $pconnect);
+//$bb_cfg['db']['db2'] = array('localhost2', 'dbase2', 'user2', 'pass2', $dbcharset, $pconnect);
+//$bb_cfg['db']['db3'] = array('localhost3', 'dbase3', 'user2', 'pass3', $dbcharset, $pconnect);
+
 $bb_cfg['db_alias'] = array(
 // 'alias' => 'srv_name'
 );
 
 // Cache
 $bb_cfg['cache']['db_dir']   = realpath(BB_ROOT) .'/cache/filecache/';
+$cfg['cache']['memcache'] = array(
+	'host'         => '127.0.0.1',
+	'port'         => 11211,
+	'pconnect'     => true,
+	'con_required' => true,
+);
+$cfg['cache']['redis']  = array(
+	'host'         => '127.0.0.1',
+	'port'         => 6379,
+	'con_required' => true,
+);
 
 // Available cache types: memcache, sqlite, db_sqlite, redis, eaccelerator, apc, xcache (default of filecache)
 # name => array( (string) type, (array) cfg )
@@ -390,8 +401,8 @@ $bb_cfg['ext_link_new_win']   = true;              // open external links in new
 $bb_cfg['topic_moved_days_keep'] = 7;              // remove topic moved links after xx days (or FALSE to disable)
 
 $bb_cfg['allowed_posts_per_page'] = array(15, 30, 50, 100);
-$bb_cfg['user_signature_start'] = "<br />__________<br /><span class='signature'>";
-$bb_cfg['user_signature_end']	= "</span>";	//Это позволит использовать html теги, которые требуют закрытия. Например <table> или <font color>
+$bb_cfg['user_signature_start'] = "<br />_________________<br />";
+$bb_cfg['user_signature_end']	= "";	//Это позволит использовать html теги, которые требуют закрытия. Например <table> или <font color>
 
 // Posts
 $bb_cfg['use_posts_cache']       = true;           // if you switch from ON to OFF, you need to TRUNCATE `bb_posts_html` table

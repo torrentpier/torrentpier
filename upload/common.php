@@ -144,13 +144,7 @@ class CACHES
 					case 'memcache':
 						if (!isset($this->obj[$cache_name]))
 						{
-							$cache_cfg = array(
-								'host'         => '127.0.0.1',
-								'port'         => 11211,
-								'pconnect'     => true,  // use persistent connection
-								'con_required' => true,  // exit script if can't connect
-							);
-							$this->obj[$cache_name] = new cache_memcache($cache_cfg);
+							$this->obj[$cache_name] = new cache_memcache($this->cfg['memcache']);
 						}
 						$this->ref[$cache_name] =& $this->obj[$cache_name];
 						break;
@@ -182,12 +176,7 @@ class CACHES
                     case 'redis':
                         if (!isset($this->obj[$cache_name]))
 						{
-							$cache_cfg = array(
-								'host'         => '127.0.0.1',
-								'port'         => 6379,
-								'con_required' => true,
-							);
-							$this->obj[$cache_name] = new cache_redis($cache_cfg);
+							$this->obj[$cache_name] = new cache_redis($this->cfg['redis']);
 						}
 						$this->ref[$cache_name] =& $this->obj[$cache_name];
 	                    break;
@@ -1104,18 +1093,29 @@ class datastore_sqlite extends datastore_common
 {
 	var $engine = 'SQLite';
 	var $db     = null;
-	var $cfg    = array();
+	var $cfg  = array(
+	              'db_file_path' => '/path/to/datastore.db.sqlite',
+	              'table_name'   => 'datastore',
+	              'table_schema' => 'CREATE TABLE datastore (
+	                                   cache_name        VARCHAR(255),
+	                                   cache_expire_time INT,
+	                                   cache_value       TEXT,
+	                                   PRIMARY KEY (cache_name)
+	                                 )',
+	              'pconnect'     => true,
+	              'con_required' => true,
+	              'log_name'     => 'DATASTORE',
+	            );
 
 	function datastore_sqlite ($cfg)
 	{
-		$this->cfg = $cfg;
+		$this->cfg = array_merge($this->cfg, $cfg);
 		$this->db = new sqlite_common($cfg);
 	}
 
 	function store ($item_name, $item_data)
 	{
 		$this->data[$item_name] = $item_data;
-#		bb_log(join("\t", array(date('H:i:s'), $item_name, @basename($_SERVER['REQUEST_URI'])))."\n", 'ds_store');
 
 		$ds_title = sqlite_escape_string($item_name);
 		$ds_data  = sqlite_escape_string(serialize($item_data));
@@ -1123,6 +1123,11 @@ class datastore_sqlite extends datastore_common
 		$result = $this->db->query("REPLACE INTO ". $this->cfg['table_name'] ." (ds_title, ds_data) VALUES ('$ds_title', '$ds_data')");
 
 		return (bool) $result;
+	}
+
+    function clean ()
+	{
+		$this->db->query("DELETE FROM ". $this->cfg['table_name']);
 	}
 
 	function _fetch_from_store ()
@@ -1407,42 +1412,20 @@ class datastore_mysql extends datastore_common
 switch ($bb_cfg['datastore_type'])
 {
 	case 'memcache':
-		$cache_cfg = array(
-			'host'         => '127.0.0.1',
-			'port'         => 11211,
-			'pconnect'     => true,  // use persistent connection
-			'con_required' => true,  // exit script if can't connect
-		);
-		$datastore = new datastore_memcache($cache_cfg);
+		$datastore = new datastore_memcache($cfg['cache']['memcache']);
 		break;
 
 	case 'sqlite':
 		$default_cfg = array(
-			'db_file_path' => '/dev/shm/bb.datastore.sqlite',
-			'table_name'   => 'datastore',
-			'table_schema' => 'CREATE TABLE datastore (
-			                     ds_title VARCHAR(255),
-			                     ds_data  TEXT,
-			                     PRIMARY KEY (ds_title)
-			                   )',
+			'db_file_path' => $bb_cfg['cache']['db_dir'] . '/bb_datastore.sqlite.db',
 			'pconnect'     => true,
 			'con_required' => true,
-			'log_name'     => 'DATASTORE',
 		);
-		$cache_cfg = array(
-			'db_file_path' => $bb_cfg['cache']['db_dir'] . '/bb_datastore.sqlite.db',
-			'pconnect'     => false,
-		);
-		$datastore = new datastore_sqlite(array_merge($default_cfg, $cache_cfg));
+		$datastore = new datastore_sqlite($default_cfg);
 		break;
 
 	case 'redis':
-	    $cache_cfg = array(
-			'host'         => '127.0.0.1',
-			'port'         => 6379,
-			'con_required' => true,
-		);
-		$datastore = new datastore_redis($cache_cfg);
+		$datastore = new datastore_redis($cfg['cache']['redis']);
 		break;
 
     case 'eaccelerator':
