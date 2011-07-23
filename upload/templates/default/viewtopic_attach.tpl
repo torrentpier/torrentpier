@@ -324,6 +324,7 @@
 				<option value="del_torrent">{L_DELETE_TORRENT}</option>
 				<option value="del_torrent_move_topic">{L_DEL_MOVE_TORRENT}</option>
 				<!-- IF AUTH_MOD -->
+				<!-- IF $bb_cfg['gold_silver_enabled'] -->
 				<!-- IF postrow.attach.tor_reged.TOR_SILVER_GOLD == 1 -->
 				<option value="unset_silver_gold">{L_UNSET_GOLD_TORRENT} / {L_UNSET_SILVER_TORRENT}</option>
 				<option value="set_silver">{L_SET_SILVER_TORRENT}</option>
@@ -333,6 +334,7 @@
 				<!-- ELSE -->
 				<option value="set_gold">{L_SET_GOLD_TORRENT}</option>
 				<option value="set_silver">{L_SET_SILVER_TORRENT}</option>
+				<!-- ENDIF -->
 				<!-- ENDIF -->
 				<!-- ENDIF -->
 			</select>
