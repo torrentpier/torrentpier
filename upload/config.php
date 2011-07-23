@@ -406,6 +406,8 @@ $bb_cfg['ext_link_new_win']   = true;              // open external links in new
 $bb_cfg['topic_moved_days_keep'] = 7;              // remove topic moved links after xx days (or FALSE to disable)
 
 $bb_cfg['allowed_posts_per_page'] = array(15, 30, 50, 100);
+$bb_cfg['user_signature_start'] = "<br />_________________<br />";
+$bb_cfg['user_signature_end']	= "";	//Это позволит использовать html теги, которые требуют закрытия. Например <table> или <font color>
 
 // Posts
 $bb_cfg['use_posts_cache']       = true;           // if you switch from ON to OFF, you need to TRUNCATE `bb_posts_html` table
