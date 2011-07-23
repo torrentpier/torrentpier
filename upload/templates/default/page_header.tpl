@@ -7,8 +7,8 @@
 <meta http-equiv="Content-Style-Type" content="text/css" />
 {META}
 <link rel="stylesheet" href="{STYLESHEET}?v={$bb_cfg['css_ver']}" type="text/css">
-<link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
 <link rel="icon" type="image/png" href="/images/logo/logo_big.png" />
+<link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
 <link rel="search" type="application/opensearchdescription+xml" href="opensearch_desc.xml" title="{SITENAME} (Forum)" />
 <link rel="search" type="application/opensearchdescription+xml" href="opensearch_desc_bt.xml" title="{SITENAME} (Tracker)" />
 
