@@ -57,7 +57,7 @@ $bb_cfg['css_ver'] = 1;
 
 // Increase number of revision after update
 $bb_cfg['tp_version'] = '2.0.2';
-$bb_cfg['tp_release_state'] = 'TP II r141';
+$bb_cfg['tp_release_state'] = 'TP II r143';
 $bb_cfg['tp_release_date'] = '25-07-2011';
 
 $bb_cfg['board_disabled_msg'] = 'форум временно отключен'; // 'forums temporarily disabled'; // show this msg if board has been disabled via ON/OFF trigger
@@ -78,13 +78,13 @@ $bb_cfg['db_alias'] = array(
 
 // Cache
 $bb_cfg['cache']['db_dir']   = realpath(BB_ROOT) .'/cache/filecache/';
-$cfg['cache']['memcache'] = array(
+$bb_cfg['cache']['memcache'] = array(
 	'host'         => '127.0.0.1',
 	'port'         => 11211,
 	'pconnect'     => true,
 	'con_required' => true,
 );
-$cfg['cache']['redis']  = array(
+$bb_cfg['cache']['redis']  = array(
 	'host'         => '127.0.0.1',
 	'port'         => 6379,
 	'con_required' => true,
