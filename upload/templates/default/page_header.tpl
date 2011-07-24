@@ -212,8 +212,8 @@ input[type="checkbox"] { margin-bottom: -1px; }
 </style><![endif]-->
 
 <!-- IF INCLUDE_DEVELOP_JS -->
-<script type="text/javascript" src="{#BB_ROOT}misc/js/develop.js"></script>
 <script type="text/javascript">
+var dev = true;
 function OpenInEditor ($file, $line)
 {
   	$editor_path = '{EDITOR_PATH}';
