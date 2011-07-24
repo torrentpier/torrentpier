@@ -1425,7 +1425,6 @@ else if ( $submit || $refresh || $mode != '' )
 
 	// Output the data to the template (for MAIL.RU Keyboard)
 	$template->assign_vars(array(
-		'SHOW_VIRTUAL_KEYBOARD' => $bb_cfg['show_virtual_keyboard'],
 		'L_LAYOUT' => $lang['KB_RUS_KEYLAYOUT'],
 		'L_NONE' => $lang['KB_NONE'],
 		'L_TRANSLIT' => $lang['KB_TRANSLIT'],
