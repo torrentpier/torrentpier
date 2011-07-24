@@ -14,6 +14,16 @@
 <!-- ENDIF -->
 <!-- ENDIF / LOGGED_IN -->
 
+<!-- IF $bb_cfg['use_ajax_posts'] && (AUTH_DELETE || AUTH_REPLY) -->
+<script type="text/javascript">
+ajax.callback.posts = function(data) {
+	if(data.redirect) document.location.href = data.redirect;
+	if(data.hide) $('tbody#post_'+ data.post_id).hide();
+	if(data.quote) $('textarea.editor').attr('value', $('textarea.editor').val() + data.message +' ').focus();
+};
+</script>
+<!-- ENDIF -->
+
 <!-- IF SPLIT_FORM -->
 <script type="text/javascript">
 function set_hid_chbox (id)
@@ -203,9 +213,9 @@ function set_hid_chbox (id)
 			<!-- IF postrow.MOD_CHECKBOX --><input type="checkbox" class="select_post" onclick="set_hid_chbox('{postrow.POST_ID}');"><!-- ENDIF -->
 
 			<p style="float: right;<!-- IF TEXT_BUTTONS --> padding: 3px 2px 4px;<!-- ELSE --> padding: 1px 6px 2px;<!-- ENDIF -->" class="post_btn_1">
-				<!-- IF postrow.QUOTE --><a class="txtb" href="{QUOTE_URL}{postrow.POST_ID}">{QUOTE_IMG}</a>{POST_BTN_SPACER}<!-- ENDIF -->
+				<!-- IF postrow.QUOTE --><a class="txtb" href="<!-- IF $bb_cfg['use_ajax_posts'] -->" onclick="ajax.exec({ action: 'posts', post_id: {postrow.POST_ID}, type: 'quote'}); return false;<!-- ELSE -->{QUOTE_URL}{postrow.POST_ID}<!-- ENDIF -->">{QUOTE_IMG}</a>{POST_BTN_SPACER}<!-- ENDIF -->
 				<!-- IF postrow.EDIT --><a class="txtb" href="{EDIT_POST_URL}{postrow.POST_ID}">{EDIT_POST_IMG}</a>{POST_BTN_SPACER}<!-- ENDIF -->
-				<!-- IF postrow.DELETE --><a class="txtb" href="{DELETE_POST_URL}{postrow.POST_ID}">{DELETE_POST_IMG}</a>{POST_BTN_SPACER}<!-- ENDIF -->
+				<!-- IF postrow.DELETE --><a class="txtb" href="<!-- IF $bb_cfg['use_ajax_posts'] -->" onclick="ajax.exec({ action: 'posts', post_id: {postrow.POST_ID}, type: 'delete'}); return false;<!-- ELSE -->{DELETE_POST_URL}{postrow.POST_ID}<!-- ENDIF -->">{DELETE_POST_IMG}</a>{POST_BTN_SPACER}<!-- ENDIF -->
 				<!-- IF postrow.IP --><a class="txtb" href="{IP_POST_URL}{postrow.POST_ID}&amp;t={TOPIC_ID}">{IP_POST_IMG}</a>{POST_BTN_SPACER}<!-- ENDIF -->
 				<!-- IF postrow.REPORT -->{postrow.REPORT}{POST_BTN_SPACER}<!-- ENDIF -->
 				<!-- IF AUTH_MOD -->

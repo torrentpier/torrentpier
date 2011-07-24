@@ -1042,6 +1042,9 @@ if ($bb_cfg['show_quick_reply'])
 	}
 }
 
+foreach($is_auth as $name => $is)
+{	$template->assign_vars(array(strtoupper($name) => $is));}
+
 $template->assign_vars(array(
 	'PG_ROW_CLASS' => isset($pg_row_class) ? $pg_row_class : 'row1',
 ));

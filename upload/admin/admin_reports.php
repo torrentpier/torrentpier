@@ -1,5 +1,6 @@
 <?php
 
+if(!$bb_cfg['reports_enabled']) return;
 if (!empty($setmodules))
 {
 	$file = basename(__FILE__);
@@ -9,11 +10,11 @@ if (!empty($setmodules))
 }
 
 define('IN_PHPBB', true);
-$phpbb_root_path = './../';
-$no_page_header = true;
+define('BB_ROOT', './../');
+
 require("./pagestart.php");
-require($phpbb_root_path . "includes/functions_report.php");
-require($phpbb_root_path . "includes/functions_report_admin.php");
+require(BB_ROOT . "includes/functions_report.php");
+require(BB_ROOT . "includes/functions_report_admin.php");
 
 $return_links = array(
 	'index' => '<br /><br />' . sprintf($lang['CLICK_RETURN_ADMIN_INDEX'], '<a href="' . append_sid("index.php?pane=right") . '">', '</a>'),

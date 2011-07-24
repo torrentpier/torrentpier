@@ -639,6 +639,8 @@ else
 				define('WORD_LIST_OBTAINED', TRUE);
 			}
 
+            if($post_info['post_attachment'] && !IS_AM) $message = $post_info['topic_title'];
+
 			// Use trim to get rid of spaces placed there by MS-SQL 2000
 			$quote_username = ( trim($post_info['post_username']) != '' ) ? $post_info['post_username'] : $post_info['username'];
 			$message = '[quote="' . $quote_username . '"]' . $message . '[/quote]';

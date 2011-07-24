@@ -408,6 +408,7 @@ $bb_cfg['user_signature_end']	= '</span>';	//Это позволит испол�
 $bb_cfg['use_posts_cache']       = true;           // if you switch from ON to OFF, you need to TRUNCATE `bb_posts_html` table
 $bb_cfg['posts_cache_days_keep'] = 14;
 $bb_cfg['max_post_length']       = 120000;         // bytes
+$bb_cfg['use_ajax_posts']        = true;
 
 // Search
 $bb_cfg['search_engine_type']          = 'mysql';  //  none, mysql, sphinx

@@ -21,6 +21,12 @@ switch ($ajax->action)
 		require(INC_DIR .'bbcode.php');
 	break;
 
+	case 'posts':
+		require(INC_DIR .'bbcode.php');
+	    require(INC_DIR .'functions_post.php');
+		require(INC_DIR .'functions_admin.php');
+	break;
+
 	case 'view_torrent':
 	case 'mod_action':
 	case 'change_tor_status':
@@ -69,6 +75,7 @@ class ajax_common
 		'view_message'      => array('guest'),
         'view_torrent'      => array('guest'),
         'user_register'     => array('guest'),
+        'posts'             => array('guest'),
 	);
 
 	var $action = null;
@@ -257,8 +264,7 @@ class ajax_common
 	*/
 	function prompt_for_confirm ($confirm_msg)
 	{
-		global $lang;
-		if(!empty($confirm_msg)) $confirm_msg = $lang['CONFIRM'];
+		if(empty($confirm_msg)) $this->ajax_die('false');
 
 		$this->response['prompt_confirm'] = 1;
 		$this->response['confirm_msg'] = $confirm_msg;
@@ -401,4 +407,8 @@ class ajax_common
 		require(AJAX_DIR .'mod_action.php');
     }
 
+    function posts()
+    {
+		require(AJAX_DIR .'posts.php');
+    }
 }
