@@ -143,9 +143,9 @@ ajax.callback.gen_passkey = function(data){
 	</td>
 </tr>
 <script type="text/javascript">
-ajax.callback.view_message = function(data){
+ajax.callback.posts = function(data){
     $('#view_message').show();
-    $('.signature').html(data.html);
+    $('.signature').html(data.message_html);
     initPostBBCode('.signature');
 };
 </script>
@@ -157,7 +157,7 @@ ajax.callback.view_message = function(data){
 	<!-- ELSE -->
 	<td>
 		<textarea id="user_sig" name="user_sig" rows="5" cols="60" style="width: 96%;">{USER_SIG}</textarea>
-		<input type="button" value="{L_PREVIEW}" onclick="ajax.exec({ action: 'view_message', message: $('textarea#user_sig').val() });">
+		<input type="button" value="{L_PREVIEW}" onclick="ajax.exec({ action: 'posts', type: 'view_message', message: $('textarea#user_sig').val() });">
 	</td>
 	<!-- ENDIF -->
 </tr>

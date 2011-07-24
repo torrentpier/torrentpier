@@ -171,7 +171,7 @@ switch($this->request['type'])
 						<input type="button" value="List" name="codeList" title="List (Ctrl+L)" style="width: 46px;" />
 						<input type="button" value="1." name="codeOpt" title="List item (Ctrl+0)" style="width: 30px;" />&nbsp;
 						<input type="button" value="Quote selected" name="quoteselected" title="{L_QUOTE_SELECTED}" style="width: 100px;" onmouseout="bbcode.refreshSelection(false);" onmouseover="bbcode.refreshSelection(true);" onclick="bbcode.onclickQuoteSel();" />&nbsp;
-						<input type="button" value="Translit" name="Translit" title="Перевести выделение из транслита на русский" style="width: 60px;" onclick="transliterate(document.post.message, this);" /> <a href="#" onclick="toggle_block(\'translit_opt\'); return false"><span style="color: darkred"><b>?</b></span></a>
+						<input type="button" value="Translit" name="Translit" title="Перевести выделение из транслита на русский" style="width: 60px;" onclick="transliterate(document.post.message, this);" />
 					</div>
 					<textarea id="message-'. $post_id .'" class="editor mrg_4" name="message" rows="18" cols="92">'. $post['post_text'] .'</textarea>
 					<div class="mrg_4 tCenter">
@@ -200,6 +200,9 @@ switch($this->request['type'])
 				</form>';
 		}
 		$this->response['post_id'] = $post_id;
+		break;
+
+	case 'add':
 		break;
 
 	default:
