@@ -1,13 +1,13 @@
-#	Иструкция от dimka3210
-#	Данный мод позволяет использовать виртуальную клавиатуру.
-#	Сам мод был вырезан из-за неактивности, но будет поставляться вместе с движком.
-# 	Получить поддержку по движку можно на форуме http://torrentpier.me
+#	РРЅСЃС‚СЂСѓРєС†РёСЏ РѕС‚ dimka3210
+#	Р”Р°РЅРЅС‹Р№ РјРѕРґ РїРѕР·РІРѕР»СЏРµС‚ РёСЃРїРѕР»СЊР·РѕРІР°С‚СЊ РІРёСЂС‚СѓР°Р»СЊРЅСѓСЋ РєР»Р°РІРёР°С‚СѓСЂСѓ.
+#	РЎР°Рј РјРѕРґ Р±С‹Р» РІС‹СЂРµР·Р°РЅ РёР·-Р·Р° РЅРµР°РєС‚РёРІРЅРѕСЃС‚Рё, РЅРѕ Р±СѓРґРµС‚ РїРѕСЃС‚Р°РІР»СЏС‚СЊСЃСЏ РІРјРµСЃС‚Рµ СЃ РґРІРёР¶РєРѕРј.
+# 	РџРѕР»СѓС‡РёС‚СЊ РїРѕРґРґРµСЂР¶РєСѓ РїРѕ РґРІРёР¶РєСѓ РјРѕР¶РЅРѕ РЅР° С„РѕСЂСѓРјРµ http://torrentpier.me
 
-открыть /lang_english/lang_main.php
+РѕС‚РєСЂС‹С‚СЊ /lang_english/lang_main.php
 ----------------
-найти 
+РЅР°Р№С‚Рё 
 $lang['SEEDER_LAST_SEEN'] = 'Seeder not seen: <b>%s</b>';
-ниже добавить
+РЅРёР¶Рµ РґРѕР±Р°РІРёС‚СЊ
 $lang['KB_TITLE'] = 'Russian keyboard';
 $lang['KB_RUS_KEYLAYOUT'] = 'Layout: ';
 $lang['KB_NONE'] = 'None';
@@ -20,33 +20,33 @@ $lang['KB_CLOSE'] = 'Close';
 $lang['KB_TRANSLIT_MOZILLA'] = 'Select text you wish to translit and click \'Translit\'.';
 $lang['KB_TRANSLIT_OPERA7'] = 'Click here to translit your message.';
 
-открыть /lang_russian/lang_main.php
+РѕС‚РєСЂС‹С‚СЊ /lang_russian/lang_main.php
 ----------------
-найти
-$lang['SEEDER_LAST_SEEN'] = 'Полного источника не было: <b>%s</b>';
-ниже добавить
-$lang['KB_TITLE'] = 'Русская клавиатура';
-$lang['KB_RUS_KEYLAYOUT'] = 'Раскладка: ';
-$lang['KB_NONE'] = 'Отсутствует';
-$lang['KB_TRANSLIT'] = 'Транслит';
-$lang['KB_TRADITIONAL'] = 'Традиционная';
-$lang['KB_RULES'] = 'Правила набора';
-$lang['KB_SHOW'] = 'Показать клавиатуру';
-$lang['KB_ABOUT'] = 'О клавиатуре';
-$lang['KB_CLOSE'] = 'Закрыть';
-$lang['KB_TRANSLIT_MOZILLA'] = 'Выберите текст, который вы хотите для перевода в транслит, и нажмите кнопку \'Транслит\'.';
-$lang['KB_TRANSLIT_OPERA7'] = 'Нажмите здесь для перевода вашего сообщения в транслит.';
+РЅР°Р№С‚Рё
+$lang['SEEDER_LAST_SEEN'] = 'РџРѕР»РЅРѕРіРѕ РёСЃС‚РѕС‡РЅРёРєР° РЅРµ Р±С‹Р»Рѕ: <b>%s</b>';
+РЅРёР¶Рµ РґРѕР±Р°РІРёС‚СЊ
+$lang['KB_TITLE'] = 'Р СѓСЃСЃРєР°СЏ РєР»Р°РІРёР°С‚СѓСЂР°';
+$lang['KB_RUS_KEYLAYOUT'] = 'Р Р°СЃРєР»Р°РґРєР°: ';
+$lang['KB_NONE'] = 'РћС‚СЃСѓС‚СЃС‚РІСѓРµС‚';
+$lang['KB_TRANSLIT'] = 'РўСЂР°РЅСЃР»РёС‚';
+$lang['KB_TRADITIONAL'] = 'РўСЂР°РґРёС†РёРѕРЅРЅР°СЏ';
+$lang['KB_RULES'] = 'РџСЂР°РІРёР»Р° РЅР°Р±РѕСЂР°';
+$lang['KB_SHOW'] = 'РџРѕРєР°Р·Р°С‚СЊ РєР»Р°РІРёР°С‚СѓСЂСѓ';
+$lang['KB_ABOUT'] = 'Рћ РєР»Р°РІРёР°С‚СѓСЂРµ';
+$lang['KB_CLOSE'] = 'Р—Р°РєСЂС‹С‚СЊ';
+$lang['KB_TRANSLIT_MOZILLA'] = 'Р’С‹Р±РµСЂРёС‚Рµ С‚РµРєСЃС‚, РєРѕС‚РѕСЂС‹Р№ РІС‹ С…РѕС‚РёС‚Рµ РґР»СЏ РїРµСЂРµРІРѕРґР° РІ С‚СЂР°РЅСЃР»РёС‚, Рё РЅР°Р¶РјРёС‚Рµ РєРЅРѕРїРєСѓ \'РўСЂР°РЅСЃР»РёС‚\'.';
+$lang['KB_TRANSLIT_OPERA7'] = 'РќР°Р¶РјРёС‚Рµ Р·РґРµСЃСЊ РґР»СЏ РїРµСЂРµРІРѕРґР° РІР°С€РµРіРѕ СЃРѕРѕР±С‰РµРЅРёСЏ РІ С‚СЂР°РЅСЃР»РёС‚.';
 
-открыть posting.php
+РѕС‚РєСЂС‹С‚СЊ posting.php
 -------------------
-найти 
+РЅР°Р№С‚Рё 
 'POSTING_TOPIC_TITLE' => ($mode != 'newtopic') ? wbr($post_info['topic_title']) : '',
-ниже добавить
+РЅРёР¶Рµ РґРѕР±Р°РІРёС‚СЊ
 'SHOW_VIRTUAL_KEYBOARD' => $bb_cfg['show_virtual_keyboard'],
-найти
+РЅР°Р№С‚Рё
 'S_HIDDEN_FORM_FIELDS' => $hidden_form_fields)
 );
-ниже добивить
+РЅРёР¶Рµ РґРѕР±РёРІРёС‚СЊ
 $template->assign_vars(array(
 	'L_KB_TITLE' => $lang['KB_TITLE'],
 	'L_LAYOUT' => $lang['KB_RUS_KEYLAYOUT'],
@@ -63,12 +63,12 @@ $template->assign_vars(array(
 	'S_VISIBILITY_OFF' => '')
 );
 
-открыть privmsg.php
+РѕС‚РєСЂС‹С‚СЊ privmsg.php
 -------------------
-найти 
+РЅР°Р№С‚Рё 
 'U_VIEW_FORUM' => append_sid("privmsg.php"))
 	);
-ниже добавить
+РЅРёР¶Рµ РґРѕР±Р°РІРёС‚СЊ
 $template->assign_vars(array(
 		'SHOW_VIRTUAL_KEYBOARD' => $bb_cfg['show_virtual_keyboard'],
 		'L_LAYOUT' => $lang['KB_RUS_KEYLAYOUT'],
@@ -85,17 +85,17 @@ $template->assign_vars(array(
 		'S_VISIBILITY_OFF' => '')
 	);
 
-открыть /templates/default/posting.tpl
+РѕС‚РєСЂС‹С‚СЊ /templates/default/posting.tpl
 --------------------------------------
-найти 
+РЅР°Р№С‚Рё 
 <!-- IF IN_PM -->
 <!-- ELSEIF LOGGED_IN -->
-выше добавить
+РІС‹С€Рµ РґРѕР±Р°РІРёС‚СЊ
 <!-- IF SHOW_VIRTUAL_KEYBOARD --><!-- INCLUDE kb.tpl --><!-- ENDIF -->
 
-в config.php добавить
+РІ config.php РґРѕР±Р°РІРёС‚СЊ
 ---------------------
 $bb_cfg['show_virtual_keyboard'] = true;
 
-Файл kb.tpl положить в /templates/default/
+Р¤Р°Р№Р» kb.tpl РїРѕР»РѕР¶РёС‚СЊ РІ /templates/default/
 ------------------------------------------
