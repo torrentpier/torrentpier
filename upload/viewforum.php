@@ -589,10 +589,7 @@ $pg_url .= ($topics_per_page != $bb_cfg['topics_per_page'])  ? "&amp;tpp=$topics
 
 if ($found_topics)
 {
-	$template->assign_vars(array(
-		'PAGINATION'  => generate_pagination($pg_url, $forum_topics, $topics_per_page, $start),
-		'PAGE_NUMBER' => sprintf($lang['PAGE_OF'], (floor($start / $topics_per_page) + 1), ceil($forum_topics / $topics_per_page)),
-	));
+	generate_pagination($pg_url, $forum_topics, $topics_per_page, $start);
 }
 else
 {

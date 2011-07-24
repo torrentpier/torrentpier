@@ -543,7 +543,7 @@ $pg_url .= isset($_REQUEST['single']) ? "&amp;single=1" : '';
 $pg_url .= ($moderation) ? "&amp;mod=1" : '';
 $pg_url .= ($posts_per_page != $bb_cfg['posts_per_page']) ? "&amp;ppp=$posts_per_page" : '';
 
-$pagination = generate_pagination($pg_url, $total_replies, $posts_per_page, $start);
+generate_pagination($pg_url, $total_replies, $posts_per_page, $start);
 
 //
 // Selects
@@ -578,8 +578,6 @@ $template->assign_vars(array(
 	'TOPIC_ID'            => $topic_id,
 	'PAGE_TITLE'          => $topic_title,
 	'TOPIC_TITLE'         => wbr($topic_title),
-	'PAGINATION'          => $pagination,
-	'PAGE_NUMBER'         => sprintf($lang['PAGE_OF'], ( floor($start/$posts_per_page) + 1 ), ceil( $total_replies / $posts_per_page )),
 	'PORNO_FORUM'         => isset($porno_forums[$forum_id]),
 	'REPLY_IMG'           => $reply_img,
 	'SHOW_BOT_NICK'       => $bb_cfg['show_bot_nick'],

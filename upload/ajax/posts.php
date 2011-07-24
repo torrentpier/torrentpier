@@ -231,6 +231,9 @@ switch($this->request['type'])
 			$this->ajax_die(sprintf($lang['SORRY_AUTH_REPLY'], strip_tags($is_auth['auth_reply_type'])));
 		}
 
+	    $message = (string) $this->request['message'];
+		$message = prepare_message($message);
+
         // Flood control
 		$where_sql = (IS_GUEST) ? "p.poster_ip = '". USER_IP ."'" : "p.poster_id = {$userdata['user_id']}";
 
@@ -263,15 +266,12 @@ switch($this->request['type'])
 			{
 				$last_msg = DB()->escape($row['post_text']);
 
-				if ($last_msg == $post_message)
+				if ($last_msg == $message)
 				{
 					$this->ajax_die($lang['DOUBLE_POST_ERROR']);
 				}
 			}
 		}
-
-	    $message = (string) $this->request['message'];
-		$message = prepare_message($message);
 
 	    if($bb_cfg['max_smilies'])
 	    {

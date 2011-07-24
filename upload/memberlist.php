@@ -229,19 +229,13 @@ if ( $mode != 'topten' || $bb_cfg['topics_per_page'] < 10 )
 	if ($total = DB()->sql_fetchrow($result))
 	{
 		$total_members = $total['total'];
-		$pagination = generate_pagination($paginationurl, $total_members, $bb_cfg['topics_per_page'], $start). '&nbsp;';
+		generate_pagination($paginationurl, $total_members, $bb_cfg['topics_per_page'], $start). '&nbsp;';
 	}
 	DB()->sql_freeresult($result);
 }
-else
-{
-	$pagination = '&nbsp;';
-	$total_members = 10;
-}
+
 $template->assign_vars(array(
 	'PAGE_TITLE' => $lang['MEMBERLIST'],
-	'PAGINATION' => $pagination,
-	'PAGE_NUMBER' => sprintf($lang['PAGE_OF'], ( floor( $start / $bb_cfg['topics_per_page'] ) + 1 ), ceil( $total_members / $bb_cfg['topics_per_page'] )),
 ));
 
 print_page('memberlist.tpl');

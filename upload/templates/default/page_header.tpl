@@ -436,6 +436,29 @@ important_info
 
 <!--menus-->
 
+<!-- IF PAGINATION -->
+<div class="menu-sub" id="pg-jump">
+	<table cellspacing="1" cellpadding="4">
+	<tr><th>К странице...</th></tr>
+	<tr><td>
+		<form method="get" onsubmit="return go_to_page();">
+			<input id="pg-page" type="text" size="5" maxlength="4" />
+			<input type="submit" value="Перейти"/>
+		</form>
+	</td></tr>
+	</table>
+</div>
+<script type="text/javascript">
+function go_to_page ()
+{
+	var page_num = (parseInt( $('#pg-page').val() ) > 1) ? $('#pg-page').val() : 1;
+	var pg_start = (page_num - 1) * {PG_PER_PAGE};
+	window.location = '{PG_BASE_URL}&start=' + pg_start;
+	return false;
+}
+</script>
+<!-- ENDIF -->
+
 <!-- IF SHOW_ONLY_NEW_MENU -->
 <div class="menu-sub" id="only-new-options">
 	<table cellspacing="1" cellpadding="4">

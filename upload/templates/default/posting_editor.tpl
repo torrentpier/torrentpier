@@ -174,6 +174,7 @@ function checkForm(form) {
 				topic_id: {TOPIC_ID}
 			});
 		}, 100);
+		$('#topic_quick_reply').hide();
 		return false;
 	}
 	<!-- ENDIF -->

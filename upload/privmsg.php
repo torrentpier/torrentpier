@@ -1751,11 +1751,7 @@ else
 		}
 		while( $row = DB()->sql_fetchrow($result) );
 
-		$template->assign_vars(array(
-			'PAGINATION' => generate_pagination("privmsg.php?folder=$folder", $pm_total, $bb_cfg['topics_per_page'], $start),
-			'PAGE_NUMBER' => sprintf($lang['PAGE_OF'], ( floor( $start / $bb_cfg['topics_per_page'] ) + 1 ), ceil( $pm_total / $bb_cfg['topics_per_page'] )),
-		));
-
+		generate_pagination("privmsg.php?folder=$folder", $pm_total, $bb_cfg['topics_per_page'], $start);
 	}
 	else
 	{

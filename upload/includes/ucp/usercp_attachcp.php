@@ -321,12 +321,7 @@ if (sizeof($attachments) > 0)
 // Generate Pagination
 if ($do_pagination && $total_rows > $bb_cfg['topics_per_page'])
 {
-	$pagination = generate_pagination(BB_ROOT ."profile.php?mode=attachcp&amp;mode_a=$mode&amp;order=$sort_order&amp;" . POST_USERS_URL . '=' . $profiledata['user_id'] . '&amp;sid=' . $userdata['session_id'], $total_rows, $bb_cfg['topics_per_page'], $start).'&nbsp;';
-
-	$template->assign_vars(array(
-		'PAGINATION'	=> $pagination,
-		'PAGE_NUMBER'	=> sprintf($lang['PAGE_OF'], (floor($start / $bb_cfg['topics_per_page']) + 1), ceil($total_rows / $bb_cfg['topics_per_page'])),
-	));
+	generate_pagination(BB_ROOT ."profile.php?mode=attachcp&amp;mode_a=$mode&amp;order=$sort_order&amp;" . POST_USERS_URL . '=' . $profiledata['user_id'] . '&amp;sid=' . $userdata['session_id'], $total_rows, $bb_cfg['topics_per_page'], $start).'&nbsp;';
 }
 
 print_page('usercp_attachcp.tpl');

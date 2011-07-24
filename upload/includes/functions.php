@@ -1670,7 +1670,7 @@ function birthday_age($date)
 //
 function generate_pagination($base_url, $num_items, $per_page, $start_item, $add_prevnext_text = TRUE)
 {
-	global $lang;
+	global $lang, $template;
 
 // Pagination Mod
 	$begin_end = 3;
@@ -1772,9 +1772,17 @@ function generate_pagination($base_url, $num_items, $per_page, $start_item, $add
 
 	}
 
-	$return = ($page_string) ? $lang['GOTO_PAGE'] .':&nbsp;&nbsp;'. $page_string : '';
+	$pagination = ($page_string) ? '<a class="menu-root" href="#pg-jump">Страницы</a> :&nbsp;&nbsp;'. $page_string : '';
+	$pagination = str_replace('&amp;start=0', '', $pagination);
 
-	return str_replace('&amp;start=0', '', $return);
+	$template->assign_vars(array(
+		'PAGINATION'   => $pagination,
+		'PAGE_NUMBER'  => sprintf('Страница <b>%d</b> из <b>%s</b>', ( floor($start_item/$per_page) + 1 ), ceil( $num_items / $per_page )),
+		'PG_BASE_URL'  => $base_url,
+		'PG_PER_PAGE'  => $per_page,
+	));
+
+	return $pagination;
 }
 
 //

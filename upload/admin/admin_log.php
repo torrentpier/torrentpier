@@ -243,10 +243,7 @@ else
 	$pages = (!$log_count) ? 1 : ceil($items_count / $per_page);
 }
 
-$template->assign_vars(array(
-	'PAGINATION'  => generate_pagination($url, $items_count, $per_page, $start),
-	'PAGE_NUMBER' => sprintf($lang['PAGE_OF'], floor($start / $per_page) + 1, $pages),
-));
+generate_pagination($url, $items_count, $per_page, $start);
 
 $filter = array();
 

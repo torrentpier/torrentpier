@@ -752,10 +752,10 @@ if ($items_display)
 	$pages = (!$items_count) ? 1 : ceil($items_count / $per_page);
 	$url = ($search_id) ? url_arg($url, 'id', $search_id) : $url;
 
+    generate_pagination($url, $items_count, $per_page, $start);
+
 	$template->assign_vars(array(
 		'PAGE_TITLE'  => $lang['SEARCH'],
-		'PAGINATION'  => generate_pagination($url, $items_count, $per_page, $start),
-		'PAGE_NUMBER' => sprintf($lang['PAGE_OF'], floor($start / $per_page) + 1, $pages),
 
 		'SEARCH_MATCHES'   => ($items_count) ? sprintf($lang['FOUND_SEARCH_MATCHES'], $items_count) : '',
 		'DISPLAY_AS_POSTS' => $post_mode,

@@ -581,12 +581,7 @@ if ($view == 'attachments')
 // Generate Pagination
 if ($do_pagination && $total_rows > $bb_cfg['topics_per_page'])
 {
-	$pagination = generate_pagination('admin_attach_cp.php?view=' . $view . '&amp;mode=' . $mode . '&amp;order=' . $sort_order . '&amp;uid=' . $uid, $total_rows, $bb_cfg['topics_per_page'], $start).'&nbsp;';
-
-	$template->assign_vars(array(
-		'PAGINATION' => $pagination,
-		'PAGE_NUMBER' => sprintf($lang['PAGE_OF'], ( floor( $start / $bb_cfg['topics_per_page'] ) + 1 ), ceil( $total_rows / $bb_cfg['topics_per_page'] )),
-	));
+	generate_pagination('admin_attach_cp.php?view=' . $view . '&amp;mode=' . $mode . '&amp;order=' . $sort_order . '&amp;uid=' . $uid, $total_rows, $bb_cfg['topics_per_page'], $start).'&nbsp;';
 }
 
 print_page('admin_attach_cp.tpl', 'admin');

@@ -800,11 +800,11 @@ if ($tor_count)
 	$search_matches = ($tor_count == 1) ? sprintf($lang['FOUND_SEARCH_MATCH'], $tor_count) : sprintf($lang['FOUND_SEARCH_MATCHES'], $tor_count);
 	$search_max = "(max: $tor_search_limit)";
 
+    generate_pagination($base_url, $tor_count, $per_page, $start);
+
 	$template->assign_vars(array(
 		'MATCHES'     => $search_matches,
 		'SERACH_MAX'  => $search_max,
-		'PAGINATION'  => generate_pagination($base_url, $tor_count, $per_page, $start),
-		'PAGE_NUMBER' => sprintf($lang['PAGE_OF'], (floor($start / $per_page) + 1), ceil($tor_count / $per_page)),
 	));
 }
 

@@ -442,10 +442,7 @@ else
 		$pages = (!$members_count) ? 1 : ceil($items_count / $per_page);
 	}
 
-	$template->assign_vars(array(
-		'PAGINATION'  => generate_pagination(GROUP_URL . $group_id, $items_count, $per_page, $start),
-		'PAGE_NUMBER' => sprintf($lang['PAGE_OF'], floor($start / $per_page) + 1, $pages),
-	));
+    generate_pagination(GROUP_URL . $group_id, $items_count, $per_page, $start);
 
 	// Pending
 	if ($is_moderator)
