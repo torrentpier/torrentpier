@@ -30,7 +30,7 @@ if (!defined('WORD_LIST_OBTAINED'))
 
 switch($this->request['type'])
 {	case 'delete';
-		if(!$post) bb_die('not post');
+		if(!$post) $this->ajax_die('not post');
 
 		$is_auth = auth(AUTH_ALL, $post['forum_id'], $userdata, $post);
 
@@ -43,14 +43,14 @@ switch($this->request['type'])
 			$this->response['hide']    = true;
 			$this->response['post_id'] = $post_id;		}
 		else
-		{			bb_die(sprintf($lang['SORRY_AUTH_DELETE'], strip_tags($is_auth['auth_delete_type'])));		}
+		{			$this->ajax_die(sprintf($lang['SORRY_AUTH_DELETE'], strip_tags($is_auth['auth_delete_type'])));		}
 		break;
 
-	case 'quote';
-		if(!$post) bb_die('not post');
+	case 'reply';
+		if(!$post) $this->ajax_die('not post');
 		if(bf($userdata['user_opt'], 'user_opt', 'allow_post'))
 		{
-			bb_die($lang['RULES_REPLY_CANNOT']);
+			$this->ajax_die($lang['RULES_REPLY_CANNOT']);
 		}
 
 		// Use trim to get rid of spaces placed there by MS-SQL 2000
@@ -73,8 +73,133 @@ switch($this->request['type'])
 		$this->response['message'] = $message;
 		break;
 
-	case 'add':
-		$this->ajax_die('off');
+	case 'view_message':
+		$message = (string) $this->request['message'];
+		if(!trim($message)) $this->ajax_die($lang['EMPTY_MESSAGE']);
+		$message = bbcode2html($message);
+        $this->response['message_html'] = $message;
+		break;
+
+	case 'edit':
+    case 'editor':
+        if(!$post) $this->ajax_die('not post');
+
+        if(mb_strlen($post['post_text'], 'UTF-8') > 1000)
+        {        	$this->response['redirect'] = make_url('posting.php?mode=editpost&p='. $post_id);        }
+		else if($this->request['type'] == 'editor')
+		{
+			$text = (string) $this->request['text'];
+			$text = prepare_message($text);
+
+			if(mb_strlen($text) > 2)
+			{
+				if($text != $post['post_text'])
+				{
+				    if($bb_cfg['max_smilies'])
+				    {
+						$count_smilies = substr_count(bbcode2html($text), '<img class="smile" src="'. $bb_cfg['smilies_path']);
+						if($count_smilies > $bb_cfg['max_smilies'])
+						{
+							$this->ajax_die(sprintf($lang['MAX_SMILIES_PER_POST'], $bb_cfg['max_smilies']));
+						}
+				    }
+                    DB()->query("UPDATE ". BB_POSTS_TEXT ." SET post_text = '". DB()->escape($text) ."' WHERE post_id = $post_id LIMIT 1");
+                    add_search_words($post_id, stripslashes($text), stripslashes($post['topic_title']));
+				    update_post_html(array(
+						'post_id'        => $post_id,
+						'post_text'      => $text,
+					));
+				}
+			}
+			else $this->ajax_die($lang['EMPTY_MESSAGE']);
+
+			$this->response['html'] = bbcode2html($text);
+		}
+		else
+		{
+			$is_auth = auth(AUTH_ALL, $post['forum_id'], $userdata, $post);
+			if ($post['topic_status'] == TOPIC_LOCKED && !$is_auth['auth_mod'])
+			{
+				$this->ajax_die($lang['TOPIC_LOCKED']);
+			}
+			else if(!$is_auth['auth_edit'])
+			{
+				$this->ajax_die(sprintf($lang['SORRY_AUTH_EDIT'], strip_tags($is_auth['auth_edit_type'])));
+			}
+
+			// Запрет на редактирование раздачи юзером
+			if ($post['allow_reg_tracker'] && ($post['topic_first_post_id'] == $post_id) && !IS_AM)
+			{
+				$tor_status = DB()->fetch_row("SELECT tor_status FROM ". BB_BT_TORRENTS ." WHERE topic_id = {$post['topic_id']} LIMIT 1", 'tor_status');
+				if ($tor_status != false)
+				{
+					// по статусу раздачи
+					if (isset($bb_cfg['tor_cannot_edit'][$tor_status]))
+					{
+						$this->ajax_die("Вы не можете редактировать сообщение со статусом {$lang['tor_status'][$tor_status]}");
+					}
+					// проверенный, через время
+					if ($tor_status == TOR_APPROVED)
+					{
+						$days_after_last_edit     = $bb_cfg['dis_edit_tor_after_days'];
+						$last_edit_time           = max($post['post_time'], $post['post_edit_time']) + 86400*$days_after_last_edit;
+						$disallowed_by_forum_perm = in_array($post['forum_id'], $bb_cfg['dis_edit_tor_forums']);
+						$disallowed_by_user_opt   = bf($user->opt, 'user_opt', 'dis_edit_release');
+
+						if ($last_edit_time < TIMENOW && ($disallowed_by_forum_perm || $disallowed_by_user_opt))
+						{
+							$how_msg = ($disallowed_by_user_opt) ? 'Вам запрещено' : 'Вы не можете';
+							$this->ajax_die("$how_msg редактировать сообщение со статусом <b>{$lang['tor_status'][$tor_status]}</b> по прошествии $days_after_last_edit дней");
+						}
+					}
+				}
+			}
+
+			$this->response['text'] = '
+			    <form action="posting.php" method="post" name="post">
+					<input type="hidden" name="mode" value="reply" />
+					<input type="hidden" name="t" value="'. $post['topic_id'] .'" />
+					<div class="buttons mrg_4">
+						<input type="button" value=" B " name="codeB" title="Bold (Ctrl+B)" style="font-weight: bold; width: 30px;" />
+						<input type="button" value=" i " name="codeI" title="Italic (Ctrl+I)" style="width: 30px; font-style: italic;" />
+						<input type="button" value=" u " name="codeU" title="Underline (Ctrl+U)" style="width: 30px; text-decoration: underline;" />
+						<input type="button" value=" s " name="codeS" title="Strikeout (Ctrl+S)" style="width: 30px; text-decoration: line-through;" />&nbsp;&nbsp;
+						<input type="button" value="Quote" name="codeQuote" title="Quote (Ctrl+Q)" style="width: 50px;" />
+						<input type="button" value="Img" name="codeImg" title="Image (Ctrl+R)" style="width: 40px;" />
+						<input type="button" value="URL" name="codeUrl" title="URL (Ctrl+W)" style="width: 40px; text-decoration: underline;" /><input type="hidden" name="codeUrl2" />&nbsp;
+						<input type="button" value="Code" name="codeCode" title="Code (Ctrl+K)" style="width: 46px;" />
+						<input type="button" value="List" name="codeList" title="List (Ctrl+L)" style="width: 46px;" />
+						<input type="button" value="1." name="codeOpt" title="List item (Ctrl+0)" style="width: 30px;" />&nbsp;
+						<input type="button" value="Quote selected" name="quoteselected" title="{L_QUOTE_SELECTED}" style="width: 100px;" onmouseout="bbcode.refreshSelection(false);" onmouseover="bbcode.refreshSelection(true);" onclick="bbcode.onclickQuoteSel();" />&nbsp;
+						<input type="button" value="Translit" name="Translit" title="Перевести выделение из транслита на русский" style="width: 60px;" onclick="transliterate(document.post.message, this);" /> <a href="#" onclick="toggle_block(\'translit_opt\'); return false"><span style="color: darkred"><b>?</b></span></a>
+					</div>
+					<textarea id="message-'. $post_id .'" class="editor mrg_4" name="message" rows="18" cols="92">'. $post['post_text'] .'</textarea>
+					<div class="mrg_4 tCenter">
+						<input title="Alt+Enter" type="submit" name="preview" value="'. $lang['PREVIEW'] .'">
+						<input type="button" onclick="edit_post('. $post_id .');" value="'. $lang['CANCEL'] .'">
+						<input type="button" onclick="edit_post('. $post_id .', \'editor\', $(\'#message-'. $post_id .'\').val()); return false;" class="bold" value="'. $lang['EDIT_POST'] .'">
+					</div><hr>
+					<script type="text/javascript">
+					var bbcode = new BBCode("message-'. $post_id .'");
+					var ctrl = "ctrl";
+
+					bbcode.addTag("codeB", "b", null, "B", ctrl);
+					bbcode.addTag("codeI", "i", null, "I", ctrl);
+					bbcode.addTag("codeU", "u", null, "U", ctrl);
+					bbcode.addTag("codeS", "s", null, "S", ctrl);
+
+					bbcode.addTag("codeQuote", "quote", null, "Q", ctrl);
+					bbcode.addTag("codeImg", "img", null, "R", ctrl);
+					bbcode.addTag("codeUrl", "url", "/url", "", ctrl);
+					bbcode.addTag("codeUrl2", "url=", "/url", "W", ctrl);
+
+					bbcode.addTag("codeCode", "code", null, "K", ctrl);
+					bbcode.addTag("codeList",  "list", null, "L", ctrl);
+					bbcode.addTag("codeOpt", "*", "", "0", ctrl);
+					</script>
+				</form>';
+		}
+		$this->response['post_id'] = $post_id;
 		break;
 
 	default:

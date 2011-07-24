@@ -17,7 +17,6 @@ if (file_exists(BB_DISABLED))
 switch ($ajax->action)
 {
 	case 'view_post':
-	case 'view_message':
 		require(INC_DIR .'bbcode.php');
 	break;
 
@@ -72,7 +71,6 @@ class ajax_common
         'change_torrent'    => array('user'),
 
 		'view_post'         => array('guest'),
-		'view_message'      => array('guest'),
         'view_torrent'      => array('guest'),
         'user_register'     => array('guest'),
         'posts'             => array('guest'),
@@ -370,16 +368,6 @@ class ajax_common
 	function view_post ()
 	{
 		require(AJAX_DIR .'view_post.php');
-	}
-
-	function view_message ()
-	{
-		global $lang;
-
-		$message = (string) $this->request['message'];
-		if(!trim($message)) $this->ajax_die($lang['EMPTY_MESSAGE']);
-		$message = bbcode2html($message);
-        $this->response['html'] = $message;
 	}
 
 	function change_tor_status ()

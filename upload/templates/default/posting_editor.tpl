@@ -1,5 +1,16 @@
 <!-- IF QUICK_REPLY -->
 <!-- ELSE -->
+<script type="text/javascript">
+ajax.callback.posts = function(data){
+    if(data.message_html){
+	    $('#view_message').show();
+	    $('.view-message').html(data.message_html);
+	    initPostBBCode('.view-message');
+			var maxH   = screen.height - 490;
+		$('.view-message').css({ maxHeight: maxH });
+	}
+};
+</script>
 <div class="mrg_4" style="padding-left:2px;">
 <select name="fontFace">
 	<option style="font-family: Verdana" value="-1" selected="selected">{L_FONT_SEL}:</option>
@@ -82,7 +93,7 @@
 </div>
 
 	<textarea
-		class="editor mrg_4" name="message" rows="18" cols="92"
+		class="editor mrg_4" name="message" id="message" rows="18" cols="92"
 <!-- IF SHOW_VIRTUAL_KEYBOARD -->
 		onkeypress = "if(use_kb) return decode(event);"
 <!-- ENDIF -->
@@ -138,7 +149,7 @@
 	<div class="pad_4">{CAPTCHA_HTML}</div>
 	<input title="Alt+Enter" type="submit" name="preview" value="{L_PREVIEW}" id="post-preview-btn" onclick="$('#post-submit').remove();" />&nbsp;&nbsp;
 	<input title="Ctrl+Enter" type="submit" name="post" class="bold" value="{L_SUBMIT}" id="post-submit-btn" />
-    <input type="button" value="Быстрый предпросмотр" onclick="ajax.exec({ action: 'view_message', message: $('textarea.editor').val() });">
+    <input type="button" value="Быстрый предпросмотр" onclick="ajax.exec({ action: 'posts', type: 'view_message', message: $('textarea.editor').val()});">
     <div id="post-js-warn">Для отправки сообщений необходимo включить JavaScript</div>
 </div>
 
@@ -169,7 +180,7 @@ $(document).ready(function(){
 </script>
 
 <script type="text/javascript">
-var bbcode = new BBCode(document.post.message);
+var bbcode = new BBCode("message");
 var ctrl = "ctrl";
 
 bbcode.addTag("codeB", "b", null, "B", ctrl);
@@ -201,15 +212,6 @@ bbcode.addTag("codeAlign", function(e) { var v=e.value; e.selectedIndex=0; retur
 </script>
 <!-- ENDIF -->
 
-<script type="text/javascript">
-ajax.callback.view_message = function(data){
-    $('#view_message').show();
-    $('.view-message').html(data.html);
-    initPostBBCode('.view-message');
-		var maxH   = screen.height - 490;
-	$('.view-message').css({ maxHeight: maxH });
-};
-</script>
 <style type="text/css">
 .view-message { border: 1px #A5AFB4 solid; padding: 4px; margin: 6px; overflow: auto; }
 </style>

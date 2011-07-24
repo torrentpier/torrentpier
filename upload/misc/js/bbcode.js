@@ -1,5 +1,9 @@
 // BBCode control. (based on bbcode.js from http://forum.dklab.ru)
-function BBCode(textarea) { this.construct(textarea) }
+function BBCode(obj)
+{
+	textarea = document.getElementById(obj);
+	this.construct(textarea);
+}
 BBCode.prototype = {
 	VK_TAB:		 9,
 	VK_ENTER:	 13,
