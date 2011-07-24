@@ -2,13 +2,11 @@
 <!-- ELSE -->
 <script type="text/javascript">
 ajax.callback.posts = function(data){
-    if(data.message_html){
-	    $('#view_message').show();
+    $('#view_message').show();
 	    $('.view-message').html(data.message_html);
 	    initPostBBCode('.view-message');
 			var maxH   = screen.height - 490;
 		$('.view-message').css({ maxHeight: maxH });
-	}
 };
 </script>
 <div class="mrg_4" style="padding-left:2px;">
@@ -148,9 +146,41 @@ ajax.callback.posts = function(data){
 <div class="mrg_4 tCenter">
 	<div class="pad_4">{CAPTCHA_HTML}</div>
 	<input title="Alt+Enter" type="submit" name="preview" value="{L_PREVIEW}" />&nbsp;&nbsp;
-	<input title="Ctrl+Enter" type="submit" name="post" class="bold" value="{L_SUBMIT}" />
-	<input type="button" value="Быстрый предпросмотр" onclick="ajax.exec({ action: 'posts', type: 'view_message', message: $('textarea.editor').val()});">
+	<input onclick="submitted = true;" title="Ctrl+Enter" type="submit" name="post" class="bold" value="{L_SUBMIT}" />
+	<input type="button" value="Быстрый предпросмотр" onclick="ajax.exec({ action: 'posts', type: 'view_message', message: $('textarea#message').val()});">
 </div>
+
+<script type="text/javascript">
+var submitted = false;
+// Called before form submitting.
+function checkForm(form) {
+	var formErrors = false;
+	if (form.message.value.length < 2) {
+		formErrors = "{L_EMPTY_MESSAGE}";
+	}
+	if (formErrors) {
+		setTimeout(function() { alert(formErrors) }, 100);
+		return false;
+	}
+	<!-- IF QUICK_REPLY -->
+	<!-- IF $bb_cfg['use_ajax_posts'] && !IS_GUEST -->
+	if(form.message.value.length < 100 && submitted)
+	{
+		setTimeout(function() {
+			ajax.exec({
+				action: 'posts',
+				type: 'add',
+				message: $('textarea#message').val(),
+				topic_id: {TOPIC_ID}
+			});
+		}, 100);
+		return false;
+	}
+	<!-- ENDIF -->
+	<!-- ENDIF -->
+	return true;
+}
+</script>
 
 <script type="text/javascript">
 var bbcode = new BBCode("message");

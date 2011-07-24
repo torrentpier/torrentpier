@@ -295,19 +295,6 @@ BBCode.prototype = {
 
 }
 
-// Called before form submitting.
-function checkForm(form) {
-  var formErrors = false;
-  if (form.message.value.length < 2) {
-    formErrors = "Please enter the message.";
-  }
-  if (formErrors) {
-    setTimeout(function() { alert(formErrors) }, 100);
-    return false;
-  }
-  return true;
-}
-
 // Emulation of innerText for Mozilla.
 if (window.HTMLElement && window.HTMLElement.prototype.__defineSetter__) {
   HTMLElement.prototype.__defineSetter__("innerText", function (sText) {
