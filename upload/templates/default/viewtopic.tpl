@@ -359,7 +359,7 @@ function set_hid_chbox (id)
 </table><!--/pagination-->
 
 <!-- IF QUICK_REPLY -->
-<form action="{QR_POST_ACTION}" method="post" name="post" onsubmit="if(checkForm(this)){ dis_submit_btn(); }else{ return false; }">
+<form action="{QR_POST_ACTION}" method="post" name="post" onsubmit="return checkForm(this);">
 <input type="hidden" name="mode" value="reply" />
 <input type="hidden" name="t" value="{QR_TOPIC_ID}" />
 

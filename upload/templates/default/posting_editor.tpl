@@ -145,39 +145,12 @@ ajax.callback.posts = function(data){
 	</table>
 </div>
 
-<div class="mrg_4 tCenter hidden" id="post-buttons-block">
+<div class="mrg_4 tCenter">
 	<div class="pad_4">{CAPTCHA_HTML}</div>
-	<input title="Alt+Enter" type="submit" name="preview" value="{L_PREVIEW}" id="post-preview-btn" onclick="$('#post-submit').remove();" />&nbsp;&nbsp;
-	<input title="Ctrl+Enter" type="submit" name="post" class="bold" value="{L_SUBMIT}" id="post-submit-btn" />
-    <input type="button" value="Быстрый предпросмотр" onclick="ajax.exec({ action: 'posts', type: 'view_message', message: $('textarea.editor').val()});">
-    <div id="post-js-warn">Для отправки сообщений необходимo включить JavaScript</div>
+	<input title="Alt+Enter" type="submit" name="preview" value="{L_PREVIEW}" />&nbsp;&nbsp;
+	<input title="Ctrl+Enter" type="submit" name="post" class="bold" value="{L_SUBMIT}" />
+	<input type="button" value="Быстрый предпросмотр" onclick="ajax.exec({ action: 'posts', type: 'view_message', message: $('textarea.editor').val()});">
 </div>
-
-<script type="text/javascript">
-function dis_submit_btn ()
-{
-	$('#post-submit-btn').attr('disabled', 1);
-	//debounce('post-submit-btn', 3000);
-}
-
-function debounce (el_id, time_ms)
-{
-	var $el = $('#'+el_id);
-	if ( $el.attr('disabled') == false ) {
-		$el.attr('disabled', 1);
-		setTimeout(function(){ $el.attr('disabled', 0); }, time_ms);
-	}
-}
-
-$(document).ready(function(){
-	$('#post-submit-btn').click(function(event){
-		$('#post-submit-btn').after('<input id="post-submit" type="hidden" name="post" value="1" />');
-	});
-	$('#post-js-warn').hide();
-	$('#post-buttons-block').show();
-	$('#post-submit-btn').attr('disabled', 0);
-});
-</script>
 
 <script type="text/javascript">
 var bbcode = new BBCode("message");
