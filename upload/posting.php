@@ -786,9 +786,6 @@ $template->assign_vars(array(
 	'POSTING_TYPE_TITLE' => $page_title,
 	'POSTING_TOPIC_ID' => ($mode != 'newtopic') ? $topic_id : '',
 	'POSTING_TOPIC_TITLE' => ($mode != 'newtopic') ? wbr($post_info['topic_title']) : '',
-
-	'SHOW_VIRTUAL_KEYBOARD' => $bb_cfg['show_virtual_keyboard'],
-
 	'U_VIEW_FORUM' => append_sid("viewforum.php?" . POST_FORUM_URL . "=$forum_id"))
 );
 

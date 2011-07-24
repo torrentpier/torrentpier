@@ -113,8 +113,6 @@
  </td>
  <td class="vTop pad_0 w100"><!-- INCLUDE posting_editor.tpl --></td>
 </tr>
-
-<!-- IF SHOW_VIRTUAL_KEYBOARD --><!-- INCLUDE kb.tpl --><!-- ENDIF -->
 <!-- IF IN_PM -->
 <!-- ELSEIF LOGGED_IN -->
 <tr>

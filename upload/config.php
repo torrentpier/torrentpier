@@ -57,7 +57,7 @@ $bb_cfg['css_ver'] = 1;
 
 // Increase number of revision after update
 $bb_cfg['tp_version'] = '2.0.2';
-$bb_cfg['tp_release_state'] = 'TP II r131';
+$bb_cfg['tp_release_state'] = 'TP II r132';
 $bb_cfg['tp_release_date'] = '24-07-2011';
 
 $bb_cfg['board_disabled_msg'] = 'форум временно отключен'; // 'forums temporarily disabled'; // show this msg if board has been disabled via ON/OFF trigger
@@ -427,7 +427,6 @@ $bb_cfg['tidy_post']                   = true;
 $bb_cfg['spam_filter_file_path']       = ''; //BB_PATH .'/misc/spam_filter_words.txt';
 
 // Posting
-$bb_cfg['show_virtual_keyboard'] = true;
 $bb_cfg['prevent_multiposting']  = true;           // replace "reply" with "edit last msg" if user (not admin or mod) is last topic poster
 $bb_cfg['max_smilies']           = 10;             // Максимальное число смайлов в посте (0 - без ограничения)
 
