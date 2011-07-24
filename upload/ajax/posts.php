@@ -83,7 +83,7 @@ switch($this->request['type'])
 		$message = (string) $this->request['message'];
 		if(!trim($message)) $this->ajax_die($lang['EMPTY_MESSAGE']);
 		$message = bbcode2html($message);
-        $this->response['view_message'] = $message;
+        $this->response['message_html'] = $message;
 		break;
 
 	case 'edit':
