@@ -871,22 +871,6 @@ $template->assign_vars(array(
 	'S_HIDDEN_FORM_FIELDS' => $hidden_form_fields)
 );
 
-// Output the data to the template (for MAIL.RU Keyboard)
-$template->assign_vars(array(
-	'L_KB_TITLE' => $lang['KB_TITLE'],
-	'L_LAYOUT' => $lang['KB_RUS_KEYLAYOUT'],
-	'L_NONE' => $lang['KB_NONE'],
-	'L_TRANSLIT' => $lang['KB_TRANSLIT'],
-	'L_TRADITIONAL' => $lang['KB_TRADITIONAL'],
-	'L_RULES' => $lang['KB_RULES'],
-	'L_SHOW' => $lang['KB_SHOW'],
-	'L_CLOSE' =>  $lang['KB_CLOSE'],
-	'L_TRANSLIT_OPERA7' => $lang['KB_TRANSLIT_OPERA7'],
-	'L_TRANSLIT_MOZILLA' => $lang['KB_TRANSLIT_MOZILLA'],
-	'S_VISIBILITY_RULES' => 'position:absolute;visibility:hidden;',
-	'S_VISIBILITY_KEYB' => 'position:absolute;visibility:hidden;',
-	'S_VISIBILITY_OFF' => '')
-);
 //
 // Poll entry switch/output
 //

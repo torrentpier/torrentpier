@@ -307,6 +307,7 @@ $lang['POST_A_NEW_TOPIC'] = 'Post a new topic';
 $lang['POST_A_REPLY'] = 'Post a reply';
 $lang['POST_TOPIC_AS'] = 'Post topic as';
 $lang['EDIT_POST'] = 'Edit post';
+$lang['EDIT_POST_AJAX'] = "You can not edit the message with the status ";
 $lang['OPTIONS'] = 'Options';
 
 $lang['POST_ANNOUNCEMENT'] = 'Announcement';
@@ -1320,21 +1321,6 @@ $lang['BT_LOW_RATIO_FOR_DL'] = "With ratio <b>%s</b> you can't download torrents
 $lang['BT_RATIO_WARNING_MSG'] = 'If your ratio falls below %s, you will not be able to download Torrents! <a href="%s"><b>More about the rating.</b></a>';
 
 $lang['SEEDER_LAST_SEEN'] = 'Seeder not seen: <b>%s</b>';
-
-//
-// MAIL.RU Keyboard
-//
-$lang['KB_TITLE'] = 'Russian keyboard';
-$lang['KB_RUS_KEYLAYOUT'] = 'Layout: ';
-$lang['KB_NONE'] = 'None';
-$lang['KB_TRANSLIT'] = 'Translit';
-$lang['KB_TRADITIONAL'] = 'Traditional';
-$lang['KB_RULES'] = 'Using translit';
-$lang['KB_SHOW'] = 'Show keyboard (Make sure you\'re using Cyrillic codepage!)';
-$lang['KB_ABOUT'] = 'About';
-$lang['KB_CLOSE'] = 'Close';
-$lang['KB_TRANSLIT_MOZILLA'] = 'Select text you wish to translit and click \'Translit\'.';
-$lang['KB_TRANSLIT_OPERA7'] = 'Click here to translit your message.';
 
 $lang['NEED_TO_LOGIN_FIRST'] = 'You need to login first';
 $lang['ONLY_FOR_MOD'] = 'This option only for moderators';
