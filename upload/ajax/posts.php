@@ -286,7 +286,7 @@ switch($this->request['type'])
         $post_id = DB()->sql_nextid();
 		DB()->sql_query("INSERT INTO " . BB_POSTS_TEXT . " (post_id, post_text) VALUES ($post_id, '". DB()->escape($message) ."')");
 
-        update_post_stats('', $t_data, $t_data['forum_id'], $topic_id, $post_id, $userdata['user_id']);
+        update_post_stats('reply', $t_data, $t_data['forum_id'], $topic_id, $post_id, $userdata['user_id']);
 
 		add_search_words($post_id, stripslashes($message), stripslashes($t_data['topic_title']));
 	    update_post_html(array(
