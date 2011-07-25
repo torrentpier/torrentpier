@@ -505,7 +505,7 @@ CREATE TABLE `bb_captcha` (
   `cap_code` char(6) NOT NULL,
   `cap_expire` int(11) NOT NULL default '0',
   PRIMARY KEY  (`cap_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
