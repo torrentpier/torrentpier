@@ -28,6 +28,9 @@ if (!defined('BB_ROOT')) die(basename(__FILE__));
 //
 function language_select($default, $select_name = "language", $dirname="language")
 {
+	global $bb_cfg;
+	if(!$default) $default = $bb_cfg['default_lang'];
+
 	$dir = opendir(BB_ROOT . $dirname);
 
 	$lang = array();
