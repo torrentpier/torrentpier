@@ -1412,7 +1412,7 @@ class datastore_mysql extends datastore_common
 switch ($bb_cfg['datastore_type'])
 {
 	case 'memcache':
-		$datastore = new datastore_memcache($cfg['cache']['memcache']);
+		$datastore = new datastore_memcache($bb_cfg['cache']['memcache']);
 		break;
 
 	case 'sqlite':
@@ -1425,7 +1425,7 @@ switch ($bb_cfg['datastore_type'])
 		break;
 
 	case 'redis':
-		$datastore = new datastore_redis($cfg['cache']['redis']);
+		$datastore = new datastore_redis($bb_cfg['cache']['redis']);
 		break;
 
     case 'eaccelerator':
