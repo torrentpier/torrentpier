@@ -375,8 +375,7 @@ $sql = "
 	  u.user_avatar, u.user_avatar_type,
 	  u.user_opt,
 	  p.*,
-	  h.post_html, IF(h.post_html IS NULL, pt.post_text, NULL) AS post_text,
-	  pt.post_subject
+	  h.post_html, IF(h.post_html IS NULL, pt.post_text, NULL) AS post_text
 	FROM      ". BB_POSTS      ." p
 	LEFT JOIN ". BB_USERS      ." u  ON(u.user_id = p.poster_id)
 	LEFT JOIN ". BB_POSTS_TEXT ." pt ON(pt.post_id = p.post_id)
@@ -857,8 +856,6 @@ for($i = 0; $i < $total_posts; $i++)
 	//
 	// Parse message and sig
 	//
-	$post_subject = ( $postrow[$i]['post_subject'] != '' ) ? $postrow[$i]['post_subject'] : '';
-
 	$message = get_parsed_post($postrow[$i]);
 
 	$user_sig = ($bb_cfg['allow_sig'] && !$user->opt_js['h_sig'] && $postrow[$i]['user_sig']) ? $postrow[$i]['user_sig'] : '';
@@ -875,8 +872,6 @@ for($i = 0; $i < $total_posts; $i++)
 	//
 	if (count($orig_word))
 	{
-		$post_subject = preg_replace($orig_word, $replacement_word, $post_subject);
-
 		if ($user_sig)
 		{
 			$user_sig = str_replace('\"', '"', substr(@preg_replace('#(\>(((?>([^><]+|(?R)))*)\<))#se', "@preg_replace(\$orig_word, \$replacement_word, '\\0')", '>' . $user_sig . '<'), 1, -1));
@@ -971,7 +966,6 @@ for($i = 0; $i < $total_posts; $i++)
 		'POSTER_AVATAR'      => $poster_avatar,
 		'POST_NUMBER'        => ($i + $start + 1),
 		'POST_DATE'          => $post_date,
-		'POST_SUBJECT'       => $post_subject,
 		'MESSAGE'            => $message,
 		'SIGNATURE'          => $user_sig,
 		'EDITED_MESSAGE'     => $l_edited_by,

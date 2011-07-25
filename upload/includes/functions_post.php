@@ -219,7 +219,7 @@ function submit_post($mode, &$post_data, &$message, &$meta, &$forum_id, &$topic_
 		$post_id = DB()->sql_nextid();
 	}
 
-	$sql = ($mode != 'editpost') ? "INSERT INTO " . BB_POSTS_TEXT . " (post_id, post_subject, post_text) VALUES ($post_id, '$post_subject', '$post_message')" : "UPDATE " . BB_POSTS_TEXT . " SET post_text = '$post_message', post_subject = '$post_subject' WHERE post_id = $post_id";
+	$sql = ($mode != 'editpost') ? "INSERT INTO " . BB_POSTS_TEXT . " (post_id, post_text) VALUES ($post_id, '$post_message')" : "UPDATE " . BB_POSTS_TEXT . " SET post_text = '$post_message' WHERE post_id = $post_id";
 	if (!DB()->sql_query($sql))
 	{
 		message_die(GENERAL_ERROR, 'Error in posting', '', __LINE__, __FILE__, $sql);
@@ -721,8 +721,8 @@ function insert_post ($mode, $topic_id, $forum_id = '', $old_forum_id = '', $new
 	$post_id = DB()->sql_nextid();
 	$post_text = DB()->escape($post_text);
 
-	$post_text_columns = 'post_id,   post_subject,    post_text';
-	$post_text_values = "$post_id, '$post_subject', '$post_text'";
+	$post_text_columns = 'post_id,    post_text';
+	$post_text_values = "$post_id, '$post_text'";
 
 	DB()->query("INSERT INTO ". BB_POSTS_TEXT ." ($post_text_columns) VALUES ($post_text_values)");
 }
