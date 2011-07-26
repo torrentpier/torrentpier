@@ -11,7 +11,7 @@ ajax.callback.posts = function(data){
 </script>
 <div class="mrg_4" style="padding-left:2px;">
 <select name="fontFace">
-	<option style="font-family: Verdana" value="-1" selected="selected">{L_FONT_SEL}:</option>
+	<option style="font-family: Verdana" value="-1" selected="selected">{L_QR_FONT_SEL}:</option>
 	<option style="font-family: Courier" value="Courier">&nbsp;Courier</option>
 	<option style="font-family: 'Courier New'" value="'Courier New'">&nbsp;Courier New</option>
 	<option style="font-family: monospace" value="monospace">&nbsp;monospace</option>
@@ -28,7 +28,7 @@ ajax.callback.posts = function(data){
 </select>
 &nbsp;
 <select name="codeColor" class="text_color">
-	<option style="color: black; background: #fff;" value="black" selected="selected">{L_FONT_COLOR_SEL}:</option>
+	<option style="color: black; background: #fff;" value="black" selected="selected">{L_QR_COLOR_SEL}:</option>
 	<option style="color: darkred;" value="darkred">&nbsp;{L_COLOR_DARK_RED}</option>
 	<option style="color: brown;" value="brown">&nbsp;{L_COLOR_BROWN}</option>
 	<option style="color: #996600;" value="#996600">&nbsp;{L_COLOR_ORANGE}</option>
@@ -41,11 +41,11 @@ ajax.callback.posts = function(data){
 	<option style="color: blue;" value="blue">&nbsp;{L_COLOR_BLUE}</option>
 	<option style="color: darkblue;" value="darkblue">&nbsp;{L_COLOR_DARK_BLUE}</option>
 	<option style="color: indigo;" value="indigo">&nbsp;{L_COLOR_INDIGO}</option>
-	<option style="color: #006699;" value="#006699">&nbsp;{L_STEEL_BLUE}</option>
+	<option style="color: #006699;" value="#006699">&nbsp;{L_COLOR_STEEL_BLUE}</option>
 </select>
 &nbsp;
 <select name="codeSize" class="text_size">
-	<option value="12" selected="selected">{L_FONT_SIZE_SEL}:</option>
+	<option value="12" selected="selected">{L_QR_SIZE_SEL}:</option>
 	<option value="9" class="em">{L_FONT_SMALL}</option>
 	<option value="10">&nbsp;size=10</option>
 	<option value="11">&nbsp;size=11</option>
