@@ -118,7 +118,6 @@ switch ($mode)
 			'user_sig'         => true,
 			'user_occ'         => true,
 			'user_interests'   => true,
-			'user_avatar'      => true,
 			'user_avatar_type' => true,
 		);
 
@@ -137,6 +136,7 @@ switch ($mode)
 			SELECT
 				user_id,
 				user_level,
+				user_avatar,
 				$profile_fields_sql
 			FROM ". BB_USERS ."
 			WHERE user_id = $pr_user_id
@@ -534,7 +534,6 @@ foreach ($profile_fields as $field => $can_edit)
 		$tp_data['USER_SKYPE'] = $pr_data['user_skype'];
 		break;
 
-	case 'user_avatar':
 	case 'user_avatar_type':
 		if(isset($_POST['avatargallery']) && !$errors)
 		{
