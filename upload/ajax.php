@@ -1,7 +1,7 @@
 <?php
 
 define('IN_AJAX', true);
-$ajax =& new ajax_common();
+$ajax = new ajax_common();
 
 require('./common.php');
 
@@ -22,7 +22,7 @@ switch ($ajax->action)
 
 	case 'posts':
 		require(INC_DIR .'bbcode.php');
-	    require(INC_DIR .'functions_post.php');
+		require(INC_DIR .'functions_post.php');
 		require(INC_DIR .'functions_admin.php');
 	break;
 
@@ -30,17 +30,17 @@ switch ($ajax->action)
 	case 'mod_action':
 	case 'change_tor_status':
 	case 'gen_passkey';
-	    require(BB_ROOT .'attach_mod/attachment_mod.php');
+		require(BB_ROOT .'attach_mod/attachment_mod.php');
 		require(INC_DIR .'functions_torrent.php');
 	break;
 
-    case 'change_torrent':
-        require(BB_ROOT .'attach_mod/attachment_mod.php');
+	case 'change_torrent':
+		require(BB_ROOT .'attach_mod/attachment_mod.php');
 		require(INC_DIR .'functions_torrent.php');
 	break;
 
 	case 'user_register':
-	    require(INC_DIR .'functions_validate.php');
+		require(INC_DIR .'functions_validate.php');
 	break;
 }
 
@@ -61,19 +61,19 @@ class ajax_common
 	var $valid_actions = array(
 	//   ACTION NAME             AJAX_AUTH
 		'edit_user_profile' => array('admin'),
-        'change_user_rank'  => array('admin'),
-        'change_user_opt'   => array('admin'),
+		'change_user_rank'  => array('admin'),
+		'change_user_opt'   => array('admin'),
 
 		'change_tor_status' => array('mod'),
 		'mod_action'        => array('mod'),
 
-        'gen_passkey'       => array('user'),
-        'change_torrent'    => array('user'),
+		'gen_passkey'       => array('user'),
+		'change_torrent'    => array('user'),
 
 		'view_post'         => array('guest'),
-        'view_torrent'      => array('guest'),
-        'user_register'     => array('guest'),
-        'posts'             => array('guest'),
+		'view_torrent'      => array('guest'),
+		'user_register'     => array('guest'),
+		'posts'             => array('guest'),
 	);
 
 	var $action = null;
@@ -205,7 +205,6 @@ class ajax_common
 				$this->response['raw_output'] = $contents;
 			}
 		}
-
 
 		$response_js = bb_json_encode($this->response);
 

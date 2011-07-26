@@ -97,8 +97,7 @@ function prepare_message ($message)
 // Either in a window or inline
 function generate_smilies($mode)
 {
-	global $bb_cfg, $template, $lang, $images;
-	global $user;
+	global $bb_cfg, $template, $lang, $images, $user;
 
 	$inline_columns = 4;
 	$inline_rows = 7;
@@ -109,11 +108,12 @@ function generate_smilies($mode)
 		$user->session_start();
 	}
 
-    if (!$sql = CACHE('bb_cache')->get('smilies'))
+	if (!$sql = CACHE('bb_cache')->get('smilies'))
 	{
 		$sql = DB()->fetch_rowset("SELECT emoticon, code, smile_url FROM ". BB_SMILIES ." ORDER BY smilies_id");
 		CACHE('bb_cache')->set('smilies', $sql);
 	}
+
 	if ($sql)
 	{
 		$num_smilies = 0;
@@ -179,7 +179,6 @@ function generate_smilies($mode)
 
 			$template->assign_vars(array(
 				'PAGE_TITLE' => $lang['EMOTICONS'],
-				'L_EMOTICONS' => $lang['EMOTICONS'],
 				'S_SMILIES_COLSPAN' => $s_colspan,
 			));
 		}
@@ -906,9 +905,9 @@ function get_parsed_post ($postrow, $mode = 'full', $return_chars = 600)
 		return $postrow['post_html'];
 	}
 
-    $message = bbcode2html($postrow['post_text']);
+	$message = bbcode2html($postrow['post_text']);
 
-    // Posts cache
+	// Posts cache
 	if ($bb_cfg['use_posts_cache'])
 	{
 		DB()->shutdown['post_html'][] = array(

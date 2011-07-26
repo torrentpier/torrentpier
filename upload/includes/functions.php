@@ -79,12 +79,9 @@ function set_tracks ($cookie_name, &$tracking_ary, $tracks = null, $val = TIMENO
 			{
 				$tracking_ary[$key] = $val;
 			}
-			else
+			elseif ($curr_track_val < $user->data['user_lastvisit'])
 			{
-				if ($curr_track_val < $user->data['user_lastvisit'])
-				{
-					unset($tracking_ary[$key]);
-				}
+				unset($tracking_ary[$key]);
 			}
 		}
 	}
@@ -1808,17 +1805,19 @@ function obtain_word_list(&$orig_word, &$replacement_word)
 
 	if (!$bb_cfg['use_word_censor']) return;
 
-    if (!$sql = CACHE('bb_cache')->get('censored'))
+	if (!$sql = CACHE('bb_cache')->get('censored'))
 	{
 		$sql = DB()->fetch_rowset("SELECT word, replacement FROM ". BB_WORDS);
 		CACHE('bb_cache')->set('censored', $sql, 7200);
 	}
-    foreach($sql as $row)
-    {
-	    //$orig_word[] = '#(?<!\S)(' . str_replace('\*', '\S*?', preg_quote($row['word'], '#')) . ')(?!\S)#iu';
+
+	foreach($sql as $row)
+	{
+		//$orig_word[] = '#(?<!\S)(' . str_replace('\*', '\S*?', preg_quote($row['word'], '#')) . ')(?!\S)#iu';
 		$orig_word[] = '#(?<![\p{Nd}\p{L}_])(' . str_replace('\*', '[\p{Nd}\p{L}_]*?', preg_quote($row['word'], '#')) . ')(?![\p{Nd}\p{L}_])#iu';
 		$replacement_word[] = $row['replacement'];
-    }
+	}
+
 	return true;
 }
 
@@ -1832,25 +1831,6 @@ function smiley_sort ($a, $b)
 	return (strlen($a['code']) > strlen($b['code'])) ? -1 : 1;
 }
 
-//
-// This is general replacement for die(), allows templated
-// output in users (or default) language, etc.
-//
-// $msg_code can be one of these constants:
-//
-// GENERAL_MESSAGE : Use for any simple text message, eg. results
-// of an operation, authorisation failures, etc.
-//
-// GENERAL ERROR : Use for any error which occurs _AFTER_ the
-// common.php include and session code, ie. most errors in
-// pages/functions
-//
-// CRITICAL_MESSAGE : Used when basic config data is available but
-// a session may not exist, eg. banned users
-//
-// CRITICAL_ERROR : Used when config data cannot be obtained, eg
-// no database connection. Should _not_ be used in 99.5% of cases
-//
 function bb_die ($msg_text)
 {
 	if (defined('IN_AJAX'))
@@ -1862,8 +1842,7 @@ function bb_die ($msg_text)
 
 function message_die ($msg_code, $msg_text = '', $msg_title = '', $err_line = '', $err_file = '', $sql = '')
 {
-	global $DBS, $template, $bb_cfg, $theme, $lang, $nav_links, $gen_simple_header, $images;
-	global $userdata;
+	global $DBS, $template, $bb_cfg, $theme, $lang, $nav_links, $gen_simple_header, $images, $userdata;
 
 	if (defined('HAS_DIED'))
 	{
@@ -1969,18 +1948,11 @@ function message_die ($msg_code, $msg_text = '', $msg_title = '', $err_line = ''
 	}
 	else
 	{
-#		while (@ob_end_clean());
 		echo "<html>\n<body>\n". $msg_title ."\n<br /><br />\n". $msg_text ."</body>\n</html>";
 	}
 	exit;
 }
 
-//
-// This function is for compatibility with PHP 4.x's realpath()
-// function.  In later versions of PHP, it needs to be called
-// to do checks with some functions.  Older versions of PHP don't
-// seem to need this, so we'll just return the original value.
-// dougk_ff7 <October 5, 2002>
 function phpbb_realpath($path)
 {
 	return (!@function_exists('realpath') || !@realpath(INC_DIR . 'functions.php')) ? $path : @realpath($path);

@@ -1,16 +1,5 @@
 <?php
-/**
-*
-* @package attachment_mod
-* @version $Id: attachment_mod.php,v 1.6 2005/11/06 18:35:43 acydburn Exp $
-* @copyright (c) 2002 Meik Sievertsen
-* @license http://opensource.org/licenses/gpl-license.php GNU Public License
-*
-* Minimum Requirement: PHP 4.2.0
-*/
 
-/**
-*/
 if (!defined('IN_PHPBB'))
 {
 	die('Hacking attempt');
@@ -56,13 +45,6 @@ function attach_mod_get_lang($language_file)
 }
 
 /**
-* Include attachment mod language entries
-*/
-function include_attach_lang()
-{
-}
-
-/**
 * Get attachment mod configuration
 */
 function get_config()
@@ -71,8 +53,7 @@ function get_config()
 
 	$attach_config = array();
 
-	$sql = 'SELECT *
-		FROM ' . BB_ATTACH_CONFIG;
+	$sql = 'SELECT * FROM ' . BB_ATTACH_CONFIG;
 
 	if ( !($result = DB()->sql_query($sql)) )
 	{
@@ -99,10 +80,7 @@ if (!($attach_config = CACHE('bb_cache')->get('attach_config')))
 	CACHE('bb_cache')->set('attach_config', $attach_config, 86400);
 }
 
-// Please do not change the include-order, it is valuable for proper execution.
-// Functions for displaying Attachment Things
 include(BB_ROOT .'attach_mod/displaying.php');
-// Posting Attachments Class (HAVE TO BE BEFORE PM)
 include(BB_ROOT .'attach_mod/posting_attachments.php');
 
 if (!intval($attach_config['allow_ftp_upload']))
