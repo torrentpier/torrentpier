@@ -1880,7 +1880,7 @@ function message_die ($msg_code, $msg_text = '', $msg_title = '', $err_line = ''
 	{
 		if (!empty($DBS) && $sql_store)
 		{
-			$sql_error = DB()->sql_error();
+			$sql_error = $DBS->sql_error();
 			$debug_text .= "<br /><br />SQL Error : {$sql_error['code']}<br /><br />{$sql_error['message']}";
 		}
 		if ($sql_store)
@@ -1988,7 +1988,7 @@ function phpbb_realpath($path)
 
 function login_redirect ($url = '')
 {
-	redirect('login.php' .'?redirect='. (($url) ? $url : $_SERVER['REQUEST_URI']));
+	redirect('login.php?redirect='. (($url) ? $url : $_SERVER['REQUEST_URI']));
 }
 
 function meta_refresh($url, $time = 5)
@@ -2461,7 +2461,7 @@ function print_page ($args, $type = '', $mode = '')
 
 function caching_output ($enabled, $mode, $cache_var_name, $ttl = 300)
 {
-	if (!$enabled || !CACHE('tr_cache')->used)
+	if (!$enabled || !CACHE('bb_cache')->used)
 	{
 		return;
 	}
