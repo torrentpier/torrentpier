@@ -43,7 +43,7 @@ function user_avatar_delete($avatar_type, $avatar_file)
 	$avatar_file = basename($avatar_file);
 	if ( $avatar_type == USER_AVATAR_UPLOAD && $avatar_file != '' )
 	{
-		if ( @file_exists(BB_ROOT ('./' . $bb_cfg['avatar_path'] . '/' . $avatar_file)) )
+		if ( @file_exists(@phpbb_realpath('./' . $bb_cfg['avatar_path'] . '/' . $avatar_file)) )
 		{
 			@unlink('./' . $bb_cfg['avatar_path'] . '/' . $avatar_file);
 		}
@@ -68,7 +68,7 @@ function user_avatar_gallery($mode, &$errors, $avatar_filename, $avatar_category
 		return '';
 	}
 
-	if ( file_exists(BB_ROOT ($bb_cfg['avatar_gallery_path'] . '/' . $avatar_category . '/' . $avatar_filename)) && ($mode == 'editprofile') )
+	if ( file_exists(@phpbb_realpath($bb_cfg['avatar_gallery_path'] . '/' . $avatar_category . '/' . $avatar_filename)) && ($mode == 'editprofile') )
 	{
 		return array('user_avatar' => DB()->escape($avatar_category . '/' . $avatar_filename), 'user_avatar_type' => USER_AVATAR_GALLERY);
 	}
