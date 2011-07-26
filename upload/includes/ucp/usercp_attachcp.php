@@ -172,12 +172,7 @@ $s_hidden .= '<input type="hidden" name="sid" value="' . $userdata['session_id']
 // Assign Template Vars
 $template->assign_vars(array(
 	'PAGE_TITLE' => $lang['USER_ACP_TITLE'],
-	'L_FILENAME' => $lang['FILE_NAME'],
-	'L_FILECOMMENT' => $lang['FILE_COMMENT_CP'],
-	'L_SIZE' => $lang['SIZE_IN_KB'],
-
 	'USERNAME' => $profiledata['username'],
-
 	'S_USER_HIDDEN' => $s_hidden,
 	'S_MODE_ACTION'	=> append_sid(BB_ROOT ."profile.php?mode=attachcp"),
 	'S_MODE_SELECT' => $select_sort_mode,

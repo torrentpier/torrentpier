@@ -171,7 +171,7 @@ $lang['QUOTA_LIMIT_EXIST'] = 'The Quota Limit %s exist already.'; // Replace %s 
 // Attachments -> Control Panel
 $lang['CONTROL_PANEL_TITLE'] = 'File Attachment Control Panel';
 $lang['CONTROL_PANEL_EXPLAIN'] = 'Here you can view and manage all attachments based on Users, Attachments, Views etc...';
-$lang['FILE_COMMENT_CP'] = 'File Comment';
+$lang['FILECOMMENT'] = 'File Comment';
 
 // Control Panel -> Search
 $lang['SEARCH_WILDCARD_EXPLAIN'] = 'Use * as a wildcard for partial matches';
@@ -192,7 +192,7 @@ $lang['NUMBER_PMS_ATTACH'] = 'Total Number of Attachments in Private Messages';
 
 // Control Panel -> Attachments
 $lang['STATISTICS_FOR_USER'] = 'Attachment Statistics for %s'; // replace %s with username
-$lang['SIZE_IN_KB'] = 'Size (KB)';
+$lang['SIZE'] = 'Size (KB)';
 $lang['DOWNLOADS'] = 'Downloads';
 $lang['POST_TIME'] = 'Post Time';
 $lang['POSTED_IN_TOPIC'] = 'Posted in Topic';

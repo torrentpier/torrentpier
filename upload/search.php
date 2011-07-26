@@ -489,7 +489,6 @@ if ($post_mode)
 		  t.*,
 		  p.*,
 		  h.post_html, IF(h.post_html IS NULL, pt.post_text, NULL) AS post_text,
-		  pt.post_subject,
 		  IF(p.poster_id = $anon_id, p.post_username, u.username) AS username, u.user_id
 		FROM       $posts_tbl
 		INNER JOIN $topics_tbl     ON(t.topic_id = p.topic_id)
