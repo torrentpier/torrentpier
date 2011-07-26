@@ -5,7 +5,6 @@ function run_jobs($jobs) {
 
 	define('IN_CRON', true);
 
-	if (!defined('DBCHARSET')) define('DBCHARSET', 'latin1');
 	$sql = "SELECT cron_script
 			FROM " . BB_CRON ."
 			WHERE cron_id IN ($jobs)";

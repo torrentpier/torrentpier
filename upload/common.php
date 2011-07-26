@@ -13,8 +13,6 @@ if (!defined('IN_PHPBB') && !defined('IN_TRACKER')) define('IN_PHPBB', true);
 require(BB_ROOT .'config.php');
 require(BB_ROOT .'config_mods.php');
 
-if (!defined('DBCHARSET')) define('DBCHARSET', 'utf8');
-
 $server_protocol = ($bb_cfg['cookie_secure']) ? 'https://' : 'http://';
 $server_port = ($bb_cfg['server_port'] != 80) ? ':'. $bb_cfg['server_port'] : '';
 define('FORUM_PATH', $bb_cfg['script_path']);

@@ -9,6 +9,13 @@ if (!$tr_cfg['scrape'])
 	msg_die('Please disable SCRAPE!');
 }
 
+if($bb_cfg['announce_type'] == 'xbt')
+{
+	$url = $bb_cfg['announce_xbt'] . str_replace('/bt/scrape.php', '/scrape', $_SERVER['REQUEST_URI']);
+	header("Location: $url");
+	exit;
+}
+
 // Recover info_hash
 if (isset($_GET['?info_hash']) && !isset($_GET['info_hash']))
 {

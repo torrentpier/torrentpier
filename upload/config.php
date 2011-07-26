@@ -106,8 +106,26 @@ $bb_cfg['cache']['engines'] = array(
 // Available datastore types: memcache, sqlite, redis, eaccelerator, apc, xcache (default of mysql)
 $bb_cfg['datastore_type'] = 'filecache';
 
+// Server
+$bb_cfg['server_name'] = (!empty($_SERVER['SERVER_NAME'])) ? $_SERVER['SERVER_NAME'] : 'torrentpier.me';         // The domain name from which this board runs
+$bb_cfg['server_port'] = (!empty($_SERVER['SERVER_PORT'])) ? $_SERVER['SERVER_PORT'] : 80;                       // The port your server is running on
+$bb_cfg['script_path'] = '/';                      // The path where FORUM is located relative to the domain name
+$bb_cfg['sitename'] = 'TorrentPier II - Torrent Tracker (see $bb_cfg[\'sitename\'] in config.php)';               // Name of your site
+
+// Server load
+$bb_cfg['max_srv_load']      = 0;                  // 0 - disable
+$bb_cfg['tr_working_second'] = 0;                  // 0 - disable
+
+// Backup
+$bb_cfg['db_backup_shell_cmd']     = '';           // '/path/to/db_backup.sh 2>&1'
+$bb_cfg['site_backup_shell_cmd']   = '';
+
+// GZip
+$bb_cfg['gzip_compress'] = true;                   // compress output
+
 // Tracker
 $bb_cfg['announce_type']      = 'php';             // Тип анонсера, xbt или php
+$bb_cfg['announce_xbt']       = "http://{$bb_cfg['server_name']}:2710";
 $bb_cfg['announce_interval']  = 2400;              // Announce interval (default: 1800)
 $bb_cfg['passkey_key']        = 'uk';              // Passkey key name in GET request
 $bb_cfg['ignore_reported_ip'] = false;             // Ignore IP reported by client
@@ -247,23 +265,6 @@ $bb_cfg['cookie_secure'] = (!empty($_SERVER['HTTPS']) ? 1 : 0); # 0
 $bb_cfg['cookie_prefix'] = 'bb_';                  # 'bb_'
 
 define('COOKIE_DBG', 'bb_dbg');                    // debug cookie name
-
-// Server
-$bb_cfg['server_name'] = (!empty($_SERVER['SERVER_NAME'])) ? $_SERVER['SERVER_NAME'] : 'torrentpier.me';         // The domain name from which this board runs
-$bb_cfg['server_port'] = (!empty($_SERVER['SERVER_PORT'])) ? $_SERVER['SERVER_PORT'] : 80;                       // The port your server is running on
-$bb_cfg['script_path'] = '/';                      // The path where FORUM is located relative to the domain name
-$bb_cfg['sitename'] = 'TorrentPier II - Torrent Tracker (see $bb_cfg[\'sitename\'] in config.php)';               // Name of your site
-
-// Server load
-$bb_cfg['max_srv_load']      = 0;                  // 0 - disable
-$bb_cfg['tr_working_second'] = 0;                  // 0 - disable
-
-// Backup
-$bb_cfg['db_backup_shell_cmd']     = '';           // '/path/to/db_backup.sh 2>&1'
-$bb_cfg['site_backup_shell_cmd']   = '';
-
-// GZip
-$bb_cfg['gzip_compress'] = true;                   // compress output
 
 // Sessions
 $bb_cfg['session_update_intrv']    = 180;          // sec

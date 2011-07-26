@@ -557,11 +557,11 @@ function send_torrent_with_passkey ($filename)
 	}
 
 	// XBTT unique passkey
-	if($bb_cfg['announce_type'] == 'xbt')
+	if($bb_cfg['announce_type'] != 'xbt')
 	{
 		$info_hash = pack('H*', sha1(bencode($tor['info'])));
 		$passkey = substr('00000000'. dechex($userdata['user_id']), -8) . substr(sha1($bb_cfg['torrent_pass_private_key'] .' '. $passkey_val .' '. $userdata['user_id'] .' '. $info_hash), 0, 24);
-		$announce = preg_replace('@/a[^/]*$@i', "/$passkey$0", $ann_url);
+		$announce = $bb_cfg['announce_xbt'] .'/'. $passkey .'/announce';
 	}
 	else
 	{
