@@ -144,10 +144,10 @@ if ($bb_cfg['show_latest_news'] AND $news_forum_ids = $bb_cfg['latest_news_forum
 //
 // Ads
 //
-$ad_html = $ad_block_assignment = array();
-
 if ($bb_cfg['show_ads'])
 {
+	$ad_html = $ad_block_assignment = array();
+
 	$active_ads = DB()->fetch_rowset("
 		SELECT *
 		FROM ". BB_ADS ."
@@ -168,7 +168,6 @@ if ($bb_cfg['show_ads'])
 
 		$ad_html[$ad['ad_id']] = $ad['ad_html'];
 	}
+	$this->store('ads', $ad_html);
+	bb_update_config(array('active_ads' => serialize($ad_block_assignment)));
 }
-
-$this->store('ads', $ad_html);
-bb_update_config(array('active_ads' => serialize($ad_block_assignment)));

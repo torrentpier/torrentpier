@@ -533,6 +533,11 @@ $html = new html_common();
 $log_action = new log_action();
 $ads = new ads_common();
 
+// !!! Temporarily (??) 'cat_forums' always enqueued
+$datastore->enqueue(array(
+	'cat_forums',
+));
+
 // Cron
 if ((empty($_POST) && !defined('IN_ADMIN') && !defined('IN_AJAX') && !defined('IN_SERVICE') && !file_exists(CRON_RUNNING) && ($bb_cfg['cron_enabled'] || defined('START_CRON'))) || defined('FORCE_CRON'))
 {
