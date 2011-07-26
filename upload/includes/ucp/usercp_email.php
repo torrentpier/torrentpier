@@ -121,11 +121,8 @@ if ( $row = DB()->fetch_row($sql) )
 
 		$template->assign_vars(array(
 			'USERNAME' => $username,
-
 			'S_HIDDEN_FIELDS' => '',
 			'S_POST_ACTION' => append_sid("profile.php?mode=email&amp;" . POST_USERS_URL . "=$user_id"),
-
-			'L_MESSAGE_BODY_DESC' => $lang['EMAIL_MESSAGE_DESC'],
 		));
 
 		print_page('usercp_email.tpl');

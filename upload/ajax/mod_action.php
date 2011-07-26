@@ -2,8 +2,6 @@
 
 if (!defined('IN_AJAX')) die(basename(__FILE__));
 
-global $bb_cfg;
-
 global $userdata, $bb_cfg, $lang;
 
 $mode     = (string) $this->request['mode'];

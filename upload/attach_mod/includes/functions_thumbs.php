@@ -1,19 +1,5 @@
 <?php
-/**
-*
-* @package attachment_mod
-* @version $Id: functions_thumbs.php,v 1.3 2005/11/15 21:26:47 acydburn Exp $
-* @copyright (c) 2002 Meik Sievertsen
-* @license http://opensource.org/licenses/gpl-license.php GNU Public License
-*
-*/
 
-/**
-* All Attachment Functions needed to create Thumbnails
-*/
-
-/**
-*/
 if ( !defined('IN_PHPBB') )
 {
 	die('Hacking attempt');

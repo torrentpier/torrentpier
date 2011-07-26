@@ -4,12 +4,12 @@ $lang['RELEASE'] = 'Шаблоны для релизов';
 $lang['RELEASED'] = 'На своих раздачах';
 $lang['RELEASES'] = 'Релизы';
 
-$lang['BT_BACK'] = 'Назад';
-$lang['BT_BAD_FIELDS'] = 'Неверно заполнены поля';
-$lang['BT_FILL_FORM'] = 'Заполните форму для релиза';
-$lang['BT_NEW_RELEASE'] = 'Новый релиз';
-$lang['BT_NEXT'] = 'Продолжить';
-$lang['BT_OTHER'] = 'Другой';
+$lang['BACK'] = 'Назад';
+$lang['ERROR'] = 'Неверно заполнены поля';
+$lang['RELEASE_WELCOME'] = 'Заполните форму для релиза';
+$lang['NEW_RELEASE'] = 'Новый релиз';
+$lang['NEXT'] = 'Продолжить';
+$lang['OTHER'] = 'Другой';
 
 $lang['TPL']['AGE'] = 'Возраст';
 $lang['TPL']['ANNOTATION'] = 'Аннотация';

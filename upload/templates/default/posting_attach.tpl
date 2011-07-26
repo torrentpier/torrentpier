@@ -2,7 +2,7 @@
 <!--========================================================================-->
 
 <tr>
-	<th colspan="2" class="thHead">{L_ADD_ATTACH_TITLE}</th>
+	<th colspan="2" class="thHead">{L_ADD_ATTACHMENT_TITLE}</th>
 </tr>
 <tr>
 	<td class="pad_4"><b>{L_FILE_NAME}</b></td>
@@ -11,7 +11,7 @@
 		<tr>
 			<td class="pad_4">
 				<input type="file" name="fileupload" size="45" maxlength="{FILESIZE}" />
-				<p class="small nowrap">{L_ADD_ATTACH_EXPLAIN}</p>
+				<p class="small nowrap">{L_ADD_ATTACHMENT_EXPLAIN}</p>
 			</td>
 			<td class="med pad_4" style="padding-left: 12px;">{RULES}</td>
 		</tr>

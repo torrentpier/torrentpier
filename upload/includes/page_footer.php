@@ -12,7 +12,6 @@ if (!empty($template))
 		'TRANSLATION_INFO' => isset($lang['TRANSLATION_INFO']) ? $lang['TRANSLATION_INFO'] : '',
 		'SHOW_ADMIN_LINK'  => (IS_ADMIN && !defined('IN_ADMIN')),
 		'ADMIN_LINK_HREF'  => "admin/index.php",
-		'L_GOTO_ADMINCP'   => $lang['ADMIN_PANEL'],
 
 	));
 

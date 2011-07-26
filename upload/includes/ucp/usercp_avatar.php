@@ -1,25 +1,4 @@
 <?php
-/***************************************************************************
- *                             usercp_avatar.php
- *                            -------------------
- *   begin                : Saturday, Feb 13, 2001
- *   copyright            : (C) 2001 The phpBB Group
- *   email                : support@phpbb.com
- *
- *   $Id: usercp_avatar.php,v 1.8.2.24 2006/05/23 21:09:27 grahamje Exp $
- *
- *
- ***************************************************************************/
-
-/***************************************************************************
- *
- *   This program is free software; you can redistribute it and/or modify
- *   it under the terms of the GNU General Public License as published by
- *   the Free Software Foundation; either version 2 of the License, or
- *   (at your option) any later version.
- *
- *
- ***************************************************************************/
 
 if ( !defined('IN_PHPBB') )
 {
@@ -64,7 +43,7 @@ function user_avatar_delete($avatar_type, $avatar_file)
 	$avatar_file = basename($avatar_file);
 	if ( $avatar_type == USER_AVATAR_UPLOAD && $avatar_file != '' )
 	{
-		if ( @file_exists(@phpbb_realpath('./' . $bb_cfg['avatar_path'] . '/' . $avatar_file)) )
+		if ( @file_exists(BB_ROOT ('./' . $bb_cfg['avatar_path'] . '/' . $avatar_file)) )
 		{
 			@unlink('./' . $bb_cfg['avatar_path'] . '/' . $avatar_file);
 		}
@@ -89,7 +68,7 @@ function user_avatar_gallery($mode, &$errors, $avatar_filename, $avatar_category
 		return '';
 	}
 
-	if ( file_exists(@phpbb_realpath($bb_cfg['avatar_gallery_path'] . '/' . $avatar_category . '/' . $avatar_filename)) && ($mode == 'editprofile') )
+	if ( file_exists(BB_ROOT ($bb_cfg['avatar_gallery_path'] . '/' . $avatar_category . '/' . $avatar_filename)) && ($mode == 'editprofile') )
 	{
 		return array('user_avatar' => DB()->escape($avatar_category . '/' . $avatar_filename), 'user_avatar_type' => USER_AVATAR_GALLERY);
 	}

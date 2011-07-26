@@ -22,7 +22,6 @@ if ($profile_user_id == $userdata['user_id'])
 {
 	$template->assign_vars(array(
 		'EDIT_PROF'      => true,
-		'L_EDIT_PROF'    => $lang['EDIT_PROFILE'],
 		'EDIT_PROF_HREF' => append_sid("profile.php?mode=editprofile"),
 	));
 }
@@ -39,7 +38,7 @@ if (IS_ADMIN)
 	$template->assign_vars(array(
 		'SHOW_PASSKEY'   => true,
 		'S_GEN_PASSKEY'  => '<a href="#" onclick="ajax.exec({ action: \'gen_passkey\', user_id: '. $profile_user_id .' }); return false;">'. $lang['BT_GEN_PASSKEY_URL'] .'</a>',
-		'CAN_EDIT_RATIO' => IS_SUPER_ADMIN,
+		'CAN_EDIT_RATIO' => IS_ADMIN,
 	));
 }
 else
@@ -171,18 +170,6 @@ if (!IS_USER || $profile_user_id == $userdata['user_id'])
 {
 	$page_cfg['dl_links_user_id'] = $profile_user_id;
 }
-
-$template->assign_vars(array(
-	'U_TORRENT_PROFILE' => append_sid("profile.php?mode=viewprofile&amp;u=". $profiledata['user_id']) . '#torrent',
-	'L_TORRENT_PROFILE' => $lang['VIEW_TORRENT_PROFILE'],
-	'L_UP_TOTAL' 		=> $lang['PROFILE_UP_TOTAL'],
-	'L_DOWN_TOTAL' 		=> $lang['PROFILE_DOWN_TOTAL'],
-	'L_BONUS' 			=> $lang['PROFILE_BONUS'],
-	'L_TOTAL_RELEASED' 	=> $lang['PROFILE_RELEASED'],
-	'L_USER_RATIO' 		=> $lang['PROFILE_RATIO'],
-	'L_MAX_SPEED' 		=> $lang['PROFILE_MAX_SPEED'],
-	'L_IT_WILL_BE_DOWN' => $lang['PROFILE_IT_WILL_BE_DOWNLOADED'],
-));
 
 $sql = 'SELECT SUM(speed_up) as speed_up, SUM(speed_down) as speed_down
     FROM '. BB_BT_TRACKER .'

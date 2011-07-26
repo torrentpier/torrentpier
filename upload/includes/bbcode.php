@@ -172,7 +172,6 @@ function generate_smilies($mode)
 				$template->assign_block_vars('switch_smilies_extra', array());
 
 				$template->assign_vars(array(
-					'L_MORE_SMILIES' => $lang['MORE_EMOTICONS'],
 					'U_MORE_SMILIES' => append_sid("posting.php?mode=smilies"))
 				);
 			}

@@ -1,12 +1,4 @@
 <?php
-/**
-*
-* @package attachment_mod
-* @version $Id: functions_filetypes.php,v 1.1 2005/11/05 12:30:57 acydburn Exp $
-* @copyright (c) 2002 Meik Sievertsen
-* @license http://opensource.org/licenses/gpl-license.php GNU Public License
-*
-*/
 
 /**
 * All Attachment Functions needed to determine Special Files/Dimensions

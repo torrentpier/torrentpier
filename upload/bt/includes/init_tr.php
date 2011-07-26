@@ -3,10 +3,7 @@
 if (!defined('IN_TRACKER')) die(basename(__FILE__));
 
 // Exit if tracker is disabled
-if ($tr_cfg['off'])
-{
-	tr_die($tr_cfg['off_reason']);
-}
+if ($tr_cfg['off']) tr_die($tr_cfg['off_reason']);
 
 //
 // Functions

@@ -486,7 +486,7 @@ $(document).ready(function(){
 	<!-- IF EDIT_PROF -->
 	<form method="post" action="{EDIT_PROF_HREF}">
 	<p class="tCenter mrg_10">
-		<input type="submit" value="{L_EDIT_PROF}" class="main gen" />
+		<input type="submit" value="{L_EDIT_PROFILE}" class="main gen" />
 	</p>
 	</form>
 	<!-- ELSE -->

@@ -1,15 +1,5 @@
 <?php
-/**
-*
-* @package attachment_mod
-* @version $Id: displaying.php,v 1.4 2005/11/06 16:28:14 acydburn Exp $
-* @copyright (c) 2002 Meik Sievertsen
-* @license http://opensource.org/licenses/gpl-license.php GNU Public License
-*
-*/
 
-/**
-*/
 if ( !defined('IN_PHPBB') )
 {
 	die('Hacking attempt');
@@ -256,14 +246,6 @@ function display_attachments($post_id)
 
 		if (!$denied || IS_ADMIN)
 		{
-			// Some basic Template Vars
-			$template->assign_vars(array(
-				'L_DESCRIPTION'		=> $lang['DESCRIPTION'],
-				'L_DOWNLOAD'		=> $lang['DOWNLOAD'],
-				'L_FILENAME'		=> $lang['FILE_NAME'],
-				'L_FILESIZE'		=> $lang['FILESIZE'])
-			);
-
 			// define category
 			$image = FALSE;
 			$stream = FALSE;

@@ -22,7 +22,7 @@ $selects = array(
 	'SEL_VIDEO_CODECS' => array(
 		'DivX',
 		'XviD',
-		"{$lang['BT_OTHER']} MPEG4",
+		"{$lang['OTHER']} MPEG4",
 		'VPx',
 		'MPEG1',
 		'MPEG2',

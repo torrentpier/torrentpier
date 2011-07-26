@@ -40,7 +40,7 @@
 		<!-- ENDIF -->
 
 		<!-- IF SHOW_ADMIN_LINK -->
-		<div class="tiny tCenter"><a href="{ADMIN_LINK_HREF}">{L_GOTO_ADMINCP}</a></div>
+		<div class="tiny tCenter"><a href="{ADMIN_LINK_HREF}">{L_ADMIN_PANEL}</a></div>
 		<br />
 		<!-- ENDIF -->
 

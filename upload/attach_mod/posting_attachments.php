@@ -1,12 +1,10 @@
 <?php
-/**
-*
-* @package attachment_mod
-* @version $Id: posting_attachments.php,v 1.7 2005/11/15 20:20:43 acydburn Exp $
-* @copyright (c) 2002 Meik Sievertsen
-* @license http://opensource.org/licenses/gpl-license.php GNU Public License
-*
-*/
+
+if ( !defined('IN_PHPBB') )
+{
+	die('Hacking attempt');
+	exit;
+}
 
 define('FILENAME_PREFIX',         false);
 define('FILENAME_PREFIX_LENGTH',  6);
@@ -15,18 +13,6 @@ define('FILENAME_CRYPTIC',        false);
 define('FILENAME_CRYPTIC_LENGTH', 64);
 define('FILENAME_TRANSLITERATE',  true);
 
-/**
-*/
-if ( !defined('IN_PHPBB') )
-{
-	die('Hacking attempt');
-	exit;
-}
-
-/**
-* @package attachment_mod
-* Base Class for Attaching
-*/
 class attach_parent
 {
 	var $post_attach = false;
@@ -74,18 +60,7 @@ class attach_parent
 	function get_quota_limits($userdata_quota, $user_id = 0)
 	{
 		global $attach_config;
-
-		//
-		// Define Filesize Limits (Prepare Quota Settings)
-		// Priority: User, Group, Management
-		//
-		// This method is somewhat query intensive, but i think because this one is only executed while attaching a file,
-		// it does not make much sense to come up with an new db-entry.
-		// Maybe i will change this in a future version, where you are able to disable the User Quota Feature at all (using
-		// Default Limits for all Users/Groups)
-		//
-
-		// Change this to 'group;user' if you want to have first priority on group quota settings.
+		
 //		$priority = 'group;user';
 		$priority = 'user;group';
 
@@ -327,15 +302,6 @@ class attach_parent
 							array_unshift($this->attachment_thumbnail_list, $this->thumbnail);
 
 							$this->file_comment = '';
-
-							// This Variable is set to FALSE here, because the Attachment Mod enter Attachments into the
-							// Database in two modes, one if the id_list is 0 and the second one if post_attach is true
-							// Since post_attach is automatically switched to true if an Attachment got added to the filesystem,
-							// but we are assigning an id of 0 here, we have to reset the post_attach variable to FALSE.
-							//
-							// This is very relevant, because it could happen that the post got not submitted, but we do not
-							// know this circumstance here. We could be at the posting page or we could be redirected to the entered
-							// post. :)
 							$this->post_attach = FALSE;
 						}
 					}
@@ -592,7 +558,6 @@ class attach_parent
 						$this->attachment_id_list[$actual_element] = $actual_id_list[$actual_element];
 						$this->attachment_thumbnail_list[$actual_element] = $this->thumbnail;
 						$this->file_comment = '';
-
 					}
 				}
 
@@ -793,12 +758,7 @@ class attach_parent
 		$u_rules_id = $forum_id;
 
 		$template->assign_vars(array(
-			'L_ADD_ATTACHMENT_TITLE' => $lang['ADD_ATTACHMENT_TITLE'],
-			'L_POSTED_ATTACHMENTS' => $lang['POSTED_ATTACHMENTS'],
-			'L_FILE_NAME' => $lang['FILE_NAME'],
-			'L_FILE_COMMENT' => $lang['FILE_COMMENT'],
 			'RULES' => '<a href="'."misc.php?do=attach_rules&f=$u_rules_id".'" target="_blank">'. $lang['ALLOWED_EXTENSIONS_AND_SIZES'] .'</a>',
-
 			'ADD_ATTACH_HIDDEN_FIELDS' => $s_hidden,
 		));
 
@@ -829,11 +789,6 @@ class attach_parent
 		if ($this->add_attachment_body)
 		{
 			$template->assign_vars(array(
-				'TPL_ADD_ATTACHMENT'   => true,
-				'L_ADD_ATTACH_TITLE'   => $lang['ADD_ATTACHMENT_TITLE'],
-				'L_ADD_ATTACH_EXPLAIN' => $lang['ADD_ATTACHMENT_EXPLAIN'],
-				'L_ADD_ATTACHMENT'     => $lang['ADD_ATTACHMENT'],
-
 				'FILE_COMMENT' => htmlspecialchars($this->file_comment),
 				'FILESIZE'     => $attach_config['max_filesize'],
 				'FILENAME'     => htmlspecialchars($this->filename),
@@ -846,11 +801,6 @@ class attach_parent
 		{
 			$template->assign_vars(array(
 				'TPL_POSTED_ATTACHMENTS' => true,
-				'L_POSTED_ATTACHMENTS'   => $lang['POSTED_ATTACHMENTS'],
-				'L_UPDATE_COMMENT'       => $lang['UPDATE_COMMENT'],
-				'L_UPLOAD_NEW_VERSION'   => $lang['UPLOAD_NEW_VERSION'],
-				'L_DELETE_ATTACHMENT'    => $lang['DELETE_ATTACHMENT'],
-				'L_DELETE_THUMBNAIL'     => $lang['DELETE_THUMBNAIL'],
 			));
 
 			for ($i = 0; $i < sizeof($this->attachment_list); $i++)

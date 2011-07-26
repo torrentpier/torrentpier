@@ -1,12 +1,4 @@
 <?php
-/**
-*
-* @package attachment_mod
-* @version $Id: functions_delete.php,v 1.1 2005/11/05 12:23:33 acydburn Exp $
-* @copyright (c) 2002 Meik Sievertsen
-* @license http://opensource.org/licenses/gpl-license.php GNU Public License
-*
-*/
 
 /**
 * All Attachment Functions processing the Deletion Process

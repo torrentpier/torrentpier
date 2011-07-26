@@ -1,20 +1,6 @@
 <?php
-/**
-*
-* @package attachment_mod
-* @version $Id: functions_includes.php,v 1.3 2005/11/06 16:32:19 acydburn Exp $
-* @copyright (c) 2002 Meik Sievertsen
-* @license http://opensource.org/licenses/gpl-license.php GNU Public License
-*
-*/
 
-/**
-* These are functions called directly from phpBB2 Files
-*/
 
-/**
-* Include the FAQ-File (faq.php)
-*/
 function attach_faq_include($lang_file)
 {
 	global $bb_cfg, $faq, $attach_config;
@@ -31,25 +17,6 @@ function attach_faq_include($lang_file)
 	}
 }
 
-/**
-* Setup Basic Authentication
-*/
-// moved to auth
-
-/**
-* Setup Forum Authentication (admin/admin_forumauth.php)
-*/
-//admin/admin_forumauth.php
-
-
-/**
-* Setup Usergroup Authentication
-*/
-//admin/admin_ug_auth.php
-
-/**
-* Setup s_auth_can in viewforum and viewtopic (viewtopic.php/viewforum.php)
-*/
 function attach_build_auth_levels($is_auth, &$s_auth_can)
 {
 	global $lang, $attach_config, $forum_id;
@@ -453,7 +420,6 @@ function display_upload_attach_box_limits($user_id, $group_id = 0)
 	$template->assign_block_vars('switch_upload_limits', array());
 
 	$template->assign_vars(array(
-		'L_UACP'			=> $lang['UACP'],
 		'U_UACP'			=> BB_ROOT ."profile.php?mode=attachcp&amp;u=$user_id&amp;sid={$userdata['session_id']}",
 		'UPLOADED' 			=> sprintf($lang['USER_UPLOADED_PROFILE'], $user_uploaded),
 		'QUOTA' 			=> sprintf($lang['USER_QUOTA_PROFILE'], $user_quota),

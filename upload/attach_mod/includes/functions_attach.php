@@ -1,12 +1,4 @@
 <?php
-/**
-*
-* @package attachment_mod
-* @version $Id: functions_attach.php,v 1.4 2005/11/17 17:41:36 acydburn Exp $
-* @copyright (c) 2002 Meik Sievertsen
-* @license http://opensource.org/licenses/gpl-license.php GNU Public License
-*
-*/
 
 /**
 * All Attachment Functions needed everywhere

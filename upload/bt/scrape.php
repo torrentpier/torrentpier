@@ -4,10 +4,7 @@ define('IN_TRACKER', true);
 define('BB_ROOT', './../');
 require(BB_ROOT .'common.php');
 
-if (!$tr_cfg['scrape'])
-{
-	msg_die('Please disable SCRAPE!');
-}
+if (!$tr_cfg['scrape']) msg_die('Please disable SCRAPE!');
 
 if($bb_cfg['announce_type'] == 'xbt')
 {

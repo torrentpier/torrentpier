@@ -131,7 +131,6 @@ if ($show_dl_buttons)
 	';
 
 	$template->assign_vars(array(
-		'L_NONE'           => $lang['NONE'],
 		'DL_HIDDEN_FIELDS' => $dl_hidden_fields,
 		'S_DL_ACTION'      => append_sid("dl_list.php?". POST_TOPIC_URL ."=$topic_id"),
 	));

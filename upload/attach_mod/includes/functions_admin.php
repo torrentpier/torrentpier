@@ -1,12 +1,4 @@
 <?php
-/**
-*
-* @package attachment_mod
-* @version $Id: functions_admin.php,v 1.4 2006/04/22 16:21:09 acydburn Exp $
-* @copyright (c) 2002 Meik Sievertsen
-* @license http://opensource.org/licenses/gpl-license.php GNU Public License
-*
-*/
 
 /**
 * All Attachment Functions only needed in Admin

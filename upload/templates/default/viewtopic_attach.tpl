@@ -4,7 +4,7 @@
 
 <!-- BEGIN denyrow -->
 <fieldset class="attach">
-<legend>{ATTACHMENT_ICON} Attachment</legend>
+<legend>{ATTACHMENT_ICON} {L_ATTACHMENT}</legend>
 	<p class="attach_link denied">{postrow.attach.denyrow.L_DENIED}</p>
 </fieldset>
 
@@ -98,7 +98,7 @@
 
 <!-- BEGIN cat_images -->
 <fieldset class="attach">
-<legend>{ATTACHMENT_ICON} Attachment ({postrow.attach.cat_images.FILESIZE} {postrow.attach.cat_images.SIZE_VAR})</legend>
+<legend>{ATTACHMENT_ICON} {L_ATTACHMENT} ({postrow.attach.cat_images.FILESIZE} {postrow.attach.cat_images.SIZE_VAR})</legend>
 	<p class="tCenter pad_6">
 		<img src="{postrow.attach.cat_images.IMG_SRC}" id="attachImg" class="postImg" alt="img" border="0" />
 	</p>
@@ -114,7 +114,7 @@
 
 <!-- BEGIN cat_thumb_images -->
 <fieldset class="attach">
-<legend>{ATTACHMENT_ICON} Attachment Thumbnail</legend>
+<legend>{ATTACHMENT_ICON} {L_ATTACHMENT_THUMBNAIL}</legend>
 	<p class="attach_link">
 		<a href="{postrow.attach.cat_thumb_images.IMG_SRC}" target="_blank"><img src="{postrow.attach.cat_thumb_images.IMG_THUMB_SRC}" alt="{postrow.attach.cat_thumb_images.DOWNLOAD_NAME}" border="0" /></a>
 	</p>
@@ -134,7 +134,7 @@
 
 <!-- BEGIN attachrow -->
 <fieldset class="attach">
-<legend>{postrow.attach.attachrow.S_UPLOAD_IMAGE} Attachment</legend>
+<legend>{postrow.attach.attachrow.S_UPLOAD_IMAGE} {L_ATTACHMENT}</legend>
 	<p class="attach_link">
 		<a href="{postrow.attach.attachrow.U_DOWNLOAD_LINK}" {postrow.attach.attachrow.TARGET_BLANK}><b>{postrow.attach.attachrow.DOWNLOAD_NAME}</b></a>
 		<span class="attach_stats med">({postrow.attach.attachrow.FILESIZE} {postrow.attach.attachrow.SIZE_VAR}, {L_DOWNLOADED}: {postrow.attach.attachrow.DOWNLOAD_COUNT})</span>
@@ -257,7 +257,7 @@
 			<p>{postrow.attach.tor_reged.S_UPLOAD_IMAGE}</p><p><b>{L_DOWNLOAD}</b></p></a>
 			<!-- ENDIF -->
 			<p class="small">{postrow.attach.tor_reged.FILESIZE}</p>
-			<p style="padding-top: 6px;"><input id="tor-filelist-btn" type="button" class="lite" style="width: 120px;" value="Список файлов" /></p>
+			<p style="padding-top: 6px;"><input id="tor-filelist-btn" type="button" class="lite" value="{L_FILELIST}" /></p>
 		</td>
 	</tr>
 	<tr class="row1">
@@ -416,8 +416,9 @@ $(function(){
 }
 #tor-filelist i { color: #7A7A7A; padding-left: 4px; }
 #tor-filelist s { color: #0000FF; text-decoration: none; }
-#tor-filelist .b { font-weight: bold; }
 #tor-filelist .b > s { color: #800000; }
+#tor-filelist .b { font-weight: bold; padding-left: 20px; background: transparent url('images/folder.gif') no-repeat 3px 50%;}
+#tor-filelist ul li span { padding-left: 20px; background: transparent url('images/page.gif') no-repeat 3px 50%;}
 #tor-filelist .tor-root-dir { font-size: 13px; font-weight: bold; line-height: 12px; padding-left: 4px; }
 #tor-fl-treecontrol { padding: 2px 0 4px; }
 #tor-fl-treecontrol a { padding: 0 8px; font-size: 11px; text-decoration: none; }
@@ -428,10 +429,18 @@ $(function(){
 <div id="fl-tbl-wrap">
 	<table class="w100 borderless" cellspacing="0" cellpadding="0">
 	<tr>
-		<td><div id="tor-fl-treecontrol"><a href="#">Свернуть директории</a>&middot;<a href="#">Развернуть</a>&middot;<a href="#">Переключить</a></div></td>
+		<!--<td></td>-->
+		<td>
+		    <div id="tor-fl-treecontrol">
+			    <a href="#">{L_COLLAPSE}</a>&middot;
+				<a href="#">{L_EXPAND}</a>&middot;
+				<a href="#">{L_SWITCH}</a>
+			</div>
+		</td>
 	</tr>
 	<tr>
-		<td class="vTop" style="width: 100%;"><div id="tor-filelist" class="med"><span class="loading-1">загружается...</span></div></td>
+		<!--<td class="vTop"><div id="tor-fl-bgn">YOUR ADS BLOCK</div></td>-->
+		<td class="vTop" style="width: 100%;"><div id="tor-filelist" class="med"><span class="loading-1">{L_LOADING}</span></div></td>
 	</tr>
 	</table>
 </div>

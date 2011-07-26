@@ -1,10 +1,6 @@
 <?php
 
-if (!defined('BB_ROOT'))
-{
-	die(basename(__FILE__));
-}
-
+if (!defined('BB_ROOT')) die(basename(__FILE__));
 if (!$post_info) die('$post_info missing');
 
 require(DEFAULT_LANG_DIR .'lang_topic_templates.php');
@@ -84,7 +80,7 @@ if ($topic_tpl = DB()->fetch_row($sql))
 		require(INC_DIR .'topic_templates/tpl_selects.php');
 
 		$template->assign_vars(array(
-			'PAGE_TITLE'        => $lang['BT_NEW_RELEASE'],
+			'PAGE_TITLE'        => $lang['NEW_RELEASE'],
 			'FORUM_NAME'        => htmlCHR($post_info['forum_name']),
 			'S_ACTION'          => append_sid("posting.php?mode=newtopic&tpl=1&". POST_FORUM_URL .'='. $post_info['forum_id']),
 			'S_CANCEL_ACTION'   => append_sid(FORUM_URL . $post_info['forum_id']),
@@ -94,12 +90,7 @@ if ($topic_tpl = DB()->fetch_row($sql))
 
 			'REGULAR_TOPIC_BUTTON' => true, # (IS_MOD || IS_ADMIN),
 			'REGULAR_TOPIC_HREF'   => append_sid("posting.php?mode=newtopic&". POST_FORUM_URL .'='. $post_info['forum_id']),
-			'L_POST_REGULAR_TOPIC' => $lang['POST_REGULAR_TOPIC'],
 
-			'L_BACK'            => $lang['BT_BACK'],
-			'L_ERROR'           => $lang['BT_BAD_FIELDS'],
-			'L_NEXT'            => $lang['BT_NEXT'],
-			'L_RELEASE_WELCOME' => $lang['BT_FILL_FORM'],
 			'L_TITLE'           => $lang['TPL']['RELEASE_NAME'],
 			'L_TITLE_DESC'      => $lang['TPL']['RELEASE_NAME_DESC'],
 			'L_ORIGINAL_TITLE'  => $lang['TPL']['ORIGINAL_NAME'],

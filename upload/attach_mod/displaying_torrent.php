@@ -1,9 +1,8 @@
 <?php
 
-if (!defined('IN_PHPBB'))	die(basename(__FILE__));
+if (!defined('IN_PHPBB')) die(basename(__FILE__));
 
-global $bb_cfg, $t_data, $poster_id, $is_auth;
-global $dl_link_css, $dl_status_css;
+global $bb_cfg, $t_data, $poster_id, $is_auth, $dl_link_css, $dl_status_css;
 
 $change_peers_bgr_over = true;
 $bgr_class_1    = 'prow1';
@@ -134,11 +133,7 @@ if ($tor_auth)
 	$template->assign_vars(array(
 		'TOR_CONTROLS'  => true,
 		'TOR_ACTION'    => "torrent.php",
-
-		//torrent status mod
 		'TOR_STATUS'    => "torstatus.php",
-		//end torrent status mod
-
 		'TOR_ATTACH_ID' => $attach_id,
 	));
 
@@ -233,13 +228,10 @@ if ($tor_reged && $tor_info)
 			'DL_LINK_CLASS'   => (isset($bt_userdata['user_status'])) ? $dl_link_css[$bt_userdata['user_status']] : 'genmed',
 			'DL_TITLE_CLASS'  => (isset($bt_userdata['user_status'])) ? $dl_status_css[$bt_userdata['user_status']] : 'gen',
 			'FILESIZE'        => $tor_file_size,
-
 			'MAGNET'          => $tor_magnet,
-
 			'DOWNLOAD_COUNT'  => sprintf($lang['DOWNLOAD_NUMBER'], $download_count),
 			'REGED_TIME'      => bb_date($tor_info['reg_time']),
 			'REGED_DELTA'     => delta_time($tor_info['reg_time']),
-
 			'TORRENT_SIZE'    => humn_size($tor_size),
 			'COMPLETED'       => sprintf($lang['DOWNLOAD_NUMBER'], $tor_info['complete_count']),
 		));

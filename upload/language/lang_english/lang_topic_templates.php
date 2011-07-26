@@ -4,12 +4,12 @@ $lang['RELEASE'] = 'Release Templates';
 $lang['RELEASED'] = 'Released';
 $lang['RELEASES'] = 'Releases';
 
-$lang['BT_BACK'] = 'Back';
-$lang['BT_BAD_FIELDS'] = 'Invalid fields';
-$lang['BT_FILL_FORM'] = 'Pleae fill in the releae form';
-$lang['BT_NEW_RELEASE'] = 'New release';
-$lang['BT_NEXT'] = 'Continue';
-$lang['BT_OTHER'] = 'Other';
+$lang['BACK'] = 'Back';
+$lang['ERROR'] = 'Invalid fields';
+$lang['RELEASE_WELCOME'] = 'Pleae fill in the releae form';
+$lang['NEW_RELEASE'] = 'New release';
+$lang['NEXT'] = 'Continue';
+$lang['OTHER'] = 'Other';
 
 $lang['TPL']['AGE'] = 'Age';
 $lang['TPL']['ANNOTATION'] = 'Annotation';

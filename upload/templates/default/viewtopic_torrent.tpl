@@ -258,6 +258,7 @@
 		<!-- IF DL_BUT_CANCEL --><input type="submit" name="dl_set_cancel" value="{L_DL_CANCEL}" class="liteoption" /><!-- ENDIF -->
 	</form>
 	<!-- ENDIF -->
+	<!-- IF $bb_cfg['callseed'] --><form action="callseed.php?t={TOPIC_ID}" method="post"><input type="submit" value="{L_CALLSEED}" class="liteoption" />&nbsp;</form><!-- ENDIF -->
 	&nbsp;
 	</td>
 </tr>

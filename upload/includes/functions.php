@@ -2733,7 +2733,7 @@ function get_path_from_id ($id, $ext_id, $base_path, $first_div, $sec_div)
 	return ($base_path ? "$base_path/" : '') . ($id % $sec_div) .'/'. $id . ($ext ? ".$ext" : '');
 }
 
-function send_pm($user_id, $subject, $message)
+/*function send_pm($user_id, $subject, $message)
 {	global $userdata;
 
 	$subject = DB()->escape($subject);
@@ -2751,4 +2751,4 @@ function send_pm($user_id, $subject, $message)
 		user_last_privmsg = ". TIMENOW .",
 		user_newest_pm_id = $pm_id
 		WHERE user_id = $user_id");
-}
+}*/

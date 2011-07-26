@@ -1050,11 +1050,14 @@ $lang['VIEWED'] = 'Viewed';
 $lang['DOWNLOAD_NUMBER'] = '%d times'; // replace %d with count
 $lang['EXTENSION_DISABLED_AFTER_POSTING'] = 'The Extension \'%s\' was deactivated by an board admin, therefore this Attachment is not displayed.'; // used in Posts and PM's, replace %s with mime type
 
+$lang['ATTACHMENT'] = 'Attachments';
+$lang['ATTACHMENT_THUMBNAIL'] = 'Attachment Thumbnail';
+
 // Posting/PM -> Posting Attachments
 $lang['ADD_ATTACHMENT'] = 'Add Attachment';
 $lang['ADD_ATTACHMENT_TITLE'] = 'Add an Attachment';
 $lang['ADD_ATTACHMENT_EXPLAIN'] = 'If you do not want to add an Attachment to your Post, please leave the Fields blank';
-$lang['FILE_NAME'] = 'Filename';
+$lang['FILENAME'] = 'Filename';
 $lang['FILE_COMMENT'] = 'File Comment';
 
 // Posting/PM -> Posted Attachments
@@ -1277,7 +1280,7 @@ $lang['SEARCH_DL_COMPLETE_DOWNLOADS']   = 'Completed Downloads';
 $lang['SEARCH_DL_CANCEL'] = 'Canceled';
 $lang['CUR_DOWNLOADS'] = 'Current Downloads';
 $lang['CUR_UPLOADS']   = 'Current Uploads';
-$lang['SEARCH_USER_RELEASES'] = 'Find all current releases';
+$lang['SEARCH_RELEASES'] = 'Find all current releases';
 $lang['TOR_SEARCH_TITLE'] = 'Torrent search options';
 $lang['OPEN_TOPIC'] = 'Open topic';
 
@@ -1290,15 +1293,14 @@ $lang['ONLY_1_TOR_PER_POST'] = 'You can register only one torrent in one post';
 $lang['ONLY_1_TOR_PER_TOPIC'] = 'You can register only one torrent in one topic';
 $lang['VIEWING_USER_BT_PROFILE'] = 'Viewing torrent-profile :: %s'; // %s is username
 $lang['CUR_ACTIVE_DLS'] = 'Currently active torrents';
-$lang['VIEW_TORRENT_PROFILE'] = 'Torrent-profile';
 
-$lang['PROFILE_UP_TOTAL'] = 'Total uploaded';
-$lang['PROFILE_DOWN_TOTAL'] = 'Total downloaded';
-$lang['PROFILE_BONUS'] = 'Bonus';
-$lang['PROFILE_RELEASED'] = 'Total released';
-$lang['PROFILE_RATIO'] = 'Ratio';
-$lang['PROFILE_MAX_SPEED'] = 'Speed';
-$lang['PROFILE_IT_WILL_BE_DOWNLOADED'] = 'it will start to be considered after it will be downloaded';
+$lang['UP_TOTAL'] = 'Total uploaded';
+$lang['DOWN_TOTAL'] = 'Total downloaded';
+$lang['BONUS'] = 'Bonus';
+$lang['TOTAL_RELEASED'] = 'Total released';
+$lang['USER_RATIO'] = 'Ratio';
+$lang['MAX_SPEED'] = 'Speed';
+$lang['IT_WILL_BE_DOWN'] = 'it will start to be considered after it will be downloaded';
 
 $lang['CURR_PASSKEY'] = 'Current passkey:';
 $lang['SPMODE_FULL'] = 'Show peers in full details';
@@ -1542,3 +1544,10 @@ $lang['NOTICE'] = '!ATTENTION!';
 $lang['POWERED'] = 'Powered by <a target="_blank" href="http://torrentpier.me">TorrentPier</a> &copy; Meithar';
 $lang['DIVE'] = 'The forum is submitted on base <a target="_blank" href="http://www.phpbb.com">phpBB</a> &copy; phpBB Group';
 $lang['COPY'] = 'The site does not give electronic versions of products, and is engaged only in a collecting and cataloguing of the references sent and published at a forum by our readers. If you are the legal owner of any submitted material and do not wish that the reference to him{it} was in our catalogue, contact us and we shall immediately remove her. Files for an exchange on tracker are given by users of a site, and the administration does not bear the responsibility for their maintenance. The request to not fill in the files protected by copyrights, and also files of the illegal maintenance!';
+
+$lang['CALLSEED'] = 'Downloaded the call';
+// FILELIST
+$lang['FILELIST'] = 'Filelist';
+$lang['COLLAPSE'] = 'Collapse directory';
+$lang['EXPAND']   = 'Expand';
+$lang['SWITCH']   = 'Switch';
