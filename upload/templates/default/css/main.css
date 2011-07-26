@@ -835,7 +835,7 @@ a.tr-dl:visited { color: #5493B4; font-weight: normal; }
 /* ================================================================ *
      Images
  * ================================================================ */
-img.forum_icon  { width: 46px; height: 25px; }
+img.forum_icon  { width: auto; height: auto; }
 img.topic_icon  { width: 19px; height: 18px; }
 img.pm_box_icon { width: 28px; height: 25px; }
 img.icon1       { width: 12px; height: 9px;  }

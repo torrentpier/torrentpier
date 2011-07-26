@@ -100,7 +100,15 @@ $(document).ready(function(){
 
 <h1 class="pagetitle">{L_VIEWING_PROFILE}</h1>
 
-<p class="nav"><a href="{U_INDEX}">{T_INDEX}</a></p>
+<div class="nav">
+	<p class="floatL"><a href="{U_INDEX}">{T_INDEX}</a></p>
+	<!-- IF IS_ADMIN -->
+	<p class="floatR">
+	<a href="{U_MANAGE}">{L_PROFILE}</a> &middot; 
+	<a href="{U_PERMISSIONS}">{L_PERMISSIONS}</a>&nbsp;</p>
+	<!-- ENDIF -->
+	<div class="clear"></div>
+</div>
 
 <table class="user_profile bordered w100" cellpadding="0" border=1>
 <tr>
@@ -168,13 +176,13 @@ $(document).ready(function(){
 			<style type="text/css"> #user-opt label { display: block; } </style>
 			<legend>Юзеру <b style="color: darkred;">ЗАПРЕЩЕНО</b></legend>
 			<div class="tLeft" style="padding: 2px 6px 6px; display: block;">
-				<label><input type="checkbox" name="allow_avatar"     />показывать аватар</label>
-				<label><input type="checkbox" name="allow_sig"        />показывать подпись</label>
-				<label><input type="checkbox" name="allow_passkey"    />скачивать торренты</label>
-				<label><input type="checkbox" name="allow_pm"         />отправлять лс</label>
-				<label><input type="checkbox" name="allow_post"       />отправлять сообщения</label>
-				<label><input type="checkbox" name="allow_post_edit"  />редактировать сообщения</label>
-				<label><input type="checkbox" name="allow_topic"      />создавать темы</label>
+				<label><input type="checkbox" name="allow_avatar"/>показывать аватар</label>
+				<label><input type="checkbox" name="allow_sig"/>показывать подпись</label>
+				<label><input type="checkbox" name="allow_passkey"/>скачивать торренты</label>
+				<label><input type="checkbox" name="allow_pm"/>отправлять лс</label>
+				<label><input type="checkbox" name="allow_post"/>отправлять сообщения</label>
+				<label><input type="checkbox" name="allow_post_edit"/>редактировать сообщения</label>
+				<label><input type="checkbox" name="allow_topic"/>создавать темы</label>
 			</div>
 			</fieldset>
 			<div id="user-opt-save" class="hidden">
@@ -457,13 +465,15 @@ $(document).ready(function(){
 	<tr class="row2 tCenter">
 		<td colspan="4" class="pad_6">
 			<!-- IF SHOW_SEARCH_DL -->
-				<a href="{U_SEARCH_DL_WILL}">{L_SEARCH_DL_WILL_DOWNLOADS}</a>
+				<a href="{U_SEARCH_DL_WILL}" class="med">{L_SEARCH_DL_WILL_DOWNLOADS}</a>
 				::
-				<a href="{U_SEARCH_DL_DOWN}">{L_SEARCH_DL_DOWN}</a>
+				<a href="{U_SEARCH_DL_DOWN}" class="med">{L_SEARCH_DL_DOWN}</a>
 				::
-				<a href="{U_SEARCH_DL_COMPLETE}">{L_SEARCH_DL_COMPLETE}</a>
+				<a href="{U_SEARCH_DL_COMPLETE}" class="med">{L_SEARCH_DL_COMPLETE}</a>
 				::
-				<a href="{U_SEARCH_DL_CANCEL}">{L_SEARCH_DL_CANCEL}</a>
+				<a href="{U_SEARCH_DL_CANCEL}" class="med">{L_SEARCH_DL_CANCEL}</a>
+			<!-- ELSE -->
+			&nbsp;
 			<!-- ENDIF -->
 		</td>
 	</tr>
@@ -481,14 +491,6 @@ $(document).ready(function(){
 	</form>
 	<!-- ELSE -->
 	<br />
-	<!-- ENDIF -->
-
-	<!-- IF SHOW_ADMIN_OPTIONS -->
-	<div class="med tRight">
-			{L_MANAGE_USER}:&nbsp;
-			<a href="{U_MANAGE}">{L_MANAGE}</a>&nbsp;
-			<a href="{U_PERMISSIONS}">{L_PERMISSIONS}</a>
-	</div>
 	<!-- ENDIF -->
 
 	<div class="spacer_6"></div>

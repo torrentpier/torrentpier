@@ -1,11 +1,9 @@
 <?php
 
 if (!defined('BB_ROOT')) die(basename(__FILE__));
+if (defined('PAGE_HEADER_SENT')) return;
 
 // Parse and show the overall page header
-
-if (!defined('BB_ROOT')) die(basename(__FILE__));
-if (defined('PAGE_HEADER_SENT')) return;
 
 global $page_cfg, $userdata, $user, $ads, $bb_cfg, $template, $lang, $images;
 
@@ -211,7 +209,7 @@ $template->assign_vars(array(
 	'AUTOLOGIN_DISABLED' => !$bb_cfg['allow_autologin'],
 	'S_LOGIN_ACTION'     => BB_ROOT ."login.php",
 
-	'U_CUR_DOWNLOADS'    => PROFILE_URL . $userdata['user_id'] .'#torrent',
+	'U_CUR_DOWNLOADS'    => PROFILE_URL . $userdata['user_id'],
 	'U_FAQ'              => $bb_cfg['faq_url'],
 	'U_FORUM'            => "viewforum.php",
 	'U_GROUP_CP'         => "groupcp.php",

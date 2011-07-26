@@ -31,7 +31,7 @@ $lang['TIME'] = 'Time';
 $lang['HOURS'] = 'Hours';
 $lang['MESSAGE'] = 'Message';
 $lang['TORRENT'] = 'Torrent';
-$lang['MANAGE'] = 'Profile';
+$lang['PROFILE'] = 'Profile';
 $lang['PERMISSIONS'] = 'Permissions';
 
 $lang['1_DAY'] = '1 Day';
@@ -178,7 +178,6 @@ $lang['USER_WELCOME'] = 'Welcome,';
 //
 // Index page
 //
-$lang['INDEX'] = 'Index';
 $lang['HOME'] = 'Home';
 $lang['NO_POSTS'] = 'No Posts';
 $lang['NO_FORUMS'] = 'This board has no forums';

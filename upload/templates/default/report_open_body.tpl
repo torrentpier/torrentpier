@@ -40,7 +40,7 @@ function checked_toggle(form, status)
 
 <table cellpadding="2" cellspacing="2" border="0" width="80%" align="center">
 	<tr> 
-		<td class="nav"><a href="{U_INDEX}" class="nav">{L_INDEX}</a></td>
+		<td class="nav"><a href="{U_INDEX}" class="nav">{L_HOME}</a></td>
 	</tr>
 </table>
 

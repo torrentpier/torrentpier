@@ -12,7 +12,7 @@
 <!-- IF LOGGED_IN -->
 <div id="forums_top_links">
 	<div class="floatL">
-		<a href="{U_SEARCH_NEW}" class="med"><b>{L_SEARCH_NEW}</b></a> [{MINIPOST_IMG_NEW}] &#0183;
+		<a href="{U_SEARCH_NEW}" class="med"><b>{L_SEARCH_NEW}</b></a> &#0183;
 		<a href="{U_SEARCH_SELF_BY_LAST}" class="med">{L_SEARCH_SELF}</a> <a href="#search-my-posts" class="menu-root menu-alt1">{OPEN_MENU_IMG_ALT1}</a> &#0183;
 		<a href="{U_SEARCH_LATEST}" class="med">{L_SEARCH_LATEST}</a>
 	</div>

@@ -341,15 +341,16 @@ function OpenInEditor ($file, $line)
             <td width="40%">
          {L_USER_WELCOME} &nbsp;<a href="{U_PROFILE}"><b class="med">{THIS_USERNAME}</b></a>&nbsp; [ <a href="{U_LOGIN_LOGOUT}" onclick="return confirm('{L_CONFIRM_LOGOUT}');">{L_LOGOUT}</a> ]
       </td>
-	<!-- Report -->
+
 	<td align="center" nowrap="nowrap">
 		<!-- BEGIN switch_report_list -->
-		&nbsp;<a href="{U_REPORT_LIST}" class="mainmenu">{REPORT_LIST}</a>  &nbsp;&#0183;
+		<a href="{U_REPORT_LIST}" class="mainmenu">{REPORT_LIST}</a> &#0183;
 		<!-- END switch_report_list -->
 		<!-- BEGIN switch_report_list_new -->
-		&nbsp;<strong><a href="{U_REPORT_LIST}" class="mainmenu">{REPORT_LIST} &#0183; </a></strong>
+		<strong><a href="{U_REPORT_LIST}" class="mainmenu">{REPORT_LIST} &#0183; </a></strong>
 		<!-- END switch_report_list_new -->
-	<!-- Report [END] -->
+    </td>
+	
 	<td style="padding: 2px;">
 	<div>
 	<form id="quick-search" action="" method="post" onsubmit="
@@ -367,52 +368,58 @@ function OpenInEditor ($file, $line)
 	</form>
 	</div>
 	</td>
-      <td width="50%" class="tRight">
-		<!-- Report -->
-		<!-- BEGIN switch_report_general -->
-		<a href="{U_WRITE_REPORT}">{L_WRITE_REPORT}</a> &#0183;
-		<!-- END switch_report_general -->
-		<!-- Report [END] -->
-         <a href="{U_OPTIONS}" style="color:#993300"><b>{L_OPTIONS}</b></a> &#0183;
-		 <a href="{U_CUR_DOWNLOADS}">{L_CUR_DOWNLOADS}</a> <a href="#dls-menu" class="menu-root menu-alt1"><img src="images/menu_open_1.gif" class="menu-alt1" width="9" height="9" align="middle" alt="" /></a> &#0183;
-		 <a href="{U_SEARCH_SELF_BY_LAST}">{L_SEARCH_SELF}</a>
-      </td>
-         </tr>
-   </table>
+    <td width="50%" class="tRight">
+	    <!-- BEGIN switch_report_general -->
+	    <a href="{U_WRITE_REPORT}">{L_WRITE_REPORT}</a> &#0183;
+	    <!-- END switch_report_general -->
+	    <a href="{U_OPTIONS}"><b>{L_OPTIONS}</b></a> &#0183;
+	    <a href="{U_CUR_DOWNLOADS}">{L_PROFILE}</a> <a href="#dls-menu" class="menu-root menu-alt1">&#9660;</a> &#0183;
+	    <a href="{U_SEARCH_SELF_BY_LAST}">{L_SEARCH_SELF}</a>
+    </td>
+        </tr>
+    </table>
 </div>
 <!--/logout-->
-<style type="text/css">
-.menu-a { background: #FFFFFF; border: 1px solid #92A3A4; }
-.menu-a a { background: #EFEFEF; padding: 4px 10px 5px; margin: 1px; display: block; }
-</style>
+
 <div class="menu-sub" id="dls-menu">
-	<div class="menu-a bold nowrap">
-		<a class="med" href="{U_TRACKER}?rid={SESSION_USER_ID}#results">{L_CUR_UPLOADS}</a>
-		<a class="med" href="{U_SEARCH}?dlu={SESSION_USER_ID}&dlc=1">{L_SEARCH_DL_COMPLETE_DOWNLOADS}</a>
-		<a class="med" href="{U_SEARCH}?dlu={SESSION_USER_ID}&dlw=1">{L_SEARCH_DL_WILL_DOWNLOADS}</a>
-	</div>
+<table class="nowrap" cellspacing="1" cellpadding="4">
+<tr>
+    <th>&nbsp;</th>
+</tr>
+<tr>
+	<td>
+		<fieldset id="show-only">
+		<legend>{L_SEARCH}</legend>
+			<div class="bold nowrap pad_2">
+				<p class="mrg_4"><a class="med" href="{U_TRACKER}?rid={SESSION_USER_ID}#results">{L_CUR_UPLOADS}</a></p>
+				<p class="mrg_4"><a class="med" href="{U_CUR_DOWNLOADS}#torrent">{L_CUR_DOWNLOADS}</a></p>
+				<p class="mrg_4"><a class="med" href="{U_SEARCH}?dlu={SESSION_USER_ID}&dlc=1">{L_SEARCH_DL_COMPLETE_DOWNLOADS}</a></p>
+		        <p class="mrg_4"><a class="med" href="{U_SEARCH}?dlu={SESSION_USER_ID}&dlw=1">{L_SEARCH_DL_WILL_DOWNLOADS}</a></p>
+			</div>
+		</fieldset>
+	</td>
+</tr>
+</table>
 </div>
+
 <!-- ELSE -->
 
 <!--login form-->
 <div class="topmenu">
    <table width="100%" cellpadding="0" cellspacing="0">
    <tr>
-
-            <td class="tCenter pad_2">
-         <a href="{U_REGISTER}" id="register_link"><b>{L_REGISTER}</b></a>
-         &nbsp;&#0183;&nbsp;
-         <form action="{S_LOGIN_ACTION}" method="post">
-            {L_USERNAME}: <input type="text" name="login_username" size="12" tabindex="1" accesskey="l" />
-            {L_PASSWORD}: <input type="password" name="login_password" size="12" tabindex="2" />
-            <label title="{L_AUTO_LOGIN}"><input type="checkbox" name="autologin" value="1" tabindex="3" /> {L_REMEMBER}</label>&nbsp;
-            <input type="submit" name="login" value="{L_LOGIN}" tabindex="4" />
-         </form>
-         &nbsp;&#0183;&nbsp;
-         <a href="{U_SEND_PASSWORD}">{L_FORGOTTEN_PASSWORD}</a>
-      </td>
-         </tr>
-   </table>
+        <td class="tCenter pad_2">
+            <a href="{U_REGISTER}" id="register_link"><b>{L_REGISTER}</b></a> &#0183; 
+                <form action="{S_LOGIN_ACTION}" method="post">
+                    {L_USERNAME}: <input type="text" name="login_username" size="12" tabindex="1" accesskey="l" />
+                    {L_PASSWORD}: <input type="password" name="login_password" size="12" tabindex="2" />
+                    <label title="{L_AUTO_LOGIN}"><input type="checkbox" name="autologin" value="1" tabindex="3" />{L_REMEMBER}</label>&nbsp;
+                    <input type="submit" name="login" value="{L_LOGIN}" tabindex="4" />
+                </form> &#0183; 
+            <a href="{U_SEND_PASSWORD}">{L_FORGOTTEN_PASSWORD}</a>
+        </td>
+    </tr>
+    </table>
 </div>
 
 <!--/login form-->

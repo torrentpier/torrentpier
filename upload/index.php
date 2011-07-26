@@ -194,7 +194,7 @@ if (!$forums_count = count($cat_forums) AND $viewcat)
 
 $template->assign_vars(array(
 	'SHOW_FORUMS'           => $forums_count,
-	'PAGE_TITLE'            => $lang['INDEX'],
+	'PAGE_TITLE'            => $lang['HOME'],
 	'NO_FORUMS_MSG'         => ($only_new) ? $lang['NO_NEW_POSTS'] : $lang['NO_FORUMS'],
 
 	'TOTAL_TOPICS'          => sprintf($lang['POSTED_TOPICS_TOTAL'], $stats['topiccount']),

@@ -131,10 +131,7 @@ switch ($field)
 	case 'u_down_total':
 	case 'u_up_release':
 	case 'u_up_bonus':
-		if (!IS_SUPER_ADMIN)
-		{
-			$this->ajax_die($lang['ONLY_FOR_SUPER_ADMIN']);
-		}
+		if (!IS_ADMIN) $this->ajax_die($lang['NOT_ADMIN']);
 
 		$table = BB_BT_USERS;
 		$value = (float) str_replace(',', '.', $this->request['value']);
