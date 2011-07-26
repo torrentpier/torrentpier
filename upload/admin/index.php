@@ -314,7 +314,7 @@ else if( isset($_GET['pane']) && $_GET['pane'] == 'right' )
 						"LASTUPDATE" => bb_date($onlinerow_reg[$i]['user_session_time'], 'H:i'),
 						"IP_ADDRESS" => $reg_ip,
 
-						"U_WHOIS_IP" => "http://www.dnsstuff.com/tools/whois/?ip=$reg_ip",
+						"U_WHOIS_IP" => "http://ip-whois.net/ip_geo.php?ip=$reg_ip",
 						"U_USER_PROFILE" => append_sid("profile.php?mode=editprofile&amp;" . POST_USERS_URL . "=" . $onlinerow_reg[$i]['user_id']),
 					));
 				}
@@ -351,7 +351,7 @@ else if( isset($_GET['pane']) && $_GET['pane'] == 'right' )
 					"LASTUPDATE" => bb_date($onlinerow_guest[$i]['session_time'], 'H:i'),
 					"IP_ADDRESS" => $guest_ip,
 
-					"U_WHOIS_IP" => "http://www.dnsstuff.com/tools/whois/?ip=$guest_ip",
+					"U_WHOIS_IP" => "http://ip-whois.net/ip_geo.php?ip=$guest_ip",
 				));
 			}
 		}

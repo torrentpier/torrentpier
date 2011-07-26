@@ -7,13 +7,13 @@ require(BB_ROOT ."common.php");
 
 // Start session management
 $user->session_start(array('req_login' => true));
+$page_cfg['use_tablesorter'] = true;
 
 //
 // Output page header and load viewonline template
 //
 $template->assign_vars(array(
 	'PAGE_TITLE' => $lang['WHOSONLINE'],
-	'L_LAST_UPDATE' => $lang['LAST_UPDATED'],
 ));
 
 //
@@ -104,20 +104,22 @@ while ( $row = DB()->sql_fetchrow($result) )
 	}
 
 	$prev_ip = $row['session_ip'];
+	$user_ip = hexdec(substr($prev_ip, 0, 2)) . '.' . hexdec(substr($prev_ip, 2, 2)) . '.' . hexdec(substr($prev_ip, 4, 2)) . '.' . hexdec(substr($prev_ip, 6, 2));
 
 	if ( $view_online )
 	{
-		$row_class = !($$which_counter % 2) ? 'row1' : 'row2';
+		$row_class = !($which_counter % 2) ? 'row1' : 'row2';
 
 		$template->assign_block_vars("$which_row", array(
 			'ROW_CLASS' => $row_class,
 			'USERNAME' => $username,
 			'LASTUPDATE' => bb_date($row['session_time']),
-
+			'USERIP'     => $user_ip,
+			'U_WHOIS_IP' => "http://ip-whois.net/ip_geo.php?ip=$user_ip",
 			'U_USER_PROFILE' => ((isset($user_id)) ? append_sid("profile.php?mode=viewprofile&amp;" . POST_USERS_URL . '=' . $user_id) : ''),
 		));
 
-		$$which_counter++;
+		$which_counter++;
 	}
 }
 
@@ -161,6 +163,7 @@ else
 }
 
 $template->assign_vars(array(
+	'TOTAL_USERS_ONLINE' => $l_r_user_s + $registered_users + $l_h_user_s + $hidden_users + $l_g_user_s + $guest_users,
 	'TOTAL_REGISTERED_USERS_ONLINE' => sprintf($l_r_user_s, $registered_users) . sprintf($l_h_user_s, $hidden_users),
 	'TOTAL_GUEST_USERS_ONLINE' => sprintf($l_g_user_s, $guest_users))
 );

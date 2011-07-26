@@ -19,7 +19,7 @@
 			<table cellspacing="1" cellpadding="4" border="0" width="90%" align="center" class="bodyline">
 				<!-- BEGIN switch_subject -->
 				<tr>
-					<td class="row2" valign="top" width="25%"><span class="gen">{L_SUBJECT}:</span></td>
+					<td class="row2" valign="top" width="25%"><span class="gen">{L_REPORT_SUBJECT}:</span></td>
 					<td class="row2"><span class="gen">
 						<!-- BEGIN switch_url -->
 						<a href="{U_REPORT_SUBJECT}" class="gen"{S_REPORT_SUBJECT_TARGET}>
@@ -46,7 +46,7 @@
 					<td class="row2" width="25%"><span class="genmed">{L_REPORTED_BY}:</span></td>
 					<td class="row2"><span class="genmed">
 						<a href="{U_REPORT_AUTHOR}" class="genmed">{REPORT_AUTHOR}</a>&nbsp;
-						[ <a href="{U_REPORT_AUTHOR_PRIVMSG}" class="genmed">{L_SEND_PRIVMSG}</a> ]
+						[ <a href="{U_REPORT_AUTHOR_PRIVMSG}" class="genmed">{L_SEND_PRIVATE_MESSAGE}</a> ]
 					</span></td>
 				</tr>
 				<tr>

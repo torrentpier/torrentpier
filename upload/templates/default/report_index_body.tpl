@@ -35,7 +35,7 @@
 						<td class="report_delete" width="70%">
 							<a href="{switch_deleted_reports.deleted_reports.U_SHOW}" class="gen">{switch_deleted_reports.deleted_reports.TITLE}</a><br />
 							<span class="gensmall">
-								{L_BY} <a href="{switch_deleted_reports.deleted_reports.U_AUTHOR}" class="gensmall">{switch_deleted_reports.deleted_reports.AUTHOR}</a>
+								{L_REPORT_BY} <a href="{switch_deleted_reports.deleted_reports.U_AUTHOR}" class="gensmall">{switch_deleted_reports.deleted_reports.AUTHOR}</a>
 							</span>
 						</td>
 						<td class="report_delete" align="center" width="30%"><span class="gen">{switch_deleted_reports.deleted_reports.TYPE}</span></td>
@@ -47,7 +47,7 @@
 								<option value="" selected="selected">{L_ACTION}</option>
 								<option value="" disabled="disabled"></option>
 								<option value="delete">{L_DELETE}</option>
-								<optgroup label="{L_MARK}">
+								<optgroup label="{L_REPORT_MARK}">
 									<option value="clear" class="report_cleared">{L_STATUS_CLEARED}</option>
 									<option value="process" class="report_process">{L_STATUS_IN_PROCESS}</option>
 									<option value="open" class="report_open">{L_STATUS_OPEN}</option>
@@ -64,7 +64,7 @@
 			<table cellspacing="2" cellpadding="2" border="0" width="90%" align="center">
 				<tr> 
 					<td class="gensmall">
-						<a href="javascript:checked_toggle('report_list_deleted',true)" class="gensmall">{L_SELECT_ALL}</a> ::
+						<a href="javascript:checked_toggle('report_list_deleted',true)" class="gensmall">{L_MARK_ALL}</a> ::
 						<a href="javascript:checked_switch('report_list_deleted')" class="gensmall">{L_INVERT_SELECT}</a>
 					</td>
 				</tr>

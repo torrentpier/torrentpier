@@ -71,7 +71,7 @@ function checked_toggle(form, status)
 							</strong>
 							<!-- END switch_current -->
 							<span class="gensmall">
-								{L_BY} <a href="{report_modules.reports.U_AUTHOR}" class="gensmall">{report_modules.reports.AUTHOR}</a>
+								{L_REPORT_BY} <a href="{report_modules.reports.U_AUTHOR}" class="gensmall">{report_modules.reports.AUTHOR}</a>
 							</span>
 						</td>
 					</tr>
@@ -90,7 +90,7 @@ function checked_toggle(form, status)
 								<!-- BEGIN switch_global_delete_option -->
 								<option value="delete">{L_DELETE}</option>
 								<!-- END switch_global_delete_option -->
-								<optgroup label="{L_MARK}">
+								<optgroup label="{L_REPORT_MARK}">
 									<option value="clear" class="report_cleared">{L_STATUS_CLEARED}</option>
 									<option value="process" class="report_process">{L_STATUS_IN_PROCESS}</option>
 									<option value="open" class="report_open">{L_STATUS_OPEN}</option>
@@ -104,7 +104,7 @@ function checked_toggle(form, status)
 				</table>
 			</form>
 			<span class="gensmall">
-				<a href="javascript:checked_toggle('report_list',true)" class="gensmall">{L_SELECT_ALL}</a> ::
+				<a href="javascript:checked_toggle('report_list',true)" class="gensmall">{L_MARK_ALL}</a> ::
 				<a href="javascript:checked_switch('report_list')" class="gensmall">{L_INVERT_SELECT}</a>
 			</span>
 		</td>

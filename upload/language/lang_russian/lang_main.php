@@ -864,6 +864,8 @@ $lang['GUEST_USERS_ONLINE'] = 'Сейчас на форуме гостей: %d';
 $lang['GUEST_USERS_ZERO_ONLINE'] = 'Сейчас на форуме гостей: 0'; // There are 10 Guest users online
 $lang['GUEST_USER_ONLINE'] = 'Сейчас на форуме гостей: %d';
 $lang['NO_USERS_BROWSING'] = 'Этот форум сейчас никто не просматривает';
+$lang['ALL_USERS'] = 'Всех:';
+
 
 $lang['ONLINE_EXPLAIN'] = 'данные за последние пять минут';
 $lang['LAST_UPDATED'] = 'Последнее изменение';

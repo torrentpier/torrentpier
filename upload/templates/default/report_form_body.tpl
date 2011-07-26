@@ -27,7 +27,7 @@
 		</tr>
 		<!-- BEGIN switch_report_subject -->
 		<tr>
-			<td class="row1" width="25%"><span class="genmed">{L_SUBJECT}:</span></td>
+			<td class="row1" width="25%"><span class="genmed">{L_REPORT_SUBJECT}:</span></td>
 			<td class="row2"><span class="genmed">
 				<!-- BEGIN switch_url -->
 				<a href="{U_REPORT_SUBJECT}" class="genmed">
@@ -53,7 +53,7 @@
 		<!-- END switch_report_reasons -->
 		<!-- BEGIN switch_report_title -->
 		<tr>
-			<td class="row1" width="25%"><label for="title" class="genmed">{L_TITLE}:</label></td>
+			<td class="row1" width="25%"><label for="title" class="genmed">{L_POST_SUBJECT}:</label></td>
 			<td class="row2"><input type="text" class="post" name="title" id="title" size="50" maxlength="255" style="width: 100%" value="{REPORT_TITLE}" /></td>
 		</tr>
 		<!-- END switch_report_title -->

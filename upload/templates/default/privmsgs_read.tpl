@@ -54,8 +54,8 @@
 </tr>
 <tr>
  <td colspan="2" class="catBottom pad_4">
-		<input type="submit" name="save" value="{L_SAVE_MSG}" class="liteoption" />&nbsp;
-		<input type="submit" name="delete" value="{L_DELETE_MSG}" class="liteoption" />&nbsp;
+		<input type="submit" name="save" value="{L_SAVE_MESSAGE}" class="liteoption" />&nbsp;
+		<input type="submit" name="delete" value="{L_DELETE_MESSAGE}" class="liteoption" />&nbsp;
  </td>
 </tr>
 </tbody>

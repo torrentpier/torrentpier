@@ -96,9 +96,7 @@ if ($do == 'attach_rules')
 	}
 
 	$template->assign_vars(array(
-		'PAGE_TITLE' => $lang['ATTACH_RULES_TITLE'],
-		'L_RULES_TITLE' => $lang['ATTACH_RULES_TITLE'],
-		'L_EMPTY_GROUP_PERMS' => $lang['NOTE_USER_EMPTY_GROUP_PERMISSIONS'])
+		'PAGE_TITLE' => $lang['ATTACH_RULES_TITLE'])
 	);
 
 	if ($nothing)

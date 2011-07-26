@@ -583,5 +583,5 @@ $dl_status_css = array(
 // Show 'Board is disabled' message if needed.
 if ($bb_cfg['board_disable'] && !defined('IN_ADMIN') && !defined('IN_LOGIN'))
 {
-	message_die(GENERAL_MESSAGE, 'BOARD_DISABLE', 'Information');
+	message_die(GENERAL_MESSAGE, 'BOARD_DISABLE');
 }

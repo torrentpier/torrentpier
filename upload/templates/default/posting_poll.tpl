@@ -1,6 +1,6 @@
 <tbody class="pad_4">
 <tr>
-	<th colspan="2" class="thHead">{L_ADD_A_POLL}</th>
+	<th colspan="2" class="thHead">{L_ADD_POLL}</th>
 </tr>
 <tr>
 	<td><b>{L_POLL_QUESTION}</b></td>
@@ -24,16 +24,16 @@
 	</td>
 </tr>
 <tr>
-	<td><b>{L_POLL_LENGTH}</b></td>
+	<td><b>{L_POLL_FOR}</b></td>
 	<td>
 		<input type="text" name="poll_length" size="3" maxlength="3" value="{POLL_LENGTH}" />&nbsp;
 		<b>{L_DAYS}</b>&nbsp;&nbsp;
-		<span class="small">{L_POLL_LENGTH_EXPLAIN}</span>
+		<span class="small">{L_POLL_FOR_EXPLAIN}</span>
 	</td>
 </tr>
 <!-- BEGIN switch_poll_delete_toggle -->
 <tr>
-	<td><b>{L_POLL_DELETE}</b></td>
+	<td><b>{L_DELETE_POLL}</b></td>
 	<td><input type="checkbox" name="poll_delete" /></td>
 </tr>
 <!-- END switch_poll_delete_toggle -->

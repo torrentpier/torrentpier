@@ -91,7 +91,7 @@
 <!-- END listrow -->
 <!-- BEGIN switch_no_messages -->
 <tr>
-	<td class="row1 pad_10 tCenter" colspan="5">{L_NO_MESSAGES}</td>
+	<td class="row1 pad_10 tCenter" colspan="5">{L_NO_MESSAGES_FOLDER}</td>
 </tr>
 <!-- END switch_no_messages -->
 <tfoot>

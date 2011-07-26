@@ -10,7 +10,7 @@
 	<th>{L_IP_INFO}</th>
 </tr>
 <tr>
-	<td class="catTitle">{L_THIS_POST_IP}</td>
+	<td class="catTitle">{L_THIS_POSTS_IP}</td>
 </tr>
 <tr>
 	<td class="row1 pad_6">
@@ -19,19 +19,19 @@
 	</td>
 </tr>
 <tr>
-	<td class="catTitle">{L_OTHER_USERS}</td>
+	<td class="catTitle">{L_USERS_THIS_IP}</td>
 </tr>
 <!-- BEGIN userrow -->
 <tr>
 	<td class="{userrow.ROW_CLASS} pad_4 nowrap">
 		<p class="floatL" style="width: 160px;"><a href="{userrow.U_PROFILE}"><b>{userrow.USERNAME}</b></a></p>
 		<p class="floatL">[ {L_POSTS}: {userrow.POSTS} ]</p>
-		<p class="floatR">[ <a href="{userrow.U_SEARCHPOSTS}">{userrow.L_SEARCH_POSTS}</a> ]&nbsp;</p>
+		<p class="floatR">[ <a href="{userrow.U_SEARCHPOSTS}">{userrow.L_SEARCH_USER_POSTS_SHORT}</a> ]&nbsp;</p>
 	</td>
 </tr>
 <!-- END userrow -->
 <tr>
-	<td class="catTitle">{L_OTHER_IPS}</td>
+	<td class="catTitle">{L_OTHER_IP_THIS_USER}</td>
 </tr>
 <!-- BEGIN iprow -->
 <tr>
@@ -81,10 +81,10 @@
 		<tr>
 			<td class="nowrap">
 				<!-- IF SHOW_LEAVESHADOW -->
-				<p class="mrg_2"><input type="checkbox" name="move_leave_shadow" id="move_leave_shadow" /><label for="move_leave_shadow">{L_LEAVESHADOW}</label></p>
+				<p class="mrg_2"><input type="checkbox" name="move_leave_shadow" id="move_leave_shadow" /><label for="move_leave_shadow">{L_LEAVE_SHADOW_TOPIC}</label></p>
 				<!-- ENDIF -->
 				<!-- IF SHOW_BOT_OPTIONS -->
-				<p class="mrg_2"><input type="checkbox" name="insert_bot_msg" id="insert_bot_msg" checked="checked" /><label for="insert_bot_msg">{L_LEAVE_MSG}</label></p>
+				<p class="mrg_2"><input type="checkbox" name="insert_bot_msg" id="insert_bot_msg" checked="checked" /><label for="insert_bot_msg">{L_BOT_LEAVE_MSG_MOVED}</label></p>
 				<!-- ENDIF -->
 			</td>
 		</tr>

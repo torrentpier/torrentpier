@@ -1,28 +1,35 @@
 <p class="nav"><a href="{U_INDEX}">{T_INDEX}</a></p>
 
-<table class="forumline">
+<table class="forumline tablesorter">
+<thead>
 <tr>
-	<th>{L_USERNAME}</th>
-	<th>{L_LAST_UPDATE}</th>
+	<th width="35%" class="{sorter: 'text'}"><b class="tbs-text">{L_USERNAME}</b></th>
+	<th width="35%" class="{sorter: 'digit'}"><b class="tbs-text">{L_LAST_UPDATED}</b></th>
+	<!-- IF IS_ADMIN --><th width="30%" class="{sorter: 'digit'}"><b class="tbs-text">{L_IP_ADDRESS}</b></th><!-- ENDIF -->
 </tr>
 <tr>
-	<td class="catTitle" colspan="2">{TOTAL_REGISTERED_USERS_ONLINE}</td>
+	<td class="catTitle" colspan="3">{TOTAL_REGISTERED_USERS_ONLINE} | {L_ALL_USERS} {TOTAL_USERS_ONLINE}</td>
 </tr>
+</thead>
 <!-- BEGIN reg_user_row -->
 <tr class="{reg_user_row.ROW_CLASS}">
 	<td><a href="{reg_user_row.U_USER_PROFILE}" class="gen">{reg_user_row.USERNAME}</a></td>
 	<td class="tCenter">{reg_user_row.LASTUPDATE}</td>
+	<!-- IF IS_ADMIN --><td class="tCenter"><a href="{reg_user_row.U_WHOIS_IP}" class="gen" target="_blank">{reg_user_row.USERIP}</a></td><!-- ENDIF -->
 </tr>
 <!-- END reg_user_row -->
+<tfoot>
 <tr>
-	<td class="catTitle" colspan="2">{TOTAL_GUEST_USERS_ONLINE}</td>
+	<td class="catTitle" colspan="3">{TOTAL_GUEST_USERS_ONLINE}</td>
 </tr>
 <!-- BEGIN guest_user_row -->
 <tr class="{guest_user_row.ROW_CLASS}">
 	<td>{guest_user_row.USERNAME}</td>
 	<td class="tCenter">{guest_user_row.LASTUPDATE}</td>
+	<!-- IF SHOW_ADMIN_OPTIONS --><td class="tCenter"><a href="{guest_user_row.U_WHOIS_IP}" class="gen" target="_blank">{guest_user_row.USERIP}</a></td><!-- ENDIF -->
 </tr>
 <!-- END guest_user_row -->
+</tfoot>
 </table>
 
 <div class="spacer_4"></div>

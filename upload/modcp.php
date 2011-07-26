@@ -296,13 +296,10 @@ switch ($mode)
 				'TPL_MODCP_MOVE'   => true,
 				'SHOW_LEAVESHADOW' => $is_moderator,
 				'SHOW_BOT_OPTIONS' => $is_moderator,
-				'L_LEAVE_MSG'      => $lang['BOT_LEAVE_MSG_MOVED'],
 
 				'MESSAGE_TITLE' => $lang['CONFIRM'],
 				'MESSAGE_TEXT'  => $lang['CONFIRM_MOVE_TOPIC'],
 				'TOPIC_TITLES'  => join("\n</li>\n<li>\n", $topic_titles),
-
-				'L_LEAVESHADOW'   => $lang['LEAVE_SHADOW_TOPIC'],
 
 				'S_FORUM_SELECT'  => $forum_select,
 				'S_MODCP_ACTION'  => "modcp.php",
@@ -658,9 +655,6 @@ switch ($mode)
 
 		$template->assign_vars(array(
 			'TPL_MODCP_IP'   => true,
-			'L_THIS_POST_IP' => $lang['THIS_POSTS_IP'],
-			'L_OTHER_IPS'    => $lang['OTHER_IP_THIS_USER'],
-			'L_OTHER_USERS'  => $lang['USERS_THIS_IP'],
 			'IP'             => $ip_this_post,
 			'U_LOOKUP_IP'    => "modcp.php?mode=ip&amp;" . POST_POST_URL . "=$post_id&amp;" . POST_TOPIC_URL . "=$topic_id&amp;rdns=$ip_this_post&amp;sid=" . $userdata['session_id'])
 		);
@@ -739,7 +733,6 @@ switch ($mode)
 					'ROW_CLASS'      => !($i % 2) ? 'row4' : 'row5',
 					'USERNAME'       => wbr($username),
 					'POSTS'          => $row['postings'],
-					'L_SEARCH_POSTS' => $lang['SEARCH_USER_POSTS_SHORT'],
 					'U_PROFILE'      => ($id == ANONYMOUS) ? "modcp.php?mode=ip&amp;p=$post_id&amp;t=$topic_id" : PROFILE_URL . $id,
 					'U_SEARCHPOSTS'  => "search.php?search_author=1&amp;uid=$id",
 				));

@@ -114,7 +114,7 @@ function set_hid_chbox (id)
 		</td>
 		<!-- IF SELECT_PPP -->
 		<td class="med" style="padding: 0px 4px 2px 4px;">|</td>
-		<td class="small nowrap" style="padding: 0px 0px 0px 0px;">{L_SELECT_PPP}</td>
+		<td class="small nowrap" style="padding: 0px 0px 0px 0px;">{L_SELECT_POSTS_PER_PAGE}</td>
 		<td class="small nowrap" style="padding: 0px 0px 0px 3px;">
 			<form id="ppp" action="{PAGE_URL_PPP}" method="post">{SELECT_PPP}</form>
 		</td>

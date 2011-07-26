@@ -49,16 +49,6 @@ $tracking_forums = get_tracks('forum');
 // Start session management
 $user->session_start();
 
-// Quick Reply
-$template->assign_vars(array(
-	'L_FONT_SEL'         => $lang['QR_FONT_SEL'],
-	'L_FONT_COLOR_SEL'   => $lang['QR_COLOR_SEL'],
-	'L_FONT_SIZE_SEL'    => $lang['QR_SIZE_SEL'],
-	'L_STEEL_BLUE'       => $lang['COLOR_STEEL_BLUE'],
-	'L_COLOR_GRAY'       => $lang['COLOR_GRAY'],
-	'L_COLOR_DARK_GREEN' => $lang['COLOR_DARK_GREEN'],
-));
-
 // What auth type do we need to check?
 $is_auth = array();
 switch ($mode)
@@ -812,58 +802,9 @@ $template->assign_vars(array(
 	'CAPTCHA_HTML' => (IS_GUEST) ? CAPTCHA()->get_html() : '',
 	'SUBJECT' => $subject,
 	'MESSAGE' => $message,
-
-	'L_SUBJECT' => $lang['SUBJECT'],
-	'L_MESSAGE_BODY' => $lang['MESSAGE_BODY'],
-	'L_CONFIRM_DELETE' => $lang['CONFIRM_DELETE'],
-	'L_DISABLE_BBCODE' => $lang['DISABLE_BBCODE_POST'],
-	'L_DISABLE_SMILIES' => $lang['DISABLE_SMILIES_POST'],
-	'L_NOTIFY_ON_REPLY' => $lang['NOTIFY'],
-	'L_DELETE_POST' => $lang['DELETE_POST'],
-	'L_UPDATE_POST_TIME' => $lang['UPDATE_POST_TIME'],
-
-	'L_BBCODE_B_HELP' => $lang['BBCODE_B_HELP'],
-	'L_BBCODE_I_HELP' => $lang['BBCODE_I_HELP'],
-	'L_BBCODE_U_HELP' => $lang['BBCODE_U_HELP'],
-	'L_BBCODE_Q_HELP' => $lang['BBCODE_Q_HELP'],
-	'L_BBCODE_C_HELP' => $lang['BBCODE_C_HELP'],
-	'L_BBCODE_L_HELP' => $lang['BBCODE_L_HELP'],
-	'L_BBCODE_O_HELP' => $lang['BBCODE_O_HELP'],
-	'L_BBCODE_P_HELP' => $lang['BBCODE_P_HELP'],
-	'L_BBCODE_W_HELP' => $lang['BBCODE_W_HELP'],
-	'L_BBCODE_A_HELP' => $lang['BBCODE_A_HELP'],
-	'L_BBCODE_S_HELP' => $lang['BBCODE_S_HELP'],
-	'L_BBCODE_F_HELP' => $lang['BBCODE_F_HELP'],
-	'L_EMPTY_MESSAGE' => $lang['EMPTY_MESSAGE'],
-
-	'L_FONT_COLOR' => $lang['FONT_COLOR'],
-	'L_COLOR_DEFAULT' => $lang['COLOR_DEFAULT'],
-	'L_COLOR_DARK_RED' => $lang['COLOR_DARK_RED'],
-	'L_COLOR_RED' => $lang['COLOR_RED'],
-	'L_COLOR_ORANGE' => $lang['COLOR_ORANGE'],
-	'L_COLOR_BROWN' => $lang['COLOR_BROWN'],
-	'L_COLOR_YELLOW' => $lang['COLOR_YELLOW'],
-	'L_COLOR_GREEN' => $lang['COLOR_GREEN'],
-	'L_COLOR_OLIVE' => $lang['COLOR_OLIVE'],
-	'L_COLOR_CYAN' => $lang['COLOR_CYAN'],
-	'L_COLOR_BLUE' => $lang['COLOR_BLUE'],
-	'L_COLOR_DARK_BLUE' => $lang['COLOR_DARK_BLUE'],
-	'L_COLOR_INDIGO' => $lang['COLOR_INDIGO'],
-	'L_COLOR_VIOLET' => $lang['COLOR_VIOLET'],
-	'L_COLOR_WHITE' => $lang['COLOR_WHITE'],
-	'L_COLOR_BLACK' => $lang['COLOR_BLACK'],
-
-	'L_FONT_SIZE' => $lang['FONT_SIZE'],
-	'L_FONT_TINY' => $lang['FONT_TINY'],
-	'L_FONT_SMALL' => $lang['FONT_SMALL'],
-	'L_FONT_NORMAL' => $lang['FONT_NORMAL'],
-	'L_FONT_LARGE' => $lang['FONT_LARGE'],
-	'L_FONT_HUGE' => $lang['FONT_HUGE'],
-
-	'L_STYLES_TIP' => $lang['STYLES_TIP'],
-
+	
 	'U_VIEWTOPIC' => ( $mode == 'reply' ) ? append_sid("viewtopic.php?" . POST_TOPIC_URL . "=$topic_id&amp;postorder=desc") : '',
-
+	
 	'S_NOTIFY_CHECKED' => ( $notify_user ) ? 'checked="checked"' : '',
 	'S_TYPE_TOGGLE' => $topic_type_toggle,
 	'S_TOPIC_ID' => $topic_id,
@@ -877,16 +818,6 @@ $template->assign_vars(array(
 if( ( $mode == 'newtopic' || ( $mode == 'editpost' && $post_data['edit_poll']) ) && $is_auth['auth_pollcreate'] )
 {
 	$template->assign_vars(array(
-		'L_ADD_A_POLL' => $lang['ADD_POLL'],
-		'L_ADD_POLL_EXPLAIN' => $lang['ADD_POLL_EXPLAIN'],
-		'L_POLL_QUESTION' => $lang['POLL_QUESTION'],
-		'L_POLL_OPTION' => $lang['POLL_OPTION'],
-		'L_ADD_OPTION' => $lang['ADD_OPTION'],
-		'L_POLL_LENGTH' => $lang['POLL_FOR'],
-		'L_DAYS' => $lang['DAYS'],
-		'L_POLL_LENGTH_EXPLAIN' => $lang['POLL_FOR_EXPLAIN'],
-		'L_POLL_DELETE' => $lang['DELETE_POLL'],
-
 		'POLL_TITLE' => @$poll_title,
 		'POLL_LENGTH' => @$poll_length)
 	);
@@ -902,7 +833,6 @@ if( ( $mode == 'newtopic' || ( $mode == 'editpost' && $post_data['edit_poll']) )
 		{
 			$template->assign_block_vars('poll_option_rows', array(
 				'POLL_OPTION' => str_replace('"', '&quot;', $option_text),
-
 				'S_POLL_OPTION_NUM' => $option_id)
 			);
 		}

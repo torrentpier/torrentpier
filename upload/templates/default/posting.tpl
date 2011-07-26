@@ -131,7 +131,7 @@
 		<!-- IF SHOW_NOTIFY_CHECKBOX -->
 		<tr>
 			<td><input type="checkbox" id="notify" name="notify" {S_NOTIFY_CHECKED} /></td>
-			<td><label for="notify">{L_NOTIFY_ON_REPLY}</label></td>
+			<td><label for="notify">{L_NOTIFY}</label></td>
 		</tr>
 		<!-- ENDIF -->
 		</table>

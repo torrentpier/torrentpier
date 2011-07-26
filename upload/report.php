@@ -199,10 +199,7 @@ if (isset($report_module))
 		'L_WRITE_REPORT' => $report_module->lang['WRITE_REPORT'],
 		'L_WRITE_REPORT_EXPLAIN' => $report_module->lang['WRITE_REPORT_EXPLAIN'],
 		'REPORT_TITLE' => (!method_exists($report_module, 'subject_obtain') && isset($report_title)) ? stripslashes($report_title) : '',
-		'REPORT_DESC' => (isset($report_desc)) ? stripslashes($report_desc) : '',
-
-		'L_TITLE' => $lang['POST_SUBJECT'],
-		'L_SUBJECT' => $lang['REPORT_SUBJECT'])
+		'REPORT_DESC' => (isset($report_desc)) ? stripslashes($report_desc) : '')
 	);
 
 	$template->pparse('body');
@@ -411,13 +408,10 @@ else
 
 			$template->assign_vars(array(
 				'S_REPORT_ACTION', append_sid("report.php"),
-
-				'L_BY' => $lang['REPORT_BY'],
-				'L_MARK' => $lang['REPORT_MARK'],
+				
 				'L_STATUS_CLEARED' => $lang['REPORT_STATUS'][REPORT_CLEARED],
 				'L_STATUS_IN_PROCESS' => $lang['REPORT_STATUS'][REPORT_IN_PROCESS],
-				'L_STATUS_OPEN' => $lang['REPORT_STATUS'][REPORT_OPEN],
-				'L_SELECT_ALL' => $lang['MARK_ALL'])
+				'L_STATUS_OPEN' => $lang['REPORT_STATUS'][REPORT_OPEN])
 			);
 
 			//
@@ -451,13 +445,10 @@ else
 				'S_REPORT_ACTION' => append_sid("report.php"),
 
 				'U_REPORT_INDEX' => append_sid("report.php"),
-
-				'L_BY' => $lang['REPORT_BY'],
-				'L_MARK' => $lang['REPORT_MARK'],
+				
 				'L_STATUS_CLEARED' => $lang['REPORT_STATUS'][REPORT_CLEARED],
 				'L_STATUS_IN_PROCESS' => $lang['REPORT_STATUS'][REPORT_IN_PROCESS],
-				'L_STATUS_OPEN' => $lang['REPORT_STATUS'][REPORT_OPEN],
-				'L_SELECT_ALL' => $lang['MARK_ALL'])
+				'L_STATUS_OPEN' => $lang['REPORT_STATUS'][REPORT_OPEN])
 			);
 
 			$cat = (isset($_GET[POST_CAT_URL])) ? (int) $_GET[POST_CAT_URL] : null;
@@ -719,10 +710,7 @@ else
 					'REPORT_TIME' => bb_date($report['report_time']),
 					'REPORT_DESC' => bbcode2html($report['report_desc']),
 					'REPORT_STATUS' => $lang['REPORT_STATUS'][$report['report_status']],
-					'REPORT_STATUS_CLASS' => $report_status_classes[$report['report_status']],
-
-					'L_SUBJECT' => $lang['REPORT_SUBJECT'],
-					'L_SEND_PRIVMSG' => $lang['SEND_PRIVATE_MESSAGE'])
+					'REPORT_STATUS_CLASS' => $report_status_classes[$report['report_status']])
 				);
 			}
 			//

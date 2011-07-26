@@ -2,11 +2,11 @@
 
 <table class="forumline wAuto">
 <tr>
-	<th>{L_RULES_TITLE}</th>
+	<th>{L_ATTACH_RULES_TITLE}</th>
 </tr>
 <!-- BEGIN switch_nothing -->
 <tr>
-	<td class="row1 tCenter">{L_EMPTY_GROUP_PERMS}</td>
+	<td class="row1 tCenter">{L_NOTE_USER_EMPTY_GROUP_PERMISSIONS}</td>
 </tr>
 <!-- END switch_nothing -->
 <!-- BEGIN group_row -->

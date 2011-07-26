@@ -75,10 +75,6 @@ else if (IS_GROUP_MEMBER)
 
 $template->assign_vars(array(
 	'IN_PM'              => true,
-	'L_FONT_COLOR_SEL'   => $lang['QR_COLOR_SEL'],
-	'L_FONT_SEL'         => $lang['QR_FONT_SEL'],
-	'L_FONT_SIZE_SEL'    => $lang['QR_SIZE_SEL'],
-	'L_STEEL_BLUE'       => $lang['COLOR_STEEL_BLUE'],
 	'QUICK_REPLY'        => ($bb_cfg['show_quick_reply'] && $folder == 'inbox' && $mode == 'read'),
 ));
 
@@ -436,13 +432,7 @@ if ( $mode == 'read' )
 		'SENTBOX' => $sentbox_url,
 		'OUTBOX' => $outbox_url,
 		'SAVEBOX' => $savebox_url,
-
 		'BOX_NAME' => $l_box_name,
-
-		'L_SENTBOX' => $lang['SENT'],
-		'L_SAVEBOX' => $lang['SAVED'],
-		'L_SAVE_MSG' => $lang['SAVE_MESSAGE'],
-		'L_DELETE_MSG' => $lang['DELETE_MESSAGE'],
 
 		'S_PRIVMSGS_ACTION' => append_sid("privmsg.php?folder=$folder"),
 		'S_HIDDEN_FIELDS' => $s_hidden_fields)
@@ -1659,8 +1649,6 @@ else
 
 		'BOX_SIZE_STATUS' => ($l_box_size_status) ? $l_box_size_status : '',
 
-		'L_SENTBOX' => $lang['SENT'],
-		'L_SAVEBOX' => $lang['SAVED'],
 		'L_FROM_OR_TO' => ( $folder == 'inbox' || $folder == 'savebox' ) ? $lang['FROM'] : $lang['TO'],
 
 		'S_PRIVMSGS_ACTION' => append_sid("privmsg.php?folder=$folder"),
@@ -1739,10 +1727,6 @@ else
 	}
 	else
 	{
-		$template->assign_vars(array(
-			'L_NO_MESSAGES' => $lang['NO_MESSAGES_FOLDER'])
-		);
-
 		$template->assign_block_vars("switch_no_messages", array() );
 	}
 }

@@ -55,7 +55,7 @@ function checked_toggle(form, status)
 			<td class="{open_reports.ROW_CLASS}" width="100%">
 				<a href="{open_reports.U_SHOW}" class="gen">{open_reports.TITLE}</a><br />
 				<span class="gensmall">
-					{L_BY} <a href="{open_reports.U_AUTHOR}" class="gensmall">{open_reports.AUTHOR}</a>
+					{L_REPORT_BY} <a href="{open_reports.U_AUTHOR}" class="gensmall">{open_reports.AUTHOR}</a>
 				</span>
 			</td>
 		</tr>
@@ -66,7 +66,7 @@ function checked_toggle(form, status)
 					<option value="" selected="selected">{L_ACTION}</option>
 					<option value="" disabled="disabled"></option>
 					<option value="delete">{L_DELETE}</option>
-					<optgroup label="{L_MARK}">
+					<optgroup label="{L_REPORT_MARK}">
 						<option value="clear" class="report_cleared">{L_STATUS_CLEARED}</option>
 						<option value="process" class="report_process">{L_STATUS_IN_PROCESS}</option>
 						<option value="open" class="report_open">{L_STATUS_OPEN}</option>
@@ -83,7 +83,7 @@ function checked_toggle(form, status)
 <table cellspacing="2" cellpadding="2" border="0" width="80%" align="center">
 	<tr> 
 		<td class="gensmall">
-			<a href="javascript:checked_toggle('report_list_open',true)" class="gensmall">{L_SELECT_ALL}</a> ::
+			<a href="javascript:checked_toggle('report_list_open',true)" class="gensmall">{L_MARK_ALL}</a> ::
 			<a href="javascript:checked_switch('report_list_open')" class="gensmall">{L_INVERT_SELECT}</a>
 		</td>
 	</tr>

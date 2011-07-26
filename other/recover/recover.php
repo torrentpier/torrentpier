@@ -44,7 +44,7 @@ else
 @ini_set('memory_limit', '512M');
 @ini_set('max_execution_time', @ini_get('max_execution_time') + 1200);
 
-$torrents_count = (int) get_count(BT_TORRENTS_TABLE, 'attach_id');
+$torrents_count = (int) get_count(BB_BT_TORRENTS, 'attach_id');
 $loops = (int) ceil($torrents_count / C_TORRENTS_PER_ONCE);
 
 $not_exist = array();
@@ -58,13 +58,13 @@ for ($i = 0; $i < $loops; $i++)
 	
 	$sql = "SELECT 
 				tor.attach_id, tor.topic_id, ad.physical_filename
-			FROM ". BT_TORRENTS_TABLE ." tor
-			LEFT JOIN ". ATTACHMENTS_DESC_TABLE ." ad ON(ad.attach_id = tor.attach_id)
+			FROM ". BB_BT_TORRENTS ." tor
+			LEFT JOIN ". BB_ATTACHMENTS_DESC ." ad ON(ad.attach_id = tor.attach_id)
 			ORDER BY tor.attach_id
 			LIMIT $start, $offset";
 	
-	$torrents = $db->fetch_rowset($sql);
-	$db->sql_freeresult();
+	$torrents = DB()->fetch_rowset($sql);
+	DB()->sql_freeresult();
 		
 	foreach ($torrents as $torrent)
 	{
@@ -78,9 +78,9 @@ for ($i = 0; $i < $loops; $i++)
 			$tor = bdecode_file($filename);
 			$info = (!empty($tor['info'])) ? $tor['info'] : array();
 			$info_hash     = pack('H*', sha1(bencode($info)));
-			$info_hash_sql = rtrim($db->escape($info_hash), ' ');
+			$info_hash_sql = rtrim(DB()->escape($info_hash), ' ');
 		
-			$db->query("UPDATE 	". BT_TORRENTS_TABLE ."
+			DB()->query("UPDATE ". BB_BT_TORRENTS ."
 						SET info_hash = '$info_hash_sql'
 						WHERE attach_id = {$torrent['attach_id']}");
 		}

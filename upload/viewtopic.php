@@ -593,7 +593,6 @@ $template->assign_vars(array(
 
 	'AUTH_MOD'            => $is_auth['auth_mod'],
 	'IN_MODERATION'       => $moderation,
-	'L_SELECT_PPP'        => $lang['SELECT_POSTS_PER_PAGE'],
 	'SELECT_PPP'          => ($moderation && $select_ppp && $total_replies > $posts_per_page) ? build_select('ppp', $select_ppp, $posts_per_page, null, null, 'onchange="$(\'#ppp\').submit();"') : '',
 
 	'S_SELECT_POST_DAYS'  => build_select('postdays', array_flip($sel_previous_days), $post_days),

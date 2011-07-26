@@ -856,6 +856,7 @@ $lang['GUEST_USERS_ONLINE'] = 'There are %d Guest users online'; // There are 10
 $lang['GUEST_USERS_ZERO_ONLINE'] = 'There are 0 Guest users online'; // There are 10 Guest users online
 $lang['GUEST_USER_ONLINE'] = 'There is %d Guest user online'; // There is 1 Guest user online
 $lang['NO_USERS_BROWSING'] = 'There are no users currently browsing this forum';
+$lang['ALL_USERS'] = 'All users:';
 
 $lang['ONLINE_EXPLAIN'] = 'users active over the past five minutes';
 $lang['LAST_UPDATED'] = 'Last Updated';

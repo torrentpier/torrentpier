@@ -6,7 +6,7 @@
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset={L_CONTENT_ENCODING}" />
 	<meta http-equiv="Content-Style-Type" content="text/css" />
-	<title>Administration</title>
+	<title>{L_ADMIN}</title>
 </head>
 
 <frameset cols="220,*" rows="*" border="1" framespacing="1" frameborder="yes">
@@ -147,15 +147,15 @@ table.forumline { margin: 0 auto; }
 <!-- IF SHOW_USERS_ONLINE -->
 <table class="forumline">
 	<tr>
-		<th>&nbsp;{L_USERNAME}&nbsp;</th>
-		<th>&nbsp;{L_LOGIN}<br />{L_LAST_UPDATE}&nbsp;</th>
-		<th>&nbsp;{L_IP_ADDRESS}&nbsp;</th>
+		<th>{L_USERNAME}</th>
+		<th>{L_LOGIN} / {L_LAST_UPDATE}</th>
+		<th>{L_IP_ADDRESS}</th>
 	</tr>
 	<!-- BEGIN reg_user_row -->
 	<tr>
-		<td nowrap="nowrap" class="{reg_user_row.ROW_CLASS}">&nbsp;<span class="gen"><a href="{reg_user_row.U_USER_PROFILE}" class="gen">{reg_user_row.USERNAME}</a></span>&nbsp;</td>
-		<td align="center" nowrap="nowrap" class="{reg_user_row.ROW_CLASS}">&nbsp;<span class="gen">{reg_user_row.STARTED}-{reg_user_row.LASTUPDATE}</span>&nbsp;</td>
-		<td class="{reg_user_row.ROW_CLASS}">&nbsp;<span class="gen"><a href="{reg_user_row.U_WHOIS_IP}" class="gen" target="_phpbbwhois">{reg_user_row.IP_ADDRESS}</a></span>&nbsp;</td>
+		<td nowrap="nowrap" class="{reg_user_row.ROW_CLASS}"><a href="{reg_user_row.U_USER_PROFILE}" class="gen">{reg_user_row.USERNAME}</a></td>
+		<td align="center" nowrap="nowrap" class="{reg_user_row.ROW_CLASS}">{reg_user_row.STARTED}-{reg_user_row.LASTUPDATE}</td>
+		<td class="{reg_user_row.ROW_CLASS} tCenter"><a href="{reg_user_row.U_WHOIS_IP}" class="gen" target="_blank">{reg_user_row.IP_ADDRESS}</a></td>
 	</tr>
 	<!-- END reg_user_row -->
 	<tr>
@@ -165,7 +165,7 @@ table.forumline { margin: 0 auto; }
 	<tr>
 		<td nowrap="nowrap" class="{guest_user_row.ROW_CLASS}">&nbsp;<span class="gen">{guest_user_row.USERNAME}</span>&nbsp;</td>
 		<td align="center" nowrap="nowrap" class="{guest_user_row.ROW_CLASS}">&nbsp;<span class="gen">{guest_user_row.STARTED}-{guest_user_row.LASTUPDATE}</span>&nbsp;</td>
-		<td class="{guest_user_row.ROW_CLASS}">&nbsp;<span class="gen"><a href="{guest_user_row.U_WHOIS_IP}" target="_phpbbwhois">{guest_user_row.IP_ADDRESS}</a></span>&nbsp;</td>
+		<td class="{guest_user_row.ROW_CLASS}">&nbsp;<span class="gen"><a href="{guest_user_row.U_WHOIS_IP}" target="_blank">{guest_user_row.IP_ADDRESS}</a></span>&nbsp;</td>
 	</tr>
 	<!-- END guest_user_row -->
 </table>
