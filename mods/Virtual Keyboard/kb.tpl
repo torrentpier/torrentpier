@@ -6,7 +6,7 @@
 <style type="text/css">
 /*  Mail.ru Keyboard buttons styles */
 .b30 { width: 22px; background: #FAFAFA; border: 1px solid #4C4C4C; }
-.b80 { width: 60px; background: #FAFAFA; border: 1px solid #4C4C4C; }
+.b80 { width: 70px; background: #FAFAFA; border: 1px solid #4C4C4C; }
 .b100 { width: 80px; background: #FAFAFA; border: 1px solid #4C4C4C; }
 .b300 { width: 170px; background: #FAFAFA; border: 1px solid #4C4C4C; }
 span.a { cursor: pointer; text-decoration: underline; }
@@ -23,21 +23,21 @@ var l_letter=new Array('`','1','2','3','4','5','6','7','8','9','0','-','=','q','
 
 		<b>{L_KB_TITLE}</b>
 		<div id="kb_rules" class="small" style="{S_VISIBILITY_RULES}">
-			<script>if(isMOZ||isIE)document.write("{L_LAYOUT}<select name='decflag' onchange='document.post.message.focus();' style='font-size:10px;position:relative;top:2px'><option value=0>{L_NONE}<option value=1>{L_TRANSLIT}<option value=2 selected>{L_TRADITIONAL}</select><br />");</script>
-			<span class="a" onclick="javascript:translit();">{L_TRANSLIT}</span><br />
-			<span class="a" onclick="javascript:kb_rules();">{L_RULES}</span><br />
+			<script>if(isMOZ||isIE)document.write("{L_KB_RUS_KEYLAYOUT}<select name='decflag' onchange='document.post.message.focus();' style='font-size:10px;position:relative;top:2px'><option value=0>{L_KB_NONE}<option value=1>{L_KB_TRANSLIT}<option value=2 selected>{L_KB_TRADITIONAL}</select><br />");</script>
+			<span class="a" onclick="javascript:translit();">{L_KB_TRANSLIT}</span><br />
+			<span class="a" onclick="javascript:kb_rules();">{L_KB_RULES}</span><br />
 			<span class="a" onclick="javascript:kb_close();">{L_HIDE}</span>
 		</div>
 	</td>
 
 	<td class="row2">
-		<div id="kb_off" style="{S_VISIBILITY_OFF}"><span class="a" onclick="javascript:kb_show();">{L_SHOW}</span></div>
+		<div id="kb_off" style="{S_VISIBILITY_OFF}"><span class="a" onclick="javascript:kb_show();">{L_KB_SHOW}</span></div>
 
 		<div id="kb_trules" style="{S_VISIBILITY_KEYB}">
 		<table class="borderless">
 		<tr>
-			<td nowrap="nowrap" colspan="10"><b>{L_RULES}</b></td>
-			<td colspan="2" class="small"><span class="a" onclick="javascript:kb_rules();">{L_CLOSE}</span></td>
+			<td nowrap="nowrap" colspan="10"><b>{L_KB_RULES}</b></td>
+			<td colspan="2" class="small"><span class="a" onclick="javascript:kb_rules();">{L_KB_CLOSE}</span></td>
 		</tr>
 		<tr valign="top">
 			<td nowrap="nowrap"><b>&#1072; <br>&#1073; <br>&#1074; <br>&#1075; <br>&#1076; <br>&#1077; </b></td>

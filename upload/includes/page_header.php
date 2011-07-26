@@ -227,9 +227,7 @@ $template->assign_vars(array(
 	'U_SEND_PASSWORD'    => "profile.php?mode=sendpassword",
 	'U_TERMS'            => $bb_cfg['terms_and_conditions_url'],
 	'U_TRACKER'          => "tracker.php",
-	'GALLERY_TRUE'			 => $bb_cfg['gallery_enabled'],
 	'U_GALLERY'          => "gallery.php",
-	'SHOW_GALLERY'       => (!empty($bb_cfg['gallery_enabled']) && !empty($bb_cfg['gallery_show_link']) ? true : false),
 
 	'SHOW_ADMIN_OPTIONS' => $is_admin,
 	'SHOW_SIDEBAR1'      => (!empty($page_cfg['show_sidebar1'][BB_SCRIPT]) || $bb_cfg['show_sidebar1_on_every_page']),

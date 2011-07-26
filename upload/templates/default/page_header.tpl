@@ -302,7 +302,7 @@ function OpenInEditor ($file, $line)
 			<a href="{U_INDEX}"><b>{L_HOME}</b></a>&#0183;
 
 			<a href="{U_TRACKER}"><b>{L_TRACKER}</b></a>&#0183;
-			<!-- IF LOGGED_IN --><!-- IF GALLERY_TRUE --><a href="{U_GALLERY}"><b>{L_GALLERY}</b></a>&#0183;<!-- ENDIF --><!-- ENDIF -->
+			<!-- IF LOGGED_IN && $bb_cfg['gallery_enabled'] --><a href="{U_GALLERY}"><b>{L_GALLERY}</b></a>&#0183;<!-- ENDIF -->
 			<a href="{U_SEARCH}"><b>{L_SEARCH}</b></a>&#0183;
 			<a href="{U_TERMS}"><b>{L_TERMS}</b></a>&#0183;
 			<a href="{U_FAQ}"><b style="color: #993300;">{L_FAQ}</b></a>&#0183;

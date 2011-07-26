@@ -3,11 +3,74 @@
 #	Сам мод был вырезан из-за неактивности, но будет поставляться вместе с движком.
 # 	Получить поддержку по движку можно на форуме http://torrentpier.me
 
-открыть /lang_english/lang_main.php
-----------------
-найти 
-$lang['SEEDER_LAST_SEEN'] = 'Seeder not seen: <b>%s</b>';
-ниже добавить
+Скопировать файл kb.tpl в /templates/default/
+
+#
+#-----[ OPEN / Открыть ]-----------------------------------------
+#
+    config_mods.php
+#
+#-----[ ADD / Добавить ]-----------------------------------------
+#
+
+$bb_cfg['show_virtual_keyboard'] = true;
+
+#
+#-----[ OPEN / Открыть ]-----------------------------------------
+#
+    posting.php
+
+#
+#-----[ FIND / Найти ]-------------------------------------------
+#	
+
+'S_HIDDEN_FORM_FIELDS' => $hidden_form_fields)
+);
+
+#
+#-----[ AFTER ADD / После добавить]------------------------------
+#
+
+$template->assign_vars(array(
+	'SHOW_VIRTUAL_KEYBOARD' => $bb_cfg['show_virtual_keyboard'],
+	'S_VISIBILITY_RULES' => 'position:absolute;visibility:hidden;',
+	'S_VISIBILITY_KEYB' => 'position:absolute;visibility:hidden;',
+	'S_VISIBILITY_OFF' => '')
+);
+
+#
+#-----[ OPEN / Открыть ]-----------------------------------------
+#
+    privmsg.php
+	
+#
+#-----[ FIND / Найти ]-------------------------------------------
+#
+
+'U_VIEW_FORUM' => append_sid("privmsg.php"))
+	);
+
+#
+#-----[ AFTER ADD / После добавить]------------------------------
+#
+
+	$template->assign_vars(array(
+		'SHOW_VIRTUAL_KEYBOARD' => $bb_cfg['show_virtual_keyboard'],
+		'S_VISIBILITY_RULES' => 'position:absolute;visibility:hidden;',
+		'S_VISIBILITY_KEYB' => 'position:absolute;visibility:hidden;',
+		'S_VISIBILITY_OFF' => '')
+	);
+	
+#
+#-----[ OPEN / Открыть ]-----------------------------------------
+#
+    lang_english/lang_main.php
+
+#
+#-----[ ADD / Добавить в конец]------------------------------
+#
+
+// MAIL.RU KEYBOARD	
 $lang['KB_TITLE'] = 'Russian keyboard';
 $lang['KB_RUS_KEYLAYOUT'] = 'Layout: ';
 $lang['KB_NONE'] = 'None';
@@ -20,11 +83,16 @@ $lang['KB_CLOSE'] = 'Close';
 $lang['KB_TRANSLIT_MOZILLA'] = 'Select text you wish to translit and click \'Translit\'.';
 $lang['KB_TRANSLIT_OPERA7'] = 'Click here to translit your message.';
 
-открыть /lang_russian/lang_main.php
-----------------
-найти
-$lang['SEEDER_LAST_SEEN'] = 'Полного источника не было: <b>%s</b>';
-ниже добавить
+#
+#-----[ OPEN / Открыть ]-----------------------------------------
+#
+    lang_russian/lang_main.php
+
+#
+#-----[ ADD / Добавить в конец]------------------------------
+#
+	
+// MAIL.RU KEYBOARD	
 $lang['KB_TITLE'] = 'Русская клавиатура';
 $lang['KB_RUS_KEYLAYOUT'] = 'Раскладка: ';
 $lang['KB_NONE'] = 'Отсутствует';
@@ -37,65 +105,26 @@ $lang['KB_CLOSE'] = 'Закрыть';
 $lang['KB_TRANSLIT_MOZILLA'] = 'Выберите текст, который вы хотите для перевода в транслит, и нажмите кнопку \'Транслит\'.';
 $lang['KB_TRANSLIT_OPERA7'] = 'Нажмите здесь для перевода вашего сообщения в транслит.';
 
-открыть posting.php
--------------------
-найти 
-'POSTING_TOPIC_TITLE' => ($mode != 'newtopic') ? wbr($post_info['topic_title']) : '',
-ниже добавить
-'SHOW_VIRTUAL_KEYBOARD' => $bb_cfg['show_virtual_keyboard'],
-найти
-'S_HIDDEN_FORM_FIELDS' => $hidden_form_fields)
-);
-ниже добивить
-$template->assign_vars(array(
-	'L_KB_TITLE' => $lang['KB_TITLE'],
-	'L_LAYOUT' => $lang['KB_RUS_KEYLAYOUT'],
-	'L_NONE' => $lang['KB_NONE'],
-	'L_TRANSLIT' => $lang['KB_TRANSLIT'],
-	'L_TRADITIONAL' => $lang['KB_TRADITIONAL'],
-	'L_RULES' => $lang['KB_RULES'],
-	'L_SHOW' => $lang['KB_SHOW'],
-	'L_CLOSE' =>  $lang['KB_CLOSE'],
-	'L_TRANSLIT_OPERA7' => $lang['KB_TRANSLIT_OPERA7'],
-	'L_TRANSLIT_MOZILLA' => $lang['KB_TRANSLIT_MOZILLA'],
-	'S_VISIBILITY_RULES' => 'position:absolute;visibility:hidden;',
-	'S_VISIBILITY_KEYB' => 'position:absolute;visibility:hidden;',
-	'S_VISIBILITY_OFF' => '')
-);
 
-открыть privmsg.php
--------------------
-найти 
-'U_VIEW_FORUM' => append_sid("privmsg.php"))
-	);
-ниже добавить
-$template->assign_vars(array(
-		'SHOW_VIRTUAL_KEYBOARD' => $bb_cfg['show_virtual_keyboard'],
-		'L_LAYOUT' => $lang['KB_RUS_KEYLAYOUT'],
-		'L_NONE' => $lang['KB_NONE'],
-		'L_TRANSLIT' => $lang['KB_TRANSLIT'],
-		'L_TRADITIONAL' => $lang['KB_TRADITIONAL'],
-		'L_RULES' => $lang['KB_RULES'],
-		'L_SHOW' => $lang['KB_SHOW'],
-		'L_CLOSE' =>  $lang['KB_CLOSE'],
-		'L_TRANSLIT_OPERA7' => $lang['KB_TRANSLIT_OPERA7'],
-		'L_TRANSLIT_MOZILLA' => $lang['KB_TRANSLIT_MOZILLA'],
-		'S_VISIBILITY_RULES' => 'position:absolute;visibility:hidden;',
-		'S_VISIBILITY_KEYB' => 'position:absolute;visibility:hidden;',
-		'S_VISIBILITY_OFF' => '')
-	);
+#
+#-----[ OPEN / Открыть ]-----------------------------------------
+#
+    templates/default/posting.tpl
 
-открыть /templates/default/posting.tpl
---------------------------------------
-найти 
+#
+#-----[ FIND / Найти ]-------------------------------------------
+#
+
 <!-- IF IN_PM -->
 <!-- ELSEIF LOGGED_IN -->
-выше добавить
+
+#
+#-----[ BEFORE ADD / Перед добавить]------------------------------
+#
+
 <!-- IF SHOW_VIRTUAL_KEYBOARD --><!-- INCLUDE kb.tpl --><!-- ENDIF -->
 
-в config.php добавить
----------------------
-$bb_cfg['show_virtual_keyboard'] = true;
 
-Файл kb.tpl положить в /templates/default/
-------------------------------------------
+# 
+#-----[ SAVE/CLOSE ALL FILES / Сохранить/Закрыть все файлы]------------------------------------------ 
+#

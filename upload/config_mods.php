@@ -20,7 +20,6 @@ $bb_cfg['gold_silver_enabled'] = true;
 
 // Gallery
 $bb_cfg['gallery_enabled'] = true;
-$bb_cfg['gallery_show_link'] = true;
 $bb_cfg['pic_dir'] = 'pictures/';
 $bb_cfg['pic_max_size'] = 2*1024*1024; // 2 MiB
 $bb_cfg['auto_delete_posted_pics'] = true; // Delete pictures while delete post?

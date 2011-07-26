@@ -963,7 +963,6 @@ CREATE TABLE `bb_posts_search` (
 
 CREATE TABLE `bb_posts_text` (
   `post_id` mediumint(8) unsigned NOT NULL default '0',
-  `post_subject` enum('','kFpILr5') NOT NULL default '',
   `post_text` text NOT NULL,
   PRIMARY KEY  (`post_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
@@ -972,7 +971,7 @@ CREATE TABLE `bb_posts_text` (
 -- Дамп данных таблицы `bb_posts_text`
 --
 
-INSERT INTO `bb_posts_text` VALUES (1, '', '[list]\r\n[*]Переделан поиск по топикам с выбором типа [none, mysql, sphinx] (только в tracker.php)\r\n[*]Удалены bbcode_uid и переход на class.bbcode\r\n[*]Изменён метод и способ кеширования (cache_memcache, cache_sqlite, db_sqlite, filecache)\r\n[*]Изменён способ подключения к БД и отказ от глобальной переменной $db\r\n[*]Улучшенный дебагер\r\n[*]Полностью переписан и упрощен файл регистрации\r\n[*]Переписана капча (в том числе при быстром ответе у гостя)\r\n[*]Добавлена возможность выбора типа анонсера (xbt или php) http://animeshka.org:2710/statistic\r\n[*]Удаление файлов torrent.php и torstatus.php и перенос их функций в ajax\r\n[*]\r\n[/list]');
+INSERT INTO `bb_posts_text` VALUES (1, '[list]\n[*]Переделан поиск по топикам с выбором типа [none, mysql, sphinx] (только в tracker.php)\n[*]Удалены bbcode_uid и переход на class.bbcode\n[*]Изменён метод и способ кеширования (memcache, sqlite, db_sqlite, redis, eaccelerator, apc, xcache, filecache)\n[*]Изменён способ подключения к БД и отказ от глобальной переменной $db\n[*]Улучшенный дебагер\n[*]Полностью переписан и упрощен файл регистрации\n[*]Переписана капча (в том числе при быстром ответе у гостя)\n[*]Добавлена возможность выбора типа анонсера (xbt или php)\n[*]Удаление файлов torrent.php и torstatus.php и перенос их функций в ajax\n[*]Ajax цитирование, изменение, редактирование, удаление сообщений\n[/list]');
 
 -- --------------------------------------------------------
 
