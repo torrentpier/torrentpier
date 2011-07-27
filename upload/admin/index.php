@@ -24,9 +24,6 @@ if( isset($_GET['pane']) && $_GET['pane'] == 'left' )
 
 	$template->assign_vars(array(
 		'TPL_ADMIN_NAVIGATE' => true,
-
-        "L_FRAME_NO_SUPPORT" => $lang['IDX_BROWSER_NSP_FRAME'],
-
 		"U_FORUM_INDEX" => append_sid("../index.php"),
 		"U_ADMIN_INDEX" => append_sid("index.php?pane=right"))
 	);
@@ -52,7 +49,6 @@ if( isset($_GET['pane']) && $_GET['pane'] == 'left' )
 
 			$template->assign_block_vars("catrow.modulerow", array(
 				"ROW_CLASS" => $row_class,
-
 				"ADMIN_MODULE" => $action,
 				"U_ADMIN_MODULE" => append_sid($file))
 			);
@@ -64,10 +60,7 @@ else if( isset($_GET['pane']) && $_GET['pane'] == 'right' )
 {
 	$template->assign_vars(array(
 		'TPL_ADMIN_MAIN' => true,
-
-		"L_LAST_UPDATE" => $lang['LAST_UPDATED'],
-		"L_DB_SIZE" => $lang['DATABASE_SIZE'])
-	);
+	));
 
 	//
 	// Get forum statistics
@@ -97,11 +90,7 @@ else if( isset($_GET['pane']) && $_GET['pane'] == 'right' )
 		}
 		@closedir($avatar_dir);
 
-		//
-		// This bit of code translates the avatar directory size into human readable format
-		// Borrowed the code from the PHP.net annoted manual, origanally written by:
-		// Jesse (jesse@jess.on.ca)
-		//
+		
 		if($avatar_dir_size >= 1048576)
 		{
 			$avatar_dir_size = round($avatar_dir_size / 1048576 * 100) / 100 . " MB";
@@ -350,16 +339,9 @@ else if( isset($_GET['pane']) && $_GET['pane'] == 'right' )
 					"STARTED" => bb_date($onlinerow_guest[$i]['session_start'], 'H:i'),
 					"LASTUPDATE" => bb_date($onlinerow_guest[$i]['session_time'], 'H:i'),
 					"IP_ADDRESS" => $guest_ip,
-
 					"U_WHOIS_IP" => "http://ip-whois.net/ip_geo.php?ip=$guest_ip",
 				));
 			}
-		}
-		else
-		{
-			$template->assign_vars(array(
-				"L_NO_GUESTS_BROWSING" => $lang['NO_USERS_BROWSING'])
-			);
 		}
 	}
 	else

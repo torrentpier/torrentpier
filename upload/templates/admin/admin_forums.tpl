@@ -19,7 +19,7 @@ function toggle_cat_list (val)
 
 <h1>{L_FORUM_TITLE}</h1>
 
-<p>{L_FORUM_EXPLAIN}</p>
+<p>{L_FORUM_EDIT_DELETE_EXPLAIN}</p>
 <br />
 
 <form name="frm" action="{S_FORUM_ACTION}" method="post">
@@ -35,11 +35,11 @@ function toggle_cat_list (val)
 		<td class="row2"><input style="width: 96%;" type="text" name="forumname" value="{FORUM_NAME}" class="post" /></td>
 	</tr>
 	<tr>
-		<td class="row1">{L_FORUM_DESCRIPTION}</td>
+		<td class="row1">{L_FORUM_DESC}</td>
 		<td class="row2"><textarea style="width: 96%;" rows="5" wrap="virtual" name="forumdesc" class="post">{DESCRIPTION}</textarea></td>
 	</tr>
 	<tr>
-		<td class="row1">{L_PARENT_FORUM}</td>
+		<td class="row1">{L_SF_PARENT_FORUM}</td>
 		<td class="row2"><select onchange="toggle_cat_list(this.value)" name="forum_parent">{S_PARENT_FORUM}</select></td>
 	</tr>
 	<tr id="cat_list" class="{CAT_LIST_CLASS}">
@@ -47,7 +47,7 @@ function toggle_cat_list (val)
 		<td class="row2"><select name="c">{S_CAT_LIST}</select></td>
 	</tr>
 	<tr id="show_on_index" class="{SHOW_ON_INDEX_CLASS}">
-		<td class="row1">{L_SHOW_ON_INDEX}</td>
+		<td class="row1">{L_SF_SHOW_ON_INDEX}</td>
 		<td class="row2"><label for="show_on_index1"><input type="radio" name="show_on_index" id="show_on_index1" value="1" <!-- IF SHOW_ON_INDEX == 1 -->checked="checked"<!-- ENDIF -->  /> Yes&nbsp;</label><label for="show_on_index2">&nbsp;<input type="radio" name="show_on_index" id="show_on_index2" value="0" <!-- IF SHOW_ON_INDEX == 0 -->checked="checked"<!-- ENDIF --> /> No &nbsp;</label></td>
 	</tr>
 	<tr>
@@ -55,7 +55,7 @@ function toggle_cat_list (val)
 		<td class="row2"><select name="forumstatus">{S_STATUS_LIST}</select></td>
 	</tr>
 	<tr>
-		<td class="row1">{L_AUTO_PRUNE}</td>
+		<td class="row1">{L_FORUM_PRUNING}</td>
 		<td class="row2">
 		<table class="borderless">
 		<tr>
@@ -87,9 +87,9 @@ function toggle_cat_list (val)
 <!-- IF TPL_EDIT_CATEGORY -->
 <!--========================================================================-->
 
-<h1>{L_EDIT_CAT}</h1>
+<h1>{L_EDIT_CATEGORY}</h1>
 
-<p>{L_EDIT_CAT_EXPL}</p>
+<p>{L_EDIT_CATEGORY_EXPLAIN}</p>
 <br />
 
 <form action="{S_FORUM_ACTION}" method="post">
@@ -99,7 +99,7 @@ function toggle_cat_list (val)
 <table class="forumline">
 <col class="row1">
 <tr>
-	<th>{L_EDIT_CAT}</th>
+	<th>{L_EDIT_CATEGORY}</th>
 </tr>
 <tr>
 	<td class="pad_12 tCenter">
@@ -120,7 +120,7 @@ function toggle_cat_list (val)
 
 <h1>{DELETE_TITLE}</h1>
 
-<p>{L_DELETE_EXPL}</p>
+<p>{L_FORUM_DELETE_EXPLAIN}</p>
 <br />
 
 <form action="{S_FORUM_ACTION}" method="post">
@@ -177,7 +177,7 @@ function hl (id, on)
 
 <h1>{L_FORUM_TITLE}</h1>
 
-<p>{L_FORUM_EXPLAIN}</p>
+<p>{L_FORUM_EDIT_DELETE_EXPLAIN}</p>
 <br />
 
 <form method="post" action="{S_FORUM_ACTION}">

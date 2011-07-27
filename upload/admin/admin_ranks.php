@@ -89,8 +89,6 @@ if( $mode != "" )
 			"IMAGE" => ( @$rank_info['rank_image'] ) ? $rank_info['rank_image'] : "images/ranks/rank_image.gif",
 			"IMAGE_DISPLAY" => ( @$rank_info['rank_image'] ) ? '<img src="../' . $rank_info['rank_image'] . '" />' : "",
 
-			"L_RANKS_TEXT" => $lang['RANKS_EXPLAIN'],
-
 			"S_RANK_ACTION" => append_sid("admin_ranks.php"),
 			"S_HIDDEN_FIELDS" => $s_hidden_fields)
 		);
@@ -233,11 +231,6 @@ else
 
 	$template->assign_vars(array(
 		'TPL_RANKS_LIST' => true,
-
-		"L_RANKS_TEXT" => $lang['RANKS_EXPLAIN'],
-		"L_RANK" => $lang['RANK_TITLE'],
-		"L_ADD_RANK" => $lang['ADD_NEW_RANK'],
-
 		"S_RANKS_ACTION" => append_sid("admin_ranks.php"))
 	);
 

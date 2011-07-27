@@ -216,10 +216,6 @@ if ($mode == 'extensions')
 	// Extensions
 	$template->assign_vars(array(
 		'TPL_ATTACH_EXTENSIONS' => true,
-
-		'L_EXTENSIONS_TITLE' => $lang['MANAGE_EXTENSIONS'],
-		'L_EXTENSIONS_EXPLAIN' => $lang['MANAGE_EXTENSIONS_EXPLAIN'],
-
 		'S_CANCEL_ACTION' => append_sid("admin_extensions.php?mode=extensions"),
 		'S_ATTACH_ACTION' => append_sid("admin_extensions.php?mode=extensions"))
 	);
@@ -453,15 +449,8 @@ if ($mode == 'groups')
 
 	$template->assign_vars(array(
 		'TPL_ATTACH_EXTENSION_GROUPS' => true,
-
-		'L_EXTENSION_GROUPS_TITLE' => $lang['MANAGE_EXTENSION_GROUPS'],
-		'L_EXTENSION_GROUPS_EXPLAIN' => $lang['MANAGE_EXTENSION_GROUPS_EXPLAIN'],
-		'L_MAX_FILESIZE'				=> $lang['MAX_GROUPS_FILESIZE'],
-		'L_FORUM_PERMISSIONS'			=> $lang['EXT_GROUP_PERMISSIONS'],
-
 		'ADD_GROUP_NAME' => ( isset($submit) ) ? @$extension_group : '',
 		'MAX_FILESIZE' => $max_add_filesize,
-
 		'S_FILESIZE' => size_select('add_size_select', $size),
 		'S_ADD_DOWNLOAD_MODE' => download_select('add_download_mode'),
 		'S_SELECT_CAT' => category_select('add_category'),
@@ -723,7 +712,6 @@ if ($e_mode == 'perm' && $group)
 
 	$template->assign_vars(array(
 		'TPL_ATTACH_EXTENSION_GROUPS_PERMISSIONS' => true,
-
 		'L_GROUP_PERMISSIONS_TITLE' => sprintf($lang['GROUP_PERMISSIONS_TITLE_ADMIN'], trim($group_name)),
 		'A_PERM_ACTION' => append_sid("admin_extensions.php?mode=groups&amp;e_mode=perm&amp;e_group=$group"))
 	);

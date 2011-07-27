@@ -385,22 +385,6 @@ $order_options = '<option value="">&nbsp;Time&nbsp;</option>';
 $template->assign_vars(array(
 	'LOG_COLSPAN'       => 4,
 
-	'L_NO_MATCH'               => $lang['NO_MATCH'],
-    'L_ADM_LOG_ALL_ACTIONS'    => $lang['ACTS_LOG_ALL_ACTIONS'],
-    'L_ADM_LOG_SEARCH_OPTIONS' => $lang['ACTS_LOG_SEARCH_OPTIONS'],
-    'L_ADM_LOG_FORUM'          => $lang['ACTS_LOG_FORUM'],
-    'L_ADM_LOG_ACTION'         => $lang['ACTS_LOG_ACTION'],
-    'L_ADM_LOG_USER'           => $lang['ACTS_LOG_USER'],
-    'L_ADM_LOG_LOGS_FROM'      => $lang['ACTS_LOG_LOGS_FROM'],
-    'L_ADM_LOG_FIRST'          => $lang['ACTS_LOG_FIRST'],
-    'L_ADM_LOG_DAYS_BACK'      => $lang['ACTS_LOG_DAYS_BACK'],
-    'L_ADM_LOG_TOPIC_MATCH'    => $lang['ACTS_LOG_TOPIC_MATCH'],
-    'L_ADM_LOG_SORT_BY'        => $lang['ACTS_LOG_SORT_BY'],
-    'L_ADM_LOG_ACTION'         => $lang['ACTS_LOG_LOGS_ACTION'],
-    'L_ADM_LOG_USERNAME'       => $lang['ACTS_LOG_USERNAME'],
-    'L_ADM_LOG_TIME'           => $lang['ACTS_LOG_TIME'],
-    'L_ADM_LOG_INFO'           => $lang['ACTS_LOG_INFO'],
-
 	'DATETIME_NAME'     => $datetime_key,
 	'DATETIME_VAL'      => date('Y-m-d', $datetime_val),
 	'DAYSBACK_NAME'     => $daysback_key,

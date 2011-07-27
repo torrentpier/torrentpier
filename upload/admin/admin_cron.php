@@ -38,9 +38,7 @@ require(INC_DIR .'functions_admin_torrent.php');
 require(INC_DIR .'functions_admin_cron.php');
 
 if ($mode == 'list') {
-	$sql = "SELECT *
-		FROM ". BB_CRON ."
-		ORDER BY cron_id";
+	$sql = "SELECT * FROM ". BB_CRON ." ORDER BY cron_id";
 
 	if( !$result1 = DB()->sql_query($sql) )
 	{

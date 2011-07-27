@@ -60,10 +60,6 @@ if (isset($_REQUEST['submit']))
 }
 
 $template->assign_vars(array(
-	'L_PRUNE_RESULT'  => $lang['PRUNE_SUCCESS'],
-	'L_PRUNE_EXPLAIN' => $lang['FORUM_PRUNE_EXPLAIN'],
-	'L_PRUNE_TOPICS'  => $lang['PRUNE_TOPICS_NOT_POSTED'],
-
 	'PRUNED_TOTAL'   => $pruned_total,
 	'S_PRUNE_ACTION' => basename(__FILE__),
 	'SEL_FORUM'      => get_forum_select('admin', 'f[]', null, 65, 16, '', $all_forums),

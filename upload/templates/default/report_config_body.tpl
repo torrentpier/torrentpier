@@ -1,6 +1,6 @@
 <h1>{L_CONFIGURATION_TITLE}</h1>
 
-<p>{L_CONFIGURATION_EXPLAIN}</p>
+<p>{L_REPORT_CONFIG_EXPLAIN}</p>
 <br />
 
 <form action="{S_REPORT_ACTION}" method="post">

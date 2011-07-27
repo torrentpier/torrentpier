@@ -2,15 +2,15 @@
 <!-- IF TPL_ATTACH_EXTENSIONS -->
 <!--========================================================================-->
 
-<h1>{L_EXTENSIONS_TITLE}</h1>
+<h1>{L_MANAGE_EXTENSIONS}</h1>
 
-<p>{L_EXTENSIONS_EXPLAIN}</p>
+<p>{L_MANAGE_EXTENSIONS_EXPLAIN}</p>
 <br />
 
 <form method="post" action="{S_ATTACH_ACTION}">
 <table class="forumline">
 	<tr>
-	  <td class="catTitle" colspan="4">{L_EXTENSIONS_TITLE}
+	  <td class="catTitle" colspan="4">{L_MANAGE_EXTENSIONS}
 	  </td>
 	</tr>
 	<tr>
@@ -60,15 +60,15 @@
 
 {GROUP_PERMISSIONS_BOX}
 
-<h1>{L_EXTENSION_GROUPS_TITLE}</h1>
+<h1>{L_MANAGE_EXTENSION_GROUPS}</h1>
 
-<p>{L_EXTENSION_GROUPS_EXPLAIN}</p>
+<p>{L_MANAGE_EXTENSION_GROUPS_EXPLAIN}</p>
 <br />
 
 <form method="post" action="{S_ATTACH_ACTION}">
 <table class="forumline">
 	<tr>
-	  <td class="catTitle" colspan="8">{L_EXTENSION_GROUPS_TITLE}
+	  <td class="catTitle" colspan="8">{L_MANAGE_EXTENSION_GROUPS}
 	  </td>
 	</tr>
 	<tr>
@@ -107,7 +107,7 @@
 	  <th>&nbsp;{L_ALLOWED}&nbsp;</th>
 	  <th>&nbsp;{L_DOWNLOAD_MODE}&nbsp;</th>
 	  <th>&nbsp;{L_UPLOAD_ICON}&nbsp;</th>
-	  <th>&nbsp;{L_MAX_FILESIZE}&nbsp;</th>
+	  <th>&nbsp;{L_MAX_GROUPS_FILESIZE}&nbsp;</th>
 	  <th>&nbsp;{L_ALLOWED_FORUMS}&nbsp;</th>
 	  <th>&nbsp;{L_DELETE}&nbsp;</th>
 	</tr>
@@ -127,7 +127,7 @@
 	  <td class="row2" align="center">{grouprow.S_DOWNLOAD_MODE}</td>
 	  <td class="row1" align="center"><input type="text" size="15" maxlength="100" name="upload_icon_list[]" class="post" value="{grouprow.UPLOAD_ICON}" /></td>
 	  <td class="row2" align="center"><input type="text" size="3" maxlength="15" name="max_filesize_list[]" class="post" value="{grouprow.MAX_FILESIZE}" /> {grouprow.S_FILESIZE}</td>
-	  <td class="row1" align="center"><span class="small"><a href="{grouprow.U_FORUM_PERMISSIONS}" class="small">{L_FORUM_PERMISSIONS}</a></span></td>
+	  <td class="row1" align="center"><span class="small"><a href="{grouprow.U_FORUM_PERMISSIONS}" class="small">{L_EXT_GROUP_PERMISSIONS}</a></span></td>
 	  <td class="row2" align="center"><input type="checkbox" name="group_id_list[]" value="{grouprow.GROUP_ID}" /></td>
 	</tr>
   <!-- BEGIN extensionrow -->

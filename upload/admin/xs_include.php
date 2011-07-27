@@ -1,37 +1,8 @@
 <?php
 
-/***************************************************************************
- *                               xs_include.php
- *                               --------------
- *   copyright            : (C) 2003 - 2005 CyberAlien
- *   support              : http://www.phpbbstyles.com
- *
- *   version              : 2.3.1
- *
- *   file revision        : 77
- *   project revision     : 78
- *   last modified        : 05 Dec 2005  13:54:54
- *
- ***************************************************************************/
+if (!defined('IN_PHPBB') || !defined('IN_XS')) die(basename(__FILE__));
+if(defined('XS_INCLUDED')) return;
 
-/***************************************************************************
- *
- *   This program is free software; you can redistribute it and/or modify
- *   it under the terms of the GNU General Public License as published by
- *   the Free Software Foundation; either version 2 of the License, or
- *   (at your option) any later version.
- *
- ***************************************************************************/
-
-if (!defined('IN_PHPBB') || !defined('IN_XS'))
-{
-	die(basename(__FILE__));
-}
-
-if(defined('XS_INCLUDED'))
-{
-	return;
-}
 define('XS_INCLUDED', true);
 
 
@@ -50,7 +21,6 @@ if(!defined('XS_LANG_INCLUDED'))
 	include($xs_lang_file);
 	define('XS_LANG_INCLUDED', true);
 }
-
 
 define('XS_SHOWNAV_CONFIG', 0);
 define('XS_SHOWNAV_INSTALL', 1);

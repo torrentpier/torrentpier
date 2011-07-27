@@ -72,7 +72,7 @@
 		<th colspan="4">{L_ATTACH_SEARCH_QUERY}</th>
 	</tr>
 	<tr>
-		<td class="row1" colspan="2"><span class="gen">{L_FILE_NAME}:</span><br /><span class="small">{L_SEARCH_WILDCARD_EXPLAIN}</span></td>
+		<td class="row1" colspan="2"><span class="gen">{L_FILENAME}:</span><br /><span class="small">{L_SEARCH_WILDCARD_EXPLAIN}</span></td>
 		<td class="row2" colspan="2"><span class="med"><input type="text" style="width: 200px" class="post" name="search_keyword_fname" size="20" /></span></td>
 	</tr>
 	<tr>
@@ -198,10 +198,10 @@
   <table class="forumline">
   <tr>
 	  <th>#</th>
-	  <th>{L_FILE_NAME}</th>
-	  <th>{L_FILE_COMMENT_CP}</th>
+	  <th>{L_FILENAME}</th>
+	  <th>{L_FILE_COMMENT}</th>
 	  <th>{L_EXTENSION}</th>
-	  <th>{L_SIZE_IN_KB}</th>
+	  <th>{L_SIZE}</th>
 	  <th>{L_DOWNLOADS}</th>
 	  <th>{L_POST_TIME}</th>
 	  <th>{L_POSTED_IN_TOPIC}</th>

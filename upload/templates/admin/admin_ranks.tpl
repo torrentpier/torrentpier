@@ -4,7 +4,7 @@
 
 <h1>{L_RANKS_TITLE}</h1>
 
-<p>{L_RANKS_TEXT}</p>
+<p>{L_RANKS_EXPLAIN}</p>
 <br />
 
 <form action="{S_RANK_ACTION}" method="post">
@@ -50,15 +50,15 @@
 
 <h1>{L_RANKS_TITLE}</h1>
 
-<p>{L_RANKS_TEXT}</p>
+<p>{L_RANKS_EXPLAIN}</p>
 <br />
 
 <form method="post" action="{S_RANKS_ACTION}">
 
 <table class="forumline w80">
 <tr>
-	<th>{L_RANK}</th>
-	<th>Image</th>
+	<th>{L_RANK_TITLE}</th>
+	<th>{L_RANK_IMAGE}</th>
 	<th>{L_EDIT}</th>
 	<th>{L_DELETE}</th>
 </tr>
@@ -72,7 +72,7 @@
 <!-- END ranks -->
 <tr>
 	<td class="catBottom" colspan="4">
-		<input type="submit" class="mainoption" name="add" value="{L_ADD_RANK}" />
+		<input type="submit" class="mainoption" name="add" value="{L_ADD_NEW_RANK}" />
 	</td>
 </tr>
 </table>

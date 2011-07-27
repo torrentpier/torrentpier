@@ -1,27 +1,5 @@
 <?php
 
-/***************************************************************************
- * Filename:          admin_forumauth_list.php
- * Description:       Summary listing of the advanced permissions of all forums
- *                    with integrated editing
- * Author:            Graham Eames (phpbb@grahameames.co.uk)
- * Last Modified:     26-Mar-2004
- * File Version:      1.2
- *
- * Acknowlegments:    This file uses some features adapted from those
- *                    provided in admin_forumauth.php from the base distribution.
- *
- ***************************************************************************/
-
-/***************************************************************************
- *
- *   This program is free software; you can redistribute it and/or modify
- *   it under the terms of the GNU General Public License as published by
- *   the Free Software Foundation; either version 2 of the License, or
- *   (at your option) any later version.
- *
- ***************************************************************************/
-
 // ACP Header - START
 if (!empty($setmodules))
 {
@@ -32,7 +10,7 @@ require('./pagestart.php');
 // ACP Header - END
 
 
-//                            View       Read       Post       Reply      Edit      Delete     Sticky    Announce     Vote       Poll    PostAttach  Download
+//  View  Read  Post  Reply  Edit  Delete  Sticky  Announce  Vote  Poll  PostAttach  Download
 $simple_auth_ary = array(
 /* Public */     0 => array(AUTH_ALL,  AUTH_ALL,  AUTH_ALL,  AUTH_ALL,  AUTH_REG,  AUTH_REG,  AUTH_MOD,  AUTH_MOD,  AUTH_REG,  AUTH_REG,  AUTH_REG,  AUTH_ALL), // Public
 /* Reg */        1 => array(AUTH_ALL,  AUTH_ALL,  AUTH_REG,  AUTH_REG,  AUTH_REG,  AUTH_REG,  AUTH_MOD,  AUTH_MOD,  AUTH_REG,  AUTH_REG,  AUTH_REG,  AUTH_REG), // Registered
@@ -224,9 +202,6 @@ if( empty($forum_id) && empty($cat_id) )
 	//
 	$template->assign_vars(array(
 		'TPL_AUTH_FORUM_LIST' => true,
-
-		'L_AUTH_TITLE' => $lang['PERMISSIONS_LIST'],
-		'L_AUTH_EXPLAIN' => $lang['FORUM_AUTH_LIST_EXPLAIN'],
 		'S_COLUMN_SPAN' => count($forum_auth_fields)+1,
 	));
 
@@ -383,10 +358,6 @@ else
 	$template->assign_vars(array(
 		'TPL_AUTH_CAT' => true,
 		'CAT_NAME' => htmlCHR($cat_name),
-
-		'L_AUTH_TITLE' => $lang['AUTH_CONTROL_CATEGORY'],
-		'L_AUTH_EXPLAIN' => $lang['CAT_AUTH_LIST_EXPLAIN'],
-
 		'S_FORUMAUTH_ACTION' => append_sid("admin_forumauth_list.php"),
 		'S_COLUMN_SPAN' => count($forum_auth_fields)+1,
 		'S_HIDDEN_FIELDS' => $s_hidden_fields)

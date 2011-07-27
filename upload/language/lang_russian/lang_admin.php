@@ -1,29 +1,4 @@
 <?php
-/***************************************************************************
- *                            lang_admin.php [Russian]
- *                              -------------------
- *     begin                : Sat Dec 16 2000
- *     copyright            : (C) 2001 The phpBB Group
- *     email                : support@phpbb.com
- *
- *     $Id$
- *
- ****************************************************************************/
-
-/***************************************************************************
- *
- *   This program is free software; you can redistribute it and/or modify
- *   it under the terms of the GNU General Public License as published by
- *   the Free Software Foundation; either version 2 of the License, or
- *   (at your option) any later version.
- *
- ***************************************************************************/
-
-//
-// Translation performed by Alexey V. Borzov (borz_off)
-// borz_off@cs.msu.su
-//
-
 
 $lang['GENERAL'] = 'Общие настройки';
 $lang['USERS'] = 'Пользователи';
@@ -508,7 +483,7 @@ $lang['RANK_TITLE'] = 'Звание';
 $lang['RANK_SPECIAL'] = 'Специальное звание';
 $lang['RANK_MINIMUM'] = 'Минимум сообщений';
 $lang['RANK_MAXIMUM'] = 'Максимум сообщений';
-$lang['RANK_IMAGE'] = 'Картинка к званию (относительно корня phpBB2)';
+$lang['RANK_IMAGE'] = 'Картинка к званию';
 $lang['RANK_IMAGE_EXPLAIN'] = 'Здесь вы можете присвоить всем имеющим такое звание специальное изображение. Вы можете указать либо относительный, либо абсолютный путь к изображению';
 
 $lang['MUST_SELECT_RANK'] = 'Извините, вы не выбрали звание. Вернитесь и попробуйте ещё раз.';

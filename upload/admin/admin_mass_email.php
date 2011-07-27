@@ -150,9 +150,7 @@ require(PAGE_HEADER);
 $template->assign_vars(array(
 	'MESSAGE' => $message,
 	'SUBJECT' => $subject,
-
-	'L_EMAIL_EXPLAIN' => $lang['MASS_EMAIL_EXPLAIN'],
-	'L_EMAIL_SUBJECT' => $lang['SUBJECT'],
+	
 	'L_NOTICE' => @$notice,
 
 	'S_USER_ACTION' => append_sid('admin_mass_email.php'),

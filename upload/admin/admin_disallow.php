@@ -62,8 +62,7 @@ else if( isset($_POST['delete_name']) )
 //
 // Grab the current list of disallowed usernames...
 //
-$sql = "SELECT *
-	FROM " . BB_DISALLOW;
+$sql = "SELECT * FROM " . BB_DISALLOW;
 $result = DB()->sql_query($sql);
 if( !$result )
 {
@@ -95,13 +94,6 @@ $disallow_select .= '</select>';
 $template->assign_vars(array(
 	"S_DISALLOW_SELECT" => $disallow_select,
 	"S_FORM_ACTION" => append_sid("admin_disallow.php"),
-
-	"L_DISALLOW_TITLE" => $lang['DISALLOW_CONTROL'],
-	"L_DELETE_DISALLOW" => $lang['DELETE_DISALLOW_TITLE'],
-	"L_DELETE_EXPLAIN" => $lang['DELETE_DISALLOW_EXPLAIN'],
-	"L_ADD" => $lang['ADD_DISALLOW'],
-	"L_ADD_DISALLOW" => $lang['ADD_DISALLOW_TITLE'],
-	"L_ADD_EXPLAIN" => $lang['ADD_DISALLOW_EXPLAIN'],
 ));
 
 print_page('admin_disallow.tpl', 'admin');

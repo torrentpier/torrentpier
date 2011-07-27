@@ -51,8 +51,6 @@ set_tpl_vars      ($default_cfg_num, $tr_cfg);
 set_tpl_vars_lang ($default_cfg_num);
 
 $template->assign_vars(array(
-	'L_CONFIGURATION_TITLE' => $lang['TRACKER_CFG_TITLE'],
-
 	'IGNORE_REPORTED_IP' => $bb_cfg['ignore_reported_ip'],
 	'ANNOUNCE_INTERVAL'  => $bb_cfg['announce_interval'],
 	'PASSKEY_KEY'        => $bb_cfg['passkey_key'],

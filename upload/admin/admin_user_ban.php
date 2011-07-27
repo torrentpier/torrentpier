@@ -298,15 +298,7 @@ if ( isset($_POST['submit']) )
 else
 {
 	$template->assign_vars(array(
-		'L_BAN_TITLE' => $lang['BAN_CONTROL'],
-		'L_IP_OR_HOSTNAME' => $lang['IP_HOSTNAME'],
-
 		'S_BANLIST_ACTION' => append_sid("admin_user_ban.php"))
-	);
-
-	$template->assign_vars(array(
-		'L_BAN_USER' => $lang['BAN_USERNAME'],
-		'L_BAN_USER_EXPLAIN' => $lang['BAN_USERNAME_EXPLAIN'])
 	);
 
 	$userban_count = 0;
@@ -389,9 +381,6 @@ else
 	$select_emaillist = '<select name="unban_email[]" multiple="multiple" size="10">' . $select_emaillist . '</select>';
 
 	$template->assign_vars(array(
-		'L_UNBAN_USER' => $lang['UNBAN_USERNAME'],
-		'L_UNBAN_USER_EXPLAIN' => $lang['UNBAN_USERNAME_EXPLAIN'],
-
 		'U_SEARCH_USER' => append_sid("./../search.php?mode=searchuser"),
 		'S_UNBAN_USERLIST_SELECT' => $select_userlist,
 		'S_UNBAN_IPLIST_SELECT' => $select_iplist,

@@ -171,11 +171,6 @@ if( isset($_GET['import_pack']) || isset($_POST['import_pack']) )
 		$template->assign_vars(array(
 			'TPL_SMILE_IMPORT' => true,
 
-			"L_SMILEY_EXPLAIN" => $lang['SMILEY_IMPORT_INST'],
-			"L_SELECT_LBL" => $lang['CHOOSE_SMILE_PAK'],
-			"L_CONFLICTS" => $lang['SMILE_CONFLICTS'],
-			"L_DEL_EXISTING" => $lang['DEL_EXISTING_SMILEYS'],
-
 			"S_SMILEY_ACTION" => append_sid("admin_smilies.php"),
 			"S_SMILE_SELECT" => $smile_paks_select,
 			"S_HIDDEN_FIELDS" => $hidden_vars)
@@ -234,12 +229,7 @@ else if( isset($_POST['add']) || isset($_GET['add']) )
 
 	$template->assign_vars(array(
 		'TPL_SMILE_EDIT' => true,
-
-		"L_SMILEY_EXPLAIN" => $lang['SMILE_DESC'],
-		"L_SMILEY_EMOTION" => $lang['SMILEY_EMOT'],
-
 		"SMILEY_IMG" => BB_ROOT . $bb_cfg['smilies_path'] . '/' . $smiley_images[0],
-
 		"S_SMILEY_ACTION" => append_sid("admin_smilies.php"),
 		"S_HIDDEN_FIELDS" => $s_hidden_fields,
 		"S_FILENAME_OPTIONS" => $filename_list,
@@ -309,15 +299,9 @@ else if ( $mode != "" )
 
 			$template->assign_vars(array(
 				'TPL_SMILE_EDIT' => true,
-
 				"SMILEY_CODE" => $smile_data['code'],
 				"SMILEY_EMOTICON" => $smile_data['emoticon'],
-
-				"L_SMILEY_EXPLAIN" => $lang['SMILE_DESC'],
-				"L_SMILEY_EMOTION" => $lang['SMILEY_EMOT'],
-
 				"SMILEY_IMG" => BB_ROOT . $bb_cfg['smilies_path'] . '/' . $smiley_edit_img,
-
 				"S_SMILEY_ACTION" => append_sid("admin_smilies.php"),
 				"S_HIDDEN_FIELDS" => $s_hidden_fields,
 				"S_FILENAME_OPTIONS" => $filename_list,
@@ -434,13 +418,6 @@ else
 
 	$template->assign_vars(array(
 		'TPL_SMILE_MAIN' => true,
-
-		"L_SMILEY_TEXT" => $lang['SMILE_DESC'],
-		"L_SMILEY_ADD" => $lang['SMILE_ADD'],
-		"L_EMOT" => $lang['EMOTION'],
-		"L_IMPORT_PACK" => $lang['IMPORT_SMILE_PACK'],
-		"L_EXPORT_PACK" => $lang['EXPORT_SMILE_PACK'],
-
 		"S_HIDDEN_FIELDS" => @$s_hidden_fields,
 		"S_SMILEY_ACTION" => append_sid("admin_smilies.php"))
 	);

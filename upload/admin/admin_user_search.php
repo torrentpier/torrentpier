@@ -106,33 +106,7 @@ if(!isset($_POST['dosearch'])&&!isset($_GET['dosearch']))
 
 	$template->assign_vars(array(
 		'TPL_ADMIN_USER_SEARCH_MAIN' => true,
-
-		'L_USER_SEARCH' => $lang['SEARCH_USERS_ADVANCED'],
-		'L_SEARCH_EXPLAIN' => $lang['SEARCH_USERS_EXPLAIN'],
-		'L_USERNAME_EXPLAIN' => $lang['SEARCH_USERNAME_EXPLAIN'],
-		'L_EMAIL' => $lang['EMAIL_ADDRESS'],
-		'L_EMAIL_EXPLAIN' => $lang['SEARCH_EMAIL_EXPLAIN'],
-		'L_IP' => $lang['IP_ADDRESS'],
-		'L_IP_EXPLAIN' => $lang['SEARCH_IP_EXPLAIN'],
-		'L_USERS_JOINED' => $lang['SEARCH_USERS_JOINED'],
-		'L_REGEX' => $lang['REGULAR_EXPRESSION'],
-		'L_JOIN_DATE_EXPLAIN' => $lang['SEARCH_USERS_JOINED_EXPLAIN'],
-		'L_SEARCH_USERS_GROUPS_EXPLAIN' => $lang['SEARCH_USERS_GROUPS_EXPLAIN'],
-		'L_ADMINS' => $lang['ADMINISTRATORS'],
-		'L_POSTCOUNT_EXPLAIN' => $lang['SEARCH_USERS_POSTCOUNT_EXPLAIN'],
-		'L_GREATERTHAN' => $lang['GREATER_THAN'],
-		'L_LESSERTHAN' => $lang['LESS_THAN'],
-		'L_USERFIELD_EXPLAIN' => $lang['SEARCH_USERS_USERFIELD_EXPLAIN'],
-		'L_LASTVISITED' => $lang['SEARCH_USERS_LASTVISITED'],
-		'L_LASTVISITED_EXPLAIN' => $lang['SEARCH_USERS_LASTVISITED_EXPLAIN'],
-		'L_LANGUAGE' => $lang['BOARD_LANG'],
-		'L_LANGUAGE_EXPLAIN' => $lang['SEARCH_USERS_LANGUAGE_EXPLAIN'],
-		'L_TIMEZONE_EXPLAIN' => $lang['SEARCH_USERS_TIMEZONE_EXPLAIN'],
-		'L_STYLE' => $lang['BOARD_STYLE'],
-		'L_STYLE_EXPLAIN' => $lang['SEARCH_USERS_STYLE_EXPLAIN'],
-		'L_MODERATORS_OF_EXPLAIN' => $lang['SEARCH_USERS_MODERATORS_EXPLAIN'],
-		'L_MISC_EXPLAIN' => $lang['SEARCH_USERS_MISC_EXPLAIN'],
-
+		
 		'YEAR' => date("Y"),
 		'MONTH' => date("m"),
 		'DAY' => date("d"),
@@ -1268,11 +1242,6 @@ else
 
 	$template->assign_vars(array(
 		'TPL_ADMIN_USER_SEARCH_RESULTS' => true,
-
-		'L_USER_SEARCH' => $lang['SEARCH_USERS_ADVANCED'],
-		'L_EMAIL' => $lang['EMAIL_ADDRESS'],
-		'L_JOINDATE' => $lang['JOINED'],
-		'L_LASTVISIT' => $lang['LAST_VISIT'],
 
 		'PAGE_NUMBER' => sprintf($lang['PAGE_OF'], $page, $num_pages),
 		'PAGINATION' => $pagination,

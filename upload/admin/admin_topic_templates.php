@@ -81,8 +81,6 @@ foreach ($forums as $i => $forum)
 }
 
 $template->assign_vars(array(
-	'L_ADMIN_TITLE' => $lang['RELEASE_TEMPLATES'],
-	'L_ADMIN_TEXT'  => $lang['RELEASE_EXP'],
 	'S_ACTION'      => append_sid("admin_topic_templates.php"),
 ));
 

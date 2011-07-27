@@ -14,8 +14,7 @@ require(INC_DIR .'functions_selects.php');
 //
 // Pull all config data
 //
-$sql = "SELECT *
-	FROM " . BB_CONFIG;
+$sql = "SELECT * FROM " . BB_CONFIG;
 if(!$result = DB()->sql_query($sql))
 {
 	message_die(CRITICAL_ERROR, "Could not query config information in admin_board", "", __LINE__, __FILE__, $sql);
@@ -63,8 +62,8 @@ $disable_board_no = ( !$new['board_disable'] ) ? "checked=\"checked\"" : "";
 $bbcode_yes = ( $new['allow_bbcode'] ) ? "checked=\"checked\"" : "";
 $bbcode_no = ( !$new['allow_bbcode'] ) ? "checked=\"checked\"" : "";
 
-$activation_none = ( $new['require_activation'] == USER_ACTIVATION_NONE ) ? "checked=\"checked\"" : "";
-$activation_user = ( $new['require_activation'] == USER_ACTIVATION_SELF ) ? "checked=\"checked\"" : "";
+$activation_none  = ( $new['require_activation'] == USER_ACTIVATION_NONE ) ? "checked=\"checked\"" : "";
+$activation_user  = ( $new['require_activation'] == USER_ACTIVATION_SELF ) ? "checked=\"checked\"" : "";
 $activation_admin = ( $new['require_activation'] == USER_ACTIVATION_ADMIN ) ? "checked=\"checked\"" : "";
 
 $confirm_yes = ($new['enable_confirm']) ? 'checked="checked"' : '';

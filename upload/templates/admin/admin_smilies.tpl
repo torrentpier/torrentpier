@@ -4,7 +4,7 @@
 
 <h1>{L_SMILEY_TITLE}</h1>
 
-<P>{L_SMILEY_TEXT}</p>
+<P>{L_SMILE_DESC}</p>
 <br />
 
 <form method="post" action="{S_SMILEY_ACTION}">
@@ -14,7 +14,7 @@
 	<tr>
 		<th>{L_CODE}</th>
 		<th>{L_SMILE}</th>
-		<th>{L_EMOT}</th>
+		<th>{L_EMOTION}</th>
 		<th colspan="2">{L_ACTION}</th>
 	</tr>
 	<!-- BEGIN smiles -->
@@ -27,7 +27,7 @@
 	</tr>
 	<!-- END smiles -->
 	<tr>
-		<td class="catBottom" colspan="5"><input type="submit" name="add" value="{L_SMILEY_ADD}" class="mainoption" />&nbsp;&nbsp;<input class="liteoption" type="submit" name="import_pack" value="{L_IMPORT_PACK}">&nbsp;&nbsp;<input class="liteoption" type="submit" name="export_pack" value="{L_EXPORT_PACK}"></td>
+		<td class="catBottom" colspan="5"><input type="submit" name="add" value="{L_SMILE_ADD}" class="mainoption" />&nbsp;&nbsp;<input class="liteoption" type="submit" name="import_pack" value="{L_IMPORT_SMILE_PACK}">&nbsp;&nbsp;<input class="liteoption" type="submit" name="export_pack" value="{L_EXPORT_SMILE_PACK}"></td>
 	</tr>
 </table>
 
@@ -41,7 +41,7 @@
 
 <h1>{L_SMILEY_TITLE}</h1>
 
-<p>{L_SMILEY_EXPLAIN}</p>
+<p>{L_SMILEY_IMPORT_INST}</p>
 <br />
 
 <script type="text/javascript">
@@ -67,7 +67,7 @@ function update_smiley(newimage)
 		<td class="row1"><select name="smile_url" onchange="update_smiley(this.options[selectedIndex].value);">{S_FILENAME_OPTIONS}</select> &nbsp; <img name="smiley_image" src="{SMILEY_IMG}" border="0" alt="" /> &nbsp;</td>
 	</tr>
 	<tr>
-		<td class="row2">{L_SMILEY_EMOTION}</td>
+		<td class="row2">{L_SMILEY_EMOT}</td>
 		<td class="row2"><input class="post" type="text" name="smile_emotion" value="{SMILEY_EMOTICON}" /></td>
 	</tr>
 	<tr>
@@ -85,7 +85,7 @@ function update_smiley(newimage)
 
 <h1>{L_SMILEY_TITLE}</h1>
 
-<p>{L_SMILEY_EXPLAIN}</p>
+<p>{L_SMILEY_IMPORT_INST}</p>
 <br />
 
 <form method="post" action="{S_SMILEY_ACTION}">
@@ -96,15 +96,15 @@ function update_smiley(newimage)
 		<th colspan="2">{L_SMILEY_IMPORT}</th>
 	</tr>
 	<tr>
-		<td class="row2">{L_SELECT_LBL}</td>
+		<td class="row2">{L_CHOOSE_SMILE_PAK}</td>
 		<td class="row2">{S_SMILE_SELECT}</td>
 	</tr>
 	<tr>
-		<td class="row1">{L_DEL_EXISTING}</td>
+		<td class="row1">{L_DEL_EXISTING_SMILEYS}</td>
 		<td class="row1"><input type="checkbox" name="clear_current" value="1" /></td>
 	</tr>
 	<tr>
-		<td class="row2" colspan="2" align="center">{L_CONFLICTS}<br /><input type="radio" name="replace" value="1" checked="checked"/> {L_REPLACE_EXISTING} &nbsp; <input type="radio" name="replace" value="0" /> {L_KEEP_EXISTING}</td>
+		<td class="row2" colspan="2" align="center">{L_SMILE_CONFLICTS}<br /><input type="radio" name="replace" value="1" checked="checked"/> {L_REPLACE_EXISTING} &nbsp; <input type="radio" name="replace" value="0" /> {L_KEEP_EXISTING}</td>
 	</tr>
 	<tr>
 		<td class="catBottom" colspan="2"><input class="mainoption" name="import_pack" type="submit" value="{L_IMPORT}" /></td>

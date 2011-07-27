@@ -14,11 +14,11 @@
 	
 	<table width="100%" cellpadding="4" cellspacing="1" border="0" class="forumline" align="center">
 		<tr>
-			<th class="thHead" colspan="2">{L_EDIT_REASON}</th>
+			<th class="thHead" colspan="2">{L_ADD_REASON}</th>
 		</tr>
 		<tr>
 			<td class="row1" width="40%">
-				<label for="report_reason_desc" class="gen">{L_REASON_DESC}</label>:<br />
+				<label for="report_reason_desc" class="gen">{L_FORUM_DESC}</label>:<br />
 				<span class="gensmall">{L_REASON_DESC_EXPLAIN}</span>
 			</td>
 			<td class="row2">

@@ -2,9 +2,9 @@
 <!-- IF TPL_ATTACH_SPECIAL_CATEGORIES -->
 <!--========================================================================-->
 
-<h1>{L_MANAGE_CAT_TITLE}</h1>
+<h1>{L_MANAGE_CATEGORIES}</h1>
 
-<p>{L_MANAGE_CAT_EXPLAIN}</p>
+<p>{L_MANAGE_CATEGORIES_EXPLAIN}</p>
 <br />
 
 <form action="{S_ATTACH_ACTION}" method="post">
@@ -18,11 +18,11 @@
 	</tr>
 <!-- BEGIN switch_thumbnail_support -->
 	<tr>
-		<td class="row1" width="80%">{L_CREATE_THUMBNAIL}<br /><span class="small">{L_CREATE_THUMBNAIL_EXPLAIN}</span></td>
+		<td class="row1" width="80%">{L_IMAGE_CREATE_THUMBNAIL}<br /><span class="small">{L_IMAGE_CREATE_THUMBNAIL_EXPLAIN}</span></td>
 		<td class="row2"><input type="radio" name="img_create_thumbnail" value="1" {CREATE_THUMBNAIL_YES} /> {L_YES}&nbsp;&nbsp;<input type="radio" name="img_create_thumbnail" value="0" {CREATE_THUMBNAIL_NO} /> {L_NO}</td>
 	</tr>
 	<tr>
-		<td class="row1" width="80%">{L_MIN_THUMB_FILESIZE}<br /><span class="small">{L_MIN_THUMB_FILESIZE_EXPLAIN}</span></td>
+		<td class="row1" width="80%">{L_IMAGE_MIN_THUMB_FILESIZE}<br /><span class="small">{L_IMAGE_MIN_THUMB_FILESIZE_EXPLAIN}</span></td>
 		<td class="row2"><input type="text" size="7" maxlength="15" name="img_min_thumb_filesize" value="{IMAGE_MIN_THUMB_FILESIZE}" class="post" /> {L_BYTES}</td>
 	</tr>
 	<tr>
@@ -31,7 +31,7 @@
 	</tr>
 <!-- END switch_thumbnail_support -->
 	<tr>
-		<td class="row1" width="80%">{L_IMAGICK_PATH}<br /><span class="small">{L_IMAGICK_PATH_EXPLAIN}</span></td>
+		<td class="row1" width="80%">{L_IMAGE_IMAGICK_PATH}<br /><span class="small">{L_IMAGE_IMAGICK_PATH_EXPLAIN}</span></td>
 		<td class="row2"><input type="text" size="20" maxlength="200" name="img_imagick" value="{IMAGE_IMAGICK_PATH}" class="post" /></td>
 	</tr>
 	<tr>
@@ -43,7 +43,7 @@
 		<td class="row2"><input type="text" size="3" maxlength="4" name="img_link_width" value="{IMAGE_LINK_WIDTH}" class="post" /> x <input type="text" size="3" maxlength="4" name="img_link_height" value="{IMAGE_LINK_HEIGHT}" class="post" /></td>
 	</tr>
 	<tr>
-		<td class="catBottom" colspan="2">{S_HIDDEN_FIELDS}<input type="submit" name="submit" value="{L_SUBMIT}" class="mainoption" />&nbsp;&nbsp;<input type="reset" value="{L_RESET}" class="liteoption" />&nbsp;&nbsp;<input type="submit" name="search_imagick" value="{L_SEARCH_IMAGICK}" class="liteoption" />&nbsp;&nbsp;<input type="submit" name="cat_settings" value="{L_TEST_SETTINGS}" class="liteoption" /></td>
+		<td class="catBottom" colspan="2">{S_HIDDEN_FIELDS}<input type="submit" name="submit" value="{L_SUBMIT}" class="mainoption" />&nbsp;&nbsp;<input type="reset" value="{L_RESET}" class="liteoption" />&nbsp;&nbsp;<input type="submit" name="search_imagick" value="{L_IMAGE_SEARCH_IMAGICK}" class="liteoption" />&nbsp;&nbsp;<input type="submit" name="cat_settings" value="{L_TEST_SETTINGS}" class="liteoption" /></td>
 	</tr>
 </table>
 </form>
@@ -54,30 +54,30 @@
 <!-- IF TPL_ATTACH_MANAGE -->
 <!--========================================================================-->
 
-<h1>{L_MANAGE_TITLE}</h1>
+<h1>{L_ATTACH_SETTINGS}</h1>
 
-<p>{L_MANAGE_EXPLAIN}</p>
+<p>{L_MANAGE_ATTACHMENTS_EXPLAIN}</p>
 <br />
 
 <form action="{S_ATTACH_ACTION}" method="post">
 <table class="forumline">
 	<tr>
-	  <th colspan="2">{L_ATTACHMENT_SETTINGS}</th>
+	  <th colspan="2">{L_ATTACH_SETTINGS}</th>
 	</tr>
 	<tr>
-		<td class="row1" width="80%">{L_UPLOAD_DIR}<br /><span class="small">{L_UPLOAD_DIR_EXPLAIN}</span></td>
+		<td class="row1" width="80%">{L_UPLOAD_DIRECTORY}<br /><span class="small">{L_UPLOAD_DIRECTORY_EXPLAIN}</span></td>
 		<td class="row2"><input type="text" size="25" maxlength="100" name="upload_dir" class="post" value="{UPLOAD_DIR}" /></td>
 	</tr>
 	<tr>
-		<td class="row1" width="80%">{L_ATTACHMENT_IMG_PATH}<br /><span class="small">{L_IMG_PATH_EXPLAIN}</span></td>
+		<td class="row1" width="80%">{L_ATTACH_IMG_PATH}<br /><span class="small">{L_ATTACH_IMG_PATH_EXPLAIN}</span></td>
 		<td class="row2"><input type="text" size="25" maxlength="100" name="upload_img" class="post" value="{ATTACHMENT_IMG_PATH}" /></td>
 	</tr>
 	<tr>
-		<td class="row1" width="80%">{L_ATTACHMENT_TOPIC_ICON}<br /><span class="small">{L_TOPIC_ICON_EXPLAIN}</span></td>
+		<td class="row1" width="80%">{L_ATTACH_TOPIC_ICON}<br /><span class="small">{L_ATTACH_TOPIC_ICON_EXPLAIN}</span></td>
 		<td class="row2"><input type="text" size="25" maxlength="100" name="topic_icon" class="post" value="{TOPIC_ICON}" readonly="readonly" /></td>
 	</tr>
 	<tr>
-		<td class="row1" width="80%">{L_DISPLAY_ORDER}<br /><span class="small">{L_DISPLAY_ORDER_EXPLAIN}</span></td>
+		<td class="row1" width="80%">{L_ATTACH_DISPLAY_ORDER}<br /><span class="small">{L_ATTACH_DISPLAY_ORDER_EXPLAIN}</span></td>
 		<td class="row2">
 		<table class="borderless">
 			<tr>
@@ -89,10 +89,10 @@
 		</table></td>
 	</tr>
 	<tr>
-	  <th colspan="2">{L_ATTACHMENT_FILESIZE_SETTINGS}</th>
+	  <th colspan="2">{L_ATTACH_FILESIZE_SETTINGS}</th>
 	</tr>
 	<tr>
-		<td class="row1" width="80%">{L_MAX_FILESIZE}<br /><span class="small">{L_MAX_FILESIZE_EXPLAIN}</span></td>
+		<td class="row1" width="80%">{L_MAX_FILESIZE_ATTACH}<br /><span class="small">{L_MAX_FILESIZE_ATTACH_EXPLAIN}</span></td>
 		<td class="row2"><input type="text" size="8" maxlength="15" name="max_filesize" class="post" value="{MAX_FILESIZE}" /> {S_FILESIZE}</td>
 	</tr>
 	<tr>
@@ -119,7 +119,7 @@
 		</td>
 	</tr>
 	<tr>
-	  <th colspan="2">{L_ATTACHMENT_NUMBER_SETTINGS}</th>
+	  <th colspan="2">{L_ATTACH_NUMBER_SETTINGS}</th>
 	</tr>
 	<tr>
 		<td class="row1" width="80%">{L_MAX_ATTACHMENTS}<br /><span class="small">{L_MAX_ATTACHMENTS_EXPLAIN}</span></td>
@@ -130,14 +130,14 @@
 		<td class="row2"><input type="text" size="3" maxlength="3" name="max_attachments_pm" class="post" value="{MAX_ATTACHMENTS_PM}" /></td>
 	</tr>
 	<tr>
-	  <th colspan="2">{L_ATTACHMENT_OPTIONS_SETTINGS}</th>
+	  <th colspan="2">{L_ATTACH_OPTIONS_SETTINGS}</th>
 	</tr>
 	<tr>
 		<td class="row1" width="80%">{L_DISABLE_MOD}<br /><span class="small">{L_DISABLE_MOD_EXPLAIN}</span></td>
 		<td class="row2"><input type="radio" name="disable_mod" value="1" {DISABLE_MOD_YES} /> {L_YES}&nbsp;&nbsp;<input type="radio" name="disable_mod" value="0" {DISABLE_MOD_NO} /> {L_NO}</td>
 	</tr>
 	<tr>
-		<td class="row1" width="80%">{L_PM_ATTACH}<br /><span class="small">{L_PM_ATTACH_EXPLAIN}</span></td>
+		<td class="row1" width="80%">{L_PM_ATTACHMENTS}<br /><span class="small">{L_PM_ATTACHMENTS_EXPLAIN}</span></td>
 		<td class="row2"><input type="radio" name="allow_pm_attach" value="1" {PM_ATTACH_YES} /> {L_YES}&nbsp;&nbsp;<input type="radio" name="allow_pm_attach" value="0" {PM_ATTACH_NO} /> {L_NO}</td>
 	</tr>
 <!-- BEGIN switch_ftp -->
@@ -146,18 +146,18 @@
 		<td class="row2"><input type="radio" name="allow_ftp_upload" value="1" {FTP_UPLOAD_YES} /> {L_YES}&nbsp;&nbsp;<input type="radio" name="allow_ftp_upload" value="0" {FTP_UPLOAD_NO} /> {L_NO}</td>
 	</tr>
 	<tr>
-	  <th colspan="2">{L_ATTACHMENT_FTP_SETTINGS}</th>
+	  <th colspan="2">{L_FTP_INFO}</th>
 	</tr>
 	<tr>
-		<td class="row1" width="80%">{L_ATTACHMENT_FTP_SERVER}<br /><span class="small">{L_ATTACHMENT_FTP_SERVER_EXPLAIN}</span></td>
+		<td class="row1" width="80%">{L_FTP_SERVER}<br /><span class="small">{L_FTP_SERVER_EXPLAIN}</span></td>
 		<td class="row2"><input type="text" size="20" maxlength="100" name="ftp_server" class="post" value="{FTP_SERVER}" /></td>
 	</tr>
 	<tr>
-		<td class="row1" width="80%">{L_ATTACHMENT_FTP_PATH}<br /><span class="small">{L_ATTACHMENT_FTP_PATH_EXPLAIN}</span></td>
+		<td class="row1" width="80%">{L_ATTACH_FTP_PATH}<br /><span class="small">{L_ATTACH_FTP_PATH_EXPLAIN}</span></td>
 		<td class="row2"><input type="text" size="20" maxlength="100" name="ftp_path" class="post" value="{FTP_PATH}" /></td>
 	</tr>
 	<tr>
-		<td class="row1" width="80%">{L_DOWNLOAD_PATH}<br /><span class="small">{L_DOWNLOAD_PATH_EXPLAIN}</span></td>
+		<td class="row1" width="80%">{L_FTP_DOWNLOAD_PATH}<br /><span class="small">{L_FTP_DOWNLOAD_PATH_EXPLAIN}</span></td>
 		<td class="row2"><input type="text" size="20" maxlength="100" name="download_path" class="post" value="{DOWNLOAD_PATH}" /></td>
 	</tr>
 	<tr>
@@ -165,21 +165,21 @@
 		<td class="row2"><input type="radio" name="ftp_pasv_mode" value="1" {FTP_PASV_MODE_YES} /> {L_YES}&nbsp;&nbsp;<input type="radio" name="ftp_pasv_mode" value="0" {FTP_PASV_MODE_NO} /> {L_NO}</td>
 	</tr>
 	<tr>
-		<td class="row1" width="80%">{L_ATTACHMENT_FTP_USER}</td>
+		<td class="row1" width="80%">{L_FTP_USERNAME}</td>
 		<td class="row2"><input type="text" size="20" maxlength="100" name="ftp_user" class="post" value="{FTP_USER}" /></td>
 	</tr>
 	<tr>
-		<td class="row1" width="80%">{L_ATTACHMENT_FTP_PASS}</td>
+		<td class="row1" width="80%">{L_FTP_PASSWORD}</td>
 		<td class="row2"><input type="password" size="10" maxlength="20" name="ftp_pass" class="post" value="{FTP_PASS}" /></td>
 	</tr>
 <!-- END switch_ftp -->
 <!-- BEGIN switch_no_ftp -->
 	<input type="hidden" name="allow_ftp_upload" value="0" />
 	<tr>
-	  <th colspan="2">{L_ATTACHMENT_FTP_SETTINGS}</th>
+	  <th colspan="2">{L_FTP_INFO}</th>
 	</tr>
 	<tr>
-	  <td class="row1" colspan="2" align="center"><span class="gen">{L_NO_FTP_EXTENSIONS}</span></td>
+	  <td class="row1" colspan="2" align="center"><span class="gen">{L_NO_FTP_EXTENSIONS_INSTALLED}</span></td>
 	</tr>
 <!-- END switch_no_ftp -->
 	<tr>
@@ -194,7 +194,7 @@
 <!-- IF TPL_ATTACH_QUOTA -->
 <!--========================================================================-->
 
-<h1>{L_MANAGE_QUOTAS_TITLE}</h1>
+<h1>{L_MANAGE_QUOTAS}</h1>
 
 <p>{L_MANAGE_QUOTAS_EXPLAIN}</p>
 <br />
@@ -202,7 +202,7 @@
 <form method="post" action="{S_ATTACH_ACTION}">
 <table class="forumline">
 	<tr>
-	  <td class="catTitle" colspan="3">{L_MANAGE_QUOTAS_TITLE}
+	  <td class="catTitle" colspan="3">{L_MANAGE_QUOTAS}
 	  </td>
 	</tr>
 	<tr>

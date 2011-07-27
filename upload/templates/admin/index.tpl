@@ -134,7 +134,7 @@ table.forumline { margin: 0 auto; }
 		<td class="row2"><b>{AVATAR_DIR_SIZE}</b></td>
 	</tr>
 	<tr>
-		<td class="row1" nowrap="nowrap">{L_DB_SIZE}:</td>
+		<td class="row1" nowrap="nowrap">{L_DATABASE_SIZE}:</td>
 		<td class="row2"><b>{DB_SIZE}</b></td>
 		<td class="row1" nowrap="nowrap">{L_GZIP_COMPRESSION}:</td>
 		<td class="row2"><b>{GZIP_COMPRESSION}</b></td>
@@ -148,7 +148,7 @@ table.forumline { margin: 0 auto; }
 <table class="forumline">
 	<tr>
 		<th>{L_USERNAME}</th>
-		<th>{L_LOGIN} / {L_LAST_UPDATE}</th>
+		<th>{L_LOGIN} / {L_LAST_UPDATED}</th>
 		<th>{L_IP_ADDRESS}</th>
 	</tr>
 	<!-- BEGIN reg_user_row -->

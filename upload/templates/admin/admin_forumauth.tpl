@@ -1,6 +1,6 @@
-<h1>{L_AUTH_TITLE}</h1>
+<h1>{L_AUTH_CONTROL_FORUM}</h1>
 
-<p>{L_AUTH_EXPLAIN}</p>
+<p>{L_FORUM_AUTH_EXPLAIN}</p>
 <br />
 
 <!-- IF TPL_AUTH_SELECT_FORUM -->
@@ -13,7 +13,7 @@
 
 <table class="forumline wAuto">
 	<tr>
-		<th>{L_AUTH_SELECT}</th>
+		<th>{L_SELECT_A_FORUM}</th>
 	</tr>
 	<tr>
 		<td class="row1 tCenter">
@@ -41,7 +41,7 @@
 <col class="row1">
 <col class="row2">
 <tr>
-	<th colspan="2">{L_AUTH_TITLE}</th>
+	<th colspan="2">{L_AUTH_CONTROL_FORUM}</th>
 </tr>
 <!-- BEGIN forum_auth -->
 <tr class="tCenter">

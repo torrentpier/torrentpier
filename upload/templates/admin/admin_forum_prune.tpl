@@ -2,7 +2,7 @@
 <h1>{L_FORUM_PRUNE}</h1>
 
 <!-- IF L_PRUNE_EXPLAIN -->
-<p>{L_PRUNE_EXPLAIN}</p>
+<p>{L_FORUM_PRUNE_EXPLAIN}</p>
 <!-- ENDIF -->
 
 <!-- IF FORUM_NAME -->
@@ -26,7 +26,7 @@
 </tr>
 <!-- END pruned -->
 <tr>
-	<td colspan="2" class="row2 tCenter"><b>{L_PRUNE_RESULT}</b></td>
+	<td colspan="2" class="row2 tCenter"><b>{L_PRUNE_SUCCESSf}</b></td>
 </tr>
 <!-- ENDIF -->
 <tr>
@@ -37,7 +37,7 @@
 </tr>
 <tr>
 	<td colspan="2" class="row1 tCenter">
-		<p>{L_PRUNE_TOPICS}	<input class="post" type="text" name="prunedays" size="4" /> {L_DAYS}</p>
+		<p>{L_PRUNE_TOPICS_NOT_POSTED}	<input class="post" type="text" name="prunedays" size="4" /> {L_DAYS}</p>
 		<p class="med"><label><input class="post" type="checkbox" name="prune_all_topic_types" value="1" />Удалить все темы, включая объявления и прилепленные</label></p>
 	</td>
 </tr>

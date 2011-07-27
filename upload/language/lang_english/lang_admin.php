@@ -1,33 +1,5 @@
 <?php
-/***************************************************************************
- *                            lang_admin.php [English]
- *                              -------------------
- *     begin                : Sat Dec 16 2000
- *     copyright            : (C) 2001 The phpBB Group
- *     email                : support@phpbb.com
- *
- *     $Id: lang_admin.php,v 1.35.2.13 2005/12/29 11:51:12 acydburn Exp $
- *
- ****************************************************************************/
-/***************************************************************************
- *
- *   This program is free software; you can redistribute it and/or modify
- *   it under the terms of the GNU General Public License as published by
- *   the Free Software Foundation; either version 2 of the License, or
- *   (at your option) any later version.
- *
- ***************************************************************************/
-/* CONTRIBUTORS
-	2002-12-15	Philip M. White (pwhite@mailhaven.com)
-		Fixed many minor grammatical mistakes
-*/
-//
-// Format is same as lang_main
-//
-//
-// Modules, this replaces the keys used
-// in the modules[][] arrays in each module file
-//
+
 $lang['GENERAL'] = 'General Admin';
 $lang['USERS'] = 'User Admin';
 $lang['GROUPS'] = 'Group Admin';
@@ -508,7 +480,7 @@ $lang['RANK_TITLE'] = 'Rank Title';
 $lang['RANK_SPECIAL'] = 'Set as Special Rank';
 $lang['RANK_MINIMUM'] = 'Minimum Posts';
 $lang['RANK_MAXIMUM'] = 'Maximum Posts';
-$lang['RANK_IMAGE'] = 'Rank Image (Relative to phpBB2 root path)';
+$lang['RANK_IMAGE'] = 'Rank Image';
 $lang['RANK_IMAGE_EXPLAIN'] = 'Use this to define a small image associated with the rank';
 
 $lang['MUST_SELECT_RANK'] = 'You must select a rank';

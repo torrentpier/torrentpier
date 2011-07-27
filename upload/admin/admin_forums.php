@@ -150,16 +150,11 @@ if ($mode)
 				'S_PRUNE_ENABLED' => $prune_enabled,
 
 				'SHOW_ON_INDEX' => $show_on_index,
-				'L_SHOW_ON_INDEX' => $lang['SF_SHOW_ON_INDEX'],
-				'L_PARENT_FORUM' => $lang['SF_PARENT_FORUM'],
 				'S_PARENT_FORUM' => $s_parent,
 				'CAT_LIST_CLASS' => ($forum_parent) ? 'hidden' : '',
 				'SHOW_ON_INDEX_CLASS' => (!$forum_parent) ? 'hidden' : '',
 
 				'L_FORUM_TITLE' => $l_title,
-				'L_FORUM_EXPLAIN' => $lang['FORUM_EDIT_DELETE_EXPLAIN'],
-				'L_FORUM_DESCRIPTION' => $lang['FORUM_DESC'],
-				'L_AUTO_PRUNE' => $lang['FORUM_PRUNING'],
 
 				'PRUNE_DAYS' => $prune_days,
 				'FORUM_NAME' => htmlCHR($forumname),
@@ -371,10 +366,7 @@ if ($mode)
 
 			$template->assign_vars(array(
 				'TPL_EDIT_CATEGORY' => true,
-
 				'CAT_TITLE'       => htmlCHR($cat_info['cat_title']),
-				'L_EDIT_CAT'      => $lang['EDIT_CATEGORY'],
-				'L_EDIT_CAT_EXPL' => $lang['EDIT_CATEGORY_EXPLAIN'],
 				'S_HIDDEN_FIELDS' => build_hidden_fields($hidden_fields),
 				'S_SUBMIT_VALUE'  => $lang['UPDATE'],
 				'S_FORUM_ACTION'  => "admin_forums.php",
@@ -439,8 +431,6 @@ if ($mode)
 
 				'WHAT_TO_DELETE'   => htmlCHR($foruminfo['forum_name']),
 				'DELETE_TITLE'     => $lang['FORUM_DELETE'],
-				'L_DELETE_EXPL'    => $lang['FORUM_DELETE_EXPLAIN'],
-				'L_MOVE_CONTENTS'  => $lang['MOVE_CONTENTS'],
 				'CAT_FORUM_NAME'   => $lang['FORUM_NAME'],
 
 				'S_HIDDEN_FIELDS'  => build_hidden_fields($hidden_fields),
@@ -546,7 +536,6 @@ if ($mode)
 
 				'WHAT_TO_DELETE'   => htmlCHR($catinfo['cat_title']),
 				'DELETE_TITLE'     => $lang['CATEGORY_DELETE'],
-				'L_DELETE_EXPL'    => $lang['FORUM_DELETE_EXPLAIN'],
 				'CAT_FORUM_NAME'   => $lang['CATEGORY'],
 
 				'S_HIDDEN_FIELDS'  => build_hidden_fields($hidden_fields),
@@ -724,10 +713,7 @@ if (!$mode || $show_main_page)
 		'TPL_FORUMS_LIST' => true,
 
 		'S_FORUM_ACTION' => append_sid("admin_forums.php"),
-		'L_FORUM_TITLE' => $lang['FORUM_ADMIN_MAIN'],
-		'L_FORUM_EXPLAIN' => $lang['FORUM_ADMIN_EXPLAIN'],
-		'L_EDIT' => 'edit', //$lang['EDIT'],
-		'L_RESYNC' => 'sync', //$lang['RESYNC']
+		'L_FORUM_TITLE' => $lang['FORUM_ADMIN_MAIN']
 	));
 
 	$sql = "SELECT cat_id, cat_title, cat_order

@@ -65,9 +65,6 @@ if( $mode != "" )
 			"WORD"        => $word,
 			"REPLACEMENT" => $replacement,
 
-			"L_WORDS_TEXT"  => $lang['WORDS_EXPLAIN'],
-			"L_WORD_CENSOR" => $lang['EDIT_WORD_CENSOR'],
-
 			"S_WORDS_ACTION"  => append_sid("admin_words.php"),
 			"S_HIDDEN_FIELDS" => $s_hidden_fields)
 		);
@@ -145,9 +142,6 @@ else
 
 	$template->assign_vars(array(
 		'TPL_ADMIN_WORDS_LIST' => true,
-
-		"L_WORDS_TEXT" => $lang['WORDS_EXPLAIN'],
-		"L_ADD_WORD" => $lang['ADD_NEW_WORD'],
 
 		"S_WORDS_ACTION" => append_sid("admin_words.php"),
 		"S_HIDDEN_FIELDS" => '')

@@ -4,7 +4,7 @@
 
 <h1>{L_WORDS_TITLE}</h1>
 
-<P>{L_WORDS_TEXT}</p>
+<P>{L_WORDS_EXPLAIN}</p>
 <br />
 
 <form method="post" action="{S_WORDS_ACTION}">
@@ -24,7 +24,7 @@
 	</tr>
 	<!-- END words -->
 	<tr>
-		<td colspan="5" class="catBottom">{S_HIDDEN_FIELDS}<input type="submit" name="add" value="{L_ADD_WORD}" class="mainoption" /></td>
+		<td colspan="5" class="catBottom">{S_HIDDEN_FIELDS}<input type="submit" name="add" value="{L_ADD_NEW_WORD}" class="mainoption" /></td>
 	</tr>
 </table></form>
 
@@ -36,14 +36,14 @@
 
 <h1>{L_WORDS_TITLE}</h1>
 
-<p>{L_WORDS_TEXT}</p>
+<p>{L_WORDS_EXPLAIN}</p>
 <br />
 
 <form method="post" action="{S_WORDS_ACTION}">
 
 <table class="forumline">
 	<tr>
-		<th colspan="2">{L_WORD_CENSOR}</th>
+		<th colspan="2">{L_EDIT_WORD_CENSOR}</th>
 	</tr>
 	<tr>
 		<td class="row1">{L_WORD}</td>

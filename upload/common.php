@@ -429,7 +429,7 @@ class sqlite_common extends cache_dbg_common
 	             'shard_type'   => 'none',     #  none, string, int (тип перевичного ключа для шардинга)
 	             'shard_val'    => 0,          #  для string - кол. начальных символов, для int - делитель (будет использован остаток от деления)
 	           );
-	var $engine    = 'SQLite DB';
+	var $engine    = 'SQLite';
 	var $dbh       = null;
 	var $connected = false;
 	var $shard_val = false;
@@ -1439,19 +1439,20 @@ function sql_dbg_enabled ()
 
 function short_query ($sql, $esc_html = false)
 {
-	$max_len = 2500;
-	$sql = str_compact($sql);
+    $max_len = 100;
+    $sql = str_compact($sql);
 
-	if (empty($_COOKIE['sql_log_full']))
-	{
-		if (strlen($sql) > $max_len)
-		{
-			$sql = substr($sql, 0, $max_len-500) .' [...cut...] '. substr($sql, -480);
-		}
-	}
+    if (empty($_COOKIE['sql_log_full']))
+    {
+        if (mb_strlen($sql, 'UTF-8') > $max_len)
+        {
+            $sql = mb_substr($sql, 0, 50) .' [...cut...] '. mb_substr($sql, -50);
+        }
+    }
 
-	return ($esc_html) ? htmlCHR($sql, true) : $sql;
+    return ($esc_html) ? htmlCHR($sql, true) : $sql;
 }
+
 // Functions
 function utime ()
 {

@@ -400,36 +400,6 @@ if ($mode == 'manage')
 
 	$template->assign_vars(array(
 		'TPL_ATTACH_MANAGE' => true,
-
-		'L_MANAGE_TITLE' => $lang['ATTACH_SETTINGS'],
-		'L_MANAGE_EXPLAIN' => $lang['MANAGE_ATTACHMENTS_EXPLAIN'],
-		'L_ATTACHMENT_SETTINGS' => $lang['ATTACH_SETTINGS'],
-		'L_ATTACHMENT_FILESIZE_SETTINGS' => $lang['ATTACH_FILESIZE_SETTINGS'],
-		'L_ATTACHMENT_NUMBER_SETTINGS' => $lang['ATTACH_NUMBER_SETTINGS'],
-		'L_ATTACHMENT_OPTIONS_SETTINGS' => $lang['ATTACH_OPTIONS_SETTINGS'],
-		'L_ATTACHMENT_FTP_SETTINGS' => $lang['FTP_INFO'],
-		'L_NO_FTP_EXTENSIONS' => $lang['NO_FTP_EXTENSIONS_INSTALLED'],
-		'L_UPLOAD_DIR' => $lang['UPLOAD_DIRECTORY'],
-		'L_UPLOAD_DIR_EXPLAIN' => $lang['UPLOAD_DIRECTORY_EXPLAIN'],
-		'L_ATTACHMENT_IMG_PATH' => $lang['ATTACH_IMG_PATH'],
-		'L_IMG_PATH_EXPLAIN' => $lang['ATTACH_IMG_PATH_EXPLAIN'],
-		'L_ATTACHMENT_TOPIC_ICON' => $lang['ATTACH_TOPIC_ICON'],
-		'L_TOPIC_ICON_EXPLAIN' => $lang['ATTACH_TOPIC_ICON_EXPLAIN'],
-		'L_DISPLAY_ORDER' => $lang['ATTACH_DISPLAY_ORDER'],
-		'L_DISPLAY_ORDER_EXPLAIN' => $lang['ATTACH_DISPLAY_ORDER_EXPLAIN'],
-		'L_MAX_FILESIZE' => $lang['MAX_FILESIZE_ATTACH'],
-		'L_MAX_FILESIZE_EXPLAIN' => $lang['MAX_FILESIZE_ATTACH_EXPLAIN'],
-		'L_PM_ATTACH' => $lang['PM_ATTACHMENTS'],
-		'L_PM_ATTACH_EXPLAIN' => $lang['PM_ATTACHMENTS_EXPLAIN'],
-		'L_ATTACHMENT_FTP_PATH' => $lang['ATTACH_FTP_PATH'],
-		'L_ATTACHMENT_FTP_USER' => $lang['FTP_USERNAME'],
-		'L_ATTACHMENT_FTP_PASS' => $lang['FTP_PASSWORD'],
-		'L_ATTACHMENT_FTP_PATH_EXPLAIN' => $lang['ATTACH_FTP_PATH_EXPLAIN'],
-		'L_ATTACHMENT_FTP_SERVER' => $lang['FTP_SERVER'],
-		'L_ATTACHMENT_FTP_SERVER_EXPLAIN' => $lang['FTP_SERVER_EXPLAIN'],
-		'L_DOWNLOAD_PATH' => $lang['FTP_DOWNLOAD_PATH'],
-		'L_DOWNLOAD_PATH_EXPLAIN' => $lang['FTP_DOWNLOAD_PATH_EXPLAIN'],
-
 		'S_ATTACH_ACTION' => append_sid('admin_attachments.php?mode=manage'),
 		'S_FILESIZE' => $select_size_mode,
 		'S_FILESIZE_QUOTA' => $select_quota_size_mode,
@@ -531,35 +501,18 @@ if ($mode == 'cats')
 
 	$template->assign_vars(array(
 		'TPL_ATTACH_SPECIAL_CATEGORIES' => true,
-
-		'L_MANAGE_CAT_TITLE' => $lang['MANAGE_CATEGORIES'],
-		'L_MANAGE_CAT_EXPLAIN' => $lang['MANAGE_CATEGORIES_EXPLAIN'],
-		'L_SETTINGS_CAT_STREAM' => $lang['SETTINGS_CAT_STREAMS'],
-		'L_CREATE_THUMBNAIL' => $lang['IMAGE_CREATE_THUMBNAIL'],
-		'L_CREATE_THUMBNAIL_EXPLAIN' => $lang['IMAGE_CREATE_THUMBNAIL_EXPLAIN'],
-		'L_MIN_THUMB_FILESIZE' => $lang['IMAGE_MIN_THUMB_FILESIZE'],
-		'L_MIN_THUMB_FILESIZE_EXPLAIN' => $lang['IMAGE_MIN_THUMB_FILESIZE_EXPLAIN'],
-		'L_IMAGICK_PATH' => $lang['IMAGE_IMAGICK_PATH'],
-		'L_IMAGICK_PATH_EXPLAIN' => $lang['IMAGE_IMAGICK_PATH_EXPLAIN'],
-		'L_SEARCH_IMAGICK' => $lang['IMAGE_SEARCH_IMAGICK'],
-
 		'IMAGE_MAX_HEIGHT' => $new_attach['img_max_height'],
 		'IMAGE_MAX_WIDTH' => $new_attach['img_max_width'],
-
 		'IMAGE_LINK_HEIGHT' => $new_attach['img_link_height'],
 		'IMAGE_LINK_WIDTH' => $new_attach['img_link_width'],
 		'IMAGE_MIN_THUMB_FILESIZE' => $new_attach['img_min_thumb_filesize'],
 		'IMAGE_IMAGICK_PATH' => $new_attach['img_imagick'],
-
 		'DISPLAY_INLINED_YES' => $display_inlined_yes,
 		'DISPLAY_INLINED_NO' => $display_inlined_no,
-
 		'CREATE_THUMBNAIL_YES' => $create_thumbnail_yes,
 		'CREATE_THUMBNAIL_NO' => $create_thumbnail_no,
-
 		'USE_GD2_YES' => $use_gd2_yes,
 		'USE_GD2_NO' => $use_gd2_no,
-
 		'S_ASSIGNED_GROUP_IMAGES' => implode(', ', $s_assigned_group_images),
 		'S_ATTACH_ACTION' => append_sid('admin_attachments.php?mode=cats'))
 	);
@@ -854,13 +807,8 @@ if ($mode == 'quota')
 
 	$template->assign_vars(array(
 		'TPL_ATTACH_QUOTA' => true,
-
-		'L_MANAGE_QUOTAS_TITLE' => $lang['MANAGE_QUOTAS'],
-		'L_SIZE' => $lang['MAX_FILESIZE_ATTACH'],
 		'MAX_FILESIZE' => $max_add_filesize,
-
 		'S_FILESIZE' => size_select('add_size_select', $size),
-
 		'S_ATTACH_ACTION' => append_sid('admin_attachments.php?mode=quota'))
 	);
 

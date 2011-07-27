@@ -1,6 +1,6 @@
-<h1>{L_ADMIN_TITLE}</h1>
+<h1>{L_RELEASE_TEMPLATES}</h1>
 
-<P>{L_ADMIN_TEXT}</p>
+<P>{L_RELEASE_EXP}</p>
 <br />
 
 <form method="post" action="{S_ACTION}">

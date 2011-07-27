@@ -335,11 +335,7 @@ if ($mode == 'submit' || $mode == 'refresh')
 
 	$template->assign_vars(array(
 		'L_NEXT'                    => $next_button,
-
-		'L_TIME_LAST_POSTS_ADMIN'         => sprintf($lang['TIME_LAST_POSTS'], $num_rows),
-		'L_TIME_BEGINNING'          => $lang['TIME_FROM_THE_BEGINNING'],
-
-		'L_ESTIMATED_VALUES'        => $lang['INFO_ESTIMATED_VALUES'],
+		'L_TIME_LAST_POSTS_ADMIN'   => sprintf($lang['TIME_LAST_POSTS'], $num_rows),
 
 		'PROCESSING_POSTS'          => sprintf($lang['PROCESSED_POST_IDS'], $start_post_id, $end_post_id),
 		'PROCESSING_MESSAGES'       => $processing_messages,

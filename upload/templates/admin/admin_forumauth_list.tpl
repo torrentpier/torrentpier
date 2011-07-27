@@ -2,9 +2,9 @@
 <!-- IF TPL_AUTH_FORUM_LIST -->
 <!--========================================================================-->
 
-<h1>{L_AUTH_TITLE}</h1>
+<h1>{L_AUTH_CONTROL_CATEGORY}</h1>
 
-<p>{L_AUTH_EXPLAIN}</p>
+<p>{L_FORUM_AUTH_LIST_EXPLAIN}</p>
 <br />
 
 <table class="forumline med">
@@ -36,9 +36,9 @@
 <!-- IF TPL_AUTH_CAT -->
 <!--========================================================================-->
 
-<h1>{L_AUTH_TITLE}</h1>
+<h1>{L_PERMISSIONS_LIST}</h1>
 
-<p>{L_AUTH_EXPLAIN}</p>
+<p>{L_CAT_AUTH_LIST_EXPLAIN}</p>
 
 <h2>{L_CATEGORY} : {CAT_NAME}</h2>
 

@@ -1,7 +1,7 @@
 
 <h1>{L_EMAIL}</h1>
 
-<p>{L_EMAIL_EXPLAIN}</p>
+<p>{L_MASS_EMAIL_EXPLAIN}</p>
 <br />
 
 <form method="post" action="{S_USER_ACTION}">
@@ -15,7 +15,7 @@
 	  <td class="row2">{S_GROUP_SELECT}</td>
 	</tr>
 	<tr>
-	  <td class="row1" align="right"><b>{L_EMAIL_SUBJECT}</b></td>
+	  <td class="row1" align="right"><b>{L_SUBJECT}</b></td>
 	  <td class="row2"><span class="gen"><input class="post" type="text" name="subject" size="45" maxlength="100" tabindex="2" class="post" value="{SUBJECT}" /></span></td>
 	</tr>
 	<tr>

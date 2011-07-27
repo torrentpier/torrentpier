@@ -1,11 +1,11 @@
 <h1>{L_REPORTS_TITLE}</h1>
 
-<p>{L_REPORTS_EXPLAIN}</p>
+<p>{L_REPORT_ADMIN_EXPLAIN}</p>
 
 <table width="100%" cellpadding="4" cellspacing="1" border="0" class="forumline">
 	<tr>
 		<th class="thCornerL" width="50%">{L_REPORT_MODULE}</th>
-		<th class="thTop">{L_REPORT_COUNT}</th>
+		<th class="thTop">{L_REPORTS}</th>
 		<th class="thCornerR" width="50%">{L_ACTION}</th>
 	</tr>
 	<!-- BEGIN installed_modules -->
@@ -50,7 +50,7 @@
 		</td>
 		<td class="row1" align="center"><span class="genmed">{inactive_modules.modules.REPORT_COUNT}</span></td>
 		<td class="row1" align="center"><span class="genmed">
-			<a href="{inactive_modules.modules.U_INSTALL}" class="genmed">{L_INSTALL}</a>
+			<a href="{inactive_modules.modules.U_INSTALL}" class="genmed">{L_INSTALL2}</a>
 		</span></td>
 	</tr>
 	<!-- END modules -->

@@ -204,7 +204,7 @@ function updateButton()
 				<tr>
 					<td>{L_TIME_LAST_POSTS_ADMIN}&nbsp;</td>
 					<td>{LAST_CYCLE_TIME}</td>
-					<td>{L_TIME_BEGINNING}&nbsp;</td>
+					<td>{L_TIME_FROM_THE_BEGINNING}&nbsp;</td>
 					<td>{SESSION_TIME}</td>
 				</tr>
 				<tr>
@@ -237,7 +237,7 @@ function updateButton()
 		</td>
 	</tr>
 	<tr>
-		<td class="row2 small tCenter">{L_ESTIMATED_VALUES}</td>
+		<td class="row2 small tCenter">{L_INFO_ESTIMATED_VALUES}</td>
 	</tr>
 
 	<tr>

@@ -1,7 +1,7 @@
 <form action="{S_REPORT_ACTION}" method="post">
 	<table width="100%" cellpadding="4" cellspacing="1" border="0" class="forumline" align="center">
 		<tr>
-			<th class="thHead" colspan="2">{L_EDIT_MODULE}</th>
+			<th class="thHead" colspan="2">{L_EDIT_REPORT_MODULE}</th>
 		</tr>
 		<tr> 
 			<td class="row1" width="40%" valign="top"><span class="gen">{L_REPORT_MODULE}:</span></td>
@@ -37,7 +37,7 @@
 		</tr>
 		<tr>
 			<td class="row1">
-				<label for="auth_write" class="gen">{L_AUTH_WRITE}</label>:
+				<label for="auth_write" class="gen">{L_WRITE}</label>:
 			</td>
 			<td class="row2">
 				<select name="auth_write" id="auth_write">
@@ -49,7 +49,7 @@
 		</tr>
 		<tr>
 			<td class="row1">
-				<label for="auth_view" class="gen">{L_AUTH_VIEW}</label>:
+				<label for="auth_view" class="gen">{L_VIEW}</label>:
 			</td>
 			<td class="row2">
 				<select name="auth_view" id="auth_view">
@@ -61,8 +61,8 @@
 		</tr>
 		<tr>
 			<td class="row1">
-				<label for="auth_notify" class="gen">{L_AUTH_NOTIFY}</label>:<br />
-				<span class="gensmall">{L_AUTH_NOTIFY_EXPLAIN}</span>
+				<label for="auth_notify" class="gen">{L_REPORT_NOTIFY}</label>:<br />
+				<span class="gensmall">{L_REPORT_AUTH_NOTIFY_EXPLAIN}</span>
 			</td>
 			<td class="row2">
 				<select name="auth_notify" id="auth_notify">
@@ -74,8 +74,8 @@
 		</tr>
 		<tr>
 			<td class="row1">
-				<label for="auth_delete" class="gen">{L_AUTH_DELETE}</label>:<br />
-				<span class="gensmall">{L_AUTH_DELETE_EXPLAIN}</span>
+				<label for="auth_delete" class="gen">{L_DELETE}</label>:<br />
+				<span class="gensmall">{L_REPORT_AUTH_DELETE_EXPLAIN}</span>
 			</td>
 			<td class="row2">
 				<select name="auth_delete" id="auth_delete">

@@ -13,8 +13,8 @@ define('IN_PHPBB', true);
 define('BB_ROOT', './../');
 
 require("./pagestart.php");
-require(BB_ROOT . "includes/functions_report.php");
-require(BB_ROOT . "includes/functions_report_admin.php");
+require(INC_DIR . "functions_report.php");
+require(INC_DIR . "functions_report_admin.php");
 
 $return_links = array(
 	'index' => '<br /><br />' . sprintf($lang['CLICK_RETURN_ADMIN_INDEX'], '<a href="' . append_sid("index.php?pane=right") . '">', '</a>'),
@@ -80,8 +80,7 @@ if ($mode == 'config')
 			'REPORT_NEW_WINDOW_ON' => ($bb_cfg['report_new_window']) ? ' checked="checked"' : '',
 			'REPORT_NEW_WINDOW_OFF' => (!$bb_cfg['report_new_window']) ? ' checked="checked"' : '',
 
-			'L_CONFIGURATION_TITLE' => $lang['REPORTS'] . ': ' . $lang['CONFIGURATION'],
-			'L_CONFIGURATION_EXPLAIN' => $lang['REPORT_CONFIG_EXPLAIN'])
+			'L_CONFIGURATION_TITLE' => $lang['REPORTS'] . ': ' . $lang['CONFIGURATION'])
 		);
 
 		print_page('report_config_body.tpl');
@@ -127,20 +126,11 @@ else if (isset($_POST[POST_CAT_URL]) || isset($_GET[POST_CAT_URL]))
 
 			$template->assign_vars(array(
 				'S_HIDDEN_FIELDS' => $hidden_fields,
-
 				'MODULE_TITLE' => $module_info['title'],
 				'MODULE_EXPLAIN' => $module_info['explain'],
 				'MODULE_NOTIFY_ON' => ($report_module->data['report_module_notify']) ? ' checked="checked"' : '',
 				'MODULE_NOTIFY_OFF' => (!$report_module->data['report_module_notify']) ? ' checked="checked"' : '',
-				'MODULE_PRUNE' => $report_module->data['report_module_prune'],
-
-				'L_EDIT_MODULE' => $lang['EDIT_REPORT_MODULE'],
-				'L_AUTH_WRITE' => $lang['WRITE'],
-				'L_AUTH_VIEW' => $lang['VIEW'],
-				'L_AUTH_NOTIFY' => $lang['REPORT_NOTIFY'],
-				'L_AUTH_NOTIFY_EXPLAIN' => $lang['REPORT_AUTH_NOTIFY_EXPLAIN'],
-				'L_AUTH_DELETE' => $lang['DELETE'],
-				'L_AUTH_DELETE_EXPLAIN' => $lang['REPORT_AUTH_DELETE_EXPLAIN'])
+				'MODULE_PRUNE' => $report_module->data['report_module_prune'])
 			);
 
 			//
@@ -232,14 +222,7 @@ else if (isset($_POST[POST_CAT_URL]) || isset($_GET[POST_CAT_URL]))
 
 						$template->assign_vars(array(
 							'S_HIDDEN_FIELDS' => $hidden_fields,
-
-							'REASON_DESC' => $report_reason['report_reason_desc'],
-
-							'L_EDIT_REASON' => $lang['EDIT_REASON'],
-							'L_REASON_DESC' => $lang['FORUM_DESC'],
-							'L_REASON_DESC_EXPLAIN' => $lang['REASON_DESC_EXPLAIN'],
-							'L_SUBMIT' => $lang['SUBMIT'],
-							'L_CANCEL' => $lang['CANCEL'])
+							'REASON_DESC' => $report_reason['report_reason_desc'])
 						);
 
 						print_page('report_reason_edit_body.tpl');
@@ -341,11 +324,7 @@ else if (isset($_POST[POST_CAT_URL]) || isset($_GET[POST_CAT_URL]))
 
 						$template->assign_vars(array(
 							'S_HIDDEN_FIELDS' => $hidden_fields,
-
-							'REASON_DESC' => (isset($reason_desc)) ? stripslashes($reason_desc) : '',
-
-							'L_EDIT_REASON' => $lang['ADD_REASON'],
-							'L_REASON_DESC' => $lang['FORUM_DESC'])
+							'REASON_DESC' => (isset($reason_desc)) ? stripslashes($reason_desc) : '')
 						);
 
 						print_page('report_reason_edit_body.tpl');
@@ -486,15 +465,7 @@ else if (isset($_POST['module']) || isset($_GET['module']))
 				'MODULE_EXPLAIN' => $module_info['explain'],
 				'MODULE_NOTIFY_ON' => ($bb_cfg['report_notify']) ? ' checked="checked"' : '',
 				'MODULE_NOTIFY_OFF' => (!$bb_cfg['report_notify']) ? ' checked="checked"' : '',
-				'MODULE_PRUNE' => 0,
-
-				'L_EDIT_MODULE' => $lang['INSTALL_REPORT_MODULE'],
-				'L_AUTH_WRITE' => $lang['WRITE'],
-				'L_AUTH_VIEW' => $lang['VIEW'],
-				'L_AUTH_NOTIFY' => $lang['REPORT_NOTIFY'],
-				'L_AUTH_NOTIFY_EXPLAIN' => $lang['REPORT_AUTH_NOTIFY_EXPLAIN'],
-				'L_AUTH_DELETE' => $lang['DELETE'],
-				'L_AUTH_DELETE_EXPLAIN' => $lang['REPORT_AUTH_DELETE_EXPLAIN'])
+				'MODULE_PRUNE' => 0)
 			);
 
 			//
@@ -521,11 +492,7 @@ else
 			$report_modules = report_modules();
 
 			$template->assign_vars(array(
-				'L_REPORTS_TITLE' => $lang['REPORTS'] . ': ' . $lang['MODULES_REASONS'],
-				'L_REPORTS_EXPLAIN' => $lang['REPORT_ADMIN_EXPLAIN'],
-
-				'L_REPORT_COUNT' => $lang['REPORTS'],
-				'L_INSTALL' => $lang['INSTALL2'])
+				'L_REPORTS_TITLE' => $lang['REPORTS'] . ': ' . $lang['MODULES_REASONS'])
 			);
 
 			$report_counts = report_counts_obtain();
