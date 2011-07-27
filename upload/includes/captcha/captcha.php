@@ -5,17 +5,17 @@
 */
 class captcha_common
 {
-	var $cfg            = array();      // конфиг
-	var $can_bypass     = false;        // может обойти капчу
-	var $cap_img_total  = 1000;         // количество текущих картинок
-	var $new_per_minute = 10;           // сколько генерить новых, столько же будет помечаться для удаления
-	var $key_ttl        = 300;          // время жизни _code_ ключа
-	var $cap_sid_len    = 20;           // длина sid'a
-	var $cap_min_chars  = 3;            // минимум символов на картинке
-	var $cap_max_chars  = 5;            // максимум
+	var $cfg            = array();      // РєРѕРЅС„РёРі
+	var $can_bypass     = false;        // РјРѕР¶РµС‚ РѕР±РѕР№С‚Рё РєР°РїС‡Сѓ
+	var $cap_img_total  = 1000;         // РєРѕР»РёС‡РµСЃС‚РІРѕ С‚РµРєСѓС‰РёС… РєР°СЂС‚РёРЅРѕРє
+	var $new_per_minute = 10;           // СЃРєРѕР»СЊРєРѕ РіРµРЅРµСЂРёС‚СЊ РЅРѕРІС‹С…, СЃС‚РѕР»СЊРєРѕ Р¶Рµ Р±СѓРґРµС‚ РїРѕРјРµС‡Р°С‚СЊСЃСЏ РґР»СЏ СѓРґР°Р»РµРЅРёСЏ
+	var $key_ttl        = 300;          // РІСЂРµРјСЏ Р¶РёР·РЅРё _code_ РєР»СЋС‡Р°
+	var $cap_sid_len    = 20;           // РґР»РёРЅР° sid'a
+	var $cap_min_chars  = 3;            // РјРёРЅРёРјСѓРј СЃРёРјРІРѕР»РѕРІ РЅР° РєР°СЂС‚РёРЅРєРµ
+	var $cap_max_chars  = 5;            // РјР°РєСЃРёРјСѓРј
 	var $img_ext        = 'jpg';
 
-	var $cap_sid_key    = 'cap_sid';    // ключи/значения в $_POST
+	var $cap_sid_key    = 'cap_sid';    // РєР»СЋС‡Рё/Р·РЅР°С‡РµРЅРёСЏ РІ $_POST
 	var $cap_sid_val    = '';
 	var $curr_code_key  = '';
 	var $prev_code_key  = '';
@@ -37,7 +37,7 @@ class captcha_common
 
 	function verify_code ()
 	{
-		// обход
+		// РѕР±С…РѕРґ
 		if ($this->can_bypass || $this->cfg['disabled'])
 		{
 			if (!empty($_POST[$this->cfg['secret_key']])) log_get('cap/off', @$_POST['login_username']);
@@ -142,7 +142,7 @@ class captcha_common
 	}
 
 	/**
-	*  Генерит валидное имя ключа для получения введенного кода капчи из $_POST
+	*  Р“РµРЅРµСЂРёС‚ РІР°Р»РёРґРЅРѕРµ РёРјСЏ РєР»СЋС‡Р° РґР»СЏ РїРѕР»СѓС‡РµРЅРёСЏ РІРІРµРґРµРЅРЅРѕРіРѕ РєРѕРґР° РєР°РїС‡Рё РёР· $_POST
 	*/
 	function get_key_name ($tm)
 	{
