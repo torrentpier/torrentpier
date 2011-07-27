@@ -172,7 +172,7 @@ switch($this->request['type'])
 			
 			$hidden_form = '<input type="hidden" name="mode" value="editpost" />';
 			$hidden_form .= '<input type="hidden" name="'. POST_POST_URL .'" value="'. $post_id .'" />';
-			$submit = $this->response['redirect'] = make_url('posting.php?mode=editpost&p='. $post_id);
+			$hidden_form .= '<input type="hidden" name="subject" value="'. $post['topic_title'] .'" />';
 
 			$this->response['text'] = '
 			    <form action="posting.php" method="post" name="post">
@@ -193,7 +193,7 @@ switch($this->request['type'])
 					</div>
 					<textarea id="message-'. $post_id .'" class="editor mrg_4" name="message" rows="18" cols="92">'. $post['post_text'] .'</textarea>
 					<div class="mrg_4 tCenter">
-						<input title="Alt+Enter" type="button" id="'.$submit.'" name="preview" value="'. $lang['PREVIEW'] .'">
+						<input title="Alt+Enter" type="submit" value="Полное редактирвоание">
 						<input type="button" onclick="edit_post('. $post_id .');" value="'. $lang['CANCEL'] .'">
 						<input type="button" onclick="edit_post('. $post_id .', \'editor\', $(\'#message-'. $post_id .'\').val()); return false;" class="bold" value="'. $lang['EDIT_POST'] .'">
 					</div><hr>
