@@ -92,9 +92,6 @@ ajax.callback.posts = function(data){
 
 	<textarea
 		class="editor mrg_4" name="message" id="message" rows="18" cols="92"
-<!-- IF SHOW_VIRTUAL_KEYBOARD -->
-		onkeypress = "if(use_kb) return decode(event);"
-<!-- ENDIF -->
 		onfocus  = "storeCaret(this);"
 		onselect = "storeCaret(this);"
 		onclick  = "storeCaret(this);"

@@ -616,7 +616,7 @@ else
 	}
 	else if ( $mode == 'quote' || $mode == 'editpost' )
 	{
-		$subject = ( $post_data['first_post'] ) ? $post_info['topic_title'] : $post_info['post_subject'];
+		$subject = ( $post_data['first_post'] ) ? $post_info['topic_title'] : '';
 		$message = $post_info['post_text'];
 
 		if ( $mode == 'quote' )

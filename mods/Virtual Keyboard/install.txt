@@ -124,6 +124,24 @@ $lang['KB_TRANSLIT_OPERA7'] = 'Нажмите здесь для перевода
 
 <!-- IF SHOW_VIRTUAL_KEYBOARD --><!-- INCLUDE kb.tpl --><!-- ENDIF -->
 
+#
+#-----[ OPEN / Открыть ]-----------------------------------------
+#
+    templates/default/posting_editor.tpl
+
+#
+#-----[ FIND / Найти ]-------------------------------------------
+#
+
+class="editor mrg_4" name="message" id="message" rows="18" cols="92"
+
+#
+#-----[ ADD / Добавить]------------------------------
+#
+
+<!-- IF SHOW_VIRTUAL_KEYBOARD -->
+		onkeypress = "if(use_kb) return decode(event);"
+<!-- ENDIF -->
 
 # 
 #-----[ SAVE/CLOSE ALL FILES / Сохранить/Закрыть все файлы]------------------------------------------ 

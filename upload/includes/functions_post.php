@@ -1,24 +1,4 @@
 <?php
-/***************************************************************************
- *                            functions_post.php
- *                            -------------------
- *   begin                : Saturday, Feb 13, 2001
- *   copyright            : (C) 2001 The phpBB Group
- *   email                : support@phpbb.com
- *
- *   $Id: functions_post.php,v 1.9.2.40 2005/12/22 11:34:02 acydburn Exp $
- *
- *
- ***************************************************************************/
-
-/***************************************************************************
- *
- *   This program is free software; you can redistribute it and/or modify
- *   it under the terms of the GNU General Public License as published by
- *   the Free Software Foundation; either version 2 of the License, or
- *   (at your option) any later version.
- *
- ***************************************************************************/
 
 if (!defined('BB_ROOT')) die(basename(__FILE__));
 
@@ -126,8 +106,7 @@ function prepare_post(&$mode, &$post_data, &$error_msg, &$username, &$subject, &
 //
 function submit_post($mode, &$post_data, &$message, &$meta, &$forum_id, &$topic_id, &$post_id, &$poll_id, &$topic_type, $post_username, $post_subject, $post_message, $poll_title, &$poll_options, &$poll_length, $update_post_time)
 {
-	global $bb_cfg, $lang;
-	global $userdata, $post_info, $is_auth;
+	global $userdata, $post_info, $is_auth, $bb_cfg, $lang;
 
 	$current_time = time();
 
@@ -646,8 +625,7 @@ function user_notification($mode, &$post_data, &$topic_title, &$forum_id, &$topi
 
 function insert_post ($mode, $topic_id, $forum_id = '', $old_forum_id = '', $new_topic_id = '', $new_topic_title = '', $old_topic_id = '', $message = '', $poster_id = '')
 {
-	global $bb_cfg, $lang;
-	global $userdata, $is_auth;
+	global $userdata, $is_auth, $bb_cfg, $lang;
 
 	require(DEFAULT_LANG_DIR .'lang_bot.php');
 
@@ -761,6 +739,5 @@ function topic_review ($topic_id)
 
 	$template->assign_vars(array(
 		'TPL_TOPIC_REVIEW' => (bool) $review_posts,
-		'L_TOPIC_REVIEW'   => $lang['TOPIC_REVIEW'],
 	));
 }

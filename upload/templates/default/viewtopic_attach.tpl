@@ -200,10 +200,8 @@
 				<option value="del_torrent">{L_DELETE_TORRENT}</option>
 				<option value="del_torrent_move_topic">{L_DEL_MOVE_TORRENT}</option>
 			</select>
-			<label>
-				<input name="confirm" id="tor-confirm-{postrow.attach.tor_not_reged.ATTACH_ID}" type="checkbox" value="1" onclick="if( $('#tor-select-{postrow.attach.tor_not_reged.ATTACH_ID}')[0].selectedIndex != 0 ){ $('#tor-submit-{postrow.attach.tor_not_reged.ATTACH_ID}').click(function(){ change_torrents(); }); $('#tor-submit-{postrow.attach.tor_not_reged.ATTACH_ID}').attr('disabled', !this.checked); } else { return false; }" />&nbsp;{L_CONFIRM}&nbsp;
-			</label>
-			<input name="" id="tor-submit-{postrow.attach.tor_not_reged.ATTACH_ID}" type="submit" value="{L_DO_SUBMIT}" class="liteoption" style="width: 110px;" disabled="disabled" />&nbsp;
+			
+			&nbsp; <a href="#" onclick="change_torrents($('#tor-{postrow.attach.tor_reged.ATTACH_ID} select').val()); return false;"><input type="submit" value="{L_DO_SUBMIT}" class="liteoption" /></a>
 		<!-- ENDIF -->
 		&nbsp;</td>
 	</tr>
@@ -282,7 +280,7 @@
 
 				<span id="tor-{postrow.attach.tor_reged.ATTACH_ID}">{postrow.attach.tor_reged.TOR_STATUS_SELECT}</span>
 
-				<a href="#" onclick="ajax.change_tor_status($('#tor-{postrow.attach.tor_reged.ATTACH_ID} select').val()); return false;" class="txtb">[Изменить]</a>
+				<a href="#" onclick="ajax.change_tor_status($('#tor-{postrow.attach.tor_reged.ATTACH_ID} select').val()); return false;"><input type="submit" value="{L_DO_SUBMIT}" class="liteoption" /></a>
 
 			<!-- ENDIF -->
 		</td>
@@ -338,10 +336,8 @@
 				<!-- ENDIF -->
 				<!-- ENDIF -->
 			</select>
-			<label>
-				<input name="confirm" id="tor-confirm-{postrow.attach.tor_reged.ATTACH_ID}" type="checkbox" value="1" onclick="if( $('#tor-select-{postrow.attach.tor_reged.ATTACH_ID}')[0].selectedIndex != 0 ){ $('#tor-submit-{postrow.attach.tor_reged.ATTACH_ID}').click(function(){ change_torrents(); }); $('#tor-submit-{postrow.attach.tor_reged.ATTACH_ID}').attr('disabled', !this.checked); } else { return false; }" />&nbsp;{L_CONFIRM}&nbsp;
-			</label>
-			<input name="" id="tor-submit-{postrow.attach.tor_reged.ATTACH_ID}" type="button" value="{L_DO_SUBMIT}" class="liteoption" style="width: 110px;" disabled="disabled" />&nbsp;
+			
+			&nbsp; <a href="#" onclick="change_torrents($('#tor-{postrow.attach.tor_reged.ATTACH_ID} select').val()); return false;"><input type="submit" value="{L_DO_SUBMIT}" class="liteoption" /></a>
 
 		<!-- ELSEIF TOR_HELP_LINKS -->
 		{TOR_HELP_LINKS}

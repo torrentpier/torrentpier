@@ -13,6 +13,7 @@ define('FILENAME_CRYPTIC',        false);
 define('FILENAME_CRYPTIC_LENGTH', 64);
 define('FILENAME_TRANSLITERATE',  true);
 
+
 class attach_parent
 {
 	var $post_attach = false;
@@ -789,6 +790,7 @@ class attach_parent
 		if ($this->add_attachment_body)
 		{
 			$template->assign_vars(array(
+				'TPL_ADD_ATTACHMENT'   => true,
 				'FILE_COMMENT' => htmlspecialchars($this->file_comment),
 				'FILESIZE'     => $attach_config['max_filesize'],
 				'FILENAME'     => htmlspecialchars($this->filename),

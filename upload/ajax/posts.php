@@ -29,21 +29,26 @@ if (!defined('WORD_LIST_OBTAINED'))
 }
 
 switch($this->request['type'])
-{	case 'delete';
+{
+	case 'delete';
 		if(!$post) $this->ajax_die('not post');
 
 		$is_auth = auth(AUTH_ALL, $post['forum_id'], $userdata, $post);
 
 		if($post['post_id'] != $post['topic_first_post_id'] && ($is_auth['auth_mod'] || ($userdata['user_id'] == $post['poster_id'] && $is_auth['auth_delete'] && $post['topic_last_post_id'] == $post['post_id'] && $post['post_time'] + 3600*3 > TIMENOW)))
-		{			if (empty($this->request['confirmed']))
+		{
+			if (empty($this->request['confirmed']))
 			{
 				$this->prompt_for_confirm($lang['CONFIRM_DELETE']);
 			}
 			post_delete($post_id);
 			$this->response['hide']    = true;
-			$this->response['post_id'] = $post_id;		}
+			$this->response['post_id'] = $post_id;
+		}
 		else
-		{			$this->ajax_die(sprintf($lang['SORRY_AUTH_DELETE'], strip_tags($is_auth['auth_delete_type'])));		}
+		{
+			$this->ajax_die(sprintf($lang['SORRY_AUTH_DELETE'], strip_tags($is_auth['auth_delete_type'])));
+		}
 		break;
 
 	case 'reply';
@@ -73,7 +78,9 @@ switch($this->request['type'])
 		}
 
 		if(mb_strlen($message, 'UTF-8') > 1000)
-		{			$this->response['redirect'] = make_url('posting.php?mode=quote&p='. $post_id);		}
+		{
+			$this->response['redirect'] = make_url('posting.php?mode=quote&p='. $post_id);
+		}
 
 		$this->response['quote']   = true;
 		$this->response['message'] = $message;
@@ -91,7 +98,9 @@ switch($this->request['type'])
         if(!$post) $this->ajax_die('not post');
 
         if(mb_strlen($post['post_text'], 'UTF-8') > 1000)
-        {        	$this->response['redirect'] = make_url('posting.php?mode=editpost&p='. $post_id);        }
+        {
+        	$this->response['redirect'] = make_url('posting.php?mode=editpost&p='. $post_id);
+        }
 		else if($this->request['type'] == 'editor')
 		{
 			$text = (string) $this->request['text'];
@@ -160,11 +169,14 @@ switch($this->request['type'])
 					}
 				}
 			}
+			
+			$hidden_form = '<input type="hidden" name="mode" value="editpost" />';
+			$hidden_form .= '<input type="hidden" name="'. POST_POST_URL .'" value="'. $post_id .'" />';
+			$submit = $this->response['redirect'] = make_url('posting.php?mode=editpost&p='. $post_id);
 
 			$this->response['text'] = '
 			    <form action="posting.php" method="post" name="post">
-					<input type="hidden" name="mode" value="reply" />
-					<input type="hidden" name="t" value="'. $post['topic_id'] .'" />
+					'. $hidden_form .'			
 					<div class="buttons mrg_4">
 						<input type="button" value=" B " name="codeB" title="Bold (Ctrl+B)" style="font-weight: bold; width: 30px;" />
 						<input type="button" value=" i " name="codeI" title="Italic (Ctrl+I)" style="width: 30px; font-style: italic;" />
@@ -181,7 +193,7 @@ switch($this->request['type'])
 					</div>
 					<textarea id="message-'. $post_id .'" class="editor mrg_4" name="message" rows="18" cols="92">'. $post['post_text'] .'</textarea>
 					<div class="mrg_4 tCenter">
-						<input title="Alt+Enter" type="submit" name="preview" value="'. $lang['PREVIEW'] .'">
+						<input title="Alt+Enter" type="'.$submit.'" name="preview" value="'. $lang['PREVIEW'] .'">
 						<input type="button" onclick="edit_post('. $post_id .');" value="'. $lang['CANCEL'] .'">
 						<input type="button" onclick="edit_post('. $post_id .', \'editor\', $(\'#message-'. $post_id .'\').val()); return false;" class="bold" value="'. $lang['EDIT_POST'] .'">
 					</div><hr>
@@ -299,7 +311,8 @@ switch($this->request['type'])
 
 	default:
 		$this->ajax_die('empty type');
-		break;}
+		break;
+}
 
 
 

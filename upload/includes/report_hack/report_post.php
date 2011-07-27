@@ -172,7 +172,7 @@ class report_post extends report_module
 	//
 	function subject_obtain($report_subject)
 	{
-		$sql = 'SELECT pt.post_subject, t.topic_title, t.topic_first_post_id
+		$sql = 'SELECT t.topic_title, t.topic_first_post_id
 			FROM ' . BB_POSTS . ' p
 			INNER JOIN ' . BB_POSTS_TEXT . ' pt
 				ON pt.post_id = p.post_id
@@ -192,9 +192,9 @@ class report_post extends report_module
 			return false;
 		}
 
-		if ($row['post_subject'] != '')
+		if ($row['topic_title'] != '')
 		{
-			return $row['post_subject'];
+			return $row['topic_title'];
 		}
 		else
 		{

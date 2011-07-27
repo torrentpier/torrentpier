@@ -80,11 +80,13 @@ switch($type)
 	break;
 
 	case 'del_torrent';
+		if (empty($this->request['confirmed'])) $this->prompt_for_confirm('Вы уверены, что хотите удалить торрент?');
 	    delete_torrent($attach_id);
 	    $url = make_url(TOPIC_URL . $torrent['topic_id']);
 	break;
 
 	case 'del_torrent_move_topic';
+		if (empty($this->request['confirmed'])) $this->prompt_for_confirm('Вы уверены, что хотите удалить и перенести топик?');
 	    delete_torrent($attach_id);
 		$url = make_url("modcp.php?t={$torrent['topic_id']}&mode=move&sid={$userdata['session_id']}");
 	break;}

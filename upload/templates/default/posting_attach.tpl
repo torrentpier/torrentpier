@@ -5,7 +5,7 @@
 	<th colspan="2" class="thHead">{L_ADD_ATTACHMENT_TITLE}</th>
 </tr>
 <tr>
-	<td class="pad_4"><b>{L_FILE_NAME}</b></td>
+	<td class="pad_4"><b>{L_FILENAME}</b></td>
 	<td>
 		<table class="borderless" cellspacing="0">
 		<tr>
@@ -39,7 +39,7 @@
 </tr>
 <!-- BEGIN attach_row -->
 <tr>
-	<td class="row5"><b>{L_FILE_NAME}</b></td>
+	<td class="row5"><b>{L_FILENAME}</b></td>
 	<td class="row5"><a class="gen" href="{attach_row.U_VIEW_ATTACHMENT}" target="_blank"><b>{attach_row.FILE_NAME}</b></a></td>
 </tr>
 <tr>

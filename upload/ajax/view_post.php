@@ -16,7 +16,6 @@ $sql = "
 	SELECT
 	  p.*,
 	  h.post_html, IF(h.post_html IS NULL, pt.post_text, NULL) AS post_text,
-	  pt.post_subject,
 	  f.auth_read
 	FROM       ". BB_POSTS      ." p
 	INNER JOIN ". BB_POSTS_TEXT ." pt ON(pt.post_id = p.post_id)
