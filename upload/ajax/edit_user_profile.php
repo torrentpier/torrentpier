@@ -14,7 +14,7 @@ if (!$field = (string) $this->request['field'])
 }
 
 $table = BB_USERS;
-$value = (string) $this->request['value'];
+$value = $this->request['value'] = (string) (isset($this->request['value'])) ? $this->request['value'] : 0;
 
 switch ($field)
 {
@@ -52,7 +52,9 @@ switch ($field)
 			$this->ajax_die('error');
 		}
 		else
-		{			$this->response['new_value'] = $lang['GENDER_SELECT'][$value];		}
+		{
+			$this->response['new_value'] = $lang['GENDER_SELECT'][$value];
+		}
 		break;
 
 	case 'user_birthday':
@@ -65,7 +67,9 @@ switch ($field)
 		if($b_day || $b_md || $b_year)
 		{
 			if((bb_date(TIMENOW, 'Y') - $b_year) > $bb_cfg['birthday']['max_user_age'])
-			{				$this->ajax_die(sprintf($lang['BIRTHDAY_TO_HIGH'], $bb_cfg['birthday']['max_user_age']));			}
+			{
+				$this->ajax_die(sprintf($lang['BIRTHDAY_TO_HIGH'], $bb_cfg['birthday']['max_user_age']));
+			}
             else if((bb_date(TIMENOW, 'Y') - $b_year) < $bb_cfg['birthday']['min_user_age'])
 			{
 				$this->ajax_die(sprintf($lang['BIRTHDAY_TO_LOW'], $bb_cfg['birthday']['min_user_age']));
@@ -78,11 +82,13 @@ switch ($field)
 			{
 				$value = mkrealdate($b_day, $b_md, $b_year);
 				$next_birthday_greeting = (date('md') < $b_md . (($b_day <= 9) ? '0' : '') . $b_day) ? date('Y') : date('Y')+1;
-			}		}
+			}
+		}
 		else
 		{
 		    $value = 0;
-		    $next_birthday_greeting = 0;		}
+		    $next_birthday_greeting = 0;
+		}
 		DB()->query("UPDATE $table SET user_next_birthday_greeting = $next_birthday_greeting WHERE user_id = $user_id LIMIT 1");
 
 	    $this->response['new_value']  = $this->request['value'];
