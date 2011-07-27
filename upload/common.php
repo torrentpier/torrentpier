@@ -65,7 +65,7 @@ class DBS
 		}
 	}
 
-	// ïîëó÷åíèå/èíèöèàëèçàöèÿ êëàññà äëÿ ñåðâåðà $srv_name
+	// Ð¿Ð¾Ð»ÑƒÑ‡ÐµÐ½Ð¸Ðµ/Ð¸Ð½Ð¸Ñ†Ð¸Ð°Ð»Ð¸Ð·Ð°Ñ†Ð¸Ñ ÐºÐ»Ð°ÑÑÐ° Ð´Ð»Ñ ÑÐµÑ€Ð²ÐµÑ€Ð° $srv_name
 	function get_db_obj ($srv_name_or_alias = 'db1')
 	{
 		$srv_name = $this->get_srv_name($srv_name_or_alias);
@@ -78,7 +78,7 @@ class DBS
 		return $this->srv[$srv_name];
 	}
 
-	// îïðåäåëåíèå èìåíè ñåðâåðà
+	// Ð¾Ð¿Ñ€ÐµÐ´ÐµÐ»ÐµÐ½Ð¸Ðµ Ð¸Ð¼ÐµÐ½Ð¸ ÑÐµÑ€Ð²ÐµÑ€Ð°
 	function get_srv_name ($name)
 	{
 		if (isset($this->alias[$name]))
@@ -114,9 +114,9 @@ define('PEERS_LIST_EXPIRE', round($bb_cfg['announce_interval'] * 0.7));  // sec
 
 class CACHES
 {
-	var $cfg = array();   // êîíôèã
-	var $obj = array();   // êåø-îáúåêòû
-	var $ref = array();   // ññûëêè íà $obj (èìÿ_êåøà => êåø_îáúåêò)
+	var $cfg = array();   // ÐºÐ¾Ð½Ñ„Ð¸Ð³
+	var $obj = array();   // ÐºÐµÑˆ-Ð¾Ð±ÑŠÐµÐºÑ‚Ñ‹
+	var $ref = array();   // ÑÑÑ‹Ð»ÐºÐ¸ Ð½Ð° $obj (Ð¸Ð¼Ñ_ÐºÐµÑˆÐ° => ÐºÐµÑˆ_Ð¾Ð±ÑŠÐµÐºÑ‚)
 
 	function CACHES ($cfg)
 	{
@@ -439,8 +439,8 @@ class sqlite_common extends cache_dbg_common
 	             'pconnect'     => true,
 	             'con_required' => true,
 	             'log_name'     => 'SQLite',
-	             'shard_type'   => 'none',     #  none, string, int (òèï ïåðåâè÷íîãî êëþ÷à äëÿ øàðäèíãà)
-	             'shard_val'    => 0,          #  äëÿ string - êîë. íà÷àëüíûõ ñèìâîëîâ, äëÿ int - äåëèòåëü (áóäåò èñïîëüçîâàí îñòàòîê îò äåëåíèÿ)
+	             'shard_type'   => 'none',     #  none, string, int (Ñ‚Ð¸Ð¿ Ð¿ÐµÑ€ÐµÐ²Ð¸Ñ‡Ð½Ð¾Ð³Ð¾ ÐºÐ»ÑŽÑ‡Ð° Ð´Ð»Ñ ÑˆÐ°Ñ€Ð´Ð¸Ð½Ð³Ð°)
+	             'shard_val'    => 0,          #  Ð´Ð»Ñ string - ÐºÐ¾Ð». Ð½Ð°Ñ‡Ð°Ð»ÑŒÐ½Ñ‹Ñ… ÑÐ¸Ð¼Ð²Ð¾Ð»Ð¾Ð², Ð´Ð»Ñ int - Ð´ÐµÐ»Ð¸Ñ‚ÐµÐ»ÑŒ (Ð±ÑƒÐ´ÐµÑ‚ Ð¸ÑÐ¿Ð¾Ð»ÑŒÐ·Ð¾Ð²Ð°Ð½ Ð¾ÑÑ‚Ð°Ñ‚Ð¾Ðº Ð¾Ñ‚ Ð´ÐµÐ»ÐµÐ½Ð¸Ñ)
 	           );
 	var $engine    = 'SQLite DB';
 	var $dbh       = null;
@@ -503,7 +503,7 @@ class sqlite_common extends cache_dbg_common
 		{
 			$shard_val = $key % $this->cfg['shard_val'];
 		}
-		// âñå çàïðîñû äîëæíû áûòü ê îäíîìó è òîìó æå øàðäó
+		// Ð²ÑÐµ Ð·Ð°Ð¿Ñ€Ð¾ÑÑ‹ Ð´Ð¾Ð»Ð¶Ð½Ñ‹ Ð±Ñ‹Ñ‚ÑŒ Ðº Ð¾Ð´Ð½Ð¾Ð¼Ñƒ Ð¸ Ñ‚Ð¾Ð¼Ñƒ Ð¶Ðµ ÑˆÐ°Ñ€Ð´Ñƒ
 		if ($this->shard_val !== false)
 		{
 			if ($shard_val != $this->shard_val)
@@ -898,18 +898,18 @@ class cache_file extends cache_common
 class datastore_common
 {
 	/**
-	* Äèðåêòîðèÿ ñ builder-ñêðèïòàìè (âíóòðè INC_DIR)
+	* Ð”Ð¸Ñ€ÐµÐºÑ‚Ð¾Ñ€Ð¸Ñ Ñ builder-ÑÐºÑ€Ð¸Ð¿Ñ‚Ð°Ð¼Ð¸ (Ð²Ð½ÑƒÑ‚Ñ€Ð¸ INC_DIR)
 	*/
 	var $ds_dir = 'datastore/';
 	/**
-	* Ãîòîâàÿ ê óïîòðåáëåíèþ data
+	* Ð“Ð¾Ñ‚Ð¾Ð²Ð°Ñ Ðº ÑƒÐ¿Ð¾Ñ‚Ñ€ÐµÐ±Ð»ÐµÐ½Ð¸ÑŽ data
 	* array('title' => data)
 	*/
 	var $data = array();
 	/**
-	* Ñïèñîê ýëåìåíòîâ, êîòîðûå áóäóò èçâëå÷åíû èç õðàíèëèùà ïðè ïåðâîì æå çàïðîñå get()
-	* äî ýòîãî ìîìåíòà îíè ñòàâÿòñÿ â î÷åðåäü $queued_items äëÿ äàëüíåéøåãî èçâëå÷åíèÿ _fetch()'åì
-	* âñåõ ýëåìåíòîâ îäíèì çàïðîñîì
+	* Ð¡Ð¿Ð¸ÑÐ¾Ðº ÑÐ»ÐµÐ¼ÐµÐ½Ñ‚Ð¾Ð², ÐºÐ¾Ñ‚Ð¾Ñ€Ñ‹Ðµ Ð±ÑƒÐ´ÑƒÑ‚ Ð¸Ð·Ð²Ð»ÐµÑ‡ÐµÐ½Ñ‹ Ð¸Ð· Ñ…Ñ€Ð°Ð½Ð¸Ð»Ð¸Ñ‰Ð° Ð¿Ñ€Ð¸ Ð¿ÐµÑ€Ð²Ð¾Ð¼ Ð¶Ðµ Ð·Ð°Ð¿Ñ€Ð¾ÑÐµ get()
+	* Ð´Ð¾ ÑÑ‚Ð¾Ð³Ð¾ Ð¼Ð¾Ð¼ÐµÐ½Ñ‚Ð° Ð¾Ð½Ð¸ ÑÑ‚Ð°Ð²ÑÑ‚ÑÑ Ð² Ð¾Ñ‡ÐµÑ€ÐµÐ´ÑŒ $queued_items Ð´Ð»Ñ Ð´Ð°Ð»ÑŒÐ½ÐµÐ¹ÑˆÐµÐ³Ð¾ Ð¸Ð·Ð²Ð»ÐµÑ‡ÐµÐ½Ð¸Ñ _fetch()'ÐµÐ¼
+	* Ð²ÑÐµÑ… ÑÐ»ÐµÐ¼ÐµÐ½Ñ‚Ð¾Ð² Ð¾Ð´Ð½Ð¸Ð¼ Ð·Ð°Ð¿Ñ€Ð¾ÑÐ¾Ð¼
 	* array('title1', 'title2'...)
 	*/
 	var $queued_items = array();
@@ -942,7 +942,7 @@ class datastore_common
 	{
 		foreach ((array) $items as $item)
 		{
-			// èãíîð óæå ïîñòàâëåííîãî â î÷åðåäü ëèáî óæå èçâëå÷åííîãî
+			// Ð¸Ð³Ð½Ð¾Ñ€ ÑƒÐ¶Ðµ Ð¿Ð¾ÑÑ‚Ð°Ð²Ð»ÐµÐ½Ð½Ð¾Ð³Ð¾ Ð² Ð¾Ñ‡ÐµÑ€ÐµÐ´ÑŒ Ð»Ð¸Ð±Ð¾ ÑƒÐ¶Ðµ Ð¸Ð·Ð²Ð»ÐµÑ‡ÐµÐ½Ð½Ð¾Ð³Ð¾
 			if (!in_array($item, $this->queued_items) && !isset($this->data[$item]))
 			{
 				$this->queued_items[] = $item;
