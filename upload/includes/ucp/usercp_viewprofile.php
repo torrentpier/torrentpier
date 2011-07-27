@@ -143,9 +143,9 @@ $template->assign_vars(array(
 	'OCCUPATION' 	=> $profiledata['user_occ'],
 	'INTERESTS' 	=> $profiledata['user_interests'],
 	'SKYPE'         => $profiledata['user_skype'],
-	'GENDER'        => $lang['GENDER_SELECT'][$profiledata['user_gender']],
-	'BIRTHDAY'      => ($profiledata['user_birthday']) ? realdate($profiledata['user_birthday'], 'Y-m-d') : '',
-	'AGE'           => ($profiledata['user_birthday']) ? birthday_age($profiledata['user_birthday']) : '',
+	'GENDER'        => ($profiledata['user_gender']) ? $lang['GENDER_SELECT'][$profiledata['user_gender']] : '',
+	'BIRTHDAY'      => ($bb_cfg['birthday']['enabled'] && $profiledata['user_birthday']) ? realdate($profiledata['user_birthday'], 'Y-m-d') : '',
+	'AGE'           => ($bb_cfg['birthday']['enabled'] && $profiledata['user_birthday']) ? birthday_age($profiledata['user_birthday']) : '',
 	'AVATAR_IMG' 	=> $avatar_img,
 
 	'L_VIEWING_PROFILE' => sprintf($lang['VIEWING_USER_PROFILE'], $profiledata['username']),
