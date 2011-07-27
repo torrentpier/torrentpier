@@ -158,19 +158,6 @@ class CACHES
 						$this->ref[$cache_name] =& $this->obj[$cache_name];
 						break;
 
-					case 'db_sqlite':
-						if (!isset($this->obj[$cache_name]))
-						{
-							$cache_cfg['pconnect']     = $this->cfg['pconnect'];
-							$cache_cfg['db_file_path'] = $this->get_db_path($cache_name, $cache_cfg, '.sqlite.db');
-							$cache_cfg['table_name']   = $cache_name;
-							$cache_cfg['table_schema'] = $this->get_table_schema($cache_cfg);
-
-							$this->obj[$cache_name] = new sqlite_common($cache_cfg);
-						}
-						$this->ref[$cache_name] =& $this->obj[$cache_name];
-						break;
-
                     case 'redis':
                         if (!isset($this->obj[$cache_name]))
 						{
@@ -1095,10 +1082,9 @@ class datastore_sqlite extends datastore_common
 	              'db_file_path' => '/path/to/datastore.db.sqlite',
 	              'table_name'   => 'datastore',
 	              'table_schema' => 'CREATE TABLE datastore (
-	                                   cache_name        VARCHAR(255),
-	                                   cache_expire_time INT,
-	                                   cache_value       TEXT,
-	                                   PRIMARY KEY (cache_name)
+	                                   ds_title       VARCHAR(255),
+	                                   ds_data        TEXT,
+	                                   PRIMARY KEY (ds_title)
 	                                 )',
 	              'pconnect'     => true,
 	              'con_required' => true,
@@ -1108,7 +1094,7 @@ class datastore_sqlite extends datastore_common
 	function datastore_sqlite ($cfg)
 	{
 		$this->cfg = array_merge($this->cfg, $cfg);
-		$this->db = new sqlite_common($cfg);
+		$this->db = new sqlite_common($this->cfg);
 	}
 
 	function store ($item_name, $item_data)
@@ -1415,7 +1401,7 @@ switch ($bb_cfg['datastore_type'])
 
 	case 'sqlite':
 		$default_cfg = array(
-			'db_file_path' => $bb_cfg['cache']['db_dir'] . '/bb_datastore.sqlite.db',
+			'db_file_path' => $bb_cfg['cache']['db_dir'] .'bb_datastore.sqlite.db',
 			'pconnect'     => true,
 			'con_required' => true,
 		);

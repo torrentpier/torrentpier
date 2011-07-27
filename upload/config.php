@@ -57,8 +57,8 @@ $bb_cfg['css_ver'] = 1;
 
 // Increase number of revision after update
 $bb_cfg['tp_version'] = '2.0.2';
-$bb_cfg['tp_release_state'] = 'TP II r168';
-$bb_cfg['tp_release_date'] = '27-07-2011';
+$bb_cfg['tp_release_state'] = 'TP II r169';
+$bb_cfg['tp_release_date'] = '28-07-2011';
 
 $bb_cfg['board_disabled_msg'] = 'форум временно отключен'; // 'forums temporarily disabled'; // show this msg if board has been disabled via ON/OFF trigger
 $bb_cfg['srv_overloaded_msg'] = "Извините, в данный момент сервер перегружен\nПопробуйте повторить запрос через несколько минут";
@@ -91,7 +91,7 @@ $bb_cfg['cache']['redis']  = array(
 	'con_required' => true,
 );
 
-// Available cache types: memcache, sqlite, db_sqlite, redis, eaccelerator, apc, xcache (default of filecache)
+// Available cache types: memcache, sqlite, redis, eaccelerator, apc, xcache (default of filecache)
 # name => array( (string) type, (array) cfg )
 $bb_cfg['cache']['engines'] = array(
 	'bb_cache'       => array('filecache',   array()),
