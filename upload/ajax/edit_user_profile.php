@@ -43,22 +43,19 @@ switch ($field)
 		{
 			$this->response['new_value'] = htmlCHR($value);
 		}
-		else $this->ajax_die('Поле "Сайт" может содержать только http:// ссылку');
+		else $this->ajax_die($lang['WEBSITE_ERROR']);
 		break;
 
 	case 'user_gender':
 	    if (!isset($lang['GENDER_SELECT'][$value]))
 		{
-			$this->ajax_die('error');
+			$this->ajax_die($lang['ERROR']);
 		}
-		else
-		{
-			$this->response['new_value'] = $lang['GENDER_SELECT'][$value];
-		}
+		else $this->response['new_value'] = $lang['GENDER_SELECT'][$value];
 		break;
 
 	case 'user_birthday':
-	    if(!$bb_cfg['birthday']['enabled']) $this->ajax_die('off');
+	    if(!$bb_cfg['birthday']['enabled']) $this->ajax_die($lang['MODULE_OFF']);
 	    $data = explode('-', $value);
 	    $b_day  = (isset($data[2])) ? (int) $data[2] : 0;
 		$b_md   = (isset($data[1])) ? (int) $data[1] : 0;
@@ -98,7 +95,7 @@ switch ($field)
 		$value = (int) $value;
 		if ($value && !preg_match('#^\d{6,15}$#', $value))
 		{
-			$this->ajax_die('Поле "ICQ" может содержать только номер icq');
+			$this->ajax_die($lang['ICQ_ERROR']);
 		}
 		$this->response['new_value'] = $this->request['value'];
 	    break;
@@ -123,7 +120,7 @@ switch ($field)
 		$tz = TIMENOW + (3600 * $bb_cfg['board_timezone']);
 		if (($value = strtotime($value, $tz)) < $bb_cfg['board_startdate'] OR $value > TIMENOW)
 		{
-			$this->ajax_die('invalid date: '. $this->request['value']);
+			$this->ajax_die($lang['INVALID_DATE'] . $this->request['value']);
 		}
 		$this->response['new_value'] = bb_date($value);
 		break;

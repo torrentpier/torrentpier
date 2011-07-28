@@ -52,7 +52,7 @@ switch($this->request['type'])
 		break;
 
 	case 'reply';
-		if(!$post) $this->ajax_die('not post');
+		if(!$post) $this->ajax_die($lang['NOT_POST']);
 
 		$is_auth = auth(AUTH_ALL, $post['forum_id'], $userdata, $post);
 		if(bf($userdata['user_opt'], 'user_opt', 'allow_post'))
@@ -95,7 +95,7 @@ switch($this->request['type'])
 
 	case 'edit':
     case 'editor':
-        if(!$post) $this->ajax_die('not post');
+        if(!$post) $this->ajax_die($lang['NOT_POST']);
 
         if(mb_strlen($post['post_text'], 'UTF-8') > 1000)
         {
@@ -151,7 +151,7 @@ switch($this->request['type'])
 					// по статусу раздачи
 					if (isset($bb_cfg['tor_cannot_edit'][$tor_status]))
 					{
-						$this->ajax_die("Вы не можете редактировать сообщение со статусом {$lang['tor_status'][$tor_status]}");
+						$this->ajax_die($lang['NOT_EDIT_TOR_STATUS'] .' - '. $lang['TOR_STATUS_NAME'][$tor_status]);
 					}
 					// проверенный, через время
 					if ($tor_status == TOR_APPROVED)
@@ -163,8 +163,8 @@ switch($this->request['type'])
 
 						if ($last_edit_time < TIMENOW && ($disallowed_by_forum_perm || $disallowed_by_user_opt))
 						{
-							$how_msg = ($disallowed_by_user_opt) ? 'Вам запрещено' : 'Вы не можете';
-							$this->ajax_die("$how_msg редактировать сообщение со статусом <b>{$lang['tor_status'][$tor_status]}</b> по прошествии $days_after_last_edit дней");
+							$how_msg = ($disallowed_by_user_opt) ? $lang['EDIT_POST_NOT_1'] : $lang['EDIT_POST_NOT_2'];
+							$this->ajax_die("$how_msg" .$lang['EDIT_POST_AJAX']. $lang['TOR_STATUS_NAME'][$tor_status] . $lang['AFTER_THE_LAPSE']. "$days_after_last_edit" . $lang['TOR_STATUS_DAYS']);
 						}
 					}
 				}
@@ -193,9 +193,9 @@ switch($this->request['type'])
 					</div>
 					<textarea id="message-'. $post_id .'" class="editor mrg_4" name="message" rows="18" cols="92">'. $post['post_text'] .'</textarea>
 					<div class="mrg_4 tCenter">
-						<input title="Alt+Enter" type="submit" value="Полное редактирвоание">
+						<input title="Alt+Enter" type="submit" value="'.$lang['PREVIEW'].'">
 						<input type="button" onclick="edit_post('. $post_id .');" value="'. $lang['CANCEL'] .'">
-						<input type="button" onclick="edit_post('. $post_id .', \'editor\', $(\'#message-'. $post_id .'\').val()); return false;" class="bold" value="'. $lang['EDIT_POST'] .'">
+						<input type="button" onclick="edit_post('. $post_id .', \'editor\', $(\'#message-'. $post_id .'\').val()); return false;" class="bold" value="'. $lang['SUBMIT'] .'">
 					</div><hr>
 					<script type="text/javascript">
 					var bbcode = new BBCode("message-'. $post_id .'");
@@ -313,6 +313,3 @@ switch($this->request['type'])
 		$this->ajax_die('empty type');
 		break;
 }
-
-
-

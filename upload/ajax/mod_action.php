@@ -4,18 +4,18 @@ if (!defined('IN_AJAX')) die(basename(__FILE__));
 
 global $userdata, $bb_cfg, $lang;
 
-$mode     = (string) $this->request['mode'];
+$mode = (string) $this->request['mode'];
 
 switch ($mode)
 {
 	case 'tor_status':
-	    $topics   = (string) $this->request['topic_ids'];
-	    $status   = (int) $this->request['status'];
+	    $topics = (string) $this->request['topic_ids'];
+	    $status = (int) $this->request['status'];
 
 	    // Валидность статуса
 		if (!isset($lang['TOR_STATUS_NAME'][$status]))
 		{
-			$this->ajax_die("Такого статуса не существует: $new_status");
+			$this->ajax_die($lang['STATUS_DOES_EXIST'] . $new_status);
 		}
 
 		$topic_ids = DB()->fetch_rowset("SELECT attach_id FROM ". BB_BT_TORRENTS ." WHERE topic_id IN($topics)", 'attach_id');
@@ -33,12 +33,12 @@ switch ($mode)
 		$topic_title = (string) $this->request['topic_title'];
 		$new_title   = clean_title($topic_title);
 
-		if (!$topic_id) $this->ajax_die('invalid topic_id (empty)');
-		if ($new_title == '') $this->ajax_die('Вы должны указать заголовок сообщения');
+		if (!$topic_id) $this->ajax_die($lang['INVALID_TOPIC_ID']);
+		if ($new_title == '') $this->ajax_die($lang['DONT_MESSAGE_TITLE']);
 
 		if (!$t_data = DB()->fetch_row("SELECT forum_id FROM ". BB_TOPICS ." WHERE topic_id = $topic_id LIMIT 1"))
 		{
-			$this->ajax_die('invalid topic_id (not found in db)');
+			$this->ajax_die($lang['INVALID_TOPIC_ID_DB']);
 		}
 		$this->verify_mod_rights($t_data['forum_id']);
 

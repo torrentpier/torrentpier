@@ -22,6 +22,8 @@ $lang['FLAGS'] = 'Flags';
 $lang['FORUM_CONFIG'] = 'Forum settings';
 $lang['TRACKER_CONFIG'] = 'Tracker settings';
 $lang['RELEASE_TEMPLATES'] = 'Release Templates';
+$lang['ACTIONS_LOG'] = 'Report on action';
+$lang['SEARCH'] = 'Search';
 
 //
 // Index

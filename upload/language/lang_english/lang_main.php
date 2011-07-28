@@ -306,7 +306,19 @@ $lang['POST_A_NEW_TOPIC'] = 'Post a new topic';
 $lang['POST_A_REPLY'] = 'Post a reply';
 $lang['POST_TOPIC_AS'] = 'Post topic as';
 $lang['EDIT_POST'] = 'Edit post';
-$lang['EDIT_POST_AJAX'] = "You can not edit the message with the status ";
+$lang['EDIT_POST_NOT_1'] = 'You are not allowed ';
+$lang['EDIT_POST_NOT_2'] = 'You can not ';
+$lang['EDIT_POST_AJAX'] = 'You can not edit the message with the status ';
+$lang['AFTER_THE_LAPSE'] = "after the lapse of ';
+
+$lang['DONT_MESSAGE_TITLE'] = 'You have not specified the message header';
+$lang['INVALID_TOPIC_ID'] = 'Topic Absent!';
+$lang['INVALID_TOPIC_ID_DB'] = 'Topic does not exist in the database!';
+
+$lang['NOT_POST'] = 'Absent Message';
+$lang['NOT_EDIT_TOR_STATUS'] = 'You may not edit your hand with the status';
+$lang['TOR_STATUS_DAYS'] = 'days'
+
 $lang['OPTIONS'] = 'Options';
 
 $lang['POST_ANNOUNCEMENT'] = 'Announcement';
@@ -1188,6 +1200,19 @@ $lang['TOR_STATUS_NAME'] = array(
     TOR_CHECKING      => 'verified',
     TOR_TMP           => 'temporary',
 );
+$lang['TOR_STATUS_FAILED'] = 'Such status does not exist!';
+$lang['TORRENT_FAILED'] = 'Distribution was not found!';
+$lang['TOR_STATUS_DUB'] = 'Distribution has the same status';
+$lang['TOR_DONT_CHANGE'] = 'Change of status can not be!';
+$lang['TOR_STATUS_OF'] = 'Distribution has the status of:';
+$lang['TOR_STATUS_CHANGED'] = 'Status changed: ';
+$lang['BACK'] = ' back';
+$lang['PROCEED'] = 'Proceed';
+$lang['INVALID_ATTACH_ID'] = 'Missing file identifier!';
+$lang['CHANGE_TOR_TYPE'] = 'Type the torrent successfully changed';
+$lang['DEL_TORRENT'] = 'Are you sure you want to delete the torrent?';
+$lang['DEL_MOVE_TORRENT'] = 'Are you sure you want to delete and move the topic?';
+
 //end torrent status mod
 
 $lang['BT_TOPIC_TITLE'] = 'Topic title';
@@ -1332,9 +1357,6 @@ $lang['ONLY_FOR_SUPER_ADMIN'] = 'This option only for super admins';
 $lang['ACCESS'] = 'Access';
 $lang['ACCESS_SRV_LOAD'] = 'Depend on server load';
 $lang['LOGS'] = 'Topic history';
-
-$lang['LAST_IP'] = 'Last IP:';
-$lang['REG_IP']  = 'Registration IP:';
 $lang['ALREADY_REG_IP'] = 'With your IP-address is already registered user %s. If you have not previously registered on our tracker, mail to <a href="mailto:%s">Administrator</ a>';
 
 //
@@ -1346,11 +1368,6 @@ $lang['NOT_ADMIN'] = 'You are not authorised to administer this board';
 
 $lang['COOKIES_REQUIRED'] = 'Cookies must be enabled!';
 $lang['SESSION_EXPIRED'] = 'Session expired';
-
-// FLAGHACK-start
-$lang['COUNTRY_FLAG'] = 'Country Flag';
-$lang['SELECT_COUNTRY'] = 'SELECT COUNTRY' ;
-// FLAGHACK-end
 
 // Sort memberlist per letter
 $lang['SORT_PER_LETTER'] = 'Show only usernames starting with';
@@ -1514,26 +1531,6 @@ $lang['REPORTS_DELETED'] = 'The selected reports were deleted.';//
 // Reports [END]
 //
 
-// Medal [BEGIN]
-$lang['MEDAL'] = 'Honour roll';
-$lang['TOP_10'] = 'Ten best';
-$lang['TOP_10_RATIO'] = 'on Upload/Download Ratio';
-$lang['TOP_10_SIZE_DOWNLOAD'] = 'on volume of the loaded';
-$lang['BEST_RELIZER'] = 'Ten best';
-$lang['BEST_RELEASES'] = 'The best releases';
-$lang['DOWNLOAD_MONTH'] = 'Downloadings of releases for a month';
-$lang['THANKS_MONTH'] = 'Thank\'s of releases for month';
-$lang['BEST_RELEASES_MONTH'] = 'The best releases for a month';
-$lang['BEST_RELEASES_WEEK'] = 'The best releases for a week';
-$lang['THANKS'] = 'Thanks';
-$lang['RELEASES'] = 'Releases';
-$lang['AVERAGE_RATING'] = 'Average estimation';
-$lang['BEST_COUNT_DOWNLOAD'] = 'on count downloadings';
-$lang['BEST_COUNT_THANKS'] = 'on count thanks';
-$lang['DOWNLOADS'] = 'Downloads';
-$lang['ON_AVERAGE'] = 'On average';
-// Medal [END]
-
 // search
 $lang['SEARCH_S'] = 'search...';
 $lang['FORUM_S'] = 'on forum';
@@ -1551,3 +1548,20 @@ $lang['FILELIST'] = 'Filelist';
 $lang['COLLAPSE'] = 'Collapse directory';
 $lang['EXPAND']   = 'Expand';
 $lang['SWITCH']   = 'Switch';
+$lang['EMPTY_ATTACH_ID']   = 'Missing file identifier!';
+$lang['TOR_NOT_FOUND'] = 'File is missing on the server!';
+$lang['ERROR_BUILD'] = 'Error: unable to build a list of files';
+$lang['TORFILE_INVALID'] = 'Torrent file is corrupt';
+// FILELIST
+
+// Profile
+$lang['WEBSITE_ERROR'] = 'The "site" may contain only http://sitename';
+$lang['ICQ_ERROR'] = 'The field of "ICQ" may contain only icq number';
+$lang['INVALID_DATE'] = 'Error date ';
+
+// Register
+$lang['CHOOSE_A_NAME'] = 'You should choose a name';
+$lang['CHOOSE_E_MAIL'] = 'You must specify the e-mail';
+$lang['CHOOSE_PASS'] = 'Field for the password must not be empty!';
+$lang['CHOOSE_PASS_ERR'] = 'Entered passwords do not match';
+$lang['CHOOSE_PASS_OK'] = 'Passwords match, you can proceed with the registration.';

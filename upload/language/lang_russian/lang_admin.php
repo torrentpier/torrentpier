@@ -25,7 +25,7 @@ $lang['FORUM_CONFIG'] = 'Настройки форумов';
 $lang['TRACKER_CONFIG'] = 'Настройки трекера';
 $lang['RELEASE_TEMPLATES'] = 'Шаблоны для релизов';
 $lang['ACTIONS_LOG'] = 'Отчет по действиям';
-$lang['SEARCH'] = 'Поиск пользователей';
+$lang['SEARCH'] = 'Поиск';
 
 //
 //Welcome page

@@ -18,7 +18,7 @@ $new_status = (int) $this->request['status'];
 // Валидность статуса
 if (!isset($lang['TOR_STATUS_NAME'][$new_status]))
 {
-	$this->ajax_die("Такого статуса не существует: $new_status");
+	$this->ajax_die($lang['TOR_STATUS_FAILED']);
 }
 
 $tor = DB()->fetch_row("
@@ -29,17 +29,17 @@ $tor = DB()->fetch_row("
 	WHERE tor.attach_id = $attach_id
 	LIMIT 1
 ");
-if (!$tor) $this->ajax_die('torrent not found');
+if (!$tor) $this->ajax_die($lang['TORRENT_FAILED']);
 
 // Тот же статус
 if ($tor['tor_status'] == $new_status)
 {
-	$this->ajax_die('Раздача имеет тот же статус');
+	$this->ajax_die($lang['TOR_STATUS_DUB']);
 }
 // Запрет на изменение/присвоение CH-статуса модератором
 if ($new_status == TOR_CLOSED_CPHOLD && !IS_ADMIN)
 {
-	$this->ajax_die('Изменение статуса невозможно');
+	$this->ajax_die($lang['TOR_DONT_CHANGE']);
 }
 
 // Права на изменение статуса
@@ -62,9 +62,9 @@ if ($tor['tor_status'] != TOR_NOT_APPROVED && $tor['checked_user_id'] != $userda
 {
 	if (empty($this->request['confirmed']))
 	{
-		$msg  = "Раздача имеет статус: {$lang['TOR_STATUS_NAME'][$tor['tor_status']]}\n\n";
-		$msg .= ($username = get_username($tor['checked_user_id'])) ? "Статус изменен: ". html_entity_decode($username) .", ". delta_time($tor['checked_time']) ." назад\n\n" : "";
-		$msg .= "Продолжить?";
+		$msg  = $lang['TOR_STATUS_OF'] ." {$lang['TOR_STATUS_NAME'][$tor['tor_status']]}\n\n";
+		$msg .= ($username = get_username($tor['checked_user_id'])) ? $lang['TOR_STATUS_CHANGED'] . html_entity_decode($username) .", ". delta_time($tor['checked_time']) . $lang['BACK'] ."\n\n" : "";
+		$msg .= $lang['PROCEED'] .'?';
 		$this->prompt_for_confirm($msg);
 	}
 }

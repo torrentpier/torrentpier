@@ -14,7 +14,7 @@ switch($mode)
 
 		if (empty($username))
 		{
-			$html = '<img src="./images/bad.gif"> <span class="leechmed bold">Вы должны выбрать имя</span>';
+			$html = '<img src="./images/bad.gif"> <span class="leechmed bold">'.$lang['CHOOSE_A_NAME'].'</span>';
 		}
 		else if($err = validate_username($username))
 		{
@@ -26,7 +26,7 @@ switch($mode)
 
 		if (empty($email))
 		{
-			$html = '<img src="./images/bad.gif"> <span class="leechmed bold">Вы должны указать e-mail</span>';
+			$html = '<img src="./images/bad.gif"> <span class="leechmed bold">'.$lang['CHOOSE_E_MAIL'].'</span>';
 		}
 		else if($err = validate_email($email))
 		{
@@ -38,17 +38,17 @@ switch($mode)
 		$pass_confirm = (string) $this->request['pass_confirm'];
 		if (empty($pass) || empty($pass_confirm))
 		{
-			$html = '<img src="./images/bad.gif"> <span class="leechmed bold">Поля для ввода пароля не должны быть пустыми!</span>';
+			$html = '<img src="./images/bad.gif"> <span class="leechmed bold">'.$lang['CHOOSE_PASS'].'</span>';
 		}
 		else
 		{
 			if ($pass != $pass_confirm)
 			{
-				$html = '<img src="./images/bad.gif"> <span class="leechmed bold">Введённые пароли не совпадают</span>';
+				$html = '<img src="./images/bad.gif"> <span class="leechmed bold">'.$lang['CHOOSE_PASS_ERR'].'</span>';
 			}
 			else
 			{
-				$html = '<img src="./images/good.gif"> <span class="seedmed bold">Пароли совпадают, можете продолжить регистрацию.</span>';
+				$html = '<img src="./images/good.gif"> <span class="seedmed bold">'.$lang['CHOOSE_PASS_OK'].'</span>';
 			}
 		}
 	break;

@@ -6,26 +6,26 @@ global $lang;
 
 if (!isset($this->request['attach_id']))
 {
-	$this->ajax_die('empty attach_id');
+	$this->ajax_die($lang['EMPTY_ATTACH_ID']);
 }
-$attach_id   = (int) $this->request['attach_id'];
+$attach_id = (int) $this->request['attach_id'];
 
 $torrent = DB()->fetch_row("SELECT at.attach_id, at.physical_filename
 	FROM ". BB_ATTACHMENTS_DESC ." at
 	WHERE at.attach_id = $attach_id
 	LIMIT 1");
-if(!$torrent) $this->ajax_die('empty attach_id');
+if(!$torrent) $this->ajax_die($lang['EMPTY_ATTACH_ID']);
 $filename = get_attachments_dir() .'/'. $torrent['physical_filename'];
 
 if (($file_contents = @file_get_contents($filename)) === false)
 {
 	if(IS_AM)
 	{
-		$this->ajax_die('torrent not found on disk: '. htmlCHR($filename));
+		$this->ajax_die($lang['TOR_NOT_FOUND'] ."\n\n". htmlCHR($filename));
 	}
 	else
 	{
-		$this->ajax_die('файл временно не доступен');
+		$this->ajax_die($lang['TOR_NOT_FOUND']);
 	}
 }
 
@@ -34,9 +34,11 @@ $tor_filelist = build_tor_filelist($file_contents);
 
 function build_tor_filelist ($file_contents)
 {
+    global $lang;
+	
 	if (!$tor = bdecode($file_contents))
 	{
-		return 'invalid torrent file';
+		return $lang['TORFILE_INVALID'];
 	}
 
 	$torrent = new torrent($tor);
@@ -125,7 +127,7 @@ class torrent
 						{
 							if (is_string($cur_files_ary))
 							{
-								$this->ajax_die('Error: cannot build filelist [string]');
+								$this->ajax_die($lang['ERROR_BUILD']);
 							}
 							$cur_files_ary[] = $this->build_file_item($name, $length);
 						}
