@@ -1,11 +1,11 @@
 <?php
 
-if(!$bb_cfg['reports_enabled']) return;
 if (!empty($setmodules))
 {
 	$file = basename(__FILE__);
+	if($bb_cfg['reports_enabled']){
 	$module['Reports']['Modules_reasons'] = $file;
-	$module['Reports']['Configuration'] = "$file?mode=config";
+	$module['Reports']['Configuration'] = "$file?mode=config";}
 	return;
 }
 

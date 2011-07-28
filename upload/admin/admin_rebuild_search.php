@@ -5,11 +5,14 @@
 // ACP Header - START
 if (!empty($setmodules))
 {
-	$module['General']['Rebuild_Search_Index'] = basename(__FILE__);
+	if(IS_SUPER_ADMIN){
+	$module['General']['Rebuild_Search_Index'] = basename(__FILE__);}
 	return;
 }
 require('./pagestart.php');
 // ACP Header - END
+
+if(!IS_SUPER_ADMIN) bb_die($lang['NOT_ADMIN']);
 
 require(INC_DIR .'bbcode.php');
 require(DEFAULT_LANG_DIR .'lang_admin_rebuild_search.php');

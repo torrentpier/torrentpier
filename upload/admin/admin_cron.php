@@ -3,7 +3,8 @@
 // ACP Header - START
 if (!empty($setmodules))
 {
-	$module['TorrentPier']['Cron'] = basename(__FILE__) . '?mode=list';
+	if(IS_SUPER_ADMIN){
+	$module['TorrentPier']['Cron'] = basename(__FILE__) . '?mode=list';}
 	return;
 }
 
@@ -32,6 +33,8 @@ else {
 	require('./pagestart.php');
 }
 // ACP Header - END
+
+if(!IS_SUPER_ADMIN) bb_die($lang['NOT_ADMIN']);
 
 require(LANG_DIR .'lang_admin_cron.php');
 require(INC_DIR .'functions_admin_torrent.php');

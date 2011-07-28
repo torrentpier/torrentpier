@@ -9,8 +9,8 @@
 		<th class="thCornerR" width="50%">{L_ACTION}</th>
 	</tr>
 	<!-- BEGIN installed_modules -->
-	<tr>
-		<td class="catSides" colspan="3"><span class="cattitle">{L_INSTALLED_MODULES}</span></td>
+	<tr class="row3 med">
+	    <td colspan="3" class="catTitle">{L_INSTALLED_MODULES}</td>
 	</tr>
 	<!-- BEGIN modules -->
 	<tr>
@@ -39,8 +39,8 @@
 	<!-- END installed_modules -->
 	
 	<!-- BEGIN inactive_modules -->
-	<tr>
-		<td class="catSides" colspan="3"><span class="cattitle">{L_INACTIVE_MODULES}</span></td>
+	<tr class="row3 med">
+	    <td colspan="3" class="catTitle">{L_INACTIVE_MODULES}</td>
 	</tr>
 	<!-- BEGIN modules -->
 	<tr>

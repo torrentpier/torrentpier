@@ -567,7 +567,7 @@ INSERT INTO `bb_config` VALUES ('bt_add_comment', '');
 INSERT INTO `bb_config` VALUES ('bt_add_publisher', 'YourSiteName');
 INSERT INTO `bb_config` VALUES ('bt_allow_spmode_change', '1');
 INSERT INTO `bb_config` VALUES ('bt_announce_url', 'http://yourdomain.com/bt/announce.php');
-INSERT INTO `bb_config` VALUES ('bt_disable_dht', '1');
+INSERT INTO `bb_config` VALUES ('bt_disable_dht', '0');
 INSERT INTO `bb_config` VALUES ('bt_check_announce_url', '0');
 INSERT INTO `bb_config` VALUES ('bt_del_addit_ann_urls', '1');
 INSERT INTO `bb_config` VALUES ('bt_dl_list_only_1st_page', '1');
