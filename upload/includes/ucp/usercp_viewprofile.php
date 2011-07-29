@@ -8,10 +8,6 @@ $datastore->enqueue(array(
 	'ranks',
 ));
 
-if (!$userdata['session_logged_in'])
-{
-	redirect(append_sid("login.php?redirect={$_SERVER['REQUEST_URI']}", TRUE));
-}
 if (empty($_GET[POST_USERS_URL]) || $_GET[POST_USERS_URL] == ANONYMOUS)
 {
 	bb_die($lang['NO_USER_ID_SPECIFIED']);
@@ -20,6 +16,10 @@ if (!$profiledata = get_userdata($_GET[POST_USERS_URL]))
 {
 	bb_die($lang['NO_USER_ID_SPECIFIED']);
 }
+
+if(bf($profiledata['user_opt'], 'user_opt', 'view_profile'))
+{	meta_refresh(append_sid("login.php?redirect={$_SERVER['REQUEST_URI']}", true));
+    bb_die("Пользователь {$profiledata['username']} запретил гостям просмотр своего профиля");}
 
 //
 // Calculate the number of days this user has been a member ($memberdays)

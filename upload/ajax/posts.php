@@ -159,7 +159,7 @@ switch($this->request['type'])
 						$days_after_last_edit     = $bb_cfg['dis_edit_tor_after_days'];
 						$last_edit_time           = max($post['post_time'], $post['post_edit_time']) + 86400*$days_after_last_edit;
 						$disallowed_by_forum_perm = in_array($post['forum_id'], $bb_cfg['dis_edit_tor_forums']);
-						$disallowed_by_user_opt   = bf($user->opt, 'user_opt', 'dis_edit_release');
+						$disallowed_by_user_opt   = bf($user->opt, 'user_opt', 'allow_post_edit');
 
 						if ($last_edit_time < TIMENOW && ($disallowed_by_forum_perm || $disallowed_by_user_opt))
 						{
@@ -169,14 +169,14 @@ switch($this->request['type'])
 					}
 				}
 			}
-			
+
 			$hidden_form = '<input type="hidden" name="mode" value="editpost" />';
 			$hidden_form .= '<input type="hidden" name="'. POST_POST_URL .'" value="'. $post_id .'" />';
 			$hidden_form .= '<input type="hidden" name="subject" value="'. $post['topic_title'] .'" />';
 
 			$this->response['text'] = '
 			    <form action="posting.php" method="post" name="post">
-					'. $hidden_form .'			
+					'. $hidden_form .'
 					<div class="buttons mrg_4">
 						<input type="button" value=" B " name="codeB" title="Bold (Ctrl+B)" style="font-weight: bold; width: 30px;" />
 						<input type="button" value=" i " name="codeI" title="Italic (Ctrl+I)" style="width: 30px; font-style: italic;" />

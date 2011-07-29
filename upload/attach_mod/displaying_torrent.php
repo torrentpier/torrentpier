@@ -219,7 +219,7 @@ if ($tor_reged && $tor_info)
 			// torrent status mod
 			'TOR_STATUS_TEXT' => $lang['TOR_STATUS_NAME'][$tor_info['tor_status']],
 			'TOR_STATUS_ICON' => $bb_cfg['tor_icons'][$tor_info['tor_status']],
-			'TOR_STATUS_BY'   => ($cuid && $is_auth['auth_mod']) ? ('&nbsp;&middot;&nbsp; <a href='. PROFILE_URL . $cuid . '>' . get_username($cuid) . '</a>&nbsp; &middot;&nbsp; <i>'. delta_time($tor_info['checked_time']) .' назад</i>') : '',
+			'TOR_STATUS_BY'   => ($cuid && $is_auth['auth_mod']) ? ('<span title="'.bb_date($tor_info['checked_time'], 'd-M-Y H:i').'"> &middot; <a class="med" href='. PROFILE_URL . $cuid . '>' . get_username($cuid) . '</a> &middot; <i>'. delta_time($tor_info['checked_time']) . $lang['BACK'] . '</i></span>') : '',
 			'TOR_STATUS_SELECT' => build_select('', array_flip($lang['TOR_STATUS_NAME']), TOR_APPROVED),
 			//end torrent status mod
 

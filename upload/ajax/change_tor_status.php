@@ -10,7 +10,7 @@ if (!isset($this->request['attach_id']))
 }
 if (!isset($this->request['status']))
 {
-	$this->ajax_die('empty tor_status');
+	$this->ajax_die('не выбран статус');
 }
 $attach_id  = (int) $this->request['attach_id'];
 $new_status = (int) $this->request['status'];
@@ -72,4 +72,4 @@ if ($tor['tor_status'] != TOR_NOT_APPROVED && $tor['checked_user_id'] != $userda
 change_tor_status($attach_id, $new_status);
 
 $this->response['attach_id'] = $attach_id;
-$this->response['status']    = $bb_cfg['tor_icons'][$new_status] .' '. $lang['TOR_STATUS_NAME'][$new_status];
+$this->response['status'] = $bb_cfg['tor_icons'][$new_status] .' <b> '. $lang['TOR_STATUS_NAME'][$new_status]. '</b> &middot; <a class="med" href='. PROFILE_URL . $tor['checked_user_id'] . '>' . get_username($tor['checked_user_id']) . '</a> &middot; <i>'. delta_time(time()) . $lang['BACK']. '</i>';
