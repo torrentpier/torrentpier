@@ -177,6 +177,13 @@ ajax.callback.posts = function(data){
 	</td>
 </tr>
 <tr>
+	<td>Запретить гостям просмотр вашего профиля:</td>
+	<td>
+		<label><input type="radio" name="view_profile" value="1" <!-- IF VIEW_PROFILE -->checked="checked"<!-- ENDIF --> />{L_YES}</label>&nbsp;&nbsp;
+		<label><input type="radio" name="view_profile" value="0" <!-- IF not VIEW_PROFILE -->checked="checked"<!-- ENDIF --> />{L_NO}</label>
+	</td>
+</tr>
+<tr>
 	<td>{L_ALWAYS_NOTIFY}:<h6>{L_ALWAYS_NOTIFY_EXPLAIN}</h6></td>
 	<td>
 		<label><input type="radio" name="notify" value="1" <!-- IF NOTIFY -->checked="checked"<!-- ENDIF --> />{L_YES}</label>&nbsp;&nbsp;

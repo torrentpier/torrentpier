@@ -19,7 +19,7 @@ if (!$profiledata = get_userdata($_GET[POST_USERS_URL]))
 
 if(bf($profiledata['user_opt'], 'user_opt', 'view_profile'))
 {	meta_refresh(append_sid("login.php?redirect={$_SERVER['REQUEST_URI']}", true));
-    bb_die("Пользователь {$profiledata['username']} запретил гостям просмотр своего профиля");}
+    bb_die("РџРѕР»СЊР·РѕРІР°С‚РµР»СЊ {$profiledata['username']} Р·Р°РїСЂРµС‚РёР» РіРѕСЃС‚СЏРј РїСЂРѕСЃРјРѕС‚СЂ СЃРІРѕРµРіРѕ РїСЂРѕС„РёР»СЏ");}
 
 //
 // Calculate the number of days this user has been a member ($memberdays)
