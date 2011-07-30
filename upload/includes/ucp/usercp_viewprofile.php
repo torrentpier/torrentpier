@@ -17,7 +17,7 @@ if (!$profiledata = get_userdata($_GET[POST_USERS_URL]))
 	bb_die($lang['NO_USER_ID_SPECIFIED']);
 }
 
-if(bf($profiledata['user_opt'], 'user_opt', 'view_profile'))
+if(bf($profiledata['user_opt'], 'user_opt', 'view_profile') && IS_GUEST)
 {	meta_refresh(append_sid("login.php?redirect={$_SERVER['REQUEST_URI']}", true));
     bb_die("Пользователь {$profiledata['username']} запретил гостям просмотр своего профиля");}
 

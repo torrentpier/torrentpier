@@ -314,6 +314,8 @@ $bb_cfg['tor_cannot_edit'] = array(
 	TOR_CONSUMED      => true,
 	TOR_DUP           => true,
 );
+// Запрет на создание новых раздач если стоит статус недооформлено/неоформлено/сомнительно
+$bb_cfg['tor_cannot_new'] = array(TOR_NEED_EDIT, TOR_NO_DESC, TOR_DOUBTFUL);
 
 // Table names
 define('BUF_TOPIC_VIEW',          'buf_topic_view');

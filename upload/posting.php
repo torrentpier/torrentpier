@@ -291,6 +291,23 @@ if (!$is_auth[$is_auth_type])
 
 if ($mode == 'newtopic' && $topic_tpl && $post_info['topic_tpl_id'])
 {
+	if($tor_status = join(',', $bb_cfg['tor_cannot_new']))
+    {
+		$sql = DB()->fetch_rowset("SELECT t.topic_title, t.topic_id, tor.tor_status
+			FROM ". BB_BT_TORRENTS ." tor, ". BB_TOPICS ." t
+			WHERE poster_id = {$userdata['user_id']}
+				AND tor.topic_id = t.topic_id
+				AND tor.tor_status IN ($tor_status)
+		    ORDER BY tor.reg_time
+		");
+
+        $topics = '';
+        foreach($sql as $row)
+        {
+        	$topics .= $bb_cfg['tor_icons'][$row['tor_status']] .'<a href="'. TOPIC_URL . $row['topic_id'] .'">'. $row['topic_title'] .'</a><div class="spacer_12"></div>';
+        }
+		if ($topics) bb_die($topics .'У вас есть неоформленный релиз, прежде чем создавать новый исправьте свой неоформленный.');
+	}
 	require(INC_DIR .'topic_templates.php');
 }
 
@@ -802,9 +819,9 @@ $template->assign_vars(array(
 	'CAPTCHA_HTML' => (IS_GUEST) ? CAPTCHA()->get_html() : '',
 	'SUBJECT' => $subject,
 	'MESSAGE' => $message,
-	
+
 	'U_VIEWTOPIC' => ( $mode == 'reply' ) ? append_sid("viewtopic.php?" . POST_TOPIC_URL . "=$topic_id&amp;postorder=desc") : '',
-	
+
 	'S_NOTIFY_CHECKED' => ( $notify_user ) ? 'checked="checked"' : '',
 	'S_TYPE_TOGGLE' => $topic_type_toggle,
 	'S_TOPIC_ID' => $topic_id,
