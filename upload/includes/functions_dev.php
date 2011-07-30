@@ -12,19 +12,31 @@ function get_sql_log ()
 	}
 	foreach ($CACHES->obj as $cache_name => $cache_obj)
 	{
-		$log .= !empty($cache_obj->db) ? get_sql_log_html($cache_obj->db, "cache: $cache_name [{$cache_obj->db->engine}]") : '';
+		if(!empty($cache_obj->db))
+		{
+			$log .= get_sql_log_html($cache_obj->db, "cache: $cache_name [{$cache_obj->db->engine}]");
+	    }
+	    elseif(!empty($cache_obj->engine))
+	    {
+	    	$log .= get_sql_log_html($cache_obj, "cache: $cache_name [{$cache_obj->engine}]");
+	    }
 	}
 
 	$log .= !empty($sphinx) ? get_sql_log_html($sphinx, '$sphinx') : '';
-	$log .= !empty($datastore->db) ? get_sql_log_html($datastore->db, '$datastore ['.$datastore->engine.']') : '';
+	if(!empty($datastore->db->dbg))
+	{
+		$log .= get_sql_log_html($datastore->db, '$datastore ['.$datastore->engine.']');
+	}
+	else if(!empty($datastore->dbg))
+	{
+		$log .= get_sql_log_html($datastore, '$datastore ['.$datastore->engine.']');
+	}
 
-	return $log;
+    return $log;
 }
 
 function get_sql_log_html ($db_obj, $log_name)
 {
-	if (empty($db_obj->dbg)) return '';
-
 	$log = '';
 
 	foreach ($db_obj->dbg as $i => $dbg)

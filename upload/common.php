@@ -255,20 +255,72 @@ class cache_common
 	{
 		return false;
 	}
+
+	var $num_queries    = 0;
+	var $sql_starttime  = 0;
+	var $sql_inittime   = 0;
+	var $sql_timetotal  = 0;
+	var $cur_query_time = 0;
+
+	var $dbg            = array();
+	var $dbg_id         = 0;
+	var $dbg_enabled    = false;
+	var $cur_query      = null;
+
+	function debug ($mode, $cur_query = null)
+	{
+		if (!$this->dbg_enabled) return;
+
+		$id  =& $this->dbg_id;
+		$dbg =& $this->dbg[$id];
+
+		if ($mode == 'start')
+		{
+			$this->sql_starttime = utime();
+
+			$dbg['sql']  = isset($cur_query) ? short_query($cur_query) : short_query($this->cur_query);
+			$dbg['src']  = $this->debug_find_source();
+			$dbg['file'] = $this->debug_find_source('file');
+			$dbg['line'] = $this->debug_find_source('line');
+			$dbg['time'] = '';
+		}
+		else if ($mode == 'stop')
+		{
+			$this->cur_query_time = utime() - $this->sql_starttime;
+			$this->sql_timetotal += $this->cur_query_time;
+			$dbg['time'] = $this->cur_query_time;
+			$id++;
+		}
+	}
+
+	function debug_find_source ($mode = '')
+	{
+		foreach (debug_backtrace() as $trace)
+		{
+			if ($trace['file'] !== __FILE__)
+			{
+				switch ($mode)
+				{
+					case 'file': return $trace['file'];
+					case 'line': return $trace['line'];
+					default: return hide_bb_path($trace['file']) .'('. $trace['line'] .')';
+				}
+			}
+		}
+		return 'src not found';
+	}
 }
 
 class cache_memcache extends cache_common
 {
 	var $used      = true;
-
+    var $engine    = 'Memcache';
 	var $cfg       = null;
 	var $memcache  = null;
 	var $connected = false;
 
 	function cache_memcache ($cfg)
 	{
-		global $bb_cfg;
-
 		if (!$this->is_installed())
 		{
 			die('Error: Memcached extension not installed');
@@ -276,11 +328,15 @@ class cache_memcache extends cache_common
 
 		$this->cfg = $cfg;
 		$this->memcache = new Memcache;
+		$this->dbg_enabled = sql_dbg_enabled();
 	}
 
 	function connect ()
 	{
 		$connect_type = ($this->cfg['pconnect']) ? 'pconnect' : 'connect';
+
+        $this->cur_query = $connect_type .' '. $this->cfg['host'] .':'. $this->cfg['port'];
+		$this->debug('start');
 
 		if (@$this->memcache->$connect_type($this->cfg['host'], $this->cfg['port']))
 		{
@@ -293,23 +349,47 @@ class cache_memcache extends cache_common
 		{
 			die('Could not connect to memcached server');
 		}
+
+		$this->debug('stop');
+		$this->cur_query = null;
 	}
 
 	function get ($name)
 	{
 		if (!$this->connected) $this->connect();
+
+		$this->cur_query = "cache->get('$name')";
+		$this->debug('start');
+		$this->debug('stop');
+		$this->cur_query = null;
+		$this->num_queries++;
+
 		return ($this->connected) ? $this->memcache->get($name) : false;
 	}
 
 	function set ($name, $value, $ttl = 0)
 	{
 		if (!$this->connected) $this->connect();
+
+		$this->cur_query = "cache->set('$name')";
+		$this->debug('start');
+		$this->debug('stop');
+		$this->cur_query = null;
+		$this->num_queries++;
+
 		return ($this->connected) ? $this->memcache->set($name, $value, false, $ttl) : false;
 	}
 
 	function rm ($name)
 	{
 		if (!$this->connected) $this->connect();
+
+		$this->cur_query = "cache->rm('$name')";
+		$this->debug('start');
+		$this->debug('stop');
+		$this->cur_query = null;
+		$this->num_queries++;
+
 		return ($this->connected) ? $this->memcache->delete($name) : false;
 	}
 
@@ -417,7 +497,7 @@ class cache_sqlite extends cache_common
 	}
 }
 
-class sqlite_common extends cache_dbg_common
+class sqlite_common extends cache_common
 {
 	var $cfg = array(
 	             'db_file_path' => 'sqlite.db',
@@ -569,75 +649,16 @@ class sqlite_common extends cache_dbg_common
 	}
 }
 
-class cache_dbg_common
-{
-	var $num_queries    = 0;
-	var $sql_starttime  = 0;
-	var $sql_inittime   = 0;
-	var $sql_timetotal  = 0;
-	var $cur_query_time = 0;
-
-	var $dbg            = array();
-	var $dbg_id         = 0;
-	var $dbg_enabled    = false;
-	var $cur_query      = null;
-
-	function debug ($mode, $cur_query = null)
-	{
-		if (!$this->dbg_enabled) return;
-
-		$id  =& $this->dbg_id;
-		$dbg =& $this->dbg[$id];
-
-		if ($mode == 'start')
-		{
-			$this->sql_starttime = utime();
-
-			$dbg['sql']  = isset($cur_query) ? short_query($cur_query) : short_query($this->cur_query);
-			$dbg['src']  = $this->debug_find_source();
-			$dbg['file'] = $this->debug_find_source('file');
-			$dbg['line'] = $this->debug_find_source('line');
-			$dbg['time'] = '';
-		}
-		else if ($mode == 'stop')
-		{
-			$this->cur_query_time = utime() - $this->sql_starttime;
-			$this->sql_timetotal += $this->cur_query_time;
-			$dbg['time'] = $this->cur_query_time;
-			$id++;
-		}
-	}
-
-	function debug_find_source ($mode = '')
-	{
-		foreach (debug_backtrace() as $trace)
-		{
-			if ($trace['file'] !== __FILE__)
-			{
-				switch ($mode)
-				{
-					case 'file': return $trace['file'];
-					case 'line': return $trace['line'];
-					default: return hide_bb_path($trace['file']) .'('. $trace['line'] .')';
-				}
-			}
-		}
-		return 'src not found';
-	}
-}
-
 class cache_redis extends cache_common
 {
 	var $used      = true;
-
+    var $engine    = 'Redis';
 	var $cfg       = null;
 	var $redis     = null;
 	var $connected = false;
 
 	function cache_redis ($cfg)
 	{
-		global $bb_cfg;
-
 		if (!$this->is_installed())
 		{
 			die('Error: Redis extension not installed');
@@ -645,10 +666,14 @@ class cache_redis extends cache_common
 
 		$this->cfg = $cfg;
 		$this->redis = new Redis();
+		$this->dbg_enabled = sql_dbg_enabled();
 	}
 
 	function connect ()
 	{
+		$this->cur_query = 'connect '. $this->cfg['host'] .':'. $this->cfg['port'];
+		$this->debug('start');
+
 		if (@$this->redis->connect($this->cfg['host'], $this->cfg['port']))
 		{
 			$this->connected = true;
@@ -658,23 +683,42 @@ class cache_redis extends cache_common
 		{
 			die('Could not connect to redis server');
 		}
+
+		$this->debug('stop');
+		$this->cur_query = null;
 	}
 
 	function get ($name)
 	{
 		if (!$this->connected) $this->connect();
+
+		$this->cur_query = "cache->get('$name')";
+		$this->debug('start');
+		$this->debug('stop');
+		$this->cur_query = null;
+		$this->num_queries++;
+
 		return ($this->connected) ? unserialize($this->redis->get($name)) : false;
 	}
 
 	function set ($name, $value, $ttl = 0)
 	{
 		if (!$this->connected) $this->connect();
+
+		$this->cur_query = "cache->set('$name')";
+		$this->debug('start');
+
 		if($this->redis->set($name, serialize($value)))
 		{
 			if ($ttl > 0)
 			{
 				$this->redis->expire($name, $ttl);
 			}
+
+			$this->debug('stop');
+			$this->cur_query = null;
+			$this->num_queries++;
+
 			return true;
 		}
 		else
@@ -686,6 +730,13 @@ class cache_redis extends cache_common
 	function rm ($name)
 	{
 		if (!$this->connected) $this->connect();
+
+		$this->cur_query = "cache->rm('$name')";
+		$this->debug('start');
+		$this->debug('stop');
+		$this->cur_query = null;
+		$this->num_queries++;
+
 		return ($this->connected) ? $this->redis->del($name) : false;
 	}
 
@@ -697,7 +748,8 @@ class cache_redis extends cache_common
 
 class cache_eaccelerator extends cache_common
 {
-	var $used = true;
+	var $used   = true;
+    var $engine = 'eAccelerator';
 
 	function cache_eaccelerator ()
 	{
@@ -705,20 +757,39 @@ class cache_eaccelerator extends cache_common
 		{
 			die('Error: eAccelerator extension not installed');
 		}
+		$this->dbg_enabled = sql_dbg_enabled();
 	}
 
 	function get ($name)
 	{
+		$this->cur_query = "cache->get('$name')";
+		$this->debug('start');
+		$this->debug('stop');
+		$this->cur_query = null;
+		$this->num_queries++;
+
 		return eaccelerator_get($name);
 	}
 
 	function set ($name, $value, $ttl = 0)
 	{
+		$this->cur_query = "cache->set('$name')";
+		$this->debug('start');
+		$this->debug('stop');
+		$this->cur_query = null;
+		$this->num_queries++;
+
 		return eaccelerator_put($name, $value, $ttl);
 	}
 
 	function rm ($name)
 	{
+		$this->cur_query = "cache->rm('$name')";
+		$this->debug('start');
+		$this->debug('stop');
+		$this->cur_query = null;
+		$this->num_queries++;
+
 		return eaccelerator_rm($name);
 	}
 
@@ -731,6 +802,7 @@ class cache_eaccelerator extends cache_common
 class cache_apc extends cache_common
 {
 	var $used = true;
+    var $engine = 'APC';
 
 	function cache_apc ()
 	{
@@ -738,20 +810,39 @@ class cache_apc extends cache_common
 		{
 			die('Error: APC extension not installed');
 		}
+		$this->dbg_enabled = sql_dbg_enabled();
 	}
 
 	function get ($name)
 	{
+		$this->cur_query = "cache->get('$name')";
+		$this->debug('start');
+		$this->debug('stop');
+		$this->cur_query = null;
+		$this->num_queries++;
+
 		return apc_fetch($name);
 	}
 
 	function set ($name, $value, $ttl = 0)
 	{
+		$this->cur_query = "cache->set('$name')";
+		$this->debug('start');
+		$this->debug('stop');
+		$this->cur_query = null;
+		$this->num_queries++;
+
 		return apc_store($name, $value, $ttl);
 	}
 
 	function rm ($name)
 	{
+		$this->cur_query = "cache->rm('$name')";
+		$this->debug('start');
+		$this->debug('stop');
+		$this->cur_query = null;
+		$this->num_queries++;
+
 		return apc_delete($name);
 	}
 
@@ -764,6 +855,7 @@ class cache_apc extends cache_common
 class cache_xcache extends cache_common
 {
 	var $used = true;
+    var $engine = 'XCache';
 
 	function cache_xcache ()
 	{
@@ -771,20 +863,39 @@ class cache_xcache extends cache_common
 		{
 			die('Error: XCache extension not installed');
 		}
+		$this->dbg_enabled = sql_dbg_enabled();
 	}
 
 	function get ($name)
 	{
+		$this->cur_query = "cache->get('$name')";
+		$this->debug('start');
+		$this->debug('stop');
+		$this->cur_query = null;
+		$this->num_queries++;
+
 		return xcache_get($name);
 	}
 
 	function set ($name, $value, $ttl = 0)
 	{
+		$this->cur_query = "cache->set('$name')";
+		$this->debug('start');
+		$this->debug('stop');
+		$this->cur_query = null;
+		$this->num_queries++;
+
 		return xcache_set($name, $value, $ttl);
 	}
 
 	function rm ($name)
 	{
+		$this->cur_query = "cache->rm('$name')";
+		$this->debug('start');
+		$this->debug('stop');
+		$this->cur_query = null;
+		$this->num_queries++;
+
 		return xcache_unset($name);
 	}
 
@@ -796,23 +907,30 @@ class cache_xcache extends cache_common
 
 class cache_file extends cache_common
 {
-	var $used = true;
-
-	var $dir  = null;
+	var $used   = true;
+    var $engine = 'Filecache';
+	var $dir    = null;
 
 	function cache_file ($dir)
 	{
 		$this->dir = $dir;
+		$this->dbg_enabled = sql_dbg_enabled();
 	}
 
 	function get ($name)
 	{
 		$filename = $this->dir . clean_filename($name) . '.php';
 
+        $this->cur_query = "cache->set('$name')";
+		$this->debug('start');
+
 		if(file_exists($filename))
 		{
 			require($filename);
 		}
+
+        $this->debug('stop');
+		$this->cur_query = null;
 
 		return (!empty($filecache['value'])) ? $filecache['value'] : false;
 	}
@@ -823,6 +941,9 @@ class cache_file extends cache_common
 		{
 			return false;
 		}
+
+        $this->cur_query = "cache->set('$name')";
+		$this->debug('start');
 
 		$filename   = $this->dir . clean_filename($name) . '.php';
 		$expire     = TIMENOW + $ttl;
@@ -836,6 +957,10 @@ class cache_file extends cache_common
 		$filecache .= '$filecache = ' . var_export($cache_data, true) . ";\n";
 		$filecache .= '?>';
 
+        $this->debug('stop');
+		$this->cur_query = null;
+		$this->num_queries++;
+
 		return (bool) file_write($filecache, $filename, false, true, true);
 	}
 
@@ -844,6 +969,12 @@ class cache_file extends cache_common
 		$filename   = $this->dir . clean_filename($name) . '.php';
 		if (file_exists($filename))
 		{
+			$this->cur_query = "cache->rm('$name')";
+			$this->debug('start');
+			$this->debug('stop');
+			$this->cur_query = null;
+			$this->num_queries++;
+
 			return (bool) unlink($filename);
 		}
 		return false;
@@ -939,8 +1070,6 @@ class datastore_common
 
 	function &get ($title)
 	{
-#		if (in_array(BB_SCRIPT, array('forum', 'topic', 'ajax')))  bb_log(' ', "ds/". BB_SCRIPT ."/$title");
-
 		if (!isset($this->data[$title]))
 		{
 			$this->enqueue($title);
@@ -999,6 +1128,60 @@ class datastore_common
 			trigger_error("Unknown datastore item: $title", E_USER_ERROR);
 		}
 	}
+
+	var $num_queries    = 0;
+	var $sql_starttime  = 0;
+	var $sql_inittime   = 0;
+	var $sql_timetotal  = 0;
+	var $cur_query_time = 0;
+
+	var $dbg            = array();
+	var $dbg_id         = 0;
+	var $dbg_enabled    = false;
+	var $cur_query      = null;
+
+	function debug ($mode, $cur_query = null)
+	{
+		if (!$this->dbg_enabled) return;
+
+		$id  =& $this->dbg_id;
+		$dbg =& $this->dbg[$id];
+
+		if ($mode == 'start')
+		{
+			$this->sql_starttime = utime();
+
+			$dbg['sql']  = isset($cur_query) ? short_query($cur_query) : short_query($this->cur_query);
+			$dbg['src']  = $this->debug_find_source();
+			$dbg['file'] = $this->debug_find_source('file');
+			$dbg['line'] = $this->debug_find_source('line');
+			$dbg['time'] = '';
+		}
+		else if ($mode == 'stop')
+		{
+			$this->cur_query_time = utime() - $this->sql_starttime;
+			$this->sql_timetotal += $this->cur_query_time;
+			$dbg['time'] = $this->cur_query_time;
+			$id++;
+		}
+	}
+
+	function debug_find_source ($mode = '')
+	{
+		foreach (debug_backtrace() as $trace)
+		{
+			if ($trace['file'] !== __FILE__)
+			{
+				switch ($mode)
+				{
+					case 'file': return $trace['file'];
+					case 'line': return $trace['line'];
+					default: return hide_bb_path($trace['file']) .'('. $trace['line'] .')';
+				}
+			}
+		}
+		return 'src not found';
+	}
 }
 
 class datastore_memcache extends datastore_common
@@ -1006,6 +1189,7 @@ class datastore_memcache extends datastore_common
 	var $cfg       = null;
 	var $memcache  = null;
 	var $connected = false;
+    var $engine    = 'Memcache';
 
 	function datastore_memcache ($cfg)
 	{
@@ -1018,11 +1202,15 @@ class datastore_memcache extends datastore_common
 
 		$this->cfg = $cfg;
 		$this->memcache = new Memcache;
+		$this->dbg_enabled = sql_dbg_enabled();
 	}
 
 	function connect ()
 	{
 		$connect_type = ($this->cfg['pconnect']) ? 'pconnect' : 'connect';
+
+        $this->cur_query = $connect_type .' '. $this->cfg['host'] .':'. $this->cfg['port'];
+		$this->debug('start');
 
 		if (@$this->memcache->$connect_type($this->cfg['host'], $this->cfg['port']))
 		{
@@ -1035,12 +1223,22 @@ class datastore_memcache extends datastore_common
 		{
 			die('Could not connect to memcached server');
 		}
+
+		$this->debug('stop');
+		$this->cur_query = null;
 	}
 
 	function store ($title, $var)
 	{
 		if (!$this->connected) $this->connect();
 		$this->data[$title] = $var;
+
+		$this->cur_query = "cache->set('$title')";
+		$this->debug('start');
+		$this->debug('stop');
+		$this->cur_query = null;
+		$this->num_queries++;
+
 		return (bool) $this->memcache->set($title, $var);
 	}
 
@@ -1049,6 +1247,12 @@ class datastore_memcache extends datastore_common
 		if (!$this->connected) $this->connect();
 		foreach ($this->known_items as $title => $script_name)
 		{
+			$this->cur_query = "cache->rm('$title')";
+			$this->debug('start');
+			$this->debug('stop');
+			$this->cur_query = null;
+			$this->num_queries++;
+
 			$this->memcache->delete($title);
 		}
 	}
@@ -1064,6 +1268,12 @@ class datastore_memcache extends datastore_common
 		if (!$this->connected) $this->connect();
 		foreach ($items as $item)
 		{
+			$this->cur_query = "cache->get('$item')";
+			$this->debug('start');
+			$this->debug('stop');
+			$this->cur_query = null;
+			$this->num_queries++;
+
 			$this->data[$item] = $this->memcache->get($item);
 		}
 	}
@@ -1137,6 +1347,7 @@ class datastore_redis extends datastore_common
 	var $cfg		= null;
 	var $redis		= null;
 	var $connected	= false;
+    var $engine    = 'Redis';
 
 	function datastore_redis ($cfg)
 	{
@@ -1148,11 +1359,15 @@ class datastore_redis extends datastore_common
 		}
 
 		$this->cfg = $cfg;
-		$this->redis = new Redis();;
+		$this->redis = new Redis();
+		$this->dbg_enabled = sql_dbg_enabled();
 	}
 
 	function connect ()
 	{
+		$this->cur_query = 'connect '. $this->cfg['host'] .':'. $this->cfg['port'];
+		$this->debug('start');
+
 		if (@$this->redis->connect($this->cfg['host'],$this->cfg['port']))
 		{
 			$this->connected = true;
@@ -1162,12 +1377,22 @@ class datastore_redis extends datastore_common
 		{
 			die('Could not connect to redis server');
 		}
+
+		$this->debug('stop');
+		$this->cur_query = null;
 	}
 
 	function store ($title, $var)
 	{
 		if (!$this->connected) $this->connect();
 		$this->data[$title] = $var;
+
+		$this->cur_query = "cache->set('$title')";
+		$this->debug('start');
+		$this->debug('stop');
+		$this->cur_query = null;
+		$this->num_queries++;
+
 		return (bool) $this->redis->set($title, serialize($var));
 	}
 
@@ -1176,6 +1401,12 @@ class datastore_redis extends datastore_common
 		if (!$this->connected) $this->connect();
 		foreach ($this->known_items as $title => $script_name)
 		{
+			$this->cur_query = "cache->rm('$title')";
+			$this->debug('start');
+			$this->debug('stop');
+			$this->cur_query = null;
+			$this->num_queries++;
+
 			$this->redis->del($title);
 		}
 	}
@@ -1191,6 +1422,12 @@ class datastore_redis extends datastore_common
 		if (!$this->connected) $this->connect();
 		foreach ($items as $item)
 		{
+			$this->cur_query = "cache->get('$item')";
+			$this->debug('start');
+			$this->debug('stop');
+			$this->cur_query = null;
+			$this->num_queries++;
+
 			$this->data[$item] = unserialize($this->redis->get($item));
 		}
 	}
@@ -1203,9 +1440,27 @@ class datastore_redis extends datastore_common
 
 class datastore_eaccelerator extends datastore_common
 {
+	var $engine    = 'eAccelerator';
+
+	function datastore_eaccelerator ()
+	{
+		if (!$this->is_installed())
+		{
+			die('Error: eAccelerator extension not installed');
+		}
+		$this->dbg_enabled = sql_dbg_enabled();
+	}
+
 	function store ($title, $var)
 	{
 		$this->data[$title] = $var;
+
+		$this->cur_query = "cache->set('$title')";
+		$this->debug('start');
+		$this->debug('stop');
+		$this->cur_query = null;
+		$this->num_queries++;
+
 		eaccelerator_put($title, $var);
 	}
 
@@ -1213,6 +1468,12 @@ class datastore_eaccelerator extends datastore_common
 	{
 		foreach ($this->known_items as $title => $script_name)
 		{
+			$this->cur_query = "cache->rm('$title')";
+			$this->debug('start');
+			$this->debug('stop');
+			$this->cur_query = null;
+			$this->num_queries++;
+
 			eaccelerator_rm($title);
 		}
 	}
@@ -1227,16 +1488,45 @@ class datastore_eaccelerator extends datastore_common
 
 		foreach ($items as $item)
 		{
+			$this->cur_query = "cache->get('$item')";
+			$this->debug('start');
+			$this->debug('stop');
+			$this->cur_query = null;
+			$this->num_queries++;
+
 			$this->data[$item] = eaccelerator_get($item);
 		}
+	}
+
+	function is_installed ()
+	{
+		return function_exists('eaccelerator_get');
 	}
 }
 
 class datastore_xcache extends datastore_common
 {
+    var $engine = 'XCache';
+
+	function cache_xcache ()
+	{
+		if (!$this->is_installed())
+		{
+			die('Error: XCache extension not installed');
+		}
+		$this->dbg_enabled = sql_dbg_enabled();
+	}
+
 	function store ($title, $var)
 	{
 		$this->data[$title] = $var;
+
+		$this->cur_query = "cache->set('$title')";
+		$this->debug('start');
+		$this->debug('stop');
+		$this->cur_query = null;
+		$this->num_queries++;
+
 		return (bool) xcache_set($title, $var);
 	}
 
@@ -1244,6 +1534,12 @@ class datastore_xcache extends datastore_common
 	{
 		foreach ($this->known_items as $title => $script_name)
 		{
+			$this->cur_query = "cache->rm('$title')";
+			$this->debug('start');
+			$this->debug('stop');
+			$this->cur_query = null;
+			$this->num_queries++;
+
 			xcache_unset($title);
 		}
 	}
@@ -1258,16 +1554,45 @@ class datastore_xcache extends datastore_common
 
 		foreach ($items as $item)
 		{
+			$this->cur_query = "cache->set('$item')";
+			$this->debug('start');
+			$this->debug('stop');
+			$this->cur_query = null;
+			$this->num_queries++;
+
 			$this->data[$item] = xcache_get($item);
 		}
+	}
+
+	function is_installed ()
+	{
+		return function_exists('xcache_get');
 	}
 }
 
 class datastore_apc extends datastore_common
 {
+    var $engine = 'APC';
+
+	function datastore_apc ()
+	{
+		if (!$this->is_installed())
+		{
+			die('Error: APC extension not installed');
+		}
+		$this->dbg_enabled = sql_dbg_enabled();
+	}
+
 	function store ($title, $var)
 	{
 		$this->data[$title] = $var;
+
+		$this->cur_query = "cache->set('$title')";
+		$this->debug('start');
+		$this->debug('stop');
+		$this->cur_query = null;
+		$this->num_queries++;
+
 		return (bool) apc_store($title, $var);
 	}
 
@@ -1275,6 +1600,12 @@ class datastore_apc extends datastore_common
 	{
 		foreach ($this->known_items as $title => $script_name)
 		{
+			$this->cur_query = "cache->rm('$title')";
+			$this->debug('start');
+			$this->debug('stop');
+			$this->cur_query = null;
+			$this->num_queries++;
+
 			apc_delete($title);
 		}
 	}
@@ -1289,22 +1620,38 @@ class datastore_apc extends datastore_common
 
 		foreach ($items as $item)
 		{
+			$this->cur_query = "cache->get('$item')";
+			$this->debug('start');
+			$this->debug('stop');
+			$this->cur_query = null;
+			$this->num_queries++;
+
 			$this->data[$item] = apc_fetch($item);
 		}
+	}
+
+	function is_installed ()
+	{
+		return function_exists('apc_fetch');
 	}
 }
 
 class datastore_file extends datastore_common
 {
-	var $dir = null;
+	var $dir    = null;
+    var $engine = 'Filecache';
 
 	function datastore_file ($dir)
 	{
 		$this->dir = $dir;
+		$this->dbg_enabled = sql_dbg_enabled();
 	}
 
 	function store ($title, $var)
 	{
+        $this->cur_query = "cache->set('$title')";
+		$this->debug('start');
+
 		$this->data[$title] = $var;
 
 		$filename   = $this->dir . clean_filename($title) . '.php';
@@ -1313,6 +1660,10 @@ class datastore_file extends datastore_common
 		$filecache .= "if (!defined('BB_ROOT')) die(basename(__FILE__));\n";
 		$filecache .= '$filestore = ' . var_export($var, true) . ";\n";
 		$filecache .= '?>';
+
+		$this->debug('stop');
+		$this->cur_query = null;
+		$this->num_queries++;
 
 		return (bool) file_write($filecache, $filename, false, true, true);
 	}
@@ -1350,6 +1701,12 @@ class datastore_file extends datastore_common
 		foreach($items as $item)
 		{
 			$filename = $this->dir . $item . '.php';
+
+            $this->cur_query = "cache->get('$item')";
+			$this->debug('start');
+			$this->debug('stop');
+			$this->cur_query = null;
+			$this->num_queries++;
 
 			if(file_exists($filename))
 			{
@@ -1439,18 +1796,18 @@ function sql_dbg_enabled ()
 
 function short_query ($sql, $esc_html = false)
 {
-    $max_len = 100;
-    $sql = str_compact($sql);
+	$max_len = 100;
+	$sql = str_compact($sql);
 
-    if (empty($_COOKIE['sql_log_full']))
-    {
-        if (mb_strlen($sql, 'UTF-8') > $max_len)
-        {
-            $sql = mb_substr($sql, 0, 50) .' [...cut...] '. mb_substr($sql, -50);
-        }
-    }
+	if (empty($_COOKIE['sql_log_full']))
+	{
+		if (mb_strlen($sql, 'UTF-8') > $max_len)
+		{
+			$sql = mb_substr($sql, 0, 50) .' [...cut...] '. mb_substr($sql, -50);
+		}
+	}
 
-    return ($esc_html) ? htmlCHR($sql, true) : $sql;
+	return ($esc_html) ? htmlCHR($sql, true) : $sql;
 }
 
 // Functions
