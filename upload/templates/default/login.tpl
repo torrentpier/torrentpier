@@ -4,8 +4,6 @@
 <form action="{S_LOGIN_ACTION}" method="post">
 
 <input type="hidden" name="redirect" value="{REDIRECT_URL}" />
-<input type="hidden" name="cookie_test" value="{COOKIE_TEST_VAL}" />
-{S_HIDDEN_FIELDS}
 <!-- IF ADMIN_LOGIN --><input type="hidden" name="admin" value="1" /><!-- ENDIF -->
 
 <p class="nav"><a href="{U_INDEX}">{T_INDEX}</a></p>
@@ -17,19 +15,24 @@
 <tr>
 	<td class="row1">
 
-	<!-- IF ERR_MSG -->
-	<h4 class="warnColor1 tCenter mrg_16">{ERR_MSG}</h4>
+	<!-- IF LOGIN_ERR_MSG -->
+	<h4 class="warnColor1 tCenter mrg_16">{LOGIN_ERR_MSG}</h4>
+	<!-- ELSEIF ADMIN_LOGIN -->
+	<h4 class="tCenter mrg_16">Для получения доступа к мод/админ опциям необходимо еще раз ввести пароль</h4>
+	<!-- ELSE -->
+	<h4 class="tCenter mrg_16">{L_ENTER_PASSWORD}</h4>
 	<!-- ENDIF -->
+
 
 	<div class="mrg_16">
 	<table class="borderless bCenter">
 	<tr>
 		<td width="35%" align="right">{L_USERNAME}:</td>
-		<td><input type="text" class="post" name="login_username" size="25" maxlength="40" value="{USERNAME}" <!-- IF ADMIN_LOGIN -->readonly="readonly" style="color: gray"<!-- ENDIF --> /></td>
+		<td><input type="text" class="post" name="login_username" size="25" maxlength="40" value="{LOGIN_USERNAME}" tabindex="101"<!-- IF ADMIN_LOGIN --> readonly="readonly" style="color: gray"<!-- ENDIF --> /></td>
 	</tr>
 	<tr>
 		<td align="right">{L_PASSWORD}:</td>
-		<td><input type="password" class="post" name="login_password" size="25" maxlength="32" /></td>
+		<td><input type="password" class="post" name="login_password" value="{LOGIN_PASSWORD}" tabindex="102" size="25" maxlength="32" /></td>
 	</tr>
 	<!-- IF CAPTCHA_HTML -->
 	<tr>
@@ -38,10 +41,7 @@
 	</tr>
 	<!-- ENDIF -->
 	<tr>
-		<td colspan="2" class="tCenter nowrap">{L_AUTO_LOGIN}: <input type="checkbox" name="autologin" <!-- IF ADMIN_LOGIN || AUTOLOGIN_DISABLED -->disabled="disabled"<!-- ELSE -->checked="checked"<!-- ENDIF --> /></td>
-	</tr>
-	<tr>
-		<td colspan="2" class="warnColor1 tCenter" style="<!-- IF COOKIES_ERROR -->font-size: 24px;<!-- ENDIF -->">{L_COOKIES_REQUIRED}</td>
+		<td colspan="2" class="tCenter nowrap">{L_AUTO_LOGIN}: <input type="checkbox" name="autologin" tabindex="103"<!-- IF ADMIN_LOGIN || AUTOLOGIN_DISABLED --> disabled="disabled"<!-- ELSE -->checked="checked"<!-- ENDIF --> /></td>
 	</tr>
 	<tr>
 		<td colspan="2" class="tCenter pad_6"><input type="submit" name="login" class="bold long" value="{L_LOGIN}" /></td>
