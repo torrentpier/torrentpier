@@ -1,37 +1,35 @@
 
-<h1 class="pagetitle">Вход</h1>
+<h1 class="pagetitle">{PAGE_TITLE}</h1>
 
-<form action="{LOGIN_URL}" method="post">
+<form action="{S_LOGIN_ACTION}" method="post">
 
 <input type="hidden" name="redirect" value="{REDIRECT_URL}" />
+<input type="hidden" name="cookie_test" value="{COOKIE_TEST_VAL}" />
+{S_HIDDEN_FIELDS}
 <!-- IF ADMIN_LOGIN --><input type="hidden" name="admin" value="1" /><!-- ENDIF -->
 
 <p class="nav"><a href="{U_INDEX}">{T_INDEX}</a></p>
 
 <table class="forumline">
 <tr>
-	<th>Вход</th>
+	<th>{L_ENTER_PASSWORD}</th>
 </tr>
 <tr>
 	<td class="row1">
 
-	<!-- IF LOGIN_ERR_MSG -->
-	<h4 class="warnColor1 tCenter mrg_16">{LOGIN_ERR_MSG}</h4>
-	<!-- ELSEIF ADMIN_LOGIN -->
-	<h4 class="tCenter mrg_16">Для получения доступа к мод/админ опциям необходимо еще раз ввести пароль</h4>
-	<!-- ELSE -->
-	<h4 class="tCenter mrg_16">Введите ваше имя и пароль</h4>
+	<!-- IF ERR_MSG -->
+	<h4 class="warnColor1 tCenter mrg_16">{ERR_MSG}</h4>
 	<!-- ENDIF -->
 
 	<div class="mrg_16">
 	<table class="borderless bCenter">
 	<tr>
-		<td width="31%" class="tRight">Имя:</td>
-		<td width="69%"><input type="text" name="login_username" size="25" maxlength="30" value="{LOGIN_USERNAME}" tabindex="101" <!-- IF ADMIN_LOGIN -->readonly="readonly" style="color: gray"<!-- ENDIF --> /></td>
+		<td width="35%" align="right">{L_USERNAME}:</td>
+		<td><input type="text" class="post" name="login_username" size="25" maxlength="40" value="{USERNAME}" <!-- IF ADMIN_LOGIN -->readonly="readonly" style="color: gray"<!-- ENDIF --> /></td>
 	</tr>
 	<tr>
-		<td class="tRight">Пароль:</td>
-		<td><input type="password" name="login_password" size="25" maxlength="32" value="{LOGIN_PASSWORD}" tabindex="102" /></td>
+		<td align="right">{L_PASSWORD}:</td>
+		<td><input type="password" class="post" name="login_password" size="25" maxlength="32" /></td>
 	</tr>
 	<!-- IF CAPTCHA_HTML -->
 	<tr>
@@ -40,16 +38,16 @@
 	</tr>
 	<!-- ENDIF -->
 	<tr>
-		<td colspan="2" class="tCenter med nowrap pad_4"><label><input type="checkbox" name="ses_short" value="1" <!-- IF ADMIN_LOGIN -->disabled="disabled"<!-- ENDIF --> tabindex="103" /> Короткая сессия (автовыход через полчаса неактивности)</label></td>
+		<td colspan="2" class="tCenter nowrap">{L_AUTO_LOGIN}: <input type="checkbox" name="autologin" <!-- IF ADMIN_LOGIN || AUTOLOGIN_DISABLED -->disabled="disabled"<!-- ELSE -->checked="checked"<!-- ENDIF --> /></td>
 	</tr>
 	<tr>
-		<td colspan="2" class="tCenter pad_8"><input type="submit" name="login" class="bold long" value="Вход" tabindex="104" /></td>
+		<td colspan="2" class="warnColor1 tCenter" style="<!-- IF COOKIES_ERROR -->font-size: 24px;<!-- ENDIF -->">{L_COOKIES_REQUIRED}</td>
 	</tr>
 	<tr>
-		<td colspan="2" class="tCenter med">В вашем браузере должны быть включены куки и JavaScript!</td>
+		<td colspan="2" class="tCenter pad_6"><input type="submit" name="login" class="bold long" value="{L_LOGIN}" /></td>
 	</tr>
 	<tr>
-		<td colspan="2" class="tCenter"><a href="profile.php?mode=sendpassword" class="med">Забыли пароль?</a></td>
+		<td colspan="2" align="center"><a href="{U_SEND_PASSWORD}" class="small">{L_FORGOTTEN_PASSWORD}</a></td>
 	</tr>
 	</table>
 	</div>

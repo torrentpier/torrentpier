@@ -108,6 +108,7 @@ if (IS_GUEST || $mod_admin_login)
 		'ADMIN_LOGIN'     => $mod_admin_login,
 		'REDIRECT_URL'    => htmlCHR($redirect_url),
 		'CAPTCHA_HTML'    => ($need_captcha) ? CAPTCHA()->get_html() : '',
+		'PAGE_TITLE'  => $lang['LOGIN'],
 	));
 
 	print_page('login.tpl');
