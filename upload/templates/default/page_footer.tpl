@@ -44,16 +44,14 @@
 		<br />
 		<!-- ENDIF -->
 
-		{SAPE}
-		{MAINLINK}
-		<div class="copyright tleft" align="center">
+		<div class="copyright tCenter">
 			{L_POWERED} <br />
 			{L_DIVE} <br />
 		</div>
 
 	</div>
 
-	<div class="copyright" align="center">
+	<div class="copyright tCenter">
 		<b style="color:rgb(204,0,0);">{L_NOTICE}</b><br />
 		{L_COPY}
 	</div>

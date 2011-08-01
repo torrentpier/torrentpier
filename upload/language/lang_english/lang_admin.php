@@ -385,6 +385,7 @@ $lang['USER_DELETE'] = 'Delete';
 $lang['USER_DELETE_EXPLAIN'] = 'Delete this user';
 $lang['USER_DELETED'] = 'User was successfully deleted';
 $lang['DELETE_USER_POSTS'] = 'Delete all user posts';
+$lang['USER_DELETED_POSTS'] = 'Posts were successfully removed';
 
 $lang['USER_STATUS'] = 'User is active';
 $lang['USER_ALLOWPM'] = 'Can send Private Messages';

@@ -74,8 +74,8 @@ ajax.callback.gen_passkey = function(data){
 	<th colspan="2"><a name="bittorrent"></a>TorrentPier</th>
 </tr>
 <tr>
-	<td>{L_GEN_PASSKEY}<h6>{L_GEN_PASSKEY_EXPLAIN}</h6></td>
-	<td class="med">{L_GEN_PASSKEY_EXPLAIN_2}<br />{S_GEN_PASSKEY}</td>
+	<td>{L_BT_GEN_PASSKEY}<h6>{L_BT_GEN_PASSKEY_EXPLAIN}</h6></td>
+	<td class="med">{L_BT_GEN_PASSKEY_EXPLAIN_2}<br />{S_GEN_PASSKEY}</td>
 </tr>
 <tr>
 	<td>{L_CURR_PASSKEY}</td>

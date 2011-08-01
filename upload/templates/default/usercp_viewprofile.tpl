@@ -230,10 +230,10 @@ $(document).ready(function(){
 				<td>
 					<p>
 						<b>{POSTS}</b>&nbsp;
-						[ <a href="{U_SEARCH_USER}" class="med">{L_SEARCH_USER_POSTS_PROFILE}</a> ]
+						[ <a href="{U_SEARCH_USER}" class="med">{L_SEARCH_USER_POSTS}</a> ]
 						[ <a href="{U_SEARCH_TOPICS}" class="med">{L_SEARCH_USER_TOPICS}</a> ]
+						<!-- IF RELEASED -->[ <a class="med" href={U_SEARCH_RELEASES}>{L_SEARCH_RELEASES}</a> ]<!-- ENDIF -->
 					</p>
-					<p class="med">[ {POST_PERCENT_STATS} / {POST_DAY_STATS} ]</p>
 				</td>
 			</tr>
 			<!-- IF LOCATION -->
@@ -276,15 +276,6 @@ $(document).ready(function(){
 				<td><b>{AGE}</b></td>
 			</tr>
 			<!-- ENDIF -->
-			<!-- BEGIN switch_upload_limits -->
-			<tr>
-				<th>{L_UPLOAD_QUOTA}:</th>
-				<td>
-					<p class="med">[{UPLOADED} / {QUOTA} / {PERCENT_FULL}]</p>
-					<p class="med"><a href="{U_UACP}" class="med">{L_UACP}</a></p>
-				</td>
-			</tr>
-			<!-- END switch_upload_limits -->
 			<!-- IF SHOW_ACCESS_PRIVILEGE -->
 			<tr>
 				<th>{L_ACCESS}:</th>
@@ -338,7 +329,6 @@ $(document).ready(function(){
 			<th>{L_TOTAL_RELEASED}:</th>
 			<td id="u_up_release">
 				<span class="editable seed">{RELEASED}</span>
-				<!-- IF RELEASED -->&nbsp;[ <a class="med" href={U_SEARCH_RELEASES}>{L_SEARCH_RELEASES}</a> ]<!-- ENDIF -->
 			</td>
 		</tr>
 		<tr>

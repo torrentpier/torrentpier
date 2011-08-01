@@ -309,7 +309,7 @@ $lang['EDIT_POST'] = 'Edit post';
 $lang['EDIT_POST_NOT_1'] = 'You are not allowed ';
 $lang['EDIT_POST_NOT_2'] = 'You can not ';
 $lang['EDIT_POST_AJAX'] = 'You can not edit the message with the status ';
-$lang['AFTER_THE_LAPSE'] = "after the lapse of ';
+$lang['AFTER_THE_LAPSE'] = 'after the lapse of ';
 
 $lang['DONT_MESSAGE_TITLE'] = 'You have not specified the message header';
 $lang['INVALID_TOPIC_ID'] = 'Topic Absent!';
@@ -547,7 +547,7 @@ $lang['POSTER_RANK'] = 'Poster rank';
 $lang['TOTAL_POSTS'] = 'Total posts';
 $lang['USER_POST_PCT_STATS'] = '%.2f%% of total'; // 1.25% of total
 $lang['USER_POST_DAY_STATS'] = '%.2f posts per day'; // 1.5 posts per day
-$lang['SEARCH_USER_POSTS'] = 'Find posts by %s'; // Find all posts by username
+$lang['SEARCH_USER_POSTS'] = 'Find posts'; // Find all posts by username
 $lang['SEARCH_USER_POSTS_SHORT'] = 'Find user posts';
 $lang['SEARCH_USER_TOPICS'] = 'Find user topics'; // Find all topics by username
 
@@ -1305,7 +1305,7 @@ $lang['SEARCH_DL_COMPLETE_DOWNLOADS']   = 'Completed Downloads';
 $lang['SEARCH_DL_CANCEL'] = 'Canceled';
 $lang['CUR_DOWNLOADS'] = 'Current Downloads';
 $lang['CUR_UPLOADS']   = 'Current Uploads';
-$lang['SEARCH_RELEASES'] = 'Find all current releases';
+$lang['SEARCH_RELEASES'] = 'Find releases';
 $lang['TOR_SEARCH_TITLE'] = 'Torrent search options';
 $lang['OPEN_TOPIC'] = 'Open topic';
 
@@ -1558,6 +1558,9 @@ $lang['TORFILE_INVALID'] = 'Torrent file is corrupt';
 $lang['WEBSITE_ERROR'] = 'The "site" may contain only http://sitename';
 $lang['ICQ_ERROR'] = 'The field of "ICQ" may contain only icq number';
 $lang['INVALID_DATE'] = 'Error date ';
+$lang['PROFILE_USER'] = 'Viewing profile';
+$lang['GOOD_UPDATE'] = 'was successfully changed';
+$lang['FORBADE_VIEWING'] = 'forbade visitors viewing your profile';
 
 // Register
 $lang['CHOOSE_A_NAME'] = 'You should choose a name';
@@ -1565,3 +1568,5 @@ $lang['CHOOSE_E_MAIL'] = 'You must specify the e-mail';
 $lang['CHOOSE_PASS'] = 'Field for the password must not be empty!';
 $lang['CHOOSE_PASS_ERR'] = 'Entered passwords do not match';
 $lang['CHOOSE_PASS_OK'] = 'Passwords match, you can proceed with the registration.';
+
+$lang['EMAILER_DISABLED'] = 'Sorry, this feature is temporarily not working';

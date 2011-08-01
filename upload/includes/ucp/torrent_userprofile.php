@@ -4,7 +4,7 @@ if (!defined('IN_VIEWPROFILE')) die(basename(__FILE__));
 
 if (!$profiledata['user_id'] || $profiledata['user_id'] == ANONYMOUS)
 {
-	message_die(GENERAL_ERROR, 'Invalid user_id');
+	message_die(GENERAL_ERROR, $lang['NO_USER_ID_SPECIFIED']);
 }
 
 $seeding = $leeching = $releasing = array();

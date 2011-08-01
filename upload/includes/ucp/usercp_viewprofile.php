@@ -19,7 +19,7 @@ if (!$profiledata = get_userdata($_GET[POST_USERS_URL]))
 
 if(bf($profiledata['user_opt'], 'user_opt', 'view_profile') && IS_GUEST)
 {	meta_refresh(append_sid("login.php?redirect={$_SERVER['REQUEST_URI']}", true));
-    bb_die("Пользователь {$profiledata['username']} запретил гостям просмотр своего профиля");}
+    bb_die("<b>{$profiledata['username']}</b> " . $lang['FORBADE_VIEWING']);}
 
 //
 // Calculate the number of days this user has been a member ($memberdays)
@@ -150,7 +150,6 @@ $template->assign_vars(array(
 
 	'L_VIEWING_PROFILE' => sprintf($lang['VIEWING_USER_PROFILE'], $profiledata['username']),
 	'L_ABOUT_USER_PROFILE' 	=> sprintf($lang['ABOUT_USER'], $profiledata['username']),
-	'L_SEARCH_USER_POSTS_PROFILE'  => sprintf($lang['SEARCH_USER_POSTS'], '<b>'. $profiledata['username'] .'</b>'),
 
 	'U_SEARCH_USER'     => "search.php?search_author=1&amp;uid={$profiledata['user_id']}",
 	'U_SEARCH_TOPICS'   => "search.php?uid={$profiledata['user_id']}&amp;myt=1",

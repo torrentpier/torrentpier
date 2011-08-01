@@ -18,7 +18,7 @@ $can_register = (IS_GUEST || IS_ADMIN);
 
 $submit   = !empty($_POST['submit']);
 $errors   = array();
-$adm_edit = false;                      // редактирование админом чужого профиля
+$adm_edit = false;     // редактирование админом чужого профиля
 
 require(INC_DIR .'bbcode.php');
 require(INC_DIR .'functions_validate.php');
@@ -242,11 +242,11 @@ foreach ($profile_fields as $field => $can_edit)
 			{
 				if (strlen($new_pass) > 20)
 				{
-					$errors[] = 'Пароль должен быть не длиннее 20 символов';
+					$errors[] = $lang['CHOOSE_PASS_ERR_20'];
 				}
 				else if ($new_pass != $cfm_pass)
 				{
-					$errors[] = 'Введённые пароли не совпадают';
+					$errors[] = $lang['CHOOSE_PASS_ERR'];
 				}
 				$db_data['user_password'] = md5(md5($new_pass));
 			}
@@ -255,7 +255,7 @@ foreach ($profile_fields as $field => $can_edit)
 			{
 				if (empty($new_pass))
 				{
-					$errors[] = 'Вы должны указать пароль';
+					$errors[] = $lang['CHOOSE_PASSWORD'];
 				}
 			}
 			else
@@ -266,7 +266,7 @@ foreach ($profile_fields as $field => $can_edit)
 				}
 				if (!empty($new_pass) && !$cur_pass_valid)
 				{
-					$errors[] = 'Для изменения пароля вы должны правильно указать текущий пароль';
+					$errors[] = $lang['CHOOSE_PASS_FAILED'];
 				}
 			}
 		}
@@ -424,7 +424,7 @@ foreach ($profile_fields as $field => $can_edit)
 			else
 			{
 				$pr_data['user_icq'] = '';
-				$errors[] = htmlCHR('Поле "ICQ" может содержать только номер icq');
+				$errors[] = htmlCHR($lang['ICQ_ERROR']);
 			}
 		}
 		$tp_data['USER_ICQ'] = $pr_data['user_icq'];
@@ -445,7 +445,7 @@ foreach ($profile_fields as $field => $can_edit)
 			}
 			else
 			{
-				$errors[] = htmlCHR('Поле "Сайт" может содержать только http:// ссылку');
+				$errors[] = htmlCHR($lang['WEBSITE_ERROR']);
 			}
 		}
 		$tp_data['USER_WEBSITE'] = $pr_data['user_website'];
@@ -856,7 +856,7 @@ if ($submit && !$errors)
 			else if (!empty($_POST['delete_user_posts']))
 			{
 				post_delete('user', $pr_data['user_id']);
-				bb_die('User posts were deleted');
+				bb_die($lang['USER_DELETED_POSTS']);
 			}
 		}
 
@@ -921,7 +921,7 @@ if ($submit && !$errors)
 
 			if($adm_edit)
 			{
-				bb_die("Профиль <b>{$pr_data['username']}</b> был успешно изменён");
+				bb_die($lang['PROFILE_USER'] . " <b>{$pr_data['username']}</b> " . $lang['GOOD_UPDATE']);
 			}
 			elseif(!$pr_data['user_active'])
 			{
@@ -974,9 +974,6 @@ if ($mode == 'editprofile' && $userdata['session_logged_in'])
 	$curr_passkey = ($row['auth_key']) ? $row['auth_key'] : '';
 
 	$template->assign_vars(array(
-		'L_GEN_PASSKEY'           => $lang['BT_GEN_PASSKEY'],
-		'L_GEN_PASSKEY_EXPLAIN'   => $lang['BT_GEN_PASSKEY_EXPLAIN'],
-		'L_GEN_PASSKEY_EXPLAIN_2' => $lang['BT_GEN_PASSKEY_EXPLAIN_2'],
 		'S_GEN_PASSKEY'           => '<a href="#" onclick="ajax.exec({ action: \'gen_passkey\', user_id: '. $pr_user_id .' }); return false;">' . $lang['BT_GEN_PASSKEY_URL'] . '</a>',
 		'CURR_PASSKEY'            => $curr_passkey,
 	));

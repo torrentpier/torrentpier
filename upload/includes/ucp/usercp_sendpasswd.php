@@ -6,10 +6,7 @@ if ( !defined('IN_PHPBB') )
 	exit;
 }
 
-if ($bb_cfg['emailer_disabled'])
-{
-	bb_die('Извините, эта функция временно не работает');
-}
+if ($bb_cfg['emailer_disabled']) bb_die($lang['EMAILER_DISABLED']);
 
 if ( isset($_POST['submit']) )
 {

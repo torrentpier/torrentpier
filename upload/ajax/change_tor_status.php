@@ -6,11 +6,11 @@ global $userdata, $bb_cfg, $lang;
 
 if (!isset($this->request['attach_id']))
 {
-	$this->ajax_die('empty attach_id');
+	$this->ajax_die($lang['EMPTY_ATTACH_ID']);
 }
 if (!isset($this->request['status']))
 {
-	$this->ajax_die('не выбран статус');
+	$this->ajax_die($lang['TOR_DONT_CHANGE']);
 }
 $attach_id  = (int) $this->request['attach_id'];
 $new_status = (int) $this->request['status'];
@@ -45,10 +45,7 @@ if ($new_status == TOR_CLOSED_CPHOLD && !IS_ADMIN)
 // Права на изменение статуса
 if ($tor['tor_status'] == TOR_CLOSED_CPHOLD)
 {
-	if (!IS_ADMIN)
-	{
-		$this->verify_mod_rights($tor['forum_id']);
-	}
+	if (!IS_ADMIN) $this->verify_mod_rights($tor['forum_id']);
 	DB()->query("UPDATE ". BB_TOPICS ." SET topic_status = ". TOPIC_UNLOCKED ." WHERE topic_id = {$tor['topic_id']} LIMIT 1");
 	$new_status = TOR_NOT_APPROVED;
 }

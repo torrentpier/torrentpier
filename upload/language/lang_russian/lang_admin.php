@@ -142,7 +142,7 @@ $lang['AUTH_READ'] = $lang['READ'] = 'Читать';
 $lang['AUTH_POST'] = $lang['POST'] = 'Создавать темы';
 $lang['AUTH_REPLY'] = $lang['REPLY'] = 'Отвечать';
 $lang['AUTH_EDIT'] = $lang['EDIT'] = 'Редактировать';
-$lang['AUTH_DELETE'] = $lang['DELETE'] = 'Удалять';
+$lang['AUTH_DELETE'] = $lang['DELETE'] = 'Удалить';
 $lang['AUTH_STICKY'] = $lang['STICKY'] = 'Прилеплять темы';
 $lang['AUTH_ANNOUNCE'] = $lang['ANNOUNCE'] = 'Создавать объявления';
 $lang['AUTH_VOTE'] = $lang['VOTE'] = 'Голосовать';
@@ -386,6 +386,7 @@ $lang['USER_DELETE'] = 'Удаление';
 $lang['USER_DELETE_EXPLAIN'] = 'Удалить этого пользователя';
 $lang['USER_DELETED'] = 'Пользователь был успешно удалён';
 $lang['DELETE_USER_POSTS'] = 'Удалить все сообщения пользователя';
+$lang['USER_DELETED_POSTS'] = 'Сообщения пользователя успешно удалены';
 
 $lang['USER_STATUS'] = 'Пользователь активен';
 $lang['USER_ALLOWPM'] = 'Может посылать личные сообщения';
