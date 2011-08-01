@@ -32,7 +32,7 @@ DB()->query("
 	CREATE TEMPORARY TABLE $tmp_attach_tbl (
 		physical_filename VARCHAR(255) NOT NULL default '',
 		KEY physical_filename (physical_filename(20))
-	) ENGINE = MyISAM DEFAULT CHARSET=$dbcharset
+	) ENGINE = MyISAM
 ");
 
 // Get attach_mod config
