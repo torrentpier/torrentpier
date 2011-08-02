@@ -301,6 +301,9 @@ bool Ctracker_input::banned() const
 					|| boost::istarts_with(m_peer_id, "-UT11");
 			case 'T': // -TS* > TorrentStorm
 				return boost::istarts_with(m_peer_id, "-TS");
+			case 'M': // -MG* > MediaGet
+				return boost::istarts_with(m_peer_id, "-MG1Cr0")
+					|| boost::istarts_with(m_peer_id, "-MG21");
 			default:
 				return false;
 			}

@@ -44,7 +44,6 @@ const std::string bts_announce = "announce";
 const std::string bts_announce_list = "announce-list";
 const std::string bts_banned_client = "access denied, banned client";
 const std::string bts_can_not_leech = "access denied, leeching forbidden, you are only allowed to seed";
-const std::string bts_park = "access denied, account parked";
 const std::string bts_close_torrent = "close torrent";
 const std::string bts_complete = "complete";
 const std::string bts_complete_total = "complete total";

@@ -57,7 +57,7 @@ public:
 		bool xbt_error_empty;
 		// Upload Greatest Common Divisor
 		long long ul_gdc, ul_gdc_16k;
-		int ul_gdc_count, ul_16k_count, ul_eq_dl_count, end_vip;
+		int ul_gdc_count, ul_16k_count, ul_eq_dl_count;
 
 		bool ipv6set;
 		// boost::array<char, 16> ipv6;
@@ -132,9 +132,6 @@ public:
 			peers_limit = 0;
 			torrents_limit = 0;
 			wait_time = 0;
-			user_vip = 0;
-			user_vip_exp = 0;
-			user_park = 0;	
 			user_active = 1;
 		}
 
@@ -147,9 +144,6 @@ public:
 		std::string passkey;
 		int torrents_limit;
 		int wait_time;
-		int user_vip;
-		int user_vip_exp;
-		int user_park;
 		int user_active;
 	};
 
@@ -269,6 +263,5 @@ private:
 	std::string m_users_dl_status_buffer;
 	std::string m_tor_dl_stat_buffer;
 	std::string m_cheat_buffer;
-	std::string m_vip_buffer;
 	// TorrentPier end
 };
