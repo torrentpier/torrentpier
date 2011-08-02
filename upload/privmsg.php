@@ -1240,7 +1240,6 @@ else if ( $submit || $refresh || $mode != '' )
 
 			$privmsg_subject = $privmsg['privmsgs_subject'];
 			$privmsg_message = $privmsg['privmsgs_text'];
-			$privmsg_bbcode_enabled = ($privmsg['privmsgs_enable_bbcode'] == 1);
 
 			$to_username = $privmsg['username'];
 			$to_userid = $privmsg['user_id'];

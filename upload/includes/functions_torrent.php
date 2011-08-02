@@ -245,7 +245,7 @@ function change_tor_type ($attach_id, $tor_status_gold)
 		$result = DB()->query($sql);
 		$row = DB()->sql_fetchrow($result);
 		$sql = "INSERT INTO ". BB_BT_TORRENTS ."_del(is_del, topic_id,info_hash, dl_percent)
-			VALUES (0, " .$row['topic_id'] .", '". $row['info_hash'] ."', ". $row['dl_percent'] .") ON DUPLICATE KEY UPDATE dl_percent = values(dl_percent)";
+			VALUES (0, " .$row['topic_id'] .", '". DB()->escape($row['info_hash']) ."', ". $row['dl_percent'] .") ON DUPLICATE KEY UPDATE dl_percent = values(dl_percent)";
 		if (!DB()->sql_query($sql))
 		{
 			message_die(GENERAL_ERROR, "Error delete_torrents", '', __LINE__, __FILE__, $sql);
