@@ -30,24 +30,24 @@ if ($show_dbg_info)
 {
 	$gen_time = utime() - TIMESTART;
 	$gen_time_txt = sprintf('%.3f', $gen_time);
-	$gzip_text = (UA_GZIP_SUPPORTED) ? 'GZIP' : '<s>GZIP</s>';
-	$gzip_text .= ($bb_cfg['gzip_compress']) ? ' ON' : ' OFF';
+	$gzip_text = (UA_GZIP_SUPPORTED) ? 'GZIP ' : '<s>GZIP</s> ';
+	$gzip_text .= ($bb_cfg['gzip_compress']) ? $lang['ON'] : $lang['OFF'];
 	$debug_text = (DEBUG) ? 'Debug ON' : 'Debug OFF';
 
 	$stat = '[&nbsp; ';
-	$stat .= "Execution time: $gen_time_txt sec ";
+	$stat .= "".$lang['EXECUTION_TIME'] ." $gen_time_txt ".$lang['SEC'];
 
 	if (!empty($DBS))
 	{
 		$sql_t = $DBS->sql_timetotal;
-		$sql_time_txt = ($sql_t) ? sprintf('%.3f sec (%d%%) in ', $sql_t, round($sql_t*100/$gen_time)) : '';
+		$sql_time_txt = ($sql_t) ? sprintf('%.3f '.$lang['SEC'].' (%d%%) &middot; ', $sql_t, round($sql_t*100/$gen_time)) : '';
 		$num_q = $DBS->num_queries;
-		$stat .= " &nbsp;|&nbsp; MySQL: {$sql_time_txt}{$num_q} queries";
+		$stat .= " &nbsp;|&nbsp; MySQL: {$sql_time_txt}{$num_q} " . $lang['QUERIES'];
 	}
 
 	$stat .= " &nbsp;|&nbsp; $gzip_text";
 
-	$stat .= ' &nbsp;|&nbsp; Mem: ';
+	$stat .= ' &nbsp;|&nbsp; '.$lang['MEMORY'];
 	$stat .= humn_size($bb_cfg['mem_on_start'], 2) .' / ';
 	$stat .= humn_size(sys('mem_peak'), 2) .' / ';
 	$stat .= humn_size(sys('mem'), 2);

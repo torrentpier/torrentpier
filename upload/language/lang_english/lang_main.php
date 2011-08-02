@@ -1570,3 +1570,11 @@ $lang['CHOOSE_PASS_ERR'] = 'Entered passwords do not match';
 $lang['CHOOSE_PASS_OK'] = 'Passwords match, you can proceed with the registration.';
 
 $lang['EMAILER_DISABLED'] = 'Sorry, this feature is temporarily not working';
+
+// Debug
+$lang['EXECUTION_TIME'] = 'Execution time:';
+$lang['SEC'] = 'sec';
+$lang['ON'] = 'on';
+$lang['OFF'] = 'off';
+$lang['MEMORY'] = 'Mem: ';
+$lang['QUERIES'] = 'queries';

@@ -16,7 +16,7 @@ DB()->query("
 	CREATE TEMPORARY TABLE $tmp_tbl (
 		user_avatar VARCHAR(255) NOT NULL default '',
 		KEY user_avatar (user_avatar(20))
-	) ENGINE = MyISAM
+	) ENGINE = MyISAM DEFAULT CHARSET = utf8
 ");
 
 DB()->query("ALTER TABLE ". BB_USERS ." ADD INDEX user_avatar(user_avatar(10))");
