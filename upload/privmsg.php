@@ -18,13 +18,7 @@ $page_cfg['load_tpl_vars'] = array(
 //
 // Is PM disabled?
 //
-if ( !empty($bb_cfg['privmsg_disable']) )
-{
-	message_die(GENERAL_MESSAGE, 'PM_disabled');
-}
-
-$html_entities_match = array('#&(?!(\#[0-9]+;))#', '#<#', '#>#', '#"#');
-$html_entities_replace = array('&amp;', '&lt;', '&gt;', '&quot;');
+if ($bb_cfg['privmsg_disable']) bb_die('PM_DISABLED');
 
 //
 // Parameters
@@ -1305,9 +1299,8 @@ else if ( $submit || $refresh || $mode != '' )
 		$replacement_word = array();
 		obtain_word_list($orig_word, $replacement_word);
 
-		$preview_message = stripslashes(bbcode2html($privmsg_message));
-		$privmsg_message = stripslashes(preg_replace($html_entities_match, $html_entities_replace, $privmsg_message));
-
+        $preview_message = htmlCHR($privmsg_message, false, ENT_NOQUOTES);
+		$preview_message = bbcode2html($privmsg_message);
 
 		if ( count($orig_word) )
 		{
@@ -1388,8 +1381,7 @@ else if ( $submit || $refresh || $mode != '' )
 	//
 	generate_smilies('inline');
 
-	$privmsg_subject = preg_replace($html_entities_match, $html_entities_replace, $privmsg_subject);
-	$privmsg_subject = str_replace('"', '&quot;', $privmsg_subject);
+	$privmsg_subject = clean_title($privmsg_subject);
 
 	$template->assign_vars(array(
 		'SUBJECT' => htmlCHR($privmsg_subject),

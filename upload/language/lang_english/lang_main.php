@@ -1175,6 +1175,11 @@ $lang['BT_GEN_PASSKEY_NEW'] = 'Are you sure you want to create a new passkey?';
 $lang['BT_GEN_PASSKEY_OK'] = 'New personal identifier generated';
 $lang['BT_NO_SEARCHABLE_FORUMS'] = 'No searchable forums found';
 
+$lang['SEEDS'] = 'Seed';
+$lang['LEECHS'] = 'Leech';
+$lang['SPEED_UP'] = 'Speed Up';
+$lang['SPEED_DOWN'] = 'Speed Down';
+
 $lang['SEEDERS'] = 'Seeders';
 $lang['LEECHERS'] = 'Leechers';
 $lang['RELEASING'] = 'Self';
@@ -1212,7 +1217,8 @@ $lang['INVALID_ATTACH_ID'] = 'Missing file identifier!';
 $lang['CHANGE_TOR_TYPE'] = 'Type the torrent successfully changed';
 $lang['DEL_TORRENT'] = 'Are you sure you want to delete the torrent?';
 $lang['DEL_MOVE_TORRENT'] = 'Are you sure you want to delete and move the topic?';
-
+$lang['UNEXECUTED_RELEASE'] = 'Do you have a shapeless release before creating a new fix his unformed!';
+$lang['STATUS_DOES_EXIST'] = 'Such status does not exist: ';
 //end torrent status mod
 
 $lang['BT_TOPIC_TITLE'] = 'Topic title';
@@ -1578,3 +1584,9 @@ $lang['ON'] = 'on';
 $lang['OFF'] = 'off';
 $lang['MEMORY'] = 'Mem: ';
 $lang['QUERIES'] = 'queries';
+
+// Attach Guest
+$lang['DOWNLOAD_INFO'] = 'Download free and at maximum speed!';
+$lang['HOW_TO_DOWNLOAD'] = 'How to Download?';
+$lang['WHAT_IS_A_TORRENT'] = 'What is a torrent?';
+$lang['RATINGS_AND_LIMITATIONS'] = 'Ratings and Limitations';

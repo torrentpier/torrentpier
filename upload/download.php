@@ -28,7 +28,7 @@ function send_file_to_browser($attachment, $upload_dir)
 	{
 		if (@!file_exists(@amod_realpath($filename)))
 		{
-			message_die(GENERAL_ERROR, $lang['ERROR_NO_ATTACHMENT'] . "<br /><br /><b>404 File Not Found:</b> The File <i>" . $filename . "</i> does not exist.");
+			message_die(GENERAL_ERROR, $lang['ERROR_NO_ATTACHMENT'] . "<br /><br />" . $filename.  "<br /><br />" .$lang['TOR_NOT_FOUND']);
 		}
 		else
 		{
@@ -151,7 +151,7 @@ function send_file_to_browser($attachment, $upload_dir)
 
 		if (!$result)
 		{
-			message_die(GENERAL_ERROR, $lang['ERROR_NO_ATTACHMENT'] . "<br /><br /><b>404 File Not Found:</b> The File <i>" . $filename . "</i> does not exist.");
+			message_die(GENERAL_ERROR, $lang['ERROR_NO_ATTACHMENT'] . "<br /><br />" . $filename.  "<br /><br />" .$lang['TOR_NOT_FOUND']);
 		}
 
 		@ftp_quit($conn_id);
@@ -166,7 +166,7 @@ function send_file_to_browser($attachment, $upload_dir)
 	}
 	else
 	{
-		message_die(GENERAL_ERROR, $lang['ERROR_NO_ATTACHMENT'] . "<br /><br /><b>404 File Not Found:</b> The File <i>" . $filename . "</i> does not exist.");
+		message_die(GENERAL_ERROR, $lang['ERROR_NO_ATTACHMENT'] . "<br /><br />" . $filename.  "<br /><br />" .$lang['TOR_NOT_FOUND']);
 	}
 
 	exit;

@@ -151,7 +151,7 @@ $lang['NEWEST_USER'] = 'Последний зарегистрированный 
 
 // Tracker stats
 $lang['TORRENTS_STAT'] = 'Раздач: <b style="color: blue;">%s</b>,&nbsp; общий размер: <b>%s</b>'; // first %s = number of torrents, second %s is the total size.
-$lang['PEERS_STAT'] = 'Пиров: <b>%s</b>,&nbsp; сидеров: <b class="seedmed">%s</b>,&nbsp; личеров: <b class="leechmed">%s</b>'; // first %s = number of peers, second %s = number of seeders,  third %s = number of leechers.
+$lang['PEERS_STAT'] = 'Пиров: <b>%s</b>,&nbsp; Сидов: <b class="seedmed">%s</b>,&nbsp; Личеров: <b class="leechmed">%s</b>'; // first %s = number of peers, second %s = number of seeders,  third %s = number of leechers.
 $lang['SPEED_STAT'] = 'Скорость обмена: <b>%s</b>&nbsp;'; // %s = total speed.
 
 $lang['NO_NEW_POSTS_LAST_VISIT'] = 'Нет новых сообщений с последнего посещения';
@@ -328,7 +328,7 @@ $lang['OPTIONS'] = 'Настройки';
 $lang['POST_ANNOUNCEMENT'] = 'Объявление';
 $lang['POST_STICKY'] = 'Прилепленная';
 $lang['POST_NORMAL'] = 'Обычная';
-$lang['POST_DOWNLOAD'] = 'Download';
+$lang['POST_DOWNLOAD'] = 'Скачиваемая';
 
 $lang['CONFIRM_DELETE'] = 'Вы уверены, что хотите удалить это сообщение?';
 $lang['CONFIRM_DELETE_POLL'] = 'Вы уверены, что хотите удалить этот опрос?';
@@ -1067,7 +1067,7 @@ $lang['DOWNLOAD'] = 'Скачать'; // this Language Variable is defined in la
 $lang['FILESIZE'] = 'Размер';
 $lang['VIEWED'] = 'Просмотров';
 $lang['DOWNLOAD_NUMBER'] = '%d раз'; // replace %d with count
-$lang['EXTENSION_DISABLED_AFTER_POSTING'] = 'The Extension \'%s\' was deactivated by an board admin, therefore this Attachment is not displayed.'; // used in Posts and PM's, replace %s with mime type
+$lang['EXTENSION_DISABLED_AFTER_POSTING'] = 'Расширение \'%s\' было деактивировано администратором, поэтому это приложение не отображается.'; // used in Posts and PM's, replace %s with mime type
 
 $lang['ATTACHMENT'] = 'Вложения';
 $lang['ATTACHMENT_THUMBNAIL'] = 'Вложение Миниатюра';
@@ -1182,6 +1182,11 @@ $lang['BT_GEN_PASSKEY_NEW'] = 'Вы уверены, что хотите созд
 $lang['BT_GEN_PASSKEY_OK'] = 'Новый персональный идентификатор сгенеририван';
 $lang['BT_NO_SEARCHABLE_FORUMS'] = 'Доступных для поиска форумов не найдено';
 
+$lang['SEEDS'] = 'Сидам';
+$lang['LEECHS'] = 'Личерам';
+$lang['SPEED_UP'] = 'Скорость отдачи';
+$lang['SPEED_DOWN'] = 'Скорость скачивания';
+
 $lang['SEEDERS'] = 'Сидов';
 $lang['LEECHERS'] = 'Личеров';
 $lang['RELEASING'] = 'Свои';
@@ -1219,13 +1224,12 @@ $lang['INVALID_ATTACH_ID'] = 'Отсутствует идентификатор 
 $lang['CHANGE_TOR_TYPE'] = 'Тип торрента успешно изменён';
 $lang['DEL_TORRENT'] = 'Вы уверены, что хотите удалить торрент?';
 $lang['DEL_MOVE_TORRENT'] = 'Вы уверены, что хотите удалить и перенести топик?';
-
+$lang['UNEXECUTED_RELEASE'] = 'У вас есть неоформленный релиз, прежде чем создавать новый исправьте свой неоформленный!';
 $lang['STATUS_DOES_EXIST'] = 'Такого статуса не существует: ';
-
 //end torrent status mod
 
 $lang['BT_TOPIC_TITLE'] = 'Название темы';
-$lang['BT_SEEDER_LAST_SEEN'] = 'Последний seeder';
+$lang['BT_SEEDER_LAST_SEEN'] = 'Последний Сид';
 $lang['BT_SORT_FORUM'] = 'Форум';
 $lang['SIZE'] = 'Размер';
 $lang['PIECE_LENGTH'] = 'Размер блока';
@@ -1257,9 +1261,9 @@ $lang['TORRENTS_FROM'] = 'Торенты за';
 $lang['SHOW_ONLY'] = 'Показывать только';
 $lang['SHOW_COLUMN'] = 'Показывать колонку';
 
-$lang['BT_ONLY_ACTIVE'] = 'Активные (есть seeder или leecher)';
+$lang['BT_ONLY_ACTIVE'] = 'Активные (есть сидер или личер)';
 $lang['BT_ONLY_MY'] = 'Мои раздачи';
-$lang['BT_SEED_EXIST'] = 'Есть seeder (полный источник)';
+$lang['BT_SEED_EXIST'] = 'Есть Сид (полный источник)';
 $lang['BT_ONLY_NEW'] = 'Новые с последнего посещения';
 $lang['BT_SHOW_CAT'] = 'Категория';
 $lang['BT_SHOW_FORUM'] = 'Форум';
@@ -1298,10 +1302,10 @@ $lang['DLCANCEL_2'] = 'Отмена';
 $lang['DL_LIST_DEL'] = 'Очистить DL-List';
 $lang['DL_LIST_DEL_CONFIRM'] = 'Вы уверены, что хотите удалить DL-List для этого топика?';
 $lang['SHOW_DL_LIST'] = 'Список скачавших';
-$lang['SET_DL_STATUS'] = 'Download';
-$lang['UNSET_DL_STATUS'] = 'Not Download';
-$lang['TOPICS_DOWN_SETS'] = 'Выбранные темы изменили статус на: <b>Download</b>';
-$lang['TOPICS_DOWN_UNSETS'] = 'Выбранные темы перестали быть <b>Download</b>';
+$lang['SET_DL_STATUS'] = 'Разрешить скачивание';
+$lang['UNSET_DL_STATUS'] = 'Запретить скачивание';
+$lang['TOPICS_DOWN_SETS'] = 'Выбранные темы изменили статус на: <b>Скачиваемые</b>';
+$lang['TOPICS_DOWN_UNSETS'] = 'Выбранные темы перестали быть <b>Скачиваемыми</b>';
 
 $lang['TOPIC_DL'] = 'DL';
 
@@ -1325,8 +1329,8 @@ $lang['ALREADY_REG'] = 'Торрент уже зарегистрирован';
 $lang['NOT_TORRENT'] = 'Это не торрент-файл';
 $lang['ONLY_1_TOR_PER_POST'] = 'Вы не можете зарегистрировать еще один торрент для этого сообщения';
 $lang['ONLY_1_TOR_PER_TOPIC'] = 'Вы не можете зарегистрировать еще один торрент для этого топика';
-$lang['VIEWING_USER_BT_PROFILE'] = 'Torrent-профиль пользователя %s'; // %s is username
-$lang['CUR_ACTIVE_DLS'] = 'Текущие активные torrent\'ы';
+$lang['VIEWING_USER_BT_PROFILE'] = 'Торрент-профиль пользователя %s'; // %s is username
+$lang['CUR_ACTIVE_DLS'] = 'Текущие активные торренты';
 
 $lang['UP_TOTAL'] = 'Всего отдано';
 $lang['DOWN_TOTAL'] = 'Всего скачано';
@@ -1343,8 +1347,8 @@ $lang['BT_RATIO'] = 'Рейтинг';
 $lang['YOUR_RATIO'] = 'Ваш рейтинг';
 $lang['DOWNLOADED'] = 'Скачано';
 $lang['UPLOADED'] = 'Отдано';
-$lang['RELEASED'] = 'на своих';
-$lang['BT_BONUS_UP'] = 'бонус';
+$lang['RELEASED'] = 'На своих';
+$lang['BT_BONUS_UP'] = 'Бонус';
 
 $lang['TRACKER'] = 'Трекер';
 $lang['GALLERY'] = 'Галерея';
@@ -1593,3 +1597,8 @@ $lang['OFF'] = 'выкл';
 $lang['MEMORY'] = 'Память: ';
 $lang['QUERIES'] = 'запр.';
 
+// Attach Guest
+$lang['DOWNLOAD_INFO'] = 'Скачать бесплатно и на максимальной скорости!';
+$lang['HOW_TO_DOWNLOAD'] = 'Как скачивать?';
+$lang['WHAT_IS_A_TORRENT'] = 'Что такое торрент?';
+$lang['RATINGS_AND_LIMITATIONS'] = 'Рейтинг и ограничения';

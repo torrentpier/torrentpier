@@ -21,11 +21,11 @@ if (($file_contents = @file_get_contents($filename)) === false)
 {
 	if(IS_AM)
 	{
-		$this->ajax_die($lang['TOR_NOT_FOUND'] ."\n\n". htmlCHR($filename));
+		$this->ajax_die($lang['ERROR_NO_ATTACHMENT'] ."\n\n". htmlCHR($filename));
 	}
 	else
 	{
-		$this->ajax_die($lang['TOR_NOT_FOUND']);
+		$this->ajax_die($lang['ERROR_NO_ATTACHMENT']);
 	}
 }
 

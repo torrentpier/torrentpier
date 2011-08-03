@@ -31,7 +31,7 @@ function topic_info($topic_id)
 	return $t;
 }
 
-function send_pm($topic_id, $t_info, $to_user_id)
+function call_seed($topic_id, $t_info, $to_user_id)
 {
 	global $userdata, $lang, $msg_error;
 
@@ -126,7 +126,7 @@ function send_pm($topic_id, $t_info, $to_user_id)
 	{
 		if ($msg_error != "OK") break;
 
-		send_pm($topic_id, $t_info, $user_id);
+		call_seed($topic_id, $t_info, $user_id);
 	}
 
 	$msg = '';

@@ -519,11 +519,11 @@ foreach ($topic_rowset as $topic)
 	{
 		if ($topic['tor_type'] == TOR_TYPE_GOLD)
 		{
-			$is_gold = '<img src="images/tor_gold.gif" width="16" height="15" title="'.$lang['GOLD'].'" />&nbsp;';
+			$is_gold = '<img src="images/tor_gold.gif" width="16" height="15" title="'.$lang['GOLD'].'" alt="" />&nbsp;';
 		}
 		elseif ($topic['tor_type'] == TOR_TYPE_SILVER)
 		{
-			$is_gold = '<img src="images/tor_silver.gif" width="16" height="15" title="'.$lang['SILVER'].'" />&nbsp;';
+			$is_gold = '<img src="images/tor_silver.gif" width="16" height="15" title="'.$lang['SILVER'].'" alt="" />&nbsp;';
 		}
 	}
 	// END Gold/Silver releases mod

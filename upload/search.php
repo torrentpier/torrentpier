@@ -455,7 +455,7 @@ if ($post_mode)
 		if ($text_match_sql)
 		{
 			$search_match_topics_csv = '';
-            if(!$forum_selected[0]) $forum_selected = array();
+            if(!is_array($forum_selected)) $forum_selected = array();
             $title_match_topics = get_title_match_topics($text_match_sql, 500, $forum_selected);
 
 			if (!$search_match_topics_csv = join(',', $title_match_topics))
@@ -627,7 +627,7 @@ else
 		if ($text_match_sql)
 		{
 			$search_match_topics_csv = '';
-            if(!$forum_selected[0]) $forum_selected = array();
+            if(!is_array($forum_selected)) $forum_selected = array();
             $title_match_topics = get_title_match_topics($text_match_sql, 500, $forum_selected);
 
 			if (!$search_match_topics_csv = join(',', $title_match_topics))

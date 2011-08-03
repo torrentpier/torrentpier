@@ -92,19 +92,19 @@ $order_opt = array(
 		                 'sql'  => 'tor.complete_count',
 		                ),
 	$ord_seeders   => array(
-		                 'lang' => 'Seeders',
+		                 'lang' => $lang['SEEDS'],
 		                 'sql'  => 'sn.seeders',
 		                ),
 	$ord_leechers  => array(
-		                 'lang' => 'Leechers',
+		                 'lang' => $lang['LEECHS'],
 		                 'sql'  => 'sn.leechers',
 		                ),
 	$ord_sp_up     => array(
-		                 'lang' => 'Speed UP',
+		                 'lang' => $lang['SPEED_UP'],
 		                 'sql'  => 'sn.speed_up',
 		                ),
 	$ord_sp_down   => array(
-		                 'lang' => 'Speed DOWN',
+		                 'lang' => $lang['SPEED_DOWN'],
 		                 'sql'  => 'sn.speed_down',
 		                ),
 	$ord_repl      => array(
@@ -733,11 +733,11 @@ if ($allowed_forums)
 			{
 				if ($tor['tor_type'] == TOR_TYPE_GOLD)
 				{
-					$is_gold = '<img src="images/tor_gold.gif" width="16" height="15" title="'.$lang['GOLD'].'" />&nbsp;';
+					$is_gold = '<img src="images/tor_gold.gif" width="16" height="15" title="'.$lang['GOLD'].'" alt="" />&nbsp;';
 				}
 				elseif ($tor['tor_type'] == TOR_TYPE_SILVER)
 				{
-					$is_gold = '<img src="images/tor_silver.gif" width="16" height="15" title="'.$lang['SILVER'].'" />&nbsp;';
+					$is_gold = '<img src="images/tor_silver.gif" width="16" height="15" title="'.$lang['SILVER'].'" alt="" />&nbsp;';
 				}
 			}
 			// END Gold/Silver releases mod
@@ -773,7 +773,7 @@ if ($allowed_forums)
 				'UL_SPEED'     => $ul_sp,
 				'DL_SPEED'     => $dl_sp,
 				'SEEDS'        => ($seeds) ? $seeds : 0,
-				'SEEDS_TITLE'  => ($seeds) ? 'Seeders' : (" Last seen: \n ". (($s_last) ? bb_date($s_last, $date_format) : 'Never')),
+				'SEEDS_TITLE'  => ($seeds) ? $lang['SEEDERS'] : ($lang['SEED_NOT_SEEN']. ":\n ". (($s_last) ? bb_date($s_last, $date_format) : $lang['NEVER'])),
 				'LEECHS'       => ($leechs) ? $leechs : 0,
 				'COMPLETED'    => ($compl) ? $compl : 0,
 				'REPLIES'      => $tor['topic_replies'],
