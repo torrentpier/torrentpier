@@ -69,4 +69,4 @@ if ($tor['tor_status'] != TOR_NOT_APPROVED && $tor['checked_user_id'] != $userda
 change_tor_status($attach_id, $new_status);
 
 $this->response['attach_id'] = $attach_id;
-$this->response['status'] = $bb_cfg['tor_icons'][$new_status] .' <b> '. $lang['TOR_STATUS_NAME'][$new_status]. '</b> &middot; <a class="med" href='. PROFILE_URL . $userdata['user_id'] . '>' . get_username($userdata['user_id']) . '</a> &middot; <i>'. delta_time(time()) . $lang['BACK']. '</i>';
+$this->response['status'] = $bb_cfg['tor_icons'][$new_status] .' <b> '. $lang['TOR_STATUS_NAME'][$new_status]. '</b> &middot; <a class="med" href='. PROFILE_URL . $userdata['user_id'] . '>' . $userdata['username'] . '</a> &middot; <i>'. delta_time(time()) . $lang['BACK']. '</i>';

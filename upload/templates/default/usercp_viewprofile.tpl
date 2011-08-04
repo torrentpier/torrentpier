@@ -174,25 +174,25 @@ $(document).ready(function(){
 		<div id="user-opt" style="display: none;">
 			<fieldset class="mrg_6">
 			<style type="text/css"> #user-opt label { display: block; } </style>
-			<legend>Юзеру <b style="color: darkred;">ЗАПРЕЩЕНО</b></legend>
+			<legend>{L_BAN_USER}</legend>
 			<div class="tLeft" style="padding: 2px 6px 6px; display: block;">
-				<label><input type="checkbox" name="allow_avatar"/>показывать аватар</label>
-				<label><input type="checkbox" name="allow_sig"/>показывать подпись</label>
-				<label><input type="checkbox" name="allow_passkey"/>скачивать торренты</label>
-				<label><input type="checkbox" name="allow_pm"/>отправлять лс</label>
-				<label><input type="checkbox" name="allow_post"/>отправлять сообщения</label>
-				<label><input type="checkbox" name="allow_post_edit"/>редактировать сообщения</label>
-				<label><input type="checkbox" name="allow_topic"/>создавать темы</label>
+				<label><input type="checkbox" name="allow_avatar"/>{L_HIDE_AVATARS}</label>
+				<label><input type="checkbox" name="allow_sig"/>{L_SHOW_CAPTION}</label>
+				<label><input type="checkbox" name="allow_passkey"/>{L_DOWNLOAD_TORRENT}</label>
+				<label><input type="checkbox" name="allow_pm"/>{L_SEND_PM}</label>
+				<label><input type="checkbox" name="allow_post"/>{L_SEND_MESSAGE}</label>
+				<label><input type="checkbox" name="allow_post_edit"/>{L_EDIT_POST}</label>
+				<label><input type="checkbox" name="allow_topic"/>{L_NEW_THREADS}</label>
 			</div>
 			</fieldset>
 			<div id="user-opt-save" class="hidden">
-				<p><input id="user-opt-save-btn" class="bold long" type="button" value="&nbsp;&nbsp;Сохранить&nbsp;&nbsp;" /></p>
+				<p><input id="user-opt-save-btn" class="bold long" type="button" value="{L_SUBMIT}" /></p>
 				<p id="user-opt-resp" class="mrg_6"></p>
 			</div>
 		</div>
 		<!-- ELSEIF USER_RESTRICTIONS -->
 		<fieldset class="mrg_6">
-		<legend>Юзеру <b style="color: darkred;">ЗАПРЕЩЕНО</b></legend>
+		<legend>{L_USER_NOT_ALLOWED}</legend>
 			<div class="tLeft" style="padding: 4px 6px 8px 2px;">
 			<ul><li>{USER_RESTRICTIONS}</li></ul>
 			</div>

@@ -25,6 +25,7 @@ $lang['POSTED'] = 'Posted';
 $lang['USERNAME'] = 'Username';
 $lang['PASSWORD'] = 'Password';
 $lang['EMAIL'] = 'Email';
+$lang['PM'] = 'PM';
 $lang['POSTER'] = 'Poster';
 $lang['AUTHOR'] = 'Author';
 $lang['TIME'] = 'Time';
@@ -263,6 +264,7 @@ $lang['CODE'] = 'Code'; // comes before bbcode code output.
 $lang['CODE_COPIED'] = 'Code copied to clipboard';
 $lang['CODE_COPY'] = 'copy to clipboard';
 $lang['SPOILER_HEAD'] = 'hidden text';
+$lang['SPOILER_CLOSE'] = 'turn';
 
 $lang['EDITED_TIME_TOTAL'] = 'Last edited by %s on %s; edited %d time in total'; // Last edited by me on 12 Oct 2001; edited 1 time in total
 $lang['EDITED_TIMES_TOTAL'] = 'Last edited by %s on %s; edited %d times in total'; // Last edited by me on 12 Oct 2001; edited 2 times in total
@@ -1191,6 +1193,7 @@ $lang['MAGNET'] = 'Magnet';
 //torrent status mod
 $lang['TOR_STATUS'] = 'Status';
 $lang['TOR_STATUS_SELECT_ACTION'] = 'Select status';
+$lang['TOR_STATUS_NOT_SELECT'] = 'You have not selected status.';
 $lang['TOR_STATUS_SELECT_ALL'] = 'All statuses';
 $lang['TOR_STATUS_NAME'] = array(
     TOR_NOT_APPROVED  => 'not checked',
@@ -1567,6 +1570,16 @@ $lang['INVALID_DATE'] = 'Error date ';
 $lang['PROFILE_USER'] = 'Viewing profile';
 $lang['GOOD_UPDATE'] = 'was successfully changed';
 $lang['FORBADE_VIEWING'] = 'forbade visitors viewing your profile';
+$lang['DENY_VISITORS'] = 'Deny visitors viewing your profile:';
+$lang['BAN_USER'] = 'To prevent a user:';
+$lang['USER_NOT_ALLOWED'] = 'Users are not permitted:';
+$lang['HIDE_AVATARS'] = 'Show avatars';
+$lang['SHOW_CAPTION'] = 'Show your signature';
+$lang['DOWNLOAD_TORRENT'] = 'Download torrent';
+$lang['SEND_PM'] = 'Send PM';
+$lang['SEND_MESSAGE'] = 'Send message';
+$lang['EDIT_POST'] = 'Edit Post';
+$lang['NEW_THREADS'] = 'New Threads';
 
 // Register
 $lang['CHOOSE_A_NAME'] = 'You should choose a name';
@@ -1574,8 +1587,10 @@ $lang['CHOOSE_E_MAIL'] = 'You must specify the e-mail';
 $lang['CHOOSE_PASS'] = 'Field for the password must not be empty!';
 $lang['CHOOSE_PASS_ERR'] = 'Entered passwords do not match';
 $lang['CHOOSE_PASS_OK'] = 'Passwords match, you can proceed with the registration.';
-
 $lang['EMAILER_DISABLED'] = 'Sorry, this feature is temporarily not working';
+$lang['TERMS_ON'] = 'I agree with these terms and conditions';
+$lang['TERMS_OFF'] = 'I do not agree to these terms';
+$lang['JAVASCRIPT_ON_REGISTER'] = 'To register, heads necessary to enable JavaScript';
 
 // Debug
 $lang['EXECUTION_TIME'] = 'Execution time:';
@@ -1590,3 +1605,9 @@ $lang['DOWNLOAD_INFO'] = 'Download free and at maximum speed!';
 $lang['HOW_TO_DOWNLOAD'] = 'How to Download?';
 $lang['WHAT_IS_A_TORRENT'] = 'What is a torrent?';
 $lang['RATINGS_AND_LIMITATIONS'] = 'Ratings and Limitations';
+
+$lang['SCREENSHOTS_RULES'] = 'Read the rules laid out screenshots!';
+$lang['GO_TO_PAGE'] = 'Go to page ...';
+$lang['EDIT'] = 'Edit';
+$lang['SAVE'] = 'Save';
+$lang['NEW_WINDOW'] = 'in a new window';

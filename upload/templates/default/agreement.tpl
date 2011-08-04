@@ -14,9 +14,9 @@
 				<form id="go-to-reg" action="profile.php?mode=register" method="post">
 				<input type="hidden" name="reg_agreed" value="1" />
 				</form>
-				<a href="#" onclick="$('#go-to-reg').submit(); return false;">Я <b>согласен</b> с этими условиями</a>
+				<a href="#" onclick="$('#go-to-reg').submit(); return false;">{L_TERMS_ON}</a>
 				<br /><br />
-				<a href="index.php">Я <b>не согласен</b> с этими условиями</a>
+				<a href="index.php">{L_TERMS_OFF}</a>
 			</div>
 			<br />
 		</div>
@@ -24,4 +24,4 @@
 </tr>
 </table>
 
-<noscript><div class="warningBox2 bold tCenter">Для регистрации необходимo включить JavaScript</div></noscript>
+<noscript><div class="warningBox2 bold tCenter">{L_JAVASCRIPT_ON_REGISTER}</div></noscript>

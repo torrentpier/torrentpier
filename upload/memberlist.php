@@ -152,7 +152,7 @@ $template->assign_vars(array(
 ));
 
 // per-letter selection end
-$sql = "SELECT username, user_id, user_opt, user_posts, user_regdate, user_from, user_website, user_email, user_icq, user_avatar, user_avatar_type
+$sql = "SELECT username, user_id, user_opt, user_posts, user_regdate, user_from, user_website, user_avatar, user_avatar_type
          FROM ". BB_USERS ."
 		 WHERE user_id NOT IN(". EXCLUDED_USERS_CSV .")";
 if ( $username )
@@ -212,9 +212,9 @@ if ( $row = DB()->sql_fetchrow($result) )
 }
 else
 {
-  	 $template->assign_block_vars('no_username', array(
+  	$template->assign_block_vars('no_username', array(
        'NO_USER_ID_SPECIFIED' => $lang['NO_USER_ID_SPECIFIED']   )
- 	 );
+ 	);
 }
 $paginationurl = "memberlist.php?mode=$mode&amp;order=$sort_order&amp;letter=$by_letter";
 if ($paginationusername) $paginationurl .= "&amp;username=$paginationusername";

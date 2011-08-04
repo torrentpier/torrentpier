@@ -65,10 +65,10 @@ switch ($mode)
 
 			}
 			// Вывод начальной страницы с условиями регистрации
-			if (empty($_POST['reg_agreed']))
+			/*if (empty($_POST['reg_agreed']))
 			{
 				print_page('agreement.tpl');
-			}
+			}*/
 		}
 
 		// field => can_edit

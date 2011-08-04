@@ -18,7 +18,7 @@
 	<!-- IF LOGIN_ERR_MSG -->
 	<h4 class="warnColor1 tCenter mrg_16">{LOGIN_ERR_MSG}</h4>
 	<!-- ELSEIF ADMIN_LOGIN -->
-	<h4 class="tCenter mrg_16">Для получения доступа к мод/админ опциям необходимо еще раз ввести пароль</h4>
+	<h4 class="tCenter mrg_16">{L_ADMIN_REAUTHENTICATE}</h4>
 	<!-- ELSE -->
 	<h4 class="tCenter mrg_16">{L_ENTER_PASSWORD}</h4>
 	<!-- ENDIF -->
@@ -36,7 +36,7 @@
 	</tr>
 	<!-- IF CAPTCHA_HTML -->
 	<tr>
-		<td class="tRight nowrap">Код:</td>
+		<td class="tRight nowrap">{L_CODE}</td>
 		<td>{CAPTCHA_HTML}</td>
 	</tr>
 	<!-- ENDIF -->

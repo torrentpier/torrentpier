@@ -117,13 +117,13 @@ function mod_action (mode)
 		topics += ','+ this.value;
 	});
 	if(!topics){
-		alert('Вы не выбрали ни одной темы.');
+		alert('{L_NONE_SELECTED}');
 		return false;
 	}
 	if(mode == 'tor_status'){
 		status = $('#st option:selected').val();
 		if(status == '-1'){
-			alert('Вы не выбрали статус.');
+			alert('{L_TOR_STATUS_NOT_SELECT}');
 			return false;
 		}
 		ajax.mod_action(topics, mode, status);
@@ -161,7 +161,7 @@ ajax.callback.mod_action = function(data) {
 	<input type="checkbox" onclick="$('.topic-chbox').attr({ checked: this.checked }); if(this.checked){$('.tt-text').addClass('hl-tt');}else{$('.tt-text').removeClass('hl-tt');}" />
 	<!-- IF TORRENTS -->
 	{SELECT_ST}
-	<input type="button" onclick="mod_action('tor_status');" value="Изменить" />
+	<input type="button" onclick="mod_action('tor_status');" value="{L_EDIT}" />
 	<!-- ENDIF -->
 	</div>
 	<div class="floatR">
@@ -169,7 +169,7 @@ ajax.callback.mod_action = function(data) {
 	<input type="submit" name="move" value="{L_MOVE}" />
 	<input type="submit" name="lock" value="{L_LOCK}" />
 	<input type="submit" name="unlock" value="{L_UNLOCK}" />
-	<label><input id="in-new-window" type="checkbox" />в новом окне</label>
+	<label><input id="in-new-window" type="checkbox" />{L_NEW_WINDOW}</label>
 	</div>
 </form>
 </div>
@@ -177,8 +177,8 @@ ajax.callback.mod_action = function(data) {
 <div id="tt-edit-tpl" style="display: none;">
 	<div class="tt-edit" style="padding: 4px;">
 		<textarea class="tt-edit-input" rows="2" cols="50" style="width: 98%; height: 35px;"></textarea>
-		<a href="#" onclick="tte_submit('save'); return false;" class="adm">[сохранить]</a> &middot;
-		<a href="#" onclick="tte_submit('cancel'); return false;" class="med">отмена</a>
+		<a href="#" onclick="tte_submit('save'); return false;" class="adm">[{L_SAVE}]</a> &middot;
+		<a href="#" onclick="tte_submit('cancel'); return false;" class="med">{L_CANCEL}</a>
 	</div>
 </div>
 

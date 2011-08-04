@@ -280,7 +280,7 @@
 
 				<span id="tor-{postrow.attach.tor_reged.ATTACH_ID}">{postrow.attach.tor_reged.TOR_STATUS_SELECT}</span>
 
-				<a href="#" onclick="ajax.change_tor_status($('#tor-{postrow.attach.tor_reged.ATTACH_ID} select').val()); return false;"><input type="submit" value="{L_DO_SUBMIT}" class="liteoption" /></a>
+				<a href="#" onclick="ajax.change_tor_status($('#tor-{postrow.attach.tor_reged.ATTACH_ID} select').val()); return false;"><input type="submit" value="{L_EDIT}" class="liteoption" /></a>
 
 			<!-- ENDIF -->
 		</td>
@@ -337,7 +337,7 @@
 				<!-- ENDIF -->
 			</select>
 			
-			&nbsp; <a href="#" onclick="change_torrents($('#tor-{postrow.attach.tor_reged.ATTACH_ID} select').val()); return false;"><input type="submit" value="{L_DO_SUBMIT}" class="liteoption" /></a>
+			&nbsp; <a href="#" onclick="change_torrents($('#tor-{postrow.attach.tor_reged.ATTACH_ID} select').val()); return false;"><input type="submit" value="{L_EDIT}" class="liteoption" /></a>
 
 		<!-- ELSEIF TOR_HELP_LINKS -->
 		{TOR_HELP_LINKS}

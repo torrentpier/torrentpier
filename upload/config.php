@@ -56,8 +56,8 @@ $bb_cfg['js_ver']  = 1;
 $bb_cfg['css_ver'] = 1;
 
 // Increase number of revision after update
-$bb_cfg['tp_version'] = '2.0.2';
-$bb_cfg['tp_release_state'] = 'TP II r190';
+$bb_cfg['tp_version'] = '2.0';
+$bb_cfg['tp_release_state'] = 'R191';
 $bb_cfg['tp_release_date'] = '4-08-2011';
 
 $bb_cfg['board_disabled_msg'] = 'форум временно отключен'; // 'forums temporarily disabled'; // show this msg if board has been disabled via ON/OFF trigger

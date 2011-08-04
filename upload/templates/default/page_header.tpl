@@ -81,13 +81,13 @@ function initSpoilers(context)
 {
 	$('div.sp-body', context).each(function(){
 		var $sp_body = $(this);
-		var name = $.trim(this.title) || 'скрытый текст';
+		var name = $.trim(this.title) || '{L_SPOILER_HEAD}';
 		this.title = '';
 		var $sp_head = $('<div class="sp-head folded clickable">'+ name +'</div>');
 		$sp_head.insertBefore($sp_body).click(function(e){
 			if (!$sp_body.hasClass('inited')) {
 				initPostImages($sp_body);
-				var $sp_fold_btn = $('<div class="sp-fold clickable">[свернуть]</div>').click(function(){
+				var $sp_fold_btn = $('<div class="sp-fold clickable">[{L_SPOILER_CLOSE}]</div>').click(function(){
 					$.scrollTo($sp_head, { duration:200, axis:'y', offset:-200 });
 					$sp_head.click().animate({opacity: 0.1}, 500).animate({opacity: 1}, 700);
 				});
@@ -119,7 +119,7 @@ function fixPostImage ($img)
 	var banned_image_hosts = /imagebanana|hidebehind/i;  // imageshack
 	var src = $img[0].src;
 	if (src.match(banned_image_hosts)) {
-		$img.wrap('<a href="'+ this.src +'" target="_blank"></a>').attr({ src: "{SMILES_URL}/tr_oops.gif", title: "Прочтите правила выкладывания скриншотов!" });
+		$img.wrap('<a href="'+ this.src +'" target="_blank"></a>').attr({ src: "{SMILES_URL}/tr_oops.gif", title: "{L_SCREENSHOTS_RULES}" });
 	}
 	return $img;
 }
@@ -203,7 +203,7 @@ input[type="checkbox"] { margin-bottom: -1px; }
 
 <!--[if lte IE 6]><style type="text/css">
 .forumline th { height: 24px; padding: 2px 4px; }
-.menu-sub iframe.ie-fix-select-overlap { display: none; display/**/: block; position: absolute; z-index: -1; filter: mask(); }
+.menu-sub iframe.ie-fix-select-overlap { display: none; display: block; position: absolute; z-index: -1; filter: mask(); }
 </style><![endif]-->
 
 <!--[if IE]><style type="text/css">
@@ -266,8 +266,8 @@ function OpenInEditor ($file, $line)
 </div>
 <!-- ENDIF / EDITABLE_TPLS -->
 
-<table id="ajax-loading" cellpadding="0" cellspacing="0"><tr><td class="icon"></td><td>Loading...</td></tr></table>
-<table id="ajax-error" cellpadding="0" cellspacing="0"><tr><td>Error</td></tr></table>
+<table id="ajax-loading" cellpadding="0" cellspacing="0"><tr><td class="icon"></td><td>{L_LOADING}</td></tr></table>
+<table id="ajax-error" cellpadding="0" cellspacing="0"><tr><td>{L_ERROR}</td></tr></table>
 
 <div id="preload" style="position: absolute; overflow: hidden; top: 0; left: 0; height: 1px; width: 1px;"></div>
 
@@ -300,7 +300,6 @@ function OpenInEditor ($file, $line)
 	<tr>
 		<td class="nowrap">
 			<a href="{U_INDEX}"><b>{L_HOME}</b></a>&#0183;
-
 			<a href="{U_TRACKER}"><b>{L_TRACKER}</b></a>&#0183;
 			<!-- IF LOGGED_IN && $bb_cfg['gallery_enabled'] --><a href="{U_GALLERY}"><b>{L_GALLERY}</b></a>&#0183;<!-- ENDIF -->
 			<a href="{U_SEARCH}"><b>{L_SEARCH}</b></a>&#0183;
@@ -327,20 +326,18 @@ function OpenInEditor ($file, $line)
 <div id="logo">
 	<!--<h1>{SITENAME}</h1>
 	<h6>{SITE_DESCRIPTION}</h6> -->
-
 	<a href="{U_INDEX}"><img src="images/logo/logo.png" alt="{SITENAME}" /></a>
-
 </div>
 <!--/logo-->
 
 <!-- IF LOGGED_IN -->
 <!--logout-->
 <div class="topmenu">
-   <table width="100%" cellpadding="0" cellspacing="0">
-   <tr>
-            <td width="40%">
-         {L_USER_WELCOME} &nbsp;<a href="{U_PROFILE}"><b class="med">{THIS_USERNAME}</b></a>&nbsp; [ <a href="{U_LOGIN_LOGOUT}" onclick="return confirm('{L_CONFIRM_LOGOUT}');">{L_LOGOUT}</a> ]
-      </td>
+<table width="100%" cellpadding="0" cellspacing="0">
+<tr>
+    <td width="40%">
+        {L_USER_WELCOME} &nbsp;<a href="{U_PROFILE}"><b class="med">{THIS_USERNAME}</b></a>&nbsp; [ <a href="{U_LOGIN_LOGOUT}" onclick="return confirm('{L_CONFIRM_LOGOUT}');">{L_LOGOUT}</a> ]
+    </td>
 
 	<td align="center" nowrap="nowrap">
 		<!-- BEGIN switch_report_list -->
@@ -446,11 +443,11 @@ important_info
 <!-- IF PAGINATION -->
 <div class="menu-sub" id="pg-jump">
 	<table cellspacing="1" cellpadding="4">
-	<tr><th>К странице...</th></tr>
+	<tr><th>{L_GO_TO_PAGE}</th></tr>
 	<tr><td>
 		<form method="get" onsubmit="return go_to_page();">
 			<input id="pg-page" type="text" size="5" maxlength="4" />
-			<input type="submit" value="Перейти"/>
+			<input type="submit" value="{L_JUMP_TO}"/>
 		</form>
 	</td></tr>
 	</table>
@@ -518,8 +515,8 @@ function go_to_page ()
        <tr><td>{L_YOUR_RATIO}</td><td><!-- IF DOWN_TOTAL_BYTES gt MIN_DL_BYTES --><b>{USER_RATIO}</b><!-- ELSE --><b>{L_NONE}</b> (DL < {MIN_DL_FOR_RATIO})<!-- ENDIF --></td></tr>
        <tr><td>{L_DOWNLOADED}</td><td class="leechmed"><b>{DOWN_TOTAL}</b></td></tr>
        <tr><td>{L_UPLOADED}</td><td class="seedmed"><b>{UP_TOTAL}</b></td></tr>
-       <tr><td><i>{L_RELEASED}</i></td><td class="seedmed">{RELEASED}</td></tr>
-       <tr><td><i>{L_BT_BONUS_UP}</i></td><td class="seedmed">{UP_BONUS}</td></tr>
+       <tr><td>{L_RELEASED}</td><td class="seedmed">{RELEASED}</td></tr>
+       <tr><td>{L_BT_BONUS_UP}</td><td class="seedmed">{UP_BONUS}</td></tr>
        </table>
      </div><!-- ENDIF -->
 

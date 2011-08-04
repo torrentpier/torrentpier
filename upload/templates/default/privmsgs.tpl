@@ -83,7 +83,7 @@
 <!-- BEGIN listrow -->
 <tr class="{listrow.ROW_CLASS} med tCenter">
 	<td><img src="{listrow.PRIVMSG_FOLDER_IMG}" alt="{listrow.L_PRIVMSG_FOLDER_ALT}" title="{listrow.L_PRIVMSG_FOLDER_ALT}" /></td>
-	<td class="tLeft"><a href="{listrow.U_READ}" class="med bold">{listrow.SUBJECT}</a></td>
+	<td class="tLeft pad_0"><a href="{listrow.U_READ}" class="med bold block pad_4">{listrow.SUBJECT}</a></td>
 	<td><a href="{listrow.U_FROM_USER_PROFILE}">{listrow.FROM}</a></td>
 	<td>{listrow.DATE}</td>
 	<td><input type="checkbox" name="mark[]2" value="{listrow.S_MARK_ID}" /></td>
