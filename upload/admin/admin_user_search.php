@@ -1304,7 +1304,7 @@ else
 
 			'U_VIEWPROFILE' => append_sid("../profile.php?mode=viewprofile&".POST_USERS_URL."=".$rowset[$i]['user_id']),
 			'U_VIEWPOSTS' => append_sid("../search.php?search_author=1&amp;uid={$rowset[$i]['user_id']}"),
-			'U_MANAGE' => append_sid("profile.php?mode=editprofile&".POST_USERS_URL."=".$rowset[$i]['user_id']),
+			'U_MANAGE' => append_sid("../profile.php?mode=editprofile&".POST_USERS_URL."=".$rowset[$i]['user_id']),
 			'U_PERMISSIONS' => append_sid("admin_ug_auth.php?mode=user&".POST_USERS_URL."=".$rowset[$i]['user_id']),
 		));
 	}
