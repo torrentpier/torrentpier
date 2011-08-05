@@ -320,7 +320,7 @@ $lang['INVALID_TOPIC_ID_DB'] = 'Topic does not exist in the database!';
 
 $lang['NOT_POST'] = 'Absent Message';
 $lang['NOT_EDIT_TOR_STATUS'] = 'You may not edit your hand with the status';
-$lang['TOR_STATUS_DAYS'] = 'days'
+$lang['TOR_STATUS_DAYS'] = 'days';
 
 $lang['OPTIONS'] = 'Options';
 
