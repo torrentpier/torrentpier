@@ -187,7 +187,7 @@ if ($tor_reged && $tor_info)
 			$dl_allowed = ($user_ratio > $min_ratio_dl);
 		}
 
-		if (isset($user_ratio) && isset($min_ratio_warn) && $user_ratio < $min_ratio_warn && TR_RATING_LIMITS)
+		if ((isset($user_ratio) && isset($min_ratio_warn) && $user_ratio < $min_ratio_warn && TR_RATING_LIMITS) || ($bt_userdata['u_down_total'] < MIN_DL_FOR_RATIO))
 		{
 			$template->assign_vars(array(
 				'SHOW_RATIO_WARN'  => true,

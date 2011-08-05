@@ -525,7 +525,7 @@ CREATE TABLE `bb_categories` (
 -- Дамп данных таблицы `bb_categories`
 --
 
-INSERT INTO `bb_categories` VALUES (1, 'Test category 1', 10);
+INSERT INTO `bb_categories` VALUES (1, 'Ваша первая категория', 10);
 
 -- --------------------------------------------------------
 
@@ -551,7 +551,7 @@ INSERT INTO `bb_config` VALUES ('allow_bbcode', '1');
 INSERT INTO `bb_config` VALUES ('allow_namechange', '0');
 INSERT INTO `bb_config` VALUES ('allow_sig', '1');
 INSERT INTO `bb_config` VALUES ('allow_smilies', '1');
-INSERT INTO `bb_config` VALUES ('avatar_filesize', '10000');
+INSERT INTO `bb_config` VALUES ('avatar_filesize', '100000');
 INSERT INTO `bb_config` VALUES ('avatar_gallery_path', 'images/avatars/gallery');
 INSERT INTO `bb_config` VALUES ('avatar_max_height', '100');
 INSERT INTO `bb_config` VALUES ('avatar_max_width', '100');
@@ -709,10 +709,10 @@ CREATE TABLE `bb_datastore` (
 -- Дамп данных таблицы `bb_datastore`
 --
 
-INSERT INTO `bb_datastore` VALUES ('cat_forums', 'a:6:{s:15:"not_auth_forums";a:4:{s:10:"guest_view";s:0:"";s:10:"guest_read";s:0:"";s:9:"user_view";s:0:"";s:9:"user_read";s:0:"";}s:14:"tracker_forums";s:0:"";s:14:"cat_title_html";a:1:{i:1;s:15:"Test category 1";}s:15:"forum_name_html";a:1:{i:1;s:12:"Test Forum 1";}s:1:"c";a:1:{i:1;a:4:{s:6:"cat_id";s:1:"1";s:9:"cat_title";s:15:"Test category 1";s:9:"cat_order";s:2:"10";s:6:"forums";a:1:{i:0;s:1:"1";}}}s:1:"f";a:1:{i:1;a:20:{s:8:"forum_id";s:1:"1";s:6:"cat_id";s:1:"1";s:10:"forum_name";s:12:"Test Forum 1";s:10:"forum_desc";s:26:"This is just a test forum.";s:12:"forum_status";s:1:"0";s:11:"forum_posts";s:1:"1";s:12:"forum_topics";s:1:"1";s:9:"auth_view";s:1:"0";s:9:"auth_read";s:1:"0";s:9:"auth_post";s:1:"1";s:10:"auth_reply";s:1:"1";s:9:"auth_edit";s:1:"1";s:11:"auth_delete";s:1:"1";s:11:"auth_sticky";s:1:"3";s:13:"auth_announce";s:1:"3";s:9:"auth_vote";s:1:"1";s:15:"auth_pollcreate";s:1:"1";s:16:"auth_attachments";s:1:"1";s:13:"auth_download";s:1:"1";s:12:"forum_parent";s:1:"0";}}}');
-INSERT INTO `bb_datastore` VALUES ('jumpbox', 'a:2:{s:5:"guest";s:241:"\n<select  id="jumpbox" onchange="window.location.href=''viewforum.php?f=''+this.value;" name="f" id="f">\n	<optgroup label="&nbsp;Test category 1">\n		<option class="root_forum" value="1">&nbsp;Test Forum 1&nbsp;</option>\n	</optgroup>\n</select>\n";s:4:"user";s:241:"\n<select  id="jumpbox" onchange="window.location.href=''viewforum.php?f=''+this.value;" name="f" id="f">\n	<optgroup label="&nbsp;Test category 1">\n		<option class="root_forum" value="1">&nbsp;Test Forum 1&nbsp;</option>\n	</optgroup>\n</select>\n";}');
-INSERT INTO `bb_datastore` VALUES ('viewtopic_forum_select', 'a:1:{s:22:"viewtopic_forum_select";s:187:"\n<select  name="new_forum_id" id="new_forum_id">\n	<optgroup label="&nbsp;Test category 1">\n		<option class="root_forum" value="1">&nbsp;Test Forum 1&nbsp;</option>\n	</optgroup>\n</select>\n";}');
-INSERT INTO `bb_datastore` VALUES ('latest_news', 'a:1:{i:0;a:3:{s:8:"topic_id";s:1:"1";s:10:"topic_time";s:9:"972086460";s:11:"topic_title";s:18:"Welcome to TorrentPier";}}');
+INSERT INTO `bb_datastore` VALUES ('cat_forums', 'a:6:{s:15:"not_auth_forums";a:4:{s:10:"guest_view";s:0:"";s:10:"guest_read";s:0:"";s:9:"user_view";s:0:"";s:9:"user_read";s:0:"";}s:14:"tracker_forums";s:0:"";s:14:"cat_title_html";a:1:{i:1;s:15:"Ваша первая категория";}s:15:"forum_name_html";a:1:{i:1;s:12:"Ваш первый форум 1";}s:1:"c";a:1:{i:1;a:4:{s:6:"cat_id";s:1:"1";s:9:"cat_title";s:15:"Ваша первая категория 1";s:9:"cat_order";s:2:"10";s:6:"forums";a:1:{i:0;s:1:"1";}}}s:1:"f";a:1:{i:1;a:20:{s:8:"forum_id";s:1:"1";s:6:"cat_id";s:1:"1";s:10:"forum_name";s:12:"Ваш первый форум";s:10:"forum_desc";s:26:"Ваш первый форум";s:12:"forum_status";s:1:"0";s:11:"forum_posts";s:1:"1";s:12:"forum_topics";s:1:"1";s:9:"auth_view";s:1:"0";s:9:"auth_read";s:1:"0";s:9:"auth_post";s:1:"1";s:10:"auth_reply";s:1:"1";s:9:"auth_edit";s:1:"1";s:11:"auth_delete";s:1:"1";s:11:"auth_sticky";s:1:"3";s:13:"auth_announce";s:1:"3";s:9:"auth_vote";s:1:"1";s:15:"auth_pollcreate";s:1:"1";s:16:"auth_attachments";s:1:"1";s:13:"auth_download";s:1:"1";s:12:"forum_parent";s:1:"0";}}}');
+INSERT INTO `bb_datastore` VALUES ('jumpbox', 'a:2:{s:5:"guest";s:241:"\n<select  id="jumpbox" onchange="window.location.href=''viewforum.php?f=''+this.value;" name="f" id="f">\n	<optgroup label="&nbsp;Ваша первая категория">\n		<option class="root_forum" value="1">&nbsp;Ваш первый форум&nbsp;</option>\n	</optgroup>\n</select>\n";s:4:"user";s:241:"\n<select  id="jumpbox" onchange="window.location.href=''viewforum.php?f=''+this.value;" name="f" id="f">\n	<optgroup label="&nbsp;Ваша первая категория">\n		<option class="root_forum" value="1">&nbsp;Ваш первый форум&nbsp;</option>\n	</optgroup>\n</select>\n";}');
+INSERT INTO `bb_datastore` VALUES ('viewtopic_forum_select', 'a:1:{s:22:"viewtopic_forum_select";s:187:"\n<select  name="new_forum_id" id="new_forum_id">\n	<optgroup label="&nbsp;Ваша первая категория">\n		<option class="root_forum" value="1">&nbsp;Ваш первый форум&nbsp;</option>\n	</optgroup>\n</select>\n";}');
+INSERT INTO `bb_datastore` VALUES ('latest_news', 'a:1:{i:0;a:3:{s:8:"topic_id";s:1:"1";s:10:"topic_time";s:9:"972086460";s:11:"topic_title";s:18:"Добро пожаловать в TorrentPier II";}}');
 INSERT INTO `bb_datastore` VALUES ('ads', 'a:0:{}');
 INSERT INTO `bb_datastore` VALUES ('stats', 'a:4:{s:9:"usercount";s:1:"3";s:10:"newestuser";a:2:{s:7:"user_id";s:1:"2";s:8:"username";s:5:"admin";}s:9:"postcount";s:1:"1";s:10:"topiccount";s:1:"1";}');
 INSERT INTO `bb_datastore` VALUES ('moderators', 'a:6:{s:10:"name_users";a:0:{}s:11:"name_groups";a:0:{}s:9:"mod_users";a:0:{}s:10:"mod_groups";a:0:{}s:10:"moderators";a:0:{}s:6:"admins";a:1:{i:2;s:5:"admin";}}');
@@ -856,7 +856,7 @@ CREATE TABLE `bb_forums` (
 -- Дамп данных таблицы `bb_forums`
 --
 
-INSERT INTO `bb_forums` VALUES (1, 1, 'Test Forum 1', 'This is just a test forum.', 0, 10, 1, 1, 1, 0, 0, 0, 1, 1, 1, 1, 3, 3, 1, 1, 1, 1, 0, 0, 0, 0, 1, 0, 0, 0);
+INSERT INTO `bb_forums` VALUES (1, 1, 'Ваш первый форум', 'Описание вашего первого форума.', 0, 10, 1, 1, 1, 0, 0, 0, 1, 1, 1, 1, 3, 3, 1, 1, 1, 1, 0, 0, 0, 0, 1, 0, 0, 0);
 
 -- --------------------------------------------------------
 
@@ -1045,7 +1045,7 @@ CREATE TABLE `bb_ranks` (
 -- Дамп данных таблицы `bb_ranks`
 --
 
-INSERT INTO `bb_ranks` VALUES (1, 'Site Admin', -1, 1, '');
+INSERT INTO `bb_ranks` VALUES (1, 'Администратор', -1, 1, 'images/ranks/admin.png');
 
 -- --------------------------------------------------------
 --
@@ -1297,7 +1297,7 @@ CREATE TABLE `bb_topics` (
 -- Дамп данных таблицы `bb_topics`
 --
 
-INSERT INTO `bb_topics` VALUES (1, 1, 'Добро пожаловать в TorrentPier II!', 2, 1309421220, 2, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 972086460);
+INSERT INTO `bb_topics` VALUES (1, 1, 'Добро пожаловать в TorrentPier II', 2, 1309421220, 2, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 972086460);
 
 -- --------------------------------------------------------
 
@@ -1402,9 +1402,9 @@ CREATE TABLE IF NOT EXISTS `bb_users` (
 -- Дамп данных таблицы `bb_users`
 --
 
-INSERT INTO `bb_users` VALUES (-1, 0, 'Anonymous', 'd41d8cd98f00b204e9800998ecf8427e', 0, 0, '0', 1309421220, '0', 0, 5, '0.00', '', 0, 0, 0, 220, 0, '', 0, 0, 1, 1, '', '', '', '', '', '', '', '', '', '', 0, '', 0);
-INSERT INTO `bb_users` VALUES (2, 1, 'admin', 'c3284d0f94606de1fd2af172aba15bf3', 0, 0, '0', 1309421220, '0', 1, 1, '+4.00', '', 0, 0, 0, 304, 1, '', 1, 1, 1, 1, 'admin@admin.com', '', '', '', '', '', '', '', '', '', 0, '', 0);
-INSERT INTO `bb_users` VALUES (-746, 0, 'bot', 'd41d8cd98f00b204e9800998ecf8427e', 0, 0, '0', 1309421220, '0', 0, 0, '0.00', '', 0, 0, 0, 148, 0, 'bot.gif', 1, 0, 1, 1, 'bot@bot.bot', '', '', '', '', '', '', '', '', '', 0, '', 0);
+INSERT INTO `bb_users` VALUES (-1, 0, 'Anonymous', 'd41d8cd98f00b204e9800998ecf8427e', 0, 0, '0', 1309421220, '0', 0, 5, '0.00', '', 0, 0, 0, 220, 0, '', 0, 0, 0, 0, '', '', '', '', '', '', '', '', '', '', 0, '', 0);
+INSERT INTO `bb_users` VALUES (2, 1, 'admin', 'c3284d0f94606de1fd2af172aba15bf3', 0, 0, '0', 1309421220, '0', 1, 1, '+4.00', '', 0, 0, 0, 304, 1, '', 1, 0, 0, 0, 'admin@admin.com', '', '', '', '', '', '', '', '', '', 0, '', 0);
+INSERT INTO `bb_users` VALUES (-746, 0, 'bot', 'd41d8cd98f00b204e9800998ecf8427e', 0, 0, '0', 1309421220, '0', 0, 0, '0.00', '', 0, 0, 0, 148, 0, 'bot.gif', 1, 0, 0, 0, 'bot@bot.bot', '', '', '', '', '', '', '', '', '', 0, '', 0);
 
 -- --------------------------------------------------------
 

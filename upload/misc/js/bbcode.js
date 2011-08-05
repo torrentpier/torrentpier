@@ -56,7 +56,7 @@ BBCode.prototype = {
 			this.insertAtCursor('[quote]' + sel + '[/quote]\n');
 		}
 		else {
-			alert('Please select text.');
+			alert('Вы не выбрали текст');
 		}
 		return false;
 	},

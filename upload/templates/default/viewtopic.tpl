@@ -19,7 +19,7 @@
 ajax.open_edit = false;
 function edit_post(post_id, type, text) {
 	if(ajax.open_edit && ajax.open_edit != post_id) {
-	    alert('У вас уже открыто одно быстрое редактирование!');
+	    alert('{L_AJAX_EDIT_OPEN}');
 	} else{
 		if(ajax.open_edit && !text){
 			$('#pp_'+ post_id).show();
@@ -412,12 +412,12 @@ function set_hid_chbox (id)
 $(document).ready(function(){
  $("div.post_body")
    .find("img.postImg[@src*='imageshack']")
-     .attr({ src: "images/smiles/tr_oops.gif", alt: "Прочтите правила выкладывания скриншотов в этом разделе!" })
+     .attr({ src: "images/smiles/tr_oops.gif", alt: "{L_SCREENSHOTS_RULES_TOPIC}" })
      .wrap('<a href="viewtopic.php?t={$bb_cfg['porno_forums_screenshots_topic_id']}"></a>')
    .end()
    .find("a.postLink[@href*='imageshack']")
      .attr({ href: "viewtopic.php?t={$bb_cfg['porno_forums_screenshots_topic_id']}" })
-     .text("Прочтите правила выкладывания скриншотов в этом разделе! ");
+     .text("{L_SCREENSHOTS_RULES_TOPIC}");
 });
 </script>
 <!-- ENDIF -->

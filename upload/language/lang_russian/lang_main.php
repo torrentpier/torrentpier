@@ -54,6 +54,7 @@ $lang['DO_SUBMIT'] = 'Отправить';
 $lang['RESET'] = 'Вернуть';
 $lang['CANCEL'] = 'Отмена';
 $lang['PREVIEW'] = 'Предв. просмотр';
+$lang['AJAX_PREVIEW'] = 'Быстрый просмотр';
 $lang['CONFIRM'] = 'Подтвердите';
 $lang['YES'] = 'Да';
 $lang['NO'] = 'Нет';
@@ -319,10 +320,10 @@ $lang['EDIT_POST_AJAX'] = 'редактировать сообщение со с
 $lang['AFTER_THE_LAPSE'] = 'по прошествии ';
 
 $lang['DONT_MESSAGE_TITLE'] = 'Вы не указали заголовок сообщения';
-$lang['INVALID_TOPIC_ID'] = 'Топик отсутсвует!';
-$lang['INVALID_TOPIC_ID_DB'] = 'Топик отсутсвует в базе данных!';
+$lang['INVALID_TOPIC_ID'] = 'Топик отсутствует!';
+$lang['INVALID_TOPIC_ID_DB'] = 'Топик отсутствует в базе данных!';
 
-$lang['NOT_POST'] = 'Сообщение отсутсвует';
+$lang['NOT_POST'] = 'Сообщение отсутствует';
 $lang['NOT_EDIT_TOR_STATUS'] = 'Вы не можете редактировать раздачу со статусом';
 $lang['TOR_STATUS_DAYS'] = 'дней';
 
@@ -1621,7 +1622,33 @@ $lang['WHAT_IS_A_TORRENT'] = 'Что такое торрент?';
 $lang['RATINGS_AND_LIMITATIONS'] = 'Рейтинг и ограничения';
 
 $lang['SCREENSHOTS_RULES'] = 'Прочтите правила выкладывания скриншотов!';
+$lang['SCREENSHOTS_RULES_TOPIC'] = 'Прочтите правила выкладывания скриншотов в этом разделе!';
+$lang['AJAX_EDIT_OPEN'] = 'У вас уже открыто одно быстрое редактирование!';
 $lang['GO_TO_PAGE'] = 'К странице...';
 $lang['EDIT'] = 'Изменить';
 $lang['SAVE'] = 'Сохранить';
 $lang['NEW_WINDOW'] = 'в новом окне';
+
+// BB Code
+$lang['ALIGN'] = 'Выровнять:';
+$lang['LEFT'] = 'Влево';
+$lang['RIGHT'] = 'Вправо';
+$lang['CENTER'] = 'По центру';
+$lang['JUSTIFY'] = 'По ширине';
+$lang['HOR_LINE'] = 'Горизонтальная линия (Ctrl+8)';
+$lang['NEW_LINE'] = 'Перенос на новую строку';
+$lang['BOLD'] = 'Жирный (Ctrl+B)';
+$lang['ITALIC'] = 'Наклонный (Ctrl+I)';
+$lang['UNDERLINE'] = 'Подчеркнутый (Ctrl+U)';
+$lang['STRIKEOUT'] = 'Зачеркнутый (Ctrl+S)';
+$lang['QUOTE_TITLE'] = 'Цитата (Ctrl+Q)';
+$lang['IMG_TITLE'] = 'Изображение (Ctrl+R)';
+$lang['URL'] = 'Ссылка';
+$lang['URL_TITLE'] = 'Ссылка (Ctrl+W)';
+$lang['CODE_TITLE'] = 'Код (Ctrl+K)';
+$lang['LIST'] = 'Список';
+$lang['LIST_TITLE'] = 'Список (Ctrl+L)';
+$lang['LIST_ITEM'] = 'Элемент списка (Ctrl+0)';
+$lang['QUOTE_SEL'] = 'Цит.выдел';
+$lang['TRANSLIT'] = 'Транслит';
+$lang['TRANSLIT_TITLE'] = 'Перевести выделение из транслита на русский';

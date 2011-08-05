@@ -37,6 +37,7 @@
 ** Необходимые значения в php.ini **
 ************************************
 
+mbstring.internal_encoding = UTF-8
 magic_quotes_gpc = Off
 extension=php_mbstring.dll
 extension=php_pdo.dll

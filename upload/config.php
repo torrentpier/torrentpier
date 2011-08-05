@@ -57,8 +57,8 @@ $bb_cfg['css_ver'] = 1;
 
 // Increase number of revision after update
 $bb_cfg['tp_version'] = '2.0';
-$bb_cfg['tp_release_state'] = 'R192';
-$bb_cfg['tp_release_date'] = '4-08-2011';
+$bb_cfg['tp_release_state'] = 'R194';
+$bb_cfg['tp_release_date'] = '5-08-2011';
 
 $bb_cfg['board_disabled_msg'] = 'форум временно отключен'; // 'forums temporarily disabled'; // show this msg if board has been disabled via ON/OFF trigger
 $bb_cfg['srv_overloaded_msg'] = "Извините, в данный момент сервер перегружен\nПопробуйте повторить запрос через несколько минут";
@@ -135,8 +135,6 @@ $bb_cfg['allow_internal_ip']  = false;             // Allow internal IP (10.xx..
 $bb_cfg['how_to_download_url_help']  = 'viewtopic.php?t=1'; // URL help link for "How to Download?"
 $bb_cfg['what_is_torrent_url_help']  = 'viewtopic.php?t=2'; // URL help link for "What is Bittorrent?"
 $bb_cfg['ratio_url_help']            = 'viewtopic.php?t=3'; // URL help link for Ratio.
-
-//$bb_cfg['bt_ratio_warning_msg']      = '$bb_cfg[\'bt_ratio_warning_msg\']'; /* Перемещено в "attach_mod\displaying_torrent.php" */
 
 $bb_cfg['bt_min_ratio_allow_dl_tor'] = 0;          // 0 - disable
 $bb_cfg['bt_min_ratio_warning']      = 0;          // 0 - disable

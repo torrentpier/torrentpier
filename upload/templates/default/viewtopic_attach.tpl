@@ -255,7 +255,7 @@
 			<p>{postrow.attach.tor_reged.S_UPLOAD_IMAGE}</p><p><b>{L_DOWNLOAD}</b></p></a>
 			<!-- ENDIF -->
 			<p class="small">{postrow.attach.tor_reged.FILESIZE}</p>
-			<p style="padding-top: 6px;"><input id="tor-filelist-btn" type="button" class="lite" value="{L_FILELIST}" /></p>
+			<p style="padding-top: 6px;"><input id="tor-filelist-btn" type="button" class="lite" value="{L_FILELIST}" style="width:105px;" /></p>
 		</td>
 	</tr>
 	<tr class="row1">
@@ -278,9 +278,8 @@
 				};
 			</script>
 
-				<span id="tor-{postrow.attach.tor_reged.ATTACH_ID}">{postrow.attach.tor_reged.TOR_STATUS_SELECT}</span>
-
-				<a href="#" onclick="ajax.change_tor_status($('#tor-{postrow.attach.tor_reged.ATTACH_ID} select').val()); return false;"><input type="submit" value="{L_EDIT}" class="liteoption" /></a>
+			<span id="tor-{postrow.attach.tor_reged.ATTACH_ID}">{postrow.attach.tor_reged.TOR_STATUS_SELECT}</span>
+			<a href="#" onclick="ajax.change_tor_status($('#tor-{postrow.attach.tor_reged.ATTACH_ID} select').val()); return false;"><input type="submit" value="{L_EDIT}" class="liteoption" style="width:70px;" /></a>
 
 			<!-- ENDIF -->
 		</td>
@@ -322,11 +321,10 @@
 				<option value="del_torrent">{L_DELETE_TORRENT}</option>
 				<option value="del_torrent_move_topic">{L_DEL_MOVE_TORRENT}</option>
 				<!-- IF AUTH_MOD -->
-				<!-- IF $bb_cfg['gold_silver_enabled'] -->
-				<!-- IF postrow.attach.tor_reged.TOR_SILVER_GOLD == 1 -->
+				<!-- IF postrow.attach.tor_reged.TOR_SILVER_GOLD == 1 && $bb_cfg['gold_silver_enabled'] -->
 				<option value="unset_silver_gold">{L_UNSET_GOLD_TORRENT} / {L_UNSET_SILVER_TORRENT}</option>
 				<option value="set_silver">{L_SET_SILVER_TORRENT}</option>
-				<!-- ELSEIF postrow.attach.tor_reged.TOR_SILVER_GOLD == 2 -->
+				<!-- ELSEIF postrow.attach.tor_reged.TOR_SILVER_GOLD == 2 && $bb_cfg['gold_silver_enabled'] -->
 				<option value="unset_silver_gold">{L_UNSET_GOLD_TORRENT} / {L_UNSET_SILVER_TORRENT}</option>
 				<option value="set_gold">{L_SET_GOLD_TORRENT}</option>
 				<!-- ELSE -->
@@ -334,10 +332,9 @@
 				<option value="set_silver">{L_SET_SILVER_TORRENT}</option>
 				<!-- ENDIF -->
 				<!-- ENDIF -->
-				<!-- ENDIF -->
 			</select>
 			
-			&nbsp; <a href="#" onclick="change_torrents($('#tor-{postrow.attach.tor_reged.ATTACH_ID} select').val()); return false;"><input type="submit" value="{L_EDIT}" class="liteoption" /></a>
+			<a href="#" onclick="change_torrents($('#tor-{postrow.attach.tor_reged.ATTACH_ID} select').val()); return false;"><input type="submit" value="{L_EDIT}" class="liteoption" style="width:70px;" /></a>
 
 		<!-- ELSEIF TOR_HELP_LINKS -->
 		{TOR_HELP_LINKS}
