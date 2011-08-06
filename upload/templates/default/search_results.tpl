@@ -99,12 +99,12 @@
 	<td class="tLeft" style="padding: 2px 5px 3px 4px;">
 		<div class="topictitle" onmousedown="$p('tid_{t.TOPIC_ID}').className='opened'">
 			<!-- IF t.IS_UNREAD --><a href="{TOPIC_URL}{t.HREF_TOPIC_ID}{NEWEST_URL}">{ICON_NEWEST_REPLY}</a><!-- ENDIF -->
-			<!-- IF t.STATUS == MOVED --><span class="topicMoved">{L_MOVED}</span>
-				<!-- ELSEIF t.TYPE == ANNOUNCE --><span class="topicAnnounce">{L_ANNOUNCE}</span>
-				<!-- ELSEIF t.DL_CLASS --><span class="{t.DL_CLASS} iconDL">{L_DL_TOPIC}</span>
+			<!-- IF t.STATUS == MOVED --><span class="topicMoved">{L_TOPIC_MOVED}</span>
+				<!-- ELSEIF t.TYPE == ANNOUNCE --><span class="topicAnnounce">{L_TOPIC_ANNOUNCEMENT}</span>
+				<!-- ELSEIF t.DL_CLASS --><span class="{t.DL_CLASS} iconDL">{L_TOPIC_DL}</span>
 				<!-- ELSEIF t.ATTACH and not t.DL -->{TOPIC_ATTACH_ICON}
 			<!-- ENDIF -->
-			<!-- IF t.POLL --><span class="topicPoll">{L_POLL}</span><!-- ENDIF -->
+			<!-- IF t.POLL --><span class="topicPoll">{L_TOPIC_POLL}</span><!-- ENDIF -->
 			<a href="{TOPIC_URL}{t.TOPIC_ID}" class="topictitle"><span id="tid_{t.TOPIC_ID}">{t.TOPIC_TITLE}</span></a>
 		<!-- IF t.PAGINATION --><span class="topicPG">[{ICON_GOTOPOST}{L_GOTO_SHORT} {t.PAGINATION} ]</span><!-- ENDIF -->
 		</div>

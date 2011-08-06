@@ -253,7 +253,7 @@ foreach ($cat_forums as $cid => $c)
 			$template->assign_block_vars('c.f.sf', array(
 				'SF_ID'   => $fid,
 				'SF_NAME' => $fname_html,
-				'SF_NEW'  => $new ? ' new' : '',
+				'SF_NEW'  => $new ? $lang['NEW'] : '',
 			));
 			continue;
 		}
@@ -269,7 +269,7 @@ foreach ($cat_forums as $cid => $c)
 			'LAST_SF_ID' => isset($f['last_sf_id']) ? $f['last_sf_id'] : null,
 
 			'MODERATORS'  => isset($moderators[$fid]) ? join(', ', $moderators[$fid]) : '',
-			'FORUM_FOLDER_ALT' => ($new) ? 'new' : 'old',
+			'FORUM_FOLDER_ALT' => ($new) ? $lang['NEW'] : $lang['OLD'],
 		));
 
 		if ($f['last_post_id'])

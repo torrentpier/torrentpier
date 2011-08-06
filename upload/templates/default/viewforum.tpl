@@ -444,10 +444,10 @@ td.topic_id { cursor: pointer; }
 	<div class="torTopic">
 		<!-- IF t.TOR_STATUS_ICON --><span id="status-{t.TOPIC_ID}">{t.TOR_STATUS_ICON}</span>&#0183;<!-- ENDIF -->
 		<!-- IF t.IS_UNREAD --><a href="{TOPIC_URL}{t.HREF_TOPIC_ID}{NEWEST_URL}">{ICON_NEWEST_REPLY}</a><!-- ENDIF -->
-		<!-- IF t.STATUS == MOVED --><span class="topicMoved">{L_MOVED}</span>
-			<!-- ELSEIF t.DL_CLASS --><span class="{t.DL_CLASS} iconDL"><b>{L_DL_TOPIC}</b></span>
+		<!-- IF t.STATUS == MOVED --><span class="topicMoved">{L_TOPIC_MOVED}</span>
+			<!-- ELSEIF t.DL_CLASS --><span class="{t.DL_CLASS} iconDL"><b>{L_TOPIC_DL}</b></span>
 		<!-- ENDIF -->
-		<!-- IF t.POLL --><span class="topicPoll">{L_POLL}</span><!-- ENDIF -->
+		<!-- IF t.POLL --><span class="topicPoll">{L_TOPIC_POLL}</span><!-- ENDIF -->
 		<!-- IF t.TOR_STALED || t.TOR_FROZEN -->
 			<!-- IF t.ATTACH --><span>{TOPIC_ATTACH_ICON}</span><!-- ENDIF -->
 			<a id="tt-{t.TOPIC_ID}" href="{TOPIC_URL}{t.HREF_TOPIC_ID}" class="gen tt-text">{t.TOPIC_TITLE}</a>
@@ -545,11 +545,11 @@ td.topic_id { cursor: pointer; }
 	<td class="tt">
 		<span class="topictitle">
 			<!-- IF t.IS_UNREAD --><a href="{TOPIC_URL}{t.HREF_TOPIC_ID}{NEWEST_URL}">{ICON_NEWEST_REPLY}</a><!-- ENDIF -->
-			<!-- IF t.STATUS == MOVED --><span class="topicMoved">{L_MOVED}</span>
-				<!-- ELSEIF t.DL --><span class="">{L_DL_TOPIC}</span>
+			<!-- IF t.STATUS == MOVED --><span class="topicMoved">{L_TOPIC_MOVED}</span>
+				<!-- ELSEIF t.DL --><span class="">{L_TOPIC_DL}</span>
 				<!-- ELSEIF t.ATTACH -->{TOPIC_ATTACH_ICON}
 			<!-- ENDIF -->
-			<!-- IF t.POLL --><span class="topicPoll">{L_POLL}</span><!-- ENDIF -->
+			<!-- IF t.POLL --><span class="topicPoll">{L_TOPIC_POLL}</span><!-- ENDIF -->
 			<a id="tt-{t.TOPIC_ID}" href="{TOPIC_URL}{t.HREF_TOPIC_ID}" class="topictitle tt-text">{t.TOPIC_TITLE}</a>
 		</span>
 		<!-- IF t.PAGINATION --><span class="topicPG">[{ICON_GOTOPOST}{L_GOTO_SHORT} {t.PAGINATION} ]</span><!-- ENDIF -->

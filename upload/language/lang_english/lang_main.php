@@ -1636,3 +1636,9 @@ $lang['LIST'] = 'List';
 $lang['LIST_TITLE'] = 'List (Ctrl+L)';
 $lang['LIST_ITEM'] = 'List item (Ctrl+0)';
 $lang['QUOTE_SEL'] = 'Quote selected';
+
+$lang['NEW'] = 'New';
+$lang['NEWEST'] = 'Newest';
+$lang['LATEST'] = 'Latest';
+$lang['POST'] = 'Post';
+$lang['OLD'] = 'Old';

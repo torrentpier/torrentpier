@@ -216,11 +216,11 @@
 
 	<table class="bCenter med" id="f_icons_legend">
 	<tr>
-		<td><img class="forum_icon" src="{IMG}folder_new_big.gif" alt="new"/></td>
+		<td><img class="forum_icon" src="{IMG}folder_new_big.gif" alt="{L_NEW}"/></td>
 		<td>{L_NEW_POSTS}</td>
-		<td><img class="forum_icon" src="{IMG}folder_big.gif" alt="old" /></td>
+		<td><img class="forum_icon" src="{IMG}folder_big.gif" alt="{L_OLD}" /></td>
 		<td>{L_NO_NEW_POSTS}</td>
-		<td><img class="forum_icon" src="{IMG}folder_locked_big.gif" alt="locked" /></td>
+		<td><img class="forum_icon" src="{IMG}folder_locked_big.gif" alt="{L_FORUM_LOCKED_MAIN}" /></td>
 		<td>{L_FORUM_LOCKED_MAIN}</td>
 	</tr>
 	</table>

@@ -1648,3 +1648,9 @@ $lang['LIST_ITEM'] = 'Элемент списка (Ctrl+0)';
 $lang['QUOTE_SEL'] = 'Цит.выдел';
 $lang['TRANSLIT'] = 'Транслит';
 $lang['TRANSLIT_TITLE'] = 'Перевести выделение из транслита на русский';
+
+$lang['NEW'] = 'Новое';
+$lang['NEWEST'] = 'Непрочит.';
+$lang['LATEST'] = 'Последнее';
+$lang['POST'] = 'Пост';
+$lang['OLD'] = 'Прочит';

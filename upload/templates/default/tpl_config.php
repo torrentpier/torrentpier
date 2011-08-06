@@ -132,22 +132,22 @@ if (!empty($page_cfg['load_tpl_vars']) AND $vars = array_flip($page_cfg['load_tp
 	if (isset($vars['post_buttons']))
 	{
 		$template->assign_vars(array(
-			'QUOTE_IMG'       => ($bb_cfg['text_buttons']) ? $lang['REPLY_WITH_QUOTE_TXTB'] : '<img src="'. $images['icon_quote']   .'" alt="Quote" title="'. $lang['REPLY_WITH_QUOTE'] .'" />',
-			'EDIT_POST_IMG'   => ($bb_cfg['text_buttons']) ? $lang['EDIT_DELETE_POST_TXTB'] : '<img src="'. $images['icon_edit']    .'" alt="Edit" title="'. $lang['EDIT_POST'] .'" />',
-			'DELETE_POST_IMG' => ($bb_cfg['text_buttons']) ? $lang['DELETE_POST_TXTB']      : '<img src="'. $images['icon_delpost'] .'" alt="Delete" title="'. $lang['DELETE_POST'] .'" />',
-			'IP_POST_IMG'     => ($bb_cfg['text_buttons']) ? $lang['VIEW_IP_TXTB']          : '<img src="'. $images['icon_ip']      .'" alt="IP" title="'. $lang['VIEW_IP'] .'" />',
-			'MOD_POST_IMG'    => ($bb_cfg['text_buttons']) ? $lang['MODERATE_POST_TXTB']    : '<img src="'. $images['icon_mod']     .'" alt="Moderate" title="'. $lang['MODERATE_POST'] .'" />',
+			'QUOTE_IMG'       => ($bb_cfg['text_buttons']) ? $lang['REPLY_WITH_QUOTE_TXTB'] : '<img src="'. $images['icon_quote']   .'" alt="'.$lang['REPLY_WITH_QUOTE_TXTB'].'" title="'. $lang['REPLY_WITH_QUOTE'] .'" />',
+			'EDIT_POST_IMG'   => ($bb_cfg['text_buttons']) ? $lang['EDIT_DELETE_POST_TXTB'] : '<img src="'. $images['icon_edit']    .'" alt="'.$lang['EDIT_DELETE_POST_TXTB'].'" title="'. $lang['EDIT_POST'] .'" />',
+			'DELETE_POST_IMG' => ($bb_cfg['text_buttons']) ? $lang['DELETE_POST_TXTB']      : '<img src="'. $images['icon_delpost'] .'" alt="'.$lang['DELETE_POST_TXTB'].'" title="'. $lang['DELETE_POST'] .'" />',
+			'IP_POST_IMG'     => ($bb_cfg['text_buttons']) ? $lang['VIEW_IP_TXTB']          : '<img src="'. $images['icon_ip']      .'" alt="'.$lang['VIEW_IP_TXTB'].'" title="'. $lang['VIEW_IP'] .'" />',
+			'MOD_POST_IMG'    => ($bb_cfg['text_buttons']) ? $lang['MODERATE_POST_TXTB']    : '<img src="'. $images['icon_mod']     .'" alt="'.$lang['MODERATE_POST_TXTB'].'" title="'. $lang['MODERATE_POST'] .'" />',
 
 			'QUOTE_URL'       => BB_ROOT ."posting.php?mode=quote&amp;p=",
 			'EDIT_POST_URL'   => BB_ROOT ."posting.php?mode=editpost&amp;p=",
 			'DELETE_POST_URL' => BB_ROOT ."posting.php?mode=delete&amp;p=",
 			'IP_POST_URL'     => BB_ROOT ."modcp.php?mode=ip&amp;p=",
 
-			'PROFILE_IMG'     => ($bb_cfg['text_buttons']) ? $lang['READ_PROFILE_TXTB']     : '<img src="'. $images['icon_profile'] .'" alt="Profile" title="'. $lang['READ_PROFILE'] .'" />',
-			'PM_IMG'          => ($bb_cfg['text_buttons']) ? $lang['SEND_PM_TXTB']          : '<img src="'. $images['icon_pm'] .'" alt="PM" title="'. $lang['SEND_PRIVATE_MESSAGE'] .'" />',
-			'EMAIL_IMG'       => ($bb_cfg['text_buttons']) ? $lang['SEND_EMAIL_TXTB']       : '<img src="'. $images['icon_email'] .'" alt="email" title="'. $lang['SEND_EMAIL'] .'" />',
-			'WWW_IMG'         => ($bb_cfg['text_buttons']) ? $lang['VISIT_WEBSITE_TXTB']    : '<img src="'. $images['icon_www'] .'" alt="www" title="'. $lang['VISIT_WEBSITE'] .'" />',
-			'ICQ_IMG'         => ($bb_cfg['text_buttons']) ? $lang['ICQ_TXTB']              : '<img src="'. $images['icon_icq'] .'" alt="ICQ" title="'. $lang['ICQ'] .'" />',
+			'PROFILE_IMG'     => ($bb_cfg['text_buttons']) ? $lang['READ_PROFILE_TXTB'] : '<img src="'. $images['icon_profile'] .'" alt="'. $lang['READ_PROFILE_TXTB'] .'" title="'. $lang['READ_PROFILE'] .'" />',
+			'PM_IMG'          => ($bb_cfg['text_buttons']) ? $lang['SEND_PM_TXTB'] : '<img src="'. $images['icon_pm'] .'" alt="'. $lang['SEND_PM_TXTB'] .'" title="'. $lang['SEND_PRIVATE_MESSAGE'] .'" />',
+			'EMAIL_IMG'       => ($bb_cfg['text_buttons']) ? $lang['SEND_EMAIL_TXTB'] : '<img src="'. $images['icon_email'] .'" alt="'. $lang['SEND_EMAIL_TXTB'] .'" title="'. $lang['SEND_EMAIL'] .'" />',
+			'WWW_IMG'         => ($bb_cfg['text_buttons']) ? $lang['VISIT_WEBSITE_TXTB'] : '<img src="'. $images['icon_www'] .'" alt="'.$lang['VISIT_WEBSITE_TXTB'].'" title="'. $lang['VISIT_WEBSITE'] .'" />',
+			'ICQ_IMG'         => ($bb_cfg['text_buttons']) ? $lang['ICQ_TXTB'] : '<img src="'. $images['icon_icq'] .'" alt="'.$lang['ICQ_TXTB'].'" title="'. $lang['ICQ'] .'" />',
 
 			'EMAIL_URL'       => BB_ROOT ."profile.php?mode=email&amp;u=",
 			'FORUM_URL'       => BB_ROOT . FORUM_URL,
@@ -159,11 +159,11 @@ if (!empty($page_cfg['load_tpl_vars']) AND $vars = array_flip($page_cfg['load_tp
 	if (isset($vars['post_icons']))
 	{
 		$template->assign_vars(array(
-			'MINIPOST_IMG'      => '<img src="'. $images['icon_minipost']     .'" class="icon1" alt="post" />',
-			'ICON_GOTOPOST'     => '<img src="'. $images['icon_gotopost']     .'" class="icon1" alt="goto" title="'. $lang['GOTO_PAGE'] .'" />',
-			'MINIPOST_IMG_NEW'  => '<img src="'. $images['icon_minipost_new'] .'" class="icon1" alt="new" />',
-			'ICON_LATEST_REPLY' => '<img src="'. $images['icon_latest_reply'] .'" class="icon2" alt="latest" title="'. $lang['VIEW_LATEST_POST'] .'" />',
-			'ICON_NEWEST_REPLY' => '<img src="'. $images['icon_newest_reply'] .'" class="icon2" alt="newest" title="'. $lang['VIEW_NEWEST_POST'] .'" />',
+			'MINIPOST_IMG'      => '<img src="'. $images['icon_minipost'] .'" class="icon1" alt="'.$lang['POST'].'" />',
+			'ICON_GOTOPOST'     => '<img src="'. $images['icon_gotopost'] .'" class="icon1" alt="'.$lang['GO'].'" title="'. $lang['GOTO_PAGE'] .'" />',
+			'MINIPOST_IMG_NEW'  => '<img src="'. $images['icon_minipost_new'] .'" class="icon1" alt="'.$lang['NEW'].'" />',
+			'ICON_LATEST_REPLY' => '<img src="'. $images['icon_latest_reply'] .'" class="icon2" alt="'.$lang['LATEST'].'" title="'. $lang['VIEW_LATEST_POST'] .'" />',
+			'ICON_NEWEST_REPLY' => '<img src="'. $images['icon_newest_reply'] .'" class="icon2" alt="'.$lang['NEWEST'].'" title="'. $lang['VIEW_NEWEST_POST'] .'" />',
 		));
 	}
 	if (isset($vars['topic_icons']))
@@ -173,17 +173,13 @@ if (!empty($page_cfg['load_tpl_vars']) AND $vars = array_flip($page_cfg['load_tp
 			'ANNOUNCE'   => POST_ANNOUNCE,
 			'STICKY'     => POST_STICKY,
 			'LOCKED'     => TOPIC_LOCKED,
-			'L_MOVED'    => $lang['TOPIC_MOVED'],
-			'L_ANNOUNCE' => $lang['TOPIC_ANNOUNCEMENT'],
-			'L_DL_TOPIC' => $lang['TOPIC_DL'],
-			'L_POLL'     => $lang['TOPIC_POLL'],
 		));
 	}
 	if (isset($vars['pm_icons']))
 	{
 		$template->assign_vars(array(
-			'INBOX_IMG'      => '<img src="'. $images['pm_inbox']   .'" class="pm_box_icon" alt="" />',
-			'OUTBOX_IMG'     => '<img src="'. $images['pm_outbox']  .'" class="pm_box_icon" alt="" />',
+			'INBOX_IMG'      => '<img src="'. $images['pm_inbox'] .'" class="pm_box_icon" alt="" />',
+			'OUTBOX_IMG'     => '<img src="'. $images['pm_outbox'] .'" class="pm_box_icon" alt="" />',
 			'SENTBOX_IMG'    => '<img src="'. $images['pm_sentbox'] .'" class="pm_box_icon" alt="" />',
 			'SAVEBOX_IMG'    => '<img src="'. $images['pm_savebox'] .'" class="pm_box_icon" alt="" />',
 		));
