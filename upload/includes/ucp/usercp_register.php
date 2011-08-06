@@ -757,6 +757,8 @@ if ($submit && !$errors)
 		}
 		$db_data['user_regdate'] = TIMENOW;
 
+        if(!IS_ADMIN) $db_data['user_reg_ip'] = USER_IP;
+
 		$sql_args = DB()->build_array('INSERT', $db_data);
 
 		DB()->query("INSERT INTO ". BB_USERS . $sql_args);
