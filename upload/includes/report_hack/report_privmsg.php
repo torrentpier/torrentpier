@@ -193,7 +193,7 @@ class report_privmsg extends report_module
 	//
 	function subject_details_obtain($report_subject)
 	{
-		$sql = 'SELECT p.privmsgs_subject, p.privmsgs_from_userid, p.privmsgs_enable_bbcode, p.privmsgs_enable_smilies, pt.privmsgs_text, u.username
+		$sql = 'SELECT p.privmsgs_subject, p.privmsgs_from_userid, pt.privmsgs_text, u.username
 			FROM ' . BB_PRIVMSGS . ' p
 			INNER JOIN ' . BB_PRIVMSGS_TEXT . ' pt
 				ON pt.privmsgs_text_id = privmsgs_id
@@ -214,12 +214,12 @@ class report_privmsg extends report_module
 		}
 
 		$subject_details = array(
-			'Message_id' => '#' . $report_subject,
-			'Message_from' => '<a href="' . append_sid("profile.php?mode=viewprofile&amp;" . POST_USERS_URL . '=' . $row['privmsgs_from_userid']) . '">' . $row['username'] . '</a>',
-			'Message_title' => $row['privmsgs_subject'],
-			'Message_text' => $row['privmsgs_text']);
+			'MESSAGE_ID' => '#' . $report_subject,
+			'MESSAGE_FROM' => '<a href="' . append_sid("profile.php?mode=viewprofile&amp;" . POST_USERS_URL . '=' . $row['privmsgs_from_userid']) . '">' . $row['username'] . '</a>',
+			'MESSAGE_TITLE' => $row['privmsgs_subject'],
+			'MESSAGE_TEXT' => $row['privmsgs_text']);
 
-		$this->_subject_details_prepare($subject_details['Message_text'], $subject_details['Message_title'], $row);
+		$this->_subject_details_prepare($subject_details['MESSAGE_TEXT'], $subject_details['MESSAGE_TITLE'], $row);
 
 		return array(
 			'details' => $subject_details);

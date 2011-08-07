@@ -7,8 +7,11 @@
 		<!--sidebar2-->
 		<td id="sidebar2">
 		<div id="sidebar2_wrap">
+		
+		
 			<?php if (!empty($bb_cfg['sidebar2_static_content_path'])) include($bb_cfg['sidebar2_static_content_path']); ?>
 			<img width="210" class="spacer" src="{SPACER}" alt="" />
+			
 		</div><!--/sidebar2_wrap-->
 		</td><!--/sidebar2-->
 	<!-- ENDIF -->

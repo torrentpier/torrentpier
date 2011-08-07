@@ -45,7 +45,7 @@
   * Ads
   * Misc
   * Captcha
-*/
+  **/
 
 if (!defined('BB_ROOT')) die(basename(__FILE__));
 
@@ -56,9 +56,9 @@ $bb_cfg['js_ver']  = 1;
 $bb_cfg['css_ver'] = 1;
 
 // Increase number of revision after update
-$bb_cfg['tp_version'] = '2.0';
-$bb_cfg['tp_release_state'] = 'R198';
-$bb_cfg['tp_release_date'] = '7-08-2011';
+$bb_cfg['tp_version'] = '2.0 RC';
+$bb_cfg['tp_release_state'] = 'R199';
+$bb_cfg['tp_release_date'] = '8-08-2011';
 
 $bb_cfg['board_disabled_msg'] = 'форум временно отключен'; // 'forums temporarily disabled'; // show this msg if board has been disabled via ON/OFF trigger
 $bb_cfg['srv_overloaded_msg'] = "Извините, в данный момент сервер перегружен\nПопробуйте повторить запрос через несколько минут";
@@ -138,7 +138,6 @@ $bb_cfg['ratio_url_help']            = 'viewtopic.php?t=3'; // URL help link for
 
 $bb_cfg['bt_min_ratio_allow_dl_tor'] = 0;          // 0 - disable
 $bb_cfg['bt_min_ratio_warning']      = 0;          // 0 - disable
-$bb_cfg['bt_ratio_warning_url_help'] = $bb_cfg['ratio_url_help']; // URL help link, for limit end.
 $bb_cfg['bt_min_ratio_dl_button']    = 0;          // 0 - disable
 
 $tr_cfg = array(
@@ -241,8 +240,8 @@ $bb_cfg['theme_css']  = 'theme_default.css';
 $bb_cfg['show_sidebar1_on_every_page'] = false;
 $bb_cfg['show_sidebar2_on_every_page'] = false;
 
-$bb_cfg['sidebar1_static_content_path'] = BB_PATH .'/misc/html/sidebar1.html';      #
-$bb_cfg['sidebar2_static_content_path'] = '';
+$bb_cfg['sidebar1_static_content_path'] = BB_PATH .'/misc/html/sidebar1.html';
+$bb_cfg['sidebar2_static_content_path'] = BB_PATH .'/misc/html/sidebar2.html';
 
 $page_cfg['show_sidebar1'] = array(
 #	BB_SCRIPT => true

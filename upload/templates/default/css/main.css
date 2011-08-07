@@ -131,7 +131,9 @@ img   { border: 0px; }
 .dlDown, .leech, .leechmed, .leechsmall  { color: #800000; }
 .dlComplete, .seed, .seedmed, .seedsmall { color: #006600; }
 .dlCancel { color: #666666; }
-.itsme { color: #0000FF !important; font-size: 12px; font-weight: bold; text-decoration: none;}
+
+/* DL list color me */
+.itsme { color: #0000FF !important; font-size: 12px; font-weight: bold; text-decoration: none;} 
 
 a.dlWill,     a.dlWill:visited           { color: #0066CC; text-decoration: none; }
 a.dlDown,     a.dlDown:visited           { color: #800000; text-decoration: none; }
@@ -590,7 +592,9 @@ table.smilies td { padding: 3px; text-align: center; }
 /* ---------------------------------- *
      Forums on home page
  * ---------------------------------- */
-/*.forums thead { display: none;}*/  /* Форум, Тем, Сообщ., Посл. сообщение OFF on index page */
+/*.forums thead { display: none;}*/          /* Hide Forum, Topics, Posts, Last Post in index */
+/*.f_topics, .f_posts { display: none; }*/   /* Hide posts/topics count <td> in index */
+
 #forums_list_wrap { margin-top: 4px; padding-right: 2px; }
 #forums_top_links { clear: both; }
 #forums_wrap { clear: both; padding-top: 1px; }

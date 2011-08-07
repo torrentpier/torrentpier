@@ -4,7 +4,7 @@
 
 <table class="forumline" style="table-layout: fixed;">
 <tr>
-	<th>{L_DONATE_TITLE}</th>
+	<th>{PAGE_TITLE}</th>
 </tr>
 <tr>
 	<td class="row1 pad_8" align="center">
@@ -13,7 +13,6 @@
 		<br/>
 		Если Вы желаете материально  помочь в развитии проекту - ниже указаны возможные способы перевода денежных средств.
 			<br/><br/>
-		<img src="images/wm.gif"/>
 		<br/>
 		WMID: *************
 		<br/> <br/>
@@ -25,19 +24,19 @@
 			</tr>
 			<tr>
 				<td>Евро</td>
-				<td><img border="0" src="images/wme.png"/> E*************</td>
+				<td> E*************</td>
 			</tr>
 			<tr>
 				<td>Доллар</td>
-				<td><img border="0" src="images/wmz.png"/> Z*************</td>
+				<td> Z*************</td>
 			</tr>
 			<tr>
 				<td>Гривны</td>
-				<td><img border="0" src="images/wmu.png"/> U*************</td>
+				<td> U*************</td>
 			</tr>
 			<tr>
 				<td>Рубли</td>
-				<td><img border="0" src="images/wmr.png"/> R*************</td>
+				<td> R*************</td>
 			</tr>
 			</tbody>
 		</table>

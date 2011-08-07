@@ -106,7 +106,7 @@
 
 					<p class="last_post_time">
 						<span class="last_time">{c.f.last.LAST_POST_TIME}</span>
-						<span class="last_author">by
+						<span class="last_author">&middot;
 							<!-- IF c.f.last.LAST_POST_USER_ID -->
 							<a href="{PROFILE_URL}{c.f.last.LAST_POST_USER_ID}">{c.f.last.LAST_POST_USER_NAME}</a>
 							<!-- ELSE -->
