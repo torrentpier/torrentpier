@@ -486,7 +486,8 @@ if ($tor_reged && $tor_info)
 						$compl_perc = ($compl_size) ? floor($compl_size * 100 / $tor_size) : 0;
 					}
 
-					$rel_sign = (!$guest && $peer['releaser']) ? '<span class="seed">&nbsp;<b><sup>&reg;</sup></b>&nbsp;</span>' : '';
+					if($userdata['user_id'] == $peer['user_id']) $link_class = 'itsme';
+					$rel_sign = (!$guest && $peer['releaser']) ? '<span class="'. $link_class .'">&nbsp;<b><sup>&reg;</sup></b>&nbsp;</span>' : '';
 					$name     = '<a href="'. $u_prof_href .'" class="'. $link_class .'">'. wbr($peer['username']) .'</a>'. $rel_sign;
 					$up_tot   = ($p_max_up)   ? humn_size($p_max_up)   : '-';
 					$down_tot = ($p_max_down) ? humn_size($p_max_down) : '-';
@@ -506,7 +507,7 @@ if ($tor_reged && $tor_info)
 						'DOWN_TOTAL'   => ($max_down_id[$x] == $pid)    ? "<b>$down_tot</b>" : $down_tot,
 						'SPEED_UP'     => ($max_sp_up_id[$x] == $pid)   ? "<b>$sp_up</b>"    : $sp_up,
 						'SPEED_DOWN'   => ($max_sp_down_id[$x] == $pid) ? "<b>$sp_down</b>"  : $sp_down,
-						'UPD_EXP_TIME' => ($peer['update_time']) ? "upd: ". bb_date($peer['update_time'], 'd-M-y H:i') : "stopped",
+						'UPD_EXP_TIME' => ($peer['update_time']) ? $lang['DL_UPD'] . bb_date($peer['update_time'], 'd-M-y H:i') .' &middot; '. delta_time($peer['update_time']) . $lang['BACK']  : $lang['DL_STOPPED'],
 						'TOR_RATIO'    => ($up_ratio) ? "UL/DL ratio: $up_ratio"  : '',
 					));
 
@@ -558,34 +559,6 @@ if ($tor_reged && $tor_info)
 			}
 		}
 		unset($peers);
-
-		if ($s_mode == 'full' && (defined('SEEDER_EXIST') || defined('LEECHER_EXIST')))
-		{
-			$name_opt        = '<option value="name">Username</option>';
-			$seed_compl_opt  = '<option value="cup">Upload ratio</option>';
-			$leech_compl_opt = '<option value="compl">Completed</option>';
-
-			$up_down_speed_opt = '
-			<option value="cup">Uploaded</option>
-			<option value="cdown">Downloaded</option>
-			<option value="sup">Upload speed</option>
-			<option value="sdown">Download speed</option>
-			<option value="time">Update time</option>';
-
-			$ip_opt = ($ip) ? '<option value="ip">IP</option>' : '';
-			$port_opt = ($port !== false) ? '<option value="port">Port</option>' : '';
-
-			if ($cnt['s'] > 2)
-			{
-				$seed_order_select = $name_opt . $seed_compl_opt . $up_down_speed_opt . $ip_opt . $port_opt;
-				$template->assign_block_vars('sfull.sorder', array('SEED_ORDER_SELECT' => '<select name="porder" class="prow1">'. $seed_order_select .'</select>'));
-			}
-			if ($cnt['l'] > 2)
-			{
-				$leech_order_select = $name_opt . $leech_compl_opt . $up_down_speed_opt . $ip_opt . $port_opt;
-				$template->assign_block_vars('lfull.lorder', array('LEECH_ORDER_SELECT' => '<select name="porder" class="prow1">'. $leech_order_select .'</select>'));
-			}
-		}
 
 		// Show "seeder last seen info"
 		if (($s_mode == 'count' && !$seed_count) || (!$seeders && !defined('SEEDER_EXIST')))

@@ -169,7 +169,6 @@ $(document).ready(function(){
 
 var ajax = new Ajax('{AJAX_HANDLER}', 'POST', 'json');
 
-<!-- IF USE_TABLESORTER -->
 function getElText (e)
 {
   	var t = '';
@@ -180,7 +179,7 @@ function escHTML (txt)
 {
   	return txt.replace(/</g, '&lt;');
 }
-
+<!-- IF USE_TABLESORTER -->
 $(document).ready(function(){
   	$('.tablesorter').tablesorter(); //	{debug: true}
 });
@@ -266,9 +265,7 @@ function OpenInEditor ($file, $line)
 </div>
 <!-- ENDIF / EDITABLE_TPLS -->
 
-<table id="ajax-loading" cellpadding="0" cellspacing="0"><tr><td class="icon"></td><td>{L_LOADING}</td></tr></table>
-<table id="ajax-error" cellpadding="0" cellspacing="0"><tr><td>{L_ERROR}</td></tr></table>
-
+<div id="ajax-loading"></div><div id="ajax-error"></div>
 <div id="preload" style="position: absolute; overflow: hidden; top: 0; left: 0; height: 1px; width: 1px;"></div>
 
 <div id="body_container">
@@ -512,7 +509,7 @@ function go_to_page ()
       <h3>{L_BT_RATIO}</h3>
        <table cellpadding="0">
 	   <div align="center">{THIS_AVATAR}</div>
-       <tr><td>{L_YOUR_RATIO}</td><td><!-- IF DOWN_TOTAL_BYTES gt MIN_DL_BYTES --><b>{USER_RATIO}</b><!-- ELSE --><b>{L_NONE}</b> (DL < {MIN_DL_FOR_RATIO})<!-- ENDIF --></td></tr>
+       <tr><td>{L_BT_RATIO}</td><td><!-- IF DOWN_TOTAL_BYTES gt MIN_DL_BYTES --><b>{USER_RATIO}</b><!-- ELSE --><b>{L_NONE}</b> (DL < {MIN_DL_FOR_RATIO})<!-- ENDIF --></td></tr>
        <tr><td>{L_DOWNLOADED}</td><td class="leechmed"><b>{DOWN_TOTAL}</b></td></tr>
        <tr><td>{L_UPLOADED}</td><td class="seedmed"><b>{UP_TOTAL}</b></td></tr>
        <tr><td>{L_RELEASED}</td><td class="seedmed">{RELEASED}</td></tr>

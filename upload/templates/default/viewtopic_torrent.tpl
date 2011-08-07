@@ -3,6 +3,13 @@
 <col class="row1">
 <col class="row1">
 
+<script type="text/javascript">
+$(document).ready(function(){
+	$('table.tablesorter').tablesorter({
+		sortList: [[4,1]]	});
+    });
+</script>
+
 <tr>
 	<td colspan="2" class="catTitle"><a href="{DL_LIST_HREF}">
 		{L_DL_LIST_AND_TORRENT_ACTIVITY}
@@ -101,7 +108,7 @@
 
 		<tr>
 		<td colspan="2">
-
+		
 		<!-- IF SEEDER_LAST_SEEN -->
 		<div id="last_seed_info" class="row5 w60 mrg_4 bCenter">
 			<p class="mrg_10">{SEEDER_LAST_SEEN}</p>
@@ -115,42 +122,28 @@
 		<a name="seeders"></a>
 		<table class="borderless w60 bCenter">
 		<tr>
-			<td>
-			<form method="POST" action="{sfull.SEED_ORD_ACT}">
-
-				<p class="floatL" style="margin-top: 4px;"><b>{L_SEEDERS}</b>:</p>
-				<!-- BEGIN sorder -->
-				<p class="floatR med">
-					{L_SORT_BY}: {sfull.sorder.SEED_ORDER_SELECT}
-					<input type="submit" value="&#9660;" class="pOrdSel" name="psortdesc" /><input type="submit" value="&#9650;" class="pOrdSel" name="psortasc" />
-				</p>
-				<!-- END sorder -->
-
-			</form>
-			</td>
+			<td><p class="floatL" style="margin-top: 4px;"><b>{L_SEEDERS}</b>:</p></td>
 		</tr>
 		<tr>
 			<td class="pad_0">
 
-			<table cellpadding="0" class="peers w100 med">
+			<table cellpadding="0" class="peers w100 med tablesorter" id="seeders-tbl">
+			<thead>
 			<tr>
-				<th rowspan="2">Username<img width="130" class="spacer" src="{SPACER}" alt="" /></td>
-				<th rowspan="2" title="Uploaded/TorrentSize">UL<br />Ratio<img width="40" class="spacer" src="{SPACER}" alt="" /></td>
-				<th colspan="2" width="30%">Transfers<img width="140" class="spacer" src="{SPACER}" alt="" /></td>
-				<th colspan="2" width="35%">Speed<img width="150" class="spacer" src="{SPACER}" alt="" /></td>
+				<th class="{sorter: 'text'}"><b class="tbs-text">{L_DL_USER}</b><img width="130" class="spacer" src="{SPACER}" alt="" /></th>
+		        <th class="{sorter: 'digit'}" title="{L_DL_FORMULA}"><b class="tbs-text">{L_DL_ULR}</b><img width="40" class="spacer" src="{SPACER}" alt="" /></th>
+		        <th class="{sorter: 'digit'}"><b class="tbs-text">{L_DL_UL}</b><img width="70" class="spacer" src="{SPACER}" alt="" /></th>
+		        <th class="{sorter: 'digit'}"><b class="tbs-text">{L_DL_DL}</b><img width="70" class="spacer" src="{SPACER}" alt="" /></th>
+		        <th class="{sorter: 'digit'}"><b class="tbs-text">{L_DL_UL_SPEED}</b><img width="75" class="spacer" src="{SPACER}" alt="" /></th>
+		        <th class="{sorter: 'digit'}"><b class="tbs-text">{L_DL_DL_SPEED}</b><img width="75" class="spacer" src="{SPACER}" alt="" /></th>
 				<!-- BEGIN iphead -->
-				<th rowspan="2" width="30%">IP<img width="105" class="spacer" src="{SPACER}" alt="" /></td>
+				<th class="{sorter: 'digit'}"><b class="tbs-text">{L_IP_ADDRESS}</b><img width="75" class="spacer" src="{SPACER}" alt="" /></th>
 				<!-- END iphead -->
 				<!-- BEGIN porthead -->
-				<th rowspan="2">Port<img width="50" class="spacer" src="{SPACER}" alt="" /></td>
+				<th class="{sorter: 'digit'}"><b class="tbs-text">{L_DL_PORT}</b><img width="75" class="spacer" src="{SPACER}" alt="" /></th>
 				<!-- END porthead -->
 			</tr>
-			<tr>
-				<th>up<img width="70" class="spacer" src="{SPACER}" alt="" /></td>
-				<th>down<img width="70" class="spacer" src="{SPACER}" alt="" /></td>
-				<th title="{sfull.SEEDERS_UP_TOT}">up<img width="75" class="spacer" src="{SPACER}" alt="" /></td>
-				<th>down<img width="75" class="spacer" src="{SPACER}" alt="" /></td>
-			</tr>
+			</thead>
 			<!-- BEGIN srow -->
 			<tr{sfull.srow.ROW_BGR}>
 				<td class="tLeft" title="{sfull.srow.UPD_EXP_TIME}"><b>{sfull.srow.NAME}</b></td>
@@ -160,7 +153,7 @@
 				<td class="seedmed">{sfull.srow.SPEED_UP}</td>
 				<td class="leechmed">{sfull.srow.SPEED_DOWN}</td>
 				<!-- BEGIN ip -->
-				<td class="tRight">{sfull.srow.ip.IP}</td>
+				<td>{sfull.srow.ip.IP}</td>
 				<!-- END ip -->
 				<!-- BEGIN port -->
 				<td>{sfull.srow.port.PORT}</td>
@@ -178,42 +171,28 @@
 		<a name="leechers"></a>
 		<table class="borderless w60 bCenter">
 		<tr>
-			<td>
-			<form method="POST" action="{lfull.LEECH_ORD_ACT}">
-
-				<p class="floatL" style="margin-top: 4px;"><b>{L_LEECHERS}</b>:</p>
-				<!-- BEGIN lorder -->
-				<p class="floatR med">
-					{L_SORT_BY}: {lfull.lorder.LEECH_ORDER_SELECT}
-					<input type="submit" value="&#9660;" class="pOrdSel" name="psortdesc" /><input type="submit" value="&#9650;" class="pOrdSel" name="psortasc" />
-				</p>
-				<!-- END lorder -->
-
-			</form>
-			</td>
+			<td><p class="floatL" style="margin-top: 4px;"><b>{L_LEECHERS}</b>:</p></td>
 		</tr>
 		<tr>
 			<td class="pad_0">
 
-			<table cellpadding="0" class="peers w100 med">
+			<table cellpadding="0" class="peers w100 med tablesorter" id="leechers-tbl">
+			<thead>
 			<tr>
-				<th rowspan="2">Username<img width="130" class="spacer" src="{SPACER}" alt="" /></td>
-				<th rowspan="2" title="Complete percent"><b>%</b><img width="40" class="spacer" src="{SPACER}" alt="" /></td>
-				<th colspan="2" width="30%">Transfers<img width="140" class="spacer" src="{SPACER}" alt="" /></td>
-				<th colspan="2" width="35%">Speed<img width="150" class="spacer" src="{SPACER}" alt="" /></td>
+				<th class="{sorter: 'text'}"><b class="tbs-text">{L_DL_USER}</b><img width="130" class="spacer" src="{SPACER}" alt="" /></th>
+		        <th class="{sorter: 'digit'}" title="{L_DL_PERCENT}"><b class="tbs-text">%</b><img width="40" class="spacer" src="{SPACER}" alt="" /></th>
+		        <th class="{sorter: 'digit'}"><b class="tbs-text">{L_DL_UL}</b><img width="70" class="spacer" src="{SPACER}" alt="" /></th>
+		        <th class="{sorter: 'digit'}"><b class="tbs-text">{L_DL_DL}</b><img width="70" class="spacer" src="{SPACER}" alt="" /></th>
+		        <th class="{sorter: 'digit'}"><b class="tbs-text">{L_DL_UL_SPEED}</b><img width="75" class="spacer" src="{SPACER}" alt="" /></th>
+		        <th class="{sorter: 'digit'}"><b class="tbs-text">{L_DL_DL_SPEED}</b><img width="75" class="spacer" src="{SPACER}" alt="" /></th>
 				<!-- BEGIN iphead -->
-				<th rowspan="2" width="30%">IP<img width="105" class="spacer" src="{SPACER}" alt="" /></td>
+				<th class="{sorter: 'digit'}"><b class="tbs-text">{L_IP_ADDRESS}</b><img width="75" class="spacer" src="{SPACER}" alt="" /></th>
 				<!-- END iphead -->
 				<!-- BEGIN porthead -->
-				<th rowspan="2">Port<img width="50" class="spacer" src="{SPACER}" alt="" /></td>
+				<th class="{sorter: 'digit'}"><b class="tbs-text">{L_DL_PORT}</b><img width="75" class="spacer" src="{SPACER}" alt="" /></th>
 				<!-- END porthead -->
 			</tr>
-			<tr>
-				<th>up<img width="70" class="spacer" src="{SPACER}" alt="" /></td>
-				<th>down<img width="70" class="spacer" src="{SPACER}" alt="" /></td>
-				<th title="{lfull.LEECHERS_UP_TOT}">up<img width="75" class="spacer" src="{SPACER}" alt="" /></td>
-				<th title="{lfull.LEECHERS_DOWN_TOT}">down<img width="75" class="spacer" src="{SPACER}" alt="" /></td>
-			</tr>
+			</thead>
 			<!-- BEGIN lrow -->
 			<tr{lfull.lrow.ROW_BGR}>
 				<td class="tLeft" title="{lfull.lrow.UPD_EXP_TIME}"><b>{lfull.lrow.NAME}</b></td>
@@ -223,7 +202,7 @@
 				<td class="seedmed">{lfull.lrow.SPEED_UP}</td>
 				<td class="leechmed">{lfull.lrow.SPEED_DOWN}</td>
 				<!-- BEGIN ip -->
-				<td class="tRight">{lfull.lrow.ip.IP}</td>
+				<td>{lfull.lrow.ip.IP}</td>
 				<!-- END ip -->
 				<!-- BEGIN port -->
 				<td>{lfull.lrow.port.PORT}</td>
@@ -237,7 +216,7 @@
 		</table>
 		<!-- END lfull -->
 
-		<div class="med tCenter mrg_4 warnColor1">показаны данные <i><b>только за текущую сессию</b></i></div>
+		<div class="med tCenter mrg_4 warnColor1">{L_DL_INFO}</div>
 
 		</div><!--/full_details-->
 		<!-- ENDIF / PEER_EXIST -->

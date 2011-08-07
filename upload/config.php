@@ -57,8 +57,8 @@ $bb_cfg['css_ver'] = 1;
 
 // Increase number of revision after update
 $bb_cfg['tp_version'] = '2.0';
-$bb_cfg['tp_release_state'] = 'R196';
-$bb_cfg['tp_release_date'] = '6-08-2011';
+$bb_cfg['tp_release_state'] = 'R198';
+$bb_cfg['tp_release_date'] = '7-08-2011';
 
 $bb_cfg['board_disabled_msg'] = 'форум временно отключен'; // 'forums temporarily disabled'; // show this msg if board has been disabled via ON/OFF trigger
 $bb_cfg['srv_overloaded_msg'] = "Извините, в данный момент сервер перегружен\nПопробуйте повторить запрос через несколько минут";
@@ -177,7 +177,7 @@ $bb_cfg['seeder_never_seen_days_keep'] = 5;
 
 // Ratio limits
 define('TR_RATING_LIMITS', true);                  // ON/OFF
-define('MIN_DL_FOR_RATIO', 5368709120);            // in bytes, 0 - disable
+define('MIN_DL_FOR_RATIO', 10737418240);           // 10 GB in bytes, 0 - disable
 
 // Don't change the order of ratios (from 0 to 1)
 // rating < 0.4 -- allow only 1 torrent for leeching
@@ -290,7 +290,7 @@ $bb_cfg['abuse_email']             = 'abuse@' . $bb_cfg['server_name'];
 
 // AJAX
 define('AJAX_HTML_DIR', BB_ROOT .'ajax/html/');
-define('AJAX_DIR', BB_ROOT .'ajax/');
+define('AJAX_DIR',      BB_ROOT .'ajax/');
 
 // Debug
 define('DEBUG',           false);                  // !!! "DEBUG" should be ALWAYS DISABLED on production environment !!!

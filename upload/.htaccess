@@ -2,10 +2,11 @@
 AddDefaultCharset UTF-8
 ## Set charset for php mb-functions
 php_value mbstring.internal_encoding UTF-8
+php_value magic_quotes_gpc off
 
 ## RSS MOD
-RewriteEngine On
-RewriteRule ^rss.xml$ rss.php [L]
+#RewriteEngine On
+#RewriteRule ^rss.xml$ rss.php [L]
 
 ## Access control
 <FilesMatch "\.(.*sql|tpl|inc|db|log)|(config|common).php$">

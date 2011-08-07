@@ -50,87 +50,33 @@ if(document.getElementById) {
 
 <table class="forumline">
 <tr>
-<td colspan="10" class="catTitle">
-  {L_CRON_LIST}
-</td>
+    <td colspan="10" class="catTitle">{L_CRON_LIST}</td>
 </tr>
 <tr>
-<th width="5%" nowrap="nowrap" align="center">
- <INPUT onclick="CheckAll(this,'select[]')" type="checkbox">
-</th>
-<th width="5%" nowrap="nowrap" align="center">
-
-  {L_CRON_ID}
-
-</th>
-<th width="5%" nowrap="nowrap" align="center">
-
-  {L_CRON_ACTIVE}
-
-</th>
-<th width="30%" nowrap="nowrap" align="center">
-
-  {L_CRON_TITLE}
-
-</th>
-<th width="20%" nowrap="nowrap" align="center">
-
-  {L_CRON_SCRIPT}
-
-</th>
-<th width="5%" nowrap="nowrap" align="center">
-
-  {L_CRON_SCHEDULE}
-
-</th>
-<th width="5%" nowrap="nowrap" align="center">
-
-  {L_CRON_LAST_RUN}
-
-</th>
-<th width="5%" nowrap="nowrap" align="center">
-
-  {L_CRON_NEXT_RUN}
-
-</th>
-<th width="1%" nowrap="nowrap" align="center">
-
-  {L_CRON_RUN_COUNT}
-
-</th>
-<th width="10%" nowrap="nowrap" align="center">
-
-  {L_CRON_MANAGE}
-
-</th>
+    <th width="5%" nowrap="nowrap"><INPUT onclick="CheckAll(this,'select[]')" type="checkbox"></th>
+    <th width="5%" nowrap="nowrap">{L_CRON_ID}</th>
+    <th width="5%" nowrap="nowrap">{L_CRON_ACTIVE}</th>
+    <th width="30%" nowrap="nowrap" >{L_CRON_TITLE}</th>
+    <th width="20%" nowrap="nowrap">{L_CRON_SCRIPT}</th>
+    <th width="5%" nowrap="nowrap">{L_CRON_SCHEDULE}</th>
+    <th width="5%" nowrap="nowrap">{L_CRON_LAST_RUN}</th>
+    <th width="5%" nowrap="nowrap">{L_CRON_NEXT_RUN}</th>
+    <th width="1%" nowrap="nowrap">{L_CRON_RUN_COUNT}</th>
+    <th width="10%" nowrap="nowrap">{L_CRON_MANAGE}</th>
 </tr>
-
-{LIST}
-
+    {LIST}
 </table>
+
 <table class="forumline">
-<tr>
-<td colspan="2" class="catTitle">
-  {L_CRON_OPTIONS}
-</td>
-</tr>
-<tr>
-	<td width="50%" nowrap="nowrap" class="row1" align="left">{L_CRON_ENABLED}</td>
-	<td width="50%" nowrap="nowrap" class="row1" align="left"><label for="cron_enabled1"><input type="radio" name="cron_enabled" id="cron_enabled1" value="1" {CRON_ENABLED_YES} /> {L_CRON_ENABLED_YES}&nbsp;</label><label for="cron_enabled2">&nbsp;<input type="radio" name="cron_enabled" id="cron_enabled2" value="0" {CRON_ENABLED_NO} /> {L_CRON_ENABLED_NO} &nbsp;</label></td>
-</tr>
-<tr>
-	<td width="50%" nowrap="nowrap" class="row1" align="left">{L_CRON_CHECK_INTERVAL}</td>
-	<td width="50%" nowrap="nowrap" class="row1" align="left"><input class="post" type="text" size="35" maxlength="255" name="cron_check_interval" value="{CRON_CHECK_INTERVAL}" /></td>
-</tr>
 <tr>
 <td colspan="2" class="catBottom">
 	{L_WITH_SELECTED}
 	<select name="cron_action" id="cron_select" >
-				<option value="" selected="selected" class="select-action">&raquo; {L_NOTHING}</option>
-				<option value="run">{L_CRON_RUN}</option>
-				<option value="delete">{L_CRON_DEL}</option>
-				<option value="disable">{L_CRON_DISABLE}</option>
-				<option value="enable">{L_CRON_ENABLE}</option>
+		<option value="" selected="selected" class="select-action">&raquo; {L_NOTHING}</option>
+		<option value="run">{L_CRON_RUN}</option>
+		<option value="delete">{L_CRON_DEL}</option>
+		<option value="disable">{L_CRON_DISABLE}</option>
+		<option value="enable">{L_CRON_ENABLE}</option>
 	</select>
 	<label for="confirm">&nbsp;<input onclick="toggle_disabled('send', this.checked)" id="confirm" type="checkbox" name="confirm" value="1" /></label>
 	<input type="submit" name="submit" id="send" value="{L_SUBMIT}" class="mainoption" disabled="disabled" />&nbsp;&nbsp;	
@@ -140,7 +86,7 @@ if(document.getElementById) {
 </form>
 <br />
 <center>
-<a href="admin_cron.php?mode=run"><b>{L_RUN_MAIN_CRON}</b></a><br />
+<a href="admin_cron.php?mode=run"><b>{L_RUN_MAIN_CRON}</b></a> &middot;
 <a href="admin_cron.php?mode=add"><b>{L_ADD_JOB}</b></a>
 </center>
 {CRON_ACTION}
@@ -148,7 +94,7 @@ if(document.getElementById) {
 <center><b>{L_CRON_WORKS}
 <a href="admin_cron.php?mode=repair">{L_REPAIR_CRON}</b></a></center>
 <!-- ENDIF / CRON_RUNNING -->
-
+<br />
 <!--========================================================================-->
 <!-- ENDIF / TPL_CRON_LIST -->
 

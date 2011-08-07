@@ -114,23 +114,24 @@ img   { border: 0px; }
      Links
  * ---------------------------------- */
 :link:focus, :visited:focus   { color: #DD6900; }
-:link                         { color: #006699; }
-:visited                      { color: #006699; }
-:link:hover, :visited:hover   { color: #DD6900; text-decoration: underline !important; }
+:link        { color: #006699; text-decoration: none !important; }
+:visited  { color: #006699; text-decoration: none !important; }
+:link:hover, :visited:hover     { color: #DD6900; text-decoration: underline !important; }
 :link:active, :visited:active { color: #DD6900; text-decoration: underline !important; }
 
-.colorAdmin, a.colorAdmin, a.colorAdmin:visited { color: #FF8C24 !important; }
-.colorSuperMod, a.colorSuperMod, a.colorSuperMod:visited { color: #000000;!important; }
-.colorMod,   a.colorMod,   a.colorMod:visited   { color: #008000 !important; }
+.colorAdmin, a.colorAdmin, a.colorAdmin:visited { color: #A00 !important; }
+.colorSuperMod, a.colorSuperMod, a.colorSuperMod:visited { color: #0080FF !important; }
+.colorMod,   a.colorMod,   a.colorMod:visited   { color: #009900 !important; }
 .colorGroup, a.colorGroup, a.colorGroup:visited { color: #476996 !important; }
 .colorCPH,   a.colorCPH,   a.colorCPH:visited   { color: #0080FF !important; }
 
 .adm, a.adm, a.adm:visited { color: #800000; text-decoration: none; font-size: 11px; }
 
-.dlWill                                  { color: #0066CC; }
+.dlWill  { color: #0066CC; }
 .dlDown, .leech, .leechmed, .leechsmall  { color: #800000; }
 .dlComplete, .seed, .seedmed, .seedsmall { color: #006600; }
-.dlCancel                                { color: #666666; }
+.dlCancel { color: #666666; }
+.itsme { color: #0000FF !important; font-size: 12px; font-weight: bold; text-decoration: none;}
 
 a.dlWill,     a.dlWill:visited           { color: #0066CC; text-decoration: none; }
 a.dlDown,     a.dlDown:visited           { color: #800000; text-decoration: none; }
@@ -401,7 +402,7 @@ table.forumline {
 	border-top: 1px solid #B7C0C5;
 }
 .forumline th {
-	border: 1px solid #B7C0C5; border-width: 1px; border-top-color: #92A3A4;
+	border: 1px solid #B7C0C5; border-width: 1px; border-top-color: #92A3A4; 
 }
 .forumline td {
 	border: 1px solid #B7C0C5; border-width: 0 1px 1px;
@@ -589,6 +590,7 @@ table.smilies td { padding: 3px; text-align: center; }
 /* ---------------------------------- *
      Forums on home page
  * ---------------------------------- */
+/*.forums thead { display: none;}*/  /* Форум, Тем, Сообщ., Посл. сообщение OFF on index page */
 #forums_list_wrap { margin-top: 4px; padding-right: 2px; }
 #forums_top_links { clear: both; }
 #forums_wrap { clear: both; padding-top: 1px; }
@@ -881,26 +883,12 @@ a.menu-root, a.menu-root:visited, a.menu-root:hover {
  * ================================================================ */
 var.ajax-params { display: none; }
 #ajax-loading, #ajax-error {
-	position: fixed; right: 3px; top: 0px;
-	z-index: 5000;
-	display: none;
+	position: absolute; z-index: 2000; padding: 4px; font-size: 11px;
+	max-width: 400px; max-height: 200px; white-space: nowrap; display: none;
 }
-#ajax-loading td, #ajax-error td {
-	font-size: 11px;
-	font-weight: bold;
-	white-space: nowrap;
-	padding: 3px 4px 4px 4px;
-	border: 1px solid #2E8B57;
-	color: #FFF5EE; background: #2E8B57;
+#ajax-loading { background: rgba(0,0,0, 0.5) url(../images/loading_1.gif) no-repeat center center; border-bottom-left-radius: 10px; -webkit-border-bottom-left-radius:  10px; -moz-border-radius-bottomleft:  10px; -khtml-border-bottom-left-radius:  10px; float: right; width: 85px; height: 30px;
 }
-#ajax-loading td.icon {
-	width: 12px; height: 12px;
-	background: #EFEFEF url(../images/loading.gif) no-repeat center center;
-}
-#ajax-error {
-	background: #8B0000; color: #F5F5F5;
-	border: 0px; padding: 4px;
-	white-space: nowrap; overflow: auto;
+#ajax-error { background: #d32031 url(../images/loading_1.gif) no-repeat center center; border-bottom-left-radius: 10px; -webkit-border-bottom-left-radius:  10px; -moz-border-radius-bottomleft:  10px; -khtml-border-bottom-left-radius:  10px; float: right; min-width: 200px; height: 30px;
 }
 .editable-container { cursor: pointer; }
 .editable-container:hover { background: #E8E9F8; }

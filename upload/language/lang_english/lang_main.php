@@ -1341,7 +1341,6 @@ $lang['CURR_PASSKEY'] = 'Current passkey:';
 $lang['SPMODE_FULL'] = 'Show peers in full details';
 
 $lang['BT_RATIO'] = 'Ratio';
-$lang['YOUR_RATIO'] = 'Your Ratio';
 $lang['DOWNLOADED'] = 'Downloaded';
 $lang['UPLOADED'] = 'Uploaded';
 $lang['RELEASED'] = 'Released';
@@ -1642,3 +1641,17 @@ $lang['NEWEST'] = 'Newest';
 $lang['LATEST'] = 'Latest';
 $lang['POST'] = 'Post';
 $lang['OLD'] = 'Old';
+
+// DL-List
+$lang['DL_USER'] = 'Username';
+$lang['DL_PERCENT'] = 'Complete percent';
+$lang['DL_UL'] = 'UL';
+$lang['DL_DL'] = 'DL';
+$lang['DL_UL_SPEED'] = 'UL speed';
+$lang['DL_DL_SPEED'] = 'DL speed';
+$lang['DL_PORT'] = 'Port';
+$lang['DL_FORMULA'] = 'Formula: Uploaded/TorrentSize';
+$lang['DL_ULR'] = 'ULR';
+$lang['DL_STOPPED'] = 'stopped';
+$lang['DL_UPD'] = 'upd: ';
+$lang['DL_INFO'] = 'shows data <i><b>only for the current session</b></i>';

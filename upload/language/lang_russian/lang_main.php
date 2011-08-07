@@ -178,7 +178,7 @@ $lang['FORGOTTEN_PASSWORD'] = 'Забыли пароль?';
 $lang['AUTO_LOGIN'] = 'Автоматически входить при каждом посещении';
 $lang['ERROR_LOGIN'] = 'Вы ввели неверное/неактивное имя пользователя или неверный пароль.';
 $lang['REMEMBER'] = 'Запомнить';
-$lang['USER_WELCOME'] = 'Привет, ';
+$lang['USER_WELCOME'] = 'Рады видеть Вас, ';
 
 //
 // Index page
@@ -1348,7 +1348,6 @@ $lang['SPMODE_FULL'] = 'Подробная статистика пиров';
 $lang['CURR_PASSKEY'] = 'Текущий passkey:';
 
 $lang['BT_RATIO'] = 'Рейтинг';
-$lang['YOUR_RATIO'] = 'Ваш рейтинг';
 $lang['DOWNLOADED'] = 'Скачано';
 $lang['UPLOADED'] = 'Отдано';
 $lang['RELEASED'] = 'На своих';
@@ -1654,3 +1653,17 @@ $lang['NEWEST'] = 'Непрочит.';
 $lang['LATEST'] = 'Последнее';
 $lang['POST'] = 'Пост';
 $lang['OLD'] = 'Прочит';
+
+// DL-лист
+$lang['DL_USER'] = 'Пользователь';
+$lang['DL_PERCENT'] = 'Скачано процентов';
+$lang['DL_UL'] = 'Отдано';
+$lang['DL_DL'] = 'Скачано';
+$lang['DL_UL_SPEED'] = 'Отдача';
+$lang['DL_DL_SPEED'] = 'Загрузка';
+$lang['DL_PORT'] = 'Порт';
+$lang['DL_FORMULA'] = 'Формула: Отдано/Размер раздачи';
+$lang['DL_ULR'] = 'ULR';
+$lang['DL_STOPPED'] = 'Остановил Скачивание/Раздачу';
+$lang['DL_UPD'] = 'Подключён: ';
+$lang['DL_INFO'] = 'показаны данные <i><b>только за текущую сессию</b></i>';

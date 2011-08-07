@@ -159,7 +159,7 @@ $online['cnt'] = $online_short['cnt'] = <<<HTML
 	<span class="colorGroup bold">{$users_cnt['group_member']}</span> <span class="small">&middot;</span>
 	<span class="colorISL">{$users_cnt['ignore_load']}</span> <span class="small">&middot;</span>
 	<span>{$users_cnt['user']}</span> <span class="small">&middot;</span>
-	<span><i>{$users_cnt['guest']}</i></span>
+	<span>{$users_cnt['guest']}</span>
 ]
 HTML;
 
