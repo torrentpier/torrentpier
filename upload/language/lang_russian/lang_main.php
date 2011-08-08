@@ -194,7 +194,7 @@ $lang['WHOSONLINE'] = 'Кто сейчас на форуме';
 $lang['MARK_ALL_FORUMS_READ'] = 'Отметить все форумы как прочтённые';
 $lang['FORUMS_MARKED_READ'] = 'Все форумы были отмечены как прочтённые';
 
-$lang['LATEST_NEWS'] = 'Последние новости';
+$lang['LATEST_NEWS'] = 'Новости трекера';
 $lang['SUBFORUMS'] = 'Подфорумы';
 
 //
@@ -793,6 +793,7 @@ $lang['VIEW_INFORMATION'] = 'Просмотреть информацию';
 //
 // Search
 //
+$lang['SEARCH_HELP_URL'] = 'Помощь по поиску';
 $lang['SEARCH_QUERY'] = 'Запрос';
 $lang['SEARCH_OPTIONS'] = 'Параметры запроса';
 

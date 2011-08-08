@@ -22,6 +22,7 @@
 	<th class="{sorter: 'digit'}" ><b class="tbs-text">#</b></th>
 	<th class="{sorter: 'text'}" ><b class="tbs-text">{L_USERNAME}</b></th>
 	<th class="{sorter: false}" ><b class="tbs-text">{L_PM}</b></th>
+	<th class="{sorter: 'text'}" ><b class="tbs-text">{L_EMAIL}</b></th>
 	<th class="{sorter: 'text'}" ><b class="tbs-text">{L_LOCATION}</b></th>
 	<th class="{sorter: 'digit'}" ><b class="tbs-text">{L_JOINED}</b></th>
 	<th class="{sorter: 'digit'}" ><b class="tbs-text">{L_POSTS_SHORT}</b></th>
@@ -38,13 +39,8 @@
 	<td>{memberrow.ROW_NUMBER}</td>
 	<td><a href="{memberrow.U_VIEWPROFILE}" class="gen"><b>{memberrow.USERNAME}</b></a></td>
 	<td>{memberrow.PM}</td>
-	<td>
-		<table class="borderless w100">
-		<tr>
-			<td class="tCenter w100">{memberrow.FROM}</td>
-		</tr>
-		</table>
-	</td>
+	<td>{memberrow.EMAIL}</td>
+	<td>{memberrow.FROM}</td>
 	<td class="small">
 		<u>{memberrow.JOINED_RAW}</u>
 		{memberrow.JOINED}

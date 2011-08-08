@@ -245,7 +245,7 @@ ajax.callback.posts = function(data){
 			<td class="tCenter nowrap">
 				<p>{L_CURRENT_IMAGE}</p>
 				<p class="mrg_6">{USER_AVATAR}</p>
-				<p><label><input type="checkbox" name="avatardel" /> {L_DELETE}</label></p>
+				<p><label><input type="checkbox" name="avatardel" /> {L_DELETE_IMAGE}</label></p>
 			</td>
 		</tr>
 		</table>

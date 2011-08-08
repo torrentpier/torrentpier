@@ -77,9 +77,8 @@
 			<label><input type="radio" name="group_type" value="{S_GROUP_OPEN_TYPE}" {S_GROUP_OPEN_CHECKED} />{L_GROUP_OPEN}</label> &nbsp;&nbsp;
 			<label><input type="radio" name="group_type" value="{S_GROUP_CLOSED_TYPE}" {S_GROUP_CLOSED_CHECKED} />{L_GROUP_CLOSED}</label> &nbsp;&nbsp;
 			<label><input type="radio" name="group_type" value="{S_GROUP_HIDDEN_TYPE}" {S_GROUP_HIDDEN_CHECKED} />{L_GROUP_HIDDEN}</label>
-		</p>
-		<p class="mrg_4">
-			<input class="mainoption" type="submit" name="groupstatus" value="{L_UPDATE}" />
+			
+			&nbsp; <input class="mainoption" type="submit" name="groupstatus" value="{L_UPDATE}" />
 		</p>
 	</td>
 </tr>

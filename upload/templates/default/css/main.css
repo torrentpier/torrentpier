@@ -489,7 +489,7 @@ table.smilies td { padding: 3px; text-align: center; }
  * ---------------------------------- */
 .topmenu {
 	background: #EFEFEF; border: solid #CFD4D8; border-width: 1px 0px;
-	margin: 3px 4px 0; padding: 0 8px;
+	margin: 3px 4px 0; padding: 0 8px; overflow: hidden;
 }
 .topmenu a:link, .topmenu a:visited { text-decoration: none; }
 .topmenu td { padding: 4px; font-size: 11px; white-space: nowrap; }

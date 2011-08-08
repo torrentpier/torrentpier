@@ -182,15 +182,15 @@ switch($this->request['type'])
 						<input type="button" value="i" name="codeI" title="'.$lang['ITALIC'].'" style="width: 30px; font-style: italic;" />
 						<input type="button" value="u" name="codeU" title="'.$lang['UNDERLINE'].'" style="width: 30px; text-decoration: underline;" />
 						<input type="button" value="s" name="codeS" title="'.$lang['STRIKEOUT'].'" style="width: 30px; text-decoration: line-through;" />&nbsp;&nbsp;
-						<input type="button" value="'.$lang['QUOTE'].'" name="codeQuote" title="'.$lang['QUOTE_TITLE'].'" style="width: 50px;" />
+						<input type="button" value="'.$lang['QUOTE'].'" name="codeQuote" title="'.$lang['QUOTE_TITLE'].'" style="width: 57px;" />
 						<input type="button" value="Img" name="codeImg" title="'.$lang['IMG_TITLE'].'" style="width: 40px;" />
-						<input type="button" value="'.$lang['URL'].'" name="codeUrl" title="'.$lang['URL_TITLE'].'" style="width: 55px; text-decoration: underline;" /><input type="hidden" name="codeUrl2" />&nbsp;
-						<input type="button" value="'.$lang['CODE'].'" name="codeCode" title="'.$lang['CODE_TITLE'].'" style="width: 46px;" />
-						<input type="button" value="'.$lang['LIST'].'" name="codeList" title="'.$lang['LIST_TITLE'].'" style="width: 55px;" />
+						<input type="button" value="'.$lang['URL'].'" name="codeUrl" title="'.$lang['URL_TITLE'].'" style="width: 63px; text-decoration: underline;" /><input type="hidden" name="codeUrl2" />&nbsp;
+						<input type="button" value="'.$lang['CODE'].'" name="codeCode" title="'.$lang['CODE_TITLE'].'" style="width: 43px;" />
+						<input type="button" value="'.$lang['LIST'].'" name="codeList" title="'.$lang['LIST_TITLE'].'" style="width: 58px;" />
 						<input type="button" value="1." name="codeOpt" title="'.$lang['LIST_ITEM'].'" style="width: 30px;" />&nbsp;
 						<input type="button" value="'.$lang['QUOTE_SEL'].'" name="quoteselected" title="'.$lang['QUOTE_SELECTED'].'" onmouseout="bbcode.refreshSelection(false);" onmouseover="bbcode.refreshSelection(true);" onclick="bbcode.onclickQuoteSel();" />&nbsp;
 						
-						<input type="button" value="'.$lang['TRANSLIT'].'" name="Translit" title="'.$lang['TRANSLIT_TITLE'].'" style="width: 60px;" onclick="transliterate(document.post.message, this);" />
+						<input type="button" value="'.$lang['TRANSLIT'].'" name="Translit" title="'.$lang['TRANSLIT_TITLE'].'" style="width: 68px;" onclick="transliterate(document.post.message, this);" />
 					</div>
 					<textarea id="message-'. $post_id .'" class="editor mrg_4" name="message" rows="18" cols="92">'. $post['post_text'] .'</textarea>
 					<div class="mrg_4 tCenter">

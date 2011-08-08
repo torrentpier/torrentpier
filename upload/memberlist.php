@@ -152,7 +152,7 @@ $template->assign_vars(array(
 ));
 
 // per-letter selection end
-$sql = "SELECT username, user_id, user_opt, user_posts, user_regdate, user_from, user_website, user_avatar, user_avatar_type
+$sql = "SELECT username, user_id, user_opt, user_posts, user_regdate, user_from, user_website, user_email, user_avatar, user_avatar_type
          FROM ". BB_USERS ."
 		 WHERE user_id NOT IN(". EXCLUDED_USERS_CSV .")";
 if ( $username )
@@ -179,9 +179,26 @@ if ( $row = DB()->sql_fetchrow($result) )
 
         $poster_avatar = get_avatar($row['user_avatar'], $row['user_avatar_type'], !bf($row['user_opt'], 'user_opt', 'allow_avatar'));
 
-		$pm = '<a class="txtb" href="'. append_sid("privmsg.php?mode=post&amp;". POST_USERS_URL ."=$user_id") .'">'. $lang['SEND_PM_TXTB'] .'</a>';
-		$email = ($bb_cfg['board_email_form']) ? '<a class="txtb" href="'. append_sid("profile.php?mode=email&amp;". POST_USERS_URL ."=$user_id") .'">'. $lang['SEND_EMAIL_TXTB'] .'</a>' : false;
-		$www = ($row['user_website']) ? '<a class="txtb" href="'. $row['user_website'] .'" target="_userwww">'. $lang['VISIT_WEBSITE_TXTB'] .'</a>' : false;
+		$pm = ($bb_cfg['text_buttons']) ? '<a class="txtb" href="'. append_sid("privmsg.php?mode=post&amp;". POST_USERS_URL ."=$user_id") .'">'. $lang['SEND_PM_TXTB'] .'</a>' : '<a href="' . append_sid("privmsg.php?mode=post&amp;". POST_USERS_URL ."=$user_id") .'"><img src="' . $images['icon_pm'] . '" alt="' . $lang['SEND_PRIVATE_MESSAGE'] . '" title="' . $lang['SEND_PRIVATE_MESSAGE'] . '" border="0" /></a>';
+		
+        if (bf($row['user_opt'], 'user_opt', 'viewemail') || IS_ADMIN)
+        {
+        	$email_uri = ($bb_cfg['board_email_form']) ? append_sid('profile.php?mode=email&amp;'. POST_USERS_URL .'='. $profiledata['user_id']) : 'mailto:'. $row['user_email'];
+        	$email = '<a class="editable" href="'. $email_uri .'">'. $row['user_email'] .'</a>';
+        }
+        else
+        {
+        	$email = '';
+        }
+
+        if ($row['user_website'])
+{
+            $www = ($bb_cfg['text_buttons']) ? '<a class="txtb" href="'. $row['user_website'] .'"  target="_userwww">'. $lang['VISIT_WEBSITE_TXTB'] .'</a>' : '<a class="txtb" href="'. $row['user_website'] .'" target="_userwww"><img src="' . $images['icon_www'] . '" alt="' . $lang['VISIT_WEBSITE'] . '" title="' . $lang['VISIT_WEBSITE'] . '" border="0" /></a>';
+        }
+        else
+        {
+            $www = '';
+        }
 
 		$temp_url = append_sid("search.php?search_author=1&amp;uid=$user_id");
 		$search_img = '<a href="' . $temp_url . '"><img src="' . $images['icon_search'] . '" alt="' . $lang['SEARCH_USER_POSTS'] . '" title="' . $lang['SEARCH_USER_POSTS'] . '" border="0" /></a>';

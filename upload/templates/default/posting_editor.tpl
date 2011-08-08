@@ -69,7 +69,7 @@ ajax.callback.posts = function(data){
 <span class="buttons">
 	<input type="button" value="&#8212;" name="codeHR" title="{L_HOR_LINE}" style="font-weight: bold; width: 26px;" />
 	<input type="button" value="&para;" name="codeBR" title="{L_NEW_LINE}" style="width: 26px;" />&nbsp;
-	<input type="button" value="{L_SPOILER}" name="codeSpoiler" title="{L_SPOILER}" style="width: 60px;" />
+	<input type="button" value="{L_SPOILER}" name="codeSpoiler" title="{L_SPOILER}" style="width: 65px;" />
 </span>
 &nbsp;
 </div>
@@ -80,15 +80,15 @@ ajax.callback.posts = function(data){
 	<input type="button" value="i" name="codeI" title="{L_ITALIC}" style="width: 25px; font-style: italic;" />
 	<input type="button" value="u" name="codeU" title="{L_UNDERLINE}" style="width: 25px; text-decoration: underline;" />
 	<input type="button" value="s" name="codeS" title="{L_STRIKEOUT}" style="width: 25px; text-decoration: line-through;" />&nbsp;&nbsp;
-	<input type="button" value="{L_QUOTE}" name="codeQuote" title="{L_QUOTE_TITLE}" style="width: 50px;" />
+	<input type="button" value="{L_QUOTE}" name="codeQuote" title="{L_QUOTE_TITLE}" style="width: 57px;" />
 	<input type="button" value="Img" name="codeImg" title="{L_IMG_TITLE}" style="width: 40px;" />
-	<input type="button" value="{L_URL}" name="codeUrl" title="{L_URL_TITLE}" text-decoration: underline;"  style="width: 55px;"/><input type="hidden" name="codeUrl2" />&nbsp;
-	<input type="button" value="{L_CODE}" name="codeCode" title="{L_CODE_TITLE}" style="width: 40px;" />
-	<input type="button" value="{L_LIST}" name="codeList" title="{L_LIST_TITLE}"  style="width: 55px;"/>
+	<input type="button" value="{L_URL}" name="codeUrl" title="{L_URL_TITLE}" text-decoration: underline;"  style="width: 63px;"/><input type="hidden" name="codeUrl2" />&nbsp;
+	<input type="button" value="{L_CODE}" name="codeCode" title="{L_CODE_TITLE}" style="width: 43px;" />
+	<input type="button" value="{L_LIST}" name="codeList" title="{L_LIST_TITLE}"  style="width: 58px;"/>
 	<input type="button" value="1." name="codeOpt" title="{L_LIST_ITEM}" style="width: 30px;" />&nbsp;
 	<input type="button" value="{L_QUOTE_SEL}" name="quoteselected" title="{L_QUOTE_SELECTED}" onmouseout="bbcode.refreshSelection(false);" onmouseover="bbcode.refreshSelection(true);" onclick="bbcode.onclickQuoteSel();" />&nbsp;
 	
-	<input type="button" value="{L_TRANSLIT}" name="Translit" title="{L_TRANSLIT_TITLE}" style="width: 65px;" onclick="transliterate(document.post.message, this);" /> <a href="#" onclick="toggle_block('translit_opt'); return false"><span style="color: darkred"><b>?</b></span></a>
+	<input type="button" value="{L_TRANSLIT}" name="Translit" title="{L_TRANSLIT_TITLE}" style="width: 68px;" onclick="transliterate(document.post.message, this);" /> <a href="#" onclick="toggle_block('translit_opt'); return false"><span style="color: darkred"><b>?</b></span></a>
 </div>
 
 	<textarea
@@ -143,7 +143,7 @@ ajax.callback.posts = function(data){
 
 <div class="mrg_4 tCenter">
 	<div class="pad_4">{CAPTCHA_HTML}</div>
-	<input title="Alt+Enter" type="submit" name="preview" value="{L_PREVIEW}" />&nbsp;&nbsp;
+	<input title="Alt+Enter" type="submit" name="preview" value="{L_PREVIEW}" />
 	<input onclick="submitted = true;" title="Ctrl+Enter" type="submit" name="post" class="bold" value="{L_SUBMIT}" />
 	<input type="button" value="{L_AJAX_PREVIEW}" onclick="ajax.exec({ action: 'posts', type: 'view_message', message: $('textarea#message').val()});">
 </div>

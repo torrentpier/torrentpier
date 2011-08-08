@@ -56,8 +56,8 @@ $bb_cfg['js_ver']  = 1;
 $bb_cfg['css_ver'] = 1;
 
 // Increase number of revision after update
-$bb_cfg['tp_version'] = '2.0 RC';
-$bb_cfg['tp_release_state'] = 'R199';
+$bb_cfg['tp_version'] = '2.0 Stable';
+$bb_cfg['tp_release_state'] = 'R200';
 $bb_cfg['tp_release_date'] = '8-08-2011';
 
 $bb_cfg['board_disabled_msg'] = 'форум временно отключен'; // 'forums temporarily disabled'; // show this msg if board has been disabled via ON/OFF trigger
@@ -132,9 +132,11 @@ $bb_cfg['ignore_reported_ip'] = false;             // Ignore IP reported by clie
 $bb_cfg['verify_reported_ip'] = true;              // Verify IP reported by client against $_SERVER['HTTP_X_FORWARDED_FOR']
 $bb_cfg['allow_internal_ip']  = false;             // Allow internal IP (10.xx.. etc.)
 
-$bb_cfg['how_to_download_url_help']  = 'viewtopic.php?t=1'; // URL help link for "How to Download?"
-$bb_cfg['what_is_torrent_url_help']  = 'viewtopic.php?t=2'; // URL help link for "What is Bittorrent?"
-$bb_cfg['ratio_url_help']            = 'viewtopic.php?t=3'; // URL help link for Ratio.
+// FAQ URL help link
+$bb_cfg['how_to_download_url_help']  = 'viewtopic.php?t=1'; // Как скачивать?
+$bb_cfg['what_is_torrent_url_help']  = 'viewtopic.php?t=2'; // Что такое торрент?
+$bb_cfg['ratio_url_help']            = 'viewtopic.php?t=3'; // Рейтинг и ограничения
+$bb_cfg['search_help_url']           = 'viewtopic.php?t=4'; // Помощь по поиску
 
 $bb_cfg['bt_min_ratio_allow_dl_tor'] = 0;          // 0 - disable
 $bb_cfg['bt_min_ratio_warning']      = 0;          // 0 - disable
@@ -420,8 +422,6 @@ $bb_cfg['max_search_words_per_post']   = 200;
 $bb_cfg['search_min_word_len']         = 3;
 $bb_cfg['search_max_word_len']         = 35;
 $bb_cfg['limit_max_search_results']    = false;
-$bb_cfg['search_help_url']             = '';
-$bb_cfg['search_match_help_topic_id']  = 0;
 $bb_cfg['tidy_post']                   = true;
 $bb_cfg['spam_filter_file_path']       = ''; //BB_PATH .'/misc/spam_filter_words.txt';
 

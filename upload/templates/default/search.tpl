@@ -16,7 +16,7 @@
 <tr>
 	<td class="row1" width="50%">
 		<fieldset>
-		<legend>{L_SEARCH_WORDS}<!-- IF $bb_cfg['search_match_help_topic_id'] --> <a href="{TOPIC_URL}{$bb_cfg['search_match_help_topic_id']}">[?]</a><!-- ENDIF --></legend>
+		<legend>{L_SEARCH_WORDS}<!-- IF $bb_cfg['search_help_url'] --> <a href="{$bb_cfg['search_help_url']}">[?]</a><!-- ENDIF --></legend>
 		<div>
 			<p class="input"><input id="text_match_input" type="text" style="width: 95%" class="post" name="{TEXT_MATCH_KEY}" size="30" /></p>
 			<p class="chbox med">{TITLE_ONLY_CHBOX}&nbsp;&nbsp;{ALL_WORDS_CHBOX}</p>
@@ -51,7 +51,6 @@
 </tr>
 <tr>
 	<td colspan="2" class="row2 med pad_4 wrap">
-		<!-- IF $bb_cfg['search_help_url'] --><p class="floatR pad_4 bold lh_150">{$bb_cfg['search_help_url']}</p><!-- ENDIF -->
 		<p class="med pad_2">{L_SEARCH_WORDS_EXPL}</p>
 	</td>
 </tr>

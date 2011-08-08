@@ -255,7 +255,7 @@
 			<p>{postrow.attach.tor_reged.S_UPLOAD_IMAGE}</p><p><b>{L_DOWNLOAD}</b></p></a>
 			<!-- ENDIF -->
 			<p class="small">{postrow.attach.tor_reged.FILESIZE}</p>
-			<p style="padding-top: 6px;"><input id="tor-filelist-btn" type="button" class="lite" value="{L_FILELIST}" style="width:105px;" /></p>
+			<p style="padding-top: 6px;"><input id="tor-filelist-btn" type="button" class="lite" value="{L_FILELIST}" /></p>
 		</td>
 	</tr>
 	<tr class="row1">
@@ -279,7 +279,7 @@
 			</script>
 
 			<span id="tor-{postrow.attach.tor_reged.ATTACH_ID}">{postrow.attach.tor_reged.TOR_STATUS_SELECT}</span>
-			<a href="#" onclick="ajax.change_tor_status($('#tor-{postrow.attach.tor_reged.ATTACH_ID} select').val()); return false;"><input type="submit" value="{L_EDIT}" class="liteoption" style="width:70px;" /></a>
+			<a href="#" onclick="ajax.change_tor_status($('#tor-{postrow.attach.tor_reged.ATTACH_ID} select').val()); return false;"><input type="submit" value="{L_EDIT}" class="liteoption" /></a>
 
 			<!-- ENDIF -->
 		</td>
@@ -336,7 +336,7 @@
 				<!-- ENDIF -->
 			</select>
 			
-			<a href="#" onclick="change_torrents($('#tor-{postrow.attach.tor_reged.ATTACH_ID} select').val()); return false;"><input type="submit" value="{L_EDIT}" class="liteoption" style="width:70px;" /></a>
+			<a href="#" onclick="change_torrents($('#tor-{postrow.attach.tor_reged.ATTACH_ID} select').val()); return false;"><input type="submit" value="{L_EDIT}" class="liteoption" /></a>
 
 		<!-- ELSEIF TOR_HELP_LINKS -->
 		{TOR_HELP_LINKS}

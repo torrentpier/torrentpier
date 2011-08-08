@@ -189,8 +189,8 @@ ajax.callback.view_post = function(data) {
 						<input style="width: 95%;" class="post" type="text" size="50" maxlength="{TITLE_MATCH_MAX}" name="{TITLE_MATCH_NAME}" value="{TITLE_MATCH_VAL}" />
 					</p>
 					<p class="chbox med">
-						{ALL_WORDS_CHBOX}&nbsp;&middot;&nbsp;
-						<a class="med" href="{TOPIC_URL}{$bb_cfg['search_match_help_topic_id']}">Помощь по поиску</a>
+						{ALL_WORDS_CHBOX}
+						<!-- IF $bb_cfg['search_help_url'] --> &middot; <a class="med" href="{$bb_cfg['search_help_url']}">{L_SEARCH_HELP_URL}</a><!-- ENDIF -->
 					</p>
 				</div>
 				</fieldset>

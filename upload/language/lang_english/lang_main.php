@@ -789,6 +789,7 @@ $lang['VIEW_INFORMATION'] = 'View Information';
 //
 // Search
 //
+$lang['SEARCH_HELP_URL'] = 'Search Help';
 $lang['SEARCH_QUERY'] = 'Search Query';
 $lang['SEARCH_OPTIONS'] = 'Search Options';
 
