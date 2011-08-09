@@ -66,7 +66,7 @@
 <!-- IF QUICK_REPLY -->
 <div class="spacer_6"></div>
 
-<form action="{S_PRIVMSGS_ACTION}" method="post" name="post" onsubmit="return checkForm(this);">
+<form action="{S_PRIVMSGS_ACTION}" method="post" name="post" onsubmit="if(checkForm(this)){ dis_submit_btn(); }else{ return false; }">
 {S_HIDDEN_FIELDS}
 
 <table class="topic" cellpadding="0" cellspacing="0">

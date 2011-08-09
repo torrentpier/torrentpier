@@ -87,7 +87,7 @@ ajax.callback.posts = function(data){
 	<input type="button" value="{L_LIST}" name="codeList" title="{L_LIST_TITLE}"  style="width: 58px;"/>
 	<input type="button" value="1." name="codeOpt" title="{L_LIST_ITEM}" style="width: 30px;" />&nbsp;
 	<input type="button" value="{L_QUOTE_SEL}" name="quoteselected" title="{L_QUOTE_SELECTED}" onmouseout="bbcode.refreshSelection(false);" onmouseover="bbcode.refreshSelection(true);" onclick="bbcode.onclickQuoteSel();" />&nbsp;
-	
+
 	<input type="button" value="{L_TRANSLIT}" name="Translit" title="{L_TRANSLIT_TITLE}" style="width: 68px;" onclick="transliterate(document.post.message, this);" /> <a href="#" onclick="toggle_block('translit_opt'); return false"><span style="color: darkred"><b>?</b></span></a>
 </div>
 
@@ -141,16 +141,44 @@ ajax.callback.posts = function(data){
 	</table>
 </div>
 
-<div class="mrg_4 tCenter">
-	<div class="pad_4">{CAPTCHA_HTML}</div>
-	<input title="Alt+Enter" type="submit" name="preview" value="{L_PREVIEW}" />
-	<input onclick="submitted = true;" title="Ctrl+Enter" type="submit" name="post" class="bold" value="{L_SUBMIT}" />
-	<input type="button" value="{L_AJAX_PREVIEW}" onclick="ajax.exec({ action: 'posts', type: 'view_message', message: $('textarea#message').val()});">
+<div class="mrg_8 tCenter">
+	<div id="post-buttons-block" style="display: none;">
+		<div class="pad_4">{CAPTCHA_HTML}</div>
+		<input type="submit" name="preview" value="{L_PREVIEW}" id="post-preview-btn" onclick="$('#post-submit').remove();">&nbsp;&nbsp;
+		<input onclick="submitted = true;" title="Ctrl+Enter" type="submit" name="post" class="bold" value="{L_SUBMIT}" id="post-submit-btn">&nbsp;&nbsp;
+		<input type="button" value="{L_AJAX_PREVIEW}" onclick="ajax.exec({ action: 'posts', type: 'view_message', message: $('textarea#message').val()});">
+	</div>
+	<div id="post-js-warn">Для отправки сообщений необходимo включить JavaScript</div>
 </div>
 
 <script type="text/javascript">
-var submitted = false;
+function dis_submit_btn ()
+{
+	$('#post-submit-btn').attr('disabled', 1);
+	//debounce('post-submit-btn', 3000);
+}
+
+function debounce (el_id, time_ms)
+{
+	var $el = $('#'+el_id);
+	if ( $el.attr('disabled') == false ) {
+		$el.attr('disabled', 1);
+		setTimeout(function(){ $el.attr('disabled', 0); }, time_ms);
+	}
+}
+
+$(document).ready(function(){
+	$('#post-submit-btn').click(function(event){
+		$('#post-submit-btn').after('<input id="post-submit" type="hidden" name="post" value="1" />');
+	});
+	$('#post-js-warn').hide();
+	$('#post-buttons-block').show();
+	$('#post-submit-btn').attr('disabled', 0);
+});
+
 // Called before form submitting.
+var submitted = false;
+
 function checkForm(form) {
 	var formErrors = false;
 	if (form.message.value.length < 2) {
