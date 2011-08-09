@@ -180,10 +180,10 @@ if ( $row = DB()->sql_fetchrow($result) )
         $poster_avatar = get_avatar($row['user_avatar'], $row['user_avatar_type'], !bf($row['user_opt'], 'user_opt', 'allow_avatar'));
 
 		$pm = ($bb_cfg['text_buttons']) ? '<a class="txtb" href="'. append_sid("privmsg.php?mode=post&amp;". POST_USERS_URL ."=$user_id") .'">'. $lang['SEND_PM_TXTB'] .'</a>' : '<a href="' . append_sid("privmsg.php?mode=post&amp;". POST_USERS_URL ."=$user_id") .'"><img src="' . $images['icon_pm'] . '" alt="' . $lang['SEND_PRIVATE_MESSAGE'] . '" title="' . $lang['SEND_PRIVATE_MESSAGE'] . '" border="0" /></a>';
-		
+
         if (bf($row['user_opt'], 'user_opt', 'viewemail') || IS_ADMIN)
         {
-        	$email_uri = ($bb_cfg['board_email_form']) ? append_sid('profile.php?mode=email&amp;'. POST_USERS_URL .'='. $profiledata['user_id']) : 'mailto:'. $row['user_email'];
+        	$email_uri = ($bb_cfg['board_email_form']) ? append_sid("profile.php?mode=email&amp;". POST_USERS_URL ."=$user_id") : 'mailto:'. $row['user_email'];
         	$email = '<a class="editable" href="'. $email_uri .'">'. $row['user_email'] .'</a>';
         }
         else

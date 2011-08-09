@@ -13,7 +13,7 @@
 
 <div class="spacer_6"></div>
 
-<form method="post" action="{S_PRIVMSGS_ACTION}">
+<form action="{S_PRIVMSGS_ACTION}" method="post" name="post" onsubmit="if(checkForm(this)){ dis_submit_btn(); }else{ return false; }">
 {S_HIDDEN_FIELDS}
 
 <table class="borderless">

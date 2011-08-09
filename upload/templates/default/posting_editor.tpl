@@ -188,8 +188,10 @@ function checkForm(form) {
 		setTimeout(function() { alert(formErrors) }, 100);
 		return false;
 	}
-	<!-- IF QUICK_REPLY -->
-	<!-- IF $bb_cfg['use_ajax_posts'] && !IS_GUEST -->
+<!-- IF QUICK_REPLY -->
+<!-- IF IN_PM -->
+<!-- ELSE -->
+<!-- IF $bb_cfg['use_ajax_posts'] && !IS_GUEST -->
 	if(form.message.value.length < 100 && submitted)
 	{
 		setTimeout(function() {
@@ -202,8 +204,9 @@ function checkForm(form) {
 		}, 100);
 		return false;
 	}
-	<!-- ENDIF -->
-	<!-- ENDIF -->
+<!-- ENDIF -->
+<!-- ENDIF -->
+<!-- ENDIF -->
 	return true;
 }
 </script>
