@@ -48,7 +48,9 @@ ajax.callback.posts = function(data) {	if(data.html){
 		$('#pe_'+ data.post_id).html(data.text);
 	}
 	if(data.redirect) document.location.href = data.redirect;
-	if(data.hide) $('tbody#post_'+ data.post_id).hide();
+	if(data.hide) {		if(ajax.open_edit == data.post_id) ajax.open_edit = false;
+		$('tbody#post_'+ data.post_id).hide();
+	}
 	if(data.quote) $('textarea#message').attr('value', $('textarea#message').val() + data.message +' ').focus();
     if(data.message_html){
 	    $('#view_message').show();

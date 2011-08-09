@@ -97,7 +97,7 @@ switch($this->request['type'])
     case 'editor':
         if(!$post) $this->ajax_die($lang['NOT_POST']);
 
-        if(mb_strlen($post['post_text'], 'UTF-8') > 1000)
+        if((mb_strlen($post['post_text'], 'UTF-8') > 1000) || $post['post_attachment'] || ($post['topic_first_post_id'] == $post_id))
         {
         	$this->response['redirect'] = make_url('posting.php?mode=editpost&p='. $post_id);
         }
@@ -189,7 +189,7 @@ switch($this->request['type'])
 						<input type="button" value="'.$lang['LIST'].'" name="codeList" title="'.$lang['LIST_TITLE'].'" style="width: 58px;" />
 						<input type="button" value="1." name="codeOpt" title="'.$lang['LIST_ITEM'].'" style="width: 30px;" />&nbsp;
 						<input type="button" value="'.$lang['QUOTE_SEL'].'" name="quoteselected" title="'.$lang['QUOTE_SELECTED'].'" onmouseout="bbcode.refreshSelection(false);" onmouseover="bbcode.refreshSelection(true);" onclick="bbcode.onclickQuoteSel();" />&nbsp;
-						
+
 						<input type="button" value="'.$lang['TRANSLIT'].'" name="Translit" title="'.$lang['TRANSLIT_TITLE'].'" style="width: 68px;" onclick="transliterate(document.post.message, this);" />
 					</div>
 					<textarea id="message-'. $post_id .'" class="editor mrg_4" name="message" rows="18" cols="92">'. $post['post_text'] .'</textarea>
