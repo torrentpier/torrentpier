@@ -20,7 +20,6 @@ $lang['CREATE_NEW'] = 'Создать';
 $lang['ADD_NEW'] = 'Добавить';
 $lang['FLAGS'] = 'Флаги';
 $lang['REBUILD_SEARCH_INDEX'] = 'Перечесть индексы поиска';
-$lang['ACTIONS_LOG'] = 'Лог действий';
 $lang['FORUM_CONFIG'] = 'Настройки форумов';
 $lang['TRACKER_CONFIG'] = 'Настройки трекера';
 $lang['RELEASE_TEMPLATES'] = 'Шаблоны для релизов';

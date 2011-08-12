@@ -14,7 +14,7 @@ table.log_filters td {
 
 <table class="bordered w100" cellspacing="0">
 	<tr>
-		<th class="thHead">Log actions: search options</th>
+		<th class="thHead">{L_ACTS_LOG_SEARCH_OPTIONS}</th>
 	</tr>
 	<tr>
 		<td class="row1">
@@ -22,7 +22,7 @@ table.log_filters td {
 				<tr>
 					<td rowspan="2" valign="top" nowrap="nowrap" class="row1">
 						<fieldset>
-						<legend>Forum</legend>
+						<legend>{L_ACTS_LOG_FORUM}</legend>
 						<div>
 							<p class="select">{SEL_FORUM}</p>
 						</div>
@@ -30,7 +30,7 @@ table.log_filters td {
 					</td>
 					<td valign="top" class="row1">
 						<fieldset>
-						<legend>Action</legend>
+						<legend>{L_ACTS_LOG_ACTION}</legend>
 						<div>
 							<p class="select">{SEL_LOG_TYPE}</p>
 						</div>
@@ -38,7 +38,7 @@ table.log_filters td {
 					</td>
 					<td valign="top" class="row1">
 						<fieldset>
-						<legend>User</legend>
+						<legend>{L_ACTS_LOG_USER}</legend>
 						<div>
 							<p class="select">{SEL_USERS}</p>
 						</div>
@@ -54,20 +54,20 @@ table.log_filters td {
 				<tr>
 					<td valign="top" class="row1">
 						<fieldset>
-						<legend>Logs from <span style="font-size: 9px;">(<i>first: {FIRST_LOG_TIME}</i>)</span></legend>
+						<legend>{L_ACTS_LOG_LOGS_FROM} <span style="font-size: 9px;">(<i>{L_ACTS_LOG_FIRST}{FIRST_LOG_TIME}</i>)</span></legend>
 						<div>
 							<p class="input nowrap">
 								<input class="post" type="text" size="10" maxlength="20" name="{DATETIME_NAME}" value="{DATETIME_VAL}" />
 								&amp;
 								<input class="post" type="text" size="2" maxlength="5" name="{DAYSBACK_NAME}" value="{DAYSBACK_VAL}" />
-								days back
+								{L_ACTS_LOG_DAYS_BACK}
 							</p>
 						</div>
 						</fieldset>
 					</td>
 					<td valign="top" class="row1">
 						<fieldset>
-						<legend>Topic title match</legend>
+						<legend>{L_ACTS_LOG_TOPIC_MATCH}</legend>
 							<div>
 								<p class="input"><input class="post" type="text" size="28" maxlength="{TITLE_MATCH_MAX}" name="{TITLE_MATCH_NAME}" value="{TITLE_MATCH_VAL}" /></p>
 							</div>
@@ -75,7 +75,7 @@ table.log_filters td {
 					</td>
 					<td valign="top" class="row1" style="padding: 0px;">
 						<fieldset>
-						<legend>Sort by</legend>
+						<legend>{L_ACTS_LOG_SORT_BY}</legend>
 							<div>
 								<p class="select nowrap">
 									<select class="post" name="{ORDER_NAME}">{ORDER_OPTIONS}</select>
@@ -102,10 +102,10 @@ table.log_filters td {
 
 <table class="forumline">
 	<tr>
-		<th>Action</th>
-		<th>Username</th>
-		<th>Time</th>
-		<th width="60%">Info</th>
+		<th>{L_ACTS_LOG_LOGS_ACTION}</th>
+		<th>{L_ACTS_LOG_USERNAME}</th>
+		<th>{L_ACTS_LOG_TIME}</th>
+		<th width="60%">{L_ACTS_LOG_INFO}</th>
 	</tr>
 	<!-- BEGIN log -->
 	<tr class="{log.ROW_CLASS}">
@@ -174,7 +174,7 @@ table.log_filters td {
 <div class="spacer_8"></div>
 
 <fieldset class="row3">
-<legend>Filter</legend>
+<legend>{L_ACTS_LOG_FILTER}</legend>
 <table class="log_filters" cellspacing="4"><tr>
 
 	<!-- IF FILTER_FORUMS -->
@@ -190,7 +190,7 @@ table.log_filters td {
 
 	<!-- IF FILTER_TOPICS -->
 	<td>
-	<p class="med bold">Topics:</p>
+	<p class="med bold">{L_ACTS_LOG_TOPICS}</p>
 	<div>
 		<!-- BEGIN topics -->
 		<p class="med mrg_4">{topics.TOPIC_TITLE}</p>
@@ -201,7 +201,7 @@ table.log_filters td {
 
 	<!-- IF FILTER_USERS -->
 	<td>
-	<p class="med bold">Users:</p>
+	<p class="med bold">{L_ACTS_LOG_USER}:</p>
 	<div>
 		<!-- BEGIN users -->
 		<p class="med mrg_4">{users.USERNAME}</p>
@@ -213,4 +213,3 @@ table.log_filters td {
 </tr></table>
 </fieldset>
 <!-- ENDIF -->
-

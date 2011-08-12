@@ -453,7 +453,7 @@ $(document).ready(function(){
 	<!-- END leech -->
 
 	<tr class="row2 tCenter">
-		<td colspan="4" class="pad_6">
+		<td class="catBottom" colspan="4" class="pad_6">
 			<!-- IF SHOW_SEARCH_DL -->
 				<a href="{U_SEARCH_DL_WILL}" class="med">{L_SEARCH_DL_WILL_DOWNLOADS}</a>
 				::

@@ -1372,7 +1372,7 @@ CREATE TABLE IF NOT EXISTS `bb_users` (
   `user_new_privmsg` smallint(5) unsigned NOT NULL default '0',
   `user_unread_privmsg` smallint(5) unsigned NOT NULL default '0',
   `user_last_privmsg` int(11) NOT NULL default '0',
-  `user_opt` int(11) NOT NULL default '0',
+  `user_opt` int(11) NOT NULL default '1',
   `user_rank` int(11) NOT NULL default '0',
   `user_avatar` varchar(100) NOT NULL default '',
   `user_avatar_type` tinyint(4) NOT NULL default '0',

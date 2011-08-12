@@ -26,3 +26,5 @@ $lang['ACTS_LOG_LOGS_ACTION'] = 'Action';
 $lang['ACTS_LOG_USERNAME'] = 'Username';
 $lang['ACTS_LOG_TIME'] = 'Time';
 $lang['ACTS_LOG_INFO'] = 'Info';
+$lang['ACTS_LOG_FILTER'] = 'Filter';
+$lang['ACTS_LOG_TOPICS'] = 'Topics:';

@@ -380,7 +380,7 @@ else
 $log_type_select = array($lang['ACTS_LOG_ALL_ACTIONS'] => $all_types) + $log_action->log_type_select;
 
 // Order select
-$order_options = '<option value="">&nbsp;Time&nbsp;</option>';
+$order_options = '<option value="">&nbsp;'.$lang['ACTS_LOG_TIME'].'&nbsp;</option>';
 
 $template->assign_vars(array(
 	'LOG_COLSPAN'       => 4,
@@ -389,7 +389,7 @@ $template->assign_vars(array(
 	'DATETIME_VAL'      => date('Y-m-d', $datetime_val),
 	'DAYSBACK_NAME'     => $daysback_key,
 	'DAYSBACK_VAL'      => $daysback_val,
-	'FIRST_LOG_TIME'    => ($first_log_time) ? date('Y-m-d', $first_log_time) : 'none',
+	'FIRST_LOG_TIME'    => ($first_log_time) ? date('Y-m-d', $first_log_time) : $lang['ACC_NONE'],
 
 	'TITLE_MATCH_MAX'   => $title_match_max_len,
 	'TITLE_MATCH_NAME'  => $title_match_key,
