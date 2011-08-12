@@ -56,9 +56,9 @@ $bb_cfg['js_ver']  = 1;
 $bb_cfg['css_ver'] = 1;
 
 // Increase number of revision after update
-$bb_cfg['tp_version'] = '2.0 Stable';
-$bb_cfg['tp_release_state'] = 'R202';
-$bb_cfg['tp_release_date'] = '10-08-2011';
+$bb_cfg['tp_version'] = '2.1 Beta';
+$bb_cfg['tp_release_state'] = 'R205';
+$bb_cfg['tp_release_date'] = '12-08-2011';
 
 $bb_cfg['board_disabled_msg'] = 'форум временно отключен'; // 'forums temporarily disabled'; // show this msg if board has been disabled via ON/OFF trigger
 $bb_cfg['srv_overloaded_msg'] = "Извините, в данный момент сервер перегружен\nПопробуйте повторить запрос через несколько минут";
