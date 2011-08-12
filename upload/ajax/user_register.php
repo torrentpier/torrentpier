@@ -2,7 +2,7 @@
 
 if (!defined('IN_AJAX')) die(basename(__FILE__));
 
-global $bb_cfg, $lang;
+global $bb_cfg, $lang, $userdata;
 
 $mode = (string) $this->request['mode'];
 
@@ -48,7 +48,8 @@ switch($mode)
 			}
 			else
 			{
-				$html = '<img src="./images/good.gif"> <span class="seedmed bold">'.$lang['CHOOSE_PASS_OK'].'</span>';
+				$text = (IS_GUEST) ? $lang['CHOOSE_PASS_REG_OK'] : $lang['CHOOSE_PASS_OK'];
+				$html = '<img src="./images/good.gif"> <span class="seedmed bold">'.$text.'</span>';
 			}
 		}
 	break;
