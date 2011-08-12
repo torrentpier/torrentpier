@@ -304,7 +304,7 @@ else if( isset($_GET['pane']) && $_GET['pane'] == 'right' )
 						"IP_ADDRESS" => $reg_ip,
 
 						"U_WHOIS_IP" => "http://ip-whois.net/ip_geo.php?ip=$reg_ip",
-						"U_USER_PROFILE" => append_sid("profile.php?mode=editprofile&amp;" . POST_USERS_URL . "=" . $onlinerow_reg[$i]['user_id']),
+						"U_USER_PROFILE" => append_sid("../profile.php?mode=editprofile&amp;" . POST_USERS_URL . "=" . $onlinerow_reg[$i]['user_id']),
 					));
 				}
 			}

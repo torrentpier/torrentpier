@@ -42,10 +42,6 @@ switch ($mode)
 		require(INC_DIR .'ucp/usercp_email.php');
 		break;
 
-	case 'attachcp':
-		require(INC_DIR .'ucp/usercp_attachcp.php');
-		break;
-
 	default:
 		bb_die('Invalid mode');
 }

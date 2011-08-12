@@ -553,8 +553,6 @@ $lang['OCCUPATION'] = 'Род занятий';
 $lang['POSTER_RANK'] = 'Звание';
 
 $lang['TOTAL_POSTS'] = 'Всего сообщений';
-$lang['USER_POST_PCT_STATS'] = '%.2f%% от общего числа'; // 15% of total
-$lang['USER_POST_DAY_STATS'] = '%.2f сообщений в день'; // 1.5 posts per day
 $lang['SEARCH_USER_POSTS'] = 'Найти сообщения'; // Find all posts by username
 $lang['SEARCH_USER_POSTS_SHORT'] = 'Найти сообщения пользователя';
 $lang['SEARCH_USER_TOPICS'] = 'Начатые темы'; // Find all topics by username
@@ -1144,14 +1142,6 @@ $lang['NOTE_USER_EMPTY_GROUP_PERMISSIONS'] = 'ВНИМАНИЕ:<br />Вы мож
 // Quota Variables
 $lang['UPLOAD_QUOTA'] = 'Квота';
 $lang['PM_QUOTA'] = 'Квота ЛС';
-$lang['USER_UPLOAD_QUOTA_REACHED'] = 'К сожалению, вы достигли максимального общего объема закачанных файлов - %d %s'; // replace %d with Size, %s with Size Lang (MB for example)
-
-// User Attachment Control Panel
-$lang['USER_ACP_TITLE'] = 'Управление вложениями';//'Панель управления вложениями пользователя';
-$lang['UACP'] = 'Управление вложениями';
-$lang['USER_UPLOADED_PROFILE'] = 'Закачано: %s';
-$lang['USER_QUOTA_PROFILE'] = 'Квота: %s';
-$lang['UPLOAD_PERCENT_PROFILE'] = '%d%% от общего';
 
 // Common Variables
 $lang['BYTES'] = 'Байт';

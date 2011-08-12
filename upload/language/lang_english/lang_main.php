@@ -548,8 +548,6 @@ $lang['OCCUPATION'] = 'Occupation';
 $lang['POSTER_RANK'] = 'Poster rank';
 
 $lang['TOTAL_POSTS'] = 'Total posts';
-$lang['USER_POST_PCT_STATS'] = '%.2f%% of total'; // 1.25% of total
-$lang['USER_POST_DAY_STATS'] = '%.2f posts per day'; // 1.5 posts per day
 $lang['SEARCH_USER_POSTS'] = 'Find posts'; // Find all posts by username
 $lang['SEARCH_USER_POSTS_SHORT'] = 'Find user posts';
 $lang['SEARCH_USER_TOPICS'] = 'Find user topics'; // Find all topics by username
@@ -1137,14 +1135,6 @@ $lang['NOTE_USER_EMPTY_GROUP_PERMISSIONS'] = 'NOTE:<br />You are normally allowe
 // Quota Variables
 $lang['UPLOAD_QUOTA'] = 'Upload Quota';
 $lang['PM_QUOTA'] = 'PM Quota';
-$lang['USER_UPLOAD_QUOTA_REACHED'] = 'Sorry, you have reached your maximum Upload Quota Limit of %d %s'; // replace %d with Size, %s with Size Lang (MB for example)
-
-// User Attachment Control Panel
-$lang['USER_ACP_TITLE'] = 'User ACP';
-$lang['UACP'] = 'User Attachment Control Panel';
-$lang['USER_UPLOADED_PROFILE'] = 'Uploaded: %s';
-$lang['USER_QUOTA_PROFILE'] = 'Quota: %s';
-$lang['UPLOAD_PERCENT_PROFILE'] = '%d%% of total';
 
 // Common Variables
 $lang['BYTES'] = 'Bytes';

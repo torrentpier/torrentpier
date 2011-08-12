@@ -232,8 +232,8 @@ $(document).ready(function(){
 						<b>{POSTS}</b>&nbsp;
 						[ <a href="{U_SEARCH_USER}" class="med">{L_SEARCH_USER_POSTS}</a> ]
 						[ <a href="{U_SEARCH_TOPICS}" class="med">{L_SEARCH_USER_TOPICS}</a> ]
-						<!-- IF RELEASED -->[ <a class="med" href={U_SEARCH_RELEASES}>{L_SEARCH_RELEASES}</a> ]<!-- ENDIF -->
-					</p>
+						[ <a class="med" href={U_SEARCH_RELEASES}>{L_SEARCH_RELEASES}</a> ]
+					</p>					
 				</td>
 			</tr>
 			<!-- IF LOCATION -->

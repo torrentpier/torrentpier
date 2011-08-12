@@ -114,6 +114,7 @@ while ( $row = DB()->sql_fetchrow($result) )
 			'ROW_CLASS' => $row_class,
 			'USERNAME' => $username,
 			'LASTUPDATE' => bb_date($row['session_time']),
+			'LASTUPDATE_RAW' => $row['session_time'],
 			'USERIP'     => $user_ip,
 			'U_WHOIS_IP' => "http://ip-whois.net/ip_geo.php?ip=$user_ip",
 			'U_USER_PROFILE' => ((isset($user_id)) ? append_sid("profile.php?mode=viewprofile&amp;" . POST_USERS_URL . '=' . $user_id) : ''),

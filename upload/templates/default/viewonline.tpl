@@ -14,7 +14,7 @@
 <!-- BEGIN reg_user_row -->
 <tr class="{reg_user_row.ROW_CLASS}">
 	<td><a href="{reg_user_row.U_USER_PROFILE}" class="gen">{reg_user_row.USERNAME}</a></td>
-	<td class="tCenter">{reg_user_row.LASTUPDATE}</td>
+	<td class="tCenter"><u>{reg_user_row.LASTUPDATE_RAW}</u>{reg_user_row.LASTUPDATE}</td>
 	<!-- IF IS_ADMIN --><td class="tCenter"><a href="{reg_user_row.U_WHOIS_IP}" class="gen" target="_blank">{reg_user_row.USERIP}</a></td><!-- ENDIF -->
 </tr>
 <!-- END reg_user_row -->

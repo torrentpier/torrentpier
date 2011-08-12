@@ -21,24 +21,6 @@ if(bf($profiledata['user_opt'], 'user_opt', 'view_profile') && IS_GUEST)
 {	meta_refresh(append_sid("login.php?redirect={$_SERVER['REQUEST_URI']}", true));
     bb_die("<b>{$profiledata['username']}</b> " . $lang['FORBADE_VIEWING']);}
 
-//
-// Calculate the number of days this user has been a member ($memberdays)
-// Then calculate their posts per day
-//
-$regdate = $profiledata['user_regdate'];
-$memberdays = max(1, round((TIMENOW - $regdate) / 86400));
-$posts_per_day = $profiledata['user_posts'] / $memberdays;
-
-// Get the users percentage of total posts
-if ($profiledata['user_posts'] != 0)
-{
-	$total_posts = get_db_stat('postcount');
-	$percentage = ($total_posts) ? min(100, ($profiledata['user_posts'] / $total_posts) * 100) : 0;
-}
-else
-{
-	$percentage = 0;
-}
 $avatar_img = get_avatar($profiledata['user_avatar'], $profiledata['user_avatar_type'], !bf($profiledata['user_opt'], 'user_opt', 'allow_avatar'));
 
 if (!$ranks = $datastore->get('ranks'))
@@ -62,7 +44,7 @@ if (IS_ADMIN)
 	$rank_select = build_select('rank-sel', $rank_select, $user_rank);
 }
 
-if (bf($profiledata['user_opt'], 'user_opt', 'viewemail') || IS_ADMIN)
+if (bf($profiledata['user_opt'], 'user_opt', 'viewemail') || IS_AM)
 {
 	$email_uri = ($bb_cfg['board_email_form']) ? append_sid('profile.php?mode=email&amp;'. POST_USERS_URL .'='. $profiledata['user_id']) : 'mailto:'. $profiledata['user_email'];
 	$email = '<a class="editable" href="'. $email_uri .'">'. $profiledata['user_email'] .'</a>';
@@ -71,9 +53,6 @@ else
 {
 	$email = '';
 }
-
-$temp_url = append_sid("search.php?search_author=1&amp;uid={$profiledata['user_id']}");
-$search = '<a href="'. $temp_url .'">'. sprintf($lang['SEARCH_USER_POSTS'], $profiledata['username']) .'</a>';
 
 // Report
 //
@@ -95,11 +74,6 @@ if ($report_user && $report_user->auth_check('auth_write'))
 //
 // Generate page
 //
-if ($profiledata['user_id'] == $userdata['user_id'] || IS_ADMIN)
-{
-	require(BB_ROOT .'attach_mod/attachment_mod.php');
-	display_upload_attach_box_limits($profiledata['user_id']);
-}
 
 $signature = ($bb_cfg['allow_sig'] && $profiledata['user_sig']) ? $profiledata['user_sig'] : '';
 
@@ -124,12 +98,7 @@ $template->assign_vars(array(
 	'POSTER_RANK' 	=> $poster_rank,
 	'RANK_IMAGE' 	=> $rank_image,
 	'RANK_SELECT' 	=> $rank_select,
-	'POSTS_PER_DAY' => $posts_per_day,
 	'POSTS' 		=> $profiledata['user_posts'],
-	'PERCENTAGE' 	=> $percentage .'%',
-	'POST_DAY_STATS' => sprintf($lang['USER_POST_DAY_STATS'], $posts_per_day),
-	'POST_PERCENT_STATS' => sprintf($lang['USER_POST_PCT_STATS'], $percentage),
-	'SEARCH' 	=> $search,
 	'PM' 		=> '<a href="'. append_sid('privmsg.php?mode=post&amp;'. POST_USERS_URL .'='. $profiledata['user_id']) .'">'. $lang['SEND_PRIVATE_MESSAGE'] .'</a>',
 	'EMAIL' 	=> $email,
 	'WWW' 		=> $profiledata['user_website'],
