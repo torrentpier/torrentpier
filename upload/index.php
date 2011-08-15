@@ -37,6 +37,10 @@ $req_page .= ($viewcat) ? "_c{$viewcat}" : '';
 define('REQUESTED_PAGE', $req_page);
 caching_output(IS_GUEST, 'send', REQUESTED_PAGE .'_guest');
 
+$hide_cat_opt  = isset($user->opt_js['h_cat']) ? (string) $user->opt_js['h_cat'] : 0;
+$hide_cat_user = array_flip(explode('-', $hide_cat_opt));
+$showhide = isset($_GET['sh']) ? (int) $_GET['sh'] : 0;
+
 // Topics read tracks
 $tracking_topics = get_tracks('topic');
 $tracking_forums = get_tracks('forum');
@@ -226,6 +230,21 @@ $template->assign_vars(array(
 // Build index page
 foreach ($cat_forums as $cid => $c)
 {
+    $template->assign_block_vars('h_c', array(
+		'H_C_ID'     => $cid,
+		'H_C_TITLE'  => $cat_title_html[$cid],
+		'H_C_CHEKED' => in_array($cid, preg_split("/[-]+/", $hide_cat_opt)) ? 'checked' : '',
+	));
+
+    $template->assign_vars(array(
+		'H_C_AL_MESS'  => ($hide_cat_opt && !$showhide) ? true : false
+	));
+
+    if (!$showhide && isset($hide_cat_user[$cid]))
+	{
+		continue;
+	}
+
 	$template->assign_block_vars('c', array(
 		'CAT_ID'    => $cid,
 		'CAT_TITLE' => $cat_title_html[$cid],

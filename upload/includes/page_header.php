@@ -170,6 +170,7 @@ $template->assign_vars(array(
 	'IN_ADMIN'           => defined('IN_ADMIN'),
 	'QUIRKS_MODE'        => !empty($page_cfg['quirks_mode']),
 	'SHOW_ADS'           => (!$logged_in || isset($bb_cfg['show_ads_users'][$user->id]) || (!($is_admin || $is_mod) && $user->show_ads)),
+    'USER_HIDE_CAT'      => (BB_SCRIPT == 'index'),
 
 	'INCLUDE_BBCODE_JS'  => !empty($page_cfg['include_bbcode_js']),
 	'USER_OPTIONS_JS'    => ($logged_in) ? bb_json_encode($user->opt_js) : '{}',

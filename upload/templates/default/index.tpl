@@ -48,6 +48,10 @@
 
 <!-- IF SHOW_FORUMS -->
 
+<!-- IF H_C_AL_MESS -->
+<div class="row1 med tCenter mrg_2 pad_4 border bw_TRBL">Часть категорий скрыта "опциями показа" <span class="small">(<a class="small" href="index.php?sh=1">Показать все</a>)</span></div>
+<!-- ENDIF -->
+
 <!-- BEGIN c -->
 <div class="category">
 	<h3 class="cat_title"><a href="{c.U_VIEWCAT}">{c.CAT_TITLE}</a></h3>

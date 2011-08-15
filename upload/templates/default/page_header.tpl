@@ -344,7 +344,7 @@ function OpenInEditor ($file, $line)
 		<strong><a href="{U_REPORT_LIST}" class="mainmenu">{REPORT_LIST} &#0183; </a></strong>
 		<!-- END switch_report_list_new -->
     </td>
-	
+
 	<td style="padding: 2px;">
 	<div>
 	<form id="quick-search" action="" method="post" onsubmit="
@@ -403,13 +403,13 @@ function OpenInEditor ($file, $line)
    <table width="100%" cellpadding="0" cellspacing="0">
    <tr>
         <td class="tCenter pad_2">
-            <a href="{U_REGISTER}" id="register_link"><b>{L_REGISTER}</b></a> &#0183; 
+            <a href="{U_REGISTER}" id="register_link"><b>{L_REGISTER}</b></a> &#0183;
                 <form action="{S_LOGIN_ACTION}" method="post">
                     {L_USERNAME}: <input type="text" name="login_username" size="12" tabindex="1" accesskey="l" />
                     {L_PASSWORD}: <input type="password" name="login_password" size="12" tabindex="2" />
                     <label title="{L_AUTO_LOGIN}"><input type="checkbox" name="autologin" value="1" tabindex="3" />{L_REMEMBER}</label>&nbsp;
                     <input type="submit" name="login" value="{L_LOGIN}" tabindex="4" />
-                </form> &#0183; 
+                </form> &#0183;
             <a href="{U_SEND_PASSWORD}">{L_FORGOTTEN_PASSWORD}</a>
         </td>
     </tr>
@@ -487,6 +487,35 @@ function go_to_page ()
 				</label>
 			</div>
 			</fieldset>
+			<!-- IF USER_HIDE_CAT -->
+			<fieldset id="user_hide_cat">
+			<legend>Скрыть категории</legend>
+			<div id="h-cat-ctl" class="pad_4 nowrap">
+				<form autocomplete="off">
+					<!-- BEGIN h_c -->
+					<label><input class="h-cat-cbx" type="checkbox" value="{h_c.H_C_ID}" {h_c.H_C_CHEKED} />{h_c.H_C_TITLE}</label>
+					<!-- END h_c -->
+				</form>
+				<div class="spacer_6"></div>
+				<div class="tCenter">
+					<!-- IF H_C_AL_MESS -->
+					<input style="width: 100px;" type="button" onclick="$('input.h-cat-cbx').attr('checked',false); $('input#sec_h_cat').click(); return false;" value="Сбросить">
+					<!-- ENDIF -->
+					<input id="sec_h_cat" type="button" onclick="set_h_cat();" style="width: 100px;" value="Отправить">
+				    <script type="text/javascript">
+					function set_h_cat ()
+					{
+						h_cats = [];
+						$.each($('input.h-cat-cbx:checked'), function(i,el){
+							h_cats.push( $(this).val() );
+						});
+						user.set('h_cat', h_cats.join('-'), 365, true);
+					}
+					</script>
+				</div>
+			</div>
+			</fieldset>
+			<!-- ENDIF -->
 		</td>
 	</tr>
 	</table>
