@@ -999,6 +999,9 @@ $lang['TZ']['11'] = 'GMT + 11';
 $lang['TZ']['12'] = 'GMT + 12';
 $lang['TZ']['13'] = 'GMT + 13';
 
+$lang['TODAY'] = 'Сегодня';
+$lang['YESTERDAY'] = 'Вчера';
+
 $lang['DATETIME']['SUNDAY'] = 'Воскресенье';
 $lang['DATETIME']['MONDAY'] = 'Понедельник';
 $lang['DATETIME']['TUESDAY'] = 'Вторник';

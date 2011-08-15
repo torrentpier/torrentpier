@@ -1572,7 +1572,41 @@ function bb_date ($gmepoch, $format = false, $tz = null)
 	}
 	$date = gmdate($format, $gmepoch + (3600 * $tz));
 
-	return ($bb_cfg['translate_dates']) ? strtr(strtoupper($date), $lang['DATETIME']) : $date;
+	$thetime = ($bb_cfg['translate_dates']) ? strtr(strtoupper($date), $lang['DATETIME']) : $date;
+
+    $time_format = " H:i";
+
+    $date = getdate();
+    $today = $date['mday'];
+    $month = $date['mon'];
+    $year = $date['year'];
+
+    $forum_date_today = @gmdate ("d", $gmepoch + (3600 * $tz));
+    $forum_date_month = @gmdate ("m", $gmepoch + (3600 * $tz));
+    $forum_date_year = @gmdate ("Y", $gmepoch + (3600 * $tz));
+
+    if ($forum_date_today == $today && $forum_date_month == $month && $forum_date_year == $year)
+    {
+        $thetime = $lang['TODAY'] . @gmdate($time_format, $gmepoch + (3600 * $tz));
+    }
+    elseif ($today != 1 && $forum_date_today == ($today-1) && $forum_date_month == $month && $forum_date_year == $year)
+    {
+        $thetime = $lang['YESTERDAY'] . @gmdate($time_format, $gmepoch + (3600 * $tz));
+    }
+    elseif ($today == 1 && $month != 1)
+    {
+	    $yesterday = date ("t", mktime(0, 0, 0, ($month-1), 1, $year));
+	    if ($forum_date_today == $yesterday && $forum_date_month == ($month-1) && $forum_date_year == $year)
+	        $thetime = $lang['YESTERDAY'] . @gmdate($time_format, $gmepoch + (3600 * $tz));
+    }
+    elseif ($today == 1 && $month == 1)
+    {
+	    $yesterday = date ("t", mktime(0, 0, 0, 12, 1, ($year -1)));
+	    if ($forum_date_today == $yesterday && $forum_date_month == 12 && $forum_date_year == ($year-1))
+	        $thetime = $lang['YESTERDAY'] . @gmdate($time_format, $gmepoch + (3600 * $tz));
+    }
+
+    return ($thetime);
 }
 
 // Birthday

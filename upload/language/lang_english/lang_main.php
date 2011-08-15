@@ -992,6 +992,9 @@ $lang['TZ']['11'] = 'GMT + 11 Hours';
 $lang['TZ']['12'] = 'GMT + 12 Hours';
 $lang['TZ']['13'] = 'GMT + 13 Hours';
 
+$lang['TODAY'] = 'Today';
+$lang['YESTERDAY'] = 'Yesterday';
+
 $lang['DATETIME']['SUNDAY'] = 'Sunday';
 $lang['DATETIME']['MONDAY'] = 'Monday';
 $lang['DATETIME']['TUESDAY'] = 'Tuesday';
