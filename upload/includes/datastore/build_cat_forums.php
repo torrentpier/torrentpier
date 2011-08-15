@@ -73,6 +73,8 @@ foreach (DB()->fetch_rowset($sql) as $row)
 		$not_auth['user_read'][] = $fid;
 	}
 
+    $data['forum'][$fid] = $row;
+
 	// Store forums data
 	if ($parent_id = $row['forum_parent'])
 	{

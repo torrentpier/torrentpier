@@ -40,10 +40,12 @@ $req_page .= ($start) ? "_start{$start}" : '';
 define('REQUESTED_PAGE', $req_page);
 caching_output(IS_GUEST, 'send', REQUESTED_PAGE .'_guest');
 
-// Check if the user has actually sent a forum ID
-$sql = "SELECT * FROM ". BB_FORUMS ." WHERE forum_id = $forum_id LIMIT 1";
-
-if (!$forum_id OR !$forum_data = DB()->fetch_row($sql))
+if (!$forums = $datastore->get('cat_forums'))
+{
+	$datastore->update('cat_forums');
+	$forums = $datastore->get('cat_forums');
+}
+if (!$forum_id OR !$forum_data = @$forums['forum'][$forum_id])
 {
 	bb_die($lang['FORUM_NOT_EXIST']);
 }
