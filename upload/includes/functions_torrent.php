@@ -256,7 +256,7 @@ function change_tor_type ($attach_id, $tor_status_gold)
 function tracker_register ($attach_id, $mode = '')
 {
 	global $template, $attach_config, $bb_cfg, $lang, $return_message;
-	global $reg_mode;
+	global $reg_mode, $tr_cfg;
 
 	$attach_id = intval($attach_id);
 	$reg_mode = $mode;
@@ -425,6 +425,11 @@ function tracker_register ($attach_id, $mode = '')
 		{
 			message_die(GENERAL_ERROR, 'Could not update topics table', '', __LINE__, __FILE__, $sql);
 		}
+	}
+
+    if($tr_cfg['tor_topic_up'])
+	{
+		DB()->query("UPDATE ". BB_TOPICS ." SET topic_last_post_time = GREATEST(topic_last_post_time, ". (TIMENOW - 3*86400) .") WHERE topic_id = $topic_id LIMIT 1");
 	}
 
 	if ($reg_mode == 'request' || $reg_mode == 'newtopic')

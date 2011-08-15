@@ -159,7 +159,8 @@ $tr_cfg = array(
 	'leech_expire_factor'   => 60,
 	'limit_concurrent_ips'  => false,
 	'limit_seed_ips'        => 0,
-	'limit_leech_ips'       => 2,
+	'limit_leech_ips'       => 0,
+	'tor_topic_up'          => true,
 );
 
 $bb_cfg['show_dl_status_in_search'] = true;
