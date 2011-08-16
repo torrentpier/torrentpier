@@ -15,13 +15,13 @@ function validate_username ($username, $check_ban_and_taken = true)
 	// Length
 	if (strlen($username) > USERNAME_MAX_LENGTH)
 	{
-		return 'Слишком длинное имя пользователя';
+		return $lang['USERNAME_TOO_LONG'];
 	}
 	// Allowed symbols
 	if (!preg_match('#^['.$name_chars.']+$#iu', $username, $m))
 	{
 		$invalid_chars = preg_replace('#['.$name_chars.']#iu', '', $username);
-		return "Имя <b>$username</b> содержит неподходящие символы: <b>". htmlCHR($invalid_chars) .'</b>';
+		return "{$lang['USERNAME_INVALID']}: <b>". htmlCHR($invalid_chars) ."</b>";
 	}
 	// HTML Entities
 	if (preg_match_all('/&(#[0-9]+|[a-z]+);/iu', $username, $m))
@@ -30,7 +30,7 @@ function validate_username ($username, $check_ban_and_taken = true)
 		{
 			if (!preg_match('/^(&amp;|&lt;|&gt;)$/iu', $ent))
 			{
-				return 'Это имя содержит неподходящие символы';
+				return $lang['USERNAME_INVALID'];
 			}
 		}
 	}
@@ -43,7 +43,7 @@ function validate_username ($username, $check_ban_and_taken = true)
 		{
 			if ((!IS_GUEST && $row['username'] != $userdata['username']) || IS_GUEST)
 			{
-				return 'Пользователь с таким именем уже существует';
+				return $lang['USERNAME_TAKEN'];
 			}
 		}
 		// Запрещено
@@ -57,7 +57,7 @@ function validate_username ($username, $check_ban_and_taken = true)
 		{
 			if (preg_match("#^($banned_names_exp)$#iu", $username))
 			{
-				return 'Это имя было запрещено к использованию';
+				return $lang['USERNAME_DISALLOWED'];
 			}
 		}
 	}
@@ -68,13 +68,15 @@ function validate_username ($username, $check_ban_and_taken = true)
 // Check to see if email address is banned or already present in the DB
 function validate_email ($email, $check_ban_and_taken = true)
 {
+	global $lang;
+
 	if (!$email || !preg_match('#^([_a-z\d])[a-z\d\.\-_]+@[a-z\d\-]+\.([a-z\d\-]+\.)*?[a-z]{2,4}$#i', $email))
 	{
-		return 'Этот адрес email неправилен';
+		return $lang['EMAIL_INVALID'];
 	}
 	if (strlen($email) > USEREMAIL_MAX_LENGTH)
 	{
-		return 'Слишком длинный email [максимум: '. USEREMAIL_MAX_LENGTH .' символов]';
+		return $lang['EMAIL_TOO_LONG'];
 	}
 
 	if ($check_ban_and_taken)
@@ -89,7 +91,7 @@ function validate_email ($email, $check_ban_and_taken = true)
 		{
 			if (preg_match("#^($banned_emails_exp)$#i", $email))
 			{
-				return 'Этот адрес email находится в чёрном списке';
+				return sprintf($lang['EMAIL_BANNED'], $email);
 			}
 		}
 
@@ -97,7 +99,7 @@ function validate_email ($email, $check_ban_and_taken = true)
 
 		if (DB()->fetch_row("SELECT 1 FROM ". BB_USERS ." WHERE user_email = '$email_sql' LIMIT 1"))
 		{
-			return 'Этот адрес e-mail уже занят другим пользователем';
+			return $lang['EMAIL_TAKEN'];
 		}
 	}
 

@@ -200,7 +200,7 @@
 				<option value="del_torrent">{L_DELETE_TORRENT}</option>
 				<option value="del_torrent_move_topic">{L_DEL_MOVE_TORRENT}</option>
 			</select>
-			
+
 			&nbsp; <a href="#" onclick="change_torrents($('#tor-{postrow.attach.tor_reged.ATTACH_ID} select').val()); return false;"><input type="submit" value="{L_DO_SUBMIT}" class="liteoption" /></a>
 		<!-- ENDIF -->
 		&nbsp;</td>
@@ -335,7 +335,7 @@
 				<!-- ENDIF -->
 				<!-- ENDIF -->
 			</select>
-			
+
 			<a href="#" onclick="change_torrents($('#tor-{postrow.attach.tor_reged.ATTACH_ID} select').val()); return false;"><input type="submit" value="{L_EDIT}" class="liteoption" /></a>
 
 		<!-- ELSEIF TOR_HELP_LINKS -->
@@ -362,51 +362,45 @@ function humn_size (size) {
 	return size + ' ' + units[i];
 }
 
-tor_filelist_loaded = false;
-$(function(){
-	$('#tor-filelist-btn').click(function(){
-		if (tor_filelist_loaded) {
-			$('#tor-fl-wrap').toggle();
-			return false;
-		}
-		$('#tor-fl-wrap').show();
-
-		ajax.exec({action: 'view_torrent', attach_id: {postrow.attach.tor_reged.ATTACH_ID} });
-		ajax.callback.view_torrent = function(data) {
-			$('#tor-filelist').html(data.html);
-			$('#tor-filelist > ul.tree-root').treeview({
-				control: "#tor-fl-treecontrol"
-			});
-			$('#tor-filelist li.collapsable').each(function(){
-				var $li = $(this);
-				var dir_size = 0;
-				$('i', $li).each(function(){ dir_size += parseInt(this.innerHTML) });
-				$('span.b:first', $li).append(' &middot; <s>' + humn_size(dir_size) + '</s>');
-			});
-			$('#tor-filelist i').each(function(){
-				var size_bytes = this.innerHTML;
-				this.innerHTML = '('+ size_bytes +')';
-				$(this).prepend('<s>'+ humn_size(size_bytes) +'</s> ');
-			});
-			tor_filelist_loaded = true;
-		};
-		$('#tor-fl-treecontrol a').click(function(){ this.blur(); });
+ajax.tor_filelist_loaded = false;
+$('#tor-filelist-btn').click(function(){
+	if (ajax.tor_filelist_loaded) {
+		$('#tor-fl-wrap').toggle();
 		return false;
-	});
+	}
+	$('#tor-fl-wrap').show();
+
+	ajax.exec({action: 'view_torrent', attach_id: {postrow.attach.tor_reged.ATTACH_ID} });
+	ajax.callback.view_torrent = function(data) {
+		$('#tor-filelist').html(data.html);
+		$('#tor-filelist > ul.tree-root').treeview({
+			control: "#tor-fl-treecontrol"
+		});
+		$('#tor-filelist li.collapsable').each(function(){
+			var $li = $(this);
+			var dir_size = 0;
+			$('i', $li).each(function(){ dir_size += parseInt(this.innerHTML) });
+			$('span.b:first', $li).append(' &middot; <s>' + humn_size(dir_size) + '</s>');
+		});
+		$('#tor-filelist i').each(function(){
+			var size_bytes = this.innerHTML;
+			this.innerHTML = '('+ size_bytes +')';
+			$(this).prepend('<s>'+ humn_size(size_bytes) +'</s> ');
+		});
+		ajax.tor_filelist_loaded = true;
+	};
+	$('#tor-fl-treecontrol a').click(function(){ this.blur(); });
+	return false;
 });
 </script>
 
 <style type="text/css">
 #tor-fl-wrap {
 	margin: 12px auto 0; width: 95%;
-	border: 1px solid #A5AFB4; background: #F8F8F8;
-	display: none;
 }
 #fl-tbl-wrap { margin: 2px 14px 16px 14px; }
-#tor-fl-wrap td { background: #F8F8F8;; }
 #tor-filelist {
-	margin: 0 2px; padding: 8px 6px; border: 1px solid #B5BEC4;
-	background: #F4F4F4;
+	margin: 0 2px; padding: 8px 6px;
 	max-height: 284px; overflow: auto;
 }
 #tor-filelist i { color: #7A7A7A; padding-left: 4px; }
@@ -420,7 +414,7 @@ $(function(){
 #tor-fl-bgn { width: 200px; height: 300px; margin-right: 6px; border: 1px solid #B5BEC4;}
 </style>
 
-<div id="tor-fl-wrap">
+<div id="tor-fl-wrap" class="border bw_TRBL row2 hidden">
 <div id="fl-tbl-wrap">
 	<table class="w100 borderless" cellspacing="0" cellpadding="0">
 	<tr>
@@ -435,7 +429,7 @@ $(function(){
 	</tr>
 	<tr>
 		<!--<td class="vTop"><div id="tor-fl-bgn">YOUR ADS BLOCK</div></td>-->
-		<td class="vTop" style="width: 100%;"><div id="tor-filelist" class="med"><span class="loading-1">{L_LOADING}</span></div></td>
+		<td class="vTop" style="width: 100%;"><div id="tor-filelist" class="border bw_TRBL med row1"><span class="loading-1">{L_LOADING}</span></div></td>
 	</tr>
 	</table>
 </div>

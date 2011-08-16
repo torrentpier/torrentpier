@@ -63,11 +63,11 @@ switch ($field)
 
 		if($b_day || $b_md || $b_year)
 		{
-			if((bb_date(TIMENOW, 'Y') - $b_year) > $bb_cfg['birthday']['max_user_age'])
+			if((bb_date(TIMENOW, 'Y', '', false) - $b_year) > $bb_cfg['birthday']['max_user_age'])
 			{
 				$this->ajax_die(sprintf($lang['BIRTHDAY_TO_HIGH'], $bb_cfg['birthday']['max_user_age']));
 			}
-            else if((bb_date(TIMENOW, 'Y') - $b_year) < $bb_cfg['birthday']['min_user_age'])
+            else if((bb_date(TIMENOW, 'Y', '', false) - $b_year) < $bb_cfg['birthday']['min_user_age'])
 			{
 				$this->ajax_die(sprintf($lang['BIRTHDAY_TO_LOW'], $bb_cfg['birthday']['min_user_age']));
 			}
