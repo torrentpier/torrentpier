@@ -49,7 +49,8 @@
 <!-- IF SHOW_FORUMS -->
 
 <!-- IF H_C_AL_MESS -->
-<div class="row1 med tCenter mrg_2 pad_4 border bw_TRBL">Часть категорий скрыта "опциями показа" <span class="small">(<a class="small" href="index.php?sh=1">Показать все</a>)</span></div>
+<div class="row1 med tCenter pad_4 border bw_TRBL">Часть категорий скрыта "опциями показа" <span class="small">(<a class="small" href="index.php?sh=1">Показать все</a>)</span></div>
+<div class="cat_separator"></div>
 <!-- ENDIF -->
 
 <!-- BEGIN c -->

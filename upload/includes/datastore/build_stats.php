@@ -29,4 +29,22 @@ $data['leechers'] = number_format($row['leechers']);
 $data['peers']    = number_format($row['seeders'] + $row['leechers']);
 $data['speed']    = $row['speed'];
 
+// gender + birthday stat
+$sql = DB()->fetch_rowset("SELECT user_gender, user_id, username, user_birthday, user_level, user_rank FROM ". BB_USERS ." WHERE user_id NOT IN(". EXCLUDED_USERS_CSV .") ORDER BY user_level DESC, username");
+$birthday = array();
+foreach($sql as $row)
+{
+	if($row['user_gender'] == 1) @$data['male']++;
+	if($row['user_gender'] == 2) @$data['female']++;
+	if(!$row['user_gender']) @$data['unselect']++;
+	if($row['user_birthday']) $birthday[] = array(
+		'username'      => $row['username'],
+		'user_id'       => $row['user_id'],
+		'user_rank'     => $row['user_rank'],
+	    'user_level'    => $row['user_level'],
+	    'user_birthday' => $row['user_birthday'],
+	);
+}
+$data['birthday'] = $birthday;
+
 $this->store('stats', $data);
