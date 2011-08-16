@@ -57,7 +57,7 @@ $bb_cfg['css_ver'] = 1;
 
 // Increase number of revision after update
 $bb_cfg['tp_version'] = '2.1 Beta';
-$bb_cfg['tp_release_state'] = 'R219';
+$bb_cfg['tp_release_state'] = 'R223';
 $bb_cfg['tp_release_date'] = '17-08-2011';
 
 $bb_cfg['board_disabled_msg'] = 'форум временно отключен'; // 'forums temporarily disabled'; // show this msg if board has been disabled via ON/OFF trigger
@@ -110,7 +110,7 @@ $bb_cfg['datastore_type'] = 'filecache';
 $bb_cfg['server_name'] = (!empty($_SERVER['SERVER_NAME'])) ? $_SERVER['SERVER_NAME'] : 'torrentpier.me';         // The domain name from which this board runs
 $bb_cfg['server_port'] = (!empty($_SERVER['SERVER_PORT'])) ? $_SERVER['SERVER_PORT'] : 80;                       // The port your server is running on
 $bb_cfg['script_path'] = '/';                      // The path where FORUM is located relative to the domain name
-$bb_cfg['sitename'] = 'TorrentPier II - Torrent Tracker (see $bb_cfg[\'sitename\'] in config.php)';               // Name of your site
+$bb_cfg['sitename'] = (!empty($_SERVER['SERVER_NAME'])) ? $_SERVER['SERVER_NAME'] : 'TorrentPier II - Torrent Tracker (see $bb_cfg[\'sitename\'] in config.php)';               // Name of your site
 
 // Server load
 $bb_cfg['max_srv_load']      = 0;                  // 0 - disable
@@ -259,7 +259,7 @@ $bb_cfg['topic_tpl']['overall_header'] = TEMPLATES_DIR .'topic_tpl_overall_heade
 $bb_cfg['topic_tpl']['rules_video']    = TEMPLATES_DIR .'topic_tpl_rules_video.html';
 
 // Cookie
-$bb_cfg['cookie_domain'] = '';                     # '.yourdomain.com'
+$bb_cfg['cookie_domain'] = (!empty($_SERVER['SERVER_NAME'])) ? $_SERVER['SERVER_NAME'] : '';  # '.yourdomain.com'
 $bb_cfg['cookie_path']   = '/';                    # '/forum/'
 $bb_cfg['cookie_secure'] = (!empty($_SERVER['HTTPS']) ? 1 : 0); # 0
 $bb_cfg['cookie_prefix'] = 'bb_';                  # 'bb_'

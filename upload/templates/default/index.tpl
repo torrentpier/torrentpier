@@ -181,9 +181,12 @@
 				<p>{PEERS_STAT}</p>
 				<p>{SPEED_STAT}</p>
 
+				<!-- IF $bb_cfg['birthday']['enabled'] -->
 				<div class="hr1" style="margin: 5px 0 4px;"></div>
                 <p>{WHOSBIRTHDAY_TODAY}</p>
                 <p>{WHOSBIRTHDAY_WEEK}</p>
+				<!-- ENDIF -->
+				
                 <div class="hr1" style="margin: 5px 0 4px;"></div>
 
 				<p>{TOTAL_USERS_ONLINE}<!-- IF SHOW_ADMIN_OPTIONS --> &nbsp;{USERS_ONLINE_COUNTS}<!-- ENDIF --></p>

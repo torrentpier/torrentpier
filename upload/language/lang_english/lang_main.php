@@ -633,6 +633,7 @@ $lang['CURRENT_IMAGE'] = 'Current Image';
 
 $lang['NOTIFY_ON_PRIVMSG'] = 'Notify on new Private Message';
 $lang['HIDE_USER'] = 'Hide your online status';
+$lang['HIDDEN_USER'] = 'Hidden user';
 
 $lang['PROFILE_UPDATED'] = 'Your profile has been updated';
 $lang['PROFILE_UPDATED_INACTIVE'] = 'Your profile has been updated. However, you have changed vital details, thus your account is now inactive. Check your e-mail to find out how to reactivate your account, or if admin activation is required, wait for the administrator to reactivate it.';

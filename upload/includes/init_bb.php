@@ -271,6 +271,10 @@ define('POST_REPORT_URL', 'r');
 define('POST_REPORT_REASON_URL', 'r');
 // Report [END]
 
+// Gender
+define('MALE',          1);  
+define('FEMALE',        2);
+
 // Torrents     (reserved: -1)
 define('TOR_NOT_APPROVED',  0);   // не проверено
 define('TOR_CLOSED',        1);   // закрыто

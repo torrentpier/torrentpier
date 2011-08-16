@@ -29,16 +29,20 @@ $data['leechers'] = number_format($row['leechers']);
 $data['peers']    = number_format($row['seeders'] + $row['leechers']);
 $data['speed']    = $row['speed'];
 
-global $bb_cfg, $lang;
+global $bb_cfg;
 
 // gender stat
-$sql = DB()->fetch_rowset("SELECT user_gender FROM ". BB_USERS ." WHERE user_id NOT IN(". EXCLUDED_USERS_CSV .")");
-$data['male'] = $data['female'] = $data['unselect'] = 0;
-foreach($sql as $row)
+if ($bb_cfg['gender'])
 {
-	if($row['user_gender'] == 1) $data['male']++;
-	if($row['user_gender'] == 2) $data['female']++;
-	if(!$row['user_gender']) $data['unselect']++;
+    $sql = DB()->fetch_rowset("SELECT user_gender FROM ". BB_USERS ." WHERE user_id NOT IN(". EXCLUDED_USERS_CSV .")");
+    $data['male'] = $data['female'] = $data['unselect'] = 0;
+    
+	foreach($sql as $row)
+    {
+	    if($row['user_gender'] == MALE) $data['male']++;
+	    if($row['user_gender'] == FEMALE) $data['female']++;
+	    if(!$row['user_gender']) $data['unselect']++;
+    }
 }
 
 // birthday stat
@@ -70,8 +74,8 @@ if($bb_cfg['birthday']['check_day'] && $bb_cfg['birthday']['enabled'])
 		}
 	}
 
-	$data['birthday_today_list'] = ($birthday_today_list) ? $lang['BIRTHDAY_TODAY'] . join(', ', $birthday_today_list) : $lang['NOBIRTHDAY_TODAY'];
-	$data['birthday_week_list'] = ($birthday_week_list) ? sprintf($lang['BIRTHDAY_WEEK'], $bb_cfg['birthday']['check_day'], join(', ', $birthday_week_list)) : sprintf($lang['NOBIRTHDAY_WEEK'], $bb_cfg['birthday']['check_day']);
+	$data['birthday_today_list'] = $birthday_today_list;
+    $data['birthday_week_list']  = $birthday_week_list;
 }
 
 $this->store('stats', $data);

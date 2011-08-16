@@ -85,10 +85,12 @@ ajax.callback.gen_passkey = function(data){
 <tr>
 	<th colspan="2">{L_PROFILE_INFO}</th>
 </tr>
+<!-- IF $bb_cfg['gender'] -->
 <tr>
 	<td>{L_GENDER}:</td>
 	<td>{USER_GENDER}</td>
 </tr>
+<!-- ENDIF -->
 <!-- IF BIRTHDAY -->
 <tr>
 	<td>{L_BIRTHDAY}:</td>

@@ -204,7 +204,7 @@ $template->assign_vars(array(
 	'TOTAL_TOPICS'          => sprintf($lang['POSTED_TOPICS_TOTAL'], $stats['topiccount']),
 	'TOTAL_POSTS'           => sprintf($lang['POSTED_ARTICLES_TOTAL'], $stats['postcount']),
 	'TOTAL_USERS'           => sprintf($lang['REGISTERED_USERS_TOTAL'], $stats['usercount']),
-	'TOTAL_GENDER'          => sprintf($lang['USERS_TOTAL_GENDER'], $stats['male'], $stats['female'], $stats['unselect']),
+	'TOTAL_GENDER'          => ($bb_cfg['gender']) ? sprintf($lang['USERS_TOTAL_GENDER'], $stats['male'], $stats['female'], $stats['unselect']) : '',
 	'NEWEST_USER'           => sprintf($lang['NEWEST_USER'], '<a href="'. PROFILE_URL . $stats['newestuser']['user_id'] .'">', $stats['newestuser']['username'], '</a>'),
 
 	// Tracker stats
@@ -339,10 +339,10 @@ if ($bb_cfg['show_latest_news'])
 
 if($bb_cfg['birthday']['check_day'] && $bb_cfg['birthday']['enabled'])
 {
-	$template->assign_vars(array(
-		'WHOSBIRTHDAY_WEEK'  => $stats['birthday_week_list'],
-		'WHOSBIRTHDAY_TODAY' => $stats['birthday_today_list'],
-	));
+    $template->assign_vars(array(
+        'WHOSBIRTHDAY_WEEK'  => ($stats['birthday_week_list']) ? sprintf($lang['BIRTHDAY_WEEK'], $bb_cfg['birthday']['check_day'], join(', ', $stats['birthday_week_list'])) : sprintf($lang['NOBIRTHDAY_WEEK'], $bb_cfg['birthday']['check_day']),
+        'WHOSBIRTHDAY_TODAY' => ($stats['birthday_today_list']) ? $lang['BIRTHDAY_TODAY'] . join(', ', $stats['birthday_today_list']) : $lang['NOBIRTHDAY_TODAY'],
+    ));
 }
 
 // Allow cron

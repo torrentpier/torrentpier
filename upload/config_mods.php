@@ -37,5 +37,8 @@ $bb_cfg['birthday']['max_user_age'] = 100;
 $bb_cfg['birthday']['min_user_age'] = 10;
 $bb_cfg['birthday']['check_day']    = 7;
 
+// Gender
+$bb_cfg['gender'] = true;
+
 // CallSeed
 $bb_cfg['callseed'] = false;

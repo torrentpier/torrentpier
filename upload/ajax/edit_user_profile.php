@@ -47,7 +47,8 @@ switch ($field)
 		break;
 
 	case 'user_gender':
-	    if (!isset($lang['GENDER_SELECT'][$value]))
+	    if(!$bb_cfg['gender']) $this->ajax_die($lang['MODULE_OFF']);
+		if (!isset($lang['GENDER_SELECT'][$value]))
 		{
 			$this->ajax_die($lang['ERROR']);
 		}
