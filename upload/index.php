@@ -339,37 +339,9 @@ if ($bb_cfg['show_latest_news'])
 
 if($bb_cfg['birthday']['check_day'] && $bb_cfg['birthday']['enabled'])
 {
-	$this_year = bb_date(TIMENOW, 'Y', '', false);
-	$date_today = bb_date(TIMENOW, 'Ymd', '', false);
-	$date_forward = bb_date(TIMENOW + ($bb_cfg['birthday']['check_day']*86400), 'Ymd', '', false);
-
-	$birthday_today_list = $birthday_week_list = array();
-
-	foreach ($stats['birthday'] as $birthdayrow)
-	{
-		$user_birthday = realdate($birthdayrow['user_birthday'], 'md');
-	    $user_birthday2 = $this_year . $user_birthday;
-
-        if ($user_birthday2 < $date_today) $user_birthday2 += 10000;
-
-		if ($user_birthday2 > $date_today  && $user_birthday2 <= $date_forward)
-		{
-			// user are having birthday within the next days
-			$birthday_week_list[] = '<a href="'. PROFILE_URL . $birthdayrow['user_id'] .'">'. wbr($birthdayrow['username']) .'</a> <span class="small">('. birthday_age($birthdayrow['user_birthday'], 1) .')</span>';
-		}
-		elseif ($user_birthday2 == $date_today)
-     	{
-			//user have birthday today
-			$birthday_today_list[] = '<a href="'. PROFILE_URL . $birthdayrow['user_id'] .'">'. wbr($birthdayrow['username']) .'</a> <span class="small">('. birthday_age($birthdayrow['user_birthday'], 1) .')</span>';
-        }
-	}
-
-	$birthday_today_list = ($birthday_today_list) ? $lang['BIRTHDAY_TODAY'] . join(', ', $birthday_today_list) : $lang['NOBIRTHDAY_TODAY'];
-	$birthday_week_list = ($birthday_week_list) ? sprintf($lang['BIRTHDAY_WEEK'], $bb_cfg['birthday']['check_day'], join(', ', $birthday_week_list)) : sprintf($lang['NOBIRTHDAY_WEEK'], $bb_cfg['birthday']['check_day']);
-
 	$template->assign_vars(array(
-		'WHOSBIRTHDAY_WEEK'  => $birthday_week_list,
-		'WHOSBIRTHDAY_TODAY' => $birthday_today_list,
+		'WHOSBIRTHDAY_WEEK'  => $stats['birthday_week_list'],
+		'WHOSBIRTHDAY_TODAY' => $stats['birthday_today_list'],
 	));
 }
 
