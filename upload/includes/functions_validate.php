@@ -5,7 +5,7 @@ if (!defined('BB_ROOT')) die(basename(__FILE__));
 // !!! $username должен быть предварительно обработан clean_username() !!!
 function validate_username ($username, $check_ban_and_taken = true)
 {
-	global $userdata;
+	global $userdata, $lang;
 
 	static $name_chars = 'a-z0-9а-яё_@$%^&;(){}\#\-\'.:+ ';
 

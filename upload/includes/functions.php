@@ -2770,18 +2770,33 @@ function get_path_from_id ($id, $ext_id, $base_path, $first_div, $sec_div)
 	return ($base_path ? "$base_path/" : '') . ($id % $sec_div) .'/'. $id . ($ext ? ".$ext" : '');
 }
 
-function send_pm($user_id, $subject, $message)
-{	global $userdata;
+function send_pm($user_id, $subject, $message, $poster_id = false)
+{
+	global $userdata;
 
 	$subject = DB()->escape($subject);
 	$message = DB()->escape($message);
 
+    if($poster_id == BOT_UID)
+    {
+    	$poster_ip = '7f000001';
+    }
+    else if($row = DB()->fetch_row("SELECT user_reg_ip ". BB_USERS ." WHERE user_id = $poster_id"))
+    {
+    	$poster_ip = $row['user_reg_ip'];
+    }
+    else
+    {
+    	$poster_id = $userdata['user_id'];
+    	$poster_ip = USER_IP;
+    }
+
 	DB()->sql_query("INSERT INTO ". BB_PRIVMSGS ." (privmsgs_type, privmsgs_subject, privmsgs_from_userid, privmsgs_to_userid, privmsgs_date, privmsgs_ip)
-		VALUES (". PRIVMSGS_NEW_MAIL .", '$subject', {$userdata['user_id']}, $user_id, ". TIMENOW .", '". USER_IP ."')");
+		VALUES (". PRIVMSGS_NEW_MAIL .", '$subject', {$poster_id}, $user_id, ". TIMENOW .", '$poster_ip')");
 	$pm_id = DB()->sql_nextid();
 
 	DB()->sql_query("INSERT INTO " . BB_PRIVMSGS_TEXT . " (privmsgs_text_id, privmsgs_text)
-			VALUES ($privmsg_sent_id, '$message')");
+			VALUES ($pm_id, '$message')");
 
 	DB()->sql_query("UPDATE ". BB_USERS ." SET
 		user_new_privmsg = user_new_privmsg + 1,
@@ -2789,3 +2804,4 @@ function send_pm($user_id, $subject, $message)
 		user_newest_pm_id = $pm_id
 		WHERE user_id = $user_id");
 }
+
