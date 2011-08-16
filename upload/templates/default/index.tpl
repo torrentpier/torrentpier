@@ -172,6 +172,7 @@
 				<p>{TOTAL_TOPICS}</p>
 				<p>{TOTAL_POSTS}</p>
 				<p>{TOTAL_USERS}</p>
+				<p>{TOTAL_GENDER}</p>
 				<p>{NEWEST_USER}</p>
 
 				<div class="hr1" style="margin: 5px 0 4px;"></div>
@@ -181,6 +182,9 @@
 				<p>{SPEED_STAT}</p>
 
 				<div class="hr1" style="margin: 5px 0 4px;"></div>
+                <p>{WHOSBIRTHDAY_TODAY}</p>
+                <p>{WHOSBIRTHDAY_WEEK}</p>
+                <div class="hr1" style="margin: 5px 0 4px;"></div>
 
 				<p>{TOTAL_USERS_ONLINE}<!-- IF SHOW_ADMIN_OPTIONS --> &nbsp;{USERS_ONLINE_COUNTS}<!-- ENDIF --></p>
 				<p>{RECORD_USERS}</p>

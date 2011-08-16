@@ -149,6 +149,7 @@ $lang['POSTED_ARTICLES_ZERO_TOTAL'] = 'Наши пользователи не о
 $lang['POSTED_ARTICLES_TOTAL'] = 'Наши пользователи оставили сообщений: <b>%s</b>'; // Number of posts
 $lang['REGISTERED_USERS_ZERO_TOTAL'] = 'У нас нет зарегистрированных пользователей'; // # registered users
 $lang['REGISTERED_USERS_TOTAL'] = 'Всего зарегистрированных пользователей: <b>%s</b>'; // # registered users
+$lang['USERS_TOTAL_GENDER'] = 'Парней: <b>%d</b>, девушек: <b>%d</b>, ещё не определились: <b>%d</b>';
 $lang['NEWEST_USER'] = 'Последний зарегистрированный пользователь: <b>%s%s%s</b>'; // username
 
 // Tracker stats
@@ -1590,10 +1591,10 @@ $lang['NEW_THREADS'] = 'Создавать темы';
 // Регистрация
 $lang['CHOOSE_A_NAME'] = 'Вы должны выбрать имя';
 $lang['CHOOSE_E_MAIL'] = 'Вы должны указать e-mail';
-$lang['CHOOSE_PASSWORD'] = 'Вы должны указать пароль';
 $lang['CHOOSE_PASS'] = 'Поля для ввода пароля не должны быть пустыми!';
 $lang['CHOOSE_PASS_ERR'] = 'Введённые пароли не совпадают';
-$lang['CHOOSE_PASS_ERR_20'] = 'Пароль должен быть не длиннее 20 символов';
+$lang['CHOOSE_PASS_ERR_MIN'] = 'Пароль должен быть не короче %d символов';
+$lang['CHOOSE_PASS_ERR_MAX'] = 'Пароль должен быть не длиннее %d символов';
 $lang['CHOOSE_PASS_OK'] = 'Пароли совпадают';
 $lang['CHOOSE_PASS_REG_OK'] = 'Пароли совпадают, можете продолжить регистрацию';
 $lang['CHOOSE_PASS_FAILED'] = 'Для изменения пароля вы должны правильно указать текущий пароль';

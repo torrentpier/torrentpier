@@ -240,11 +240,15 @@ foreach ($profile_fields as $field => $can_edit)
 			// пароль для гостя и при смене пароля юзером
 			if (!empty($new_pass))
 			{
-				if (strlen($new_pass) > 20)
+				if (mb_strlen($new_pass, 'UTF-8') > 20)
 				{
-					$errors[] = $lang['CHOOSE_PASS_ERR_20'];
+					$errors[] = sprintf($lang['CHOOSE_PASS_ERR_MAX'], 20);
 				}
-				else if ($new_pass != $cfm_pass)
+				elseif (mb_strlen($new_pass, 'UTF-8') < 5)
+				{
+					$errors[] = sprintf($lang['CHOOSE_PASS_ERR_MIN'], 5);
+				}
+				elseif ($new_pass != $cfm_pass)
 				{
 					$errors[] = $lang['CHOOSE_PASS_ERR'];
 				}
@@ -255,7 +259,7 @@ foreach ($profile_fields as $field => $can_edit)
 			{
 				if (empty($new_pass))
 				{
-					$errors[] = $lang['CHOOSE_PASSWORD'];
+					$errors[] = $lang['CHOOSE_PASS'];
 				}
 			}
 			else

@@ -145,6 +145,7 @@ $lang['POSTED_ARTICLES_ZERO_TOTAL'] = 'Our users have posted a total of <b>0</b>
 $lang['POSTED_ARTICLES_TOTAL'] = 'Our users have posted a total of <b>%s</b> articles'; // Number of posts
 $lang['REGISTERED_USERS_ZERO_TOTAL'] = 'We have <b>0</b> registered users'; // # registered users
 $lang['REGISTERED_USERS_TOTAL'] = 'We have <b>%s</b> registered users'; // # registered users
+$lang['USERS_TOTAL_GENDER'] = 'Boys: <b>%d</b>, girls: <b>%d</b>, others: <b>%d</b>';
 $lang['NEWEST_USER'] = 'The newest registered user is <b>%s%s%s</b>'; // a href, username, /a
 
 // Tracker stats
@@ -576,11 +577,17 @@ $lang['GENDER_SELECT'] = array(
 	1 => 'Male',
 	2 => 'Female'
 );
+
 $lang['BIRTHDAY'] = 'Birthday';
 $lang['WRONG_BIRTHDAY_FORMAT'] = 'The birthday format was entered incorrectly.';
 $lang['AGE'] = 'Age';
 $lang['BIRTHDAY_TO_HIGH'] = 'Sorry, this site, does not accept user older than %d years old';
 $lang['BIRTHDAY_TO_LOW'] = 'Sorry, this site, does not accept user yonger than %d years old';
+$lang['BIRTHDAY_TODAY'] = 'Users with a birthday today:';
+$lang['BIRTHDAY_WEEK'] = 'Users with a birthday within the next %d days:';
+$lang['NOBIRTHDAY_WEEK'] = 'No users are having a birthday in the upcoming %d days'; // %d is substitude with the number of days
+$lang['NOBIRTHDAY_TODAY'] = 'No users have a birthday today';
+
 $lang['NO_THEMES'] = 'No Themes In database';
 $lang['TIMEZONE'] = 'Timezone';
 $lang['DATE_FORMAT_PROFILE'] = 'Date format';
@@ -1580,8 +1587,11 @@ $lang['CHOOSE_A_NAME'] = 'You should choose a name';
 $lang['CHOOSE_E_MAIL'] = 'You must specify the e-mail';
 $lang['CHOOSE_PASS'] = 'Field for the password must not be empty!';
 $lang['CHOOSE_PASS_ERR'] = 'Entered passwords do not match';
+$lang['CHOOSE_PASS_ERR_MIN'] = 'Your password must be at least %d characters';
+$lang['CHOOSE_PASS_ERR_MAX'] = 'Your password must be no longer than $d characters';
 $lang['CHOOSE_PASS_OK'] = 'Passwords match';
 $lang['CHOOSE_PASS_REG_OK'] = 'Passwords match, you can proceed with the registration';
+$lang['CHOOSE_PASS_FAILED'] = 'To change the password, you must correctly specify the current password';
 $lang['EMAILER_DISABLED'] = 'Sorry, this feature is temporarily not working';
 $lang['TERMS_ON'] = 'I agree with these terms and conditions';
 $lang['TERMS_OFF'] = 'I do not agree to these terms';

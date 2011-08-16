@@ -14,7 +14,7 @@ switch($mode)
 
 		if (empty($username))
 		{
-			$html = '<img src="./images/bad.gif"> <span class="leechmed bold">'.$lang['CHOOSE_A_NAME'].'</span>';
+			$html = '<img src="./images/bad.gif"> <span class="leechmed bold">'. $lang['CHOOSE_A_NAME'] .'</span>';
 		}
 		else if($err = validate_username($username))
 		{
@@ -26,7 +26,7 @@ switch($mode)
 
 		if (empty($email))
 		{
-			$html = '<img src="./images/bad.gif"> <span class="leechmed bold">'.$lang['CHOOSE_E_MAIL'].'</span>';
+			$html = '<img src="./images/bad.gif"> <span class="leechmed bold">'. $lang['CHOOSE_E_MAIL'] .'</span>';
 		}
 		else if($err = validate_email($email))
 		{
@@ -38,18 +38,29 @@ switch($mode)
 		$pass_confirm = (string) $this->request['pass_confirm'];
 		if (empty($pass) || empty($pass_confirm))
 		{
-			$html = '<img src="./images/bad.gif"> <span class="leechmed bold">'.$lang['CHOOSE_PASS'].'</span>';
+			$html = '<img src="./images/bad.gif"> <span class="leechmed bold">'. $lang['CHOOSE_PASS'] .'</span>';
 		}
 		else
 		{
-			if ($pass != $pass_confirm)
+		    if ($pass != $pass_confirm)
 			{
-				$html = '<img src="./images/bad.gif"> <span class="leechmed bold">'.$lang['CHOOSE_PASS_ERR'].'</span>';
+				$html = '<img src="./images/bad.gif"> <span class="leechmed bold">'. $lang['CHOOSE_PASS_ERR'] .'</span>';
 			}
 			else
 			{
-				$text = (IS_GUEST) ? $lang['CHOOSE_PASS_REG_OK'] : $lang['CHOOSE_PASS_OK'];
-				$html = '<img src="./images/good.gif"> <span class="seedmed bold">'.$text.'</span>';
+				if (mb_strlen($pass, 'UTF-8') > 20)
+				{
+					$html = '<img src="./images/bad.gif"> <span class="leechmed bold">'. sprintf($lang['CHOOSE_PASS_ERR_MAX'], 20) .'</span>';
+				}
+				elseif (mb_strlen($pass, 'UTF-8') < 5)
+				{
+					$html = '<img src="./images/bad.gif"> <span class="leechmed bold">'. sprintf($lang['CHOOSE_PASS_ERR_MIN'], 5) .'</span>';
+				}
+				else
+				{
+					$text = (IS_GUEST) ? $lang['CHOOSE_PASS_REG_OK'] : $lang['CHOOSE_PASS_OK'];
+					$html = '<img src="./images/good.gif"> <span class="seedmed bold">'. $text .'</span>';
+			    }
 			}
 		}
 	break;
