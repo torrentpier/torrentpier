@@ -35,6 +35,7 @@ $bb_cfg['no_avatar'] = 'images/avatars/gallery/noavatar.png';
 $bb_cfg['birthday']['enabled']      = true;
 $bb_cfg['birthday']['max_user_age'] = 100;
 $bb_cfg['birthday']['min_user_age'] = 10;
+$bb_cfg['birthday']['check_day']    = 7;
 
 // CallSeed
 $bb_cfg['callseed'] = false;

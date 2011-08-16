@@ -726,7 +726,7 @@ if($bb_cfg['birthday']['enabled'] && $mode != 'register')
 	}
 	$s_birthday .= build_select('b_md', $months, $b_md);
 
-	$year = date('Y');
+	$year = bb_date(TIMENOW, 'Y', '', false);
 	$years = array($lang['DELTA_TIME']['INTERVALS']['year'][0] => 0);
 	for($i=$year-$bb_cfg['birthday']['max_user_age']; $i<=$year-$bb_cfg['birthday']['min_user_age']; $i++)
 	{

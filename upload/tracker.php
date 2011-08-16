@@ -780,7 +780,7 @@ if ($allowed_forums)
 				'VIEWS'        => $tor['topic_views'],
 				'ADDED_RAW'    => $tor['reg_time'],
 				'ADDED_TIME'   => bb_date($tor['reg_time'], $time_format),
-				'ADDED_DATE'   => bb_date($tor['reg_time'], $date_format),
+				'ADDED_DATE'   => bb_date($tor['reg_time'], $date_format, '', false),
 			));
 		}
 	}

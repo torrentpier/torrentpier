@@ -582,11 +582,17 @@ $lang['GENDER_SELECT'] = array(
 	2 => 'Женский'
 );
 $lang['MODULE_OFF'] = 'Модуль отключен!';
+
 $lang['BIRTHDAY'] = 'День рождения';
 $lang['WRONG_BIRTHDAY_FORMAT'] = 'Дата рождения указана неверно';
 $lang['AGE'] = 'Возраст';
 $lang['BIRTHDAY_TO_HIGH'] = 'Извините, сайт запрещено посещать людям старше %d лет';
 $lang['BIRTHDAY_TO_LOW'] = 'Извините, сайт запрещено посещать детям младше %d лет';
+$lang['BIRTHDAY_TODAY'] = 'Пользователи, празднующие День Рождения сегодня:';
+$lang['BIRTHDAY_WEEK'] = 'Пользователи, празднующие День Рождения в ближайшие %d дней: %s';
+$lang['NOBIRTHDAY_WEEK'] = 'В ближайшие %d дней никто не празднует День Рождения.'; // %d is substitude with the number of days
+$lang['NOBIRTHDAY_TODAY'] = 'Сегодня никто не празднует День Рождения.';
+
 $lang['NO_THEMES'] = 'В базе нет цветовых схем';
 $lang['TIMEZONE'] = 'Часовой пояс';
 $lang['DATE_FORMAT_PROFILE'] = 'Формат даты';
