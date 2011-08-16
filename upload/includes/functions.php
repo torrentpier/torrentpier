@@ -1692,10 +1692,10 @@ function realdate($date, $format = "Ymd")
 	return bb_date($date*86400+1, $format, 0);
 }
 
-function birthday_age($date)
+function birthday_age($date, $list = 0)
 {
 	if(!$date) return;
-	return delta_time(mktime(11, 0, 0, realdate($date, 'm'), realdate($date, 'd'), realdate($date, 'Y')));
+	return delta_time(mktime(11, 0, 0, realdate($date, 'm'), realdate($date, 'd'), (realdate($date, 'Y') - $list)));
 }
 
 //
