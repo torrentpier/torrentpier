@@ -145,12 +145,12 @@ $lang['POSTED_ARTICLES_ZERO_TOTAL'] = 'Our users have posted a total of <b>0</b>
 $lang['POSTED_ARTICLES_TOTAL'] = 'Our users have posted a total of <b>%s</b> articles'; // Number of posts
 $lang['REGISTERED_USERS_ZERO_TOTAL'] = 'We have <b>0</b> registered users'; // # registered users
 $lang['REGISTERED_USERS_TOTAL'] = 'We have <b>%s</b> registered users'; // # registered users
-$lang['USERS_TOTAL_GENDER'] = 'Boys: <b>%d</b>, girls: <b>%d</b>, others: <b>%d</b>';
+$lang['USERS_TOTAL_GENDER'] = 'Boys: <b>%d</b>, Girls: <b>%d</b>, Others: <b>%d</b>';
 $lang['NEWEST_USER'] = 'The newest registered user is <b>%s%s%s</b>'; // a href, username, /a
 
 // Tracker stats
-$lang['TORRENTS_STAT'] = 'Torrents: <b style="color: blue;">%s</b>,&nbsp; total size: <b>%s</b>'; // first %s = number of torrents, second %s is the total size.
-$lang['PEERS_STAT'] = 'Peers: <b>%s</b>,&nbsp; seeders: <b class="seedmed">%s</b>,&nbsp; leechers: <b class="leechmed">%s</b>'; // first %s = number of peers, second %s = number of seeders,  third %s = number of leechers.
+$lang['TORRENTS_STAT'] = 'Torrents: <b style="color: blue;">%s</b>,&nbsp; Total size: <b>%s</b>'; // first %s = number of torrents, second %s is the total size.
+$lang['PEERS_STAT'] = 'Peers: <b>%s</b>,&nbsp; Seeders: <b class="seedmed">%s</b>,&nbsp; Leechers: <b class="leechmed">%s</b>'; // first %s = number of peers, second %s = number of seeders,  third %s = number of leechers.
 $lang['SPEED_STAT'] = 'Total speed: <b>%s</b>&nbsp;'; // %s = total speed.
 
 $lang['NO_NEW_POSTS_LAST_VISIT'] = 'No new posts since your last visit';
@@ -547,6 +547,8 @@ $lang['HIDDEN_EMAIL'] = '[ Hidden ]';
 $lang['INTERESTS'] = 'Interests';
 $lang['OCCUPATION'] = 'Occupation';
 $lang['POSTER_RANK'] = 'Poster rank';
+$lang['AWARDED_RANK'] = 'Awarded rank';
+$lang['SHOT_RANK'] = 'Shot rank';
 
 $lang['TOTAL_POSTS'] = 'Total posts';
 $lang['SEARCH_USER_POSTS'] = 'Find posts'; // Find all posts by username
@@ -583,8 +585,8 @@ $lang['WRONG_BIRTHDAY_FORMAT'] = 'The birthday format was entered incorrectly.';
 $lang['AGE'] = 'Age';
 $lang['BIRTHDAY_TO_HIGH'] = 'Sorry, this site, does not accept user older than %d years old';
 $lang['BIRTHDAY_TO_LOW'] = 'Sorry, this site, does not accept user yonger than %d years old';
-$lang['BIRTHDAY_TODAY'] = 'Users with a birthday today:';
-$lang['BIRTHDAY_WEEK'] = 'Users with a birthday within the next %d days:';
+$lang['BIRTHDAY_TODAY'] = 'Users with a birthday today: ';
+$lang['BIRTHDAY_WEEK'] = 'Users with a birthday within the next %d days: %s';
 $lang['NOBIRTHDAY_WEEK'] = 'No users are having a birthday in the upcoming %d days'; // %d is substitude with the number of days
 $lang['NOBIRTHDAY_TODAY'] = 'No users have a birthday today';
 

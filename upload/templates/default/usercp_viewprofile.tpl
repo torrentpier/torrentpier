@@ -21,7 +21,7 @@ ajax.callback.edit_user_profile = function(data){
 
 // change_user_rank
 ajax.change_user_rank = function(uid, rank_id) {
-	$('#rank-msg').html('<i class="loading-1">выполняется...</i>');
+	$('#rank-msg').html('<i class="loading-1">{L_LOADING}</i>');
 	ajax.exec({
 		action  : 'change_user_rank',
 		user_id : uid,

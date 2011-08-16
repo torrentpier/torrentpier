@@ -290,7 +290,7 @@ class ajax_common
 
 	function change_user_rank ()
 	{
-		global $datastore;
+		global $datastore, $lang;
 
 		$ranks   = $datastore->get('ranks');
 		$rank_id = intval($this->request['rank_id']);
@@ -306,7 +306,7 @@ class ajax_common
 
 		DB()->query("UPDATE ". BB_USERS ." SET user_rank = $rank_id WHERE user_id = $user_id LIMIT 1");
 
-		$this->response['html'] = ($rank_id != 0) ? 'Присвоено звание <b>'. $ranks[$rank_id]['rank_title'] .'</b>' : 'Звание снято';
+		$this->response['html'] = ($rank_id != 0) ? $lang['AWARDED_RANK'] . ' <b> '. $ranks[$rank_id]['rank_title'] .'</b>' : $lang['SHOT_RANK'];
 	}
 
     function change_user_opt ()

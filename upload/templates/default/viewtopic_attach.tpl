@@ -428,7 +428,7 @@ $('#tor-filelist-btn').click(function(){
 		</td>
 	</tr>
 	<tr>
-		<!--<td class="vTop"><div id="tor-fl-bgn">YOUR ADS BLOCK</div></td>-->
+		<!--<td class="vTop"><div id="tor-fl-bgn" class="border bw_TRBL med row1">YOUR ADS BLOCK</div></td>-->
 		<td class="vTop" style="width: 100%;"><div id="tor-filelist" class="border bw_TRBL med row1"><span class="loading-1">{L_LOADING}</span></div></td>
 	</tr>
 	</table>

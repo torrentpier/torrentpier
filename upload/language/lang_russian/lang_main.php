@@ -149,11 +149,11 @@ $lang['POSTED_ARTICLES_ZERO_TOTAL'] = 'Наши пользователи не о
 $lang['POSTED_ARTICLES_TOTAL'] = 'Наши пользователи оставили сообщений: <b>%s</b>'; // Number of posts
 $lang['REGISTERED_USERS_ZERO_TOTAL'] = 'У нас нет зарегистрированных пользователей'; // # registered users
 $lang['REGISTERED_USERS_TOTAL'] = 'Всего зарегистрированных пользователей: <b>%s</b>'; // # registered users
-$lang['USERS_TOTAL_GENDER'] = 'Парней: <b>%d</b>, девушек: <b>%d</b>, ещё не определились: <b>%d</b>';
+$lang['USERS_TOTAL_GENDER'] = 'Парней: <b>%d</b>, Девушек: <b>%d</b>, Не указан: <b>%d</b>';
 $lang['NEWEST_USER'] = 'Последний зарегистрированный пользователь: <b>%s%s%s</b>'; // username
 
 // Tracker stats
-$lang['TORRENTS_STAT'] = 'Раздач: <b style="color: blue;">%s</b>,&nbsp; общий размер: <b>%s</b>'; // first %s = number of torrents, second %s is the total size.
+$lang['TORRENTS_STAT'] = 'Раздач: <b style="color: blue;">%s</b>,&nbsp; Общий размер: <b>%s</b>'; // first %s = number of torrents, second %s is the total size.
 $lang['PEERS_STAT'] = 'Пиров: <b>%s</b>,&nbsp; Сидов: <b class="seedmed">%s</b>,&nbsp; Личеров: <b class="leechmed">%s</b>'; // first %s = number of peers, second %s = number of seeders,  third %s = number of leechers.
 $lang['SPEED_STAT'] = 'Скорость обмена: <b>%s</b>&nbsp;'; // %s = total speed.
 
@@ -552,6 +552,9 @@ $lang['HIDDEN_EMAIL'] = '[ скрыт ]';
 $lang['INTERESTS'] = 'Интересы';
 $lang['OCCUPATION'] = 'Род занятий';
 $lang['POSTER_RANK'] = 'Звание';
+$lang['AWARDED_RANK'] = 'Присвоено звание';
+$lang['SHOT_RANK'] = 'Звание снято';
+
 
 $lang['TOTAL_POSTS'] = 'Всего сообщений';
 $lang['SEARCH_USER_POSTS'] = 'Найти сообщения'; // Find all posts by username
@@ -589,7 +592,7 @@ $lang['WRONG_BIRTHDAY_FORMAT'] = 'Дата рождения указана не�
 $lang['AGE'] = 'Возраст';
 $lang['BIRTHDAY_TO_HIGH'] = 'Извините, сайт запрещено посещать людям старше %d лет';
 $lang['BIRTHDAY_TO_LOW'] = 'Извините, сайт запрещено посещать детям младше %d лет';
-$lang['BIRTHDAY_TODAY'] = 'Пользователи, празднующие День Рождения сегодня:';
+$lang['BIRTHDAY_TODAY'] = 'Пользователи, празднующие День Рождения сегодня: ';
 $lang['BIRTHDAY_WEEK'] = 'Пользователи, празднующие День Рождения в ближайшие %d дней: %s';
 $lang['NOBIRTHDAY_WEEK'] = 'В ближайшие %d дней никто не празднует День Рождения.'; // %d is substitude with the number of days
 $lang['NOBIRTHDAY_TODAY'] = 'Сегодня никто не празднует День Рождения.';
