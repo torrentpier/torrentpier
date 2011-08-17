@@ -1609,6 +1609,7 @@ $lang['ON'] = 'on';
 $lang['OFF'] = 'off';
 $lang['MEMORY'] = 'Mem: ';
 $lang['QUERIES'] = 'queries';
+$lang['LIMIT'] = 'Limit:';
 
 // Attach Guest
 $lang['DOWNLOAD_INFO'] = 'Download free and at maximum speed!';

@@ -273,7 +273,7 @@ foreach ($cat_forums as $cid => $c)
 			$template->assign_block_vars('c.f.sf', array(
 				'SF_ID'   => $fid,
 				'SF_NAME' => $fname_html,
-				'SF_NEW'  => $new ? $lang['NEW'] : '',
+				'SF_NEW'  => $new ? ' new' : '',
 			));
 			continue;
 		}

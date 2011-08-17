@@ -1617,6 +1617,7 @@ $lang['ON'] = 'вкл';
 $lang['OFF'] = 'выкл';
 $lang['MEMORY'] = 'Память: ';
 $lang['QUERIES'] = 'запр.';
+$lang['LIMIT'] = 'Лимит:';
 
 // Attach Guest
 $lang['DOWNLOAD_INFO'] = 'Скачать бесплатно и на максимальной скорости!';
