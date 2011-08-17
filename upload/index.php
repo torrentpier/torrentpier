@@ -355,7 +355,7 @@ if ($bb_cfg['birthday']['check_day'] && $bb_cfg['birthday']['enabled'])
 	{
 		foreach($stats['birthday_today_list'] as $today)
 		{
-			$today_list[] = '<a href="'. PROFILE_URL . $today['user_id'] .'">'. $today['username'] .'</a>  <span class="small">('. birthday_age($today['age'], 1) .')</span>';
+			$today_list[] = '<a href="'. PROFILE_URL . $today['user_id'] .'">'. $today['username'] .'</a>  <span class="small">('. birthday_age($today['age']) .')</span>';
 		}
 		$today_list = join(', ', $today_list);
 		$today_list = $lang['BIRTHDAY_TODAY'] . $today_list;
