@@ -36,7 +36,7 @@ if ($bb_cfg['gender'])
 {
     $sql = DB()->fetch_rowset("SELECT user_gender FROM ". BB_USERS ." WHERE user_id NOT IN(". EXCLUDED_USERS_CSV .")");
     $data['male'] = $data['female'] = $data['unselect'] = 0;
-    
+
 	foreach($sql as $row)
     {
 	    if($row['user_gender'] == MALE) $data['male']++;
@@ -46,7 +46,7 @@ if ($bb_cfg['gender'])
 }
 
 // birthday stat
-if($bb_cfg['birthday']['check_day'] && $bb_cfg['birthday']['enabled'])
+if ($bb_cfg['birthday']['check_day'] && $bb_cfg['birthday']['enabled'])
 {
 	$sql = DB()->fetch_rowset("SELECT user_id, username, user_birthday, user_birthday, user_level, user_rank FROM ". BB_USERS ." WHERE user_id NOT IN(". EXCLUDED_USERS_CSV .") ORDER BY user_level DESC, username");
 	$this_year = bb_date(TIMENOW, 'Y', '', false);
@@ -65,12 +65,24 @@ if($bb_cfg['birthday']['check_day'] && $bb_cfg['birthday']['enabled'])
 		if ($user_birthday2 > $date_today  && $user_birthday2 <= $date_forward)
 		{
 			// user are having birthday within the next days
-			$birthday_week_list[] = '<a href="'. PROFILE_URL . $row['user_id'] .'">'. wbr($row['username']) .'</a> <span class="small">('. birthday_age($row['user_birthday'], 1) .')</span>';
+			$birthday_week_list[] = array(
+				'user_id'  => $row['user_id'],
+				'username' => $row['username'],
+				'level'    => $row['user_level'],
+				'rank'     => $row['user_rank'],
+				'age'      => $row['user_birthday'],
+			);
 		}
 		elseif ($user_birthday2 == $date_today)
 		{
 			//user have birthday today
-			$birthday_today_list[] = '<a href="'. PROFILE_URL . $row['user_id'] .'">'. wbr($row['username']) .'</a> <span class="small">('. birthday_age($row['user_birthday'], 1) .')</span>';
+			$birthday_today_list[] = array(
+				'user_id'  => $row['user_id'],
+				'username' => $row['username'],
+				'level'    => $row['user_level'],
+				'rank'     => $row['user_rank'],
+				'age'      => $row['user_birthday'],
+			);
 		}
 	}
 

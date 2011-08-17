@@ -337,12 +337,35 @@ if ($bb_cfg['show_latest_news'])
 	}
 }
 
-if($bb_cfg['birthday']['check_day'] && $bb_cfg['birthday']['enabled'])
+if ($bb_cfg['birthday']['check_day'] && $bb_cfg['birthday']['enabled'])
 {
-    $template->assign_vars(array(
-        'WHOSBIRTHDAY_WEEK'  => ($stats['birthday_week_list']) ? sprintf($lang['BIRTHDAY_WEEK'], $bb_cfg['birthday']['check_day'], join(', ', $stats['birthday_week_list'])) : sprintf($lang['NOBIRTHDAY_WEEK'], $bb_cfg['birthday']['check_day']),
-        'WHOSBIRTHDAY_TODAY' => ($stats['birthday_today_list']) ? $lang['BIRTHDAY_TODAY'] . join(', ', $stats['birthday_today_list']) : $lang['NOBIRTHDAY_TODAY'],
-    ));
+	$week_list = $today_list = array();
+	if ($stats['birthday_week_list'])
+	{
+		foreach($stats['birthday_week_list'] as $week)
+		{
+			$week_list[] = '<a href="'. PROFILE_URL . $week['user_id'] .'">'. $week['username'] .'</a> <span class="small">('. birthday_age($week['age'], 1) .')</span>';
+		}
+		$week_list = join(', ', $week_list);
+		$week_list = sprintf($lang['BIRTHDAY_WEEK'], $bb_cfg['birthday']['check_day'], $week_list);
+	}
+	else $week_list = sprintf($lang['NOBIRTHDAY_WEEK'], $bb_cfg['birthday']['check_day']);
+
+	if ($stats['birthday_today_list'])
+	{
+		foreach($stats['birthday_today_list'] as $today)
+		{
+			$today_list[] = '<a href="'. PROFILE_URL . $today['user_id'] .'">'. $today['username'] .'</a>  <span class="small">('. birthday_age($today['age'], 1) .')</span>';
+		}
+		$today_list = join(', ', $today_list);
+		$today_list = $lang['BIRTHDAY_TODAY'] . $today_list;
+	}
+	else $today_list = $lang['NOBIRTHDAY_TODAY'];
+
+	$template->assign_vars(array(
+		'WHOSBIRTHDAY_WEEK'  => $week_list,
+		'WHOSBIRTHDAY_TODAY' => $today_list,
+	));
 }
 
 // Allow cron
