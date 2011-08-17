@@ -9,20 +9,10 @@
 </style>
 <div id="infobox-body">
 
-<p>Размещение рекламы на <?php echo $bb_cfg['sitename']?></p>
+<h2 class="bold">Размещение рекламы на <a href="http://<?php echo ($bb_cfg['server_port'] != 80) ? "{$bb_cfg['server_name']}:{$bb_cfg['server_port']}" : $bb_cfg['server_name']; ?>"><?php echo $bb_cfg['sitename']?></a></h2>
 
-<p><script type="text/javascript">document.write('По вопросам размещения рекламы обращайтесь по адресу <b>adv</b> <i>щенёнок</i> <b><?php echo $bb_cfg['server_name']?></b>');</script></p>
+<p>По вопросам размещения рекламы обращайтесь по адресу: <strong><a href="mailto:<?php echo $bb_cfg['adv_email']; ?>" class="gen"><?php echo $bb_cfg['adv_email']; ?></a></strong></p>
 
-<!--
-<p>
-	Так же вы можете
-	<a href="http://www.mestkom.ru/asp/pay.asp?id_d=337080" onclick="
-		opener.window.location.href = this.href;
-		opener.focus();
-		window.close();
-	">купить показы на местком.ру</a>
-</p>
--->
 
 </div><!--/infobox-body-->
 </div>

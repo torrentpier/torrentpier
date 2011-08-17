@@ -57,7 +57,7 @@ $bb_cfg['css_ver'] = 1;
 
 // Increase number of revision after update
 $bb_cfg['tp_version'] = '2.1 Beta';
-$bb_cfg['tp_release_state'] = 'R223';
+$bb_cfg['tp_release_state'] = 'R227';
 $bb_cfg['tp_release_date'] = '17-08-2011';
 
 $bb_cfg['board_disabled_msg'] = 'форум временно отключен'; // 'forums temporarily disabled'; // show this msg if board has been disabled via ON/OFF trigger
@@ -289,6 +289,7 @@ $bb_cfg['groupcp_send_email']      = true;
 
 $bb_cfg['tech_admin_email']        = 'admin@' . $bb_cfg['server_name'];  // email for sending error reports
 $bb_cfg['abuse_email']             = 'abuse@' . $bb_cfg['server_name'];
+$bb_cfg['adv_email']               = 'adv@' . $bb_cfg['server_name'];
 
 // AJAX
 define('AJAX_HTML_DIR', BB_ROOT .'ajax/html/');
