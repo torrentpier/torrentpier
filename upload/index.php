@@ -344,7 +344,7 @@ if ($bb_cfg['birthday']['check_day'] && $bb_cfg['birthday']['enabled'])
 	{
 		foreach($stats['birthday_week_list'] as $week)
 		{
-			$week_list[] = '<a href="'. PROFILE_URL . $week['user_id'] .'">'. $week['username'] .'</a> <span class="small">('. birthday_age($week['age'], 1) .')</span>';
+			$week_list[] = '<a href="'. PROFILE_URL . $week['user_id'] .'">'. $week['username'] .'</a> <span class="small">('. birthday_age($week['age']) .')</span>';
 		}
 		$week_list = join(', ', $week_list);
 		$week_list = sprintf($lang['BIRTHDAY_WEEK'], $bb_cfg['birthday']['check_day'], $week_list);
@@ -355,7 +355,7 @@ if ($bb_cfg['birthday']['check_day'] && $bb_cfg['birthday']['enabled'])
 	{
 		foreach($stats['birthday_today_list'] as $today)
 		{
-			$today_list[] = '<a href="'. PROFILE_URL . $today['user_id'] .'">'. $today['username'] .'</a>  <span class="small">('. birthday_age($today['age']) .')</span>';
+			$today_list[] = '<a href="'. PROFILE_URL . $today['user_id'] .'">'. $today['username'] .'</a>  <span class="small">('. birthday_age($today['age'], 1) .')</span>';
 		}
 		$today_list = join(', ', $today_list);
 		$today_list = $lang['BIRTHDAY_TODAY'] . $today_list;
