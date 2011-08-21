@@ -264,15 +264,15 @@ function set_hid_chbox (id)
 			<div class="clear"></div>
 		</div>
 
-		<div class="post_wrap">
-			<div class="post_body">
+		<div class="post_body">
+			<div class="post_wrap">
 			    <span id="pp_{postrow.POST_ID}">{postrow.MESSAGE}</span>
 				<span id="pe_{postrow.POST_ID}"></span>
 				{postrow.ATTACHMENTS}
-			</div><!--/post_body-->
+			</div><!--/post_wrap-->
 			<!-- IF postrow.SIGNATURE -->{postrow.SIGNATURE}<!-- ENDIF -->
 			<!-- IF postrow.EDITED_MESSAGE --><div class="last_edited">{postrow.EDITED_MESSAGE}</div><!-- ENDIF -->
-		</div><!--/post_wrap-->
+		</div><!--/post_body-->
 
 	</td>
 </tr>

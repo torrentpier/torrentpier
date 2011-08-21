@@ -357,7 +357,7 @@ function OpenInEditor ($file, $line)
 		<select id="search-action">
 			<option value="tracker.php#results" selected="selected"> {L_TRACKER_S} </option>
 			<option value="search.php"> {L_FORUM_S} </option>
-					</select>
+		</select>
 		<input type="submit" class="med bold" value="&raquo;" style="width: 30px;" />
 	</form>
 	</div>
@@ -374,28 +374,14 @@ function OpenInEditor ($file, $line)
     </table>
 </div>
 <!--/logout-->
-
 <div class="menu-sub" id="dls-menu">
-<table class="nowrap" cellspacing="1" cellpadding="4">
-<tr>
-    <th>&nbsp;</th>
-</tr>
-<tr>
-	<td>
-		<fieldset id="show-only">
-		<legend>{L_SEARCH}</legend>
-			<div class="bold nowrap pad_2">
-				<p class="mrg_4"><a class="med" href="{U_TRACKER}?rid={SESSION_USER_ID}#results">{L_CUR_UPLOADS}</a></p>
-				<p class="mrg_4"><a class="med" href="{U_CUR_DOWNLOADS}#torrent">{L_CUR_DOWNLOADS}</a></p>
-				<p class="mrg_4"><a class="med" href="{U_SEARCH}?dlu={SESSION_USER_ID}&dlc=1">{L_SEARCH_DL_COMPLETE_DOWNLOADS}</a></p>
-		        <p class="mrg_4"><a class="med" href="{U_SEARCH}?dlu={SESSION_USER_ID}&dlw=1">{L_SEARCH_DL_WILL_DOWNLOADS}</a></p>
-			</div>
-		</fieldset>
-	</td>
-</tr>
-</table>
+	<div class="menu-a bold nowrap">
+		<a class="med" href="{U_TRACKER}?rid={SESSION_USER_ID}#results">{L_CUR_UPLOADS}</a>
+		<a class="med" href="{U_CUR_DOWNLOADS}#torrent">{L_CUR_DOWNLOADS}</a>
+		<a class="med" href="{U_SEARCH}?dlu={SESSION_USER_ID}&dlc=1">{L_SEARCH_DL_COMPLETE_DOWNLOADS}</a>
+		<a class="med" href="{U_SEARCH}?dlu={SESSION_USER_ID}&dlw=1">{L_SEARCH_DL_WILL_DOWNLOADS}</a>
+	</div>
 </div>
-
 <!-- ELSE -->
 
 <!--login form-->

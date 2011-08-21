@@ -133,7 +133,7 @@ img   { border: 0px; }
 .dlCancel { color: #666666; }
 
 /* DL list color me */
-.itsme { color: #0000FF !important; font-size: 12px; font-weight: bold; text-decoration: none;} 
+.itsme { color: #0000FF !important; font-size: 12px; font-weight: bold; text-decoration: none;}
 
 a.dlWill,     a.dlWill:visited           { color: #0066CC; text-decoration: none; }
 a.dlDown,     a.dlDown:visited           { color: #800000; text-decoration: none; }
@@ -404,7 +404,7 @@ table.forumline {
 	border-top: 1px solid #B7C0C5;
 }
 .forumline th {
-	border: 1px solid #B7C0C5; border-width: 1px; border-top-color: #92A3A4; 
+	border: 1px solid #B7C0C5; border-width: 1px; border-top-color: #92A3A4;
 }
 .forumline td {
 	border: 1px solid #B7C0C5; border-width: 0 1px 1px;
@@ -737,8 +737,8 @@ td.topicSep {                /* Topic type groups separator */
 table.topic { width: 100%; }
 
 	.post_head { padding: 0 6px; font-size: 10px; }
-	.post_wrap { margin: 5px 5px 8px; }
-		.post_body { line-height: 18px; }  /* The content of the posts */
+	.post_wrap { line-height: 18px; }
+		.post_body { margin: 5px 5px 8px; }  /* The content of the posts */
 			a.postLink { text-decoration: none; }
 			a.postLink:visited { text-decoration: none; color: #5493B4; }
 		.posted_since { color: #666666; padding-left: 4px; }
@@ -882,6 +882,9 @@ a.menu-root, a.menu-root:visited, a.menu-root:hover {
     display: none;
     display/**/: block;
     position: absolute; z-index: -1; filter: mask(); }
+.menu-a { background: #FFFFFF; border: 1px solid #92A3A4; }
+.menu-a a { color: #0000A0; background: #E7E7E7; padding: 4px 10px 5px; margin: 1px; display: block; text-decoration: none !important; }
+.menu-a a:hover { color: #0000FF; background: #D1D7DC; text-decoration: none !important; }
 /* ================================================================ *
      Ajax
  * ================================================================ */

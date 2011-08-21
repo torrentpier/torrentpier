@@ -72,6 +72,10 @@ ajax.callback.posts = function(data){
 	<input type="button" value="{L_SPOILER}" name="codeSpoiler" title="{L_SPOILER}" style="width: 65px;" />
 </span>
 &nbsp;
+<div class="buttons floatR">
+	<input type="button" value="+" onclick="$('#message').css({height: parseInt($('#message').css('height')) + 100}); return false;">
+	<input type="button" value="-" onclick="$('#message').css({height: parseInt($('#message').css('height')) - 100}); return false;">
+</div>
 </div>
 <!-- ENDIF / !QUICK_REPLY -->
 
