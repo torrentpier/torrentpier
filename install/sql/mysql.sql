@@ -1038,6 +1038,7 @@ CREATE TABLE `bb_ranks` (
   `rank_min` mediumint(8) NOT NULL default '0',
   `rank_special` tinyint(1) NOT NULL default '1',
   `rank_image` varchar(255) NOT NULL default '',
+  `rank_style` varchar(255) NOT NULL default '',
   PRIMARY KEY  (`rank_id`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;
 
