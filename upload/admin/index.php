@@ -90,7 +90,7 @@ else if( isset($_GET['pane']) && $_GET['pane'] == 'right' )
 		}
 		@closedir($avatar_dir);
 
-		
+
 		if($avatar_dir_size >= 1048576)
 		{
 			$avatar_dir_size = round($avatar_dir_size / 1048576 * 100) / 100 . " MB";
@@ -132,62 +132,7 @@ else if( isset($_GET['pane']) && $_GET['pane'] == 'right' )
 	// This code is heavily influenced by a similar routine
 	// in phpMyAdmin 2.2.0
 	//
-	/*
-	if( preg_match("/^mysql/", SQL_LAYER) )
-	{
-		$sql = "SELECT VERSION() AS mysql_version";
-		if($result = DB()->sql_query($sql))
-		{
-			$row = DB()->sql_fetchrow($result);
-			$version = $row['mysql_version'];
 
-			if( preg_match("/^(3\.23|4\.|5\.)/", $version) )
-			{
-				$db_name = ( preg_match("/^(3\.23\.[6-9])|(3\.23\.[1-9][1-9])|(4\.)|(5\.)/", $version) ) ? "`".DBNAME."`" : DBNAME;
-
-				$sql = "SHOW TABLE STATUS FROM " . $db_name;
-				if($result = DB()->sql_query($sql))
-				{
-					$tabledata_ary = DB()->sql_fetchrowset($result);
-
-					$dbsize = 0;
-					for($i = 0; $i < count($tabledata_ary); $i++)
-					{
-						if( @$tabledata_ary[$i]['Type'] != "MRG_MyISAM" )
-						{
-							$dbsize += $tabledata_ary[$i]['Data_length'] + $tabledata_ary[$i]['Index_length'];
-						}
-					}
-				} // Else we couldn't get the table status.
-			}
-			else
-			{
-				$dbsize = $lang['NOT_AVAILABLE'];
-			}
-		}
-		else
-		{
-			$dbsize = $lang['NOT_AVAILABLE'];
-		}
-	}
-	else if( preg_match("/^mssql/", SQL_LAYER) )
-	{
-		$sql = "SELECT ((SUM(size) * 8.0) * 1024.0) as dbsize
-			FROM sysfiles";
-		if( $result = DB()->sql_query($sql) )
-		{
-			$dbsize = ( $row = DB()->sql_fetchrow($result) ) ? intval($row['dbsize']) : $lang['NOT_AVAILABLE'];
-		}
-		else
-		{
-			$dbsize = $lang['NOT_AVAILABLE'];
-		}
-	}
-	else
-	{
-		$dbsize = $lang['NOT_AVAILABLE'];
-	}
-	*/
 	$dbsize = $lang['NOT_AVAILABLE'];
 
 	if ( is_integer($dbsize) )
@@ -229,7 +174,7 @@ else if( isset($_GET['pane']) && $_GET['pane'] == 'right' )
 		//
 		// Get users online information.
 		//
-		$sql = "SELECT u.user_id, u.username, s.session_time AS user_session_time, u.user_opt, s.session_logged_in, s.session_ip, s.session_start
+		$sql = "SELECT u.user_id, u.username, u.user_rank, s.session_time AS user_session_time, u.user_opt, s.session_logged_in, s.session_ip, s.session_start
 			FROM " . BB_USERS . " u, " . BB_SESSIONS . " s
 			WHERE s.session_logged_in = 1
 				AND u.user_id = s.session_user_id
@@ -252,20 +197,6 @@ else if( isset($_GET['pane']) && $_GET['pane'] == 'right' )
 			message_die(GENERAL_ERROR, "Couldn't obtain guest user/online information.", "", __LINE__, __FILE__, $sql);
 		}
 		$onlinerow_guest = DB()->sql_fetchrowset($result);
-
-		$sql = "SELECT forum_name, forum_id
-			FROM " . BB_FORUMS;
-		if($forums_result = DB()->sql_query($sql))
-		{
-			while($forumsrow = DB()->sql_fetchrow($forums_result))
-			{
-				$forum_data[$forumsrow['forum_id']] = $forumsrow['forum_name'];
-			}
-		}
-		else
-		{
-			message_die(GENERAL_ERROR, "Couldn't obtain user/online forums information.", "", __LINE__, __FILE__, $sql);
-		}
 
 		$reg_userid_ary = array();
 
@@ -297,14 +228,13 @@ else if( isset($_GET['pane']) && $_GET['pane'] == 'right' )
 					$reg_ip = decode_ip($onlinerow_reg[$i]['session_ip']);
 
 					$template->assign_block_vars("reg_user_row", array(
-						"ROW_CLASS" => $row_class,
-						"USERNAME" => $username,
-						"STARTED" => bb_date($onlinerow_reg[$i]['session_start'], 'H:i'),
-						"LASTUPDATE" => bb_date($onlinerow_reg[$i]['user_session_time'], 'H:i'),
+						"ROW_CLASS"  => $row_class,
+						"USER"       => profile_url($onlinerow_reg[$i]),
+						"STARTED"    => bb_date($onlinerow_reg[$i]['session_start'], 'H:i', 'false'),
+						"LASTUPDATE" => bb_date($onlinerow_reg[$i]['user_session_time'], 'H:i', 'false'),
 						"IP_ADDRESS" => $reg_ip,
 
 						"U_WHOIS_IP" => "http://ip-whois.net/ip_geo.php?ip=$reg_ip",
-						"U_USER_PROFILE" => append_sid("../profile.php?mode=editprofile&amp;" . POST_USERS_URL . "=" . $onlinerow_reg[$i]['user_id']),
 					));
 				}
 			}
@@ -334,10 +264,10 @@ else if( isset($_GET['pane']) && $_GET['pane'] == 'right' )
 				$guest_ip = decode_ip($onlinerow_guest[$i]['session_ip']);
 
 				$template->assign_block_vars("guest_user_row", array(
-					"ROW_CLASS" => $row_class,
-					"USERNAME" => $lang['GUEST'],
-					"STARTED" => bb_date($onlinerow_guest[$i]['session_start'], 'H:i'),
-					"LASTUPDATE" => bb_date($onlinerow_guest[$i]['session_time'], 'H:i'),
+					"ROW_CLASS"  => $row_class,
+					"USERNAME"   => $lang['GUEST'],
+					"STARTED"    => bb_date($onlinerow_guest[$i]['session_start'], 'H:i', 'false'),
+					"LASTUPDATE" => bb_date($onlinerow_guest[$i]['session_time'], 'H:i' , 'false'),
 					"IP_ADDRESS" => $guest_ip,
 					"U_WHOIS_IP" => "http://ip-whois.net/ip_geo.php?ip=$guest_ip",
 				));

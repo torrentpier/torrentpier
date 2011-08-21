@@ -331,7 +331,7 @@ if ($bb_cfg['show_latest_news'])
 		$template->assign_block_vars('news', array(
 			'NEWS_TOPIC_ID' => $news['topic_id'],
 			'NEWS_TITLE'    => $news['topic_title'],
-			'NEWS_TIME'     => bb_date($news['topic_time'], 'd-M', '', false),
+			'NEWS_TIME'     => bb_date($news['topic_time'], 'd-M', 'false'),
 			'NEWS_IS_NEW'   => is_unread($news['topic_time'], $news['topic_id'], $news['forum_id']),
 		));
 	}

@@ -489,7 +489,7 @@ if ($post_mode)
 		  t.*,
 		  p.*,
 		  h.post_html, IF(h.post_html IS NULL, pt.post_text, NULL) AS post_text,
-		  IF(p.poster_id = $anon_id, p.post_username, u.username) AS username, u.user_id
+		  IF(p.poster_id = $anon_id, p.post_username, u.username) AS username, u.user_id, u.user_rank
 		FROM       $posts_tbl
 		INNER JOIN $topics_tbl     ON(t.topic_id = p.topic_id)
 		INNER JOIN $posts_text_tbl ON(pt.post_id = p.post_id)
@@ -550,7 +550,7 @@ if ($post_mode)
 			$template->assign_block_vars('t.p', array(
 				'ROW_NUM'      => $row_num,
 				'POSTER_ID'    => $post['poster_id'],
-				'POSTER_NAME'  => ($post['username']) ? wbr($post['username']) : $lang['GUEST'],
+				'POSTER'       => profile_url($post),
 				'POST_ID'      => $post['post_id'],
 				'POST_DATE'    => bb_date($post['post_time'], $bb_cfg['post_date_format']),
 				'IS_UNREAD'    => is_unread($post['post_time'], $topic_id, $forum_id),
@@ -668,9 +668,9 @@ else
 	$join_dl = ($bb_cfg['show_dl_status_in_search'] && !IS_GUEST);
 
 	$SQL['SELECT'][] = "
-		t.*, t.topic_poster AS first_user_id,
+		t.*, t.topic_poster AS first_user_id, u1.user_rank AS first_user_rank,
 		IF(t.topic_poster = $anon_id, p1.post_username, u1.username) AS first_username,
-		p2.poster_id AS last_user_id,
+		p2.poster_id AS last_user_id, u2.user_rank AS last_user_rank,
 		IF(p2.poster_id = $anon_id, p2.post_username, u2.username) AS last_username
 	";
 	if ($join_dl) $SQL['SELECT'][] = "dl.user_status AS dl_status";
@@ -735,12 +735,10 @@ else
 			'POLL'          => $topic['topic_vote'],
 			'DL_CLASS'      => isset($topic['dl_status']) ? $dl_link_css[$topic['dl_status']] : '',
 
-			'TOPIC_AUTHOR_HREF' => ($topic['first_user_id'] != ANONYMOUS) ? $topic['first_user_id'] : '',
-			'TOPIC_AUTHOR_NAME' => ($topic['first_username']) ? wbr($topic['first_username']) : $lang['GUEST'],
-			'LAST_POSTER_HREF'  => ($topic['last_user_id'] != ANONYMOUS) ? $topic['last_user_id'] : '',
-			'LAST_POSTER_NAME'  => ($topic['last_username']) ? str_short($topic['last_username'], 15) : $lang['GUEST'],
-			'LAST_POST_TIME'    => bb_date($topic['topic_last_post_time']),
-			'LAST_POST_ID'      => $topic['topic_last_post_id'],
+			'TOPIC_AUTHOR'  => profile_url(array('username' => $topic['first_username'], 'user_id' => $topic['first_user_id'], 'user_rank' => $topic['first_user_rank'])),
+			'LAST_POSTER'   => profile_url(array('username' => $topic['last_username'], 'user_id' => $topic['last_user_id'], 'user_rank' => $topic['last_user_rank'])),
+			'LAST_POST_TIME' => bb_date($topic['topic_last_post_time']),
+			'LAST_POST_ID'  => $topic['topic_last_post_id'],
 		));
 	}
 }

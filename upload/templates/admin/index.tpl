@@ -152,10 +152,10 @@ table.forumline { margin: 0 auto; }
 		<th>{L_IP_ADDRESS}</th>
 	</tr>
 	<!-- BEGIN reg_user_row -->
-	<tr>
-		<td nowrap="nowrap" class="{reg_user_row.ROW_CLASS}"><a href="{reg_user_row.U_USER_PROFILE}" class="gen">{reg_user_row.USERNAME}</a></td>
-		<td align="center" nowrap="nowrap" class="{reg_user_row.ROW_CLASS}">{reg_user_row.STARTED}-{reg_user_row.LASTUPDATE}</td>
-		<td class="{reg_user_row.ROW_CLASS} tCenter"><a href="{reg_user_row.U_WHOIS_IP}" class="gen" target="_blank">{reg_user_row.IP_ADDRESS}</a></td>
+	<tr class="{reg_user_row.ROW_CLASS}">
+		<td nowrap="nowrap">{reg_user_row.USER}</td>
+		<td align="center" nowrap="nowrap">{reg_user_row.STARTED}-{reg_user_row.LASTUPDATE}</td>
+		<td class="tCenter"><a href="{reg_user_row.U_WHOIS_IP}" class="gen" target="_blank">{reg_user_row.IP_ADDRESS}</a></td>
 	</tr>
 	<!-- END reg_user_row -->
 	<tr>

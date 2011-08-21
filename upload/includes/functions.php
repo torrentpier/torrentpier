@@ -1558,14 +1558,17 @@ function setup_style ()
 }
 
 // Create date/time from format and timezone
-function bb_date ($gmepoch, $format = false, $tz = null, $replace = true)
+function bb_date ($gmepoch, $format = false, $tz = null)
 {
 	global $bb_cfg, $lang;
 
 	if (is_null($tz))
 	{
 		$tz = $bb_cfg['board_timezone'];
+		$replace = true;
 	}
+	else $replace = false;
+
 	if (!$format)
 	{
 		$format = $bb_cfg['default_dateformat'];

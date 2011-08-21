@@ -28,7 +28,7 @@
 <tr class="<!-- IF t.p.ROW_NUM is even -->row1<!-- ELSE -->row2<!-- ENDIF -->">
 	<td class="poster_info td1">
 
-		<p class="nick"><a href="{PROFILE_URL}{t.p.POSTER_ID}">{t.p.POSTER_NAME}</a></p>
+		<p class="nick">{t.p.POSTER}</p>
 		<p><img src="{SPACER}" width="{TOPIC_LEFT_COL_SPACER_WITDH}" height="<!-- IF t.p.AVATAR -->2<!-- ELSE -->30<!-- ENDIF -->" alt="" /></p>
 
 	</td>
@@ -74,9 +74,9 @@
 <table class="forumline forum">
 <col class="row1">
 <col class="row1" width="25%">
-<col class="row4" width="75%">
+<col class="row2" width="75%">
 <col class="row1">
-<col class="row4">
+<col class="row2">
 <col class="row1">
 <tr>
 	<th>&nbsp;</th>
@@ -109,12 +109,12 @@
 		<!-- IF t.PAGINATION --><span class="topicPG">[{ICON_GOTOPOST}{L_GOTO_SHORT} {t.PAGINATION} ]</span><!-- ENDIF -->
 		</div>
 	</td>
-	<td class="med"><!-- IF t.TOPIC_AUTHOR_HREF --><a href="{PROFILE_URL}{t.TOPIC_AUTHOR_HREF}">{t.TOPIC_AUTHOR_NAME}</a><!-- ELSE -->{t.TOPIC_AUTHOR_NAME}<!-- ENDIF --></td>
+	<td class="med">{t.TOPIC_AUTHOR}</td>
 	<td class="small">{t.REPLIES}</td>
 	<td class="small nowrap" style="padding: 1px 4px 3px 4px;">
 		<p>{t.LAST_POST_TIME}</p>
 		<p>
-			<!-- IF t.LAST_POSTER_HREF --><a href="{PROFILE_URL}{t.LAST_POSTER_HREF}">{t.LAST_POSTER_NAME}</a><!-- ELSE -->{t.LAST_POSTER_NAME}<!-- ENDIF -->
+			{t.LAST_POSTER}
 			<span onmousedown="$p('tid_{t.TOPIC_ID}').className='opened'"><a href="{POST_URL}{t.LAST_POST_ID}#{t.LAST_POST_ID}">{ICON_LATEST_REPLY}</a></span>
 		</p>
 	</td>
