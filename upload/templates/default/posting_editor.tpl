@@ -171,14 +171,12 @@ function debounce (el_id, time_ms)
 	}
 }
 
-$(document).ready(function(){
-	$('#post-submit-btn').click(function(event){
-		$('#post-submit-btn').after('<input id="post-submit" type="hidden" name="post" value="1" />');
-	});
-	$('#post-js-warn').hide();
-	$('#post-buttons-block').show();
-	$('#post-submit-btn').attr('disabled', 0);
+$('#post-submit-btn').click(function(event){
+	$('#post-submit-btn').after('<input id="post-submit" type="hidden" name="post" value="1" />');
 });
+$('#post-js-warn').hide();
+$('#post-buttons-block').show();
+$('#post-submit-btn').attr('disabled', 0);
 
 // Called before form submitting.
 var submitted = false;

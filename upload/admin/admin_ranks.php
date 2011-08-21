@@ -82,7 +82,7 @@ if($mode != "")
 			"RANK" => !empty($rank_info['rank_title']) ? $rank_info['rank_title'] : '',
 			"SPECIAL_RANK" => $rank_is_special,
 			"NOT_SPECIAL_RANK" => $rank_is_not_special,
-			"MINIMUM" => ($rank_is_special) ? "" : $rank_info['rank_min'],
+			"MINIMUM" => ($rank_is_special) ? "" : @$rank_info['rank_min'],
 			"IMAGE" => !empty($rank_info['rank_image']) ? $rank_info['rank_image'] : "images/ranks/rank_image.gif",
 			"STYLE" => !empty($rank_info['rank_style']) ? $rank_info['rank_style'] : '',
 			"IMAGE_DISPLAY" => !empty($rank_info['rank_image']) ? '<img src="../' . $rank_info['rank_image'] . '" />' : "",
