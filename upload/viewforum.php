@@ -146,7 +146,7 @@ if (!$forum_data['forum_parent'] && isset($forums['f'][$forum_id]['subforums']) 
 		SELECT
 			f.forum_id, f.forum_status, f.forum_last_post_id, f.forum_posts, f.forum_topics,
 			t.topic_last_post_time, t.topic_id AS last_topic_id, t.topic_title AS last_topic_title,
-			p.poster_id AS sf_last_user_id, IF(p.poster_id = $anon, p.post_username, u.username) AS sf_last_username
+			p.poster_id AS sf_last_user_id, IF(p.poster_id = $anon, p.post_username, u.username) AS sf_last_username. u.user_rank
 		FROM      ". BB_FORUMS ." f
 		LEFT JOIN ". BB_TOPICS ." t ON(f.forum_last_post_id = t.topic_last_post_id)
 		LEFT JOIN ". BB_POSTS  ." p ON(f.forum_last_post_id = p.post_id)
@@ -188,13 +188,11 @@ if (!$forum_data['forum_parent'] && isset($forums['f'][$forum_id]['subforums']) 
 			$folder_image = $images['forum_new'];
 		}
 
-		$last_post_username = ($sf_data['sf_last_username']) ? $sf_data['sf_last_username'] : $lang['GUEST'];
-
 		if ($sf_data['forum_last_post_id'])
 		{
 			$last_post = bb_date($sf_data['topic_last_post_time'], $bb_cfg['last_post_date_format']);
 			$last_post .= '<br />';
-			$last_post .= ($sf_data['sf_last_user_id'] != ANONYMOUS) ? '<a href="'. PROFILE_URL . $sf_data['sf_last_user_id'] .'">'. $last_post_username .'</a>' : $last_post_username;
+			$last_post .= profile_url(array('username' => $sf_data['sf_last_username'], 'user_id' => $sf_data['sf_last_user_id'], 'user_rank' => $sf_data['user_rank']));
 			$last_post .= '<a href="'. POST_URL . $sf_data['forum_last_post_id'] .'#'. $sf_data['forum_last_post_id'] .'"><img src="'. $images['icon_latest_reply'] .'" class="icon2" alt="latest" title="'. $lang['VIEW_LATEST_POST'] .'" /></a>';
 		}
 
