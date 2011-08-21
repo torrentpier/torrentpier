@@ -16,8 +16,8 @@ $datastore->enqueue(array(
 $log_action->init();
 
 $per_page            = 50;
-$row_class_1         = 'prow1';
-$row_class_2         = 'prow2';
+$row_class_1         = 'row1';
+$row_class_2         = 'row2';
 $def_days            = 3;
 $def_datetime        = TIMENOW;
 $max_forum_name_len  = 40;

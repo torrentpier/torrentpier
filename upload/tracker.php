@@ -29,8 +29,8 @@ $tracker_url         = basename(__FILE__);
 
 $time_format  = 'H:i';
 $date_format  = 'j-M-y';
-$row_class_1  = 'prow1';
-$row_class_2  = 'prow2';
+$row_class_1  = 'row1';
+$row_class_2  = 'row2';
 
 $start = isset($_REQUEST['start']) ? abs(intval($_REQUEST['start'])) : 0;
 

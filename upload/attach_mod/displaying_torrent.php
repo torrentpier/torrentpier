@@ -5,9 +5,9 @@ if (!defined('IN_PHPBB')) die(basename(__FILE__));
 global $bb_cfg, $t_data, $poster_id, $is_auth, $dl_link_css, $dl_status_css;
 
 $change_peers_bgr_over = true;
-$bgr_class_1    = 'prow1';
-$bgr_class_2    = 'prow2';
-$bgr_class_over = 'prow3';
+$bgr_class_1    = 'row1';
+$bgr_class_2    = 'row2';
+$bgr_class_over = 'row3';
 
 $show_peers_limit          = 300;
 $max_peers_before_overflow = 20;

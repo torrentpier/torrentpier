@@ -447,7 +447,7 @@ td.topic_id { cursor: pointer; }
 			{t.TOR_TYPE}<a id="tt-{t.TOPIC_ID}" href="{TOPIC_URL}{t.HREF_TOPIC_ID}" class="torTopic tt-text"><b>{t.TOPIC_TITLE}</b></a>
 		<!-- ENDIF -->
 	</div>
-	<div class="topicAuthor" style="padding-top: 2px;">
+	<div class="topicAuthor nowrap" style="padding-top: 2px;">
 		{t.TOPIC_AUTHOR}
 	</td>
 
@@ -544,7 +544,7 @@ td.topic_id { cursor: pointer; }
 		<!-- IF t.PAGINATION --><span class="topicPG">[{ICON_GOTOPOST}{L_GOTO_SHORT} {t.PAGINATION} ]</span><!-- ENDIF -->
 	</td>
 	<td class="tCenter med">{t.REPLIES}</td>
-	<td class="tCenter med">{t.TOPIC_AUTHOR}</td>
+	<td class="tCenter med nowrap">{t.TOPIC_AUTHOR}</td>
 	<td class="tCenter med">{t.VIEWS}</td>
 	<td class="tCenter nowrap small" style="padding: 1px 6px 2px;">
 		<p>{t.LAST_POST_TIME}</p>

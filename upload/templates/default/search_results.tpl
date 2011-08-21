@@ -109,7 +109,7 @@
 		<!-- IF t.PAGINATION --><span class="topicPG">[{ICON_GOTOPOST}{L_GOTO_SHORT} {t.PAGINATION} ]</span><!-- ENDIF -->
 		</div>
 	</td>
-	<td class="med">{t.TOPIC_AUTHOR}</td>
+	<td class="med nowrap">{t.TOPIC_AUTHOR}</td>
 	<td class="small">{t.REPLIES}</td>
 	<td class="small nowrap" style="padding: 1px 4px 3px 4px;">
 		<p>{t.LAST_POST_TIME}</p>

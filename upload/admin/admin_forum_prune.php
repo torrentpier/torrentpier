@@ -44,7 +44,7 @@ if (isset($_REQUEST['submit']))
 		$prune_performed = true;
 
 		$template->assign_block_vars('pruned', array(
-			'ROW_CLASS'     => !($i % 2) ? 'prow1' : 'prow2',
+			'ROW_CLASS'     => !($i % 2) ? 'row1' : 'row2',
 			'FORUM_NAME'    => htmlCHR($row['forum_name']),
 			'PRUNED_TOPICS' => $pruned_topics,
 		));

@@ -766,9 +766,9 @@ if (!$mode || $show_main_page)
 		//
 		$gen_cat = array();
 
-		$bgr_class_1    = 'prow1';
-		$bgr_class_2    = 'prow2';
-		$bgr_class_over = 'prow3';
+		$bgr_class_1    = 'row1';
+		$bgr_class_2    = 'row2';
+		$bgr_class_over = 'row3';
 
 		$template->assign_vars(array(
 			'U_ALL_FORUMS' => "admin_forums.php?c=all",

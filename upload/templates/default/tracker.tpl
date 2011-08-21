@@ -309,28 +309,28 @@ ajax.callback.view_post = function(data) {
 	<!-- IF SHOW_FORUM -->
 	<td class="row1"><a class="gen" href="{TR_FORUM_URL}{tor.FORUM_ID}">{tor.FORUM_NAME}</a></td>
 	<!-- ENDIF -->
-	<td class="row4 med tLeft">
+	<td class="row2 med tLeft">
 		<a class="{tor.DL_CLASS}<!-- IF AJAX_TOPICS --> folded2 tLink<!-- ENDIF -->" <!-- IF AJAX_TOPICS -->onclick="ajax.view_post({tor.POST_ID}, this); return false;"<!-- ENDIF --> href="{TOPIC_URL}{tor.TOPIC_ID}"><!-- IF tor.TOR_FROZEN -->{tor.TOPIC_TITLE}<!-- ELSE -->{tor.TOR_TYPE}<b>{tor.TOPIC_TITLE}</b><!-- ENDIF --></a>
 	    <!-- IF SHOW_TIME_TOPICS --><div class="tr_tm">{tor.TOPIC_TIME}</div><!-- ENDIF -->
 	</td>
 	<!-- IF SHOW_AUTHOR -->
 	<td class="row1"><a class="med" href="{TR_POSTER_URL}{tor.POSTER_ID}">{tor.USERNAME}</a></td>
 	<!-- ENDIF -->
-	<td class="row4 small nowrap">
+	<td class="row3 small nowrap">
 		<u>{tor.TOR_SIZE_RAW}</u>
 		<!-- IF not tor.TOR_FROZEN --><a class="small tr-dl" title="{L_DOWNLOAD}" href="{DOWNLOAD_URL}{tor.ATTACH_ID}">{tor.TOR_SIZE}</a> <!-- IF MAGNET_LINKS --><span title="{L_MAGNET}">{tor.MAGNET}</span><!-- ENDIF --><!-- ELSE -->
 		{tor.TOR_SIZE}<!-- ENDIF -->
 	</td>
-	<td class="row4 seedmed" title="{tor.SEEDS_TITLE}"><b>{tor.SEEDS}</b></td>
-	<td class="row4 leechmed" title="{L_LEECHERS}"><b>{tor.LEECHS}</b></td>
-	<td class="row4 small" title="{L_REPLIES}: {tor.REPLIES}">{tor.COMPLETED}</td>
+	<td class="row3 seedmed" title="{tor.SEEDS_TITLE}"><b>{tor.SEEDS}</b></td>
+	<td class="row3 leechmed" title="{L_LEECHERS}"><b>{tor.LEECHS}</b></td>
+	<td class="row3 small" title="{L_REPLIES}: {tor.REPLIES}">{tor.COMPLETED}</td>
 	<!-- IF SHOW_SPEED -->
-	<td class="row4 nowrap">
+	<td class="row3 nowrap">
 		<p class="seedmed">{tor.UL_SPEED}</p>
 		<p class="leechmed">{tor.DL_SPEED}</p>
 	</td>
 	<!-- ENDIF -->
-	<td class="row4 small nowrap" style="padding: 1px 3px 2px;" title="{L_ADDED}">
+	<td class="row3 small nowrap" style="padding: 1px 3px 2px;" title="{L_ADDED}">
 		<u>{tor.ADDED_RAW}</u>
 		<p>{tor.ADDED_TIME}</p>
 		<p>{tor.ADDED_DATE}</p>
