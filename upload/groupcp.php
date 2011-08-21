@@ -19,7 +19,7 @@ function generate_user_info(&$row, $date_format, $group_mod, &$from, &$posts, &$
 	$joined = bb_date($row['user_regdate'], $lang['DATE_FORMAT']);
 	$posts  = ( $row['user_posts'] ) ? $row['user_posts'] : 0;
 	$pm     = ($bb_cfg['text_buttons']) ? '<a class="txtb" href="'. append_sid("privmsg.php?mode=post&amp;". POST_USERS_URL ."=".$row['user_id']) .'">'. $lang['SEND_PM_TXTB'] .'</a>' : '<a href="' . append_sid("privmsg.php?mode=post&amp;". POST_USERS_URL ."=".$row['user_id']) .'"><img src="' . $images['icon_pm'] . '" alt="' . $lang['SEND_PRIVATE_MESSAGE'] . '" title="' . $lang['SEND_PRIVATE_MESSAGE'] . '" border="0" /></a>';
-	
+
 	if (bf($row['user_opt'], 'user_opt', 'viewemail') || $group_mod)
     {
        	$email_uri = ($bb_cfg['board_email_form']) ? append_sid("profile.php?mode=email&amp;". POST_USERS_URL ."=".$row['user_id']) : 'mailto:'. $row['user_email'];
@@ -419,7 +419,7 @@ else
 
     // Members
 	$count_members = DB()->fetch_rowset("
-		SELECT u.username, u.user_id, u.user_opt, u.user_posts, u.user_regdate, u.user_from, u.user_website, u.user_email, ug.user_pending
+		SELECT u.username, u.user_rank, u.user_id, u.user_opt, u.user_posts, u.user_regdate, u.user_from, u.user_website, u.user_email, ug.user_pending
 		FROM ". BB_USER_GROUP ." ug, ". BB_USERS ." u
 		WHERE ug.group_id = $group_id
 			AND ug.user_pending = 0
@@ -434,7 +434,7 @@ else
 
 	// Members
 	$group_members = DB()->fetch_rowset("
-		SELECT u.username, u.user_id, u.user_opt, u.user_posts, u.user_regdate, u.user_from, u.user_website, u.user_email, ug.user_pending
+		SELECT u.username, u.user_rank, u.user_id, u.user_opt, u.user_posts, u.user_regdate, u.user_from, u.user_website, u.user_email, ug.user_pending
 		FROM ". BB_USER_GROUP ." ug, ". BB_USERS ." u
 		WHERE ug.group_id = $group_id
 			AND ug.user_pending = 0
@@ -451,7 +451,7 @@ else
 	if ($is_moderator)
 	{
 		$modgroup_pending_list = DB()->fetch_rowset("
-			SELECT u.username, u.user_id, u.user_opt, u.user_posts, u.user_regdate, u.user_from, u.user_website, u.user_email
+			SELECT u.username, u.user_rank, u.user_id, u.user_opt, u.user_posts, u.user_regdate, u.user_from, u.user_website, u.user_email
 			FROM ". BB_USER_GROUP ." ug, ". BB_USERS ." u
 			WHERE ug.group_id = $group_id
 				AND ug.user_pending = 1
@@ -552,14 +552,13 @@ else
 		'GROUP_NAME' => htmlCHR($group_info['group_name']),
 		'GROUP_DESCRIPTION' => $group_info['group_description'],
 		'GROUP_DETAILS' => $group_details,
-		'MOD_USERNAME' => $username,
+		'MOD_USER' => profile_url($group_moderator),
 		'MOD_FROM' => $from,
 		'MOD_JOINED' => $joined,
 		'MOD_POSTS' => $posts,
 		'MOD_PM' => $pm,
 		'MOD_EMAIL' => $email,
 		'MOD_WWW' => $www,
-		'U_MOD_VIEWPROFILE' => "profile.php?mode=viewprofile&amp;" . POST_USERS_URL . "=$user_id",
 		'U_SEARCH_USER' => "search.php?mode=searchuser",
         'GROUP_TYPE' => $group_type,
 		'S_GROUP_OPEN_TYPE' => GROUP_OPEN,
@@ -577,7 +576,6 @@ else
 	// Dump out the remaining users
 	foreach ($group_members as $i => $member)
 	{
-		$username = $member['username'];
 		$user_id = $member['user_id'];
 
 		generate_user_info($member, $bb_cfg['default_dateformat'], $is_moderator, $from, $posts, $joined, $pm, $email, $www);
@@ -589,7 +587,7 @@ else
 			$template->assign_block_vars('member', array(
 				'ROW_NUMBER'    => $i + ( $start + 1 ),
 				'ROW_CLASS' => $row_class,
-				'USERNAME' => $username,
+				'USER' => profile_url($member),
 				'FROM' => $from,
 				'JOINED' => $joined,
 				'POSTS' => $posts,
@@ -597,7 +595,6 @@ else
 				'PM' => $pm,
 				'EMAIL' => $email,
 				'WWW' => $www,
-				'U_VIEWPROFILE' => "profile.php?mode=viewprofile&amp;" . POST_USERS_URL . "=$user_id",
 			));
 
 			if ($is_moderator)
@@ -627,7 +624,6 @@ else
 	{
 		foreach ($modgroup_pending_list as $i => $member)
 		{
-			$username = $member['username'];
 			$user_id = $member['user_id'];
 
 			generate_user_info($member, $bb_cfg['default_dateformat'], $is_moderator, $from, $posts, $joined, $pm, $email, $www);
@@ -638,14 +634,13 @@ else
 
 			$template->assign_block_vars('pending', array(
 				'ROW_CLASS' => $row_class,
-				'USERNAME' => $username,
+				'USER' => profile_url($member),
 				'FROM' => $from,
 				'JOINED' => $joined,
 				'POSTS' => $posts,
 				'USER_ID' => $user_id,
 				'PM' => $pm,
 				'EMAIL' => $email,
-				'U_VIEWPROFILE' => "profile.php?mode=viewprofile&amp;". POST_USERS_URL ."=$user_id",
 			));
 		}
 

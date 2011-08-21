@@ -70,21 +70,21 @@
 </tr>
 </table>
 
-<table class="forumline tablesorter"> 
+<table class="forumline tablesorter">
 <thead>
 <tr>
-	<th width="2%">&nbsp;</th> 
-	<th width="50%" class="{sorter: 'text'}"><b class="tbs-text">{L_SUBJECT}</b></th> 
-	<th width="5%" class="{sorter: 'text'}"><b class="tbs-text">{L_FROM_OR_TO}</b></th> 
-	<th width="5%" class="{sorter: 'digit'}"><b class="tbs-text">{L_DATE}</b></th> 
 	<th width="2%">&nbsp;</th>
-</tr> 
+	<th width="50%" class="{sorter: 'text'}"><b class="tbs-text">{L_SUBJECT}</b></th>
+	<th width="5%" class="{sorter: 'text'}"><b class="tbs-text">{L_FROM_OR_TO}</b></th>
+	<th width="5%" class="{sorter: 'digit'}"><b class="tbs-text">{L_DATE}</b></th>
+	<th width="2%">&nbsp;</th>
+</tr>
 </thead>
 <!-- BEGIN listrow -->
 <tr class="{listrow.ROW_CLASS} med tCenter">
 	<td><img src="{listrow.PRIVMSG_FOLDER_IMG}" alt="{listrow.L_PRIVMSG_FOLDER_ALT}" title="{listrow.L_PRIVMSG_FOLDER_ALT}" /></td>
 	<td class="tLeft pad_0"><a href="{listrow.U_READ}" class="med bold block pad_4">{listrow.SUBJECT}</a></td>
-	<td><a href="{listrow.U_FROM_USER_PROFILE}">{listrow.FROM}</a></td>
+	<td>{listrow.FROM}</td>
 	<td>{listrow.DATE}</td>
 	<td><input type="checkbox" name="mark[]2" value="{listrow.S_MARK_ID}" /></td>
 </tr>

@@ -30,11 +30,11 @@
 </tr>
 <tr>
 	<td>{L_FROM}:&nbsp;</td>
-	<td width="100%"><b><a href="{PROFILE_URL}{FROM_USER_ID}" class="med">{FROM_USER_NAME}</a></b></td>
+	<td width="100%"><b>{FROM_USER}</b></td>
 </tr>
 <tr>
 	<td>{L_TO}:&nbsp;</td>
-	<td><a href="{PROFILE_URL}{TO_USER_ID}" class="med">{TO_USER_NAME}</a></td>
+	<td>{TO_USER}</td>
 </tr>
 <tr>
 	<td>{L_POSTED}:&nbsp;</td>
@@ -47,7 +47,7 @@
 </thead>
 <tbody>
 <tr>
-	<td colspan="2" class="row4 gen pad_4">
+	<td colspan="2" class="row1 gen pad_4">
 		<div class="post_wrap"><div class="post_body">{PM_MESSAGE}</div></div>
 		<div class="clearB tRight">{QUOTE_PM_IMG} {EDIT_PM_IMG} {REPORT_PM_IMG}</div>
  </td>

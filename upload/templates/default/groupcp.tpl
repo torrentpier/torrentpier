@@ -117,7 +117,7 @@
 </tr>
 <tr class="row1 tCenter">
 	<td width="3%">{ROW_NUMBER}</td>
-	<td><a href="{U_MOD_VIEWPROFILE}" class="gen"><b>{MOD_USERNAME}</b></a></td>
+	<td><b>{MOD_USER}</b></td>
 	<td>{MOD_PM}</td>
 	<td>{MOD_EMAIL}</td>
 	<td>{MOD_FROM}</td>
@@ -134,7 +134,7 @@
 <!-- BEGIN member -->
 <tr class="{member.ROW_CLASS} tCenter">
 	<td width="3%">{member.ROW_NUMBER}</td>
-	<td><a href="{member.U_VIEWPROFILE}" class="gen">{member.USERNAME}</a></td>
+	<td>{member.USER}</td>
 	<td>{member.PM}</td>
 	<td>{member.EMAIL}</td>
 	<td>{member.FROM}</td>
@@ -202,7 +202,7 @@
 	<th class="{sorter: 'digit'}" ><b class="tbs-text">{L_JOINED}</b></th>
 	<th class="{sorter: 'digit'}" ><b class="tbs-text">{L_POSTS_SHORT}</b></th>
 	<th class="{sorter: false}" ><b class="tbs-text">{L_WEBSITE}</b></th>
-	
+
 </tr>
 <tr>
 		<td class="catTitle" colspan="8">{L_PENDING_MEMBERS}</td>
@@ -211,14 +211,14 @@
 <!-- BEGIN pending -->
 <tr class="{pending.ROW_CLASS} tCenter">
 	<td><input type="checkbox" name="pending_members[]" value="{pending.USER_ID}"/></td>
-	<td><a href="{pending.U_VIEWPROFILE}" class="gen">{pending.USERNAME}</a></td>
+	<td>{pending.USER}</td>
 	<td>{pending.PM}</td>
 	<td>{pending.EMAIL}</td>
 	<td>{pending.FROM}</td>
 	<td class="small">{pending.JOINED}</td>
 	<td>{pending.POSTS}</td>
 	<td>{pending.WWW}</td>
-	
+
 </tr>
 <!-- END pending -->
 <tfoot>

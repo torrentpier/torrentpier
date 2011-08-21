@@ -2803,27 +2803,29 @@ function profile_url($data)
 {
 	global $bb_cfg, $lang, $datastore;
 
-    if (!$ranks = $datastore->get('ranks'))
+	if (!$ranks = $datastore->get('ranks'))
 	{
 		$datastore->update('ranks');
 		$ranks = $datastore->get('ranks');
 	}
 
-    if(isset($ranks[$data['user_rank']]))
-    {    	$title = $ranks[$data['user_rank']]['rank_title'];        $style = $ranks[$data['user_rank']]['rank_style'];
-    }
-    if(empty($title)) $title = 'User';
-    if(empty($style)) $style = 'colorUser';
+	$user_rank = !empty($data['user_rank']) ? $data['user_rank'] : 0;
 
-    $username = !empty($data['username']) ? $data['username'] : $lang['GUEST'];
-    $user_id = (!empty($data['user_id']) && $username != $lang['GUEST']) ? $data['user_id'] : ANONYMOUS;
+	if(isset($ranks[$user_rank]))
+	{		$title = $ranks[$user_rank]['rank_title'];		$style = $ranks[$user_rank]['rank_style'];
+	}
+	if(empty($title)) $title = 'User';
+	if(empty($style)) $style = 'colorUser';
+
+	$username = !empty($data['username']) ? $data['username'] : $lang['GUEST'];
+	$user_id = (!empty($data['user_id']) && $username != $lang['GUEST']) ? $data['user_id'] : ANONYMOUS;
 
 	$profile = '<span title="'. $title .'" class="'. $style .'">'. $username .'</span>';
 
-    if(!in_array($user_id, array('', ANONYMOUS, BOT_UID)) && $username)
-    {
-    	$profile = '<a href="'. make_url(PROFILE_URL . $user_id) .'">'. $profile .'</a>';
-    }
+	if(!in_array($user_id, array('', ANONYMOUS, BOT_UID)) && $username)
+	{
+		$profile = '<a href="'. make_url(PROFILE_URL . $user_id) .'">'. $profile .'</a>';
+	}
 
 	return $profile;
 }

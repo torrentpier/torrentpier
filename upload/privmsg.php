@@ -164,7 +164,9 @@ if ( $mode == 'read' )
 	//
 	// Major query obtains the message ...
 	//
-	$sql = "SELECT u.username AS username_1, u.user_id AS user_id_1, u2.username AS username_2, u2.user_id AS user_id_2, u.user_posts, u.user_from, u.user_email, u.user_regdate, u.user_rank, u.user_avatar, pm.*, pmt.privmsgs_text
+	$sql = "SELECT u.username, u.user_id, u.user_posts, u.user_from, u.user_email, u.user_regdate, u.user_rank, u.user_avatar,
+			u2.username AS to_username, u2.user_id AS to_user_id, u2.user_rank as to_user_rank,
+			pm.*, pmt.privmsgs_text
 		FROM " . BB_PRIVMSGS . " pm, " . BB_PRIVMSGS_TEXT . " pmt, " . BB_USERS . " u, " . BB_USERS . " u2
 		WHERE pm.privmsgs_id = $privmsgs_id
 			AND pmt.privmsgs_text_id = pm.privmsgs_id
@@ -432,10 +434,10 @@ if ( $mode == 'read' )
 		'S_HIDDEN_FIELDS' => $s_hidden_fields)
 	);
 
-	$username_from = $privmsg['username_1'];
-	$user_id_from = $privmsg['user_id_1'];
-	$username_to = $privmsg['username_2'];
-	$user_id_to = $privmsg['user_id_2'];
+	$username_from = $privmsg['username'];
+	$user_id_from = $privmsg['user_id'];
+	$username_to = $privmsg['to_username'];
+	$user_id_to = $privmsg['to_user_id'];
 
 	$post_date = bb_date($privmsg['privmsgs_date']);
 
@@ -474,27 +476,25 @@ if ( $mode == 'read' )
 	// Dump it to the templating engine
 	//
 	$template->assign_vars(array(
-		'TO_USER_ID'     => $user_id_to,
-		'TO_USER_NAME'   => $username_to,
-		'FROM_USER_ID'   => $user_id_from,
-		'FROM_USER_NAME' => $username_from,
+		'TO_USER'        => profile_url(array('username' => $username_to, 'user_id' => $user_id_to, 'user_rank' => $privmsg['to_user_rank'])),
+		'FROM_USER'      => profile_url($privmsg),
 
-		'QR_SUBJECT' => ((!preg_match('/^Re:/', $post_subject)) ? 'Re: ' : '') . $post_subject,
-		'MESSAGE_TO' => $username_to,
-		'MESSAGE_FROM' => $username_from,
-		'RANK_IMAGE' => (@$rank_image) ? $rank_image : '',
-		'POSTER_JOINED' => (@$poster_joined) ? $poster_joined : '',
-		'POSTER_POSTS' => (@$poster_posts) ? $poster_posts : '',
-		'POSTER_FROM' => (@$poster_from) ? $poster_from : '',
-		'POSTER_AVATAR' => (@$poster_avatar) ? $poster_avatar : '',
-		'POST_SUBJECT' => $post_subject,
-		'POST_DATE' => $post_date,
-		'PM_MESSAGE' => $private_message,
+		'QR_SUBJECT'     => (!preg_match('/^Re:/', $post_subject) ? 'Re: ' : '') . $post_subject,
+		'MESSAGE_TO'     => $username_to,
+		'MESSAGE_FROM'   => $username_from,
+		'RANK_IMAGE'     => (@$rank_image) ? $rank_image : '',
+		'POSTER_JOINED'  => (@$poster_joined) ? $poster_joined : '',
+		'POSTER_POSTS'   => (@$poster_posts) ? $poster_posts : '',
+		'POSTER_FROM'    => (@$poster_from) ? $poster_from : '',
+		'POSTER_AVATAR'  => (@$poster_avatar) ? $poster_avatar : '',
+		'POST_SUBJECT'   => $post_subject,
+		'POST_DATE'      => $post_date,
+		'PM_MESSAGE'     => $private_message,
 
-		'PROFILE_IMG' => $profile_img,
-		'PROFILE' => $profile,
-		'SEARCH_IMG' => $search_img,
-		'SEARCH' => $search,
+		'PROFILE_IMG'    => $profile_img,
+		'PROFILE'        => $profile,
+		'SEARCH_IMG'     => $search_img,
+		'SEARCH'         => $search,
 	));
 }
 else if ( ( $delete && $mark_list ) || $delete_all )
@@ -565,7 +565,7 @@ else if ( ( $delete && $mark_list ) || $delete_all )
 		WHERE $delete_type $delete_sql_id";
 		if ( !($result = DB()->sql_query($sql)) )
 		{
-		message_die(GENERAL_ERROR, 'Could not obtain id list to delete messages', '', __LINE__, __FILE__, $sql);
+			message_die(GENERAL_ERROR, 'Could not obtain id list to delete messages', '', __LINE__, __FILE__, $sql);
 		}
 
 		$mark_list = array();
@@ -1457,7 +1457,7 @@ else
 	//
 	$sql_tot = "SELECT COUNT(privmsgs_id) AS total
 		FROM " . BB_PRIVMSGS . " ";
-	$sql = "SELECT pm.privmsgs_type, pm.privmsgs_id, pm.privmsgs_date, pm.privmsgs_subject, u.user_id, u.username
+	$sql = "SELECT pm.privmsgs_type, pm.privmsgs_id, pm.privmsgs_date, pm.privmsgs_subject, u.user_id, u.username, u.user_rank
 		FROM " . BB_PRIVMSGS . " pm, " . BB_USERS . " u ";
 	switch( $folder )
 	{
@@ -1671,9 +1671,7 @@ else
 			$icon_flag_alt = ( $flag == PRIVMSGS_NEW_MAIL || $flag == PRIVMSGS_UNREAD_MAIL ) ? $lang['UNREAD_MESSAGE'] : $lang['READ_MESSAGE'];
 
 			$msg_userid = $row['user_id'];
-			$msg_username = $row['username'];
-
-			$u_from_user_profile = append_sid("profile.php?mode=viewprofile&amp;" . POST_USERS_URL . "=$msg_userid");
+			$msg_user = profile_url($row);
 
 			$msg_subject = $row['privmsgs_subject'];
 
@@ -1690,15 +1688,15 @@ else
 			{
 				$msg_subject = '<b>' . $msg_subject . '</b>';
 				$msg_date = '<b>' . $msg_date . '</b>';
-				$msg_username = '<b>' . $msg_username . '</b>';
+				$msg_user = '<b>' . $msg_user . '</b>';
 			}
 
-			$row_class = !($i & 1) ? 'prow1' : 'prow2';
+			$row_class = !($i & 1) ? 'row1' : 'row2';
 			$i++;
 
 			$template->assign_block_vars('listrow', array(
 				'ROW_CLASS' => $row_class,
-				'FROM' => $msg_username,
+				'FROM' => $msg_user,
 				'SUBJECT' => htmlCHR($msg_subject),
 				'DATE' => $msg_date,
 
@@ -1709,8 +1707,7 @@ else
 				'S_MARK_ID' => $privmsg_id,
 
 				'U_READ' => $u_subject,
-				'U_FROM_USER_PROFILE' => $u_from_user_profile)
-			);
+			));
 		}
 		while( $row = DB()->sql_fetchrow($result) );
 

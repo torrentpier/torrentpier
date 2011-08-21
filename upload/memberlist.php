@@ -196,7 +196,7 @@ if ($result = DB()->fetch_rowset($sql))
 		$template->assign_block_vars('memberrow', array(
 			'ROW_NUMBER'    => $i + ( $start + 1 ),
 			'ROW_CLASS'     => $row_class,
-			'USER'          => profile($row),
+			'USER'          => profile_url($row),
 			'FROM'          => $from,
 			'JOINED_RAW'    => $row['user_regdate'],
 			'JOINED'        => $joined,

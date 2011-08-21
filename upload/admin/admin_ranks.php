@@ -7,9 +7,6 @@ if (!empty($setmodules))
 	return;
 }
 
-function update_ranks () { $GLOBALS['datastore']->update('ranks'); }
-register_shutdown_function('update_ranks');
-
 require('./pagestart.php');
 // ACP Header - END
 
@@ -164,6 +161,8 @@ if($mode != "")
 
 		$message .= "<br /><br />" . sprintf($lang['CLICK_RETURN_RANKADMIN'], "<a href=\"" . append_sid("admin_ranks.php") . "\">", "</a>") . "<br /><br />" . sprintf($lang['CLICK_RETURN_ADMIN_INDEX'], "<a href=\"" . append_sid("index.php?pane=right") . "\">", "</a>");
 
+        $datastore->update('ranks');
+
 		message_die(GENERAL_MESSAGE, $message);
 
 	}
@@ -202,6 +201,8 @@ if($mode != "")
 			}
 
 			$message = $lang['RANK_REMOVED'] . "<br /><br />" . sprintf($lang['CLICK_RETURN_RANKADMIN'], "<a href=\"" . append_sid("admin_ranks.php") . "\">", "</a>") . "<br /><br />" . sprintf($lang['CLICK_RETURN_ADMIN_INDEX'], "<a href=\"" . append_sid("index.php?pane=right") . "\">", "</a>");
+
+            $datastore->update('ranks');
 
 			message_die(GENERAL_MESSAGE, $message);
 
