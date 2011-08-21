@@ -188,11 +188,12 @@ if (!$forum_data['forum_parent'] && isset($forums['f'][$forum_id]['subforums']) 
 			$folder_image = $images['forum_new'];
 		}
 
+        $last_post_user = profile_url(array('username' => $sf_data['sf_last_username'], 'user_id' => $sf_data['sf_last_user_id'], 'user_rank' => $sf_data['user_rank']));
+
 		if ($sf_data['forum_last_post_id'])
 		{
 			$last_post = bb_date($sf_data['topic_last_post_time'], $bb_cfg['last_post_date_format']);
-			$last_post .= '<br />';
-			$last_post .= profile_url(array('username' => $sf_data['sf_last_username'], 'user_id' => $sf_data['sf_last_user_id'], 'user_rank' => $sf_data['user_rank']));
+			$last_post .= "<br />$last_post_user";
 			$last_post .= '<a href="'. POST_URL . $sf_data['forum_last_post_id'] .'#'. $sf_data['forum_last_post_id'] .'"><img src="'. $images['icon_latest_reply'] .'" class="icon2" alt="latest" title="'. $lang['VIEW_LATEST_POST'] .'" /></a>';
 		}
 
@@ -218,8 +219,7 @@ if (!$forum_data['forum_parent'] && isset($forums['f'][$forum_id]['subforums']) 
 				'LAST_TOPIC_TITLE'    => str_short($sf_data['last_topic_title'], $last_topic_max_len),
 				'LAST_POST_TIME'      => bb_date($sf_data['topic_last_post_time'], $bb_cfg['last_post_date_format']),
 				'LAST_POST_ID'        => $sf_data['forum_last_post_id'],
-				'LAST_POST_USER_NAME' => $last_post_username,
-				'LAST_POST_USER_ID'   => ($sf_data['sf_last_user_id'] != ANONYMOUS) ? $sf_data['sf_last_user_id'] : '',
+				'LAST_POST_USER'      => $last_post_user,
 				'ICON_LATEST_REPLY'   => $images['icon_latest_reply'],
 			));
 		}

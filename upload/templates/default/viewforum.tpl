@@ -326,22 +326,14 @@ td.topic_id { cursor: pointer; }
 				<p class="small" style="margin-top:4px;">
 					{f.last.LAST_POST_TIME}
 					by
-					<!-- IF f.last.LAST_POST_USER_ID -->
-					<a href="{PROFILE_URL}{f.last.LAST_POST_USER_ID}">{f.last.LAST_POST_USER_NAME}</a>
-					<!-- ELSE -->
-					{f.last.LAST_POST_USER_NAME}
-					<!-- ENDIF -->
+					{f.last.LAST_POST_USER}
 				</p>
 
 				<!-- ELSE / start of !f.last.SHOW_LAST_TOPIC -->
 
 				<p class="small">{f.last.LAST_POST_TIME}</p>
 				<p class="small" style="margin-top:3px;">
-					<!-- IF f.last.LAST_POST_USER_ID -->
-					<a href="{PROFILE_URL}{f.last.LAST_POST_USER_ID}">{f.last.LAST_POST_USER_NAME}</a>
-					<!-- ELSE -->
-					{f.last.LAST_POST_USER_NAME}
-					<!-- ENDIF -->
+					{f.last.LAST_POST_USER}
 					<a href="{POST_URL}{f.last.LAST_POST_ID}#{f.last.LAST_POST_ID}">{ICON_LATEST_REPLY}</a>
 				</p>
 
