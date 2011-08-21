@@ -2820,6 +2820,8 @@ function profile_url($data)
 	if(empty($title)) $title = 'User';
 	if(empty($style)) $style = 'colorUser';
 
+	if(!$bb_cfg['color_nick']) $style = '';
+
 	$username = !empty($data['username']) ? $data['username'] : $lang['GUEST'];
 	$user_id = (!empty($data['user_id']) && $username != $lang['GUEST']) ? $data['user_id'] : ANONYMOUS;
 

@@ -57,7 +57,7 @@ $bb_cfg['css_ver'] = 1;
 
 // Increase number of revision after update
 $bb_cfg['tp_version'] = '2.1 Stable';
-$bb_cfg['tp_release_state'] = 'R239';
+$bb_cfg['tp_release_state'] = 'R240';
 $bb_cfg['tp_release_date'] = '22-08-2011';
 
 $bb_cfg['board_disabled_msg'] = 'форум временно отключен'; // 'forums temporarily disabled'; // show this msg if board has been disabled via ON/OFF trigger
@@ -437,6 +437,7 @@ $bb_cfg['max_smilies']           = 10;             // Максимальное �
 $bb_cfg['log_days_keep'] = 90;
 
 // Users
+$bb_cfg['color_nick']                   = true;    // Окраска ников пользователей по user_rank
 $bb_cfg['user_not_activated_days_keep'] = 7;       // "not activated" == "not finished registration"
 $bb_cfg['user_not_active_days_keep']    = 180;     // inactive users but only with no posts
 

@@ -27,7 +27,7 @@ $online = $online_short = array('userlist' => '');
 
 $sql = "
 	SELECT
-		u.username, u.user_id, u.user_opt, u.user_level,
+		u.username, u.user_id, u.user_opt, u.user_rank, u.user_level,
 		u.ignore_srv_load,
 		s.session_logged_in, s.session_ip, (s.session_time - s.session_start) AS ses_len, COUNT(s.session_id) AS sessions, COUNT(DISTINCT s.session_ip) AS ips
 	FROM ". BB_SESSIONS ." s, ". BB_USERS ." u
@@ -42,32 +42,23 @@ foreach (DB()->fetch_rowset($sql) as $u)
 	if ($u['session_logged_in'])
 	{
 		$stat = array();
-		$style_color = $class = '';
-		$name = $u['username'];
+		$name = profile_url($u);
 		$level = $u['user_level'];
 
 		if ($level == ADMIN)
 		{
 			$name = "<b>$name</b>";
-			$class = ' class="colorAdmin"';
 			$users_cnt['admin']++;
 		}
 		else if ($level == MOD)
 		{
 			$name = "<b>$name</b>";
-			$class = ' class="colorMod"';
 			$users_cnt['mod']++;
 		}
 		else if ($level == GROUP_MEMBER)
 		{
 			$name = "<b>$name</b>";
-			$class = ' class="colorGroup"';
 			$users_cnt['group_member']++;
-		}
-		else if ($u['ignore_srv_load'])
-		{
-			$class = ' class="colorISL"';
-			$users_cnt['ignore_load']++;
 		}
 		else
 		{
@@ -91,11 +82,7 @@ foreach (DB()->fetch_rowset($sql) as $u)
 			$stat[] = "t:<span style=\"color: #1E90FF\">$t</span>";
 		}
 
-		$h = PROFILE_URL . $u['user_id'];
-		$u  = "<a href=\"$h\"$class$style_color>";
-		$u .= ($stat) ? "$name<span class=\"ou_stat\" style=\"color: #707070\" title=\"{$u['session_ip']}\"> [<b>". join(', ', $stat) .'</b>]</span>' : $name;
-		$u .= '</a>';
-		$ulist[$level][] = $u;
+		$ulist[$level][] = ($stat) ? "$name<span class=\"ou_stat\" style=\"color: #707070\" title=\"{$u['session_ip']}\"> [<b>". join(', ', $stat) .'</b>]</span>' : $name;
 	}
 	else
 	{
