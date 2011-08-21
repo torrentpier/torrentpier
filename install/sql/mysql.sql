@@ -1046,7 +1046,7 @@ CREATE TABLE `bb_ranks` (
 -- Дамп данных таблицы `bb_ranks`
 --
 
-INSERT INTO `bb_ranks` VALUES (1, 'Администратор', -1, 1, 'images/ranks/admin.png');
+INSERT INTO `bb_ranks` VALUES (1, 'Администратор', -1, 1, 'images/ranks/admin.png', 'colorAdmin');
 
 -- --------------------------------------------------------
 --
