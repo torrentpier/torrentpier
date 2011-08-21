@@ -73,19 +73,19 @@ if($mode != "")
 
 		$s_hidden_fields .= '<input type="hidden" name="mode" value="save" />';
 
-		$rank_is_special = isset($rank_info['rank_special']) ? HTML_CHECKED : "";
-		$rank_is_not_special = !isset($rank_info['rank_special']) ? HTML_CHECKED : "";
+		$rank_is_special = !empty($rank_info['rank_special']) ? HTML_CHECKED : "";
+		$rank_is_not_special = empty($rank_info['rank_special']) ? HTML_CHECKED : "";
 
 		$template->assign_vars(array(
 			'TPL_RANKS_EDIT' => true,
 
-			"RANK" => isset($rank_info['rank_title']) ? $rank_info['rank_title'] : '',
+			"RANK" => !empty($rank_info['rank_title']) ? $rank_info['rank_title'] : '',
 			"SPECIAL_RANK" => $rank_is_special,
 			"NOT_SPECIAL_RANK" => $rank_is_not_special,
 			"MINIMUM" => ($rank_is_special) ? "" : $rank_info['rank_min'],
-			"IMAGE" => isset($rank_info['rank_image']) ? $rank_info['rank_image'] : "images/ranks/rank_image.gif",
-			"STYLE" => isset($rank_info['rank_style']) ? $rank_info['rank_style'] : '',
-			"IMAGE_DISPLAY" => isset($rank_info['rank_image']) ? '<img src="../' . $rank_info['rank_image'] . '" />' : "",
+			"IMAGE" => !empty($rank_info['rank_image']) ? $rank_info['rank_image'] : "images/ranks/rank_image.gif",
+			"STYLE" => !empty($rank_info['rank_style']) ? $rank_info['rank_style'] : '',
+			"IMAGE_DISPLAY" => !empty($rank_info['rank_image']) ? '<img src="../' . $rank_info['rank_image'] . '" />' : "",
 
 			"S_RANK_ACTION" => append_sid("admin_ranks.php"),
 			"S_HIDDEN_FIELDS" => $s_hidden_fields)
