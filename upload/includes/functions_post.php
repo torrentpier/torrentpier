@@ -713,7 +713,7 @@ function topic_review ($topic_id)
 	$review_posts = DB()->fetch_rowset("
 		SELECT
 			p.*, h.post_html, IF(h.post_html IS NULL, pt.post_text, NULL) AS post_text,
-			IF(p.poster_id = ". ANONYMOUS .", p.post_username, u.username) AS username, u.user_id
+			IF(p.poster_id = ". ANONYMOUS .", p.post_username, u.username) AS username, u.user_rank
 		FROM      ". BB_POSTS      ." p
 		LEFT JOIN ". BB_USERS      ." u  ON(u.user_id = p.poster_id)
 		LEFT JOIN ". BB_POSTS_TEXT ." pt ON(pt.post_id = p.post_id)
@@ -726,12 +726,10 @@ function topic_review ($topic_id)
 	// Topic posts block
 	foreach ($review_posts as $i => $post)
 	{
-		$poster_name = ($post['username']) ? wbr($post['username']) : $lang['GUEST'];
-
 		$template->assign_block_vars('review', array(
 			'ROW_CLASS'      => !($i % 2) ? 'row1' : 'row2',
-			'POSTER_NAME'    => $poster_name,
-			'POSTER_NAME_JS' => addslashes($poster_name),
+			'POSTER'         => profile_url($post),
+			'POSTER_NAME_JS' => addslashes($post['username']),
 			'POST_DATE'      => bb_date($post['post_time'], $bb_cfg['post_date_format']),
 			'MESSAGE'        => get_parsed_post($post),
 		));

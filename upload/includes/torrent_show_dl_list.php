@@ -44,7 +44,7 @@ if ($show_dl_list)
 	}
 	else
 	{
-		$sql = "SELECT d.user_status, d.user_id, DATE_FORMAT(d.last_modified_dlstatus, '%Y-%m-%d') AS last_modified_dlstatus, u.username
+		$sql = "SELECT d.user_status, d.user_id, DATE_FORMAT(d.last_modified_dlstatus, '%Y-%m-%d') AS last_modified_dlstatus, u.username, u.user_rank
 			FROM ". BB_BT_DLSTATUS ." d, ". BB_USERS ." u
 			WHERE d.topic_id = $topic_id
 				AND d.user_id = u.user_id
@@ -76,7 +76,7 @@ if ($show_dl_list)
 			else
 			{
 				$u_prof_href = ($u['user_id'] == ANONYMOUS) ? '#' : append_sid("profile.php?mode=viewprofile&amp;u=". $u['user_id']) .'#torrent';
-				$dl_cat[$u['user_status']] .= '<nobr><a class="'. $u_link_class .'" href="'. $u_prof_href .'" title="'. $u['last_modified_dlstatus'] .'">'. $u['username'] .'</a></nobr>, ';
+				$dl_cat[$u['user_status']] .= '<nobr><a class="'. $u_link_class .'" href="'. $u_prof_href .'" title="'. $u['last_modified_dlstatus'] .'">'. profile_url(array('username' => $u['username'], 'user_rank' => $u['user_rank'])) .'</a></nobr>, ';
 				$dl_count[$u['user_status']]++;
 			}
 		}

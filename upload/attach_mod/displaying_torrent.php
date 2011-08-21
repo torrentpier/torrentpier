@@ -306,7 +306,7 @@ if ($tor_reged && $tor_info)
 		}
 		else if ($s_mode == 'names')
 		{
-			$sql = "SELECT tr.user_id, tr.ip, tr.port, tr.remain, tr.seeder, u.username
+			$sql = "SELECT tr.user_id, tr.ip, tr.port, tr.remain, tr.seeder, u.username, u.user_rank
 				FROM ". BB_BT_TRACKER ." tr, ". BB_USERS ." u
 				WHERE tr.topic_id = $tor_id
 					AND u.user_id = tr.user_id
@@ -319,7 +319,7 @@ if ($tor_reged && $tor_info)
 			$sql = "SELECT
 					tr.user_id, tr.ip, tr.port, tr.uploaded, tr.downloaded, tr.remain,
 					tr.seeder, tr.releaser, tr.speed_up, tr.speed_down, tr.update_time,
-					u.username
+					u.username, u.user_rank
 				FROM ". BB_BT_TRACKER ." tr
 				LEFT JOIN ". BB_USERS ." u ON u.user_id = tr.user_id
 				WHERE tr.topic_id = $tor_id
@@ -415,12 +415,7 @@ if ($tor_reged && $tor_info)
 				{
 					$ip    = bt_show_ip($peer['ip']);
 					$port  = bt_show_port($peer['port']);
-					$guest = ($peer['user_id'] == ANONYMOUS || is_null($peer['username']));
 
-					if (isset($peer['user_id']) && $guest)
-					{
-						$peer['username'] = 'Guest';
-					}
 					// peer max/current up/down
 					$p_max_up   = $peer['uploaded'];
 					$p_max_down = $peer['downloaded'];
@@ -432,7 +427,6 @@ if ($tor_reged && $tor_info)
 						$x = 's';
 						$x_row = 'srow';
 						$x_full = 'sfull';
-						$link_class = 'seedmed';
 
 						if (!defined('SEEDER_EXIST'))
 						{
@@ -460,7 +454,6 @@ if ($tor_reged && $tor_info)
 						$x = 'l';
 						$x_row = 'lrow';
 						$x_full = 'lfull';
-						$link_class = 'leechmed';
 
 						if (!defined('LEECHER_EXIST'))
 						{
@@ -486,9 +479,8 @@ if ($tor_reged && $tor_info)
 						$compl_perc = ($compl_size) ? floor($compl_size * 100 / $tor_size) : 0;
 					}
 
-					if($userdata['user_id'] == $peer['user_id']) $link_class = 'itsme';
-					$rel_sign = (!$guest && $peer['releaser']) ? '<span class="'. $link_class .'">&nbsp;<b><sup>&reg;</sup></b>&nbsp;</span>' : '';
-					$name     = '<a href="'. $u_prof_href .'" class="'. $link_class .'">'. wbr($peer['username']) .'</a>'. $rel_sign;
+					$rel_sign = (!$guest && $peer['releaser']) ? '&nbsp;<b><sup>&reg;</sup></b>' : '';
+					$name     = profile_url($peer). $rel_sign;
 					$up_tot   = ($p_max_up)   ? humn_size($p_max_up)   : '-';
 					$down_tot = ($p_max_down) ? humn_size($p_max_down) : '-';
 					$up_ratio = ($p_max_down) ? round(($p_max_up / $p_max_down), 2) : '';

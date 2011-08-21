@@ -45,7 +45,7 @@
 				<tr>
 					<td class="row2" width="25%"><span class="genmed">{L_REPORTED_BY}:</span></td>
 					<td class="row2"><span class="genmed">
-						<a href="{U_REPORT_AUTHOR}" class="genmed">{REPORT_AUTHOR}</a>&nbsp;
+						{REPORT_AUTHOR}&nbsp;
 						[ <a href="{U_REPORT_AUTHOR_PRIVMSG}" class="genmed">{L_SEND_PRIVATE_MESSAGE}</a> ]
 					</span></td>
 				</tr>
@@ -79,7 +79,7 @@
 				<tr>
 					<td class="row2"><span class="genmed">{L_LAST_CHANGED_BY}:</span></td>
 					<td class="row2"><span class="genmed">
-						<a href="{U_REPORT_LAST_CHANGE_USER}" class="genmed">{REPORT_LAST_CHANGE_USER}</a> ({REPORT_LAST_CHANGE_TIME})
+						{REPORT_LAST_CHANGE_USER} ({REPORT_LAST_CHANGE_TIME})
 					</span></td>
 				</tr>
 				<!-- END switch_report_changes -->

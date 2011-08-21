@@ -106,7 +106,7 @@ if(!isset($_POST['dosearch'])&&!isset($_GET['dosearch']))
 
 	$template->assign_vars(array(
 		'TPL_ADMIN_USER_SEARCH_MAIN' => true,
-		
+
 		'YEAR' => date("Y"),
 		'MONTH' => date("m"),
 		'DAY' => date("d"),
@@ -316,8 +316,8 @@ else
 
 	$base_url = "admin_user_search.php?dosearch=true";
 
-	$select_sql = "SELECT u.user_id, u.username, u.user_email, u.user_posts, u.user_regdate, u.user_level, u.user_active, u.user_lastvisit
-						FROM ".BB_USERS." AS u";
+	$select_sql = "SELECT u.user_id, u.username, u.user_rank, u.user_email, u.user_posts, u.user_regdate, u.user_level, u.user_active, u.user_lastvisit
+						FROM ". BB_USERS ." AS u";
 
 	$lower_b = 'LOWER(';
 	$lower_e = ')';
@@ -1271,7 +1271,7 @@ else
 	}
 
 	$sql = "SELECT ban_userid AS user_id
-				FROM ".BB_BANLIST."
+				FROM ". BB_BANLIST ."
 					WHERE ban_userid IN ($users_sql)";
 
 	if(!$result = DB()->sql_query($sql))
@@ -1294,7 +1294,7 @@ else
 
 		$template->assign_block_vars('userrow', array(
 			'ROW_CLASS' => $row_class,
-			'USERNAME' => $rowset[$i]['username'],
+			'USER' => profile_url($rowset[$i]),
 			'EMAIL' => $rowset[$i]['user_email'],
 			'JOINDATE' => bb_date($rowset[$i]['user_regdate']),
 			'LASTVISIT' => bb_date($rowset[$i]['user_lastvisit']),
@@ -1302,7 +1302,6 @@ else
 			'BAN' => ( ( !isset($banned[$rowset[$i]['user_id']]) ) ? $lang['NOT_BANNED'] : $lang['BANNED'] ),
 			'ABLED' => ( ( $rowset[$i]['user_active'] ) ? $lang['ENABLED'] : $lang['DISABLED'] ),
 
-			'U_VIEWPROFILE' => append_sid("../profile.php?mode=viewprofile&".POST_USERS_URL."=".$rowset[$i]['user_id']),
 			'U_VIEWPOSTS' => append_sid("../search.php?search_author=1&amp;uid={$rowset[$i]['user_id']}"),
 			'U_MANAGE' => append_sid("../profile.php?mode=editprofile&".POST_USERS_URL."=".$rowset[$i]['user_id']),
 			'U_PERMISSIONS' => append_sid("admin_ug_auth.php?mode=user&".POST_USERS_URL."=".$rowset[$i]['user_id']),

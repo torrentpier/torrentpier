@@ -176,16 +176,16 @@
 		<th>{L_ACCOUNT_STATUS}</th>
 	</tr>
 	<!-- BEGIN userrow -->
-	<tr>
-		<td class="{userrow.ROW_CLASS}" align="center" nowrap="nowrap"><span class="gen">&nbsp;<a href="{userrow.U_VIEWPROFILE}" class="gen">{userrow.USERNAME}</a>&nbsp;</span></td>
-		<td class="{userrow.ROW_CLASS}" align="center" nowrap="nowrap"><span class="gen">&nbsp;{userrow.EMAIL}&nbsp;</span></td>
-		<td class="{userrow.ROW_CLASS}" align="center" nowrap="nowrap"><span class="gen">&nbsp;{userrow.JOINDATE}&nbsp;</span></td>
-		<td class="{userrow.ROW_CLASS}" align="center" nowrap="nowrap"><span class="gen">&nbsp;<a href="{userrow.U_VIEWPOSTS}" class="gen">{userrow.POSTS}</a>&nbsp;</span></td>
-		<td class="{userrow.ROW_CLASS}" align="center" nowrap="nowrap"><span class="gen">&nbsp;{userrow.LASTVISIT}&nbsp;</span></td>
-		<td class="{userrow.ROW_CLASS}" align="center" nowrap="nowrap"><span class="gen">&nbsp;<a href="{userrow.U_MANAGE}" class="gen">{L_MANAGE}</a>&nbsp;</span></td>
-		<td class="{userrow.ROW_CLASS}" align="center" nowrap="nowrap"><span class="gen">&nbsp;<a href="{userrow.U_PERMISSIONS}" class="gen">{L_PERMISSIONS}</a>&nbsp;</span></td>
-		<td class="{userrow.ROW_CLASS}" align="center" nowrap="nowrap"><span class="gen">&nbsp;{userrow.BAN}&nbsp;</span></td>
-		<td class="{userrow.ROW_CLASS}" align="center" nowrap="nowrap"><span class="gen">&nbsp;{userrow.ABLED}&nbsp;</span></td>
+	<tr class="gen nowrap tCenter {userrow.ROW_CLASS}">
+		<td>&nbsp;{userrow.USER}&nbsp;</td>
+		<td>&nbsp;{userrow.EMAIL}&nbsp;</td>
+		<td>&nbsp;{userrow.JOINDATE}&nbsp;</td>
+		<td>&nbsp;<a href="{userrow.U_VIEWPOSTS}" class="gen">{userrow.POSTS}&nbsp;</span></td>
+		<td>&nbsp;{userrow.LASTVISIT}&nbsp;</td>
+		<td>&nbsp;<a href="{userrow.U_MANAGE}" class="gen">{L_MANAGE}</a>&nbsp;</td>
+		<td>&nbsp;<a href="{userrow.U_PERMISSIONS}" class="gen">{L_PERMISSIONS}</a>&nbsp;</td>
+		<td>&nbsp;{userrow.BAN}&nbsp;</td>
+		<td>&nbsp;{userrow.ABLED}&nbsp;</td>
 	</tr>
 	<!-- END userrow -->
 	<tr>

@@ -341,7 +341,7 @@ if (!IS_GUEST && $mode != 'newtopic' && ($submit || $preview || $mode == 'quote'
 {
 	if ($topic_last_read = max(intval(@$tracking_topics[$topic_id]), intval(@$tracking_forums[$forum_id])))
 	{
-		$sql = "SELECT p.*, pt.post_text, u.username
+		$sql = "SELECT p.*, pt.post_text, u.username, u.user_rank
 			FROM ". BB_POSTS ." p, ". BB_POSTS_TEXT ." pt, ". BB_USERS ." u
 			WHERE p.topic_id = ". (int) $topic_id ."
 				AND u.user_id = p.poster_id
@@ -356,19 +356,10 @@ if (!IS_GUEST && $mode != 'newtopic' && ($submit || $preview || $mode == 'quote'
 
 			foreach ($rowset as $i => $row)
 			{
-				if ($row['poster_id'] == ANONYMOUS)
-				{
-					$new_post_username = (!$row['post_username']) ? $lang['GUEST'] : $row['post_username'];
-				}
-				else
-				{
-					$new_post_username = $row['username'];
-				}
-
 				$template->assign_block_vars('new_posts', array(
 					'ROW_CLASS'      => !($i % 2) ? 'row1' : 'row2',
-					'POSTER_NAME'    => $new_post_username,
-					'POSTER_NAME_JS' => addslashes($new_post_username),
+					'POSTER'         => profile_url($row),
+					'POSTER_NAME_JS' => addslashes($row['username']),
 					'POST_DATE'      => bb_date($row['post_time'], $bb_cfg['post_date_format']),
 					'MESSAGE'        => get_parsed_post($row),
 				));

@@ -39,7 +39,7 @@ function checked_toggle(form, status)
 </script>
 
 <table cellspacing="2" cellpadding="2" border="0" width="100%">
-	<tr> 
+	<tr>
 		<td class="nav"><a href="{U_INDEX}" class="nav">{T_INDEX}</a></td>
 	</tr>
 </table>
@@ -71,7 +71,7 @@ function checked_toggle(form, status)
 							</strong>
 							<!-- END switch_current -->
 							<span class="gensmall">
-								{L_REPORT_BY} <a href="{report_modules.reports.U_AUTHOR}" class="gensmall">{report_modules.reports.AUTHOR}</a>
+								{L_REPORT_BY} {report_modules.reports.AUTHOR}
 							</span>
 						</td>
 					</tr>

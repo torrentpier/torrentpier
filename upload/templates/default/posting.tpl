@@ -15,13 +15,13 @@
 <tr class="{new_posts.ROW_CLASS}">
 	<td width="120" class="poster_info td1">
 		<p class="nick" onmouseout="bbcode.refreshSelection(false);" onmouseover="bbcode.refreshSelection(true);" onclick="bbcode.onclickPoster('{new_posts.POSTER_NAME_JS}');">
-			<a href="#" onclick="return false;">{new_posts.POSTER_NAME}</a>
+			<a href="#" onclick="return false;">{new_posts.POSTER}</a>
 		</p>
 		<p><img src="{SPACER}" width="120" height="10" alt="" /></p>
 	</td>
 	<td class="message td2">
 		<div class="post_head pad_4">{MINIPOST_IMG_NEW} {new_posts.POST_DATE}</div>
-		<div class="post_wrap">{new_posts.MESSAGE}</div>
+		<div class="post_wrap post_body">{new_posts.MESSAGE}</div>
 	</td>
 </tr>
 <!-- END new_posts -->
@@ -41,7 +41,7 @@
 	<th>{L_PREVIEW}</th>
 </tr>
 <tr>
-	<td class="row1"><div class="post_wrap">{PREVIEW_MSG}</div></td>
+	<td class="row1"><div class="post_wrap post_body">{PREVIEW_MSG}</div></td>
 </tr>
 </table>
 
@@ -170,13 +170,13 @@
 <tr class="{review.ROW_CLASS}">
 	<td width="120" class="poster_info td1">
 		<p class="nick" onmouseout="bbcode.refreshSelection(false);" onmouseover="bbcode.refreshSelection(true);" onclick="bbcode.onclickPoster('{review.POSTER_NAME_JS}');">
-			<a href="#" onclick="return false;">{review.POSTER_NAME}</a>
+			<a href="#" onclick="return false;">{review.POSTER}</a>
 		</p>
 		<p><img src="{SPACER}" width="120" height="10" alt="" /></p>
 	</td>
 	<td class="message td2">
 		<div class="post_head pad_4">{MINIPOST_IMG} {review.POST_DATE}</div>
-		<div class="post_wrap">{review.MESSAGE}</div>
+		<div class="post_wrap post_body">{review.MESSAGE}</div>
 	</td>
 </tr>
 <!-- END review -->

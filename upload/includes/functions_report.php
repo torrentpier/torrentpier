@@ -404,7 +404,7 @@ function report_notify($mode)
 			// Obtain report information
 			//
 			$sql = 'SELECT r.report_id, r.report_module_id, r.report_subject, r.report_subject_data, r.report_title, r.report_desc,
-					rc.report_change_time, rc.report_change_comment, u.username
+					rc.report_change_time, rc.report_change_comment, u.username, u.user_rank
 				FROM ' . BB_REPORTS . ' r
 				INNER JOIN ' . BB_REPORTS_CHANGES . ' rc
 					ON rc.report_change_id = r.report_last_change
@@ -732,7 +732,7 @@ function reports_obtain($module_id = null, $auth_check = true)
 {
 	$where_sql = (isset($module_id)) ? 'AND r.report_module_id = ' . (int) $module_id : '';
 	$sql = 'SELECT r.report_id, r.user_id, r.report_time, r.report_module_id, r.report_status, r.report_subject,
-			r.report_subject_data, r.report_title, u.username
+			r.report_subject_data, r.report_title, u.username, u.user_rank
 		FROM ' . BB_REPORTS . ' r
 		LEFT JOIN ' . BB_USERS . ' u
 			ON u.user_id = r.user_id
@@ -792,7 +792,7 @@ function reports_obtain($module_id = null, $auth_check = true)
 function reports_open_obtain($module_id, $report_subject, $auth_check = true)
 {
 	$sql = 'SELECT r.report_id, r.user_id, r.report_time, r.report_module_id, r.report_status, r.report_subject,
-			r.report_subject_data, r.report_title, u.username
+			r.report_subject_data, r.report_title, u.username, u.user_rank
 		FROM ' . BB_REPORTS . ' r
 		LEFT JOIN ' . BB_USERS . ' u
 			ON u.user_id = r.user_id
@@ -839,7 +839,7 @@ function reports_open_obtain($module_id, $report_subject, $auth_check = true)
 function reports_deleted_obtain($auth_check = true)
 {
 	$sql = 'SELECT r.report_id, r.user_id, r.report_time, r.report_module_id, r.report_subject,
-			r.report_subject_data, r.report_title, u.username
+			r.report_subject_data, r.report_title, u.username, u.user_rank
 		FROM ' . BB_REPORTS . ' r
 		LEFT JOIN ' . BB_USERS . ' u
 			ON u.user_id = r.user_id
@@ -886,7 +886,7 @@ function report_obtain($report_id, $auth_check = true)
 	global $bb_cfg, $lang;
 
 	$sql = 'SELECT r.report_id, r.user_id, r.report_time, r.report_module_id, r.report_status, r.report_subject,
-			r.report_subject_data, r.report_title, r.report_desc, rr.report_reason_desc, u.username
+			r.report_subject_data, r.report_title, r.report_desc, rr.report_reason_desc, u.username, u.user_rank
 		FROM ' . BB_REPORTS . ' r
 		LEFT JOIN ' . BB_REPORTS_REASONS . ' rr
 			ON rr.report_reason_id = r.report_reason_id
@@ -940,7 +940,7 @@ function report_obtain($report_id, $auth_check = true)
 //
 function report_changes_obtain($report_id)
 {
-	$sql = 'SELECT rc.user_id, rc.report_change_time, rc.report_status, rc.report_change_comment, u.username
+	$sql = 'SELECT rc.user_id, rc.report_change_time, rc.report_status, rc.report_change_comment, u.username, u.user_rank
 		FROM ' . BB_REPORTS_CHANGES . ' rc
 		LEFT JOIN ' . BB_USERS . ' u
 			ON u.user_id = rc.user_id

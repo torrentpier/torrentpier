@@ -408,7 +408,7 @@ else
 
 			$template->assign_vars(array(
 				'S_REPORT_ACTION', append_sid("report.php"),
-				
+
 				'L_STATUS_CLEARED' => $lang['REPORT_STATUS'][REPORT_CLEARED],
 				'L_STATUS_IN_PROCESS' => $lang['REPORT_STATUS'][REPORT_IN_PROCESS],
 				'L_STATUS_OPEN' => $lang['REPORT_STATUS'][REPORT_OPEN])
@@ -421,11 +421,10 @@ else
 			{
 				$template->assign_block_vars('open_reports', array(
 					'U_SHOW' => append_sid("report.php?" . POST_REPORT_URL . '=' . $report['report_id']),
-					'U_AUTHOR' => append_sid("profile.php?mode=viewprofile&amp;" . POST_USERS_URL . '=' . $report['user_id']),
 
 					'ID' => $report['report_id'],
 					'TITLE' => $report['report_title'],
-					'AUTHOR' => $report['username'],
+					'AUTHOR' => profile_url($report),
 					'TIME' => bb_date($report['report_time']))
 				);
 			}
@@ -445,7 +444,7 @@ else
 				'S_REPORT_ACTION' => append_sid("report.php"),
 
 				'U_REPORT_INDEX' => append_sid("report.php"),
-				
+
 				'L_STATUS_CLEARED' => $lang['REPORT_STATUS'][REPORT_CLEARED],
 				'L_STATUS_IN_PROCESS' => $lang['REPORT_STATUS'][REPORT_IN_PROCESS],
 				'L_STATUS_OPEN' => $lang['REPORT_STATUS'][REPORT_OPEN])
@@ -506,12 +505,11 @@ else
 				{
 					$template->assign_block_vars('report_modules.reports', array(
 						'U_SHOW' => append_sid("report.php?" . POST_REPORT_URL . '=' . $report['report_id'] . $cat_url),
-						'U_AUTHOR' => append_sid("profile.php?mode=viewprofile&amp;" . POST_USERS_URL . '=' . $report['user_id']),
 
 						'ROW_CLASS' => $report_status_classes[$report['report_status']],
 						'ID' => $report['report_id'],
 						'TITLE' => (strlen($report['report_title'] > 53)) ? substr($report['report_title'], 0, 50) . '...' : $report['report_title'],
-						'AUTHOR' => $report['username'],
+						'AUTHOR' => profile_url($report),
 						'TIME' => bb_date($report['report_time']),
 						'STATUS' => $lang['REPORT_STATUS'][$report['report_status']])
 					);
@@ -645,8 +643,7 @@ else
 
 					foreach ($report_changes as $report_change)
 					{
-						$u_report_change_user = append_sid("profile.php?mode=viewprofile&amp;" . POST_USERS_URL . '=' . $report_change['user_id']);
-						$report_change_user = '<a href="' . $u_report_change_user . '">' . $report_change['username'] . '</a>';
+						$report_change_user = profile_url($report_change);
 
 						$report_change_status = $lang['REPORT_STATUS'][$report_change['report_status']];
 						$report_change_time = bb_date($report_change['report_change_time']);
@@ -668,11 +665,9 @@ else
 						}
 
 						$template->assign_block_vars('switch_report_changes.report_changes', array(
-							'U_USER' => $u_report_change_user,
-
 							'ROW_CLASS' => $report_status_classes[$report_change['report_status']],
 							'STATUS' => $report_change_status,
-							'USER' => $report_change['username'],
+							'USER' => $report_change_user,
 							'TIME' => $report_change_time,
 
 							'TEXT' => $report_change_text)
@@ -683,10 +678,8 @@ else
 					// Assign last change information
 					//
 					$template->assign_vars(array(
-						'U_REPORT_LAST_CHANGE_USER' => $u_report_change_user,
-
 						'REPORT_LAST_CHANGE_TIME' => $report_change_time,
-						'REPORT_LAST_CHANGE_USER' => $report_change['username'])
+						'REPORT_LAST_CHANGE_USER' => profile_url($report_change))
 					);
 				}
 
@@ -701,12 +694,11 @@ else
 				$template->assign_vars(array(
 					'S_HIDDEN_FIELDS' => '<input type="hidden" name="' . POST_REPORT_URL . '" value="' . $report['report_id'] . '" />',
 
-					'U_REPORT_AUTHOR' => append_sid("profile.php?mode=viewprofile&amp;" . POST_USERS_URL . '=' . $report['user_id']),
 					'U_REPORT_AUTHOR_PRIVMSG' => append_sid("privmsg.php?mode=post&amp;" . POST_USERS_URL . '=' . $report['user_id']),
 
 					'REPORT_TYPE' => $report_module->lang['REPORT_TYPE'],
 					'REPORT_TITLE' => $report['report_title'],
-					'REPORT_AUTHOR' => $report['username'],
+					'REPORT_AUTHOR' => profile_url($report),
 					'REPORT_TIME' => bb_date($report['report_time']),
 					'REPORT_DESC' => bbcode2html($report['report_desc']),
 					'REPORT_STATUS' => $lang['REPORT_STATUS'][$report['report_status']],
@@ -748,12 +740,11 @@ else
 
 						$template->assign_block_vars('switch_deleted_reports.deleted_reports', array(
 							'U_SHOW' => append_sid("report.php?" . POST_REPORT_URL . '=' . $report['report_id'] . $cat_url),
-							'U_AUTHOR' => append_sid("profile.php?mode=viewprofile&amp;" . POST_USERS_URL . '=' . $report['user_id']),
 
 							'ID' => $report['report_id'],
 							'TITLE' => $report['report_title'],
 							'TYPE' => $report_module->lang['REPORT_TYPE'],
-							'AUTHOR' => $report['username'],
+							'AUTHOR' => profile_url($report),
 							'TIME' => bb_date($report['report_time']),
 							'STATUS' => $lang['REPORT_STATUS'][REPORT_DELETE])
 						);
