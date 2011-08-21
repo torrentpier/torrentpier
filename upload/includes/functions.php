@@ -2504,11 +2504,6 @@ function caching_output ($enabled, $mode, $cache_var_name, $ttl = 300)
  */
 function bb_json_encode ($data)
 {
-	if (!function_exists('json_encode')) {
-		require_once( INC_DIR . 'FastJSON.class.php' );
-		$json = new FastJSON();
-		return $json->encode(utf8_encode($data));
-	}
 	return json_encode($data);
 }
 
@@ -2518,12 +2513,6 @@ function bb_json_encode ($data)
 function bb_json_decode ($data)
 {
 	if (!is_string($data)) trigger_error('invalid argument for '. __FUNCTION__, E_USER_ERROR);
-
-	if (!function_exists('json_decode')) {
-		require_once( INC_DIR . 'FastJSON.class.php' );
-		$json = new FastJSON();
-		return utf8_decode($json->decode($data));
-	}
 	return json_decode($data, true);
 }
 
@@ -2809,4 +2798,34 @@ function send_pm($user_id, $subject, $message, $poster_id = false)
 		user_newest_pm_id = $pm_id
 		WHERE user_id = $user_id");
 }
+
+function profile_url($data)
+{
+	global $bb_cfg, $lang, $datastore;
+
+    if (!$ranks = $datastore->get('ranks'))
+	{
+		$datastore->update('ranks');
+		$ranks = $datastore->get('ranks');
+	}
+
+    if(isset($ranks[$data['user_rank']]))
+    {    	$title = $ranks[$data['user_rank']]['rank_title'];        $style = $ranks[$data['user_rank']]['rank_style'];
+    }
+    if(empty($title)) $title = 'User';
+    if(empty($style)) $style = 'colorUser';
+
+    $username = !empty($data['username']) ? $data['username'] : $lang['GUEST'];
+    $user_id = (!empty($data['user_id']) && $username != $lang['GUEST']) ? $data['user_id'] : ANONYMOUS;
+
+	$profile = '<span title="'. $title .'" class="'. $style .'">'. $username .'</span>';
+
+    if(!in_array($user_id, array('', ANONYMOUS, BOT_UID)) && $username)
+    {
+    	$profile = '<a href="'. make_url(PROFILE_URL . $user_id) .'">'. $profile .'</a>';
+    }
+
+	return $profile;
+}
+
 

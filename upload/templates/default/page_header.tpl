@@ -333,7 +333,7 @@ function OpenInEditor ($file, $line)
 <table width="100%" cellpadding="0" cellspacing="0">
 <tr>
     <td width="40%">
-        {L_USER_WELCOME} &nbsp;<a href="{U_PROFILE}"><b class="med">{THIS_USERNAME}</b></a>&nbsp; [ <a href="{U_LOGIN_LOGOUT}" onclick="return confirm('{L_CONFIRM_LOGOUT}');">{L_LOGOUT}</a> ]
+        {L_USER_WELCOME} &nbsp;<b class="med">{THIS_USER}</b>&nbsp; [ <a href="{U_LOGIN_LOGOUT}" onclick="return confirm('{L_CONFIRM_LOGOUT}');">{L_LOGOUT}</a> ]
     </td>
 
 	<td align="center" nowrap="nowrap">

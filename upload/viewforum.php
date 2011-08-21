@@ -410,9 +410,9 @@ if ($topics_csv = join(',', $topic_ids))
 {
 	$topic_rowset = DB()->fetch_rowset("
 		SELECT
-			t.*, t.topic_poster AS first_user_id,
+			t.*, t.topic_poster AS first_user_id, u1.user_rank as first_user_rank,
 			IF(t.topic_poster = $anon, p1.post_username, u1.username) AS first_username,
-			p2.poster_id AS last_user_id,
+			p2.poster_id AS last_user_id, u2.user_rank as last_user_rank,
 			IF(p2.poster_id = $anon, p2.post_username, u2.username) AS last_username
 				$select_tor_sql
 		FROM      ". BB_TOPICS ." t
@@ -554,12 +554,10 @@ foreach ($topic_rowset as $topic)
 		'POLL'             => $topic['topic_vote'],
 		'DL_CLASS'         => isset($topic['dl_status']) ? $dl_link_css[$topic['dl_status']] : '',
 
-		'TOPIC_AUTHOR_ID'   => ($topic['first_user_id'] != ANONYMOUS) ? $topic['first_user_id'] : '',
-		'TOPIC_AUTHOR_NAME' => ($topic['first_username']) ? wbr($topic['first_username']) : $lang['GUEST'],
-		'LAST_POSTER_HREF'  => ($topic['last_user_id'] != ANONYMOUS) ? $topic['last_user_id'] : '',
-		'LAST_POSTER_NAME'  => ($topic['last_username']) ? str_short($topic['last_username'], 15) : $lang['GUEST'],
-		'LAST_POST_TIME'    => bb_date($topic['topic_last_post_time']),
-		'LAST_POST_ID'      => $topic['topic_last_post_id'],
+		'TOPIC_AUTHOR'     => profile_url(array('username' => str_short($topic['first_username'], 15), 'user_id' => $topic['first_user_id'], 'user_rank' => $topic['first_user_rank'])),
+		'LAST_POSTER'      => profile_url(array('username' => str_short($topic['last_username'], 15), 'user_id' => $topic['last_user_id'], 'user_rank' => $topic['last_user_rank'])),
+		'LAST_POST_TIME'   => bb_date($topic['topic_last_post_time']),
+		'LAST_POST_ID'     => $topic['topic_last_post_id'],
 	));
 
 	if (isset($topic['tor_size']))

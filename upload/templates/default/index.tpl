@@ -112,11 +112,7 @@
 					<p class="last_post_time">
 						<span class="last_time">{c.f.last.LAST_POST_TIME}</span>
 						<span class="last_author">&middot;
-							<!-- IF c.f.last.LAST_POST_USER_ID -->
-							<a href="{PROFILE_URL}{c.f.last.LAST_POST_USER_ID}">{c.f.last.LAST_POST_USER_NAME}</a>
-							<!-- ELSE -->
-							{c.f.last.LAST_POST_USER_NAME}
-							<!-- ENDIF -->
+							{c.f.last.LAST_POST_USER}
 						</span>
 					</p>
 				<!-- END last -->
@@ -186,7 +182,7 @@
                 <p>{WHOSBIRTHDAY_TODAY}</p>
                 <p>{WHOSBIRTHDAY_WEEK}</p>
 				<!-- ENDIF -->
-				
+
                 <div class="hr1" style="margin: 5px 0 4px;"></div>
 
 				<p>{TOTAL_USERS_ONLINE}<!-- IF SHOW_ADMIN_OPTIONS --> &nbsp;{USERS_ONLINE_COUNTS}<!-- ENDIF --></p>

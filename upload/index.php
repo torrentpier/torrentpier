@@ -99,7 +99,7 @@ $sql = "
 		f.cat_id, f.forum_id, f.forum_status, f.forum_parent, f.show_on_index,
 		p.post_id AS last_post_id, p.post_time AS last_post_time,
 		t.topic_id AS last_topic_id, t.topic_title AS last_topic_title,
-		u.user_id AS last_post_user_id,
+		u.user_id AS last_post_user_id, u.user_rank AS last_post_user_rank,
 		IF(p.poster_id = $anon, p.post_username, u.username) AS last_post_username
 	FROM       ". BB_CATEGORIES ." c
 	INNER JOIN ". BB_FORUMS     ." f ON($forums_join_sql)
@@ -115,6 +115,7 @@ $replace_in_parent = array(
 	'last_post_time',
 	'last_post_user_id',
 	'last_post_username',
+	'last_post_user_rank',
 	'last_topic_title',
 	'last_topic_id',
 );
@@ -300,8 +301,7 @@ foreach ($cat_forums as $cid => $c)
 				'LAST_TOPIC_TITLE'    => wbr(str_short($f['last_topic_title'], $last_topic_max_len)),
 
 				'LAST_POST_TIME'      => bb_date($f['last_post_time'], $bb_cfg['last_post_date_format']),
-				'LAST_POST_USER_ID'   => ($f['last_post_user_id'] != ANONYMOUS) ? $f['last_post_user_id'] : false,
-				'LAST_POST_USER_NAME' => ($f['last_post_username']) ? str_short($f['last_post_username'], 15) : $lang['GUEST'],
+				'LAST_POST_USER'      => profile_url(array('username' => str_short($f['last_post_username'], 15), 'user_id' => $f['last_post_user_id'], 'user_rank' => $f['last_post_user_rank'])),
 			));
 		}
 	}
@@ -344,7 +344,7 @@ if ($bb_cfg['birthday']['check_day'] && $bb_cfg['birthday']['enabled'])
 	{
 		foreach($stats['birthday_week_list'] as $week)
 		{
-			$week_list[] = '<a href="'. PROFILE_URL . $week['user_id'] .'">'. $week['username'] .'</a> <span class="small">('. birthday_age($week['age']) .')</span>';
+			$week_list[] = profile_url($week) .' <span class="small">('. birthday_age($week['age']) .')</span>';
 		}
 		$week_list = join(', ', $week_list);
 		$week_list = sprintf($lang['BIRTHDAY_WEEK'], $bb_cfg['birthday']['check_day'], $week_list);
@@ -355,7 +355,7 @@ if ($bb_cfg['birthday']['check_day'] && $bb_cfg['birthday']['enabled'])
 	{
 		foreach($stats['birthday_today_list'] as $today)
 		{
-			$today_list[] = '<a href="'. PROFILE_URL . $today['user_id'] .'">'. $today['username'] .'</a>  <span class="small">('. birthday_age($today['age'], 1) .')</span>';
+			$today_list[] = profile_url($today) .' <span class="small">('. birthday_age($today['age'], 1) .')</span>';
 		}
 		$today_list = join(', ', $today_list);
 		$today_list = $lang['BIRTHDAY_TODAY'] . $today_list;

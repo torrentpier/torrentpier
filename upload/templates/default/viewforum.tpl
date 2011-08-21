@@ -456,10 +456,7 @@ td.topic_id { cursor: pointer; }
 		<!-- ENDIF -->
 	</div>
 	<div class="topicAuthor" style="padding-top: 2px;">
-		<!-- IF t.TOPIC_AUTHOR_ID --><a href="{PROFILE_URL}{t.TOPIC_AUTHOR_ID}" class="topicAuthor">{t.TOPIC_AUTHOR_NAME}</a>
-		<!-- ELSE -->{t.TOPIC_AUTHOR_NAME}<!-- ENDIF -->
-		<!-- IF t.PAGINATION --><span class="topicPG">&nbsp;[{ICON_GOTOPOST}{L_GOTO_SHORT} {t.PAGINATION} ]</span><!-- ENDIF -->
-	</div>
+		{t.TOPIC_AUTHOR}
 	</td>
 
 	<td class="tCenter nowrap" style="padding: 2px 4px;">
@@ -487,7 +484,7 @@ td.topic_id { cursor: pointer; }
 	<td class="tCenter small nowrap" style="padding: 3px 6px 2px;">
 		<p>{t.LAST_POST_TIME}</p>
 		<p style="padding-top: 2px">
-			<!-- IF t.LAST_POSTER_HREF --><a href="{PROFILE_URL}{t.LAST_POSTER_HREF}">{t.LAST_POSTER_NAME}</a><!-- ELSE -->{t.LAST_POSTER_NAME}<!-- ENDIF -->
+			{t.LAST_POSTER}
 			<a href="{POST_URL}{t.LAST_POST_ID}#{t.LAST_POST_ID}">{ICON_LATEST_REPLY}</a>
 		</p>
 	</td>
@@ -555,12 +552,12 @@ td.topic_id { cursor: pointer; }
 		<!-- IF t.PAGINATION --><span class="topicPG">[{ICON_GOTOPOST}{L_GOTO_SHORT} {t.PAGINATION} ]</span><!-- ENDIF -->
 	</td>
 	<td class="tCenter med">{t.REPLIES}</td>
-	<td class="tCenter med"><!-- IF t.TOPIC_AUTHOR_ID --><a href="{PROFILE_URL}{t.TOPIC_AUTHOR_ID}">{t.TOPIC_AUTHOR_NAME}</a><!-- ELSE -->{t.TOPIC_AUTHOR_NAME}<!-- ENDIF --></td>
+	<td class="tCenter med">{t.TOPIC_AUTHOR}</td>
 	<td class="tCenter med">{t.VIEWS}</td>
 	<td class="tCenter nowrap small" style="padding: 1px 6px 2px;">
 		<p>{t.LAST_POST_TIME}</p>
 		<p>
-			<!-- IF t.LAST_POSTER_HREF --><a href="{PROFILE_URL}{t.LAST_POSTER_HREF}">{t.LAST_POSTER_NAME}</a><!-- ELSE -->{t.LAST_POSTER_NAME}<!-- ENDIF -->
+			{t.LAST_POSTER}
 			<a href="{POST_URL}{t.LAST_POST_ID}#{t.LAST_POST_ID}">{ICON_LATEST_REPLY}</a>
 		</p>
 	</td>

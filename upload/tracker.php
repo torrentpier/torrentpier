@@ -660,7 +660,7 @@ if ($allowed_forums)
 		$select .= (!$hide_speed)  ? ", sn.speed_up, sn.speed_down" : '';
 		$select .= (!$hide_forum)  ? ", tor.forum_id" : '';
 		$select .= (!$hide_cat)    ? ", f.cat_id" : '';
-		$select .= (!$hide_author) ? ", tor.poster_id, u.username" : '';
+		$select .= (!$hide_author) ? ", tor.poster_id, u.username, u.user_rank" : '';
 		$select .= (!IS_GUEST)     ? ", dl.user_status AS dl_status" : '';
 
 		// FROM
@@ -752,7 +752,7 @@ if ($allowed_forums)
 				'TOPIC_TIME'   => bb_date($tor['topic_time'], 'd-M-y') .' <b>&middot;</b> '. delta_time($tor['topic_time']),
 				'POST_ID'      => $tor['post_id'],
 				'POSTER_ID'    => $poster_id,
-				'USERNAME'     => isset($tor['username']) ? wbr($tor['username']) : '',
+				'USERNAME'     => profile_url(array('username' => $tor['username'], 'user_rank' => $tor['user_rank'])),
 
 				'ROW_CLASS'    => $row_class,
 				'ROW_NUM'      => $row_num,

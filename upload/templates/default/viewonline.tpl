@@ -13,7 +13,7 @@
 </thead>
 <!-- BEGIN reg_user_row -->
 <tr class="{reg_user_row.ROW_CLASS}">
-	<td><a href="{reg_user_row.U_USER_PROFILE}" class="gen">{reg_user_row.USERNAME}</a></td>
+	<td><b>{reg_user_row.USER}</b></td>
 	<td class="tCenter"><u>{reg_user_row.LASTUPDATE_RAW}</u>{reg_user_row.LASTUPDATE}</td>
 	<!-- IF IS_ADMIN --><td class="tCenter"><a href="{reg_user_row.U_WHOIS_IP}" class="gen" target="_blank">{reg_user_row.USERIP}</a></td><!-- ENDIF -->
 </tr>
@@ -24,7 +24,7 @@
 </tr>
 <!-- BEGIN guest_user_row -->
 <tr class="{guest_user_row.ROW_CLASS}">
-	<td>{guest_user_row.USERNAME}</td>
+	<td>{guest_user_row.USER}</td>
 	<td class="tCenter">{guest_user_row.LASTUPDATE}</td>
 	<!-- IF SHOW_ADMIN_OPTIONS --><td class="tCenter"><a href="{guest_user_row.U_WHOIS_IP}" class="gen" target="_blank">{guest_user_row.USERIP}</a></td><!-- ENDIF -->
 </tr>

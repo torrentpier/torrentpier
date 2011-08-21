@@ -23,6 +23,12 @@
 	</td>
 </tr>
 <tr>
+	<td width="40%"><h4>Style</h4></td>
+	<td>
+		<input class="post" type="text" name="style" size="60" maxlength="40" value="{STYLE}" />
+	</td>
+</tr>
+<tr>
 	<td valign="top"><h4>{L_RANK_IMAGE}:</h4></td>
 	<td>
 		<input class="post" type="text" name="rank_image" size="60" maxlength="255" value="{IMAGE}" />
@@ -64,7 +70,7 @@
 </tr>
 <!-- BEGIN ranks -->
 <tr class="{ranks.ROW_CLASS} tCenter">
-	<td>{ranks.RANK}</td>
+	<td><div class="{ranks.STYLE}">{ranks.RANK}</div></td>
 	<td>{ranks.IMAGE_DISPLAY}</td>
 	<td><a href="{ranks.U_RANK_EDIT}">{L_EDIT}</a></td>
 	<td><a href="{ranks.U_RANK_DELETE}">{L_DELETE}</a></td>

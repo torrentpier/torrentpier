@@ -947,7 +947,7 @@ for($i = 0; $i < $total_posts; $i++)
 		'ROW_CLASS'          => !($i % 2) ? 'row1' : 'row2',
 		'POST_ID'            => $postrow[$i]['post_id'],
 		'IS_NEWEST'          => ($postrow[$i]['post_id'] == $newest),
-		'POSTER_NAME'        => wbr($poster),
+		'POSTER_NAME'        => profile_url(array('username' => $poster, 'user_rank' => $user_rank)),
 		'POSTER_NAME_JS'     => addslashes($poster),
 		'POSTER_RANK'        => $poster_rank,
 		'RANK_IMAGE'         => $rank_image,

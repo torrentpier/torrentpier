@@ -152,7 +152,7 @@ $template->assign_vars(array(
 ));
 
 // per-letter selection end
-$sql = "SELECT username, user_id, user_opt, user_posts, user_regdate, user_from, user_website, user_email
+$sql = "SELECT username, user_id, user_rank, user_opt, user_posts, user_regdate, user_from, user_website, user_email
          FROM ". BB_USERS ."
 		 WHERE user_id NOT IN(". EXCLUDED_USERS_CSV .")";
 if ( $username )
@@ -163,20 +163,16 @@ if ( $username )
 $sql .= ($letter_sql) ? " AND $letter_sql" : '';
 $sql .= " ORDER BY $order_by";
 
-$result = DB()->sql_query($sql) OR message_die(GENERAL_ERROR, 'Could not query users', '', __LINE__, __FILE__, $sql);
-
-if ( $row = DB()->sql_fetchrow($result) )
+if ($result = DB()->fetch_rowset($sql))
 {
-	$i = 0;
-	do
+	foreach($result as $i => $row)
 	{
-		$username = $row['username'];
 		$user_id  = $row['user_id'];
 		$from     = $row['user_from'];
 		$joined   = bb_date($row['user_regdate'], $lang['DATE_FORMAT']);
 		$posts    = $row['user_posts'];
 		$pm       = ($bb_cfg['text_buttons']) ? '<a class="txtb" href="'. append_sid("privmsg.php?mode=post&amp;". POST_USERS_URL ."=$user_id") .'">'. $lang['SEND_PM_TXTB'] .'</a>' : '<a href="' . append_sid("privmsg.php?mode=post&amp;". POST_USERS_URL ."=$user_id") .'"><img src="' . $images['icon_pm'] . '" alt="' . $lang['SEND_PRIVATE_MESSAGE'] . '" title="' . $lang['SEND_PRIVATE_MESSAGE'] . '" border="0" /></a>';
-		
+
         if (bf($row['user_opt'], 'user_opt', 'viewemail') || IS_AM)
         {
         	$email_uri = ($bb_cfg['board_email_form']) ? append_sid("profile.php?mode=email&amp;". POST_USERS_URL ."=$user_id") : 'mailto:'. $row['user_email'];
@@ -200,7 +196,7 @@ if ( $row = DB()->sql_fetchrow($result) )
 		$template->assign_block_vars('memberrow', array(
 			'ROW_NUMBER'    => $i + ( $start + 1 ),
 			'ROW_CLASS'     => $row_class,
-			'USERNAME'      => $username,
+			'USER'          => profile($row),
 			'FROM'          => $from,
 			'JOINED_RAW'    => $row['user_regdate'],
 			'JOINED'        => $joined,
@@ -210,10 +206,7 @@ if ( $row = DB()->sql_fetchrow($result) )
 			'WWW'           => $www,
 			'U_VIEWPROFILE' => append_sid("profile.php?mode=viewprofile&amp;". POST_USERS_URL ."=$user_id"))
 		);
-		$i++;
 	}
-	while ( $row = DB()->sql_fetchrow($result) );
-	DB()->sql_freeresult($result);
 }
 else
 {

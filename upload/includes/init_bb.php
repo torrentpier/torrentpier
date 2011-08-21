@@ -272,7 +272,7 @@ define('POST_REPORT_REASON_URL', 'r');
 // Report [END]
 
 // Gender
-define('MALE',          1);  
+define('MALE',          1);
 define('FEMALE',        2);
 
 // Torrents     (reserved: -1)

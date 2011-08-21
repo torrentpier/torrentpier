@@ -25,7 +25,7 @@ $is_auth_ary = auth(AUTH_VIEW, AUTH_LIST_ALL, $userdata);
 //
 // Get user list
 //
-$sql = "SELECT u.user_id, u.username, u.user_opt, u.user_level, s.session_logged_in, s.session_time, s.session_ip
+$sql = "SELECT u.user_id, u.username, u.user_opt, u.user_rank, s.session_logged_in, s.session_time, s.session_ip
 	FROM ".BB_USERS." u, ".BB_SESSIONS." s
 	WHERE u.user_id = s.session_user_id
 		AND s.session_time >= ".( time() - 300 ) . "
@@ -56,21 +56,7 @@ while ( $row = DB()->sql_fetchrow($result) )
 
 		if ( $user_id != $prev_user )
 		{
-			$username = $row['username'];
-
-			$style_color = '';
-			if ( $row['user_level'] == ADMIN )
-			{
-				$username = '<b class="colorAdmin">' . $username . '</b>';
-			}
-			else if ( $row['user_level'] == MOD )
-			{
-				$username = '<b class="colorMod">' . $username . '</b>';
-			}
-			else if ( $row['user_level'] == GROUP_MEMBER )
-			{
-				$username = '<b class="colorGroup">' . $username . '</b>';
-			}
+			$username = profile_url($row);
 
 			if ( bf($row['user_opt'], 'user_opt', 'allow_viewonline') )
 			{
@@ -111,13 +97,12 @@ while ( $row = DB()->sql_fetchrow($result) )
 		$row_class = !($which_counter % 2) ? 'row1' : 'row2';
 
 		$template->assign_block_vars("$which_row", array(
-			'ROW_CLASS' => $row_class,
-			'USERNAME' => $username,
+			'ROW_CLASS'  => $row_class,
+			'USER'       => $username,
 			'LASTUPDATE' => bb_date($row['session_time']),
 			'LASTUPDATE_RAW' => $row['session_time'],
 			'USERIP'     => $user_ip,
 			'U_WHOIS_IP' => "http://ip-whois.net/ip_geo.php?ip=$user_ip",
-			'U_USER_PROFILE' => ((isset($user_id)) ? append_sid("profile.php?mode=viewprofile&amp;" . POST_USERS_URL . '=' . $user_id) : ''),
 		));
 
 		$which_counter++;

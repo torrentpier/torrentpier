@@ -37,7 +37,7 @@
 <!-- BEGIN memberrow -->
 <tr class="{memberrow.ROW_CLASS} tCenter">
 	<td>{memberrow.ROW_NUMBER}</td>
-	<td><a href="{memberrow.U_VIEWPROFILE}" class="gen"><b>{memberrow.USERNAME}</b></a></td>
+	<td><b>{memberrow.USER}</b></td>
 	<td>{memberrow.PM}</td>
 	<td>{memberrow.EMAIL}</td>
 	<td>{memberrow.FROM}</td>
