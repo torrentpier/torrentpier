@@ -560,7 +560,7 @@ INSERT INTO `bb_config` VALUES ('board_disable', '0');
 INSERT INTO `bb_config` VALUES ('board_email', 'board_email@yourdomain.com');
 INSERT INTO `bb_config` VALUES ('board_email_form', '0');
 INSERT INTO `bb_config` VALUES ('board_email_sig', 'Thanks, The Management');
-INSERT INTO `bb_config` VALUES ('board_startdate', '1309421220');
+INSERT INTO `bb_config` VALUES ('board_startdate', '');
 INSERT INTO `bb_config` VALUES ('board_timezone', '0');
 INSERT INTO `bb_config` VALUES ('bt_add_auth_key', '1');
 INSERT INTO `bb_config` VALUES ('bt_add_comment', '');
