@@ -108,7 +108,7 @@ function submit_post($mode, &$post_data, &$message, &$meta, &$forum_id, &$topic_
 {
 	global $userdata, $post_info, $is_auth, $bb_cfg, $lang;
 
-	$current_time = time();
+	$current_time = TIMENOW;
 
 	// Flood control
 	$row = null;
@@ -453,7 +453,7 @@ function user_notification($mode, &$post_data, &$topic_title, &$forum_id, &$topi
 		return;
 	}
 
-	$current_time = time();
+	$current_time = TIMENOW;
 
 	if ($mode != 'delete')
 	{
@@ -633,7 +633,7 @@ function insert_post ($mode, $topic_id, $forum_id = '', $old_forum_id = '', $new
 
 	$post_username = $post_subject = $post_text = $poster_ip = '';
 
-	$post_time = $current_time = time();
+	$post_time = $current_time = TIMENOW;
 	$username = $userdata['username'];
 	$user_id = $userdata['user_id'];
 

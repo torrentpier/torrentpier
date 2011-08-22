@@ -201,7 +201,7 @@ if ($mode == 'submit' || $mode == 'refresh')
 			'search_words' => add_search_words($row['post_id'], stripslashes($row['post_text']), stripslashes($row['post_subject']), true),
 		);
 
-		$timer_expired = (time() > $expire_time);
+		$timer_expired = (TIMENOW > $expire_time);
 		$num_rows++;
 	}
 
@@ -212,7 +212,7 @@ if ($mode == 'submit' || $mode == 'refresh')
 	}
 
 	// find how much time the last cycle took
-	$last_cycle_time = intval(time() - $start_time);
+	$last_cycle_time = intval(TIMENOW - $start_time);
 
 	// check if we had any data
 	if ($num_rows != 0)
@@ -222,7 +222,7 @@ if ($mode == 'submit' || $mode == 'refresh')
 			// insert a new session entry
 			$args = DB()->build_array('INSERT', array(
 				'end_post_id'     => (int) $end_post_id,
-				'end_time'        => (int) time(),
+				'end_time'        => (int) TIMENOW,
 				'last_cycle_time' => (int) $last_cycle_time,
 				'session_time'    => (int) $last_cycle_time,
 				'session_posts'   => (int) $num_rows,
@@ -240,7 +240,7 @@ if ($mode == 'submit' || $mode == 'refresh')
 			DB()->query("
 				UPDATE ". BB_SEARCH_REBUILD ." SET
 					end_post_id     = $end_post_id,
-					end_time        = ". time() .",
+					end_time        = ". TIMENOW .",
 					last_cycle_time = $last_cycle_time,
 					session_time    = session_time + $last_cycle_time,
 					session_posts   = session_posts + $num_rows,
@@ -255,7 +255,7 @@ if ($mode == 'submit' || $mode == 'refresh')
 	$template->assign_vars(array('TPL_REBUILD_SEARCH_PROGRESS' => true));
 
 	$processing_messages = '';
-	$processing_messages .= ($timer_expired) ? sprintf($lang['TIMER_EXPIRED'], time() - $start_time) : '';
+	$processing_messages .= ($timer_expired) ? sprintf($lang['TIMER_EXPIRED'], TIMENOW - $start_time) : '';
 	$processing_messages .= ($start == 0 && $clear_search) ? $lang['CLEARED_SEARCH_TABLES'] : '';
 
 	// check if we have reached the end of our post processing
@@ -350,7 +350,7 @@ if ($mode == 'submit' || $mode == 'refresh')
 		'TOTAL_DETAILS'             => sprintf($lang['PROCESS_DETAILS'], $total_posts_processed - $num_rows + 1, $total_posts_processed, $total_posts),
 		'TOTAL_PERCENT'             => sprintf($lang['PERCENT_COMPLETED'], round($total_percent, 2)),
 
-		'LAST_CYCLE_TIME'           => delta_time(time()),
+		'LAST_CYCLE_TIME'           => delta_time(TIMENOW),
 		'SESSION_TIME'              => delta_time($last_session_data['start_time']),
 		'SESSION_AVERAGE_CYCLE_TIME'=> delta_time($session_average_cycle_time, 0),
 		'SESSION_ESTIMATED_TIME'    => delta_time($session_estimated_time, 0),
@@ -399,7 +399,7 @@ else  // show the input page
 		{
 			$last_saved_processing = sprintf($lang['INFO_PROCESSING_ABORTED'], $last_saved_post_id, $total_posts_processed, $last_saved_date);
 			// check if the interrupted cycle has finished
-			if ( time() - $last_session_data['end_time'] < $last_session_data['last_cycle_time'] )
+			if ( TIMENOW - $last_session_data['end_time'] < $last_session_data['last_cycle_time'] )
 			{
 				$last_saved_processing .= '<br />'.$lang['INFO_PROCESSING_ABORTED_SOON'];
 			}

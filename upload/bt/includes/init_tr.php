@@ -20,7 +20,7 @@ function tracker_exit ()
 			$sql_total_perc = round($DBS->sql_timetotal*100/$gen_time);
 
 			$str = array();
-			$str[] = substr(time(), -4, 4);
+			$str[] = substr(TIMENOW, -4, 4);
 			$str[] = sprintf('%.4f', $gen_time);
 			$str[] = sprintf('%.4f'. LOG_SEPR .'%02d%%', $DBS->sql_inittime, $sql_init_perc);
 			$str[] = sprintf('%.4f'. LOG_SEPR .'%02d%%', $DBS->sql_timetotal, $sql_total_perc);

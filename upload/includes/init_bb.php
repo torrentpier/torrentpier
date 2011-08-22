@@ -544,13 +544,16 @@ $datastore->enqueue(array(
 	'cat_forums',
 ));
 
+// Дата старта вашего проэкта
+if(!$bb_cfg['board_startdate']) bb_update_config(array('board_startdate' => TIMENOW));
+
 // Cron
 if ((empty($_POST) && !defined('IN_ADMIN') && !defined('IN_AJAX') && !defined('IN_SERVICE') && !file_exists(CRON_RUNNING) && ($bb_cfg['cron_enabled'] || defined('START_CRON'))) || defined('FORCE_CRON'))
 {
 	if (TIMENOW - $bb_cfg['cron_last_check'] > $bb_cfg['cron_check_interval'])
 	{
 		// Update cron_last_check
-		bb_update_config(array('cron_last_check' => (time() + 10)));
+		bb_update_config(array('cron_last_check' => (TIMENOW + 10)));
 
 		define('CRON_LOG_ENABLED', true);   // global ON/OFF
 		define('CRON_FORCE_LOG',   false);  // always log regardless of job settings

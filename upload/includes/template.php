@@ -899,7 +899,7 @@ class Template {
 					continue;
 				}
 				$line = '<'.'?php ';
-				$filehash = md5($params_str . $this->include_count . time());
+				$filehash = md5($params_str . $this->include_count . TIMENOW);
 				$line .= ' $this->set_filename(\'xs_include_' . $filehash . '\', \'' . $params_str .'\', true); ';
 				$line .= ' $this->pparse(\'xs_include_' . $filehash . '\'); ';
 				$line .= ' ?'.'>';

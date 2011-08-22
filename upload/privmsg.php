@@ -913,7 +913,7 @@ else if ( $submit || $refresh || $mode != '' )
 			$db_row = DB()->sql_fetchrow($result);
 
 			$last_post_time = $db_row['last_post_time'];
-			$current_time = time();
+			$current_time = TIMENOW;
 
 			if ( ( $current_time - $last_post_time ) < $bb_cfg['flood_interval'])
 			{
@@ -1000,7 +1000,7 @@ else if ( $submit || $refresh || $mode != '' )
 			bb_die($lang['CANNOT_SEND_PRIVMSG']);
 		}
 
-		$msg_time = time();
+		$msg_time = TIMENOW;
 
 		if ( $mode != 'edit' )
 		{
@@ -1518,7 +1518,7 @@ else
 	if ( $submit_msgdays && ( !empty($_POST['msgdays']) || !empty($_GET['msgdays']) ) )
 	{
 		$msg_days = ( !empty($_POST['msgdays']) ) ? intval($_POST['msgdays']) : intval($_GET['msgdays']);
-		$min_msg_time = time() - ($msg_days * 86400);
+		$min_msg_time = TIMENOW - ($msg_days * 86400);
 
 		$limit_msg_time_total = " AND privmsgs_date > $min_msg_time";
 		$limit_msg_time = " AND pm.privmsgs_date > $min_msg_time ";

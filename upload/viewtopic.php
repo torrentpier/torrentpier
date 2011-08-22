@@ -666,7 +666,7 @@ if ( !empty($t_data['topic_vote']) )
 			$view_result = 0;
 		}
 
-		$poll_expired = ( $vote_info[0]['vote_length'] ) ? ( ( $vote_info[0]['vote_start'] + $vote_info[0]['vote_length'] < time() ) ? TRUE : 0 ) : 0;
+		$poll_expired = ( $vote_info[0]['vote_length'] ) ? ( ( $vote_info[0]['vote_start'] + $vote_info[0]['vote_length'] < TIMENOW ) ? TRUE : 0 ) : 0;
 
 		if ( $user_voted || $view_result || $poll_expired || !$is_auth['auth_vote'] || $t_data['topic_status'] == TOPIC_LOCKED )
 		{

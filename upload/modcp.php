@@ -461,7 +461,7 @@ switch ($mode)
 				}
 
 				$new_forum_id = intval($_POST['new_forum_id']);
-				$topic_time = time();
+				$topic_time = TIMENOW;
 
 				$sql = 'SELECT forum_id FROM ' . BB_FORUMS . '
 					WHERE forum_id = ' . $new_forum_id;

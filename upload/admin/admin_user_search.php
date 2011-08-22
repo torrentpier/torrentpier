@@ -953,7 +953,7 @@ else
 
 			$base_url .= "&search_lastvisited=true&lastvisited_type=".rawurlencode(stripslashes($lastvisited_type))."&lastvisited_days=".rawurlencode($lastvisited_days);
 
-			$lastvisited_seconds = ( time() - ( ( ( $lastvisited_days * 24 ) * 60 ) * 60 ) );
+			$lastvisited_seconds = ( TIMENOW - ( ( ( $lastvisited_days * 24 ) * 60 ) * 60 ) );
 
 			switch($lastvisited_type)
 			{

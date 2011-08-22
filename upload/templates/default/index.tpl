@@ -49,7 +49,7 @@
 <!-- IF SHOW_FORUMS -->
 
 <!-- IF H_C_AL_MESS -->
-<div class="row1 med tCenter pad_4 border bw_TRBL">{L_HIDE_CAT_MESS}</span></div>
+<div class="row1 med tCenter pad_4 border bw_TRBL">{L_HIDE_CAT_MESS}</div>
 <div class="cat_separator"></div>
 <!-- ENDIF -->
 

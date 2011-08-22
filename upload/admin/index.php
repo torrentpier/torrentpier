@@ -71,7 +71,7 @@ else if( isset($_GET['pane']) && $_GET['pane'] == 'right' )
 
 	$start_date = bb_date($bb_cfg['board_startdate']);
 
-	$boarddays = ( time() - $bb_cfg['board_startdate'] ) / 86400;
+	$boarddays = ( TIMENOW - $bb_cfg['board_startdate'] ) / 86400;
 
 	$posts_per_day = sprintf("%.2f", $total_posts / $boarddays);
 	$topics_per_day = sprintf("%.2f", $total_topics / $boarddays);
@@ -133,22 +133,42 @@ else if( isset($_GET['pane']) && $_GET['pane'] == 'right' )
 	// in phpMyAdmin 2.2.0
 	//
 
-	$dbsize = $lang['NOT_AVAILABLE'];
-
-	if ( is_integer($dbsize) )
+	$sql = "SELECT VERSION() AS mysql_version";
+	if($result = DB()->sql_query($sql))
 	{
-		if( $dbsize >= 1048576 )
+		$row = DB()->sql_fetchrow($result);
+		$version = $row['mysql_version'];
+
+		if( preg_match("/^(3\.23|4\.|5\.)/", $version) )
 		{
-			$dbsize = sprintf("%.2f MB", ( $dbsize / 1048576 ));
-		}
-		else if( $dbsize >= 1024 )
-		{
-			$dbsize = sprintf("%.2f KB", ( $dbsize / 1024 ));
+			$dblist = array();
+			foreach($bb_cfg['db'] as $name => $row)
+			{                $sql = "SHOW TABLE STATUS
+					FROM {$row[1]}";
+				if($result = DB()->sql_query($sql))
+				{
+					$tabledata_ary = DB()->sql_fetchrowset($result);
+
+					$dbsize = 0;
+					for($i = 0; $i < count($tabledata_ary); $i++)
+					{
+						if( @$tabledata_ary[$i]['Type'] != "MRG_MyISAM" )
+						{
+							$dbsize += $tabledata_ary[$i]['Data_length'] + $tabledata_ary[$i]['Index_length'];
+						}
+					}
+					$dblist[] = '<span title="'. $name .'">'. humn_size($dbsize) .'</span>';
+				}			}
+			$dbsize = implode('&nbsp;|&nbsp;', $dblist);
 		}
 		else
 		{
-			$dbsize = sprintf("%.2f Bytes", $dbsize);
+			$dbsize = $lang['Not_available'];
 		}
+	}
+	else
+	{
+		$dbsize = $lang['Not_available'];
 	}
 
 	$template->assign_vars(array(
@@ -179,7 +199,7 @@ else if( isset($_GET['pane']) && $_GET['pane'] == 'right' )
 			WHERE s.session_logged_in = 1
 				AND u.user_id = s.session_user_id
 				AND u.user_id <> " . ANONYMOUS . "
-				AND s.session_time >= " . ( time() - 300 ) . "
+				AND s.session_time >= " . ( TIMENOW - 300 ) . "
 			ORDER BY s.session_ip ASC, s.session_time DESC";
 		if(!$result = DB()->sql_query($sql))
 		{
@@ -190,7 +210,7 @@ else if( isset($_GET['pane']) && $_GET['pane'] == 'right' )
 		$sql = "SELECT session_logged_in, session_time, session_ip, session_start
 			FROM " . BB_SESSIONS . "
 			WHERE session_logged_in = 0
-				AND session_time >= " . ( time() - 300 ) . "
+				AND session_time >= " . ( TIMENOW - 300 ) . "
 			ORDER BY session_ip ASC, session_time DESC";
 		if(!$result = DB()->sql_query($sql))
 		{

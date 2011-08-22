@@ -142,34 +142,6 @@ switch($this->request['type'])
 				$this->ajax_die(sprintf($lang['SORRY_AUTH_EDIT'], strip_tags($is_auth['auth_edit_type'])));
 			}
 
-			// Запрет на редактирование раздачи юзером
-			if ($post['allow_reg_tracker'] && ($post['topic_first_post_id'] == $post_id) && !IS_AM)
-			{
-				$tor_status = DB()->fetch_row("SELECT tor_status FROM ". BB_BT_TORRENTS ." WHERE topic_id = {$post['topic_id']} LIMIT 1", 'tor_status');
-				if ($tor_status != false)
-				{
-					// по статусу раздачи
-					if (isset($bb_cfg['tor_cannot_edit'][$tor_status]))
-					{
-						$this->ajax_die($lang['NOT_EDIT_TOR_STATUS'] .' - '. $lang['TOR_STATUS_NAME'][$tor_status]);
-					}
-					// проверенный, через время
-					if ($tor_status == TOR_APPROVED)
-					{
-						$days_after_last_edit     = $bb_cfg['dis_edit_tor_after_days'];
-						$last_edit_time           = max($post['post_time'], $post['post_edit_time']) + 86400*$days_after_last_edit;
-						$disallowed_by_forum_perm = in_array($post['forum_id'], $bb_cfg['dis_edit_tor_forums']);
-						$disallowed_by_user_opt   = bf($user->opt, 'user_opt', 'allow_post_edit');
-
-						if ($last_edit_time < TIMENOW && ($disallowed_by_forum_perm || $disallowed_by_user_opt))
-						{
-							$how_msg = ($disallowed_by_user_opt) ? $lang['EDIT_POST_NOT_1'] : $lang['EDIT_POST_NOT_2'];
-							$this->ajax_die("$how_msg" .$lang['EDIT_POST_AJAX']. $lang['TOR_STATUS_NAME'][$tor_status] . $lang['AFTER_THE_LAPSE']. "$days_after_last_edit" . $lang['TOR_STATUS_DAYS']);
-						}
-					}
-				}
-			}
-
 			$hidden_form = '<input type="hidden" name="mode" value="editpost" />';
 			$hidden_form .= '<input type="hidden" name="'. POST_POST_URL .'" value="'. $post_id .'" />';
 			$hidden_form .= '<input type="hidden" name="subject" value="'. $post['topic_title'] .'" />';
@@ -268,8 +240,7 @@ switch($this->request['type'])
 			$sql = "
 				SELECT pt.post_text
 				FROM ". BB_POSTS ." p, ". BB_POSTS_TEXT ." pt
-				WHERE
-						$where_sql
+				WHERE $where_sql
 					AND p.post_time = ". (int) $row['last_post_time'] ."
 					AND pt.post_id = p.post_id
 				LIMIT 1

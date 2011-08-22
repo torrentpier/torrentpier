@@ -28,7 +28,7 @@ $is_auth_ary = auth(AUTH_VIEW, AUTH_LIST_ALL, $userdata);
 $sql = "SELECT u.user_id, u.username, u.user_opt, u.user_rank, s.session_logged_in, s.session_time, s.session_ip
 	FROM ".BB_USERS." u, ".BB_SESSIONS." s
 	WHERE u.user_id = s.session_user_id
-		AND s.session_time >= ".( time() - 300 ) . "
+		AND s.session_time >= ".( TIMENOW - 300 ) . "
 	ORDER BY u.username ASC, s.session_ip ASC";
 if ( !($result = DB()->sql_query($sql)) )
 {

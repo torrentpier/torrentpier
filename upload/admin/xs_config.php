@@ -60,7 +60,7 @@ if(isset($_POST['submit']) && !defined('DEMO_MODE'))
 	}
 	if($update_time)
 	{
-		$bb_cfg['xs_template_time'] = time() + 10; // set time 10 seconds in future in case if some tpl file would be compiled right now with current settings
+		$bb_cfg['xs_template_time'] = TIMENOW + 10; // set time 10 seconds in future in case if some tpl file would be compiled right now with current settings
 		bb_update_config(array('xs_template_time' => $bb_cfg['xs_template_time']));
 	}
 	$template->assign_block_vars('switch_updated', array());

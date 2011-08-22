@@ -61,7 +61,7 @@ class attach_parent
 	function get_quota_limits($userdata_quota, $user_id = 0)
 	{
 		global $attach_config;
-		
+
 //		$priority = 'group;user';
 		$priority = 'user;group';
 
@@ -966,7 +966,7 @@ class attach_parent
 			{
 				//
 				// Prepare Values
-				$this->filetime = time();
+				$this->filetime = TIMENOW;
 
 				$this->filename = $r_file;
 

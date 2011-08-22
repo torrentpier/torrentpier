@@ -338,7 +338,7 @@ function search_attachments($order_by, &$total_rows)
 	// Search Attachment Time
 	if ($search_days_greater != '')
 	{
-		$where_sql[] = ' (a.filetime < ' . ( time() - ((int) $search_days_greater * 86400)) . ') ';
+		$where_sql[] = ' (a.filetime < ' . ( TIMENOW - ((int) $search_days_greater * 86400)) . ') ';
 	}
 
 	// Search Forum

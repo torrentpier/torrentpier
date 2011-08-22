@@ -144,7 +144,7 @@ function report_modules($mode = 'all', $module = null)
 			$module_names[$row['report_module_name']] = $row['report_module_id'];
 
 			// Delete old reports
-			if ($row['report_module_prune'] && $row['report_module_last_prune'] + ($row['report_module_prune'] * 3600) < time())
+			if ($row['report_module_prune'] && $row['report_module_last_prune'] + ($row['report_module_prune'] * 3600) < TIMENOW)
 			{
 				report_prune($row['report_module_id'], $row['report_module_prune'] * 86400);
 
@@ -997,7 +997,7 @@ function report_prune($module_id, $prune_time)
 			ON rc.report_change_id = r.report_last_change
 		WHERE r.report_module_id = ' . (int) $module_id . '
 			AND r.report_status IN(' . REPORT_CLEARED . ', ' . REPORT_DELETE . ')
-			AND rc.report_change_time < ' . (time() - (int) $prune_time);
+			AND rc.report_change_time < ' . (TIMENOW - (int) $prune_time);
 	if (!$result = DB()->sql_query($sql))
 	{
 		message_die(GENERAL_ERROR, 'Could not obtain old reports', '', __LINE__, __FILE__, $sql);
@@ -1021,7 +1021,7 @@ function report_prune($module_id, $prune_time)
 	// Set last prune date
 	//
 	$sql = 'UPDATE ' . BB_REPORTS_MODULES . '
-		SET report_module_last_prune = ' . time() . '
+		SET report_module_last_prune = ' . TIMENOW . '
 		WHERE report_module_id = ' . (int) $module_id;
 	if (!DB()->sql_query($sql))
 	{
@@ -1071,7 +1071,7 @@ function report_insert($module_id, $report_subject, $report_reason, $report_titl
 	//
 	$sql = 'INSERT INTO ' . BB_REPORTS . ' (user_id, report_time, report_module_id, report_status, report_reason_id,
 		report_subject, report_subject_data, report_title, report_desc)
-		VALUES (' . $userdata['user_id'] . ', ' . time() . ', ' . (int) $module_id . ', ' . REPORT_NEW . ', ' . (int) $report_reason . ',
+		VALUES (' . $userdata['user_id'] . ', ' . TIMENOW . ', ' . (int) $module_id . ', ' . REPORT_NEW . ', ' . (int) $report_reason . ',
 			' . (int) $report_subject . ", $report_subject_data_sql, '" . DB()->escape($report_title) . "',
 			'" . DB()->escape($report_desc) . "')";
 	if (!DB()->sql_query($sql))
@@ -1083,7 +1083,7 @@ function report_insert($module_id, $report_subject, $report_reason, $report_titl
 
 	$report = array(
 		'report_id' => $report_id,
-		'report_time' => time(),
+		'report_time' => TIMENOW,
 		'report_module_id' => $module_id,
 		'report_reason_id' => $report_reason,
 		'report_subject' => $report_subject,
@@ -1189,7 +1189,7 @@ function reports_update_status($report_ids, $report_status, $comment = '', $auth
 	foreach ($report_ids as $report_id)
 	{
 		$sql = 'INSERT INTO ' . BB_REPORTS_CHANGES . " (report_id, user_id, report_change_time, report_status, report_change_comment)
-			VALUES($report_id, " . $userdata['user_id'] . ', ' . time() . ", $report_status, '$comment')";
+			VALUES($report_id, " . $userdata['user_id'] . ', ' . TIMENOW . ", $report_status, '$comment')";
 		if (!DB()->sql_query($sql))
 		{
 			message_die(GENERAL_ERROR, 'Could not insert report change', __LINE__, __FILE__, $sql);

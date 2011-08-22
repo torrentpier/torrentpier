@@ -10,7 +10,7 @@ if (!$profiledata['user_id'] || $profiledata['user_id'] == ANONYMOUS)
 $seeding = $leeching = $releasing = array();
 
 $profile_user_id = intval($profiledata['user_id']);
-$current_time = (isset($_GET['time']) && $_GET['time'] == 'all') ? 0 : time();
+$current_time = (isset($_GET['time']) && $_GET['time'] == 'all') ? 0 : TIMENOW;
 
 // Get username
 if (!$username = $profiledata['username'])
