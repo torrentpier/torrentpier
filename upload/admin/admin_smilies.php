@@ -7,9 +7,6 @@ if (!empty($setmodules))
 	return;
 }
 
-function update_smilies () { $GLOBALS['datastore']->update('smile_replacements'); }
-register_shutdown_function('update_smilies');
-
 require('./pagestart.php');
 // ACP Header - END
 
@@ -60,9 +57,9 @@ if( isset($_GET['import_pack']) || isset($_POST['import_pack']) )
 	//
 	// Import a list a "Smiley Pack"
 	//
-	$smile_pak = ( isset($_POST['smile_pak']) ) ? $_POST['smile_pak'] : $_GET['smile_pak'];
-	$clear_current = ( isset($_POST['clear_current']) ) ? $_POST['clear_current'] : $_GET['clear_current'];
-	$replace_existing = ( isset($_POST['replace']) ) ? $_POST['replace'] : $_GET['replace'];
+	$smile_pak = (string) request_var('smile_pak', '');
+	$clear_current = (int) request_var('clear_current', '');
+	$replace_existing = (int) request_var('replace', '');
 
 	if ( !empty($smile_pak) )
 	{
@@ -77,6 +74,7 @@ if( isset($_GET['import_pack']) || isset($_POST['import_pack']) )
 			{
 				message_die(GENERAL_ERROR, "Couldn't delete current smilies", "", __LINE__, __FILE__, $sql);
 			}
+			$datastore->update('smile_replacements');
 		}
 		else
 		{
@@ -142,6 +140,7 @@ if( isset($_GET['import_pack']) || isset($_POST['import_pack']) )
 					{
 						message_die(GENERAL_ERROR, "Couldn't update smilies!", "", __LINE__, __FILE__, $sql);
 					}
+					$datastore->update('smile_replacements');
 				}
 			}
 		}
@@ -149,7 +148,6 @@ if( isset($_GET['import_pack']) || isset($_POST['import_pack']) )
 		$message = $lang['SMILEY_IMPORT_SUCCESS'] . "<br /><br />" . sprintf($lang['CLICK_RETURN_SMILEADMIN'], "<a href=\"" . append_sid("admin_smilies.php") . "\">", "</a>") . "<br /><br />" . sprintf($lang['CLICK_RETURN_ADMIN_INDEX'], "<a href=\"" . append_sid("index.php?pane=right") . "\">", "</a>");
 
 		message_die(GENERAL_MESSAGE, $message);
-
 	}
 	else
 	{
@@ -182,7 +180,9 @@ else if( isset($_POST['export_pack']) || isset($_GET['export_pack']) )
 	//
 	// Export our smiley config as a smiley pak...
 	//
-	if ( $_GET['export_pack'] == "send" )
+	$export_pack = (string) request_var('export_pack', '');
+
+	if ( $export_pack == "send" )
 	{
 		$sql = "SELECT *
 			FROM " . BB_SMILIES;
@@ -255,6 +255,7 @@ else if ( $mode != "" )
 			{
 				message_die(GENERAL_ERROR, "Couldn't delete smiley", "", __LINE__, __FILE__, $sql);
 			}
+            $datastore->update('smile_replacements');
 
 			$message = $lang['SMILEY_DEL_SUCCESS'] . "<br /><br />" . sprintf($lang['CLICK_RETURN_SMILEADMIN'], "<a href=\"" . append_sid("admin_smilies.php") . "\">", "</a>") . "<br /><br />" . sprintf($lang['CLICK_RETURN_ADMIN_INDEX'], "<a href=\"" . append_sid("index.php?pane=right") . "\">", "</a>");
 
@@ -347,6 +348,7 @@ else if ( $mode != "" )
 			{
 				message_die(GENERAL_ERROR, "Couldn't update smilies info", "", __LINE__, __FILE__, $sql);
 			}
+            $datastore->update('smile_replacements');
 
 			$message = $lang['SMILEY_EDIT_SUCCESS'] . "<br /><br />" . sprintf($lang['CLICK_RETURN_SMILEADMIN'], "<a href=\"" . append_sid("admin_smilies.php") . "\">", "</a>") . "<br /><br />" . sprintf($lang['CLICK_RETURN_ADMIN_INDEX'], "<a href=\"" . append_sid("index.php?pane=right") . "\">", "</a>");
 
@@ -392,6 +394,7 @@ else if ( $mode != "" )
 			{
 				message_die(GENERAL_ERROR, "Couldn't insert new smiley", "", __LINE__, __FILE__, $sql);
 			}
+            $datastore->update('smile_replacements');
 
 			$message = $lang['SMILEY_ADD_SUCCESS'] . "<br /><br />" . sprintf($lang['CLICK_RETURN_SMILEADMIN'], "<a href=\"" . append_sid("admin_smilies.php") . "\">", "</a>") . "<br /><br />" . sprintf($lang['CLICK_RETURN_ADMIN_INDEX'], "<a href=\"" . append_sid("index.php?pane=right") . "\">", "</a>");
 

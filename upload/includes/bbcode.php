@@ -97,7 +97,7 @@ function prepare_message ($message)
 // Either in a window or inline
 function generate_smilies($mode)
 {
-	global $bb_cfg, $template, $lang, $images, $user;
+	global $bb_cfg, $template, $lang, $images, $user, $datastore;
 
 	$inline_columns = 4;
 	$inline_rows = 7;
@@ -108,13 +108,9 @@ function generate_smilies($mode)
 		$user->session_start();
 	}
 
-	if (!$sql = CACHE('bb_cache')->get('smilies'))
-	{
-		$sql = DB()->fetch_rowset("SELECT emoticon, code, smile_url FROM ". BB_SMILIES ." ORDER BY smilies_id");
-		CACHE('bb_cache')->set('smilies', $sql);
-	}
+    $data = $datastore->get('smile_replacements');
 
-	if ($sql)
+	if ($sql = $data['smile'])
 	{
 		$num_smilies = 0;
 		$rowset = array();
