@@ -186,7 +186,7 @@ switch($this->request['type'])
 						<input type="button" value="Img" name="codeImg" title="'.$lang['IMG_TITLE'].'" style="width: 40px;" />
 						<input type="button" value="'.$lang['URL'].'" name="codeUrl" title="'.$lang['URL_TITLE'].'" style="width: 63px; text-decoration: underline;" /><input type="hidden" name="codeUrl2" />&nbsp;
 						<input type="button" value="'.$lang['CODE'].'" name="codeCode" title="'.$lang['CODE_TITLE'].'" style="width: 43px;" />
-						<input type="button" value="'.$lang['LIST'].'" name="codeList" title="'.$lang['LIST_TITLE'].'" style="width: 58px;" />
+						<input type="button" value="'.$lang['LIST'].'" name="codeList" title="'.$lang['LIST_TITLE'].'" style="width: 60px;" />
 						<input type="button" value="1." name="codeOpt" title="'.$lang['LIST_ITEM'].'" style="width: 30px;" />&nbsp;
 						<input type="button" value="'.$lang['QUOTE_SEL'].'" name="quoteselected" title="'.$lang['QUOTE_SELECTED'].'" onmouseout="bbcode.refreshSelection(false);" onmouseover="bbcode.refreshSelection(true);" onclick="bbcode.onclickQuoteSel();" />&nbsp;
 

@@ -544,6 +544,7 @@ foreach ($topic_rowset as $topic)
 		'TOR_TYPE'         => $is_gold,
 
 		'TOR_STATUS_ICON'  => isset($topic['tor_status']) ? $bb_cfg['tor_icons'][$topic['tor_status']] : '',
+		'TOR_STATUS_TEXT'  => isset($topic['tor_status']) ? $lang['TOR_STATUS_NAME'][$topic['tor_status']] : '',
 
 		'ATTACH'           => $topic['topic_attachment'],
 		'STATUS'           => $topic['topic_status'],

@@ -29,7 +29,7 @@ function get_torrent_info ($attach_id)
 
 	if (!$torrent = DB()->fetch_row($sql))
 	{
-		message_die(GENERAL_ERROR, 'Invalid attach_id');
+		message_die(GENERAL_ERROR, $lang['INVALID_ATTACH_ID']);
 	}
 
 	return $torrent;
@@ -74,7 +74,7 @@ function tracker_unregister ($attach_id, $mode = '')
 	{
 		if (!$torrent)
 		{
-			message_die(GENERAL_ERROR, 'Torrent not found');
+			message_die(GENERAL_ERROR, $lang['TOR_NOT_FOUND']);
 		}
 		if (!$torrent['tracker_status'])
 		{
@@ -165,15 +165,14 @@ function tracker_unregister ($attach_id, $mode = '')
 
 function delete_torrent ($attach_id, $mode = '')
 {
-	global $lang, $userdata;
-	global $reg_mode, $topic_id;
+	global $lang, $userdata, $reg_mode, $topic_id;
 
 	$attach_id = intval($attach_id);
 	$reg_mode = $mode;
 
 	if (!$torrent = get_torrent_info($attach_id))
 	{
-		message_die(GENERAL_ERROR, 'Torrent not found');
+		message_die(GENERAL_ERROR, $lang['TOR_NOT_FOUND']);
 	}
 
 	$post_id   = $torrent['post_id'];
@@ -202,7 +201,7 @@ function change_tor_status ($attach_id, $new_tor_status)
 
 	if (!$torrent = get_torrent_info($attach_id))
 	{
-		bb_die('Torrent not found');
+		bb_die($lang['TOR_NOT_FOUND']);
 	}
 
 	$topic_id = $torrent['topic_id'];
@@ -226,13 +225,10 @@ function change_tor_type ($attach_id, $tor_status_gold)
 
 	if (!$torrent = get_torrent_info($attach_id))
 	{
-		bb_die('Torrent not found');
+		bb_die($lang['TOR_NOT_FOUND']);
 	}
 
-	if (!(IS_MOD || IS_ADMIN))
-	{
-		bb_die($lang['ONLY_FOR_MOD']);
-	}
+	if (!IS_AM) bb_die($lang['ONLY_FOR_MOD']);
 
 	$topic_id = $torrent['topic_id'];
 	$tor_status_gold = intval($tor_status_gold);
@@ -255,15 +251,14 @@ function change_tor_type ($attach_id, $tor_status_gold)
 
 function tracker_register ($attach_id, $mode = '')
 {
-	global $template, $attach_config, $bb_cfg, $lang, $return_message;
-	global $reg_mode, $tr_cfg;
+	global $template, $attach_config, $bb_cfg, $lang, $return_message, $reg_mode, $tr_cfg;
 
 	$attach_id = intval($attach_id);
 	$reg_mode = $mode;
 
 	if (!$torrent = get_torrent_info($attach_id))
 	{
-		bb_die('Torrent not found');
+		bb_die($lang['TOR_NOT_FOUND']);
 	}
 
 	$post_id   = $torrent['post_id'];
@@ -343,7 +338,7 @@ function tracker_register ($attach_id, $mode = '')
 
 	if (!@$info['name'] || !@$info['piece length'] || !@$info['pieces'] || strlen($info['pieces']) % 20 != 0)
 	{
-		torrent_error_exit('Invalid torrent file');
+		torrent_error_exit($lang['TORFILE_INVALID']);
 	}
 
 	$info_hash     = pack('H*', sha1(bencode($info)));
@@ -380,7 +375,7 @@ function tracker_register ($attach_id, $mode = '')
 	}
 	else
 	{
-		torrent_error_exit('Invalid torrent file');
+		torrent_error_exit($lang['TORFILE_INVALID']);
 	}
 
 	$reg_time = TIMENOW;

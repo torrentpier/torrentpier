@@ -475,7 +475,7 @@ function go_to_page ()
 			</fieldset>
 			<!-- IF USER_HIDE_CAT -->
 			<fieldset id="user_hide_cat">
-			<legend>Скрыть категории</legend>
+			<legend>{L_HIDE_CAT}</legend>
 			<div id="h-cat-ctl" class="pad_4 nowrap">
 				<form autocomplete="off">
 					<!-- BEGIN h_c -->

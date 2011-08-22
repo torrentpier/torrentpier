@@ -434,7 +434,7 @@ td.topic_id { cursor: pointer; }
 
 	<td style="padding: 2px 5px 3px 3px;" class="tt">
 	<div class="torTopic">
-		<!-- IF t.TOR_STATUS_ICON --><span id="status-{t.TOPIC_ID}">{t.TOR_STATUS_ICON}</span>&#0183;<!-- ENDIF -->
+		<!-- IF t.TOR_STATUS_ICON --><span id="status-{t.TOPIC_ID}" title="{t.TOR_STATUS_TEXT}">{t.TOR_STATUS_ICON}</span>&#0183;<!-- ENDIF -->
 		<!-- IF t.IS_UNREAD --><a href="{TOPIC_URL}{t.HREF_TOPIC_ID}{NEWEST_URL}">{ICON_NEWEST_REPLY}</a><!-- ENDIF -->
 		<!-- IF t.STATUS == MOVED --><span class="topicMoved">{L_TOPIC_MOVED}</span>
 			<!-- ELSEIF t.DL_CLASS --><span class="{t.DL_CLASS} iconDL"><b>{L_TOPIC_DL}</b></span>

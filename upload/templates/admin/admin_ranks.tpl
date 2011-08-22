@@ -23,19 +23,19 @@
 	</td>
 </tr>
 <tr>
-	<td width="40%"><h4>Style</h4></td>
+	<td width="40%"><h4>{L_STYLE_COLOR}</h4><br />
+		<h6>{L_STYLE_COLOR_FAQ}</h6>
 	<td>
 		<input class="post" type="text" name="style" size="60" maxlength="40" value="{STYLE}" />
 	</td>
 </tr>
 <tr>
-	<td valign="top"><h4>{L_RANK_IMAGE}:</h4></td>
+	<td valign="top"><h4>{L_RANK_IMAGE}:</h4><br />
+		<h6>{L_RANK_IMAGE_EXPLAIN}</h6></td>
 	<td>
 		<input class="post" type="text" name="rank_image" size="60" maxlength="255" value="{IMAGE}" />
 		<br /><br />
 		{IMAGE_DISPLAY}
-		<br /><br />
-		<h6>{L_RANK_IMAGE_EXPLAIN}</h6>
 	</td>
 </tr>
 <tr>

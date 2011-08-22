@@ -12,6 +12,8 @@ $lang['TRANSLATION_INFO'] = '';
 //
 $lang['FORUM'] = 'Forum';
 $lang['CATEGORY'] = 'Category';
+$lang['HIDE_CAT'] = 'Hide categories';
+$lang['HIDE_CAT_MESS'] = 'Part categories hidden <a class="menu-root" href="#only-new-options">options Show</a> <span class="small"> &middot; <a class="small" href="index.php?sh=1">Show All</a>';
 $lang['TOPIC'] = 'Topic';
 $lang['TOPICS'] = 'Topics';
 $lang['TOPICS_SHORT'] = 'Topics';

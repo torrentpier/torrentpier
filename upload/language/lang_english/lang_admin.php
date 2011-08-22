@@ -478,8 +478,9 @@ $lang['RANKS_TITLE'] = 'Rank Administration';
 $lang['RANKS_EXPLAIN'] = 'Using this form you can add, edit, view and delete ranks. You can also create custom ranks which can be applied to a user via the user management facility';
 
 $lang['ADD_NEW_RANK'] = 'Add new rank';
-
 $lang['RANK_TITLE'] = 'Rank Title';
+$lang['STYLE_COLOR'] = 'Style rank';
+$lang['STYLE_COLOR_FAQ'] = 'Specify class for painting at the title of the desired color. For example <i class="bold">colorAdmin<i>';
 $lang['RANK_SPECIAL'] = 'Set as Special Rank';
 $lang['RANK_MINIMUM'] = 'Minimum Posts';
 $lang['RANK_MAXIMUM'] = 'Maximum Posts';

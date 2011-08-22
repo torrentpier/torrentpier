@@ -17,6 +17,8 @@ $lang['TRANSLATION_INFO'] = '';
 //
 $lang['FORUM'] = 'Форум';
 $lang['CATEGORY'] = 'Категория';
+$lang['HIDE_CAT'] = 'Скрыть категории';
+$lang['HIDE_CAT_MESS'] = 'Часть категорий скрыта <a class="menu-root" href="#only-new-options">Опциями показа</a> <span class="small"> &middot; <a class="small" href="index.php?sh=1">Показать все</a>';
 $lang['TOPIC'] = 'Тема';
 $lang['TOPICS'] = 'Темы';
 $lang['TOPICS_SHORT'] = 'Тем';
