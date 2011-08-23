@@ -295,7 +295,7 @@ ajax.callback.posts = function(data){
 <tr>
 	<td>{L_USER_DELETE}?</td>
 	<td>
-		<label><input type="checkbox" name="deleteuser">{L_USER_DELETE_EXPLAIN}</label>
+		<label><input type="checkbox" name="delete_user">{L_USER_DELETE_EXPLAIN}</label>
 		<br />
 		<label><input type="checkbox" name="delete_user_posts">{L_DELETE_USER_POSTS}</label>
 	</td>

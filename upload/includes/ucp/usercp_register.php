@@ -848,7 +848,7 @@ if ($submit && !$errors)
 			require(INC_DIR .'functions_admin.php');
 
 			$del_msg = false;
-			if (!empty($_POST['deleteuser']))
+			if (!empty($_POST['delete_user']))
 			{
 				delete_user_sessions($pr_data['user_id']);
 				user_delete($pr_data['user_id'], !empty($_POST['delete_user_posts']));
@@ -858,12 +858,12 @@ if ($submit && !$errors)
 					$datastore->update('moderators');
 				}
 
-				$del_msg = $lang['USER_DELETED'];
+				$del_msg .= $lang['USER_DELETED'];
 			}
 			if (!empty($_POST['delete_user_posts']))
 			{
 				post_delete('user', $pr_data['user_id']);
-				$del_msg = $lang['USER_DELETED_POSTS'];
+				$del_msg .= ($del_msg) ? '<br /><br />'. $lang['USER_DELETED_POSTS'] : $lang['USER_DELETED_POSTS'];
 			}
 			if($del_msg) bb_die($del_msg);
 		}
