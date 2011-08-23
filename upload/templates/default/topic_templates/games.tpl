@@ -1,6 +1,7 @@
 <script type="text/javascript">
 var source_type = ['{SEL_SOURCE_TYPE}'];
 var localization = ['{SEL_UI_LANG}'];
+var local_vocie  = ['{SEL_UI_LANG}'];
 var medicine = ['{SEL_MEDICINE}'];
 var torrent_sign = "{TORRENT_SIGN}";
 
@@ -111,6 +112,7 @@ function form_validate (f)
 	<td>
 		<select name="msg[source_type]"><option value="">&raquo; {L_SELECT}</option><script type="text/javascript">document.writeln(make_format_list(source_type));</script></select>&nbsp;
 		<span class="nowrap"><b>{L_LOCALIZATION}</b>: <select name="msg[localization]"><option value="">&raquo; {L_SELECT}</option><script type="text/javascript">document.writeln(make_format_list(localization));</script></select></span>&nbsp;
+		<span class="nowrap"><b>{L_LOCAL_VOICE}</b>: <select name="msg[local_voice]"><option value="">&raquo; {L_SELECT}</option><script type="text/javascript">document.writeln(make_format_list(localization));</script></select></span>&nbsp;
 		<span class="nowrap"><b>{L_MEDICINE}</b>: <select name="msg[medicine]"><option value="">&raquo; {L_SELECT}</option><script type="text/javascript">document.writeln(make_format_list(medicine));</script></select></span>
 	</td>
 </tr>

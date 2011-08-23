@@ -42,6 +42,7 @@ $lang['TPL']['KBPS'] = 'kbps';
 $lang['TPL']['LANG'] = 'Язык';
 $lang['TPL']['LOCAL'] = 'рус.';
 $lang['TPL']['LOCALIZATION'] = 'Язык интерфейса';
+$lang['TPL']['LOCAL_VOICE'] = 'Язык озвучки';
 $lang['TPL']['MANUFACTURER'] = 'Производитель';
 $lang['TPL']['MANUFACTURER_URL'] = 'Сайт производителя';
 $lang['TPL']['MED'] = 'таб.';
@@ -95,7 +96,7 @@ $lang['TPL']['VERSION'] = 'Версия';
 $lang['TPL']['VIDEO'] = 'Видео';
 $lang['TPL']['VIDEO_BITRATE'] = 'Битрейт видео';
 $lang['TPL']['VIDEO_CODEC'] = 'Видео кодек';
-$lang['TPL']['VISTA_COMPATIBLE'] = 'Совместимость с Vista';
+$lang['TPL']['VISTA_COMPATIBLE'] = 'Совместимость с Windows7';
 $lang['TPL']['Y'] = '%s г.';
 $lang['TPL']['YEAR'] = 'Год выпуска';
 $lang['TPL']['YEAR_EXP'] = 'Год выпуска должен быть четырехзначным числом';
@@ -135,10 +136,10 @@ $lang['TPL']['UI_LANG_OPTIONS_PS'] = array(
 );
 
 $lang['TPL']['UI_LANG_OPTIONS'] = array(
-	'английский + русский',
-	'только английский',
-	'только русский',
-	'немецкий',
+	0 => 'английский + русский',
+	1 => 'только английский',
+	2 => 'только русский',
+	3 => 'немецкий',
 );
 
 $lang['TPL']['AUDIOBOOK_TYPE_OPTIONS'] = array(
@@ -148,8 +149,10 @@ $lang['TPL']['AUDIOBOOK_TYPE_OPTIONS'] = array(
 );
 
 $lang['TPL']['SOURCE_TYPE_OPTIONS'] = array(
-	'лицензия',
-	'пиратка',
+	0 => 'лицензия',
+	1 => 'пиратка',
+	2 => 'Rip',
+	3 => 'RePack',
 );
 
 $lang['TPL']['MULTIPLAYER_OPTIONS'] = array(

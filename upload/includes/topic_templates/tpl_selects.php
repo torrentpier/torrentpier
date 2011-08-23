@@ -4,19 +4,24 @@ if (!defined('IN_PHPBB')) die(basename(__FILE__));
 
 $selects = array(
 	'SEL_VIDEO_QUALITY' => array(
+		'VHSRip',
+		'TVRip',
+		'SATRip',
+		'CamRip',
+		'TeleCine',
+		'TeleSynch',
+		'DVDScreener',
 		'DVDRip',
+		'DVDRip-AVC',
 		'DVD5',
 		"DVD5 {$lang['TPL']['COMPRESSED']}",
 		'DVD9',
 		'HDTV',
 		'HDTVRip',
-		'TVRip',
-		'TeleCine',
-		'TeleSynch',
-		'CamRip',
-		'SATRip',
-		'VHSRip',
-		'DVDScreener',
+		'HDTVRip-AVC',
+		'BDRip',
+		'BDRip-AVC',
+		'BDRemux',
 	),
 
 	'SEL_VIDEO_CODECS' => array(
@@ -39,6 +44,7 @@ $selects = array(
 		'MKV',
 		'WMV',
 		'MPEG',
+		'FLV',
 	),
 
 	'SEL_AUDIO_CODECS' => array(

@@ -42,6 +42,7 @@ $lang['TPL']['KBPS'] = 'kbps';
 $lang['TPL']['LANG'] = 'Language';
 $lang['TPL']['LOCAL'] = 'loc.';
 $lang['TPL']['LOCALIZATION'] = 'Localization';
+$lang['TPL']['LOCAL_VOICE'] = 'Sound language';
 $lang['TPL']['MANUFACTURER'] = 'Manufacturer';
 $lang['TPL']['MANUFACTURER_URL'] = "Manufacturer's Site";
 $lang['TPL']['MED'] = 'fix.';
@@ -95,7 +96,7 @@ $lang['TPL']['VERSION'] = 'Version';
 $lang['TPL']['VIDEO'] = 'Video';
 $lang['TPL']['VIDEO_BITRATE'] = 'Video bitrate';
 $lang['TPL']['VIDEO_CODEC'] = 'Video codec';
-$lang['TPL']['VISTA_COMPATIBLE'] = 'Vista compatibility';
+$lang['TPL']['VISTA_COMPATIBLE'] = 'Windows7 compatibility';
 $lang['TPL']['Y'] = '%s y.';
 $lang['TPL']['YEAR'] = 'Year';
 $lang['TPL']['YEAR_EXP'] = 'Year must a four-digit number';
@@ -121,7 +122,7 @@ $lang['TPL']['LANG_OPTIONS'] = array(
 );
 
 $lang['TPL']['UI_LANG_OPTIONS'] = array(
-	'english',
+	0 => 'english',
 );
 
 $lang['TPL']['UI_LANG_OPTIONS_PS'] = array(
@@ -135,8 +136,10 @@ $lang['TPL']['AUDIOBOOK_TYPE_OPTIONS'] = array(
 );
 
 $lang['TPL']['SOURCE_TYPE_OPTIONS'] = array(
-	'licensed',
-	'pirated',
+	0 => 'licensed',
+	1 => 'pirated',
+	2 => 'Rip',
+	3 => 'RePack',
 );
 
 $lang['TPL']['MULTIPLAYER_OPTIONS'] = array(

@@ -25,6 +25,7 @@ if (@$_REQUEST['preview'] && is_array($_POST['msg']))
 		'cd_image_type',
 		'can_play_xbox360',
 		'localization',
+		'local_voice',
 		'translation_type',
 		'medicine',
 		'multiplayer',
@@ -53,12 +54,15 @@ if (@$_REQUEST['preview'] && is_array($_POST['msg']))
 		$subject = $msg['release_name'];
 		$subject .= ($msg['year']) ? ' ('. trim($msg['year'], '/') .')' : '';
 		$subject .= ($msg['publisher']) ? ' ('. trim($msg['publisher'], '/') .')' : '';
-		$subject .= ($msg['localization']) ? ' ('. trim($msg['localization'], '/') .')' : '';
-		$subject .= ($msg['source_type']) ? ' ['. trim($msg['source_type'], '/') .']' : '';		
 
-		if ($msg['localization'] == 'Multi5')
-		{
-			$subject .= ' [multi5]';
-		}
+		if ($msg['localization'] == $lang['TPL']['UI_LANG_OPTIONS'][0]) $subject .= ' (ENG+RUS)';
+		if ($msg['localization'] == $lang['TPL']['UI_LANG_OPTIONS'][1]) $subject .= ' (ENG)';
+		if ($msg['localization'] == $lang['TPL']['UI_LANG_OPTIONS'][2]) $subject .= ' (RUS)';
+		if ($msg['localization'] == $lang['TPL']['UI_LANG_OPTIONS'][3]) $subject .= ' (DEU)';
+		
+		if ($msg['source_type'] == $lang['TPL']['SOURCE_TYPE_OPTIONS'][0]) $subject .= ' [L]';
+		if ($msg['source_type'] == $lang['TPL']['SOURCE_TYPE_OPTIONS'][1]) $subject .= ' [P]';
+		if ($msg['source_type'] == $lang['TPL']['SOURCE_TYPE_OPTIONS'][2]) $subject .= ' [Rip]';
+		if ($msg['source_type'] == $lang['TPL']['SOURCE_TYPE_OPTIONS'][3]) $subject .= ' [RePack]';
 	}
 }
