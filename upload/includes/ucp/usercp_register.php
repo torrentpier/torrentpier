@@ -847,6 +847,7 @@ if ($submit && !$errors)
 		{
 			require(INC_DIR .'functions_admin.php');
 
+			$del_msg = false;
 			if (!empty($_POST['deleteuser']))
 			{
 				delete_user_sessions($pr_data['user_id']);
@@ -857,13 +858,14 @@ if ($submit && !$errors)
 					$datastore->update('moderators');
 				}
 
-				bb_die($lang['USER_DELETED']);
+				$del_msg = $lang['USER_DELETED'];
 			}
-			else if (!empty($_POST['delete_user_posts']))
+			if (!empty($_POST['delete_user_posts']))
 			{
 				post_delete('user', $pr_data['user_id']);
-				bb_die($lang['USER_DELETED_POSTS']);
+				$del_msg = $lang['USER_DELETED_POSTS'];
 			}
+			if($del_msg) bb_die($del_msg);
 		}
 
 		// если что-то было изменено
