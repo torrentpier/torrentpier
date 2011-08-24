@@ -54,7 +54,6 @@ $forums_tbl     = BB_FORUMS          .' f';
 $posts_tbl      = BB_POSTS           .' p';
 $posts_text_tbl = BB_POSTS_TEXT      .' pt';
 $posts_html_tbl = BB_POSTS_HTML      .' h';
-$search_tbl     = BB_POSTS_SEARCH    .' ps';
 $tr_snap_tbl    = BB_BT_TRACKER_SNAP .' sn';
 $topics_tbl     = BB_TOPICS          .' t';
 $torrents_tbl   = BB_BT_TORRENTS     .' tor';
@@ -430,7 +429,6 @@ if ($post_mode)
 		// FROM
 		if ($join_t) $SQL['FROM'][] = $topics_tbl;
 		if ($join_p) $SQL['FROM'][] = $posts_tbl;
-		if ($join_s) $SQL['FROM'][] = $search_tbl;
 
 		if (!$SQL['FROM'])
 		{
@@ -440,7 +438,6 @@ if ($post_mode)
 
 		// WHERE
 		if ($join_p && $join_t) $SQL['WHERE'][] = "t.topic_id = p.topic_id";
-		if ($join_s) $SQL['WHERE'][] = "ps.post_id = p.post_id";
 
 		if ($excluded_forums_csv) $SQL['WHERE'][] = "$tbl.forum_id NOT IN($excluded_forums_csv)";
 
@@ -455,7 +452,6 @@ if ($post_mode)
 		if ($text_match_sql)
 		{
 			$search_match_topics_csv = '';
-            if(!is_array($forum_selected)) $forum_selected = array();
             $title_match_topics = get_title_match_topics($text_match_sql, 500, $forum_selected);
 
 			if (!$search_match_topics_csv = join(',', $title_match_topics))
@@ -463,7 +459,9 @@ if ($post_mode)
 				bb_die($lang['NO_SEARCH_MATCH']);
 			}
 
-			$SQL['WHERE'][] = "$tbl.topic_id IN($search_match_topics_csv)";
+            $where_id = ($title_match) ? 'topic_id' : 'post_id';
+
+			$SQL['WHERE'][] = "$tbl.$where_id IN($search_match_topics_csv)";
 			prevent_huge_searches($SQL);
 		}
 
@@ -600,7 +598,6 @@ else
 
 		// FROM
 		if ($join_t) $SQL['FROM'][] = $topics_tbl;
-		if ($join_s) $SQL['FROM'][] = $search_tbl;
 		if ($join_p) $SQL['FROM'][] = $posts_tbl;
 
 		if (!$SQL['FROM'])
@@ -611,7 +608,6 @@ else
 
 		// WHERE
 		if ($join_p && $join_t) $SQL['WHERE'][] = "t.topic_id = p.topic_id";
-		if ($join_s) $SQL['WHERE'][] = "ps.post_id = p.post_id";
 
 		if ($excluded_forums_csv) $SQL['WHERE'][] = "$tbl.forum_id NOT IN($excluded_forums_csv)";
 
@@ -627,7 +623,6 @@ else
 		if ($text_match_sql)
 		{
 			$search_match_topics_csv = '';
-            if(!is_array($forum_selected)) $forum_selected = array();
             $title_match_topics = get_title_match_topics($text_match_sql, 500, $forum_selected);
 
 			if (!$search_match_topics_csv = join(',', $title_match_topics))
@@ -635,7 +630,9 @@ else
 				bb_die($lang['NO_SEARCH_MATCH']);
 			}
 
-			$SQL['WHERE'][] = "$tbl.topic_id IN($search_match_topics_csv)";
+            $where_id = ($title_match) ? 'topic_id' : 'post_id';
+
+			$SQL['WHERE'][] = "$tbl.$where_id IN($search_match_topics_csv)";
 			prevent_huge_searches($SQL);
 		}
 

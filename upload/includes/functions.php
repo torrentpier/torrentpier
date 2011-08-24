@@ -2608,18 +2608,18 @@ function log_sphinx_error ($err_type, $err_msg, $query = '')
 
 function get_title_match_topics ($title_match_sql, $limit = 500, $forum_ids = array())
 {
-	global $bb_cfg, $sphinx, $userdata;
+	global $bb_cfg, $sphinx, $userdata, $title_match;
 
-	$topic_ids = array();
+	$where_ids = array();
 	$limit     = (int) $limit;
-	$forum_ids = (array) $forum_ids;
+	if($forum_ids) $forum_ids = array_diff($forum_ids, array(0 => 0));
 	$title_match_sql = encode_text_match($title_match_sql);
 
 	if ($bb_cfg['search_engine_type'] == 'sphinx')
 	{
-		global $user, $title_match; //$title_match - для поиска по постам и топикам (ещё не реализовано)
-
 		init_sphinx();
+
+		$where = ($title_match) ? 'topics' : 'posts';
 
 		$sphinx->SetServer($bb_cfg['sphinx_topic_titles_host'], $bb_cfg['sphinx_topic_titles_port']);
 		$sphinx->SetLimits(0, $limit, $limit, $limit);
@@ -2631,18 +2631,17 @@ function get_title_match_topics ($title_match_sql, $limit = 500, $forum_ids = ar
 		{
 			$sphinx->SetMatchMode(SPH_MATCH_PHRASE);
 		}
-		if ($result = $sphinx->Query($title_match_sql, 'topics', $userdata['username'] .' ('. CLIENT_IP .')'))
+		if ($result = $sphinx->Query($title_match_sql, $where, $userdata['username'] .' ('. CLIENT_IP .')'))
 		{
 			if (!empty($result['matches']))
 			{
-				$topic_ids = array_keys($result['matches']);
+				$where_ids = array_keys($result['matches']);
 			}
 		}
 		else if ($error = $sphinx->GetLastError())
 		{
 			if (strpos($error, 'errno=110'))
 			{
-				bb_log(' ', 'misc/sphinx_conn_err_110');
 				bb_die('В данный момент поисковик недоступен<br /><br />Попробуйте повторить запрос через несколько секунд');
 			}
 			log_sphinx_error('ERR', $error, $title_match_sql);
@@ -2654,18 +2653,30 @@ function get_title_match_topics ($title_match_sql, $limit = 500, $forum_ids = ar
 	}
 	else if ($bb_cfg['search_engine_type'] == 'mysql')
 	{
-		$in_forums = ($forum_ids) ? "AND forum_id IN(". join(',', $forum_ids) .")" : '';
-		$sql = "
-			SELECT topic_id
-			FROM ". BB_TOPICS ."
-			WHERE topic_title LIKE '%$title_match_sql%'
-				$in_forums
-			ORDER BY NULL
-			LIMIT $limit
-		";
+		$where_forum = ($forum_ids) ? "AND forum_id IN(". join(',', $forum_ids) .")" : '';
+		$search_bool_mode = ($bb_cfg['allow_search_in_bool_mode']) ? ' IN BOOLEAN MODE' : '';
+
+		if($title_match)
+		{
+			$where_id = 'topic_id';
+			$sql = "SELECT topic_id FROM ". BB_TOPICS ."
+					WHERE MATCH (topic_title) AGAINST ('$title_match_sql'$search_bool_mode)
+					$where_forum
+				LIMIT $limit";
+		}
+		else
+		{
+			$where_id = 'post_id';
+			$sql = "SELECT p.post_id FROM ". BB_POSTS ." p, ". BB_POSTS_SEARCH ." ps
+				WHERE ps.post_id = p.post_id
+					AND MATCH (ps.search_words) AGAINST ('$title_match_sql'$search_bool_mode)
+					$where_forum
+				LIMIT $limit";
+		}
+
 		foreach (DB()->fetch_rowset($sql) as $row)
 		{
-			$topic_ids[] = $row['topic_id'];
+			$where_ids[] = $row[$where_id];
 		}
 	}
 	else
@@ -2673,7 +2684,7 @@ function get_title_match_topics ($title_match_sql, $limit = 500, $forum_ids = ar
 		bb_die('Поиск временно отключен');
 	}
 
-	return $topic_ids;
+	return $where_ids;
 }
 
 // для более корректного поиска по словам содержащим одиночную кавычку
