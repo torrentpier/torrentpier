@@ -24,6 +24,7 @@ class captcha_common
 	var $new_cap_sid    = '';
 	var $new_code_key   = '';
 	var $new_cap_code   = '';
+	var $new_img_url   = '';
 	var $new_img_path   = '';
 	var $new_img_bin    = '';
 
@@ -84,11 +85,11 @@ class captcha_common
 		if ($this->cfg['disabled']) return '';
 
 		$this->gen_cap_sid();
-		$this->new_img_path  = $this->get_img_path($this->new_cap_id);
+		$this->new_img_url  = $this->get_img_url($this->new_cap_id);
 		$this->new_code_key = $this->get_key_name(TIMENOW);
 
 		return '
-			<div><img src="'. $this->cfg['img_url'] .'?'. mt_rand() .'" width="120" height="72" alt="pic" /></div>
+			<div><img src="'. $this->new_img_url .'?'. mt_rand() .'" width="120" height="72" alt="pic" /></div>
 			<input type="hidden" name="'. $this->cap_sid_key .'" value="'. $this->new_cap_sid .'" />
 			<input type="text" name="'. $this->new_code_key .'" value="" size="25" class="bold" />
 		';
@@ -128,6 +129,11 @@ class captcha_common
 		$this->new_cap_sid = make_rand_str($this->cap_sid_len);
 
 		CACHE('bb_cap_sid')->set('c_sid_'. $this->new_cap_sid, $this->new_cap_code, $this->key_ttl*2);
+	}
+
+    function get_img_url ($id)
+	{
+		return $this->get_path($id, $this->cfg['img_url']);
 	}
 
 	function get_img_path ($id)
