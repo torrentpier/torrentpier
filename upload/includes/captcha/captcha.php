@@ -88,7 +88,7 @@ class captcha_common
 		$this->new_code_key = $this->get_key_name(TIMENOW);
 
 		return '
-			<div><img src="'. $this->new_img_path .'?'. mt_rand() .'" width="120" height="72" alt="pic" /></div>
+			<div><img src="'. $this->cfg['img_url'] .'?'. mt_rand() .'" width="120" height="72" alt="pic" /></div>
 			<input type="hidden" name="'. $this->cap_sid_key .'" value="'. $this->new_cap_sid .'" />
 			<input type="text" name="'. $this->new_code_key .'" value="" size="25" class="bold" />
 		';

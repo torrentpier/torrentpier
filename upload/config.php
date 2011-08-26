@@ -57,8 +57,8 @@ $bb_cfg['css_ver'] = 1;
 
 // Increase number of revision after update
 $bb_cfg['tp_version'] = '2.1 Stable';
-$bb_cfg['tp_release_state'] = 'R253';
-$bb_cfg['tp_release_date'] = '25-08-2011';
+$bb_cfg['tp_release_state'] = 'R256';
+$bb_cfg['tp_release_date'] = '26-08-2011';
 
 $bb_cfg['board_disabled_msg'] = 'форум временно отключен'; // 'forums temporarily disabled'; // show this msg if board has been disabled via ON/OFF trigger
 $bb_cfg['srv_overloaded_msg'] = "Извините, в данный момент сервер перегружен\nПопробуйте повторить запрос через несколько минут";
@@ -510,4 +510,5 @@ $bb_cfg['advert_html_path']            = $bb_cfg['html_path'] .'advert.html';  #
 // Captcha
 $bb_cfg['captcha']['disabled']   = false;
 $bb_cfg['captcha']['secret_key'] = 'secret_key';
-$bb_cfg['captcha']['img_path']   = "./images/captcha/";  # without '/'
+$bb_cfg['captcha']['img_url']    = './images/captcha/';         # without '/'
+$bb_cfg['captcha']['img_path']   = BB_PATH .'/images/captcha/'; # without '/'
