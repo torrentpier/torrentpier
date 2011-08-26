@@ -1565,10 +1565,7 @@ function bb_date ($gmepoch, $format = false, $tz = null)
 	if (is_null($tz))
 	{
 		$tz = $bb_cfg['board_timezone'];
-		$replace = true;
 	}
-	else $replace = false;
-
 	if (!$format)
 	{
 		$format = $bb_cfg['default_dateformat'];
@@ -1582,7 +1579,7 @@ function bb_date ($gmepoch, $format = false, $tz = null)
 
 	$thetime = ($bb_cfg['translate_dates']) ? strtr(strtoupper($date), $lang['DATETIME']) : $date;
 
-	if($replace)
+	if(is_numeric($tz))
 	{
 		$time_format = " H:i";
 

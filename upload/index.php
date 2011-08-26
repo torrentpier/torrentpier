@@ -340,25 +340,41 @@ if ($bb_cfg['show_latest_news'])
 if ($bb_cfg['birthday']['check_day'] && $bb_cfg['birthday']['enabled'])
 {
 	$week_list = $today_list = array();
+	$week_all = $today_all = false;
+
 	if ($stats['birthday_week_list'])
 	{
-		foreach($stats['birthday_week_list'] as $week)
+		shuffle($stats['birthday_week_list']);
+		foreach($stats['birthday_week_list'] as $i => $week)
 		{
+			if($i >= 5)
+			{
+				$week_all = true;
+				continue;
+			}
+
 			$week_list[] = profile_url($week) .' <span class="small">('. birthday_age($week['age']) .')</span>';
 		}
-		$week_list = join(', ', $week_list);
-		$week_list = sprintf($lang['BIRTHDAY_WEEK'], $bb_cfg['birthday']['check_day'], $week_list);
+		$week_all = ($week_all) ? '&nbsp;<a class="txtb" href="#" onclick="ajax.exec({action: \'birthday_list\', mode: \'week\'}); return false;" title="'. $lang['ALL'] .'">...</a>' : '';
+		$week_list = sprintf($lang['BIRTHDAY_WEEK'], $bb_cfg['birthday']['check_day'], join(', ', $week_list)) . $week_all;
 	}
 	else $week_list = sprintf($lang['NOBIRTHDAY_WEEK'], $bb_cfg['birthday']['check_day']);
 
 	if ($stats['birthday_today_list'])
 	{
-		foreach($stats['birthday_today_list'] as $today)
+		shuffle($stats['birthday_today_list']);
+		foreach($stats['birthday_today_list'] as $i => $today)
 		{
+			if($i >= 5)
+			{
+				$today_all = true;
+				continue;
+			}
+
 			$today_list[] = profile_url($today) .' <span class="small">('. birthday_age($today['age'], 1) .')</span>';
 		}
-		$today_list = join(', ', $today_list);
-		$today_list = $lang['BIRTHDAY_TODAY'] . $today_list;
+		$today_all = ($today_all) ? '&nbsp;<a class="txtb" href="#" onclick="ajax.exec({action: \'birthday_list\', mode: \'today\'}); return false;" title="'. $lang['ALL'] .'">...</a>' : '';
+		$today_list = $lang['BIRTHDAY_TODAY'] . join(', ', $today_list) . $today_all;
 	}
 	else $today_list = $lang['NOBIRTHDAY_TODAY'];
 

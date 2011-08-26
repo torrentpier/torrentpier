@@ -74,6 +74,7 @@ class ajax_common
 		'view_torrent'      => array('guest'),
 		'user_register'     => array('guest'),
 		'posts'             => array('guest'),
+		'birthday_list'     => array('guest'),
 	);
 
 	var $action = null;
@@ -364,6 +365,52 @@ class ajax_common
 		else $this->ajax_die($lang['NOT_AUTHORISED']);
 	}
 
+	function birthday_list()
+	{
+		global $bb_cfg, $lang, $datastore;
+
+		if (!$stats = $datastore->get('stats'))
+		{
+			$datastore->update('stats');
+			$stats = $datastore->get('stats');
+		}
+
+		$mode = (string) $this->request['mode'];
+		switch($mode)
+		{
+			case 'week':
+				if ($stats['birthday_week_list'])
+				{
+					foreach($stats['birthday_week_list'] as $week)
+					{
+						$html[] = profile_url($week) .' <span class="small">('. birthday_age($week['age']) .')</span>';
+					}
+					$html = sprintf($lang['BIRTHDAY_WEEK'], $bb_cfg['birthday']['check_day'], join(', ', $html));
+				}
+				else $html = sprintf($lang['NOBIRTHDAY_WEEK'], $bb_cfg['birthday']['check_day']);
+			break;
+
+			case 'today':
+				if ($stats['birthday_today_list'])
+				{
+					foreach($stats['birthday_today_list'] as $today)
+					{
+						$html[] = profile_url($today) .' <span class="small">('. birthday_age($today['age'], 1) .')</span>';
+					}
+					$html = $lang['BIRTHDAY_TODAY'] . join(', ', $html);
+				}
+				else $html = $lang['NOBIRTHDAY_TODAY'];
+			break;
+
+			default:
+				$html = '';
+			break;
+		}
+
+		$this->response['html'] = $html;
+		$this->response['mode'] = $mode;
+	}
+
 	function view_post ()
 	{
 		require(AJAX_DIR .'view_post.php');
@@ -399,3 +446,4 @@ class ajax_common
 		require(AJAX_DIR .'posts.php');
     }
 }
+
