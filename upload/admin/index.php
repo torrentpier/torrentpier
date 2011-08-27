@@ -143,7 +143,8 @@ else if( isset($_GET['pane']) && $_GET['pane'] == 'right' )
 		{
 			$dblist = array();
 			foreach($bb_cfg['db'] as $name => $row)
-			{                $sql = "SHOW TABLE STATUS
+			{
+                $sql = "SHOW TABLE STATUS
 					FROM {$row[1]}";
 				if($result = DB()->sql_query($sql))
 				{
@@ -158,7 +159,8 @@ else if( isset($_GET['pane']) && $_GET['pane'] == 'right' )
 						}
 					}
 					$dblist[] = '<span title="'. $name .'">'. humn_size($dbsize) .'</span>';
-				}			}
+				}
+			}
 			$dbsize = implode('&nbsp;|&nbsp;', $dblist);
 		}
 		else
@@ -298,6 +300,7 @@ else if( isset($_GET['pane']) && $_GET['pane'] == 'right' )
 	{
 		$template->assign_vars(array(
 			'USERS_ONLINE_HREF' => "index.php?pane=right&users_online=1&sid={$userdata['session_id']}",
+      'L_SHOW_USERS_ONLINE' => $lang['SHOW_ONLINE_USERLIST'],
 		));
 	}
 
