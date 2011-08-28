@@ -300,6 +300,7 @@ else if( isset($_GET['pane']) && $_GET['pane'] == 'right' )
 	{
 		$template->assign_vars(array(
 			'USERS_ONLINE_HREF' => "index.php?pane=right&users_online=1&sid={$userdata['session_id']}",
+			'SHOW_ONLINE_USERLIST' => $lang['SHOW_ONLINE_USERLIST'],
 		));
 	}
 

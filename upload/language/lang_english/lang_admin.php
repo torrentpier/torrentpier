@@ -73,6 +73,9 @@ $lang['TOPICS_DATA_SYNCHRONIZED'] = 'Topics data synchronized';
 $lang['USER_POSTS_COUNT'] = 'User posts count';
 $lang['USER POSTS COUNT SYNCHRONIZED'] = 'User posts count synchronized';
 
+// Online Userlist
+$lang['SHOW_ONLINE_USERLIST'] = 'Show the list of online users';
+
 //
 //Welcome page
 //

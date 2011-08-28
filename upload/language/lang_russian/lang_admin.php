@@ -91,6 +91,9 @@ $lang['TOPICS_DATA_SYNCHRONIZED'] = 'Темы синхронизированы';
 $lang['USER_POSTS_COUNT'] = 'Количество сообщений пользователей.';
 $lang['USER POSTS COUNT SYNCHRONIZED'] = 'Количество сообщений пользователей синхронизированы.';
 
+// Online Userlist
+$lang['SHOW_ONLINE_USERLIST'] = 'Показать список пользователей онлайн';
+
 //
 // Auth pages
 //
