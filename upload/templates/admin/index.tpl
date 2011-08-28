@@ -170,7 +170,7 @@ table.forumline { margin: 0 auto; }
 	<!-- END guest_user_row -->
 </table>
 <!-- ELSE -->
-<a href="{USERS_ONLINE_HREF}#online">{SHOW_ONLINE_USERLIST}</a>
+<a href="{USERS_ONLINE_HREF}#online">{L_SHOW_ONLINE_USERLIST}</a>
 <!-- ENDIF -->
 
 <!--========================================================================-->

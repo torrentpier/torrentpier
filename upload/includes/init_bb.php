@@ -543,9 +543,15 @@ $ads = new ads_common();
 $datastore->enqueue(array(
 	'cat_forums',
 ));
-
-// Дата старта вашего проэкта
-if(!$bb_cfg['board_startdate']) bb_update_config(array('board_startdate' => TIMENOW));
+	
+// Дата старта вашего проекта
+if(!$bb_cfg['board_startdate']) 
+{
+    bb_update_config(array('board_startdate' => TIMENOW));
+	DB()->query("UPDATE ". BB_USERS ." SET user_regdate = ". TIMENOW ." WHERE user_id = -1");
+	DB()->query("UPDATE ". BB_USERS ." SET user_regdate = ". TIMENOW ." WHERE user_id = 2");
+	DB()->query("UPDATE ". BB_USERS ." SET user_regdate = ". TIMENOW ." WHERE user_id = -746");
+}	
 
 // Cron
 if ((empty($_POST) && !defined('IN_ADMIN') && !defined('IN_AJAX') && !defined('IN_SERVICE') && !file_exists(CRON_RUNNING) && ($bb_cfg['cron_enabled'] || defined('START_CRON'))) || defined('FORCE_CRON'))
