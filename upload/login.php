@@ -60,7 +60,7 @@ $mod_admin_login = (IS_AM && !$user->data['session_admin']);
 $login_username = ($mod_admin_login) ? $userdata['username'] : (string) @$_POST['login_username'];
 $login_password = (string) @$_POST['login_password'];
 
-// Ïðîâåðêà íà íåâåðíóþ êîìáèíàöèþ ëîãèí/ïàðîëü
+// ÐŸÑ€Ð¾Ð²ÐµÑ€ÐºÐ° Ð½Ð° Ð½ÐµÐ²ÐµÑ€Ð½ÑƒÑŽ ÐºÐ¾Ð¼Ð±Ð¸Ð½Ð°Ñ†Ð¸ÑŽ Ð»Ð¾Ð³Ð¸Ð½/Ð¿Ð°Ñ€Ð¾Ð»ÑŒ
 $need_captcha = false;
 if(!$mod_admin_login)
 {
@@ -94,7 +94,7 @@ if (isset($_POST['login']))
 		if ($user->login($_POST, $mod_admin_login))
 		{
 			$redirect_url = (defined('FIRST_LOGON')) ? $bb_cfg['first_logon_redirect_url'] : $redirect_url;
-			// Îáíóëåíèå ïðè ââåäåíèè ïðàâèëüíî êîìáèíàöèè ëîãèí/ïàðîëü
+			// ÐžÐ±Ð½ÑƒÐ»ÐµÐ½Ð¸Ðµ Ð¿Ñ€Ð¸ Ð²Ð²ÐµÐ´ÐµÐ½Ð¸Ð¸ Ð¿Ñ€Ð°Ð²Ð¸Ð»ÑŒÐ½Ð¾ ÐºÐ¾Ð¼Ð±Ð¸Ð½Ð°Ñ†Ð¸Ð¸ Ð»Ð¾Ð³Ð¸Ð½/Ð¿Ð°Ñ€Ð¾Ð»ÑŒ
 			CACHE('bb_login_err')->set('l_err_'. USER_IP, 0, 3600);
 
 			redirect($redirect_url);
@@ -108,7 +108,7 @@ if (isset($_POST['login']))
 			if($login_err > $bb_cfg['invalid_logins']) $need_captcha = true;
 			if($login_err > 50)
 			{
-				// çàáàíèòü èï :)
+				// Ð·Ð°Ð±Ð°Ð½Ð¸Ñ‚ÑŒ Ð¸Ð¿ :)
 			}
 			CACHE('bb_login_err')->set('l_err_'. USER_IP, ($login_err + 1), 3600);
 		}
