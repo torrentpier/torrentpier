@@ -57,7 +57,7 @@ $bb_cfg['css_ver'] = 1;
 
 // Increase number of revision after update
 $bb_cfg['tp_version'] = '2.1 Stable';
-$bb_cfg['tp_release_state'] = 'R262';
+$bb_cfg['tp_release_state'] = 'R263';
 $bb_cfg['tp_release_date'] = '29-08-2011';
 
 $bb_cfg['board_disabled_msg'] = 'форум временно отключен'; // 'forums temporarily disabled'; // show this msg if board has been disabled via ON/OFF trigger
@@ -277,6 +277,7 @@ $bb_cfg['max_last_visit_days']     = 14;           // days
 $bb_cfg['last_visit_update_intrv'] = 3600;         // sec
 
 // Registration
+$bb_cfg['invalid_logins']          = 5;            // Кол-во неверных попыток ввода пароля, перед выводом проверки капчи
 $bb_cfg['new_user_reg_disabled']   = false;        // Disable new user registrations
 $bb_cfg['unique_ip']               = false;        // Deny registration of several accounts by one ip
 $bb_cfg['new_user_reg_restricted'] = false;

@@ -179,7 +179,7 @@ ajax.callback.posts = function(data){
 	</td>
 </tr>
 <tr>
-	<td>{L_DENY_VISITORS}</td>
+	<td>{L_DENY_VISITORS}:</td>
 	<td>
 		<label><input type="radio" name="view_profile" value="1" <!-- IF VIEW_PROFILE -->checked="checked"<!-- ENDIF --> />{L_YES}</label>&nbsp;&nbsp;
 		<label><input type="radio" name="view_profile" value="0" <!-- IF not VIEW_PROFILE -->checked="checked"<!-- ENDIF --> />{L_NO}</label>

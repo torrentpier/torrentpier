@@ -166,11 +166,16 @@ if (IS_ADMIN)
 		'EMAIL_ADDRESS'    => htmlCHR($profiledata['user_email']),
 	));
 }
-else
-{
-	$user_restrictions = array();
 
-	$template->assign_var('USER_RESTRICTIONS', join('</li><li>', $user_restrictions));
-}
+$user_restrictions = array();
+
+if (bf($profiledata['user_opt'], 'user_opt', 'allow_avatar'))    $user_restrictions[] = $lang['HIDE_AVATARS'];
+if (bf($profiledata['user_opt'], 'user_opt', 'allow_passkey'))   $user_restrictions[] = $lang['DOWNLOAD_TORRENT'];
+if (bf($profiledata['user_opt'], 'user_opt', 'allow_pm'))        $user_restrictions[] = $lang['SEND_PM'];
+if (bf($profiledata['user_opt'], 'user_opt', 'allow_post'))      $user_restrictions[] = $lang['SEND_MESSAGE'];
+if (bf($profiledata['user_opt'], 'user_opt', 'allow_post_edit')) $user_restrictions[] = $lang['EDIT_POST'];
+if (bf($profiledata['user_opt'], 'user_opt', 'allow_topic'))     $user_restrictions[] = $lang['NEW_THREADS'];
+
+$template->assign_var('USER_RESTRICTIONS', join('</li><li>', $user_restrictions));
 
 print_page('usercp_viewprofile.tpl');

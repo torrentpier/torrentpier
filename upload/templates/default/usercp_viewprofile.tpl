@@ -67,7 +67,6 @@ $(document).ready(function(){
 		$('#user-opt-resp').html('&nbsp;');
 		ajax.change_user_opt();
 	});
-	$('#user-opt').show();
 });
 </script>
 
@@ -104,8 +103,26 @@ $(document).ready(function(){
 	<p class="floatL"><a href="{U_INDEX}">{T_INDEX}</a></p>
 	<!-- IF IS_ADMIN -->
 	<p class="floatR">
-	<a href="{U_MANAGE}">{L_PROFILE}</a> &middot; 
-	<a href="{U_PERMISSIONS}">{L_PERMISSIONS}</a>&nbsp;</p>
+	<a href="{U_MANAGE}">{L_PROFILE}</a> &middot;
+	<a href="{U_PERMISSIONS}">{L_PERMISSIONS}</a> &middot;
+	<a href="#user-opt" class="menu-root menu-alt1">{L_BAN_USER}</a></p>
+		<div class="menu-sub row1 border bw_TRBL" id="user-opt">
+			<fieldset class="mrg_6">
+			<div class="tLeft" style="padding: 2px 6px 6px; display: block;">
+				<label><input type="checkbox" name="allow_avatar"/>{L_HIDE_AVATARS}</label>
+				<label><input type="checkbox" name="allow_sig"/>{L_SHOW_CAPTION}</label>
+				<label><input type="checkbox" name="allow_passkey"/>{L_DOWNLOAD_TORRENT}</label>
+				<label><input type="checkbox" name="allow_pm"/>{L_SEND_PM}</label>
+				<label><input type="checkbox" name="allow_post"/>{L_SEND_MESSAGE}</label>
+				<label><input type="checkbox" name="allow_post_edit"/>{L_EDIT_POST}</label>
+				<label><input type="checkbox" name="allow_topic"/>{L_NEW_THREADS}</label>
+			</div>
+			</fieldset>
+			<div id="user-opt-save" class="hidden tCenter">
+				<p><input id="user-opt-save-btn" class="bold long" type="button" value="{L_SUBMIT}" /></p>
+				<p id="user-opt-resp" class="mrg_6"></p>
+			</div>
+		</div>
 	<!-- ENDIF -->
 	<div class="clear"></div>
 </div>
@@ -170,29 +187,9 @@ $(document).ready(function(){
 		<!-- ENDIF -->
 		</table><!--/user_contacts-->
 
-		<!-- IF IS_ADMIN -->
-		<div id="user-opt" style="display: none;">
-			<fieldset class="mrg_6">
-			<style type="text/css"> #user-opt label { display: block; } </style>
-			<legend>{L_BAN_USER}</legend>
-			<div class="tLeft" style="padding: 2px 6px 6px; display: block;">
-				<label><input type="checkbox" name="allow_avatar"/>{L_HIDE_AVATARS}</label>
-				<label><input type="checkbox" name="allow_sig"/>{L_SHOW_CAPTION}</label>
-				<label><input type="checkbox" name="allow_passkey"/>{L_DOWNLOAD_TORRENT}</label>
-				<label><input type="checkbox" name="allow_pm"/>{L_SEND_PM}</label>
-				<label><input type="checkbox" name="allow_post"/>{L_SEND_MESSAGE}</label>
-				<label><input type="checkbox" name="allow_post_edit"/>{L_EDIT_POST}</label>
-				<label><input type="checkbox" name="allow_topic"/>{L_NEW_THREADS}</label>
-			</div>
-			</fieldset>
-			<div id="user-opt-save" class="hidden">
-				<p><input id="user-opt-save-btn" class="bold long" type="button" value="{L_SUBMIT}" /></p>
-				<p id="user-opt-resp" class="mrg_6"></p>
-			</div>
-		</div>
-		<!-- ELSEIF USER_RESTRICTIONS -->
+		<!-- IF USER_RESTRICTIONS -->
 		<fieldset class="mrg_6">
-		<legend>{L_USER_NOT_ALLOWED}</legend>
+		<legend>{L_USER_NOT_ALLOWED}:</legend>
 			<div class="tLeft" style="padding: 4px 6px 8px 2px;">
 			<ul><li>{USER_RESTRICTIONS}</li></ul>
 			</div>
@@ -233,7 +230,7 @@ $(document).ready(function(){
 						[ <a href="{U_SEARCH_USER}" class="med">{L_SEARCH_USER_POSTS}</a> ]
 						[ <a href="{U_SEARCH_TOPICS}" class="med">{L_SEARCH_USER_TOPICS}</a> ]
 						[ <a class="med" href={U_SEARCH_RELEASES}>{L_SEARCH_RELEASES}</a> ]
-					</p>					
+					</p>
 				</td>
 			</tr>
 			<!-- IF LOCATION -->

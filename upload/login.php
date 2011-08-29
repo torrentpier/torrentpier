@@ -60,8 +60,13 @@ $mod_admin_login = (IS_AM && !$user->data['session_admin']);
 $login_username = ($mod_admin_login) ? $userdata['username'] : (string) @$_POST['login_username'];
 $login_password = (string) @$_POST['login_password'];
 
-// Login
-$need_captcha = (!$mod_admin_login) ? CACHE('bb_login_err')->get('l_err_'. USER_IP) : false;
+// Проверка на неверную комбинацию логин/пароль
+$need_captcha = false;
+if(!$mod_admin_login)
+{
+	$need_captcha = CACHE('bb_login_err')->get('l_err_'. USER_IP);
+	if($need_captcha < $bb_cfg['invalid_logins']) $need_captcha = false;
+}
 
 // login
 if (isset($_POST['login']))
@@ -89,12 +94,23 @@ if (isset($_POST['login']))
 		if ($user->login($_POST, $mod_admin_login))
 		{
 			$redirect_url = (defined('FIRST_LOGON')) ? $bb_cfg['first_logon_redirect_url'] : $redirect_url;
+			// Обнуление при введении правильно комбинации логин/пароль
+			CACHE('bb_login_err')->set('l_err_'. USER_IP, 0, 3600);
+
 			redirect($redirect_url);
 		}
 
 		$login_errors[] = $lang['ERROR_LOGIN'];
 
-		$need_captcha = (!$mod_admin_login) ? CACHE('bb_login_err')->set('l_err_'. USER_IP, 1, 3600) : false;
+		if(!$mod_admin_login)
+		{
+			$login_err = CACHE('bb_login_err')->get('l_err_'. USER_IP);
+			if($login_err > $bb_cfg['invalid_logins']) $need_captcha = true;
+            if($login_err > 50) // забанить ип :)
+
+			CACHE('bb_login_err')->set('l_err_'. USER_IP, ($login_err + 1), 3600);
+		}
+		else $need_captcha = false;
 	}
 }
 
@@ -104,7 +120,7 @@ if (IS_GUEST || $mod_admin_login)
 	$template->assign_vars(array(
 		'LOGIN_USERNAME'  => htmlCHR($login_username),
 		'LOGIN_PASSWORD'  => htmlCHR($login_password),
-		'LOGIN_ERR_MSG'   => join('<br />', $login_errors),
+		'ERROR_MESSAGE'   => join('<br />', $login_errors),
 		'ADMIN_LOGIN'     => $mod_admin_login,
 		'REDIRECT_URL'    => htmlCHR($redirect_url),
 		'CAPTCHA_HTML'    => ($need_captcha) ? CAPTCHA()->get_html() : '',

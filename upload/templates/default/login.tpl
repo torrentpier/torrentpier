@@ -15,9 +15,7 @@
 <tr>
 	<td class="row1">
 
-	<!-- IF LOGIN_ERR_MSG -->
-	<h4 class="warnColor1 tCenter mrg_16">{LOGIN_ERR_MSG}</h4>
-	<!-- ELSEIF ADMIN_LOGIN -->
+	<!-- IF ADMIN_LOGIN -->
 	<h4 class="tCenter mrg_16">{L_ADMIN_REAUTHENTICATE}</h4>
 	<!-- ELSE -->
 	<h4 class="tCenter mrg_16">{L_ENTER_PASSWORD}</h4>
