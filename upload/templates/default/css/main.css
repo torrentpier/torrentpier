@@ -886,7 +886,7 @@ a.menu-root, a.menu-root:visited, a.menu-root:hover {
  * ================================================================ */
 var.ajax-params { display: none; }
 #ajax-loading, #ajax-error {
-	position: absolute; z-index: 2000; padding: 4px; font-size: 11px;
+	position: fixed; top:0 !important; z-index: 2000; padding: 4px; font-size: 11px;
 	max-width: 400px; max-height: 200px; white-space: nowrap; display: none;
 }
 #ajax-loading { background: rgba(0,0,0, 0.5) url(../images/loading_1.gif) no-repeat center center; border-bottom-left-radius: 10px; -webkit-border-bottom-left-radius:  10px; -moz-border-radius-bottomleft:  10px; -khtml-border-bottom-left-radius:  10px; float: right; width: 85px; height: 30px;
