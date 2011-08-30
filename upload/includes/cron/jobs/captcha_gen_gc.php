@@ -3,14 +3,14 @@
 if (!defined('BB_ROOT')) die(basename(__FILE__));
 
 //
-// Ñîçäàíèå íîâûõ êàðòèíîê
+// Ð¡Ð¾Ð·Ð´Ð°Ð½Ð¸Ðµ Ð½Ð¾Ð²Ñ‹Ñ… ÐºÐ°Ñ€Ñ‚Ð¸Ð½Ð¾Ðº
 //
-$cap_img_total   = CAPTCHA()->cap_img_total;    // ñêîëüêî äîëæíî áûòü âñåãî àêòèâíûõ (cap_id > 0)
-$new_per_minute  = CAPTCHA()->new_per_minute;   // ñêîëüêî äîáàâëÿòü íîâûõ
+$cap_img_total   = CAPTCHA()->cap_img_total;    // ÑÐºÐ¾Ð»ÑŒÐºÐ¾ Ð´Ð¾Ð»Ð¶Ð½Ð¾ Ð±Ñ‹Ñ‚ÑŒ Ð²ÑÐµÐ³Ð¾ Ð°ÐºÑ‚Ð¸Ð²Ð½Ñ‹Ñ… (cap_id > 0)
+$new_per_minute  = CAPTCHA()->new_per_minute;   // ÑÐºÐ¾Ð»ÑŒÐºÐ¾ Ð´Ð¾Ð±Ð°Ð²Ð»ÑÑ‚ÑŒ Ð½Ð¾Ð²Ñ‹Ñ…
 $cap_expire_time = TIMENOW + CAPTCHA()->key_ttl*2;
 
-$gen_new_img_count = $new_per_minute;           // ñêîëüêî ðåàëüíî íóæíî ñãåíåðèòü íîâûõ
-$expire_img_count  = $new_per_minute;           // ñêîëüêî ïîìåòèòü äëÿ óäàëåíèÿ
+$gen_new_img_count = $new_per_minute;           // ÑÐºÐ¾Ð»ÑŒÐºÐ¾ Ñ€ÐµÐ°Ð»ÑŒÐ½Ð¾ Ð½ÑƒÐ¶Ð½Ð¾ ÑÐ³ÐµÐ½ÐµÑ€Ð¸Ñ‚ÑŒ Ð½Ð¾Ð²Ñ‹Ñ…
+$expire_img_count  = $new_per_minute;           // ÑÐºÐ¾Ð»ÑŒÐºÐ¾ Ð¿Ð¾Ð¼ÐµÑ‚Ð¸Ñ‚ÑŒ Ð´Ð»Ñ ÑƒÐ´Ð°Ð»ÐµÐ½Ð¸Ñ
 
 $row = DB('cap')->fetch_row("SELECT COUNT(*) AS cnt, MAX(cap_id) AS max_id FROM ". BB_CAPTCHA ." WHERE cap_id > 0");
 
@@ -34,7 +34,7 @@ while ($cur_id <= $finish_id)
 }
 
 //
-// Ìåòêà î íåàêòèâíîñòè è îá èñòå÷åíèè ñðîêà
+// ÐœÐµÑ‚ÐºÐ° Ð¾ Ð½ÐµÐ°ÐºÑ‚Ð¸Ð²Ð½Ð¾ÑÑ‚Ð¸ Ð¸ Ð¾Ð± Ð¸ÑÑ‚ÐµÑ‡ÐµÐ½Ð¸Ð¸ ÑÑ€Ð¾ÐºÐ°
 //
 DB('cap')->query("
 	UPDATE ". BB_CAPTCHA ." SET
@@ -46,7 +46,7 @@ DB('cap')->query("
 ");
 
 //
-// Óäàëåíèå ñòàðûõ
+// Ð£Ð´Ð°Ð»ÐµÐ½Ð¸Ðµ ÑÑ‚Ð°Ñ€Ñ‹Ñ…
 //
 $del_ids = DB('cap')->fetch_rowset("SELECT cap_id FROM ". BB_CAPTCHA ." WHERE cap_id < 0 AND cap_expire < ". TIMENOW, 'cap_id');
 
