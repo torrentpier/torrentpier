@@ -1583,11 +1583,11 @@ function bb_date ($gmepoch, $format = false, $tz = null)
 
 	if(is_numeric($tz))
 	{
-        if (!$userdata['session_logged_in'])
+        if (empty($userdata['session_logged_in']))
 		{
-			$tz = $userdata['user_timezone'];
+			$tz = $bb_cfg['board_timezone'];
 		}
-		else $tz = $bb_cfg['board_timezone'];
+		else $tz = $userdata['user_timezone'];
 
 		$time_format = " H:i";
 
