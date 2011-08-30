@@ -117,14 +117,14 @@ class captcha_common
 
 	function gen_cap_sid ()
 	{
-		$row = DB()->fetch_row("SELECT MIN(cap_id) AS min_id, MAX(cap_id) AS max_id FROM ". BB_CAPTCHA ." WHERE cap_id > 0");
+		$row = DB('cap')->fetch_row("SELECT MIN(cap_id) AS min_id, MAX(cap_id) AS max_id FROM ". BB_CAPTCHA ." WHERE cap_id > 0");
 
 		$min_id = intval($row['min_id']) + $this->new_per_minute;
 		$max_id = intval($row['max_id']);
 
 		$this->new_cap_id = ($min_id < $max_id) ? mt_rand($min_id, $max_id) : $max_id;
 
-		$this->new_cap_code = (string) DB()->fetch_row("SELECT cap_code FROM ". BB_CAPTCHA ." WHERE cap_id = {$this->new_cap_id}", 'cap_code');
+		$this->new_cap_code = (string) DB('cap')->fetch_row("SELECT cap_code FROM ". BB_CAPTCHA ." WHERE cap_id = {$this->new_cap_id}", 'cap_code');
 
 		$this->new_cap_sid = make_rand_str($this->cap_sid_len);
 

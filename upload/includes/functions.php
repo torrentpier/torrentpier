@@ -1560,11 +1560,13 @@ function setup_style ()
 // Create date/time from format and timezone
 function bb_date ($gmepoch, $format = false, $tz = null)
 {
-	global $bb_cfg, $lang;
+	global $bb_cfg, $lang, $userdata;
 
 	if (is_null($tz))
 	{
-		$tz = $bb_cfg['board_timezone'];
+		if(!IS_GUEST)
+		{			$tz = $userdata['user_timezone'];		}
+		else $tz = $bb_cfg['board_timezone'];
 	}
 	if (!$format)
 	{
@@ -1581,6 +1583,12 @@ function bb_date ($gmepoch, $format = false, $tz = null)
 
 	if(is_numeric($tz))
 	{
+        if(!IS_GUEST)
+		{
+			$tz = $userdata['user_timezone'];
+		}
+		else $tz = $bb_cfg['board_timezone'];
+
 		$time_format = " H:i";
 
 		$date = getdate();

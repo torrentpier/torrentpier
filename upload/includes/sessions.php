@@ -488,9 +488,9 @@ class user_common
 				COOKIE_LOAD,
 				COOKIE_DBG,
 				'torhelp',
-				'kb_layout',
 				'explain',
-				'sql_log'
+				'sql_log',
+				'sql_log_full',
 			);
 
 			foreach ($delete_cookies as $cookie)

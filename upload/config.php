@@ -51,29 +51,24 @@ if (!defined('BB_ROOT')) die(basename(__FILE__));
 
 $bb_cfg = $tr_cfg = $page_cfg = array();
 
-// Increase number after changing js or css
-$bb_cfg['js_ver']  = 1;
-$bb_cfg['css_ver'] = 1;
-
 // Increase number of revision after update
 $bb_cfg['tp_version'] = '2.1 Stable';
-$bb_cfg['tp_release_state'] = 'R265';
+$bb_cfg['tp_release_state'] = 'R264';
 $bb_cfg['tp_release_date'] = '30-08-2011';
 
-$bb_cfg['board_disabled_msg'] = 'форум временно отключен'; // 'forums temporarily disabled'; // show this msg if board has been disabled via ON/OFF trigger
-$bb_cfg['srv_overloaded_msg'] = "Извините, в данный момент сервер перегружен\nПопробуйте повторить запрос через несколько минут";
-
 // Database
-$dbcharset = 'utf8';
-$pconnect  = false;
+$charset  = 'utf8';
+$pconnect = false;
 
-// ['db']['srv_name'] => (array) srv_cfg; порядок параметров srv_cfg (хост, название базы, пользователь, пароль, charset, pconnect);
-$bb_cfg['db']['db1'] = array('localhost', 'dbase', 'user', 'pass', $dbcharset, $pconnect);
-//$bb_cfg['db']['db2'] = array('localhost2', 'dbase2', 'user2', 'pass2', $dbcharset, $pconnect);
-//$bb_cfg['db']['db3'] = array('localhost3', 'dbase3', 'user2', 'pass3', $dbcharset, $pconnect);
+// Настройка баз данных ['db']['srv_name'] => (array) srv_cfg;
+// порядок параметров srv_cfg (хост, название базы, пользователь, пароль, charset, pconnect);
+$bb_cfg['db']['db1'] = array('localhost', 'dbase', 'user', 'pass', $charset, $pconnect);
+//$bb_cfg['db']['db2'] = array('localhost2', 'dbase2', 'user2', 'pass2', $charset, $pconnect);
+//$bb_cfg['db']['db3'] = array('localhost3', 'dbase3', 'user2', 'pass3', $charset, $pconnect);
 
 $bb_cfg['db_alias'] = array(
-// 'alias' => 'srv_name'
+//	'alias'        => 'srv_name'
+	'cap'          => 'db1',  // BB_CAPTCHA
 );
 
 // Cache
@@ -113,15 +108,19 @@ $bb_cfg['script_path'] = '/';                      // The path where FORUM is lo
 $bb_cfg['sitename'] = (!empty($_SERVER['SERVER_NAME'])) ? $_SERVER['SERVER_NAME'] : 'TorrentPier II - Torrent Tracker (see $bb_cfg[\'sitename\'] in config.php)';               // Name of your site
 
 // Server load
-$bb_cfg['max_srv_load']      = 0;                  // 0 - disable
-$bb_cfg['tr_working_second'] = 0;                  // 0 - disable
+$bb_cfg['max_srv_load']       = 0;                  // 0 - disable
+$bb_cfg['tr_working_second']  = 0;                  // 0 - disable
+
+// Increase number after changing js or css
+$bb_cfg['js_ver']             = 1;
+$bb_cfg['css_ver']            = 1;
 
 // Backup
 $bb_cfg['db_backup_shell_cmd']     = '';           // '/path/to/db_backup.sh 2>&1'
 $bb_cfg['site_backup_shell_cmd']   = '';
 
 // GZip
-$bb_cfg['gzip_compress'] = true;                   // compress output
+$bb_cfg['gzip_compress']      = true;              // compress output
 
 // Tracker
 $bb_cfg['announce_type']      = 'php';             // Тип анонсера, xbt или php
