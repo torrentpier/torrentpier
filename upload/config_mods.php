@@ -13,8 +13,8 @@
 
 if (!defined('BB_ROOT')) die(basename(__FILE__));
 
-$bb_cfg['board_disabled_msg'] = 'форум временно отключен'; // 'forums temporarily disabled'; // show this msg if board has been disabled via ON/OFF trigger
-$bb_cfg['srv_overloaded_msg'] = "Извините, в данный момент сервер перегружен\nПопробуйте повторить запрос через несколько минут";
+$bb_cfg['board_disabled_msg'] = 'С„РѕСЂСѓРј РІСЂРµРјРµРЅРЅРѕ РѕС‚РєР»СЋС‡РµРЅ'; // 'forums temporarily disabled'; // show this msg if board has been disabled via ON/OFF trigger
+$bb_cfg['srv_overloaded_msg'] = "РР·РІРёРЅРёС‚Рµ, РІ РґР°РЅРЅС‹Р№ РјРѕРјРµРЅС‚ СЃРµСЂРІРµСЂ РїРµСЂРµРіСЂСѓР¶РµРЅ\nРџРѕРїСЂРѕР±СѓР№С‚Рµ РїРѕРІС‚РѕСЂРёС‚СЊ Р·Р°РїСЂРѕСЃ С‡РµСЂРµР· РЅРµСЃРєРѕР»СЊРєРѕ РјРёРЅСѓС‚";
 
 // Advanced Report Hack
 $bb_cfg['reports_enabled'] = true;
