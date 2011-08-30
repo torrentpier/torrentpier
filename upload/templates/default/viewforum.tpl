@@ -267,9 +267,27 @@ td.topic_id { cursor: pointer; }
 	<tr>
 		<td valign="bottom">
 			<h1 class="maintitle"><a href="{U_VIEW_FORUM}">{FORUM_NAME}</a></h1>
-			<!-- IF MODERATORS -->
-			<p class="small">{L_MODERATORS}: <b>{MODERATORS}</b></p>
-			<!-- ENDIF -->
+			
+			<p class="small" id="moderators"><a style="text-decoration: none;" href="#">{L_MODERATORS}</a></p>
+            <script type="text/javascript">
+                $(document).ready(function(){
+                    $("#moderators a").one('click', function(){
+                    $('#moderators').html($('#moderators').text());
+                        ajax.get_forum_mods();
+                            return false;
+                    });
+                });
+                ajax.get_forum_mods = function() {
+                    ajax.exec({
+                        action   : 'get_forum_mods',
+                        forum_id : {FORUM_ID} 
+                    });
+                };
+                ajax.callback.get_forum_mods = function(data) {
+                    $('#moderators').append(data.html);
+                };
+            </script>
+			
 			<!-- IF SHOW_ONLINE_LIST -->
 			<p class="small">{LOGGED_IN_USER_LIST}</p>
 			<!-- ENDIF -->
@@ -309,7 +327,6 @@ td.topic_id { cursor: pointer; }
 	<td class="pad_4">{f.TOPIC_TYPE}
 		<h4 class="forumlink"><a href="{f.U_VIEWFORUM}">{f.FORUM_NAME}</a></h4>
 		<!-- IF f.FORUM_DESC --><p class="forum_desc">{f.FORUM_DESC}</p><!-- ENDIF -->
-		<!-- IF f.MODERATORS --><p class="moderators"><em>{L_MODERATORS}:</em> {f.MODERATORS}</p><!-- ENDIF -->
 	</td>
 	<td class="med tCenter">{f.TOPICS}</td>
 	<td class="med tCenter">{f.POSTS}</td>

@@ -12,10 +12,6 @@ $last_topic_max_len  = 40;
 $title_match_key     = 'nm';
 $title_match_max_len = 60;
 
-$datastore->enqueue(array(
-	'moderators',
-));
-
 $page_cfg['load_tpl_vars'] = array(
 	'post_icons',
 	'topic_icons',
@@ -206,7 +202,6 @@ if (!$forum_data['forum_parent'] && isset($forums['f'][$forum_id]['subforums']) 
 			'TOPICS'      => commify($sf_data['forum_topics']),
 			'POSTS'       => commify($sf_data['forum_posts']),
 			'LAST_POST'   => $last_post,
-			'MODERATORS'  => '',
 		));
 
 		if ($sf_data['forum_last_post_id'])
@@ -257,36 +252,6 @@ if ($is_auth['auth_mod'])
 		$select_tpp[$tpp] = $tpp;
 	}
 }
-
-// Obtain list of moderators
-$moderators = array();
-if (!$mod = $datastore->get('moderators'))
-{
-	$datastore->update('moderators');
-	$mod = $datastore->get('moderators');
-}
-
-if (isset($mod['mod_users'][$forum_id]))
-{
-	foreach ($mod['mod_users'][$forum_id] as $user_id)
-	{
-		$moderators[] = '<a href="'. PROFILE_URL . $user_id .'">'. $mod['name_users'][$user_id] .'</a>';
-	}
-}
-if (isset($mod['mod_groups'][$forum_id]))
-{
-	foreach ($mod['mod_groups'][$forum_id] as $group_id)
-	{
-		$moderators[] = '<a href="'. "groupcp.php?". POST_GROUPS_URL ."=". $group_id .'">'. $mod['name_groups'][$group_id] .'</a>';
-	}
-}
-
-$template->assign_vars(array(
-	'MODERATORS'  => ($moderators) ? join(', ', $moderators) : $lang['NONE'],
-));
-
-unset($moderators, $mod);
-$datastore->rm('moderators');
 
 // Generate a 'Show topics in previous x days' select box.
 $topic_days   = 0; // all the time

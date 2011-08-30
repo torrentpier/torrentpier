@@ -75,6 +75,7 @@ class ajax_common
 		'user_register'     => array('guest'),
 		'posts'             => array('guest'),
 		'birthday_list'     => array('guest'),
+		'get_forum_mods'    => array('guest'),
 	);
 
 	var $action = null;
@@ -410,6 +411,43 @@ class ajax_common
 		$this->response['html'] = $html;
 		$this->response['mode'] = $mode;
 	}
+	
+	function get_forum_mods()
+    {
+        global $lang, $datastore;
+        
+		$forum_id = (int) $this->request['forum_id'];
+        
+		$datastore->enqueue(array(
+            'moderators',
+        ));
+        
+		$moderators = array();
+        $mod = $datastore->get('moderators');
+
+        if (isset($mod['mod_users'][$forum_id]))
+        {
+            foreach ($mod['mod_users'][$forum_id] as $user_id)
+            {
+                $moderators[] = '<a href="'. PROFILE_URL . $user_id .'">'. $mod['name_users'][$user_id] .'</a>';
+            }
+        }
+  
+        if (isset($mod['mod_groups'][$forum_id]))
+        {
+            foreach ($mod['mod_groups'][$forum_id] as $group_id)
+            {
+                $moderators[] = '<a href="'. "groupcp.php?". POST_GROUPS_URL ."=". $group_id .'">'. $mod['name_groups'][$group_id] .'</a>';
+            }
+        }
+  
+        $html = ':&nbsp;';
+        $html .= ($moderators) ? join(', ', $moderators) : $lang['NONE'];
+        
+		$this->response['html'] = '<strong>'.$html.'</strong>';
+        unset($moderators, $mod);
+        $datastore->rm('moderators');
+    }
 
 	function view_post ()
 	{
