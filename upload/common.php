@@ -1718,37 +1718,6 @@ class datastore_file extends datastore_common
 	}
 }
 
-class datastore_mysql extends datastore_common
-{
-	var $engine = 'MySQL';
-
-	function store ($item_name, $item_data)
-	{
-		$this->data[$item_name] = $item_data;
-
-		$args = DB()->build_array('INSERT', array(
-			'ds_title' => (string) $item_name,
-			'ds_data'  => (string) serialize($item_data),
-		));
-		DB()->query("REPLACE INTO ". BB_DATASTORE . $args);
-	}
-
-	function _fetch_from_store ()
-	{
-		if (!$items = $this->queued_items) return;
-
-		array_deep($items, 'mysql_escape_string');
-		$items_list = join("','", $items);
-
-		$sql = "SELECT ds_title, ds_data FROM ". BB_DATASTORE ." WHERE ds_title IN('$items_list')";
-
-		foreach (DB()->fetch_rowset($sql) as $row)
-		{
-			$this->data[$row['ds_title']] = unserialize($row['ds_data']);
-		}
-	}
-}
-
 // Initialize Datastore
 switch ($bb_cfg['datastore_type'])
 {
@@ -1780,13 +1749,9 @@ switch ($bb_cfg['datastore_type'])
 	case 'apc':
 		$datastore = new datastore_apc();
 		break;
-
+	
 	case 'filecache':
-		$datastore = new datastore_file($bb_cfg['cache']['db_dir'] . 'datastore/');
-		break;
-
-	default: //mysql
-		$datastore = new datastore_mysql();
+	default: $datastore = new datastore_file($bb_cfg['cache']['db_dir'] . 'datastore/');
 }
 
 function sql_dbg_enabled ()

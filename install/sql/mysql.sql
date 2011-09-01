@@ -39,7 +39,6 @@ DROP TABLE IF EXISTS `bb_categories`;
 DROP TABLE IF EXISTS `bb_config`;
 DROP TABLE IF EXISTS `bb_countries`;
 DROP TABLE IF EXISTS `bb_cron`;
-DROP TABLE IF EXISTS `bb_datastore`;
 DROP TABLE IF EXISTS `bb_disallow`;
 DROP TABLE IF EXISTS `bb_extension_groups`;
 DROP TABLE IF EXISTS `bb_extensions`;
@@ -692,30 +691,6 @@ INSERT INTO `bb_cron` VALUES (19, 1, 'Captcha', 'captcha_gen_gc.php', 'daily', N
 INSERT INTO `bb_cron` VALUES (20, 1, 'Tracker dl-complete count', 'tr_complete_count.php', 'interval', NULL, NULL, 255, '2008-05-22 19:12:01', '2008-05-23 01:12:01', '06:00:00', 0, '', 0, 0, 3);
 INSERT INTO `bb_cron` VALUES (21, 1, 'Cache garbage collector', 'cache_gc.php', 'interval', NULL, NULL, 255, '2008-05-22 19:18:13', '2008-05-22 19:23:13', '00:05:00', 0, '', 0, 0, 24);
 INSERT INTO `bb_cron` VALUES (22, 1, 'Manage Antibroot', 'bb_manage_untrusted.php', 'interval', NULL, NULL, 255, '2008-05-22 19:18:13', '2008-05-22 19:23:13', '00:10:00', 0, '', 0, 0, 24);
-
--- --------------------------------------------------------
-
---
--- Структура таблицы `bb_datastore`
---
-
-CREATE TABLE `bb_datastore` (
-  `ds_title` varchar(255) NOT NULL default '',
-  `ds_data` longtext NOT NULL,
-  PRIMARY KEY  (`ds_title`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
-
---
--- Дамп данных таблицы `bb_datastore`
---
-
-INSERT INTO `bb_datastore` VALUES ('cat_forums', 'a:6:{s:15:"not_auth_forums";a:4:{s:10:"guest_view";s:0:"";s:10:"guest_read";s:0:"";s:9:"user_view";s:0:"";s:9:"user_read";s:0:"";}s:14:"tracker_forums";s:0:"";s:14:"cat_title_html";a:1:{i:1;s:15:"Ваша первая категория";}s:15:"forum_name_html";a:1:{i:1;s:12:"Ваш первый форум 1";}s:1:"c";a:1:{i:1;a:4:{s:6:"cat_id";s:1:"1";s:9:"cat_title";s:15:"Ваша первая категория 1";s:9:"cat_order";s:2:"10";s:6:"forums";a:1:{i:0;s:1:"1";}}}s:1:"f";a:1:{i:1;a:20:{s:8:"forum_id";s:1:"1";s:6:"cat_id";s:1:"1";s:10:"forum_name";s:12:"Ваш первый форум";s:10:"forum_desc";s:26:"Ваш первый форум";s:12:"forum_status";s:1:"0";s:11:"forum_posts";s:1:"1";s:12:"forum_topics";s:1:"1";s:9:"auth_view";s:1:"0";s:9:"auth_read";s:1:"0";s:9:"auth_post";s:1:"1";s:10:"auth_reply";s:1:"1";s:9:"auth_edit";s:1:"1";s:11:"auth_delete";s:1:"1";s:11:"auth_sticky";s:1:"3";s:13:"auth_announce";s:1:"3";s:9:"auth_vote";s:1:"1";s:15:"auth_pollcreate";s:1:"1";s:16:"auth_attachments";s:1:"1";s:13:"auth_download";s:1:"1";s:12:"forum_parent";s:1:"0";}}}');
-INSERT INTO `bb_datastore` VALUES ('jumpbox', 'a:2:{s:5:"guest";s:241:"\n<select  id="jumpbox" onchange="window.location.href=''viewforum.php?f=''+this.value;" name="f" id="f">\n	<optgroup label="&nbsp;Ваша первая категория">\n		<option class="root_forum" value="1">&nbsp;Ваш первый форум&nbsp;</option>\n	</optgroup>\n</select>\n";s:4:"user";s:241:"\n<select  id="jumpbox" onchange="window.location.href=''viewforum.php?f=''+this.value;" name="f" id="f">\n	<optgroup label="&nbsp;Ваша первая категория">\n		<option class="root_forum" value="1">&nbsp;Ваш первый форум&nbsp;</option>\n	</optgroup>\n</select>\n";}');
-INSERT INTO `bb_datastore` VALUES ('viewtopic_forum_select', 'a:1:{s:22:"viewtopic_forum_select";s:187:"\n<select  name="new_forum_id" id="new_forum_id">\n	<optgroup label="&nbsp;Ваша первая категория">\n		<option class="root_forum" value="1">&nbsp;Ваш первый форум&nbsp;</option>\n	</optgroup>\n</select>\n";}');
-INSERT INTO `bb_datastore` VALUES ('latest_news', 'a:1:{i:0;a:3:{s:8:"topic_id";s:1:"1";s:10:"topic_time";s:9:"972086460";s:11:"topic_title";s:18:"Добро пожаловать в TorrentPier II";}}');
-INSERT INTO `bb_datastore` VALUES ('ads', 'a:0:{}');
-INSERT INTO `bb_datastore` VALUES ('stats', 'a:4:{s:9:"usercount";s:1:"3";s:10:"newestuser";a:2:{s:7:"user_id";s:1:"2";s:8:"username";s:5:"admin";}s:9:"postcount";s:1:"1";s:10:"topiccount";s:1:"1";}');
-INSERT INTO `bb_datastore` VALUES ('moderators', 'a:6:{s:10:"name_users";a:0:{}s:11:"name_groups";a:0:{}s:9:"mod_users";a:0:{}s:10:"mod_groups";a:0:{}s:10:"moderators";a:0:{}s:6:"admins";a:1:{i:2;s:5:"admin";}}');
 
 -- --------------------------------------------------------
 

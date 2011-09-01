@@ -53,8 +53,8 @@ $bb_cfg = $tr_cfg = $page_cfg = array();
 
 // Increase number of revision after update
 $bb_cfg['tp_version'] = '2.1 Stable';
-$bb_cfg['tp_release_state'] = 'R273';
-$bb_cfg['tp_release_date'] = '31-08-2011';
+$bb_cfg['tp_release_state'] = 'R274';
+$bb_cfg['tp_release_date'] = '01-09-2011';
 
 // Database
 $charset  = 'utf8';
@@ -98,7 +98,7 @@ $bb_cfg['cache']['engines'] = array(
 );
 
 // Datastore
-// Available datastore types: memcache, sqlite, redis, eaccelerator, apc, xcache (default of mysql)
+// Available datastore types: memcache, sqlite, redis, eaccelerator, apc, xcache  (default filecache)
 $bb_cfg['datastore_type'] = 'filecache';
 
 // Server
