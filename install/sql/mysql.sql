@@ -1182,7 +1182,7 @@ CREATE TABLE `bb_smilies` (
   `smile_url` varchar(100) NOT NULL default '',
   `emoticon` varchar(75) NOT NULL default '',
   PRIMARY KEY  (`smilies_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=50 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8;
 
 --
 -- Дамп данных таблицы `bb_smilies`
@@ -1237,6 +1237,13 @@ INSERT INTO `bb_smilies` VALUES (46, ':bt:', 'bt.gif', 'bt');
 INSERT INTO `bb_smilies` VALUES (47, ':bu:', 'bu.gif', 'bu');
 INSERT INTO `bb_smilies` VALUES (48, ':bv:', 'bv.gif', 'bv');
 INSERT INTO `bb_smilies` VALUES (49, ':bw:', 'bw.gif', 'bw');
+INSERT INTO `bb_smilies` VALUES (50, ':bx:', 'bx.gif', 'bx');
+INSERT INTO `bb_smilies` VALUES (51, ':by:', 'by.gif', 'by');
+INSERT INTO `bb_smilies` VALUES (52, ':bz:', 'bz.gif', 'bz');
+INSERT INTO `bb_smilies` VALUES (53, ':ca:', 'ca.gif', 'ca');
+INSERT INTO `bb_smilies` VALUES (54, ':cb:', 'cb.gif', 'cb');
+INSERT INTO `bb_smilies` VALUES (55, ':cc:', 'cc.gif', 'cc');
+INSERT INTO `bb_smilies` VALUES (56, ':cd:', 'cd.gif', 'cd');
 
 -- --------------------------------------------------------
 
