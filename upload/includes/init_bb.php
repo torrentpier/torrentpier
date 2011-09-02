@@ -343,7 +343,6 @@ define('BB_CATEGORIES',           'bb_categories');
 define('BB_CAPTCHA',              'bb_captcha');
 define('BB_CONFIG',               'bb_config');
 define('BB_CRON',                 'bb_cron');
-define('BB_DATASTORE',            'bb_datastore');
 define('BB_DISALLOW',             'bb_disallow');
 define('BB_EXTENSION_GROUPS',     'bb_extension_groups');
 define('BB_EXTENSIONS',           'bb_extensions');
@@ -359,7 +358,7 @@ define('BB_PRIVMSGS_TEXT',        'bb_privmsgs_text');
 define('BB_QUOTA_LIMITS',         'bb_quota_limits');
 define('BB_QUOTA',                'bb_attach_quota');
 define('BB_RANKS',                'bb_ranks');
-define('BB_REPORTS',              'bb_reports'); // Report
+define('BB_REPORTS',              'bb_reports');         // Report
 define('BB_REPORTS_CHANGES',      'bb_reports_changes'); // Report Change's
 define('BB_REPORTS_MODULES',      'bb_reports_modules'); // Report Module Table
 define('BB_REPORTS_REASONS',      'bb_reports_reasons'); // Report Reasons
@@ -543,15 +542,13 @@ $ads = new ads_common();
 $datastore->enqueue(array(
 	'cat_forums',
 ));
-	
+
 // Дата старта вашего проекта
-if(!$bb_cfg['board_startdate']) 
+if(!$bb_cfg['board_startdate'])
 {
     bb_update_config(array('board_startdate' => TIMENOW));
-	DB()->query("UPDATE ". BB_USERS ." SET user_regdate = ". TIMENOW ." WHERE user_id = -1");
-	DB()->query("UPDATE ". BB_USERS ." SET user_regdate = ". TIMENOW ." WHERE user_id = 2");
-	DB()->query("UPDATE ". BB_USERS ." SET user_regdate = ". TIMENOW ." WHERE user_id = -746");
-}	
+	DB()->query("UPDATE ". BB_USERS ." SET user_regdate = ". TIMENOW ." WHERE user_id IN(2, ". EXCLUDED_USERS_CSV);
+}
 
 // Cron
 if ((empty($_POST) && !defined('IN_ADMIN') && !defined('IN_AJAX') && !defined('IN_SERVICE') && !file_exists(CRON_RUNNING) && ($bb_cfg['cron_enabled'] || defined('START_CRON'))) || defined('FORCE_CRON'))

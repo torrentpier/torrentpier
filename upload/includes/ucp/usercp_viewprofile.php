@@ -21,13 +21,12 @@ if(bf($profiledata['user_opt'], 'user_opt', 'view_profile') && IS_GUEST)
 {	meta_refresh(append_sid("login.php?redirect={$_SERVER['REQUEST_URI']}", true));
     bb_die("<b>{$profiledata['username']}</b> " . $lang['FORBADE_VIEWING']);}
 
-$avatar_img = get_avatar($profiledata['user_avatar'], $profiledata['user_avatar_type'], !bf($profiledata['user_opt'], 'user_opt', 'allow_avatar'));
-
 if (!$ranks = $datastore->get('ranks'))
 {
 	$datastore->update('ranks');
 	$ranks = $datastore->get('ranks');
 }
+
 $poster_rank = $rank_image = $rank_select = '';
 if ($user_rank = $profiledata['user_rank'] AND isset($ranks[$user_rank]))
 {
@@ -91,42 +90,42 @@ else if ($signature)
 }
 
 $template->assign_vars(array(
-	'PAGE_TITLE' 	=> sprintf($lang['VIEWING_USER_PROFILE'], $profiledata['username']),
-	'USERNAME' 		=> $profiledata['username'],
-	'PROFILE_USER_ID' => $profiledata['user_id'],
-	'USER_REGDATE' 	=> bb_date($profiledata['user_regdate'], 'Y-m-d H:i'),
-	'POSTER_RANK' 	=> $poster_rank,
-	'RANK_IMAGE' 	=> $rank_image,
-	'RANK_SELECT' 	=> $rank_select,
-	'POSTS' 		=> $profiledata['user_posts'],
-	'PM' 		=> '<a href="'. append_sid('privmsg.php?mode=post&amp;'. POST_USERS_URL .'='. $profiledata['user_id']) .'">'. $lang['SEND_PRIVATE_MESSAGE'] .'</a>',
-	'EMAIL' 	=> $email,
-	'WWW' 		=> $profiledata['user_website'],
-	'ICQ' 		=> $profiledata['user_icq'],
-	'LAST_VISIT_TIME' => ($profiledata['user_lastvisit']) ? (bf($profiledata['user_opt'], 'user_opt', 'allow_viewonline') && !IS_ADMIN) ? $lang['HIDDEN_USER'] : bb_date($profiledata['user_lastvisit'], 'Y-m-d H:i') : $lang['NEVER'],
-	'LAST_ACTIVITY_TIME' => ($profiledata['user_session_time']) ? (bf($profiledata['user_opt'], 'user_opt', 'allow_viewonline') && !IS_ADMIN) ? $lang['HIDDEN_USER'] : bb_date($profiledata['user_session_time'], 'Y-m-d H:i') : $lang['NEVER'],
-	'LOCATION' => ($profiledata['user_from']) ? $profiledata['user_from'] : '',
+	'PAGE_TITLE'           => sprintf($lang['VIEWING_USER_PROFILE'], $profiledata['username']),
+	'USERNAME'             => $profiledata['username'],
+	'PROFILE_USER_ID'      => $profiledata['user_id'],
+	'USER_REGDATE'         => bb_date($profiledata['user_regdate'], 'Y-m-d H:i', 'false'),
+	'POSTER_RANK'          => $poster_rank,
+	'RANK_IMAGE'           => $rank_image,
+	'RANK_SELECT'          => $rank_select,
+	'POSTS'                => $profiledata['user_posts'],
+	'PM'                   => '<a href="'. append_sid('privmsg.php?mode=post&amp;'. POST_USERS_URL .'='. $profiledata['user_id']) .'">'. $lang['SEND_PRIVATE_MESSAGE'] .'</a>',
+	'EMAIL'                => $email,
+	'WWW'                  => $profiledata['user_website'],
+	'ICQ'                  => $profiledata['user_icq'],
+	'LAST_VISIT_TIME'      => ($profiledata['user_lastvisit']) ? (bf($profiledata['user_opt'], 'user_opt', 'allow_viewonline') && !IS_ADMIN) ? $lang['HIDDEN_USER'] : bb_date($profiledata['user_lastvisit'], 'Y-m-d H:i', 'false') : $lang['NEVER'],
+	'LAST_ACTIVITY_TIME'   => ($profiledata['user_session_time']) ? (bf($profiledata['user_opt'], 'user_opt', 'allow_viewonline') && !IS_ADMIN) ? $lang['HIDDEN_USER'] : bb_date($profiledata['user_session_time'], 'Y-m-d H:i', 'false') : $lang['NEVER'],
+	'LOCATION'             => $profiledata['user_from'],
 
-	'USER_ACTIVE' 	=> $profiledata['user_active'],
+	'USER_ACTIVE'          => $profiledata['user_active'],
 
-	'OCCUPATION' 	=> $profiledata['user_occ'],
-	'INTERESTS' 	=> $profiledata['user_interests'],
-	'SKYPE'         => $profiledata['user_skype'],
-	'GENDER'        => ($bb_cfg['gender'] && $profiledata['user_gender']) ? $lang['GENDER_SELECT'][$profiledata['user_gender']] : '',
-	'BIRTHDAY'      => ($bb_cfg['birthday']['enabled'] && $profiledata['user_birthday']) ? realdate($profiledata['user_birthday'], 'Y-m-d') : '',
-	'AGE'           => ($bb_cfg['birthday']['enabled'] && $profiledata['user_birthday']) ? birthday_age($profiledata['user_birthday']) : '',
-	'AVATAR_IMG' 	=> $avatar_img,
+	'OCCUPATION'           => $profiledata['user_occ'],
+	'INTERESTS'            => $profiledata['user_interests'],
+	'SKYPE'                => $profiledata['user_skype'],
+	'GENDER'               => ($bb_cfg['gender'] && $profiledata['user_gender']) ? $lang['GENDER_SELECT'][$profiledata['user_gender']] : '',
+	'BIRTHDAY'             => ($bb_cfg['birthday']['enabled'] && $profiledata['user_birthday']) ? realdate($profiledata['user_birthday'], 'Y-m-d') : '',
+	'AGE'                  => ($bb_cfg['birthday']['enabled'] && $profiledata['user_birthday']) ? birthday_age($profiledata['user_birthday']) : '',
+	'AVATAR_IMG'           => get_avatar($profiledata['user_avatar'], $profiledata['user_avatar_type'], !bf($profiledata['user_opt'], 'user_opt', 'allow_avatar')),
 
-	'L_VIEWING_PROFILE' => sprintf($lang['VIEWING_USER_PROFILE'], $profiledata['username']),
-	'L_ABOUT_USER_PROFILE' 	=> sprintf($lang['ABOUT_USER'], $profiledata['username']),
+	'L_VIEWING_PROFILE'    => sprintf($lang['VIEWING_USER_PROFILE'], $profiledata['username']),
+	'L_ABOUT_USER_PROFILE' => sprintf($lang['ABOUT_USER'], $profiledata['username']),
 
-	'U_SEARCH_USER'     => "search.php?search_author=1&amp;uid={$profiledata['user_id']}",
-	'U_SEARCH_TOPICS'   => "search.php?uid={$profiledata['user_id']}&amp;myt=1",
-	'U_SEARCH_RELEASES' => "tracker.php?rid={$profiledata['user_id']}#results",
+	'U_SEARCH_USER'        => "search.php?search_author=1&amp;uid={$profiledata['user_id']}",
+	'U_SEARCH_TOPICS'      => "search.php?uid={$profiledata['user_id']}&amp;myt=1",
+	'U_SEARCH_RELEASES'    => "tracker.php?rid={$profiledata['user_id']}#results",
 
-	'S_PROFILE_ACTION'  => "profile.php",
+	'S_PROFILE_ACTION'     => "profile.php",
 
-	'SIGNATURE'  => $signature,
+	'SIGNATURE'            => $signature,
 ));
 
 //bt
