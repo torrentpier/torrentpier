@@ -1648,6 +1648,7 @@ $lang['LIST'] = 'List';
 $lang['LIST_TITLE'] = 'List (Ctrl+L)';
 $lang['LIST_ITEM'] = 'List item (Ctrl+0)';
 $lang['QUOTE_SEL'] = 'Quote selected';
+$lang['JAVASCRIPT_ON'] = 'Heads necessary to send messages to enable JavaScript';
 
 $lang['NEW'] = 'New';
 $lang['NEWEST'] = 'Newest';
