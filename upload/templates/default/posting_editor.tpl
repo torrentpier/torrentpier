@@ -92,8 +92,9 @@ ajax.callback.posts = function(data){
 	<input type="button" value="{L_LIST}" name="codeList" title="{L_LIST_TITLE}"  style="width: 60px;"/>
 	<input type="button" value="1." name="codeOpt" title="{L_LIST_ITEM}" style="width: 30px;" />&nbsp;
 	<input type="button" value="{L_QUOTE_SEL}" name="quoteselected" title="{L_QUOTE_SELECTED}" onmouseout="bbcode.refreshSelection(false);" onmouseover="bbcode.refreshSelection(true);" onclick="bbcode.onclickQuoteSel();" />&nbsp;
-
+    <!-- IF USER_RUS -->
 	<input type="button" value="{L_TRANSLIT}" name="Translit" title="{L_TRANSLIT_TITLE}" style="width: 68px;" onclick="transliterate(document.post.message, this);" /> <a href="#" onclick="toggle_block('translit_opt'); return false"><span style="color: darkred"><b>?</b></span></a>
+	<!-- ENDIF -->
 </div>
 
 	<textarea
@@ -104,6 +105,7 @@ ajax.callback.posts = function(data){
 		onkeyup  = "storeCaret(this);"
 	>{MESSAGE}</textarea>
 
+<!-- IF USER_RUS -->	
 <div id="translit_opt" class="mrg_4" style="display: none;">
 	<table cellspacing="0" class="translit_expl borderless bCenter">
 	<tr>
@@ -145,6 +147,7 @@ ajax.callback.posts = function(data){
 	</tr>
 	</table>
 </div>
+<!-- ENDIF -->
 
 <div class="mrg_8 tCenter">
 	<div id="post-buttons-block" style="display: none;">
@@ -191,8 +194,7 @@ function checkForm(form) {
 		setTimeout(function() { alert(formErrors) }, 100);
 		return false;
 	}
-<!-- IF QUICK_REPLY -->
-<!-- IF IN_PM -->
+<!-- IF QUICK_REPLY || IN_PM -->
 <!-- ELSE -->
 <!-- IF $bb_cfg['use_ajax_posts'] && !IS_GUEST -->
 	if(form.message.value.length < 100 && submitted)
@@ -207,7 +209,6 @@ function checkForm(form) {
 		}, 100);
 		return false;
 	}
-<!-- ENDIF -->
 <!-- ENDIF -->
 <!-- ENDIF -->
 	return true;

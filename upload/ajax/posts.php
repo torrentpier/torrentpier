@@ -161,8 +161,6 @@ switch($this->request['type'])
 						<input type="button" value="'.$lang['LIST'].'" name="codeList" title="'.$lang['LIST_TITLE'].'" style="width: 60px;" />
 						<input type="button" value="1." name="codeOpt" title="'.$lang['LIST_ITEM'].'" style="width: 30px;" />&nbsp;
 						<input type="button" value="'.$lang['QUOTE_SEL'].'" name="quoteselected" title="'.$lang['QUOTE_SELECTED'].'" onmouseout="bbcode.refreshSelection(false);" onmouseover="bbcode.refreshSelection(true);" onclick="bbcode.onclickQuoteSel();" />&nbsp;
-
-						<input type="button" value="'.$lang['TRANSLIT'].'" name="Translit" title="'.$lang['TRANSLIT_TITLE'].'" style="width: 68px;" onclick="transliterate(document.post.message, this);" />
 					</div>
 					<textarea id="message-'. $post_id .'" class="editor mrg_4" name="message" rows="18" cols="92">'. $post['post_text'] .'</textarea>
 					<div class="mrg_4 tCenter">
