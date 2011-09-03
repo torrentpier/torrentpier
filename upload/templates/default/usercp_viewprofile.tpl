@@ -235,6 +235,7 @@ $(document).ready(function(){
 				</td>
 			</tr>
 			
+			<!-- IF IS_ADMIN -->
 			<tr id="delete" style="display: none;">
 			    <td colspan="2" class="med tCenter">
 				    [ <a href="#" onclick="ajax.exec({action : 'delete_userdata', mode: 'delete_profile', user_id : '{PROFILE_USER_ID}'}); return false;" class="adm">{L_USER_DELETE_EXPLAIN}</a> ]&nbsp;
@@ -248,6 +249,7 @@ $(document).ready(function(){
 					</script>
 			    </td>
 		    </tr>
+			<!-- ENDIF -->
 			
 			<!-- IF LOCATION -->
 			<tr>
@@ -363,7 +365,7 @@ $(document).ready(function(){
 			<td id="u_ratio" class="gen">
 				<!-- IF DOWN_TOTAL_BYTES gt MIN_DL_BYTES -->
 				<b class="gen">{USER_RATIO}</b>&nbsp;
-				<a class="gen" href="#" onclick="$('#ratio-expl').show(); $(this).hide(); return false;">[?]</a>
+				[<a class="gen" href="#" onclick="toggle_block('ratio-expl'); return false;">?</a>]
 				<!-- ELSE -->
 				<span class="med">{L_IT_WILL_BE_DOWN} <b>{MIN_DL_FOR_RATIO}</b></span>
 				<!-- ENDIF -->
@@ -378,18 +380,16 @@ $(document).ready(function(){
 				) / {L_DOWNLOADED} <b class="leechmed">{DOWN_TOTAL}</b>
 			</td>
 		</tr>
+		
 		<!-- IF SHOW_PASSKEY -->
 		<script type="text/javascript">
-		ajax.callback.gen_passkey = function(data){
-			$('#passkey').text(data.passkey);
-		};
+		    ajax.callback.gen_passkey = function(data){
+			    $('#passkey').text(data.passkey);
+		    };
 		</script>
 		<tr>
-			<th><a class="med" href="#" onclick="toggle_block('gen_passkey'); return false;" class="gen">Passkey:</a></th>
+			<th><a href="#" onclick="ajax.exec({ action: 'gen_passkey', user_id  : {PROFILE_USER_ID} }); return false;">Passkey</a>:</th>
 			<td id="passkey">{AUTH_KEY}</td>
-		</tr>
-		<tr id="gen_passkey" style="display: none;">
-			<td colspan="2" class="med tCenter">{S_GEN_PASSKEY}</td>
 		</tr>
 		<!-- ENDIF / SHOW_PASSKEY -->
 		</table><!--/ratio_details-->
