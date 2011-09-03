@@ -105,7 +105,7 @@
 		<!-- END smilies_row -->
 		<!-- BEGIN switch_smilies_extra -->
 		<tr>
-			<td colspan="{S_SMILIES_COLSPAN}"><a href="{U_MORE_SMILIES}" onclick="window.open('{U_MORE_SMILIES}', '_phpbbsmilies', 'HEIGHT=400,resizable=yes,scrollbars=yes,WIDTH=450'); return false;" target="_phpbbsmilies" class="med">{L_MORE_EMOTICONS}</a></td>
+			<td colspan="{S_SMILIES_COLSPAN}"><a href="{U_MORE_SMILIES}" onclick="window.open('{U_MORE_SMILIES}', '_phpbbsmilies', 'HEIGHT=420,resizable=yes,scrollbars=yes,WIDTH=470'); return false;" target="_phpbbsmilies" class="med">{L_MORE_EMOTICONS}</a></td>
 		</tr>
 		<!-- END switch_smilies_extra -->
 		</table><!--/smilies-->

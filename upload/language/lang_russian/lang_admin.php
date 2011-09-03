@@ -384,12 +384,6 @@ $lang['ADMIN_USER_FAIL'] = 'Не могу изменить профиль пол
 $lang['ADMIN_USER_UPDATED'] = 'Профиль пользователя был успешно изменён';
 $lang['CLICK_RETURN_USERADMIN'] = '%sВернуться к управлению пользователями%s';
 
-$lang['USER_DELETE'] = 'Удаление';
-$lang['USER_DELETE_EXPLAIN'] = 'Удалить этого пользователя';
-$lang['USER_DELETED'] = 'Пользователь был успешно удалён';
-$lang['DELETE_USER_POSTS'] = 'Удалить все сообщения пользователя';
-$lang['USER_DELETED_POSTS'] = 'Сообщения пользователя успешно удалены';
-
 $lang['USER_STATUS'] = 'Пользователь активен';
 $lang['USER_ALLOWPM'] = 'Может посылать личные сообщения';
 $lang['USER_ALLOWAVATAR'] = 'Может показывать аватару';

@@ -292,14 +292,6 @@ ajax.callback.posts = function(data){
 		<label><input type="radio" name="user_active" value="0" <!-- IF not USER_ACTIVE -->checked="checked"<!-- ENDIF --> />{L_NO}</label>
 	</td>
 </tr>
-<tr>
-	<td>{L_USER_DELETE}?</td>
-	<td>
-		<label><input type="checkbox" name="delete_user">{L_USER_DELETE_EXPLAIN}</label>
-		<br />
-		<label><input type="checkbox" name="delete_user_posts">{L_DELETE_USER_POSTS}</label>
-	</td>
-</tr>
 <!-- ENDIF -->
 <!-- ENDIF / EDIT_PROFILE -->
 

@@ -842,32 +842,6 @@ if ($submit && !$errors)
 	*/
 	else
 	{
-		// Удаление пользователя и сообщений для админа
-		if ($userdata['user_id'] != $pr_data['user_id'] && IS_ADMIN)
-		{
-			require(INC_DIR .'functions_admin.php');
-
-			$del_msg = false;
-			if (!empty($_POST['delete_user']))
-			{
-				delete_user_sessions($pr_data['user_id']);
-				user_delete($pr_data['user_id'], !empty($_POST['delete_user_posts']));
-
-				if ($pr_data['user_level'] == MOD)
-				{
-					$datastore->update('moderators');
-				}
-
-				$del_msg .= $lang['USER_DELETED'];
-			}
-			if (!empty($_POST['delete_user_posts']))
-			{
-				post_delete('user', $pr_data['user_id']);
-				$del_msg .= ($del_msg) ? '<br /><br />'. $lang['USER_DELETED_POSTS'] : $lang['USER_DELETED_POSTS'];
-			}
-			if($del_msg) bb_die($del_msg);
-		}
-
 		// если что-то было изменено
 		if ($db_data)
 		{

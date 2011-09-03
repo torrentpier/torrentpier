@@ -63,6 +63,7 @@ class ajax_common
 		'edit_user_profile' => array('admin'),
 		'change_user_rank'  => array('admin'),
 		'change_user_opt'   => array('admin'),
+		'delete_userdata'   => array('admin'),
 
 		'change_tor_status' => array('mod'),
 		'mod_action'        => array('mod'),
@@ -448,6 +449,48 @@ class ajax_common
         unset($moderators, $mod);
         $datastore->rm('moderators');
     }
+	
+	function delete_userdata()
+	{
+		global $userdata, $lang, $bb_cfg;
+		$mode = (string) $this->request['mode'];
+		$user_id = $this->request['user_id'];
+		if (!IS_ADMIN) $this->ajax_die($lang['NOT_ADMIN']);
+		
+		if ($mode == 'delete_profile')
+		{
+		    if ($userdata['user_id'] == $user_id) $this->ajax_die($lang['USER_DELETE_ME']);
+			if (empty($this->request['confirmed'])) $this->prompt_for_confirm($lang['USER_DELETE_CONFIRM']);
+
+			if ($user_id != 2 && $user_id != BOT_UID)
+		    {
+			    require(INC_DIR .'functions_admin.php');
+			
+			    user_delete($user_id);
+			    delete_user_sessions($user_id);
+			
+			    $this->response['info'] = $lang['USER_DELETED'];
+		    }
+		    else $this->ajax_die($lang['USER_DELETE_CSV']);
+		}
+		if ($mode == 'delete_message')
+		{
+		    if (empty($this->request['confirmed']) && $userdata['user_id'] == $user_id) $this->prompt_for_confirm($lang['DELETE_USER_POSTS_ME']);
+			if (empty($this->request['confirmed'])) $this->prompt_for_confirm($lang['DELETE_USER_POSTS_CONFIRM']);
+		    if (IS_ADMIN)
+		    {
+			    require(INC_DIR .'functions_admin.php');
+			
+			    post_delete('user', $user_id);
+			
+			    $this->response['info'] = $lang['USER_DELETED_POSTS'];
+		    }
+		    else $this->ajax_die($lang['NOT_ADMIN']);
+		}
+		
+		$this->response['mode']	= $mode;
+		$this->response['url'] = html_entity_decode(make_url('/') . PROFILE_URL . $user_id);
+	}
 
 	function view_post ()
 	{

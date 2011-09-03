@@ -1589,6 +1589,17 @@ $lang['SEND_MESSAGE'] = 'Send message';
 $lang['EDIT_POST'] = 'Edit Post';
 $lang['NEW_THREADS'] = 'New Threads';
 
+$lang['USER_DELETE'] = 'Delete';
+$lang['USER_DELETE_EXPLAIN'] = 'Delete this user';
+$lang['USER_DELETE_ME'] = 'Sorry, your account is forbidden to remove!';
+$lang['USER_DELETE_CSV'] = 'Sorry, this account is not allowed to delete!';
+$lang['USER_DELETE_CONFIRM'] = 'Are you sure you want to delete this user?';
+$lang['USER_DELETED'] = 'User was successfully deleted';
+$lang['DELETE_USER_POSTS'] = 'Delete all user posts';
+$lang['DELETE_USER_POSTS_ME'] = 'Are you sure you want to delete all my posts?';
+$lang['DELETE_USER_POSTS_CONFIRM'] = 'Are you sure you want to delete all of your users?';
+$lang['USER_DELETED_POSTS'] = 'Posts were successfully removed';
+
 // Register
 $lang['CHOOSE_A_NAME'] = 'You should choose a name';
 $lang['CHOOSE_E_MAIL'] = 'You must specify the e-mail';

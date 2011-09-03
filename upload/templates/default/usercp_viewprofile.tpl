@@ -230,9 +230,25 @@ $(document).ready(function(){
 						[ <a href="{U_SEARCH_USER}" class="med">{L_SEARCH_USER_POSTS}</a> ]
 						[ <a href="{U_SEARCH_TOPICS}" class="med">{L_SEARCH_USER_TOPICS}</a> ]
 						[ <a class="med" href={U_SEARCH_RELEASES}>{L_SEARCH_RELEASES}</a> ]
+						<!-- IF IS_ADMIN -->[ <a href="#" onclick="toggle_block('delete'); return false;" class="adm">{L_USER_DELETE}</a> ]<!-- ENDIF -->
 					</p>
 				</td>
 			</tr>
+			
+			<tr id="delete" style="display: none;">
+			    <td colspan="2" class="med tCenter">
+				    [ <a href="#" onclick="ajax.exec({action : 'delete_userdata', mode: 'delete_profile', user_id : '{PROFILE_USER_ID}'}); return false;" class="adm">{L_USER_DELETE_EXPLAIN}</a> ]&nbsp;
+					[ <a href="#" onclick="ajax.exec({action : 'delete_userdata', mode: 'delete_message', user_id : '{PROFILE_USER_ID}'}); return false;" class="adm">{L_DELETE_USER_POSTS}</a> ]
+					
+					<script type="text/javascript">
+					    ajax.callback.delete_userdata = function(data) {
+						    if(data.info) alert(data.info);
+                            if(data.url) document.location.href = data.url;
+					    };
+					</script>
+			    </td>
+		    </tr>
+			
 			<!-- IF LOCATION -->
 			<tr>
 				<th class="vBottom">{L_LOCATION}:</th>
