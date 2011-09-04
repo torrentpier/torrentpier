@@ -1639,11 +1639,11 @@ $lang['SAVE'] = 'Save';
 $lang['NEW_WINDOW'] = 'in a new window';
 
 // BB Code
-$lang['ALIGN'] = 'Выровнять:';
-$lang['LEFT'] = 'Влево';
-$lang['RIGHT'] = 'Вправо';
-$lang['CENTER'] = 'По центру';
-$lang['JUSTIFY'] = 'По ширине';
+$lang['ALIGN'] = 'Align:';
+$lang['LEFT'] = 'To the left';
+$lang['RIGHT'] = 'To the right';
+$lang['CENTER'] = 'Centered';
+$lang['JUSTIFY'] = 'Fit to width';
 $lang['HOR_LINE'] = 'Horizontal line (Ctrl+8)';
 $lang['NEW_LINE'] = 'New line';
 $lang['BOLD'] = 'Bold (Ctrl+B)';

@@ -9,7 +9,7 @@ $title_font_size = 24;
 function tpl_func_developer ($item, $val)
 {
 	if (!$val['name'] || !$val['url']) return '';
-	return '[b]'. $GLOBALS['lang']['TPL'][$item] .'[/b]: ' . "[url={$val['url']}]{$val['name']}[/url]" ."\n";
+	return '[b]'. $GLOBALS['lang']['TPL'][strtoupper($item)] .'[/b]: ' . "[url={$val['url']}]{$val['name']}[/url]" ."\n";
 }
 
 if (!empty($_REQUEST['preview']) && is_array($_POST['msg']))
