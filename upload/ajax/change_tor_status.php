@@ -47,7 +47,6 @@ if ($tor['tor_status'] == TOR_CLOSED_CPHOLD)
 {
 	if (!IS_ADMIN) $this->verify_mod_rights($tor['forum_id']);
 	DB()->query("UPDATE ". BB_TOPICS ." SET topic_status = ". TOPIC_UNLOCKED ." WHERE topic_id = {$tor['topic_id']} LIMIT 1");
-	$new_status = TOR_NOT_APPROVED;
 }
 else
 {

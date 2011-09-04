@@ -799,8 +799,8 @@ table.topic { width: 100%; }
 .tor-dup          { padding-left: 1px; color: #0000FF; font-weight: bold; }
 .tor-need-edit    { color: #FF0000; font-weight: bold; }
 .tor-no-desc      { padding-left: 1px; color: #FF4500; font-weight: bold; }
-.tor-not-approved { color: #C71585; }
-.tor-checking     { color: #2424FF; }
+.tor-not-approved { color: #C71585; font-weight: bold; }
+.tor-checking     { color: #2424FF; font-weight: bold; }
 
 /* ---------------------------------- *
      Attachments
