@@ -2829,7 +2829,7 @@ function profile_url($data)
 	if(isset($ranks[$user_rank]))
 	{		$title = $ranks[$user_rank]['rank_title'];		$style = $ranks[$user_rank]['rank_style'];
 	}
-	if(empty($title)) $title = '';
+	if(empty($title)) $title = 'User';
 	if(empty($style)) $style = 'colorUser';
 
 	if(!$bb_cfg['color_nick']) $style = '';
