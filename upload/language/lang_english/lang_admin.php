@@ -384,7 +384,6 @@ $lang['ADMIN_USER_FAIL'] = 'Couldn\'t update the user\'s profile.';
 $lang['ADMIN_USER_UPDATED'] = 'The user\'s profile was successfully updated.';
 $lang['CLICK_RETURN_USERADMIN'] = 'Click %sHere%s to return to User Administration';
 
-$lang['USER_STATUS'] = 'User is active';
 $lang['USER_ALLOWPM'] = 'Can send Private Messages';
 $lang['USER_ALLOWAVATAR'] = 'Can display avatar';
 

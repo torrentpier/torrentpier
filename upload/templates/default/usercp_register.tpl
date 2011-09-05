@@ -281,18 +281,6 @@ ajax.callback.posts = function(data){
 </tr>
 <!-- END switch_avatar_local_gallery -->
 <!-- END switch_avatar_block -->
-<!-- IF IS_ADMIN && ADM_EDIT -->
-<tr>
-	<th colspan="2">{L_MANAGE_USER}</th>
-</tr>
-<tr>
-	<td>{L_USER_STATUS}</td>
-	<td>
-		<label><input type="radio" name="user_active" value="1" <!-- IF USER_ACTIVE -->checked="checked"<!-- ENDIF --> />{L_YES}</label>&nbsp;&nbsp;
-		<label><input type="radio" name="user_active" value="0" <!-- IF not USER_ACTIVE -->checked="checked"<!-- ENDIF --> />{L_NO}</label>
-	</td>
-</tr>
-<!-- ENDIF -->
 <!-- ENDIF / EDIT_PROFILE -->
 
 <!-- IF SHOW_REG_AGREEMENT -->

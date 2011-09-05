@@ -210,6 +210,9 @@ $(document).ready(function(){
 				<th>{L_JOINED}:</th>
 				<td id="user_regdate">
 					<span class="editable bold">{USER_REGDATE}</span>
+					<!-- IF IS_ADMIN -->
+					[ <a href="#" onclick="ajax.exec({action : 'delete_userdata', mode: '<!-- IF USER_ACTIVE -->user_deactivate<!-- ELSE -->user_activate<!-- ENDIF -->', user_id : {PROFILE_USER_ID}}); return false;" class="<!-- IF USER_ACTIVE -->adm<!-- ELSE -->seed bold<!-- ENDIF -->"><!-- IF USER_ACTIVE -->{L_USER_DEACTIVATE}<!-- ELSE -->{L_USER_ACTIVATE}<!-- ENDIF --></a> ]
+					<!-- ENDIF -->
 				</td>
 			</tr>
 			<tr>

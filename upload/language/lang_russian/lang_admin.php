@@ -384,7 +384,6 @@ $lang['ADMIN_USER_FAIL'] = 'Не могу изменить профиль пол
 $lang['ADMIN_USER_UPDATED'] = 'Профиль пользователя был успешно изменён';
 $lang['CLICK_RETURN_USERADMIN'] = '%sВернуться к управлению пользователями%s';
 
-$lang['USER_STATUS'] = 'Пользователь активен';
 $lang['USER_ALLOWPM'] = 'Может посылать личные сообщения';
 $lang['USER_ALLOWAVATAR'] = 'Может показывать аватару';
 

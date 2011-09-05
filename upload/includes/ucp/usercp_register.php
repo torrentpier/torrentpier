@@ -102,7 +102,6 @@ switch ($mode)
 
 		// field => can_edit
 		$profile_fields = array(
-			'user_active'      => IS_ADMIN,
 			'username'         => (IS_ADMIN || $bb_cfg['allow_namechange']),
 			'user_password'    => true,
 			'user_email'       => true,      // должен быть после user_password
@@ -195,19 +194,6 @@ foreach ($profile_fields as $field => $can_edit)
 {
 	switch ($field)
 	{	/**
-	*  Активация (edit, reg)
-	*/
-	case 'user_active':
-		$active = isset($_POST['user_active']) ? (int) $_POST['user_active'] : $pr_data['user_active'];
-		if ($submit && $active != $pr_data['user_active'] && $adm_edit)
-		{
-            $pr_data['user_active'] = $active;
-			$db_data['user_active'] = $active;
-		}
-		$tp_data['USER_ACTIVE'] = $pr_data['user_active'];
-		break;
-
-	/**
 	*  Имя (edit, reg)
 	*/
 	case 'username':
@@ -528,11 +514,10 @@ foreach ($profile_fields as $field => $can_edit)
 		$skype = isset($_POST['user_skype']) ? (string) $_POST['user_skype'] : $pr_data['user_skype'];
 		if ($submit && $skype != $pr_data['user_skype'])
 		{
-			if (!preg_match("#^[a-zA-Z0-9_.\-@,]{6,32}$#", $skype))
+			if ($skype != '' && !preg_match("#^[a-zA-Z0-9_.\-@,]{6,32}$#", $skype))
 			{
 				$errors[] = $lang['SKYPE_ERROR'];
 			}
-
 			$pr_data['user_skype'] = $skype;
 			$db_data['user_skype'] = (string) $skype;
 		}

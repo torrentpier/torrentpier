@@ -1606,6 +1606,14 @@ $lang['DELETE_USER_POSTS_ME'] = 'Вы действительно хотите у
 $lang['DELETE_USER_POSTS_CONFIRM'] = 'Вы действительно хотите удалить все свои пользователя?';
 $lang['USER_DELETED_POSTS'] = 'Сообщения успешно удалены';
 
+$lang['USER_ACTIVATE'] = 'Активировать';
+$lang['USER_DEACTIVATE'] = 'Деактивировать';
+$lang['DEACTIVATE_CONFIRM'] = 'Вы действительно хотите активировать этого пользователя?';
+$lang['USER_ACTIVATE_ON'] = 'Пользователь успешно активирован';
+$lang['USER_DEACTIVATE_ME'] = 'Вы не можете деактивировать свой аккаунт!';
+$lang['ACTIVATE_CONFIRM'] = 'Вы действительно хотите деактивировать этого пользователя?';
+$lang['USER_ACTIVATE_OFF'] = 'Пользователь успешно деактивирован';
+
 // Регистрация
 $lang['CHOOSE_A_NAME'] = 'Вы должны выбрать имя';
 $lang['CHOOSE_E_MAIL'] = 'Вы должны указать e-mail';

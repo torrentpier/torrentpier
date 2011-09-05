@@ -1600,6 +1600,14 @@ $lang['DELETE_USER_POSTS_ME'] = 'Are you sure you want to delete all my posts?';
 $lang['DELETE_USER_POSTS_CONFIRM'] = 'Are you sure you want to delete all of your users?';
 $lang['USER_DELETED_POSTS'] = 'Posts were successfully removed';
 
+$lang['USER_ACTIVATE'] = 'Activate';
+$lang['USER_DEACTIVATE'] = 'Deactivate';
+$lang['DEACTIVATE_CONFIRM'] = 'Are you sure you want to enable this user?';
+$lang['USER_ACTIVATE_ON'] = 'User has successfully activated';
+$lang['USER_DEACTIVATE_ME'] = 'You can not deactivate my account!';
+$lang['ACTIVATE_CONFIRM'] = 'Are you sure you want to disable this user?';
+$lang['USER_ACTIVATE_OFF'] = 'User successfully deactivated';
+
 // Register
 $lang['CHOOSE_A_NAME'] = 'You should choose a name';
 $lang['CHOOSE_E_MAIL'] = 'You must specify the e-mail';
