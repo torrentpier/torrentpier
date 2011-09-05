@@ -2611,12 +2611,11 @@ function log_sphinx_error ($err_type, $err_msg, $query = '')
 	}
 }
 
-function get_title_match_topics ($title_match_sql, $limit = 500, $forum_ids = array())
+function get_title_match_topics ($title_match_sql, $forum_ids = array())
 {
 	global $bb_cfg, $sphinx, $userdata, $title_match;
 
 	$where_ids = array();
-	$limit     = (int) $limit;
 	if($forum_ids) $forum_ids = array_diff($forum_ids, array(0 => 0));
 	$title_match_sql = encode_text_match($title_match_sql);
 
@@ -2627,7 +2626,6 @@ function get_title_match_topics ($title_match_sql, $limit = 500, $forum_ids = ar
 		$where = ($title_match) ? 'topics' : 'posts';
 
 		$sphinx->SetServer($bb_cfg['sphinx_topic_titles_host'], $bb_cfg['sphinx_topic_titles_port']);
-		$sphinx->SetLimits(0, $limit, $limit, $limit);
 		if ($forum_ids)
 		{
 			$sphinx->SetFilter('forum_id', $forum_ids, false);
@@ -2666,8 +2664,7 @@ function get_title_match_topics ($title_match_sql, $limit = 500, $forum_ids = ar
 			$where_id = 'topic_id';
 			$sql = "SELECT topic_id FROM ". BB_TOPICS ."
 					WHERE MATCH (topic_title) AGAINST ('$title_match_sql'$search_bool_mode)
-					$where_forum
-				LIMIT $limit";
+					$where_forum";
 		}
 		else
 		{
@@ -2675,8 +2672,7 @@ function get_title_match_topics ($title_match_sql, $limit = 500, $forum_ids = ar
 			$sql = "SELECT p.post_id FROM ". BB_POSTS ." p, ". BB_POSTS_SEARCH ." ps
 				WHERE ps.post_id = p.post_id
 					AND MATCH (ps.search_words) AGAINST ('$title_match_sql'$search_bool_mode)
-					$where_forum
-				LIMIT $limit";
+					$where_forum";
 		}
 
 		foreach (DB()->fetch_rowset($sql) as $row)

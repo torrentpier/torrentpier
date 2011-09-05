@@ -17,7 +17,6 @@ $page_cfg['load_tpl_vars'] = array(
 $user->session_start(array('req_login' => $bb_cfg['bt_tor_browse_only_reg']));
 
 $tor_search_limit    = (IS_AM) ? 2000 : 500;
-$title_match_limit   = 700;                    // больше $tor_search_limit т.к. ищет по всем темам, а не только по раздачам
 $forum_select_size   = (UA_OPERA) ? 21 : 24;   // forum select box max rows
 $max_forum_name_len  = 60;                     // inside forum select box
 $max_forums_selected = 50;
@@ -504,7 +503,7 @@ if ($allowed_forums)
 
 	if ($title_match)
 	{
-		$title_match_topics = get_title_match_topics($title_match_sql, $title_match_limit, $search_in_forums_ary);
+		$title_match_topics = get_title_match_topics($title_match_sql, $search_in_forums_ary);
 
 		if (!$search_match_topics_csv = join(',', $title_match_topics))
 		{
