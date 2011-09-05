@@ -60,7 +60,7 @@ switch ($mode)
 			{
 				if (in_array(date('G'), array(0,/*1,2,3,4,5,6,7,8,11,12,13,14,15,16,*/17,18,19,20,21,22,23)))
 				{
-					bb_die('В данный момент регистрация закрыта<br /><br />Вы можете зарегистрироваться с 01:00 до 17:00 MSK (сейчас '. date('G:i') .' MSK)<br /><br />Приносим извинения за это временное неудобство');
+					bb_die($lang['REGISTERED_IN_TIME']);
 				}
 
 			}
@@ -102,6 +102,7 @@ switch ($mode)
 
 		// field => can_edit
 		$profile_fields = array(
+			'user_active'      => IS_ADMIN,
 			'username'         => (IS_ADMIN || $bb_cfg['allow_namechange']),
 			'user_password'    => true,
 			'user_email'       => true,      // должен быть после user_password
@@ -143,7 +144,7 @@ switch ($mode)
 		";
 		if (!$pr_data = DB()->fetch_row($sql))
 		{
-			bb_die('Профиль не найден');
+			bb_die($lang['PROFILE_NOT_FOUND']);
 		}
 
 		if (!bf($pr_data['user_opt'], 'user_opt', 'allow_avatar') && ($bb_cfg['allow_avatar_upload'] || $bb_cfg['allow_avatar_local'] || $bb_cfg['allow_avatar_remote']))
@@ -193,7 +194,20 @@ $cur_pass_valid = $adm_edit;
 foreach ($profile_fields as $field => $can_edit)
 {
 	switch ($field)
-	{	/**
+	{
+	/**
+	*  Активация (edit, reg)
+	*/
+	case 'user_active':
+		$active = isset($_POST['user_active']) ? (int) $_POST['user_active'] : $pr_data['user_active'];
+		if ($submit && $adm_edit)
+		{
+            $pr_data['user_active'] = $active;
+			$db_data['user_active'] = $active;
+		}
+		break;
+		
+	/**
 	*  Имя (edit, reg)
 	*/
 	case 'username':
