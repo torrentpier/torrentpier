@@ -1399,6 +1399,7 @@ CREATE TABLE `bb_user_group` (
   `group_id` mediumint(8) NOT NULL default '0',
   `user_id` mediumint(8) NOT NULL default '0',
   `user_pending` tinyint(1) NOT NULL default '0',
+  `user_time` int(11) NOT NULL,
   PRIMARY KEY  (`group_id`,`user_id`),
   KEY `user_id` (`user_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
