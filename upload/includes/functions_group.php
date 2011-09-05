@@ -103,14 +103,14 @@ function delete_user_group ($group_id, $user_id)
 
 function create_user_group ($user_id)
 {
-	DB()->query("INSERT INTO ". BB_GROUPS ." (group_single_user) VALUES (1)");
+    DB()->query("INSERT INTO ". BB_GROUPS ." (group_single_user) VALUES (1)");
 
-	$group_id = (int) DB()->sql_nextid();
-	$user_id  = (int) $user_id;
+    $group_id = (int) DB()->sql_nextid();
+    $user_id  = (int) $user_id;
 
-	DB()->query("INSERT INTO ". BB_USER_GROUP ." (user_id, group_id) VALUES ($user_id, $group_id)");
+    DB()->query("INSERT INTO ". BB_USER_GROUP ." (user_id, group_id, user_time) VALUES ($user_id, $group_id, ". TIMENOW .")");
 
-	return $group_id;
+    return $group_id;
 }
 
 function get_group_data ($group_id)
