@@ -92,9 +92,13 @@ $(document).ready(function(){
 <var class="ajax-params">{action: "edit_user_profile", id: "u_up_release"}</var>
 <var class="ajax-params">{action: "edit_user_profile", id: "u_up_bonus"}</var>
 <!-- ENDIF -->
-
 <!-- ENDIF / SHOW_ADMIN_OPTIONS -->
-
+<script type="text/javascript">
+ajax.callback.manage_user = function(data) {
+	if(data.info) alert(data.info);
+	if(data.url) document.location.href = data.url;
+};
+</script>
 <a name="editprofile"></a>
 
 <h1 class="pagetitle">{L_VIEWING_PROFILE}</h1>
@@ -211,7 +215,8 @@ $(document).ready(function(){
 				<td id="user_regdate">
 					<span class="editable bold">{USER_REGDATE}</span>
 					<!-- IF IS_ADMIN -->
-					[ <a href="#" onclick="ajax.exec({action : 'delete_userdata', mode: '<!-- IF USER_ACTIVE -->user_deactivate<!-- ELSE -->user_activate<!-- ENDIF -->', user_id : {PROFILE_USER_ID}}); return false;" class="<!-- IF USER_ACTIVE -->adm<!-- ELSE -->seed bold<!-- ENDIF -->"><!-- IF USER_ACTIVE -->{L_USER_DEACTIVATE}<!-- ELSE -->{L_USER_ACTIVATE}<!-- ENDIF --></a> ]
+					[ <a href="#" onclick="ajax.exec({action : 'manage_user', mode: '<!-- IF USER_ACTIVE -->user_deactivate<!-- ELSE -->user_activate<!-- ENDIF -->', user_id : {PROFILE_USER_ID}}); return false;" class="<!-- IF USER_ACTIVE -->adm<!-- ELSE -->seed bold<!-- ENDIF -->"><!-- IF USER_ACTIVE -->{L_USER_DEACTIVATE}<!-- ELSE -->{L_USER_ACTIVATE}<!-- ENDIF --></a> ]&nbsp;
+					[ <a href="#" onclick="ajax.exec({action : 'manage_user', mode: 'delete_profile', user_id : '{PROFILE_USER_ID}'}); return false;" class="adm">{L_USER_DELETE_EXPLAIN}</a> ]
 					<!-- ENDIF -->
 				</td>
 			</tr>
@@ -237,23 +242,16 @@ $(document).ready(function(){
 					</p>
 				</td>
 			</tr>
-			
+
 			<!-- IF IS_ADMIN -->
 			<tr id="delete" style="display: none;">
 			    <td colspan="2" class="med tCenter">
-				    [ <a href="#" onclick="ajax.exec({action : 'delete_userdata', mode: 'delete_profile', user_id : '{PROFILE_USER_ID}'}); return false;" class="adm">{L_USER_DELETE_EXPLAIN}</a> ]&nbsp;
-					[ <a href="#" onclick="ajax.exec({action : 'delete_userdata', mode: 'delete_message', user_id : '{PROFILE_USER_ID}'}); return false;" class="adm">{L_DELETE_USER_POSTS}</a> ]
-					
-					<script type="text/javascript">
-					    ajax.callback.delete_userdata = function(data) {
-						    if(data.info) alert(data.info);
-                            if(data.url) document.location.href = data.url;
-					    };
-					</script>
+					[ <a href="#" onclick="ajax.exec({action : 'manage_user', mode: 'delete_topics', user_id : '{PROFILE_USER_ID}'}); return false;" class="adm">топики целиком</a> ]&nbsp;
+                    [ <a href="#" onclick="ajax.exec({action : 'manage_user', mode: 'delete_message', user_id : '{PROFILE_USER_ID}'}); return false;" class="adm">все, кроме заглавных</a> ]
 			    </td>
 		    </tr>
 			<!-- ENDIF -->
-			
+
 			<!-- IF LOCATION -->
 			<tr>
 				<th class="vBottom">{L_LOCATION}:</th>
@@ -383,7 +381,7 @@ $(document).ready(function(){
 				) / {L_DOWNLOADED} <b class="leechmed">{DOWN_TOTAL}</b>
 			</td>
 		</tr>
-		
+
 		<!-- IF SHOW_PASSKEY -->
 		<script type="text/javascript">
 		    ajax.callback.gen_passkey = function(data){

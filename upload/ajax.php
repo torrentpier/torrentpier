@@ -42,6 +42,10 @@ switch ($ajax->action)
 	case 'user_register':
 		require(INC_DIR .'functions_validate.php');
 	break;
+
+	case 'manage_user':
+		require(INC_DIR .'functions_admin.php');
+	break;
 }
 
 // position in $ajax->valid_actions['xxx']
@@ -63,13 +67,13 @@ class ajax_common
 		'edit_user_profile' => array('admin'),
 		'change_user_rank'  => array('admin'),
 		'change_user_opt'   => array('admin'),
-		'delete_userdata'   => array('admin'),
 
 		'change_tor_status' => array('mod'),
 		'mod_action'        => array('mod'),
 
 		'gen_passkey'       => array('user'),
 		'change_torrent'    => array('user'),
+        'manage_user'       => array('user'),
 
 		'view_post'         => array('guest'),
 		'view_torrent'      => array('guest'),
@@ -412,17 +416,17 @@ class ajax_common
 		$this->response['html'] = $html;
 		$this->response['mode'] = $mode;
 	}
-	
+
 	function get_forum_mods()
     {
         global $lang, $datastore;
-        
+
 		$forum_id = (int) $this->request['forum_id'];
-        
+
 		$datastore->enqueue(array(
             'moderators',
         ));
-        
+
 		$moderators = array();
         $mod = $datastore->get('moderators');
 
@@ -433,7 +437,7 @@ class ajax_common
                 $moderators[] = '<a href="'. PROFILE_URL . $user_id .'">'. $mod['name_users'][$user_id] .'</a>';
             }
         }
-  
+
         if (isset($mod['mod_groups'][$forum_id]))
         {
             foreach ($mod['mod_groups'][$forum_id] as $group_id)
@@ -441,10 +445,10 @@ class ajax_common
                 $moderators[] = '<a href="'. "groupcp.php?". POST_GROUPS_URL ."=". $group_id .'">'. $mod['name_groups'][$group_id] .'</a>';
             }
         }
-  
+
         $html = ':&nbsp;';
         $html .= ($moderators) ? join(', ', $moderators) : $lang['NONE'];
-        
+
 		$this->response['html'] = '<strong>'.$html.'</strong>';
         unset($moderators, $mod);
         $datastore->rm('moderators');
@@ -484,10 +488,10 @@ class ajax_common
     {
 		require(AJAX_DIR .'posts.php');
     }
-	
-	function delete_userdata()
+
+	function manage_user()
 	{
-		require(AJAX_DIR .'delete_userdata.php');
+		require(AJAX_DIR .'manage_user.php');
 	}
 }
 
