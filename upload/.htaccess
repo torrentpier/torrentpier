@@ -7,3 +7,4 @@ AddDefaultCharset UTF-8
 <FilesMatch "\.(.*sql|tpl|inc|db|log)|(config|common).php$">
 deny from all
 </FilesMatch>
+php_value allow_call_time_pass_reference On
