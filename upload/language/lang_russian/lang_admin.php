@@ -1,651 +1,649 @@
 <?php
 
-$lang['GENERAL'] = 'General Admin';
-$lang['USERS'] = 'User Admin';
-$lang['GROUPS'] = 'Group Admin';
-$lang['FORUMS'] = 'Forum Admin';
+$lang['GENERAL'] = 'Общие настройки';
+$lang['USERS'] = 'Пользователи';
+$lang['GROUPS'] = 'Группы';
+$lang['FORUMS'] = 'Форумы';
 
-$lang['CONFIGURATION'] = 'Configuration';
-$lang['PERMISSIONS'] = 'Permissions';
-$lang['MANAGE'] = 'Management';
-$lang['DISALLOW'] = 'Disallow names';
-$lang['PRUNE'] = 'Pruning';
-$lang['MASS_EMAIL'] = 'Mass Email';
-$lang['RANKS'] = 'Ranks';
-$lang['SMILIES'] = 'Smilies';
-$lang['BAN_MANAGEMENT'] = 'Ban Control';
-$lang['WORD_CENSOR'] = 'Word Censors';
-$lang['EXPORT'] = 'Export';
-$lang['CREATE_NEW'] = 'Create';
-$lang['ADD_NEW'] = 'Add';
-$lang['CRON'] = 'Task Scheduler (Cron)';
-$lang['FORUM_CONFIG'] = 'Forum settings';
-$lang['TRACKER_CONFIG'] = 'Tracker settings';
-$lang['RELEASE_TEMPLATES'] = 'Release Templates';
-$lang['ACTIONS_LOG'] = 'Report on action';
-$lang['SEARCH'] = 'Search';
-
-//
-// Index
-//
-$lang['ADMIN'] = 'Administration';
-$lang['MAIN_INDEX'] = 'Forum Index';
-$lang['FORUM_STATS'] = 'Forum Statistics';
-$lang['ADMIN_INDEX'] = 'Admin Index';
-$lang['CREATE_PROFILE'] = 'Create profile';
-
-$lang['TP_VERSION']      = 'TorrenPier version';
-$lang['TP_RELEASE_DATE'] = 'Release date';
-
-$lang['CLICK_RETURN_ADMIN_INDEX'] = 'Click %sHere%s to return to the Admin Index';
-
-$lang['STATISTIC'] = 'Statistic';
-$lang['VALUE'] = 'Value';
-$lang['NUMBER_POSTS'] = 'Number of posts';
-$lang['POSTS_PER_DAY'] = 'Posts per day';
-$lang['NUMBER_TOPICS'] = 'Number of topics';
-$lang['TOPICS_PER_DAY'] = 'Topics per day';
-$lang['NUMBER_USERS'] = 'Number of users';
-$lang['USERS_PER_DAY'] = 'Users per day';
-$lang['BOARD_STARTED'] = 'Board started';
-$lang['AVATAR_DIR_SIZE'] = 'Avatar directory size';
-$lang['DATABASE_SIZE'] = 'Database size';
-$lang['GZIP_COMPRESSION'] ='Gzip compression';
-$lang['NOT_AVAILABLE'] = 'Not available';
-
-$lang['ON'] = 'ON'; // This is for GZip compression
-$lang['OFF'] = 'OFF';
-
-// Clear Cache
-$lang['CLEAR_CACHE'] = 'Clear Cache';
-$lang['DATASTORE'] = 'Datastore';
-$lang['DATASTORE_CLEARED'] = 'Datastore cleared';
-$lang['TEMPLATES'] = 'Templates';
-
-// Update
-$lang['UPDATE'] = 'Update';
-$lang['USER_LEVELS'] = 'User levels';
-$lang['USER_LEVELS_UPDATED'] = 'User levels updated';
-
-// Synchronize
-$lang['SYNCHRONIZE'] = 'Synchronize';
-$lang['TOPICS'] = 'Topics';
-$lang['TOPICS_DATA_SYNCHRONIZED'] = 'Topics data synchronized';
-$lang['USER_POSTS_COUNT'] = 'User posts count';
-$lang['USER POSTS COUNT SYNCHRONIZED'] = 'User posts count synchronized';
-
-// Online Userlist
-$lang['SHOW_ONLINE_USERLIST'] = 'Show the list of online users';
+$lang['CONFIGURATION'] = 'Конфигурация';
+$lang['PERMISSIONS'] = 'Права доступа';
+$lang['MANAGE'] = 'Управление';
+$lang['DISALLOW'] = 'Запрещённые имена';
+$lang['PRUNE'] = 'Чистка';
+$lang['MASS_EMAIL'] = 'Массовая рассылка почты';
+$lang['RANKS'] = 'Звания';
+$lang['SMILIES'] = 'Смайлики';
+$lang['BAN_MANAGEMENT'] = 'Чёрные списки (Ban)';
+$lang['WORD_CENSOR'] = 'Автоцензор';
+$lang['EXPORT'] = 'Экспорт';
+$lang['CREATE_NEW'] = 'Создать';
+$lang['ADD_NEW'] = 'Добавить';
+$lang['CRON'] = 'Планировщик задач (Cron)';
+$lang['REBUILD_SEARCH_INDEX'] = 'Перечесть индексы поиска';
+$lang['FORUM_CONFIG'] = 'Настройки форумов';
+$lang['TRACKER_CONFIG'] = 'Настройки трекера';
+$lang['RELEASE_TEMPLATES'] = 'Шаблоны для релизов';
+$lang['ACTIONS_LOG'] = 'Отчет по действиям';
+$lang['SEARCH'] = 'Поиск';
 
 //
 //Welcome page
 //
-$lang['IDX_BROWSER_NSP_FRAME'] = 'Sorry, your browser doesn\'t seem to support frames';
-$lang['IDX_CLEAR_CACHE'] ='Clear Cache:';
-$lang['IDX_CLEAR_DATASTORE'] = 'Datastore';
-$lang['IDX_CLEAR_TEMPLATES'] = 'Templates';
-$lang['IDX_CLEAR_NEWNEWS'] = 'Net news';
-$lang['IDX_UPDATE'] = 'Update:';
-$lang['IDX_UPDATE_USER_LEVELS'] = 'User levels';
-$lang['IDX_SYNCHRONIZE'] = 'Synchronize:';
-$lang['IDX_SYNCHRONIZE_TOPICS'] = 'Topics';
-$lang['IDX_SYNCHRONIZE_POSTCOUNT'] = 'User posts count';
+$lang['IDX_BROWSER_NSP_FRAME'] = 'Простите, но ваш браузер не поддерживает фреймы.';
+$lang['IDX_CLEAR_CACHE'] ='Очистить кеш:';
+$lang['IDX_CLEAR_DATASTORE'] = 'Данные';
+$lang['IDX_CLEAR_TEMPLATES'] = 'Шаблоны';
+$lang['IDX_CLEAR_NEWNEWS'] = 'Новости';
+$lang['IDX_UPDATE'] = 'Обновить:';
+$lang['IDX_UPDATE_USER_LEVELS'] = 'Уровни пользователей';
+$lang['IDX_SYNCHRONIZE'] = 'Синхронизировать:';
+$lang['IDX_SYNCHRONIZE_TOPICS'] = 'Темы';
+$lang['IDX_SYNCHRONIZE_POSTCOUNT'] = 'Количество сообщений';
 //
 // Welcome page END
 //
 
 //
+// Index
+//
+$lang['ADMIN'] = 'Администрирование';
+$lang['MAIN_INDEX'] = 'Список форумов';
+$lang['FORUM_STATS'] = 'Статистика Форумов';
+$lang['ADMIN_INDEX'] = 'Главная страница';
+$lang['CREATE_PROFILE'] = 'Создать аккаунт';
+
+$lang['TP_VERSION']      = 'Версия TorrenPier';
+$lang['TP_RELEASE_DATE'] = 'Дата выпуска';
+
+$lang['CLICK_RETURN_ADMIN_INDEX'] = '%sВернуться на главную страницу администраторского раздела%s';
+
+$lang['STATISTIC'] = 'Статистика';
+$lang['VALUE'] = 'Значение';
+$lang['NUMBER_POSTS'] = 'Кол-во сообщений';
+$lang['POSTS_PER_DAY'] = 'Сообщений в день';
+$lang['NUMBER_TOPICS'] = 'Кол-во тем';
+$lang['TOPICS_PER_DAY'] = 'Тем в день';
+$lang['NUMBER_USERS'] = 'Кол-во пользователей';
+$lang['USERS_PER_DAY'] = 'Пользователей в день';
+$lang['BOARD_STARTED'] = 'Дата запуска';
+$lang['AVATAR_DIR_SIZE'] = 'Размер директории с аватарами';
+$lang['DATABASE_SIZE'] = 'Объём БД';
+$lang['GZIP_COMPRESSION'] ='сжатие Gzip';
+$lang['NOT_AVAILABLE'] = 'Недоступно';
+
+$lang['ON'] = 'ВКЛ'; // This is for GZip compression
+$lang['OFF'] = 'ВЫКЛ';
+
+// Clear Cache
+$lang['CLEAR_CACHE'] = 'Очистить кеш';
+$lang['DATASTORE'] = 'Datastore';
+$lang['DATASTORE_CLEARED'] = 'Datastore очищен';
+$lang['TEMPLATES'] = 'Шаблона';
+
+// Update
+$lang['UPDATE'] = 'Обновить';
+$lang['USER_LEVELS'] = 'Уровни и права пользователей';
+$lang['USER_LEVELS_UPDATED'] = 'Уровни и права пользователей обновлены';
+
+// Synchronize
+$lang['SYNCHRONIZE'] = 'Синхронизировать';
+$lang['TOPICS'] = 'Темы';
+$lang['TOPICS_DATA_SYNCHRONIZED'] = 'Темы синхронизированы';
+$lang['USER_POSTS_COUNT'] = 'Количество сообщений пользователей.';
+$lang['USER POSTS COUNT SYNCHRONIZED'] = 'Количество сообщений пользователей синхронизированы.';
+
+// Online Userlist
+$lang['SHOW_ONLINE_USERLIST'] = 'Показать список пользователей онлайн';
+
+//
 // Auth pages
 //
-$lang['USER_SELECT'] = 'Select a User';
-$lang['GROUP_SELECT'] = 'Select a Group';
-$lang['SELECT_A_FORUM'] = 'Select a Forum';
-$lang['AUTH_CONTROL_USER'] = 'User Permissions Control';
-$lang['AUTH_CONTROL_GROUP'] = 'Group Permissions Control';
-$lang['AUTH_CONTROL_FORUM'] = 'Forum Permissions Control';
-$lang['LOOK_UP_FORUM'] = 'Look up Forum';
+$lang['USER_SELECT'] = 'Выберите пользователя';
+$lang['GROUP_SELECT'] = 'Выберите группу';
+$lang['SELECT_A_FORUM'] = 'Выберите форум';
+$lang['AUTH_CONTROL_USER'] = 'Права пользователей';
+$lang['AUTH_CONTROL_GROUP'] = 'Права групп';
+$lang['AUTH_CONTROL_FORUM'] = 'Доступ к форумам';
+$lang['LOOK_UP_FORUM'] = 'Выбрать форум';
 
-$lang['GROUP_AUTH_EXPLAIN'] = 'Here you can alter the permissions and moderator status assigned to each user group. Do not forget when changing group permissions that individual user permissions may still allow the user entry to forums, etc. You will be warned if this is the case.';
-$lang['USER_AUTH_EXPLAIN'] = 'Here you can alter the permissions and moderator status assigned to each individual user. Do not forget when changing user permissions that group permissions may still allow the user entry to forums, etc. You will be warned if this is the case.';
-$lang['FORUM_AUTH_EXPLAIN'] = 'Here you can alter the authorisation levels of each forum. You will have both a simple and advanced method for doing this, where advanced offers greater control of each forum operation. Remember that changing the permission level of forums will affect which users can carry out the various operations within them.';
+$lang['GROUP_AUTH_EXPLAIN'] = 'Здесь вы можете изменить права доступа и статус модератора для каждой группы пользователей. Не забывайте при изменении прав доступа для групп, что права доступа для отдельных пользователей могут давать пользователю возможность входа в форумы и т.п. Вы будете предупреждены в этом случае.';
+$lang['USER_AUTH_EXPLAIN'] = 'Здесь вы можете изменить права доступа и статус модератора для отдельных пользователей. Не забывайте при изменении прав пользователя, что права доступа для группы могут давать пользователю возможность входа в форумы и т.п. Вы будете предупреждены в этом случае.';
+$lang['FORUM_AUTH_EXPLAIN'] = 'Здесь вы можете регулировать доступ к каждому форуму. У вас будет обычный и продвинутый режим для этого, продвинутый даёт больше возможностей для контроля. Помните, что изменение прав доступа к форуму повлияет на то, какие пользователи смогут совершать в нём различные действия';
 
-$lang['SIMPLE_MODE'] = 'Simple Mode';
-$lang['ADVANCED_MODE'] = 'Advanced Mode';
-$lang['MODERATOR_STATUS'] = 'Moderator status';
+$lang['SIMPLE_MODE'] = 'Простой режим';
+$lang['ADVANCED_MODE'] = 'Продвинутый режим';
+$lang['MODERATOR_STATUS'] = 'Статус модератора';
 
-$lang['ALLOWED_ACCESS'] = 'Allowed Access';
-$lang['DISALLOWED_ACCESS'] = 'Disallowed Access';
-$lang['IS_MODERATOR'] = 'Is Moderator';
-$lang['NOT_MODERATOR'] = 'Not Moderator';
+$lang['ALLOWED_ACCESS'] = 'Доступ открыт';
+$lang['DISALLOWED_ACCESS'] = 'Доступ закрыт';
+$lang['IS_MODERATOR'] = 'Модератор';
+$lang['NOT_MODERATOR'] = 'Не модератор';
 
-$lang['CONFLICT_WARNING'] = 'Authorisation Conflict Warning';
-$lang['CONFLICT_ACCESS_USERAUTH'] = 'This user still has access rights to this forum via group membership. You may want to alter the group permissions or remove this user the group to fully prevent them having access rights. The groups granting rights (and the forums involved) are noted below.';
-$lang['CONFLICT_MOD_USERAUTH'] = 'This user still has moderator rights to this forum via group membership. You may want to alter the group permissions or remove this user the group to fully prevent them having moderator rights. The groups granting rights (and the forums involved) are noted below.';
+$lang['CONFLICT_WARNING'] = 'Предупреждение о конфликте прав';
+$lang['CONFLICT_ACCESS_USERAUTH'] = 'У пользователя (пользователей) всё ещё есть права доступа к этому форуму, связанные с членством в группе. Вам, возможно, надо изменить права доступа для групп или исключить пользователя из группы для того, чтобы полностью закрыть ему права доступа. Группы, дающие такие права, перечислены ниже.';
+$lang['CONFLICT_MOD_USERAUTH'] = 'У данного пользователя всё ещё есть право модерирования этого форума, связанное с его членством в группе. Вам, возможно, надо изменить права доступа для групп или исключить пользователя из группы для того, чтобы полностью закрыть ему право модерации. Группы, дающие это право, перечислены ниже.';
 
-$lang['CONFLICT_ACCESS_GROUPAUTH'] = 'The following user (or users) still have access rights to this forum via their user permission settings. You may want to alter the user permissions to fully prevent them having access rights. The users granted rights (and the forums involved) are noted below.';
-$lang['CONFLICT_MOD_GROUPAUTH'] = 'The following user (or users) still have moderator rights to this forum via their user permissions settings. You may want to alter the user permissions to fully prevent them having moderator rights. The users granted rights (and the forums involved) are noted below.';
+$lang['CONFLICT_ACCESS_GROUPAUTH'] = 'У пользователя (пользователей) всё ещё есть права доступа к этому форуму из-за установок их личных прав. Вам, возможно, надо изменить их права для того, чтобы полностью закрыть им доступ. Пользователи, имеющие такие права, перечислены ниже.';
+$lang['CONFLICT_MOD_GROUPAUTH'] = 'У пользователя (пользователей) всё ещё есть право модерирования этого форума из-за установок их личных прав. Вам, возможно, надо изменить их права для того, чтобы полностью закрыть им возможность модерирования. Пользователи, имеющие такие права, перечислены ниже.';
 
-$lang['PUBLIC'] = 'Public';
-$lang['PRIVATE'] = 'Private';
-$lang['REGISTERED'] = 'Registered';
-$lang['ADMINISTRATORS'] = 'Administrators';
-$lang['HIDDEN'] = 'Hidden';
+$lang['PUBLIC'] = 'Публичный';
+$lang['PRIVATE'] = 'Приватный';
+$lang['REGISTERED'] = 'Зарегистрированный';
+$lang['ADMINISTRATORS'] = 'Администраторы';
+$lang['HIDDEN'] = 'Спрятанный';
 
 // These are displayed in the drop down boxes for advanced
 // mode forum auth, try and keep them short!
-$lang['FORUM_ALL'] = 'ALL';
-$lang['FORUM_REG'] = 'REG';
-$lang['FORUM_PRIVATE'] = 'PRIVATE';
-$lang['FORUM_MOD'] = 'MOD';
-$lang['FORUM_ADMIN'] = 'ADMIN';
+$lang['FORUM_ALL'] = 'Все';
+$lang['FORUM_REG'] = 'Регистр.';
+$lang['FORUM_PRIVATE'] = 'Приватный';
+$lang['FORUM_MOD'] = 'Модератор';
+$lang['FORUM_ADMIN'] = 'Админ';
 
-$lang['AUTH_VIEW'] = $lang['VIEW'] = 'View';
-$lang['AUTH_READ'] = $lang['READ'] = 'Read';
-$lang['AUTH_POST'] = $lang['POST'] = 'Post';
-$lang['AUTH_REPLY'] = $lang['REPLY'] = 'Reply';
-$lang['AUTH_EDIT'] = $lang['EDIT'] = 'Edit';
-$lang['AUTH_DELETE'] = $lang['DELETE'] = 'Delete';
-$lang['AUTH_STICKY'] = $lang['STICKY'] = 'Sticky';
-$lang['AUTH_ANNOUNCE'] = $lang['ANNOUNCE'] = 'Announce';
-$lang['AUTH_VOTE'] = $lang['VOTE'] = 'Vote';
-$lang['AUTH_POLLCREATE'] = $lang['POLLCREATE'] = 'Poll create';
-$lang['AUTH_ATTACHMENTS'] = $lang['AUTH_ATTACH'] = 'Post Files';
-$lang['AUTH_DOWNLOAD'] = $lang['AUTH_DOWNLOAD'] = 'Download Files';
+$lang['AUTH_VIEW'] = $lang['VIEW'] = 'Видеть';
+$lang['AUTH_READ'] = $lang['READ'] = 'Читать';
+$lang['AUTH_POST'] = $lang['POST'] = 'Создавать темы';
+$lang['AUTH_REPLY'] = $lang['REPLY'] = 'Отвечать';
+$lang['AUTH_EDIT'] = $lang['EDIT'] = 'Редактировать';
+$lang['AUTH_DELETE'] = $lang['DELETE'] = 'Удалить';
+$lang['AUTH_STICKY'] = $lang['STICKY'] = 'Прилеплять темы';
+$lang['AUTH_ANNOUNCE'] = $lang['ANNOUNCE'] = 'Создавать объявления';
+$lang['AUTH_VOTE'] = $lang['VOTE'] = 'Голосовать';
+$lang['AUTH_POLLCREATE'] = $lang['POLLCREATE'] = 'Создавать опросы';
+$lang['AUTH_ATTACHMENTS'] = $lang['AUTH_ATTACH'] = 'Прикреплять файлы';
+$lang['AUTH_DOWNLOAD'] = $lang['AUTH_DOWNLOAD'] = 'Скачивать файлы';
 
-$lang['SIMPLE_PERMISSION'] = 'Simple Permissions';
+$lang['SIMPLE_PERMISSION'] = 'Простое право доступа';
 
-$lang['USER_LEVEL'] = 'User Level';
-$lang['AUTH_USER'] = 'User';
-$lang['AUTH_ADMIN'] = 'Administrator';
-$lang['GROUP_MEMBERSHIPS'] = 'Usergroup memberships';
-$lang['USERGROUP_MEMBERS'] = 'This group has the following members';
+$lang['USER_LEVEL'] = 'Статус пользователя';
+$lang['AUTH_USER'] = 'Пользователь';
+$lang['AUTH_ADMIN'] = 'Администратор';
+$lang['GROUP_MEMBERSHIPS'] = 'Членство в группах';
+$lang['USERGROUP_MEMBERS'] = 'В этой группе состоят';
 
-$lang['FORUM_AUTH_UPDATED'] = 'Forum permissions updated';
-$lang['USER_AUTH_UPDATED'] = 'User permissions updated';
-$lang['GROUP_AUTH_UPDATED'] = 'Group permissions updated';
+$lang['FORUM_AUTH_UPDATED'] = 'Права доступа к форуму изменены';
+$lang['USER_AUTH_UPDATED'] = 'Права пользователя изменены';
+$lang['GROUP_AUTH_UPDATED'] = 'Права группы изменены';
 
-$lang['AUTH_UPDATED'] = 'Permissions have been updated';
-$lang['CLICK_RETURN_USERAUTH'] = 'Click %sHere%s to return to User Permissions';
-$lang['CLICK_RETURN_GROUPAUTH'] = 'Click %sHere%s to return to Group Permissions';
-$lang['CLICK_RETURN_FORUMAUTH'] = 'Click %sHere%s to return to Forum Permissions';
+$lang['AUTH_UPDATED'] = 'Права доступа изменены';
+$lang['CLICK_RETURN_USERAUTH'] = '%sВернуться к управлению правами пользователей%s';
+$lang['CLICK_RETURN_GROUPAUTH'] = '%sВернуться к управлению правами групп%s';
+$lang['CLICK_RETURN_FORUMAUTH'] = '%sВернуться к управлению доступом к форумам%s';
 
 
 //
 // Banning
 //
-$lang['BAN_CONTROL'] = 'Ban Control';
-$lang['BAN_EXPLAIN'] = 'Here you can control the banning of users. You can achieve this by banning either or both of a specific user or an individual or range of IP addresses or hostnames. These methods prevent a user from even reaching the index page of your board. To prevent a user from registering under a different username you can also specify a banned email address. Please note that banning an email address alone will not prevent that user from being able to log on or post to your board. You should use one of the first two methods to achieve this.';
-$lang['BAN_EXPLAIN_WARN'] = 'Please note that entering a range of IP addresses results in all the addresses between the start and end being added to the banlist. Attempts will be made to minimise the number of addresses added to the database by introducing wildcards automatically where appropriate. If you really must enter a range, try to keep it small or better yet state specific addresses.';
+$lang['BAN_CONTROL'] = 'Чёрные списки';
+$lang['BAN_EXPLAIN'] = 'Здесь вы можете закрывать пользователям любой доступ к форумам. Вы можете внести в чёрный список конкретного пользователя, а также один ил несколько IP адресов или имён серверов. Этот метод не даст пользователю увидеть даже список форумов. Чтобы запретить регистрацию под другим именем, вы можете также внести в чёрный список адрес e-mail. Учтите, запрещение только e-mail адреса не закроет пользователю возможность заходить на форум и писать сообщения. Для этого вам придётся воспользоваться одним из первых двух методов.';
+$lang['BAN_EXPLAIN_WARN'] = 'Учтите, что ввод диапазона IP адресов приведёт к добавлению всех адресов между первым и последним в &laquo;чёрный список&raquo;. Будут проделаны попытки уменьшить это количество вводом шаблонов, где это возможно. Если вам действительно надо ввести диапазон адресов, постарайтесь сделать его поменьше или, что ещё лучше, вводите отдельные адреса.';
 
-$lang['SELECT_IP'] = 'Select an IP address';
-$lang['SELECT_EMAIL'] = 'Select an Email address';
+$lang['SELECT_IP'] = 'Выберите IP адрес';
+$lang['SELECT_EMAIL'] = 'Выберите адрес e-mail';
 
-$lang['BAN_USERNAME'] = 'Ban one or more specific users';
-$lang['BAN_USERNAME_EXPLAIN'] = 'You can ban multiple users in one go using the appropriate combination of mouse and keyboard for your computer and browser';
+$lang['BAN_USERNAME'] = 'Закрытие доступа отдельным пользователям';
+$lang['BAN_USERNAME_EXPLAIN'] = 'Вы можете закрыть доступ нескольким пользователям за один раз, используя подходящую для вашего компьютера и браузера комбинацию клавиатуры и мыши.';
 
-$lang['BAN_IP'] = 'Ban one or more IP addresses or hostnames';
-$lang['IP_HOSTNAME'] = 'IP addresses or hostnames';
-$lang['BAN_IP_EXPLAIN'] = 'To specify several different IP addresses or hostnames separate them with commas. To specify a range of IP addresses, separate the start and end with a hyphen (-); to specify a wildcard, use an asterisk (*).';
+$lang['BAN_IP'] = 'Закрыть доступ с одного или нескольких адресов IP или хостов';
+$lang['IP_HOSTNAME'] = 'Адреса IP или хосты';
+$lang['BAN_IP_EXPLAIN'] = 'Чтобы указать несколько разных адресов или хостов, разделите их запятыми. Чтобы указать последовательность адресов IP разделите начало и конец дефисом (-), чтобы указать шаблон используйте *';
 
-$lang['BAN_EMAIL'] = 'Ban one or more email addresses';
-$lang['BAN_EMAIL_EXPLAIN'] = 'To specify more than one email address, separate them with commas. To specify a wildcard username, use * like *@hotmail.com';
+$lang['BAN_EMAIL'] = 'Запретить e-mail адреса';
+$lang['BAN_EMAIL_EXPLAIN'] = 'Чтобы запретить несколько e-mail адресов, разделите их запятыми. Чтобы указать шаблон, используйте *, например *@mail.ru';
 
-$lang['UNBAN_USERNAME'] = 'Un-ban one more specific users';
-$lang['UNBAN_USERNAME_EXPLAIN'] = 'You can unban multiple users in one go using the appropriate combination of mouse and keyboard for your computer and browser';
+$lang['UNBAN_USERNAME'] = 'Вновь открыть доступ пользователям';
+$lang['UNBAN_USERNAME_EXPLAIN'] = 'Вы можете вновь открыть доступ нескольким пользователям за один раз, используя подходящую для вашего компьютера и браузера комбинацию клавиатуры и мыши.';
 
-$lang['UNBAN_IP'] = 'Un-ban one or more IP addresses';
-$lang['UNBAN_IP_EXPLAIN'] = 'You can unban multiple IP addresses in one go using the appropriate combination of mouse and keyboard for your computer and browser';
+$lang['UNBAN_IP'] = 'Вновь открыть доступ с адресов IP';
+$lang['UNBAN_IP_EXPLAIN'] = 'Вы можете вновь разрешить доступ с нескольких адресов IP за один раз, используя подходящую для вашего компьютера и браузера комбинацию клавиатуры и мыши.';
 
-$lang['UNBAN_EMAIL'] = 'Un-ban one or more email addresses';
-$lang['UNBAN_EMAIL_EXPLAIN'] = 'You can unban multiple email addresses in one go using the appropriate combination of mouse and keyboard for your computer and browser';
+$lang['UNBAN_EMAIL'] = 'Вновь разрешить адреса e-mail';
+$lang['UNBAN_EMAIL_EXPLAIN'] = 'Вы можете вновь разрешить несколько адресов e-mail за один раз, используя подходящую для вашего компьютера и браузера комбинацию клавиатуры и мыши.';
 
-$lang['NO_BANNED_USERS'] = 'No banned usernames';
-$lang['NO_BANNED_IP'] = 'No banned IP addresses';
-$lang['NO_BANNED_EMAIL'] = 'No banned email addresses';
+$lang['NO_BANNED_USERS'] = 'Чёрный список пользователей пуст';
+$lang['NO_BANNED_IP'] = 'Чёрный список адресов IP пуст';
+$lang['NO_BANNED_EMAIL'] = 'Чёрный список адресов e-mail пуст';
 
-$lang['BAN_UPDATE_SUCESSFUL'] = 'The banlist has been updated successfully';
-$lang['CLICK_RETURN_BANADMIN'] = 'Click %sHere%s to return to Ban Control';
+$lang['BAN_UPDATE_SUCESSFUL'] = 'Чёрный список был успешно обновлён';
+$lang['CLICK_RETURN_BANADMIN'] = '%sВернуться к чёрным спискам%s';
 
 
 //
 // Configuration
 //
-$lang['GENERAL_CONFIG'] = 'General Configuration';
-$lang['CONFIG_EXPLAIN'] = 'The form below will allow you to customize all the general board options. For User and Forum configurations use the related links on the left hand side.';
+$lang['GENERAL_CONFIG'] = 'Общие настройки';
+$lang['CONFIG_EXPLAIN'] = 'Эта форма позволит вам изменить общие настройки форумов. Для управления пользователями и отдельными форумами используйте соответствующие ссылки слева.';
 
-$lang['CLICK_RETURN_CONFIG'] = 'Click %sHere%s to return to General Configuration';
+$lang['CLICK_RETURN_CONFIG'] = '%sВернуться к общим настройкам%s';
 
-$lang['GENERAL_SETTINGS'] = 'General Board Settings';
-$lang['SITE_NAME'] = 'Site name';
-$lang['SITE_DESC'] = 'Site description';
-$lang['BOARD_DISABLE'] = 'Disable board';
-$lang['BOARD_DISABLE_EXPLAIN'] = 'This will make the board unavailable to users. Administrators are able to access the Administration Panel while the board is disabled.';
-$lang['ACCT_ACTIVATION'] = 'Enable account activation';
-$lang['ACC_NONE'] = 'None'; // These three entries are the type of activation
-$lang['ACC_USER'] = 'User';
-$lang['ACC_ADMIN'] = 'Admin';
+$lang['GENERAL_SETTINGS'] = 'Общие настройки форумов';
+$lang['SITE_NAME'] = 'Название сайта';
+$lang['SITE_DESC'] = 'Описание сайта';
+$lang['BOARD_DISABLE'] = 'Отключить форумы';
+$lang['BOARD_DISABLE_EXPLAIN'] = 'Форумы станут недоступными пользователям. У Администраторов останется доступ через Панель Администрирования пока форум выключен.';
+$lang['ACCT_ACTIVATION'] = 'Включить активизацию учётных записей';
+$lang['ACC_NONE'] = 'Нет'; // These three entries are the type of activation
+$lang['ACC_USER'] = 'Пользователем';
+$lang['ACC_ADMIN'] = 'Администратором';
 
-$lang['ABILITIES_SETTINGS'] = 'User and Forum Basic Settings';
-$lang['MAX_POLL_OPTIONS'] = 'Max number of poll options';
-$lang['FLOOD_INTERVAL'] = 'Flood Interval';
-$lang['FLOOD_INTERVAL_EXPLAIN'] = 'Number of seconds a user must wait between posts';
-$lang['BOARD_EMAIL_FORM'] = 'User email via board';
-$lang['BOARD_EMAIL_FORM_EXPLAIN'] = 'Users send email to each other via this board';
-$lang['TOPICS_PER_PAGE'] = 'Topics Per Page';
-$lang['POSTS_PER_PAGE'] = 'Posts Per Page';
-$lang['HOT_THRESHOLD'] = 'Posts for Popular Threshold';
-$lang['DEFAULT_LANGUAGE'] = 'Default Language';
-$lang['DATE_FORMAT'] = 'Date Format';
-$lang['SYSTEM_TIMEZONE'] = 'System Timezone';
-$lang['ENABLE_PRUNE'] = 'Enable Forum Pruning';
-$lang['ALLOW_BBCODE'] = 'Allow BBCode';
-$lang['ALLOW_SMILIES'] = 'Allow Smilies';
-$lang['SMILIES_PATH'] = 'Smilies Storage Path';
-$lang['SMILIES_PATH_EXPLAIN'] = 'Path under your phpBB root dir, e.g. images/smiles';
-$lang['ALLOW_SIG'] = 'Allow Signatures';
-$lang['MAX_SIG_LENGTH'] = 'Maximum signature length';
-$lang['MAX_SIG_LENGTH_EXPLAIN'] = 'Maximum number of characters in user signatures';
-$lang['ALLOW_NAME_CHANGE'] = 'Allow Username changes';
+$lang['ABILITIES_SETTINGS'] = 'Общие настройки форумов и пользователей';
+$lang['MAX_POLL_OPTIONS'] = 'Макс. кол-во вариантов ответа в опросе';
+$lang['FLOOD_INTERVAL'] = 'Задержка &laquo;флуда&raquo;';
+$lang['FLOOD_INTERVAL_EXPLAIN'] = 'Время (в секундах), которое должно пройти между двумя сообщениями пользователя.';
+$lang['BOARD_EMAIL_FORM'] = 'Рассылка e-mail сообщений через форумы';
+$lang['BOARD_EMAIL_FORM_EXPLAIN'] = 'Пользователи смогут посылать друг другу e-mail через форумы';
+$lang['TOPICS_PER_PAGE'] = 'Тем на страницу';
+$lang['POSTS_PER_PAGE'] = 'Сообщений на страницу';
+$lang['HOT_THRESHOLD'] = 'Сообщений в &laquo;популярной&raquo; теме';
+$lang['DEFAULT_LANGUAGE'] = 'Язык по умолчанию';
+$lang['DATE_FORMAT'] = 'Формат даты';
+$lang['SYSTEM_TIMEZONE'] = 'Часовой пояс';
+$lang['ENABLE_PRUNE'] = 'Включить чистку форумов';
+$lang['ALLOW_BBCODE'] = 'Разрешить BBCode';
+$lang['ALLOW_SMILIES'] = 'Разрешить смайлики';
+$lang['SMILIES_PATH'] = 'Путь к смайликам';
+$lang['SMILIES_PATH_EXPLAIN'] = 'Каталог ниже корня phpBB, например images/smilies';
+$lang['ALLOW_SIG'] = 'Разрешить подписи';
+$lang['MAX_SIG_LENGTH'] = 'Макс. длина подписи';
+$lang['MAX_SIG_LENGTH_EXPLAIN'] = 'Максимальное кол-во символов в подписи пользователя';
+$lang['ALLOW_NAME_CHANGE'] = 'Разрешить смену имени пользователя';
 
-$lang['AVATAR_SETTINGS'] = 'Avatar Settings';
-$lang['ALLOW_LOCAL'] = 'Enable gallery avatars';
-$lang['ALLOW_REMOTE'] = 'Enable remote avatars';
-$lang['ALLOW_REMOTE_EXPLAIN'] = 'Avatars linked to from another website';
-$lang['ALLOW_UPLOAD'] = 'Enable avatar uploading';
-$lang['MAX_FILESIZE'] = 'Maximum Avatar File Size';
-$lang['MAX_FILESIZE_EXPLAIN'] = 'For uploaded avatar files';
-$lang['MAX_AVATAR_SIZE'] = 'Maximum Avatar Dimensions';
-$lang['MAX_AVATAR_SIZE_EXPLAIN'] = '(Height x Width in pixels)';
-$lang['AVATAR_STORAGE_PATH'] = 'Avatar Storage Path';
-$lang['AVATAR_STORAGE_PATH_EXPLAIN'] = 'Path under your phpBB root dir, e.g. images/avatars';
-$lang['AVATAR_GALLERY_PATH'] = 'Avatar Gallery Path';
-$lang['AVATAR_GALLERY_PATH_EXPLAIN'] = 'Path under your phpBB root dir for pre-loaded images, e.g. images/avatars/gallery';
+$lang['AVATAR_SETTINGS'] = 'Настройки аватар';
+$lang['ALLOW_LOCAL'] = 'Разрешить аватар из галереи';
+$lang['ALLOW_REMOTE'] = 'Разрешить удалённых аватар';
+$lang['ALLOW_REMOTE_EXPLAIN'] = 'Ссылка на аватару, находящуюся на другом сайте';
+$lang['ALLOW_UPLOAD'] = 'Разрешить закачку аватар';
+$lang['MAX_FILESIZE'] = 'Макс. размер файла аватары';
+$lang['MAX_FILESIZE_EXPLAIN'] = 'Для закачанных файлов';
+$lang['MAX_AVATAR_SIZE'] = 'Макс. размер изображения';
+$lang['MAX_AVATAR_SIZE_EXPLAIN'] = '(высота x ширина в пикселях)';
+$lang['AVATAR_STORAGE_PATH'] = 'Путь к аватарам';
+$lang['AVATAR_STORAGE_PATH_EXPLAIN'] = 'Каталог ниже корня phpBB, например images/avatars';
+$lang['AVATAR_GALLERY_PATH'] = 'Путь к галерее аватар';
+$lang['AVATAR_GALLERY_PATH_EXPLAIN'] = 'Каталог ниже корня phpBB для готовых картинок, например images/avatars/gallery';
 
-$lang['EMAIL_SETTINGS'] = 'Email Settings';
-$lang['ADMIN_EMAIL'] = 'Admin Email Address';
-$lang['EMAIL_SIG'] = 'Email Signature';
-$lang['EMAIL_SIG_EXPLAIN'] = 'This text will be attached to all emails the board sends';
-$lang['USE_SMTP'] = 'Use SMTP Server for email';
-$lang['USE_SMTP_EXPLAIN'] = 'Say yes if you want or have to send email via a named server instead of the local mail function';
-$lang['SMTP_SERVER'] = 'SMTP Server Address';
-$lang['SMTP_USERNAME'] = 'SMTP Username';
-$lang['SMTP_USERNAME_EXPLAIN'] = 'Only enter a username if your SMTP server requires it';
-$lang['SMTP_PASSWORD'] = 'SMTP Password';
-$lang['SMTP_PASSWORD_EXPLAIN'] = 'Only enter a password if your SMTP server requires it';
+$lang['EMAIL_SETTINGS'] = 'Настройки e-mail';
+$lang['ADMIN_EMAIL'] = 'Адрес e-mail администратора';
+$lang['EMAIL_SIG'] = 'Подпись в сообщениях e-mail';
+$lang['EMAIL_SIG_EXPLAIN'] = 'Этот текст будет подставляться во все письма, рассылаемые из форумов';
+$lang['USE_SMTP'] = 'Использовать сервер SMTP для отправки почты';
+$lang['USE_SMTP_EXPLAIN'] = 'Отметьте, если вы хотите/вынуждены отсылать почту через сервер SMTP, а не локальную почтовую службу';
+$lang['SMTP_SERVER'] = 'Адрес сервера SMTP';
+$lang['SMTP_USERNAME'] = 'Имя пользователя для SMTP';
+$lang['SMTP_USERNAME_EXPLAIN'] = 'Не указывайте имя пользователя если оно не требуется для работы с вашим сервером SMTP';
+$lang['SMTP_PASSWORD'] = 'Пароль для SMTP';
+$lang['SMTP_PASSWORD_EXPLAIN'] = 'Не указывайте пароль если он не требуется для работы с вашим сервером SMTP';
 
-$lang['DISABLE_PRIVMSG'] = 'Private Messaging';
-$lang['INBOX_LIMITS'] = 'Max posts in Inbox';
-$lang['SENTBOX_LIMITS'] = 'Max posts in Sentbox';
-$lang['SAVEBOX_LIMITS'] = 'Max posts in Savebox';
+$lang['DISABLE_PRIVMSG'] = 'Личные сообщения';
+$lang['INBOX_LIMITS'] = 'Макс. число сообщений в папке &laquo;Входящие&raquo;';
+$lang['SENTBOX_LIMITS'] = 'Макс. число сообщений в папке &laquo;Отправленные&raquo;';
+$lang['SAVEBOX_LIMITS'] = 'Макс. число сообщений в папке &laquo;Сохранённые&raquo;';
 
 // Visual Confirmation
-$lang['VISUAL_CONFIRM'] = 'Enable Visual Confirmation';
-$lang['VISUAL_CONFIRM_EXPLAIN'] = 'Requires users enter a code defined by an image when registering.';
+$lang['VISUAL_CONFIRM'] = 'Включить визуальное подтверждение';
+$lang['VISUAL_CONFIRM_EXPLAIN'] = 'Потребовать от пользователей ввести при регистрации изображённый на картинке код.';
 
 // Autologin Keys - added 2.0.18
-$lang['ALLOW_AUTOLOGIN'] = 'Allow automatic logins';
-$lang['ALLOW_AUTOLOGIN_EXPLAIN'] = 'Determines whether users are allowed to select to be automatically logged in when visiting the forum';
-$lang['AUTOLOGIN_TIME'] = 'Automatic login key expiry';
-$lang['AUTOLOGIN_TIME_EXPLAIN'] = 'How long a autologin key is valid for in days if the user does not visit the board. Set to zero to disable expiry.';
-
+$lang['ALLOW_AUTOLOGIN'] = 'Разрешить автоматический вход на форум';
+$lang['ALLOW_AUTOLOGIN_EXPLAIN'] = 'Разрешен ли пользователям автоматический вход на форум';
+$lang['AUTOLOGIN_TIME'] = 'Автоматический вход на форум действителен';
+$lang['AUTOLOGIN_TIME_EXPLAIN'] = 'Срок в днях с последнего посещения, в течение которого пользователь может автоматически войти на форум. Установите равным нулю, если хотите отключить данную возможность.';
 //
 // Forum Management
 //
-$lang['FORUM_ADMIN_MAIN'] = 'Forum Administration';
-$lang['FORUM_ADMIN_EXPLAIN'] = 'From this panel you can add, delete, edit, re-order and re-synchronise categories and forums';
-$lang['EDIT_FORUM'] = 'Edit forum';
-$lang['CREATE_FORUM'] = 'Create new forum';
-$lang['CREATE_CATEGORY'] = 'Create new category';
-$lang['REMOVE'] = 'Remove';
-$lang['ACTION'] = 'Action';
-$lang['UPDATE_ORDER'] = 'Update Order';
-$lang['CONFIG_UPDATED'] = 'Forum Configuration Updated Successfully';
-$lang['EDIT'] = 'Edit';
-$lang['MOVE_UP'] = 'Move up';
-$lang['MOVE_DOWN'] = 'Move down';
-$lang['RESYNC'] = 'Resync';
-$lang['NO_MODE'] = 'No mode was set';
-$lang['FORUM_EDIT_DELETE_EXPLAIN'] = 'The form below will allow you to customize all the general board options. For User and Forum configurations use the related links on the left hand side';
+$lang['FORUM_ADMIN_MAIN'] = 'Управление форумами';
+$lang['FORUM_ADMIN_EXPLAIN'] = 'Здесь вы можете создавать, удалять и изменять порядок вывода категорий и форумов';
+$lang['EDIT_FORUM'] = 'Изменить форум';
+$lang['CREATE_FORUM'] = 'Создать новый форум';
+$lang['CREATE_CATEGORY'] = 'Создать новую категорию';
+$lang['REMOVE'] = 'Удалить';
+$lang['ACTION'] = 'Действие';
+$lang['UPDATE_ORDER'] = 'Изменить порядок';
+$lang['CONFIG_UPDATED'] = 'Конфигурация форумов успешно изменена';
+$lang['EDIT'] = 'Изменить';
+$lang['MOVE_UP'] = 'вверх'; // 'Сдвинуть вверх';
+$lang['MOVE_DOWN'] = 'вниз'; // 'Сдвинуть вниз';
+$lang['RESYNC'] = 'Синхронизация';
+$lang['NO_MODE'] = 'Не было задано действие';
+$lang['FORUM_EDIT_DELETE_EXPLAIN'] = 'Здесь вы можете изменить название и описание форума, закрыть его (или вновь открыть) и настроить автоматическую чистку. Для управления правами доступа к форуму воспользуйтесь соответствующей ссылкой в левой части.';
 
-$lang['MOVE_CONTENTS'] = 'Move all contents';
-$lang['FORUM_DELETE'] = 'Delete Forum';
-$lang['FORUM_DELETE_EXPLAIN'] = 'The form below will allow you to delete a forum (or category) and decide where you want to put all topics (or forums) it contained.';
-$lang['CATEGORY_DELETE'] = 'Delete Category';
+$lang['MOVE_CONTENTS'] = 'Перенести всё содержимое';
+$lang['FORUM_DELETE'] = 'Удалить форум';
+$lang['FORUM_DELETE_EXPLAIN'] = 'Здесь вы сможете удалить форум (или категорию) и решить, куда перенести все темы (или форумы), которые там содержались.';
+$lang['CATEGORY_DELETE'] = 'Удалить Категорию';
 
-$lang['STATUS_LOCKED'] = 'Locked';
-$lang['STATUS_UNLOCKED'] = 'Unlocked';
-$lang['FORUM_SETTINGS'] = 'General Forum Settings';
-$lang['FORUM_NAME'] = 'Forum name';
-$lang['FORUM_DESC'] = 'Description';
-$lang['FORUM_STATUS'] = 'Forum status';
-$lang['FORUM_PRUNING'] = 'Auto-pruning';
+$lang['STATUS_LOCKED'] = 'Закрыт';
+$lang['STATUS_UNLOCKED'] = 'Открыт';
+$lang['FORUM_SETTINGS'] = 'Общие параметры форума';
+$lang['FORUM_NAME'] = 'Название форума';
+$lang['FORUM_DESC'] = 'Описание';
+$lang['FORUM_STATUS'] = 'Статус форума';
+$lang['FORUM_PRUNING'] = 'Автоматическая чистка';
 
-$lang['PRUNE_DAYS'] = 'Remove topics that have not been posted to in';
-$lang['SET_PRUNE_DATA'] = 'You have turned on auto-prune for this forum but did not set a number of days to prune. Please go back and do so.';
+$lang['PRUNE_DAYS'] = 'Удалять темы, в которых не было сообщений последние';
+$lang['SET_PRUNE_DATA'] = 'Вы выбрали для этого форума автоматическую чистку, но не указали количество дней. Пожалуйста, вернитесь и укажите.';
 
-$lang['MOVE_AND_DELETE'] = 'Move and Delete';
+$lang['MOVE_AND_DELETE'] = 'Перенести и удалить';
 
-$lang['DELETE_ALL_POSTS'] = 'Delete all posts';
-$lang['NOWHERE_TO_MOVE'] = 'Nowhere to move to';
+$lang['DELETE_ALL_POSTS'] = 'Удалить все темы';
+$lang['NOWHERE_TO_MOVE'] = 'Некуда переносить';
 
-$lang['EDIT_CATEGORY'] = 'Edit Category';
-$lang['EDIT_CATEGORY_EXPLAIN'] = 'Use this form to modify a category\'s name.';
+$lang['EDIT_CATEGORY'] = 'Изменить категорию';
+$lang['EDIT_CATEGORY_EXPLAIN'] = 'Используйте эту форму, чтобы изменить название категории';
 
-$lang['FORUMS_UPDATED'] = 'Forum and Category information updated successfully';
+$lang['FORUMS_UPDATED'] = 'Информация о форумах и категориях успешно изменена';
 
-$lang['MUST_DELETE_FORUMS'] = 'You need to delete all forums before you can delete this category';
+$lang['MUST_DELETE_FORUMS'] = 'Вы должны удалить все форумы, прежде чем сможете удалить эту категорию';
 
-$lang['CLICK_RETURN_FORUMADMIN'] = 'Click %sHere%s to return to Forum Administration';
+$lang['CLICK_RETURN_FORUMADMIN'] = '%sВернуться к управлению форумами%s';
 
-$lang['SHOW_ALL_FORUMS_ON_ONE_PAGE'] = 'Show all forums on one page';
+$lang['SHOW_ALL_FORUMS_ON_ONE_PAGE'] = 'Открыть все форумы на одной странице';
 
 //
 // Smiley Management
 //
-$lang['SMILEY_TITLE'] = 'Smiles Editing Utility';
-$lang['SMILE_DESC'] = 'From this page you can add, remove and edit the emoticons or smileys that your users can use in their posts and private messages.';
+$lang['SMILEY_TITLE'] = 'Утилита редактирования смайликов';
+$lang['SMILE_DESC'] = 'Здесь вы можете редактировать список смайликов';
 
-$lang['SMILEY_CONFIG'] = 'Smiley Configuration';
-$lang['SMILEY_CODE'] = 'Smiley Code';
-$lang['SMILEY_URL'] = 'Smiley Image File';
-$lang['SMILEY_EMOT'] = 'Smiley Emotion';
-$lang['SMILE_ADD'] = 'Add a new Smiley';
-$lang['SMILE'] = 'Smile';
-$lang['EMOTION'] = 'Emotion';
+$lang['SMILEY_CONFIG'] = 'Управление смайликами';
+$lang['SMILEY_CODE'] = 'Код смайлика';
+$lang['SMILEY_URL'] = 'Файл с изображением смайлика';
+$lang['SMILEY_EMOT'] = 'Эмоция смайлика';
+$lang['SMILE_ADD'] = 'Добавить новый смайлик';
+$lang['SMILE'] = 'Смайлик';
+$lang['EMOTION'] = 'Эмоция';
 
-$lang['SELECT_PAK'] = 'Select Pack (.pak) File';
-$lang['REPLACE_EXISTING'] = 'Replace Existing Smiley';
-$lang['KEEP_EXISTING'] = 'Keep Existing Smiley';
-$lang['SMILEY_IMPORT_INST'] = 'You should unzip the smiley package and upload all files to the appropriate Smiley directory for your installation. Then select the correct information in this form to import the smiley pack.';
-$lang['SMILEY_IMPORT'] = 'Smiley Pack Import';
-$lang['CHOOSE_SMILE_PAK'] = 'Choose a Smile Pack .pak file';
-$lang['IMPORT'] = 'Import Smileys';
-$lang['SMILE_CONFLICTS'] = 'What should be done in case of conflicts';
-$lang['DEL_EXISTING_SMILEYS'] = 'Delete existing smileys before import';
-$lang['IMPORT_SMILE_PACK'] = 'Import Smiley Pack';
-$lang['EXPORT_SMILE_PACK'] = 'Create Smiley Pack';
-$lang['EXPORT_SMILES'] = 'To create a smiley pack from your currently installed smileys, click %sHere%s to download the smiles.pak file. Name this file appropriately making sure to keep the .pak file extension.  Then create a zip file containing all of your smiley images plus this .pak configuration file.';
+$lang['SELECT_PAK'] = 'Выберите файл с набором (.pak)';
+$lang['REPLACE_EXISTING'] = 'Заменить существующий смайлик';
+$lang['KEEP_EXISTING'] = 'Сохранить существующий смайлик';
+$lang['SMILEY_IMPORT_INST'] = 'Вы должны распаковать набор смайликов и закачать все файлы в подходящую для вашей установки директорию. Потом выберите в этой форме нужную информацию для импорта набора смайликов.';
+$lang['SMILEY_IMPORT'] = 'Импорт набора смайликов';
+$lang['CHOOSE_SMILE_PAK'] = 'Выберите файл .pak с набором';
+$lang['IMPORT'] = 'Импортировать смайлики';
+$lang['SMILE_CONFLICTS'] = 'Что делать в случае конфликта';
+$lang['DEL_EXISTING_SMILEYS'] = 'Удалить перед импортом существующие смайлики';
+$lang['IMPORT_SMILE_PACK'] = 'Импортировать набор смайликов';
+$lang['EXPORT_SMILE_PACK'] = 'Создать набор смайликов';
+$lang['EXPORT_SMILES'] = 'Для создания набора смайликов из смайликов, установленных в данный момент, %sскачайте файл smiles.pak%s. Переименуйте его как вам нужно, сохранив при этом расширение .pak, затем создайте файл zip, содержащий все изображения смайликов, а также этот файл.';
 
-$lang['SMILEY_ADD_SUCCESS'] = 'The Smiley was successfully added';
-$lang['SMILEY_EDIT_SUCCESS'] = 'The Smiley was successfully updated';
-$lang['SMILEY_IMPORT_SUCCESS'] = 'The Smiley Pack was imported successfully!';
-$lang['SMILEY_DEL_SUCCESS'] = 'The Smiley was successfully removed';
-$lang['CLICK_RETURN_SMILEADMIN'] = 'Click %sHere%s to return to Smiley Administration';
+$lang['SMILEY_ADD_SUCCESS'] = 'Смайлик был успешно добавлен';
+$lang['SMILEY_EDIT_SUCCESS'] = 'Смайлик был успешно изменён';
+$lang['SMILEY_IMPORT_SUCCESS'] = 'Набор смайликов был успешно импортирован';
+$lang['SMILEY_DEL_SUCCESS'] = 'Смайлик был успешно удалён';
+$lang['CLICK_RETURN_SMILEADMIN'] = '%sВернуться к списку смайликов%s';
 
 
 //
 // User Management
 //
-$lang['USER_ADMIN'] = 'User Administration';
-$lang['USER_ADMIN_EXPLAIN'] = 'Here you can change your users\' information and certain options. To modify the users\' permissions, please use the user and group permissions system.';
+$lang['USER_ADMIN'] = 'Управление пользователями';
+$lang['USER_ADMIN_EXPLAIN'] = 'Здесь вы можете изменить информацию о пользователе. Чтобы изменить права доступа используйте панель управления правами доступа';
 
-$lang['LOOK_UP_USER'] = 'Look up user';
+$lang['LOOK_UP_USER'] = 'Выбрать пользователя';
 
-$lang['ADMIN_USER_FAIL'] = 'Couldn\'t update the user\'s profile.';
-$lang['ADMIN_USER_UPDATED'] = 'The user\'s profile was successfully updated.';
-$lang['CLICK_RETURN_USERADMIN'] = 'Click %sHere%s to return to User Administration';
+$lang['ADMIN_USER_FAIL'] = 'Не могу изменить профиль пользователя';
+$lang['ADMIN_USER_UPDATED'] = 'Профиль пользователя был успешно изменён';
+$lang['CLICK_RETURN_USERADMIN'] = '%sВернуться к управлению пользователями%s';
 
-$lang['USER_ALLOWPM'] = 'Can send Private Messages';
-$lang['USER_ALLOWAVATAR'] = 'Can display avatar';
+$lang['USER_ALLOWPM'] = 'Может посылать личные сообщения';
+$lang['USER_ALLOWAVATAR'] = 'Может показывать аватару';
 
-$lang['ADMIN_AVATAR_EXPLAIN'] = 'Here you can see and delete the user\'s current avatar.';
+$lang['ADMIN_AVATAR_EXPLAIN'] = 'Здесь вы можете просмотреть и удалить текущую аватару пользователя';
 
-$lang['USER_SPECIAL'] = 'Special admin-only fields';
-$lang['USER_SPECIAL_EXPLAIN'] = 'These fields are not able to be modified by the users.  Here you can set their status and other options that are not given to users.';
+$lang['USER_SPECIAL'] = 'Поля только для админа';
+$lang['USER_SPECIAL_EXPLAIN'] = 'Эти поля сами пользователи редактировать не могут. Здесь вы можете установить их статус и сделать прочие недоступные им настройки.';
 
 
 //
 // Group Management
 //
-$lang['GROUP_ADMINISTRATION'] = 'Group Administration';
-$lang['GROUP_ADMIN_EXPLAIN'] = 'From this panel you can administer all your usergroups. You can delete, create and edit existing groups. You may choose moderators, toggle open/closed group status and set the group name and description';
-$lang['ERROR_UPDATING_GROUPS'] = 'There was an error while updating the groups';
-$lang['UPDATED_GROUP'] = 'The group was successfully updated';
-$lang['ADDED_NEW_GROUP'] = 'The new group was successfully created';
-$lang['DELETED_GROUP'] = 'The group was successfully deleted';
-$lang['CREATE_NEW_GROUP'] = 'Create new group';
-$lang['EDIT_GROUP'] = 'Edit group';
-$lang['GROUP_STATUS'] = 'Group status';
-$lang['GROUP_DELETE'] = 'Delete group';
-$lang['GROUP_DELETE_CHECK'] = 'Delete this group';
-$lang['SUBMIT_GROUP_CHANGES'] = 'Submit Changes';
-$lang['RESET_GROUP_CHANGES'] = 'Reset Changes';
-$lang['NO_GROUP_NAME'] = 'You must specify a name for this group';
-$lang['NO_GROUP_MODERATOR'] = 'You must specify a moderator for this group';
-$lang['NO_GROUP_MODE'] = 'You must specify a mode for this group, open or closed';
-$lang['NO_GROUP_ACTION'] = 'No action was specified';
-$lang['DELETE_OLD_GROUP_MOD'] = 'Delete the old group moderator?';
-$lang['DELETE_OLD_GROUP_MOD_EXPL'] = 'If you\'re changing the group moderator, check this box to remove the old moderator from the group.  Otherwise, do not check it, and the user will become a regular member of the group.';
-$lang['CLICK_RETURN_GROUPSADMIN'] = 'Click %sHere%s to return to Group Administration.';
-$lang['SELECT_GROUP'] = 'Select a group';
-$lang['LOOK_UP_GROUP'] = 'Look up group';
+$lang['GROUP_ADMINISTRATION'] = 'Управление группами';
+$lang['GROUP_ADMIN_EXPLAIN'] = 'Здесь вы можете управлять всеми вашими группами: это включает удаление, добавление и изменение групп. Вы можете назначать модераторов, изменять открытый/закрытый статус группы и устанавливать её название и описание.';
+$lang['ERROR_UPDATING_GROUPS'] = 'Ошибка при изменении группы.';
+$lang['UPDATED_GROUP'] = 'Группа была успешно изменена';
+$lang['ADDED_NEW_GROUP'] = 'Группа была успешно создана';
+$lang['DELETED_GROUP'] = 'Группа была успешно удалена';
+$lang['CREATE_NEW_GROUP'] = 'Создать новую группу';
+$lang['EDIT_GROUP'] = 'Изменить группу';
+$lang['GROUP_STATUS'] = 'Статус группы';
+$lang['GROUP_DELETE'] = 'Удалить группу.';
+$lang['GROUP_DELETE_CHECK'] = 'Удалить эту группу';
+$lang['SUBMIT_GROUP_CHANGES'] = 'Сохранить изменения';
+$lang['RESET_GROUP_CHANGES'] = 'Отменить изменения';
+$lang['NO_GROUP_NAME'] = 'Вы должны указать название группы';
+$lang['NO_GROUP_MODERATOR'] = 'Вы должны выбрать модератора группы';
+$lang['NO_GROUP_MODE'] = 'Вы должны выбрать режим группы: открытый или закрытый';
+$lang['NO_GROUP_ACTION'] = 'Не было выбрано действие';
+$lang['DELETE_OLD_GROUP_MOD'] = 'Удалить старого модератора?';
+$lang['DELETE_OLD_GROUP_MOD_EXPL'] = 'Если вы меняете модератора группы и поставите здесь галочку, то предыдущий модератор будет исключён из группы. Если вы её не поставите, то он станет обычным членом группы.';
+$lang['CLICK_RETURN_GROUPSADMIN'] = '%sВернуться к управлению группами%s';
+$lang['SELECT_GROUP'] = 'Выберите группу';
+$lang['LOOK_UP_GROUP'] = 'Выбрать группу';
 
 
 //
 // Prune Administration
 //
-$lang['FORUM_PRUNE'] = 'Forum Prune';
-$lang['FORUM_PRUNE_EXPLAIN'] = 'This will delete any topic which has not been posted to within the number of days you select. If you do not enter a number then all topics will be deleted. It will not remove <b>sticky</b> topics and <b>announcements</b>. You will need to remove those topics manually.';
-$lang['DO_PRUNE'] = 'Do Prune';
-$lang['ALL_FORUMS'] = 'All Forums';
-$lang['PRUNE_TOPICS_NOT_POSTED'] = 'Prune topics with no replies in this many days';
-$lang['TOPICS_PRUNED'] = 'Topics pruned';
-$lang['POSTS_PRUNED'] = 'Posts pruned';
-$lang['PRUNE_SUCCESS'] = 'Pruning of forums was successful';
+$lang['FORUM_PRUNE'] = 'Чистка форумов';
+$lang['FORUM_PRUNE_EXPLAIN'] = 'Будут удалены темы, в которых не было новых сообщений за выбранное число дней. Если вы не введёте число, то будут удалены все темы. Не будут удалены <b>прилепленные</b> темы и <b>объявления</b>. Вам придётся удалять такие темы вручную.';
+$lang['DO_PRUNE'] = 'Провести чистку';
+$lang['ALL_FORUMS'] = 'Все форумы';
+$lang['PRUNE_TOPICS_NOT_POSTED'] = 'Удалить темы, в которых не было ответов за данное кол-во дней';
+$lang['TOPICS_PRUNED'] = 'Тем вычищено';
+$lang['POSTS_PRUNED'] = 'Сообщений вычищено';
+$lang['PRUNE_SUCCESS'] = 'Форум успешно почищен';
 
 
 //
 // Word censor
 //
-$lang['WORDS_TITLE'] = 'Word Censoring';
-$lang['WORDS_EXPLAIN'] = 'From this control panel you can add, edit, and remove words that will be automatically censored on your forums. In addition people will not be allowed to register with usernames containing these words. Wildcards (*) are accepted in the word field. For example, *test* will match detestable, test* would match testing, *test would match detest.';
-$lang['WORD'] = 'Word';
-$lang['EDIT_WORD_CENSOR'] = 'Edit word censor';
-$lang['REPLACEMENT'] = 'Replacement';
-$lang['ADD_NEW_WORD'] = 'Add new word';
-$lang['UPDATE_WORD'] = 'Update word censor';
+$lang['WORDS_TITLE'] = 'Автоцензор';
+$lang['WORDS_EXPLAIN'] = 'Здесь вы можете добавить, изменить или удалить слова, которые будут автоматически подвергаться цензуре на ваших форумах. Кроме того, пользователи не смогут зарегистрироваться под именами, содержащими эти слова. В списке слов могут использоваться шаблоны (*), т.е. к \'*тест*\' подойдёт \'протестировать\', к \'тест*\' &mdash; \'тестирование\', к \'*тест\' &mdash; \'протест\'.<br>(Примечание переводчика) Рекомендую пользоваться этой фичей <b>очень</b> аккуратно: например, некие очевидные замены буду неадекватно реагировать на слова \'потребитель\', \'употреблять\' и т.п.';
+$lang['WORD'] = 'Слово';
+$lang['EDIT_WORD_CENSOR'] = 'Изменить автоцензор';
+$lang['REPLACEMENT'] = 'Замена';
+$lang['ADD_NEW_WORD'] = 'Добавить новое слово';
+$lang['UPDATE_WORD'] = 'Обновить автоцензор';
 
-$lang['MUST_ENTER_WORD'] = 'You must enter a word and its replacement';
-$lang['NO_WORD_SELECTED'] = 'No word selected for editing';
+$lang['MUST_ENTER_WORD'] = 'Вы должны ввести слово и его замену';
+$lang['NO_WORD_SELECTED'] = 'Не выбрано слово для редактирования';
 
-$lang['WORD_UPDATED'] = 'The selected word censor has been successfully updated';
-$lang['WORD_ADDED'] = 'The word censor has been successfully added';
-$lang['WORD_REMOVED'] = 'The selected word censor has been successfully removed';
+$lang['WORD_UPDATED'] = 'Выбранный автоцензор был успешно изменён';
+$lang['WORD_ADDED'] = 'Автоцензор был успешно добавлен';
+$lang['WORD_REMOVED'] = 'Выбранный автоцензор был успешно удалён';
 
-$lang['CLICK_RETURN_WORDADMIN'] = 'Click %sHere%s to return to Word Censor Administration';
+$lang['CLICK_RETURN_WORDADMIN'] = '%sВернуться к управлению автоцензором%s';
 
 
 //
 // Mass Email
 //
-$lang['MASS_EMAIL_EXPLAIN'] = 'Here you can email a message to either all of your users or all users of a specific group.  To do this, an email will be sent out to the administrative email address supplied, with a blind carbon copy sent to all recipients. If you are emailing a large group of people please be patient after submitting and do not stop the page halfway through. It is normal for a mass emailing to take a long time and you will be notified when the script has completed';
-$lang['COMPOSE'] = 'Compose';
+$lang['MASS_EMAIL_EXPLAIN'] = 'Вы можете разослать e-mail сообщение либо всем вашим пользователям, либо пользователям, входящим в определённую группу. Сообщение будет отправлено на административный адрес, с BCC: всем получателям. Если вы отправляете письмо большой группе людей, то будьте терпеливы: не останавливайте загрузку страницы после нажатия кнопки. Массовая рассылка может занять много времени, вы увидите сообщение, когда выполнение завершится.';
+$lang['COMPOSE'] = 'Текст сообщения';
 
-$lang['RECIPIENTS'] = 'Recipients';
-$lang['ALL_USERS'] = 'All Users';
+$lang['RECIPIENTS'] = 'Получатели';
+$lang['ALL_USERS'] = 'Все пользователи';
 
-$lang['EMAIL_SUCCESSFULL'] = 'Your message has been sent';
-$lang['CLICK_RETURN_MASSEMAIL'] = 'Click %sHere%s to return to the Mass Email form';
+$lang['EMAIL_SUCCESSFULL'] = 'Ваше сообщение было отправлено';
+$lang['CLICK_RETURN_MASSEMAIL'] = '%sВернуться к массовой рассылке%s';
 
 
 //
 // Ranks admin
 //
-$lang['RANKS_TITLE'] = 'Rank Administration';
-$lang['RANKS_EXPLAIN'] = 'Using this form you can add, edit, view and delete ranks. You can also create custom ranks which can be applied to a user via the user management facility';
+$lang['RANKS_TITLE'] = 'Управление званиями';
+$lang['RANKS_EXPLAIN'] = 'Здесь вы можете добавлять, редактировать, просматривать и удалять звания. Вы также можете создавать специальные звания, которые могут затем быть присвоены пользователям на странице управления пользователями.';
 
-$lang['ADD_NEW_RANK'] = 'Add new rank';
-$lang['RANK_TITLE'] = 'Rank Title';
-$lang['STYLE_COLOR'] = 'Style rank';
-$lang['STYLE_COLOR_FAQ'] = 'Specify class for painting at the title of the desired color. For example <i class="bold">colorAdmin<i>';
-$lang['RANK_SPECIAL'] = 'Set as Special Rank';
-$lang['RANK_MINIMUM'] = 'Minimum Posts';
-$lang['RANK_MAXIMUM'] = 'Maximum Posts';
-$lang['RANK_IMAGE'] = 'Rank Image';
-$lang['RANK_IMAGE_EXPLAIN'] = 'Use this to define a small image associated with the rank';
+$lang['ADD_NEW_RANK'] = 'Новое звание';
+$lang['RANK_TITLE'] = 'Звание';
+$lang['STYLE_COLOR'] = 'Стиль звания';
+$lang['STYLE_COLOR_FAQ'] = 'Укажите class для окраски звания в нужный цвет. Например <i class="bold">colorAdmin<i>';
+$lang['RANK_SPECIAL'] = 'Специальное звание';
+$lang['RANK_MINIMUM'] = 'Минимум сообщений';
+$lang['RANK_MAXIMUM'] = 'Максимум сообщений';
+$lang['RANK_IMAGE'] = 'Картинка к званию';
+$lang['RANK_IMAGE_EXPLAIN'] = 'Здесь вы можете присвоить всем имеющим такое звание специальное изображение. Вы можете указать либо относительный, либо абсолютный путь к изображению';
 
-$lang['MUST_SELECT_RANK'] = 'You must select a rank';
-$lang['NO_ASSIGNED_RANK'] = 'No special rank assigned';
+$lang['MUST_SELECT_RANK'] = 'Извините, вы не выбрали звание. Вернитесь и попробуйте ещё раз.';
+$lang['NO_ASSIGNED_RANK'] = 'Специального звания не присвоено';
 
-$lang['RANK_UPDATED'] = 'The rank was successfully updated';
-$lang['RANK_ADDED'] = 'The rank was successfully added';
-$lang['RANK_REMOVED'] = 'The rank was successfully deleted';
-$lang['NO_UPDATE_RANKS'] = 'The rank was successfully deleted. However, user accounts using this rank were not updated.  You will need to manually reset the rank on these accounts';
+$lang['RANK_UPDATED'] = 'Звание было успешно изменено';
+$lang['RANK_ADDED'] = 'Звание было успешно добавлено';
+$lang['RANK_REMOVED'] = 'Звание было успешно удалено';
+$lang['NO_UPDATE_RANKS'] = 'Звание было успешно удалено. Тем не менее, информация о пользователях, у которых было это звание, не была изменена. Вам придётся изменить эту информацию вручную.';
 
-$lang['CLICK_RETURN_RANKADMIN'] = 'Click %sHere%s to return to Rank Administration';
+$lang['CLICK_RETURN_RANKADMIN'] = '%sВернуться к управлению званиями%s';
 
 //
 // Disallow Username Admin
 //
-$lang['DISALLOW_CONTROL'] = 'Username Disallow Control';
-$lang['DISALLOW_EXPLAIN'] = 'Here you can control usernames which will not be allowed to be used.  Disallowed usernames are allowed to contain a wildcard character of *.  Please note that you will not be allowed to specify any username that has already been registered. You must first delete that name then disallow it.';
+$lang['DISALLOW_CONTROL'] = 'Запрещённые имена пользователя';
+$lang['DISALLOW_EXPLAIN'] = "Здесь вы можете задать имена, которые будут запрещены к использованию. Запрещённые имена могут содержать шаблон '*'. Учтите: вы не сможете запретить имя, если уже существует пользователь с таким именем. Вам придётся сначала удалить пользователя, а уже потом запретить имя.";
 
-$lang['DELETE_DISALLOW'] = 'Delete';
-$lang['DELETE_DISALLOW_TITLE'] = 'Remove a Disallowed Username';
-$lang['DELETE_DISALLOW_EXPLAIN'] = 'You can remove a disallowed username by selecting the username from this list and clicking submit';
+$lang['DELETE_DISALLOW'] = 'Удалить';
+$lang['DELETE_DISALLOW_TITLE'] = 'Удалить запрещённое имя пользователя';
+$lang['DELETE_DISALLOW_EXPLAIN'] = 'Вы можете убрать запрещённое имя, выбрав его из списка и нажав кнопку &laquo;сохранить&raquo;';
 
-$lang['ADD_DISALLOW'] = 'Add';
-$lang['ADD_DISALLOW_TITLE'] = 'Add a disallowed username';
-$lang['ADD_DISALLOW_EXPLAIN'] = 'You can disallow a username using the wildcard character * to match any character';
+$lang['ADD_DISALLOW'] = 'Добавить';
+$lang['ADD_DISALLOW_TITLE'] = 'Добавить запрещённое имя пользователя';
+$lang['ADD_DISALLOW_EXPLAIN'] = 'Вы можете запретить имя пользователя, используя шаблон \'*\', который подходит к любому символу';
 
-$lang['NO_DISALLOWED'] = 'No Disallowed Usernames';
+$lang['NO_DISALLOWED'] = 'Нет запрещённых имён';
 
-$lang['DISALLOWED_DELETED'] = 'The disallowed username has been successfully removed';
-$lang['DISALLOW_SUCCESSFUL'] = 'The disallowed username has been successfully added';
-$lang['DISALLOWED_ALREADY'] = 'The name you entered could not be disallowed. It either already exists in the list, exists in the word censor list, or a matching username is present.';
+$lang['DISALLOWED_DELETED'] = 'Запрещённое имя пользователя было успешно удалено';
+$lang['DISALLOW_SUCCESSFUL'] = 'Запрещённое имя пользователя было успешно добавлено';
+$lang['DISALLOWED_ALREADY'] = 'Имя, которое вы пытаетесь запретить, либо уже запрещено, либо есть в списке нецензурных слов, либо существует пользователь с подходящим именем';
 
-$lang['CLICK_RETURN_DISALLOWADMIN'] = 'Click %sHere%s to return to Disallow Username Administration';
+$lang['CLICK_RETURN_DISALLOWADMIN'] = '%sВернуться к управлению запрещёнными именами%s';
 
 // FTP
-$lang['ATTACHMENT_FTP_SETTINGS'] = 'Setting up an FTP upload for attachments';
-$lang['FTP_CHOOSE'] = 'Choose Download Method';
-$lang['FTP_OPTION'] = '<br />Since FTP extensions are enabled in this version of PHP you may also be given the option of first trying to automatically FTP the config file into place.';
-$lang['FTP_INSTRUCTS'] = 'You have chosen to FTP the file to the account containing phpBB 2 automatically.  Please enter the information below to facilitate this process. Note that the FTP path should be the exact path via FTP to your phpBB2 installation as if you were FTPing to it using any normal client.';
-$lang['FTP_INFO'] = 'Enter Your FTP Information';
-$lang['ATTEMPT_FTP'] = 'Attempt to FTP config file into place';
-$lang['SEND_FILE'] = 'Just send the file to me and I\'ll FTP it manually';
-$lang['FTP_PATH'] = 'FTP path to phpBB 2';
-$lang['FTP_USERNAME'] = 'Your FTP Username';
-$lang['FTP_PASSWORD'] = 'Your FTP Password';
-$lang['TRANSFER_CONFIG'] = 'Start Transfer';
-$lang['NOFTP_CONFIG'] = 'The attempt to FTP the config file into place failed.  Please download the config file and FTP it into place manually.';
+$lang['ATTACHMENT_FTP_SETTINGS'] = 'Настройка закачки вложений на FTP';
+$lang['FTP_CHOOSE'] = 'Выберите метод скачивания';
+$lang['FTP_OPTION'] = '<br />В этой версии PHP включены возможности FTP, вы можете попробовать сначала автоматически закачать файл настроек по FTP в нужный каталог.';
+$lang['FTP_INSTRUCTS'] = 'Вы решили закачать файл настроек по FTP в каталог, содержащий phpBB 2. Пожалуйста, укажите информацию, требуемую для осуществления этого процесса. Учтите, что путь FTP должен быть полным путём к вашей установке phpBB 2, как если бы вы пользовались обычным клиентом FTP.';
+$lang['FTP_INFO'] = 'Укажите настройки FTP';
+$lang['ATTEMPT_FTP'] = 'Попробовать закачать файл настроек по FTP';
+$lang['SEND_FILE'] = 'Просто прислать файл, я закачаю его вручную';
+$lang['FTP_PATH'] = 'Путь FTP к каталогу phpBB 2';
+$lang['FTP_USERNAME'] = 'Имя пользователя для FTP';
+$lang['FTP_PASSWORD'] = 'Пароль для FTP';
+$lang['TRANSFER_CONFIG'] = 'Начать закачку';
+$lang['NOFTP_CONFIG'] = 'Попытка закачать файл настроек по FTP завершилась неудачей. Пожалуйста, скачайте файл настроек и поместите его в нужный каталог вручную.';
 
 //
 // Version Check
 //
-$lang['VERSION_INFORMATION'] = 'Version Information';
+$lang['VERSION_INFORMATION'] = 'Информация о версии TorrentPier';
 
 //
 // Login attempts configuration
 //
-$lang['MAX_LOGIN_ATTEMPTS'] = 'Allowed login attempts';
-$lang['MAX_LOGIN_ATTEMPTS_EXPLAIN'] = 'The number of allowed board login attempts.';
-$lang['LOGIN_RESET_TIME'] = 'Login lock time';
-$lang['LOGIN_RESET_TIME_EXPLAIN'] = 'Time in minutes the user have to wait until he is allowed to login again after exceeding the number of allowed login attempts.';
+$lang['MAX_LOGIN_ATTEMPTS'] = 'Разрешено попыток входа';
+$lang['MAX_LOGIN_ATTEMPTS_EXPLAIN'] = 'Количество разрешенных попыток входа на трекер. Для отключения поставьте 0.';
+$lang['LOGIN_RESET_TIME'] = 'Время блокировки имени пользователя.';
+$lang['LOGIN_RESET_TIME_EXPLAIN'] = 'Время, через которое пользователь сможет войти на трекер, после превышения количества разрешенных попыток входа (в минутах).';
 
-//
+// TODO: Translate PLST to RUS
 // Permissions List
 //
-$lang['PERMISSIONS_LIST'] = 'Permissions List';
-$lang['AUTH_CONTROL_CATEGORY'] = 'Category Permissions Control';
-$lang['FORUM_AUTH_LIST_EXPLAIN'] = 'This provides a summary of the authorisation levels of each forum. You can edit these permissions, using either a simple or advanced method by clicking on the forum name. Remember that changing the permission level of forums will affect which users can carry out the various operations within them.';
+$lang['PERMISSIONS_LIST'] = 'Список прав доступа';
+$lang['AUTH_CONTROL_CATEGORY'] = 'Права доступа к категориям';
+$lang['FORUM_AUTH_LIST_EXPLAIN'] = 'Этот модуль дает возможность установить права доступа для каждого форума. Вы можете изменить эти права, простым или расширеным способом, нажав на название форума. Помните, что при изменении прав доступа повлияет на пользователей, выполнять различные операции в них.';
 $lang['CAT_AUTH_LIST_EXPLAIN'] = 'This provides a summary of the authorisation levels of each forum within this category. You can edit the permissions of individual forums, using either a simple or advanced method by clicking on the forum name. Alternatively, you can set the permissions for all the forums in this category by using the drop-down menus at the bottom of the page. Remember that changing the permission level of forums will affect which users can carry out the various operations within them.';
-$lang['FORUM_AUTH_LIST_EXPLAIN_ALL'] = 'All users';
-$lang['FORUM_AUTH_LIST_EXPLAIN_REG'] = 'All registered users';
-$lang['FORUM_AUTH_LIST_EXPLAIN_PRIVATE'] = 'Only users granted special permission';
-$lang['FORUM_AUTH_LIST_EXPLAIN_MOD'] = 'Only moderators of this forum';
-$lang['FORUM_AUTH_LIST_EXPLAIN_ADMIN'] = 'Only administrators';
-$lang['FORUM_AUTH_LIST_EXPLAIN_AUTH_VIEW'] = '%s can view this forum';
-$lang['FORUM_AUTH_LIST_EXPLAIN_AUTH_READ'] = '%s can read posts in this forum';
-$lang['FORUM_AUTH_LIST_EXPLAIN_AUTH_POST'] = '%s can post in this forum';
-$lang['FORUM_AUTH_LIST_EXPLAIN_AUTH_REPLY'] = '%s can reply to posts this forum';
-$lang['FORUM_AUTH_LIST_EXPLAIN_AUTH_EDIT'] = '%s can edit posts in this forum';
-$lang['FORUM_AUTH_LIST_EXPLAIN_AUTH_DELETE'] = '%s can delete posts in this forum';
-$lang['FORUM_AUTH_LIST_EXPLAIN_AUTH_STICKY'] = '%s can post sticky topics in this forum';
-$lang['FORUM_AUTH_LIST_EXPLAIN_AUTH_ANNOUNCE'] = '%s can post announcements in this forum';
-$lang['FORUM_AUTH_LIST_EXPLAIN_AUTH_VOTE'] = '%s can vote in polls in this forum';
-$lang['FORUM_AUTH_LIST_EXPLAIN_AUTH_POLLCREATE'] = '%s can create polls in this forum';
-$lang['FORUM_AUTH_LIST_EXPLAIN_AUTH_ATTACHMENTS'] = '%s can post attachments';
-$lang['FORUM_AUTH_LIST_EXPLAIN_AUTH_DOWNLOAD'] = '%s can download attachments';
+$lang['FORUM_AUTH_LIST_EXPLAIN_ALL'] = 'Все пользователи';
+$lang['FORUM_AUTH_LIST_EXPLAIN_REG'] = 'Все зарегистрированые пользователи';
+$lang['FORUM_AUTH_LIST_EXPLAIN_PRIVATE'] = 'Только пользователи со спец правами';
+$lang['FORUM_AUTH_LIST_EXPLAIN_MOD'] = 'Только модераторы этого форума';
+$lang['FORUM_AUTH_LIST_EXPLAIN_ADMIN'] = 'Только администраторы';
+$lang['FORUM_AUTH_LIST_EXPLAIN_AUTH_VIEW'] = '%s может просматривать этот форум';
+$lang['FORUM_AUTH_LIST_EXPLAIN_AUTH_READ'] = '%s может просматривать сообщения в этом форуме';
+$lang['FORUM_AUTH_LIST_EXPLAIN_AUTH_POST'] = '%s может создавать сообщения в этом форуме';
+$lang['FORUM_AUTH_LIST_EXPLAIN_AUTH_REPLY'] = '%s может отвечать на сообщения в этом форуме';
+$lang['FORUM_AUTH_LIST_EXPLAIN_AUTH_EDIT'] = '%s может редактировать сообщения в этом форуме';
+$lang['FORUM_AUTH_LIST_EXPLAIN_AUTH_DELETE'] = '%s может удалять сообщения в этом форуме';
+$lang['FORUM_AUTH_LIST_EXPLAIN_AUTH_STICKY'] = '%s может прикреплять темы в этом форуме';
+$lang['FORUM_AUTH_LIST_EXPLAIN_AUTH_ANNOUNCE'] = '%s может размещать объявления в этом форуме';
+$lang['FORUM_AUTH_LIST_EXPLAIN_AUTH_VOTE'] = '%s может голосовать в опросах этого форума';
+$lang['FORUM_AUTH_LIST_EXPLAIN_AUTH_POLLCREATE'] = '%s может создавать опросы в этом форуме';
+$lang['FORUM_AUTH_LIST_EXPLAIN_AUTH_ATTACHMENTS'] = '%s может прикреплять вложения';
+$lang['FORUM_AUTH_LIST_EXPLAIN_AUTH_DOWNLOAD'] = '%s может скачивать вложения';
 
 //
 // Misc
 //
-$lang['SF_SHOW_ON_INDEX'] = 'Show on main page';
-$lang['SF_PARENT_FORUM'] = 'Parent forum';
-$lang['SF_NO_PARENT'] = 'No parent forum';
-$lang['TEMPLATE'] = 'Template';
-//Misc END
+$lang['SF_SHOW_ON_INDEX'] = 'Показывать на главной';
+$lang['SF_PARENT_FORUM'] = 'Родительский форум';
+$lang['SF_NO_PARENT'] = 'Нет родительского форума';
+$lang['TEMPLATE'] = 'Шаблон';
 
 //
-// Reports (need to translate!)
+// Reports
 //
-$lang['REPORT_CONFIG_EXPLAIN'] = 'On this page you can change the general configuration of the report feature.';
-$lang['REPORT_SUBJECT_AUTH'] = 'Individual permissions';
-$lang['REPORT_SUBJECT_AUTH_EXPLAIN'] = 'If this setting is enabled, moderators can only view reports they can edit. For example a post report will be hidden if the user isn\'t a moderator of the forum the post belongs to.';
-$lang['REPORT_MODULES_CACHE'] = 'Cache modules in a file';
-$lang['REPORT_MODULES_CACHE_EXPLAIN'] = 'Note: The cache directory must be set to <em>CHMOD 777</em> (full write permissions).';
-$lang['REPORT_NOTIFY'] = 'Email notification';
-$lang['REPORT_NOTIFY_CHANGE'] = 'on status changes and new reports';
-$lang['REPORT_NOTIFY_NEW'] = 'on new reports';
-$lang['REPORT_LIST_ADMIN'] = 'Admin-only report list';
-$lang['REPORT_NEW_WINDOW'] = 'Open subjects in a new window';
-$lang['REPORT_NEW_WINDOW_EXPLAIN'] = 'This setting also affects direct links to the reports at the view topic page.';
-$lang['REPORT_CONFIG_UPDATED'] = 'The configuration was updated.';
-$lang['CLICK_RETURN_REPORT_CONFIG'] = 'Click %sHere%s to return to the configuration.';
+$lang['REPORT_CONFIG_EXPLAIN'] = 'На этой странице находятся основные настройки модуля "Сообщения о нарушениях".';
+$lang['REPORT_SUBJECT_AUTH'] = 'Индивидуальные права доступа';
+$lang['REPORT_SUBJECT_AUTH_EXPLAIN'] = 'Если опция включена, то модераторы смогут просматривать и редактировать только сообщения о нарушениях в модерируемых ими форумах.';
+$lang['REPORT_MODULES_CACHE'] = 'Кэшировать модули в файлах';
+$lang['REPORT_MODULES_CACHE_EXPLAIN'] = 'Замечание: права доступа к директории cache в режим "полный доступ на запись и чтение" (<em>CHMOD 777</em>).';
+$lang['REPORT_NOTIFY'] = 'Уведомления по e-mail';
+$lang['REPORT_NOTIFY_CHANGE'] = 'об изменениях статусов и новых сообщениях';
+$lang['REPORT_NOTIFY_NEW'] = 'о новых сообщениях';
+$lang['REPORT_LIST_ADMIN'] = 'Список сообщений доступен только администратору';
+$lang['REPORT_NEW_WINDOW'] = 'Открывать страницу с нарушением в новом окне';
+$lang['REPORT_NEW_WINDOW_EXPLAIN'] = 'Эта опция так же влияет н вид ссылок к форме отправки сообщения о нарушении на страницах просмотра тем.';
+$lang['REPORT_CONFIG_UPDATED'] = 'Конфигурция обновлена.';
+$lang['CLICK_RETURN_REPORT_CONFIG'] = '%sНажмите%s для возврата к настройкам модуля.';
 
-$lang['MODULES_REASONS'] = 'Modules and Reasons';
-$lang['REPORT_ADMIN_EXPLAIN'] = 'On this page you can install new report modules and edit or uninstall currently installed modules. In addition you can set up predefined reasons for every report module.';
-$lang['REPORT_MODULE'] = 'Report module';
-$lang['INSTALLED_MODULES'] = 'Installed modules';
-$lang['NO_MODULES_INSTALLED'] = 'No modules installed';
-$lang['REASONS'] = 'Reasons (%d)';
-$lang['SYNC'] = 'Sync';
-$lang['UNINSTALL'] = 'Uninstall';
-$lang['INSTALL2'] = 'Install';
-$lang['INACTIVE_MODULES'] = 'Inactive modules';
-$lang['NO_MODULES_INACTIVE'] = 'No inactive modules';
-$lang['REPORT_MODULE_NOT_EXISTS'] = 'The selected module doesn\'t exist.';
-$lang['CLICK_RETURN_REPORT_ADMIN'] = 'Click %sHere%s to return to the Modules &amp; Reasons administration.';
+$lang['MODULES_REASONS'] = 'Модули и Причины';
+$lang['REPORT_ADMIN_EXPLAIN'] = 'На этой странице вы можете установить новый модуль, изменить настройки модуля или удалить уже установленный модуль. Так же здесь вы можете задать установить Причины написания сообщений о нарушении для каждого модуля.';
+$lang['REPORT_MODULE'] = 'Модуль Сообщений о нарушении';
+$lang['INSTALLED_MODULES'] = 'Установленные модули';
+$lang['NO_MODULES_INSTALLED'] = 'Нет установленных модулей';
+$lang['REASONS'] = 'Причины (%d)';
+$lang['SYNC'] = 'Синхронизировать';
+$lang['UNINSTALL'] = 'Удалить';
+$lang['INSTALL2'] = 'Установить';
+$lang['INACTIVE_MODULES'] = 'Неактивные модули';
+$lang['NO_MODULES_INACTIVE'] = 'Нет неактивных модулей';
+$lang['REPORT_MODULE_NOT_EXISTS'] = 'Выбранный модель не существует.';
+$lang['CLICK_RETURN_REPORT_ADMIN'] = '%sНажмите%s для возврата к настройкам Модулей &amp; Причин.';
 
-$lang['BACK_MODULES'] = 'Back to the modules';
-$lang['REPORT_REASON'] = 'Report reason';
-$lang['NO_REASONS'] = 'No reasons for this module';
-$lang['ADD_REASON'] = 'Add reason';
-$lang['EDIT_REASON'] = 'Edit reason';
-$lang['REASON_DESC_EXPLAIN'] = 'If the description matches with a language variable, the variable will be used instead.';
-$lang['REASON_DESC_EMPTY'] = 'You have to enter a report reason.';
-$lang['REPORT_REASON_ADDED'] = 'The report reason was added.';
-$lang['REPORT_REASON_EDITED'] = 'The report reason was edited.';
-$lang['DELETE_REASON'] = 'Delete reason';
-$lang['DELETE_REPORT_REASON_EXPLAIN'] = 'Are you sure you want to delete the selected report reason?';
-$lang['REPORT_REASON_DELETED'] = 'The report reason was deleted.';
-$lang['REPORT_REASON_NOT_EXISTS'] = 'The selected report reason doesn\'t exist.';
-$lang['CLICK_RETURN_REPORT_REASONS'] = 'Click %sHere%s to return to the report reasons administration.';
+$lang['BACK_MODULES'] = 'Назад к модулям';
+$lang['REPORT_REASON'] = 'Причина написания сообщения';
+$lang['NO_REASONS'] = 'Нет определенных Причин для этого модуля';
+$lang['ADD_REASON'] = 'Добавить Причину';
+$lang['EDIT_REASON'] = 'Редактировать Причину';
+$lang['REASON_DESC_EXPLAIN'] = 'Если название совпадет с языковой переменно, то будет использована переменная.';
+$lang['REASON_DESC_EMPTY'] = 'Нобходимо ввести текст Причины.';
+$lang['REPORT_REASON_ADDED'] = 'Причина добавлена.';
+$lang['REPORT_REASON_EDITED'] = 'Причина отредактирована.';
+$lang['DELETE_REASON'] = 'Удалить Причину';
+$lang['DELETE_REPORT_REASON_EXPLAIN'] = 'Вы уверены, что хотите удалить выбранную Причину?';
+$lang['REPORT_REASON_DELETED'] = 'Причина удалена.';
+$lang['REPORT_REASON_NOT_EXISTS'] = 'Выбранная Причина не существует.';
+$lang['CLICK_RETURN_REPORT_REASONS'] = '%sНажмите%s для возврата к настройкам Причин сообщений о нарушениях.';
 
-$lang['REPORT_MODULE_SYNCED'] = 'The module was synced.';
+$lang['REPORT_MODULE_SYNCED'] = 'Модуль синхронизирован.';
 
-$lang['UNINSTALL_REPORT_MODULE'] = 'Uninstall module';
-$lang['UNINSTALL_REPORT_MODULE_EXPLAIN'] = 'Are you sure you want to uninstall the selected report module? <br />Note: All reports in the module will be deleted, too.';
-$lang['REPORT_MODULE_UNINSTALLED'] = 'The module was uninstalled.';
+$lang['UNINSTALL_REPORT_MODULE'] = 'Удалить модуль';
+$lang['UNINSTALL_REPORT_MODULE_EXPLAIN'] = 'Вы уверены, что хотите удалить выбранный модуль? <br />Замечание: все сообщения для этого модуля также будут удалены.';
+$lang['REPORT_MODULE_UNINSTALLED'] = 'Модуль удален.';
 
-$lang['INSTALL_REPORT_MODULE'] = 'Install module';
-$lang['EDIT_REPORT_MODULE'] = 'Edit module';
-$lang['REPORT_PRUNE'] = 'Prune reports';
-$lang['REPORT_PRUNE_EXPLAIN'] = 'Cleared reports and reports marked for deletion will be deleted automatically after <var>x</var> days. Set to <em>zero</em> to disable the feature.';
-$lang['REPORT_PERMISSIONS'] = 'Report permissions';
-$lang['WRITE'] = 'Write';
+$lang['INSTALL_REPORT_MODULE'] = 'Установить модуль';
+$lang['EDIT_REPORT_MODULE'] = 'Редактировать настройки модуля';
+$lang['REPORT_PRUNE'] = 'Очистить сообщения';
+$lang['REPORT_PRUNE_EXPLAIN'] = 'Зыкрытые и отмеченные для удаления сообщения автоматически будут удалены через  <var>x</var> дней. Значение <em>zero</em> отключает автоматическую чистку.';
+$lang['REPORT_PERMISSIONS'] = 'Права доступа';
+$lang['WRITE'] = 'Написать';
 $lang['REPORT_AUTH'] = array(
-	REPORT_AUTH_USER => 'Users',
-	REPORT_AUTH_MOD => 'Moderators',
-	REPORT_AUTH_CONFIRM => 'Moderators (after confirmation)',
-	REPORT_AUTH_ADMIN => 'Administrators');
-$lang['REPORT_AUTH_NOTIFY_EXPLAIN'] = 'Moderators will only be notified if they can view and edit the report.';
-$lang['REPORT_AUTH_DELETE_EXPLAIN'] = 'If you select <em>Moderators (after confirmation)</em>, deletions have to be confirmed by an administrator.';
-$lang['REPORT_MODULE_INSTALLED'] = 'The module was installed.';
-$lang['REPORT_MODULE_EDITED'] = 'The module was edited.';
-$lang['REPORTS'] = 'Reports';
+	REPORT_AUTH_USER => 'Пользователи',
+	REPORT_AUTH_MOD => 'Модераторы',
+	REPORT_AUTH_CONFIRM => 'Модераторы (после подтверждения)',
+	REPORT_AUTH_ADMIN => 'Администраторы');
+$lang['REPORT_AUTH_NOTIFY_EXPLAIN'] = 'Модераторы будут уведомлены только, если они могут просматривать и редактировать сообщение.';
+$lang['REPORT_AUTH_DELETE_EXPLAIN'] = 'Если выбрано <em>Модераторы (после подтверждения)</em>, удаление сообщения должно быть подтверждено администратором.';
+$lang['REPORT_MODULE_INSTALLED'] = 'Модуль удален.';
+$lang['REPORT_MODULE_EDITED'] = 'Модуль отредактирован.';
+$lang['REPORTS'] = 'Нарушения';
 //
 // Reports [END]
 //
-
