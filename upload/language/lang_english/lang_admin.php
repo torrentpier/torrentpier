@@ -18,7 +18,7 @@ $lang['WORD_CENSOR'] = 'Word Censors';
 $lang['EXPORT'] = 'Export';
 $lang['CREATE_NEW'] = 'Create';
 $lang['ADD_NEW'] = 'Add';
-$lang['FLAGS'] = 'Flags';
+$lang['CRON'] = 'Task Scheduler (Cron)';
 $lang['FORUM_CONFIG'] = 'Forum settings';
 $lang['TRACKER_CONFIG'] = 'Tracker settings';
 $lang['RELEASE_TEMPLATES'] = 'Release Templates';
@@ -32,6 +32,7 @@ $lang['ADMIN'] = 'Administration';
 $lang['MAIN_INDEX'] = 'Forum Index';
 $lang['FORUM_STATS'] = 'Forum Statistics';
 $lang['ADMIN_INDEX'] = 'Admin Index';
+$lang['CREATE_PROFILE'] = 'Create profile';
 
 $lang['TP_VERSION']      = 'TorrenPier version';
 $lang['TP_RELEASE_DATE'] = 'Release date';
@@ -593,7 +594,7 @@ $lang['REPORT_NEW_WINDOW_EXPLAIN'] = 'This setting also affects direct links to 
 $lang['REPORT_CONFIG_UPDATED'] = 'The configuration was updated.';
 $lang['CLICK_RETURN_REPORT_CONFIG'] = 'Click %sHere%s to return to the configuration.';
 
-$lang['MODULES_REASONS'] = 'Modules &amp; Reasons';
+$lang['MODULES_REASONS'] = 'Modules and Reasons';
 $lang['REPORT_ADMIN_EXPLAIN'] = 'On this page you can install new report modules and edit or uninstall currently installed modules. In addition you can set up predefined reasons for every report module.';
 $lang['REPORT_MODULE'] = 'Report module';
 $lang['INSTALLED_MODULES'] = 'Installed modules';

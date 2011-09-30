@@ -80,7 +80,24 @@ function validate_cron_post($cron_arr) {
 }
 
 function insert_cron_job($cron_arr)
-{
+{	
+	$row = DB()->fetch_row("SELECT cron_title, cron_script FROM ". BB_CRON ." WHERE cron_title = '". $_POST['cron_title'] ."' or cron_script = '". $_POST['cron_script'] ."' ");
+	
+    if($row)
+	{
+	    global $lang;
+		
+		if ($_POST['cron_script'] == $row['cron_script'])
+		{
+		    $langmode = $lang['SCRIPT_DUPLICATE'];
+		}
+		else $langmode = $lang['TITLE_DUPLICATE'];
+		
+		$message = $langmode . "<br /><br />" . sprintf($lang['CLICK_RETURN_JOBS_ADDED'], "<a href=\"javascript:history.back(-1)\">", "</a>") . "<br /><br />" . sprintf($lang['CLICK_RETURN_JOBS'], "<a href=\"" . append_sid("admin_cron.php?mode=list") . "\">", "</a>") . "<br /><br />" . sprintf($lang['CLICK_RETURN_ADMIN_INDEX'], "<a href=\"" . append_sid("index.php?pane=right") . "\">", "</a>");
+	    
+		message_die(GENERAL_MESSAGE, $message);
+	}
+	
 	$cron_active = $cron_arr['cron_active'];
 	$cron_title = $cron_arr['cron_title'];
 	$cron_script = $cron_arr['cron_script'];
@@ -96,7 +113,8 @@ function insert_cron_job($cron_arr)
 	$log_sql_queries = $cron_arr['log_sql_queries'];
 	$disable_board = $cron_arr['disable_board'];
 	$run_counter = $cron_arr['run_counter'];
-	DB()->query("INSERT INTO ".BB_CRON." (cron_active, cron_title, cron_script, schedule, run_day, run_time, run_order, last_run, next_run, run_interval, log_enabled, log_file, log_sql_queries, disable_board, run_counter) VALUES (
+	
+	DB()->query("INSERT INTO ". BB_CRON ." (cron_active, cron_title, cron_script, schedule, run_day, run_time, run_order, last_run, next_run, run_interval, log_enabled, log_file, log_sql_queries, disable_board, run_counter) VALUES (
 	$cron_active, '$cron_title', '$cron_script', '$schedule', '$run_day', '$run_time', '$run_order', '$last_run', '$next_run', '$run_interval', $log_enabled, '$log_file', $log_sql_queries, $disable_board, '$run_counter')");
 }
 
@@ -137,23 +155,4 @@ function update_cron_job($cron_arr)
 		run_counter = '$run_counter'
 	WHERE cron_id = $cron_id
 	");
-}
-
-function update_config_php($config_option_name, $new_value) {
-	$file = file(BB_ROOT.'config.php');
-	$i = 0;
-	$count = count($file);
-	while ($i<$count) {
-		if (preg_match("/$config_option_name/i", $file[$i])) {
-			$line = explode(';', $file[$i]); //explode comments
-			$line[0] = '$bb_cfg[\''.$config_option_name.'\'] = '.$new_value.''; //assign a new value
-			$file[$i] = implode(';', $line); //build a new line
-
-			$fp = fopen(BB_ROOT."config.php","w");
-			fputs($fp,implode("",$file));
-			fclose($fp);
-		}
-	$i++;
-	}
-	return;
 }

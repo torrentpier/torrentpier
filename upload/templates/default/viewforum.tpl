@@ -308,7 +308,6 @@ td.topic_id { cursor: pointer; }
 </table>
 
 <!-- IF SHOW_SUBFORUMS -->
-
 <table class="forumline forum">
 <col class="row1">
 <col class="row1" width="60%">
@@ -342,7 +341,7 @@ td.topic_id { cursor: pointer; }
 				</h6>
 				<p class="small" style="margin-top:4px;">
 					{f.last.LAST_POST_TIME}
-					by
+					&middot;
 					{f.last.LAST_POST_USER}
 				</p>
 
@@ -385,19 +384,6 @@ td.topic_id { cursor: pointer; }
 		<td class="small nowrap" style="padding: 0 0 0 3px;">
 			<form id="tpp" action="{PAGE_URL_TPP}" method="post">{SELECT_TPP}</form>
 		</td>
-		<!-- IF TORRENTS -->
-		<td class="small nowrap" style="padding: 0 0 0 6px;">{L_STATUS}:</td>
-		<td class="small nowrap" style="padding: 0 0 0 3px;">{SELECT_TST}</td>
-		<!-- ENDIF -->
-		<td class="small nowrap" style="padding: 0 0 0 3px;">&nbsp;<input id="tst-submit-btn" type="button" class="bold" value="&raquo;" style="width: 30px;" onclick="mod_goto(); return false;" /></td>
-		<script type="text/javascript">
-		function mod_goto(){
-			window.location = '{MOD_URL}' +'&tpp='+ $('#tpp').val() <!-- IF TORRENTS -->+'&tst='+ $('#tst').val()<!-- ENDIF --> +'&mod=1';
-		}
-		$(function(){
-			$('#tst').bind('change', function(){ $('#tst-submit-btn').attr({disabled: 1}); mod_goto(); });
-		});
-		</script>
 		<!-- ENDIF / AUTH_MOD -->
 
 		<td class="small bold nowrap tRight w100">
@@ -428,7 +414,6 @@ td.topic_id { cursor: pointer; }
 </table>
 
 <!-- IF TORRENTS -->
-
 <table class="forumline forum" id="forum-table">
 <col class="row1">
 <col class="row1">
@@ -465,9 +450,11 @@ td.topic_id { cursor: pointer; }
 		<!-- ELSE -->
 			{t.TOR_TYPE}<a id="tt-{t.TOPIC_ID}" href="{TOPIC_URL}{t.HREF_TOPIC_ID}" class="torTopic tt-text"><b>{t.TOPIC_TITLE}</b></a>
 		<!-- ENDIF -->
+		<!-- IF t.PAGINATION --><span class="topicPG">[{ICON_GOTOPOST}{L_GOTO_SHORT} {t.PAGINATION} ]</span><!-- ENDIF -->
 	</div>
 	<div class="topicAuthor nowrap" style="padding-top: 2px;">
 		{t.TOPIC_AUTHOR}
+	</div>	
 	</td>
 
 	<td class="tCenter nowrap" style="padding: 2px 4px;">
@@ -615,7 +602,7 @@ td.topic_id { cursor: pointer; }
 <div class="bottom_info">
 
 <!-- IF PAGINATION -->
-<div class="nav" id="pagination">
+<div class="nav">
 	<p style="float: left">{PAGE_NUMBER}</p>
 	<p style="float: right">{PAGINATION}</p>
 	<div class="clear"></div>

@@ -66,7 +66,7 @@ switch($this->request['type'])
 
 		// Use trim to get rid of spaces placed there by MS-SQL 2000
 		$quote_username = (trim($post['post_username']) != '') ? $post['post_username'] : get_username($post['poster_id']);
-		$message = '[quote="'. $quote_username .'"]'. $post['post_text'] .'[/quote]';
+		$message = "[quote=\"". $quote_username ."\"]". $post['post_text'] ."[/quote]\n";
 		// hide user passkey
 		$message = preg_replace('#(?<=\?uk=)[a-zA-Z0-9]{10}(?=&)#', 'passkey', $message);
 		// hide sid
@@ -77,9 +77,9 @@ switch($this->request['type'])
 			$message = (!empty($message)) ? preg_replace($orig_word, $replace_word, $message) : '';
 		}
 
-		if($post['post_attachment'] || $post['topic_first_post_id'])
+		if($post['post_id'] == $post['topic_first_post_id'])
 		{
-		    $message = '[quote]'. $post['topic_title'] .'[/quote]';
+		    $message = "[quote]". $post['topic_title'] ."[/quote]\n";
 		}
 		if(mb_strlen($message, 'UTF-8') > 1000)
 		{

@@ -1,105 +1,133 @@
-<SCRIPT language=JavaScript title="check">
-function CheckAll(Element,Name){
-if(document.getElementById) {
-	thisCheckBoxes = Element.parentNode.parentNode.parentNode.getElementsByTagName('input');
-	for (i = 1; i < thisCheckBoxes.length; i++){
-		if (thisCheckBoxes[i].name == Name){
-			thisCheckBoxes[i].checked = Element.checked;
-			Colorize(document.getElementById(thisCheckBoxes[i].id.replace('cb','tr')), thisCheckBoxes[i]);
-		}
-	}
-	}
-}
+<script type="text/javascript">
+$(document).ready(function() {
+    $("#check_all").click(function () {
+        if (!$("#check_all").is(":checked"))
+            $(".checkbox").removeAttr("checked");
+        else 
+            $(".checkbox").attr("checked","checked");
+    });
+});
+</script>
 
-function Colorize(Element, CBElement){
-if(document.getElementById) {
-	if(Element && CBElement){
-		Element.className = ( CBElement.checked ? 'selected' : 'default' );
-	}
-}
-}
+<style type="text/css">
+#cron_true, #cron_false { width: 95%; }
+#cron_true td { background: #d9facb; padding: 8px 8px; color: #286e0f; }
+#cron_false td { background: #eaeadf; padding: 8px 8px; color: #286e0f; }
+table.cron_true { width: 100%; border: 2px solid #169900; background: #60f950; margin: 0 auto; }
+table.cron_false { width: 100%; border: 2px solid #796405; background: #d7b101; margin: 0 auto; }
+tr.hl-tr:hover td { background-color: #CFC !important; }
+</style>
 
-function CheckRadioTR(Element){
-if(document.getElementById) {
-	CheckTR(Element);
-	thisTRs = Element.parentNode.getElementsByTagName('tr');
-	for (i = 0; i < thisTRs.length; i++){
-		if (thisTRs[i].id != Element.id && thisTRs[i].className != 'header') thisTRs[i].className = 'default';
-	}
-}
-}
-
-function CheckTR(Element){
-if(document.getElementById) {
-	thisCheckbox = document.getElementById(Element.id.replace('tr','cb'));
-	thisCheckbox.checked = !thisCheckbox.checked;
-	Colorize(Element, thisCheckbox);
-}
-}
-
-function CheckCB(Element){
-if(document.getElementById) {
-	if(document.getElementById(Element.id.replace('cb','tr'))){Element.checked = !Element.checked;}
-}
-}
-</SCRIPT>
 <!-- IF TPL_CRON_LIST -->
 <!--========================================================================-->
 <form action="{S_CRON_ACTION}" method="post">
 <input class="text" type="hidden" name="mode" value="{S_MODE}" />
 
+<table cellpadding="2" cellspacing="0" width="100%">
+<tr>
+	<td width="80%">
+		<h1>{L_CRON}</h1>
+
+        <a href="admin_cron.php?mode=add">{L_CRON_EDIT_HEAD_ADD}</a>
+	</td>
+	<td width="20%" class="vBottom tRight nowrap med">
+	<!-- IF TPL_CRON_LIST -->
+        <table id="cron_<!-- IF CRON_ENABLED -->true<!-- ELSE -->false<!-- ENDIF -->" class="cron_<!-- IF CRON_ENABLED -->true<!-- ELSE -->false<!-- ENDIF -->">
+	        <tr>
+			    <td>{L_CRON_ENABLED}</td>
+	            <td>
+				    <label><input type="radio" name="cron_enabled" value="1" <!-- IF CRON_ENABLED -->checked="checked"<!-- ENDIF --> />{L_YES}</label>&nbsp;&nbsp;
+					<label><input type="radio" name="cron_enabled" value="0" <!-- IF not CRON_ENABLED -->checked="checked"<!-- ENDIF --> />{L_NO}</label>
+				</td>
+				<td>{L_CRON_CHECK_INTERVAL}</td>
+	            <td>
+				    <input class="post" type="text" size="10" maxlength="255" name="cron_check_interval" value="{CRON_CHECK_INTERVAL}" />
+                </td>
+				<td>
+				    <input type="submit" name="submit" value="{L_SUBMIT}" class="mainoption" />	
+                </td>
+			</tr>
+        </table>
+	<!-- ELSE IF CRON_RUNNING -->
+        <table id="tor_blocked" class="error">
+	        <tr>
+			    <td>
+				    <p class="error_msg">{L_CRON_WORKS} <a href="admin_cron.php?mode=repair"><b>{L_REPAIR_CRON}</b></a></p>
+				</td>
+			</tr>
+        </table>
+    <!-- ENDIF -->
+	</td>
+</tr>
+</table>
+<br />
+
 <table class="forumline">
 <tr>
-    <td colspan="10" class="catTitle">{L_CRON_LIST}</td>
+    <th colspan="10">{L_CRON_LIST}</th>
 </tr>
-<tr>
-    <th width="5%" nowrap="nowrap"><INPUT onclick="CheckAll(this,'select[]')" type="checkbox"></th>
-    <th width="5%" nowrap="nowrap">{L_CRON_ID}</th>
-    <th width="5%" nowrap="nowrap">{L_CRON_ACTIVE}</th>
-    <th width="30%" nowrap="nowrap" >{L_CRON_TITLE}</th>
-    <th width="20%" nowrap="nowrap">{L_CRON_SCRIPT}</th>
-    <th width="5%" nowrap="nowrap">{L_CRON_SCHEDULE}</th>
-    <th width="5%" nowrap="nowrap">{L_CRON_LAST_RUN}</th>
-    <th width="5%" nowrap="nowrap">{L_CRON_NEXT_RUN}</th>
-    <th width="1%" nowrap="nowrap">{L_CRON_RUN_COUNT}</th>
-    <th width="10%" nowrap="nowrap">{L_CRON_MANAGE}</th>
+
+<tr class="row3 med tCenter">
+    <td><input type="checkbox" id="check_all"></td>
+    <td>{L_CRON_ID}</td>
+    <td>{L_CRON_ACTIVE}</td>
+    <td>{L_CRON_TITLE}</td>
+    <td>{L_CRON_SCRIPT}</td>
+    <td>{L_CRON_SCHEDULE}</td>
+    <td>{L_CRON_LAST_RUN}</td>
+    <td>{L_CRON_NEXT_RUN}</td>
+    <td>{L_CRON_RUN_COUNT}</td>
+    <td>{L_CRON_MANAGE}</td>
 </tr>
-    {LIST}
+
+<!-- BEGIN list -->
+<tr class="{list.ROW_CLASS} hl-tr">
+	<td align="center"><input type="checkbox" name="select[]" class="checkbox" value="{list.CRON_ID}"></td>
+	<td nowrap="nowrap" align="center">{list.CRON_ID}</td>
+	<td nowrap="nowrap" align="center">{list.CRON_ACTIVE}</td>
+	<td nowrap="nowrap" align="left">{list.CRON_TITLE}</td>
+	<td nowrap="nowrap" align="left">{list.CRON_SCRIPT}</td>
+	<td nowrap="nowrap" class="med tCenter">{list.SCHEDULE}</td>
+	<td nowrap="nowrap" align="center">{list.LAST_RUN}</td>
+	<td nowrap="nowrap" align="center">{list.NEXT_RUN}</td>
+	<td nowrap="nowrap" align="center"><font color="#505050"><b><span class="leechmed">{list.RUN_COUNT}</span></b></font></td>
+	<td nowrap="nowrap" align="center">
+		<a href="admin_cron.php?mode=run&id={list.CRON_ID}"><img src="../images/icon_sync.gif" alt="[Run]" title="{L_CRON_RUN}" /></a>
+		<a href="admin_cron.php?mode=edit&id={list.CRON_ID}"><img src="../images/icon_edit.gif" alt="[Edit]" title="{L_CRON_EDIT_HEAD_EDIT}" /></a>
+		<a href="admin_cron.php?mode=delete&id={list.CRON_ID}"><img src="../images/icon_delete.gif" alt="[Del]" title="{L_CRON_DEL}" /></a>
+	</td>
+</tr>
+<!-- END list -->
 </table>
 
 <table class="forumline">
 <tr>
-<td colspan="2" class="catBottom">
-	{L_WITH_SELECTED}
-	<select name="cron_action" id="cron_select" >
-		<option value="" selected="selected" class="select-action">&raquo; {L_NOTHING}</option>
-		<option value="run">{L_CRON_RUN}</option>
-		<option value="delete">{L_CRON_DEL}</option>
-		<option value="disable">{L_CRON_DISABLE}</option>
-		<option value="enable">{L_CRON_ENABLE}</option>
-	</select>
-	<label for="confirm">&nbsp;<input onclick="toggle_disabled('send', this.checked)" id="confirm" type="checkbox" name="confirm" value="1" /></label>
-	<input type="submit" name="submit" id="send" value="{L_SUBMIT}" class="mainoption" disabled="disabled" />&nbsp;&nbsp;	
-</td>
+    <td colspan="2" class="catBottom">
+	    {L_WITH_SELECTED}
+	    <select name="cron_action" id="cron_select" >
+		    <option value="" selected="selected" class="select-action">&raquo; {L_NOTHING}</option>
+		    <option value="run">{L_CRON_RUN}</option>
+		    <option value="delete">{L_CRON_DEL}</option>
+		    <option value="disable">{L_CRON_DISABLE}</option>
+		    <option value="enable">{L_CRON_ENABLE}</option>
+	    </select>
+	    <label><input onclick="toggle_disabled('send', this.checked)" type="checkbox" name="confirm" value="1" /></label>&nbsp;
+	    <input type="submit" name="submit" id="send" value="{L_SUBMIT}" class="mainoption" disabled="disabled" />	
+    </td>
 </tr>
 </table>
 </form>
-<br />
-<center>
-<a href="admin_cron.php?mode=run"><b>{L_RUN_MAIN_CRON}</b></a> &middot;
-<a href="admin_cron.php?mode=add"><b>{L_ADD_JOB}</b></a>
-</center>
-{CRON_ACTION}
-<!-- IF CRON_RUNNING -->
-<center><b>{L_CRON_WORKS}
-<a href="admin_cron.php?mode=repair">{L_REPAIR_CRON}</b></a></center>
-<!-- ENDIF / CRON_RUNNING -->
 <br />
 <!--========================================================================-->
 <!-- ENDIF / TPL_CRON_LIST -->
 
 <!-- IF TPL_CRON_EDIT -->
 <h1>{L_CRON_EDIT_HEAD}</h1>
+
+
+<a href="admin_cron.php?mode=list">{L_CRON_LIST}</a>
+<br /><br />
+
 <form action="{S_CRON_ACTION}" method="post">
 <input class="text" type="hidden" name="mode" value="{S_MODE}" />
 
@@ -114,8 +142,14 @@ if(document.getElementById) {
 	<td><input class="text" type="hidden" size="30" maxlength="255" name="cron_id" value="{CRON_ID}" /> <b>{CRON_ID}</b></td>
 </tr>
 <tr>
-	<td><h4>{L_CRON_ACTIVE}</h4><h6>{L_CRON_ACTIVE_EXPL}</h6></td>
-	<td><label for="cron_active1"><input type="radio" name="cron_active" id="cron_active1" value="1" {CRON_ACTIVE_YES} /> {L_CRON_ACTIVE_YES}&nbsp;</label><label for="cron_active2">&nbsp;<input type="radio" name="cron_active" id="cron_active2" value="0" {CRON_ACTIVE_NO} /> {L_CRON_ACTIVE_NO} &nbsp;</label></td>
+	<td>
+	    <h4>{L_CRON_ACTIVE}</h4>
+		<h6>{L_CRON_ACTIVE_EXPL}</h6>
+	</td>
+	<td>
+	    <label><input type="radio" name="cron_active" value="1" <!-- IF CRON_ACTIVE -->checked="checked"<!-- ENDIF --> />{L_YES}</label>&nbsp;&nbsp;
+	    <label><input type="radio" name="cron_active" value="0" <!-- IF not CRON_ACTIVE -->checked="checked"<!-- ENDIF --> />{L_NO}</label>
+	</td>
 </tr>
 <tr>
 	<td><h4>{L_CRON_TITLE}</h4></td>
@@ -126,7 +160,7 @@ if(document.getElementById) {
 	<td><input class="post" type="text" size="35" maxlength="255" name="cron_script" value="{CRON_SCRIPT}" /></td>
 </tr>
 <tr>
-	<td><h4>{L_SCHEDULE}</h4></td>
+	<td><h4>{L_CRON_SCHEDULE}</h4></td>
 	<td>{SCHEDULE}</td>
 </tr>
 <tr>
@@ -155,7 +189,10 @@ if(document.getElementById) {
 </tr>
 <tr>
 	<td><h4>{L_LOG_ENABLED}</h4></td>
-	<td><label for="log_enabled1"><input type="radio" name="log_enabled" id="log_enabled1" value="1" {LOG_ENABLED_YES} /> {L_LOG_ENABLED_YES}&nbsp;</label><label for="log_enabled2">&nbsp;<input type="radio" name="log_enabled" id="log_enabled2" value="0" {LOG_ENABLED_NO} /> {L_LOG_ENABLED_NO} &nbsp;</label></td>
+	<td>
+	    <label><input type="radio" name="log_enabled" value="1" <!-- IF LOG_ENABLED -->checked="checked"<!-- ENDIF --> />{L_YES}</label>&nbsp;&nbsp;
+		<label><input type="radio" name="log_enabled" value="0" <!-- IF not LOG_ENABLED -->checked="checked"<!-- ENDIF --> />{L_NO}</label>
+	</td>
 </tr>
 <tr>
 	<td><h4>{L_LOG_FILE}</h4><h6>{L_LOG_FILE_EXPL}</h6></td>
@@ -163,11 +200,17 @@ if(document.getElementById) {
 </tr>
 <tr>
 	<td><h4>{L_LOG_SQL_QUERIES}</h4></td>
-	<td><label for="log_sql_queries1"><input type="radio" name="log_sql_queries" id="log_sql_queries1" value="1" {LOG_SQL_QUERIES_YES} /> {L_LOG_SQL_QUERIES_YES}&nbsp;</label><label for="log_sql_queries2">&nbsp;<input type="radio" name="log_sql_queries" id="log_sql_queries2" value="0" {LOG_SQL_QUERIES_NO} /> {L_LOG_SQL_QUERIES_NO} &nbsp;</label></td>
+	<td>
+	    <label><input type="radio" name="log_sql_queries" value="1" <!-- IF LOG_SQL_QUERIES -->checked="checked"<!-- ENDIF --> />{L_YES}</label>&nbsp;&nbsp;
+		<label><input type="radio" name="log_sql_queries" value="0" <!-- IF not LOG_SQL_QUERIES -->checked="checked"<!-- ENDIF --> />{L_NO}</label>
+	</td>
 </tr>
 <tr>
 	<td><h4>{L_DISABLE_BOARD}</h4><h6>{L_DISABLE_BOARD_EXPL}</h6></td>
-	<td><label for="disable_board1"><input type="radio" name="disable_board" id="disable_board1" value="1" {DISABLE_BOARD_YES} /> {L_DISABLE_BOARD_YES}&nbsp;</label><label for="disable_board2">&nbsp;<input type="radio" name="disable_board" id="disable_board2" value="0" {DISABLE_BOARD_NO} /> {L_DISABLE_BOARD_NO} &nbsp;</label></td>
+	<td>
+	    <label><input type="radio" name="disable_board" value="1" <!-- IF DISABLE_BOARD -->checked="checked"<!-- ENDIF --> />{L_YES}</label>&nbsp;&nbsp;
+		<label><input type="radio" name="disable_board" value="0" <!-- IF not DISABLE_BOARD -->checked="checked"<!-- ENDIF --> />{L_NO}</label>
+	</td>
 </tr>
 <tr>
 	<td><h4>{L_RUN_COUNTER}</h4></td>

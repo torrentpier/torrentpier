@@ -72,16 +72,23 @@ table.forumline { margin: 0 auto; }
 			<a href="{U_CLEAR_TPL_CACHE}">{L_TEMPLATES}</a>&nbsp;
 		</td>
 	</tr>
+	<tr>
 		<td><b>{L_UPDATE}:</b></td>
 		<td>
 			<a href="{U_UPDATE_USER_LEVEL}">{L_USER_LEVELS}</a>&nbsp;
 		</td>
 	</tr>
-	</tr>
+	<tr>
 		<td><b>{L_SYNCHRONIZE}:</b></td>
 		<td>
 			<a href="{U_SYNC_TOPICS}">{L_TOPICS}</a>,&nbsp;
 			<a href="{U_SYNC_USER_POSTS}">{L_USER_POSTS_COUNT}</a>&nbsp;
+		</td>
+	</tr>
+	<tr>
+		<td><b>{L_ADMIN}:</b></td>
+		<td>
+			<a href="../profile.php?mode=register">{L_CREATE_PROFILE}</a>
 		</td>
 	</tr>
 </table>

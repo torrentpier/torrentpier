@@ -636,6 +636,8 @@ INSERT INTO `bb_config` VALUES ('report_notify', '0');
 INSERT INTO `bb_config` VALUES ('report_list_admin', '0');
 INSERT INTO `bb_config` VALUES ('report_new_window', '0');
 INSERT INTO `bb_config` VALUES ('torrent_pass_private_key', 'вставить_из_конфига_XBTT');
+INSERT INTO `bb_config` VALUES ('cron_enabled', '1');
+INSERT INTO `bb_config` VALUES ('cron_check_interval', '300');
 
 -- --------------------------------------------------------
 
@@ -690,7 +692,6 @@ INSERT INTO `bb_cron` VALUES (18, 1, 'Seeder last seen', 'tr_update_seeder_last_
 INSERT INTO `bb_cron` VALUES (19, 1, 'Captcha', 'captcha_gen_gc.php', 'daily', NULL, '05:00:00', 120, '2008-05-22 19:11:58', '2008-05-23 01:11:58', NULL, 0, '', 0, 0, 3);
 INSERT INTO `bb_cron` VALUES (20, 1, 'Tracker dl-complete count', 'tr_complete_count.php', 'interval', NULL, NULL, 255, '2008-05-22 19:12:01', '2008-05-23 01:12:01', '06:00:00', 0, '', 0, 0, 3);
 INSERT INTO `bb_cron` VALUES (21, 1, 'Cache garbage collector', 'cache_gc.php', 'interval', NULL, NULL, 255, '2008-05-22 19:18:13', '2008-05-22 19:23:13', '00:05:00', 0, '', 0, 0, 24);
-INSERT INTO `bb_cron` VALUES (22, 1, 'Manage Antibroot', 'bb_manage_untrusted.php', 'interval', NULL, NULL, 255, '2008-05-22 19:18:13', '2008-05-22 19:23:13', '00:10:00', 0, '', 0, 0, 24);
 
 -- --------------------------------------------------------
 

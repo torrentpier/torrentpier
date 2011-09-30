@@ -53,8 +53,8 @@ $bb_cfg = $tr_cfg = $page_cfg = array();
 
 // Increase number of revision after update
 $bb_cfg['tp_version'] = '2.1 Stable';
-$bb_cfg['tp_release_state'] = 'R295';
-$bb_cfg['tp_release_date'] = '30-09-2011';
+$bb_cfg['tp_release_state'] = 'R296';
+$bb_cfg['tp_release_date'] = '01-10-2011';
 
 // Database
 $charset  = 'utf8';
@@ -373,10 +373,6 @@ define('BB_ENABLED',   TRIGGERS_DIR .'$on');
 define('BB_DISABLED',  TRIGGERS_DIR .'$off');
 define('CRON_ALLOWED', TRIGGERS_DIR .'cron_allowed');
 define('CRON_RUNNING', TRIGGERS_DIR .'cron_running');
-
-// Cron
-$bb_cfg['cron_enabled']        = true;             // При отвязки крона старт производить из cron.php
-$bb_cfg['cron_check_interval'] = 300;              // sec
 
 // News
 $bb_cfg['show_latest_news']     = true;
