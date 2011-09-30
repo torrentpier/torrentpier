@@ -440,7 +440,7 @@ $template->assign_vars(array(
 	'ONLY_NEW_TOPICS_ON'  => ($only_new == ONLY_NEW_TOPICS),
 
 	'TITLE_MATCH'         => htmlCHR($title_match),
-	'SELECT_TPP'          => ($select_tpp) ? build_select('tpp', $select_tpp, $topics_per_page) : '',
+	'SELECT_TPP'          => ($select_tpp) ? build_select('tpp', $select_tpp, $topics_per_page, null, null, 'onchange="$(\'#tpp\').submit();"') : '',
 	'T_POST_NEW_TOPIC'    => ($forum_data['forum_status'] == FORUM_LOCKED) ? $lang['FORUM_LOCKED'] : $lang['POST_NEW_TOPIC'],
 	'S_AUTH_LIST'         => $u_auth,
 	'U_VIEW_FORUM'        => FORUM_URL . $forum_id,
@@ -572,6 +572,7 @@ else
 
 $template->assign_vars(array(
 	'PAGE_URL'         => $pg_url,
+	'PAGE_URL_TPP'     => url_arg($pg_url, 'tpp', null),
 	'FOUND_TOPICS'     => $found_topics,
 
 	'AUTH_MOD'         => $is_auth['auth_mod'],

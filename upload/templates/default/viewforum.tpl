@@ -382,20 +382,9 @@ td.topic_id { cursor: pointer; }
 		</td>
 		<td class="med" style="padding: 0 4px 2px 4px;">|</td>
 		<td class="small nowrap" style="padding: 0;">{L_TOPICS_PER_PAGE}:</td>
-		<td class="small nowrap" style="padding: 0 0 0 3px;">{SELECT_TPP}</td>
-		<!-- IF TORRENTS -->
-		<td class="small nowrap" style="padding: 0 0 0 6px;">{L_STATUS}:</td>
-		<td class="small nowrap" style="padding: 0 0 0 3px;">{SELECT_TST}</td>
-		<!-- ENDIF -->
-		<td class="small nowrap" style="padding: 0 0 0 3px;">&nbsp;<input id="tst-submit-btn" type="button" class="bold" value="&raquo;" style="width: 30px;" onclick="mod_goto(); return false;" /></td>
-		<script type="text/javascript">
-		function mod_goto(){
-			window.location = '{MOD_URL}' +'&tpp='+ $('#tpp').val() <!-- IF TORRENTS -->+'&tst='+ $('#tst').val()<!-- ENDIF --> +'&mod=1';
-		}
-		$(function(){
-			$('#tst').bind('change', function(){ $('#tst-submit-btn').attr({disabled: 1}); mod_goto(); });
-		});
-		</script>
+		<td class="small nowrap" style="padding: 0 0 0 3px;">
+			<form id="tpp" action="{PAGE_URL_TPP}" method="post">{SELECT_TPP}</form>
+		</td>
 		<!-- ENDIF / AUTH_MOD -->
 
 		<td class="small bold nowrap tRight w100">

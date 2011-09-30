@@ -15,6 +15,6 @@ foreach ($gc_cache as $cache_name)
 	if (method_exists(CACHE($cache_name), 'gc'))
 	{
 		$changes = CACHE($cache_name)->gc();
-		$cron_runtime_log .= date('Y-m-d H:i:s') ." -- tr -- $changes rows deleted\n";
+		$cron_runtime_log = date('Y-m-d H:i:s') ." -- tr -- $changes rows deleted\n";
 	}
 }

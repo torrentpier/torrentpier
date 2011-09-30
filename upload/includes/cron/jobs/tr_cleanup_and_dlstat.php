@@ -2,6 +2,8 @@
 
 if (!defined('BB_ROOT')) die(basename(__FILE__));
 
+global $tr_cfg;
+
 $releaser = DL_STATUS_RELEASER;
 
 if($bb_cfg['announce_type'] != 'xbt')

@@ -53,8 +53,8 @@ $bb_cfg = $tr_cfg = $page_cfg = array();
 
 // Increase number of revision after update
 $bb_cfg['tp_version'] = '2.1 Stable';
-$bb_cfg['tp_release_state'] = 'R293';
-$bb_cfg['tp_release_date'] = '20-09-2011';
+$bb_cfg['tp_release_state'] = 'R294';
+$bb_cfg['tp_release_date'] = '30-09-2011';
 
 // Database
 $charset  = 'utf8';
@@ -508,7 +508,9 @@ $bb_cfg['copyright_holders_html_path'] = $bb_cfg['html_path'] .'copyright_holder
 $bb_cfg['advert_html_path']            = $bb_cfg['html_path'] .'advert.html';  #
 
 // Captcha
-$bb_cfg['captcha']['disabled']   = false;
-$bb_cfg['captcha']['secret_key'] = 'secret_key';
-$bb_cfg['captcha']['img_url']    = './images/captcha/';         # without '/'
-$bb_cfg['captcha']['img_path']   = BB_PATH .'/images/captcha/'; # without '/'
+$bb_cfg['captcha'] = array(
+    'disabled' => false,
+	'secret_key' => 'secret_key',
+	'img_url'    => './images/captcha/',           # without '/'
+    'img_path'   => BB_PATH .'/images/captcha/',   # without '/'
+);

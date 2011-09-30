@@ -77,6 +77,10 @@ switch($this->request['type'])
 			$message = (!empty($message)) ? preg_replace($orig_word, $replace_word, $message) : '';
 		}
 
+		if($post['post_attachment'] || $post['topic_first_post_id'])
+		{
+		    $message = '[quote]'. $post['topic_title'] .'[/quote]';
+		}
 		if(mb_strlen($message, 'UTF-8') > 1000)
 		{
 			$this->response['redirect'] = make_url('posting.php?mode=quote&p='. $post_id);
