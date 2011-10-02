@@ -44,7 +44,6 @@ function show_forum_mod_options ()
 	$('input.topic-chbox').click(function(){
 		$('#tt-'+this.value).toggleClass('hl-tt');
 	});
-	$('#pagination a').each(function(){ this.href += '&mod=1'; });
 	$('#mod-action-cell').append( $('#mod-action-content')[0] );
 	$('#show_mod_options').html($('#show_mod_options').text());
 	$('#mod-action-row, #mod-action-content, #mod-sel-topics').show();

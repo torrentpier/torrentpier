@@ -768,6 +768,7 @@ $lang['GROUP_ADDED'] = 'You have been added to this usergroup.';
 $lang['ALREADY_MEMBER_GROUP'] = 'You are already a member of this group';
 $lang['USER_IS_MEMBER_GROUP'] = 'User is already a member of this group';
 $lang['GROUP_TYPE_UPDATED'] = 'Successfully updated group type.';
+$lang['EFFECTIVE_DATE'] = 'Effective Date';
 
 $lang['COULD_NOT_ADD_USER'] = 'The user you selected does not exist.';
 $lang['COULD_NOT_ANON_USER'] = 'You cannot make Anonymous a group member.';
@@ -1359,6 +1360,7 @@ $lang['GALLERY'] = 'Gallery';
 $lang['OPEN_TOPICS'] = 'Open topics';
 $lang['OPEN_IN_SAME_WINDOW'] = 'open in same window';
 $lang['SHOW_TIME_TOPICS'] = 'show time of the creation topics';
+$lang['SHOW_CURSOR'] = 'highlight the row under the cursor';
 
 $lang['BT_LOW_RATIO_FUNC'] = "You can't use this option (ratio is too low)";
 $lang['BT_LOW_RATIO_FOR_DL'] = "With ratio <b>%s</b> you can't download torrents";

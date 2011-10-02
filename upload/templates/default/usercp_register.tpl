@@ -23,8 +23,8 @@ ajax.callback.user_register = function(data){
 <tr>
 	<th colspan="2">{L_REGISTRATION_INFO}</th>
 </tr>
-<tr>
-	<td class="row2 small" colspan="2">{L_ITEMS_REQUIRED}</td>
+<tr class="row3 med">
+	<td class="bold" colspan="2">{L_ITEMS_REQUIRED}</td>
 </tr>
 <tr>
 	<td>{L_USERNAME}: *</td>

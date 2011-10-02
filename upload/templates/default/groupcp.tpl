@@ -107,13 +107,14 @@
 	<th class="{sorter: false}" ><b class="tbs-text">{L_PM}</b></th>
 	<th class="{sorter: 'text'}" ><b class="tbs-text">{L_EMAIL}</b></th>
 	<th class="{sorter: false}" ><b class="tbs-text">{L_LOCATION}</b></th>
-	<th class="{sorter: 'digit'}" ><b class="tbs-text">{L_JOINED}</b></th>
+	<th width="10%" class="{sorter: 'digit'}" ><b class="tbs-text">{L_JOINED}</b></th>
 	<th class="{sorter: 'digit'}" ><b class="tbs-text">{L_POSTS_SHORT}</b></th>
 	<th class="{sorter: false}" ><b class="tbs-text">{L_WEBSITE}</b></th>
+	<th width="10%" class="{sorter: false}" ><b class="tbs-text">{L_EFFECTIVE_DATE}</b></th>
 	<th class="{sorter: false}" ><b class="tbs-text">#</b></th>
 </tr>
 <tr>
-	<td colspan="9" class="catTitle">{L_GROUP_MODERATOR}</td>
+	<td colspan="10" class="catTitle">{L_GROUP_MODERATOR}</td>
 </tr>
 <tr class="row1 tCenter">
 	<td width="3%">{ROW_NUMBER}</td>
@@ -124,10 +125,11 @@
 	<td class="small">{MOD_JOINED}</td>
 	<td>{MOD_POSTS}</td>
 	<td>{MOD_WWW}</td>
+	<td class="small">{MOD_TIME}</td>
 	<td width="3%">&nbsp;</td>
 </tr>
 <tr>
-	<td colspan="9" class="catTitle">{L_GROUP_MEMBERS}</td>
+	<td colspan="10" class="catTitle">{L_GROUP_MEMBERS}</td>
 </tr>
 </thead>
 
@@ -141,6 +143,7 @@
 	<td class="small">{member.JOINED}</td>
 	<td>{member.POSTS}</td>
 	<td>{member.WWW}</td>
+	<td class="small">{member.TIME}</td>
 	<td width="3%">
 		<!-- BEGIN switch_mod_option -->
 		<input type="checkbox" name="members[]" value="{member.USER_ID}" />
@@ -151,20 +154,20 @@
 
 <!-- BEGIN switch_no_members -->
 <tr>
-	<td colspan="9" class="row1 tCenter">{L_NO_GROUP_MEMBERS}</td>
+	<td colspan="10" class="row1 tCenter">{L_NO_GROUP_MEMBERS}</td>
 </tr>
 <!-- END switch_no_members -->
 
 <!-- BEGIN switch_hidden_group -->
 <tr>
-	<td colspan="9" class="row1 tCenter">{L_HIDDEN_GROUP_MEMBERS}</td>
+	<td colspan="10" class="row1 tCenter">{L_HIDDEN_GROUP_MEMBERS}</td>
 </tr>
 <!-- END switch_hidden_group -->
 
 <!-- BEGIN switch_mod_option -->
 <tfoot>
 <tr>
-	<td colspan="9" class="cat" style="padding: 2px 12px;">
+	<td colspan="10" class="cat" style="padding: 2px 12px;">
 		<p id="add_group_member" class="floatL">
 			<input type="text" name="username" maxlength="50" size="20" />
 			<input type="submit" name="add" value="{L_ADD_MEMBER}" class="mainoption" />
@@ -202,10 +205,9 @@
 	<th class="{sorter: 'digit'}" ><b class="tbs-text">{L_JOINED}</b></th>
 	<th class="{sorter: 'digit'}" ><b class="tbs-text">{L_POSTS_SHORT}</b></th>
 	<th class="{sorter: false}" ><b class="tbs-text">{L_WEBSITE}</b></th>
-
 </tr>
 <tr>
-		<td class="catTitle" colspan="8">{L_PENDING_MEMBERS}</td>
+    <td class="catTitle" colspan="8">{L_PENDING_MEMBERS}</td>
 </tr>
 </thead>
 <!-- BEGIN pending -->
@@ -218,7 +220,6 @@
 	<td class="small">{pending.JOINED}</td>
 	<td>{pending.POSTS}</td>
 	<td>{pending.WWW}</td>
-
 </tr>
 <!-- END pending -->
 <tfoot>

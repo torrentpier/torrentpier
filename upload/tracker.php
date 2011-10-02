@@ -240,6 +240,7 @@ $GPC = array(
 	'show_speed'    => array('ds',   0,           CHBOX),
 	's_not_seen'    => array('sns',  $search_all, SELECT),
 	'time'          => array('tm',   $search_all, SELECT),
+	'tor_type'      => array('tor_type', 0,        CHBOX),
 );
 
 // Define all GPC vars with default values
@@ -447,6 +448,7 @@ $prev_days   = ($time_val != $search_all);
 $poster_id   = (bool) $poster_id_val;
 $title_match = (bool) $title_match_sql;
 $s_not_seen  = ($s_not_seen_val != $search_all);
+$tor_type    = (bool) $tor_type_val;
 
 $hide_cat    = intval(!$show_cat_val);
 $hide_forum  = intval(!$show_forum_val);
@@ -598,6 +600,10 @@ if ($allowed_forums)
 		{
 			$SQL['WHERE'][] = "sn.seeders >= 1";
 		}
+        if ($tor_type)
+        {
+            $SQL['WHERE'][] = "tor.tor_type IN(1,2)";
+        }
 
 		// ORDER
 		$SQL['ORDER BY'][] = "{$order_opt[$order_val]['sql']} {$sort_opt[$sort_val]['sql']}";
@@ -751,7 +757,7 @@ if ($allowed_forums)
 				'TOPIC_TIME'   => bb_date($tor['topic_time'], 'd-M-y') .' <b>&middot;</b> '. delta_time($tor['topic_time']),
 				'POST_ID'      => $tor['post_id'],
 				'POSTER_ID'    => $poster_id,
-				'USERNAME'     => profile_url(array('username' => $tor['username'], 'user_rank' => $tor['user_rank'])),
+				'USERNAME'     => ($hide_author) ? '' : profile_url(array('username' => $tor['username'], 'user_rank' => $tor['user_rank'])),
 
 				'ROW_CLASS'    => $row_class,
 				'ROW_NUM'      => $row_num,
@@ -848,12 +854,15 @@ $template->assign_vars(array(
 ));
 
 // Displaying options
+$tor_type_lang = $lang['GOLD'] . ' / ' . $lang['SILVER'];
+
 $template->assign_vars(array(
 	'SHOW_CAT_CHBOX'    => build_checkbox ($show_cat_key,    $lang['BT_SHOW_CAT'],        $show_cat_val),
 	'SHOW_FORUM_CHBOX'  => build_checkbox ($show_forum_key,  $lang['BT_SHOW_FORUM'],      $show_forum_val),
 	'SHOW_AUTHOR_CHBOX' => build_checkbox ($show_author_key, $lang['BT_SHOW_AUTHOR'],     $show_author_val),
 	'SHOW_SPEED_CHBOX'  => build_checkbox ($show_speed_key,  $lang['BT_SHOW_SPEED'],      $show_speed_val),
 	'ALL_WORDS_CHBOX'   => build_checkbox ($all_words_key,   $lang['SEARCH_ALL_WORDS'],   $all_words_val),
+	'TOR_TYPE_CHBOX'    => build_checkbox ($tor_type_key,    $tor_type_lang,              $tor_type_val),
 
 	'ONLY_MY_CHBOX'     => build_checkbox ($my_key,          $lang['BT_ONLY_MY'],         $only_my,       IS_GUEST),
 	'ONLY_ACTIVE_CHBOX' => build_checkbox ($active_key,      $lang['BT_ONLY_ACTIVE'],     $active_val),
@@ -872,6 +881,8 @@ $template->assign_vars(array(
 
 	'AJAX_TOPICS'      => $user->opt_js['tr_t_ax'],
 	'SHOW_TIME_TOPICS' => $user->opt_js['tr_t_t'],
+	'SHOW_CURSOR'      => $user->opt_js['hl_tr'],
+	
 	'U_SEARCH_USER'    => "search.php?mode=searchuser&input_name=$poster_name_key",
 ));
 
@@ -890,6 +901,7 @@ $save_through_pages = array(
 	'show_cat',
 	'show_forum',
 	'show_speed',
+	'tor_type',
 );
 $hidden_fields = array();
 foreach ($save_through_pages as $name)

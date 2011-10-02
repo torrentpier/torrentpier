@@ -11,12 +11,13 @@ $page_cfg['use_tablesorter'] = true;
 $s_member_groups = $s_pending_groups = $s_member_groups_opt = $s_pending_groups_opt = '';
 $select_sort_mode = $select_sort_order = '';
 
-function generate_user_info(&$row, $date_format, $group_mod, &$from, &$posts, &$joined, &$pm, &$email, &$www)
+function generate_user_info(&$row, $date_format, $group_mod, &$from, &$posts, &$joined, &$pm, &$email, &$www, &$user_time)
 {
 	global $lang, $images, $bb_cfg;
 
 	$from   = ( !empty($row['user_from']) ) ? $row['user_from'] : '';
 	$joined = bb_date($row['user_regdate'], $lang['DATE_FORMAT']);
+	$user_time   = ( !empty($row['user_time']) ) ? bb_date($row['user_time'], $lang['DATE_FORMAT']) : $lang['NO'];
 	$posts  = ( $row['user_posts'] ) ? $row['user_posts'] : 0;
 	$pm     = ($bb_cfg['text_buttons']) ? '<a class="txtb" href="'. append_sid("privmsg.php?mode=post&amp;". POST_USERS_URL ."=".$row['user_id']) .'">'. $lang['SEND_PM_TXTB'] .'</a>' : '<a href="' . append_sid("privmsg.php?mode=post&amp;". POST_USERS_URL ."=".$row['user_id']) .'"><img src="' . $images['icon_pm'] . '" alt="' . $lang['SEND_PRIVATE_MESSAGE'] . '" title="' . $lang['SEND_PRIVATE_MESSAGE'] . '" border="0" /></a>';
 
@@ -25,19 +26,13 @@ function generate_user_info(&$row, $date_format, $group_mod, &$from, &$posts, &$
        	$email_uri = ($bb_cfg['board_email_form']) ? append_sid("profile.php?mode=email&amp;". POST_USERS_URL ."=".$row['user_id']) : 'mailto:'. $row['user_email'];
        	$email = '<a class="editable" href="'. $email_uri .'">'. $row['user_email'] .'</a>';
     }
-    else
-    {
-       	$email = '';
-    }
+    else $email = '';
 
     if ($row['user_website'])
     {
         $www = ($bb_cfg['text_buttons']) ? '<a class="txtb" href="'. $row['user_website'] .'"  target="_userwww">'. $lang['VISIT_WEBSITE_TXTB'] .'</a>' : '<a class="txtb" href="'. $row['user_website'] .'" target="_userwww"><img src="' . $images['icon_www'] . '" alt="' . $lang['VISIT_WEBSITE'] . '" title="' . $lang['VISIT_WEBSITE'] . '" border="0" /></a>';
     }
-    else
-    {
-        $www = '';
-    }
+    else $www = '';
 
 	return;
 }
@@ -238,7 +233,7 @@ else if (@$_POST['joingroup'])
 		bb_die($lang['ALREADY_MEMBER_GROUP']);
 	}
 
-	add_user_into_group($group_id, $userdata['user_id'], 1);
+	add_user_into_group($group_id, $userdata['user_id'], 1, TIMENOW);
 
 	if ($bb_cfg['groupcp_send_email'])
 	{
@@ -419,7 +414,7 @@ else
 
     // Members
 	$count_members = DB()->fetch_rowset("
-		SELECT u.username, u.user_rank, u.user_id, u.user_opt, u.user_posts, u.user_regdate, u.user_from, u.user_website, u.user_email, ug.user_pending
+		SELECT u.username, u.user_rank, u.user_id, u.user_opt, u.user_posts, u.user_regdate, u.user_from, u.user_website, u.user_email, ug.user_pending, ug.user_time
 		FROM ". BB_USER_GROUP ." ug, ". BB_USERS ." u
 		WHERE ug.group_id = $group_id
 			AND ug.user_pending = 0
@@ -434,7 +429,7 @@ else
 
 	// Members
 	$group_members = DB()->fetch_rowset("
-		SELECT u.username, u.user_rank, u.user_id, u.user_opt, u.user_posts, u.user_regdate, u.user_from, u.user_website, u.user_email, ug.user_pending
+		SELECT u.username, u.user_rank, u.user_id, u.user_opt, u.user_posts, u.user_regdate, u.user_from, u.user_website, u.user_email, ug.user_pending, ug.user_time
 		FROM ". BB_USER_GROUP ." ug, ". BB_USERS ." u
 		WHERE ug.group_id = $group_id
 			AND ug.user_pending = 0
@@ -527,7 +522,7 @@ else
 	$username = $group_moderator['username'];
 	$user_id = $group_moderator['user_id'];
 
-	generate_user_info($group_moderator, $bb_cfg['default_dateformat'], $is_moderator, $from, $posts, $joined, $pm, $email, $www);
+	generate_user_info($group_moderator, $bb_cfg['default_dateformat'], $is_moderator, $from, $posts, $joined, $pm, $email, $www, $user_time);
 
     $group_type = '';
     if($group_info['group_type'] == GROUP_OPEN)
@@ -559,6 +554,7 @@ else
 		'MOD_PM' => $pm,
 		'MOD_EMAIL' => $email,
 		'MOD_WWW' => $www,
+		'MOD_TIME' => $user_time,
 		'U_SEARCH_USER' => "search.php?mode=searchuser",
         'GROUP_TYPE' => $group_type,
 		'S_GROUP_OPEN_TYPE' => GROUP_OPEN,
@@ -578,7 +574,7 @@ else
 	{
 		$user_id = $member['user_id'];
 
-		generate_user_info($member, $bb_cfg['default_dateformat'], $is_moderator, $from, $posts, $joined, $pm, $email, $www);
+		generate_user_info($member, $bb_cfg['default_dateformat'], $is_moderator, $from, $posts, $joined, $pm, $email, $www, $user_time);
 
 		if ($group_info['group_type'] != GROUP_HIDDEN || $is_group_member || $is_moderator)
 		{
@@ -595,6 +591,7 @@ else
 				'PM' => $pm,
 				'EMAIL' => $email,
 				'WWW' => $www,
+				'TIME' => $user_time,
 			));
 
 			if ($is_moderator)
@@ -626,7 +623,7 @@ else
 		{
 			$user_id = $member['user_id'];
 
-			generate_user_info($member, $bb_cfg['default_dateformat'], $is_moderator, $from, $posts, $joined, $pm, $email, $www);
+			generate_user_info($member, $bb_cfg['default_dateformat'], $is_moderator, $from, $posts, $joined, $pm, $email, $www, $user_time);
 
 			$row_class = !($i % 2) ? 'row1' : 'row2';
 

@@ -75,12 +75,13 @@ function delete_group ($group_id)
 	update_user_level('all');
 }
 
-function add_user_into_group ($group_id, $user_id, $user_pending = 0)
+function add_user_into_group ($group_id, $user_id, $user_pending = 0, $user_time = TIMENOW)
 {
 	$args = DB()->build_array('INSERT', array(
 		'group_id'     => (int) $group_id,
 		'user_id'      => (int) $user_id,
 		'user_pending' => (int) $user_pending,
+		'user_time'    => (int) $user_time,
 	));
 	DB()->query("REPLACE INTO ". BB_USER_GROUP . $args);
 

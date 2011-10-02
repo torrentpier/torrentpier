@@ -53,8 +53,8 @@ $bb_cfg = $tr_cfg = $page_cfg = array();
 
 // Increase number of revision after update
 $bb_cfg['tp_version'] = '2.1 Stable';
-$bb_cfg['tp_release_state'] = 'R297';
-$bb_cfg['tp_release_date'] = '01-10-2011';
+$bb_cfg['tp_release_state'] = 'R298';
+$bb_cfg['tp_release_date'] = '02-10-2011';
 
 // Database
 $charset  = 'utf8';
@@ -105,7 +105,6 @@ $bb_cfg['datastore_type'] = 'filecache';
 $bb_cfg['server_name'] = (!empty($_SERVER['SERVER_NAME'])) ? $_SERVER['SERVER_NAME'] : 'torrentpier.me';         // The domain name from which this board runs
 $bb_cfg['server_port'] = (!empty($_SERVER['SERVER_PORT'])) ? $_SERVER['SERVER_PORT'] : 80;                       // The port your server is running on
 $bb_cfg['script_path'] = '/';                      // The path where FORUM is located relative to the domain name
-$bb_cfg['sitename'] = (!empty($_SERVER['SERVER_NAME'])) ? $_SERVER['SERVER_NAME'] : 'TorrentPier II - Torrent Tracker (see $bb_cfg[\'sitename\'] in config.php)';               // Name of your site
 
 // Server load
 $bb_cfg['max_srv_load']       = 0;                  // 0 - disable
@@ -289,7 +288,7 @@ $bb_cfg['groupcp_send_email']      = true;
 
 $bb_cfg['tech_admin_email']        = 'admin@' . $bb_cfg['server_name'];  // email for sending error reports
 $bb_cfg['abuse_email']             = 'abuse@' . $bb_cfg['server_name'];
-$bb_cfg['adv_email']               = 'adv@' . $bb_cfg['server_name'];
+$bb_cfg['adv_email']               = 'adv@'   . $bb_cfg['server_name'];
 
 // AJAX
 define('AJAX_HTML_DIR', BB_ROOT .'ajax/html/');

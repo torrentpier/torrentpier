@@ -23,53 +23,77 @@
 </tr>
 <tr>
 	<td><h4>{L_BOARD_DISABLE}</h4><h6>{L_BOARD_DISABLE_EXPLAIN}</h6></td>
-	<td><input type="radio" name="board_disable" value="1" {S_DISABLE_BOARD_YES} /> {L_YES}&nbsp;&nbsp;<input type="radio" name="board_disable" value="0" {S_DISABLE_BOARD_NO} /> {L_NO}</td>
+	<td>
+	    <label><input type="radio" name="board_disable" value="1" <!-- IF DISABLE_BOARD -->checked="checked"<!-- ENDIF --> />{L_YES}</label>&nbsp;&nbsp;
+		<label><input type="radio" name="board_disable" value="0" <!-- IF not DISABLE_BOARD -->checked="checked"<!-- ENDIF --> />{L_NO}</label>
+	</td>
 </tr>
 <tr>
 	<td><h4>{L_ACCT_ACTIVATION}</h4></td>
 	<td>
-		<div><input type="radio" name="require_activation" value="{ACTIVATION_NONE}" {ACTIVATION_NONE_CHECKED} />{L_ACC_NONE}</div>
-		<div><input type="radio" name="require_activation" value="{ACTIVATION_USER}" {ACTIVATION_USER_CHECKED} />{L_ACC_USER}</div>
-		<div><input type="radio" name="require_activation" value="{ACTIVATION_ADMIN}" {ACTIVATION_ADMIN_CHECKED} />{L_ACC_ADMIN}</div>
+		<div><label><input type="radio" name="require_activation" value="{ACTIVATION_NONE}" {ACTIVATION_NONE_CHECKED} />{L_ACC_NONE}</label></div>
+		<div><label><input type="radio" name="require_activation" value="{ACTIVATION_USER}" {ACTIVATION_USER_CHECKED} />{L_ACC_USER}</label></div>
+		<div><label><input type="radio" name="require_activation" value="{ACTIVATION_ADMIN}" {ACTIVATION_ADMIN_CHECKED} />{L_ACC_ADMIN}</label></div>
 	</td>
 </tr>
 <tr>
 	<td><h4>{L_VISUAL_CONFIRM}</h4><h6>{L_VISUAL_CONFIRM_EXPLAIN}</h6></td>
-	<td><input type="radio" name="enable_confirm" value="1" {CONFIRM_ENABLE} />{L_YES}&nbsp; &nbsp;<input type="radio" name="enable_confirm" value="0" {CONFIRM_DISABLE} />{L_NO}</td>
+	<td>
+	    <label><input type="radio" name="enable_confirm" value="1" <!-- IF VISUAL_CONFIRM -->checked="checked"<!-- ENDIF --> />{L_YES}</label>&nbsp;&nbsp;
+		<label><input type="radio" name="enable_confirm" value="0" <!-- IF not VISUAL_CONFIRM -->checked="checked"<!-- ENDIF --> />{L_NO}</label>
+	</td>
 </tr>
 <tr>
 	<td><h4>{L_ALLOW_AUTOLOGIN}</h4><h6>{L_ALLOW_AUTOLOGIN_EXPLAIN}</h6></td>
-	<td><input type="radio" name="allow_autologin" value="1" {ALLOW_AUTOLOGIN_YES} />{L_YES}&nbsp; &nbsp;<input type="radio" name="allow_autologin" value="0" {ALLOW_AUTOLOGIN_NO} />{L_NO}</td>
+	<td>
+	    <label><input type="radio" name="allow_autologin" value="1" <!-- IF ALLOW_AUTOLOGIN -->checked="checked"<!-- ENDIF --> />{L_YES}</label>&nbsp;&nbsp;
+		<label><input type="radio" name="allow_autologin" value="0" <!-- IF not ALLOW_AUTOLOGIN -->checked="checked"<!-- ENDIF --> />{L_NO}</label>
+	</td>
 </tr>
 <tr>
 	<td><h4>{L_AUTOLOGIN_TIME}</h4><h6>{L_AUTOLOGIN_TIME_EXPLAIN}</h6></td>
-	<td><input class="post" type="text" size="3" maxlength="4" name="max_autologin_time" value="{AUTOLOGIN_TIME}" /> days</td>
+	<td>
+	    <input class="post" type="text" size="3" maxlength="4" name="max_autologin_time" value="{AUTOLOGIN_TIME}" /> {L_DAYS}
+	</td>
 </tr>
 <tr>
 	<td><h4>{L_BOARD_EMAIL_FORM}</h4><h6>{L_BOARD_EMAIL_FORM_EXPLAIN}</h6></td>
-	<td><input type="radio" name="board_email_form" value="1" {BOARD_EMAIL_FORM_ENABLE} /> {L_ENABLED}&nbsp;&nbsp;<input type="radio" name="board_email_form" value="0" {BOARD_EMAIL_FORM_DISABLE} /> {L_DISABLED}</td>
+	<td>
+	    <label><input type="radio" name="board_email_form" value="1" <!-- IF BOARD_EMAIL_FORM -->checked="checked"<!-- ENDIF --> /> {L_ENABLED}</label>&nbsp;&nbsp;
+		<label><input type="radio" name="board_email_form" value="0" <!-- IF not BOARD_EMAIL_FORM -->checked="checked"<!-- ENDIF --> /> {L_DISABLED}</label>
+	</td>
 </tr>
 <tr>
 	<td><h4>{L_FLOOD_INTERVAL}</h4><h6>{L_FLOOD_INTERVAL_EXPLAIN}</h6></td>
-	<td><input class="post" type="text" size="3" maxlength="4" name="flood_interval" value="{FLOOD_INTERVAL}" /> sec</td>
+	<td>
+	    <input class="post" type="text" size="3" maxlength="4" name="flood_interval" value="{FLOOD_INTERVAL}" /> {L_SEC}
+	</td>
 </tr>
 <!--
 <tr>
 	<td><h4>{L_MAX_LOGIN_ATTEMPTS}</h4><h6>{L_MAX_LOGIN_ATTEMPTS_EXPLAIN}</h6></td>
-	<td><input class="post" type="text" size="3" maxlength="4" name="max_login_attempts" value="{MAX_LOGIN_ATTEMPTS}" /></td>
+	<td>
+	    <input class="post" type="text" size="3" maxlength="4" name="max_login_attempts" value="{MAX_LOGIN_ATTEMPTS}" />
+	</td>
 </tr>
 <tr>
 	<td><h4>{L_LOGIN_RESET_TIME}</h4><h6>{L_LOGIN_RESET_TIME_EXPLAIN}</h6></td>
-	<td><input class="post" type="text" size="3" maxlength="4" name="login_reset_time" value="{LOGIN_RESET_TIME}" /></td>
+	<td>
+	    <input class="post" type="text" size="3" maxlength="4" name="login_reset_time" value="{LOGIN_RESET_TIME}" />
+	</td>
 </tr>
 -->
 <tr>
 	<td><h4>{L_TOPICS_PER_PAGE}</h4></td>
-	<td><input class="post" type="text" name="topics_per_page" size="5" maxlength="4" value="{TOPICS_PER_PAGE}" /></td>
+	<td>
+	    <input class="post" type="text" name="topics_per_page" size="5" maxlength="4" value="{TOPICS_PER_PAGE}" />
+	</td>
 </tr>
 <tr>
 	<td><h4>{L_POSTS_PER_PAGE}</h4></td>
-	<td><input class="post" type="text" name="posts_per_page" size="5" maxlength="4" value="{POSTS_PER_PAGE}" /></td>
+	<td>
+	    <input class="post" type="text" name="posts_per_page" size="5" maxlength="4" value="{POSTS_PER_PAGE}" />
+	</td>
 </tr>
 <tr>
 	<td><h4>{L_HOT_THRESHOLD}</h4></td>
@@ -89,14 +113,20 @@
 </tr>
 <tr>
 	<td><h4>{L_ENABLE_PRUNE}</h4></td>
-	<td><input type="radio" name="prune_enable" value="1" {PRUNE_YES} /> {L_YES}&nbsp;&nbsp;<input type="radio" name="prune_enable" value="0" {PRUNE_NO} /> {L_NO}</td>
+	<td>
+	    <label><input type="radio" name="prune_enable" value="1" <!-- IF PRUNE_ENABLE -->checked="checked"<!-- ENDIF --> />{L_YES}</label>&nbsp;&nbsp;
+		<label><input type="radio" name="prune_enable" value="0" <!-- IF not PRUNE_ENABLE -->checked="checked"<!-- ENDIF --> />{L_NO}</label>
+	</td>
 </tr>
 <tr>
 	<th colspan="2">{L_PRIVATE_MESSAGING}</th>
 </tr>
 <tr>
 	<td><h4>{L_DISABLE_PRIVMSG}</h4></td>
-	<td><input type="radio" name="privmsg_disable" value="0" {S_PRIVMSG_ENABLED} />{L_ENABLED}&nbsp; &nbsp;<input type="radio" name="privmsg_disable" value="1" {S_PRIVMSG_DISABLED} />{L_DISABLED}</td>
+	<td>
+	    <label><input type="radio" name="privmsg_disable" value="0" <!-- IF PRIVMSG_DISABLE -->checked="checked"<!-- ENDIF --> />{L_ENABLED}</label>&nbsp;&nbsp;
+		<label><input type="radio" name="privmsg_disable" value="1" <!-- IF not PRIVMSG_DISABLE -->checked="checked"<!-- ENDIF --> />{L_DISABLED}</label>
+	</td>
 </tr>
 <tr>
 	<td><h4>{L_INBOX_LIMITS}</h4></td>
@@ -119,11 +149,17 @@
 </tr>
 <tr>
 	<td><h4>{L_ALLOW_BBCODE}</h4></td>
-	<td><input type="radio" name="allow_bbcode" value="1" {BBCODE_YES} /> {L_YES}&nbsp;&nbsp;<input type="radio" name="allow_bbcode" value="0" {BBCODE_NO} /> {L_NO}</td>
+	<td>
+	    <label><input type="radio" name="allow_bbcode" value="1" <!-- IF ALLOW_BBCODE -->checked="checked"<!-- ENDIF --> />{L_YES}</label>&nbsp;&nbsp;
+		<label><input type="radio" name="allow_bbcode" value="0" <!-- IF not ALLOW_BBCODE -->checked="checked"<!-- ENDIF --> />{L_NO}</label>
+	</td>
 </tr>
 <tr>
 	<td><h4>{L_ALLOW_SMILIES}</h4></td>
-	<td><input type="radio" name="allow_smilies" value="1" {SMILE_YES} /> {L_YES}&nbsp;&nbsp;<input type="radio" name="allow_smilies" value="0" {SMILE_NO} /> {L_NO}</td>
+	<td>
+	    <label><input type="radio" name="allow_smilies" value="1" <!-- IF ALLOW_SMILIES -->checked="checked"<!-- ENDIF --> />{L_YES}</label>&nbsp;&nbsp;
+		<label><input type="radio" name="allow_smilies" value="0" <!-- IF not ALLOW_SMILIES -->checked="checked"<!-- ENDIF --> />{L_NO}</label>
+	</td>
 </tr>
 <tr>
 	<td><h4>{L_SMILIES_PATH}</h4><h6>{L_SMILIES_PATH_EXPLAIN}</h6></td>
@@ -131,7 +167,10 @@
 </tr>
 <tr>
 	<td><h4>{L_ALLOW_SIG}</h4></td>
-	<td><input type="radio" name="allow_sig" value="1" {SIG_YES} /> {L_YES}&nbsp;&nbsp;<input type="radio" name="allow_sig" value="0" {SIG_NO} /> {L_NO}</td>
+	<td>
+	    <label><input type="radio" name="allow_sig" value="1" <!-- IF ALLOW_SMILIES -->checked="checked"<!-- ENDIF --> />{L_YES}</label>&nbsp;&nbsp;
+		<label><input type="radio" name="allow_sig" value="0" <!-- IF not ALLOW_SMILIES -->checked="checked"<!-- ENDIF --> />{L_NO}</label>
+	</td>
 </tr>
 <tr>
 	<td><h4>{L_MAX_SIG_LENGTH}</h4><h6>{L_MAX_SIG_LENGTH_EXPLAIN}</h6></td>
@@ -139,26 +178,38 @@
 </tr>
 <tr>
 	<td><h4>{L_ALLOW_NAME_CHANGE}</h4></td>
-	<td><input type="radio" name="allow_namechange" value="1" {NAMECHANGE_YES} /> {L_YES}&nbsp;&nbsp;<input type="radio" name="allow_namechange" value="0" {NAMECHANGE_NO} /> {L_NO}</td>
+	<td>
+	    <label><input type="radio" name="allow_namechange" value="1" <!-- IF ALLOW_NAMECHANGE -->checked="checked"<!-- ENDIF --> />{L_YES}</label>&nbsp;&nbsp;
+		<label><input type="radio" name="allow_namechange" value="0" <!-- IF not ALLOW_NAMECHANGE -->checked="checked"<!-- ENDIF --> />{L_NO}</label>
+	</td>
 </tr>
 <tr>
 	<th colspan="2">{L_AVATAR_SETTINGS}</th>
 </tr>
 <tr>
 	<td><h4>{L_ALLOW_LOCAL}</h4></td>
-	<td><input type="radio" name="allow_avatar_local" value="1" {AVATARS_LOCAL_YES} /> {L_YES}&nbsp;&nbsp;<input type="radio" name="allow_avatar_local" value="0" {AVATARS_LOCAL_NO} /> {L_NO}</td>
+	<td>
+	    <label><input type="radio" name="allow_avatar_local" value="1" <!-- IF ALLOW_AVATARS_LOCAL -->checked="checked"<!-- ENDIF --> />{L_YES}</label>&nbsp;&nbsp;
+		<label><input type="radio" name="allow_avatar_local" value="0" <!-- IF not ALLOW_AVATARS_LOCAL -->checked="checked"<!-- ENDIF --> />{L_NO}</label>
+	</td>
 </tr>
 <tr>
 	<td><h4>{L_ALLOW_REMOTE}</h4><h6>{L_ALLOW_REMOTE_EXPLAIN}</h6></td>
-	<td><input type="radio" name="allow_avatar_remote" value="1" {AVATARS_REMOTE_YES} /> {L_YES}&nbsp;&nbsp;<input type="radio" name="allow_avatar_remote" value="0" {AVATARS_REMOTE_NO} /> {L_NO}</td>
+	<td>
+	    <label><input type="radio" name="allow_avatar_remote" value="1" <!-- IF ALLOW_AVATAR_REMOTE -->checked="checked"<!-- ENDIF --> />{L_YES}</label>&nbsp;&nbsp;
+		<label><input type="radio" name="allow_avatar_remote" value="0" <!-- IF not ALLOW_AVATAR_REMOTE -->checked="checked"<!-- ENDIF --> />{L_NO}</label>
+	</td>
 </tr>
 <tr>
 	<td><h4>{L_ALLOW_UPLOAD}</h4></td>
-	<td><input type="radio" name="allow_avatar_upload" value="1" {AVATARS_UPLOAD_YES} /> {L_YES}&nbsp;&nbsp;<input type="radio" name="allow_avatar_upload" value="0" {AVATARS_UPLOAD_NO} /> {L_NO}</td>
+	<td>
+	    <label><input type="radio" name="allow_avatar_upload" value="1" <!-- IF ALLOW_AVATAR_UPLOAD -->checked="checked"<!-- ENDIF --> />{L_YES}</label>&nbsp;&nbsp;
+		<label><input type="radio" name="allow_avatar_upload" value="0" <!-- IF not ALLOW_AVATAR_UPLOAD -->checked="checked"<!-- ENDIF --> />{L_NO}</label>
+	</td>
 </tr>
 <tr>
 	<td><h4>{L_MAX_FILESIZE}</h4><h6>{L_MAX_FILESIZE_EXPLAIN}</h6></td>
-	<td><input class="post" type="text" size="4" maxlength="10" name="avatar_filesize" value="{AVATAR_FILESIZE}" /> Bytes</td>
+	<td><input class="post" type="text" size="10" maxlength="10" name="avatar_filesize" value="{AVATAR_FILESIZE}" /> {L_BYTES}</td>
 </tr>
 <tr>
 	<td><h4>{L_MAX_AVATAR_SIZE}</h4><h6>{L_MAX_AVATAR_SIZE_EXPLAIN}</h6></td>
@@ -185,7 +236,10 @@
 </tr>
 <tr>
 	<td><h4>{L_USE_SMTP}</h4><h6>{L_USE_SMTP_EXPLAIN}</h6></td>
-	<td><input type="radio" name="smtp_delivery" value="1" {SMTP_YES} /> {L_YES}&nbsp;&nbsp;<input type="radio" name="smtp_delivery" value="0" {SMTP_NO} /> {L_NO}</td>
+	<td>
+	    <label><input type="radio" name="smtp_delivery" value="1" <!-- IF SMTP_DELIVERY -->checked="checked"<!-- ENDIF --> />{L_YES}</label>&nbsp;&nbsp;
+		<label><input type="radio" name="smtp_delivery" value="0" <!-- IF not SMTP_DELIVERY -->checked="checked"<!-- ENDIF --> />{L_NO}</label>
+	</td>
 </tr>
 <tr>
 	<td><h4>{L_SMTP_SERVER}</h4></td>
@@ -201,7 +255,8 @@
 </tr>
 <tr>
 	<td class="catBottom" colspan="2">
-		<input type="submit" name="submit" value="{L_SUBMIT}" class="mainoption" />&nbsp;&nbsp;<input type="reset" value="{L_RESET}" class="liteoption" />
+		<input type="submit" name="submit" value="{L_SUBMIT}" class="mainoption" />&nbsp;&nbsp;
+		<input type="reset" value="{L_RESET}" class="liteoption" />
 	</td>
 </tr>
 </table>

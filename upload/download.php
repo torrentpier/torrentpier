@@ -343,10 +343,11 @@ if ($download_mode == PHYSICAL_LINK)
 }
 else
 {
-	if(IS_GUEST && !CAPTCHA()->verify_code())
+    if(IS_GUEST && !CAPTCHA()->verify_code())
     {
-    	global $template;
-    	$redirect_url = !empty($_POST['redirect_url']) ? $_POST['redirect_url'] : $_SERVER['HTTP_REFERER'];
+        global $template;
+
+        $redirect_url = !empty($_POST['redirect_url']) ? $_POST['redirect_url'] : @$_SERVER['HTTP_REFERER'];
     	$message = '<form action="'. DOWNLOAD_URL . $attachment['attach_id'] .'" method="post">';
     	$message .= $lang['CONFIRM_CODE'];
     	$message .= '<div class="mrg_10">'. CAPTCHA()->get_html() .'</div>';

@@ -28,6 +28,7 @@ class user_common
 		'sp_op'    => 0,     // show spoiler opened
 		'tr_t_ax'  => 0,     // ajax open topics
 		'tr_t_t'   => 0,     // show time of the creation topics
+		'hl_tr'    => 1,     // show cursor in tracker.php
 	);
 
 	/**

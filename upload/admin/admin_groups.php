@@ -11,10 +11,10 @@ require('./pagestart.php');
 
 require(INC_DIR .'functions_group.php');
 
-$group_id = (@$_REQUEST[POST_GROUPS_URL]) ? intval($_REQUEST[POST_GROUPS_URL]) : 0;
-$mode     = (@$_REQUEST['mode']) ? strval($_REQUEST['mode']) : '';
+$group_id = isset($_REQUEST[POST_GROUPS_URL]) ? intval($_REQUEST[POST_GROUPS_URL]) : 0;
+$mode     = isset($_REQUEST['mode']) ? strval($_REQUEST['mode']) : '';
 
-attachment_quota_settings('group', @$_POST['group_update'], $mode);
+attachment_quota_settings('group', isset($_POST['group_update']), $mode);
 
 if (!empty($_POST['edit']) || !empty($_POST['new']))
 {
@@ -131,7 +131,7 @@ else if (!empty($_POST['group_update']))
 				add_user_into_group($group_id, $group_moderator);
 
 				// Delete old moderator's user_group
-				if (@$_POST['delete_old_moderator'])
+				if (isset($_POST['delete_old_moderator']))
 				{
 					delete_user_group($group_id, $group_info['group_moderator']);
 				}

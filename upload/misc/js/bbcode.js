@@ -44,7 +44,7 @@ BBCode.prototype = {
 			this.quoterText = sel;
 			this.insertTag('_quoter');
 		} else {
-			this.insertAtCursor("[b]" + name + '[/b]\n');
+			this.insertAtCursor("[b]" + name + '[/b], ');
 		}
 		return false;
 	},

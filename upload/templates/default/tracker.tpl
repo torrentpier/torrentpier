@@ -149,6 +149,7 @@ ajax.callback.view_post = function(data) {
 					<p class="chbox">{ONLY_ACTIVE_CHBOX}</p>
 					<p class="chbox">{SEED_EXIST_CHBOX}</p>
 					<p class="chbox">{ONLY_NEW_CHBOX}[{MINIPOST_IMG_NEW}]&nbsp;</p>
+					<!-- IF $bb_cfg['gold_silver_enabled'] --><p class="chbox">{TOR_TYPE_CHBOX}</p><!-- ENDIF -->
 				</div>
 				</fieldset>
 				<fieldset>
@@ -255,6 +256,11 @@ ajax.callback.view_post = function(data) {
 						onclick="user.set('tr_t_t', this.checked ? 1 : 0);"
 					/>{L_SHOW_TIME_TOPICS}
 				</label>
+				<label>
+					<input type="checkbox" <!-- IF SHOW_CURSOR -->{CHECKED}<!-- ENDIF -->
+						onclick="user.set('hl_tr', this.checked ? 1 : 0);"
+					/>{L_SHOW_CURSOR}
+				</label>
 			</div>
 			</fieldset>
 		</td>
@@ -272,6 +278,7 @@ ajax.callback.view_post = function(data) {
 .tr_tm { margin-top: 2px; font-size: 10px; color: #676767; }
 .ch { font-style: italic; color: #0080FF; }
 #fs-sel-cat option.cat-title { font-weight: bold; color: #005A88; background: #F5F5F5; }
+tr.hl-tr:hover td { background-color: #F8F8F8 !important; }
 </style>
 
 <table class="forumline tablesorter" id="tor-tbl">
@@ -300,7 +307,7 @@ ajax.callback.view_post = function(data) {
 </tr>
 </thead>
 <!-- BEGIN tor -->
-<tr class="tCenter" id="tor_{tor.POST_ID}">
+<tr class="tCenter <!-- IF SHOW_CURSOR -->hl-tr<!-- ENDIF -->" id="tor_{tor.POST_ID}">
 	<td class="row1"><!-- IF tor.USER_AUTHOR --><p style="padding-bottom: 3px">&nbsp;<b>&reg;</b>&nbsp;</p><!-- ELSEIF tor.IS_NEW -->{MINIPOST_IMG_NEW}<!-- ELSE -->{MINIPOST_IMG}<!-- ENDIF --></td>
 	<td class="row1 tCenter" title="{tor.TOR_STATUS_TEXT}">{tor.TOR_STATUS_ICON}</td>
 	<!-- IF SHOW_CAT -->
