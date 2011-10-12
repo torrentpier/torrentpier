@@ -585,7 +585,7 @@ else
 							foreach ($report_subject['details'] as $detail_title => $detail_value)
 							{
 								$template->assign_block_vars('report_subject.details', array(
-									'TITLE' => $report_module->lang[$detail_title],
+									'TITLE' => $report_module->lang[strtoupper($detail_title)],
 									'VALUE' => $detail_value)
 								);
 							}

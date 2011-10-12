@@ -5,7 +5,6 @@
 // borz_off@cs.msu.su
 //
 
-setlocale(LC_ALL, 'ru_RU.UTF-8');
 $lang['CONTENT_ENCODING'] = 'UTF-8';
 $lang['CONTENT_DIRECTION'] = 'ltr';
 $lang['DATE_FORMAT'] = 'Y-m-d'; //'d.m.Y'; // This should be changed to the default date format for your language, php date() format
