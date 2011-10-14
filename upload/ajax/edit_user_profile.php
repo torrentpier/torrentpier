@@ -118,13 +118,14 @@ switch ($field)
 
 	case 'user_regdate':
 	case 'user_lastvisit':
-		$tz = TIMENOW + (3600 * $bb_cfg['board_timezone']);
-		if (($value = strtotime($value, $tz)) < $bb_cfg['board_startdate'] OR $value > TIMENOW)
-		{
-			$this->ajax_die($lang['INVALID_DATE'] . $this->request['value']);
-		}
-		$this->response['new_value'] = bb_date($value);
-		break;
+        $tz = TIMENOW + (3600 * $bb_cfg['board_timezone']);
+        if (($value = strtotime($value, $tz)) < $bb_cfg['board_startdate'] OR $value > TIMENOW)
+        {
+            $this->ajax_die($lang['INVALID_DATE'] . $this->request['value']);
+        }
+        $value = $value - (3600 * -1);
+        $this->response['new_value'] = bb_date($value);
+        break;
 
 	case 'ignore_srv_load':
 		$value = ($this->request['value']) ? 0 : 1;

@@ -1007,8 +1007,8 @@ $lang['TZ']['11'] = 'GMT + 11 Hours';
 $lang['TZ']['12'] = 'GMT + 12 Hours';
 $lang['TZ']['13'] = 'GMT + 13 Hours';
 
-$lang['TODAY'] = 'Today';
-$lang['YESTERDAY'] = 'Yesterday';
+$lang['DATETIME']['TODAY'] = 'Today';
+$lang['DATETIME']['YESTERDAY'] = 'Yesterday';
 
 $lang['DATETIME']['SUNDAY'] = 'Sunday';
 $lang['DATETIME']['MONDAY'] = 'Monday';
@@ -1598,7 +1598,8 @@ $lang['USER_DELETE_ME'] = 'Sorry, your account is forbidden to remove!';
 $lang['USER_DELETE_CSV'] = 'Sorry, this account is not allowed to delete!';
 $lang['USER_DELETE_CONFIRM'] = 'Are you sure you want to delete this user?';
 $lang['USER_DELETED'] = 'User was successfully deleted';
-$lang['DELETE_USER_POSTS'] = 'Delete all user posts';
+$lang['DELETE_USER_ALL_POSTS'] = 'Delete all user posts';
+$lang['DELETE_USER_POSTS'] = 'Delete all messages, except for capital';
 $lang['DELETE_USER_POSTS_ME'] = 'Are you sure you want to delete all my posts?';
 $lang['DELETE_USER_POSTS_CONFIRM'] = 'Are you sure you want to delete all of your users?';
 $lang['USER_DELETED_POSTS'] = 'Posts were successfully removed';

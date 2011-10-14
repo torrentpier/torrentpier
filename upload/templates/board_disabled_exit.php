@@ -20,7 +20,7 @@ if (!empty($_POST['message']))
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<meta http-equiv="Content-Style-Type" content="text/css">
-	<title><?php echo $bb_cfg['sitename']?></title>
+	<title><?php echo $bb_cfg['server_name']; ?></title>
 	<style type="text/css">
 	body { min-width: 760px; color: #000000; background: #E3E3E3; font: bold 16px Verdana; }
 	.msg { font: 12px Verdana; }

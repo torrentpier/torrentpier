@@ -246,8 +246,8 @@ ajax.callback.manage_user = function(data) {
 			<!-- IF IS_ADMIN -->
 			<tr id="delete" style="display: none;">
 			    <td colspan="2" class="med tCenter">
-					[ <a href="#" onclick="ajax.exec({action : 'manage_user', mode: 'delete_topics', user_id : '{PROFILE_USER_ID}'}); return false;" class="adm">топики целиком</a> ]&nbsp;
-                    [ <a href="#" onclick="ajax.exec({action : 'manage_user', mode: 'delete_message', user_id : '{PROFILE_USER_ID}'}); return false;" class="adm">все, кроме заглавных</a> ]
+					[ <a href="#" onclick="ajax.exec({action : 'manage_user', mode: 'delete_topics', user_id : '{PROFILE_USER_ID}'}); return false;" class="adm">{L_DELETE_USER_ALL_POSTS}</a> ]&nbsp;
+                    [ <a href="#" onclick="ajax.exec({action : 'manage_user', mode: 'delete_message', user_id : '{PROFILE_USER_ID}'}); return false;" class="adm">{L_DELETE_USER_POSTS}</a> ]
 			    </td>
 		    </tr>
 			<!-- ENDIF -->

@@ -1560,68 +1560,57 @@ function setup_style ()
 // Create date/time from format and timezone
 function bb_date ($gmepoch, $format = false, $tz = null)
 {
-	global $bb_cfg, $lang, $userdata;
+    global $bb_cfg, $lang, $userdata;
 
-	if (is_null($tz))
-	{
-		if (empty($userdata['session_logged_in']))
-		{			$tz = $bb_cfg['board_timezone'];		}
-		else $tz = $userdata['user_timezone'];
-	}
-	if (!$format)
-	{
-		$format = $bb_cfg['default_dateformat'];
-	}
-	$date = gmdate($format, $gmepoch + (3600 * $tz));
+    if (!$format) $format = $bb_cfg['default_dateformat'];
+    if (empty($lang))require_once($bb_cfg['default_lang_dir'] .'lang_main.php');
 
-    if (empty($lang))
-	{
-		require_once($bb_cfg['default_lang_dir'] .'lang_main.php');
-	}
-
-	$thetime = ($bb_cfg['translate_dates']) ? strtr(strtoupper($date), $lang['DATETIME']) : $date;
-
-	if(is_numeric($tz))
-	{
+    if (is_null($tz) || $tz == 'false')
+    {
         if (empty($userdata['session_logged_in']))
-		{
-			$tz = $bb_cfg['board_timezone'];
-		}
-		else $tz = $userdata['user_timezone'];
+        {
+            $tz2 = $bb_cfg['board_timezone'];
+        }
+        else $tz2 = $userdata['user_timezone'];
+    }
+    elseif (is_numeric($tz)) $tz2 = $tz;
 
-		$time_format = " H:i";
+    $date = gmdate($format, $gmepoch + (3600 * $tz2));
 
-		$date = getdate();
-		$today = $date['mday'];
-		$month = $date['mon'];
-		$year = $date['year'];
+    if($tz != 'false')
+    {
+        $time_format = " H:i";
 
-		$forum_date_today = @gmdate ("d", $gmepoch + (3600 * $tz));
-		$forum_date_month = @gmdate ("m", $gmepoch + (3600 * $tz));
-		$forum_date_year = @gmdate ("Y", $gmepoch + (3600 * $tz));
+        $today = gmdate("d", TIMENOW + (3600 * $tz2));
+        $month = gmdate("m", TIMENOW + (3600 * $tz2));
+        $year  = gmdate("Y", TIMENOW + (3600 * $tz2));
 
-		if ($forum_date_today == $today && $forum_date_month == $month && $forum_date_year == $year)
-		{
-			$thetime = $lang['TODAY'] . @gmdate($time_format, $gmepoch + (3600 * $tz));
-		}
-		elseif ($today != 1 && $forum_date_today == ($today-1) && $forum_date_month == $month && $forum_date_year == $year)
-		{
-			$thetime = $lang['YESTERDAY'] . @gmdate($time_format, $gmepoch + (3600 * $tz));
-		}
-		elseif ($today == 1 && $month != 1)
-		{
-			$yesterday = date ("t", mktime(0, 0, 0, ($month-1), 1, $year));
-			if ($forum_date_today == $yesterday && $forum_date_month == ($month-1) && $forum_date_year == $year)
-				$thetime = $lang['YESTERDAY'] . @gmdate($time_format, $gmepoch + (3600 * $tz));
-		}
-		elseif ($today == 1 && $month == 1)
-		{
-			$yesterday = date ("t", mktime(0, 0, 0, 12, 1, ($year -1)));
-			if ($forum_date_today == $yesterday && $forum_date_month == 12 && $forum_date_year == ($year-1))
-				$thetime = $lang['YESTERDAY'] . @gmdate($time_format, $gmepoch + (3600 * $tz));
-		}
-	}
-	return ($thetime);
+        $date_today = gmdate("d", $gmepoch + (3600 * $tz2));
+        $date_month = gmdate("m", $gmepoch + (3600 * $tz2));
+        $date_year  = gmdate("Y", $gmepoch + (3600 * $tz2));
+
+        if ($date_today == $today && $date_month == $month && $date_year == $year)
+        {
+            $date = 'today' . gmdate($time_format, $gmepoch + (3600 * $tz2));
+        }
+        elseif ($today != 1 && $date_today == ($today-1) && $date_month == $month && $date_year == $year)
+        {
+            $date = 'yesterday' . gmdate($time_format, $gmepoch + (3600 * $tz2));
+        }
+        elseif ($today == 1 && $month != 1)
+        {
+            $yesterday = date ("t", mktime(0, 0, 0, ($month-1), 1, $year));
+            if ($date_today == $yesterday && $date_month == ($month-1) && $date_year == $year)
+                $date = 'yesterday' . gmdate($time_format, $gmepoch + (3600 * $tz2));
+        }
+        elseif ($today == 1 && $month == 1)
+        {
+            $yesterday = date ("t", mktime(0, 0, 0, 12, 1, ($year -1)));
+            if ($date_today == $yesterday && $date_month == 12 && $date_year == ($year-1))
+                $date = 'yesterday' . gmdate($time_format, $gmepoch + (3600 * $tz));
+        }
+    }
+    return ($bb_cfg['translate_dates']) ? strtr(strtoupper($date), $lang['DATETIME']) : $date;
 }
 
 // Birthday

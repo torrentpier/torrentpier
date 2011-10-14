@@ -132,9 +132,6 @@ img   { border: 0px; }
 .dlComplete, .seed, .seedmed, .seedsmall { color: #006600; }
 .dlCancel { color: #666666; }
 
-/* DL list color me */
-.itsme { color: #0000FF !important; font-size: 12px; font-weight: bold; text-decoration: none;}
-
 a.dlWill,     a.dlWill:visited           { color: #0066CC; text-decoration: none; }
 a.dlDown,     a.dlDown:visited           { color: #800000; text-decoration: none; }
 a.dlComplete, a.dlComplete:visited       { color: #006600; text-decoration: none; }

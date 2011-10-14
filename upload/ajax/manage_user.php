@@ -25,7 +25,7 @@ switch($mode)
 
     case 'delete_topics':
         if (empty($this->request['confirmed']) && $userdata['user_id'] == $user_id) $this->prompt_for_confirm($lang['DELETE_USER_POSTS_ME']);
-        if (empty($this->request['confirmed'])) $this->prompt_for_confirm('Удалить все сообщения и все начатые юзером топики целиком?');
+        if (empty($this->request['confirmed'])) $this->prompt_for_confirm('РЈРґР°Р»РёС‚СЊ РІСЃРµ СЃРѕРѕР±С‰РµРЅРёСЏ Рё РІСЃРµ РЅР°С‡Р°С‚С‹Рµ СЋР·РµСЂРѕРј С‚РѕРїРёРєРё С†РµР»РёРєРѕРј?');
 
 		if (IS_ADMIN)
 	    {
@@ -40,7 +40,7 @@ switch($mode)
 
     case 'delete_message':
         if (empty($this->request['confirmed']) && $userdata['user_id'] == $user_id) $this->prompt_for_confirm($lang['DELETE_USER_POSTS_ME']);
-        if (empty($this->request['confirmed'])) $this->prompt_for_confirm('Удалить все сообщения, кроме заглавных?');
+        if (empty($this->request['confirmed'])) $this->prompt_for_confirm('РЈРґР°Р»РёС‚СЊ РІСЃРµ СЃРѕРѕР±С‰РµРЅРёСЏ, РєСЂРѕРјРµ Р·Р°РіР»Р°РІРЅС‹С…?');
 
 		if (IS_ADMIN)
 	    {
