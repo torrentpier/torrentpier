@@ -52,9 +52,9 @@ if (!defined('BB_ROOT')) die(basename(__FILE__));
 $bb_cfg = $tr_cfg = $page_cfg = array();
 
 // Increase number of revision after update
-$bb_cfg['tp_version'] = '2.1 Stable';
-$bb_cfg['tp_release_state'] = 'R300';
-$bb_cfg['tp_release_date'] = '15-10-2011';
+$bb_cfg['tp_version'] = '2.2 Beta';
+$bb_cfg['tp_release_state'] = 'R301';
+$bb_cfg['tp_release_date'] = '29-10-2011';
 
 // Database
 $charset  = 'utf8';

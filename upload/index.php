@@ -209,9 +209,9 @@ $template->assign_vars(array(
 	'NEWEST_USER'           => sprintf($lang['NEWEST_USER'], '<a href="'. PROFILE_URL . $stats['newestuser']['user_id'] .'">', $stats['newestuser']['username'], '</a>'),
 
 	// Tracker stats
-	'TORRENTS_STAT'         => sprintf($lang['TORRENTS_STAT'], $stats['torrentcount'], humn_size($stats['size'])),
-	'PEERS_STAT'		    => sprintf($lang['PEERS_STAT'], $stats['peers'], $stats['seeders'], $stats['leechers']),
-	'SPEED_STAT'		    => sprintf($lang['SPEED_STAT'], humn_size($stats['speed']) .'/s'),
+	'TORRENTS_STAT'         => ($bb_cfg['tor_stats']) ? sprintf($lang['TORRENTS_STAT'], $stats['torrentcount'], humn_size($stats['size'])) : '',
+	'PEERS_STAT'		    => ($bb_cfg['tor_stats']) ? sprintf($lang['PEERS_STAT'], $stats['peers'], $stats['seeders'], $stats['leechers']) : '',
+	'SPEED_STAT'		    => ($bb_cfg['tor_stats']) ? sprintf($lang['SPEED_STAT'], humn_size($stats['speed']) .'/s') : '',
 
 	'FORUM_IMG'             => $images['forum'],
 	'FORUM_NEW_IMG'         => $images['forum_new'],

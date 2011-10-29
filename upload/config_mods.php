@@ -45,3 +45,6 @@ $bb_cfg['gender'] = true;
 
 // CallSeed
 $bb_cfg['callseed'] = false;
+
+// Tracker stats
+$bb_cfg['tor_stats'] = true;
