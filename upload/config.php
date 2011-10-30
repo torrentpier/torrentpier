@@ -53,8 +53,8 @@ $bb_cfg = $tr_cfg = $page_cfg = array();
 
 // Increase number of revision after update
 $bb_cfg['tp_version'] = '2.2 Beta';
-$bb_cfg['tp_release_state'] = 'R301';
-$bb_cfg['tp_release_date'] = '29-10-2011';
+$bb_cfg['tp_release_state'] = 'R302';
+$bb_cfg['tp_release_date'] = '30-10-2011';
 
 // Database
 $charset  = 'utf8';
@@ -102,7 +102,7 @@ $bb_cfg['cache']['engines'] = array(
 $bb_cfg['datastore_type'] = 'filecache';
 
 // Server
-$bb_cfg['server_name'] = (!empty($_SERVER['SERVER_NAME'])) ? $_SERVER['SERVER_NAME'] : '';         // The domain name from which this board runs
+$bb_cfg['server_name'] = (!empty($_SERVER['SERVER_NAME'])) ? $_SERVER['SERVER_NAME'] : 'torrentpier.me';         // The domain name from which this board runs
 $bb_cfg['server_port'] = (!empty($_SERVER['SERVER_PORT'])) ? $_SERVER['SERVER_PORT'] : 80;                       // The port your server is running on
 $bb_cfg['script_path'] = '/';                      // The path where FORUM is located relative to the domain name
 

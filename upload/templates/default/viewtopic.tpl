@@ -220,11 +220,11 @@ function set_hid_chbox (id)
 		<p class="avatar">{postrow.POSTER_AVATAR}</p>
 	<!-- ELSE -->
 		<!-- IF QUICK_REPLY -->
-		<p class="nick" title="{L_INS_NAME_TIP}" onmouseout="bbcode.refreshSelection(false);" onmouseover="bbcode.refreshSelection(true);" onclick="bbcode.onclickPoster('{postrow.POSTER_NAME_JS}');">
+		<p class="nick<!-- IF postrow.POSTER_NAME --> nick-author<!-- ENDIF -->" title="{L_INS_NAME_TIP}" onmouseout="bbcode.refreshSelection(false);" onmouseover="bbcode.refreshSelection(true);" onclick="bbcode.onclickPoster('{postrow.POSTER_NAME_JS}');">
 			<a href="#" onclick="return false;">{postrow.POSTER_NAME}</a>
 		</p>
 		<!-- ELSE -->
-		<p class="nick">{postrow.POSTER_NAME}</p>
+		<p class="nick<!-- IF postrow.POSTER_NAME --> nick-author<!-- ENDIF -->">{postrow.POSTER_NAME}</p>
 		<!-- ENDIF -->
 
 		<!-- IF postrow.POSTER_RANK --><p class="rank_txt">{postrow.POSTER_RANK}</p><!-- ENDIF -->
