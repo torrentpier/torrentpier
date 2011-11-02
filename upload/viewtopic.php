@@ -860,7 +860,9 @@ for($i = 0; $i < $total_posts; $i++)
 	$user_sig = ($bb_cfg['allow_sig'] && !$user->opt_js['h_sig'] && $postrow[$i]['user_sig']) ? $postrow[$i]['user_sig'] : '';
 
 	if(bf($postrow[$i]['user_opt'], 'user_opt', 'allow_sig'))
-	{		$user_sig = $lang['SIGNATURE_DISABLE'];	}
+	{
+		$user_sig = $lang['SIGNATURE_DISABLE'];
+	}
 	else if ($user_sig)
 	{
 		$user_sig = bbcode2html($user_sig);
@@ -947,7 +949,7 @@ for($i = 0; $i < $total_posts; $i++)
 		'ROW_CLASS'          => !($i % 2) ? 'row1' : 'row2',
 		'POST_ID'            => $postrow[$i]['post_id'],
 		'IS_NEWEST'          => ($postrow[$i]['post_id'] == $newest),
-		'POSTER_NAME'        => ($poster_id != $t_data['topic_poster']) ? profile_url(array('username' => $poster, 'user_rank' => $user_rank)) : $poster,
+		'POSTER_NAME'        => ($poster_id != $t_data['topic_poster']) ? profile_url(array('username' => $poster, 'user_rank' => $user_rank)) : wbr($poster),
 		'POSTER_NAME_JS'     => addslashes($poster),
 		'POSTER_RANK'        => $poster_rank,
 		'RANK_IMAGE'         => $rank_image,
@@ -958,6 +960,7 @@ for($i = 0; $i < $total_posts; $i++)
 		'POSTER_FROM'        => ($bb_cfg['show_poster_from']) ? wbr($poster_from) : '',
 		'POSTER_BOT'         => ($poster_id == BOT_UID),
 		'POSTER_ID'          => $poster_id,
+		'POSTER_AUTHOR'      => ($poster_id == $t_data['topic_poster']),
 		'POSTED_AFTER'       => ($prev_post_time) ? delta_time($postrow[$i]['post_time'], $prev_post_time) : '',
 		'IS_UNREAD'          => is_unread($postrow[$i]['post_time'], $topic_id, $forum_id),
 		'IS_FIRST_POST'      => (!$start && ($postrow[$i]['post_id'] == $t_data['topic_first_post_id'])),
@@ -1034,7 +1037,9 @@ if ($bb_cfg['show_quick_reply'])
 }
 
 foreach($is_auth as $name => $is)
-{	$template->assign_vars(array(strtoupper($name) => $is));}
+{
+	$template->assign_vars(array(strtoupper($name) => $is));
+}
 
 $template->assign_vars(array(
 	'PG_ROW_CLASS' => isset($pg_row_class) ? $pg_row_class : 'row1',

@@ -38,7 +38,8 @@ function edit_post(post_id, type, text) {
 		ajax.open_edit = false;
 	}
 }
-ajax.callback.posts = function(data) {	if(data.html){
+ajax.callback.posts = function(data) {
+	if(data.html){
 		$('#pp_'+ data.post_id).show().html(data.html);
 		initPostBBCode('#pp_'+ data.post_id);
 	    $('#pe_'+ data.post_id).hide();
@@ -48,7 +49,8 @@ ajax.callback.posts = function(data) {	if(data.html){
 		$('#pe_'+ data.post_id).html(data.text);
 	}
 	if(data.redirect) document.location.href = data.redirect;
-	if(data.hide) {		if(ajax.open_edit == data.post_id) ajax.open_edit = false;
+	if(data.hide) {
+		if(ajax.open_edit == data.post_id) ajax.open_edit = false;
 		$('tbody#post_'+ data.post_id).hide();
 	}
 	if(data.quote) $('textarea#message').attr('value', $('textarea#message').val() + data.message +' ').focus();
@@ -220,11 +222,11 @@ function set_hid_chbox (id)
 		<p class="avatar">{postrow.POSTER_AVATAR}</p>
 	<!-- ELSE -->
 		<!-- IF QUICK_REPLY -->
-		<p class="nick<!-- IF postrow.POSTER_NAME --> nick-author<!-- ENDIF -->" title="{L_INS_NAME_TIP}" onmouseout="bbcode.refreshSelection(false);" onmouseover="bbcode.refreshSelection(true);" onclick="bbcode.onclickPoster('{postrow.POSTER_NAME_JS}');">
+		<p class="nick<!-- IF postrow.POSTER_AUTHOR --> nick-author<!-- ENDIF -->" title="{L_INS_NAME_TIP}" onmouseout="bbcode.refreshSelection(false);" onmouseover="bbcode.refreshSelection(true);" onclick="bbcode.onclickPoster('{postrow.POSTER_NAME_JS}');">
 			<a href="#" onclick="return false;">{postrow.POSTER_NAME}</a>
 		</p>
 		<!-- ELSE -->
-		<p class="nick<!-- IF postrow.POSTER_NAME --> nick-author<!-- ENDIF -->">{postrow.POSTER_NAME}</p>
+		<p class="nick<!-- IF postrow.POSTER_AUTHOR --> nick-author<!-- ENDIF -->">{postrow.POSTER_NAME}</p>
 		<!-- ENDIF -->
 
 		<!-- IF postrow.POSTER_RANK --><p class="rank_txt">{postrow.POSTER_RANK}</p><!-- ENDIF -->
