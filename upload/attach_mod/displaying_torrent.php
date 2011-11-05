@@ -132,8 +132,6 @@ if ($tor_auth)
 {
 	$template->assign_vars(array(
 		'TOR_CONTROLS'  => true,
-		'TOR_ACTION'    => "torrent.php",
-		'TOR_STATUS'    => "torstatus.php",
 		'TOR_ATTACH_ID' => $attach_id,
 	));
 
@@ -213,7 +211,7 @@ if ($tor_reged && $tor_info)
 			'DOWNLOAD_NAME'   => $display_name,
 			'TRACKER_LINK'    => $tracker_link,
 			'ATTACH_ID'       => $attach_id,
-			'TOR_FROZEN'      => ($tor_info['tor_status'] == TOR_STATUS_FROZEN || $tor_info['tor_status'] == 3 || $tor_info['tor_status'] == 4 || $tor_info['tor_status'] == 7),
+			'TOR_FROZEN'      => isset($bb_cfg['tor_frozen'][$tor_info['tor_status']]),
 			'TOR_SILVER_GOLD' => $tor_type,
 
 			// torrent status mod
