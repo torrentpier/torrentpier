@@ -168,7 +168,7 @@ switch($this->request['type'])
 					</div>
 					<textarea id="message-'. $post_id .'" class="editor mrg_4" name="message" rows="18" cols="92">'. $post['post_text'] .'</textarea>
 					<div class="mrg_4 tCenter">
-						<input title="Alt+Enter" type="submit" value="'.$lang['PREVIEW'].'">
+						<input title="Alt+Enter" name="preview" type="submit" value="'.$lang['PREVIEW'].'">
 						<input type="button" onclick="edit_post('. $post_id .');" value="'. $lang['CANCEL'] .'">
 						<input type="button" onclick="edit_post('. $post_id .', \'editor\', $(\'#message-'. $post_id .'\').val()); return false;" class="bold" value="'. $lang['SUBMIT'] .'">
 					</div><hr>

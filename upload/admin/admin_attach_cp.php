@@ -524,7 +524,7 @@ if ($view == 'attachments')
 
 					if (strlen($post_title) > 32)
 					{
-						$post_title = substr($post_title, 0, 30) . '...';
+						$post_title = str_short($post_title, 30);
 					}
 
 					$view_topic = append_sid(BB_ROOT . 'viewtopic.php?' . POST_POST_URL . '=' . $ids[$j]['post_id'] . '#' . $ids[$j]['post_id']);
