@@ -56,7 +56,7 @@ function tpl_func_screen_shots ($item, $val)
 
 // get tpl data
 $sql = "SELECT *
-	FROM ". BB_TOPIC_TPL ."
+	FROM ". BB_TOPIC_TPL_OLD ."
 	WHERE tpl_id = ". (int) $post_info['topic_tpl_id'];
 
 if ($topic_tpl = DB()->fetch_row($sql))

@@ -1,0 +1,24 @@
+
+<div id="tpl-abr-box"></div>
+<script type="text/javascript">
+$(document).ready(function(){
+	$.each(TPL.el_id, function(el,desc){
+		var m = el.match(/^(.*)(_abr)$/);
+		if (m == null) {
+			return true; // continue
+		}
+		var el_abr = m[0];
+		var el_ref = m[1];
+		$('#tpl-abr-box').append('<div id="'+el_abr+'-hid">'+ TPL.build_select_el(el_abr) +'</div>');
+		TPL.submit_fn[el_abr] = function(){
+			if ( $('#'+el_ref).length ) {
+				$('#'+el_abr)[0].selectedIndex = $('#'+el_ref)[0].selectedIndex;
+			}
+		}
+	});
+});
+</script>
+
+<!--load_pic_btn-->
+<div id="load_pic_btn"><input type="button" style="width: 140px;" value="Загрузить картинку" onclick="window.open('http://ipicture.ru', '_blank'); return false;" /></div>
+<!--/load_pic_btn-->

@@ -70,6 +70,7 @@ class ajax_common
 
 		'change_tor_status' => array('mod'),
 		'mod_action'        => array('mod'),
+        'topic_tpl'         => array('mod'),
 
 		'gen_passkey'       => array('user'),
 		'change_torrent'    => array('user'),
@@ -180,7 +181,6 @@ class ajax_common
 	function init ()
 	{
 		$this->request = $_POST;
-
 		$this->action  =& $this->request['action'];
 	}
 
@@ -492,6 +492,11 @@ class ajax_common
 	function manage_user()
 	{
 		require(AJAX_DIR .'manage_user.php');
+	}
+
+	function topic_tpl()
+	{
+		require(AJAX_DIR .'topic_tpl.php');
 	}
 }
 

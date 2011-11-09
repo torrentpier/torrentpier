@@ -49,6 +49,12 @@ $tracking_forums = get_tracks('forum');
 // Start session management
 $user->session_start();
 
+if ($mode == 'new_rel')
+{
+	require(INC_DIR .'posting_tpl.php');
+	exit;
+}
+
 // What auth type do we need to check?
 $is_auth = array();
 switch ($mode)

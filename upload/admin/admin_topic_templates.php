@@ -15,7 +15,7 @@ $mode = (string) request_var('mode', '');
 
 if ($mode == 'templates')
 {
-	$sql = "SELECT * FROM ". BB_TOPIC_TPL ." ORDER BY tpl_name";
+	$sql = "SELECT * FROM ". BB_TOPIC_TPL_OLD ." ORDER BY tpl_name";
 
 	foreach (DB()->fetch_rowset($sql) as $i => $row)
 	{
@@ -40,7 +40,7 @@ else if ($mode == 'add' || $mode == 'edit')
     {    	$tpl_id = (int) request_var('tpl', '');
     	if(!$tpl_id) bb_die('');
 
-    	$row = DB()->fetch_row("SELECT * FROM ". BB_TOPIC_TPL ." WHERE tpl_id = $tpl_id");
+    	$row = DB()->fetch_row("SELECT * FROM ". BB_TOPIC_TPL_OLD ." WHERE tpl_id = $tpl_id");
         if(!$row) bb_die('');
 
         $template->assign_vars(array(
@@ -67,7 +67,7 @@ else if ($mode == 'add' || $mode == 'edit')
     if(isset($_POST['submit']))
     {
 	    if($mode == 'edit')
-	    {	    	DB()->query("UPDATE ". BB_TOPIC_TPL ." SET
+	    {	    	DB()->query("UPDATE ". BB_TOPIC_TPL_OLD ." SET
 					tpl_name = '". DB()->escape($tpl_name) ."',
 					tpl_script = '". DB()->escape($tpl_script) ."',
 					tpl_template = '". DB()->escape($tpl_template) ."',
@@ -76,7 +76,7 @@ else if ($mode == 'add' || $mode == 'edit')
 			");
 			$message = 'изменено';	    }
 	    else
-	    {	    	DB()->query("INSERT INTO ". BB_TOPIC_TPL ." (tpl_name, tpl_script, tpl_template, tpl_desc)
+	    {	    	DB()->query("INSERT INTO ". BB_TOPIC_TPL_OLD ." (tpl_name, tpl_script, tpl_template, tpl_desc)
 				VALUES ('". DB()->escape($tpl_name) ."', '". DB()->escape($tpl_script) ."', '". DB()->escape($tpl_template) ."', '". DB()->escape($tpl_desc) ."')");
 			$message = 'добавлено';	    }
 
@@ -93,12 +93,12 @@ else if ($mode == 'delete')
 
     if (isset($_POST['confirm']))
 	{
-		DB()->query("DELETE ". BB_TOPIC_TPL ." WHERE tpl_id IN(". join(',', $tpl_ids) .")");
+		DB()->query("DELETE ". BB_TOPIC_TPL_OLD ." WHERE tpl_id IN(". join(',', $tpl_ids) .")");
 		bb_die('Удалено');
 	}
 	else
 	{
-		$names = DB()->fetch_rowset("SELECT tpl_name FROM ". BB_TOPIC_TPL ." WHERE tpl_id IN(". join(',', $tpl_ids) .") ORDER BY tpl_name", 'tpl_name');
+		$names = DB()->fetch_rowset("SELECT tpl_name FROM ". BB_TOPIC_TPL_OLD ." WHERE tpl_id IN(". join(',', $tpl_ids) .") ORDER BY tpl_name", 'tpl_name');
 
 		print_confirmation(array(
 			'QUESTION'      => 'Вы уверены, что хотите удалить?',
@@ -120,7 +120,7 @@ else
 	$available_tpl_id = array(0);
 	$tpl_select = array($lang['TPL_NONE'] => 0);
 
-	$sql = "SELECT * FROM ". BB_TOPIC_TPL ." ORDER BY tpl_name";
+	$sql = "SELECT * FROM ". BB_TOPIC_TPL_OLD ." ORDER BY tpl_name";
 
 	foreach (DB()->fetch_rowset($sql) as $row)
 	{

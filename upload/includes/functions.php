@@ -667,6 +667,8 @@ function delta_time ($timestamp_1, $timestamp_2 = TIMENOW, $granularity = 'auto'
 
 function get_select ($type)
 {
+	global $lang;
+
 	$select_ary = array();
 
 	switch ($type)
@@ -689,6 +691,16 @@ function get_select ($type)
 				$select_ary[$row['group_name']] = $row['group_id'];
 			}
 			$select_name = POST_GROUPS_URL;
+			break;
+
+		case 'forum_tpl':
+			$sql = "SELECT tpl_id, tpl_name FROM ". BB_TOPIC_TPL ." ORDER BY tpl_name";
+			$select_ary[$lang['SELECT']] = 0;
+			foreach (DB()->fetch_rowset($sql) as $row)
+			{
+				$select_ary[$row['tpl_name']] = $row['tpl_id'];
+			}
+			$select_name = 'forum_tpl_select';
 			break;
 	}
 	return ($select_ary) ? build_select($select_name, $select_ary) : '';
