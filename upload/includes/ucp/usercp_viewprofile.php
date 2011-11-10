@@ -17,9 +17,10 @@ if (!$profiledata = get_userdata($_GET[POST_USERS_URL]))
 	bb_die($lang['NO_USER_ID_SPECIFIED']);
 }
 
-if(bf($profiledata['user_opt'], 'user_opt', 'view_profile') && IS_GUEST)
-{	meta_refresh(append_sid("login.php?redirect={$_SERVER['REQUEST_URI']}", true));
-    bb_die("<b>{$profiledata['username']}</b> " . $lang['FORBADE_VIEWING']);}
+if (!$userdata['session_logged_in'])
+{
+	redirect(append_sid("login.php?redirect={$_SERVER['REQUEST_URI']}", true));
+}
 
 if (!$ranks = $datastore->get('ranks'))
 {
@@ -74,15 +75,20 @@ if ($report_user && $report_user->auth_check('auth_write'))
 // Generate page
 //
 
+$profile_user_id = ($profiledata['user_id'] == $userdata['user_id']);
+
 $signature = ($bb_cfg['allow_sig'] && $profiledata['user_sig']) ? $profiledata['user_sig'] : '';
 
 if(bf($profiledata['user_opt'], 'user_opt', 'allow_sig'))
 {
-	if($profiledata['user_id'] == $userdata['user_id'])
-	{		$signature = $lang['SIGNATURE_DISABLE'];
+	if($profile_user_id)
+	{
+		$signature = $lang['SIGNATURE_DISABLE'];
 	}
 	else
-	{		$signature = '';	}
+	{
+		$signature = '';
+	}
 }
 else if ($signature)
 {
@@ -104,6 +110,7 @@ $template->assign_vars(array(
 	'ICQ'                  => $profiledata['user_icq'],
 	'LAST_VISIT_TIME'      => ($profiledata['user_lastvisit']) ? (bf($profiledata['user_opt'], 'user_opt', 'allow_viewonline') && !IS_ADMIN) ? $lang['HIDDEN_USER'] : bb_date($profiledata['user_lastvisit'], 'Y-m-d H:i', 'false') : $lang['NEVER'],
 	'LAST_ACTIVITY_TIME'   => ($profiledata['user_session_time']) ? (bf($profiledata['user_opt'], 'user_opt', 'allow_viewonline') && !IS_ADMIN) ? $lang['HIDDEN_USER'] : bb_date($profiledata['user_session_time'], 'Y-m-d H:i', 'false') : $lang['NEVER'],
+	'ALLOW_DLS'            => (!bf($profiledata['user_opt'], 'user_opt', 'allow_dls') || (IS_AM || $profile_user_id)),
 	'LOCATION'             => $profiledata['user_from'],
 
 	'USER_ACTIVE'          => $profiledata['user_active'],
@@ -117,7 +124,6 @@ $template->assign_vars(array(
 	'AVATAR_IMG'           => get_avatar($profiledata['user_avatar'], $profiledata['user_avatar_type'], !bf($profiledata['user_opt'], 'user_opt', 'allow_avatar')),
 
 	'L_VIEWING_PROFILE'    => sprintf($lang['VIEWING_USER_PROFILE'], $profiledata['username']),
-	'L_ABOUT_USER_PROFILE' => sprintf($lang['ABOUT_USER'], $profiledata['username']),
 
 	'U_SEARCH_USER'        => "search.php?search_author=1&amp;uid={$profiledata['user_id']}",
 	'U_SEARCH_TOPICS'      => "search.php?uid={$profiledata['user_id']}&amp;myt=1",
@@ -128,11 +134,12 @@ $template->assign_vars(array(
 	'SIGNATURE'            => $signature,
 ));
 
-//bt
-// Show users torrent-profile
-define('IN_VIEWPROFILE', TRUE);
-include(INC_DIR .'ucp/torrent_userprofile.php');
-//bt end
+if (!bf($profiledata['user_opt'], 'user_opt', 'allow_dls') || (IS_AM || $profile_user_id))
+{
+    // Show users torrent-profile
+    define('IN_VIEWPROFILE', TRUE);
+    include(INC_DIR .'ucp/torrent_userprofile.php');
+}
 
 $template->assign_vars(array(
 	'SHOW_ACCESS_PRIVILEGE' => IS_ADMIN,

@@ -53,8 +53,8 @@ $bb_cfg = $tr_cfg = $page_cfg = array();
 
 // Increase number of revision after update
 $bb_cfg['tp_version'] = '2.2 Beta';
-$bb_cfg['tp_release_state'] = 'R306';
-$bb_cfg['tp_release_date'] = '09-11-2011';
+$bb_cfg['tp_release_state'] = 'R307';
+$bb_cfg['tp_release_date'] = '10-11-2011';
 
 // Database
 $charset  = 'utf8';
@@ -171,9 +171,9 @@ $bb_cfg['allow_dl_list_names_mode'] = true;
 $bb_cfg['torrent_sign']   = '';                    // e.g. "[yoursite.com]"
 $bb_cfg['tor_help_links'] = '';
 
-// Days to keep torrent registered, if:
-$bb_cfg['seeder_last_seen_days_keep']  = 20;
-$bb_cfg['seeder_never_seen_days_keep'] = 5;
+// Сколько дней сохранять торрент зарегистрированным / Days to keep torrent registered, if:
+$bb_cfg['seeder_last_seen_days_keep']  = 0; // сколько дней назад был сид последний раз
+$bb_cfg['seeder_never_seen_days_keep'] = 0; // сколько дней имеется статус "Сида не было никогда"
 
 // Ratio limits
 define('TR_RATING_LIMITS', true);                  // ON/OFF

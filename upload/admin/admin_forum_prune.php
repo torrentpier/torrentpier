@@ -27,7 +27,7 @@ if (isset($_REQUEST['submit']))
 	}
 	if (!$var =& $_REQUEST['prunedays'] OR !$prunedays = abs(intval($var)))
 	{
-		message_die(GENERAL_MESSAGE, return_msg_prune('Prune days not selected'));
+		message_die(GENERAL_MESSAGE, return_msg_prune($lang['NOT_DAYS']));
 	}
 
 	$prunetime = TIMENOW - 86400*$prunedays;

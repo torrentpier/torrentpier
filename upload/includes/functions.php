@@ -1,9 +1,6 @@
 <?php
 
-if (!defined('BB_ROOT'))
-{
-	die(basename(__FILE__));
-}
+if (!defined('BB_ROOT')) die(basename(__FILE__));
 
 /**
  *  $request_type = 'p' or 'g' (for POST or GET)
@@ -280,7 +277,7 @@ $bf['user_opt'] = array(
 	'allow_topic'      => 11, // Запрет на создание новых тем
 	'allow_post'       => 12, // Запрет на отправку сообщений
 	'allow_post_edit'  => 13, // Запрет на редактирование сообщений
-	'view_profile'     => 14, // Запрет на просмотр профиля гостям
+	'allow_dls'        => 14, // Запрет на список текущих закачек в профиле
 );
 
 function bit2dec ($bit_num)
@@ -1820,12 +1817,12 @@ function generate_pagination($base_url, $num_items, $per_page, $start_item, $add
 
 	}
 
-	$pagination = ($page_string) ? '<a class="menu-root" href="#pg-jump">Страницы</a> :&nbsp;&nbsp;'. $page_string : '';
+	$pagination = ($page_string) ? '<a class="menu-root" href="#pg-jump">'. $lang['GOTO_PAGE'] .'</a> :&nbsp;&nbsp;'. $page_string : '';
 	$pagination = str_replace('&amp;start=0', '', $pagination);
 
 	$template->assign_vars(array(
 		'PAGINATION'   => $pagination,
-		'PAGE_NUMBER'  => sprintf('Страница <b>%d</b> из <b>%s</b>', ( floor($start_item/$per_page) + 1 ), ceil( $num_items / $per_page )),
+		'PAGE_NUMBER'  => sprintf($lang['PAGE_OF'], ( floor($start_item/$per_page) + 1 ), ceil( $num_items / $per_page )),
 		'PG_BASE_URL'  => $base_url,
 		'PG_PER_PAGE'  => $per_page,
 	));
@@ -2614,7 +2611,7 @@ function log_sphinx_error ($err_type, $err_msg, $query = '')
 
 function get_title_match_topics ($title_match_sql, $forum_ids = array())
 {
-	global $bb_cfg, $sphinx, $userdata, $title_match;
+	global $bb_cfg, $sphinx, $userdata, $title_match, $lang;
 
 	$where_ids = array();
 	if($forum_ids) $forum_ids = array_diff($forum_ids, array(0 => 0));
@@ -2646,7 +2643,7 @@ function get_title_match_topics ($title_match_sql, $forum_ids = array())
 		{
 			if (strpos($error, 'errno=110'))
 			{
-				bb_die('В данный момент поисковик недоступен<br /><br />Попробуйте повторить запрос через несколько секунд');
+				bb_die($lang['SEARCH_ERROR']);
 			}
 			log_sphinx_error('ERR', $error, $title_match_sql);
 		}
@@ -2683,7 +2680,7 @@ function get_title_match_topics ($title_match_sql, $forum_ids = array())
 	}
 	else
 	{
-		bb_die('Поиск временно отключен');
+		bb_die($lang['SEARCH_OFF']);
 	}
 
 	return $where_ids;
@@ -2751,11 +2748,11 @@ function get_avatar ($avatar, $type, $allow_avatar = true)
 
 function set_die_append_msg ($forum_id = null, $topic_id = null)
 {
-	global $template;
+	global $lang, $template;
 	$msg = '';
-	$msg .= ($topic_id) ? '<p class="mrg_10"><a href="viewtopic.php?t='. $topic_id .'">Вернуться в тему</a></p>' : '';
-	$msg .= ($forum_id) ? '<p class="mrg_10"><a href="viewforum.php?f='. $forum_id .'">Вернуться в форум</a></p>' : '';
-	$msg .= '<p class="mrg_10"><a href="index.php">Вернуться на главную</a></p>';
+	$msg .= ($topic_id) ? '<p class="mrg_10"><a href="viewtopic.php?t='. $topic_id .'">'. $lang['CLICK_RETURN_TOPIC'] .'</a></p>' : '';
+	$msg .= ($forum_id) ? '<p class="mrg_10"><a href="viewforum.php?f='. $forum_id .'">'. $lang['CLICK_RETURN_FORUM'] .'</a></p>' : '';
+	$msg .= '<p class="mrg_10"><a href="index.php">'. $lang['CLICK_RETURN_INDEX'] .'</a></p>';
 	$template->assign_var('BB_DIE_APPEND_MSG', $msg);
 }
 

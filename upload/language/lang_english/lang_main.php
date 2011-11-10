@@ -526,8 +526,7 @@ $lang['OUTBOX_EXPL'] = '';
 //
 // Profiles/Registration
 //
-$lang['VIEWING_USER_PROFILE'] = 'Viewing profile :: %s'; // %s is username
-$lang['ABOUT_USER'] = 'All about %s'; // %s is username
+$lang['VIEWING_USER_PROFILE'] = 'Viewing profile :: %s';
 
 $lang['DISABLED_USER'] = 'Account disabled';
 $lang['MANAGE_USER'] = 'Administration';
@@ -802,6 +801,8 @@ $lang['MEMBERS_IN_GROUP'] = 'Members in group';
 //
 // Search
 //
+$lang['SEARCH_OFF'] = 'Search is temporarily disabled';
+$lang['SEARCH_ERROR'] = 'At the moment, the search engine is not available<br /><br />Try to repeat the request after several seconds';
 $lang['SEARCH_HELP_URL'] = 'Search Help';
 $lang['SEARCH_QUERY'] = 'Search Query';
 $lang['SEARCH_OPTIONS'] = 'Search Options';
@@ -1579,8 +1580,7 @@ $lang['ICQ_ERROR'] = 'The field of "ICQ" may contain only icq number';
 $lang['INVALID_DATE'] = 'Error date ';
 $lang['PROFILE_USER'] = 'Viewing profile';
 $lang['GOOD_UPDATE'] = 'was successfully changed';
-$lang['FORBADE_VIEWING'] = 'forbade visitors viewing your profile';
-$lang['DENY_VISITORS'] = 'Deny visitors viewing your profile';
+$lang['DENY_VISITORS'] = 'Hide the current list of downloads on your profile';
 $lang['BAN_USER'] = 'To prevent a user';
 $lang['USER_NOT_ALLOWED'] = 'Users are not permitted';
 $lang['HIDE_AVATARS'] = 'Show avatars';

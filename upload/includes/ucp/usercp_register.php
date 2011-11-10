@@ -396,7 +396,7 @@ foreach ($profile_fields as $field => $can_edit)
 		    'notify'           => true,
 			'notify_pm'        => true,
 			'hide_porn_forums' => true,
-			'view_profile'     => true,
+			'allow_dls'        => true,
 		);
 		foreach ($update_user_opt as $opt => $can_change_opt)
 		{

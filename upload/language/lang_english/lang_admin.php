@@ -432,7 +432,7 @@ $lang['PRUNE_TOPICS_NOT_POSTED'] = 'Prune topics with no replies in this many da
 $lang['TOPICS_PRUNED'] = 'Topics pruned';
 $lang['POSTS_PRUNED'] = 'Posts pruned';
 $lang['PRUNE_SUCCESS'] = 'Pruning of forums was successful';
-
+$lang['NOT_DAYS'] = 'Prune days not selected';
 
 //
 // Word censor

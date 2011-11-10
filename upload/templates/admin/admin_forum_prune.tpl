@@ -26,7 +26,7 @@
 </tr>
 <!-- END pruned -->
 <tr>
-	<td colspan="2" class="row2 tCenter"><b>{L_PRUNE_SUCCESSF}</b></td>
+	<td colspan="2" class="row2 tCenter"><b>{L_PRUNE_SUCCESS}</b></td>
 </tr>
 <!-- ENDIF -->
 <tr>

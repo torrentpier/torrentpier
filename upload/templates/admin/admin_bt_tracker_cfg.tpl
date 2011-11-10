@@ -11,7 +11,10 @@
 <!-- IF DISABLE_SUBMIT -->
 <tr>
 	<td colspan="2" class="pad_0 tCenter">
-	<p class="warnColor1 warnBorder1 pad_10">Changes disabled (see <b>$tr_cfg</b> in config.php)</p>
+	<p class="warnColor1 warnBorder1 pad_10">Changes disabled (see <b>$tr_cfg</b> in config.php)
+	<br />
+	Изменение данных из файла config.php при необходимости. Строка ~143
+	</p>
 	</td>
 </tr>
 <!-- ENDIF -->

@@ -136,9 +136,6 @@ ajax.callback.manage_user = function(data) {
 	<th colspan="2" class="thHead">{L_VIEWING_PROFILE}</th>
 </tr>
 <tr>
-	<td colspan="2" class="catTitle">{L_ABOUT_USER_PROFILE}</td>
-</tr>
-<tr>
 	<td class="row1 vTop tCenter" width="30%">
 
 		<p class="mrg_4">{AVATAR_IMG}</p>
@@ -321,6 +318,7 @@ ajax.callback.manage_user = function(data) {
 <a name="torrent"></a>
 <div class="spacer_8"></div>
 
+<!-- IF ALLOW_DLS -->
 <table class="bordered w100">
 <tr>
 	<th colspan="4" class="thHead">{L_VIEW_TOR_PROF}</th>
@@ -397,7 +395,7 @@ ajax.callback.manage_user = function(data) {
 
 		</td>
 	</tr>
-
+	
 	<tr>
 		<th colspan="4" class="thHead">{L_CUR_ACTIVE_DLS}</th>
 	</tr>
@@ -481,8 +479,8 @@ ajax.callback.manage_user = function(data) {
 			<!-- ENDIF -->
 		</td>
 	</tr>
-
 </table>
+<!-- ENDIF -->
 
 <!--bottom_info-->
 <div class="bottom_info">
