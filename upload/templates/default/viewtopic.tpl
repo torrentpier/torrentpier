@@ -115,6 +115,8 @@ function set_hid_chbox (id)
 		<!-- IF AUTH_MOD -->
 		<td class="small bold nowrap" style="padding: 0px 0px 0px 4px;">
 			<!-- IF IN_MODERATION -->{L_MODERATE_TOPIC}<!-- ELSE --><a href="{PAGE_URL}&amp;mod=1&amp;start={PAGE_START}" class="small bold">{L_MODERATE_TOPIC}</a><!-- ENDIF -->
+			&nbsp;|&nbsp;
+			<a class="small bold" href="{PIN_HREF}">{PIN_TITLE}</a>
 		</td>
 		<!-- IF SELECT_PPP -->
 		<td class="med" style="padding: 0px 4px 2px 4px;">|</td>

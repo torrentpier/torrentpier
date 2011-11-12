@@ -1693,3 +1693,9 @@ $lang['DL_ULR'] = 'ULR';
 $lang['DL_STOPPED'] = 'stopped';
 $lang['DL_UPD'] = 'upd: ';
 $lang['DL_INFO'] = 'shows data <i><b>only for the current session</b></i>';
+
+// Post PIN
+$lang['POST_PIN'] = 'Pin first post';
+$lang['POST_UNPIN'] = 'Unpin first post';
+$lang['POST_PINNED'] = 'First post pinned';
+$lang['POST_UNPINNED'] = 'First post unpinned';

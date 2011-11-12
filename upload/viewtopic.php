@@ -368,6 +368,28 @@ $post_order = (isset($_POST['postorder']) && $_POST['postorder'] !== 'asc') ? 'd
 //
 // Go ahead and pull all data for this topic
 //
+// 1. Add first post of topic if it pinned and page of topic not first
+$first_post = false;
+if ($t_data['topic_show_first_post'] && ( $start != 0))
+{
+	$first_post = DB()->fetch_rowset("
+		SELECT
+		  u.username, u.user_id, u.user_posts, u.user_from,
+		  u.user_regdate, u.user_rank, u.user_sig,
+		  u.user_avatar, u.user_avatar_type,
+		  u.user_opt,
+		  p.*,
+		  h.post_html, IF(h.post_html IS NULL, pt.post_text, NULL) AS post_text
+		FROM      ". BB_POSTS      ." p
+		LEFT JOIN ". BB_USERS      ." u  ON(u.user_id = p.poster_id)
+		LEFT JOIN ". BB_POSTS_TEXT ." pt ON(pt.post_id = p.post_id)
+		LEFT JOIN ". BB_POSTS_HTML ." h  ON(h.post_id = p.post_id)
+		WHERE
+			p.post_id = {$t_data['topic_first_post_id']}
+		LIMIT 1
+	");
+}
+// 2. All others posts
 $sql = "
 	SELECT
 	  u.username, u.user_id, u.user_posts, u.user_from,
@@ -394,6 +416,7 @@ $sql = "
 
 if ($postrow = DB()->fetch_rowset($sql))
 {
+	if ($first_post) $postrow = array_merge($first_post, $postrow);
 	$total_posts = count($postrow);
 }
 else
@@ -590,6 +613,10 @@ $template->assign_vars(array(
 	'SPOILER_OPENED'      => $user->opt_js['sp_op'],
 
 	'HIDE_RANK_IMG_DIS'   => !$bb_cfg['show_rank_image'],
+
+	'PINNED_FIRST_POST'   => ($t_data['topic_show_first_post']),
+	'PIN_HREF'            => $t_data['topic_show_first_post'] ? "modcp.php?t=$topic_id&amp;mode=post_unpin" : "modcp.php?t=$topic_id&amp;mode=post_pin",
+	'PIN_TITLE'           => $t_data['topic_show_first_post'] ? $lang['POST_UNPIN'] : $lang['POST_PIN'],
 
 	'AUTH_MOD'            => $is_auth['auth_mod'],
 	'IN_MODERATION'       => $moderation,

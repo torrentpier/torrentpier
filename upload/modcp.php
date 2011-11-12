@@ -194,6 +194,8 @@ switch ($mode)
 	case 'unlock':
 	case 'set_download':
 	case 'unset_download':
+	case 'post_stick':
+	case 'post_unstick':
 
 		if (empty($_POST['topic_id_list']) && empty($topic_id))
 		{
@@ -741,6 +743,80 @@ switch ($mode)
 		}
 
 		$template->set_filenames(array('body' => 'modcp.tpl'));
+		break;
+
+	case 'post_pin':
+	case 'post_unpin':
+		$pin = ($mode == 'post_pin');
+		$new_topic_status = ($pin) ? 1 : 0;
+
+		if(count($topic_csv))
+		{
+			$sql = "
+				SELECT topic_id, topic_title
+				FROM ". BB_TOPICS ."
+				WHERE topic_id IN($topic_csv)
+					AND forum_id = $forum_id
+					AND topic_show_first_post != ". TOPIC_MOVED ."
+					AND topic_show_first_post != $new_topic_status
+			";
+
+			$topic_csv = array();
+
+			foreach (DB()->fetch_rowset($sql) as $row)
+			{
+				$topic_csv[] = $row['topic_id'];
+				$log_topics[$row['topic_id']] = $row['topic_title'];
+			}
+
+			if (!$topic_csv = get_id_csv($topic_csv))
+			{
+				message_die(GENERAL_MESSAGE, $lang['NONE_SELECTED']);
+			}
+
+			DB()->query("
+				UPDATE ". BB_TOPICS ." SET
+					topic_show_first_post = $new_topic_status
+				WHERE topic_id IN($topic_csv)
+			");
+
+			$msg = ($pin) ? $lang['POST_PINNED'] : $lang['POST_UNPINNED'];
+			message_die(GENERAL_MESSAGE, return_msg_mcp($msg));
+		}
+		elseif ($topic_id)
+		{
+			$sql = "
+				SELECT topic_id, topic_title
+				FROM ". BB_TOPICS ."
+				WHERE topic_id = $topic_id
+					AND forum_id = $forum_id
+					AND topic_show_first_post != ". TOPIC_MOVED ."
+					AND topic_show_first_post != $new_topic_status
+				LIMIT 1
+			";
+
+			$topic_csv = array();
+
+			foreach (DB()->fetch_rowset($sql) as $row)
+			{
+				$topic_csv[] = $row['topic_id'];
+				$log_topics[$row['topic_id']] = $row['topic_title'];
+			}
+
+			if (!$topic_csv = get_id_csv($topic_csv))
+			{
+				message_die(GENERAL_MESSAGE, $lang['NONE_SELECTED']);
+			}
+
+			DB()->query("
+				UPDATE ". BB_TOPICS ." SET
+					topic_show_first_post = $new_topic_status
+				WHERE topic_id IN($topic_csv)
+			");
+
+			$msg = ($pin) ? $lang['POST_PINNED'] : $lang['POST_UNPINNED'];
+			message_die(GENERAL_MESSAGE, return_msg_mcp($msg));
+		}
 		break;
 
 	default:
