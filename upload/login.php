@@ -133,4 +133,4 @@ if (IS_GUEST || $mod_admin_login)
 	print_page('login.tpl');
 }
 
-redirect('index.php');
+redirect($redirect_url);
