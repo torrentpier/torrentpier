@@ -328,6 +328,26 @@ function OpenInEditor ($file, $line)
 <!--/logo-->
 
 <!-- IF LOGGED_IN -->
+
+<script type="text/javascript">
+ajax.change_tz = function(tz) {
+	ajax.exec({
+		action     : 'change_tz',
+		tz      : tz,
+	});
+};
+ajax.callback.change_tz = function(data) {
+};
+$(document).ready(function() {
+	x = new Date();
+	tz = -x.getTimezoneOffset()/60;
+	if (tz != <?php echo $bb_cfg['board_timezone']?>)
+	{
+		ajax.change_tz(tz);
+	}
+});
+</script>
+
 <!--logout-->
 <div class="topmenu">
 <table width="100%" cellpadding="0" cellspacing="0">

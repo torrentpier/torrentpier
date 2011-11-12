@@ -15,6 +15,15 @@ ajax.callback.user_register = function(data){
 <!-- IF ADM_EDIT -->
 <input type="hidden" name="u" value="{PR_USER_ID}" />
 <!-- ENDIF -->
+<!-- IF not ADM_EDIT -->
+<script type="text/javascript">
+x = new Date();
+tz = -x.getTimezoneOffset()/60;
+document.write('<input type="hidden" name="user_timezone" value="'+tz+'" />');
+</script>
+<!-- ELSE -->
+<input type="hidden" name="user_timezone" value="{USER_TIMEZONE}" />
+<!-- ENDIF -->
 
 <table class="forumline usercp_register">
 <col class="row1" width="35%">
@@ -130,10 +139,6 @@ ajax.callback.gen_passkey = function(data){
 	<td>{LANGUAGE_SELECT}</td>
 </tr>
 <!-- ENDIF -->
-<tr>
-	<td>{L_TIMEZONE}:</td>
-	<td>{TIMEZONE_SELECT}</td>
-</tr>
 <!-- IF EDIT_PROFILE -->
 <tr>
 	<th colspan="2">{L_PREFERENCES}</th>

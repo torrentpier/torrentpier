@@ -82,7 +82,9 @@ class ajax_common
 		'posts'             => array('guest'),
 		'birthday_list'     => array('guest'),
 		'get_forum_mods'    => array('guest'),
-	);
+
+		'change_tz'         => array('user'),
+);
 
 	var $action = null;
 
@@ -498,5 +500,19 @@ class ajax_common
 	{
 		require(AJAX_DIR .'topic_tpl.php');
 	}
-}
 
+	function change_tz()
+	{
+		global $bb_cfg, $userdata;
+		$tz = (int) $this->request['tz'];
+		if ($tz < -12) $tz = -12;
+		if ($tz > 13) $tz = 13;
+		if ($tz != $bb_cfg['board_timezone'])
+		{
+			// Set current user timezone
+			DB()->query("UPDATE ". BB_USERS ." SET user_timezone = $tz WHERE user_id = ". $userdata['user_id'] ." LIMIT 1");
+			$bb_cfg['board_timezone'] = $tz;
+			cache_rm_user_sessions ($userdata['user_id']);
+		}
+	}
+}
