@@ -935,6 +935,7 @@ $template->assign_vars(array(
 
     'LANGUAGE_SELECT'    => language_select($user_lang, 'user_lang'),
 	'TIMEZONE_SELECT'    => tz_select($user_timezone, 'user_timezone'),
+	'USER_TIMEZONE'      => $pr_data['user_timezone'],
 
     'AVATAR_EXPLAIN'     => sprintf($lang['AVATAR_EXPLAIN'], $bb_cfg['avatar_max_width'], $bb_cfg['avatar_max_height'], (round($bb_cfg['avatar_filesize'] / 1024))),
     'SIGNATURE_EXPLAIN'  => sprintf($lang['SIGNATURE_EXPLAIN'], $bb_cfg['max_sig_chars']),
