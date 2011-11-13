@@ -35,7 +35,7 @@ $tor_filelist = build_tor_filelist($file_contents);
 function build_tor_filelist ($file_contents)
 {
     global $lang;
-	
+
 	if (!$tor = bdecode($file_contents))
 	{
 		return $lang['TORFILE_INVALID'];
@@ -127,7 +127,7 @@ class torrent
 						{
 							if (is_string($cur_files_ary))
 							{
-								$this->ajax_die($lang['ERROR_BUILD']);
+								bb_die($lang['ERROR_BUILD']);
 							}
 							$cur_files_ary[] = $this->build_file_item($name, $length);
 						}

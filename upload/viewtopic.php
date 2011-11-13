@@ -370,9 +370,9 @@ $post_order = (isset($_POST['postorder']) && $_POST['postorder'] !== 'asc') ? 'd
 //
 // 1. Add first post of topic if it pinned and page of topic not first
 $first_post = false;
-if ($t_data['topic_show_first_post'] && ( $start != 0))
+if ($t_data['topic_show_first_post'] && $start)
 {
-	$first_post = DB()->fetch_rowset("
+	$first_post = DB()->fetch_row("
 		SELECT
 		  u.username, u.user_id, u.user_posts, u.user_from,
 		  u.user_regdate, u.user_rank, u.user_sig,
