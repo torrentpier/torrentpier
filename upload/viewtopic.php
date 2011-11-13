@@ -372,7 +372,7 @@ $post_order = (isset($_POST['postorder']) && $_POST['postorder'] !== 'asc') ? 'd
 $first_post = false;
 if ($t_data['topic_show_first_post'] && $start)
 {
-	$first_post = DB()->fetch_row("
+	$first_post = DB()->fetch_rowset("
 		SELECT
 		  u.username, u.user_id, u.user_posts, u.user_from,
 		  u.user_regdate, u.user_rank, u.user_sig,
