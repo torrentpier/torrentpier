@@ -109,7 +109,7 @@ if (defined('REQUESTED_PAGE') && !defined('DISABLE_CACHING_OUTPUT'))
 {
 	if (IS_GUEST === true)
 	{
-		caching_output(true, 'store', REQUESTED_PAGE .'_guest');
+		caching_output(true, 'store', REQUESTED_PAGE .'_guest_'. $bb_cfg['default_lang']);
 	}
 }
 

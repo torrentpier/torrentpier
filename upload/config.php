@@ -53,8 +53,8 @@ $bb_cfg = $tr_cfg = $page_cfg = array();
 
 // Increase number of revision after update
 $bb_cfg['tp_version'] = '2.2 Beta';
-$bb_cfg['tp_release_state'] = 'R314';
-$bb_cfg['tp_release_date'] = '13-11-2011';
+$bb_cfg['tp_release_state'] = 'R316';
+$bb_cfg['tp_release_date'] = '15-11-2011';
 
 // Database
 $charset  = 'utf8';
@@ -229,7 +229,25 @@ define('TRIGGERS_DIR',  BB_PATH .'/triggers/' );
 // Language
 setlocale(LC_ALL, 'ru_RU.UTF-8');
 setlocale(LC_NUMERIC, 'C');
-$bb_cfg['default_lang_dir'] = LANG_ROOT_DIR .'lang_russian/';
+$bb_cfg['auto_language'] = true;
+if (!empty($_SERVER['HTTP_ACCEPT_LANGUAGE']) && $bb_cfg['auto_language'])
+{
+	if (substr($_SERVER['HTTP_ACCEPT_LANGUAGE'], 0, 2) == 'ru')
+	{
+		$bb_cfg['default_lang_dir'] = LANG_ROOT_DIR .'lang_russian/';
+		$bb_cfg['default_lang'] = 'russian';
+	}
+	else
+	{
+		$bb_cfg['default_lang_dir'] = LANG_ROOT_DIR .'lang_english/';
+		$bb_cfg['default_lang'] = 'english';
+	}
+}
+else
+{
+	if ($bb_cfg['default_lang'] == 'russian') $bb_cfg['default_lang_dir'] = LANG_ROOT_DIR .'lang_russian/';
+	else $bb_cfg['default_lang_dir'] = LANG_ROOT_DIR .'lang_english/';
+}
 
 // Templates
 define('ADMIN_TPL_DIR', TEMPLATES_DIR .'/admin/');
