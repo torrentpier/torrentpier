@@ -53,7 +53,7 @@ $bb_cfg = $tr_cfg = $page_cfg = array();
 
 // Increase number of revision after update
 $bb_cfg['tp_version'] = '2.2 Beta';
-$bb_cfg['tp_release_state'] = 'R316';
+$bb_cfg['tp_release_state'] = 'R317';
 $bb_cfg['tp_release_date'] = '15-11-2011';
 
 // Database
@@ -245,7 +245,7 @@ if (!empty($_SERVER['HTTP_ACCEPT_LANGUAGE']) && $bb_cfg['auto_language'])
 }
 else
 {
-	if ($bb_cfg['default_lang'] == 'russian') $bb_cfg['default_lang_dir'] = LANG_ROOT_DIR .'lang_russian/';
+	if (isset($bb_cfg['default_lang']) && $bb_cfg['default_lang'] == 'russian') $bb_cfg['default_lang_dir'] = LANG_ROOT_DIR .'lang_russian/';
 	else $bb_cfg['default_lang_dir'] = LANG_ROOT_DIR .'lang_english/';
 }
 
