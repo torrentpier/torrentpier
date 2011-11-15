@@ -95,7 +95,7 @@ switch($this->request['type'])
 		if(!trim($message)) $this->ajax_die($lang['EMPTY_MESSAGE']);
 
         $this->response['message_html'] = bbcode2html($message);
-        $this->response['res_id'] = $this->request['res_id'];
+        $this->response['res_id'] = @$this->request['res_id'];
 		break;
 
 	case 'edit':
