@@ -249,7 +249,7 @@ function change_tor_type ($attach_id, $tor_status_gold)
 	}
 }
 
-function tracker_register ($attach_id, $mode = '')
+function tracker_register ($attach_id, $mode = '', $tor_status = TOR_NOT_APPROVED)
 {
 	global $template, $attach_config, $bb_cfg, $lang, $return_message, $reg_mode, $tr_cfg;
 
@@ -381,8 +381,8 @@ function tracker_register ($attach_id, $mode = '')
 	$reg_time = TIMENOW;
 	$size = sprintf('%.0f', (float) $totallen);
 
-	$columns = ' info_hash,       post_id,  poster_id,  topic_id,  forum_id,  attach_id,   size,   reg_time';
-	$values = "'$info_hash_sql', $post_id, $poster_id, $topic_id, $forum_id, $attach_id, '$size', $reg_time";
+	$columns = ' info_hash,       post_id,  poster_id,  topic_id,  forum_id,  attach_id,    size,  reg_time,  tor_status';
+	$values = "'$info_hash_sql', $post_id, $poster_id, $topic_id, $forum_id, $attach_id, '$size', $reg_time, $tor_status";
 
 	$sql = "INSERT INTO ". BB_BT_TORRENTS ." ($columns) VALUES ($values)";
 

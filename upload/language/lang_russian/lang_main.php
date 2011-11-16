@@ -1225,6 +1225,7 @@ $lang['TOR_STATUS_NAME'] = array(
     TOR_DOUBTFUL      => 'сомнительно',
     TOR_CHECKING      => 'проверяется',
     TOR_TMP           => 'временная',
+	TOR_PREMOD        => 'премодерация',
 );
 $lang['TOR_STATUS_FAILED'] = 'Такого статуса не существует!';
 $lang['TORRENT_FAILED'] = 'Раздача не найдена!';
