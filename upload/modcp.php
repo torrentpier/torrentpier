@@ -90,6 +90,14 @@ else
 	{
 		$mode = 'unlock';
 	}
+	else if (isset($_REQUEST['post_pin']) || @$_POST['mod_action'] === 'post_pin')
+	{
+		$mode = 'post_pin';
+	}
+	else if (isset($_REQUEST['post_unpin']) || @$_POST['mod_action'] === 'post_unpin')
+	{
+		$mode = 'post_unpin';
+	}
 }
 
 // Obtain relevant data
@@ -194,8 +202,8 @@ switch ($mode)
 	case 'unlock':
 	case 'set_download':
 	case 'unset_download':
-	case 'post_stick':
-	case 'post_unstick':
+	case 'post_pin':
+	case 'post_unpin':
 
 		if (empty($_POST['topic_id_list']) && empty($topic_id))
 		{

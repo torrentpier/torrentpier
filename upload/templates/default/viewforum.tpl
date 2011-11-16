@@ -168,6 +168,8 @@ ajax.callback.mod_action = function(data) {
 	<input type="submit" name="move" value="{L_MOVE}" />
 	<input type="submit" name="lock" value="{L_LOCK}" />
 	<input type="submit" name="unlock" value="{L_UNLOCK}" />
+	<input type="submit" name="post_pin" value="{L_POST_PIN}" />
+	<input type="submit" name="post_unpin" value="{L_POST_UNPIN}" />
 	<label><input id="in-new-window" type="checkbox" />{L_NEW_WINDOW}</label>
 	</div>
 </form>
