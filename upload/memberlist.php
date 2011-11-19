@@ -176,7 +176,6 @@ if ($result = DB()->fetch_rowset($sql))
         if (bf($row['user_opt'], 'user_opt', 'viewemail') || IS_AM)
         {
         	$email_uri = ($bb_cfg['board_email_form']) ? append_sid("profile.php?mode=email&amp;". POST_USERS_URL ."=$user_id") : 'mailto:'. $row['user_email'];
-        	$email = '<a class="editable" href="'. $email_uri .'">'. $row['user_email'] .'</a>';
 			$email = ($bb_cfg['text_buttons']) ? '<a class="editable" href="'. $email_uri .'">'. $row['user_email'] .'</a>' : '<a href="' . $email_uri .'"><img src="' . $images['icon_email'] . '" alt="' . $lang['SEND_EMAIL_MSG'] . '" title="' . $lang['SEND_EMAIL_MSG'] . '" border="0" /></a>';
 
         }
