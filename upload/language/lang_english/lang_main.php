@@ -598,7 +598,7 @@ $lang['DATE_FORMAT_EXPLAIN'] = 'The syntax used is identical to the PHP <a href=
 $lang['SIGNATURE'] = 'Signature';
 $lang['SIGNATURE_EXPLAIN'] = 'This is a block of text that can be added to posts you make. There is a %d character limit';
 $lang['SIGNATURE_DISABLE'] = 'Signed off for violation of forum rules';
-$lang['PUBLIC_VIEW_EMAIL'] = 'Always show my e-mail address';
+$lang['PUBLIC_VIEW_EMAIL'] = 'Show e-mail address in your profile';
 
 $lang['EMAIL_EXPLAIN'] = 'At this address you will be sent to complete the registration';
 
