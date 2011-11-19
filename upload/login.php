@@ -97,6 +97,7 @@ if (isset($_POST['login']))
 			// Обнуление при введении правильно комбинации логин/пароль
 			CACHE('bb_login_err')->set('l_err_'. USER_IP, 0, 3600);
 
+			if ($redirect_url == '/login.php' || $redirect_url == 'login.php') $redirect_url = 'index.php';
 			redirect($redirect_url);
 		}
 
