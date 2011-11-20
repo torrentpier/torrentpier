@@ -211,7 +211,7 @@ if ($tor_reged && $tor_info)
 			'DOWNLOAD_NAME'   => $display_name,
 			'TRACKER_LINK'    => $tracker_link,
 			'ATTACH_ID'       => $attach_id,
-			'TOR_FROZEN'      => isset($bb_cfg['tor_frozen'][$tor_info['tor_status']]),
+			'TOR_FROZEN'      => (!IS_AM) ? isset($bb_cfg['tor_frozen'][$tor_info['tor_status']]) : '',
 			'TOR_SILVER_GOLD' => $tor_type,
 
 			// torrent status mod

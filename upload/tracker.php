@@ -769,7 +769,7 @@ if ($allowed_forums)
 				'MAGNET'       => $tor_magnet,
 				'TOR_TYPE'     => $is_gold,
 
-				'TOR_FROZEN'   => isset($bb_cfg['tor_frozen'][$tor['tor_status']]),
+				'TOR_FROZEN'   => (!IS_AM) ? isset($bb_cfg['tor_frozen'][$tor['tor_status']]) : '',
 				'TOR_STATUS_ICON' => $bb_cfg['tor_icons'][$tor['tor_status']],
 				'TOR_STATUS_TEXT' => $lang['TOR_STATUS_NAME'][$tor['tor_status']],
 

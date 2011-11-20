@@ -505,7 +505,7 @@ foreach ($topic_rowset as $topic)
 		'REPLIES'          => $replies,
 		'VIEWS'            => $topic['topic_views'],
 		'TOR_STALED'       => ($forum_data['allow_reg_tracker'] && !($t_type == POST_ANNOUNCE || $t_type == POST_STICKY || $topic['tor_size'])),
-		'TOR_FROZEN'       => isset($topic['tor_status']) ? isset($bb_cfg['tor_frozen'][$topic['tor_status']]) : '',
+		'TOR_FROZEN'       => isset($topic['tor_status']) ? ((!IS_AM) ? isset($bb_cfg['tor_frozen'][$topic['tor_status']]) : '') : '',
 		'TOR_TYPE'         => $is_gold,
 
 		'TOR_STATUS_ICON'  => isset($topic['tor_status']) ? $bb_cfg['tor_icons'][$topic['tor_status']] : '',

@@ -305,7 +305,6 @@ $bb_cfg['tor_icons'] = array(
 );
 
 // Запрет на скачивание
-if (!IS_AM)
 $bb_cfg['tor_frozen'] = array(
 	TOR_CHECKING      => true,
 	TOR_CLOSED        => true,
