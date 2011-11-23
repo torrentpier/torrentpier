@@ -2,7 +2,7 @@
 
 if (!defined('IN_AJAX')) die(basename(__FILE__));
 
-global $userdata, $bb_cfg, $lang;
+global $userdata, $bb_cfg, $lang, $datastore;
 
 $mode = (string) $this->request['mode'];
 
@@ -47,12 +47,24 @@ switch ($mode)
 		DB()->query("UPDATE ". BB_TOPICS ." SET topic_title = '$topic_title_sql' WHERE topic_id = $topic_id LIMIT 1");
 
         //Обновление кеша новостей на главной
-		$news_forums = array_flip(explode(',', $bb_cfg['latest_news_forum_id']));
-		if(isset($news_forums[$t_data['forum_id']]) && $bb_cfg['show_latest_news'])
-		{			global $datastore;
-
-			$datastore->enqueue('latest_news');
-			$datastore->update('latest_news');		}
+		if($bb_cfg['show_latest_news'])
+		{
+		    $news_forums = array_flip(explode(',', $bb_cfg['latest_news_forum_id']));
+		    if(isset($news_forums[$t_data['forum_id']]) && $bb_cfg['show_latest_news'])
+		    {
+			    $datastore->enqueue('latest_news');
+			    $datastore->update('latest_news');		    }
+		}
+		
+		if($bb_cfg['show_network_news'])
+		{
+		    $net_forums = array_flip(explode(',', $bb_cfg['network_news_forum_id']));
+		    if(isset($net_forums[$t_data['forum_id']]) && $bb_cfg['show_network_news'])
+		    {
+			    $datastore->enqueue('network_news');
+			    $datastore->update('network_news');
+		    }
+		}
 
         $this->response['topic_id'] = $topic_id;
 		$this->response['topic_title'] = $new_title;

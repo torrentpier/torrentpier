@@ -31,7 +31,6 @@
   * LOG
   * Error reporting
   * Cron
-  * News
 
   * Subforums
   * Forums
@@ -53,8 +52,8 @@ $bb_cfg = $tr_cfg = $page_cfg = array();
 
 // Increase number of revision after update
 $bb_cfg['tp_version'] = '2.2 Beta';
-$bb_cfg['tp_release_state'] = 'R327';
-$bb_cfg['tp_release_date'] = '21-11-2011';
+$bb_cfg['tp_release_state'] = 'R328';
+$bb_cfg['tp_release_date'] = '24-11-2011';
 
 // Database
 $charset  = 'utf8';
@@ -390,11 +389,6 @@ define('BB_ENABLED',   TRIGGERS_DIR .'$on');
 define('BB_DISABLED',  TRIGGERS_DIR .'$off');
 define('CRON_ALLOWED', TRIGGERS_DIR .'cron_allowed');
 define('CRON_RUNNING', TRIGGERS_DIR .'cron_running');
-
-// News
-$bb_cfg['show_latest_news']     = true;
-$bb_cfg['latest_news_count']    = 5;
-$bb_cfg['latest_news_forum_id'] = '1'; // (string) 1,2,3...
 
 // Subforums
 $bb_cfg['sf_on_first_page_only']     = true;

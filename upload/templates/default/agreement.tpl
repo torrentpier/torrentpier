@@ -3,7 +3,7 @@
 
 <table class="forumline">
 <tr>
-	<th>{SITENAME} - {REGISTRATION}</th>
+	<th>{SITENAME} - {L_REGISTRATION}</th>
 </tr>
 <tr>
 	<td class="row1">

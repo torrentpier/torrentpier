@@ -22,6 +22,10 @@ if ($bb_cfg['show_latest_news'])
 {
 	$datastore->enqueue('latest_news');
 }
+if ($bb_cfg['show_network_news'])
+{
+   $datastore->enqueue('network_news');
+}
 
 // Init userdata
 $user->session_start();
@@ -335,6 +339,30 @@ if ($bb_cfg['show_latest_news'])
 			'NEWS_IS_NEW'   => is_unread($news['topic_time'], $news['topic_id'], $news['forum_id']),
 		));
 	}
+}
+
+// Network news
+if ($bb_cfg['show_network_news'])
+{
+    if (!$network_news = $datastore->get('network_news'))
+	{
+	    $datastore->update('network_news');
+		$network_news = $datastore->get('network_news');
+	}	
+
+    $template->assign_vars(array(
+        'SHOW_NETWORK_NEWS' => true,
+    ));
+
+   foreach ($network_news as $net)
+    {
+        $template->assign_block_vars('net', array(
+			'NEWS_TOPIC_ID' => $net['topic_id'],
+			'NEWS_TITLE'    => $net['topic_title'],
+			'NEWS_TIME'     => bb_date($net['topic_time'], 'd-M', 'false'),
+			'NEWS_IS_NEW'   => is_unread($net['topic_time'], $net['topic_id'], $net['forum_id']),
+        ));
+    }
 }
 
 if ($bb_cfg['birthday']['check_day'] && $bb_cfg['birthday']['enabled'])

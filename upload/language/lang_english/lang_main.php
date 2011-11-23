@@ -195,6 +195,7 @@ $lang['MARK_ALL_FORUMS_READ'] = 'Mark all forums read';
 $lang['FORUMS_MARKED_READ'] = 'All forums have been marked read';
 
 $lang['LATEST_NEWS'] = 'Latest news';
+$lang['NETWORK_NEWS'] = 'Network news';
 $lang['SUBFORUMS'] = 'Subforums';
 
 //

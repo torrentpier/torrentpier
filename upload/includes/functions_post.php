@@ -106,7 +106,7 @@ function prepare_post(&$mode, &$post_data, &$error_msg, &$username, &$subject, &
 //
 function submit_post($mode, &$post_data, &$message, &$meta, &$forum_id, &$topic_id, &$post_id, &$poll_id, &$topic_type, $post_username, $post_subject, $post_message, $poll_title, &$poll_options, &$poll_length, $update_post_time)
 {
-	global $userdata, $post_info, $is_auth, $bb_cfg, $lang;
+	global $userdata, $post_info, $is_auth, $bb_cfg, $lang, $datastore;
 
 	$current_time = TIMENOW;
 
@@ -215,13 +215,24 @@ function submit_post($mode, &$post_data, &$message, &$meta, &$forum_id, &$topic_
 	));
 
     //Обновление кеша новостей на главной
-	$news_forums = array_flip(explode(',', $bb_cfg['latest_news_forum_id']));
-	if(isset($news_forums[$forum_id]) && $bb_cfg['show_latest_news'] && $mode == 'newtopic')
+	if($bb_cfg['show_latest_news'])
 	{
-		global $datastore;
-
-		$datastore->enqueue('latest_news');
-		$datastore->update('latest_news');
+		$news_forums = array_flip(explode(',', $bb_cfg['latest_news_forum_id']));
+		if(isset($news_forums[$forum_id]) && $bb_cfg['show_latest_news'] && $mode == 'newtopic')
+		{
+			$datastore->enqueue('latest_news');
+			$datastore->update('latest_news');
+		}
+	}
+		
+	if($bb_cfg['show_network_news'])
+	{
+		$net_forums = array_flip(explode(',', $bb_cfg['network_news_forum_id']));
+		if(isset($net_forums[$forum_id]) && $bb_cfg['show_network_news'] && $mode == 'newtopic')
+		{
+			$datastore->enqueue('network_news');
+			$datastore->update('network_news');
+		}
 	}
 
 	//

@@ -1040,6 +1040,7 @@ class datastore_common
 		'jumpbox'                => 'build_cat_forums.php',
 		'viewtopic_forum_select' => 'build_cat_forums.php',
 		'latest_news'            => 'build_cat_forums.php',
+		'network_news'           => 'build_cat_forums.php',
 		'ads'                    => 'build_cat_forums.php',
 		'moderators'             => 'build_moderators.php',
 		'stats'                  => 'build_stats.php',
