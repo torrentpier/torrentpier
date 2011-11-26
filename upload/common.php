@@ -11,7 +11,6 @@ if (!defined('IN_PHPBB') && !defined('IN_TRACKER')) define('IN_PHPBB', true);
 
 // Get initial config
 require(BB_ROOT .'config.php');
-require(BB_ROOT .'config_mods.php');
 
 $server_protocol = ($bb_cfg['cookie_secure']) ? 'https://' : 'http://';
 $server_port = ($bb_cfg['server_port'] != 80) ? ':'. $bb_cfg['server_port'] : '';
