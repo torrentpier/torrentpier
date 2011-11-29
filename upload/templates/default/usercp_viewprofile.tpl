@@ -299,13 +299,6 @@ ajax.callback.manage_user = function(data) {
 
 	</td>
 </tr>
-<!-- IF SIGNATURE -->
-<tr>
-	<td class="row1 pad_4" colspan="2">
-	    <div class="signature">{SIGNATURE}</div>
-	</td>
-</tr>
-<!-- ENDIF -->
 <!-- Report -->
 <!-- BEGIN switch_report_user -->
 <tr>
@@ -313,6 +306,16 @@ ajax.callback.manage_user = function(data) {
 </tr>
 <!-- END switch_report_user -->
 <!-- Report [END] -->
+<!-- IF SIGNATURE -->
+<tr>
+	<th colspan="2" class="thHead">{L_SIGNATURE_USER}{USERNAME}</th>
+</tr>
+<tr>
+	<td class="row1 pad_4" colspan="2">
+	    <div class="signature">{SIGNATURE}</div>
+	</td>
+</tr>
+<!-- ENDIF -->
 </table><!--/user_profile-->
 
 <a name="torrent"></a>

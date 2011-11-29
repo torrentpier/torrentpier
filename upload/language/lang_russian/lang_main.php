@@ -603,6 +603,7 @@ $lang['TIMEZONE'] = 'Часовой пояс';
 $lang['DATE_FORMAT_PROFILE'] = 'Формат даты';
 $lang['DATE_FORMAT_EXPLAIN'] = 'Синтаксис идентичен функции <a href="http://www.php.net/date" target="_other">date()</a> языка PHP';
 $lang['SIGNATURE'] = 'Подпись';
+$lang['SIGNATURE_USER'] = 'Подпись пользователя ';
 $lang['SIGNATURE_EXPLAIN'] = 'Это текст, который можно добавлять к размещаемым вами сообщениям. Длина его ограничена %d символами.';
 $lang['SIGNATURE_DISABLE'] = 'Подпись отключена за нарушение правил форума';
 $lang['PUBLIC_VIEW_EMAIL'] = 'Показывать мой адрес e-mail в профиле';
