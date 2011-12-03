@@ -314,6 +314,14 @@ $bb_cfg['tor_frozen'] = array(
 	TOR_NO_DESC       => true,
 	TOR_PREMOD        => true,
 );
+
+// Разрешение на скачку автором, если закрыто на скачивание.
+$bb_cfg['tor_frozen_author_download'] = array(
+	TOR_CHECKING      => true,
+	TOR_NO_DESC       => true,
+	TOR_PREMOD        => true,
+);
+
 // Запрет на редактирование головного сообщения
 $bb_cfg['tor_cannot_edit'] = array(
 	TOR_CHECKING      => true,
