@@ -63,8 +63,8 @@ $bb_cfg = $tr_cfg = $page_cfg = array();
 
 // Increase number of revision after update
 $bb_cfg['tp_version'] = '2.4 (beta)';
-$bb_cfg['tp_release_state'] = 'R332';
-$bb_cfg['tp_release_date'] = '03-12-2011';
+$bb_cfg['tp_release_state'] = 'R333';
+$bb_cfg['tp_release_date'] = '05-12-2011';
 
 // Database
 $charset  = 'utf8';
@@ -572,10 +572,12 @@ $bb_cfg['tor_stats'] = true;
 
 // News
 $bb_cfg['show_latest_news']     = true;
+$bb_cfg['max_news_title']       = 50;
 $bb_cfg['latest_news_count']    = 5;
 $bb_cfg['latest_news_forum_id'] = '1'; // (string) 1,2,3...
 
 // Network News
 $bb_cfg['show_network_news']     = true;
+$bb_cfg['max_net_title']         = 50;
 $bb_cfg['network_news_count']    = 5;
 $bb_cfg['network_news_forum_id'] = '2'; // (string) 1,2,3...

@@ -146,7 +146,7 @@ if ($bb_cfg['show_latest_news'] AND $news_forum_ids = $bb_cfg['latest_news_forum
 //
 // Network_news
 //
-if ($bb_cfg['show_network_news'] AND $net_forum_ids = intval($bb_cfg['network_news_forum_id']))
+if ($bb_cfg['show_network_news'] AND $net_forum_ids = $bb_cfg['network_news_forum_id'])
 {
    $net_count = max($bb_cfg['network_news_count'], 1);
 

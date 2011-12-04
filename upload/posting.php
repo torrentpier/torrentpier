@@ -732,27 +732,27 @@ if ( $mode == 'newtopic' || ( $mode == 'editpost' && $post_data['first_post'] ) 
 
 	if( $is_auth['auth_sticky'] )
 	{
-		$topic_type_toggle .= '<input type="radio" name="topictype" value="' . POST_STICKY . '"';
+		$topic_type_toggle .= '<label><input type="radio" name="topictype" value="' . POST_STICKY . '"';
 		if ( isset($post_data['topic_type']) && ($post_data['topic_type'] == POST_STICKY || $topic_type == POST_STICKY) )
 		{
 			$topic_type_toggle .= ' checked="checked"';
 		}
-		$topic_type_toggle .= ' /> ' . $lang['POST_STICKY'] . '&nbsp;&nbsp;';
+		$topic_type_toggle .= ' /> ' . $lang['POST_STICKY'] . '</label>&nbsp;&nbsp;';
 	}
 
 	if( $is_auth['auth_announce'] )
 	{
-		$topic_type_toggle .= '<input type="radio" name="topictype" value="' . POST_ANNOUNCE . '"';
+		$topic_type_toggle .= '<label><input type="radio" name="topictype" value="' . POST_ANNOUNCE . '"';
 		if ( isset($post_data['topic_type']) && ($post_data['topic_type'] == POST_ANNOUNCE || $topic_type == POST_ANNOUNCE) )
 		{
 			$topic_type_toggle .= ' checked="checked"';
 		}
-		$topic_type_toggle .= ' /> ' . $lang['POST_ANNOUNCEMENT'] . '&nbsp;&nbsp;';
+		$topic_type_toggle .= ' /> ' . $lang['POST_ANNOUNCEMENT'] . '</label>&nbsp;&nbsp;';
 	}
 
 	if ( $topic_type_toggle != '' )
 	{
-		$topic_type_toggle = $lang['POST_TOPIC_AS'] . ': <input type="radio" name="topictype" value="' . POST_NORMAL .'"' . ( (!isset($post_data['topic_type']) || $post_data['topic_type'] == POST_NORMAL || $topic_type == POST_NORMAL) ? ' checked="checked"' : '' ) . ' /> ' . $lang['POST_NORMAL'] . '&nbsp;&nbsp;' . $topic_type_toggle;
+		$topic_type_toggle = $lang['POST_TOPIC_AS'] . ': <label><input type="radio" name="topictype" value="' . POST_NORMAL .'"' . ( (!isset($post_data['topic_type']) || $post_data['topic_type'] == POST_NORMAL || $topic_type == POST_NORMAL) ? ' checked="checked"' : '' ) . ' /> ' . $lang['POST_NORMAL'] . '</label>&nbsp;&nbsp;' . $topic_type_toggle;
 	}
 }
 //bt

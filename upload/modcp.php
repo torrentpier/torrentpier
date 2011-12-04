@@ -249,24 +249,18 @@ switch ($mode)
 			$result = topic_delete($req_topics, $forum_id);
 
 		    //Обновление кеша новостей на главной
-			if($bb_cfg['show_latest_news'])
-			{
-		    	$news_forums = array_flip(explode(',', $bb_cfg['latest_news_forum_id']));
-		    	if(isset($news_forums[$forum_id]) && $bb_cfg['show_latest_news'] && $result)
-		    	{
-			    	$datastore->enqueue('latest_news');
-			    	$datastore->update('latest_news');
-		    	}
-			}
+			$news_forums = array_flip(explode(',', $bb_cfg['latest_news_forum_id']));
+		    if(isset($news_forums[$forum_id]) && $bb_cfg['show_latest_news'] && $result)
+		    {
+			    $datastore->enqueue('latest_news');
+			    $datastore->update('latest_news');
+		    }
 		
-			if($bb_cfg['show_network_news'])
+			$net_forums = array_flip(explode(',', $bb_cfg['network_news_forum_id']));
+			if(isset($net_forums[$forum_id]) && $bb_cfg['show_network_news'] && $result)
 			{
-		 	   $net_forums = array_flip(explode(',', $bb_cfg['network_news_forum_id']));
-			    if(isset($net_forums[$forum_id]) && $bb_cfg['show_network_news'] && $result)
-			    {
-				    $datastore->enqueue('network_news');
-				    $datastore->update('network_news');
-			    }
+				$datastore->enqueue('network_news');
+				$datastore->update('network_news');
 			}
 
 			$msg = ($result) ? $lang['TOPICS_REMOVED'] : 'No topics were removed';
@@ -296,6 +290,13 @@ switch ($mode)
 			{
 				$datastore->enqueue('latest_news');
 				$datastore->update('latest_news');
+			}
+		
+			$net_forums = array_flip(explode(',', $bb_cfg['network_news_forum_id']));
+			if((isset($news_forums[$forum_id]) || isset($news_forums[$new_forum_id])) && $bb_cfg['show_network_news'] && $result)
+			{
+				$datastore->enqueue('network_news');
+				$datastore->update('network_news');
 			}
 
 			$msg = ($result) ? $lang['TOPICS_MOVED'] : $lang['NO_TOPICS_MOVED'];
