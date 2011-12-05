@@ -1,4 +1,4 @@
-<!-- IF SHOW_ADMIN_OPTIONS -->
+<!-- IF IS_ADMIN -->
 <script type="text/javascript">
 ajax.init.edit_user_profile = function(params){
 	if (params.submit) {
@@ -92,15 +92,31 @@ $(document).ready(function(){
 <var class="ajax-params">{action: "edit_user_profile", id: "u_up_release"}</var>
 <var class="ajax-params">{action: "edit_user_profile", id: "u_up_bonus"}</var>
 <!-- ENDIF -->
-<!-- ENDIF / SHOW_ADMIN_OPTIONS -->
 <script type="text/javascript">
 ajax.callback.manage_user = function(data) {
 	if(data.info) alert(data.info);
 	if(data.url) document.location.href = data.url;
 };
 </script>
-<a name="editprofile"></a>
+<!-- ENDIF / IS_ADMIN -->
 
+<!-- IF IS_AM -->
+<script type="text/javascript">
+ajax.mod_action = function(mode) {
+	ajax.exec({
+		action  : 'mod_action',
+		mode    : mode,
+		user_id : {PROFILE_USER_ID}
+	});
+}
+ajax.callback.mod_action = function(data) {
+	$('#ip_list').html(data.ip_list_html);
+}
+</script>
+<!-- ENDIF / IS_AM -->
+
+
+<a name="editprofile"></a>
 <h1 class="pagetitle">{L_VIEWING_PROFILE}</h1>
 
 <div class="nav">
@@ -223,7 +239,8 @@ ajax.callback.manage_user = function(data) {
 					<span class="editable bold">{LAST_VISIT_TIME}</span>
 				</td>
 			</tr>
-			<tr>
+
+		    <tr>
 				<th class="nowrap">{L_LAST_ACTIVITY}:</th>
 				<td><b>{LAST_ACTIVITY_TIME}</b></td>
 			</tr>
@@ -235,6 +252,7 @@ ajax.callback.manage_user = function(data) {
 						[ <a href="{U_SEARCH_USER}" class="med">{L_SEARCH_USER_POSTS}</a> ]
 						[ <a href="{U_SEARCH_TOPICS}" class="med">{L_SEARCH_USER_TOPICS}</a> ]
 						[ <a class="med" href={U_SEARCH_RELEASES}>{L_SEARCH_RELEASES}</a> ]
+						<!-- IF IS_AM -->[ <a href="#" class="adm" onclick="ajax.mod_action('profile_ip'); return false;">{L_IP_ADDRESS}</a> ]<!-- ENDIF -->
 						<!-- IF IS_ADMIN -->[ <a href="#" onclick="toggle_block('delete'); return false;" class="adm">{L_USER_DELETE}</a> ]<!-- ENDIF -->
 					</p>
 				</td>
@@ -294,9 +312,11 @@ ajax.callback.manage_user = function(data) {
 				<th>{L_ACCESS}:</th>
 				<td id="ignore_srv_load">{L_ACCESS_SRV_LOAD}: <b class="editable">{IGNORE_SRV_LOAD}</b></td>
 			</tr>
-			<!-- ENDIF -->
+			<!-- ENDIF -->			
 		</table><!--/user_details-->
 
+	<!-- IF IS_AM --><span id="ip_list"></span><!-- ENDIF -->
+	
 	</td>
 </tr>
 <!-- Report -->

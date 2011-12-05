@@ -67,6 +67,7 @@ class ajax_common
 		'edit_user_profile' => array('admin'),
 		'change_user_rank'  => array('admin'),
 		'change_user_opt'   => array('admin'),
+		'manage_user'       => array('admin'),
 
 		'change_tor_status' => array('mod'),
 		'mod_action'        => array('mod'),
@@ -74,16 +75,14 @@ class ajax_common
 
 		'gen_passkey'       => array('user'),
 		'change_torrent'    => array('user'),
-        'manage_user'       => array('user'),
+		'change_tz'         => array('user'),
 
 		'view_post'         => array('guest'),
 		'view_torrent'      => array('guest'),
 		'user_register'     => array('guest'),
 		'posts'             => array('guest'),
 		'birthday_list'     => array('guest'),
-		'get_forum_mods'    => array('guest'),
-
-		'change_tz'         => array('user'),
+		'get_forum_mods'    => array('guest'),	
 );
 
 	var $action = null;

@@ -463,7 +463,7 @@ $(document).ready(function(){
 		<br clear="all" />
 		<div style="float: left;">{S_TOPIC_ADMIN}</div>
 <!-- ENDIF -->
-<!-- IF SHOW_ADMIN_OPTIONS -->
+<!-- IF IS_ADMIN -->
 		<div class="med" style="float: right;">
 		Admin:&nbsp;
 		<a href="{U_LOGS}">{L_LOGS}</a>&nbsp;

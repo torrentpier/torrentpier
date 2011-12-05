@@ -51,7 +51,8 @@ switch ($mode)
 		if(isset($news_forums[$t_data['forum_id']]) && $bb_cfg['show_latest_news'])
 		{
 			$datastore->enqueue('latest_news');
-			$datastore->update('latest_news');		}
+			$datastore->update('latest_news');
+		}
 		
 		$net_forums = array_flip(explode(',', $bb_cfg['network_news_forum_id']));
 		if(isset($net_forums[$t_data['forum_id']]) && $bb_cfg['show_network_news'])
@@ -63,4 +64,61 @@ switch ($mode)
         $this->response['topic_id'] = $topic_id;
 		$this->response['topic_title'] = $new_title;
 		break;
+		
+	case 'profile_ip':
+	    $user_id = (int) $this->request['user_id'];	
+		$profiledata = get_userdata($user_id);
+		
+		if(!$user_id) $this->ajax_die($lang['NO_USER_ID_SPECIFIED']);
+
+	    $reg_ip = DB()->fetch_rowset("SELECT username, user_id, user_rank FROM ". BB_USERS ." 
+			WHERE user_reg_ip = '{$profiledata['user_reg_ip']}' 
+				AND user_reg_ip != ''
+				AND user_id != {$profiledata['user_id']}
+			ORDER BY username ASC");
+
+		$last_ip = DB()->fetch_rowset("SELECT username, user_id, user_rank FROM " .BB_USERS ." 
+			WHERE user_last_ip = '{$profiledata['user_last_ip']}' 
+				AND user_last_ip != ''
+				AND user_id != {$profiledata['user_id']}");
+
+		$link_reg_ip = $link_last_ip = '';
+	
+		if(!empty($reg_ip))
+		{
+			$link_reg_ip .= $lang['OTHER_IP'] .' ';
+			foreach ($reg_ip as $row)
+			{
+				$link_reg_ip .= profile_url($row) .' ';
+			}
+		}
+
+		if(!empty($last_ip))
+		{
+			$link_last_ip .= $lang['OTHER_IP'] .' ';
+			foreach ($last_ip as $row)
+			{
+				$link_last_ip .= profile_url($row) .' ';
+			}
+		}
+		
+		$this->response['ip_list_html'] = '
+		    <style type="text/css">
+			table.mod_ip    { background: #F9F9F9; border: 1px solid #A5AFB4; border-collapse: separate;}
+            table.mod_ip td { padding: 2px 5px; white-space: normal; font-size: 11px; }
+            table.mod_ip div { max-height: 150px;  overflow: auto;}
+			</style>
+			<br /><table class="mod_ip bCenter borderless" cellspacing="1">
+                <tr class="row5" >
+					<td>'. $lang['REG_IP'] .'</td>
+					<td class="tCenter"><a href="http://ip-whois.net/ip_geo.php?ip='.decode_ip($profiledata['user_reg_ip']).'" class="gen" target="_blank">'.decode_ip($profiledata['user_reg_ip']).'</a></td>
+					<td><div>'. $link_reg_ip .'</div></td>
+				</tr>
+                <tr class="row4">
+					<td>'. $lang['LAST_IP'] .'</td>
+					<td class="tCenter"><a href="http://ip-whois.net/ip_geo.php?ip='.decode_ip($profiledata['user_last_ip']).'" class="gen" target="_blank">'.decode_ip($profiledata['user_last_ip']).'</a></td>
+					<td><div>'. $link_last_ip .'</div></td>
+				</tr>
+            </table><br />';
+	break;	
 }

@@ -1379,6 +1379,10 @@ $lang['ONLY_FOR_SUPER_ADMIN'] = 'This option only for super admins';
 $lang['ACCESS'] = 'Access';
 $lang['ACCESS_SRV_LOAD'] = 'Depend on server load';
 $lang['LOGS'] = 'Topic history';
+
+$lang['LAST_IP'] = 'Last IP:';
+$lang['REG_IP']  = 'Registration IP:';
+$lang['OTHER_IP']  = 'Other IP:';
 $lang['ALREADY_REG_IP'] = 'With your IP-address is already registered user %s. If you have not previously registered on our tracker, mail to <a href="mailto:%s">Administrator</ a>';
 
 //

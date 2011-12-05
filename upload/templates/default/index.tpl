@@ -191,11 +191,11 @@
 
                 <div class="hr1" style="margin: 5px 0 4px;"></div>
 
-				<p>{TOTAL_USERS_ONLINE}<!-- IF SHOW_ADMIN_OPTIONS --> &nbsp;{USERS_ONLINE_COUNTS}<!-- ENDIF --></p>
+				<p>{TOTAL_USERS_ONLINE}<!-- IF IS_ADMIN --> &nbsp;{USERS_ONLINE_COUNTS}<!-- ENDIF --></p>
 				<p>{RECORD_USERS}</p>
 
 				<!-- IF SHOW_ONLINE_LIST -->
-					<style type="text/css"><!-- IF SHOW_ADMIN_OPTIONS -->.colorISL, a.colorISL, a.colorISL:visited { color: #793D00; }<!-- ELSE -->.ou_stat { display: none; }<!-- ENDIF --></style>
+					<style type="text/css"><!-- IF IS_ADMIN -->.colorISL, a.colorISL, a.colorISL:visited { color: #793D00; }<!-- ELSE -->.ou_stat { display: none; }<!-- ENDIF --></style>
 					<a name="online"></a>
 					<div id="online_userlist" style="margin-top: 4px;">{LOGGED_IN_USER_LIST}</div>
 
