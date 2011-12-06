@@ -1555,7 +1555,6 @@ function setup_style ()
 		'SPACER'           => BB_ROOT .'images/spacer.gif',
 		'STYLESHEET'       => $css_dir . $stylesheet,
 		'THEME_CSS'        => ($theme_css) ? $css_dir . $theme_css : '',
-		'DBG_CSS'          => $css_dir . 'dbg.css',
 		'EXT_LINK_NEW_WIN' => $bb_cfg['ext_link_new_win'],
 	));
 
