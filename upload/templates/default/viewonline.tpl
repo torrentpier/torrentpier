@@ -26,7 +26,7 @@
 <tr class="{guest_user_row.ROW_CLASS}">
 	<td>{guest_user_row.USER}</td>
 	<td class="tCenter">{guest_user_row.LASTUPDATE}</td>
-	<!-- IF ADMIN --><td class="tCenter"><a href="{guest_user_row.U_WHOIS_IP}" class="gen" target="_blank">{guest_user_row.USERIP}</a></td><!-- ENDIF -->
+	<!-- IF IS_ADMIN --><td class="tCenter"><a href="{guest_user_row.U_WHOIS_IP}" class="gen" target="_blank">{guest_user_row.USERIP}</a></td><!-- ENDIF -->
 </tr>
 <!-- END guest_user_row -->
 </tfoot>
