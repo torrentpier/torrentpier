@@ -830,13 +830,15 @@ for($i = 0; $i < $total_posts; $i++)
 	{
 		$poster_avatar = get_avatar($postrow[$i]['user_avatar'], $postrow[$i]['user_avatar_type'], !bf($postrow[$i]['user_opt'], 'user_opt', 'allow_avatar'));
 	}
+	
+	$user_rank = $postrow[$i]['user_rank'];
 
 	//
 	// Generate ranks, set them to empty string initially.
 	//
 	$poster_rank = $rank_image = '';
 
-	if (!$user->opt_js['h_rnk_i'] AND $user_rank = $postrow[$i]['user_rank'] AND isset($ranks[$user_rank]))
+	if (!$user->opt_js['h_rnk_i'] AND isset($ranks[$user_rank]))
 	{
 		$rank_image = ($bb_cfg['show_rank_image'] && $ranks[$user_rank]['rank_image']) ? '<img src="'. $ranks[$user_rank]['rank_image'] .'" alt="" title="" border="0" />' : '';
 		$poster_rank = ($bb_cfg['show_rank_text']) ? $ranks[$user_rank]['rank_title'] : '';

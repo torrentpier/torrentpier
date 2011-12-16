@@ -111,12 +111,12 @@ switch ($mode)
 			<br /><table class="mod_ip bCenter borderless" cellspacing="1">
                 <tr class="row5" >
 					<td>'. $lang['REG_IP'] .'</td>
-					<td class="tCenter"><a href="http://ip-whois.net/ip_geo.php?ip='.decode_ip($profiledata['user_reg_ip']).'" class="gen" target="_blank">'.decode_ip($profiledata['user_reg_ip']).'</a></td>
+					<td class="tCenter"><a href="'. $bb_cfg['whois_info'] . decode_ip($profiledata['user_reg_ip']).'" class="gen" target="_blank">'.decode_ip($profiledata['user_reg_ip']).'</a></td>
 					<td><div>'. $link_reg_ip .'</div></td>
 				</tr>
                 <tr class="row4">
 					<td>'. $lang['LAST_IP'] .'</td>
-					<td class="tCenter"><a href="http://ip-whois.net/ip_geo.php?ip='.decode_ip($profiledata['user_last_ip']).'" class="gen" target="_blank">'.decode_ip($profiledata['user_last_ip']).'</a></td>
+					<td class="tCenter"><a href="'. $bb_cfg['whois_info'] . decode_ip($profiledata['user_last_ip']).'" class="gen" target="_blank">'.decode_ip($profiledata['user_last_ip']).'</a></td>
 					<td><div>'. $link_last_ip .'</div></td>
 				</tr>
             </table><br />';

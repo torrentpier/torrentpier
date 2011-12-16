@@ -118,9 +118,10 @@ while ($row = DB()->sql_fetchrow($result))
 		{
 			$value = trim($new_attach[$config_name]);
 
-			if ($value[strlen($value)-1] == '/')
+			if (strlen($value) && substr($value, -1) == '/')
 			{
-				$value[strlen($value)-1] = ' ';
+				if(strlen($value)) $value = substr($value, 0, strlen($value)-1);
+				else $value = '';
 			}
 
 			$new_attach[$config_name] = trim($value);

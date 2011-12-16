@@ -102,7 +102,7 @@ while ( $row = DB()->sql_fetchrow($result) )
 			'LASTUPDATE' => bb_date($row['session_time']),
 			'LASTUPDATE_RAW' => $row['session_time'],
 			'USERIP'     => $user_ip,
-			'U_WHOIS_IP' => "http://ip-whois.net/ip_geo.php?ip=$user_ip",
+			'U_WHOIS_IP' => $bb_cfg['whois_info'] . $user_ip,
 		));
 
 		$which_counter++;

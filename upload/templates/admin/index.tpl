@@ -160,7 +160,7 @@ table.forumline { margin: 0 auto; }
 	</tr>
 	<!-- BEGIN reg_user_row -->
 	<tr class="{reg_user_row.ROW_CLASS}">
-		<td nowrap="nowrap">{reg_user_row.USER}</td>
+		<td class="bold" nowrap="nowrap">{reg_user_row.USER}</td>
 		<td align="center" nowrap="nowrap">{reg_user_row.STARTED}-{reg_user_row.LASTUPDATE}</td>
 		<td class="tCenter"><a href="{reg_user_row.U_WHOIS_IP}" class="gen" target="_blank">{reg_user_row.IP_ADDRESS}</a></td>
 	</tr>
@@ -169,10 +169,10 @@ table.forumline { margin: 0 auto; }
 		<td colspan="3" class="row3"><img src="{SPACER}" width="1" height="1" alt="."></td>
 	</tr>
 	<!-- BEGIN guest_user_row -->
-	<tr>
-		<td nowrap="nowrap" class="{guest_user_row.ROW_CLASS}">&nbsp;<span class="gen">{guest_user_row.USERNAME}</span>&nbsp;</td>
-		<td align="center" nowrap="nowrap" class="{guest_user_row.ROW_CLASS}">&nbsp;<span class="gen">{guest_user_row.STARTED}-{guest_user_row.LASTUPDATE}</span>&nbsp;</td>
-		<td class="{guest_user_row.ROW_CLASS}">&nbsp;<span class="gen"><a href="{guest_user_row.U_WHOIS_IP}" target="_blank">{guest_user_row.IP_ADDRESS}</a></span>&nbsp;</td>
+	<tr class="{guest_user_row.ROW_CLASS}">
+		<td nowrap="nowrap">{L_GUEST}</td>
+		<td align="center">{guest_user_row.STARTED}-{guest_user_row.LASTUPDATE}</td>
+		<td class="tCenter"><a href="{guest_user_row.U_WHOIS_IP}" target="_blank">{guest_user_row.IP_ADDRESS}</a></td>
 	</tr>
 	<!-- END guest_user_row -->
 </table>

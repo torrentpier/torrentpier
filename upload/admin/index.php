@@ -165,12 +165,12 @@ else if( isset($_GET['pane']) && $_GET['pane'] == 'right' )
 		}
 		else
 		{
-			$dbsize = $lang['Not_available'];
+			$dbsize = $lang['NOT_AVAILABLE'];
 		}
 	}
 	else
 	{
-		$dbsize = $lang['Not_available'];
+		$dbsize = $lang['NOT_AVAILABLE'];
 	}
 
 	$template->assign_vars(array(
@@ -255,18 +255,10 @@ else if( isset($_GET['pane']) && $_GET['pane'] == 'right' )
 						"STARTED"    => bb_date($onlinerow_reg[$i]['session_start'], 'H:i', 'false'),
 						"LASTUPDATE" => bb_date($onlinerow_reg[$i]['user_session_time'], 'H:i', 'false'),
 						"IP_ADDRESS" => $reg_ip,
-
-						"U_WHOIS_IP" => "http://ip-whois.net/ip_geo.php?ip=$reg_ip",
+						"U_WHOIS_IP" => $bb_cfg['whois_info'] . $reg_ip,
 					));
 				}
 			}
-
-		}
-		else
-		{
-			$template->assign_vars(array(
-				"L_NO_REGISTERED_USERS_BROWSING" => $lang['NO_USERS_BROWSING'])
-			);
 		}
 
 		//
@@ -287,11 +279,10 @@ else if( isset($_GET['pane']) && $_GET['pane'] == 'right' )
 
 				$template->assign_block_vars("guest_user_row", array(
 					"ROW_CLASS"  => $row_class,
-					"USERNAME"   => $lang['GUEST'],
 					"STARTED"    => bb_date($onlinerow_guest[$i]['session_start'], 'H:i', 'false'),
 					"LASTUPDATE" => bb_date($onlinerow_guest[$i]['session_time'], 'H:i' , 'false'),
 					"IP_ADDRESS" => $guest_ip,
-					"U_WHOIS_IP" => "http://ip-whois.net/ip_geo.php?ip=$guest_ip",
+					"U_WHOIS_IP" => $bb_cfg['whois_info'] . $guest_ip,
 				));
 			}
 		}
