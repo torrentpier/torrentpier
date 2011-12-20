@@ -155,7 +155,7 @@
 		<th colspan="3">{postrow.attach.tor_not_reged.DOWNLOAD_NAME}</th>
 	</tr>
 	<tr class="row1">
-		<td width="15%">{L_TRACKER}:</td>
+		<td width="15%">{L_TORRENT}:</td>
 		<td width="70%">{postrow.attach.tor_not_reged.TRACKER_LINK}</td>
 		<td width="15%" rowspan="3" class="tCenter pad_6">
 			<p>{postrow.attach.tor_not_reged.S_UPLOAD_IMAGE}</p>
