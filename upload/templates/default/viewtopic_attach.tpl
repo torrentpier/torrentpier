@@ -242,7 +242,7 @@
     </tr>
     <!-- ENDIF -->
 	<tr class="row1">
-		<td width="15%">{L_TRACKER}:</td>
+		<td width="15%">{L_TORRENT}:</td>
 		<td width="70%">
 			{postrow.attach.tor_reged.TRACKER_LINK} &nbsp;
 			[ <span title="{postrow.attach.tor_reged.REGED_DELTA}">{postrow.attach.tor_reged.REGED_TIME}</span> ]

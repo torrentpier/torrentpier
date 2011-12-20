@@ -108,6 +108,7 @@ hr  { height: 0px; border: 0px solid #B7C0C5; border-top-width: 1px; }
 form  { display: inline; }
 label { cursor: pointer; white-space: nowrap; }
 img   { border: 0px; }
+wbr   { display: inline-block; }
 
 .highlight { color: #FF0000; background: #FFFFE0; }
 /* ---------------------------------- *
