@@ -42,7 +42,7 @@ function initQuotes(context)
 	$('div.q', context).each(function(){
 		var $q = $(this);
 		var name = $(this).attr('head');
-		$q.before('<div class="q-head">'+ (name ? '<b>'+name+'</b> писал(а):' : '<b>Цитата:</b>') +'</div>');
+		$q.before('<div class="q-head">'+ (name ? '<b>'+name+'</b> {L_WROTE}:' : '<b>{L_QUOTE}</b>') +'</div>');
 	});
 }
 function initPostImages(context)

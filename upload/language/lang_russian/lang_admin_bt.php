@@ -61,7 +61,7 @@ $lang['FORUM_CFG_EXPL'] = 'Настройки форума';
 $lang['BT_SELECT_FORUMS'] = 'Форумы, в которых:';
 $lang['BT_SELECT_FORUMS_EXPL'] = 'для выделения нескольких форумов, отмечайте их с нажатой клавишей <i>Ctrl</i>';
 
-$lang['ALLOW_REG_TRACKER'] = 'Разрешена регистрация торентов на трекере';
+$lang['ALLOW_REG_TRACKER'] = 'Разрешена регистрация торрентов на трекере';
 $lang['ALLOW_DL_TOPIC'] = 'Разрешено создавать Download топики';
 $lang['SHOW_DL_BUTTONS'] = 'Показывать кнопки для изменения DL-статуса';
 $lang['SELF_MODERATED'] = 'Автор топика может перенести его в другой форум';
@@ -76,15 +76,15 @@ $lang['BT_CHECK_ANNOUNCE_URL_EXPL'] = 'разрешить регистрацию
 $lang['BT_REPLACE_ANN_URL'] = 'Заменять announce url';
 $lang['BT_REPLACE_ANN_URL_EXPL'] = 'заменять оригинальный announce url в .torrent файлах на ваш';
 $lang['BT_DEL_ADDIT_ANN_URLS'] = 'Удалять все дополнительные announce urls';
-$lang['BT_DEL_ADDIT_ANN_URLS_EXPL'] = 'если торент содержит адреса других трекеров, они будут удалены';
-$lang['BT_ADD_COMMENT'] = 'Добавлять в торент комментарий';
+$lang['BT_DEL_ADDIT_ANN_URLS_EXPL'] = 'если торрент содержит адреса других трекеров, они будут удалены';
+$lang['BT_ADD_COMMENT'] = 'Добавлять в торрент комментарий';
 $lang['BT_ADD_COMMENT_EXPL'] = 'оставьте пустым для добавления адреса топика в качестве комментария';
 $lang['BT_ADD_PUBLISHER'] = 'Добавлять адрес топика как publisher-url и это имя в качестве имени publisher';
 $lang['BT_ADD_PUBLISHER_EXPL'] = 'для отключения - оставьте пустым';
 
 $lang['BT_SHOW_PEERS_HEAD'] = 'Peers-List';
 $lang['BT_SHOW_PEERS'] = 'Показывать список источников (seeders/leechers)';
-$lang['BT_SHOW_PEERS_EXPL'] = 'будет выводиться над топиком с торентом';
+$lang['BT_SHOW_PEERS_EXPL'] = 'будет выводиться над топиком с торрентом';
 $lang['BT_SHOW_PEERS_MODE'] = 'По умолчанию показывать источники как:';
 $lang['BT_SHOW_PEERS_MODE_COUNT'] = 'Только количество';
 $lang['BT_SHOW_PEERS_MODE_NAMES'] = 'Только имена';
@@ -105,9 +105,9 @@ $lang['BT_SHOW_DL_BUT_COMPL'] = $lang['DL_COMPLETE'];
 $lang['BT_SHOW_DL_BUT_CANCEL'] = $lang['DL_CANCEL'];
 
 $lang['BT_ADD_AUTH_KEY_HEAD'] = 'Passkey';
-$lang['BT_ADD_AUTH_KEY'] = 'Aвтодобавление passkey к торент-файлам перед их скачиванием';
+$lang['BT_ADD_AUTH_KEY'] = 'Aвтодобавление passkey к торрент-файлам перед их скачиванием';
 $lang['BT_GEN_PASSKEY_ON_REG'] = 'Автоматически генерировать passkey';
-$lang['BT_GEN_PASSKEY_ON_REG_EXPL'] = 'если passkey не найден, генерировать его при первом скачивании торента';
+$lang['BT_GEN_PASSKEY_ON_REG_EXPL'] = 'если passkey не найден, генерировать его при первом скачивании торрента';
 
 $lang['BT_TOR_BROWSE_ONLY_REG_HEAD'] = 'Torrent browser (трекер)';
 $lang['BT_TOR_BROWSE_ONLY_REG'] = 'Torrent browser (tracker.php) не доступен для гостей';
@@ -117,7 +117,7 @@ $lang['BT_SEARCH_BOOL_MODE_EXPL'] = 'использовать *, +, - и т.д. 
 $lang['BT_SHOW_DL_STAT_ON_INDEX_HEAD'] = 'Разное';
 $lang['BT_SHOW_DL_STAT_ON_INDEX'] = 'Показывать UL/DL статистику юзера на главной странице форума';
 $lang['BT_NEWTOPIC_AUTO_REG'] = 'Регистрировать торренты на трекере для новых топиков';
-$lang['BT_SET_DLTYPE_ON_TOR_REG'] = 'Изменять статус топика на "Download" во время регистрации торента на трекере';
+$lang['BT_SET_DLTYPE_ON_TOR_REG'] = 'Изменять статус топика на "Download" во время регистрации торрента на трекере';
 $lang['BT_SET_DLTYPE_ON_TOR_REG_EXPL'] = 'не зависит от того, разрешено ли в этом форуме создавать Download-топики (в настройках форумов)';
 $lang['BT_UNSET_DLTYPE_ON_TOR_UNREG'] = 'Изменять статус топика на "Normal" во время удаления торрента с трекера';
 
