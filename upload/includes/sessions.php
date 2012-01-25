@@ -229,7 +229,7 @@ class user_common
 		$session_id = $this->sessiondata['sid'];
 
 		$login   = (int) ($this->data['user_id'] != ANONYMOUS);
-		$is_user = ($this->data['user_level'] == USER);
+		$is_user = ($this->data['user_level'] != ADMIN);
 		$user_id = (int) $this->data['user_id'];
 		$mod_admin_session = ($this->data['user_level'] == ADMIN || $this->data['user_level'] == MOD);
 
