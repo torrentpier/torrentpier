@@ -4,6 +4,8 @@ if (!defined('BB_ROOT')) die(basename(__FILE__));
 
 function get_torrent_info ($attach_id)
 {
+	global $lang;
+	
 	$attach_id = intval($attach_id);
 
 	$sql = "

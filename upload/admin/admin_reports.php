@@ -9,9 +9,6 @@ if (!empty($setmodules))
 	return;
 }
 
-define('IN_PHPBB', true);
-define('BB_ROOT', './../');
-
 require("./pagestart.php");
 require(INC_DIR . "functions_report.php");
 require(INC_DIR . "functions_report_admin.php");
