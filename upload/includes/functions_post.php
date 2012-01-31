@@ -645,8 +645,6 @@ function insert_post ($mode, $topic_id, $forum_id = '', $old_forum_id = '', $new
 	$post_username = $post_subject = $post_text = $poster_ip = '';
 
 	$post_time = $current_time = TIMENOW;
-	$username = $userdata['username'];
-	$user_id = $userdata['user_id'];
 
 	if ($mode == 'after_move')
 	{
@@ -663,14 +661,14 @@ function insert_post ($mode, $topic_id, $forum_id = '', $old_forum_id = '', $new
 		}
 		if (!$forum_names) return;
 
-		$post_text = sprintf($lang['BOT_TOPIC_MOVED_FROM_TO'], "<a class=\"gen\" href=\"viewforum.php?f=$old_forum_id\">$forum_names[$old_forum_id]</a>", "<a class=\"gen\" href=\"viewforum.php?f=$forum_id\">$forum_names[$forum_id]</a>", "<a class=\"gen\" href=\"profile.php?mode=viewprofile&u=$user_id\">$username</a>");
+		$post_text = sprintf($lang['BOT_TOPIC_MOVED_FROM_TO'], "<a class=\"gen\" href=\"viewforum.php?f=$old_forum_id\">$forum_names[$old_forum_id]</a>", "<a class=\"gen\" href=\"viewforum.php?f=$forum_id\">$forum_names[$forum_id]</a>", profile_url($userdata));
 
 		$poster_id = BOT_UID;
 		$poster_ip = '7f000001';
 	}
 	else if ($mode == 'after_split_to_old')
 	{
-		$post_text = sprintf($lang['BOT_MESS_SPLITS'], "<a class=\"gen\" href=\"viewtopic.php?t=$new_topic_id\">". htmlCHR($new_topic_title) ."</a>", "<a class=\"gen\" href=\"profile.php?mode=viewprofile&u=$user_id\">$username</a>");
+		$post_text = sprintf($lang['BOT_MESS_SPLITS'], "<a class=\"gen\" href=\"viewtopic.php?t=$new_topic_id\">". htmlCHR($new_topic_title) ."</a>", profile_url($userdata));
 
 		$poster_id = BOT_UID;
 		$poster_ip = '7f000001';
@@ -687,7 +685,7 @@ function insert_post ($mode, $topic_id, $forum_id = '', $old_forum_id = '', $new
 			$old_topic_title = $row['topic_title'];
 			$post_time = $row['post_time'] - 1;
 
-			$post_text = sprintf($lang['BOT_TOPIC_SPLITS'], "<a class=\"gen\" href=\"viewtopic.php?t=$old_topic_id\">$old_topic_title</a>", "<a class=\"gen\" href=\"profile.php?mode=viewprofile&u=$user_id\">$username</a>");
+			$post_text = sprintf($lang['BOT_TOPIC_SPLITS'], "<a class=\"gen\" href=\"viewtopic.php?t=$old_topic_id\">$old_topic_title</a>", profile_url($userdata));
 
 			$poster_id = BOT_UID;
 			$poster_ip = '7f000001';
