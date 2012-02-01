@@ -286,43 +286,43 @@
 <tr>
 	<td><h4>{L_REPORT_MODULE}</h4></td>
 	<td>
-	    <label><input type="radio" name="reports_enabled" value="1" <!-- IF REPORTS_ENABLED -->checked="checked"<!-- ENDIF --> />{L_YES}</label>&nbsp;&nbsp;
-		<label><input type="radio" name="reports_enabled" value="0" <!-- IF not REPORTS_ENABLED -->checked="checked"<!-- ENDIF --> />{L_NO}</label>
+	    <label><input type="radio" name="reports_enabled" value="1" <!-- IF REPORTS_ENABLED -->checked="checked"<!-- ENDIF --> />{L_ENABLED}</label>&nbsp;&nbsp;
+		<label><input type="radio" name="reports_enabled" value="0" <!-- IF not REPORTS_ENABLED -->checked="checked"<!-- ENDIF --> />{L_DISABLED}</label>
 	</td>
 </tr>
 <tr>
 	<td><h4>{L_GOLD} / {L_SILVER}</h4></td>
 	<td>
-	    <label><input type="radio" name="gold_silver_enabled" value="1" <!-- IF GOLD_SILVER_ENABLED -->checked="checked"<!-- ENDIF --> />{L_YES}</label>&nbsp;&nbsp;
-		<label><input type="radio" name="gold_silver_enabled" value="0" <!-- IF not GOLD_SILVER_ENABLED -->checked="checked"<!-- ENDIF --> />{L_NO}</label>
+	    <label><input type="radio" name="gold_silver_enabled" value="1" <!-- IF GOLD_SILVER_ENABLED -->checked="checked"<!-- ENDIF --> />{L_ENABLED}</label>&nbsp;&nbsp;
+		<label><input type="radio" name="gold_silver_enabled" value="0" <!-- IF not GOLD_SILVER_ENABLED -->checked="checked"<!-- ENDIF --> />{L_DISABLED}</label>
 	</td>
 </tr>
 <tr>
 	<td><h4>{L_MAGNET}</h4></td>
 	<td>
-	    <label><input type="radio" name="magnet_links_enabled" value="1" <!-- IF MAGNET_LINKS_ENABLED -->checked="checked"<!-- ENDIF --> />{L_YES}</label>&nbsp;&nbsp;
-		<label><input type="radio" name="magnet_links_enabled" value="0" <!-- IF not MAGNET_LINKS_ENABLED -->checked="checked"<!-- ENDIF --> />{L_NO}</label>
+	    <label><input type="radio" name="magnet_links_enabled" value="1" <!-- IF MAGNET_LINKS_ENABLED -->checked="checked"<!-- ENDIF --> />{L_ENABLED}</label>&nbsp;&nbsp;
+		<label><input type="radio" name="magnet_links_enabled" value="0" <!-- IF not MAGNET_LINKS_ENABLED -->checked="checked"<!-- ENDIF --> />{L_DISABLED}</label>
 	</td>
 </tr>
 <tr>
 	<td><h4>{L_GENDER}</h4></td>
 	<td>
-	    <label><input type="radio" name="gender" value="1" <!-- IF GENDER -->checked="checked"<!-- ENDIF --> />{L_YES}</label>&nbsp;&nbsp;
-		<label><input type="radio" name="gender" value="0" <!-- IF not GENDER -->checked="checked"<!-- ENDIF --> />{L_NO}</label>
+	    <label><input type="radio" name="gender" value="1" <!-- IF GENDER -->checked="checked"<!-- ENDIF --> />{L_ENABLED}</label>&nbsp;&nbsp;
+		<label><input type="radio" name="gender" value="0" <!-- IF not GENDER -->checked="checked"<!-- ENDIF --> />{L_DISABLED}</label>
 	</td>
 </tr>
 <tr>
 	<td><h4>{L_CALLSEED}</h4></td>
 	<td>
-	    <label><input type="radio" name="callseed" value="1" <!-- IF CALLSEED -->checked="checked"<!-- ENDIF --> />{L_YES}</label>&nbsp;&nbsp;
-		<label><input type="radio" name="callseed" value="0" <!-- IF not CALLSEED -->checked="checked"<!-- ENDIF --> />{L_NO}</label>
+	    <label><input type="radio" name="callseed" value="1" <!-- IF CALLSEED -->checked="checked"<!-- ENDIF --> />{L_ENABLED}</label>&nbsp;&nbsp;
+		<label><input type="radio" name="callseed" value="0" <!-- IF not CALLSEED -->checked="checked"<!-- ENDIF --> />{L_DISABLED}</label>
 	</td>
 </tr>
 <tr>
-	<td><h4>{L_SPMODE_FULL}</h4></td>
+	<td><h4>{L_TRACKER_STATS}</h4></td>
 	<td>
-	    <label><input type="radio" name="tor_stats" value="1" <!-- IF TOR_STATS -->checked="checked"<!-- ENDIF --> />{L_YES}</label>&nbsp;&nbsp;
-		<label><input type="radio" name="tor_stats" value="0" <!-- IF not TOR_STATS -->checked="checked"<!-- ENDIF --> />{L_NO}</label>
+	    <label><input type="radio" name="tor_stats" value="1" <!-- IF TOR_STATS -->checked="checked"<!-- ENDIF --> />{L_ENABLED}</label>&nbsp;&nbsp;
+		<label><input type="radio" name="tor_stats" value="0" <!-- IF not TOR_STATS -->checked="checked"<!-- ENDIF --> />{L_DISABLED}</label>
 	</td>
 </tr>
 <tr>
@@ -336,8 +336,8 @@
 <tr>
 	<td><h4>{L_LATEST_NEWS}</h4></td>
 	<td>
-	    <label><input type="radio" name="show_latest_news" value="1" <!-- IF SHOW_LATEST_NEWS -->checked="checked"<!-- ENDIF --> />{L_YES}</label>&nbsp;&nbsp;
-		<label><input type="radio" name="show_latest_news" value="0" <!-- IF not SHOW_LATEST_NEWS -->checked="checked"<!-- ENDIF --> />{L_NO}</label>
+	    <label><input type="radio" name="show_latest_news" value="1" <!-- IF SHOW_LATEST_NEWS -->checked="checked"<!-- ENDIF --> />{L_ENABLED}</label>&nbsp;&nbsp;
+		<label><input type="radio" name="show_latest_news" value="0" <!-- IF not SHOW_LATEST_NEWS -->checked="checked"<!-- ENDIF --> />{L_DISABLED}</label>
 	</td>
 </tr>
 <tr>
@@ -359,8 +359,8 @@
 <tr>
 	<td><h4>{L_NETWORK_NEWS}</h4></td>
 	<td>
-	    <label><input type="radio" name="show_network_news" value="1" <!-- IF SHOW_NETWORK_NEWS -->checked="checked"<!-- ENDIF --> />{L_YES}</label>&nbsp;&nbsp;
-		<label><input type="radio" name="show_network_news" value="0" <!-- IF not SHOW_NETWORK_NEWS -->checked="checked"<!-- ENDIF --> />{L_NO}</label>
+	    <label><input type="radio" name="show_network_news" value="1" <!-- IF SHOW_NETWORK_NEWS -->checked="checked"<!-- ENDIF --> />{L_ENABLED}</label>&nbsp;&nbsp;
+		<label><input type="radio" name="show_network_news" value="0" <!-- IF not SHOW_NETWORK_NEWS -->checked="checked"<!-- ENDIF --> />{L_DISABLED}</label>
 	</td>
 </tr>
 <tr>
@@ -374,6 +374,32 @@
 <tr>
 	<td><h4>{L_NEWS_FORUM_ID}</h4></td>
 	<td><input class="post" type="text" size="25" maxlength="100" name="NETWORK_NEWS_FORUM_ID" value="{NETWORK_NEWS_FORUM_ID}" /></td>
+</tr>
+
+<tr class="row3 med">
+	<td class="bold tCenter" colspan="2">{L_GALLERY}</td>
+</tr>
+<tr>
+	<td><h4>{L_GALLERY}</h4></td>
+	<td>
+	    <label><input type="radio" name="gallery_enabled" value="1" <!-- IF GALLERY_ENABLED -->checked="checked"<!-- ENDIF --> />{L_ENABLED}</label>&nbsp;&nbsp;
+		<label><input type="radio" name="gallery_enabled" value="0" <!-- IF not GALLERY_ENABLED -->checked="checked"<!-- ENDIF --> />{L_DISABLED}</label>
+	</td>
+</tr>
+<tr>
+	<td><h4>{L_PIC_GALLERY}</h4></td>
+	<td><input class="post" type="text" size="25" maxlength="100" name="pic_dir" value="{PIC_DIR}" /></td>
+</tr>
+<tr>
+	<td><h4>{L_PIC_SIZE}</h4></td>
+	<td><input class="post" type="text" size="25" maxlength="100" name="pic_max_size" value="{PIC_MAX_SIZE}" />&nbsp;{L_MB}</td>
+</tr>
+<tr>
+	<td><h4>{L_AUTO_DELETE_POSTED_PICS}</h4></td>
+	<td>
+	    <label><input type="radio" name="auto_delete_posted_pics" value="1" <!-- IF AUTO_DELETE_POSTED_PICS -->checked="checked"<!-- ENDIF --> />{L_ENABLED}</label>&nbsp;&nbsp;
+		<label><input type="radio" name="auto_delete_posted_pics" value="0" <!-- IF not AUTO_DELETE_POSTED_PICS -->checked="checked"<!-- ENDIF --> />{L_DISABLED}</label>
+	</td>
 </tr>
 <!-- ENDIF / CONFIG_MODS -->
 <tr>

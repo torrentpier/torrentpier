@@ -318,23 +318,20 @@ ajax.callback.mod_action = function(data) {
 	
 	</td>
 </tr>
-<!-- Report -->
-<!-- BEGIN switch_report_user -->
-<tr>
-	<td class="catBottom" align="center" colspan="2"><a href="{U_REPORT_USER}" class="gen">{L_REPORT_USER}</a></td>
-</tr>
-<!-- END switch_report_user -->
-<!-- Report [END] -->
 <!-- IF SIGNATURE -->
-<tr>
-	<th colspan="2" class="thHead">{L_SIGNATURE_USER}{USERNAME}</th>
-</tr>
 <tr>
 	<td class="row1 pad_4" colspan="2">
 	    <div class="signature">{SIGNATURE}</div>
 	</td>
 </tr>
 <!-- ENDIF -->
+
+<!-- BEGIN switch_report_user -->
+<tr>
+	<td class="catBottom" align="center" colspan="2"><a href="{U_REPORT_USER}" class="gen">{L_REPORT_USER}</a></td>
+</tr>
+<!-- END switch_report_user -->
+
 </table><!--/user_profile-->
 
 <a name="torrent"></a>

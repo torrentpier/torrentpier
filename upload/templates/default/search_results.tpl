@@ -74,9 +74,9 @@
 <table class="forumline forum">
 <col class="row1">
 <col class="row1" width="25%">
-<col class="row2" width="75%">
+<col class="row1" width="75%">
 <col class="row1">
-<col class="row2">
+<col class="row1">
 <col class="row1">
 <tr>
 	<th>&nbsp;</th>
