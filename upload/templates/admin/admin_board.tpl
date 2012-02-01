@@ -1,8 +1,12 @@
-
+<!-- IF CONFIG -->
 <h1>{L_GENERAL_CONFIG}</h1>
 
 <p>{L_CONFIG_EXPLAIN}</p>
 <br />
+
+<a href="admin_board.php?mode=config" class="bold">{L_GENERAL_CONFIG}</a> &#0183;
+<a href="admin_board.php?mode=config_mods">{L_CONFIG_MODS}</a>
+<br /><br />
 
 <form action="{S_CONFIG_ACTION}" method="post">
 {S_HIDDEN_FIELDS}
@@ -224,6 +228,10 @@
 	<td><input class="post" type="text" size="20" maxlength="255" name="avatar_gallery_path" value="{AVATAR_GALLERY_PATH}" /></td>
 </tr>
 <tr>
+	<td><h4>{L_NOAVATAR}</h4></td>
+	<td><input class="post" type="text" size="35" maxlength="255" name="no_avatar" value="{NO_AVATAR}" /></td>
+</tr>
+<tr>
 	<th colspan="2">{L_EMAIL_SETTINGS}</th>
 </tr>
 <tr>
@@ -253,6 +261,121 @@
 	<td><h4>{L_SMTP_PASSWORD}</h4><h6>{L_SMTP_PASSWORD_EXPLAIN}</h6></td>
 	<td><input class="post" type="password" name="smtp_password" value="{SMTP_PASSWORD}" size="25" maxlength="255" /></td>
 </tr>
+
+<!-- ENDIF / CONFIG -->
+
+<!-- IF CONFIG_MODS -->
+<h1>{L_CONFIG_MODS}</h1>
+
+<p>{L_MODS_EXPLAIN}</p>
+<br />
+
+<a href="admin_board.php?mode=config">{L_GENERAL_CONFIG}</a> &#0183;
+<a href="admin_board.php?mode=config_mods" class="bold">{L_CONFIG_MODS}</a>
+<br /><br />
+
+<form action="{S_CONFIG_ACTION}" method="post">
+{S_HIDDEN_FIELDS}
+
+<table class="forumline">
+<col class="row1">
+<col class="row2">
+<tr>
+	<th colspan="2">{L_CONFIG_MODS}</th>
+</tr>
+<tr>
+	<td><h4>{L_REPORT_MODULE}</h4></td>
+	<td>
+	    <label><input type="radio" name="reports_enabled" value="1" <!-- IF REPORTS_ENABLED -->checked="checked"<!-- ENDIF --> />{L_YES}</label>&nbsp;&nbsp;
+		<label><input type="radio" name="reports_enabled" value="0" <!-- IF not REPORTS_ENABLED -->checked="checked"<!-- ENDIF --> />{L_NO}</label>
+	</td>
+</tr>
+<tr>
+	<td><h4>{L_GOLD} / {L_SILVER}</h4></td>
+	<td>
+	    <label><input type="radio" name="gold_silver_enabled" value="1" <!-- IF GOLD_SILVER_ENABLED -->checked="checked"<!-- ENDIF --> />{L_YES}</label>&nbsp;&nbsp;
+		<label><input type="radio" name="gold_silver_enabled" value="0" <!-- IF not GOLD_SILVER_ENABLED -->checked="checked"<!-- ENDIF --> />{L_NO}</label>
+	</td>
+</tr>
+<tr>
+	<td><h4>{L_MAGNET}</h4></td>
+	<td>
+	    <label><input type="radio" name="magnet_links_enabled" value="1" <!-- IF MAGNET_LINKS_ENABLED -->checked="checked"<!-- ENDIF --> />{L_YES}</label>&nbsp;&nbsp;
+		<label><input type="radio" name="magnet_links_enabled" value="0" <!-- IF not MAGNET_LINKS_ENABLED -->checked="checked"<!-- ENDIF --> />{L_NO}</label>
+	</td>
+</tr>
+<tr>
+	<td><h4>{L_GENDER}</h4></td>
+	<td>
+	    <label><input type="radio" name="gender" value="1" <!-- IF GENDER -->checked="checked"<!-- ENDIF --> />{L_YES}</label>&nbsp;&nbsp;
+		<label><input type="radio" name="gender" value="0" <!-- IF not GENDER -->checked="checked"<!-- ENDIF --> />{L_NO}</label>
+	</td>
+</tr>
+<tr>
+	<td><h4>{L_CALLSEED}</h4></td>
+	<td>
+	    <label><input type="radio" name="callseed" value="1" <!-- IF CALLSEED -->checked="checked"<!-- ENDIF --> />{L_YES}</label>&nbsp;&nbsp;
+		<label><input type="radio" name="callseed" value="0" <!-- IF not CALLSEED -->checked="checked"<!-- ENDIF --> />{L_NO}</label>
+	</td>
+</tr>
+<tr>
+	<td><h4>{L_SPMODE_FULL}</h4></td>
+	<td>
+	    <label><input type="radio" name="tor_stats" value="1" <!-- IF TOR_STATS -->checked="checked"<!-- ENDIF --> />{L_YES}</label>&nbsp;&nbsp;
+		<label><input type="radio" name="tor_stats" value="0" <!-- IF not TOR_STATS -->checked="checked"<!-- ENDIF --> />{L_NO}</label>
+	</td>
+</tr>
+<tr>
+	<td><h4>{L_WHOIS_INFO}</h4></td>
+	<td><input class="post" type="text" size="28" maxlength="100" name="whois_info" value="{WHOIS_INFO}" /></td>
+</tr>
+
+<tr class="row3 med">
+	<td class="bold tCenter" colspan="2">{L_LATEST_NEWS}</td>
+</tr>
+<tr>
+	<td><h4>{L_LATEST_NEWS}</h4></td>
+	<td>
+	    <label><input type="radio" name="show_latest_news" value="1" <!-- IF SHOW_LATEST_NEWS -->checked="checked"<!-- ENDIF --> />{L_YES}</label>&nbsp;&nbsp;
+		<label><input type="radio" name="show_latest_news" value="0" <!-- IF not SHOW_LATEST_NEWS -->checked="checked"<!-- ENDIF --> />{L_NO}</label>
+	</td>
+</tr>
+<tr>
+	<td><h4>{L_MAX_NEWS_TITLE}</h4></td>
+	<td><input class="post" type="text" size="25" maxlength="100" name="max_news_title" value="{MAX_NEWS_TITLE}" /></td>
+</tr>
+<tr>
+	<td><h4>{L_NEWS_COUNT}</h4></td>
+	<td><input class="post" type="text" size="25" maxlength="100" name="latest_news_count" value="{LATEST_NEWS_COUNT}" /></td>
+</tr>
+<tr>
+	<td><h4>{L_NEWS_FORUM_ID}</h4></td>
+	<td><input class="post" type="text" size="25" maxlength="100" name="LATEST_NEWS_FORUM_ID" value="{LATEST_NEWS_FORUM_ID}" /></td>
+</tr>
+
+<tr class="row3 med">
+	<td class="bold tCenter" colspan="2">{L_NETWORK_NEWS}</td>
+</tr>
+<tr>
+	<td><h4>{L_NETWORK_NEWS}</h4></td>
+	<td>
+	    <label><input type="radio" name="show_network_news" value="1" <!-- IF SHOW_NETWORK_NEWS -->checked="checked"<!-- ENDIF --> />{L_YES}</label>&nbsp;&nbsp;
+		<label><input type="radio" name="show_network_news" value="0" <!-- IF not SHOW_NETWORK_NEWS -->checked="checked"<!-- ENDIF --> />{L_NO}</label>
+	</td>
+</tr>
+<tr>
+	<td><h4>{L_MAX_NEWS_TITLE}</h4></td>
+	<td><input class="post" type="text" size="25" maxlength="100" name="max_net_title" value="{MAX_NET_TITLE}" /></td>
+</tr>
+<tr>
+	<td><h4>{L_NEWS_COUNT}</h4></td>
+	<td><input class="post" type="text" size="25" maxlength="100" name="network_news_count" value="{NETWORK_NEWS_COUNT}" /></td>
+</tr>
+<tr>
+	<td><h4>{L_NEWS_FORUM_ID}</h4></td>
+	<td><input class="post" type="text" size="25" maxlength="100" name="NETWORK_NEWS_FORUM_ID" value="{NETWORK_NEWS_FORUM_ID}" /></td>
+</tr>
+<!-- ENDIF / CONFIG_MODS -->
 <tr>
 	<td class="catBottom" colspan="2">
 		<input type="submit" name="submit" value="{L_SUBMIT}" class="mainoption" />&nbsp;&nbsp;

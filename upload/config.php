@@ -63,8 +63,8 @@ $bb_cfg = $tr_cfg = $page_cfg = array();
 
 // Increase number of revision after update
 $bb_cfg['tp_version'] = '2.4 (beta)';
-$bb_cfg['tp_release_state'] = 'R346';
-$bb_cfg['tp_release_date'] = '01-02-2012';
+$bb_cfg['tp_release_state'] = 'R347';
+$bb_cfg['tp_release_date'] = '02-02-2012';
 
 // Database
 $charset  = 'utf8';
@@ -537,49 +537,8 @@ $bb_cfg['captcha'] = array(
 	'img_path'   => BB_PATH .'/images/captcha/',   # without '/'
 );
 
-// Advanced Report Hack
-$bb_cfg['reports_enabled'] = true;
-
-// Gold/Silver releases
-$bb_cfg['gold_silver_enabled'] = true;
-
-// Gallery
-$bb_cfg['gallery_enabled'] = true;
-$bb_cfg['pic_dir'] = 'pictures/';
-$bb_cfg['pic_max_size'] = 3*1024*1024; // 3 MB
-$bb_cfg['auto_delete_posted_pics'] = true; // Delete pictures while delete post?
-
-// Magnet links
-$bb_cfg['magnet_links_enabled'] = true;
-
-// No avatar
-$bb_cfg['no_avatar'] = 'images/avatars/gallery/noavatar.png';
-
 // Birthday
 $bb_cfg['birthday']['enabled']      = true;
 $bb_cfg['birthday']['max_user_age'] = 99;
 $bb_cfg['birthday']['min_user_age'] = 10;
 $bb_cfg['birthday']['check_day']    = 7;
-
-// Gender
-$bb_cfg['gender'] = true;
-
-// CallSeed
-$bb_cfg['callseed'] = false;
-
-// Tracker stats
-$bb_cfg['tor_stats'] = true;
-
-// News
-$bb_cfg['show_latest_news']     = true;
-$bb_cfg['max_news_title']       = 50;
-$bb_cfg['latest_news_count']    = 5;
-$bb_cfg['latest_news_forum_id'] = '1'; // (string) 1,2,3...
-
-// Network News
-$bb_cfg['show_network_news']     = true;
-$bb_cfg['max_net_title']         = 50;
-$bb_cfg['network_news_count']    = 5;
-$bb_cfg['network_news_forum_id'] = '2'; // (string) 1,2,3...
-
-$bb_cfg['whois_info'] = 'http://ip-whois.net/ip_geo.php?ip=';

@@ -4,6 +4,8 @@ $lang['GENERAL'] = 'General Admin';
 $lang['USERS'] = 'User Admin';
 $lang['GROUPS'] = 'Group Admin';
 $lang['FORUMS'] = 'Forum Admin';
+$lang['MODS'] = 'Modifications';
+$lang['TORRENTPIER'] = 'Product configuration';
 
 $lang['CONFIGURATION'] = 'Configuration';
 $lang['PERMISSIONS'] = 'Permissions';
@@ -213,7 +215,11 @@ $lang['CLICK_RETURN_BANADMIN'] = 'Click %sHere%s to return to Ban Control';
 $lang['GENERAL_CONFIG'] = 'General Configuration';
 $lang['CONFIG_EXPLAIN'] = 'The form below will allow you to customize all the general board options. For User and Forum configurations use the related links on the left hand side.';
 
-$lang['CLICK_RETURN_CONFIG'] = 'Click %sHere%s to return to General Configuration';
+$lang['CONFIG_MODS'] = 'Configuration modifications';
+$lang['MODS_EXPLAIN'] = 'This form allows you to adjust the modifications';
+
+$lang['CLICK_RETURN_CONFIG'] = '%sClick Here to return to General Configuration%s';
+$lang['CLICK_RETURN_CONFIG_MODS'] = '%sBack to the settings modifications%s';
 
 $lang['GENERAL_SETTINGS'] = 'General Board Settings';
 $lang['SITE_NAME'] = 'Site name';
@@ -580,6 +586,7 @@ $lang['TEMPLATE'] = 'Template';
 //
 // Reports (need to translate!)
 //
+$lang['REPORT'] = 'Reports';
 $lang['REPORT_CONFIG_EXPLAIN'] = 'On this page you can change the general configuration of the report feature.';
 $lang['REPORT_SUBJECT_AUTH'] = 'Individual permissions';
 $lang['REPORT_SUBJECT_AUTH_EXPLAIN'] = 'If this setting is enabled, moderators can only view reports they can edit. For example a post report will be hidden if the user isn\'t a moderator of the forum the post belongs to.';
@@ -649,3 +656,11 @@ $lang['REPORTS'] = 'Reports';
 // Reports [END]
 //
 
+//
+// Mods
+//
+$lang['MAX_NEWS_TITLE'] = 'Max. length of the news';
+$lang['NEWS_COUNT'] = 'How many news show';
+$lang['NEWS_FORUM_ID'] = 'From what forums to display <br /> <h6>Of the several forums raises, separated by commas. Example 1,2,3</h6>';
+$lang['NOAVATAR'] = 'No avatar';
+$lang['WHOIS_INFO'] = 'Information about IP address';

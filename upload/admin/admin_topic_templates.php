@@ -3,7 +3,7 @@
 // ACP Header - START
 if (!empty($setmodules))
 {
-	$module['TorrentPier']['Release_Templates'] = basename(__FILE__);
+	$module['Mods']['Release_Templates'] = basename(__FILE__);
 	return;
 }
 require('./pagestart.php');
