@@ -69,7 +69,7 @@ if ( $row = DB()->fetch_row($sql) )
 				$emailer->from($userdata['user_email']);
 				$emailer->replyto($userdata['user_email']);
 
-				$email_headers = 'X-AntiAbuse: Board servername - ' . $server_name . "\n";
+				$email_headers = 'X-AntiAbuse: Board servername - ' . $bb_cfg['server_name'] . "\n";
 				$email_headers .= 'X-AntiAbuse: User_id - ' . $userdata['user_id'] . "\n";
 				$email_headers .= 'X-AntiAbuse: Username - ' . $userdata['username'] . "\n";
 				$email_headers .= 'X-AntiAbuse: User IP - ' . CLIENT_IP . "\n";

@@ -2787,7 +2787,7 @@ function send_pm($user_id, $subject, $message, $poster_id = false)
     {
     	$poster_ip = '7f000001';
     }
-    else if($row = DB()->fetch_row("SELECT user_reg_ip ". BB_USERS ." WHERE user_id = $poster_id"))
+    else if($row = DB()->fetch_row("SELECT user_reg_ip FROM ". BB_USERS ." WHERE user_id = $poster_id"))
     {
     	$poster_ip = $row['user_reg_ip'];
     }
