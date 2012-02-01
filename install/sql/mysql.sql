@@ -638,6 +638,26 @@ INSERT INTO `bb_config` VALUES ('report_new_window', '0');
 INSERT INTO `bb_config` VALUES ('torrent_pass_private_key', 'вставить_из_конфига_XBTT');
 INSERT INTO `bb_config` VALUES ('cron_enabled', '1');
 INSERT INTO `bb_config` VALUES ('cron_check_interval', '300');
+INSERT INTO `bb_config` VALUES ('reports_enabled', '1');
+INSERT INTO `bb_config` VALUES ('gold_silver_enabled', '1');
+INSERT INTO `bb_config` VALUES ('gallery_enabled', '1');
+INSERT INTO `bb_config` VALUES ('pic_dir', 'pictures/');
+INSERT INTO `bb_config` VALUES ('pic_max_size', '3*1024*1024');
+INSERT INTO `bb_config` VALUES ('auto_delete_posted_pics', '1');
+INSERT INTO `bb_config` VALUES ('magnet_links_enabled', '1');
+INSERT INTO `bb_config` VALUES ('no_avatar', 'images/avatars/gallery/noavatar.png');
+INSERT INTO `bb_config` VALUES ('gender', '1');
+INSERT INTO `bb_config` VALUES ('callseed', '0');
+INSERT INTO `bb_config` VALUES ('tor_stats', '1');
+INSERT INTO `bb_config` VALUES ('show_latest_news', '1');
+INSERT INTO `bb_config` VALUES ('max_news_title', '50');
+INSERT INTO `bb_config` VALUES ('latest_news_count', '5');
+INSERT INTO `bb_config` VALUES ('latest_news_forum_id', '1');
+INSERT INTO `bb_config` VALUES ('show_network_news', '1');
+INSERT INTO `bb_config` VALUES ('max_net_title', '50');
+INSERT INTO `bb_config` VALUES ('network_news_count', '5');
+INSERT INTO `bb_config` VALUES ('network_news_forum_id', '2');
+INSERT INTO `bb_config` VALUES ('whois_info', 'http://ip-whois.net/ip_geo.php?ip=');
 
 -- --------------------------------------------------------
 

@@ -97,7 +97,6 @@ switch($mode)
 	break;
 	
 	default:
-	//case 'config':
 		$template->assign_vars(array(
 	        'S_CONFIG_ACTION' => append_sid('admin_board.php?mode=config'),
 			'CONFIG' => true,
