@@ -29,7 +29,7 @@
 </tr>
 <tr>
 	<td width="15%" class="attachrow"><span class="med">&nbsp;{L_FILESIZE}:</span></td>
-	<td width="75%" class="attachrow"><span class="med">&nbsp;{postrow.attach.cat_stream.FILESIZE} {postrow.attach.cat_stream.SIZE_VAR}</td>
+	<td width="75%" class="attachrow"><span class="med">&nbsp;{postrow.attach.cat_stream.FILESIZE}</td>
 </tr>
 <tr>
 	<td width="15%" class="attachrow"><span class="med">&nbsp;{L_VIEWED}:</span></td>
@@ -73,7 +73,7 @@
 </tr>
 <tr>
 	<td width="15%" class="attachrow"><span class="med">&nbsp;{L_FILESIZE}:</span></td>
-	<td width="75%" class="attachrow"><span class="med">&nbsp;{postrow.attach.cat_swf.FILESIZE} {postrow.attach.cat_swf.SIZE_VAR}</td>
+	<td width="75%" class="attachrow"><span class="med">&nbsp;{postrow.attach.cat_swf.FILESIZE}</td>
 </tr>
 <tr>
 	<td width="15%" class="attachrow"><span class="med">&nbsp;{L_VIEWED}:</span></td>
@@ -98,7 +98,7 @@
 
 <!-- BEGIN cat_images -->
 <fieldset class="attach">
-<legend>{ATTACHMENT_ICON} {L_ATTACHMENT} ({postrow.attach.cat_images.FILESIZE} {postrow.attach.cat_images.SIZE_VAR})</legend>
+<legend>{ATTACHMENT_ICON} {L_ATTACHMENT} ({postrow.attach.cat_images.FILESIZE})</legend>
 	<p class="tCenter pad_6">
 		<img src="{postrow.attach.cat_images.IMG_SRC}" id="attachImg" class="postImg" alt="img" border="0" />
 	</p>
@@ -120,7 +120,7 @@
 	</p>
 	<p class="attach_link">
 		<a href="{postrow.attach.cat_thumb_images.IMG_SRC}" target="_blank"><b>{postrow.attach.cat_thumb_images.DOWNLOAD_NAME}</b></a>
-		<span class="attach_stats med">({postrow.attach.cat_thumb_images.FILESIZE} {postrow.attach.cat_thumb_images.SIZE_VAR})</span>
+		<span class="attach_stats med">({postrow.attach.cat_thumb_images.FILESIZE})</span>
 	</p>
 	<!-- IF postrow.attach.cat_thumb_images.COMMENT -->
 	<p class="attach_comment med">
@@ -137,7 +137,7 @@
 <legend>{postrow.attach.attachrow.S_UPLOAD_IMAGE} {L_ATTACHMENT}</legend>
 	<p class="attach_link">
 		<a href="{postrow.attach.attachrow.U_DOWNLOAD_LINK}" {postrow.attach.attachrow.TARGET_BLANK}><b>{postrow.attach.attachrow.DOWNLOAD_NAME}</b></a>
-		<span class="attach_stats med">({postrow.attach.attachrow.FILESIZE} {postrow.attach.attachrow.SIZE_VAR}, {L_DOWNLOADED}: {postrow.attach.attachrow.DOWNLOAD_COUNT})</span>
+		<span class="attach_stats med">({postrow.attach.attachrow.FILESIZE}, {L_DOWNLOADED}: {postrow.attach.attachrow.DOWNLOAD_COUNT})</span>
 	</p>
 	<!-- IF postrow.attach.attachrow.COMMENT -->
 	<p class="attach_comment med">

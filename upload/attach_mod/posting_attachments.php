@@ -1103,23 +1103,14 @@ class attach_parent
 			// check Filesize
 			if (!$error && $allowed_filesize != 0 && $this->filesize > $allowed_filesize && !(IS_ADMIN || IS_MOD || IS_GROUP_MEMBER))
 			{
-				$size_lang = ($allowed_filesize >= 1048576) ? $lang['MB'] : ( ($allowed_filesize >= 1024) ? $lang['KB'] : $lang['BYTES'] );
-
-				if ($allowed_filesize >= 1048576)
-				{
-					$allowed_filesize = round($allowed_filesize / 1048576 * 100) / 100;
-				}
-				else if($allowed_filesize >= 1024)
-				{
-					$allowed_filesize = round($allowed_filesize / 1024 * 100) / 100;
-				}
+				$allowed_filesize = humn_size($allowed_filesize);
 
 				$error = TRUE;
 				if(!empty($error_msg))
 				{
 					$error_msg .= '<br />';
 				}
-				$error_msg .= sprintf($lang['ATTACHMENT_TOO_BIG'], $allowed_filesize, $size_lang);
+				$error_msg .= sprintf($lang['ATTACHMENT_TOO_BIG'], $allowed_filesize);
 			}
 
 			// Check our complete quota

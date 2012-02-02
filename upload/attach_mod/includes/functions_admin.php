@@ -224,20 +224,7 @@ function get_formatted_dirsize()
 		@ftp_quit($conn_id);
 	}
 
-	if ($upload_dir_size >= 1048576)
-	{
-		$upload_dir_size = round($upload_dir_size / 1048576 * 100) / 100 . ' ' . $lang['MB'];
-	}
-	else if ($upload_dir_size >= 1024)
-	{
-		$upload_dir_size = round($upload_dir_size / 1024 * 100) / 100 . ' ' . $lang['KB'];
-	}
-	else
-	{
-		$upload_dir_size = $upload_dir_size . ' ' . $lang['BYTES'];
-	}
-
-	return $upload_dir_size;
+	return humn_size($upload_dir_size);
 }
 
 /*

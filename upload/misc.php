@@ -55,18 +55,8 @@ if ($do == 'attach_rules')
 			$group_name = $rows[$i]['group_name'];
 			$f_size = intval(trim($rows[$i]['max_filesize']));
 			$det_filesize = (!$f_size) ? $_max_filesize : $f_size;
-			$size_lang = ($det_filesize >= 1048576) ? $lang['MB'] : (($det_filesize >= 1024) ? $lang['KB'] : $lang['BYTES']);
 
-			if ($det_filesize >= 1048576)
-			{
-				$det_filesize = round($det_filesize / 1048576 * 100) / 100;
-			}
-			else if($det_filesize >= 1024)
-			{
-				$det_filesize = round($det_filesize / 1024 * 100) / 100;
-			}
-
-			$max_filesize = ($det_filesize == 0) ? $lang['UNLIMITED'] : $det_filesize . ' ' . $size_lang;
+			$max_filesize = (!$det_filesize) ? $lang['UNLIMITED'] : humn_size($det_filesize);
 
 			$template->assign_block_vars('group_row', array(
 				'GROUP_RULE_HEADER' => sprintf($lang['GROUP_RULE_HEADER'], $group_name, $max_filesize))

@@ -263,18 +263,7 @@ if ($view == 'stats')
 {
 	$upload_dir_size = get_formatted_dirsize();
 
-	if ($attach_config['attachment_quota'] >= 1048576)
-	{
-		$attachment_quota = round($attach_config['attachment_quota'] / 1048576 * 100) / 100 . ' ' . $lang['MB'];
-	}
-	else if ($attach_config['attachment_quota'] >= 1024)
-	{
-		$attachment_quota = round($attach_config['attachment_quota'] / 1024 * 100) / 100 . ' ' . $lang['KB'];
-	}
-	else
-	{
-		$attachment_quota = $attach_config['attachment_quota'] . ' ' . $lang['BYTES'];
-	}
+	$attachment_quota = humn_size($attach_config['attachment_quota']);
 
 	// number_of_attachments
 	$row = DB()->fetch_row("

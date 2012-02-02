@@ -91,19 +91,7 @@ else if( isset($_GET['pane']) && $_GET['pane'] == 'right' )
 		@closedir($avatar_dir);
 
 
-		if($avatar_dir_size >= 1048576)
-		{
-			$avatar_dir_size = round($avatar_dir_size / 1048576 * 100) / 100 .' '. $lang['MB'];
-		}
-		else if($avatar_dir_size >= 1024)
-		{
-			$avatar_dir_size = round($avatar_dir_size / 1024 * 100) / 100 .' '. $lang['KB'];
-		}
-		else
-		{
-			$avatar_dir_size = $avatar_dir_size .' '. $lang['BYTES'];
-		}
-
+		$avatar_dir_size = humn_size($avatar_dir_size);
 	}
 	else
 	{

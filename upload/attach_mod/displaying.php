@@ -217,16 +217,7 @@ function display_attachments($post_id)
 			$upload_image = '<img src="' . $upload_icons[$attachments['_' . $post_id][$i]['extension']] . '" alt="" border="0" />';
 		}
 
-		$filesize = $attachments['_' . $post_id][$i]['filesize'];
-		$size_lang = ($filesize >= 1048576) ? $lang['MB'] : ( ($filesize >= 1024) ? $lang['KB'] : $lang['BYTES'] );
-		if ($filesize >= 1048576)
-		{
-			$filesize = (round((round($filesize / 1048576 * 100) / 100), 2));
-		}
-		else if ($filesize >= 1024)
-		{
-			$filesize = (round((round($filesize / 1024 * 100) / 100), 2));
-		}
+		$filesize = humn_size($attachments['_' . $post_id][$i]['filesize']);
 
 		$display_name = htmlspecialchars($attachments['_' . $post_id][$i]['real_filename']);
 		$comment = htmlspecialchars($attachments['_' . $post_id][$i]['comment']);
@@ -333,7 +324,6 @@ function display_attachments($post_id)
 
 					'IMG_SRC' => $img_source,
 					'FILESIZE' => $filesize,
-					'SIZE_VAR' => $size_lang,
 					'COMMENT' => $comment,
 				));
 
@@ -384,7 +374,6 @@ function display_attachments($post_id)
 					'IMG_SRC' => append_sid(BB_ROOT . 'download.php?id=' . $attachments['_' . $post_id][$i]['attach_id']),
 					'IMG_THUMB_SRC' => $thumb_source,
 					'FILESIZE' => $filesize,
-					'SIZE_VAR' => $size_lang,
 					'COMMENT' => $comment,
 				));
 			}
@@ -398,7 +387,6 @@ function display_attachments($post_id)
 
 					'DOWNLOAD_NAME' => $display_name,
 					'FILESIZE' => $filesize,
-					'SIZE_VAR' => $size_lang,
 					'COMMENT' => $comment,
 					'DOWNLOAD_COUNT' => sprintf($lang['DOWNLOAD_NUMBER'], $attachments['_' . $post_id][$i]['download_count']))
 				);
@@ -425,7 +413,6 @@ function display_attachments($post_id)
 
 					'DOWNLOAD_NAME' => $display_name,
 					'FILESIZE' => $filesize,
-					'SIZE_VAR' => $size_lang,
 					'COMMENT' => $comment,
 					'DOWNLOAD_COUNT' => sprintf($lang['DOWNLOAD_NUMBER'], $attachments['_' . $post_id][$i]['download_count']),
 					'WIDTH' => $width,
@@ -460,7 +447,6 @@ function display_attachments($post_id)
 
 					'DOWNLOAD_NAME' => $display_name,
 					'FILESIZE' => $filesize,
-					'SIZE_VAR' => $size_lang,
 					'COMMENT' => $comment,
 					'TARGET_BLANK' => $target_blank,
 
