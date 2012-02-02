@@ -255,7 +255,7 @@ switch ($mode)
 			    $datastore->enqueue('latest_news');
 			    $datastore->update('latest_news');
 		    }
-		
+
 			$net_forums = array_flip(explode(',', $bb_cfg['network_news_forum_id']));
 			if(isset($net_forums[$forum_id]) && $bb_cfg['show_network_news'] && $result)
 			{
@@ -291,7 +291,7 @@ switch ($mode)
 				$datastore->enqueue('latest_news');
 				$datastore->update('latest_news');
 			}
-		
+
 			$net_forums = array_flip(explode(',', $bb_cfg['network_news_forum_id']));
 			if((isset($news_forums[$forum_id]) || isset($news_forums[$new_forum_id])) && $bb_cfg['show_network_news'] && $result)
 			{
@@ -474,7 +474,7 @@ switch ($mode)
 				do
 				{
 					$user_id_sql .= (($user_id_sql != '') ? ', ' : '') . intval($row['poster_id']);
-					$post_id_sql .= (($post_id_sql != '') ? ', ' : '') . intval($row['post_id']);;
+					$post_id_sql .= (($post_id_sql != '') ? ', ' : '') . intval($row['post_id']);
 				}
 				while ($row = DB()->sql_fetchrow($result));
 

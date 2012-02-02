@@ -3,8 +3,8 @@
 // ACP Header - START
 if (!empty($setmodules))
 {
-	$module['General']['Configuration'] = basename(__FILE__) .'?mode=config';;
-	$module['Mods']['Configuration'] = basename(__FILE__) .'?mode=config_mods';;
+	$module['General']['Configuration'] = basename(__FILE__) .'?mode=config';
+	$module['Mods']['Configuration'] = basename(__FILE__) .'?mode=config_mods';
 	return;
 }
 require('./pagestart.php');
@@ -15,8 +15,8 @@ require(INC_DIR .'functions_selects.php');
 $mode = isset($_GET['mode']) ? $_GET['mode'] : '';
 
 $return_links = array(
-	'index' => '<br /><br />'. sprintf($lang['CLICK_RETURN_ADMIN_INDEX'], '<a href="'. append_sid('index.php?pane=right') . '">', '</a>'),	
-	'config' => '<br /><br />'. sprintf($lang['CLICK_RETURN_CONFIG'], '<a href="' . append_sid('admin_board.php?mode=config') . '">', '</a>'),	
+	'index' => '<br /><br />'. sprintf($lang['CLICK_RETURN_ADMIN_INDEX'], '<a href="'. append_sid('index.php?pane=right') . '">', '</a>'),
+	'config' => '<br /><br />'. sprintf($lang['CLICK_RETURN_CONFIG'], '<a href="' . append_sid('admin_board.php?mode=config') . '">', '</a>'),
 	'config_mods' => '<br /><br />'. sprintf($lang['CLICK_RETURN_CONFIG_MODS'], '<a href="'. append_sid('admin_board.php?mode=config_mods') . '">', '</a>')
 );
 
@@ -53,7 +53,7 @@ else
 			bb_update_config(array($config_name => $new[$config_name]));
 		}
 	}
-    
+
 	if( isset($_POST['submit']) )
 	{
 		if ($mode == 'config')
@@ -73,7 +73,7 @@ switch($mode)
 	    $template->assign_vars(array(
 	        'S_CONFIG_ACTION' => append_sid('admin_board.php?mode=config_mods'),
 			'CONFIG_MODS' => true,
-			
+
 		    'REPORTS_ENABLED' => $new['reports_enabled'],
 		    'GOLD_SILVER_ENABLED' => $new['gold_silver_enabled'],
 		    'GALLERY_ENABLED' => $new['gallery_enabled'],
@@ -95,23 +95,23 @@ switch($mode)
 		    'WHOIS_INFO' => $new['whois_info'],
 	    ));
 	break;
-	
+
 	default:
 		$template->assign_vars(array(
 	        'S_CONFIG_ACTION' => append_sid('admin_board.php?mode=config'),
 			'CONFIG' => true,
-			
+
 	        'SITENAME' => htmlCHR($new['sitename']),
 		    'CONFIG_SITE_DESCRIPTION' => htmlCHR($new['site_desc']),
 		    'DISABLE_BOARD' => ($new['board_disable']) ? true : false,
-	
+
 		    'ACTIVATION_NONE' => USER_ACTIVATION_NONE,
 		    'ACTIVATION_NONE_CHECKED' => ($new['require_activation'] == USER_ACTIVATION_NONE) ? 'checked="checked"' : '',
 		    'ACTIVATION_USER' => USER_ACTIVATION_SELF,
 		    'ACTIVATION_USER_CHECKED' => ($new['require_activation'] == USER_ACTIVATION_SELF) ? 'checked="checked"' : '',
 		    'ACTIVATION_ADMIN' => USER_ACTIVATION_ADMIN,
 		    'ACTIVATION_ADMIN_CHECKED' => ($new['require_activation'] == USER_ACTIVATION_ADMIN) ? 'checked="checked"' : '',
-	
+
 		    'VISUAL_CONFIRM' => ($new['enable_confirm']) ? true : false,
 		    'ALLOW_AUTOLOGIN' => ($new['allow_autologin']) ? true : false,
 		    'AUTOLOGIN_TIME' => (int) $new['max_autologin_time'],
@@ -158,6 +158,5 @@ switch($mode)
 	    ));
     break;
 }
-		
+
 print_page('admin_board.tpl', 'admin');
-	
