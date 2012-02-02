@@ -350,7 +350,7 @@
 </tr>
 <tr>
 	<td><h4>{L_NEWS_FORUM_ID}</h4></td>
-	<td><input class="post" type="text" size="25" maxlength="100" name="LATEST_NEWS_FORUM_ID" value="{LATEST_NEWS_FORUM_ID}" /></td>
+	<td><input class="post" type="text" size="25" maxlength="100" name="latest_news_forum_id" value="{LATEST_NEWS_FORUM_ID}" /></td>
 </tr>
 
 <tr class="row3 med">
@@ -373,7 +373,7 @@
 </tr>
 <tr>
 	<td><h4>{L_NEWS_FORUM_ID}</h4></td>
-	<td><input class="post" type="text" size="25" maxlength="100" name="NETWORK_NEWS_FORUM_ID" value="{NETWORK_NEWS_FORUM_ID}" /></td>
+	<td><input class="post" type="text" size="25" maxlength="100" name="network_news_forum_id" value="{NETWORK_NEWS_FORUM_ID}" /></td>
 </tr>
 
 <tr class="row3 med">
