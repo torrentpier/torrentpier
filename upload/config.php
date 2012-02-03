@@ -45,16 +45,6 @@
   * Misc
   * Captcha
 
-  Modules settings for:
-   - Advanced Report Hack
-   - Gold/Silver releases
-   - Gallery
-   - Magnet links
-   - No avatar
-   - CallSeed
-   - News
-   - Network News
-
 **/
 
 if (!defined('BB_ROOT')) die(basename(__FILE__));
@@ -63,7 +53,7 @@ $bb_cfg = $tr_cfg = $page_cfg = array();
 
 // Increase number of revision after update
 $bb_cfg['tp_version'] = '2.4 (beta)';
-$bb_cfg['tp_release_state'] = 'R354';
+$bb_cfg['tp_release_state'] = 'R355';
 $bb_cfg['tp_release_date'] = '03-02-2012';
 
 // Database

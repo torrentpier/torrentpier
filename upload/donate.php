@@ -9,7 +9,7 @@ require(BB_ROOT ."common.php");
 $user->session_start();
 
 $template->assign_vars(array(
-	'PAGE_TITLE' => 'Помошь трекеру',
+	'PAGE_TITLE' => 'Помощь трекеру',
 ));
 
 print_page('donate.tpl');
