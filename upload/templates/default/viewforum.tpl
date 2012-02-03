@@ -380,7 +380,7 @@ td.topic_id { cursor: pointer; }
 		<td class="small bold nowrap" style="padding: 0px 0px 0px 4px;">
 			<span id="show_mod_options"><a href="#" class="small bold">{L_MODERATE_FORUM}</a></span>
 		</td>
-		<td class="med" style="padding: 0 4px 2px 4px;">|</td>
+		<td class="med" style="padding: 0 4px 2px 4px;color:#CDCDCD">|</td>
 		<td class="small nowrap" style="padding: 0;">{L_TOPICS_PER_PAGE}:</td>
 		<td class="small nowrap" style="padding: 0 0 0 3px;">
 			<form id="tpp" action="{PAGE_URL_TPP}" method="post">{SELECT_TPP}</form>
@@ -403,7 +403,7 @@ td.topic_id { cursor: pointer; }
 		<td class="small bold nowrap tRight w100">
 			&nbsp;
 			<!-- IF LOGGED_IN -->
-			<a class="small" href="{U_SEARCH_SELF}">{L_SEARCH_SELF}</a> &nbsp;|&nbsp;
+			<a class="small" href="{U_SEARCH_SELF}">{L_SEARCH_SELF}</a> &nbsp;<span style="color:#CDCDCD;">|</span>&nbsp;
 			<a class="menu-root" href="#only-new-options">{L_DISPLAYING_OPTIONS}</a>
 			<!-- ENDIF / LOGGED_IN -->
 		</td>

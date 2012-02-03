@@ -124,25 +124,7 @@ ajax.callback.mod_action = function(data) {
 	<!-- IF IS_ADMIN -->
 	<p class="floatR">
 	<a href="{U_MANAGE}">{L_PROFILE}</a> &middot;
-	<a href="{U_PERMISSIONS}">{L_PERMISSIONS}</a> &middot;
-	<a href="#user-opt" class="menu-root menu-alt1">{L_BAN_USER}</a></p>
-		<div class="menu-sub row1 border bw_TRBL" id="user-opt">
-			<fieldset class="mrg_6">
-			<div class="tLeft" style="padding: 2px 6px 6px; display: block;">
-				<label><input type="checkbox" name="allow_avatar"/>{L_HIDE_AVATARS}</label>
-				<label><input type="checkbox" name="allow_sig"/>{L_SHOW_CAPTION}</label>
-				<label><input type="checkbox" name="allow_passkey"/>{L_DOWNLOAD_TORRENT}</label>
-				<label><input type="checkbox" name="allow_pm"/>{L_SEND_PM}</label>
-				<label><input type="checkbox" name="allow_post"/>{L_SEND_MESSAGE}</label>
-				<label><input type="checkbox" name="allow_post_edit"/>{L_EDIT_POST}</label>
-				<label><input type="checkbox" name="allow_topic"/>{L_NEW_THREADS}</label>
-			</div>
-			</fieldset>
-			<div id="user-opt-save" class="hidden tCenter">
-				<p><input id="user-opt-save-btn" class="bold long" type="button" value="{L_SUBMIT}" /></p>
-				<p id="user-opt-resp" class="mrg_6"></p>
-			</div>
-		</div>
+	<a href="{U_PERMISSIONS}">{L_PERMISSIONS}</a>
 	<!-- ENDIF -->
 	<div class="clear"></div>
 </div>
@@ -238,7 +220,22 @@ ajax.callback.mod_action = function(data) {
                             <a href="#" onclick="ajax.exec({action : 'manage_user', mode: 'delete_message', user_id : '{PROFILE_USER_ID}'}); return false;" class="adm">{L_DELETE_USER_POSTS}</a> <br />
 			            </div>
 			            </fieldset>
-		            </div>
+						<fieldset class="mrg_6"><legend>{L_BAN_USER}</legend>
+						<div class="tLeft" style="padding: 2px 6px 6px; display: block;" id="user-opt">
+							<label><input type="checkbox" name="allow_avatar"/>{L_HIDE_AVATARS}</label>
+							<label><input type="checkbox" name="allow_sig"/>{L_SHOW_CAPTION}</label>
+							<label><input type="checkbox" name="allow_passkey"/>{L_DOWNLOAD_TORRENT}</label>
+							<label><input type="checkbox" name="allow_pm"/>{L_SEND_PM}</label>
+							<label><input type="checkbox" name="allow_post"/>{L_SEND_MESSAGE}</label>
+							<label><input type="checkbox" name="allow_post_edit"/>{L_EDIT_POST}</label>
+							<label><input type="checkbox" name="allow_topic"/>{L_NEW_THREADS}</label>
+						</div>
+						</fieldset>
+						<div id="user-opt-save" class="hidden tCenter">
+							<p><input id="user-opt-save-btn" class="bold long" type="button" value="{L_SUBMIT}" /></p>
+							<p id="user-opt-resp" class="mrg_6"></p>
+						</div>
+					</div>
 					<!-- ENDIF -->
 					<!-- IF IS_AM -->[ <a href="#" class="adm" onclick="ajax.mod_action('profile_ip'); return false;">{L_IP_ADDRESS}</a> ]<!-- ENDIF -->
 				</td>

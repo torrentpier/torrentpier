@@ -74,7 +74,7 @@ body, th, td, font {
 #body_container { background: #E3E3E3; padding: 0 2px 4px; }
 	#page_container {
 		margin: 0 auto;
-		background: #FFFFFF; border: 1px solid #D1D7DC;
+		background: #FFFFFF; border: 1px solid #CFD4D8;
 		}
 		#page_header {
 			position: relative; width: 100%;
@@ -114,11 +114,11 @@ wbr   { display: inline-block; }
 /* ---------------------------------- *
      Links
  * ---------------------------------- */
-:link:focus, :visited:focus   { color: #DD6900; }
-:link        { color: #006699; text-decoration: none !important; }
-:visited  { color: #006699; text-decoration: none !important; }
-:link:hover, :visited:hover     { color: #DD6900; text-decoration: underline !important; }
-:link:active, :visited:active { color: #DD6900; text-decoration: underline !important; }
+:link:focus, :visited:focus   { color: #444; }
+:link        { color: #222; text-decoration: none !important; }
+:visited  { color: #222; text-decoration: none !important; }
+:link:hover, :visited:hover     { color: #444; text-decoration: underline !important; }
+:link:active, :visited:active { color: #444; text-decoration: underline !important; }
 
 .colorAdmin, a.colorAdmin, a.colorAdmin:visited { color: #A00 !important; }
 .colorSuperMod, a.colorSuperMod, a.colorSuperMod:visited { color: #0080FF !important; }
@@ -164,14 +164,14 @@ a.seed:visited, a.seedmed:visited, a.seedsmall:visited
 	font-size: 11px; text-decoration: none;
 }
 a.topictitle:visited, a.torTopic:visited, a.tLink:visited {
-	color: #5493B4;
+	color: #444;
 }
 /* ---------------------------------- *
      Backgrounds
  * ---------------------------------- */
-.row1, .row1 td { background: #EFEFEF; }
-.row2, .row2 td { background: #DEE3E7; }
-.row3, .row3 td { background: #D1D7DC; }
+.row1, .row1 td { background: #eff0f3; }
+.row2, .row2 td { background: #e3e8ed; }
+.row3, .row3 td { background: #d2d7e2; }
 .row4, .row4 td { background: #ECECEC; }
 .row5, .row5 td { background: #E7E7E7; }
 .row6, .row6 td { background: #E9E9E6; }
@@ -213,7 +213,7 @@ td.small { font-size: 10px !important; }
 .gen, .med, .genmed,
 .small, .gensmall   { color: #000000; }
 a.gen, a.med, a.genmed,
-a.small, a.gensmall { color: #006699; text-decoration: none; }
+a.small, a.gensmall { color: #222; text-decoration: none; }
 /* ---------------------------------- *
      Post elements
  * ---------------------------------- */
@@ -253,7 +253,7 @@ a.small, a.gensmall { color: #006699; text-decoration: none; }
 /* ---------------------------------- *
      Spoiler
  * ---------------------------------- */
-.sp-wrap { padding: 0; background: #E9E9E6; }
+.sp-wrap { padding: 0; background: #EDEDED; }
 .sp-head { border-width: 0; font-size: 11px; padding: 1px 14px 3px; margin-left: 6px; line-height: 15px; font-weight: bold; color: #2A2A2A; cursor: pointer; }
 .sp-body { border-width: 1px 0 0 0; display: none; font-weight: normal; background: #F5F5F5; border-bottom: 1px solid #C3CBD1;}
 .sp-fold { width: 98%; margin: 0 auto; text-align: right; font-size: 10px; color: #444444; }
@@ -311,12 +311,12 @@ input.mainoption, input.main {
 }
 
 /* The buttons used for bbCode styling in message post */
-input.button, .buttons input { border: 1px solid; background: #F5F5F5; }
+input.button, .buttons input { border:1px dotted; background: #F6F6FF; }
 input.long { padding-left: 20px; padding-right: 20px; }
-
+.buttons input:hover {border:1px solid #DEDEDE; background:#FFF;}
 input.button, .buttons input,
 input.mainoption, input.main, input.liteoption, input.lite  {
- color: #000000; border-color: #B4B4B4 #000000 #000000 #B4B4B4;
+ color: #000000; border-color: #ABABAB;
 }
 
 /* "gte IE 7" in page_header.tpl */
@@ -406,7 +406,7 @@ table.forumline {
 .forumline th, .thHead {
 	padding: 6px 8px 7px; text-align: center;
 	color: #D5E4EC; font-size: 11px; font-weight: bold;
-	background: #006699 url(../images/cellpic3.gif) repeat-x;
+	background: #1C508C url(../images/cellpic1.gif) repeat-x;
 }
 /* "lte IE 6" in page_header.tpl */
 .forumline th:first-child { border-left-color: #92A3A4; }
@@ -427,7 +427,7 @@ table.message td {
 
 .cat, td.cat, td.catTitle, td.catHead, td.catBottom {
 	padding: 5px 4px 6px;
-	background: #E0E5E9 url(../images/cellpic1.gif) repeat-x;
+	background: #E0E5E9 url(../images/cellpic.gif) repeat-x;
 }
 .catTitle {
 	font-weight: bold; letter-spacing: 1px;
@@ -482,7 +482,7 @@ table.smilies td { padding: 3px; text-align: center; }
      TopMenu, Quick Login, PM Info, Loguot..
  * ---------------------------------- */
 .topmenu {
-	background: #EFEFEF; border: 1px solid #CFD4D8;
+	background: #eff0f3; border: 1px solid #CFD4D8;
 	margin: 3px 4px 0; padding: 0 3px; overflow: hidden;
 }
 .topmenu a:link, .topmenu a:visited { text-decoration: none; }
@@ -509,11 +509,11 @@ table.smilies td { padding: 3px; text-align: center; }
      Main navigation
  * ---------------------------------- */
 #main-nav {
-	padding: 2px 10px; margin: 0 4px;
-	border: solid #CFD4D8; border-width: 1px 0; background: #CFD4D8;
+	padding: 4px 10px; margin: 0px;
+	border: solid #C3CBD1 /*#CFD4D8*/; border-width: 0 0 1px 0px; background: #eff0f3 url('../images/cellpic.gif');
 	}
 	#main-nav b { padding: 0 4px 0 1px; }
-	#main-nav a { color: #535F62; text-decoration: none; }
+	#main-nav a { color: #444; text-decoration: none; }
 	#main-nav a:hover, #main-nav a:active {
 		text-decoration: none !important; color: #000000;
 	}
@@ -594,7 +594,7 @@ table.smilies td { padding: 3px; text-align: center; }
 #forums_wrap { clear: both; padding-top: 1px; }
 .cat_title {                    /* Category header */
 	padding: 3px 8px 5px; letter-spacing: 1px; text-indent: 0.6em;
-	background: #DEE3E7 url(../images/cellpic1.gif) repeat-x;
+	background: #DEE3E7 url(../images/cellpic.gif) repeat-x;
 	}
 	.cat_title a { text-decoration: none; color: #333333 !important; }
 table.forums { width: 100%; }
@@ -622,7 +622,7 @@ table.forums { width: 100%; }
 	}
 	.subforums em { display: none; }
 	.subforums + .moderators { margin-top: 0; }
-	.dot-sf { color: #417998 !important; font-size: 11px; margin-right: 4px; }
+	.dot-sf { color: #444 !important; font-size: 11px; margin-right: 4px; }
 	.new .dot-sf { color: #CA4200 !important; }
 	.sf_title { white-space: normal; }
 	.sf_icon { margin-right: 1px; }
@@ -866,7 +866,7 @@ a.menu-root, a.menu-root:visited, a.menu-root:hover {
 	text-decoration: none !important; }
 .menu-sub  { position: absolute; display: none; z-index: 1000; }
 	.menu-sub table	{ background: #FFFFFF; border: 1px solid #92A3A4; }
-	.menu-sub table th { background: #71869F; color: #F0F8FF; font-weight: bold; font-size: 11px; }
+	.menu-sub table th { background: #566C98; color: #F0F8FF; font-weight: bold; font-size: 11px; }
 	.menu-sub table td { background: #E7E7E7; font-size: 11px; }
 	.menu-sub table td.cat { background: #B5BEC3; }
 	.menu-sub legend { font-weight: bold; }
@@ -877,8 +877,8 @@ a.menu-root, a.menu-root:visited, a.menu-root:hover {
     display/**/: block;
     position: absolute; z-index: -1; filter: mask(); }
 .menu-a { background: #FFFFFF; border: 1px solid #92A3A4; }
-.menu-a a { color: #0000A0; background: #E7E7E7; padding: 4px 10px 5px; margin: 1px; display: block; text-decoration: none !important; }
-.menu-a a:hover { color: #0000FF; background: #D1D7DC; text-decoration: none !important; }
+.menu-a a { color: #222; background: #E7E7E7; padding: 4px 10px 5px; margin: 1px; display: block; text-decoration: none !important; }
+.menu-a a:hover { color: #444; background: #EFEFEF; text-decoration: none !important; }
 /* ================================================================ *
      Ajax
  * ================================================================ */

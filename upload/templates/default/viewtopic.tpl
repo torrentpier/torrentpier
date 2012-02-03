@@ -115,7 +115,7 @@ function set_hid_chbox (id)
 		<!-- IF AUTH_MOD -->
 		<td class="small bold nowrap" style="padding: 0px 0px 0px 4px;">
 			<!-- IF IN_MODERATION -->{L_MODERATE_TOPIC}<!-- ELSE --><a href="{PAGE_URL}&amp;mod=1&amp;start={PAGE_START}" class="small bold">{L_MODERATE_TOPIC}</a><!-- ENDIF -->
-			&nbsp;|&nbsp;
+			&nbsp;<span style="color:#CDCDCD;">|</span>&nbsp;
 			<a class="small bold" href="{PIN_HREF}">{PIN_TITLE}</a>
 		</td>
 		<!-- IF SELECT_PPP -->
@@ -130,7 +130,7 @@ function set_hid_chbox (id)
 		<td class="small bold nowrap tRight" width="100%">
 			&nbsp;
 			<!-- IF LOGGED_IN -->
-			<a class="small" href="{U_SEARCH_SELF}">{L_SEARCH_SELF}</a> &nbsp;|&nbsp;
+			<a class="small" href="{U_SEARCH_SELF}">{L_SEARCH_SELF}</a> &nbsp;<span style="color:#CDCDCD;">|</span>&nbsp;
 			<a class="menu-root" href="#topic-options">{L_DISPLAYING_OPTIONS}</a>
 			<!-- ENDIF / LOGGED_IN -->
 		</td>

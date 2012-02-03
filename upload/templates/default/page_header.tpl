@@ -296,14 +296,14 @@ function OpenInEditor ($file, $line)
 	<table width="100%" cellpadding="0" cellspacing="0">
 	<tr>
 		<td class="nowrap">
-			<a href="{U_INDEX}"><b>{L_HOME}</b></a>&#0183;
-			<a href="{U_TRACKER}"><b>{L_TRACKER}</b></a>&#0183;
-			<!-- IF LOGGED_IN && $bb_cfg['gallery_enabled'] --><a href="{U_GALLERY}"><b>{L_GALLERY}</b></a>&#0183;<!-- ENDIF -->
-			<a href="{U_SEARCH}"><b>{L_SEARCH}</b></a>&#0183;
-			<a href="{U_TERMS}"><b>{L_TERMS}</b></a>&#0183;
-			<a href="{U_FAQ}"><b style="color: #993300;">{L_FAQ}</b></a>&#0183;
-			<a href="{U_GROUP_CP}"><b>{L_USERGROUPS}</b></a>&#0183;
-			<a href="{U_MEMBERLIST}"><b>{L_MEMBERLIST}</b></a>
+			<a href="{U_INDEX}"><b>{L_HOME}</b></a><span style="color:#CDCDCD;">|</span>
+			<a href="{U_TRACKER}"><b>{L_TRACKER}</b></a><span style="color:#CDCDCD;">|</span>
+			<!-- IF LOGGED_IN && $bb_cfg['gallery_enabled'] --><a href="{U_GALLERY}"><b>{L_GALLERY}</b></a><span style="color:#CDCDCD;">|</span><!-- ENDIF -->
+			<a href="{U_SEARCH}"><b>{L_SEARCH}</b></a><span style="color:#CDCDCD;">|</span>
+			<a href="{U_TERMS}"><b>{L_TERMS}</b></a><span style="color:#CDCDCD;">|</span>
+			<a href="{U_FAQ}"><b style="color: #993300;">{L_FAQ}</b></a><span style="color:#CDCDCD;">|</span>
+			<a href="{U_GROUP_CP}"><b>{L_USERGROUPS}</b></a><span style="color:#CDCDCD;">|</span>
+			<a href="{U_MEMBERLIST}"><b>{L_MEMBERLIST}</b></a><span style="color:#CDCDCD;">|</span>
 		</td>
 		<td class="nowrap" align="right">
 			<!-- IF LOGGED_IN -->
