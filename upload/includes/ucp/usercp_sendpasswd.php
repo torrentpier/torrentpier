@@ -8,15 +8,15 @@ if ( !defined('IN_PHPBB') )
 
 if ($bb_cfg['emailer_disabled']) bb_die($lang['EMAILER_DISABLED']);
 
+$need_captcha = ($_GET['mode'] == 'sendpassword' && !IS_ADMIN);
+						
 if ( isset($_POST['submit']) )
 {
-	$username = ( !empty($_POST['username']) ) ? clean_username($_POST['username']) : '';
+	if ($need_captcha && !CAPTCHA()->verify_code())	bb_die($lang['CONFIRM_CODE_WRONG']);
 	$email = ( !empty($_POST['email']) ) ? trim(strip_tags(htmlspecialchars($_POST['email']))) : '';
-
 	$sql = "SELECT *
 		FROM " . BB_USERS . "
-		WHERE user_email = '" . DB()->escape($email) . "'
-			AND username = '" . DB()->escape($username) . "'";
+		WHERE user_email = '" . DB()->escape($email)."'";
 	if ( $result = DB()->sql_query($sql) )
 	{
 		if ( $row = DB()->sql_fetchrow($result) )
@@ -30,7 +30,6 @@ if ( isset($_POST['submit']) )
 				bb_die($lang['NO_SEND_ACCOUNT']);
 			}
 
-			$username = $row['username'];
 			$user_id = $row['user_id'];
 
 			$user_actkey = make_rand_str(12);
@@ -56,7 +55,6 @@ if ( isset($_POST['submit']) )
 
 			$emailer->assign_vars(array(
 				'SITENAME' => $bb_cfg['sitename'],
-				'USERNAME' => $username,
 				'PASSWORD' => $user_password,
 				'EMAIL_SIG' => (!empty($bb_cfg['board_email_sig'])) ? str_replace('<br />', "\n", "-- \n" . $bb_cfg['board_email_sig']) : '',
 
@@ -81,14 +79,12 @@ if ( isset($_POST['submit']) )
 }
 else
 {
-	$username = '';
 	$email = '';
 }
 
 $template->assign_vars(array(
-	'USERNAME' => $username,
 	'EMAIL' => $email,
-
+	'CAPTCHA_HTML'       => ($need_captcha) ? CAPTCHA()->get_html() : '',
 	'S_HIDDEN_FIELDS' => '',
 	'S_PROFILE_ACTION' => append_sid("profile.php?mode=sendpassword"))
 );
