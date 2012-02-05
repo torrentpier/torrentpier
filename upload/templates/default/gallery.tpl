@@ -94,16 +94,16 @@ function add_image_field(i)
 	<tr>
 		<td class="row1" align="center">
 			<span class="gen">
-				<h3 align="Center">{MAX_SIZE_HINT} {MAX_SIZE}</h3>
+				<h3 align="Center">{L_GALLERY_MAX_FILE_SIZE} {MAX_SIZE}</h3>
 				{MSG}
 				<hr>
 				<center>
 					<form enctype="multipart/form-data" method="post" action="?go=upload">
-						<span id="fileupload"><input name="imgfile[]" type="file" /><br /></span><a href="#" onclick="$('#fileupload').clone(true).insertBefore(this); return false;" style="text-decoration: underline;"  align="right">{MORE}</a><br />
+						<span id="fileupload"><input name="imgfile[]" type="file" /><br /></span><a href="#" onclick="$('#fileupload').clone(true).insertBefore(this); return false;" style="text-decoration: underline;"  align="right">{L_GALLERY_MORE_LINK}</a><br />
 						<br />
-						<label><input type="checkbox" name="create_thumb" value="0"  />&nbsp;{CREATE_THUMB}&nbsp;</label>
+						<label><input type="checkbox" name="create_thumb" value="0"  />&nbsp;{L_GALLERY_CREATE_THUMB}&nbsp;</label>
 						<hr />
-						<input type="submit" value="{UPLOAD}" />
+						<input type="submit" value="{L_GALLERY_UPLOAD_IMAGE}" />
 					</form>
 				</center>
 			</span>

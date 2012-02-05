@@ -1,7 +1,11 @@
-<h1>{L_CONFIGURATION_TITLE}</h1>
+<h1>{L_CONFIGURATION}</h1>
 
 <p>{L_REPORT_CONFIG_EXPLAIN}</p>
 <br />
+
+<a href="admin_reports.php?mode=config" class="bold">{L_CONFIGURATION}</a> &#0183;
+<a href="admin_reports.php">{L_MODULES_REASONS}</a>
+<br /><br />
 
 <form action="{S_REPORT_ACTION}" method="post">
 	<table width="99%" cellpadding="4" cellspacing="1" border="0" align="center" class="forumline">

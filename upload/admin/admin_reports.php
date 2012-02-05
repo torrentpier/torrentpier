@@ -75,9 +75,7 @@ if ($mode == 'config')
 			'REPORT_LIST_ADMIN_OFF' => (!$bb_cfg['report_list_admin']) ? ' checked="checked"' : '',
 			'REPORT_NEW_WINDOW_ON' => ($bb_cfg['report_new_window']) ? ' checked="checked"' : '',
 			'REPORT_NEW_WINDOW_OFF' => (!$bb_cfg['report_new_window']) ? ' checked="checked"' : '',
-
-			'L_CONFIGURATION_TITLE' => $lang['REPORTS'] . ': ' . $lang['CONFIGURATION'])
-		);
+		));
 
 		print_page('report_config_body.tpl', 'admin');
 	}
@@ -486,11 +484,6 @@ else
 	{
 		case '':
 			$report_modules = report_modules();
-
-			$template->assign_vars(array(
-				'L_REPORTS_TITLE' => $lang['REPORTS'] . ': ' . $lang['MODULES_REASONS'])
-			);
-
 			$report_counts = report_counts_obtain();
 			$report_reason_counts = report_reason_counts_obtain();
 

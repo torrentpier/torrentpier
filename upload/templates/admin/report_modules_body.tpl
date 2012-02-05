@@ -1,6 +1,11 @@
-<h1>{L_REPORTS_TITLE}</h1>
+<h1>{L_MODULES_REASONS}</h1>
 
 <p>{L_REPORT_ADMIN_EXPLAIN}</p>
+<br />
+
+<a href="admin_reports.php?mode=config">{L_CONFIGURATION}</a> &#0183;
+<a href="admin_reports.php" class="bold">{L_MODULES_REASONS}</a>
+<br /><br />
 
 <table width="100%" cellpadding="4" cellspacing="1" border="0" class="forumline">
 	<tr>

@@ -642,7 +642,7 @@ INSERT INTO `bb_config` VALUES ('reports_enabled', '1');
 INSERT INTO `bb_config` VALUES ('gold_silver_enabled', '1');
 INSERT INTO `bb_config` VALUES ('gallery_enabled', '1');
 INSERT INTO `bb_config` VALUES ('pic_dir', 'pictures/');
-INSERT INTO `bb_config` VALUES ('pic_max_size', '3*1024*1024');
+INSERT INTO `bb_config` VALUES ('pic_max_size', '3');
 INSERT INTO `bb_config` VALUES ('auto_delete_posted_pics', '1');
 INSERT INTO `bb_config` VALUES ('magnet_links_enabled', '1');
 INSERT INTO `bb_config` VALUES ('no_avatar', 'images/avatars/gallery/noavatar.png');

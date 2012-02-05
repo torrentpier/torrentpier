@@ -3,7 +3,7 @@
 define('IN_PHPBB', true);
 define('BB_SCRIPT', 'gallery');
 define('BB_ROOT', './');
-require(BB_ROOT ."common.php");
+require(BB_ROOT .'common.php');
 
 // Start session management
 $user->session_start(array('req_login' => true));
@@ -16,7 +16,7 @@ if(bf($userdata['user_opt'], 'user_opt', 'allow_gallery'))
 {	bb_die($lang['USE_GALLERY_OFF']);}
 
 $go = isset($_GET['go']) ? $_GET['go'] : '';
-$max_size = $bb_cfg['pic_max_size'];
+$max_size = $bb_cfg['pic_max_size']*1024*1024;
 $dir = $bb_cfg['pic_dir'];
 $url = make_url('/');
 
@@ -187,10 +187,6 @@ if ($go == 'delete' && IS_ADMIN && !empty($_GET['fn']))
 $template->assign_vars(array(
 	'MSG'            =>  $msg,
 	'MAX_SIZE'       =>  humn_size($max_size),
-	'MAX_SIZE_HINT'  =>  $lang['GALLERY_MAX_FILE_SIZE'],
-	'CREATE_THUMB'   =>  $lang['GALLERY_CREATE_THUMB'],
-	'UPLOAD'         =>  $lang['GALLERY_UPLOAD_IMAGE'],
-	'MORE'           =>  $lang['GALLERY_MORE_LINK'],
 ));
 
 print_page('gallery.tpl');
