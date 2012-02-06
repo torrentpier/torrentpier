@@ -1,8 +1,10 @@
+<!-- IF CAPTCHA_HTML -->
 <script type="text/javascript">
 ajax.callback.user_register = function(data){
 	$('#'+ data.mode).html(data.html);
 };
 </script>
+<!-- ENDIF -->
 <p class="nav"><a href="{U_INDEX}">{T_INDEX}</a></p>
 
 <form action="{S_PROFILE_ACTION}" method="post">
@@ -18,16 +20,16 @@ ajax.callback.user_register = function(data){
 <tr>
 	<td colspan="2" class="row2 small">{L_ITEMS_REQUIRED}</td>
 </tr>
+<tr>
+	<td>{L_EMAIL_ADDRESS}: *</td>
+	<td><input type="text" class="post" name="email" size="50" maxlength="255" /></td>
+</tr>
 <!-- IF CAPTCHA_HTML -->
 <tr>
 	<td>{L_CONFIRM_CODE}:</td>
 	<td><span id="refresh_captcha">{CAPTCHA_HTML}</span> <img align="middle" src="/images/pic_loading.gif" title="{L_UPDATE}" onclick="ajax.exec({ action: 'user_register', mode: 'refresh_captcha'}); return false;"></td>
 </tr>
 <!-- ENDIF -->
-<tr>
-	<td>{L_EMAIL_ADDRESS}: *</td>
-	<td><input type="text" class="post" name="email" size="50" maxlength="255" /></td>
-</tr>
 <tr>
 	<td colspan="2" class="catBottom">
 		<input type="submit" name="submit" class="main" value="{L_SUBMIT}" />&nbsp;
