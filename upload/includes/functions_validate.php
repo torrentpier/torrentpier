@@ -68,7 +68,7 @@ function validate_username ($username, $check_ban_and_taken = true)
 // Check to see if email address is banned or already present in the DB
 function validate_email ($email, $check_ban_and_taken = true)
 {
-	global $lang;
+	global $lang, $userdata;
 
 	if (!$email || !preg_match('#^([_a-z\d])[a-z\d\.\-_]+@[a-z\d\-]+\.([a-z\d\-]+\.)*?[a-z]{2,4}$#i', $email))
 	{
@@ -97,9 +97,12 @@ function validate_email ($email, $check_ban_and_taken = true)
 
 		$email_sql = DB()->escape($email);
 
-		if (DB()->fetch_row("SELECT 1 FROM ". BB_USERS ." WHERE user_email = '$email_sql' LIMIT 1"))
-		{
-			return $lang['EMAIL_TAKEN'];
+		if ($row = DB()->fetch_row("SELECT `user_email` FROM ". BB_USERS ." WHERE user_email = '$email_sql' LIMIT 1"))
+		{	
+			if($row['user_email'] == $userdata['user_email'])
+				return false;
+			else
+				return $lang['EMAIL_TAKEN'];
 		}
 	}
 
