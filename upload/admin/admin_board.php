@@ -111,7 +111,6 @@ switch($mode)
 		    'ACTIVATION_ADMIN' => USER_ACTIVATION_ADMIN,
 		    'ACTIVATION_ADMIN_CHECKED' => ($new['require_activation'] == USER_ACTIVATION_ADMIN) ? 'checked="checked"' : '',
 
-		    'VISUAL_CONFIRM' => ($new['enable_confirm']) ? true : false,
 		    'ALLOW_AUTOLOGIN' => ($new['allow_autologin']) ? true : false,
 		    'AUTOLOGIN_TIME' => (int) $new['max_autologin_time'],
 		    'BOARD_EMAIL_FORM' => ($new['board_email_form']) ? true : false,

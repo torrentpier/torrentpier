@@ -593,7 +593,6 @@ INSERT INTO `bb_config` VALUES ('config_id', '1');
 INSERT INTO `bb_config` VALUES ('cron_last_check', '1211477514');
 INSERT INTO `bb_config` VALUES ('default_dateformat', 'Y-m-d H:i');
 INSERT INTO `bb_config` VALUES ('default_lang', 'russian');
-INSERT INTO `bb_config` VALUES ('enable_confirm', '1');
 INSERT INTO `bb_config` VALUES ('flood_interval', '15');
 INSERT INTO `bb_config` VALUES ('hot_threshold', '300');
 INSERT INTO `bb_config` VALUES ('login_reset_time', '30');
@@ -639,7 +638,6 @@ INSERT INTO `bb_config` VALUES ('torrent_pass_private_key', 'вставить_и
 INSERT INTO `bb_config` VALUES ('cron_enabled', '1');
 INSERT INTO `bb_config` VALUES ('cron_check_interval', '300');
 INSERT INTO `bb_config` VALUES ('reports_enabled', '1');
-INSERT INTO `bb_config` VALUES ('gold_silver_enabled', '1');
 INSERT INTO `bb_config` VALUES ('gallery_enabled', '1');
 INSERT INTO `bb_config` VALUES ('pic_dir', 'pictures/');
 INSERT INTO `bb_config` VALUES ('pic_max_size', '3');

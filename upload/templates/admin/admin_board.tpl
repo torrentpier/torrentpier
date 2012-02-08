@@ -41,13 +41,6 @@
 	</td>
 </tr>
 <tr>
-	<td><h4>{L_VISUAL_CONFIRM}</h4><h6>{L_VISUAL_CONFIRM_EXPLAIN}</h6></td>
-	<td>
-	    <label><input type="radio" name="enable_confirm" value="1" <!-- IF VISUAL_CONFIRM -->checked="checked"<!-- ENDIF --> />{L_YES}</label>&nbsp;&nbsp;
-		<label><input type="radio" name="enable_confirm" value="0" <!-- IF not VISUAL_CONFIRM -->checked="checked"<!-- ENDIF --> />{L_NO}</label>
-	</td>
-</tr>
-<tr>
 	<td><h4>{L_ALLOW_AUTOLOGIN}</h4><h6>{L_ALLOW_AUTOLOGIN_EXPLAIN}</h6></td>
 	<td>
 	    <label><input type="radio" name="allow_autologin" value="1" <!-- IF ALLOW_AUTOLOGIN -->checked="checked"<!-- ENDIF --> />{L_YES}</label>&nbsp;&nbsp;
