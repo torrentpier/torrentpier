@@ -480,7 +480,7 @@ foreach ($topic_rowset as $topic)
 
 	// Gold/Silver releases mod
 	$is_gold = '';
-	if ($bb_cfg['gold_silver_enabled'] && isset($topic['tor_type']))
+	if ($tr_cfg['gold_silver_enabled'] && isset($topic['tor_type']))
 	{
 		if ($topic['tor_type'] == TOR_TYPE_GOLD)
 		{

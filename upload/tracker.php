@@ -734,7 +734,7 @@ if ($allowed_forums)
 
 			// Gold/Silver releases mod
 			$is_gold = '';
-			if ($bb_cfg['gold_silver_enabled'])
+			if ($tr_cfg['gold_silver_enabled'])
 			{
 				if ($tor['tor_type'] == TOR_TYPE_GOLD)
 				{
@@ -882,7 +882,7 @@ $template->assign_vars(array(
 	'AJAX_TOPICS'      => $user->opt_js['tr_t_ax'],
 	'SHOW_TIME_TOPICS' => $user->opt_js['tr_t_t'],
 	'SHOW_CURSOR'      => $user->opt_js['hl_tr'],
-	
+
 	'U_SEARCH_USER'    => "search.php?mode=searchuser&input_name=$poster_name_key",
 ));
 

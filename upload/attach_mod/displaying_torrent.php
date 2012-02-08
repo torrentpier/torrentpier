@@ -189,7 +189,7 @@ if ($tor_reged && $tor_info)
 		{
 			$template->assign_vars(array(
 				'SHOW_RATIO_WARN'  => true,
-				'RATIO_WARN_MSG'   => sprintf($lang['BT_RATIO_WARNING_MSG'], $min_ratio_warn, $bb_cfg['ratio_url_help']),
+				'RATIO_WARN_MSG'   => sprintf($lang['BT_RATIO_WARNING_MSG'], $min_ratio_dl, $bb_cfg['ratio_url_help']),
 			));
 		}
 	}

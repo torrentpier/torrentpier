@@ -357,7 +357,7 @@ $up_add = ($lp_info && $uploaded > $lp_info['uploaded']) ? $uploaded - $lp_info[
 $down_add = ($lp_info && $downloaded > $lp_info['downloaded']) ? $downloaded - $lp_info['downloaded'] : 0;
 
 // Gold/Silver releases
-if ($bb_cfg['gold_silver_enabled'] && $down_add)
+if ($tr_cfg['gold_silver_enabled'] && $down_add)
 {
 	if ($tor_type == TOR_TYPE_GOLD)
 	{

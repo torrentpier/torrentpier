@@ -149,7 +149,7 @@ ajax.callback.view_post = function(data) {
 					<p class="chbox">{ONLY_ACTIVE_CHBOX}</p>
 					<p class="chbox">{SEED_EXIST_CHBOX}</p>
 					<p class="chbox">{ONLY_NEW_CHBOX}[{MINIPOST_IMG_NEW}]&nbsp;</p>
-					<!-- IF $bb_cfg['gold_silver_enabled'] --><p class="chbox">{TOR_TYPE_CHBOX}</p><!-- ENDIF -->
+					<!-- IF $tr_cfg['gold_silver_enabled'] --><p class="chbox">{TOR_TYPE_CHBOX}</p><!-- ENDIF -->
 				</div>
 				</fieldset>
 				<fieldset>

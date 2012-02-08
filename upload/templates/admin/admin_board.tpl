@@ -291,13 +291,6 @@
 	</td>
 </tr>
 <tr>
-	<td><h4>{L_GOLD} / {L_SILVER}</h4></td>
-	<td>
-	    <label><input type="radio" name="gold_silver_enabled" value="1" <!-- IF GOLD_SILVER_ENABLED -->checked="checked"<!-- ENDIF --> />{L_ENABLED}</label>&nbsp;&nbsp;
-		<label><input type="radio" name="gold_silver_enabled" value="0" <!-- IF not GOLD_SILVER_ENABLED -->checked="checked"<!-- ENDIF --> />{L_DISABLED}</label>
-	</td>
-</tr>
-<tr>
 	<td><h4>{L_MAGNET}</h4></td>
 	<td>
 	    <label><input type="radio" name="magnet_links_enabled" value="1" <!-- IF MAGNET_LINKS_ENABLED -->checked="checked"<!-- ENDIF --> />{L_ENABLED}</label>&nbsp;&nbsp;

@@ -75,7 +75,6 @@ switch($mode)
 			'CONFIG_MODS' => true,
 
 		    'REPORTS_ENABLED' => $new['reports_enabled'],
-		    'GOLD_SILVER_ENABLED' => $new['gold_silver_enabled'],
 		    'GALLERY_ENABLED' => $new['gallery_enabled'],
 		    'PIC_DIR' => $new['pic_dir'],
 		    'PIC_MAX_SIZE' => $new['pic_max_size'],

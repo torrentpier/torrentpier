@@ -57,6 +57,7 @@ $template->assign_vars(array(
 	'IGNORE_REPORTED_IP' => $bb_cfg['ignore_reported_ip'],
 	'ANNOUNCE_INTERVAL'  => $bb_cfg['announce_interval'],
 	'PASSKEY_KEY'        => $bb_cfg['passkey_key'],
+	'GOLD_SILVER_ENABLED' => $tr_cfg['gold_silver_enabled'],
 	'DISABLE_SUBMIT'     => true,
 
 	'S_HIDDEN_FIELDS' => '',
