@@ -53,7 +53,7 @@ $bb_cfg = $tr_cfg = $page_cfg = array();
 
 // Increase number of revision after update
 $bb_cfg['tp_version'] = '2.4 (beta)';
-$bb_cfg['tp_release_state'] = 'R361';
+$bb_cfg['tp_release_state'] = 'R362';
 $bb_cfg['tp_release_date'] = '08-02-2012';
 
 // Database
@@ -411,7 +411,7 @@ $bb_cfg['show_poster_joined'] = true;
 $bb_cfg['show_poster_posts']  = true;
 $bb_cfg['show_poster_from']   = true;
 $bb_cfg['show_bot_nick']      = false;
-$bb_cfg['text_buttons']       = true;              // replace EDIT, QUOTE... images with text links
+$bb_cfg['text_buttons']       = false;              // replace EDIT, QUOTE... images with text links
 $bb_cfg['parse_ed2k_links']   = true;              // make ed2k links clickable
 $bb_cfg['post_date_format']   = 'd-M-Y H:i';
 $bb_cfg['ext_link_new_win']   = true;              // open external links in new window

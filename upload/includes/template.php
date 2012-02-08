@@ -287,7 +287,7 @@ class Template {
 	{
 		$this->cur_tpl = $filename;
 
-		global $lang, $bb_cfg;
+		global $lang, $bb_cfg, $tr_cfg;
 
 		$L =& $lang;
 		$V =& $this->vars;

@@ -20,7 +20,7 @@ if (!$f_data['forum_tpl_id'] OR !$tpl_data = DB()->fetch_row($sql))
 {
 	if (!$edit_tpl_mode)
 	{
-		redirect(POSTING_URL. "?mode=newtopic&f=$forum_id");
+		redirect("posting.php?mode=newtopic&f=$forum_id");
 	}
 }
 
