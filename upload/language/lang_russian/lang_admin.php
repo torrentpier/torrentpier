@@ -653,7 +653,7 @@ $lang['REPORTS'] = 'Нарушения';
 //
 // Reports [END]
 //
-
+$lang['SHOW_MOD_HOME_PAGE'] = 'Показывать модераторов на главной?'; 
 //
 // Mods
 //

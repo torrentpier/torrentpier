@@ -1,5 +1,13 @@
 <h1>{L_FORUM_CFG_TITLE}</h1>
-
+<script language="JavaScript">
+function show_mod_index(){
+	var val = $("input[name=moder_index]:radio:checked").val();
+	ajax.exec({
+		action: 'show_mod_index',
+		value: val,
+	});
+}
+</script>
 <form action="{S_CONFIG_ACTION}" method="post">
 {S_HIDDEN_FIELDS}
 
@@ -22,6 +30,11 @@
 </tr>
 <tr class="row2 tCenter">
 	<td colspan="3" class="small">{L_BT_SELECT_FORUMS_EXPL}</td>
+</tr>
+<tr class="row2 tCenter">
+	<td class="small">{L_SHOW_MOD_HOME_PAGE}</td>	
+	<td class="small"><input type="radio" name="moder_index" value="1" checked />{L_YES}&nbsp;<input type="radio" name="moder_index" value="0" />{L_NO} </td>
+	<td class="small"><input type="button" value="{L_SUBMIT}" onclick="show_mod_index();"/></td>
 </tr>
 </table>
 

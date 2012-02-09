@@ -656,6 +656,7 @@ INSERT INTO `bb_config` VALUES ('max_net_title', '50');
 INSERT INTO `bb_config` VALUES ('network_news_count', '5');
 INSERT INTO `bb_config` VALUES ('network_news_forum_id', '2');
 INSERT INTO `bb_config` VALUES ('whois_info', 'http://ip-whois.net/ip_geo.php?ip=');
+INSERT INTO `bb_config` VALUES ('show_mod_index', '1');
 
 -- --------------------------------------------------------
 
@@ -818,6 +819,7 @@ CREATE TABLE `bb_forums` (
   `forum_posts` mediumint(8) unsigned NOT NULL default '0',
   `forum_topics` mediumint(8) unsigned NOT NULL default '0',
   `forum_last_post_id` mediumint(8) unsigned NOT NULL default '0',
+  `forum_tpl_id` smallint(6) NOT NULL DEFAULT '0',
   `prune_days` smallint(5) unsigned NOT NULL default '0',
   `auth_view` tinyint(2) NOT NULL default '0',
   `auth_read` tinyint(2) NOT NULL default '0',
@@ -850,7 +852,7 @@ CREATE TABLE `bb_forums` (
 -- Дамп данных таблицы `bb_forums`
 --
 
-INSERT INTO `bb_forums` VALUES (1, 1, 'Ваш первый форум', 'Описание вашего первого форума.', 0, 10, 1, 1, 1, 0, 0, 0, 1, 1, 1, 1, 3, 3, 1, 1, 1, 1, 0, 0, 0, 0, 1, 0, 0, 0);
+INSERT INTO `bb_forums` VALUES (1, 1, 'Ваш первый форум', 'Описание вашего первого форума.', 0, 10, 1, 1, 1, 0, 0, 0, 0, 1, 1, 1, 1, 3, 3, 1, 1, 1, 1, 0, 0, 0, 0, 1, 0, 0, 0);
 
 -- --------------------------------------------------------
 

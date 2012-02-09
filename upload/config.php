@@ -53,8 +53,8 @@ $bb_cfg = $tr_cfg = $page_cfg = array();
 
 // Increase number of revision after update
 $bb_cfg['tp_version'] = '2.4 (beta)';
-$bb_cfg['tp_release_state'] = 'R363';
-$bb_cfg['tp_release_date'] = '08-02-2012';
+$bb_cfg['tp_release_state'] = 'R364';
+$bb_cfg['tp_release_date'] = '10-02-2012';
 
 // Database
 $charset  = 'utf8';
@@ -163,7 +163,6 @@ $tr_cfg = array(
 	'limit_seed_ips'        => 0,
 	'limit_leech_ips'       => 0,
 	'tor_topic_up'          => true,
-	'gold_silver_enabled'   => true,
 );
 
 $bb_cfg['show_dl_status_in_search'] = true;
@@ -411,7 +410,7 @@ $bb_cfg['show_poster_joined'] = true;
 $bb_cfg['show_poster_posts']  = true;
 $bb_cfg['show_poster_from']   = true;
 $bb_cfg['show_bot_nick']      = false;
-$bb_cfg['text_buttons']       = false;              // replace EDIT, QUOTE... images with text links
+$bb_cfg['text_buttons']       = true;              // replace EDIT, QUOTE... images with text links
 $bb_cfg['parse_ed2k_links']   = true;              // make ed2k links clickable
 $bb_cfg['post_date_format']   = 'd-M-Y H:i';
 $bb_cfg['ext_link_new_win']   = true;              // open external links in new window

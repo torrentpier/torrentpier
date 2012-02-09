@@ -216,7 +216,7 @@ $template->assign_vars(array(
 	'TORRENTS_STAT'         => ($bb_cfg['tor_stats']) ? sprintf($lang['TORRENTS_STAT'], $stats['torrentcount'], humn_size($stats['size'])) : '',
 	'PEERS_STAT'		    => ($bb_cfg['tor_stats']) ? sprintf($lang['PEERS_STAT'], $stats['peers'], $stats['seeders'], $stats['leechers']) : '',
 	'SPEED_STAT'		    => ($bb_cfg['tor_stats']) ? sprintf($lang['SPEED_STAT'], humn_size($stats['speed']) .'/s') : '',
-
+	'SHOW_MOD_INDEX'	=> $bb_cfg['show_mod_index'],
 	'FORUM_IMG'             => $images['forum'],
 	'FORUM_NEW_IMG'         => $images['forum_new'],
 	'FORUM_LOCKED_IMG'      => $images['forum_locked'],
@@ -286,15 +286,14 @@ foreach ($cat_forums as $cid => $c)
 		$template->assign_block_vars('c.f',	array(
 			'FORUM_FOLDER_IMG' => $folder_image,
 
-			'FORUM_ID'   => $fid,
-			'FORUM_NAME' => $fname_html,
-			'FORUM_DESC' => $f['forum_desc'],
-			'POSTS'      => commify($f['forum_posts']),
-			'TOPICS'     => commify($f['forum_topics']),
-			'LAST_SF_ID' => isset($f['last_sf_id']) ? $f['last_sf_id'] : null,
-
-			'MODERATORS'  => isset($moderators[$fid]) ? join(', ', $moderators[$fid]) : '',
-			'FORUM_FOLDER_ALT' => ($new) ? $lang['NEW'] : $lang['OLD'],
+			'FORUM_ID'   		=> $fid,
+			'FORUM_NAME' 		=> $fname_html,
+			'FORUM_DESC'		=> $f['forum_desc'],
+			'POSTS'     		=> commify($f['forum_posts']),
+			'TOPICS'    		=> commify($f['forum_topics']),
+			'LAST_SF_ID'		=> isset($f['last_sf_id']) ? $f['last_sf_id'] : null,
+			'MODERATORS' 		=> isset($moderators[$fid]) ? join(', ', $moderators[$fid]) : '',
+			'FORUM_FOLDER_ALT' 	=> ($new) ? $lang['NEW'] : $lang['OLD'],
 		));
 
 		if ($f['last_post_id'])

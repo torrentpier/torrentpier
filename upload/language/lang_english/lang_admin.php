@@ -655,7 +655,7 @@ $lang['REPORTS'] = 'Reports';
 //
 // Reports [END]
 //
-
+$lang['SHOW_MOD_HOME_PAGE'] = 'Show on moderators the index.php?'; 
 //
 // Mods
 //

@@ -92,7 +92,7 @@
 				</p>
 				<!-- ENDIF -->
 
-				<!-- IF c.f.MODERATORS -->
+				<!-- IF c.f.MODERATORS && SHOW_MOD_INDEX -->
 				<p class="moderators"><em>{L_MODERATORS}:</em> {c.f.MODERATORS}</p>
 				<!-- ENDIF -->
 
