@@ -68,7 +68,6 @@ class ajax_common
 		'change_user_rank'  => array('admin'),
 		'change_user_opt'   => array('admin'),
 		'manage_user'       => array('admin'),
-		'show_mod_index'    => array('admin'),
 
 		'change_tor_status' => array('mod'),
 		'mod_action'        => array('mod'),
@@ -515,11 +514,5 @@ class ajax_common
 			$bb_cfg['board_timezone'] = $tz;
 			cache_rm_user_sessions ($userdata['user_id']);
 		}
-	}
-	function show_mod_index(){
-			$value = $this->request['value'];
-			DB()->query("UPDATE " . BB_CONFIG . " SET `config_value` = '{$value}' WHERE `config_name` = 'show_mod_index'");
-			CACHE('bb_cache')->rm('config_bb_config');
-			$this->ajax_die('Данные успешно обновлены!');
 	}
 }

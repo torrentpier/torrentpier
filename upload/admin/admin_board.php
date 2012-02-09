@@ -92,6 +92,7 @@ switch($mode)
 		    'NETWORK_NEWS_COUNT' => $new['network_news_count'],
 		    'NETWORK_NEWS_FORUM_ID' => $new['network_news_forum_id'],
 		    'WHOIS_INFO' => $new['whois_info'],
+		    'SHOW_MOD_INDEX' => $new['show_mod_index'],
 	    ));
 	break;
 

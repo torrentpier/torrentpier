@@ -53,7 +53,7 @@ $bb_cfg = $tr_cfg = $page_cfg = array();
 
 // Increase number of revision after update
 $bb_cfg['tp_version'] = '2.4 (beta)';
-$bb_cfg['tp_release_state'] = 'R364';
+$bb_cfg['tp_release_state'] = 'R366';
 $bb_cfg['tp_release_date'] = '10-02-2012';
 
 // Database
@@ -163,7 +163,7 @@ $tr_cfg = array(
 	'limit_seed_ips'        => 0,
 	'limit_leech_ips'       => 0,
 	'tor_topic_up'          => true,
-  'gold_silver_enabled'   => true,
+    'gold_silver_enabled'   => true,
 );
 
 $bb_cfg['show_dl_status_in_search'] = true;

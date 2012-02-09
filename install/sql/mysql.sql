@@ -85,7 +85,7 @@ CREATE TABLE `bb_ads` (
   `ad_desc` varchar(255) NOT NULL default '',
   `ad_html` text NOT NULL,
   PRIMARY KEY  (`ad_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -171,7 +171,7 @@ CREATE TABLE `bb_attachments_desc` (
   KEY `filetime` (`filetime`),
   KEY `filesize` (`filesize`),
   KEY `physical_filename` (`physical_filename`(10))
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -227,7 +227,7 @@ CREATE TABLE `bb_banlist` (
   `ban_email` varchar(255) NOT NULL default '',
   PRIMARY KEY  (`ban_id`),
   KEY `ban_ip_user_id` (`ban_ip`,`ban_userid`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -518,7 +518,7 @@ CREATE TABLE `bb_categories` (
   `cat_order` smallint(5) unsigned NOT NULL default '0',
   PRIMARY KEY  (`cat_id`),
   KEY `cat_order` (`cat_order`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8;
 
 --
 -- Дамп данных таблицы `bb_categories`
@@ -684,7 +684,7 @@ CREATE TABLE `bb_cron` (
   PRIMARY KEY  (`cron_id`),
   UNIQUE KEY `title` (`cron_title`),
   UNIQUE KEY `script` (`cron_script`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=22 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8;
 
 --
 -- Дамп данных таблицы `bb_cron`
@@ -722,7 +722,7 @@ CREATE TABLE `bb_disallow` (
   `disallow_id` mediumint(8) unsigned NOT NULL auto_increment,
   `disallow_username` varchar(25) NOT NULL default '',
   PRIMARY KEY  (`disallow_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -736,7 +736,7 @@ CREATE TABLE `bb_extensions` (
   `extension` varchar(100) NOT NULL default '',
   `comment` varchar(100) NOT NULL default '',
   PRIMARY KEY  (`ext_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=30 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8;
 
 --
 -- Дамп данных таблицы `bb_extensions`
@@ -788,7 +788,7 @@ CREATE TABLE `bb_extension_groups` (
   `max_filesize` int(20) NOT NULL default '0',
   `forum_permissions` text NOT NULL,
   PRIMARY KEY  (`group_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=9 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8;
 
 --
 -- Дамп данных таблицы `bb_extension_groups`
@@ -846,7 +846,7 @@ CREATE TABLE `bb_forums` (
   KEY `cat_id` (`cat_id`),
   KEY `forum_last_post_id` (`forum_last_post_id`),
   KEY `forum_parent` (`forum_parent`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8;
 
 --
 -- Дамп данных таблицы `bb_forums`
@@ -869,7 +869,7 @@ CREATE TABLE `bb_groups` (
   `group_single_user` tinyint(1) NOT NULL default '1',
   PRIMARY KEY  (`group_id`),
   KEY `group_single_user` (`group_single_user`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -917,7 +917,7 @@ CREATE TABLE `bb_posts` (
   KEY `poster_id` (`poster_id`),
   KEY `post_time` (`post_time`),
   KEY `forum_id_post_time` (`forum_id`,`post_time`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8;
 
 --
 -- Дамп данных таблицы `bb_posts`
@@ -987,7 +987,7 @@ CREATE TABLE `bb_privmsgs` (
   PRIMARY KEY  (`privmsgs_id`),
   KEY `privmsgs_from_userid` (`privmsgs_from_userid`),
   KEY `privmsgs_to_userid` (`privmsgs_to_userid`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -1012,7 +1012,7 @@ CREATE TABLE `bb_quota_limits` (
   `quota_desc` varchar(20) NOT NULL default '',
   `quota_limit` bigint(20) unsigned NOT NULL default '0',
   PRIMARY KEY  (`quota_limit_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=4 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8;
 
 --
 -- Дамп данных таблицы `bb_quota_limits`
@@ -1036,7 +1036,7 @@ CREATE TABLE `bb_ranks` (
   `rank_image` varchar(255) NOT NULL default '',
   `rank_style` varchar(255) NOT NULL default '',
   PRIMARY KEY  (`rank_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8;
 
 --
 -- Дамп данных таблицы `bb_ranks`
@@ -1068,7 +1068,7 @@ CREATE TABLE `bb_reports` (
   KEY `report_status` (`report_status`),
   KEY `report_reason_id` (`report_reason_id`),
   KEY `report_subject` (`report_subject`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 
 -- --------------------------------------------------------
@@ -1088,7 +1088,7 @@ CREATE TABLE `bb_reports_changes` (
   KEY `report_id` (`report_id`),
   KEY `user_id` (`user_id`),
   KEY `report_change_time` (`report_change_time`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -1110,7 +1110,7 @@ CREATE TABLE `bb_reports_modules` (
   PRIMARY KEY  (`report_module_id`),
   KEY `report_module_order` (`report_module_order`),
   KEY `auth_view` (`auth_view`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=6 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8;
 
 --
 -- Дамп данных таблицы `bb_reports_modules`
@@ -1137,7 +1137,7 @@ CREATE TABLE `bb_reports_reasons` (
   PRIMARY KEY  (`report_reason_id`),
   KEY `report_type_id` (`report_module_id`),
   KEY `report_reason_order` (`report_reason_order`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 --
 -- Структура таблицы `bb_search_rebuild`
@@ -1156,7 +1156,7 @@ CREATE TABLE `bb_search_rebuild` (
   `search_size` int(10) unsigned NOT NULL default '0',
   `rebuild_session_status` tinyint(1) NOT NULL default '0',
   PRIMARY KEY  (`rebuild_session_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -1296,7 +1296,7 @@ CREATE TABLE `bb_topics` (
   KEY `topic_last_post_id` (`topic_last_post_id`),
   KEY `topic_last_post_time` (`topic_last_post_time`),
   FULLTEXT KEY `topic_title` (`topic_title`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8;
 
 --
 -- Дамп данных таблицы `bb_topics`
@@ -1333,7 +1333,7 @@ CREATE TABLE `bb_topic_templates` (
   `tpl_desc` varchar(255) NOT NULL default '',
   PRIMARY KEY  (`tpl_id`),
   UNIQUE KEY `tpl_name` (`tpl_name`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=15 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8;
 
 --
 -- Дамп данных таблицы `bb_topic_templates`
@@ -1401,7 +1401,7 @@ CREATE TABLE IF NOT EXISTS `bb_users` (
   KEY `username` (`username`(10)),
   KEY `user_email` (`user_email`(10)),
   KEY `user_level` (`user_level`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=3 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8;
 
 --
 -- Дамп данных таблицы `bb_users`
@@ -1440,7 +1440,7 @@ CREATE TABLE `bb_vote_desc` (
   `vote_length` int(11) NOT NULL default '0',
   PRIMARY KEY  (`vote_id`),
   KEY `topic_id` (`topic_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -1483,7 +1483,7 @@ CREATE TABLE `bb_words` (
   `word` char(100) NOT NULL default '',
   `replacement` char(100) NOT NULL default '',
   PRIMARY KEY  (`word_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -1540,7 +1540,7 @@ CREATE TABLE IF NOT EXISTS `xbt_announce_log` (
   `uid` int(11) NOT NULL default '0',
   `mtime` int(11) NOT NULL default '0',
   PRIMARY KEY  (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -1598,6 +1598,6 @@ CREATE TABLE IF NOT EXISTS `xbt_scrape_log` (
   `uid` int(11) NOT NULL default '0',
   `mtime` int(11) NOT NULL default '0',
   PRIMARY KEY  (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------

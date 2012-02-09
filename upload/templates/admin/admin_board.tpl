@@ -315,6 +315,13 @@
 	<td><h4>{L_WHOIS_INFO}</h4></td>
 	<td><input class="post" type="text" size="28" maxlength="100" name="whois_info" value="{WHOIS_INFO}" /></td>
 </tr>
+<tr>
+	<td><h4>{L_SHOW_MOD_HOME_PAGE}</h4></td>
+	<td>
+	    <label><input type="radio" name="show_mod_index" value="1" <!-- IF SHOW_MOD_INDEX -->checked="checked"<!-- ENDIF --> />{L_ENABLED}</label>&nbsp;&nbsp;
+		<label><input type="radio" name="show_mod_index" value="0" <!-- IF not SHOW_MOD_INDEX -->checked="checked"<!-- ENDIF --> />{L_DISABLED}</label>
+	</td>
+</tr>
 
 <tr class="row3 med">
 	<td class="bold tCenter" colspan="2">{L_LATEST_NEWS}</td>
