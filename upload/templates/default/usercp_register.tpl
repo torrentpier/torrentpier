@@ -12,6 +12,7 @@ ajax.callback.user_register = function(data){
 <form method="post" action="profile.php" class="tokenized" enctype="multipart/form-data">
 <input type="hidden" name="mode" value="{MODE}" />
 <input type="hidden" name="reg_agreed" value="1" />
+<!-- IF NEW_USER --><input type="hidden" name="admin" value="1" /><!-- ENDIF -->
 <!-- IF ADM_EDIT -->
 <input type="hidden" name="u" value="{PR_USER_ID}" />
 <!-- ENDIF -->

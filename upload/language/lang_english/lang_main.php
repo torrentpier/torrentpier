@@ -205,6 +205,7 @@ $lang['VIEW_FORUM'] = 'View Forum';
 
 $lang['FORUM_NOT_EXIST'] = 'The forum you selected does not exist.';
 $lang['REACHED_ON_ERROR'] = 'You have reached this page in error.';
+$lang['ERROR_PORNO_FORUM'] = 'This porno-forum is hidden in your profile';
 
 $lang['DISPLAY_TOPICS'] = 'Display topics from previous';
 $lang['ALL_TOPICS'] = 'All Topics';

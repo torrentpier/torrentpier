@@ -206,7 +206,7 @@ foreach ($profile_fields as $field => $can_edit)
 			$db_data['user_active'] = $active;
 		}
 		break;
-		
+
 	/**
 	*  Имя (edit, reg)
 	*/
@@ -215,7 +215,8 @@ foreach ($profile_fields as $field => $can_edit)
 
 		if ($submit)
 		{
-			if (!$errors AND $err = validate_username($username) && $mode == 'register')
+			$err = validate_username($username);
+			if (!$errors AND $err && $mode == 'register')
 			{
 				$errors[] = $err;
 			}
@@ -961,6 +962,12 @@ if ($mode == 'editprofile' && $userdata['session_logged_in'])
 	));
 }
 //bt end
+
+$new_user = (int) request_var('admin', '');
+if($new_user && IS_ADMIN) $gen_simple_header = true;
+$template->assign_vars(array(
+	'NEW_USER'            => $new_user,
+));
 
 require(PAGE_HEADER);
 

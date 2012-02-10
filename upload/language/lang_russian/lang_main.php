@@ -207,6 +207,7 @@ $lang['VIEW_FORUM'] = 'Просмотр форума';
 
 $lang['FORUM_NOT_EXIST'] = 'Форума, который вы выбрали, не существует';
 $lang['REACHED_ON_ERROR'] = 'Вы попали на эту страницу из-за ошибки';
+$lang['ERROR_PORNO_FORUM'] = 'Данный porno-форум скрыт вами в профиле';
 
 $lang['DISPLAY_TOPICS'] = 'Показать';
 $lang['ALL_TOPICS'] = 'все темы';

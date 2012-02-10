@@ -117,7 +117,7 @@ $forum_topic_data =& $t_data;
 $topic_id = $t_data['topic_id'];
 $forum_id = $t_data['forum_id'];
 
-if($t_data['allow_porno_topic']) bb_die('бетатестеры вставте языковые');
+if($t_data['allow_porno_topic'] && bf($userdata['user_opt'], 'user_opt', 'hide_porn_forums')) bb_die($lang['ERROR_PORNO_FORUM']);
 
 if ($userdata['session_admin'] && !empty($_REQUEST['mod']))
 {
