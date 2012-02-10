@@ -148,7 +148,7 @@ $lang['POSTED_ARTICLES_TOTAL'] = 'Our users have posted a total of <b>%s</b> art
 $lang['REGISTERED_USERS_ZERO_TOTAL'] = 'We have <b>0</b> registered users'; // # registered users
 $lang['REGISTERED_USERS_TOTAL'] = 'We have <b>%s</b> registered users'; // # registered users
 $lang['USERS_TOTAL_GENDER'] = 'Boys: <b>%d</b>, Girls: <b>%d</b>, Others: <b>%d</b>';
-$lang['NEWEST_USER'] = 'The newest registered user is <b>%s%s%s</b>'; // a href, username, /a
+$lang['NEWEST_USER'] = 'The newest registered user is <b>%s</b>'; // a href, username, /a
 
 // Tracker stats
 $lang['TORRENTS_STAT'] = 'Torrents: <b style="color: blue;">%s</b>,&nbsp; Total size: <b>%s</b>'; // first %s = number of torrents, second %s is the total size.

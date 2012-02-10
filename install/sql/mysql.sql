@@ -834,7 +834,7 @@ CREATE TABLE `bb_forums` (
   `auth_attachments` tinyint(2) NOT NULL default '0',
   `auth_download` tinyint(2) NOT NULL default '0',
   `allow_reg_tracker` tinyint(1) NOT NULL default '0',
-  `allow_dl_topic` tinyint(1) NOT NULL default '0',
+  `allow_porno_topic` tinyint(1) NOT NULL default '0',
   `self_moderated` tinyint(1) NOT NULL default '0',
   `forum_parent` smallint(5) unsigned NOT NULL default '0',
   `show_on_index` tinyint(1) NOT NULL default '1',

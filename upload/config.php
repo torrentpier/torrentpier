@@ -53,7 +53,7 @@ $bb_cfg = $tr_cfg = $page_cfg = array();
 
 // Increase number of revision after update
 $bb_cfg['tp_version'] = '2.4 (beta)';
-$bb_cfg['tp_release_state'] = 'R366';
+$bb_cfg['tp_release_state'] = 'R367';
 $bb_cfg['tp_release_date'] = '10-02-2012';
 
 // Database
@@ -503,7 +503,6 @@ $banned_user_agents = array(
 #	'wget',
 );
 
-$bb_cfg['porno_forums']   = '';                    // (string) 1,2,3..
 $bb_cfg['porno_forums_screenshots_topic_id'] = 52267;
 $bb_cfg['trash_forum_id'] = 0;                     // (int)    27
 

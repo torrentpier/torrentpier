@@ -20,7 +20,6 @@ $newest = $next_topic_id = 0;
 $start  = isset($_GET['start']) ? abs(intval($_GET['start'])) : 0;
 $topic_id = isset($_GET[POST_TOPIC_URL]) ? (int) $_GET[POST_TOPIC_URL] : 0;
 $post_id  = (!$topic_id && isset($_GET[POST_POST_URL])) ? (int) $_GET[POST_POST_URL] : 0;
-$porno_forums = array_flip(explode(',', $bb_cfg['porno_forums']));
 
 // Start session
 $user->session_start();
@@ -117,6 +116,8 @@ if (!$t_data = DB()->fetch_row($sql))
 $forum_topic_data =& $t_data;
 $topic_id = $t_data['topic_id'];
 $forum_id = $t_data['forum_id'];
+
+if($t_data['allow_porno_topic']) bb_die('бетатестеры вставте языковые');
 
 if ($userdata['session_admin'] && !empty($_REQUEST['mod']))
 {
@@ -487,7 +488,7 @@ if ( $is_auth['auth_mod'] )
 
 	$topic_mod .= "<a href=\"modcp.php?" . POST_TOPIC_URL . "=$topic_id&amp;mode=split&amp;sid=" . $userdata['session_id'] . '"><img src="' . $images['topic_mod_split'] . '" alt="' . $lang['SPLIT_TOPIC'] . '" title="' . $lang['SPLIT_TOPIC'] . '" border="0" /></a>&nbsp;';
 	//bt
-	if ($t_data['allow_dl_topic'] || $t_data['topic_dl_type'] == TOPIC_DL_TYPE_DL || IS_ADMIN)
+	if ($t_data['allow_reg_tracker'] || $t_data['topic_dl_type'] == TOPIC_DL_TYPE_DL || IS_ADMIN)
 	{
 		if ($t_data['topic_dl_type'] == TOPIC_DL_TYPE_DL)
 		{
@@ -600,7 +601,7 @@ $template->assign_vars(array(
 	'TOPIC_ID'            => $topic_id,
 	'PAGE_TITLE'          => $topic_title,
 	'TOPIC_TITLE'         => wbr($topic_title),
-	'PORNO_FORUM'         => isset($porno_forums[$forum_id]),
+	'PORNO_FORUM'         => ($t_data['allow_porno_topic']),
 	'REPLY_IMG'           => $reply_img,
 	'SHOW_BOT_NICK'       => $bb_cfg['show_bot_nick'],
 	'T_POST_REPLY'        => $reply_alt,
@@ -830,7 +831,7 @@ for($i = 0; $i < $total_posts; $i++)
 	{
 		$poster_avatar = get_avatar($postrow[$i]['user_avatar'], $postrow[$i]['user_avatar_type'], !bf($postrow[$i]['user_opt'], 'user_opt', 'allow_avatar'));
 	}
-	
+
 	$user_rank = $postrow[$i]['user_rank'];
 
 	//

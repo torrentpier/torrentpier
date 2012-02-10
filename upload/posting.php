@@ -758,7 +758,7 @@ if ( $mode == 'newtopic' || ( $mode == 'editpost' && $post_data['first_post'] ) 
 //bt
 $topic_dl_type = (isset($post_info['topic_dl_type'])) ? $post_info['topic_dl_type'] : 0;
 
-if ($topic_dl_type || $post_info['allow_dl_topic'] || $is_auth['auth_mod'])
+if ($topic_dl_type || $post_info['allow_reg_tracker'] || $is_auth['auth_mod'])
 {
 	if (!$topic_type_toggle)
 	{
@@ -769,7 +769,7 @@ if ($topic_dl_type || $post_info['allow_dl_topic'] || $is_auth['auth_mod'])
 	$dl_type_name = 'topic_dl_type';
 	$dl_type_val = ($topic_dl_type) ? 1 : 0;
 
-	if (!$post_info['allow_dl_topic'] && !$is_auth['auth_mod'])
+	if (!$post_info['allow_reg_tracker'] && !$is_auth['auth_mod'])
 	{
 		$dl_ds = ' disabled="disabled" ';
 		$dl_hid = '<input type="hidden" name="topic_dl_type" value="'. $dl_type_val .'" />';

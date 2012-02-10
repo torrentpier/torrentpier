@@ -207,7 +207,6 @@ ajax.callback.posts = function(data){
 	</td>
 </tr>
 <!-- ENDIF -->
-<!-- IF $bb_cfg['porno_forums'] -->
 <tr>
 	<td>{L_HIDE_PORN_FORUMS}:</td>
 	<td>
@@ -215,7 +214,6 @@ ajax.callback.posts = function(data){
 		<label><input type="radio" name="hide_porn_forums" value="0" <!-- IF not HIDE_PORN_FORUMS -->checked="checked"<!-- ENDIF --> />{L_NO}</label>
 	</td>
 </tr>
-<!-- ENDIF -->
 <!-- IF SHOW_DATEFORMAT -->
 <tr>
 	<td>{L_DATE_FORMAT}:<h6>{L_DATE_FORMAT_EXPLAIN}</h6></td>

@@ -780,16 +780,6 @@ class user_common
 	}
 
 	/**
-	*  Exclude porn forums
-	*/
-	function exclude_porn_forums ()
-	{
-		global $bb_cfg;
-
-		return ($bb_cfg['porno_forums'] && bf($this->opt, 'user_opt', 'hide_porn_forums')) ? $bb_cfg['porno_forums'] : '';
-	}
-
-	/**
 	*  Get excluded forums
 	*/
 	function get_excluded_forums ($auth_type, $return_as = 'csv')
@@ -800,9 +790,21 @@ class user_common
 		{
 			$excluded[] = $not_auth;
 		}
-		if ($porn = $this->exclude_porn_forums())
+
+		if(bf($this->opt, 'user_opt', 'hide_porn_forums'))
 		{
-			$excluded[] = $porn;
+			global $datastore;
+
+			if (!$forums = $datastore->get('cat_forums'))
+			{
+				$datastore->update('cat_forums');
+				$forums = $datastore->get('cat_forums');
+			}
+
+			foreach($forums['forum'] as $key => $row)
+			{
+                if($row['allow_porno_topic']) $excluded[] = $row['forum_id'];
+			}
 		}
 
 		switch ($return_as)

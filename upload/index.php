@@ -210,7 +210,7 @@ $template->assign_vars(array(
 	'TOTAL_POSTS'           => sprintf($lang['POSTED_ARTICLES_TOTAL'], $stats['postcount']),
 	'TOTAL_USERS'           => sprintf($lang['REGISTERED_USERS_TOTAL'], $stats['usercount']),
 	'TOTAL_GENDER'          => ($bb_cfg['gender']) ? sprintf($lang['USERS_TOTAL_GENDER'], $stats['male'], $stats['female'], $stats['unselect']) : '',
-	'NEWEST_USER'           => sprintf($lang['NEWEST_USER'], '<a href="'. PROFILE_URL . $stats['newestuser']['user_id'] .'">', $stats['newestuser']['username'], '</a>'),
+	'NEWEST_USER'           => sprintf($lang['NEWEST_USER'], profile_url($stats['newestuser'])),
 
 	// Tracker stats
 	'TORRENTS_STAT'         => ($bb_cfg['tor_stats']) ? sprintf($lang['TORRENTS_STAT'], $stats['torrentcount'], humn_size($stats['size'])) : '',
@@ -347,7 +347,7 @@ if ($bb_cfg['show_network_news'])
 	{
 	    $datastore->update('network_news');
 		$network_news = $datastore->get('network_news');
-	}	
+	}
 
     $template->assign_vars(array(
         'SHOW_NETWORK_NEWS' => true,

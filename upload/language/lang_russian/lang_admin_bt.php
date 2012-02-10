@@ -62,7 +62,7 @@ $lang['BT_SELECT_FORUMS'] = 'Форумы, в которых:';
 $lang['BT_SELECT_FORUMS_EXPL'] = 'для выделения нескольких форумов, отмечайте их с нажатой клавишей <i>Ctrl</i>';
 
 $lang['ALLOW_REG_TRACKER'] = 'Разрешена регистрация торрентов на трекере';
-$lang['ALLOW_DL_TOPIC'] = 'Разрешено создавать Download топики';
+$lang['ALLOW_PORNO_TOPIC'] = 'Разрешено создавать porno топики';
 $lang['SHOW_DL_BUTTONS'] = 'Показывать кнопки для изменения DL-статуса';
 $lang['SELF_MODERATED'] = 'Автор топика может перенести его в другой форум';
 

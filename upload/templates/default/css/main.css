@@ -114,11 +114,11 @@ wbr   { display: inline-block; }
 /* ---------------------------------- *
      Links
  * ---------------------------------- */
-:link:focus, :visited:focus   { color: #444; }
-:link        { color: #222; text-decoration: none !important; }
-:visited  { color: #222; text-decoration: none !important; }
-:link:hover, :visited:hover     { color: #444; text-decoration: underline !important; }
-:link:active, :visited:active { color: #444; text-decoration: underline !important; }
+:link:focus, :visited:focus   { color: #DD6900; }
+:link        { color: #006699; text-decoration: none !important; }
+:visited  { color: #006699; text-decoration: none !important; }
+:link:hover, :visited:hover     { color: #DD6900; text-decoration: underline !important; }
+:link:active, :visited:active { color: #DD6900; text-decoration: underline !important; }
 
 .colorAdmin, a.colorAdmin, a.colorAdmin:visited { color: #A00 !important; }
 .colorSuperMod, a.colorSuperMod, a.colorSuperMod:visited { color: #0080FF !important; }

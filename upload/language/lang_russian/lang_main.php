@@ -151,7 +151,7 @@ $lang['POSTED_ARTICLES_TOTAL'] = 'Наши пользователи остави
 $lang['REGISTERED_USERS_ZERO_TOTAL'] = 'У нас нет зарегистрированных пользователей'; // # registered users
 $lang['REGISTERED_USERS_TOTAL'] = 'Всего зарегистрированных пользователей: <b>%s</b>'; // # registered users
 $lang['USERS_TOTAL_GENDER'] = 'Парней: <b>%d</b>, Девушек: <b>%d</b>, Не указан: <b>%d</b>';
-$lang['NEWEST_USER'] = 'Последний зарегистрированный пользователь: <b>%s%s%s</b>'; // username
+$lang['NEWEST_USER'] = 'Последний зарегистрированный пользователь: <b>%s</b>'; // username
 
 // Tracker stats
 $lang['TORRENTS_STAT'] = 'Раздач: <b style="color: blue;">%s</b>,&nbsp; Общий размер: <b>%s</b>'; // first %s = number of torrents, second %s is the total size.

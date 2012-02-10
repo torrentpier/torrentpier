@@ -133,6 +133,8 @@ if (!$forums = $datastore->get('cat_forums'))
 	$forums = $datastore->get('cat_forums');
 }
 
+if($forums['forum'][$forum_id]['allow_porno_topic']) bb_die('бетатестеры вставте языковые');
+
 if (!$forum_data['forum_parent'] && isset($forums['f'][$forum_id]['subforums']) && $show_subforums)
 {
 	$not_auth_forums = ($bb_cfg['sf_check_view_permissions']) ? $user->get_not_auth_forums(AUTH_VIEW) : '';

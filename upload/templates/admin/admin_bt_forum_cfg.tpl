@@ -13,12 +13,12 @@
 <tr class="row2 tCenter">
 	<td>{L_ALLOW_REG_TRACKER}</td>
 	<td>{L_SELF_MODERATED}</td>
-	<td>{L_ALLOW_DL_TOPIC}</td>
+	<td>{L_ALLOW_PORNO_TOPIC}</td>
 </tr>
 <tr class="tCenter">
 	<td>{S_ALLOW_REG_TRACKER}</td>
 	<td>{S_SELF_MODERATED}</td>
-	<td>{S_ALLOW_DL_TOPIC}</td>
+	<td>{S_ALLOW_PORNO_TOPIC}</td>
 </tr>
 <tr class="row2 tCenter">
 	<td colspan="3" class="small">{L_BT_SELECT_FORUMS_EXPL}</td>
