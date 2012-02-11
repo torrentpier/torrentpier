@@ -970,12 +970,6 @@ if ($mode == 'editprofile' && $userdata['session_logged_in'])
 }
 //bt end
 
-$new_user = (int) request_var('admin', '');
-if($new_user && IS_ADMIN) $gen_simple_header = true;
-$template->assign_vars(array(
-	'NEW_USER'            => $new_user,
-));
-
 require(PAGE_HEADER);
 
 $template->pparse('body');
