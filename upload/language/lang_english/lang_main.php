@@ -205,7 +205,7 @@ $lang['VIEW_FORUM'] = 'View Forum';
 
 $lang['FORUM_NOT_EXIST'] = 'The forum you selected does not exist.';
 $lang['REACHED_ON_ERROR'] = 'You have reached this page in error.';
-$lang['ERROR_PORNO_FORUM'] = 'This porno-forum is hidden in your profile';
+$lang['ERROR_PORNO_FORUM'] = 'This type of forums was hidden in your profile by you';
 
 $lang['DISPLAY_TOPICS'] = 'Display topics from previous';
 $lang['ALL_TOPICS'] = 'All Topics';
@@ -290,7 +290,7 @@ $lang['TOTAL_VOTES'] = 'Total Votes';
 $lang['SEARCH_IN_TOPIC'] = 'search in topic...';
 $lang['HIDE_IN_TOPIC'] = 'Hide';
 
-$lang['FLAGS'] = 'flags';
+$lang['SHOW'] = 'Show';
 $lang['AVATARS'] = 'avatars';
 $lang['RANK_IMAGES'] = 'rank images';
 $lang['POST_IMAGES'] = 'post images';
@@ -298,6 +298,7 @@ $lang['SMILIES'] = 'smilies';
 $lang['SIGNATURES'] = 'signatures';
 $lang['SPOILER'] = 'Spoiler';
 $lang['SHOW_OPENED'] = 'show opened';
+$lang['DOWNLOAD_PIC'] = 'downloadable pictures';
 
 $lang['MODERATE_TOPIC'] = 'Moderate this topic';
 $lang['SELECT_POSTS_PER_PAGE'] = 'posts per page';
@@ -1610,6 +1611,13 @@ $lang['DELETE_USER_POSTS'] = 'Delete all messages, except for capital';
 $lang['DELETE_USER_POSTS_ME'] = 'Are you sure you want to delete all my posts?';
 $lang['DELETE_USER_POSTS_CONFIRM'] = 'Are you sure you want to delete all of your users?';
 $lang['USER_DELETED_POSTS'] = 'Posts were successfully removed';
+
+$lang['USER'] = 'User';
+$lang['ROLE'] = 'Role:';
+$lang['MEMBERSHIP_IN'] = 'Membership in';
+$lang['PARTY'] = 'Party:';
+$lang['CANDIDATE'] = 'Candidate:';
+$lang['INDIVIDUAL'] = 'Has the individual rights';
 
 $lang['USER_ACTIVATE'] = 'Activate';
 $lang['USER_DEACTIVATE'] = 'Deactivate';

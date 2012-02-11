@@ -1,8 +1,8 @@
 <h1>{L_RELEASE_TEMPLATES}</h1>
 
-<a href="./admin_topic_templates.php">Список форумов</a> &#0183;
-<a href="./admin_topic_templates.php?mode=templates">Список шаблонов</a> &#0183;
-<a href="./admin_topic_templates.php?mode=add">Добавить шаблон</a>
+<a href="./admin_topic_templates.php">{L_LIST_FORUMS}</a> &#0183;
+<a href="./admin_topic_templates.php?mode=templates">{L_LIST_OF_PATTERNS}</a> &#0183;
+<a href="./admin_topic_templates.php?mode=add">{L_ADD_TEMPLATE}</a>
 <br /><br />
 
 <!-- IF FORUM_LIST -->

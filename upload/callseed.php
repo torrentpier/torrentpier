@@ -3,10 +3,10 @@
 define('IN_PHPBB', true);
 define('BB_SCRIPT', 'callseed');
 define('BB_ROOT', './');
-require(BB_ROOT . "common.php");
+require(BB_ROOT . 'common.php');
 
 // Init userdata
-$user->session_start();
+$user->session_start(array('req_login' => true));
 
 require(INC_DIR .'bbcode.php');
 require(LANG_DIR .'lang_callseed.php');

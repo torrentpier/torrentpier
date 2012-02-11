@@ -249,7 +249,3 @@ bbcode.addTag("codeSize", function(e) { var v=e.value; e.selectedIndex=0; return
 bbcode.addTag("codeAlign", function(e) { var v=e.value; e.selectedIndex=0; return "align="+v }, "/align");
 </script>
 <!-- ENDIF -->
-
-<style type="text/css">
-.view-message { border: 1px #A5AFB4 solid; padding: 4px; margin: 6px; overflow: auto; }
-</style>

@@ -28,11 +28,12 @@ if (!$ranks = $datastore->get('ranks'))
 	$ranks = $datastore->get('ranks');
 }
 
-$poster_rank = $rank_image = $rank_select = '';
+$poster_rank = $rank_image= $rank_style = $rank_select = '';
 if ($user_rank = $profiledata['user_rank'] AND isset($ranks[$user_rank]))
 {
 	$rank_image = ($ranks[$user_rank]['rank_image']) ? '<img src="'. $ranks[$user_rank]['rank_image'] .'" alt="" title="" border="0" />' : '';
 	$poster_rank = $ranks[$user_rank]['rank_title'];
+	$rank_style  = $ranks[$user_rank]['rank_style'];
 }
 if (IS_ADMIN)
 {
@@ -100,7 +101,7 @@ $template->assign_vars(array(
 	'USERNAME'             => $profiledata['username'],
 	'PROFILE_USER_ID'      => $profiledata['user_id'],
 	'USER_REGDATE'         => bb_date($profiledata['user_regdate'], 'Y-m-d H:i', 'false'),
-	'POSTER_RANK'          => ($poster_rank) ? $poster_rank : 'User',
+	'POSTER_RANK'          => ($poster_rank) ? "<span class=\"$rank_style\">". $poster_rank ."</span>" : $lang['USER'],
 	'RANK_IMAGE'           => $rank_image,
 	'RANK_SELECT'          => $rank_select,
 	'POSTS'                => $profiledata['user_posts'],
@@ -166,9 +167,9 @@ if (IS_ADMIN)
 				$single = $row['groups_cnt'];
 			}
 		}
-		if ($member)  $group_membership[] = "участник: <b>$member</b>";
-		if ($pending) $group_membership[] = "кандидат: <b>$pending</b>";
-		if ($single)  $group_membership[] = "имеет индивидуальные права";
+		if ($member)  $group_membership[] = $lang['PARTY'] ." <b>$member</b>";
+		if ($pending) $group_membership[] = $lang['CANDIDATE'] ." <b>$pending</b>";
+		if ($single)  $group_membership[] = $lang['INDIVIDUAL'];
 		$group_membership = join(', ', $group_membership);
 	}
 	$template->assign_vars(array(

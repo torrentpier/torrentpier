@@ -115,7 +115,7 @@ ajax.callback.mod_action = function(data) {
 </script>
 <script type="text/javascript">
 ajax.group_membership = function(mode) {
-	$('#gr-mem-list').html('<i class="loading-1">загружается...</i>');
+	$('#gr-mem-list').html('<i class="loading-1">{L_LOADING}</i>');
 	ajax.exec({
 		action  : 'group_membership',
 		mode    : mode,
@@ -126,12 +126,6 @@ ajax.callback.group_membership = function(data) {
 	$('#gr-mem-list').html(data.group_list_html);
 }
 </script>
-
-<style type="text/css">
-#gr-mem-list ul { margin: 2px 4px; }
-#gr-mem-list li { margin-bottom: 2px; }
-a.selfMod, a.selfMod:visited { color: #0000FF; }
-</style>
 <!-- ENDIF / IS_AM -->
 
 <a name="editprofile"></a>
@@ -225,18 +219,18 @@ a.selfMod, a.selfMod:visited { color: #0000FF; }
 		<table class="user_details borderless w100">
 			<!-- IF SHOW_ROLE -->
 			<tr>
-				<th>Роль:</th>
+				<th>{L_ROLE}</th>
 				<td id="role">
 					<b>{POSTER_RANK}</b>
 					<!-- IF GROUP_MEMBERSHIP and IS_MOD -->
-					<span id="gr-mod-a">[ <a href="#" class="med" onclick="ajax.group_membership('get_group_list'); $('#gr-mem-tr').show(); $('#gr-mod-a').hide(); return false;">членство в группах</a> ]</span>
+					<span id="gr-mod-a">[ <a href="#" class="med" onclick="ajax.group_membership('get_group_list'); $('#gr-mem-tr').show(); $('#gr-mod-a').hide(); return false;">{L_MEMBERSHIP_IN}</a> ]</span>
 					<!-- ENDIF -->
 				</td>
 			</tr>
 			<!-- ENDIF -->
 			<!-- IF GROUP_MEMBERSHIP -->
 			<tr id="gr-mem-tr"<!-- IF IS_MOD --> style="display: none;"<!-- ENDIF -->>
-				<th>Членство в группах:</th>
+				<th>{L_MEMBERSHIP_IN}:</th>
 				<td id="gr-mem-list">
 					<!-- IF IS_ADMIN --><a href="#" class="med" onclick="ajax.group_membership('get_group_list'); return false;">{GROUP_MEMBERSHIP_TXT}</a><!-- ENDIF -->
 				</td>

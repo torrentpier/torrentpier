@@ -612,6 +612,7 @@ $template->assign_vars(array(
 	'HIDE_SMILE'          => $user->opt_js['h_smile'],
 	'HIDE_SIGNATURE'      => $user->opt_js['h_sig'],
 	'SPOILER_OPENED'      => $user->opt_js['sp_op'],
+	'SHOW_IMG_AFTER_LOAD' => $user->opt_js['i_aft_l'],
 
 	'HIDE_RANK_IMG_DIS'   => !$bb_cfg['show_rank_image'],
 

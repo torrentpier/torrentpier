@@ -62,7 +62,7 @@ $default_cfg = array_merge($default_cfg_str, $default_cfg_bool, $default_cfg_num
 
 $db_fields_bool = array(
 	'allow_reg_tracker'            => 0,  // Allowed forums for registering torrents on tracker
-	'allow_porno_topic'            => 0,  // Allowed forums for dl-topics
+	'allow_porno_topic'            => 0,  // Allowed forums for porno topics
 	'self_moderated'               => 0,  // Users can move theirs topic to another forum
 );
 

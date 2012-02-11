@@ -385,7 +385,7 @@
 </tr>
 <tr>
 	<td><h4>{L_PIC_SIZE}</h4></td>
-	<td><input class="post" type="text" size="25" maxlength="100" name="pic_max_size" value="{PIC_MAX_SIZE}" /></td>
+	<td><input class="post" type="text" size="25" maxlength="100" name="pic_max_size" value="{PIC_MAX_SIZE}" />&nbsp;{L_MB}</td>
 </tr>
 <tr>
 	<td><h4>{L_AUTO_DELETE_POSTED_PICS}</h4></td>

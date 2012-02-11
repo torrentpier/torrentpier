@@ -58,7 +58,7 @@ function initPostImages(context)
 		$img.bind('click', function(){ return imgFit(this, maxW); });
 		if (user.opt_js.i_aft_l) {
 			$('#preload').append($img);
-			var loading_icon = '<a href="'+ src +'" target="_blank"><img src="/loading.gif" alt="" /></a>';
+			var loading_icon = '<a href="'+ src +'" target="_blank"><img src="images/pic_loading.gif" alt="" /></a>';
 			$v.html(loading_icon);
 			if ($.browser.msie) {
 				$v.after('<wbr>');

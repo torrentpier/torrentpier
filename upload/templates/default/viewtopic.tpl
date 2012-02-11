@@ -188,7 +188,7 @@ function set_hid_chbox (id)
 			</fieldset>
 			<div class="spacer_4"></div>
 			<fieldset id="spoiler-opt">
-			<legend>{L_SPOILER}</legend>
+			<legend>{L_SHOW}</legend>
 			<div class="med pad_4">
 			<p>
 				<label>
@@ -196,6 +196,11 @@ function set_hid_chbox (id)
 						onclick="user.set('sp_op', this.checked ? 1 : 0);"
 					/>{L_SHOW_OPENED}
 				</label>
+				<label>
+				<input type="checkbox" <!-- IF SHOW_IMG_AFTER_LOAD -->{CHECKED}<!-- ENDIF -->
+					onclick="user.set('i_aft_l', this.checked ? 1 : 0);"
+				/>{L_DOWNLOAD_PIC}
+			</label>
 			</p>
 			</div>
 			</fieldset>

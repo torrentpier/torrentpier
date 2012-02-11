@@ -655,7 +655,7 @@ $lang['REPORTS'] = 'Reports';
 //
 // Reports [END]
 //
-$lang['SHOW_MOD_HOME_PAGE'] = 'Show on moderators the index.php?'; 
+ 
 //
 // Mods
 //
@@ -668,3 +668,4 @@ $lang['WHOIS_INFO'] = 'Information about IP address';
 $lang['PIC_GALLERY'] = 'Directory for the images';
 $lang['PIC_SIZE'] = 'The maximum size of images';
 $lang['AUTO_DELETE_POSTED_PICS'] = 'Delete Images hosted in remote positions';
+$lang['SHOW_MOD_HOME_PAGE'] = 'Show on moderators the index.php';

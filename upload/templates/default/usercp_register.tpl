@@ -39,7 +39,7 @@ document.write('<input type="hidden" name="user_timezone" value="'+tz+'" />');
 <tr>
 	<td>{L_USERNAME}: *</td>
 	<td><!-- IF CAN_EDIT_USERNAME --><input id="username" onBlur="ajax.exec({ action: 'user_register', mode: 'check_name', username: $('#username').val()}); return false;" type="text" name="username" size="35" maxlength="25" value="{USERNAME}" /><!-- ELSE --><b>{USERNAME}</b><!-- ENDIF -->
-    &nbsp;<span id="check_name"></span></td>
+    <span id="check_name"></span></td>
 </tr>
 <tr>
 	<td>{L_EMAIL}: * <!-- IF EDIT_PROFILE --><!-- ELSE IF $bb_cfg['reg_email_activation'] --><h6>{L_EMAIL_EXPLAIN}</h6><!-- ENDIF --></td>
@@ -290,13 +290,6 @@ ajax.callback.posts = function(data){
 <!-- IF SHOW_REG_AGREEMENT -->
 <tr>
 	<td class="row2" colspan="2">
-	<style type="text/css">
-	#infobox-wrap { width: 740px; }
-	#infobox-body {
-		background: #FFFFFF; color: #000000; padding: 1em;
-		height: 300px; overflow: auto; border: 1px inset #000000;
-	}
-	</style>
 	<div id="infobox-wrap" class="bCenter row1">
 		<fieldset class="pad_6">
 		<legend class="med bold mrg_2 warnColor1">{L_USER_AGREEMENT_HEAD}</legend>

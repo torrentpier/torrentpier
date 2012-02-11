@@ -207,7 +207,7 @@ $lang['VIEW_FORUM'] = 'Просмотр форума';
 
 $lang['FORUM_NOT_EXIST'] = 'Форума, который вы выбрали, не существует';
 $lang['REACHED_ON_ERROR'] = 'Вы попали на эту страницу из-за ошибки';
-$lang['ERROR_PORNO_FORUM'] = 'Данный porno-форум скрыт вами в профиле';
+$lang['ERROR_PORNO_FORUM'] = 'Данный тип форумов скрыт вами в профиле';
 
 $lang['DISPLAY_TOPICS'] = 'Показать';
 $lang['ALL_TOPICS'] = 'все темы';
@@ -293,14 +293,15 @@ $lang['TOTAL_VOTES'] = 'Всего проголосовало';
 $lang['SEARCH_IN_TOPIC'] = 'Искать в теме…';
 $lang['HIDE_IN_TOPIC'] = 'Не показывать';
 
-$lang['FLAGS'] = 'флаги';
+$lang['SHOW'] = 'Показывать';
 $lang['AVATARS'] = 'аватары';
 $lang['RANK_IMAGES'] = 'картинки званий';
 $lang['POST_IMAGES'] = 'картинки в сообщениях';
 $lang['SMILIES'] = 'смайлики';
 $lang['SIGNATURES'] = 'подписи';
 $lang['SPOILER'] = 'Спойлер';
-$lang['SHOW_OPENED'] = 'показывать открытым';
+$lang['SHOW_OPENED'] = 'спойлер открытым';
+$lang['DOWNLOAD_PIC'] = 'загружаемые картинки';
 
 $lang['MODERATE_TOPIC'] = 'Модерировать этот топик';
 $lang['SELECT_POSTS_PER_PAGE'] = 'сообщ. на страницу';
@@ -1615,6 +1616,14 @@ $lang['DELETE_USER_POSTS'] = 'Удалить все сообщения, кром
 $lang['DELETE_USER_POSTS_ME'] = 'Вы действительно хотите удалить все свои сообщения?';
 $lang['DELETE_USER_POSTS_CONFIRM'] = 'Вы действительно хотите удалить все свои пользователя?';
 $lang['USER_DELETED_POSTS'] = 'Сообщения успешно удалены';
+
+$lang['USER'] = 'Пользователь'; 
+$lang['ROLE'] = 'Роль:';
+$lang['MEMBERSHIP_IN'] = 'Членство в группах';
+$lang['PARTY'] = 'Участник:';
+$lang['CANDIDATE'] = 'Кандидат:';
+$lang['INDIVIDUAL'] = 'Имеет индивидуальные права';
+
 
 $lang['USER_ACTIVATE'] = 'Активировать';
 $lang['USER_DEACTIVATE'] = 'Деактивировать';
