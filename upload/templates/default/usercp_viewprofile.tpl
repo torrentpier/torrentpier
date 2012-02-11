@@ -110,11 +110,29 @@ ajax.mod_action = function(mode) {
 	});
 }
 ajax.callback.mod_action = function(data) {
-	$('#ip_list').html(data.ip_list_html);
+	$('#ip_list').toggle().html(data.ip_list_html);
 }
 </script>
-<!-- ENDIF / IS_AM -->
+<script type="text/javascript">
+ajax.group_membership = function(mode) {
+	$('#gr-mem-list').html('<i class="loading-1">загружается...</i>');
+	ajax.exec({
+		action  : 'group_membership',
+		mode    : mode,
+		user_id : {PROFILE_USER_ID}
+	});
+}
+ajax.callback.group_membership = function(data) {
+	$('#gr-mem-list').html(data.group_list_html);
+}
+</script>
 
+<style type="text/css">
+#gr-mem-list ul { margin: 2px 4px; }
+#gr-mem-list li { margin-bottom: 2px; }
+a.selfMod, a.selfMod:visited { color: #0000FF; }
+</style>
+<!-- ENDIF / IS_AM -->
 
 <a name="editprofile"></a>
 <h1 class="pagetitle">{L_VIEWING_PROFILE}</h1>
@@ -145,7 +163,7 @@ ajax.callback.mod_action = function(data) {
 			</script>
 			<div id="rank-msg" class="mrg_6"></div>
 		<!-- ELSE IF POSTER_RANK -->
-			{POSTER_RANK}
+			{RANK_IMAGE}
 		<!-- ENDIF -->
 		</p>
 		<h4 class="cat border bw_TB" id="username">{L_CONTACT} <span class="editable bold">{USERNAME}</span></h4>
@@ -205,6 +223,25 @@ ajax.callback.mod_action = function(data) {
 		<!-- ENDIF -->
 
 		<table class="user_details borderless w100">
+			<!-- IF SHOW_ROLE -->
+			<tr>
+				<th>Роль:</th>
+				<td id="role">
+					<b>{POSTER_RANK}</b>
+					<!-- IF GROUP_MEMBERSHIP and IS_MOD -->
+					<span id="gr-mod-a">[ <a href="#" class="med" onclick="ajax.group_membership('get_group_list'); $('#gr-mem-tr').show(); $('#gr-mod-a').hide(); return false;">членство в группах</a> ]</span>
+					<!-- ENDIF -->
+				</td>
+			</tr>
+			<!-- ENDIF -->
+			<!-- IF GROUP_MEMBERSHIP -->
+			<tr id="gr-mem-tr"<!-- IF IS_MOD --> style="display: none;"<!-- ENDIF -->>
+				<th>Членство в группах:</th>
+				<td id="gr-mem-list">
+					<!-- IF IS_ADMIN --><a href="#" class="med" onclick="ajax.group_membership('get_group_list'); return false;">{GROUP_MEMBERSHIP_TXT}</a><!-- ENDIF -->
+				</td>
+			</tr>
+			<!-- ENDIF -->
 			<tr>
 				<th>{L_JOINED}:</th>
 				<td id="user_regdate">
@@ -308,11 +345,11 @@ ajax.callback.mod_action = function(data) {
 				<th>{L_ACCESS}:</th>
 				<td id="ignore_srv_load">{L_ACCESS_SRV_LOAD}: <b class="editable">{IGNORE_SRV_LOAD}</b></td>
 			</tr>
-			<!-- ENDIF -->			
+			<!-- ENDIF -->
 		</table><!--/user_details-->
 
 	<!-- IF IS_AM --><span id="ip_list"></span><!-- ENDIF -->
-	
+
 	</td>
 </tr>
 <!-- IF SIGNATURE -->
@@ -411,7 +448,7 @@ ajax.callback.mod_action = function(data) {
 
 		</td>
 	</tr>
-	
+
 	<tr>
 		<th colspan="4" class="thHead">{L_CUR_ACTIVE_DLS}</th>
 	</tr>

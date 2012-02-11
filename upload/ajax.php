@@ -46,6 +46,10 @@ switch ($ajax->action)
 	case 'manage_user':
 		require(INC_DIR .'functions_admin.php');
 	break;
+
+	case 'group_membership':
+		require(INC_DIR .'functions_group.php');
+	break;
 }
 
 // position in $ajax->valid_actions['xxx']
@@ -72,6 +76,7 @@ class ajax_common
 		'change_tor_status' => array('mod'),
 		'mod_action'        => array('mod'),
         'topic_tpl'         => array('mod'),
+        'group_membership'  => array('mod'),
 
 		'gen_passkey'       => array('user'),
 		'change_torrent'    => array('user'),
@@ -82,8 +87,8 @@ class ajax_common
 		'user_register'     => array('guest'),
 		'posts'             => array('guest'),
 		'birthday_list'     => array('guest'),
-		'get_forum_mods'    => array('guest'),	
-		
+		'get_forum_mods'    => array('guest'),
+
 );
 
 	var $action = null;
@@ -455,6 +460,75 @@ class ajax_common
         unset($moderators, $mod);
         $datastore->rm('moderators');
     }
+
+    // User groups membership
+	function group_membership ()
+	{
+		global $user;
+
+		if (!$user_id = intval($this->request['user_id']) OR !$profiledata = get_userdata($user_id))
+		{
+			$this->ajax_die("invalid user_id: $user_id");
+		}
+		if (!$mode = (string) $this->request['mode'])
+		{
+			$this->ajax_die('invalid mode (empty)');
+		}
+
+		switch ($mode)
+		{
+			case 'get_group_list':
+				$sql = "
+					SELECT ug.user_pending, g.group_id, g.group_type, g.group_name, g.group_moderator, self.user_id AS can_view
+					FROM       ". BB_USER_GROUP ." ug
+					INNER JOIN ". BB_GROUPS     ." g ON(g.group_id = ug.group_id AND g.group_single_user = 0)
+					 LEFT JOIN ". BB_USER_GROUP ." self ON(self.group_id = g.group_id AND self.user_id = {$user->id} AND self.user_pending = 0)
+					WHERE ug.user_id = $user_id
+					ORDER BY g.group_name
+				";
+				$html = array();
+				foreach (DB()->fetch_rowset($sql) as $row)
+				{
+					$class  = ($row['user_pending']) ? 'med' : 'med bold';
+					$class .= ($row['group_moderator'] == $user_id) ? ' colorMod' : '';
+					$href   = "groupcp.php?g={$row['group_id']}";
+
+					if (IS_ADMIN)
+					{
+						$href .= "&amp;u=$user_id";
+						$link  = '<a href="'. $href .'" class="'. $class .'" target="_blank">'. htmlCHR($row['group_name']) .'</a>';
+						$html[] = $link;
+					}
+					else
+					{
+						// скрытая группа и сам юзер не является её членом
+						if ($row['group_type'] == GROUP_HIDDEN && !$row['can_view'])
+						{
+							continue;
+						}
+						if ($row['group_moderator'] == $user->id)
+						{
+							$class .= ' selfMod';
+							$href  .= "&amp;u=$user_id";  // сам юзер модератор этой группы
+						}
+						$link  = '<a href="'. $href .'" class="'. $class .'" target="_blank">'. htmlCHR($row['group_name']) .'</a>';
+						$html[] = $link;
+					}
+				}
+				if ($html)
+				{
+					$this->response['group_list_html'] = '<ul><li>'. join('</li><li>', $html) .'</li></ul>';
+				}
+				else
+				{
+					$this->response['group_list_html'] = 'не член, либо у вас нет прав на просмотр скрытых групп';
+				}
+				break;
+
+			default:
+				$this->ajax_die("invalid mode: $mode");
+		}
+	}
 
 	function view_post ()
 	{

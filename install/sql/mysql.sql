@@ -862,6 +862,7 @@ INSERT INTO `bb_forums` VALUES (1, 1, 'Ваш первый форум', 'Опи�
 
 CREATE TABLE `bb_groups` (
   `group_id` mediumint(8) NOT NULL auto_increment,
+  `group_time` int(11) NOT NULL default '0',
   `group_type` tinyint(4) NOT NULL default '1',
   `group_name` varchar(40) NOT NULL default '',
   `group_description` varchar(255) NOT NULL default '',

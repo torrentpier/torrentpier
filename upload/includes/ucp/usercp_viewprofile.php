@@ -100,7 +100,7 @@ $template->assign_vars(array(
 	'USERNAME'             => $profiledata['username'],
 	'PROFILE_USER_ID'      => $profiledata['user_id'],
 	'USER_REGDATE'         => bb_date($profiledata['user_regdate'], 'Y-m-d H:i', 'false'),
-	'POSTER_RANK'          => $poster_rank,
+	'POSTER_RANK'          => ($poster_rank) ? $poster_rank : 'User',
 	'RANK_IMAGE'           => $rank_image,
 	'RANK_SELECT'          => $rank_select,
 	'POSTS'                => $profiledata['user_posts'],
@@ -132,7 +132,56 @@ $template->assign_vars(array(
 	'S_PROFILE_ACTION'     => "profile.php",
 
 	'SIGNATURE'            => $signature,
+
+	'SHOW_ROLE'            => (IS_AM || $profile_user_id || $profiledata['user_active']),
+	'GROUP_MEMBERSHIP'     => false,
 ));
+
+if (IS_ADMIN)
+{
+	$group_membership = array();
+	$sql = "
+		SELECT COUNT(g.group_id) AS groups_cnt, g.group_single_user, ug.user_pending
+		FROM ". BB_USER_GROUP ." ug
+		LEFT JOIN ". BB_GROUPS ." g USING(group_id)
+		WHERE ug.user_id = {$profiledata['user_id']}
+		GROUP BY ug.user_id, g.group_single_user, ug.user_pending
+		ORDER BY NULL
+	";
+	if ($rowset = DB()->fetch_rowset($sql))
+	{
+		$member = $pending = $single = 0;
+		foreach ($rowset as $row)
+		{
+			if (!$row['group_single_user'] && !$row['user_pending'])
+			{
+				$member = $row['groups_cnt'];
+			}
+			else if (!$row['group_single_user'] && $row['user_pending'])
+			{
+				$pending = $row['groups_cnt'];
+			}
+			else if ($row['group_single_user'])
+			{
+				$single = $row['groups_cnt'];
+			}
+		}
+		if ($member)  $group_membership[] = "участник: <b>$member</b>";
+		if ($pending) $group_membership[] = "кандидат: <b>$pending</b>";
+		if ($single)  $group_membership[] = "имеет индивидуальные права";
+		$group_membership = join(', ', $group_membership);
+	}
+	$template->assign_vars(array(
+		'GROUP_MEMBERSHIP'      => (bool) $group_membership,
+		'GROUP_MEMBERSHIP_TXT'  => $group_membership,
+	));
+}
+else if (IS_MOD)
+{
+	$template->assign_vars(array(
+		'SHOW_GROUP_MEMBERSHIP' => ($profiledata['user_level'] != USER),
+	));
+}
 
 if (!bf($profiledata['user_opt'], 'user_opt', 'allow_dls') || (IS_AM || $profile_user_id))
 {

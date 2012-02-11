@@ -154,7 +154,7 @@
 
 <!-- BEGIN switch_no_members -->
 <tr>
-	<td colspan="10" class="row1 tCenter">{L_NO_GROUP_MEMBERS}</td>
+	<td colspan="10" class="row1 tCenter pad_10">{L_NO_GROUP_MEMBERS}</td>
 </tr>
 <!-- END switch_no_members -->
 

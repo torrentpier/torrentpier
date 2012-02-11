@@ -129,6 +129,7 @@ else if (!empty($_POST['group_update']))
 			{
 				// Create user_group for new group's moderator
 				add_user_into_group($group_id, $group_moderator);
+                $sql_ary['group_time']  = TIMENOW;
 
 				// Delete old moderator's user_group
 				if (isset($_POST['delete_old_moderator']))
@@ -150,6 +151,7 @@ else if (!empty($_POST['group_update']))
 		}
 		else if ($mode == 'newgroup')
 		{
+			$sql_ary['group_time']  = TIMENOW;
 			$sql_args = DB()->build_array('INSERT', $sql_ary);
 
 			// Create new group

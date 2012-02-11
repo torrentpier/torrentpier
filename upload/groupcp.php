@@ -16,8 +16,8 @@ function generate_user_info(&$row, $date_format, $group_mod, &$from, &$posts, &$
 	global $lang, $images, $bb_cfg;
 
 	$from   = ( !empty($row['user_from']) ) ? $row['user_from'] : '';
-	$joined = bb_date($row['user_regdate'], $lang['DATE_FORMAT']);
-	$user_time   = ( !empty($row['user_time']) ) ? bb_date($row['user_time'], $lang['DATE_FORMAT']) : $lang['NO'];
+	$joined = bb_date($row['user_regdate']);
+	$user_time   = ( !empty($row['user_time']) ) ? bb_date($row['user_time']) : $lang['NO'];
 	$posts  = ( $row['user_posts'] ) ? $row['user_posts'] : 0;
 	$pm     = ($bb_cfg['text_buttons']) ? '<a class="txtb" href="'. append_sid("privmsg.php?mode=post&amp;". POST_USERS_URL ."=".$row['user_id']) .'">'. $lang['SEND_PM_TXTB'] .'</a>' : '<a href="' . append_sid("privmsg.php?mode=post&amp;". POST_USERS_URL ."=".$row['user_id']) .'"><img src="' . $images['icon_pm'] . '" alt="' . $lang['SEND_PRIVATE_MESSAGE'] . '" title="' . $lang['SEND_PRIVATE_MESSAGE'] . '" border="0" /></a>';
 
@@ -175,7 +175,9 @@ if (!$group_id)
 	}
 	else
 	{
-		bb_die($lang['NO_GROUPS_EXIST']);
+		if(IS_ADMIN)
+		{			redirect('admin/admin_groups.php');		}
+		else bb_die($lang['NO_GROUPS_EXIST']);
 	}
 }
 else if (!empty($_POST['groupstatus']))
@@ -554,7 +556,7 @@ else
 		'MOD_PM' => $pm,
 		'MOD_EMAIL' => $email,
 		'MOD_WWW' => $www,
-		'MOD_TIME' => $user_time,
+		'MOD_TIME' => ( !empty($group_info['group_time']) ) ? bb_date($group_info['group_time']) : $lang['NO'],
 		'U_SEARCH_USER' => "search.php?mode=searchuser",
         'GROUP_TYPE' => $group_type,
 		'S_GROUP_OPEN_TYPE' => GROUP_OPEN,
