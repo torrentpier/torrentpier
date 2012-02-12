@@ -353,12 +353,12 @@ function topic_delete ($mode_or_topic_id, $forum_id = null, $prune_time = 0, $pr
 	// Delete posts, posts_text, attachments (from DB)
     DB()->query("
         DELETE p, pt, ps, a, d, ph
-        FROM      ". $tmp_delete_posts      ." del
-        LEFT JOIN ". BB_POSTS            ." p  ON(p.post_id  = del.post_id)
-        LEFT JOIN ". BB_POSTS_TEXT      ." pt  ON(pt.post_id  = del.post_id)
-        LEFT JOIN ". BB_POSTS_HTML      ." ph  ON(ph.post_id  = del.post_id)
-        LEFT JOIN ". BB_POSTS_SEARCH    ." ps  ON(ps.post_id  = del.post_id)
-        LEFT JOIN ". BB_ATTACHMENTS      ." a  ON(a.post_id  = del.post_id)
+        FROM      ". $tmp_delete_topics  ." del
+        LEFT JOIN ". BB_POSTS            ." p  ON(p.topic_id = del.topic_id)
+        LEFT JOIN ". BB_POSTS_TEXT       ." pt ON(pt.post_id = p.post_id)
+        LEFT JOIN ". BB_POSTS_HTML       ." ph ON(ph.post_id = p.post_id)
+        LEFT JOIN ". BB_POSTS_SEARCH     ." ps ON(ps.post_id = p.post_id)
+        LEFT JOIN ". BB_ATTACHMENTS      ." a  ON(a.post_id = p.post_id)
         LEFT JOIN ". BB_ATTACHMENTS_DESC ." d  ON(d.attach_id = a.attach_id)
     ");
 
@@ -729,16 +729,17 @@ function post_delete ($mode_or_post_id, $user_id = null, $exclude_first = true)
 	unset($row, $result);
 
 	// Delete posts, posts_text, attachments (from DB)
-	DB()->query("
-		DELETE p, pt, ps, tor, a, d
-		FROM      ". $tmp_delete_posts      ." del
-		LEFT JOIN ". BB_POSTS            ." p   ON(p.post_id   = del.post_id)
-		LEFT JOIN ". BB_POSTS_TEXT       ." pt  ON(pt.post_id  = del.post_id)
-		LEFT JOIN ". BB_POSTS_SEARCH     ." ps  ON(ps.post_id  = del.post_id)
-		LEFT JOIN ". BB_BT_TORRENTS      ." tor ON(tor.post_id = del.post_id)
-		LEFT JOIN ". BB_ATTACHMENTS      ." a   ON(a.post_id   = del.post_id)
-		LEFT JOIN ". BB_ATTACHMENTS_DESC ." d   ON(d.attach_id = a.attach_id)
-	");
+    DB()->query("
+        DELETE p, pt, ps, tor, a, d, ph
+        FROM      ". $tmp_delete_posts   ." del
+        LEFT JOIN ". BB_POSTS            ." p   ON(p.post_id  = del.post_id)
+        LEFT JOIN ". BB_POSTS_TEXT       ." pt  ON(pt.post_id  = del.post_id)
+        LEFT JOIN ". BB_POSTS_HTML       ." ph  ON(ph.post_id  = del.post_id)
+        LEFT JOIN ". BB_POSTS_SEARCH     ." ps  ON(ps.post_id  = del.post_id)
+        LEFT JOIN ". BB_BT_TORRENTS      ." tor ON(tor.post_id = del.post_id)
+        LEFT JOIN ". BB_ATTACHMENTS      ." a   ON(a.post_id  = del.post_id)
+        LEFT JOIN ". BB_ATTACHMENTS_DESC ." d   ON(d.attach_id = a.attach_id)
+    ");
 
 	// Log action
 	if ($del_user_posts)
