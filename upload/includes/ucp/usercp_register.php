@@ -720,7 +720,7 @@ foreach ($profile_fields as $field => $can_edit)
 	}
 }
 
-if($bb_cfg['birthday']['enabled'] && $mode != 'register')
+if($bb_cfg['birthday_enabled'] && $mode != 'register')
 {
 	$days = array($lang['DELTA_TIME']['INTERVALS']['mday'][0] => 0);
 	for($i=1; $i<=31; $i++)
@@ -739,7 +739,7 @@ if($bb_cfg['birthday']['enabled'] && $mode != 'register')
 
 	$year = bb_date(TIMENOW, 'Y', 'false');
 	$years = array($lang['DELTA_TIME']['INTERVALS']['year'][0] => 0);
-	for($i=$year-$bb_cfg['birthday']['max_user_age']; $i<=$year-$bb_cfg['birthday']['min_user_age']; $i++)
+	for($i=$year-$bb_cfg['birthday_max_age']; $i<=$year-$bb_cfg['birthday_min_age']; $i++)
 	{
 		$years[$i] = $i;
 	}

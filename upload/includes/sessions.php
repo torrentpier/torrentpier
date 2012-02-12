@@ -29,7 +29,7 @@ class user_common
 		'tr_t_ax'  => 0,     // ajax open topics
 		'tr_t_t'   => 0,     // show time of the creation topics
 		'hl_tr'    => 1,     // show cursor in tracker.php
-		'i_aft_l'  => 1,     // show images only after full loading
+		'i_aft_l'  => 0,     // show images only after full loading
 	);
 
 	/**

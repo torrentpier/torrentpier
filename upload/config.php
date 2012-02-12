@@ -30,7 +30,6 @@
   * Special users (dbg_users, unlimited_users, super_admins)
   * LOG
   * Error reporting
-  * Cron
 
   * Subforums
   * Forums
@@ -53,7 +52,7 @@ $bb_cfg = $tr_cfg = $page_cfg = array();
 
 // Increase number of revision after update
 $bb_cfg['tp_version'] = '2.4 (beta)';
-$bb_cfg['tp_release_state'] = 'R372';
+$bb_cfg['tp_release_state'] = 'R373';
 $bb_cfg['tp_release_date'] = '12-02-2012';
 
 // Database
@@ -280,7 +279,7 @@ $bb_cfg['topic_tpl']['overall_header'] = TEMPLATES_DIR .'topic_tpl_overall_heade
 $bb_cfg['topic_tpl']['rules_video']    = TEMPLATES_DIR .'topic_tpl_rules_video.html';
 
 // Cookie
-$bb_cfg['cookie_domain'] = (!empty($_SERVER['SERVER_NAME'])) ? $_SERVER['SERVER_NAME'] : '';  # '.yourdomain.com'
+$bb_cfg['cookie_domain'] = (empty($_SERVER['SERVER_NAME'])) ? $_SERVER['SERVER_NAME'] : '';  # '.yourdomain.com'
 $bb_cfg['cookie_path']   = '/';                    # '/forum/'
 $bb_cfg['cookie_secure'] = (!empty($_SERVER['HTTPS']) ? 1 : 0); # 0
 $bb_cfg['cookie_prefix'] = 'bb_';                  # 'bb_'
@@ -510,9 +509,9 @@ $bb_cfg['first_logon_redirect_url']    = 'index.php';
 $bb_cfg['faq_url']                     = 'faq.php';
 $bb_cfg['terms_and_conditions_url']    = 'index.php';
 
-$bb_cfg['user_agreement_url']          = "misc.php?do=info&show=user_agreement";
-$bb_cfg['copyright_holders_url']       = "misc.php?do=info&show=copyright_holders";
-$bb_cfg['advert_url']                  = "misc.php?do=info&show=advert";
+$bb_cfg['user_agreement_url']          = 'misc.php?do=info&show=user_agreement';
+$bb_cfg['copyright_holders_url']       = 'misc.php?do=info&show=copyright_holders';
+$bb_cfg['advert_url']                  = 'misc.php?do=info&show=advert';
 
 $bb_cfg['html_path']                   = BB_PATH .'/misc/html/';  #
 $bb_cfg['user_agreement_html_path']    = $bb_cfg['html_path'] .'user_agreement.html';  #
@@ -526,9 +525,3 @@ $bb_cfg['captcha'] = array(
 	'img_url'    => './images/captcha/',           # without '/'
 	'img_path'   => BB_PATH .'/images/captcha/',   # without '/'
 );
-
-// Birthday
-$bb_cfg['birthday']['enabled']      = true;
-$bb_cfg['birthday']['max_user_age'] = 99;
-$bb_cfg['birthday']['min_user_age'] = 10;
-$bb_cfg['birthday']['check_day']    = 7;

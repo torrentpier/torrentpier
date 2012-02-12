@@ -599,6 +599,10 @@ $lang['BIRTHDAY_TODAY'] = 'Пользователи, празднующие Де
 $lang['BIRTHDAY_WEEK'] = 'Пользователи, празднующие День Рождения в ближайшие %d дней: %s';
 $lang['NOBIRTHDAY_WEEK'] = 'В ближайшие %d дней никто не празднует День Рождения.'; // %d is substitude with the number of days
 $lang['NOBIRTHDAY_TODAY'] = 'Сегодня никто не празднует День Рождения.';
+$lang['BIRTHDAY_ENABLE'] = 'Показывать дни рождения';
+$lang['BIRTHDAY_MAX_AGE'] = 'Максимальный возраст';
+$lang['BIRTHDAY_MIN_AGE'] = 'Минимальный возраст';
+$lang['BIRTHDAY_CHECK_DAY'] = 'Показывать ближайшие дни рождения за';
 
 $lang['NO_THEMES'] = 'В базе нет цветовых схем';
 $lang['TIMEZONE'] = 'Часовой пояс';

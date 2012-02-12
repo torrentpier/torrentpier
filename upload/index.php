@@ -364,7 +364,7 @@ if ($bb_cfg['show_network_news'])
     }
 }
 
-if ($bb_cfg['birthday']['check_day'] && $bb_cfg['birthday']['enabled'])
+if ($bb_cfg['birthday_check_day'] && $bb_cfg['birthday_enabled'])
 {
 	$week_list = $today_list = array();
 	$week_all = $today_all = false;
@@ -383,9 +383,9 @@ if ($bb_cfg['birthday']['check_day'] && $bb_cfg['birthday']['enabled'])
 			$week_list[] = profile_url($week) .' <span class="small">('. birthday_age($week['age']) .')</span>';
 		}
 		$week_all = ($week_all) ? '&nbsp;<a class="txtb" href="#" onclick="ajax.exec({action: \'birthday_list\', mode: \'week\'}); return false;" title="'. $lang['ALL'] .'">...</a>' : '';
-		$week_list = sprintf($lang['BIRTHDAY_WEEK'], $bb_cfg['birthday']['check_day'], join(', ', $week_list)) . $week_all;
+		$week_list = sprintf($lang['BIRTHDAY_WEEK'], $bb_cfg['birthday_check_day'], join(', ', $week_list)) . $week_all;
 	}
-	else $week_list = sprintf($lang['NOBIRTHDAY_WEEK'], $bb_cfg['birthday']['check_day']);
+	else $week_list = sprintf($lang['NOBIRTHDAY_WEEK'], $bb_cfg['birthday_check_day']);
 
 	if ($stats['birthday_today_list'])
 	{

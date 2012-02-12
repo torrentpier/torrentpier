@@ -84,7 +84,7 @@ $tor_status = -1;  //  all by default
 
 if ($is_auth['auth_mod'])
 {
-	$redirect = isset($_POST['redirect']) ? $_POST['redirect'] : $_SERVER['REQUEST_URI'];
+	$redirect = isset($_POST['redirect']) ? $_POST['redirect'] : @$_SERVER['REQUEST_URI'];
 	$redirect = url_arg($redirect, 'mod', 1, '&');
 	$mod_redirect_url = "login.php?redirect=$redirect&admin=1";
 

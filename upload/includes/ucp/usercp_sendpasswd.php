@@ -30,6 +30,7 @@ if ( isset($_POST['submit']) )
 				bb_die($lang['NO_SEND_ACCOUNT']);
 			}
 
+			$username = $row['username'];
 			$user_id = $row['user_id'];
 
 			$user_actkey = make_rand_str(12);
@@ -55,6 +56,7 @@ if ( isset($_POST['submit']) )
 
 			$emailer->assign_vars(array(
 				'SITENAME' => $bb_cfg['sitename'],
+				'USERNAME' => $username,
 				'PASSWORD' => $user_password,
 				'EMAIL_SIG' => (!empty($bb_cfg['board_email_sig'])) ? str_replace('<br />', "\n", "-- \n" . $bb_cfg['board_email_sig']) : '',
 
@@ -79,10 +81,11 @@ if ( isset($_POST['submit']) )
 }
 else
 {
-	$email = '';
+	$email = $username = '';
 }
 
 $template->assign_vars(array(
+	'USERNAME' => $username,
 	'EMAIL' => $email,
 	'CAPTCHA_HTML'       => ($need_captcha) ? CAPTCHA()->get_html() : '',
 	'S_HIDDEN_FIELDS' => '',

@@ -265,6 +265,29 @@ function OpenInEditor ($file, $line)
 </div>
 <!-- ENDIF / EDITABLE_TPLS -->
 
+<!-- IF PAGINATION -->
+<div class="menu-sub" id="pg-jump">
+	<table cellspacing="1" cellpadding="4">
+	<tr><th>{L_GO_TO_PAGE}</th></tr>
+	<tr><td>
+		<form method="get" onsubmit="return go_to_page();">
+			<input id="pg-page" type="text" size="5" maxlength="4" />
+			<input type="submit" value="{L_JUMP_TO}"/>
+		</form>
+	</td></tr>
+	</table>
+</div>
+<script type="text/javascript">
+function go_to_page ()
+{
+	var page_num = (parseInt( $('#pg-page').val() ) > 1) ? $('#pg-page').val() : 1;
+	var pg_start = (page_num - 1) * {PG_PER_PAGE};
+	window.location = '{PG_BASE_URL}&start=' + pg_start;
+	return false;
+}
+</script>
+<!-- ENDIF -->
+
 <div id="ajax-loading"></div><div id="ajax-error"></div>
 <div id="preload" style="position: absolute; overflow: hidden; top: 0; left: 0; height: 1px; width: 1px;"></div>
 
@@ -442,29 +465,6 @@ important_info
 <!--/page_header-->
 
 <!--menus-->
-
-<!-- IF PAGINATION -->
-<div class="menu-sub" id="pg-jump">
-	<table cellspacing="1" cellpadding="4">
-	<tr><th>{L_GO_TO_PAGE}</th></tr>
-	<tr><td>
-		<form method="get" onsubmit="return go_to_page();">
-			<input id="pg-page" type="text" size="5" maxlength="4" />
-			<input type="submit" value="{L_JUMP_TO}"/>
-		</form>
-	</td></tr>
-	</table>
-</div>
-<script type="text/javascript">
-function go_to_page ()
-{
-	var page_num = (parseInt( $('#pg-page').val() ) > 1) ? $('#pg-page').val() : 1;
-	var pg_start = (page_num - 1) * {PG_PER_PAGE};
-	window.location = '{PG_BASE_URL}&start=' + pg_start;
-	return false;
-}
-</script>
-<!-- ENDIF -->
 
 <!-- IF SHOW_ONLY_NEW_MENU -->
 <div class="menu-sub" id="only-new-options">

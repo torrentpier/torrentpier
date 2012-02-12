@@ -56,7 +56,7 @@ switch ($field)
 		break;
 
 	case 'user_birthday':
-	    if(!$bb_cfg['birthday']['enabled']) $this->ajax_die($lang['MODULE_OFF']);
+	    if(!$bb_cfg['birthday_enabled']) $this->ajax_die($lang['MODULE_OFF']);
 	    $data = explode('-', $value);
 	    $b_day  = (isset($data[2])) ? (int) $data[2] : 0;
 		$b_md   = (isset($data[1])) ? (int) $data[1] : 0;
@@ -64,13 +64,13 @@ switch ($field)
 
 		if($b_day || $b_md || $b_year)
 		{
-			if((bb_date(TIMENOW, 'Y', 'false') - $b_year) > $bb_cfg['birthday']['max_user_age'])
+			if((bb_date(TIMENOW, 'Y', 'false') - $b_year) > $bb_cfg['birthday_max_age'])
 			{
-				$this->ajax_die(sprintf($lang['BIRTHDAY_TO_HIGH'], $bb_cfg['birthday']['max_user_age']));
+				$this->ajax_die(sprintf($lang['BIRTHDAY_TO_HIGH'], $bb_cfg['birthday_max_age']));
 			}
-            else if((bb_date(TIMENOW, 'Y', 'false') - $b_year) < $bb_cfg['birthday']['min_user_age'])
+            else if((bb_date(TIMENOW, 'Y', 'false') - $b_year) < $bb_cfg['birthday_min_age'])
 			{
-				$this->ajax_die(sprintf($lang['BIRTHDAY_TO_LOW'], $bb_cfg['birthday']['min_user_age']));
+				$this->ajax_die(sprintf($lang['BIRTHDAY_TO_LOW'], $bb_cfg['birthday_min_age']));
 			}
 			if (!checkdate($b_md, $b_day, $b_year))
 			{

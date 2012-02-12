@@ -123,7 +123,7 @@ table.log_filters td {
 			<div class="log_msg">{log.MSG}</div>
 			<!-- ENDIF -->
 			<!-- IF log.TOPIC_TITLE -->
-			<div class="nowrap">
+			<div>
 				<a href="{log.TOPIC_HREF_S}" class="med"><span class="med">{log.TOPIC_TITLE}</span></a>
 				<!-- IF log.TOPIC_HREF -->
 					<a href="{log.TOPIC_HREF}" class="med" target="_blank"><img src="{IMG}icon_latest_reply.gif" class="icon2" alt="" title="" /></a>
@@ -169,17 +169,16 @@ table.log_filters td {
 
 </form>
 
-
 <!-- IF FILTERS -->
 <div class="spacer_8"></div>
 
 <fieldset class="row3">
 <legend>{L_ACTS_LOG_FILTER}</legend>
-<table class="log_filters" cellspacing="4"><tr>
-
+<table class="log_filters" cellspacing="4">
+<tr>
 	<!-- IF FILTER_FORUMS -->
 	<td>
-	<p class="med bold">Forums:</p>
+	<p class="med bold">{L_FORUMS}:</p>
 	<div>
 		<!-- BEGIN forums -->
 		<p class="med mrg_4">{forums.FORUM_NAME}</p>
@@ -209,7 +208,7 @@ table.log_filters td {
 	</div>
 	</td>
 	<!-- ENDIF -->
-
+	
 </tr></table>
 </fieldset>
 <!-- ENDIF -->

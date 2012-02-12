@@ -13,9 +13,13 @@ function validate_username ($username, $check_ban_and_taken = true)
 	$username = clean_username($username);
 
 	// Length
-	if (strlen($username) > USERNAME_MAX_LENGTH)
+	if (mb_strlen($username, 'UTF-8') > USERNAME_MAX_LENGTH)
 	{
 		return $lang['USERNAME_TOO_LONG'];
+	} 
+	else if (mb_strlen($username, 'UTF-8') < USERNAME_MIN_LENGTH)
+	{
+		return $lang['USERNAME_TOO_SMALL'];
 	}
 	// Allowed symbols
 	if (!preg_match('#^['.$name_chars.']+$#iu', $username, $m))

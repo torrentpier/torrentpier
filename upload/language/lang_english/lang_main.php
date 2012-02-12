@@ -593,6 +593,10 @@ $lang['BIRTHDAY_TODAY'] = 'Users with a birthday today: ';
 $lang['BIRTHDAY_WEEK'] = 'Users with a birthday within the next %d days: %s';
 $lang['NOBIRTHDAY_WEEK'] = 'No users are having a birthday in the upcoming %d days'; // %d is substitude with the number of days
 $lang['NOBIRTHDAY_TODAY'] = 'No users have a birthday today';
+$lang['BIRTHDAY_ENABLE'] = 'Enable birthday';
+$lang['BIRTHDAY_MAX_AGE'] = 'Max age';
+$lang['BIRTHDAY_MIN_AGE'] = 'Min age';
+$lang['BIRTHDAY_CHECK_DAY'] = 'Days to check for come shortly birthdays';
 
 $lang['NO_THEMES'] = 'No Themes In database';
 $lang['TIMEZONE'] = 'Timezone';

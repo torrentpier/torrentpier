@@ -394,6 +394,29 @@
 		<label><input type="radio" name="auto_delete_posted_pics" value="0" <!-- IF not AUTO_DELETE_POSTED_PICS -->checked="checked"<!-- ENDIF --> />{L_DISABLED}</label>
 	</td>
 </tr>
+
+<tr class="row3 med">
+	<td class="bold tCenter" colspan="2">{L_BIRTHDAY}</td>
+</tr>
+<tr>
+	<td><h4>{L_BIRTHDAY_ENABLE}</h4></td>
+	<td>
+	    <label><input type="radio" name="birthday_enabled" value="1" <!-- IF BIRTHDAY_ENABLED -->checked="checked"<!-- ENDIF --> />{L_ENABLED}</label>&nbsp;&nbsp;
+		<label><input type="radio" name="birthday_enabled" value="0" <!-- IF not BIRTHDAY_ENABLED -->checked="checked"<!-- ENDIF --> />{L_DISABLED}</label>
+	</td>
+</tr>
+<tr>
+	<td><h4>{L_BIRTHDAY_MAX_AGE}</h4></td>
+	<td><input class="post" type="text" size="25" maxlength="100" name="birthday_max_age" value="{BIRTHDAY_MAX_AGE}" />&nbsp;{L_BIRTHDAY_YEARS}</td>
+</tr>
+<tr>
+	<td><h4>{L_BIRTHDAY_MIN_AGE}</h4></td>
+	<td><input class="post" type="text" size="25" maxlength="100" name="birthday_min_age" value="{BIRTHDAY_MIN_AGE}" />&nbsp;{L_BIRTHDAY_YEARS}</td>
+</tr>
+<tr>
+	<td><h4>{L_BIRTHDAY_CHECK_DAY}</h4></td>
+	<td><input class="post" type="text" size="25" maxlength="100" name="birthday_check_day" value="{BIRTHDAY_CHECK_DAY}" />&nbsp;{L_DAYS}</td>
+</tr>
 <!-- ENDIF / CONFIG_MODS -->
 <tr>
 	<td class="catBottom" colspan="2">

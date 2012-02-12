@@ -216,6 +216,8 @@ define('PRIVMSGS_SAVED_IN_MAIL',  3);
 define('PRIVMSGS_SAVED_OUT_MAIL', 4);
 define('PRIVMSGS_UNREAD_MAIL',    5);
 
+define('USERNAME_MIN_LENGTH',     3);
+
 // URL PARAMETERS (hardcoding allowed)
 define('POST_CAT_URL',    'c');
 define('POST_FORUM_URL',  'f');

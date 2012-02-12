@@ -178,7 +178,7 @@
 				<p>{SPEED_STAT}</p>
 				<!-- ENDIF -->
 
-				<!-- IF $bb_cfg['birthday']['enabled'] -->
+				<!-- IF $bb_cfg['birthday_enabled'] -->
 				<script type="text/javascript">
 				ajax.callback.birthday_list = function(data) {
 					$('#birthday_'+ data.mode).html(data.html);
