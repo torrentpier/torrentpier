@@ -654,6 +654,7 @@ $lang['USERNAME_TAKEN'] = 'Sorry, but this username has already been taken.';
 $lang['USERNAME_INVALID'] = 'Sorry, but this username contains an invalid character';
 $lang['USERNAME_DISALLOWED'] = 'Sorry, but this username has been disallowed.';
 $lang['USERNAME_TOO_LONG'] = 'Your name is too long.';
+$lang['USERNAME_TOO_SMALL'] = 'Your name is too small.';
 $lang['EMAIL_TAKEN'] = 'Sorry, but that e-mail address is already registered to a user.';
 $lang['EMAIL_BANNED'] = 'Sorry, but <b>%s</b> address has been banned.';
 $lang['EMAIL_INVALID'] = 'Sorry, but this e-mail address is invalid.';
