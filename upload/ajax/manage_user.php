@@ -15,8 +15,8 @@ switch($mode)
 
 		if ($user_id != BOT_UID)
         {
-	        user_delete($user_id);
 	        delete_user_sessions($user_id);
+			user_delete($user_id);
 
 	        $this->response['info'] = $lang['USER_DELETED'];
         }

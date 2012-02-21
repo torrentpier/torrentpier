@@ -2721,28 +2721,28 @@ function create_magnet($infohash, $auth_key, $logged_in)
 	return '<a href="magnet:?xt=urn:btih:'. bin2hex($infohash) .'&tr='. urlencode($bb_cfg['bt_announce_url'] . $passkey_url) .'"><img src="images/magnet.png" width="12" height="12" border="0" /></a>';
 }
 
-function get_avatar ($avatar, $type, $allow_avatar = true)
+function get_avatar ($avatar, $type, $allow_avatar = true, $height = false, $width = false)
 {
-	global $bb_cfg, $lang;
-
-	$user_avatar = '<img src="'. $bb_cfg['no_avatar'] .'" alt="" border="0" />';
-
-	if ($allow_avatar)
-	{
-		switch($type)
-		{
-			case USER_AVATAR_UPLOAD:
-				$user_avatar = ( $bb_cfg['allow_avatar_upload'] ) ? '<img src="'. $bb_cfg['avatar_path'] .'/'. $avatar .'" alt="" border="0" />' : '';
-				break;
-			case USER_AVATAR_REMOTE:
-				$user_avatar = ( $bb_cfg['allow_avatar_remote'] ) ? '<img src="'. $avatar .'" alt="" border="0" onload="imgFit(this, 100);" onClick="return imgFit(this, 100);" />' : '';
-				break;
-			case USER_AVATAR_GALLERY:
-				$user_avatar = ( $bb_cfg['allow_avatar_local'] ) ? '<img src="'. $bb_cfg['avatar_gallery_path'] .'/'. $avatar .'" alt="" border="0" />' : '';
-				break;
-		}
-	}
-	return $user_avatar;
+    global $bb_cfg, $lang;
+ 
+    $user_avatar = '<img src="'. $bb_cfg['no_avatar'] .'" alt="" border="0" height="'. $height .'" width="'. $width .'" />';
+ 
+    if ($allow_avatar)
+    {
+        switch($type)
+        {
+            case USER_AVATAR_UPLOAD:
+                $user_avatar = ( $bb_cfg['allow_avatar_upload'] ) ? '<img src="'. $bb_cfg['avatar_path'] .'/'. $avatar .'" alt="" border="0" height="'. $height .'" width="'. $width .'" />' : '';
+                break;
+            case USER_AVATAR_REMOTE:
+                $user_avatar = ( $bb_cfg['allow_avatar_remote'] ) ? '<img src="'. $avatar .'" alt="" border="0" onload="imgFit(this, 100);" onClick="return imgFit(this, 100);" height="'. $height .'" width="'. $width .'" />' : '';
+                break;
+            case USER_AVATAR_GALLERY:
+                $user_avatar = ( $bb_cfg['allow_avatar_local'] ) ? '<img src="'. $bb_cfg['avatar_gallery_path'] .'/'. $avatar .'" alt="" border="0" height="'. $height .'" width="'. $width .'" />' : '';
+                break;
+        }
+    }
+    return $user_avatar;
 }
 
 function set_die_append_msg ($forum_id = null, $topic_id = null)

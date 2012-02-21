@@ -157,6 +157,19 @@ class CACHES
 						$this->ref[$cache_name] =& $this->obj[$cache_name];
 						break;
 
+                    case 'db_sqlite':
+						if (!isset($this->obj[$cache_name]))
+						{
+							$cache_cfg['pconnect']     = $this->cfg['pconnect'];
+							$cache_cfg['db_file_path'] = $this->get_db_path($cache_name, $cache_cfg, '.sqlite.db');
+							$cache_cfg['table_name']   = $cache_name;
+							$cache_cfg['table_schema'] = $this->get_table_schema($cache_cfg);
+
+							$this->obj[$cache_name] = new sqlite_common($cache_cfg);
+						}
+						$this->ref[$cache_name] =& $this->obj[$cache_name];
+						break;
+
                     case 'redis':
                         if (!isset($this->obj[$cache_name]))
 						{

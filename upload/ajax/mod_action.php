@@ -102,6 +102,16 @@ switch ($mode)
 			}
 		}
 		
+		if ($profiledata['user_level'] == ADMIN && !IS_ADMIN) $reg_ip = $last_ip = $lang['HIDDEN'];
+		elseif ($profiledata['user_level'] == MOD && IS_MOD)  $reg_ip = $last_ip = $lang['HIDDEN'];
+		else
+		{
+			$user_reg_ip  = decode_ip($profiledata['user_reg_ip']);
+			$user_last_ip = decode_ip($profiledata['user_last_ip']);
+			$reg_ip  = '<a href="'. $bb_cfg['whois_info'] . $user_reg_ip .'" class="gen" target="_blank">'. $user_reg_ip .'</a>';
+			$last_ip = '<a href="'. $bb_cfg['whois_info'] . $user_last_ip .'" class="gen" target="_blank">'. $user_last_ip .'</a>';
+		}
+		
 		$this->response['ip_list_html'] = '
 		    <style type="text/css">
 			table.mod_ip    { background: #F9F9F9; border: 1px solid #A5AFB4; border-collapse: separate;}
@@ -111,14 +121,15 @@ switch ($mode)
 			<br /><table class="mod_ip bCenter borderless" cellspacing="1">
                 <tr class="row5" >
 					<td>'. $lang['REG_IP'] .'</td>
-					<td class="tCenter"><a href="'. $bb_cfg['whois_info'] . decode_ip($profiledata['user_reg_ip']).'" class="gen" target="_blank">'.decode_ip($profiledata['user_reg_ip']).'</a></td>
+					<td class="tCenter">'. $reg_ip .'</td>
 					<td><div>'. $link_reg_ip .'</div></td>
 				</tr>
                 <tr class="row4">
 					<td>'. $lang['LAST_IP'] .'</td>
-					<td class="tCenter"><a href="'. $bb_cfg['whois_info'] . decode_ip($profiledata['user_last_ip']).'" class="gen" target="_blank">'.decode_ip($profiledata['user_last_ip']).'</a></td>
+					<td class="tCenter">'. $last_ip .'</td>
 					<td><div>'. $link_last_ip .'</div></td>
 				</tr>
-            </table><br />';
+            </table><br />
+		';
 	break;	
 }
