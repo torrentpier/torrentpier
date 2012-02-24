@@ -529,6 +529,11 @@ function htmlCHR ($txt, $double_encode = false, $quote_style = ENT_QUOTES, $char
 	return (string) htmlspecialchars($txt, $quote_style, $charset, $double_encode);
 }
 
+function html_ent_decode ($txt, $quote_style = ENT_QUOTES, $charset = 'UTF-8')
+{
+	return (string) html_entity_decode($txt, $quote_style, $charset);
+}
+
 function make_url ($path)
 {
 	return FULL_URL . preg_replace('#^\/?(.*?)\/?$#', '\1', $path);

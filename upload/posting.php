@@ -541,33 +541,38 @@ else if ( ($submit || $confirm) && !$topic_has_new_posts )
 			include(INC_DIR .'functions_torrent.php');
 			if(!DB()->fetch_row("SELECT attach_id FROM ". BB_BT_TORRENTS ." WHERE attach_id = ". TORRENT_ATTACH_ID))
 			{
-				// Получение списка id форумов начиная с parent
-				$forum_parent = $forum_id;
-				if ($post_info['forum_parent']) $forum_parent = $post_info['forum_parent'];
-				$count_sql = "
-					SELECT forum_id
-					FROM ". BB_FORUMS ."
-					WHERE forum_parent = $forum_parent
-				";
-				$count_rowset = DB()->fetch_rowset($count_sql);
-				$sub_forums = array();
-				foreach ($count_rowset as $count_row)
+				if($bb_cfg['premod'])
 				{
-					if ($count_row['forum_id'] != $forum_id) $sub_forums[] = $count_row['forum_id'];
+				    // Получение списка id форумов начиная с parent
+				    $forum_parent = $forum_id;
+				    if ($post_info['forum_parent']) $forum_parent = $post_info['forum_parent'];
+				    $count_sql = "
+					    SELECT forum_id
+				    	FROM ". BB_FORUMS ."
+			    		WHERE forum_parent = $forum_parent
+			    	";
+			    	$count_rowset = DB()->fetch_rowset($count_sql);
+			    	$sub_forums = array();
+			    	foreach ($count_rowset as $count_row)
+			    	{
+			    		if ($count_row['forum_id'] != $forum_id) $sub_forums[] = $count_row['forum_id'];
+			    	}
+			    	$sub_forums[] = $forum_id;
+			    	$sub_forums = join(',', $sub_forums);
+			    	// Подсчёт проверенных релизов в форумах раздела
+			    	$count_checked_releases = DB()->fetch_row("
+			    		SELECT COUNT(*) AS checked_releases
+			    		FROM ". BB_BT_TORRENTS ."
+			    		WHERE poster_id  = ". $userdata['user_id'] ."
+			    		  AND forum_id   IN($sub_forums)
+			    		  AND tor_status IN(". TOR_APPROVED .",". TOR_DOUBTFUL .",". TOR_TMP .")
+			    		LIMIT 1
+			    	", 'checked_releases');
+	
+				    if ($count_checked_releases || IS_AM) tracker_register(TORRENT_ATTACH_ID, 'newtopic', TOR_NOT_APPROVED);
+				    else tracker_register(TORRENT_ATTACH_ID, 'newtopic', TOR_PREMOD);
 				}
-				$sub_forums[] = $forum_id;
-				$sub_forums = join(',', $sub_forums);
-				// Подсчёт проверенных релизов в форумах раздела
-				$count_checked_releases = DB()->fetch_row("
-					SELECT COUNT(*) AS checked_releases
-					FROM ". BB_BT_TORRENTS ."
-					WHERE poster_id  = ". $userdata['user_id'] ."
-					  AND forum_id   IN($sub_forums)
-					  AND tor_status IN(". TOR_APPROVED .",". TOR_DOUBTFUL .",". TOR_TMP .")
-					LIMIT 1
-				", 'checked_releases');
-				if ($count_checked_releases || IS_AM) tracker_register(TORRENT_ATTACH_ID, 'newtopic', TOR_NOT_APPROVED);
-				else tracker_register(TORRENT_ATTACH_ID, 'newtopic', TOR_PREMOD);
+				else tracker_register(TORRENT_ATTACH_ID, 'newtopic', TOR_NOT_APPROVED);
 			}
 		}
 

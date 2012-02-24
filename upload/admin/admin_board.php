@@ -97,7 +97,8 @@ switch($mode)
 		    'L_BIRTHDAY_YEARS' => $lang['DELTA_TIME']['INTERVALS']['year'][2],
 		    'BIRTHDAY_MAX_AGE' => $new['birthday_max_age'],
 		    'BIRTHDAY_MIN_AGE' => $new['birthday_min_age'],
-		    'BIRTHDAY_CHECK_DAY' => $new['birthday_check_day'],
+		    'BIRTHDAY_CHECK_DAY' => $new['birthday_check_day'],		
+		    'PREMOD'     => $new['premod'],		
 	    ));
 	break;
 

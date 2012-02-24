@@ -1612,9 +1612,10 @@ $lang['USER_DELETE_CSV'] = 'Sorry, this account is not allowed to delete!';
 $lang['USER_DELETE_CONFIRM'] = 'Are you sure you want to delete this user?';
 $lang['USER_DELETED'] = 'User was successfully deleted';
 $lang['DELETE_USER_ALL_POSTS'] = 'Delete all user posts';
+$lang['DELETE_USER_ALL_POSTS_CONFIRM'] = 'Are you sure you want to delete all messages and all topics started by the whole thing?';
 $lang['DELETE_USER_POSTS'] = 'Delete all messages, except for capital';
 $lang['DELETE_USER_POSTS_ME'] = 'Are you sure you want to delete all my posts?';
-$lang['DELETE_USER_POSTS_CONFIRM'] = 'Are you sure you want to delete all of your users?';
+$lang['DELETE_USER_POSTS_CONFIRM'] = 'Are you sure you want to delete all messages, except for capital?';
 $lang['USER_DELETED_POSTS'] = 'Posts were successfully removed';
 
 $lang['USER'] = 'User';
@@ -1623,6 +1624,7 @@ $lang['MEMBERSHIP_IN'] = 'Membership in';
 $lang['PARTY'] = 'Party:';
 $lang['CANDIDATE'] = 'Candidate:';
 $lang['INDIVIDUAL'] = 'Has the individual rights';
+$lang['GROUP_HIDDEN'] = 'You are not authorized to view hidden groups';
 
 $lang['USER_ACTIVATE'] = 'Activate';
 $lang['USER_DEACTIVATE'] = 'Deactivate';

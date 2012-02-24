@@ -382,7 +382,7 @@ if ($bb_cfg['birthday_check_day'] && $bb_cfg['birthday_enabled'])
 
 			$week_list[] = profile_url($week) .' <span class="small">('. birthday_age($week['age']) .')</span>';
 		}
-		$week_all = ($week_all) ? '&nbsp;<a class="txtb" href="#" onclick="ajax.exec({action: \'birthday_list\', mode: \'week\'}); return false;" title="'. $lang['ALL'] .'">...</a>' : '';
+		$week_all = ($week_all) ? '&nbsp;<a class="txtb" href="#" onclick="ajax.exec({action: \'index_data\', mode: \'birthday_week\'}); return false;" title="'. $lang['ALL'] .'">...</a>' : '';
 		$week_list = sprintf($lang['BIRTHDAY_WEEK'], $bb_cfg['birthday_check_day'], join(', ', $week_list)) . $week_all;
 	}
 	else $week_list = sprintf($lang['NOBIRTHDAY_WEEK'], $bb_cfg['birthday_check_day']);
@@ -400,7 +400,7 @@ if ($bb_cfg['birthday_check_day'] && $bb_cfg['birthday_enabled'])
 
 			$today_list[] = profile_url($today) .' <span class="small">('. birthday_age($today['age'], 1) .')</span>';
 		}
-		$today_all = ($today_all) ? '&nbsp;<a class="txtb" href="#" onclick="ajax.exec({action: \'birthday_list\', mode: \'today\'}); return false;" title="'. $lang['ALL'] .'">...</a>' : '';
+		$today_all = ($today_all) ? '&nbsp;<a class="txtb" href="#" onclick="ajax.exec({action: \'index_data\', mode: \'birthday_today\'}); return false;" title="'. $lang['ALL'] .'">...</a>' : '';
 		$today_list = $lang['BIRTHDAY_TODAY'] . join(', ', $today_list) . $today_all;
 	}
 	else $today_list = $lang['NOBIRTHDAY_TODAY'];

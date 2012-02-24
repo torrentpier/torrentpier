@@ -666,4 +666,5 @@ $lang['WHOIS_INFO'] = 'Информация о IP адресе';
 $lang['PIC_GALLERY'] = 'Директория для изображений';
 $lang['PIC_SIZE'] = 'Максимальный размер изображений';
 $lang['AUTO_DELETE_POSTED_PICS'] = 'Удалять изображения размещенные в удаленных постах';
-$lang['SHOW_MOD_HOME_PAGE'] = 'Показывать модераторов на главной'; 
+$lang['SHOW_MOD_HOME_PAGE'] = 'Показывать модераторов на главной';
+$lang['PREMOD_HELP'] = '<h4><span class="tor-icon tor-dup">&#8719;</span> Премодерация</h4> <h6>Если у пользователя нет раздач со статусом <span class="tor-icon tor-approved">&radic;</span>, <span class="tor-icon tor-approved">#</span> или <span class="tor-icon tor-dup">T</span> в текущем разделе, включая подразделы, то раздача автоматически получает данный статус</h6>';

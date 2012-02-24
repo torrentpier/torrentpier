@@ -353,20 +353,21 @@ function go_to_page ()
 <!-- IF LOGGED_IN -->
 
 <script type="text/javascript">
-ajax.change_tz = function(tz) {
+ajax.index_data = function(tz) {
 	ajax.exec({
-		action     : 'change_tz',
+		action  : 'index_data',
+		mode    : 'change_tz',
 		tz      : tz,
 	});
 };
-ajax.callback.change_tz = function(data) {
+ajax.callback.index_data = function(data) {
 };
 $(document).ready(function() {
 	x = new Date();
 	tz = -x.getTimezoneOffset()/60;
 	if (tz != <?php echo $bb_cfg['board_timezone']?>)
 	{
-		ajax.change_tz(tz);
+		ajax.index_data(tz);
 	}
 });
 </script>

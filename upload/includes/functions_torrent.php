@@ -567,7 +567,7 @@ function send_torrent_with_passkey ($filename)
     }
     else
     {
-        $announce = strval($ann_url . "?$passkey_key=$passkey_val&");
+        $announce = strval($ann_url . "?$passkey_key=$passkey_val");
     }
 
 	// Replace original announce url with tracker default

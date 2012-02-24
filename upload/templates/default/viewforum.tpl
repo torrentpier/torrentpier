@@ -274,17 +274,18 @@ td.topic_id { cursor: pointer; }
                 $(document).ready(function(){
                     $("#moderators a").one('click', function(){
                     $('#moderators').html($('#moderators').text());
-                        ajax.get_forum_mods();
+                        ajax.index_data();
                             return false;
                     });
                 });
-                ajax.get_forum_mods = function() {
+                ajax.index_data = function() {
                     ajax.exec({
-                        action   : 'get_forum_mods',
+                        action   : 'index_data',
+                        mode     : 'get_forum_mods',
                         forum_id : {FORUM_ID} 
                     });
                 };
-                ajax.callback.get_forum_mods = function(data) {
+                ajax.callback.index_data = function(data) {
                     $('#moderators').append(data.html);
                 };
             </script>

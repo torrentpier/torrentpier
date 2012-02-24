@@ -180,13 +180,13 @@
 
 				<!-- IF $bb_cfg['birthday_enabled'] -->
 				<script type="text/javascript">
-				ajax.callback.birthday_list = function(data) {
-					$('#birthday_'+ data.mode).html(data.html);
+				ajax.callback.index_data = function(data) {
+					$('#'+ data.mode).html(data.html);
 				};
 				</script>
 				<div class="hr1" style="margin: 5px 0 4px;"></div>
-                <p id="birthday_today">{WHOSBIRTHDAY_TODAY}</p>
-                <p id="birthday_week">{WHOSBIRTHDAY_WEEK}</p>
+                <p id="birthday_today" class="birthday">{WHOSBIRTHDAY_TODAY}</p>
+                <p id="birthday_week" class="birthday">{WHOSBIRTHDAY_WEEK}</p>
 				<!-- ENDIF -->
 
                 <div class="hr1" style="margin: 5px 0 4px;"></div>

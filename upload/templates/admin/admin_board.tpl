@@ -322,6 +322,13 @@
 		<label><input type="radio" name="show_mod_index" value="0" <!-- IF not SHOW_MOD_INDEX -->checked="checked"<!-- ENDIF --> />{L_DISABLED}</label>
 	</td>
 </tr>
+<tr>
+	<td>{L_PREMOD_HELP}</td>
+	<td>
+	    <label><input type="radio" name="premod" value="1" <!-- IF PREMOD -->checked="checked"<!-- ENDIF --> />{L_ENABLED}</label>&nbsp;&nbsp;
+		<label><input type="radio" name="premod" value="0" <!-- IF not PREMOD -->checked="checked"<!-- ENDIF --> />{L_DISABLED}</label>
+	</td>
+</tr>
 
 <tr class="row3 med">
 	<td class="bold tCenter" colspan="2">{L_LATEST_NEWS}</td>

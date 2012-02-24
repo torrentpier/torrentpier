@@ -113,11 +113,6 @@ switch ($mode)
 		}
 		
 		$this->response['ip_list_html'] = '
-		    <style type="text/css">
-			table.mod_ip    { background: #F9F9F9; border: 1px solid #A5AFB4; border-collapse: separate;}
-            table.mod_ip td { padding: 2px 5px; white-space: normal; font-size: 11px; }
-            table.mod_ip div { max-height: 150px;  overflow: auto;}
-			</style>
 			<br /><table class="mod_ip bCenter borderless" cellspacing="1">
                 <tr class="row5" >
 					<td>'. $lang['REG_IP'] .'</td>

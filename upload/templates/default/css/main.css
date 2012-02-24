@@ -254,8 +254,8 @@ a.small, a.gensmall { color: #006699; text-decoration: none; }
 /* ---------------------------------- *
      Spoiler
  * ---------------------------------- */
-.sp-wrap { padding: 0; background: #E9E9E6; }
-.sp-head { border-width: 0; font-size: 11px; padding: 1px 14px 3px; margin-left: 6px; line-height: 15px; font-weight: bold; color: #2A2A2A; cursor: pointer; }
+.sp-wrap { padding: 0; background: #E9E9E6; width:auto;}
+.sp-head { border-width: 0; font-size: 11px; padding: 1px 14px 3px; margin-left: 6px; line-height: 15px; font-weight: bold; color: #2A2A2A; cursor: pointer; width:auto;}
 .sp-body { border-width: 1px 0 0 0; display: none; font-weight: normal; background: #F5F5F5; border-bottom: 1px solid #C3CBD1;}
 .sp-fold { width: 98%; margin: 0 auto; text-align: right; font-size: 10px; color: #444444; }
 /* ---------------------------------- *
@@ -593,7 +593,11 @@ table.smilies td { padding: 3px; text-align: center; }
 a.selfMod, a.selfMod:visited { color: #0000FF; }
 
 .view-message { border: 1px #A5AFB4 solid; padding: 4px; margin: 6px; overflow: auto; }
-	
+.birthday  { margin: 3px 0; padding: 2px 4px;  max-height: 200px; overflow: auto;}
+
+table.mod_ip    { background: #F9F9F9; border: 1px solid #A5AFB4; border-collapse: separate;}
+table.mod_ip td { padding: 2px 5px; white-space: normal; font-size: 11px; }
+table.mod_ip div { max-height: 150px;  overflow: auto;}
 /* ---------------------------------- *
      Forums on home page
  * ---------------------------------- */
