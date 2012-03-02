@@ -598,6 +598,11 @@ a.selfMod, a.selfMod:visited { color: #0000FF; }
 table.mod_ip    { background: #F9F9F9; border: 1px solid #A5AFB4; border-collapse: separate;}
 table.mod_ip td { padding: 2px 5px; white-space: normal; font-size: 11px; }
 table.mod_ip div { max-height: 150px;  overflow: auto;}
+
+table.ratio    { background: #F9F9F9; border: 1px solid #A5AFB4; border-collapse: separate; }
+table.ratio th, table.ratio td { padding: 2px 12px; text-align: center; white-space: nowrap; font-size: 11px;}
+table.ratio th { color: #000000; white-space: nowrap; }
+table.ratio td { padding: 2px 24px; }
 /* ---------------------------------- *
      Forums on home page
  * ---------------------------------- */

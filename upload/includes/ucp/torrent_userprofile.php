@@ -31,7 +31,10 @@ else
 }
 
 // Set tpl vars for bt_userdata
-show_bt_userdata($profile_user_id);
+if (IS_ADMIN || $profile_user_id == $userdata['user_id'])
+{
+    show_bt_userdata($profile_user_id);
+}
 
 if (IS_ADMIN)
 {
@@ -157,7 +160,6 @@ $template->assign_vars(array(
 	'L_SEEDINGS'  => '<b>'. $lang['SEEDING'] .'</b>'. (($seeding_count) ? "<br />[ <b>$seeding_count</b> ]" : ''),
 	'L_LEECHINGS' => '<b>'. $lang['LEECHING'] .'</b>'. (($leeching_count) ? "<br />[ <b>$leeching_count</b> ]" : ''),
 
-	'L_VIEW_TOR_PROF'  => sprintf($lang['VIEWING_USER_BT_PROFILE'], $username),
 	'RELEASED_ROWSPAN' => ($releasing_count) ? 'rowspan="'. ($releasing_count + 1) .'"' : '',
 	'SEED_ROWSPAN'     => ($seeding_count) ? 'rowspan="'. ($seeding_count + 1) .'"' : '',
 	'LEECH_ROWSPAN'    => ($leeching_count) ? 'rowspan="'. ($leeching_count + 1) .'"' : '',
@@ -168,19 +170,4 @@ $template->assign_vars(array('SHOW_SEARCH_DL' => false));
 if (!IS_USER || $profile_user_id == $userdata['user_id'])
 {
 	$page_cfg['dl_links_user_id'] = $profile_user_id;
-}
-
-$sql = 'SELECT SUM(speed_up) as speed_up, SUM(speed_down) as speed_down
-    FROM '. BB_BT_TRACKER .'
-    WHERE user_id = ' . $profile_user_id . '';
-
-if ($row = DB()->fetch_row($sql))
-{
-	$speed_up   = ($row['speed_up']) ? humn_size($row['speed_up']).'/s' : '-';
-	$speed_down = ($row['speed_down']) ? humn_size($row['speed_down']).'/s' : '-';
-
-	$template->assign_vars(array(
-		'SPEED_UP'   => $speed_up,
-		'SPEED_DOWN' => $speed_down,
-	));
 }

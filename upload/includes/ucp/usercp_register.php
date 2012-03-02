@@ -910,7 +910,7 @@ if ($submit && !$errors)
 
 			if($adm_edit)
 			{
-				bb_die($lang['PROFILE_USER'] . " <b>{$pr_data['username']}</b> " . $lang['GOOD_UPDATE']);
+				bb_die($lang['PROFILE_USER'] . ' <b>'. profile_url($pr_data) .'</b> '. $lang['GOOD_UPDATE']);
 			}
 			elseif(!$pr_data['user_active'])
 			{

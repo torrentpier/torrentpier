@@ -89,8 +89,38 @@ switch($mode)
 		}
 	break;
 	
-	default:
-		$html = '';
+	case 'get_traf_stats':
+		$user_id = (int) $this->request['user_id'];
+		$btu = get_bt_userdata($user_id);
+		$bts = get_bt_speed($user_id);
+		
+		$speed_up = ($bts['speed_up']) ? humn_size($bts['speed_up']).'/s' : '0 KB/s';
+		$speed_down = ($bts['speed_down']) ? humn_size($bts['speed_down']).'/s' : '0 KB/s';
+		$user_ratio = ($btu['u_down_total'] > MIN_DL_FOR_RATIO) ? '<b class="gen">'. get_bt_ratio($btu) .'</b>' : $lang['IT_WILL_BE_DOWN'] .' <b>'. humn_size(MIN_DL_FOR_RATIO) .'</b>';
+		
+		$html = '
+            <tr class="row3">
+				<th>'. $lang['DOWNLOADED'] .'</th>
+				<th>'. $lang['UPLOADED'] .'</th>
+				<th>'. $lang['RELEASED'] .'</th>
+				<th>'. $lang['BONUS'] .'</th>
+			</tr>
+			<tr class="row1">
+				<td id="u_down_total"><span class="editable bold leechmed">'. humn_size($btu['u_down_total']) .'</span></td>
+				<td id="u_up_total"><span class="editable bold seedmed">' .humn_size($btu['u_up_total']) .'</span></td>
+				<td id="u_up_release"><span class="editable bold seedmed">'. humn_size($btu['u_up_release']) .'</span></td>
+				<td id="u_up_bonus"><span class="editable bold seedmed">'. humn_size($btu['u_up_bonus']) .'</span></td>
+			</tr>
+			<tr class="row5">
+				<td colspan="2">'. $lang['DL_DL_SPEED'] .': '. $speed_down .'</span></td>
+				<td colspan="2">'. $lang['DL_UL_SPEED'] .': '. $speed_up .'</span></td>
+			</tr>
+		';
+
+		$this->response['user_ratio'] = '
+            <th><a href="'. $bb_cfg['ratio_url_help'] .'" class="bold">'. $lang['USER_RATIO'] .'</a>:</th>
+			<td>'. $user_ratio .'</td>
+		';
 	break;
 }
 

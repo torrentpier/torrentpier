@@ -1352,25 +1352,19 @@ $lang['ALREADY_REG'] = 'Торрент уже зарегистрирован';
 $lang['NOT_TORRENT'] = 'Это не торрент-файл';
 $lang['ONLY_1_TOR_PER_POST'] = 'Вы не можете зарегистрировать еще один торрент для этого сообщения';
 $lang['ONLY_1_TOR_PER_TOPIC'] = 'Вы не можете зарегистрировать еще один торрент для этого топика';
-$lang['VIEWING_USER_BT_PROFILE'] = 'Торрент-профиль пользователя %s'; // %s is username
+$lang['VIEWING_USER_BT_PROFILE'] = 'Торрент-профиль'; // %s is username
 $lang['CUR_ACTIVE_DLS'] = 'Текущие активные торренты';
 
-$lang['UP_TOTAL'] = 'Всего отдано';
-$lang['DOWN_TOTAL'] = 'Всего скачано';
-$lang['BONUS'] = 'Бонус';
-$lang['TOTAL_RELEASED'] = 'Отдано на своих раздачах';
 $lang['USER_RATIO'] = 'Рейтинг';
 $lang['MAX_SPEED'] = 'Скорость';
+$lang['DOWNLOADED'] = 'Скачано';
+$lang['UPLOADED'] = 'Отдано';
+$lang['RELEASED'] = 'На своих';
+$lang['BONUS'] = 'Бонус';
 $lang['IT_WILL_BE_DOWN'] = 'начнет учитываться после того как будет скачано';
 
 $lang['SPMODE_FULL'] = 'Подробная статистика пиров';
 $lang['CURR_PASSKEY'] = 'Текущий passkey:';
-
-$lang['BT_RATIO'] = 'Рейтинг';
-$lang['DOWNLOADED'] = 'Скачано';
-$lang['UPLOADED'] = 'Отдано';
-$lang['RELEASED'] = 'На своих';
-$lang['BT_BONUS_UP'] = 'Бонус';
 
 $lang['TRACKER'] = 'Трекер';
 $lang['GALLERY'] = 'Галерея';
@@ -1629,7 +1623,7 @@ $lang['MEMBERSHIP_IN'] = 'Членство в группах';
 $lang['PARTY'] = 'Участник:';
 $lang['CANDIDATE'] = 'Кандидат:';
 $lang['INDIVIDUAL'] = 'Имеет индивидуальные права';
-$lang['GROUP_HIDDEN'] = 'У Вас нет прав на просмотр скрытых групп';
+$lang['GROUP_LIST_HIDDEN'] = 'У Вас нет прав на просмотр скрытых групп';
 
 
 $lang['USER_ACTIVATE'] = 'Активировать';

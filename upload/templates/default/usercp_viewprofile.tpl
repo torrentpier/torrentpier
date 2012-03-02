@@ -128,6 +128,34 @@ ajax.callback.group_membership = function(data) {
 </script>
 <!-- ENDIF / IS_AM -->
 
+<!-- IF TRAF_STATS -->	
+<script type="text/javascript">
+ajax.index_data = function(mode) {
+	ajax.exec({
+		action  : 'index_data',
+		mode    : mode,
+		user_id : {PROFILE_USER_ID}	
+	});
+}
+ajax.callback.index_data = function(data) {
+	$('#traf-stats-tbl').html(data.html);
+	$('#user_ratio').html(data.user_ratio);
+	$('#traf-stats-span').hide();
+	$('#traf-stats-tbl').show();
+	$('#user_ratio').show();
+	$("html:not(:animated)"+( ! $.browser.opera ? ",body:not(:animated)" : "")).animate({scrollTop: $('#traf-stats-tbl').position().top});
+}
+</script>
+<!-- ENDIF -->
+
+<!-- IF SHOW_PASSKEY -->
+<script type="text/javascript">
+ajax.callback.gen_passkey = function(data){
+	$('#passkey').text(data.passkey);
+};
+</script>
+<!-- ENDIF / SHOW_PASSKEY -->
+
 <a name="editprofile"></a>
 <h1 class="pagetitle">{L_VIEWING_PROFILE}</h1>
 
@@ -277,10 +305,13 @@ ajax.callback.group_membership = function(data) {
 					<span class="editable bold">{LAST_VISIT_TIME}</span>
 				</td>
 			</tr>
-
+			
 		    <tr>
 				<th class="nowrap">{L_LAST_ACTIVITY}:</th>
-				<td><b>{LAST_ACTIVITY_TIME}</b></td>
+				<td>
+				    <b>{LAST_ACTIVITY_TIME}</b>
+					<!-- IF TRAF_STATS --><span id="traf-stats-span">[ <a href="#" id="traf-stats-btn" class="med" onclick="ajax.index_data('get_traf_stats'); return false;">{L_VIEWING_USER_BT_PROFILE}</a> ]</span><!-- ENDIF -->
+				</td>
 			</tr>
 			<tr>
 				<th>{L_TOTAL_POSTS}:</th>
@@ -293,6 +324,26 @@ ajax.callback.group_membership = function(data) {
 					</p>
 				</td>
 			</tr>
+			
+			<tr id="user_ratio" <!-- IF TRAF_STATS -->style="display: none;"<!-- ENDIF -->>
+			    <th>{L_USER_RATIO}:</th>
+			    <td>
+				    <!-- IF DOWN_TOTAL_BYTES gt MIN_DL_BYTES -->
+				    <b id="u_ratio" class="gen">{USER_RATIO}</b>
+				    [<a class="gen" href="#" onclick="toggle_block('ratio-expl'); return false;">?</a>]
+				    <!-- ELSE -->
+				    <span class="med"><b>{L_NONE}</b> (DL < {MIN_DL_FOR_RATIO})</span>
+				    <!-- ENDIF -->
+					<!-- IF IS_ADMIN --> 
+					[ <a href="#" onclick="ajax.exec({ action: 'gen_passkey', user_id  : {PROFILE_USER_ID} }); return false;">Passkey</a>: <span id="passkey">{AUTH_KEY}</span> ]<!-- ENDIF -->
+			    </td>
+		    </tr>
+
+		    <tr id="ratio-expl" style="display: none;">
+			    <td colspan="2" class="med tCenter">
+				( {L_UP_TOTAL} <b class="seedmed">{UP_TOTAL}</b> + {L_TOTAL_RELEASED} <b class="seedmed">{RELEASED}</b> + {L_BONUS} <b class="seedmed">{UP_BONUS}</b> ) / {L_DOWNLOADED} <b class="leechmed">{DOWN_TOTAL}</b>
+			    </td>
+		    </tr>
 
 			<!-- IF LOCATION -->
 			<tr>
@@ -340,6 +391,30 @@ ajax.callback.group_membership = function(data) {
 				<td id="ignore_srv_load">{L_ACCESS_SRV_LOAD}: <b class="editable">{IGNORE_SRV_LOAD}</b></td>
 			</tr>
 			<!-- ENDIF -->
+			
+			<tr>
+			    <td colspan="2" class="pad_4">
+			    <table id="traf-stats-tbl" <!-- IF TRAF_STATS -->style="display: none;"<!-- ENDIF --> class="ratio bCenter borderless" cellspacing="1" width="200">
+			    <tr class="row3">
+				    <th>{L_DOWNLOADED}</th>
+				    <th>{L_UPLOADED}</th>
+				    <th>{L_RELEASED}</th>
+				    <th>{L_BONUS}</th>
+			    </tr>
+			    <tr class="row1">
+				    <td id="u_down_total"><span class="editable bold leechmed">{DOWN_TOTAL}</span></td>
+				    <td id="u_up_total"><span class="editable bold seedmed">{UP_TOTAL}</span></td>
+				    <td id="u_up_release"><span class="editable bold seedmed">{RELEASED}</span></td>
+				    <td id="u_up_bonus"><span class="editable bold seedmed">{UP_BONUS}</span></td>
+			    </tr>
+				<tr class="row5">
+				    <td colspan="2">{L_DL_DL_SPEED}: {SPEED_DOWN}</td>
+				    <td colspan="2">{L_DL_UL_SPEED}: {SPEED_UP}</td>
+			    </tr>				
+			    </table>
+			</td>
+		</tr>
+		
 		</table><!--/user_details-->
 
 	<!-- IF IS_AM --><span id="ip_list"></span><!-- ENDIF -->
@@ -367,82 +442,6 @@ ajax.callback.group_membership = function(data) {
 
 <!-- IF ALLOW_DLS -->
 <table class="bordered w100">
-<tr>
-	<th colspan="4" class="thHead">{L_VIEW_TOR_PROF}</th>
-</tr>
-<tr>
-	<td colspan="4" class="row2">
-
-		<table class="ratio_details borderless bCenter mrg_4">
-		<tr>
-			<th><b>{L_DOWN_TOTAL}:</b></th>
-			<td id="u_down_total" class="leech">
-				<span class="editable bold">{DOWN_TOTAL}</span>
-			</td>
-		</tr>
-		<tr>
-			<th width="50%"><b>{L_UP_TOTAL}:</b></th>
-			<td width="50%" id="u_up_total" class="seed">
-				<span class="editable bold">{UP_TOTAL}</span>
-			</td>
-		</tr>
-		<tr>
-			<th>{L_TOTAL_RELEASED}:</th>
-			<td id="u_up_release">
-				<span class="editable seed">{RELEASED}</span>
-			</td>
-		</tr>
-		<tr>
-			<th width="50%">{L_BONUS}:</th>
-			<td width="50%" id="u_up_bonus">
-				<span class="editable seed">{UP_BONUS}</span>
-			</td>
-		</tr>
-
-		<tr>
-			<th width="50%">{L_MAX_SPEED}:</th>
-			<td width="50%" id="u_up_bonus">
-				<span>{SPEED_UP}</span> / <span>{SPEED_DOWN}</span>
-			</td>
-		</tr>
-
-		<tr>
-			<th>{L_USER_RATIO}:</th>
-			<td id="u_ratio" class="gen">
-				<!-- IF DOWN_TOTAL_BYTES gt MIN_DL_BYTES -->
-				<b class="gen">{USER_RATIO}</b>&nbsp;
-				[<a class="gen" href="#" onclick="toggle_block('ratio-expl'); return false;">?</a>]
-				<!-- ELSE -->
-				<span class="med">{L_IT_WILL_BE_DOWN} <b>{MIN_DL_FOR_RATIO}</b></span>
-				<!-- ENDIF -->
-			</td>
-		</tr>
-		<tr id="ratio-expl" style="display: none;">
-			<td colspan="2" class="med tCenter">
-				(
-					{L_UP_TOTAL} <b class="seedmed">{UP_TOTAL}</b>
-					+ {L_TOTAL_RELEASED} <b class="seedmed">{RELEASED}</b>
-					+ {L_BONUS} <b class="seedmed">{UP_BONUS}</b>
-				) / {L_DOWNLOADED} <b class="leechmed">{DOWN_TOTAL}</b>
-			</td>
-		</tr>
-
-		<!-- IF SHOW_PASSKEY -->
-		<script type="text/javascript">
-		    ajax.callback.gen_passkey = function(data){
-			    $('#passkey').text(data.passkey);
-		    };
-		</script>
-		<tr>
-			<th><a href="#" onclick="ajax.exec({ action: 'gen_passkey', user_id  : {PROFILE_USER_ID} }); return false;">Passkey</a>:</th>
-			<td id="passkey">{AUTH_KEY}</td>
-		</tr>
-		<!-- ENDIF / SHOW_PASSKEY -->
-		</table><!--/ratio_details-->
-
-		</td>
-	</tr>
-
 	<tr>
 		<th colspan="4" class="thHead">{L_CUR_ACTIVE_DLS}</th>
 	</tr>

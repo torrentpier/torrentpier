@@ -1348,22 +1348,17 @@ $lang['ONLY_1_TOR_PER_TOPIC'] = 'You can register only one torrent in one topic'
 $lang['VIEWING_USER_BT_PROFILE'] = 'Viewing torrent-profile :: %s'; // %s is username
 $lang['CUR_ACTIVE_DLS'] = 'Currently active torrents';
 
-$lang['UP_TOTAL'] = 'Total uploaded';
-$lang['DOWN_TOTAL'] = 'Total downloaded';
-$lang['BONUS'] = 'Bonus';
-$lang['TOTAL_RELEASED'] = 'Total released';
 $lang['USER_RATIO'] = 'Ratio';
 $lang['MAX_SPEED'] = 'Speed';
-$lang['IT_WILL_BE_DOWN'] = 'it will start to be considered after it will be downloaded';
-
-$lang['CURR_PASSKEY'] = 'Current passkey:';
-$lang['SPMODE_FULL'] = 'Show peers in full details';
-
 $lang['BT_RATIO'] = 'Ratio';
 $lang['DOWNLOADED'] = 'Downloaded';
 $lang['UPLOADED'] = 'Uploaded';
 $lang['RELEASED'] = 'Released';
-$lang['BT_BONUS_UP'] = 'Bonus';
+$lang['BONUS'] = 'Bonus';
+$lang['IT_WILL_BE_DOWN'] = 'it will start to be considered after it will be downloaded';
+
+$lang['CURR_PASSKEY'] = 'Current passkey:';
+$lang['SPMODE_FULL'] = 'Show peers in full details';
 
 $lang['TRACKER'] = 'Tracker';
 $lang['GALLERY'] = 'Gallery';
@@ -1624,7 +1619,7 @@ $lang['MEMBERSHIP_IN'] = 'Membership in';
 $lang['PARTY'] = 'Party:';
 $lang['CANDIDATE'] = 'Candidate:';
 $lang['INDIVIDUAL'] = 'Has the individual rights';
-$lang['GROUP_HIDDEN'] = 'You are not authorized to view hidden groups';
+$lang['GROUP_LIST_HIDDEN'] = 'You are not authorized to view hidden groups';
 
 $lang['USER_ACTIVATE'] = 'Activate';
 $lang['USER_DEACTIVATE'] = 'Deactivate';

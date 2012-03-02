@@ -436,7 +436,7 @@ class ajax_common
 				}
 				else
 				{
-					$this->response['group_list_html'] = $lang['GROUP_HIDDEN'];
+					$this->response['group_list_html'] = $lang['GROUP_LIST_HIDDEN'];
 				}
 				break;
 

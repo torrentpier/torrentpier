@@ -1206,7 +1206,13 @@ function wbr ($text, $max_word_length = HTML_WBR_LENGTH)
 
 function get_bt_userdata ($user_id)
 {
-	return DB()->fetch_row("SELECT * FROM ". BB_BT_USERS ." WHERE user_id = ". (int) $user_id ." LIMIT 1");
+	return DB()->fetch_row("SELECT * FROM ". BB_BT_USERS ." WHERE user_id = ". (int) $user_id);
+}
+
+function get_bt_speed ($user_id)
+{
+	return DB()->fetch_row("SELECT SUM(speed_up) as speed_up, SUM(speed_down) as speed_down
+    FROM ". BB_BT_TRACKER ." WHERE user_id = ". (int) $user_id);
 }
 
 function get_bt_ratio ($btu)
@@ -1221,6 +1227,7 @@ function get_bt_ratio ($btu)
 function show_bt_userdata ($user_id)
 {
 	$btu = get_bt_userdata($user_id);
+	$bts = get_bt_speed($user_id);
 
 	$GLOBALS['template']->assign_vars(array(
 		'SHOW_BT_USERDATA' => true,
@@ -1233,6 +1240,8 @@ function show_bt_userdata ($user_id)
 		'MIN_DL_FOR_RATIO' => humn_size(MIN_DL_FOR_RATIO),
 		'MIN_DL_BYTES'     => MIN_DL_FOR_RATIO,
 		'AUTH_KEY'         => $btu['auth_key'],
+		'SPEED_UP'         => ($bts['speed_up']) ? humn_size($bts['speed_up']).'/s' : '0 KB/s',
+		'SPEED_DOWN'       => ($bts['speed_down']) ? humn_size($bts['speed_down']).'/s' : '0 KB/s',
 	));
 }
 
@@ -2721,24 +2730,28 @@ function create_magnet($infohash, $auth_key, $logged_in)
 	return '<a href="magnet:?xt=urn:btih:'. bin2hex($infohash) .'&tr='. urlencode($bb_cfg['bt_announce_url'] . $passkey_url) .'"><img src="images/magnet.png" width="12" height="12" border="0" /></a>';
 }
 
-function get_avatar ($avatar, $type, $allow_avatar = true, $height = false, $width = false)
+function get_avatar ($avatar, $type, $allow_avatar = true, $height = '', $width = '')
 {
     global $bb_cfg, $lang;
  
-    $user_avatar = '<img src="'. $bb_cfg['no_avatar'] .'" alt="" border="0" height="'. $height .'" width="'. $width .'" />';
+    $height = ($height != '') ? 'height="'. $height .'"' : '';
+	$width  = ($width != '') ? 'width="'. $width .'"' : '';
+	
+	$user_avatar = '<img src="'. $bb_cfg['no_avatar'] .'" alt="" border="0" '. $height .' '. $width .' />';
+	
  
     if ($allow_avatar)
     {
         switch($type)
         {
             case USER_AVATAR_UPLOAD:
-                $user_avatar = ( $bb_cfg['allow_avatar_upload'] ) ? '<img src="'. $bb_cfg['avatar_path'] .'/'. $avatar .'" alt="" border="0" height="'. $height .'" width="'. $width .'" />' : '';
+                $user_avatar = ( $bb_cfg['allow_avatar_upload'] ) ? '<img src="'. $bb_cfg['avatar_path'] .'/'. $avatar .'" alt="" border="0" '. $height .' '. $width .' />' : '';
                 break;
             case USER_AVATAR_REMOTE:
-                $user_avatar = ( $bb_cfg['allow_avatar_remote'] ) ? '<img src="'. $avatar .'" alt="" border="0" onload="imgFit(this, 100);" onClick="return imgFit(this, 100);" height="'. $height .'" width="'. $width .'" />' : '';
+                $user_avatar = ( $bb_cfg['allow_avatar_remote'] ) ? '<img src="'. $avatar .'" alt="" border="0" onload="imgFit(this, 100);" onClick="return imgFit(this, 100);" '. $height .' '. $width .' />' : '';
                 break;
             case USER_AVATAR_GALLERY:
-                $user_avatar = ( $bb_cfg['allow_avatar_local'] ) ? '<img src="'. $bb_cfg['avatar_gallery_path'] .'/'. $avatar .'" alt="" border="0" height="'. $height .'" width="'. $width .'" />' : '';
+                $user_avatar = ( $bb_cfg['allow_avatar_local'] ) ? '<img src="'. $bb_cfg['avatar_gallery_path'] .'/'. $avatar .'" alt="" border="0" '. $height .' '. $width .' />' : '';
                 break;
         }
     }

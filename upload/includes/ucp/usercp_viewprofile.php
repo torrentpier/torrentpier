@@ -136,6 +136,7 @@ $template->assign_vars(array(
 
 	'SHOW_ROLE'            => (IS_AM || $profile_user_id || $profiledata['user_active']),
 	'GROUP_MEMBERSHIP'     => false,
+	'TRAF_STATS'           => !(IS_ADMIN || $profile_user_id),	
 ));
 
 if (IS_ADMIN)
