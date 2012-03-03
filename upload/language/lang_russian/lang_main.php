@@ -1196,11 +1196,7 @@ $lang['INVALID_ANN_URL'] = 'Неправильный Аnnounce URL [%s]<br /><br
 $lang['PASSKEY_ERR_TOR_NOT_REG'] = 'Невозможно добавить passkey<br /><br />Торрент не зарегистрирован на трекере';
 $lang['PASSKEY_ERR_EMPTY'] = 'Невозможно добавить passkey<br /><br />Вам необходимо <a href="%s" target="_blank"><b>зайти в ваш форумный профиль</b></a> и сгенерировать passkey';
 $lang['BT_GEN_PASSKEY'] = 'Passkey';
-$lang['BT_GEN_PASSKEY_URL'] = 'Создать или изменить Passkey';
-$lang['BT_GEN_PASSKEY_EXPLAIN'] = 'Сгенерировать ваш личный id, который будет добавляться в торрент-файлы во время скачивания и затем использоваться трекером в качестве вашего аутентификатора.';
-$lang['BT_GEN_PASSKEY_EXPLAIN_2'] = '<b>Внимание!</b> После изменения или создания нового id вам будет необходимо <b>заново скачать все активные торренты!</b>';
-$lang['BT_GEN_PASSKEY_NEW'] = 'Вы уверены, что хотите создать новый passkey?';
-$lang['BT_GEN_PASSKEY_OK'] = 'Новый персональный идентификатор сгенеририван';
+$lang['BT_GEN_PASSKEY_NEW'] = "Внимание! После изменения нового passkey, Вам необходимо будет заново скачать все активные торренты! \n Вы уверены, что хотите создать новый passkey?";
 $lang['BT_NO_SEARCHABLE_FORUMS'] = 'Доступных для поиска форумов не найдено';
 
 $lang['SEEDS'] = 'Сидам';
@@ -1362,9 +1358,7 @@ $lang['UPLOADED'] = 'Отдано';
 $lang['RELEASED'] = 'На своих';
 $lang['BONUS'] = 'Бонус';
 $lang['IT_WILL_BE_DOWN'] = 'начнет учитываться после того как будет скачано';
-
 $lang['SPMODE_FULL'] = 'Подробная статистика пиров';
-$lang['CURR_PASSKEY'] = 'Текущий passkey:';
 
 $lang['TRACKER'] = 'Трекер';
 $lang['GALLERY'] = 'Галерея';

@@ -30,32 +30,12 @@ else
 	$template->assign_vars(array('EDIT_PROF' => false));
 }
 
-// Set tpl vars for bt_userdata
-if (IS_ADMIN || $profile_user_id == $userdata['user_id'])
-{
-    show_bt_userdata($profile_user_id);
-}
-
-if (IS_ADMIN)
-{
-	$template->assign_vars(array(
-		'SHOW_PASSKEY'   => true,
-		'CAN_EDIT_RATIO' => IS_ADMIN,
-	));
-}
-else
-{
-	$template->assign_vars(array(
-		'CAN_EDIT_RATIO' => false,
-	));
-}
-
 // Auth
 $not_auth_forums_sql = ($f = $user->get_not_auth_forums(AUTH_READ)) ? "AND f.forum_id NOT IN($f)" : '';
 $datastore->rm('cat_forums');
 
 // Get users active torrents
-$sql = 'SELECT f.forum_id, f.forum_name, t.topic_title, tor.size, tr.*
+$sql = 'SELECT f.forum_id, f.forum_name, t.topic_title, tor.tor_type, tor.size, tr.*
 	FROM '. BB_FORUMS .' f, '. BB_TOPICS .' t, '. BB_BT_TRACKER .' tr, '. BB_BT_TORRENTS ." tor
 	WHERE tr.user_id = $profile_user_id
 		AND tr.topic_id = tor.topic_id
@@ -99,11 +79,25 @@ if ($releasing_count = count($releasing))
 
 	for ($i=0; $i<$releasing_count; $i++)
 	{
+		$is_gold = '';
+		if ($tr_cfg['gold_silver_enabled'])
+		{
+		    if ($releasing[$i]['tor_type'] == TOR_TYPE_GOLD)
+		    {
+                $is_gold = '<img src="images/tor_gold.gif" width="16" height="15" title="'.$lang['GOLD'].'" />&nbsp;';
+            }
+            elseif ($releasing[$i]['tor_type'] == TOR_TYPE_SILVER)
+            {
+                $is_gold = '<img src="images/tor_silver.gif" width="16" height="15" title="'.$lang['SILVER'].'" />&nbsp;';
+            }
+        }
+
 		$template->assign_block_vars('released.releasedrow', array(
 			'FORUM_NAME'   => htmlCHR($releasing[$i]['forum_name']),
-			'TOPIC_TITLE'  => wbr($releasing[$i]['topic_title']),
+			'TOPIC_TITLE'  => ($releasing[$i]['update_time']) ? wbr($releasing[$i]['topic_title']) : '<s>'. wbr($releasing[$i]['topic_title']) .'</s>',
 			'U_VIEW_FORUM' => "viewforum.php?". POST_FORUM_URL .'='. $releasing[$i]['forum_id'],
 			'U_VIEW_TOPIC' => "viewtopic.php?". POST_TOPIC_URL .'='. $releasing[$i]['topic_id'] .'&amp;spmode=full#seeders',
+			'TOR_TYPE'   => $is_gold,
 		));
 	}
 }
@@ -118,11 +112,25 @@ if ($seeding_count = count($seeding))
 
 	for ($i=0; $i<$seeding_count; $i++)
 	{
+		$is_gold = '';
+		if ($tr_cfg['gold_silver_enabled'])
+		{
+		    if ($seeding[$i]['tor_type'] == TOR_TYPE_GOLD)
+		    {
+                $is_gold = '<img src="images/tor_gold.gif" width="16" height="15" title="'.$lang['GOLD'].'" />&nbsp;';
+            }
+            elseif ($seeding[$i]['tor_type'] == TOR_TYPE_SILVER)
+            {
+		        $is_gold = '<img src="images/tor_silver.gif" width="16" height="15" title="'.$lang['SILVER'].'" />&nbsp;';
+            }
+        }
+		
 		$template->assign_block_vars('seed.seedrow', array(
 			'FORUM_NAME'   => htmlCHR($seeding[$i]['forum_name']),
-			'TOPIC_TITLE'  => wbr($seeding[$i]['topic_title']),
+			'TOPIC_TITLE'  => ($seeding[$i]['update_time']) ? wbr($seeding[$i]['topic_title']) : '<s>'. wbr($seeding[$i]['topic_title']) .'</s>',
 			'U_VIEW_FORUM' => "viewforum.php?". POST_FORUM_URL .'='. $seeding[$i]['forum_id'],
 			'U_VIEW_TOPIC' => "viewtopic.php?". POST_TOPIC_URL .'='. $seeding[$i]['topic_id'] .'&amp;spmode=full#seeders',
+			'TOR_TYPE'   => $is_gold,
 		));
 	}
 }
@@ -137,15 +145,29 @@ if ($leeching_count = count($leeching))
 
 	for ($i=0; $i<$leeching_count; $i++)
 	{
+		$is_gold = '';
+		if ($tr_cfg['gold_silver_enabled'])
+		{
+		    if ($leeching[$i]['tor_type'] == TOR_TYPE_GOLD)
+		    {
+                $is_gold = '<img src="images/tor_gold.gif" width="16" height="15" title="'.$lang['GOLD'].'" />&nbsp;';
+            }
+            elseif ($leeching[$i]['tor_type'] == TOR_TYPE_SILVER)
+            {
+                $is_gold = '<img src="images/tor_silver.gif" width="16" height="15" title="'.$lang['SILVER'].'" />&nbsp;';
+            }
+        }
+		
 		$compl_size = ($leeching[$i]['remain'] && $leeching[$i]['size'] && $leeching[$i]['size'] > $leeching[$i]['remain']) ? ($leeching[$i]['size'] - $leeching[$i]['remain']) : 0;
 		$compl_perc = ($compl_size) ? floor($compl_size * 100 / $leeching[$i]['size']) : 0;
 
 		$template->assign_block_vars('leech.leechrow', array(
 			'FORUM_NAME'   => htmlCHR($leeching[$i]['forum_name']),
-			'TOPIC_TITLE'  => wbr($leeching[$i]['topic_title']),
+			'TOPIC_TITLE'  => ($leeching[$i]['update_time']) ? wbr($leeching[$i]['topic_title']) : '<s>'. wbr($leeching[$i]['topic_title']) .'</s>',
 			'U_VIEW_FORUM' => "viewforum.php?". POST_FORUM_URL .'='. $leeching[$i]['forum_id'],
 			'U_VIEW_TOPIC' => "viewtopic.php?". POST_TOPIC_URL .'='. $leeching[$i]['topic_id'] .'&amp;spmode=full#leechers',
 			'COMPL_PERC'   => $compl_perc,
+			'TOR_TYPE'   => $is_gold,
 		));
 	}
 }

@@ -955,21 +955,6 @@ $template->assign_vars(array(
 
 ));
 
-//bt
-if ($mode == 'editprofile' && $userdata['session_logged_in'])
-{
-	$template->assign_block_vars('switch_bittorrent', array());
-
-	$row = DB()->fetch_row("SELECT auth_key FROM ". BB_BT_USERS ." WHERE user_id = $pr_user_id");
-	$curr_passkey = ($row['auth_key']) ? $row['auth_key'] : '';
-
-	$template->assign_vars(array(
-		'S_GEN_PASSKEY'           => '<a href="#" onclick="ajax.exec({ action: \'gen_passkey\', user_id: '. $pr_user_id .' }); return false;">' . $lang['BT_GEN_PASSKEY_URL'] . '</a>',
-		'CURR_PASSKEY'            => $curr_passkey,
-	));
-}
-//bt end
-
 require(PAGE_HEADER);
 
 $template->pparse('body');

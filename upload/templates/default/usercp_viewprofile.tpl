@@ -86,12 +86,11 @@ $(document).ready(function(){
 <!-- IF IGNORE_SRV_LOAD_EDIT -->
 <var class="ajax-params">{action: "edit_user_profile", id: "ignore_srv_load", editableType: "yesno-radio"}</var>
 <!-- ENDIF -->
-<!-- IF CAN_EDIT_RATIO -->
 <var class="ajax-params">{action: "edit_user_profile", id: "u_up_total"}</var>
 <var class="ajax-params">{action: "edit_user_profile", id: "u_down_total"}</var>
 <var class="ajax-params">{action: "edit_user_profile", id: "u_up_release"}</var>
 <var class="ajax-params">{action: "edit_user_profile", id: "u_up_bonus"}</var>
-<!-- ENDIF -->
+
 <script type="text/javascript">
 ajax.callback.manage_user = function(data) {
 	if(data.info) alert(data.info);
@@ -139,11 +138,10 @@ ajax.index_data = function(mode) {
 }
 ajax.callback.index_data = function(data) {
 	$('#traf-stats-tbl').html(data.html);
-	$('#user_ratio').html(data.user_ratio);
+	$('#bt_user_ratio').html(data.user_ratio);
 	$('#traf-stats-span').hide();
 	$('#traf-stats-tbl').show();
-	$('#user_ratio').show();
-	$("html:not(:animated)"+( ! $.browser.opera ? ",body:not(:animated)" : "")).animate({scrollTop: $('#traf-stats-tbl').position().top});
+	$('#bt_user_ratio').show();
 }
 </script>
 <!-- ENDIF -->
@@ -325,23 +323,23 @@ ajax.callback.gen_passkey = function(data){
 				</td>
 			</tr>
 			
-			<tr id="user_ratio" <!-- IF TRAF_STATS -->style="display: none;"<!-- ENDIF -->>
+			<tr id="bt_user_ratio" <!-- IF TRAF_STATS -->style="display: none;"<!-- ENDIF -->>
 			    <th>{L_USER_RATIO}:</th>
 			    <td>
 				    <!-- IF DOWN_TOTAL_BYTES gt MIN_DL_BYTES -->
 				    <b id="u_ratio" class="gen">{USER_RATIO}</b>
 				    [<a class="gen" href="#" onclick="toggle_block('ratio-expl'); return false;">?</a>]
 				    <!-- ELSE -->
-				    <span class="med"><b>{L_NONE}</b> (DL < {MIN_DL_FOR_RATIO})</span>
+				    <span class="med" title="{L_IT_WILL_BE_DOWN} {MIN_DL_FOR_RATIO}"><b>{L_NONE}</b> (DL < {MIN_DL_FOR_RATIO})</span>
 				    <!-- ENDIF -->
-					<!-- IF IS_ADMIN --> 
-					[ <a href="#" onclick="ajax.exec({ action: 'gen_passkey', user_id  : {PROFILE_USER_ID} }); return false;">Passkey</a>: <span id="passkey">{AUTH_KEY}</span> ]<!-- ENDIF -->
+					<!-- IF SHOW_PASSKEY -->
+					[ <a href="#" onclick="ajax.exec({ action: 'gen_passkey', user_id  : {PROFILE_USER_ID} }); return false;">{L_BT_GEN_PASSKEY}</a>: <span class="med bold" id="passkey">{AUTH_KEY}</span> ]<!-- ENDIF -->
 			    </td>
 		    </tr>
 
 		    <tr id="ratio-expl" style="display: none;">
 			    <td colspan="2" class="med tCenter">
-				( {L_UP_TOTAL} <b class="seedmed">{UP_TOTAL}</b> + {L_TOTAL_RELEASED} <b class="seedmed">{RELEASED}</b> + {L_BONUS} <b class="seedmed">{UP_BONUS}</b> ) / {L_DOWNLOADED} <b class="leechmed">{DOWN_TOTAL}</b>
+				( {L_UPLOADED} <b class="seedmed">{UP_TOTAL}</b> + {L_RELEASED} <b class="seedmed">{RELEASED}</b> + {L_BONUS} <b class="seedmed">{UP_BONUS}</b> ) / {L_DOWNLOADED} <b class="leechmed">{DOWN_TOTAL}</b>
 			    </td>
 		    </tr>
 
@@ -391,7 +389,7 @@ ajax.callback.gen_passkey = function(data){
 				<td id="ignore_srv_load">{L_ACCESS_SRV_LOAD}: <b class="editable">{IGNORE_SRV_LOAD}</b></td>
 			</tr>
 			<!-- ENDIF -->
-			
+
 			<tr>
 			    <td colspan="2" class="pad_4">
 			    <table id="traf-stats-tbl" <!-- IF TRAF_STATS -->style="display: none;"<!-- ENDIF --> class="ratio bCenter borderless" cellspacing="1" width="200">
@@ -459,7 +457,7 @@ ajax.callback.gen_passkey = function(data){
 	<!-- BEGIN releasedrow -->
 	<tr class="row1">
 		<td class="tCenter pad_4"><a class="gen" href="{seed.releasedrow.U_VIEW_FORUM}">{seed.releasedrow.FORUM_NAME}</a></td>
-		<td colspan="2" class="pad_4"><a class="med" href="{seed.releasedrow.U_VIEW_TOPIC}"><b>{seed.releasedrow.TOPIC_TITLE}</b></a></td>
+		<td colspan="2" class="pad_4"><a class="med" href="{seed.releasedrow.U_VIEW_TOPIC}">{seed.releasedrow.TOR_TYPE}<b>{seed.releasedrow.TOPIC_TITLE}</b></a></td>
 	</tr>
 	<!-- END releasedrow -->
 	<!-- END released -->
@@ -481,7 +479,7 @@ ajax.callback.gen_passkey = function(data){
 	<!-- BEGIN seedrow -->
 	<tr class="row1">
 		<td class="tCenter pad_4"><a class="gen" href="{seed.seedrow.U_VIEW_FORUM}">{seed.seedrow.FORUM_NAME}</a></td>
-		<td colspan="2" class="pad_4"><a class="med" href="{seed.seedrow.U_VIEW_TOPIC}"><b>{seed.seedrow.TOPIC_TITLE}</b></a></td>
+		<td colspan="2" class="pad_4"><a class="med" href="{seed.seedrow.U_VIEW_TOPIC}">{seed.seedrow.TOR_TYPE}<b>{seed.seedrow.TOPIC_TITLE}</b></a></td>
 	</tr>
 	<!-- END seedrow -->
 	<!-- END seed -->
@@ -504,7 +502,7 @@ ajax.callback.gen_passkey = function(data){
 	<!-- BEGIN leechrow -->
 	<tr class="row1">
 		<td class="tCenter pad_4"><a class="gen" href="{leech.leechrow.U_VIEW_FORUM}">{leech.leechrow.FORUM_NAME}</a></td>
-		<td class="pad_4"><a class="med" href="{leech.leechrow.U_VIEW_TOPIC}"><b>{leech.leechrow.TOPIC_TITLE}</b></a></td>
+		<td class="pad_4"><a class="med" href="{leech.leechrow.U_VIEW_TOPIC}">{leech.leechrow.TOR_TYPE}<b>{leech.leechrow.TOPIC_TITLE}</b></a></td>
 		<td class="tCenter med"><b>{leech.leechrow.COMPL_PERC}</b></td>
 	</tr>
 	<!-- END leechrow -->

@@ -1206,13 +1206,7 @@ function wbr ($text, $max_word_length = HTML_WBR_LENGTH)
 
 function get_bt_userdata ($user_id)
 {
-	return DB()->fetch_row("SELECT * FROM ". BB_BT_USERS ." WHERE user_id = ". (int) $user_id);
-}
-
-function get_bt_speed ($user_id)
-{
-	return DB()->fetch_row("SELECT SUM(speed_up) as speed_up, SUM(speed_down) as speed_down
-    FROM ". BB_BT_TRACKER ." WHERE user_id = ". (int) $user_id);
+	return DB()->fetch_row("SELECT bt.*, SUM(tr.speed_up) as speed_up, SUM(tr.speed_down) as speed_down FROM ". BB_BT_USERS ." bt, ". BB_BT_TRACKER ." tr WHERE bt.user_id = ". (int) $user_id ." AND tr.user_id = ". (int) $user_id);
 }
 
 function get_bt_ratio ($btu)
@@ -1226,8 +1220,9 @@ function get_bt_ratio ($btu)
 
 function show_bt_userdata ($user_id)
 {
+	global $lang;
+	
 	$btu = get_bt_userdata($user_id);
-	$bts = get_bt_speed($user_id);
 
 	$GLOBALS['template']->assign_vars(array(
 		'SHOW_BT_USERDATA' => true,
@@ -1239,9 +1234,9 @@ function show_bt_userdata ($user_id)
 		'USER_RATIO'       => get_bt_ratio($btu),
 		'MIN_DL_FOR_RATIO' => humn_size(MIN_DL_FOR_RATIO),
 		'MIN_DL_BYTES'     => MIN_DL_FOR_RATIO,
-		'AUTH_KEY'         => $btu['auth_key'],
-		'SPEED_UP'         => ($bts['speed_up']) ? humn_size($bts['speed_up']).'/s' : '0 KB/s',
-		'SPEED_DOWN'       => ($bts['speed_down']) ? humn_size($bts['speed_down']).'/s' : '0 KB/s',
+		'AUTH_KEY'         => ($btu['auth_key']) ? $btu['auth_key'] : $lang['NONE'],
+		'SPEED_UP'         => ($btu['speed_up']) ? humn_size($btu['speed_up']).'/s' : '0 KB/s',
+		'SPEED_DOWN'       => ($btu['speed_down']) ? humn_size($btu['speed_down']).'/s' : '0 KB/s',
 	));
 }
 
@@ -2726,7 +2721,7 @@ function pad_with_space ($str)
 function create_magnet($infohash, $auth_key, $logged_in)
 {
 	global $bb_cfg, $userdata, $_GET;
-	$passkey_url = (!$logged_in || isset($_GET['no_passkey'])) ? '' : "?{$bb_cfg['passkey_key']}=$auth_key&";
+	$passkey_url = (!$logged_in || isset($_GET['no_passkey'])) ? '' : "?{$bb_cfg['passkey_key']}=$auth_key";
 	return '<a href="magnet:?xt=urn:btih:'. bin2hex($infohash) .'&tr='. urlencode($bb_cfg['bt_announce_url'] . $passkey_url) .'"><img src="images/magnet.png" width="12" height="12" border="0" /></a>';
 }
 
@@ -2856,5 +2851,3 @@ function profile_url($data)
 
 	return $profile;
 }
-
-

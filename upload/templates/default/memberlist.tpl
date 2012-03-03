@@ -1,7 +1,6 @@
 <h1 class="pagetitle">{PAGE_TITLE}</h1>
 
 <form method="post" action="{S_MODE_ACTION}" name="post">
-
 <table width="100%">
 	<tr>
 		<td align="right" class="med" nowrap="nowrap">{L_SORT_BY}:&nbsp;{S_MODE_SELECT}&nbsp;&nbsp;{L_ORDER}&nbsp;{S_ORDER_SELECT}&nbsp;&nbsp;<input type="submit" name="submit" value="{L_SUBMIT}" /></td>
@@ -15,6 +14,7 @@
 		<td align="right" class="med">{L_SORT_PER_LETTER}:&nbsp;{S_LETTER_SELECT}{S_LETTER_HIDDEN}</td>
 	</tr>
 </table>
+</form>
 
 <table class="forumline tablesorter">
 <thead>

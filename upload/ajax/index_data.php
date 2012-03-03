@@ -92,10 +92,9 @@ switch($mode)
 	case 'get_traf_stats':
 		$user_id = (int) $this->request['user_id'];
 		$btu = get_bt_userdata($user_id);
-		$bts = get_bt_speed($user_id);
 		
-		$speed_up = ($bts['speed_up']) ? humn_size($bts['speed_up']).'/s' : '0 KB/s';
-		$speed_down = ($bts['speed_down']) ? humn_size($bts['speed_down']).'/s' : '0 KB/s';
+		$speed_up = ($btu['speed_up']) ? humn_size($btu['speed_up']).'/s' : '0 KB/s';
+		$speed_down = ($btu['speed_down']) ? humn_size($btu['speed_down']).'/s' : '0 KB/s';
 		$user_ratio = ($btu['u_down_total'] > MIN_DL_FOR_RATIO) ? '<b class="gen">'. get_bt_ratio($btu) .'</b>' : $lang['IT_WILL_BE_DOWN'] .' <b>'. humn_size(MIN_DL_FOR_RATIO) .'</b>';
 		
 		$html = '

@@ -74,24 +74,6 @@ document.write('<input type="hidden" name="user_timezone" value="'+tz+'" />');
 	<td><a href="{U_RESET_AUTOLOGIN}">{L_RESET_AUTOLOGIN}</a><h6>{L_RESET_AUTOLOGIN_EXPL}</h6></td>
 </tr>
 <!-- ENDIF -->
-<!-- BEGIN switch_bittorrent -->
-<script type="text/javascript">
-ajax.callback.gen_passkey = function(data){
-	$('#passkey').text(data.passkey);
-};
-</script>
-<tr>
-	<th colspan="2"><a name="bittorrent"></a>TorrentPier</th>
-</tr>
-<tr>
-	<td>{L_BT_GEN_PASSKEY}<h6>{L_BT_GEN_PASSKEY_EXPLAIN}</h6></td>
-	<td class="med">{L_BT_GEN_PASSKEY_EXPLAIN_2}<br />{S_GEN_PASSKEY}</td>
-</tr>
-<tr>
-	<td>{L_CURR_PASSKEY}</td>
-	<td class="med" id="passkey">{CURR_PASSKEY}</td>
-</tr>
-<!-- END switch_bittorrent -->
 <tr>
 	<th colspan="2">{L_PROFILE_INFO}</th>
 </tr>

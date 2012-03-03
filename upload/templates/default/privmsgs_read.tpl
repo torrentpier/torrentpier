@@ -65,7 +65,15 @@
 
 <!-- IF QUICK_REPLY -->
 <div class="spacer_6"></div>
-
+<script type="text/javascript">
+ajax.callback.posts = function(data){
+    $('#view_message').show();
+	    $('.view-message').html(data.message_html);
+	    initPostBBCode('.view-message');
+			var maxH   = screen.height - 490;
+		$('.view-message').css({ maxHeight: maxH });
+};
+</script>
 <form action="{S_PRIVMSGS_ACTION}" method="post" name="post" onsubmit="if(checkForm(this)){ dis_submit_btn(); }else{ return false; }">
 {S_HIDDEN_FIELDS}
 
@@ -83,6 +91,9 @@
 </tr>
 <tr>
 	<td class="td2 row2 tCenter pad_4">
+		<div id="view_message" class="hidden">
+			<div class="tLeft view-message"></div>
+		</div>
 		<div class="quick_reply_box bCenter">
 			<!-- INCLUDE posting_editor.tpl -->
 		</div>

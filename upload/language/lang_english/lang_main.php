@@ -1189,11 +1189,7 @@ $lang['INVALID_ANN_URL'] = 'Invalid Announce URL [%s]<br /><br />must be <b>%s</
 $lang['PASSKEY_ERR_TOR_NOT_REG'] = 'Could not add passkey<br /><br />Torrent not registered on tracker';
 $lang['PASSKEY_ERR_EMPTY'] = 'Could not add passkey (passkey is empty)<br /><br />Go to <a href="%s" target="_blank"><b>your forum profile</b></a> and generate it';
 $lang['BT_GEN_PASSKEY'] = 'Passkey';
-$lang['BT_GEN_PASSKEY_URL'] = 'Generate or change Passkey';
-$lang['BT_GEN_PASSKEY_EXPLAIN'] = 'Generate your personal id for torrent tracker';
-$lang['BT_GEN_PASSKEY_EXPLAIN_2'] = "<b>Warning!</b> After generating new id you'll need to <b>redownload all active torrent's!</b>";
-$lang['BT_GEN_PASSKEY_NEW'] = 'Are you sure you want to create a new passkey?';
-$lang['BT_GEN_PASSKEY_OK'] = 'New personal identifier generated';
+$lang['BT_GEN_PASSKEY_NEW'] = "Attention! After changing the new passkey, you will need to re-download all the active torrents! \ n Are you sure you want to create a new passkey?";
 $lang['BT_NO_SEARCHABLE_FORUMS'] = 'No searchable forums found';
 
 $lang['SEEDS'] = 'Seed';
@@ -1356,8 +1352,6 @@ $lang['UPLOADED'] = 'Uploaded';
 $lang['RELEASED'] = 'Released';
 $lang['BONUS'] = 'Bonus';
 $lang['IT_WILL_BE_DOWN'] = 'it will start to be considered after it will be downloaded';
-
-$lang['CURR_PASSKEY'] = 'Current passkey:';
 $lang['SPMODE_FULL'] = 'Show peers in full details';
 
 $lang['TRACKER'] = 'Tracker';

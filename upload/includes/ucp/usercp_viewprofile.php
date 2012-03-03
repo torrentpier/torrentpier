@@ -133,10 +133,10 @@ $template->assign_vars(array(
 	'S_PROFILE_ACTION'     => 'profile.php',
 
 	'SIGNATURE'            => $signature,
-
+    'SHOW_PASSKEY'         => (IS_ADMIN || $profile_user_id),
 	'SHOW_ROLE'            => (IS_AM || $profile_user_id || $profiledata['user_active']),
 	'GROUP_MEMBERSHIP'     => false,
-	'TRAF_STATS'           => !(IS_ADMIN || $profile_user_id),	
+	'TRAF_STATS'           => !(IS_AM || $profile_user_id),
 ));
 
 if (IS_ADMIN)
@@ -190,6 +190,19 @@ if (!bf($profiledata['user_opt'], 'user_opt', 'allow_dls') || (IS_AM || $profile
     // Show users torrent-profile
     define('IN_VIEWPROFILE', TRUE);
     include(INC_DIR .'ucp/torrent_userprofile.php');
+}
+
+// Ajax bt_userdata
+if (IS_AM || $profile_user_id)
+{
+    show_bt_userdata($profiledata['user_id']);
+}
+else
+{
+	$template->assign_vars(array(
+		'DOWN_TOTAL_BYTES' => false,
+		'MIN_DL_BYTES' => false,
+	));
 }
 
 $template->assign_vars(array(
