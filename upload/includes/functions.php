@@ -1206,7 +1206,10 @@ function wbr ($text, $max_word_length = HTML_WBR_LENGTH)
 
 function get_bt_userdata ($user_id)
 {
-	return DB()->fetch_row("SELECT bt.*, SUM(tr.speed_up) as speed_up, SUM(tr.speed_down) as speed_down FROM ". BB_BT_USERS ." bt, ". BB_BT_TRACKER ." tr WHERE bt.user_id = ". (int) $user_id ." AND tr.user_id = ". (int) $user_id);
+	return DB()->fetch_row("SELECT bt.*, SUM(tr.speed_up) as speed_up, SUM(tr.speed_down) as speed_down 
+                            FROM      ". BB_BT_USERS   ." bt
+                            LEFT JOIN ". BB_BT_TRACKER ." tr ON (bt.user_id = tr.user_id)
+                            WHERE bt.user_id = ". (int) $user_id);
 }
 
 function get_bt_ratio ($btu)

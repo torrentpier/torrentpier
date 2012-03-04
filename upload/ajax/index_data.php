@@ -98,7 +98,7 @@ switch($mode)
 		$user_ratio = ($btu['u_down_total'] > MIN_DL_FOR_RATIO) ? '<b class="gen">'. get_bt_ratio($btu) .'</b>' : $lang['IT_WILL_BE_DOWN'] .' <b>'. humn_size(MIN_DL_FOR_RATIO) .'</b>';
 		
 		$html = '
-            <tr class="row3">
+            <tr class="row2">
 				<th>'. $lang['DOWNLOADED'] .'</th>
 				<th>'. $lang['UPLOADED'] .'</th>
 				<th>'. $lang['RELEASED'] .'</th>

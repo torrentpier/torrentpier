@@ -332,8 +332,14 @@ ajax.callback.gen_passkey = function(data){
 				    <!-- ELSE -->
 				    <span class="med" title="{L_IT_WILL_BE_DOWN} {MIN_DL_FOR_RATIO}"><b>{L_NONE}</b> (DL < {MIN_DL_FOR_RATIO})</span>
 				    <!-- ENDIF -->
+				
 					<!-- IF SHOW_PASSKEY -->
-					[ <a href="#" onclick="ajax.exec({ action: 'gen_passkey', user_id  : {PROFILE_USER_ID} }); return false;">{L_BT_GEN_PASSKEY}</a>: <span class="med bold" id="passkey">{AUTH_KEY}</span> ]<!-- ENDIF -->
+					[ {L_BT_PASSKEY}:  <span id="passkey-btn"><a class="med" href="#" onclick="$('#passkey-gen').show(); $('#passkey-btn').hide(); return false;">{L_BT_PASSKEY_VIEW}</a></span>					
+					<span id="passkey-gen" class="med" style="display: none;">
+						<b id="passkey" class="med bold">{AUTH_KEY}</b>&nbsp;
+				        <a href="#" onclick="ajax.exec({ action: 'gen_passkey', user_id  : {PROFILE_USER_ID} }); return false;">{L_BT_GEN_PASSKEY}</a>
+					</span> ]
+					<!-- ENDIF -->
 			    </td>
 		    </tr>
 
@@ -392,26 +398,26 @@ ajax.callback.gen_passkey = function(data){
 
 			<tr>
 			    <td colspan="2" class="pad_4">
-			    <table id="traf-stats-tbl" <!-- IF TRAF_STATS -->style="display: none;"<!-- ENDIF --> class="ratio bCenter borderless" cellspacing="1" width="200">
-			    <tr class="row3">
-				    <th>{L_DOWNLOADED}</th>
-				    <th>{L_UPLOADED}</th>
-				    <th>{L_RELEASED}</th>
-				    <th>{L_BONUS}</th>
-			    </tr>
-			    <tr class="row1">
-				    <td id="u_down_total"><span class="editable bold leechmed">{DOWN_TOTAL}</span></td>
-				    <td id="u_up_total"><span class="editable bold seedmed">{UP_TOTAL}</span></td>
-				    <td id="u_up_release"><span class="editable bold seedmed">{RELEASED}</span></td>
-				    <td id="u_up_bonus"><span class="editable bold seedmed">{UP_BONUS}</span></td>
-			    </tr>
-				<tr class="row5">
-				    <td colspan="2">{L_DL_DL_SPEED}: {SPEED_DOWN}</td>
-				    <td colspan="2">{L_DL_UL_SPEED}: {SPEED_UP}</td>
-			    </tr>				
-			    </table>
-			</td>
-		</tr>
+			        <table id="traf-stats-tbl" <!-- IF TRAF_STATS -->style="display: none;"<!-- ENDIF --> class="ratio bCenter borderless" cellspacing="1" width="200">
+			        <tr class="row2">
+				        <th>{L_DOWNLOADED}</th>
+				        <th>{L_UPLOADED}</th>
+				        <th>{L_RELEASED}</th>
+				        <th>{L_BONUS}</th>
+			        </tr>
+			        <tr class="row1">
+				        <td id="u_down_total"><span class="editable bold leechmed">{DOWN_TOTAL}</span></td>
+				        <td id="u_up_total"><span class="editable bold seedmed">{UP_TOTAL}</span></td>
+				        <td id="u_up_release"><span class="editable bold seedmed">{RELEASED}</span></td>
+				        <td id="u_up_bonus"><span class="editable bold seedmed">{UP_BONUS}</span></td>
+			        </tr>
+			    	<tr class="row5">
+				        <td colspan="2">{L_DL_DL_SPEED}: {SPEED_DOWN}</td>
+				        <td colspan="2">{L_DL_UL_SPEED}: {SPEED_UP}</td>
+			        </tr>				
+			        </table>
+			    </td>
+		    </tr>
 		
 		</table><!--/user_details-->
 
