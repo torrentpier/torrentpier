@@ -52,8 +52,8 @@ $bb_cfg = $tr_cfg = $page_cfg = array();
 
 // Increase number of revision after update
 $bb_cfg['tp_version'] = '2.4 (beta)';
-$bb_cfg['tp_release_state'] = 'R380';
-$bb_cfg['tp_release_date'] = '04-03-2012';
+$bb_cfg['tp_release_state'] = 'R381';
+$bb_cfg['tp_release_date'] = '06-03-2012';
 
 // Database
 $charset  = 'utf8';
@@ -474,8 +474,6 @@ $bb_cfg['ad_blocks'] = array(
 );
 
 // Misc
-define('BOT_UID', -746);
-
 define('LOADAVG',   function_exists('get_loadavg') ? get_loadavg() : 0);
 define('MEM_USAGE', function_exists('memory_get_usage'));
 

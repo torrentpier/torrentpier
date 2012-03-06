@@ -618,6 +618,7 @@ else
 		if ($new_topics) $SQL['WHERE'][] = "t.topic_time > $lastvisit";
 		if ($prev_days)  $SQL['WHERE'][] = "$tbl.$time_field > ". $time_opt[$time_val]['sql'];
 		if ($my_posts)   $SQL['WHERE'][] = "p.poster_id = $poster_id_val";
+		if ($my_posts && $user->id == $poster_id_val)   $SQL['WHERE'][] = "p.user_post = 1";
 		if ($my_topics)  $SQL['WHERE'][] = "t.topic_poster = $poster_id_val";
 
 		if ($text_match_sql)

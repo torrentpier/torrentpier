@@ -1206,10 +1206,11 @@ function wbr ($text, $max_word_length = HTML_WBR_LENGTH)
 
 function get_bt_userdata ($user_id)
 {
-	return DB()->fetch_row("SELECT bt.*, SUM(tr.speed_up) as speed_up, SUM(tr.speed_down) as speed_down 
+	return DB()->fetch_row("SELECT bt.*, SUM(tr.speed_up) as speed_up, SUM(tr.speed_down) as speed_down
                             FROM      ". BB_BT_USERS   ." bt
                             LEFT JOIN ". BB_BT_TRACKER ." tr ON (bt.user_id = tr.user_id)
-                            WHERE bt.user_id = ". (int) $user_id);
+                            WHERE bt.user_id = ". (int) $user_id ."
+                            GROUP BY bt.user_id");
 }
 
 function get_bt_ratio ($btu)
@@ -1224,7 +1225,7 @@ function get_bt_ratio ($btu)
 function show_bt_userdata ($user_id)
 {
 	global $lang;
-	
+
 	$btu = get_bt_userdata($user_id);
 
 	$GLOBALS['template']->assign_vars(array(
@@ -2731,13 +2732,13 @@ function create_magnet($infohash, $auth_key, $logged_in)
 function get_avatar ($avatar, $type, $allow_avatar = true, $height = '', $width = '')
 {
     global $bb_cfg, $lang;
- 
+
     $height = ($height != '') ? 'height="'. $height .'"' : '';
 	$width  = ($width != '') ? 'width="'. $width .'"' : '';
-	
+
 	$user_avatar = '<img src="'. $bb_cfg['no_avatar'] .'" alt="" border="0" '. $height .' '. $width .' />';
-	
- 
+
+
     if ($allow_avatar)
     {
         switch($type)

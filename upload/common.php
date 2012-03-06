@@ -39,6 +39,7 @@ define('TOR_TYPE_GOLD',       1);
 define('TOR_TYPE_SILVER',     2);
 
 define('ANONYMOUS', -1);
+define('BOT_UID',   -746);
 
 // DBS
 class DBS
@@ -1762,7 +1763,7 @@ switch ($bb_cfg['datastore_type'])
 	case 'apc':
 		$datastore = new datastore_apc();
 		break;
-	
+
 	case 'filecache':
 	default: $datastore = new datastore_file($bb_cfg['cache']['db_dir'] . 'datastore/');
 }

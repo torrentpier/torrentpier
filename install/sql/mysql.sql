@@ -917,6 +917,7 @@ CREATE TABLE `bb_posts` (
   `post_edit_count` smallint(5) unsigned NOT NULL default '0',
   `post_attachment` tinyint(1) NOT NULL default '0',
   `post_reported` tinyint(1) NOT NULL default '0',
+  `user_post` tinyint(1) NOT NULL default '1',
   PRIMARY KEY  (`post_id`),
   KEY `topic_id` (`topic_id`),
   KEY `poster_id` (`poster_id`),
@@ -928,7 +929,7 @@ CREATE TABLE `bb_posts` (
 -- Дамп данных таблицы `bb_posts`
 --
 
-INSERT INTO `bb_posts` VALUES (1, 1, 1, 2, 1309421220, '', '', 0, 0, 0, 0);
+INSERT INTO `bb_posts` VALUES (1, 1, 1, 2, 1309421220, '', '', 0, 0, 0, 0, 1);
 
 -- --------------------------------------------------------
 
