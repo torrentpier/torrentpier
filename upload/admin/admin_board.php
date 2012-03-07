@@ -50,6 +50,8 @@ else
 
 		if (isset($_POST['submit']) && $row['config_value'] != $new[$config_name])
 		{
+			if($config_name == 'seed_bonus_points' || $config_name == 'seed_bonus_release') $new[$config_name] = serialize($new[$config_name]);
+
 			bb_update_config(array($config_name => $new[$config_name]));
 		}
 	}
@@ -92,14 +94,31 @@ switch($mode)
 		    'NETWORK_NEWS_COUNT' => $new['network_news_count'],
 		    'NETWORK_NEWS_FORUM_ID' => $new['network_news_forum_id'],
 		    'WHOIS_INFO' => $new['whois_info'],
-		    'SHOW_MOD_INDEX' => $new['show_mod_index'],			
-		    'BIRTHDAY_ENABLED' => $new['birthday_enabled'],			
+		    'SHOW_MOD_INDEX' => $new['show_mod_index'],
+		    'BIRTHDAY_ENABLED' => $new['birthday_enabled'],
 		    'L_BIRTHDAY_YEARS' => $lang['DELTA_TIME']['INTERVALS']['year'][2],
 		    'BIRTHDAY_MAX_AGE' => $new['birthday_max_age'],
 		    'BIRTHDAY_MIN_AGE' => $new['birthday_min_age'],
-		    'BIRTHDAY_CHECK_DAY' => $new['birthday_check_day'],		
-		    'PREMOD'     => $new['premod'],		
+		    'BIRTHDAY_CHECK_DAY' => $new['birthday_check_day'],
+		    'PREMOD'     => $new['premod'],
+		    'SEED_BONUS_ENABLED' => $new['seed_bonus_enabled'],
+		    'SEED_BONUS_TOR_SIZE' => $new['seed_bonus_tor_size'],
+		    'SEED_BONUS_USER_REGDATE' => $new['seed_bonus_user_regdate'],
 	    ));
+
+	    if($new['seed_bonus_points'] && $new['seed_bonus_release'])
+	    {		    $seed_bonus = unserialize($new['seed_bonus_points']);
+		    $seed_release = unserialize($new['seed_bonus_release']);
+
+		    foreach($seed_bonus as $i => $row)
+		    {
+			    if(!$row || !$seed_release[$i]) continue;
+
+			    $template->assign_block_vars('seed_bonus', array(
+		            'RELEASE' => $seed_release[$i],
+		            'POINTS'  => $row,
+			    ));
+		    }	    }
 	break;
 
 	default:

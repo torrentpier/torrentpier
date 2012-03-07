@@ -3,9 +3,14 @@
 <!-- ENDIF -->
 
 <div class="nav">
-	<p style="float: left;"><a href="{U_INDEX}">{T_INDEX}</a></p>
-	<!-- IF LOGGED_IN --><p style="float: right;"><a href="#" class="small normal" onclick="setCookie('{COOKIE_MARK}', 'all_forums'); window.location.reload(); return false;">{L_MARK_ALL_FORUMS_READ}</a></p><!-- ENDIF -->
-	<div class="clear"></div>
+	<a href="{U_INDEX}">{T_INDEX}</a>
+	<!-- IF not DL_CONTROLS -->
+	&nbsp;&middot;&nbsp;
+	<span id="show-edit-btn"><a href="#">Редактировать список</a></span>
+	<span id="edit-sel-topics" style="display: none;"><a href="#" class="bold adm" onclick="$('input.topic-chbox').trigger('click'); return false;">отметить/инвертировать</a></span>
+	<!-- ENDIF -->
+	&nbsp;&middot;&nbsp;
+	<!-- IF LOGGED_IN --><a href="#" class="small normal" onclick="setCookie('{COOKIE_MARK}', 'all_forums'); window.location.reload(); return false;">{L_MARK_ALL_FORUMS_READ}</a><!-- ENDIF -->
 </div>
 
 <!-- IF DISPLAY_AS_POSTS -->
@@ -69,14 +74,75 @@
 
 <!-- IF DL_CONTROLS -->
 <form method="post" action="{DL_ACTION}">
+<!-- ELSE -->
+<script type="text/javascript">
+ajax.in_edit_mode = false;
+
+$(document).ready(function(){
+	$('#show-edit-btn a').click(function(){
+		show_edit_options();
+		$('#show-edit-btn').html( $('#edit-sel-topics').html() );
+		return false;
+	});
+
+
+	$('td.topic_id').click(function(){
+		if (!ajax.in_edit_mode) {
+			$('#show-edit-btn a').click();
+			$(this).find('input').click();
+		}
+	});
+});
+
+function show_edit_options ()
+{
+	$('td.topic_id').each(function(){
+		var topic_id = $(this).attr('id');
+		var input = '<input id="sel-'+ topic_id +'" type="checkbox" value="'+ topic_id +'" class="topic-chbox" />';
+		$(this).html(input);
+	});
+
+	$('input.topic-chbox').click(function(){
+		if ($.browser.mozilla) {
+			$('#tr-'+this.value+' td').toggleClass('hl-selected-row');
+		}	else {
+			$('#tr-'+this.value).toggleClass('hl-selected-row');
+		}
+	});
+	$('#pagination a.pg').each(function(){ this.href += '&mod=1'; });
+	$('#ed-list-desc').hide();
+	$('#mod-action-cell').append( $('#mod-action-content')[0] );
+	$('#mod-action-row, #mod-action-content').show();
+
+	$('#mod-action').submit(function(){
+		var $form = $(this);
+		$('input[name~=topic_id_list]', $form).remove();
+		$('input.topic-chbox:checked').each(function(){
+			$form.append('<input type="hidden" name="topic_id_list[]" value="'+ this.value +'" />');
+			$('#tr-'+this.value).remove();
+		});
+	});
+	ajax.in_edit_mode = true;
+}
+</script>
+
+<div id="mod-action-content" style="display: none;">
+<form id="mod-action" method="post" action="search.php" target="_blank">
+	<input type="submit" name="del_my_post" value="Удалить выбранные темы из списка" class="bold" onclick="if (!window.confirm( this.value +'?' )){ return false };" />
+</form>
+</div>
+
+<style type="text/css">
+td.topic_id { cursor: pointer; }
+</style>
 <!-- ENDIF -->
 
 <table class="forumline forum">
 <col class="row1">
 <col class="row1" width="25%">
-<col class="row1" width="75%">
+<col class="row4" width="75%">
 <col class="row1">
-<col class="row1">
+<col class="row4">
 <col class="row1">
 <tr>
 	<th>&nbsp;</th>
@@ -87,8 +153,8 @@
 	<th>{L_LASTPOST}</th>
 </tr>
 <!-- BEGIN t -->
-<tr class="tCenter">
-	<td>
+<tr id="tr-{t.TOPIC_ID}" class="tCenter">
+	<td id="{t.TOPIC_ID}" class="topic_id">
 		<!-- IF DL_CONTROLS -->
 			<input type="checkbox" name="dl_topics_id_list[]" value="{t.TOPIC_ID}" />
 		<!-- ELSE -->
@@ -96,7 +162,7 @@
 		<!-- ENDIF -->
 	</td>
 	<td><a href="{FORUM_URL}{t.FORUM_ID}" class="gen">{t.FORUM_NAME}</a></td>
-	<td class="tLeft" style="padding: 2px 5px 3px 4px;">
+		<td class="tLeft" style="padding: 2px 5px 3px 4px;">
 		<div class="topictitle" onmousedown="$p('tid_{t.TOPIC_ID}').className='opened'">
 			<!-- IF t.IS_UNREAD --><a href="{TOPIC_URL}{t.HREF_TOPIC_ID}{NEWEST_URL}">{ICON_NEWEST_REPLY}</a><!-- ENDIF -->
 			<!-- IF t.STATUS == MOVED --><span class="topicMoved">{L_TOPIC_MOVED}</span>
@@ -120,8 +186,8 @@
 	</td>
 </tr>
 <!-- END t -->
-<tr>
-	<td class="catBottom" colspan="6">
+<tr id="mod-action-row">
+	<td colspan="6" id="mod-action-cell" class="row2">
 	<!-- IF DL_CONTROLS -->
 		<input type="submit" name="dl_set_will" value="{L_DL_WILL}" class="liteoption" />
 		<input type="submit" name="dl_set_down" value="{L_DL_DOWN}" class="liteoption" />
@@ -130,9 +196,12 @@
 		<input type="hidden" name="redirect_type" value="search" />
 		<input type="hidden" name="mode" value="set_topics_dl_status" />
 	<!-- ELSE -->
-		&nbsp;
+		<span id="ed-list-desc" class="small">Для удаления тем из списка нажмите на иконку слева от названия любого раздела</span>
 	<!-- ENDIF -->
 	</td>
+</tr>
+<tr>
+	<td class="row2" colspan="6">&nbsp;</td>
 </tr>
 </table>
 

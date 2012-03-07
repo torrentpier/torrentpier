@@ -14,6 +14,35 @@ $page_cfg['load_tpl_vars'] = array(
 
 $user->session_start(array('req_login' => $bb_cfg['disable_search_for_guest']));
 
+if (isset($_POST['del_my_post']))
+{
+	$template->assign_var('BB_DIE_APPEND_MSG', '
+		<a href="#" onclick="window.close(); window.opener.focus();">Закрыть и вернуться к списку "Мои сообщения"</a>
+		<br /><br />
+		<a href="index.php">Вернуться на главную страницу</a>
+	');
+
+	if (IS_GUEST)
+	{
+		redirect('index.php');
+	}
+	if (empty($_POST['topic_id_list']) OR !$topic_csv = get_id_csv($_POST['topic_id_list']))
+	{
+		bb_die($lang['NONE_SELECTED']);
+	}
+
+	DB()->query("UPDATE ". BB_POSTS ." SET user_post = 0 WHERE poster_id = {$user->id} AND topic_id IN($topic_csv)");
+
+	if (DB()->affected_rows())
+	{
+		bb_die('Выбранные темы ['. count($_POST['topic_id_list']) .' шт.] удалены из списка "Мои сообщения"');
+	}
+	else
+	{
+		bb_die("Темы не найдены в списке ваших сообщений (возможно вы их уже удалили)");
+	}
+}
+
 $tracking_topics = get_tracks('topic');
 $tracking_forums = get_tracks('forum');
 

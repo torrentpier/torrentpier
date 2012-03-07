@@ -424,6 +424,47 @@
 	<td><h4>{L_BIRTHDAY_CHECK_DAY}</h4></td>
 	<td><input class="post" type="text" size="25" maxlength="100" name="birthday_check_day" value="{BIRTHDAY_CHECK_DAY}" />&nbsp;{L_DAYS}</td>
 </tr>
+
+<tr class="row3 med">
+	<td class="bold tCenter" colspan="2">{L_SEED_BONUS}</td>
+</tr>
+<tr>
+	<td><h4>{L_SEED_BONUS}</h4></td>
+	<td>
+	    <label><input type="radio" name="seed_bonus_enabled" value="1" <!-- IF SEED_BONUS_ENABLED -->checked="checked"<!-- ENDIF --> />{L_ENABLED}</label>&nbsp;&nbsp;
+		<label><input type="radio" name="seed_bonus_enabled" value="0" <!-- IF not SEED_BONUS_ENABLED -->checked="checked"<!-- ENDIF --> />{L_DISABLED}</label>
+	</td>
+</tr>
+<!-- BEGIN seed_bonus -->
+<tr id="seed_bonus_{seed_bonus.RELEASE}">
+	<td>{L_SEED_BONUS_ADD}</td>
+	<td>
+	    <input class="post" type="text" size="5" name="seed_bonus_release[]" value="{seed_bonus.RELEASE}" />&nbsp;{L_SEED_BONUS_RELEASE} <br />
+		<input class="post" type="text" size="5" name="seed_bonus_points[]" value="{seed_bonus.POINTS}" />&nbsp;{L_SEED_BONUS_POINTS} &nbsp;
+		<input onclick="$('#seed_bonus_{seed_bonus.RELEASE}').remove();" class="post" type="button" size="2" value="{L_DELETE}" />
+	</td>
+</tr>
+<!-- END seed_bonus -->
+<tr class="row3 med"><td colspan="2"></td></tr>
+<tr id="seed_bonus">
+	<td>{L_SEED_BONUS_ADD}</td>
+	<td>
+	    <input class="post" type="text" size="5" name="seed_bonus_release[]" value="" />&nbsp;{L_SEED_BONUS_RELEASE} <br />
+		<input class="post" type="text" size="5" name="seed_bonus_points[]" value="" />&nbsp;{L_SEED_BONUS_POINTS}
+		<input onclick="$('#seed_bonus').clone().appendTo('.seed_bonus');" class="post" type="button" size="2" value="+" />
+		<input onclick="$('#seed_bonus').remove();" class="post" type="button" size="2" value="-" />
+	</td>
+</tr>
+<tbody class="seed_bonus"></tbody>
+<tr class="row3 med"><td colspan="2"></td></tr>
+<tr>
+	<td>{L_SEED_BONUS_TOR_SIZE}</td>
+	<td><input class="post" type="text" size="25" maxlength="100" name="seed_bonus_tor_size" value="{SEED_BONUS_TOR_SIZE}" />&nbsp;GB</td>
+</tr>
+<tr>
+	<td>{L_SEED_BONUS_USER_REGDATA}</td>
+	<td><input class="post" type="text" size="25" maxlength="100" name="seed_bonus_user_regdate" value="{SEED_BONUS_USER_REGDATE}" />&nbsp;{L_DAYS}</td>
+</tr>
 <!-- ENDIF / CONFIG_MODS -->
 <tr>
 	<td class="catBottom" colspan="2">

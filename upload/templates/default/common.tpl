@@ -6,6 +6,7 @@
 	<table class="forumline message">
 		<tr><th>{MESSAGE_TITLE}</th></tr>
 		<tr><td>{MESSAGE_TEXT}</td></tr>
+		<!-- IF BB_DIE_APPEND_MSG --><tr><td>{BB_DIE_APPEND_MSG}</td></tr><!-- ENDIF -->
 	</table>
 
 	<!-- IF IN_ADMIN --><br /><br /><!-- ELSE --><div class="spacer_10"></div><!-- ENDIF -->
