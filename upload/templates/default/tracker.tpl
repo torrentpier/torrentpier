@@ -273,14 +273,6 @@ ajax.callback.view_post = function(data) {
 <!-- ENDIF / LOGGED_IN -->
 
 <a name="results"></a>
-<style type="text/css">
-.seed-leech { padding-left: 1px; padding-right: 0; }
-.tr_tm { margin-top: 2px; font-size: 10px; color: #676767; }
-.ch { font-style: italic; color: #0080FF; }
-#fs-sel-cat option.cat-title { font-weight: bold; color: #005A88; background: #F5F5F5; }
-tr.hl-tr:hover td { background-color: #F8F8F8 !important; }
-</style>
-
 <table class="forumline tablesorter" id="tor-tbl">
 <thead>
 <tr>

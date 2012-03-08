@@ -459,7 +459,7 @@
 <tr class="row3 med"><td colspan="2"></td></tr>
 <tr>
 	<td>{L_SEED_BONUS_TOR_SIZE}</td>
-	<td><input class="post" type="text" size="25" maxlength="100" name="seed_bonus_tor_size" value="{SEED_BONUS_TOR_SIZE}" />&nbsp;GB</td>
+	<td><input class="post" type="text" size="25" maxlength="100" name="seed_bonus_tor_size" value="{SEED_BONUS_TOR_SIZE}" />&nbsp;{L_GB}</td>
 </tr>
 <tr>
 	<td>{L_SEED_BONUS_USER_REGDATA}</td>

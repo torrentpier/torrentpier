@@ -61,6 +61,9 @@ $lang['FORUM_CFG_EXPL'] = 'Forum config';
 $lang['BT_SELECT_FORUMS'] = 'Forum options:';
 $lang['BT_SELECT_FORUMS_EXPL'] = 'hold down <i>Ctrl</i> while selecting multiple forums';
 
+$lang['REG_TORRENTS'] = 'Register torrents';
+$lang['ALLOWED'] = 'Resolved';
+$lang['DISALLOWED'] = 'Prohibited';
 $lang['ALLOW_REG_TRACKER'] = 'Allowed forums for registering .torrents on tracker';
 $lang['ALLOW_PORNO_TOPIC'] = 'Allow post porno topics';
 $lang['SHOW_DL_BUTTONS'] = 'Show buttons for manually changing DL-status';

@@ -217,10 +217,8 @@ class ads_common
 define('AUTH_LIST_ALL', 0);
 
 // forum's ACL types (phpbb_forums: auth_view, auth_read... values)
-#      'AUTH_ALL'    0
 define('AUTH_REG',   1);
 define('AUTH_ACL',   2);
-#      'AUTH_MOD'    3
 define('AUTH_ADMIN', 5);
 
 // forum_perm bitfields - backward compatible with auth($type)
@@ -539,7 +537,7 @@ class Date_Delta
 		60        => 'seconds',   // set granularity to "seconds" if delta less then 1 minute
 		10800     => 'minutes',   // 3 hours
 		259200    => 'hours',     // 3 days
-		31363200  => 'mday',      // 12 months + 1d+12h
+		31363200  => 'mday',      // 12 months
 		311040000 => 'mon',       // 10 years
 	);
 	var $intervals = array();
@@ -979,7 +977,7 @@ function bt_show_ip ($ip, $port = '')
 {
 	global $bb_cfg;
 
-	if (IS_MOD || IS_ADMIN)
+	if (IS_AM)
 	{
 		$ip = decode_ip($ip);
 		$ip .= ($port) ? ":$port" : '';
@@ -995,7 +993,7 @@ function bt_show_port ($port)
 {
 	global $bb_cfg;
 
-	if (IS_MOD || IS_ADMIN)
+	if (IS_AM)
 	{
 		return $port;
 	}
@@ -2759,7 +2757,8 @@ function get_avatar ($avatar, $type, $allow_avatar = true, $height = '', $width 
 
 function set_die_append_msg ($forum_id = null, $topic_id = null)
 {
-	global $lang, $template;
+	global $userdata, $lang, $template;
+	
 	$msg = '';
 	$msg .= ($topic_id) ? '<p class="mrg_10"><a href="viewtopic.php?t='. $topic_id .'">'. $lang['CLICK_RETURN_TOPIC'] .'</a></p>' : '';
 	$msg .= ($forum_id) ? '<p class="mrg_10"><a href="viewforum.php?f='. $forum_id .'">'. $lang['CLICK_RETURN_FORUM'] .'</a></p>' : '';

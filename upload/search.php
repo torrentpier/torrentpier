@@ -17,9 +17,9 @@ $user->session_start(array('req_login' => $bb_cfg['disable_search_for_guest']));
 if (isset($_POST['del_my_post']))
 {
 	$template->assign_var('BB_DIE_APPEND_MSG', '
-		<a href="#" onclick="window.close(); window.opener.focus();">Закрыть и вернуться к списку "Мои сообщения"</a>
+		<a href="#" onclick="window.close(); window.opener.focus();">'. $lang['GOTO_MY_MESSAGE'] .'</a>
 		<br /><br />
-		<a href="index.php">Вернуться на главную страницу</a>
+		<a href="index.php">'. $lang['INDEX_RETURN'] .'</a>
 	');
 
 	if (IS_GUEST)
@@ -35,12 +35,30 @@ if (isset($_POST['del_my_post']))
 
 	if (DB()->affected_rows())
 	{
-		bb_die('Выбранные темы ['. count($_POST['topic_id_list']) .' шт.] удалены из списка "Мои сообщения"');
+		//bb_die('Выбранные темы ['. count($_POST['topic_id_list']) .' шт.] удалены из списка "Мои сообщения"');
+		bb_die($lang['DEL_MY_MESSAGE']);
 	}
 	else
 	{
-		bb_die("Темы не найдены в списке ваших сообщений (возможно вы их уже удалили)");
+		bb_die($lang['NO_TOPICS_MY_MESSAGE']);
 	}
+}
+else if(isset($_POST['add_my_post']))
+{
+	$template->assign_var('BB_DIE_APPEND_MSG', '
+		<a href="#" onclick="window.close(); window.opener.focus();">'. $lang['GOTO_MY_MESSAGE'] .'</a>
+		<br /><br />
+		<a href="index.php">'. $lang['INDEX_RETURN'] .'</a>
+	');
+
+	if (IS_GUEST)
+	{
+		redirect('index.php');
+	}
+
+	DB()->query("UPDATE ". BB_POSTS ." SET user_post = 1 WHERE poster_id = {$user->id}");
+
+	redirect("search.php?u={$user->id}");
 }
 
 $tracking_topics = get_tracks('topic');
@@ -569,7 +587,7 @@ if ($post_mode)
 		));
 
 		$quote_btn = true;
-		$edit_btn = $delpost_btn = $ip_btn = (IS_MOD || IS_ADMIN);
+		$edit_btn = $delpost_btn = $ip_btn = (IS_AM);
 
 		// Topic posts block
 		foreach ($topic_posts as $row_num => $post)
@@ -647,7 +665,21 @@ else
 		if ($new_topics) $SQL['WHERE'][] = "t.topic_time > $lastvisit";
 		if ($prev_days)  $SQL['WHERE'][] = "$tbl.$time_field > ". $time_opt[$time_val]['sql'];
 		if ($my_posts)   $SQL['WHERE'][] = "p.poster_id = $poster_id_val";
-		if ($my_posts && $user->id == $poster_id_val)   $SQL['WHERE'][] = "p.user_post = 1";
+		if ($my_posts && $user->id == $poster_id_val)
+		{
+			$SQL['WHERE'][] = "p.user_post = 1";
+
+			if($userdata['user_posts'])
+			{
+				$template->assign_var('BB_DIE_APPEND_MSG', '
+					<form id="mod-action" method="POST" action="search.php">
+					    <input type="submit" name="add_my_post" value="'. $lang['RESTORE_ALL_POSTS'] .'" class="bold" onclick="if (!window.confirm( this.value +\'?\' )){ return false };" />
+					</form>
+					<br /><br />
+					<a href="index.php">'. $lang['INDEX_RETURN'] .'</a>
+				');
+			}	
+		}
 		if ($my_topics)  $SQL['WHERE'][] = "t.topic_poster = $poster_id_val";
 
 		if ($text_match_sql)
@@ -779,13 +811,14 @@ if ($items_display)
     generate_pagination($url, $items_count, $per_page, $start);
 
 	$template->assign_vars(array(
-		'PAGE_TITLE'  => $lang['SEARCH'],
+		'PAGE_TITLE'       => $lang['SEARCH'],
 
 		'SEARCH_MATCHES'   => ($items_count) ? sprintf($lang['FOUND_SEARCH_MATCHES'], $items_count) : '',
 		'DISPLAY_AS_POSTS' => $post_mode,
 
-		'DL_CONTROLS'   => ($dl_search && $dl_user_id_val == $user_id),
-		'DL_ACTION'     => "dl_list.php",
+		'DL_CONTROLS'      => ($dl_search && $dl_user_id_val == $user_id),
+		'DL_ACTION'        => 'dl_list.php',
+		'MY_POSTS'         => ($my_posts && $user->id == $poster_id_val),
 	));
 
 	print_page('search_results.tpl');
@@ -798,8 +831,7 @@ redirect(basename(__FILE__));
 //
 function fetch_search_ids ($sql, $search_type = SEARCH_TYPE_POST, $redirect_to_result = UA_IE)
 {
-	global $lang, $search_id, $session_id;
-	global $items_found, $per_page;
+	global $lang, $search_id, $session_id, $items_found, $per_page;
 
 	$items_found = array();
 	foreach (DB()->fetch_rowset($sql) as $row)

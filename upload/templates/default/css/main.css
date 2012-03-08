@@ -594,6 +594,7 @@ a.selfMod, a.selfMod:visited { color: #0000FF; }
 
 .view-message { border: 1px #A5AFB4 solid; padding: 4px; margin: 6px; overflow: auto; }
 .birthday  { margin: 3px 0; padding: 2px 4px;  max-height: 200px; overflow: auto;}
+td.topic_id { cursor: pointer; }
 
 table.mod_ip    { background: #F9F9F9; border: 1px solid #A5AFB4; border-collapse: separate;}
 table.mod_ip td { padding: 2px 5px; white-space: normal; font-size: 11px; }
@@ -851,7 +852,11 @@ fieldset.attach { width: 95%; margin: 14px auto; padding: 2px; clear: both; }
  * ---------------------------------- */
 a.tr-dl { font-weight: bold; }
 a.tr-dl:visited { color: #5493B4; font-weight: normal; }
-
+.seed-leech { padding-left: 1px; padding-right: 0; }
+.tr_tm { margin-top: 2px; font-size: 10px; color: #676767; }
+.ch { font-style: italic; color: #0080FF; }
+#fs-sel-cat option.cat-title { font-weight: bold; color: #005A88; background: #F5F5F5; }
+tr.hl-tr:hover td { background-color: #F8F8F8 !important; }
 /* ================================================================ *
      Images
  * ================================================================ */

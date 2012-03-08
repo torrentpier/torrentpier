@@ -3,7 +3,7 @@
 define('IN_PHPBB', true);
 define('BB_SCRIPT', 'modcp');
 define('BB_ROOT', './');
-require(BB_ROOT ."common.php");
+require(BB_ROOT .'common.php');
 require(INC_DIR .'bbcode.php');
 require(INC_DIR .'functions_post.php');
 require_once(INC_DIR .'functions_admin.php');
@@ -145,7 +145,7 @@ $user->session_start(array('req_login' => true));
 // Check if user did or did not confirm. If they did not, forward them to the last page they were on
 if (isset($_POST['cancel']) || IS_GUEST)
 {
-	$redirect = "index.php";
+	$redirect = 'index.php';
 
 	if ($topic_id || $forum_id)
 	{
@@ -156,7 +156,7 @@ if (isset($_POST['cancel']) || IS_GUEST)
 
 // Start auth check
 $is_auth = auth(AUTH_ALL, $forum_id, $userdata);
-$is_moderator = (IS_MOD || IS_ADMIN);
+$is_moderator = (IS_AM);
 
 if ($mode == 'ip')
 {

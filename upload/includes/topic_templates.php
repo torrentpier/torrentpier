@@ -88,7 +88,7 @@ if ($topic_tpl = DB()->fetch_row($sql))
 			'TORRENT_EXT_LEN'   => strlen(TORRENT_EXT) + 1,
 			'U_VIEW_FORUM'      => append_sid(FORUM_URL . $post_info['forum_id']),
 
-			'REGULAR_TOPIC_BUTTON' => true, # (IS_MOD || IS_ADMIN),
+			'REGULAR_TOPIC_BUTTON' => true, # (IS_AM),
 			'REGULAR_TOPIC_HREF'   => append_sid("posting.php?mode=newtopic&". POST_FORUM_URL .'='. $post_info['forum_id']),
 
 			'L_TITLE'           => $lang['TPL']['RELEASE_NAME'],

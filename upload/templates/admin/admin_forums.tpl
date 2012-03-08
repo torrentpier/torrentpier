@@ -36,7 +36,7 @@ function toggle_cat_list (val)
 	</tr>
 	<tr>
 		<td class="row1">{L_FORUM_DESC}</td>
-		<td class="row2"><textarea style="width: 96%;" rows="5" wrap="virtual" name="forumdesc" class="post">{DESCRIPTION}</textarea></td>
+		<td class="row2"><textarea style="width: 96%;" rows="2" wrap="virtual" name="forumdesc" class="post">{DESCRIPTION}</textarea></td>
 	</tr>
 	<tr>
 		<td class="row1">{L_SF_PARENT_FORUM}</td>
@@ -47,27 +47,24 @@ function toggle_cat_list (val)
 		<td class="row2"><select name="c">{S_CAT_LIST}</select></td>
 	</tr>
 	<tr id="show_on_index" class="{SHOW_ON_INDEX_CLASS}">
-		<td class="row1">{L_SF_SHOW_ON_INDEX}</td>
-		<td class="row2"><label for="show_on_index1"><input type="radio" name="show_on_index" id="show_on_index1" value="1" <!-- IF SHOW_ON_INDEX == 1 -->checked="checked"<!-- ENDIF -->  /> {L_YES}&nbsp;</label><label for="show_on_index2">&nbsp;<input type="radio" name="show_on_index" id="show_on_index2" value="0" <!-- IF SHOW_ON_INDEX == 0 -->checked="checked"<!-- ENDIF --> /> {L_NO} &nbsp;</label></td>
+		<td class="row1">{L_SF_SHOW_ON_INDEX}</td>	
+		<td class="row2">
+		    <label><input type="radio" name="show_on_index" value="1" <!-- IF SHOW_ON_INDEX -->checked="checked"<!-- ENDIF -->  />{L_YES}</label>&nbsp;&nbsp;
+			<label><input type="radio" name="show_on_index" value="0" <!-- IF not SHOW_ON_INDEX -->checked="checked"<!-- ENDIF --> />{L_NO}</label>
+		</td>		
 	</tr>
 	<tr>
 		<td class="row1">{L_FORUM_STATUS}</td>
 		<td class="row2"><select name="forumstatus">{S_STATUS_LIST}</select></td>
 	</tr>
 	<tr>
-		<td class="row1">{L_FORUM_PRUNING}</td>
-		<td class="row2">
-		<table class="borderless">
-		<tr>
-			<td align="right">{L_ENABLED}</td>
-			<td><input type="checkbox" name="prune_enable" value="1" {S_PRUNE_ENABLED} /></td>
-			</tr>
-			<tr>
-			<td align="right">{L_PRUNE_DAYS}</td>
-			<td>&nbsp;<input type="text" name="prune_days" value="{PRUNE_DAYS}" size="5" class="post" />&nbsp;{L_DAYS}</td>
-			</tr>
-		</table></td>
-	</tr>
+	    <td class="row1">{L_REG_TORRENTS}</td>
+	    <td class="row2">{ALLOW_REG_TRACKER} &nbsp; {L_SELF_MODERATED}: {SELF_MODERATED}  &nbsp; {L_ALLOW_PORNO_TOPIC}: {ALLOW_PORNO_TOPIC}</td>
+    </tr>
+	<tr>
+	    <td class="row1">{L_FORUM_PRUNING}</td>
+	    <td class="row2">{L_PRUNE_DAYS} <input type="text" name="prune_days" value="{PRUNE_DAYS}" size="4" class="post" /> {L_DAYS} &nbsp;<i class="med">(0 = {L_DISABLED})</span></td>
+    </tr>
 	<tr>
 		<td class="row1">{L_SORT_BY}</td>
 		<td class="row2">
@@ -76,7 +73,9 @@ function toggle_cat_list (val)
 		</td>
 	</tr>
 	<tr>
-		<td class="catBottom" colspan="2"><input type="submit" name="submit" value="{S_SUBMIT_VALUE}" class="mainoption" /></td>
+		<td class="catBottom" colspan="2">
+		    <input type="submit" name="submit" value="{S_SUBMIT_VALUE}" class="mainoption" />
+		</td>
 	</tr>
 </table>
 </form>
@@ -202,7 +201,7 @@ function hl (id, on)
 		<td class="small">{L_PRUNE}</td>
 	</tr>
 	<!-- BEGIN forumrow -->
-	<tr class="row1" onmouseover="hl('fname_{catrow.forumrow.FORUM_ID}', 1);" onmouseout="hl('fname_{catrow.forumrow.FORUM_ID}', 0);">
+	<tr class="row1 hl-tr" onmouseover="hl('fname_{catrow.forumrow.FORUM_ID}', 1);" onmouseout="hl('fname_{catrow.forumrow.FORUM_ID}', 0);">
 		<td class="gen" align="center"><a class="gen" title="{L_MOVE_UP}" href="{catrow.forumrow.U_FORUM_MOVE_UP}"><b>&nbsp;&#8593;&nbsp;</b></a><a class="gen" title="{L_MOVE_DOWN}" href="{catrow.forumrow.U_FORUM_MOVE_DOWN}"><b>&nbsp;&#8595;&nbsp;</b></a></td>
 		<td width="100%" {catrow.forumrow.SF_PAD}><a {catrow.forumrow.FORUM_DESC} class="{catrow.forumrow.FORUM_NAME_CLASS}" href="{catrow.forumrow.U_VIEWFORUM}" target="_new"><!-- IF catrow.forumrow.SHOW_ON_INDEX --><b><!-- ENDIF --><span id="fname_{catrow.forumrow.FORUM_ID}">{catrow.forumrow.FORUM_NAME}</span><!-- IF catrow.forumrow.SHOW_ON_INDEX --></b><!-- ENDIF --></a>&nbsp;&nbsp;<em class="med" style="color: grey">{L_TOPICS_SHORT}:</em> <span class="med">{catrow.forumrow.NUM_TOPICS}</span> <em class="med" style="color: grey">{L_POSTS_SHORT}:</em> <span class="med">{catrow.forumrow.NUM_POSTS}</span></td>
 		<td class="med" align="center"><a class="med" href="{catrow.forumrow.U_FORUM_EDIT}">&nbsp;{L_EDIT}&nbsp;</a></td>

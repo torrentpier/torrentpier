@@ -4,17 +4,16 @@
 
 <div class="nav">
 	<a href="{U_INDEX}">{T_INDEX}</a>
-	<!-- IF not DL_CONTROLS -->
+	<!-- IF MY_POSTS -->
 	&nbsp;&middot;&nbsp;
-	<span id="show-edit-btn"><a href="#">Редактировать список</a></span>
-	<span id="edit-sel-topics" style="display: none;"><a href="#" class="bold adm" onclick="$('input.topic-chbox').trigger('click'); return false;">отметить/инвертировать</a></span>
+	<span id="show-edit-btn"><a href="#">{L_EDIT_MY_MESSAGE_LIST}</a></span>
+	<span id="edit-sel-topics" style="display: none;"><a href="#" class="bold adm" onclick="$('input.topic-chbox').trigger('click'); return false;">{L_SELECT_INVERT}</a></span>
 	<!-- ENDIF -->
 	&nbsp;&middot;&nbsp;
-	<!-- IF LOGGED_IN --><a href="#" class="small normal" onclick="setCookie('{COOKIE_MARK}', 'all_forums'); window.location.reload(); return false;">{L_MARK_ALL_FORUMS_READ}</a><!-- ENDIF -->
+	<!-- IF LOGGED_IN --><a href="#" class="med normal" onclick="setCookie('{COOKIE_MARK}', 'all_forums'); window.location.reload(); return false;">{L_MARK_ALL_FORUMS_READ}</a><!-- ENDIF -->
 </div>
 
 <!-- IF DISPLAY_AS_POSTS -->
-
 <table class="topic" cellpadding="0" cellspacing="0">
 <tr>
 	<th class="thHead td1">{L_AUTHOR}</th>
@@ -73,8 +72,8 @@
 <!-- ELSE / start of !DISPLAY_AS_POSTS -->
 
 <!-- IF DL_CONTROLS -->
-<form method="post" action="{DL_ACTION}">
-<!-- ELSE -->
+<form method="POST" action="{DL_ACTION}">
+<!-- ELSEIF MY_POSTS -->
 <script type="text/javascript">
 ajax.in_edit_mode = false;
 
@@ -127,14 +126,17 @@ function show_edit_options ()
 </script>
 
 <div id="mod-action-content" style="display: none;">
-<form id="mod-action" method="post" action="search.php" target="_blank">
-	<input type="submit" name="del_my_post" value="Удалить выбранные темы из списка" class="bold" onclick="if (!window.confirm( this.value +'?' )){ return false };" />
+<form id="mod-action" method="POST" action="{U_SEARCH}" target="_blank">
+	<table class="borderless pad_0" cellpadding="0" cellspacing="0">
+	    <tr>
+		    <td class="pad_4">
+		        <input type="submit" name="del_my_post" value="{L_DEL_LIST_MY_MESSAGE}" class="bold" onclick="if (!window.confirm( this.value +'?' )){ return false };" />
+	        </td>
+			<td class="med" style="padding: 0 8px;">{L_DEL_LIST_MY_MESSAGE_INFO}</td>
+		</tr>
+	</table>
 </form>
 </div>
-
-<style type="text/css">
-td.topic_id { cursor: pointer; }
-</style>
 <!-- ENDIF -->
 
 <table class="forumline forum">
@@ -186,22 +188,26 @@ td.topic_id { cursor: pointer; }
 	</td>
 </tr>
 <!-- END t -->
+<!-- IF MY_POSTS -->
 <tr id="mod-action-row">
 	<td colspan="6" id="mod-action-cell" class="row2">
-	<!-- IF DL_CONTROLS -->
+	    <span id="ed-list-desc" class="small">{L_DEL_LIST_INFO}</span>
+	</td>
+</tr>
+<!-- ENDIF -->
+<tr>
+	<td class="row2" colspan="6">
+		<!-- IF DL_CONTROLS -->
 		<input type="submit" name="dl_set_will" value="{L_DL_WILL}" class="liteoption" />
 		<input type="submit" name="dl_set_down" value="{L_DL_DOWN}" class="liteoption" />
 		<input type="submit" name="dl_set_complete" value="{L_DL_COMPLETE}" class="liteoption" />
 		<input type="submit" name="dl_set_cancel" value="{L_DL_CANCEL}" class="liteoption" />
 		<input type="hidden" name="redirect_type" value="search" />
 		<input type="hidden" name="mode" value="set_topics_dl_status" />
-	<!-- ELSE -->
-		<span id="ed-list-desc" class="small">Для удаления тем из списка нажмите на иконку слева от названия любого раздела</span>
-	<!-- ENDIF -->
+		<!-- ELSE -->
+		&nbsp;
+		<!-- ENDIF -->
 	</td>
-</tr>
-<tr>
-	<td class="row2" colspan="6">&nbsp;</td>
 </tr>
 </table>
 
