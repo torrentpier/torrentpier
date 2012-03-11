@@ -907,15 +907,6 @@ function delete_user_sessions ($user_id)
 	DB()->query("DELETE FROM ". BB_SESSIONS ." WHERE session_user_id IN($user_id)");
 }
 
-function append_sid ($url, $non_html_amp = false)
-{
-	if (defined('SID_GET') && !strpos($url, SID_GET))
-	{
-		$url .= ((strpos($url, '?') !== false) ? (($non_html_amp) ? '&' : '&amp;') : '?') . SID_GET;
-	}
-	return $url;
-}
-
 // deprecated
 function session_begin ($userdata, $page_id = 0, $enable_autologin = false, $auto_created = false)
 {

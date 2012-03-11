@@ -147,7 +147,7 @@ if ($mode)
 
 				'S_FORUM_DISPLAY_SORT_LIST'		=> $forum_display_sort_list,
 				'S_FORUM_DISPLAY_ORDER_LIST'	=> $forum_display_order_list,
-				'S_FORUM_ACTION' => append_sid("admin_forums.php"),
+				'S_FORUM_ACTION' => "admin_forums.php",
 				'S_HIDDEN_FIELDS' => $s_hidden_fields,
 				'S_SUBMIT_VALUE' => $buttonvalue,
 				'S_CAT_LIST' => $catlist,
@@ -229,7 +229,7 @@ if ($mode)
 			renumber_order('forum', $cat_id);
 			$datastore->update('cat_forums');
 
-			$message = $lang['FORUMS_UPDATED'] . "<br /><br />" . sprintf($lang['CLICK_RETURN_FORUMADMIN'], "<a href=\"" . "admin_forums.php?c=$cat_id" . "\">", "</a>") . "<br /><br />" . sprintf($lang['CLICK_RETURN_ADMIN_INDEX'], "<a href=\"" . append_sid("index.php?pane=right") . "\">", "</a>");
+			$message = $lang['FORUMS_UPDATED'] . "<br /><br />" . sprintf($lang['CLICK_RETURN_FORUMADMIN'], "<a href=\"" . "admin_forums.php?c=$cat_id" . "\">", "</a>") . "<br /><br />" . sprintf($lang['CLICK_RETURN_ADMIN_INDEX'], "<a href=\"index.php?pane=right\">", "</a>");
 			message_die(GENERAL_MESSAGE, $message);
 
 			break;
@@ -322,7 +322,7 @@ if ($mode)
 
 			$message = $lang['FORUMS_UPDATED'] . "<br /><br />";
 			$message .= ($fix) ? "$fix<br /><br />" : '';
-			$message .= sprintf($lang['CLICK_RETURN_FORUMADMIN'], "<a href=\"" . "admin_forums.php?c=$cat_id" . "\">", "</a>") . "<br /><br />" . sprintf($lang['CLICK_RETURN_ADMIN_INDEX'], "<a href=\"" . append_sid("index.php?pane=right") . "\">", "</a>");
+			$message .= sprintf($lang['CLICK_RETURN_FORUMADMIN'], "<a href=\"" . "admin_forums.php?c=$cat_id" . "\">", "</a>") . "<br /><br />" . sprintf($lang['CLICK_RETURN_ADMIN_INDEX'], "<a href=\"index.php?pane=right\">", "</a>");
 			message_die(GENERAL_MESSAGE, $message);
 
 			break;
@@ -351,7 +351,7 @@ if ($mode)
 
 			$datastore->update('cat_forums');
 
-			$message = $lang['FORUMS_UPDATED'] . "<br /><br />" . sprintf($lang['CLICK_RETURN_FORUMADMIN'], "<a href=\"" . append_sid("admin_forums.php") . "\">", "</a>") . "<br /><br />" . sprintf($lang['CLICK_RETURN_ADMIN_INDEX'], "<a href=\"" . append_sid("index.php?pane=right") . "\">", "</a>");
+			$message = $lang['FORUMS_UPDATED'] . "<br /><br />" . sprintf($lang['CLICK_RETURN_FORUMADMIN'], "<a href=\"admin_forums.php\">", "</a>") . "<br /><br />" . sprintf($lang['CLICK_RETURN_ADMIN_INDEX'], "<a href=\"index.php?pane=right\">", "</a>");
 			message_die(GENERAL_MESSAGE, $message);
 
 			break;
@@ -409,7 +409,7 @@ if ($mode)
 
 			$datastore->update('cat_forums');
 
-			$message = $lang['FORUMS_UPDATED'] . "<br /><br />" . sprintf($lang['CLICK_RETURN_FORUMADMIN'], "<a href=\"" . append_sid("admin_forums.php") . "\">", "</a>") . "<br /><br />" . sprintf($lang['CLICK_RETURN_ADMIN_INDEX'], "<a href=\"" . append_sid("index.php?pane=right") . "\">", "</a>");
+			$message = $lang['FORUMS_UPDATED'] . "<br /><br />" . sprintf($lang['CLICK_RETURN_FORUMADMIN'], "<a href=\"admin_forums.php\">", "</a>") . "<br /><br />" . sprintf($lang['CLICK_RETURN_ADMIN_INDEX'], "<a href=\"index.php?pane=right\">", "</a>");
 			message_die(GENERAL_MESSAGE, $message);
 
 			break;
@@ -503,7 +503,7 @@ if ($mode)
 			update_user_level('all');
 			$datastore->update('cat_forums');
 
-			$message = $lang['FORUMS_UPDATED'] . "<br /><br />" . sprintf($lang['CLICK_RETURN_FORUMADMIN'], "<a href=\"" . append_sid("admin_forums.php") . "\">", "</a>") . "<br /><br />" . sprintf($lang['CLICK_RETURN_ADMIN_INDEX'], "<a href=\"" . append_sid("index.php?pane=right") . "\">", "</a>");
+			$message = $lang['FORUMS_UPDATED'] . "<br /><br />" . sprintf($lang['CLICK_RETURN_FORUMADMIN'], "<a href=\"admin_forums.php\">", "</a>") . "<br /><br />" . sprintf($lang['CLICK_RETURN_ADMIN_INDEX'], "<a href=\"index.php?pane=right\">", "</a>");
 			message_die(GENERAL_MESSAGE, $message);
 
 			break;
@@ -582,7 +582,7 @@ if ($mode)
 
 			$message = $lang['FORUMS_UPDATED'] . "<br /><br />";
 			$message .= ($fix) ? "$fix<br /><br />" : '';
-			$message .= sprintf($lang['CLICK_RETURN_FORUMADMIN'], "<a href=\"" . append_sid("admin_forums.php") . "\">", "</a>") . "<br /><br />" . sprintf($lang['CLICK_RETURN_ADMIN_INDEX'], "<a href=\"" . append_sid("index.php?pane=right") . "\">", "</a>");
+			$message .= sprintf($lang['CLICK_RETURN_FORUMADMIN'], "<a href=\"admin_forums.php\">", "</a>") . "<br /><br />" . sprintf($lang['CLICK_RETURN_ADMIN_INDEX'], "<a href=\"index.php?pane=right\">", "</a>");
 			message_die(GENERAL_MESSAGE, $message);
 
 			break;
@@ -716,7 +716,7 @@ if (!$mode || $show_main_page)
 	$template->assign_vars(array(
 		'TPL_FORUMS_LIST' => true,
 
-		'S_FORUM_ACTION' => append_sid("admin_forums.php"),
+		'S_FORUM_ACTION' => "admin_forums.php",
 		'L_FORUM_TITLE' => $lang['FORUM_ADMIN_MAIN']
 	));
 

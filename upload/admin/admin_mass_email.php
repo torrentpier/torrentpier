@@ -110,7 +110,7 @@ if ( isset($_POST['submit']) )
 		$emailer->send();
 		$emailer->reset();
 
-		message_die(GENERAL_MESSAGE, $lang['EMAIL_SENT'] . '<br /><br />' . sprintf($lang['CLICK_RETURN_ADMIN_INDEX'],  '<a href="' . append_sid("index.php?pane=right") . '">', '</a>'));
+		message_die(GENERAL_MESSAGE, $lang['EMAIL_SENT'] . '<br /><br />' . sprintf($lang['CLICK_RETURN_ADMIN_INDEX'],  '<a href="index.php?pane=right">', '</a>'));
 	}
 }
 
@@ -150,10 +150,10 @@ require(PAGE_HEADER);
 $template->assign_vars(array(
 	'MESSAGE' => $message,
 	'SUBJECT' => $subject,
-	
+
 	'L_NOTICE' => @$notice,
 
-	'S_USER_ACTION' => append_sid('admin_mass_email.php'),
+	'S_USER_ACTION' => 'admin_mass_email.php',
 	'S_GROUP_SELECT' => $select_list)
 );
 

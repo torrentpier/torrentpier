@@ -75,7 +75,7 @@ $tor_auth_del = ($tor_auth && $tor_reged);
 
 $tracker_link  = ($tor_reged) ? $lang['BT_REG_YES'] : $lang['BT_REG_NO'];
 
-$download_link = append_sid("download.php?id=$attach_id");
+$download_link = "download.php?id=$attach_id";
 $description   = ($comment) ? $comment : preg_replace("#.torrent$#i", '', $display_name);
 
 if ($tor_auth_reg || $tor_auth_del)
@@ -406,7 +406,7 @@ if ($tor_reged && $tor_info)
 
 			foreach ($peers as $pid => $peer)
 			{
-				$u_prof_href = ($s_mode == 'count') ? '#' : append_sid("profile.php?mode=viewprofile&amp;u=". $peer['user_id']) .'#torrent';
+				$u_prof_href = ($s_mode == 'count') ? '#' : "profile.php?mode=viewprofile&amp;u=". $peer['user_id'] ."#torrent";
 
 				// Full details mode
 				if ($s_mode == 'full')
@@ -429,7 +429,7 @@ if ($tor_reged && $tor_info)
 						if (!defined('SEEDER_EXIST'))
 						{
 							define('SEEDER_EXIST', true);
-							$seed_order_action = append_sid("viewtopic.php?". POST_TOPIC_URL ."=$bt_topic_id&amp;spmode=full") .'#seeders';
+							$seed_order_action = "viewtopic.php?". POST_TOPIC_URL ."=$bt_topic_id&amp;spmode=full#seeders";
 
 							$template->assign_block_vars("$x_full", array(
 								'SEED_ORD_ACT'   => $seed_order_action,
@@ -456,7 +456,7 @@ if ($tor_reged && $tor_info)
 						if (!defined('LEECHER_EXIST'))
 						{
 							define('LEECHER_EXIST', true);
-							$leech_order_action = append_sid("viewtopic.php?". POST_TOPIC_URL ."=$bt_topic_id&amp;spmode=full") .'#leechers';
+							$leech_order_action = "viewtopic.php?". POST_TOPIC_URL ."=$bt_topic_id&amp;spmode=full#leechers";
 
 							$template->assign_block_vars("$x_full", array(
 								'LEECH_ORD_ACT'     => $leech_order_action,
@@ -578,7 +578,7 @@ if ($bb_cfg['bt_allow_spmode_change'] && $s_mode != 'full')
 {
 	$template->assign_vars(array(
 		'PEERS_FULL_LINK'  => true,
-		'SPMODE_FULL_HREF' => append_sid("viewtopic.php?". POST_TOPIC_URL ."=$bt_topic_id&amp;spmode=full") .'#seeders',
+		'SPMODE_FULL_HREF' => "viewtopic.php?". POST_TOPIC_URL ."=$bt_topic_id&amp;spmode=full#seeders",
 	));
 }
 

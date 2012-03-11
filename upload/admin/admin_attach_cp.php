@@ -211,7 +211,7 @@ else if ($delete && sizeof($delete_id_list) > 0)
 // Assign Default Template Vars
 $template->assign_vars(array(
 	'S_VIEW_SELECT' => $select_view,
-	'S_MODE_ACTION' => append_sid('admin_attach_cp.php'))
+	'S_MODE_ACTION' => 'admin_attach_cp.php')
 );
 
 if ($submit_change && $view == 'attachments')
@@ -516,7 +516,7 @@ if ($view == 'attachments')
 						$post_title = str_short($post_title, 30);
 					}
 
-					$view_topic = append_sid(BB_ROOT . 'viewtopic.php?' . POST_POST_URL . '=' . $ids[$j]['post_id'] . '#' . $ids[$j]['post_id']);
+					$view_topic = BB_ROOT . 'viewtopic.php?' . POST_POST_URL . '=' . $ids[$j]['post_id'] . '#' . $ids[$j]['post_id'];
 
 					$post_titles[] = '<a href="' . $view_topic . '" class="gen" target="_blank">' . $post_title . '</a>';
 				}
@@ -544,7 +544,7 @@ if ($view == 'attachments')
 
 				'S_DELETE_BOX' => $delete_box,
 				'S_HIDDEN' => $hidden_field,
-				'U_VIEW_ATTACHMENT'	=> append_sid(BB_ROOT . 'download.php?id=' . $attachments[$i]['attach_id']))
+				'U_VIEW_ATTACHMENT'	=> BB_ROOT . 'download.php?id=' . $attachments[$i]['attach_id'])
 			);
 
 		}

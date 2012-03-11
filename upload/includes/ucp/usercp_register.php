@@ -627,7 +627,7 @@ foreach ($profile_fields as $field => $can_edit)
 			$template->assign_vars(array(
 				'S_CATEGORY_SELECT' => $s_categories,
 				'S_COLSPAN' => $s_colspan,
-				'S_PROFILE_ACTION' => append_sid("profile.php?mode=$mode"),
+				'S_PROFILE_ACTION' => "profile.php?mode=$mode",
 				'S_HIDDEN_FIELDS' => $s_hidden_vars)
 			);
 
@@ -840,7 +840,7 @@ if ($submit && !$errors)
 			}
 		}
 
-		$message = $message . '<br /><br />' . sprintf($lang['CLICK_RETURN_INDEX'],  '<a href="' . append_sid("index.php") . '">', '</a>');
+		$message = $message . '<br /><br />' . sprintf($lang['CLICK_RETURN_INDEX'],  '<a href="index.php">', '</a>');
 
 		bb_die($message);
 	}
@@ -885,13 +885,13 @@ if ($submit && !$errors)
 				$emailer->send();
 				$emailer->reset();
 
-				$message = $lang['PROFILE_UPDATED_INACTIVE'] . '<br /><br />' . sprintf($lang['CLICK_RETURN_INDEX'],  '<a href="' . append_sid("index.php") . '">', '</a>');
+				$message = $lang['PROFILE_UPDATED_INACTIVE'] . '<br /><br />' . sprintf($lang['CLICK_RETURN_INDEX'],  '<a href="index.php">', '</a>');
 			    $user->session_end();
 			}
 			else
 			{
-				meta_refresh(append_sid("index.php"), 10);
-				$message = $lang['PROFILE_UPDATED'] . '<br /><br />' . sprintf($lang['CLICK_RETURN_INDEX'],  '<a href="' . append_sid("index.php") . '">', '</a>');
+				meta_refresh("index.php", 10);
+				$message = $lang['PROFILE_UPDATED'] . '<br /><br />' . sprintf($lang['CLICK_RETURN_INDEX'],  '<a href="index.php">', '</a>');
 			}
 
 			$sql_args = DB()->build_array('UPDATE', $db_data);
@@ -914,12 +914,12 @@ if ($submit && !$errors)
 			}
 			elseif(!$pr_data['user_active'])
 			{
-				bb_die($lang['PROFILE_UPDATED_INACTIVE'] . '<br /><br />' . sprintf($lang['CLICK_RETURN_INDEX'],  '<a href="' . append_sid("index.php") . '">', '</a>'));
+				bb_die($lang['PROFILE_UPDATED_INACTIVE'] . '<br /><br />' . sprintf($lang['CLICK_RETURN_INDEX'],  '<a href="index.php">', '</a>'));
 			}
 			else
 			{
-				meta_refresh(append_sid("index.php"), 10);
-				bb_die($lang['PROFILE_UPDATED'] . '<br /><br /><a href="' . PROFILE_URL . $userdata['user_id'] . '">'.$lang['RETURN_PROFILE'].'</a><br /><br />' . sprintf($lang['CLICK_RETURN_INDEX'],  '<a href="' . append_sid("index.php") . '">', '</a>'));
+				meta_refresh("index.php", 10);
+				bb_die($lang['PROFILE_UPDATED'] . '<br /><br /><a href="' . PROFILE_URL . $userdata['user_id'] . '">'.$lang['RETURN_PROFILE'].'</a><br /><br />' . sprintf($lang['CLICK_RETURN_INDEX'],  '<a href="index.php">', '</a>'));
 			}
 		}
 		else

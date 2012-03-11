@@ -87,7 +87,7 @@ if($mode != "")
 			"STYLE" => !empty($rank_info['rank_style']) ? $rank_info['rank_style'] : '',
 			"IMAGE_DISPLAY" => !empty($rank_info['rank_image']) ? '<img src="../' . $rank_info['rank_image'] . '" />' : "",
 
-			"S_RANK_ACTION" => append_sid("admin_ranks.php"),
+			"S_RANK_ACTION" => "admin_ranks.php",
 			"S_HIDDEN_FIELDS" => $s_hidden_fields)
 		);
 
@@ -159,7 +159,7 @@ if($mode != "")
 			message_die(GENERAL_ERROR, "Couldn't update/insert into ranks table", "", __LINE__, __FILE__, $sql);
 		}
 
-		$message .= "<br /><br />" . sprintf($lang['CLICK_RETURN_RANKADMIN'], "<a href=\"" . append_sid("admin_ranks.php") . "\">", "</a>") . "<br /><br />" . sprintf($lang['CLICK_RETURN_ADMIN_INDEX'], "<a href=\"" . append_sid("index.php?pane=right") . "\">", "</a>");
+		$message .= "<br /><br />" . sprintf($lang['CLICK_RETURN_RANKADMIN'], "<a href=\"admin_ranks.php\">", "</a>") . "<br /><br />" . sprintf($lang['CLICK_RETURN_ADMIN_INDEX'], "<a href=\"index.php?pane=right\">", "</a>");
 
         $datastore->update('ranks');
 
@@ -200,7 +200,7 @@ if($mode != "")
 				message_die(GENERAL_ERROR, $lang['NO_UPDATE_RANKS'], "", __LINE__, __FILE__, $sql);
 			}
 
-			$message = $lang['RANK_REMOVED'] . "<br /><br />" . sprintf($lang['CLICK_RETURN_RANKADMIN'], "<a href=\"" . append_sid("admin_ranks.php") . "\">", "</a>") . "<br /><br />" . sprintf($lang['CLICK_RETURN_ADMIN_INDEX'], "<a href=\"" . append_sid("index.php?pane=right") . "\">", "</a>");
+			$message = $lang['RANK_REMOVED'] . "<br /><br />" . sprintf($lang['CLICK_RETURN_RANKADMIN'], "<a href=\"admin_ranks.php\">", "</a>") . "<br /><br />" . sprintf($lang['CLICK_RETURN_ADMIN_INDEX'], "<a href=\"index.php?pane=right\">", "</a>");
 
             $datastore->update('ranks');
 
@@ -234,7 +234,7 @@ else
 
 	$template->assign_vars(array(
 		'TPL_RANKS_LIST' => true,
-		"S_RANKS_ACTION" => append_sid("admin_ranks.php"))
+		"S_RANKS_ACTION" => "admin_ranks.php")
 	);
 
 	for($i = 0; $i < $rank_count; $i++)
@@ -261,8 +261,8 @@ else
 			"SPECIAL_RANK" => $rank_is_special,
 			"RANK_MIN" => $rank_min,
 
-			"U_RANK_EDIT" => append_sid("admin_ranks.php?mode=edit&amp;id=$rank_id"),
-			"U_RANK_DELETE" => append_sid("admin_ranks.php?mode=delete&amp;id=$rank_id"))
+			"U_RANK_EDIT" => "admin_ranks.php?mode=edit&amp;id=$rank_id",
+			"U_RANK_DELETE" => "admin_ranks.php?mode=delete&amp;id=$rank_id")
 		);
 	}
 }

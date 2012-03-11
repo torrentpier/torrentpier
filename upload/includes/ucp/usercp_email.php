@@ -9,7 +9,7 @@ if ( !defined('IN_PHPBB') )
 // Is send through board enabled? No, return to index
 if (!$bb_cfg['board_email_form'])
 {
-	redirect(append_sid("index.php", true));
+	redirect("index.php");
 }
 
 if ( !empty($_GET[POST_USERS_URL]) || !empty($_POST[POST_USERS_URL]) )
@@ -23,7 +23,7 @@ else
 
 if ( !$userdata['session_logged_in'] )
 {
-	redirect(append_sid("login.php?redirect=profile.php&mode=email&" . POST_USERS_URL . "=$user_id", true));
+	redirect("login.php?redirect=profile.php&mode=email&" . POST_USERS_URL . "=$user_id");
 }
 
 $sql = "SELECT username, user_email, user_lang
@@ -109,7 +109,7 @@ if ( $row = DB()->fetch_row($sql) )
 				}
 
 				sleep(7);
-				$message = $lang['EMAIL_SENT'] . '<br /><br />' . sprintf($lang['CLICK_RETURN_INDEX'],  '<a href="' . append_sid("index.php") . '">', '</a>');
+				$message = $lang['EMAIL_SENT'] . '<br /><br />' . sprintf($lang['CLICK_RETURN_INDEX'],  '<a href="index.php">', '</a>');
 				message_die(GENERAL_MESSAGE, $message);
 			}
 		}
@@ -122,7 +122,7 @@ if ( $row = DB()->fetch_row($sql) )
 		$template->assign_vars(array(
 			'USERNAME' => $username,
 			'S_HIDDEN_FIELDS' => '',
-			'S_POST_ACTION' => append_sid("profile.php?mode=email&amp;" . POST_USERS_URL . "=$user_id"),
+			'S_POST_ACTION' => "profile.php?mode=email&amp;" . POST_USERS_URL . "=$user_id",
 		));
 
 		print_page('usercp_email.tpl');

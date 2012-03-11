@@ -31,7 +31,7 @@ if ( $row = DB()->sql_fetchrow($result) )
 		{
 			if (!$userdata['session_logged_in'])
 			{
-				redirect(append_sid('login.php?redirect=profile.php&mode=activate&' . POST_USERS_URL . '=' . $row['user_id'] . '&act_key=' . trim($_GET['act_key'])));
+				redirect('login.php?redirect=profile.php&mode=activate&' . POST_USERS_URL . '=' . $row['user_id'] . '&act_key=' . trim($_GET['act_key']));
 			}
 			else if (!IS_ADMIN)
 			{

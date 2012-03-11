@@ -19,7 +19,7 @@ if (!$profiledata = get_userdata($_GET[POST_USERS_URL]))
 
 if (!$userdata['session_logged_in'])
 {
-	redirect(append_sid("login.php?redirect={$_SERVER['REQUEST_URI']}", true));
+	redirect("login.php?redirect={$_SERVER['REQUEST_URI']}");
 }
 
 if (!$ranks = $datastore->get('ranks'))
@@ -47,7 +47,7 @@ if (IS_ADMIN)
 
 if (bf($profiledata['user_opt'], 'user_opt', 'viewemail') || IS_AM)
 {
-	$email_uri = ($bb_cfg['board_email_form']) ? append_sid('profile.php?mode=email&amp;'. POST_USERS_URL .'='. $profiledata['user_id']) : 'mailto:'. $profiledata['user_email'];
+	$email_uri = ($bb_cfg['board_email_form']) ? 'profile.php?mode=email&amp;'. POST_USERS_URL .'='. $profiledata['user_id'] : 'mailto:'. $profiledata['user_email'];
 	$email = '<a class="editable" href="'. $email_uri .'">'. $profiledata['user_email'] .'</a>';
 }
 else
@@ -66,7 +66,7 @@ if ($report_user && $report_user->auth_check('auth_write'))
 {
 	$template->assign_block_vars('switch_report_user', array());
 	$template->assign_vars(array(
-		'U_REPORT_USER' => append_sid('report.php?mode='. $report_user->mode .'&amp;id='. $profiledata['user_id']),
+		'U_REPORT_USER' => 'report.php?mode='. $report_user->mode .'&amp;id='. $profiledata['user_id'],
 		'L_REPORT_USER' => $report_user->lang['WRITE_REPORT'])
 	);
 }
@@ -105,7 +105,7 @@ $template->assign_vars(array(
 	'RANK_IMAGE'           => $rank_image,
 	'RANK_SELECT'          => $rank_select,
 	'POSTS'                => $profiledata['user_posts'],
-	'PM'                   => '<a href="'. append_sid('privmsg.php?mode=post&amp;'. POST_USERS_URL .'='. $profiledata['user_id']) .'">'. $lang['SEND_PRIVATE_MESSAGE'] .'</a>',
+	'PM'                   => '<a href="privmsg.php?mode=post&amp;'. POST_USERS_URL .'='. $profiledata['user_id'] .'">'. $lang['SEND_PRIVATE_MESSAGE'] .'</a>',
 	'EMAIL'                => $email,
 	'WWW'                  => $profiledata['user_website'],
 	'ICQ'                  => $profiledata['user_icq'],

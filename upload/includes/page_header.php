@@ -156,7 +156,7 @@ if ($bb_cfg['reports_enabled'])
 			$template->assign_block_vars('switch_report_general', array());
 
 			$template->assign_vars(array(
-				'U_WRITE_REPORT' => append_sid("report.php?mode=" . $report_general->mode),
+				'U_WRITE_REPORT' => "report.php?mode=" . $report_general->mode,
 				'L_WRITE_REPORT' => $report_general->lang['WRITE_REPORT'])
 			);
 		}
@@ -171,7 +171,7 @@ $template->assign_vars(array(
 	'QUIRKS_MODE'        => !empty($page_cfg['quirks_mode']),
 	'SHOW_ADS'           => (!$logged_in || isset($bb_cfg['show_ads_users'][$user->id]) || (!($is_admin || $is_mod) && $user->show_ads)),
     'USER_HIDE_CAT'      => (BB_SCRIPT == 'index'),
-	
+
 	'USER_RUS'           => ($userdata['user_lang'] != 'english') ? true : false,
 
 	'INCLUDE_BBCODE_JS'  => !empty($page_cfg['include_bbcode_js']),
@@ -201,7 +201,7 @@ $template->assign_vars(array(
 
 	// Report
 	'REPORT_LIST'        => $report_list,
-	'U_REPORT_LIST'      => append_sid("report.php"),
+	'U_REPORT_LIST'      => "report.php",
 	// Report [END]
 
 	'LOGGED_IN'          => $logged_in,

@@ -26,7 +26,7 @@ $poster_name_max_len = 25;
 $select_max_height   = 16;
 $dt_format           = 'Y-m-d';   // used in one-day filter
 
-$url = append_sid(basename(__FILE__));
+$url = basename(__FILE__);
 
 // Key names
 $type_key        = 'type';
@@ -409,7 +409,7 @@ $template->assign_vars(array(
 	'SEL_LOG_TYPE'      => build_select("{$type_key}[]", $log_type_select, $type_selected, 60, $select_max_height),
 	'SEL_USERS'         => build_select("{$user_key}[]", $users, $user_selected, 16, $select_max_height),
 
-	'S_LOG_ACTION'      => append_sid("admin_log.php"),
+	'S_LOG_ACTION'      => "admin_log.php",
 	'TOPIC_CSV'         => $topic_csv,
 ));
 

@@ -82,14 +82,14 @@ if ($topic_tpl = DB()->fetch_row($sql))
 		$template->assign_vars(array(
 			'PAGE_TITLE'        => $lang['NEW_RELEASE'],
 			'FORUM_NAME'        => htmlCHR($post_info['forum_name']),
-			'S_ACTION'          => append_sid("posting.php?mode=newtopic&tpl=1&". POST_FORUM_URL .'='. $post_info['forum_id']),
-			'S_CANCEL_ACTION'   => append_sid(FORUM_URL . $post_info['forum_id']),
+			'S_ACTION'          => "posting.php?mode=newtopic&tpl=1&". POST_FORUM_URL .'='. $post_info['forum_id'],
+			'S_CANCEL_ACTION'   => FORUM_URL . $post_info['forum_id'],
 			'TORRENT_EXT'       => TORRENT_EXT,
 			'TORRENT_EXT_LEN'   => strlen(TORRENT_EXT) + 1,
-			'U_VIEW_FORUM'      => append_sid(FORUM_URL . $post_info['forum_id']),
+			'U_VIEW_FORUM'      => FORUM_URL . $post_info['forum_id'],
 
 			'REGULAR_TOPIC_BUTTON' => true, # (IS_AM),
-			'REGULAR_TOPIC_HREF'   => append_sid("posting.php?mode=newtopic&". POST_FORUM_URL .'='. $post_info['forum_id']),
+			'REGULAR_TOPIC_HREF'   => "posting.php?mode=newtopic&". POST_FORUM_URL .'='. $post_info['forum_id'],
 
 			'L_TITLE'           => $lang['TPL']['RELEASE_NAME'],
 			'L_TITLE_DESC'      => $lang['TPL']['RELEASE_NAME_DESC'],
@@ -109,7 +109,7 @@ if ($topic_tpl = DB()->fetch_row($sql))
 		foreach ($lang['TPL']['GUIDE'] as $name => $guide_post_id)
 		{
 			$template->assign_vars(array(
-				strtoupper($name) .'_HREF' => append_sid(POST_URL ."$guide_post_id&amp;single=1#$guide_post_id"),
+				strtoupper($name) .'_HREF' => POST_URL ."$guide_post_id&amp;single=1#$guide_post_id",
 			));
 		}
 

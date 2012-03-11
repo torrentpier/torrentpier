@@ -61,7 +61,7 @@ $template->assign_vars(array(
 	'DISABLE_SUBMIT'     => true,
 
 	'S_HIDDEN_FIELDS' => '',
-	'S_CONFIG_ACTION' => append_sid("admin_bt_tracker_cfg.php"),
+	'S_CONFIG_ACTION' => "admin_bt_tracker_cfg.php",
 ));
 
 print_page('admin_bt_tracker_cfg.tpl', 'admin');

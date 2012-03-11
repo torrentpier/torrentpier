@@ -36,21 +36,21 @@ if(isset($_POST['action']) && $_POST['action'] === 'web')
 $get_data = count($get_data) ? 'php?' . implode('&', $get_data) : 'php';
 
 $content_url = array(
-	'config'		=> append_sid('xs_config.'.$get_data),
-	'install'		=> append_sid('xs_install.'.$get_data),
-	'uninstall'		=> append_sid('xs_uninstall.'.$get_data),
-	'default'		=> append_sid('xs_styles.'.$get_data),
-	'cache'			=> append_sid('xs_cache.'.$get_data),
-	'import'		=> append_sid('xs_import.'.$get_data),
-	'export'		=> append_sid('xs_export.'.$get_data),
-	'clone'			=> append_sid('xs_clone.'.$get_data),
-	'download'		=> append_sid('xs_download.'.$get_data),
-	'edittpl'		=> append_sid('xs_edit.'.$get_data),
-	'editdb'		=> append_sid('xs_edit_data.'.$get_data),
-	'exportdb'		=> append_sid('xs_export_data.'.$get_data),
-	'updates'		=> append_sid('xs_update.'.$get_data),
-	'portal'		=> append_sid('xs_portal.'.$get_data),
-	'style_config'	=> append_sid('xs_style_config.'.$get_data),
+	'config'		=> 'xs_config.'.$get_data,
+	'install'		=> 'xs_install.'.$get_data,
+	'uninstall'		=> 'xs_uninstall.'.$get_data,
+	'default'		=> 'xs_styles.'.$get_data,
+	'cache'			=> 'xs_cache.'.$get_data,
+	'import'		=> 'xs_import.'.$get_data,
+	'export'		=> 'xs_export.'.$get_data,
+	'clone'			=> 'xs_clone.'.$get_data,
+	'download'		=> 'xs_download.'.$get_data,
+	'edittpl'		=> 'xs_edit.'.$get_data,
+	'editdb'		=> 'xs_edit_data.'.$get_data,
+	'exportdb'		=> 'xs_export_data.'.$get_data,
+	'updates'		=> 'xs_update.'.$get_data,
+	'portal'		=> 'xs_portal.'.$get_data,
+	'style_config'	=> 'xs_style_config.'.$get_data,
 	);
 
 if(isset($content_url[$action]))
@@ -59,12 +59,12 @@ if(isset($content_url[$action]))
 }
 else
 {
-	$content = append_sid('xs_index.'.$get_data);
+	$content = 'xs_index.'.$get_data;
 }
 
 $template->set_filenames(array('body' => XS_TPL_PATH . 'frameset.tpl'));
 $template->assign_vars(array(
-	'FRAME_TOP'		=> append_sid('xs_frame_top.php'),
+	'FRAME_TOP'		=> 'xs_frame_top.php',
 	'FRAME_MAIN'	=> $content,
 	));
 

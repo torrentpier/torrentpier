@@ -22,7 +22,7 @@ if ($profile_user_id == $userdata['user_id'])
 {
 	$template->assign_vars(array(
 		'EDIT_PROF'      => true,
-		'EDIT_PROF_HREF' => append_sid("profile.php?mode=editprofile"),
+		'EDIT_PROF_HREF' => "profile.php?mode=editprofile",
 	));
 }
 else
@@ -124,7 +124,7 @@ if ($seeding_count = count($seeding))
 		        $is_gold = '<img src="images/tor_silver.gif" width="16" height="15" title="'.$lang['SILVER'].'" />&nbsp;';
             }
         }
-		
+
 		$template->assign_block_vars('seed.seedrow', array(
 			'FORUM_NAME'   => htmlCHR($seeding[$i]['forum_name']),
 			'TOPIC_TITLE'  => ($seeding[$i]['update_time']) ? wbr($seeding[$i]['topic_title']) : '<s>'. wbr($seeding[$i]['topic_title']) .'</s>',
@@ -157,7 +157,7 @@ if ($leeching_count = count($leeching))
                 $is_gold = '<img src="images/tor_silver.gif" width="16" height="15" title="'.$lang['SILVER'].'" />&nbsp;';
             }
         }
-		
+
 		$compl_size = ($leeching[$i]['remain'] && $leeching[$i]['size'] && $leeching[$i]['size'] > $leeching[$i]['remain']) ? ($leeching[$i]['size'] - $leeching[$i]['remain']) : 0;
 		$compl_perc = ($compl_size) ? floor($compl_size * 100 / $leeching[$i]['size']) : 0;
 

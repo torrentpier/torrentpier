@@ -10,7 +10,7 @@ require(BB_ROOT .'attach_mod/attachment_mod.php');
 
 if (!$userdata['session_logged_in'])
 {
-	redirect(append_sid("login.php?redirect={$_SERVER['REQUEST_URI']}", TRUE));
+	redirect("login.php?redirect={$_SERVER['REQUEST_URI']}");
 }
 
 // Page config
@@ -174,7 +174,7 @@ $template->assign_vars(array(
 	'PAGE_TITLE' => $lang['USER_ACP_TITLE'],
 	'USERNAME' => $profiledata['username'],
 	'S_USER_HIDDEN' => $s_hidden,
-	'S_MODE_ACTION'	=> append_sid(BB_ROOT ."profile.php?mode=attachcp"),
+	'S_MODE_ACTION'	=> BB_ROOT ."profile.php?mode=attachcp",
 	'S_MODE_SELECT' => $select_sort_mode,
 	'S_ORDER_SELECT' => $select_sort_order)
 );
@@ -263,7 +263,7 @@ if (sizeof($attachments) > 0)
 
 				$post_title = str_short($post_title, 30);
 
-				$view_topic = append_sid(BB_ROOT .'viewtopic.php?' . POST_POST_URL . '=' . $ids[$j]['post_id'] . '#' . $ids[$j]['post_id']);
+				$view_topic = BB_ROOT .'viewtopic.php?' . POST_POST_URL . '=' . $ids[$j]['post_id'] . '#' . $ids[$j]['post_id'];
 
 				$post_titles[] = '<a href="' . $view_topic . '" class="gen" target="_blank">' . $post_title . '</a>';
 			}
@@ -306,8 +306,8 @@ if (sizeof($attachments) > 0)
 
 				'S_DELETE_BOX'      => $delete_box,
 				'S_HIDDEN'          => $hidden_field,
-				'U_VIEW_ATTACHMENT' => append_sid(BB_ROOT .'download.php?id=' . $attachments[$i]['attach_id']))
-	//			'U_VIEW_POST' => ($attachments[$i]['post_id'] != 0) ? append_sid("../viewtopic.php?" . POST_POST_URL . "=" . $attachments[$i]['post_id'] . "#" . $attachments[$i]['post_id']) : '')
+				'U_VIEW_ATTACHMENT' => BB_ROOT .'download.php?id=' . $attachments[$i]['attach_id'])
+	//			'U_VIEW_POST' => ($attachments[$i]['post_id'] != 0) ? "../viewtopic.php?" . POST_POST_URL . "=" . $attachments[$i]['post_id'] . "#" . $attachments[$i]['post_id'] : '')
 			);
 		}
 	}

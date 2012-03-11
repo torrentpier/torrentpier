@@ -11,7 +11,7 @@ if(empty($template->xs_version) || $template->xs_version !== 8)
 define('IN_XS', true);
 include('xs_include.php');
 
-$template->assign_block_vars('nav_left',array('ITEM' => '&raquo; <a href="' . append_sid('xs_cache.php') . '">' . $lang['XS_MANAGE_CACHE'] . '</a>'));
+$template->assign_block_vars('nav_left',array('ITEM' => '&raquo; <a href="xs_cache.php">' . $lang['XS_MANAGE_CACHE'] . '</a>'));
 
 $data = '';
 

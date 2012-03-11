@@ -205,7 +205,7 @@ if ($submit && $mode == 'extensions')
 
 	if (!@$error)
 	{
-		$message = $lang['ATTACH_CONFIG_UPDATED'] . '<br /><br />' . sprintf($lang['CLICK_RETURN_ATTACH_CONFIG'], '<a href="' . append_sid("admin_extensions.php?mode=extensions") . '">', '</a>') . '<br /><br />' . sprintf($lang['CLICK_RETURN_ADMIN_INDEX'], '<a href="' . append_sid("index.php?pane=right") . '">', '</a>');
+		$message = $lang['ATTACH_CONFIG_UPDATED'] . '<br /><br />' . sprintf($lang['CLICK_RETURN_ATTACH_CONFIG'], '<a href="admin_extensions.php?mode=extensions">', '</a>') . '<br /><br />' . sprintf($lang['CLICK_RETURN_ADMIN_INDEX'], '<a href="index.php?pane=right">', '</a>');
 
 		message_die(GENERAL_MESSAGE, $message);
 	}
@@ -216,8 +216,8 @@ if ($mode == 'extensions')
 	// Extensions
 	$template->assign_vars(array(
 		'TPL_ATTACH_EXTENSIONS' => true,
-		'S_CANCEL_ACTION' => append_sid("admin_extensions.php?mode=extensions"),
-		'S_ATTACH_ACTION' => append_sid("admin_extensions.php?mode=extensions"))
+		'S_CANCEL_ACTION' => "admin_extensions.php?mode=extensions",
+		'S_ATTACH_ACTION' => "admin_extensions.php?mode=extensions")
 	);
 
 	if ($submit)
@@ -420,7 +420,7 @@ if ($submit && $mode == 'groups')
 
 	if (!@$error)
 	{
-		$message = $lang['ATTACH_CONFIG_UPDATED'] . '<br /><br />' . sprintf($lang['CLICK_RETURN_ATTACH_CONFIG'], '<a href="' . append_sid("admin_extensions.php?mode=groups") . '">', '</a>') . '<br /><br />' . sprintf($lang['CLICK_RETURN_ADMIN_INDEX'], '<a href="' . append_sid("index.php?pane=right") . '">', '</a>');
+		$message = $lang['ATTACH_CONFIG_UPDATED'] . '<br /><br />' . sprintf($lang['CLICK_RETURN_ATTACH_CONFIG'], '<a href="admin_extensions.php?mode=groups">', '</a>') . '<br /><br />' . sprintf($lang['CLICK_RETURN_ADMIN_INDEX'], '<a href="index.php?pane=right">', '</a>');
 
 		message_die(GENERAL_MESSAGE, $message);
 	}
@@ -454,8 +454,8 @@ if ($mode == 'groups')
 		'S_FILESIZE' => size_select('add_size_select', $size),
 		'S_ADD_DOWNLOAD_MODE' => download_select('add_download_mode'),
 		'S_SELECT_CAT' => category_select('add_category'),
-		'S_CANCEL_ACTION' => append_sid("admin_extensions.php?mode=groups"),
-		'S_ATTACH_ACTION' => append_sid("admin_extensions.php?mode=groups"))
+		'S_CANCEL_ACTION' => "admin_extensions.php?mode=groups",
+		'S_ATTACH_ACTION' => "admin_extensions.php?mode=groups")
 	);
 
 	$sql = 'SELECT *
@@ -503,8 +503,8 @@ if ($mode == 'groups')
 
 			'MAX_FILESIZE' => $extension_group[$i]['max_filesize'],
 			'CAT_BOX' => ( $viewgroup == $extension_group[$i]['group_id'] ) ? $lang['DECOLLAPSE'] : $lang['COLLAPSE'],
-			'U_VIEWGROUP' => ( $viewgroup == $extension_group[$i]['group_id'] ) ? append_sid("admin_extensions.php?mode=groups") : append_sid("admin_extensions.php?mode=groups&" . POST_GROUPS_URL . "=" . $extension_group[$i]['group_id']),
-			'U_FORUM_PERMISSIONS' => append_sid("admin_extensions.php?mode=$mode&amp;e_mode=perm&amp;e_group=" . $extension_group[$i]['group_id']))
+			'U_VIEWGROUP' => ( $viewgroup == $extension_group[$i]['group_id'] ) ? "admin_extensions.php?mode=groups" : "admin_extensions.php?mode=groups&" . POST_GROUPS_URL . "=" . $extension_group[$i]['group_id'],
+			'U_FORUM_PERMISSIONS' => "admin_extensions.php?mode=$mode&amp;e_mode=perm&amp;e_group=" . $extension_group[$i]['group_id'])
 		);
 
 		if ($viewgroup && $viewgroup == $extension_group[$i]['group_id'])
@@ -713,7 +713,7 @@ if ($e_mode == 'perm' && $group)
 	$template->assign_vars(array(
 		'TPL_ATTACH_EXTENSION_GROUPS_PERMISSIONS' => true,
 		'L_GROUP_PERMISSIONS_TITLE' => sprintf($lang['GROUP_PERMISSIONS_TITLE_ADMIN'], trim($group_name)),
-		'A_PERM_ACTION' => append_sid("admin_extensions.php?mode=groups&amp;e_mode=perm&amp;e_group=$group"))
+		'A_PERM_ACTION' => "admin_extensions.php?mode=groups&amp;e_mode=perm&amp;e_group=$group")
 	);
 
 	$forum_option_values = array(GPERM_ALL => $lang['PERM_ALL_FORUMS']);

@@ -65,7 +65,7 @@ if( $mode != "" )
 			"WORD"        => $word,
 			"REPLACEMENT" => $replacement,
 
-			"S_WORDS_ACTION"  => append_sid("admin_words.php"),
+			"S_WORDS_ACTION"  => "admin_words.php",
 			"S_HIDDEN_FIELDS" => $s_hidden_fields)
 		);
 	}
@@ -99,7 +99,7 @@ if( $mode != "" )
 			message_die(GENERAL_ERROR, "Could not insert data into words table", $lang['ERROR'], __LINE__, __FILE__, $sql);
 		}
 
-		$message .= "<br /><br />" . sprintf($lang['CLICK_RETURN_WORDADMIN'], "<a href=\"" . append_sid("admin_words.php") . "\">", "</a>") . "<br /><br />" . sprintf($lang['CLICK_RETURN_ADMIN_INDEX'], "<a href=\"" . append_sid("index.php?pane=right") . "\">", "</a>");
+		$message .= "<br /><br />" . sprintf($lang['CLICK_RETURN_WORDADMIN'], "<a href=\"admin_words.php\">", "</a>") . "<br /><br />" . sprintf($lang['CLICK_RETURN_ADMIN_INDEX'], "<a href=\"index.php?pane=right\">", "</a>");
 
 		message_die(GENERAL_MESSAGE, $message);
 	}
@@ -117,7 +117,7 @@ if( $mode != "" )
 				message_die(GENERAL_ERROR, "Could not remove data from words table", $lang['ERROR'], __LINE__, __FILE__, $sql);
 			}
 
-			$message = $lang['WORD_REMOVED'] . "<br /><br />" . sprintf($lang['CLICK_RETURN_WORDADMIN'], "<a href=\"" . append_sid("admin_words.php") . "\">", "</a>") . "<br /><br />" . sprintf($lang['CLICK_RETURN_ADMIN_INDEX'], "<a href=\"" . append_sid("index.php?pane=right") . "\">", "</a>");
+			$message = $lang['WORD_REMOVED'] . "<br /><br />" . sprintf($lang['CLICK_RETURN_WORDADMIN'], "<a href=\"admin_words.php\">", "</a>") . "<br /><br />" . sprintf($lang['CLICK_RETURN_ADMIN_INDEX'], "<a href=\"index.php?pane=right\">", "</a>");
 
 			message_die(GENERAL_MESSAGE, $message);
 		}
@@ -143,7 +143,7 @@ else
 	$template->assign_vars(array(
 		'TPL_ADMIN_WORDS_LIST' => true,
 
-		"S_WORDS_ACTION" => append_sid("admin_words.php"),
+		"S_WORDS_ACTION" => "admin_words.php",
 		"S_HIDDEN_FIELDS" => '')
 	);
 
@@ -160,8 +160,8 @@ else
 			"WORD" => $word,
 			"REPLACEMENT" => $replacement,
 
-			"U_WORD_EDIT" => append_sid("admin_words.php?mode=edit&amp;id=$word_id"),
-			"U_WORD_DELETE" => append_sid("admin_words.php?mode=delete&amp;id=$word_id"))
+			"U_WORD_EDIT" => "admin_words.php?mode=edit&amp;id=$word_id",
+			"U_WORD_DELETE" => "admin_words.php?mode=delete&amp;id=$word_id")
 		);
 	}
 }

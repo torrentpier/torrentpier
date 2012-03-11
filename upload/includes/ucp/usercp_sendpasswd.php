@@ -9,7 +9,7 @@ if ( !defined('IN_PHPBB') )
 if ($bb_cfg['emailer_disabled']) bb_die($lang['EMAILER_DISABLED']);
 
 $need_captcha = ($_GET['mode'] == 'sendpassword' && !IS_ADMIN);
-						
+
 if ( isset($_POST['submit']) )
 {
 	if ($need_captcha && !CAPTCHA()->verify_code())	bb_die($lang['CONFIRM_CODE_WRONG']);
@@ -65,7 +65,7 @@ if ( isset($_POST['submit']) )
 			$emailer->send();
 			$emailer->reset();
 
-			$message = $lang['PASSWORD_UPDATED'] . '<br /><br />' . sprintf($lang['CLICK_RETURN_INDEX'],  '<a href="' . append_sid("index.php") . '">', '</a>');
+			$message = $lang['PASSWORD_UPDATED'] . '<br /><br />' . sprintf($lang['CLICK_RETURN_INDEX'],  '<a href="index.php">', '</a>');
 
 			message_die(GENERAL_MESSAGE, $message);
 		}
@@ -89,7 +89,7 @@ $template->assign_vars(array(
 	'EMAIL' => $email,
 	'CAPTCHA_HTML'       => ($need_captcha) ? CAPTCHA()->get_html() : '',
 	'S_HIDDEN_FIELDS' => '',
-	'S_PROFILE_ACTION' => append_sid("profile.php?mode=sendpassword"))
+	'S_PROFILE_ACTION' => "profile.php?mode=sendpassword")
 );
 
 print_page('usercp_sendpasswd.tpl');

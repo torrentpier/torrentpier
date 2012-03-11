@@ -523,7 +523,7 @@ if ($report_topic && $report_topic->auth_check('auth_write'))
 		if ($report_topic->auth_check('auth_view') && $is_auth)
 		{
 			$target = ($bb_cfg['report_new_window']) ? ' target="_blank"' : '';
-			$s_report_topic ='&nbsp;<a href="' . append_sid("report.php?mode=reported&amp;" . POST_CAT_URL . '=' . $report_topic->id . "&amp;id=$topic_id") . '"' . $target . '><img src="' . $images['topic_mod_reported'] . '" alt="' . $report_topic->lang['DUPLICATE_REPORT'] . '" title="' . $report_topic->lang['DUPLICATE_REPORT'] . '" border="0" /></a>&nbsp;';
+			$s_report_topic ='&nbsp;<a href="' . ("report.php?mode=reported&amp;" . POST_CAT_URL . '=' . $report_topic->id . "&amp;id=$topic_id") . '"' . $target . '><img src="' . $images['topic_mod_reported'] . '" alt="' . $report_topic->lang['DUPLICATE_REPORT'] . '" title="' . $report_topic->lang['DUPLICATE_REPORT'] . '" border="0" /></a>&nbsp;';
 		}
 		else
 		{
@@ -532,7 +532,7 @@ if ($report_topic && $report_topic->auth_check('auth_write'))
 	}
 	else
 	{
-		$s_report_topic = '&nbsp;<a href="' . append_sid("report.php?mode=" . $report_topic->mode . "&amp;id=$topic_id") . '"><img src="' . $images['topic_mod_report'] . '" alt="' . $report_topic->lang['WRITE_REPORT'] . '" title="' . $report_topic->lang['WRITE_REPORT'] . '" border="0" /></a>&nbsp;';
+		$s_report_topic = '&nbsp;<a href="' . ("report.php?mode=" . $report_topic->mode . "&amp;id=$topic_id") . '"><img src="' . $images['topic_mod_report'] . '" alt="' . $report_topic->lang['WRITE_REPORT'] . '" title="' . $report_topic->lang['WRITE_REPORT'] . '" border="0" /></a>&nbsp;';
 	}
 
 	$topic_mod .= $s_report_topic;
@@ -952,7 +952,7 @@ for($i = 0; $i < $total_posts; $i++)
 			$report_auth = ($userdata['user_level'] == ADMIN || (!$bb_cfg['report_list_admin'] && (!$bb_cfg['report_subject_auth'] || $is_auth['auth_mod'])));
 			if ($report_post->auth_check('auth_view') && $report_auth)
 			{
-				$temp_url = append_sid("report.php?mode=reported&amp;" . POST_CAT_URL . '=' . $report_post->id . '&amp;id=' . $postrow[$i]['post_id']);
+				$temp_url = "report.php?mode=reported&amp;" . POST_CAT_URL . '=' . $report_post->id . '&amp;id=' . $postrow[$i]['post_id'];
 				$target = ($bb_cfg['report_new_window']) ? ' target="_blank"' : '';
 				$report_img = '<a href="' . $temp_url . '"' . $target . '><img src="' . $images['icon_reported'] . '" alt="' . $report_post->lang['DUPLICATE_REPORT'] . '" title="' . $report_post->lang['DUPLICATE_REPORT'] . '" border="0" /></a>';
 				$report = '<a href="' . $temp_url . '"' . $target . '>[' . $report_post->lang['DUPLICATE_REPORT'] . ']</a>';
@@ -965,7 +965,7 @@ for($i = 0; $i < $total_posts; $i++)
 		}
 		else
 		{
-			$temp_url = append_sid("report.php?mode=" . $report_post->mode . '&amp;id=' . $postrow[$i]['post_id']);
+			$temp_url = "report.php?mode=" . $report_post->mode . '&amp;id=' . $postrow[$i]['post_id'];
 			$report_img = '<a href="' . $temp_url . '"><img src="' . $images['icon_report'] . '" alt="' . $report_post->lang['WRITE_REPORT'] . '" title="' . $report_post->lang['WRITE_REPORT'] . '" border="0" /></a>';
 			$report = '<a class="txtb" href="' . $temp_url . '">[' . $report_post->lang['WRITE_REPORT'] . ']</a>';
 		}

@@ -230,7 +230,7 @@ if ($post_info = DB()->fetch_row($sql))
 		if ($post_info['poster_id'] != $userdata['user_id'] && !$is_auth['auth_mod'])
 		{
 			$message = ($delete || $mode == 'delete') ? $lang['DELETE_OWN_POSTS'] : $lang['EDIT_OWN_POSTS'];
-			$message .= '<br /><br />'. sprintf($lang['CLICK_RETURN_TOPIC'], '<a href="'. append_sid(TOPIC_URL ."$topic_id") .'">', '</a>');
+			$message .= '<br /><br />'. sprintf($lang['CLICK_RETURN_TOPIC'], '<a href="'. TOPIC_URL . $topic_id .'">', '</a>');
 
 			message_die(GENERAL_MESSAGE, $message);
 		}
@@ -468,13 +468,13 @@ else if ( $mode == 'vote' )
 		}
 		DB()->sql_freeresult($result);
 
-		meta_refresh(append_sid("viewtopic.php?" . POST_TOPIC_URL . "=$topic_id"));
-		$message .= '<br /><br />' . sprintf($lang['CLICK_RETURN_TOPIC'], '<a href="' . append_sid("viewtopic.php?" . POST_TOPIC_URL . "=$topic_id") . '">', '</a>');
+		meta_refresh("viewtopic.php?" . POST_TOPIC_URL . "=$topic_id");
+		$message .= '<br /><br />' . sprintf($lang['CLICK_RETURN_TOPIC'], '<a href="' . ("viewtopic.php?" . POST_TOPIC_URL . "=$topic_id") . '">', '</a>');
 		message_die(GENERAL_MESSAGE, $message);
 	}
 	else
 	{
-		redirect(append_sid("viewtopic.php?" . POST_TOPIC_URL . "=$topic_id", true));
+		redirect("viewtopic.php?" . POST_TOPIC_URL . "=$topic_id");
 	}
 }
 //snp
@@ -568,7 +568,7 @@ else if ( ($submit || $confirm) && !$topic_has_new_posts )
 			    		  AND tor_status IN(". TOR_APPROVED .",". TOR_DOUBTFUL .",". TOR_TMP .")
 			    		LIMIT 1
 			    	", 'checked_releases');
-	
+
 				    if ($count_checked_releases || IS_AM) tracker_register(TORRENT_ATTACH_ID, 'newtopic', TOR_NOT_APPROVED);
 				    else tracker_register(TORRENT_ATTACH_ID, 'newtopic', TOR_PREMOD);
 				}
@@ -821,7 +821,7 @@ $template->assign_vars(array(
 	'POSTING_TYPE_TITLE' => $page_title,
 	'POSTING_TOPIC_ID' => ($mode != 'newtopic') ? $topic_id : '',
 	'POSTING_TOPIC_TITLE' => ($mode != 'newtopic') ? wbr($post_info['topic_title']) : '',
-	'U_VIEW_FORUM' => append_sid("viewforum.php?" . POST_FORUM_URL . "=$forum_id"))
+	'U_VIEW_FORUM' => "viewforum.php?" . POST_FORUM_URL . "=$forum_id")
 );
 
 if ($mode == 'newtopic' || $post_data['first_post'])
@@ -848,12 +848,12 @@ $template->assign_vars(array(
 	'SUBJECT' => $subject,
 	'MESSAGE' => $message,
 
-	'U_VIEWTOPIC' => ( $mode == 'reply' ) ? append_sid("viewtopic.php?" . POST_TOPIC_URL . "=$topic_id&amp;postorder=desc") : '',
+	'U_VIEWTOPIC' => ( $mode == 'reply' ) ? "viewtopic.php?" . POST_TOPIC_URL . "=$topic_id&amp;postorder=desc" : '',
 
 	'S_NOTIFY_CHECKED' => ( $notify_user ) ? 'checked="checked"' : '',
 	'S_TYPE_TOGGLE' => $topic_type_toggle,
 	'S_TOPIC_ID' => $topic_id,
-	'S_POST_ACTION' => append_sid("posting.php"),
+	'S_POST_ACTION' => "posting.php",
 	'S_HIDDEN_FORM_FIELDS' => $hidden_form_fields)
 );
 

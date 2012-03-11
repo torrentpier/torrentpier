@@ -163,7 +163,7 @@ class report_privmsg extends report_module
 	function subject_url($report_subject, $non_html_amp = false)
 	{
 		$sep = ($non_html_amp) ? '&' : '&amp;';
-		return append_sid("privmsg.php?mode=read$sep" . POST_POST_URL . '=' . (int) $report_subject, $non_html_amp);
+		return "privmsg.php?mode=read$sep" . POST_POST_URL . '=' . (int) $report_subject, $non_html_amp;
 	}
 
 	//
@@ -193,7 +193,7 @@ class report_privmsg extends report_module
 	//
 	function subject_details_obtain($report_subject)
 	{
-		$sql = 'SELECT p.privmsgs_subject, p.privmsgs_from_userid, pt.privmsgs_text, u.username
+		$sql = 'SELECT p.privmsgs_subject, p.privmsgs_from_userid, pt.privmsgs_text, u.username, u.user_id, u.user_rank
 			FROM ' . BB_PRIVMSGS . ' p
 			INNER JOIN ' . BB_PRIVMSGS_TEXT . ' pt
 				ON pt.privmsgs_text_id = privmsgs_id
@@ -215,7 +215,7 @@ class report_privmsg extends report_module
 
 		$subject_details = array(
 			'MESSAGE_ID' => '#' . $report_subject,
-			'MESSAGE_FROM' => '<a href="' . append_sid("profile.php?mode=viewprofile&amp;" . POST_USERS_URL . '=' . $row['privmsgs_from_userid']) . '">' . $row['username'] . '</a>',
+			'MESSAGE_FROM' => profile_url($row),
 			'MESSAGE_TITLE' => $row['privmsgs_subject'],
 			'MESSAGE_TEXT' => $row['privmsgs_text']);
 

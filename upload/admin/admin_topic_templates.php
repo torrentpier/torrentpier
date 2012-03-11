@@ -28,7 +28,7 @@ if ($mode == 'templates')
 
     $template->assign_vars(array(
 		'TPL_LIST'      => true,
-		'S_ACTION'      => append_sid("admin_topic_templates.php?mode=delete"),
+		'S_ACTION'      => "admin_topic_templates.php?mode=delete",
 	));
 }
 else if ($mode == 'add' || $mode == 'edit')
@@ -44,12 +44,12 @@ else if ($mode == 'add' || $mode == 'edit')
         if(!$row) bb_die('');
 
         $template->assign_vars(array(
-			'S_ACTION'      => append_sid("admin_topic_templates.php?mode=edit&tpl=$tpl_id"),
+			'S_ACTION'      => "admin_topic_templates.php?mode=edit&tpl=$tpl_id",
 		));
     }
     else
     {    	$template->assign_vars(array(
-			'S_ACTION'      => append_sid("admin_topic_templates.php?mode=add"),
+			'S_ACTION'      => "admin_topic_templates.php?mode=add",
 		));    }
 
     $tpl_name =	isset($_POST['tpl_name']) ? $_POST['tpl_name'] : @$row['tpl_name'];
@@ -159,8 +159,8 @@ else
 		}
 
 		$message = $lang['CONFIG_UPD'] .'<br /><br />';
-		$message .= sprintf($lang['RETURN_CONFIG'], '<a href="'. append_sid("admin_topic_templates.php") .'">', '</a>') .'<br /><br />';
-		$message .= sprintf($lang['CLICK_RETURN_ADMIN_INDEX'], '<a href="'. append_sid("index.php?pane=right") .'">', '</a>');
+		$message .= sprintf($lang['RETURN_CONFIG'], '<a href="admin_topic_templates.php">', '</a>') .'<br /><br />';
+		$message .= sprintf($lang['CLICK_RETURN_ADMIN_INDEX'], '<a href="index.php?pane=right">', '</a>');
 
 		message_die(GENERAL_MESSAGE, $message);
 	}
@@ -180,7 +180,7 @@ else
 
 	$template->assign_vars(array(
 		'FORUM_LIST'    => true,
-		'S_ACTION'      => append_sid("admin_topic_templates.php"),
+		'S_ACTION'      => "admin_topic_templates.php",
 	));
 }
 print_page('admin_topic_templates.tpl', 'admin');

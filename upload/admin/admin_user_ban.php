@@ -290,7 +290,7 @@ if ( isset($_POST['submit']) )
 		}
 	}
 
-	$message = $lang['BAN_UPDATE_SUCESSFUL'] . '<br /><br />' . sprintf($lang['CLICK_RETURN_BANADMIN'], '<a href="' . append_sid("admin_user_ban.php") . '">', '</a>') . '<br /><br />' . sprintf($lang['CLICK_RETURN_ADMIN_INDEX'], '<a href="' . append_sid("index.php?pane=right") . '">', '</a>');
+	$message = $lang['BAN_UPDATE_SUCESSFUL'] . '<br /><br />' . sprintf($lang['CLICK_RETURN_BANADMIN'], '<a href="admin_user_ban.php">', '</a>') . '<br /><br />' . sprintf($lang['CLICK_RETURN_ADMIN_INDEX'], '<a href="index.php?pane=right">', '</a>');
 
 	message_die(GENERAL_MESSAGE, $message);
 
@@ -298,7 +298,7 @@ if ( isset($_POST['submit']) )
 else
 {
 	$template->assign_vars(array(
-		'S_BANLIST_ACTION' => append_sid("admin_user_ban.php"))
+		'S_BANLIST_ACTION' => "admin_user_ban.php")
 	);
 
 	$userban_count = 0;
@@ -381,11 +381,11 @@ else
 	$select_emaillist = '<select name="unban_email[]" multiple="multiple" size="10">' . $select_emaillist . '</select>';
 
 	$template->assign_vars(array(
-		'U_SEARCH_USER' => append_sid("./../search.php?mode=searchuser"),
+		'U_SEARCH_USER' => "./../search.php?mode=searchuser",
 		'S_UNBAN_USERLIST_SELECT' => $select_userlist,
 		'S_UNBAN_IPLIST_SELECT' => $select_iplist,
 		'S_UNBAN_EMAILLIST_SELECT' => $select_emaillist,
-		'S_BAN_ACTION' => append_sid("admin_user_ban.php"))
+		'S_BAN_ACTION' => "admin_user_ban.php")
 	);
 }
 

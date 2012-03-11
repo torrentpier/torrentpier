@@ -171,7 +171,7 @@ if( isset($_POST['submit']) )
 	}
 
 	$datastore->update('cat_forums');
-	$message = $lang['FORUM_AUTH_UPDATED'] . '<br /><br />' . sprintf($lang['CLICK_RETURN_FORUMAUTH'],  '<a href="' . append_sid("admin_forumauth_list.php") . '">', "</a>");
+	$message = $lang['FORUM_AUTH_UPDATED'] . '<br /><br />' . sprintf($lang['CLICK_RETURN_FORUMAUTH'],  '<a href="admin_forumauth_list.php">', "</a>");
 	message_die(GENERAL_MESSAGE, $message);
 
 } // End of submit
@@ -230,7 +230,7 @@ if( empty($forum_id) && empty($cat_id) )
 
 		$template->assign_block_vars('cat_row', array(
 			'CAT_NAME' => htmlCHR($category_rows[$i]['cat_title']),
-			'CAT_URL' => append_sid('admin_forumauth_list.php'.'?'.POST_CAT_URL.'='.$category_rows[$i]['cat_id']))
+			'CAT_URL' => 'admin_forumauth_list.php'.'?'.POST_CAT_URL.'='.$category_rows[$i]['cat_id'])
 		);
 
 		for ($j=0; $j<count($forum_rows); $j++)
@@ -239,7 +239,7 @@ if( empty($forum_id) && empty($cat_id) )
 			{
 				$template->assign_block_vars('cat_row.forum_row', array(
 					'ROW_CLASS' => !($j % 2) ? 'row4' : 'row5',
-					'FORUM_NAME' => '<a class="'.(($forum_rows[$j]['forum_parent']) ? 'genmed' : 'gen').'" href="'.append_sid('admin_forumauth.php?'.POST_FORUM_URL.'='.$forum_rows[$j]['forum_id']).'">'.htmlCHR($forum_rows[$j]['forum_name']).'</a>',
+					'FORUM_NAME' => '<a class="'.(($forum_rows[$j]['forum_parent']) ? 'genmed' : 'gen').'" href="admin_forumauth.php?'. POST_FORUM_URL .'='. $forum_rows[$j]['forum_id'] .'">'. htmlCHR($forum_rows[$j]['forum_name']) .'</a>',
 					'IS_SUBFORUM' => $forum_rows[$j]['forum_parent'],
 				));
 
@@ -298,7 +298,7 @@ else
 
 	$template->assign_block_vars('cat_row', array(
 		'CAT_NAME' => htmlCHR($cat_name),
-		'CAT_URL' => append_sid('admin_forumauth_list.php'.'?'.POST_CAT_URL.'='.$cat_id))
+		'CAT_URL' => 'admin_forumauth_list.php?'. POST_CAT_URL .'='. $cat_id)
 	);
 
 	for ($j=0; $j<count($forum_rows); $j++)
@@ -307,7 +307,7 @@ else
 		{
 			$template->assign_block_vars('cat_row.forum_row', array(
 				'ROW_CLASS' => !($j % 2) ? 'row4' : 'row5',
-				'FORUM_NAME' => '<a class="'.(($forum_rows[$j]['forum_parent']) ? 'genmed' : 'gen').'" href="'.append_sid('admin_forumauth.php?'.POST_FORUM_URL.'='.$forum_rows[$j]['forum_id']).'">'.htmlCHR($forum_rows[$j]['forum_name']).'</a>',
+				'FORUM_NAME' => '<a class="'.(($forum_rows[$j]['forum_parent']) ? 'genmed' : 'gen').'" href="admin_forumauth.php?'. POST_FORUM_URL .'='. $forum_rows[$j]['forum_id'] .'">'. htmlCHR($forum_rows[$j]['forum_name']) .'</a>',
 				'IS_SUBFORUM' => $forum_rows[$j]['forum_parent'],
 			));
 
@@ -358,7 +358,7 @@ else
 	$template->assign_vars(array(
 		'TPL_AUTH_CAT' => true,
 		'CAT_NAME' => htmlCHR($cat_name),
-		'S_FORUMAUTH_ACTION' => append_sid("admin_forumauth_list.php"),
+		'S_FORUMAUTH_ACTION' => "admin_forumauth_list.php",
 		'S_COLUMN_SPAN' => count($forum_auth_fields)+1,
 		'S_HIDDEN_FIELDS' => $s_hidden_fields)
 	);

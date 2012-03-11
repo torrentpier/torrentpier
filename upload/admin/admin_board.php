@@ -15,9 +15,9 @@ require(INC_DIR .'functions_selects.php');
 $mode = isset($_GET['mode']) ? $_GET['mode'] : '';
 
 $return_links = array(
-	'index' => '<br /><br />'. sprintf($lang['CLICK_RETURN_ADMIN_INDEX'], '<a href="'. append_sid('index.php?pane=right') . '">', '</a>'),
-	'config' => '<br /><br />'. sprintf($lang['CLICK_RETURN_CONFIG'], '<a href="' . append_sid('admin_board.php?mode=config') . '">', '</a>'),
-	'config_mods' => '<br /><br />'. sprintf($lang['CLICK_RETURN_CONFIG_MODS'], '<a href="'. append_sid('admin_board.php?mode=config_mods') . '">', '</a>')
+	'index' => '<br /><br />'. sprintf($lang['CLICK_RETURN_ADMIN_INDEX'], '<a href="index.php?pane=right">', '</a>'),
+	'config' => '<br /><br />'. sprintf($lang['CLICK_RETURN_CONFIG'], '<a href="admin_board.php?mode=config">', '</a>'),
+	'config_mods' => '<br /><br />'. sprintf($lang['CLICK_RETURN_CONFIG_MODS'], '<a href="admin_board.php?mode=config_mods">', '</a>')
 );
 
 //
@@ -73,7 +73,7 @@ switch($mode)
 {
 	case 'config_mods':
 	    $template->assign_vars(array(
-	        'S_CONFIG_ACTION' => append_sid('admin_board.php?mode=config_mods'),
+	        'S_CONFIG_ACTION' => 'admin_board.php?mode=config_mods',
 			'CONFIG_MODS' => true,
 
 		    'REPORTS_ENABLED' => $new['reports_enabled'],
@@ -123,7 +123,7 @@ switch($mode)
 
 	default:
 		$template->assign_vars(array(
-	        'S_CONFIG_ACTION' => append_sid('admin_board.php?mode=config'),
+	        'S_CONFIG_ACTION' => 'admin_board.php?mode=config',
 			'CONFIG' => true,
 
 	        'SITENAME' => htmlCHR($new['sitename']),

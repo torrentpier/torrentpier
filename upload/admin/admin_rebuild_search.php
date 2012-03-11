@@ -48,7 +48,7 @@ if (isset($_REQUEST['cancel_button']))
 		");
 	}
 
-	$message = sprintf($lang['REBUILD_SEARCH_ABORTED'], $last_session_data['end_post_id']) .'<br /><br />'. sprintf($lang['CLICK_RETURN_REBUILD_SEARCH'], '<a href="'.append_sid("admin_rebuild_search.php").'">', '</a>');
+	$message = sprintf($lang['REBUILD_SEARCH_ABORTED'], $last_session_data['end_post_id']) .'<br /><br />'. sprintf($lang['CLICK_RETURN_REBUILD_SEARCH'], '<a href="admin_rebuild_search.php">', '</a>');
 	message_die(GENERAL_MESSAGE, $message);
 }
 
@@ -142,7 +142,7 @@ if ($mode == 'submit')
 {
 	if ($session_posts_processing <= 0 || $post_limit <= 0 || $refresh_rate <= 0 || $time_limit <=0)
 	{
-		$message = $lang['WRONG_INPUT'] .'<br /><br />'. sprintf($lang['CLICK_RETURN_REBUILD_SEARCH'], '<a href="'.append_sid("admin_rebuild_search.php").'">', '</a>');
+		$message = $lang['WRONG_INPUT'] .'<br /><br />'. sprintf($lang['CLICK_RETURN_REBUILD_SEARCH'], '<a href="admin_rebuild_search.php">', '</a>');
 		message_die(GENERAL_MESSAGE, $message);
 	}
 }
@@ -271,21 +271,22 @@ if ($mode == 'submit' || $mode == 'refresh')
 		$form_parameters .= '&time_limit='.$time_limit;
 		$form_parameters .= '&refresh_rate='.$refresh_rate;
 
-		$form_action = append_sid('admin_rebuild_search.php'.'?mode=refresh'.$form_parameters);
+		$form_action = 'admin_rebuild_search.php'.'?mode=refresh'.$form_parameters;
 		$next_button = $lang['NEXT'];
 		$progress_bar_img = $images['progress_bar'];
 
 		$processing_messages .= sprintf($lang['PROCESSING_NEXT_POSTS'], $post_limit);
 
+        meta_refresh($form_action, $refresh_rate);
+
 		// create the meta tag for refresh
 		$template->assign_vars(array(
-			'META'          => '<meta http-equiv="refresh" content="'.$refresh_rate.';url='.$form_action.'">',
 			'CANCEL_BUTTON' => true,
 		));
 	}
 	else  // end of processing
 	{
-		$form_action = append_sid("admin_rebuild_search.php");
+		$form_action = "admin_rebuild_search.php";
 		$next_button = $lang['FINISHED'];
 		$progress_bar_img = $images['progress_bar_full'];
 
@@ -449,7 +450,7 @@ else  // show the input page
 		'SESSION_ID'               => $userdata['session_id'],
 
 		'S_HIDDEN_FIELDS'          => $s_hidden_fields,
-		'S_REBUILD_SEARCH_ACTION'  => append_sid("admin_rebuild_search.php?mode=submit"),
+		'S_REBUILD_SEARCH_ACTION'  => "admin_rebuild_search.php?mode=submit",
 	));
 }
 

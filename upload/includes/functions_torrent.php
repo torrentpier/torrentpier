@@ -5,7 +5,7 @@ if (!defined('BB_ROOT')) die(basename(__FILE__));
 function get_torrent_info ($attach_id)
 {
 	global $lang;
-	
+
 	$attach_id = intval($attach_id);
 
 	$sql = "
@@ -358,7 +358,7 @@ function tracker_register ($attach_id, $mode = '', $tor_status = TOR_NOT_APPROVE
 	}
 	if ($row = DB()->sql_fetchrow($result))
 	{
-		$msg = sprintf($lang['BT_REG_FAIL_SAME_HASH'], append_sid(TOPIC_URL . $row['topic_id']));
+		$msg = sprintf($lang['BT_REG_FAIL_SAME_HASH'], TOPIC_URL . $row['topic_id']);
 		torrent_error_exit($msg);
 	}
 
@@ -431,7 +431,7 @@ function tracker_register ($attach_id, $mode = '', $tor_status = TOR_NOT_APPROVE
 
 	if ($reg_mode == 'request' || $reg_mode == 'newtopic')
 	{
-		$mess = sprintf($lang['BT_REGISTERED'], append_sid("download.php?id=$attach_id"));
+		$mess = sprintf($lang['BT_REGISTERED'], "download.php?id=$attach_id");
 		exit_redirect($mess, $post_id, $forum_id);
 	}
 
@@ -493,7 +493,7 @@ function send_torrent_with_passkey ($filename)
 		}
 		else
 		{
-			$mess = sprintf($lang['PASSKEY_ERR_EMPTY'], append_sid("profile.php?mode=editprofile#bittorrent"));
+			$mess = sprintf($lang['PASSKEY_ERR_EMPTY'], "profile.php?mode=editprofile#bittorrent");
 			message_die(GENERAL_ERROR, $mess);
 		}
 	}
@@ -739,7 +739,7 @@ function exit_redirect ($message, $post_id, $forum_id)
 {
 	global $template, $lang;
 
-	$exit_message = $message .'<br /><br />'. sprintf($lang['CLICK_RETURN_TOPIC'], '<a href="'. append_sid("viewtopic.php?". POST_POST_URL ."=". $post_id) .'#'. $post_id .'">', '</a>') .'<br /><br />'. sprintf($lang['CLICK_RETURN_FORUM'], '<a href="'. append_sid("viewforum.php?". POST_FORUM_URL ."=$forum_id") .'">', '</a>');
+	$exit_message = $message .'<br /><br />'. sprintf($lang['CLICK_RETURN_TOPIC'], '<a href="viewtopic.php?'. POST_POST_URL .'='. $post_id .'#'. $post_id .'">', '</a>') .'<br /><br />'. sprintf($lang['CLICK_RETURN_FORUM'], '<a href="viewforum.php?'. POST_FORUM_URL .'='. $forum_id .'">', '</a>');
 	message_die(GENERAL_MESSAGE, $exit_message);
 }
 

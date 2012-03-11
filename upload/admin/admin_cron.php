@@ -14,7 +14,7 @@ $submit  = isset($_POST['submit']);
 $jobs = isset($_POST['select']) ? implode(',', $_POST['select']) : '';
 $cron_action = isset($_POST['cron_action']) ? $_POST['cron_action'] : '';
 
-if ($mode == 'run' && !$job_id) 
+if ($mode == 'run' && !$job_id)
 {
 	define('BB_ROOT', './../');
 	require(BB_ROOT.'common.php');
@@ -41,19 +41,19 @@ foreach($sql as $row)
 	$default_config[$config_name] = $config_value;
 
 	$new[$config_name] = isset($_POST[$config_name]) ? $_POST[$config_name] : $default_config[$config_name];
-			
+
 	if (isset($_POST['submit']) && $row['config_value'] != $new[$config_name])
 	{
 		 bb_update_config(array($config_name => $new[$config_name]));
 	}
 }
 
-		
+
 $template->assign_vars(array(
 	'CRON_ENABLED' => ($new['cron_enabled']) ? true : false,
 	'CRON_CHECK_INTERVAL' => $new['cron_check_interval'],
 ));
-		
+
 switch($mode)
 {
     case 'list':
@@ -77,10 +77,10 @@ switch($mode)
 
 	    $template->assign_vars(array(
 		    'TPL_CRON_LIST' => true,
-		    'S_CRON_ACTION' => append_sid("admin_cron.php"),
+		    'S_CRON_ACTION' => "admin_cron.php",
 		    'S_MODE'        => 'list',
 	    ));
-	
+
 	    //detect cron status
 	    if (@file_exists('../triggers/cron_running'))
 	    {
@@ -89,15 +89,15 @@ switch($mode)
 		    ));
 	    }
     break;
-	
+
 	case 'repair':
-	    if (@file_exists('../triggers/cron_running')) 
+	    if (@file_exists('../triggers/cron_running'))
 	    {
 		    rename("../triggers/cron_running", "../triggers/cron_allowed");
 	    }
 	    redirect('admin/'.basename(__FILE__) . '?mode=list');
     break;
-	
+
 	case 'run':
 	    run_jobs($job_id);
 	    redirect('admin/'.basename(__FILE__) . '?mode=list');
@@ -127,13 +127,13 @@ switch($mode)
 		        'RUN_COUNTER'     => $row['run_counter'],
 	        ));
 	    }
-		
+
 	    $run_day = array($lang['DELTA_TIME']['INTERVALS']['mday'][0] => 0);
 	    for($i=1; $i<=28; $i++)
 	    {
 		    $run_day[$i] = $i;
 	    }
-		
+
 	    $schedule = array($lang['SCHEDULE']['select'] => 0);
         foreach ($lang['SCHEDULE'] as $type => $key)
         {
@@ -142,30 +142,30 @@ switch($mode)
 
 	    $template->assign_vars(array(
 		    'TPL_CRON_EDIT'     => true,
-		    'S_CRON_ACTION'     => append_sid("admin_cron.php"),
+		    'S_CRON_ACTION'     => "admin_cron.php",
 		    'S_MODE'            => 'edit',
 		    'SCHEDULE'          => build_select('schedule', $schedule, $row['schedule']),
 		    'RUN_DAY'           => build_select('run_day', $run_day, $row['run_day']),
 		    'L_CRON_EDIT_HEAD'  => $lang['CRON_EDIT_HEAD_EDIT'],
 	    ));
     break;
-	
+
 	case 'add':
 	    $run_day = array($lang['DELTA_TIME']['INTERVALS']['mday'][0] => 0);
 	    for($i=1; $i<=28; $i++)
 	    {
 		    $run_day[$i] = $i;
 	    }
-		
+
 	    $schedule = array();
         foreach ($lang['SCHEDULE'] as $type => $key)
         {
             $schedule[$key] = $type;
         }
-	    
+
 	    $template->assign_vars(array(
 		    'TPL_CRON_EDIT'     => true,
-		    'S_CRON_ACTION'     => append_sid("admin_cron.php"),
+		    'S_CRON_ACTION'     => "admin_cron.php",
 		    'S_MODE'            => 'add',
 		    'SCHEDULE'          => build_select('schedule', $schedule, 'select', null, null),
 		    'RUN_DAY'           => build_select('run_day', $run_day, 0, null, null),
@@ -189,33 +189,33 @@ switch($mode)
 
 	case 'delete':
 		delete_jobs($job_id);
-			
-		$message = $lang['JOB_REMOVED'] . "<br /><br />" . sprintf($lang['CLICK_RETURN_JOBS'], "<a href=\"" . append_sid("admin_cron.php?mode=list") . "\">", "</a>") . "<br /><br />" . sprintf($lang['CLICK_RETURN_ADMIN_INDEX'], "<a href=\"" . append_sid("index.php?pane=right") . "\">", "</a>");
+
+		$message = $lang['JOB_REMOVED'] . "<br /><br />" . sprintf($lang['CLICK_RETURN_JOBS'], "<a href=\"admin_cron.php?mode=list\">", "</a>") . "<br /><br />" . sprintf($lang['CLICK_RETURN_ADMIN_INDEX'], "<a href=\"index.php?pane=right\">", "</a>");
 	    message_die(GENERAL_MESSAGE, $message);
     break;
-}	
+}
 
-if ($submit) 
+if ($submit)
 {
 	if ($_POST['mode'] == 'list')
 	{
-		if ($cron_action == 'run' && $jobs) 
+		if ($cron_action == 'run' && $jobs)
 		{
 			run_jobs($jobs);
 		}
-		else if ($cron_action == 'delete' && $jobs) 
+		else if ($cron_action == 'delete' && $jobs)
 		{
 			delete_jobs($jobs);
 		}
-		else if (($cron_action == 'disable' || $cron_action == 'enable') && $jobs) 
+		else if (($cron_action == 'disable' || $cron_action == 'enable') && $jobs)
 		{
 			toggle_active($jobs, $cron_action);
 		}
 		redirect('admin/'.basename(__FILE__) . '?mode=list');
 	}
-	else if (validate_cron_post($_POST) == 1) 
+	else if (validate_cron_post($_POST) == 1)
 	{
-		if($_POST['mode'] == 'edit') 
+		if($_POST['mode'] == 'edit')
 		{
 			update_cron_job($_POST);
 		}
@@ -227,7 +227,7 @@ if ($submit)
 
 		redirect('admin/'.basename(__FILE__) . '?mode=list');
 	}
-	else 
+	else
 	{
 		$message = validate_cron_post($_POST);
 		message_die(GENERAL_MESSAGE, $message);

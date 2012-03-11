@@ -67,7 +67,7 @@ $select_sort_order .= '</select>';
 $template->assign_vars(array(
 	'S_MODE_SELECT' => $select_sort_mode,
 	'S_ORDER_SELECT' => $select_sort_order,
-	'S_MODE_ACTION' => append_sid("memberlist.php"),
+	'S_MODE_ACTION' => "memberlist.php",
 	'S_USERNAME' => $paginationusername,
 ));
 
@@ -132,19 +132,19 @@ if ($by_letter_req)
 // ENG
 for ($i=ord('A'), $cnt=ord('Z'); $i <= $cnt; $i++)
 {
-	$select_letter .= ($by_letter == chr($i)) ? '<b>'. chr($i) .'</b>&nbsp;' : '<a class="genmed" href="'. append_sid("memberlist.php?letter=". chr($i) ."&amp;mode=$mode&amp;order=$sort_order") .'">'. chr($i) .'</a>&nbsp;';
+	$select_letter .= ($by_letter == chr($i)) ? '<b>'. chr($i) .'</b>&nbsp;' : '<a class="genmed" href="'. ("memberlist.php?letter=". chr($i) ."&amp;mode=$mode&amp;order=$sort_order") .'">'. chr($i) .'</a>&nbsp;';
 }
 // RUS
 $select_letter .= ': ';
 for ($i=224, $cnt=255; $i <= $cnt; $i++)
 {
-   $select_letter .= ($by_letter == iconv('windows-1251', 'UTF-8', chr($i))) ? '<b>'. iconv('windows-1251', 'UTF-8', chr($i-32)) .'</b>&nbsp;' : '<a class="genmed" href="'. append_sid("memberlist.php?letter=%". strtoupper(base_convert($i, 10, 16)) ."&amp;mode=$mode&amp;order=$sort_order") .'">'. iconv('windows-1251', 'UTF-8', chr($i-32)) .'</a>&nbsp;';
+   $select_letter .= ($by_letter == iconv('windows-1251', 'UTF-8', chr($i))) ? '<b>'. iconv('windows-1251', 'UTF-8', chr($i-32)) .'</b>&nbsp;' : '<a class="genmed" href="'. ("memberlist.php?letter=%". strtoupper(base_convert($i, 10, 16)) ."&amp;mode=$mode&amp;order=$sort_order") .'">'. iconv('windows-1251', 'UTF-8', chr($i-32)) .'</a>&nbsp;';
 }
 
 $select_letter .= ':&nbsp;';
-$select_letter .= ($by_letter == 'others') ? '<b>'. $lang['OTHERS'] .'</b>&nbsp;' : '<a class="genmed" href="'. append_sid("memberlist.php?letter=others&amp;mode=$mode&amp;order=$sort_order") .'">'. $lang['OTHERS'] .'</a>&nbsp;';
+$select_letter .= ($by_letter == 'others') ? '<b>'. $lang['OTHERS'] .'</b>&nbsp;' : '<a class="genmed" href="'. ("memberlist.php?letter=others&amp;mode=$mode&amp;order=$sort_order") .'">'. $lang['OTHERS'] .'</a>&nbsp;';
 $select_letter .= ':&nbsp;';
-$select_letter .= ($by_letter == 'all') ? '<b>'. $lang['ALL'] .'</b>' : '<a class="genmed" href="'. append_sid("memberlist.php?letter=all&amp;mode=$mode&amp;order=$sort_order") .'">'. $lang['ALL'] .'</a>';
+$select_letter .= ($by_letter == 'all') ? '<b>'. $lang['ALL'] .'</b>' : '<a class="genmed" href="'. ("memberlist.php?letter=all&amp;mode=$mode&amp;order=$sort_order") .'">'. $lang['ALL'] .'</a>';
 
 $template->assign_vars(array(
 	'S_LETTER_SELECT'   => $select_letter,
@@ -171,11 +171,11 @@ if ($result = DB()->fetch_rowset($sql))
 		$from     = $row['user_from'];
 		$joined   = bb_date($row['user_regdate'], $lang['DATE_FORMAT']);
 		$posts    = $row['user_posts'];
-		$pm       = ($bb_cfg['text_buttons']) ? '<a class="txtb" href="'. append_sid("privmsg.php?mode=post&amp;". POST_USERS_URL ."=$user_id") .'">'. $lang['SEND_PM_TXTB'] .'</a>' : '<a href="' . append_sid("privmsg.php?mode=post&amp;". POST_USERS_URL ."=$user_id") .'"><img src="' . $images['icon_pm'] . '" alt="' . $lang['SEND_PRIVATE_MESSAGE'] . '" title="' . $lang['SEND_PRIVATE_MESSAGE'] . '" border="0" /></a>';
+		$pm       = ($bb_cfg['text_buttons']) ? '<a class="txtb" href="'. ("privmsg.php?mode=post&amp;". POST_USERS_URL ."=$user_id") .'">'. $lang['SEND_PM_TXTB'] .'</a>' : '<a href="' . ("privmsg.php?mode=post&amp;". POST_USERS_URL ."=$user_id") .'"><img src="' . $images['icon_pm'] . '" alt="' . $lang['SEND_PRIVATE_MESSAGE'] . '" title="' . $lang['SEND_PRIVATE_MESSAGE'] . '" border="0" /></a>';
 
         if (bf($row['user_opt'], 'user_opt', 'viewemail') || IS_AM)
         {
-        	$email_uri = ($bb_cfg['board_email_form']) ? append_sid("profile.php?mode=email&amp;". POST_USERS_URL ."=$user_id") : 'mailto:'. $row['user_email'];
+        	$email_uri = ($bb_cfg['board_email_form']) ? ("profile.php?mode=email&amp;". POST_USERS_URL ."=$user_id") : 'mailto:'. $row['user_email'];
 			$email = '<a class="editable" href="'. $email_uri .'">'. $row['user_email'] .'</a>';
 			//$email = ($bb_cfg['text_buttons']) ? '<a class="editable" href="'. $email_uri .'">'. $row['user_email'] .'</a>' : '<a href="' . $email_uri .'"><img src="' . $images['icon_email'] . '" alt="' . $lang['SEND_EMAIL_MSG'] . '" title="' . $lang['SEND_EMAIL_MSG'] . '" border="0" /></a>';
 
@@ -206,7 +206,7 @@ if ($result = DB()->fetch_rowset($sql))
 			'PM'            => $pm,
 			'EMAIL'         => $email,
 			'WWW'           => $www,
-			'U_VIEWPROFILE' => append_sid("profile.php?mode=viewprofile&amp;". POST_USERS_URL ."=$user_id"))
+			'U_VIEWPROFILE' => "profile.php?mode=viewprofile&amp;". POST_USERS_URL ."=$user_id")
 		);
 	}
 }

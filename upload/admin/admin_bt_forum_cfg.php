@@ -83,7 +83,7 @@ if ($submit && $confirm)
 
 	$datastore->update('cat_forums');
 
-	$message = $lang['CONFIG_UPD'] .'<br /><br />'. sprintf($lang['RETURN_CONFIG'], '<a href="'. append_sid("admin_bt_forum_cfg.php") .'">', '</a>') .'<br /><br />'. sprintf($lang['CLICK_RETURN_ADMIN_INDEX'], '<a href="'. append_sid("index.php?pane=right") .'">', '</a>');
+	$message = $lang['CONFIG_UPD'] .'<br /><br />'. sprintf($lang['RETURN_CONFIG'], '<a href=""admin_bt_forum_cfg.php">', '</a>') .'<br /><br />'. sprintf($lang['CLICK_RETURN_ADMIN_INDEX'], '<a href="index.php?pane=right">', '</a>');
 	message_die(GENERAL_MESSAGE, $message);
 }
 
@@ -151,7 +151,7 @@ $template->assign_vars(array(
 	'BT_SHOW_PEERS_MODE_FULL_SEL'  => ($cfg['bt_show_peers_mode'] == SHOW_PEERS_FULL) ? HTML_CHECKED : '',
 
 	'S_HIDDEN_FIELDS' => '',
-	'S_CONFIG_ACTION' => append_sid("admin_bt_forum_cfg.php"),
+	'S_CONFIG_ACTION' => "admin_bt_forum_cfg.php",
 ));
 
 print_page('admin_bt_forum_cfg.tpl', 'admin');

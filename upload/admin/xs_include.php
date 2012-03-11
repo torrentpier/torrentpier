@@ -151,7 +151,7 @@ if(!defined('NO_XS_HEADER'))
 
 	$template->preparse = 'xs_header';
 	$template->postparse = 'xs_footer';
-	$template->assign_block_vars('nav_left',array('ITEM' => '<a href="' . append_sid('xs_index.php') . '">' . $lang['XS_MENU'] . '</a>'));
+	$template->assign_block_vars('nav_left',array('ITEM' => '<a href="xs_index.php">' . $lang['XS_MENU'] . '</a>'));
 }
 
 // check if cache is writable

@@ -75,7 +75,7 @@ if ($show_dl_list)
 			}
 			else
 			{
-				$u_prof_href = ($u['user_id'] == ANONYMOUS) ? '#' : append_sid("profile.php?mode=viewprofile&amp;u=". $u['user_id']) .'#torrent';
+				$u_prof_href = ($u['user_id'] == ANONYMOUS) ? '#' : "profile.php?mode=viewprofile&amp;u=". $u['user_id'] ."#torrent";
 				$dl_cat[$u['user_status']] .= '<nobr><a class="'. $u_link_class .'" href="'. $u_prof_href .'" title="'. $u['last_modified_dlstatus'] .'">'. profile_url(array('username' => $u['username'], 'user_rank' => $u['user_rank'])) .'</a></nobr>, ';
 				$dl_count[$u['user_status']]++;
 			}
@@ -132,7 +132,7 @@ if ($show_dl_buttons)
 
 	$template->assign_vars(array(
 		'DL_HIDDEN_FIELDS' => $dl_hidden_fields,
-		'S_DL_ACTION'      => append_sid("dl_list.php?". POST_TOPIC_URL ."=$topic_id"),
+		'S_DL_ACTION'      => "dl_list.php?". POST_TOPIC_URL ."=$topic_id",
 	));
 }
 

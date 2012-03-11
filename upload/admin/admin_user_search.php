@@ -118,7 +118,7 @@ if(!isset($_POST['dosearch'])&&!isset($_GET['dosearch']))
 		'STYLE_LIST' => $styles_list,
 		'LASTVISITED_LIST' => $lastvisited_list,
 
-		'S_SEARCH_ACTION' => append_sid("admin_user_search.php")
+		'S_SEARCH_ACTION' => "admin_user_search.php"
 	));
 }
 else
@@ -1227,12 +1227,12 @@ else
 
 	if($page > 1)
 	{
-		$pagination .= '<a href="'.append_sid("$base_url&sort=$sort&order=$order&page=".($page - 1)).'">'.$lang['PREVIOUS'].'</a>';
+		$pagination .= '<a href="'.("$base_url&sort=$sort&order=$order&page=".($page - 1)).'">'.$lang['PREVIOUS'].'</a>';
 	}
 
 	if($page < $num_pages)
 	{
-		$pagination .= ( $pagination == '' ) ? '<a href="'.append_sid("$base_url&sort=$sort&order=$order&page=".($page + 1)).'">'.$lang['NEXT'].'</a>' : ' | <a href="'.append_sid("$base_url&sort=$sort&order=$order&page=".($page + 1)).'">'.$lang['NEXT'].'</a>';
+		$pagination .= ( $pagination == '' ) ? '<a href="'.("$base_url&sort=$sort&order=$order&page=".($page + 1)).'">'.$lang['NEXT'].'</a>' : ' | <a href="'.("$base_url&sort=$sort&order=$order&page=".($page + 1)).'">'.$lang['NEXT'].'</a>';
 	}
 
 	if($num_pages > 2)
@@ -1245,15 +1245,15 @@ else
 
 		'PAGE_NUMBER' => sprintf($lang['PAGE_OF'], $page, $num_pages),
 		'PAGINATION' => $pagination,
-		'NEW_SEARCH' => sprintf($lang['SEARCH_USERS_NEW'],$text, $total_pages['total'],append_sid("admin_user_search.php")),
+		'NEW_SEARCH' => sprintf($lang['SEARCH_USERS_NEW'],$text, $total_pages['total'], "admin_user_search.php"),
 
-		'U_USERNAME' => ( ( $sort == 'username' ) ? append_sid("$base_url&sort=$sort&order=$o_order") : append_sid("$base_url&sort=username&order=$order") ),
-		'U_EMAIL' => ( ( $sort == 'user_email' ) ? append_sid("$base_url&sort=$sort&order=$o_order") : append_sid("$base_url&sort=user_email&order=$order") ),
-		'U_POSTS' => ( ( $sort == 'posts' ) ? append_sid("$base_url&sort=$sort&order=$o_order") : append_sid("$base_url&sort=posts&order=$order") ),
-		'U_JOINDATE' => ( ( $sort == 'regdate' ) ? append_sid("$base_url&sort=$sort&order=$o_order") : append_sid("$base_url&sort=regdate&order=$order") ),
-		'U_LASTVISIT' => ( ( $sort == 'lastvisit' ) ? append_sid("$base_url&sort=$sort&order=$o_order") : append_sid("$base_url&sort=lastvisit&order=$order") ),
+		'U_USERNAME' => ($sort == 'username') ? "$base_url&sort=$sort&order=$o_order" : "$base_url&sort=username&order=$order",
+		'U_EMAIL' => ($sort == 'user_email') ? "$base_url&sort=$sort&order=$o_order" : "$base_url&sort=user_email&order=$order",
+		'U_POSTS' => ($sort == 'posts') ? "$base_url&sort=$sort&order=$o_order" : "$base_url&sort=posts&order=$order",
+		'U_JOINDATE' => ($sort == 'regdate') ? "$base_url&sort=$sort&order=$o_order" : "$base_url&sort=regdate&order=$order",
+		'U_LASTVISIT' => ($sort == 'lastvisit') ? "$base_url&sort=$sort&order=$o_order") : "$base_url&sort=lastvisit&order=$order",
 
-		'S_POST_ACTION' => append_sid("$base_url&sort=$sort&order=$order")
+		'S_POST_ACTION' => "$base_url&sort=$sort&order=$order"
 	));
 
 	if(!$result = DB()->sql_query($select_sql))
@@ -1302,9 +1302,9 @@ else
 			'BAN' => ( ( !isset($banned[$rowset[$i]['user_id']]) ) ? $lang['NOT_BANNED'] : $lang['BANNED'] ),
 			'ABLED' => ( ( $rowset[$i]['user_active'] ) ? $lang['ENABLED'] : $lang['DISABLED'] ),
 
-			'U_VIEWPOSTS' => append_sid("../search.php?search_author=1&amp;uid={$rowset[$i]['user_id']}"),
-			'U_MANAGE' => append_sid("../profile.php?mode=editprofile&".POST_USERS_URL."=".$rowset[$i]['user_id']),
-			'U_PERMISSIONS' => append_sid("admin_ug_auth.php?mode=user&".POST_USERS_URL."=".$rowset[$i]['user_id']),
+			'U_VIEWPOSTS' => "../search.php?search_author=1&amp;uid={$rowset[$i]['user_id']}",
+			'U_MANAGE' => "../profile.php?mode=editprofile&".POST_USERS_URL."=".$rowset[$i]['user_id'],
+			'U_PERMISSIONS' => "admin_ug_auth.php?mode=user&".POST_USERS_URL."=".$rowset[$i]['user_id'],
 		));
 	}
 }

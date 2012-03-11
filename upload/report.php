@@ -13,8 +13,8 @@ $user->session_start(array('req_login' => true));
 if(!$bb_cfg['reports_enabled']) bb_die($lang['REPORTS_DISABLE']);
 
 $return_links = array(
-	'index' => '<br /><br />' . sprintf($lang['CLICK_RETURN_INDEX'], '<a href="' . append_sid("index.php") . '">', '</a>'),
-	'list' => '<br /><br />' . sprintf($lang['CLICK_RETURN_REPORT_LIST'], '<a href="' . append_sid("report.php") . '">', '</a>')
+	'index' => '<br /><br />' . sprintf($lang['CLICK_RETURN_INDEX'], '<a href="index.php">', '</a>'),
+	'list' => '<br /><br />' . sprintf($lang['CLICK_RETURN_REPORT_LIST'], '<a href="report.php">', '</a>')
 );
 
 if (isset($_POST['mode']) || isset($_GET['mode']))
@@ -120,7 +120,7 @@ if (isset($report_module))
 	}
 	else if (isset($_POST['cancel']))
 	{
-		$redirect_url = (method_exists($report_module, 'subject_url')) ? $report_module->subject_url($report_subject_id, true) : append_sid("index.php", true);
+		$redirect_url = (method_exists($report_module, 'subject_url')) ? $report_module->subject_url($report_subject_id, true) : "index.php";
 		redirect($redirect_url);
 	}
 
@@ -193,7 +193,7 @@ if (isset($report_module))
 	$hidden_fields = '<input type="hidden" name="mode" value="' . $mode . '" /><input type="hidden" name="id" value="' . $report_subject_id . '" />';
 
 	$template->assign_vars(array(
-		'S_REPORT_ACTION' => append_sid("report.php"),
+		'S_REPORT_ACTION' => "report.php",
 		'S_HIDDEN_FIELDS' => $hidden_fields,
 
 		'L_WRITE_REPORT' => $report_module->lang['WRITE_REPORT'],
@@ -209,7 +209,7 @@ else
 {
 	if ($userdata['user_level'] != ADMIN && ($bb_cfg['report_list_admin'] || $userdata['user_level'] != MOD))
 	{
-		redirect(append_sid("index.php", true));
+		redirect("index.php");
 	}
 
 	$params = array('open', 'process', 'clear', 'delete');
@@ -259,8 +259,7 @@ else
 
 			if (empty($reports))
 			{
-				$template->assign_var('META', '<meta http-equiv="refresh" content="3;url=' . append_sid("report.php") . '">');
-
+				meta_refresh('report.php', 3);
 				message_die(GENERAL_MESSAGE, $lang['NO_REPORTS_SELECTED'] . $return_links['list'] . $return_links['index']);
 			}
 
@@ -270,7 +269,7 @@ else
 			if (isset($_POST['cancel']))
 			{
 				$redirect_url = ($single_report) ? "report.php?" . POST_REPORT_URL . '=' . $reports[0] : "report.php";
-				redirect(append_sid($redirect_url, true));
+				redirect($redirect_url);
 			}
 
 			//
@@ -290,7 +289,7 @@ else
 			}
 
 			$template->assign_vars(array(
-				'S_CONFIRM_ACTION' => append_sid("report.php"),
+				'S_CONFIRM_ACTION' => "report.php",
 				'S_HIDDEN_FIELDS' => $hidden_fields)
 			);
 
@@ -321,9 +320,10 @@ else
 					reports_update_status($reports, $status, $comment);
 
 					$meta_url = ($single_report) ? "report.php?" . POST_REPORT_URL . '=' . $reports[0] : "report.php";
-					$template->assign_var('META', '<meta http-equiv="refresh" content="3;url=' . append_sid($meta_url) . '">');
 
-					$return_link = ($single_report) ? '<br /><br />' . sprintf($lang['CLICK_RETURN_REPORT'], '<a href="' . append_sid("report.php?" . POST_REPORT_URL . '=' . $reports[0]) . '">', '</a>') : '';
+					meta_refresh($meta_url, 3);
+
+					$return_link = ($single_report) ? '<br /><br />' . sprintf($lang['CLICK_RETURN_REPORT'], '<a href="' . ("report.php?" . POST_REPORT_URL . '=' . $reports[0]) . '">', '</a>') : '';
 					$message = ($single_report) ? 'REPORT_CHANGED' : 'REPORTS_CHANGED';
 					message_die(GENERAL_MESSAGE, $lang[$message] . $return_link . $return_links['list'] . $return_links['index']);
 				}
@@ -352,7 +352,7 @@ else
 				{
 					reports_delete($reports);
 
-					$template->assign_var('META', '<meta http-equiv="refresh" content="3;url=' . append_sid("report.php") . '">');
+                    meta_refresh('report.php', 3);
 
 					$message = ($single_report) ? 'REPORT_DELETED' : 'REPORTS_DELETED';
 					message_die(GENERAL_MESSAGE, $lang[$message] . $return_links['list'] . $return_links['index']);
@@ -396,7 +396,7 @@ else
 			//
 			else if (count($reports) == 1)
 			{
-				$redirect_url = append_sid("report.php?" . POST_REPORT_URL . '=' . $reports[0]['report_id'], true);
+				$redirect_url = "report.php?" . POST_REPORT_URL . '=' . $reports[0]['report_id'];
 				redirect($redirect_url);
 			}
 
@@ -407,7 +407,7 @@ else
 			);
 
 			$template->assign_vars(array(
-				'S_REPORT_ACTION', append_sid("report.php"),
+				'S_REPORT_ACTION', "report.php",
 
 				'L_STATUS_CLEARED' => $lang['REPORT_STATUS'][REPORT_CLEARED],
 				'L_STATUS_IN_PROCESS' => $lang['REPORT_STATUS'][REPORT_IN_PROCESS],
@@ -420,7 +420,7 @@ else
 			foreach ($reports as $report)
 			{
 				$template->assign_block_vars('open_reports', array(
-					'U_SHOW' => append_sid("report.php?" . POST_REPORT_URL . '=' . $report['report_id']),
+					'U_SHOW' => "report.php?" . POST_REPORT_URL . '=' . $report['report_id'],
 
 					'ID' => $report['report_id'],
 					'TITLE' => $report['report_title'],
@@ -441,9 +441,9 @@ else
 			);
 
 			$template->assign_vars(array(
-				'S_REPORT_ACTION' => append_sid("report.php"),
+				'S_REPORT_ACTION' => "report.php",
 
-				'U_REPORT_INDEX' => append_sid("report.php"),
+				'U_REPORT_INDEX' => "report.php",
 
 				'L_STATUS_CLEARED' => $lang['REPORT_STATUS'][REPORT_CLEARED],
 				'L_STATUS_IN_PROCESS' => $lang['REPORT_STATUS'][REPORT_IN_PROCESS],
@@ -472,7 +472,7 @@ else
 				}
 
 				$template->assign_block_vars('report_modules', array(
-					'U_SHOW' => append_sid("report.php?" . POST_CAT_URL . '=' . $report_module->id),
+					'U_SHOW' => "report.php?" . POST_CAT_URL . '=' . $report_module->id,
 
 					'TITLE' => $report_module->lang['REPORT_LIST_TITLE'])
 				);
@@ -504,7 +504,7 @@ else
 				foreach ($reports[$report_module->id] as $report)
 				{
 					$template->assign_block_vars('report_modules.reports', array(
-						'U_SHOW' => append_sid("report.php?" . POST_REPORT_URL . '=' . $report['report_id'] . $cat_url),
+						'U_SHOW' => "report.php?" . POST_REPORT_URL . '=' . $report['report_id'] . $cat_url,
 
 						'ROW_CLASS' => $report_status_classes[$report['report_status']],
 						'ID' => $report['report_id'],
@@ -694,7 +694,7 @@ else
 				$template->assign_vars(array(
 					'S_HIDDEN_FIELDS' => '<input type="hidden" name="' . POST_REPORT_URL . '" value="' . $report['report_id'] . '" />',
 
-					'U_REPORT_AUTHOR_PRIVMSG' => append_sid("privmsg.php?mode=post&amp;" . POST_USERS_URL . '=' . $report['user_id']),
+					'U_REPORT_AUTHOR_PRIVMSG' => "privmsg.php?mode=post&amp;" . POST_USERS_URL . '=' . $report['user_id'],
 
 					'REPORT_TYPE' => $report_module->lang['REPORT_TYPE'],
 					'REPORT_TITLE' => $report['report_title'],
@@ -739,7 +739,7 @@ else
 						$report_module =& $report_modules[$report['report_module_id']];
 
 						$template->assign_block_vars('switch_deleted_reports.deleted_reports', array(
-							'U_SHOW' => append_sid("report.php?" . POST_REPORT_URL . '=' . $report['report_id'] . $cat_url),
+							'U_SHOW' => "report.php?" . POST_REPORT_URL . '=' . $report['report_id'] . $cat_url,
 
 							'ID' => $report['report_id'],
 							'TITLE' => $report['report_title'],

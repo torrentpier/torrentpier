@@ -24,8 +24,8 @@ if( isset($_GET['pane']) && $_GET['pane'] == 'left' )
 
 	$template->assign_vars(array(
 		'TPL_ADMIN_NAVIGATE' => true,
-		"U_FORUM_INDEX" => append_sid("../index.php"),
-		"U_ADMIN_INDEX" => append_sid("index.php?pane=right"))
+		"U_FORUM_INDEX" => "../index.php",
+		"U_ADMIN_INDEX" => "index.php?pane=right")
 	);
 
 	ksort($module);
@@ -50,7 +50,7 @@ if( isset($_GET['pane']) && $_GET['pane'] == 'left' )
 			$template->assign_block_vars("catrow.modulerow", array(
 				"ROW_CLASS" => $row_class,
 				"ADMIN_MODULE" => $action,
-				"U_ADMIN_MODULE" => append_sid($file))
+				"U_ADMIN_MODULE" => $file)
 			);
 			$row_count++;
 		}

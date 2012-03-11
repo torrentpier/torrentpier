@@ -168,7 +168,7 @@ function generate_smilies($mode)
 				$template->assign_block_vars('switch_smilies_extra', array());
 
 				$template->assign_vars(array(
-					'U_MORE_SMILIES' => append_sid("posting.php?mode=smilies"))
+					'U_MORE_SMILIES' => "posting.php?mode=smilies")
 				);
 			}
 

@@ -145,7 +145,7 @@ if( isset($_GET['import_pack']) || isset($_POST['import_pack']) )
 			}
 		}
 
-		$message = $lang['SMILEY_IMPORT_SUCCESS'] . "<br /><br />" . sprintf($lang['CLICK_RETURN_SMILEADMIN'], "<a href=\"" . append_sid("admin_smilies.php") . "\">", "</a>") . "<br /><br />" . sprintf($lang['CLICK_RETURN_ADMIN_INDEX'], "<a href=\"" . append_sid("index.php?pane=right") . "\">", "</a>");
+		$message = $lang['SMILEY_IMPORT_SUCCESS'] . "<br /><br />" . sprintf($lang['CLICK_RETURN_SMILEADMIN'], "<a href=\"admin_smilies.php\">", "</a>") . "<br /><br />" . sprintf($lang['CLICK_RETURN_ADMIN_INDEX'], "<a href=\"index.php?pane=right\">", "</a>");
 
 		message_die(GENERAL_MESSAGE, $message);
 	}
@@ -169,7 +169,7 @@ if( isset($_GET['import_pack']) || isset($_POST['import_pack']) )
 		$template->assign_vars(array(
 			'TPL_SMILE_IMPORT' => true,
 
-			"S_SMILEY_ACTION" => append_sid("admin_smilies.php"),
+			"S_SMILEY_ACTION" => "admin_smilies.php",
 			"S_SMILE_SELECT" => $smile_paks_select,
 			"S_HIDDEN_FIELDS" => $hidden_vars)
 		);
@@ -209,7 +209,7 @@ else if( isset($_POST['export_pack']) || isset($_GET['export_pack']) )
 		exit;
 	}
 
-	$message = sprintf($lang['EXPORT_SMILES'], "<a href=\"" . append_sid("admin_smilies.php?export_pack=send", true) . "\">", "</a>") . "<br /><br />" . sprintf($lang['CLICK_RETURN_SMILEADMIN'], "<a href=\"" . append_sid("admin_smilies.php") . "\">", "</a>") . "<br /><br />" . sprintf($lang['CLICK_RETURN_ADMIN_INDEX'], "<a href=\"" . append_sid("index.php?pane=right") . "\">", "</a>");
+	$message = sprintf($lang['EXPORT_SMILES'], "<a href=\"admin_smilies.php?export_pack=send\">", "</a>") . "<br /><br />" . sprintf($lang['CLICK_RETURN_SMILEADMIN'], "<a href=\"admin_smilies.php\">", "</a>") . "<br /><br />" . sprintf($lang['CLICK_RETURN_ADMIN_INDEX'], "<a href=\"index.php?pane=right\">", "</a>");
 
 	message_die(GENERAL_MESSAGE, $message);
 
@@ -230,7 +230,7 @@ else if( isset($_POST['add']) || isset($_GET['add']) )
 	$template->assign_vars(array(
 		'TPL_SMILE_EDIT' => true,
 		"SMILEY_IMG" => BB_ROOT . $bb_cfg['smilies_path'] . '/' . $smiley_images[0],
-		"S_SMILEY_ACTION" => append_sid("admin_smilies.php"),
+		"S_SMILEY_ACTION" => "admin_smilies.php",
 		"S_HIDDEN_FIELDS" => $s_hidden_fields,
 		"S_FILENAME_OPTIONS" => $filename_list,
 		"S_SMILEY_BASEDIR" => BB_ROOT . $bb_cfg['smilies_path'])
@@ -257,7 +257,7 @@ else if ( $mode != "" )
 			}
             $datastore->update('smile_replacements');
 
-			$message = $lang['SMILEY_DEL_SUCCESS'] . "<br /><br />" . sprintf($lang['CLICK_RETURN_SMILEADMIN'], "<a href=\"" . append_sid("admin_smilies.php") . "\">", "</a>") . "<br /><br />" . sprintf($lang['CLICK_RETURN_ADMIN_INDEX'], "<a href=\"" . append_sid("index.php?pane=right") . "\">", "</a>");
+			$message = $lang['SMILEY_DEL_SUCCESS'] . "<br /><br />" . sprintf($lang['CLICK_RETURN_SMILEADMIN'], "<a href=\"admin_smilies.php\">", "</a>") . "<br /><br />" . sprintf($lang['CLICK_RETURN_ADMIN_INDEX'], "<a href=\"index.php?pane=right\">", "</a>");
 
 			message_die(GENERAL_MESSAGE, $message);
 			break;
@@ -303,7 +303,7 @@ else if ( $mode != "" )
 				"SMILEY_CODE" => $smile_data['code'],
 				"SMILEY_EMOTICON" => $smile_data['emoticon'],
 				"SMILEY_IMG" => BB_ROOT . $bb_cfg['smilies_path'] . '/' . $smiley_edit_img,
-				"S_SMILEY_ACTION" => append_sid("admin_smilies.php"),
+				"S_SMILEY_ACTION" => "admin_smilies.php",
 				"S_HIDDEN_FIELDS" => $s_hidden_fields,
 				"S_FILENAME_OPTIONS" => $filename_list,
 				"S_SMILEY_BASEDIR" => BB_ROOT . $bb_cfg['smilies_path'])
@@ -350,7 +350,7 @@ else if ( $mode != "" )
 			}
             $datastore->update('smile_replacements');
 
-			$message = $lang['SMILEY_EDIT_SUCCESS'] . "<br /><br />" . sprintf($lang['CLICK_RETURN_SMILEADMIN'], "<a href=\"" . append_sid("admin_smilies.php") . "\">", "</a>") . "<br /><br />" . sprintf($lang['CLICK_RETURN_ADMIN_INDEX'], "<a href=\"" . append_sid("index.php?pane=right") . "\">", "</a>");
+			$message = $lang['SMILEY_EDIT_SUCCESS'] . "<br /><br />" . sprintf($lang['CLICK_RETURN_SMILEADMIN'], "<a href=\"admin_smilies.php\">", "</a>") . "<br /><br />" . sprintf($lang['CLICK_RETURN_ADMIN_INDEX'], "<a href=\"index.php?pane=right\">", "</a>");
 
 			message_die(GENERAL_MESSAGE, $message);
 			break;
@@ -396,7 +396,7 @@ else if ( $mode != "" )
 			}
             $datastore->update('smile_replacements');
 
-			$message = $lang['SMILEY_ADD_SUCCESS'] . "<br /><br />" . sprintf($lang['CLICK_RETURN_SMILEADMIN'], "<a href=\"" . append_sid("admin_smilies.php") . "\">", "</a>") . "<br /><br />" . sprintf($lang['CLICK_RETURN_ADMIN_INDEX'], "<a href=\"" . append_sid("index.php?pane=right") . "\">", "</a>");
+			$message = $lang['SMILEY_ADD_SUCCESS'] . "<br /><br />" . sprintf($lang['CLICK_RETURN_SMILEADMIN'], "<a href=\"admin_smilies.php\">", "</a>") . "<br /><br />" . sprintf($lang['CLICK_RETURN_ADMIN_INDEX'], "<a href=\"index.php?pane=right\">", "</a>");
 
 			message_die(GENERAL_MESSAGE, $message);
 			break;
@@ -422,7 +422,7 @@ else
 	$template->assign_vars(array(
 		'TPL_SMILE_MAIN' => true,
 		"S_HIDDEN_FIELDS" => @$s_hidden_fields,
-		"S_SMILEY_ACTION" => append_sid("admin_smilies.php"))
+		"S_SMILEY_ACTION" => "admin_smilies.php")
 	);
 
 	//
@@ -445,8 +445,8 @@ else
 			"CODE" => $smilies[$i]['code'],
 			"EMOT" => $smilies[$i]['emoticon'],
 
-			"U_SMILEY_EDIT" => append_sid("admin_smilies.php?mode=edit&amp;id=" . $smilies[$i]['smilies_id']),
-			"U_SMILEY_DELETE" => append_sid("admin_smilies.php?mode=delete&amp;id=" . $smilies[$i]['smilies_id']))
+			"U_SMILEY_EDIT" => "admin_smilies.php?mode=edit&amp;id=" . $smilies[$i]['smilies_id'],
+			"U_SMILEY_DELETE" => "admin_smilies.php?mode=delete&amp;id=" . $smilies[$i]['smilies_id'])
 		);
 	}
 }
