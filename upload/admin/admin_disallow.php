@@ -37,7 +37,7 @@ if( isset($_POST['add_name']) )
 		$message = $lang['DISALLOW_SUCCESSFUL'];
 	}
 
-	$message .= "<br /><br />" . sprintf($lang['CLICK_RETURN_DISALLOWADMIN'], "<a href=\""admin_disallow.php\">", "</a>") . "<br /><br />" . sprintf($lang['CLICK_RETURN_ADMIN_INDEX'], "<a href=\"index.php?pane=right\">", "</a>");
+	$message .= '<br /><br />'. sprintf($lang['CLICK_RETURN_DISALLOWADMIN'], '<a href="admin_disallow.php">', '</a>') . '<br /><br />'. sprintf($lang['CLICK_RETURN_ADMIN_INDEX'], '<a href="index.php?pane=right">', '</a>');
 
 	message_die(GENERAL_MESSAGE, $message);
 }
@@ -53,7 +53,7 @@ else if( isset($_POST['delete_name']) )
 		message_die(GENERAL_ERROR, "Couldn't removed disallowed user.", "",__LINE__, __FILE__, $sql);
 	}
 
-	$message .= $lang['DISALLOWED_DELETED'] . "<br /><br />" . sprintf($lang['CLICK_RETURN_DISALLOWADMIN'], "<a href=\""admin_disallow.php\">", "</a>") . "<br /><br />" . sprintf($lang['CLICK_RETURN_ADMIN_INDEX'], "<a href=\"index.php?pane=right\">", "</a>");
+	$message .= $lang['DISALLOWED_DELETED'] .'<br /><br />'. sprintf($lang['CLICK_RETURN_DISALLOWADMIN'], '<a href="admin_disallow.php">', '</a>') .'<br /><br />'. sprintf($lang['CLICK_RETURN_ADMIN_INDEX'], '<a href="index.php?pane=right">', '</a>');
 
 	message_die(GENERAL_MESSAGE, $message);
 
@@ -92,8 +92,8 @@ else
 $disallow_select .= '</select>';
 
 $template->assign_vars(array(
-	"S_DISALLOW_SELECT" => $disallow_select,
-	"S_FORM_ACTION" => "admin_disallow.php",
+	'S_DISALLOW_SELECT' => $disallow_select,
+	'S_FORM_ACTION'     => 'admin_disallow.php',
 ));
 
 print_page('admin_disallow.tpl', 'admin');

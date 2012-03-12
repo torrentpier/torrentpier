@@ -2,8 +2,6 @@
 
 if (!defined('BB_ROOT')) die(basename(__FILE__));
 
-$template->set_filenames(array('body' => 'usercp_register.tpl'));
-
 array_deep($_POST, 'trim');
 
 set_die_append_msg();
@@ -142,6 +140,7 @@ switch ($mode)
 		$sql = "
 			SELECT
 				user_id,
+				user_rank,
 				user_level,
 				user_avatar,
 				$profile_fields_sql
@@ -486,7 +485,7 @@ foreach ($profile_fields as $field => $can_edit)
 		{
 			$sig = prepare_message($sig);
 
-			if (mb_strlen($sig, "UTF-8") > $bb_cfg['max_sig_chars'])
+			if (mb_strlen($sig, 'UTF-8') > $bb_cfg['max_sig_chars'])
 			{
 				$errors[] = $lang['SIGNATURE_TOO_LONG'];
 			}
@@ -605,19 +604,19 @@ foreach ($profile_fields as $field => $can_edit)
 			$s_colspan = 0;
 			for($i = 0; $i < @count($avatar_images[$category]); $i++)
 			{
-				$template->assign_block_vars("avatar_row", array());
+				$template->assign_block_vars('avatar_row', array());
 
 				$s_colspan = max($s_colspan, count($avatar_images[$category][$i]));
 
 				for($j = 0; $j < count($avatar_images[$category][$i]); $j++)
 				{
 					$template->assign_block_vars('avatar_row.avatar_column', array(
-						"AVATAR_IMAGE" => $bb_cfg['avatar_gallery_path'] . '/' . $category . '/' . $avatar_images[$category][$i][$j],
-						"AVATAR_NAME" => $avatar_name[$category][$i][$j])
+						'AVATAR_IMAGE' => $bb_cfg['avatar_gallery_path'] . '/' . $category . '/' . $avatar_images[$category][$i][$j],
+						'AVATAR_NAME' => $avatar_name[$category][$i][$j])
 					);
 
 					$template->assign_block_vars('avatar_row.avatar_option_column', array(
-						"S_OPTIONS_AVATAR" => $avatar_images[$category][$i][$j])
+						'S_OPTIONS_AVATAR' => $avatar_images[$category][$i][$j])
 					);
 				}
 			}
@@ -627,7 +626,7 @@ foreach ($profile_fields as $field => $can_edit)
 			$template->assign_vars(array(
 				'S_CATEGORY_SELECT' => $s_categories,
 				'S_COLSPAN' => $s_colspan,
-				'S_PROFILE_ACTION' => "profile.php?mode=$mode",
+				'S_PROFILE_ACTION' => 'profile.php?mode='. $mode,
 				'S_HIDDEN_FIELDS' => $s_hidden_vars)
 			);
 
@@ -777,6 +776,7 @@ if ($submit && !$errors)
 
 		if (IS_ADMIN)
 		{
+			set_pr_die_append_msg($new_user_id);
 			$message = $lang['ACCOUNT_ADDED'];
 		}
 		else
@@ -826,7 +826,7 @@ if ($submit && !$errors)
 				$emailer->replyto($bb_cfg['board_email']);
 
 				$emailer->email_address($email);
-				$emailer->use_template("admin_activate", $user_lang);
+				$emailer->use_template('admin_activate', $user_lang);
 				$emailer->set_subject($lang['NEW_ACCOUNT_SUBJECT']);
 
 				$emailer->assign_vars(array(
@@ -840,8 +840,6 @@ if ($submit && !$errors)
 			}
 		}
 
-		$message = $message . '<br /><br />' . sprintf($lang['CLICK_RETURN_INDEX'],  '<a href="index.php">', '</a>');
-
 		bb_die($message);
 	}
 	/**
@@ -849,6 +847,7 @@ if ($submit && !$errors)
 	*/
 	else
 	{
+		set_pr_die_append_msg($pr_data['user_id']);
 		// если что-то было изменено
 		if ($db_data)
 		{
@@ -866,7 +865,7 @@ if ($submit && !$errors)
 
 				if($bb_cfg['require_activation'] == USER_ACTIVATION_ADMIN)
 				{
-					$emailer->use_template("admin_activate", $pr_data['user_lang']);
+					$emailer->use_template('admin_activate', $pr_data['user_lang']);
 				}
 				else
 				{
@@ -885,13 +884,13 @@ if ($submit && !$errors)
 				$emailer->send();
 				$emailer->reset();
 
-				$message = $lang['PROFILE_UPDATED_INACTIVE'] . '<br /><br />' . sprintf($lang['CLICK_RETURN_INDEX'],  '<a href="index.php">', '</a>');
+				$message = $lang['PROFILE_UPDATED_INACTIVE'];
 			    $user->session_end();
 			}
 			else
 			{
-				meta_refresh("index.php", 10);
-				$message = $lang['PROFILE_UPDATED'] . '<br /><br />' . sprintf($lang['CLICK_RETURN_INDEX'],  '<a href="index.php">', '</a>');
+				meta_refresh('index.php' , 10);
+				$message = $lang['PROFILE_UPDATED'];
 			}
 
 			$sql_args = DB()->build_array('UPDATE', $db_data);
@@ -914,12 +913,12 @@ if ($submit && !$errors)
 			}
 			elseif(!$pr_data['user_active'])
 			{
-				bb_die($lang['PROFILE_UPDATED_INACTIVE'] . '<br /><br />' . sprintf($lang['CLICK_RETURN_INDEX'],  '<a href="index.php">', '</a>'));
+				bb_die($lang['PROFILE_UPDATED_INACTIVE']);
 			}
 			else
 			{
-				meta_refresh("index.php", 10);
-				bb_die($lang['PROFILE_UPDATED'] . '<br /><br /><a href="' . PROFILE_URL . $userdata['user_id'] . '">'.$lang['RETURN_PROFILE'].'</a><br /><br />' . sprintf($lang['CLICK_RETURN_INDEX'],  '<a href="index.php">', '</a>'));
+				meta_refresh('index.php' , 10);
+				bb_die($lang['PROFILE_UPDATED']);
 			}
 		}
 		else
@@ -955,8 +954,20 @@ $template->assign_vars(array(
 
 ));
 
-require(PAGE_HEADER);
+print_page('usercp_register.tpl');
 
-$template->pparse('body');
+// ----------------------------------------------------------- //
+// Functions
+//
+function set_pr_die_append_msg ($pr_uid)
+{
+	global $lang, $template;
 
-require(PAGE_FOOTER);
+	$template->assign_var('BB_DIE_APPEND_MSG', '
+		<a href="'. PROFILE_URL . $pr_uid .'" onclick="return post2url(this.href, {after_edit: 1});">Перейти к просмотру профиля</a>
+		<br /><br />
+		<a href="profile.php?mode=editprofile'. (IS_ADMIN ? "&amp;u=$pr_uid" : '') .'" onclick="return post2url(this.href, {after_edit: 1});">Вернуться к редактированию</a>
+		<br /><br />
+		<a href="index.php">Вернуться на главную страницу</a>
+	');
+}

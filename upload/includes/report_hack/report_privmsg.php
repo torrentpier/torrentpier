@@ -163,7 +163,7 @@ class report_privmsg extends report_module
 	function subject_url($report_subject, $non_html_amp = false)
 	{
 		$sep = ($non_html_amp) ? '&' : '&amp;';
-		return "privmsg.php?mode=read$sep" . POST_POST_URL . '=' . (int) $report_subject, $non_html_amp;
+		return 'privmsg.php?mode=read'.$sep . POST_POST_URL . '=' . (int) $report_subject . $non_html_amp;
 	}
 
 	//

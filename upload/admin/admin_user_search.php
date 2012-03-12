@@ -118,7 +118,7 @@ if(!isset($_POST['dosearch'])&&!isset($_GET['dosearch']))
 		'STYLE_LIST' => $styles_list,
 		'LASTVISITED_LIST' => $lastvisited_list,
 
-		'S_SEARCH_ACTION' => "admin_user_search.php"
+		'S_SEARCH_ACTION' => 'admin_user_search.php',
 	));
 }
 else
@@ -314,7 +314,7 @@ else
 			}
 	}
 
-	$base_url = "admin_user_search.php?dosearch=true";
+	$base_url = 'admin_user_search.php?dosearch=true';
 
 	$select_sql = "SELECT u.user_id, u.username, u.user_rank, u.user_email, u.user_posts, u.user_regdate, u.user_level, u.user_active, u.user_lastvisit
 						FROM ". BB_USERS ." AS u";
@@ -347,7 +347,7 @@ else
 	switch($mode)
 	{
 		case 'search_username':
-			$base_url .= "&search_username=true&username=".rawurlencode(stripslashes($username));
+			$base_url .= '&search_username=true&username='.rawurlencode(stripslashes($username));
 
 			$text = sprintf($lang['SEARCH_FOR_USERNAME'], strip_tags(htmlspecialchars(stripslashes($username))));
 
@@ -396,7 +396,7 @@ else
 			}
 			break;
 		case 'search_email':
-			$base_url .= "&search_email=true&email=".rawurlencode(stripslashes($email));
+			$base_url .= '&search_email=true&email='.rawurlencode(stripslashes($email));
 
 			$text = sprintf($lang['SEARCH_FOR_EMAIL'], strip_tags(htmlspecialchars(stripslashes($email))));
 
@@ -445,7 +445,7 @@ else
 			}
 			break;
 		case 'search_ip':
-			$base_url .= "&search_ip=true&ip_address=".rawurlencode(stripslashes($ip_address));
+			$base_url .= '&search_ip=true&ip_address='.rawurlencode(stripslashes($ip_address));
 
 			// Remove any whitespace
 			$ip_address = trim($ip_address);
@@ -525,10 +525,7 @@ else
 				message_die(GENERAL_MESSAGE, $lang['SEARCH_INVALID_IP']);
 			}
 
-			$ip_in_sql = '';
-			$ip_like_sql = '';
-			$ip_like_sql_flylast = '';
-			$ip_like_sql_flyreg = '';
+			$ip_in_sql = $ip_like_sql = $ip_like_sql_flylast = $ip_like_sql_flyreg = '';
 
 			foreach($users as $address)
 			{
@@ -658,7 +655,7 @@ else
 
 			break;
 		case 'search_joindate':
-			$base_url .= "&search_joindate=true&date_type=".rawurlencode($date_type)."&date_day=".rawurlencode($date_day)."&date_month=".rawurlencode($date_month)."&date_year=".rawurlencode(stripslashes($date_year));
+			$base_url .= '&search_joindate=true&date_type='. rawurlencode($date_type) .'&date_day='. rawurlencode($date_day) .'&date_month='. rawurlencode($date_month) .'&date_year='. rawurlencode(stripslashes($date_year));
 
 			$date_type = trim(strtolower($date_type));
 
@@ -713,7 +710,7 @@ else
 		case 'search_group':
 			$group_id = intval($group_id);
 
-			$base_url .= "&search_group=true&group_id=".rawurlencode($group_id);
+			$base_url .= '&search_group=true&group_id='. rawurlencode($group_id);
 
 			if(!$group_id)
 			{
@@ -754,7 +751,7 @@ else
 		case 'search_rank':
 			$rank_id = intval($rank_id);
 
-			$base_url .= "&search_rank=true&rank_id=".rawurlencode($rank_id);
+			$base_url .= '&search_rank=true&rank_id='. rawurlencode($rank_id);
 
 			if(!$rank_id)
 			{
@@ -793,7 +790,7 @@ else
 			$postcount_type = trim(strtolower($postcount_type));
 			$postcount_value = trim(strtolower($postcount_value));
 
-			$base_url .= "&search_postcount=true&postcount_type=".rawurlencode($postcount_type)."&postcount_value=".rawurlencode(stripslashes($postcount_value));
+			$base_url .= '&search_postcount=true&postcount_type='. rawurlencode($postcount_type) .'&postcount_value='. rawurlencode(stripslashes($postcount_value));
 
 			switch($postcount_type)
 			{
@@ -870,7 +867,7 @@ else
 
 			break;
 		case 'search_userfield':
-			$base_url .= "&search_userfield=true&userfield_type=".rawurlencode($userfield_type)."&userfield_value=".rawurlencode(stripslashes($userfield_value));
+			$base_url .= '&search_userfield=true&userfield_type='. rawurlencode($userfield_type) .'&userfield_value='. rawurlencode(stripslashes($userfield_value));
 
 			$text = strip_tags(htmlspecialchars(stripslashes($userfield_value)));
 
@@ -951,7 +948,7 @@ else
 			$lastvisited_type = trim(strtolower($lastvisited_type));
 			$lastvisited_days = intval($lastvisited_days);
 
-			$base_url .= "&search_lastvisited=true&lastvisited_type=".rawurlencode(stripslashes($lastvisited_type))."&lastvisited_days=".rawurlencode($lastvisited_days);
+			$base_url .= '&search_lastvisited=true&lastvisited_type='. rawurlencode(stripslashes($lastvisited_type)) .'&lastvisited_days='. rawurlencode($lastvisited_days);
 
 			$lastvisited_seconds = ( TIMENOW - ( ( ( $lastvisited_days * 24 ) * 60 ) * 60 ) );
 
@@ -986,7 +983,7 @@ else
 
 			break;
 		case 'search_language':
-			$base_url .= "&search_language=true&language_type=".rawurlencode(stripslashes($language_type));
+			$base_url .= '&search_language=true&language_type='. rawurlencode(stripslashes($language_type));
 
 			$language_type = trim(strtolower(stripslashes($language_type)));
 
@@ -1007,7 +1004,7 @@ else
 
 			break;
 		case 'search_timezone':
-			$base_url .= "&search_timezone=true&timezone_type=".rawurlencode(stripslashes($timezone_type));
+			$base_url .= '&search_timezone=true&timezone_type='. rawurlencode(stripslashes($timezone_type));
 			$text = sprintf($lang['SEARCH_FOR_TIMEZONE'], strip_tags(htmlspecialchars(stripslashes($timezone_type))));
 
 			$timezone_type = intval($timezone_type);
@@ -1025,7 +1022,7 @@ else
 			message_die(GENERAL_MESSAGE, 'Disabled');
 			break;
 		case 'search_moderators':
-			$base_url .= "&search_moderators=true&moderators_forum=".rawurlencode(stripslashes($moderators_forum));
+			$base_url .= '&search_moderators=true&moderators_forum='. rawurlencode(stripslashes($moderators_forum));
 			$moderators_forum = intval($moderators_forum);
 
 			$sql = "SELECT forum_name
@@ -1069,7 +1066,7 @@ else
 		default:
 			$misc = trim(strtolower($misc));
 
-			$base_url .= "&search_misc=true&misc=".rawurlencode(stripslashes($misc));
+			$base_url .= '&search_misc=true&misc='. rawurlencode(stripslashes($misc));
 
 			switch($misc)
 			{
@@ -1149,40 +1146,40 @@ else
 		case 'regdate':
 			$sort = 'regdate';
 
-			$select_sql .= "u.user_regdate";
+			$select_sql .= 'u.user_regdate';
 			break;
 		case 'posts':
 			$sort = 'posts';
 
-			$select_sql .= "u.user_posts";
+			$select_sql .= 'u.user_posts';
 			break;
 		case 'user_email':
 			$sort = 'user_email';
 
-			$select_sql .= "u.user_email";
+			$select_sql .= 'u.user_email';
 			break;
 		case 'lastvisit':
 			$sort = 'lastvisit';
 
-			$select_sql .= "u.user_lastvisit";
+			$select_sql .= 'u.user_lastvisit';
 			break;
 		case 'username':
 		default:
 			$sort = 'username';
 
-			$select_sql .= "u.username";
+			$select_sql .= 'u.username';
 	}
 
 	switch(@$_GET['order'])
 	{
 		case 'DESC':
-			$order = "DESC";
-			$o_order = "ASC";
+			$order = 'DESC';
+			$o_order = 'ASC';
 			break;
 		case 'DESC':
 		default:
-			$o_order = "DESC";
-			$order = "ASC";
+			$o_order = 'DESC';
+			$order = 'ASC';
 	}
 
 	$select_sql .= " $order";
@@ -1227,17 +1224,12 @@ else
 
 	if($page > 1)
 	{
-		$pagination .= '<a href="'.("$base_url&sort=$sort&order=$order&page=".($page - 1)).'">'.$lang['PREVIOUS'].'</a>';
+		$pagination .= '<a href="'.$base_url.'&sort='.$sort.'&order='.$order.'&page='.($page - 1).'">'. $lang['PREVIOUS'] .'</a>';
 	}
 
 	if($page < $num_pages)
 	{
-		$pagination .= ( $pagination == '' ) ? '<a href="'.("$base_url&sort=$sort&order=$order&page=".($page + 1)).'">'.$lang['NEXT'].'</a>' : ' | <a href="'.("$base_url&sort=$sort&order=$order&page=".($page + 1)).'">'.$lang['NEXT'].'</a>';
-	}
-
-	if($num_pages > 2)
-	{
-		$pagination .= '&nbsp;&nbsp;<input type="text" name="page" maxlength="5" size="2" class="post" />&nbsp;<input type="submit" name="submit" value="'.$lang['GO'].'" class="post" />';
+		$pagination .= ( $pagination == '' ) ? '<a href="'.$base_url.'&sort='.$sort.'&order='.$order.'&page='. ($page + 1) .'">'.$lang['NEXT'].'</a>' : ' | <a href="'.$base_url.'&sort='.$sort.'&order='.$order.'&page='. ($page + 1) .'">'.$lang['NEXT'].'</a>';
 	}
 
 	$template->assign_vars(array(
@@ -1245,13 +1237,13 @@ else
 
 		'PAGE_NUMBER' => sprintf($lang['PAGE_OF'], $page, $num_pages),
 		'PAGINATION' => $pagination,
-		'NEW_SEARCH' => sprintf($lang['SEARCH_USERS_NEW'],$text, $total_pages['total'], "admin_user_search.php"),
+		'NEW_SEARCH' => sprintf($lang['SEARCH_USERS_NEW'],$text, $total_pages['total'], 'admin_user_search.php'),
 
 		'U_USERNAME' => ($sort == 'username') ? "$base_url&sort=$sort&order=$o_order" : "$base_url&sort=username&order=$order",
 		'U_EMAIL' => ($sort == 'user_email') ? "$base_url&sort=$sort&order=$o_order" : "$base_url&sort=user_email&order=$order",
 		'U_POSTS' => ($sort == 'posts') ? "$base_url&sort=$sort&order=$o_order" : "$base_url&sort=posts&order=$order",
 		'U_JOINDATE' => ($sort == 'regdate') ? "$base_url&sort=$sort&order=$o_order" : "$base_url&sort=regdate&order=$order",
-		'U_LASTVISIT' => ($sort == 'lastvisit') ? "$base_url&sort=$sort&order=$o_order") : "$base_url&sort=lastvisit&order=$order",
+		'U_LASTVISIT' => ($sort == 'lastvisit') ? "$base_url&sort=$sort&order=$o_order" : "$base_url&sort=lastvisit&order=$order",
 
 		'S_POST_ACTION' => "$base_url&sort=$sort&order=$order"
 	));
@@ -1303,8 +1295,8 @@ else
 			'ABLED' => ( ( $rowset[$i]['user_active'] ) ? $lang['ENABLED'] : $lang['DISABLED'] ),
 
 			'U_VIEWPOSTS' => "../search.php?search_author=1&amp;uid={$rowset[$i]['user_id']}",
-			'U_MANAGE' => "../profile.php?mode=editprofile&".POST_USERS_URL."=".$rowset[$i]['user_id'],
-			'U_PERMISSIONS' => "admin_ug_auth.php?mode=user&".POST_USERS_URL."=".$rowset[$i]['user_id'],
+			'U_MANAGE' => '../profile.php?mode=editprofile&'. POST_USERS_URL .'='.$rowset[$i]['user_id'],
+			'U_PERMISSIONS' => 'admin_ug_auth.php?mode=user&'. POST_USERS_URL .'='. $rowset[$i]['user_id'],
 		));
 	}
 }

@@ -164,7 +164,7 @@ class report_post extends report_module
 	function subject_url($report_subject, $non_html_amp = false)
 	{
 		$report_subject = (int) $report_subject;
-		return "viewtopic.php?" . POST_POST_URL . "=$report_subject#$report_subject", $non_html_amp;
+		return 'viewtopic.php?'. POST_POST_URL .'='. $report_subject .'#'. $report_subject . $non_html_amp;
 	}
 
 	//

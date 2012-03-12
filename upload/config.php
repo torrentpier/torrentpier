@@ -52,8 +52,8 @@ $bb_cfg = $tr_cfg = $page_cfg = array();
 
 // Increase number of revision after update
 $bb_cfg['tp_version'] = '2.4 (beta)';
-$bb_cfg['tp_release_state'] = 'R384';
-$bb_cfg['tp_release_date'] = '11-03-2012';
+$bb_cfg['tp_release_state'] = 'R385';
+$bb_cfg['tp_release_date'] = '12-03-2012';
 
 // Database
 $charset  = 'utf8';
@@ -279,7 +279,7 @@ $bb_cfg['topic_tpl']['overall_header'] = TEMPLATES_DIR .'topic_tpl_overall_heade
 $bb_cfg['topic_tpl']['rules_video']    = TEMPLATES_DIR .'topic_tpl_rules_video.html';
 
 // Cookie
-$bb_cfg['cookie_domain'] = (empty($_SERVER['SERVER_NAME'])) ? $_SERVER['SERVER_NAME'] : '';  # '.yourdomain.com'
+$bb_cfg['cookie_domain'] = (!empty($_SERVER['SERVER_NAME'])) ? $_SERVER['SERVER_NAME'] : '';  # '.yourdomain.com'
 $bb_cfg['cookie_path']   = '/';                    # '/forum/'
 $bb_cfg['cookie_secure'] = (!empty($_SERVER['HTTPS']) ? 1 : 0); # 0
 $bb_cfg['cookie_prefix'] = 'bb_';                  # 'bb_'
