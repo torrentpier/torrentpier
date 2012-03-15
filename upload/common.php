@@ -367,7 +367,7 @@ class cache_memcache extends cache_common
 		$this->cur_query = null;
 	}
 
-	function get ($name)
+	function get ($name, $get_miss_key_callback = '', $prefix = '', $ttl = 0)
 	{
 		if (!$this->connected) $this->connect();
 
@@ -380,7 +380,7 @@ class cache_memcache extends cache_common
 		return ($this->connected) ? $this->memcache->get($name) : false;
 	}
 
-	function set ($name, $value, $ttl = 0)
+	function set ($name, $value, $ttl = 0, $prefix = '')
 	{
 		if (!$this->connected) $this->connect();
 
@@ -393,7 +393,7 @@ class cache_memcache extends cache_common
 		return ($this->connected) ? $this->memcache->set($name, $value, false, $ttl) : false;
 	}
 
-	function rm ($name)
+	function rm ($name, $prefix = '')
 	{
 		if (!$this->connected) $this->connect();
 
@@ -701,7 +701,7 @@ class cache_redis extends cache_common
 		$this->cur_query = null;
 	}
 
-	function get ($name)
+	function get ($name, $get_miss_key_callback = '', $prefix = '', $ttl = 0)
 	{
 		if (!$this->connected) $this->connect();
 
@@ -714,7 +714,7 @@ class cache_redis extends cache_common
 		return ($this->connected) ? unserialize($this->redis->get($name)) : false;
 	}
 
-	function set ($name, $value, $ttl = 0)
+	function set ($name, $value, $ttl = 0, $prefix = '')
 	{
 		if (!$this->connected) $this->connect();
 
@@ -740,7 +740,7 @@ class cache_redis extends cache_common
 		}
 	}
 
-	function rm ($name)
+	function rm ($name, $prefix = '')
 	{
 		if (!$this->connected) $this->connect();
 
@@ -773,7 +773,7 @@ class cache_eaccelerator extends cache_common
 		$this->dbg_enabled = sql_dbg_enabled();
 	}
 
-	function get ($name)
+	function get ($name, $get_miss_key_callback = '', $prefix = '', $ttl = 0)
 	{
 		$this->cur_query = "cache->get('$name')";
 		$this->debug('start');
@@ -784,7 +784,7 @@ class cache_eaccelerator extends cache_common
 		return eaccelerator_get($name);
 	}
 
-	function set ($name, $value, $ttl = 0)
+	function set ($name, $value, $ttl = 0, $prefix = '')
 	{
 		$this->cur_query = "cache->set('$name')";
 		$this->debug('start');
@@ -795,7 +795,7 @@ class cache_eaccelerator extends cache_common
 		return eaccelerator_put($name, $value, $ttl);
 	}
 
-	function rm ($name)
+	function rm ($name, $prefix = '')
 	{
 		$this->cur_query = "cache->rm('$name')";
 		$this->debug('start');
@@ -826,7 +826,7 @@ class cache_apc extends cache_common
 		$this->dbg_enabled = sql_dbg_enabled();
 	}
 
-	function get ($name)
+	function get ($name, $get_miss_key_callback = '', $prefix = '', $ttl = 0)
 	{
 		$this->cur_query = "cache->get('$name')";
 		$this->debug('start');
@@ -837,7 +837,7 @@ class cache_apc extends cache_common
 		return apc_fetch($name);
 	}
 
-	function set ($name, $value, $ttl = 0)
+	function set ($name, $value, $ttl = 0, $prefix = '')
 	{
 		$this->cur_query = "cache->set('$name')";
 		$this->debug('start');
@@ -848,7 +848,7 @@ class cache_apc extends cache_common
 		return apc_store($name, $value, $ttl);
 	}
 
-	function rm ($name)
+	function rm ($name, $prefix = '')
 	{
 		$this->cur_query = "cache->rm('$name')";
 		$this->debug('start');
@@ -879,7 +879,7 @@ class cache_xcache extends cache_common
 		$this->dbg_enabled = sql_dbg_enabled();
 	}
 
-	function get ($name)
+	function get ($name, $get_miss_key_callback = '', $prefix = '', $ttl = 0)
 	{
 		$this->cur_query = "cache->get('$name')";
 		$this->debug('start');
@@ -890,7 +890,7 @@ class cache_xcache extends cache_common
 		return xcache_get($name);
 	}
 
-	function set ($name, $value, $ttl = 0)
+	function set ($name, $value, $ttl = 0, $prefix = '')
 	{
 		$this->cur_query = "cache->set('$name')";
 		$this->debug('start');
@@ -901,7 +901,7 @@ class cache_xcache extends cache_common
 		return xcache_set($name, $value, $ttl);
 	}
 
-	function rm ($name)
+	function rm ($name, $prefix = '')
 	{
 		$this->cur_query = "cache->rm('$name')";
 		$this->debug('start');
@@ -930,7 +930,7 @@ class cache_file extends cache_common
 		$this->dbg_enabled = sql_dbg_enabled();
 	}
 
-	function get ($name)
+	function get ($name, $get_miss_key_callback = '', $prefix = '', $ttl = 0)
 	{
 		$filename = $this->dir . clean_filename($name) . '.php';
 
@@ -948,7 +948,7 @@ class cache_file extends cache_common
 		return (!empty($filecache['value'])) ? $filecache['value'] : false;
 	}
 
-	function set ($name, $value, $ttl = 86400)
+	function set ($name, $value, $ttl = 86400, $prefix = '')
 	{
 		if (!function_exists('var_export'))
 		{
@@ -977,7 +977,7 @@ class cache_file extends cache_common
 		return (bool) file_write($filecache, $filename, false, true, true);
 	}
 
-	function rm ($name)
+	function rm ($name, $prefix = '')
 	{
 		$filename   = $this->dir . clean_filename($name) . '.php';
 		if (file_exists($filename))

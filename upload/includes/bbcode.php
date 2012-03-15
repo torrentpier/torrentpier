@@ -785,6 +785,13 @@ function bbcode2html ($text)
 	{
 		$bbcode = new bbcode();
 	}
+	$orig_word = array();
+	$replacement_word = array();
+	obtain_word_list($orig_word, $replacement_word);
+	if ( count($orig_word) )
+	{
+		$text = preg_replace($orig_word, $replacement_word, $text);
+	}
 	return $bbcode->bbcode2html($text);
 }
 

@@ -877,7 +877,7 @@ $template->assign_vars(array(
 	'POSTER_NAME_NAME' => $poster_name_key,
 	'POSTER_NAME_VAL'  => htmlCHR($poster_name_val),
 	'TITLE_MATCH_NAME' => $title_match_key,
-	'TITLE_MATCH_VAL'  => $title_match_val,
+	'TITLE_MATCH_VAL'  => htmlCHR($title_match_val),
 
 	'AJAX_TOPICS'      => $user->opt_js['tr_t_ax'],
 	'SHOW_TIME_TOPICS' => $user->opt_js['tr_t_t'],

@@ -110,7 +110,7 @@ if (isset($report_module))
 		//
 		if (empty($errors))
 		{
-			$report_desc = DB()->escape($report_desc);
+			$report_desc = str_replace("\'", "'", $report_desc);
 			$report_title = clean_title($report_title);
 
 			report_insert($report_module->id, $report_subject_id, $report_reason, $report_title, $report_desc, false);
