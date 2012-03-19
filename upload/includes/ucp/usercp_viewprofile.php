@@ -240,6 +240,7 @@ if (IS_ADMIN)
 $user_restrictions = array();
 
 if (bf($profiledata['user_opt'], 'user_opt', 'allow_avatar'))    $user_restrictions[] = $lang['HIDE_AVATARS'];
+if (bf($profiledata['user_opt'], 'user_opt', 'allow_sig'))     $user_restrictions[] = $lang['SHOW_CAPTION'];
 if (bf($profiledata['user_opt'], 'user_opt', 'allow_passkey'))   $user_restrictions[] = $lang['DOWNLOAD_TORRENT'];
 if (bf($profiledata['user_opt'], 'user_opt', 'allow_pm'))        $user_restrictions[] = $lang['SEND_PM'];
 if (bf($profiledata['user_opt'], 'user_opt', 'allow_post'))      $user_restrictions[] = $lang['SEND_MESSAGE'];
