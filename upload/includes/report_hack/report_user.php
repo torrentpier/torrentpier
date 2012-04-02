@@ -21,7 +21,7 @@ class report_user extends report_module
 	function subject_url($id, $non_html_amp = false)
 	{
 		$sep = ($non_html_amp) ? '&' : '&amp;';
-		return 'profile.php?mode=viewprofile'. $sep. POST_USERS_URL .'=' . (int) $id . $non_html_amp;
+		return 'profile.php?mode=viewprofile'. $sep. POST_USERS_URL .'=' . (int) $id;
 	}
 
 	//

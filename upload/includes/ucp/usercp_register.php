@@ -548,7 +548,7 @@ foreach ($profile_fields as $field => $can_edit)
 	case 'user_avatar_type':
 		if(isset($_POST['avatargallery']) && !$errors)
 		{
-			$avatar_category = (!empty($_POST['avatarcategory'])) ? htmlspecialchars($_POST['avatarcategory']) : '';
+			$category = (!empty($_POST['avatarcategory'])) ? htmlspecialchars($_POST['avatarcategory']) : '';
 
 	        $dir = @opendir($bb_cfg['avatar_gallery_path']);
 
@@ -630,7 +630,7 @@ foreach ($profile_fields as $field => $can_edit)
 				'S_HIDDEN_FIELDS' => $s_hidden_vars)
 			);
 
-			$template->set_filenames(array('body' => 'usercp_avatar_gallery.tpl'));
+			print_page('usercp_avatar_gallery.tpl');
 		}
 
 		$user_avatar_local = (isset($_POST['avatarselect']) && !empty($_POST['submitavatar']) && $bb_cfg['allow_avatar_local']) ? htmlspecialchars($_POST['avatarselect']) : ((isset($_POST['avatarlocal'])) ? htmlspecialchars($_POST['avatarlocal']) : '');

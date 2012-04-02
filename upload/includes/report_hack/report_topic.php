@@ -163,7 +163,7 @@ class report_topic extends report_module
 	//
 	function subject_url($report_subject, $non_html_amp = false)
 	{
-		return 'viewtopic.php?'. POST_TOPIC_URL .'='. (int) $report_subject . $non_html_amp;
+		return 'viewtopic.php?'. POST_TOPIC_URL .'='. (int) $report_subject;
 	}
 
 	//
