@@ -31,8 +31,11 @@ else
 }
 
 // Auth
-$not_auth_forums_sql = ($f = $user->get_not_auth_forums(AUTH_READ)) ? "AND f.forum_id NOT IN($f)" : '';
-$datastore->rm('cat_forums');
+$excluded_forums_csv = $user->get_excluded_forums(AUTH_VIEW);
+$not_auth_forums_sql = ($excluded_forums_csv) ? "
+	AND f.forum_id NOT IN($excluded_forums_csv)
+	AND f.forum_parent NOT IN($excluded_forums_csv)
+" : '';
 
 // Get users active torrents
 $sql = 'SELECT f.forum_id, f.forum_name, t.topic_title, tor.tor_type, tor.size, tr.*

@@ -52,8 +52,8 @@ $bb_cfg = $tr_cfg = $page_cfg = array();
 
 // Increase number of revision after update
 $bb_cfg['tp_version'] = '2.4 (beta)';
-$bb_cfg['tp_release_state'] = 'R389';
-$bb_cfg['tp_release_date'] = '2-04-2012';
+$bb_cfg['tp_release_state'] = 'R390';
+$bb_cfg['tp_release_date'] = '9-04-2012';
 
 // Database
 $charset  = 'utf8';
@@ -397,7 +397,6 @@ define('CRON_RUNNING', TRIGGERS_DIR .'cron_running');
 
 // Subforums
 $bb_cfg['sf_on_first_page_only']     = true;
-$bb_cfg['sf_check_view_permissions'] = false;
 
 // Forums
 $bb_cfg['allowed_topics_per_page'] = array(50, 100, 150, 200, 250, 300);

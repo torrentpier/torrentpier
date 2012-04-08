@@ -1418,7 +1418,7 @@ CREATE TABLE IF NOT EXISTS `bb_users` (
   `ignore_srv_load` tinyint(1) NOT NULL DEFAULT '0',
   `autologin_id` varchar(12) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL DEFAULT '',
   `user_newest_pm_id` mediumint(8) NOT NULL DEFAULT '0',
-  `user_points` int(11) NOT NULL DEFAULT '0',
+  `user_points` float(16,2) NOT NULL DEFAULT '0.00',
   PRIMARY KEY (`user_id`),
   KEY `username` (`username`(10)),
   KEY `user_email` (`user_email`(10)),

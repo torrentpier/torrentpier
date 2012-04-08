@@ -137,7 +137,7 @@ if($forums['forum'][$forum_id]['allow_porno_topic'] && bf($userdata['user_opt'],
 
 if (!$forum_data['forum_parent'] && isset($forums['f'][$forum_id]['subforums']) && $show_subforums)
 {
-	$not_auth_forums = ($bb_cfg['sf_check_view_permissions']) ? $user->get_not_auth_forums(AUTH_VIEW) : '';
+	$not_auth_forums = $user->get_excluded_forums(AUTH_VIEW);
 	$ignore_forum_sql = ($not_auth_forums) ? "AND f.forum_id NOT IN($not_auth_forums)" : '';
 
 	$sql = "
