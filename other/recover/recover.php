@@ -1,11 +1,13 @@
 <?php
 	
-define ('IN_PHPBB', true);
-define ('IN_SERVICE', true);
-require ("./common.php");
-require ('./includes/functions_torrent.php');
-require ("./converter/settings.php");
-require ("./converter/functions.php");
+define('IN_PHPBB', true);
+define('IN_SERVICE', true);
+define('BB_ROOT', './');
+require(BB_ROOT .'common.php');
+require(INC_DIR .'functions_torrent.php');
+require(BB_ROOT .'converter/settings.php');
+require(BB_ROOT .'converter/functions.php');
+
 
 // Init userdata
 $user->session_start();
@@ -16,7 +18,7 @@ ob_implicit_flush();
 ?><!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html dir="ltr">
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta http-equiv="Content-Type" content="text/html; charset=utf8">
 <meta http-equiv="Content-Style-Type" content="text/css">
 <title></title>
 </head>

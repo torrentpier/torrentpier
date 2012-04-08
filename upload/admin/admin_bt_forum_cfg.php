@@ -10,7 +10,7 @@ require('./pagestart.php');
 // ACP Header - END
 
 $max_forum_name_len = 30;
-$max_forum_rows     = 35;
+$max_forum_rows     = 25;
 
 require(INC_DIR .'functions_admin_torrent.php');
 require(LANG_DIR .'lang_admin_bt.php');
@@ -83,7 +83,7 @@ if ($submit && $confirm)
 
 	$datastore->update('cat_forums');
 
-	$message = $lang['CONFIG_UPD'] .'<br /><br />'. sprintf($lang['RETURN_CONFIG'], '<a href=""admin_bt_forum_cfg.php">', '</a>') .'<br /><br />'. sprintf($lang['CLICK_RETURN_ADMIN_INDEX'], '<a href="index.php?pane=right">', '</a>');
+	$message = $lang['CONFIG_UPD'] .'<br /><br />'. sprintf($lang['RETURN_CONFIG'], '<a href="admin_bt_forum_cfg.php">', '</a>') .'<br /><br />'. sprintf($lang['CLICK_RETURN_ADMIN_INDEX'], '<a href="index.php?pane=right">', '</a>');
 	message_die(GENERAL_MESSAGE, $message);
 }
 

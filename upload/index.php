@@ -398,7 +398,7 @@ if ($bb_cfg['birthday_check_day'] && $bb_cfg['birthday_enabled'])
 				continue;
 			}
 
-			$today_list[] = profile_url($today) .' <span class="small">('. birthday_age($today['age'], 1) .')</span>';
+			$today_list[] = profile_url($today) .' <span class="small">('. birthday_age($today['age']) .')</span>';
 		}
 		$today_all = ($today_all) ? '&nbsp;<a class="txtb" href="#" onclick="ajax.exec({action: \'index_data\', mode: \'birthday_today\'}); return false;" title="'. $lang['ALL'] .'">...</a>' : '';
 		$today_list = $lang['BIRTHDAY_TODAY'] . join(', ', $today_list) . $today_all;

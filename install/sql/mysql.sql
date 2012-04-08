@@ -311,7 +311,7 @@ CREATE TABLE IF NOT EXISTS `bb_bt_last_torstat` (
   `bonus_add` bigint(20) unsigned NOT NULL DEFAULT '0',
   `speed_up` bigint(20) unsigned NOT NULL DEFAULT '0',
   `speed_down` bigint(20) unsigned NOT NULL DEFAULT '0',
-  PRIMARY KEY (`topic_id`,`user_id`) USING BTREE
+  PRIMARY KEY USING BTREE (`topic_id`,`user_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------

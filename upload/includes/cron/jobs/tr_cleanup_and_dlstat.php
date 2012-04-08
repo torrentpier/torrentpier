@@ -201,6 +201,7 @@ if($bb_cfg['seed_bonus_enabled'] && $bb_cfg['seed_bonus_points'] && $bb_cfg['see
 			FROM ". BB_BT_TRACKER ." bt, ". BB_BT_TORRENTS ." tor
 			WHERE tor.topic_id = bt.topic_id
 				AND tor.size   > $tor_size
+				AND bt.seeder  > 0
 			GROUP BY user_id
 	");
 
@@ -221,6 +222,8 @@ if($bb_cfg['seed_bonus_enabled'] && $bb_cfg['seed_bonus_points'] && $bb_cfg['see
 			WHERE u.user_id = b.user_id
 				AND b.release_count <= $release
 				AND u.user_regdate  <  $user_regdate
+				AND u.user_active   = 1
+				AND u.user_id       not IN(". EXCLUDED_USERS_CSV .")
 		");
     }
 

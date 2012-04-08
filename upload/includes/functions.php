@@ -2760,9 +2760,9 @@ function set_die_append_msg ($forum_id = null, $topic_id = null)
 	global $userdata, $lang, $template;
 
 	$msg = '';
-	$msg .= ($topic_id) ? '<p class="mrg_10"><a href="viewtopic.php?t='. $topic_id .'">'. $lang['CLICK_RETURN_TOPIC'] .'</a></p>' : '';
-	$msg .= ($forum_id) ? '<p class="mrg_10"><a href="viewforum.php?f='. $forum_id .'">'. $lang['CLICK_RETURN_FORUM'] .'</a></p>' : '';
-	$msg .= '<p class="mrg_10"><a href="index.php">'. $lang['CLICK_RETURN_INDEX'] .'</a></p>';
+	$msg .= ($topic_id) ? '<p class="mrg_10"><a href="viewtopic.php?t='. $topic_id .'">'. $lang['TOPIC_RETURN'] .'</a></p>' : '';
+	$msg .= ($forum_id) ? '<p class="mrg_10"><a href="viewforum.php?f='. $forum_id .'">'. $lang['FORUM_RETURN'] .'</a></p>' : '';
+	$msg .= '<p class="mrg_10"><a href="index.php">'. $lang['INDEX_RETURN'] .'</a></p>';
 	$template->assign_var('BB_DIE_APPEND_MSG', $msg);
 }
 

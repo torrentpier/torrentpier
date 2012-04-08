@@ -2,10 +2,11 @@
 
 define ('IN_PHPBB', true);
 define ('IN_SERVICE', true);
-require ("./common.php");
-require ("./converter/constants.php");
-require ("./converter/settings.php");
-require ("./converter/functions.php");
+define ('BB_ROOT', './');
+require (BB_ROOT .'common.php');
+require (BB_ROOT .'converter/constants.php');
+require (BB_ROOT .'converter/settings.php');
+require (BB_ROOT .'converter/functions.php');
 
 // Start session management
 $user->session_start();
@@ -17,10 +18,11 @@ ob_implicit_flush();
 error_reporting(E_ALL);
 @ini_set('display_errors', 1);
 
-?><!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+?>
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html dir="ltr">
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+<meta http-equiv="Content-Type" content="text/html; charset=utf8">
 <meta http-equiv="Content-Style-Type" content="text/css">
 <title></title>
 </head>
@@ -57,7 +59,7 @@ if (CONVERT_USERS)
 		print_ok ("Users cleared");
 	}
 	
-	$max_uid = (int) get_max_val(USERS_TABLE, 'user_id');
+	$max_uid = (int) get_max_val(BB_USERS, 'user_id');
 	$max_uid = ($max_uid > 1) ? $max_uid : 1;
 
 	$users_count = (int) get_count(TB_USERS_TABLE, 'id');
@@ -89,8 +91,8 @@ if (CONVERT_USERS)
 			ORDER BY id
 			LIMIT $start, $offset";
 
-		$users = $db->fetch_rowset($sql);
-		$db->sql_freeresult();	
+		$users = DB()->fetch_rowset($sql);
+		DB()->sql_freeresult();	
 		
 		foreach ($users as $user)
 		{
@@ -109,7 +111,7 @@ if (CONVERT_USERS)
 	$to_write .= '$passwords = '. var_export($pass, true) .';';
 	fwrite($passf, $to_write);
 	fclose($passf);
-	set_auto_increment(USERS_TABLE, 'user_id');
+	set_auto_increment(BB_USERS, 'user_id');
 
 	print_ok ("Total $users_count users from TBDev converted");
 	unset($users, $pass, $to_write);
@@ -117,8 +119,8 @@ if (CONVERT_USERS)
 
 if (CONVERT_TORRENTS)
 {
-	require_once('./includes/functions_post.php');
-	require_once('./includes/bbcode.php');
+	require_once(INC_DIR .'functions_post.php');
+	require_once(INC_DIR .'bbcode.php');
 	
 	if (CLEAN)
 	{
@@ -131,7 +133,7 @@ if (CONVERT_TORRENTS)
 	$max_uid = !empty($max_uid) ? $max_uid : 1;
 
 	//Create a category for torrents	
-	$max_cat_id = (int) get_max_val(CATEGORIES_TABLE, 'cat_id');	
+	$max_cat_id = (int) get_max_val(BB_CATEGORIES, 'cat_id');	
 	$tr_cat_id = $max_cat_id + 1;
 	
 	$tp_cat_data = array(
@@ -139,13 +141,13 @@ if (CONVERT_TORRENTS)
 		"cat_title"    => 'Tracker',
 	);
 	tp_add_category($tp_cat_data);
-	set_auto_increment(CATEGORIES_TABLE, 'cat_id');
+	set_auto_increment(BB_CATEGORIES, 'cat_id');
 	unset($tp_cat_data);
 	
 	$cats = $db->fetch_rowset("SELECT id, sort, name FROM ". TB_CATEGORIES_TABLE);
-	$db->sql_freeresult();
+	DB()->sql_freeresult();
 	
-	$max_forum_id = (int) get_max_val(FORUMS_TABLE, 'forum_id');
+	$max_forum_id = (int) get_max_val(BB_FORUMS, 'forum_id');
 	
 	foreach ($cats as $cat)
 	{
@@ -153,7 +155,7 @@ if (CONVERT_TORRENTS)
 		$cat['cat_id'] = $tr_cat_id;
 		convert_cat($cat);
 	}
-	set_auto_increment(FORUMS_TABLE, 'forum_id');
+	set_auto_increment(BB_FORUMS, 'forum_id');
 	print_ok ("Categories from TBDev converted");
 	unset($cats);
 	
@@ -173,9 +175,9 @@ if (CONVERT_TORRENTS)
 			break;
 	}
 	
-	$max_topic_id  = (int) get_max_val(TOPICS_TABLE, 'topic_id');	
-	$max_post_id   = (int) get_max_val(POSTS_TABLE, 'post_id');
-	$max_attach_id = (int) get_max_val(ATTACHMENTS_TABLE, 'attach_id');
+	$max_topic_id  = (int) get_max_val(BB_TOPICS, 'topic_id');	
+	$max_post_id   = (int) get_max_val(BB_POSTS, 'post_id');
+	$max_attach_id = (int) get_max_val(BB_ATTACHMENTS, 'attach_id');
 		
 	$torrents_count = (int) get_count(TB_TORRENTS_TABLE, 'id');
 	$loops = (int) ceil($torrents_count / C_TORRENTS_PER_ONCE);
@@ -193,8 +195,8 @@ if (CONVERT_TORRENTS)
 			ORDER BY id
 			LIMIT $start, $offset";
 	
-		$torrents = $db->fetch_rowset($sql);
-		$db->sql_freeresult();
+		$torrents = DB()->fetch_rowset($sql);
+		DB()->sql_freeresult();
 		
 		foreach ($torrents as $torrent)
 		{
@@ -207,16 +209,16 @@ if (CONVERT_TORRENTS)
 			//print_r($torrent);
 		}
 	}
-	set_auto_increment(TOPICS_TABLE, 'topic_id');
-	set_auto_increment(POSTS_TABLE,   'post_id');
+	set_auto_increment(BB_TOPICS, 'topic_id');
+	set_auto_increment(BB_POSTS,   'post_id');
 	print_ok ("Total $torrents_count torrents from TBDev converted");
 	unset($torrents);
 	
 	if (CONVERT_COMMENTS)
 	{
-		$max_post_id   = (int) get_max_val(POSTS_TABLE, 'post_id');
-		$max_topic_id  = (int) get_max_val(TOPICS_TABLE, 'topic_id');
-		$max_attach_id = (int) get_max_val(ATTACHMENTS_TABLE, 'attach_id');
+		$max_post_id   = (int) get_max_val(BB_POSTS, 'post_id');
+		$max_topic_id  = (int) get_max_val(BB_TOPICS, 'topic_id');
+		$max_attach_id = (int) get_max_val(BB_ATTACHMENTS, 'attach_id');
 		
 		$comments_count = (int) get_count(TB_COMMENTS_TABLE, 'id');
 		$loops = (int) ceil($comments_count / C_COMMENTS_PER_ONCE);
@@ -235,8 +237,8 @@ if (CONVERT_TORRENTS)
 				ORDER BY c.id
 				LIMIT $start, $offset";
 	
-			$comments = $db->fetch_rowset($sql);
-			$db->sql_freeresult();
+			$comments = DB()->fetch_rowset($sql);
+			DB()->sql_freeresult();
 		
 			foreach ($comments as $comment)
 			{
@@ -246,7 +248,7 @@ if (CONVERT_TORRENTS)
 			}
 		}
 		unset($comments);
-		set_auto_increment(POSTS_TABLE, 'post_id');
+		set_auto_increment(BB_POSTS, 'post_id');
 		print_ok ("Total $comments_count comments from TBDev converted");
 	}
 }
@@ -262,4 +264,4 @@ if (CONVERT_MYBB_FORUMS)
 Converting completed.
 </body>
 </html>
-<? } ?>
+<?php } ?>

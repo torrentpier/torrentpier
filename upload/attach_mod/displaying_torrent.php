@@ -473,8 +473,15 @@ if ($tor_reged && $tor_info)
 								$template->assign_block_vars("$x_full.porthead", array());
 							}
 						}
-						$compl_size = ($peer['remain'] && $tor_size && $tor_size > $peer['remain']) ? ($tor_size - $peer['remain']) : 0;
-						$compl_perc = ($compl_size) ? floor($compl_size * 100 / $tor_size) : 0;
+                        $compl_size = ($peer['remain'] && $tor_size && $tor_size > $peer['remain']) ? ($tor_size - $peer['remain']) : 0;
+                        if($bb_cfg['announce_type'] == 'xbt')
+                        {
+						    $compl_perc = $peer['complete_percent'];
+						}
+                        else
+                        {
+                            $compl_perc = ($compl_size) ? floor($compl_size * 100 / $tor_size) : 0;
+                        }
 					}
 
 					$rel_sign = (!$guest && $peer['releaser']) ? '&nbsp;<b><sup>&reg;</sup></b>' : '';

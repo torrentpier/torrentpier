@@ -6,10 +6,10 @@ define ('USER_ID_DIFF', 1); //	User_id difference between TP and TBDev (tp_user_
 
 // TorrentPier Database
 $dbhost = 'localhost';
-$dbname = 'torrentpier';
-$dbuser = 'root';
-$dbpasswd  = 'root';
-$dbcharset = 'cp1251';
+$dbname = 'dbase';
+$dbuser = 'user';
+$dbpasswd  = 'pass';
+$dbcharset = 'utf8';
 
 // Start announce
 define ('IN_ANNOUNCE', true);
@@ -60,5 +60,3 @@ unset($res, $user, $dbpasswd, $passkey, $user_id);
 // Execute TP's announce
 chdir(TP_ROOT .'bt/');
 require ('announce.php');
-
-?>

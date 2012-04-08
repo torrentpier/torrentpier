@@ -1192,7 +1192,7 @@ $lang['PASSKEY_ERR_EMPTY'] = 'Could not add passkey (passkey is empty)<br /><br 
 $lang['BT_PASSKEY'] = 'Passkey';
 $lang['BT_GEN_PASSKEY'] = 'create a new';
 $lang['BT_PASSKEY_VIEW'] = 'show';
-$lang['BT_GEN_PASSKEY_NEW'] = "Attention! After changing the new passkey, you will need to re-download all the active torrents! \ n Are you sure you want to create a new passkey?";
+$lang['BT_GEN_PASSKEY_NEW'] = "Attention! After changing the new passkey, you will need to re-download all the active torrents! \n Are you sure you want to create a new passkey?";
 $lang['BT_NO_SEARCHABLE_FORUMS'] = 'No searchable forums found';
 
 $lang['SEEDS'] = 'Seed';
@@ -1724,4 +1724,9 @@ $lang['RESTORE_ALL_POSTS'] = 'Restore all posts';
 $lang['DEL_LIST_MY_MESSAGE'] = 'Delete the selected topic from the list';
 $lang['DEL_LIST_MY_MESSAGE_INFO'] = 'After removal of up to update the <b>entire list</b> it can be shown already deleted threads';
 $lang['DEL_LIST_INFO'] = 'To delete an order from the list, click on the icon to the left of the names of any section';
+
+// set_die_append_msg
 $lang['INDEX_RETURN'] = 'Back to home page';
+$lang['FORUM_RETURN'] = 'Back to Forum';
+$lang['TOPIC_RETURN'] = 'Back to the topic';
+$lang['POST_RETURN']  = 'Go to post';

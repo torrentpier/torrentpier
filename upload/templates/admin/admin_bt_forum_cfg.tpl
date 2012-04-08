@@ -11,7 +11,7 @@
 	<th colspan="3">{L_BT_SELECT_FORUMS}</th>
 </tr>
 <tr class="row2 tCenter">
-	<td>{L_ALLOW_REG_TRACKER}</td>
+	<td>{L_ALLOW_REG_TRACKER} <input onclick="$('select').each(function(){ this.size += 5; }); return false;" class="mainoption" type="button" value="+" /></td>
 	<td>{L_SELF_MODERATED}</td>
 	<td>{L_ALLOW_PORNO_TOPIC}</td>
 </tr>
