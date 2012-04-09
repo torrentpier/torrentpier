@@ -59,6 +59,7 @@ $images['post_new']            = $_lang .'post.gif';
 $images['post_locked']         = $_lang .'reply-locked.gif';
 $images['reply_new']           = $_lang .'reply.gif';
 $images['reply_locked']        = $_lang .'reply-locked.gif';
+$images['relese_new']          = $_lang .'relese.gif';
 
 // pm_icons
 $images['pm_inbox']            = $_main .'msg_inbox.gif';
@@ -122,7 +123,7 @@ $template->assign_vars(array(
 // Images auto-resize
 	'POST_IMG_WIDTH_DECR_JS'      => $bb_cfg['topic_left_column_witdh'] + $bb_cfg['post_img_width_decr'],
 	'ATTACH_IMG_WIDTH_DECR_JS'    => $bb_cfg['topic_left_column_witdh'] + $bb_cfg['attach_img_width_decr'],
-	
+
 	'MAGNET_LINKS'        => $bb_cfg['magnet_links_enabled'],
 ));
 

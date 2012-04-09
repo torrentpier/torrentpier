@@ -93,7 +93,7 @@ switch($this->request['type'])
 	case 'view_message':
 		$message = (string) $this->request['message'];
 		if(!trim($message)) $this->ajax_die($lang['EMPTY_MESSAGE']);
-		$message = htmlCHR($message);
+		$message = htmlCHR($message, false, ENT_NOQUOTES);
 
         $this->response['message_html'] = bbcode2html($message);
         $this->response['res_id'] = @$this->request['res_id'];

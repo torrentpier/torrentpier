@@ -65,6 +65,7 @@ DROP TABLE IF EXISTS `bb_smilies`;
 DROP TABLE IF EXISTS `bb_topics`;
 DROP TABLE IF EXISTS `bb_topics_watch`;
 DROP TABLE IF EXISTS `bb_topic_templates`;
+DROP TABLE IF EXISTS `bb_topic_tpl`;
 DROP TABLE IF EXISTS `bb_users`;
 DROP TABLE IF EXISTS `bb_user_group`;
 DROP TABLE IF EXISTS `bb_vote_desc`;
@@ -1374,6 +1375,26 @@ INSERT INTO `bb_topic_templates` VALUES (11, 'music', 'music', 'music', 'Music')
 INSERT INTO `bb_topic_templates` VALUES (12, 'books', 'books', 'books', 'Books');
 INSERT INTO `bb_topic_templates` VALUES (13, 'audiobooks', 'audiobooks', 'audiobooks', 'Audiobooks');
 INSERT INTO `bb_topic_templates` VALUES (14, 'sport', 'sport', 'sport', 'Sport');
+
+-- --------------------------------------------------------
+
+--
+-- Структура таблицы `bb_topic_tpl`
+--
+
+CREATE TABLE `bb_topic_tpl` (
+  `tpl_id` smallint(6) NOT NULL auto_increment,
+  `tpl_name` varchar(60) NOT NULL default '',
+  `tpl_src_form` text NOT NULL,
+  `tpl_src_title` text NOT NULL,
+  `tpl_src_msg` text NOT NULL,
+  `tpl_comment` text NOT NULL,
+  `tpl_rules_post_id` int(10) unsigned NOT NULL default '0',
+  `tpl_last_edit_tm` int(11) NOT NULL default '0',
+  `tpl_last_edit_by` int(11) NOT NULL default '0',
+  PRIMARY KEY  (`tpl_id`),
+  UNIQUE KEY `tpl_name` (`tpl_name`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 

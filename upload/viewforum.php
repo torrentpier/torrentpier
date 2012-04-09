@@ -399,8 +399,16 @@ $found_topics = count($topic_rowset);
 $orig_word = $replacement_word = array();
 obtain_word_list($orig_word, $replacement_word);
 
-$post_new_topic_url = "posting.php?mode=newtopic&amp;f=$forum_id";
-$post_new_topic_url .= ($forum_data['topic_tpl_id']) ? '&tpl=1' : '';
+if($forum_data['allow_reg_tracker'])
+{
+	$post_new_topic_url = "posting.php?mode=new_rel&amp;f=$forum_id";
+	$post_img = $images['relese_new'];
+}
+else
+{
+	$post_new_topic_url = "posting.php?mode=newtopic&amp;f=$forum_id";
+	$post_img = $images['post_new'];
+}
 
 // Post URL generation for templating vars
 $template->assign_vars(array(
@@ -428,7 +436,7 @@ $template->assign_vars(array(
 	'FORUM_ID'            => $forum_id,
 	'FORUM_NAME'          => htmlCHR($forum_data['forum_name']),
 	'TORRENTS'            => $forum_data['allow_reg_tracker'],
-	'POST_IMG'            => ($forum_data['forum_status'] == FORUM_LOCKED) ? $images['post_locked'] : $images['post_new'],
+	'POST_IMG'            => ($forum_data['forum_status'] == FORUM_LOCKED) ? $images['post_locked'] : $post_img,
 
 	'FOLDER_IMG'          => $images['folder'],
 	'FOLDER_NEW_IMG'      => $images['folder_new'],
