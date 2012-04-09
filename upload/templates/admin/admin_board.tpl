@@ -435,6 +435,9 @@
 		<label><input type="radio" name="seed_bonus_enabled" value="0" <!-- IF not SEED_BONUS_ENABLED -->checked="checked"<!-- ENDIF --> />{L_DISABLED}</label>
 	</td>
 </tr>
+<tr class="row3 med">
+	<td class="bold tCenter warnColor1" colspan="2">ВНИМАНИЕ!!! Сид Бонусы должны быть в порядке возрастания</td>
+</tr>
 <!-- BEGIN seed_bonus -->
 <tr id="seed_bonus_{seed_bonus.RELEASE}">
 	<td>{L_SEED_BONUS_ADD}</td>

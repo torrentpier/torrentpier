@@ -189,8 +189,7 @@ if($bb_cfg['seed_bonus_enabled'] && $bb_cfg['seed_bonus_points'] && $bb_cfg['see
 	DB()->query("
 		CREATE TEMPORARY TABLE tmp_bonus (
 			user_id       INT UNSIGNED NOT NULL DEFAULT '0',
-			release_count INT UNSIGNED NOT NULL DEFAULT '0',
-			PRIMARY KEY (user_id)
+			release_count INT UNSIGNED NOT NULL DEFAULT '0'
 		) ENGINE = MEMORY
 	");
 
@@ -218,7 +217,8 @@ if($bb_cfg['seed_bonus_enabled'] && $bb_cfg['seed_bonus_points'] && $bb_cfg['see
 
         DB()->query("
 			UPDATE ". BB_USERS ." u, tmp_bonus b
-				SET u.user_points = u.user_points + $user_points
+				SET u.user_points = u.user_points + $user_points,
+				b.user_id = 0
 			WHERE u.user_id = b.user_id
 				AND b.release_count <= $release
 				AND u.user_regdate  <  $user_regdate
