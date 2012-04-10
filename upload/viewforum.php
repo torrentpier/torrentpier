@@ -402,12 +402,14 @@ obtain_word_list($orig_word, $replacement_word);
 if($forum_data['allow_reg_tracker'])
 {
 	$post_new_topic_url = "posting.php?mode=new_rel&amp;f=$forum_id";
-	$post_img = $images['relese_new'];
+	$post_img = $images['release_new'];
+	$post_new_topic = $lang['POST_NEW_RELEASE'];
 }
 else
 {
 	$post_new_topic_url = "posting.php?mode=newtopic&amp;f=$forum_id";
 	$post_img = $images['post_new'];
+	$post_new_topic = $lang['POST_NEW_TOPIC'];
 }
 
 // Post URL generation for templating vars
@@ -451,7 +453,7 @@ $template->assign_vars(array(
 
 	'TITLE_MATCH'         => htmlCHR($title_match),
 	'SELECT_TPP'          => ($select_tpp) ? build_select('tpp', $select_tpp, $topics_per_page, null, null, 'onchange="$(\'#tpp\').submit();"') : '',
-	'T_POST_NEW_TOPIC'    => ($forum_data['forum_status'] == FORUM_LOCKED) ? $lang['FORUM_LOCKED'] : $lang['POST_NEW_TOPIC'],
+	'T_POST_NEW_TOPIC'    => ($forum_data['forum_status'] == FORUM_LOCKED) ? $lang['FORUM_LOCKED'] : $post_new_topic,
 	'S_AUTH_LIST'         => $u_auth,
 	'U_VIEW_FORUM'        => FORUM_URL . $forum_id,
 	'U_MARK_READ'         => FORUM_URL . $forum_id ."&amp;mark=topics",

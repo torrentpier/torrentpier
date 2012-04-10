@@ -82,6 +82,7 @@ $lang['SKYPE_ERROR'] = 'You entered an invalid login';
 $lang['FORUM_INDEX'] = '%s Forum Index';  // eg. sitename Forum Index, %s can be removed if you prefer
 
 $lang['POST_NEW_TOPIC'] = 'Post new topic';
+$lang['POST_NEW_RELEASE'] = 'Post new release';
 $lang['POST_REGULAR_TOPIC'] = 'Post regular topic';
 $lang['REPLY_TO_TOPIC'] = 'Reply to topic';
 $lang['REPLY_WITH_QUOTE'] = 'Reply with quote';

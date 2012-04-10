@@ -59,7 +59,7 @@ $images['post_new']            = $_lang .'post.gif';
 $images['post_locked']         = $_lang .'reply-locked.gif';
 $images['reply_new']           = $_lang .'reply.gif';
 $images['reply_locked']        = $_lang .'reply-locked.gif';
-$images['relese_new']          = $_lang .'relese.gif';
+$images['release_new']         = $_lang .'release.gif';
 
 // pm_icons
 $images['pm_inbox']            = $_main .'msg_inbox.gif';

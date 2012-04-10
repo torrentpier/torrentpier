@@ -85,6 +85,7 @@ $lang['SKYPE_ERROR'] = 'Вы ввели некорректный логин';
 $lang['FORUM_INDEX'] = 'Список форумов %s';
 
 $lang['POST_NEW_TOPIC'] = 'Начать новую тему';
+$lang['POST_NEW_RELEASE'] = 'Создать раздачу';
 $lang['POST_REGULAR_TOPIC'] = 'Создать обычную тему';
 $lang['REPLY_TO_TOPIC'] = 'Ответить на тему';
 $lang['REPLY_WITH_QUOTE'] = 'Ответить с цитатой';
@@ -1614,7 +1615,7 @@ $lang['DELETE_USER_POSTS_ME'] = 'Вы действительно хотите у
 $lang['DELETE_USER_POSTS_CONFIRM'] = 'Вы действительно хотите удалить все сообщения пользователя, кроме заглавных?';
 $lang['USER_DELETED_POSTS'] = 'Сообщения успешно удалены';
 
-$lang['USER'] = 'Пользователь'; 
+$lang['USER'] = 'Пользователь';
 $lang['ROLE'] = 'Роль:';
 $lang['MEMBERSHIP_IN'] = 'Членство в группах';
 $lang['PARTY'] = 'Участник:';

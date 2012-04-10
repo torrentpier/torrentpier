@@ -436,7 +436,7 @@
 	</td>
 </tr>
 <tr class="row3 med">
-	<td class="bold tCenter warnColor1" colspan="2">ВНИМАНИЕ!!! Сид Бонусы должны быть в порядке возрастания</td>
+	<td class="bold tCenter warnColor1" colspan="2">{L_SEED_BONUS_WARNING}</td>
 </tr>
 <!-- BEGIN seed_bonus -->
 <tr id="seed_bonus_{seed_bonus.RELEASE}">
