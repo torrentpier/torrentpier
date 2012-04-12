@@ -128,10 +128,14 @@ if($bb_cfg['announce_type'] != 'xbt')
 				". BB_BT_USERS             ." u,
 				". NEW_BB_BT_LAST_USERSTAT ." ub
 			SET
-				u.u_up_total   = u.u_up_total   + ub.up_add,
-				u.u_down_total = u.u_down_total + ub.down_add,
-				u.u_up_release = u.u_up_release + ub.release_add,
-				u.u_up_bonus   = u.u_up_bonus   + ub.bonus_add
+				u.u_up_total       = u.u_up_total       + ub.up_add,
+				u.u_down_total     = u.u_down_total     + ub.down_add,
+				u.u_up_release     = u.u_up_release     + ub.release_add,
+				u.u_up_bonus       = u.u_up_bonus       + ub.bonus_add,
+				u.up_today         = u.up_today         + ub.up_add,
+				u.down_today       = u.down_today       + ub.down_add,
+				u.up_release_today = u.up_release_today + ub.release_add,
+				u.up_bonus_today   = u.up_bonus_today   + ub.bonus_add
 			WHERE u.user_id = ub.user_id
 		");
 
@@ -216,8 +220,9 @@ if($bb_cfg['seed_bonus_enabled'] && $bb_cfg['seed_bonus_points'] && $bb_cfg['see
         $user_regdate = (TIMENOW - $bb_cfg['seed_bonus_user_regdate'] * 86400);
 
         DB()->query("
-			UPDATE ". BB_USERS ." u, tmp_bonus b
+			UPDATE ". BB_USERS ." u, ". BB_BT_USERS ." bu, tmp_bonus b
 				SET u.user_points = u.user_points + $user_points,
+				bu.points_today = bu.points_today + $user_points,
 				b.user_id = 0
 			WHERE u.user_id = b.user_id
 				AND b.release_count <= $release

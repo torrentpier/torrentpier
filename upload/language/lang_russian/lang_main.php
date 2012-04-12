@@ -604,6 +604,7 @@ $lang['BIRTHDAY_ENABLE'] = 'Показывать дни рождения';
 $lang['BIRTHDAY_MAX_AGE'] = 'Максимальный возраст';
 $lang['BIRTHDAY_MIN_AGE'] = 'Минимальный возраст';
 $lang['BIRTHDAY_CHECK_DAY'] = 'Показывать ближайшие дни рождения за';
+$lang['YEARS'] = 'Лет';
 
 $lang['NO_THEMES'] = 'В базе нет цветовых схем';
 $lang['TIMEZONE'] = 'Часовой пояс';

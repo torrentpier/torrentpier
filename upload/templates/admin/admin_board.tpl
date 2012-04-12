@@ -414,11 +414,11 @@
 </tr>
 <tr>
 	<td><h4>{L_BIRTHDAY_MAX_AGE}</h4></td>
-	<td><input class="post" type="text" size="25" maxlength="100" name="birthday_max_age" value="{BIRTHDAY_MAX_AGE}" />&nbsp;{L_BIRTHDAY_YEARS}</td>
+	<td><input class="post" type="text" size="25" maxlength="100" name="birthday_max_age" value="{BIRTHDAY_MAX_AGE}" />&nbsp;{L_YEARS}</td>
 </tr>
 <tr>
 	<td><h4>{L_BIRTHDAY_MIN_AGE}</h4></td>
-	<td><input class="post" type="text" size="25" maxlength="100" name="birthday_min_age" value="{BIRTHDAY_MIN_AGE}" />&nbsp;{L_BIRTHDAY_YEARS}</td>
+	<td><input class="post" type="text" size="25" maxlength="100" name="birthday_min_age" value="{BIRTHDAY_MIN_AGE}" />&nbsp;{L_YEARS}</td>
 </tr>
 <tr>
 	<td><h4>{L_BIRTHDAY_CHECK_DAY}</h4></td>

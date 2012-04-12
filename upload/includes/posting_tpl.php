@@ -3,7 +3,7 @@
 if (!defined('BB_ROOT')) die(basename(__FILE__));
 
 $can_edit_tpl = IS_SUPER_ADMIN;
-$edit_tpl_mode = ($can_edit_tpl && empty($_REQUEST['edit_tpl']));
+$edit_tpl_mode = ($can_edit_tpl && !empty($_REQUEST['edit_tpl']));
 
 // forum_data
 $sql = "SELECT forum_name, allow_reg_tracker, forum_tpl_id FROM ". BB_FORUMS ." WHERE forum_id = $forum_id LIMIT 1";

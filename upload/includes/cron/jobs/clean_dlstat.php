@@ -98,3 +98,25 @@ DB()->query("
 	LEFT JOIN ". BB_BT_TORRENTS ." tor USING(topic_id)
 	WHERE tor.topic_id IS NULL
 ");
+
+DB()->query("
+	UPDATE
+		". BB_BT_USERS ."
+	SET
+		up_yesterday         = up_today,
+		down_yesterday       = down_today,
+		up_release_yesterday = up_release_today,
+		up_bonus_yesterday   = up_bonus_today,
+		points_yesterday     = points_today
+");
+
+DB()->query("
+	UPDATE
+		". BB_BT_USERS ."
+	SET
+		up_today             = 0,
+		down_today           = 0,
+		up_release_today     = 0,
+		up_bonus_today       = 0,
+		points_today         = 0
+");

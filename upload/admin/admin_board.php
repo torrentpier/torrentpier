@@ -96,7 +96,6 @@ switch($mode)
 		    'WHOIS_INFO' => $new['whois_info'],
 		    'SHOW_MOD_INDEX' => $new['show_mod_index'],
 		    'BIRTHDAY_ENABLED' => $new['birthday_enabled'],
-		    'L_BIRTHDAY_YEARS' => $lang['DELTA_TIME']['INTERVALS']['year'][2],
 		    'BIRTHDAY_MAX_AGE' => $new['birthday_max_age'],
 		    'BIRTHDAY_MIN_AGE' => $new['birthday_min_age'],
 		    'BIRTHDAY_CHECK_DAY' => $new['birthday_check_day'],
