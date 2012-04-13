@@ -591,6 +591,7 @@ $template->assign_vars(array(
 	'SESSION_ADMIN'    => $userdata['session_admin'],
 	'MOD_REDIRECT_URL' => $mod_redirect_url,
 	'MODERATION_ON'    => $moderation,
+	'PRUNE_DAYS'       => $forum_data['prune_days'],
 ));
 
 print_page('viewforum.tpl');

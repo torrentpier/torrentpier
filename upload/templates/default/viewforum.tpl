@@ -635,7 +635,24 @@ td.topic_id { cursor: pointer; }
 
 <!-- IF LOGGED_IN -->
 <p class="med"><a href="{U_MARK_READ}">{L_MARK_TOPICS_READ}</a></p>
+<!-- IF IS_AM -->
+<p class="mrg_2 tRight">{L_AUTOCLEAN} <!-- IF PRUNE_DAYS --><b>{PRUNE_DAYS} {L_DAYS}</b><!-- ELSE -->{L_DISABLED}<!-- ENDIF --></p>
 <!-- ENDIF -->
+
+<!-- IF IS_ADMIN -->
+<div class="med tCenter">
+{L_ADMIN}:&nbsp;
+<!-- IF $bb_cfg['new_tpls'] -->
+<a href="posting.php?mode=new_rel&amp;f={FORUM_ID}&amp;edit_tpl=1" class="bold">{L_DESIGNER}</a> &nbsp;&middot;&nbsp;
+<!-- ENDIF -->
+<a href="admin/admin_log.php?f={FORUM_ID}&amp;db={$bb_cfg['log_days_keep']}">{L_FORUM_LOGS}</a> &nbsp;&middot;&nbsp;
+<a href="admin/admin_forums.php?mode=editforum&amp;f={FORUM_ID}">{L_EDIT}</a> &nbsp;&middot;&nbsp;
+<a href="admin/admin_forumauth.php?f={FORUM_ID}">{L_PERMISSIONS}</a> &nbsp;&middot;&nbsp;
+<a href="admin/admin_forums.php?mode=deleteforum&amp;f={FORUM_ID}">{L_DELETE}</a>
+</div>
+<!-- ENDIF / IS_ADMIN -->
+
+<!-- ENDIF / LOGGED_IN -->
 
 <table width="100%" cellspacing="0">
 <tr>

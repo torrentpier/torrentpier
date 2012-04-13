@@ -660,37 +660,25 @@ function delta_time ($timestamp_1, $timestamp_2 = TIMENOW, $granularity = 'auto'
 	return $GLOBALS['DeltaTime']->spellDelta($timestamp_1, $timestamp_2, $granularity);
 }
 
-function get_select ($type)
+function get_select ($select, $selected = null, $return_as = 'html', $first_opt = '&raquo;&raquo; Выбрать ')
 {
 	global $lang;
-
 	$select_ary = array();
 
-	switch ($type)
+	switch ($select)
 	{
 		case 'groups':
-
-			$sql = "SELECT group_id, group_name
-				FROM ". BB_GROUPS ."
-				WHERE group_single_user = 0
-				ORDER BY group_name";
-
+			$sql = "SELECT group_id, group_name FROM ". BB_GROUPS ." WHERE group_single_user = 0 ORDER BY group_name";
 			foreach (DB()->fetch_rowset($sql) as $row)
 			{
-				if (isset($select_ary[$row['group_name']]))
-				{
-					$cnt = md5($row['group_name']) .'_cnt';
-					$$cnt = @$$cnt + 1;
-					$row['group_name'] = $row['group_name'] . ' ['. (int) $$cnt .']';
-				}
 				$select_ary[$row['group_name']] = $row['group_id'];
 			}
-			$select_name = POST_GROUPS_URL;
+			$select_name = 'g';
 			break;
 
 		case 'forum_tpl':
 			$sql = "SELECT tpl_id, tpl_name FROM ". BB_TOPIC_TPL ." ORDER BY tpl_name";
-			$select_ary[$lang['SELECT']] = 0;
+			$select_ary[$first_opt] = 0;
 			foreach (DB()->fetch_rowset($sql) as $row)
 			{
 				$select_ary[$row['tpl_name']] = $row['tpl_id'];
@@ -698,7 +686,8 @@ function get_select ($type)
 			$select_name = 'forum_tpl_select';
 			break;
 	}
-	return ($select_ary) ? build_select($select_name, $select_ary) : '';
+
+	return ($return_as == 'html') ? build_select($select_name, $select_ary, $selected) : $select_ary;
 }
 
 class html_common
@@ -1237,8 +1226,21 @@ function show_bt_userdata ($user_id)
 		'MIN_DL_FOR_RATIO' => humn_size(MIN_DL_FOR_RATIO),
 		'MIN_DL_BYTES'     => MIN_DL_FOR_RATIO,
 		'AUTH_KEY'         => ($btu['auth_key']) ? $btu['auth_key'] : $lang['NONE'],
-		'SPEED_UP'         => ($btu['speed_up']) ? humn_size($btu['speed_up']).'/s' : '0 KB/s',
-		'SPEED_DOWN'       => ($btu['speed_down']) ? humn_size($btu['speed_down']).'/s' : '0 KB/s',
+		
+		'TD_DL'            => humn_size($btu['down_today']),
+		'TD_UL'            => humn_size($btu['up_today']),
+		'TD_REL'           => humn_size($btu['up_release_today']),
+		'TD_BONUS'         => humn_size($btu['up_bonus_today']),
+		'TD_POINTS'        => $btu['points_today'],
+
+		'YS_DL'            => humn_size($btu['down_yesterday']),
+		'YS_UL'            => humn_size($btu['up_yesterday']),
+		'YS_REL'           => humn_size($btu['up_release_yesterday']),
+		'YS_BONUS'         => humn_size($btu['up_bonus_yesterday']),
+		'YS_POINTS'        => $btu['points_yesterday'],
+		
+		'SPEED_UP'         => humn_size($btu['speed_up'], 0, 'KB') .'/s',
+		'SPEED_DOWN'       => humn_size($btu['speed_down'], 0, 'KB') .'/s',
 	));
 }
 

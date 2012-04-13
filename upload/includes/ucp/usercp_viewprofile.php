@@ -119,6 +119,7 @@ $template->assign_vars(array(
 	'OCCUPATION'           => $profiledata['user_occ'],
 	'INTERESTS'            => $profiledata['user_interests'],
 	'SKYPE'                => $profiledata['user_skype'],
+	'USER_POINTS'          => $profiledata['user_points'],
 	'GENDER'               => ($bb_cfg['gender'] && $profiledata['user_gender']) ? $lang['GENDER_SELECT'][$profiledata['user_gender']] : '',
 	'BIRTHDAY'             => ($bb_cfg['birthday_enabled'] && $profiledata['user_birthday']) ? realdate($profiledata['user_birthday'], 'Y-m-d') : '',
 	'AGE'                  => ($bb_cfg['birthday_enabled'] && $profiledata['user_birthday']) ? birthday_age($profiledata['user_birthday']) : '',

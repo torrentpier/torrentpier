@@ -129,6 +129,8 @@ $lang['BT_UNSET_DLTYPE_ON_TOR_UNREG'] = 'Change topic status to "Normal" while u
 $lang['LIST_FORUMS'] = 'List Forums';
 $lang['LIST_OF_PATTERNS'] = 'List of patterns';
 $lang['ADD_TEMPLATE'] = 'Add the template';
+$lang['TEMPLATE_DISABLE'] = 'Template disabled';
+$lang['FOR_NEW_TEMPLATE'] = 'for new patterns!';
 
 $lang['RELEASE_EXP'] = 'This page displays all forums. For each of them you can set the release type which should be posted in the forum.';
 $lang['TPL_NONE'] = 'Don\'t use templates';

@@ -49,7 +49,6 @@
 
 		<div class="copyright tCenter">
 			{L_POWERED} <br />
-			{L_DIVE} <br />
 		</div>
 
 	</div>

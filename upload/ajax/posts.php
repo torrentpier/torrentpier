@@ -18,6 +18,25 @@ if (isset($this->request['post_id']))
 			AND f.forum_id = t.forum_id
 			AND p.post_id  = pt.post_id
 		LIMIT 1");
+	if(!$post) $this->ajax_die('not post');
+
+	$is_auth = auth(AUTH_ALL, $post['forum_id'], $userdata, $post);
+	if ($post['topic_status'] == TOPIC_LOCKED && !$is_auth['auth_mod'])
+	{
+	   $this->ajax_die($lang['TOPIC_LOCKED']);
+	}
+}
+elseif (isset($this->request['topic_id']))
+{
+	$post_id = (int) $this->request['post_id'];
+	$post = DB()->fetch_row("SELECT t.*, f.*
+			FROM ". BB_TOPICS ." t, ". BB_FORUMS ." f
+			WHERE t.topic_id = $topic_id
+				AND f.forum_id = t.forum_id
+			LIMIT 1");
+	if(!$post) $this->ajax_die('not post');
+
+	$is_auth = auth(AUTH_ALL, $post['forum_id'], $userdata, $post);
 }
 
 if (!defined('WORD_LIST_OBTAINED'))
@@ -31,10 +50,6 @@ if (!defined('WORD_LIST_OBTAINED'))
 switch($this->request['type'])
 {
 	case 'delete';
-		if(!$post) $this->ajax_die('not post');
-
-		$is_auth = auth(AUTH_ALL, $post['forum_id'], $userdata, $post);
-
 		if($post['post_id'] != $post['topic_first_post_id'] && ($is_auth['auth_mod'] || ($userdata['user_id'] == $post['poster_id'] && $is_auth['auth_delete'] && $post['topic_last_post_id'] == $post['post_id'] && $post['post_time'] + 3600*3 > TIMENOW)))
 		{
 			if (empty($this->request['confirmed']))
@@ -52,9 +67,6 @@ switch($this->request['type'])
 		break;
 
 	case 'reply';
-		if(!$post) $this->ajax_die($lang['NOT_POST']);
-
-		$is_auth = auth(AUTH_ALL, $post['forum_id'], $userdata, $post);
 		if(bf($userdata['user_opt'], 'user_opt', 'allow_post'))
 		{
 			$this->ajax_die($lang['RULES_REPLY_CANNOT']);
@@ -101,8 +113,6 @@ switch($this->request['type'])
 
 	case 'edit':
     case 'editor':
-        if(!$post) $this->ajax_die($lang['NOT_POST']);
-
         if((mb_strlen($post['post_text'], 'UTF-8') > 1000) || $post['post_attachment'] || ($post['topic_first_post_id'] == $post_id))
         {
         	$this->response['redirect'] = make_url('posting.php?mode=editpost&p='. $post_id);
@@ -202,12 +212,7 @@ switch($this->request['type'])
 		{
 			$this->ajax_die('empty topic_id');
 		}
-		$topic_id = (int) $this->request['topic_id'];
-        $t_data = DB()->fetch_row("SELECT t.*, f.*
-			FROM ". BB_TOPICS ." t, ". BB_FORUMS ." f
-			WHERE t.topic_id = $topic_id
-				AND f.forum_id = t.forum_id
-			LIMIT 1");
+
 		if(!$t_data) $this->ajax_die($lang['TOPIC_POST_NOT_EXIST']);
 
 		$is_auth = auth(AUTH_ALL, $t_data['forum_id'], $userdata, $t_data);
@@ -218,6 +223,10 @@ switch($this->request['type'])
         else if(!$is_auth['auth_reply'])
 		{
 			$this->ajax_die(sprintf($lang['SORRY_AUTH_REPLY'], strip_tags($is_auth['auth_reply_type'])));
+		}
+        if ($post['topic_status'] == TOPIC_LOCKED && !$is_auth['auth_mod'])
+		{
+		   $this->ajax_die($lang['TOPIC_LOCKED']);
 		}
 
 	    $message = (string) $this->request['message'];
@@ -270,13 +279,13 @@ switch($this->request['type'])
 			}
 	    }
 
-		DB()->sql_query("INSERT INTO " . BB_POSTS . " (topic_id, forum_id, poster_id, post_time, poster_ip) VALUES ($topic_id, ". $t_data['forum_id'] .", ". $userdata['user_id'] .", '". TIMENOW ."', '". USER_IP ."')");
+		DB()->sql_query("INSERT INTO " . BB_POSTS . " (topic_id, forum_id, poster_id, post_time, poster_ip) VALUES ($topic_id, ". $post['forum_id'] .", ". $userdata['user_id'] .", '". TIMENOW ."', '". USER_IP ."')");
         $post_id = DB()->sql_nextid();
 		DB()->sql_query("INSERT INTO " . BB_POSTS_TEXT . " (post_id, post_text) VALUES ($post_id, '". DB()->escape($message) ."')");
 
-        update_post_stats('reply', $t_data, $t_data['forum_id'], $topic_id, $post_id, $userdata['user_id']);
+        update_post_stats('reply', $post, $post['forum_id'], $topic_id, $post_id, $userdata['user_id']);
 
-		add_search_words($post_id, stripslashes($message), stripslashes($t_data['topic_title']));
+		add_search_words($post_id, stripslashes($message), stripslashes($post['topic_title']));
 	    update_post_html(array(
 			'post_id'        => $post_id,
 			'post_text'      => $message,

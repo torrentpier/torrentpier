@@ -10,6 +10,7 @@ $lang['TRANSLATION_INFO'] = '';
 // Common, these terms are used
 // extensively on several pages
 //
+$lang['ADMIN'] = 'Administration';
 $lang['FORUM'] = 'Forum';
 $lang['CATEGORY'] = 'Category';
 $lang['HIDE_CAT'] = 'Hide categories';
@@ -1349,13 +1350,19 @@ $lang['ONLY_1_TOR_PER_TOPIC'] = 'You can register only one torrent in one topic'
 $lang['VIEWING_USER_BT_PROFILE'] = 'Viewing torrent-profile :: %s'; // %s is username
 $lang['CUR_ACTIVE_DLS'] = 'Currently active torrents';
 
+$lang['TD_TRAF'] = 'Today';
+$lang['YS_TRAF'] = 'Yesterday';
+$lang['TOTAL_TRAF'] = 'Total';
+
 $lang['USER_RATIO'] = 'Ratio';
 $lang['MAX_SPEED'] = 'Speed';
 $lang['BT_RATIO'] = 'Ratio';
 $lang['DOWNLOADED'] = 'Downloaded';
 $lang['UPLOADED'] = 'Uploaded';
 $lang['RELEASED'] = 'Released';
-$lang['BONUS'] = 'Bonus';
+$lang['BONUS'] = 'On the rare';
+$lang['SEED_BONUS'] = 'Seed Bonus';
+$lang['EXCHANGE'] = 'Exchange';
 $lang['IT_WILL_BE_DOWN'] = 'it will start to be considered after it will be downloaded';
 $lang['SPMODE_FULL'] = 'Show peers in full details';
 
@@ -1380,6 +1387,9 @@ $lang['ONLY_FOR_SUPER_ADMIN'] = 'This option only for super admins';
 $lang['ACCESS'] = 'Access';
 $lang['ACCESS_SRV_LOAD'] = 'Depend on server load';
 $lang['LOGS'] = 'Topic history';
+$lang['FORUM_LOGS'] = 'History Forum';
+$lang['AUTOCLEAN'] = 'Autoclean:';
+$lang['DESIGNER'] = 'Designer';
 
 $lang['LAST_IP'] = 'Last IP:';
 $lang['REG_IP']  = 'Registration IP:';
@@ -1565,8 +1575,7 @@ $lang['TRACKER_S'] = 'on tracker';
 
 // copyright
 $lang['NOTICE'] = '!ATTENTION!';
-$lang['POWERED'] = 'Powered by <a target="_blank" href="http://torrentpier.me">TorrentPier II</a> &copy; Meithar';
-$lang['DIVE'] = 'The forum is submitted on base <a target="_blank" href="http://www.phpbb.com">phpBB</a> &copy; phpBB Group';
+$lang['POWERED'] = 'Powered by <a target="_blank" href="http://torrentpier.me">TorrentPier II</a> &copy; Meithar, TorrentPier II Team';
 $lang['COPY'] = 'The site does not give electronic versions of products, and is engaged only in a collecting and cataloguing of the references sent and published at a forum by our readers. If you are the legal owner of any submitted material and do not wish that the reference to him{it} was in our catalogue, contact us and we shall immediately remove her. Files for an exchange on tracker are given by users of a site, and the administration does not bear the responsibility for their maintenance. The request to not fill in the files protected by copyrights, and also files of the illegal maintenance!';
 
 $lang['CALLSEED'] = 'Downloaded the call';

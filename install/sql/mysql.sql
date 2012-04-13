@@ -485,6 +485,16 @@ CREATE TABLE IF NOT EXISTS `bb_bt_users` (
   `u_down_total` bigint(20) unsigned NOT NULL DEFAULT '0',
   `u_up_release` bigint(20) unsigned NOT NULL DEFAULT '0',
   `u_up_bonus` bigint(20) unsigned NOT NULL DEFAULT '0',
+  `up_today` bigint(20) unsigned NOT NULL DEFAULT '0',
+  `down_today` bigint(20) unsigned NOT NULL DEFAULT '0',
+  `up_release_today` bigint(20) unsigned NOT NULL DEFAULT '0',
+  `up_bonus_today` bigint(20) unsigned NOT NULL DEFAULT '0',
+  `points_today` float(16,2) unsigned NOT NULL DEFAULT '0.00',
+  `up_yesterday` bigint(20) unsigned NOT NULL DEFAULT '0',
+  `down_yesterday` bigint(20) unsigned NOT NULL DEFAULT '0',
+  `up_release_yesterday` bigint(20) unsigned NOT NULL DEFAULT '0',
+  `up_bonus_yesterday` bigint(20) unsigned NOT NULL DEFAULT '0',
+  `points_yesterday` float(16,2) unsigned NOT NULL DEFAULT '0',
   PRIMARY KEY (`user_id`),
   UNIQUE KEY `auth_key` (`auth_key`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
@@ -676,6 +686,7 @@ INSERT INTO `bb_config` VALUES ('network_news_forum_id', '2');
 INSERT INTO `bb_config` VALUES ('whois_info', 'http://ip-whois.net/ip_geo.php?ip=');
 INSERT INTO `bb_config` VALUES ('show_mod_index', '1');
 INSERT INTO `bb_config` VALUES ('premod', '0');
+INSERT INTO `bb_config` VALUES ('new_tpls', '1');
 
 -- --------------------------------------------------------
 
@@ -1450,7 +1461,7 @@ CREATE TABLE IF NOT EXISTS `bb_users` (
 -- Дамп данных таблицы `bb_users`
 --
 
-INSERT INTO `bb_users` VALUES (-1, 0, 'Anonymous', 'd41d8cd98f00b204e9800998ecf8427e', 0, 0, '0', 0, '0', 0, 5, 0.00, '', 0, 0, 0, 220, 0, '', 0, 0, 0, 0, '', '', '', '', '', '', '', '', '', '', 0, '', 0, 0);
+INSERT INTO `bb_users` VALUES (-1, 0, 'Anonymous', 'd41d8cd98f00b204e9800998ecf8427e', 0, 0, '0', 0, '0', 0, 5, 0.00, '', 0, 0, 0, 0, 0, '', 0, 0, 0, 0, '', '', '', '', '', '', '', '', '', '', 0, '', 0, 0);
 INSERT INTO `bb_users` VALUES (2, 1, 'admin', 'c3284d0f94606de1fd2af172aba15bf3', 0, 0, '0', 0, '0', 1, 1, 4.00, '', 0, 0, 0, 304, 1, '', 1, 0, 0, 0, 'admin@admin.com', '', '', '', '', '', '', '', '', '', 0, '', 0, 0);
 INSERT INTO `bb_users` VALUES (-746, 0, 'bot', 'd41d8cd98f00b204e9800998ecf8427e', 0, 0, '0', 0, '0', 0, 0, 0.00, '', 0, 0, 0, 144, 0, 'bot.gif', 1, 0, 0, 0, 'bot@bot.bot', '', '', '', '', '', '', '', '', '', 0, '', 0, 0);
 

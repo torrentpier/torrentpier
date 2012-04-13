@@ -14,6 +14,7 @@ $lang['TRANSLATION_INFO'] = '';
 // Common, these terms are used
 // extensively on several pages
 //
+$lang['ADMIN'] = 'Администрирование';
 $lang['FORUM'] = 'Форум';
 $lang['CATEGORY'] = 'Категория';
 $lang['HIDE_CAT'] = 'Скрыть категории';
@@ -1356,12 +1357,18 @@ $lang['ONLY_1_TOR_PER_TOPIC'] = 'Вы не можете зарегистриро
 $lang['VIEWING_USER_BT_PROFILE'] = 'Торрент-профиль'; // %s is username
 $lang['CUR_ACTIVE_DLS'] = 'Текущие активные торренты';
 
+$lang['TD_TRAF'] = 'Сегодня';
+$lang['YS_TRAF'] = 'Вчера';
+$lang['TOTAL_TRAF'] = 'Всего';
+
 $lang['USER_RATIO'] = 'Рейтинг';
 $lang['MAX_SPEED'] = 'Скорость';
 $lang['DOWNLOADED'] = 'Скачано';
 $lang['UPLOADED'] = 'Отдано';
 $lang['RELEASED'] = 'На своих';
-$lang['BONUS'] = 'Бонус';
+$lang['BONUS'] = 'На редких';
+$lang['SEED_BONUS'] = 'СидБонус';
+$lang['EXCHANGE'] = 'Обменять';
 $lang['IT_WILL_BE_DOWN'] = 'начнет учитываться после того как будет скачано';
 $lang['SPMODE_FULL'] = 'Подробная статистика пиров';
 
@@ -1386,6 +1393,9 @@ $lang['ONLY_FOR_SUPER_ADMIN'] = 'Эта опция доступна только
 $lang['ACCESS'] = 'Доступ';
 $lang['ACCESS_SRV_LOAD'] = 'Зависит от загрузки сервера';
 $lang['LOGS'] = 'История темы';
+$lang['FORUM_LOGS'] = 'История форума';
+$lang['AUTOCLEAN'] = 'Авточистка:';
+$lang['DESIGNER'] = 'Конструктор';
 
 $lang['LAST_IP'] = 'Последний IP:';
 $lang['REG_IP']  = 'IP регистрации:';
@@ -1569,8 +1579,7 @@ $lang['TRACKER_S'] = 'по трекеру';
 
 // copyright
 $lang['NOTICE'] = '!ВНИМАНИЕ!';
-$lang['POWERED'] = 'Powered by <a target="_blank" href="http://torrentpier.me">TorrentPier II</a> &copy; Meithar';
-$lang['DIVE'] = 'Форум представлен на базе <a target="_blank" href="http://www.phpbb.com">phpBB</a> &copy; phpBB Group';
+$lang['POWERED'] = 'Powered by <a target="_blank" href="http://torrentpier.me">TorrentPier II</a> &copy; Meithar, TorrentPier II Team';
 $lang['COPY'] = 'Сайт не предоставляет электронные версии произведений, а занимается лишь коллекционированием и каталогизацией ссылок, присылаемых и публикуемых на форуме нашими читателями. Если вы являетесь правообладателем какого-либо представленного материала и не желаете, чтобы ссылка на него находилась в нашем каталоге, свяжитесь с нами, и мы незамедлительно удалим её. Файлы для обмена на трекере предоставлены пользователями сайта, и администрация не несёт ответственности за их содержание. Просьба не заливать файлы, защищенные авторскими правами, а также файлы нелегального содержания!';
 
 $lang['CALLSEED'] = 'Позвать скачавших';

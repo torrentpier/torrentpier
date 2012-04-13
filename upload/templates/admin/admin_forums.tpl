@@ -62,6 +62,10 @@ function toggle_cat_list (val)
 	    <td class="row2">{ALLOW_REG_TRACKER} &nbsp; {L_SELF_MODERATED}: {SELF_MODERATED}  &nbsp; {L_ALLOW_PORNO_TOPIC}: {ALLOW_PORNO_TOPIC}</td>
     </tr>
 	<tr>
+	    <td class="row1">{L_DESIGNER}</td>
+	    <td class="row2">{TPL_SELECT} - {L_FOR_NEW_TEMPLATE}</td>
+    </tr>
+	<tr>
 	    <td class="row1">{L_FORUM_PRUNING}</td>
 	    <td class="row2">{L_PRUNE_DAYS} <input type="text" name="prune_days" value="{PRUNE_DAYS}" size="4" class="post" /> {L_DAYS} &nbsp;<i class="med">(0 = {L_DISABLED})</span></td>
     </tr>

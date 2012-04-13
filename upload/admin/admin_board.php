@@ -100,6 +100,7 @@ switch($mode)
 		    'BIRTHDAY_MIN_AGE' => $new['birthday_min_age'],
 		    'BIRTHDAY_CHECK_DAY' => $new['birthday_check_day'],
 		    'PREMOD'     => $new['premod'],
+		    'NEW_TPLS'     => $new['new_tpls'],
 		    'SEED_BONUS_ENABLED' => $new['seed_bonus_enabled'],
 		    'SEED_BONUS_TOR_SIZE' => $new['seed_bonus_tor_size'],
 		    'SEED_BONUS_USER_REGDATE' => $new['seed_bonus_user_regdate'],

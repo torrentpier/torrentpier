@@ -41,7 +41,13 @@ switch ($mode)
 	case 'email':
 		require(INC_DIR .'ucp/usercp_email.php');
 		break;
+		
+	case 'bonus':
+		if (IS_GUEST) login_redirect();
 
+		require(INC_DIR . 'ucp/usercp_bonus.php');
+		break;
+		
 	default:
 		bb_die('Invalid mode');
 }

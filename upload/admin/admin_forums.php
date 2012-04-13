@@ -84,6 +84,7 @@ if ($mode)
 				$forum_parent = $row['forum_parent'];
 				$show_on_index = $row['show_on_index'];
 				$prune_days = $row['prune_days'];
+				$forum_tpl_id = $row['forum_tpl_id'];
 				$allow_reg_tracker = $row['allow_reg_tracker'];
 				$allow_porno_topic = $row['allow_porno_topic'];
 				$self_moderated = $row['self_moderated'];
@@ -101,6 +102,7 @@ if ($mode)
 				$forum_id = '';
 				$show_on_index = 1;
 				$prune_days = 0;
+				$forum_tpl_id = 0;
 				$allow_reg_tracker = 0;
 				$allow_porno_topic = 0;
 				$self_moderated = 0;
@@ -147,7 +149,7 @@ if ($mode)
 
 				'S_FORUM_DISPLAY_SORT_LIST'		=> $forum_display_sort_list,
 				'S_FORUM_DISPLAY_ORDER_LIST'	=> $forum_display_order_list,
-				'S_FORUM_ACTION' => "admin_forums.php",
+				'S_FORUM_ACTION' => 'admin_forums.php',
 				'S_HIDDEN_FIELDS' => $s_hidden_fields,
 				'S_SUBMIT_VALUE' => $buttonvalue,
 				'S_CAT_LIST' => $catlist,
@@ -157,6 +159,7 @@ if ($mode)
 				'S_PARENT_FORUM' => $s_parent,
 				'CAT_LIST_CLASS' => ($forum_parent) ? 'hidden' : '',
 				'SHOW_ON_INDEX_CLASS' => (!$forum_parent) ? 'hidden' : '',
+				'TPL_SELECT' => get_select('forum_tpl', $forum_tpl_id, 'html', $lang['TEMPLATE_DISABLE']),
 				'ALLOW_REG_TRACKER' => build_select('allow_reg_tracker', array($lang['DISALLOWED'] => 0, $lang['ALLOWED'] => 1), $allow_reg_tracker),
 				'ALLOW_PORNO_TOPIC' => build_select('allow_porno_topic', array($lang['NO'] => 0, $lang['YES'] => 1), $allow_porno_topic),
 				'SELF_MODERATED' => build_select('self_moderated', array($lang['NO'] => 0, $lang['YES'] => 1), $self_moderated),
@@ -186,6 +189,7 @@ if ($mode)
 			$forum_display_sort = intval($_POST['forum_display_sort']);
 			$forum_display_order = intval($_POST['forum_display_order']);
 
+			$forum_tpl_id = (int) $_POST['forum_tpl_select'];
 			$allow_reg_tracker = (int) $_POST['allow_reg_tracker'];
 			$allow_porno_topic = (int) $_POST['allow_porno_topic'];
 			$self_moderated = (int) $_POST['self_moderated'];
@@ -221,8 +225,8 @@ if ($mode)
 				$value_sql .= ", $value";
 			}
 
-			$columns = ' forum_name,   cat_id,   forum_desc,   forum_order,  forum_status,  prune_days,  forum_parent,  show_on_index,  forum_display_sort,  forum_display_order,  allow_reg_tracker,  allow_porno_topic,  self_moderated'. $field_sql;
-			$values = "'$forum_name', $cat_id, '$forum_desc', $forum_order, $forum_status, $prune_days, $forum_parent, $show_on_index, $forum_display_sort, $forum_display_order, $allow_reg_tracker, $allow_porno_topic, $self_moderated". $value_sql;
+			$columns = ' forum_name,   cat_id,   forum_desc,   forum_order,  forum_status,  prune_days,  forum_parent,  show_on_index,  forum_display_sort,  forum_display_order,  forum_tpl_id,  allow_reg_tracker,  allow_porno_topic,  self_moderated'. $field_sql;
+			$values = "'$forum_name', $cat_id, '$forum_desc', $forum_order, $forum_status, $prune_days, $forum_parent, $show_on_index, $forum_display_sort, $forum_display_order, $forum_tpl_id, $allow_reg_tracker, $allow_porno_topic, $self_moderated". $value_sql;
 
 			DB()->query("INSERT INTO ". BB_FORUMS ." ($columns) VALUES ($values)");
 
@@ -250,6 +254,7 @@ if ($mode)
 
 			$forum_display_order = intval($_POST['forum_display_order']);
 			$forum_display_sort = intval($_POST['forum_display_sort']);
+			$forum_tpl_id = (int) $_POST['forum_tpl_select'];
 			$allow_reg_tracker = (int) $_POST['allow_reg_tracker'];
 			$allow_porno_topic = (int) $_POST['allow_porno_topic'];
 			$self_moderated  = (int) $_POST['self_moderated'];
@@ -300,6 +305,7 @@ if ($mode)
 					prune_days          = $prune_days,
 					forum_parent        = $forum_parent,
 					show_on_index       = $show_on_index,
+					forum_tpl_id        = $forum_tpl_id,
 					allow_reg_tracker   = $allow_reg_tracker,
 					allow_porno_topic   = $allow_porno_topic,
 					self_moderated      = $self_moderated,

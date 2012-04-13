@@ -417,6 +417,7 @@ define('MODCP_URL',    "modcp.php?"     .'f=');
 define('PM_URL',       "privmsg.php?"   .'mode=post&amp;u=');
 define('POST_URL',     "viewtopic.php?" .'p=');
 define('PROFILE_URL',  "profile.php?"   .'mode=viewprofile&amp;u=');
+define('BONUS_URL',    "profile.php?"   .'mode=bonus');
 define('TOPIC_URL',    "viewtopic.php?" .'t=');
 
 define('USER_AGENT', @strtolower($_SERVER['HTTP_USER_AGENT']));
