@@ -118,9 +118,9 @@ switch($mode)
 			<tr class="row5">
 				<td colspan="1">'. $lang['MAX_SPEED'] .'</td>
 				<td colspan="2">'. $lang['DL_DL_SPEED'] .': '. $speed_down .'</span></td>
-				<td colspan="2">'. $lang['DL_DL_SPEED'] .': '. $speed_down .'</span></td>
-		        <td colspan="1"></td>
-		    </tr>';
+				<td colspan="2">'. $lang['DL_UL_SPEED'] .': '. $speed_up .'</span></td>';
+		$html .= ($bb_cfg['seed_bonus_enabled']) ? '<td colspan="1"></td>' : '';
+		$html .= '</tr>';
 
 		$this->response['user_ratio'] = '
             <th><a href="'. $bb_cfg['ratio_url_help'] .'" class="bold">'. $lang['USER_RATIO'] .'</a>:</th>

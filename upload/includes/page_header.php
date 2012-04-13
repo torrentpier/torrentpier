@@ -206,6 +206,7 @@ $template->assign_vars(array(
 
 	'LOGGED_IN'          => $logged_in,
 	'SESSION_USER_ID'    => $userdata['user_id'],
+	'POINTS'             => $userdata['user_points'],
 	'THIS_USER'          => profile_url($userdata),
 	'THIS_AVATAR'  	     => get_avatar($userdata['user_avatar'], $userdata['user_avatar_type'], !bf($userdata['user_opt'], 'user_opt', 'allow_avatar')),
 	'SHOW_LOGIN_LINK'    => !defined('IN_LOGIN'),

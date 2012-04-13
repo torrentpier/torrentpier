@@ -643,12 +643,12 @@ td.topic_id { cursor: pointer; }
 <div class="med tCenter">
 {L_ADMIN}:&nbsp;
 <!-- IF $bb_cfg['new_tpls'] -->
-<a href="posting.php?mode=new_rel&amp;f={FORUM_ID}&amp;edit_tpl=1" class="bold">{L_DESIGNER}</a> &nbsp;&middot;&nbsp;
+<a href="posting.php?mode=new_rel&amp;f={FORUM_ID}&amp;edit_tpl=1" class="bold" target="_blank">{L_DESIGNER}</a> &nbsp;&middot;&nbsp;
 <!-- ENDIF -->
-<a href="admin/admin_log.php?f={FORUM_ID}&amp;db={$bb_cfg['log_days_keep']}">{L_FORUM_LOGS}</a> &nbsp;&middot;&nbsp;
-<a href="admin/admin_forums.php?mode=editforum&amp;f={FORUM_ID}">{L_EDIT}</a> &nbsp;&middot;&nbsp;
-<a href="admin/admin_forumauth.php?f={FORUM_ID}">{L_PERMISSIONS}</a> &nbsp;&middot;&nbsp;
-<a href="admin/admin_forums.php?mode=deleteforum&amp;f={FORUM_ID}">{L_DELETE}</a>
+<a href="admin/admin_log.php?f={FORUM_ID}&amp;db={$bb_cfg['log_days_keep']}" target="_blank">{L_FORUM_LOGS}</a> &nbsp;&middot;&nbsp;
+<a href="admin/admin_forums.php?mode=editforum&amp;f={FORUM_ID}" target="_blank">{L_EDIT}</a> &nbsp;&middot;&nbsp;
+<a href="admin/admin_forumauth.php?f={FORUM_ID}" target="_blank">{L_PERMISSIONS}</a> &nbsp;&middot;&nbsp;
+<a href="admin/admin_forums.php?mode=deleteforum&amp;f={FORUM_ID}" target="_blank">{L_DELETE}</a>
 </div>
 <!-- ENDIF / IS_ADMIN -->
 

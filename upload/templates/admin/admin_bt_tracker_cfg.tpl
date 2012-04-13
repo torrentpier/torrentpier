@@ -13,7 +13,7 @@
 	<td colspan="2" class="pad_0 tCenter">
 	<p class="warnColor1 warnBorder1 pad_10">Changes disabled (see <b>$tr_cfg</b> in config.php)
 	<br />
-	Изменение данных из файла config.php при необходимости. Строка ~143
+	Изменение данных из файла config.php при необходимости. Строка ~146
 	</p>
 	</td>
 </tr>

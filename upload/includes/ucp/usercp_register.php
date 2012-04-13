@@ -15,7 +15,7 @@ if (IS_ADMIN)
 	if($new_user) $gen_simple_header = true;
 
 	$template->assign_vars(array(
-		'NEW_USER'            => $new_user,
+		'NEW_USER'  => $new_user,
 	));
 }
 
@@ -955,19 +955,3 @@ $template->assign_vars(array(
 ));
 
 print_page('usercp_register.tpl');
-
-// ----------------------------------------------------------- //
-// Functions
-//
-function set_pr_die_append_msg ($pr_uid)
-{
-	global $lang, $template;
-
-	$template->assign_var('BB_DIE_APPEND_MSG', '
-		<a href="'. PROFILE_URL . $pr_uid .'" onclick="return post2url(this.href, {after_edit: 1});">Перейти к просмотру профиля</a>
-		<br /><br />
-		<a href="profile.php?mode=editprofile'. (IS_ADMIN ? "&amp;u=$pr_uid" : '') .'" onclick="return post2url(this.href, {after_edit: 1});">Вернуться к редактированию</a>
-		<br /><br />
-		<a href="index.php">Вернуться на главную страницу</a>
-	');
-}

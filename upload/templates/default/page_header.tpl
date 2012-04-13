@@ -550,6 +550,7 @@ important_info
        <tr><td>{L_UPLOADED}</td><td class="seedmed"><b>{UP_TOTAL}</b></td></tr>
        <tr><td>{L_RELEASED}</td><td class="seedmed">{RELEASED}</td></tr>
        <tr><td>{L_BONUS}</td><td class="seedmed">{UP_BONUS}</td></tr>
+       <!-- IF $bb_cfg['seed_bonus_enabled'] --><tr><td>{L_SEED_BONUS}</td><td><a href="profile.php?mode=bonus"><span class="points bold">{POINTS}</span></a></td></tr><!-- ENDIF -->
        </table>
      </div><!-- ENDIF -->
 

@@ -131,8 +131,8 @@ switch($mode)
 			    if(!$row || !$price_row[$i]) continue;
 
 			    $template->assign_block_vars('bonus_upload', array(
-		            'UP' => $upload_row[$i],
-		            'PRICE'  => $row,
+		            'UP'     => $row,
+                    'PRICE'  => $price_row[$i],
 			    ));
 		    }
 	    }

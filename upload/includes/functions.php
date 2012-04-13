@@ -2768,6 +2768,19 @@ function set_die_append_msg ($forum_id = null, $topic_id = null)
 	$template->assign_var('BB_DIE_APPEND_MSG', $msg);
 }
 
+function set_pr_die_append_msg($pr_uid)
+{
+	global $lang, $template;
+
+	$template->assign_var('BB_DIE_APPEND_MSG', '
+		<a href="'. PROFILE_URL . $pr_uid .'" onclick="return post2url(this.href, {after_edit: 1});">'. $lang['PROFILE_RETURN'] .'</a>
+		<br /><br />
+		<a href="profile.php?mode=editprofile'. (IS_ADMIN ? "&amp;u=$pr_uid" : '') .'" onclick="return post2url(this.href, {after_edit: 1});">'. $lang['PROFILE_EDIT_RETURN'] .'</a>
+		<br /><br />
+		<a href="index.php">'. $lang['INDEX_RETURN'] .'</a>
+	');
+}
+
 function CAPTCHA ()
 {
 	static $captcha_obj = null;
