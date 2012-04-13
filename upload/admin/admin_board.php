@@ -51,6 +51,7 @@ else
 		if (isset($_POST['submit']) && $row['config_value'] != $new[$config_name])
 		{
 			if($config_name == 'seed_bonus_points' || $config_name == 'seed_bonus_release') $new[$config_name] = serialize($new[$config_name]);
+            if($config_name == 'bonus_upload' || $config_name == 'bonus_upload_price') $new[$config_name] = serialize($new[$config_name]);
 
 			bb_update_config(array($config_name => $new[$config_name]));
 		}
@@ -119,6 +120,22 @@ switch($mode)
 		            'POINTS'  => $row,
 			    ));
 		    }	    }
+
+	    if($new['bonus_upload'] && $new['bonus_upload_price'])
+	    {
+		    $upload_row = unserialize($new['bonus_upload']);
+			$price_row   = unserialize($new['bonus_upload_price']);
+
+		    foreach($upload_row as $i => $row)
+		    {
+			    if(!$row || !$price_row[$i]) continue;
+
+			    $template->assign_block_vars('bonus_upload', array(
+		            'UP' => $upload_row[$i],
+		            'PRICE'  => $row,
+			    ));
+		    }
+	    }
 	break;
 
 	default:

@@ -32,7 +32,7 @@ require(INC_DIR .'functions_admin_torrent.php');
 require(INC_DIR .'functions_admin_cron.php');
 
 
-$sql = DB()->fetch_rowset("SELECT * FROM " . BB_CONFIG);
+$sql = DB()->fetch_rowset("SELECT * FROM ". BB_CONFIG ." WHERE config_name = 'cron_enabled' OR config_name = 'cron_check_interval'");
 
 foreach($sql as $row)
 {

@@ -220,14 +220,14 @@ if($bb_cfg['seed_bonus_enabled'] && $bb_cfg['seed_bonus_points'] && $bb_cfg['see
         $user_regdate = (TIMENOW - $bb_cfg['seed_bonus_user_regdate'] * 86400);
 
         DB()->query("
-			UPDATE ". BB_USERS ." u
-				LEFT JOIN ". BB_BT_USERS ." bu ON(bu.user_id = u.user_id)
-				LEFT JOIN tmp_bonus b ON(b.user_id = u.user_id)				
-			SET 
-				u.user_points   = u.user_points + $user_points,
-				bu.points_today = bu.points_today + $user_points,
-				b.user_id       = 0
-			WHERE u.user_id         =  b.user_id				
+			UPDATE ". BB_USERS ." u, ". BB_BT_USERS ." bu, tmp_bonus b
+			SET
+				u.user_points       = u.user_points + $user_points,
+				bu.points_today     = bu.points_today + $user_points,
+				b.user_id           = 0
+			WHERE
+			    b.user_id           =  u.user_id
+				AND bu.user_id      =  u.user_id
 				AND b.release_count <= $release
 				AND u.user_regdate  <  $user_regdate
 				AND u.user_active   =  1

@@ -580,6 +580,8 @@ INSERT INTO `bb_config` VALUES ('board_email_form', '0');
 INSERT INTO `bb_config` VALUES ('board_email_sig', 'Thanks, The Management');
 INSERT INTO `bb_config` VALUES ('board_startdate', '');
 INSERT INTO `bb_config` VALUES ('board_timezone', '0');
+INSERT INTO `bb_config` VALUES ('bonus_upload', '');
+INSERT INTO `bb_config` VALUES ('bonus_upload_price', '');
 INSERT INTO `bb_config` VALUES ('birthday_enabled', '1');
 INSERT INTO `bb_config` VALUES ('birthday_max_age', '99');
 INSERT INTO `bb_config` VALUES ('birthday_min_age', '10');

@@ -475,6 +475,31 @@
 	<td>{L_SEED_BONUS_USER_REGDATA}</td>
 	<td><input class="post" type="text" size="25" maxlength="100" name="seed_bonus_user_regdate" value="{SEED_BONUS_USER_REGDATE}" />&nbsp;{L_DAYS}</td>
 </tr>
+<tr class="row3 med">
+	<td class="bold tCenter" colspan="2">Настройка обмена бонусов</td>
+</tr>
+<!-- BEGIN bonus_upload -->
+<tr id="bonus_upload_{bonus_upload.UP}">
+	<td><h4>{L_SEED_BONUS_ROPORTION}</h4><h6></h6></td>
+	<td>
+	    <input class="post" type="text" size="5" name="bonus_upload[]" value="{bonus_upload.UP}" />&nbsp;размер в GB <br />
+		<input class="post" type="text" size="5" name="bonus_upload_price[]" value="{bonus_upload.PRICE}" />&nbsp;их цена &nbsp;
+		<input onclick="$('#bonus_upload_{bonus_upload.UP}').remove();" class="post" type="button" size="2" value="{L_DELETE}" />
+	</td>
+</tr>
+<!-- END bonus -->
+<tr class="row3 med"><td colspan="2"></td></tr>
+<tr id="bonus_upload">
+	<td><h4>{L_SEED_BONUS_ROPORTION}</h4><h6></h6></td>
+	<td>
+	    <input class="post" type="text" size="5" name="bonus_upload[]" value="" />&nbsp;размер в GB <br />
+		<input class="post" type="text" size="5" name="bonus_upload_price[]" value="" />&nbsp;их цена
+		<input onclick="$('#bonus_upload').clone().appendTo('.bonus_upload');" class="post" type="button" size="2" value="+" />
+		<input onclick="$('#bonus_upload').remove();" class="post" type="button" size="2" value="-" />
+	</td>
+</tr>
+<tbody class="bonus_upload"></tbody>
+<tr class="row3 med"><td colspan="2"></td></tr>
 <!-- ENDIF / CONFIG_MODS -->
 <tr>
 	<td class="catBottom" colspan="2">

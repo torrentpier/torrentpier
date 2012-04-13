@@ -1369,6 +1369,11 @@ $lang['RELEASED'] = 'На своих';
 $lang['BONUS'] = 'На редких';
 $lang['SEED_BONUS'] = 'СидБонус';
 $lang['EXCHANGE'] = 'Обменять';
+$lang['BONUS_UPLOAD_DESC'] = '<b>%s к раздаче</b> <br /> Обменять бонусные очки на %1$s трафика, который будет приплюсован к сумме Вашей раздачи.';
+$lang['BONUS_UPLOAD_PRICE'] = '<b>%s</b> (у Вас <b class="%s">%s</b>)';
+$lang['PRICE'] = 'Цена';
+$lang['EXCHANGE_NOT'] = 'Обмен не доступен';
+$lang['BONUS_SUCCES'] = 'Вам успешно зачислено %s GB';
 $lang['IT_WILL_BE_DOWN'] = 'начнет учитываться после того как будет скачано';
 $lang['SPMODE_FULL'] = 'Подробная статистика пиров';
 

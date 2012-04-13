@@ -1363,6 +1363,11 @@ $lang['RELEASED'] = 'Released';
 $lang['BONUS'] = 'On the rare';
 $lang['SEED_BONUS'] = 'Seed Bonus';
 $lang['EXCHANGE'] = 'Exchange';
+$lang['BONUS_UPLOAD_DESC'] = '<b>%s to distribution</b> <br /> To exchange bonus points on %1$s traffic which will be added on to the sum of your distribution.';
+$lang['BONUS_UPLOAD_PRICE'] = '<b>%s</b> (at You <b class="%s">%s</b>)';
+$lang['PRICE'] = 'price';
+$lang['EXCHANGE_NOT'] 'The exchange not available';
+$lang['BONUS_SUCCES'] = 'To you it is successfully enlisted %s GB';
 $lang['IT_WILL_BE_DOWN'] = 'it will start to be considered after it will be downloaded';
 $lang['SPMODE_FULL'] = 'Show peers in full details';
 

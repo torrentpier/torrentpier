@@ -28,7 +28,7 @@ if (isset($this->request['post_id']))
 }
 elseif (isset($this->request['topic_id']))
 {
-	$post_id = (int) $this->request['post_id'];
+	$topic_id = (int) $this->request['topic_id'];
 	$post = DB()->fetch_row("SELECT t.*, f.*
 			FROM ". BB_TOPICS ." t, ". BB_FORUMS ." f
 			WHERE t.topic_id = $topic_id
@@ -62,7 +62,7 @@ switch($this->request['type'])
 		}
 		else
 		{
-			$this->ajax_die(sprintf($lang['SORRY_AUTH_DELETE'], strip_tags($is_auth['auth_delete_type'])));
+			$this->ajax_die(sprintf($lang['DELETE_OWN_POSTS'], strip_tags($is_auth['auth_delete_type'])));
 		}
 		break;
 
@@ -113,6 +113,10 @@ switch($this->request['type'])
 
 	case 'edit':
     case 'editor':
+        if ($post['poster_id'] != $userdata['user_id'] && !$is_auth['auth_mod'])
+		{
+			$this->ajax_die($lang['EDIT_OWN_POSTS']);
+		}
         if((mb_strlen($post['post_text'], 'UTF-8') > 1000) || $post['post_attachment'] || ($post['topic_first_post_id'] == $post_id))
         {
         	$this->response['redirect'] = make_url('posting.php?mode=editpost&p='. $post_id);
@@ -213,9 +217,6 @@ switch($this->request['type'])
 			$this->ajax_die('empty topic_id');
 		}
 
-		if(!$t_data) $this->ajax_die($lang['TOPIC_POST_NOT_EXIST']);
-
-		$is_auth = auth(AUTH_ALL, $t_data['forum_id'], $userdata, $t_data);
 		if(bf($userdata['user_opt'], 'user_opt', 'allow_post'))
 		{
 			$this->ajax_die($lang['RULES_REPLY_CANNOT']);
