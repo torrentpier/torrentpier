@@ -1231,13 +1231,13 @@ function show_bt_userdata ($user_id)
 		'TD_UL'            => humn_size($btu['up_today']),
 		'TD_REL'           => humn_size($btu['up_release_today']),
 		'TD_BONUS'         => humn_size($btu['up_bonus_today']),
-		'TD_POINTS'        => $btu['points_today'],
+		'TD_POINTS'        => ($btu['auth_key']) ? $btu['points_today'] : '0.00',
 
 		'YS_DL'            => humn_size($btu['down_yesterday']),
 		'YS_UL'            => humn_size($btu['up_yesterday']),
 		'YS_REL'           => humn_size($btu['up_release_yesterday']),
 		'YS_BONUS'         => humn_size($btu['up_bonus_yesterday']),
-		'YS_POINTS'        => $btu['points_yesterday'],
+		'YS_POINTS'        => ($btu['auth_key']) ? $btu['points_yesterday'] : '0.00',
 		
 		'SPEED_UP'         => humn_size($btu['speed_up'], 0, 'KB') .'/s',
 		'SPEED_DOWN'       => humn_size($btu['speed_down'], 0, 'KB') .'/s',
@@ -1553,7 +1553,6 @@ function setup_style ()
 	// AdminCP works only with default template
 	$tpl_dir_name = defined('IN_ADMIN') ? 'default'   : basename($bb_cfg['tpl_name']);
 	$stylesheet   = defined('IN_ADMIN') ? 'main.css'  : basename($bb_cfg['stylesheet']);
-	$theme_css    = defined('IN_ADMIN') ? 'admin.css' : basename($bb_cfg['theme_css']);
 
 	$template = new Template(TEMPLATES_DIR . $tpl_dir_name);
 	$css_dir = BB_ROOT . basename(TEMPLATES_DIR) ."/$tpl_dir_name/css/";
@@ -1562,7 +1561,6 @@ function setup_style ()
 		'BB_ROOT'          => BB_ROOT,
 		'SPACER'           => BB_ROOT .'images/spacer.gif',
 		'STYLESHEET'       => $css_dir . $stylesheet,
-		'THEME_CSS'        => ($theme_css) ? $css_dir . $theme_css : '',
 		'EXT_LINK_NEW_WIN' => $bb_cfg['ext_link_new_win'],
 	));
 
@@ -2850,7 +2848,9 @@ function profile_url($data)
 	$user_rank = !empty($data['user_rank']) ? $data['user_rank'] : 0;
 
 	if(isset($ranks[$user_rank]))
-	{		$title = $ranks[$user_rank]['rank_title'];		$style = $ranks[$user_rank]['rank_style'];
+	{
+		$title = $ranks[$user_rank]['rank_title'];
+		$style = $ranks[$user_rank]['rank_style'];
 	}
 	if(empty($title)) $title = $lang['USER'];
 	if(empty($style)) $style = 'colorUser';

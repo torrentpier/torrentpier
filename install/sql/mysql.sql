@@ -635,7 +635,7 @@ INSERT INTO `bb_config` VALUES ('record_online_date', '1211477508');
 INSERT INTO `bb_config` VALUES ('record_online_users', '2');
 INSERT INTO `bb_config` VALUES ('require_activation', '0');
 INSERT INTO `bb_config` VALUES ('sendmail_fix', '0');
-INSERT INTO `bb_config` VALUES ('seed_bonus_enabled', '0');
+INSERT INTO `bb_config` VALUES ('seed_bonus_enabled', '1');
 INSERT INTO `bb_config` VALUES ('seed_bonus_release', '');
 INSERT INTO `bb_config` VALUES ('seed_bonus_points', '');
 INSERT INTO `bb_config` VALUES ('seed_bonus_tor_size', '0');

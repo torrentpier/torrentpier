@@ -28,7 +28,7 @@ if (isset($_POST['bonus_id']))
 	$upload = $upload_row[$id]*1024*1024*1024;
 	$points = $price_row[$id];
 	
-    if($userdata['user_points'] <= $points) 
+    if($userdata['user_points'] < $points)
 	{
 	    meta_refresh('index.php', 5);
 		

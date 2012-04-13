@@ -51,8 +51,8 @@ if (!defined('BB_ROOT')) die(basename(__FILE__));
 $bb_cfg = $tr_cfg = $page_cfg = array();
 
 // Increase number of revision after update
-$bb_cfg['tp_version'] = '2.4 (RC)';
-$bb_cfg['tp_release_state'] = 'R398';
+$bb_cfg['tp_version'] = '2.4 RC';
+$bb_cfg['tp_release_state'] = 'R399';
 $bb_cfg['tp_release_date'] = '13-04-2012';
 
 // Database
@@ -258,7 +258,6 @@ define('ADMIN_TPL_DIR', TEMPLATES_DIR .'/admin/');
 
 $bb_cfg['tpl_name']   = 'default';
 $bb_cfg['stylesheet'] = 'main.css';
-$bb_cfg['theme_css']  = 'theme_default.css';
 
 $bb_cfg['show_sidebar1_on_every_page'] = false;
 $bb_cfg['show_sidebar2_on_every_page'] = false;
