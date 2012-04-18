@@ -198,7 +198,7 @@
 			<select name="tor_action" id="tor-select-{postrow.attach.tor_not_reged.ATTACH_ID}" onchange="$('#tor-confirm-{postrow.attach.tor_not_reged.ATTACH_ID}').attr('checked', 0); $('#tor-submit-{postrow.attach.tor_not_reged.ATTACH_ID}').attr('disabled', 1)">
 				<option value="" selected="selected" class="select-action">&raquo; {L_SELECT_ACTION}</option>
 				<option value="del_torrent">{L_DELETE_TORRENT}</option>
-				<option value="del_torrent_move_topic">{L_DEL_MOVE_TORRENT}</option>
+				<option value="del_torrent_move_topic">{L_DELETE_MOVE_TORRENT}</option>
 			</select>
 
 			&nbsp; <a href="#" onclick="change_torrents($('#tor-{postrow.attach.tor_reged.ATTACH_ID} select').val()); return false;"><input type="submit" value="{L_DO_SUBMIT}" class="liteoption" /></a>

@@ -317,7 +317,7 @@ if ($tor_reged && $tor_info)
 			$sql = "SELECT
 					tr.user_id, tr.ip, tr.port, tr.uploaded, tr.downloaded, tr.remain,
 					tr.seeder, tr.releaser, tr.speed_up, tr.speed_down, tr.update_time,
-					u.username, u.user_rank
+					tr.complete_percent, u.username, u.user_rank
 				FROM ". BB_BT_TRACKER ." tr
 				LEFT JOIN ". BB_USERS ." u ON u.user_id = tr.user_id
 				WHERE tr.topic_id = $tor_id

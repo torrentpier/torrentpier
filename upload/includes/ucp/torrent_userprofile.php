@@ -162,7 +162,14 @@ if ($leeching_count = count($leeching))
         }
 
 		$compl_size = ($leeching[$i]['remain'] && $leeching[$i]['size'] && $leeching[$i]['size'] > $leeching[$i]['remain']) ? ($leeching[$i]['size'] - $leeching[$i]['remain']) : 0;
-		$compl_perc = ($compl_size) ? floor($compl_size * 100 / $leeching[$i]['size']) : 0;
+		
+		if($bb_cfg['announce_type'] == 'xbt')
+        {
+		    $compl_perc = $leeching[$i]['complete_percent'];}
+        else
+        {
+            $compl_perc = ($compl_size) ? floor($compl_size * 100 / $leeching[$i]['size']) : 0;
+        }
 
 		$template->assign_block_vars('leech.leechrow', array(
 			'FORUM_NAME'   => htmlCHR($leeching[$i]['forum_name']),
