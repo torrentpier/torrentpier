@@ -52,7 +52,7 @@ function initPostImages(context)
 	$('var.postImg', context).not($in_spoilers).each(function(){
 		var $v = $(this);
 		var src = $v.attr('title');
-		var $img = $('<img src="'+ src +'" class="'+ $v.attr('className') +'" alt="pic" />');
+		var $img = $('<img src="'+ src +'" class="'+ $v.attr('class') +'" alt="pic" />');
 		$img = fixPostImage($img);
 		var maxW = ($v.hasClass('postImgAligned')) ? postImgAligned_MaxWidth : postImg_MaxWidth;
 		$img.bind('click', function(){ return imgFit(this, maxW); });
