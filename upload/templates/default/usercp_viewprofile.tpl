@@ -44,7 +44,7 @@ ajax.change_user_opt = function() {
 };
 ajax.callback.change_user_opt = function(data){
 	$('#user-opt-resp').html(data.resp_html);
-	$('#user-opt-save-btn').attr({ disabled: 0 });
+	$('#user-opt-save-btn').removeAttr('disabled');
 }
 
 $(document).ready(function(){

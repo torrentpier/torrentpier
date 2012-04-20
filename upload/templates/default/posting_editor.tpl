@@ -180,7 +180,7 @@ $('#post-submit-btn').click(function(event){
 });
 $('#post-js-warn').hide();
 $('#post-buttons-block').show();
-$('#post-submit-btn').attr('disabled', 0);
+$('#post-submit-btn').removeAttr('disabled'); 
 
 // Called before form submitting.
 var submitted = false;

@@ -293,7 +293,7 @@ switch ($mode)
 			}
 
 			$net_forums = array_flip(explode(',', $bb_cfg['network_news_forum_id']));
-			if((isset($news_forums[$forum_id]) || isset($news_forums[$new_forum_id])) && $bb_cfg['show_network_news'] && $result)
+			if((isset($net_forums[$forum_id]) || isset($net_forums[$new_forum_id])) && $bb_cfg['show_network_news'] && $result)
 			{
 				$datastore->enqueue('network_news');
 				$datastore->update('network_news');
