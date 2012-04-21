@@ -1278,6 +1278,11 @@ $lang['GO_TO_SECTION'] = 'Goto section';
 $lang['TORRENTS_FROM'] = 'Posts from';
 $lang['SHOW_ONLY'] = 'Show only';
 $lang['SHOW_COLUMN'] = 'Show column';
+$lang['SEL_CHAPTERS'] = 'Link to the selected partitions';
+$lang['NOT_SEL_CHAPTERS'] = 'You have not selected topics';
+$lang['SEL_CHAPTERS_HELP'] = 'You can select a maximum %s partition';
+$lang['HIDE_CONTENTS'] = 'Hide the contents of {...}';
+$lang['FILTER_BY_NAME'] = '<i>filter by name </i>';
 
 $lang['BT_ONLY_ACTIVE'] = 'Active';
 $lang['BT_ONLY_MY'] = 'My releases';

@@ -831,7 +831,7 @@ foreach ($cat_forum['c'] as $cat_id => $forums_ary)
 		$style = '';
 		if (!isset($cat_forum['subforums'][$forum_id]))
 		{
-			$class = 'root_forum';
+			$class = 'root_forum has_sf';
 			$class .= isset($cat_forum['forums_with_sf'][$forum_id]) ? ' has_sf' : '';
 			$style = " class=\"$class\"";
 		}
@@ -841,8 +841,8 @@ foreach ($cat_forum['c'] as $cat_id => $forums_ary)
 
 	$opt .= "</optgroup>\n";
 }
-$search_all_opt = '<option value="'. $search_all .'"'. (($forum_val == $search_all) ? HTML_SELECTED : '') .'>&nbsp;'. htmlCHR($lang['ALL_AVAILABLE']) ."</option>\n";
-$cat_forum_select = "\n".'<select id="fs" style="width: 100%;" name="'. $forum_key .'[]" multiple="multiple" size="'. $forum_select_size ."\">\n". $search_all_opt . $opt ."</select>\n";
+$search_all_opt = '<option value="'. $search_all .'" value="fs-'. $search_all .'"'. (($forum_val == $search_all) ? HTML_SELECTED : '') .'>&nbsp;'. htmlCHR($lang['ALL_AVAILABLE']) ."</option>\n";
+$cat_forum_select = "\n".'<select id="fs-main" style="width: 100%;" name="'. $forum_key .'[]" multiple="multiple" size="'. $forum_select_size ."\">\n". $search_all_opt . $opt ."</select>\n";
 
 // Sort dir
 $template->assign_vars(array(
@@ -882,6 +882,7 @@ $template->assign_vars(array(
 	'AJAX_TOPICS'      => $user->opt_js['tr_t_ax'],
 	'SHOW_TIME_TOPICS' => $user->opt_js['tr_t_t'],
 	'SHOW_CURSOR'      => $user->opt_js['hl_tr'],
+	'HIDE_CONTENTS'    => $user->opt_js['h_tsp'],
 
 	'U_SEARCH_USER'    => "search.php?mode=searchuser&input_name=$poster_name_key",
 ));
@@ -929,6 +930,9 @@ $template->assign_vars(array(
 	'SHOW_FORUM'        => $show_forum_val,
 	'SHOW_AUTHOR'       => $show_author_val,
 	'SHOW_SPEED'        => $show_speed_val,
+    'MAX_FS'            => $max_forums_selected,
+    'L_MAX_FS'          => sprintf($lang['SEL_CHAPTERS_HELP'], $max_forums_selected),
+    'TRACKER_URL'       => make_url('tracker.php?'),
 
 	'TR_CAT_URL'        => "$tracker_url?$cat_key=",
 	'TR_FORUM_URL'      => "$tracker_url?$forum_key=",

@@ -47,11 +47,6 @@ ajax.callback.view_post = function(data) {
 };
 </script>
 
-<style type="text/css">
-.post_wrap { border: 1px #A5AFB4 solid; margin: 8px 8px 6px; overflow: auto; }
-.post_links { margin: 6px; }
-</style>
-
 <table id="post-row" style="display: none;">
 <tr>
 	<td class="row2" colspan="{TOR_COLSPAN}">
@@ -80,18 +75,114 @@ ajax.callback.view_post = function(data) {
 <!-- ENDIF / TORHELP_TOPICS -->
 
 <!-- IF SHOW_SEARCH_OPT -->
-<style type="text/css">
-#fs-nav .b { font-weight: bold; }
-#fs-nav li, #fs-nav-close { cursor: pointer; }
-#fs-nav span.f:hover, #fs-nav-close:hover { color: blue; background: #DEE2E4; }
-#fs-nav-list { border: 3px double #9AA7AD; background: #EFEFEF; padding: 8px; max-height: 500px; overflow: auto; }
-#fs-sel-cat { min-width: 250px; max-width: 300px; }
-#fs-sel-cat option.cat-title { font-weight: bold; color: #005A88; background: #F5F5F5; }
-</style>
+<script type="text/javascript">
+var FSN = {
+	fs_all      : '',
+	fs_og       : [],
+	fs_lb       : [],
+	sel_width   : null,
+	scroll      : $.browser.mozilla,
+	nav_inited  : false,
+
+	show_nav: function() {
+		$('#fs>legend').empty().append( $('#fs-nav-legend').contents() );
+	},
+	build_nav: function() {
+
+		if (FSN.nav_inited) return;
+
+		var $fieldset = $('fieldset#fs');
+		var $select = $('select:last', $fieldset);
+		var $optgroup = $('optgroup', $select);
+
+		$optgroup.each(function(i){
+			var $og = $(this);
+			$og.attr({ id: 'og-'+i });
+			FSN.fs_og[i] = $(this).html();
+			FSN.fs_lb[i] = $(this).attr('label');
+			$('#fs-sel-cat').append('<option class="cat-title" value="'+ i +'">&nbsp;&nbsp;&middot;&nbsp;'+ FSN.fs_lb[i] +'&nbsp;</option>\n');
+			$('<li><span class="b">'+ FSN.fs_lb[i] +'</span>\n<ul id="nav-c-'+ i +'"></ul>\n</li>').appendTo('#fs-nav-ul').click(function(){
+				if (FSN.scroll) {
+					$select.scrollTo('#og-'+i);
+				}
+			});
+			$('option', $og).each(function(){
+				var $op = $(this);
+				if ($op[0].className) {
+					$('<li><span class="f">'+ $op.html() +'</span>\n</li>').appendTo('#nav-c-'+ i).click(function(e){
+						e.stopPropagation();
+						if (FSN.scroll) {
+							$select.scrollTo( '#'+$op.attr('id'), { duration:300 } ).scrollTo( '-=3px' );
+						}
+						$('option', $select).removeAttr('selected');
+						$('#'+$op.attr('id')).attr({ selected: 1 });
+						$('#fs-nav-list').fadeOut();
+					});
+				}
+			});
+		});
+
+		$('#fs-nav-ul').treeview({ collapsed: true });
+		// фикс для FF2, чтобы меню не выстраивалось лесенкой
+		if ($.browser.mozilla && parseFloat($.browser.version) <= 1.8) {
+			$('#fs-nav-list ul').after('<div style="margin-top: 1px;"></div>');
+		}
+
+		$('#fs-sel-cat').bind('change', function(){
+			var i = $(this).val();
+			if (FSN.sel_width == null) {
+				FSN.sel_width = $select.width() + 4;
+			}
+			// опера не понимает <optgroup> при популяции селекта [http://dev.jquery.com/ticket/3040]
+			if ($.browser.opera) {
+				if (i == 'all') {
+					$select.empty().append('<option id="fs--1" value="-1">&nbsp;{L_ALL_AVAILABLE}</option>\n');
+					$.each(FSN.fs_og, function(i, v){
+					 $select.append( $(document.createElement('optgroup')).attr('label', FSN.fs_lb[i]).append(FSN.fs_og[i]) );
+					});
+				}
+				else {
+					$select.empty().append( $(document.createElement('optgroup')).attr('label', FSN.fs_lb[i]).append(FSN.fs_og[i]) );
+				}
+			}
+			else {
+				if (i == 'all') {
+					var fs_html = FSN.fs_all;
+				}
+				else {
+					var fs_html = '<optgroup label="'+ FSN.fs_lb[i] +'">'+ FSN.fs_og[i] +'</optgroup>';
+				}
+				$select.html(fs_html).focus();
+			}
+			if (i == 'all') {
+				$('#fs-nav-menu').show();
+			}
+			else {
+				$('#fs-nav-menu').hide();
+			}
+			$select.width(FSN.sel_width);
+		});
+
+		FSN.fs_all = $select.html();
+
+		FSN.nav_inited = true;
+	}
+};
+
+$(function(){
+	FSN.show_nav();
+	$('#fs legend').one('mouseenter', FSN.build_nav);
+});
+</script>
 
 <div class="menu-sub" id="fs-nav-list">
 	<div class="tRight"><span id="fs-nav-close" class="med" onclick="$('#fs-nav-list').hide();"> [ {L_HIDE} ] </span></div>
-	<ul id="fs-nav" class="tree-root"></ul>
+	<ul id="fs-nav-ul" class="tree-root"></ul>
+</div>
+
+<div id="fs-nav-legend" style="display: none;">
+	<select id="fs-sel-cat"><option value="all">&nbsp;{L_SELECT_CAT}&nbsp;</option></select>
+	<span id="fs-nav-menu">&middot;&nbsp;<a class="menu-root" href="#fs-nav-list">{L_GO_TO_SECTION}</a></span>
 </div>
 
 <form method="POST" name="post" action="{TOR_SEARCH_ACTION}#results">
@@ -108,13 +199,11 @@ ajax.callback.view_post = function(data) {
 		<table class="fieldsets borderless bCenter pad_0" cellspacing="0">
 		<tr>
 			<td rowspan="2" width="50%">
-				<fieldset>
-				<legend>
-					<select id="fs-sel-cat"><option value="all">&nbsp;{L_SELECT_CAT}&nbsp;</option></select>
-					<span id="fs-nav-menu" style="display: none">&middot;&nbsp;<a class="menu-root" href="#fs-nav-list">{L_GO_TO_SECTION}</a></span>
-				</legend>
+				<fieldset id="fs">
+				<legend>{L_SEARCH_IN_FORUMS}</legend>
 				<div>
 					<p class="select">{CAT_FORUM_SELECT}</p>
+					<p id="fs-qs-div" class="med" style="display: none;"><input id="fs-qs-input" type="text" style="width: 200px;"> {L_FILTER_BY_NAME}</p>
 					<p><img width="300" class="spacer" src="{SPACER}" alt="" /></p>
 				</div>
 				</fieldset>
@@ -149,6 +238,13 @@ ajax.callback.view_post = function(data) {
 					<p class="chbox">{ONLY_ACTIVE_CHBOX}</p>
 					<p class="chbox">{SEED_EXIST_CHBOX}</p>
 					<p class="chbox">{ONLY_NEW_CHBOX}[{MINIPOST_IMG_NEW}]&nbsp;</p>
+					<p>
+					    <label>
+		                    <input type="checkbox" <!-- IF HIDE_CONTENTS -->{CHECKED}<!-- ENDIF -->
+							    onclick="user.set('h_tsp', this.checked ? 1 : 0);"
+		                    />&nbsp;{L_HIDE_CONTENTS}
+	                    </label>
+					</p>
 					<!-- IF $tr_cfg['gold_silver_enabled'] --><p class="chbox">{TOR_TYPE_CHBOX}</p><!-- ENDIF -->
 				</div>
 				</fieldset>
@@ -191,6 +287,7 @@ ajax.callback.view_post = function(data) {
 					</p>
 					<p class="chbox med">
 						{ALL_WORDS_CHBOX}
+						&middot; <a class="med" href="#" onclick="return get_fs_link();">{L_SEL_CHAPTERS}</a>
 						<!-- IF $bb_cfg['search_help_url'] --> &middot; <a class="med" href="{$bb_cfg['search_help_url']}">{L_SEARCH_HELP_URL}</a><!-- ENDIF -->
 					</p>
 				</div>
@@ -309,7 +406,7 @@ ajax.callback.view_post = function(data) {
 	<td class="row1"><a class="gen" href="{TR_FORUM_URL}{tor.FORUM_ID}">{tor.FORUM_NAME}</a></td>
 	<!-- ENDIF -->
 	<td class="row4 med tLeft">
-		<a class="{tor.DL_CLASS}<!-- IF AJAX_TOPICS --> folded2 tLink<!-- ENDIF -->" <!-- IF AJAX_TOPICS -->onclick="ajax.view_post({tor.POST_ID}, this); return false;"<!-- ENDIF --> href="{TOPIC_URL}{tor.TOPIC_ID}"><!-- IF tor.TOR_FROZEN -->{tor.TOPIC_TITLE}<!-- ELSE -->{tor.TOR_TYPE}<b>{tor.TOPIC_TITLE}</b><!-- ENDIF --></a>
+		<a class="{tor.DL_CLASS}<!-- IF AJAX_TOPICS --> folded2<!-- ENDIF --> tLink" <!-- IF AJAX_TOPICS -->onclick="ajax.view_post({tor.POST_ID}, this); return false;"<!-- ENDIF --> href="{TOPIC_URL}{tor.TOPIC_ID}"><!-- IF tor.TOR_FROZEN -->{tor.TOPIC_TITLE}<!-- ELSE -->{tor.TOR_TYPE}<b>{tor.TOPIC_TITLE}</b><!-- ENDIF --></a>
 	    <!-- IF SHOW_TIME_TOPICS --><div class="tr_tm">{tor.TOPIC_TIME}</div><!-- ENDIF -->
 	</td>
 	<!-- IF SHOW_AUTHOR -->
@@ -371,74 +468,62 @@ ajax.callback.view_post = function(data) {
 </div><!--/bottom_info-->
 
 <script type="text/javascript">
-//$.each( [7], function(i,n){ $('#fs-'+ n).attr('selected', 1) });
+// Скрыть содержимое {...}
+if (user.opt_js.h_tsp) {
+	$('a.tLink').each(function(){
+		$(this).html( $(this).html().replace(/\{.+?\}/g, '{...}') );
+	});
+}
+$.each( [{SELECTED_FORUMS}], function(i,n){ $('#fs-'+ n).attr('selected', 1) });
 $('#search_opt, #search-results').show();
+var fs_last_val = [];
+$(function(){
+	<!-- IF TITLE_MATCH_URL -->
+	$('a.f, a.pg').each(function(){ this.href += '&{TITLE_MATCH_URL}'; });
+	$('a.s-all').each(function(){ this.href += '?{TITLE_MATCH_URL}'; });
+	<!-- ENDIF -->
+	<!-- IF POSTER_MATCH_URL -->
+	$('a.f, a.pg').each(function(){ this.href += '&{POSTER_MATCH_URL}'; });
+	<!-- ENDIF -->
+	// лимит на количество выбранных разделов
+	fs_last_val = $('#fs-main').val();
 
-var fs_all = '';
-var fs_og = [];
-var fs_lb = [];
-var show_fs_nav = true;
-
-$(document).ready(function(){
-	$('#fs optgroup').each(function(i){
-		var $og = $(this);
-		$og.attr({ id: 'og-'+i });
-		fs_og[i] = $(this).html();
-		fs_lb[i] = $(this).attr('label');
-		$('#fs-sel-cat').append('<option class="cat-title" value="'+ i +'">&nbsp;&nbsp;&middot;&nbsp;'+ fs_lb[i] +'&nbsp;</option>');
-		if (show_fs_nav) {
-			$('#fs-nav').append('<li><span class="b" onclick="$(\'#fs\').scrollTo(\'#og-'+i+'\')">'+ fs_lb[i] +'</span><ul id="nav-c-'+ i +'"></ul></li>');
-			$('option', $og).each(function(){
-				var $op = $(this);
-				if ($op[0].className) {
-					$('<li><span class="f">'+ $op.html() +'</span></li>').appendTo('#nav-c-'+ i).click(function(){
-						$('#fs').scrollTo( '#'+$op.attr('id'), { axis:'y' } ).scrollTo( '-=5px' );
-						$('#fs option').attr({ selected: 0 });
-						$('#'+$op.attr('id')).attr({ selected: 1 });
-					});
-				}
-			});
+	$('#fs-main').bind('change', function(){
+		var fs_val = $('#fs-main').val();
+		if (fs_val != null) {
+			if (fs_val.length > {MAX_FS}) {
+				alert('{L_MAX_FS}');
+				$('#fs-main').val( fs_last_val );
+			}
+			else {
+				fs_last_val = fs_val;
+			}
 		}
 	});
+	if ($.browser.mozilla) {
+	$('#fs-qs-input').focus().quicksearch('#fs-main option', {
+		delay   : 300,
+		onAfter : function(){
+			$('#fs-main optgroup').show();
+			$('#fs-main option:hidden').parent('optgroup').not( $('#fs-main :visible').parent('optgroup') ).hide();
+		}
+	});
+	$('#fs-main').attr( 'size', $('#fs-main').attr('size')-1 );
+	$('#fs-qs-div').show();
+}
+});
+function get_fs_link ()
+{
+	var fs_url = '{TRACKER_URL}';
+	var fs_val = $('#fs-main').val();
 
-	if (show_fs_nav) {
-		$('#fs-nav-menu').show();
-		$('#fs-nav').treeview({ collapsed: true });
+	if (fs_val == null) {
+		alert('{L_NOT_SEL_CHAPTERS}');
 	}
 	else {
-		$('#fs-nav-menu').remove();
+		fs_url += 'f%5B%5D='+ fs_val.join('&f%5B%5D=');
+		window.prompt('{L_SEL_CHAPTERS}:', fs_url);
 	}
-
-	$('#fs-sel-cat').bind('change', function(){
-		var i = $(this).val();
-		// еб..я опера не понимает <optgroup> при популяции селекта [http://dev.jquery.com/ticket/3040]
-		if ($.browser.opera) {
-			if (i == 'all') {
-				$('#fs').empty().append('<option id="fs--1" value="-1">&nbsp;{L_ALL_AVAILABLE}</option>');
-				$.each(fs_og, function(i, v){
-				 $('#fs').append( $(document.createElement('optgroup')).attr('label', fs_lb[i]).append(fs_og[i]) );
-				});
-				$('#fs-nav-menu').show();
-			}
-			else {
-				$('#fs').empty().append( $(document.createElement('optgroup')).attr('label', fs_lb[i]).append(fs_og[i]) );
-				$('#fs-nav-menu').hide();
-			}
-		}
-		else {
-			if (i == 'all') {
-				var fs_html = fs_all;
-				$('#fs-nav-menu').show();
-			}
-			else {
-				var fs_html = '<optgroup label="'+ fs_lb[i] +'">'+ fs_og[i] +'</optgroup>';
-				$('#fs-nav-menu').hide();
-			}
-			$('#fs').html(fs_html).focus();
-		}
-	});
-
-	fs_all = $('#fs').html();
-	$('#fs').css({width: $('#fs').width() +'px'});
-});
+	return false;
+}
 </script>

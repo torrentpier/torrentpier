@@ -1285,6 +1285,11 @@ $lang['GO_TO_SECTION'] = 'перейти к разделу';
 $lang['TORRENTS_FROM'] = 'Торренты за';
 $lang['SHOW_ONLY'] = 'Показывать только';
 $lang['SHOW_COLUMN'] = 'Показывать колонку';
+$lang['SEL_CHAPTERS'] = 'Ссылка на выбранные разделы';
+$lang['NOT_SEL_CHAPTERS'] = 'Вы не выбрали разделы';
+$lang['SEL_CHAPTERS_HELP'] = 'Вы можете выбрать максимум %s разделов';
+$lang['HIDE_CONTENTS'] = 'Скрыть содержимое {...}';
+$lang['FILTER_BY_NAME'] = '<i>фильтр по названию</i>';
 
 $lang['BT_ONLY_ACTIVE'] = 'Активные (есть сидер или личер)';
 $lang['BT_ONLY_MY'] = 'Мои раздачи';

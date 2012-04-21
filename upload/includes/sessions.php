@@ -30,6 +30,7 @@ class user_common
 		'tr_t_t'   => 0,     // show time of the creation topics
 		'hl_tr'    => 1,     // show cursor in tracker.php
 		'i_aft_l'  => 0,     // show images only after full loading
+		'h_tsp'    => 0,     // show released title {...}
 	);
 
 	/**
