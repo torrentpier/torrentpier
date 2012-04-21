@@ -52,7 +52,7 @@ $bb_cfg = $tr_cfg = $page_cfg = array();
 
 // Increase number of revision after update
 $bb_cfg['tp_version'] = '2.5 Beta';
-$bb_cfg['tp_release_state'] = 'R405';
+$bb_cfg['tp_release_state'] = 'R406';
 $bb_cfg['tp_release_date'] = '21-04-2012';
 
 // Database

@@ -858,17 +858,12 @@ a.tr-dl:visited { color: #5493B4; font-weight: normal; }
 .ch { font-style: italic; color: #0080FF; }
 #fs-sel-cat option.cat-title { font-weight: bold; color: #005A88; background: #F5F5F5; }
 tr.hl-tr:hover td { background-color: #F8F8F8 !important; }
-
 #fs-nav-ul .b { font-weight: bold; }
 #fs-nav-ul li, #fs-nav-close { cursor: pointer; }
 #fs-nav-ul span.f:hover, #fs-nav-close:hover { color: blue; background: #DEE2E4; }
 #fs-nav-list { border: 3px double #9AA7AD; background: #EFEFEF; padding: 8px; max-height: 500px; overflow: auto; }
 #fs-sel-cat { width: 260px; }
 #fs-sel-cat option.cat-title { font-weight: bold; color: #005A88; background: #F5F5F5; }
-
-.post_wrap { border: 1px #A5AFB4 solid; margin: 8px 8px 6px; overflow: auto; }
-.post_links { margin: 6px; }
-.unfolded2, .folded2 { display: inline !important; }
 /* ================================================================ *
      Images
  * ================================================================ */

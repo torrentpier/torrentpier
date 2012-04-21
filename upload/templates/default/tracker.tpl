@@ -47,6 +47,11 @@ ajax.callback.view_post = function(data) {
 };
 </script>
 
+<style type="text/css">
+.post_wrap { border: 1px #A5AFB4 solid; margin: 8px 8px 6px; overflow: auto; }
+.post_links { margin: 6px; }
+</style>
+
 <table id="post-row" style="display: none;">
 <tr>
 	<td class="row2" colspan="{TOR_COLSPAN}">
