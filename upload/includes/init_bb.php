@@ -334,6 +334,9 @@ $bb_cfg['tor_cannot_edit'] = array(
 // Запрет на создание новых раздач если стоит статус недооформлено/неоформлено/сомнительно
 $bb_cfg['tor_cannot_new'] = array(TOR_NEED_EDIT, TOR_NO_DESC, TOR_DOUBTFUL);
 
+// Разрешение на ответ релизера, если раздача исправлена.
+$bb_cfg['tor_reply'] = array(TOR_NEED_EDIT, TOR_NO_DESC, TOR_DOUBTFUL);
+
 // Table names
 define('BUF_TOPIC_VIEW',          'buf_topic_view');
 define('BUF_LAST_SEEDER',         'buf_last_seeder');

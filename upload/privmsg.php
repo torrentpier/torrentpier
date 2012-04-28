@@ -54,7 +54,7 @@ else
 // Start session management
 $user->session_start(array('req_login' => true));
 
-if (IS_ADMIN || IS_MOD)
+if (IS_AM)
 {
 	$bb_cfg['max_inbox_privmsgs']   += 1000;
 	$bb_cfg['max_sentbox_privmsgs'] += 1000;

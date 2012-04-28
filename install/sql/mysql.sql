@@ -689,6 +689,7 @@ INSERT INTO `bb_config` VALUES ('whois_info', 'http://ip-whois.net/ip_geo.php?ip
 INSERT INTO `bb_config` VALUES ('show_mod_index', '1');
 INSERT INTO `bb_config` VALUES ('premod', '0');
 INSERT INTO `bb_config` VALUES ('new_tpls', '1');
+INSERT INTO `bb_config` VALUES ('tor_comment', '1');
 
 -- --------------------------------------------------------
 

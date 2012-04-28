@@ -330,6 +330,13 @@
 	</td>
 </tr>
 <tr>
+	<td>{L_TOR_COMMENT}</td>
+	<td>
+	    <label><input type="radio" name="tor_comment" value="1" <!-- IF TOR_COMMENT -->checked="checked"<!-- ENDIF --> />{L_ENABLED}</label>&nbsp;&nbsp;
+		<label><input type="radio" name="tor_comment" value="0" <!-- IF not TOR_COMMENT -->checked="checked"<!-- ENDIF --> />{L_DISABLED}</label>
+	</td>
+</tr>
+<tr>
 	<td><h4>{L_DESIGNER}</h4></td>
 	<td>
 	    <label><input type="radio" name="new_tpls" value="1" <!-- IF NEW_TPLS -->checked="checked"<!-- ENDIF --> />{L_ENABLED}</label>&nbsp;&nbsp;

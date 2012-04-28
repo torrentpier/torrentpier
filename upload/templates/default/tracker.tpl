@@ -526,7 +526,7 @@ function get_fs_link ()
 		alert('{L_NOT_SEL_CHAPTERS}');
 	}
 	else {
-		fs_url += 'f%5B%5D='+ fs_val.join('&f%5B%5D=');
+		fs_url += 'f[]='+ fs_val.join('&f[]=');
 		window.prompt('{L_SEL_CHAPTERS}:', fs_url);
 	}
 	return false;

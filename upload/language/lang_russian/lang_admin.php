@@ -667,8 +667,8 @@ $lang['PIC_GALLERY'] = 'Директория для изображений';
 $lang['PIC_SIZE'] = 'Максимальный размер изображений';
 $lang['AUTO_DELETE_POSTED_PICS'] = 'Удалять изображения размещенные в удаленных постах';
 $lang['SHOW_MOD_HOME_PAGE'] = 'Показывать модераторов на главной';
-$lang['PREMOD_HELP'] = '<h4><span class="tor-icon tor-dup">&#8719;</span> Премодерация</h4> <h6>Если у пользователя нет раздач со статусом <span class="tor-icon tor-approved">&radic;</span>, <span class="tor-icon tor-approved">#</span> или <span class="tor-icon tor-dup">T</span> в текущем разделе, включая подразделы, то раздача автоматически получает данный статус</h6>';
-
+$lang['PREMOD_HELP'] = '<h4><span class="tor-icon tor-dup">&#8719;</span> Премодерация</h4> <h6>Если у релизера нет раздач со статусом <span class="tor-icon tor-approved">&radic;</span>, <span class="tor-icon tor-approved">#</span> или <span class="tor-icon tor-dup">T</span> в текущем разделе, включая подразделы, то раздача автоматически получает данный статус</h6>';
+$lang['TOR_COMMENT'] = '<h4>Комментарий к статусу раздачи</h4> <h6>Комметарий позволяет указать релизеру допущенные ошибки. При недооформленных статусах релизеру доступна форма ответа о исправлении релиза</h6>';
 $lang['SEED_BONUS_ADD'] = '<h4>Добавление сид бонуса</h4><h6>Кол-во раздаваемых раздач пользователем и размер начисления бонусов за них (начисления раз в час)</h6>';
 $lang['SEED_BONUS_RELEASE'] = 'до N-числа релизов';
 $lang['SEED_BONUS_POINTS'] = 'бонусов в час';

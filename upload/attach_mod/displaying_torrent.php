@@ -108,10 +108,10 @@ if (!$tor_reged)
 }
 else
 {
-	$sql = "SELECT *
-		FROM ". BB_BT_TORRENTS ."
-		WHERE attach_id = $attach_id
-		LIMIT 1";
+	$sql = "SELECT bt.*, u.user_id, u.username, u.user_rank 
+		FROM ". BB_BT_TORRENTS ." bt
+		LEFT JOIN ". BB_USERS  ." u ON(bt.checked_user_id = u.user_id)
+		WHERE bt.attach_id = $attach_id";
 
 	if (!$result = DB()->sql_query($sql))
 	{
@@ -211,14 +211,15 @@ if ($tor_reged && $tor_info)
 			'DOWNLOAD_NAME'   => $display_name,
 			'TRACKER_LINK'    => $tracker_link,
 			'ATTACH_ID'       => $attach_id,
-			'TOR_FROZEN'      => (!IS_AM) ? (isset($bb_cfg['tor_frozen'][$tor_info['tor_status']]) && !(isset($bb_cfg['tor_frozen_author_download'][$tor_info['tor_status']]) && $userdata['user_id'] == $tor_info['poster_id'])) ? true : '' : '',
 			'TOR_SILVER_GOLD' => $tor_type,
 
 			// torrent status mod
+			'TOR_FROZEN'      => (!IS_AM) ? (isset($bb_cfg['tor_frozen'][$tor_info['tor_status']]) && !(isset($bb_cfg['tor_frozen_author_download'][$tor_info['tor_status']]) && $poster_id)) ? true : '' : '',
 			'TOR_STATUS_TEXT' => $lang['TOR_STATUS_NAME'][$tor_info['tor_status']],
 			'TOR_STATUS_ICON' => $bb_cfg['tor_icons'][$tor_info['tor_status']],
-			'TOR_STATUS_BY'   => ($cuid && $is_auth['auth_mod']) ? ('<span title="'.bb_date($tor_info['checked_time'], 'd-M-Y H:i').'"> &middot; <a class="med" href='. PROFILE_URL . $cuid . '>' . get_username($cuid) . '</a> &middot; <i>'. delta_time($tor_info['checked_time']) . $lang['BACK'] . '</i></span>') : '',
+			'TOR_STATUS_BY'   => ($cuid && $is_auth['auth_mod']) ? ('<span title="'. bb_date($tor_info['checked_time'], 'd-M-Y H:i') .'"> &middot; '. profile_url($tor_info) .' &middot; <i>'. delta_time($tor_info['checked_time']) . $lang['BACK'] .'</i></span>') : '',
 			'TOR_STATUS_SELECT' => build_select('', array_flip($lang['TOR_STATUS_NAME']), TOR_APPROVED),
+			'TOR_STATUS_REPLY' => $bb_cfg['tor_comment'] && in_array($tor_info['tor_status'], $bb_cfg['tor_reply']) && $poster_id,
 			//end torrent status mod
 
 			'S_UPLOAD_IMAGE'  => $upload_image,

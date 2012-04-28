@@ -1244,6 +1244,8 @@ $lang['DEL_TORRENT'] = 'Are you sure you want to delete the torrent?';
 $lang['DEL_MOVE_TORRENT'] = 'Are you sure you want to delete and move the topic?';
 $lang['UNEXECUTED_RELEASE'] = 'Do you have a shapeless release before creating a new fix his unformed!';
 $lang['STATUS_DOES_EXIST'] = 'Such status does not exist: ';
+$lang['TOR_FIXED'] = 'Fixed';
+$lang['TOR_SENT_COMMENT'] = 'The information sent to the moderator. Expect.';
 //end torrent status mod
 
 $lang['BT_TOPIC_TITLE'] = 'Topic title';

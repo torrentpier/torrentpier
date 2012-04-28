@@ -670,6 +670,7 @@ $lang['PIC_SIZE'] = 'The maximum size of images';
 $lang['AUTO_DELETE_POSTED_PICS'] = 'Delete Images hosted in remote positions';
 $lang['SHOW_MOD_HOME_PAGE'] = 'Show on moderators the index.php';
 $lang['PREMOD_HELP'] = '<h4><span class="tor-icon tor-dup">&#8719;</span> Pre-moderation</h4> <h6>If you do not have hands to the status of v, #, or T in this section, including subsections, the distribution will automatically receive this status</h6>';
+$lang['TOR_COMMENT'] = '<h4>Commentary on the status of distribution</h4> <h6>Comment successfully allows you to specify releasers mistakes. When nedooformlennyh statuses releasers available form of the response of the correction release</h6>';
 $lang['SEED_BONUS'] = 'Seed Bonus';
 $lang['SEED_BONUS_ADD'] = '<h4>Adding seed bonus </h4> <h6> Number of hands handed out by the user and the size of bonuses for them (charging times an hour) </h6>';
 $lang['SEED_BONUS_RELEASE'] = 'to N-number of releases';
