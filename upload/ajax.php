@@ -73,13 +73,13 @@ class ajax_common
 		'change_user_opt'   => array('admin'),
 		'manage_user'       => array('admin'),
 
-		'change_tor_status' => array('mod'),
 		'mod_action'        => array('mod'),
         'topic_tpl'         => array('mod'),
         'group_membership'  => array('mod'),
 
 		'gen_passkey'       => array('user'),
 		'change_torrent'    => array('user'),
+		'change_tor_status' => array('user'),
 
 		'view_post'         => array('guest'),
 		'view_torrent'      => array('guest'),

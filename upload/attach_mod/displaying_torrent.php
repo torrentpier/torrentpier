@@ -204,9 +204,6 @@ if ($tor_reged && $tor_info)
 	}
 	else
 	{
-		//torrent status mod
-		$cuid = $tor_info['checked_user_id'];
-		//end torrent status mod
 		$template->assign_block_vars('postrow.attach.tor_reged', array(
 			'DOWNLOAD_NAME'   => $display_name,
 			'TRACKER_LINK'    => $tracker_link,
@@ -214,12 +211,12 @@ if ($tor_reged && $tor_info)
 			'TOR_SILVER_GOLD' => $tor_type,
 
 			// torrent status mod
-			'TOR_FROZEN'      => (!IS_AM) ? (isset($bb_cfg['tor_frozen'][$tor_info['tor_status']]) && !(isset($bb_cfg['tor_frozen_author_download'][$tor_info['tor_status']]) && $poster_id)) ? true : '' : '',
+			'TOR_FROZEN'      => (!IS_AM) ? (isset($bb_cfg['tor_frozen'][$tor_info['tor_status']]) && !(isset($bb_cfg['tor_frozen_author_download'][$tor_info['tor_status']]) && $userdata['user_id'] == $tor_info['poster_id'])) ? true : '' : '',
 			'TOR_STATUS_TEXT' => $lang['TOR_STATUS_NAME'][$tor_info['tor_status']],
 			'TOR_STATUS_ICON' => $bb_cfg['tor_icons'][$tor_info['tor_status']],
-			'TOR_STATUS_BY'   => ($cuid && $is_auth['auth_mod']) ? ('<span title="'. bb_date($tor_info['checked_time'], 'd-M-Y H:i') .'"> &middot; '. profile_url($tor_info) .' &middot; <i>'. delta_time($tor_info['checked_time']) . $lang['BACK'] .'</i></span>') : '',
-			'TOR_STATUS_SELECT' => build_select('', array_flip($lang['TOR_STATUS_NAME']), TOR_APPROVED),
-			'TOR_STATUS_REPLY' => $bb_cfg['tor_comment'] && in_array($tor_info['tor_status'], $bb_cfg['tor_reply']) && $poster_id,
+			'TOR_STATUS_BY'   => ($tor_info['checked_user_id'] && $is_auth['auth_mod']) ? ('<span title="'. bb_date($tor_info['checked_time'], 'd-M-Y H:i') .'"> &middot; '. profile_url($tor_info) .' &middot; <i>'. delta_time($tor_info['checked_time']) . $lang['BACK'] .'</i></span>') : '',
+			'TOR_STATUS_SELECT' => build_select('sel_status', array_flip($lang['TOR_STATUS_NAME']), TOR_APPROVED),
+			'TOR_STATUS_REPLY' => $bb_cfg['tor_comment'] && !IS_GUEST && in_array($tor_info['tor_status'], $bb_cfg['tor_reply']) && $userdata['user_id'] == $tor_info['poster_id'] && $t_data['topic_status'] != TOPIC_LOCKED,
 			//end torrent status mod
 
 			'S_UPLOAD_IMAGE'  => $upload_image,

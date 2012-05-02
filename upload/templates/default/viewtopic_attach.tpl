@@ -264,24 +264,40 @@
 			<span id="tor-{postrow.attach.tor_reged.ATTACH_ID}-status">{postrow.attach.tor_reged.TOR_STATUS_ICON} <b>{postrow.attach.tor_reged.TOR_STATUS_TEXT}</b>
 			<!-- IF postrow.attach.tor_reged.TOR_STATUS_BY -->{postrow.attach.tor_reged.TOR_STATUS_BY}<!-- ENDIF -->
 			</span>
-			<!-- IF AUTH_MOD -->
+			<!-- IF postrow.attach.tor_reged.TOR_STATUS_REPLY || AUTH_MOD -->
 			<script type="text/javascript">
-				ajax.change_tor_status = function(status) {
+				ajax.change_tor_status = function(mode) {
 					ajax.exec({
 						action    : 'change_tor_status',
 						attach_id : {postrow.attach.tor_reged.ATTACH_ID},
-						status    : status
+						mode      : mode,
+						title     : '{TOPIC_TITLE}',
+						status    : $('#sel_status').val(),
+						comment   : $('#comment').val(),
 					});
 				};
 				ajax.callback.change_tor_status = function(data) {
-					$('#tor-'+ data.attach_id +'-status').html(data.status);
+					<!-- IF AUTH_MOD -->
+					    $('#tor-'+ data.attach_id +'-status').html(data.status);
+					<!-- ELSEIF postrow.attach.tor_reged.TOR_STATUS_REPLY -->
+					    $('#tor_comment').html('{L_TOR_AUTH_SENT_COMMENT}');
+					<!-- ENDIF -->
 				};
 			</script>
 
-			<span id="tor-{postrow.attach.tor_reged.ATTACH_ID}">{postrow.attach.tor_reged.TOR_STATUS_SELECT}</span>
-			<a href="#" onclick="ajax.change_tor_status($('#tor-{postrow.attach.tor_reged.ATTACH_ID} select').val()); return false;"><input type="submit" value="{L_EDIT}" class="liteoption" /></a>
-
+			<span id="tor_comment">
+			<!-- IF $bb_cfg['tor_comment'] -->
+			<input type="text" id="comment" onfocus="if(this.value=='{L_COMMENT}') this.value='';" onblur="if(this.value=='') this.value='';" value="{L_COMMENT}" class="hint" />
 			<!-- ENDIF -->
+			
+			<!-- IF AUTH_MOD -->
+			<span id="tor-{postrow.attach.tor_reged.ATTACH_ID}">{postrow.attach.tor_reged.TOR_STATUS_SELECT}</span>
+			<a href="#" onclick="ajax.change_tor_status('status'); return false;"><input type="submit" value="{L_EDIT}" class="liteoption" /></a>
+			<!-- ELSEIF postrow.attach.tor_reged.TOR_STATUS_REPLY -->
+			<a href="#" onclick="ajax.change_tor_status('status_reply'); return false;"><input type="submit" value="{L_TOR_AUTH_FIXED}" class="liteoption" /></a>
+			<!-- ENDIF -->
+			</span>
+			<!-- ENDIF / AUTH_MOD -->
 		</td>
 	</tr>
 	<tr class="row1">

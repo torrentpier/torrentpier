@@ -1244,8 +1244,15 @@ $lang['DEL_TORRENT'] = 'Are you sure you want to delete the torrent?';
 $lang['DEL_MOVE_TORRENT'] = 'Are you sure you want to delete and move the topic?';
 $lang['UNEXECUTED_RELEASE'] = 'Do you have a shapeless release before creating a new fix his unformed!';
 $lang['STATUS_DOES_EXIST'] = 'Such status does not exist: ';
-$lang['TOR_FIXED'] = 'Fixed';
-$lang['TOR_SENT_COMMENT'] = 'The information sent to the moderator. Expect.';
+
+// tor_comment
+$lang['TOR_MOD_TITLE'] = 'Changing the status of distribution - %s';
+$lang['TOR_MOD_MSG'] = "Hello, %s.\n\n Status [url=%s]your[/url] distribution is changed to [b]%s[/b]";
+
+$lang['TOR_AUTH_TITLE'] = 'Changes in the design - %s';
+$lang['TOR_AUTH_MSG'] = "Hello, %s.\n\n Making my hand changed - [url=%s]%s[/url]\n\n Please re-check it.";
+$lang['TOR_AUTH_FIXED'] = 'Fixed';
+$lang['TOR_AUTH_SENT_COMMENT'] = ' &middot; <span class="seed bold">The information sent to the moderator. Expect.</span>';
 //end torrent status mod
 
 $lang['BT_TOPIC_TITLE'] = 'Topic title';

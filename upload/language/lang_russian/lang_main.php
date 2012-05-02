@@ -1251,8 +1251,15 @@ $lang['DEL_TORRENT'] = 'Вы уверены, что хотите удалить 
 $lang['DEL_MOVE_TORRENT'] = 'Вы уверены, что хотите удалить и перенести топик?';
 $lang['UNEXECUTED_RELEASE'] = 'У вас есть неоформленный релиз, прежде чем создавать новый - исправьте свой неоформленный!';
 $lang['STATUS_DOES_EXIST'] = 'Такого статуса не существует: ';
-$lang['TOR_FIXED'] = 'Исправил';
-$lang['TOR_SENT_COMMENT'] = 'Информация отправлена модератору. Ожидайте.';
+
+// tor_comment
+$lang['TOR_MOD_TITLE'] = 'Изменение статуса раздачи - %s';
+$lang['TOR_MOD_MSG'] = "Здравствуйте, %s.\n\n Статус [url=%s]Вашей[/url] раздачи изменен на [b]%s[/b]";
+
+$lang['TOR_AUTH_TITLE'] = 'Изменение в оформлении - %s';
+$lang['TOR_AUTH_MSG'] = "Здравствуйте, %s.\n\n Оформление моей раздачи изменено - [url=%s]%s[/url]\n\n Просьба повторно её проверить.";
+$lang['TOR_AUTH_FIXED'] = 'Исправил';
+$lang['TOR_AUTH_SENT_COMMENT'] = ' &middot; <span class="seed bold">Информация отправлена модератору. Ожидайте.</span>';
 //end torrent status mod
 
 $lang['BT_TOPIC_TITLE'] = 'Название темы';
