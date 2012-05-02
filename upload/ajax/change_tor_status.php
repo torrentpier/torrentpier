@@ -80,7 +80,7 @@ switch($mode)
 			{    
 				$subject = sprintf($lang['TOR_MOD_TITLE'], $topic_title);
 			    $message = sprintf($lang['TOR_MOD_MSG'], get_username($tor['poster_id']), make_url(TOPIC_URL . $tor['topic_id']), $bb_cfg['tor_icons'][$new_status] .' '.$lang['TOR_STATUS_NAME'][$new_status]);
-		        if($comment != $lang['COMMENT']) $message .= "\n\n[b]". $lang['COMMENT'] .'[/b]: '. $comment;
+		        if($comment && $comment != $lang['COMMENT']) $message .= "\n\n[b]". $lang['COMMENT'] .'[/b]: '. $comment;
 
 	            send_pm($tor['poster_id'], $subject, $message, $userdata['user_id']);
 			
