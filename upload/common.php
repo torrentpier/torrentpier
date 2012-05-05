@@ -249,22 +249,22 @@ class cache_common
 	/**
 	* Returns value of variable
 	*/
-	function get ($key, $get_miss_key_callback = '', $prefix = '', $ttl = 604800)
+	function get ($name, $get_miss_key_callback = '', $prefix = '', $ttl = 604800)
 	{
-		if ($get_miss_key_callback) return $get_miss_key_callback($key);
-		return is_array($key) ? array() : false;
+		if ($get_miss_key_callback) return $get_miss_key_callback($name);
+		return is_array($name) ? array() : false;
 	}
 	/**
 	* Store value of variable
 	*/
-	function set ($key, $value, $ttl = 604800, $prefix = '')
+	function set ($name, $value, $ttl = 604800, $prefix = '')
 	{
 		return false;
 	}
 	/**
 	* Remove variable
 	*/
-	function rm ($key, $prefix = '')
+	function rm ($name, $prefix = '')
 	{
 		return false;
 	}
@@ -436,26 +436,26 @@ class cache_sqlite extends cache_common
 		$this->db = new sqlite_common($this->cfg);
 	}
 
-	function get ($key, $get_miss_key_callback = '', $prefix = '', $ttl = 604800)
+	function get ($name, $get_miss_key_callback = '', $prefix = '', $ttl = 604800)
 	{
-		if (empty($key))
+		if (empty($name))
 		{
-			return is_array($key) ? array() : false;
+			return is_array($name) ? array() : false;
 		}
-		$this->db->shard($prefix.$key);
+		$this->db->shard($prefix.$name);
 		$cached_items = array();
 		$prefix_len   = strlen($prefix);
 		$prefix_sql   = sqlite_escape_string($prefix);
 
-		$key_ary = $key_sql = (array) $key;
-		array_deep($key_sql, 'sqlite_escape_string');
+		$name_ary = $name_sql = (array) $name;
+		array_deep($name_sql, 'sqlite_escape_string');
 
 		// get available items
 		$rowset = $this->db->fetch_rowset("
 			SELECT cache_name, cache_value
 			FROM ". $this->cfg['table_name'] ."
-			WHERE cache_name IN('$prefix_sql". join("','$prefix_sql", $key_sql) ."') AND cache_expire_time > ". TIMENOW ."
-			LIMIT ". count($key) ."
+			WHERE cache_name IN('$prefix_sql". join("','$prefix_sql", $name_sql) ."') AND cache_expire_time > ". TIMENOW ."
+			LIMIT ". count($name) ."
 		");
 
 		$this->db->debug('start', 'unserialize()');
@@ -466,7 +466,7 @@ class cache_sqlite extends cache_common
 		$this->db->debug('stop');
 
 		// get miss items
-		if ($get_miss_key_callback AND $miss_key = array_diff($key_ary, array_keys($cached_items)))
+		if ($get_miss_key_callback AND $miss_key = array_diff($name_ary, array_keys($cached_items)))
 		{
 			foreach ($get_miss_key_callback($miss_key) as $k => $v)
 			{
@@ -475,31 +475,38 @@ class cache_sqlite extends cache_common
 			}
 		}
 		// return
-		if (is_array($key))
+		if (is_array($name))
 		{
 			return $cached_items;
 		}
 		else
 		{
-			return isset($cached_items[$key]) ? $cached_items[$key] : false;
+			return isset($cached_items[$name]) ? $cached_items[$name] : false;
 		}
 	}
 
-	function set ($key, $value, $ttl = 604800, $prefix = '')
+	function set ($name, $value, $ttl = 604800, $prefix = '')
 	{
-		$this->db->shard($prefix.$key);
-		$key_sql   = sqlite_escape_string($prefix.$key);
+		$this->db->shard($prefix.$name);
+		$name_sql   = sqlite_escape_string($prefix.$name);
 		$expire    = TIMENOW + $ttl;
 		$value_sql = sqlite_escape_string(serialize($value));
 
-		$result = $this->db->query("REPLACE INTO ". $this->cfg['table_name'] ." (cache_name, cache_expire_time, cache_value) VALUES ('$key_sql', $expire, '$value_sql')");
+		$result = $this->db->query("REPLACE INTO ". $this->cfg['table_name'] ." (cache_name, cache_expire_time, cache_value) VALUES ('$name_sql', $expire, '$value_sql')");
 		return (bool) $result;
 	}
 
-	function rm ($key, $prefix = '')
+	function rm ($name, $prefix = '')
 	{
-		$this->db->shard($prefix.$key);
-		$result = $this->db->query("DELETE FROM ". $this->cfg['table_name'] ." WHERE cache_name = '". sqlite_escape_string($prefix.$key) ."'");
+		if($name)
+		{
+			$this->db->shard($prefix.$name);
+			$result = $this->db->query("DELETE FROM ". $this->cfg['table_name'] ." WHERE cache_name = '". sqlite_escape_string($prefix.$name) ."'");
+		}
+		else
+		{
+			$result = $this->db->query("DELETE FROM ". $this->cfg['table_name']);
+		}
 		return (bool) $result;
 	}
 
@@ -567,28 +574,28 @@ class sqlite_common extends cache_common
 		return sqlite_query($this->dbh, $this->cfg['table_schema']);
 	}
 
-	function shard ($key)
+	function shard ($name)
 	{
 		$type = $this->cfg['shard_type'];
 
 		if ($type == 'none') return;
-		if (is_array($key))  trigger_error('cannot shard: $key is array', E_USER_ERROR);
+		if (is_array($name))  trigger_error('cannot shard: $name is array', E_USER_ERROR);
 
 		// define shard_val
 		if ($type == 'string')
 		{
-			$shard_val = substr($key, 0, $this->cfg['shard_val']);
+			$shard_val = substr($name, 0, $this->cfg['shard_val']);
 		}
 		else
 		{
-			$shard_val = $key % $this->cfg['shard_val'];
+			$shard_val = $name % $this->cfg['shard_val'];
 		}
 		// все запросы должны быть к одному и тому же шарду
 		if ($this->shard_val !== false)
 		{
 			if ($shard_val != $this->shard_val)
 			{
-				trigger_error("shard cannot be reassigned. [{$this->shard_val}, $shard_val, $key]", E_USER_ERROR);
+				trigger_error("shard cannot be reassigned. [{$this->shard_val}, $shard_val, $name]", E_USER_ERROR);
 			}
 			else
 			{
@@ -654,6 +661,26 @@ class sqlite_common extends cache_common
 	function get_error_msg ()
 	{
 		return 'SQLite error #'. ($err_code = sqlite_last_error($this->dbh)) .': '. sqlite_error_string($err_code);
+	}
+
+    function rm ($name, $prefix = '')
+	{
+		if($name)
+		{
+			$this->db->shard($prefix.$name);
+			$result = $this->db->query("DELETE FROM ". $this->cfg['table_name'] ." WHERE cache_name = '". sqlite_escape_string($prefix.$name) ."'");
+		}
+		else
+		{
+			$result = $this->db->query("DELETE FROM ". $this->cfg['table_name']);
+		}
+		return (bool) $result;
+	}
+
+    function gc ($expire_time = TIMENOW)
+	{
+		$result = $this->db->query("DELETE FROM ". $this->cfg['table_name'] ." WHERE cache_expire_time < $expire_time");
+		return ($result) ? sqlite_changes($this->db->dbh) : 0;
 	}
 
 	function trigger_error ($msg = 'DB Error')
@@ -979,47 +1006,36 @@ class cache_file extends cache_common
 
 	function rm ($name, $prefix = '')
 	{
-		$filename   = $this->dir . clean_filename($name) . '.php';
-		if (file_exists($filename))
+		$clear = false;
+		if($name)
 		{
-			$this->cur_query = "cache->rm('$name')";
-			$this->debug('start');
-			$this->debug('stop');
-			$this->cur_query = null;
-			$this->num_queries++;
-
-			return (bool) unlink($filename);
-		}
-		return false;
-	}
-
-	function gc ($expire_time = TIMENOW)
-	{
-		$dir = $this->dir;
-
-		if (is_dir($dir))
-		{
-			if ($dh = opendir($dir))
+		    $filename = $this->dir . clean_filename($name) . '.php';
+			if (file_exists($filename))
 			{
-				while (($file = readdir($dh)) !== false)
-				{
-					if ($file != "." && $file != "..")
-					{
-						$filename = $dir . $file;
-
-						require($filename);
-
-						if(!empty($filecache['expire']) && ($filecache['expire'] < $expire_time))
-						{
-							unlink($filename);
-						}
-					}
-				}
-				closedir($dh);
+				$clear = (bool) unlink($filename);
 			}
 		}
+		else
+		{
+			if (is_dir($this->dir))
+			{
+				if ($dh = opendir($this->dir))
+				{
+					while (($file = readdir($dh)) !== false)
+					{
+						if ($file != "." && $file != "..")
+						{
+							$filename = $this->dir . $file;
 
-		return;
+							unlink($filename);
+							$clear = true;
+						}
+					}
+					closedir($dh);
+				}
+			}
+		}
+		return $clear;
 	}
 }
 
