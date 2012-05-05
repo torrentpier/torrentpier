@@ -61,7 +61,20 @@ table.forumline { margin: 0 auto; }
 
 <!-- IF TPL_ADMIN_MAIN -->
 <!--========================================================================-->
-
+<script type="text/javascript">
+ajax.manage_user = function(mode) {
+	$('#cache').html('<i class="loading-1">{L_LOADING}</i>');
+	ajax.exec({
+		action  : 'manage_user',
+		mode    : mode,
+		user_id : '',
+	});
+}
+ajax.callback.manage_user = function(data) {
+	$('#cache').toggle().html(data.cache_html);
+	$('#cache_clear').toggle().html(data.cache_html);
+}
+</script>
 <br />
 
 <table>
@@ -69,6 +82,7 @@ table.forumline { margin: 0 auto; }
 		<td><b>{L_CLEAR_CACHE}:</b></td>
 		<td>
 			<a href="{U_CLEAR_DATASTORE}">{L_DATASTORE}</a>,&nbsp;
+			<a href="#" id="cache" onclick="ajax.manage_user('clear_cache'); return false;">{L_ALL_CACHE}</a><span id="cache_clear" class="seed bold"></span>,&nbsp;
 			<a href="{U_CLEAR_TPL_CACHE}">{L_TEMPLATES}</a>&nbsp;
 		</td>
 	</tr>

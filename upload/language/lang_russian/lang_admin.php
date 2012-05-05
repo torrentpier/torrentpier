@@ -54,7 +54,7 @@ $lang['FORUM_STATS'] = 'Статистика Форумов';
 $lang['ADMIN_INDEX'] = 'Главная страница';
 $lang['CREATE_PROFILE'] = 'Создать аккаунт';
 
-$lang['TP_VERSION']      = 'Версия TorrenPier';
+$lang['TP_VERSION']      = 'Версия TorrenPier II';
 $lang['TP_RELEASE_DATE'] = 'Дата выпуска';
 
 $lang['CLICK_RETURN_ADMIN_INDEX'] = '%sВернуться на главную страницу администраторского раздела%s';
@@ -539,7 +539,7 @@ $lang['NOFTP_CONFIG'] = 'Попытка закачать файл настрое
 //
 // Version Check
 //
-$lang['VERSION_INFORMATION'] = 'Информация о версии TorrentPier';
+$lang['VERSION_INFORMATION'] = 'Информация о версии TorrentPier II';
 
 //
 // Login attempts configuration

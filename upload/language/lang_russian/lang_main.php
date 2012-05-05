@@ -99,7 +99,8 @@ $lang['CLICK_RETURN_MODCP'] = '%sВернуться к панели модера
 $lang['CLICK_RETURN_GROUP'] = '%sВернуться к информации о группах%s';
 
 $lang['ADMIN_PANEL'] = 'Администраторский раздел';
-
+$lang['ALL_CACHE'] = 'Весь кеш';
+$lang['ALL_CACHE_CLEARED'] = 'Кеш очищен';
 $lang['BOARD_DISABLE'] = 'Извините, эти форумы отключены. Попробуйте зайти попозже';
 
 $lang['LOADING'] = 'Загружается…';

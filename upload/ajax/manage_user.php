@@ -9,6 +9,23 @@ $user_id = $this->request['user_id'];
 
 switch($mode)
 {
+	case 'clear_cache':	
+		$gc_cache = array(
+	        'tr_cache',
+	        'bb_cache',
+	        'session_cache',
+	        'bb_login_err',
+	        'bb_cap_sid',
+        );
+
+	    foreach ($gc_cache as $cache_name)
+        {
+	        CACHE($cache_name)->rm();
+        }
+
+	    $this->response['cache_html'] = $lang['ALL_CACHE_CLEARED'];
+	break;
+	
 	case 'delete_profile':
 		if ($userdata['user_id'] == $user_id) $this->ajax_die($lang['USER_DELETE_ME']);
 	    if (empty($this->request['confirmed'])) $this->prompt_for_confirm($lang['USER_DELETE_CONFIRM']);
