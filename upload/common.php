@@ -264,7 +264,7 @@ class cache_common
 	/**
 	* Remove variable
 	*/
-	function rm ($name, $prefix = '')
+	function rm ($name = '', $prefix = '')
 	{
 		return false;
 	}
@@ -393,7 +393,7 @@ class cache_memcache extends cache_common
 		return ($this->connected) ? $this->memcache->set($name, $value, false, $ttl) : false;
 	}
 
-	function rm ($name, $prefix = '')
+	function rm ($name = '', $prefix = '')
 	{
 		if (!$this->connected) $this->connect();
 
@@ -496,7 +496,7 @@ class cache_sqlite extends cache_common
 		return (bool) $result;
 	}
 
-	function rm ($name, $prefix = '')
+	function rm ($name = '', $prefix = '')
 	{
 		if($name)
 		{
@@ -663,7 +663,7 @@ class sqlite_common extends cache_common
 		return 'SQLite error #'. ($err_code = sqlite_last_error($this->dbh)) .': '. sqlite_error_string($err_code);
 	}
 
-    function rm ($name, $prefix = '')
+    function rm ($name = '', $prefix = '')
 	{
 		if($name)
 		{
@@ -767,7 +767,7 @@ class cache_redis extends cache_common
 		}
 	}
 
-	function rm ($name, $prefix = '')
+	function rm ($name = '', $prefix = '')
 	{
 		if (!$this->connected) $this->connect();
 
@@ -822,7 +822,7 @@ class cache_eaccelerator extends cache_common
 		return eaccelerator_put($name, $value, $ttl);
 	}
 
-	function rm ($name, $prefix = '')
+	function rm ($name = '', $prefix = '')
 	{
 		$this->cur_query = "cache->rm('$name')";
 		$this->debug('start');
@@ -875,7 +875,7 @@ class cache_apc extends cache_common
 		return apc_store($name, $value, $ttl);
 	}
 
-	function rm ($name, $prefix = '')
+	function rm ($name = '', $prefix = '')
 	{
 		$this->cur_query = "cache->rm('$name')";
 		$this->debug('start');
@@ -928,7 +928,7 @@ class cache_xcache extends cache_common
 		return xcache_set($name, $value, $ttl);
 	}
 
-	function rm ($name, $prefix = '')
+	function rm ($name = '', $prefix = '')
 	{
 		$this->cur_query = "cache->rm('$name')";
 		$this->debug('start');
@@ -1004,7 +1004,7 @@ class cache_file extends cache_common
 		return (bool) file_write($filecache, $filename, false, true, true);
 	}
 
-	function rm ($name, $prefix = '')
+	function rm ($name = '', $prefix = '')
 	{
 		$clear = false;
 		if($name)

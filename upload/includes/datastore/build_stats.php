@@ -11,7 +11,7 @@ $row = DB()->fetch_row("SELECT COUNT(*) AS usercount FROM ". BB_USERS ." WHERE u
 $data['usercount'] = number_format($row['usercount']);
 
 // newestuser
-$row = DB()->fetch_row("SELECT user_id, username, user_rank FROM ". BB_USERS ." ORDER BY user_id DESC LIMIT 1");
+$row = DB()->fetch_row("SELECT user_id, username, user_rank FROM ". BB_USERS ." WHERE user_active = 1 ORDER BY user_id DESC LIMIT 1");
 $data['newestuser'] = $row;
 
 // post/topic count
