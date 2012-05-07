@@ -9,7 +9,7 @@ $user_id = $this->request['user_id'];
 
 switch($mode)
 {
-	case 'clear_cache':	
+	case 'clear_cache':
 		$gc_cache = array(
 	        'tr_cache',
 	        'bb_cache',
@@ -25,7 +25,15 @@ switch($mode)
 
 	    $this->response['cache_html'] = $lang['ALL_CACHE_CLEARED'];
 	break;
-	
+
+	case 'clear_datastore':
+		global $datastore;
+
+		$datastore->clean();
+
+		$this->response['datastore_html'] = 'datastore очищен';
+	break;
+
 	case 'delete_profile':
 		if ($userdata['user_id'] == $user_id) $this->ajax_die($lang['USER_DELETE_ME']);
 	    if (empty($this->request['confirmed'])) $this->prompt_for_confirm($lang['USER_DELETE_CONFIRM']);

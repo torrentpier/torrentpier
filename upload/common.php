@@ -151,7 +151,7 @@ class CACHES
 						if (!isset($this->obj[$cache_name]))
 						{
 							$cache_cfg['pconnect']     = $this->cfg['pconnect'];
-							$cache_cfg['db_file_path'] = $this->get_db_path($cache_name, $cache_cfg, '_cache.sqlite.db');
+							$cache_cfg['db_file_path'] = $this->get_db_path($cache_name, $cache_cfg, '.sqlite.db');
 
 							$this->obj[$cache_name] = new cache_sqlite($cache_cfg);
 						}
@@ -245,26 +245,28 @@ function CACHE ($cache_name)
 
 class cache_common
 {
+    var $prefix = 'tp2_';    // Для использования нескольких проектов на одном сервере
+
 	var $used = false;
 	/**
 	* Returns value of variable
 	*/
-	function get ($name, $get_miss_key_callback = '', $prefix = '', $ttl = 604800)
+	function get ($name, $get_miss_key_callback = '', $ttl = 604800)
 	{
-		if ($get_miss_key_callback) return $get_miss_key_callback($prefix . $name);
-		return is_array($prefix . $name) ? array() : false;
+		if ($get_miss_key_callback) return $get_miss_key_callback($this->prefix . $name);
+		return is_array($this->prefix . $name) ? array() : false;
 	}
 	/**
 	* Store value of variable
 	*/
-	function set ($name, $value, $ttl = 604800, $prefix = '')
+	function set ($name, $value, $ttl = 604800)
 	{
 		return false;
 	}
 	/**
 	* Remove variable
 	*/
-	function rm ($name = '', $prefix = '')
+	function rm ($name = '')
 	{
 		return false;
 	}
@@ -367,7 +369,7 @@ class cache_memcache extends cache_common
 		$this->cur_query = null;
 	}
 
-	function get ($name, $get_miss_key_callback = '', $prefix = '', $ttl = 0)
+	function get ($name, $get_miss_key_callback = '', $ttl = 0)
 	{
 		if (!$this->connected) $this->connect();
 
@@ -377,10 +379,10 @@ class cache_memcache extends cache_common
 		$this->cur_query = null;
 		$this->num_queries++;
 
-		return ($this->connected) ? $this->memcache->get($prefix . $name) : false;
+		return ($this->connected) ? $this->memcache->get($this->prefix . $name) : false;
 	}
 
-	function set ($name, $value, $ttl = 0, $prefix = '')
+	function set ($name, $value, $ttl = 0)
 	{
 		if (!$this->connected) $this->connect();
 
@@ -390,16 +392,16 @@ class cache_memcache extends cache_common
 		$this->cur_query = null;
 		$this->num_queries++;
 
-		return ($this->connected) ? $this->memcache->set($prefix . $name, $value, false, $ttl) : false;
+		return ($this->connected) ? $this->memcache->set($this->prefix . $name, $value, false, $ttl) : false;
 	}
 
-	function rm ($name = '', $prefix = '')
+	function rm ($name = '')
 	{
 		if (!$this->connected) $this->connect();
 
 		if($name)
 		{
-			return ($this->connected) ? $this->memcache->delete($prefix . $name) : false;
+			return ($this->connected) ? $this->memcache->delete($this->prefix . $name) : false;
 		}
 		else
 		{
@@ -437,7 +439,7 @@ class cache_sqlite extends cache_common
 		$this->db = new sqlite_common($this->cfg);
 	}
 
-	function get ($name, $get_miss_key_callback = '', $prefix = '', $ttl = 604800)
+	function get ($name, $get_miss_key_callback = '', $ttl = 604800)
 	{
 		if (empty($name))
 		{
@@ -445,8 +447,8 @@ class cache_sqlite extends cache_common
 		}
 		$this->db->shard($name);
 		$cached_items = array();
-		$prefix_len   = strlen($prefix);
-		$prefix_sql   = sqlite_escape_string($prefix);
+		$this->prefix_len   = strlen($this->prefix);
+		$this->prefix_sql   = sqlite_escape_string($this->prefix);
 
 		$name_ary = $name_sql = (array) $name;
 		array_deep($name_sql, 'sqlite_escape_string');
@@ -455,14 +457,14 @@ class cache_sqlite extends cache_common
 		$rowset = $this->db->fetch_rowset("
 			SELECT cache_name, cache_value
 			FROM ". $this->cfg['table_name'] ."
-			WHERE cache_name IN('$prefix_sql". join("','$prefix_sql", $name_sql) ."') AND cache_expire_time > ". TIMENOW ."
+			WHERE cache_name IN('$this->prefix_sql". join("','$this->prefix_sql", $name_sql) ."') AND cache_expire_time > ". TIMENOW ."
 			LIMIT ". count($name) ."
 		");
 
 		$this->db->debug('start', 'unserialize()');
 		foreach ($rowset as $row)
 		{
-			$cached_items[substr($row['cache_name'], $prefix_len)] = unserialize($row['cache_value']);
+			$cached_items[substr($row['cache_name'], $this->prefix_len)] = unserialize($row['cache_value']);
 		}
 		$this->db->debug('stop');
 
@@ -471,12 +473,12 @@ class cache_sqlite extends cache_common
 		{
 			foreach ($get_miss_key_callback($miss_key) as $k => $v)
 			{
-				$this->set($prefix . $k, $v, $ttl);
+				$this->set($this->prefix . $k, $v, $ttl);
 				$cached_items[$k] = $v;
 			}
 		}
 		// return
-		if (is_array($prefix . $name))
+		if (is_array($this->prefix . $name))
 		{
 			return $cached_items;
 		}
@@ -486,10 +488,10 @@ class cache_sqlite extends cache_common
 		}
 	}
 
-	function set ($name, $value, $ttl = 604800, $prefix = '')
+	function set ($name, $value, $ttl = 604800)
 	{
-		$this->db->shard($prefix . $name);
-		$name_sql   = sqlite_escape_string($prefix . $name);
+		$this->db->shard($this->prefix . $name);
+		$name_sql   = sqlite_escape_string($this->prefix . $name);
 		$expire    = TIMENOW + $ttl;
 		$value_sql = sqlite_escape_string(serialize($value));
 
@@ -497,12 +499,12 @@ class cache_sqlite extends cache_common
 		return (bool) $result;
 	}
 
-	function rm ($name = '', $prefix = '')
+	function rm ($name = '')
 	{
-		if($prefix . $name)
+		if($this->prefix . $name)
 		{
-			$this->db->shard($prefix . $name);
-			$result = $this->db->query("DELETE FROM ". $this->cfg['table_name'] ." WHERE cache_name = '". sqlite_escape_string($prefix . $name) ."'");
+			$this->db->shard($this->prefix . $name);
+			$result = $this->db->query("DELETE FROM ". $this->cfg['table_name'] ." WHERE cache_name = '". sqlite_escape_string($this->prefix . $name) ."'");
 		}
 		else
 		{
@@ -664,12 +666,12 @@ class sqlite_common extends cache_common
 		return 'SQLite error #'. ($err_code = sqlite_last_error($this->dbh)) .': '. sqlite_error_string($err_code);
 	}
 
-    function rm ($name = '', $prefix = '')
+    function rm ($name = '')
 	{
-		if($prefix . $name)
+		if($this->prefix . $name)
 		{
-			$this->db->shard($prefix . $name);
-			$result = $this->db->query("DELETE FROM ". $this->cfg['table_name'] ." WHERE cache_name = '". sqlite_escape_string($prefix . $name) ."'");
+			$this->db->shard($this->prefix . $name);
+			$result = $this->db->query("DELETE FROM ". $this->cfg['table_name'] ." WHERE cache_name = '". sqlite_escape_string($this->prefix . $name) ."'");
 		}
 		else
 		{
@@ -729,7 +731,7 @@ class cache_redis extends cache_common
 		$this->cur_query = null;
 	}
 
-	function get ($name, $get_miss_key_callback = '', $prefix = '', $ttl = 0)
+	function get ($name, $get_miss_key_callback = '', $ttl = 0)
 	{
 		if (!$this->connected) $this->connect();
 
@@ -739,21 +741,21 @@ class cache_redis extends cache_common
 		$this->cur_query = null;
 		$this->num_queries++;
 
-		return ($this->connected) ? unserialize($this->redis->get($prefix . $name)) : false;
+		return ($this->connected) ? unserialize($this->redis->get($this->prefix . $name)) : false;
 	}
 
-	function set ($name, $value, $ttl = 0, $prefix = '')
+	function set ($name, $value, $ttl = 0)
 	{
 		if (!$this->connected) $this->connect();
 
 		$this->cur_query = "cache->set('$name')";
 		$this->debug('start');
 
-		if($this->redis->set($prefix . $name, serialize($value)))
+		if($this->redis->set($this->prefix . $name, serialize($value)))
 		{
 			if ($ttl > 0)
 			{
-				$this->redis->expire($prefix . $name, $ttl);
+				$this->redis->expire($this->prefix . $name, $ttl);
 			}
 
 			$this->debug('stop');
@@ -768,11 +770,11 @@ class cache_redis extends cache_common
 		}
 	}
 
-	function rm ($name = '', $prefix = '')
+	function rm ($name = '')
 	{
 		if (!$this->connected) $this->connect();
 
-		return ($this->connected) ? $this->redis->del($prefix . $name) : false;
+		return ($this->connected) ? $this->redis->del($this->prefix . $name) : false;
 	}
 
 	function is_installed ()
@@ -795,7 +797,7 @@ class cache_eaccelerator extends cache_common
 		$this->dbg_enabled = sql_dbg_enabled();
 	}
 
-	function get ($name, $get_miss_key_callback = '', $prefix = '', $ttl = 0)
+	function get ($name, $get_miss_key_callback = '', $ttl = 0)
 	{
 		$this->cur_query = "cache->get('$name')";
 		$this->debug('start');
@@ -803,10 +805,10 @@ class cache_eaccelerator extends cache_common
 		$this->cur_query = null;
 		$this->num_queries++;
 
-		return eaccelerator_get($prefix . $name);
+		return eaccelerator_get($this->prefix . $name);
 	}
 
-	function set ($name, $value, $ttl = 0, $prefix = '')
+	function set ($name, $value, $ttl = 0)
 	{
 		$this->cur_query = "cache->set('$name')";
 		$this->debug('start');
@@ -814,12 +816,12 @@ class cache_eaccelerator extends cache_common
 		$this->cur_query = null;
 		$this->num_queries++;
 
-		return eaccelerator_put($prefix . $name, $value, $ttl);
+		return eaccelerator_put($this->prefix . $name, $value, $ttl);
 	}
 
-	function rm ($name = '', $prefix = '')
+	function rm ($name = '')
 	{
-		return eaccelerator_rm($prefix . $name);
+		return eaccelerator_rm($this->prefix . $name);
 	}
 
 	function is_installed ()
@@ -842,7 +844,7 @@ class cache_apc extends cache_common
 		$this->dbg_enabled = sql_dbg_enabled();
 	}
 
-	function get ($name, $get_miss_key_callback = '', $prefix = '', $ttl = 0)
+	function get ($name, $get_miss_key_callback = '', $ttl = 0)
 	{
 		$this->cur_query = "cache->get('$name')";
 		$this->debug('start');
@@ -850,10 +852,10 @@ class cache_apc extends cache_common
 		$this->cur_query = null;
 		$this->num_queries++;
 
-		return apc_fetch($prefix . $name);
+		return apc_fetch($this->prefix . $name);
 	}
 
-	function set ($name, $value, $ttl = 0, $prefix = '')
+	function set ($name, $value, $ttl = 0)
 	{
 		$this->cur_query = "cache->set('$name')";
 		$this->debug('start');
@@ -861,12 +863,12 @@ class cache_apc extends cache_common
 		$this->cur_query = null;
 		$this->num_queries++;
 
-		return apc_store($prefix . $name, $value, $ttl);
+		return apc_store($this->prefix . $name, $value, $ttl);
 	}
 
-	function rm ($name = '', $prefix = '')
+	function rm ($name = '')
 	{
-		return apc_delete($prefix . $name);
+		return apc_delete($this->prefix . $name);
 	}
 
 	function is_installed ()
@@ -889,7 +891,7 @@ class cache_xcache extends cache_common
 		$this->dbg_enabled = sql_dbg_enabled();
 	}
 
-	function get ($name, $get_miss_key_callback = '', $prefix = '', $ttl = 0)
+	function get ($name, $get_miss_key_callback = '', $ttl = 0)
 	{
 		$this->cur_query = "cache->get('$name')";
 		$this->debug('start');
@@ -897,10 +899,10 @@ class cache_xcache extends cache_common
 		$this->cur_query = null;
 		$this->num_queries++;
 
-		return xcache_get($prefix . $name);
+		return xcache_get($this->prefix . $name);
 	}
 
-	function set ($name, $value, $ttl = 0, $prefix = '')
+	function set ($name, $value, $ttl = 0)
 	{
 		$this->cur_query = "cache->set('$name')";
 		$this->debug('start');
@@ -908,12 +910,12 @@ class cache_xcache extends cache_common
 		$this->cur_query = null;
 		$this->num_queries++;
 
-		return xcache_set($prefix . $name, $value, $ttl);
+		return xcache_set($this->prefix . $name, $value, $ttl);
 	}
 
-	function rm ($name = '', $prefix = '')
+	function rm ($name = '')
 	{
-		return xcache_unset($prefix . $name);
+		return xcache_unset($this->prefix . $name);
 	}
 
 	function is_installed ()
@@ -934,9 +936,9 @@ class cache_file extends cache_common
 		$this->dbg_enabled = sql_dbg_enabled();
 	}
 
-	function get ($name, $get_miss_key_callback = '', $prefix = '', $ttl = 0)
+	function get ($name, $get_miss_key_callback = '', $ttl = 0)
 	{
-		$filename = $this->dir . clean_filename($prefix . $name) . '.php';
+		$filename = $this->dir . clean_filename($this->prefix . $name) . '.php';
 
         $this->cur_query = "cache->set('$name')";
 		$this->debug('start');
@@ -952,7 +954,7 @@ class cache_file extends cache_common
 		return (!empty($filecache['value'])) ? $filecache['value'] : false;
 	}
 
-	function set ($name, $value, $ttl = 86400, $prefix = '')
+	function set ($name, $value, $ttl = 86400)
 	{
 		if (!function_exists('var_export'))
 		{
@@ -962,7 +964,7 @@ class cache_file extends cache_common
         $this->cur_query = "cache->set('$name')";
 		$this->debug('start');
 
-		$filename   = $this->dir . clean_filename($prefix . $name) . '.php';
+		$filename   = $this->dir . clean_filename($this->prefix . $name) . '.php';
 		$expire     = TIMENOW + $ttl;
 		$cache_data = array(
 			'expire'  => $expire,
@@ -981,12 +983,12 @@ class cache_file extends cache_common
 		return (bool) file_write($filecache, $filename, false, true, true);
 	}
 
-	function rm ($name = '', $prefix = '')
+	function rm ($name = '')
 	{
 		$clear = false;
-		if($prefix . $name)
+		if($this->prefix . $name)
 		{
-		    $filename = $this->dir . clean_filename($prefix . $name) . '.php';
+		    $filename = $this->dir . clean_filename($this->prefix . $name) . '.php';
 			if (file_exists($filename))
 			{
 				$clear = (bool) unlink($filename);
@@ -1764,7 +1766,7 @@ switch ($bb_cfg['datastore_type'])
 
 	case 'sqlite':
 		$default_cfg = array(
-			'db_file_path' => $bb_cfg['cache']['db_dir'] .'bb_datastore.sqlite.db',
+			'db_file_path' => $bb_cfg['cache']['db_dir'] .'datastore.sqlite.db',
 			'pconnect'     => true,
 			'con_required' => true,
 		);
