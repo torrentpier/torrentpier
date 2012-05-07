@@ -1226,7 +1226,7 @@ function show_bt_userdata ($user_id)
 		'MIN_DL_FOR_RATIO' => humn_size(MIN_DL_FOR_RATIO),
 		'MIN_DL_BYTES'     => MIN_DL_FOR_RATIO,
 		'AUTH_KEY'         => ($btu['auth_key']) ? $btu['auth_key'] : $lang['NONE'],
-		
+
 		'TD_DL'            => humn_size($btu['down_today']),
 		'TD_UL'            => humn_size($btu['up_today']),
 		'TD_REL'           => humn_size($btu['up_release_today']),
@@ -1238,7 +1238,7 @@ function show_bt_userdata ($user_id)
 		'YS_REL'           => humn_size($btu['up_release_yesterday']),
 		'YS_BONUS'         => humn_size($btu['up_bonus_yesterday']),
 		'YS_POINTS'        => ($btu['auth_key']) ? $btu['points_yesterday'] : '0.00',
-		
+
 		'SPEED_UP'         => humn_size($btu['speed_up'], 0, 'KB') .'/s',
 		'SPEED_DOWN'       => humn_size($btu['speed_down'], 0, 'KB') .'/s',
 	));
@@ -1555,13 +1555,15 @@ function setup_style ()
 	$stylesheet   = defined('IN_ADMIN') ? 'main.css'  : basename($bb_cfg['stylesheet']);
 
 	$template = new Template(TEMPLATES_DIR . $tpl_dir_name);
-	$css_dir = BB_ROOT . basename(TEMPLATES_DIR) ."/$tpl_dir_name/css/";
+	$css_dir = basename(TEMPLATES_DIR) ."/$tpl_dir_name/css/";
 
 	$template->assign_vars(array(
 		'BB_ROOT'          => BB_ROOT,
-		'SPACER'           => BB_ROOT .'images/spacer.gif',
-		'STYLESHEET'       => $css_dir . $stylesheet,
+		'SPACER'           => make_url('/images/spacer.gif'),
+		'STYLESHEET'       => make_url($css_dir . $stylesheet),
 		'EXT_LINK_NEW_WIN' => $bb_cfg['ext_link_new_win'],
+		'TPL_DIR'          => make_url($css_dir),
+		'SITE_URL'         => make_url('/'),
 	));
 
 	require(TEMPLATES_DIR . $tpl_dir_name .'/tpl_config.php');

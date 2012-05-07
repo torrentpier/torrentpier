@@ -7,16 +7,16 @@
 <meta http-equiv="Content-Style-Type" content="text/css" />
 {META}
 <link rel="stylesheet" href="{STYLESHEET}?v={$bb_cfg['css_ver']}" type="text/css">
-<link rel="icon" type="image/png" href="/images/logo/logo_big.png" />
-<link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
-<link rel="search" type="application/opensearchdescription+xml" href="opensearch_desc.xml" title="{SITENAME} (Forum)" />
-<link rel="search" type="application/opensearchdescription+xml" href="opensearch_desc_bt.xml" title="{SITENAME} (Tracker)" />
+<link rel="icon" type="image/png" href="{SITE_URL}images/logo/logo_big.png" />
+<link rel="shortcut icon" href="{SITE_URL}favicon.ico" type="image/x-icon">
+<link rel="search" type="application/opensearchdescription+xml" href="{SITE_URL}opensearch_desc.xml" title="{SITENAME} (Forum)" />
+<link rel="search" type="application/opensearchdescription+xml" href="{SITE_URL}opensearch_desc_bt.xml" title="{SITENAME} (Tracker)" />
 
-<script type="text/javascript" src="{#BB_ROOT}misc/js/jquery.pack.js?v={$bb_cfg['js_ver']}"></script>
-<script type="text/javascript" src="{#BB_ROOT}misc/js/main.js?v={$bb_cfg['js_ver']}"></script>
+<script type="text/javascript" src="{SITE_URL}misc/js/jquery.pack.js?v={$bb_cfg['js_ver']}"></script>
+<script type="text/javascript" src="{SITE_URL}misc/js/main.js?v={$bb_cfg['js_ver']}"></script>
 
 <!-- IF INCLUDE_BBCODE_JS -->
-<script type="text/javascript" src="{#BB_ROOT}misc/js/bbcode.js?v={$bb_cfg['js_ver']}"></script>
+<script type="text/javascript" src="{SITE_URL}misc/js/bbcode.js?v={$bb_cfg['js_ver']}"></script>
 <script type="text/javascript">
 var postImg_MaxWidth = screen.width - {POST_IMG_WIDTH_DECR_JS};
 var postImgAligned_MaxWidth = Math.round(screen.width/3);
@@ -58,7 +58,7 @@ function initPostImages(context)
 		$img.bind('click', function(){ return imgFit(this, maxW); });
 		if (user.opt_js.i_aft_l) {
 			$('#preload').append($img);
-			var loading_icon = '<a href="'+ src +'" target="_blank"><img src="images/pic_loading.gif" alt="" /></a>';
+			var loading_icon = '<a href="'+ src +'" target="_blank"><img src="{SITE_URL}images/pic_loading.gif" alt="" /></a>';
 			$v.html(loading_icon);
 			if ($.browser.msie) {
 				$v.after('<wbr>');
@@ -167,7 +167,7 @@ $(document).ready(function(){
 });
 <!-- ENDIF -->
 
-var ajax = new Ajax('{AJAX_HANDLER}', 'POST', 'json');
+var ajax = new Ajax('{SITE_URL}ajax.php', 'POST', 'json');
 
 function getElText (e)
 {
@@ -565,12 +565,12 @@ important_info
     <td id="main_content">
     <div id="main_content_wrap">
     <div id="latest_news">
-    <table cellspacing="0" cellpadding="0" width="100%"> 
+    <table cellspacing="0" cellpadding="0" width="100%">
         <tr>
             <td width="50%">
                 <!-- IF SHOW_LATEST_NEWS -->
-                <h3>{L_LATEST_NEWS}</h3> 
-                    <table cellpadding="0"> 
+                <h3>{L_LATEST_NEWS}</h3>
+                    <table cellpadding="0">
                     <!-- BEGIN news -->
                     <tr>
                         <td><div class="news_date">{news.NEWS_TIME}</div></td>
@@ -582,7 +582,7 @@ important_info
                     </table>
 			        <!-- ENDIF -->
             </td>
-   
+
             <!-- IF SHOW_NETWORK_NEWS -->
             <td width="50%">
                 <h3>{L_NETWORK_NEWS}</h3>

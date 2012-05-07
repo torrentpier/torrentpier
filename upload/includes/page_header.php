@@ -245,7 +245,6 @@ $template->assign_vars(array(
 	'TOPIC_URL'          => BB_ROOT . TOPIC_URL,
 
 	'AJAX_HTML_DIR'      => AJAX_HTML_DIR,
-	'AJAX_HANDLER'       => BB_ROOT .'ajax.php',
 
 	'ONLY_NEW_POSTS'     => ONLY_NEW_POSTS,
 	'ONLY_NEW_TOPICS'    => ONLY_NEW_TOPICS,
