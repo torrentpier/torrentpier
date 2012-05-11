@@ -50,10 +50,14 @@ if (!defined('BB_ROOT')) die(basename(__FILE__));
 
 $bb_cfg = $tr_cfg = $page_cfg = array();
 
+// Primary domain name
+$domain_name = 'torrentpier.me';                    // Enter here your primary domain name of your site
+$domain_name = (!empty($_SERVER['SERVER_NAME'])) ? $_SERVER['SERVER_NAME'] : $domain_name;
+
 // Increase number of revision after update
 $bb_cfg['tp_version'] = '2.5 Beta';
-$bb_cfg['tp_release_state'] = 'R413';
-$bb_cfg['tp_release_date'] = '07-05-2012';
+$bb_cfg['tp_release_state'] = 'R415';
+$bb_cfg['tp_release_date'] = '11-05-2012';
 
 // Database
 $charset  = 'utf8';
@@ -101,9 +105,9 @@ $bb_cfg['cache']['engines'] = array(
 $bb_cfg['datastore_type'] = 'filecache';
 
 // Server
-$bb_cfg['server_name'] = (!empty($_SERVER['SERVER_NAME'])) ? $_SERVER['SERVER_NAME'] : 'torrentpier.me';         // The domain name from which this board runs
+$bb_cfg['server_name'] = $domain_name;              // The domain name from which this board runs
 $bb_cfg['server_port'] = (!empty($_SERVER['SERVER_PORT'])) ? $_SERVER['SERVER_PORT'] : 80;                       // The port your server is running on
-$bb_cfg['script_path'] = '/';                      // The path where FORUM is located relative to the domain name
+$bb_cfg['script_path'] = '/';                       // The path where FORUM is located relative to the domain name
 
 // Server load
 $bb_cfg['max_srv_load']       = 0;                  // 0 - disable
@@ -126,7 +130,7 @@ $bb_cfg['gzip_compress']      = true;              // compress output
 
 // Tracker
 $bb_cfg['announce_type']      = 'php';             // Тип анонсера, xbt или php
-$bb_cfg['announce_xbt']       = "http://{$bb_cfg['server_name']}:2710";
+$bb_cfg['announce_xbt']       = "http://{$domain_name}:2710";
 $bb_cfg['announce_interval']  = 2400;              // Announce interval (default: 1800)
 $bb_cfg['passkey_key']        = 'uk';              // Passkey key name in GET request
 $bb_cfg['ignore_reported_ip'] = false;             // Ignore IP reported by client
@@ -278,7 +282,7 @@ $bb_cfg['topic_tpl']['overall_header'] = TEMPLATES_DIR .'topic_tpl_overall_heade
 $bb_cfg['topic_tpl']['rules_video']    = TEMPLATES_DIR .'topic_tpl_rules_video.html';
 
 // Cookie
-$bb_cfg['cookie_domain'] = (!empty($_SERVER['SERVER_NAME'])) ? $_SERVER['SERVER_NAME'] : '';  # '.yourdomain.com'
+$bb_cfg['cookie_domain'] = '.'. $domain_name;      # '.yourdomain.com'
 $bb_cfg['cookie_path']   = '/';                    # '/forum/'
 $bb_cfg['cookie_secure'] = (!empty($_SERVER['HTTPS']) ? 1 : 0); # 0
 $bb_cfg['cookie_prefix'] = 'bb_';                  # 'bb_'
@@ -307,9 +311,9 @@ $bb_cfg['topic_notify_enabled']    = true;
 $bb_cfg['pm_notify_enabled']       = true;
 $bb_cfg['groupcp_send_email']      = true;
 
-$bb_cfg['tech_admin_email']        = 'admin@' . $bb_cfg['server_name'];  // email for sending error reports
-$bb_cfg['abuse_email']             = 'abuse@' . $bb_cfg['server_name'];
-$bb_cfg['adv_email']               = 'adv@'   . $bb_cfg['server_name'];
+$bb_cfg['tech_admin_email']        = 'admin@' . $domain_name;  // email for sending error reports
+$bb_cfg['abuse_email']             = 'abuse@' . $domain_name;
+$bb_cfg['adv_email']               = 'adv@'   . $domain_name;
 
 // AJAX
 define('AJAX_HTML_DIR', BB_ROOT .'ajax/html/');
