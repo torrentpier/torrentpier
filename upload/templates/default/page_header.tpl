@@ -119,7 +119,7 @@ function fixPostImage ($img)
 	var banned_image_hosts = /imagebanana|hidebehind/i;  // imageshack
 	var src = $img[0].src;
 	if (src.match(banned_image_hosts)) {
-		$img.wrap('<a href="'+ this.src +'" target="_blank"></a>').attr({ src: "{SMILES_URL}/tr_oops.gif", title: "{L_SCREENSHOTS_RULES}" });
+		$img.wrap('<a href="'+ this.src +'" target="_blank"></a>').attr({ src: "{SITE_URL}images/tr_oops.gif", title: "{L_SCREENSHOTS_RULES}" });
 	}
 	return $img;
 }

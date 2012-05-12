@@ -56,8 +56,8 @@ $domain_name = (!empty($_SERVER['SERVER_NAME'])) ? $_SERVER['SERVER_NAME'] : $do
 
 // Increase number of revision after update
 $bb_cfg['tp_version'] = '2.5 Beta';
-$bb_cfg['tp_release_state'] = 'R415';
-$bb_cfg['tp_release_date'] = '11-05-2012';
+$bb_cfg['tp_release_state'] = 'R416';
+$bb_cfg['tp_release_date'] = '12-05-2012';
 
 // Database
 $charset  = 'utf8';
@@ -199,8 +199,8 @@ $rating_limits = array(
 );
 
 // Seeding torrents limit
-$bb_cfg['max_seeding_torrents']     = 0;        // 0 - unlimited
-$bb_cfg['min_up_speed_per_torrent'] = 500;      // bytes
+$bb_cfg['max_seeding_torrents']     	 = 0;        // 0 - unlimited
+$bb_cfg['min_up_speed_per_torrent'] 	 = 500;      // bytes
 $bb_cfg['too_many_seeding_redirect_url'] = 'viewtopic.php?t=TOPIC_ID';
 
 // DL-Status
