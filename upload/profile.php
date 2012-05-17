@@ -47,7 +47,13 @@ switch ($mode)
 
 		require(INC_DIR . 'ucp/usercp_bonus.php');
 		break;
-		
+	
+	case 'watch':
+		if (IS_GUEST) login_redirect();
+
+		require(INC_DIR . 'ucp/usercp_topic_watch.php');
+		break;
+	
 	default:
 		bb_die('Invalid mode');
 }

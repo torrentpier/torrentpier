@@ -326,6 +326,7 @@ ajax.callback.gen_passkey = function(data){
 						[ <a href="{U_SEARCH_USER}" class="med">{L_SEARCH_USER_POSTS}</a> ]
 						[ <a href="{U_SEARCH_TOPICS}" class="med">{L_SEARCH_USER_TOPICS}</a> ]
 						[ <a class="med" href="{U_SEARCH_RELEASES}">{L_SEARCH_RELEASES}</a> ]
+						[ <a class="med" href="{U_WATCHED_TOPICS}">{L_WATCHED_TOPICS}</a> ]
 					</p>
 				</td>
 			</tr>
