@@ -83,7 +83,52 @@ function set_hid_chbox (id)
 
 <div class="spacer_6"></div>
 
-<h1 class="maintitle"><a href="{U_VIEW_TOPIC}">{TOPIC_TITLE}</a></h1>
+<h1 class="maintitle">
+	<a class="tt-text" href="{U_VIEW_TOPIC}">{TOPIC_TITLE}</a>
+<!-- IF AUTH_MOD -->
+<script type="text/javascript">
+var $tt_td = $('.maintitle');
+function edit_topic_title (mode)
+{
+	if (mode == 'edit') {		var tt_text = $tt_td.find('.tt-text').text();
+
+		ajax.tte_orig_html = $tt_td.html();
+		$tt_td.html( $('#tt-edit-tpl').html() );
+		$('.tt-edit-input', $tt_td).val(tt_text).focus();	}
+	else if (mode == 'save') {
+		var topic_title = $('.tt-edit-input', $tt_td).val();
+
+		ajax.edit_topic_title(topic_title);
+	}
+	else {
+		$tt_td.html(ajax.tte_orig_html);
+	}
+}
+ajax.edit_topic_title = function(topic_title) {
+	ajax.exec({
+		action      : 'mod_action',
+		mode        : 'edit_topic_title',
+		topic_id    : {TOPIC_ID},
+		topic_title : topic_title
+	});
+}
+ajax.callback.mod_action = function(data) {
+	$tt_td.html(ajax.tte_orig_html);
+	$('.tt-text', $tt_td).html(data.topic_title);
+}
+</script>
+<a style="cursor: help; color: #800000;" title="{L_EDIT_TOPIC_TITLE}" onclick="edit_topic_title('edit'); return false" href="#">&para;</a>
+
+<div id="tt-edit-tpl" style="display: none;">
+	<div class="tt-edit" style="padding: 4px;">
+		<textarea class="tt-edit-input" rows="2" cols="50" style="width: 98%; height: 35px;"></textarea>
+		<input type="button" value="{L_SAVE}" onclick="edit_topic_title('save'); return false;" />
+		<input type="button" value="{L_CANCEL}" onclick="edit_topic_title('cancel'); return false;" />
+	</div>
+</div>
+<!-- ENDIF -->
+</h1>
+
 <!-- IF PAGINATION -->
 <p class="small" style="padding: 1px 6px 5px;"><b>{PAGINATION}</b></p>
 <!-- ENDIF -->

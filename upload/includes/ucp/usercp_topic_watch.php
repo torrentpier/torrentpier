@@ -13,9 +13,10 @@ $user_id = $userdata['user_id'];
 $start = isset($_GET['start']) ? abs(intval($_GET['start'])) : 0;
 $per_page = $bb_cfg['topics_per_page'];
 
-if ( isset($HTTP_POST_VARS['watch_list']) )
+if ( isset($_POST['topic_id_list']) )
 {
-    $topic_ids = implode(",", $HTTP_POST_VARS['watch_list']);
+    $topic_ids = implode(",", $_POST['topic_id_list']);
+
     $sql = "DELETE FROM ". BB_TOPICS_WATCH ."
       WHERE topic_id IN(". $topic_ids .")
       AND user_id = $user_id";
@@ -63,7 +64,7 @@ if ($watch_count > 0)
         for ( $i = 0; $i < count($watch); $i++ )
         {
             $is_unread = is_unread($watch[$i]['topic_last_post_time'], $watch[$i]['topic_id'], $watch[$i]['forum_id']);
-			
+
 			$template->assign_block_vars('watch', array(
 				'ROW_CLASS'         => ( !($i % 2) ) ? 'row1' : 'row2',
                 'POST_ID'           => $watch[$i]['topic_first_post_id'],
@@ -74,8 +75,8 @@ if ($watch_count > 0)
 				'FORUM_TITLE'       => wbr($watch[$i]['forum_name']),
 				'U_FORUM'           => FORUM_URL . $watch[$i]['forum_id'],
 				'REPLIES'           => $watch[$i]['topic_replies'],
-				'AUTHOR'            => profile_url(array('username' => $watch[$i]['username'], 'user_rank' => $watch[$i]['user_rank'])) .'</a>',
-				'LAST_POST'         => bb_date($watch[$i]['topic_last_post_time']) .'<br />'. profile_url(array('username' => $watch[$i]['last_username'], 'user_rank' => $watch[$i]['last_user_rank'])),
+				'AUTHOR'            => profile_url($watch[$i]),
+				'LAST_POST'         => bb_date($watch[$i]['topic_last_post_time']) .'<br />'. profile_url(array('user_id' => $watch[$i]['last_user_id'], 'username' => $watch[$i]['last_username'], 'user_rank' => $watch[$i]['last_user_rank'])),
                 'LAST_POST_ID'      => $watch[$i]['topic_last_post_id'],
                 'IS_UNREAD'         => $is_unread,
 			    'TOPIC_ICON'        => get_topic_icon($watch[$i], $is_unread),

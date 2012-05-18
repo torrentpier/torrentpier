@@ -128,13 +128,13 @@ ajax.callback.group_membership = function(data) {
 </script>
 <!-- ENDIF / IS_AM -->
 
-<!-- IF TRAF_STATS -->	
+<!-- IF TRAF_STATS -->
 <script type="text/javascript">
 ajax.index_data = function(mode) {
 	ajax.exec({
 		action  : 'index_data',
 		mode    : mode,
-		user_id : {PROFILE_USER_ID}	
+		user_id : {PROFILE_USER_ID}
 	});
 }
 ajax.callback.index_data = function(data) {
@@ -310,7 +310,7 @@ ajax.callback.gen_passkey = function(data){
 					<span class="editable bold">{LAST_VISIT_TIME}</span>
 				</td>
 			</tr>
-			
+
 		    <tr>
 				<th class="nowrap">{L_LAST_ACTIVITY}:</th>
 				<td>
@@ -326,11 +326,11 @@ ajax.callback.gen_passkey = function(data){
 						[ <a href="{U_SEARCH_USER}" class="med">{L_SEARCH_USER_POSTS}</a> ]
 						[ <a href="{U_SEARCH_TOPICS}" class="med">{L_SEARCH_USER_TOPICS}</a> ]
 						[ <a class="med" href="{U_SEARCH_RELEASES}">{L_SEARCH_RELEASES}</a> ]
-						[ <a class="med" href="{U_WATCHED_TOPICS}">{L_WATCHED_TOPICS}</a> ]
+						<!-- IF PROFILE_USER -->[ <a class="med" href="{U_WATCHED_TOPICS}">{L_WATCHED_TOPICS}</a> ]<!-- ENDIF -->
 					</p>
 				</td>
 			</tr>
-			
+
 			<tr id="bt_user_ratio" <!-- IF TRAF_STATS -->style="display: none;"<!-- ENDIF -->>
 			    <th>{L_USER_RATIO}:</th>
 			    <td>
@@ -340,9 +340,9 @@ ajax.callback.gen_passkey = function(data){
 				    <!-- ELSE -->
 				    <span class="med" title="{L_IT_WILL_BE_DOWN} {MIN_DL_FOR_RATIO}"><b>{L_NONE}</b> (DL < {MIN_DL_FOR_RATIO})</span>
 				    <!-- ENDIF -->
-				
+
 					<!-- IF SHOW_PASSKEY -->
-					[ {L_BT_PASSKEY}:  <span id="passkey-btn"><a class="med" href="#" onclick="$('#passkey-gen').show(); $('#passkey-btn').hide(); return false;">{L_BT_PASSKEY_VIEW}</a></span>					
+					[ {L_BT_PASSKEY}:  <span id="passkey-btn"><a class="med" href="#" onclick="$('#passkey-gen').show(); $('#passkey-btn').hide(); return false;">{L_BT_PASSKEY_VIEW}</a></span>
 					<span id="passkey-gen" class="med" style="display: none;">
 						<b id="passkey" class="med bold">{AUTH_KEY}</b>&nbsp;
 				        <a href="#" onclick="ajax.exec({ action: 'gen_passkey', user_id  : {PROFILE_USER_ID} }); return false;">{L_BT_GEN_PASSKEY}</a>
@@ -402,8 +402,8 @@ ajax.callback.gen_passkey = function(data){
 				<th>{L_ACCESS}:</th>
 				<td id="ignore_srv_load">{L_ACCESS_SRV_LOAD}: <b class="editable">{IGNORE_SRV_LOAD}</b></td>
 			</tr>
-			<!-- ENDIF -->			
-			
+			<!-- ENDIF -->
+
 		    <tr>
 			    <td colspan="2" class="pad_4">
 
@@ -450,7 +450,7 @@ ajax.callback.gen_passkey = function(data){
 
 			</td>
 		</tr>
-		
+
 		</table><!--/user_details-->
 
 	<!-- IF IS_AM --><span id="ip_list"></span><!-- ENDIF -->

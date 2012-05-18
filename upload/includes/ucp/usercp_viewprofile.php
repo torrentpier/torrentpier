@@ -100,6 +100,7 @@ $template->assign_vars(array(
 	'PAGE_TITLE'           => sprintf($lang['VIEWING_USER_PROFILE'], $profiledata['username']),
 	'USERNAME'             => $profiledata['username'],
 	'PROFILE_USER_ID'      => $profiledata['user_id'],
+	'PROFILE_USER'         => $profile_user_id,
 	'USER_REGDATE'         => bb_date($profiledata['user_regdate'], 'Y-m-d H:i', 'false'),
 	'POSTER_RANK'          => ($poster_rank) ? "<span class=\"$rank_style\">". $poster_rank ."</span>" : $lang['USER'],
 	'RANK_IMAGE'           => $rank_image,
@@ -131,7 +132,7 @@ $template->assign_vars(array(
 	'U_SEARCH_TOPICS'      => "search.php?uid={$profiledata['user_id']}&amp;myt=1",
 	'U_SEARCH_RELEASES'    => "tracker.php?rid={$profiledata['user_id']}#results",
 	'U_WATCHED_TOPICS'     => "profile.php?mode=watch",
-	
+
 	'S_PROFILE_ACTION'     => 'profile.php',
 
 	'SIGNATURE'            => $signature,

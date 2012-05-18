@@ -322,6 +322,7 @@ $lang['POST_A_NEW_TOPIC'] = 'Начать новую тему';
 $lang['POST_A_REPLY'] = 'Ответить';
 $lang['POST_TOPIC_AS'] = 'Статус создаваемой темы';
 $lang['EDIT_POST'] = 'Редактировать сообщение';
+$lang['EDIT_TOPIC_TITLE'] = 'Изменить название темы';
 $lang['EDIT_POST_NOT_1'] = 'Вам запрещено ';
 $lang['EDIT_POST_NOT_2'] = 'Вы не можете ';
 $lang['EDIT_POST_AJAX'] = 'редактировать сообщение со статусом';
@@ -1636,7 +1637,6 @@ $lang['SHOW_CAPTION'] = 'Показывать подпись';
 $lang['DOWNLOAD_TORRENT'] = 'Скачивать торренты';
 $lang['SEND_PM'] = 'Отправлять ЛС';
 $lang['SEND_MESSAGE'] = 'Отправлять сообщения';
-$lang['EDIT_POST'] = 'Редактировать сообщения';
 $lang['NEW_THREADS'] = 'Создавать темы';
 $lang['PROFILE_NOT_FOUND'] = 'Профиль не найден';
 

@@ -1632,6 +1632,7 @@ $lang['DOWNLOAD_TORRENT'] = 'Download torrent';
 $lang['SEND_PM'] = 'Send PM';
 $lang['SEND_MESSAGE'] = 'Send message';
 $lang['EDIT_POST'] = 'Edit Post';
+$lang['EDIT_TOPIC_TITLE'] = 'Edit Topic title';
 $lang['NEW_THREADS'] = 'New Threads';
 $lang['PROFILE_NOT_FOUND'] = 'Profile not found';
 
@@ -1762,6 +1763,10 @@ $lang['RESTORE_ALL_POSTS'] = 'Restore all posts';
 $lang['DEL_LIST_MY_MESSAGE'] = 'Delete the selected topic from the list';
 $lang['DEL_LIST_MY_MESSAGE_INFO'] = 'After removal of up to update the <b>entire list</b> it can be shown already deleted threads';
 $lang['DEL_LIST_INFO'] = 'To delete an order from the list, click on the icon to the left of the names of any section';
+
+//Отслеживаемые темы
+$lang['WATCHED_TOPICS'] = 'Watched Topics';
+$lang['NO_WATCHED_TOPICS'] = 'You are not watching any topics';
 
 // set_die_append_msg
 $lang['INDEX_RETURN'] = 'Back to home page';

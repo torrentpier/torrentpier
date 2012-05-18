@@ -178,8 +178,8 @@ ajax.callback.mod_action = function(data) {
 <div id="tt-edit-tpl" style="display: none;">
 	<div class="tt-edit" style="padding: 4px;">
 		<textarea class="tt-edit-input" rows="2" cols="50" style="width: 98%; height: 35px;"></textarea>
-		<a href="#" onclick="tte_submit('save'); return false;" class="adm">[{L_SAVE}]</a> &middot;
-		<a href="#" onclick="tte_submit('cancel'); return false;" class="med">{L_CANCEL}</a>
+		<input type="button" value="{L_SAVE}" onclick="tte_submit('save'); return false;" />
+		<input type="button" value="{L_CANCEL}" onclick="tte_submit('cancel'); return false;" />
 	</div>
 </div>
 
@@ -268,7 +268,7 @@ td.topic_id { cursor: pointer; }
 	<tr>
 		<td valign="bottom">
 			<h1 class="maintitle"><a href="{U_VIEW_FORUM}">{FORUM_NAME}</a></h1>
-			
+
 			<p class="small" id="moderators"><a style="text-decoration: none;" href="#">{L_MODERATORS}</a></p>
             <script type="text/javascript">
                 $(document).ready(function(){
@@ -282,14 +282,14 @@ td.topic_id { cursor: pointer; }
                     ajax.exec({
                         action   : 'index_data',
                         mode     : 'get_forum_mods',
-                        forum_id : {FORUM_ID} 
+                        forum_id : {FORUM_ID}
                     });
                 };
                 ajax.callback.index_data = function(data) {
                     $('#moderators').append(data.html);
                 };
             </script>
-			
+
 			<!-- IF SHOW_ONLINE_LIST -->
 			<p class="small">{LOGGED_IN_USER_LIST}</p>
 			<!-- ENDIF -->
@@ -469,7 +469,7 @@ td.topic_id { cursor: pointer; }
 	</div>
 	<div class="topicAuthor nowrap" style="padding-top: 2px;">
 		{t.TOPIC_AUTHOR}
-	</div>	
+	</div>
 	</td>
 
 	<td class="tCenter nowrap" style="padding: 2px 4px;">

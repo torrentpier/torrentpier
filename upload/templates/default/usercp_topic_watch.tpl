@@ -1,16 +1,12 @@
 <script type="text/javascript">
 ajax.in_edit_mode = false;
 
-
 $(document).ready(function(){
 	$('#show-edit-btn a').click(function(){
 		show_edit_options();
 		$('#show-edit-btn').html( $('#edit-sel-topics').html() );
 		return false;
 	});
-
-
-
 
 	$('td.topic_id').click(function(){
 		if (!ajax.in_edit_mode) {
@@ -20,7 +16,6 @@ $(document).ready(function(){
 	});
 });
 
-
 function show_edit_options ()
 {
 	$('td.topic_id').each(function(){
@@ -28,7 +23,6 @@ function show_edit_options ()
 		var input = '<input id="sel-'+ topic_id +'" type="checkbox" value="'+ topic_id +'" class="topic-chbox" />';
 		$(this).html(input);
 	});
-
 
 	$('input.topic-chbox').click(function(){
 		if ($.browser.mozilla) {
@@ -41,7 +35,6 @@ function show_edit_options ()
 	$('#ed-list-desc').hide();
 	$('#mod-action-cell').append( $('#mod-action-content')[0] );
 	$('#mod-action-row, #mod-action-content').show();
-
 
 	$('#mod-action').submit(function(){
 		var $form = $(this);
