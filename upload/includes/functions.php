@@ -2517,6 +2517,7 @@ function caching_output ($enabled, $mode, $cache_var_name, $ttl = 300)
  */
 function bb_json_encode ($data)
 {
+	$data = mb_check_encoding($data, 'UTF-8') ? $data : utf8_encode($data);
 	return json_encode($data);
 }
 
