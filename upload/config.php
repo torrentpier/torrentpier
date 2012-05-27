@@ -56,8 +56,8 @@ $domain_name = (!empty($_SERVER['SERVER_NAME'])) ? $_SERVER['SERVER_NAME'] : $do
 
 // Increase number of revision after update
 $bb_cfg['tp_version'] = '2.5 Beta';
-$bb_cfg['tp_release_state'] = 'R421';
-$bb_cfg['tp_release_date'] = '23-05-2012';
+$bb_cfg['tp_release_state'] = 'R423';
+$bb_cfg['tp_release_date'] = '27-05-2012';
 
 // Database
 $charset  = 'utf8';

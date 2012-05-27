@@ -501,7 +501,7 @@ class cache_sqlite extends cache_common
 
 	function rm ($name = '')
 	{
-		if($this->prefix . $name)
+		if($name)
 		{
 			$this->db->shard($this->prefix . $name);
 			$result = $this->db->query("DELETE FROM ". $this->cfg['table_name'] ." WHERE cache_name = '". sqlite_escape_string($this->prefix . $name) ."'");
@@ -668,7 +668,7 @@ class sqlite_common extends cache_common
 
     function rm ($name = '')
 	{
-		if($this->prefix . $name)
+		if($name)
 		{
 			$this->db->shard($this->prefix . $name);
 			$result = $this->db->query("DELETE FROM ". $this->cfg['table_name'] ." WHERE cache_name = '". sqlite_escape_string($this->prefix . $name) ."'");
@@ -986,7 +986,7 @@ class cache_file extends cache_common
 	function rm ($name = '')
 	{
 		$clear = false;
-		if($this->prefix . $name)
+		if($name)
 		{
 		    $filename = $this->dir . clean_filename($this->prefix . $name) . '.php';
 			if (file_exists($filename))
