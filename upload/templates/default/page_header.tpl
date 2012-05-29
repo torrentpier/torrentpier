@@ -319,7 +319,7 @@ function go_to_page ()
 	<table width="100%" cellpadding="0" cellspacing="0">
 	<tr>
 		<td class="nowrap">
-			<a href="{U_INDEX}"><b>{L_HOME}</b></a><span style="color:#CDCDCD;">|</span>
+			<!-- IF SEO_LINK_HOME_PAGE --><a href="{U_INDEX}"><b>{L_HOME}</b></a><span style="color:#CDCDCD;">|</span><!-- ENDIF -->
 			<a href="{U_TRACKER}"><b>{L_TRACKER}</b></a><span style="color:#CDCDCD;">|</span>
 			<!-- IF LOGGED_IN && $bb_cfg['gallery_enabled'] --><a href="{U_GALLERY}"><b>{L_GALLERY}</b></a><span style="color:#CDCDCD;">|</span><!-- ENDIF -->
 			<a href="{U_SEARCH}"><b>{L_SEARCH}</b></a><span style="color:#CDCDCD;">|</span>
@@ -346,7 +346,7 @@ function go_to_page ()
 <div id="logo">
 	<!--<h1>{SITENAME}</h1>
 	<h6>{SITE_DESCRIPTION}</h6> -->
-	<a href="{U_INDEX}"><img src="images/logo/logo.png" alt="{SITENAME}" /></a>
+	<!-- IF SEO_LINK_HOME_PAGE --><a href="{U_INDEX}"><!-- ENDIF --><img src="images/logo/logo.png" alt="{SITENAME}" /><!-- IF SEO_LINK_HOME_PAGE --></a><!-- ENDIF -->
 </div>
 <!--/logo-->
 
