@@ -56,7 +56,7 @@ $domain_name = (!empty($_SERVER['SERVER_NAME'])) ? $_SERVER['SERVER_NAME'] : $do
 
 // Increase number of revision after update
 $bb_cfg['tp_version'] = '2.5 Beta';
-$bb_cfg['tp_release_state'] = 'R424';
+$bb_cfg['tp_release_state'] = 'R425';
 $bb_cfg['tp_release_date'] = '30-05-2012';
 
 // Database
@@ -527,4 +527,4 @@ $bb_cfg['captcha'] = array(
 );
 
 // SEO
-$bb_cfg['seo_link_home_page'] = false;
+$bb_cfg['seo_link_home_page'] = true;

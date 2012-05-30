@@ -165,8 +165,19 @@ if ($bb_cfg['reports_enabled'])
 else $report_list = '';
 // Report [END]
 
+// FOR SEO
 $template->assign_vars(array(
-	'SEO_LINK_HOME_PAGE' 		=>	($bb_cfg['seo_link_home_page']) ? ((preg_match('/index\.php/', $_SERVER['SCRIPT_NAME'])) ? false : true) : true,
+	'SEO_LINK_INDEX_PAGE' 			=>	seo_link_header('index'),
+	'SEO_LINK_TRACKER_PAGE' 		=>	seo_link_header('tracker'),
+	'SEO_LINK_GALLERY_PAGE' 		=>	seo_link_header('gallery'),
+	'SEO_LINK_SEARCH_PAGE' 			=>	seo_link_header('search'),
+	'SEO_LINK_FAQ_PAGE' 			=>	seo_link_header('faq'),
+	'SEO_LINK_GROUP_PAGE' 			=>	seo_link_header('groupcp'),
+	'SEO_LINK_MEMEBERLIST_PAGE' 	=>	seo_link_header('memberlist'),
+));
+
+
+$template->assign_vars(array(
 
 	'SIMPLE_HEADER'      		=> !empty($gen_simple_header),
 

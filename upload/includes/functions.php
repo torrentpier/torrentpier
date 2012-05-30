@@ -2870,3 +2870,15 @@ function profile_url($data)
 
 	return $profile;
 }
+
+function seo_link_header($str){
+	/**
+	 * Функция обработки url. Сверяет url с переданным выражением.
+	 */
+	global $bb_cfg;
+
+	$regexp = "/{$str}\.php/";
+	$return = ($bb_cfg['seo_link_home_page']) ? ((preg_match($regexp, $_SERVER['SCRIPT_NAME'])) ? false : true) : true;
+	
+	return $return;
+}
