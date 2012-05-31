@@ -346,7 +346,7 @@ function go_to_page ()
 <div id="logo">
 	<!--<h1>{SITENAME}</h1>
 	<h6>{SITE_DESCRIPTION}</h6> -->
-	<!-- IF SEO_LINK_INDEX_PAGE --><a href="{U_INDEX}"><!-- ENDIF --><img src="images/logo/logo.png" alt="{SITENAME}" /><!-- IF SEO_LINK_HOME_PAGE --></a><!-- ENDIF -->
+	<!-- IF SEO_LINK_INDEX_PAGE --><a href="{U_INDEX}"><!-- ENDIF --><img src="images/logo/logo.png" alt="{SITENAME}" /><!-- IF SEO_LINK_INDEX_PAGE --></a><!-- ENDIF -->
 </div>
 <!--/logo-->
 
