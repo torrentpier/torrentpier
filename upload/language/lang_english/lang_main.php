@@ -1679,7 +1679,7 @@ $lang['EMAILER_DISABLED'] = 'Sorry, this feature is temporarily not working';
 $lang['TERMS_ON'] = 'I agree with these terms and conditions';
 $lang['TERMS_OFF'] = 'I do not agree to these terms';
 $lang['JAVASCRIPT_ON_REGISTER'] = 'To register, heads necessary to enable JavaScript';
-$lang['REGISTERED_IN_TIME'] = "At the moment registration is closed<br /><br />You can register from 01:00 to 17:00 MSK (?????? ". date('H:i') ." MSK)<br /><br />We apologize for this inconvenience";
+$lang['REGISTERED_IN_TIME'] = "At the moment registration is closed<br /><br />You can register from 01:00 to 17:00 MSK (now ". date('H:i') ." MSK)<br /><br />We apologize for this inconvenience";
 
 // Debug
 $lang['EXECUTION_TIME'] = 'Execution time:';
