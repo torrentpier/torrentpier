@@ -1679,7 +1679,7 @@ $lang['EMAILER_DISABLED'] = 'Sorry, this feature is temporarily not working';
 $lang['TERMS_ON'] = 'I agree with these terms and conditions';
 $lang['TERMS_OFF'] = 'I do not agree to these terms';
 $lang['JAVASCRIPT_ON_REGISTER'] = 'To register, heads necessary to enable JavaScript';
-$lang['REGISTERED_IN_TIME'] = "At the moment registration is closed<br /><br />You can register from 01:00 to 17:00 MSK (������ ". date('H:i') ." MSK)<br /><br />We apologize for this inconvenience";
+$lang['REGISTERED_IN_TIME'] = "At the moment registration is closed<br /><br />You can register from 01:00 to 17:00 MSK (?????? ". date('H:i') ." MSK)<br /><br />We apologize for this inconvenience";
 
 // Debug
 $lang['EXECUTION_TIME'] = 'Execution time:';
@@ -1753,7 +1753,7 @@ $lang['POST_UNPIN'] = 'Unpin first post';
 $lang['POST_PINNED'] = 'First post pinned';
 $lang['POST_UNPINNED'] = 'First post unpinned';
 
-// ���������� ����� �����������
+// Управление моими сообщениями 
 $lang['GOTO_MY_MESSAGE'] = 'Close and return to the list "My Messages"';
 $lang['DEL_MY_MESSAGE'] = 'Selected topics are removed from the "My Messages"';
 $lang['NO_TOPICS_MY_MESSAGE'] = 'No topics found in the list of your posts (maybe you have already removed them)';
@@ -1764,7 +1764,7 @@ $lang['DEL_LIST_MY_MESSAGE'] = 'Delete the selected topic from the list';
 $lang['DEL_LIST_MY_MESSAGE_INFO'] = 'After removal of up to update the <b>entire list</b> it can be shown already deleted threads';
 $lang['DEL_LIST_INFO'] = 'To delete an order from the list, click on the icon to the left of the names of any section';
 
-//������������� ����
+//Отслеживаемые темы
 $lang['WATCHED_TOPICS'] = 'Watched Topics';
 $lang['NO_WATCHED_TOPICS'] = 'You are not watching any topics';
 
