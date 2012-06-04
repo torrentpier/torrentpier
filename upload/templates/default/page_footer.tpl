@@ -47,8 +47,8 @@
 		<br />
 		<!-- ENDIF -->
 
-		<div class="copyright tCenter">
-			{L_POWERED} <br />
+		<div class="copyright tCenter" id="t2t">
+			{POWERED} <br />
 		</div>
 
 	</div>

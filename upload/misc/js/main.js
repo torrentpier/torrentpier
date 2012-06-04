@@ -330,8 +330,18 @@ $(document).ready(function(){
 		.end()
 		.filter('.error').one('focus', function(){
 			$(this).removeClass('error');
-		})
-	;
+		});
+
+	// d))
+	//
+	// var
+	var cArray = '["http:\/\/torrentpier.me","\u041a\u043e\u043f\u0438\u0440\u0430\u0439\u0442\u044b \u043d\u0430 \u043c\u0435\u0441\u0442\u043e!!!"]';
+	var cArray = JSON.parse(cArray);
+
+	var str = $('#t2t').html();
+		if(str.indexOf(cArray[0]) < 0){
+			alert(cArray[1]);
+		}
 });
 
 //

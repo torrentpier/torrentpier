@@ -1607,7 +1607,7 @@ $lang['TRACKER_S'] = 'по трекеру';
 
 // copyright
 $lang['NOTICE'] = '!ВНИМАНИЕ!';
-$lang['POWERED'] = 'Powered by <a target="_blank" href="http://torrentpier.me">TorrentPier II</a> &copy; Meithar, TorrentPier II Team';
+$lang['POWERED'] = 'UG93ZXJlZCBieSA8YSB0YXJnZXQ9Il9ibGFuayIgaHJlZj0iaHR0cDovL3RvcnJlbnRwaWVyLm1lIj5Ub3JyZW50UGllciBJSTwvYT4gJmNvcHk7IE1laXRoYXIsIFRvcnJlbnRQaWVyIElJIFRlYW0=';
 $lang['COPY'] = 'Сайт не предоставляет электронные версии произведений, а занимается лишь коллекционированием и каталогизацией ссылок, присылаемых и публикуемых на форуме нашими читателями. Если вы являетесь правообладателем какого-либо представленного материала и не желаете, чтобы ссылка на него находилась в нашем каталоге, свяжитесь с нами, и мы незамедлительно удалим её. Файлы для обмена на трекере предоставлены пользователями сайта, и администрация не несёт ответственности за их содержание. Просьба не заливать файлы, защищенные авторскими правами, а также файлы нелегального содержания!';
 
 $lang['CALLSEED'] = 'Позвать скачавших';
