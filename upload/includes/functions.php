@@ -1863,6 +1863,7 @@ function obtain_word_list(&$orig_word, &$replacement_word)
 	if (!$sql = CACHE('bb_cache')->get('censored'))
 	{
 		$sql = DB()->fetch_rowset("SELECT word, replacement FROM ". BB_WORDS);
+		if(!$sql) $sql = array(array('word' => 1, 'replacement' => 1));
 		CACHE('bb_cache')->set('censored', $sql, 7200);
 	}
 
@@ -2879,6 +2880,6 @@ function seo_link_header($str){
 
 	$regexp = "/{$str}\.php/";
 	$return = ($bb_cfg['seo_link_home_page']) ? ((preg_match($regexp, $_SERVER['SCRIPT_NAME'])) ? false : true) : true;
-	
+
 	return $return;
 }
