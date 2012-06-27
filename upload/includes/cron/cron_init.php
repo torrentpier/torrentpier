@@ -19,6 +19,11 @@ function cron_get_file_lock ()
 	{
 		cron_release_deadlock();
 	}
+	else if (!file_exists(CRON_ALLOWED) && !file_exists(CRON_RUNNING))
+	{
+		file_write('', CRON_ALLOWED);
+		$lock_obtained = @rename(CRON_ALLOWED, CRON_RUNNING);
+	}
 
 	return $lock_obtained;
 }
