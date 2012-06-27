@@ -31,7 +31,7 @@ switch($mode)
 
 		$datastore->clean();
 
-		$this->response['datastore_html'] = 'datastore очищен';
+		$this->response['cache_html'] = 'datastore РѕС‡РёС‰РµРЅ';
 	break;
 
 	case 'delete_profile':
