@@ -307,6 +307,17 @@ function go_to_page ()
 <!-- ELSE -->
 <!--======-->
 
+<script type="text/javascript">
+if (top != self) {
+	allowed_self = /^(translate\.googleusercontent\.com)$/;
+	if (!self.location.hostname.match(allowed_self)) {
+		$(function(){
+			$('body').html('<center><h1><br /><br />Похоже вас пытаются обмануть<br />Сайт '+ self.location.hostname +' открыт во фрейме</h1></center>');
+		});
+	}
+}
+</script>
+
 <!--page_container-->
 <div id="page_container">
 <a name="top"></a>
