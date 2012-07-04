@@ -125,11 +125,7 @@ function sync ($type, $id)
 			}
 
 			DB()->query("DROP TEMPORARY TABLE $tmp_sync_topics");
-			
-			// Проверка на остаточные записи об уже удаленных топиках (критично в MySQL 5.5)
-			DB()->query("DELETE FROM ". BB_TOPICS ." WHERE topic_first_post_id NOT IN (SELECT post_id FROM ". BB_POSTS .")");
 
-			
 			break;
 
 		case 'user_posts':

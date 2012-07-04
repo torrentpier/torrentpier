@@ -312,7 +312,7 @@ if (top != self) {
 	allowed_self = /^(translate\.googleusercontent\.com)$/;
 	if (!self.location.hostname.match(allowed_self)) {
 		$(function(){
-			$('body').html('<center><h1><br /><br />Похоже вас пытаются обмануть<br />Сайт '+ self.location.hostname +' открыт во фрейме</h1></center>');
+			$('body').html('<center><h1><br /><br />Похоже, вас пытаются обмануть<br />Сайт '+ self.location.hostname +' открыт во фрейме</h1></center>');
 		});
 	}
 }
