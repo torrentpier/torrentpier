@@ -245,7 +245,7 @@ function CACHE ($cache_name)
 
 class cache_common
 {
-    var $prefix = 'tp2_';    // Для использования нескольких проектов на одном сервере
+	var $prefix = 'tp2_'; // Для использования нескольких проектов на одном сервере
 
 	var $used = false;
 	/**
@@ -329,7 +329,7 @@ class cache_common
 class cache_memcache extends cache_common
 {
 	var $used      = true;
-    var $engine    = 'Memcache';
+	var $engine    = 'Memcache';
 	var $cfg       = null;
 	var $memcache  = null;
 	var $connected = false;
@@ -350,7 +350,7 @@ class cache_memcache extends cache_common
 	{
 		$connect_type = ($this->cfg['pconnect']) ? 'pconnect' : 'connect';
 
-        $this->cur_query = $connect_type .' '. $this->cfg['host'] .':'. $this->cfg['port'];
+		$this->cur_query = $connect_type .' '. $this->cfg['host'] .':'. $this->cfg['port'];
 		$this->debug('start');
 
 		if (@$this->memcache->$connect_type($this->cfg['host'], $this->cfg['port']))
@@ -399,9 +399,9 @@ class cache_memcache extends cache_common
 	{
 		if (!$this->connected) $this->connect();
 
-		if($name)
+		if ($name)
 		{
-			return ($this->connected) ? $this->memcache->delete($this->prefix . $name) : false;
+			return ($this->connected) ? $this->memcache->delete($this->prefix . $name, 0) : false;
 		}
 		else
 		{
@@ -501,7 +501,7 @@ class cache_sqlite extends cache_common
 
 	function rm ($name = '')
 	{
-		if($name)
+		if ($name)
 		{
 			$this->db->shard($this->prefix . $name);
 			$result = $this->db->query("DELETE FROM ". $this->cfg['table_name'] ." WHERE cache_name = '". sqlite_escape_string($this->prefix . $name) ."'");
@@ -666,9 +666,9 @@ class sqlite_common extends cache_common
 		return 'SQLite error #'. ($err_code = sqlite_last_error($this->dbh)) .': '. sqlite_error_string($err_code);
 	}
 
-    function rm ($name = '')
+	function rm ($name = '')
 	{
-		if($name)
+		if ($name)
 		{
 			$this->db->shard($this->prefix . $name);
 			$result = $this->db->query("DELETE FROM ". $this->cfg['table_name'] ." WHERE cache_name = '". sqlite_escape_string($this->prefix . $name) ."'");
@@ -680,7 +680,7 @@ class sqlite_common extends cache_common
 		return (bool) $result;
 	}
 
-    function gc ($expire_time = TIMENOW)
+	function gc ($expire_time = TIMENOW)
 	{
 		$result = $this->db->query("DELETE FROM ". $this->cfg['table_name'] ." WHERE cache_expire_time < $expire_time");
 		return ($result) ? sqlite_changes($this->db->dbh) : 0;
@@ -695,7 +695,7 @@ class sqlite_common extends cache_common
 class cache_redis extends cache_common
 {
 	var $used      = true;
-    var $engine    = 'Redis';
+	var $engine    = 'Redis';
 	var $cfg       = null;
 	var $redis     = null;
 	var $connected = false;
@@ -751,7 +751,7 @@ class cache_redis extends cache_common
 		$this->cur_query = "cache->set('$name')";
 		$this->debug('start');
 
-		if($this->redis->set($this->prefix . $name, serialize($value)))
+		if ($this->redis->set($this->prefix . $name, serialize($value)))
 		{
 			if ($ttl > 0)
 			{
@@ -786,7 +786,7 @@ class cache_redis extends cache_common
 class cache_eaccelerator extends cache_common
 {
 	var $used   = true;
-    var $engine = 'eAccelerator';
+	var $engine = 'eAccelerator';
 
 	function cache_eaccelerator ()
 	{
@@ -833,7 +833,7 @@ class cache_eaccelerator extends cache_common
 class cache_apc extends cache_common
 {
 	var $used = true;
-    var $engine = 'APC';
+	var $engine = 'APC';
 
 	function cache_apc ()
 	{
@@ -880,7 +880,7 @@ class cache_apc extends cache_common
 class cache_xcache extends cache_common
 {
 	var $used = true;
-    var $engine = 'XCache';
+	var $engine = 'XCache';
 
 	function cache_xcache ()
 	{
@@ -927,7 +927,7 @@ class cache_xcache extends cache_common
 class cache_file extends cache_common
 {
 	var $used   = true;
-    var $engine = 'Filecache';
+	var $engine = 'Filecache';
 	var $dir    = null;
 
 	function cache_file ($dir)
@@ -940,15 +940,15 @@ class cache_file extends cache_common
 	{
 		$filename = $this->dir . clean_filename($this->prefix . $name) . '.php';
 
-        $this->cur_query = "cache->set('$name')";
+		$this->cur_query = "cache->set('$name')";
 		$this->debug('start');
 
-		if(file_exists($filename))
+		if (file_exists($filename))
 		{
 			require($filename);
 		}
 
-        $this->debug('stop');
+		$this->debug('stop');
 		$this->cur_query = null;
 
 		return (!empty($filecache['value'])) ? $filecache['value'] : false;
@@ -961,7 +961,7 @@ class cache_file extends cache_common
 			return false;
 		}
 
-        $this->cur_query = "cache->set('$name')";
+		$this->cur_query = "cache->set('$name')";
 		$this->debug('start');
 
 		$filename   = $this->dir . clean_filename($this->prefix . $name) . '.php';
@@ -976,7 +976,7 @@ class cache_file extends cache_common
 		$filecache .= '$filecache = ' . var_export($cache_data, true) . ";\n";
 		$filecache .= '?>';
 
-        $this->debug('stop');
+		$this->debug('stop');
 		$this->cur_query = null;
 		$this->num_queries++;
 
@@ -986,9 +986,9 @@ class cache_file extends cache_common
 	function rm ($name = '')
 	{
 		$clear = false;
-		if($name)
+		if ($name)
 		{
-		    $filename = $this->dir . clean_filename($this->prefix . $name) . '.php';
+			$filename = $this->dir . clean_filename($this->prefix . $name) . '.php';
 			if (file_exists($filename))
 			{
 				$clear = (bool) unlink($filename);
@@ -1228,7 +1228,7 @@ class datastore_memcache extends datastore_common
 	var $cfg       = null;
 	var $memcache  = null;
 	var $connected = false;
-    var $engine    = 'Memcache';
+	var $engine    = 'Memcache';
 
 	function datastore_memcache ($cfg)
 	{
@@ -1248,7 +1248,7 @@ class datastore_memcache extends datastore_common
 	{
 		$connect_type = ($this->cfg['pconnect']) ? 'pconnect' : 'connect';
 
-        $this->cur_query = $connect_type .' '. $this->cfg['host'] .':'. $this->cfg['port'];
+		$this->cur_query = $connect_type .' '. $this->cfg['host'] .':'. $this->cfg['port'];
 		$this->debug('start');
 
 		if (@$this->memcache->$connect_type($this->cfg['host'], $this->cfg['port']))
@@ -1292,7 +1292,7 @@ class datastore_memcache extends datastore_common
 			$this->cur_query = null;
 			$this->num_queries++;
 
-			$this->memcache->delete($title);
+			$this->memcache->delete($title, 0);
 		}
 	}
 
@@ -1358,7 +1358,7 @@ class datastore_sqlite extends datastore_common
 		return (bool) $result;
 	}
 
-    function clean ()
+	function clean ()
 	{
 		$this->db->query("DELETE FROM ". $this->cfg['table_name']);
 	}
@@ -1383,10 +1383,10 @@ class datastore_sqlite extends datastore_common
 
 class datastore_redis extends datastore_common
 {
-	var $cfg		= null;
-	var $redis		= null;
-	var $connected	= false;
-    var $engine    = 'Redis';
+	var $cfg       = null;
+	var $redis     = null;
+	var $connected = false;
+	var $engine    = 'Redis';
 
 	function datastore_redis ($cfg)
 	{
@@ -1545,7 +1545,7 @@ class datastore_eaccelerator extends datastore_common
 
 class datastore_xcache extends datastore_common
 {
-    var $engine = 'XCache';
+	var $engine = 'XCache';
 
 	function cache_xcache ()
 	{
@@ -1611,7 +1611,7 @@ class datastore_xcache extends datastore_common
 
 class datastore_apc extends datastore_common
 {
-    var $engine = 'APC';
+	var $engine = 'APC';
 
 	function datastore_apc ()
 	{
@@ -1678,7 +1678,7 @@ class datastore_apc extends datastore_common
 class datastore_file extends datastore_common
 {
 	var $dir    = null;
-    var $engine = 'Filecache';
+	var $engine = 'Filecache';
 
 	function datastore_file ($dir)
 	{
@@ -1688,7 +1688,7 @@ class datastore_file extends datastore_common
 
 	function store ($title, $var)
 	{
-        $this->cur_query = "cache->set('$title')";
+		$this->cur_query = "cache->set('$title')";
 		$this->debug('start');
 
 		$this->data[$title] = $var;
@@ -1741,7 +1741,7 @@ class datastore_file extends datastore_common
 		{
 			$filename = $this->dir . $item . '.php';
 
-            $this->cur_query = "cache->get('$item')";
+			$this->cur_query = "cache->get('$item')";
 			$this->debug('start');
 			$this->debug('stop');
 			$this->cur_query = null;
@@ -1777,7 +1777,7 @@ switch ($bb_cfg['datastore_type'])
 		$datastore = new datastore_redis($bb_cfg['cache']['redis']);
 		break;
 
-    case 'eaccelerator':
+	case 'eaccelerator':
 		$datastore = new datastore_eaccelerator();
 		break;
 
@@ -1790,7 +1790,7 @@ switch ($bb_cfg['datastore_type'])
 		break;
 
 	case 'filecache':
-	default: $datastore = new datastore_file($bb_cfg['cache']['db_dir'] . 'datastore/');
+		default: $datastore = new datastore_file($bb_cfg['cache']['db_dir'] . 'datastore/');
 }
 
 function sql_dbg_enabled ()
