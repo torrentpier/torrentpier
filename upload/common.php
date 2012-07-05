@@ -774,7 +774,14 @@ class cache_redis extends cache_common
 	{
 		if (!$this->connected) $this->connect();
 
-		return ($this->connected) ? $this->redis->del($this->prefix . $name) : false;
+		if ($name)
+		{
+			return ($this->connected) ? $this->redis->del($this->prefix . $name) : false;
+		}
+		else
+		{
+			return ($this->connected) ? $this->redis->flushdb() : false;
+		}
 	}
 
 	function is_installed ()
