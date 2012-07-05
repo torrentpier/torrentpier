@@ -875,7 +875,14 @@ class cache_apc extends cache_common
 
 	function rm ($name = '')
 	{
-		return apc_delete($this->prefix . $name);
+		if ($name)
+		{
+			return apc_delete($this->prefix . $name);
+		}
+		else
+		{
+			return apc_clear_cache();
+		}
 	}
 
 	function is_installed ()
@@ -922,7 +929,16 @@ class cache_xcache extends cache_common
 
 	function rm ($name = '')
 	{
-		return xcache_unset($this->prefix . $name);
+		if ($name)
+		{
+			return xcache_unset($this->prefix . $name);
+		}
+		else
+		{
+			xcache_clear_cache(XC_TYPE_PHP, 1);
+			xcache_clear_cache(XC_TYPE_VAR, 1);
+			return;
+		}
 	}
 
 	function is_installed ()
