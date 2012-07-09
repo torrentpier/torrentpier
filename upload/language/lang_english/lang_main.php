@@ -887,18 +887,10 @@ $lang['YOU_BEEN_BANNED'] = 'You have been banned from this forum.<br />Please co
 //
 // Viewonline
 //
-$lang['REG_USERS_ZERO_ONLINE'] = 'There are 0 Registered users and '; // There are 5 Registered and
-$lang['REG_USERS_ONLINE'] = 'There are %d Registered users and '; // There are 5 Registered and
-$lang['REG_USER_ONLINE'] = 'There is %d Registered user and '; // There is 1 Registered and
-$lang['HIDDEN_USERS_ZERO_ONLINE'] = '0 Hidden users online'; // 6 Hidden users online
-$lang['HIDDEN_USERS_ONLINE'] = '%d Hidden users online'; // 6 Hidden users online
-$lang['HIDDEN_USER_ONLINE'] = '%d Hidden user online'; // 6 Hidden users online
-$lang['GUEST_USERS_ONLINE'] = 'There are %d Guest users online'; // There are 10 Guest users online
-$lang['GUEST_USERS_ZERO_ONLINE'] = 'There are 0 Guest users online'; // There are 10 Guest users online
-$lang['GUEST_USER_ONLINE'] = 'There is %d Guest user online'; // There is 1 Guest user online
-$lang['NO_USERS_BROWSING'] = 'There are no users currently browsing this forum';
+$lang['REG_USERS_ONLINE'] = 'Who is online registered users: %d and ';
+$lang['HIDDEN_USERS_ONLINE'] = 'hidden users: %d';
+$lang['GUEST_USERS_ONLINE'] = 'Online Guests: %d';
 $lang['ALL_USERS'] = 'All users:';
-
 $lang['ONLINE_EXPLAIN'] = 'users active over the past five minutes';
 $lang['LAST_UPDATED'] = 'Last Updated';
 

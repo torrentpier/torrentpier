@@ -3,7 +3,7 @@
 define('IN_PHPBB', true);
 define('BB_SCRIPT', 'online');
 define('BB_ROOT', './');
-require(BB_ROOT ."common.php");
+require(BB_ROOT .'common.php');
 
 // Start session management
 $user->session_start(array('req_login' => true));
@@ -109,63 +109,10 @@ while ( $row = DB()->sql_fetchrow($result) )
 	}
 }
 
-if( $registered_users == 0 )
-{
-	$l_r_user_s = $lang['REG_USERS_ZERO_ONLINE'];
-}
-else if( $registered_users == 1 )
-{
-	$l_r_user_s = $lang['REG_USER_ONLINE'];
-}
-else
-{
-	$l_r_user_s = $lang['REG_USERS_ONLINE'];
-}
-
-if( $hidden_users == 0 )
-{
-	$l_h_user_s = $lang['HIDDEN_USERS_ZERO_ONLINE'];
-}
-else if( $hidden_users == 1 )
-{
-	$l_h_user_s = $lang['HIDDEN_USER_ONLINE'];
-}
-else
-{
-	$l_h_user_s = $lang['HIDDEN_USERS_ONLINE'];
-}
-
-if( $guest_users == 0 )
-{
-	$l_g_user_s = $lang['GUEST_USERS_ZERO_ONLINE'];
-}
-else if( $guest_users == 1 )
-{
-	$l_g_user_s = $lang['GUEST_USER_ONLINE'];
-}
-else
-{
-	$l_g_user_s = $lang['GUEST_USERS_ONLINE'];
-}
-
 $template->assign_vars(array(
-	'TOTAL_USERS_ONLINE' => $l_r_user_s + $registered_users + $l_h_user_s + $hidden_users + $l_g_user_s + $guest_users,
-	'TOTAL_REGISTERED_USERS_ONLINE' => sprintf($l_r_user_s, $registered_users) . sprintf($l_h_user_s, $hidden_users),
-	'TOTAL_GUEST_USERS_ONLINE' => sprintf($l_g_user_s, $guest_users))
+	'TOTAL_USERS_ONLINE' => $registered_users + $hidden_users + $guest_users,
+	'TOTAL_REGISTERED_USERS_ONLINE' => sprintf($lang['REG_USERS_ONLINE'], $registered_users) . sprintf($lang['HIDDEN_USERS_ONLINE'], $hidden_users),
+	'TOTAL_GUEST_USERS_ONLINE' => sprintf($lang['GUEST_USERS_ONLINE'], $guest_users))
 );
-
-if ( $registered_users + $hidden_users == 0 )
-{
-	$template->assign_vars(array(
-		'L_NO_REGISTERED_USERS_BROWSING' => $lang['NO_USERS_BROWSING'])
-	);
-}
-
-if ( $guest_users == 0 )
-{
-	$template->assign_vars(array(
-		'L_NO_GUESTS_BROWSING' => $lang['NO_USERS_BROWSING'])
-	);
-}
 
 print_page('viewonline.tpl');
