@@ -251,7 +251,7 @@ ajax.callback.mod_action = function(data) {
 		</td>
 	</tr>
 	<tr>
-		<td class="cat tCenter pad_4"><input type="button" value="{L_DO_SUBMIT}" style="width: 100px;" onclick="window.location.reload();" /></td>
+		<td class="cat tCenter pad_4"><input type="button" value="{L_SUBMIT}" style="width: 100px;" onclick="window.location.reload();" /></td>
 	</tr>
 	</table>
 </div><!--/topic-options-->

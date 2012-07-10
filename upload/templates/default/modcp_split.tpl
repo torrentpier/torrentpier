@@ -53,11 +53,11 @@ function toggle_cbox (cb_id, tr_id)
 	</tr>
 	<!-- //bot end -->
 	<tr>
-	 <td colspan="2" class="catBottom">
-			<input class="liteoption" type="submit" name="delete_posts" value="{L_DELETE_POSTS}" style="width: 140px;" />
-			<input class="liteoption" type="submit" name="split_type_all" value="{L_SPLIT_POSTS}" style="width: 210px;" />
-			<input class="liteoption" type="submit" name="split_type_beyond" value="{L_SPLIT_AFTER}" style="width: 270px;" />
-	 </td>
+	    <td colspan="2" class="catBottom">
+			<input type="submit" name="delete_posts" value="{L_DELETE_POSTS}" style="width: 140px;" />
+            <input type="submit" name="split_type_all" value="{L_SPLIT_POSTS}" style="width: 215px;" />
+            <input type="submit" name="split_type_beyond" value="{L_SPLIT_AFTER}" style="width: 280px;" />
+	    </td>
 	</tr>
 </table>
 <div><img src="{SPACER}" alt="" width="1" height="6" /></div>

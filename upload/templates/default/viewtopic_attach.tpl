@@ -201,7 +201,7 @@
 				<option value="del_torrent_move_topic">{L_DELETE_MOVE_TORRENT}</option>
 			</select>
 
-			&nbsp; <a href="#" onclick="change_torrents($('#tor-{postrow.attach.tor_reged.ATTACH_ID} select').val()); return false;"><input type="submit" value="{L_DO_SUBMIT}" class="liteoption" /></a>
+			&nbsp; <a href="#" onclick="change_torrents($('#tor-{postrow.attach.tor_reged.ATTACH_ID} select').val()); return false;"><input type="submit" value="{L_SUBMIT}" class="liteoption" /></a>
 		<!-- ENDIF -->
 		&nbsp;</td>
 	</tr>

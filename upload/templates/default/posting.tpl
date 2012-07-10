@@ -93,7 +93,7 @@
 
 <tr>
 	<td class="vTop pad_4">
-		<p><b>{L_MESSAGE_BODY}</b></p>
+		<p><b>{L_MESSAGE}</b></p>
 
 		<table id="smilies" class="smilies borderless mrg_16">
 		<!-- BEGIN smilies_row -->

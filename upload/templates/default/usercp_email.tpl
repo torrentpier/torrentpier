@@ -21,7 +21,7 @@
 	<td><input type="text" name="subject" size="80" /></td>
 </tr>
 <tr>
-	<td valign="top"><b>{L_MESSAGE_BODY}</b><p class="small pad_6">{L_EMAIL_MESSAGE_DESC}</p></td>
+	<td valign="top"><b>{L_MESSAGE}</b><p class="small pad_6">{L_EMAIL_MESSAGE_DESC}</p></td>
 	<td><textarea name="message" rows="25" cols="80">{MESSAGE}</textarea></td>
 </tr>
 <tr>

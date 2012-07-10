@@ -673,7 +673,7 @@ td.topic_id { cursor: pointer; }
 		</tr>
 		<tr>
 			<td><img class="topic_icons" src="{FOLDER_LOCKED_IMG}" /></td>
-			<td>{L_NO_NEW_POSTS_LOCKED}</td>
+			<td>{L_TOPIC_LOCKED_SHORT}</td>
 			<td><img class="topic_icons" src="{FOLDER_DOWNLOAD_IMG}" /></td>
 			<td>{L_POST_DOWNLOAD}</td>
 		</tr>

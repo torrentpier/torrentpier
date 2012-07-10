@@ -272,7 +272,7 @@ function OpenInEditor ($file, $line)
 	<tr><td>
 		<form method="get" onsubmit="return go_to_page();">
 			<input id="pg-page" type="text" size="5" maxlength="4" />
-			<input type="submit" value="{L_JUMP_TO}"/>
+			<input type="submit" value="{L_GO}"/>
 		</form>
 	</td></tr>
 	</table>

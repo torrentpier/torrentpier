@@ -29,7 +29,6 @@ $lang['USERNAME'] = 'Username';
 $lang['PASSWORD'] = 'Password';
 $lang['EMAIL'] = 'Email';
 $lang['PM'] = 'PM';
-$lang['POSTER'] = 'Poster';
 $lang['AUTHOR'] = 'Author';
 $lang['TIME'] = 'Time';
 $lang['HOURS'] = 'Hours';
@@ -46,10 +45,8 @@ $lang['3_MONTHS'] = '3 Months';
 $lang['6_MONTHS'] = '6 Months';
 $lang['1_YEAR'] = '1 Year';
 
-$lang['GO'] = 'Go';
-$lang['JUMP_TO'] = 'Jump to';
+$lang['GO'] = 'Jump to';
 $lang['SUBMIT'] = 'Submit';
-$lang['DO_SUBMIT'] = 'Submit';
 $lang['RESET'] = 'Reset';
 $lang['CANCEL'] = 'Cancel';
 $lang['PREVIEW'] = 'Preview';
@@ -164,7 +161,6 @@ $lang['NEW_POSTS'] = 'New posts';
 $lang['NEW_POST'] = 'New post';
 $lang['NO_NEW_POSTS_HOT'] = 'No new posts [ Popular ]';
 $lang['NEW_POSTS_HOT'] = 'New posts [ Popular ]';
-$lang['NO_NEW_POSTS_LOCKED'] = 'Locked';
 $lang['NEW_POSTS_LOCKED'] = 'New posts [ Locked ]';
 $lang['FORUM_LOCKED_MAIN'] = 'Forum is locked';
 
@@ -309,7 +305,6 @@ $lang['SELECT_POSTS_PER_PAGE'] = 'posts per page';
 //
 // Posting/Replying (Not private messaging!)
 //
-$lang['MESSAGE_BODY'] = 'Message body';
 $lang['TOPIC_REVIEW'] = 'Topic review';
 
 $lang['NO_POST_MODE'] = 'No post mode specified'; // If posting.php is called without a mode (newtopic/reply/delete/etc, shouldn't be shown normaly)
@@ -375,14 +370,6 @@ $lang['DAYS'] = 'Days';
 $lang['POLL_FOR_EXPLAIN'] = '[ Enter 0 or leave blank for a never-ending poll ]';
 $lang['DELETE_POLL'] = 'Delete Poll';
 
-$lang['DISABLE_BBCODE_POST'] = 'Disable BBCode in this post';
-$lang['DISABLE_SMILIES_POST'] = 'Disable Smilies in this post';
-
-$lang['BBCODE_IS_ON'] = '%sBBCode%s is <u>ON</u>'; // %s are replaced with URI pointing to FAQ
-$lang['BBCODE_IS_OFF'] = '%sBBCode%s is <u>OFF</u>';
-$lang['SMILIES_ARE_ON'] = 'Smilies are <u>ON</u>';
-$lang['SMILIES_ARE_OFF'] = 'Smilies are <u>OFF</u>';
-
 $lang['ATTACH_SIGNATURE'] = 'Attach signature (signatures can be changed in profile)';
 $lang['NOTIFY'] = 'Notify me when a reply is posted';
 
@@ -392,20 +379,6 @@ $lang['POLL_DELETE'] = 'Your poll has been deleted successfully.';
 $lang['VOTE_CAST'] = 'Your vote has been cast.';
 
 $lang['TOPIC_REPLY_NOTIFICATION'] = 'Topic Reply Notification';
-
-$lang['BBCODE_B_HELP'] = 'Bold text: [b]text[/b]  (alt+b)';
-$lang['BBCODE_I_HELP'] = 'Italic text: [i]text[/i]  (alt+i)';
-$lang['BBCODE_U_HELP'] = 'Underline text: [u]text[/u]  (alt+u)';
-$lang['BBCODE_Q_HELP'] = 'Quote text: [quote]text[/quote]  (alt+q)';
-$lang['BBCODE_C_HELP'] = 'Code display: [code]code[/code]  (alt+c)';
-$lang['BBCODE_L_HELP'] = 'List: [list]text[/list] (alt+l)';
-$lang['BBCODE_O_HELP'] = 'Ordered list: [list=]text[/list]  (alt+o)';
-$lang['BBCODE_P_HELP'] = 'Insert image: [img]http://image_url[/img]  (alt+p)';
-$lang['BBCODE_W_HELP'] = 'Insert URL: [url]http://url[/url] or [url=http://url]URL text[/url]  (alt+w)';
-$lang['BBCODE_A_HELP'] = 'Close all open bbCode tags';
-$lang['BBCODE_S_HELP'] = 'Font color: [color=red]text[/color]  Tip: you can also use color=#FF0000';
-$lang['BBCODE_F_HELP'] = 'Font size: [size=x-small]small text[/size]';
-
 $lang['EMOTICONS'] = 'Emoticons';
 $lang['MORE_EMOTICONS'] = 'View more Emoticons';
 
@@ -1704,21 +1677,20 @@ $lang['CENTER'] = 'Centered';
 $lang['JUSTIFY'] = 'Fit to width';
 $lang['HOR_LINE'] = 'Horizontal line (Ctrl+8)';
 $lang['NEW_LINE'] = 'New line';
-$lang['BOLD'] = 'Bold (Ctrl+B)';
-$lang['ITALIC'] = 'Italic (Ctrl+I)';
-$lang['UNDERLINE'] = 'Underline (Ctrl+U)';
-$lang['STRIKEOUT'] = 'Strikeout (Ctrl+S)';
-$lang['QUOTE_TITLE'] = 'Quote (Ctrl+Q)';
-$lang['IMG_TITLE'] = 'Image (Ctrl+R)';
+$lang['BOLD'] = 'Bold text: [b]text[/b] (Ctrl+B)';
+$lang['ITALIC'] = 'Italic text: [i]text[/i] (Ctrl+I)';
+$lang['UNDERLINE'] = 'Underline text: [u]text[/u] (Ctrl+U)';
+$lang['STRIKEOUT'] = 'Strikeout text: [s]text[/s] (Ctrl+S)';
+$lang['QUOTE_TITLE'] = 'Quote text: [quote]text[/quote]  (Ctrl+Q)';
+$lang['IMG_TITLE'] = 'Insert image: [img]http://image_url[/img]  (Ctrl+R)';
 $lang['URL'] = 'Url';
-$lang['URL_TITLE'] = 'URL (Ctrl+W)';
-$lang['CODE_TITLE'] = 'Code (Ctrl+K)';
+$lang['URL_TITLE'] = 'Insert URL: [url]http://url[/url] or [url=http://url]URL text[/url]  (Ctrl+W)';
+$lang['CODE_TITLE'] = 'Code display: [code]code[/code]  (Ctrl+K)';
 $lang['LIST'] = 'List';
-$lang['LIST_TITLE'] = 'List (Ctrl+L)';
-$lang['LIST_ITEM'] = 'List item (Ctrl+0)';
+$lang['LIST_TITLE'] = 'List: [list]text[/list] (Ctrl+l)';
+$lang['LIST_ITEM'] = 'Ordered list: [list=]text[/list]  (Ctrl+O)';
 $lang['QUOTE_SEL'] = 'Quote selected';
 $lang['JAVASCRIPT_ON'] = 'Heads necessary to send messages to enable JavaScript';
-
 $lang['NEW'] = 'New';
 $lang['NEWEST'] = 'Newest';
 $lang['LATEST'] = 'Latest';

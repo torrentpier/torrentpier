@@ -87,7 +87,7 @@ ajax.callback.posts = function(data){
 	<input type="button" value="s" name="codeS" title="{L_STRIKEOUT}" style="width: 25px; text-decoration: line-through;" />&nbsp;&nbsp;
 	<input type="button" value="{L_QUOTE}" name="codeQuote" title="{L_QUOTE_TITLE}" style="width: 57px;" />
 	<input type="button" value="Img" name="codeImg" title="{L_IMG_TITLE}" style="width: 40px;" />
-	<input type="button" value="{L_URL}" name="codeUrl" title="{L_URL_TITLE}" text-decoration: underline;"  style="width: 63px;"/><input type="hidden" name="codeUrl2" />&nbsp;
+	<input type="button" value="{L_URL}" name="codeUrl" title="{L_URL_TITLE}" text-decoration: underline;" style="width: 63px;"/>&nbsp;
 	<input type="button" value="{L_CODE}" name="codeCode" title="{L_CODE_TITLE}" style="width: 43px;" />
 	<input type="button" value="{L_LIST}" name="codeList" title="{L_LIST_TITLE}"  style="width: 60px;"/>
 	<input type="button" value="1." name="codeOpt" title="{L_LIST_ITEM}" style="width: 30px;" />&nbsp;
@@ -228,8 +228,7 @@ bbcode.addTag("codeS", "s", null, "S", ctrl);
 
 bbcode.addTag("codeQuote", "quote", null, "Q", ctrl);
 bbcode.addTag("codeImg", "img", null, "R", ctrl);
-bbcode.addTag("codeUrl", "url", "/url", "", ctrl);
-bbcode.addTag("codeUrl2", "url=", "/url", "W", ctrl);
+bbcode.addTag("codeUrl", "url", "/url", "W", ctrl);
 
 bbcode.addTag("codeCode", "code", null, "K", ctrl);
 bbcode.addTag("codeList",  "list", null, "L", ctrl);
