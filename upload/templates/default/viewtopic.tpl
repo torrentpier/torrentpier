@@ -84,6 +84,7 @@ function set_hid_chbox (id)
 <div class="spacer_6"></div>
 
 <h1 class="maintitle">
+	<a class="tt-text" href="{U_VIEW_TOPIC}">{TOPIC_TITLE}</a>
 <!-- IF AUTH_MOD -->
 <script type="text/javascript">
 var $tt_td = $('.maintitle');
@@ -117,7 +118,7 @@ ajax.callback.mod_action = function(data) {
 }
 </script>
 <a style="cursor: help; color: #800000;" title="{L_EDIT_TOPIC_TITLE}" onclick="edit_topic_title('edit'); return false" href="#">&para;</a>
-	<a class="tt-text" href="{U_VIEW_TOPIC}">{TOPIC_TITLE}</a>
+
 <div id="tt-edit-tpl" style="display: none;">
 	<div class="tt-edit" style="padding: 4px;">
 		<textarea class="tt-edit-input" rows="2" cols="50" style="width: 98%; height: 35px;"></textarea>

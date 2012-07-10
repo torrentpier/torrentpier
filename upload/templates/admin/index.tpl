@@ -70,8 +70,9 @@ ajax.manage_user = function(mode) {
 	});
 }
 ajax.callback.manage_user = function(data) {
-		$('#cache_clear').html(data.cache_html);
-	}
+	$('#cache').html(data.cache_html);
+	$('#datastore').html(data.datastore_html);
+}
 </script>
 <br />
 
@@ -79,8 +80,8 @@ ajax.callback.manage_user = function(data) {
 	<tr>
 		<td><b>{L_CLEAR_CACHE}:</b></td>
 		<td>
-			<a href="#" onclick="ajax.manage_user('clear_datastore'); return false;">{L_DATASTORE}</a>,&nbsp;
-			<a href="#" onclick="ajax.manage_user('clear_cache'); return false;">{L_ALL_CACHE}</a>&nbsp;<span id="cache_clear" class="seed bold"></span>,&nbsp;
+			<a href="#" id="datastore" onclick="ajax.manage_user('clear_datastore'); return false;">{L_DATASTORE}</a>,&nbsp;
+			<a href="#" id="cache" onclick="ajax.manage_user('clear_cache'); return false;">{L_ALL_CACHE}</a>,&nbsp;
 			<a href="{U_CLEAR_TPL_CACHE}">{L_TEMPLATES}</a>&nbsp;
 		</td>
 	</tr>

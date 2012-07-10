@@ -23,7 +23,7 @@ switch($mode)
 	        CACHE($cache_name)->rm();
         }
 
-	    $this->response['cache_html'] = $lang['ALL_CACHE_CLEARED'];
+	    $this->response['cache_html'] = '<span class="seed bold">'. $lang['ALL_CACHE_CLEARED'] .'</span>';
 	break;
 
 	case 'clear_datastore':
@@ -31,7 +31,7 @@ switch($mode)
 
 		$datastore->clean();
 
-		$this->response['cache_html'] = 'datastore очищен';
+		$this->response['datastore_html'] = '<span class="seed bold">'. $lang['DATASTORE_CLEARED'] .'</span>';
 	break;
 
 	case 'delete_profile':

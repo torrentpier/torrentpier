@@ -78,8 +78,6 @@ $lang['OFF'] = 'ВЫКЛ';
 
 // Clear Cache
 $lang['CLEAR_CACHE'] = 'Очистить кеш';
-$lang['DATASTORE'] = 'Datastore';
-$lang['DATASTORE_CLEARED'] = 'Datastore очищен';
 $lang['TEMPLATES'] = 'Шаблона';
 
 // Update

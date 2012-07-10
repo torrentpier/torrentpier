@@ -95,6 +95,8 @@ $lang['CLICK_RETURN_GROUP'] = 'Click %sHere%s to return to group information';
 $lang['ADMIN_PANEL'] = 'Go to Administration Panel';
 $lang['ALL_CACHE'] = 'All cache';
 $lang['ALL_CACHE_CLEARED'] = 'Cache cleared';
+$lang['DATASTORE'] = 'Datastore';
+$lang['DATASTORE_CLEARED'] = 'Datastore cleared';
 $lang['BOARD_DISABLE'] = 'Sorry, but this board is currently unavailable.  Please try again later.';
 
 $lang['LOADING'] = 'Loading...';

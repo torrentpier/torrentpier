@@ -60,8 +60,6 @@ $lang['OFF'] = 'OFF';
 
 // Clear Cache
 $lang['CLEAR_CACHE'] = 'Clear Cache';
-$lang['DATASTORE'] = 'Datastore';
-$lang['DATASTORE_CLEARED'] = 'Datastore cleared';
 $lang['TEMPLATES'] = 'Templates';
 
 // Update
