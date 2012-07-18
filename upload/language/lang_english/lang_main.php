@@ -1719,7 +1719,7 @@ $lang['POST_UNPIN'] = 'Unpin first post';
 $lang['POST_PINNED'] = 'First post pinned';
 $lang['POST_UNPINNED'] = 'First post unpinned';
 
-// Управление моими сообщениями 
+// Management of my messages 
 $lang['GOTO_MY_MESSAGE'] = 'Close and return to the list "My Messages"';
 $lang['DEL_MY_MESSAGE'] = 'Selected topics are removed from the "My Messages"';
 $lang['NO_TOPICS_MY_MESSAGE'] = 'No topics found in the list of your posts (maybe you have already removed them)';
@@ -1730,7 +1730,7 @@ $lang['DEL_LIST_MY_MESSAGE'] = 'Delete the selected topic from the list';
 $lang['DEL_LIST_MY_MESSAGE_INFO'] = 'After removal of up to update the <b>entire list</b> it can be shown already deleted threads';
 $lang['DEL_LIST_INFO'] = 'To delete an order from the list, click on the icon to the left of the names of any section';
 
-//Отслеживаемые темы
+// Watched topics
 $lang['WATCHED_TOPICS'] = 'Watched Topics';
 $lang['NO_WATCHED_TOPICS'] = 'You are not watching any topics';
 
