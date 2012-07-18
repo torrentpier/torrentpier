@@ -7,7 +7,6 @@ Disallow: /modcp.php
 Disallow: /posting.php
 Disallow: /privmsg.php
 Disallow: /profile.php
-Disallow: /release.php
 Disallow: /viewonline.php
 Crawl-delay: 0.3
 Host: torrentpier.me
