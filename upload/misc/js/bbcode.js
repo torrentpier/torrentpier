@@ -13,6 +13,7 @@ BBCode.prototype = {
   textarea:   null,
   stext:      '',
   quoter:     null,
+  qouted_pid: null,
   collapseAfterInsert: false,
   replaceOnInsert: false,
 
@@ -23,7 +24,7 @@ BBCode.prototype = {
     // Tag for quoting.
     this.addTag(
       '_quoter',
-      function() { return '[quote="'+th.quoter+'"]' },
+      function() { return '[quote="'+th.quoter+'"][qpost='+th.qouted_pid+']' },
       '[/quote]\n',
       null,
       null,
@@ -37,10 +38,11 @@ BBCode.prototype = {
   },
 
   // Insert poster name or poster quotes to the text.
-  onclickPoster: function(name) {
+  onclickPoster: function(name, post_id) {
     var sel = this.getSelection()[0];
 		if (sel) {
 			this.quoter = name;
+			this.qouted_pid = post_id;
 			this.quoterText = sel;
 			this.insertTag('_quoter');
 		} else {

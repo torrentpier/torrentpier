@@ -276,7 +276,7 @@ ajax.callback.mod_action = function(data) {
 		<p class="avatar">{postrow.POSTER_AVATAR}</p>
 	<!-- ELSE -->
 		<!-- IF QUICK_REPLY -->
-		<p class="nick" title="{L_INS_NAME_TIP}" onmouseout="bbcode.refreshSelection(false);" onmouseover="bbcode.refreshSelection(true);" onclick="bbcode.onclickPoster('{postrow.POSTER_NAME_JS}');">
+		<p class="nick" title="{L_INS_NAME_TIP}" onmouseout="bbcode.refreshSelection(false);" onmouseover="bbcode.refreshSelection(true);" onclick="bbcode.onclickPoster('{postrow.POSTER_NAME_JS}', {postrow.POST_ID});">
 			<a href="#" onclick="return false;">{postrow.POSTER_NAME}</a> <!-- IF postrow.POSTER_AUTHOR --><sup>&reg;</sup><!-- ENDIF -->
 		</p>
 		<!-- ELSE -->
