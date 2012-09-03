@@ -410,12 +410,12 @@ td.topic_id { cursor: pointer; }
 		</td>
 
 		<td class="nowrap" style="padding: 0px 4px 2px 4px;">
-			<form action="{PAGE_URL}" method="post" onsubmit="var txt=$('#search-text').val(); return !(txt=='{L_TITLE_SEARCH_HINT}' || !txt);">
+			<form action="{PAGE_URL}" method="post">
 				<input id="search-text" type="text" name="nm"
 				<!-- IF TITLE_MATCH -->
-					value="{TITLE_MATCH}" <!-- IF FOUND_TOPICS -->class="found"<!-- ELSE -->class="error"<!-- ENDIF -->
+					value="{TITLE_MATCH}" required <!-- IF FOUND_TOPICS -->class="found"<!-- ELSE -->class="error"<!-- ENDIF -->
 				<!-- ELSE -->
-					value="{L_TITLE_SEARCH_HINT}" class="hint"
+					placeholder="{L_TITLE_SEARCH_HINT}" required class="hint"
 				<!-- ENDIF -->
 				style="width: 150px;" />
 				<input type="submit" class="bold" value="&raquo;" style="width: 30px;" />

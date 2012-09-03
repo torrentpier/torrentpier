@@ -288,7 +288,7 @@ $(function(){
 				<legend>{L_TITLE_MATCH}</legend>
 				<div>
 					<p class="input">
-						<input style="width: 95%;" class="post" type="text" size="50" maxlength="{TITLE_MATCH_MAX}" name="{TITLE_MATCH_NAME}" value="{TITLE_MATCH_VAL}" />
+						<input style="width: 95%;" class="post" type="text" size="50" maxlength="{TITLE_MATCH_MAX}" name="{TITLE_MATCH_NAME}" value="{TITLE_MATCH_VAL}" required />
 					</p>
 					<p class="chbox med">
 						{ALL_WORDS_CHBOX}

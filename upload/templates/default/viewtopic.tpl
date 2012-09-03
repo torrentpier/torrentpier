@@ -90,11 +90,13 @@ function set_hid_chbox (id)
 var $tt_td = $('.maintitle');
 function edit_topic_title (mode)
 {
-	if (mode == 'edit') {		var tt_text = $tt_td.find('.tt-text').text();
+	if (mode == 'edit') {
+		var tt_text = $tt_td.find('.tt-text').text();
 
 		ajax.tte_orig_html = $tt_td.html();
 		$tt_td.html( $('#tt-edit-tpl').html() );
-		$('.tt-edit-input', $tt_td).val(tt_text).focus();	}
+		$('.tt-edit-input', $tt_td).val(tt_text).focus();
+	}
 	else if (mode == 'save') {
 		var topic_title = $('.tt-edit-input', $tt_td).val();
 
@@ -181,8 +183,8 @@ ajax.callback.mod_action = function(data) {
 		</td>
 
 		<td class="nowrap" style="padding: 0px 4px 2px 4px;">
-			<form action="search.php?t={TOPIC_ID}&amp;dm=1&amp;s=1" method="post" onsubmit="var txt=$('#search-text').val(); return !(txt=='{L_SEARCH_IN_TOPIC}' || !txt);">
-				<input id="search-text" type="text" name="nm" value="{L_SEARCH_IN_TOPIC}" class="hint" style="width: 150px;" />
+			<form action="search.php?t={TOPIC_ID}&amp;dm=1&amp;s=1" method="post">
+				<input id="search-text" type="text" name="nm" class="hint" style="width: 150px;" placeholder="{L_SEARCH_IN_TOPIC}" required />
 				<input type="submit" class="bold" value="&raquo;" style="width: 30px;" />
 			</form>
 		</td>
