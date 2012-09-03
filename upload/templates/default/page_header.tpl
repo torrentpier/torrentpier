@@ -43,7 +43,13 @@ function initQuotes(context)
 	$('div.q', context).each(function(){
 		var $q = $(this);
 		var name = $(this).attr('head');
-		$q.before('<div class="q-head">'+ (name ? '<b>'+name+'</b> {L_WROTE}:' : '<b>{L_QUOTE}</b>') +'</div>');
+		var q_title = (name ? '<b>'+name+'</b> {L_WROTE}:' : '<b>{L_QUOTE}</b>');
+		if ( quoted_pid = $q.children('u.q-post:first').text() ) {
+			var on_this_page = $('#post_'+quoted_pid).length;
+			var href = (on_this_page) ? '#'+ quoted_pid : './viewtopic.php?p='+ quoted_pid +'#'+ quoted_pid;
+			q_title += ' <a href="'+ href +'" title="Перейти к цитируемому сообщению"><img src="{SITE_URL}templates/default/images/icon_latest_reply.gif" class="icon2" alt="" /></a>';
+		}
+		$q.before('<div class="q-head">'+ q_title +'</div>');
 	});
 }
 function initPostImages(context)
@@ -256,7 +262,7 @@ function OpenInEditor ($file, $line)
 </script>
 <!-- ENDIF / INCLUDE_DEVELOP_JS -->
 <style type="text/css">
-	.menu-sub, #ajax-loading, #ajax-error, var.ajax-params, .sp-title { display: none; }
+	.menu-sub, #ajax-loading, #ajax-error, var.ajax-params, .sp-title, .q-post { display: none; }
 </style>
 </head>
 

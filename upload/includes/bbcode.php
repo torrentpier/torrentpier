@@ -509,6 +509,7 @@ class bbcode
 			"#\[url=(https?://$url_exp)\]([^?\n\t].*?)\[/url\]#isu"  => '<a href="$1" class="postLink">$2</a>',
 			"#\[url=(www\.$url_exp)\]([^?\n\t].*?)\[/url\]#isu"      => '<a href="http://$1" class="postLink">$2</a>',
 		    "#\[email\]($email_exp)\[/email\]#isu"                   => '<a href="mailto:$1">$1</a>',
+			"#\[qpost=([0-9]*)\]#isu"                                => '<u class="q-post">$1</u>',
 		);
 
 		$this->str = array(
