@@ -362,7 +362,6 @@ if (top != self) {
 <!--/logo-->
 
 <!-- IF LOGGED_IN -->
-
 <script type="text/javascript">
 ajax.index_data = function(tz) {
 	ajax.exec({
@@ -371,8 +370,7 @@ ajax.index_data = function(tz) {
 		tz      : tz,
 	});
 };
-ajax.callback.index_data = function(data) {
-};
+ajax.callback.index_data = function(data) {};
 $(document).ready(function() {
 	x = new Date();
 	tz = -x.getTimezoneOffset()/60;
@@ -387,9 +385,9 @@ $(document).ready(function() {
 <div class="topmenu">
 <table width="100%" cellpadding="0" cellspacing="0">
 <tr>
-    <td width="40%">
-        {L_USER_WELCOME} &nbsp;<b class="med">{THIS_USER}</b>&nbsp; [ <a href="{U_LOGIN_LOGOUT}" onclick="return confirm('{L_CONFIRM_LOGOUT}');">{L_LOGOUT}</a> ]
-    </td>
+	<td width="40%">
+		{L_USER_WELCOME} &nbsp;<b class="med">{THIS_USER}</b>&nbsp; [ <a href="{U_LOGIN_LOGOUT}" onclick="return confirm('{L_CONFIRM_LOGOUT}');">{L_LOGOUT}</a> ]
+	</td>
 
 	<td align="center" nowrap="nowrap">
 		<!-- BEGIN switch_report_list -->
@@ -398,37 +396,35 @@ $(document).ready(function() {
 		<!-- BEGIN switch_report_list_new -->
 		<strong><a href="{U_REPORT_LIST}" class="mainmenu">{REPORT_LIST} &#0183; </a></strong>
 		<!-- END switch_report_list_new -->
-    </td>
+	</td>
 
 	<td style="padding: 2px;">
-	<div>
-	<form id="quick-search" action="" method="post" onsubmit="
-		$(this).attr('action', $('#search-action').val());
-		var txt=$('#search-text').val(); return !(txt=='{L_SEARCH_S}' || !txt);
-	">
-		<input type="hidden" name="max" value="1" />
-		<input type="hidden" name="to" value="1" />
-		<input id="search-text" type="text" name="nm" onfocus="if(this.value=='{L_SEARCH_S}') this.value='';" onblur="if(this.value=='') this.value='{L_SEARCH_S}';" value="{L_SEARCH_S}" class="hint" style="width: 120px;" />
-		<select id="search-action">
-			<option value="tracker.php#results" selected="selected"> {L_TRACKER_S} </option>
-			<option value="search.php"> {L_FORUM_S} </option>
-		</select>
-		<input type="submit" class="med bold" value="&raquo;" style="width: 30px;" />
-	</form>
-	</div>
+		<div>
+			<form id="quick-search" action="" method="post" onsubmit="$(this).attr('action', $('#search-action').val());">
+				<input type="hidden" name="max" value="1" />
+				<input type="hidden" name="to" value="1" />
+				<input id="search-text" type="text" name="nm" class="hint" style="width: 120px;" placeholder="{L_SEARCH_S}" required />
+				<select id="search-action">
+					<option value="tracker.php#results" selected="selected"> {L_TRACKER_S} </option>
+					<option value="search.php"> {L_FORUM_S} </option>
+				</select>
+				<input type="submit" class="med bold" value="&raquo;" style="width: 30px;" />
+			</form>
+		</div>
 	</td>
-    <td width="50%" class="tRight">
-	    <!-- BEGIN switch_report_general -->
-	    <a href="{U_WRITE_REPORT}">{L_WRITE_REPORT}</a> &#0183;
-	    <!-- END switch_report_general -->
-	    <a href="{U_OPTIONS}"><b>{L_OPTIONS}</b></a> &#0183;
-	    <a href="{U_CUR_DOWNLOADS}">{L_PROFILE}</a> <a href="#dls-menu" class="menu-root menu-alt1">&#9660;</a> &#0183;
-	    <a href="{U_SEARCH_SELF_BY_LAST}">{L_SEARCH_SELF}</a>
-    </td>
-        </tr>
-    </table>
+	<td width="50%" class="tRight">
+		<!-- BEGIN switch_report_general -->
+		<a href="{U_WRITE_REPORT}">{L_WRITE_REPORT}</a> &#0183;
+		<!-- END switch_report_general -->
+		<a href="{U_OPTIONS}"><b>{L_OPTIONS}</b></a> &#0183;
+		<a href="{U_CUR_DOWNLOADS}">{L_PROFILE}</a> <a href="#dls-menu" class="menu-root menu-alt1">&#9660;</a> &#0183;
+		<a href="{U_SEARCH_SELF_BY_LAST}">{L_SEARCH_SELF}</a>
+	</td>
+</tr>
+</table>
 </div>
 <!--/logout-->
+
 <div class="menu-sub" id="dls-menu">
 	<div class="menu-a bold nowrap">
 		<a class="med" href="{U_TRACKER}?rid={SESSION_USER_ID}#results">{L_CUR_UPLOADS}</a>
@@ -456,10 +452,8 @@ $(document).ready(function() {
     </tr>
     </table>
 </div>
-
 <!--/login form-->
 <!-- ENDIF -->
-
 
 <!--breadcrumb-->
 <!--<div id="breadcrumb"></div>-->
