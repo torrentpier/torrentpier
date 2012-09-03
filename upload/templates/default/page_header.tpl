@@ -36,6 +36,7 @@ function initPostBBCode(context)
 	initExternalLinks(context);
 	initPostImages(context);
 	initSpoilers(context);
+	initMedia(context);
 }
 function initQuotes(context)
 {
@@ -122,6 +123,35 @@ function fixPostImage ($img)
 		$img.wrap('<a href="'+ this.src +'" target="_blank"></a>').attr({ src: "{SITE_URL}images/tr_oops.gif", title: "{L_SCREENSHOTS_RULES}" });
 	}
 	return $img;
+}
+function initMedia(context)
+{
+	var apostLink = $('a.postLink', context);
+	for (var i = 0; i < apostLink.length; i++) {
+		var link = apostLink[i];
+		if (typeof link.href != 'string') {
+			continue;
+		}
+		if (/^http(?:s|):\/\/www.youtube.com\/watch\?(.*)?(&?v=([a-z0-9\-_]+))(.*)?|http:\/\/youtu.be\/.+/i.test(link.href)) {
+			var a = document.createElement('span');
+			a.className = 'YTLink';
+			a.innerHTML = '<span title="Начать проигрывание на текущей странице" class="YTLinkButton">&#9658;</span>';
+			window.addEvent(a, 'click', function (e) {
+				var vhref = e.target.nextSibling.href.replace(/^http(?:s|):\/\/www.youtube.com\/watch\?(.*)?(&?v=([a-z0-9\-_]+))(.*)?|http:\/\/youtu.be\//ig, "http://www.youtube.com/embed/$3");
+				var text  = e.target.nextSibling.innerText != "" ? e.target.nextSibling.innerText : e.target.nextSibling.href;
+				$('#Panel_youtube').remove();
+				ypanel('youtube', {
+					title: '<b>' + text + '</b>',
+					resizing: 0,
+					width: 862,
+					height: 550,
+					content: '<iframe width="853" height="510" frameborder="0" allowfullscreen="" src="' + vhref + '?wmode=opaque"></iframe>'
+				});
+			});
+			link.parentNode.insertBefore(a, link);
+			a.appendChild(link);
+		}
+	}
 }
 $(document).ready(function(){
   	$('div.post_wrap, div.signature').each(function(){ initPostBBCode( $(this) ) });
@@ -340,6 +370,13 @@ if (top != self) {
 			<!-- IF SEO_LINK_MEMEBERLIST_PAGE --><a href="{U_MEMBERLIST}"><!-- ENDIF --><b>{L_MEMBERLIST}</b><!-- IF SEO_LINK_MEMEBERLIST_PAGE --></a><!-- ENDIF --><span style="color:#CDCDCD;">|</span>
 		</td>
 		<td class="nowrap" align="right">
+		    <!-- BEGIN switch_report_list -->
+		        <a href="{U_REPORT_LIST}" class="mainmenu">{REPORT_LIST}</a> &#0183;
+		    <!-- END switch_report_list -->
+		    <!-- BEGIN switch_report_list_new -->
+		        <strong><a href="{U_REPORT_LIST}" class="mainmenu">{REPORT_LIST} &#0183; </a></strong>
+		    <!-- END switch_report_list_new -->
+
 			<!-- IF LOGGED_IN -->
 				<!-- IF HAVE_NEW_PM || HAVE_UNREAD_PM -->
 					<a href="{U_READ_PM}" class="new-pm-link"><b>{L_PRIVATE_MESSAGES}: {PM_INFO}</b></a>
@@ -389,26 +426,17 @@ $(document).ready(function() {
 		{L_USER_WELCOME} &nbsp;<b class="med">{THIS_USER}</b>&nbsp; [ <a href="{U_LOGIN_LOGOUT}" onclick="return confirm('{L_CONFIRM_LOGOUT}');">{L_LOGOUT}</a> ]
 	</td>
 
-	<td align="center" nowrap="nowrap">
-		<!-- BEGIN switch_report_list -->
-		<a href="{U_REPORT_LIST}" class="mainmenu">{REPORT_LIST}</a> &#0183;
-		<!-- END switch_report_list -->
-		<!-- BEGIN switch_report_list_new -->
-		<strong><a href="{U_REPORT_LIST}" class="mainmenu">{REPORT_LIST} &#0183; </a></strong>
-		<!-- END switch_report_list_new -->
-	</td>
-
 	<td style="padding: 2px;">
 		<div>
 			<form id="quick-search" action="" method="post" onsubmit="$(this).attr('action', $('#search-action').val());">
 				<input type="hidden" name="max" value="1" />
 				<input type="hidden" name="to" value="1" />
-				<input id="search-text" type="text" name="nm" class="hint" style="width: 120px;" placeholder="{L_SEARCH_S}" required />
+				<input id="search-text" type="text" name="nm" class="hint" placeholder="{L_SEARCH_S}" required />
 				<select id="search-action">
 					<option value="tracker.php#results" selected="selected"> {L_TRACKER_S} </option>
 					<option value="search.php"> {L_FORUM_S} </option>
 				</select>
-				<input type="submit" class="med bold" value="&raquo;" style="width: 30px;" />
+				<input type="submit" class="med" value="{L_SEARCH}" style="width: 55px;" />
 			</form>
 		</div>
 	</td>

@@ -12,18 +12,16 @@
 	* Quote blocks
 	* Spoiler
 
-	? Infoboxes
+	* Infoboxes
 	* Inputs, buttons, forms
 	* Text replacement for buttons
 	* Basic tables
 
 	* Page header
-		- TopMenu, Quick Login, PM Info, Loguot..
+		- TopMenu, Quick Login, PM Info, Loguot, Search..
 		- Logo
 		- Main navigation
 		- Latest News
-	? Breadcrumb
-	? Important info
 
 	* Page content
 	* Sidebar 1
@@ -44,6 +42,7 @@
 	* Misc
 	* Reports
 	* Shortcuts
+	* YouTube Panel
 */
 
 /* ================================================================ *
@@ -545,13 +544,20 @@ table.smilies td { padding: 3px; text-align: center; }
 	#latest_news a { text-decoration: none; color: #000000; }
 	#latest_news .new a { color: #A52A2A; font-weight: bold; }
 /* ---------------------------------- *
-     Breadcrumb [ home >> forum1 >> etc. ]
+    Search input
  * ---------------------------------- */
-#breadcrumb {}
-/* ---------------------------------- *
-     Important info
- * ---------------------------------- */
-#important_info {}
+#search-text {
+	background: white;
+    border: 1px solid silver;
+    padding: 1px;
+    width: 250px;
+}
+#search-text:hover {
+	border: 1px solid #aaaaaa;
+}
+#search-text:focus {
+	border: 1px solid #aaaaaa;
+}
 /* ================================================================ *
      Page content
  * ================================================================ */
@@ -1185,3 +1191,143 @@ select.report_mode option.report_open {
 .tRight    { text-align: right !important; }
 .vBottom   { vertical-align: bottom !important; }
 .vTop      { vertical-align: top !important; }
+/* ================================================================ *
+     YouTube.Panel
+ * ================================================================ */
+.Panels {
+	z-index:200;
+	top:50%;
+	left:50%;
+	background-attachment:fixed, scroll;
+	background: url(../images/aerobg.png), -moz-linear-gradient(top, rgba(200,200,200,0.4) 0%, rgba(255,255,255,1) 100%);
+	background: url(../images/aerobg.png), -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(200,200,200,0.4)), color-stop(100%,rgba(255,255,255,1)));
+	background: url(../images/aerobg.png), -webkit-linear-gradient(top, rgba(200,200,200,0.4) 0%,rgba(255,255,255,1) 100%);
+	background: url(../images/aerobg.png), -o-linear-gradient(top, rgba(200,200,200,0.4) 0%,rgba(255,255,255,1) 100%);
+	background: url(../images/aerobg.png), -ms-linear-gradient(top, rgba(200,200,200,0.4) 0%,rgba(255,255,255,1) 100%);
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#66c8c8c8', endColorstr='#ffffff',GradientType=0 );
+	background: url(../images/aerobg.png), linear-gradient(top, rgba(200,200,200,0.4) 0%,rgba(255,255,255,1) 100%);
+	background-size:cover;
+	-moz-background-size:cover;
+	-webkit-background-size:cover;
+	border:1px solid gray;
+	border-radius:3px;
+	-moz-border-radius:3px;
+	-webkit-border-radius:3px;
+	box-shadow:0 2px 5px rgba(0,0,0,0.3),0 0 1px #FFF inset;
+	-moz-box-shadow:0 2px 5px rgba(0,0,0,0.3),0 0 1px #FFF inset;
+	-webkit-box-shadow:0 2px 5px rgba(0,0,0,0.3),0 0 1px #FFF inset;
+	position:fixed;
+	max-width:99%;
+	min-width:100px;
+	min-height:24px;
+	overflow:hidden;
+	margin:1px;
+}
+
+.Panels.Minimized {
+	position:relative;
+	top:auto!important;
+	left:auto!important;
+	float:left;
+	max-width:200px;
+	height:24px!important;
+	margin:0!important;
+}
+
+.PanelsButton {
+	float:right;
+	overflow:hidden;
+	margin:5px 5px 0px 10px;
+}
+
+.PanelsClose { color: #006699; cursor: pointer; }
+
+.PanelsClose:hover { color: #DD6900; text-decoration: underline !important; }
+.PanelsTitle {
+	overflow:hidden;
+	white-space:nowrap;
+	max-height:20px;
+	font-weight:700;
+}
+
+.Panels.Minimized .PanelsTitle.Hidden {
+	display:block;
+}
+
+.PanelsTitle,.PanelsMenu {
+	padding:5px 5px 0;
+}
+
+.Panels.Minimized .PanelsTitle,.Panels.Minimized .PanelsMenu {
+	cursor:inherit;
+}
+
+.PanelsContent,.PanelsFooter {
+	border-top:1px dashed #A9A9A9;
+	clear:both;
+	margin:5px 0 0;
+	padding:5px;
+}
+
+#PanelsDock {
+	bottom:0;
+	left:0;
+	position:fixed;
+	padding:0 0 0 5px;
+}
+
+#PanelsDockToggle {
+	border:1px solid gray;
+	box-shadow:0 2px 5px rgba(0,0,0,0.3),0 0 1px #FFF inset;
+	-moz-box-shadow:0 2px 5px rgba(0,0,0,0.3),0 0 1px #FFF inset;
+	-webkit-box-shadow:0 2px 5px rgba(0,0,0,0.3),0 0 1px #FFF inset;
+	float:left;
+	border-radius:0 3px 3px 0;
+	-moz-border-radius:0 3px 3px 0;
+	-webkit-border-radius:0 3px 3px 0;
+	margin:1px 1px 1px 0;
+	padding:4px 10px;
+}
+
+.Panels.Minimized .PanelsMenu,.Panels.Minimized .PanelsContent,.Panels.Minimized .PanelsFooter,.PanelsTitle.Hidden,.PanelsMenu.Hidden {
+	display:none;
+}
+span.button {
+	background-image:url(../images/def_button.png);
+}
+
+span.button:hover {
+	background-image:url(../images/def_button_light.png);
+}
+
+span.YTLink{
+	background-color:gray;
+	border:1px solid #333333;
+	display:inline-block;
+	font-weight:bold;
+	padding:2px 2px 2px 5px;
+	margin:1px 2px -6px;
+	border-radius:3px;
+	-moz-border-radius:3px;
+	-webkit-border-radius:3px;
+}
+span.YTLinkButton{
+	background-color:#008500;
+	border:1px solid #333333;
+	color:white;
+	display:inline-block;
+	float:right;
+	margin:-3px -3px -3px 4px;
+	padding:2px 4px;
+	-webkit-border-top-right-radius: 3px;
+	-webkit-border-bottom-right-radius: 3px;
+	-moz-border-radius-topright: 3px;
+	-moz-border-radius-bottomright: 3px;
+	border-top-right-radius: 3px;
+	border-bottom-right-radius: 3px;
+	cursor: url(../images/link_help.cur), pointer;
+}
+span.YTLink a.postLink{
+	color:white;
+	float:left;
+}
