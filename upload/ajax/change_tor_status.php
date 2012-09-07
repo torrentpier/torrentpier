@@ -6,13 +6,12 @@ global $userdata, $bb_cfg, $lang;
 
 if (!isset($this->request['attach_id'])) $this->ajax_die($lang['EMPTY_ATTACH_ID']);
 
-$attach_id  = (int) $this->request['attach_id'];	
+$attach_id  = (int) $this->request['attach_id'];
 $mode    = (string) $this->request['mode'];
 
 if($bb_cfg['tor_comment'])
 {
     $comment = (string) $this->request['comment'];
-    // $topic_title = $this->request['title'];
 }
 
 $tor = DB()->fetch_row("
