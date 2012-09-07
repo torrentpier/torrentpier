@@ -244,8 +244,23 @@ var Menu = {
 	setLocation: function() {
 		var CSS = this.$root.offset();
 		CSS.top  += this.$root.height() + this.offsetCorrection_Y;
+		var curTop = parseInt(CSS.top);
+		var tCorner = $(document).scrollTop() + $(window).height() - 20;
+		var maxVisibleTop = Math.min(curTop, Math.max(0, tCorner - this.$menu.height()));
+		if (curTop != maxVisibleTop) {
+			CSS.top = maxVisibleTop;
+		}
 		CSS.left += this.offsetCorrection_X;
+		var curLeft = parseInt(CSS.left);
+		var rCorner = $(document).scrollLeft() + $(window).width() - 6;
+		var maxVisibleLeft = Math.min(curLeft, Math.max(0, rCorner - this.$menu.width()));
+		if (curLeft != maxVisibleLeft) {
+			CSS.left = maxVisibleLeft;
+		}
 		this.$menu.css(CSS);
+		if (this.iframeFix) {
+			$('iframe.ie-fix-select-overlap', $menu).css({ width: $menu.width(), height: $menu.height() });
+		}
 	},
 
 	fixLocation: function() {
@@ -287,7 +302,7 @@ var Menu = {
 	showClickedMenu: function() {
 		this.setLocation();
 		this.$menu.css({display: 'block'});
-		this.fixLocation();
+		// this.fixLocation();
 		this.activeMenuId = this.clickedMenuId;
 	},
 
