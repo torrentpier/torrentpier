@@ -12,14 +12,15 @@ $mode    = (string) $this->request['mode'];
 if($bb_cfg['tor_comment'])
 {
     $comment = (string) $this->request['comment'];
-    $topic_title = $this->request['title'];
+    // $topic_title = $this->request['title'];
 }
 
 $tor = DB()->fetch_row("
 	SELECT
-		tor.poster_id, tor.forum_id, tor.topic_id, tor.tor_status, tor.checked_time, tor.checked_user_id, f.cat_id
+		tor.poster_id, tor.forum_id, tor.topic_id, tor.tor_status, tor.checked_time, tor.checked_user_id, f.cat_id, t.topic_title
 	FROM       ". BB_BT_TORRENTS ." tor
 	INNER JOIN ". BB_FORUMS      ." f ON(f.forum_id = tor.forum_id)
+	INNER JOIN ". BB_TOPICS      ." t ON(t.topic_id = tor.topic_id)
 	WHERE tor.attach_id = $attach_id
 	LIMIT 1
 ");
@@ -78,7 +79,7 @@ switch($mode)
 		{
 		    if($tor['poster_id'] > 0)
 			{    
-				$subject = sprintf($lang['TOR_MOD_TITLE'], $topic_title);
+				$subject = sprintf($lang['TOR_MOD_TITLE'], $tor['topic_title']);
 			    $message = sprintf($lang['TOR_MOD_MSG'], get_username($tor['poster_id']), make_url(TOPIC_URL . $tor['topic_id']), $bb_cfg['tor_icons'][$new_status] .' '.$lang['TOR_STATUS_NAME'][$new_status]);
 		        if($comment && $comment != $lang['COMMENT']) $message .= "\n\n[b]". $lang['COMMENT'] .'[/b]: '. $comment;
 
@@ -92,9 +93,9 @@ switch($mode)
     case 'status_reply':
 		if(!$bb_cfg['tor_comment']) $this->ajax_die($lang['MODULE_OFF']);
 		
-		$subject = sprintf($lang['TOR_AUTH_TITLE'], $topic_title);
+		$subject = sprintf($lang['TOR_AUTH_TITLE'], $tor['topic_title']);
 		
-		$message = sprintf($lang['TOR_AUTH_MSG'], get_username($tor['checked_user_id']), make_url(TOPIC_URL . $tor['topic_id']), $topic_title);		
+		$message = sprintf($lang['TOR_AUTH_MSG'], get_username($tor['checked_user_id']), make_url(TOPIC_URL . $tor['topic_id']), $tor['topic_title']);		
 		if($comment && $comment != $lang['COMMENT']) $message .= "\n\n[b]". $lang['COMMENT'] .'[/b]: '. $comment;
 	    
 	    send_pm($tor['checked_user_id'], $subject, $message, $userdata['user_id']);

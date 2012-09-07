@@ -271,7 +271,6 @@
 						action    : 'change_tor_status',
 						attach_id : {postrow.attach.tor_reged.ATTACH_ID},
 						mode      : mode,
-						title     : '{TOPIC_TITLE}',
 						status    : $('#sel_status').val(),
 						comment   : $('#comment').val(),
 					});
