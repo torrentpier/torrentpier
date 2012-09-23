@@ -22,6 +22,10 @@ $images['icon_mod']            = $_main .'icon_mod.gif';
 $images['icon_www']            = $_lang .'icon_www.gif';
 $images['icon_icq']            = $_lang .'icon_icq_add.gif';
 
+$images['icon_birthday']       = $_main .'icon_birthday.gif';
+$images['icon_male']           = $_main .'icon_male.gif';
+$images['icon_female']         = $_main .'icon_female.gif';
+
 // post_icons
 $images['icon_minipost']       = $_main .'icon_minipost.gif';
 $images['icon_gotopost']       = $_main .'icon_minipost.gif';

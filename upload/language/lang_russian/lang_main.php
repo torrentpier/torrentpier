@@ -570,6 +570,7 @@ $lang['GENDER_SELECT'] = array(
 $lang['MODULE_OFF'] = 'Модуль отключен!';
 
 $lang['BIRTHDAY'] = 'День рождения';
+$lang['HAPPY_BIRTHDAY'] = 'С Днем Рождения!';
 $lang['WRONG_BIRTHDAY_FORMAT'] = 'Дата рождения указана неверно';
 $lang['AGE'] = 'Возраст';
 $lang['BIRTHDAY_TO_HIGH'] = 'Извините, сайт запрещено посещать пользователям старше %d лет';

@@ -375,10 +375,10 @@ if ($t_data['topic_show_first_post'] && $start)
 {
 	$first_post = DB()->fetch_rowset("
 		SELECT
-		  u.username, u.user_id, u.user_posts, u.user_from,
-		  u.user_regdate, u.user_rank, u.user_sig,
+		  u.username, u.user_id, u.user_rank, u.user_posts, u.user_from,
+		  u.user_regdate, u.user_sig,
 		  u.user_avatar, u.user_avatar_type,
-		  u.user_opt,
+		  u.user_opt, u.user_gender, u.user_birthday,
 		  p.*,
 		  h.post_html, IF(h.post_html IS NULL, pt.post_text, NULL) AS post_text
 		FROM      ". BB_POSTS      ." p
@@ -393,10 +393,10 @@ if ($t_data['topic_show_first_post'] && $start)
 // 2. All others posts
 $sql = "
 	SELECT
-	  u.username, u.user_id, u.user_posts, u.user_from,
-	  u.user_regdate, u.user_rank, u.user_sig,
+	  u.username, u.user_id, u.user_rank, u.user_posts, u.user_from,
+	  u.user_regdate, u.user_sig,
 	  u.user_avatar, u.user_avatar_type,
-	  u.user_opt,
+	  u.user_opt, u.user_gender, u.user_birthday,
 	  p.*,
 	  h.post_html, IF(h.post_html IS NULL, pt.post_text, NULL) AS post_text
 	FROM      ". BB_POSTS      ." p
@@ -807,6 +807,8 @@ require_once(INC_DIR ."functions_report.php");
 $report_post = report_modules('name', 'report_post');
 // Report [END]
 
+$this_date = bb_date(TIMENOW ,'md', 'false');
+
 //
 // Okay, let's do the loop, yeah come on baby let's do the loop
 // and it goes like this ...
@@ -815,6 +817,8 @@ for($i = 0; $i < $total_posts; $i++)
 {
 	$poster_id = $postrow[$i]['user_id'];
 	$poster = ( $poster_id == ANONYMOUS ) ? $lang['GUEST'] : $postrow[$i]['username'];
+
+    $poster_birthday = ($postrow[$i]['user_id'] != ANONYMOUS) ? realdate($postrow[$i]['user_birthday'], 'md') : 0;
 
 	$post_date = bb_date($postrow[$i]['post_time'], $bb_cfg['post_date_format']);
 	$max_post_time = max($max_post_time, $postrow[$i]['post_time']);
@@ -855,13 +859,7 @@ for($i = 0; $i < $total_posts; $i++)
 	}
 
 	// Buttons
-	$pm_btn = '';
-	$profile_btn = '';
-
-	$delpost_btn = '';
-	$edit_btn = '';
-	$ip_btn = '';
-	$quote_btn = '';
+	$pm_btn = $profile_btn = $delpost_btn = $edit_btn = $ip_btn = $quote_btn = '';
 
 	if ($poster_id != ANONYMOUS)
 	{
@@ -975,6 +973,20 @@ for($i = 0; $i < $total_posts; $i++)
 		$report_img = $report = '';
 	}
 	// Report [END]
+	
+	// Gender
+	switch($postrow[$i]['user_gender']) 
+    { 
+	    case MALE: 
+		    $gender = '<img src="'. $images['icon_male'] .'" alt="" title="'. $lang['GENDER_SELECT'][1] .'" border="0" />';
+		    break; 
+	    case FEMALE: 
+		    $gender = '<img src="'. $images['icon_female'] .'" alt="" title="'. $lang['GENDER_SELECT'][2] .'" border="0" />';
+			break; 
+	    default: 
+		    $gender = '';
+            break;			
+    }
 
 	$template->assign_block_vars('postrow', array(
 		'ROW_CLASS'          => !($i % 2) ? 'row1' : 'row2',
@@ -992,6 +1004,7 @@ for($i = 0; $i < $total_posts; $i++)
 		'POSTER_BOT'         => ($poster_id == BOT_UID),
 		'POSTER_ID'          => $poster_id,
 		'POSTER_AUTHOR'      => ($poster_id == $t_data['topic_poster']),
+		'POSTER_GENDER'      => ($bb_cfg['gender'] && $gender) ? $gender : '',
 		'POSTED_AFTER'       => ($prev_post_time) ? delta_time($postrow[$i]['post_time'], $prev_post_time) : '',
 		'IS_UNREAD'          => is_unread($postrow[$i]['post_time'], $topic_id, $forum_id),
 		'IS_FIRST_POST'      => (!$start && ($postrow[$i]['post_id'] == $t_data['topic_first_post_id'])),
@@ -1003,17 +1016,16 @@ for($i = 0; $i < $total_posts; $i++)
 		'SIGNATURE'          => $user_sig,
 		'EDITED_MESSAGE'     => $l_edited_by,
 
-		'PM'      => $pm_btn,
-		'PROFILE' => $profile_btn,
+		'PM'                 => $pm_btn,
+		'PROFILE'            => $profile_btn,
 
-		'QUOTE'   => $quote_btn,
-		'EDIT'    => $edit_btn,
-		'DELETE'  => $delpost_btn,
-		'IP'      => $ip_btn,
+		'QUOTE'              => $quote_btn,
+		'EDIT'               => $edit_btn,
+		'DELETE'             => $delpost_btn,
+		'IP'                 => $ip_btn,
 
-		// Report
-		'REPORT'  => ($bb_cfg['text_buttons']) ? $report : $report_img,
-		// Report [END]
+		'REPORT'             => ($bb_cfg['text_buttons']) ? $report : $report_img,
+		'POSTER_BIRTHDAY'    => ($bb_cfg['birthday_enabled'] && $this_date == $poster_birthday) ? '<img src="'. $images['icon_birthday'] .'" alt="" title="'. $lang['HAPPY_BIRTHDAY'] .'" border="0" />' : '',
 	));
 
 	if ($postrow[$i]['post_attachment'] && $is_auth['auth_download'] && function_exists('display_post_attachments'))

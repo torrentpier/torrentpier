@@ -563,6 +563,7 @@ $lang['GENDER_SELECT'] = array(
 );
 
 $lang['BIRTHDAY'] = 'Birthday';
+$lang['HAPPY_BIRTHDAY'] = 'Happy Birthday!';
 $lang['WRONG_BIRTHDAY_FORMAT'] = 'The birthday format was entered incorrectly.';
 $lang['AGE'] = 'Age';
 $lang['BIRTHDAY_TO_HIGH'] = 'Sorry, this site, does not accept user older than %d years old';
