@@ -988,6 +988,16 @@ for($i = 0; $i < $total_posts; $i++)
             break;			
     }
 
+	$post_mod_comment_html = '';
+	if ($postrow[$i]['post_mod_comment_type'] == 1)
+	{
+		$post_mod_comment_html = '<div class="mcBlock"><table cellspacing="0" cellpadding="0" border="0"><tr><td class="mcTd1C">K</td><td class="mcTd2C"><a href="profile.php?mode=viewprofile&u='. $postrow[$i]['post_mc_mod_id'] .'">'. $postrow[$i]['post_mc_mod_name'] .'</a> '. $lang['WROTE'] .':<br /><br />'. bbcode2html($postrow[$i]['post_mod_comment']) .'</td></tr></table></div>';
+	}
+	else if ($postrow[$i]['post_mod_comment_type'] == 2)
+	{
+		$post_mod_comment_html = '<div class="mcBlock"><table cellspacing="0" cellpadding="0" border="0"><tr><td class="mcTd1W">!</td><td class="mcTd2W"><a href="profile.php?mode=viewprofile&u='. $postrow[$i]['post_mc_mod_id'] .'">'. $postrow[$i]['post_mc_mod_name'] .'</a> '. $lang['WROTE'] .':<br /><br />'. bbcode2html($postrow[$i]['post_mod_comment']) .'</td></tr></table></div>';
+	}
+
 	$template->assign_block_vars('postrow', array(
 		'ROW_CLASS'          => !($i % 2) ? 'row1' : 'row2',
 		'POST_ID'            => $postrow[$i]['post_id'],
@@ -1026,6 +1036,10 @@ for($i = 0; $i < $total_posts; $i++)
 
 		'REPORT'             => ($bb_cfg['text_buttons']) ? $report : $report_img,
 		'POSTER_BIRTHDAY'    => ($bb_cfg['birthday_enabled'] && $this_date == $poster_birthday) ? '<img src="'. $images['icon_birthday'] .'" alt="" title="'. $lang['HAPPY_BIRTHDAY'] .'" border="0" />' : '',
+
+		'POST_MOD_COMMENT'   => ($postrow[$i]['post_mod_comment'] && $postrow[$i]['post_mod_comment_type']) ? $post_mod_comment_html : '',
+		'POST_MC_BBCODE'     => str_replace("\n", '\n', $postrow[$i]['post_mod_comment']),
+		'POST_MC_TYPE'       => $postrow[$i]['post_mod_comment_type'],
 	));
 
 	if ($postrow[$i]['post_attachment'] && $is_auth['auth_download'] && function_exists('display_post_attachments'))

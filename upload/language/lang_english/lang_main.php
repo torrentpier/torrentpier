@@ -1740,5 +1740,7 @@ $lang['INDEX_RETURN'] = 'Back to home page';
 $lang['FORUM_RETURN'] = 'Back to Forum';
 $lang['TOPIC_RETURN'] = 'Back to the topic';
 $lang['POST_RETURN']  = 'Go to post';
-$lang['PROFILE_EDIT_RETURN']  = 'Return to editing';
-$lang['PROFILE_RETURN']  = 'Go to the Profile';
+$lang['PROFILE_EDIT_RETURN'] = 'Return to editing';
+$lang['PROFILE_RETURN'] = 'Go to the Profile';
+
+$lang['WARNING'] = 'Warning';

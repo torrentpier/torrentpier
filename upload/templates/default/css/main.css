@@ -918,6 +918,11 @@ a.menu-root, a.menu-root:visited, a.menu-root:hover {
 .menu-a { background: #FFFFFF; border: 1px solid #92A3A4; }
 .menu-a a { color: #0000A0; background: #E7E7E7; padding: 4px 10px 5px; margin: 1px; display: block; text-decoration: none !important; }
 .menu-a a:hover { color: #0000FF; background: #D1D7DC; text-decoration: none !important; }
+
+.mc{ background:#E7E7E7; padding:5px; font-size:11px;}
+.mc-bord{ background:#fff; padding:1px; border:1px solid #92A3A4;}
+.mc-th{ background:#71869F; color:#F0F8FF; padding:4px; border-bottom:1px solid #fff; font-weight:bold; font-size:11px; text-align:center;}
+.mc-but{ background:#B5BEC3; padding:4px; border-top:1px solid #fff; text-align:center;}
 /* ================================================================ *
      Ajax
  * ================================================================ */
@@ -1332,3 +1337,26 @@ span.YTLink a.postLink{
 	color:white;
 	float:left;
 }
+
+/* Mod comment */
+.mcBlock{
+	border:1px solid #92a3a4; width:90%; margin:30px 0 0 30px; padding:4px;
+	border-radius:4px; -moz-border-radius:4px; -webkit-border-radius:4px;
+	box-shadow:0px 0px 5px #999; -moz-box-shadow:0px 0px 5px #999; -webkit-box-shadow:0px 0px 5px #999;
+}
+.mcBlock table{ width:100%;}
+.mcTd1C, .mcTd1W{
+	width:50px;
+	font:45px Georgia, serif; color:#e7e7e7; font-weight:bold;
+	border:1px solid #eff0f3;
+	padding:2px 0 0;
+	text-align:center;
+}
+.mcTd2C, .mcTd2W{ background:#e7e7e7 !important; border:1px solid #e1e1e1; padding:10px;}
+.mcTd1C{ background:#71869f !important; border:1px solid #536479; text-shadow:0 0 10px #1d232c;}
+.mcTd2C{ color:#262e37;}
+.mcTd1W{ background:#751717 !important; border:1px solid #5e0000; text-shadow:0 0 10px #200000;}
+.mcTd2W{ color:#3e0000;}
+	
+
+ 

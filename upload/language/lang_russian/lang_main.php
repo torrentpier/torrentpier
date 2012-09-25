@@ -1749,5 +1749,7 @@ $lang['INDEX_RETURN'] = 'Вернуться на главную';
 $lang['FORUM_RETURN'] = 'Вернуться в форум';
 $lang['TOPIC_RETURN'] = 'Вернуться в тему';
 $lang['POST_RETURN']  = 'Перейти к сообщению';
-$lang['PROFILE_EDIT_RETURN']  = 'Вернуться к редактированию';
-$lang['PROFILE_RETURN']  = 'Перейти к просмотру профиля';
+$lang['PROFILE_EDIT_RETURN'] = 'Вернуться к редактированию';
+$lang['PROFILE_RETURN'] = 'Перейти к просмотру профиля';
+
+$lang['WARNING'] = 'Предупреждение';
