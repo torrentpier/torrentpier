@@ -144,7 +144,7 @@ if (!empty($page_cfg['load_tpl_vars']) AND $vars = array_flip($page_cfg['load_tp
 			'DELETE_POST_IMG' => ($bb_cfg['text_buttons']) ? $lang['DELETE_POST_TXTB']      : '<img src="'. $images['icon_delpost'] .'" alt="'.$lang['DELETE_POST_TXTB'].'" title="'. $lang['DELETE_POST'] .'" />',
 			'IP_POST_IMG'     => ($bb_cfg['text_buttons']) ? $lang['VIEW_IP_TXTB']          : '<img src="'. $images['icon_ip']      .'" alt="'.$lang['VIEW_IP_TXTB'].'" title="'. $lang['VIEW_IP'] .'" />',
 			'MOD_POST_IMG'    => ($bb_cfg['text_buttons']) ? $lang['MODERATE_POST_TXTB']    : '<img src="'. $images['icon_mod']     .'" alt="'.$lang['MODERATE_POST_TXTB'].'" title="'. $lang['MODERATE_POST'] .'" />',
-			'MC_IMG'          => ($bb_cfg['text_buttons']) ? 'Comment' : '<img src="'. $images['icon_mc']   .'" alt="Comment" title="Comment" />',
+			'MC_IMG'          => ($bb_cfg['text_buttons']) ? '['.$lang['COMMENT'].']'       : '<img src="'. $images['icon_mc']      .'" alt="['.$lang['COMMENT'].']" title="'.$lang['COMMENT'].'" />',
 
 			'QUOTE_URL'       => BB_ROOT ."posting.php?mode=quote&amp;p=",
 			'EDIT_POST_URL'   => BB_ROOT ."posting.php?mode=editpost&amp;p=",
