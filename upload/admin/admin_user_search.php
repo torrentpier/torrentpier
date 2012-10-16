@@ -1295,7 +1295,7 @@ else
 			'ABLED' => ( ( $rowset[$i]['user_active'] ) ? $lang['ENABLED'] : $lang['DISABLED'] ),
 
 			'U_VIEWPOSTS' => "../search.php?search_author=1&amp;uid={$rowset[$i]['user_id']}",
-			'U_MANAGE' => '../profile.php?mode=editprofile&'. POST_USERS_URL .'='.$rowset[$i]['user_id'],
+			'U_MANAGE' => '../profile.php?mode=editprofile&'. POST_USERS_URL .'='.$rowset[$i]['user_id'].'&admin=1',
 			'U_PERMISSIONS' => 'admin_ug_auth.php?mode=user&'. POST_USERS_URL .'='. $rowset[$i]['user_id'],
 		));
 	}
