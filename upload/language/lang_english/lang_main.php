@@ -883,6 +883,7 @@ $lang['LOCK'] = 'Lock';
 $lang['UNLOCK'] = 'Unlock';
 
 $lang['TOPICS_REMOVED'] = 'The selected topics have been successfully removed from the database.';
+$lang['NO_TOPICS_REMOVED'] = 'No topics were removed.';
 $lang['TOPICS_LOCKED'] = 'The selected topics have been locked.';
 $lang['TOPICS_MOVED'] = 'The selected topics have been moved.';
 $lang['TOPICS_UNLOCKED'] = 'The selected topics have been unlocked.';

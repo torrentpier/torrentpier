@@ -109,12 +109,11 @@ if (DEBUG) {
 	';
 }
 
+echo '</div><!-- / sqlLogHead -->';
+ 
 if ($sql_log)
 {
-echo '
-</div><!-- / sqlLogHead -->
-
-<div class="sqlLog" id="sqlLog">
+echo '<div class="sqlLog" id="sqlLog">
 '. ($sql_log ? $sql_log : '') .'
 '. (UA_IE ? '<br />' : '') .'
 </div><!-- / sqlLog -->

@@ -263,7 +263,7 @@ switch ($mode)
 				$datastore->update('network_news');
 			}
 
-			$msg = ($result) ? $lang['TOPICS_REMOVED'] : 'No topics were removed';
+			$msg = ($result) ? $lang['TOPICS_REMOVED'] : $lang['NO_TOPICS_REMOVED'];
 			message_die(GENERAL_MESSAGE, return_msg_mcp($msg));
 		}
 		else
