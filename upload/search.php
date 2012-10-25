@@ -818,7 +818,7 @@ if ($items_display)
 
 		'DL_CONTROLS'      => ($dl_search && $dl_user_id_val == $user_id),
 		'DL_ACTION'        => 'dl_list.php',
-		'MY_POSTS'         => ($my_posts && $user->id == $poster_id_val),
+		'MY_POSTS'         => (!$post_mode && $my_posts && $user->id == $poster_id_val),
 	));
 
 	print_page('search_results.tpl');

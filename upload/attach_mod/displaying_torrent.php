@@ -2,7 +2,7 @@
 
 if (!defined('IN_PHPBB')) die(basename(__FILE__));
 
-global $bb_cfg, $t_data, $poster_id, $is_auth, $dl_link_css, $dl_status_css;
+global $bb_cfg, $t_data, $poster_id, $is_auth, $dl_link_css, $dl_status_css, $lang, $images;
 
 $change_peers_bgr_over = true;
 $bgr_class_1    = 'row1';
@@ -15,7 +15,7 @@ $peers_overflow_div_height = '400px';
 $peers_div_style_normal    = 'padding: 3px;';
 $peers_div_style_overflow  = "padding: 6px; height: $peers_overflow_div_height; overflow: auto; border: 1px inset;";
 $s_last_seed_date_format   = 'Y-m-d';
-$upload_image              = '<img src="images/icon_dn.gif" alt="" border="0" />';
+$upload_image              = '<img src="'. $images['icon_dn'] .'" alt="'. $lang['DL_TORRENT'] .'" border="0" />';
 
 $peers_cnt = $seed_count = 0;
 $seeders = $leechers = '';

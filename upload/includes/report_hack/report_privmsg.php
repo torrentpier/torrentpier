@@ -232,7 +232,7 @@ class report_privmsg extends report_module
 	function _subject_details_prepare(&$message, &$subject, $row)
 	{
 		global $bb_cfg, $userdata, $datastore;
-		include(INC_DIR . "bbcode.php");
+		require_once(INC_DIR . "bbcode.php");
 
 		//
 		// If the board has HTML off but the post has HTML
