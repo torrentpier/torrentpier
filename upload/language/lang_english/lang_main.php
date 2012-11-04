@@ -1456,9 +1456,6 @@ $lang['COLOR_DARK_GREEN'] = 'Dark Green';
 
 //txtb
 $lang['ICQ_TXTB'] = '[ICQ]';
-$lang['AIM_TXTB'] = '[AIM]';
-$lang['MSNM_TXTB'] = '[MSN]';
-$lang['YIM_TXTB'] = '[Yahoo]';
 $lang['REPLY_WITH_QUOTE_TXTB'] = '[Quote]';
 $lang['READ_PROFILE_TXTB'] = '[Profile]';
 $lang['SEND_EMAIL_TXTB'] = '[E-mail]';

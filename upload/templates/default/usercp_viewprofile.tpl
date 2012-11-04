@@ -174,7 +174,7 @@ ajax.callback.gen_passkey = function(data){
 	<div class="clear"></div>
 </div>
 
-<table class="user_profile bordered w100" cellpadding="0" border=1>
+<table class="user_profile bordered w100" cellpadding="0">
 <tr>
 	<th colspan="2" class="thHead">{L_VIEWING_PROFILE}</th>
 </tr>
