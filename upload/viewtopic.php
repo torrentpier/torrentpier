@@ -1038,7 +1038,7 @@ for($i = 0; $i < $total_posts; $i++)
 		'POSTER_BIRTHDAY'    => ($bb_cfg['birthday_enabled'] && $this_date == $poster_birthday) ? '<img src="'. $images['icon_birthday'] .'" alt="" title="'. $lang['HAPPY_BIRTHDAY'] .'" border="0" />' : '',
 
 		'POST_MOD_COMMENT'   => ($postrow[$i]['post_mod_comment'] && $postrow[$i]['post_mod_comment_type']) ? $post_mod_comment_html : '',
-		'POST_MC_BBCODE'     => str_replace("\n", '\n', $postrow[$i]['post_mod_comment']),
+		'POST_MC_BBCODE'     => str_replace("\n", '\n', addslashes($postrow[$i]['post_mod_comment'])),
 		'POST_MC_TYPE'       => $postrow[$i]['post_mod_comment_type'],
 	));
 
