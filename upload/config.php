@@ -56,8 +56,9 @@ $domain_name = (!empty($_SERVER['SERVER_NAME'])) ? $_SERVER['SERVER_NAME'] : $do
 
 // Increase number of revision after update
 $bb_cfg['tp_version'] = '2.5 Beta';
-$bb_cfg['tp_release_state'] = 'R469';
-$bb_cfg['tp_release_date'] = '05-11-2012';
+
+$bb_cfg['tp_release_date'] = '07-11-2012';
+$bb_cfg['tp_release_state'] = 'R470';
 
 // Database
 $charset  = 'utf8';
@@ -433,6 +434,7 @@ $bb_cfg['use_ajax_posts']        = true;
 $bb_cfg['search_engine_type']          = 'mysql';  //  none, mysql, sphinx
 $bb_cfg['sphinx_topic_titles_host']    = '127.0.0.1';
 $bb_cfg['sphinx_topic_titles_port']    = 3312;
+$bb_cfg['sphinx_config_path']          = realpath("../install/sphinx/sphinx.conf");
 $bb_cfg['disable_ft_search_in_posts']  = false;    // disable searching in post bodies
 $bb_cfg['disable_search_for_guest']    = true;
 $bb_cfg['allow_search_in_bool_mode']   = true;

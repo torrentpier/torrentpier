@@ -2,7 +2,7 @@
 
 if (!defined('IN_AJAX')) die(basename(__FILE__));
 
-global $userdata, $lang;
+global $userdata, $lang, $bb_cfg;
 
 $mode = (string) $this->request['mode'];
 $user_id = $this->request['user_id'];
@@ -93,6 +93,20 @@ switch($mode)
 
 	    $this->response['info'] = $lang['USER_ACTIVATE_OFF'];
 	break;
+	case "indexer":
+		exec("indexer --config {$bb_cfg['sphinx_config_path']} --all --rotate", $result);
+		if(!is_file($bb_cfg['sphinx_config_path'].".log")){
+			file_put_contents($bb_cfg['sphinx_config_path'].".log", "####Logger from dimka3210.####".date("H:i:s", time())."##############################\r\n\r\n\r\n\r\n", FILE_APPEND);
+		}
+			file_put_contents($bb_cfg['sphinx_config_path'].".log", "##############################".date("H:i:s", time())."##############################\r\n", FILE_APPEND);
+		foreach($result as $row){
+			file_put_contents($bb_cfg['sphinx_config_path'].".log", $row."\r\n", FILE_APPEND);
+		}
+		file_put_contents($bb_cfg['sphinx_config_path'].".log", "\r\n", FILE_APPEND);
+		file_put_contents($bb_cfg['sphinx_config_path'].".log", "\r\n", FILE_APPEND);
+
+		$this->response['indexer'] = '<span class="seed bold">'.$lang['INDEXER']."</span>";
+		break;
 }
 
 $this->response['mode']	= $mode;

@@ -66,12 +66,13 @@ ajax.manage_user = function(mode) {
 	ajax.exec({
 		action  : 'manage_user',
 		mode    : mode,
-		user_id : '',
+		user_id : ''
 	});
 }
 ajax.callback.manage_user = function(data) {
 	$('#cache').html(data.cache_html);
 	$('#datastore').html(data.datastore_html);
+	$('#indexer').html(data.indexer);
 }
 </script>
 <br />
@@ -88,7 +89,8 @@ ajax.callback.manage_user = function(data) {
 	<tr>
 		<td><b>{L_UPDATE}:</b></td>
 		<td>
-			<a href="{U_UPDATE_USER_LEVEL}">{L_USER_LEVELS}</a>&nbsp;
+			<a href="{U_UPDATE_USER_LEVEL}">{L_USER_LEVELS}</a>,&nbsp;
+			<!-- IF $bb_cfg['search_engine_type'] == "sphinx" --><a href="#" id="indexer" onclick="ajax.manage_user('indexer'); return false;">{L_INDEXER}</a><!-- ENDIF -->
 		</td>
 	</tr>
 	<tr>
