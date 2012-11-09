@@ -165,8 +165,8 @@
 <tr>
 	<td><h4>{L_ALLOW_SIG}</h4></td>
 	<td>
-	    <label><input type="radio" name="allow_sig" value="1" <!-- IF ALLOW_SMILIES -->checked="checked"<!-- ENDIF --> />{L_YES}</label>&nbsp;&nbsp;
-		<label><input type="radio" name="allow_sig" value="0" <!-- IF not ALLOW_SMILIES -->checked="checked"<!-- ENDIF --> />{L_NO}</label>
+	    <label><input type="radio" name="allow_sig" value="1" <!-- IF ALLOW_SIG -->checked="checked"<!-- ENDIF --> />{L_YES}</label>&nbsp;&nbsp;
+		<label><input type="radio" name="allow_sig" value="0" <!-- IF not ALLOW_SIG -->checked="checked"<!-- ENDIF --> />{L_NO}</label>
 	</td>
 </tr>
 <tr>

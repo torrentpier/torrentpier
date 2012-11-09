@@ -37,7 +37,7 @@ if ($user_rank = $profiledata['user_rank'] AND isset($ranks[$user_rank]))
 }
 if (IS_ADMIN)
 {
-	$rank_select = array($lang['NO'] => 0);
+	$rank_select = array($lang['NONE'] => 0);
 	foreach ($ranks as $row)
 	{
 		$rank_select[$row['rank_title']] = $row['rank_id'];

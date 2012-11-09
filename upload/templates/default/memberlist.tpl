@@ -1,4 +1,4 @@
-<h1 class="pagetitle">{PAGE_TITLE}</h1>
+<h1 class="pagetitle">{L_MEMBERLIST}</h1>
 
 <form method="post" action="{S_MODE_ACTION}" name="post">
 <table width="100%">

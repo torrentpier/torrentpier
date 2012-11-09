@@ -366,7 +366,7 @@ ajax.callback.gen_passkey = function(data){
 			<!-- IF WWW -->
 			<tr>
 				<th>{L_WEBSITE}:</th>
-				<td id="user_website"><a href="{WWW}" class="editable">{WWW}</a></td>
+				<td id="user_website"><a href="{WWW}" class="editable" target="_blank">{WWW}</a></td>
 			</tr>
 			<!-- ENDIF -->
 			<!-- IF OCCUPATION -->

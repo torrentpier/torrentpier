@@ -3,7 +3,7 @@
 define('IN_PHPBB', true);
 define('BB_SCRIPT', 'memberlist');
 define('BB_ROOT', './');
-require(BB_ROOT ."common.php");
+require(BB_ROOT .'common.php');
 
 $page_cfg['use_tablesorter'] = true;
 
@@ -233,9 +233,5 @@ if ( $mode != 'topten' || $bb_cfg['topics_per_page'] < 10 )
 	}
 	DB()->sql_freeresult($result);
 }
-
-$template->assign_vars(array(
-	'PAGE_TITLE' => $lang['MEMBERLIST'],
-));
 
 print_page('memberlist.tpl');
