@@ -6,7 +6,7 @@
 	<!-- IF SHOW_SIDEBAR2 -->
 		<!--sidebar2-->
 		<td id="sidebar2">
-		<div id="sidebar2_wrap">
+		<div id="sidebar2-wrap">
 		
 		
 			<?php if (!empty($bb_cfg['sidebar2_static_content_path'])) include($bb_cfg['sidebar2_static_content_path']); ?>

@@ -131,6 +131,10 @@ $lang['LIST_OF_PATTERNS'] = 'List of patterns';
 $lang['ADD_TEMPLATE'] = 'Add the template';
 $lang['TEMPLATE_DISABLE'] = 'Template disabled';
 $lang['FOR_NEW_TEMPLATE'] = 'for new patterns!';
+$lang['ADEDD'] = 'added';
+$lang['CHANGED'] = 'changed';
+$lang['REMOVED'] = 'Removed';
+$lang['QUESTION'] = 'Are you sure want to delete?';
 
 $lang['RELEASE_EXP'] = 'This page displays all forums. For each of them you can set the release type which should be posted in the forum.';
 $lang['TPL_NONE'] = 'Don\'t use templates';
