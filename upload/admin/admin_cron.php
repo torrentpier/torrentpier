@@ -190,7 +190,7 @@ switch($mode)
 	case 'delete':
 		delete_jobs($job_id);
 
-		$message = $lang['JOB_REMOVED'] . "<br /><br />" . sprintf($lang['CLICK_RETURN_JOBS'], "<a href=\"admin_cron.php?mode=list\">", "</a>") . "<br /><br />" . sprintf($lang['CLICK_RETURN_ADMIN_INDEX'], "<a href=\"index.php?pane=right\">", "</a>");
+		$message = $lang['JOB_REMOVED'] . '<br /><br />' . sprintf($lang['CLICK_RETURN_JOBS'], '<a href="admin_cron.php?mode=list">', '</a>') . '<br /><br />' . sprintf($lang['CLICK_RETURN_ADMIN_INDEX'], '<a href="index.php?pane=right">', '</a>');
 	    message_die(GENERAL_MESSAGE, $message);
     break;
 }

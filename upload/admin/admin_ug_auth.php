@@ -234,7 +234,7 @@ if ($mode == 'user' && (!empty($_POST['username']) || $user_id))
 				'FORUM_NAME'   => str_short($forums['forum_name_html'][$f_id], $max_forum_name_length),
 				'SF_SPACER'    => ($f_data['forum_parent']) ? HTML_SF_SPACER : '',
 				'IS_MODERATOR' => (bool) $auth_mod,
-				'MOD_STATUS'   => ($auth_mod) ? $lang['MODERATOR'] : $lang['NO'],
+				'MOD_STATUS'   => ($auth_mod) ? $lang['MODERATOR'] : $lang['NONE'],
 				'MOD_CLASS'    => ($auth_mod) ? (($disabled) ? 'yesDisabled' : 'yesMOD') : 'noMOD',
 				'AUTH_MOD_VAL' => ($auth_mod) ? 1 : 0,
 			));

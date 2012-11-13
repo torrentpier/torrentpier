@@ -125,22 +125,22 @@ if ($mode)
 			$catlist = get_list('category', $cat_id, TRUE);
 			$forumlocked = $forumunlocked = '';
 
-			$forumstatus == ( FORUM_LOCKED ) ? $forumlocked = "selected=\"selected\"" : $forumunlocked = "selected=\"selected\"";
+			$forumstatus == ( FORUM_LOCKED ) ? $forumlocked = 'selected="selected"' : $forumunlocked = 'selected="selected"';
 
 			// These two options ($lang['STATUS_UNLOCKED'] and $lang['STATUS_LOCKED']) seem to be missing from
 			// the language files.
 			$lang['STATUS_UNLOCKED'] = isset($lang['STATUS_UNLOCKED']) ? $lang['STATUS_UNLOCKED'] : 'Unlocked';
 			$lang['STATUS_LOCKED'] = isset($lang['STATUS_LOCKED']) ? $lang['STATUS_LOCKED'] : 'Locked';
 
-			$statuslist = "<option value=\"" . FORUM_UNLOCKED . "\" $forumunlocked>" . $lang['STATUS_UNLOCKED'] . "</option>\n";
-			$statuslist .= "<option value=\"" . FORUM_LOCKED . "\" $forumlocked>" . $lang['STATUS_LOCKED'] . "</option>\n";
+			$statuslist = '<option value="' . FORUM_UNLOCKED . '" '. $forumunlocked .'>' . $lang['STATUS_UNLOCKED'] . '</option>\n';
+			$statuslist .= '<option value="' . FORUM_LOCKED . '" '. $forumlocked .'>' . $lang['STATUS_LOCKED'] . '</option>\n';
 
 			$forum_display_sort_list = get_forum_display_sort_option($forum_display_sort, 'list', 'sort');
 			$forum_display_order_list = get_forum_display_sort_option($forum_display_order, 'list', 'order');
 
 			$s_hidden_fields = '<input type="hidden" name="mode" value="' . $newmode .'" /><input type="hidden" name="' . POST_FORUM_URL . '" value="' . $forum_id . '" />';
 
-			$s_parent = '<option value="-1">&nbsp;'. $lang['SF_NO_PARENT'] ."</option>\n";
+			$s_parent = '<option value="-1">&nbsp;'. $lang['SF_NO_PARENT'] .'</option>\n';
 			$sel_forum = ($forum_parent && !isset($_REQUEST['forum_parent'])) ? $forum_id : $forum_parent;
 			$s_parent .= sf_get_list('forum', $forum_id, $sel_forum);
 
@@ -161,8 +161,8 @@ if ($mode)
 				'SHOW_ON_INDEX_CLASS' => (!$forum_parent) ? 'hidden' : '',
 				'TPL_SELECT' => get_select('forum_tpl', $forum_tpl_id, 'html', $lang['TEMPLATE_DISABLE']),
 				'ALLOW_REG_TRACKER' => build_select('allow_reg_tracker', array($lang['DISALLOWED'] => 0, $lang['ALLOWED'] => 1), $allow_reg_tracker),
-				'ALLOW_PORNO_TOPIC' => build_select('allow_porno_topic', array($lang['NO'] => 0, $lang['YES'] => 1), $allow_porno_topic),
-				'SELF_MODERATED' => build_select('self_moderated', array($lang['NO'] => 0, $lang['YES'] => 1), $self_moderated),
+				'ALLOW_PORNO_TOPIC' => build_select('allow_porno_topic', array($lang['NONE'] => 0, $lang['YES'] => 1), $allow_porno_topic),
+				'SELF_MODERATED' => build_select('self_moderated', array($lang['NONE'] => 0, $lang['YES'] => 1), $self_moderated),
 
 				'L_FORUM_TITLE' => $l_title,
 
@@ -233,7 +233,7 @@ if ($mode)
 			renumber_order('forum', $cat_id);
 			$datastore->update('cat_forums');
 
-			$message = $lang['FORUMS_UPDATED'] . "<br /><br />" . sprintf($lang['CLICK_RETURN_FORUMADMIN'], "<a href=\"" . "admin_forums.php?c=$cat_id" . "\">", "</a>") . "<br /><br />" . sprintf($lang['CLICK_RETURN_ADMIN_INDEX'], "<a href=\"index.php?pane=right\">", "</a>");
+			$message = $lang['FORUMS_UPDATED'] . '<br /><br />' . sprintf($lang['CLICK_RETURN_FORUMADMIN'], '<a href="admin_forums.php?c='. $cat_id .'">', '</a>') . '<br /><br />' . sprintf($lang['CLICK_RETURN_ADMIN_INDEX'], '<a href="index.php?pane=right">', '</a>');
 			message_die(GENERAL_MESSAGE, $message);
 
 			break;
@@ -326,9 +326,9 @@ if ($mode)
 			$fix = fix_orphan_sf();
 			$datastore->update('cat_forums');
 
-			$message = $lang['FORUMS_UPDATED'] . "<br /><br />";
+			$message = $lang['FORUMS_UPDATED'] . '<br /><br />';
 			$message .= ($fix) ? "$fix<br /><br />" : '';
-			$message .= sprintf($lang['CLICK_RETURN_FORUMADMIN'], "<a href=\"" . "admin_forums.php?c=$cat_id" . "\">", "</a>") . "<br /><br />" . sprintf($lang['CLICK_RETURN_ADMIN_INDEX'], "<a href=\"index.php?pane=right\">", "</a>");
+			$message .= sprintf($lang['CLICK_RETURN_FORUMADMIN'], '<a href="admin_forums.php?c='. $cat_id .'">', '</a>') . '<br /><br />' . sprintf($lang['CLICK_RETURN_ADMIN_INDEX'], '<a href="index.php?pane=right">', '</a>');
 			message_die(GENERAL_MESSAGE, $message);
 
 			break;
@@ -357,7 +357,7 @@ if ($mode)
 
 			$datastore->update('cat_forums');
 
-			$message = $lang['FORUMS_UPDATED'] . "<br /><br />" . sprintf($lang['CLICK_RETURN_FORUMADMIN'], "<a href=\"admin_forums.php\">", "</a>") . "<br /><br />" . sprintf($lang['CLICK_RETURN_ADMIN_INDEX'], "<a href=\"index.php?pane=right\">", "</a>");
+			$message = $lang['FORUMS_UPDATED'] . '<br /><br />' . sprintf($lang['CLICK_RETURN_FORUMADMIN'], '<a href="admin_forums.php">', '</a>') . '<br /><br />' . sprintf($lang['CLICK_RETURN_ADMIN_INDEX'], '<a href="index.php?pane=right">', '/a>');
 			message_die(GENERAL_MESSAGE, $message);
 
 			break;
@@ -415,7 +415,7 @@ if ($mode)
 
 			$datastore->update('cat_forums');
 
-			$message = $lang['FORUMS_UPDATED'] . "<br /><br />" . sprintf($lang['CLICK_RETURN_FORUMADMIN'], "<a href=\"admin_forums.php\">", "</a>") . "<br /><br />" . sprintf($lang['CLICK_RETURN_ADMIN_INDEX'], "<a href=\"index.php?pane=right\">", "</a>");
+			$message = $lang['FORUMS_UPDATED'] . '<br /><br />' . sprintf($lang['CLICK_RETURN_FORUMADMIN'], '<a href="admin_forums.php">', '</a>') . '<br /><br />' . sprintf($lang['CLICK_RETURN_ADMIN_INDEX'], '<a href="index.php?pane=right">', '</a>');
 			message_die(GENERAL_MESSAGE, $message);
 
 			break;
@@ -509,7 +509,7 @@ if ($mode)
 			update_user_level('all');
 			$datastore->update('cat_forums');
 
-			$message = $lang['FORUMS_UPDATED'] . "<br /><br />" . sprintf($lang['CLICK_RETURN_FORUMADMIN'], "<a href=\"admin_forums.php\">", "</a>") . "<br /><br />" . sprintf($lang['CLICK_RETURN_ADMIN_INDEX'], "<a href=\"index.php?pane=right\">", "</a>");
+			$message = $lang['FORUMS_UPDATED'] . '<br /><br />' . sprintf($lang['CLICK_RETURN_FORUMADMIN'], '<a href="admin_forums.php">', '</a>') . '<br /><br />' . sprintf($lang['CLICK_RETURN_ADMIN_INDEX'], '<a href="index.php?pane=right">', '</a>');
 			message_die(GENERAL_MESSAGE, $message);
 
 			break;
@@ -586,9 +586,9 @@ if ($mode)
 			$fix = fix_orphan_sf();
 			$datastore->update('cat_forums');
 
-			$message = $lang['FORUMS_UPDATED'] . "<br /><br />";
+			$message = $lang['FORUMS_UPDATED'] . '<br /><br />';
 			$message .= ($fix) ? "$fix<br /><br />" : '';
-			$message .= sprintf($lang['CLICK_RETURN_FORUMADMIN'], "<a href=\"admin_forums.php\">", "</a>") . "<br /><br />" . sprintf($lang['CLICK_RETURN_ADMIN_INDEX'], "<a href=\"index.php?pane=right\">", "</a>");
+			$message .= sprintf($lang['CLICK_RETURN_FORUMADMIN'], '<a href="admin_forums.php">', '</a>') . '<br /><br />' . sprintf($lang['CLICK_RETURN_ADMIN_INDEX'], '<a href="index.php?pane=right">', '</a>');
 			message_die(GENERAL_MESSAGE, $message);
 
 			break;
@@ -763,7 +763,7 @@ if (!$mode || $show_main_page)
 			ORDER BY cat_id, forum_order";
 		if(!$q_forums = DB()->sql_query($sql))
 		{
-			message_die(GENERAL_ERROR, "Could not query forums information", "", __LINE__, __FILE__, $sql);
+			message_die(GENERAL_ERROR, "Could not query forums information", '', __LINE__, __FILE__, $sql);
 		}
 
 		if( $total_forums = DB()->num_rows($q_forums) )
@@ -788,7 +788,7 @@ if (!$mode || $show_main_page)
 		{
 			$cat_id = $category_rows[$i]['cat_id'];
 
-			$template->assign_block_vars("catrow", array(
+			$template->assign_block_vars('catrow', array(
 				'S_ADD_FORUM_SUBMIT' => "addforum[$cat_id]",
 				'S_ADD_FORUM_NAME'   => "forumname[$cat_id]",
 
@@ -813,7 +813,7 @@ if (!$mode || $show_main_page)
 				if ($forum_rows[$j]['cat_id'] == $cat_id)
 				{
 
-					$template->assign_block_vars("catrow.forumrow",	array(
+					$template->assign_block_vars('catrow.forumrow',	array(
 						'FORUM_NAME' => htmlCHR($forum_rows[$j]['forum_name']),
 						'FORUM_DESC' => htmlCHR($forum_rows[$j]['forum_desc']),
 						'NUM_TOPICS' => $forum_rows[$j]['forum_topics'],
@@ -865,14 +865,14 @@ function get_info($mode, $id)
 			break;
 
 		default:
-			message_die(GENERAL_ERROR, "Wrong mode for generating select list", "", __LINE__, __FILE__);
+			message_die(GENERAL_ERROR, "Wrong mode for generating select list", '', __LINE__, __FILE__);
 			break;
 	}
 	$sql = "SELECT count(*) as total
 		FROM $table";
 	if( !$result = DB()->sql_query($sql) )
 	{
-		message_die(GENERAL_ERROR, "Couldn't get Forum/Category information", "", __LINE__, __FILE__, $sql);
+		message_die(GENERAL_ERROR, "Couldn't get Forum/Category information", '', __LINE__, __FILE__, $sql);
 	}
 	$count = DB()->sql_fetchrow($result);
 	$count = $count['total'];
@@ -883,12 +883,12 @@ function get_info($mode, $id)
 
 	if( !$result = DB()->sql_query($sql) )
 	{
-		message_die(GENERAL_ERROR, "Couldn't get Forum/Category information", "", __LINE__, __FILE__, $sql);
+		message_die(GENERAL_ERROR, "Couldn't get Forum/Category information", '', __LINE__, __FILE__, $sql);
 	}
 
 	if( DB()->num_rows($result) != 1 )
 	{
-		message_die(GENERAL_ERROR, "Forum/Category doesn't exist or multiple forums/categories with ID $id", "", __LINE__, __FILE__);
+		message_die(GENERAL_ERROR, "Forum/Category doesn't exist or multiple forums/categories with ID $id", '', __LINE__, __FILE__);
 	}
 
 	$return = DB()->sql_fetchrow($result);
@@ -915,7 +915,7 @@ function get_list($mode, $id, $select)
 			break;
 
 		default:
-			message_die(GENERAL_ERROR, "Wrong mode for generating select list", "", __LINE__, __FILE__);
+			message_die(GENERAL_ERROR, "Wrong mode for generating select list", '', __LINE__, __FILE__);
 			break;
 	}
 
@@ -929,22 +929,21 @@ function get_list($mode, $id, $select)
 
 	if( !$result = DB()->sql_query($sql) )
 	{
-		message_die(GENERAL_ERROR, "Couldn't get list of Categories/Forums", "", __LINE__, __FILE__, $sql);
+		message_die(GENERAL_ERROR, "Couldn't get list of Categories/Forums", '', __LINE__, __FILE__, $sql);
 	}
 
 	$catlist = '';
 
-	while( $row = DB()->sql_fetchrow($result) )
-	{
-		$s = "";
-		if ($row[$idfield] == $id)
-		{
-			$s = " selected=\"selected\"";
-		}
-		$catlist .= "<option value=\"$row[$idfield]\"$s>&nbsp;" . htmlCHR(str_short($row[$namefield], 60)) . "</option>\n";
-	}
-
-	return($catlist);
+   while( $row = DB()->sql_fetchrow($result) )
+   {
+	  	  $s = '';
+		  if ($row[$idfield] == $id)
+		  {
+			  $s = ' selected="selected"';
+		  }
+		  $catlist .= '<option value="'. $row[$idfield] .'"'.$s.'>&nbsp;' . htmlCHR(str_short($row[$namefield], 60)) . '</option>\n';
+   }
+   return($catlist);
 }
 
 function renumber_order($mode, $cat = 0)
@@ -966,7 +965,7 @@ function renumber_order($mode, $cat = 0)
 			break;
 
 		default:
-			message_die(GENERAL_ERROR, "Wrong mode for generating select list", "", __LINE__, __FILE__);
+			message_die(GENERAL_ERROR, "Wrong mode for generating select list", '', __LINE__, __FILE__);
 			break;
 	}
 
@@ -980,7 +979,7 @@ function renumber_order($mode, $cat = 0)
 
 	if( !$result = DB()->sql_query($sql) )
 	{
-		message_die(GENERAL_ERROR, "Couldn't get list of Categories", "", __LINE__, __FILE__, $sql);
+		message_die(GENERAL_ERROR, "Couldn't get list of Categories", '', __LINE__, __FILE__, $sql);
 	}
 
 	$i = 10;
@@ -993,14 +992,14 @@ function renumber_order($mode, $cat = 0)
 			WHERE $idfield = " . $row[$idfield];
 		if( !DB()->sql_query($sql) )
 		{
-			message_die(GENERAL_ERROR, "Couldn't update order fields", "", __LINE__, __FILE__, $sql);
+			message_die(GENERAL_ERROR, "Couldn't update order fields", '', __LINE__, __FILE__, $sql);
 		}
 		$i += 10;
 	}
 
 	if (!$result = DB()->sql_query($sql))
 	{
-		message_die(GENERAL_ERROR, "Couldn't get list of Categories", "", __LINE__, __FILE__, $sql);
+		message_die(GENERAL_ERROR, "Couldn't get list of Categories", '', __LINE__, __FILE__, $sql);
 	}
 
 }
@@ -1023,7 +1022,7 @@ function get_cat_forums ($cat_id = FALSE)
 
 	if (!$result = DB()->sql_query($sql))
 	{
-		message_die(GENERAL_ERROR, "Couldn't get list of Categories", "", __LINE__, __FILE__, $sql);
+		message_die(GENERAL_ERROR, "Couldn't get list of Categories", '', __LINE__, __FILE__, $sql);
 	}
 
 	if ($rowset = DB()->sql_fetchrowset($result))
@@ -1145,14 +1144,14 @@ function fix_orphan_sf ($orphan_sf_sql = '', $show_mess = FALSE)
 
 		if ($affectedrows = DB()->affected_rows())
 		{
-			$done_mess = "Subforums data corrected. <b>$affectedrows</b> orphan subforum(s) moved to root level.";
+			$done_mess = 'Subforums data corrected. <b>'. $affectedrows .'</b> orphan subforum(s) moved to root level.';
 		}
 
 		if ($show_mess)
 		{
 			$message  = $done_mess .'<br /><br />';
-			$message .= sprintf($lang['CLICK_RETURN_FORUMADMIN'], "<a href=\"admin_forums.php\">", '</a>') .'<br /><br />';
-			$message .= sprintf($lang['CLICK_RETURN_ADMIN_INDEX'], "<a href=\"index.php?pane=right\">", '</a>');
+			$message .= sprintf($lang['CLICK_RETURN_FORUMADMIN'], '<a href="admin_forums.php">', '</a>') .'<br /><br />';
+			$message .= sprintf($lang['CLICK_RETURN_ADMIN_INDEX'], '<a href="index.php?pane=right">', '</a>');
 			message_die(GENERAL_MESSAGE, $message);
 		}
 	}

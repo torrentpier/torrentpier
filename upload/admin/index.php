@@ -7,12 +7,12 @@ require('./pagestart.php');
 //
 if( isset($_GET['pane']) && $_GET['pane'] == 'left' )
 {
-	$dir = @opendir(".");
+	$dir = @opendir('.');
 
 	$setmodules = 1;
 	while( $file = @readdir($dir) )
 	{
-		if( preg_match("/^admin_.*?\.php$/", $file) )
+		if( preg_match('/^admin_.*?\.php$/', $file) )
 		{
 			include('./' . $file);
 		}
@@ -24,19 +24,19 @@ if( isset($_GET['pane']) && $_GET['pane'] == 'left' )
 
 	$template->assign_vars(array(
 		'TPL_ADMIN_NAVIGATE' => true,
-		"U_FORUM_INDEX" => "../index.php",
-		"U_ADMIN_INDEX" => "index.php?pane=right")
-	);
+		'U_FORUM_INDEX' => "../index.php",
+		'U_ADMIN_INDEX' => "index.php?pane=right",
+	));
 
 	ksort($module);
 
 	while( list($cat, $action_array) = each($module) )
 	{
-		$cat = ( !empty($lang[strtoupper($cat)]) ) ? $lang[strtoupper($cat)] : preg_replace("/_/", " ", $cat);
+		$cat = ( !empty($lang[strtoupper($cat)]) ) ? $lang[strtoupper($cat)] : preg_replace('/_/', ' ', $cat);
 
-		$template->assign_block_vars("catrow", array(
-			"ADMIN_CATEGORY" => $cat)
-		);
+		$template->assign_block_vars('catrow', array(
+			'ADMIN_CATEGORY' => $cat,
+		));
 
 		ksort($action_array);
 
@@ -45,12 +45,12 @@ if( isset($_GET['pane']) && $_GET['pane'] == 'left' )
 		{
 			$row_class = !($row_count % 2) ? 'row1' : 'row2';
 
-			$action = ( !empty($lang[strtoupper($action)]) ) ? $lang[strtoupper($action)] : preg_replace("/_/", " ", $action);
+			$action = ( !empty($lang[strtoupper($action)]) ) ? $lang[strtoupper($action)] : preg_replace('/_/', ' ', $action);
 
-			$template->assign_block_vars("catrow.modulerow", array(
-				"ROW_CLASS" => $row_class,
-				"ADMIN_MODULE" => $action,
-				"U_ADMIN_MODULE" => $file)
+			$template->assign_block_vars('catrow.modulerow', array(
+				'ROW_CLASS' => $row_class,
+				'ADMIN_MODULE' => $action,
+				'U_ADMIN_MODULE' => $file)
 			);
 			$row_count++;
 		}
@@ -73,9 +73,9 @@ else if( isset($_GET['pane']) && $_GET['pane'] == 'right' )
 
 	$boarddays = ( TIMENOW - $bb_cfg['board_startdate'] ) / 86400;
 
-	$posts_per_day = sprintf("%.2f", $total_posts / $boarddays);
-	$topics_per_day = sprintf("%.2f", $total_topics / $boarddays);
-	$users_per_day = sprintf("%.2f", $total_users / $boarddays);
+	$posts_per_day = sprintf('%.2f', $total_posts / $boarddays);
+	$topics_per_day = sprintf('%.2f', $total_topics / $boarddays);
+	$users_per_day = sprintf('%.2f', $total_users / $boarddays);
 
 	$avatar_dir_size = 0;
 
@@ -83,9 +83,9 @@ else if( isset($_GET['pane']) && $_GET['pane'] == 'right' )
 	{
 		while( $file = @readdir($avatar_dir) )
 		{
-			if( $file != "." && $file != ".." )
+			if( $file != '.' && $file != '..' )
 			{
-				$avatar_dir_size += @filesize(BB_ROOT . $bb_cfg['avatar_path'] . "/" . $file);
+				$avatar_dir_size += @filesize(BB_ROOT . $bb_cfg['avatar_path'] . '/' . $file);
 			}
 		}
 		@closedir($avatar_dir);
@@ -127,7 +127,7 @@ else if( isset($_GET['pane']) && $_GET['pane'] == 'right' )
 		$row = DB()->sql_fetchrow($result);
 		$version = $row['mysql_version'];
 
-		if( preg_match("/^(3\.23|4\.|5\.)/", $version) )
+		if( preg_match('/^(3\.23|4\.|5\.)/', $version) )
 		{
 			$dblist = array();
 			foreach($bb_cfg['db'] as $name => $row)
@@ -141,7 +141,7 @@ else if( isset($_GET['pane']) && $_GET['pane'] == 'right' )
 					$dbsize = 0;
 					for($i = 0; $i < count($tabledata_ary); $i++)
 					{
-						if( @$tabledata_ary[$i]['Type'] != "MRG_MyISAM" )
+						if( @$tabledata_ary[$i]['Type'] != 'MRG_MyISAM' )
 						{
 							$dbsize += $tabledata_ary[$i]['Data_length'] + $tabledata_ary[$i]['Index_length'];
 						}
@@ -162,17 +162,17 @@ else if( isset($_GET['pane']) && $_GET['pane'] == 'right' )
 	}
 
 	$template->assign_vars(array(
-		"NUMBER_OF_POSTS" => $total_posts,
-		"NUMBER_OF_TOPICS" => $total_topics,
-		"NUMBER_OF_USERS" => $total_users,
-		"START_DATE" => $start_date,
-		"POSTS_PER_DAY" => $posts_per_day,
-		"TOPICS_PER_DAY" => $topics_per_day,
-		"USERS_PER_DAY" => $users_per_day,
-		"AVATAR_DIR_SIZE" => $avatar_dir_size,
-		"DB_SIZE" => $dbsize,
-		"GZIP_COMPRESSION" => ( $bb_cfg['gzip_compress'] ) ? $lang['ON'] : $lang['OFF'])
-	);
+		'NUMBER_OF_POSTS'  => $total_posts,
+		'NUMBER_OF_TOPICS' => $total_topics,
+		'NUMBER_OF_USERS'  => $total_users,
+		'START_DATE'       => $start_date,
+		'POSTS_PER_DAY'    => $posts_per_day,
+		'TOPICS_PER_DAY'   => $topics_per_day,
+		'USERS_PER_DAY'    => $users_per_day,
+		'AVATAR_DIR_SIZE'  => $avatar_dir_size,
+		'DB_SIZE'		   => $dbsize,
+		'GZIP_COMPRESSION' => ( $bb_cfg['gzip_compress'] ) ? $lang['ON'] : $lang['OFF'],
+	));
 	//
 	// End forum statistics
 	//
@@ -193,7 +193,7 @@ else if( isset($_GET['pane']) && $_GET['pane'] == 'right' )
 			ORDER BY s.session_ip ASC, s.session_time DESC";
 		if(!$result = DB()->sql_query($sql))
 		{
-			message_die(GENERAL_ERROR, "Couldn't obtain regd user/online information.", "", __LINE__, __FILE__, $sql);
+			message_die(GENERAL_ERROR, "Couldn't obtain regd user/online information.", '', __LINE__, __FILE__, $sql);
 		}
 		$onlinerow_reg = DB()->sql_fetchrowset($result);
 
@@ -204,7 +204,7 @@ else if( isset($_GET['pane']) && $_GET['pane'] == 'right' )
 			ORDER BY session_ip ASC, session_time DESC";
 		if(!$result = DB()->sql_query($sql))
 		{
-			message_die(GENERAL_ERROR, "Couldn't obtain guest user/online information.", "", __LINE__, __FILE__, $sql);
+			message_die(GENERAL_ERROR, "Couldn't obtain guest user/online information.", '', __LINE__, __FILE__, $sql);
 		}
 		$onlinerow_guest = DB()->sql_fetchrowset($result);
 
@@ -237,13 +237,13 @@ else if( isset($_GET['pane']) && $_GET['pane'] == 'right' )
 
 					$reg_ip = decode_ip($onlinerow_reg[$i]['session_ip']);
 
-					$template->assign_block_vars("reg_user_row", array(
-						"ROW_CLASS"  => $row_class,
-						"USER"       => profile_url($onlinerow_reg[$i]),
-						"STARTED"    => bb_date($onlinerow_reg[$i]['session_start'], 'H:i', 'false'),
-						"LASTUPDATE" => bb_date($onlinerow_reg[$i]['user_session_time'], 'H:i', 'false'),
-						"IP_ADDRESS" => $reg_ip,
-						"U_WHOIS_IP" => $bb_cfg['whois_info'] . $reg_ip,
+					$template->assign_block_vars('reg_user_row', array(
+						'ROW_CLASS'  => $row_class,
+						'USER'       => profile_url($onlinerow_reg[$i]),
+						'STARTED'    => bb_date($onlinerow_reg[$i]['session_start'], 'H:i', 'false'),
+						'LASTUPDATE' => bb_date($onlinerow_reg[$i]['user_session_time'], 'H:i', 'false'),
+						'IP_ADDRESS' => $reg_ip,
+						'U_WHOIS_IP' => $bb_cfg['whois_info'] . $reg_ip,
 					));
 				}
 			}
@@ -265,12 +265,12 @@ else if( isset($_GET['pane']) && $_GET['pane'] == 'right' )
 
 				$guest_ip = decode_ip($onlinerow_guest[$i]['session_ip']);
 
-				$template->assign_block_vars("guest_user_row", array(
-					"ROW_CLASS"  => $row_class,
-					"STARTED"    => bb_date($onlinerow_guest[$i]['session_start'], 'H:i', 'false'),
-					"LASTUPDATE" => bb_date($onlinerow_guest[$i]['session_time'], 'H:i' , 'false'),
-					"IP_ADDRESS" => $guest_ip,
-					"U_WHOIS_IP" => $bb_cfg['whois_info'] . $guest_ip,
+				$template->assign_block_vars('guest_user_row', array(
+					'ROW_CLASS'  => $row_class,
+					'STARTED'    => bb_date($onlinerow_guest[$i]['session_start'], 'H:i', 'false'),
+					'LASTUPDATE' => bb_date($onlinerow_guest[$i]['session_time'], 'H:i' , 'false'),
+					'IP_ADDRESS' => $guest_ip,
+					'U_WHOIS_IP' => $bb_cfg['whois_info'] . $guest_ip,
 				));
 			}
 		}

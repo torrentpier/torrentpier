@@ -32,12 +32,14 @@ if ($mode == 'templates')
 	));
 }
 else if ($mode == 'add' || $mode == 'edit')
-{    $template->assign_vars(array(
+{
+    $template->assign_vars(array(
 		'TPL'    => true,
 	));
 
     if($mode == 'edit')
-    {    	$tpl_id = (int) request_var('tpl', '');
+    {
+    	$tpl_id = (int) request_var('tpl', '');
     	if(!$tpl_id) bb_die('');
 
     	$row = DB()->fetch_row("SELECT * FROM ". BB_TOPIC_TPL_OLD ." WHERE tpl_id = $tpl_id");
@@ -48,9 +50,11 @@ else if ($mode == 'add' || $mode == 'edit')
 		));
     }
     else
-    {    	$template->assign_vars(array(
+    {
+    	$template->assign_vars(array(
 			'S_ACTION'      => "admin_topic_templates.php?mode=add",
-		));    }
+		));
+    }
 
     $tpl_name =	isset($_POST['tpl_name']) ? $_POST['tpl_name'] : @$row['tpl_name'];
     $tpl_script = isset($_POST['tpl_script']) ? $_POST['tpl_script'] : @$row['tpl_script'];
@@ -67,24 +71,29 @@ else if ($mode == 'add' || $mode == 'edit')
     if(isset($_POST['submit']))
     {
 	    if($mode == 'edit')
-	    {	    	DB()->query("UPDATE ". BB_TOPIC_TPL_OLD ." SET
+	    {
+	    	DB()->query("UPDATE ". BB_TOPIC_TPL_OLD ." SET
 					tpl_name = '". DB()->escape($tpl_name) ."',
 					tpl_script = '". DB()->escape($tpl_script) ."',
 					tpl_template = '". DB()->escape($tpl_template) ."',
 					tpl_desc = '". DB()->escape($tpl_desc) ."'
 				WHERE tpl_id = $tpl_id
 			");
-			$message = 'изменено';	    }
+			$message = $lang['CHANGED'];
+	    }
 	    else
-	    {	    	DB()->query("INSERT INTO ". BB_TOPIC_TPL_OLD ." (tpl_name, tpl_script, tpl_template, tpl_desc)
+	    {
+	    	DB()->query("INSERT INTO ". BB_TOPIC_TPL_OLD ." (tpl_name, tpl_script, tpl_template, tpl_desc)
 				VALUES ('". DB()->escape($tpl_name) ."', '". DB()->escape($tpl_script) ."', '". DB()->escape($tpl_template) ."', '". DB()->escape($tpl_desc) ."')");
-			$message = 'добавлено';	    }
+			$message = $lang['ADEDD'];
+	    }
 
 	    bb_die($message);
 	}
 }
 else if ($mode == 'delete')
-{    $tpl_ids = isset($_POST['tpl_id']) ? $_POST['tpl_id'] : bb_die('вы ничего не выбрали');
+{
+    $tpl_ids = isset($_POST['tpl_id']) ? $_POST['tpl_id'] : bb_die($lang['NOT_CHOOSE']);
 
     foreach ($tpl_ids as $tpl_id)
 	{
@@ -93,20 +102,21 @@ else if ($mode == 'delete')
 
     if (isset($_POST['confirm']))
 	{
-		DB()->query("DELETE ". BB_TOPIC_TPL_OLD ." WHERE tpl_id IN(". join(',', $tpl_ids) .")");
-		bb_die('Удалено');
+		DB()->query("DELETE FROM ". BB_TOPIC_TPL_OLD ." WHERE tpl_id IN(". join(',', $tpl_ids) .")");
+		bb_die($lang['REMOVED']);
 	}
 	else
 	{
 		$names = DB()->fetch_rowset("SELECT tpl_name FROM ". BB_TOPIC_TPL_OLD ." WHERE tpl_id IN(". join(',', $tpl_ids) .") ORDER BY tpl_name", 'tpl_name');
 
 		print_confirmation(array(
-			'QUESTION'      => 'Вы уверены, что хотите удалить?',
-			'ITEMS_LIST'    => join("\n</li>\n<li>\n", $names),
+			'QUESTION'      => $lang['QUESTION'],
+			'ITEMS_LIST'    => join('\n</li>\n<li>\n', $names),
 			'FORM_ACTION'   => "admin_topic_templates.php?mode=delete",
 			'HIDDEN_FIELDS' => build_hidden_fields($hidden_fields),
 		));
-	}}
+	}
+}
 else
 {
 	$forums = DB()->fetch_rowset("

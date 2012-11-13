@@ -197,7 +197,7 @@ if ( isset($_POST['submit']) )
 				VALUES ('" . $ip_list[$i] . "')";
 			if ( !DB()->sql_query($sql) )
 			{
-				message_die(GENERAL_ERROR, "Couldn't insert ban_ip info into database", "", __LINE__, __FILE__, $sql);
+				message_die(GENERAL_ERROR, "Couldn't insert ban_ip info into database", '', __LINE__, __FILE__, $sql);
 			}
 		}
 	}
@@ -213,7 +213,7 @@ if ( isset($_POST['submit']) )
 			WHERE $kill_session_sql";
 		if ( !DB()->sql_query($sql) )
 		{
-			message_die(GENERAL_ERROR, "Couldn't delete banned sessions from database", "", __LINE__, __FILE__, $sql);
+			message_die(GENERAL_ERROR, "Couldn't delete banned sessions from database", '', __LINE__, __FILE__, $sql);
 		}
 	}
 
@@ -234,7 +234,7 @@ if ( isset($_POST['submit']) )
 				VALUES ('" . DB()->escape($email_list[$i]) . "')";
 			if ( !DB()->sql_query($sql) )
 			{
-				message_die(GENERAL_ERROR, "Couldn't insert ban_email info into database", "", __LINE__, __FILE__, $sql);
+				message_die(GENERAL_ERROR, "Couldn't insert ban_email info into database", '', __LINE__, __FILE__, $sql);
 			}
 		}
 	}
@@ -286,7 +286,7 @@ if ( isset($_POST['submit']) )
 			WHERE ban_id IN ($where_sql)";
 		if ( !DB()->sql_query($sql) )
 		{
-			message_die(GENERAL_ERROR, "Couldn't delete ban info from database", "", __LINE__, __FILE__, $sql);
+			message_die(GENERAL_ERROR, "Couldn't delete ban info from database", '', __LINE__, __FILE__, $sql);
 		}
 	}
 
@@ -298,8 +298,8 @@ if ( isset($_POST['submit']) )
 else
 {
 	$template->assign_vars(array(
-		'S_BANLIST_ACTION' => "admin_user_ban.php")
-	);
+		'S_BANLIST_ACTION' => "admin_user_ban.php",
+	));
 
 	$userban_count = 0;
 	$ipban_count = 0;
@@ -385,8 +385,8 @@ else
 		'S_UNBAN_USERLIST_SELECT' => $select_userlist,
 		'S_UNBAN_IPLIST_SELECT' => $select_iplist,
 		'S_UNBAN_EMAILLIST_SELECT' => $select_emaillist,
-		'S_BAN_ACTION' => "admin_user_ban.php")
-	);
+		'S_BAN_ACTION' => "admin_user_ban.php",
+	));
 }
 
 print_page('admin_user_ban.tpl', 'admin');

@@ -21,22 +21,22 @@ $mode = htmlspecialchars($mode);
 //
 if( isset($_POST['add']) )
 {
-	$mode = "add";
+	$mode = 'add';
 }
 else if( isset($_POST['save']) )
 {
-	$mode = "save";
+	$mode = 'save';
 }
 
-if( $mode != "" )
+if( $mode != '' )
 {
-	if( $mode == "edit" || $mode == "add" )
+	if( $mode == 'edit' || $mode == 'add' )
 	{
 		$word_id = intval(request_var('id', 0));
 
 		$s_hidden_fields = $word = $replacement = '';
 
-		if( $mode == "edit" )
+		if( $mode == 'edit' )
 		{
 			if( $word_id )
 			{
@@ -45,7 +45,7 @@ if( $mode != "" )
 					WHERE word_id = $word_id";
 				if(!$result = DB()->sql_query($sql))
 				{
-					message_die(GENERAL_ERROR, "Could not query words table", "Error", __LINE__, __FILE__, $sql);
+					message_die(GENERAL_ERROR, "Could not query words table", $lang['ERROR'], __LINE__, __FILE__, $sql);
 				}
 
 				$word_info = DB()->sql_fetchrow($result);
@@ -62,20 +62,20 @@ if( $mode != "" )
 		$template->assign_vars(array(
 			'TPL_ADMIN_WORDS_EDIT' => true,
 
-			"WORD"        => $word,
-			"REPLACEMENT" => $replacement,
+			'WORD'        => $word,
+			'REPLACEMENT' => $replacement,
 
-			"S_WORDS_ACTION"  => "admin_words.php",
-			"S_HIDDEN_FIELDS" => $s_hidden_fields)
-		);
+			'S_WORDS_ACTION'  => "admin_words.php",
+			'S_HIDDEN_FIELDS' => $s_hidden_fields,
+		));
 	}
-	else if( $mode == "save" )
+	else if( $mode == 'save' )
 	{
 		$word_id     = intval(request_var('id', 0));
-		$word        = trim(request_var('word', ""));
-		$replacement = trim(request_var('replacement', ""));
+		$word        = trim(request_var('word', ''));
+		$replacement = trim(request_var('replacement', ''));
 
-		if($word == "" || $replacement == "")
+		if($word == '' || $replacement == '')
 		{
 			message_die(GENERAL_MESSAGE, $lang['MUST_ENTER_WORD']);
 		}
@@ -99,11 +99,11 @@ if( $mode != "" )
 			message_die(GENERAL_ERROR, "Could not insert data into words table", $lang['ERROR'], __LINE__, __FILE__, $sql);
 		}
 
-		$message .= "<br /><br />" . sprintf($lang['CLICK_RETURN_WORDADMIN'], "<a href=\"admin_words.php\">", "</a>") . "<br /><br />" . sprintf($lang['CLICK_RETURN_ADMIN_INDEX'], "<a href=\"index.php?pane=right\">", "</a>");
+		$message .= '<br /><br />' . sprintf($lang['CLICK_RETURN_WORDADMIN'], '<a href="admin_words.php">', '</a>') . '<br /><br />' . sprintf($lang['CLICK_RETURN_ADMIN_INDEX'], '<a href="index.php?pane=right">', '</a>');
 
 		message_die(GENERAL_MESSAGE, $message);
 	}
-	else if( $mode == "delete" )
+	else if( $mode == 'delete' )
 	{
 		$word_id = intval(request_var('id', 0));
 
@@ -117,7 +117,7 @@ if( $mode != "" )
 				message_die(GENERAL_ERROR, "Could not remove data from words table", $lang['ERROR'], __LINE__, __FILE__, $sql);
 			}
 
-			$message = $lang['WORD_REMOVED'] . "<br /><br />" . sprintf($lang['CLICK_RETURN_WORDADMIN'], "<a href=\"admin_words.php\">", "</a>") . "<br /><br />" . sprintf($lang['CLICK_RETURN_ADMIN_INDEX'], "<a href=\"index.php?pane=right\">", "</a>");
+			$message = $lang['WORD_REMOVED'] . '<br /><br />' . sprintf($lang['CLICK_RETURN_WORDADMIN'], '<a href="admin_words.php">', '</a>') . '<br /><br />' . sprintf($lang['CLICK_RETURN_ADMIN_INDEX'], '<a href="index.php?pane=right">', '</a>');
 
 			message_die(GENERAL_MESSAGE, $message);
 		}
@@ -143,9 +143,9 @@ else
 	$template->assign_vars(array(
 		'TPL_ADMIN_WORDS_LIST' => true,
 
-		"S_WORDS_ACTION" => "admin_words.php",
-		"S_HIDDEN_FIELDS" => '')
-	);
+		'S_WORDS_ACTION' => "admin_words.php",
+		'S_HIDDEN_FIELDS' => '',
+	));
 
 	for($i = 0; $i < $word_count; $i++)
 	{
@@ -155,14 +155,14 @@ else
 
 		$row_class = !($i % 2) ? 'row1' : 'row2';
 
-		$template->assign_block_vars("words", array(
-			"ROW_CLASS" => $row_class,
-			"WORD" => $word,
-			"REPLACEMENT" => $replacement,
+		$template->assign_block_vars('words', array(
+			'ROW_CLASS' => $row_class,
+			'WORD' => $word,
+			'REPLACEMENT' => $replacement,
 
-			"U_WORD_EDIT" => "admin_words.php?mode=edit&amp;id=$word_id",
-			"U_WORD_DELETE" => "admin_words.php?mode=delete&amp;id=$word_id")
-		);
+			'U_WORD_EDIT' => "admin_words.php?mode=edit&amp;id=$word_id",
+			'U_WORD_DELETE' => "admin_words.php?mode=delete&amp;id=$word_id",
+		));
 	}
 }
 

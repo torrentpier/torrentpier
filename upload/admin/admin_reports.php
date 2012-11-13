@@ -347,7 +347,7 @@ else if (isset($_POST[POST_CAT_URL]) || isset($_GET[POST_CAT_URL]))
 
 						$template->assign_vars(array(
 							'U_ADD_REASON' => 'admin_reports.php?mode[]=reasons&amp;' . POST_CAT_URL . "=$module_id&amp;mode[]=add",
-							'U_MODULES' => 'admin_reports.php'
+							'U_MODULES'    => "admin_reports.php",
 						));
 
 						print_page('report_module_reasons_body.tpl', 'admin');
@@ -459,8 +459,8 @@ else if (isset($_POST['module']) || isset($_GET['module']))
 				'MODULE_EXPLAIN' => $module_info['explain'],
 				'MODULE_NOTIFY_ON' => ($bb_cfg['report_notify']) ? ' checked="checked"' : '',
 				'MODULE_NOTIFY_OFF' => (!$bb_cfg['report_notify']) ? ' checked="checked"' : '',
-				'MODULE_PRUNE' => 0)
-			);
+				'MODULE_PRUNE' => 0,
+			));
 
 			//
 			// Authorisation selects
