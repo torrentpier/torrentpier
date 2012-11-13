@@ -4,7 +4,7 @@ define('IN_PHPBB',   true);
 define('BB_SCRIPT', 'login');
 define('IN_LOGIN', true);
 define('BB_ROOT', './');
-require(BB_ROOT .'common.php');
+require(BB_ROOT ."common.php");
 
 array_deep($_POST, 'trim');
 
