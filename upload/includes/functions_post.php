@@ -206,7 +206,9 @@ function submit_post($mode, &$post_data, &$message, &$meta, &$forum_id, &$topic_
 
 	if ($userdata['user_id'] != BOT_UID)
 	{
-		add_search_words($post_id, stripslashes($post_message), stripslashes($post_subject));
+		$s_post_message = str_replace('\n', "\n", $post_message);
+		$s_post_subject = str_replace('\n', "\n", $post_subject);
+		add_search_words($post_id, stripslashes($s_post_message), stripslashes($s_post_subject));
 	}
 
 	update_post_html(array(

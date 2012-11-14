@@ -139,7 +139,9 @@ switch($this->request['type'])
 						}
 				    }
 					DB()->query("UPDATE ". BB_POSTS_TEXT ." SET post_text = '". DB()->escape($text) ."' WHERE post_id = $post_id LIMIT 1");
-					add_search_words($post_id, stripslashes($text), stripslashes($post['topic_title']));
+					$s_text = str_replace('\n', "\n", $text);
+					$s_topic_title = str_replace('\n', "\n", $post['topic_title']);
+					add_search_words($post_id, stripslashes($s_text), stripslashes($s_topic_title));
 				    update_post_html(array(
 						'post_id'        => $post_id,
 						'post_text'      => $text,
@@ -285,7 +287,9 @@ switch($this->request['type'])
 
         update_post_stats('reply', $post, $post['forum_id'], $topic_id, $post_id, $userdata['user_id']);
 
-		add_search_words($post_id, stripslashes($message), stripslashes($post['topic_title']));
+		$s_message = str_replace('\n', "\n", $message);
+		$s_topic_title = str_replace('\n', "\n", $post['topic_title']);
+		add_search_words($post_id, stripslashes($s_message), stripslashes($s_topic_title));
 	    update_post_html(array(
 			'post_id'        => $post_id,
 			'post_text'      => $message,

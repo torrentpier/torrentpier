@@ -343,7 +343,7 @@ function strip_bbcode ($message, $stripquotes = true, $fast_and_dirty = false, $
 			$message = str_replace($m[0], $m[2], $message);
 		}
 
-		$replace = array('[*]', '[hr]', '[br]');
+		$replace = array('[*]', '[hr]', '[br]', '[align=center]', '[align=left]', '[align=right]');
 		$message = str_replace($replace, ' ', $message);
 	}
 
@@ -365,6 +365,9 @@ function extract_search_words ($text)
 	$text = preg_replace('/(\w*?)&#?[0-9a-z]+;(\w*?)/iu', '', $text);
 	// Remove URL's       ((www|ftp)\.[\w\#!$%&~/.\-;:=,?@а-яА-Я\[\]+]*?)
 	$text = preg_replace('#\b[a-z0-9]+://[\w\#!$%&~/.\-;:=,?@а-яА-Я\[\]+]+(/[0-9a-z\?\.%_\-\+=&/]+)?#u', ' ', $text);
+	$text = str_replace('[url=', ' ', $text);
+	$text = str_replace('?', ' ', $text);
+	$text = str_replace('!', ' ', $text);
 
 	$text = strip_bbcode($text);
 
@@ -372,7 +375,7 @@ function extract_search_words ($text)
 	$text = preg_replace('#[.,:;]#u', ' ', $text);
 
 	// short & long words
-	$text = preg_replace('#(?<=^|\s)(\S{1,'.$min_word_len.'}|\S{'.$max_word_len.',}|\W*)(?=$|\s)#', ' ', $text);
+	$text = preg_replace('#(?<=^|\s)(\S{1,'.$min_word_len.'}|\S{'.$max_word_len.',}|\W*)(?=$|\s)#u', ' ', $text);
 
 	$text = remove_stopwords($text);
 #	$text = replace_synonyms($text);
@@ -508,7 +511,7 @@ class bbcode
 			"#\[url\](www\.$url_exp)\[/url\]#isu"                    => '<a href="http://$1" class="postLink">$1</a>',
 			"#\[url=(https?://$url_exp)\]([^?\n\t].*?)\[/url\]#isu"  => '<a href="$1" class="postLink">$2</a>',
 			"#\[url=(www\.$url_exp)\]([^?\n\t].*?)\[/url\]#isu"      => '<a href="http://$1" class="postLink">$2</a>',
-		    "#\[email\]($email_exp)\[/email\]#isu"                   => '<a href="mailto:$1">$1</a>',
+			"#\[email\]($email_exp)\[/email\]#isu"                   => '<a href="mailto:$1">$1</a>',
 			"#\[qpost=([0-9]*)\]#isu"                                => '<u class="q-post">$1</u>',
 		);
 
