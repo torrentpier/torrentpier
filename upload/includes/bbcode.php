@@ -375,13 +375,21 @@ function extract_search_words ($text)
 	$text = preg_replace('#[.,:;]#u', ' ', $text);
 
 	// short & long words
-	$text = preg_replace('#(?<=^|\s)(\S{1,'.$min_word_len.'}|\S{'.$max_word_len.',}|\W*)(?=$|\s)#u', ' ', $text);
+	// $text = preg_replace('#(?<=^|\s)(\S{1,'.$min_word_len.'}|\S{'.$max_word_len.',}|\W*)(?=$|\s)#u', ' ', $text);
 
 	$text = remove_stopwords($text);
 #	$text = replace_synonyms($text);
 
 	// Trim 1+ spaces to one space and split this string into unique words
 	$text = array_unique(explode(' ', str_compact($text)));
+
+	// short & long words 2
+	$text_out = array();
+	foreach ($text as $word)
+	{
+		if (mb_strlen($word) > $min_word_len && mb_strlen($word) <= $max_word_len) $text_out[] = $word;
+	}
+	$text = $text_out;
 
 	if (sizeof($text) > $max_words_count)
 	{

@@ -196,9 +196,11 @@ if ($mode == 'submit' || $mode == 'refresh')
 		$end_post_id   = $row['post_id'];
 
 		// Get search words
+		$s_post_text = str_replace('\n', "\n", $row['post_text']);
+		$s_post_subject = str_replace('\n', "\n", $row['post_subject']);
 		$words_sql[] = array(
 			'post_id'      => (int) $row['post_id'],
-			'search_words' => add_search_words($row['post_id'], stripslashes($row['post_text']), stripslashes($row['post_subject']), true),
+			'search_words' => add_search_words($row['post_id'], stripslashes($s_post_text), stripslashes($s_post_subject), true),
 		);
 
 		$timer_expired = (TIMENOW > $expire_time);
