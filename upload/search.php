@@ -1,10 +1,13 @@
 <?php
 
-define('IN_PHPBB',   true);
 define('BB_SCRIPT', 'search');
 define('BB_ROOT', './');
-require(BB_ROOT ."common.php");
-require(INC_DIR .'bbcode.php');
+require(BB_ROOT . 'common.php');
+
+require(INC_DIR . 'bbcode.php');
+require(INC_DIR . 'class.utf8.php');
+require(INC_DIR . 'class.correct.php');
+require(INC_DIR . 'class.reflection.php');
 
 $page_cfg['load_tpl_vars'] = array(
 	'post_buttons',
@@ -425,7 +428,10 @@ if (!$items_found)
 	{
 		if ($tmp = substr(trim($var), 0, $text_match_max_len))
 		{
-			$text_match_sql = clean_text_match($tmp, $all_words_val, false, true);
+			// Autocorrect wrong keyboard layout
+			$tlc             = new Text_LangCorrect();
+			$title_match_val = $tlc->parse($tlc->parse($tmp, 1), 2);
+			$text_match_sql = clean_text_match($title_match_val, $all_words_val, false, true);
 		}
 	}
 }

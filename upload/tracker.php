@@ -1,14 +1,16 @@
 <?php
 
-define('IN_PHPBB',   true);
 define('BB_SCRIPT', 'tracker');
 define('BB_ROOT', './');
-require(BB_ROOT ."common.php");
+require(BB_ROOT . 'common.php');
+
+require(INC_DIR . 'class.utf8.php');
+require(INC_DIR . 'class.correct.php');
+require(INC_DIR . 'class.reflection.php');
 
 // Page config
 $page_cfg['include_bbcode_js'] = true;
 $page_cfg['use_tablesorter']   = true;
-
 $page_cfg['load_tpl_vars'] = array(
 	'post_icons',
 );
@@ -425,7 +427,9 @@ if (!$set_default)
 	{
 		if ($tmp = mb_substr(trim($tm), 0, $title_match_max_len))
 		{
-			$title_match_val = $tmp;
+			// Autocorrect wrong keyboard layout
+			$tlc             = new Text_LangCorrect();
+			$title_match_val = $tlc->parse($tlc->parse($tmp, 1), 2);
 			$title_match_sql = clean_text_match($title_match_val, true, false, false);
 		}
 	}
