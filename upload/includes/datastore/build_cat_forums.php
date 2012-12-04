@@ -136,6 +136,7 @@ if ($bb_cfg['show_latest_news'] AND $news_forum_ids = $bb_cfg['latest_news_forum
 		SELECT topic_id, topic_time, topic_title, forum_id
 		FROM ". BB_TOPICS ."
 		WHERE forum_id IN ($news_forum_ids)
+	      AND topic_moved_id = 0
 		ORDER BY topic_time DESC
 		LIMIT $news_count
 	");
@@ -154,6 +155,7 @@ if ($bb_cfg['show_network_news'] AND $net_forum_ids = $bb_cfg['network_news_foru
       SELECT topic_id, topic_time, topic_title, forum_id
       FROM ". BB_TOPICS ."
       WHERE forum_id IN ($net_forum_ids)
+	      AND topic_moved_id = 0
       ORDER BY topic_time DESC
       LIMIT $net_count
    ");
