@@ -319,7 +319,7 @@ class ajax_common
 		}
 
 		DB()->query("UPDATE ". BB_USERS ." SET user_rank = $rank_id WHERE user_id = $user_id LIMIT 1");
-		
+
 		cache_rm_user_sessions($user_id);
 
 		$this->response['html'] = ($rank_id != 0) ? $lang['AWARDED_RANK'] . ' <b> '. $ranks[$rank_id]['rank_title'] .'</b>' : $lang['SHOT_RANK'];
@@ -451,7 +451,7 @@ class ajax_common
 
 	function post_mod_comment ()
 	{
-		global $lang, $user;
+		global $lang, $userdata;
 
 		$post_id = (int) $this->request['post_id'];
 		$post = DB()->fetch_row("SELECT t.*, f.*, p.*, pt.post_text
@@ -466,12 +466,12 @@ class ajax_common
 		$text = (string) $this->request['mc_text'];
 		$text = prepare_message($text);
 		if (!$text) $this->ajax_die('no text');
-		DB()->query("UPDATE ". BB_POSTS ." SET post_mod_comment = '". DB()->escape($text) ."', post_mod_comment_type = $type, post_mc_mod_id = ". $user->id .", post_mc_mod_name = '". $user->data['username'] ."' WHERE post_id = $post_id LIMIT 1");
+		DB()->query("UPDATE ". BB_POSTS ." SET post_mod_comment = '". DB()->escape($text) ."', post_mod_comment_type = $type, post_mc_mod_id = ". $userdata['user_id'] .", post_mc_mod_name = '". $userdata['username'] ."' WHERE post_id = $post_id LIMIT 1");
 		$this->response['type'] = $type;
 		$this->response['post_id'] = $post_id;
 		if ($type == 0) $this->response['html'] = '';
-		else if ($type == 1) $this->response['html'] = '<div class="mcBlock"><table cellspacing="0" cellpadding="0" border="0"><tr><td class="mcTd1C">K</td><td class="mcTd2C"><a href="profile.php?mode=viewprofile&u='. $user->id .'">'. $user->data['username'] .'</a> '. $lang['WROTE'] .':<br /><br />'. bbcode2html($text) .'</td></tr></table></div>';
-		else if ($type == 2) $this->response['html'] = '<div class="mcBlock"><table cellspacing="0" cellpadding="0" border="0"><tr><td class="mcTd1W">!</td><td class="mcTd2W"><a href="profile.php?mode=viewprofile&u='. $user->id .'">'. $user->data['username'] .'</a> '. $lang['WROTE'] .':<br /><br />'. bbcode2html($text) .'</td></tr></table></div>';
+		else if ($type == 1) $this->response['html'] = '<div class="mcBlock"><table cellspacing="0" cellpadding="0" border="0"><tr><td class="mcTd1C">K</td><td class="mcTd2C">'. profile_url($userdata) .'&nbsp;'. $lang['WROTE'] .':<br /><br />'. bbcode2html($text) .'</td></tr></table></div>';
+		else if ($type == 2) $this->response['html'] = '<div class="mcBlock"><table cellspacing="0" cellpadding="0" border="0"><tr><td class="mcTd1W">!</td><td class="mcTd2W">'. profile_url($userdata) .'&nbsp;'. $lang['WROTE'] .':<br /><br />'. bbcode2html($text) .'</td></tr></table></div>';
 	}
 
 	function view_post ()
@@ -518,7 +518,7 @@ class ajax_common
 	{
 		require(AJAX_DIR .'topic_tpl.php');
 	}
-	
+
 	function index_data()
     {
 		require(AJAX_DIR .'index_data.php');
