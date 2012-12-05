@@ -822,21 +822,61 @@ if ($submit && !$errors)
 
 			if ($bb_cfg['require_activation'] == USER_ACTIVATION_ADMIN)
 			{
-				$emailer->from($bb_cfg['board_email']);
-				$emailer->replyto($bb_cfg['board_email']);
+				$sql = "SELECT user_email, user_lang, usr_opt
+					FROM ". BB_USERS ."
+					WHERE user_level = " . ADMIN;
 
-				$emailer->email_address($email);
-				$emailer->use_template('admin_activate', $user_lang);
-				$emailer->set_subject($lang['NEW_ACCOUNT_SUBJECT']);
+				if ( !($result = DB()->sql_query($sql)) )
+				{
+					message_die(GENERAL_ERROR, 'Could not select Administrators', '', __LINE__, __FILE__, $sql);
+				}
 
-				$emailer->assign_vars(array(
-					'USERNAME'   => html_entity_decode($username),
-					'EMAIL_SIG'  => str_replace('<br />', "\n", "-- \n" . $bb_cfg['board_email_sig']),
+				while ($row = DB()->sql_fetchrow($result))
+				{
+					if(bf($to_userdata['user_opt'], 'user_opt', 'notify_pm'))
+					{
+						$active_admin = true;
 
-					'U_ACTIVATE' => make_url('profile.php?mode=activate&' . POST_USERS_URL . '=' . $new_user_id . '&act_key=' . $db_data['user_actkey'])
-				));
-				$emailer->send();
-				$emailer->reset();
+						$emailer->from($bb_cfg['board_email']);
+						$emailer->replyto($bb_cfg['board_email']);
+
+						$emailer->email_address(trim($row['user_email']));
+						$emailer->use_template("admin_activate", $row['user_lang']);
+						$emailer->set_subject($lang['NEW_ACCOUNT_SUBJECT']);
+
+						$emailer->assign_vars(array(
+							'USERNAME'   => html_entity_decode($username),
+							'EMAIL_SIG'  => str_replace('<br />', "\n", "-- \n" . $bb_cfg['board_email_sig']),
+
+							'U_ACTIVATE' => make_url('profile.php?mode=activate&' . POST_USERS_URL . '=' . $new_user_id . '&act_key=' . $db_data['user_actkey'])
+						));
+
+						$emailer->send();
+						$emailer->reset();
+					}
+				}
+
+				if(empty($active_admin))
+				{
+					$emailer->from($bb_cfg['board_email']);
+					$emailer->replyto($bb_cfg['board_email']);
+
+					$emailer->email_address($bb_cfg['board_email']);
+					$emailer->use_template("admin_activate", $row['user_lang']);
+					$emailer->set_subject($lang['NEW_ACCOUNT_SUBJECT']);
+
+					$emailer->assign_vars(array(
+						'USERNAME'   => html_entity_decode($username),
+						'EMAIL_SIG'  => str_replace('<br />', "\n", "-- \n" . $bb_cfg['board_email_sig']),
+
+						'U_ACTIVATE' => make_url('profile.php?mode=activate&' . POST_USERS_URL . '=' . $new_user_id . '&act_key=' . $db_data['user_actkey'])
+					));
+
+					$emailer->send();
+					$emailer->reset();
+				}
+
+				DB()->sql_freeresult($result);
 			}
 		}
 

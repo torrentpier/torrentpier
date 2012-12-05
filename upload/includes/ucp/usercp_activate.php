@@ -39,7 +39,7 @@ if ( $row = DB()->sql_fetchrow($result) )
 			}
 		}
 
-		$sql_update_pass = ( $row['user_newpasswd'] != '' ) ? ", user_password = '" . DB()->escape($row['user_newpasswd']) . "', user_newpasswd = ''" : '';
+		$sql_update_pass = ( $row['user_newpasswd'] != '' ) ? ", user_password = '" . md5(md5($row['user_newpasswd'])) . "', user_newpasswd = ''" : '';
 
 		$sql = "UPDATE " . BB_USERS . "
 			SET user_active = 1, user_actkey = ''" . $sql_update_pass . "
@@ -64,7 +64,7 @@ if ( $row = DB()->sql_fetchrow($result) )
 			$emailer->assign_vars(array(
 				'SITENAME' => $bb_cfg['sitename'],
 				'USERNAME' => $row['username'],
-				'PASSWORD' => $password_confirm,
+				'PASSWORD' => $row['user_newpasswd'],
 				'EMAIL_SIG' => (!empty($bb_cfg['board_email_sig'])) ? str_replace('<br />', "\n", "-- \n" . $bb_cfg['board_email_sig']) : '')
 			);
 			$emailer->send();

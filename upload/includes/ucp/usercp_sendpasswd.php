@@ -37,7 +37,7 @@ if ( isset($_POST['submit']) )
 			$user_password = make_rand_str(8);
 
 			$sql = "UPDATE " . BB_USERS . "
-				SET user_newpasswd = '" . md5(md5($user_password)) . "', user_actkey = '$user_actkey'
+				SET user_newpasswd = '$user_password', user_actkey = '$user_actkey'
 				WHERE user_id = " . $row['user_id'];
 			if ( !DB()->sql_query($sql) )
 			{
