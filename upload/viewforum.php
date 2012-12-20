@@ -339,15 +339,15 @@ $title_match_sql = '';
 
 if ($title_match =& $_REQUEST[$title_match_key])
 {
-	if ($title_match = substr(trim($title_match), 0, $title_match_max_len))
+	if ($tmp = mb_substr(trim($title_match), 0, $title_match_max_len))
 	{
-		$search_bool_mode = ($bb_cfg['allow_search_in_bool_mode']) ? " IN BOOLEAN MODE" : '';
-		$search_text_sql = DB()->escape($title_match);
-		$title_match_sql = "
-			AND MATCH (t.topic_title) AGAINST ('$search_text_sql'". $search_bool_mode .")
-		";
-		$start = 0;
-		$forum_topics = $topics_per_page;
+		$title_match_val = clean_text_match($tmp, true, false, false);
+		$title_match_topics = get_title_match_topics($title_match_val, array(0 => $forum_id));
+
+		if ($search_match_topics_csv = join(',', $title_match_topics))
+		{
+			$title_match_sql = "AND t.topic_id IN($search_match_topics_csv)";
+		}
 	}
 }
 
