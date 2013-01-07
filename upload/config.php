@@ -56,8 +56,8 @@ $domain_name = (!empty($_SERVER['SERVER_NAME'])) ? $_SERVER['SERVER_NAME'] : $do
 
 // Increase number of revision after update
 $bb_cfg['tp_version'] = '2.5 pre-stable';
-$bb_cfg['tp_release_date'] = '21-12-2012';
-$bb_cfg['tp_release_state'] = 'R482';
+$bb_cfg['tp_release_date'] = '07-01-2013';
+$bb_cfg['tp_release_state'] = 'R483';
 
 // Database
 $charset  = 'utf8';
@@ -65,7 +65,7 @@ $pconnect = false;
 
 // Настройка баз данных ['db']['srv_name'] => (array) srv_cfg;
 // порядок параметров srv_cfg (хост, название базы, пользователь, пароль, charset, pconnect);
-$bb_cfg['db']['db1'] = array('localhost', 'dbase', 'user', 'pass', $charset, $pconnect);
+$bb_cfg['db']['db1'] = array('localhost', 'demo_port32', 'demo_port32', 'demo_port32', $charset, $pconnect);
 //$bb_cfg['db']['db2'] = array('localhost2', 'dbase2', 'user2', 'pass2', $charset, $pconnect);
 //$bb_cfg['db']['db3'] = array('localhost3', 'dbase3', 'user2', 'pass3', $charset, $pconnect);
 

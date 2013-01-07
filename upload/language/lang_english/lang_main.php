@@ -140,6 +140,8 @@ $lang['MODERATOR'] = 'Moderator';
 $lang['MODERATORS'] = 'Moderators';
 $lang['TERMS'] = 'Terms';
 $lang['NOTHING_HAS_CHANGED'] = 'Nothing has changed';
+$lang['AUTOCOMPLETE'] = "Password generate";
+$lang['YOUR_NEW_PASSWORD'] = "Your are new password:";
 
 //
 // Stats block text

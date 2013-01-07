@@ -1357,6 +1357,49 @@ span.YTLink a.postLink{
 .mcTd2C{ color:#262e37;}
 .mcTd1W{ background:#751717 !important; border:1px solid #5e0000; text-shadow:0 0 10px #200000;}
 .mcTd2W{ color:#3e0000;}
-	
 
- 
+span#autocomplete {
+	cursor: pointer;
+	color: #006699;
+	font: 12px Arial,sans-serif;
+}
+
+div#autocomplete_popup {
+	position: fixed;
+	z-index: 999;
+	width: 300px;
+	height: 100px;
+	background: #FFFFFF;
+	text-align: center;
+	display: none;
+	border: 1px solid #B7C0C5;
+}
+
+div#autocomplete_popup div.relative {
+	position: relative;
+	width: 300px;
+	height: 100px;
+}
+
+div#autocomplete_popup div.title {
+	background: url("../images/cellpic1.gif") repeat-x scroll 0 0 #1C508C;
+	color: #D5E4EC;
+	font-size: 11px;
+	font-weight: bold;
+	padding: 6px 8px 7px;
+}
+
+div#autocomplete_popup div.close {
+	position: absolute;
+	right: 6px;
+	cursor: pointer;
+	top: 2px;
+	color: red;
+	font-weight: bold;
+}
+
+div#autocomplete_popup input {
+	font-size: 16px;
+	margin: 20px 0 0;
+	width: 83px;
+}
