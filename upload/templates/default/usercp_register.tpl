@@ -31,6 +31,51 @@
 				jQuery(this).val(string_result);
 			});
 		});
+
+		/**
+		 * @Author: dimka3210
+		 * @Desc: А давайте окно сделаем перемещаемым.
+		 */
+		var _X, _Y;
+		var _bMoveble = false;
+
+		jQuery("div#autocomplete_popup div.title").mousedown(function (event) {
+			_bMoveble = true;
+			_X = event.clientX;
+			_Y = event.clientY;
+		});
+
+		jQuery("div#autocomplete_popup div.title").mousemove(function (event) {
+			var jFrame = jQuery("div#autocomplete_popup");
+			var jFLeft = parseInt(jFrame.css("left"));
+			var jFTop = parseInt(jFrame.css("top"));
+
+			if (_bMoveble) {
+				if (event.clientX < _X) {
+					jFrame.css("left", jFLeft - (_X - event.clientX) + "px");
+				} else {
+					jFrame.css("left", (jFLeft + (event.clientX - _X)) + "px");
+				}
+
+				if (event.clientY < _Y) {
+					jFrame.css("top", jFTop - (_Y - event.clientY) + "px");
+				} else {
+					jFrame.css("top", (jFTop + (event.clientY - _Y)) + "px");
+				}
+
+				_X = event.clientX;
+				_Y = event.clientY;
+				console.log("X: " + _X + " Y: " + _Y);
+			}
+		});
+
+		jQuery("div#autocomplete_popup div.title").mouseup(function () {
+			_bMoveble = false;
+		}).mouseout(function () {
+					_bMoveble = false;
+				});
+
+
 	});
 </script>
 <div id="autocomplete_popup">
