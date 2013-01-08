@@ -160,7 +160,9 @@ function submit_post($mode, &$post_data, &$message, &$meta, &$forum_id, &$topic_
 
 		$topic_dl_type = (isset($_POST['topic_dl_type']) && ($post_info['allow_reg_tracker'] || $is_auth['auth_mod'])) ? TOPIC_DL_TYPE_DL : TOPIC_DL_TYPE_NORMAL;
 
-		$sql  = ($mode != "editpost") ? "INSERT INTO " . BB_TOPICS . " (topic_title, topic_poster, topic_time, forum_id, topic_status, topic_type, topic_dl_type, topic_vote) VALUES ('$post_subject', " . $userdata['user_id'] . ", $current_time, $forum_id, " . TOPIC_UNLOCKED . ", $topic_type, $topic_dl_type, $topic_vote)" : "UPDATE " . BB_TOPICS . " SET topic_title = '$post_subject', topic_type = $topic_type, topic_dl_type = $topic_dl_type " . ((@$post_data['edit_vote'] || !empty($poll_title)) ? ", topic_vote = " . $topic_vote : "") . " WHERE topic_id = $topic_id";
+		$is_draft = (empty($_POST['to_draft'])) ? 0 : 1;
+
+		$sql  = ($mode != "editpost") ? "INSERT INTO " . BB_TOPICS . " (topic_title, topic_poster, topic_time, forum_id, topic_status, topic_type, topic_dl_type, topic_vote, is_draft) VALUES ('$post_subject', " . $userdata['user_id'] . ", $current_time, $forum_id, " . TOPIC_UNLOCKED . ", $topic_type, $topic_dl_type, $topic_vote, $is_draft)" : "UPDATE " . BB_TOPICS . " SET topic_title = '$post_subject', topic_type = $topic_type, topic_dl_type = $topic_dl_type " . ((@$post_data['edit_vote'] || !empty($poll_title)) ? ", topic_vote = " . $topic_vote : "") . ", is_draft={$is_draft}" . " WHERE topic_id = $topic_id";
 
 		if (!DB()->sql_query($sql))
 		{

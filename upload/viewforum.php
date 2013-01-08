@@ -49,6 +49,7 @@ if (!$forum_id OR !$forum_data = @$forums['forum'][$forum_id])
 // Only new
 $only_new = $user->opt_js['only_new'];
 $only_new_sql = '';
+$no_draft = "AND `t`.`is_draft` = 0";
 if ($only_new == ONLY_NEW_POSTS)
 {
 	$only_new_sql = "AND t.topic_last_post_time > $lastvisit";
@@ -362,6 +363,7 @@ $sql = "
 		$only_new_sql
 		$title_match_sql
 		$limit_topics_time_sql
+		$no_draft
 	$order_sql
 	LIMIT $start, $topics_per_page
 ";

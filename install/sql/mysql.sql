@@ -1331,6 +1331,7 @@ CREATE TABLE IF NOT EXISTS `bb_topics` (
   `topic_dl_type` tinyint(1) NOT NULL DEFAULT '0',
   `topic_last_post_time` int(11) NOT NULL DEFAULT '0',
   `topic_show_first_post` tinyint(1) unsigned NOT NULL DEFAULT '0',
+  `is_draft` TINYINT(1) UNSIGNED NOT NULL DEFAULT '0',
   PRIMARY KEY (`topic_id`),
   KEY `forum_id` (`forum_id`),
   KEY `topic_last_post_id` (`topic_last_post_id`),

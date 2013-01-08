@@ -321,9 +321,11 @@ if ($mode == 'newtopic' && $topic_tpl && $post_info['topic_tpl_id'])
 if ($submit || $refresh)
 {
 	$notify_user = (int) !empty($_POST['notify']);
+	$to_draft = (int) !empty($_POST['to_draft']);
 }
 else
 {
+	$to_draft = ($bb_cfg['status_of_draft']) ? $post_info['is_draft'] : false ;
 	$notify_user = bf($userdata['user_opt'], 'user_opt', 'notify');
 	if (!IS_GUEST && $mode != 'newtopic' && !$notify_user)
 	{
@@ -851,6 +853,7 @@ $template->assign_vars(array(
 	'U_VIEWTOPIC' => ( $mode == 'reply' ) ? "viewtopic.php?" . POST_TOPIC_URL . "=$topic_id&amp;postorder=desc" : '',
 
 	'S_NOTIFY_CHECKED' => ( $notify_user ) ? 'checked="checked"' : '',
+	'S_DRAFT_CHECKED' => ( $to_draft ) ? 'checked="checked"' : '',
 	'S_TYPE_TOGGLE' => $topic_type_toggle,
 	'S_TOPIC_ID' => $topic_id,
 	'S_POST_ACTION' => "posting.php",

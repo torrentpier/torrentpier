@@ -403,6 +403,12 @@ ajax.callback.gen_passkey = function(data){
 				<td id="ignore_srv_load">{L_ACCESS_SRV_LOAD}: <b class="editable">{IGNORE_SRV_LOAD}</b></td>
 			</tr>
 			<!-- ENDIF -->
+			<!-- IF SEE_I -->
+			<tr>
+				<th>Черновиков:</th>
+				<td><a href="./profile.php?mode=viewdraft&u={PROFILE_USER_ID}"><b>{COUNT_DRAFT}</b></a></td>
+			</tr>
+			<!-- ENDIF -->
 
 		    <tr>
 			    <td colspan="2" class="pad_4">

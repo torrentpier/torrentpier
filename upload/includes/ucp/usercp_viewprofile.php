@@ -96,6 +96,9 @@ else if ($signature)
 	$signature = bbcode2html($signature);
 }
 
+$count_draft = DB()->fetch_row("SELECT COUNT(topic_id) as count FROM ". BB_TOPICS . " WHERE topic_poster = {$profiledata['user_id']} AND is_draft=1");
+$count_draft = $count_draft["count"];
+
 $template->assign_vars(array(
 	'PAGE_TITLE'           => sprintf($lang['VIEWING_USER_PROFILE'], $profiledata['username']),
 	'USERNAME'             => $profiledata['username'],
@@ -116,6 +119,8 @@ $template->assign_vars(array(
 	'LOCATION'             => $profiledata['user_from'],
 
 	'USER_ACTIVE'          => $profiledata['user_active'],
+	'COUNT_DRAFT'          => $count_draft,
+	'SEE_I'                => ($profiledata['user_id'] == $userdata['user_id'] || IS_ADMIN) ? true : false,
 
 	'OCCUPATION'           => $profiledata['user_occ'],
 	'INTERESTS'            => $profiledata['user_interests'],
