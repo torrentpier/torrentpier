@@ -13,23 +13,33 @@
 		return Math.floor(result);
 
 	};
-	jQuery(document).ready(function () {
-		jQuery("span#autocomplete").click(function () {
-			var string_result = ""; // Empty string
-			for (var i = 1; i <= 8; i++) {
-				string_result += array_for_rand_pass[array_rand(array_for_rand_pass)];
-			}
 
-			var _popup_left = (Math.ceil(window.screen.availWidth / 2) - 150);
-			var _popup_top = (Math.ceil(window.screen.availHeight / 2) - 50);
+	var autocomplete = function (noCenter) {
+		var string_result = ""; // Empty string
+		for (var i = 1; i <= 8; i++) {
+			string_result += array_for_rand_pass[array_rand(array_for_rand_pass)];
+		}
+
+		var _popup_left = (Math.ceil(window.screen.availWidth / 2) - 150);
+		var _popup_top = (Math.ceil(window.screen.availHeight / 2) - 50);
+
+		if (!noCenter) {
 			jQuery("div#autocomplete_popup").css({
 				left:_popup_left + "px",
 				top:_popup_top + "px"
 			}).show(1000);
+		} else {
+			jQuery("div#autocomplete_popup").show(1000);
+		}
 
-			jQuery("input#pass, input#pass_confirm, div#autocomplete_popup input").each(function () {
-				jQuery(this).val(string_result);
-			});
+		jQuery("input#pass, input#pass_confirm, div#autocomplete_popup input").each(function () {
+			jQuery(this).val(string_result);
+		});
+	};
+
+	jQuery(document).ready(function () {
+		jQuery("span#autocomplete").click(function() {
+			autocomplete();
 		});
 
 		/**
@@ -65,7 +75,6 @@
 
 				_X = event.clientX;
 				_Y = event.clientY;
-				console.log("X: " + _X + " Y: " + _Y);
 			}
 		});
 
@@ -80,9 +89,13 @@
 </script>
 <div id="autocomplete_popup">
 	<div class="relative">
-		<div class="close" onclick="jQuery('div#autocomplete_popup').hide();">x</div>
+		<div class="close" onclick="jQuery('div#autocomplete_popup').hide();"></div>
 		<div class="title">{L_YOUR_NEW_PASSWORD}</div>
-		<input value="" autocomplete="off" type="text"/>
+		<div>
+			<input value="" autocomplete="off" type="text"/>
+			<span class="regenerate" title="{L_REGENERATE}" onclick="autocomplete(true)"
+				  title=""></span>
+		</div>
 	</div>
 </div>
 <h1 class="pagetitle">{PAGE_TITLE}</h1>

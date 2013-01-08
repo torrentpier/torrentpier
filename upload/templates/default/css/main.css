@@ -1391,15 +1391,27 @@ div#autocomplete_popup div.title {
 
 div#autocomplete_popup div.close {
 	position: absolute;
-	right: 6px;
+	right: 7px;
 	cursor: pointer;
-	top: 2px;
+	top: 7px;
 	color: red;
 	font-weight: bold;
+	width: 12px;
+	height: 12px;
+	background: url("/images/bad.gif") transparent no-repeat;
 }
 
 div#autocomplete_popup input {
 	font-size: 16px;
 	margin: 20px 0 0;
 	width: 83px;
+}
+
+div#autocomplete_popup span.regenerate {
+	width: 16px;
+	height: 16px;
+	margin: 24px 0 0 8px;
+	background: url("/images/pic_loading.gif") transparent no-repeat;
+	cursor: pointer;
+	display: inline-block;
 }
