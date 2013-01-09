@@ -405,7 +405,7 @@ ajax.callback.gen_passkey = function(data){
 			<!-- ENDIF -->
 			<!-- IF SEE_I -->
 			<tr>
-				<th>Черновиков:</th>
+				<th>{L_DRAFTS}</th>
 				<td><a href="./profile.php?mode=viewdraft&u={PROFILE_USER_ID}"><b>{COUNT_DRAFT}</b></a></td>
 			</tr>
 			<!-- ENDIF -->
