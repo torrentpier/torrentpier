@@ -120,8 +120,6 @@ $template->assign_vars(array(
 
 	'USER_ACTIVE'          => $profiledata['user_active'],
 	'COUNT_DRAFT'          => $count_draft,
-	'SEE_I'                => ($profiledata['user_id'] == $userdata['user_id'] || IS_ADMIN) ? true : false,
-
 	'OCCUPATION'           => $profiledata['user_occ'],
 	'INTERESTS'            => $profiledata['user_interests'],
 	'SKYPE'                => $profiledata['user_skype'],
