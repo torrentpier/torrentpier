@@ -325,7 +325,7 @@ if ($submit || $refresh)
 }
 else
 {
-	$to_draft = ($bb_cfg['status_of_draft']) ? $post_info['is_draft'] : false ;
+	$to_draft = ($bb_cfg['status_of_draft'] && $mode == 'editpost') ? $post_info['is_draft'] : false ;
 	$notify_user = bf($userdata['user_opt'], 'user_opt', 'notify');
 	if (!IS_GUEST && $mode != 'newtopic' && !$notify_user)
 	{
