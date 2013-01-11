@@ -665,7 +665,7 @@ INSERT INTO `bb_config` VALUES ('report_notify', '0');
 INSERT INTO `bb_config` VALUES ('report_list_admin', '0');
 INSERT INTO `bb_config` VALUES ('report_new_window', '0');
 INSERT INTO `bb_config` VALUES ('torrent_pass_private_key', 'вставить_из_конфига_XBTT');
-INSERT INTO `bb_config` VALUES ('cron_enabled', '1');
+INSERT INTO `bb_config` VALUES ('cron_enabled', '0');
 INSERT INTO `bb_config` VALUES ('cron_check_interval', '300');
 INSERT INTO `bb_config` VALUES ('reports_enabled', '1');
 INSERT INTO `bb_config` VALUES ('gallery_enabled', '1');
@@ -1343,7 +1343,7 @@ CREATE TABLE IF NOT EXISTS `bb_topics` (
 -- Дамп данных таблицы `bb_topics`
 --
 
-INSERT INTO `bb_topics` VALUES (1, 1, 'Добро пожаловать в TorrentPier II', 2, 1309421220, 2, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 972086460, 0);
+INSERT INTO `bb_topics` VALUES (1, 1, 'Добро пожаловать в TorrentPier II', 2, 1309421220, 2, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 972086460, 0, 0);
 
 -- --------------------------------------------------------
 
