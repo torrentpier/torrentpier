@@ -3,7 +3,7 @@
 define('IN_PHPBB', true);
 define('BB_SCRIPT', 'topic');
 define('BB_ROOT', './');
-require(BB_ROOT ."common.php");
+require(BB_ROOT .'common.php');
 require(INC_DIR .'bbcode.php');
 
 $datastore->enqueue(array(

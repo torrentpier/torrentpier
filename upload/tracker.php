@@ -2,11 +2,11 @@
 
 define('BB_SCRIPT', 'tracker');
 define('BB_ROOT', './');
-require(BB_ROOT . 'common.php');
+require(BB_ROOT .'common.php');
 
-require(INC_DIR . 'class.utf8.php');
-require(INC_DIR . 'class.correct.php');
-require(INC_DIR . 'class.reflection.php');
+require(INC_DIR .'class.utf8.php');
+require(INC_DIR .'class.correct.php');
+require(INC_DIR .'class.reflection.php');
 
 // Page config
 $page_cfg['include_bbcode_js'] = true;

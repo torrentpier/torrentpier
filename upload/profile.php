@@ -20,13 +20,9 @@ switch ($mode)
 		require(INC_DIR . 'ucp/usercp_viewprofile.php');
 		break;
 
-	case 'viewdraft':
-		require(INC_DIR . 'ucp/usercp_viewdraft.php');
-		break;
-
 	case 'register':
 	case 'editprofile':
-		if ( !$userdata['session_logged_in'] && $mode == 'editprofile' )
+		if (IS_GUEST && $mode == 'editprofile' )
 		{
 			login_redirect();
 		}
@@ -57,6 +53,10 @@ switch ($mode)
 
 		require(INC_DIR . 'ucp/usercp_topic_watch.php');
 		break;
+		
+	case 'viewdraft':
+		require(INC_DIR . 'ucp/usercp_viewdraft.php');
+		break;	
 	
 	default:
 		bb_die('Invalid mode');

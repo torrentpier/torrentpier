@@ -527,3 +527,82 @@ $(document).ready(function(){
 		}
 	});
 });
+
+/**
+  * Autocomplete password
+  **/
+	var array_for_rand_pass = ["a", "A", "b", "B", "c", "C", "d", "D", "e", "E", "f", "F", "g", "G", "h", "H", "i", "I", "j", "J", "k", "K", "l", "L", "m", "M", "n", "N", "o", "O", "p", "P", "q", "Q", "r", "R", "s", "S", "t", "T", "u", "U", "v", "V", "w", "W", "x", "X", "y", "Y", "z", "Z", 0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
+	var array_rand = function (array) {
+		var array_length = array.length;
+		var result = Math.random() * array_length;
+		return Math.floor(result);
+
+	};
+
+	var autocomplete = function (noCenter) {
+		var string_result = ""; // Empty string
+		for (var i = 1; i <= 8; i++) {
+			string_result += array_for_rand_pass[array_rand(array_for_rand_pass)];
+		}
+
+		var _popup_left = (Math.ceil(window.screen.availWidth / 2) - 150);
+		var _popup_top = (Math.ceil(window.screen.availHeight / 2) - 50);
+
+		if (!noCenter) {
+			$("div#autocomplete_popup").css({
+				left:_popup_left + "px",
+				top:_popup_top + "px"
+			}).show(1000);
+		} else {
+			$("div#autocomplete_popup").show(1000);
+		}
+
+		$("input#pass, input#pass_confirm, div#autocomplete_popup input").each(function () {
+			$(this).val(string_result);
+		});
+	};
+	
+$(document).ready(function () {
+	$("span#autocomplete").click(function() {
+		autocomplete();
+	});
+
+	// перемещение окна
+	var _X, _Y;
+	var _bMoveble = false;
+
+	$("div#autocomplete_popup div.title").mousedown(function (event) {
+		_bMoveble = true;
+		_X = event.clientX;
+		_Y = event.clientY;
+	});
+
+	$("div#autocomplete_popup div.title").mousemove(function (event) {
+		var jFrame = $("div#autocomplete_popup");
+		var jFLeft = parseInt(jFrame.css("left"));
+		var jFTop = parseInt(jFrame.css("top"));
+
+		if (_bMoveble) {
+			if (event.clientX < _X) {
+				jFrame.css("left", jFLeft - (_X - event.clientX) + "px");
+			} else {
+				jFrame.css("left", (jFLeft + (event.clientX - _X)) + "px");
+			}
+
+			if (event.clientY < _Y) {
+				jFrame.css("top", jFTop - (_Y - event.clientY) + "px");
+			} else {
+				jFrame.css("top", (jFTop + (event.clientY - _Y)) + "px");
+			}
+
+			_X = event.clientX;
+			_Y = event.clientY;
+		}
+	});
+
+	$("div#autocomplete_popup div.title").mouseup(function () {
+		_bMoveble = false;
+	}).mouseout(function () {
+		_bMoveble = false;
+	});
+});

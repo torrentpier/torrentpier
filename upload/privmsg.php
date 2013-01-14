@@ -4,7 +4,7 @@ define('IN_PHPBB',   true);
 define('BB_SCRIPT', 'pm');
 define('IN_PM',     true);
 define('BB_ROOT', './');
-require(BB_ROOT ."common.php");
+require(BB_ROOT .'common.php');
 require(INC_DIR .'bbcode.php');
 require(INC_DIR .'functions_post.php');
 

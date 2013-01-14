@@ -136,8 +136,8 @@ if ($bb_cfg['show_latest_news'] AND $news_forum_ids = $bb_cfg['latest_news_forum
 		SELECT topic_id, topic_time, topic_title, forum_id
 		FROM ". BB_TOPICS ."
 		WHERE forum_id IN ($news_forum_ids)
-	      AND topic_moved_id = 0
-	      AND is_draft = 0
+	        AND topic_moved_id = 0
+	        AND is_draft = 0
 		ORDER BY topic_time DESC
 		LIMIT $news_count
 	");
@@ -150,18 +150,19 @@ if ($bb_cfg['show_latest_news'] AND $news_forum_ids = $bb_cfg['latest_news_forum
 //
 if ($bb_cfg['show_network_news'] AND $net_forum_ids = $bb_cfg['network_news_forum_id'])
 {
-   $net_count = max($bb_cfg['network_news_count'], 1);
+    $net_count = max($bb_cfg['network_news_count'], 1);
 
-   $data = DB()->fetch_rowset("
-      SELECT topic_id, topic_time, topic_title, forum_id
-      FROM ". BB_TOPICS ."
-      WHERE forum_id IN ($net_forum_ids)
-	      AND topic_moved_id = 0
-      ORDER BY topic_time DESC
-      LIMIT $net_count
-   ");
+    $data = DB()->fetch_rowset("
+        SELECT topic_id, topic_time, topic_title, forum_id
+        FROM ". BB_TOPICS ."
+        WHERE forum_id IN ($net_forum_ids)
+	        AND topic_moved_id = 0
+			AND is_draft = 0
+        ORDER BY topic_time DESC
+        LIMIT $net_count
+    ");
 
-   $this->store('network_news', $data);
+    $this->store('network_news', $data);
 }
 
 //

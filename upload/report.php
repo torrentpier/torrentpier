@@ -3,9 +3,9 @@
 define('IN_PHPBB', true);
 define('BB_SCRIPT', 'report');
 define('BB_ROOT', './');
-require(BB_ROOT ."common.php");
-require(INC_DIR ."bbcode.php");
-require(INC_DIR ."functions_report.php");
+require(BB_ROOT .'common.php');
+require(INC_DIR .'bbcode.php');
+require(INC_DIR .'functions_report.php');
 
 // Init userdata
 $user->session_start(array('req_login' => true));
