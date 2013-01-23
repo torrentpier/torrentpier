@@ -378,6 +378,7 @@ $lang['DELETE_POLL'] = 'Delete Poll';
 $lang['ATTACH_SIGNATURE'] = 'Attach signature (signatures can be changed in profile)';
 $lang['NOTIFY'] = 'Notify me when a reply is posted';
 $lang['TO_DRAFT'] = 'Save as Draft';
+$lang['DRAFTS'] = 'Drafts';
 
 $lang['STORED'] = 'Your message has been entered successfully.';
 $lang['DELETED'] = 'Your message has been deleted successfully.';

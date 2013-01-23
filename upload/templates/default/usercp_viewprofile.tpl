@@ -405,17 +405,16 @@ ajax.callback.gen_passkey = function(data){
 			<!-- ENDIF -->
 			<!--  IF PROFILE_USER || IS_ADMIN -->
 			<tr>
-				<th>{L_DRAFTS}</th>
-				<td><a href="./profile.php?mode=viewdraft&u={PROFILE_USER_ID}"><b>{COUNT_DRAFT}</b></a></td>
+				<th>{L_DRAFTS}:</th>
+				<td><a href="profile.php?mode=viewdraft&u={PROFILE_USER_ID}"><b>{COUNT_DRAFT}</b></a></td>
 			</tr>
 			<!-- ENDIF -->
-
 		    <tr>
 			    <td colspan="2" class="pad_4">
 
 			    <table id="traf-stats-tbl" <!-- IF TRAF_STATS -->style="display: none;"<!-- ENDIF --> class="bCenter borderless" cellspacing="1">
 			    <tr class="row3">
-				    <th style="padding: 0;" class="stats-ext"></th>
+				    <th class="stats-ext"></th>
 				    <th>{L_DOWNLOADED}</th>
 				    <th>{L_UPLOADED}</th>
 				    <th>{L_RELEASED}</th>
