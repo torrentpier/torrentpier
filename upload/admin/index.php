@@ -127,7 +127,7 @@ else if( isset($_GET['pane']) && $_GET['pane'] == 'right' )
 		$row = DB()->sql_fetchrow($result);
 		$version = $row['mysql_version'];
 
-		if( preg_match('/^(3\.23|4\.|5\.)/', $version) )
+		if( preg_match('/^(3\.23|4\.|5\.|10\.)/', $version) )
 		{
 			$dblist = array();
 			foreach($bb_cfg['db'] as $name => $row)

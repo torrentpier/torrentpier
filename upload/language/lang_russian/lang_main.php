@@ -1657,7 +1657,6 @@ $lang['TERMS_OFF'] = 'Я <b>не согласен</b> с этими услови
 $lang['JAVASCRIPT_ON_REGISTER'] = 'Для регистрации необходимо включить JavaScript';
 $lang['REGISTERED_IN_TIME'] = "В данный момент регистрация закрыта<br /><br />вы можете зарегистрироваться с 01:00 до 17:00 MSK (сейчас ". date('H:i') ." MSK)<br /><br />Приносим извинения за это временное неудобство";
 $lang['AUTOCOMPLETE'] = 'Сгенерировать пароль';
-$lang['AUTOCOMPLETE'] = 'Сгенерировать пароль';
 $lang['YOUR_NEW_PASSWORD'] = 'Ваш пароль: ';
 $lang['REGENERATE'] = 'Перегенерировать';
 

@@ -2802,7 +2802,7 @@ function get_path_from_id ($id, $ext_id, $base_path, $first_div, $sec_div)
 	return ($base_path ? "$base_path/" : '') . ($id % $sec_div) .'/'. $id . ($ext ? ".$ext" : '');
 }
 
-function send_pm($user_id, $subject, $message, $poster_id = false)
+function send_pm($user_id, $subject, $message, $poster_id = BOT_UID)
 {
 	global $userdata;
 

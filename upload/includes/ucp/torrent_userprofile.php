@@ -199,7 +199,7 @@ $template->assign_vars(array(
 
 $template->assign_vars(array('SHOW_SEARCH_DL' => false));
 
-if (!IS_USER || $profile_user_id == $userdata['user_id'])
+if (IS_AM || $profile_user_id == $userdata['user_id'])
 {
 	$page_cfg['dl_links_user_id'] = $profile_user_id;
 }

@@ -2,7 +2,7 @@
 
 if (!defined('BB_ROOT')) die(basename(__FILE__));
 
-if (empty($bb_cfg['seeder_last_seen_days_keep']) || empty($bb_cfg['seeder_never_seen_days_keep']))
+if ($bb_cfg['seeder_last_seen_days_keep'] == 0 || $bb_cfg['seeder_never_seen_days_keep'] == 0)
 {
 	return;
 }

@@ -45,7 +45,7 @@ if (IS_ADMIN)
 	$rank_select = build_select('rank-sel', $rank_select, $user_rank);
 }
 
-if (bf($profiledata['user_opt'], 'user_opt', 'viewemail') || IS_AM)
+if (bf($profiledata['user_opt'], 'user_opt', 'viewemail') || $profiledata['user_id'] == $userdata['user_id'] || IS_AM)
 {
 	$email_uri = ($bb_cfg['board_email_form']) ? 'profile.php?mode=email&amp;'. POST_USERS_URL .'='. $profiledata['user_id'] : 'mailto:'. $profiledata['user_email'];
 	$email = '<a class="editable" href="'. $email_uri .'">'. $profiledata['user_email'] .'</a>';
