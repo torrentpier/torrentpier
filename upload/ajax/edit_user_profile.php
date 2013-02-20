@@ -58,9 +58,9 @@ switch ($field)
 	case 'user_birthday':
 	    if(!$bb_cfg['birthday_enabled']) $this->ajax_die($lang['MODULE_OFF']);
 	    $data = explode('-', $value);
-	    $b_day  = (isset($data[2])) ? (int) $data[2] : 0;
-		$b_md   = (isset($data[1])) ? (int) $data[1] : 0;
-		$b_year = (isset($data[0])) ? (int) $data[0] : 0;
+	    $b_day  = (isset($data[2])) ? (int) $data[2] : '';
+		$b_md   = (isset($data[1])) ? (int) $data[1] : '';
+		$b_year = (isset($data[0])) ? (int) $data[0] : '';
 
 		if($b_day || $b_md || $b_year)
 		{
@@ -78,13 +78,13 @@ switch ($field)
 			}
 			else
 			{
-				$value = mkrealdate($b_day, $b_md, $b_year);
+				$value = "$b_year-$b_md-$b_day";
 				$next_birthday_greeting = (date('md') < $b_md . (($b_day <= 9) ? '0' : '') . $b_day) ? date('Y') : date('Y')+1;
 			}
 		}
 		else
 		{
-		    $value = 0;
+		    $value = '';
 		    $next_birthday_greeting = 0;
 		}
 		DB()->query("UPDATE $table SET user_next_birthday_greeting = $next_birthday_greeting WHERE user_id = $user_id LIMIT 1");

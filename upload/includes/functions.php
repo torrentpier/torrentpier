@@ -1713,7 +1713,7 @@ function realdate($date, $format = "Ymd")
 function birthday_age($date, $list = 0)
 {
 	if(!$date) return;
-	return delta_time(mktime(11, 0, 0, realdate($date, 'm'), realdate($date, 'd'), (realdate($date, 'Y') - $list)));
+	return delta_time(mktime(11, 0, 0, date('m', strtotime($date)), date('d', strtotime($date)), (date('Y', strtotime($date)) - $list)));
 }
 
 //

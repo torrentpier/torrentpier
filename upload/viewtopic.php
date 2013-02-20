@@ -818,7 +818,7 @@ for($i = 0; $i < $total_posts; $i++)
 	$poster_id = $postrow[$i]['user_id'];
 	$poster = ( $poster_id == ANONYMOUS ) ? $lang['GUEST'] : $postrow[$i]['username'];
 
-    $poster_birthday = ($postrow[$i]['user_id'] != ANONYMOUS) ? realdate($postrow[$i]['user_birthday'], 'md') : 0;
+    $poster_birthday = ($postrow[$i]['user_id'] != ANONYMOUS) ? date('md', strtotime($postrow[$i]['user_birthday'])) : '';
 
 	$post_date = bb_date($postrow[$i]['post_time'], $bb_cfg['post_date_format']);
 	$max_post_time = max($max_post_time, $postrow[$i]['post_time']);

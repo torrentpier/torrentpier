@@ -125,8 +125,8 @@ $template->assign_vars(array(
 	'SKYPE'                => $profiledata['user_skype'],
 	'USER_POINTS'          => $profiledata['user_points'],
 	'GENDER'               => ($bb_cfg['gender'] && $profiledata['user_gender']) ? $lang['GENDER_SELECT'][$profiledata['user_gender']] : '',
-	'BIRTHDAY'             => ($bb_cfg['birthday_enabled'] && $profiledata['user_birthday']) ? realdate($profiledata['user_birthday'], 'Y-m-d') : '',
-	'AGE'                  => ($bb_cfg['birthday_enabled'] && $profiledata['user_birthday']) ? birthday_age($profiledata['user_birthday']) : '',
+	'BIRTHDAY'             => ($bb_cfg['birthday_enabled'] && $profiledata['user_birthday'] != '0000-00-00') ? date('Y-m-d', strtotime($profiledata['user_birthday'])) : '',
+	'AGE'                  => ($bb_cfg['birthday_enabled'] && $profiledata['user_birthday'] != '0000-00-00') ? birthday_age($profiledata['user_birthday']) : '',
 	'AVATAR_IMG'           => get_avatar($profiledata['user_avatar'], $profiledata['user_avatar_type'], !bf($profiledata['user_opt'], 'user_opt', 'allow_avatar')),
 
 	'L_VIEWING_PROFILE'    => sprintf($lang['VIEWING_USER_PROFILE'], $profiledata['username']),

@@ -526,33 +526,26 @@ class ajax_common
 
 	function modify_draft()
 	{
-		global $userdata;
-		
-		//if($bb_cfg['status_of_draft'] || !$bb_cfg['status_of_draft']) $this->ajax_die('Профилактика !!!');
-		
-		$tid  = (int) $this->request['id_draft'];
-		$mode = (int) $this->request['mode'];
-		
-		$row = DB()->fetch_row("SELECT * FROM " . BB_TOPICS . " WHERE topic_id = {$tid}");
+		global $userdata, $bb_cfg, $lang;
 
-		if(!$row) $this->ajax_die('Нет такого черновика');
+		if(!$bb_cfg['status_of_draft']) $this->ajax_die($lang['MODULE_OFF']);
 
-		if($row['topic_poster'] != $userdata['user_id'] && !IS_ADMIN) 
+		$tid = (int)$this->request["id_draft"];
+		$mode = (int)$this->request["mode"];
+		$sql = "SELECT * FROM ". BB_TOPICS ." WHERE topic_id = {$tid}";
+
+		if (!$row = DB()->fetch_row($sql)) $this->ajax_die("Нет такого черновика");
+
+		if ($row["topic_poster"] != $userdata["user_id"] && !IS_ADMIN) $this->ajax_die("Нельзя удалять чужие черновики");
+
+		if (!$mode)
 		{
-			$this->ajax_die('Нельзя удалять чужие черновики');
+			DB()->query("DELETE FROM ". BB_TOPICS ." WHERE  topic_id = {$tid} LIMIT 1");
 		}
-
-		print_r($mode);
-		
-		if(!$mode)
-		{
-			DB()->query("DELETE FROM ". BB_TOPICS ." WHERE topic_id = {$tid}");
-		}
-		else 
+		else
 		{
 			DB()->query("UPDATE ". BB_TOPICS ." SET is_draft = 0 WHERE topic_id = {$tid}");
 		}
-
-		$this->response['tid'] = $tid;
+		$this->response["tid"] = $tid;
 	}
 }

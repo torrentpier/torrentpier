@@ -566,6 +566,7 @@ $lang['GENDER_SELECT'] = array(
 	1 => 'Male',
 	2 => 'Female'
 );
+$lang['MODULE_OFF'] = 'Module is disabled!';
 
 $lang['BIRTHDAY'] = 'Birthday';
 $lang['HAPPY_BIRTHDAY'] = 'Happy Birthday!';

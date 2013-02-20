@@ -14,14 +14,7 @@
 
 Устанавливаем права доступа на данные папки 777, на файлы внутри этих папок (кроме .htaccess) 666:
 - ajax
-- ajax/html 
-- images
-- images/avatars
-- images/avatars/gallery
-- images/captcha
-- images/logo
-- images/ranks
-- images/smiles
+- ajax/html
 - cache
 - cache/filecache
 - cache/filecache/bb_cache
@@ -29,6 +22,13 @@
 - cache/filecache/session_cache
 - files
 - files/thumbs
+- images
+- images/avatars
+- images/avatars/gallery
+- images/captcha
+- images/logo
+- images/ranks
+- images/smiles
 - log
 - pictures
 - triggers

@@ -227,8 +227,10 @@ foreach ($profile_fields as $field => $can_edit)
 				$errors[] = $err;
 			}
 			if($can_edit && $username != $pr_data['username'] || $mode == 'register')
-			{				$pr_data['username'] = $username;
-				$db_data['username'] = $username;			}
+			{
+				$pr_data['username'] = $username;
+				$db_data['username'] = $username;
+			}
 		}
 		$tp_data['CAN_EDIT_USERNAME'] = $can_edit;
 		$tp_data['USERNAME'] = $pr_data['username'];
@@ -358,35 +360,39 @@ foreach ($profile_fields as $field => $can_edit)
 		break;
 
     /**
-	*  Возраст (edit, reg)
+	*  Возраст (edit)
 	*/
 	case 'user_birthday':
-		$b_day  = (isset($_POST['b_day'])) ? (int) $_POST['b_day'] : realdate($pr_data['user_birthday'], 'j');
-		$b_md   = (isset($_POST['b_md'])) ? (int) $_POST['b_md'] : realdate($pr_data['user_birthday'], 'n');
-		$b_year = (isset($_POST['b_year'])) ? (int) $_POST['b_year'] : realdate($pr_data['user_birthday'], 'Y');
+		$user_birthday = ($pr_data['user_birthday'] != '0000-00-00') ? strtotime($pr_data['user_birthday']) : false;
+
+		$b_day  = (isset($_POST['b_day'])) ? (int) $_POST['b_day'] : (($user_birthday) ? date('j', $user_birthday) : 0);
+		$b_md   = (isset($_POST['b_md'])) ? (int) $_POST['b_md'] : (($user_birthday) ? date('n', $user_birthday) : 0);
+		$b_year = (isset($_POST['b_year'])) ? (int) $_POST['b_year'] : (($user_birthday) ? date('Y', $user_birthday) : 0);
 
 		if ($b_day || $b_md || $b_year)
 		{
 			if (!checkdate($b_md, $b_day, $b_year))
 			{
 				$errors[] = $lang['WRONG_BIRTHDAY_FORMAT'];
-				$birthday = $next_birthday_greeting = 0;
+				$birthday = '';
+				$next_birthday_greeting = 0;
 			}
 			else
 			{
-				$birthday = mkrealdate($b_day, $b_md, $b_year);
+				$birthday = "$b_year-$b_md-$b_day";
 				$next_birthday_greeting = (date('md') < $b_md . (($b_day <= 9) ? '0' : '') . $b_day) ? date('Y') : date('Y')+1;
 			}
 		}
 		else
 		{
-			$birthday = $next_birthday_greeting = 0;
+			$birthday = '';
+			$next_birthday_greeting = 0;
 		}
 
         if ($submit && $birthday != $pr_data['user_birthday'])
 		{
 			$pr_data['user_birthday'] = $birthday;
-			$db_data['user_birthday'] = (int) $birthday;
+			$db_data['user_birthday'] = $birthday;
 			$db_data['user_next_birthday_greeting'] = $next_birthday_greeting;
 		}
 		break;
