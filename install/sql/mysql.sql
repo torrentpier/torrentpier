@@ -1443,7 +1443,7 @@ CREATE TABLE IF NOT EXISTS `bb_users` (
   `user_avatar` varchar(100) NOT NULL DEFAULT '',
   `user_avatar_type` tinyint(4) NOT NULL DEFAULT '0',
   `user_gender` tinyint(1) NOT NULL DEFAULT '0',
-  `user_birthday` date DEFAULT NULL,
+  `user_birthday` date NOT NULL DEFAULT '0000-00-00',
   `user_next_birthday_greeting` int(11) NOT NULL DEFAULT '0',
   `user_email` varchar(255) NOT NULL DEFAULT '',
   `user_skype` varchar(32) NOT NULL DEFAULT '',

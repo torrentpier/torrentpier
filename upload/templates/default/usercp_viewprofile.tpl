@@ -155,6 +155,19 @@ ajax.callback.gen_passkey = function(data){
 </script>
 <!-- ENDIF / SHOW_PASSKEY -->
 
+<script type="text/javascript">
+ajax.view_profile = function(mode) {
+	ajax.exec({
+		action  : 'view_profile',
+		mode    : mode,
+		user_id : {PROFILE_USER_ID}
+	});
+}
+ajax.callback.view_profile = function(data) {
+	$('#active_torrents').html(data.active_torrents);
+}
+</script>
+
 <style type="text/css">
 #traf-stats-tbl { width: 468px; background: #F9F9F9; border: 1px solid #A5AFB4; border-collapse: separate; }
 #traf-stats-tbl th, #traf-stats-tbl td { padding: 2px 10px 3px; text-align: center; white-space: nowrap; font-size: 11px; }
@@ -316,6 +329,7 @@ ajax.callback.gen_passkey = function(data){
 				<td>
 				    <b>{LAST_ACTIVITY_TIME}</b>
 					<!-- IF TRAF_STATS --><span id="traf-stats-span">[ <a href="#" id="traf-stats-btn" class="med" onclick="ajax.index_data('get_traf_stats'); return false;">{L_VIEWING_USER_BT_PROFILE}</a> ]</span><!-- ENDIF -->
+					[ <a href="#torrent" class="med" onclick="ajax.view_profile('active_torrents'); return false;">{L_CUR_ACTIVE_DLS}</a> ]
 				</td>
 			</tr>
 			<tr>
@@ -478,96 +492,7 @@ ajax.callback.gen_passkey = function(data){
 
 </table><!--/user_profile-->
 
-<a name="torrent"></a>
-<div class="spacer_8"></div>
-
-<!-- IF ALLOW_DLS -->
-<table class="bordered w100">
-	<tr>
-		<th colspan="4" class="thHead">{L_CUR_ACTIVE_DLS}</th>
-	</tr>
-
-	<tr>
-		<td {RELEASED_ROWSPAN} class="row1 tCenter dlComplete lh_150 pad_4">{L_RELEASINGS}</td>
-		<!-- BEGIN switch_releasing_none -->
-			<td colspan="3" class="row1 w100 tCenter pad_8">{L_NONE}</td>
-		</tr>
-		<!-- END switch_releasing_none -->
-		<!-- BEGIN released -->
-		<td class="row3 tCenter">{L_FORUM}</td>
-		<td colspan="2" class="row3 tCenter">{L_TOPICS}</td>
-	</tr>
-	<!-- BEGIN releasedrow -->
-	<tr class="row1">
-		<td class="tCenter pad_4"><a class="gen" href="{seed.releasedrow.U_VIEW_FORUM}">{seed.releasedrow.FORUM_NAME}</a></td>
-		<td colspan="2" class="pad_4"><a class="med" href="{seed.releasedrow.U_VIEW_TOPIC}">{seed.releasedrow.TOR_TYPE}<b>{seed.releasedrow.TOPIC_TITLE}</b></a></td>
-	</tr>
-	<!-- END releasedrow -->
-	<!-- END released -->
-
-	<tr>
-		<td colspan="4" class="row2 pad_0"><div class="spacer_4"></div></td>
-	</tr>
-
-	<tr>
-		<td {SEED_ROWSPAN} class="row1 tCenter dlComplete lh_150 pad_4">{L_SEEDINGS}</td>
-		<!-- BEGIN switch_seeding_none -->
-			<td colspan="3" class="row1 w100 tCenter pad_8">{L_NONE}</td>
-		</tr>
-		<!-- END switch_seeding_none -->
-		<!-- BEGIN seed -->
-		<td class="row3 tCenter">{L_FORUM}</td>
-		<td colspan="2" class="row3 tCenter">{L_TOPICS}</td>
-	</tr>
-	<!-- BEGIN seedrow -->
-	<tr class="row1">
-		<td class="tCenter pad_4"><a class="gen" href="{seed.seedrow.U_VIEW_FORUM}">{seed.seedrow.FORUM_NAME}</a></td>
-		<td colspan="2" class="pad_4"><a class="med" href="{seed.seedrow.U_VIEW_TOPIC}">{seed.seedrow.TOR_TYPE}<b>{seed.seedrow.TOPIC_TITLE}</b></a></td>
-	</tr>
-	<!-- END seedrow -->
-	<!-- END seed -->
-
-	<tr>
-		<td colspan="4" class="row2 pad_0"><div class="spacer_4"></div></td>
-	</tr>
-
-	<tr>
-		<td {LEECH_ROWSPAN} class="row1 tCenter dlDown lh_150 pad_4">{L_LEECHINGS}</td>
-		<!-- BEGIN switch_leeching_none -->
-		<td colspan="3" class="row1 w100 tCenter pad_8">{L_NONE}</td>
-		</tr>
-		<!-- END switch_leeching_none -->
-		<!-- BEGIN leech -->
-		<td class="row3 tCenter">{L_FORUM}</td>
-		<td class="row3 tCenter">{L_TOPICS}</td>
-		<td class="row3 tCenter">%</td>
-	</tr>
-	<!-- BEGIN leechrow -->
-	<tr class="row1">
-		<td class="tCenter pad_4"><a class="gen" href="{leech.leechrow.U_VIEW_FORUM}">{leech.leechrow.FORUM_NAME}</a></td>
-		<td class="pad_4"><a class="med" href="{leech.leechrow.U_VIEW_TOPIC}">{leech.leechrow.TOR_TYPE}<b>{leech.leechrow.TOPIC_TITLE}</b></a></td>
-		<td class="tCenter med"><b>{leech.leechrow.COMPL_PERC}</b></td>
-	</tr>
-	<!-- END leechrow -->
-	<!-- END leech -->
-
-	<tr class="row2 tCenter">
-		<td class="catBottom pad_6" colspan="4">
-			<!-- IF SHOW_SEARCH_DL -->
-				<a href="{U_SEARCH_DL_WILL}" class="med">{L_SEARCH_DL_WILL_DOWNLOADS}</a>
-				::
-				<a href="{U_SEARCH_DL_DOWN}" class="med">{L_SEARCH_DL_DOWN}</a>
-				::
-				<a href="{U_SEARCH_DL_COMPLETE}" class="med">{L_SEARCH_DL_COMPLETE}</a>
-				::
-				<a href="{U_SEARCH_DL_CANCEL}" class="med">{L_SEARCH_DL_CANCEL}</a>
-			<!-- ELSE -->
-			&nbsp;
-			<!-- ENDIF -->
-		</td>
-	</tr>
-</table>
-<!-- ENDIF -->
+<div id="active_torrents"></div>
 
 <!--bottom_info-->
 <div class="bottom_info">

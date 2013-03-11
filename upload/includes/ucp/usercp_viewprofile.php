@@ -191,13 +191,6 @@ else if (IS_MOD)
 	));
 }
 
-if (!bf($profiledata['user_opt'], 'user_opt', 'allow_dls') || (IS_AM || $profile_user_id))
-{
-    // Show users torrent-profile
-    define('IN_VIEWPROFILE', TRUE);
-    include(INC_DIR .'ucp/torrent_userprofile.php');
-}
-
 // Ajax bt_userdata
 if (IS_AM || $profile_user_id)
 {

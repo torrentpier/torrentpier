@@ -83,6 +83,7 @@ class ajax_common
 		'change_torrent'    => array('user'),
 		'change_tor_status' => array('user'),
 		'modify_draft'      => array('user'),
+		'view_profile'      => array('user'),
 
 		'view_post'         => array('guest'),
 		'view_torrent'      => array('guest'),
@@ -530,13 +531,13 @@ class ajax_common
 
 		if(!$bb_cfg['status_of_draft']) $this->ajax_die($lang['MODULE_OFF']);
 
-		$tid = (int)$this->request["id_draft"];
-		$mode = (int)$this->request["mode"];
+		$tid = (int)$this->request['id_draft'];
+		$mode = (int)$this->request['mode'];
 		$sql = "SELECT * FROM ". BB_TOPICS ." WHERE topic_id = {$tid}";
 
-		if (!$row = DB()->fetch_row($sql)) $this->ajax_die("Нет такого черновика");
+		if (!$row = DB()->fetch_row($sql)) $this->ajax_die('Нет такого черновика');
 
-		if ($row["topic_poster"] != $userdata["user_id"] && !IS_ADMIN) $this->ajax_die("Нельзя удалять чужие черновики");
+		if ($row['topic_poster'] != $userdata['user_id'] && !IS_ADMIN) $this->ajax_die('Нельзя удалять чужие черновики');
 
 		if (!$mode)
 		{
@@ -546,6 +547,11 @@ class ajax_common
 		{
 			DB()->query("UPDATE ". BB_TOPICS ." SET is_draft = 0 WHERE topic_id = {$tid}");
 		}
-		$this->response["tid"] = $tid;
+		$this->response['tid'] = $tid;
+	}
+
+	function view_profile()
+	{
+		require(AJAX_DIR .'view_profile.php');
 	}
 }

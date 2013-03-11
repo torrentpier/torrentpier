@@ -181,7 +181,7 @@ if (!empty($mod))
 	{
 		foreach ($user_ids as $user_id)
 		{
-			$moderators[$forum_id][] = '<a href="'. (PROFILE_URL . $user_id) .'">'. $mod['name_users'][$user_id] .'</a>';
+			$moderators[$forum_id][] = '<a href="'. PROFILE_URL . $user_id .'">'. $mod['name_users'][$user_id] .'</a>';
 		}
 	}
 	foreach ($mod['mod_groups'] as $forum_id => $group_ids)

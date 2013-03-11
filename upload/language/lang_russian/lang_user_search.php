@@ -54,6 +54,7 @@ $lang['SEARCH_FOR_POSTCOUNT_LESSER'] = 'Поиск пользователей с
 $lang['SEARCH_FOR_POSTCOUNT_RANGE'] = 'Поиск пользователей с количеством сообщений от %d до %d';
 $lang['SEARCH_FOR_POSTCOUNT_EQUALS'] = 'Поиск пользователей с количеством сообщений %d';
 $lang['SEARCH_FOR_USERFIELD_ICQ'] = 'Поиск пользователей с адресом ICQ %s';
+$lang['SEARCH_FOR_USERFIELD_SKYPE'] = 'Поиск пользователей с логином в Skype %s';
 $lang['SEARCH_FOR_USERFIELD_WEBSITE'] = 'Поиск пользователей, чей веб-сайт %s';
 $lang['SEARCH_FOR_USERFIELD_LOCATION'] = 'Поиск пользователей из %s';
 $lang['SEARCH_FOR_USERFIELD_INTERESTS'] = 'Поиск пользователей с интересами %s';

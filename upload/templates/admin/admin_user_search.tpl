@@ -81,7 +81,7 @@
 	  <td class="row3"><img src="{SPACER}" width="1" height="1" alt="."></td>
 	</tr>
 	<tr>
-		<td class="row1" nowrap="nowrap"><span class="gen"><b>{L_USERFIELD}:</b>&nbsp;<select name="userfield_type"><option value="icq" selected="selected">{L_ICQ}</option><option value="website">{L_WEBSITE}</option><option value="location">{L_LOCATION}</option><option value="interests">{L_INTERESTS}</option></select>&nbsp;<input class="post" type="text" name="userfield_value" maxlength="25" size="25" />&nbsp;<input type="submit" class="post2" name="search_userfield" value="{L_SEARCH}" /> {L_REGULAR_EXPRESSION} <input type="checkbox" name="search_userfield_regex" value="true" /></span></td>
+		<td class="row1" nowrap="nowrap"><span class="gen"><b>{L_USERFIELD}:</b>&nbsp;<select name="userfield_type"><option value="icq" selected="selected">{L_ICQ}</option><option value="skype">{L_SKYPE}</option><option value="website">{L_WEBSITE}</option><option value="location">{L_LOCATION}</option><option value="interests">{L_INTERESTS}</option></select>&nbsp;<input class="post" type="text" name="userfield_value" maxlength="25" size="25" />&nbsp;<input type="submit" class="post2" name="search_userfield" value="{L_SEARCH}" /> {L_REGULAR_EXPRESSION} <input type="checkbox" name="search_userfield_regex" value="true" /></span></td>
 	</tr>
 	<tr>
 		<td class="row2"><span class="small">{L_SEARCH_USERS_USERFIELD_EXPLAIN}</span></td>

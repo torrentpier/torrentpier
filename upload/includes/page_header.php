@@ -275,7 +275,7 @@ $template->assign_vars(array(
 	'READONLY'           		=> HTML_READONLY,
 	'SELECTED'           		=> HTML_SELECTED,
 
-	'U_SEARCH_SELF_BY_LAST' => "search.php?uid={$userdata['user_id']}&amp;o=5",
+	'U_SEARCH_SELF_BY_LAST'		=> "search.php?uid={$userdata['user_id']}&amp;o=5",
 ));
 
 if (!empty($page_cfg['dl_links_user_id']))

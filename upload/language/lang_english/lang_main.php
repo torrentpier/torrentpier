@@ -36,6 +36,10 @@ $lang['MESSAGE'] = 'Message';
 $lang['TORRENT'] = 'Torrent';
 $lang['PROFILE'] = 'Profile';
 $lang['PERMISSIONS'] = 'Permissions';
+$lang['TYPE'] = 'Type';
+$lang['SEEDER'] = 'Seeder';
+$lang['LEECHER'] = 'Leecher';
+$lang['RELEASER'] = 'Releaser';
 
 $lang['1_DAY'] = '1 Day';
 $lang['7_DAYS'] = '7 Days';
@@ -1339,6 +1343,7 @@ $lang['ONLY_1_TOR_PER_POST'] = 'You can register only one torrent in one post';
 $lang['ONLY_1_TOR_PER_TOPIC'] = 'You can register only one torrent in one topic';
 $lang['VIEWING_USER_BT_PROFILE'] = 'Viewing torrent-profile :: %s'; // %s is username
 $lang['CUR_ACTIVE_DLS'] = 'Currently active torrents';
+$lang['CUR_ACTIVE_DLS_ERROR'] = 'User does not download and seeding';
 
 $lang['TD_TRAF'] = 'Today';
 $lang['YS_TRAF'] = 'Yesterday';
