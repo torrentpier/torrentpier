@@ -311,8 +311,11 @@ foreach ($profile_fields as $field => $can_edit)
 				{
 					$errors[] = $err;
 				}
-				$pr_data['user_active'] = 0;
-				$db_data['user_active'] = 0;
+				if ($bb_cfg['require_activation'] == USER_ACTIVATION_SELF || $bb_cfg['require_activation'] == USER_ACTIVATION_ADMIN)
+				{
+					$pr_data['user_active'] = 0;
+					$db_data['user_active'] = 0;
+				}
 				$db_data['user_email'] = $email;
 			}
 		}

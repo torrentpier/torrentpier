@@ -440,16 +440,7 @@ if ($view == 'attachments')
 		WHERE a.attach_id IN (" . implode(', ', $attach_id) . ") " .
 		$order_by;
 
-	}
-	else if ($search_based)
-	{
-		// we are called from search
-		$attachments = search_attachments($order_by, $total_rows);
-	}
-
-	if (!$search_based)
-	{
-		if ( !($result = DB()->sql_query($sql)) )
+	    if ( !($result = DB()->sql_query($sql)) )
 		{
 			message_die(GENERAL_ERROR, 'Couldn\'t query attachments', '', __LINE__, __FILE__, $sql);
 		}
@@ -457,6 +448,11 @@ if ($view == 'attachments')
 		$attachments = DB()->sql_fetchrowset($result);
 		$num_attach = DB()->num_rows($result);
 		DB()->sql_freeresult($result);
+	}
+	else
+	{
+		// we are called from search
+		$attachments = search_attachments($order_by, $total_rows);
 	}
 
 	if (sizeof($attachments) > 0)
