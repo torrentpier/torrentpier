@@ -140,7 +140,7 @@
 	<td class="row2" align="center">&nbsp;</td>
 	<td class="row2" align="center">&nbsp;</td>
 	<td class="row2" align="center">&nbsp;</td>
-	<tr>
+  </tr>
 
   <!-- END extensionrow -->
   <!-- END grouprow -->

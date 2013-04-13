@@ -89,7 +89,7 @@ class user_common
 
 			if ($session_id)
 			{
-				$SQL['WHERE'][]	= "s.session_id = '$session_id'";
+				$SQL['WHERE'][] = "s.session_id = '$session_id'";
 
 				if ($bb_cfg['torhelp_enabled'])
 				{
@@ -101,8 +101,8 @@ class user_common
 			}
 			else
 			{
-				$SQL['WHERE'][]	= "s.session_ip = '". USER_IP ."'";
-				$SQL['WHERE'][]	= "s.session_user_id = ". ANONYMOUS;
+				$SQL['WHERE'][] = "s.session_ip = '". USER_IP ."'";
+				$SQL['WHERE'][] = "s.session_user_id = ". ANONYMOUS;
 
 				$userdata_cache_id = USER_IP;
 			}

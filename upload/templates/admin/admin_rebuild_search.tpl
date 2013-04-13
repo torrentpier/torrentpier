@@ -173,7 +173,7 @@ function updateButton()
 						<!-- IF SESSION_PERCENT_BOX -->
 						<div style="width: 200px; border: 1px solid #6E3A20; background: #FFFFFF;">
 							<div class="spacer_6" style="width: {SESSION_PERCENT_WIDTH}%; background: #2E8F58;"></div>
-						<div>
+						</div>
 						<!-- ENDIF / SESSION_PERCENT_BOX -->
 					</td>
 				</tr>
@@ -185,7 +185,7 @@ function updateButton()
 						<!-- IF TOTAL_PERCENT_BOX -->
 						<div style="width: 200px; border: 1px solid #6E3A20; background: #FFFFFF;">
 							<div class="spacer_6" style="width: {TOTAL_PERCENT_WIDTH}%; background: #2E8F58;"></div>
-						<div>
+						</div>
 						<!-- ENDIF / TOTAL_PERCENT_BOX -->
 					</td>
 				</tr>

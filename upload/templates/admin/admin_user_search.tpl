@@ -180,7 +180,7 @@
 		<td>&nbsp;{userrow.USER}&nbsp;</td>
 		<td>&nbsp;{userrow.EMAIL}&nbsp;</td>
 		<td>&nbsp;{userrow.JOINDATE}&nbsp;</td>
-		<td>&nbsp;<a href="{userrow.U_VIEWPOSTS}" class="gen" target="_blank">{userrow.POSTS}&nbsp;</span></td>
+		<td>&nbsp;<a href="{userrow.U_VIEWPOSTS}" class="gen" target="_blank">{userrow.POSTS}&nbsp;</td>
 		<td>&nbsp;{userrow.LASTVISIT}&nbsp;</td>
 		<td>&nbsp;<a href="{userrow.U_MANAGE}" class="gen">{L_MANAGE}</a>&nbsp;</td>
 		<td>&nbsp;<a href="{userrow.U_PERMISSIONS}" class="gen">{L_PERMISSIONS}</a>&nbsp;</td>

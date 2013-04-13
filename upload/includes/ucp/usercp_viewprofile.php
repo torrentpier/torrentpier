@@ -96,8 +96,16 @@ else if ($signature)
 	$signature = bbcode2html($signature);
 }
 
-$count_draft = DB()->fetch_row("SELECT COUNT(topic_id) as count FROM ". BB_TOPICS . " WHERE topic_poster = {$profiledata['user_id']} AND is_draft=1");
-$count_draft = $count_draft["count"];
+if($bb_cfg['status_of_draft'])
+{
+	$count_draft = DB()->fetch_row("
+		SELECT COUNT(topic_id) as count
+		FROM ". BB_TOPICS . "
+		WHERE topic_poster = {$profiledata['user_id']}
+		AND is_draft = 1
+	");
+	$count_draft = $count_draft["count"];
+}
 
 $template->assign_vars(array(
 	'PAGE_TITLE'           => sprintf($lang['VIEWING_USER_PROFILE'], $profiledata['username']),
@@ -119,7 +127,7 @@ $template->assign_vars(array(
 	'LOCATION'             => $profiledata['user_from'],
 
 	'USER_ACTIVE'          => $profiledata['user_active'],
-	'COUNT_DRAFT'          => $count_draft,
+	'COUNT_DRAFT'          => ($bb_cfg['status_of_draft']) ? $count_draft : '',
 	'OCCUPATION'           => $profiledata['user_occ'],
 	'INTERESTS'            => $profiledata['user_interests'],
 	'SKYPE'                => $profiledata['user_skype'],
@@ -143,6 +151,7 @@ $template->assign_vars(array(
 	'SHOW_ROLE'            => (IS_AM || $profile_user_id || $profiledata['user_active']),
 	'GROUP_MEMBERSHIP'     => false,
 	'TRAF_STATS'           => !(IS_AM || $profile_user_id),
+	'U_MANAGE'			   => (IS_ADMIN) ? "profile.php?mode=editprofile&amp;u={$profiledata['user_id']}" : 'profile.php?mode=editprofile',
 ));
 
 if (IS_ADMIN)
@@ -214,8 +223,6 @@ if (IS_ADMIN)
 {
 	$template->assign_vars(array(
 		'EDITABLE_TPLS' => true,
-
-		'U_MANAGE'      => "profile.php?mode=editprofile&amp;u={$profiledata['user_id']}",
 		'U_PERMISSIONS' => "admin/admin_ug_auth.php?mode=user&amp;u={$profiledata['user_id']}",
 	));
 

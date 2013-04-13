@@ -225,6 +225,7 @@ $lang['TOPIC_ANNOUNCEMENT'] = 'Announcement:';
 $lang['TOPIC_STICKY'] = 'Sticky:';
 $lang['TOPIC_MOVED'] = 'Moved:';
 $lang['TOPIC_POLL'] = '[ Poll ]';
+$lang['TOPIC_DRAFT'] = '[ Draft ]';
 
 $lang['MARK_TOPICS_READ'] = 'Mark all topics read';
 $lang['TOPICS_MARKED_READ'] = 'The topics for this forum have now been marked read';
@@ -383,6 +384,7 @@ $lang['ATTACH_SIGNATURE'] = 'Attach signature (signatures can be changed in prof
 $lang['NOTIFY'] = 'Notify me when a reply is posted';
 $lang['TO_DRAFT'] = 'Save as Draft';
 $lang['DRAFTS'] = 'Drafts';
+$lang['CANNOT_DELETE_DRAFT'] = 'Sorry, but you may not delete other user\'s drafts';
 
 $lang['STORED'] = 'Your message has been entered successfully.';
 $lang['DELETED'] = 'Your message has been deleted successfully.';

@@ -25,6 +25,7 @@
 <tr>
 	<td width="40%"><h4>{L_STYLE_COLOR}</h4><br />
 		<h6>{L_STYLE_COLOR_FAQ}</h6>
+	</td>
 	<td>
 		<input class="post" type="text" name="style" size="60" maxlength="40" value="{STYLE}" />
 	</td>

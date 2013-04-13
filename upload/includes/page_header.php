@@ -278,19 +278,6 @@ $template->assign_vars(array(
 	'U_SEARCH_SELF_BY_LAST'		=> "search.php?uid={$userdata['user_id']}&amp;o=5",
 ));
 
-if (!empty($page_cfg['dl_links_user_id']))
-{
-	$dl_link = "search.php?dlu={$page_cfg['dl_links_user_id']}&amp;";
-
-	$template->assign_vars(array(
-		'SHOW_SEARCH_DL'       => true,
-		'U_SEARCH_DL_WILL'     => $dl_link .'dlw=1',
-		'U_SEARCH_DL_DOWN'     => $dl_link .'dld=1',
-		'U_SEARCH_DL_COMPLETE' => $dl_link .'dlc=1',
-		'U_SEARCH_DL_CANCEL'   => $dl_link .'dla=1',
-	));
-}
-
 if (!empty($page_cfg['show_torhelp'][BB_SCRIPT]) && !empty($userdata['torhelp']))
 {
 	$ignore_time = !empty($_COOKIE['torhelp']) ? (int) $_COOKIE['torhelp'] : 0;

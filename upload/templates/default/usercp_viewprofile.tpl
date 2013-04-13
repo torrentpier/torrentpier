@@ -179,11 +179,9 @@ ajax.callback.view_profile = function(data) {
 
 <div class="nav">
 	<p class="floatL"><a href="{U_INDEX}">{T_INDEX}</a></p>
-	<!-- IF IS_ADMIN -->
 	<p class="floatR">
-	<a href="{U_MANAGE}">{L_PROFILE}</a> &middot;
-	<a href="{U_PERMISSIONS}">{L_PERMISSIONS}</a>
-	<!-- ENDIF -->
+	<!-- IF IS_ADMIN || PROFILE_USER --><a href="{U_MANAGE}">{L_EDIT_PROFILE}</a><!-- ENDIF -->
+	<!-- IF IS_ADMIN --> &middot; <a href="{U_PERMISSIONS}">{L_PERMISSIONS}</a><!-- ENDIF -->
 	<div class="clear"></div>
 </div>
 
@@ -417,7 +415,7 @@ ajax.callback.view_profile = function(data) {
 				<td id="ignore_srv_load">{L_ACCESS_SRV_LOAD}: <b class="editable">{IGNORE_SRV_LOAD}</b></td>
 			</tr>
 			<!-- ENDIF -->
-			<!--  IF PROFILE_USER || IS_ADMIN -->
+			<!--  IF PROFILE_USER || IS_ADMIN && $bb_cfg['status_of_draft'] -->
 			<tr>
 				<th>{L_DRAFTS}:</th>
 				<td><a href="profile.php?mode=viewdraft&u={PROFILE_USER_ID}"><b>{COUNT_DRAFT}</b></a></td>
@@ -463,7 +461,7 @@ ajax.callback.view_profile = function(data) {
 				    <td colspan="1">{L_MAX_SPEED}</td>
 				    <td colspan="2">{L_DL_DL_SPEED}: {SPEED_DOWN}</td>
 				    <td colspan="2">{L_DL_UL_SPEED}: {SPEED_UP}</td>
-				    <!-- IF $bb_cfg['seed_bonus_enabled'] --><td colspan="1"><!-- IF EDIT_PROF --><a href="profile.php?mode=bonus">{L_EXCHANGE}</a><!-- ENDIF --></td><!-- ENDIF -->
+				    <!-- IF $bb_cfg['seed_bonus_enabled'] --><td colspan="1"><!-- IF PROFILE_USER --><a href="profile.php?mode=bonus">{L_EXCHANGE}</a><!-- ENDIF --></td><!-- ENDIF -->
 			    </tr>
 			</table>
 
@@ -496,16 +494,6 @@ ajax.callback.view_profile = function(data) {
 
 <!--bottom_info-->
 <div class="bottom_info">
-
-	<!-- IF EDIT_PROF -->
-	<form method="post" action="{EDIT_PROF_HREF}">
-	<p class="tCenter mrg_10">
-		<input type="submit" value="{L_EDIT_PROFILE}" class="main gen" />
-	</p>
-	</form>
-	<!-- ELSE -->
-	<br />
-	<!-- ENDIF -->
 
 	<div class="spacer_6"></div>
 

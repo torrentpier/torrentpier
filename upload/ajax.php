@@ -45,6 +45,7 @@ switch ($ajax->action)
 	break;
 
 	case 'manage_user':
+	case 'modify_draft':
 		require(INC_DIR .'functions_admin.php');
 	break;
 
@@ -535,13 +536,13 @@ class ajax_common
 		$mode = (int)$this->request['mode'];
 		$sql = "SELECT * FROM ". BB_TOPICS ." WHERE topic_id = {$tid}";
 
-		if (!$row = DB()->fetch_row($sql)) $this->ajax_die('Нет такого черновика');
+		if (!$row = DB()->fetch_row($sql)) $this->ajax_die($lang['TOPIC_POST_NOT_EXIST']);
 
-		if ($row['topic_poster'] != $userdata['user_id'] && !IS_ADMIN) $this->ajax_die('Нельзя удалять чужие черновики');
+		if ($row['topic_poster'] != $userdata['user_id'] && !IS_ADMIN) $this->ajax_die($lang['CANNOT_DELETE_DRAFT']);
 
 		if (!$mode)
 		{
-			DB()->query("DELETE FROM ". BB_TOPICS ." WHERE  topic_id = {$tid} LIMIT 1");
+			topic_delete($tid);
 		}
 		else
 		{

@@ -11,12 +11,29 @@ switch ($mode)
 	case 'active_torrents':
 	    $user_id = (int) $this->request['user_id'];
 		if(!$user_id) $this->ajax_die($lang['NO_USER_ID_SPECIFIED']);
+		$user_info = get_userdata($user_id);
+		if(bf($user_info['user_opt'], 'user_opt', 'allow_dls') && !IS_AM && $user_id != $userdata['user_id']) $this->ajax_die($lang['CUR_ACTIVE_DLS_DISALLOWED']);
 
 		$excluded_forums_csv = $user->get_excluded_forums(AUTH_VIEW);
 		$not_auth_forums_sql = ($excluded_forums_csv) ? "
 			AND f.forum_id NOT IN($excluded_forums_csv)
 			AND f.forum_parent NOT IN($excluded_forums_csv)
 		" : '';
+
+		$dl = '&nbsp;';
+		if(IS_AM || $user_id == $userdata['user_id'])
+		{
+			$dl_link = "search.php?dlu=$user_id&amp;";
+			$dl = '
+				<a href="'. $dl_link .'dlw=1" class="med">'. $lang['SEARCH_DL_WILL_DOWNLOADS'] .'</a>
+				::
+				<a href="'. $dl_link .'dld=1" class="med">'. $lang['SEARCH_DL_DOWN'] .'</a>
+				::
+				<a href="'. $dl_link .'dlc=1" class="med">'. $lang['SEARCH_DL_COMPLETE'] .'</a>
+				::
+				<a href="'. $dl_link .'dla=1" class="med">'. $lang['SEARCH_DL_CANCEL'] .'</a>
+			';
+		}
 
 		$sql = "
 			SELECT
@@ -40,10 +57,11 @@ switch ($mode)
 			$this->ajax_die('Could not query users torrent profile information', '', __LINE__, __FILE__, $sql);
 		}
 
+		$r = $s = $l = $releasing_count = $seeding_count = $leeching_count = 0;
+
 		if ($rowset = DB()->sql_fetchrowset($result))
 		{
 			$html = '';
-			$r = $s = $l = $releasing_count = $seeding_count = $leeching_count = 0;
 			for ($i=0; $i<count($rowset); $i++)
 			{
 				$is_gold = '';
@@ -111,48 +129,65 @@ switch ($mode)
 			$releasing_count	= ($releasing_count) ? $releasing_count .' ('. humn_size($r) .')' : 0;
 			$seeding_count		= ($seeding_count) ? $seeding_count .' ('. humn_size($s) .')' : 0;
 			$leeching_count		= ($leeching_count) ? $leeching_count .' ('. humn_size($l) .')' : 0;
-
-			$dl = '&nbsp;';
-			if (!empty($page_cfg['dl_links_user_id']))
-			{
-				$dl_link = "search.php?dlu={$page_cfg['dl_links_user_id']}&amp;";
-				$dl = '
-					<a href="'. $dl_link .'dlw=1" class="med">'. $lang['SEARCH_DL_WILL_DOWNLOADS'] .'</a>
-					::
-					<a href="'. $dl_link .'dld=1" class="med">'. $lang['SEARCH_DL_DOWN'] .'</a>
-					::
-					<a href="'. $dl_link .'dlc=1" class="med">'. $lang['SEARCH_DL_COMPLETE'] .'</a>
-					::
-					<a href="'. $dl_link .'dla=1" class="med">'. $lang['SEARCH_DL_CANCEL'] .'</a>
-				';
-			}
-
-			$this->response['active_torrents'] = '
-				<a name="torrent"></a>
-
-				<div class="spacer_8"></div>
-				<div class="pagetitle tCenter">'. $lang['CUR_ACTIVE_DLS'] .'</div>
-				<div class="bold tCenter">'. $lang['RELEASING'] .': <span class="dlComplete">'. $releasing_count .'</span> :: '. $lang['SEEDING'] .': <span class="dlComplete">' . $seeding_count .'</span> :: '. $lang['LEECHING'] .': <span class="dlDown">' . $leeching_count .'</span></div>
-				<div class="spacer_8"></div>
-
-				<div class="fon2">
-				<table class="forumline">
-					<tr>
-						<th><b class="tbs-text">'. $lang['TYPE'] .'</b></th>
-						<th><b class="tbs-text">'. $lang['FORUM'] .'</b></th>
-						<th><b class="tbs-text">'. $lang['TOPICS'] .'</b></th>
-						<th colspan="2"><b class="tbs-text">'. $lang['TORRENT'] .'</b></th>
-					</tr>
-					'. $html .'
-					<tr class="row2 tCenter">
-						<td class="catBottom pad_6" colspan="5">
-						'. $dl .'
-						</td>
-					</tr>
-				</table>
-				</div>
+		}
+		else
+		{
+			$html = '
+				<tr class="row1">
+					<td colspan="4" class="tCenter pad_4">'. $lang['NONE'] .'</td>
+				</tr>
 			';
 		}
-		else $this->ajax_die($lang['CUR_ACTIVE_DLS_ERROR']);
+
+		$this->response['active_torrents'] = '
+			<a name="torrent"></a>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+			<div class="spacer_8"></div>
+			<h1 class="pagetitle tCenter">'. $lang['CUR_ACTIVE_DLS'] .'</h1>
+			<div class="bold tCenter">'. $lang['RELEASING'] .': <span class="dlComplete">'. $releasing_count .'</span> :: '. $lang['SEEDING'] .': <span class="dlComplete">' . $seeding_count .'</span> :: '. $lang['LEECHING'] .': <span class="dlDown">' . $leeching_count .'</span></div>
+			<div class="spacer_8"></div>
+
+
+
+			<div class="fon2">
+
+
+
+
+
+
+			<table class="forumline">
+				<tr>
+					<th><b class="tbs-text">'. $lang['TYPE'] .'</b></th>
+					<th><b class="tbs-text">'. $lang['FORUM'] .'</b></th>
+					<th><b class="tbs-text">'. $lang['TOPICS'] .'</b></th>
+					<th colspan="2"><b class="tbs-text">'. $lang['TORRENT'] .'</b></th>
+				</tr>
+				'. $html .'
+				<tr class="row2 tCenter">
+					<td class="catBottom pad_6" colspan="5">
+					'. $dl .'
+					</td>
+				</tr>
+			</table>
+			</div>
+		';
+
+
+
 	break;
 }

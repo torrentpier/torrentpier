@@ -433,7 +433,7 @@ class SphinxClient extends cache_common
 
 		// per-query settings
 		$this->_offset		= 0;
-		$this->_limit		= 20;
+		$this->_limit		= 2000;
 		$this->_mode		= SPH_MATCH_ALL;
 		$this->_weights		= array ();
 		$this->_sort		= SPH_SORT_RELEVANCE;

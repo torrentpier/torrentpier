@@ -49,7 +49,6 @@ if (!$forum_id OR !$forum_data = @$forums['forum'][$forum_id])
 // Only new
 $only_new = $user->opt_js['only_new'];
 $only_new_sql = '';
-$no_draft = "AND `t`.`is_draft` = 0";
 if ($only_new == ONLY_NEW_POSTS)
 {
 	$only_new_sql = "AND t.topic_last_post_time > $lastvisit";
@@ -279,6 +278,7 @@ if (!empty($_REQUEST['topicdays']))
 			SELECT COUNT(*) AS forum_topics
 			FROM ". BB_TOPICS ."
 			WHERE forum_id = $forum_id
+				AND is_draft != 1
 				AND topic_last_post_time > ". (TIMENOW - 86400*$req_topic_days) ."
 		";
 
@@ -363,7 +363,6 @@ $sql = "
 		$only_new_sql
 		$title_match_sql
 		$limit_topics_time_sql
-		$no_draft
 	$order_sql
 	LIMIT $start, $topics_per_page
 ";
@@ -465,12 +464,18 @@ $template->assign_vars(array(
 // Okay, lets dump out the page ...
 foreach ($topic_rowset as $topic)
 {
+	if ($topic['is_draft'] && $topic['first_user_id'] != $userdata['user_id'])
+	{
+		continue;
+	}
+
 	$topic_id = $topic['topic_id'];
 	$moved    = ($topic['topic_status'] == TOPIC_MOVED);
 	$replies  = $topic['topic_replies'];
 	$t_hot    = ($replies >= $bb_cfg['hot_threshold']);
 	$t_type   = $topic['topic_type'];
 	$separator = '';
+	$topic_draft = ($topic['is_draft']) ? $lang['TOPIC_DRAFT'] .' ' : '';
 	$is_unread = is_unread($topic['topic_last_post_time'], $topic_id, $forum_id);
 
 	if ($t_type == POST_ANNOUNCE && !defined('ANNOUNCE_SEP'))
@@ -511,7 +516,7 @@ foreach ($topic_rowset as $topic)
 		'FORUM_ID'         => $forum_id,
 		'TOPIC_ID'         => $topic_id,
 		'HREF_TOPIC_ID'    => ($moved) ? $topic['topic_moved_id'] : $topic['topic_id'],
-		'TOPIC_TITLE'      => wbr($topic['topic_title']),
+		'TOPIC_TITLE'      => $topic_draft . wbr($topic['topic_title']),
 		'TOPICS_SEPARATOR' => $separator,
 		'IS_UNREAD'        => $is_unread,
 		'TOPIC_ICON'       => get_topic_icon($topic, $is_unread),

@@ -52,7 +52,7 @@
 </tr>
 <tr>
 	<td><h4>{L_ALLOW_GUEST_DL}</h4><!-- IF L_ALLOW_GUEST_DL_EXPL --><h6>{L_ALLOW_GUEST_DL_EXPL}</h6><!-- ENDIF --></td>
-	<td><span class="gen">&nbsp; <!-- IF $bb_cfg['bt_tor_browse_only_reg'] -->{L_NO}<!-- ELSE -->{L_YES}<!-- ENDIF --></td>
+	<td>&nbsp; <!-- IF $bb_cfg['bt_tor_browse_only_reg'] -->{L_NO}<!-- ELSE -->{L_YES}<!-- ENDIF --></td>
 </tr>
 
 <tr>

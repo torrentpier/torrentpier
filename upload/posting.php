@@ -525,10 +525,28 @@ else if ( ($submit || $confirm) && !$topic_has_new_posts )
 		if (!in_array($mode, array('editpost', 'delete', 'poll_delete')))
 		{
 			$user_id = ( $mode == 'reply' || $mode == 'newtopic' ) ? $userdata['user_id'] : $post_data['poster_id'];
-			if (!isset($_POST['to_draft'])) 
+			if (!$to_draft)
 			{
-			    update_post_stats($mode, $post_data, $forum_id, $topic_id, $post_id, $user_id);
-			}	
+				update_post_stats($mode, $post_data, $forum_id, $topic_id, $post_id, $user_id);
+			}
+			else
+			{
+				update_post_stats('delete', $post_data, $forum_id, $topic_id, $post_id, $user_id);
+			}
+		}
+		if ($mode == 'editpost')
+		{
+			if ($post_info['is_draft'] != $to_draft)
+			{
+				if ($to_draft)
+				{
+					update_post_stats('delete', $post_data, $forum_id, $topic_id, $post_id, $post_data['poster_id']);
+				}
+				else
+				{
+					update_post_stats($mode, $post_data, $forum_id, $topic_id, $post_id, $post_data['poster_id']);
+				}
+			}
 		}
 		$attachment_mod['posting']->insert_attachment($post_id);
 

@@ -108,14 +108,14 @@
 	</tr>
 	<tr>
 		<td class="row1" colspan="2" align="right"><span class="gen">{L_FORUM}:</span></td>
-		<td class="row2" colspan="2"><select class="post" name="search_forum">{S_FORUM_OPTIONS}</select></span></td>
+		<td class="row2" colspan="2"><select class="post" name="search_forum">{S_FORUM_OPTIONS}</select></td>
 	</tr>
 	<tr>
 		<td class="row1" colspan="2" align="right"><span class="gen">{L_SORT_BY}:&nbsp;</span></td>
-		<td class="row2" colspan="2">{S_SORT_OPTIONS}</span></td>
+		<td class="row2" colspan="2">{S_SORT_OPTIONS}</td>
 		<tr>
 		<td class="row1" colspan="2" align="right"><span class="gen">{L_SORT}:&nbsp;</span></td>
-		<td class="row2" colspan="2">{S_SORT_ORDER}</span></td>
+		<td class="row2" colspan="2">{S_SORT_ORDER}</td>
 	</tr>
 	<tr>
 		<td class="catBottom" colspan="4">{S_HIDDEN_FIELDS}<input class="liteoption" type="submit" name="search" value="{L_SEARCH}" /></td>
@@ -133,8 +133,10 @@
 <form method="post" action="{S_MODE_ACTION}">
 	<table width="100%">
 	<tr>
-	  <td align="right" nowrap="nowrap"><span class="med">{L_VIEW}:&nbsp;{S_VIEW_SELECT}&nbsp;&nbsp;{L_SORT_BY}:&nbsp;{S_MODE_SELECT}&nbsp;&nbsp;{L_ORDER}&nbsp;{S_ORDER_SELECT}&nbsp;&nbsp;
+	  <td align="right" nowrap="nowrap">
+		<span class="med">{L_VIEW}:&nbsp;{S_VIEW_SELECT}&nbsp;&nbsp;{L_SORT_BY}:&nbsp;{S_MODE_SELECT}&nbsp;&nbsp;{L_ORDER}&nbsp;{S_ORDER_SELECT}&nbsp;&nbsp;
 		<input type="submit" name="submit" value="{L_SUBMIT}" class="liteoption" />
+		</span>
 	  </td>
 	</tr>
   </table>
@@ -196,7 +198,7 @@
 	</tr>
   </table>
   <table class="forumline">
-  <tr>
+	<tr>
 	  <th>#</th>
 	  <th>{L_FILENAME}</th>
 	  <th>{L_FILE_COMMENT}</th>

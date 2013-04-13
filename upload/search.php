@@ -25,10 +25,6 @@ if (isset($_POST['del_my_post']))
 		<a href="index.php">'. $lang['INDEX_RETURN'] .'</a>
 	');
 
-	if (IS_GUEST)
-	{
-		redirect('index.php');
-	}
 	if (empty($_POST['topic_id_list']) OR !$topic_csv = get_id_csv($_POST['topic_id_list']))
 	{
 		bb_die($lang['NONE_SELECTED']);

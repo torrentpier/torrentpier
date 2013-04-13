@@ -223,6 +223,7 @@ $lang['TOPIC_ANNOUNCEMENT'] = 'Объявление:';
 $lang['TOPIC_STICKY'] = 'Прилеплена:';
 $lang['TOPIC_MOVED'] = 'Перемещена:';
 $lang['TOPIC_POLL'] = '[ Опрос ]';
+$lang['TOPIC_DRAFT'] = '[ Черновик ]';
 
 $lang['MARK_TOPICS_READ'] = 'Отметить все темы как прочтённые';
 $lang['TOPICS_MARKED_READ'] = 'Все темы в этом форуме были отмечены как прочтённые';
@@ -385,6 +386,7 @@ $lang['ATTACH_SIGNATURE'] = 'Присоединить подпись (можно
 $lang['NOTIFY'] = 'Сообщать мне о получении ответа';
 $lang['TO_DRAFT'] = 'Сохранить как черновик';
 $lang['DRAFTS'] = 'Черновиков';
+$lang['CANNOT_DELETE_DRAFT'] = 'Извините, вы не можете удалять чужие черновики';
 
 $lang['STORED'] = 'Ваше сообщение было успешно добавлено';
 $lang['DELETED'] = 'Ваше сообщение было успешно удалено';

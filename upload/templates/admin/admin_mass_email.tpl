@@ -19,8 +19,8 @@
 	  <td class="row2"><span class="gen"><input class="post" type="text" name="subject" size="45" maxlength="100" tabindex="2" class="post" value="{SUBJECT}" /></span></td>
 	</tr>
 	<tr>
-	  <td class="row1" align="right" valign="top"> <span class="gen"><b>{L_MESSAGE}</b></span>
-	  <td class="row2"><span class="gen"> <textarea name="message" rows="15" cols="35" wrap="virtual" style="width:450px" tabindex="3" class="post">{MESSAGE}</textarea></span>
+	  <td class="row1" align="right" valign="top"> <span class="gen"><b>{L_MESSAGE}</b></span></td>
+	  <td class="row2"><span class="gen"> <textarea name="message" rows="15" cols="35" wrap="virtual" style="width:450px" tabindex="3" class="post">{MESSAGE}</textarea></span></td>
 	</tr>
 	<tr>
 	  <td class="catBottom" colspan="2"><input type="submit" value="{L_EMAIL}" name="submit" class="mainoption" /></td>
