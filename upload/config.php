@@ -56,8 +56,8 @@ $domain_name = (!empty($_SERVER['SERVER_NAME'])) ? $_SERVER['SERVER_NAME'] : $do
 
 // Increase number of revision after update
 $bb_cfg['tp_version'] = '2.5 pre-stable';
-$bb_cfg['tp_release_date'] = '14-04-2013';
-$bb_cfg['tp_release_state'] = 'R499';
+$bb_cfg['tp_release_date'] = '15-05-2013';
+$bb_cfg['tp_release_state'] = 'R500';
 
 // Database
 $charset  = 'utf8';
@@ -77,6 +77,7 @@ $bb_cfg['db_alias'] = array(
 // Cache
 $bb_cfg['cache']['pconnect'] = true;
 $bb_cfg['cache']['db_dir']   = realpath(BB_ROOT) .'/cache/filecache/';
+$bb_cfg['cache']['prefix']   = '';  // Префикс кеша 'tp_2'
 $bb_cfg['cache']['memcache'] = array(
 	'host'         => '127.0.0.1',
 	'port'         => 11211,

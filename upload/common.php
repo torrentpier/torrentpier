@@ -142,7 +142,7 @@ class CACHES
 					case 'memcache':
 						if (!isset($this->obj[$cache_name]))
 						{
-							$this->obj[$cache_name] = new cache_memcache($this->cfg['memcache']);
+							$this->obj[$cache_name] = new cache_memcache($this->cfg['memcache'], $this->cfg['prefix']);
 						}
 						$this->ref[$cache_name] =& $this->obj[$cache_name];
 						break;
@@ -153,7 +153,7 @@ class CACHES
 							$cache_cfg['pconnect']     = $this->cfg['pconnect'];
 							$cache_cfg['db_file_path'] = $this->get_db_path($cache_name, $cache_cfg, '.sqlite.db');
 
-							$this->obj[$cache_name] = new cache_sqlite($cache_cfg);
+							$this->obj[$cache_name] = new cache_sqlite($cache_cfg, $this->cfg['prefix']);
 						}
 						$this->ref[$cache_name] =& $this->obj[$cache_name];
 						break;
@@ -174,7 +174,7 @@ class CACHES
                     case 'redis':
                         if (!isset($this->obj[$cache_name]))
 						{
-							$this->obj[$cache_name] = new cache_redis($this->cfg['redis']);
+							$this->obj[$cache_name] = new cache_redis($this->cfg['redis'], $this->cfg['prefix']);
 						}
 						$this->ref[$cache_name] =& $this->obj[$cache_name];
 	                    break;
@@ -182,7 +182,7 @@ class CACHES
 					case 'eaccelerator':
 						if (!isset($this->obj[$cache_name]))
 						{
-							$this->obj[$cache_name] = new cache_eaccelerator();
+							$this->obj[$cache_name] = new cache_eaccelerator($this->cfg['prefix']);
 						}
 						$this->ref[$cache_name] =& $this->obj[$cache_name];
 						break;
@@ -190,7 +190,7 @@ class CACHES
                     case 'apc':
 						if (!isset($this->obj[$cache_name]))
 						{
-							$this->obj[$cache_name] = new cache_apc();
+							$this->obj[$cache_name] = new cache_apc($this->cfg['prefix']);
 						}
 						$this->ref[$cache_name] =& $this->obj[$cache_name];
 						break;
@@ -198,7 +198,7 @@ class CACHES
 					case 'xcache':
 						if (!isset($this->obj[$cache_name]))
 						{
-							$this->obj[$cache_name] = new cache_xcache();
+							$this->obj[$cache_name] = new cache_xcache($this->cfg['prefix']);
 						}
 						$this->ref[$cache_name] =& $this->obj[$cache_name];
 						break;
@@ -206,7 +206,7 @@ class CACHES
 					default: //filecache
 						if (!isset($this->obj[$cache_name]))
 						{
-							$this->obj[$cache_name] = new cache_file($this->cfg['db_dir'] . $cache_name .'/');
+							$this->obj[$cache_name] = new cache_file($this->cfg['db_dir'] . $cache_name .'/', $this->cfg['prefix']);
 						}
 						$this->ref[$cache_name] =& $this->obj[$cache_name];
 						break;
@@ -245,16 +245,14 @@ function CACHE ($cache_name)
 
 class cache_common
 {
-	var $prefix = 'tp2_'; // Для использования нескольких проектов на одном сервере
-
 	var $used = false;
 	/**
 	* Returns value of variable
 	*/
 	function get ($name, $get_miss_key_callback = '', $ttl = 604800)
 	{
-		if ($get_miss_key_callback) return $get_miss_key_callback($this->prefix . $name);
-		return is_array($this->prefix . $name) ? array() : false;
+		if ($get_miss_key_callback) return $get_miss_key_callback($name);
+		return is_array($name) ? array() : false;
 	}
 	/**
 	* Store value of variable
@@ -331,17 +329,19 @@ class cache_memcache extends cache_common
 	var $used      = true;
 	var $engine    = 'Memcache';
 	var $cfg       = null;
+	var $prefix    = null;
 	var $memcache  = null;
 	var $connected = false;
 
-	function cache_memcache ($cfg)
+	function cache_memcache ($cfg, $prefix = null)
 	{
 		if (!$this->is_installed())
 		{
 			die('Error: Memcached extension not installed');
 		}
 
-		$this->cfg = $cfg;
+		$this->cfg      = $cfg;
+		$this->prefix   = $prefix;
 		$this->memcache = new Memcache;
 		$this->dbg_enabled = sql_dbg_enabled();
 	}
@@ -401,6 +401,12 @@ class cache_memcache extends cache_common
 
 		if ($name)
 		{
+			$this->cur_query = "cache->rm('$name')";
+			$this->debug('start');
+			$this->debug('stop');
+			$this->cur_query = null;
+			$this->num_queries++;
+
 			return ($this->connected) ? $this->memcache->delete($this->prefix . $name, 0) : false;
 		}
 		else
@@ -417,33 +423,35 @@ class cache_memcache extends cache_common
 
 class cache_sqlite extends cache_common
 {
-	var $used = true;
-	var $db   = null;
-	var $cfg  = array(
-	              'db_file_path' => '/path/to/cache.db.sqlite',
-	              'table_name'   => 'cache',
-	              'table_schema' => 'CREATE TABLE cache (
-	                                   cache_name        VARCHAR(255),
-	                                   cache_expire_time INT,
-	                                   cache_value       TEXT,
-	                                   PRIMARY KEY (cache_name)
-	                                 )',
-	              'pconnect'     => true,
-	              'con_required' => true,
-	              'log_name'     => 'CACHE',
-	            );
+	var $used   = true;
+	var $db     = null;
+	var $prefix = null;
+	var $cfg    = array(
+	        'db_file_path' => '/path/to/cache.db.sqlite',
+	        'table_name'   => 'cache',
+	        'table_schema' => 'CREATE TABLE cache (
+	                cache_name        VARCHAR(255),
+	                cache_expire_time INT,
+	                cache_value       TEXT,
+	                PRIMARY KEY (cache_name)
+	        )',
+	        'pconnect'     => true,
+	        'con_required' => true,
+	        'log_name'     => 'CACHE',
+	    );
 
-	function cache_sqlite ($cfg)
+	function cache_sqlite ($cfg, $prefix = null)
 	{
 		$this->cfg = array_merge($this->cfg, $cfg);
 		$this->db = new sqlite_common($this->cfg);
+		$this->prefix = $prefix;
 	}
 
 	function get ($name, $get_miss_key_callback = '', $ttl = 604800)
 	{
 		if (empty($name))
 		{
-			return is_array( $name) ? array() : false;
+			return is_array($name) ? array() : false;
 		}
 		$this->db->shard($name);
 		$cached_items = array();
@@ -523,15 +531,15 @@ class cache_sqlite extends cache_common
 class sqlite_common extends cache_common
 {
 	var $cfg = array(
-	             'db_file_path' => 'sqlite.db',
-	             'table_name'   => 'table_name',
-	             'table_schema' => 'CREATE TABLE table_name (...)',
-	             'pconnect'     => true,
-	             'con_required' => true,
-	             'log_name'     => 'SQLite',
-	             'shard_type'   => 'none',     #  none, string, int (тип перевичного ключа для шардинга)
-	             'shard_val'    => 0,          #  для string - кол. начальных символов, для int - делитель (будет использован остаток от деления)
-	           );
+	        'db_file_path' => 'sqlite.db',
+	        'table_name'   => 'table_name',
+	        'table_schema' => 'CREATE TABLE table_name (...)',
+	        'pconnect'     => true,
+	        'con_required' => true,
+	        'log_name'     => 'SQLite',
+	        'shard_type'   => 'none',     #  none, string, int (тип перевичного ключа для шардинга)
+	        'shard_val'    => 0,          #  для string - кол. начальных символов, для int - делитель (будет использован остаток от деления)
+	    );
 	var $engine    = 'SQLite';
 	var $dbh       = null;
 	var $connected = false;
@@ -698,17 +706,19 @@ class cache_redis extends cache_common
 	var $engine    = 'Redis';
 	var $cfg       = null;
 	var $redis     = null;
+	var $prefix    = null;
 	var $connected = false;
 
-	function cache_redis ($cfg)
+	function cache_redis ($cfg, $prefix = null)
 	{
 		if (!$this->is_installed())
 		{
 			die('Error: Redis extension not installed');
 		}
 
-		$this->cfg = $cfg;
-		$this->redis = new Redis();
+		$this->cfg    = $cfg;
+		$this->prefix = $prefix;
+		$this->redis  = new Redis();
 		$this->dbg_enabled = sql_dbg_enabled();
 	}
 
@@ -776,6 +786,12 @@ class cache_redis extends cache_common
 
 		if ($name)
 		{
+			$this->cur_query = "cache->rm('$name')";
+			$this->debug('start');
+			$this->debug('stop');
+			$this->cur_query = null;
+			$this->num_queries++;
+
 			return ($this->connected) ? $this->redis->del($this->prefix . $name) : false;
 		}
 		else
@@ -794,14 +810,16 @@ class cache_eaccelerator extends cache_common
 {
 	var $used   = true;
 	var $engine = 'eAccelerator';
+	var $prefix = null;
 
-	function cache_eaccelerator ()
+	function cache_eaccelerator ($prefix = null)
 	{
 		if (!$this->is_installed())
 		{
 			die('Error: eAccelerator extension not installed');
 		}
 		$this->dbg_enabled = sql_dbg_enabled();
+		$this->prefix = $prefix;
 	}
 
 	function get ($name, $get_miss_key_callback = '', $ttl = 0)
@@ -828,6 +846,12 @@ class cache_eaccelerator extends cache_common
 
 	function rm ($name = '')
 	{
+		$this->cur_query = "cache->rm('$name')";
+		$this->debug('start');
+		$this->debug('stop');
+		$this->cur_query = null;
+		$this->num_queries++;
+
 		return eaccelerator_rm($this->prefix . $name);
 	}
 
@@ -839,16 +863,18 @@ class cache_eaccelerator extends cache_common
 
 class cache_apc extends cache_common
 {
-	var $used = true;
+	var $used   = true;
 	var $engine = 'APC';
+	var $prefix = null;
 
-	function cache_apc ()
+	function cache_apc ($prefix = null)
 	{
 		if (!$this->is_installed())
 		{
 			die('Error: APC extension not installed');
 		}
 		$this->dbg_enabled = sql_dbg_enabled();
+		$this->prefix = $prefix;
 	}
 
 	function get ($name, $get_miss_key_callback = '', $ttl = 0)
@@ -877,6 +903,12 @@ class cache_apc extends cache_common
 	{
 		if ($name)
 		{
+			$this->cur_query = "cache->rm('$name')";
+			$this->debug('start');
+			$this->debug('stop');
+			$this->cur_query = null;
+			$this->num_queries++;
+
 			return apc_delete($this->prefix . $name);
 		}
 		else
@@ -893,16 +925,18 @@ class cache_apc extends cache_common
 
 class cache_xcache extends cache_common
 {
-	var $used = true;
+	var $used   = true;
 	var $engine = 'XCache';
+	var $prefix = null;
 
-	function cache_xcache ()
+	function cache_xcache ($prefix = null)
 	{
 		if (!$this->is_installed())
 		{
 			die('Error: XCache extension not installed');
 		}
 		$this->dbg_enabled = sql_dbg_enabled();
+		$this->prefix = $prefix;
 	}
 
 	function get ($name, $get_miss_key_callback = '', $ttl = 0)
@@ -931,12 +965,18 @@ class cache_xcache extends cache_common
 	{
 		if ($name)
 		{
+			$this->cur_query = "cache->rm('$name')";
+			$this->debug('start');
+			$this->debug('stop');
+			$this->cur_query = null;
+			$this->num_queries++;
+
 			return xcache_unset($this->prefix . $name);
 		}
 		else
 		{
-			xcache_clear_cache(XC_TYPE_PHP, 1);
-			xcache_clear_cache(XC_TYPE_VAR, 1);
+			xcache_clear_cache(XC_TYPE_PHP, 0);
+			xcache_clear_cache(XC_TYPE_VAR, 0);
 			return;
 		}
 	}
@@ -952,10 +992,12 @@ class cache_file extends cache_common
 	var $used   = true;
 	var $engine = 'Filecache';
 	var $dir    = null;
+	var $prefix = null;
 
-	function cache_file ($dir)
+	function cache_file ($dir, $prefix = null)
 	{
-		$this->dir = $dir;
+		$this->dir    = $dir;
+		$this->prefix = $prefix;
 		$this->dbg_enabled = sql_dbg_enabled();
 	}
 
@@ -1011,11 +1053,18 @@ class cache_file extends cache_common
 		$clear = false;
 		if ($name)
 		{
+			$this->cur_query = "cache->rm('$name')";
+			$this->debug('start');
+
 			$filename = $this->dir . clean_filename($this->prefix . $name) . '.php';
 			if (file_exists($filename))
 			{
 				$clear = (bool) unlink($filename);
 			}
+
+			$this->debug('stop');
+			$this->cur_query = null;
+			$this->num_queries++;
 		}
 		else
 		{
@@ -1252,8 +1301,9 @@ class datastore_memcache extends datastore_common
 	var $memcache  = null;
 	var $connected = false;
 	var $engine    = 'Memcache';
+	var $prefix    = null;
 
-	function datastore_memcache ($cfg)
+	function datastore_memcache ($cfg, $prefix = null)
 	{
 		global $bb_cfg;
 
@@ -1262,8 +1312,9 @@ class datastore_memcache extends datastore_common
 			die('Error: Memcached extension not installed');
 		}
 
-		$this->cfg = $cfg;
-		$this->memcache = new Memcache;
+		$this->cfg         = $cfg;
+		$this->prefix      = $prefix;
+		$this->memcache    = new Memcache;
 		$this->dbg_enabled = sql_dbg_enabled();
 	}
 
@@ -1301,7 +1352,7 @@ class datastore_memcache extends datastore_common
 		$this->cur_query = null;
 		$this->num_queries++;
 
-		return (bool) $this->memcache->set($title, $var);
+		return (bool) $this->memcache->set($this->prefix . $title, $var);
 	}
 
 	function clean ()
@@ -1315,7 +1366,7 @@ class datastore_memcache extends datastore_common
 			$this->cur_query = null;
 			$this->num_queries++;
 
-			$this->memcache->delete($title, 0);
+			$this->memcache->delete($this->prefix . $title, 0);
 		}
 	}
 
@@ -1336,7 +1387,7 @@ class datastore_memcache extends datastore_common
 			$this->cur_query = null;
 			$this->num_queries++;
 
-			$this->data[$item] = $this->memcache->get($item);
+			$this->data[$item] = $this->memcache->get($this->prefix . $item);
 		}
 	}
 
@@ -1350,30 +1401,32 @@ class datastore_sqlite extends datastore_common
 {
 	var $engine = 'SQLite';
 	var $db     = null;
-	var $cfg  = array(
-	              'db_file_path' => '/path/to/datastore.db.sqlite',
-	              'table_name'   => 'datastore',
-	              'table_schema' => 'CREATE TABLE datastore (
-	                                   ds_title       VARCHAR(255),
-	                                   ds_data        TEXT,
-	                                   PRIMARY KEY (ds_title)
-	                                 )',
-	              'pconnect'     => true,
-	              'con_required' => true,
-	              'log_name'     => 'DATASTORE',
-	            );
+	var $prefix = null;
+	var $cfg    = array(
+	        'db_file_path' => '/path/to/datastore.db.sqlite',
+	        'table_name'   => 'datastore',
+	        'table_schema' => 'CREATE TABLE datastore (
+	            ds_title       VARCHAR(255),
+	            ds_data        TEXT,
+	            PRIMARY KEY (ds_title)
+	        )',
+	        'pconnect'     => true,
+	        'con_required' => true,
+	        'log_name'     => 'DATASTORE',
+	    );
 
-	function datastore_sqlite ($cfg)
+	function datastore_sqlite ($cfg, $prefix = null)
 	{
 		$this->cfg = array_merge($this->cfg, $cfg);
-		$this->db = new sqlite_common($this->cfg);
+		$this->db  = new sqlite_common($this->cfg);
+		$this->prefix = $prefix;
 	}
 
 	function store ($item_name, $item_data)
 	{
 		$this->data[$item_name] = $item_data;
 
-		$ds_title = sqlite_escape_string($item_name);
+		$ds_title = sqlite_escape_string($this->prefix . $item_name);
 		$ds_data  = sqlite_escape_string(serialize($item_data));
 
 		$result = $this->db->query("REPLACE INTO ". $this->cfg['table_name'] ." (ds_title, ds_data) VALUES ('$ds_title', '$ds_data')");
@@ -1390,15 +1443,18 @@ class datastore_sqlite extends datastore_common
 	{
 		if (!$items = $this->queued_items) return;
 
-		array_deep($items, 'sqlite_escape_string');
-		$items_list = join("','", $items);
+		$prefix_len = strlen($this->prefix);
+		$prefix_sql = sqlite_escape_string($this->prefix);
 
-		$rowset = $this->db->fetch_rowset("SELECT ds_title, ds_data FROM ". $this->cfg['table_name'] ." WHERE ds_title IN('$items_list')");
+		array_deep($items, 'sqlite_escape_string');
+		$items_list = $prefix_sql . join("','$prefix_sql", $items);
+
+		$rowset = $this->db->fetch_rowset("SELECT ds_title, ds_data FROM ". $this->cfg['table_name'] ." WHERE ds_title IN ('$items_list')");
 
 		$this->db->debug('start', "unserialize()");
 		foreach ($rowset as $row)
 		{
-			$this->data[$row['ds_title']] = unserialize($row['ds_data']);
+			$this->data[substr($row['ds_title'], $prefix_len)] = unserialize($row['ds_data']);
 		}
 		$this->db->debug('stop');
 	}
@@ -1408,10 +1464,11 @@ class datastore_redis extends datastore_common
 {
 	var $cfg       = null;
 	var $redis     = null;
+	var $prefix    = null;
 	var $connected = false;
 	var $engine    = 'Redis';
 
-	function datastore_redis ($cfg)
+	function datastore_redis ($cfg, $prefix = null)
 	{
 		global $bb_cfg;
 
@@ -1423,6 +1480,7 @@ class datastore_redis extends datastore_common
 		$this->cfg = $cfg;
 		$this->redis = new Redis();
 		$this->dbg_enabled = sql_dbg_enabled();
+		$this->prefix = $prefix;
 	}
 
 	function connect ()
@@ -1455,7 +1513,7 @@ class datastore_redis extends datastore_common
 		$this->cur_query = null;
 		$this->num_queries++;
 
-		return (bool) $this->redis->set($title, serialize($var));
+		return (bool) $this->redis->set($this->prefix . $title, serialize($var));
 	}
 
 	function clean ()
@@ -1469,7 +1527,7 @@ class datastore_redis extends datastore_common
 			$this->cur_query = null;
 			$this->num_queries++;
 
-			$this->redis->del($title);
+			$this->redis->del($this->prefix . $title);
 		}
 	}
 
@@ -1490,7 +1548,7 @@ class datastore_redis extends datastore_common
 			$this->cur_query = null;
 			$this->num_queries++;
 
-			$this->data[$item] = unserialize($this->redis->get($item));
+			$this->data[$item] = unserialize($this->redis->get($this->prefix . $item));
 		}
 	}
 
@@ -1503,14 +1561,18 @@ class datastore_redis extends datastore_common
 class datastore_eaccelerator extends datastore_common
 {
 	var $engine    = 'eAccelerator';
+	var $prefix    = null;
 
-	function datastore_eaccelerator ()
+	function datastore_eaccelerator ($prefix = null)
 	{
+		global $bb_cfg;
+
 		if (!$this->is_installed())
 		{
 			die('Error: eAccelerator extension not installed');
 		}
 		$this->dbg_enabled = sql_dbg_enabled();
+		$this->prefix = $prefix;
 	}
 
 	function store ($title, $var)
@@ -1523,7 +1585,7 @@ class datastore_eaccelerator extends datastore_common
 		$this->cur_query = null;
 		$this->num_queries++;
 
-		eaccelerator_put($title, $var);
+		eaccelerator_put($this->prefix . $title, $var);
 	}
 
 	function clean ()
@@ -1536,7 +1598,7 @@ class datastore_eaccelerator extends datastore_common
 			$this->cur_query = null;
 			$this->num_queries++;
 
-			eaccelerator_rm($title);
+			eaccelerator_rm($this->prefix . $title);
 		}
 	}
 
@@ -1556,7 +1618,7 @@ class datastore_eaccelerator extends datastore_common
 			$this->cur_query = null;
 			$this->num_queries++;
 
-			$this->data[$item] = eaccelerator_get($item);
+			$this->data[$item] = eaccelerator_get($this->prefix . $item);
 		}
 	}
 
@@ -1568,15 +1630,20 @@ class datastore_eaccelerator extends datastore_common
 
 class datastore_xcache extends datastore_common
 {
+	var $prefix = null;
 	var $engine = 'XCache';
 
-	function cache_xcache ()
+	function datastore_xcache ($prefix = null)
 	{
+		global $bb_cfg;
+
 		if (!$this->is_installed())
 		{
 			die('Error: XCache extension not installed');
 		}
+
 		$this->dbg_enabled = sql_dbg_enabled();
+		$this->prefix = $prefix;
 	}
 
 	function store ($title, $var)
@@ -1589,7 +1656,7 @@ class datastore_xcache extends datastore_common
 		$this->cur_query = null;
 		$this->num_queries++;
 
-		return (bool) xcache_set($title, $var);
+		return (bool) xcache_set($this->prefix . $title, $var);
 	}
 
 	function clean ()
@@ -1602,7 +1669,7 @@ class datastore_xcache extends datastore_common
 			$this->cur_query = null;
 			$this->num_queries++;
 
-			xcache_unset($title);
+			xcache_unset($this->prefix . $title);
 		}
 	}
 
@@ -1622,7 +1689,7 @@ class datastore_xcache extends datastore_common
 			$this->cur_query = null;
 			$this->num_queries++;
 
-			$this->data[$item] = xcache_get($item);
+			$this->data[$item] = xcache_get($this->prefix . $item);
 		}
 	}
 
@@ -1635,14 +1702,18 @@ class datastore_xcache extends datastore_common
 class datastore_apc extends datastore_common
 {
 	var $engine = 'APC';
+	var $prefix = null;
 
-	function datastore_apc ()
+	function datastore_apc ($prefix = null)
 	{
+		global $bb_cfg;
+
 		if (!$this->is_installed())
 		{
 			die('Error: APC extension not installed');
 		}
 		$this->dbg_enabled = sql_dbg_enabled();
+		$this->prefix = $prefix;
 	}
 
 	function store ($title, $var)
@@ -1655,7 +1726,7 @@ class datastore_apc extends datastore_common
 		$this->cur_query = null;
 		$this->num_queries++;
 
-		return (bool) apc_store($title, $var);
+		return (bool) apc_store($this->prefix . $title, $var);
 	}
 
 	function clean ()
@@ -1668,7 +1739,7 @@ class datastore_apc extends datastore_common
 			$this->cur_query = null;
 			$this->num_queries++;
 
-			apc_delete($title);
+			apc_delete($this->prefix . $title);
 		}
 	}
 
@@ -1688,7 +1759,7 @@ class datastore_apc extends datastore_common
 			$this->cur_query = null;
 			$this->num_queries++;
 
-			$this->data[$item] = apc_fetch($item);
+			$this->data[$item] = apc_fetch($this->prefix . $item);
 		}
 	}
 
@@ -1701,10 +1772,14 @@ class datastore_apc extends datastore_common
 class datastore_file extends datastore_common
 {
 	var $dir    = null;
+	var $prefix = null;
 	var $engine = 'Filecache';
 
-	function datastore_file ($dir)
+	function datastore_file ($dir, $prefix = null)
 	{
+		global $bb_cfg;
+
+		$this->prefix = $prefix;
 		$this->dir = $dir;
 		$this->dbg_enabled = sql_dbg_enabled();
 	}
@@ -1716,7 +1791,7 @@ class datastore_file extends datastore_common
 
 		$this->data[$title] = $var;
 
-		$filename   = $this->dir . clean_filename($title) . '.php';
+		$filename   = $this->dir . clean_filename($this->prefix . $title) . '.php';
 
 		$filecache = "<?php\n";
 		$filecache .= "if (!defined('BB_ROOT')) die(basename(__FILE__));\n";
@@ -1762,7 +1837,7 @@ class datastore_file extends datastore_common
 
 		foreach($items as $item)
 		{
-			$filename = $this->dir . $item . '.php';
+			$filename = $this->dir . $this->prefix . $item . '.php';
 
 			$this->cur_query = "cache->get('$item')";
 			$this->debug('start');
@@ -1784,7 +1859,7 @@ class datastore_file extends datastore_common
 switch ($bb_cfg['datastore_type'])
 {
 	case 'memcache':
-		$datastore = new datastore_memcache($bb_cfg['cache']['memcache']);
+		$datastore = new datastore_memcache($bb_cfg['cache']['memcache'], $bb_cfg['cache']['prefix']);
 		break;
 
 	case 'sqlite':
@@ -1793,27 +1868,27 @@ switch ($bb_cfg['datastore_type'])
 			'pconnect'     => true,
 			'con_required' => true,
 		);
-		$datastore = new datastore_sqlite($default_cfg);
+		$datastore = new datastore_sqlite($default_cfg, $bb_cfg['cache']['prefix']);
 		break;
 
 	case 'redis':
-		$datastore = new datastore_redis($bb_cfg['cache']['redis']);
+		$datastore = new datastore_redis($bb_cfg['cache']['redis'], $bb_cfg['cache']['prefix']);
 		break;
 
 	case 'eaccelerator':
-		$datastore = new datastore_eaccelerator();
+		$datastore = new datastore_eaccelerator($bb_cfg['cache']['prefix']);
 		break;
 
 	case 'xcache':
-		$datastore = new datastore_xcache();
+		$datastore = new datastore_xcache($bb_cfg['cache']['prefix']);
 		break;
 
 	case 'apc':
-		$datastore = new datastore_apc();
+		$datastore = new datastore_apc($bb_cfg['cache']['prefix']);
 		break;
 
 	case 'filecache':
-		default: $datastore = new datastore_file($bb_cfg['cache']['db_dir'] . 'datastore/');
+		default: $datastore = new datastore_file($bb_cfg['cache']['db_dir'] . 'datastore/', $bb_cfg['cache']['prefix']);
 }
 
 function sql_dbg_enabled ()
