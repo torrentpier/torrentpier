@@ -139,6 +139,10 @@ switch($this->request['type'])
 						}
 				    }
 					DB()->query("UPDATE ". BB_POSTS_TEXT ." SET post_text = '". DB()->escape($text) ."' WHERE post_id = $post_id LIMIT 1");
+					if ($post['topic_last_post_id'] != $post['post_id'] && $userdata['user_id'] == $post['poster_id'])
+					{
+						DB()->query("UPDATE ". BB_POSTS ." SET post_edit_time = '". TIMENOW ."', post_edit_count = post_edit_count + 1 WHERE post_id = $post_id LIMIT 1");
+					}
 					$s_text = str_replace('\n', "\n", $text);
 					$s_topic_title = str_replace('\n', "\n", $post['topic_title']);
 					add_search_words($post_id, stripslashes($s_text), stripslashes($s_topic_title));

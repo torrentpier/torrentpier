@@ -326,7 +326,7 @@ if ($submit || $refresh)
 else
 {
 	$notify_user = bf($userdata['user_opt'], 'user_opt', 'notify');
-	$to_draft = ($bb_cfg['status_of_draft'] && $mode == 'editpost') ? $post_info['is_draft'] : false;
+	$to_draft = ($mode == 'editpost') ? $post_info['is_draft'] : false;
 	
 	if (!IS_GUEST && $mode != 'newtopic' && !$notify_user)
 	{
@@ -525,14 +525,8 @@ else if ( ($submit || $confirm) && !$topic_has_new_posts )
 		if (!in_array($mode, array('editpost', 'delete', 'poll_delete')))
 		{
 			$user_id = ( $mode == 'reply' || $mode == 'newtopic' ) ? $userdata['user_id'] : $post_data['poster_id'];
-			if (!$to_draft)
-			{
-				update_post_stats($mode, $post_data, $forum_id, $topic_id, $post_id, $user_id);
-			}
-			else
-			{
-				update_post_stats('delete', $post_data, $forum_id, $topic_id, $post_id, $user_id);
-			}
+			$post_data['to_draft'] = $to_draft;
+			update_post_stats($mode, $post_data, $forum_id, $topic_id, $post_id, $user_id);
 		}
 		if ($mode == 'editpost')
 		{
@@ -540,11 +534,11 @@ else if ( ($submit || $confirm) && !$topic_has_new_posts )
 			{
 				if ($to_draft)
 				{
-					update_post_stats('delete', $post_data, $forum_id, $topic_id, $post_id, $post_data['poster_id']);
+					update_draft('is_draft', $forum_id, $topic_id, $post_id, $post_data['poster_id']);
 				}
 				else
 				{
-					update_post_stats($mode, $post_data, $forum_id, $topic_id, $post_id, $post_data['poster_id']);
+					update_draft('no_draft', $forum_id, $topic_id, $post_id, $post_data['poster_id']);
 				}
 			}
 		}
@@ -560,7 +554,7 @@ else if ( ($submit || $confirm) && !$topic_has_new_posts )
 			set_tracks(COOKIE_TOPIC, $tracking_topics, $topic_id);
 		}
 
-		if (defined('TORRENT_ATTACH_ID') && $bb_cfg['bt_newtopic_auto_reg'] && !$error_msg)
+		if (defined('TORRENT_ATTACH_ID') && $bb_cfg['bt_newtopic_auto_reg'] && !$error_msg&& !$to_draft)
 		{
 			include(INC_DIR .'functions_torrent.php');
 			if(!DB()->fetch_row("SELECT attach_id FROM ". BB_BT_TORRENTS ." WHERE attach_id = ". TORRENT_ATTACH_ID))
@@ -839,34 +833,18 @@ $template->set_filenames(array(
 	'body' => 'posting.tpl',
 ));
 
+//
+// Output the data to the template
+//
+
 $template->assign_vars(array(
 	'FORUM_NAME' => htmlCHR($forum_name),
 	'PAGE_TITLE' => $page_title,
 	'POSTING_TYPE_TITLE' => $page_title,
 	'POSTING_TOPIC_ID' => ($mode != 'newtopic') ? $topic_id : '',
 	'POSTING_TOPIC_TITLE' => ($mode != 'newtopic') ? wbr($post_info['topic_title']) : '',
-	'U_VIEW_FORUM' => "viewforum.php?" . POST_FORUM_URL . "=$forum_id")
-);
+	'U_VIEW_FORUM' => "viewforum.php?" . POST_FORUM_URL . "=$forum_id",
 
-if ($mode == 'newtopic' || $post_data['first_post'])
-{
-	$template->assign_var('POSTING_SUBJECT');
-}
-
-// Update post time
-if ($mode == 'editpost' && $post_data['last_post'] && !$post_data['first_post'])
-{
-	$template->assign_vars(array(
-		'SHOW_UPDATE_POST_TIME'    => ($is_auth['auth_mod'] || ($post_data['poster_post'] && $post_info['post_time'] + 3600*3 > TIMENOW)),
-		'UPDATE_POST_TIME_CHECKED' => ($post_data['poster_post'] && ($post_info['post_time'] + 3600*2 > TIMENOW)),
-	));
-}
-
-//
-// Output the data to the template
-//
-
-$template->assign_vars(array(
 	'USERNAME' => @$username,
 	'CAPTCHA_HTML' => (IS_GUEST) ? CAPTCHA()->get_html() : '',
 	'SUBJECT' => $subject,
@@ -881,6 +859,25 @@ $template->assign_vars(array(
 	'S_POST_ACTION' => "posting.php",
 	'S_HIDDEN_FORM_FIELDS' => $hidden_form_fields)
 );
+
+if ($mode == 'newtopic' || $post_data['first_post'])
+{
+	$template->assign_var('POSTING_SUBJECT');
+}
+
+if ($mode == 'newtopic' || ($post_data['first_post'] && ($post_info['topic_replies'] == 0 || $post_info['is_draft'])) && $bb_cfg['status_of_draft'])
+{
+	$template->assign_var('DRAFT_CHK');
+}
+
+// Update post time
+if ($mode == 'editpost' && $post_data['last_post'] && !$post_data['first_post'])
+{
+	$template->assign_vars(array(
+		'SHOW_UPDATE_POST_TIME'    => ($is_auth['auth_mod'] || ($post_data['poster_post'] && $post_info['post_time'] + 3600*3 > TIMENOW)),
+		'UPDATE_POST_TIME_CHECKED' => ($post_data['poster_post'] && ($post_info['post_time'] + 3600*2 > TIMENOW)),
+	));
+}
 
 //
 // Poll entry switch/output

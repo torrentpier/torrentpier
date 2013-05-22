@@ -142,34 +142,12 @@ switch ($mode)
 		$this->response['active_torrents'] = '
 			<a name="torrent"></a>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 			<div class="spacer_8"></div>
 			<h1 class="pagetitle tCenter">'. $lang['CUR_ACTIVE_DLS'] .'</h1>
 			<div class="bold tCenter">'. $lang['RELEASING'] .': <span class="dlComplete">'. $releasing_count .'</span> :: '. $lang['SEEDING'] .': <span class="dlComplete">' . $seeding_count .'</span> :: '. $lang['LEECHING'] .': <span class="dlDown">' . $leeching_count .'</span></div>
 			<div class="spacer_8"></div>
 
-
-
 			<div class="fon2">
-
-
-
-
-
-
 			<table class="forumline">
 				<tr>
 					<th><b class="tbs-text">'. $lang['TYPE'] .'</b></th>
@@ -186,8 +164,5 @@ switch ($mode)
 			</table>
 			</div>
 		';
-
-
-
 	break;
 }

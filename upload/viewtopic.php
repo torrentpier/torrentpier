@@ -113,6 +113,11 @@ if (!$t_data = DB()->fetch_row($sql))
 	bb_die($lang['TOPIC_POST_NOT_EXIST']);
 }
 
+if($t_data['topic_poster'] != $userdata['user_id'] && $t_data['is_draft'] && !IS_ADMIN)
+{
+	bb_die($lang['CANNOT_VIEW_DRAFT']);
+}
+
 $forum_topic_data =& $t_data;
 $topic_id = $t_data['topic_id'];
 $forum_id = $t_data['forum_id'];
@@ -457,8 +462,8 @@ $view_forum_url = "viewforum.php?f=$forum_id";
 $view_prev_topic_url = "viewtopic.php?t=$topic_id&amp;view=previous#newest";
 $view_next_topic_url = "viewtopic.php?t=$topic_id&amp;view=next#newest";
 
-$reply_img = ( $t_data['forum_status'] == FORUM_LOCKED || $t_data['topic_status'] == TOPIC_LOCKED ) ? $images['reply_locked'] : $images['reply_new'];
-$reply_alt = ( $t_data['forum_status'] == FORUM_LOCKED || $t_data['topic_status'] == TOPIC_LOCKED ) ? $lang['TOPIC_LOCKED_SHORT'] : $lang['REPLY_TO_TOPIC'];
+$reply_img = ( $t_data['forum_status'] == FORUM_LOCKED || $t_data['topic_status'] == TOPIC_LOCKED || $t_data['is_draft'] ) ? $images['reply_locked'] : $images['reply_new'];
+$reply_alt = ( $t_data['forum_status'] == FORUM_LOCKED || $t_data['topic_status'] == TOPIC_LOCKED || $t_data['is_draft'] ) ? $lang['TOPIC_LOCKED_SHORT'] : $lang['REPLY_TO_TOPIC'];
 
 // Set 'body' template for attach_mod
 $template->set_filenames(array('body' => 'viewtopic.tpl'));
@@ -1076,7 +1081,7 @@ if (defined('SPLIT_FORM_START'))
 //
 if ($bb_cfg['show_quick_reply'])
 {
-	if ($is_auth['auth_reply'] && !($t_data['forum_status'] == FORUM_LOCKED || $t_data['topic_status'] == TOPIC_LOCKED))
+	if ($is_auth['auth_reply'] && !($t_data['forum_status'] == FORUM_LOCKED || $t_data['topic_status'] == TOPIC_LOCKED) && !$t_data['is_draft'])
 	{
 		$template->assign_vars(array(
 			'QUICK_REPLY'     => true,

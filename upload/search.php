@@ -476,7 +476,7 @@ if ($post_mode)
 		$SQL['SELECT'][] = ($join_t && !$join_p) ? 't.topic_first_post_id AS item_id' : 'p.post_id AS item_id';
 
 		// FROM
-		if ($join_t) $SQL['FROM'][] = $topics_tbl;
+		if ($join_t || $bb_cfg['status_of_draft']) $SQL['FROM'][] = $topics_tbl;
 		if ($join_p) $SQL['FROM'][] = $posts_tbl;
 
 		if (!$SQL['FROM'])
@@ -497,6 +497,7 @@ if ($post_mode)
 		if ($prev_days)  $SQL['WHERE'][] = "$tbl.$time_field > ". $time_opt[$time_val]['sql'];
 		if ($my_posts)   $SQL['WHERE'][] = "p.poster_id = $poster_id_val";
 		if ($my_topics)  $SQL['WHERE'][] = "t.topic_poster = $poster_id_val";
+		if ($poster_id_val != $user_id && !IS_ADMIN && $bb_cfg['status_of_draft']) $SQL['WHERE'][] = "t.is_draft = 0";
 
 		if ($text_match_sql)
 		{
@@ -579,13 +580,14 @@ if ($post_mode)
 		$topic_id    = (int) $topic_id;
 		$forum_id    = (int) $first_post['forum_id'];
 		$is_unread_t = is_unread($first_post['topic_last_post_time'], $topic_id, $forum_id);
+		$topic_draft = ($first_post['is_draft']) ? $lang['TOPIC_DRAFT'] .' ' : '';
 
 		$template->assign_block_vars('t', array(
 			'FORUM_ID'    => $forum_id,
 			'FORUM_NAME'  => $forum_name_html[$forum_id],
 			'TOPIC_ID'    => $topic_id,
-			'TOPIC_TITLE' => $first_post['topic_title'],
-			'TOPIC_ICON'  => get_topic_icon($first_post, $is_unread_t),
+			'TOPIC_TITLE' => $topic_draft . $first_post['topic_title'],
+			'TOPIC_ICON'  => ($first_post['is_draft']) ? $images['draft'] : get_topic_icon($first_post, $is_unread_t),
 		));
 
 		$quote_btn = true;
@@ -646,7 +648,7 @@ else
 		}
 
 		// FROM
-		if ($join_t) $SQL['FROM'][] = $topics_tbl;
+		if ($join_t || $bb_cfg['status_of_draft']) $SQL['FROM'][] = $topics_tbl;
 		if ($join_p) $SQL['FROM'][] = $posts_tbl;
 
 		if (!$SQL['FROM'])
@@ -683,6 +685,7 @@ else
 			}	
 		}
 		if ($my_topics)  $SQL['WHERE'][] = "t.topic_poster = $poster_id_val";
+		if ($poster_id_val != $user_id && !IS_ADMIN && $bb_cfg['status_of_draft']) $SQL['WHERE'][] = "t.is_draft = 0";
 
 		if ($text_match_sql)
 		{
@@ -777,6 +780,7 @@ else
 		$forum_id  = $topic['forum_id'];
 		$is_unread = is_unread($topic['topic_last_post_time'], $topic_id, $forum_id);
 		$moved     = ($topic['topic_status'] == TOPIC_MOVED);
+		$topic_draft = ($topic['is_draft']) ? $lang['TOPIC_DRAFT'] .' ' : '';
 
 		$template->assign_block_vars('t', array(
 			'ROW_NUM'       => $row_num,
@@ -784,9 +788,9 @@ else
 			'FORUM_NAME'    => $forum_name_html[$forum_id],
 			'TOPIC_ID'      => $topic_id,
 			'HREF_TOPIC_ID' => ($moved) ? $topic['topic_moved_id'] : $topic['topic_id'],
-			'TOPIC_TITLE'   => wbr($topic['topic_title']),
+			'TOPIC_TITLE'   => $topic_draft . wbr($topic['topic_title']),
 			'IS_UNREAD'     => $is_unread,
-			'TOPIC_ICON'    => get_topic_icon($topic, $is_unread),
+			'TOPIC_ICON'    => ($topic['is_draft']) ? $images['draft'] : get_topic_icon($topic, $is_unread),
 			'PAGINATION'    => ($moved) ? '' : build_topic_pagination(TOPIC_URL . $topic_id, $topic['topic_replies'], $bb_cfg['posts_per_page']),
 			'REPLIES'       => $topic['topic_replies'],
 			'ATTACH'        => $topic['topic_attachment'],

@@ -387,6 +387,7 @@ $lang['NOTIFY'] = 'Сообщать мне о получении ответа';
 $lang['TO_DRAFT'] = 'Сохранить как черновик';
 $lang['DRAFTS'] = 'Черновиков';
 $lang['CANNOT_DELETE_DRAFT'] = 'Извините, вы не можете удалять чужие черновики';
+$lang['CANNOT_VIEW_DRAFT'] = 'Извините, вы не можете просматривать чужие черновики';
 
 $lang['STORED'] = 'Ваше сообщение было успешно добавлено';
 $lang['DELETED'] = 'Ваше сообщение было успешно удалено';
@@ -567,7 +568,6 @@ $lang['HIDE_PORN_FORUMS'] = 'Скрыть pron форумы';
 $lang['ALWAYS_NOTIFY'] = 'Всегда сообщать мне об ответах';
 $lang['ALWAYS_NOTIFY_EXPLAIN'] = 'Когда кто-нибудь ответит на тему, в которую вы писали, вам высылается e-mail. Это можно также настроить при размещении сообщения.';
 
-$lang['BOARD_STYLE'] = 'Внешний вид форумов';
 $lang['BOARD_LANG'] = 'Язык';
 $lang['GENDER'] = 'Пол';
 $lang['GENDER_SELECT'] = array(
@@ -1349,6 +1349,7 @@ $lang['ONLY_1_TOR_PER_TOPIC'] = 'Вы не можете зарегистриро
 $lang['VIEWING_USER_BT_PROFILE'] = 'Торрент-профиль'; // %s is username
 $lang['CUR_ACTIVE_DLS'] = 'Текущие активные торренты';
 $lang['CUR_ACTIVE_DLS_ERROR'] = 'Пользователь ничего не скачивает и не сидирует';
+$lang['CUR_ACTIVE_DLS_DISALLOWED'] = 'Пользователь запретил просматривать его активные торренты';
 
 $lang['TD_TRAF'] = 'Сегодня';
 $lang['YS_TRAF'] = 'Вчера';

@@ -128,6 +128,7 @@ $template->assign_vars(array(
 
 	'USER_ACTIVE'          => $profiledata['user_active'],
 	'COUNT_DRAFT'          => ($bb_cfg['status_of_draft']) ? $count_draft : '',
+	'SHOW_DRAFT'		   => ($bb_cfg['status_of_draft'] && (IS_ADMIN || $profile_user_id)),
 	'OCCUPATION'           => $profiledata['user_occ'],
 	'INTERESTS'            => $profiledata['user_interests'],
 	'SKYPE'                => $profiledata['user_skype'],

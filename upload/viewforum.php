@@ -519,7 +519,7 @@ foreach ($topic_rowset as $topic)
 		'TOPIC_TITLE'      => $topic_draft . wbr($topic['topic_title']),
 		'TOPICS_SEPARATOR' => $separator,
 		'IS_UNREAD'        => $is_unread,
-		'TOPIC_ICON'       => get_topic_icon($topic, $is_unread),
+		'TOPIC_ICON'       => ($topic['is_draft']) ? $images['draft'] : get_topic_icon($topic, $is_unread),
 		'PAGINATION'       => ($moved) ? '' : build_topic_pagination(TOPIC_URL . $topic_id, $replies, $bb_cfg['posts_per_page']),
 		'REPLIES'          => $replies,
 		'VIEWS'            => $topic['topic_views'],

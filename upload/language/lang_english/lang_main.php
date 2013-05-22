@@ -385,6 +385,7 @@ $lang['NOTIFY'] = 'Notify me when a reply is posted';
 $lang['TO_DRAFT'] = 'Save as Draft';
 $lang['DRAFTS'] = 'Drafts';
 $lang['CANNOT_DELETE_DRAFT'] = 'Sorry, but you may not delete other user\'s drafts';
+$lang['CANNOT_VIEW_DRAFT'] = 'Sorry, but you may not view other user\'s drafts';
 
 $lang['STORED'] = 'Your message has been entered successfully.';
 $lang['DELETED'] = 'Your message has been deleted successfully.';
@@ -564,7 +565,6 @@ $lang['HIDE_PORN_FORUMS'] = 'Hide porno forums';
 $lang['ALWAYS_NOTIFY'] = 'Always notify me of replies';
 $lang['ALWAYS_NOTIFY_EXPLAIN'] = 'Sends an e-mail when someone replies to a topic you have posted in. This can be changed whenever you post.';
 
-$lang['BOARD_STYLE'] = 'Board Style';
 $lang['BOARD_LANG'] = 'Board Language';
 $lang['GENDER'] = 'Gender';
 $lang['GENDER_SELECT'] = array(
@@ -1346,6 +1346,7 @@ $lang['ONLY_1_TOR_PER_TOPIC'] = 'You can register only one torrent in one topic'
 $lang['VIEWING_USER_BT_PROFILE'] = 'Viewing torrent-profile :: %s'; // %s is username
 $lang['CUR_ACTIVE_DLS'] = 'Currently active torrents';
 $lang['CUR_ACTIVE_DLS_ERROR'] = 'User does not download and seeding';
+$lang['CUR_ACTIVE_DLS_DISALLOWED'] = 'Browse the user denied active torrents';
 
 $lang['TD_TRAF'] = 'Today';
 $lang['YS_TRAF'] = 'Yesterday';

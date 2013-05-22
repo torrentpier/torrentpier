@@ -8,7 +8,7 @@ if (!$profiledata = get_userdata($_GET[POST_USERS_URL])) bb_die($lang['NO_USER_I
 
 if (!$userdata['session_logged_in']) redirect("login.php?redirect={$_SERVER['REQUEST_URI']}");
 
-if ($profiledata['user_id'] != $userdata['user_id'] && !IS_ADMIN) bb_die('Ты ноги мыла, Дездемона? :)');
+if ($profiledata['user_id'] != $userdata['user_id'] && !IS_ADMIN) bb_die($lang['CANNOT_VIEW_DRAFT']);
 
 $sql = "
 	SELECT t.*, f.forum_name, f.cat_id, f.forum_parent AS parent_id, f2.forum_name AS parent_name, c.cat_title
