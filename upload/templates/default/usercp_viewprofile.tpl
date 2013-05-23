@@ -418,7 +418,7 @@ ajax.callback.view_profile = function(data) {
 			<!-- IF SHOW_DRAFT -->
 			<tr>
 				<th>{L_DRAFTS}:</th>
-				<td><a href="profile.php?mode=viewdraft&u={PROFILE_USER_ID}"><b>{COUNT_DRAFT}</b></a></td>
+				<td><a href="{U_DRAFTS}"><b>{COUNT_DRAFT}</b></a></td>
 			</tr>
 			<!-- ENDIF -->
 		    <tr>

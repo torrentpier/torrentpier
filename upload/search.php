@@ -465,7 +465,7 @@ if ($post_mode)
 	// Run initial search for post_ids
 	if (!$items_found)
 	{
-		$join_t = ($title_match || $my_topics || $new_topics || in_array($order_val, array($ord_last_p, $ord_created, $ord_name, $ord_repl)));
+		$join_t = ($title_match || $my_topics || $new_topics || in_array($order_val, array($ord_last_p, $ord_created, $ord_name, $ord_repl || $bb_cfg['status_of_draft'])));
 		$join_s = ($text_match_sql && !$title_match);
 		$join_p = ($my_posts || $join_s);
 
@@ -476,7 +476,7 @@ if ($post_mode)
 		$SQL['SELECT'][] = ($join_t && !$join_p) ? 't.topic_first_post_id AS item_id' : 'p.post_id AS item_id';
 
 		// FROM
-		if ($join_t || $bb_cfg['status_of_draft']) $SQL['FROM'][] = $topics_tbl;
+		if ($join_t) $SQL['FROM'][] = $topics_tbl;
 		if ($join_p) $SQL['FROM'][] = $posts_tbl;
 
 		if (!$SQL['FROM'])
@@ -629,7 +629,7 @@ else
 	// Run initial search for topic_ids
 	if (!$items_found)
 	{
-		$join_t  = ($title_match || $my_topics || $new_topics || $dl_search || $new_posts || in_array($order_val, array($ord_last_p, $ord_created, $ord_name, $ord_repl)));
+		$join_t  = ($title_match || $my_topics || $new_topics || $dl_search || $new_posts || in_array($order_val, array($ord_last_p, $ord_created, $ord_name, $ord_repl || $bb_cfg['status_of_draft'])));
 		$join_s  = ($text_match_sql && !$title_match);
 		$join_p  = ($my_posts || $join_s);
 		$join_dl = ($dl_search);

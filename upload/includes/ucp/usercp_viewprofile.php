@@ -143,7 +143,7 @@ $template->assign_vars(array(
 	'U_SEARCH_USER'        => "search.php?search_author=1&amp;uid={$profiledata['user_id']}",
 	'U_SEARCH_TOPICS'      => "search.php?uid={$profiledata['user_id']}&amp;myt=1",
 	'U_SEARCH_RELEASES'    => "tracker.php?rid={$profiledata['user_id']}#results",
-	'U_WATCHED_TOPICS'     => "profile.php?mode=watch",
+	'U_DRAFTS'			   => "profile.php?mode=viewdraft&u={$profiledata['user_id']}",
 
 	'S_PROFILE_ACTION'     => 'profile.php',
 

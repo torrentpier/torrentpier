@@ -462,9 +462,10 @@ $(document).ready(function() {
 <div class="menu-sub" id="dls-menu">
 	<div class="menu-a bold nowrap">
 		<a class="med" href="{U_TRACKER}?rid={SESSION_USER_ID}#results">{L_CUR_UPLOADS}</a>
-		<a class="med" href="{U_CUR_DOWNLOADS}#torrent">{L_CUR_DOWNLOADS}</a>
 		<a class="med" href="{U_SEARCH}?dlu={SESSION_USER_ID}&dlc=1">{L_SEARCH_DL_COMPLETE_DOWNLOADS}</a>
 		<a class="med" href="{U_SEARCH}?dlu={SESSION_USER_ID}&dlw=1">{L_SEARCH_DL_WILL_DOWNLOADS}</a>
+		<a class="med" href="{U_WATCHED_TOPICS}">{L_WATCHED_TOPICS}</a>
+		<a class="med" href="{U_MY_DRAFTS}">{L_DRAFTS}</a>
 	</div>
 </div>
 <!-- ELSE -->
