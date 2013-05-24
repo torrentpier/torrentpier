@@ -22,7 +22,7 @@ $sql = "
 
 if(!$rows = DB()->fetch_rowset($sql))
 {
-	bb_die('Список черновиков пуст<br /><br /><a href="'. PROFILE_URL . $profiledata['user_id'] .'">'. $lang['RETURN_PROFILE'] .'</a><br /><br />'. sprintf($lang['CLICK_RETURN_INDEX'],  '<a href="index.php">', '</a>'));
+	bb_die($lang['NO_DRAFTS'] . '<br /><br /><a href="'. PROFILE_URL . $profiledata['user_id'] .'">'. $lang['RETURN_PROFILE'] .'</a><br /><br />'. sprintf($lang['CLICK_RETURN_INDEX'],  '<a href="index.php">', '</a>'));
 }
 
 $i = 0;

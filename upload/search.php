@@ -648,7 +648,7 @@ else
 		}
 
 		// FROM
-		if ($join_t || $bb_cfg['status_of_draft']) $SQL['FROM'][] = $topics_tbl;
+		if ($join_t) $SQL['FROM'][] = $topics_tbl;
 		if ($join_p) $SQL['FROM'][] = $posts_tbl;
 
 		if (!$SQL['FROM'])

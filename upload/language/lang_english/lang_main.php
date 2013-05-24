@@ -386,6 +386,7 @@ $lang['TO_DRAFT'] = 'Save as Draft';
 $lang['DRAFTS'] = 'Drafts';
 $lang['CANNOT_DELETE_DRAFT'] = 'Sorry, but you may not delete other user\'s drafts';
 $lang['CANNOT_VIEW_DRAFT'] = 'Sorry, but you may not view other user\'s drafts';
+$lang['NO_DRAFTS'] = 'The draft list is empty';
 
 $lang['STORED'] = 'Your message has been entered successfully.';
 $lang['DELETED'] = 'Your message has been deleted successfully.';

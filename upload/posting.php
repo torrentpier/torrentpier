@@ -321,12 +321,12 @@ if ($mode == 'newtopic' && $topic_tpl && $post_info['topic_tpl_id'])
 if ($submit || $refresh)
 {
 	$notify_user = (int) !empty($_POST['notify']);
-	$to_draft    = (int) !empty($_POST['to_draft']);
+	$to_draft = ($post_data['first_post']) ? (int) !empty($_POST['to_draft']) : 0;
 }
 else
 {
 	$notify_user = bf($userdata['user_opt'], 'user_opt', 'notify');
-	$to_draft = ($mode == 'editpost') ? $post_info['is_draft'] : false;
+	$to_draft = ($mode == 'editpost') ? $post_info['is_draft'] : 0;
 	
 	if (!IS_GUEST && $mode != 'newtopic' && !$notify_user)
 	{

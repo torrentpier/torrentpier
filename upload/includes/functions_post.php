@@ -320,6 +320,7 @@ function submit_post($mode, &$post_data, &$message, &$meta, &$forum_id, &$topic_
 //
 function update_post_stats($mode, $post_data, $forum_id, $topic_id, $post_id, $user_id)
 {
+	$to_draft = (isset($post_data['to_draft'])) ? $post_data['to_draft'] : 0;
 	$sign = ($mode == 'delete') ? '- 1' : '+ 1';
 	$forum_update_sql = "forum_posts = forum_posts $sign";
 	$topic_update_sql = '';
@@ -388,7 +389,7 @@ function update_post_stats($mode, $post_data, $forum_id, $topic_id, $post_id, $u
 	}
 	else if ($mode != 'poll_delete')
 	{
-		if (!$post_data['to_draft'])
+		if (!$to_draft)
 		{
 			$forum_update_sql .= ", forum_last_post_id = $post_id" . (($mode == 'newtopic') ? ", forum_topics = forum_topics $sign" : "");
 		}
@@ -399,7 +400,7 @@ function update_post_stats($mode, $post_data, $forum_id, $topic_id, $post_id, $u
 		$topic_update_sql .= 'topic_vote = 0';
 	}
 
-	if (!$post_data['to_draft'])
+	if (!$to_draft)
 	{
 		$sql = "UPDATE " . BB_FORUMS . " SET
 			$forum_update_sql
@@ -421,7 +422,7 @@ function update_post_stats($mode, $post_data, $forum_id, $topic_id, $post_id, $u
 		}
 	}
 
-	if ($mode != 'poll_delete' || $post_data['to_draft'])
+	if ($mode != 'poll_delete' || $to_draft)
 	{
 		$sql = "SELECT forum_postcount
 			FROM " . BB_FORUMS . "
