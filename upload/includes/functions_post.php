@@ -424,19 +424,6 @@ function update_post_stats($mode, $post_data, $forum_id, $topic_id, $post_id, $u
 
 	if ($mode != 'poll_delete' || $to_draft)
 	{
-		$sql = "SELECT forum_postcount
-			FROM " . BB_FORUMS . "
-			WHERE forum_id = $forum_id
-			AND forum_postcount = 0";
-		if (!$result = DB()->sql_query($sql))
-		{
-			message_die(GENERAL_ERROR, 'Error in deleting post', '', __LINE__, __FILE__, $sql);
-		}
-		if ($row = DB()->sql_fetchrow($result))
-		{
-			return;
-		}
-
 		$sql = "UPDATE " . BB_USERS . "
 			SET user_posts = user_posts $sign
 			WHERE user_id = $user_id";
