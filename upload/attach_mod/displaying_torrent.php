@@ -589,7 +589,7 @@ if ($bb_cfg['bt_allow_spmode_change'] && $s_mode != 'full')
 
 $template->assign_vars(array(
 	'SHOW_DL_LIST_LINK' => (($bb_cfg['bt_show_dl_list'] || $bb_cfg['allow_dl_list_names_mode']) && $t_data['topic_dl_type'] == TOPIC_DL_TYPE_DL),
-	'SHOW_TOR_ACT'      => ($tor_reged && $show_peers),
+	'SHOW_TOR_ACT'      => ($tor_reged && $show_peers && (!isset($bb_cfg['tor_no_tor_act'][$tor_info['tor_status']]) || IS_AM)),
 	'S_MODE_COUNT'      => ($s_mode == 'count'),
 	'S_MODE_NAMES'      => ($s_mode == 'names'),
 	'S_MODE_FULL'       => ($s_mode == 'full'),

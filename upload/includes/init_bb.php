@@ -337,6 +337,14 @@ $bb_cfg['tor_cannot_new'] = array(TOR_NEED_EDIT, TOR_NO_DESC, TOR_DOUBTFUL);
 // Разрешение на ответ релизера, если раздача исправлена.
 $bb_cfg['tor_reply'] = array(TOR_NEED_EDIT, TOR_NO_DESC, TOR_DOUBTFUL);
 
+// Если такой статус у релиза, то статистика раздачи будет скрыта
+$bb_cfg['tor_no_tor_act'] = array(
+	TOR_CLOSED			=> true,
+	TOR_DUP				=> true,
+	TOR_CLOSED_CPHOLD	=> true,
+	TOR_CONSUMED		=> true,
+);
+
 // Table names
 define('BUF_TOPIC_VIEW',          'buf_topic_view');
 define('BUF_LAST_SEEDER',         'buf_last_seeder');

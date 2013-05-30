@@ -534,11 +534,11 @@ else if ( ($submit || $confirm) && !$topic_has_new_posts )
 			{
 				if ($to_draft)
 				{
-					update_draft('is_draft', $forum_id, $topic_id, $post_id, $post_data['poster_id']);
+					update_draft('is_draft', $forum_id, $topic_id, $post_info['topic_dl_type'], $post_id, $post_data['poster_id']);
 				}
 				else
 				{
-					update_draft('no_draft', $forum_id, $topic_id, $post_id, $post_data['poster_id']);
+					update_draft('no_draft', $forum_id, $topic_id, $post_info['topic_dl_type'], $post_id, $post_data['poster_id']);
 				}
 			}
 		}
