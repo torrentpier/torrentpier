@@ -32,11 +32,19 @@ function copyText_writeLink(node)
 function initPostBBCode(context)
 {
 	$('span.post-hr', context).html('<hr align="left" />');
+	initCodes(context);
 	initQuotes(context);
 	initExternalLinks(context);
 	initPostImages(context);
 	initSpoilers(context);
 	initMedia(context);
+}
+function initCodes(context)
+{
+	$('div.c-body', context).each(function(){
+		var $c = $(this);
+		$c.before('<div class="c-head"><b>{L_CODE}:</b></div>');
+	});
 }
 function initQuotes(context)
 {
@@ -47,7 +55,7 @@ function initQuotes(context)
 		if ( quoted_pid = $q.children('u.q-post:first').text() ) {
 			var on_this_page = $('#post_'+quoted_pid).length;
 			var href = (on_this_page) ? '#'+ quoted_pid : './viewtopic.php?p='+ quoted_pid +'#'+ quoted_pid;
-			q_title += ' <a href="'+ href +'" title="Перейти к цитируемому сообщению"><img src="{SITE_URL}templates/default/images/icon_latest_reply.gif" class="icon2" alt="" /></a>';
+			q_title += ' <a href="'+ href +'" title="{L_GOTO_QUOTED_POST}"><img src="{SITE_URL}templates/default/images/icon_latest_reply.gif" class="icon2" alt="" /></a>';
 		}
 		$q.before('<div class="q-head">'+ q_title +'</div>');
 	});
@@ -141,7 +149,7 @@ function initMedia(context)
 		if (/^http(?:s|):\/\/www.youtube.com\/watch\?(.*)?(&?v=([a-z0-9\-_]+))(.*)?|http:\/\/youtu.be\/.+/i.test(link.href)) {
 			var a = document.createElement('span');
 			a.className = 'YTLink';
-			a.innerHTML = '<span title="Начать проигрывание на текущей странице" class="YTLinkButton">&#9658;</span>';
+			a.innerHTML = '<span title="{L_PLAY_ON_CURPAGE}" class="YTLinkButton">&#9658;</span>';
 			window.addEvent(a, 'click', function (e) {
 				var vhref = e.target.nextSibling.href.replace(/^http(?:s|):\/\/www.youtube.com\/watch\?(.*)?(&?v=([a-z0-9\-_]+))(.*)?|http:\/\/youtu.be\//ig, "http://www.youtube.com/embed/$3");
 				var text  = e.target.nextSibling.innerText != "" ? e.target.nextSibling.innerText : e.target.nextSibling.href;
@@ -410,7 +418,7 @@ ajax.index_data = function(tz) {
 	ajax.exec({
 		action  : 'index_data',
 		mode    : 'change_tz',
-		tz      : tz,
+		tz      : tz
 	});
 };
 ajax.callback.index_data = function(data) {};
@@ -546,9 +554,9 @@ important_info
 				<div class="spacer_6"></div>
 				<div class="tCenter">
 					<!-- IF H_C_AL_MESS -->
-					<input style="width: 100px;" type="button" onclick="$('input.h-cat-cbx').attr('checked',false); $('input#sec_h_cat').click(); return false;" value="Сбросить">
+					<input style="width: 100px;" type="button" onclick="$('input.h-cat-cbx').attr('checked',false); $('input#sec_h_cat').click(); return false;" value="{L_RESET}">
 					<!-- ENDIF -->
-					<input id="sec_h_cat" type="button" onclick="set_h_cat();" style="width: 100px;" value="Отправить">
+					<input id="sec_h_cat" type="button" onclick="set_h_cat();" style="width: 100px;" value="{L_SUBMIT}">
 				    <script type="text/javascript">
 					function set_h_cat ()
 					{

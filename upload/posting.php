@@ -317,11 +317,19 @@ if ($mode == 'newtopic' && $topic_tpl && $post_info['topic_tpl_id'])
 	require(INC_DIR .'topic_templates.php');
 }
 
-// Notify
+// Notify and draft
+$post_data['is_draft'] = $post_info['is_draft'];
 if ($submit || $refresh)
 {
 	$notify_user = (int) !empty($_POST['notify']);
-	$to_draft = ($post_data['first_post']) ? (int) !empty($_POST['to_draft']) : 0;
+	if ($bb_cfg['status_of_draft'] && $post_data['first_post'])
+	{
+		$to_draft = (int) !empty($_POST['to_draft']);
+	}
+	else
+	{
+		$to_draft = ($mode == 'editpost') ? $post_info['is_draft'] : 0;
+	}
 }
 else
 {
@@ -865,7 +873,7 @@ if ($mode == 'newtopic' || $post_data['first_post'])
 	$template->assign_var('POSTING_SUBJECT');
 }
 
-if ($mode == 'newtopic' || ($post_data['first_post'] && ($post_info['topic_replies'] == 0 || $post_info['is_draft'])) && $bb_cfg['status_of_draft'])
+if (($mode == 'newtopic' || $post_data['first_post'] && ($post_info['topic_replies'] == 0 || $post_info['is_draft'])) && $bb_cfg['status_of_draft'])
 {
 	$template->assign_var('DRAFT_CHK');
 }

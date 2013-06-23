@@ -134,11 +134,13 @@ class torrent
 							$cur_files_ary[] = $this->build_file_item($name, $length);
 						}
 					}
+					natsort($cur_files_ary);
 				}
 				else
 				{
 					$name = $f['path'][0];
 					$this->files_ary['/'][] = $this->build_file_item($name, $length);
+					natsort($this->files_ary['/']);
 				}
 			}
 		}
@@ -149,6 +151,7 @@ class torrent
 			$length = isset($info['length']) ? $info['length'] : 0;
 
 			$this->files_ary['/'][] = $this->build_file_item($name, $length);
+			natsort($this->files_ary['/']);
 		}
 	}
 

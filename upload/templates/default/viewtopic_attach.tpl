@@ -286,7 +286,7 @@
 
 			<span id="tor_comment">
 			<!-- IF $bb_cfg['tor_comment'] -->
-			<input type="text" id="comment" onfocus="if(this.value=='{L_COMMENT}') this.value='';" onblur="if(this.value=='') this.value='';" value="{L_COMMENT}" class="hint" />
+			<input type="text" id="comment" onfocus="if(this.value==this.defaultValue || this.className=='hint'){this.value=''; this.className='';}" onblur="if(this.value==''){this.value=this.defaultValue; this.className='hint';}" value="{L_COMMENT}" class="hint" />
 			<!-- ENDIF -->
 			
 			<!-- IF AUTH_MOD -->

@@ -78,7 +78,7 @@ document.write('<input type="hidden" name="user_timezone" value="'+tz+'" />');
 <!-- IF CAPTCHA_HTML -->
 <tr>
 	<td>{L_CONFIRM_CODE}:</td>
-	<td><span id="refresh_captcha">{CAPTCHA_HTML}</span> <img align="middle" src="/images/pic_loading.gif" title="{L_UPDATE}" onclick="ajax.exec({ action: 'user_register', mode: 'refresh_captcha'}); return false;" /></td>
+	<td><span id="refresh_captcha">{CAPTCHA_HTML}</span> <img align="middle" src="./images/pic_loading.gif" title="{L_UPDATE}" onclick="ajax.exec({ action: 'user_register', mode: 'refresh_captcha'}); return false;" /></td>
 </tr>
 <!-- ENDIF -->
 <!-- IF EDIT_PROFILE -->

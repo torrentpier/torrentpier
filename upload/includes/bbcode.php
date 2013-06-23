@@ -13,6 +13,7 @@ $page_cfg['include_bbcode_js'] = true;
 //
 function get_bbcode_tpl ()
 {
+global $lang;
 $bbcode_tpl = array();
 
 // Quote
@@ -34,7 +35,6 @@ HTML;
 // Code
 $bbcode_tpl['code_open'] = <<<HTML
 	<div class="c-wrap">
-		<div class="c-head"><b>Код:</b></div>
 		<div class="c-body">
 HTML;
 

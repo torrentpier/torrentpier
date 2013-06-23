@@ -735,6 +735,9 @@ td.topicSep {                /* Topic type groups separator */
 .topicSticky {               /* Topic Sticky prefix */
 	color: #009900;
 }
+.topicDraft {                 /* Topic Draft prefix */
+	font-weight: normal; color: #C63B00;
+}
 .topicPoll {                 /* Topic Poll prefix */
 	font-weight: normal; color: #006699;
 }
@@ -1398,7 +1401,7 @@ div#autocomplete_popup div.close {
 	font-weight: bold;
 	width: 12px;
 	height: 12px;
-	background: url("/images/bad.gif") transparent no-repeat;
+	background: url("./../images/bad.gif") transparent no-repeat;
 }
 
 div#autocomplete_popup input {
@@ -1411,7 +1414,7 @@ div#autocomplete_popup span.regenerate {
 	width: 16px;
 	height: 16px;
 	margin: 24px 0 0 8px;
-	background: url("/images/pic_loading.gif") transparent no-repeat;
+	background: url("./../images/pic_loading.gif") transparent no-repeat;
 	cursor: pointer;
 	display: inline-block;
 }

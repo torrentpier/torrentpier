@@ -546,7 +546,21 @@ class ajax_common
 		}
 		else
 		{
-			DB()->query("UPDATE ". BB_TOPICS ." SET is_draft = 0 WHERE topic_id = {$tid}");
+			require_once(INC_DIR . 'functions_post.php');
+			DB()->query("
+					UPDATE
+						". BB_POSTS ." p,
+						". BB_TOPICS ." t
+					SET
+						p.post_time = ". TIMENOW .",
+						t.is_draft = 0,
+						t.topic_last_post_time = ". TIMENOW .",
+						t.topic_time = ". TIMENOW ."
+					WHERE
+						t.topic_id = {$tid}
+					AND t.topic_first_post_id = p.post_id
+			");
+			update_draft('no_draft', $row['forum_id'], $tid, $row['topic_dl_type'], $row['topic_first_post_id'], $row['topic_poster']);
 		}
 		$this->response['tid'] = $tid;
 	}

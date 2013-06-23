@@ -394,8 +394,6 @@ if ($topics_csv = join(',', $topic_ids))
 	");
 }
 
-$found_topics = count($topic_rowset);
-
 // Define censored word matches
 $orig_word = $replacement_word = array();
 obtain_word_list($orig_word, $replacement_word);
@@ -462,6 +460,7 @@ $template->assign_vars(array(
 ));
 
 // Okay, lets dump out the page ...
+$found_topics = 0;
 foreach ($topic_rowset as $topic)
 {
 	if ($topic['is_draft'] && $topic['first_user_id'] != $userdata['user_id'])
@@ -475,7 +474,6 @@ foreach ($topic_rowset as $topic)
 	$t_hot    = ($replies >= $bb_cfg['hot_threshold']);
 	$t_type   = $topic['topic_type'];
 	$separator = '';
-	$topic_draft = ($topic['is_draft']) ? $lang['TOPIC_DRAFT'] .' ' : '';
 	$is_unread = is_unread($topic['topic_last_post_time'], $topic_id, $forum_id);
 
 	if ($t_type == POST_ANNOUNCE && !defined('ANNOUNCE_SEP'))
@@ -516,7 +514,7 @@ foreach ($topic_rowset as $topic)
 		'FORUM_ID'         => $forum_id,
 		'TOPIC_ID'         => $topic_id,
 		'HREF_TOPIC_ID'    => ($moved) ? $topic['topic_moved_id'] : $topic['topic_id'],
-		'TOPIC_TITLE'      => $topic_draft . wbr($topic['topic_title']),
+		'TOPIC_TITLE'      => wbr($topic['topic_title']),
 		'TOPICS_SEPARATOR' => $separator,
 		'IS_UNREAD'        => $is_unread,
 		'TOPIC_ICON'       => ($topic['is_draft']) ? $images['draft'] : get_topic_icon($topic, $is_unread),
@@ -534,6 +532,7 @@ foreach ($topic_rowset as $topic)
 		'STATUS'           => $topic['topic_status'],
 		'TYPE'             => $topic['topic_type'],
 		'DL'               => ($topic['topic_dl_type'] == TOPIC_DL_TYPE_DL && !$forum_data['allow_reg_tracker']),
+		'IS_DRAFT'		   => $topic['is_draft'],
 		'POLL'             => $topic['topic_vote'],
 		'DL_CLASS'         => isset($topic['dl_status']) ? $dl_link_css[$topic['dl_status']] : '',
 
@@ -556,6 +555,7 @@ foreach ($topic_rowset as $topic)
 			'MAGNET'     => $tor_magnet,
 		));
 	}
+	$found_topics++;
 }
 unset($topic_rowset);
 

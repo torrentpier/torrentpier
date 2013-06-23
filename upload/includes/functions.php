@@ -768,7 +768,6 @@ class html_common
 
 	function _array2html_rec ($array, $ul, $li)
 	{
-		@natsort($array);
 		foreach ($array as $k => $v)
 		{
 			if (is_array($v))

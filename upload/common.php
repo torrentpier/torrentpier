@@ -1795,7 +1795,7 @@ class datastore_file extends datastore_common
 
 		$filecache = "<?php\n";
 		$filecache .= "if (!defined('BB_ROOT')) die(basename(__FILE__));\n";
-		$filecache .= '$filestore = ' . var_export($var, true) . ";\n";
+		$filecache .= '$filecache = ' . var_export($var, true) . ";\n";
 		$filecache .= '?>';
 
 		$this->debug('stop');
@@ -1849,7 +1849,7 @@ class datastore_file extends datastore_common
 			{
 				require($filename);
 
-				$this->data[$item] = $filestore;
+				$this->data[$item] = $filecache;
 			}
 		}
 	}

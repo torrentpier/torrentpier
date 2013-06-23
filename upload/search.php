@@ -497,7 +497,7 @@ if ($post_mode)
 		if ($prev_days)  $SQL['WHERE'][] = "$tbl.$time_field > ". $time_opt[$time_val]['sql'];
 		if ($my_posts)   $SQL['WHERE'][] = "p.poster_id = $poster_id_val";
 		if ($my_topics)  $SQL['WHERE'][] = "t.topic_poster = $poster_id_val";
-		if ($poster_id_val != $user_id && !IS_ADMIN && $bb_cfg['status_of_draft']) $SQL['WHERE'][] = "t.is_draft = 0";
+		if ($poster_id_val != $user_id && !IS_ADMIN) $SQL['WHERE'][] = "t.is_draft = 0";
 
 		if ($text_match_sql)
 		{
@@ -685,7 +685,7 @@ else
 			}	
 		}
 		if ($my_topics)  $SQL['WHERE'][] = "t.topic_poster = $poster_id_val";
-		if ($poster_id_val != $user_id && !IS_ADMIN && $bb_cfg['status_of_draft']) $SQL['WHERE'][] = "t.is_draft = 0";
+		if ($poster_id_val != $user_id && !IS_ADMIN) $SQL['WHERE'][] = "t.is_draft = 0";
 
 		if ($text_match_sql)
 		{

@@ -1,9 +1,7 @@
 
 <h1>{L_FORUM_PRUNE}</h1>
 
-<!-- IF L_PRUNE_EXPLAIN -->
 <p>{L_FORUM_PRUNE_EXPLAIN}</p>
-<!-- ENDIF -->
 
 <!-- IF FORUM_NAME -->
 <h2>{L_FORUM}: {FORUM_NAME}</h2>

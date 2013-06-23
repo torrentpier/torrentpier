@@ -340,7 +340,7 @@ else
 
 		for($k = 0; $k < count($forum_auth_levels); $k++)
 		{
-			$selected = ( $forum_rows[0][$forum_auth_fields[$j]] == $forum_auth_const[$k] ) ? ' selected="selected"' : '';
+			$selected = ( !empty($forum_rows) && $forum_rows[0][$forum_auth_fields[$j]] == $forum_auth_const[$k] ) ? ' selected="selected"' : '';
 			$custom_auth[$j] .= '<option value="' . $forum_auth_const[$k] . '"' . $selected . '>' . $lang['FORUM_' . $forum_auth_levels[$k]] . '</option>';
 		}
 		$custom_auth[$j] .= '</select>';

@@ -280,6 +280,7 @@ $lang['CODE_COPIED'] = 'Code copied to clipboard';
 $lang['CODE_COPY'] = 'copy to clipboard';
 $lang['SPOILER_HEAD'] = 'hidden text';
 $lang['SPOILER_CLOSE'] = 'turn';
+$lang['PLAY_ON_CURPAGE'] = 'Start playing on the current page';
 
 $lang['EDITED_TIME_TOTAL'] = 'Last edited by %s on %s; edited %d time in total'; // Last edited by me on 12 Oct 2001; edited 1 time in total
 $lang['EDITED_TIMES_TOTAL'] = 'Last edited by %s on %s; edited %d times in total'; // Last edited by me on 12 Oct 2001; edited 2 times in total
@@ -1423,6 +1424,7 @@ $lang['OTHERS'] = 'others';
 $lang['ALL'] = 'all';
 
 $lang['POST_LINK'] = 'Post link';
+$lang['GOTO_QUOTED_POST'] = 'Go to the quoted post';
 $lang['LAST_VISITED'] = 'Last Visited';
 $lang['LAST_ACTIVITY'] = 'Last activity';
 $lang['NEVER'] = 'Never';

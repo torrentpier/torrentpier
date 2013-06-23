@@ -278,6 +278,7 @@ $lang['CODE_COPIED'] = 'Код скопирован в буфер обмена';
 $lang['CODE_COPY'] = 'скопировать в буфер обмена';
 $lang['SPOILER_HEAD'] = 'Скрытый текст';
 $lang['SPOILER_CLOSE'] = 'Свернуть';
+$lang['PLAY_ON_CURPAGE'] = 'Начать проигрывание на текущей странице';
 
 
 $lang['EDITED_TIME_TOTAL'] = 'Последний раз редактировалось: %s (%s), всего редактировалось %d раз'; // Last edited by me on 12 Oct 2001, edited 1 time in total
@@ -1425,6 +1426,7 @@ $lang['OTHERS'] = 'другие';
 $lang['ALL'] = 'все';
 
 $lang['POST_LINK'] = 'Линк на это сообщение';
+$lang['GOTO_QUOTED_POST'] = 'Перейти к цитируемому сообщению';
 $lang['LAST_VISITED'] = 'Последний визит';
 $lang['LAST_ACTIVITY'] = 'Последняя активность';
 $lang['NEVER'] = 'Никогда';
