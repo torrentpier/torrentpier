@@ -1459,6 +1459,7 @@ CREATE TABLE IF NOT EXISTS `bb_users` (
   `autologin_id` varchar(12) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL DEFAULT '',
   `user_newest_pm_id` mediumint(8) NOT NULL DEFAULT '0',
   `user_points` float(16,2) NOT NULL DEFAULT '0.00',
+  `tpl_name` varchar(255) NOT NULL DEFAULT 'default',
   PRIMARY KEY (`user_id`),
   KEY `username` (`username`(10)),
   KEY `user_email` (`user_email`(10)),
@@ -1469,9 +1470,9 @@ CREATE TABLE IF NOT EXISTS `bb_users` (
 -- Дамп данных таблицы `bb_users`
 --
 
-INSERT INTO `bb_users` VALUES (-1, 0, 'Anonymous', 'd41d8cd98f00b204e9800998ecf8427e', 0, 0, '0', 0, '0', 0, 5, 0.00, '', 0, 0, 0, 0, 0, '', 0, 0, 0, 0, '', '', '', '', '', '', '', '', '', '', 0, '', 0, 0);
-INSERT INTO `bb_users` VALUES (2, 1, 'admin', 'c3284d0f94606de1fd2af172aba15bf3', 0, 0, '0', 0, '0', 1, 1, 4.00, '', 0, 0, 0, 304, 1, '', 1, 0, 0, 0, 'admin@admin.com', '', '', '', '', '', '', '', '', '', 0, '', 0, 0);
-INSERT INTO `bb_users` VALUES (-746, 0, 'bot', 'd41d8cd98f00b204e9800998ecf8427e', 0, 0, '0', 0, '0', 0, 0, 0.00, '', 0, 0, 0, 144, 0, 'bot.gif', 1, 0, 0, 0, 'bot@bot.bot', '', '', '', '', '', '', '', '', '', 0, '', 0, 0);
+INSERT INTO `bb_users` VALUES (-1, 0, 'Anonymous', 'd41d8cd98f00b204e9800998ecf8427e', 0, 0, '0', 0, '0', 0, 5, 0.00, '', 0, 0, 0, 0, 0, '', 0, 0, 0, 0, '', '', '', '', '', '', '', '', '', '', 0, '', 0, 0, 'default');
+INSERT INTO `bb_users` VALUES (2, 1, 'admin', 'c3284d0f94606de1fd2af172aba15bf3', 0, 0, '0', 0, '0', 1, 1, 4.00, '', 0, 0, 0, 304, 1, '', 1, 0, 0, 0, 'admin@admin.com', '', '', '', '', '', '', '', '', '', 0, '', 0, 0, 'default');
+INSERT INTO `bb_users` VALUES (-746, 0, 'bot', 'd41d8cd98f00b204e9800998ecf8427e', 0, 0, '0', 0, '0', 0, 0, 0.00, '', 0, 0, 0, 144, 0, 'bot.gif', 1, 0, 0, 0, 'bot@bot.bot', '', '', '', '', '', '', '', '', '', 0, '', 0, 0, 'default');
 
 -- --------------------------------------------------------
 

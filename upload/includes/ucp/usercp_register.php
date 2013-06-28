@@ -124,6 +124,7 @@ switch ($mode)
 			'user_occ'         => true,
 			'user_interests'   => true,
 			'user_avatar_type' => true,
+			'tpl_name'         => true,
 		);
 
 		// Выбор профиля: для юзера свой, для админа любой
@@ -718,6 +719,25 @@ foreach ($profile_fields as $field => $can_edit)
 				$db_data['user_avatar_type'] = $avatar['user_avatar_type'];
 			}
 		}
+		break;
+
+	case 'tpl_name':
+		$templates = isset($_POST['tpl_name']) ? (string) $_POST['tpl_name'] : $pr_data['tpl_name'];
+		$templates = htmlCHR($templates);
+		if ($submit && $templates != $pr_data['tpl_name'])
+		{
+			$pr_data['tpl_name'] = $bb_cfg['tpl_name'];
+			$db_data['tpl_name'] = (string) $bb_cfg['tpl_name'];
+			foreach ($bb_cfg['templates'] as $temptemplate)
+			{
+				if ($templates == $temptemplate['dirname'])
+				{
+					$pr_data['tpl_name'] = $templates;
+					$db_data['tpl_name'] = (string) $templates;
+				}
+			}
+		}
+		$tp_data['TEMPLATES_SELECT'] = templates_select($pr_data['tpl_name'], 'tpl_name');
 		break;
 
 	/**

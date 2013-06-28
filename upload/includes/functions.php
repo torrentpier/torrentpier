@@ -1547,11 +1547,22 @@ function get_forum_select ($mode = 'guest', $name = POST_FORUM_URL, $selected = 
 
 function setup_style ()
 {
-	global $bb_cfg, $template;
+	global $bb_cfg, $template, $userdata;
 
 	// AdminCP works only with default template
 	$tpl_dir_name = defined('IN_ADMIN') ? 'default'   : basename($bb_cfg['tpl_name']);
 	$stylesheet   = defined('IN_ADMIN') ? 'main.css'  : basename($bb_cfg['stylesheet']);
+
+	if (!empty($userdata['tpl_name']))
+	{
+		foreach ($bb_cfg['templates'] as $temptemplate)
+		{
+			if ($userdata['tpl_name'] == $temptemplate['dirname'])
+			{
+				$tpl_dir_name = basename($userdata['tpl_name']);
+			}
+		}
+	}
 
 	$template = new Template(TEMPLATES_DIR . $tpl_dir_name);
 	$css_dir = basename(TEMPLATES_DIR) ."/$tpl_dir_name/css/";
@@ -1570,6 +1581,21 @@ function setup_style ()
 	$theme = array('template_name' => $tpl_dir_name);
 
 	return $theme;
+}
+
+function templates_select($default, $select_name = 'tpl_name')
+{
+	global $bb_cfg;
+
+	$templates_select = '<select name="'. $select_name .'">';
+	foreach ($bb_cfg['templates'] as $template)
+	{
+		$selected = '';
+		if ($template['dirname'] == $default) $selected = ' selected="selected"';
+		$templates_select .= '<option value="'. $template['dirname'] .'"'. $selected .'>'. $template['title'] .'</option>';
+	}
+	$templates_select .= '</select>&nbsp;';
+	return $templates_select;
 }
 
 // Create date/time from format and timezone

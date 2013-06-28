@@ -1760,3 +1760,5 @@ $lang['PROFILE_RETURN'] = 'Go to the Profile';
 
 $lang['WARNING'] = 'Warning';
 $lang['INDEXER'] = "Reindex search";
+
+$lang['FORUM_STYLE'] = 'Forum style';
