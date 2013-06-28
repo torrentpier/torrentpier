@@ -56,8 +56,8 @@ $domain_name = (!empty($_SERVER['SERVER_NAME'])) ? $_SERVER['SERVER_NAME'] : $do
 
 // Increase number of revision after update
 $bb_cfg['tp_version'] = '2.5 pre-stable';
-$bb_cfg['tp_release_date'] = '28-06-2013';
-$bb_cfg['tp_release_state'] = 'R508';
+$bb_cfg['tp_release_date'] = '29-06-2013';
+$bb_cfg['tp_release_state'] = 'R509';
 
 // Database
 $charset  = 'utf8';
@@ -261,11 +261,12 @@ else
 // Templates
 define('ADMIN_TPL_DIR', TEMPLATES_DIR .'/admin/');
 
-// Template 1 (template 2 is $bb_cfg['templates'][1], template 3 is $bb_cfg['templates'][2]...)
-$bb_cfg['templates'][0]['dirname']        = 'default';
-$bb_cfg['templates'][0]['title']          = 'Стандартный';
+$bb_cfg['templates'] = array(
+//	'folder'	=> 'Name',
+	'default'	=> 'Стандартный'
+);
 
-$bb_cfg['tpl_name']   = $bb_cfg['templates'][0]['dirname'];
+$bb_cfg['tpl_name']   = 'default';
 $bb_cfg['stylesheet'] = 'main.css';
 
 $bb_cfg['show_sidebar1_on_every_page'] = false;

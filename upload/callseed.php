@@ -87,7 +87,7 @@ function call_seed($topic_id, $t_info, $to_user_id)
 		if($cp <= $pause)
 		{
 			$cur_pause_hour = floor($pcp/3600);
-			$cur_pause_min = floor($pcp/60)/*-($cur_pause_hour*60)*/;
+			$cur_pause_min = floor($pcp/60);
 			$msg_error = "SPAM";
 		}
 	}
@@ -101,32 +101,33 @@ function call_seed($topic_id, $t_info, $to_user_id)
 	{
 		$sql = "SELECT seeders, leechers FROM ". BB_BT_TRACKER_SNAP ." WHERE topic_id = $topic_id LIMIT 1";
         $row = DB()->fetch_row($sql);
-        if ($row['seeders'] > 2)
-		#if ( !in_array($userdata['user_level'], array(ADMIN, MOD)) )
+        if ($row['seeders'] <= 2)
+		{
+			$sql = "SELECT user_id FROM ". BB_BT_DLSTATUS ." WHERE topic_id = $topic_id AND user_id != {$userdata['user_id']}";
+
+			foreach(DB()->fetch_rowset($sql) as $row)
+			{
+				$u_id[] = $row['user_id'];
+			}
+			if (!in_array($t_info['topic_poster'], $u_id))
+			{
+				$u_id[] = $t_info['topic_poster'];
+			}
+			array_unique($u_id);
+
+			foreach($u_id as $i=>$user_id)
+			{
+				if ($msg_error != "OK") break;
+
+				call_seed($topic_id, $t_info, $user_id);
+			}
+		}
+		else
 		{
 			$seeders = $row['seeders'];
 			$leechers = $row['leechers'];
 			$msg_error = "HAVE_SEED";
 		}
-	}
-
-	$sql = "SELECT user_id FROM ". BB_BT_DLSTATUS ." WHERE topic_id = $topic_id AND user_id != {$userdata['user_id']}";
-	/*$row = DB()->fetch_rowset($sql);*/
-	foreach(DB()->fetch_rowset($sql) as $row)
-	{
-		$u_id[] = $row['user_id'];
-	}
-	if (!in_array($t_info['topic_poster'], $u_id))
-	{
-		$u_id[] = $t_info['topic_poster'];
-	}
-	array_unique($u_id);
-
-	foreach($u_id as $i=>$user_id)
-	{
-		if ($msg_error != "OK") break;
-
-		call_seed($topic_id, $t_info, $user_id);
 	}
 
 	$msg = '';

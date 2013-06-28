@@ -562,7 +562,7 @@ else if ( ($submit || $confirm) && !$topic_has_new_posts )
 			set_tracks(COOKIE_TOPIC, $tracking_topics, $topic_id);
 		}
 
-		if (defined('TORRENT_ATTACH_ID') && $bb_cfg['bt_newtopic_auto_reg'] && !$error_msg&& !$to_draft)
+		if (defined('TORRENT_ATTACH_ID') && $bb_cfg['bt_newtopic_auto_reg'] && !$error_msg && !$to_draft)
 		{
 			include(INC_DIR .'functions_torrent.php');
 			if(!DB()->fetch_row("SELECT attach_id FROM ". BB_BT_TORRENTS ." WHERE attach_id = ". TORRENT_ATTACH_ID))
@@ -789,28 +789,38 @@ if ( $mode == 'newtopic' || ( $mode == 'editpost' && $post_data['first_post'] ) 
 //bt
 $topic_dl_type = (isset($post_info['topic_dl_type'])) ? $post_info['topic_dl_type'] : 0;
 
-if ($topic_dl_type || $post_info['allow_reg_tracker'] || $is_auth['auth_mod'])
+if ($post_info['allow_reg_tracker'] && $post_data['first_post'] && ($topic_dl_type || $is_auth['auth_mod']))
 {
-	if (!$topic_type_toggle)
+	$sql = "
+		SELECT tor.attach_id
+		FROM ". BB_POSTS ." p
+		LEFT JOIN ". BB_BT_TORRENTS ." tor ON (p.post_id = tor.post_id)
+		WHERE p.post_id = $post_id
+	";
+	$result = DB()->fetch_row($sql);
+	if(!empty($result['attach_id']))
 	{
-		$topic_type_toggle = $lang['POST_TOPIC_AS'] . ': ';
+		if (!$topic_type_toggle)
+		{
+			$topic_type_toggle = $lang['POST_TOPIC_AS'] . ': ';
+		}
+
+		$dl_ds = $dl_ch = $dl_hid = '';
+		$dl_type_name = 'topic_dl_type';
+		$dl_type_val = ($topic_dl_type) ? 1 : 0;
+
+		if (!$post_info['allow_reg_tracker'] && !$is_auth['auth_mod'])
+		{
+			$dl_ds = ' disabled="disabled" ';
+			$dl_hid = '<input type="hidden" name="topic_dl_type" value="'. $dl_type_val .'" />';
+			$dl_type_name = '';
+		}
+
+		$dl_ch = ($mode == 'editpost' && $post_data['first_post'] && $topic_dl_type) ? ' checked="checked" ' : '';
+
+		$topic_type_toggle .= '<nobr><input type="checkbox" name="'. $dl_type_name .'" id="topic_dl_type_id" '. $dl_ds . $dl_ch .' /><label for="topic_dl_type_id"> '.$lang['POST_DOWNLOAD'].'</label></nobr>';
+		$topic_type_toggle .= $dl_hid;
 	}
-
-	$dl_ds = $dl_ch = $dl_hid = '';
-	$dl_type_name = 'topic_dl_type';
-	$dl_type_val = ($topic_dl_type) ? 1 : 0;
-
-	if (!$post_info['allow_reg_tracker'] && !$is_auth['auth_mod'])
-	{
-		$dl_ds = ' disabled="disabled" ';
-		$dl_hid = '<input type="hidden" name="topic_dl_type" value="'. $dl_type_val .'" />';
-		$dl_type_name = '';
-	}
-
-	$dl_ch = ($mode == 'editpost' && $post_data['first_post'] && $topic_dl_type) ? ' checked="checked" ' : '';
-
-	$topic_type_toggle .= '<nobr><input type="checkbox" name="'. $dl_type_name .'" id="topic_dl_type_id" '. $dl_ds . $dl_ch .' /><label for="topic_dl_type_id"> '.$lang['POST_DOWNLOAD'].'</label></nobr>';
-	$topic_type_toggle .= $dl_hid;
 }
 //bt end
 
