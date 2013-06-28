@@ -11,6 +11,6 @@ $lang['CALLSEED_MSG_MSG']  = 'Ошибка отправки сообщения';
 $lang['CALLSEED_MSG_MSG_TEXT'] = 'Ошибка сохранения текста сообщения';
 $lang['CALLSEED_MSG_POPUP']    = 'Ошибка работы всплывающего окна';
 $lang['CALLSEED_MSG_TIME']     = 'Не удалось установить время последнего запроса';
-$lang['CALLSEED_HAVE_SEED']    = 'Раздача не нуждаются в помощи (<b>Сидеров:</b> %d, <b>Личеров:</b> %d)';
+$lang['CALLSEED_HAVE_SEED']    = 'Раздача не нуждается в помощи (<b>Сидеров:</b> %d, <b>Личеров:</b> %d)';
 
 $lang['CALLSEED_RETURN'] = '<br><br> <a href="viewtopic.php?t=%s"><b>Вернуться в тему</b></a>';

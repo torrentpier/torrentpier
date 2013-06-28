@@ -51,7 +51,7 @@ $default_cfg_bool = array(
 	'bt_allow_spmode_change'       => 1,
 	'bt_del_addit_ann_urls'        => 1,
 	'bt_set_dltype_on_tor_reg'     => 1,
-	'bt_unset_dltype_on_tor_unreg' => 0,
+	'bt_unset_dltype_on_tor_unreg' => 1,
 );
 
 $default_cfg_num = array(

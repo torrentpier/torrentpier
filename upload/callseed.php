@@ -110,7 +110,7 @@ function call_seed($topic_id, $t_info, $to_user_id)
 		}
 	}
 
-	$sql = "SELECT user_id FROM ". BB_BT_DLSTATUS ." WHERE topic_id = $topic_id";
+	$sql = "SELECT user_id FROM ". BB_BT_DLSTATUS ." WHERE topic_id = $topic_id AND user_id != {$userdata['user_id']}";
 	/*$row = DB()->fetch_rowset($sql);*/
 	foreach(DB()->fetch_rowset($sql) as $row)
 	{

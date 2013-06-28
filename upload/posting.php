@@ -318,7 +318,7 @@ if ($mode == 'newtopic' && $topic_tpl && $post_info['topic_tpl_id'])
 }
 
 // Notify and draft
-$post_data['is_draft'] = $post_info['is_draft'];
+if (!IS_GUEST && $mode != 'newtopic') $post_data['is_draft'] = $post_info['is_draft'];
 if ($submit || $refresh)
 {
 	$notify_user = (int) !empty($_POST['notify']);

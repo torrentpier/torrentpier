@@ -114,7 +114,7 @@ if( isset($_GET['import_pack']) || isset($_POST['import_pack']) )
 				$smile_data[$j] = str_replace('>', '&gt;', $smile_data[$j]);
 				$k = $smile_data[$j];
 
-				if( $smiles[$k] == 1 )
+				if( isset($smiles[$k]) )
 				{
 					if( !empty($replace_existing) )
 					{

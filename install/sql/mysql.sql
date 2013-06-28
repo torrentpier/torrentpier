@@ -613,7 +613,7 @@ INSERT INTO `bb_config` VALUES ('bt_show_peers', '1');
 INSERT INTO `bb_config` VALUES ('bt_show_peers_mode', '1');
 INSERT INTO `bb_config` VALUES ('bt_show_port_only_moder', '1');
 INSERT INTO `bb_config` VALUES ('bt_tor_browse_only_reg', '0');
-INSERT INTO `bb_config` VALUES ('bt_unset_dltype_on_tor_unreg', '0');
+INSERT INTO `bb_config` VALUES ('bt_unset_dltype_on_tor_unreg', '1');
 INSERT INTO `bb_config` VALUES ('config_id', '1');
 INSERT INTO `bb_config` VALUES ('cron_last_check', '1211477514');
 INSERT INTO `bb_config` VALUES ('default_dateformat', 'Y-m-d H:i');
