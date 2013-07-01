@@ -1553,6 +1553,14 @@ function setup_style ()
 	$tpl_dir_name = defined('IN_ADMIN') ? 'default'   : basename((IS_GUEST || empty($userdata['tpl_name'])) ? $bb_cfg['tpl_name'] : $userdata['tpl_name']);
 	$stylesheet   = defined('IN_ADMIN') ? 'main.css'  : basename($bb_cfg['stylesheet']);
 
+	if (!IS_GUEST && !empty($userdata['tpl_name']))
+	{
+		foreach ($bb_cfg['templates'] as $folder => $name)
+		{
+			if ($userdata['tpl_name'] == $folder) $tpl_dir_name = basename($userdata['tpl_name']);
+		}
+	}
+
 	$template = new Template(TEMPLATES_DIR . $tpl_dir_name);
 	$css_dir = basename(TEMPLATES_DIR) ."/$tpl_dir_name/css/";
 
