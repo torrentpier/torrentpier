@@ -1550,7 +1550,7 @@ function setup_style ()
 	global $bb_cfg, $template, $userdata;
 
 	// AdminCP works only with default template
-	$tpl_dir_name = defined('IN_ADMIN') ? 'default'   : basename((IS_GUEST || empty($userdata['tpl_name'])) ? $bb_cfg['tpl_name'] : $userdata['tpl_name']);
+	$tpl_dir_name = defined('IN_ADMIN') ? 'default'   : basename($bb_cfg['tpl_name']);
 	$stylesheet   = defined('IN_ADMIN') ? 'main.css'  : basename($bb_cfg['stylesheet']);
 
 	if (!IS_GUEST && !empty($userdata['tpl_name']))
