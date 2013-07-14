@@ -140,6 +140,7 @@ document.write('<input type="hidden" name="user_timezone" value="'+tz+'" />');
 <tr>
 	<th colspan="2">{L_PREFERENCES}</th>
 </tr>
+<!-- IF TEMPLATES_SELECT -->
 <tr>
 	<td>{L_FORUM_STYLE}</td>
 	<td>
@@ -148,6 +149,7 @@ document.write('<input type="hidden" name="user_timezone" value="'+tz+'" />');
 		</div>
 	</td>
 </tr>
+<!-- ENDIF -->
 <!-- IF not SIG_DISALLOWED -->
 <tr colspan="2" id="view_message" class="hidden">
 	<td colspan="2">

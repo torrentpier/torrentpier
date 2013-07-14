@@ -123,7 +123,7 @@ $template->assign_vars(array(
 	'ICQ'                  => $profiledata['user_icq'],
 	'LAST_VISIT_TIME'      => ($profiledata['user_lastvisit']) ? (bf($profiledata['user_opt'], 'user_opt', 'allow_viewonline') && !IS_ADMIN) ? $lang['HIDDEN_USER'] : bb_date($profiledata['user_lastvisit'], 'Y-m-d H:i', 'false') : $lang['NEVER'],
 	'LAST_ACTIVITY_TIME'   => ($profiledata['user_session_time']) ? (bf($profiledata['user_opt'], 'user_opt', 'allow_viewonline') && !IS_ADMIN) ? $lang['HIDDEN_USER'] : bb_date($profiledata['user_session_time'], 'Y-m-d H:i', 'false') : $lang['NEVER'],
-	'ALLOW_DLS'            => (!bf($profiledata['user_opt'], 'user_opt', 'allow_dls') || (IS_AM || $profile_user_id)),
+	'ALLOW_DLS'            => bf($profiledata['user_opt'], 'user_opt', 'allow_dls'),
 	'LOCATION'             => $profiledata['user_from'],
 
 	'USER_ACTIVE'          => $profiledata['user_active'],

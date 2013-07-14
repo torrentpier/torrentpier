@@ -12,7 +12,7 @@ switch ($mode)
 	    $user_id = (int) $this->request['user_id'];
 		if(!$user_id) $this->ajax_die($lang['NO_USER_ID_SPECIFIED']);
 		$user_info = get_userdata($user_id);
-		if(bf($user_info['user_opt'], 'user_opt', 'allow_dls') && !IS_AM && $user_id != $userdata['user_id']) $this->ajax_die($lang['CUR_ACTIVE_DLS_DISALLOWED']);
+		if(!bf($user_info['user_opt'], 'user_opt', 'allow_dls') && !IS_AM && $user_id != $userdata['user_id']) $this->ajax_die($lang['CUR_ACTIVE_DLS_DISALLOWED']);
 
 		$excluded_forums_csv = $user->get_excluded_forums(AUTH_VIEW);
 		$not_auth_forums_sql = ($excluded_forums_csv) ? "

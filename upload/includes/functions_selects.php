@@ -92,12 +92,14 @@ function templates_select($default_style, $select_name = 'tpl_name')
 	global $bb_cfg;
 
 	$templates_select = '<select name="'. $select_name .'">';
+	$x = 0;
 	foreach ($bb_cfg['templates'] as $folder => $name)
 	{
 		$selected = '';
 		if ($folder == $default_style) $selected = ' selected="selected"';
 		$templates_select .= '<option value="'. $folder .'"'. $selected .'>'. $name .'</option>';
+		$x++;
 	}
 	$templates_select .= '</select>&nbsp;';
-	return $templates_select;
+	return ($x > 1) ? $templates_select : '';
 }
