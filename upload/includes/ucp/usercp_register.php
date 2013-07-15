@@ -722,7 +722,7 @@ foreach ($profile_fields as $field => $can_edit)
 		break;
 
 	/**
-	*  Выбор шаблона (edit, reg)
+	*  Выбор шаблона (edit)
 	*/
 	case 'tpl_name':
 		$templates = isset($_POST['tpl_name']) ? (string) $_POST['tpl_name'] : $pr_data['tpl_name'];
@@ -800,6 +800,8 @@ if ($submit && !$errors)
 		$db_data['user_regdate'] = TIMENOW;
 
         if(!IS_ADMIN) $db_data['user_reg_ip'] = USER_IP;
+
+		if(!isset($db_data['tpl_name'])) $db_data['tpl_name'] = (string) $bb_cfg['tpl_name'];
 
 		$sql_args = DB()->build_array('INSERT', $db_data);
 

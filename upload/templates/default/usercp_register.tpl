@@ -193,8 +193,8 @@ ajax.callback.posts = function(data){
 <tr>
 	<td>{L_DENY_VISITORS}:</td>
 	<td>
-		<label><input type="radio" name="allow_dls" value="1" <!-- IF ALLOW_DLS -->checked="checked"<!-- ENDIF --> />{L_YES}</label>&nbsp;&nbsp;
-		<label><input type="radio" name="allow_dls" value="0" <!-- IF not ALLOW_DLS -->checked="checked"<!-- ENDIF --> />{L_NO}</label>
+		<label><input type="radio" name="allow_dls" value="0" <!-- IF not ALLOW_DLS -->checked="checked"<!-- ENDIF --> />{L_YES}</label>&nbsp;&nbsp;
+		<label><input type="radio" name="allow_dls" value="1" <!-- IF ALLOW_DLS -->checked="checked"<!-- ENDIF --> />{L_NO}</label>
 	</td>
 </tr>
 <tr>
