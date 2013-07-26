@@ -232,16 +232,8 @@ class report_privmsg extends report_module
 	function _subject_details_prepare(&$message, &$subject, $row)
 	{
 		global $bb_cfg, $userdata, $datastore;
-		require_once(INC_DIR . "bbcode.php");
 
-		//
-		// If the board has HTML off but the post has HTML
-		// on then we process it, else leave it alone
-		//
-		/*if ((!$bb_cfg['allow_html'] || !$userdata['user_allowhtml']) && $row['privmsgs_enable_html'])
-		{
-			$message = preg_replace('#(<)([\/]?.*?)(>)#is', '&lt;\\2&gt;', $message);
-		}*/
+		require_once(INC_DIR . "bbcode.php");
 
 		$message = bbcode2html($message);
 

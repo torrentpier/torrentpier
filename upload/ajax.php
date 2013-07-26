@@ -76,8 +76,8 @@ class ajax_common
 		'manage_user'       => array('admin'),
 
 		'mod_action'        => array('mod'),
-        'topic_tpl'         => array('mod'),
-        'group_membership'  => array('mod'),
+		'topic_tpl'         => array('mod'),
+		'group_membership'  => array('mod'),
 		'post_mod_comment'  => array('mod'),
 
 		'gen_passkey'       => array('user'),
@@ -284,7 +284,7 @@ class ajax_common
 		$this->send();
 	}
 
-    /**
+	/**
 	*  Verify mod rights
 	*/
 	function verify_mod_rights ($forum_id)
@@ -301,7 +301,7 @@ class ajax_common
 
 	function edit_user_profile ()
 	{
-        require(AJAX_DIR .'edit_user_profile.php');
+		require(AJAX_DIR .'edit_user_profile.php');
 	}
 
 	function change_user_rank ()
@@ -327,7 +327,7 @@ class ajax_common
 		$this->response['html'] = ($rank_id != 0) ? $lang['AWARDED_RANK'] . ' <b> '. $ranks[$rank_id]['rank_title'] .'</b>' : $lang['SHOT_RANK'];
 	}
 
-    function change_user_opt ()
+	function change_user_opt ()
 	{
 		global $bf, $lang;
 
@@ -353,8 +353,8 @@ class ajax_common
 
 		DB()->query("UPDATE ". BB_USERS ." SET user_opt = {$u_data['user_opt']} WHERE user_id = $user_id LIMIT 1");
 
-        // Удаляем данные из кеша
-        cache_rm_user_sessions ($user_id);
+		// Удаляем данные из кеша
+		cache_rm_user_sessions ($user_id);
 
 		$this->response['resp_html'] = $lang['SAVED'];
 	}
@@ -382,7 +382,7 @@ class ajax_common
 		else $this->ajax_die($lang['NOT_AUTHORISED']);
 	}
 
-    // User groups membership
+	// User groups membership
 	function group_membership ()
 	{
 		global $lang, $user;
@@ -497,19 +497,19 @@ class ajax_common
 	}
 
 	function user_register()
-    {
+	{
 		require(AJAX_DIR .'user_register.php');
-    }
+	}
 
-    function mod_action()
-    {
+	function mod_action()
+	{
 		require(AJAX_DIR .'mod_action.php');
-    }
+	}
 
-    function posts()
-    {
+	function posts()
+	{
 		require(AJAX_DIR .'posts.php');
-    }
+	}
 
 	function manage_user()
 	{
@@ -522,7 +522,7 @@ class ajax_common
 	}
 
 	function index_data()
-    {
+	{
 		require(AJAX_DIR .'index_data.php');
 	}
 

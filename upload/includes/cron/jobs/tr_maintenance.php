@@ -29,14 +29,6 @@ $attach_sql = join(',', $attach_sql);
 
 if ($dead_tor_sql && $attach_sql)
 {
-/*
-	// Update topic type
-	DB()->query("
-		UPDATE ". BB_TOPICS ." SET
-			topic_dl_type = ". TOPIC_DL_TYPE_NORMAL ."
-		WHERE topic_id IN($dead_tor_sql)
-	");
-*/
 	// Delete torstat
 	DB()->query("
 		DELETE FROM ". BB_BT_TORSTAT ."
