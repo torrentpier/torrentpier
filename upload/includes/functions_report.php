@@ -76,17 +76,21 @@ function report_modules_cache_clean()
 //
 function report_modules_obtain()
 {
-	$sql = 'SELECT report_module_id, report_module_order, report_module_notify, report_module_prune, report_module_last_prune,
-			report_module_name, auth_write, auth_view, auth_notify, auth_delete
-		FROM ' . BB_REPORTS_MODULES . '
-		ORDER BY report_module_order';
-	if (!$result = DB()->sql_query($sql))
+	if (!$modules = CACHE('bb_cache')->get('report_modules_obtain'))
 	{
-		message_die(GENERAL_ERROR, 'Could not obtain report modules', '', __LINE__, __FILE__, $sql);
-	}
+		$sql = 'SELECT report_module_id, report_module_order, report_module_notify, report_module_prune, report_module_last_prune,
+				report_module_name, auth_write, auth_view, auth_notify, auth_delete
+			FROM ' . BB_REPORTS_MODULES . '
+			ORDER BY report_module_order';
+		if (!$result = DB()->sql_query($sql))
+		{
+			message_die(GENERAL_ERROR, 'Could not obtain report modules', '', __LINE__, __FILE__, $sql);
+		}
 
-	$modules = DB()->sql_fetchrowset($result);
-	DB()->sql_freeresult($result);
+		$modules = DB()->sql_fetchrowset($result);
+		DB()->sql_freeresult($result);
+		CACHE('bb_cache')->set('report_modules_obtain', $modules, 300);
+	}
 
 	if (empty($modules))
 	{
@@ -103,10 +107,9 @@ function report_modules_obtain()
 function report_modules($mode = 'all', $module = null)
 {
 	global $bb_cfg;
-	static $modules;
-	static $module_names;
+	static $modules, $module_names;
 
-    if(!$bb_cfg['reports_enabled']) return false;
+	if (!$bb_cfg['reports_enabled']) return false;
 
 	if (!isset($modules))
 	{
@@ -115,7 +118,6 @@ function report_modules($mode = 'all', $module = null)
 		if (!$bb_cfg['report_modules_cache'] || !$rows = report_modules_cache_read())
 		{
 			$rows = report_modules_obtain();
-
 			if ($bb_cfg['report_modules_cache'])
 			{
 				report_modules_cache_write($rows);
@@ -131,7 +133,7 @@ function report_modules($mode = 'all', $module = null)
 
 			// Include language file
 			$lang = array();
-            $lang_file = LANG_ROOT_DIR ."lang_{$bb_cfg['default_lang']}/report_hack/lang_{$row['report_module_name']}.php";
+			$lang_file = LANG_ROOT_DIR ."lang_{$bb_cfg['default_lang']}/report_hack/lang_{$row['report_module_name']}.php";
 			if (file_exists($lang_file))
 			{
 				include($lang_file);
@@ -172,7 +174,6 @@ function report_modules($mode = 'all', $module = null)
 			{
 				return false;
 			}
-
 			$key = ($mode == 'name') ? $module_names[$module] : $module;
 			return (isset($modules[$key])) ? $modules[$key] : false;
 		break;
@@ -313,22 +314,16 @@ function report_notify($mode)
 			// get module object
 			$report_module = report_modules('id', $report['report_module_id']);
 
-			//
 			// Check if notifications are enabled
-			//
 			if (!$report_module->data['report_module_notify'])
 			{
 				break;
 			}
 
-			//
 			// Obtain report reason description
-			//
 			if ($report['report_reason_id'])
 			{
-				$sql = 'SELECT report_reason_desc
-					FROM ' . BB_REPORTS_REASONS . '
-					WHERE report_reason_id = ' . $report['report_reason_id'];
+				$sql = 'SELECT report_reason_desc FROM ' . BB_REPORTS_REASONS . ' WHERE report_reason_id = ' . $report['report_reason_id'];
 				if (!$result = DB()->sql_query($sql))
 				{
 					message_die(GENERAL_ERROR, 'Could not obtain report reason desc', '', __LINE__, __FILE__, $sql);
@@ -344,9 +339,7 @@ function report_notify($mode)
 				$report['report_reason_desc'] = '';
 			}
 
-			//
 			// Obtain notification users
-			//
 			$user_level_sql = ($bb_cfg['report_list_admin']) ? '= ' . ADMIN : 'IN(' . ADMIN . ', ' . MOD . ')';
 			$sql = 'SELECT user_id, user_level, user_email, user_lang
 				FROM ' . BB_USERS . '
@@ -361,17 +354,13 @@ function report_notify($mode)
 			$notify_users[$report['report_id']] = array();
 			while ($row = DB()->sql_fetchrow($result))
 			{
-				//
 				// Check module authorisation
-				//
 				if (!$report_module->auth_check(array('auth_view', 'auth_notify'), $row))
 				{
 					continue;
 				}
 
-				//
 				// Check subject authorisation
-				//
 				if ($bb_cfg['report_subject_auth'])
 				{
 					$report_subject = array($report['report_id'] => array($report['report_subject'], $report['report_subject_data']));
@@ -400,9 +389,7 @@ function report_notify($mode)
 			$report_ids = func_get_arg(2);
 			report_prepare_ids($report_ids);
 
-			//
 			// Obtain report information
-			//
 			$sql = 'SELECT r.report_id, r.report_module_id, r.report_subject, r.report_subject_data, r.report_title, r.report_desc,
 					rc.report_change_time, rc.report_change_comment, u.username, u.user_rank
 				FROM ' . BB_REPORTS . ' r
@@ -435,9 +422,7 @@ function report_notify($mode)
 			}
 			DB()->sql_freeresult($result);
 
-			//
 			// Obtain notification users
-			//
 			$user_level_sql = ($bb_cfg['report_list_admin']) ? '= ' . ADMIN : 'IN(' . ADMIN . ', ' . MOD . ')';
 			$sql = 'SELECT user_id, user_level, user_email, user_lang
 				FROM ' . BB_USERS . '
@@ -463,33 +448,25 @@ function report_notify($mode)
 				{
 					$report_module =& $report_modules[$report_module_id];
 
-					//
 					// Check if notifications are enabled
-					//
 					if (!$report_module->data['report_module_notify'])
 					{
 						continue;
 					}
 
-					//
 					// Check module authorisation
-					//
 					if (!$report_module->auth_check($auth_options, $row))
 					{
 						continue;
 					}
 
-					//
 					// Check subject authorisation
-					//
 					if ($bb_cfg['report_subject_auth'])
 					{
 						$report_module->subjects_auth_check($report_subjects, $row);
 					}
 
-					//
 					// Add users
-					//
 					foreach (array_keys($report_subjects) as $report_id)
 					{
 						if (!isset($notify_users[$report_id]))
@@ -517,19 +494,10 @@ function report_notify($mode)
 		return true;
 	}
 
-	// Sixty second limit
-	@set_time_limit(60);
 
-	//
-	// Let's do some checking to make sure that mass mail functions
-	// are working in win32 versions of php.
-	//
 	if (preg_match('/[c-z]:\\\.*/i', getenv('PATH')) && !$bb_cfg['smtp_delivery'])
 	{
 		$ini_val = (@phpversion() >= '4.0.0') ? 'ini_get' : 'get_cfg_var';
-
-		// We are running on windows, force delivery to use our smtp functions
-		// since php's are broken by default
 		$bb_cfg['smtp_delivery'] = 1;
 		$bb_cfg['smtp_host'] = @$ini_val('SMTP');
 	}
@@ -547,9 +515,7 @@ function report_notify($mode)
 	$emailer->from($bb_cfg['board_email']);
 	$emailer->replyto($bb_cfg['board_email']);
 
-	//
 	// Send emails
-	//
 	foreach ($notify_users as $report_id => $report_notify_users)
 	{
 		$report =& $reports[$report_id];
@@ -561,10 +527,7 @@ function report_notify($mode)
 			// Get language variables
 			$lang =& report_notify_lang($user_info['user_lang']);
 
-			//
-			// Set email variables
-			// we use $vars here because of an emailer bug
-			//
+			// Set email variables, we use $vars here because of an emailer bug
 			$vars = array(
 				'EMAIL_SIG' => (!empty($bb_cfg['board_email_sig'])) ? str_replace('<br />', "\n", "-- \n" . $bb_cfg['board_email_sig']) : '',
 				'SITENAME' => $bb_cfg['sitename'],
@@ -604,7 +567,6 @@ function report_notify($mode)
 			}
 
 			$emailer->assign_vars($vars);
-
 			$emailer->send();
 			$emailer->reset();
 		}
@@ -657,16 +619,19 @@ function report_count_obtain()
 
 	if ($userdata['user_level'] == ADMIN)
 	{
-		$sql = 'SELECT COUNT(report_id) AS report_count
-			FROM ' . BB_REPORTS . '
-			WHERE report_status IN(' . REPORT_NEW . ', ' . REPORT_OPEN . ')';
-		if (!$result = DB()->sql_query($sql))
+		if (!CACHE('bb_cache')->get('report_count_obtain_exp') || (CACHE('bb_cache')->get('report_count_obtain_exp') + 300) < TIMENOW)
 		{
-			message_die(GENERAL_ERROR, 'Could not obtain report count', '', __LINE__, __FILE__, $sql);
+			$sql = 'SELECT COUNT(report_id) AS report_count FROM ' . BB_REPORTS . ' WHERE report_status IN(' . REPORT_NEW . ', ' . REPORT_OPEN . ')';
+			if (!$result = DB()->sql_query($sql))
+			{
+				message_die(GENERAL_ERROR, 'Could not obtain report count', '', __LINE__, __FILE__, $sql);
+			}
+			$report_count = DB()->sql_fetchfield('report_count', 0, $result);
+			DB()->sql_freeresult($result);
+			CACHE('bb_cache')->set('report_count_obtain', $report_count, 300);
+			CACHE('bb_cache')->set('report_count_obtain_exp', (TIMENOW + 300), 300);
 		}
-
-		$report_count = DB()->sql_fetchfield('report_count', 0, $result);
-		DB()->sql_freeresult($result);
+		$report_count = CACHE('bb_cache')->get('report_count_obtain');
 	}
 	else if ($userdata['user_level'] != MOD)
 	{
@@ -760,17 +725,13 @@ function reports_obtain($module_id = null, $auth_check = true)
 		}
 	}
 
-	//
 	// Check authorisation
-	//
 	if ($auth_check)
 	{
 		reports_auth_check($rows);
 	}
 
-	//
 	// Prepare reports array
-	//
 	$reports = array();
 	foreach ($rows as $row)
 	{
@@ -821,9 +782,7 @@ function reports_open_obtain($module_id, $report_subject, $auth_check = true)
 		}
 	}
 
-	//
 	// Check authorisation
-	//
 	if ($auth_check)
 	{
 		reports_auth_check($reports);
@@ -866,9 +825,7 @@ function reports_deleted_obtain($auth_check = true)
 		}
 	}
 
-	//
 	// Check authorisation
-	//
 	if ($auth_check)
 	{
 		reports_auth_check($reports, array('auth_view', 'auth_delete'));
@@ -916,9 +873,7 @@ function report_obtain($report_id, $auth_check = true)
 		$report['report_reason_desc'] = $lang[$report['report_reason_desc']];
 	}
 
-	//
 	// Check authorisation
-	//
 	if ($auth_check)
 	{
 		$auth_names = ($report['report_status'] == REPORT_DELETE) ? array('auth_view', 'auth_delete') : 'auth_view';
@@ -1017,12 +972,8 @@ function report_prune($module_id, $prune_time)
 	// Delete reports
 	reports_delete($report_ids, false, false);
 
-	//
 	// Set last prune date
-	//
-	$sql = 'UPDATE ' . BB_REPORTS_MODULES . '
-		SET report_module_last_prune = ' . TIMENOW . '
-		WHERE report_module_id = ' . (int) $module_id;
+	$sql = 'UPDATE ' . BB_REPORTS_MODULES . ' SET report_module_last_prune = ' . TIMENOW . ' WHERE report_module_id = ' . (int) $module_id;
 	if (!DB()->sql_query($sql))
 	{
 		message_die(GENERAL_ERROR, 'Could not delete old reports', '', __LINE__, __FILE__, $sql);
@@ -1039,9 +990,7 @@ function report_insert($module_id, $report_subject, $report_reason, $report_titl
 
 	$report_module = report_modules('id', $module_id);
 
-	//
 	// Check authorisation
-	//
 	if ($auth_check && !$report_module->auth_check('auth_write'))
 	{
 		return false;
@@ -1089,11 +1038,10 @@ function report_insert($module_id, $report_subject, $report_reason, $report_titl
 		'report_subject' => $report_subject,
 		'report_subject_data' => $report_subject_data,
 		'report_title' => $report_title,
-		'report_desc' => $report_desc);
+		'report_desc' => $report_desc
+	);
 
-	//
 	// Execute module action
-	//
 	if ($module_action)
 	{
 		$report_module = report_modules('id', $module_id);
@@ -1103,24 +1051,16 @@ function report_insert($module_id, $report_subject, $report_reason, $report_titl
 		}
 	}
 
-	/*DB()->sql_query('');*/
-
-	//
 	// Send report notifications
-	//
 	if ($notify && ($bb_cfg['report_notify'] == REPORT_NOTIFY_NEW || $bb_cfg['report_notify'] == REPORT_NOTIFY_CHANGE))
 	{
 		report_notify('new', $report);
 	}
 
-	//
 	// Increase report counter
-	//
 	if (isset($bb_cfg['report_hack_count']))
 	{
-		$sql = 'UPDATE ' . BB_CONFIG . "
-			SET config_value = config_value + 1
-			WHERE config_name = 'report_hack_count'";
+		$sql = 'UPDATE ' . BB_CONFIG . " SET config_value = config_value + 1 WHERE config_name = 'report_hack_count'";
 		if (!DB()->sql_query($sql))
 		{
 			message_die(GENERAL_ERROR, 'Could not update report hack count', '', __LINE__, __FILE__, $sql);
@@ -1165,9 +1105,7 @@ function reports_update_status($report_ids, $report_status, $comment = '', $auth
 		}
 	}
 
-	//
 	// Check authorisation
-	//
 	if ($auth_check)
 	{
 		$report_ids = reports_auth_check($reports);
@@ -1178,13 +1116,7 @@ function reports_update_status($report_ids, $report_status, $comment = '', $auth
 		return;
 	}
 
-	// Sorry, but we can't use transactions here because the DBAL doesn't allow BEGIN_TRANSACTION with an
-	// empty query
-	// DB()->sql_query('');
-
-	//
 	// Insert report status changes and update reports
-	//
 	$comment = DB()->escape($comment);
 	foreach ($report_ids as $report_id)
 	{
@@ -1197,9 +1129,7 @@ function reports_update_status($report_ids, $report_status, $comment = '', $auth
 
 		$change_id = DB()->sql_nextid();
 
-		//
 		// Update reports
-		//
 		$sql = 'UPDATE ' . BB_REPORTS . "
 			SET
 				report_status = $report_status,
@@ -1211,19 +1141,13 @@ function reports_update_status($report_ids, $report_status, $comment = '', $auth
 		}
 	}
 
-	//
 	// Execute module action
-	//
 	if ($module_action)
 	{
 		reports_module_action($reports, 'update_status', $report_status);
 	}
 
-	/*DB()->sql_query('');*/
-
-	//
 	// Send report notifications
-	//
 	if ($notify && $bb_cfg['report_notify'] == REPORT_NOTIFY_CHANGE)
 	{
 		report_notify('change', $report_status, $report_ids);
@@ -1262,9 +1186,7 @@ function reports_delete($report_ids, $auth_check = true, $module_action = true)
 		}
 	}
 
-	//
 	// Check authorisation
-	//
 	if ($auth_check)
 	{
 		// general authorisation check
@@ -1273,9 +1195,7 @@ function reports_delete($report_ids, $auth_check = true, $module_action = true)
 		// check for auth_delete
 		$report_ids = reports_auth_check($reports, 'auth_delete', false);
 
-		//
 		// Update reports without auth_delete
-		//
 		for ($i = 0, $count = count($update_ids); $i < $count; $i++)
 		{
 			if (in_array($update_ids[$i], $report_ids))
@@ -1296,35 +1216,25 @@ function reports_delete($report_ids, $auth_check = true, $module_action = true)
 		return;
 	}
 
-	//
 	// Delete reports
-	//
-	$sql = 'DELETE FROM ' . BB_REPORTS . "
-		WHERE report_id IN($reports_sql)";
+	$sql = 'DELETE FROM ' . BB_REPORTS . " WHERE report_id IN($reports_sql)";
 	if (!DB()->sql_query($sql))
 	{
 		message_die(GENERAL_ERROR, 'Could not delete reports', '', __LINE__, __FILE__, $sql);
 	}
 
-	//
 	// Delete report status changes
-	//
-	$sql = 'DELETE FROM ' . BB_REPORTS_CHANGES . "
-		WHERE report_id IN($reports_sql)";
+	$sql = 'DELETE FROM ' . BB_REPORTS_CHANGES . " WHERE report_id IN($reports_sql)";
 	if (!DB()->sql_query($sql))
 	{
 		message_die(GENERAL_ERROR, 'Could not delete reports changes', '', __LINE__, __FILE__, $sql);
 	}
 
-	//
 	// Execute module action
-	//
 	if ($module_action)
 	{
 		reports_module_action($reports, 'delete');
 	}
-
-	/*DB()->sql_query('');*/
 }
 
 //
@@ -1353,9 +1263,7 @@ function report_statistics($mode)
 
 			if ($report_count > $bb_cfg['report_hack_count'])
 			{
-				$sql = 'UPDATE ' . BB_CONFIG . "
-					SET config_value = '" . $report_count . "'
-					WHERE config_name = 'report_hack_count'";
+				$sql = 'UPDATE ' . BB_CONFIG . " SET config_value = '" . $report_count . "' WHERE config_name = 'report_hack_count'";
 				DB()->sql_query($sql);
 			}
 
