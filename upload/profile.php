@@ -1,6 +1,6 @@
 <?php
 
-define('IN_PHPBB', true);
+define('IN_FORUM', true);
 define('IN_PROFILE', true);
 define('BB_SCRIPT', 'profile');
 define('BB_ROOT', './');

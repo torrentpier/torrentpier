@@ -1,6 +1,6 @@
 <?php
 
-define('IN_PHPBB', true);
+define('IN_FORUM', true);
 define('BB_SCRIPT', 'misc');
 define('BB_ROOT', './');
 require(BB_ROOT .'common.php');

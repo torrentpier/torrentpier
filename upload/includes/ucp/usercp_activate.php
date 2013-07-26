@@ -1,6 +1,6 @@
 <?php
 
-if ( !defined('IN_PHPBB') )
+if ( !defined('IN_FORUM') )
 {
 	die('Hacking attempt');
 	exit;

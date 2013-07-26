@@ -1,6 +1,6 @@
 <?php
 
-define('IN_PHPBB',   true);
+define('IN_FORUM',   true);
 define('BB_SCRIPT', 'download');
 define('IN_SERVICE', true);
 define('NO_GZIP', true);

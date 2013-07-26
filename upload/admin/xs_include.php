@@ -1,6 +1,6 @@
 <?php
 
-if (!defined('IN_PHPBB') || !defined('IN_XS')) die(basename(__FILE__));
+if (!defined('IN_FORUM') || !defined('IN_XS')) die(basename(__FILE__));
 if(defined('XS_INCLUDED')) return;
 
 define('XS_INCLUDED', true);

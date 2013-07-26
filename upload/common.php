@@ -7,7 +7,7 @@ define('TIMENOW',   time());
 if (isset($_REQUEST['GLOBALS']) || isset($_FILES['GLOBALS'])) die();
 
 if (!defined('BB_ROOT')) define('BB_ROOT', './');
-if (!defined('IN_PHPBB') && !defined('IN_TRACKER')) define('IN_PHPBB', true);
+if (!defined('IN_FORUM') && !defined('IN_TRACKER')) define('IN_FORUM', true);
 
 // Get initial config
 require(BB_ROOT .'config.php');
@@ -2247,7 +2247,7 @@ function log_request ($file = '', $prepend_str = false, $add_post = true)
 }
 
 // Board init
-if (defined('IN_PHPBB'))
+if (defined('IN_FORUM'))
 {
 	require(INC_DIR .'init_bb.php');
 }

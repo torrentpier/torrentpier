@@ -1,6 +1,6 @@
 <?php
 
-if (!defined('IN_PHPBB')) die(basename(__FILE__));
+if (!defined('IN_FORUM')) die(basename(__FILE__));
 
 global $bb_cfg, $t_data, $poster_id, $is_auth, $dl_link_css, $dl_status_css, $lang, $images;
 

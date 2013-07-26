@@ -1,6 +1,6 @@
 <?php
 
-define('IN_PHPBB',   true);
+define('IN_FORUM',   true);
 define('BB_SCRIPT', 'groupcp');
 define('BB_ROOT', './');
 require(BB_ROOT ."common.php");
@@ -176,7 +176,9 @@ if (!$group_id)
 	else
 	{
 		if(IS_ADMIN)
-		{			redirect('admin/admin_groups.php');		}
+		{
+			redirect('admin/admin_groups.php');
+		}
 		else bb_die($lang['NO_GROUPS_EXIST']);
 	}
 }

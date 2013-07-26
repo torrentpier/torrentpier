@@ -3,7 +3,7 @@
 // Comment the following line to enable
 die('Please REMOVE THIS FILE from your production environment!<br /><br />'. basename(__FILE__));
 
-define('IN_PHPBB', true);
+define('IN_FORUM', true);
 define('BB_ROOT', './../');
 
 require('./dbg_config.php');

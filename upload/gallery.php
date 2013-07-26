@@ -1,6 +1,6 @@
 <?php
 
-define('IN_PHPBB', true);
+define('IN_FORUM', true);
 define('BB_SCRIPT', 'gallery');
 define('BB_ROOT', './');
 require(BB_ROOT .'common.php');
@@ -13,7 +13,9 @@ if (!$bb_cfg['gallery_enabled']) bb_die($lang['GALLERY_DISABLED']);
 require(LANG_ROOT_DIR ."lang_{$userdata['user_lang']}/lang_gallery.php");
 
 if(bf($userdata['user_opt'], 'user_opt', 'allow_gallery'))
-{	bb_die($lang['USE_GALLERY_OFF']);}
+{
+	bb_die($lang['USE_GALLERY_OFF']);
+}
 
 $go = isset($_GET['go']) ? $_GET['go'] : '';
 $max_size = $bb_cfg['pic_max_size']*1024*1024;

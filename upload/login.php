@@ -1,6 +1,6 @@
 <?php
 
-define('IN_PHPBB',   true);
+define('IN_FORUM',   true);
 define('BB_SCRIPT', 'login');
 define('IN_LOGIN', true);
 define('BB_ROOT', './');

@@ -1,6 +1,6 @@
 <?php
 
-if (!defined('IN_PHPBB')) die(basename(__FILE__));
+if (!defined('IN_FORUM')) die(basename(__FILE__));
 
 $selects = array(
 	'SEL_VIDEO_QUALITY' => array(
