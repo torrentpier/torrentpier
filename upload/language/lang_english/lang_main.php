@@ -228,7 +228,7 @@ $lang['TOPIC_POLL'] = '[ Poll ]';
 $lang['TOPIC_DRAFT'] = '[ Draft ]';
 
 $lang['MARK_TOPICS_READ'] = 'Mark all topics read';
-$lang['TOPICS_MARKED_READ'] = 'The topics for this forum have been marked read now';
+$lang['TOPICS_MARKED_READ'] = 'The topics for this forum have just been marked read';
 
 $lang['RULES_POST_CAN'] = 'You <b>can</b> post new topics in this forum';
 $lang['RULES_POST_CANNOT'] = 'You <b>cannot</b> post new topics in this forum';
@@ -294,7 +294,7 @@ $lang['SPLIT_TOPIC'] = 'Split this topic';
 $lang['STOP_WATCHING_TOPIC'] = 'Stop watching this topic';
 $lang['START_WATCHING_TOPIC'] = 'Watch this topic for replies';
 $lang['NO_LONGER_WATCHING'] = 'You are no longer watching this topic';
-$lang['YOU_ARE_WATCHING'] = 'You are now watching this topic';
+$lang['YOU_ARE_WATCHING'] = 'You are watching this topic now';
 
 $lang['TOTAL_VOTES'] = 'Total Votes';
 $lang['SEARCH_IN_TOPIC'] = 'search in topic...';
@@ -668,8 +668,8 @@ $lang['ACCOUNT_ACTIVATED_SUBJECT'] = 'Account Activated';
 $lang['ACCOUNT_ADDED'] = 'Thank you for registering. Your account has been created. You may now log in with your username and password';
 $lang['ACCOUNT_INACTIVE'] = 'Your account has been created. However, this forum requires account activation. An activation key has been sent to the e-mail address you provided. Please check your e-mail for further information';
 $lang['ACCOUNT_INACTIVE_ADMIN'] = 'Your account has been created. However, this forum requires account activation by the administrator. An e-mail has been sent to them and you will be informed when your account has been activated';
-$lang['ACCOUNT_ACTIVE'] = 'Your account has now been activated. Thank you for registering';
-$lang['ACCOUNT_ACTIVE_ADMIN'] = 'The account has now been activated';
+$lang['ACCOUNT_ACTIVE'] = 'Your account has just been activated. Thank you for registering';
+$lang['ACCOUNT_ACTIVE_ADMIN'] = 'The account has just been activated';
 $lang['REACTIVATE'] = 'Reactivate your account!';
 $lang['ALREADY_ACTIVATED'] = 'You have already activated your account';
 
