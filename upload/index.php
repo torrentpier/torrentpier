@@ -74,6 +74,7 @@ if ($viewcat AND !$viewcat =& $forums['c'][$viewcat]['cat_id'])
 {
 	redirect("index.php");
 }
+
 // Forums
 $forums_join_sql = 'f.cat_id = c.cat_id';
 $forums_join_sql .= ($viewcat) ? "
@@ -124,48 +125,53 @@ $replace_in_parent = array(
 	'last_topic_id',
 );
 
-foreach (DB()->fetch_rowset($sql) as $row)
+$cache_name = 'index_sql_' . md5($sql);
+if (!$cat_forums = CACHE('bb_cache')->get($cache_name))
 {
-	if (!$cat_id = $row['cat_id'] OR !$forum_id = $row['forum_id'])
+	foreach (DB()->fetch_rowset($sql) as $row)
 	{
-		continue;
-	}
-
-	if ($parent_id = $row['forum_parent'])
-	{
-		if (!$parent =& $cat_forums[$cat_id]['f'][$parent_id])
-		{
-			$parent = $forums['f'][$parent_id];
-			$parent['last_post_time'] = 0;
-		}
-		if ($row['last_post_time'] > $parent['last_post_time'])
-		{
-			foreach ($replace_in_parent as $key)
-			{
-				$parent[$key] = $row[$key];
-			}
-		}
-		if ($show_subforums && $row['show_on_index'])
-		{
-			$parent['last_sf_id'] = $forum_id;
-		}
-		else
+		if (!$cat_id = $row['cat_id'] OR !$forum_id = $row['forum_id'])
 		{
 			continue;
 		}
-	}
-	else
-	{
-		$f =& $forums['f'][$forum_id];
-		$row['forum_desc']   = $f['forum_desc'];
-		$row['forum_posts']  = $f['forum_posts'];
-		$row['forum_topics'] = $f['forum_topics'];
-	}
 
-	$cat_forums[$cat_id]['f'][$forum_id] = $row;
+		if ($parent_id = $row['forum_parent'])
+		{
+			if (!$parent =& $cat_forums[$cat_id]['f'][$parent_id])
+			{
+				$parent = $forums['f'][$parent_id];
+				$parent['last_post_time'] = 0;
+			}
+			if ($row['last_post_time'] > $parent['last_post_time'])
+			{
+				foreach ($replace_in_parent as $key)
+				{
+					$parent[$key] = $row[$key];
+				}
+			}
+			if ($show_subforums && $row['show_on_index'])
+			{
+				$parent['last_sf_id'] = $forum_id;
+			}
+			else
+			{
+				continue;
+			}
+		}
+		else
+		{
+			$f =& $forums['f'][$forum_id];
+			$row['forum_desc']   = $f['forum_desc'];
+			$row['forum_posts']  = $f['forum_posts'];
+			$row['forum_topics'] = $f['forum_topics'];
+		}
+		$cat_forums[$cat_id]['f'][$forum_id] = $row;
+	}
+	CACHE('bb_cache')->set($cache_name, $cat_forums, 180);
+	unset($row);
+	unset($forums);
+	$datastore->rm('cat_forums');
 }
-unset($forums);
-$datastore->rm('cat_forums');
 
 // Obtain list of moderators
 $moderators = array();
