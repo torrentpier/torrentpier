@@ -334,7 +334,7 @@ $lang['INVALID_TOPIC_ID'] = 'Topic Absent!';
 $lang['INVALID_TOPIC_ID_DB'] = 'Topic does not exist in the database!';
 
 $lang['NOT_POST'] = 'Absent Message';
-$lang['NOT_EDIT_TOR_STATUS'] = 'You may not edit your hand with the status';
+$lang['NOT_EDIT_TOR_STATUS'] = 'You may not edit your distributions with the status';
 $lang['TOR_STATUS_DAYS'] = 'days';
 
 $lang['OPTIONS'] = 'Options';
@@ -1234,7 +1234,7 @@ $lang['TOR_MOD_TITLE'] = 'Changing the status of distribution - %s';
 $lang['TOR_MOD_MSG'] = "Hello, %s.\n\n Status [url=%s]your[/url] distribution is changed to [b]%s[/b]";
 
 $lang['TOR_AUTH_TITLE'] = 'Changes in the design - %s';
-$lang['TOR_AUTH_MSG'] = "Hello, %s.\n\n Making my hand changed - [url=%s]%s[/url]\n\n Please re-check it.";
+$lang['TOR_AUTH_MSG'] = "Hello, %s.\n\n Making my distribution changed - [url=%s]%s[/url]\n\n Please re-check it.";
 $lang['TOR_AUTH_FIXED'] = 'Fixed';
 $lang['TOR_AUTH_SENT_COMMENT'] = ' &middot; <span class="seed bold">The information sent to the moderator. Expect.</span>';
 //end torrent status mod

@@ -65,14 +65,14 @@ $lang['TEMPLATES'] = 'Templates';
 // Update
 $lang['UPDATE'] = 'Update';
 $lang['USER_LEVELS'] = 'User levels';
-$lang['USER_LEVELS_UPDATED'] = 'User levels updated';
+$lang['USER_LEVELS_UPDATED'] = 'User levels have been updated';
 
 // Synchronize
 $lang['SYNCHRONIZE'] = 'Synchronize';
 $lang['TOPICS'] = 'Topics';
-$lang['TOPICS_DATA_SYNCHRONIZED'] = 'Topics data synchronized';
+$lang['TOPICS_DATA_SYNCHRONIZED'] = 'Topics data have been synchronized';
 $lang['USER_POSTS_COUNT'] = 'User posts count';
-$lang['USER POSTS COUNT SYNCHRONIZED'] = 'User posts count synchronized';
+$lang['USER POSTS COUNT SYNCHRONIZED'] = 'User posts count has been synchronized';
 
 // Online Userlist
 $lang['SHOW_ONLINE_USERLIST'] = 'Show the list of online users';
@@ -160,9 +160,9 @@ $lang['AUTH_ADMIN'] = 'Administrator';
 $lang['GROUP_MEMBERSHIPS'] = 'Usergroup memberships';
 $lang['USERGROUP_MEMBERS'] = 'This group has the following members';
 
-$lang['FORUM_AUTH_UPDATED'] = 'Forum permissions updated';
-$lang['USER_AUTH_UPDATED'] = 'User permissions updated';
-$lang['GROUP_AUTH_UPDATED'] = 'Group permissions updated';
+$lang['FORUM_AUTH_UPDATED'] = 'Forum permissions have been updated';
+$lang['USER_AUTH_UPDATED'] = 'User permissions have been updated';
+$lang['GROUP_AUTH_UPDATED'] = 'Group permissions have been updated';
 
 $lang['AUTH_UPDATED'] = 'Permissions have been updated';
 $lang['CLICK_RETURN_USERAUTH'] = 'Click %sHere%s to return to User Permissions';
@@ -290,7 +290,7 @@ $lang['VISUAL_CONFIRM_EXPLAIN'] = 'Requires users enter a code defined by an ima
 $lang['ALLOW_AUTOLOGIN'] = 'Allow automatic logins';
 $lang['ALLOW_AUTOLOGIN_EXPLAIN'] = 'Determines whether users are allowed to select to be automatically logged in when visiting the forum';
 $lang['AUTOLOGIN_TIME'] = 'Automatic login key expiry';
-$lang['AUTOLOGIN_TIME_EXPLAIN'] = 'How long a autologin key is valid for in days if the user does not visit the board. Set to zero to disable expiry.';
+$lang['AUTOLOGIN_TIME_EXPLAIN'] = 'How long an autologin key is valid for in days if the user does not visit the board. Set to zero to disable expiry.';
 
 //
 // Forum Management
@@ -303,7 +303,7 @@ $lang['CREATE_CATEGORY'] = 'Create new category';
 $lang['REMOVE'] = 'Remove';
 $lang['ACTION'] = 'Action';
 $lang['UPDATE_ORDER'] = 'Update Order';
-$lang['CONFIG_UPDATED'] = 'Forum Configuration Updated Successfully';
+$lang['CONFIG_UPDATED'] = 'Forum Configuration Has Been Updated Successfully';
 $lang['EDIT'] = 'Edit';
 $lang['MOVE_UP'] = 'Move up';
 $lang['MOVE_DOWN'] = 'Move down';
@@ -370,10 +370,10 @@ $lang['IMPORT_SMILE_PACK'] = 'Import Smiley Pack';
 $lang['EXPORT_SMILE_PACK'] = 'Create Smiley Pack';
 $lang['EXPORT_SMILES'] = 'To create a smiley pack from your currently installed smileys, click %sHere%s to download the smiles.pak file. Name this file appropriately making sure to keep the .pak file extension.  Then create a zip file containing all of your smiley images plus this .pak configuration file.';
 
-$lang['SMILEY_ADD_SUCCESS'] = 'The Smiley was successfully added';
-$lang['SMILEY_EDIT_SUCCESS'] = 'The Smiley was successfully updated';
-$lang['SMILEY_IMPORT_SUCCESS'] = 'The Smiley Pack was imported successfully!';
-$lang['SMILEY_DEL_SUCCESS'] = 'The Smiley was successfully removed';
+$lang['SMILEY_ADD_SUCCESS'] = 'The Smiley has been added successfully';
+$lang['SMILEY_EDIT_SUCCESS'] = 'The Smiley has been updated successfully';
+$lang['SMILEY_IMPORT_SUCCESS'] = 'The Smiley Pack has been imported successfully!';
+$lang['SMILEY_DEL_SUCCESS'] = 'The Smiley has been removed  successfully';
 $lang['CLICK_RETURN_SMILEADMIN'] = 'Click %sHere%s to return to Smiley Administration';
 
 
@@ -386,7 +386,7 @@ $lang['USER_ADMIN_EXPLAIN'] = 'Here you can change your users\' information and 
 $lang['LOOK_UP_USER'] = 'Look up user';
 
 $lang['ADMIN_USER_FAIL'] = 'Couldn\'t update the user\'s profile.';
-$lang['ADMIN_USER_UPDATED'] = 'The user\'s profile was successfully updated.';
+$lang['ADMIN_USER_UPDATED'] = 'The user\'s profile has been updated successfully.';
 $lang['CLICK_RETURN_USERADMIN'] = 'Click %sHere%s to return to User Administration';
 
 $lang['USER_ALLOWPM'] = 'Can send Private Messages';
@@ -404,9 +404,9 @@ $lang['USER_SPECIAL_EXPLAIN'] = 'These fields are not able to be modified by the
 $lang['GROUP_ADMINISTRATION'] = 'Group Administration';
 $lang['GROUP_ADMIN_EXPLAIN'] = 'From this panel you can administer all your usergroups. You can delete, create and edit existing groups. You may choose moderators, toggle open/closed group status and set the group name and description';
 $lang['ERROR_UPDATING_GROUPS'] = 'There was an error while updating the groups';
-$lang['UPDATED_GROUP'] = 'The group was successfully updated';
-$lang['ADDED_NEW_GROUP'] = 'The new group was successfully created';
-$lang['DELETED_GROUP'] = 'The group was successfully deleted';
+$lang['UPDATED_GROUP'] = 'The group has been updated successfully';
+$lang['ADDED_NEW_GROUP'] = 'The new group has been created successfully';
+$lang['DELETED_GROUP'] = 'The group has been deleted successfully';
 $lang['CREATE_NEW_GROUP'] = 'Create new group';
 $lang['EDIT_GROUP'] = 'Edit group';
 $lang['GROUP_STATUS'] = 'Group status';
@@ -435,7 +435,7 @@ $lang['ALL_FORUMS'] = 'All Forums';
 $lang['PRUNE_TOPICS_NOT_POSTED'] = 'Prune topics with no replies in this many days';
 $lang['TOPICS_PRUNED'] = 'Topics pruned';
 $lang['POSTS_PRUNED'] = 'Posts pruned';
-$lang['PRUNE_SUCCESS'] = 'Pruning of forums was successful';
+$lang['PRUNE_SUCCESS'] = 'Forum has been pruned successfully';
 $lang['NOT_DAYS'] = 'Prune days not selected';
 
 //
@@ -452,9 +452,9 @@ $lang['UPDATE_WORD'] = 'Update word censor';
 $lang['MUST_ENTER_WORD'] = 'You must enter a word and its replacement';
 $lang['NO_WORD_SELECTED'] = 'No word selected for editing';
 
-$lang['WORD_UPDATED'] = 'The selected word censor has been successfully updated';
-$lang['WORD_ADDED'] = 'The word censor has been successfully added';
-$lang['WORD_REMOVED'] = 'The selected word censor has been successfully removed';
+$lang['WORD_UPDATED'] = 'The selected word censor has been updated  successfully';
+$lang['WORD_ADDED'] = 'The word censor has been added  successfully';
+$lang['WORD_REMOVED'] = 'The selected word censor has been removed  successfully ';
 
 $lang['CLICK_RETURN_WORDADMIN'] = 'Click %sHere%s to return to Word Censor Administration';
 
@@ -491,10 +491,10 @@ $lang['RANK_IMAGE_EXPLAIN'] = 'Use this to define a small image associated with 
 $lang['MUST_SELECT_RANK'] = 'You must select a rank';
 $lang['NO_ASSIGNED_RANK'] = 'No special rank assigned';
 
-$lang['RANK_UPDATED'] = 'The rank was successfully updated';
-$lang['RANK_ADDED'] = 'The rank was successfully added';
-$lang['RANK_REMOVED'] = 'The rank was successfully deleted';
-$lang['NO_UPDATE_RANKS'] = 'The rank was successfully deleted. However, user accounts using this rank were not updated.  You will need to manually reset the rank on these accounts';
+$lang['RANK_UPDATED'] = 'The rank has been updated successfully';
+$lang['RANK_ADDED'] = 'The rank has been added successfully';
+$lang['RANK_REMOVED'] = 'The rank has been deleted successfully';
+$lang['NO_UPDATE_RANKS'] = 'The rank has been deleted successfully. However, user accounts using this rank were not updated.  You will need to manually reset the rank on these accounts';
 
 $lang['CLICK_RETURN_RANKADMIN'] = 'Click %sHere%s to return to Rank Administration';
 
@@ -514,8 +514,8 @@ $lang['ADD_DISALLOW_EXPLAIN'] = 'You can disallow a username using the wildcard 
 
 $lang['NO_DISALLOWED'] = 'No Disallowed Usernames';
 
-$lang['DISALLOWED_DELETED'] = 'The disallowed username has been successfully removed';
-$lang['DISALLOW_SUCCESSFUL'] = 'The disallowed username has been successfully added';
+$lang['DISALLOWED_DELETED'] = 'The disallowed username has been removed successfully';
+$lang['DISALLOW_SUCCESSFUL'] = 'The disallowed username has been added successfully';
 $lang['DISALLOWED_ALREADY'] = 'The name you entered could not be disallowed. It either already exists in the list, exists in the word censor list, or a matching username is present.';
 
 $lang['CLICK_RETURN_DISALLOWADMIN'] = 'Click %sHere%s to return to Disallow Username Administration';
@@ -596,7 +596,7 @@ $lang['REPORT_NOTIFY_NEW'] = 'on new reports';
 $lang['REPORT_LIST_ADMIN'] = 'Admin-only report list';
 $lang['REPORT_NEW_WINDOW'] = 'Open subjects in a new window';
 $lang['REPORT_NEW_WINDOW_EXPLAIN'] = 'This setting also affects direct links to the reports at the view topic page.';
-$lang['REPORT_CONFIG_UPDATED'] = 'The configuration was updated.';
+$lang['REPORT_CONFIG_UPDATED'] = 'The configuration has been updated.';
 $lang['CLICK_RETURN_REPORT_CONFIG'] = 'Click %sHere%s to return to the configuration.';
 
 $lang['MODULES_REASONS'] = 'Modules and Reasons';
@@ -619,20 +619,20 @@ $lang['NO_REASONS'] = 'No reasons for this module';
 $lang['ADD_REASON'] = 'Add reason';
 $lang['EDIT_REASON'] = 'Edit reason';
 $lang['REASON_DESC_EXPLAIN'] = 'If the description matches with a language variable, the variable will be used instead.';
-$lang['REASON_DESC_EMPTY'] = 'You have to enter a report reason.';
-$lang['REPORT_REASON_ADDED'] = 'The report reason was added.';
-$lang['REPORT_REASON_EDITED'] = 'The report reason was edited.';
+$lang['REASON_DESC_EMPTY'] = 'You must enter a report reason.';
+$lang['REPORT_REASON_ADDED'] = 'The report reason has been added.';
+$lang['REPORT_REASON_EDITED'] = 'The report reason has been edited.';
 $lang['DELETE_REASON'] = 'Delete reason';
 $lang['DELETE_REPORT_REASON_EXPLAIN'] = 'Are you sure you want to delete the selected report reason?';
-$lang['REPORT_REASON_DELETED'] = 'The report reason was deleted.';
+$lang['REPORT_REASON_DELETED'] = 'The report reason has been deleted.';
 $lang['REPORT_REASON_NOT_EXISTS'] = 'The selected report reason doesn\'t exist.';
 $lang['CLICK_RETURN_REPORT_REASONS'] = 'Click %sHere%s to return to the report reasons administration.';
 
-$lang['REPORT_MODULE_SYNCED'] = 'The module was synced.';
+$lang['REPORT_MODULE_SYNCED'] = 'The module has been synced.';
 
 $lang['UNINSTALL_REPORT_MODULE'] = 'Uninstall module';
 $lang['UNINSTALL_REPORT_MODULE_EXPLAIN'] = 'Are you sure you want to uninstall the selected report module? <br />Note: All reports in the module will be deleted, too.';
-$lang['REPORT_MODULE_UNINSTALLED'] = 'The module was uninstalled.';
+$lang['REPORT_MODULE_UNINSTALLED'] = 'The module has been uninstalled.';
 
 $lang['INSTALL_REPORT_MODULE'] = 'Install module';
 $lang['EDIT_REPORT_MODULE'] = 'Edit module';
@@ -647,8 +647,8 @@ $lang['REPORT_AUTH'] = array(
 	REPORT_AUTH_ADMIN => 'Administrators');
 $lang['REPORT_AUTH_NOTIFY_EXPLAIN'] = 'Moderators will only be notified if they can view and edit the report.';
 $lang['REPORT_AUTH_DELETE_EXPLAIN'] = 'If you select <em>Moderators (after confirmation)</em>, deletions have to be confirmed by an administrator.';
-$lang['REPORT_MODULE_INSTALLED'] = 'The module was installed.';
-$lang['REPORT_MODULE_EDITED'] = 'The module was edited.';
+$lang['REPORT_MODULE_INSTALLED'] = 'The module has been installed.';
+$lang['REPORT_MODULE_EDITED'] = 'The module has been edited.';
 $lang['REPORTS'] = 'Reports';
 //
 // Reports [END]
@@ -667,10 +667,10 @@ $lang['PIC_GALLERY'] = 'Directory for the images';
 $lang['PIC_SIZE'] = 'The maximum size of images';
 $lang['AUTO_DELETE_POSTED_PICS'] = 'Delete Images hosted in remote positions';
 $lang['SHOW_MOD_HOME_PAGE'] = 'Show on moderators the index.php';
-$lang['PREMOD_HELP'] = '<h4><span class="tor-icon tor-dup">&#8719;</span> Pre-moderation</h4> <h6>If you do not have hands to the status of v, #, or T in this section, including subsections, the distribution will automatically receive this status</h6>';
+$lang['PREMOD_HELP'] = '<h4><span class="tor-icon tor-dup">&#8719;</span> Pre-moderation</h4> <h6>If you do not have distributions to the status of v, #, or T in this section, including subsections, the distribution will automatically receive this status</h6>';
 $lang['TOR_COMMENT'] = '<h4>Commentary on the status of distribution</h4> <h6>Comment successfully allows you to specify releasers mistakes. When nedooformlennyh statuses releasers available form of the response of the correction release</h6>';
 $lang['SEED_BONUS'] = 'Seed Bonus';
-$lang['SEED_BONUS_ADD'] = '<h4>Adding seed bonus </h4> <h6> Number of hands handed out by the user and the size of bonuses for them (charging times an hour) </h6>';
+$lang['SEED_BONUS_ADD'] = '<h4>Adding seed bonus </h4> <h6> Number of distributions handed out by the user and the size of bonuses for them (charging times an hour) </h6>';
 $lang['SEED_BONUS_RELEASE'] = 'to N-number of releases';
 $lang['SEED_BONUS_POINTS'] = 'bonuses in an hour';
 $lang['SEED_BONUS_TOR_SIZE'] = '<h4>Minimum distribution for which will be awarded bonuses </h4> <h6> If you want to calculate bonuses for all distribution, leave blank. </h6>';
