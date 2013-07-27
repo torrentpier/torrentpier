@@ -14,7 +14,7 @@ $lang['ADMIN'] = 'Administration';
 $lang['FORUM'] = 'Forum';
 $lang['CATEGORY'] = 'Category';
 $lang['HIDE_CAT'] = 'Hide categories';
-$lang['HIDE_CAT_MESS'] = 'Part categories hidden "options Show" &middot; <a href="index.php?sh=1">Show All</a>';
+$lang['HIDE_CAT_MESS'] = 'Part of categories are hidden "options Show" &middot; <a href="index.php?sh=1">Show All</a>';
 $lang['TOPIC'] = 'Topic';
 $lang['TOPICS'] = 'Topics';
 $lang['TOPICS_SHORT'] = 'Topics';
@@ -98,9 +98,9 @@ $lang['CLICK_RETURN_GROUP'] = 'Click %sHere%s to return to group information';
 
 $lang['ADMIN_PANEL'] = 'Go to Administration Panel';
 $lang['ALL_CACHE'] = 'All cache';
-$lang['ALL_CACHE_CLEARED'] = 'Cache cleared';
+$lang['ALL_CACHE_CLEARED'] = 'Cache has been cleared';
 $lang['DATASTORE'] = 'Datastore';
-$lang['DATASTORE_CLEARED'] = 'Datastore cleared';
+$lang['DATASTORE_CLEARED'] = 'Datastore has been cleared';
 $lang['BOARD_DISABLE'] = 'Sorry, but this board is currently unavailable.  Please try again later.';
 
 $lang['LOADING'] = 'Loading...';
@@ -113,14 +113,14 @@ $lang['DISPLAYING_OPTIONS'] = 'Displaying options';
 $lang['REGISTERED_USERS'] = 'Registered Users:';
 $lang['BROWSING_FORUM'] = 'Users browsing this forum:';
 $lang['ONLINE_USERS'] = 'In total there are <b>%1$d</b> users online: %2$d Registered and %3$d Guests';
-$lang['RECORD_ONLINE_USERS'] = 'Most users ever online was <b>%s</b> on %s'; // first %s = number of users, second %s is the date.
+$lang['RECORD_ONLINE_USERS'] = 'The Most users ever online was <b>%s</b> on %s'; // first %s = number of users, second %s is the date.
 $lang['USERS'] = 'users';
 
 $lang['ONLINE_ADMIN'] = 'Administrator';
 $lang['ONLINE_MOD'] = 'Moderator';
 $lang['ONLINE_GROUP_MEMBER'] = 'Group member';
 
-$lang['YOU_LAST_VISIT'] = 'You last visited on: <span class="tz_time">%s</span>';
+$lang['YOU_LAST_VISIT'] = 'Your last visit was on: <span class="tz_time">%s</span>';
 $lang['CURRENT_TIME'] = 'The time now is: <span class="tz_time">%s</span>';
 
 $lang['SEARCH_NEW'] = 'View newest posts';
@@ -143,7 +143,7 @@ $lang['LASTPOST'] = 'Last Post';
 $lang['MODERATOR'] = 'Moderator';
 $lang['MODERATORS'] = 'Moderators';
 $lang['TERMS'] = 'Terms';
-$lang['NOTHING_HAS_CHANGED'] = 'Nothing has changed';
+$lang['NOTHING_HAS_CHANGED'] = 'Nothing has been changed';
 $lang['AUTOCOMPLETE'] = 'Password generate';
 $lang['YOUR_NEW_PASSWORD'] = 'Your are new password:';
 $lang['REGENERATE'] = 'Regenerate';
@@ -228,7 +228,7 @@ $lang['TOPIC_POLL'] = '[ Poll ]';
 $lang['TOPIC_DRAFT'] = '[ Draft ]';
 
 $lang['MARK_TOPICS_READ'] = 'Mark all topics read';
-$lang['TOPICS_MARKED_READ'] = 'The topics for this forum have now been marked read';
+$lang['TOPICS_MARKED_READ'] = 'The topics for this forum have been marked read now';
 
 $lang['RULES_POST_CAN'] = 'You <b>can</b> post new topics in this forum';
 $lang['RULES_POST_CANNOT'] = 'You <b>cannot</b> post new topics in this forum';
@@ -348,8 +348,8 @@ $lang['CONFIRM_DELETE'] = 'Are you sure you want to delete this post?';
 $lang['CONFIRM_DELETE_POLL'] = 'Are you sure you want to delete this poll?';
 
 $lang['FLOOD_ERROR'] = 'You cannot make another post so soon after your last; please try again in a short while.';
-$lang['EMPTY_SUBJECT'] = 'You must specify a subject when posting a new topic.';
-$lang['EMPTY_MESSAGE'] = 'You must enter a message when posting.';
+$lang['EMPTY_SUBJECT'] = 'You must specify a subject.';
+$lang['EMPTY_MESSAGE'] = 'You must enter a message.';
 $lang['FORUM_LOCKED'] = 'This forum is locked: you cannot post, reply to, or edit topics.';
 $lang['TOPIC_LOCKED'] = 'This topic is locked: you cannot edit posts or make replies.';
 $lang['TOPIC_LOCKED_SHORT'] = 'Topic locked';
@@ -493,7 +493,7 @@ $lang['SEND_A_NEW_MESSAGE'] = 'Send a new private message';
 $lang['SEND_A_REPLY'] = 'Reply to a private message';
 $lang['EDIT_MESSAGE'] = 'Edit private message';
 
-$lang['NOTIFICATION_SUBJECT'] = 'New Private Message has arrived!';
+$lang['NOTIFICATION_SUBJECT'] = 'New Private Message has been recieved!';
 
 $lang['FIND_USERNAME'] = 'Find a username';
 $lang['SELECT_USERNAME'] = 'Select a Username';
@@ -502,7 +502,7 @@ $lang['NO_MATCH'] = 'No matches found.';
 
 $lang['NO_POST_ID'] = 'No post ID was specified';
 $lang['NO_SUCH_FOLDER'] = 'No such folder exists';
-$lang['NO_FOLDER'] = 'No folder specified';
+$lang['NO_FOLDER'] = 'No folder was specified';
 
 $lang['MARK_ALL'] = 'Mark all';
 $lang['UNMARK_ALL'] = 'Unmark all';
@@ -638,7 +638,7 @@ $lang['HIDE_USER'] = 'Hide your online status';
 $lang['HIDDEN_USER'] = 'Hidden user';
 
 $lang['PROFILE_UPDATED'] = 'Your profile has been updated';
-$lang['PROFILE_UPDATED_INACTIVE'] = 'Your profile has been updated. However, you have changed vital details, thus your account is now inactive. Check your e-mail to find out how to reactivate your account, or if admin activation is required, wait for the administrator to reactivate it.';
+$lang['PROFILE_UPDATED_INACTIVE'] = 'Your profile has been updated. However, you have changed vital details, thus your account is inactive now. Check your e-mail to find out how to reactivate your account, or if admin activation is required, wait for the administrator to reactivate it.';
 
 $lang['PASSWORD_MISMATCH'] = 'The passwords you entered did not match.';
 $lang['CURRENT_PASSWORD_MISMATCH'] = 'The current password you supplied does not match that stored in the database.';
@@ -1260,7 +1260,7 @@ $lang['SILVER'] = 'Silver';
 $lang['SET_GOLD_TORRENT'] = 'Make gold';
 $lang['UNSET_GOLD_TORRENT'] = 'UnMake gold';
 $lang['SET_SILVER_TORRENT'] = 'Make silver';
-$lang['UNSET_SILVER_TORRENT'] = 'UnMake gold';
+$lang['UNSET_SILVER_TORRENT'] = 'UnMake silver';
 $lang['GOLD_STATUS'] = 'GOLD TORRENT! DOWNLOAD TRAFFIC DOES NOT CONSIDER!';
 $lang['SILVER_STATUS'] = 'SILVER TORRENT! DOWNLOAD TRAFFIC PARTIALLY CONSIDERED!';
 // End - Gold/Silver releases
@@ -1557,8 +1557,8 @@ $lang['REPORT_STATUS'] = array(
 
 $lang['REASON'] = 'Reason';
 $lang['REPORT_SUBJECT'] = 'Subject';
-$lang['REPORT_TITLE_EMPTY'] = 'You have to enter a title of the report.';
-$lang['REPORT_DESC_EMPTY'] = 'You have to enter a message.';
+$lang['REPORT_TITLE_EMPTY'] = 'You must enter a title of the report.';
+$lang['REPORT_DESC_EMPTY'] = 'You must enter a message.';
 $lang['REPORT_INSERTED'] = 'The report was sent to the team.';
 
 $lang['CHANGE_REPORT'] = 'Change report';
@@ -1626,7 +1626,7 @@ $lang['USER_DELETE_CSV'] = 'Sorry, this account is not allowed to delete!';
 $lang['USER_DELETE_CONFIRM'] = 'Are you sure you want to delete this user?';
 $lang['USER_DELETED'] = 'User was successfully deleted';
 $lang['DELETE_USER_ALL_POSTS'] = 'Delete all user posts';
-$lang['DELETE_USER_ALL_POSTS_CONFIRM'] = 'Are you sure you want to delete all messages and all topics started by the whole thing?';
+$lang['DELETE_USER_ALL_POSTS_CONFIRM'] = 'Are you sure you want to delete all messages and all topics started by this user?';
 $lang['DELETE_USER_POSTS'] = 'Delete all messages, except for capital';
 $lang['DELETE_USER_POSTS_ME'] = 'Are you sure you want to delete all my posts?';
 $lang['DELETE_USER_POSTS_CONFIRM'] = 'Are you sure you want to delete all messages, except for capital?';
@@ -1643,10 +1643,10 @@ $lang['GROUP_LIST_HIDDEN'] = 'You are not authorized to view hidden groups';
 $lang['USER_ACTIVATE'] = 'Activate';
 $lang['USER_DEACTIVATE'] = 'Deactivate';
 $lang['DEACTIVATE_CONFIRM'] = 'Are you sure you want to enable this user?';
-$lang['USER_ACTIVATE_ON'] = 'User has successfully activated';
+$lang['USER_ACTIVATE_ON'] = 'User has been successfully activated';
 $lang['USER_DEACTIVATE_ME'] = 'You can not deactivate my account!';
 $lang['ACTIVATE_CONFIRM'] = 'Are you sure you want to disable this user?';
-$lang['USER_ACTIVATE_OFF'] = 'User successfully deactivated';
+$lang['USER_ACTIVATE_OFF'] = 'User has been successfully deactivated';
 
 // Register
 $lang['CHOOSE_A_NAME'] = 'You should choose a name';
@@ -1737,7 +1737,7 @@ $lang['POST_UNPINNED'] = 'First post unpinned';
 
 // Management of my messages 
 $lang['GOTO_MY_MESSAGE'] = 'Close and return to the list "My Messages"';
-$lang['DEL_MY_MESSAGE'] = 'Selected topics are removed from the "My Messages"';
+$lang['DEL_MY_MESSAGE'] = 'Selected topics have been removed from the "My Messages"';
 $lang['NO_TOPICS_MY_MESSAGE'] = 'No topics found in the list of your posts (maybe you have already removed them)';
 $lang['EDIT_MY_MESSAGE_LIST'] = 'edit list';
 $lang['SELECT_INVERT'] = 'select / invert';
