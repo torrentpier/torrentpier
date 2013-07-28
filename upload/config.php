@@ -55,9 +55,9 @@ $domain_name = 'torrentpier.me';                    // Enter here your primary d
 $domain_name = (!empty($_SERVER['SERVER_NAME'])) ? $_SERVER['SERVER_NAME'] : $domain_name;
 
 // Increase number of revision after update
-$bb_cfg['tp_version'] = '2.5 pre-stable';
-$bb_cfg['tp_release_date'] = '28-07-2013';
-$bb_cfg['tp_release_state'] = 'R523';
+$bb_cfg['tp_version'] = '2.5 (unstable)';
+$bb_cfg['tp_release_date'] = '29-07-2013';
+$bb_cfg['tp_release_state'] = 'R524';
 
 // Database
 $charset  = 'utf8';

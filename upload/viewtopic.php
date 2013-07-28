@@ -257,27 +257,27 @@ $can_watch_topic = $is_watching_topic = false;
 
 if ($bb_cfg['topic_notify_enabled'])
 {
-	if( $userdata['session_logged_in'] )
+	if ($userdata['session_logged_in'])
 	{
 		$can_watch_topic = TRUE;
 
-		$sql = "SELECT notify_status
+		$sql = "SELECT SQL_CACHE notify_status
 			FROM " . BB_TOPICS_WATCH . "
 			WHERE topic_id = $topic_id
 				AND user_id = " . $userdata['user_id'];
 
 		if ($row = DB()->fetch_row($sql))
 		{
-			if ( isset($_GET['unwatch']) )
+			if (isset($_GET['unwatch']))
 			{
-				if ( $_GET['unwatch'] == 'topic' )
+				if ($_GET['unwatch'] == 'topic')
 				{
 					$is_watching_topic = 0;
 
 					$sql = "DELETE FROM " . BB_TOPICS_WATCH . "
 						WHERE topic_id = $topic_id
 							AND user_id = " . $userdata['user_id'];
-					if ( !($result = DB()->sql_query($sql)) )
+					if (!($result = DB()->sql_query($sql)))
 					{
 						message_die(GENERAL_ERROR, "Could not delete topic watch information", '', __LINE__, __FILE__, $sql);
 					}
@@ -290,13 +290,13 @@ if ($bb_cfg['topic_notify_enabled'])
 			{
 				$is_watching_topic = TRUE;
 
-				if ( $row['notify_status'] )
+				if ($row['notify_status'])
 				{
 					$sql = "UPDATE " . BB_TOPICS_WATCH . "
 						SET notify_status = 0
 						WHERE topic_id = $topic_id
 							AND user_id = " . $userdata['user_id'];
-					if ( !($result = DB()->sql_query($sql)) )
+					if (!($result = DB()->sql_query($sql)))
 					{
 						message_die(GENERAL_ERROR, "Could not update topic watch information", '', __LINE__, __FILE__, $sql);
 					}
@@ -305,15 +305,15 @@ if ($bb_cfg['topic_notify_enabled'])
 		}
 		else
 		{
-			if ( isset($_GET['watch']) )
+			if (isset($_GET['watch']))
 			{
-				if ( $_GET['watch'] == 'topic' )
+				if ($_GET['watch'] == 'topic')
 				{
 					$is_watching_topic = TRUE;
 
 					$sql = "INSERT INTO " . BB_TOPICS_WATCH . " (user_id, topic_id, notify_status)
 						VALUES (" . $userdata['user_id'] . ", $topic_id, 0)";
-					if ( !($result = DB()->sql_query($sql)) )
+					if (!($result = DB()->sql_query($sql)))
 					{
 						message_die(GENERAL_ERROR, "Could not insert topic watch information", '', __LINE__, __FILE__, $sql);
 					}
@@ -330,9 +330,9 @@ if ($bb_cfg['topic_notify_enabled'])
 	}
 	else
 	{
-		if ( isset($_GET['unwatch']) )
+		if (isset($_GET['unwatch']))
 		{
-			if ( $_GET['unwatch'] == 'topic' )
+			if ($_GET['unwatch'] == 'topic')
 			{
 				redirect("login.php?redirect=viewtopic.php&t=$topic_id&unwatch=topic");
 			}
@@ -484,15 +484,11 @@ $topic_mod = '';
 if ( $is_auth['auth_mod'] )
 {
 	$s_auth_can .= $lang['RULES_MODERATE'];
-
 	$topic_mod .= "<a href=\"modcp.php?" . POST_TOPIC_URL . "=$topic_id&amp;mode=delete&amp;sid=" . $userdata['session_id'] . '"><img src="' . $images['topic_mod_delete'] . '" alt="' . $lang['DELETE_TOPIC'] . '" title="' . $lang['DELETE_TOPIC'] . '" border="0" /></a>&nbsp;';
-
 	$topic_mod .= "<a href=\"modcp.php?" . POST_TOPIC_URL . "=$topic_id&amp;mode=move&amp;sid=" . $userdata['session_id'] . '"><img src="' . $images['topic_mod_move'] . '" alt="' . $lang['MOVE_TOPIC'] . '" title="' . $lang['MOVE_TOPIC'] . '" border="0" /></a>&nbsp;';
-
 	$topic_mod .= ( $t_data['topic_status'] == TOPIC_UNLOCKED ) ? "<a href=\"modcp.php?" . POST_TOPIC_URL . "=$topic_id&amp;mode=lock&amp;sid=" . $userdata['session_id'] . '"><img src="' . $images['topic_mod_lock'] . '" alt="' . $lang['LOCK_TOPIC'] . '" title="' . $lang['LOCK_TOPIC'] . '" border="0" /></a>&nbsp;' : "<a href=\"modcp.php?" . POST_TOPIC_URL . "=$topic_id&amp;mode=unlock&amp;sid=" . $userdata['session_id'] . '"><img src="' . $images['topic_mod_unlock'] . '" alt="' . $lang['UNLOCK_TOPIC'] . '" title="' . $lang['UNLOCK_TOPIC'] . '" border="0" /></a>&nbsp;';
-
 	$topic_mod .= "<a href=\"modcp.php?" . POST_TOPIC_URL . "=$topic_id&amp;mode=split&amp;sid=" . $userdata['session_id'] . '"><img src="' . $images['topic_mod_split'] . '" alt="' . $lang['SPLIT_TOPIC'] . '" title="' . $lang['SPLIT_TOPIC'] . '" border="0" /></a>&nbsp;';
-	//bt
+
 	if ($t_data['allow_reg_tracker'] || $t_data['topic_dl_type'] == TOPIC_DL_TYPE_DL || IS_ADMIN)
 	{
 		if ($t_data['topic_dl_type'] == TOPIC_DL_TYPE_DL)
@@ -504,19 +500,13 @@ if ( $is_auth['auth_mod'] )
 			$topic_mod .= "<a href=\"modcp.php?" . POST_TOPIC_URL . "=$topic_id&amp;mode=set_download&amp;sid=" . $userdata['session_id'] . '"><img src="' . $images['topic_dl'] . '" alt="' . $lang['SET_DL_STATUS'] . '" title="' . $lang['SET_DL_STATUS'] . '" border="0" /></a>';
 		}
 	}
-	//bt end
 }
-//bt
 else if (($t_data['topic_poster'] == $userdata['user_id']) && $userdata['session_logged_in'] && $t_data['self_moderated'])
 {
 	$topic_mod .= "<a href=\"modcp.php?" . POST_TOPIC_URL . "=$topic_id&amp;mode=move&amp;sid=" . $userdata['session_id'] . '"><img src="' . $images['topic_mod_move'] . '" alt="' . $lang['MOVE_TOPIC'] . '" title="' . $lang['MOVE_TOPIC'] . '" border="0" /></a>&nbsp;';
 }
-//bt end
 
-// Report
-//
 // Get report topic module and create report link
-//
 require_once(INC_DIR ."functions_report.php");
 $report_topic = report_modules('name', 'report_topic');
 
@@ -543,7 +533,6 @@ if ($report_topic && $report_topic->auth_check('auth_write'))
 	$topic_mod .= $s_report_topic;
 	$template->assign_var('S_REPORT_TOPIC', $s_report_topic);
 }
-// Report [END]
 
 //
 // Topic watch information
@@ -606,7 +595,7 @@ $template->assign_vars(array(
 	'TOPIC_ID'            => $topic_id,
 	'PAGE_TITLE'          => $topic_title,
 	'TOPIC_TITLE'         => wbr($topic_title),
-	'PORNO_FORUM'         => ($t_data['allow_porno_topic']),
+	'PORNO_FORUM'         => $t_data['allow_porno_topic'],
 	'REPLY_IMG'           => $reply_img,
 	'SHOW_BOT_NICK'       => $bb_cfg['show_bot_nick'],
 	'T_POST_REPLY'        => $reply_alt,
@@ -621,7 +610,7 @@ $template->assign_vars(array(
 
 	'HIDE_RANK_IMG_DIS'   => !$bb_cfg['show_rank_image'],
 
-	'PINNED_FIRST_POST'   => ($t_data['topic_show_first_post']),
+	'PINNED_FIRST_POST'   => $t_data['topic_show_first_post'],
 	'PIN_HREF'            => $t_data['topic_show_first_post'] ? "modcp.php?t=$topic_id&amp;mode=post_unpin" : "modcp.php?t=$topic_id&amp;mode=post_pin",
 	'PIN_TITLE'           => $t_data['topic_show_first_post'] ? $lang['POST_UNPIN'] : $lang['POST_PIN'],
 
@@ -805,35 +794,21 @@ if ( !DB()->sql_query($sql) )
 $prev_post_time = $max_post_time = 0;
 
 // Report
-//
-// Get report post module
-//
 require_once(INC_DIR ."functions_report.php");
 $report_post = report_modules('name', 'report_post');
-// Report [END]
 
 $this_date = bb_date(TIMENOW ,'md', 'false');
 
-//
-// Okay, let's do the loop, yeah come on baby let's do the loop
-// and it goes like this ...
-//
 for($i = 0; $i < $total_posts; $i++)
 {
-	$poster_id = $postrow[$i]['user_id'];
-	$poster = ( $poster_id == ANONYMOUS ) ? $lang['GUEST'] : $postrow[$i]['username'];
-
-    $poster_birthday = ($postrow[$i]['user_id'] != ANONYMOUS) ? date('md', strtotime($postrow[$i]['user_birthday'])) : '';
-
-	$post_date = bb_date($postrow[$i]['post_time'], $bb_cfg['post_date_format']);
-	$max_post_time = max($max_post_time, $postrow[$i]['post_time']);
-
-	$poster_posts = ( $postrow[$i]['user_id'] != ANONYMOUS ) ? $postrow[$i]['user_posts'] : '';
-
-	$poster_from = ( $postrow[$i]['user_from'] && $postrow[$i]['user_id'] != ANONYMOUS ) ? $postrow[$i]['user_from'] : '';
-
-	$poster_joined = ( $postrow[$i]['user_id'] != ANONYMOUS ) ? $lang['JOINED'] . ': ' . bb_date($postrow[$i]['user_regdate'], $lang['DATE_FORMAT']) : '';
-
+	$poster_id        = $postrow[$i]['user_id'];
+	$poster           = ( $poster_id == ANONYMOUS ) ? $lang['GUEST'] : $postrow[$i]['username'];
+	$poster_birthday  = ($postrow[$i]['user_id'] != ANONYMOUS) ? date('md', strtotime($postrow[$i]['user_birthday'])) : '';
+	$post_date        = bb_date($postrow[$i]['post_time'], $bb_cfg['post_date_format']);
+	$max_post_time    = max($max_post_time, $postrow[$i]['post_time']);
+	$poster_posts     = ( $postrow[$i]['user_id'] != ANONYMOUS ) ? $postrow[$i]['user_posts'] : '';
+	$poster_from      = ( $postrow[$i]['user_from'] && $postrow[$i]['user_id'] != ANONYMOUS ) ? $postrow[$i]['user_from'] : '';
+	$poster_joined    = ( $postrow[$i]['user_id'] != ANONYMOUS ) ? $lang['JOINED'] . ': ' . bb_date($postrow[$i]['user_regdate'], $lang['DATE_FORMAT']) : '';
 	$poster_longevity = ( $postrow[$i]['user_id'] != ANONYMOUS ) ? delta_time($postrow[$i]['user_regdate']) : '';
 
 	$poster_avatar = '';
@@ -842,23 +817,16 @@ for($i = 0; $i < $total_posts; $i++)
 		$poster_avatar = get_avatar($postrow[$i]['user_avatar'], $postrow[$i]['user_avatar_type'], !bf($postrow[$i]['user_opt'], 'user_opt', 'allow_avatar'));
 	}
 
-	$user_rank = $postrow[$i]['user_rank'];
-
-	//
-	// Generate ranks, set them to empty string initially.
-	//
 	$poster_rank = $rank_image = '';
-
+	$user_rank = $postrow[$i]['user_rank'];
 	if (!$user->opt_js['h_rnk_i'] AND isset($ranks[$user_rank]))
 	{
 		$rank_image = ($bb_cfg['show_rank_image'] && $ranks[$user_rank]['rank_image']) ? '<img src="'. $ranks[$user_rank]['rank_image'] .'" alt="" title="" border="0" />' : '';
 		$poster_rank = ($bb_cfg['show_rank_text']) ? $ranks[$user_rank]['rank_title'] : '';
 	}
 
-	//
 	// Handle anon users posting with usernames
-	//
-	if ( $poster_id == ANONYMOUS && $postrow[$i]['post_username'] != '' )
+	if ($poster_id == ANONYMOUS && $postrow[$i]['post_username'] != '')
 	{
 		$poster = $postrow[$i]['post_username'];
 	}
@@ -868,32 +836,24 @@ for($i = 0; $i < $total_posts; $i++)
 
 	if ($poster_id != ANONYMOUS)
 	{
-		// profile
 		$profile_btn = true;
-		// pm
 		$pm_btn = true;
 	}
 
 	if ($poster_id != BOT_UID)
 	{
-		// Quote
 		$quote_btn = true;
-		// Edit
 		$edit_btn = (($userdata['user_id'] == $poster_id && $is_auth['auth_edit']) || $is_auth['auth_mod']);
-		// IP
 		$ip_btn = ($is_auth['auth_mod'] || IS_MOD);
 	}
-	// Delete
 	$delpost_btn = ($postrow[$i]['post_id'] != $t_data['topic_first_post_id'] && ($is_auth['auth_mod'] || ($userdata['user_id'] == $poster_id && $is_auth['auth_delete'] && $t_data['topic_last_post_id'] == $postrow[$i]['post_id'] && $postrow[$i]['post_time'] + 3600*3 > TIMENOW)));
 
-	//
 	// Parse message and sig
-	//
 	$message = get_parsed_post($postrow[$i]);
 
 	$user_sig = ($bb_cfg['allow_sig'] && !$user->opt_js['h_sig'] && $postrow[$i]['user_sig']) ? $postrow[$i]['user_sig'] : '';
 
-	if(bf($postrow[$i]['user_opt'], 'user_opt', 'allow_sig'))
+	if (bf($postrow[$i]['user_opt'], 'user_opt', 'allow_sig'))
 	{
 		$user_sig = $lang['SIGNATURE_DISABLE'];
 	}
@@ -902,9 +862,7 @@ for($i = 0; $i < $total_posts; $i++)
 		$user_sig = bbcode2html($user_sig);
 	}
 
-	//
 	// Replace naughty words
-	//
 	if (count($orig_word))
 	{
 		if ($user_sig)
@@ -915,22 +873,16 @@ for($i = 0; $i < $total_posts; $i++)
 		$message = str_replace('\"', '"', substr(@preg_replace('#(\>(((?>([^><]+|(?R)))*)\<))#se', "@preg_replace(\$orig_word, \$replacement_word, '\\0')", '>' . $message . '<'), 1, -1));
 	}
 
-	//
-	// Replace newlines (we use this rather than nl2br because
-	// till recently it wasn't XHTML compliant)
-	//
+	// Replace newlines (we use this rather than nl2br because till recently it wasn't XHTML compliant)
 	if ($user_sig)
 	{
 		$user_sig = $bb_cfg['user_signature_start'] . $user_sig . $bb_cfg['user_signature_end'];
 	}
 
-	//
 	// Editing information
-	//
-	if ( $postrow[$i]['post_edit_count'] )
+	if ($postrow[$i]['post_edit_count'])
 	{
-		$l_edit_time_total = ( $postrow[$i]['post_edit_count'] == 1 ) ? $lang['EDITED_TIME_TOTAL'] : $lang['EDITED_TIMES_TOTAL'];
-
+		$l_edit_time_total = ($postrow[$i]['post_edit_count'] == 1) ? $lang['EDITED_TIME_TOTAL'] : $lang['EDITED_TIMES_TOTAL'];
 		$l_edited_by = '<br /><br />' . sprintf($l_edit_time_total, $poster, bb_date($postrow[$i]['post_edit_time']), $postrow[$i]['post_edit_count']);
 	}
 	else
@@ -938,16 +890,10 @@ for($i = 0; $i < $total_posts; $i++)
 		$l_edited_by = '';
 	}
 
-	//
-	// Again this will be handled by the templating
-	// code at some point
-	//
+	// Again this will be handled by the templating code at some point
 	$pg_row_class = !($i % 2) ? 'row2' : 'row1';
 
-	// Report
-	//
 	// Create report links
-	//
 	if ($report_post && $report_post->auth_check('auth_write'))
 	{
 		if ($postrow[$i]['post_reported'])
@@ -977,21 +923,20 @@ for($i = 0; $i < $total_posts; $i++)
 	{
 		$report_img = $report = '';
 	}
-	// Report [END]
-	
+
 	// Gender
 	switch($postrow[$i]['user_gender']) 
-    { 
-	    case MALE: 
-		    $gender = '<img src="'. $images['icon_male'] .'" alt="" title="'. $lang['GENDER_SELECT'][1] .'" border="0" />';
-		    break; 
-	    case FEMALE: 
-		    $gender = '<img src="'. $images['icon_female'] .'" alt="" title="'. $lang['GENDER_SELECT'][2] .'" border="0" />';
-			break; 
-	    default: 
-		    $gender = '';
-            break;			
-    }
+	{
+		case MALE:
+			$gender = '<img src="'. $images['icon_male'] .'" alt="" title="'. $lang['GENDER_SELECT'][1] .'" border="0" />';
+			break;
+		case FEMALE:
+			$gender = '<img src="'. $images['icon_female'] .'" alt="" title="'. $lang['GENDER_SELECT'][2] .'" border="0" />';
+			break;
+		default:
+			$gender = '';
+			break;
+	}
 
 	$post_mod_comment_html = '';
 	if ($postrow[$i]['post_mod_comment_type'] == 1)
@@ -1076,9 +1021,7 @@ if (defined('SPLIT_FORM_START'))
 	));
 }
 
-//
 // Quick Reply
-//
 if ($bb_cfg['show_quick_reply'])
 {
 	if ($is_auth['auth_reply'] && !($t_data['forum_status'] == FORUM_LOCKED || $t_data['topic_status'] == TOPIC_LOCKED) && !$t_data['is_draft'])
