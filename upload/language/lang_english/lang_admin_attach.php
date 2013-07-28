@@ -217,7 +217,7 @@ $lang['VIEW_ATTACHMENTS'] = 'Attachments';
 // Successfully updated
 $lang['ATTACH_CONFIG_UPDATED'] = 'Attachment Configuration updated successfully';
 $lang['CLICK_RETURN_ATTACH_CONFIG'] = 'Click %sHere%s to return to Attachment Configuration';
-$lang['TEST_SETTINGS_SUCCESSFUL'] = 'Settings Test finished, configuration seems to be fine.';
+$lang['TEST_SETTINGS_SUCCESSFUL'] = 'Settings Test has been finished, configuration seems to be fine.';
 
 // Some basic definitions
 $lang['ATTACHMENTS'] = 'Attachments';

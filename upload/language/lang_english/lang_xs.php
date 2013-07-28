@@ -106,7 +106,7 @@ $lang['XS_ERROR_NOT_INSTALLED'] = 'eXtreme Styles mod is not installed. You forg
 
 $lang['XS_CHMOD'] = 'CHMOD';
 $lang['XS_CHMOD_RETURN'] = '<br /><br /><a href="{URL}">Click here</a> to return to configuration.';
-$lang['XS_CHMOD_MESSAGE1'] = 'Configuration changed.';
+$lang['XS_CHMOD_MESSAGE1'] = 'Configuration has been changed.';
 $lang['XS_CHMOD_ERROR1'] = 'Cannot change access mode to cache directory';
 
 /*
