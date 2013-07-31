@@ -57,7 +57,7 @@ $domain_name = (!empty($_SERVER['SERVER_NAME'])) ? $_SERVER['SERVER_NAME'] : $do
 // Increase number of revision after update
 $bb_cfg['tp_version'] = '2.5 (unstable)';
 $bb_cfg['tp_release_date'] = '01-08-2013';
-$bb_cfg['tp_release_state'] = 'R527';
+$bb_cfg['tp_release_state'] = 'R528';
 
 // Database
 $charset  = 'utf8';
@@ -178,7 +178,7 @@ $bb_cfg['allow_dl_list_names_mode'] = true;
 
 // Torrents
 $bb_cfg['torrent_sign']   = ''; // e.g. "[yoursite.com]"
-$bb_cfg['torrent_style']  = true;
+$bb_cfg['torrent_style']  = false;
 $bb_cfg['tor_help_links'] = '';
 
 // Сколько дней сохранять торрент зарегистрированным / Days to keep torrent registered, if:
