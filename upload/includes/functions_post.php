@@ -562,8 +562,7 @@ function delete_post($mode, $post_data, &$message, &$meta, $forum_id, $topic_id,
 //
 function user_notification($mode, &$post_data, &$topic_title, &$forum_id, &$topic_id, &$post_id, &$notify_user)
 {
-	global $bb_cfg, $lang;
-	global $userdata;
+	global $bb_cfg, $lang, $userdata;
 
 	if (!$bb_cfg['topic_notify_enabled'])
 	{
@@ -621,23 +620,6 @@ function user_notification($mode, &$post_data, &$topic_title, &$forum_id, &$topi
 				}
 				while ($row = DB()->sql_fetchrow($result));
 
-				//
-				// Let's do some checking to make sure that mass mail functions
-				// are working in win32 versions of php.
-				//
-				if (preg_match('/[c-z]:\\\.*/i', getenv('PATH')) && !$bb_cfg['smtp_delivery'])
-				{
-					$ini_val = (@phpversion() >= '4.0.0') ? 'ini_get' : 'get_cfg_var';
-
-					// We are running on windows, force delivery to use our smtp functions
-					// since php's are broken by default
-					if (!@$ini_val('sendmail_path'))
-					{
-						$bb_cfg['smtp_delivery'] = 1;
-						$bb_cfg['smtp_host'] = @$ini_val('SMTP');
-					}
-				}
-
 				if (sizeof($bcc_list_ary))
 				{
 					include(INC_DIR .'emailer.class.php');
@@ -656,10 +638,10 @@ function user_notification($mode, &$post_data, &$topic_title, &$forum_id, &$topi
 					$emailer->from($bb_cfg['board_email']);
 					$emailer->replyto($bb_cfg['board_email']);
 
-					if(count($orig_word))
+					if (count($orig_word))
 					{
 						$topic_title = preg_replace($orig_word, $replacement_word, $topic_title);
-                    }
+					}
 
 					@reset($bcc_list_ary);
 					while (list($user_lang, $bcc_list) = each($bcc_list_ary))
@@ -685,7 +667,6 @@ function user_notification($mode, &$post_data, &$topic_title, &$forum_id, &$topi
 							'SITENAME' => $bb_cfg['sitename'],
 							'USERNAME'    => $userdata['username'],
 							'EMAIL_SIG' => (!empty($bb_cfg['board_email_sig'])) ? str_replace('<br />', "\n", "-- \n" . $bb_cfg['board_email_sig']) : '',
-
 							'U_TOPIC' => $server_protocol . $server_name . $server_port . $script_name . '?' . POST_POST_URL . "=$post_id#$post_id",
 							'U_STOP_WATCHING_TOPIC' => $server_protocol . $server_name . $server_port . $script_name . '?' . POST_TOPIC_URL . "=$topic_id&unwatch=topic")
 						);

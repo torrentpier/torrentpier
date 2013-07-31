@@ -2,7 +2,7 @@
 
 function get_sql_log ()
 {
-	global $bb_cfg, $DBS, $CACHES, $sphinx, $datastore;
+	global $DBS, $CACHES, $sphinx, $datastore;
 
 	$log = '';
 
@@ -10,20 +10,22 @@ function get_sql_log ()
 	{
 		$log .= !empty($db_obj) ? get_sql_log_html($db_obj, "$srv_name [MySQL]") : '';
 	}
+
 	foreach ($CACHES->obj as $cache_name => $cache_obj)
 	{
-		if(!empty($cache_obj->db))
+		if (!empty($cache_obj->db))
 		{
 			$log .= get_sql_log_html($cache_obj->db, "cache: $cache_name [{$cache_obj->db->engine}]");
-	    }
-	    elseif(!empty($cache_obj->engine))
-	    {
-	    	$log .= get_sql_log_html($cache_obj, "cache: $cache_name [{$cache_obj->engine}]");
-	    }
+		}
+		elseif (!empty($cache_obj->engine))
+		{
+			$log .= get_sql_log_html($cache_obj, "cache: $cache_name [{$cache_obj->engine}]");
+		}
 	}
 
 	$log .= !empty($sphinx) ? get_sql_log_html($sphinx, '$sphinx') : '';
-	if(!empty($datastore->db->dbg))
+
+	if (!empty($datastore->db->dbg))
 	{
 		$log .= get_sql_log_html($datastore->db, '$datastore ['.$datastore->engine.']');
 	}
@@ -32,7 +34,7 @@ function get_sql_log ()
 		$log .= get_sql_log_html($datastore, '$datastore ['.$datastore->engine.']');
 	}
 
-    return $log;
+	return $log;
 }
 
 function get_sql_log_html ($db_obj, $log_name)

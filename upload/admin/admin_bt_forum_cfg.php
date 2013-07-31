@@ -151,7 +151,7 @@ $template->assign_vars(array(
 	'BT_SHOW_PEERS_MODE_FULL_SEL'  => ($cfg['bt_show_peers_mode'] == SHOW_PEERS_FULL) ? HTML_CHECKED : '',
 
 	'S_HIDDEN_FIELDS' => '',
-	'S_CONFIG_ACTION' => "admin_bt_forum_cfg.php",
+	'S_CONFIG_ACTION' => 'admin_bt_forum_cfg.php',
 ));
 
 print_page('admin_bt_forum_cfg.tpl', 'admin');

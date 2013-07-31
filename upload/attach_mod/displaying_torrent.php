@@ -86,6 +86,11 @@ if ($tor_auth_reg || $tor_auth_del)
 	$tracker_link = ($tor_reged) ? $unreg_tor_url : $reg_tor_url;
 }
 
+if ($bb_cfg['torrent_style'])
+{
+	$display_name = '['.$domain_name.'].t' . $bt_topic_id . '.torrent';
+}
+
 if (!$tor_reged)
 {
 	$template->assign_block_vars('postrow.attach.tor_not_reged', array(

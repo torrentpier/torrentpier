@@ -87,9 +87,7 @@ function tracker_unregister ($attach_id, $mode = '')
 
 	if (!$topic_id)
 	{
-		$sql = "SELECT topic_id
-			FROM ". BB_BT_TORRENTS ."
-			WHERE attach_id = $attach_id";
+		$sql = "SELECT topic_id FROM ". BB_BT_TORRENTS ." WHERE attach_id = $attach_id";
 
 		if (!$result = DB()->sql_query($sql))
 		{
@@ -104,10 +102,7 @@ function tracker_unregister ($attach_id, $mode = '')
 	// Unset DL-Type for topic
 	if ($bb_cfg['bt_unset_dltype_on_tor_unreg'] && $topic_id)
 	{
-		$sql = "UPDATE ". BB_TOPICS ." SET
-				topic_dl_type = ". TOPIC_DL_TYPE_NORMAL ."
-			WHERE topic_id = $topic_id
-			LIMIT 1";
+		$sql = "UPDATE ". BB_TOPICS ." SET topic_dl_type = ". TOPIC_DL_TYPE_NORMAL ." WHERE topic_id = $topic_id LIMIT 1";
 
 		if (!$result = DB()->sql_query($sql))
 		{
@@ -115,9 +110,9 @@ function tracker_unregister ($attach_id, $mode = '')
 		}
 	}
 
-    // XBTT
-    if($bb_cfg['announce_type'] == 'xbt')
-    {
+	// XBTT
+	if ($bb_cfg['announce_type'] == 'xbt')
+	{
 		$sql = "INSERT INTO ". BB_BT_TORRENTS ."_del(topic_id, info_hash)
 			SELECT topic_id, info_hash
 			FROM ". BB_BT_TORRENTS ."
@@ -128,11 +123,9 @@ function tracker_unregister ($attach_id, $mode = '')
 			message_die(GENERAL_ERROR, 'Could not delete torrent from torrents table', '', __LINE__, __FILE__, $sql);
 		}
 	}
-	// XBTT end.
 
 	// Remove peers from tracker
-	$sql = "DELETE FROM ". BB_BT_TRACKER ."
-		WHERE topic_id = $topic_id";
+	$sql = "DELETE FROM ". BB_BT_TRACKER ." WHERE topic_id = $topic_id";
 
 	if (!DB()->sql_query($sql))
 	{
@@ -140,8 +133,7 @@ function tracker_unregister ($attach_id, $mode = '')
 	}
 
 	// Delete torrent
-	$sql = "DELETE FROM ". BB_BT_TORRENTS ."
-		WHERE attach_id = $attach_id";
+	$sql = "DELETE FROM ". BB_BT_TORRENTS ." WHERE attach_id = $attach_id";
 
 	if (!DB()->sql_query($sql))
 	{
@@ -149,10 +141,7 @@ function tracker_unregister ($attach_id, $mode = '')
 	}
 
 	// Update tracker_status
-	$sql = "UPDATE ". BB_ATTACHMENTS_DESC ." SET
-			tracker_status = 0
-		WHERE attach_id = $attach_id
-		LIMIT 1";
+	$sql = "UPDATE ". BB_ATTACHMENTS_DESC ." SET tracker_status = 0 WHERE attach_id = $attach_id LIMIT 1";
 
 	if (!DB()->sql_query($sql))
 	{
@@ -236,9 +225,9 @@ function change_tor_type ($attach_id, $tor_status_gold)
 	$tor_status_gold = intval($tor_status_gold);
 	DB()->query("UPDATE ". BB_BT_TORRENTS ." SET tor_type = $tor_status_gold WHERE topic_id = $topic_id LIMIT 1");
 
-    // XBTT
-    if($bb_cfg['announce_type'] == 'xbt')
-    {
+	// XBTT
+	if ($bb_cfg['announce_type'] == 'xbt')
+	{
 		$sql = "SELECT CASE tor_type WHEN 1 THEN 0 WHEN 2 THEN 50 ELSE 100 END AS dl_percent, topic_id, info_hash FROM ". BB_BT_TORRENTS ." WHERE topic_id = $topic_id";
 		$result = DB()->query($sql);
 		$row = DB()->sql_fetchrow($result);
@@ -315,8 +304,6 @@ function tracker_register ($attach_id, $mode = '', $tor_status = TOR_NOT_APPROVE
 	if ($bb_cfg['bt_disable_dht'])
 	{
 		$tor['info']['private'] = (int) 1;
-		//$tor['info']['source']  = (string) make_url('index.php');
-
 		$fp = fopen($filename, 'w+');
 		fwrite ($fp, bencode($tor));
 		fclose ($fp);
@@ -400,10 +387,7 @@ function tracker_register ($attach_id, $mode = '', $tor_status = TOR_NOT_APPROVE
 	}
 
 	// update tracker status for this attachment
-	$sql = 'UPDATE '. BB_ATTACHMENTS_DESC ." SET
-			tracker_status = 1
-		WHERE attach_id = $attach_id
-		LIMIT 1";
+	$sql = 'UPDATE '. BB_ATTACHMENTS_DESC ." SET tracker_status = 1 WHERE attach_id = $attach_id LIMIT 1";
 
 	if (!DB()->sql_query($sql))
 	{
@@ -413,10 +397,7 @@ function tracker_register ($attach_id, $mode = '', $tor_status = TOR_NOT_APPROVE
 	// set DL-Type for topic
 	if ($bb_cfg['bt_set_dltype_on_tor_reg'])
 	{
-		$sql = 'UPDATE '. BB_TOPICS .' SET
-				topic_dl_type = '. TOPIC_DL_TYPE_DL ."
-			WHERE topic_id = $topic_id
-			LIMIT 1";
+		$sql = 'UPDATE '. BB_TOPICS .' SET topic_dl_type = '. TOPIC_DL_TYPE_DL ." WHERE topic_id = $topic_id LIMIT 1";
 
 		if (!$result = DB()->sql_query($sql))
 		{
@@ -424,7 +405,7 @@ function tracker_register ($attach_id, $mode = '', $tor_status = TOR_NOT_APPROVE
 		}
 	}
 
-    if($tr_cfg['tor_topic_up'])
+	if ($tr_cfg['tor_topic_up'])
 	{
 		DB()->query("UPDATE ". BB_TOPICS ." SET topic_last_post_time = GREATEST(topic_last_post_time, ". (TIMENOW - 3*86400) .") WHERE topic_id = $topic_id LIMIT 1");
 	}
@@ -559,16 +540,16 @@ function send_torrent_with_passkey ($filename)
 	}
 
 	// XBTT unique passkey
-    if($bb_cfg['announce_type'] == 'xbt')
-    {
-        $info_hash = pack('H*', sha1(bencode($tor['info'])));
-        $passkey = substr('00000000'. dechex($userdata['user_id']), -8) . substr(sha1($bb_cfg['torrent_pass_private_key'] .' '. $passkey_val .' '. $userdata['user_id'] .' '. $info_hash), 0, 24);
-        $announce = $bb_cfg['announce_xbt'] .'/'. $passkey .'/announce';
-    }
-    else
-    {
-        $announce = strval($ann_url . "?$passkey_key=$passkey_val");
-    }
+	if ($bb_cfg['announce_type'] == 'xbt')
+	{
+		$info_hash = pack('H*', sha1(bencode($tor['info'])));
+		$passkey = substr('00000000'. dechex($userdata['user_id']), -8) . substr(sha1($bb_cfg['torrent_pass_private_key'] .' '. $passkey_val .' '. $userdata['user_id'] .' '. $info_hash), 0, 24);
+		$announce = $bb_cfg['announce_xbt'] .'/'. $passkey .'/announce';
+	}
+	else
+	{
+		$announce = strval($ann_url . "?$passkey_key=$passkey_val");
+	}
 
 	// Replace original announce url with tracker default
 	if ($bb_cfg['bt_replace_ann_url'] || !@$tor['announce'])
@@ -581,7 +562,7 @@ function send_torrent_with_passkey ($filename)
 	{
 		unset($tor['announce-list']);
 	}
-	elseif(@$tor['announce-list'])
+	elseif (@$tor['announce-list'])
 	{
 		$tor['announce-list'] = array_merge($tor['announce-list'], array(array($announce)));
 	}
@@ -604,9 +585,7 @@ function send_torrent_with_passkey ($filename)
 
 	// Add comment
 	$comment = '';
-
 	$orig_com = (@$tor['comment']) ? $tor['comment'] : '';
-
 	if ($bb_cfg['bt_add_comment'])
 	{
 		$comment = $bb_cfg['bt_add_comment'];
@@ -631,20 +610,16 @@ function send_torrent_with_passkey ($filename)
 	$mimetype = 'application/x-bittorrent;';
 	$charset  = (strpos(USER_AGENT, 'pera') && @$lang['CONTENT_ENCODING']) ? "charset={$lang['CONTENT_ENCODING']};" : '';
 
-#	header("Content-length: ". strlen($output));
 	header("Content-Type: $mimetype $charset name=\"$filename\"");
-	header("Content-Disposition: attachment; filename=\"$filename\"");
-
-	##### LOG #####
-	global $log_ip_resp;
-
-	if (isset($log_ip_resp[USER_IP]) || isset($log_ip_resp[CLIENT_IP]))
+	if ($bb_cfg['torrent_style'])
 	{
-		$str = date('H:i:s') . LOG_SEPR . str_compact(ob_get_contents()) . LOG_LF;
-		$file = 'sessions/'. date('m-d') .'_{'. USER_IP .'}_'. CLIENT_IP .'_resp';
-		bb_log($str, $file);
+		$header_file_name = 'Content-Disposition: attachment; filename="['.$domain_name.'].t' . $topic_id . '.torrent"';
+		header($header_file_name);
 	}
-	### LOG END ###
+	else
+	{
+		header("Content-Disposition: attachment; filename=\"$filename\"");
+	}
 
 	bb_exit($output);
 }
@@ -658,10 +633,7 @@ function generate_passkey ($user_id, $force_generate = false)
 	// Check if user can change passkey
 	if (!$force_generate)
 	{
-		$sql = "SELECT user_opt
-			FROM ". BB_USERS ."
-			WHERE user_id = $user_id
-			LIMIT 1";
+		$sql = "SELECT user_opt FROM ". BB_USERS ." WHERE user_id = $user_id LIMIT 1";
 
 		if (!$result = DB()->sql_query($sql))
 		{
@@ -688,10 +660,7 @@ function generate_passkey ($user_id, $force_generate = false)
 			return $passkey_val;
 		}
 		// Update
-		$sql = "UPDATE IGNORE ". BB_BT_USERS ." SET
-				auth_key = '$passkey_val'
-			WHERE user_id = $user_id
-			LIMIT 1";
+		$sql = "UPDATE IGNORE ". BB_BT_USERS ." SET auth_key = '$passkey_val' WHERE user_id = $user_id LIMIT 1";
 
 		if (DB()->sql_query($sql) && DB()->affected_rows() == 1)
 		{
@@ -715,10 +684,7 @@ function get_registered_torrents ($id, $mode)
 {
 	$field = ($mode == 'topic') ? 'topic_id' : 'post_id';
 
-	$sql = "SELECT topic_id
-		FROM ". BB_BT_TORRENTS ."
-		WHERE $field = $id
-		LIMIT 1";
+	$sql = "SELECT topic_id FROM ". BB_BT_TORRENTS ." WHERE $field = $id LIMIT 1";
 
 	if (!$result = DB()->sql_query($sql))
 	{
