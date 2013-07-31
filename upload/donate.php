@@ -9,7 +9,7 @@ require(BB_ROOT ."common.php");
 $user->session_start();
 
 $template->assign_vars(array(
-	'PAGE_TITLE' => 'Помощь трекеру',
+	'PAGE_TITLE' => $lang['DONATION'],
 ));
 
 print_page('donate.tpl');

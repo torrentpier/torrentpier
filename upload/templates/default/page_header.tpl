@@ -126,7 +126,7 @@ function initExternalLinks(context)
   	var context = context || 'body';
   	if (ExternalLinks_InNewWindow) {
   		$("a.postLink:not([href*='"+ window.location.hostname +"/'])", context).attr({ target: '_blank' });
-  		//$("a.postLink:not([@href*='"+ window.location.hostname +"/'])", context).replaceWith('<span style="color: red;">Ссылки запрещены</span>');
+  		//$("a.postLink:not([@href*='"+ window.location.hostname +"/'])", context).replaceWith('<span style="color: red;">{L_LINKS_ARE_FORBIDDEN}</span>');
   	}
 }
 function fixPostImage ($img)
@@ -356,7 +356,7 @@ if (top != self) {
 	allowed_self = /^(translate\.googleusercontent\.com)$/;
 	if (!self.location.hostname.match(allowed_self)) {
 		$(function(){
-			$('body').html('<center><h1><br /><br />Похоже, вас пытаются обмануть<br />Сайт '+ self.location.hostname +' открыт во фрейме</h1></center>');
+			$('body').html('<center><h1><br /><br />{L_YOU_ARE_BEING_CHEATED}&nbsp;'+ self.location.hostname +'</h1></center>');
 		});
 	}
 }

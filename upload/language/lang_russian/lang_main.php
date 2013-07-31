@@ -116,7 +116,7 @@ $lang['REGISTERED_USERS'] = 'Зарегистрированные пользов
 $lang['BROWSING_FORUM'] = 'Сейчас этот форум просматривают:';
 $lang['ONLINE_USERS'] = 'Сейчас на форуме <b>%1$d</b> посетителей: %2$d зарегистрированных и %3$d гостей';
 $lang['RECORD_ONLINE_USERS'] = 'Больше всего посетителей (<b>%s</b>) здесь было %s'; // first %s = number of users, second %s is the date.
-$lang['USERS'] = 'юзеров';
+$lang['USERS'] = 'Пользователей';
 
 $lang['ONLINE_ADMIN'] = 'Администратор';
 $lang['ONLINE_MOD'] = 'Модератор';
@@ -1773,3 +1773,27 @@ $lang['WARNING'] = 'Предупреждение';
 $lang['INDEXER'] = "Переиндексировать поиск";
 
 $lang['FORUM_STYLE'] = 'Стиль форума';
+
+$lang['LINKS_ARE_FORBIDDEN'] = 'Ссылки запрещены';
+$lang['YOU_ARE_BEING_CHEATED'] = 'Похоже, вас пытаются обмануть<br />Сайт открыт во фрейме. Текущий адрес';
+
+$lang['DONATION'] = 'Помощь трекеру';
+
+// Posting templates
+$lang['EMPTY_FIELD'] = 'Вы должны заполнить поле <b>%s</b>';
+$lang['EMPTY_SEL'] = 'Вы должны выбрать <b>%s</b>';
+$lang['NOT_NUM'] = '<b>%s</b> - должно быть число';
+$lang['NOT_URL'] = '<b>%s</b> - должна быть http:// ссылка';
+$lang['NOT_IMG_URL'] = '<b>%s</b> - должна быть http:// ссылка на картинку';
+
+$lang['PUT_INTO_SUBJECT'] = 'поместить в заголовок';
+$lang['POSTER'] = 'постер';
+$lang['REQ_FILLING'] = 'требует заполнения';
+$lang['NEW_LINE'] = 'новая строка';
+$lang['NEW_LINE_AFTER'] = 'новая строка после названия';
+$lang['NUM'] = 'число';
+$lang['URL'] = 'ссылка';
+$lang['IMG'] = 'картинка';
+$lang['PRE'] = 'pre';
+$lang['IN_LINE'] = 'на той же строке';
+$lang['HEADER_ONLY'] = 'только в заголовке';

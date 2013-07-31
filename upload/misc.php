@@ -138,7 +138,7 @@ elseif ($do == 'info')
 	</html>
 	<?php
 }
-else
+else 
 {
-	message_die(GENERAL_ERROR, 'Invalid mode <br /> <a href="javascript:history.go(-1)">Go back</a>');
+	message_die(GENERAL_ERROR, 'Invalid mode <br /> <a href="javascript:history.go(-1)">'.mb_convert_case($lang['BACK'], MB_CASE_TITLE).'</a>');
 }

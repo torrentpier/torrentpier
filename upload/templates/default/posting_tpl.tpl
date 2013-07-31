@@ -350,27 +350,27 @@ var TPL = {
 	},
 	// сообщения об ошибках при валидации заполнения формы
 	err_msg: {
-		empty_INP : 'Вы должны заполнить поле <b>%s</b>',
-		empty_TXT : 'Вы должны заполнить поле <b>%s</b>',
-		empty_SEL : 'Вы должны выбрать <b>%s</b>',
-		not_num   : '<b>%s</b> - должно быть число',
-		not_url   : '<b>%s</b> - должна быть http:// ссылка',
-		not_img   : '<b>%s</b> - должна быть http:// ссылка на картинку'
+		empty_INP : '{L_EMPTY_FIELD}',
+		empty_TXT : '{L_EMPTY_FIELD}',
+		empty_SEL : '{L_EMPTY_SEL}',
+		not_num   : '{L_NOT_NUM}',
+		not_url   : '{L_NOT_URL}',
+		not_img   : '{L_NOT_IMG_URL}'
 	},
 
 	msg_attr: {
-		HEAD     : 'поместить в заголовок',
-		POSTER   : 'постер',
-		req      : 'требует заполнения',
-		spoiler  : 'спойлер',
-		BR       : 'новая строка',
-		br2      : 'новая строка после названия',
-		num      : 'число',
-		URL      : 'ссылка',
-		img      : 'картинка',
-		pre      : 'pre',
-		inline   : 'на той же строке',
-		headonly : 'только в заголовке'
+		HEAD     : '{L_PUT_INTO_SUBJECT}',
+		POSTER   : '{L_POSTER}',
+		req      : '{L_REQ_FILLING}',
+		spoiler  : '{L_SPOILER}',
+		BR       : '{L_NEW_LINE}',
+		br2      : '{L_NEW_LINE_AFTER}',
+		num      : '{L_NUM}',
+		URL      : '{L_URL}',
+		img      : '{L_IMG}',
+		pre      : '{L_PRE}',
+		inline   : '{L_IN_LINE}',
+		headonly : '{L_HEADER_ONLY}'
 	},
 	reg: {
 		num     : /^\d+$/,
