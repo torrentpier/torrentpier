@@ -350,27 +350,27 @@ var TPL = {
 	},
 	// сообщения об ошибках при валидации заполнения формы
 	err_msg: {
-		empty_INP : '{L_EMPTY_FIELD}',
-		empty_TXT : '{L_EMPTY_FIELD}',
-		empty_SEL : '{L_EMPTY_SEL}',
-		not_num   : '{L_NOT_NUM}',
-		not_url   : '{L_NOT_URL}',
-		not_img   : '{L_NOT_IMG_URL}'
+		empty_INP : '{L_TPL_EMPTY_FIELD}',
+		empty_TXT : '{L_TPL_EMPTY_FIELD}',
+		empty_SEL : '{L_TPL_EMPTY_SEL}',
+		not_num   : '{L_TPL_NOT_NUM}',
+		not_url   : '{L_TPL_NOT_URL}',
+		not_img   : '{L_TPL_NOT_IMG_URL}'
 	},
 
 	msg_attr: {
-		HEAD     : '{L_PUT_INTO_SUBJECT}',
-		POSTER   : '{L_POSTER}',
-		req      : '{L_REQ_FILLING}',
-		spoiler  : '{L_SPOILER}',
-		BR       : '{L_NEW_LINE}',
-		br2      : '{L_NEW_LINE_AFTER}',
-		num      : '{L_NUM}',
-		URL      : '{L_URL}',
-		img      : '{L_IMG}',
-		pre      : '{L_PRE}',
-		inline   : '{L_IN_LINE}',
-		headonly : '{L_HEADER_ONLY}'
+		HEAD     : '{L_TPL_PUT_INTO_SUBJECT}',
+		POSTER   : '{L_TPL_POSTER}',
+		req      : '{L_TPL_REQ_FILLING}',
+		spoiler  : '{L_TPL_SPOILER}',
+		BR       : '{L_TPL_NEW_LINE}',
+		br2      : '{L_TPL_NEW_LINE_AFTER}',
+		num      : '{L_TPL_NUM}',
+		URL      : '{L_TPL_URL}',
+		img      : '{L_TPL_IMG}',
+		pre      : '{L_TPL_PRE}',
+		inline   : '{L_TPL_IN_LINE}',
+		headonly : '{L_TPL_HEADER_ONLY}'
 	},
 	reg: {
 		num     : /^\d+$/,

@@ -1767,22 +1767,3 @@ $lang['LINKS_ARE_FORBIDDEN'] = 'Links are forbidden';
 $lang['YOU_ARE_BEING_CHEATED'] = 'Looks like you are being cheated<br />Site is opened in frame. The current address is';
 
 $lang['DONATION'] = 'Donation';
-
-// Posting templates
-$lang['EMPTY_FIELD'] = 'You must fill the field <b>%s</b>';
-$lang['EMPTY_SEL'] = 'You must select <b>%s</b>';
-$lang['NOT_NUM'] = '<b>%s</b> - Not a num';
-$lang['NOT_URL'] = '<b>%s</b> - Must be http:// URL';
-$lang['NOT_IMG_URL'] = '<b>%s</b> - Must be http:// IMG_URL';
-
-$lang['PUT_INTO_SUBJECT'] = 'put into the subject';
-$lang['POSTER'] = 'poster';
-$lang['REQ_FILLING'] = 'requires filling';
-$lang['NEW_LINE'] = 'new line';
-$lang['NEW_LINE_AFTER'] = 'new line after the title';
-$lang['NUM'] = 'num';
-$lang['URL'] = 'URL';
-$lang['IMG'] = 'Image';
-$lang['PRE'] = 'pre';
-$lang['IN_LINE'] = 'in the same line';
-$lang['HEADER_ONLY'] = 'only in a title';

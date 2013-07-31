@@ -154,3 +154,21 @@ $lang['TPL']['VISTA_COMPATIBLE_OPTIONS'] = array(
 	'no',
 	'unknown',
 );
+
+$lang['TPL_EMPTY_FIELD'] = 'You must fill the field <b>%s</b>';
+$lang['TPL_EMPTY_SEL'] = 'You must select <b>%s</b>';
+$lang['TPL_NOT_NUM'] = '<b>%s</b> - Not a num';
+$lang['TPL_NOT_URL'] = '<b>%s</b> - Must be http:// URL';
+$lang['TPL_NOT_IMG_URL'] = '<b>%s</b> - Must be http:// IMG_URL';
+$lang['TPL_PUT_INTO_SUBJECT'] = 'put into the subject';
+$lang['TPL_POSTER'] = 'poster';
+$lang['TPL_REQ_FILLING'] = 'requires filling';
+$lang['TPL_NEW_LINE'] = 'new line';
+$lang['TPL_NEW_LINE_AFTER'] = 'new line after the title';
+$lang['TPL_NUM'] = 'number';
+$lang['TPL_URL'] = 'URL';
+$lang['TPL_IMG'] = 'image';
+$lang['TPL_PRE'] = 'pre';
+$lang['TPL_SPOILER'] = 'spoiler';
+$lang['TPL_IN_LINE'] = 'in the same line';
+$lang['TPL_HEADER_ONLY'] = 'only in a title';

@@ -168,3 +168,21 @@ $lang['TPL']['VISTA_COMPATIBLE_OPTIONS'] = array(
 	'нет',
 	'неизвестно',
 );
+
+$lang['TPL_EMPTY_FIELD'] = 'Вы должны заполнить поле <b>%s</b>';
+$lang['TPL_EMPTY_SEL'] = 'Вы должны выбрать <b>%s</b>';
+$lang['TPL_NOT_NUM'] = '<b>%s</b> - должно быть число';
+$lang['TPL_NOT_URL'] = '<b>%s</b> - должна быть http:// ссылка';
+$lang['TPL_NOT_IMG_URL'] = '<b>%s</b> - должна быть http:// ссылка на картинку';
+$lang['TPL_PUT_INTO_SUBJECT'] = 'поместить в заголовок';
+$lang['TPL_POSTER'] = 'постер';
+$lang['TPL_REQ_FILLING'] = 'требует заполнения';
+$lang['TPL_NEW_LINE'] = 'новая строка';
+$lang['TPL_NEW_LINE_AFTER'] = 'новая строка после названия';
+$lang['TPL_NUM'] = 'число';
+$lang['TPL_URL'] = 'ссылка';
+$lang['TPL_IMG'] = 'картинка';
+$lang['TPL_PRE'] = 'pre';
+$lang['TPL_SPOILER'] = 'спойлер';
+$lang['TPL_IN_LINE'] = 'на той же строке';
+$lang['TPL_HEADER_ONLY'] = 'только в заголовке';
