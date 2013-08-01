@@ -613,7 +613,7 @@ function send_torrent_with_passkey ($filename)
 	header("Content-Type: $mimetype $charset name=\"$filename\"");
 	if ($bb_cfg['torrent_name_style'])
 	{
-		$header_file_name = 'Content-Disposition: attachment; filename="['.$domain_name.'].t' . $topic_id . '.torrent"';
+		$header_file_name = 'Content-Disposition: attachment; filename="['.$bb_cfg['server_name'].'].t' . $topic_id . '.torrent"';
 		header($header_file_name);
 	}
 	else
