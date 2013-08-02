@@ -291,14 +291,17 @@ function strip_quotes ($text)
 
 // #############################################################################
 /**
-* Strips away bbcode from a given string, leaving plain text
-*
-* @param	string	Text to be stripped of bbcode tags
-* @param	boolean	If true, strip away quote tags AND their contents
-* @param	boolean	If true, use the fast-and-dirty method rather than the shiny and nice method
-*
-* @return	string
-*/
+ * Strips away bbcode from a given string, leaving plain text
+ *
+ * @param    string    Text to be stripped of bbcode tags
+ * @param bool $stripquotes
+ * @param bool $fast_and_dirty
+ * @param bool $showlinks
+ * @internal param \If $boolean true, strip away quote tags AND their contents
+ * @internal param \If $boolean true, use the fast-and-dirty method rather than the shiny and nice method
+ *
+ * @return    string
+ */
 function strip_bbcode ($message, $stripquotes = true, $fast_and_dirty = false, $showlinks = true)
 {
 	$find = array();

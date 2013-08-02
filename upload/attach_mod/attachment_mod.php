@@ -20,6 +20,7 @@ if (defined('ATTACH_INSTALL'))
 /**
 * wrapper function for determining the correct language directory
 */
+/** @noinspection PhpInconsistentReturnPointsInspection */
 function attach_mod_get_lang($language_file)
 {
 	global $attach_config, $bb_cfg;

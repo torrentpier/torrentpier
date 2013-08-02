@@ -1073,6 +1073,7 @@ class Template {
 					array_splice($tokens, $is_arg_start, count($tokens), $new_tokens);
 
 					$i = $is_arg_start;
+					break;
 
 				default:
 					$pattern = '@^

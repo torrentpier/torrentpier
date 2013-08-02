@@ -21,15 +21,16 @@ function make_OpenInEditor_js ($file, $line)
 }
 
 /**
-* Show source part of the file
-* @param string $file Filename
-* @param int $line Line to read
-* @param int $prev How many lines before main line to read
-* @param int $next How many lines after main line to read
-* @return string
-* @access public
-* @package ErrorHandler
-*/
+ * Show source part of the file
+ * @param string $file Filename
+ * @param int $line Line to read
+ * @param int $prev How many lines before main line to read
+ * @param int $next How many lines after main line to read
+ * @param bool $add_view_full_link
+ * @return string
+ * @access public
+ * @package ErrorHandler
+ */
 function showSource ($file, $line, $prev = 10, $next = 10, $add_view_full_link = true)
 {
 	if (!(file_exists($file) && is_file($file)))

@@ -97,8 +97,7 @@ if ($watch_count > 0)
 else
 {
 	meta_refresh(BB_ROOT, '3');
-    bb_die($lang['NO_WATCHED_TOPICS']);
+	bb_die($lang['NO_WATCHED_TOPICS']);
 }
 
 print_page('usercp_topic_watch.tpl');
-?>

@@ -1,51 +1,5 @@
 <?php
 
-/**
-  * Database
-  * Cache
-    - Tracker Cache
-    - Forum Cache
-    - Session Cache
-    - Datastore
-  * Tracker
-  * Torrents
-    - Ratio limits
-    - Seeding torrents limit
-    - DL-Status (days to keep)
-    - Tor-Stats (days to keep)
-    - Tor-Help
-  * Path
-  * Language
-  * Templates
-  * Cookie
-  * Server
-    - Server load
-    - Backup
-    - GZip
-  * Sessions
-  * Registration
-  * Email
-  * AJAX
-  * Debug
-  * Special users (dbg_users, unlimited_users, super_admins)
-  * LOG
-  * Error reporting
-
-  * Subforums
-  * Forums
-  * Topics
-  * Posts
-  * Search
-  * Actions log
-  * Users
-  * GroupCP
-
-  * Ads
-  * Misc
-  * Captcha
-
-**/
-
 if (!defined('BB_ROOT')) die(basename(__FILE__));
 
 $bb_cfg = $tr_cfg = $page_cfg = array();
@@ -57,7 +11,7 @@ $domain_name = (!empty($_SERVER['SERVER_NAME'])) ? $_SERVER['SERVER_NAME'] : $do
 // Increase number of revision after update
 $bb_cfg['tp_version'] = '2.5 (unstable)';
 $bb_cfg['tp_release_date'] = '02-08-2013';
-$bb_cfg['tp_release_state'] = 'R531';
+$bb_cfg['tp_release_state'] = 'R532';
 
 // Database
 $charset  = 'utf8';
@@ -96,7 +50,6 @@ $bb_cfg['cache']['engines'] = array(
 	'bb_cache'       => array('filecache',   array()),
 	'tr_cache'       => array('filecache',   array()),
 	'session_cache'  => array('filecache',   array()),
-
 	'bb_cap_sid'     => array('filecache',   array()),
 	'bb_login_err'   => array('filecache',   array()),
 );
@@ -167,7 +120,7 @@ $tr_cfg = array(
 	'limit_seed_ips'        => 0,
 	'limit_leech_ips'       => 0,
 	'tor_topic_up'          => true,
-    'gold_silver_enabled'   => true,
+	'gold_silver_enabled'   => true,
 );
 
 $bb_cfg['show_dl_status_in_search'] = true;

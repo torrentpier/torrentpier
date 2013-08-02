@@ -31,5 +31,3 @@ foreach($sql as $i => $query) {
 	$row = mysql_fetch_row($res);
 	echo "<li>{$titles[$i]} - <b>{$row[0]}</b>";
 }
-
-?>

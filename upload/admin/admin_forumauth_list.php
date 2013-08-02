@@ -288,7 +288,7 @@ else
 		ORDER BY c.cat_order";
 	if( !($result = DB()->sql_query($sql)) )
 	{
-		message_die(general_error, 'Could not query categories list', '', __line__, __file__, $sql);
+		message_die(GENERAL_ERROR, 'Could not query categories list', '', __LINE__, __FILE__, $sql);
 	}
 
 	$category_rows = DB()->sql_fetchrowset($result);

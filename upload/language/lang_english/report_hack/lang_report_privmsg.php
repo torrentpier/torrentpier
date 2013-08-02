@@ -25,5 +25,3 @@ $lang['DUPLICATE_ERROR'] = 'The private message has already been reported.';
 $lang['DELETED_ERROR'] = 'The reported private message was deleted.';
 
 $lang['CLICK_RETURN'] = '%sClick here%s to return to the private message.';
-
-?>

@@ -1180,7 +1180,6 @@ else
 			$order = 'DESC';
 			$o_order = 'ASC';
 			break;
-		case 'DESC':
 		default:
 			$o_order = 'DESC';
 			$order = 'ASC';

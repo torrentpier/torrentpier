@@ -21,5 +21,3 @@ $lang['DUPLICATE_ERROR'] = 'The selected topic has already been reported.';
 $lang['DELETED_ERROR'] = 'The reported topic was deleted.';
 
 $lang['CLICK_RETURN'] = '%sClick here%s to return to the topic.';
-
-?>

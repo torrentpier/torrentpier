@@ -19,5 +19,3 @@ $lang['AUTH_WRITE_ERROR'] = 'You don\'t have the permission to report users.';
 $lang['DELETED_ERROR'] = 'The selected user was deleted.';
 
 $lang['CLICK_RETURN'] = '%sClick here%s to return to the user\'s profile.';
-
-?>

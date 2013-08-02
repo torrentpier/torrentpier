@@ -21,5 +21,3 @@ $lang['DUPLICATE_ERROR'] = 'The selected post has already been reported.';
 $lang['DELETED_ERROR'] = 'The reported post was deleted.';
 
 $lang['CLICK_RETURN'] = '%sClick here%s to return to the post.';
-
-?>
