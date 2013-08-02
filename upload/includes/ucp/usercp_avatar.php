@@ -1,10 +1,6 @@
 <?php
 
-if ( !defined('IN_FORUM') )
-{
-	die('Hacking attempt');
-	exit;
-}
+if (!defined('IN_FORUM')) die("Hacking attempt");
 
 function check_image_type(&$type, &$errors)
 {

@@ -1,10 +1,6 @@
 <?php
 
-if ( !defined('IN_FORUM') )
-{
-	die('Hacking attempt');
-	exit;
-}
+if (!defined('IN_FORUM')) die("Hacking attempt");
 
 define('FILENAME_PREFIX',         false);
 define('FILENAME_PREFIX_LENGTH',  6);

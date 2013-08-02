@@ -1,10 +1,6 @@
 <?php
 
-if ( !defined('IN_FORUM') )
-{
-	die('Hacking attempt');
-	exit;
-}
+if (!defined('IN_FORUM')) die("Hacking attempt");
 
 $allowed_extensions = array();
 $display_categories = array();

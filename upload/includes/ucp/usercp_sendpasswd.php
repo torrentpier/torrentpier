@@ -1,10 +1,6 @@
 <?php
 
-if ( !defined('IN_FORUM') )
-{
-	die('Hacking attempt');
-	exit;
-}
+if (!defined('IN_FORUM')) die("Hacking attempt");
 
 if ($bb_cfg['emailer_disabled']) bb_die($lang['EMAILER_DISABLED']);
 

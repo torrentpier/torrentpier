@@ -1,10 +1,6 @@
 <?php
 
-if ( !defined('IN_FORUM') )
-{
-	die("Hacking attempt");
-	exit;
-}
+if (!defined('IN_FORUM')) die("Hacking attempt");
 
 require(BB_ROOT .'attach_mod/attachment_mod.php');
 

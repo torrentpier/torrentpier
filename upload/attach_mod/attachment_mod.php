@@ -1,10 +1,6 @@
 <?php
 
-if (!defined('IN_FORUM'))
-{
-	die('Hacking attempt');
-	exit;
-}
+if (!defined('IN_FORUM')) die("Hacking attempt");
 
 require(BB_ROOT .'attach_mod/includes/functions_includes.php');
 require(BB_ROOT .'attach_mod/includes/functions_attach.php');
@@ -20,7 +16,6 @@ if (defined('ATTACH_INSTALL'))
 /**
 * wrapper function for determining the correct language directory
 */
-/** @noinspection PhpInconsistentReturnPointsInspection */
 function attach_mod_get_lang($language_file)
 {
 	global $attach_config, $bb_cfg;

@@ -1,10 +1,6 @@
 <?php
 
-if ( !defined('IN_FORUM') )
-{
-	die('Hacking attempt');
-	exit;
-}
+if (!defined('IN_FORUM')) die('Hacking attempt');
 
 if (empty($_GET['u']) || empty($_GET['act_key']))
 {

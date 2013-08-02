@@ -1,10 +1,6 @@
 <?php
 
-if ( !defined('IN_FORUM') )
-{
-	die("Hacking attempt");
-	exit;
-}
+if (!defined('IN_FORUM')) die("Hacking attempt");
 
 // Is send through board enabled? No, return to index
 if (!$bb_cfg['board_email_form'])

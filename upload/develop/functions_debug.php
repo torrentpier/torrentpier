@@ -36,7 +36,6 @@ function showSource ($file, $line, $prev = 10, $next = 10, $add_view_full_link =
 	if (!(file_exists($file) && is_file($file)))
 	{
 		return trigger_error("showSource() failed, file does not exist `$file`", E_USER_ERROR);
-		return false;
 	}
 	ob_start();
 
