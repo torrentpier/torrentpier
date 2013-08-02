@@ -448,6 +448,15 @@ function send_torrent_with_passkey ($filename)
 		}
 	}
 
+	// Get $topic_id
+	$topic_id_sql = 'SELECT topic_id FROM ' . BB_POSTS . ' WHERE post_id = ' . (int) $post_id;
+	if (!($topic_id_result = DB()->sql_query($topic_id_sql)))
+	{
+		message_die(GENERAL_ERROR, 'Could not query post information', '', __LINE__, __FILE__, $topic_id_sql);
+	}
+	$topic_id_row = DB()->sql_fetchrow($topic_id_result);
+	$topic_id = $topic_id_row['topic_id'];
+
 	if (!$attachment['tracker_status'])
 	{
 		message_die(GENERAL_ERROR, $lang['PASSKEY_ERR_TOR_NOT_REG']);
