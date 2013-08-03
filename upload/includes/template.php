@@ -317,7 +317,6 @@ class Template {
 	 */
 	function pparse($handle)
 	{
-		global $bb_cfg;
 		// parsing header if there is one
 		if($this->preparse || $this->postparse)
 		{
@@ -384,7 +383,7 @@ class Template {
 	 */
 	function precompile($template, $filename)
 	{
-		global $precompile_num, $bb_cfg;
+		global $precompile_num;
 		if(empty($precompile_num))
 		{
 			$precompile_num = 0;
@@ -524,7 +523,6 @@ class Template {
 	 */
 	function loadfile($handle)
 	{
-		global $bb_cfg;
 		// If cached file exists do nothing - it will be included via include()
 		if(!empty($this->files_cache[$handle]))
 		{

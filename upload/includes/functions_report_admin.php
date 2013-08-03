@@ -457,8 +457,6 @@ function report_reason_edit($reason_id, $module_id, $reason_desc)
 //
 function report_reason_move($mode, $reason_id, $steps = 1)
 {
-	global $bb_cfg;
-
 	//
 	// Obtain report reason information
 	//

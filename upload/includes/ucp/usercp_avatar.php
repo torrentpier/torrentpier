@@ -34,7 +34,7 @@ function check_image_type(&$type, &$errors)
 
 function user_avatar_delete($avatar_type, $avatar_file)
 {
-	global $bb_cfg, $userdata;
+	global $bb_cfg;
 
 	$avatar_file = basename($avatar_file);
 	if ( $avatar_type == USER_AVATAR_UPLOAD && $avatar_file != '' )

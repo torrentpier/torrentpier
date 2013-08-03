@@ -210,7 +210,7 @@ class attach_parent
 	*/
 	function handle_attachments($mode)
 	{
-		global $is_auth, $attach_config, $refresh, $post_id, $submit, $preview, $error, $error_msg, $lang, $template, $userdata;
+		global $is_auth, $attach_config, $refresh, $post_id, $submit, $preview, $error, $error_msg, $lang;
 
 		//
 		// ok, what shall we do ;)
@@ -741,7 +741,7 @@ class attach_parent
 	*/
 	function display_attachment_bodies()
 	{
-		global $attach_config, $is_auth, $lang, $mode, $template, $upload_dir, $userdata, $forum_id;
+		global $attach_config, $is_auth, $lang, $template, $upload_dir, $forum_id;
 
 		// Choose what to display
 		$value_add = $value_posted = 0;
@@ -1315,7 +1315,7 @@ class attach_posting extends attach_parent
 	*/
 	function insert_attachment($post_id)
 	{
-		global $is_auth, $mode, $userdata, $error, $error_msg;
+		global $is_auth, $mode;
 
 		// Insert Attachment ?
 		if (!empty($post_id) && ($mode == 'newtopic' || $mode == 'reply' || $mode == 'editpost') && $is_auth['auth_attachments'])

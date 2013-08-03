@@ -840,7 +840,7 @@ function reports_deleted_obtain($auth_check = true)
 //
 function report_obtain($report_id, $auth_check = true)
 {
-	global $bb_cfg, $lang;
+	global $lang;
 
 	$sql = 'SELECT r.report_id, r.user_id, r.report_time, r.report_module_id, r.report_status, r.report_subject,
 			r.report_subject_data, r.report_title, r.report_desc, rr.report_reason_desc, u.username, u.user_rank
@@ -1242,7 +1242,7 @@ function reports_delete($report_ids, $auth_check = true, $module_action = true)
 //
 function report_statistics($mode)
 {
-	global $bb_cfg, $lang;
+	global $bb_cfg;
 
 	switch ($mode)
 	{

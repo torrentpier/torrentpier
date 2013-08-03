@@ -29,8 +29,6 @@ class report_user extends report_module
 	//
 	function subject_obtain($report_subject)
 	{
-		global $db;
-
 		$sql = 'SELECT username
 			FROM ' . BB_USERS . '
 			WHERE user_id = ' . (int) $report_subject;

@@ -156,7 +156,7 @@ function tracker_unregister ($attach_id, $mode = '')
 
 function delete_torrent ($attach_id, $mode = '')
 {
-	global $lang, $userdata, $reg_mode, $topic_id;
+	global $lang, $reg_mode, $topic_id;
 
 	$attach_id = intval($attach_id);
 	$reg_mode = $mode;
@@ -242,7 +242,7 @@ function change_tor_type ($attach_id, $tor_status_gold)
 
 function tracker_register ($attach_id, $mode = '', $tor_status = TOR_NOT_APPROVED)
 {
-	global $template, $attach_config, $bb_cfg, $lang, $return_message, $reg_mode, $tr_cfg;
+	global $bb_cfg, $lang, $reg_mode, $tr_cfg;
 
 	$attach_id = intval($attach_id);
 	$reg_mode = $mode;
@@ -712,7 +712,7 @@ function get_registered_torrents ($id, $mode)
 
 function exit_redirect ($message, $post_id, $forum_id)
 {
-	global $template, $lang;
+	global $lang;
 
 	$exit_message = $message .'<br /><br />'. sprintf($lang['CLICK_RETURN_TOPIC'], '<a href="viewtopic.php?'. POST_POST_URL .'='. $post_id .'#'. $post_id .'">', '</a>') .'<br /><br />'. sprintf($lang['CLICK_RETURN_FORUM'], '<a href="viewforum.php?'. POST_FORUM_URL .'='. $forum_id .'">', '</a>');
 	message_die(GENERAL_MESSAGE, $exit_message);

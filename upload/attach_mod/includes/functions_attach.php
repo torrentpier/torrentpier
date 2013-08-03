@@ -224,7 +224,7 @@ function attach_init_ftp($mode = false)
 */
 function unlink_attach($filename, $mode = false)
 {
-	global $upload_dir, $attach_config, $lang;
+	global $upload_dir, $attach_config;
 
 	$filename = basename($filename);
 

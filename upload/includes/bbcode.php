@@ -13,7 +13,6 @@ $page_cfg['include_bbcode_js'] = true;
 //
 function get_bbcode_tpl ()
 {
-global $lang;
 $bbcode_tpl = array();
 
 // Quote
@@ -97,7 +96,7 @@ function prepare_message ($message)
 // Either in a window or inline
 function generate_smilies($mode)
 {
-	global $bb_cfg, $template, $lang, $images, $user, $datastore;
+	global $bb_cfg, $template, $lang, $user, $datastore;
 
 	$inline_columns = 4;
 	$inline_rows = 7;
@@ -711,8 +710,6 @@ class bbcode
 	*/
 	function make_clickable ($text)
 	{
-		global $bb_cfg;
-
 		$url_regexp = "#
 			(?<![\"'=])
 			\b

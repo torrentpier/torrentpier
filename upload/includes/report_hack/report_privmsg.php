@@ -231,8 +231,6 @@ class report_privmsg extends report_module
 	//
 	function _subject_details_prepare(&$message, &$subject, $row)
 	{
-		global $bb_cfg, $userdata, $datastore;
-
 		require_once(INC_DIR . "bbcode.php");
 
 		$message = bbcode2html($message);

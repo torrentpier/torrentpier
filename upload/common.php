@@ -1305,8 +1305,6 @@ class datastore_memcache extends datastore_common
 
 	function datastore_memcache ($cfg, $prefix = null)
 	{
-		global $bb_cfg;
-
 		if (!$this->is_installed())
 		{
 			die('Error: Memcached extension not installed');
@@ -1470,8 +1468,6 @@ class datastore_redis extends datastore_common
 
 	function datastore_redis ($cfg, $prefix = null)
 	{
-		global $bb_cfg;
-
 		if (!$this->is_installed())
 		{
 			die('Error: Redis extension not installed');
@@ -1565,8 +1561,6 @@ class datastore_eaccelerator extends datastore_common
 
 	function datastore_eaccelerator ($prefix = null)
 	{
-		global $bb_cfg;
-
 		if (!$this->is_installed())
 		{
 			die('Error: eAccelerator extension not installed');
@@ -1635,8 +1629,6 @@ class datastore_xcache extends datastore_common
 
 	function datastore_xcache ($prefix = null)
 	{
-		global $bb_cfg;
-
 		if (!$this->is_installed())
 		{
 			die('Error: XCache extension not installed');
@@ -1706,8 +1698,6 @@ class datastore_apc extends datastore_common
 
 	function datastore_apc ($prefix = null)
 	{
-		global $bb_cfg;
-
 		if (!$this->is_installed())
 		{
 			die('Error: APC extension not installed');
@@ -1777,8 +1767,6 @@ class datastore_file extends datastore_common
 
 	function datastore_file ($dir, $prefix = null)
 	{
-		global $bb_cfg;
-
 		$this->prefix = $prefix;
 		$this->dir = $dir;
 		$this->dbg_enabled = sql_dbg_enabled();

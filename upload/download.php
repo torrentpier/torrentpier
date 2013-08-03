@@ -93,8 +93,6 @@ function send_file_to_browser($attachment, $upload_dir)
 	}
 
 	//bt
-	global $userdata;
-
 	if (!(isset($_GET['original']) && !IS_USER))
 	{
 		include(INC_DIR .'functions_torrent.php');

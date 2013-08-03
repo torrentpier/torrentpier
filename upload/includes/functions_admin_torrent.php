@@ -4,8 +4,6 @@ if (!defined('BB_ROOT')) die(basename(__FILE__));
 
 function update_table_bool ($table_name, $key, $field_name, $field_def_val)
 {
-	global $db;
-
 	// Clear current status
 	$sql = "UPDATE $table_name
 		SET $field_name = $field_def_val
@@ -88,8 +86,6 @@ function set_tpl_vars_lang ($default_cfg)
 
 function update_config_table ($table_name, $default_cfg, $cfg, $type)
 {
-	global $db;
-
 	foreach ($default_cfg as $config_name => $config_value)
 	{
 		if (isset($_POST[$config_name]) && $_POST[$config_name] != $cfg[$config_name])

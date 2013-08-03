@@ -391,8 +391,6 @@ class user_common
 	*/
 	function login ($args, $mod_admin_login = false)
 	{
-		global $bb_cfg;
-
 		$username = !empty($args['login_username']) ? clean_username($args['login_username']) : '';
 		$password = !empty($args['login_password']) ? $args['login_password'] : '';
 
@@ -664,8 +662,6 @@ class user_common
 	*/
 	function mark_read ($type)
 	{
-		global $template, $lang;
-
 		if ($type === 'all_forums')
 		{
 			// Update session time

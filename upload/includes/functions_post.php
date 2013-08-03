@@ -723,7 +723,7 @@ function user_notification($mode, &$post_data, &$topic_title, &$forum_id, &$topi
 
 function insert_post ($mode, $topic_id, $forum_id = '', $old_forum_id = '', $new_topic_id = '', $new_topic_title = '', $old_topic_id = '', $message = '', $poster_id = '')
 {
-	global $userdata, $is_auth, $bb_cfg, $lang;
+	global $userdata, $lang;
 
 	require(DEFAULT_LANG_DIR .'lang_bot.php');
 
@@ -802,7 +802,7 @@ function insert_post ($mode, $topic_id, $forum_id = '', $old_forum_id = '', $new
 
 function topic_review ($topic_id)
 {
-	global $bb_cfg, $lang, $template;
+	global $bb_cfg, $template;
 
 	// Fetch posts data
 	$review_posts = DB()->fetch_rowset("

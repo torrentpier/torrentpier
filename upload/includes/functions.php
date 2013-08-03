@@ -662,7 +662,6 @@ function delta_time ($timestamp_1, $timestamp_2 = TIMENOW, $granularity = 'auto'
 
 function get_select ($select, $selected = null, $return_as = 'html', $first_opt = '&raquo;&raquo; Выбрать ')
 {
-	global $lang;
 	$select_ary = array();
 
 	switch ($select)
@@ -1905,7 +1904,7 @@ function bb_die ($msg_text)
 
 function message_die ($msg_code, $msg_text = '', $msg_title = '', $err_line = '', $err_file = '', $sql = '')
 {
-	global $DBS, $template, $bb_cfg, $theme, $lang, $nav_links, $gen_simple_header, $images, $userdata;
+	global $DBS, $template, $bb_cfg, $theme, $lang, $userdata;
 
 	if (defined('HAS_DIED'))
 	{
@@ -2373,7 +2372,7 @@ class log_action
 
 function get_topic_icon ($topic, $is_unread = null)
 {
-	global $bb_cfg, $lang, $images;
+	global $bb_cfg, $images;
 
 	$t_hot = ($topic['topic_replies'] >= $bb_cfg['hot_threshold']);
 	$is_unread = is_null($is_unread) ? is_unread($topic['topic_last_post_time'], $topic['topic_id'], $topic['forum_id']) : $is_unread;
@@ -2732,14 +2731,14 @@ function pad_with_space ($str)
 
 function create_magnet($infohash, $auth_key, $logged_in)
 {
-	global $bb_cfg, $userdata, $_GET, $images;
+	global $bb_cfg, $_GET, $images;
 	$passkey_url = ((!$logged_in || isset($_GET['no_passkey'])) && $bb_cfg['bt_tor_browse_only_reg']) ? '' : "?{$bb_cfg['passkey_key']}=$auth_key";
 	return '<a href="magnet:?xt=urn:btih:'. bin2hex($infohash) .'&tr='. urlencode($bb_cfg['bt_announce_url'] . $passkey_url) .'"><img src="'. $images['icon_magnet'] .'" width="12" height="12" border="0" /></a>';
 }
 
 function get_avatar ($avatar, $type, $allow_avatar = true, $height = '', $width = '')
 {
-    global $bb_cfg, $lang;
+    global $bb_cfg;
 
     $height = ($height != '') ? 'height="'. $height .'"' : '';
     $width  = ($width != '') ? 'width="'. $width .'"' : '';
@@ -2766,7 +2765,7 @@ function get_avatar ($avatar, $type, $allow_avatar = true, $height = '', $width 
 
 function set_die_append_msg ($forum_id = null, $topic_id = null)
 {
-	global $userdata, $lang, $template;
+	global $lang, $template;
 
 	$msg = '';
 	$msg .= ($topic_id) ? '<p class="mrg_10"><a href="viewtopic.php?t='. $topic_id .'">'. $lang['TOPIC_RETURN'] .'</a></p>' : '';

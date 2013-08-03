@@ -6,7 +6,7 @@
 */
 function attach_faq_include($lang_file)
 {
-	global $bb_cfg, $faq, $attach_config;
+	global $attach_config;
 
 	if (intval($attach_config['disable_mod']))
 	{
@@ -41,7 +41,7 @@ function attach_faq_include($lang_file)
 */
 function attach_build_auth_levels($is_auth, &$s_auth_can)
 {
-	global $lang, $attach_config, $forum_id;
+	global $lang, $attach_config;
 
 	if (intval($attach_config['disable_mod']))
 	{
