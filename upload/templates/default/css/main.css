@@ -922,7 +922,7 @@ a.menu-root, a.menu-root:visited, a.menu-root:hover {
 .menu-a a { color: #0000A0; background: #E7E7E7; padding: 4px 10px 5px; margin: 1px; display: block; text-decoration: none !important; }
 .menu-a a:hover { color: #0000FF; background: #D1D7DC; text-decoration: none !important; }
 
-.mc_b { background: none !important; padding: 0px; !important; }
+.mc_b { background: none !important; padding: 0px !important; }
 .mc{ background:#E7E7E7; padding:5px; font-size:11px;}
 .mc-bord{ background:#fff; padding:1px; border:1px solid #92A3A4;}
 .mc-th{ background:#71869F; color:#F0F8FF; padding:4px; border-bottom:1px solid #fff; font-weight:bold; font-size:11px; text-align:center;}
