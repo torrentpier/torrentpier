@@ -235,11 +235,6 @@ class user_common
 		$user_id = (int) $this->data['user_id'];
 		$mod_admin_session = ($this->data['user_level'] == ADMIN || $this->data['user_level'] == MOD);
 
-		if (($bb_cfg['max_srv_load'] || $bb_cfg['max_reg_users_online']) && $login && $is_user && !$this->data['ignore_srv_load'])
-		{
-			$this->limit_srv_load();
-		}
-
 		// Initial ban check against user_id or IP address
 		if ($is_user)
 		{
@@ -486,7 +481,6 @@ class user_common
 		{
 			$delete_cookies = array(
 				COOKIE_DATA,
-				COOKIE_LOAD,
 				COOKIE_DBG,
 				'torhelp',
 				'explain',
@@ -502,7 +496,7 @@ class user_common
 				}
 			}
 		}
-        else
+		else
 		{
 			$c_sdata_resv = !empty($_COOKIE[COOKIE_DATA]) ? $_COOKIE[COOKIE_DATA] : null;
 			$c_sdata_curr = ($this->sessiondata) ? serialize($this->sessiondata) : '';
@@ -510,16 +504,6 @@ class user_common
 			if ($c_sdata_curr !== $c_sdata_resv)
 			{
 				bb_setcookie(COOKIE_DATA, $c_sdata_curr, COOKIE_PERSIST, true);
-			}
-			if ($bb_cfg['max_srv_load'])
-			{
-				$c_isl_resv = isset($_COOKIE[COOKIE_LOAD]) ? intval($_COOKIE[COOKIE_LOAD]) : null;
-				$c_isl_curr = ($this->data['user_level'] == USER && !$this->data['ignore_srv_load']) ? TIMENOW : 0;
-
-				if ($c_isl_curr !== $c_isl_resv)
-				{
-					bb_setcookie(COOKIE_LOAD, $c_isl_curr);
-				}
 			}
 			if (isset($bb_cfg['dbg_users'][$this->data['user_id']]) && !isset($_COOKIE[COOKIE_DBG]))
 			{
@@ -570,36 +554,6 @@ class user_common
 		");
 
 		return $autologin_id;
-	}
-
-	/**
-	*  Limit server load
-	*/
-	function limit_srv_load ()
-	{
-		global $bb_cfg;
-
-		if (!empty($_POST['message'])) return;
-
-		$srv_overloaded = false;
-
-		if (LOADAVG)
-		{
-			$srv_overloaded = (LOADAVG > $bb_cfg['max_srv_load']);
-		}
-		if (!$srv_overloaded && $bb_cfg['max_reg_users_online'])
-		{
-			$sql = "SELECT COUNT(DISTINCT session_user_id) AS users_count FROM ". BB_SESSIONS ." WHERE session_time > ". (TIMENOW - 300);
-
-			if ($row = DB()->fetch_row($sql))
-			{
-				$srv_overloaded = ($row['users_count'] > $bb_cfg['max_reg_users_online']);
-			}
-		}
-		if ($srv_overloaded)
-		{
-			require(TPL_LIMIT_LOAD_EXIT);
-		}
 	}
 
 	/**

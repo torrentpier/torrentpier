@@ -214,12 +214,6 @@ else
 	));
 }
 
-$template->assign_vars(array(
-	'SHOW_ACCESS_PRIVILEGE' => IS_ADMIN,
-	'IGNORE_SRV_LOAD'       => ($profiledata['user_level'] != USER || $profiledata['ignore_srv_load']) ? $lang['NO'] : $lang['YES'],
-	'IGNORE_SRV_LOAD_EDIT'  => ($profiledata['user_level'] == USER),
-));
-
 if (IS_ADMIN)
 {
 	$template->assign_vars(array(

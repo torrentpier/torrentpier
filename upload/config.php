@@ -19,7 +19,6 @@
   * Templates
   * Cookie
   * Server
-    - Server load
     - Backup
     - GZip
   * Sessions
@@ -56,8 +55,8 @@ $domain_name = (!empty($_SERVER['SERVER_NAME'])) ? $_SERVER['SERVER_NAME'] : $do
 
 // Increase number of revision after update
 $bb_cfg['tp_version'] = '2.5 (unstable)';
-$bb_cfg['tp_release_date'] = '03-08-2013';
-$bb_cfg['tp_release_state'] = 'R536';
+$bb_cfg['tp_release_date'] = '06-08-2013';
+$bb_cfg['tp_release_state'] = 'R537';
 
 // Database
 $charset  = 'utf8';
@@ -109,17 +108,12 @@ $bb_cfg['server_name'] = $domain_name;              // The domain name from whic
 $bb_cfg['server_port'] = (!empty($_SERVER['SERVER_PORT'])) ? $_SERVER['SERVER_PORT'] : 80;                       // The port your server is running on
 $bb_cfg['script_path'] = '/';                       // The path where FORUM is located relative to the domain name
 
-// Server load
-$bb_cfg['max_srv_load']       = 0;                  // 0 - disable
-$bb_cfg['tr_working_second']  = 0;                  // 0 - disable
-
 // Increase number after changing js or css
 $bb_cfg['js_ver']             = 1;
 $bb_cfg['css_ver']            = 1;
 
 // Information messages
 $bb_cfg['board_disabled_msg'] = 'форум временно отключен'; // 'forums temporarily disabled'; // show this msg if board has been disabled via ON/OFF trigger
-$bb_cfg['srv_overloaded_msg'] = "Извините, в данный момент сервер перегружен\nПопробуйте повторить запрос через несколько минут";
 
 // Backup
 $bb_cfg['db_backup_shell_cmd']     = '';           // '/path/to/db_backup.sh 2>&1'
@@ -301,7 +295,6 @@ $bb_cfg['user_session_duration']   = 1800;         // sec
 $bb_cfg['admin_session_duration']  = 6*3600;       // sec
 $bb_cfg['user_session_gc_ttl']     = 1800;         // number of seconds that a staled session entry may remain in sessions table
 $bb_cfg['session_cache_gc_ttl']    = 1200;         // sec
-$bb_cfg['max_reg_users_online']    = 0;            // 0 - unlimited
 $bb_cfg['max_last_visit_days']     = 14;           // days
 $bb_cfg['last_visit_update_intrv'] = 3600;         // sec
 

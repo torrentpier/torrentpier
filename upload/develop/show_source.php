@@ -16,4 +16,3 @@ $next = @$_GET['next'] ? $_GET['next'] : 15;
 
 require('./dbg_header.php');
 echo showSource($file, $line, $prev, $next);
-

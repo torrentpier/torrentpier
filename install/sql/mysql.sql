@@ -1455,7 +1455,6 @@ CREATE TABLE IF NOT EXISTS `bb_users` (
   `user_interests` varchar(255) NOT NULL DEFAULT '',
   `user_actkey` varchar(32) NOT NULL DEFAULT '',
   `user_newpasswd` varchar(32) NOT NULL DEFAULT '',
-  `ignore_srv_load` tinyint(1) NOT NULL DEFAULT '0',
   `autologin_id` varchar(12) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL DEFAULT '',
   `user_newest_pm_id` mediumint(8) NOT NULL DEFAULT '0',
   `user_points` float(16,2) NOT NULL DEFAULT '0.00',

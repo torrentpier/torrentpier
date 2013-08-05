@@ -82,10 +82,6 @@ $(document).ready(function(){
 <var class="ajax-params">{action: "edit_user_profile", id: "user_skype"}</var>
 <var class="ajax-params">{action: "edit_user_profile", id: "user_gender", editableType: "yesno-gender"}</var>
 <var class="ajax-params">{action: "edit_user_profile", id: "user_birthday"}</var>
-
-<!-- IF IGNORE_SRV_LOAD_EDIT -->
-<var class="ajax-params">{action: "edit_user_profile", id: "ignore_srv_load", editableType: "yesno-radio"}</var>
-<!-- ENDIF -->
 <var class="ajax-params">{action: "edit_user_profile", id: "u_up_total"}</var>
 <var class="ajax-params">{action: "edit_user_profile", id: "u_down_total"}</var>
 <var class="ajax-params">{action: "edit_user_profile", id: "u_up_release"}</var>
@@ -407,12 +403,6 @@ ajax.callback.view_profile = function(data) {
 			<tr>
 				<th>{L_AGE}:</th>
 				<td><b>{AGE}</b></td>
-			</tr>
-			<!-- ENDIF -->
-			<!-- IF SHOW_ACCESS_PRIVILEGE -->
-			<tr>
-				<th>{L_ACCESS}:</th>
-				<td id="ignore_srv_load">{L_ACCESS_SRV_LOAD}: <b class="editable">{IGNORE_SRV_LOAD}</b></td>
 			</tr>
 			<!-- ENDIF -->
 			<!-- IF SHOW_DRAFT -->

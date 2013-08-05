@@ -53,10 +53,9 @@ $del_ids = DB('cap')->fetch_rowset("SELECT cap_id FROM ". BB_CAPTCHA ." WHERE ca
 foreach ($del_ids as $del_id)
 {
 	$cap_img_path = CAPTCHA()->get_img_path(abs($del_id));
-	if(@fopen($cap_img_path, 'r'))
+	if (@fopen($cap_img_path, 'r'))
 	{
 		unlink($cap_img_path);
-    }
+	}
 	DB('cap')->query("DELETE FROM ". BB_CAPTCHA ." WHERE cap_id = $del_id LIMIT 1");
 }
-

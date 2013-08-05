@@ -58,9 +58,8 @@ if ($show_dbg_info)
 		for ($i=0; $i < 3; $i++)
 		{
 			$l[$i] = round($l[$i], 1);
-			$l[$i] = (IS_ADMIN && $bb_cfg['max_srv_load'] && $l[$i] > ($bb_cfg['max_srv_load'] + 4)) ? "<span style='color: red'><b>$l[$i]</b></span>" : $l[$i];
 		}
-		$stat .= " &nbsp;|&nbsp; <span title='". $lang['LIMIT'] ." {$bb_cfg['max_srv_load']}'>". $lang['LIMIT'] ." $l[0] $l[1] $l[2]</span>";
+		$stat .= " &nbsp;|&nbsp; ". $lang['LIMIT'] ." $l[0] $l[1] $l[2]";
 	}
 
 	$stat .= ' &nbsp;]';

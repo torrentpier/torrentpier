@@ -1396,8 +1396,6 @@ $lang['ONLY_FOR_MOD'] = 'This option only for moderators';
 $lang['ONLY_FOR_ADMIN'] = 'This option only for admins';
 $lang['ONLY_FOR_SUPER_ADMIN'] = 'This option only for super admins';
 
-$lang['ACCESS'] = 'Access';
-$lang['ACCESS_SRV_LOAD'] = 'Depend on server load';
 $lang['LOGS'] = 'Topic history';
 $lang['FORUM_LOGS'] = 'History Forum';
 $lang['AUTOCLEAN'] = 'Autoclean:';

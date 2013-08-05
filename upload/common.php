@@ -2265,24 +2265,5 @@ else if (defined('IN_TRACKER'))
 		{
 			dummy_exit(mt_rand(1200, 2400));  #  die('d14:failure reason20:temporarily disablede');
 		}
-
-		// Limit server load
-		if ($bb_cfg['max_srv_load'] || $bb_cfg['tr_working_second'])
-		{
-			if ((!empty($_GET['uploaded']) || !empty($_GET['downloaded'])) && (!isset($_GET['event']) || $_GET['event'] === 'started'))
-			{
-				if ($bb_cfg['tr_working_second'] && (TIMENOW % $bb_cfg['tr_working_second']))
-				{
-					tr_drop_request('wrk_sec');
-				}
-				else if ($bb_cfg['max_srv_load'] && LOADAVG)
-				{
-					if (LOADAVG > $bb_cfg['max_srv_load'])
-					{
-						tr_drop_request('load');
-					}
-				}
-			}
-		}
 	}
 }
