@@ -135,7 +135,7 @@ define('GROUP_MEMBER', 20);
 define('CP_HOLDER',    25);
 
 $excluded_users = array(
-	ANONYMOUS,
+	GUEST_UID,
 	BOT_UID,
 );
 define('EXCLUDED_USERS_CSV', implode(',', $excluded_users));

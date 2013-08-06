@@ -646,7 +646,7 @@ switch ($mode)
 		break;
 
 	case 'ip':
-		$anon = ANONYMOUS;
+		$anon = GUEST_UID;
 
 		$rdns_ip_num = ( isset($_GET['rdns']) ) ? $_GET['rdns'] : "";
 
@@ -755,7 +755,7 @@ switch ($mode)
 					'ROW_CLASS'      => !($i % 2) ? 'row4' : 'row5',
 					'USERNAME'       => wbr($username),
 					'POSTS'          => $row['postings'],
-					'U_PROFILE'      => ($id == ANONYMOUS) ? "modcp.php?mode=ip&amp;p=$post_id&amp;t=$topic_id" : PROFILE_URL . $id,
+					'U_PROFILE'      => ($id == GUEST_UID) ? "modcp.php?mode=ip&amp;p=$post_id&amp;t=$topic_id" : PROFILE_URL . $id,
 					'U_SEARCHPOSTS'  => "search.php?search_author=1&amp;uid=$id",
 				));
 

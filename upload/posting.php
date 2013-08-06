@@ -726,7 +726,7 @@ else
 		}
 		else
 		{
-			$username = ( $post_info['user_id'] == ANONYMOUS && !empty($post_info['post_username']) ) ? $post_info['post_username'] : '';
+			$username = ( $post_info['user_id'] == GUEST_UID && !empty($post_info['post_username']) ) ? $post_info['post_username'] : '';
 		}
 	}
 }
@@ -738,7 +738,7 @@ if ($error_msg)
 	));
 }
 
-if (IS_GUEST || ($mode == 'editpost' && $post_info['poster_id'] == ANONYMOUS))
+if (IS_GUEST || ($mode == 'editpost' && $post_info['poster_id'] == GUEST_UID))
 {
 	$template->assign_var('POSTING_USERNAME');
 }
@@ -748,7 +748,7 @@ if (IS_GUEST || ($mode == 'editpost' && $post_info['poster_id'] == ANONYMOUS))
 //
 if (!IS_GUEST)
 {
-	if ($mode != 'editpost' || ($mode == 'editpost' && $post_info['poster_id'] != ANONYMOUS))
+	if ($mode != 'editpost' || ($mode == 'editpost' && $post_info['poster_id'] != GUEST_UID))
 	{
 		$template->assign_var('SHOW_NOTIFY_CHECKBOX');
 	}

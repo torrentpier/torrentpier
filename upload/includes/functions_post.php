@@ -594,7 +594,7 @@ function user_notification($mode, &$post_data, &$topic_title, &$forum_id, &$topi
 			$sql = "SELECT u.user_id, u.user_email, u.user_lang
 				FROM " . BB_TOPICS_WATCH . " tw, " . BB_USERS . " u
 				WHERE tw.topic_id = $topic_id
-					AND tw.user_id NOT IN (" . $userdata['user_id'] . ", " . BOT_UID . ", " . ANONYMOUS . $user_id_sql . ")
+					AND tw.user_id NOT IN (" . $userdata['user_id'] . ", " . BOT_UID . ", " . GUEST_UID . $user_id_sql . ")
 					AND tw.notify_status = " . TOPIC_WATCH_UN_NOTIFIED . "
 					AND u.user_id = tw.user_id";
 			if (!($result = DB()->sql_query($sql)))
@@ -808,7 +808,7 @@ function topic_review ($topic_id)
 	$review_posts = DB()->fetch_rowset("
 		SELECT
 			p.*, h.post_html, IF(h.post_html IS NULL, pt.post_text, NULL) AS post_text,
-			IF(p.poster_id = ". ANONYMOUS .", p.post_username, u.username) AS username, u.user_rank
+			IF(p.poster_id = ". GUEST_UID .", p.post_username, u.username) AS username, u.user_rank
 		FROM      ". BB_POSTS      ." p
 		LEFT JOIN ". BB_USERS      ." u  ON(u.user_id = p.poster_id)
 		LEFT JOIN ". BB_POSTS_TEXT ." pt ON(pt.post_id = p.post_id)

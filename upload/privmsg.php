@@ -956,7 +956,7 @@ else if ( $submit || $refresh || $mode != '' )
 
 			$to_userdata = get_userdata ($to_username_sql);
 
-			if (!$to_userdata || $to_userdata['user_id'] == ANONYMOUS)
+			if (!$to_userdata || $to_userdata['user_id'] == GUEST_UID)
 			{
 				$error = TRUE;
 				$error_msg = $lang['NO_SUCH_USER'];
@@ -1199,7 +1199,7 @@ else if ( $submit || $refresh || $mode != '' )
 			$sql = "SELECT username
 				FROM " . BB_USERS . "
 				WHERE user_id = $user_id
-					AND user_id <> " . ANONYMOUS;
+					AND user_id <> " . GUEST_UID;
 			if ( !($result = DB()->sql_query($sql)) )
 			{
 				$error = TRUE;

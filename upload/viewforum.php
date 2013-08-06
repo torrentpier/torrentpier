@@ -22,7 +22,7 @@ $forum_id  = (int) request_var('f', '');
 $start     = abs(intval(request_var('start', '')));
 $mark_read = (request_var('mark', '') === 'topics');
 
-$anon = ANONYMOUS;
+$anon = GUEST_UID;
 
 // Start session
 $user->session_start();

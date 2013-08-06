@@ -1312,7 +1312,7 @@ function get_db_stat($mode)
 		case 'newestuser':
 			$sql = "SELECT user_id, username
 				FROM " . BB_USERS . "
-				WHERE user_id <> " . ANONYMOUS . "
+				WHERE user_id <> " . GUEST_UID . "
 				ORDER BY user_id DESC
 				LIMIT 1";
 			break;
@@ -1422,7 +1422,7 @@ function get_userdata ($u, $force_name = false, $allow_anon = false)
 {
 	if (!$u) return false;
 
-	if (intval($u) == ANONYMOUS && $allow_anon)
+	if (intval($u) == GUEST_UID && $allow_anon)
 	{
 		if ($userdata = CACHE('bb_cache')->get('anonymous_userdata'))
 		{
@@ -1432,7 +1432,7 @@ function get_userdata ($u, $force_name = false, $allow_anon = false)
 
 	$userdata = array();
 	$name_search = false;
-	$anon_sql = (!$allow_anon) ? "AND user_id != ". ANONYMOUS : '';
+	$anon_sql = (!$allow_anon) ? "AND user_id != ". GUEST_UID : '';
 
 	if ($force_name || !is_numeric($u))
 	{
@@ -1456,7 +1456,7 @@ function get_userdata ($u, $force_name = false, $allow_anon = false)
 		}
 	}
 
-	if ($userdata['user_id'] == ANONYMOUS)
+	if ($userdata['user_id'] == GUEST_UID)
 	{
 		CACHE('bb_cache')->set('anonymous_userdata', $userdata);
 	}
@@ -2866,11 +2866,11 @@ function profile_url($data)
 	if(!$bb_cfg['color_nick']) $style = '';
 
 	$username = !empty($data['username']) ? $data['username'] : $lang['GUEST'];
-	$user_id = (!empty($data['user_id']) && $username != $lang['GUEST']) ? $data['user_id'] : ANONYMOUS;
+	$user_id = (!empty($data['user_id']) && $username != $lang['GUEST']) ? $data['user_id'] : GUEST_UID;
 
 	$profile = '<span title="'. $title .'" class="'. $style .'">'. $username .'</span>';
 
-	if(!in_array($user_id, array('', ANONYMOUS, BOT_UID)) && $username)
+	if(!in_array($user_id, array('', GUEST_UID, BOT_UID)) && $username)
 	{
 		$profile = '<a href="'. make_url(PROFILE_URL . $user_id) .'">'. $profile .'</a>';
 	}

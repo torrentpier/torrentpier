@@ -2,7 +2,7 @@
 
 if (!defined('BB_ROOT')) die(basename(__FILE__));
 
-if (empty($_GET[POST_USERS_URL]) || $_GET[POST_USERS_URL] == ANONYMOUS) bb_die($lang['NO_USER_ID_SPECIFIED']);
+if (empty($_GET[POST_USERS_URL]) || $_GET[POST_USERS_URL] == GUEST_UID) bb_die($lang['NO_USER_ID_SPECIFIED']);
 
 if (!$profiledata = get_userdata($_GET[POST_USERS_URL])) bb_die($lang['NO_USER_ID_SPECIFIED']);
 

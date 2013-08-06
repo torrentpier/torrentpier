@@ -65,7 +65,7 @@ if (!$forums = $datastore->get('cat_forums'))
 $cat_title_html = $forums['cat_title_html'];
 $forum_name_html = $forums['forum_name_html'];
 
-$anon = ANONYMOUS;
+$anon = GUEST_UID;
 $excluded_forums_csv = $user->get_excluded_forums(AUTH_VIEW);
 $only_new = $user->opt_js['only_new'];
 

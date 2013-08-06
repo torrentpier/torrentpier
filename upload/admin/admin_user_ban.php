@@ -309,7 +309,7 @@ else
 		FROM " . BB_BANLIST . " b, " . BB_USERS . " u
 		WHERE u.user_id = b.ban_userid
 			AND b.ban_userid <> 0
-			AND u.user_id <> " . ANONYMOUS . "
+			AND u.user_id <> " . GUEST_UID . "
 		ORDER BY u.username ASC";
 	if ( !($result = DB()->sql_query($sql)) )
 	{

@@ -69,7 +69,7 @@ class report_module
 			global $userdata;
 		}
 
-		if ($userdata['user_id'] == ANONYMOUS)
+		if ($userdata['user_id'] == GUEST_UID)
 		{
 			return false;
 		}

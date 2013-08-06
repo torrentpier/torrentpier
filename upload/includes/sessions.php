@@ -102,7 +102,7 @@ class user_common
 			else
 			{
 				$SQL['WHERE'][] = "s.session_ip = '". USER_IP ."'";
-				$SQL['WHERE'][] = "s.session_user_id = ". ANONYMOUS;
+				$SQL['WHERE'][] = "s.session_user_id = ". GUEST_UID;
 
 				$userdata_cache_id = USER_IP;
 			}
@@ -151,7 +151,7 @@ class user_common
 
 			if ($ip_check_s == $ip_check_u)
 			{
-				if ($this->data['user_id'] != ANONYMOUS && defined('IN_ADMIN'))
+				if ($this->data['user_id'] != GUEST_UID && defined('IN_ADMIN'))
 				{
 					define('SID_GET', "sid={$this->data['session_id']}");
 				}
@@ -179,11 +179,11 @@ class user_common
 		if (!$this->data)
 		{
 			$login = false;
-			$user_id = ($bb_cfg['allow_autologin'] && $this->sessiondata['uk'] && $this->sessiondata['uid']) ? $this->sessiondata['uid'] : ANONYMOUS;
+			$user_id = ($bb_cfg['allow_autologin'] && $this->sessiondata['uk'] && $this->sessiondata['uid']) ? $this->sessiondata['uid'] : GUEST_UID;
 
 			if ($userdata = get_userdata(intval($user_id), false, true))
 			{
-				if ($userdata['user_id'] != ANONYMOUS && $userdata['user_active'])
+				if ($userdata['user_id'] != GUEST_UID && $userdata['user_active'])
 				{
 					if (verify_id($this->sessiondata['uk'], LOGIN_KEY_LENGTH) && $this->verify_autologin_id($userdata, true, false))
 					{
@@ -191,9 +191,9 @@ class user_common
 					}
 				}
 			}
-			if (!$userdata || ($userdata['user_id'] != ANONYMOUS && !$login))
+			if (!$userdata || ($userdata['user_id'] != GUEST_UID && !$login))
 			{
-				$userdata = get_userdata(ANONYMOUS, false, true);
+				$userdata = get_userdata(GUEST_UID, false, true);
 			}
 
 			$this->session_create($userdata, true);
@@ -230,7 +230,7 @@ class user_common
 		$this->data = $userdata;
 		$session_id = $this->sessiondata['sid'];
 
-		$login   = (int) ($this->data['user_id'] != ANONYMOUS);
+		$login   = (int) ($this->data['user_id'] != GUEST_UID);
 		$is_user = ($this->data['user_level'] != ADMIN);
 		$user_id = (int) $this->data['user_id'];
 		$mod_admin_session = ($this->data['user_level'] == ADMIN || $this->data['user_level'] == MOD);
@@ -377,7 +377,7 @@ class user_common
 
 		if ($set_cookie)
 		{
-			$this->set_session_cookies(ANONYMOUS);
+			$this->set_session_cookies(GUEST_UID);
 		}
 	}
 
@@ -400,13 +400,13 @@ class user_common
 				WHERE username = '$username_sql'
 				  AND user_password = '$password_sql'
 				  AND user_active = 1
-				  AND user_id != ". ANONYMOUS ."
+				  AND user_id != ". GUEST_UID ."
 				LIMIT 1
 			";
 
 			if ($userdata = DB()->fetch_row($sql))
 			{
-				if (!$userdata['username'] || !$userdata['user_password'] || $userdata['user_id'] == ANONYMOUS || md5(md5($password)) !== $userdata['user_password'] || !$userdata['user_active'])
+				if (!$userdata['username'] || !$userdata['user_password'] || $userdata['user_id'] == GUEST_UID || md5(md5($password)) !== $userdata['user_password'] || !$userdata['user_active'])
 				{
 					trigger_error('invalid userdata', E_USER_ERROR);
 				}
@@ -431,7 +431,7 @@ class user_common
 					DB()->query("
 						DELETE FROM ". BB_SESSIONS ."
 						WHERE session_ip = '". USER_IP ."'
-							AND session_user_id = ". ANONYMOUS ."
+							AND session_user_id = ". GUEST_UID ."
 					");
 
 					return $new_session_userdata;
@@ -477,7 +477,7 @@ class user_common
 	{
 		global $bb_cfg;
 
-		if ($user_id == ANONYMOUS)
+		if ($user_id == GUEST_UID)
 		{
 			$delete_cookies = array(
 				COOKIE_DATA,
@@ -568,7 +568,7 @@ class user_common
 		define('DEFAULT_LANG_DIR', LANG_ROOT_DIR .'lang_'. $bb_cfg['default_lang'] .'/');
 		define('ENGLISH_LANG_DIR', LANG_ROOT_DIR .'lang_english/');
 
-		if ($this->data['user_id'] != ANONYMOUS)
+		if ($this->data['user_id'] != GUEST_UID)
 		{
 			if ($this->data['user_lang'] && $this->data['user_lang'] != $bb_cfg['default_lang'])
 			{
@@ -804,7 +804,7 @@ function cache_set_userdata ($userdata, $force = false)
 
 	if (!$userdata || (ignore_cached_userdata() && !$force)) return false;
 
-	$id = ($userdata['user_id'] == ANONYMOUS) ? $userdata['session_ip'] : $userdata['session_id'];
+	$id = ($userdata['user_id'] == GUEST_UID) ? $userdata['session_ip'] : $userdata['session_id'];
 	return CACHE('session_cache')->set($id, $userdata, $bb_cfg['session_update_intrv']);
 }
 
@@ -812,7 +812,7 @@ function cache_rm_userdata ($userdata)
 {
 	if (!$userdata) return false;
 
-	$id = ($userdata['user_id'] == ANONYMOUS) ? $userdata['session_ip'] : $userdata['session_id'];
+	$id = ($userdata['user_id'] == GUEST_UID) ? $userdata['session_ip'] : $userdata['session_id'];
 	return CACHE('session_cache')->rm($id);
 }
 

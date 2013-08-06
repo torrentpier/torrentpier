@@ -85,7 +85,7 @@ $poster_name_max_len = 25;
 $start = isset($_REQUEST['start']) ? abs(intval($_REQUEST['start'])) : 0;
 $url   = basename(__FILE__);
 
-$anon_id    = ANONYMOUS;
+$anon_id    = GUEST_UID;
 $user_id    = $userdata['user_id'];
 $lastvisit  = (IS_GUEST) ? TIMENOW : $userdata['user_lastvisit'];
 $search_id  = (isset($_GET['id']) && verify_id($_GET['id'], SEARCH_ID_LENGTH)) ? $_GET['id'] : '';
@@ -930,7 +930,7 @@ function username_search ($search_match)
 			SELECT username
 			FROM ". BB_USERS ."
 			WHERE username LIKE '". DB()->escape($username_search) . "'
-				AND user_id <> ". ANONYMOUS ."
+				AND user_id <> ". GUEST_UID ."
 			ORDER BY username
 			LIMIT 200
 		";

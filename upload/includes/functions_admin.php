@@ -155,12 +155,12 @@ function sync ($type, $id)
 				REPLACE INTO $tmp_user_posts
 					SELECT user_id, 0
 					FROM ". BB_USERS ."
-					WHERE user_id != ". ANONYMOUS ."
+					WHERE user_id != ". GUEST_UID ."
 						$where_user_sql
 				UNION
 					SELECT poster_id, COUNT(*)
 					FROM ". BB_POSTS ."
-					WHERE poster_id != ". ANONYMOUS ."
+					WHERE poster_id != ". GUEST_UID ."
 						$where_post_sql
 					GROUP BY poster_id
 			");
@@ -269,7 +269,7 @@ function topic_delete ($mode_or_topic_id, $forum_id = null, $prune_time = 0, $pr
 			SELECT p.poster_id, COUNT(p.post_id)
 			FROM ". $tmp_delete_topics ." del, ". BB_POSTS ." p
 			WHERE p.topic_id = del.topic_id
-				AND p.poster_id != ". ANONYMOUS ."
+				AND p.poster_id != ". GUEST_UID ."
 			GROUP BY p.poster_id
 	");
 

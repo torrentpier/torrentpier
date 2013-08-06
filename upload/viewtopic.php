@@ -802,17 +802,17 @@ $this_date = bb_date(TIMENOW ,'md', 'false');
 for($i = 0; $i < $total_posts; $i++)
 {
 	$poster_id        = $postrow[$i]['user_id'];
-	$poster           = ( $poster_id == ANONYMOUS ) ? $lang['GUEST'] : $postrow[$i]['username'];
-	$poster_birthday  = ($postrow[$i]['user_id'] != ANONYMOUS) ? date('md', strtotime($postrow[$i]['user_birthday'])) : '';
+	$poster           = ( $poster_id == GUEST_UID ) ? $lang['GUEST'] : $postrow[$i]['username'];
+	$poster_birthday  = ($postrow[$i]['user_id'] != GUEST_UID) ? date('md', strtotime($postrow[$i]['user_birthday'])) : '';
 	$post_date        = bb_date($postrow[$i]['post_time'], $bb_cfg['post_date_format']);
 	$max_post_time    = max($max_post_time, $postrow[$i]['post_time']);
-	$poster_posts     = ( $postrow[$i]['user_id'] != ANONYMOUS ) ? $postrow[$i]['user_posts'] : '';
-	$poster_from      = ( $postrow[$i]['user_from'] && $postrow[$i]['user_id'] != ANONYMOUS ) ? $postrow[$i]['user_from'] : '';
-	$poster_joined    = ( $postrow[$i]['user_id'] != ANONYMOUS ) ? $lang['JOINED'] . ': ' . bb_date($postrow[$i]['user_regdate'], $lang['DATE_FORMAT']) : '';
-	$poster_longevity = ( $postrow[$i]['user_id'] != ANONYMOUS ) ? delta_time($postrow[$i]['user_regdate']) : '';
+	$poster_posts     = ( $postrow[$i]['user_id'] != GUEST_UID ) ? $postrow[$i]['user_posts'] : '';
+	$poster_from      = ( $postrow[$i]['user_from'] && $postrow[$i]['user_id'] != GUEST_UID ) ? $postrow[$i]['user_from'] : '';
+	$poster_joined    = ( $postrow[$i]['user_id'] != GUEST_UID ) ? $lang['JOINED'] . ': ' . bb_date($postrow[$i]['user_regdate'], $lang['DATE_FORMAT']) : '';
+	$poster_longevity = ( $postrow[$i]['user_id'] != GUEST_UID ) ? delta_time($postrow[$i]['user_regdate']) : '';
 
 	$poster_avatar = '';
-	if ( !$user->opt_js['h_av'] && $poster_id != ANONYMOUS )
+	if ( !$user->opt_js['h_av'] && $poster_id != GUEST_UID )
 	{
 		$poster_avatar = get_avatar($postrow[$i]['user_avatar'], $postrow[$i]['user_avatar_type'], !bf($postrow[$i]['user_opt'], 'user_opt', 'allow_avatar'));
 	}
@@ -826,7 +826,7 @@ for($i = 0; $i < $total_posts; $i++)
 	}
 
 	// Handle anon users posting with usernames
-	if ($poster_id == ANONYMOUS && $postrow[$i]['post_username'] != '')
+	if ($poster_id == GUEST_UID && $postrow[$i]['post_username'] != '')
 	{
 		$poster = $postrow[$i]['post_username'];
 	}
@@ -834,7 +834,7 @@ for($i = 0; $i < $total_posts; $i++)
 	// Buttons
 	$pm_btn = $profile_btn = $delpost_btn = $edit_btn = $ip_btn = $quote_btn = '';
 
-	if ($poster_id != ANONYMOUS)
+	if ($poster_id != GUEST_UID)
 	{
 		$profile_btn = true;
 		$pm_btn = true;

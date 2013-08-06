@@ -23,7 +23,7 @@ DB()->query("
 		u.user_session_time = IF(u.user_session_time < s.session_time, s.session_time, u.user_session_time)
 	WHERE
 				u.user_id = s.session_user_id
-		AND s.session_user_id != ". ANONYMOUS ."
+		AND s.session_user_id != ". GUEST_UID ."
 		AND (
 			(s.session_time < $user_session_expire_time AND s.session_admin = 0)
 			OR

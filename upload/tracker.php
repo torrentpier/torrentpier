@@ -410,9 +410,9 @@ if (!$set_default)
 
 		if ($req_poster_id)
 		{
-			if ($req_poster_id == ANONYMOUS)
+			if ($req_poster_id == GUEST_UID)
 			{
-				$poster_id_val = ANONYMOUS;
+				$poster_id_val = GUEST_UID;
 				$poster_name_val = $lang['GUEST'];
 			}
 			else if ($poster_name_val = get_username($req_poster_id))

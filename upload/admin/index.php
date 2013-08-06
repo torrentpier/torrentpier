@@ -188,7 +188,7 @@ else if( isset($_GET['pane']) && $_GET['pane'] == 'right' )
 			FROM " . BB_USERS . " u, " . BB_SESSIONS . " s
 			WHERE s.session_logged_in = 1
 				AND u.user_id = s.session_user_id
-				AND u.user_id <> " . ANONYMOUS . "
+				AND u.user_id <> " . GUEST_UID . "
 				AND s.session_time >= " . ( TIMENOW - 300 ) . "
 			ORDER BY s.session_ip ASC, s.session_time DESC";
 		if(!$result = DB()->sql_query($sql))

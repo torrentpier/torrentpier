@@ -75,7 +75,7 @@ if ($submit && $mode == 'user')
 	// Make user an admin (if already user)
 	if (@$_POST['userlevel'] === 'admin')
 	{
-		if ($userdata['user_id'] == $user_id || $user_id == ANONYMOUS || $user_id == BOT_UID)
+		if ($userdata['user_id'] == $user_id || $user_id == GUEST_UID || $user_id == BOT_UID)
 		{
 			bb_die("Couldn't update admin status");
 		}

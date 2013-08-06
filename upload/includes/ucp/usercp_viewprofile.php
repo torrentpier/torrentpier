@@ -8,7 +8,7 @@ $datastore->enqueue(array(
 	'ranks',
 ));
 
-if (empty($_GET[POST_USERS_URL]) || $_GET[POST_USERS_URL] == ANONYMOUS)
+if (empty($_GET[POST_USERS_URL]) || $_GET[POST_USERS_URL] == GUEST_UID)
 {
 	bb_die($lang['NO_USER_ID_SPECIFIED']);
 }

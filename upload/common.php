@@ -38,7 +38,7 @@ define('DL_STATUS_WILL',      4);
 define('TOR_TYPE_GOLD',       1);
 define('TOR_TYPE_SILVER',     2);
 
-define('ANONYMOUS', -1);
+define('GUEST_UID', -1);
 define('BOT_UID',   -746);
 
 // DBS

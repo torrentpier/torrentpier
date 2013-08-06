@@ -68,7 +68,7 @@ $tor_reged = (bool) $tracker_status;
 $show_peers = (bool) $bb_cfg['bt_show_peers'];
 
 $locked = ($t_data['forum_status'] == FORUM_LOCKED || $t_data['topic_status'] == TOPIC_LOCKED);
-$tor_auth = ($bt_user_id != ANONYMOUS && (($bt_user_id == $poster_id && !$locked) || $is_auth['auth_mod']));
+$tor_auth = ($bt_user_id != GUEST_UID && (($bt_user_id == $poster_id && !$locked) || $is_auth['auth_mod']));
 
 $tor_auth_reg = ($tor_auth && $t_data['allow_reg_tracker'] && $post_id == $t_data['topic_first_post_id']);
 $tor_auth_del = ($tor_auth && $tor_reged);
@@ -353,7 +353,7 @@ if ($tor_reged && $tor_info)
 					$sp_up_tot[$x] += $peer['speed_up'];
 					$sp_down_tot[$x] += $peer['speed_down'];
 
-					$guest      = ($peer['user_id'] == ANONYMOUS || is_null($peer['username']));
+					$guest      = ($peer['user_id'] == GUEST_UID || is_null($peer['username']));
 					$p_max_up   = $peer['uploaded'];
 					$p_max_down = $peer['downloaded'];
 

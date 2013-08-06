@@ -86,7 +86,7 @@ switch ($mode)
 		);
 
 		$pr_data = array(
-			'user_id'          => ANONYMOUS,
+			'user_id'          => GUEST_UID,
 			'username'         => '',
 			'user_password'    => '',
 			'user_email'       => '',
