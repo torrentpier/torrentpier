@@ -181,7 +181,7 @@ class user_common
 			$login = false;
 			$user_id = ($bb_cfg['allow_autologin'] && $this->sessiondata['uk'] && $this->sessiondata['uid']) ? $this->sessiondata['uid'] : GUEST_UID;
 
-			if ($userdata = get_userdata(intval($user_id), false, true))
+			if ($userdata = get_userdata(intval($user_id), false))
 			{
 				if ($userdata['user_id'] != GUEST_UID && $userdata['user_active'])
 				{
@@ -193,7 +193,7 @@ class user_common
 			}
 			if (!$userdata || ($userdata['user_id'] != GUEST_UID && !$login))
 			{
-				$userdata = get_userdata(GUEST_UID, false, true);
+				$userdata = get_userdata(GUEST_UID, false);
 			}
 
 			$this->session_create($userdata, true);

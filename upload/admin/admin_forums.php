@@ -337,8 +337,6 @@ if ($mode)
 			//
 			// Create a category in the DB
 			//
-			verify_sid();
-
 			if (!$new_cat_title = trim($_POST['categoryname']))
 			{
 				bb_die('Category name is empty');
@@ -388,8 +386,6 @@ if ($mode)
 			//
 			// Modify a category in the DB
 			//
-			verify_sid();
-
 			if (!$new_cat_title = trim($_POST['cat_title']))
 			{
 				bb_die('Category name is empty');
@@ -455,8 +451,6 @@ if ($mode)
 			//
 			// Move or delete a forum in the DB
 			//
-			verify_sid();
-
 			$from_id = (int) $_POST['from_id'];
 			$to_id = (int) $_POST['to_id'];
 
@@ -560,8 +554,6 @@ if ($mode)
 			//
 			// Move or delete a category in the DB
 			//
-			verify_sid();
-
 			$from_id = (int) $_POST['from_id'];
 			$to_id   = (int) $_POST['to_id'];
 

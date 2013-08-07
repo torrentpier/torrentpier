@@ -2,37 +2,6 @@
 
 if (!defined('BB_ROOT')) die(basename(__FILE__));
 
-/**
- *  $request_type = 'p' or 'g' (for POST or GET)
- */
-function verify_sid ($request_type = 'p', $sid_key_name = 'sid', $die_on_error = true)
-{
-	global $userdata;
-
-	if (empty($request_type) || empty($sid_key_name))
-	{
-		trigger_error(__FUNCTION__ .": bad arguments", E_USER_ERROR);
-	}
-
-	if ($request_type == 'p')
-	{
-		$sid =& $_POST[$sid_key_name];
-	}
-	else
-	{
-		$sid =& $_GET[$sid_key_name];
-	}
-
-	$sid_valid = (!empty($sid) && !empty($userdata['session_id']) && $sid === $userdata['session_id']);
-
-	if (!$sid_valid && $die_on_error)
-	{
-		bb_die('Invalid sid');
-	}
-
-	return $sid_valid;
-}
-
 function get_tracks ($type)
 {
 	static $pattern = '#^a:\d+:{[i:;\d]+}$#';
@@ -294,11 +263,12 @@ function bit2dec ($bit_num)
 
 function bf_bit2dec ($bf_array_name, $key)
 {
-	if (!isset($GLOBALS['bf'][$bf_array_name][$key]))
+	global $bf;
+	if (!isset($bf[$bf_array_name][$key]))
 	{
 		trigger_error(__FUNCTION__ .": bitfield '$key' not found", E_USER_ERROR);
 	}
-	return (1 << $GLOBALS['bf'][$bf_array_name][$key]);
+	return (1 << $bf[$bf_array_name][$key]);
 }
 
 function bf ($int, $bf_array_name, $key)
@@ -808,12 +778,14 @@ class html_common
 
 function build_select ($name, $params, $selected = null, $max_length = HTML_SELECT_MAX_LENGTH, $multiple_size = null, $js = '')
 {
-	return $GLOBALS['html']->build_select($name, $params, $selected, $max_length, $multiple_size, $js);
+	global $html;
+	return $html->build_select($name, $params, $selected, $max_length, $multiple_size, $js);
 }
 
 function build_checkbox ($name, $title, $checked = false, $disabled = false, $class = null, $id = null, $value = 1)
 {
-	return $GLOBALS['html']->build_checkbox($name, $title, $checked, $disabled, $class, $id, $value);
+	global $html;
+	return $html->build_checkbox($name, $title, $checked, $disabled, $class, $id, $value);
 }
 
 function replace_quote ($str, $double = true, $single = true)
@@ -1000,7 +972,7 @@ function checkbox_get_val (&$key, &$val, $default = 1, $on = 1, $off = 0)
 {
 	global $previous_settings, $search_id;
 
-	if (isset($_REQUEST[$key]))
+	if (isset($_REQUEST[$key]) && is_string($_REQUEST[$key]))
 	{
 		$val = (int) $_REQUEST[$key];
 	}
@@ -1022,7 +994,7 @@ function select_get_val ($key, &$val, $options_ary, $default, $num = true)
 {
 	global $previous_settings;
 
-	if (isset($_REQUEST[$key]))
+	if (isset($_REQUEST[$key]) && is_string($_REQUEST[$key]))
 	{
 		if (isset($options_ary[$_REQUEST[$key]]))
 		{
@@ -1160,7 +1132,7 @@ function get_username ($user_id)
 function get_user_id ($username)
 {
 	if (empty($username)) return false;
-	$row = DB()->fetch_row("SELECT user_id FROM ". BB_USERS ." WHERE username = '$username' LIMIT 1");
+	$row = DB()->fetch_row("SELECT user_id FROM ". BB_USERS ." WHERE username = '". DB()->escape($username) ."' LIMIT 1");
 	return $row['user_id'];
 }
 
@@ -1181,6 +1153,7 @@ function str_short ($text, $max_length, $space = ' ')
 		$text .= '...';
 		$text = preg_replace('!&#?(\w+)?;?(\w{1,5})?\.\.\.$!', '...', $text);
 	}
+
 	return $text;
 }
 
@@ -1209,11 +1182,11 @@ function get_bt_ratio ($btu)
 
 function show_bt_userdata ($user_id)
 {
-	global $lang;
+	global $lang, $template;
 
 	$btu = get_bt_userdata($user_id);
 
-	$GLOBALS['template']->assign_vars(array(
+	$template->assign_vars(array(
 		'SHOW_BT_USERDATA' => true,
 		'UP_TOTAL'         => humn_size($btu['u_up_total']),
 		'UP_BONUS'         => humn_size($btu['u_up_bonus']),
@@ -1350,7 +1323,6 @@ function get_db_stat($mode)
 	return false;
 }
 
-// added at phpBB 2.0.11 to properly format the username
 function clean_username($username)
 {
 	$username = mb_substr(htmlspecialchars(str_replace("\'", "'", trim($username))), 0, 25, 'UTF-8');
@@ -1360,10 +1332,6 @@ function clean_username($username)
 	return $username;
 }
 
-/**
-* This function is a wrapper for ltrim, as charlist is only supported in php >= 4.1.0
-* Added in phpBB 2.0.18
-*/
 function phpbb_ltrim($str, $charlist = false)
 {
 	if ($charlist === false)
@@ -1371,25 +1339,11 @@ function phpbb_ltrim($str, $charlist = false)
 		return ltrim($str);
 	}
 
-	$php_version = explode('.', PHP_VERSION);
-
-	// php version < 4.1.0
-	if ((int) $php_version[0] < 4 || ((int) $php_version[0] == 4 && (int) $php_version[1] < 1))
-	{
-		while ($str{0} == $charlist)
-		{
-			$str = substr($str, 1);
-		}
-	}
-	else
-	{
-		$str = ltrim($str, $charlist);
-	}
+	$str = ltrim($str, $charlist);
 
 	return $str;
 }
 
-// added at phpBB 2.0.12 to fix a bug in PHP 4.3.10 (only supporting charlist in php >= 4.1.0)
 function phpbb_rtrim($str, $charlist = false)
 {
 	if ($charlist === false)
@@ -1397,71 +1351,47 @@ function phpbb_rtrim($str, $charlist = false)
 		return rtrim($str);
 	}
 
-	$php_version = explode('.', PHP_VERSION);
-
-	// php version < 4.1.0
-	if ((int) $php_version[0] < 4 || ((int) $php_version[0] == 4 && (int) $php_version[1] < 1))
-	{
-		while ($str{strlen($str)-1} == $charlist)
-		{
-			$str = substr($str, 0, strlen($str)-1);
-		}
-	}
-	else
-	{
-		$str = rtrim($str, $charlist);
-	}
+	$str = rtrim($str, $charlist);
 
 	return $str;
 }
 
-//
-// Get Userdata, $u can be username or user_id. If force_str is true, the username will be forced.
-//
-function get_userdata ($u, $force_name = false, $allow_anon = false)
+// Get Userdata, $u can be username or user_id. If $force_name is true, the username will be forced.
+function get_userdata ($u, $force_name = false)
 {
 	if (!$u) return false;
 
-	if (intval($u) == GUEST_UID && $allow_anon)
-	{
-		if ($userdata = CACHE('bb_cache')->get('anonymous_userdata'))
-		{
-			return $userdata;
-		}
-	}
-
-	$userdata = array();
+	$u_data = array();
 	$name_search = false;
-	$anon_sql = (!$allow_anon) ? "AND user_id != ". GUEST_UID : '';
+	$exclude_anon_sql = "AND user_id != ". GUEST_UID;
 
 	if ($force_name || !is_numeric($u))
 	{
 		$name_search = true;
-		$where_sql = "WHERE username = '". clean_username($u) ."'";
+		$where_sql = "WHERE username = '". DB()->escape(clean_username($u)) ."'";
 	}
 	else
 	{
+		if ($u == GUEST_UID)
+		{
+			return false;
+		}
 		$where_sql = "WHERE user_id = ". (int) $u;
 	}
 
-	$sql = "SELECT * FROM ". BB_USERS ." $where_sql $anon_sql LIMIT 1";
+	$sql = "SELECT * FROM ". BB_USERS ." $where_sql $exclude_anon_sql LIMIT 1";
 
-	if (!$userdata = DB()->fetch_row($sql))
+	if (!$u_data = DB()->fetch_row($sql))
 	{
 		if (!is_int($u) && !$name_search)
 		{
-			$where_sql = "WHERE username = '". clean_username($u) ."'";
-			$sql = "SELECT * FROM ". BB_USERS ." $where_sql $anon_sql LIMIT 1";
-			$userdata = DB()->fetch_row($sql);
+			$where_sql = "WHERE username = '". DB()->escape(clean_username($u)) ."'";
+			$sql = "SELECT * FROM ". BB_USERS ." $where_sql $exclude_anon_sql LIMIT 1";
+			$u_data = DB()->fetch_row($sql);
 		}
 	}
 
-	if ($userdata['user_id'] == GUEST_UID)
-	{
-		CACHE('bb_cache')->set('anonymous_userdata', $userdata);
-	}
-
-	return $userdata;
+	return $u_data;
 }
 
 function make_jumpbox ($selected = 0)
