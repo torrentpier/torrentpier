@@ -100,8 +100,8 @@ function call_seed($topic_id, $t_info, $to_user_id)
 	if ($msg_error == "OK")
 	{
 		$sql = "SELECT seeders, leechers FROM ". BB_BT_TRACKER_SNAP ." WHERE topic_id = $topic_id LIMIT 1";
-        $row = DB()->fetch_row($sql);
-        if ($row['seeders'] <= 2)
+		$row = DB()->fetch_row($sql);
+		if ($row['seeders'] <= 2)
 		{
 			$sql = "SELECT user_id FROM ". BB_BT_DLSTATUS ." WHERE topic_id = $topic_id AND user_id != {$userdata['user_id']}";
 

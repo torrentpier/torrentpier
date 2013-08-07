@@ -602,4 +602,5 @@ $template->assign_vars(array(
 	'SEED_EXIST'        => ($seeders || defined('SEEDER_EXIST')),
 	'LEECH_EXIST'       => ($leechers || defined('LEECHER_EXIST')),
 	'TOR_HELP_LINKS'    => $bb_cfg['tor_help_links'],
+	'CALL_SEED'         => ($bb_cfg['callseed'] && $tor_reged && !isset($bb_cfg['tor_no_tor_act'][$tor_info['tor_status']])),
 ));

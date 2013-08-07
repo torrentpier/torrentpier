@@ -79,7 +79,7 @@ $(document).ready(function(){
 					<a href="{SPMODE_FULL_HREF}" class="gen">{L_SPMODE_FULL}</a>
 					<!-- ENDIF -->
 				</div>
-				<!-- ENDIF -->			
+				<!-- ENDIF -->
 			</td>
 		</tr>
 
@@ -237,7 +237,7 @@ $(document).ready(function(){
 		<!-- IF DL_BUT_CANCEL --><input type="submit" name="dl_set_cancel" value="{L_DL_CANCEL}" class="liteoption" /><!-- ENDIF -->
 	</form>
 	<!-- ENDIF -->
-	<!-- IF $bb_cfg['callseed'] && not SEED_COUNT --><form action="callseed.php?t={TOPIC_ID}" method="post"><input type="submit" value="{L_CALLSEED}" class="liteoption" />&nbsp;</form><!-- ENDIF -->
+	<!-- IF CALL_SEED --><form action="callseed.php?t={TOPIC_ID}" method="post"><input type="submit" value="{L_CALLSEED}" class="liteoption" />&nbsp;</form><!-- ENDIF -->
 	&nbsp;
 	</td>
 </tr>
