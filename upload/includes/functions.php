@@ -1357,13 +1357,21 @@ function phpbb_rtrim($str, $charlist = false)
 }
 
 // Get Userdata, $u can be username or user_id. If $force_name is true, the username will be forced.
-function get_userdata ($u, $force_name = false)
+function get_userdata ($u, $force_name = false, $allow_guest = false)
 {
 	if (!$u) return false;
 
+	if (intval($u) == GUEST_UID && $allow_guest)
+	{
+		if ($u_data = CACHE('bb_cache')->get('guest_userdata'))
+		{
+			return $u_data;
+		}
+	}
+
 	$u_data = array();
 	$name_search = false;
-	$exclude_anon_sql = "AND user_id != ". GUEST_UID;
+	$exclude_anon_sql = (!$allow_guest) ? "AND user_id != ". GUEST_UID : '';
 
 	if ($force_name || !is_numeric($u))
 	{
@@ -1372,10 +1380,6 @@ function get_userdata ($u, $force_name = false)
 	}
 	else
 	{
-		if ($u == GUEST_UID)
-		{
-			return false;
-		}
 		$where_sql = "WHERE user_id = ". (int) $u;
 	}
 
@@ -1389,6 +1393,11 @@ function get_userdata ($u, $force_name = false)
 			$sql = "SELECT * FROM ". BB_USERS ." $where_sql $exclude_anon_sql LIMIT 1";
 			$u_data = DB()->fetch_row($sql);
 		}
+	}
+
+	if ($u_data['user_id'] == GUEST_UID)
+	{
+		CACHE('bb_cache')->set('guest_userdata', $u_data);
 	}
 
 	return $u_data;
