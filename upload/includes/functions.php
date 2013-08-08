@@ -2670,36 +2670,46 @@ function pad_with_space ($str)
 
 function create_magnet($infohash, $auth_key, $logged_in)
 {
-	global $bb_cfg, $_GET, $images;
-	$passkey_url = ((!$logged_in || isset($_GET['no_passkey'])) && $bb_cfg['bt_tor_browse_only_reg']) ? '' : "?{$bb_cfg['passkey_key']}=$auth_key";
-	return '<a href="magnet:?xt=urn:btih:'. bin2hex($infohash) .'&tr='. urlencode($bb_cfg['bt_announce_url'] . $passkey_url) .'"><img src="'. $images['icon_magnet'] .'" width="12" height="12" border="0" /></a>';
+	global $bb_cfg, $_GET, $userdata, $images;
+
+	if ($bb_cfg['announce_type'] == 'xbt')
+	{
+		$passkey = substr('00000000'. dechex($userdata['user_id']), -8) . substr(sha1($bb_cfg['torrent_pass_private_key'] .' '. $auth_key .' '. $userdata['user_id'] .' '. $infohash), 0, 24);
+		$announce = $bb_cfg['announce_xbt'] .'/'. $passkey .'/announce';
+		return '<a href="magnet:?xt=urn:btih:'. bin2hex($infohash) .'&tr='. urlencode($announce) .'"><img src="'. $images['icon_magnet'] .'" width="12" height="12" border="0" /></a>';
+	}
+	else
+	{
+		$passkey_url = ((!$logged_in || isset($_GET['no_passkey'])) && $bb_cfg['bt_tor_browse_only_reg']) ? '' : "?{$bb_cfg['passkey_key']}=$auth_key";
+		return '<a href="magnet:?xt=urn:btih:'. bin2hex($infohash) .'&tr='. urlencode($bb_cfg['bt_announce_url'] . $passkey_url) .'"><img src="'. $images['icon_magnet'] .'" width="12" height="12" border="0" /></a>';
+	}
 }
 
 function get_avatar ($avatar, $type, $allow_avatar = true, $height = '', $width = '')
 {
-    global $bb_cfg;
+	global $bb_cfg;
 
-    $height = ($height != '') ? 'height="'. $height .'"' : '';
-    $width  = ($width != '') ? 'width="'. $width .'"' : '';
+	$height = ($height != '') ? 'height="'. $height .'"' : '';
+	$width  = ($width != '') ? 'width="'. $width .'"' : '';
 
-    $user_avatar = '<img src="'. $bb_cfg['no_avatar'] .'" alt="" border="0" '. $height .' '. $width .'/>';
+	$user_avatar = '<img src="'. $bb_cfg['no_avatar'] .'" alt="" border="0" '. $height .' '. $width .'/>';
 
-    if ($allow_avatar)
-    {
-        switch($type)
-        {
-            case USER_AVATAR_UPLOAD:
-                $user_avatar = ( $bb_cfg['allow_avatar_upload'] ) ? '<img src="'. $bb_cfg['avatar_path'] .'/'. $avatar .'" alt="" border="0" '. $height .' '. $width .'/>' : '';
-                break;
-            case USER_AVATAR_REMOTE:
-                $user_avatar = ( $bb_cfg['allow_avatar_remote'] ) ? '<img src="'. $avatar .'" alt="" border="0" onload="imgFit(this, 100);" onClick="return imgFit(this, 100);" '. $height .' '. $width .'/>' : '';
-                break;
-            case USER_AVATAR_GALLERY:
-                $user_avatar = ( $bb_cfg['allow_avatar_local'] ) ? '<img src="'. $bb_cfg['avatar_gallery_path'] .'/'. $avatar .'" alt="" border="0" '. $height .' '. $width .'/>' : '';
-                break;
-        }
-    }
-    return $user_avatar;
+	if ($allow_avatar)
+	{
+		switch($type)
+		{
+			case USER_AVATAR_UPLOAD:
+				$user_avatar = ( $bb_cfg['allow_avatar_upload'] ) ? '<img src="'. $bb_cfg['avatar_path'] .'/'. $avatar .'" alt="" border="0" '. $height .' '. $width .'/>' : '';
+				break;
+			case USER_AVATAR_REMOTE:
+				$user_avatar = ( $bb_cfg['allow_avatar_remote'] ) ? '<img src="'. $avatar .'" alt="" border="0" onload="imgFit(this, 100);" onClick="return imgFit(this, 100);" '. $height .' '. $width .'/>' : '';
+				break;
+			case USER_AVATAR_GALLERY:
+				$user_avatar = ( $bb_cfg['allow_avatar_local'] ) ? '<img src="'. $bb_cfg['avatar_gallery_path'] .'/'. $avatar .'" alt="" border="0" '. $height .' '. $width .'/>' : '';
+				break;
+		}
+	}
+	return $user_avatar;
 }
 
 function set_die_append_msg ($forum_id = null, $topic_id = null)
