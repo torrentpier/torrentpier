@@ -56,7 +56,7 @@ $domain_name = (!empty($_SERVER['SERVER_NAME'])) ? $_SERVER['SERVER_NAME'] : $do
 // Increase number of revision after update
 $bb_cfg['tp_version'] = '2.5 (unstable)';
 $bb_cfg['tp_release_date'] = '10-08-2013';
-$bb_cfg['tp_release_state'] = 'R544';
+$bb_cfg['tp_release_state'] = 'R545';
 
 // Database
 $charset  = 'utf8';
@@ -306,9 +306,19 @@ $bb_cfg['new_user_reg_restricted'] = false;
 
 // Email
 $bb_cfg['emailer_disabled']        = false;
+
+$bb_cfg['smtp_host']               = '';
+$bb_cfg['smtp_password']           = '';
+$bb_cfg['smtp_username']           = '';
+
+$bb_cfg['board_email']             = 'admin@' . $domain_name;
+$bb_cfg['board_email_sig']         = '';
+$bb_cfg['sitename']                = $domain_name;
+
 $bb_cfg['topic_notify_enabled']    = true;
 $bb_cfg['pm_notify_enabled']       = true;
 $bb_cfg['groupcp_send_email']      = true;
+$bb_cfg['email_change_disabled']   = false;        // disable changing email by user
 
 $bb_cfg['tech_admin_email']        = 'admin@' . $domain_name;  // email for sending error reports
 $bb_cfg['abuse_email']             = 'abuse@' . $domain_name;
