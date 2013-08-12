@@ -11,6 +11,8 @@ $lang['TRACKER_CFG_TITLE'] = 'Tracker';
 $lang['FORUM_CFG_TITLE'] = 'Forum settings';
 $lang['TRACKER_SETTINGS'] = 'Tracker settings';
 
+$lang['CHANGES_DISABLED'] = 'Changes disabled (see <b>$tr_cfg</b> in config.php)';
+
 $lang['OFF'] = 'Disable tracker';
 $lang['OFF_REASON'] = 'Disable reason';
 $lang['OFF_REASON_EXPL'] = 'this message will be sent to client when the tracker is disabled';

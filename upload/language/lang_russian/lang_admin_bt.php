@@ -11,6 +11,8 @@ $lang['TRACKER_CFG_TITLE'] = 'Трекер';
 $lang['FORUM_CFG_TITLE'] = 'Настройки форумов';
 $lang['TRACKER_SETTINGS'] = 'Настройки трекера';
 
+$lang['CHANGES_DISABLED'] = 'Изменения недоступны (редактируйте <b>$tr_cfg</b> в файле config.php)';
+
 $lang['OFF'] = 'Отключить трекер';
 $lang['OFF_REASON'] = 'Причина отключения';
 $lang['OFF_REASON_EXPL'] = 'этот текст будет отправляться клиенту пока трекер отключен';
