@@ -55,7 +55,7 @@ switch ($ajax->action)
 }
 
 // position in $ajax->valid_actions['xxx']
-define('AJAX_AUTH', 0);  //  'guest', 'user', 'mod', 'admin'
+define('AJAX_AUTH', 0);  //  'guest', 'user', 'mod', 'admin', 'super_admin'
 
 $user->session_start();
 $ajax->exec();
@@ -158,6 +158,15 @@ class ajax_common
 				if (!IS_ADMIN)
 				{
 					$this->ajax_die($lang['ONLY_FOR_ADMIN']);
+				}
+				$this->check_admin_session();
+				break;
+				
+			// SUPER_ADMIN
+			case 'super_admin':
+				if (!IS_SUPER_ADMIN)
+				{
+					$this->ajax_die($lang['ONLY_FOR_SUPER_ADMIN']);
 				}
 				$this->check_admin_session();
 				break;
