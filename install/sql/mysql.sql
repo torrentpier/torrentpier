@@ -29,7 +29,6 @@ DROP TABLE IF EXISTS `bb_bt_last_torstat`;
 DROP TABLE IF EXISTS `bb_bt_last_userstat`;
 DROP TABLE IF EXISTS `bb_bt_torhelp`;
 DROP TABLE IF EXISTS `bb_bt_torrents`;
-DROP TABLE IF EXISTS `bb_bt_torrents_del`;
 DROP TABLE IF EXISTS `bb_bt_torstat`;
 DROP TABLE IF EXISTS `bb_bt_tor_dl_stat`;
 DROP TABLE IF EXISTS `bb_bt_tracker`;
@@ -75,11 +74,6 @@ DROP TABLE IF EXISTS `bb_words`;
 DROP TABLE IF EXISTS `buf_last_seeder`;
 DROP TABLE IF EXISTS `buf_topic_view`;
 DROP TABLE IF EXISTS `sph_counter`;
-DROP TABLE IF EXISTS `xbt_announce_log`;
-DROP TABLE IF EXISTS `xbt_config`;
-DROP TABLE IF EXISTS `xbt_deny_from_hosts`;
-DROP TABLE IF EXISTS `xbt_files_users`;
-DROP TABLE IF EXISTS `xbt_scrape_log`;
 
 --
 -- Структура таблицы `bb_ads`
@@ -380,20 +374,6 @@ CREATE TABLE IF NOT EXISTS `bb_bt_torrents` (
 -- --------------------------------------------------------
 
 --
--- Структура таблицы `bb_bt_torrents_del`
---
-
-CREATE TABLE IF NOT EXISTS `bb_bt_torrents_del` (
-  `topic_id` mediumint(8) unsigned NOT NULL,
-  `info_hash` varbinary(20) NOT NULL,
-  `is_del` tinyint(4) NOT NULL DEFAULT '1',
-  `dl_percent` tinyint(4) NOT NULL DEFAULT '100',
-  PRIMARY KEY (`topic_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
-
--- --------------------------------------------------------
-
---
 -- Структура таблицы `bb_bt_torstat`
 --
 
@@ -446,7 +426,6 @@ CREATE TABLE IF NOT EXISTS `bb_bt_tracker` (
   `up_add` bigint(20) unsigned NOT NULL DEFAULT '0',
   `down_add` bigint(20) unsigned NOT NULL DEFAULT '0',
   `update_time` int(11) NOT NULL DEFAULT '0',
-  `xbt_error` varchar(200) DEFAULT NULL,
   `ul_gdc` bigint(20) unsigned NOT NULL DEFAULT '0',
   `ul_gdc_c` mediumint(9) unsigned NOT NULL DEFAULT '0',
   `ul_16k_c` mediumint(9) unsigned NOT NULL DEFAULT '0',
@@ -664,7 +643,6 @@ INSERT INTO `bb_config` VALUES ('report_hack_count', '0');
 INSERT INTO `bb_config` VALUES ('report_notify', '0');
 INSERT INTO `bb_config` VALUES ('report_list_admin', '0');
 INSERT INTO `bb_config` VALUES ('report_new_window', '0');
-INSERT INTO `bb_config` VALUES ('torrent_pass_private_key', 'вставить_из_конфига_XBTT');
 INSERT INTO `bb_config` VALUES ('cron_enabled', '1');
 INSERT INTO `bb_config` VALUES ('cron_check_interval', '300');
 INSERT INTO `bb_config` VALUES ('reports_enabled', '1');
@@ -1006,7 +984,7 @@ CREATE TABLE IF NOT EXISTS `bb_posts_text` (
 -- Дамп данных таблицы `bb_posts_text`
 --
 
-INSERT INTO `bb_posts_text` VALUES (1, '[list]\n[*]Переделан поиск по топикам с выбором типа [none, mysql, sphinx] (только в tracker.php)\n[*]Удалены bbcode_uid и переход на class.bbcode\n[*]Изменён метод и способ кеширования (memcache, sqlite, db_sqlite, redis, eaccelerator, apc, xcache, filecache)\n[*]Изменён способ подключения к БД и отказ от глобальной переменной $db\n[*]Улучшенный дебагер\n[*]Полностью переписан и упрощен файл регистрации\n[*]Переписана капча (в том числе при быстром ответе у гостя)\n[*]Добавлена возможность выбора типа анонсера (xbt или php)\n[*]Удаление файлов torrent.php и torstatus.php и перенос их функций в ajax\n[*]Ajax цитирование, изменение, редактирование, удаление сообщений\n[/list]');
+INSERT INTO `bb_posts_text` VALUES (1, '[list]\n[*]Переделан поиск по топикам с выбором типа [none, mysql, sphinx] (только в tracker.php)\n[*]Удалены bbcode_uid и переход на class.bbcode\n[*]Изменён метод и способ кеширования (memcache, sqlite, db_sqlite, redis, eaccelerator, apc, xcache, filecache)\n[*]Изменён способ подключения к БД и отказ от глобальной переменной $db\n[*]Улучшенный дебагер\n[*]Полностью переписан и упрощен файл регистрации\n[*]Переписана капча (в том числе при быстром ответе у гостя)\n[*]Удаление файлов torrent.php и torstatus.php и перенос их функций в ajax\n[*]Ajax цитирование, изменение, редактирование, удаление сообщений\n[/list]');
 
 -- --------------------------------------------------------
 
@@ -1581,83 +1559,4 @@ CREATE TABLE IF NOT EXISTS `sph_counter` (
   `counter_id` int(11) NOT NULL,
   `max_doc_id` int(11) NOT NULL,
   PRIMARY KEY (`counter_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
-
--- --------------------------------------------------------
-
---
--- Структура таблицы `xbt_announce_log`
---
-
-CREATE TABLE IF NOT EXISTS `xbt_announce_log` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `ipa` int(10) unsigned NOT NULL DEFAULT '0',
-  `port` int(11) NOT NULL DEFAULT '0',
-  `event` int(11) NOT NULL DEFAULT '0',
-  `info_hash` blob NOT NULL,
-  `peer_id` blob NOT NULL,
-  `downloaded` bigint(20) NOT NULL DEFAULT '0',
-  `left0` bigint(20) NOT NULL DEFAULT '0',
-  `uploaded` bigint(20) NOT NULL DEFAULT '0',
-  `uid` int(11) NOT NULL DEFAULT '0',
-  `mtime` int(11) NOT NULL DEFAULT '0',
-  PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
-
--- --------------------------------------------------------
-
---
--- Структура таблицы `xbt_config`
---
-
-CREATE TABLE IF NOT EXISTS `xbt_config` (
-  `name` varchar(255) NOT NULL DEFAULT '',
-  `value` varchar(255) NOT NULL DEFAULT '',
-  PRIMARY KEY (`name`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
-
--- --------------------------------------------------------
-
---
--- Структура таблицы `xbt_deny_from_hosts`
---
-
-CREATE TABLE IF NOT EXISTS `xbt_deny_from_hosts` (
-  `begin` int(11) NOT NULL DEFAULT '0',
-  `end` int(11) NOT NULL DEFAULT '0'
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
-
--- --------------------------------------------------------
-
---
--- Структура таблицы `xbt_files_users`
---
-
-CREATE TABLE IF NOT EXISTS `xbt_files_users` (
-  `fid` int(11) NOT NULL DEFAULT '0',
-  `uid` int(11) NOT NULL DEFAULT '0',
-  `active` tinyint(4) NOT NULL DEFAULT '0',
-  `announced` int(11) NOT NULL DEFAULT '0',
-  `completed` int(11) NOT NULL DEFAULT '0',
-  `downloaded` bigint(20) NOT NULL DEFAULT '0',
-  `left` bigint(20) NOT NULL DEFAULT '0',
-  `uploaded` bigint(20) NOT NULL DEFAULT '0',
-  `mtime` int(11) NOT NULL DEFAULT '0',
-  UNIQUE KEY `fid` (`fid`,`uid`),
-  KEY `uid` (`uid`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
-
--- --------------------------------------------------------
-
---
--- Структура таблицы `xbt_scrape_log`
---
-
-CREATE TABLE IF NOT EXISTS `xbt_scrape_log` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `ipa` int(11) NOT NULL DEFAULT '0',
-  `info_hash` blob,
-  `uid` int(11) NOT NULL DEFAULT '0',
-  `mtime` int(11) NOT NULL DEFAULT '0',
-  PRIMARY KEY (`id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;

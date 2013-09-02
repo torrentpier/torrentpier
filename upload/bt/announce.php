@@ -4,13 +4,6 @@ define('IN_TRACKER', true);
 define('BB_ROOT', './../');
 require(BB_ROOT .'common.php');
 
-if($bb_cfg['announce_type'] == 'xbt')
-{
-	$url = $bb_cfg['announce_xbt'] . str_replace('/bt/announce.php', '/announce', $_SERVER['REQUEST_URI']);
-	header("Location: $url");
-	exit;
-}
-
 if (empty($_SERVER['HTTP_USER_AGENT']))
 {
 	header('Location: http://127.0.0.1', true, 301);

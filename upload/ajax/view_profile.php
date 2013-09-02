@@ -102,8 +102,7 @@ switch ($mode)
 
 					$compl_size = ($rowset[$i]['remain'] && $rowset[$i]['size'] && $rowset[$i]['size'] > $rowset[$i]['remain']) ? ($rowset[$i]['size'] - $rowset[$i]['remain']) : 0;
 
-					if($bb_cfg['announce_type'] == 'xbt') $compl_perc = $rowset[$i]['complete_percent'];
-					else $compl_perc = ($compl_size) ? floor($compl_size * 100 / $rowset[$i]['size']) : 0;
+					$compl_perc = ($compl_size) ? floor($compl_size * 100 / $rowset[$i]['size']) : 0;
 
 					$colspan = '';
 					$compl_perc_html = '<td class="tCenter med"><b>'. $compl_perc .'%</b></td>';

@@ -168,20 +168,6 @@ function delete_attachment($post_id_array = 0, $attach_id_array = 0, $page = 0, 
 		//bt
 		if ($sql_id == 'post_id')
 		{
-			// XBTT
-			if($bb_cfg['announce_type'] == 'xbt')
-			{
-				$sql = "INSERT INTO ". BB_BT_TORRENTS ."_del (topic_id, info_hash)
-					SELECT topic_id, info_hash
-					FROM ". BB_BT_TORRENTS ."
-					WHERE attach_id IN(". implode(',', $attach_id_array) .") ON DUPLICATE KEY UPDATE is_del=1";
-				if ( !(DB()->sql_query($sql)) )
-				{
-					message_die(GENERAL_ERROR, $lang['Error_deleted_attachments'], '', __LINE__, __FILE__, $sql);
-				}
-			}
-			// XBTT END.
-
 			$sql = "SELECT topic_id
 				FROM ". BB_BT_TORRENTS ."
 				WHERE attach_id IN(". implode(',', $attach_id_array) .")";

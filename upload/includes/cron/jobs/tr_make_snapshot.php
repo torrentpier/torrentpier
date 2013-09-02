@@ -64,39 +64,37 @@ DB()->query("
 
 DB()->query("DROP TABLE IF EXISTS ". NEW_BB_BT_TRACKER_SNAP .", ". OLD_BB_BT_TRACKER_SNAP);
 
-if($bb_cfg['announce_type'] != 'xbt')
+//
+// Make dl-list snapshot
+//
+define('NEW_BB_BT_DLSTATUS_SNAP', 'new_dlstatus_snap');
+define('OLD_BB_BT_DLSTATUS_SNAP', 'old_dlstatus_snap');
+
+DB()->query("DROP TABLE IF EXISTS ". NEW_BB_BT_DLSTATUS_SNAP .", ". OLD_BB_BT_DLSTATUS_SNAP);
+
+DB()->query("CREATE TABLE ". NEW_BB_BT_DLSTATUS_SNAP ." LIKE ". BB_BT_DLSTATUS_SNAP);
+
+if ($bb_cfg['bt_show_dl_list'] && $bb_cfg['bt_dl_list_only_count'])
 {
-	//
-	// Make dl-list snapshot
-	//
-	define('NEW_BB_BT_DLSTATUS_SNAP', 'new_dlstatus_snap');
-	define('OLD_BB_BT_DLSTATUS_SNAP', 'old_dlstatus_snap');
-
-	DB()->query("DROP TABLE IF EXISTS ". NEW_BB_BT_DLSTATUS_SNAP .", ". OLD_BB_BT_DLSTATUS_SNAP);
-
-	DB()->query("CREATE TABLE ". NEW_BB_BT_DLSTATUS_SNAP ." LIKE ". BB_BT_DLSTATUS_SNAP);
-
-	if ($bb_cfg['bt_show_dl_list'] && $bb_cfg['bt_dl_list_only_count'])
-	{
-		DB()->query("
-			INSERT INTO ". NEW_BB_BT_DLSTATUS_SNAP ."
-				(topic_id, dl_status, users_count)
-			SELECT
-				topic_id, user_status, COUNT(*)
-			FROM ". BB_BT_DLSTATUS ."
-			WHERE user_status != ". DL_STATUS_RELEASER ."
-			GROUP BY topic_id, user_status
-		");
-	}
-
 	DB()->query("
-		RENAME TABLE
-		". BB_BT_DLSTATUS_SNAP     ." TO ". OLD_BB_BT_DLSTATUS_SNAP .",
-		". NEW_BB_BT_DLSTATUS_SNAP ." TO ". BB_BT_DLSTATUS_SNAP ."
+		INSERT INTO ". NEW_BB_BT_DLSTATUS_SNAP ."
+			(topic_id, dl_status, users_count)
+		SELECT
+			topic_id, user_status, COUNT(*)
+		FROM ". BB_BT_DLSTATUS ."
+		WHERE user_status != ". DL_STATUS_RELEASER ."
+		GROUP BY topic_id, user_status
 	");
-
-	DB()->query("DROP TABLE IF EXISTS ". NEW_BB_BT_DLSTATUS_SNAP .", ". OLD_BB_BT_DLSTATUS_SNAP);
 }
+
+DB()->query("
+	RENAME TABLE
+	". BB_BT_DLSTATUS_SNAP     ." TO ". OLD_BB_BT_DLSTATUS_SNAP .",
+	". NEW_BB_BT_DLSTATUS_SNAP ." TO ". BB_BT_DLSTATUS_SNAP ."
+");
+
+DB()->query("DROP TABLE IF EXISTS ". NEW_BB_BT_DLSTATUS_SNAP .", ". OLD_BB_BT_DLSTATUS_SNAP);
+
 //
 // TORHELP
 //

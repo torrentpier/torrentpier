@@ -110,20 +110,6 @@ function tracker_unregister ($attach_id, $mode = '')
 		}
 	}
 
-	// XBTT
-	if ($bb_cfg['announce_type'] == 'xbt')
-	{
-		$sql = "INSERT INTO ". BB_BT_TORRENTS ."_del(topic_id, info_hash)
-			SELECT topic_id, info_hash
-			FROM ". BB_BT_TORRENTS ."
-			WHERE attach_id = $attach_id ON DUPLICATE KEY UPDATE is_del=1";
-
-		if (!DB()->sql_query($sql))
-		{
-			message_die(GENERAL_ERROR, 'Could not delete torrent from torrents table', '', __LINE__, __FILE__, $sql);
-		}
-	}
-
 	// Remove peers from tracker
 	$sql = "DELETE FROM ". BB_BT_TRACKER ." WHERE topic_id = $topic_id";
 
@@ -224,20 +210,6 @@ function change_tor_type ($attach_id, $tor_status_gold)
 	$topic_id = $torrent['topic_id'];
 	$tor_status_gold = intval($tor_status_gold);
 	DB()->query("UPDATE ". BB_BT_TORRENTS ." SET tor_type = $tor_status_gold WHERE topic_id = $topic_id LIMIT 1");
-
-	// XBTT
-	if ($bb_cfg['announce_type'] == 'xbt')
-	{
-		$sql = "SELECT CASE tor_type WHEN 1 THEN 0 WHEN 2 THEN 50 ELSE 100 END AS dl_percent, topic_id, info_hash FROM ". BB_BT_TORRENTS ." WHERE topic_id = $topic_id";
-		$result = DB()->query($sql);
-		$row = DB()->sql_fetchrow($result);
-		$sql = "INSERT INTO ". BB_BT_TORRENTS ."_del(is_del, topic_id,info_hash, dl_percent)
-			VALUES (0, " .$row['topic_id'] .", '". DB()->escape($row['info_hash']) ."', ". $row['dl_percent'] .") ON DUPLICATE KEY UPDATE dl_percent = values(dl_percent)";
-		if (!DB()->sql_query($sql))
-		{
-			message_die(GENERAL_ERROR, "Error delete_torrents", '', __LINE__, __FILE__, $sql);
-		}
-	}
 }
 
 function tracker_register ($attach_id, $mode = '', $tor_status = TOR_NOT_APPROVED)
@@ -548,17 +520,7 @@ function send_torrent_with_passkey ($filename)
 		message_die(GENERAL_ERROR, 'This is not a bencoded file');
 	}
 
-	// XBTT unique passkey
-	if ($bb_cfg['announce_type'] == 'xbt')
-	{
-		$info_hash = pack('H*', sha1(bencode($tor['info'])));
-		$passkey = substr('00000000'. dechex($userdata['user_id']), -8) . substr(sha1($bb_cfg['torrent_pass_private_key'] .' '. $passkey_val .' '. $userdata['user_id'] .' '. $info_hash), 0, 24);
-		$announce = $bb_cfg['announce_xbt'] .'/'. $passkey .'/announce';
-	}
-	else
-	{
-		$announce = strval($ann_url . "?$passkey_key=$passkey_val");
-	}
+	$announce = strval($ann_url . "?$passkey_key=$passkey_val");
 
 	// Replace original announce url with tracker default
 	if ($bb_cfg['bt_replace_ann_url'] || !@$tor['announce'])

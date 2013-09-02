@@ -55,8 +55,8 @@ $domain_name = (!empty($_SERVER['SERVER_NAME'])) ? $_SERVER['SERVER_NAME'] : $do
 
 // Increase number of revision after update
 $bb_cfg['tp_version'] = '2.5 (unstable)';
-$bb_cfg['tp_release_date'] = '30-08-2013';
-$bb_cfg['tp_release_state'] = 'R549';
+$bb_cfg['tp_release_date'] = '02-09-2013';
+$bb_cfg['tp_release_state'] = 'R551';
 
 // Database
 $charset  = 'utf8';
@@ -123,8 +123,6 @@ $bb_cfg['site_backup_shell_cmd']   = '';
 $bb_cfg['gzip_compress']      = true;              // compress output
 
 // Tracker
-$bb_cfg['announce_type']      = 'php';             // Тип анонсера, xbt или php
-$bb_cfg['announce_xbt']       = "http://{$domain_name}:2710";
 $bb_cfg['announce_interval']  = 2400;              // Announce interval (default: 1800)
 $bb_cfg['passkey_key']        = 'uk';              // Passkey key name in GET request
 $bb_cfg['ignore_reported_ip'] = false;             // Ignore IP reported by client

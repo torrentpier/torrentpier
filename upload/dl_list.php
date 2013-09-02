@@ -175,14 +175,7 @@ if ($topics_ary && ($mode == 'set_dl_status' || $mode == 'set_topics_dl_status')
 			AND topic_id IN(". join(',', $topics_ary) .")
 	");
 
-	if ($bb_cfg['announce_type'] == 'xbt')
-	{
-		DB()->query("REPLACE INTO ". BB_BT_DLSTATUS_MAIN ." $new_dlstatus_sql");
-	}
-	else
-	{
-		DB()->query("REPLACE INTO ". BB_BT_DLSTATUS_NEW ." $new_dlstatus_sql");
-	}
+	DB()->query("REPLACE INTO ". BB_BT_DLSTATUS_NEW ." $new_dlstatus_sql");
 
 	redirect("$redirect_type?$redirect");
 }

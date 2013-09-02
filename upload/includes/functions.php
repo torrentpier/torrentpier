@@ -2672,17 +2672,8 @@ function create_magnet($infohash, $auth_key, $logged_in)
 {
 	global $bb_cfg, $_GET, $userdata, $images;
 
-	if ($bb_cfg['announce_type'] == 'xbt')
-	{
-		$passkey = substr('00000000'. dechex($userdata['user_id']), -8) . substr(sha1($bb_cfg['torrent_pass_private_key'] .' '. $auth_key .' '. $userdata['user_id'] .' '. $infohash), 0, 24);
-		$announce = $bb_cfg['announce_xbt'] .'/'. $passkey .'/announce';
-		return '<a href="magnet:?xt=urn:btih:'. bin2hex($infohash) .'&tr='. urlencode($announce) .'"><img src="'. $images['icon_magnet'] .'" width="12" height="12" border="0" /></a>';
-	}
-	else
-	{
-		$passkey_url = ((!$logged_in || isset($_GET['no_passkey'])) && $bb_cfg['bt_tor_browse_only_reg']) ? '' : "?{$bb_cfg['passkey_key']}=$auth_key";
-		return '<a href="magnet:?xt=urn:btih:'. bin2hex($infohash) .'&tr='. urlencode($bb_cfg['bt_announce_url'] . $passkey_url) .'"><img src="'. $images['icon_magnet'] .'" width="12" height="12" border="0" /></a>';
-	}
+	$passkey_url = ((!$logged_in || isset($_GET['no_passkey'])) && $bb_cfg['bt_tor_browse_only_reg']) ? '' : "?{$bb_cfg['passkey_key']}=$auth_key";
+	return '<a href="magnet:?xt=urn:btih:'. bin2hex($infohash) .'&tr='. urlencode($bb_cfg['bt_announce_url'] . $passkey_url) .'"><img src="'. $images['icon_magnet'] .'" width="12" height="12" border="0" /></a>';
 }
 
 function get_avatar ($avatar, $type, $allow_avatar = true, $height = '', $width = '')
