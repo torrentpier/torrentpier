@@ -112,6 +112,14 @@ define('PEERS_LIST_PREFIX', 'peers_list_');
 define('PEER_HASH_EXPIRE',  round($bb_cfg['announce_interval'] * (0.85*$tr_cfg['expire_factor'])));  // sec
 define('PEERS_LIST_EXPIRE', round($bb_cfg['announce_interval'] * 0.7));  // sec
 
+if (!function_exists('sqlite_escape_string'))
+{
+	function sqlite_escape_string($string)
+	{
+		return SQLite3::escapeString($string);
+	}
+}
+
 class CACHES
 {
 	var $cfg = array();   // конфиг
@@ -524,7 +532,7 @@ class cache_sqlite extends cache_common
 	function gc ($expire_time = TIMENOW)
 	{
 		$result = $this->db->query("DELETE FROM ". $this->cfg['table_name'] ." WHERE cache_expire_time < $expire_time");
-		return ($result) ? sqlite_changes($this->db->dbh) : 0;
+		return ($result) ? $this->db->changes() : 0;
 	}
 }
 
@@ -555,24 +563,19 @@ class sqlite_common extends cache_common
 
 	function connect ()
 	{
-		$this->cur_query = ($this->dbg_enabled) ? ($this->cfg['pconnect'] ? 'p' : '') .'connect to: '. $this->cfg['db_file_path'] : 'connect';
+		$this->cur_query = ($this->dbg_enabled) ? 'connect to: '. $this->cfg['db_file_path'] : 'connect';
 		$this->debug('start');
 
-		$connect_type = ($this->cfg['pconnect']) ? 'sqlite_popen' : 'sqlite_open';
-
-		if ($this->cfg['shard_type'] != 'none' && $this->shard_val === false)
-		{
-			trigger_error("cannot shard: shard_val not defined for {$this->cfg['db_file_path']}", E_USER_ERROR);
-		}
-
-		if (@$this->dbh = $connect_type($this->cfg['db_file_path'], 0666, $sqlite_error))
+		if (@$this->dbh = new SQLite3($this->cfg['db_file_path']))
 		{
 			$this->connected = true;
 		}
 
+		if (DBG_LOG) dbg_log(' ', $this->cfg['log_name'] .'-connect'. ($this->connected ? '' : '-FAIL'));
+
 		if (!$this->connected && $this->cfg['con_required'])
 		{
-			trigger_error($sqlite_error, E_USER_ERROR);
+			trigger_error('SQLite not connected', E_USER_ERROR);
 		}
 
 		$this->debug('stop');
@@ -582,7 +585,7 @@ class sqlite_common extends cache_common
 	function create_table ()
 	{
 		$this->table_create_attempts++;
-		return sqlite_query($this->dbh, $this->cfg['table_schema']);
+		return $this->dbh->query($this->cfg['table_schema']);
 	}
 
 	function shard ($name)
@@ -624,13 +627,19 @@ class sqlite_common extends cache_common
 		$this->cur_query = $query;
 		$this->debug('start');
 
-		if (!$result = @sqlite_unbuffered_query($this->dbh, $query, SQLITE_ASSOC))
+		if (!$result = @$this->dbh->query($query))
 		{
-			if (!$this->table_create_attempts && !sqlite_num_rows(sqlite_query($this->dbh, "PRAGMA table_info({$this->cfg['table_name']})")))
+			$rowsresult = $this->dbh->query("PRAGMA table_info({$this->cfg['table_name']})");
+			$rowscount = 0;
+			while ($row = $rowsresult->fetchArray(SQLITE3_ASSOC))
+			{
+				$rowscount++;
+			}
+			if (!$this->table_create_attempts && !$rowscount)
 			{
 				if ($this->create_table())
 				{
-					$result = sqlite_unbuffered_query($this->dbh, $query, SQLITE_ASSOC);
+					$result = $this->dbh->query($query);
 				}
 			}
 			if (!$result)
@@ -650,18 +659,23 @@ class sqlite_common extends cache_common
 	function fetch_row ($query)
 	{
 		$result = $this->query($query);
-		return is_resource($result) ? sqlite_fetch_array($result, SQLITE_ASSOC) : false;
+		return is_resource($result) ? $result->fetchArray(SQLITE3_ASSOC) : false;
 	}
 
 	function fetch_rowset ($query)
 	{
 		$result = $this->query($query);
-		return is_resource($result) ? sqlite_fetch_all($result, SQLITE_ASSOC) : array();
+		$rowset = array();
+		while ($row = $result->fetchArray(SQLITE3_ASSOC))
+		{
+			$rowset[] = $row;
+		}
+		return $rowset;
 	}
 
 	function changes ()
 	{
-		return is_resource($this->dbh) ? sqlite_changes($this->dbh) : 0;
+		return is_resource($this->dbh) ? $this->dbh->changes() : 0;
 	}
 
 	function escape ($str)
@@ -671,7 +685,7 @@ class sqlite_common extends cache_common
 
 	function get_error_msg ()
 	{
-		return 'SQLite error #'. ($err_code = sqlite_last_error($this->dbh)) .': '. sqlite_error_string($err_code);
+		return 'SQLite error #'. ($err_code = $this->dbh->lastErrorCode()) .': '. $this->dbh->lastErrorMsg();
 	}
 
 	function rm ($name = '')
