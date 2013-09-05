@@ -47,7 +47,7 @@ switch ($field)
 		break;
 
 	case 'user_gender':
-	    if(!$bb_cfg['gender']) $this->ajax_die($lang['MODULE_OFF']);
+		if (!$bb_cfg['gender']) $this->ajax_die($lang['MODULE_OFF']);
 		if (!isset($lang['GENDER_SELECT'][$value]))
 		{
 			$this->ajax_die($lang['ERROR']);
@@ -56,19 +56,19 @@ switch ($field)
 		break;
 
 	case 'user_birthday':
-	    if(!$bb_cfg['birthday_enabled']) $this->ajax_die($lang['MODULE_OFF']);
-	    $data = explode('-', $value);
-	    $b_day  = (isset($data[2])) ? (int) $data[2] : '';
+		if (!$bb_cfg['birthday_enabled']) $this->ajax_die($lang['MODULE_OFF']);
+		$data = explode('-', $value);
+		$b_day  = (isset($data[2])) ? (int) $data[2] : '';
 		$b_md   = (isset($data[1])) ? (int) $data[1] : '';
 		$b_year = (isset($data[0])) ? (int) $data[0] : '';
 
-		if($b_day || $b_md || $b_year)
+		if ($b_day || $b_md || $b_year)
 		{
-			if((bb_date(TIMENOW, 'Y', 'false') - $b_year) > $bb_cfg['birthday_max_age'])
+			if ((bb_date(TIMENOW, 'Y', 'false') - $b_year) > $bb_cfg['birthday_max_age'])
 			{
 				$this->ajax_die(sprintf($lang['BIRTHDAY_TO_HIGH'], $bb_cfg['birthday_max_age']));
 			}
-            else if((bb_date(TIMENOW, 'Y', 'false') - $b_year) < $bb_cfg['birthday_min_age'])
+			else if ((bb_date(TIMENOW, 'Y', 'false') - $b_year) < $bb_cfg['birthday_min_age'])
 			{
 				$this->ajax_die(sprintf($lang['BIRTHDAY_TO_LOW'], $bb_cfg['birthday_min_age']));
 			}
@@ -84,30 +84,30 @@ switch ($field)
 		}
 		else
 		{
-		    $value = '';
-		    $next_birthday_greeting = 0;
+			$value = '';
+			$next_birthday_greeting = 0;
 		}
 		DB()->query("UPDATE $table SET user_next_birthday_greeting = $next_birthday_greeting WHERE user_id = $user_id LIMIT 1");
 
-	    $this->response['new_value']  = $this->request['value'];
+		$this->response['new_value']  = $this->request['value'];
 		break;
 
-    case 'user_icq':
+	case 'user_icq':
 		$value = (int) $value;
 		if ($value && !preg_match('#^\d{6,15}$#', $value))
 		{
 			$this->ajax_die($lang['ICQ_ERROR']);
 		}
 		$this->response['new_value'] = $this->request['value'];
-	    break;
+		break;
 
-    case 'user_skype':
+	case 'user_skype':
 		if ($value && !preg_match("#^[a-zA-Z0-9_.\-@,]{6,32}$#", $value))
 		{
 			$this->ajax_die($lang['SKYPE_ERROR']);
 		}
 		$this->response['new_value'] = $this->request['value'];
-	    break;
+		break;
 
 	case 'user_from':
 	case 'user_occ':
@@ -162,7 +162,7 @@ switch ($field)
 		$value = (float) str_replace(',', '.', $this->request['value']);
 		$value = sprintf('%.2f', $value);
 		$this->response['new_value'] = $value;
-        break;
+		break;
 
 	default:
 		$this->ajax_die("invalid profile field: $field");

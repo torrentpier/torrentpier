@@ -30,8 +30,8 @@ class emailer
 		global $bb_cfg;
 
 		$this->vars = array(
-			'SITENAME'    => $bb_cfg['sitename'],
 			'BOARD_EMAIL' => $bb_cfg['board_email'],
+			'SITENAME'    => $bb_cfg['board_email_sitename'],
 			'EMAIL_SIG'   => !empty($bb_cfg['board_email_sig']) ? "-- \n{$bb_cfg['board_email_sig']}" : '',
 		);
 	}

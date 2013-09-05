@@ -233,8 +233,6 @@ $lang['ABILITIES_SETTINGS'] = 'User and Forum Basic Settings';
 $lang['MAX_POLL_OPTIONS'] = 'Max number of poll options';
 $lang['FLOOD_INTERVAL'] = 'Flood Interval';
 $lang['FLOOD_INTERVAL_EXPLAIN'] = 'Number of seconds a user must wait between posts';
-$lang['BOARD_EMAIL_FORM'] = 'User email via board';
-$lang['BOARD_EMAIL_FORM_EXPLAIN'] = 'Users send email to each other via this board';
 $lang['TOPICS_PER_PAGE'] = 'Topics Per Page';
 $lang['POSTS_PER_PAGE'] = 'Posts Per Page';
 $lang['HOT_THRESHOLD'] = 'Posts for Popular Threshold';
@@ -266,16 +264,6 @@ $lang['AVATAR_GALLERY_PATH'] = 'Avatar Gallery Path';
 $lang['AVATAR_GALLERY_PATH_EXPLAIN'] = 'Path under your phpBB root dir for pre-loaded images, e.g. images/avatars/gallery';
 
 $lang['EMAIL_SETTINGS'] = 'Email Settings';
-$lang['ADMIN_EMAIL'] = 'Admin Email Address';
-$lang['EMAIL_SIG'] = 'Email Signature';
-$lang['EMAIL_SIG_EXPLAIN'] = 'This text will be attached to all emails the board sends';
-$lang['USE_SMTP'] = 'Use SMTP Server for email';
-$lang['USE_SMTP_EXPLAIN'] = 'Say yes if you want or have to send email via a named server instead of the local mail function';
-$lang['SMTP_SERVER'] = 'SMTP Server Address';
-$lang['SMTP_USERNAME'] = 'SMTP Username';
-$lang['SMTP_USERNAME_EXPLAIN'] = 'Only enter a username if your SMTP server requires it';
-$lang['SMTP_PASSWORD'] = 'SMTP Password';
-$lang['SMTP_PASSWORD_EXPLAIN'] = 'Only enter a password if your SMTP server requires it';
 
 $lang['DISABLE_PRIVMSG'] = 'Private Messaging';
 $lang['INBOX_LIMITS'] = 'Max posts in Inbox';

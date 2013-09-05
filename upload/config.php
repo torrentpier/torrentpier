@@ -55,8 +55,8 @@ $domain_name = (!empty($_SERVER['SERVER_NAME'])) ? $_SERVER['SERVER_NAME'] : $do
 
 // Increase number of revision after update
 $bb_cfg['tp_version'] = '2.5 (unstable)';
-$bb_cfg['tp_release_date'] = '02-09-2013';
-$bb_cfg['tp_release_state'] = 'R551';
+$bb_cfg['tp_release_date'] = '05-09-2013';
+$bb_cfg['tp_release_state'] = 'R552';
 
 // Database
 $charset  = 'utf8';
@@ -305,13 +305,15 @@ $bb_cfg['new_user_reg_restricted'] = false;
 // Email
 $bb_cfg['emailer_disabled']        = false;
 
-$bb_cfg['smtp_host']               = '';
-$bb_cfg['smtp_password']           = '';
-$bb_cfg['smtp_username']           = '';
+$bb_cfg['smtp_delivery']           = false; // set true if you want or have to send email via a named server instead of the local mail function
+$bb_cfg['smtp_host']               = '';    // SMTP server host
+$bb_cfg['smtp_password']           = '';    // enter a password if your SMTP server requires it
+$bb_cfg['smtp_username']           = '';    // enter a username if your SMTP server requires it
 
-$bb_cfg['board_email']             = 'admin@' . $domain_name;
-$bb_cfg['board_email_sig']         = '';
-$bb_cfg['sitename']                = $domain_name;
+$bb_cfg['board_email']             = 'noreply@' . $domain_name; // admin email address
+$bb_cfg['board_email_form']        = false;        // can users send email to each other via board
+$bb_cfg['board_email_sig']         = '';           // this text will be attached to all emails the board sends
+$bb_cfg['board_email_sitename']    = $domain_name; // sitename used in all emails header
 
 $bb_cfg['topic_notify_enabled']    = true;
 $bb_cfg['pm_notify_enabled']       = true;

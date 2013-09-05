@@ -54,13 +54,6 @@
 	</td>
 </tr>
 <tr>
-	<td><h4>{L_BOARD_EMAIL_FORM}</h4><h6>{L_BOARD_EMAIL_FORM_EXPLAIN}</h6></td>
-	<td>
-	    <label><input type="radio" name="board_email_form" value="1" <!-- IF BOARD_EMAIL_FORM -->checked="checked"<!-- ENDIF --> /> {L_ENABLED}</label>&nbsp;&nbsp;
-		<label><input type="radio" name="board_email_form" value="0" <!-- IF not BOARD_EMAIL_FORM -->checked="checked"<!-- ENDIF --> /> {L_DISABLED}</label>
-	</td>
-</tr>
-<tr>
 	<td><h4>{L_FLOOD_INTERVAL}</h4><h6>{L_FLOOD_INTERVAL_EXPLAIN}</h6></td>
 	<td>
 	    <input class="post" type="text" size="3" maxlength="4" name="flood_interval" value="{FLOOD_INTERVAL}" /> {L_SEC}
@@ -225,34 +218,12 @@
 	<td><input class="post" type="text" size="35" maxlength="255" name="no_avatar" value="{NO_AVATAR}" /></td>
 </tr>
 <tr>
-	<th colspan="2">{L_EMAIL_SETTINGS}</th>
+    <th colspan="2">{L_EMAIL_SETTINGS}</th>
 </tr>
 <tr>
-	<td><h4>{L_ADMIN_EMAIL}</h4></td>
-	<td><input class="post" type="text" size="25" maxlength="100" name="board_email" value="{EMAIL_FROM}" /></td>
-</tr>
-<tr>
-	<td><h4>{L_EMAIL_SIG}</h4><h6>{L_EMAIL_SIG_EXPLAIN}</h6></td>
-	<td><textarea name="board_email_sig" rows="5" cols="30">{EMAIL_SIG}</textarea></td>
-</tr>
-<tr>
-	<td><h4>{L_USE_SMTP}</h4><h6>{L_USE_SMTP_EXPLAIN}</h6></td>
-	<td>
-	    <label><input type="radio" name="smtp_delivery" value="1" <!-- IF SMTP_DELIVERY -->checked="checked"<!-- ENDIF --> />{L_YES}</label>&nbsp;&nbsp;
-		<label><input type="radio" name="smtp_delivery" value="0" <!-- IF not SMTP_DELIVERY -->checked="checked"<!-- ENDIF --> />{L_NO}</label>
-	</td>
-</tr>
-<tr>
-	<td><h4>{L_SMTP_SERVER}</h4></td>
-	<td><input class="post" type="text" name="smtp_host" value="{SMTP_HOST}" size="25" maxlength="50" /></td>
-</tr>
-<tr>
-	<td><h4>{L_SMTP_USERNAME}</h4><h6>{L_SMTP_USERNAME_EXPLAIN}</h6></td>
-	<td><input class="post" type="text" name="smtp_username" value="{SMTP_USERNAME}" size="25" maxlength="255" /></td>
-</tr>
-<tr>
-	<td><h4>{L_SMTP_PASSWORD}</h4><h6>{L_SMTP_PASSWORD_EXPLAIN}</h6></td>
-	<td><input class="post" type="password" name="smtp_password" value="{SMTP_PASSWORD}" size="25" maxlength="255" /></td>
+    <td colspan="2" class="pad_0 tCenter">
+        <p class="warnColor1 warnBorder1 pad_10">Changes disabled (see <b>Email section</b> in config.php)</p>
+    </td>
 </tr>
 
 <!-- ENDIF / CONFIG -->
