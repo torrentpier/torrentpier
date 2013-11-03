@@ -697,9 +697,9 @@ else
 				bb_die($lang['NO_SEARCH_MATCH']);
 			}
 
-            $where_id = ($title_match) ? 'topic_id' : 'post_id';
+            $where_id = ($title_match) ? 't.topic_id' : 'p.post_id';
 
-			$SQL['WHERE'][] = "$tbl.$where_id IN($search_match_topics_csv)";
+			$SQL['WHERE'][] = "$where_id IN($search_match_topics_csv)";
 			prevent_huge_searches($SQL);
 		}
 
