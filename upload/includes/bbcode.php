@@ -107,7 +107,7 @@ function generate_smilies($mode)
 		$user->session_start();
 	}
 
-    $data = $datastore->get('smile_replacements');
+	$data = $datastore->get('smile_replacements');
 
 	if ($sql = $data['smile'])
 	{

@@ -22,37 +22,37 @@ $data['topiccount'] = number_format($row['topiccount']);
 // Tracker stats
 if ($bb_cfg['tor_stats'])
 {
-    // torrents stat
-    $row = DB()->fetch_row("SELECT COUNT(topic_id) AS torrentcount, SUM(size) AS size FROM ". BB_BT_TORRENTS);
-    $data['torrentcount'] = number_format($row['torrentcount']);
-    $data['size'] = $row['size'];
+	// torrents stat
+	$row = DB()->fetch_row("SELECT COUNT(topic_id) AS torrentcount, SUM(size) AS size FROM ". BB_BT_TORRENTS);
+	$data['torrentcount'] = number_format($row['torrentcount']);
+	$data['size'] = $row['size'];
 
-    // peers stat
-    $row = DB()->fetch_row("SELECT SUM(seeders) AS seeders, SUM(leechers) AS leechers, ((SUM(speed_up) + SUM(speed_down))/2) AS speed FROM ". BB_BT_TRACKER_SNAP);
-    $data['seeders']  = number_format($row['seeders']);
-    $data['leechers'] = number_format($row['leechers']);
-    $data['peers']    = number_format($row['seeders'] + $row['leechers']);
-    $data['speed']    = $row['speed'];
+	// peers stat
+	$row = DB()->fetch_row("SELECT SUM(seeders) AS seeders, SUM(leechers) AS leechers, ((SUM(speed_up) + SUM(speed_down))/2) AS speed FROM ". BB_BT_TRACKER_SNAP);
+	$data['seeders']  = number_format($row['seeders']);
+	$data['leechers'] = number_format($row['leechers']);
+	$data['peers']    = number_format($row['seeders'] + $row['leechers']);
+	$data['speed']    = $row['speed'];
 }
 
 // gender stat
 if ($bb_cfg['gender'])
 {
-    $sql = DB()->fetch_rowset("SELECT user_gender FROM ". BB_USERS ." WHERE user_id NOT IN(". EXCLUDED_USERS_CSV .")");
-    $data['male'] = $data['female'] = $data['unselect'] = 0;
+	$sql = DB()->fetch_rowset("SELECT user_gender FROM ". BB_USERS ." WHERE user_id NOT IN(". EXCLUDED_USERS_CSV .")");
+	$data['male'] = $data['female'] = $data['unselect'] = 0;
 
-	foreach($sql as $row)
-    {
-	    if($row['user_gender'] == MALE) $data['male']++;
-	    if($row['user_gender'] == FEMALE) $data['female']++;
-	    if(!$row['user_gender']) $data['unselect']++;
-    }
+	foreach ($sql as $row)
+	{
+		if($row['user_gender'] == MALE) $data['male']++;
+		if($row['user_gender'] == FEMALE) $data['female']++;
+		if(!$row['user_gender']) $data['unselect']++;
+	}
 }
 
 // birthday stat
 if ($bb_cfg['birthday_check_day'] && $bb_cfg['birthday_enabled'])
 {
-	$sql = DB()->fetch_rowset("SELECT user_id, username, user_birthday, user_rank FROM ". BB_USERS ." WHERE user_id NOT IN(". EXCLUDED_USERS_CSV .") AND user_birthday IS NOT NULL ORDER BY user_level DESC, username");
+	$sql = DB()->fetch_rowset("SELECT user_id, username, user_birthday, user_rank FROM ". BB_USERS ." WHERE user_id NOT IN(". EXCLUDED_USERS_CSV .") AND user_birthday != '0000-00-00' AND user_active = 1 ORDER BY user_level DESC, username");
 	$this_year = bb_date(TIMENOW, 'Y', 'false');
 	$date_today = bb_date(TIMENOW, 'Ymd', 'false');
 	$date_forward = bb_date(TIMENOW + ($bb_cfg['birthday_check_day']*86400), 'Ymd', 'false');
@@ -89,7 +89,7 @@ if ($bb_cfg['birthday_check_day'] && $bb_cfg['birthday_enabled'])
 	}
 
 	$data['birthday_today_list'] = $birthday_today_list;
-    $data['birthday_week_list']  = $birthday_week_list;
+	$data['birthday_week_list']  = $birthday_week_list;
 }
 
 $this->store('stats', $data);

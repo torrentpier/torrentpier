@@ -13,4 +13,3 @@ $command = "$interpreter $prog_path $prog_args";
 exec($command);
 echo '<HTML><BODY onload="javascript:self.close()"></BODY></HTML>';
 exit;
-

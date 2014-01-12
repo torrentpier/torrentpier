@@ -147,7 +147,7 @@ define('USER_ACTIVATION_ADMIN', 2);
 
 define('USER_AVATAR_NONE',    0);
 define('USER_AVATAR_UPLOAD',  1);
-define('USER_AVATAR_REMOTE',  2); // не ипользуется
+define('USER_AVATAR_REMOTE',  2); // не используется
 define('USER_AVATAR_GALLERY', 3);
 
 // Group settings

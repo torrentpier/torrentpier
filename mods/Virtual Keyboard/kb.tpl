@@ -24,20 +24,20 @@ var l_letter=new Array('`','1','2','3','4','5','6','7','8','9','0','-','=','q','
 		<b>{L_KB_TITLE}</b>
 		<div id="kb_rules" class="small" style="{S_VISIBILITY_RULES}">
 			<script>if(isMOZ||isIE)document.write("{L_KB_RUS_KEYLAYOUT}<select name='decflag' onchange='document.post.message.focus();' style='font-size:10px;position:relative;top:2px'><option value=0>{L_KB_NONE}<option value=1>{L_KB_TRANSLIT}<option value=2 selected>{L_KB_TRADITIONAL}</select><br />");</script>
-			<span class="a" onclick="javascript:translit();">{L_KB_TRANSLIT}</span><br />
-			<span class="a" onclick="javascript:kb_rules();">{L_KB_RULES}</span><br />
-			<span class="a" onclick="javascript:kb_close();">{L_HIDE}</span>
+			<span class="a" onclick="translit();">{L_KB_TRANSLIT}</span><br />
+			<span class="a" onclick="kb_rules();">{L_KB_RULES}</span><br />
+			<span class="a" onclick="kb_close();">{L_HIDE}</span>
 		</div>
 	</td>
 
 	<td class="row2">
-		<div id="kb_off" style="{S_VISIBILITY_OFF}"><span class="a" onclick="javascript:kb_show();">{L_KB_SHOW}</span></div>
+		<div id="kb_off" style="{S_VISIBILITY_OFF}"><span class="a" onclick="kb_show();">{L_KB_SHOW}</span></div>
 
 		<div id="kb_trules" style="{S_VISIBILITY_KEYB}">
 		<table class="borderless">
 		<tr>
 			<td nowrap="nowrap" colspan="10"><b>{L_KB_RULES}</b></td>
-			<td colspan="2" class="small"><span class="a" onclick="javascript:kb_rules();">{L_KB_CLOSE}</span></td>
+			<td colspan="2" class="small"><span class="a" onclick="kb_rules();">{L_KB_CLOSE}</span></td>
 		</tr>
 		<tr valign="top">
 			<td nowrap="nowrap"><b>&#1072; <br>&#1073; <br>&#1074; <br>&#1075; <br>&#1076; <br>&#1077; </b></td>
