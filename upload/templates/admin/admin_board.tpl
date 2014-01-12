@@ -362,32 +362,6 @@
 </tr>
 
 <tr class="row3 med">
-	<td class="bold tCenter" colspan="2">{L_GALLERY}</td>
-</tr>
-<tr>
-	<td><h4>{L_GALLERY}</h4></td>
-	<td>
-	    <label><input type="radio" name="gallery_enabled" value="1" <!-- IF GALLERY_ENABLED -->checked="checked"<!-- ENDIF --> />{L_ENABLED}</label>&nbsp;&nbsp;
-		<label><input type="radio" name="gallery_enabled" value="0" <!-- IF not GALLERY_ENABLED -->checked="checked"<!-- ENDIF --> />{L_DISABLED}</label>
-	</td>
-</tr>
-<tr>
-	<td><h4>{L_PIC_GALLERY}</h4></td>
-	<td><input class="post" type="text" size="25" maxlength="100" name="pic_dir" value="{PIC_DIR}" /></td>
-</tr>
-<tr>
-	<td><h4>{L_PIC_SIZE}</h4></td>
-	<td><input class="post" type="text" size="25" maxlength="100" name="pic_max_size" value="{PIC_MAX_SIZE}" />&nbsp;{L_MB}</td>
-</tr>
-<tr>
-	<td><h4>{L_AUTO_DELETE_POSTED_PICS}</h4></td>
-	<td>
-	    <label><input type="radio" name="auto_delete_posted_pics" value="1" <!-- IF AUTO_DELETE_POSTED_PICS -->checked="checked"<!-- ENDIF --> />{L_ENABLED}</label>&nbsp;&nbsp;
-		<label><input type="radio" name="auto_delete_posted_pics" value="0" <!-- IF not AUTO_DELETE_POSTED_PICS -->checked="checked"<!-- ENDIF --> />{L_DISABLED}</label>
-	</td>
-</tr>
-
-<tr class="row3 med">
 	<td class="bold tCenter" colspan="2">{L_BIRTHDAY}</td>
 </tr>
 <tr>

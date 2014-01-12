@@ -293,36 +293,6 @@ function topic_delete ($mode_or_topic_id, $forum_id = null, $prune_time = 0, $pr
 		LEFT JOIN ". BB_VOTE_USERS   ." vu USING(vote_id)
 	");
 
-	if ($bb_cfg['auto_delete_posted_pics'])
-	{
-		$result = DB()->sql_query("
-			SELECT ph.post_id, ph.post_html
-			FROM $tmp_delete_topics tmp
-			LEFT JOIN ". BB_POSTS ." p USING(topic_id)
-			LEFT JOIN ". BB_POSTS_HTML ." ph ON(p.post_id = ph.post_id)
-		");
-
-		while ( $post = DB()->sql_fetchrow($result) )
-		{
-			preg_match_all('#<var.*?title="(.*?)"#', $post['post_html'], $matches, PREG_SET_ORDER);
-
-			foreach($matches as $match)
-			{
-				$have = DB()->fetch_row("
-					SELECT post_id
-					FROM ". BB_POSTS_HTML ."
-					WHERE post_html LIKE '%". DB()->escape($match[1]). "%'
-						AND post_id != {$post['post_id']}
-				");
-
-				if(empty($have))
-				{
-					@unlink(BB_ROOT . $bb_cfg['pic_dir'] . end(explode('/', $match[1])));
-				}
-			}
-		}
-	}
-
 	// Delete attachments (from disk)
 	$attach_dir = get_attachments_dir();
 
@@ -672,35 +642,6 @@ function post_delete ($mode_or_post_id, $user_id = null, $exclude_first = true)
 	{
 		DB()->query("DROP TEMPORARY TABLE $tmp_delete_posts");
 		return 0;
-	}
-
-	if ($bb_cfg['auto_delete_posted_pics'])
-	{
-		$result = DB()->sql_query("
-			SELECT ph.post_id, ph.post_html
-			FROM $tmp_delete_posts tmp
-			LEFT JOIN ". BB_POSTS_HTML ." ph USING(post_id)
-		");
-
-		while ( $post = DB()->sql_fetchrow($result) )
-		{
-			preg_match_all('#<var.*?title="(.*?)"#', $post['post_html'], $matches, PREG_SET_ORDER);
-
-			foreach($matches as $match)
-			{
-				$have = DB()->fetch_row("
-					SELECT post_id
-					FROM ". BB_POSTS_HTML ."
-					WHERE post_html LIKE '%". DB()->escape($match[1]). "%'
-						AND post_id != {$post['post_id']}
-				");
-
-				if(empty($have))
-				{
-					@unlink(BB_ROOT . $bb_cfg['pic_dir']. end(explode('/', $match[1])));
-				}
-			}
-		}
 	}
 
 	// Delete attachments (from disk)

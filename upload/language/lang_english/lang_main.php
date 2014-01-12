@@ -476,8 +476,6 @@ $lang['CANNOT_SEND_PRIVMSG'] = 'Sorry, but the administrator has prevented you f
 $lang['NO_TO_USER'] = 'You must specify a username to whom to send this message.';
 $lang['NO_SUCH_USER'] = 'Sorry, but no such user exists.';
 
-$lang['GALLERY_DISABLE'] = 'Gallery disable';
-
 $lang['DISABLE_BBCODE_PM'] = 'Disable BBCode in this message';
 $lang['DISABLE_SMILIES_PM'] = 'Disable Smilies in this message';
 
@@ -1379,7 +1377,6 @@ $lang['BONUS_NOT_SUCCES'] = '<span class="leech">You do not have bonuses availab
 $lang['BONUS_RETURN'] = 'Return to the Seed Exchange Bonus';
 
 $lang['TRACKER'] = 'Tracker';
-$lang['GALLERY'] = 'Gallery';
 $lang['OPEN_TOPICS'] = 'Open topics';
 $lang['OPEN_IN_SAME_WINDOW'] = 'open in same window';
 $lang['SHOW_TIME_TOPICS'] = 'show time of the creation topics';

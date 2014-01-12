@@ -169,7 +169,6 @@ else $report_list = '';
 $template->assign_vars(array(
 	'SEO_LINK_INDEX_PAGE' 			=>	seo_link_header('index'),
 	'SEO_LINK_TRACKER_PAGE' 		=>	seo_link_header('tracker'),
-	'SEO_LINK_GALLERY_PAGE' 		=>	seo_link_header('gallery'),
 	'SEO_LINK_SEARCH_PAGE' 			=>	seo_link_header('search'),
 	'SEO_LINK_FAQ_PAGE' 			=>	seo_link_header('faq'),
 	'SEO_LINK_GROUP_PAGE' 			=>	seo_link_header('groupcp'),
@@ -243,7 +242,6 @@ $template->assign_vars(array(
 	'U_SEND_PASSWORD'    		=> "profile.php?mode=sendpassword",
 	'U_TERMS'            		=> $bb_cfg['terms_and_conditions_url'],
 	'U_TRACKER'          		=> "tracker.php",
-	'U_GALLERY'          		=> "gallery.php",
 
 	'SHOW_SIDEBAR1'      		=> (!empty($page_cfg['show_sidebar1'][BB_SCRIPT]) || $bb_cfg['show_sidebar1_on_every_page']),
 	'SHOW_SIDEBAR2'      		=> (!empty($page_cfg['show_sidebar2'][BB_SCRIPT]) || $bb_cfg['show_sidebar2_on_every_page']),

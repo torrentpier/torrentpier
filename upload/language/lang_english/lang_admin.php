@@ -651,9 +651,6 @@ $lang['NEWS_FORUM_ID'] = 'From what forums to display <br /> <h6>Of the several 
 $lang['NOAVATAR'] = 'No avatar';
 $lang['TRACKER_STATS'] = 'Statistics on the tracker';
 $lang['WHOIS_INFO'] = 'Information about IP address';
-$lang['PIC_GALLERY'] = 'Directory for the images';
-$lang['PIC_SIZE'] = 'The maximum size of images';
-$lang['AUTO_DELETE_POSTED_PICS'] = 'Delete Images hosted in remote positions';
 $lang['SHOW_MOD_HOME_PAGE'] = 'Show on moderators the index.php';
 $lang['PREMOD_HELP'] = '<h4><span class="tor-icon tor-dup">&#8719;</span> Pre-moderation</h4> <h6>If you do not have distributions to the status of v, #, or T in this section, including subsections, the distribution will automatically receive this status</h6>';
 $lang['TOR_COMMENT'] = '<h4>Commentary on the status of distribution</h4> <h6>Comment successfully allows you to specify releasers mistakes. When nedooformlennyh statuses releasers available form of the response of the correction release</h6>';

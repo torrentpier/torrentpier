@@ -376,7 +376,6 @@ if (top != self) {
 		<td class="nowrap">
 			<!-- IF SEO_LINK_INDEX_PAGE --><a href="{U_INDEX}"><!-- ENDIF --><b>{L_HOME}</b><!-- IF SEO_LINK_INDEX_PAGE --></a><!-- ENDIF --><span style="color:#CDCDCD;">|</span>
 			<!-- IF SEO_LINK_TRACKER_PAGE --><a href="{U_TRACKER}"><!-- ENDIF --><b>{L_TRACKER}</b><!-- IF SEO_LINK_TRACKER_PAGE --></a><!-- ENDIF --><span style="color:#CDCDCD;">|</span>
-			<!-- IF LOGGED_IN && $bb_cfg['gallery_enabled'] --><!-- IF SEO_LINK_GALLERY_PAGE --><a href="{U_GALLERY}"><!-- ENDIF --><b>{L_GALLERY}</b><!-- IF SEO_LINK_GALLERY_PAGE --></a><!-- ENDIF --><span style="color:#CDCDCD;">|</span><!-- ENDIF -->
 			<!-- IF SEO_LINK_SEARCH_PAGE --><a href="{U_SEARCH}"><!-- ENDIF --><b>{L_SEARCH}</b><!-- IF SEO_LINK_SEARCH_PAGE --></a><!-- ENDIF --><span style="color:#CDCDCD;">|</span>
 			<a href="{U_TERMS}"><b>{L_TERMS}</b></a><span style="color:#CDCDCD;">|</span>
 			<!-- IF SEO_LINK_FAQ_PAGE --><a href="{U_FAQ}"><!-- ENDIF --><b style="color: #993300; cursor: help;">{L_FAQ}</b><!-- IF SEO_LINK_FAQ_PAGE --></a><!-- ENDIF --><span style="color:#CDCDCD;">|</span>
