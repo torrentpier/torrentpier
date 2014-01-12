@@ -251,8 +251,6 @@ $lang['ALLOW_NAME_CHANGE'] = 'Allow Username changes';
 
 $lang['AVATAR_SETTINGS'] = 'Avatar Settings';
 $lang['ALLOW_LOCAL'] = 'Enable gallery avatars';
-$lang['ALLOW_REMOTE'] = 'Enable remote avatars';
-$lang['ALLOW_REMOTE_EXPLAIN'] = 'Avatars linked to from another website';
 $lang['ALLOW_UPLOAD'] = 'Enable avatar uploading';
 $lang['MAX_FILESIZE'] = 'Maximum Avatar File Size';
 $lang['MAX_FILESIZE_EXPLAIN'] = 'For uploaded avatar files';

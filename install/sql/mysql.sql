@@ -542,7 +542,6 @@ CREATE TABLE IF NOT EXISTS `bb_config` (
 
 INSERT INTO `bb_config` VALUES ('allow_autologin', '1');
 INSERT INTO `bb_config` VALUES ('allow_avatar_local', '1');
-INSERT INTO `bb_config` VALUES ('allow_avatar_remote', '0');
 INSERT INTO `bb_config` VALUES ('allow_avatar_upload', '1');
 INSERT INTO `bb_config` VALUES ('allow_bbcode', '1');
 INSERT INTO `bb_config` VALUES ('allow_namechange', '0');

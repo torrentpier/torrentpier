@@ -176,7 +176,6 @@ switch($mode)
 			'SIG_SIZE' => $new['max_sig_chars'],
 			'ALLOW_NAMECHANGE' => ($new['allow_namechange']) ? true : false,
 			'ALLOW_AVATARS_LOCAL' => ($new['allow_avatar_local']) ? true : false,
-			'ALLOW_AVATAR_REMOTE' => ($new['allow_avatar_remote']) ? true : false,
 			'ALLOW_AVATAR_UPLOAD' => ($new['allow_avatar_upload']) ? true : false,
 			'AVATAR_FILESIZE' => $new['avatar_filesize'],
 			'AVATAR_MAX_HEIGHT' => $new['avatar_max_height'],

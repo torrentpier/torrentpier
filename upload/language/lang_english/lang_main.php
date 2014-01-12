@@ -556,7 +556,6 @@ $lang['ONLY_ONE_AVATAR'] = 'Only one type of avatar can be specified';
 $lang['FILE_NO_DATA'] = 'The file at the URL you gave contains no data';
 $lang['NO_CONNECTION_URL'] = 'A connection could not be made to the URL you gave';
 $lang['INCOMPLETE_URL'] = 'The URL you entered is incomplete';
-$lang['WRONG_REMOTE_AVATAR_FORMAT'] = 'The URL of the remote avatar is not valid';
 $lang['NO_SEND_ACCOUNT_INACTIVE'] = 'Sorry, but your password cannot be retrieved because your account is currently inactive';
 $lang['NO_SEND_ACCOUNT'] = 'Sorry, but your password cannot be retrieved. Please contact the forum administrator for more information';
 
@@ -615,12 +614,7 @@ $lang['RESET_AUTOLOGIN_EXPL'] = '';
 $lang['AVATAR'] = 'Avatar';
 $lang['AVATAR_EXPLAIN'] = 'Displays a small graphic image below your details in posts. Only one image can be displayed at a time, its width can be no greater than %d pixels, the height no greater than %d pixels, and the file size no more than %d KB.';
 $lang['UPLOAD_AVATAR_FILE'] = 'Upload Avatar from your machine';
-$lang['UPLOAD_AVATAR_URL'] = 'Upload Avatar from a URL';
-$lang['UPLOAD_AVATAR_URL_EXPLAIN'] = 'Enter the URL of the location containing the Avatar image, it will be copied to this site.';
 $lang['PICK_LOCAL_AVATAR'] = 'Select Avatar from the gallery';
-$lang['LINK_REMOTE_AVATAR'] = 'Link to off-site Avatar';
-$lang['LINK_REMOTE_AVATAR_EXPLAIN'] = 'Enter the URL of the location containing the Avatar image you wish to link to.';
-$lang['AVATAR_URL'] = 'URL of Avatar Image';
 $lang['SELECT_FROM_GALLERY'] = 'Select Avatar from gallery';
 $lang['VIEW_AVATAR_GALLERY'] = 'Show gallery';
 

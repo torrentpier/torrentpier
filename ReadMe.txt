@@ -30,7 +30,6 @@
 - images/ranks
 - images/smiles
 - log
-- pictures
 - triggers
 
 ************************************

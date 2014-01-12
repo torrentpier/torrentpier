@@ -18,7 +18,7 @@ ajax.callback.user_register = function(data){
 
 <p class="nav"><a href="{U_INDEX}">{T_INDEX}</a></p>
 
-<form method="post" action="profile.php" class="tokenized" enctype="multipart/form-data">
+<form method="post" action="profile.php<!-- IF IS_ADMIN && PR_USER_ID -->?u={PR_USER_ID}<!-- ENDIF -->" class="tokenized" enctype="multipart/form-data">
 <input type="hidden" name="mode" value="{MODE}" />
 <input type="hidden" name="reg_agreed" value="1" />
 <!-- IF NEW_USER --><input type="hidden" name="admin" value="1" /><!-- ENDIF -->
@@ -272,18 +272,6 @@ ajax.callback.posts = function(data){
 	</td>
 </tr>
 <!-- END switch_avatar_local_upload -->
-<!-- BEGIN switch_avatar_remote_upload -->
-<tr>
-	<td>{L_UPLOAD_AVATAR_URL}:<h6>{L_UPLOAD_AVATAR_URL_EXPLAIN}</h6></td>
-	<td><input type="text" name="avatarurl" size="44" /></td>
-</tr>
-<!-- END switch_avatar_remote_upload -->
-<!-- BEGIN switch_avatar_remote_link -->
-<tr>
-	<td>{L_LINK_REMOTE_AVATAR}:<h6>{L_LINK_REMOTE_AVATAR_EXPLAIN}</h6></td>
-	<td><input type="text" name="avatarremoteurl" size="44" /></td>
-</tr>
-<!-- END switch_avatar_remote_link -->
 <!-- BEGIN switch_avatar_local_gallery -->
 <tr>
 	<td>{L_AVATAR_GALLERY}:</td>

@@ -23,7 +23,7 @@ $can_register = (IS_GUEST || IS_ADMIN);
 
 $submit   = !empty($_POST['submit']);
 $errors   = array();
-$adm_edit = false;     // редактирование админом чужого профиля
+$adm_edit = false; // редактирование админом чужого профиля
 
 require(INC_DIR .'bbcode.php');
 require(INC_DIR .'functions_validate.php');
@@ -47,7 +47,7 @@ switch ($mode)
 		}
 		if (!IS_ADMIN)
 		{
-			// Ограничение по ипу
+			// Ограничение по ip
 			if($bb_cfg['unique_ip'])
 			{
 				if($users = DB()->fetch_row("SELECT user_id, username FROM ". BB_USERS ." WHERE user_reg_ip = '". USER_IP ."' LIMIT 1"))
@@ -67,13 +67,7 @@ switch ($mode)
 				{
 					bb_die($lang['REGISTERED_IN_TIME']);
 				}
-
 			}
-			// Вывод начальной страницы с условиями регистрации
-			/*if (empty($_POST['reg_agreed']))
-			{
-				print_page('agreement.tpl');
-			}*/
 		}
 
 		// field => can_edit
@@ -110,7 +104,7 @@ switch ($mode)
 			'user_active'      => IS_ADMIN,
 			'username'         => (IS_ADMIN || $bb_cfg['allow_namechange']),
 			'user_password'    => true,
-			'user_email'       => true,      // должен быть после user_password
+			'user_email'       => true, // должен быть после user_password
 			'user_lang'        => true,
 			'user_gender'      => true,
 			'user_birthday'    => true,
@@ -154,19 +148,13 @@ switch ($mode)
 			bb_die($lang['PROFILE_NOT_FOUND']);
 		}
 
-		if (!bf($pr_data['user_opt'], 'user_opt', 'allow_avatar') && ($bb_cfg['allow_avatar_upload'] || $bb_cfg['allow_avatar_local'] || $bb_cfg['allow_avatar_remote']))
+		if (!bf($pr_data['user_opt'], 'user_opt', 'allow_avatar') && ($bb_cfg['allow_avatar_upload'] || $bb_cfg['allow_avatar_local']))
 		{
 			$template->assign_block_vars('switch_avatar_block', array());
 
 			if ($bb_cfg['allow_avatar_upload'] && file_exists(@phpbb_realpath('./' . $bb_cfg['avatar_path'])))
 			{
 				$template->assign_block_vars('switch_avatar_block.switch_avatar_local_upload', array());
-				$template->assign_block_vars('switch_avatar_block.switch_avatar_remote_upload', array());
-			}
-
-			if ($bb_cfg['allow_avatar_remote'])
-			{
-				$template->assign_block_vars('switch_avatar_block.switch_avatar_remote_link', array());
 			}
 
 			if ($bb_cfg['allow_avatar_local'] && file_exists(@phpbb_realpath('./' . $bb_cfg['avatar_gallery_path'])))
@@ -178,7 +166,7 @@ switch ($mode)
 		{
 			$template->assign_block_vars('not_avatar_block', array());
 		}
-        break;
+		break;
 
 	default:
 		trigger_error("invalid mode: $mode", E_USER_ERROR);
@@ -209,7 +197,7 @@ foreach ($profile_fields as $field => $can_edit)
 		$active = isset($_POST['user_active']) ? (int) $_POST['user_active'] : $pr_data['user_active'];
 		if ($submit && $adm_edit)
 		{
-            $pr_data['user_active'] = $active;
+			$pr_data['user_active'] = $active;
 			$db_data['user_active'] = $active;
 		}
 		break;
@@ -218,7 +206,7 @@ foreach ($profile_fields as $field => $can_edit)
 	*  Имя (edit, reg)
 	*/
 	case 'username':
-	    $username = !empty($_POST['username']) ? clean_username($_POST['username']) : $pr_data['username'];
+		$username = !empty($_POST['username']) ? clean_username($_POST['username']) : $pr_data['username'];
 
 		if ($submit)
 		{
@@ -227,7 +215,7 @@ foreach ($profile_fields as $field => $can_edit)
 			{
 				$errors[] = $err;
 			}
-			if($can_edit && $username != $pr_data['username'] || $mode == 'register')
+			if ($can_edit && $username != $pr_data['username'] || $mode == 'register')
 			{
 				$pr_data['username'] = $username;
 				$db_data['username'] = $username;
@@ -284,7 +272,6 @@ foreach ($profile_fields as $field => $can_edit)
 				}
 			}
 		}
-
 		break;
 
 	/**
@@ -302,7 +289,7 @@ foreach ($profile_fields as $field => $can_edit)
 				}
 				$db_data['user_email'] = $email;
 			}
-			else if ($email != $pr_data['user_email'])  // если смена мейла юзером
+			else if ($email != $pr_data['user_email']) // если смена мейла юзером
 			{
 				if (!$cur_pass_valid)
 				{
@@ -330,7 +317,7 @@ foreach ($profile_fields as $field => $can_edit)
 		$user_lang = isset($_POST['user_lang']) ? (string) $_POST['user_lang'] : $pr_data['user_lang'];
 		if ($submit && ($user_lang != $pr_data['user_lang'] || $mode == 'register'))
 		{
-            $pr_data['user_lang'] = $user_lang;
+			$pr_data['user_lang'] = $user_lang;
 			$db_data['user_lang'] = $user_lang;
 		}
 		break;
@@ -357,7 +344,7 @@ foreach ($profile_fields as $field => $can_edit)
 		$gender = isset($_POST['user_gender']) ? (int) $_POST['user_gender'] : $pr_data['user_gender'];
 		if ($submit && $gender != $pr_data['user_gender'])
 		{
-            $pr_data['user_gender'] = $gender;
+			$pr_data['user_gender'] = $gender;
 			$db_data['user_gender'] = $gender;
 		}
 		$tp_data['USER_GENDER'] = build_select('user_gender', array_flip($lang['GENDER_SELECT']), $pr_data['user_gender']);
@@ -384,7 +371,7 @@ foreach ($profile_fields as $field => $can_edit)
 			else
 			{
 				$birthday = "$b_year-$b_md-$b_day";
-				$next_birthday_greeting = (date('md') < $b_md . (($b_day <= 9) ? '0' : '') . $b_day) ? date('Y') : date('Y')+1;
+				$next_birthday_greeting = (date('md') < $b_md . (($b_day <= 9) ? '0' : '') . $b_day) ? date('Y') : date('Y') + 1;
 			}
 		}
 		else
@@ -393,7 +380,7 @@ foreach ($profile_fields as $field => $can_edit)
 			$next_birthday_greeting = 0;
 		}
 
-        if ($submit && $birthday != $pr_data['user_birthday'])
+		if ($submit && $birthday != $pr_data['user_birthday'])
 		{
 			$pr_data['user_birthday'] = $birthday;
 			$db_data['user_birthday'] = $birthday;
@@ -408,9 +395,9 @@ foreach ($profile_fields as $field => $can_edit)
 		$user_opt = $pr_data['user_opt'];
 
 		$update_user_opt = array(
-		    'viewemail'        => true,
-		    'allow_viewonline' => true,
-		    'notify'           => true,
+			'viewemail'        => true,
+			'allow_viewonline' => true,
+			'notify'           => true,
 			'notify_pm'        => true,
 			'hide_porn_forums' => true,
 			'allow_dls'        => true,
@@ -556,11 +543,11 @@ foreach ($profile_fields as $field => $can_edit)
 		break;
 
 	case 'user_avatar_type':
-		if(isset($_POST['avatargallery']) && !$errors)
+		if (isset($_POST['avatargallery']) && !$errors)
 		{
 			$category = (!empty($_POST['avatarcategory'])) ? htmlspecialchars($_POST['avatarcategory']) : '';
 
-	        $dir = @opendir($bb_cfg['avatar_gallery_path']);
+			$dir = @opendir($bb_cfg['avatar_gallery_path']);
 
 			$avatar_images = array();
 			while($file = @readdir($dir))
@@ -571,15 +558,15 @@ foreach ($profile_fields as $field => $can_edit)
 
 					$avatar_row_count = 0;
 					$avatar_col_count = 0;
-					while($sub_file = @readdir($sub_dir))
+					while ($sub_file = @readdir($sub_dir))
 					{
-						if(preg_match('/(\.gif$|\.png$|\.jpg|\.jpeg)$/is', $sub_file))
+						if (preg_match('/(\.gif$|\.png$|\.jpg|\.jpeg)$/is', $sub_file))
 						{
 							$avatar_images[$file][$avatar_row_count][$avatar_col_count] = $sub_file;
 							$avatar_name[$file][$avatar_row_count][$avatar_col_count] = ucfirst(str_replace("_", " ", preg_replace('/^(.*)\..*$/', '\1', $sub_file)));
 
 							$avatar_col_count++;
-							if($avatar_col_count == 5)
+							if ($avatar_col_count == 5)
 							{
 								$avatar_row_count++;
 								$avatar_col_count = 0;
@@ -612,7 +599,7 @@ foreach ($profile_fields as $field => $can_edit)
 			$s_categories .= '</select>';
 
 			$s_colspan = 0;
-			for($i = 0; $i < @count($avatar_images[$category]); $i++)
+			for ($i = 0; $i < @count($avatar_images[$category]); $i++)
 			{
 				$template->assign_block_vars('avatar_row', array());
 
@@ -633,6 +620,9 @@ foreach ($profile_fields as $field => $can_edit)
 
 			$s_hidden_vars = '<input type="hidden" name="avatarcatname" value="' . $category . '" />';
 
+			$u_id = (isset($_GET['u']) && intval($_GET['u'])) ? intval($_GET['u']) : 0;
+			$mode = (IS_ADMIN && $u_id) ? $mode . '&u=' . $u_id : $mode;
+
 			$template->assign_vars(array(
 				'S_CATEGORY_SELECT' => $s_categories,
 				'S_COLSPAN' => $s_colspan,
@@ -645,9 +635,7 @@ foreach ($profile_fields as $field => $can_edit)
 
 		$user_avatar_local = (isset($_POST['avatarselect']) && !empty($_POST['submitavatar']) && $bb_cfg['allow_avatar_local']) ? htmlspecialchars($_POST['avatarselect']) : ((isset($_POST['avatarlocal'])) ? htmlspecialchars($_POST['avatarlocal']) : '');
 		$user_avatar_category = (isset($_POST['avatarcatname']) && $bb_cfg['allow_avatar_local']) ? htmlspecialchars($_POST['avatarcatname']) : '';
-
-		$user_avatar_remoteurl = (!empty($_POST['avatarremoteurl'])) ? trim(htmlspecialchars($_POST['avatarremoteurl'])) : '';
-		$user_avatar_upload = (!empty($_POST['avatarurl'])) ? trim($_POST['avatarurl']) : ((!empty($_FILES['avatar']) && $_FILES['avatar']['tmp_name'] != "none") ? $_FILES['avatar']['tmp_name'] : '');
+		$user_avatar_upload = (!empty($_FILES['avatar']) && $_FILES['avatar']['tmp_name'] != "none") ? $_FILES['avatar']['tmp_name'] : '';
 		$user_avatar_name = (!empty($_FILES['avatar']['name'])) ? $_FILES['avatar']['name'] : '';
 		$user_avatar_size = (!empty($_FILES['avatar']['size'])) ? $_FILES['avatar']['size'] : 0;
 		$user_avatar_filetype = (!empty($_FILES['avatar']['type'])) ? $_FILES['avatar']['type'] : '';
@@ -677,18 +665,12 @@ foreach ($profile_fields as $field => $can_edit)
 		{
 			if (!empty($user_avatar_upload))
 			{
-				$avatar_mode = (empty($user_avatar_name)) ? 'remote' : 'local';
-				$avatar = user_avatar_upload($mode, $avatar_mode, $pr_data['user_avatar'], $pr_data['user_avatar_type'], $errors, $user_avatar_upload, $user_avatar_name, $user_avatar_size, $user_avatar_filetype);
+				$avatar = user_avatar_upload($mode, 'local', $pr_data['user_avatar'], $pr_data['user_avatar_type'], $errors, $user_avatar_upload, $user_avatar_name, $user_avatar_size, $user_avatar_filetype);
 			}
 			else if (!empty($user_avatar_name))
 			{
 				$errors[] = sprintf($lang['AVATAR_FILESIZE'], round($bb_cfg['avatar_filesize'] / 1024));
 			}
-		}
-		else if ($user_avatar_remoteurl != '' && $bb_cfg['allow_avatar_remote'])
-		{
-			user_avatar_delete($pr_data['user_avatar_type'], $pr_data['user_avatar']);
-			$avatar = user_avatar_url($mode, $errors, $user_avatar_remoteurl);
 		}
 		else if ($user_avatar_local != '' && $bb_cfg['allow_avatar_local'])
 		{
@@ -696,22 +678,22 @@ foreach ($profile_fields as $field => $can_edit)
 			$avatar = user_avatar_gallery($mode, $errors, $user_avatar_local, $user_avatar_category);
 		}
 
-        if($avatar)
-        {
-        	$user_avatar = $avatar['user_avatar'];
-        	$user_avatar_type = $avatar['user_avatar_type'];
-            $hidden_vars = '';
-        	foreach($_POST as $name => $key)
-        	{
-	        	$hidden_vars .= '<input type="hidden" name="'. $name .'" value="'. $key .'" />';
-        	}
-        	$tp_data['USER_AVATAR'] = get_avatar($user_avatar, $user_avatar_type) . $hidden_vars;
-        }
-        else
-        {
-        	$tp_data['USER_AVATAR'] = get_avatar($pr_data['user_avatar'], $pr_data['user_avatar_type'], !bf($pr_data['user_opt'], 'user_opt', 'allow_avatar'));
-        }
-	    if ($submit && !bf($pr_data['user_opt'], 'user_opt', 'allow_avatar'))
+		if ($avatar)
+		{
+			$user_avatar = $avatar['user_avatar'];
+			$user_avatar_type = $avatar['user_avatar_type'];
+			$hidden_vars = '';
+			foreach ($_POST as $name => $key)
+			{
+				$hidden_vars .= '<input type="hidden" name="'. $name .'" value="'. $key .'" />';
+			}
+			$tp_data['USER_AVATAR'] = get_avatar($user_avatar, $user_avatar_type) . $hidden_vars;
+		}
+		else
+		{
+			$tp_data['USER_AVATAR'] = get_avatar($pr_data['user_avatar'], $pr_data['user_avatar_type'], !bf($pr_data['user_opt'], 'user_opt', 'allow_avatar'));
+		}
+		if ($submit && !bf($pr_data['user_opt'], 'user_opt', 'allow_avatar'))
 		{
 			if ($user_avatar != $pr_data['user_avatar'] || $user_avatar_type != $pr_data['user_avatar_type'])
 			{
@@ -751,17 +733,17 @@ foreach ($profile_fields as $field => $can_edit)
 	}
 }
 
-if($bb_cfg['birthday_enabled'] && $mode != 'register')
+if ($bb_cfg['birthday_enabled'] && $mode != 'register')
 {
 	$days = array($lang['DELTA_TIME']['INTERVALS']['mday'][0] => 0);
-	for($i=1; $i<=31; $i++)
+	for ($i = 1; $i <= 31; $i++)
 	{
 		$days[$i] = $i;
 	}
 	$s_birthday = build_select('b_day', $days, $b_day);
 
 	$months = array($lang['DELTA_TIME']['INTERVALS']['mon'][0] => 0);
-	for($i=1; $i<=12; $i++)
+	for ($i = 1; $i <= 12; $i++)
 	{
 		$month = bb_date(mktime(0, 0, 0, ($i+1), 0, 0), 'F');
 		$months[$month] = $i;
@@ -770,7 +752,7 @@ if($bb_cfg['birthday_enabled'] && $mode != 'register')
 
 	$year = bb_date(TIMENOW, 'Y', 'false');
 	$years = array($lang['DELTA_TIME']['INTERVALS']['year'][0] => 0);
-	for($i=$year-$bb_cfg['birthday_max_age']; $i<=$year-$bb_cfg['birthday_min_age']; $i++)
+	for ($i = $year-$bb_cfg['birthday_max_age']; $i <= $year - $bb_cfg['birthday_min_age']; $i++)
 	{
 		$years[$i] = $i;
 	}
@@ -799,9 +781,9 @@ if ($submit && !$errors)
 		}
 		$db_data['user_regdate'] = TIMENOW;
 
-        if(!IS_ADMIN) $db_data['user_reg_ip'] = USER_IP;
+		if (!IS_ADMIN) $db_data['user_reg_ip'] = USER_IP;
 
-		if(!isset($db_data['tpl_name'])) $db_data['tpl_name'] = (string) $bb_cfg['tpl_name'];
+		if (!isset($db_data['tpl_name'])) $db_data['tpl_name'] = (string) $bb_cfg['tpl_name'];
 
 		$sql_args = DB()->build_array('INSERT', $db_data);
 
@@ -856,11 +838,9 @@ if ($submit && !$errors)
 
 			if ($bb_cfg['require_activation'] == USER_ACTIVATION_ADMIN)
 			{
-				$sql = "SELECT user_email, user_lang, usr_opt
-					FROM ". BB_USERS ."
-					WHERE user_level = " . ADMIN;
+				$sql = "SELECT user_email, user_lang, usr_opt FROM ". BB_USERS ." WHERE user_level = " . ADMIN;
 
-				if ( !($result = DB()->sql_query($sql)) )
+				if (!($result = DB()->sql_query($sql)))
 				{
 					message_die(GENERAL_ERROR, 'Could not select Administrators', '', __LINE__, __FILE__, $sql);
 				}
@@ -890,7 +870,7 @@ if ($submit && !$errors)
 					}
 				}
 
-				if(empty($active_admin))
+				if (empty($active_admin))
 				{
 					$emailer->from($bb_cfg['board_email']);
 					$emailer->replyto($bb_cfg['board_email']);
@@ -928,7 +908,7 @@ if ($submit && !$errors)
 			if (!$pr_data['user_active'])
 			{
 				$user_actkey = make_rand_str(12);
-                $pr_data['user_actkey'] = $user_actkey;
+				$pr_data['user_actkey'] = $user_actkey;
 				$db_data['user_actkey'] = $user_actkey;
 
 				include(INC_DIR . 'emailer.class.php');
@@ -959,7 +939,7 @@ if ($submit && !$errors)
 				$emailer->reset();
 
 				$message = $lang['PROFILE_UPDATED_INACTIVE'];
-			    $user->session_end();
+				$user->session_end();
 			}
 			else
 			{
@@ -979,7 +959,7 @@ if ($submit && !$errors)
 				}
 			}
 
-            cache_rm_user_sessions ($pr_data['user_id']);
+			cache_rm_user_sessions ($pr_data['user_id']);
 
 			if($adm_edit)
 			{
@@ -1014,14 +994,14 @@ $template->assign_vars(array(
 	'SHOW_PASS'          => ($adm_edit || ($mode == 'register' && IS_ADMIN)),
 	'CAPTCHA_HTML'       => ($need_captcha) ? CAPTCHA()->get_html() : '',
 
-    'LANGUAGE_SELECT'    => language_select($user_lang, 'user_lang'),
+	'LANGUAGE_SELECT'    => language_select($user_lang, 'user_lang'),
 	'TIMEZONE_SELECT'    => tz_select($user_timezone, 'user_timezone'),
 	'USER_TIMEZONE'      => $pr_data['user_timezone'],
 
-    'AVATAR_EXPLAIN'     => sprintf($lang['AVATAR_EXPLAIN'], $bb_cfg['avatar_max_width'], $bb_cfg['avatar_max_height'], (round($bb_cfg['avatar_filesize'] / 1024))),
-    'SIGNATURE_EXPLAIN'  => sprintf($lang['SIGNATURE_EXPLAIN'], $bb_cfg['max_sig_chars']),
+	'AVATAR_EXPLAIN'     => sprintf($lang['AVATAR_EXPLAIN'], $bb_cfg['avatar_max_width'], $bb_cfg['avatar_max_height'], (round($bb_cfg['avatar_filesize'] / 1024))),
+	'SIGNATURE_EXPLAIN'  => sprintf($lang['SIGNATURE_EXPLAIN'], $bb_cfg['max_sig_chars']),
 
-    'SIG_DISALLOWED'     => bf($pr_data['user_opt'], 'user_opt', 'allow_sig'),
+	'SIG_DISALLOWED'     => bf($pr_data['user_opt'], 'user_opt', 'allow_sig'),
 
 	'PR_USER_ID'         => $pr_data['user_id'],
 	'U_RESET_AUTOLOGIN'  => "login.php?logout=1&amp;reset_autologin=1&amp;sid={$userdata['session_id']}",

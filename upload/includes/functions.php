@@ -2692,9 +2692,6 @@ function get_avatar ($avatar, $type, $allow_avatar = true, $height = '', $width 
 			case USER_AVATAR_UPLOAD:
 				$user_avatar = ( $bb_cfg['allow_avatar_upload'] ) ? '<img src="'. $bb_cfg['avatar_path'] .'/'. $avatar .'" alt="" border="0" '. $height .' '. $width .'/>' : '';
 				break;
-			case USER_AVATAR_REMOTE:
-				$user_avatar = ( $bb_cfg['allow_avatar_remote'] ) ? '<img src="'. $avatar .'" alt="" border="0" onload="imgFit(this, 100);" onClick="return imgFit(this, 100);" '. $height .' '. $width .'/>' : '';
-				break;
 			case USER_AVATAR_GALLERY:
 				$user_avatar = ( $bb_cfg['allow_avatar_local'] ) ? '<img src="'. $bb_cfg['avatar_gallery_path'] .'/'. $avatar .'" alt="" border="0" '. $height .' '. $width .'/>' : '';
 				break;

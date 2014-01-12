@@ -184,13 +184,6 @@
 	</td>
 </tr>
 <tr>
-	<td><h4>{L_ALLOW_REMOTE}</h4><h6>{L_ALLOW_REMOTE_EXPLAIN}</h6></td>
-	<td>
-	    <label><input type="radio" name="allow_avatar_remote" value="1" <!-- IF ALLOW_AVATAR_REMOTE -->checked="checked"<!-- ENDIF --> />{L_YES}</label>&nbsp;&nbsp;
-		<label><input type="radio" name="allow_avatar_remote" value="0" <!-- IF not ALLOW_AVATAR_REMOTE -->checked="checked"<!-- ENDIF --> />{L_NO}</label>
-	</td>
-</tr>
-<tr>
 	<td><h4>{L_ALLOW_UPLOAD}</h4></td>
 	<td>
 	    <label><input type="radio" name="allow_avatar_upload" value="1" <!-- IF ALLOW_AVATAR_UPLOAD -->checked="checked"<!-- ENDIF --> />{L_YES}</label>&nbsp;&nbsp;
