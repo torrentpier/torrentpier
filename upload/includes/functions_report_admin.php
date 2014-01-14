@@ -75,7 +75,7 @@ function report_modules_inactive($mode = 'all', $module = null)
 		$dir = @opendir(INC_DIR .'report_hack');
 
 		$modules = array();
-		$i = 0;
+
 		while ($file = @readdir($dir))
 		{
 			if (!preg_match('#(.*)\.' . phpbb_preg_quote('php', '#') . '$#', $file, $matches))
@@ -96,7 +96,7 @@ function report_modules_inactive($mode = 'all', $module = null)
 			// Include language file
 			$lang = array();
 
-            $lang_file = LANG_ROOT_DIR ."lang_{$bb_cfg['default_lang']}/report_hack/lang_$module_name.php";
+			$lang_file = LANG_ROOT_DIR ."lang_{$bb_cfg['default_lang']}/report_hack/lang_$module_name.php";
 			if (file_exists($lang_file))
 			{
 				include($lang_file);

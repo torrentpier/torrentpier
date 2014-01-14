@@ -152,7 +152,6 @@ function delete_torrent ($attach_id, $mode = '')
 		message_die(GENERAL_ERROR, $lang['TOR_NOT_FOUND']);
 	}
 
-	$post_id   = $torrent['post_id'];
 	$topic_id  = $torrent['topic_id'];
 	$forum_id  = $torrent['forum_id'];
 	$poster_id = $torrent['poster_id'];
@@ -162,7 +161,7 @@ function delete_torrent ($attach_id, $mode = '')
 		message_die(GENERAL_ERROR, $lang['NOT_TORRENT']);
 	}
 
-	torrent_auth_check($forum_id, $torrent['poster_id']);
+	torrent_auth_check($forum_id, $poster_id);
 	tracker_unregister($attach_id);
 	delete_attachment(0, $attach_id);
 
@@ -198,7 +197,7 @@ function change_tor_status ($attach_id, $new_tor_status)
 // Set gold/silver type for torrent
 function change_tor_type ($attach_id, $tor_status_gold)
 {
-	global $topic_id, $lang, $bb_cfg;
+	global $topic_id, $lang;
 
 	if (!$torrent = get_torrent_info($attach_id))
 	{

@@ -55,8 +55,8 @@ $domain_name = (!empty($_SERVER['SERVER_NAME'])) ? $_SERVER['SERVER_NAME'] : $do
 
 // Increase number of revision after update
 $bb_cfg['tp_version'] = '2.5 (unstable)';
-$bb_cfg['tp_release_date'] = '13-01-2014';
-$bb_cfg['tp_release_state'] = 'R556';
+$bb_cfg['tp_release_date'] = '15-01-2014';
+$bb_cfg['tp_release_state'] = 'R557';
 
 // Database
 $charset  = 'utf8';
@@ -390,7 +390,7 @@ if (DEBUG)
 }
 else
 {
-	error_reporting(E_ALL);                          # E_ALL & ~E_NOTICE
+	error_reporting(E_ALL); # E_ALL & ~E_NOTICE
 	ini_set('display_errors', 0);
 	ini_set('log_errors',     1);
 }
@@ -408,7 +408,7 @@ define('CRON_ALLOWED', TRIGGERS_DIR .'cron_allowed');
 define('CRON_RUNNING', TRIGGERS_DIR .'cron_running');
 
 // Subforums
-$bb_cfg['sf_on_first_page_only']     = true;
+$bb_cfg['sf_on_first_page_only'] = true;
 
 // Forums
 $bb_cfg['allowed_topics_per_page'] = array(50, 100, 150, 200, 250, 300);
@@ -439,19 +439,19 @@ $bb_cfg['max_post_length']       = 120000;         // bytes
 $bb_cfg['use_ajax_posts']        = true;
 
 // Search
-$bb_cfg['search_engine_type']          = 'mysql';  //  none, mysql, sphinx
-$bb_cfg['sphinx_topic_titles_host']    = '127.0.0.1';
-$bb_cfg['sphinx_topic_titles_port']    = 3312;
-$bb_cfg['sphinx_config_path']          = realpath("../install/sphinx/sphinx.conf");
-$bb_cfg['disable_ft_search_in_posts']  = false;    // disable searching in post bodies
-$bb_cfg['disable_search_for_guest']    = true;
-$bb_cfg['allow_search_in_bool_mode']   = true;
-$bb_cfg['max_search_words_per_post']   = 200;
-$bb_cfg['search_min_word_len']         = 3;
-$bb_cfg['search_max_word_len']         = 35;
-$bb_cfg['limit_max_search_results']    = false;
-$bb_cfg['tidy_post']                   = true;
-$bb_cfg['spam_filter_file_path']       = ''; //BB_PATH .'/misc/spam_filter_words.txt';
+$bb_cfg['search_engine_type']         = 'mysql';   // none, mysql, sphinx
+$bb_cfg['sphinx_topic_titles_host']   = '127.0.0.1';
+$bb_cfg['sphinx_topic_titles_port']   = 3312;
+$bb_cfg['sphinx_config_path']         = realpath("../install/sphinx/sphinx.conf");
+$bb_cfg['disable_ft_search_in_posts'] = false;     // disable searching in post bodies
+$bb_cfg['disable_search_for_guest']   = true;
+$bb_cfg['allow_search_in_bool_mode']  = true;
+$bb_cfg['max_search_words_per_post']  = 200;
+$bb_cfg['search_min_word_len']        = 3;
+$bb_cfg['search_max_word_len']        = 35;
+$bb_cfg['limit_max_search_results']   = false;
+$bb_cfg['tidy_post']                  = true;
+$bb_cfg['spam_filter_file_path']      = ''; //BB_PATH .'/misc/spam_filter_words.txt';
 
 // Posting
 $bb_cfg['prevent_multiposting']  = true;           // replace "reply" with "edit last msg" if user (not admin or mod) is last topic poster

@@ -1,8 +1,7 @@
 <?php
 
-function run_jobs($jobs) {
-	global $bb_cfg, $datastore;
-
+function run_jobs($jobs)
+{
 	define('IN_CRON', true);
 
 	$sql = "SELECT cron_script

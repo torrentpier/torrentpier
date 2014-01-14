@@ -120,9 +120,6 @@ function smtpmail($mail_to, $subject, $message, $headers = '')
 	fputs($socket, "MAIL FROM: <" . $bb_cfg['board_email'] . ">\r\n");
 	server_parse($socket, "250", __LINE__);
 
-	// Specify each user to send to and build to header.
-	$to_header = '';
-
 	// Add an additional bit of error checking to the To field.
 	$mail_to = (trim($mail_to) == '') ? 'Undisclosed-recipients:;' : trim($mail_to);
 	if (preg_match('#[^ ]+\@[^ ]+#', $mail_to))

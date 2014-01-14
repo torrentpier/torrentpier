@@ -838,7 +838,7 @@ if ($submit && !$errors)
 
 			if ($bb_cfg['require_activation'] == USER_ACTIVATION_ADMIN)
 			{
-				$sql = "SELECT user_email, user_lang, usr_opt FROM ". BB_USERS ." WHERE user_level = " . ADMIN;
+				$sql = "SELECT user_email, user_lang, user_opt FROM ". BB_USERS ." WHERE user_level = " . ADMIN;
 
 				if (!($result = DB()->sql_query($sql)))
 				{

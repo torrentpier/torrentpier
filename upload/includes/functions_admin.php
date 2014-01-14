@@ -182,7 +182,7 @@ function sync ($type, $id)
 
 function topic_delete ($mode_or_topic_id, $forum_id = null, $prune_time = 0, $prune_all = false)
 {
-	global $lang, $bb_cfg, $log_action;
+	global $lang, $log_action;
 
 	$prune = ($mode_or_topic_id === 'prune');
 
@@ -519,7 +519,7 @@ function topic_move ($topic_id, $to_forum_id, $from_forum_id = null, $leave_shad
 
 function post_delete ($mode_or_post_id, $user_id = null, $exclude_first = true)
 {
-	global $bb_cfg, $log_action;
+	global $log_action;
 
 	$del_user_posts = ($mode_or_post_id === 'user');  // Delete all user posts
 

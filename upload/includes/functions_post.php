@@ -67,7 +67,6 @@ function prepare_post(&$mode, &$post_data, &$error_msg, &$username, &$subject, &
 					$temp_option_text[$option_id] = clean_title($option_text);
 				}
 			}
-			$option_text = $temp_option_text;
 
 			if (count($poll_options) < 2)
 			{
@@ -84,16 +83,16 @@ function prepare_post(&$mode, &$post_data, &$error_msg, &$username, &$subject, &
 		}
 	}
 
-    // Check smilies limit
-    if($bb_cfg['max_smilies'])
-    {
+	// Check smilies limit
+	if ($bb_cfg['max_smilies'])
+	{
 		$count_smilies = substr_count(bbcode2html($message), '<img class="smile" src="'. $bb_cfg['smilies_path']);
-		if($count_smilies > $bb_cfg['max_smilies'])
+		if ($count_smilies > $bb_cfg['max_smilies'])
 		{
 			$to_many_smilies = sprintf($lang['MAX_SMILIES_PER_POST'], $bb_cfg['max_smilies']);
 			$error_msg .= (!empty($error_msg)) ? '<br />'. $to_many_smilies : $to_many_smilies;
 		}
-    }
+	}
 
 	if (IS_GUEST && !CAPTCHA()->verify_code())
 	{
@@ -215,12 +214,7 @@ function submit_post($mode, &$post_data, &$message, &$meta, &$forum_id, &$topic_
 	{
 		$edited_sql .= ", post_time = $current_time ";
 		//lpt
-		$result = DB()->sql_query("
-			UPDATE ". BB_TOPICS ." SET
-				topic_last_post_time = $current_time
-			WHERE topic_id = $topic_id
-			LIMIT 1
-		");
+		DB()->sql_query("UPDATE ". BB_TOPICS ." SET topic_last_post_time = $current_time WHERE topic_id = $topic_id LIMIT 1");
 	}
 
 	$sql = ($mode != "editpost") ? "INSERT INTO " . BB_POSTS . " (topic_id, forum_id, poster_id, post_username, post_time, poster_ip) VALUES ($topic_id, $forum_id, " . $userdata['user_id'] . ", '$post_username', $current_time, '". USER_IP ."')" : "UPDATE " . BB_POSTS . " SET post_username = '$post_username'" . $edited_sql . " WHERE post_id = $post_id";
@@ -346,7 +340,7 @@ function submit_post($mode, &$post_data, &$message, &$meta, &$forum_id, &$topic_
 	meta_refresh("viewtopic.php?" . POST_POST_URL . "=" . $post_id) . '#' . $post_id;
 	$message = $lang['STORED'] . '<br /><br />' . sprintf($lang['CLICK_VIEW_MESSAGE'], '<a href="viewtopic.php?'. POST_POST_URL .'='. $post_id .'#'. $post_id .'">', '</a>') . '<br /><br />' . sprintf($lang['CLICK_RETURN_FORUM'], '<a href="viewforum.php?'. POST_FORUM_URL .'='. $forum_id . '">', '</a>');
 
-    return $mode;
+	return $mode;
 }
 
 //

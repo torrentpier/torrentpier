@@ -585,10 +585,7 @@ class user_common
 		$this->data['user_lang']       = $bb_cfg['default_lang'];
 		$this->data['user_timezone']   = $bb_cfg['board_timezone'];
 
-		if (!defined('LANG_DIR'))
-		{
-			define('LANG_DIR', DEFAULT_LANG_DIR);
-		}
+		if (!defined('LANG_DIR')) define('LANG_DIR', DEFAULT_LANG_DIR);
 
 		require(LANG_DIR .'lang_main.php');
 
