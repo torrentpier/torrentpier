@@ -47,10 +47,6 @@ switch ($mode)
 		require(INC_DIR . 'ucp/usercp_topic_watch.php');
 		break;
 
-	case 'viewdraft':
-		require(INC_DIR . 'ucp/usercp_viewdraft.php');
-		break;
-
 	default:
 		bb_die('Invalid mode');
 }

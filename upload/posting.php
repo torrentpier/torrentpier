@@ -318,25 +318,15 @@ if ($mode == 'newtopic' && $topic_tpl && $post_info['topic_tpl_id'])
 	require(INC_DIR .'topic_templates.php');
 }
 
-// Notify and draft
-if (!IS_GUEST && $mode != 'newtopic') $post_data['is_draft'] = $post_info['is_draft'];
+// Notify
 if ($submit || $refresh)
 {
 	$notify_user = (int) !empty($_POST['notify']);
-	if ($bb_cfg['status_of_draft'] && $post_data['first_post'])
-	{
-		$to_draft = (int) !empty($_POST['to_draft']);
-	}
-	else
-	{
-		$to_draft = ($mode == 'editpost') ? $post_info['is_draft'] : 0;
-	}
 }
 else
 {
 	$notify_user = bf($userdata['user_opt'], 'user_opt', 'notify');
-	$to_draft = ($mode == 'editpost') ? $post_info['is_draft'] : 0;
-	
+
 	if (!IS_GUEST && $mode != 'newtopic' && !$notify_user)
 	{
 		$notify_user = (int) DB()->fetch_row("
@@ -534,22 +524,7 @@ else if ( ($submit || $confirm) && !$topic_has_new_posts )
 		if (!in_array($mode, array('editpost', 'delete', 'poll_delete')))
 		{
 			$user_id = ( $mode == 'reply' || $mode == 'newtopic' ) ? $userdata['user_id'] : $post_data['poster_id'];
-			$post_data['to_draft'] = $to_draft;
 			update_post_stats($mode, $post_data, $forum_id, $topic_id, $post_id, $user_id);
-		}
-		if ($mode == 'editpost')
-		{
-			if ($post_info['is_draft'] != $to_draft)
-			{
-				if ($to_draft)
-				{
-					update_draft('is_draft', $forum_id, $topic_id, $post_info['topic_dl_type'], $post_id, $post_data['poster_id']);
-				}
-				else
-				{
-					update_draft('no_draft', $forum_id, $topic_id, $post_info['topic_dl_type'], $post_id, $post_data['poster_id']);
-				}
-			}
 		}
 		$attachment_mod['posting']->insert_attachment($post_id);
 
@@ -563,7 +538,7 @@ else if ( ($submit || $confirm) && !$topic_has_new_posts )
 			set_tracks(COOKIE_TOPIC, $tracking_topics, $topic_id);
 		}
 
-		if (defined('TORRENT_ATTACH_ID') && $bb_cfg['bt_newtopic_auto_reg'] && !$error_msg && !$to_draft)
+		if (defined('TORRENT_ATTACH_ID') && $bb_cfg['bt_newtopic_auto_reg'] && !$error_msg)
 		{
 			include(INC_DIR .'functions_torrent.php');
 			if(!DB()->fetch_row("SELECT attach_id FROM ". BB_BT_TORRENTS ." WHERE attach_id = ". TORRENT_ATTACH_ID))
@@ -872,7 +847,6 @@ $template->assign_vars(array(
 	'U_VIEWTOPIC' => ( $mode == 'reply' ) ? "viewtopic.php?" . POST_TOPIC_URL . "=$topic_id&amp;postorder=desc" : '',
 
 	'S_NOTIFY_CHECKED' => ( $notify_user ) ? 'checked="checked"' : '',
-	'S_DRAFT_CHECKED' => ($to_draft) ? 'checked="checked"' : '',
 	'S_TYPE_TOGGLE' => $topic_type_toggle,
 	'S_TOPIC_ID' => $topic_id,
 	'S_POST_ACTION' => "posting.php",
@@ -882,11 +856,6 @@ $template->assign_vars(array(
 if ($mode == 'newtopic' || $post_data['first_post'])
 {
 	$template->assign_var('POSTING_SUBJECT');
-}
-
-if (($mode == 'newtopic' || $post_data['first_post'] && ($post_info['topic_replies'] == 0 || $post_info['is_draft'])) && $bb_cfg['status_of_draft'])
-{
-	$template->assign_var('DRAFT_CHK');
 }
 
 // Update post time

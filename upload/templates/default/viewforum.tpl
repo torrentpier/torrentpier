@@ -458,7 +458,6 @@ td.topic_id { cursor: pointer; }
 		<!-- IF t.STATUS == MOVED --><span class="topicMoved">{L_TOPIC_MOVED}</span>
 			<!-- ELSEIF t.DL_CLASS --><span class="{t.DL_CLASS} iconDL"><b>{L_TOPIC_DL}</b></span>
 		<!-- ENDIF -->
-		<!-- IF t.IS_DRAFT --><span class="topicDraft">{L_TOPIC_DRAFT}</span><!-- ENDIF -->
 		<!-- IF t.POLL --><span class="topicPoll">{L_TOPIC_POLL}</span><!-- ENDIF -->
 		<!-- IF t.TOR_STALED || t.TOR_FROZEN -->
 			<!-- IF t.ATTACH --><span>{TOPIC_ATTACH_ICON}</span><!-- ENDIF -->
@@ -560,7 +559,6 @@ td.topic_id { cursor: pointer; }
 				<!-- ELSEIF t.DL --><span class="">{L_TOPIC_DL}</span>
 				<!-- ELSEIF t.ATTACH -->{TOPIC_ATTACH_ICON}
 			<!-- ENDIF -->
-			<!-- IF t.IS_DRAFT --><span class="topicDraft">{L_TOPIC_DRAFT}</span><!-- ENDIF -->
 			<!-- IF t.POLL --><span class="topicPoll">{L_TOPIC_POLL}</span><!-- ENDIF -->
 			<a id="tt-{t.TOPIC_ID}" href="{TOPIC_URL}{t.HREF_TOPIC_ID}" class="topictitle tt-text">{t.TOPIC_TITLE}</a>
 		</span>

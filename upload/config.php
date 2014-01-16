@@ -55,8 +55,8 @@ $domain_name = (!empty($_SERVER['SERVER_NAME'])) ? $_SERVER['SERVER_NAME'] : $do
 
 // Increase number of revision after update
 $bb_cfg['tp_version'] = '2.5 (unstable)';
-$bb_cfg['tp_release_date'] = '15-01-2014';
-$bb_cfg['tp_release_state'] = 'R557';
+$bb_cfg['tp_release_date'] = '16-01-2014';
+$bb_cfg['tp_release_state'] = 'R558';
 
 // Database
 $charset  = 'utf8';
@@ -538,6 +538,3 @@ $bb_cfg['captcha'] = array(
 
 // SEO
 $bb_cfg['seo_link_home_page'] = false;
-
-// Status of draft
-$bb_cfg['status_of_draft'] = false;

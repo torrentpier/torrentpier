@@ -405,12 +405,6 @@ ajax.callback.view_profile = function(data) {
 				<td><b>{AGE}</b></td>
 			</tr>
 			<!-- ENDIF -->
-			<!-- IF SHOW_DRAFT -->
-			<tr>
-				<th>{L_DRAFTS}:</th>
-				<td><a href="{U_DRAFTS}"><b>{COUNT_DRAFT}</b></a></td>
-			</tr>
-			<!-- ENDIF -->
 		    <tr>
 			    <td colspan="2" class="pad_4">
 

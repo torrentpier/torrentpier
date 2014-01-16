@@ -45,7 +45,6 @@ switch ($ajax->action)
 	break;
 
 	case 'manage_user':
-	case 'modify_draft':
 		require(INC_DIR .'functions_admin.php');
 	break;
 
@@ -83,7 +82,6 @@ class ajax_common
 		'gen_passkey'       => array('user'),
 		'change_torrent'    => array('user'),
 		'change_tor_status' => array('user'),
-		'modify_draft'      => array('user'),
 		'view_profile'      => array('user'),
 
 		'view_post'         => array('guest'),
@@ -533,45 +531,6 @@ class ajax_common
 	function index_data()
 	{
 		require(AJAX_DIR .'index_data.php');
-	}
-
-	function modify_draft()
-	{
-		global $userdata, $bb_cfg, $lang;
-
-		if(!$bb_cfg['status_of_draft']) $this->ajax_die($lang['MODULE_OFF']);
-
-		$tid = (int)$this->request['id_draft'];
-		$mode = (int)$this->request['mode'];
-		$sql = "SELECT * FROM ". BB_TOPICS ." WHERE topic_id = {$tid}";
-
-		if (!$row = DB()->fetch_row($sql)) $this->ajax_die($lang['TOPIC_POST_NOT_EXIST']);
-
-		if ($row['topic_poster'] != $userdata['user_id'] && !IS_ADMIN) $this->ajax_die($lang['CANNOT_DELETE_DRAFT']);
-
-		if (!$mode)
-		{
-			topic_delete($tid);
-		}
-		else
-		{
-			require_once(INC_DIR . 'functions_post.php');
-			DB()->query("
-					UPDATE
-						". BB_POSTS ." p,
-						". BB_TOPICS ." t
-					SET
-						p.post_time = ". TIMENOW .",
-						t.is_draft = 0,
-						t.topic_last_post_time = ". TIMENOW .",
-						t.topic_time = ". TIMENOW ."
-					WHERE
-						t.topic_id = {$tid}
-					AND t.topic_first_post_id = p.post_id
-			");
-			update_draft('no_draft', $row['forum_id'], $tid, $row['topic_dl_type'], $row['topic_first_post_id'], $row['topic_poster']);
-		}
-		$this->response['tid'] = $tid;
 	}
 
 	function view_profile()

@@ -275,7 +275,6 @@ $template->assign_vars(array(
 
 	'U_SEARCH_SELF_BY_LAST'		=> "search.php?uid={$userdata['user_id']}&amp;o=5",
 	'U_WATCHED_TOPICS'			=> "profile.php?mode=watch",
-	'U_MY_DRAFTS'				=> "profile.php?mode=viewdraft&u={$userdata['user_id']}",
 ));
 
 if (!empty($page_cfg['show_torhelp'][BB_SCRIPT]) && !empty($userdata['torhelp']))

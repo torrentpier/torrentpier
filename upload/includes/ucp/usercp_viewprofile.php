@@ -96,17 +96,6 @@ else if ($signature)
 	$signature = bbcode2html($signature);
 }
 
-if($bb_cfg['status_of_draft'])
-{
-	$count_draft = DB()->fetch_row("
-		SELECT COUNT(topic_id) as count
-		FROM ". BB_TOPICS . "
-		WHERE topic_poster = {$profiledata['user_id']}
-		AND is_draft = 1
-	");
-	$count_draft = $count_draft["count"];
-}
-
 $template->assign_vars(array(
 	'PAGE_TITLE'           => sprintf($lang['VIEWING_USER_PROFILE'], $profiledata['username']),
 	'USERNAME'             => $profiledata['username'],
@@ -127,8 +116,6 @@ $template->assign_vars(array(
 	'LOCATION'             => $profiledata['user_from'],
 
 	'USER_ACTIVE'          => $profiledata['user_active'],
-	'COUNT_DRAFT'          => ($bb_cfg['status_of_draft']) ? $count_draft : '',
-	'SHOW_DRAFT'		   => ($bb_cfg['status_of_draft'] && (IS_ADMIN || $profile_user_id)),
 	'OCCUPATION'           => $profiledata['user_occ'],
 	'INTERESTS'            => $profiledata['user_interests'],
 	'SKYPE'                => $profiledata['user_skype'],
@@ -143,7 +130,6 @@ $template->assign_vars(array(
 	'U_SEARCH_USER'        => "search.php?search_author=1&amp;uid={$profiledata['user_id']}",
 	'U_SEARCH_TOPICS'      => "search.php?uid={$profiledata['user_id']}&amp;myt=1",
 	'U_SEARCH_RELEASES'    => "tracker.php?rid={$profiledata['user_id']}#results",
-	'U_DRAFTS'			   => "profile.php?mode=viewdraft&u={$profiledata['user_id']}",
 
 	'S_PROFILE_ACTION'     => 'profile.php',
 

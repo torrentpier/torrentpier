@@ -55,7 +55,6 @@ $images['folder_dl']           = $_main .'folder_dl.gif';
 $images['folder_dl_new']       = $_main .'folder_dl_new.gif';
 $images['folder_dl_hot']       = $_main .'folder_dl_hot.gif';
 $images['folder_dl_hot_new']   = $_main .'folder_dl_hot_new.gif';
-$images['draft']			   = $_main .'draft.gif';
 
 // attach_icons
 $images['icon_clip']           = $_img .'icon_clip.gif';

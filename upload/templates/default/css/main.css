@@ -735,9 +735,6 @@ td.topicSep {                /* Topic type groups separator */
 .topicSticky {               /* Topic Sticky prefix */
 	color: #009900;
 }
-.topicDraft {                 /* Topic Draft prefix */
-	font-weight: normal; color: #C63B00;
-}
 .topicPoll {                 /* Topic Poll prefix */
 	font-weight: normal; color: #006699;
 }

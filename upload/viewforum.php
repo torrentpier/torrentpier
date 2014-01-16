@@ -278,7 +278,6 @@ if (!empty($_REQUEST['topicdays']))
 			SELECT COUNT(*) AS forum_topics
 			FROM ". BB_TOPICS ."
 			WHERE forum_id = $forum_id
-				AND is_draft != 1
 				AND topic_last_post_time > ". (TIMENOW - 86400*$req_topic_days) ."
 		";
 
@@ -463,11 +462,6 @@ $template->assign_vars(array(
 $found_topics = 0;
 foreach ($topic_rowset as $topic)
 {
-	if ($topic['is_draft'] && $topic['first_user_id'] != $userdata['user_id'])
-	{
-		continue;
-	}
-
 	$topic_id = $topic['topic_id'];
 	$moved    = ($topic['topic_status'] == TOPIC_MOVED);
 	$replies  = $topic['topic_replies'];
@@ -517,7 +511,7 @@ foreach ($topic_rowset as $topic)
 		'TOPIC_TITLE'      => wbr($topic['topic_title']),
 		'TOPICS_SEPARATOR' => $separator,
 		'IS_UNREAD'        => $is_unread,
-		'TOPIC_ICON'       => ($topic['is_draft']) ? $images['draft'] : get_topic_icon($topic, $is_unread),
+		'TOPIC_ICON'       => get_topic_icon($topic, $is_unread),
 		'PAGINATION'       => ($moved) ? '' : build_topic_pagination(TOPIC_URL . $topic_id, $replies, $bb_cfg['posts_per_page']),
 		'REPLIES'          => $replies,
 		'VIEWS'            => $topic['topic_views'],
@@ -532,7 +526,6 @@ foreach ($topic_rowset as $topic)
 		'STATUS'           => $topic['topic_status'],
 		'TYPE'             => $topic['topic_type'],
 		'DL'               => ($topic['topic_dl_type'] == TOPIC_DL_TYPE_DL && !$forum_data['allow_reg_tracker']),
-		'IS_DRAFT'		   => $topic['is_draft'],
 		'POLL'             => $topic['topic_vote'],
 		'DL_CLASS'         => isset($topic['dl_status']) ? $dl_link_css[$topic['dl_status']] : '',
 

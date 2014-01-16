@@ -135,14 +135,6 @@
 		</tr>
 		<!-- ENDIF -->
 		</table>
-		<!-- IF DRAFT_CHK -->
-		<table class="borderless inline">
-		<tr>
-			<td><input type="checkbox" id="to_draft" name="to_draft" {S_DRAFT_CHECKED} /></td>
-			<td><label for="to_draft">{L_TO_DRAFT}</label></td>
-		</tr>
-		</table>
-		<!-- ENDIF -->
 	</div>
 	</td>
 </tr>
