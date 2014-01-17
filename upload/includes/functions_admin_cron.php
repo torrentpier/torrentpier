@@ -2,6 +2,8 @@
 
 function run_jobs($jobs)
 {
+	global $datastore;
+
 	define('IN_CRON', true);
 
 	$sql = "SELECT cron_script
