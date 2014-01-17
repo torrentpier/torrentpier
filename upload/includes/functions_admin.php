@@ -6,7 +6,7 @@ function sync ($type, $id)
 {
 	switch ($type)
 	{
-	  case 'forum':
+			case 'forum':
 
 			$all_forums = ($id === 'all');
 
@@ -65,6 +65,9 @@ function sync ($type, $id)
 			{
 				break;
 			}
+
+			// Проверка на остаточные записи об уже удаленных топиках
+			DB()->query("DELETE FROM ". BB_TOPICS ." WHERE topic_first_post_id NOT IN (SELECT post_id FROM ". BB_POSTS .")");
 
 			$tmp_sync_topics = 'tmp_sync_topics';
 
