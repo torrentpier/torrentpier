@@ -159,41 +159,26 @@ function submit_post($mode, &$post_data, &$message, &$meta, &$forum_id, &$topic_
 
 		$topic_dl_type = (isset($_POST['topic_dl_type']) && ($post_info['allow_reg_tracker'] || $is_auth['auth_mod'])) ? TOPIC_DL_TYPE_DL : TOPIC_DL_TYPE_NORMAL;
 
-		if (($mode == 'editpost' && $post_data['first_post']))
-		{
-			$sql_update = "
-				UPDATE
-					". BB_POSTS ." p,
-					". BB_TOPICS ." t
-				SET
-					p.post_time = ". TIMENOW .",
-					t.topic_title = '$post_subject',
-					t.topic_type = $topic_type,
-					t.topic_dl_type = $topic_dl_type " . ((@$post_data['edit_vote'] || !empty($poll_title)) ? ",
-					t.topic_vote = " . $topic_vote : "") . ",
-					t.topic_last_post_time = ". TIMENOW .",
-					t.topic_time = ". TIMENOW ."
-				WHERE
-					t.topic_id = $topic_id
-				AND t.topic_first_post_id = p.post_id
-			";
-		}
-		else
-		{
-			$sql_update = "
-				UPDATE
-					" . BB_TOPICS . "
-				SET
-					topic_title = '$post_subject',
-					topic_type = $topic_type,
-					topic_dl_type = $topic_dl_type " . ((@$post_data['edit_vote'] || !empty($poll_title)) ? ",
-					topic_vote = " . $topic_vote : "") . "
-				WHERE
-					topic_id = $topic_id
-			";
-		}
+		$sql_insert = "
+			INSERT INTO
+				" . BB_TOPICS . " (topic_title, topic_poster, topic_time, forum_id, topic_status, topic_type, topic_dl_type, topic_vote)
+			VALUES
+				('$post_subject', " . $userdata['user_id'] . ", $current_time, $forum_id, " . TOPIC_UNLOCKED . ", $topic_type, $topic_dl_type, $topic_vote)
+		";
 
-		$sql  = ($mode != "editpost") ? "INSERT INTO " . BB_TOPICS . " (topic_title, topic_poster, topic_time, forum_id, topic_status, topic_type, topic_dl_type, topic_vote) VALUES ('$post_subject', " . $userdata['user_id'] . ", $current_time, $forum_id, " . TOPIC_UNLOCKED . ", $topic_type, $topic_dl_type, $topic_vote)" : $sql_update;
+		$sql_update = "
+			UPDATE
+				" . BB_TOPICS . "
+			SET
+				topic_title = '$post_subject',
+				topic_type = $topic_type,
+				topic_dl_type = $topic_dl_type
+				". ((@$post_data['edit_vote'] || !empty($poll_title)) ? ", topic_vote = ". $topic_vote : "") ."
+			WHERE
+				topic_id = $topic_id
+		";
+
+		$sql  = ($mode != "editpost") ? $sql_insert : $sql_update;
 
 		if (!DB()->sql_query($sql))
 		{

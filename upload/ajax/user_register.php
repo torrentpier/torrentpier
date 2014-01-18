@@ -20,7 +20,8 @@ switch($mode)
 		{
 			$html = '<img src="./images/bad.gif"> <span class="leechmed bold">'. $err .'</span>';
 		}
-		break;
+	break;
+
 	case 'check_email':
 		$email = (string) $this->request['email'];
 
@@ -32,7 +33,8 @@ switch($mode)
 		{
 			$html = '<img src="./images/bad.gif"> <span class="leechmed bold">'. $err .'</span>';
 		}
-		break;
+	break;
+
 	case 'check_pass':
 		$pass = (string) $this->request['pass'];
 		$pass_confirm = (string) $this->request['pass_confirm'];
@@ -42,7 +44,7 @@ switch($mode)
 		}
 		else
 		{
-		    if ($pass != $pass_confirm)
+			if ($pass != $pass_confirm)
 			{
 				$html = '<img src="./images/bad.gif"> <span class="leechmed bold">'. $lang['CHOOSE_PASS_ERR'] .'</span>';
 			}
@@ -60,12 +62,13 @@ switch($mode)
 				{
 					$text = (IS_GUEST) ? $lang['CHOOSE_PASS_REG_OK'] : $lang['CHOOSE_PASS_OK'];
 					$html = '<img src="./images/good.gif"> <span class="seedmed bold">'. $text .'</span>';
-			    }
+				}
 			}
 		}
 	break;
+
 	case 'refresh_captcha';
-	    $html = CAPTCHA()->get_html();
+		$html = CAPTCHA()->get_html();
 	break;
 }
 

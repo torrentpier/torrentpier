@@ -104,4 +104,3 @@ class bb_error_handler
 
 $errHandler = new bb_error_handler;
 set_error_handler(array(&$errHandler, 'bb_error_handler'));
-

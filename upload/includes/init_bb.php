@@ -580,8 +580,7 @@ $dl_status_css = array(
 	DL_STATUS_CANCEL   => 'dlCancel',
 );
 
-
-// Show 'Board is disabled' message if needed.
+// Show 'Board is disabled' message if needed
 if ($bb_cfg['board_disable'] && !defined('IN_ADMIN') && !defined('IN_LOGIN'))
 {
 	message_die(GENERAL_MESSAGE, 'BOARD_DISABLE');

@@ -138,4 +138,3 @@ echo '</body></html>';
 DB()->query("DROP TEMPORARY TABLE ". TMP_TRACKER_TABLE);
 
 bb_exit();
-

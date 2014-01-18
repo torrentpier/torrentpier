@@ -66,6 +66,7 @@ if ($edit_tpl_mode)
 		'NO_TPL_ASSIGNED' => !($f_data['forum_tpl_id']),
 		'TPL_SELECT'      => get_select('forum_tpl', $f_data['forum_tpl_id']),
 	));
+
 	if ($tpl_data)
 	{
 		$template->assign_vars(array(
@@ -79,4 +80,3 @@ if ($edit_tpl_mode)
 }
 
 print_page('posting_tpl.tpl');
-

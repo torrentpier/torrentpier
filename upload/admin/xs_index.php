@@ -35,4 +35,5 @@ $template->assign_vars(array(
 
 $template->set_filenames(array('body' => XS_TPL_PATH . 'index.tpl'));
 $template->pparse('body');
+
 xs_exit();

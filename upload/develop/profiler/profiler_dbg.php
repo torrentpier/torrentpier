@@ -156,7 +156,7 @@ class profiler_dbg extends profiler
 	var $min_time   = 0;
 	var $total_time = 0;
 
-	//  $min_time - минимальное время выполнения для вывода в подробной построковой информации (в секундах или %)
+	//  $min_time - РјРёРЅРёРјР°Р»СЊРЅРѕРµ РІСЂРµРјСЏ РІС‹РїРѕР»РЅРµРЅРёСЏ РґР»СЏ РІС‹РІРѕРґР° РІ РїРѕРґСЂРѕР±РЅРѕР№ РїРѕСЃС‚СЂРѕРєРѕРІРѕР№ РёРЅС„РѕСЂРјР°С†РёРё (РІ СЃРµРєСѓРЅРґР°С… РёР»Рё %)
 	//
 	function print_profile_data ($min_time = 0)
 	{
@@ -371,7 +371,3 @@ class profiler_dbg extends profiler
 		return ($a['time'] > $b['time']) ? -1 : 1;
 	}
 }
-
-
-
-

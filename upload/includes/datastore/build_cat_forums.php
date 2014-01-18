@@ -24,14 +24,14 @@ $data = array(
 // Store only these fields from BB_FORUMS in $data['f']
 $forum_store_fields = array_flip(array_keys($bf['forum_perm']));
 $forum_store_fields += array_flip(array(
-  'forum_id',
-  'cat_id',
-  'forum_name',
-  'forum_desc',
-  'forum_status',
-  'forum_posts',
-  'forum_topics',
-  'forum_parent',
+	'forum_id',
+	'cat_id',
+	'forum_name',
+	'forum_desc',
+	'forum_status',
+	'forum_posts',
+	'forum_topics',
+	'forum_parent',
 ));
 
 // Categories
@@ -73,7 +73,7 @@ foreach (DB()->fetch_rowset($sql) as $row)
 		$not_auth['user_read'][] = $fid;
 	}
 
-    $data['forum'][$fid] = $row;
+	$data['forum'][$fid] = $row;
 
 	// Store forums data
 	if ($parent_id = $row['forum_parent'])
@@ -136,7 +136,7 @@ if ($bb_cfg['show_latest_news'] AND $news_forum_ids = $bb_cfg['latest_news_forum
 		SELECT topic_id, topic_time, topic_title, forum_id
 		FROM ". BB_TOPICS ."
 		WHERE forum_id IN ($news_forum_ids)
-	        AND topic_moved_id = 0
+			AND topic_moved_id = 0
 		ORDER BY topic_time DESC
 		LIMIT $news_count
 	");
@@ -149,18 +149,18 @@ if ($bb_cfg['show_latest_news'] AND $news_forum_ids = $bb_cfg['latest_news_forum
 //
 if ($bb_cfg['show_network_news'] AND $net_forum_ids = $bb_cfg['network_news_forum_id'])
 {
-    $net_count = max($bb_cfg['network_news_count'], 1);
+	$net_count = max($bb_cfg['network_news_count'], 1);
 
-    $data = DB()->fetch_rowset("
-        SELECT topic_id, topic_time, topic_title, forum_id
-        FROM ". BB_TOPICS ."
-        WHERE forum_id IN ($net_forum_ids)
-	        AND topic_moved_id = 0
-        ORDER BY topic_time DESC
-        LIMIT $net_count
-    ");
+	$data = DB()->fetch_rowset("
+		SELECT topic_id, topic_time, topic_title, forum_id
+		FROM ". BB_TOPICS ."
+		WHERE forum_id IN ($net_forum_ids)
+			AND topic_moved_id = 0
+		ORDER BY topic_time DESC
+		LIMIT $net_count
+	");
 
-    $this->store('network_news', $data);
+	$this->store('network_news', $data);
 }
 
 //
@@ -174,8 +174,8 @@ if ($bb_cfg['show_ads'])
 		SELECT *
 		FROM ". BB_ADS ."
 		WHERE ad_status = 1
-		  AND ad_start_time < NOW()
-		  AND DATE_ADD(ad_start_time, INTERVAL ad_active_days DAY) > NOW()
+			AND ad_start_time < NOW()
+			AND DATE_ADD(ad_start_time, INTERVAL ad_active_days DAY) > NOW()
 	");
 
 	foreach ($active_ads as $ad)
@@ -187,9 +187,9 @@ if ($bb_cfg['show_ads'])
 				$ad_block_assignment[$block_id][] = $ad['ad_id'];
 			}
 		}
-
 		$ad_html[$ad['ad_id']] = $ad['ad_html'];
 	}
+
 	$this->store('ads', $ad_html);
 	bb_update_config(array('active_ads' => serialize($ad_block_assignment)));
 }

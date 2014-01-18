@@ -69,4 +69,5 @@ $template->assign_vars(array(
 	));
 
 $template->pparse('body');
+
 xs_exit();

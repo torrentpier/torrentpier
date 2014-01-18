@@ -18,4 +18,5 @@ $lang['TPL']['GUIDE'] = array(
 	'audio'       => 330984,
 	'torrent'     => 330985,
 );
+
 $lang['TPL']['GUIDE'] = array();

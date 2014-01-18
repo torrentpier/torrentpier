@@ -24,18 +24,18 @@ if (isset($_POST['bonus_id']))
 		generate_passkey($user_id, true);
 		$btu = get_bt_userdata($user_id);
 	}
-	
+
 	$upload = $upload_row[$id]*1024*1024*1024;
 	$points = $price_row[$id];
-	
-    if($userdata['user_points'] < $points)
+
+	if ($userdata['user_points'] < $points)
 	{
-	    meta_refresh('index.php', 5);
-		
-	    $message = $lang['BONUS_NOT_SUCCES'] .'<br /><br /><a href="'. BONUS_URL .'">'. $lang['BONUS_RETURN'] .'</a><br /><br /><a href="'. PROFILE_URL . $userdata['user_id'] .'">'. $lang['RETURN_PROFILE'] .'</a><br /><br />'. sprintf($lang['CLICK_RETURN_INDEX'],  '<a href="index.php">', '</a>');
-	
-        bb_die($message);
-	}	
+		meta_refresh('index.php', 5);
+
+		$message = $lang['BONUS_NOT_SUCCES'] .'<br /><br /><a href="'. BONUS_URL .'">'. $lang['BONUS_RETURN'] .'</a><br /><br /><a href="'. PROFILE_URL . $userdata['user_id'] .'">'. $lang['RETURN_PROFILE'] .'</a><br /><br />'. sprintf($lang['CLICK_RETURN_INDEX'],  '<a href="index.php">', '</a>');
+
+		bb_die($message);
+	}
 
 	DB()->query("UPDATE ". BB_BT_USERS ." bu, ". BB_USERS ." u
 		SET
@@ -47,12 +47,12 @@ if (isset($_POST['bonus_id']))
 	");
 
 	cache_rm_user_sessions($user_id);
-    meta_refresh(BONUS_URL, 5);
-	
+	meta_refresh(BONUS_URL, 5);
+
 	$message = sprintf($lang['BONUS_SUCCES'], humn_size($upload_row[$id]*1024*1024*1024));
 	$message .= '<br /><br /><a href="'. BONUS_URL .'">'. $lang['BONUS_RETURN'] .'</a><br /><br /><a href="'. PROFILE_URL . $userdata['user_id'] .'">'. $lang['RETURN_PROFILE'] .'</a><br /><br />'. sprintf($lang['CLICK_RETURN_INDEX'],  '<a href="index.php">', '</a>');
-	
-    bb_die($message);
+
+	bb_die($message);
 }
 else
 {

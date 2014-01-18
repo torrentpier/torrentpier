@@ -18,6 +18,10 @@
 <!-- IF INCLUDE_BBCODE_JS -->
 <script type="text/javascript" src="{SITE_URL}misc/js/bbcode.js?v={$bb_cfg['js_ver']}"></script>
 <script type="text/javascript">
+	window.BB = {};
+	window.encURL = encodeURIComponent;
+</script>
+<script type="text/javascript">
 var postImg_MaxWidth = screen.width - {POST_IMG_WIDTH_DECR_JS};
 var postImgAligned_MaxWidth = Math.round(screen.width/3);
 var attachImg_MaxWidth = screen.width - {ATTACH_IMG_WIDTH_DECR_JS};
@@ -577,8 +581,6 @@ important_info
 
 <!--/menus-->
 
-
-
 <!--page_content-->
 <div id="page_content">
 <table cellspacing="0" cellpadding="0" border="0" style="width: 100%;">
@@ -608,48 +610,51 @@ important_info
 <!-- ENDIF -->
 
 <!--main_content-->
-    <td id="main_content">
+<td id="main_content">
     <div id="main_content_wrap">
-    <div id="latest_news">
-    <table cellspacing="0" cellpadding="0" width="100%">
-        <tr>
-            <td width="50%">
-                <!-- IF SHOW_LATEST_NEWS -->
-                <h3>{L_LATEST_NEWS}</h3>
-                    <table cellpadding="0">
-                    <!-- BEGIN news -->
-                    <tr>
-                        <td><div class="news_date">{news.NEWS_TIME}</div></td>
-                        <td width="100%">
-						    <div class="news_title<!-- IF news.NEWS_IS_NEW --> new<!-- ENDIF -->"><a href="{TOPIC_URL}{news.NEWS_TOPIC_ID}">{news.NEWS_TITLE}</a></div>
-						</td>
-                    </tr>
-                    <!-- END news -->
-                    </table>
-			        <!-- ENDIF -->
-            </td>
-
-            <!-- IF SHOW_NETWORK_NEWS -->
-            <td width="50%">
-                <h3>{L_NETWORK_NEWS}</h3>
-                <table cellpadding="0">
-                <!-- BEGIN net -->
+        <div id="latest_news">
+            <table cellspacing="0" cellpadding="0" width="100%">
                 <tr>
-                    <td><div class="news_date">{net.NEWS_TIME}</div></td>
-                    <td width="100%">
-					    <div class="news_title<!-- IF net.NEWS_IS_NEW --> new<!-- ENDIF -->"><a href="{TOPIC_URL}{net.NEWS_TOPIC_ID}">{net.NEWS_TITLE}</a></div>
-					</td>
+                    <!-- IF SHOW_LATEST_NEWS -->
+                    <td width="50%">
+                        <h3>{L_LATEST_NEWS}</h3>
+                        <table cellpadding="0">
+                            <!-- BEGIN news -->
+                            <tr>
+                                <td><div class="news_date">{news.NEWS_TIME}</div></td>
+                                <td width="100%">
+                                    <div class="news_title<!-- IF news.NEWS_IS_NEW --> new<!-- ENDIF -->"><a href="{TOPIC_URL}{news.NEWS_TOPIC_ID}">{news.NEWS_TITLE}</a></div>
+                                </td>
+                            </tr>
+                            <!-- END news -->
+                        </table>
+                     </td>
+                     <!-- ENDIF -->
+
+                     <!-- IF SHOW_NETWORK_NEWS -->
+                     <td width="50%">
+                        <h3>{L_NETWORK_NEWS}</h3>
+                        <table cellpadding="0">
+                            <!-- BEGIN net -->
+                            <tr>
+                                <td><div class="news_date">{net.NEWS_TIME}</div></td>
+                                <td width="100%">
+                                    <div class="news_title<!-- IF net.NEWS_IS_NEW --> new<!-- ENDIF -->"><a href="{TOPIC_URL}{net.NEWS_TOPIC_ID}">{net.NEWS_TITLE}</a></div>
+                                </td>
+                            </tr>
+                            <!-- END net -->
+                         </table>
+                     </td>
+                     <!-- ENDIF -->
                 </tr>
-                <!-- END net -->
-                </table>
-            </td>
-            <!-- ENDIF -->
-        </tr>
-    </table>
-    </div>
+             </table>
+        </div>
 
-
-<!-- IF AD_BLOCK_200 --><div id="ad-200">{AD_BLOCK_200}</div><!--/ad-200--><!-- ELSEIF AD_BLOCK_100 --><div id="ad-100">{AD_BLOCK_100}</div><!--/ad-100--><!-- ENDIF / AD_BLOCK_100 -->
+<!-- IF AD_BLOCK_200 -->
+        <div id="ad-200">{AD_BLOCK_200}</div><!--/ad-200-->
+<!-- ELSEIF AD_BLOCK_100 -->
+        <div id="ad-100">{AD_BLOCK_100}</div><!--/ad-100-->
+<!-- ENDIF / AD_BLOCK_100 -->
 
 <!--=======================-->
 <!-- ENDIF / COMMON_HEADER -->

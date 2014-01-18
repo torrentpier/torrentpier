@@ -26,53 +26,53 @@ if ($mode == 'templates')
 		));
 	}
 
-    $template->assign_vars(array(
+	$template->assign_vars(array(
 		'TPL_LIST'      => true,
 		'S_ACTION'      => "admin_topic_templates.php?mode=delete",
 	));
 }
 else if ($mode == 'add' || $mode == 'edit')
 {
-    $template->assign_vars(array(
+	$template->assign_vars(array(
 		'TPL'    => true,
 	));
 
-    if($mode == 'edit')
-    {
-    	$tpl_id = (int) request_var('tpl', '');
-    	if(!$tpl_id) bb_die('');
+	if ($mode == 'edit')
+	{
+		$tpl_id = (int) request_var('tpl', '');
+		if (!$tpl_id) bb_die('');
 
-    	$row = DB()->fetch_row("SELECT * FROM ". BB_TOPIC_TPL_OLD ." WHERE tpl_id = $tpl_id");
-        if(!$row) bb_die('');
+		$row = DB()->fetch_row("SELECT * FROM ". BB_TOPIC_TPL_OLD ." WHERE tpl_id = $tpl_id");
+		if (!$row) bb_die('');
 
-        $template->assign_vars(array(
+		$template->assign_vars(array(
 			'S_ACTION'      => "admin_topic_templates.php?mode=edit&tpl=$tpl_id",
 		));
-    }
-    else
-    {
-    	$template->assign_vars(array(
+	}
+	else
+	{
+		$template->assign_vars(array(
 			'S_ACTION'      => "admin_topic_templates.php?mode=add",
 		));
-    }
+	}
 
-    $tpl_name =	isset($_POST['tpl_name']) ? $_POST['tpl_name'] : @$row['tpl_name'];
-    $tpl_script = isset($_POST['tpl_script']) ? $_POST['tpl_script'] : @$row['tpl_script'];
-    $tpl_template = isset($_POST['tpl_template']) ? $_POST['tpl_template'] : @$row['tpl_template'];
-    $tpl_desc = isset($_POST['tpl_desc']) ? $_POST['tpl_desc'] : @$row['tpl_desc'];
+	$tpl_name =	isset($_POST['tpl_name']) ? $_POST['tpl_name'] : @$row['tpl_name'];
+	$tpl_script = isset($_POST['tpl_script']) ? $_POST['tpl_script'] : @$row['tpl_script'];
+	$tpl_template = isset($_POST['tpl_template']) ? $_POST['tpl_template'] : @$row['tpl_template'];
+	$tpl_desc = isset($_POST['tpl_desc']) ? $_POST['tpl_desc'] : @$row['tpl_desc'];
 
-    $template->assign_vars(array(
+	$template->assign_vars(array(
 		'NAME'      => $tpl_name,
 		'SCRIPT'    => $tpl_script,
 		'TEMP'      => $tpl_template,
 		'DESC'      => $tpl_desc,
 	));
 
-    if(isset($_POST['submit']))
-    {
-	    if($mode == 'edit')
-	    {
-	    	DB()->query("UPDATE ". BB_TOPIC_TPL_OLD ." SET
+	if (isset($_POST['submit']))
+	{
+		if ($mode == 'edit')
+		{
+			DB()->query("UPDATE ". BB_TOPIC_TPL_OLD ." SET
 					tpl_name = '". DB()->escape($tpl_name) ."',
 					tpl_script = '". DB()->escape($tpl_script) ."',
 					tpl_template = '". DB()->escape($tpl_template) ."',
@@ -80,27 +80,27 @@ else if ($mode == 'add' || $mode == 'edit')
 				WHERE tpl_id = $tpl_id
 			");
 			$message = $lang['CHANGED'];
-	    }
-	    else
-	    {
-	    	DB()->query("INSERT INTO ". BB_TOPIC_TPL_OLD ." (tpl_name, tpl_script, tpl_template, tpl_desc)
+		}
+		else
+		{
+			DB()->query("INSERT INTO ". BB_TOPIC_TPL_OLD ." (tpl_name, tpl_script, tpl_template, tpl_desc)
 				VALUES ('". DB()->escape($tpl_name) ."', '". DB()->escape($tpl_script) ."', '". DB()->escape($tpl_template) ."', '". DB()->escape($tpl_desc) ."')");
 			$message = $lang['ADEDD'];
-	    }
+		}
 
-	    bb_die($message);
+		bb_die($message);
 	}
 }
-else if ($mode == 'delete')
+elseif ($mode == 'delete')
 {
-    $tpl_ids = isset($_POST['tpl_id']) ? $_POST['tpl_id'] : bb_die($lang['NOT_CHOOSE']);
+	$tpl_ids = isset($_POST['tpl_id']) ? $_POST['tpl_id'] : bb_die($lang['NOT_CHOOSE']);
 
-    foreach ($tpl_ids as $tpl_id)
+	foreach ($tpl_ids as $tpl_id)
 	{
 		$hidden_fields['tpl_id'][] = $tpl_id;
 	}
 
-    if (isset($_POST['confirm']))
+	if (isset($_POST['confirm']))
 	{
 		DB()->query("DELETE FROM ". BB_TOPIC_TPL_OLD ." WHERE tpl_id IN(". join(',', $tpl_ids) .")");
 		bb_die($lang['REMOVED']);
@@ -193,4 +193,5 @@ else
 		'S_ACTION'      => "admin_topic_templates.php",
 	));
 }
+
 print_page('admin_topic_templates.tpl', 'admin');

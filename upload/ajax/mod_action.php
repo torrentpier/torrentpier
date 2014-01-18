@@ -9,10 +9,10 @@ $mode = (string) $this->request['mode'];
 switch ($mode)
 {
 	case 'tor_status':
-	    $topics = (string) $this->request['topic_ids'];
-	    $status = (int) $this->request['status'];
+		$topics = (string) $this->request['topic_ids'];
+		$status = (int) $this->request['status'];
 
-	    // Валидность статуса
+		// Валидность статуса
 		if (!isset($lang['TOR_STATUS_NAME'][$status]))
 		{
 			$this->ajax_die($lang['STATUS_DOES_EXIST'] . $new_status);
@@ -26,10 +26,10 @@ switch ($mode)
 		}
 		$this->response['status'] = $bb_cfg['tor_icons'][$status];
 		$this->response['topics'] = explode(',', $topics);
-		break;
+	break;
 
 	case 'edit_topic_title':
-        $topic_id    = (int) $this->request['topic_id'];
+		$topic_id    = (int) $this->request['topic_id'];
 		$topic_title = (string) $this->request['topic_title'];
 		$new_title   = clean_title($topic_title);
 
@@ -46,32 +46,32 @@ switch ($mode)
 
 		DB()->query("UPDATE ". BB_TOPICS ." SET topic_title = '$topic_title_sql' WHERE topic_id = $topic_id LIMIT 1");
 
-        //Обновление кеша новостей на главной
+		// Обновление кеша новостей на главной
 		$news_forums = array_flip(explode(',', $bb_cfg['latest_news_forum_id']));
-		if(isset($news_forums[$t_data['forum_id']]) && $bb_cfg['show_latest_news'])
+		if (isset($news_forums[$t_data['forum_id']]) && $bb_cfg['show_latest_news'])
 		{
 			$datastore->enqueue('latest_news');
 			$datastore->update('latest_news');
 		}
-		
+
 		$net_forums = array_flip(explode(',', $bb_cfg['network_news_forum_id']));
-		if(isset($net_forums[$t_data['forum_id']]) && $bb_cfg['show_network_news'])
+		if (isset($net_forums[$t_data['forum_id']]) && $bb_cfg['show_network_news'])
 		{
 			$datastore->enqueue('network_news');
 			$datastore->update('network_news');
 		}
 
-        $this->response['topic_id'] = $topic_id;
+		$this->response['topic_id'] = $topic_id;
 		$this->response['topic_title'] = $new_title;
-		break;
-		
-	case 'profile_ip':
-	    $user_id = (int) $this->request['user_id'];	
-		$profiledata = get_userdata($user_id);
-		
-		if(!$user_id) $this->ajax_die($lang['NO_USER_ID_SPECIFIED']);
+	break;
 
-	    $reg_ip = DB()->fetch_rowset("SELECT username, user_id, user_rank FROM ". BB_USERS ." 
+	case 'profile_ip':
+		$user_id = (int) $this->request['user_id'];
+		$profiledata = get_userdata($user_id);
+
+		if (!$user_id) $this->ajax_die($lang['NO_USER_ID_SPECIFIED']);
+
+		$reg_ip = DB()->fetch_rowset("SELECT username, user_id, user_rank FROM ". BB_USERS ."
 			WHERE user_reg_ip = '{$profiledata['user_reg_ip']}' 
 				AND user_reg_ip != ''
 				AND user_id != {$profiledata['user_id']}
@@ -83,8 +83,8 @@ switch ($mode)
 				AND user_id != {$profiledata['user_id']}");
 
 		$link_reg_ip = $link_last_ip = '';
-	
-		if(!empty($reg_ip))
+
+		if (!empty($reg_ip))
 		{
 			$link_reg_ip .= $lang['OTHER_IP'] .' ';
 			foreach ($reg_ip as $row)
@@ -93,7 +93,7 @@ switch ($mode)
 			}
 		}
 
-		if(!empty($last_ip))
+		if (!empty($last_ip))
 		{
 			$link_last_ip .= $lang['OTHER_IP'] .' ';
 			foreach ($last_ip as $row)
@@ -111,20 +111,20 @@ switch ($mode)
 			$reg_ip  = '<a href="'. $bb_cfg['whois_info'] . $user_reg_ip .'" class="gen" target="_blank">'. $user_reg_ip .'</a>';
 			$last_ip = '<a href="'. $bb_cfg['whois_info'] . $user_last_ip .'" class="gen" target="_blank">'. $user_last_ip .'</a>';
 		}
-		
+
 		$this->response['ip_list_html'] = '
 			<br /><table class="mod_ip bCenter borderless" cellspacing="1">
-                <tr class="row5" >
+				<tr class="row5" >
 					<td>'. $lang['REG_IP'] .'</td>
 					<td class="tCenter">'. $reg_ip .'</td>
 					<td><div>'. $link_reg_ip .'</div></td>
 				</tr>
-                <tr class="row4">
+				<tr class="row4">
 					<td>'. $lang['LAST_IP'] .'</td>
 					<td class="tCenter">'. $last_ip .'</td>
 					<td><div>'. $link_last_ip .'</div></td>
 				</tr>
-            </table><br />
+			</table><br />
 		';
-	break;	
+	break;
 }

@@ -22,9 +22,7 @@ if ( !$userdata['session_logged_in'] )
 	redirect("login.php?redirect=profile.php&mode=email&" . POST_USERS_URL . "=$user_id");
 }
 
-$sql = "SELECT username, user_email, user_lang
-	FROM " . BB_USERS . "
-	WHERE user_id = $user_id";
+$sql = "SELECT username, user_email, user_lang FROM " . BB_USERS . " WHERE user_id = $user_id";
 if ( $row = DB()->fetch_row($sql) )
 {
 	$username = $row['username'];

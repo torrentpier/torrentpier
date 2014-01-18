@@ -2745,26 +2745,26 @@ function get_path_from_id ($id, $ext_id, $base_path, $first_div, $sec_div)
 	return ($base_path ? "$base_path/" : '') . ($id % $sec_div) .'/'. $id . ($ext ? ".$ext" : '');
 }
 
-function send_pm($user_id, $subject, $message, $poster_id = BOT_UID)
+function send_pm ($user_id, $subject, $message, $poster_id = BOT_UID)
 {
 	global $userdata;
 
 	$subject = DB()->escape($subject);
 	$message = DB()->escape($message);
 
-    if($poster_id == BOT_UID)
-    {
-    	$poster_ip = '7f000001';
-    }
-    else if($row = DB()->fetch_row("SELECT user_reg_ip FROM ". BB_USERS ." WHERE user_id = $poster_id"))
-    {
-    	$poster_ip = $row['user_reg_ip'];
-    }
-    else
-    {
-    	$poster_id = $userdata['user_id'];
-    	$poster_ip = USER_IP;
-    }
+	if ($poster_id == BOT_UID)
+	{
+		$poster_ip = '7f000001';
+	}
+	elseif ($row = DB()->fetch_row("SELECT user_reg_ip FROM ". BB_USERS ." WHERE user_id = $poster_id"))
+	{
+		$poster_ip = $row['user_reg_ip'];
+	}
+	else
+	{
+		$poster_id = $userdata['user_id'];
+		$poster_ip = USER_IP;
+	}
 
 	DB()->sql_query("INSERT INTO ". BB_PRIVMSGS ." (privmsgs_type, privmsgs_subject, privmsgs_from_userid, privmsgs_to_userid, privmsgs_date, privmsgs_ip)
 		VALUES (". PRIVMSGS_NEW_MAIL .", '$subject', {$poster_id}, $user_id, ". TIMENOW .", '$poster_ip')");
@@ -2780,7 +2780,7 @@ function send_pm($user_id, $subject, $message, $poster_id = BOT_UID)
 		WHERE user_id = $user_id");
 }
 
-function profile_url($data)
+function profile_url ($data)
 {
 	global $bb_cfg, $lang, $datastore;
 
@@ -2792,22 +2792,22 @@ function profile_url($data)
 
 	$user_rank = !empty($data['user_rank']) ? $data['user_rank'] : 0;
 
-	if(isset($ranks[$user_rank]))
+	if (isset($ranks[$user_rank]))
 	{
 		$title = $ranks[$user_rank]['rank_title'];
 		$style = $ranks[$user_rank]['rank_style'];
 	}
-	if(empty($title)) $title = $lang['USER'];
-	if(empty($style)) $style = 'colorUser';
+	if (empty($title)) $title = $lang['USER'];
+	if (empty($style)) $style = 'colorUser';
 
-	if(!$bb_cfg['color_nick']) $style = '';
+	if (!$bb_cfg['color_nick']) $style = '';
 
 	$username = !empty($data['username']) ? $data['username'] : $lang['GUEST'];
 	$user_id = (!empty($data['user_id']) && $username != $lang['GUEST']) ? $data['user_id'] : GUEST_UID;
 
 	$profile = '<span title="'. $title .'" class="'. $style .'">'. $username .'</span>';
 
-	if(!in_array($user_id, array('', GUEST_UID, BOT_UID)) && $username)
+	if (!in_array($user_id, array('', GUEST_UID, BOT_UID)) && $username)
 	{
 		$profile = '<a href="'. make_url(PROFILE_URL . $user_id) .'">'. $profile .'</a>';
 	}
@@ -2815,7 +2815,8 @@ function profile_url($data)
 	return $profile;
 }
 
-function seo_link_header($str){
+function seo_link_header ($str)
+{
 	/**
 	 * Функция обработки url. Сверяет url с переданным выражением.
 	 */

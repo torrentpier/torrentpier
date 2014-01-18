@@ -5,7 +5,7 @@ if (!defined('BB_ROOT')) die(basename(__FILE__));
 //
 // Pick a language, any language
 //
-function language_select($default, $select_name = "language", $dirname="language")
+function language_select ($default, $select_name = "language", $dirname="language")
 {
 	global $bb_cfg;
 	if(!$default) $default = $bb_cfg['default_lang'];
@@ -43,7 +43,7 @@ function language_select($default, $select_name = "language", $dirname="language
 //
 // Pick a timezone
 //
-function tz_select($default, $select_name = 'timezone')
+function tz_select ($default, $select_name = 'timezone')
 {
 	global $sys_timezone, $lang;
 
@@ -66,7 +66,7 @@ function tz_select($default, $select_name = 'timezone')
 //
 // Templates
 //
-function templates_select($default_style, $select_name = 'tpl_name')
+function templates_select ($default_style, $select_name = 'tpl_name')
 {
 	global $bb_cfg;
 

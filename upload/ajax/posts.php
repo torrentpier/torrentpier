@@ -50,7 +50,7 @@ if (!defined('WORD_LIST_OBTAINED'))
 switch($this->request['type'])
 {
 	case 'delete';
-		if($post['post_id'] != $post['topic_first_post_id'] && ($is_auth['auth_mod'] || ($userdata['user_id'] == $post['poster_id'] && $is_auth['auth_delete'] && $post['topic_last_post_id'] == $post['post_id'] && $post['post_time'] + 3600*3 > TIMENOW)))
+		if ($post['post_id'] != $post['topic_first_post_id'] && ($is_auth['auth_mod'] || ($userdata['user_id'] == $post['poster_id'] && $is_auth['auth_delete'] && $post['topic_last_post_id'] == $post['post_id'] && $post['post_time'] + 3600*3 > TIMENOW)))
 		{
 			if (empty($this->request['confirmed']))
 			{
@@ -64,14 +64,14 @@ switch($this->request['type'])
 		{
 			$this->ajax_die(sprintf($lang['DELETE_OWN_POSTS'], strip_tags($is_auth['auth_delete_type'])));
 		}
-		break;
+	break;
 
 	case 'reply';
 		if(bf($userdata['user_opt'], 'user_opt', 'allow_post'))
 		{
 			$this->ajax_die($lang['RULES_REPLY_CANNOT']);
 		}
-        else if(!$is_auth['auth_reply'])
+		else if(!$is_auth['auth_reply'])
 		{
 			$this->ajax_die(sprintf($lang['SORRY_AUTH_REPLY'], strip_tags($is_auth['auth_reply_type'])));
 		}
@@ -89,55 +89,55 @@ switch($this->request['type'])
 			$message = (!empty($message)) ? preg_replace($orig_word, $replace_word, $message) : '';
 		}
 
-		if($post['post_id'] == $post['topic_first_post_id'])
+		if ($post['post_id'] == $post['topic_first_post_id'])
 		{
-		    $message = "[quote]". $post['topic_title'] ."[/quote]\n";
+			$message = "[quote]". $post['topic_title'] ."[/quote]\n";
 		}
-		if(mb_strlen($message, 'UTF-8') > 1000)
+		if (mb_strlen($message, 'UTF-8') > 1000)
 		{
 			$this->response['redirect'] = make_url('posting.php?mode=quote&p='. $post_id);
 		}
 
 		$this->response['quote']   = true;
 		$this->response['message'] = $message;
-		break;
+	break;
 
 	case 'view_message':
 		$message = (string) $this->request['message'];
 		if(!trim($message)) $this->ajax_die($lang['EMPTY_MESSAGE']);
 		$message = htmlCHR($message, false, ENT_NOQUOTES);
 
-        $this->response['message_html'] = bbcode2html($message);
-        $this->response['res_id'] = @$this->request['res_id'];
-		break;
+		$this->response['message_html'] = bbcode2html($message);
+		$this->response['res_id'] = @$this->request['res_id'];
+	break;
 
 	case 'edit':
-    case 'editor':
-        if ($post['poster_id'] != $userdata['user_id'] && !$is_auth['auth_mod'])
+	case 'editor':
+		if ($post['poster_id'] != $userdata['user_id'] && !$is_auth['auth_mod'])
 		{
 			$this->ajax_die($lang['EDIT_OWN_POSTS']);
 		}
-        if((mb_strlen($post['post_text'], 'UTF-8') > 1000) || $post['post_attachment'] || ($post['topic_first_post_id'] == $post_id))
-        {
-        	$this->response['redirect'] = make_url('posting.php?mode=editpost&p='. $post_id);
-        }
-		else if($this->request['type'] == 'editor')
+		if ((mb_strlen($post['post_text'], 'UTF-8') > 1000) || $post['post_attachment'] || ($post['topic_first_post_id'] == $post_id))
+		{
+			$this->response['redirect'] = make_url('posting.php?mode=editpost&p='. $post_id);
+		}
+		elseif ($this->request['type'] == 'editor')
 		{
 			$text = (string) $this->request['text'];
 			$text = prepare_message($text);
 
-			if(mb_strlen($text) > 2)
+			if (mb_strlen($text) > 2)
 			{
-				if($text != $post['post_text'])
+				if ($text != $post['post_text'])
 				{
-				    if($bb_cfg['max_smilies'])
-				    {
+					if ($bb_cfg['max_smilies'])
+					{
 						$count_smilies = substr_count(bbcode2html($text), '<img class="smile" src="'. $bb_cfg['smilies_path']);
-						if($count_smilies > $bb_cfg['max_smilies'])
+						if ($count_smilies > $bb_cfg['max_smilies'])
 						{
 							$this->ajax_die(sprintf($lang['MAX_SMILIES_PER_POST'], $bb_cfg['max_smilies']));
 						}
-				    }
+					}
 					DB()->query("UPDATE ". BB_POSTS_TEXT ." SET post_text = '". DB()->escape($text) ."' WHERE post_id = $post_id LIMIT 1");
 					if ($post['topic_last_post_id'] != $post['post_id'] && $userdata['user_id'] == $post['poster_id'])
 					{
@@ -146,7 +146,7 @@ switch($this->request['type'])
 					$s_text = str_replace('\n', "\n", $text);
 					$s_topic_title = str_replace('\n', "\n", $post['topic_title']);
 					add_search_words($post_id, stripslashes($s_text), stripslashes($s_topic_title));
-				    update_post_html(array(
+					update_post_html(array(
 						'post_id'        => $post_id,
 						'post_text'      => $text,
 					));
@@ -163,7 +163,7 @@ switch($this->request['type'])
 			{
 				$this->ajax_die($lang['TOPIC_LOCKED']);
 			}
-			else if(!$is_auth['auth_edit'])
+			elseif (!$is_auth['auth_edit'])
 			{
 				$this->ajax_die(sprintf($lang['SORRY_AUTH_EDIT'], strip_tags($is_auth['auth_edit_type'])));
 			}
@@ -173,7 +173,7 @@ switch($this->request['type'])
 			$hidden_form .= '<input type="hidden" name="subject" value="'. $post['topic_title'] .'" />';
 
 			$this->response['text'] = '
-			    <form action="posting.php" method="post" name="post">
+				<form action="posting.php" method="post" name="post">
 					'. $hidden_form .'
 					<div class="buttons mrg_4">
 						<input type="button" value="B" name="codeB" title="'. $lang['BOLD'] .'" style="font-weight: bold; width: 25px;" />
@@ -217,28 +217,28 @@ switch($this->request['type'])
 		break;
 
 	case 'add':
-        if (!isset($this->request['topic_id']))
+		if (!isset($this->request['topic_id']))
 		{
 			$this->ajax_die('empty topic_id');
 		}
 
-		if(bf($userdata['user_opt'], 'user_opt', 'allow_post'))
+		if (bf($userdata['user_opt'], 'user_opt', 'allow_post'))
 		{
 			$this->ajax_die($lang['RULES_REPLY_CANNOT']);
 		}
-        else if(!$is_auth['auth_reply'])
+		elseif (!$is_auth['auth_reply'])
 		{
 			$this->ajax_die(sprintf($lang['SORRY_AUTH_REPLY'], strip_tags($is_auth['auth_reply_type'])));
 		}
-        if ($post['topic_status'] == TOPIC_LOCKED && !$is_auth['auth_mod'])
+		if ($post['topic_status'] == TOPIC_LOCKED && !$is_auth['auth_mod'])
 		{
-		   $this->ajax_die($lang['TOPIC_LOCKED']);
+			$this->ajax_die($lang['TOPIC_LOCKED']);
 		}
 
-	    $message = (string) $this->request['message'];
+		$message = (string) $this->request['message'];
 		$message = prepare_message($message);
 
-        // Flood control
+		// Flood control
 		$where_sql = (IS_GUEST) ? "p.poster_ip = '". USER_IP ."'" : "p.poster_id = {$userdata['user_id']}";
 
 		$sql = "SELECT MAX(p.post_time) AS last_post_time FROM ". BB_POSTS ." p WHERE $where_sql";
@@ -276,33 +276,33 @@ switch($this->request['type'])
 			}
 		}
 
-	    if($bb_cfg['max_smilies'])
-	    {
+		if ($bb_cfg['max_smilies'])
+		{
 			$count_smilies = substr_count(bbcode2html($message), '<img class="smile" src="'. $bb_cfg['smilies_path']);
-			if($count_smilies > $bb_cfg['max_smilies'])
+			if ($count_smilies > $bb_cfg['max_smilies'])
 			{
 				$this->ajax_die(sprintf($lang['MAX_SMILIES_PER_POST'], $bb_cfg['max_smilies']));
 			}
-	    }
+		}
 
 		DB()->sql_query("INSERT INTO " . BB_POSTS . " (topic_id, forum_id, poster_id, post_time, poster_ip) VALUES ($topic_id, ". $post['forum_id'] .", ". $userdata['user_id'] .", '". TIMENOW ."', '". USER_IP ."')");
-        $post_id = DB()->sql_nextid();
+		$post_id = DB()->sql_nextid();
 		DB()->sql_query("INSERT INTO " . BB_POSTS_TEXT . " (post_id, post_text) VALUES ($post_id, '". DB()->escape($message) ."')");
 
-        update_post_stats('reply', $post, $post['forum_id'], $topic_id, $post_id, $userdata['user_id']);
+		update_post_stats('reply', $post, $post['forum_id'], $topic_id, $post_id, $userdata['user_id']);
 
 		$s_message = str_replace('\n', "\n", $message);
 		$s_topic_title = str_replace('\n', "\n", $post['topic_title']);
 		add_search_words($post_id, stripslashes($s_message), stripslashes($s_topic_title));
-	    update_post_html(array(
+		update_post_html(array(
 			'post_id'        => $post_id,
 			'post_text'      => $message,
 		));
 
 		$this->response['redirect'] = make_url(POST_URL . $post_id .'#'. $post_id);
-		break;
+	break;
 
 	default:
 		$this->ajax_die('empty type');
-		break;
+	break;
 }
