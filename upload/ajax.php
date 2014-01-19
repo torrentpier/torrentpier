@@ -132,7 +132,7 @@ class ajax_common
 		{
 			// GUEST
 			case 'guest':
-				break;
+			break;
 
 			// USER
 			case 'user':
@@ -140,7 +140,7 @@ class ajax_common
 				{
 					$this->ajax_die($lang['NEED_TO_LOGIN_FIRST']);
 				}
-				break;
+			break;
 
 			// MOD
 			case 'mod':
@@ -149,7 +149,7 @@ class ajax_common
 					$this->ajax_die($lang['ONLY_FOR_MOD']);
 				}
 				$this->check_admin_session();
-				break;
+			break;
 
 			// ADMIN
 			case 'admin':
@@ -158,8 +158,8 @@ class ajax_common
 					$this->ajax_die($lang['ONLY_FOR_ADMIN']);
 				}
 				$this->check_admin_session();
-				break;
-				
+			break;
+
 			// SUPER_ADMIN
 			case 'super_admin':
 				if (!IS_SUPER_ADMIN)
@@ -167,7 +167,7 @@ class ajax_common
 					$this->ajax_die($lang['ONLY_FOR_SUPER_ADMIN']);
 				}
 				$this->check_admin_session();
-				break;
+			break;
 
 			default:
 				trigger_error("invalid auth type for $action", E_USER_ERROR);
@@ -313,174 +313,27 @@ class ajax_common
 
 	function change_user_rank ()
 	{
-		global $datastore, $lang;
-
-		$ranks   = $datastore->get('ranks');
-		$rank_id = intval($this->request['rank_id']);
-
-		if (!$user_id = intval($this->request['user_id']) OR !$profiledata = get_userdata($user_id))
-		{
-			$this->ajax_die("invalid user_id: $user_id");
-		}
-		if ($rank_id != 0 && !isset($ranks[$rank_id]))
-		{
-			$this->ajax_die("invalid rank_id: $rank_id");
-		}
-
-		DB()->query("UPDATE ". BB_USERS ." SET user_rank = $rank_id WHERE user_id = $user_id LIMIT 1");
-
-		cache_rm_user_sessions($user_id);
-
-		$this->response['html'] = ($rank_id != 0) ? $lang['AWARDED_RANK'] . ' <b> '. $ranks[$rank_id]['rank_title'] .'</b>' : $lang['SHOT_RANK'];
+		require(AJAX_DIR .'change_user_rank.php');
 	}
 
 	function change_user_opt ()
 	{
-		global $bf, $lang;
-
-		$user_id = (int) $this->request['user_id'];
-		$new_opt = bb_json_decode($this->request['user_opt']);
-
-		if (!$user_id OR !$u_data = get_userdata($user_id))
-		{
-			$this->ajax_die('invalid user_id');
-		}
-		if (!is_array($new_opt))
-		{
-			$this->ajax_die('invalid new_opt');
-		}
-
-		foreach ($bf['user_opt'] as $opt_name => $opt_bit)
-		{
-			if (isset($new_opt[$opt_name]))
-			{
-				setbit($u_data['user_opt'], $opt_bit, !empty($new_opt[$opt_name]));
-			}
-		}
-
-		DB()->query("UPDATE ". BB_USERS ." SET user_opt = {$u_data['user_opt']} WHERE user_id = $user_id LIMIT 1");
-
-		// Удаляем данные из кеша
-		cache_rm_user_sessions ($user_id);
-
-		$this->response['resp_html'] = $lang['SAVED'];
+		require(AJAX_DIR .'change_user_opt.php');
 	}
 
 	function gen_passkey ()
 	{
-		global $userdata, $lang;
-
-		$req_uid = (int) $this->request['user_id'];
-
-		if ($req_uid == $userdata['user_id'] || IS_ADMIN)
-		{
-			if (empty($this->request['confirmed']))
-			{
-				$this->prompt_for_confirm($lang['BT_GEN_PASSKEY_NEW']);
-			}
-
-			if (!$passkey = generate_passkey($req_uid, IS_ADMIN))
-			{
-				$this->ajax_die('Could not insert passkey');
-			}
-			tracker_rm_user($req_uid);
-			$this->response['passkey'] = $passkey;
-		}
-		else $this->ajax_die($lang['NOT_AUTHORISED']);
+		require(AJAX_DIR .'gen_passkey.php');
 	}
 
-	// User groups membership
 	function group_membership ()
 	{
-		global $lang, $user;
-
-		if (!$user_id = intval($this->request['user_id']) OR !$profiledata = get_userdata($user_id))
-		{
-			$this->ajax_die("invalid user_id: $user_id");
-		}
-		if (!$mode = (string) $this->request['mode'])
-		{
-			$this->ajax_die('invalid mode (empty)');
-		}
-
-		switch ($mode)
-		{
-			case 'get_group_list':
-				$sql = "
-					SELECT ug.user_pending, g.group_id, g.group_type, g.group_name, g.group_moderator, self.user_id AS can_view
-					FROM       ". BB_USER_GROUP ." ug
-					INNER JOIN ". BB_GROUPS     ." g ON(g.group_id = ug.group_id AND g.group_single_user = 0)
-					 LEFT JOIN ". BB_USER_GROUP ." self ON(self.group_id = g.group_id AND self.user_id = {$user->id} AND self.user_pending = 0)
-					WHERE ug.user_id = $user_id
-					ORDER BY g.group_name
-				";
-				$html = array();
-				foreach (DB()->fetch_rowset($sql) as $row)
-				{
-					$class  = ($row['user_pending']) ? 'med' : 'med bold';
-					$class .= ($row['group_moderator'] == $user_id) ? ' colorMod' : '';
-					$href   = "groupcp.php?g={$row['group_id']}";
-
-					if (IS_ADMIN)
-					{
-						$href .= "&amp;u=$user_id";
-						$link  = '<a href="'. $href .'" class="'. $class .'" target="_blank">'. htmlCHR($row['group_name']) .'</a>';
-						$html[] = $link;
-					}
-					else
-					{
-						// скрытая группа и сам юзер не является её членом
-						if ($row['group_type'] == GROUP_HIDDEN && !$row['can_view'])
-						{
-							continue;
-						}
-						if ($row['group_moderator'] == $user->id)
-						{
-							$class .= ' selfMod';
-							$href  .= "&amp;u=$user_id";  // сам юзер модератор этой группы
-						}
-						$link  = '<a href="'. $href .'" class="'. $class .'" target="_blank">'. htmlCHR($row['group_name']) .'</a>';
-						$html[] = $link;
-					}
-				}
-				if ($html)
-				{
-					$this->response['group_list_html'] = '<ul><li>'. join('</li><li>', $html) .'</li></ul>';
-				}
-				else
-				{
-					$this->response['group_list_html'] = $lang['GROUP_LIST_HIDDEN'];
-				}
-				break;
-
-			default:
-				$this->ajax_die("invalid mode: $mode");
-		}
+		require(AJAX_DIR .'group_membership.php');
 	}
 
 	function post_mod_comment ()
 	{
-		global $lang, $userdata;
-
-		$post_id = (int) $this->request['post_id'];
-		$post = DB()->fetch_row("SELECT t.*, f.*, p.*, pt.post_text
-			FROM ". BB_TOPICS ." t, ". BB_FORUMS ." f, ". BB_POSTS ." p, ". BB_POSTS_TEXT ." pt
-			WHERE p.post_id = $post_id
-				AND t.topic_id = p.topic_id
-				AND f.forum_id = t.forum_id
-				AND p.post_id  = pt.post_id
-			LIMIT 1");
-		if(!$post) $this->ajax_die('not post');
-		$type = (int) $this->request['mc_type'];
-		$text = (string) $this->request['mc_text'];
-		$text = prepare_message($text);
-		if (!$text) $this->ajax_die('no text');
-		DB()->query("UPDATE ". BB_POSTS ." SET post_mod_comment = '". DB()->escape($text) ."', post_mod_comment_type = $type, post_mc_mod_id = ". $userdata['user_id'] .", post_mc_mod_name = '". $userdata['username'] ."' WHERE post_id = $post_id LIMIT 1");
-		$this->response['type'] = $type;
-		$this->response['post_id'] = $post_id;
-		if ($type == 0) $this->response['html'] = '';
-		elseif ($type == 1) $this->response['html'] = '<div class="mcBlock"><table cellspacing="0" cellpadding="0" border="0"><tr><td class="mcTd1C">K</td><td class="mcTd2C">'. profile_url($userdata) .'&nbsp;'. $lang['WROTE'] .':<br /><br />'. bbcode2html($text) .'</td></tr></table></div>';
-		elseif ($type == 2) $this->response['html'] = '<div class="mcBlock"><table cellspacing="0" cellpadding="0" border="0"><tr><td class="mcTd1W">!</td><td class="mcTd2W">'. profile_url($userdata) .'&nbsp;'. $lang['WROTE'] .':<br /><br />'. bbcode2html($text) .'</td></tr></table></div>';
+		require(AJAX_DIR .'post_mod_comment.php');
 	}
 
 	function view_post ()
@@ -503,37 +356,37 @@ class ajax_common
 		require(AJAX_DIR .'view_torrent.php');
 	}
 
-	function user_register()
+	function user_register ()
 	{
 		require(AJAX_DIR .'user_register.php');
 	}
 
-	function mod_action()
+	function mod_action ()
 	{
 		require(AJAX_DIR .'mod_action.php');
 	}
 
-	function posts()
+	function posts ()
 	{
 		require(AJAX_DIR .'posts.php');
 	}
 
-	function manage_user()
+	function manage_user ()
 	{
 		require(AJAX_DIR .'manage_user.php');
 	}
 
-	function topic_tpl()
+	function topic_tpl ()
 	{
 		require(AJAX_DIR .'topic_tpl.php');
 	}
 
-	function index_data()
+	function index_data ()
 	{
 		require(AJAX_DIR .'index_data.php');
 	}
 
-	function view_profile()
+	function view_profile ()
 	{
 		require(AJAX_DIR .'view_profile.php');
 	}
