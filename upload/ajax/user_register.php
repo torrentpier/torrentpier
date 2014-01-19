@@ -16,7 +16,7 @@ switch($mode)
 		{
 			$html = '<img src="./images/bad.gif"> <span class="leechmed bold">'. $lang['CHOOSE_A_NAME'] .'</span>';
 		}
-		else if($err = validate_username($username))
+		elseif($err = validate_username($username))
 		{
 			$html = '<img src="./images/bad.gif"> <span class="leechmed bold">'. $err .'</span>';
 		}
@@ -29,7 +29,7 @@ switch($mode)
 		{
 			$html = '<img src="./images/bad.gif"> <span class="leechmed bold">'. $lang['CHOOSE_E_MAIL'] .'</span>';
 		}
-		else if($err = validate_email($email))
+		elseif($err = validate_email($email))
 		{
 			$html = '<img src="./images/bad.gif"> <span class="leechmed bold">'. $err .'</span>';
 		}

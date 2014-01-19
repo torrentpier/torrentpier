@@ -94,7 +94,7 @@ if ($topic_id)
 			AND f.forum_id = t.forum_id
 		LIMIT 1";
 }
-else if ($post_id)
+elseif ($post_id)
 {
 	$sql = "SELECT t.*, f.*, p.post_time
 		FROM ". BB_TOPICS ." t, ". BB_FORUMS ." f, ". BB_POSTS ." p
@@ -496,7 +496,7 @@ if ( $is_auth['auth_mod'] )
 		}
 	}
 }
-else if (($t_data['topic_poster'] == $userdata['user_id']) && $userdata['session_logged_in'] && $t_data['self_moderated'])
+elseif (($t_data['topic_poster'] == $userdata['user_id']) && $userdata['session_logged_in'] && $t_data['self_moderated'])
 {
 	$topic_mod .= "<a href=\"modcp.php?" . POST_TOPIC_URL . "=$topic_id&amp;mode=move&amp;sid=" . $userdata['session_id'] . '"><img src="' . $images['topic_mod_move'] . '" alt="' . $lang['MOVE_TOPIC'] . '" title="' . $lang['MOVE_TOPIC'] . '" border="0" /></a>&nbsp;';
 }
@@ -852,7 +852,7 @@ for($i = 0; $i < $total_posts; $i++)
 	{
 		$user_sig = $lang['SIGNATURE_DISABLE'];
 	}
-	else if ($user_sig)
+	elseif ($user_sig)
 	{
 		$user_sig = bbcode2html($user_sig);
 	}
@@ -938,7 +938,7 @@ for($i = 0; $i < $total_posts; $i++)
 	{
 		$post_mod_comment_html = '<div class="mcBlock"><table cellspacing="0" cellpadding="0" border="0"><tr><td class="mcTd1C">K</td><td class="mcTd2C"><a href="profile.php?mode=viewprofile&u='. $postrow[$i]['post_mc_mod_id'] .'">'. $postrow[$i]['post_mc_mod_name'] .'</a> '. $lang['WROTE'] .':<br /><br />'. bbcode2html($postrow[$i]['post_mod_comment']) .'</td></tr></table></div>';
 	}
-	else if ($postrow[$i]['post_mod_comment_type'] == 2)
+	elseif ($postrow[$i]['post_mod_comment_type'] == 2)
 	{
 		$post_mod_comment_html = '<div class="mcBlock"><table cellspacing="0" cellpadding="0" border="0"><tr><td class="mcTd1W">!</td><td class="mcTd2W"><a href="profile.php?mode=viewprofile&u='. $postrow[$i]['post_mc_mod_id'] .'">'. $postrow[$i]['post_mc_mod_name'] .'</a> '. $lang['WROTE'] .':<br /><br />'. bbcode2html($postrow[$i]['post_mod_comment']) .'</td></tr></table></div>';
 	}

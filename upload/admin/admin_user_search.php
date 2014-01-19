@@ -130,55 +130,55 @@ else
 	{
 		$mode = 'search_username';
 	}
-	else if(isset($_POST['search_email'])||isset($_GET['search_email']))
+	elseif(isset($_POST['search_email'])||isset($_GET['search_email']))
 	{
 		$mode = 'search_email';
 	}
-	else if(isset($_POST['search_ip'])||isset($_GET['search_ip']))
+	elseif(isset($_POST['search_ip'])||isset($_GET['search_ip']))
 	{
 		$mode = 'search_ip';
 	}
-	else if(isset($_POST['search_joindate'])||isset($_GET['search_joindate']))
+	elseif(isset($_POST['search_joindate'])||isset($_GET['search_joindate']))
 	{
 		$mode = 'search_joindate';
 	}
-	else if(isset($_POST['search_group'])||isset($_GET['search_group']))
+	elseif(isset($_POST['search_group'])||isset($_GET['search_group']))
 	{
 		$mode = 'search_group';
 	}
-	else if(isset($_POST['search_rank'])||isset($_GET['search_rank']))
+	elseif(isset($_POST['search_rank'])||isset($_GET['search_rank']))
 	{
 		$mode = 'search_rank';
 	}
-	else if(isset($_POST['search_postcount'])||isset($_GET['search_postcount']))
+	elseif(isset($_POST['search_postcount'])||isset($_GET['search_postcount']))
 	{
 		$mode = 'search_postcount';
 	}
-	else if(isset($_POST['search_userfield'])||isset($_GET['search_userfield']))
+	elseif(isset($_POST['search_userfield'])||isset($_GET['search_userfield']))
 	{
 		$mode = 'search_userfield';
 	}
-	else if(isset($_POST['search_lastvisited'])||isset($_GET['search_lastvisited']))
+	elseif(isset($_POST['search_lastvisited'])||isset($_GET['search_lastvisited']))
 	{
 		$mode = 'search_lastvisited';
 	}
-	else if(isset($_POST['search_language'])||isset($_GET['search_language']))
+	elseif(isset($_POST['search_language'])||isset($_GET['search_language']))
 	{
 		$mode = 'search_language';
 	}
-	else if(isset($_POST['search_timezone'])||isset($_GET['search_timezone']))
+	elseif(isset($_POST['search_timezone'])||isset($_GET['search_timezone']))
 	{
 		$mode = 'search_timezone';
 	}
-	else if(isset($_POST['search_style'])||isset($_GET['search_style']))
+	elseif(isset($_POST['search_style'])||isset($_GET['search_style']))
 	{
 		$mode = 'search_style';
 	}
-	else if(isset($_POST['search_moderators'])||isset($_GET['search_moderators']))
+	elseif(isset($_POST['search_moderators'])||isset($_GET['search_moderators']))
 	{
 		$mode = 'search_moderators';
 	}
-	else if(isset($_POST['search_misc'])||isset($_GET['search_misc']))
+	elseif(isset($_POST['search_misc'])||isset($_GET['search_misc']))
 	{
 		$mode = 'search_misc';
 	}
@@ -465,7 +465,7 @@ else
 				$users[] = $ip;
 			}
 			// We will also support wildcards, is this an xxx.xxx.* address?
-			else if( preg_match('/^([0-9]{1,2}|[0-2][0-9]{0,2})(\.([0-9]{1,2}|[0-2][0-9]{0,2})){0,2}\.\*/', $ip_address) )
+			elseif( preg_match('/^([0-9]{1,2}|[0-2][0-9]{0,2})(\.([0-9]{1,2}|[0-2][0-9]{0,2})){0,2}\.\*/', $ip_address) )
 			{
 				// Alright, now we do the ugly part, converting them to encoded ips
 				// We need to deal with the three ways it can be done
@@ -497,7 +497,7 @@ else
 				}
 			}
 			// Lastly, let's see if they have a range in the last quad, like xxx.xxx.xxx.xxx - xxx.xxx.xxx.yyy
-			else if( preg_match('/^([0-9]{1,2}|[0-2][0-9]{0,2})(\.([0-9]{1,2}|[0-2][0-9]{0,2})){3}(\s)*-(\s)*([0-9]{1,2}|[0-2][0-9]{0,2})(\.([0-9]{1,2}|[0-2][0-9]{0,2})){3}$/', $ip_address) )
+			elseif( preg_match('/^([0-9]{1,2}|[0-2][0-9]{0,2})(\.([0-9]{1,2}|[0-2][0-9]{0,2})){3}(\s)*-(\s)*([0-9]{1,2}|[0-2][0-9]{0,2})(\.([0-9]{1,2}|[0-2][0-9]{0,2})){3}$/', $ip_address) )
 			{
 				// We will split the two ranges
 				$range = preg_split('/[-\s]+/', $ip_address);
@@ -538,13 +538,13 @@ else
 						$ip_start = substr($address, 0, 2);
 					}
 					// num.num.xxx.xxx
-					else if( preg_match('/[0-9a-f]{4}ffff/i', $address) )
+					elseif( preg_match('/[0-9a-f]{4}ffff/i', $address) )
 					{
 						$ip_start = substr($address, 0, 4);
 
 					}
 					// num.num.num.xxx
-					else if( preg_match('/[0-9a-f]{6}ff/i', $address) )
+					elseif( preg_match('/[0-9a-f]{6}ff/i', $address) )
 					{
 						$ip_start = substr($address, 0, 6);
 					}

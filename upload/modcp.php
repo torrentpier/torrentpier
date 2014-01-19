@@ -28,7 +28,7 @@ function return_msg_mcp ($status_msg)
 		$message .= sprintf($lang['CLICK_RETURN_TOPIC'], '<a href="'. TOPIC_URL . $topic_id .'">', '</a>');
 		$message .= '<br /><br />';
 	}
-	else if (count($req_topics) != 1)
+	elseif (count($req_topics) != 1)
 	{
 		$message .= sprintf($lang['CLICK_RETURN_MODCP'], '<a href="'. FORUM_URL ."$forum_id&amp;mod=1".'">', '</a>');
 		$message .= '<br /><br />';
@@ -78,23 +78,23 @@ else
 	{
 		$mode = 'delete';
 	}
-	else if (isset($_REQUEST['move']) || @$_POST['mod_action'] === 'topic_move')
+	elseif (isset($_REQUEST['move']) || @$_POST['mod_action'] === 'topic_move')
 	{
 		$mode = 'move';
 	}
-	else if (isset($_REQUEST['lock']) || @$_POST['mod_action'] === 'topic_lock')
+	elseif (isset($_REQUEST['lock']) || @$_POST['mod_action'] === 'topic_lock')
 	{
 		$mode = 'lock';
 	}
-	else if (isset($_REQUEST['unlock']) || @$_POST['mod_action'] === 'topic_unlock')
+	elseif (isset($_REQUEST['unlock']) || @$_POST['mod_action'] === 'topic_unlock')
 	{
 		$mode = 'unlock';
 	}
-	else if (isset($_REQUEST['post_pin']) || @$_POST['mod_action'] === 'post_pin')
+	elseif (isset($_REQUEST['post_pin']) || @$_POST['mod_action'] === 'post_pin')
 	{
 		$mode = 'post_pin';
 	}
-	else if (isset($_REQUEST['post_unpin']) || @$_POST['mod_action'] === 'post_unpin')
+	elseif (isset($_REQUEST['post_unpin']) || @$_POST['mod_action'] === 'post_unpin')
 	{
 		$mode = 'post_unpin';
 	}
@@ -122,7 +122,7 @@ if ($topic_id)
 	$forum_name = $topic_row['forum_name'];
 	$forum_topics = (!$topic_row['forum_topics']) ? 1 : $topic_row['forum_topics'];
 }
-else if ($forum_id)
+elseif ($forum_id)
 {
 	$sql = "SELECT forum_name, forum_topics FROM ". BB_FORUMS ." WHERE forum_id = $forum_id LIMIT 1";
 
@@ -163,7 +163,7 @@ if ($mode == 'ip')
 	// Moderator can view IP in all forums
 	$is_auth['auth_mod'] = $is_moderator;
 }
-else if ($mode == 'move' && !$is_auth['auth_mod'])
+elseif ($mode == 'move' && !$is_auth['auth_mod'])
 {
 	// User can move his own topic if this forum is "self_moderated"
 	if ($topic_id && $topic_row['self_moderated'] && $topic_row['topic_poster'] == $userdata['user_id'])
@@ -564,7 +564,7 @@ switch ($mode)
 			}
 		}
 		//mpd
-		else if ($post_id_sql && $delete_posts)
+		elseif ($post_id_sql && $delete_posts)
 		{
 			if (!$is_auth['auth_delete'])
 			{

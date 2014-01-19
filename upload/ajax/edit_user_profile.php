@@ -68,7 +68,7 @@ switch ($field)
 			{
 				$this->ajax_die(sprintf($lang['BIRTHDAY_TO_HIGH'], $bb_cfg['birthday_max_age']));
 			}
-			else if ((bb_date(TIMENOW, 'Y', 'false') - $b_year) < $bb_cfg['birthday_min_age'])
+			elseif ((bb_date(TIMENOW, 'Y', 'false') - $b_year) < $bb_cfg['birthday_min_age'])
 			{
 				$this->ajax_die(sprintf($lang['BIRTHDAY_TO_LOW'], $bb_cfg['birthday_min_age']));
 			}

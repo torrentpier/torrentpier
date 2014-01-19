@@ -122,7 +122,7 @@ class ajax_common
 		{
 			$this->ajax_die('no action specified');
 		}
-		else if (!$action_params =& $this->valid_actions[$action])
+		elseif (!$action_params =& $this->valid_actions[$action])
 		{
 			$this->ajax_die('invalid action: '. $action);
 		}
@@ -479,8 +479,8 @@ class ajax_common
 		$this->response['type'] = $type;
 		$this->response['post_id'] = $post_id;
 		if ($type == 0) $this->response['html'] = '';
-		else if ($type == 1) $this->response['html'] = '<div class="mcBlock"><table cellspacing="0" cellpadding="0" border="0"><tr><td class="mcTd1C">K</td><td class="mcTd2C">'. profile_url($userdata) .'&nbsp;'. $lang['WROTE'] .':<br /><br />'. bbcode2html($text) .'</td></tr></table></div>';
-		else if ($type == 2) $this->response['html'] = '<div class="mcBlock"><table cellspacing="0" cellpadding="0" border="0"><tr><td class="mcTd1W">!</td><td class="mcTd2W">'. profile_url($userdata) .'&nbsp;'. $lang['WROTE'] .':<br /><br />'. bbcode2html($text) .'</td></tr></table></div>';
+		elseif ($type == 1) $this->response['html'] = '<div class="mcBlock"><table cellspacing="0" cellpadding="0" border="0"><tr><td class="mcTd1C">K</td><td class="mcTd2C">'. profile_url($userdata) .'&nbsp;'. $lang['WROTE'] .':<br /><br />'. bbcode2html($text) .'</td></tr></table></div>';
+		elseif ($type == 2) $this->response['html'] = '<div class="mcBlock"><table cellspacing="0" cellpadding="0" border="0"><tr><td class="mcTd1W">!</td><td class="mcTd2W">'. profile_url($userdata) .'&nbsp;'. $lang['WROTE'] .':<br /><br />'. bbcode2html($text) .'</td></tr></table></div>';
 	}
 
 	function view_post ()

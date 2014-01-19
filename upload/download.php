@@ -44,7 +44,7 @@ function send_file_to_browser($attachment, $upload_dir)
 	{
 		$HTTP_USER_AGENT = $_SERVER['HTTP_USER_AGENT'];
 	}
-	else if (!isset($HTTP_USER_AGENT))
+	elseif (!isset($HTTP_USER_AGENT))
 	{
 		$HTTP_USER_AGENT = '';
 	}
@@ -54,27 +54,27 @@ function send_file_to_browser($attachment, $upload_dir)
 		$browser_version = $log_version[2];
 		$browser_agent = 'opera';
 	}
-	else if (preg_match('/MSIE ([0-9].[0-9]{1,2})/', $HTTP_USER_AGENT, $log_version))
+	elseif (preg_match('/MSIE ([0-9].[0-9]{1,2})/', $HTTP_USER_AGENT, $log_version))
 	{
 		$browser_version = $log_version[1];
 		$browser_agent = 'ie';
 	}
-	else if (preg_match('/OmniWeb\/([0-9].[0-9]{1,2})/', $HTTP_USER_AGENT, $log_version))
+	elseif (preg_match('/OmniWeb\/([0-9].[0-9]{1,2})/', $HTTP_USER_AGENT, $log_version))
 	{
 		$browser_version = $log_version[1];
 		$browser_agent = 'omniweb';
 	}
-	else if (preg_match('/Netscape([0-9]{1})/', $HTTP_USER_AGENT, $log_version))
+	elseif (preg_match('/Netscape([0-9]{1})/', $HTTP_USER_AGENT, $log_version))
 	{
 		$browser_version = $log_version[1];
 		$browser_agent = 'netscape';
 	}
-	else if (preg_match('/Mozilla\/([0-9].[0-9]{1,2})/', $HTTP_USER_AGENT, $log_version))
+	elseif (preg_match('/Mozilla\/([0-9].[0-9]{1,2})/', $HTTP_USER_AGENT, $log_version))
 	{
 		$browser_version = $log_version[1];
 		$browser_agent = 'mozilla';
 	}
-	else if (preg_match('/Konqueror\/([0-9].[0-9]{1,2})/', $HTTP_USER_AGENT, $log_version))
+	elseif (preg_match('/Konqueror\/([0-9].[0-9]{1,2})/', $HTTP_USER_AGENT, $log_version))
 	{
 		$browser_version = $log_version[1];
 		$browser_agent = 'konqueror';
@@ -120,7 +120,7 @@ function send_file_to_browser($attachment, $upload_dir)
 		}
 		readfile($filename);
 	}
-	else if (!$gotit && intval($attach_config['allow_ftp_upload']))
+	elseif (!$gotit && intval($attach_config['allow_ftp_upload']))
 	{
 		$conn_id = attach_init_ftp();
 

@@ -41,12 +41,11 @@ if( isset($_POST['add_name']) )
 
 	message_die(GENERAL_MESSAGE, $message);
 }
-else if( isset($_POST['delete_name']) )
+elseif (isset($_POST['delete_name']))
 {
-	$disallowed_id = ( isset($_POST['disallowed_id']) ) ? intval( $_POST['disallowed_id'] ) : intval( $_GET['disallowed_id'] );
+	$disallowed_id = (isset($_POST['disallowed_id']) ) ? intval( $_POST['disallowed_id'] ) : intval( $_GET['disallowed_id']);
 
-	$sql = "DELETE FROM " . BB_DISALLOW . "
-		WHERE disallow_id = $disallowed_id";
+	$sql = "DELETE FROM " . BB_DISALLOW . " WHERE disallow_id = $disallowed_id";
 	$result = DB()->sql_query($sql);
 	if( !$result )
 	{

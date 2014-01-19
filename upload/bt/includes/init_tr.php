@@ -375,7 +375,7 @@ class sql_db
 		{
 			$info[] = "$ext";
 		}
-		else if (!$num && ($aff = $this->affected_rows($this->result) AND $aff != -1))
+		elseif (!$num && ($aff = $this->affected_rows($this->result) AND $aff != -1))
 		{
 			$info[] = "$aff rows";
 		}
@@ -398,7 +398,7 @@ class sql_db
 				$this->sql_last_time = 0;
 			}
 		}
-		else if ($mode == 'end')
+		elseif ($mode == 'end')
 		{
 			if (SQL_CALC_QUERY_TIME || DBG_LOG || SQL_LOG_SLOW_QUERIES)
 			{

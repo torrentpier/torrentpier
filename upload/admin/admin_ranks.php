@@ -22,11 +22,11 @@ else
 	//
 	// These could be entered via a form button
 	//
-	if(isset($_POST['add']))
+	if (isset($_POST['add']))
 	{
 		$mode = 'add';
 	}
-	else if(isset($_POST['save']))
+	elseif (isset($_POST['save']))
 	{
 		$mode = 'save';
 	}
@@ -37,9 +37,9 @@ else
 }
 
 
-if($mode != '')
+if ($mode != '')
 {
-	if($mode == 'edit' || $mode == 'add')
+	if ($mode == 'edit' || $mode == 'add')
 	{
 		//
 		// They want to add a new rank, show the form.
@@ -48,15 +48,14 @@ if($mode != '')
 
 		$s_hidden_fields = '';
 
-		if($mode == 'edit')
+		if ($mode == 'edit')
 		{
 			if(empty($rank_id))
 			{
 				message_die(GENERAL_MESSAGE, $lang['MUST_SELECT_RANK']);
 			}
 
-			$sql = "SELECT * FROM " . BB_RANKS . "
-				WHERE rank_id = $rank_id";
+			$sql = "SELECT * FROM " . BB_RANKS . " WHERE rank_id = $rank_id";
 			if(!$result = DB()->sql_query($sql))
 			{
 				message_die(GENERAL_ERROR, "Couldn't obtain rank data", '', __LINE__, __FILE__, $sql);
@@ -64,7 +63,6 @@ if($mode != '')
 
 			$rank_info = DB()->sql_fetchrow($result);
 			$s_hidden_fields .= '<input type="hidden" name="id" value="'. $rank_id .'" />';
-
 		}
 		else
 		{
@@ -90,9 +88,8 @@ if($mode != '')
 			'S_RANK_ACTION' => "admin_ranks.php",
 			'S_HIDDEN_FIELDS' => $s_hidden_fields,
 		));
-
 	}
-	else if($mode == 'save')
+	elseif ($mode == 'save')
 	{
 		//
 		// Ok, they sent us our info, let's update it.
@@ -105,12 +102,12 @@ if($mode != '')
 		$min_posts = (isset($_POST['min_posts'])) ? intval($_POST['min_posts']) : -1;
 		$rank_image = ((isset($_POST['rank_image']))) ? trim($_POST['rank_image']) : '';
 
-		if($rank_title == '')
+		if ($rank_title == '')
 		{
 			message_die(GENERAL_MESSAGE, $lang['MUST_SELECT_RANK']);
 		}
 
-		if($special_rank == 1)
+		if ($special_rank == 1)
 		{
 			$max_posts = -1;
 			$min_posts = -1;
@@ -119,7 +116,7 @@ if($mode != '')
 		//
 		// The rank image has to be a jpg, gif or png
 		//
-		if($rank_image != '')
+		if ($rank_image != '')
 		{
 			if (!preg_match('/(\.gif|\.png|\.jpg)$/is', $rank_image))
 			{
@@ -131,17 +128,18 @@ if($mode != '')
 		{
 			if (!$special_rank)
 			{
-				$sql = "UPDATE " . BB_USERS . "
-					SET user_rank = 0
-					WHERE user_rank = $rank_id";
-
-				if(!$result = DB()->sql_query($sql))
+				$sql = "UPDATE " . BB_USERS . " SET user_rank = 0 WHERE user_rank = $rank_id";
+				if (!$result = DB()->sql_query($sql))
 				{
 					message_die(GENERAL_ERROR, $lang['NO_UPDATE_RANKS'], '', __LINE__, __FILE__, $sql);
 				}
 			}
 			$sql = "UPDATE " . BB_RANKS . "
-				SET rank_title = '". DB()->escape($rank_title) ."', rank_special = $special_rank, rank_min = $min_posts, rank_image = '". DB()->escape($rank_image) . "', rank_style = '". DB()->escape($rank_style) ."'
+				SET rank_title = '". DB()->escape($rank_title) ."',
+					rank_special = $special_rank,
+					rank_min = $min_posts,
+					rank_image = '". DB()->escape($rank_image) . "',
+					rank_style = '". DB()->escape($rank_style) ."'
 				WHERE rank_id = $rank_id";
 
 			$message = $lang['RANK_UPDATED'];
@@ -154,25 +152,25 @@ if($mode != '')
 			$message = $lang['RANK_ADDED'];
 		}
 
-		if(!$result = DB()->sql_query($sql))
+		if (!$result = DB()->sql_query($sql))
 		{
 			message_die(GENERAL_ERROR, "Couldn't update/insert into ranks table", '', __LINE__, __FILE__, $sql);
 		}
 
 		$message .= '<br /><br />' . sprintf($lang['CLICK_RETURN_RANKADMIN'], '<a href="admin_ranks.php">', '</a>') . '<br /><br />' . sprintf($lang['CLICK_RETURN_ADMIN_INDEX'], '<a href="index.php?pane=right">', '</a>');
 
-        $datastore->update('ranks');
+		$datastore->update('ranks');
 
 		message_die(GENERAL_MESSAGE, $message);
 
 	}
-	else if($mode == 'delete')
+	elseif ($mode == 'delete')
 	{
 		//
 		// Ok, they want to delete their rank
 		//
 
-		if(isset($_POST['id']) || isset($_GET['id']))
+		if (isset($_POST['id']) || isset($_GET['id']))
 		{
 			$rank_id = (isset($_POST['id'])) ? intval($_POST['id']) : intval($_GET['id']);
 		}
@@ -181,30 +179,26 @@ if($mode != '')
 			$rank_id = 0;
 		}
 
-		if($rank_id)
+		if ($rank_id)
 		{
 			$sql = "DELETE FROM " . BB_RANKS . " WHERE rank_id = $rank_id";
 
-			if(!$result = DB()->sql_query($sql))
+			if (!$result = DB()->sql_query($sql))
 			{
 				message_die(GENERAL_ERROR, "Couldn't delete rank data", '', __LINE__, __FILE__, $sql);
 			}
 
-			$sql = "UPDATE " . BB_USERS . "
-				SET user_rank = 0
-				WHERE user_rank = $rank_id";
-
-			if(!$result = DB()->sql_query($sql))
+			$sql = "UPDATE " . BB_USERS . " SET user_rank = 0 WHERE user_rank = $rank_id";
+			if (!$result = DB()->sql_query($sql))
 			{
 				message_die(GENERAL_ERROR, $lang['NO_UPDATE_RANKS'], '', __LINE__, __FILE__, $sql);
 			}
 
 			$message = $lang['RANK_REMOVED'] . '<br /><br />' . sprintf($lang['CLICK_RETURN_RANKADMIN'], '<a href="admin_ranks.php">', '</a>') . '<br /><br />' . sprintf($lang['CLICK_RETURN_ADMIN_INDEX'], '<a href="index.php?pane=right">', '</a>');
 
-            $datastore->update('ranks');
+			$datastore->update('ranks');
 
 			message_die(GENERAL_MESSAGE, $message);
-
 		}
 		else
 		{
@@ -235,14 +229,14 @@ else
 		'S_RANKS_ACTION' => "admin_ranks.php",
 	));
 
-	for($i = 0; $i < $rank_count; $i++)
+	for ($i = 0; $i < $rank_count; $i++)
 	{
 		$rank = $rank_rows[$i]['rank_title'];
 		$special_rank = $rank_rows[$i]['rank_special'];
 		$rank_id = $rank_rows[$i]['rank_id'];
 		$rank_min = $rank_rows[$i]['rank_min'];
 
-		if($special_rank == 1)
+		if ($special_rank == 1)
 		{
 			$rank_min = $rank_max = '-';
 		}

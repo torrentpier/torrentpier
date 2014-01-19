@@ -18,6 +18,7 @@ switch ($mode)
 			'bb_cap_sid',
 		);
 
+		// foreach ($bb_cfg['cache']['engines'] as $cache_name => $cache_val)
 		foreach ($gc_cache as $cache_name)
 		{
 			CACHE($cache_name)->rm();

@@ -71,7 +71,7 @@ switch($this->request['type'])
 		{
 			$this->ajax_die($lang['RULES_REPLY_CANNOT']);
 		}
-		else if(!$is_auth['auth_reply'])
+		elseif(!$is_auth['auth_reply'])
 		{
 			$this->ajax_die(sprintf($lang['SORRY_AUTH_REPLY'], strip_tags($is_auth['auth_reply_type'])));
 		}

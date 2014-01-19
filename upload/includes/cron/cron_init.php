@@ -15,11 +15,11 @@ function cron_get_file_lock ()
 
 		$lock_obtained = @rename(CRON_ALLOWED, CRON_RUNNING);
 	}
-	else if (file_exists(CRON_RUNNING))
+	elseif (file_exists(CRON_RUNNING))
 	{
 		cron_release_deadlock();
 	}
-	else if (!file_exists(CRON_ALLOWED) && !file_exists(CRON_RUNNING))
+	elseif (!file_exists(CRON_ALLOWED) && !file_exists(CRON_RUNNING))
 	{
 		file_write('', CRON_ALLOWED);
 		$lock_obtained = @rename(CRON_ALLOWED, CRON_RUNNING);
@@ -37,7 +37,7 @@ function cron_track_running ($mode)
 		cron_touch_lock_file(CRON_RUNNING);
 		file_write('', CRON_STARTMARK);
 	}
-	else if ($mode == 'end')
+	elseif ($mode == 'end')
 	{
 		@unlink(CRON_STARTMARK);
 	}

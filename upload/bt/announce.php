@@ -112,7 +112,7 @@ if (!$bb_cfg['ignore_reported_ip'] && isset($_GET['ip']) && $ip !== $_GET['ip'])
 	{
 		$ip = $_GET['ip'];
 	}
-	else if (isset($_SERVER['HTTP_X_FORWARDED_FOR']) && preg_match_all('#\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}#', $_SERVER['HTTP_X_FORWARDED_FOR'], $matches))
+	elseif (isset($_SERVER['HTTP_X_FORWARDED_FOR']) && preg_match_all('#\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}#', $_SERVER['HTTP_X_FORWARDED_FOR'], $matches))
 	{
 		foreach ($matches[0] as $x_ip)
 		{
@@ -292,7 +292,7 @@ else
 				{
 					msg_die('Only '. $tr_cfg['limit_seed_count'] .' torrent(s) allowed for seeding');
 				}
-				else if (!$seeder && $tr_cfg['limit_leech_count'] && $row['active_torrents'] >= $tr_cfg['limit_leech_count'])
+				elseif (!$seeder && $tr_cfg['limit_leech_count'] && $row['active_torrents'] >= $tr_cfg['limit_leech_count'])
 				{
 					msg_die('Only '. $tr_cfg['limit_leech_count'] .' torrent(s) allowed for leeching'. $rating_msg);
 				}
@@ -321,7 +321,7 @@ else
 				{
 					msg_die('You can seed only from '. $tr_cfg['limit_seed_ips'] ." IP's");
 				}
-				else if (!$seeder && $tr_cfg['limit_leech_ips'] && $row['ips'] >= $tr_cfg['limit_leech_ips'])
+				elseif (!$seeder && $tr_cfg['limit_leech_ips'] && $row['ips'] >= $tr_cfg['limit_leech_ips'])
 				{
 					msg_die('You can leech only from '. $tr_cfg['limit_leech_ips'] ." IP's");
 				}
@@ -357,7 +357,7 @@ if ($tr_cfg['gold_silver_enabled'] && $down_add)
 		$down_add = 0;
 	}
 	// Silver releases
-	else if ($tor_type == TOR_TYPE_SILVER)
+	elseif ($tor_type == TOR_TYPE_SILVER)
 	{
 		$down_add = ceil($down_add/2);
 	}

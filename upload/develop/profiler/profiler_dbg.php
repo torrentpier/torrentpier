@@ -321,8 +321,8 @@ class profiler_dbg extends profiler
 
 					$perc_class = 'perc';
 					if      ($line_perc > 5) $perc_class .= ' high5';
-					else if ($line_perc > 3) $perc_class .= ' high3';
-					else if ($line_perc > 1) $perc_class .= ' high1';
+					elseif ($line_perc > 3) $perc_class .= ' high3';
+					elseif ($line_perc > 1) $perc_class .= ' high1';
 
 					if ($line_src =& $module_src[$line_no-1])
 					{

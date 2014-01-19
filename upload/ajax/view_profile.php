@@ -89,7 +89,7 @@ switch ($mode)
 					$type = $type = '<td class="row1 tCenter dlComplete lh_150 pad_4 nowrap">'. $lang['RELEASER'] .'</td>';
 					$releasing_count++;
 				}
-				else if ($rowset[$i]['seeder'])
+				elseif ($rowset[$i]['seeder'])
 				{
 					$s = $s + $rowset[$i]['size'];
 					$type = $type = '<td class="row1 tCenter dlComplete lh_150 pad_4 nowrap">'. $lang['SEEDER'] .'</td>';

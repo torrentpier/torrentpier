@@ -33,11 +33,11 @@ if (preg_match('/^redirect=([a-z0-9\.#\/\?&=\+\-_]+)/si', $_SERVER['QUERY_STRING
 		$redirect_url[$first_amp] = '?';
 	}
 }
-else if (!empty($_POST['redirect']))
+elseif (!empty($_POST['redirect']))
 {
 	$redirect_url = str_replace('&amp;', '&', htmlspecialchars($_POST['redirect']));
 }
-else if (!empty($_SERVER['HTTP_REFERER']) && ($parts = @parse_url($_SERVER['HTTP_REFERER'])))
+elseif (!empty($_SERVER['HTTP_REFERER']) && ($parts = @parse_url($_SERVER['HTTP_REFERER'])))
 {
 	$redirect_url = (isset($parts['path']) ? $parts['path'] : "index.php") . (isset($parts['query']) ? '?'. $parts['query'] : '');
 }

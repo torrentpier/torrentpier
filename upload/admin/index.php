@@ -56,7 +56,7 @@ if( isset($_GET['pane']) && $_GET['pane'] == 'left' )
 		}
 	}
 }
-else if( isset($_GET['pane']) && $_GET['pane'] == 'right' )
+elseif( isset($_GET['pane']) && $_GET['pane'] == 'right' )
 {
 	$template->assign_vars(array(
 		'TPL_ADMIN_MAIN' => true,
@@ -122,26 +122,25 @@ else if( isset($_GET['pane']) && $_GET['pane'] == 'right' )
 	//
 
 	$sql = "SELECT VERSION() AS mysql_version";
-	if($result = DB()->sql_query($sql))
+	if ($result = DB()->sql_query($sql))
 	{
 		$row = DB()->sql_fetchrow($result);
 		$version = $row['mysql_version'];
 
-		if( preg_match('/^(3\.23|4\.|5\.|10\.)/', $version) )
+		if (preg_match('/^(3\.23|4\.|5\.|10\.)/', $version))
 		{
 			$dblist = array();
-			foreach($bb_cfg['db'] as $name => $row)
+			foreach ($bb_cfg['db'] as $name => $row)
 			{
-                $sql = "SHOW TABLE STATUS
-					FROM {$row[1]}";
-				if($result = DB()->sql_query($sql))
+				$sql = "SHOW TABLE STATUS FROM {$row[1]}";
+				if ($result = DB()->sql_query($sql))
 				{
 					$tabledata_ary = DB()->sql_fetchrowset($result);
 
 					$dbsize = 0;
-					for($i = 0; $i < count($tabledata_ary); $i++)
+					for ($i = 0; $i < count($tabledata_ary); $i++)
 					{
-						if( @$tabledata_ary[$i]['Type'] != 'MRG_MyISAM' )
+						if( @$tabledata_ary[$i]['Type'] != 'MRG_MYISAM' )
 						{
 							$dbsize += $tabledata_ary[$i]['Data_length'] + $tabledata_ary[$i]['Index_length'];
 						}
@@ -289,19 +288,19 @@ else if( isset($_GET['pane']) && $_GET['pane'] == 'right' )
 		'U_SYNC_USER_POSTS'   => "index.php?sync_user_posts=1",
 	));
 }
-else if (isset($_REQUEST['update_user_level']))
+elseif (isset($_REQUEST['update_user_level']))
 {
 	require(INC_DIR .'functions_group.php');
 	update_user_level('all');
 	bb_die($lang['USER_LEVELS_UPDATED']);
 }
-else if (isset($_REQUEST['sync_topics']))
+elseif (isset($_REQUEST['sync_topics']))
 {
 	sync('topic', 'all');
 	sync('forum', 'all');
 	bb_die($lang['TOPICS_DATA_SYNCHRONIZED']);
 }
-else if (isset($_REQUEST['sync_user_posts']))
+elseif (isset($_REQUEST['sync_user_posts']))
 {
 	sync('user_posts', 'all');
 	bb_die($lang['USER POSTS COUNT SYNCHRONIZED']);

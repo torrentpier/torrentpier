@@ -19,17 +19,17 @@ if ($mode == 'set_dl_status' || $mode == 'set_topics_dl_status')
 		$new_dl_status = DL_STATUS_WILL;
 		$dl_key = 'dlw';
 	}
-	else if (isset($_POST['dl_set_down']))
+	elseif (isset($_POST['dl_set_down']))
 	{
 		$new_dl_status = DL_STATUS_DOWN;
 		$dl_key = 'dld';
 	}
-	else if (isset($_POST['dl_set_complete']))
+	elseif (isset($_POST['dl_set_complete']))
 	{
 		$new_dl_status = DL_STATUS_COMPLETE;
 		$dl_key = 'dlc';
 	}
-	else if (isset($_POST['dl_set_cancel']))
+	elseif (isset($_POST['dl_set_cancel']))
 	{
 		$new_dl_status = DL_STATUS_CANCEL;
 		$dl_key = 'dla';
@@ -139,7 +139,7 @@ if ($mode == 'set_topics_dl_status')
 		$req_topics_ary[] = (int) $topic_id;
 	}
 }
-else if ($mode == 'set_dl_status')
+elseif ($mode == 'set_dl_status')
 {
 	$req_topics_ary[] = (int) $topic_id;
 }

@@ -61,15 +61,15 @@ $is_auth = array();
 switch ($mode)
 {
 	case 'newtopic':
-	    if(bf($userdata['user_opt'], 'user_opt', 'allow_topic'))
-	    {
-	    	bb_die($lang['RULES_POST_CANNOT']);
-	    }
+		if (bf($userdata['user_opt'], 'user_opt', 'allow_topic'))
+		{
+			bb_die($lang['RULES_POST_CANNOT']);
+		}
 		if ($topic_type == POST_ANNOUNCE)
 		{
 			$is_auth_type = 'auth_announce';
 		}
-		else if ($topic_type == POST_STICKY)
+		elseif ($topic_type == POST_STICKY)
 		{
 			$is_auth_type = 'auth_sticky';
 		}
@@ -77,32 +77,37 @@ switch ($mode)
 		{
 			$is_auth_type = 'auth_post';
 		}
-		break;
+	break;
+
 	case 'reply':
 	case 'quote':
-		if(bf($userdata['user_opt'], 'user_opt', 'allow_post'))
-	    {
-	    	bb_die($lang['RULES_REPLY_CANNOT']);
-	    }
+		if (bf($userdata['user_opt'], 'user_opt', 'allow_post'))
+		{
+			bb_die($lang['RULES_REPLY_CANNOT']);
+		}
 		$is_auth_type = 'auth_reply';
-		break;
+	break;
+
 	case 'editpost':
-	    if(bf($userdata['user_opt'], 'user_opt', 'allow_post_edit'))
-	    {
-	    	bb_die($lang['RULES_EDIT_CANNOT']);
-	    }
+		if (bf($userdata['user_opt'], 'user_opt', 'allow_post_edit'))
+		{
+			bb_die($lang['RULES_EDIT_CANNOT']);
+		}
 		$is_auth_type = 'auth_edit';
-		break;
+	break;
+
 	case 'delete':
 	case 'poll_delete':
 		$is_auth_type = 'auth_delete';
-		break;
+	break;
+
 	case 'vote':
 		$is_auth_type = 'auth_vote';
-		break;
+	break;
+
 	default:
 		message_die(GENERAL_MESSAGE, $lang['NO_POST_MODE']);
-		break;
+	break;
 }
 
 // Here we do various lookups to find topic_id, forum_id, post_id etc.
@@ -117,7 +122,7 @@ switch ($mode)
 			message_die(GENERAL_MESSAGE, $lang['FORUM_NOT_EXIST']);
 		}
 		$sql = "SELECT * FROM ". BB_FORUMS ." WHERE forum_id = $forum_id LIMIT 1";
-		break;
+	break;
 
 	case 'reply':
 	case 'vote':
@@ -130,7 +135,7 @@ switch ($mode)
 			WHERE t.topic_id = $topic_id
 				AND f.forum_id = t.forum_id
 			LIMIT 1";
-		break;
+	break;
 
 	case 'quote':
 	case 'editpost':
@@ -158,7 +163,7 @@ switch ($mode)
 		" : '';
 
 		$sql = "$select_sql $from_sql $where_sql LIMIT 1";
-		break;
+	break;
 
 	default:
 		message_die(GENERAL_MESSAGE, $lang['NO_VALID_MODE']);
@@ -175,7 +180,7 @@ if ($post_info = DB()->fetch_row($sql))
 	{
 	   message_die(GENERAL_MESSAGE, $lang['FORUM_LOCKED']);
 	}
-	else if ($mode != 'newtopic' && $post_info['topic_status'] == TOPIC_LOCKED && !$is_auth['auth_mod'])
+	elseif ($mode != 'newtopic' && $post_info['topic_status'] == TOPIC_LOCKED && !$is_auth['auth_mod'])
 	{
 	   message_die(GENERAL_MESSAGE, $lang['TOPIC_LOCKED']);
 	}
@@ -235,11 +240,11 @@ if ($post_info = DB()->fetch_row($sql))
 
 			message_die(GENERAL_MESSAGE, $message);
 		}
-		else if (!$post_data['last_post'] && !$is_auth['auth_mod'] && ($mode == 'delete' || $delete))
+		elseif (!$post_data['last_post'] && !$is_auth['auth_mod'] && ($mode == 'delete' || $delete))
 		{
 			message_die(GENERAL_MESSAGE, $lang['CANNOT_DELETE_REPLIED']);
 		}
-		else if (!$post_data['edit_poll'] && !$is_auth['auth_mod'] && ($mode == 'poll_delete' || $poll_delete))
+		elseif (!$post_data['edit_poll'] && !$is_auth['auth_mod'] && ($mode == 'poll_delete' || $poll_delete))
 		{
 			message_die(GENERAL_MESSAGE, $lang['CANNOT_DELETE_POLL']);
 		}
@@ -405,7 +410,7 @@ if ( ( $delete || $poll_delete || $mode == 'delete' ) && !$confirm )
 		'HIDDEN_FIELDS' => build_hidden_fields($hidden_fields),
 	));
 }
-else if ( $mode == 'vote' )
+elseif ( $mode == 'vote' )
 {
 	//
 	// Vote in a poll
@@ -480,8 +485,8 @@ else if ( $mode == 'vote' )
 	}
 }
 //snp
-// else if ( $submit || $confirm )
-else if ( ($submit || $confirm) && !$topic_has_new_posts )
+// elseif ( $submit || $confirm )
+elseif ( ($submit || $confirm) && !$topic_has_new_posts )
 //snp end
 {
 	//
@@ -611,11 +616,11 @@ if( $refresh || isset($_POST['del_poll_option']) || $error_msg || ($submit && $t
 #		while( list($option_id, $option_text) = @each($_POST['poll_option_text']) )
 		foreach ($_POST['poll_option_text'] as $option_id => $option_text)
 		{
-			if( isset($_POST['del_poll_option'][$option_id]) )
+			if (isset($_POST['del_poll_option'][$option_id]))
 			{
 				unset($poll_options[$option_id]);
 			}
-			else if ( !empty($option_text) )
+			elseif (!empty($option_text))
 			{
 				$poll_options[$option_id] = clean_title($option_text);
 			}
@@ -655,13 +660,13 @@ else
 		$subject = '';
 		$message = '';
 	}
-	else if ( $mode == 'reply' )
+	elseif ( $mode == 'reply' )
 	{
 		$username = ( $userdata['session_logged_in'] ) ? $userdata['username'] : '';
 		$subject = '';
 		$message = '';
 	}
-	else if ( $mode == 'quote' || $mode == 'editpost' )
+	elseif ( $mode == 'quote' || $mode == 'editpost' )
 	{
 		$subject = ( $post_data['first_post'] ) ? $post_info['topic_title'] : '';
 		$message = $post_info['post_text'];

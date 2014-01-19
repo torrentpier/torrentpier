@@ -31,7 +31,7 @@ if ($mode == 'templates')
 		'S_ACTION'      => "admin_topic_templates.php?mode=delete",
 	));
 }
-else if ($mode == 'add' || $mode == 'edit')
+elseif ($mode == 'add' || $mode == 'edit')
 {
 	$template->assign_vars(array(
 		'TPL'    => true,
@@ -111,7 +111,7 @@ elseif ($mode == 'delete')
 
 		print_confirmation(array(
 			'QUESTION'      => $lang['QUESTION'],
-			'ITEMS_LIST'    => join('\n</li>\n<li>\n', $names),
+			'ITEMS_LIST'    => join("\n</li>\n<li>\n", $names),
 			'FORM_ACTION'   => "admin_topic_templates.php?mode=delete",
 			'HIDDEN_FIELDS' => build_hidden_fields($hidden_fields),
 		));

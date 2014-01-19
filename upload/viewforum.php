@@ -53,7 +53,7 @@ if ($only_new == ONLY_NEW_POSTS)
 {
 	$only_new_sql = "AND t.topic_last_post_time > $lastvisit";
 }
-else if ($only_new == ONLY_NEW_TOPICS)
+elseif ($only_new == ONLY_NEW_TOPICS)
 {
 	$only_new_sql = "AND t.topic_time > $lastvisit";
 }
@@ -181,12 +181,12 @@ if (!$forum_data['forum_parent'] && isset($forums['f'][$forum_id]['subforums']) 
 		{
 			$folder_image = $images['forum_locked'];
 		}
-		else if (is_unread($sf_data['topic_last_post_time'], $sf_last_tid, $sf_forum_id))
+		elseif (is_unread($sf_data['topic_last_post_time'], $sf_last_tid, $sf_forum_id))
 		{
 			$folder_image = $images['forum_new'];
 		}
 
-        $last_post_user = profile_url(array('username' => $sf_data['sf_last_username'], 'user_id' => $sf_data['sf_last_user_id'], 'user_rank' => $sf_data['user_rank']));
+		$last_post_user = profile_url(array('username' => $sf_data['sf_last_username'], 'user_id' => $sf_data['sf_last_user_id'], 'user_rank' => $sf_data['user_rank']));
 
 		if ($sf_data['forum_last_post_id'])
 		{
@@ -226,7 +226,7 @@ if (!$forum_data['forum_parent'] && isset($forums['f'][$forum_id]['subforums']) 
 		}
 	}
 }
-else if ($parent_id = $forum_data['forum_parent'])
+elseif ($parent_id = $forum_data['forum_parent'])
 {
 	$template->assign_vars(array(
 		'HAS_PARENT_FORUM'  => true,
@@ -475,12 +475,12 @@ foreach ($topic_rowset as $topic)
 		define('ANNOUNCE_SEP', true);
 		$separator = $lang['TOPICS_ANNOUNCEMENT'];
 	}
-	else if ($t_type == POST_STICKY && !defined('STICKY_SEP'))
+	elseif ($t_type == POST_STICKY && !defined('STICKY_SEP'))
 	{
 		define('STICKY_SEP', true);
 		$separator = $lang['TOPICS_STICKY'];
 	}
-	else if ($t_type == POST_NORMAL && !defined('NORMAL_SEP'))
+	elseif ($t_type == POST_NORMAL && !defined('NORMAL_SEP'))
 	{
 		if (defined('ANNOUNCE_SEP') || defined('STICKY_SEP'))
 		{
