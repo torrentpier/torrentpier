@@ -117,7 +117,7 @@ function generate_smilies($mode)
 		{
 			if (empty($rowset[$row['smile_url']]))
 			{
-				$rowset[$row['smile_url']]['code'] = str_replace("'", "\\'", str_replace('\\', '\\\\', $row['code']));
+				$rowset[$row['smile_url']]['code'] = addslashes($row['code']);
 				$rowset[$row['smile_url']]['emoticon'] = $row['emoticon'];
 				$num_smilies++;
 			}
@@ -142,8 +142,8 @@ function generate_smilies($mode)
 				$template->assign_block_vars('smilies_row.smilies_col', array(
 					'SMILEY_CODE' => $data['code'],
 					'SMILEY_IMG' => $bb_cfg['smilies_path'] . '/' . $smile_url,
-					'SMILEY_DESC' => $data['emoticon'])
-				);
+					'SMILEY_DESC' => $data['emoticon'],
+				));
 
 				$s_colspan = max($s_colspan, $col + 1);
 
@@ -167,8 +167,8 @@ function generate_smilies($mode)
 				$template->assign_block_vars('switch_smilies_extra', array());
 
 				$template->assign_vars(array(
-					'U_MORE_SMILIES' => "posting.php?mode=smilies")
-				);
+					'U_MORE_SMILIES' => POSTING_URL ."?mode=smilies",
+				));
 			}
 
 			$template->assign_vars(array(
@@ -292,14 +292,11 @@ function strip_quotes ($text)
 /**
  * Strips away bbcode from a given string, leaving plain text
  *
- * @param    string    Text to be stripped of bbcode tags
- * @param bool $stripquotes
- * @param bool $fast_and_dirty
- * @param bool $showlinks
- * @internal param \If $boolean true, strip away quote tags AND their contents
- * @internal param \If $boolean true, use the fast-and-dirty method rather than the shiny and nice method
+ * @param	string	Text to be stripped of bbcode tags
+ * @param	boolean	If true, strip away quote tags AND their contents
+ * @param	boolean	If true, use the fast-and-dirty method rather than the shiny and nice method
  *
- * @return    string
+ * @return	string
  */
 function strip_bbcode ($message, $stripquotes = true, $fast_and_dirty = false, $showlinks = true)
 {
@@ -420,9 +417,9 @@ function replace_synonyms ($text)
 	return ($syn_match && $syn_replace) ? str_replace($syn_match, $syn_replace, $text) : $text;
 }
 
-function add_search_words ($post_id, $post_message, $post_title = '', $only_return_words = false)
+function add_search_words ($post_id, $post_message, $topic_title = '', $only_return_words = false)
 {
-	$text  = $post_title .' '. $post_message;
+	$text  = $topic_title .' '. $post_message;
 	$text  = strip_bbcode_uid($text);
 	$words = ($text) ? extract_search_words($text) : array();
 

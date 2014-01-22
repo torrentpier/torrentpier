@@ -81,10 +81,6 @@ $lang['BT_CHECK_ANNOUNCE_URL_EXPL'] = 'register on tracker only allowed urls';
 $lang['BT_REPLACE_ANN_URL'] = 'Replace announce url';
 $lang['BT_REPLACE_ANN_URL_EXPL'] = 'replace original announce url with your default in .torrent files';
 $lang['BT_DEL_ADDIT_ANN_URLS'] = 'Remove all additional announce urls';
-$lang['BT_ADD_COMMENT'] = 'Torrent comments';
-$lang['BT_ADD_COMMENT_EXPL'] = 'adds the Comments filed to the .torrent files (leave blank to use the topic URL as a comment)';
-$lang['BT_ADD_PUBLISHER'] = 'Torrent\'s publisher';
-$lang['BT_ADD_PUBLISHER_EXPL'] = 'adds the Publisher field and topic URL as the Publisher-url to the .torrent files (leave blank to disable)';
 
 $lang['BT_SHOW_PEERS_HEAD'] = 'Peers-List';
 $lang['BT_SHOW_PEERS'] = 'Show peers (seeders and leechers)';
@@ -110,8 +106,6 @@ $lang['BT_SHOW_DL_BUT_CANCEL'] = $lang['DL_CANCEL'];
 
 $lang['BT_ADD_AUTH_KEY_HEAD'] = 'Passkey';
 $lang['BT_ADD_AUTH_KEY'] = 'Enable adding passkey to the torrent-files before downloading';
-$lang['BT_GEN_PASSKEY_ON_REG'] = 'Automatically generate passkey';
-$lang['BT_GEN_PASSKEY_ON_REG_EXPL'] = "generate passkey during first downloading attempt if current user's passkey is empty";
 
 $lang['BT_TOR_BROWSE_ONLY_REG_HEAD'] = 'Torrent browser (tracker)';
 $lang['BT_TOR_BROWSE_ONLY_REG'] = 'Torrent browser (tracker.php) accessible only for logged in users';

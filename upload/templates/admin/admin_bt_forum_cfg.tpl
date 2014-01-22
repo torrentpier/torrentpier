@@ -53,14 +53,6 @@
 	<td><h4>{L_BT_DEL_ADDIT_ANN_URLS}</h4><h6>{L_BT_DEL_ADDIT_ANN_URLS_EXPL}</h6></td>
 	<td><label for="bt_del_addit_ann_urls1"><input type="radio" name="bt_del_addit_ann_urls" id="bt_del_addit_ann_urls1" value="1" {BT_DEL_ADDIT_ANN_URLS_YES} /> {L_BT_DEL_ADDIT_ANN_URLS_YES}&nbsp;</label><label for="bt_del_addit_ann_urls2">&nbsp;<input type="radio" name="bt_del_addit_ann_urls" id="bt_del_addit_ann_urls2" value="0" {BT_DEL_ADDIT_ANN_URLS_NO} /> {L_BT_DEL_ADDIT_ANN_URLS_NO} &nbsp;</label></td>
 </tr>
-<tr>
-	<td><h4>{L_BT_ADD_COMMENT}</h4><h6>{L_BT_ADD_COMMENT_EXPL}</h6></td>
-	<td><input class="post" type="text" size="30" maxlength="255" name="bt_add_comment" value="{BT_ADD_COMMENT}" /></td>
-</tr>
-<tr>
-	<td><h4>{L_BT_ADD_PUBLISHER}</h4><h6>{L_BT_ADD_PUBLISHER_EXPL}</h6></td>
-	<td><input class="post" type="text" size="30" maxlength="255" name="bt_add_publisher" value="{BT_ADD_PUBLISHER}" /></td>
-</tr>
 
 <tr>
 	<th colspan="2">{L_BT_SHOW_PEERS_HEAD}</th>
@@ -146,10 +138,6 @@
 <tr>
 	<td><h4>{L_BT_ADD_AUTH_KEY}</h4></td>
 	<td><label for="bt_add_auth_key1"><input type="radio" name="bt_add_auth_key" id="bt_add_auth_key1" value="1" {BT_ADD_AUTH_KEY_YES} /> {L_BT_ADD_AUTH_KEY_YES}&nbsp;</label><label for="bt_add_auth_key2">&nbsp;<input type="radio" name="bt_add_auth_key" id="bt_add_auth_key2" value="0" {BT_ADD_AUTH_KEY_NO} /> {L_BT_ADD_AUTH_KEY_NO} &nbsp;</label></td>
-</tr>
-<tr>
-	<td><h4>{L_BT_GEN_PASSKEY_ON_REG}</h4><h6>{L_BT_GEN_PASSKEY_ON_REG_EXPL}</h6></td>
-	<td><label for="bt_gen_passkey_on_reg1"><input type="radio" name="bt_gen_passkey_on_reg" id="bt_gen_passkey_on_reg1" value="1" {BT_GEN_PASSKEY_ON_REG_YES} /> {L_BT_GEN_PASSKEY_ON_REG_YES}&nbsp;</label><label for="bt_gen_passkey_on_reg2">&nbsp;<input type="radio" name="bt_gen_passkey_on_reg" id="bt_gen_passkey_on_reg2" value="0" {BT_GEN_PASSKEY_ON_REG_NO} /> {L_BT_GEN_PASSKEY_ON_REG_NO} &nbsp;</label></td>
 </tr>
 
 <tr>

@@ -228,49 +228,19 @@ function tracker_register ($attach_id, $mode = '', $tor_status = TOR_NOT_APPROVE
 	$forum_id  = $torrent['forum_id'];
 	$poster_id = $torrent['poster_id'];
 
-	if ($torrent['extension'] !== TORRENT_EXT)
-	{
-		torrent_error_exit($lang['NOT_TORRENT']);
-	}
-
-	if (!$torrent['allow_reg_tracker'])
-	{
-		torrent_error_exit($lang['REG_NOT_ALLOWED_IN_THIS_FORUM']);
-	}
-
-	if ($post_id != $torrent['topic_first_post_id'])
-	{
-		torrent_error_exit($lang['ALLOWED_ONLY_1ST_POST_REG']);
-	}
-
-	if ($torrent['tracker_status'])
-	{
-		torrent_error_exit($lang['ALREADY_REG']);
-	}
-
-	if ($this_topic_torrents = get_registered_torrents($topic_id, 'topic'))
-	{
-		torrent_error_exit($lang['ONLY_1_TOR_PER_TOPIC']);
-	}
+	if ($torrent['extension'] !== TORRENT_EXT) return torrent_error_exit($lang['NOT_TORRENT']);
+	if (!$torrent['allow_reg_tracker']) return torrent_error_exit($lang['REG_NOT_ALLOWED_IN_THIS_FORUM']);
+	if ($post_id != $torrent['topic_first_post_id']) return torrent_error_exit($lang['ALLOWED_ONLY_1ST_POST_REG']);
+	if ($torrent['tracker_status']) return torrent_error_exit($lang['ALREADY_REG']);
+	if ($this_topic_torrents = get_registered_torrents($topic_id, 'topic')) return torrent_error_exit($lang['ONLY_1_TOR_PER_TOPIC']);
 
 	torrent_auth_check($forum_id, $torrent['poster_id']);
 
 	$filename = get_attachments_dir() .'/'. $torrent['physical_filename'];
 
-	if (!is_file($filename))
-	{
-		torrent_error_exit('File name error');
-	}
-
-	if (!file_exists($filename))
-	{
-		torrent_error_exit('File not exists');
-	}
-
-	if (!$tor = bdecode_file($filename))
-	{
-		torrent_error_exit('This is not a bencoded file');
-	}
+	if (!is_file($filename)) return torrent_error_exit('File name error');
+	if (!file_exists($filename)) return torrent_error_exit('File not exists');
+	if (!$tor = bdecode_file($filename)) return torrent_error_exit('This is not a bencoded file');
 
 	if ($bb_cfg['bt_disable_dht'])
 	{
@@ -290,43 +260,33 @@ function tracker_register ($attach_id, $mode = '', $tor_status = TOR_NOT_APPROVE
 		if (!$ann || !in_array($ann, $announce_urls))
 		{
 			$msg = sprintf($lang['INVALID_ANN_URL'], htmlspecialchars($ann), $announce_urls['main_url']);
-			torrent_error_exit($msg);
+			return torrent_error_exit($msg);
 		}
 	}
 
 	$info = (@$tor['info']) ? $tor['info'] : array();
 
-	if (!@$info['name'] || !@$info['piece length'] || !@$info['pieces'] || strlen($info['pieces']) % 20 != 0)
+	if (!isset($info['name']) || !isset($info['piece length']) || !isset($info['pieces']) || strlen($info['pieces']) % 20 != 0)
 	{
-		torrent_error_exit($lang['TORFILE_INVALID']);
+		return torrent_error_exit($lang['TORFILE_INVALID']);
 	}
 
 	$info_hash     = pack('H*', sha1(bencode($info)));
 	$info_hash_sql = rtrim(DB()->escape($info_hash), ' ');
 	$info_hash_md5 = md5($info_hash);
 
-	$sql = "SELECT topic_id
-		FROM ". BB_BT_TORRENTS ."
-		WHERE info_hash = '$info_hash_sql'
-		LIMIT 1";
-
-	if (!$result = DB()->sql_query($sql))
+	if ($row = DB()->fetch_row("SELECT topic_id FROM ". BB_BT_TORRENTS ." WHERE info_hash = '$info_hash_sql' LIMIT 1"))
 	{
-		message_die(GENERAL_ERROR, 'Could not obtain torrent info', '', __LINE__, __FILE__, $sql);
-	}
-	if ($row = DB()->sql_fetchrow($result))
-	{
-		$msg = sprintf($lang['BT_REG_FAIL_SAME_HASH'], TOPIC_URL . $row['topic_id']);
-		torrent_error_exit($msg);
+		return torrent_error_exit(sprintf($lang['BT_REG_FAIL_SAME_HASH'], TOPIC_URL . $row['topic_id']));
 	}
 
 	$totallen = 0;
 
-	if (@$info['length'])
+	if (isset($info['length']))
 	{
 		$totallen = (float) $info['length'];
 	}
-	else if (@$info['files'] && is_array($info['files']))
+	else if (isset($info['files']) && is_array($info['files']))
 	{
 		foreach ($info['files'] as $fn => $f)
 		{
@@ -335,7 +295,7 @@ function tracker_register ($attach_id, $mode = '', $tor_status = TOR_NOT_APPROVE
 	}
 	else
 	{
-		torrent_error_exit($lang['TORFILE_INVALID']);
+		return torrent_error_exit($lang['TORFILE_INVALID']);
 	}
 
 	$reg_time = TIMENOW;
@@ -352,7 +312,7 @@ function tracker_register ($attach_id, $mode = '', $tor_status = TOR_NOT_APPROVE
 
 		if ($sql_error['code'] == 1062) // Duplicate entry
 		{
-			torrent_error_exit($lang['BT_REG_FAIL_SAME_HASH']);
+			return torrent_error_exit($lang['BT_REG_FAIL_SAME_HASH']);
 		}
 		message_die(GENERAL_ERROR, 'Could not register torrent on tracker', '', __LINE__, __FILE__, $sql);
 	}
@@ -445,17 +405,9 @@ function send_torrent_with_passkey ($filename)
 
 	if (!$passkey_val)
 	{
-		if ($bb_cfg['bt_gen_passkey_on_reg'])
+		if (!$passkey_val = generate_passkey($user_id))
 		{
-			if (!$passkey_val = generate_passkey($user_id))
-			{
-				message_die(GENERAL_ERROR, 'Could not insert passkey', '', __LINE__, __FILE__, $sql);
-			}
-		}
-		else
-		{
-			$mess = sprintf($lang['PASSKEY_ERR_EMPTY'], "profile.php?mode=editprofile#bittorrent");
-			message_die(GENERAL_ERROR, $mess);
+			bb_simple_die('Could not generate passkey');
 		}
 	}
 
@@ -478,35 +430,6 @@ function send_torrent_with_passkey ($filename)
 			{
 				$mess = sprintf($lang['BT_LOW_RATIO_FOR_DL'], round($user_ratio, 2), "search.php?dlu=$user_id&amp;dlc=1");
 				message_die(GENERAL_ERROR, $mess);
-			}
-		}
-	}
-
-	// Seeding torrents limit
-	if ($bb_cfg['max_seeding_torrents'] && IS_USER)
-	{
-		$seeding = DB()->fetch_row("
-			SELECT COUNT(DISTINCT topic_id) AS torrents, SUM(speed_up) AS sum_up
-			FROM ". BB_BT_TRACKER ."
-			WHERE user_id = $user_id
-				AND seeder = 1
-		");
-
-		if ($seeding && $seeding['torrents'] > $bb_cfg['max_seeding_torrents'] && $bt_userdata['u_up_total'] < 200*1024*1024*1024)
-		{
-			if ($seeding['sum_up'] < ($seeding['torrents'] * $bb_cfg['min_up_speed_per_torrent']))
-			{
-				$msg = array();
-				$msg[] = date('m-d H:i:s');
-				$msg[] = sprintf('%-30s', html_entity_decode($userdata['username'])." ($user_id)");
-				$msg[] = sprintf('%-3s', $seeding['torrents']);
-				$msg[] = sprintf('%.2f', @$user_ratio);
-				$msg[] = sprintf('%-9s', humn_size($bt_userdata['u_up_total'], '', '', ' '));
-				$msg[] = humn_size($seeding['sum_up'], '', '', ' ');
-				$msg = join(LOG_SEPR, $msg) . LOG_LF;
-				bb_log($msg, 'overseed/current');
-
-				redirect($bb_cfg['too_many_seeding_redirect_url']);
 			}
 		}
 	}
@@ -538,58 +461,32 @@ function send_torrent_with_passkey ($filename)
 	}
 
 	// Add publisher & topic url
-	$publisher = $bb_cfg['bt_add_publisher'];
-	$publisher_url = ($post_id) ? make_url(POST_URL . $post_id) : '';
+	$publisher_name = $bb_cfg['server_name'];
+	$publisher_url  = make_url(TOPIC_URL . $topic_id);
 
-	if ($publisher)
-	{
-		$tor['publisher'] = strval($publisher);
-		unset($tor['publisher.utf-8']);
+	$tor['publisher'] = strval($publisher_name);
+	unset($tor['publisher.utf-8']);
 
-		if ($publisher_url)
-		{
-			$tor['publisher-url'] = strval($publisher_url);
-			unset($tor['publisher-url.utf-8']);
-		}
-	}
+	$tor['publisher-url'] = strval($publisher_url);
+	unset($tor['publisher-url.utf-8']);
 
-	// Add comment
-	$comment = '';
-	$orig_com = (@$tor['comment']) ? $tor['comment'] : '';
-	if ($bb_cfg['bt_add_comment'])
-	{
-		$comment = $bb_cfg['bt_add_comment'];
-	}
-	else
-	{
-		$comment = ($publisher_url) ? $publisher_url : '';
-	}
-
-	if ($comment = trim($comment))
-	{
-		$tor['comment'] = strval($comment);
-		unset($tor['comment.utf-8']);
-	}
-
-	//Azureus DHT disable
-	$tor['azureus_properties'] = array('dht_backup_enable' => intval(0));
+	$tor['comment'] = strval($publisher_url);
+	unset($tor['comment.utf-8']);
 
 	// Send torrent
 	$output   = bencode($tor);
-	$filename = clean_filename(basename($attachment['real_filename']));
-	$mimetype = 'application/x-bittorrent;';
-	$charset  = (strpos(USER_AGENT, 'pera') && @$lang['CONTENT_ENCODING']) ? "charset={$lang['CONTENT_ENCODING']};" : '';
+	$dl_fname = ($bb_cfg['torrent_name_style'] ? '['.$bb_cfg['server_name'].'].t' . $topic_id . '.torrent' : clean_filename(basename($attachment['real_filename'])));
 
-	header("Content-Type: $mimetype $charset name=\"$filename\"");
-	if ($bb_cfg['torrent_name_style'])
+	if (!empty($_COOKIE['explain']))
 	{
-		$header_file_name = 'Content-Disposition: attachment; filename="['.$bb_cfg['server_name'].'].t' . $topic_id . '.torrent"';
-		header($header_file_name);
+		$out = "attach path: $filename<br /><br />";
+		$tor['info']['pieces'] = '[...] '. strlen($tor['info']['pieces']) .' bytes';
+		$out .= print_r($tor, true);
+		bb_die("<pre>$out</pre>");
 	}
-	else
-	{
-		header("Content-Disposition: attachment; filename=\"$filename\"");
-	}
+
+	header("Content-Type: application/x-bittorrent; name=\"$dl_fname\"");
+	header("Content-Disposition: attachment; filename=\"$dl_fname\"");
 
 	bb_exit($output);
 }
@@ -623,16 +520,16 @@ function generate_passkey ($user_id, $force_generate = false)
 		$passkey_val = make_rand_str(BT_AUTH_KEY_LENGTH);
 
 		// Insert new row
-		$sql = "INSERT IGNORE INTO ". BB_BT_USERS ." (user_id, auth_key) VALUES ($user_id, '$passkey_val')";
+		DB()->query("INSERT IGNORE INTO ". BB_BT_USERS ." (user_id, auth_key) VALUES ($user_id, '$passkey_val')");
 
-		if (DB()->sql_query($sql) && DB()->affected_rows() == 1)
+		if (DB()->affected_rows() == 1)
 		{
 			return $passkey_val;
 		}
 		// Update
-		$sql = "UPDATE IGNORE ". BB_BT_USERS ." SET auth_key = '$passkey_val' WHERE user_id = $user_id LIMIT 1";
+		DB()->query("UPDATE IGNORE ". BB_BT_USERS ." SET auth_key = '$passkey_val' WHERE user_id = $user_id LIMIT 1");
 
-		if (DB()->sql_query($sql) && DB()->affected_rows() == 1)
+		if (DB()->affected_rows() == 1)
 		{
 			return $passkey_val;
 		}
@@ -684,6 +581,7 @@ function torrent_error_exit ($message)
 	global $reg_mode, $return_message, $lang;
 
 	$msg = '';
+
 	if (isset($reg_mode) && ($reg_mode == 'request' || $reg_mode == 'newtopic'))
 	{
 		if (isset($return_message))
@@ -692,9 +590,8 @@ function torrent_error_exit ($message)
 		}
 		$msg .= '<b>'. $lang['BT_REG_FAIL'] .'</b><br /><br />';
 	}
-	$msg .= $message;
 
-	bb_die($msg);
+	bb_die($msg . $message);
 }
 
 // bdecode: based on OpenTracker [http://whitsoftdev.com/opentracker]

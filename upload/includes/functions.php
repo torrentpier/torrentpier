@@ -1954,6 +1954,19 @@ function message_die ($msg_code, $msg_text = '', $msg_title = '', $err_line = ''
 	exit;
 }
 
+function bb_simple_die ($txt)
+{
+	global $bb_cfg;
+
+	if (!empty($_COOKIE['explain']))
+	{
+		bb_die("bb_simple_die:<br /><br />$txt");
+	}
+
+	header('Content-Type: text/plain; charset='. $bb_cfg['charset']);
+	die($txt);
+}
+
 function phpbb_realpath($path)
 {
 	return (!@function_exists('realpath') || !@realpath(INC_DIR . 'functions.php')) ? $path : @realpath($path);

@@ -55,8 +55,8 @@ $domain_name = (!empty($_SERVER['SERVER_NAME'])) ? $_SERVER['SERVER_NAME'] : $do
 
 // Increase number of revision after update
 $bb_cfg['tp_version'] = '2.5 (unstable)';
-$bb_cfg['tp_release_date'] = '21-01-2014';
-$bb_cfg['tp_release_state'] = 'R564';
+$bb_cfg['tp_release_date'] = '23-01-2014';
+$bb_cfg['tp_release_state'] = 'R565';
 
 // Database
 $charset  = 'utf8';
@@ -190,11 +190,6 @@ $rating_limits = array(
 	'0.5' => 2,
 	'0.6' => 3,
 );
-
-// Seeding torrents limit
-$bb_cfg['max_seeding_torrents']     	 = 0;        // 0 - unlimited
-$bb_cfg['min_up_speed_per_torrent'] 	 = 500;      // bytes
-$bb_cfg['too_many_seeding_redirect_url'] = 'viewtopic.php?t=TOPIC_ID';
 
 // DL-Status
 $bb_cfg['dl_will_days_keep']     = 60;          // days to keep user's dlstatus records

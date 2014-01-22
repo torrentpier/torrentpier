@@ -22,9 +22,7 @@ $cfg = array();
 
 // All config names with default values
 $default_cfg_str = array(
-	'bt_announce_url'              => 'http://yourdomain.com/bt/',
-	'bt_add_comment'               => '',
-	'bt_add_publisher'             => '',
+	'bt_announce_url'              => 'http://demo.torrentpier.me/bt/',
 );
 
 $default_cfg_bool = array(
@@ -34,7 +32,6 @@ $default_cfg_bool = array(
 	'bt_show_dl_list'              => 0,
 	'bt_dl_list_only_1st_page'     => 1,
 	'bt_dl_list_only_count'        => 1,
-	'bt_gen_passkey_on_reg'        => 1,
 	'bt_replace_ann_url'           => 1,
 	'bt_show_ip_only_moder'        => 1,
 	'bt_show_port_only_moder'      => 1,

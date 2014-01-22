@@ -82,10 +82,6 @@ $lang['BT_REPLACE_ANN_URL'] = 'Заменять announce url';
 $lang['BT_REPLACE_ANN_URL_EXPL'] = 'заменять оригинальный announce url в .torrent файлах на ваш';
 $lang['BT_DEL_ADDIT_ANN_URLS'] = 'Удалять все дополнительные announce urls';
 $lang['BT_DEL_ADDIT_ANN_URLS_EXPL'] = 'если торрент содержит адреса других трекеров, они будут удалены';
-$lang['BT_ADD_COMMENT'] = 'Добавлять в торрент комментарий';
-$lang['BT_ADD_COMMENT_EXPL'] = 'оставьте пустым для добавления адреса топика в качестве комментария';
-$lang['BT_ADD_PUBLISHER'] = 'Добавлять адрес топика как publisher-url и это имя в качестве имени publisher';
-$lang['BT_ADD_PUBLISHER_EXPL'] = 'для отключения - оставьте пустым';
 
 $lang['BT_SHOW_PEERS_HEAD'] = 'Peers-List';
 $lang['BT_SHOW_PEERS'] = 'Показывать список источников (seeders/leechers)';
@@ -111,8 +107,6 @@ $lang['BT_SHOW_DL_BUT_CANCEL'] = $lang['DL_CANCEL'];
 
 $lang['BT_ADD_AUTH_KEY_HEAD'] = 'Passkey';
 $lang['BT_ADD_AUTH_KEY'] = 'Aвтодобавление passkey к торрент-файлам перед их скачиванием';
-$lang['BT_GEN_PASSKEY_ON_REG'] = 'Автоматически генерировать passkey';
-$lang['BT_GEN_PASSKEY_ON_REG_EXPL'] = 'если passkey не найден, генерировать его при первом скачивании торрента';
 
 $lang['BT_TOR_BROWSE_ONLY_REG_HEAD'] = 'Torrent browser (трекер)';
 $lang['BT_TOR_BROWSE_ONLY_REG'] = 'Torrent browser (tracker.php) не доступен для гостей';
