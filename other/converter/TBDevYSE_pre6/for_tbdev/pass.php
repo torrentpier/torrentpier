@@ -6,7 +6,7 @@ dbconn();
 
 loggedinorreturn();
 
-$new_tr_url = "http://pushchino.tv/forum/"; // with ending slash
+$new_tr_url = "http://torrentpier.me/"; // with ending slash
 $subject = "Переезд на новый движок";
 $msg = '[b]Внимание![/b] Наш трекер переехал на новый движок! Адрес трекера - [url='.$new_tr_url.']'.$new_tr_url.'[/url] 
 	Вся база перенесена на новый движок, регистрироваться заново не надо. 

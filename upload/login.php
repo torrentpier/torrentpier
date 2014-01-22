@@ -97,7 +97,7 @@ if (isset($_POST['login']))
 			// Обнуление при введении правильно комбинации логин/пароль
 			CACHE('bb_login_err')->set('l_err_'. USER_IP, 0, 3600);
 
-			if ($redirect_url == '/login.php' || $redirect_url == 'login.php') $redirect_url = 'index.php';
+			if ($redirect_url == '/' . LOGIN_URL || $redirect_url == LOGIN_URL) $redirect_url = 'index.php';
 			redirect($redirect_url);
 		}
 
@@ -128,7 +128,7 @@ if (IS_GUEST || $mod_admin_login)
 		'REDIRECT_URL'    => htmlCHR($redirect_url),
 		'CAPTCHA_HTML'    => ($need_captcha) ? CAPTCHA()->get_html() : '',
 		'PAGE_TITLE'      => $lang['LOGIN'],
-		'S_LOGIN_ACTION'  => "login.php",
+		'S_LOGIN_ACTION'  => LOGIN_URL,
 	));
 
 	print_page('login.tpl');

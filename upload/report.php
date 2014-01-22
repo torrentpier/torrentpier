@@ -694,7 +694,7 @@ else
 				$template->assign_vars(array(
 					'S_HIDDEN_FIELDS' => '<input type="hidden" name="' . POST_REPORT_URL . '" value="' . $report['report_id'] . '" />',
 
-					'U_REPORT_AUTHOR_PRIVMSG' => "privmsg.php?mode=post&amp;" . POST_USERS_URL . '=' . $report['user_id'],
+					'U_REPORT_AUTHOR_PRIVMSG' => PM_URL . "?mode=post&amp;" . POST_USERS_URL . '=' . $report['user_id'],
 
 					'REPORT_TYPE' => $report_module->lang['REPORT_TYPE'],
 					'REPORT_TITLE' => $report['report_title'],

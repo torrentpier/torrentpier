@@ -56,7 +56,7 @@ $domain_name = (!empty($_SERVER['SERVER_NAME'])) ? $_SERVER['SERVER_NAME'] : $do
 // Increase number of revision after update
 $bb_cfg['tp_version'] = '2.5 (unstable)';
 $bb_cfg['tp_release_date'] = '23-01-2014';
-$bb_cfg['tp_release_state'] = 'R565';
+$bb_cfg['tp_release_state'] = 'R566';
 
 // Database
 $charset  = 'utf8';
@@ -221,6 +221,12 @@ define('LANG_ROOT_DIR', BB_PATH .'/language/' );
 define('LOG_DIR',       BB_PATH .'/log/'      );
 define('TEMPLATES_DIR', BB_PATH .'/templates/');
 define('TRIGGERS_DIR',  BB_PATH .'/triggers/' );
+
+// URLs
+$bb_cfg['ajax_url']    = 'ajax.php';     #  "http://{$_SERVER['SERVER_NAME']}/ajax.php"
+$bb_cfg['login_url']   = 'login.php';    #  "http://{$domain_name}/login.php"
+$bb_cfg['pm_url']      = 'privmsg.php';  #  "http://{$domain_name}/privmsg.php"
+$bb_cfg['posting_url'] = 'posting.php';  #  "http://{$domain_name}/posting.php"
 
 // Language
 setlocale(LC_ALL, 'ru_RU.UTF-8');

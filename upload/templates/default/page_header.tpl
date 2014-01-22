@@ -215,7 +215,7 @@ $(document).ready(function(){
 });
 <!-- ENDIF -->
 
-var ajax = new Ajax('{SITE_URL}ajax.php', 'POST', 'json');
+var ajax = new Ajax('{$bb_cfg['ajax_url']}', 'POST', 'json');
 
 function getElText (e)
 {

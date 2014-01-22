@@ -77,7 +77,7 @@ $template->assign_vars(array(
 //
 if ( $cancel )
 {
-	redirect("privmsg.php?folder=$folder");
+	redirect(PM_URL . "?folder=$folder");
 }
 
 //
@@ -99,13 +99,10 @@ $error = FALSE;
 //
 // Define the box image links
 //
-$inbox_url = ( $folder != 'inbox' || $mode != '' ) ? '<a href="'."privmsg.php?folder=inbox".'">'. $lang['INBOX'] .'</a>' : $lang['INBOX'];
-
-$outbox_url = ( $folder != 'outbox' || $mode != '' ) ? '<a href="'."privmsg.php?folder=outbox".'">'. $lang['OUTBOX'] .'</a>' : $lang['OUTBOX'];
-
-$sentbox_url = ( $folder != 'sentbox' || $mode != '' ) ? '<a href="'."privmsg.php?folder=sentbox".'">'. $lang['SENTBOX'] .'</a>' : $lang['SENTBOX'];
-
-$savebox_url = ( $folder != 'savebox' || $mode != '' ) ? '<a href="'."privmsg.php?folder=savebox".'">'. $lang['SAVEBOX'] .'</a>' : $lang['SAVEBOX'];
+$inbox_url = ( $folder != 'inbox' || $mode != '' ) ? '<a href="' . PM_URL . "?folder=inbox".'">'. $lang['INBOX'] .'</a>' : $lang['INBOX'];
+$outbox_url = ( $folder != 'outbox' || $mode != '' ) ? '<a href="' . PM_URL . "?folder=outbox".'">'. $lang['OUTBOX'] .'</a>' : $lang['OUTBOX'];
+$sentbox_url = ( $folder != 'sentbox' || $mode != '' ) ? '<a href="' . PM_URL . "?folder=sentbox".'">'. $lang['SENTBOX'] .'</a>' : $lang['SENTBOX'];
+$savebox_url = ( $folder != 'savebox' || $mode != '' ) ? '<a href="' . PM_URL . "?folder=savebox".'">'. $lang['SAVEBOX'] .'</a>' : $lang['SAVEBOX'];
 
 // ----------
 // Start main
@@ -183,7 +180,7 @@ if ( $mode == 'read' )
 	//
 	if ( !($privmsg = DB()->sql_fetchrow($result)) )
 	{
-		redirect("privmsg.php?folder=$folder");
+		redirect(PM_URL . "?folder=$folder");
 	}
 
 	$privmsg_id = $privmsg['privmsgs_id'];
@@ -292,10 +289,10 @@ if ( $mode == 'read' )
 	// Pick a folder, any folder, so long as it's one below ...
 	//
 	$post_urls = array(
-		'post' => "privmsg.php?mode=post",
-		'reply' => "privmsg.php?mode=reply&amp;" . POST_POST_URL . "=$privmsg_id",
-		'quote' => "privmsg.php?mode=quote&amp;" . POST_POST_URL . "=$privmsg_id",
-		'edit' => "privmsg.php?mode=edit&amp;" . POST_POST_URL . "=$privmsg_id"
+		'post' => PM_URL . "?mode=post",
+		'reply' => PM_URL . "?mode=reply&amp;" . POST_POST_URL . "=$privmsg_id",
+		'quote' => PM_URL . "?mode=quote&amp;" . POST_POST_URL . "=$privmsg_id",
+		'edit' => PM_URL . "?mode=edit&amp;" . POST_POST_URL . "=$privmsg_id"
 	);
 	$post_icons = array(
 		'post_img' => '<a href="' . $post_urls['post'] . '"><img src="' . $images['pm_postmsg'] . '" alt="' . $lang['POST_NEW_PM'] . '" border="0" /></a>',
@@ -430,7 +427,7 @@ if ( $mode == 'read' )
 		'SAVEBOX' => $savebox_url,
 		'BOX_NAME' => $l_box_name,
 
-		'S_PRIVMSGS_ACTION' => "privmsg.php?folder=$folder",
+		'S_PRIVMSGS_ACTION' => PM_URL . "?folder=$folder",
 		'S_HIDDEN_FIELDS' => $s_hidden_fields)
 	);
 
@@ -445,7 +442,7 @@ if ( $mode == 'read' )
 	$profile_img = '<a href="' . $temp_url . '"><img src="' . $images['icon_profile'] . '" alt="' . $lang['READ_PROFILE'] . '" title="' . $lang['READ_PROFILE'] . '" border="0" /></a>';
 	$profile = '<a href="' . $temp_url . '">' . $lang['READ_PROFILE'] . '</a>';
 
-	$temp_url = "privmsg.php?mode=post&amp;" . POST_USERS_URL . "=$user_id_from";
+	$temp_url = PM_URL . "?mode=post&amp;" . POST_USERS_URL . "=$user_id_from";
 	$pm_img = '<a href="' . $temp_url . '"><img src="' . $images['icon_pm'] . '" alt="' . $lang['SEND_PRIVATE_MESSAGE'] . '" title="' . $lang['SEND_PRIVATE_MESSAGE'] . '" border="0" /></a>';
 	$pm = '<a href="' . $temp_url . '">' . $lang['SEND_PRIVATE_MESSAGE'] . '</a>';
 
@@ -520,7 +517,7 @@ else if ( ( $delete && $mark_list ) || $delete_all )
 
 		print_confirmation(array(
 			'QUESTION'      => (count($mark_list) == 1) ? $lang['CONFIRM_DELETE_PM'] : $lang['CONFIRM_DELETE_PMS'],
-			'FORM_ACTION'   => "privmsg.php?folder=$folder",
+			'FORM_ACTION'   => PM_URL . "?folder=$folder",
 			'HIDDEN_FIELDS' => build_hidden_fields($hidden_fields),
 		));
 	}
@@ -895,7 +892,7 @@ else if ( $save && $mark_list && $folder != 'savebox' && $folder != 'outbox' )
 			message_die(GENERAL_ERROR, 'Could not save private messages', '', __LINE__, __FILE__, $saved_sql);
 		}
 
-		redirect("privmsg.php?folder=savebox");
+		redirect(PM_URL . "?folder=savebox");
 	}
 }
 else if ( $submit || $refresh || $mode != '' )
@@ -1108,7 +1105,7 @@ else if ( $submit || $refresh || $mode != '' )
 			if ( bf($to_userdata['user_opt'], 'user_opt', 'notify_pm') && !empty($to_userdata['user_email']) && $to_userdata['user_active'] && $bb_cfg['pm_notify_enabled'] )
 			{
 				$script_name = preg_replace('/^\/?(.*?)\/?$/', "\\1", trim($bb_cfg['script_path']));
-				$script_name = ( $script_name != '' ) ? $script_name . '/privmsg.php' : 'privmsg.php';
+				$script_name = ( $script_name != '' ) ? $script_name . '/'. PM_URL  : PM_URL;
 				$server_name = trim($bb_cfg['server_name']);
 				$server_protocol = ( $bb_cfg['cookie_secure'] ) ? 'https://' : 'http://';
 				$server_port = ( $bb_cfg['server_port'] <> 80 ) ? ':' . trim($bb_cfg['server_port']) . '/' : '/';
@@ -1229,7 +1226,7 @@ else if ( $submit || $refresh || $mode != '' )
 
 			if ( !($privmsg = DB()->sql_fetchrow($result)) )
 			{
-				redirect("privmsg.php?folder=$folder");
+				redirect(PM_URL . "?folder=$folder");
 			}
 
 			$privmsg_subject = $privmsg['privmsgs_subject'];
@@ -1255,7 +1252,7 @@ else if ( $submit || $refresh || $mode != '' )
 
 			if ( !($privmsg = DB()->sql_fetchrow($result)) )
 			{
-				redirect("privmsg.php?folder=$folder");
+				redirect(PM_URL . "?folder=$folder");
 			}
 
 			$privmsg_subject = ( ( !preg_match('/^Re:/', $privmsg['privmsgs_subject']) ) ? 'Re: ' : '' ) . $privmsg['privmsgs_subject'];
@@ -1398,11 +1395,11 @@ else if ( $submit || $refresh || $mode != '' )
 		'POSTING_TYPE_TITLE' => $post_a,
 
 		'S_HIDDEN_FORM_FIELDS' => $s_hidden_fields,
-		'S_POST_ACTION' => "privmsg.php",
+		'S_POST_ACTION' => PM_URL,
 
 		'U_SEARCH_USER' => "search.php?mode=searchuser",
-		'U_VIEW_FORUM' => "privmsg.php")
-	);
+		'U_VIEW_FORUM' => PM_URL,
+	));
 }
 else
 {
@@ -1450,7 +1447,7 @@ else
 	//
 	// New message
 	//
-	$post_new_mesg_url = '<a href="privmsg.php?mode=post"><img src="' . $images['post_new'] . '" alt="' . $lang['SEND_A_NEW_MESSAGE'] . '" border="0" /></a>';
+	$post_new_mesg_url = '<a href="' . PM_URL .'?mode=post"><img src="' . $images['post_new'] . '" alt="' . $lang['SEND_A_NEW_MESSAGE'] . '" border="0" /></a>';
 
 	//
 	// General SQL to obtain messages
@@ -1586,7 +1583,7 @@ else
 			$l_box_name = $lang['SENTBOX'];
 			break;
 	}
-	$post_pm = "privmsg.php?mode=post";
+	$post_pm = PM_URL . "?mode=post";
 	$post_pm_img = '<a href="' . $post_pm . '"><img src="' . $images['pm_postmsg'] . '" alt="' . $lang['POST_NEW_PM'] . '" border="0" /></a>';
 	$post_pm = '<a href="' . $post_pm . '">' . $lang['POST_NEW_PM'] . '</a>';
 
@@ -1642,12 +1639,12 @@ else
 
 		'L_FROM_OR_TO' => ( $folder == 'inbox' || $folder == 'savebox' ) ? $lang['FROM'] : $lang['TO'],
 
-		'S_PRIVMSGS_ACTION' => "privmsg.php?folder=$folder",
+		'S_PRIVMSGS_ACTION' => PM_URL . "?folder=$folder",
 		'S_HIDDEN_FIELDS' => '',
 		'S_POST_NEW_MSG' => $post_new_mesg_url,
 		'S_SELECT_MSG_DAYS' => $select_msg_days,
 
-		'U_POST_NEW_TOPIC' => "privmsg.php?mode=post")
+		'U_POST_NEW_TOPIC' => PM_URL . "?mode=post")
 	);
 
 	//
@@ -1680,7 +1677,7 @@ else
 				$msg_subject = preg_replace($orig_word, $replacement_word, $msg_subject);
 			}
 
-			$u_subject = "privmsg.php?folder=$folder&amp;mode=read&amp;" . POST_POST_URL . "=$privmsg_id";
+			$u_subject = PM_URL . "?folder=$folder&amp;mode=read&amp;" . POST_POST_URL . "=$privmsg_id";
 
 			$msg_date = bb_date($row['privmsgs_date']);
 
@@ -1711,7 +1708,7 @@ else
 		}
 		while( $row = DB()->sql_fetchrow($result) );
 
-		generate_pagination("privmsg.php?folder=$folder", $pm_total, $bb_cfg['topics_per_page'], $start);
+		generate_pagination(PM_URL . "?folder=$folder", $pm_total, $bb_cfg['topics_per_page'], $start);
 	}
 	else
 	{
@@ -1735,10 +1732,10 @@ function pm_message_die ($msg)
 	global $lang;
 
 	$msg .= '<br /><br />';
-	$msg .= sprintf($lang['CLICK_RETURN_INBOX'], '<a href="'."privmsg.php?folder=inbox".'">', '</a> ');
-	$msg .= sprintf($lang['CLICK_RETURN_SENTBOX'], '<a href="'."privmsg.php?folder=sentbox".'">', '</a> ');
-	$msg .= sprintf($lang['CLICK_RETURN_OUTBOX'], '<a href="'."privmsg.php?folder=outbox".'">', '</a> ');
-	$msg .= sprintf($lang['CLICK_RETURN_SAVEBOX'], '<a href="'."privmsg.php?folder=savebox".'">', '</a> ');
+	$msg .= sprintf($lang['CLICK_RETURN_INBOX'], '<a href="' . PM_URL . "?folder=inbox".'">', '</a> ');
+	$msg .= sprintf($lang['CLICK_RETURN_SENTBOX'], '<a href="' . PM_URL . "?folder=sentbox".'">', '</a> ');
+	$msg .= sprintf($lang['CLICK_RETURN_OUTBOX'], '<a href="' . PM_URL . "?folder=outbox".'">', '</a> ');
+	$msg .= sprintf($lang['CLICK_RETURN_SAVEBOX'], '<a href="' . PM_URL . "?folder=savebox".'">', '</a> ');
 	$msg .= '<br /><br />';
 	$msg .= sprintf($lang['CLICK_RETURN_INDEX'], '<a href="'."index.php".'">', '</a>');
 

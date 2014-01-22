@@ -13,7 +13,7 @@ $user->session_start();
 
 if (IS_GUEST)
 {
-	redirect("login.php?redirect=admin/index.php");
+	redirect(LOGIN_URL . "?redirect=admin/index.php");
 }
 
 if (!IS_ADMIN)

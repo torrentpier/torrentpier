@@ -19,7 +19,7 @@ function generate_user_info(&$row, $date_format, $group_mod, &$from, &$posts, &$
 	$joined = bb_date($row['user_regdate']);
 	$user_time   = ( !empty($row['user_time']) ) ? bb_date($row['user_time']) : $lang['NONE'];
 	$posts  = ( $row['user_posts'] ) ? $row['user_posts'] : 0;
-	$pm     = ($bb_cfg['text_buttons']) ? '<a class="txtb" href="'. ("privmsg.php?mode=post&amp;". POST_USERS_URL ."=".$row['user_id']) .'">'. $lang['SEND_PM_TXTB'] .'</a>' : '<a href="' . ("privmsg.php?mode=post&amp;". POST_USERS_URL ."=".$row['user_id']) .'"><img src="' . $images['icon_pm'] . '" alt="' . $lang['SEND_PRIVATE_MESSAGE'] . '" title="' . $lang['SEND_PRIVATE_MESSAGE'] . '" border="0" /></a>';
+	$pm     = ($bb_cfg['text_buttons']) ? '<a class="txtb" href="'. (PM_URL . "?mode=post&amp;". POST_USERS_URL ."=".$row['user_id']) .'">'. $lang['SEND_PM_TXTB'] .'</a>' : '<a href="' . (PM_URL . "?mode=post&amp;". POST_USERS_URL ."=".$row['user_id']) .'"><img src="' . $images['icon_pm'] . '" alt="' . $lang['SEND_PRIVATE_MESSAGE'] . '" title="' . $lang['SEND_PRIVATE_MESSAGE'] . '" border="0" /></a>';
 
 	if (bf($row['user_opt'], 'user_opt', 'viewemail') || $group_mod)
     {

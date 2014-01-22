@@ -60,7 +60,7 @@ $user->session_start();
 // Check if user logged in
 if (!$userdata['session_logged_in'])
 {
-	redirect("login.php?redirect=$redirect_type&$redirect");
+	redirect(LOGIN_URL . "?redirect=$redirect_type&$redirect");
 }
 
 if ($bb_cfg['bt_min_ratio_dl_button'] && $btu = get_bt_userdata($user->id))

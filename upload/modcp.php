@@ -186,7 +186,7 @@ if (!$is_auth['auth_mod'])
 if ($is_moderator && !$userdata['session_admin'])
 {
 	$redirect = isset($_POST['redirect']) ? $_POST['redirect'] : $_SERVER['REQUEST_URI'];
-	redirect("login.php?redirect=$redirect&admin=1");
+	redirect(LOGIN_URL . "?redirect=$redirect&admin=1");
 }
 
 //

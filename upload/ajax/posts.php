@@ -95,7 +95,7 @@ switch($this->request['type'])
 		}
 		if (mb_strlen($message, 'UTF-8') > 1000)
 		{
-			$this->response['redirect'] = make_url('posting.php?mode=quote&p='. $post_id);
+			$this->response['redirect'] = make_url(POSTING_URL.'?mode=quote&p='. $post_id);
 		}
 
 		$this->response['quote']   = true;
@@ -119,7 +119,7 @@ switch($this->request['type'])
 		}
 		if ((mb_strlen($post['post_text'], 'UTF-8') > 1000) || $post['post_attachment'] || ($post['topic_first_post_id'] == $post_id))
 		{
-			$this->response['redirect'] = make_url('posting.php?mode=editpost&p='. $post_id);
+			$this->response['redirect'] = make_url(POSTING_URL.'?mode=editpost&p='. $post_id);
 		}
 		elseif ($this->request['type'] == 'editor')
 		{
@@ -173,7 +173,7 @@ switch($this->request['type'])
 			$hidden_form .= '<input type="hidden" name="subject" value="'. $post['topic_title'] .'" />';
 
 			$this->response['text'] = '
-				<form action="posting.php" method="post" name="post">
+				<form action="'. POSTING_URL .'" method="post" name="post">
 					'. $hidden_form .'
 					<div class="buttons mrg_4">
 						<input type="button" value="B" name="codeB" title="'. $lang['BOLD'] .'" style="font-weight: bold; width: 25px;" />

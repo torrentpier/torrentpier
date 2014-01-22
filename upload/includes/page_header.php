@@ -14,11 +14,11 @@ $is_mod    = ($logged_in && IS_MOD);
 // Generate logged in/logged out status
 if ($logged_in)
 {
-	$u_login_logout = BB_ROOT ."login.php?logout=1";
+	$u_login_logout = BB_ROOT . LOGIN_URL . "?logout=1";
 }
 else
 {
-	$u_login_logout = BB_ROOT ."login.php";
+	$u_login_logout = BB_ROOT . LOGIN_URL;
 }
 
 // Online userlist
@@ -224,7 +224,7 @@ $template->assign_vars(array(
 	'THIS_AVATAR'  	     		=> get_avatar($userdata['user_avatar'], $userdata['user_avatar_type'], !bf($userdata['user_opt'], 'user_opt', 'allow_avatar')),
 	'SHOW_LOGIN_LINK'    		=> !defined('IN_LOGIN'),
 	'AUTOLOGIN_DISABLED'		=> !$bb_cfg['allow_autologin'],
-	'S_LOGIN_ACTION'     		=> BB_ROOT ."login.php",
+	'S_LOGIN_ACTION'     		=> BB_ROOT . LOGIN_URL,
 
 	'U_CUR_DOWNLOADS'    		=> PROFILE_URL . $userdata['user_id'],
 	'U_FAQ'              		=> $bb_cfg['faq_url'],
@@ -234,9 +234,9 @@ $template->assign_vars(array(
 	'U_MEMBERLIST'       		=> "memberlist.php",
 	'U_MODCP'            		=> "modcp.php",
 	'U_OPTIONS'          		=> "profile.php?mode=editprofile",
-	'U_PRIVATEMSGS'      		=> "privmsg.php?folder=inbox",
+	'U_PRIVATEMSGS'      		=> PM_URL . "?folder=inbox",
 	'U_PROFILE'          		=> PROFILE_URL . $userdata['user_id'],
-	'U_READ_PM'          		=> "privmsg.php?folder=inbox". (($userdata['user_newest_pm_id'] && $userdata['user_new_privmsg'] == 1) ? "&mode=read&p={$userdata['user_newest_pm_id']}" : ''),
+	'U_READ_PM'          		=> PM_URL . "?folder=inbox". (($userdata['user_newest_pm_id'] && $userdata['user_new_privmsg'] == 1) ? "&mode=read&p={$userdata['user_newest_pm_id']}" : ''),
 	'U_REGISTER'         		=> "profile.php?mode=register",
 	'U_SEARCH'           		=> "search.php",
 	'U_SEND_PASSWORD'    		=> "profile.php?mode=sendpassword",
@@ -251,8 +251,11 @@ $template->assign_vars(array(
 	'DOWNLOAD_URL'       		=> BB_ROOT . DOWNLOAD_URL,
 	'FORUM_URL'          		=> BB_ROOT . FORUM_URL,
 	'GROUP_URL'          		=> BB_ROOT . GROUP_URL,
+	'LOGIN_URL'          		=> $bb_cfg['login_url'],
 	'NEWEST_URL'         		=> '&amp;view=newest#newest',
+	'PM_URL'             		=> $bb_cfg['pm_url'],
 	'POST_URL'           		=> BB_ROOT . POST_URL,
+	'POSTING_URL'        		=> $bb_cfg['posting_url'],
 	'PROFILE_URL'        		=> BB_ROOT . PROFILE_URL,
 	'TOPIC_URL'          		=> BB_ROOT . TOPIC_URL,
 

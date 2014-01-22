@@ -6,7 +6,7 @@ require(BB_ROOT .'attach_mod/attachment_mod.php');
 
 if (!$userdata['session_logged_in'])
 {
-	redirect("login.php?redirect={$_SERVER['REQUEST_URI']}");
+	redirect(LOGIN_URL . "?redirect={$_SERVER['REQUEST_URI']}");
 }
 
 // Page config

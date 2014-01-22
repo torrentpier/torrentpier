@@ -175,7 +175,7 @@ if (!$is_auth['auth_read'])
 	{
 		$redirect = ($post_id) ? POST_POST_URL . "=$post_id" : POST_TOPIC_URL . "=$topic_id";
 		$redirect .= ($start) ? "&start=$start" : '';
-		redirect("login.php?redirect=viewtopic.php&$redirect");
+		redirect(LOGIN_URL . "?redirect=viewtopic.php&$redirect");
 	}
 	bb_die($lang['TOPIC_POST_NOT_EXIST']);
 }
@@ -194,7 +194,7 @@ if ($is_auth['auth_mod'])
 {
 	$redirect = isset($_POST['redirect']) ? $_POST['redirect'] : @$_SERVER['REQUEST_URI'];
 	$redirect = url_arg($redirect, 'mod', 1, '&');
-	$mod_redirect_url = "login.php?redirect=$redirect&admin=1";
+	$mod_redirect_url = LOGIN_URL . "?redirect=$redirect&admin=1";
 
 	if ($moderation && !$userdata['session_admin'])
 	{
@@ -329,7 +329,7 @@ if ($bb_cfg['topic_notify_enabled'])
 		{
 			if ($_GET['unwatch'] == 'topic')
 			{
-				redirect("login.php?redirect=viewtopic.php&t=$topic_id&unwatch=topic");
+				redirect(LOGIN_URL . "?redirect=viewtopic.php&t=$topic_id&unwatch=topic");
 			}
 		}
 	}
@@ -450,9 +450,9 @@ if ( count($orig_word) )
 // Post, reply and other URL generation for
 // templating vars
 //
-$new_topic_url = "posting.php?mode=newtopic&amp;f=$forum_id";
+$new_topic_url = POSTING_URL . "?mode=newtopic&amp;f=$forum_id";
 $new_topic_url .= ($t_data['topic_tpl_id']) ? '&tpl=1' : '';
-$reply_topic_url = "posting.php?mode=reply&amp;t=$topic_id";
+$reply_topic_url = POSTING_URL . "?mode=reply&amp;t=$topic_id";
 $view_forum_url = "viewforum.php?f=$forum_id";
 $view_prev_topic_url = "viewtopic.php?t=$topic_id&amp;view=previous#newest";
 $view_next_topic_url = "viewtopic.php?t=$topic_id&amp;view=next#newest";
@@ -761,7 +761,7 @@ if ( !empty($t_data['topic_vote']) )
 			'POLL_QUESTION'  => $vote_title,
 
 			'S_HIDDEN_FIELDS' => $s_hidden_fields,
-			'S_POLL_ACTION' => "posting.php?mode=vote&amp;t=$topic_id",
+			'S_POLL_ACTION' => POSTING_URL . "?mode=vote&amp;t=$topic_id",
 		));
 	}
 }
@@ -1023,7 +1023,7 @@ if ($bb_cfg['show_quick_reply'])
 	{
 		$template->assign_vars(array(
 			'QUICK_REPLY'     => true,
-			'QR_POST_ACTION'  => "posting.php",
+			'QR_POST_ACTION'  => POSTING_URL,
 			'QR_TOPIC_ID'     => $topic_id,
 			'CAPTCHA_HTML'    => (IS_GUEST) ? CAPTCHA()->get_html() : '',
 		));

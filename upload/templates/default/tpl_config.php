@@ -147,9 +147,9 @@ if (!empty($page_cfg['load_tpl_vars']) AND $vars = array_flip($page_cfg['load_tp
 			'MOD_POST_IMG'    => ($bb_cfg['text_buttons']) ? $lang['MODERATE_POST_TXTB']    : '<img src="'. $images['icon_mod']     .'" alt="'.$lang['MODERATE_POST_TXTB'].'" title="'. $lang['MODERATE_POST'] .'" />',
 			'MC_IMG'          => ($bb_cfg['text_buttons']) ? '['.$lang['COMMENT'].']'       : '<img src="'. $images['icon_mc']      .'" alt="['.$lang['COMMENT'].']" title="'.$lang['COMMENT'].'" />',
 
-			'QUOTE_URL'       => BB_ROOT ."posting.php?mode=quote&amp;p=",
-			'EDIT_POST_URL'   => BB_ROOT ."posting.php?mode=editpost&amp;p=",
-			'DELETE_POST_URL' => BB_ROOT ."posting.php?mode=delete&amp;p=",
+			'QUOTE_URL'       => BB_ROOT . POSTING_URL . "?mode=quote&amp;p=",
+			'EDIT_POST_URL'   => BB_ROOT . POSTING_URL . "?mode=editpost&amp;p=",
+			'DELETE_POST_URL' => BB_ROOT . POSTING_URL . "?mode=delete&amp;p=",
 			'IP_POST_URL'     => BB_ROOT ."modcp.php?mode=ip&amp;p=",
 
 			'PROFILE_IMG'     => ($bb_cfg['text_buttons']) ? $lang['READ_PROFILE_TXTB'] : '<img src="'. $images['icon_profile'] .'" alt="'. $lang['READ_PROFILE_TXTB'] .'" title="'. $lang['READ_PROFILE'] .'" />',

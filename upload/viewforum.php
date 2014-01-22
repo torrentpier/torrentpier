@@ -69,7 +69,7 @@ if (!$is_auth['auth_view'])
 	{
 		$redirect = "f=$forum_id";
 		$redirect .= ($start) ? "&start=$start" : '';
-		redirect("login.php?redirect=viewforum.php&$redirect");
+		redirect(LOGIN_URL . "?redirect=viewforum.php&$redirect");
 	}
 	// The user is not authed to read this forum ...
 	$message = sprintf($lang['SORRY_AUTH_VIEW'], $is_auth['auth_view_type']);
@@ -86,7 +86,7 @@ if ($is_auth['auth_mod'])
 {
 	$redirect = isset($_POST['redirect']) ? $_POST['redirect'] : @$_SERVER['REQUEST_URI'];
 	$redirect = url_arg($redirect, 'mod', 1, '&');
-	$mod_redirect_url = "login.php?redirect=$redirect&admin=1";
+	$mod_redirect_url = LOGIN_URL . "?redirect=$redirect&admin=1";
 
 	if ($moderation && !$userdata['session_admin'])
 	{
@@ -399,13 +399,13 @@ obtain_word_list($orig_word, $replacement_word);
 
 if($forum_data['allow_reg_tracker'])
 {
-	$post_new_topic_url = "posting.php?mode=new_rel&amp;f=$forum_id";
+	$post_new_topic_url = POSTING_URL . "?mode=new_rel&amp;f=$forum_id";
 	$post_img = $images['release_new'];
 	$post_new_topic = $lang['POST_NEW_RELEASE'];
 }
 else
 {
-	$post_new_topic_url = "posting.php?mode=newtopic&amp;f=$forum_id";
+	$post_new_topic_url = POSTING_URL . "?mode=newtopic&amp;f=$forum_id";
 	$post_img = $images['post_new'];
 	$post_new_topic = $lang['POST_NEW_TOPIC'];
 }

@@ -19,7 +19,7 @@ if (!$profiledata = get_userdata($_GET[POST_USERS_URL]))
 
 if (!$userdata['session_logged_in'])
 {
-	redirect("login.php?redirect={$_SERVER['REQUEST_URI']}");
+	redirect(LOGIN_URL . "?redirect={$_SERVER['REQUEST_URI']}");
 }
 
 if (!$ranks = $datastore->get('ranks'))
@@ -106,7 +106,7 @@ $template->assign_vars(array(
 	'RANK_IMAGE'           => $rank_image,
 	'RANK_SELECT'          => $rank_select,
 	'POSTS'                => $profiledata['user_posts'],
-	'PM'                   => '<a href="privmsg.php?mode=post&amp;'. POST_USERS_URL .'='. $profiledata['user_id'] .'">'. $lang['SEND_PRIVATE_MESSAGE'] .'</a>',
+	'PM'                   => '<a href="' . PM_URL . '?mode=post&amp;'. POST_USERS_URL .'='. $profiledata['user_id'] .'">'. $lang['SEND_PRIVATE_MESSAGE'] .'</a>',
 	'EMAIL'                => $email,
 	'WWW'                  => $profiledata['user_website'],
 	'ICQ'                  => $profiledata['user_icq'],

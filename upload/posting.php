@@ -298,7 +298,7 @@ if (!$is_auth[$is_auth_type])
 		default:
 			$redirect = '';
 	}
-	redirect("login.php?redirect=/posting.php?$redirect");
+	redirect(LOGIN_URL . "?redirect=/posting.php?$redirect");
 }
 
 if ($mode == 'newtopic' && $topic_tpl && $post_info['topic_tpl_id'])
@@ -406,7 +406,7 @@ if ( ( $delete || $poll_delete || $mode == 'delete' ) && !$confirm )
 
 	print_confirmation(array(
 		'QUESTION'      => ($delete || $mode == 'delete') ? $lang['CONFIRM_DELETE'] : $lang['CONFIRM_DELETE_POLL'],
-		'FORM_ACTION'   => "posting.php",
+		'FORM_ACTION'   => POSTING_URL,
 		'HIDDEN_FIELDS' => build_hidden_fields($hidden_fields),
 	));
 }
@@ -854,7 +854,7 @@ $template->assign_vars(array(
 	'S_NOTIFY_CHECKED' => ( $notify_user ) ? 'checked="checked"' : '',
 	'S_TYPE_TOGGLE' => $topic_type_toggle,
 	'S_TOPIC_ID' => $topic_id,
-	'S_POST_ACTION' => "posting.php",
+	'S_POST_ACTION' => POSTING_URL,
 	'S_HIDDEN_FORM_FIELDS' => $hidden_form_fields)
 );
 

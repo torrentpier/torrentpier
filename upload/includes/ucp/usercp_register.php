@@ -1004,7 +1004,7 @@ $template->assign_vars(array(
 	'SIG_DISALLOWED'     => bf($pr_data['user_opt'], 'user_opt', 'allow_sig'),
 
 	'PR_USER_ID'         => $pr_data['user_id'],
-	'U_RESET_AUTOLOGIN'  => "login.php?logout=1&amp;reset_autologin=1&amp;sid={$userdata['session_id']}",
+	'U_RESET_AUTOLOGIN'  => LOGIN_URL . "?logout=1&amp;reset_autologin=1&amp;sid={$userdata['session_id']}",
 
 ));
 

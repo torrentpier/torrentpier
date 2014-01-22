@@ -20,7 +20,7 @@ if (!$f_data['forum_tpl_id'] OR !$tpl_data = DB()->fetch_row($sql))
 {
 	if (!$edit_tpl_mode)
 	{
-		redirect("posting.php?mode=newtopic&f=$forum_id&tpl=1");
+		redirect(POSTING_URL . "?mode=newtopic&f=$forum_id&tpl=1");
 	}
 }
 
@@ -28,12 +28,12 @@ $template->assign_vars(array(
 	'PAGE_TITLE'         => 'Новый релиз',
 	'FORUM_NAME'         => $f_data['forum_name'],
 	'FORUM_ID'           => $forum_id,
-	'TPL_FORM_ACTION'    => "posting.php?mode=newtopic&amp;f=$forum_id",
-	'REGULAR_TOPIC_HREF' => "posting.php?mode=newtopic&amp;f=$forum_id",
+	'TPL_FORM_ACTION'    => POSTING_URL . "?mode=newtopic&amp;f=$forum_id",
+	'REGULAR_TOPIC_HREF' => POSTING_URL . "?mode=newtopic&amp;f=$forum_id",
 	'TOR_REQUIRED'       => $f_data['allow_reg_tracker'],
 	'EDIT_TPL'           => $edit_tpl_mode,
 	'CAN_EDIT_TPL'       => $can_edit_tpl,
-	'EDIT_TPL_URL'       => "posting.php?mode=new_rel&amp;f=$forum_id&amp;edit_tpl=1",
+	'EDIT_TPL_URL'       => POSTING_URL . "?mode=new_rel&amp;f=$forum_id&amp;edit_tpl=1",
 ));
 
 if ($tpl_data)
