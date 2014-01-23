@@ -224,7 +224,7 @@ $template->assign_vars(array(
 	'THIS_AVATAR'  	     		=> get_avatar($userdata['user_avatar'], $userdata['user_avatar_type'], !bf($userdata['user_opt'], 'user_opt', 'allow_avatar')),
 	'SHOW_LOGIN_LINK'    		=> !defined('IN_LOGIN'),
 	'AUTOLOGIN_DISABLED'		=> !$bb_cfg['allow_autologin'],
-	'S_LOGIN_ACTION'     		=> BB_ROOT . LOGIN_URL,
+	'S_LOGIN_ACTION'     		=> LOGIN_URL,
 
 	'U_CUR_DOWNLOADS'    		=> PROFILE_URL . $userdata['user_id'],
 	'U_FAQ'              		=> $bb_cfg['faq_url'],

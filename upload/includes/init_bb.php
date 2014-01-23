@@ -2,6 +2,7 @@
 
 if (!defined('BB_ROOT')) die(basename(__FILE__));
 if (!defined('BB_SCRIPT')) define('BB_SCRIPT', 'undefined');
+if (!defined('BB_CFG_LOADED')) trigger_error('bb_cfg not loaded', E_USER_ERROR);
 
 // Exit if board is disabled via ON/OFF trigger
 if (!defined('IN_ADMIN') && !defined('IN_AJAX') && !defined('IN_SERVICE'))
@@ -93,11 +94,6 @@ if (!defined('IN_AJAX'))
 	ob_start('send_page');
 }
 
-if (DEBUG === true)
-{
-	require(DEV_DIR .'init_debug.php');
-}
-
 // Cookie params
 $c = $bb_cfg['cookie_prefix'];
 define('COOKIE_DATA',  $c .'data');
@@ -123,6 +119,15 @@ if (DBG_USER)
 {
 	error_reporting(E_ALL);
 	ini_set('display_errors', 1);
+}
+else
+{
+	unset($_COOKIE['explain']);
+}
+
+if (DEBUG === true)
+{
+	require(DEV_DIR .'init_debug.php');
 }
 
 define('DELETED', -1);
