@@ -2024,7 +2024,7 @@ function redirect ($url)
 	if (@preg_match('/Microsoft|WebSTAR|Xitami/', getenv('SERVER_SOFTWARE')))
 	{
 		header('Refresh: 0; URL='. $redirect_url);
-		echo '<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"><html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta http-equiv="refresh" content="0; url='. $redirect_url .'"><title>Redirect</title></head><body><div align="center">If your browser does not support meta redirection please click <a href="'. $redirect_url .'">HERE</a> to be redirected</div></body></html>';
+		echo '<!DOCTYPE html><html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta http-equiv="refresh" content="0; url='. $redirect_url .'"><title>Redirect</title></head><body><div align="center">If your browser does not support meta redirection please click <a href="'. $redirect_url .'">HERE</a> to be redirected</div></body></html>';
 		exit;
 	}
 
@@ -2826,17 +2826,4 @@ function profile_url ($data)
 	}
 
 	return $profile;
-}
-
-function seo_link_header ($str)
-{
-	/**
-	 * Функция обработки url. Сверяет url с переданным выражением.
-	 */
-	global $bb_cfg;
-
-	$regexp = "/{$str}\.php/";
-	$return = ($bb_cfg['seo_link_home_page']) ? ((preg_match($regexp, $_SERVER['SCRIPT_NAME'])) ? false : true) : true;
-
-	return $return;
 }

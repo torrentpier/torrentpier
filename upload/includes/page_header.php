@@ -165,25 +165,13 @@ if ($bb_cfg['reports_enabled'])
 else $report_list = '';
 // Report [END]
 
-// FOR SEO
-$template->assign_vars(array(
-	'SEO_LINK_INDEX_PAGE' 			=>	seo_link_header('index'),
-	'SEO_LINK_TRACKER_PAGE' 		=>	seo_link_header('tracker'),
-	'SEO_LINK_SEARCH_PAGE' 			=>	seo_link_header('search'),
-	'SEO_LINK_FAQ_PAGE' 			=>	seo_link_header('faq'),
-	'SEO_LINK_GROUP_PAGE' 			=>	seo_link_header('groupcp'),
-	'SEO_LINK_MEMEBERLIST_PAGE' 	=>	seo_link_header('memberlist'),
-));
-
-
 $template->assign_vars(array(
 
 	'SIMPLE_HEADER'      		=> !empty($gen_simple_header),
 
 	'IN_ADMIN'           		=> defined('IN_ADMIN'),
-	'QUIRKS_MODE'        		=> !empty($page_cfg['quirks_mode']),
 	'SHOW_ADS'           		=> (!$logged_in || isset($bb_cfg['show_ads_users'][$user->id]) || (!($is_admin || $is_mod) && $user->show_ads)),
-    'USER_HIDE_CAT'      		=> (BB_SCRIPT == 'index'),
+	'USER_HIDE_CAT'      		=> (BB_SCRIPT == 'index'),
 
 	'USER_RUS'          		=> ($userdata['user_lang'] != 'english') ? true : false,
 

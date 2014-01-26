@@ -1,7 +1,7 @@
 
 <!-- IF TPL_ADMIN_FRAMESET -->
 <!--========================================================================-->
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Frameset//EN" "http://www.w3.org/TR/html4/frameset.dtd">
+<!DOCTYPE html>
 <html dir="{L_CONTENT_DIRECTION}">
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset={L_CONTENT_ENCODING}" />

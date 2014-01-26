@@ -295,7 +295,7 @@ if (empty($_GET) && empty($_POST))
 		'THIS_USER_ID'      => $userdata['user_id'],
 		'THIS_USER_NAME'    => addslashes($userdata['username']),
 		'SEARCH_ACTION'     => "search.php",
-		'U_SEARCH_USER'     => "search.php?mode=searchuser&input_name=$poster_name_key",
+		'U_SEARCH_USER'     => "search.php?mode=searchuser&amp;input_name=$poster_name_key",
 		'ONLOAD_FOCUS_ID'   => 'text_match_input',
 
 		'MY_TOPICS_ID'      => 'my_topics',
@@ -501,14 +501,14 @@ if ($post_mode)
 		if ($text_match_sql)
 		{
 			$search_match_topics_csv = '';
-            $title_match_topics = get_title_match_topics($text_match_sql, $forum_selected);
+			$title_match_topics = get_title_match_topics($text_match_sql, $forum_selected);
 
 			if (!$search_match_topics_csv = join(',', $title_match_topics))
 			{
 				bb_die($lang['NO_SEARCH_MATCH']);
 			}
 
-            $where_id = ($title_match) ? 'topic_id' : 'post_id';
+			$where_id = ($title_match) ? 'topic_id' : 'post_id';
 
 			$SQL['WHERE'][] = "$tbl.$where_id IN($search_match_topics_csv)";
 			prevent_huge_searches($SQL);

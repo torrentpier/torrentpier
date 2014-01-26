@@ -1,4 +1,5 @@
-<!-- IF QUIRKS_MODE --><!-- ELSE --><!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd"><!-- ENDIF -->
+<!DOCTYPE html>
+
 <html dir="{L_CONTENT_DIRECTION}">
 
 <head>
@@ -378,21 +379,21 @@ if (top != self) {
 	<table width="100%" cellpadding="0" cellspacing="0">
 	<tr>
 		<td class="nowrap">
-			<!-- IF SEO_LINK_INDEX_PAGE --><a href="{U_INDEX}"><!-- ENDIF --><b>{L_HOME}</b><!-- IF SEO_LINK_INDEX_PAGE --></a><!-- ENDIF --><span style="color:#CDCDCD;">|</span>
-			<!-- IF SEO_LINK_TRACKER_PAGE --><a href="{U_TRACKER}"><!-- ENDIF --><b>{L_TRACKER}</b><!-- IF SEO_LINK_TRACKER_PAGE --></a><!-- ENDIF --><span style="color:#CDCDCD;">|</span>
-			<!-- IF SEO_LINK_SEARCH_PAGE --><a href="{U_SEARCH}"><!-- ENDIF --><b>{L_SEARCH}</b><!-- IF SEO_LINK_SEARCH_PAGE --></a><!-- ENDIF --><span style="color:#CDCDCD;">|</span>
+			<a href="{U_INDEX}"><b>{L_HOME}</b></a><span style="color:#CDCDCD;">|</span>
+			<a href="{U_TRACKER}"><b>{L_TRACKER}</b></a><span style="color:#CDCDCD;">|</span>
+			<a href="{U_SEARCH}"><b>{L_SEARCH}</b></a><span style="color:#CDCDCD;">|</span>
 			<a href="{U_TERMS}"><b>{L_TERMS}</b></a><span style="color:#CDCDCD;">|</span>
-			<!-- IF SEO_LINK_FAQ_PAGE --><a href="{U_FAQ}"><!-- ENDIF --><b style="color: #993300; cursor: help;">{L_FAQ}</b><!-- IF SEO_LINK_FAQ_PAGE --></a><!-- ENDIF --><span style="color:#CDCDCD;">|</span>
-			<!-- IF SEO_LINK_GROUP_PAGE --><a href="{U_GROUP_CP}"><!-- ENDIF --><b>{L_USERGROUPS}</b><!-- IF SEO_LINK_GROUP_PAGE --></a><!-- ENDIF --><span style="color:#CDCDCD;">|</span>
-			<!-- IF SEO_LINK_MEMEBERLIST_PAGE --><a href="{U_MEMBERLIST}"><!-- ENDIF --><b>{L_MEMBERLIST}</b><!-- IF SEO_LINK_MEMEBERLIST_PAGE --></a><!-- ENDIF --><span style="color:#CDCDCD;">|</span>
+			<a href="{U_FAQ}"><b style="color: #993300; cursor: help;">{L_FAQ}</b></a><span style="color:#CDCDCD;">|</span>
+			<a href="{U_GROUP_CP}"><b>{L_USERGROUPS}</b></a><span style="color:#CDCDCD;">|</span>
+			<a href="{U_MEMBERLIST}"><b>{L_MEMBERLIST}</b></a><span style="color:#CDCDCD;">|</span>
 		</td>
 		<td class="nowrap" align="right">
-		    <!-- BEGIN switch_report_list -->
-		        <a href="{U_REPORT_LIST}" class="mainmenu">{REPORT_LIST}</a> &#0183;
-		    <!-- END switch_report_list -->
-		    <!-- BEGIN switch_report_list_new -->
-		        <strong><a href="{U_REPORT_LIST}" class="mainmenu">{REPORT_LIST} &#0183; </a></strong>
-		    <!-- END switch_report_list_new -->
+			<!-- BEGIN switch_report_list -->
+				<a href="{U_REPORT_LIST}" class="mainmenu">{REPORT_LIST}</a> &#0183;
+			<!-- END switch_report_list -->
+			<!-- BEGIN switch_report_list_new -->
+				<strong><a href="{U_REPORT_LIST}" class="mainmenu">{REPORT_LIST} &#0183; </a></strong>
+			<!-- END switch_report_list_new -->
 
 			<!-- IF LOGGED_IN -->
 				<!-- IF HAVE_NEW_PM || HAVE_UNREAD_PM -->
@@ -411,7 +412,7 @@ if (top != self) {
 <div id="logo">
 	<!--<h1>{SITENAME}</h1>
 	<h6>{SITE_DESCRIPTION}</h6> -->
-	<!-- IF SEO_LINK_INDEX_PAGE --><a href="{U_INDEX}"><!-- ENDIF --><img src="images/logo/logo.png" alt="{SITENAME}" /><!-- IF SEO_LINK_INDEX_PAGE --></a><!-- ENDIF -->
+	<a href="{U_INDEX}"><img src="images/logo/logo.png" alt="{SITENAME}" /></a>
 </div>
 <!--/logo-->
 

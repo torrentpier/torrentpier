@@ -419,11 +419,13 @@ function replace_synonyms ($text)
 
 function add_search_words ($post_id, $post_message, $topic_title = '', $only_return_words = false)
 {
+	global $bb_cfg;
+
 	$text  = $topic_title .' '. $post_message;
 	$text  = strip_bbcode_uid($text);
 	$words = ($text) ? extract_search_words($text) : array();
 
-	if ($only_return_words)
+	if ($only_return_words || $bb_cfg['search_engine_type'] == 'sphinx')
 	{
 		return join("\n", $words);
 	}
