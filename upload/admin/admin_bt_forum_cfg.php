@@ -13,7 +13,6 @@ $max_forum_name_len = 30;
 $max_forum_rows     = 25;
 
 require(INC_DIR .'functions_admin_torrent.php');
-require(LANG_DIR .'lang_admin_bt.php');
 
 $submit  = isset($_POST['submit']);
 $confirm = isset($_POST['confirm']);

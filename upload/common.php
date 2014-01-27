@@ -1903,7 +1903,7 @@ function short_query ($sql, $esc_html = false)
 	$max_len = 100;
 	$sql = str_compact($sql);
 
-	if (empty($_COOKIE['sql_log_full']))
+	if (!empty($_COOKIE['sql_log_full']))
 	{
 		if (mb_strlen($sql, 'UTF-8') > $max_len)
 		{

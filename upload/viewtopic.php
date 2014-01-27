@@ -803,7 +803,7 @@ for($i = 0; $i < $total_posts; $i++)
 	$max_post_time    = max($max_post_time, $postrow[$i]['post_time']);
 	$poster_posts     = ( $postrow[$i]['user_id'] != GUEST_UID ) ? $postrow[$i]['user_posts'] : '';
 	$poster_from      = ( $postrow[$i]['user_from'] && $postrow[$i]['user_id'] != GUEST_UID ) ? $postrow[$i]['user_from'] : '';
-	$poster_joined    = ( $postrow[$i]['user_id'] != GUEST_UID ) ? $lang['JOINED'] . ': ' . bb_date($postrow[$i]['user_regdate'], $lang['DATE_FORMAT']) : '';
+	$poster_joined    = ( $postrow[$i]['user_id'] != GUEST_UID ) ? $lang['JOINED'] . ': ' . bb_date($postrow[$i]['user_regdate'], $bb_cfg['date_format']) : '';
 	$poster_longevity = ( $postrow[$i]['user_id'] != GUEST_UID ) ? delta_time($postrow[$i]['user_regdate']) : '';
 
 	$poster_avatar = '';
@@ -920,7 +920,7 @@ for($i = 0; $i < $total_posts; $i++)
 	}
 
 	// Gender
-	switch($postrow[$i]['user_gender']) 
+	switch($postrow[$i]['user_gender'])
 	{
 		case MALE:
 			$gender = '<img src="'. $images['icon_male'] .'" alt="" title="'. $lang['GENDER_SELECT'][1] .'" border="0" />';

@@ -64,7 +64,7 @@ $pconnect = false;
 
 // Настройка баз данных ['db']['srv_name'] => (array) srv_cfg;
 // порядок параметров srv_cfg (хост, название базы, пользователь, пароль, charset, pconnect);
-$bb_cfg['db']['db1'] = array('localhost', 'dbase', 'user', 'pass', $charset, $pconnect);
+$bb_cfg['db']['db1'] = array('localhost', 'tp2', 'root', 'vertrigo', $charset, $pconnect);
 //$bb_cfg['db']['db2'] = array('localhost2', 'dbase2', 'user2', 'pass2', $charset, $pconnect);
 //$bb_cfg['db']['db3'] = array('localhost3', 'dbase3', 'user2', 'pass3', $charset, $pconnect);
 
@@ -106,7 +106,7 @@ $bb_cfg['datastore_type'] = 'filecache';
 // Server
 $bb_cfg['server_name'] = $domain_name;              // The domain name from which this board runs
 $bb_cfg['server_port'] = (!empty($_SERVER['SERVER_PORT'])) ? $_SERVER['SERVER_PORT'] : 80;                       // The port your server is running on
-$bb_cfg['script_path'] = '/';                       // The path where FORUM is located relative to the domain name
+$bb_cfg['script_path'] = '/tp2/';                       // The path where FORUM is located relative to the domain name
 
 // Increase number after changing js or css
 $bb_cfg['js_ver']             = 1;
@@ -282,7 +282,6 @@ $bb_cfg['topic_tpl']['rules_video']    = TEMPLATES_DIR .'topic_tpl_rules_video.h
 
 // Cookie
 $bb_cfg['cookie_domain'] = '.'. $domain_name;      # '.yourdomain.com'
-$bb_cfg['cookie_path']   = '/';                    # '/forum/'
 $bb_cfg['cookie_secure'] = (!empty($_SERVER['HTTPS']) ? 1 : 0); # 0
 $bb_cfg['cookie_prefix'] = 'bb_';                  # 'bb_'
 
@@ -342,7 +341,7 @@ define('SQL_LOG_ERRORS',       true);              // all SQL_xxx options enable
 define('SQL_CALC_QUERY_TIME',  true);              // for stats
 define('SQL_LOG_SLOW_QUERIES', true);
 define('SQL_SLOW_QUERY_TIME',  10);                // sec
-define('SQL_PREPEND_SRC_COMM', false);             // prepend source file(line) comment to sql query
+define('SQL_PREPEND_SRC_COMM', true);             // prepend source file(line) comment to sql query
 
 // Special users
 $bb_cfg['dbg_users'] = array(
@@ -408,6 +407,9 @@ define('BB_DISABLED',  TRIGGERS_DIR .'$off');
 define('CRON_ALLOWED', TRIGGERS_DIR .'cron_allowed');
 define('CRON_RUNNING', TRIGGERS_DIR .'cron_running');
 
+//Формат даты
+$bb_cfg['date_format']        = 'Y-m-d';
+
 // Subforums
 $bb_cfg['sf_on_first_page_only'] = true;
 
@@ -451,7 +453,7 @@ $bb_cfg['max_search_words_per_post']  = 200;
 $bb_cfg['search_min_word_len']        = 3;
 $bb_cfg['search_max_word_len']        = 35;
 $bb_cfg['limit_max_search_results']   = false;
-$bb_cfg['tidy_post']                  = true;
+$bb_cfg['tidy_post']                  = false;
 $bb_cfg['spam_filter_file_path']      = ''; //BB_PATH .'/misc/spam_filter_words.txt';
 
 // Posting

@@ -1759,12 +1759,12 @@ function generate_pagination($base_url, $num_items, $per_page, $start_item, $add
 	{
 		if ( $on_page > 1 )
 		{
-			$page_string = ' <a href="' . $base_url . "&amp;start=" . ( ( $on_page - 2 ) * $per_page ) . '">' . $lang['PREVIOUS'] . '</a>&nbsp;&nbsp;' . $page_string;
+			$page_string = ' <a href="' . $base_url . "&amp;start=" . ( ( $on_page - 2 ) * $per_page ) . '">' . $lang['PREVIOUS_PAGE'] . '</a>&nbsp;&nbsp;' . $page_string;
 		}
 
 		if ( $on_page < $total_pages )
 		{
-			$page_string .= '&nbsp;&nbsp;<a href="' . $base_url . "&amp;start=" . ( $on_page * $per_page ) . '">' . $lang['NEXT'] . '</a>';
+			$page_string .= '&nbsp;&nbsp;<a href="' . $base_url . "&amp;start=" . ( $on_page * $per_page ) . '">' . $lang['NEXT_PAGE'] . '</a>';
 		}
 
 	}
@@ -2257,11 +2257,6 @@ class log_action
 	function init ()
 	{
 		global $lang, $bb_cfg;
-
-		if (empty($lang['LOG_ACTION']))
-		{
-			require($bb_cfg['default_lang_dir'] .'lang_log_action.php');
-		}
 
 		foreach ($lang['LOG_ACTION']['LOG_TYPE'] as $log_type => $log_desc)
 		{

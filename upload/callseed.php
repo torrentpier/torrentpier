@@ -9,7 +9,6 @@ require(BB_ROOT . 'common.php');
 $user->session_start(array('req_login' => true));
 
 require(INC_DIR .'bbcode.php');
-require(LANG_DIR .'lang_callseed.php');
 
 function topic_info($topic_id)
 {

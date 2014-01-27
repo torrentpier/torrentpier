@@ -40,8 +40,8 @@ $sort_order = request_var('order', 'ASC');
 $sort_order = ($sort_order == 'ASC') ? 'ASC' : 'DESC';
 $mode       = request_var('mode_a', '');
 
-$mode_types_text = array($lang['SORT_FILENAME'], $lang['SORT_COMMENT'], $lang['SORT_EXTENSION'], $lang['SORT_SIZE'], $lang['SORT_DOWNLOADS'], $lang['SORT_POSTTIME'], /*$lang['SORT_POSTS']*/);
-$mode_types = array('real_filename', 'comment', 'extension', 'filesize', 'downloads', 'post_time'/*, 'posts'*/);
+$mode_types_text = array($lang['SORT_FILENAME'], $lang['SORT_COMMENT'], $lang['SORT_EXTENSION'], $lang['SORT_SIZE'], $lang['SORT_DOWNLOADS'], $lang['SORT_POSTTIME']);
+$mode_types = array('real_filename', 'comment', 'extension', 'filesize', 'downloads', 'post_time');
 
 if (!$mode)
 {

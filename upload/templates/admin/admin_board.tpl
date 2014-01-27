@@ -26,7 +26,7 @@
 	<td><input class="post" type="text" size="40" maxlength="255" name="site_desc" value="{CONFIG_SITE_DESCRIPTION}" /></td>
 </tr>
 <tr>
-	<td><h4>{L_BOARD_DISABLE}</h4><h6>{L_BOARD_DISABLE_EXPLAIN}</h6></td>
+	<td><h4>{L_FORUMS_DISABLE}</h4><h6>{L_BOARD_DISABLE_EXPLAIN}</h6></td>
 	<td>
 	    <label><input type="radio" name="board_disable" value="1" <!-- IF DISABLE_BOARD -->checked="checked"<!-- ENDIF --> />{L_YES}</label>&nbsp;&nbsp;
 		<label><input type="radio" name="board_disable" value="0" <!-- IF not DISABLE_BOARD -->checked="checked"<!-- ENDIF --> />{L_NO}</label>

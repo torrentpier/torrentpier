@@ -118,7 +118,7 @@ if ( $mode == 'read' )
 	}
 	else
 	{
-		message_die(GENERAL_ERROR, $lang['NO_POST_ID']);
+		message_die(GENERAL_ERROR, $lang['NO_PM_ID']);
 	}
 
 	//

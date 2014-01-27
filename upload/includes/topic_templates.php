@@ -3,8 +3,6 @@
 if (!defined('BB_ROOT')) die(basename(__FILE__));
 if (!$post_info) die('$post_info missing');
 
-require(DEFAULT_LANG_DIR .'lang_topic_templates.php');
-
 function build_tpl_item ($item, $val)
 {
 	if (strpos($item, '--BR--') === 0)

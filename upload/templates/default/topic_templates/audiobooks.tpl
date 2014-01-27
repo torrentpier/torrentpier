@@ -73,7 +73,7 @@ function form_validate (f)
 	}
 
 	if (error) {
-		alert('{L_ERROR}: '+error+msg);
+		alert('{L_ERROR_FORM}: '+error+msg);
 		return false;
 	}
 	return true;

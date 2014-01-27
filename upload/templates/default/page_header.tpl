@@ -180,7 +180,7 @@ $(document).ready(function(){
 <script type="text/javascript">
 var BB_ROOT       = "{#BB_ROOT}";
 var cookieDomain  = "{$bb_cfg['cookie_domain']}";
-var cookiePath    = "{$bb_cfg['cookie_path']}";
+var cookiePath    = "{$bb_cfg['script_path']}";
 var cookieSecure  = {$bb_cfg['cookie_secure']};
 var cookiePrefix  = "{$bb_cfg['cookie_prefix']}";
 var LOGGED_IN     = {LOGGED_IN};

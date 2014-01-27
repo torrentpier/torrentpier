@@ -111,7 +111,7 @@ define('COOKIE_MAX_TRACKS', 90);
 function bb_setcookie ($name, $val, $lifetime = COOKIE_PERSIST, $httponly = false)
 {
 	global $bb_cfg;
-	return setcookie($name, $val, $lifetime, $bb_cfg['cookie_path'], $bb_cfg['cookie_domain'], $bb_cfg['cookie_secure'], $httponly);
+	return setcookie($name, $val, $lifetime, $bb_cfg['script_path'], $bb_cfg['cookie_domain'], $bb_cfg['cookie_secure'], $httponly);
 }
 
 // Debug options

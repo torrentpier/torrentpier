@@ -10,7 +10,6 @@ require('./pagestart.php');
 // ACP Header - END
 
 require(INC_DIR  .'functions_group.php');
-require(LANG_DIR .'lang_admin_bt.php');
 
 $s = '';
 

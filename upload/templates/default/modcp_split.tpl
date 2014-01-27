@@ -26,7 +26,7 @@ function toggle_cbox (cb_id, tr_id)
 
 <table class="forumline">
 	<tr>
-  <th colspan="2">{L_SPLIT_TOPIC}</th>
+  <th colspan="2">{L_TOPIC_SPLIT}</th>
 	</tr>
 	<tr>
   <td class="row2" colspan="2" align="center"><span class="small">{L_SPLIT_TOPIC_EXPLAIN}</span></td>

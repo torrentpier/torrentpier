@@ -502,7 +502,7 @@ if ($mode == 'groups')
 			'S_FILESIZE' => size_select('size_select_list[]', $size_format),
 
 			'MAX_FILESIZE' => $extension_group[$i]['max_filesize'],
-			'CAT_BOX' => ( $viewgroup == $extension_group[$i]['group_id'] ) ? $lang['DECOLLAPSE'] : $lang['COLLAPSE'],
+			'CAT_BOX' => ( $viewgroup == $extension_group[$i]['group_id'] ) ? '+' : '-',
 			'U_VIEWGROUP' => ( $viewgroup == $extension_group[$i]['group_id'] ) ? "admin_extensions.php?mode=groups" : "admin_extensions.php?mode=groups&" . POST_GROUPS_URL . "=" . $extension_group[$i]['group_id'],
 			'U_FORUM_PERMISSIONS' => "admin_extensions.php?mode=$mode&amp;e_mode=perm&amp;e_group=" . $extension_group[$i]['group_id'])
 		);

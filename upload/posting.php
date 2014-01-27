@@ -51,7 +51,6 @@ $user->session_start();
 
 if ($mode == 'new_rel')
 {
-	require(DEFAULT_LANG_DIR .'lang_topic_templates.php');
 	require(INC_DIR .'posting_tpl.php');
 	exit;
 }

@@ -16,7 +16,7 @@
 </tr>
 <!-- ENDIF -->
 <tr>
-	<td width="70%"><h4>{L_OFF}</h4></td>
+	<td width="70%"><h4>{L_OFF_TRACKER}</h4></td>
 	<td width="30%"><label for="off1"><input type="radio" name="off" id="off1" value="1" {OFF_YES} /> {L_OFF_YES}&nbsp;</label><label for="off2">&nbsp;<input type="radio" name="off" id="off2" value="0" {OFF_NO} /> {L_OFF_NO} &nbsp;</label></td>
 </tr>
 <tr>

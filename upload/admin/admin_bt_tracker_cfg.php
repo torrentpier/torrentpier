@@ -13,7 +13,6 @@ require('./pagestart.php');
 if(!IS_SUPER_ADMIN) bb_die($lang['NOT_ADMIN']);
 
 require(INC_DIR .'functions_admin_torrent.php');
-require(LANG_DIR .'lang_admin_bt.php');
 
 $submit       = isset($_POST['submit']);
 $confirmed    = isset($_POST['confirm']);

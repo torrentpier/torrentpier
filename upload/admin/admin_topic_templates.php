@@ -9,8 +9,6 @@ if (!empty($setmodules))
 require('./pagestart.php');
 // ACP Header - END
 
-require(LANG_DIR .'lang_admin_bt.php');
-
 $mode = (string) request_var('mode', '');
 
 if ($mode == 'templates')

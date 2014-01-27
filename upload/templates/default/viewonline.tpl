@@ -8,7 +8,7 @@
 	<!-- IF IS_ADMIN --><th width="30%" class="{sorter: 'digit'}"><b class="tbs-text">{L_IP_ADDRESS}</b></th><!-- ENDIF -->
 </tr>
 <tr>
-	<td class="catTitle" colspan="3">{TOTAL_REGISTERED_USERS_ONLINE} | {L_ALL_USERS} {TOTAL_USERS_ONLINE}</td>
+	<td class="catTitle" colspan="3">{TOTAL_REGISTERED_USERS_ONLINE} | {L_ALL_USERS_ONLINE} {TOTAL_USERS_ONLINE}</td>
 </tr>
 </thead>
 <!-- BEGIN reg_user_row -->

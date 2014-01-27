@@ -11,8 +11,6 @@ require('./pagestart.php');
 
 require(INC_DIR .'functions_selects.php');
 
-include(LANG_ROOT_DIR ."lang_{$bb_cfg['default_lang']}/lang_user_search.php");
-
 $total_sql = '';
 
 if(!isset($_POST['dosearch'])&&!isset($_GET['dosearch']))

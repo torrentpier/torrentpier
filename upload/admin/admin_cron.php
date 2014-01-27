@@ -28,7 +28,6 @@ else require('./pagestart.php');
 
 if (!IS_SUPER_ADMIN) bb_die($lang['NOT_ADMIN']);
 
-require(LANG_DIR .'lang_admin_cron.php');
 require(INC_DIR .'functions_admin_torrent.php');
 require(INC_DIR .'functions_admin_cron.php');
 

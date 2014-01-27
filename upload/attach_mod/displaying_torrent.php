@@ -113,7 +113,7 @@ if (!$tor_reged)
 }
 else
 {
-	$sql = "SELECT bt.*, u.user_id, u.username, u.user_rank 
+	$sql = "SELECT bt.*, u.user_id, u.username, u.user_rank
 		FROM ". BB_BT_TORRENTS ." bt
 		LEFT JOIN ". BB_USERS  ." u ON(bt.checked_user_id = u.user_id)
 		WHERE bt.attach_id = $attach_id";
@@ -219,7 +219,7 @@ if ($tor_reged && $tor_info)
 			'TOR_FROZEN'      => (!IS_AM) ? (isset($bb_cfg['tor_frozen'][$tor_info['tor_status']]) && !(isset($bb_cfg['tor_frozen_author_download'][$tor_info['tor_status']]) && $userdata['user_id'] == $tor_info['poster_id'])) ? true : '' : '',
 			'TOR_STATUS_TEXT' => $lang['TOR_STATUS_NAME'][$tor_info['tor_status']],
 			'TOR_STATUS_ICON' => $bb_cfg['tor_icons'][$tor_info['tor_status']],
-			'TOR_STATUS_BY'   => ($tor_info['checked_user_id'] && $is_auth['auth_mod']) ? ('<span title="'. bb_date($tor_info['checked_time'], 'd-M-Y H:i') .'"> &middot; '. profile_url($tor_info) .' &middot; <i>'. delta_time($tor_info['checked_time']) . $lang['BACK'] .'</i></span>') : '',
+			'TOR_STATUS_BY'   => ($tor_info['checked_user_id'] && $is_auth['auth_mod']) ? ('<span title="'. bb_date($tor_info['checked_time'], 'd-M-Y H:i') .'"> &middot; '. profile_url($tor_info) .' &middot; <i>'. delta_time($tor_info['checked_time']) . $lang['TOR_BACK'] .'</i></span>') : '',
 			'TOR_STATUS_SELECT' => build_select('sel_status', array_flip($lang['TOR_STATUS_NAME']), TOR_APPROVED),
 			'TOR_STATUS_REPLY' => $bb_cfg['tor_comment'] && !IS_GUEST && in_array($tor_info['tor_status'], $bb_cfg['tor_reply']) && $userdata['user_id'] == $tor_info['poster_id'] && $t_data['topic_status'] != TOPIC_LOCKED,
 			//end torrent status mod
@@ -500,7 +500,7 @@ if ($tor_reged && $tor_info)
 						'DOWN_TOTAL'   => ($max_down_id[$x] == $pid)    ? "<b>$down_tot</b>" : $down_tot,
 						'SPEED_UP'     => ($max_sp_up_id[$x] == $pid)   ? "<b>$sp_up</b>"    : $sp_up,
 						'SPEED_DOWN'   => ($max_sp_down_id[$x] == $pid) ? "<b>$sp_down</b>"  : $sp_down,
-						'UPD_EXP_TIME' => ($peer['update_time']) ? $lang['DL_UPD'] . bb_date($peer['update_time'], 'd-M-y H:i') .' &middot; '. delta_time($peer['update_time']) . $lang['BACK']  : $lang['DL_STOPPED'],
+						'UPD_EXP_TIME' => ($peer['update_time']) ? $lang['DL_UPD'] . bb_date($peer['update_time'], 'd-M-y H:i') .' &middot; '. delta_time($peer['update_time']) . $lang['TOR_BACK']  : $lang['DL_STOPPED'],
 						'TOR_RATIO'    => ($up_ratio) ? "UL/DL ratio: $up_ratio"  : '',
 					));
 

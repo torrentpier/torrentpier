@@ -589,12 +589,6 @@ class user_common
 
 		require(LANG_DIR .'lang_main.php');
 
-		if (defined('IN_ADMIN'))
-		{
-			require(LANG_DIR .'lang_admin.php');
-			require(LANG_DIR .'lang_admin_attach.php');
-		}
-
 		$theme = setup_style();
 		$DeltaTime = new Date_Delta();
 

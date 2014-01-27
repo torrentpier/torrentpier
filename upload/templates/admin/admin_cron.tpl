@@ -3,7 +3,7 @@ $(document).ready(function() {
     $("#check_all").click(function () {
         if (!$("#check_all").is(":checked"))
             $(".checkbox").removeAttr("checked");
-        else 
+        else
             $(".checkbox").attr("checked","checked");
     });
 });
@@ -44,7 +44,7 @@ tr.hl-tr:hover td { background-color: #CFC !important; }
 				    <input class="post" type="text" size="10" maxlength="255" name="cron_check_interval" value="{CRON_CHECK_INTERVAL}" />
                 </td>
 				<td>
-				    <input type="submit" name="submit" value="{L_SUBMIT}" class="mainoption" />	
+				    <input type="submit" name="submit" value="{L_SUBMIT}" class="mainoption" />
                 </td>
 			</tr>
         </table>
@@ -112,7 +112,7 @@ tr.hl-tr:hover td { background-color: #CFC !important; }
 		    <option value="enable">{L_CRON_ENABLE}</option>
 	    </select>
 	    <label><input onclick="toggle_disabled('send', this.checked)" type="checkbox" name="confirm" value="1" /></label>&nbsp;
-	    <input type="submit" name="submit" id="send" value="{L_SUBMIT}" class="mainoption" disabled="disabled" />	
+	    <input type="submit" name="submit" id="send" value="{L_SUBMIT}" class="mainoption" disabled="disabled" />
     </td>
 </tr>
 </table>
@@ -206,7 +206,7 @@ tr.hl-tr:hover td { background-color: #CFC !important; }
 	</td>
 </tr>
 <tr>
-	<td><h4>{L_DISABLE_BOARD}</h4><h6>{L_DISABLE_BOARD_EXPL}</h6></td>
+	<td><h4>{L_FORUM_DISABLE}</h4><h6>{L_BOARD_DISABLE_EXPL}</h6></td>
 	<td>
 	    <label><input type="radio" name="disable_board" value="1" <!-- IF DISABLE_BOARD -->checked="checked"<!-- ENDIF --> />{L_YES}</label>&nbsp;&nbsp;
 		<label><input type="radio" name="disable_board" value="0" <!-- IF not DISABLE_BOARD -->checked="checked"<!-- ENDIF --> />{L_NO}</label>
