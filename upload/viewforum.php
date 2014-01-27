@@ -3,7 +3,7 @@
 define('IN_FORUM',   true);
 define('BB_SCRIPT', 'forum');
 define('BB_ROOT', './');
-require(BB_ROOT . "common.php");
+require(BB_ROOT . 'common.php');
 
 $page_cfg['include_bbcode_js'] = true;
 
@@ -36,6 +36,7 @@ $req_page .= ($start) ? "_start{$start}" : '';
 define('REQUESTED_PAGE', $req_page);
 caching_output(IS_GUEST, 'send', REQUESTED_PAGE .'_guest');
 
+set_die_append_msg();
 if (!$forums = $datastore->get('cat_forums'))
 {
 	$datastore->update('cat_forums');
@@ -117,10 +118,8 @@ if ($mark_read && !IS_GUEST)
 {
 	set_tracks(COOKIE_FORUM, $tracking_forums, $forum_id);
 
-	$message = $lang['TOPICS_MARKED_READ'] .'<br /><br />';
-	$message .= sprintf($lang['CLICK_RETURN_FORUM'], '<a href="'. FORUM_URL . $forum_id .'">', '</a>');
-	$message .= '<br /><br />';
-	$message .= sprintf($lang['CLICK_RETURN_INDEX'], '<a href="'. "index.php" .'">', '</a>');
+	set_die_append_msg($forum_id);
+	$message = $lang['TOPICS_MARKED_READ'];
 	bb_die($message);
 }
 

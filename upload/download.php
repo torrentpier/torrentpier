@@ -167,6 +167,8 @@ function send_file_to_browser($attachment, $upload_dir)
 //
 $user->session_start();
 
+set_die_append_msg();
+
 if (!$download_id)
 {
 	message_die(GENERAL_ERROR, $lang['NO_ATTACHMENT_SELECTED']);
@@ -216,7 +218,7 @@ for ($i = 0; $i < $num_auth_pages && $authorised == false; $i++)
 
 	if ($auth_pages[$i]['post_id'] != 0)
 	{
-		$sql = 'SELECT forum_id
+		$sql = 'SELECT forum_id, topic_id
 			FROM ' . BB_POSTS . '
 			WHERE post_id = ' . (int) $auth_pages[$i]['post_id'];
 
@@ -227,10 +229,12 @@ for ($i = 0; $i < $num_auth_pages && $authorised == false; $i++)
 
 		$row = DB()->sql_fetchrow($result);
 
+		$topic_id = $row['topic_id'];
 		$forum_id = $row['forum_id'];
 
 		$is_auth = array();
 		$is_auth = auth(AUTH_ALL, $forum_id, $userdata);
+		set_die_append_msg($forum_id, $topic_id);
 
 		if ($is_auth['auth_download'])
 		{
@@ -287,16 +291,6 @@ if (!$thumbnail)
 // Determine the 'presenting'-method
 if ($download_mode == PHYSICAL_LINK)
 {
-	$server_protocol = ($bb_cfg['cookie_secure']) ? 'https://' : 'http://';
-	$server_name = preg_replace('/^\/?(.*?)\/?$/', '\1', trim($bb_cfg['server_name']));
-	$server_port = ($bb_cfg['server_port'] <> 80) ? ':' . trim($bb_cfg['server_port']) : '';
-	$script_name = preg_replace('/^\/?(.*?)\/?$/', '/\1', trim($bb_cfg['script_path']));
-
-	if ($script_name[strlen($script_name)] != '/')
-	{
-		$script_name .= '/';
-	}
-
 	if (intval($attach_config['allow_ftp_upload']))
 	{
 		if (trim($attach_config['download_path']) == '')
@@ -304,17 +298,15 @@ if ($download_mode == PHYSICAL_LINK)
 			message_die(GENERAL_ERROR, 'Physical Download not possible with the current Attachment Setting');
 		}
 
-		$url = trim($attach_config['download_path']) . '/' . $attachment['physical_filename'];
-		$redirect_path = $url;
+		$url = make_url($attach_config['download_path']) . '/' . $attachment['physical_filename'];
 	}
 	else
 	{
-		$url = $upload_dir . '/' . $attachment['physical_filename'];
-		$redirect_path = $server_protocol . $server_name . $server_port . $script_name . $url;
+		$url = make_url($upload_dir . '/' . $attachment['physical_filename']);
 	}
 
 	// Behave as per HTTP/1.1 spec for others
-	header('Location: ' . $redirect_path);
+	header('Location: ' . $url);
 	exit;
 }
 else

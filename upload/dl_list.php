@@ -57,6 +57,8 @@ else
 // Start session management
 $user->session_start();
 
+set_die_append_msg();
+
 // Check if user logged in
 if (!$userdata['session_logged_in'])
 {
@@ -67,6 +69,7 @@ if ($bb_cfg['bt_min_ratio_dl_button'] && $btu = get_bt_userdata($user->id))
 {
 	if (($user_ratio = get_bt_ratio($btu)) < $bb_cfg['bt_min_ratio_dl_button'])
 	{
+		set_die_append_msg($forum_id, $topic_id);
 		bb_die($lang['BT_LOW_RATIO_FUNC']);
 	}
 }

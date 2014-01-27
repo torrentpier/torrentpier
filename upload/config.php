@@ -55,8 +55,8 @@ $domain_name = (!empty($_SERVER['SERVER_NAME'])) ? $_SERVER['SERVER_NAME'] : $do
 
 // Increase number of revision after update
 $bb_cfg['tp_version'] = '2.5 (unstable)';
-$bb_cfg['tp_release_date'] = '26-01-2014';
-$bb_cfg['tp_release_state'] = 'R568';
+$bb_cfg['tp_release_date'] = '27-01-2014';
+$bb_cfg['tp_release_state'] = 'R570';
 
 // Database
 $charset  = 'utf8';
@@ -64,7 +64,7 @@ $pconnect = false;
 
 // Настройка баз данных ['db']['srv_name'] => (array) srv_cfg;
 // порядок параметров srv_cfg (хост, название базы, пользователь, пароль, charset, pconnect);
-$bb_cfg['db']['db1'] = array('localhost', 'tp2', 'root', 'vertrigo', $charset, $pconnect);
+$bb_cfg['db']['db1'] = array('localhost', 'dbase', 'user', 'pass', $charset, $pconnect);
 //$bb_cfg['db']['db2'] = array('localhost2', 'dbase2', 'user2', 'pass2', $charset, $pconnect);
 //$bb_cfg['db']['db3'] = array('localhost3', 'dbase3', 'user2', 'pass3', $charset, $pconnect);
 
@@ -106,7 +106,7 @@ $bb_cfg['datastore_type'] = 'filecache';
 // Server
 $bb_cfg['server_name'] = $domain_name;              // The domain name from which this board runs
 $bb_cfg['server_port'] = (!empty($_SERVER['SERVER_PORT'])) ? $_SERVER['SERVER_PORT'] : 80;                       // The port your server is running on
-$bb_cfg['script_path'] = '/tp2/';                       // The path where FORUM is located relative to the domain name
+$bb_cfg['script_path'] = '/';                       // The path where FORUM is located relative to the domain name
 
 // Increase number after changing js or css
 $bb_cfg['js_ver']             = 1;
@@ -201,7 +201,7 @@ $bb_cfg['dl_cancel_days_keep']   = 30;
 $bb_cfg['torstat_days_keep']     = 60;          // days to keep user's per-torrent stats
 
 // Tor-Help
-$bb_cfg['torhelp_enabled']       = true;        // find dead torrents (without seeder) that user might help seeding
+$bb_cfg['torhelp_enabled']       = false;        // find dead torrents (without seeder) that user might help seeding
 
 $page_cfg['show_torhelp'] = array(
 #	BB_SCRIPT => true
@@ -223,7 +223,7 @@ define('TEMPLATES_DIR', BB_PATH .'/templates/');
 define('TRIGGERS_DIR',  BB_PATH .'/triggers/' );
 
 // URLs
-$bb_cfg['ajax_url']    = '/ajax.php';    #  "http://{$_SERVER['SERVER_NAME']}/ajax.php"
+$bb_cfg['ajax_url']    = 'ajax.php';    #  "http://{$_SERVER['SERVER_NAME']}/ajax.php"
 $bb_cfg['login_url']   = 'login.php';    #  "http://{$domain_name}/login.php"
 $bb_cfg['pm_url']      = 'privmsg.php';  #  "http://{$domain_name}/privmsg.php"
 $bb_cfg['posting_url'] = 'posting.php';  #  "http://{$domain_name}/posting.php"
@@ -281,7 +281,7 @@ $bb_cfg['topic_tpl']['overall_header'] = TEMPLATES_DIR .'topic_tpl_overall_heade
 $bb_cfg['topic_tpl']['rules_video']    = TEMPLATES_DIR .'topic_tpl_rules_video.html';
 
 // Cookie
-$bb_cfg['cookie_domain'] = '.'. $domain_name;      # '.yourdomain.com'
+$bb_cfg['cookie_domain'] = ($domain_name != $_SERVER['SERVER_ADDR']) ? ".$domain_name" : '';      # '.yourdomain.com'
 $bb_cfg['cookie_secure'] = (!empty($_SERVER['HTTPS']) ? 1 : 0); # 0
 $bb_cfg['cookie_prefix'] = 'bb_';                  # 'bb_'
 
@@ -341,7 +341,7 @@ define('SQL_LOG_ERRORS',       true);              // all SQL_xxx options enable
 define('SQL_CALC_QUERY_TIME',  true);              // for stats
 define('SQL_LOG_SLOW_QUERIES', true);
 define('SQL_SLOW_QUERY_TIME',  10);                // sec
-define('SQL_PREPEND_SRC_COMM', true);             // prepend source file(line) comment to sql query
+define('SQL_PREPEND_SRC_COMM', false);             // prepend source file(line) comment to sql query
 
 // Special users
 $bb_cfg['dbg_users'] = array(

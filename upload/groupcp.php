@@ -39,6 +39,8 @@ function generate_user_info(&$row, $date_format, $group_mod, &$from, &$posts, &$
 
 $user->session_start(array('req_login' => true));
 
+set_die_append_msg();
+
 $group_id = isset($_REQUEST[POST_GROUPS_URL]) ? intval($_REQUEST[POST_GROUPS_URL]) : null;
 $start    = isset($_REQUEST['start']) ? abs(intval($_REQUEST['start'])) : 0;
 $per_page = $bb_cfg['groupcp_members_per_page'];

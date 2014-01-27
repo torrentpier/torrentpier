@@ -49,6 +49,8 @@ $tracking_forums = get_tracks('forum');
 // Start session management
 $user->session_start();
 
+set_die_append_msg($forum_id, $topic_id);
+
 if ($mode == 'new_rel')
 {
 	require(INC_DIR .'posting_tpl.php');
@@ -235,18 +237,18 @@ if ($post_info = DB()->fetch_row($sql))
 		if ($post_info['poster_id'] != $userdata['user_id'] && !$is_auth['auth_mod'])
 		{
 			$message = ($delete || $mode == 'delete') ? $lang['DELETE_OWN_POSTS'] : $lang['EDIT_OWN_POSTS'];
-			$message .= '<br /><br />'. sprintf($lang['CLICK_RETURN_TOPIC'], '<a href="'. TOPIC_URL . $topic_id .'">', '</a>');
-
-			message_die(GENERAL_MESSAGE, $message);
 		}
 		elseif (!$post_data['last_post'] && !$is_auth['auth_mod'] && ($mode == 'delete' || $delete))
 		{
-			message_die(GENERAL_MESSAGE, $lang['CANNOT_DELETE_REPLIED']);
+			$message = $lang['CANNOT_DELETE_REPLIED'];
 		}
 		elseif (!$post_data['edit_poll'] && !$is_auth['auth_mod'] && ($mode == 'poll_delete' || $poll_delete))
 		{
-			message_die(GENERAL_MESSAGE, $lang['CANNOT_DELETE_POLL']);
+			$message = $lang['CANNOT_DELETE_POLL'];
 		}
+		
+		set_die_append_msg($forum_id, $topic_id);
+		if(isset($message)) bb_die($message);
 	}
 	else
 	{
@@ -513,6 +515,13 @@ elseif ( ($submit || $confirm) && !$topic_has_new_posts )
 				$topic_type = ( isset($post_data['topic_type']) && $topic_type != $post_data['topic_type'] && !$is_auth['auth_sticky'] && !$is_auth['auth_announce'] ) ? $post_data['topic_type'] : $topic_type;
 
 				submit_post($mode, $post_data, $return_message, $return_meta, $forum_id, $topic_id, $post_id, $poll_id, $topic_type, DB()->escape($username), DB()->escape($subject), DB()->escape($message), DB()->escape($poll_title), $poll_options, $poll_length, $update_post_time);
+				
+				$post_url = POST_URL ."$post_id#$post_id";
+				$post_msg = ($mode == 'editpost') ? $lang['EDITED']: $lang['STORED'];
+				$onclick  = ($mode == 'editpost') ? 'onclick="return post2url(this.href);"': '';
+				$return_message .= $post_msg .'<br /><br />
+					<a '. $onclick .' href="'. $post_url .'" >'. $lang['POST_RETURN'] .'</a>
+				';
 			}
 			break;
 

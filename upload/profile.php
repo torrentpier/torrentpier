@@ -8,7 +8,8 @@ require(BB_ROOT . 'common.php');
 // Start session management
 $user->session_start();
 
-$mode = (string) @$_REQUEST['mode'];
+set_die_append_msg();
+$mode = request_var('mode', '');
 
 switch ($mode)
 {

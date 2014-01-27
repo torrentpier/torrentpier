@@ -2000,11 +2000,6 @@ function redirect ($url)
 		message_die(CRITICAL_ERROR, 'Tried to redirect to potentially insecure url.');
 	}
 
-	if (!empty($_COOKIE['explain']))
-	{
-		message_die(GENERAL_MESSAGE, "redirect($url)");
-	}
-
 	$url = trim($url);
 	$server_protocol = ($bb_cfg['cookie_secure']) ? 'https://' : 'http://';
 
@@ -2713,8 +2708,8 @@ function set_die_append_msg ($forum_id = null, $topic_id = null)
 	global $lang, $template;
 
 	$msg = '';
-	$msg .= ($topic_id) ? '<p class="mrg_10"><a href="viewtopic.php?t='. $topic_id .'">'. $lang['TOPIC_RETURN'] .'</a></p>' : '';
-	$msg .= ($forum_id) ? '<p class="mrg_10"><a href="viewforum.php?f='. $forum_id .'">'. $lang['FORUM_RETURN'] .'</a></p>' : '';
+	$msg .= ($topic_id) ? '<p class="mrg_10"><a href="'. TOPIC_URL . $topic_id .'">'. $lang['TOPIC_RETURN'] .'</a></p>' : '';
+	$msg .= ($forum_id) ? '<p class="mrg_10"><a href="'. FORUM_URL . $forum_id .'">'. $lang['FORUM_RETURN'] .'</a></p>' : '';
 	$msg .= '<p class="mrg_10"><a href="index.php">'. $lang['INDEX_RETURN'] .'</a></p>';
 	$template->assign_var('BB_DIE_APPEND_MSG', $msg);
 }

@@ -1,7 +1,5 @@
 <!DOCTYPE html>
-
-<html dir="{L_CONTENT_DIRECTION}">
-
+<html>
 <head>
 <title><!-- IF PAGE_TITLE -->{PAGE_TITLE} :: {SITENAME}<!-- ELSE -->{SITENAME}<!-- ENDIF --></title>
 <meta http-equiv="Content-Type" content="text/html; charset={L_CONTENT_ENCODING}" />
@@ -216,7 +214,7 @@ $(document).ready(function(){
 });
 <!-- ENDIF -->
 
-var ajax = new Ajax('{$bb_cfg['ajax_url']}', 'POST', 'json');
+var ajax = new Ajax('{SITE_URL}{$bb_cfg['ajax_url']}', 'POST', 'json');
 
 function getElText (e)
 {
@@ -233,6 +231,28 @@ $(document).ready(function(){
   	$('.tablesorter').tablesorter(); //	{debug: true}
 });
 <!-- ENDIF -->
+
+function cfm (txt)
+{
+	return window.confirm(txt);
+}
+function post2url (url, params) {
+	params = params || {};
+	var f = document.createElement('form');
+	f.setAttribute('method', 'post');
+	f.setAttribute('action', url);
+	params['form_token'] = '{FORM_TOKEN}';
+	for (var k in params) {
+		var h = document.createElement('input');
+		h.setAttribute('type', 'hidden');
+		h.setAttribute('name', k);
+		h.setAttribute('value', params[k]);
+		f.appendChild(h);
+	}
+	document.body.appendChild(f);
+	f.submit();
+	return false;
+}
 </script>
 
 <!--[if lte IE 6]><script type="text/javascript">

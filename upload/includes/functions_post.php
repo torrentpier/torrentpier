@@ -320,8 +320,8 @@ function submit_post($mode, &$post_data, &$message, &$meta, &$forum_id, &$topic_
 		}
 	}
 
-	meta_refresh("viewtopic.php?" . POST_POST_URL . "=" . $post_id) . '#' . $post_id;
-	$message = $lang['STORED'] . '<br /><br />' . sprintf($lang['CLICK_VIEW_MESSAGE'], '<a href="viewtopic.php?'. POST_POST_URL .'='. $post_id .'#'. $post_id .'">', '</a>') . '<br /><br />' . sprintf($lang['CLICK_RETURN_FORUM'], '<a href="viewforum.php?'. POST_FORUM_URL .'='. $forum_id . '">', '</a>');
+	meta_refresh(POST_URL ."$post_id#$post_id");
+	set_die_append_msg($forum_id, $topic_id);
 
 	return $mode;
 }
@@ -454,14 +454,7 @@ function delete_post($mode, $post_data, &$message, &$meta, $forum_id, $topic_id,
 		post_delete($post_id);
 	}
 
-	if (!($mode == 'delete' && $post_data['first_post'] && $post_data['last_post']))
-	{
-		$message .= '<br /><br />';
-		$message .= sprintf($lang['CLICK_RETURN_TOPIC'], '<a href="'. TOPIC_URL . $topic_id .'">', '</a>');
-	}
-
-	$message .= '<br /><br />';
-	$message .= sprintf($lang['CLICK_RETURN_FORUM'], '<a href="'. FORUM_URL . $forum_id .'">', '</a>');
+	set_die_append_msg($forum_id, $topic_id);
 }
 
 //

@@ -24,6 +24,8 @@ $post_id  = (!$topic_id && isset($_GET[POST_POST_URL])) ? (int) $_GET[POST_POST_
 // Start session
 $user->session_start();
 
+set_die_append_msg();
+
 // Posts per page
 $posts_per_page = $bb_cfg['posts_per_page'];
 $select_ppp = '';
@@ -277,9 +279,10 @@ if ($bb_cfg['topic_notify_enabled'])
 						message_die(GENERAL_ERROR, "Could not delete topic watch information", '', __LINE__, __FILE__, $sql);
 					}
 				}
-
-				$message = $lang['NO_LONGER_WATCHING'] . '<br /><br />' . sprintf($lang['CLICK_RETURN_TOPIC'], '<a href="' . "viewtopic.php?t=$topic_id&amp;start=$start" . '">', '</a>');
-				bb_die($message);
+				
+				set_die_append_msg($forum_id, $topic_id);
+				bb_die($lang['NO_LONGER_WATCHING']);
+				
 			}
 			else
 			{
@@ -314,8 +317,9 @@ if ($bb_cfg['topic_notify_enabled'])
 					}
 				}
 
-				$message = $lang['YOU_ARE_WATCHING'] . '<br /><br />' . sprintf($lang['CLICK_RETURN_TOPIC'], '<a href="' . "viewtopic.php?t=$topic_id&amp;start=$start" . '">', '</a>');
-				bb_die($message);
+				set_die_append_msg($forum_id, $topic_id);
+				bb_die($lang['YOU_ARE_WATCHING']);
+				
 			}
 			else
 			{

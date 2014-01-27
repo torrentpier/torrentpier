@@ -2,7 +2,6 @@
 
 setlocale(LC_ALL, 'eu_US.UTF-8');
 $lang['CONTENT_ENCODING'] = 'UTF-8';
-$lang['CONTENT_DIRECTION'] = 'ltr';
 $lang['TRANSLATION_INFO'] = '';
 
 //
@@ -376,6 +375,7 @@ $lang['ATTACH_SIGNATURE'] = 'Attach signature (signatures can be changed in prof
 $lang['NOTIFY'] = 'Notify me when a reply is posted';
 
 $lang['STORED'] = 'Your message has been entered successfully.';
+$lang['EDITED'] = 'The message has been changed';
 $lang['DELETED'] = 'Your message has been deleted successfully.';
 $lang['POLL_DELETE'] = 'Your poll has been deleted successfully.';
 $lang['VOTE_CAST'] = 'Your vote has been cast.';
@@ -2917,8 +2917,6 @@ $lang['CALLSEED_MSG_MSG_TEXT']  = 'Error saving text messages';
 $lang['CALLSEED_MSG_POPUP']     = 'Error of popup';
 $lang['CALLSEED_MSG_TIME']      = 'Unable to set the last query';
 $lang['CALLSEED_HAVE_SEED']    = 'Topic does not require help (<b>Seeders:</b> %d, <b>Leechers:</b> %d)';
-
-$lang['CALLSEED_RETURN'] = '<br><br> <a href="viewtopic.php?t=%s"><b>Back to the topic</b></a>';
 
 $lang['LOG_ACTION']['LOG_TYPE'] = array(
 	'mod_topic_delete' => 'Topic:<br /> <b>deleted</b>',

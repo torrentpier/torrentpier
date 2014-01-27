@@ -1,15 +1,17 @@
 <!-- IF TPL_GENERAL_MESSAGE -->
 <!--========================================================================-->
 
-	<!-- IF IN_ADMIN --><br /><br /><!-- ELSE --><div class="spacer_10"></div><!-- ENDIF -->
+<!-- IF IN_ADMIN --><br /><br /><!-- ELSE --><div class="spacer_10"></div><!-- ENDIF -->
 
-	<table class="forumline message">
-		<tr><th>{MESSAGE_TITLE}</th></tr>
-		<tr><td>{MESSAGE_TEXT}</td></tr>
-		<!-- IF BB_DIE_APPEND_MSG --><tr><td>{BB_DIE_APPEND_MSG}</td></tr><!-- ENDIF -->
-	</table>
+<table class="forumline message">
+	<tr><th>{MESSAGE_TITLE}</th></tr>
+	<tr><td>
+		<div class="mrg_16">{MESSAGE_TEXT}</div>
+		<div class="mrg_12">{BB_DIE_APPEND_MSG}</div>
+	</td></tr>
+</table>
 
-	<!-- IF IN_ADMIN --><br /><br /><!-- ELSE --><div class="spacer_10"></div><!-- ENDIF -->
+<!-- IF IN_ADMIN --><br /><br /><!-- ELSE --><div class="spacer_10"></div><!-- ENDIF -->
 
 <!--========================================================================-->
 <!-- ENDIF / TPL_GENERAL_MESSAGE -->

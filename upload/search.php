@@ -17,6 +17,8 @@ $page_cfg['load_tpl_vars'] = array(
 
 $user->session_start(array('req_login' => $bb_cfg['disable_search_for_guest']));
 
+set_die_append_msg();
+
 if (isset($_POST['del_my_post']))
 {
 	$template->assign_var('BB_DIE_APPEND_MSG', '
@@ -139,25 +141,25 @@ $ord_created  = 6;
 // Order options
 $order_opt = array(
 	$ord_posted    => array(
-		                 'lang' => $lang['SORT_TIME'],
-		                 'sql'  => 'item_id',
-		                ),
+		'lang' => $lang['SORT_TIME'],
+		'sql'  => 'item_id',
+	),
 	$ord_last_p    => array(
-		                 'lang' => $lang['BT_LAST_POST'],
-		                 'sql'  => 't.topic_last_post_id',
-		                ),
+		'lang' => $lang['BT_LAST_POST'],
+		'sql'  => 't.topic_last_post_id',
+	),
 	$ord_created   => array(
-		                 'lang' => $lang['BT_CREATED'],
-		                 'sql'  => 't.topic_time',
-		                ),
+		'lang' => $lang['BT_CREATED'],
+		'sql'  => 't.topic_time',
+	),
 	$ord_name      => array(
-		                 'lang' => $lang['SORT_TOPIC_TITLE'],
-		                 'sql'  => 't.topic_title',
-		                ),
+		'lang' => $lang['SORT_TOPIC_TITLE'],
+		'sql'  => 't.topic_title',
+	),
 	$ord_repl      => array(
-		                 'lang' => $lang['REPLIES'],
-		                 'sql'  => 't.topic_replies',
-		                ),
+		'lang' => $lang['REPLIES'],
+		'sql'  => 't.topic_replies',
+	),
 );
 $order_select = array();
 foreach ($order_opt as $val => $opt)
@@ -168,13 +170,13 @@ foreach ($order_opt as $val => $opt)
 // Sort direction
 $sort_opt = array(
 	$sort_asc  => array(
-		             'lang' => $lang['ASC'],
-		             'sql'  => ' ASC ',
-		            ),
+		'lang' => $lang['ASC'],
+		'sql'  => ' ASC ',
+	),
 	$sort_desc => array(
-		             'lang' => $lang['DESC'],
-		             'sql'  => ' DESC ',
-		            ),
+		'lang' => $lang['DESC'],
+		'sql'  => ' DESC ',
+	),
 );
 $sort_select = array();
 foreach ($sort_opt as $val => $opt)
@@ -185,29 +187,29 @@ foreach ($sort_opt as $val => $opt)
 // Previous days
 $time_opt = array(
 	$search_all => array(
-		     'lang' => $lang['BT_ALL_DAYS_FOR'],
-		     'sql'  => 0,
-		    ),
+		'lang' => $lang['BT_ALL_DAYS_FOR'],
+		'sql'  => 0,
+	),
 	1  => array(
-		     'lang' => $lang['BT_1_DAY_FOR'],
-		     'sql'  => TIMENOW - 86400,
-		    ),
+		'lang' => $lang['BT_1_DAY_FOR'],
+		'sql'  => TIMENOW - 86400,
+	),
 	3  => array(
-		     'lang' => $lang['BT_3_DAY_FOR'],
-		     'sql'  => TIMENOW - 86400*3,
-		    ),
+		'lang' => $lang['BT_3_DAY_FOR'],
+		'sql'  => TIMENOW - 86400*3,
+	),
 	7  => array(
-		     'lang' => $lang['BT_7_DAYS_FOR'],
-		     'sql'  => TIMENOW - 86400*7,
-		    ),
+		'lang' => $lang['BT_7_DAYS_FOR'],
+		'sql'  => TIMENOW - 86400*7,
+	),
 	14 => array(
-		     'lang' => $lang['BT_2_WEEKS_FOR'],
-		     'sql'  => TIMENOW - 86400*14,
-		    ),
+		'lang' => $lang['BT_2_WEEKS_FOR'],
+		'sql'  => TIMENOW - 86400*14,
+	),
 	30 => array(
-		     'lang' => $lang['BT_1_MONTH_FOR'],
-		     'sql'  => TIMENOW - 86400*30,
-		    ),
+		'lang' => $lang['BT_1_MONTH_FOR'],
+		'sql'  => TIMENOW - 86400*30,
+	),
 );
 $time_select = array();
 foreach ($time_opt as $val => $opt)
@@ -218,11 +220,11 @@ foreach ($time_opt as $val => $opt)
 // Display as
 $display_as_opt = array(
 	$as_topics => array(
-		             'lang' => $lang['TOPICS'],
-		            ),
+		'lang' => $lang['TOPICS'],
+	),
 	$as_posts  => array(
-		             'lang' => $lang['MESSAGE'],
-		            ),
+		'lang' => $lang['MESSAGE'],
+	),
 );
 $display_as_select = array();
 foreach ($display_as_opt as $val => $opt)
@@ -233,11 +235,11 @@ foreach ($display_as_opt as $val => $opt)
 // Chars
 $chars_opt = array(
 	$show_all => array(
-		             'lang' => $lang['ALL_AVAILABLE'],
-		            ),
+		'lang' => $lang['ALL_AVAILABLE'],
+	),
 	$show_briefly  => array(
-		             'lang' => $lang['BRIEFLY'],
-		            ),
+		'lang' => $lang['BRIEFLY'],
+	),
 );
 $chars_select = array();
 foreach ($chars_opt as $val => $opt)

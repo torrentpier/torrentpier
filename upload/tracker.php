@@ -18,6 +18,8 @@ $page_cfg['load_tpl_vars'] = array(
 // Session start
 $user->session_start(array('req_login' => $bb_cfg['bt_tor_browse_only_reg']));
 
+set_die_append_msg();
+
 $tor_search_limit    = (IS_AM) ? 2000 : 500;
 $forum_select_size   = (UA_OPERA) ? 21 : 24;   // forum select box max rows
 $max_forum_name_len  = 60;                     // inside forum select box
@@ -81,53 +83,53 @@ $ord_sp_down  = 13;
 // Order options
 $order_opt = array(
 	$ord_posted    => array(
-		                 'lang' => $lang['IS_REGISTERED'],
-		                 'sql'  => 'tor.reg_time',
-		                ),
+		'lang' => $lang['IS_REGISTERED'],
+		'sql'  => 'tor.reg_time',
+	),
 	$ord_name      => array(
-		                 'lang' => $lang['BT_TOPIC_TITLE'],
-		                 'sql'  => 't.topic_title',
-		                ),
+		'lang' => $lang['BT_TOPIC_TITLE'],
+		'sql'  => 't.topic_title',
+	),
 	$ord_compl     => array(
-		                 'lang' => $lang['COMPLETED'],
-		                 'sql'  => 'tor.complete_count',
-		                ),
+		'lang' => $lang['COMPLETED'],
+		'sql'  => 'tor.complete_count',
+	),
 	$ord_seeders   => array(
-		                 'lang' => $lang['SEEDS'],
-		                 'sql'  => 'sn.seeders',
-		                ),
+		'lang' => $lang['SEEDS'],
+		'sql'  => 'sn.seeders',
+	),
 	$ord_leechers  => array(
-		                 'lang' => $lang['LEECHS'],
-		                 'sql'  => 'sn.leechers',
-		                ),
+		'lang' => $lang['LEECHS'],
+		'sql'  => 'sn.leechers',
+	),
 	$ord_sp_up     => array(
-		                 'lang' => $lang['SPEED_UP'],
-		                 'sql'  => 'sn.speed_up',
-		                ),
+		'lang' => $lang['SPEED_UP'],
+		'sql'  => 'sn.speed_up',
+	),
 	$ord_sp_down   => array(
-		                 'lang' => $lang['SPEED_DOWN'],
-		                 'sql'  => 'sn.speed_down',
-		                ),
+		'lang' => $lang['SPEED_DOWN'],
+		'sql'  => 'sn.speed_down',
+	),
 	$ord_repl      => array(
-		                 'lang' => $lang['BT_REPLIES'],
-		                 'sql'  => 't.topic_replies',
-		                ),
+		'lang' => $lang['BT_REPLIES'],
+		'sql'  => 't.topic_replies',
+	),
 	$ord_views     => array(
-		                 'lang' => $lang['BT_VIEWS'],
-		                 'sql'  => 't.topic_views',
-		                ),
+		'lang' => $lang['BT_VIEWS'],
+		'sql'  => 't.topic_views',
+	),
 	$ord_size      => array(
-		                 'lang' => $lang['SIZE'],
-		                 'sql'  => 'tor.size',
-		                ),
+		'lang' => $lang['SIZE'],
+		'sql'  => 'tor.size',
+	),
 	$ord_last_p    => array(
-		                 'lang' => $lang['BT_LAST_POST'],
-		                 'sql'  => 't.topic_last_post_id',
-		                ),
+		'lang' => $lang['BT_LAST_POST'],
+		'sql'  => 't.topic_last_post_id',
+	),
 	$ord_last_s    => array(
-		                 'lang' => $lang['BT_SEEDER_LAST_SEEN'],
-		                 'sql'  => 'tor.seeder_last_seen',
-		                ),
+		'lang' => $lang['BT_SEEDER_LAST_SEEN'],
+		'sql'  => 'tor.seeder_last_seen',
+	),
 );
 $order_select = array();
 foreach ($order_opt as $val => $opt)
@@ -138,41 +140,41 @@ foreach ($order_opt as $val => $opt)
 // Sort direction
 $sort_opt = array(
 	$sort_asc  => array(
-		             'lang' => $lang['ASC'],
-		             'sql'  => 'ASC',
-		            ),
+		'lang' => $lang['ASC'],
+		'sql'  => 'ASC',
+	),
 	$sort_desc => array(
-		             'lang' => $lang['DESC'],
-		             'sql'  => 'DESC',
-		            ),
+		'lang' => $lang['DESC'],
+		'sql'  => 'DESC',
+	),
 );
 
 // Previous days
 $time_opt = array(
 	$search_all => array(
-		     'lang' => $lang['BT_ALL_DAYS_FOR'],
-		     'sql'  => 0,
-		    ),
+		'lang' => $lang['BT_ALL_DAYS_FOR'],
+		'sql'  => 0,
+	),
 	1  => array(
-		     'lang' => $lang['BT_1_DAY_FOR'],
-		     'sql'  => TIMENOW - 86400,
-		    ),
+		'lang' => $lang['BT_1_DAY_FOR'],
+		'sql'  => TIMENOW - 86400,
+	),
 	3  => array(
-		     'lang' => $lang['BT_3_DAY_FOR'],
-		     'sql'  => TIMENOW - 86400*3,
-		    ),
+		'lang' => $lang['BT_3_DAY_FOR'],
+		'sql'  => TIMENOW - 86400*3,
+	),
 	7  => array(
-		     'lang' => $lang['BT_7_DAYS_FOR'],
-		     'sql'  => TIMENOW - 86400*7,
-		    ),
+		'lang' => $lang['BT_7_DAYS_FOR'],
+		'sql'  => TIMENOW - 86400*7,
+	),
 	14 => array(
-		     'lang' => $lang['BT_2_WEEKS_FOR'],
-		     'sql'  => TIMENOW - 86400*14,
-		    ),
+		'lang' => $lang['BT_2_WEEKS_FOR'],
+		'sql'  => TIMENOW - 86400*14,
+	),
 	30 => array(
-		     'lang' => $lang['BT_1_MONTH_FOR'],
-		     'sql'  => TIMENOW - 86400*30,
-		    ),
+		'lang' => $lang['BT_1_MONTH_FOR'],
+		'sql'  => TIMENOW - 86400*30,
+	),
 );
 $time_select = array();
 foreach ($time_opt as $val => $opt)
@@ -183,33 +185,33 @@ foreach ($time_opt as $val => $opt)
 // Seeder not seen
 $s_not_seen_opt = array(
 	$search_all => array(
-		     'lang' => $lang['BT_DISREGARD'],
-		     'sql'  => 0,
-		    ),
+		'lang' => $lang['BT_DISREGARD'],
+		'sql'  => 0,
+	),
 	1  => array(
-		     'lang' => $lang['BT_1_DAY'],
-		     'sql'  => TIMENOW - 86400,
-		    ),
+		'lang' => $lang['BT_1_DAY'],
+		'sql'  => TIMENOW - 86400,
+	),
 	3  => array(
-		     'lang' => $lang['BT_3_DAYS'],
-		     'sql'  => TIMENOW - 86400*3,
-		    ),
+		'lang' => $lang['BT_3_DAYS'],
+		'sql'  => TIMENOW - 86400*3,
+	),
 	7  => array(
-		     'lang' => $lang['BT_7_DAYS'],
-		     'sql'  => TIMENOW - 86400*7,
-		    ),
+		'lang' => $lang['BT_7_DAYS'],
+		'sql'  => TIMENOW - 86400*7,
+	),
 	14 => array(
-		     'lang' => $lang['BT_2_WEEKS'],
-		     'sql'  => TIMENOW - 86400*14,
-		    ),
+		'lang' => $lang['BT_2_WEEKS'],
+		'sql'  => TIMENOW - 86400*14,
+	),
 	30 => array(
-		     'lang' => $lang['BT_1_MONTH'],
-		     'sql'  => TIMENOW - 86400*30,
-		    ),
+		'lang' => $lang['BT_1_MONTH'],
+		'sql'  => TIMENOW - 86400*30,
+	),
 	$never  => array(
-		     'lang' => $lang['BT_NEVER'],
-		     'sql'  => 0,
-		    ),
+		'lang' => $lang['BT_NEVER'],
+		'sql'  => 0,
+	),
 );
 $s_not_seen_select = array();
 foreach ($s_not_seen_opt as $val => $opt)

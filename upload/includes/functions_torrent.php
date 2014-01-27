@@ -136,7 +136,8 @@ function tracker_unregister ($attach_id, $mode = '')
 
 	if ($mode == 'request')
 	{
-		exit_redirect($lang['BT_UNREGISTERED'], $post_id, $forum_id);
+		set_die_append_msg($forum_id, $topic_id);
+		bb_die($lang['BT_UNREGISTERED']);
 	}
 }
 
@@ -211,7 +212,7 @@ function change_tor_type ($attach_id, $tor_status_gold)
 	DB()->query("UPDATE ". BB_BT_TORRENTS ." SET tor_type = $tor_status_gold WHERE topic_id = $topic_id LIMIT 1");
 }
 
-function tracker_register ($attach_id, $mode = '', $tor_status = TOR_NOT_APPROVED)
+function tracker_register ($attach_id, $mode = '', $tor_status = TOR_NOT_APPROVED, $reg_time = TIMENOW)
 {
 	global $bb_cfg, $lang, $reg_mode, $tr_cfg;
 
@@ -277,7 +278,9 @@ function tracker_register ($attach_id, $mode = '', $tor_status = TOR_NOT_APPROVE
 
 	if ($row = DB()->fetch_row("SELECT topic_id FROM ". BB_BT_TORRENTS ." WHERE info_hash = '$info_hash_sql' LIMIT 1"))
 	{
-		return torrent_error_exit(sprintf($lang['BT_REG_FAIL_SAME_HASH'], TOPIC_URL . $row['topic_id']));
+		$msg = sprintf($lang['BT_REG_FAIL_SAME_HASH'], TOPIC_URL . $row['topic_id']);
+		bb_die($msg);
+		set_die_append_msg($forum_id, $topic_id);
 	}
 
 	$totallen = 0;
@@ -298,7 +301,6 @@ function tracker_register ($attach_id, $mode = '', $tor_status = TOR_NOT_APPROVE
 		return torrent_error_exit($lang['TORFILE_INVALID']);
 	}
 
-	$reg_time = TIMENOW;
 	$size = sprintf('%.0f', (float) $totallen);
 
 	$columns = ' info_hash,       post_id,  poster_id,  topic_id,  forum_id,  attach_id,    size,  reg_time,  tor_status';
@@ -343,8 +345,9 @@ function tracker_register ($attach_id, $mode = '', $tor_status = TOR_NOT_APPROVE
 
 	if ($reg_mode == 'request' || $reg_mode == 'newtopic')
 	{
-		$mess = sprintf($lang['BT_REGISTERED'], "download.php?id=$attach_id");
-		exit_redirect($mess, $post_id, $forum_id);
+		set_die_append_msg($forum_id, $topic_id);
+		$mess = sprintf($lang['BT_REGISTERED'], DOWNLOAD_URL . $attach_id);
+		bb_die($mess);
 	}
 
 	return;
@@ -566,14 +569,6 @@ function get_registered_torrents ($id, $mode)
 	{
 		return false;
 	}
-}
-
-function exit_redirect ($message, $post_id, $forum_id)
-{
-	global $lang;
-
-	$exit_message = $message .'<br /><br />'. sprintf($lang['CLICK_RETURN_TOPIC'], '<a href="viewtopic.php?'. POST_POST_URL .'='. $post_id .'#'. $post_id .'">', '</a>') .'<br /><br />'. sprintf($lang['CLICK_RETURN_FORUM'], '<a href="viewforum.php?'. POST_FORUM_URL .'='. $forum_id .'">', '</a>');
-	message_die(GENERAL_MESSAGE, $exit_message);
 }
 
 function torrent_error_exit ($message)

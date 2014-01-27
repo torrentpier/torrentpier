@@ -8,6 +8,8 @@ require(BB_ROOT . 'common.php');
 // Init userdata
 $user->session_start(array('req_login' => true));
 
+set_die_append_msg();
+
 require(INC_DIR .'bbcode.php');
 
 function topic_info($topic_id)
@@ -24,7 +26,8 @@ function topic_info($topic_id)
 		"topic_title"  => $row['topic_title'],
 		"forum_title"  => $row['forum_name'],
 		"attach_id"    => $row['attach_id'],
-		"topic_poster" => $row['poster_id']
+		"topic_poster" => $row['poster_id'],
+		"forum_id"     => $row['forum_id'],
 	);
 
 	return $t;
@@ -74,6 +77,7 @@ function call_seed($topic_id, $t_info, $to_user_id)
 	$u_id = array();
 	$topic_id = request_var('t', 0);
 	$t_info = topic_info($topic_id);
+	$forum_id = $t_info['forum_id'];
 	$msg_error = "OK";
 
 	$sql = "SELECT call_seed_time FROM ". BB_BT_TORRENTS ." WHERE topic_id = $topic_id LIMIT 1";
@@ -130,8 +134,7 @@ function call_seed($topic_id, $t_info, $to_user_id)
 	}
 
 	$msg = '';
-	meta_refresh("viewtopic.php?t=$topic_id", 8);
-	$return_to = sprintf ($lang['CALLSEED_RETURN'], $topic_id);
+	meta_refresh(TOPIC_URL . $topic_id, 8);
 
 	switch($msg_error) {
 		case "OK":
@@ -157,5 +160,5 @@ function call_seed($topic_id, $t_info, $to_user_id)
 			break;
 	}
 
-$msg .= $return_to;
-message_die(GENERAL_MESSAGE, $msg);
+set_die_append_msg($forum_id, $topic_id);
+bb_die($msg);

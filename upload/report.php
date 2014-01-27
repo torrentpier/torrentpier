@@ -300,7 +300,7 @@ else
 			{
 				if (isset($_POST['confirm']))
 				{
-					$comment = (isset($_POST['comment'])) ? DB()->escape($_POST['comment']) : '';
+					$comment = (isset($_POST['comment'])) ? $_POST['comment'] : '';
 
 					switch ($mode)
 					{
