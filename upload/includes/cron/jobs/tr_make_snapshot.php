@@ -2,6 +2,8 @@
 
 if (!defined('BB_ROOT')) die(basename(__FILE__));
 
+global $bb_cfg;
+
 DB()->expect_slow_query(600);
 
 //
@@ -140,7 +142,7 @@ if ($bb_cfg['torhelp_enabled'])
 			  dl.user_id, GROUP_CONCAT(dl.topic_id)
 			FROM       ". BB_BT_TRACKER_SNAP  ." trsn
 			INNER JOIN ". BB_BT_TORRENTS      ." tor ON (tor.topic_id = trsn.topic_id)
-			INNER JOIN ". BB_BT_DLSTATUS_MAIN ." dl  ON (dl.topic_id = tor.topic_id)
+			INNER JOIN ". BB_BT_DLSTATUS      ." dl  ON (dl.topic_id = tor.topic_id)
 			WHERE
 			      trsn.seeders          <=  $tor_min_seeders
 			  AND trsn.leechers         >=  $tor_min_leechers

@@ -2,7 +2,7 @@
 
 if (!defined('BB_ROOT')) die(basename(__FILE__));
 
-global $tr_cfg;
+global $bb_cfg, $tr_cfg;
 
 $releaser = DL_STATUS_RELEASER;
 
@@ -111,21 +111,18 @@ if ($tr_cfg['update_dlstat'])
 		WHERE u.user_id = ub.user_id
 	");
 
-	// Delete from MAIN what exists in BUF but not exsits in NEW
+	// Delete from dl_list what exists in BUF but not exsits in NEW
 	DB()->query("
-		DELETE main
-		FROM ". BB_BT_DLSTATUS_MAIN ." main
-		INNER JOIN (
-			". NEW_BB_BT_LAST_TORSTAT ." buf
-			LEFT JOIN ". BB_BT_DLSTATUS_NEW ." new USING(user_id, topic_id)
-		) USING(user_id, topic_id)
-		WHERE new.user_id IS NULL
-			AND new.topic_id IS NULL
+		DELETE dl
+		FROM ". BB_BT_DLSTATUS ." dl
+		INNER JOIN ". NEW_BB_BT_LAST_TORSTAT ." buf USING(user_id, topic_id)
+		WHERE buf.user_id IS NULL
+			AND buf.topic_id IS NULL
 	");
 
 	// Update DL-Status
 	DB()->query("
-		REPLACE INTO ". BB_BT_DLSTATUS_NEW ."
+		REPLACE INTO ". BB_BT_DLSTATUS ."
 			(user_id, topic_id, user_status)
 		SELECT
 			user_id, topic_id, dl_status

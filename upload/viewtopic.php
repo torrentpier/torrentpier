@@ -175,8 +175,8 @@ if (!$is_auth['auth_read'])
 {
 	if (IS_GUEST)
 	{
-		$redirect = ($post_id) ? POST_POST_URL . "=$post_id" : POST_TOPIC_URL . "=$topic_id";
-		$redirect .= ($start) ? "&start=$start" : '';
+		$redirect = ($post_id) ? POST_URL ."$post_id#$post_id" : TOPIC_URL . $topic_id;
+		$redirect .= ($start && !$post_id) ? "&start=$start" : '';
 		redirect(LOGIN_URL . "?redirect=viewtopic.php&$redirect");
 	}
 	bb_die($lang['TOPIC_POST_NOT_EXIST']);

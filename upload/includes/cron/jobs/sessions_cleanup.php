@@ -2,6 +2,8 @@
 
 if (!defined('BB_ROOT')) die(basename(__FILE__));
 
+global $bb_cfg;
+
 $user_session_expire_time  = TIMENOW - intval($bb_cfg['user_session_duration']);
 $admin_session_expire_time = TIMENOW - intval($bb_cfg['admin_session_duration']);
 

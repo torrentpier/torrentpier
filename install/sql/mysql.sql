@@ -21,9 +21,7 @@ DROP TABLE IF EXISTS `bb_attach_quota`;
 DROP TABLE IF EXISTS `bb_auth_access`;
 DROP TABLE IF EXISTS `bb_auth_access_snap`;
 DROP TABLE IF EXISTS `bb_banlist`;
-DROP TABLE IF EXISTS `bb_bt_dlstatus_main`;
-DROP TABLE IF EXISTS `bb_bt_dlstatus_mrg`;
-DROP TABLE IF EXISTS `bb_bt_dlstatus_new`;
+DROP TABLE IF EXISTS `bb_bt_dlstatus`;
 DROP TABLE IF EXISTS `bb_bt_dlstatus_snap`;
 DROP TABLE IF EXISTS `bb_bt_last_torstat`;
 DROP TABLE IF EXISTS `bb_bt_last_userstat`;
@@ -73,7 +71,6 @@ DROP TABLE IF EXISTS `bb_vote_voters`;
 DROP TABLE IF EXISTS `bb_words`;
 DROP TABLE IF EXISTS `buf_last_seeder`;
 DROP TABLE IF EXISTS `buf_topic_view`;
-DROP TABLE IF EXISTS `sph_counter`;
 
 --
 -- Структура таблицы `bb_ads`
@@ -235,40 +232,10 @@ CREATE TABLE IF NOT EXISTS `bb_banlist` (
 -- --------------------------------------------------------
 
 --
--- Структура таблицы `bb_bt_dlstatus_main`
+-- Структура таблицы `bb_bt_dlstatus`
 --
 
-CREATE TABLE IF NOT EXISTS `bb_bt_dlstatus_main` (
-  `user_id` mediumint(9) NOT NULL DEFAULT '0',
-  `topic_id` mediumint(8) unsigned NOT NULL DEFAULT '0',
-  `user_status` tinyint(1) NOT NULL DEFAULT '0',
-  `last_modified_dlstatus` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  PRIMARY KEY (`user_id`,`topic_id`),
-  KEY `topic_id` (`topic_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
-
--- --------------------------------------------------------
-
---
--- Структура таблицы `bb_bt_dlstatus_mrg`
---
-
-CREATE TABLE IF NOT EXISTS `bb_bt_dlstatus_mrg` (
-  `user_id` mediumint(9) NOT NULL DEFAULT '0',
-  `topic_id` mediumint(8) unsigned NOT NULL DEFAULT '0',
-  `user_status` tinyint(1) NOT NULL DEFAULT '0',
-  `last_modified_dlstatus` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  KEY `user_topic` (`user_id`,`topic_id`),
-  KEY `topic_id` (`topic_id`)
-) ENGINE=MRG_MyISAM DEFAULT CHARSET=utf8 UNION=(`bb_bt_dlstatus_main`,`bb_bt_dlstatus_new`);
-
--- --------------------------------------------------------
-
---
--- Структура таблицы `bb_bt_dlstatus_new`
---
-
-CREATE TABLE IF NOT EXISTS `bb_bt_dlstatus_new` (
+CREATE TABLE IF NOT EXISTS `bb_bt_dlstatus` (
   `user_id` mediumint(9) NOT NULL DEFAULT '0',
   `topic_id` mediumint(8) unsigned NOT NULL DEFAULT '0',
   `user_status` tinyint(1) NOT NULL DEFAULT '0',
@@ -1531,16 +1498,4 @@ CREATE TABLE IF NOT EXISTS `buf_topic_view` (
   `topic_id` mediumint(8) unsigned NOT NULL DEFAULT '0',
   `topic_views` mediumint(8) unsigned NOT NULL DEFAULT '0',
   PRIMARY KEY (`topic_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
-
--- --------------------------------------------------------
-
---
--- Структура таблицы `sph_counter`
---
-
-CREATE TABLE IF NOT EXISTS `sph_counter` (
-  `counter_id` int(11) NOT NULL,
-  `max_doc_id` int(11) NOT NULL,
-  PRIMARY KEY (`counter_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;

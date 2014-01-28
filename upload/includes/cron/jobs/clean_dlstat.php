@@ -2,6 +2,8 @@
 
 if (!defined('BB_ROOT')) die(basename(__FILE__));
 
+global $bb_cfg;
+
 define('BUF_DLSTATUS_TABLE', 'tmp_buf_dlstatus');
 
 // Move new dl-status records to main table
@@ -20,13 +22,13 @@ DB()->query("
 	SELECT
 		user_id, topic_id, user_status
 	FROM
-		". BB_BT_DLSTATUS_NEW ."
+		". BB_BT_DLSTATUS ."
 	WHERE
 		last_modified_dlstatus < DATE_SUB(NOW(), INTERVAL 1 DAY)
 ");
 
 DB()->query("
-	REPLACE INTO ". BB_BT_DLSTATUS_MAIN ."
+	REPLACE INTO ". BB_BT_DLSTATUS ."
 		(user_id, topic_id, user_status)
 	SELECT
 		user_id, topic_id, user_status
@@ -34,9 +36,9 @@ DB()->query("
 ");
 
 DB()->query("
-	DELETE new
+	DELETE dl
 	FROM ". BUF_DLSTATUS_TABLE ." buf
-	INNER JOIN ". BB_BT_DLSTATUS_NEW ." new USING(user_id, topic_id)
+	INNER JOIN ". BB_BT_DLSTATUS ." dl USING(user_id, topic_id)
 ");
 
 DB()->query("DROP TEMPORARY TABLE ". BUF_DLSTATUS_TABLE);

@@ -281,12 +281,13 @@
 					<!-- ELSEIF postrow.attach.tor_reged.TOR_STATUS_REPLY -->
 					    $('#tor_comment').html('{L_TOR_AUTH_SENT_COMMENT}');
 					<!-- ENDIF -->
+						$('#comment').attr('value', '');
 				};
 			</script>
 
 			<span id="tor_comment">
 			<!-- IF $bb_cfg['tor_comment'] -->
-			<input type="text" id="comment" onfocus="if(this.value==this.defaultValue || this.className=='hint'){this.value=''; this.className='';}" onblur="if(this.value==''){this.value=this.defaultValue; this.className='hint';}" value="{L_COMMENT}" class="hint" />
+			<input type="text" id="comment" placeholder="{L_COMMENT}" />
 			<!-- ENDIF -->
 			
 			<!-- IF AUTH_MOD -->

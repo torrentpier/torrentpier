@@ -6,7 +6,7 @@ function sync ($type, $id)
 {
 	switch ($type)
 	{
-			case 'forum':
+		case 'forum':
 
 			$all_forums = ($id === 'all');
 
@@ -352,19 +352,13 @@ function topic_delete ($mode_or_topic_id, $forum_id = null, $prune_time = 0, $pr
 
 	// Delete torrents
 	DB()->query("
-		DELETE tor, tr
+		DELETE tor, tr, dl
 		FROM      ". $tmp_delete_topics ." del
 		LEFT JOIN ". BB_BT_TORRENTS  ." tor USING(topic_id)
 		LEFT JOIN ". BB_BT_TRACKER   ." tr  USING(topic_id)
+		LEFT JOIN ". BB_BT_DLSTATUS  ." dl  USING(topic_id)
 	");
-/*
-	// Delete dlstat
-	DB()->query("
-		DELETE dl
-		FROM      ". $tmp_delete_topics ." del
-		LEFT JOIN ". BB_BT_DLSTATUS  ." dl USING(topic_id)
-	");
-*/
+
 	// Log action
 	if ($prune)
 	{

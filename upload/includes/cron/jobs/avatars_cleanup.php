@@ -2,6 +2,8 @@
 
 if (!defined('BB_ROOT')) die(basename(__FILE__));
 
+global $bb_cfg;
+
 $fix_errors = true;
 $debug_mode = false;
 

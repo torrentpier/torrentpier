@@ -4,7 +4,7 @@ define('IN_FORUM',   true);
 define('BB_SCRIPT', 'dl_list');
 define('IN_SERVICE', true);
 define('BB_ROOT', './');
-require(BB_ROOT ."common.php");
+require(BB_ROOT .'common.php');
 
 $forum_id  = (@$_REQUEST[POST_FORUM_URL]) ? (int) $_REQUEST[POST_FORUM_URL] : 0;
 $topic_id  = (@$_REQUEST[POST_TOPIC_URL]) ? (int) $_REQUEST[POST_TOPIC_URL] : 0;
@@ -172,13 +172,7 @@ if ($topics_ary && ($mode == 'set_dl_status' || $mode == 'set_topics_dl_status')
 	}
 	$new_dlstatus_sql = DB()->build_array('MULTI_INSERT', $new_dlstatus_ary);
 
-	DB()->query("
-		DELETE FROM ". BB_BT_DLSTATUS_MAIN ."
-		WHERE user_id = {$user->id}
-			AND topic_id IN(". join(',', $topics_ary) .")
-	");
-
-	DB()->query("REPLACE INTO ". BB_BT_DLSTATUS_NEW ." $new_dlstatus_sql");
+    DB()->query("REPLACE INTO ". BB_BT_DLSTATUS ." $new_dlstatus_sql");
 
 	redirect("$redirect_type?$redirect");
 }

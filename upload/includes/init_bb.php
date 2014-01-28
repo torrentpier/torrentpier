@@ -338,10 +338,8 @@ define('BB_ATTACHMENTS',          'bb_attachments');
 define('BB_AUTH_ACCESS_SNAP',     'bb_auth_access_snap');
 define('BB_AUTH_ACCESS',          'bb_auth_access');
 define('BB_BANLIST',              'bb_banlist');
-define('BB_BT_DLSTATUS_MAIN',     'bb_bt_dlstatus_main');
-define('BB_BT_DLSTATUS_NEW',      'bb_bt_dlstatus_new');
+define('BB_BT_DLSTATUS',          'bb_bt_dlstatus');
 define('BB_BT_DLSTATUS_SNAP',     'bb_bt_dlstatus_snap');
-define('BB_BT_DLSTATUS',          'bb_bt_dlstatus_mrg');   // main + new
 define('BB_BT_LAST_TORSTAT',      'bb_bt_last_torstat');
 define('BB_BT_LAST_USERSTAT',     'bb_bt_last_userstat');
 define('BB_BT_TORHELP',           'bb_bt_torhelp');
@@ -402,18 +400,18 @@ define('USEREMAIL_MAX_LENGTH', 40);
 define('PAGE_HEADER', INC_DIR .'page_header.php');
 define('PAGE_FOOTER', INC_DIR .'page_footer.php');
 
-define('CAT_URL',      "index.php?"     .'c=');
-define('DOWNLOAD_URL', "download.php?"  .'id=');
-define('FORUM_URL',    "viewforum.php?" .'f=');
-define('GROUP_URL',    "groupcp.php?"   .'g=');
+define('CAT_URL',      'index.php?c=');
+define('DOWNLOAD_URL', 'download.php?id=');
+define('FORUM_URL',    'viewforum.php?f=');
+define('GROUP_URL',    'groupcp.php?g=');
 define('LOGIN_URL',    $bb_cfg['login_url']);
-define('MODCP_URL',    "modcp.php?"     .'f=');
+define('MODCP_URL',    'modcp.php?f=');
 define('PM_URL',       $bb_cfg['pm_url']);
-define('POST_URL',     "viewtopic.php?" .'p=');
+define('POST_URL',     'viewtopic.php?p=');
 define('POSTING_URL',  $bb_cfg['posting_url']);
-define('PROFILE_URL',  "profile.php?"   .'mode=viewprofile&amp;u=');
-define('BONUS_URL',    "profile.php?"   .'mode=bonus');
-define('TOPIC_URL',    "viewtopic.php?" .'t=');
+define('PROFILE_URL',  'profile.php?mode=viewprofile&amp;u=');
+define('BONUS_URL',    'profile.php?mode=bonus');
+define('TOPIC_URL',    'viewtopic.php?t=');
 
 define('USER_AGENT', @strtolower($_SERVER['HTTP_USER_AGENT']));
 define('UA_OPERA',   strpos(USER_AGENT, 'pera'));
@@ -480,6 +478,11 @@ function prn_r ($var, $title = '', $print = true)
 	$r = '<pre>'. (($title) ? "<b>$title</b>\n\n" : '') . htmlspecialchars(print_r($var, true)) .'</pre>';
 	if ($print) echo $r;
 	return $r;
+}
+
+function pre ($var, $title = '', $print = true)
+{
+	prn_r($var, $title, $print);
 }
 
 function prn ()

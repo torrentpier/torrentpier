@@ -856,7 +856,7 @@ $lang['YOU_BEEN_BANNED'] = 'You have been banned from this forum.<br />Please co
 $lang['REG_USERS_ONLINE'] = 'Who is online registered users: %d and ';
 $lang['HIDDEN_USERS_ONLINE'] = 'hidden users: %d';
 $lang['GUEST_USERS_ONLINE'] = 'Online Guests: %d';
-$lang['ALL_USERS_ONLNE'] = 'All users:';
+$lang['ALL_USERS_ONLINE'] = 'All users:';
 $lang['ONLINE_EXPLAIN'] = 'users active over the past five minutes';
 $lang['LAST_UPDATED'] = 'Last Updated';
 

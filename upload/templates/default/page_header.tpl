@@ -469,7 +469,7 @@ $(document).ready(function() {
 			<form id="quick-search" action="" method="post" onsubmit="$(this).attr('action', $('#search-action').val());">
 				<input type="hidden" name="max" value="1" />
 				<input type="hidden" name="to" value="1" />
-				<input id="search-text" type="text" name="nm" class="hint" placeholder="{L_SEARCH_S}" required />
+				<input id="search-text" type="text" name="nm" placeholder="{L_SEARCH_S}" required />
 				<select id="search-action">
 					<option value="tracker.php#results" selected="selected"> {L_TRACKER_S} </option>
 					<option value="search.php"> {L_FORUM_S} </option>

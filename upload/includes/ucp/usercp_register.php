@@ -8,7 +8,6 @@ set_die_append_msg();
 
 if (IS_ADMIN)
 {
-	require(LANG_ROOT_DIR ."lang_{$userdata['user_lang']}/lang_admin.php");
 	$bb_cfg['require_activation'] = false;
 
 	$new_user = (int) request_var('admin', '');

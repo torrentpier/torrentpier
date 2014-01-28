@@ -2,7 +2,7 @@
 <!-- IF TPL_ADMIN_FRAMESET -->
 <!--========================================================================-->
 <!DOCTYPE html>
-<html dir="{L_CONTENT_DIRECTION}">
+<html>
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset={L_CONTENT_ENCODING}" />
 	<meta http-equiv="Content-Style-Type" content="text/css" />
