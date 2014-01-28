@@ -2,8 +2,6 @@
 
 if (!defined('BB_ROOT')) die(basename(__FILE__));
 
-global $bb_cfg, $tr_cfg;
-
 $releaser = DL_STATUS_RELEASER;
 
 define('NEW_BB_BT_LAST_TORSTAT',  'new_bt_last_torstat');

@@ -2,8 +2,6 @@
 
 if (!defined('BB_ROOT')) die(basename(__FILE__));
 
-global $bb_cfg;
-
 $gc_cache = array(
 	'tr_cache',
 	'bb_cache',

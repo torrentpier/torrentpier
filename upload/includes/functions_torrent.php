@@ -198,7 +198,7 @@ function change_tor_status ($attach_id, $new_tor_status)
 // Set gold/silver type for torrent
 function change_tor_type ($attach_id, $tor_status_gold)
 {
-	global $topic_id, $lang;
+	global $topic_id, $lang, $bb_cfg;
 
 	if (!$torrent = get_torrent_info($attach_id))
 	{

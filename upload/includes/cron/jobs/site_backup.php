@@ -2,8 +2,6 @@
 
 if (!defined('BB_ROOT')) die(basename(__FILE__));
 
-global $bb_cfg;
-
 $exec_output = array();
 $exec_return_status = 0;
 

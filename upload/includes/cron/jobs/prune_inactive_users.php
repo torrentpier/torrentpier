@@ -2,8 +2,6 @@
 
 if (!defined('BB_ROOT')) die(basename(__FILE__));
 
-global $bb_cfg;
-
 $users_per_cycle = 1000;
 
 require_once(INC_DIR .'functions_admin.php');

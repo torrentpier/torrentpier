@@ -2,8 +2,6 @@
 
 if (!defined('BB_ROOT')) die(basename(__FILE__));
 
-global $bb_cfg;
-
 $log_days_keep = (int) $bb_cfg['log_days_keep'];
 
 DB()->query("

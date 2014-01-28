@@ -2,8 +2,6 @@
 
 if (!defined('BB_ROOT')) die(basename(__FILE__));
 
-global $bb_cfg;
-
 define('BUF_DLSTATUS_TABLE', 'tmp_buf_dlstatus');
 
 // Move new dl-status records to main table

@@ -2,8 +2,6 @@
 
 if (!defined('BB_ROOT')) die(basename(__FILE__));
 
-global $bb_cfg;
-
 require_once(INC_DIR .'functions_admin.php');
 
 if ($bb_cfg['prune_enable'])

@@ -2,7 +2,7 @@
 
 function run_jobs($jobs)
 {
-	global $datastore;
+	global $bb_cfg, $tr_cfg, $datastore;
 
 	define('IN_CRON', true);
 
@@ -17,7 +17,7 @@ function run_jobs($jobs)
 	while ($row = DB()->sql_fetchrow($result))
 	{
 		$job = $row['cron_script'];
-		$job_script = BB_ROOT . 'includes/cron/jobs/' . $job;
+		$job_script = INC_DIR . 'cron/jobs/' . $job;
 		require($job_script);
 	}
 	DB()->query("
