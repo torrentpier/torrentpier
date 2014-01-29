@@ -1124,9 +1124,24 @@ function request_var($var_name, $default, $multibyte = false, $cookie = false)
 
 function get_username ($user_id)
 {
-	if (empty($user_id)) return false;
-	$row = DB()->fetch_row("SELECT username FROM ". BB_USERS ." WHERE user_id = $user_id LIMIT 1");
-	return $row['username'];
+	if (empty($user_id))
+	{
+		return is_array($user_id) ? array() : false;
+	}
+	if (is_array($user_id))
+	{
+		$usernames = array();
+		foreach (DB()->fetch_rowset("SELECT user_id, username FROM ". BB_USERS ." WHERE user_id IN(". get_id_csv($user_id) .")") as $row)
+		{
+			$usernames[$row['user_id']] = $row['username'];
+		}
+		return $usernames;
+	}
+	else
+	{
+		$row = DB()->fetch_row("SELECT username FROM ". BB_USERS ." WHERE user_id = $user_id LIMIT 1");
+		return $row['username'];
+	}
 }
 
 function get_user_id ($username)

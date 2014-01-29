@@ -1770,7 +1770,7 @@ $lang['WORD_CENSOR'] = 'Автоцензор';
 $lang['EXPORT'] = 'Экспорт';
 $lang['CREATE_NEW'] = 'Создать';
 $lang['ADD_NEW'] = 'Добавить';
-$lang['CRON'] = 'Планировщик задач (Cron)';
+$lang['CRON'] = 'Планировщик задач (cron)';
 $lang['REBUILD_SEARCH_INDEX'] = 'Перечесть индексы поиска';
 $lang['FORUM_CONFIG'] = 'Настройки форумов';
 $lang['TRACKER_CONFIG'] = 'Настройки трекера';
@@ -1802,7 +1802,7 @@ $lang['FORUM_STATS'] = 'Статистика Форумов';
 $lang['ADMIN_INDEX'] = 'Главная страница';
 $lang['CREATE_PROFILE'] = 'Создать аккаунт';
 
-$lang['TP_VERSION']      = 'Версия TorrenPier II';
+$lang['TP_VERSION']      = 'Версия TorrentPier II';
 $lang['TP_RELEASE_DATE'] = 'Дата выпуска';
 
 $lang['CLICK_RETURN_ADMIN_INDEX'] = '%sВернуться на главную страницу администраторского раздела%s';
@@ -2002,11 +2002,6 @@ $lang['AVATAR_GALLERY_PATH'] = 'Путь к галерее аватар';
 $lang['AVATAR_GALLERY_PATH_EXPLAIN'] = 'Каталог ниже корня phpBB для готовых картинок, например images/avatars/gallery';
 
 $lang['EMAIL_SETTINGS'] = 'Настройки e-mail';
-
-$lang['DISABLE_PRIVMSG'] = 'Личные сообщения';
-$lang['INBOX_LIMITS'] = 'Макс. число сообщений в папке &laquo;Входящие&raquo;';
-$lang['SENTBOX_LIMITS'] = 'Макс. число сообщений в папке &laquo;Отправленные&raquo;';
-$lang['SAVEBOX_LIMITS'] = 'Макс. число сообщений в папке &laquo;Сохранённые&raquo;';
 
 // Visual Confirmation
 $lang['VISUAL_CONFIRM'] = 'Включить визуальное подтверждение';

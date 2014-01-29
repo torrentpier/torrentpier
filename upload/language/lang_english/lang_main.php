@@ -1682,8 +1682,8 @@ $lang['LIST'] = 'List';
 $lang['LIST_TITLE'] = 'List: [list]text[/list] (Ctrl+l)';
 $lang['LIST_ITEM'] = 'Ordered list: [list=]text[/list]  (Ctrl+O)';
 $lang['QUOTE_SEL'] = 'Quote selected';
-$lang['TRANSLIT'] = 'Транслит';
-$lang['TRANSLIT_TITLE'] = 'Перевести выделение из транслита на русский';
+$lang['TRANSLIT'] = 'Translit';
+$lang['TRANSLIT_TITLE'] = 'Translit selected to russian';
 $lang['JAVASCRIPT_ON'] = 'Heads necessary to send messages to enable JavaScript';
 
 $lang['NEW'] = 'New';
@@ -1764,8 +1764,8 @@ $lang['WORD_CENSOR'] = 'Word Censors';
 $lang['EXPORT'] = 'Export';
 $lang['CREATE_NEW'] = 'Create';
 $lang['ADD_NEW'] = 'Add';
-$lang['CRON'] = 'Task Scheduler (Cron)';
-$lang['REBUILD_SEARCH_INDEX'] = 'Перечесть индексы поиска';
+$lang['CRON'] = 'Task Scheduler (cron)';
+$lang['REBUILD_SEARCH_INDEX'] = 'Rebuild search index';
 $lang['FORUM_CONFIG'] = 'Forum settings';
 $lang['TRACKER_CONFIG'] = 'Tracker settings';
 $lang['RELEASE_TEMPLATES'] = 'Release Templates';
@@ -1796,7 +1796,7 @@ $lang['FORUM_STATS'] = 'Forum Statistics';
 $lang['ADMIN_INDEX'] = 'Admin Index';
 $lang['CREATE_PROFILE'] = 'Create profile';
 
-$lang['TP_VERSION']      = 'TorrenPier version';
+$lang['TP_VERSION']      = 'TorrentPier version';
 $lang['TP_RELEASE_DATE'] = 'Release date';
 
 $lang['CLICK_RETURN_ADMIN_INDEX'] = 'Click %sHere%s to return to the Admin Index';
@@ -1994,11 +1994,6 @@ $lang['AVATAR_GALLERY_PATH'] = 'Avatar Gallery Path';
 $lang['AVATAR_GALLERY_PATH_EXPLAIN'] = 'Path under your phpBB root dir for pre-loaded images, e.g. images/avatars/gallery';
 
 $lang['EMAIL_SETTINGS'] = 'Email Settings';
-
-$lang['DISABLE_PRIVMSG'] = 'Private Messaging';
-$lang['INBOX_LIMITS'] = 'Max posts in Inbox';
-$lang['SENTBOX_LIMITS'] = 'Max posts in Sentbox';
-$lang['SAVEBOX_LIMITS'] = 'Max posts in Savebox';
 
 // Visual Confirmation
 $lang['VISUAL_CONFIRM'] = 'Enable Visual Confirmation';
@@ -3090,8 +3085,8 @@ $lang['TPL']['SOURCE_TYPE_OPTIONS'] = array(
 
 $lang['TPL']['MULTIPLAYER_OPTIONS'] = array(
 	'no',
-	'2х',
-	'4х',
+	'2x',
+	'4x',
 	'more',
 );
 

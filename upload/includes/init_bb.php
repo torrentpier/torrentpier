@@ -198,6 +198,8 @@ define('PRIVMSGS_SENT_MAIL',      2);
 define('PRIVMSGS_SAVED_IN_MAIL',  3);
 define('PRIVMSGS_SAVED_OUT_MAIL', 4);
 define('PRIVMSGS_UNREAD_MAIL',    5);
+define('HAVE_UNREAD_PM',          1);
+define('HAVE_NEW_PM',             2);
 
 define('USERNAME_MIN_LENGTH',     3);
 

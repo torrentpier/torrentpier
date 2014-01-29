@@ -109,28 +109,6 @@
 	</td>
 </tr>
 <tr>
-	<th colspan="2">{L_PRIVATE_MESSAGING}</th>
-</tr>
-<tr>
-	<td><h4>{L_DISABLE_PRIVMSG}</h4></td>
-	<td>
-	    <label><input type="radio" name="privmsg_disable" value="0" <!-- IF PRIVMSG_DISABLE -->checked="checked"<!-- ENDIF --> />{L_ENABLED}</label>&nbsp;&nbsp;
-		<label><input type="radio" name="privmsg_disable" value="1" <!-- IF not PRIVMSG_DISABLE -->checked="checked"<!-- ENDIF --> />{L_DISABLED}</label>
-	</td>
-</tr>
-<tr>
-	<td><h4>{L_INBOX_LIMITS}</h4></td>
-	<td><input class="post" type="text" maxlength="4" size="4" name="max_inbox_privmsgs" value="{INBOX_LIMIT}" /></td>
-</tr>
-<tr>
-	<td><h4>{L_SENTBOX_LIMITS}</h4></td>
-	<td><input class="post" type="text" maxlength="4" size="4" name="max_sentbox_privmsgs" value="{SENTBOX_LIMIT}" /></td>
-</tr>
-<tr>
-	<td><h4>{L_SAVEBOX_LIMITS}</h4></td>
-	<td><input class="post" type="text" maxlength="4" size="4" name="max_savebox_privmsgs" value="{SAVEBOX_LIMIT}" /></td>
-</tr>
-<tr>
 	<th colspan="2">{L_ABILITIES_SETTINGS}</th>
 </tr>
 <tr>

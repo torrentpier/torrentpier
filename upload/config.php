@@ -55,8 +55,8 @@ $domain_name = (!empty($_SERVER['SERVER_NAME'])) ? $_SERVER['SERVER_NAME'] : $do
 
 // Increase number of revision after update
 $bb_cfg['tp_version'] = '2.5 (unstable)';
-$bb_cfg['tp_release_date'] = '29-01-2014';
-$bb_cfg['tp_release_state'] = 'R572';
+$bb_cfg['tp_release_date'] = '30-01-2014';
+$bb_cfg['tp_release_state'] = 'R573';
 
 // Database
 $charset  = 'utf8';
@@ -69,8 +69,20 @@ $bb_cfg['db']['db1'] = array('localhost', 'dbase', 'user', 'pass', $charset, $pc
 //$bb_cfg['db']['db3'] = array('localhost3', 'dbase3', 'user2', 'pass3', $charset, $pconnect);
 
 $bb_cfg['db_alias'] = array(
-//	'alias'        => 'srv_name'
-	'cap'          => 'db1',  // BB_CAPTCHA
+//	'alias'  => 'srv_name'
+#	db1
+	'log'    => 'db1',  // BB_LOG
+	'search' => 'db1',  // BB_TOPIC_SEARCH
+	'sres'   => 'db1',  // BB_BT_USER_SETTINGS, BB_SEARCH_RESULTS
+	'u_ses'  => 'db1',  // BB_USER_SES, BB_USER_LASTVISIT
+#	db2
+	'dls'    => 'db1',  // BB_BT_DLS_*
+	'ip'     => 'db1',  // BB_POSTS_IP
+	'ut'     => 'db1',  // BB_TOPICS_USER_POSTED
+#	db3
+	'cap'    => 'db1',  // BB_CAPTCHA
+	'pm'     => 'db1',  // BB_PRIVMSGS, BB_PRIVMSGS_TEXT
+	'pt'     => 'db1',  // BB_POSTS_TEXT
 );
 
 // Cache
@@ -104,9 +116,9 @@ $bb_cfg['cache']['engines'] = array(
 $bb_cfg['datastore_type'] = 'filecache';
 
 // Server
-$bb_cfg['server_name'] = $domain_name;              // The domain name from which this board runs
-$bb_cfg['server_port'] = (!empty($_SERVER['SERVER_PORT'])) ? $_SERVER['SERVER_PORT'] : 80;                       // The port your server is running on
-$bb_cfg['script_path'] = '/';                       // The path where FORUM is located relative to the domain name
+$bb_cfg['server_name'] = $domain_name;                                                     // The domain name from which this board runs
+$bb_cfg['server_port'] = (!empty($_SERVER['SERVER_PORT'])) ? $_SERVER['SERVER_PORT'] : 80; // The port your server is running on
+$bb_cfg['script_path'] = '/';                                                              // The path where FORUM is located relative to the domain name
 
 // Increase number after changing js or css
 $bb_cfg['js_ver']             = 1;
@@ -223,10 +235,10 @@ define('TEMPLATES_DIR', BB_PATH .'/templates/');
 define('TRIGGERS_DIR',  BB_PATH .'/triggers/' );
 
 // URLs
-$bb_cfg['ajax_url']    = 'ajax.php';    #  "http://{$_SERVER['SERVER_NAME']}/ajax.php"
+$bb_cfg['ajax_url']    = 'ajax.php';     #  "http://{$_SERVER['SERVER_NAME']}/ajax.php"
 $bb_cfg['login_url']   = 'login.php';    #  "http://{$domain_name}/login.php"
-$bb_cfg['pm_url']      = 'privmsg.php';  #  "http://{$domain_name}/privmsg.php"
 $bb_cfg['posting_url'] = 'posting.php';  #  "http://{$domain_name}/posting.php"
+$bb_cfg['pm_url']      = 'privmsg.php';  #  "http://{$domain_name}/privmsg.php"
 
 // Language
 setlocale(LC_ALL, 'ru_RU.UTF-8');
@@ -281,7 +293,7 @@ $bb_cfg['topic_tpl']['overall_header'] = TEMPLATES_DIR .'topic_tpl_overall_heade
 $bb_cfg['topic_tpl']['rules_video']    = TEMPLATES_DIR .'topic_tpl_rules_video.html';
 
 // Cookie
-$bb_cfg['cookie_domain'] = ($domain_name != $_SERVER['SERVER_ADDR']) ? ".$domain_name" : '';      # '.yourdomain.com'
+$bb_cfg['cookie_domain'] = ($domain_name != $_SERVER['SERVER_ADDR']) ? ".$domain_name" : ''; # '.yourdomain.com'
 $bb_cfg['cookie_secure'] = (!empty($_SERVER['HTTPS']) ? 1 : 0); # 0
 $bb_cfg['cookie_prefix'] = 'bb_';                  # 'bb_'
 
@@ -459,6 +471,14 @@ $bb_cfg['spam_filter_file_path']      = ''; //BB_PATH .'/misc/spam_filter_words.
 // Posting
 $bb_cfg['prevent_multiposting']  = true;           // replace "reply" with "edit last msg" if user (not admin or mod) is last topic poster
 $bb_cfg['max_smilies']           = 10;             // Максимальное число смайлов в посте (0 - без ограничения)
+
+// PM
+$bb_cfg['privmsg_disable']      = false;           // отключить систему личных сообщений на форуме
+$bb_cfg['max_outgoing_pm_cnt']  = 10;              // ограничение на кол. одновременных исходящих лс (для замедления рассылки спама)
+$bb_cfg['max_inbox_privmsgs']   = 200;
+$bb_cfg['max_savebox_privmsgs'] = 20;
+$bb_cfg['max_sentbox_privmsgs'] = 50;
+$bb_cfg['pm_days_keep']         = 180;               // время хранения ЛС
 
 // Actions log
 $bb_cfg['log_days_keep'] = 90;
