@@ -290,13 +290,13 @@ $lang['SEARCH_IN_TOPIC'] = 'search in topic...';
 $lang['HIDE_IN_TOPIC'] = 'Hide';
 
 $lang['SHOW'] = 'Show';
-$lang['AVATARS'] = 'avatars';
-$lang['RANK_IMAGES'] = 'rank images';
-$lang['POST_IMAGES'] = 'post images';
-$lang['SIGNATURES'] = 'signatures';
+$lang['AVATARS'] = 'Avatars';
+$lang['RANK_IMAGES'] = 'Rank images';
+$lang['POST_IMAGES'] = 'Post images';
+$lang['SIGNATURES'] = 'Signatures';
 $lang['SPOILER'] = 'Spoiler';
-$lang['SHOW_OPENED'] = 'show opened';
-$lang['DOWNLOAD_PIC'] = 'downloadable pictures';
+$lang['SHOW_OPENED'] = 'Show opened';
+$lang['DOWNLOAD_PIC'] = 'Downloadable pictures';
 
 $lang['MODERATE_TOPIC'] = 'Moderate this topic';
 $lang['SELECT_POSTS_PER_PAGE'] = 'posts per page';

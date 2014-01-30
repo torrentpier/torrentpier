@@ -279,10 +279,10 @@ if ($bb_cfg['topic_notify_enabled'])
 						message_die(GENERAL_ERROR, "Could not delete topic watch information", '', __LINE__, __FILE__, $sql);
 					}
 				}
-				
+
 				set_die_append_msg($forum_id, $topic_id);
 				bb_die($lang['NO_LONGER_WATCHING']);
-				
+
 			}
 			else
 			{
@@ -319,7 +319,7 @@ if ($bb_cfg['topic_notify_enabled'])
 
 				set_die_append_msg($forum_id, $topic_id);
 				bb_die($lang['YOU_ARE_WATCHING']);
-				
+
 			}
 			else
 			{
@@ -580,6 +580,11 @@ $sel_post_order_ary = array(
 	$lang['NEWEST_FIRST'] => 'desc',
 );
 
+$topic_has_poll = ($t_data['topic_vote'] && !IS_GUEST);
+$poll_time_expired = ($t_data['topic_time'] < TIMENOW - $bb_cfg['poll_max_days']*86400);
+$can_manage_poll = ($t_data['topic_poster'] == $userdata['user_id'] || $is_auth['auth_mod']);
+$can_add_poll = ($can_manage_poll && !$topic_has_poll && !$poll_time_expired && !$start);
+
 //
 // Send vars to template
 //
@@ -632,6 +637,11 @@ $template->assign_vars(array(
 	'U_POST_REPLY_TOPIC'  => $reply_topic_url,
 	'U_SEARCH_SELF'       => "search.php?uid={$userdata['user_id']}&t=$topic_id&dm=1",
 
+	'TOPIC_HAS_POLL'      => $topic_has_poll,
+	'POLL_IS_EDITABLE'    => (!$poll_time_expired),
+	'POLL_IS_FINISHED'    => ($t_data['topic_vote'] == POLL_FINISHED),
+	'CAN_MANAGE_POLL'     => $can_manage_poll,
+	'CAN_ADD_POLL'        => $can_add_poll,
 ));
 
 // Does this topic contain DL-List?
@@ -641,134 +651,6 @@ $template->assign_vars(array(
 	'DL_LIST_HREF'    => TOPIC_URL ."$topic_id&amp;dl=names&amp;spmode=full",
 ));
 require(INC_DIR .'torrent_show_dl_list.php');
-
-//
-// Does this topic contain a poll?
-//
-if ( !empty($t_data['topic_vote']) )
-{
-	$s_hidden_fields = '';
-
-	$sql = "SELECT vd.vote_id, vd.vote_text, vd.vote_start, vd.vote_length, vr.vote_option_id, vr.vote_option_text, vr.vote_result
-		FROM " . BB_VOTE_DESC . " vd, " . BB_VOTE_RESULTS . " vr
-		WHERE vd.topic_id = $topic_id
-			AND vr.vote_id = vd.vote_id
-		ORDER BY vr.vote_option_id ASC";
-	if ( !($result = DB()->sql_query($sql)) )
-	{
-		message_die(GENERAL_ERROR, "Could not obtain vote data for this topic", '', __LINE__, __FILE__, $sql);
-	}
-
-	if ( $vote_info = DB()->sql_fetchrowset($result) )
-	{
-		DB()->sql_freeresult($result);
-		$vote_options = count($vote_info);
-
-		$vote_id = $vote_info[0]['vote_id'];
-		$vote_title = $vote_info[0]['vote_text'];
-
-		$sql = "SELECT vote_id
-			FROM " . BB_VOTE_USERS . "
-			WHERE vote_id = $vote_id
-				AND vote_user_id = " . intval($userdata['user_id']);
-		if ( !($result = DB()->sql_query($sql)) )
-		{
-			message_die(GENERAL_ERROR, "Could not obtain user vote data for this topic", '', __LINE__, __FILE__, $sql);
-		}
-
-		$user_voted = ( $row = DB()->sql_fetchrow($result) ) ? TRUE : 0;
-		DB()->sql_freeresult($result);
-
-		if ( isset($_GET['vote']) || isset($_POST['vote']) )
-		{
-			$view_result = ( ( ( isset($_GET['vote']) ) ? $_GET['vote'] : $_POST['vote'] ) == 'viewresult' ) ? TRUE : 0;
-		}
-		else
-		{
-			$view_result = 0;
-		}
-
-		$poll_expired = ( $vote_info[0]['vote_length'] ) ? ( ( $vote_info[0]['vote_start'] + $vote_info[0]['vote_length'] < TIMENOW ) ? TRUE : 0 ) : 0;
-
-		if ( $user_voted || $view_result || $poll_expired || !$is_auth['auth_vote'] || $t_data['topic_status'] == TOPIC_LOCKED )
-		{
-			$vote_results_sum = 0;
-
-			for($i = 0; $i < $vote_options; $i++)
-			{
-				$vote_results_sum += $vote_info[$i]['vote_result'];
-			}
-
-			$vote_graphic = 0;
-			$vote_graphic_max = count($images['voting_graphic']);
-
-			for($i = 0; $i < $vote_options; $i++)
-			{
-				$vote_percent = ( $vote_results_sum > 0 ) ? $vote_info[$i]['vote_result'] / $vote_results_sum : 0;
-				$vote_graphic_length = round($vote_percent * $bb_cfg['vote_graphic_length']);
-
-				$vote_graphic_img = $images['voting_graphic'][$vote_graphic];
-				$vote_graphic = ($vote_graphic < $vote_graphic_max - 1) ? $vote_graphic + 1 : 0;
-
-				if ( count($orig_word) )
-				{
-					$vote_info[$i]['vote_option_text'] = preg_replace($orig_word, $replacement_word, $vote_info[$i]['vote_option_text']);
-				}
-
-				$template->assign_block_vars("poll_option", array(
-					'POLL_OPTION_CAPTION' => $vote_info[$i]['vote_option_text'],
-					'POLL_OPTION_RESULT' => $vote_info[$i]['vote_result'],
-					'POLL_OPTION_PERCENT' => sprintf("%.1d%%", ($vote_percent * 100)),
-
-					'POLL_OPTION_IMG' => $vote_graphic_img,
-					'POLL_OPTION_IMG_WIDTH' => $vote_graphic_length)
-				);
-			}
-
-			$template->assign_vars(array(
-				'TPL_POLL_RESULT' => true,
-				'TOTAL_VOTES' => $vote_results_sum,
-			));
-		}
-		else
-		{
-			for($i = 0; $i < $vote_options; $i++)
-			{
-				if ( count($orig_word) )
-				{
-					$vote_info[$i]['vote_option_text'] = preg_replace($orig_word, $replacement_word, $vote_info[$i]['vote_option_text']);
-				}
-
-				$template->assign_block_vars("poll_option", array(
-					'POLL_OPTION_ID' => $vote_info[$i]['vote_option_id'],
-					'POLL_OPTION_CAPTION' => $vote_info[$i]['vote_option_text'])
-				);
-			}
-
-			$template->assign_vars(array(
-				'TPL_POLL_BALLOT' => true,
-				'U_VIEW_RESULTS' => TOPIC_URL ."$topic_id&amp;vote=viewresult",
-			));
-
-			$s_hidden_fields = '<input type="hidden" name="topic_id" value="' . $topic_id . '" /><input type="hidden" name="mode" value="vote" />';
-		}
-
-		if ( count($orig_word) )
-		{
-			$vote_title = preg_replace($orig_word, $replacement_word, $vote_title);
-		}
-
-		$s_hidden_fields .= '<input type="hidden" name="sid" value="' . $userdata['session_id'] . '" />';
-
-		$template->assign_vars(array(
-			'TOPIC_HAS_POLL' => true,
-			'POLL_QUESTION'  => $vote_title,
-
-			'S_HIDDEN_FIELDS' => $s_hidden_fields,
-			'S_POLL_ACTION' => POSTING_URL . "?mode=vote&amp;t=$topic_id",
-		));
-	}
-}
 
 if ($t_data['topic_attachment'])
 {
@@ -788,6 +670,29 @@ $sql = "INSERT INTO ". BUF_TOPIC_VIEW ."
 if ( !DB()->sql_query($sql) )
 {
 	message_die(GENERAL_ERROR, "Could not update topic views.", '', __LINE__, __FILE__, $sql);
+}
+
+//
+// Does this topic contain a poll?
+//
+if ($topic_has_poll)
+{
+	$poll_votes_js = CACHE('bb_poll_data')->get($topic_id, 'get_poll_data_items_js', 'poll_');
+
+	if (!$poll_votes_js)
+	{
+		$template->assign_vars(array(
+			'TOPIC_HAS_POLL' => false,
+		));
+		bb_log(join("\t", array(date('m-d H:i:s'), $topic_id, "\n")), 'poll_err');
+	}
+	else
+	{
+		$template->assign_vars(array(
+			'SHOW_VOTE_BTN' => poll_is_active($t_data),
+			'POLL_VOTES_JS' => $poll_votes_js,
+		));
+	}
 }
 
 $prev_post_time = $max_post_time = 0;

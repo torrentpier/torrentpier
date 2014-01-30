@@ -290,13 +290,13 @@ $lang['SEARCH_IN_TOPIC'] = 'Искать в теме…';
 $lang['HIDE_IN_TOPIC'] = 'Не показывать';
 
 $lang['SHOW'] = 'Показывать';
-$lang['AVATARS'] = 'аватары';
-$lang['RANK_IMAGES'] = 'картинки званий';
-$lang['POST_IMAGES'] = 'картинки в сообщениях';
-$lang['SIGNATURES'] = 'подписи';
+$lang['AVATARS'] = 'Аватары';
+$lang['RANK_IMAGES'] = 'Картинки званий';
+$lang['POST_IMAGES'] = 'Картинки в сообщениях';
+$lang['SIGNATURES'] = 'Подписи';
 $lang['SPOILER'] = 'Спойлер';
-$lang['SHOW_OPENED'] = 'спойлер открытым';
-$lang['DOWNLOAD_PIC'] = 'загружаемые картинки';
+$lang['SHOW_OPENED'] = 'Спойлер открытым';
+$lang['DOWNLOAD_PIC'] = 'Загружаемые картинки';
 
 $lang['MODERATE_TOPIC'] = 'Модерировать этот топик';
 $lang['SELECT_POSTS_PER_PAGE'] = 'сообщ. на страницу';

@@ -100,6 +100,7 @@ define('COOKIE_DATA',  $c .'data');
 define('COOKIE_FORUM', $c .'f');
 define('COOKIE_MARK',  $c .'mark_read');
 define('COOKIE_TOPIC', $c .'t');
+define('COOKIE_PM',    $c .'pm');
 unset($c);
 
 define('COOKIE_SESSION', 0);
@@ -261,6 +262,10 @@ define('POST_REPORT_REASON_URL', 'r');
 define('MALE',          1);
 define('FEMALE',        2);
 
+// Poll
+# 1 - обычный опрос
+define('POLL_FINISHED', 2);
+
 // Torrents     (reserved: -1)
 define('TOR_NOT_APPROVED',  0);   // не проверено
 define('TOR_CLOSED',        1);   // закрыто
@@ -355,6 +360,8 @@ define('BB_EXTENSIONS',           'bb_extensions');
 define('BB_FORUMS',               'bb_forums');
 define('BB_GROUPS',               'bb_groups');
 define('BB_LOG',                  'bb_log');
+define('BB_POLL_USERS',           'bb_poll_users');
+define('BB_POLL_VOTES',           'bb_poll_votes');
 define('BB_POSTS_SEARCH',         'bb_posts_search');
 define('BB_POSTS',                'bb_posts');
 define('BB_POSTS_TEXT',           'bb_posts_text');
@@ -378,9 +385,6 @@ define('BB_TOPICS',               'bb_topics');
 define('BB_TOPICS_WATCH',         'bb_topics_watch');
 define('BB_USER_GROUP',           'bb_user_group');
 define('BB_USERS',                'bb_users');
-define('BB_VOTE_DESC',            'bb_vote_desc');
-define('BB_VOTE_RESULTS',         'bb_vote_results');
-define('BB_VOTE_USERS',           'bb_vote_voters');
 define('BB_WORDS',                'bb_words');
 
 define('TORRENT_EXT', 'torrent');

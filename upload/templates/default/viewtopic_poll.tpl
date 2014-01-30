@@ -1,51 +1,151 @@
-<div id="poll" class="row5" style="padding: 0 10%;">
 
-<!-- IF TPL_POLL_BALLOT -->
-<!--========================================================================-->
+<script type="text/javascript">
+var bb_poll = {};
+bb_poll.data        = {POLL_VOTES_JS};  // [["заголовок", "result"], ...]
+bb_poll.title       = '';
+bb_poll.votes_data  = {};
+bb_poll.votes_sum   = 0;
+bb_poll.max_img_len = 205;   // 100% = this length
 
-	<form method="POST" action="{S_POLL_ACTION}">
-	{S_HIDDEN_FIELDS}
+$(function(){
+	$.each(bb_poll.data, function(vote_id, vote_data){
+		var vote_text   = vote_data[0];
+		var vote_result = parseInt(vote_data[1]);
 
-		<p class="mrg_12 tCenter"><b>{POLL_QUESTION}</b></p>
+		if (vote_id == 0) {
+			bb_poll.title = vote_text;
+		}
+		else {
+			bb_poll.votes_sum += vote_result;
+			bb_poll.votes_data[vote_id] = [vote_text, vote_result];
+		}
+	});
 
-		<table cellpadding="0" class="borderless bCenter">
-		<!-- BEGIN poll_option -->
-		<tr>
-			<td><input type="radio" name="vote_id" id="vote_{poll_option.POLL_OPTION_ID}" value="{poll_option.POLL_OPTION_ID}" /></td>
-			<td><label for="vote_{poll_option.POLL_OPTION_ID}" class="wrap">{poll_option.POLL_OPTION_CAPTION}</label></td>
-		</tr>
-		<!-- END poll_option -->
-		</table>
+	$('#poll-title').html(bb_poll.title);
+	$('#votes-sum-val').text(bb_poll.votes_sum);
 
-		<p class="mrg_6 tCenter"><input type="submit" name="submit" value="{L_SUBMIT_VOTE}" class="liteoption" /></p>
+	$.each(bb_poll.votes_data, function(vote_id, vote_data){
+		var vote_caption   = vote_data[0];
+		var vote_result    = parseInt(vote_data[1]);
+		var vote_percent   = (bb_poll.votes_sum) ? Math.round(vote_result / bb_poll.votes_sum * 100) : 0;
+		var vote_img_width = Math.round(vote_percent * bb_poll.max_img_len / 100);
 
-		<p class="small mrg_8 tCenter"><b><a href="{U_VIEW_RESULTS}" class="small">{L_VIEW_RESULTS}</a></b></p>
+		$('#poll-results-tpl tbody')
+			.clone()
+			.find('span.poll-vote-caption').html(vote_caption).end()
+			.find('img.poll-vote-img').css({ width: vote_img_width }).end()
+			.find('span.poll-vote-percent').text(vote_percent+'%').end()
+			.find('span.poll-vote-result').text(vote_result).end()
+			.appendTo('#poll-results-block')
+		;
+	});
 
-	</form>
+	$('#poll').show();
+});
 
-<!--========================================================================-->
-<!-- ENDIF / TPL_POLL_BALLOT -->
+function build_votes ()
+{
+	$.each(bb_poll.votes_data, function(vote_id, vote_data){
+		var vote_caption = vote_data[0];
+		var vote_el_id   = 'vote-'+ vote_id;
 
-<!-- IF TPL_POLL_RESULT -->
-<!--========================================================================-->
+		$('#poll-results-block').hide();
+		$('#poll-votes-tpl tbody')
+			.clone()
+			.find('input').val(vote_id).attr({id: vote_el_id}).end()
+			.find('label').html(vote_caption).attr({'for': vote_el_id}).end()
+			.appendTo('#poll-votes-block')
+		;
+	});
+	$('#votes-sum-block, #vote-btn-a, #poll-manage').hide();
+	$('#vote-btn-input').show();
+}
 
-		<p class="mrg_12 tCenter"><b>{POLL_QUESTION}</b></p>
+function submit_vote ()
+{
+	var $voted_id = $('input.vote-inp:checked');
 
-		<table class="borderless bCenter">
-		<!-- BEGIN poll_option -->
-		<tr>
-			<td class="tLeft">{poll_option.POLL_OPTION_CAPTION}</td>
-			<td>&nbsp;</td>
-			<td class="nowrap"><img src="{IMG}vote_lcap.gif" width="4" alt="" height="12" /><img src="{poll_option.POLL_OPTION_IMG}" width="{poll_option.POLL_OPTION_IMG_WIDTH}" height="12" alt="{poll_option.POLL_OPTION_PERCENT}" /><img src="{IMG}vote_rcap.gif" width="4" alt="" height="12" /></td>
-			<td class="nowrap tRight"><b>&nbsp;{poll_option.POLL_OPTION_PERCENT}&nbsp;</b></td>
-			<td class="nowrap tCenter">[ {poll_option.POLL_OPTION_RESULT} ]</td>
-		</tr>
-		<!-- END poll_option -->
-		</table>
+	if ($voted_id.length == 0) {
+		alert('Вы не выбрали, за что голосуете');
+	}
+	else {
+		$('#poll-mode').val('poll_vote');
+		$voted_id.clone().appendTo('#poll-form');
+		$('#vote-id').val( $voted_id.val() );
+		$('#poll-submit-btn').click();
+	}
+}
 
-		<p class="mrg_8 tCenter"><b>{L_TOTAL_VOTES} : {TOTAL_VOTES}</b></p>
+function build_poll_edit_form ()
+{
+	$('#poll').empty().append( $('#poll-edit-tpl').contents() )
+	$('#poll-legend').html('Изменить опрос');
+	$('#poll-edit-submit-btn').click(function(){
+		return poll_manage('poll_edit', 'Изменить опрос (старые результаты будут удалены)?');
+	});
 
-<!--========================================================================-->
-<!-- ENDIF / TPL_POLL_RESULT -->
+	$('#poll-caption-inp').val( html2text(bb_poll.title) );
 
+	var votes_text = [];
+	$.each(bb_poll.votes_data, function(vote_id, vote_data){
+		votes_text.push( html2text(vote_data[0]) );
+	});
+	$('#poll-votes-inp').val( votes_text.join('\n') );
+
+	return false;
+}
+
+function html2text (str)
+{
+	return $('<span></span>').html(str).text();
+}
+</script>
+
+<table id="poll-votes-tpl" style="display: none;">
+<tbody>
+<tr>
+	<td><input type="radio" name="vote_id" class="vote-inp" value="" /></td>
+	<td><label class="wrap"></label></td>
+</tr>
+</tbody>
+</table>
+
+<table id="poll-results-tpl" style="display: none;">
+<tbody>
+<tr>
+	<td class="tLeft"><span class="poll-vote-caption"></span></td>
+	<td>&nbsp;</td>
+	<td class="nowrap"><img src="{IMG}/vote_lcap.gif" width="4" height="12" alt="" /><img src="{IMG}/voting_bar.gif" class="poll-vote-img" width="1" height="12" alt="" /><img src="{IMG}/vote_rcap.gif" width="4" height="12" alt="" /></td>
+	<td class="nowrap tRight bold">&nbsp;<span class="poll-vote-percent"></span>&nbsp;</td>
+	<td class="nowrap tCenter">[ <span class="poll-vote-result"></span> ]</td>
+</tr>
+</tbody>
+</table>
+
+<div class="mrg_12 tCenter"><b id="poll-title"></b></div>
+
+<table id="poll-results-block" class="borderless bCenter"></table>
+<table id="poll-votes-block" class="borderless bCenter"></table>
+
+<!-- IF SHOW_VOTE_BTN -->
+<div id="vote-btn-a" class="mrg_8 tCenter">[ <a href="#" onclick="build_votes(); return false;" class="gen"><b>{L_SUBMIT_VOTE}</b></a> ]</div>
+<div id="vote-btn-input" class="mrg_6 tCenter" style="display: none;"><input type="button" onclick="submit_vote(); return false;" value="{L_SUBMIT_VOTE}" class="bold" /></div>
+<!-- ELSE -->
+<div class="mrg_8 tCenter">[ <b>Опрос завершён</b> ]</div>
+<!-- ENDIF -->
+
+<div id="votes-sum-block" class="mrg_8 tCenter">Всего проголосовало: <span id="votes-sum-val"></span><b></b></div>
+
+<!-- IF CAN_MANAGE_POLL -->
+<div id="poll-manage" class="mrg_8 tCenter">
+[ <a href="#" onclick="return poll_manage('poll_delete', '{L_CONFIRM_DELETE_POLL}');" class="med">{L_DELETE_POLL}</a> ]&nbsp;&nbsp;
+	<!-- IF POLL_IS_EDITABLE -->
+	[ <a href="#" onclick="return build_poll_edit_form();" class="med">{L_EDIT}</a> ]&nbsp;&nbsp;
+		<!-- IF POLL_IS_FINISHED -->
+		[ <a href="#" onclick="return poll_manage('poll_start', 'Включить опрос?');" class="med">Включить опрос</a> ]&nbsp;&nbsp;
+		<!-- ELSE -->
+		[ <a href="#" onclick="return poll_manage('poll_finish', 'Завершить опрос?');" class="med">Завершить опрос</a> ]&nbsp;&nbsp;
+		<!-- ENDIF -->
+	<!-- ENDIF -->
 </div>
+<!-- ENDIF -->

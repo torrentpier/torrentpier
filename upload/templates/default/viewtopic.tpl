@@ -178,7 +178,64 @@ ajax.callback.post_mod_comment = function(data) {
 
 <!-- IF SHOW_DL_LIST || SHOW_TOR_ACT --><!-- INCLUDE viewtopic_torrent.tpl --><!-- ENDIF -->
 
+<!-- IF TOPIC_HAS_POLL or CAN_MANAGE_POLL -->
+<form id="poll-form" method="post" action="poll.php" style="display: none;">
+<input id="poll-mode" type="hidden" name="mode" value="" />
+<input type="hidden" name="topic_id" value="{TOPIC_ID}" />
+<input type="hidden" name="{TOPIC_HASH}" value="1" />
+<input type="hidden" name="start" value="{START}" />
+<input type="hidden" name="forum_id" value="{FORUM_ID}" />
+<input id="vote-id" type="hidden" name="vote_id" value="-1" />
+<input id="poll-submit-btn" type="submit" name="submit" value="1" />
+<input id="poll-caption-val" name="poll_caption" type="hidden" value="" />
+<textarea id="poll-votes-val" name="poll_votes" rows="10" cols="10"></textarea>
+</form>
+<!-- ENDIF -->
+<!-- IF CAN_MANAGE_POLL -->
+<script type="text/javascript">
+// заполняет #poll-form и отправляет запрос
+function poll_manage (mode, confirm_msg)
+{
+	if (confirm_msg != null && !window.confirm( confirm_msg )) {
+		return false;
+	}
+	$('#poll-mode').val(mode);
+	$('#poll-caption-val').val( $('#poll-caption-inp').val() );
+	$('#poll-votes-val').val( $('#poll-votes-inp').val() );
+	$('#poll-submit-btn').click();
+	return false;
+}
+
+function build_poll_add_form (src_el)
+{
+	$('#poll').empty().append( $('#poll-edit-tpl').contents() ).show();
+	$('#poll-legend').html('Добавить опрос');
+	$('#poll-edit-submit-btn').click(function(){
+		return poll_manage('poll_add');
+	});
+	$(src_el).remove();
+	return false;
+}
+</script>
+<div id="poll-edit-tpl" style="display: none;">
+	<table class="med bCenter"><tr><td>
+	<fieldset style="padding: 0 8px;">
+	<legend id="poll-legend"></legend>
+		<div style="margin-top: 4px;">заголовок опроса:</div>
+		<input id="poll-caption-inp" name="poll_caption" type="text" value="" class="bold" style="width: 550px;" />
+		<div class="med" style="margin-top: 4px;">варианты ответа:</div>
+		<textarea id="poll-votes-inp" rows="8" cols="10" wrap="off" class="gen" style="width: 550px;"></textarea>
+		<div class="med mrg_4"><i>каждая строка соответствует одному варианту ответа (максимум: {$bb_cfg['max_poll_options']} вариантов)</i></div>
+		<div class="mrg_8 tCenter"><input id="poll-edit-submit-btn" type="button" value="Отправить" class="bold" style="width: 100px;" /></div>
+	</fieldset>
+	</td></tr></table>
+</div>
+<!-- ENDIF -->
+<!-- IF TOPIC_HAS_POLL or CAN_ADD_POLL -->
+<div id="poll" class="row5" style="padding: 0 10%; display: none;">
 <!-- IF TOPIC_HAS_POLL --><!-- INCLUDE viewtopic_poll.tpl --><!-- ENDIF -->
+</div>
+<!-- ENDIF -->
 
 <table class="w100 border bw_TRL" cellpadding="0" cellspacing="0">
 <tr>
@@ -337,7 +394,7 @@ ajax.callback.post_mod_comment = function(data) {
 		<!-- IF postrow.POSTER_JOINED --><p class="joined" title="{postrow.POSTER_JOINED_DATE}"><em>{L_LONGEVITY}:</em> {postrow.POSTER_JOINED}</p><!-- ENDIF -->
 		<!-- IF postrow.POSTER_POSTS --><p class="posts"><em>{L_POSTS}:</em> {postrow.POSTER_POSTS}</p><!-- ENDIF -->
 		<!-- IF postrow.POSTER_FROM --><p class="from"><em>{L_LOCATION}:</em> {postrow.POSTER_FROM}</p><!-- ENDIF -->
-		
+
 		<!-- IF postrow.POSTER_BIRTHDAY --><p class="birthday">{postrow.POSTER_BIRTHDAY}</p><!-- ENDIF -->
 	<!-- ENDIF -->
 
@@ -359,6 +416,7 @@ ajax.callback.post_mod_comment = function(data) {
 
 			<p style="float: right;<!-- IF TEXT_BUTTONS --> padding: 3px 2px 4px;<!-- ELSE --> padding: 1px 6px 2px;<!-- ENDIF -->" class="post_btn_1">
 				<!-- IF AUTH_MOD --><a class="txtb menu-root mc_b" href="#mc_{postrow.POST_ID}">{MC_IMG}</a>{POST_BTN_SPACER}<!-- ENDIF -->
+				<!-- IF postrow.IS_FIRST_POST and CAN_ADD_POLL --><a href="#" onclick="return build_poll_add_form(this);" class="txtb">{L_TOPIC_POLL}</a>&nbsp;<!-- ENDIF -->
 				<!-- IF postrow.QUOTE --><a class="txtb" href="<!-- IF $bb_cfg['use_ajax_posts'] -->" onclick="ajax.exec({ action: 'posts', post_id: {postrow.POST_ID}, type: 'reply'}); return false;<!-- ELSE -->{QUOTE_URL}{postrow.POST_ID}<!-- ENDIF -->">{QUOTE_IMG}</a>{POST_BTN_SPACER}<!-- ENDIF -->
 				<!-- IF postrow.EDIT --><a class="txtb" href="<!-- IF $bb_cfg['use_ajax_posts'] -->" onclick="edit_post({postrow.POST_ID}, 'edit'); return false;<!-- ELSE -->{EDIT_POST_URL}{postrow.POST_ID}<!-- ENDIF -->">{EDIT_POST_IMG}</a>{POST_BTN_SPACER}<!-- ENDIF -->
 				<!-- IF postrow.DELETE --><a class="txtb" href="<!-- IF $bb_cfg['use_ajax_posts'] -->" onclick="ajax.exec({ action: 'posts', post_id: {postrow.POST_ID}, type: 'delete'}); return false;<!-- ELSE -->{DELETE_POST_URL}{postrow.POST_ID}<!-- ENDIF -->">{DELETE_POST_IMG}</a>{POST_BTN_SPACER}<!-- ENDIF -->

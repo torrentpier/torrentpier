@@ -56,7 +56,7 @@ $domain_name = (!empty($_SERVER['SERVER_NAME'])) ? $_SERVER['SERVER_NAME'] : $do
 // Increase number of revision after update
 $bb_cfg['tp_version'] = '2.5 (unstable)';
 $bb_cfg['tp_release_date'] = '30-01-2014';
-$bb_cfg['tp_release_state'] = 'R574';
+$bb_cfg['tp_release_state'] = 'R575';
 
 // Database
 $charset  = 'utf8';
@@ -518,6 +518,7 @@ $bb_cfg['use_word_censor'] = true;
 
 $bb_cfg['last_visit_date_format'] = 'd-M H:i';
 $bb_cfg['last_post_date_format']  = 'd-M-y H:i';
+$bb_cfg['poll_max_days']         = 180;            // сколько дней с момента создания темы опрос будет активным
 
 $bb_cfg['allow_change'] = array(
 	'language'   => true,

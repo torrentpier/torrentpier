@@ -289,11 +289,10 @@ function topic_delete ($mode_or_topic_id, $forum_id = null, $prune_time = 0, $pr
 
 	// Delete votes
 	DB()->query("
-		DELETE vd, vr, vu
+		DELETE pv, pu
 		FROM      ". $tmp_delete_topics ." del
-		LEFT JOIN ". BB_VOTE_DESC    ." vd USING(topic_id)
-		LEFT JOIN ". BB_VOTE_RESULTS ." vr USING(vote_id)
-		LEFT JOIN ". BB_VOTE_USERS   ." vu USING(vote_id)
+		LEFT JOIN ". BB_POLL_VOTES   ." pv USING(topic_id)
+		LEFT JOIN ". BB_POLL_USERS   ." pu USING(vote_id)
 	");
 
 	// Delete attachments (from disk)
@@ -322,7 +321,7 @@ function topic_delete ($mode_or_topic_id, $forum_id = null, $prune_time = 0, $pr
 		}
 	}
 	unset($row, $result);
-	
+
 	// Delete posts, posts_text, attachments (from DB)
     DB()->query("
         DELETE p, pt, ps, a, d, ph
@@ -708,26 +707,6 @@ function post_delete ($mode_or_post_id, $user_id = null, $exclude_first = true)
 	return $deleted_posts_count;
 }
 
-function poll_delete ($topic_id)
-{
-	if (!$topic_csv = get_id_csv($topic_id))
-	{
-		return false;
-	}
-
-	DB()->query("
-		DELETE vd, vr, vu
-		FROM      ". BB_VOTE_DESC    ." vd
-		LEFT JOIN ". BB_VOTE_RESULTS ." vr USING(vote_id)
-		LEFT JOIN ". BB_VOTE_USERS   ." vu USING(vote_id)
-		WHERE vd.topic_id IN($topic_csv)
-	");
-
-	DB()->query("
-		UPDATE ". BB_TOPICS ." SET topic_vote = 0 WHERE topic_id IN($topic_csv)
-	");
-}
-
 function user_delete ($user_id, $delete_posts = false)
 {
 	global $bb_cfg, $log_action;
@@ -792,12 +771,6 @@ function user_delete ($user_id, $delete_posts = false)
 	");
 
 	DB()->query("
-		UPDATE ". BB_VOTE_USERS ." SET
-			vote_user_id = ". DELETED ."
-		WHERE vote_user_id IN($user_csv)
-	");
-
-	DB()->query("
 		UPDATE ". BB_BT_TORRENTS ." SET
 			poster_id = ". DELETED ."
 		WHERE poster_id IN($user_csv)
@@ -814,9 +787,10 @@ function user_delete ($user_id, $delete_posts = false)
 	");
 
 	DB()->query("
-		DELETE u, ban, s, tw, asn
+		DELETE u, ban, pu, s, tw, asn
 		FROM ".      BB_USERS            ." u
 		LEFT JOIN ". BB_BANLIST          ." ban ON(ban.ban_userid = u.user_id)
+		LEFT JOIN ". BB_POLL_USERS       ." pu  ON(pu.user_id = u.user_id)
 		LEFT JOIN ". BB_SESSIONS         ." s   ON(s.session_user_id = u.user_id)
 		LEFT JOIN ". BB_TOPICS_WATCH     ." tw  ON(tw.user_id = u.user_id)
 		LEFT JOIN ". BB_AUTH_ACCESS_SNAP ." asn ON(asn.user_id = u.user_id)

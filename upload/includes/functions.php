@@ -14,6 +14,9 @@ function get_tracks ($type)
 		case 'forum':
 			$c_name = COOKIE_FORUM;
 			break;
+		case 'pm':
+			$c_name = COOKIE_PM;
+			break;
 		default:
 			trigger_error(__FUNCTION__ .": invalid type '$type'", E_USER_ERROR);
 	}
@@ -2395,6 +2398,45 @@ function build_topic_pagination ($url, $replies, $per_page)
 	return $pg;
 }
 
+//
+// Poll
+//
+function get_poll_data_items_js ($topic_id)
+{
+	if (!$topic_id_csv = get_id_csv($topic_id))
+	{
+		return is_array($topic_id) ? array() : false;
+	}
+	$items = array();
+
+	$sql = "
+		SELECT topic_id, vote_id, vote_text, vote_result
+		FROM ". BB_POLL_VOTES ."
+		WHERE topic_id IN($topic_id_csv)
+		ORDER BY topic_id, vote_id
+	";
+	foreach (DB()->fetch_rowset($sql) as $row)
+	{
+		$opt_text_for_js   = htmlCHR($row['vote_text']);
+		$opt_result_for_js = (int) $row['vote_result'];
+
+		$items[$row['topic_id']][$row['vote_id']] = array($opt_text_for_js, $opt_result_for_js);
+	}
+	foreach ($items as $k => $v)
+	{
+		$items[$k] = php2js($v);
+	}
+
+	return is_array($topic_id) ? $items : $items[$topic_id];
+}
+
+function poll_is_active ($t_data)
+{
+	global $bb_cfg;
+	return ($t_data['topic_vote'] == 1 && $t_data['topic_time'] > TIMENOW - $bb_cfg['poll_max_days']*86400);
+}
+
+
 function print_confirmation ($tpl_vars)
 {
 	global $template, $lang;
@@ -2487,6 +2529,66 @@ function bb_json_decode ($data)
 {
 	if (!is_string($data)) trigger_error('invalid argument for '. __FUNCTION__, E_USER_ERROR);
 	return json_decode($data, true);
+}
+
+/**
+ * -- from JsHttpRequest --
+ * Convert a PHP scalar, array or hash to JS scalar/array/hash. This function is
+ * an analog of json_encode(), but it can work with a non-UTF8 input and does not
+ * analyze the passed data. Output format must be fully JSON compatible.
+ *
+ * @param mixed $a   Any structure to convert to JS.
+ * @return string    JavaScript equivalent structure.
+ */
+function php2js ($a = false)
+{
+	if (is_null($a)) return 'null';
+	if ($a === false) return 'false';
+	if ($a === true) return 'true';
+	if (is_scalar($a))
+	{
+		if (is_float($a))
+		{
+			// Always use "." for floats.
+			$a = str_replace(",", ".", strval($a));
+		}
+		// All scalars are converted to strings to avoid indeterminism.
+		// PHP's "1" and 1 are equal for all PHP operators, but
+		// JS's "1" and 1 are not. So if we pass "1" or 1 from the PHP backend,
+		// we should get the same result in the JS frontend (string).
+		// Character replacements for JSON.
+		static $jsonReplaces = array(
+			array("\\", "/", "\n", "\t", "\r", "\b", "\f", '"'),
+			array('\\\\', '\\/', '\\n', '\\t', '\\r', '\\b', '\\f', '\"'),
+		);
+		return '"'. str_replace($jsonReplaces[0], $jsonReplaces[1], $a) .'"';
+	}
+	$isList = true;
+	for ($i = 0, reset($a); $i < count($a); $i++, next($a))
+	{
+		if (key($a) !== $i)
+		{
+			$isList = false;
+			break;
+		}
+	}
+	$result = array();
+	if ($isList)
+	{
+		foreach ($a as $v)
+		{
+			$result[] = php2js($v);
+		}
+		return '[ '. join(', ', $result) .' ]';
+	}
+	else
+	{
+		foreach ($a as $k => $v)
+		{
+			$result[] = php2js($k) .': '. php2js($v);
+		}
+		return '{ '. join(', ', $result) .' }';
+	}
 }
 
 function clean_title ($str, $replace_underscore = false)

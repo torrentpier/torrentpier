@@ -43,6 +43,8 @@ DROP TABLE IF EXISTS `bb_extension_groups`;
 DROP TABLE IF EXISTS `bb_forums`;
 DROP TABLE IF EXISTS `bb_groups`;
 DROP TABLE IF EXISTS `bb_log`;
+DROP TABLE IF EXISTS `bb_poll_users`;
+DROP TABLE IF EXISTS `bb_poll_votes`;
 DROP TABLE IF EXISTS `bb_posts`;
 DROP TABLE IF EXISTS `bb_posts_html`;
 DROP TABLE IF EXISTS `bb_posts_search`;
@@ -65,9 +67,6 @@ DROP TABLE IF EXISTS `bb_topic_templates`;
 DROP TABLE IF EXISTS `bb_topic_tpl`;
 DROP TABLE IF EXISTS `bb_users`;
 DROP TABLE IF EXISTS `bb_user_group`;
-DROP TABLE IF EXISTS `bb_vote_desc`;
-DROP TABLE IF EXISTS `bb_vote_results`;
-DROP TABLE IF EXISTS `bb_vote_voters`;
 DROP TABLE IF EXISTS `bb_words`;
 DROP TABLE IF EXISTS `buf_last_seeder`;
 DROP TABLE IF EXISTS `buf_topic_view`;
@@ -857,6 +856,34 @@ CREATE TABLE IF NOT EXISTS `bb_log` (
 -- --------------------------------------------------------
 
 --
+-- Структура таблицы `bb_poll_users`
+--
+
+CREATE TABLE IF NOT EXISTS `bb_poll_users` (
+  `topic_id` int(10) unsigned NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `vote_ip` varchar(32) NOT NULL,
+  `vote_dt` int(11) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`topic_id`,`user_id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Структура таблицы `bb_poll_votes`
+--
+
+CREATE TABLE IF NOT EXISTS `bb_poll_votes` (
+  `topic_id` int(10) unsigned NOT NULL,
+  `vote_id` tinyint(4) unsigned NOT NULL,
+  `vote_text` varchar(255) NOT NULL,
+  `vote_result` mediumint(8) unsigned NOT NULL,
+  PRIMARY KEY (`topic_id`,`vote_id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
 -- Структура таблицы `bb_posts`
 --
 
@@ -1411,52 +1438,6 @@ CREATE TABLE IF NOT EXISTS `bb_user_group` (
   `user_time` int(11) NOT NULL,
   PRIMARY KEY (`group_id`,`user_id`),
   KEY `user_id` (`user_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
-
--- --------------------------------------------------------
-
---
--- Структура таблицы `bb_vote_desc`
---
-
-CREATE TABLE IF NOT EXISTS `bb_vote_desc` (
-  `vote_id` mediumint(8) unsigned NOT NULL AUTO_INCREMENT,
-  `topic_id` mediumint(8) unsigned NOT NULL DEFAULT '0',
-  `vote_text` text NOT NULL,
-  `vote_start` int(11) NOT NULL DEFAULT '0',
-  `vote_length` int(11) NOT NULL DEFAULT '0',
-  PRIMARY KEY (`vote_id`),
-  KEY `topic_id` (`topic_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
-
--- --------------------------------------------------------
-
---
--- Структура таблицы `bb_vote_results`
---
-
-CREATE TABLE IF NOT EXISTS `bb_vote_results` (
-  `vote_id` mediumint(8) unsigned NOT NULL DEFAULT '0',
-  `vote_option_id` tinyint(4) unsigned NOT NULL DEFAULT '0',
-  `vote_option_text` varchar(255) NOT NULL DEFAULT '',
-  `vote_result` int(11) NOT NULL DEFAULT '0',
-  KEY `vote_option_id` (`vote_option_id`),
-  KEY `vote_id` (`vote_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
-
--- --------------------------------------------------------
-
---
--- Структура таблицы `bb_vote_voters`
---
-
-CREATE TABLE IF NOT EXISTS `bb_vote_voters` (
-  `vote_id` mediumint(8) unsigned NOT NULL DEFAULT '0',
-  `vote_user_id` mediumint(8) NOT NULL DEFAULT '0',
-  `vote_user_ip` char(32) NOT NULL DEFAULT '',
-  KEY `vote_id` (`vote_id`),
-  KEY `vote_user_id` (`vote_user_id`),
-  KEY `vote_user_ip` (`vote_user_ip`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------

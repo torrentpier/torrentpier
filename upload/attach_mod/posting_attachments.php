@@ -257,7 +257,7 @@ class attach_parent
 
 		if (!$submit && $mode == 'editpost' && $auth)
 		{
-			if (!$refresh && !$preview && !$error && !isset($_POST['del_poll_option']))
+			if (!$refresh && !$preview && !$error)
 			{
 				for ($i = 0; $i < sizeof($attachments); $i++)
 				{
@@ -276,7 +276,7 @@ class attach_parent
 
 		$this->num_attachments = sizeof($this->attachment_list);
 
-		if ($submit && $mode != 'vote')
+		if ($submit)
 		{
 			if ($mode == 'newtopic' || $mode == 'reply' || $mode == 'editpost')
 			{
