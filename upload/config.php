@@ -56,7 +56,7 @@ $domain_name = (!empty($_SERVER['SERVER_NAME'])) ? $_SERVER['SERVER_NAME'] : $do
 // Increase number of revision after update
 $bb_cfg['tp_version'] = '2.5 (unstable)';
 $bb_cfg['tp_release_date'] = '30-01-2014';
-$bb_cfg['tp_release_state'] = 'R575';
+$bb_cfg['tp_release_state'] = 'R576';
 
 // Database
 $charset  = 'utf8';
@@ -109,6 +109,7 @@ $bb_cfg['cache']['engines'] = array(
 	'session_cache'  => array('filecache',   array()),
 	'bb_cap_sid'     => array('filecache',   array()),
 	'bb_login_err'   => array('filecache',   array()),
+	'bb_poll_data'   => array('filecache',   array()),
 );
 
 // Datastore
@@ -180,9 +181,9 @@ $bb_cfg['show_tor_info_in_dl_list'] = true;
 $bb_cfg['allow_dl_list_names_mode'] = true;
 
 // Torrents
-$bb_cfg['torrent_sign']   = ''; // e.g. "[yoursite.com]"
-$bb_cfg['torrent_name_style']  = true; // Use torrent name style [yoursite.com].txxx.torrent
-$bb_cfg['tor_help_links'] = '';
+$bb_cfg['torrent_sign']        = "[{$domain_name}]"; // e.g. [yoursite.com]
+$bb_cfg['torrent_name_style']  = true; // use torrent name style [yoursite.com].txxx.torrent
+$bb_cfg['tor_help_links']      = '';
 
 // Сколько дней сохранять торрент зарегистрированным / Days to keep torrent registered, if:
 $bb_cfg['seeder_last_seen_days_keep']  = 0; // сколько дней назад был сид последний раз
@@ -227,12 +228,14 @@ define('DIR_SEPR', DIRECTORY_SEPARATOR);
 define('BB_PATH',       realpath(BB_ROOT)     );  // absolute pathname to the forum root
 define('ADMIN_DIR',     BB_PATH .'/admin/'    );
 define('CACHE_DIR',     BB_PATH .'/cache/'    );
+define('CFG_DIR',       BB_PATH .'/config/'   );
 define('DEV_DIR',       BB_PATH .'/develop/'  );
 define('INC_DIR',       BB_PATH .'/includes/' );
 define('LANG_ROOT_DIR', BB_PATH .'/language/' );
 define('LOG_DIR',       BB_PATH .'/log/'      );
 define('TEMPLATES_DIR', BB_PATH .'/templates/');
 define('TRIGGERS_DIR',  BB_PATH .'/triggers/' );
+define('LOCKS_DIR',     BB_PATH .'/locks/'    );
 
 // URLs
 $bb_cfg['ajax_url']    = 'ajax.php';     #  "http://{$_SERVER['SERVER_NAME']}/ajax.php"
@@ -277,9 +280,6 @@ $bb_cfg['stylesheet'] = 'main.css';
 $bb_cfg['show_sidebar1_on_every_page'] = false;
 $bb_cfg['show_sidebar2_on_every_page'] = false;
 
-$bb_cfg['sidebar1_static_content_path'] = BB_PATH .'/misc/html/sidebar1.html';
-$bb_cfg['sidebar2_static_content_path'] = BB_PATH .'/misc/html/sidebar2.html';
-
 $page_cfg['show_sidebar1'] = array(
 #	BB_SCRIPT => true
 	'index'  => true,
@@ -288,6 +288,9 @@ $page_cfg['show_sidebar2'] = array(
 #	BB_SCRIPT => true
 	'index' => false,
 );
+
+$bb_cfg['sidebar1_static_content_path'] = BB_PATH .'/misc/html/sidebar1.html';
+$bb_cfg['sidebar2_static_content_path'] = BB_PATH .'/misc/html/sidebar2.html';
 
 $bb_cfg['topic_tpl']['overall_header'] = TEMPLATES_DIR .'topic_tpl_overall_header.html';
 $bb_cfg['topic_tpl']['rules_video']    = TEMPLATES_DIR .'topic_tpl_rules_video.html';
@@ -465,7 +468,7 @@ $bb_cfg['max_search_words_per_post']  = 200;
 $bb_cfg['search_min_word_len']        = 3;
 $bb_cfg['search_max_word_len']        = 35;
 $bb_cfg['limit_max_search_results']   = false;
-$bb_cfg['tidy_post']                  = false;
+$bb_cfg['tidy_post']                  = true;
 $bb_cfg['spam_filter_file_path']      = ''; //BB_PATH .'/misc/spam_filter_words.txt';
 
 // Posting
@@ -539,7 +542,6 @@ $bb_cfg['porno_forums_screenshots_topic_id'] = 52267;
 $bb_cfg['trash_forum_id'] = 0;                     // (int)    27
 
 $bb_cfg['first_logon_redirect_url']    = 'index.php';
-$bb_cfg['faq_url']                     = 'faq.php';
 $bb_cfg['terms_and_conditions_url']    = 'index.php';
 
 $bb_cfg['user_agreement_url']          = 'misc.php?do=info&show=user_agreement';

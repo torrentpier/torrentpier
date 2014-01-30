@@ -180,9 +180,6 @@ switch($mode)
 			'AVATAR_GALLERY_PATH' => $new['avatar_gallery_path'],
 			'NO_AVATAR' => $new['no_avatar'],
 			'SMILIES_PATH' => $new['smilies_path'],
-			'INBOX_PRIVMSGS' => $new['max_inbox_privmsgs'],
-			'SENTBOX_PRIVMSGS' => $new['max_sentbox_privmsgs'],
-			'SAVEBOX_PRIVMSGS' => $new['max_savebox_privmsgs'],
 		));
 	break;
 }

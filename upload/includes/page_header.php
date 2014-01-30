@@ -215,7 +215,6 @@ $template->assign_vars(array(
 	'S_LOGIN_ACTION'     		=> LOGIN_URL,
 
 	'U_CUR_DOWNLOADS'    		=> PROFILE_URL . $userdata['user_id'],
-	'U_FAQ'              		=> $bb_cfg['faq_url'],
 	'U_FORUM'            		=> "viewforum.php",
 	'U_GROUP_CP'         		=> "groupcp.php",
 	'U_LOGIN_LOGOUT'     		=> $u_login_logout,

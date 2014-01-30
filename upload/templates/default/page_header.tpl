@@ -402,8 +402,7 @@ if (top != self) {
 			<a href="{U_INDEX}"><b>{L_HOME}</b></a><span style="color:#CDCDCD;">|</span>
 			<a href="{U_TRACKER}"><b>{L_TRACKER}</b></a><span style="color:#CDCDCD;">|</span>
 			<a href="{U_SEARCH}"><b>{L_SEARCH}</b></a><span style="color:#CDCDCD;">|</span>
-			<a href="{U_TERMS}"><b>{L_TERMS}</b></a><span style="color:#CDCDCD;">|</span>
-			<a href="{U_FAQ}"><b style="color: #993300; cursor: help;">{L_FAQ}</b></a><span style="color:#CDCDCD;">|</span>
+			<a href="{U_TERMS}"><b style="color: #993300;">{L_TERMS}</b></a><span style="color:#CDCDCD;">|</span>
 			<a href="{U_GROUP_CP}"><b>{L_USERGROUPS}</b></a><span style="color:#CDCDCD;">|</span>
 			<a href="{U_MEMBERLIST}"><b>{L_MEMBERLIST}</b></a><span style="color:#CDCDCD;">|</span>
 		</td>

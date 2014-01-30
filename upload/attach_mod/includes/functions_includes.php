@@ -1,25 +1,5 @@
 <?php
 
-
-/**
-* Include the FAQ-File (faq.php)
-*/
-function attach_faq_include($lang_file)
-{
-	global $attach_config;
-
-	if (intval($attach_config['disable_mod']))
-	{
-		return;
-	}
-
-	if ($lang_file == 'lang_faq')
-	{
-		$language = attach_mod_get_lang('lang_faq_attach');
-		include(LANG_ROOT_DIR ."lang_$language/lang_faq_attach.php");
-	}
-}
-
 /**
 * Setup Basic Authentication
 */
