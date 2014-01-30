@@ -1916,10 +1916,6 @@ function message_die ($msg_code, $msg_text = '', $msg_title = '', $err_line = ''
 			if (!$msg_title) $msg_title = $lang['INFORMATION'];
 			break;
 
-		case CRITICAL_MESSAGE:
-			if (!$msg_title) $msg_title = $lang['CRITICAL_INFORMATION'];
-			break;
-
 		case GENERAL_ERROR:
 			if (!$msg_text)  $msg_text = $lang['AN_ERROR_OCCURED'];
 			if (!$msg_title) $msg_title = $lang['GENERAL_ERROR'];

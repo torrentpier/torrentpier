@@ -295,7 +295,7 @@ function reports_module_action($reports, $action_name, $action_params = array())
 //
 function report_notify($mode)
 {
-	global $userdata, $bb_cfg;
+	global $user, $userdata, $bb_cfg;
 
 	$num_args = func_num_args();
 	$notify_users = $reports = array();
@@ -550,7 +550,7 @@ function report_notify($mode)
 					}
 
 					$vars = array_merge($vars, array(
-						'REPORT_AUTHOR' => $userdata['username'],
+						'REPORT_AUTHOR' => $user->name,
 						'REPORT_TIME' => bb_date($report['report_time']),
 						'REPORT_REASON' => $report_reason)
 					);
@@ -1067,6 +1067,9 @@ function report_insert($module_id, $report_subject, $report_reason, $report_titl
 		}
 	}
 
+	CACHE('bb_cache')->rm('report_count_obtain');
+	CACHE('bb_cache')->rm('report_count_obtain_exp');
+
 	return $report_id;
 }
 
@@ -1152,6 +1155,9 @@ function reports_update_status($report_ids, $report_status, $comment = '', $auth
 	{
 		report_notify('change', $report_status, $report_ids);
 	}
+
+	CACHE('bb_cache')->rm('report_count_obtain');
+	CACHE('bb_cache')->rm('report_count_obtain_exp');
 }
 
 //
@@ -1235,6 +1241,9 @@ function reports_delete($report_ids, $auth_check = true, $module_action = true)
 	{
 		reports_module_action($reports, 'delete');
 	}
+
+	CACHE('bb_cache')->rm('report_count_obtain');
+	CACHE('bb_cache')->rm('report_count_obtain_exp');
 }
 
 //

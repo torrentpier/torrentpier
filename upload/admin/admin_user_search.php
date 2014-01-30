@@ -1232,7 +1232,10 @@ else
 	{
 		$pagination .= ( $pagination == '' ) ? '<a href="'.$base_url.'&sort='.$sort.'&order='.$order.'&page='. ($page + 1) .'">'.$lang['NEXT'].'</a>' : ' | <a href="'.$base_url.'&sort='.$sort.'&order='.$order.'&page='. ($page + 1) .'">'.$lang['NEXT'].'</a>';
 	}
-
+	if ($num_pages > 2)
+	{
+		$pagination .= '&nbsp;&nbsp;<input type="text" name="page" maxlength="5" size="2" class="post" />&nbsp;<input type="submit" name="submit" value="'.$lang['GO'].'" class="post" />';
+	}
 	$template->assign_vars(array(
 		'TPL_ADMIN_USER_SEARCH_RESULTS' => true,
 

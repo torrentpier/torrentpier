@@ -34,6 +34,16 @@ class user_common
 	);
 
 	/**
+	 *  Defaults options for guests
+	 */
+	var $opt_js_guest = array(
+		'h_av'     => 1,
+		'h_rnk_i'  => 1,
+		'h_smile'  => 1,
+		'h_sig'    => 1,
+	);
+
+	/**
 	*  Sessiondata
 	*/
 	var $sessiondata = array(
@@ -557,6 +567,22 @@ class user_common
 	}
 
 	/**
+	 *  Set shortcuts
+	 */
+	function set_shortcuts ()
+	{
+		$this->id            =& $this->data['user_id'];
+		$this->active        =& $this->data['user_active'];
+		$this->name          =& $this->data['username'];
+		$this->lastvisit     =& $this->data['user_lastvisit'];
+		$this->regdate       =& $this->data['user_regdate'];
+		$this->level         =& $this->data['user_level'];
+		$this->opt           =& $this->data['user_opt'];
+
+		$this->ip            =  CLIENT_IP;
+	}
+
+	/**
 	*  Initialise user settings
 	*/
 	function init_userprefs ()
@@ -642,7 +668,11 @@ class user_common
 	*/
 	function load_opt_js ()
 	{
-		if (!IS_GUEST && !empty($_COOKIE['opt_js']))
+		if (IS_GUEST)
+		{
+			$this->opt_js = array_merge($this->opt_js, $this->opt_js_guest);
+		}
+		else if (!empty($_COOKIE['opt_js']))
 		{
 			$opt_js = bb_json_decode($_COOKIE['opt_js']);
 
@@ -651,15 +681,6 @@ class user_common
 				$this->opt_js = array_merge($this->opt_js, $opt_js);
 			}
 		}
-	}
-
-	/**
-	*  Set shortcuts
-	*/
-	function set_shortcuts ()
-	{
-		$this->id  =& $this->data['user_id'];
-		$this->opt =& $this->data['user_opt'];
 	}
 
 	/**

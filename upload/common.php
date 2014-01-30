@@ -1995,7 +1995,7 @@ function mkdir_rec ($path, $mode)
 
 function verify_id ($id, $length)
 {
-	return (preg_match('#^[a-zA-Z0-9]{'. $length .'}$#', $id) && is_string($id));
+	return (is_string($id) && preg_match('#^[a-zA-Z0-9]{'. $length .'}$#', $id));
 }
 
 function clean_filename ($fname)
@@ -2004,45 +2004,33 @@ function clean_filename ($fname)
 	return str_replace($s, '_', str_compact($fname));
 }
 
-function encode_ip ($dotquad_ip)
+function encode_ip ($ip)
 {
-	$ip_sep = explode('.', $dotquad_ip);
-	if (count($ip_sep) == 4)
-	{
-		return sprintf('%02x%02x%02x%02x', $ip_sep[0], $ip_sep[1], $ip_sep[2], $ip_sep[3]);
-	}
-
-	$ip_sep = explode(':', preg_replace('/(^:)|(:$)/', '', $dotquad_ip));
-	$res = '';
-	foreach ($ip_sep as $x)
-	{
-		$res .= sprintf('%0'. ($x == '' ? (9 - count($ip_sep)) * 4 : 4) .'s', $x);
-	}
-	return $res;
+	$d = explode('.', $ip);
+	return sprintf('%02x%02x%02x%02x', $d[0], $d[1], $d[2], $d[3]);
 }
 
-function decode_ip ($int_ip)
+function decode_ip ($ip)
 {
-	$int_ip = trim($int_ip);
+	return long2ip("0x{$ip}");
+}
 
-	if (strlen($int_ip) == 32)
-	{
-		$int_ip = substr(chunk_split($int_ip, 4, ':'), 0, 39);
-		$int_ip = ':'. implode(':', array_map("hexhex", explode(':',$int_ip))) .':';
-		preg_match_all("/(:0)+/", $int_ip, $zeros);
-		if (count($zeros[0]) > 0)
-		{
-			$match = '';
-			foreach($zeros[0] as $zero)
-				if (strlen($zero) > strlen($match))
-					$match = $zero;
-			$int_ip = preg_replace('/'. $match .'/', ':', $int_ip, 1);
-		}
-		return preg_replace('/(^:([^:]))|(([^:]):$)/', '$2$4', $int_ip);
-	}
-	if (strlen($int_ip) !== 8) $int_ip = '00000000';
-	$hexipbang = explode('.', chunk_split($int_ip, 2, '.'));
-	return hexdec($hexipbang[0]). '.' . hexdec($hexipbang[1]) . '.' . hexdec($hexipbang[2]) . '.' . hexdec($hexipbang[3]);
+function ip2int ($ip)
+{
+	return (float) sprintf('%u', ip2long($ip));  // для совместимости с 32 битными системами
+}
+
+// long2ip( mask_ip_int(ip2int('1.2.3.4'), 24) ) = '1.2.3.255'
+function mask_ip_int ($ip, $mask)
+{
+	$ip_int = is_numeric($ip) ? $ip : ip2int($ip);
+	$ip_masked = $ip_int | ((1 << (32 - $mask)) - 1);
+	return (float) sprintf('%u', $ip_masked);
+}
+
+function bb_crc32 ($str)
+{
+	return (float) sprintf('%u', crc32($str));
 }
 
 function hexhex ($value)
@@ -2174,21 +2162,7 @@ function hide_bb_path ($path)
 function tr_drop_request ($drop_type)
 {
 	if (DBG_LOG) dbg_log(' ', "request-dropped-$drop_type");
-	dummy_exit(mt_rand(300, 900));
-}
-
-function get_loadavg ()
-{
-	if (is_callable('sys_getloadavg'))
-	{
-		$loadavg = join(' ', sys_getloadavg());
-	}
-	else if (strpos(PHP_OS, 'Linux') !== false)
-	{
-		$loadavg = @file_get_contents('/proc/loadavg');
-	}
-
-	return !empty($loadavg) ? $loadavg : 0;
+	dummy_exit(mt_rand(60, 600));
 }
 
 function sys ($param)
@@ -2277,7 +2251,7 @@ else if (defined('IN_TRACKER'))
 		// Exit if tracker is disabled via ON/OFF trigger
 		if (file_exists(BB_DISABLED))
 		{
-			dummy_exit(mt_rand(1200, 2400));  #  die('d14:failure reason20:temporarily disablede');
+			dummy_exit(mt_rand(60, 2400));  #  die('d14:failure reason20:temporarily disablede');
 		}
 	}
 }

@@ -56,7 +56,7 @@ $domain_name = (!empty($_SERVER['SERVER_NAME'])) ? $_SERVER['SERVER_NAME'] : $do
 // Increase number of revision after update
 $bb_cfg['tp_version'] = '2.5 (unstable)';
 $bb_cfg['tp_release_date'] = '30-01-2014';
-$bb_cfg['tp_release_state'] = 'R573';
+$bb_cfg['tp_release_state'] = 'R574';
 
 // Database
 $charset  = 'utf8';
@@ -475,10 +475,10 @@ $bb_cfg['max_smilies']           = 10;             // Максимальное �
 // PM
 $bb_cfg['privmsg_disable']      = false;           // отключить систему личных сообщений на форуме
 $bb_cfg['max_outgoing_pm_cnt']  = 10;              // ограничение на кол. одновременных исходящих лс (для замедления рассылки спама)
-$bb_cfg['max_inbox_privmsgs']   = 200;
-$bb_cfg['max_savebox_privmsgs'] = 20;
-$bb_cfg['max_sentbox_privmsgs'] = 50;
-$bb_cfg['pm_days_keep']         = 180;               // время хранения ЛС
+$bb_cfg['max_inbox_privmsgs']   = 200;             // максимальное число сообщений в папке входящие
+$bb_cfg['max_savebox_privmsgs'] = 25;              // максимальное число сообщений в папке сохраненные
+$bb_cfg['max_sentbox_privmsgs'] = 50;              // максимальное число сообщений в папке отправленные
+$bb_cfg['pm_days_keep']         = 180;             // время хранения ЛС
 
 // Actions log
 $bb_cfg['log_days_keep'] = 90;
@@ -509,7 +509,6 @@ $bb_cfg['ad_blocks'] = array(
 );
 
 // Misc
-define('LOADAVG',   function_exists('get_loadavg') ? get_loadavg() : 0);
 define('MEM_USAGE', function_exists('memory_get_usage'));
 
 $bb_cfg['mem_on_start'] = (MEM_USAGE) ? memory_get_usage() : 0;

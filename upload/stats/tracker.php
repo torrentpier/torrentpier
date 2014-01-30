@@ -73,8 +73,6 @@ foreach ($rowset as $cnt => $row)
 	$peers_in_last_sec[] = sprintf('%3s', $row['peers']) . (($cnt && !(++$cnt%15)) ? "  \n" : '');
 }
 
-
-
 function commify_callback ($matches)
 {
 	return commify($matches[0]);
@@ -84,7 +82,6 @@ function commify_ob ($contents)
 	return preg_replace_callback("#\b\d+\b#", 'commify_callback', $contents);
 }
 ob_start('commify_ob');
-
 
 echo '<html><body><head></head>';
 echo '
@@ -125,9 +122,14 @@ echo '</table>';
 
 echo '<div align="center"><pre>';
 
-if ($loadavg = get_loadavg())
+if ($l = sys('la'))
 {
-	echo "\n\n<b>loadavg: </b>$loadavg\n\n";
+	$l = explode(' ', $l);
+	for ($i=0; $i < 3; $i++)
+	{
+		$l[$i] = round($l[$i], 1);
+	}
+	echo "\n\n<b>loadavg: </b>$l[0] $l[1] $l[2]\n\n";
 }
 
 echo 'gen time: <b>'. sprintf('%.3f', (array_sum(explode(' ', microtime())) - TIMESTART)) ."</b> sec\n";

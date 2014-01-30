@@ -5,7 +5,7 @@ if (!defined('BB_ROOT')) die(basename(__FILE__));
 // !!! $username должен быть предварительно обработан clean_username() !!!
 function validate_username ($username, $check_ban_and_taken = true)
 {
-	global $userdata, $lang;
+	global $user, $lang;
 
 	static $name_chars = 'a-z0-9а-яё_@$%^&;(){}\#\-\'.:+ ';
 
@@ -45,7 +45,7 @@ function validate_username ($username, $check_ban_and_taken = true)
 
 		if ($row = DB()->fetch_row("SELECT username FROM ". BB_USERS ." WHERE username = '$username_sql' LIMIT 1"))
 		{
-			if ((!IS_GUEST && $row['username'] != $userdata['username']) || IS_GUEST)
+			if ((!IS_GUEST && $row['username'] != $user->name) || IS_GUEST)
 			{
 				return $lang['USERNAME_TAKEN'];
 			}

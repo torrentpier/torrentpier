@@ -59,8 +59,8 @@ $lang['DISABLED'] = 'Disabled';
 $lang['ERROR'] = 'Error';
 $lang['SELECT_ACTION'] = 'Select action';
 
-$lang['NEXT'] = 'Next';
-$lang['PREVIOUS'] = 'Previous';
+$lang['NEXT_PAGE'] = 'Next';
+$lang['PREVIOUS_PAGE'] = 'Previous';
 $lang['GOTO_PAGE'] = 'Goto page';
 $lang['GOTO_SHORT'] = 'Page';
 $lang['JOINED'] = 'Joined';

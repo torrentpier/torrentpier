@@ -7,14 +7,14 @@ if (!defined('BB_ROOT')) die(basename(__FILE__));
 //
 function prepare_post(&$mode, &$post_data, &$error_msg, &$username, &$subject, &$message, &$poll_title, &$poll_options, &$poll_length)
 {
-	global $bb_cfg, $userdata, $lang;
+	global $bb_cfg, $user, $userdata, $lang;
 
 	// Check username
 	if (!empty($username))
 	{
 		$username = clean_username($username);
 
-		if (!$userdata['session_logged_in'] || ($userdata['session_logged_in'] && $username != $userdata['username']))
+		if (!$userdata['session_logged_in'] || ($userdata['session_logged_in'] && $username != $user->name))
 		{
 			require(INC_DIR .'functions_validate.php');
 
@@ -462,7 +462,7 @@ function delete_post($mode, $post_data, &$message, &$meta, $forum_id, $topic_id,
 //
 function user_notification($mode, &$post_data, &$topic_title, &$forum_id, &$topic_id, &$post_id, &$notify_user)
 {
-	global $bb_cfg, $lang, $userdata;
+	global $bb_cfg, $lang, $user, $userdata;
 
 	if (!$bb_cfg['topic_notify_enabled'])
 	{
@@ -565,7 +565,7 @@ function user_notification($mode, &$post_data, &$topic_title, &$forum_id, &$topi
 						$emailer->assign_vars(array(
 							'TOPIC_TITLE' => $topic_title,
 							'SITENAME' => $bb_cfg['sitename'],
-							'USERNAME'    => $userdata['username'],
+							'USERNAME'    => $user->name,
 							'EMAIL_SIG' => (!empty($bb_cfg['board_email_sig'])) ? str_replace('<br />', "\n", "-- \n" . $bb_cfg['board_email_sig']) : '',
 							'U_TOPIC' => $server_protocol . $server_name . $server_port . $script_name . '?' . POST_POST_URL . "=$post_id#$post_id",
 							'U_STOP_WATCHING_TOPIC' => $server_protocol . $server_name . $server_port . $script_name . '?' . POST_TOPIC_URL . "=$topic_id&unwatch=topic")
