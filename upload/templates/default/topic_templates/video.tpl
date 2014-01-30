@@ -4,7 +4,6 @@ var video_codecs = ['{SEL_VIDEO_CODECS}'];
 var audio_codecs = ['{SEL_AUDIO_CODECS}'];
 var quality = ['{SEL_VIDEO_QUALITY}'];
 var translation = ['{SEL_TRANSLATION}'];
-var torrent_sign = "{TORRENT_SIGN}";
 
 function make_format_list (what)
 {
@@ -49,12 +48,6 @@ function form_validate (f)
 		f.fileupload.focus();
 		error='{L_TORRENT}';
 		msg +='{L_TORRENT_EXP}';
-	}
-	else if (torrent_sign && f.fileupload.value.indexOf(torrent_sign) == -1)
-	{
-		f.fileupload.focus();
-		error='{L_TORRENT}';
-		msg +='{L_TORRENT_SIGN_EXP}';
 	}
 
 	if (error) {

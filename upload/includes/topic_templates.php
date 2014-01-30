@@ -94,8 +94,6 @@ if ($topic_tpl = DB()->fetch_row($sql))
 			'L_ORIGINAL_TITLE'  => $lang['TPL']['ORIGINAL_NAME'],
 			'L_ORIGINAL_TITLE_DESC' => $lang['TPL']['ORIGINAL_NAME_DESC'],
 			'L_TITLE_EXP'       => $lang['TPL']['NAME_EXP'],
-
-			'TORRENT_SIGN'      => $bb_cfg['torrent_sign'],
 		));
 
 		foreach ($lang['TPL'] as $name => $val)

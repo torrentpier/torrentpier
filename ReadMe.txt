@@ -18,8 +18,12 @@
 - cache
 - cache/filecache
 - cache/filecache/bb_cache
+- cache/filecache/bb_cap_sid
+- cache/filecache/bb_login_err
+- cache/filecache/bb_poll_data
 - cache/filecache/datastore
 - cache/filecache/session_cache
+- cache/filecache/tr_cache
 - files
 - files/thumbs
 - images

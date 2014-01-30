@@ -677,7 +677,7 @@ if ( !DB()->sql_query($sql) )
 //
 if ($topic_has_poll)
 {
-	$poll_votes_js = CACHE('bb_poll_data')->get($topic_id, 'get_poll_data_items_js', 'poll_');
+	$poll_votes_js = get_poll_data_items_js($topic_id);
 
 	if (!$poll_votes_js)
 	{

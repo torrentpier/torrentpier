@@ -2409,13 +2409,18 @@ function get_poll_data_items_js ($topic_id)
 	}
 	$items = array();
 
-	$sql = "
-		SELECT topic_id, vote_id, vote_text, vote_result
-		FROM ". BB_POLL_VOTES ."
-		WHERE topic_id IN($topic_id_csv)
-		ORDER BY topic_id, vote_id
-	";
-	foreach (DB()->fetch_rowset($sql) as $row)
+	if (!$poll_data = CACHE('bb_poll_data')->get("poll_$topic_id"))
+	{
+		$poll_data = DB()->fetch_rowset("
+			SELECT topic_id, vote_id, vote_text, vote_result
+			FROM ". BB_POLL_VOTES ."
+			WHERE topic_id IN($topic_id_csv)
+			ORDER BY topic_id, vote_id
+		");
+		CACHE('bb_poll_data')->set("poll_$topic_id", $poll_data);
+	}
+
+	foreach ($poll_data as $row)
 	{
 		$opt_text_for_js   = htmlCHR($row['vote_text']);
 		$opt_result_for_js = (int) $row['vote_result'];

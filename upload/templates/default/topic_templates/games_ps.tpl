@@ -6,7 +6,6 @@ var source_type = ['{SEL_SOURCE_TYPE}'];
 var localization = ['{SEL_UI_LANG_PS}'];
 var medicine = ['{SEL_MEDICINE}'];
 var sel_multiplayer = ['{SEL_MULTIPLAYER}'];
-var torrent_sign = "{TORRENT_SIGN}";
 
 function make_format_list (what)
 {
@@ -51,12 +50,6 @@ function form_validate (f)
 		f.fileupload.focus();
 		error='{L_TORRENT}';
 		msg +='{L_TORRENT_EXP}';
-	}
-	else if (torrent_sign && f.fileupload.value.indexOf(torrent_sign) == -1)
-	{
-		f.fileupload.focus();
-		error='{L_TORRENT}';
-		msg +='{L_TORRENT_SIGN_EXP}';
 	}
 
 	if (error) {

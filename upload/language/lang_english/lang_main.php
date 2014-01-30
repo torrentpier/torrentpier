@@ -3027,7 +3027,6 @@ $lang['TPL']['SYSREQ'] = 'System requirements';
 $lang['TPL']['TOR_SIZE_EXP'] = 'Filesize is too big';
 $lang['TPL']['TORRENT'] = 'Torrent';
 $lang['TPL']['TORRENT_EXP'] = 'Select torrent file that you want to release';
-$lang['TPL']['TORRENT_SIGN_EXP'] = 'You should include '. $bb_cfg['torrent_sign'] .' in the name';
 $lang['TPL']['TRACKLIST'] = 'Tracklist';
 $lang['TPL']['TRANSLATION_TYPE'] = 'Translation type';
 $lang['TPL']['UNCOMPRESSED'] = '(uncompressed)';
