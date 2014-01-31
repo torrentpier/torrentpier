@@ -282,7 +282,6 @@ elseif( isset($_GET['pane']) && $_GET['pane'] == 'right' )
 	}
 
 	$template->assign_vars(array(
-		'U_CLEAR_TPL_CACHE'   => "xs_cache.php?clear=",
 		'U_UPDATE_USER_LEVEL' => "index.php?update_user_level=1",
 		'U_SYNC_TOPICS'       => "index.php?sync_topics=1",
 		'U_SYNC_USER_POSTS'   => "index.php?sync_user_posts=1",

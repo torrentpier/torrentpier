@@ -292,7 +292,7 @@ function topic_delete ($mode_or_topic_id, $forum_id = null, $prune_time = 0, $pr
 		DELETE pv, pu
 		FROM      ". $tmp_delete_topics ." del
 		LEFT JOIN ". BB_POLL_VOTES   ." pv USING(topic_id)
-		LEFT JOIN ". BB_POLL_USERS   ." pu USING(vote_id)
+		LEFT JOIN ". BB_POLL_USERS   ." pu USING(topic_id)
 	");
 
 	// Delete attachments (from disk)

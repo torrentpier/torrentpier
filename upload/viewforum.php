@@ -298,7 +298,7 @@ $sort_value = isset($_REQUEST['sort']) ? (int) $_REQUEST['sort'] : $forum_data['
 $order_value = isset($_REQUEST['order']) ? (int) $_REQUEST['order'] : $forum_data['forum_display_order'];
 $sort_list = '<select name="sort">'. get_forum_display_sort_option($sort_value, 'list', 'sort') .'</select>';
 $order_list = '<select name="order">'. get_forum_display_sort_option($order_value, 'list', 'order') .'</select>';
-$s_display_order = '&nbsp;'. $lang['SORT_BY'] .':&nbsp;'. $sort_list . $order_list .'&nbsp;';
+$s_display_order = '&nbsp;'. $lang['SORT_BY'] .':&nbsp;'. $sort_list .'&nbsp;'. $order_list .'&nbsp;';
 
 // Selected SORT and ORDER methods
 $sort_method = get_forum_display_sort_option($sort_value, 'field', 'sort');

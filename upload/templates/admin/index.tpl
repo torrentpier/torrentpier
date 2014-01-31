@@ -73,6 +73,7 @@ ajax.callback.manage_user = function(data) {
 	$('#cache').html(data.cache_html);
 	$('#datastore').html(data.datastore_html);
 	$('#indexer').html(data.indexer);
+	$('#template_cache').html(data.template_cache);
 }
 </script>
 <br />
@@ -83,7 +84,7 @@ ajax.callback.manage_user = function(data) {
 		<td>
 			<a href="#" id="datastore" onclick="ajax.manage_user('clear_datastore'); return false;">{L_DATASTORE}</a>,&nbsp;
 			<a href="#" id="cache" onclick="ajax.manage_user('clear_cache'); return false;">{L_ALL_CACHE}</a>,&nbsp;
-			<a href="{U_CLEAR_TPL_CACHE}">{L_TEMPLATES}</a>&nbsp;
+			<a href="#" id="template_cache" onclick="ajax.manage_user('clear_template_cache'); return false;">{L_TEMPLATES}</a>&nbsp;
 		</td>
 	</tr>
 	<tr>

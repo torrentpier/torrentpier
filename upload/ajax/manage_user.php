@@ -11,11 +11,12 @@ switch ($mode)
 {
 	case 'clear_cache':
 		$gc_cache = array(
-			'tr_cache',
 			'bb_cache',
+			'tr_cache',
 			'session_cache',
-			'bb_login_err',
 			'bb_cap_sid',
+			'bb_login_err',
+			'bb_poll_data',
 		);
 
 		// foreach ($bb_cfg['cache']['engines'] as $cache_name => $cache_val)
@@ -33,6 +34,25 @@ switch ($mode)
 		$datastore->clean();
 
 		$this->response['datastore_html'] = '<span class="seed bold">'. $lang['DATASTORE_CLEARED'] .'</span>';
+	break;
+
+	case 'clear_template_cache':
+		global $template;
+
+		$match = 'tpl_';
+		$match_len = strlen($match);
+		$dir = $template->cachedir;
+		$res = @opendir($dir);
+		while (($file = readdir($res)) !== false)
+		{
+			if (substr($file, 0, $match_len) === $match)
+			{
+				@unlink($dir . $file);
+			}
+		}
+		closedir($res);
+
+		$this->response['template_cache'] = '<span class="seed bold">'. $lang['ALL_CACHE_CLEARED'] .'</span>';
 	break;
 
 	case 'delete_profile':
