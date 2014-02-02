@@ -83,7 +83,7 @@ elseif ($mode == 'add' || $mode == 'edit')
 		{
 			DB()->query("INSERT INTO ". BB_TOPIC_TPL_OLD ." (tpl_name, tpl_script, tpl_template, tpl_desc)
 				VALUES ('". DB()->escape($tpl_name) ."', '". DB()->escape($tpl_script) ."', '". DB()->escape($tpl_template) ."', '". DB()->escape($tpl_desc) ."')");
-			$message = $lang['ADEDD'];
+			$message = $lang['ADDED'];
 		}
 
 		bb_die($message);

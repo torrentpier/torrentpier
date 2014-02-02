@@ -138,7 +138,7 @@ switch($this->request['type'])
 							$this->ajax_die(sprintf($lang['MAX_SMILIES_PER_POST'], $bb_cfg['max_smilies']));
 						}
 					}
-					DB()->query("UPDATE ". BB_POSTS_TEXT ." SET post_text = '". DB()->escape($text) ."' WHERE post_id = $post_id");
+					DB()->query("UPDATE ". BB_POSTS_TEXT ." SET post_text = '". DB()->escape($text) ."' WHERE post_id = $post_id LIMIT 1");
 					if ($post['topic_last_post_id'] != $post['post_id'] && $userdata['user_id'] == $post['poster_id'])
 					{
 						DB()->query("UPDATE ". BB_POSTS ." SET post_edit_time = '". TIMENOW ."', post_edit_count = post_edit_count + 1 WHERE post_id = $post_id LIMIT 1");
@@ -298,14 +298,14 @@ switch($this->request['type'])
 			'post_id'        => $post_id,
 			'post_text'      => $message,
 		));
-		
+
 		if ($bb_cfg['topic_notify_enabled'])
 		{
 			$notify  = !empty($this->request['notify']);
 			user_notification('reply', $post, $post['topic_title'], $post['forum_id'], $topic_id, $notify);
 		}
-		
-		$this->response['redirect'] = make_url(POST_URL ."$post_id#$post_id");
+
+		$this->response['redirect'] = make_url(POST_URL . "$post_id#$post_id");
 	break;
 
 	default:

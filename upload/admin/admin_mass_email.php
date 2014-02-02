@@ -19,20 +19,20 @@ $errors = $user_id_sql = array();
 
 if (isset($_POST['submit']))
 {
-	if(!$subject)  $errors[] = $lang['EMPTY_SUBJECT'];
-	if(!$message)  $errors[] = $lang['EMPTY_MESSAGE'];
-	if(!$group_id) $errors[] = $lang['GROUP_NOT_EXIST'];
-	
-	if(!$errors)
+	if (!$subject)  $errors[] = $lang['EMPTY_SUBJECT'];
+	if (!$message)  $errors[] = $lang['EMPTY_MESSAGE'];
+	if (!$group_id) $errors[] = $lang['GROUP_NOT_EXIST'];
+
+	if (!$errors)
 	{
 		$sql = DB()->fetch_rowset("SELECT ban_userid FROM ". BB_BANLIST ." WHERE ban_userid != 0");
-			
+
 		foreach ($sql as $row)
 		{
 			$user_id_sql[] = ','. $row['ban_userid'];
 		}
 		$user_id_sql = join('', $user_id_sql);
-			
+
 		if ($group_id != -1)
 		{
 			$user_list = DB()->fetch_rowset("
@@ -54,9 +54,9 @@ if (isset($_POST['submit']))
 					AND user_id NOT IN(". EXCLUDED_USERS_CSV . $user_id_sql .")
 			");
 		}
-		
+
 		require(INC_DIR .'emailer.class.php');
-		
+
 		foreach ($user_list as $i => $row)
 		{
 			$emailer = new emailer($bb_cfg['smtp_delivery']);
@@ -76,11 +76,9 @@ if (isset($_POST['submit']))
 	}
 }
 
-
 //
 // Generate page
 //
-
 $sql = "SELECT group_id, group_name
 	FROM ". BB_GROUPS ."
 	WHERE group_single_user = 0
@@ -92,7 +90,6 @@ foreach (DB()->fetch_rowset($sql) as $row)
 {
 	$groups[$row['group_name']] = $row['group_id'];
 }
-
 
 $template->assign_vars(array(
 	'MESSAGE' => $message,

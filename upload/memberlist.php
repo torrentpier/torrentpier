@@ -138,7 +138,7 @@ for ($i=ord('A'), $cnt=ord('Z'); $i <= $cnt; $i++)
 $select_letter .= ': ';
 for ($i=224, $cnt=255; $i <= $cnt; $i++)
 {
-   $select_letter .= ($by_letter == iconv('windows-1251', 'UTF-8', chr($i))) ? '<b>'. iconv('windows-1251', 'UTF-8', chr($i-32)) .'</b>&nbsp;' : '<a class="genmed" href="'. ("memberlist.php?letter=%". strtoupper(base_convert($i, 10, 16)) ."&amp;mode=$mode&amp;order=$sort_order") .'">'. iconv('windows-1251', 'UTF-8', chr($i-32)) .'</a>&nbsp;';
+	$select_letter .= ($by_letter == iconv('windows-1251', 'UTF-8', chr($i))) ? '<b>'. iconv('windows-1251', 'UTF-8', chr($i-32)) .'</b>&nbsp;' : '<a class="genmed" href="'. ("memberlist.php?letter=%". strtoupper(base_convert($i, 10, 16)) ."&amp;mode=$mode&amp;order=$sort_order") .'">'. iconv('windows-1251', 'UTF-8', chr($i-32)) .'</a>&nbsp;';
 }
 
 $select_letter .= ':&nbsp;';
@@ -152,9 +152,7 @@ $template->assign_vars(array(
 ));
 
 // per-letter selection end
-$sql = "SELECT username, user_id, user_rank, user_opt, user_posts, user_regdate, user_from, user_website, user_email
-         FROM ". BB_USERS ."
-		 WHERE user_id NOT IN(". EXCLUDED_USERS_CSV .")";
+$sql = "SELECT username, user_id, user_rank, user_opt, user_posts, user_regdate, user_from, user_website, user_email FROM ". BB_USERS ." WHERE user_id NOT IN(". EXCLUDED_USERS_CSV .")";
 if ( $username )
 {
 	$username = preg_replace('/\*/', '%', clean_username($username));
@@ -173,25 +171,24 @@ if ($result = DB()->fetch_rowset($sql))
 		$posts    = $row['user_posts'];
 		$pm       = ($bb_cfg['text_buttons']) ? '<a class="txtb" href="'. (PM_URL . "?mode=post&amp;". POST_USERS_URL ."=$user_id") .'">'. $lang['SEND_PM_TXTB'] .'</a>' : '<a href="' . (PM_URL . "?mode=post&amp;". POST_USERS_URL ."=$user_id") .'"><img src="' . $images['icon_pm'] . '" alt="' . $lang['SEND_PRIVATE_MESSAGE'] . '" title="' . $lang['SEND_PRIVATE_MESSAGE'] . '" border="0" /></a>';
 
-        if (bf($row['user_opt'], 'user_opt', 'viewemail') || IS_AM)
-        {
-        	$email_uri = ($bb_cfg['board_email_form']) ? ("profile.php?mode=email&amp;". POST_USERS_URL ."=$user_id") : 'mailto:'. $row['user_email'];
+		if (bf($row['user_opt'], 'user_opt', 'viewemail') || IS_AM)
+		{
+			$email_uri = ($bb_cfg['board_email_form']) ? ("profile.php?mode=email&amp;". POST_USERS_URL ."=$user_id") : 'mailto:'. $row['user_email'];
 			$email = '<a class="editable" href="'. $email_uri .'">'. $row['user_email'] .'</a>';
+		}
+		else
+		{
+			$email = '';
+		}
 
-        }
-        else
-        {
-        	$email = '';
-        }
-
-        if ($row['user_website'])
-{
-            $www = ($bb_cfg['text_buttons']) ? '<a class="txtb" href="'. $row['user_website'] .'"  target="_userwww">'. $lang['VISIT_WEBSITE_TXTB'] .'</a>' : '<a class="txtb" href="'. $row['user_website'] .'" target="_userwww"><img src="' . $images['icon_www'] . '" alt="' . $lang['VISIT_WEBSITE'] . '" title="' . $lang['VISIT_WEBSITE'] . '" border="0" /></a>';
-        }
-        else
-        {
-            $www = '';
-        }
+		if ($row['user_website'])
+		{
+			$www = ($bb_cfg['text_buttons']) ? '<a class="txtb" href="'. $row['user_website'] .'"  target="_userwww">'. $lang['VISIT_WEBSITE_TXTB'] .'</a>' : '<a class="txtb" href="'. $row['user_website'] .'" target="_userwww"><img src="' . $images['icon_www'] . '" alt="' . $lang['VISIT_WEBSITE'] . '" title="' . $lang['VISIT_WEBSITE'] . '" border="0" /></a>';
+		}
+		else
+		{
+			$www = '';
+		}
 
 		$row_class = !($i % 2) ? 'row1' : 'row2';
 		$template->assign_block_vars('memberrow', array(
@@ -211,10 +208,11 @@ if ($result = DB()->fetch_rowset($sql))
 }
 else
 {
-  	$template->assign_block_vars('no_username', array(
-       'NO_USER_ID_SPECIFIED' => $lang['NO_USER_ID_SPECIFIED']   )
- 	);
+	$template->assign_block_vars('no_username', array(
+		'NO_USER_ID_SPECIFIED' => $lang['NO_USER_ID_SPECIFIED'],
+	));
 }
+
 $paginationurl = "memberlist.php?mode=$mode&amp;order=$sort_order&amp;letter=$by_letter";
 if ($paginationusername) $paginationurl .= "&amp;username=$paginationusername";
 if ( $mode != 'topten' || $bb_cfg['topics_per_page'] < 10 )

@@ -1100,7 +1100,7 @@ else if ( $submit || $refresh || $mode != '' )
 				message_die(GENERAL_ERROR, 'Could not update private message new/read status for user', '', __LINE__, __FILE__, $sql);
 			}
 
-            cache_rm_user_sessions ($to_userdata['user_id']);
+			cache_rm_user_sessions ($to_userdata['user_id']);
 
 			if ( bf($to_userdata['user_opt'], 'user_opt', 'notify_pm') && !empty($to_userdata['user_email']) && $to_userdata['user_active'] && $bb_cfg['pm_notify_enabled'] )
 			{
@@ -1109,7 +1109,7 @@ else if ( $submit || $refresh || $mode != '' )
 
 				$emailer->from($bb_cfg['sitename'] ." <{$bb_cfg['board_email']}>");
 				$emailer->email_address($to_userdata['username'] ." <{$to_userdata['user_email']}>");
-				
+
 				$emailer->use_template('privmsg_notify', $to_userdata['user_lang']);
 
 				$emailer->assign_vars(array(

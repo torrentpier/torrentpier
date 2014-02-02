@@ -30,7 +30,7 @@ $sql = "SELECT username, user_id, user_rank, user_email, user_lang
 	FROM " . BB_USERS . "
 	WHERE user_id = $user_id
 ";
-	
+
 if ($row = DB()->fetch_row($sql))
 {
 	$username   = $row['username'];
@@ -54,7 +54,7 @@ if ($row = DB()->fetch_row($sql))
 
 				$emailer->from($userdata['username'] ." <{$userdata['user_email']}>");
 				$emailer->email_address($username ." <$user_email>");
-				
+
 				$emailer->use_template('profile_send_email', $user_lang);
 				$emailer->set_subject($subject);
 

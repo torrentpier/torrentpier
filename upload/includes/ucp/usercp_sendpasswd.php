@@ -47,7 +47,7 @@ if ( isset($_POST['submit']) )
 
 			$emailer->from($bb_cfg['sitename'] ." <{$bb_cfg['board_email']}>");
 			$emailer->email_address("$username <{$row['user_email']}>");
-			
+
 			$emailer->use_template('user_activate_passwd', $row['user_lang']);
 
 			$emailer->assign_vars(array(

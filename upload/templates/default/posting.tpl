@@ -147,8 +147,6 @@
 
 <!-- IF ATTACHBOX --><!-- INCLUDE posting_attach.tpl --><!-- ENDIF -->
 
-<!-- IF POLLBOX --><!-- INCLUDE posting_poll.tpl --><!-- ENDIF -->
-
 </table>
 
 </form>

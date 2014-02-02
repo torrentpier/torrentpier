@@ -1119,18 +1119,6 @@ else
 											AND u.user_id <> ".GUEST_UID;
 
 					break;
-				case 'disabled_pms':
-					$text = $lang['SEARCH_FOR_DISABLED_PMS'];
-
-					$total_sql .= "SELECT COUNT(user_id) AS total
-									FROM ".BB_USERS."
-										WHERE user_allow_pm = 0
-											AND user_id <> ".GUEST_UID;
-
-					$select_sql .= "	WHERE u.user_allow_pm = 0
-											AND u.user_id <> ".GUEST_UID;
-
-					break;
 				default:
 					message_die(GENERAL_MESSAGE, $lang['SEARCH_INVALID']);
 			}

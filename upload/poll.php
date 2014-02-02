@@ -86,7 +86,7 @@ switch ($mode)
 			bb_die('Вы не выбрали, за что голосуете');
 		}
 
-		DB()->query("INSERT IGNORE INTO ". BB_POLL_USERS ." (topic_id, user_id, vote_dt) VALUES ($topic_id, {$userdata['user_id']}, ". TIMENOW .")");
+		DB()->query("INSERT IGNORE INTO ". BB_POLL_USERS ." (topic_id, user_id, vote_ip, vote_dt) VALUES ($topic_id, {$userdata['user_id']}, '". USER_IP ."', ". TIMENOW .")");
 
 		CACHE('bb_poll_data')->rm("poll_$topic_id");
 

@@ -88,10 +88,7 @@ if ($submit && $mode == 'extensions')
 		$extensions['_' . $extension_change_list[$i]]['group_id'] = intval($group_select_list[$i]);
 	}
 
-	$sql = 'SELECT *
-		FROM ' . BB_EXTENSIONS . '
-		ORDER BY ext_id';
-
+	$sql = 'SELECT * FROM ' . BB_EXTENSIONS . ' ORDER BY ext_id';
 	if ( !($result = DB()->sql_query($sql)) )
 	{
 		message_die(GENERAL_ERROR, 'Couldn\'t get Extension Informations.', '', __LINE__, __FILE__, $sql);
@@ -153,7 +150,7 @@ if ($submit && $mode == 'extensions')
 			'ADD_EXTENSION_EXPLAIN'	=> $extension_explain)
 		);
 
-		if (!$error)
+		if (!@$error)
 		{
 			// check extension
 			$sql = 'SELECT extension
@@ -184,7 +181,7 @@ if ($submit && $mode == 'extensions')
 				}
 			}
 
-			if (!$error)
+			if (!@$error)
 			{
 				$sql_ary = array(
 					'group_id'		=> (int) $extension_group,
@@ -394,7 +391,7 @@ if ($submit && $mode == 'groups')
 			}
 		}
 
-		if (!$error)
+		if (!@$error)
 		{
 			$filesize = ($size_select == 'kb') ? round($filesize * 1024) : ( ($size_select == 'mb') ? round($filesize * 1048576) : $filesize );
 

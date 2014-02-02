@@ -14,6 +14,26 @@ $confirm = request_var('confirm', '');
 if ($confirm)
 {
 	DB()->query("
+		CREATE TABLE IF NOT EXISTS `bb_poll_users` (
+		  `topic_id` int(10) unsigned NOT NULL,
+		  `user_id` int(11) NOT NULL,
+		  `vote_ip` varchar(32) NOT NULL,
+		  `vote_dt` int(11) NOT NULL DEFAULT '0',
+		  PRIMARY KEY (`topic_id`,`user_id`)
+		) ENGINE=MyISAM DEFAULT CHARSET=utf8
+	");
+
+	DB()->query("
+		CREATE TABLE IF NOT EXISTS `bb_poll_votes` (
+		  `topic_id` int(10) unsigned NOT NULL,
+		  `vote_id` tinyint(4) unsigned NOT NULL,
+		  `vote_text` varchar(255) NOT NULL,
+		  `vote_result` mediumint(8) unsigned NOT NULL,
+		  PRIMARY KEY (`topic_id`,`vote_id`)
+		) ENGINE=MyISAM DEFAULT CHARSET=utf8
+	");
+
+	DB()->query("
 		INSERT INTO bb_poll_votes
 			(topic_id, vote_id, vote_text, vote_result)
 		SELECT

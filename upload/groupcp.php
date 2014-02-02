@@ -248,15 +248,16 @@ else if (@$_POST['joingroup'])
 
 		$emailer->from($bb_cfg['sitename'] ." <{$bb_cfg['board_email']}>");
 		$emailer->email_address($moderator['username'] ." <{$moderator['user_email']}>");
-		
+
 		$emailer->use_template('group_request', $moderator['user_lang']);
-		
+
 		$emailer->assign_vars(array(
 			'USER'            => $userdata['username'],
 			'SITENAME'        => $bb_cfg['sitename'],
 			'GROUP_MODERATOR' => $moderator['username'],
 			'U_GROUPCP'       => make_url(GROUP_URL . $group_id),
 		));
+
 		$emailer->send();
 		$emailer->reset();
 	}
@@ -305,15 +306,15 @@ else
 
 				$emailer->from($bb_cfg['sitename'] ." <{$bb_cfg['board_email']}>");
 				$emailer->email_address($row['username'] ." <{$row['user_email']}>");
-				
+
 				$emailer->use_template('group_added', $row['user_lang']);
-				
+
 				$emailer->assign_vars(array(
 					'SITENAME'   => $bb_cfg['sitename'],
 					'GROUP_NAME' => $group_info['group_name'],
 					'U_GROUPCP'  => make_url(GROUP_URL . $group_id),
 				));
-				
+
 				$emailer->send();
 				$emailer->reset();
 			}
@@ -380,13 +381,13 @@ else
 						$emailer->use_template('group_approved', $row['user_lang']);
 						$emailer->email_address($row['username'] ." <{$row['user_email']}>");
 					}
-					
+
 					$emailer->assign_vars(array(
 						'SITENAME'   => $bb_cfg['sitename'],
 						'GROUP_NAME' => $group_info['group_name'],
 						'U_GROUPCP'  => make_url(GROUP_URL . $group_id),
 					));
-					
+
 					$emailer->send();
 					$emailer->reset();
 				}
@@ -402,7 +403,7 @@ else
 		WHERE user_id = ". $group_info['group_moderator'] ."
 	");
 
-    // Members
+	// Members
 	$count_members = DB()->fetch_rowset("
 		SELECT u.username, u.user_rank, u.user_id, u.user_opt, u.user_posts, u.user_regdate, u.user_from, u.user_website, u.user_email, ug.user_pending, ug.user_time
 		FROM ". BB_USER_GROUP ." ug, ". BB_USERS ." u
@@ -412,7 +413,7 @@ else
 			AND u.user_id = ug.user_id
 		ORDER BY u.username
 	");
-    $count_members = count($count_members);
+	$count_members = count($count_members);
 
 	// Get user information for this group
 	$modgroup_pending_count = 0;
@@ -514,16 +515,16 @@ else
 
 	generate_user_info($group_moderator, $bb_cfg['default_dateformat'], $is_moderator, $from, $posts, $joined, $pm, $email, $www, $user_time);
 
-    $group_type = '';
-    if($group_info['group_type'] == GROUP_OPEN)
-    {
-    	$group_type = $lang['GROUP_OPEN'];
-    }
-	elseif($group_info['group_type'] == GROUP_CLOSED)
+	$group_type = '';
+	if ($group_info['group_type'] == GROUP_OPEN)
+	{
+		$group_type = $lang['GROUP_OPEN'];
+	}
+	elseif ($group_info['group_type'] == GROUP_CLOSED)
 	{
 		$group_type = $lang['GROUP_CLOSED'];
 	}
-	elseif($group_info['group_type'] == GROUP_HIDDEN)
+	elseif ($group_info['group_type'] == GROUP_HIDDEN)
 	{
 		$group_type = $lang['GROUP_HIDDEN'];
 	}
@@ -546,7 +547,7 @@ else
 		'MOD_WWW' => $www,
 		'MOD_TIME' => ( !empty($group_info['group_time']) ) ? bb_date($group_info['group_time']) : $lang['NONE'],
 		'U_SEARCH_USER' => "search.php?mode=searchuser",
-        'GROUP_TYPE' => $group_type,
+		'GROUP_TYPE' => $group_type,
 		'S_GROUP_OPEN_TYPE' => GROUP_OPEN,
 		'S_GROUP_CLOSED_TYPE' => GROUP_CLOSED,
 		'S_GROUP_HIDDEN_TYPE' => GROUP_HIDDEN,

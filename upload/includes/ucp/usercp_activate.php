@@ -52,7 +52,7 @@ if ( $row = DB()->sql_fetchrow($result) )
 
 			$emailer->from($bb_cfg['sitename'] ." <{$bb_cfg['board_email']}>");
 			$emailer->email_address($row['username'] ." <{$row['user_email']}>");
-			
+
 			$emailer->use_template('admin_welcome_activated', $row['user_lang']);
 
 			$emailer->assign_vars(array(

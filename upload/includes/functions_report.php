@@ -496,7 +496,7 @@ function report_notify($mode)
 
 	require(INC_DIR .'emailer.class.php');
 	$emailer = new emailer($bb_cfg['smtp_delivery']);
-	
+
 	$emailer->from($bb_cfg['sitename'] ." <{$bb_cfg['board_email']}>");
 
 	// Send emails

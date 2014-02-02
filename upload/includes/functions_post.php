@@ -272,9 +272,7 @@ function update_post_stats($mode, $post_data, $forum_id, $topic_id, $post_id, $u
 		}
 		else if ($post_data['first_post'])
 		{
-			$sql = "SELECT MIN(post_id) AS first_post_id
-				FROM " . BB_POSTS . "
-				WHERE topic_id = $topic_id";
+			$sql = "SELECT MIN(post_id) AS first_post_id FROM " . BB_POSTS . " WHERE topic_id = $topic_id";
 			if (!($result = DB()->sql_query($sql)))
 			{
 				message_die(GENERAL_ERROR, 'Error in deleting post', '', __LINE__, __FILE__, $sql);
@@ -290,7 +288,7 @@ function update_post_stats($mode, $post_data, $forum_id, $topic_id, $post_id, $u
 			$topic_update_sql .= 'topic_replies = topic_replies - 1';
 		}
 	}
-	else if ($mode != 'poll_delete')
+	else
 	{
 		$forum_update_sql .= ", forum_last_post_id = $post_id" . (($mode == 'newtopic') ? ", forum_topics = forum_topics $sign" : "");
 		$topic_update_sql = "topic_last_post_id = $post_id, topic_last_post_time = ". TIMENOW . (($mode == 'reply') ? ", topic_replies = topic_replies $sign" : ", topic_first_post_id = $post_id");
@@ -304,13 +302,17 @@ function update_post_stats($mode, $post_data, $forum_id, $topic_id, $post_id, $u
 
 	if ($topic_update_sql != '')
 	{
-		$sql = "UPDATE " . BB_TOPICS . " SET
-			$topic_update_sql
-			WHERE topic_id = $topic_id";
+		$sql = "UPDATE " . BB_TOPICS . " SET $topic_update_sql WHERE topic_id = $topic_id";
 		if (!DB()->sql_query($sql))
 		{
 			message_die(GENERAL_ERROR, 'Error in posting', '', __LINE__, __FILE__, $sql);
 		}
+	}
+
+	$sql = "UPDATE " . BB_USERS . " SET user_posts = user_posts $sign WHERE user_id = $user_id";
+	if (!DB()->sql_query($sql))
+	{
+		message_die(GENERAL_ERROR, 'Error in posting', '', __LINE__, __FILE__, $sql);
 	}
 }
 
@@ -365,18 +367,18 @@ function user_notification($mode, &$post_data, &$topic_title, &$forum_id, &$topi
 			{
 				require(INC_DIR .'emailer.class.php');
 				$emailer = new emailer($bb_cfg['smtp_delivery']);
-				
+
 				$orig_word = $replacement_word = array();
 				obtain_word_list($orig_word, $replacement_word);
-				
+
 				if (count($orig_word))
 				{
 					$topic_title = preg_replace($orig_word, $replacement_word, $topic_title);
 				}
-				
+
 				$u_topic = make_url(TOPIC_URL . $topic_id .'&view=newest#newest');
 				$unwatch_topic = make_url(TOPIC_URL ."$topic_id&unwatch=topic");
-				
+
 				foreach ($watch_list as $row)
 				{
 					$emailer->from($bb_cfg['sitename'] ." <{$bb_cfg['board_email']}>");
@@ -393,7 +395,7 @@ function user_notification($mode, &$post_data, &$topic_title, &$forum_id, &$topi
 
 					$emailer->send();
 					$emailer->reset();
-					
+
 					$update_watched_sql[] = $row['user_id'];
 				}
 				$update_watched_sql = join(',', $update_watched_sql);

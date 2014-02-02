@@ -128,7 +128,7 @@
 	</tr>
 	<!-- END forums_exist -->
 	<tr>
-		<td class="row1" nowrap="nowrap"><span class="gen"><select name="misc" class="post"><option value="admins" selected="selected">{L_ADMINISTRATORS}</option><option value="mods">{L_MODERATORS}</option><option value="banned">{L_BANNED_USERS}</option><option value="disabled">{L_DISABLED_USERS}</option><option value="disabled_pms">{L_USERS_DISABLED_PMS}</option></select>&nbsp;<input type="submit" class="post2" class="post2" name="search_misc" value="{L_SEARCH}" /></span></td>
+		<td class="row1" nowrap="nowrap"><span class="gen"><select name="misc" class="post"><option value="admins" selected="selected">{L_ADMINISTRATORS}</option><option value="mods">{L_MODERATORS}</option><option value="banned">{L_BANNED_USERS}</option><option value="disabled">{L_DISABLED_USERS}</option></select>&nbsp;<input type="submit" class="post2" class="post2" name="search_misc" value="{L_SEARCH}" /></span></td>
 	</tr>
 	<tr>
 		<td class="row2"><span class="small">{L_SEARCH_USERS_MISC_EXPLAIN}</span></td>

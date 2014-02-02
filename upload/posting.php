@@ -167,11 +167,11 @@ if ($post_info = DB()->fetch_row($sql))
 
 	if ($post_info['forum_status'] == FORUM_LOCKED && !$is_auth['auth_mod'])
 	{
-	   message_die(GENERAL_MESSAGE, $lang['FORUM_LOCKED']);
+		message_die(GENERAL_MESSAGE, $lang['FORUM_LOCKED']);
 	}
 	elseif ($mode != 'newtopic' && $post_info['topic_status'] == TOPIC_LOCKED && !$is_auth['auth_mod'])
 	{
-	   message_die(GENERAL_MESSAGE, $lang['TOPIC_LOCKED']);
+		message_die(GENERAL_MESSAGE, $lang['TOPIC_LOCKED']);
 	}
 
 	if ($mode == 'editpost' || $mode == 'delete')
@@ -246,21 +246,21 @@ if (!$is_auth[$is_auth_type])
 
 if ($mode == 'newtopic' && $topic_tpl && $post_info['topic_tpl_id'])
 {
-	if($tor_status = join(',', $bb_cfg['tor_cannot_new']))
-    {
+	if ($tor_status = join(',', $bb_cfg['tor_cannot_new']))
+	{
 		$sql = DB()->fetch_rowset("SELECT t.topic_title, t.topic_id, tor.tor_status
 			FROM ". BB_BT_TORRENTS ." tor, ". BB_TOPICS ." t
 			WHERE poster_id = {$userdata['user_id']}
 				AND tor.topic_id = t.topic_id
 				AND tor.tor_status IN ($tor_status)
-		    ORDER BY tor.reg_time
+			ORDER BY tor.reg_time
 		");
 
-        $topics = '';
-        foreach($sql as $row)
-        {
-        	$topics .= $bb_cfg['tor_icons'][$row['tor_status']] .'<a href="'. TOPIC_URL . $row['topic_id'] .'">'. $row['topic_title'] .'</a><div class="spacer_12"></div>';
-        }
+		$topics = '';
+		foreach($sql as $row)
+		{
+			$topics .= $bb_cfg['tor_icons'][$row['tor_status']] .'<a href="'. TOPIC_URL . $row['topic_id'] .'">'. $row['topic_title'] .'</a><div class="spacer_12"></div>';
+		}
 		if ($topics) bb_die($topics . $lang['UNEXECUTED_RELEASE']);
 	}
 	require(INC_DIR .'topic_templates.php');
@@ -415,38 +415,38 @@ elseif ( ($submit || $confirm) && !$topic_has_new_posts )
 		if (defined('TORRENT_ATTACH_ID') && $bb_cfg['bt_newtopic_auto_reg'] && !$error_msg)
 		{
 			include(INC_DIR .'functions_torrent.php');
-			if(!DB()->fetch_row("SELECT attach_id FROM ". BB_BT_TORRENTS ." WHERE attach_id = ". TORRENT_ATTACH_ID))
+			if (!DB()->fetch_row("SELECT attach_id FROM ". BB_BT_TORRENTS ." WHERE attach_id = ". TORRENT_ATTACH_ID))
 			{
-				if($bb_cfg['premod'])
+				if ($bb_cfg['premod'])
 				{
-				    // Получение списка id форумов начиная с parent
-				    $forum_parent = $forum_id;
-				    if ($post_info['forum_parent']) $forum_parent = $post_info['forum_parent'];
-				    $count_sql = "
-					    SELECT forum_id
-				    	FROM ". BB_FORUMS ."
-			    		WHERE forum_parent = $forum_parent
-			    	";
-			    	$count_rowset = DB()->fetch_rowset($count_sql);
-			    	$sub_forums = array();
-			    	foreach ($count_rowset as $count_row)
-			    	{
-			    		if ($count_row['forum_id'] != $forum_id) $sub_forums[] = $count_row['forum_id'];
-			    	}
-			    	$sub_forums[] = $forum_id;
-			    	$sub_forums = join(',', $sub_forums);
-			    	// Подсчёт проверенных релизов в форумах раздела
-			    	$count_checked_releases = DB()->fetch_row("
-			    		SELECT COUNT(*) AS checked_releases
-			    		FROM ". BB_BT_TORRENTS ."
-			    		WHERE poster_id  = ". $userdata['user_id'] ."
-			    		  AND forum_id   IN($sub_forums)
-			    		  AND tor_status IN(". TOR_APPROVED .",". TOR_DOUBTFUL .",". TOR_TMP .")
-			    		LIMIT 1
-			    	", 'checked_releases');
-
-				    if ($count_checked_releases || IS_AM) tracker_register(TORRENT_ATTACH_ID, 'newtopic', TOR_NOT_APPROVED);
-				    else tracker_register(TORRENT_ATTACH_ID, 'newtopic', TOR_PREMOD);
+					// Получение списка id форумов начиная с parent
+					$forum_parent = $forum_id;
+					if ($post_info['forum_parent']) $forum_parent = $post_info['forum_parent'];
+					$count_rowset = DB()->fetch_rowset("SELECT forum_id FROM ". BB_FORUMS ." WHERE forum_parent = $forum_parent");
+					$sub_forums = array();
+					foreach ($count_rowset as $count_row)
+					{
+						if ($count_row['forum_id'] != $forum_id) $sub_forums[] = $count_row['forum_id'];
+					}
+					$sub_forums[] = $forum_id;
+					$sub_forums = join(',', $sub_forums);
+					// Подсчёт проверенных релизов в форумах раздела
+					$count_checked_releases = DB()->fetch_row("
+						SELECT COUNT(*) AS checked_releases
+						FROM ". BB_BT_TORRENTS ."
+						WHERE poster_id  = ". $userdata['user_id'] ."
+						  AND forum_id   IN($sub_forums)
+						  AND tor_status IN(". TOR_APPROVED .",". TOR_DOUBTFUL .",". TOR_TMP .")
+						LIMIT 1
+					", 'checked_releases');
+					if ($count_checked_releases || IS_AM)
+					{
+						tracker_register(TORRENT_ATTACH_ID, 'newtopic', TOR_NOT_APPROVED);
+					}
+					else
+					{
+						tracker_register(TORRENT_ATTACH_ID, 'newtopic', TOR_PREMOD);
+					}
 				}
 				else tracker_register(TORRENT_ATTACH_ID, 'newtopic', TOR_NOT_APPROVED);
 			}
@@ -467,7 +467,7 @@ elseif ( ($submit || $confirm) && !$topic_has_new_posts )
 	}
 }
 
-if( $refresh || $error_msg || ($submit && $topic_has_new_posts) )
+if ($refresh || $error_msg || ($submit && $topic_has_new_posts))
 {
 	$username = ( !empty($_POST['username']) ) ? clean_username($_POST['username']) : '';
 	$subject = ( !empty($_POST['subject']) ) ? clean_title($_POST['subject']) : '';
@@ -518,7 +518,7 @@ else
 				define('WORD_LIST_OBTAINED', TRUE);
 			}
 
-            if($post_info['post_attachment'] && !IS_AM) $message = $post_info['topic_title'];
+			if ($post_info['post_attachment'] && !IS_AM) $message = $post_info['topic_title'];
 
 			// Use trim to get rid of spaces placed there by MS-SQL 2000
 			$quote_username = ( trim($post_info['post_username']) != '' ) ? $post_info['post_username'] : $post_info['username'];
@@ -528,10 +528,10 @@ else
 			// hide sid
 			$message = preg_replace('#(?<=[\?&;]sid=)[a-zA-Z0-9]{12}#', 'sid', $message);
 
-			if ( !empty($orig_word) )
+			if (!empty($orig_word))
 			{
-				$subject = ( !empty($subject) ) ? preg_replace($orig_word, $replace_word, $subject) : '';
-				$message = ( !empty($message) ) ? preg_replace($orig_word, $replace_word, $message) : '';
+				$subject = (!empty($subject)) ? preg_replace($orig_word, $replace_word, $subject) : '';
+				$message = (!empty($message)) ? preg_replace($orig_word, $replace_word, $message) : '';
 			}
 
 			if ( !preg_match('/^Re:/', $subject) && strlen($subject) > 0 )
@@ -560,9 +560,7 @@ if (IS_GUEST || ($mode == 'editpost' && $post_info['poster_id'] == GUEST_UID))
 	$template->assign_var('POSTING_USERNAME');
 }
 
-//
 // Notify checkbox
-//
 if (!IS_GUEST)
 {
 	if ($mode != 'editpost' || ($mode == 'editpost' && $post_info['poster_id'] != GUEST_UID))
@@ -571,9 +569,7 @@ if (!IS_GUEST)
 	}
 }
 
-//
 // Topic type selection
-//
 $topic_type_toggle = '';
 if ( $mode == 'newtopic' || ( $mode == 'editpost' && $post_data['first_post'] ) )
 {
@@ -616,7 +612,7 @@ if ($post_info['allow_reg_tracker'] && $post_data['first_post'] && ($topic_dl_ty
 		WHERE p.post_id = $post_id
 	";
 	$result = DB()->fetch_row($sql);
-	if(!empty($result['attach_id']))
+	if (!empty($result['attach_id']))
 	{
 		if (!$topic_type_toggle)
 		{
@@ -669,9 +665,7 @@ $template->set_filenames(array(
 	'body' => 'posting.tpl',
 ));
 
-//
 // Output the data to the template
-//
 $template->assign_vars(array(
 	'FORUM_NAME' => htmlCHR($forum_name),
 	'PAGE_TITLE' => $page_title,
@@ -708,9 +702,7 @@ if ($mode == 'editpost' && $post_data['last_post'] && !$post_data['first_post'])
 	));
 }
 
-//
 // Topic review
-//
 if( $mode == 'reply' && $is_auth['auth_read'] )
 {
 	topic_review($topic_id);
