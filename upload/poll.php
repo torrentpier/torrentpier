@@ -13,13 +13,7 @@ $vote_id  = (int)    @$_POST['vote_id'];
 $return_topic_url = TOPIC_URL . $topic_id;
 $return_topic_url .= !empty($_POST['start']) ? "&amp;start=". intval($_POST['start']) : '';
 
-$template->assign_var('BB_DIE_APPEND_MSG', '
-	<a href="'. $return_topic_url .'">Вернуться в тему</a>
-	<br /><br />
-	<a href="viewforum.php?f='. $forum_id .'">Вернуться в раздел</a>
-	<br /><br />
-	<a href="index.php">Вернуться на главную страницу</a>
-');
+set_die_append_msg($forum_id, $topic_id);
 
 $poll = new bb_poll();
 

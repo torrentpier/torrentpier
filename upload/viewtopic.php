@@ -90,20 +90,22 @@ if ($topic_id && isset($_GET['view']) && ($_GET['view'] == 'next' || $_GET['view
 // Get forum/topic data
 if ($topic_id)
 {
-	$sql = "SELECT t.*, f.*
-		FROM ". BB_TOPICS ." t, ". BB_FORUMS ." f
+	$sql = "SELECT t.*, f.*, tw.notify_status
+		FROM ". BB_TOPICS            ." t
+		LEFT JOIN ". BB_FORUMS       ." f USING(forum_id)
+		LEFT JOIN ". BB_TOPICS_WATCH ." tw ON(tw.topic_id = t.topic_id AND user_id = {$userdata['user_id']})
 		WHERE t.topic_id = $topic_id
-			AND f.forum_id = t.forum_id
-		LIMIT 1";
+	";
 }
 elseif ($post_id)
 {
-	$sql = "SELECT t.*, f.*, p.post_time
-		FROM ". BB_TOPICS ." t, ". BB_FORUMS ." f, ". BB_POSTS ." p
+	$sql = "SELECT t.*, f.*, p.post_time, tw.notify_status
+		FROM ". BB_TOPICS            ." t
+		LEFT JOIN ". BB_FORUMS       ." f  USING(forum_id)
+		LEFT JOIN ". BB_POSTS        ." p  USING(topic_id)
+		LEFT JOIN ". BB_TOPICS_WATCH ." tw ON(tw.topic_id = t.topic_id AND user_id = {$userdata['user_id']})
 		WHERE p.post_id = $post_id
-			AND t.topic_id = p.topic_id
-			AND f.forum_id = t.forum_id
-		LIMIT 1";
+	";
 }
 else
 {
@@ -258,12 +260,7 @@ if ($bb_cfg['topic_notify_enabled'])
 	{
 		$can_watch_topic = TRUE;
 
-		$sql = "SELECT SQL_CACHE notify_status
-			FROM " . BB_TOPICS_WATCH . "
-			WHERE topic_id = $topic_id
-				AND user_id = " . $userdata['user_id'];
-
-		if ($row = DB()->fetch_row($sql))
+		if (!empty($t_data['notify_status']) && $t_data['notify_status'])
 		{
 			if (isset($_GET['unwatch']))
 			{
@@ -271,13 +268,7 @@ if ($bb_cfg['topic_notify_enabled'])
 				{
 					$is_watching_topic = 0;
 
-					$sql = "DELETE FROM " . BB_TOPICS_WATCH . "
-						WHERE topic_id = $topic_id
-							AND user_id = " . $userdata['user_id'];
-					if (!($result = DB()->sql_query($sql)))
-					{
-						message_die(GENERAL_ERROR, "Could not delete topic watch information", '', __LINE__, __FILE__, $sql);
-					}
+					DB()->query("DELETE FROM ". BB_TOPICS_WATCH ." WHERE topic_id = $topic_id AND user_id = {$userdata['user_id']}");
 				}
 
 				set_die_append_msg($forum_id, $topic_id);
@@ -288,16 +279,9 @@ if ($bb_cfg['topic_notify_enabled'])
 			{
 				$is_watching_topic = TRUE;
 
-				if ($row['notify_status'])
+				if (!$t_data['notify_status'])
 				{
-					$sql = "UPDATE " . BB_TOPICS_WATCH . "
-						SET notify_status = 0
-						WHERE topic_id = $topic_id
-							AND user_id = " . $userdata['user_id'];
-					if (!($result = DB()->sql_query($sql)))
-					{
-						message_die(GENERAL_ERROR, "Could not update topic watch information", '', __LINE__, __FILE__, $sql);
-					}
+					DB()->query("UPDATE ". BB_TOPICS_WATCH ." SET notify_status = ". TOPIC_WATCH_NOTIFIED ." WHERE topic_id = $topic_id AND user_id = {$userdata['user_id']}");
 				}
 			}
 		}
@@ -309,12 +293,10 @@ if ($bb_cfg['topic_notify_enabled'])
 				{
 					$is_watching_topic = TRUE;
 
-					$sql = "INSERT INTO " . BB_TOPICS_WATCH . " (user_id, topic_id, notify_status)
-						VALUES (" . $userdata['user_id'] . ", $topic_id, 0)";
-					if (!($result = DB()->sql_query($sql)))
-					{
-						message_die(GENERAL_ERROR, "Could not insert topic watch information", '', __LINE__, __FILE__, $sql);
-					}
+					DB()->query("
+						INSERT INTO ". BB_TOPICS_WATCH ." (user_id, topic_id, notify_status)
+						VALUES (". $userdata['user_id'] .", $topic_id, ". TOPIC_WATCH_NOTIFIED .")
+					");
 				}
 
 				set_die_append_msg($forum_id, $topic_id);
@@ -438,8 +420,7 @@ if (!$ranks = $datastore->get('ranks'))
 //
 // Define censored word matches
 //
-$orig_word = array();
-$replacement_word = array();
+$orig_word = $replacement_word = array();
 obtain_word_list($orig_word, $replacement_word);
 
 //
@@ -684,7 +665,6 @@ if ($topic_has_poll)
 		$template->assign_vars(array(
 			'TOPIC_HAS_POLL' => false,
 		));
-		bb_log(join("\t", array(date('m-d H:i:s'), $topic_id, "\n")), 'poll_err');
 	}
 	else
 	{
@@ -936,10 +916,13 @@ if ($bb_cfg['show_quick_reply'])
 			'QR_TOPIC_ID'     => $topic_id,
 			'CAPTCHA_HTML'    => (IS_GUEST) ? CAPTCHA()->get_html() : '',
 		));
+
 		if (!IS_GUEST)
 		{
+			$notify_user = bf($userdata['user_opt'], 'user_opt', 'notify');
+
 			$template->assign_vars(array(
-				'QR_NOTIFY_CHECKED'    => (bf($userdata['user_opt'], 'user_opt', 'notify') || $is_watching_topic),
+				'QR_NOTIFY_CHECKED'    => ($notify_user) ? $notify_user && $is_watching_topic : $is_watching_topic,
 			));
 		}
 	}

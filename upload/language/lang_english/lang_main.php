@@ -662,7 +662,6 @@ $lang['SEND_EMAIL_MSG'] = 'Send an e-mail message';
 $lang['NO_USER_SPECIFIED'] = 'No user was specified';
 $lang['USER_PREVENT_EMAIL'] = 'This user does not wish to receive e-mail. Try sending them a private message.';
 $lang['USER_NOT_EXIST'] = 'That user does not exist';
-$lang['CC_EMAIL'] = 'Send a copy of this e-mail to yourself';
 $lang['EMAIL_MESSAGE_DESC'] = 'This message will be sent as plain text, so do not include any HTML or BBCode. The return address for this message will be set to your e-mail address.';
 $lang['FLOOD_EMAIL_LIMIT'] = 'You cannot send another e-mail at this time. Try again later.';
 $lang['RECIPIENT'] = 'Recipient';

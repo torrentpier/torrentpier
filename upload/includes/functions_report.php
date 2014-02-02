@@ -341,7 +341,7 @@ function report_notify($mode)
 
 			// Obtain notification users
 			$user_level_sql = ($bb_cfg['report_list_admin']) ? '= ' . ADMIN : 'IN(' . ADMIN . ', ' . MOD . ')';
-			$sql = 'SELECT user_id, user_level, user_email, user_lang
+			$sql = 'SELECT username, user_id, user_level, user_email, user_lang
 				FROM ' . BB_USERS . '
 				WHERE user_active = 1
 					AND user_level ' . $user_level_sql . '
@@ -494,26 +494,10 @@ function report_notify($mode)
 		return true;
 	}
 
-
-	if (preg_match('/[c-z]:\\\.*/i', getenv('PATH')) && !$bb_cfg['smtp_delivery'])
-	{
-		$ini_val = (@phpversion() >= '4.0.0') ? 'ini_get' : 'get_cfg_var';
-		$bb_cfg['smtp_delivery'] = 1;
-		$bb_cfg['smtp_host'] = @$ini_val('SMTP');
-	}
-
-	include(INC_DIR . "emailer.class.php");
+	require(INC_DIR .'emailer.class.php');
 	$emailer = new emailer($bb_cfg['smtp_delivery']);
-
-	$server_name = trim($bb_cfg['server_name']);
-	$server_protocol = ($bb_cfg['cookie_secure']) ? 'https://' : 'http://';
-	$server_port = ($bb_cfg['server_port'] <> 80) ? ':' . trim($bb_cfg['server_port']) . '/' : '/';
-	$script_path = preg_replace('#^/?(.*?)/?$#', '$1', trim($bb_cfg['script_path']));
-	$script_path .= ($script_path != '') ? '/' : '';
-	$server_full = $server_protocol . $server_name . $server_port . $script_path;
-
-	$emailer->from($bb_cfg['board_email']);
-	$emailer->replyto($bb_cfg['board_email']);
+	
+	$emailer->from($bb_cfg['sitename'] ." <{$bb_cfg['board_email']}>");
 
 	// Send emails
 	foreach ($notify_users as $report_id => $report_notify_users)
@@ -522,20 +506,20 @@ function report_notify($mode)
 		foreach ($report_notify_users as $user_info)
 		{
 			$emailer->use_template($email_template, $user_info['user_lang']);
-			$emailer->email_address($user_info['user_email']);
+			$emailer->email_address($user_info['username'] ." <{$user_info['user_email']}>");
 
 			// Get language variables
 			$lang =& report_notify_lang($user_info['user_lang']);
 
 			// Set email variables, we use $vars here because of an emailer bug
 			$vars = array(
-				'EMAIL_SIG' => (!empty($bb_cfg['board_email_sig'])) ? str_replace('<br />', "\n", "-- \n" . $bb_cfg['board_email_sig']) : '',
-				'SITENAME' => $bb_cfg['sitename'],
+				'SITENAME'      => $bb_cfg['sitename'],
 
-				'REPORT_TITLE' => $report['report_title'],
-				'REPORT_TEXT' => $report['report_desc'],
+				'REPORT_TITLE'  => $report['report_title'],
+				'REPORT_TEXT'   => $report['report_desc'],
 
-				'U_REPORT_VIEW' => $server_full . "report.php?" . POST_REPORT_URL . "=$report_id");
+				'U_REPORT_VIEW' => make_url("report.php?" . POST_REPORT_URL . "=$report_id"),
+			);
 
 			switch ($mode)
 			{
@@ -550,19 +534,19 @@ function report_notify($mode)
 					}
 
 					$vars = array_merge($vars, array(
-						'REPORT_AUTHOR' => $user->name,
-						'REPORT_TIME' => bb_date($report['report_time']),
-						'REPORT_REASON' => $report_reason)
-					);
+						'REPORT_AUTHOR' => $userdata['username'],
+						'REPORT_TIME'   => bb_date($report['report_time'], $bb_cfg['last_post_date_format']),
+						'REPORT_REASON' => $report_reason,
+					));
 				break;
 
 				case 'change':
 					$vars = array_merge($vars, array(
-						'REPORT_CHANGE_AUTHOR' => $report['username'],
-						'REPORT_CHANGE_TIME' => bb_date($report['report_change_time']),
-						'REPORT_CHANGE_STATUS' => $lang['REPORT_STATUS'][$status],
-						'REPORT_CHANGE_COMMENT' => str_replace(array("\r\n", "\r", "\n"), ' ', $report['report_change_comment']))
-					);
+						'REPORT_CHANGE_AUTHOR'  => $report['username'],
+						'REPORT_CHANGE_TIME'    => bb_date($report['report_change_time'], $bb_cfg['last_post_date_format']),
+						'REPORT_CHANGE_STATUS'  => $lang['REPORT_STATUS'][$status],
+						'REPORT_CHANGE_COMMENT' => str_replace(array("\r\n", "\r", "\n"), ' ', $report['report_change_comment']),
+					));
 				break;
 			}
 

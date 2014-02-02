@@ -3,7 +3,7 @@
 // ACP Header - START
 if (!empty($setmodules))
 {
-	$module['General']['Mass_Email'] = basename(__FILE__);
+	$module['Mods']['Mass_Email'] = basename(__FILE__);
 	return;
 }
 require('./pagestart.php');
@@ -11,150 +11,97 @@ require('./pagestart.php');
 
 @set_time_limit(1200);
 
-$message = '';
-$subject = '';
+$subject  = (string) trim(request_var('subject', ''));
+$message  = (string) request_var('message', '');
+$group_id = (int) request_var(POST_GROUPS_URL, 0);
 
-//
-// Do the job ...
-//
-if ( isset($_POST['submit']) )
+$errors = $user_id_sql = array();
+
+if (isset($_POST['submit']))
 {
-	$subject = stripslashes(trim($_POST['subject']));
-	$message = stripslashes(trim($_POST['message']));
-
-	$error = FALSE;
-	$error_msg = '';
-
-	if ( empty($subject) )
+	if(!$subject)  $errors[] = $lang['EMPTY_SUBJECT'];
+	if(!$message)  $errors[] = $lang['EMPTY_MESSAGE'];
+	if(!$group_id) $errors[] = $lang['GROUP_NOT_EXIST'];
+	
+	if(!$errors)
 	{
-		$error = true;
-		$error_msg .= ( !empty($error_msg) ) ? '<br />' . $lang['EMPTY_SUBJECT'] : $lang['EMPTY_SUBJECT'];
-	}
-
-	if ( empty($message) )
-	{
-		$error = true;
-		$error_msg .= ( !empty($error_msg) ) ? '<br />' . $lang['EMPTY_MESSAGE'] : $lang['EMPTY_MESSAGE'];
-	}
-
-	$group_id = intval($_POST[POST_GROUPS_URL]);
-
-	$sql = ( $group_id != -1 ) ? "SELECT u.user_email FROM " . BB_USERS . " u, " . BB_USER_GROUP . " ug WHERE ug.group_id = $group_id AND ug.user_pending <> 1 AND u.user_id = ug.user_id" : "SELECT user_email FROM " . BB_USERS;
-	if ( !($result = DB()->sql_query($sql)) )
-	{
-		message_die(GENERAL_ERROR, 'Could not select group members', '', __LINE__, __FILE__, $sql);
-	}
-
-	if ( $row = DB()->sql_fetchrow($result) )
-	{
-		$bcc_list = array();
-		do
+		$sql = DB()->fetch_rowset("SELECT ban_userid FROM ". BB_BANLIST ." WHERE ban_userid != 0");
+			
+		foreach ($sql as $row)
 		{
-			$bcc_list[] = $row['user_email'];
+			$user_id_sql[] = ','. $row['ban_userid'];
 		}
-		while ( $row = DB()->sql_fetchrow($result) );
-
-		DB()->sql_freeresult($result);
-	}
-	else
-	{
-		$message = ( $group_id != -1 ) ? $lang['GROUP_NOT_EXIST'] : $lang['NO_SUCH_USER'];
-
-		$error = true;
-		$error_msg .= ( !empty($error_msg) ) ? '<br />' . $message : $message;
-	}
-
-	if ( !$error )
-	{
-		include(INC_DIR . 'emailer.class.php');
-
-		//
-		// Let's do some checking to make sure that mass mail functions
-		// are working in win32 versions of php.
-		//
-		if ( preg_match('/[c-z]:\\\.*/i', getenv('PATH')) && !$bb_cfg['smtp_delivery'])
+		$user_id_sql = join('', $user_id_sql);
+			
+		if ($group_id != -1)
 		{
-			$ini_val = ( @phpversion() >= '4.0.0' ) ? 'ini_get' : 'get_cfg_var';
-
-			// We are running on windows, force delivery to use our smtp functions
-			// since php's are broken by default
-			$bb_cfg['smtp_delivery'] = 1;
-			$bb_cfg['smtp_host'] = @$ini_val('SMTP');
+			$user_list = DB()->fetch_rowset("
+				SELECT u.username, u.user_email, u.user_lang 
+				FROM ". BB_USERS ." u, ". BB_USER_GROUP ." ug 
+				WHERE ug.group_id = $group_id 
+					AND ug.user_pending = 0 
+					AND u.user_id = ug.user_id
+					AND u.user_active = 1
+					AND u.user_id NOT IN(". EXCLUDED_USERS_CSV . $user_id_sql .")
+			");
 		}
-
-		$emailer = new emailer($bb_cfg['smtp_delivery']);
-
-		$emailer->from($bb_cfg['board_email']);
-		$emailer->replyto($bb_cfg['board_email']);
-
-		for ($i = 0; $i < count($bcc_list); $i++)
+		else
 		{
-			$emailer->bcc($bcc_list[$i]);
+			$user_list = DB()->fetch_rowset("
+				SELECT username, user_email, user_lang 
+				FROM ". BB_USERS ." 
+				WHERE user_active = 1
+					AND user_id NOT IN(". EXCLUDED_USERS_CSV . $user_id_sql .")
+			");
 		}
+		
+		require(INC_DIR .'emailer.class.php');
+		
+		foreach ($user_list as $i => $row)
+		{
+			$emailer = new emailer($bb_cfg['smtp_delivery']);
 
-		$email_headers = 'X-AntiAbuse: Board servername - ' . $bb_cfg['server_name'] . "\n";
-		$email_headers .= 'X-AntiAbuse: User_id - ' . $userdata['user_id'] . "\n";
-		$email_headers .= 'X-AntiAbuse: Username - ' . $userdata['username'] . "\n";
-		$email_headers .= 'X-AntiAbuse: User IP - ' . CLIENT_IP . "\n";
+			$emailer->from($bb_cfg['sitename'] ." <{$bb_cfg['board_email']}>");
+			$emailer->email_address($row['username'] ." <{$row['user_email']}>");
+			$emailer->use_template('admin_send_email');
 
-		$emailer->use_template('admin_send_email');
-		$emailer->email_address($bb_cfg['board_email']);
-		$emailer->set_subject($subject);
-		$emailer->extra_headers($email_headers);
+			$emailer->assign_vars(array(
+				'SUBJECT'    => html_entity_decode($subject),
+				'MESSAGE'    => html_entity_decode($message),
+			));
 
-		$emailer->assign_vars(array(
-			'SITENAME' => $bb_cfg['sitename'],
-			'BOARD_EMAIL' => $bb_cfg['board_email'],
-			'MESSAGE' => $message)
-		);
-		$emailer->send();
-		$emailer->reset();
-
-		message_die(GENERAL_MESSAGE, $lang['EMAIL_SENT'] . '<br /><br />' . sprintf($lang['CLICK_RETURN_ADMIN_INDEX'],  '<a href="index.php?pane=right">', '</a>'));
+			$emailer->send();
+			$emailer->reset();
+		}
 	}
 }
 
-if ( @$error )
-{
-	$template->assign_vars(array('ERROR_MESSAGE' => $error_msg));
-}
-
-//
-// Initial selection
-//
-
-$sql = "SELECT group_id, group_name
-	FROM ".BB_GROUPS . "
-	WHERE group_single_user <> 1";
-if ( !($result = DB()->sql_query($sql)) )
-{
-	message_die(GENERAL_ERROR, 'Could not obtain list of groups', '', __LINE__, __FILE__, $sql);
-}
-
-$select_list = '<select name = "' . POST_GROUPS_URL . '"><option value = "-1">' . $lang['ALL_USERS'] . '</option>';
-if ( $row = DB()->sql_fetchrow($result) )
-{
-	do
-	{
-		$select_list .= '<option value = "' . $row['group_id'] . '">' . $row['group_name'] . '</option>';
-	}
-	while ( $row = DB()->sql_fetchrow($result) );
-}
-$select_list .= '</select>';
 
 //
 // Generate page
 //
-require(PAGE_HEADER);
+
+$sql = "SELECT group_id, group_name
+	FROM ". BB_GROUPS ."
+	WHERE group_single_user = 0
+	ORDER BY group_name
+";
+
+$groups = array('-- '. $lang['ALL_USERS'] .' --' => -1);
+foreach (DB()->fetch_rowset($sql) as $row)
+{
+	$groups[$row['group_name']] = $row['group_id'];
+}
+
 
 $template->assign_vars(array(
 	'MESSAGE' => $message,
 	'SUBJECT' => $subject,
 
-	'L_NOTICE' => @$notice,
+	'ERROR_MESSAGE'	=> ($errors) ? join('<br />', array_unique($errors)) : '',
 
 	'S_USER_ACTION' => 'admin_mass_email.php',
-	'S_GROUP_SELECT' => $select_list)
-);
+	'S_GROUP_SELECT' => build_select(POST_GROUPS_URL, $groups),
+));
 
 print_page('admin_mass_email.tpl', 'admin');

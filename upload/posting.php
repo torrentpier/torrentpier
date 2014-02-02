@@ -404,7 +404,7 @@ elseif ( ($submit || $confirm) && !$topic_has_new_posts )
 
 		if (!$error_msg)
 		{
-			user_notification($mode, $post_data, $post_info['topic_title'], $forum_id, $topic_id, $post_id, $notify_user);
+			user_notification($mode, $post_data, $post_info['topic_title'], $forum_id, $topic_id, $notify_user);
 		}
 
 		if ($mode == 'newtopic' || $mode == 'reply')

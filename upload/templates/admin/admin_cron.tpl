@@ -83,7 +83,7 @@ tr.hl-tr:hover td { background-color: #CFC !important; }
 <!-- BEGIN list -->
 <tr class="{list.ROW_CLASS} hl-tr">
 	<td align="center"><input type="checkbox" name="select[]" class="checkbox" value="{list.CRON_ID}"></td>
-	<td nowrap="nowrap" align="center">{list.CRON_ID}</td>
+	<td nowrap="nowrap" align="center">{list.JOB_ID}</td>
 	<td nowrap="nowrap" align="center">{list.CRON_ACTIVE}</td>
 	<td nowrap="nowrap" align="left">{list.CRON_TITLE}</td>
 	<td nowrap="nowrap" align="left">{list.CRON_SCRIPT}</td>
@@ -92,9 +92,9 @@ tr.hl-tr:hover td { background-color: #CFC !important; }
 	<td nowrap="nowrap" align="center">{list.NEXT_RUN}</td>
 	<td nowrap="nowrap" align="center"><font color="#505050"><b><span class="leechmed">{list.RUN_COUNT}</span></b></font></td>
 	<td nowrap="nowrap" align="center">
-		<a href="admin_cron.php?mode=run&id={list.CRON_ID}"><img src="../images/icon_sync.gif" alt="[Run]" title="{L_CRON_RUN}" /></a>
-		<a href="admin_cron.php?mode=edit&id={list.CRON_ID}"><img src="../images/icon_edit.gif" alt="[Edit]" title="{L_CRON_EDIT_HEAD_EDIT}" /></a>
-		<a href="admin_cron.php?mode=delete&id={list.CRON_ID}"><img src="../images/icon_delete.gif" alt="[Del]" title="{L_CRON_DEL}" onclick="return cfm('Вы действительно хотите удалить крон задачу?');" /></a>
+		<a href="admin_cron.php?mode=run&id={list.CRON_ID}"><img src="{SITE_URL}images/icon_sync.gif" alt="[Run]" title="{L_CRON_RUN}" /></a>
+		<a href="admin_cron.php?mode=edit&id={list.CRON_ID}"><img src="{SITE_URL}images/icon_edit.gif" alt="[Edit]" title="{L_CRON_EDIT_HEAD_EDIT}" /></a>
+		<a href="admin_cron.php?mode=delete&id={list.CRON_ID}"><img src="{SITE_URL}images/icon_delete.gif" alt="[Del]" title="{L_CRON_DEL}" onclick="return cfm('Вы действительно хотите удалить крон задачу?');" /></a>
 	</td>
 </tr>
 <!-- END list -->

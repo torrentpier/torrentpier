@@ -137,6 +137,7 @@ switch ($mode)
 				user_rank,
 				user_level,
 				user_avatar,
+				user_email,
 				$profile_fields_sql
 			FROM ". BB_USERS ."
 			WHERE user_id = $pr_user_id
@@ -812,22 +813,19 @@ if ($submit && !$errors)
 				$email_template = 'user_welcome';
 			}
 
-			include(INC_DIR . 'emailer.class.php');
+			require(INC_DIR .'emailer.class.php');
 			$emailer = new emailer($bb_cfg['smtp_delivery']);
 
-			$emailer->from($bb_cfg['board_email']);
-			$emailer->replyto($bb_cfg['board_email']);
+			$emailer->from($bb_cfg['sitename'] ." <{$bb_cfg['board_email']}>");
+			$emailer->email_address("$username <$email>");
 
 			$emailer->use_template($email_template, $user_lang);
-			$emailer->email_address($email);
-			$emailer->set_subject(sprintf($lang['WELCOME_SUBJECT'], $bb_cfg['sitename']));
 
 			$emailer->assign_vars(array(
 				'SITENAME'    => $bb_cfg['sitename'],
 				'WELCOME_MSG' => sprintf($lang['WELCOME_SUBJECT'], $bb_cfg['sitename']),
 				'USERNAME'    => html_entity_decode($username),
 				'PASSWORD'    => $new_pass,
-				'EMAIL_SIG'   => str_replace('<br />', "\n", "-- \n" . $bb_cfg['board_email_sig']),
 
 				'U_ACTIVATE'  => make_url('profile.php?mode=activate&' . POST_USERS_URL . '=' . $new_user_id . '&act_key=' . $db_data['user_actkey'])
 			));
@@ -837,59 +835,22 @@ if ($submit && !$errors)
 
 			if ($bb_cfg['require_activation'] == USER_ACTIVATION_ADMIN)
 			{
-				$sql = "SELECT user_email, user_lang, user_opt FROM ". BB_USERS ." WHERE user_level = " . ADMIN;
+				$sql = "SELECT username, user_email, user_lang FROM ". BB_USERS ." WHERE user_level = ". ADMIN;
 
-				if (!($result = DB()->sql_query($sql)))
+				foreach (DB()->fetch_rowset($sql) as $row)
 				{
-					message_die(GENERAL_ERROR, 'Could not select Administrators', '', __LINE__, __FILE__, $sql);
-				}
-
-				while ($row = DB()->sql_fetchrow($result))
-				{
-					if(bf($to_userdata['user_opt'], 'user_opt', 'notify_pm'))
-					{
-						$active_admin = true;
-
-						$emailer->from($bb_cfg['board_email']);
-						$emailer->replyto($bb_cfg['board_email']);
-
-						$emailer->email_address(trim($row['user_email']));
-						$emailer->use_template("admin_activate", $row['user_lang']);
-						$emailer->set_subject($lang['NEW_ACCOUNT_SUBJECT']);
-
-						$emailer->assign_vars(array(
-							'USERNAME'   => html_entity_decode($username),
-							'EMAIL_SIG'  => str_replace('<br />', "\n", "-- \n" . $bb_cfg['board_email_sig']),
-
-							'U_ACTIVATE' => make_url('profile.php?mode=activate&' . POST_USERS_URL . '=' . $new_user_id . '&act_key=' . $db_data['user_actkey'])
-						));
-
-						$emailer->send();
-						$emailer->reset();
-					}
-				}
-
-				if (empty($active_admin))
-				{
-					$emailer->from($bb_cfg['board_email']);
-					$emailer->replyto($bb_cfg['board_email']);
-
-					$emailer->email_address($bb_cfg['board_email']);
+					$emailer->from($bb_cfg['sitename'] ." <{$bb_cfg['board_email']}>");
+					$emailer->email_address($row['username'] ." <{$row['user_email']}>");
 					$emailer->use_template("admin_activate", $row['user_lang']);
-					$emailer->set_subject($lang['NEW_ACCOUNT_SUBJECT']);
 
 					$emailer->assign_vars(array(
 						'USERNAME'   => html_entity_decode($username),
-						'EMAIL_SIG'  => str_replace('<br />', "\n", "-- \n" . $bb_cfg['board_email_sig']),
-
 						'U_ACTIVATE' => make_url('profile.php?mode=activate&' . POST_USERS_URL . '=' . $new_user_id . '&act_key=' . $db_data['user_actkey'])
 					));
 
 					$emailer->send();
 					$emailer->reset();
 				}
-
-				DB()->sql_freeresult($result);
 			}
 		}
 
@@ -910,11 +871,10 @@ if ($submit && !$errors)
 				$pr_data['user_actkey'] = $user_actkey;
 				$db_data['user_actkey'] = $user_actkey;
 
-				include(INC_DIR . 'emailer.class.php');
+				require(INC_DIR .'emailer.class.php');
 				$emailer = new emailer($bb_cfg['smtp_delivery']);
 
- 				$emailer->from($bb_cfg['board_email']);
-				$emailer->replyto($bb_cfg['board_email']);
+ 				$emailer->from($bb_cfg['sitename'] ." <{$bb_cfg['board_email']}>");
 
 				if($bb_cfg['require_activation'] == USER_ACTIVATION_ADMIN)
 				{
@@ -924,14 +884,11 @@ if ($submit && !$errors)
 				{
 					$emailer->use_template('user_activate', $pr_data['user_lang']);
 				}
-				$emailer->email_address($email);
-				$emailer->set_subject($lang['REACTIVATE']);
+				$emailer->email_address("$username <$email>");
 
 				$emailer->assign_vars(array(
 					'SITENAME'   => $bb_cfg['sitename'],
 					'USERNAME'   => html_entity_decode($username),
-					'EMAIL_SIG'  => (!empty($bb_cfg['board_email_sig'])) ? str_replace('<br />', "\n", "-- \n" . $bb_cfg['board_email_sig']) : '',
-
 					'U_ACTIVATE' => make_url("profile.php?mode=activate&u={$pr_data['user_id']}&act_key=$user_actkey"),
 				));
 				$emailer->send();
@@ -948,7 +905,7 @@ if ($submit && !$errors)
 
 			$sql_args = DB()->build_array('UPDATE', $db_data);
 
-			DB()->query("UPDATE ". BB_USERS ." SET $sql_args WHERE user_id = {$pr_data['user_id']} LIMIT 1");
+			DB()->query("UPDATE ". BB_USERS ." SET $sql_args WHERE user_id = {$pr_data['user_id']}");
 
 			if ($pr_data['user_id'] != $userdata['user_id'])
 			{

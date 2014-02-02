@@ -2,6 +2,8 @@
 
 if (!defined('IN_FORUM')) die("Hacking attempt");
 
+set_die_append_msg();
+
 if ($bb_cfg['emailer_disabled']) bb_die($lang['EMAILER_DISABLED']);
 
 $need_captcha = ($_GET['mode'] == 'sendpassword' && !IS_ADMIN);
@@ -40,34 +42,28 @@ if ( isset($_POST['submit']) )
 				message_die(GENERAL_ERROR, 'Could not update new password information', '', __LINE__, __FILE__, $sql);
 			}
 
-			include(INC_DIR . 'emailer.class.php');
+			require(INC_DIR .'emailer.class.php');
 			$emailer = new emailer($bb_cfg['smtp_delivery']);
 
-			$emailer->from($bb_cfg['board_email']);
-			$emailer->replyto($bb_cfg['board_email']);
-
+			$emailer->from($bb_cfg['sitename'] ." <{$bb_cfg['board_email']}>");
+			$emailer->email_address("$username <{$row['user_email']}>");
+			
 			$emailer->use_template('user_activate_passwd', $row['user_lang']);
-			$emailer->email_address($row['user_email']);
-			$emailer->set_subject($lang['NEW_PASSWORD_ACTIVATION']);
 
 			$emailer->assign_vars(array(
 				'SITENAME' => $bb_cfg['sitename'],
 				'USERNAME' => $username,
 				'PASSWORD' => $user_password,
-				'EMAIL_SIG' => (!empty($bb_cfg['board_email_sig'])) ? str_replace('<br />', "\n", "-- \n" . $bb_cfg['board_email_sig']) : '',
-
 				'U_ACTIVATE' => make_url('profile.php?mode=activate&' . POST_USERS_URL . '=' . $user_id . '&act_key=' . $user_actkey)
 			));
 			$emailer->send();
 			$emailer->reset();
 
-			$message = $lang['PASSWORD_UPDATED'] . '<br /><br />' . sprintf($lang['CLICK_RETURN_INDEX'],  '<a href="index.php">', '</a>');
-
-			message_die(GENERAL_MESSAGE, $message);
+			bb_die($lang['PASSWORD_UPDATED']);
 		}
 		else
 		{
-			message_die(GENERAL_MESSAGE, $lang['NO_EMAIL_MATCH']);
+			bb_die($lang['NO_EMAIL_MATCH']);
 		}
 	}
 	else
@@ -85,7 +81,7 @@ $template->assign_vars(array(
 	'EMAIL' => $email,
 	'CAPTCHA_HTML'       => ($need_captcha) ? CAPTCHA()->get_html() : '',
 	'S_HIDDEN_FIELDS' => '',
-	'S_PROFILE_ACTION' => "profile.php?mode=sendpassword")
-);
+	'S_PROFILE_ACTION' => "profile.php?mode=sendpassword",
+));
 
 print_page('usercp_sendpasswd.tpl');

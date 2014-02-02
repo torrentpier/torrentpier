@@ -61,6 +61,7 @@ switch($mode)
 		{
 			$template->assign_block_vars('list', array(
 				'ROW_CLASS'	  => !($i % 2) ? 'row2' : 'row1',
+				'JOB_ID'      => $i + 1,
 				'CRON_ID'     => $row['cron_id'],
 				'CRON_ACTIVE' => $row['cron_active'] ? '<img src="../images/icon_run.gif" alt="'. $lang['YES'] .'" />' : '<img src="../images/icon_delete.gif" alt="'. $lang['NO'] .'" />',
 				'CRON_TITLE'  => $row['cron_title'],

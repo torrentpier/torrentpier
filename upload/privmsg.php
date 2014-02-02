@@ -1104,31 +1104,21 @@ else if ( $submit || $refresh || $mode != '' )
 
 			if ( bf($to_userdata['user_opt'], 'user_opt', 'notify_pm') && !empty($to_userdata['user_email']) && $to_userdata['user_active'] && $bb_cfg['pm_notify_enabled'] )
 			{
-				$script_name = preg_replace('/^\/?(.*?)\/?$/', "\\1", trim($bb_cfg['script_path']));
-				$script_name = ( $script_name != '' ) ? $script_name . '/'. PM_URL  : PM_URL;
-				$server_name = trim($bb_cfg['server_name']);
-				$server_protocol = ( $bb_cfg['cookie_secure'] ) ? 'https://' : 'http://';
-				$server_port = ( $bb_cfg['server_port'] <> 80 ) ? ':' . trim($bb_cfg['server_port']) . '/' : '/';
-
-				include(INC_DIR .'emailer.class.php');
+				require(INC_DIR .'emailer.class.php');
 				$emailer = new emailer($bb_cfg['smtp_delivery']);
 
-				$emailer->from($bb_cfg['board_email']);
-				$emailer->replyto($bb_cfg['board_email']);
-
+				$emailer->from($bb_cfg['sitename'] ." <{$bb_cfg['board_email']}>");
+				$emailer->email_address($to_userdata['username'] ." <{$to_userdata['user_email']}>");
+				
 				$emailer->use_template('privmsg_notify', $to_userdata['user_lang']);
-				$emailer->email_address($to_userdata['user_email']);
-				$emailer->set_subject($lang['NOTIFICATION_SUBJECT']);
 
 				$emailer->assign_vars(array(
-					'USERNAME' => stripslashes($to_username),
-					'NAME_FROM' => $userdata['username'],
-					'MSG_SUBJECT' => stripslashes($privmsg_subject),
-					'SITENAME' => $bb_cfg['sitename'],
-					'EMAIL_SIG' => (!empty($bb_cfg['board_email_sig'])) ? str_replace('<br />', "\n", "-- \n" . $bb_cfg['board_email_sig']) : '',
-
-					'U_INBOX' => $server_protocol . $server_name . $server_port . $script_name . '?folder=inbox&mode=read&p=' . $privmsg_sent_id)
-				);
+					'USERNAME'    => html_entity_decode($to_username),
+					'NAME_FROM'   => $userdata['username'],
+					'MSG_SUBJECT' => html_entity_decode($privmsg_subject),
+					'SITENAME'    => $bb_cfg['sitename'],
+					'U_INBOX'     => make_url(PM_URL ."?folder=inbox$pm&mode=read&p=". $privmsg_sent_id),
+				));
 
 				$emailer->send();
 				$emailer->reset();

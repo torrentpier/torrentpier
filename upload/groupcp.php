@@ -243,21 +243,18 @@ else if (@$_POST['joingroup'])
 
 	if ($bb_cfg['groupcp_send_email'])
 	{
-		include(INC_DIR .'emailer.class.php');
+		require(INC_DIR .'emailer.class.php');
 		$emailer = new emailer($bb_cfg['smtp_delivery']);
 
-		$emailer->from($bb_cfg['board_email']);
-		$emailer->replyto($bb_cfg['board_email']);
-
+		$emailer->from($bb_cfg['sitename'] ." <{$bb_cfg['board_email']}>");
+		$emailer->email_address($moderator['username'] ." <{$moderator['user_email']}>");
+		
 		$emailer->use_template('group_request', $moderator['user_lang']);
-		$emailer->email_address($moderator['user_email']);
-		$emailer->set_subject($lang['GROUP_REQUEST']);
-
+		
 		$emailer->assign_vars(array(
 			'USER'            => $userdata['username'],
 			'SITENAME'        => $bb_cfg['sitename'],
 			'GROUP_MODERATOR' => $moderator['username'],
-			'EMAIL_SIG'       => ($bb_cfg['board_email_sig']) ? str_replace('<br />', "\n", "-- \n" . $bb_cfg['board_email_sig']) : '',
 			'U_GROUPCP'       => make_url(GROUP_URL . $group_id),
 		));
 		$emailer->send();
@@ -306,19 +303,17 @@ else
 				require(INC_DIR .'emailer.class.php');
 				$emailer = new emailer($bb_cfg['smtp_delivery']);
 
-				$emailer->from($bb_cfg['board_email']);
-				$emailer->replyto($bb_cfg['board_email']);
-
+				$emailer->from($bb_cfg['sitename'] ." <{$bb_cfg['board_email']}>");
+				$emailer->email_address($row['username'] ." <{$row['user_email']}>");
+				
 				$emailer->use_template('group_added', $row['user_lang']);
-				$emailer->email_address($row['user_email']);
-				$emailer->set_subject($lang['GROUP_ADDED']);
-
+				
 				$emailer->assign_vars(array(
 					'SITENAME'   => $bb_cfg['sitename'],
 					'GROUP_NAME' => $group_info['group_name'],
-					'EMAIL_SIG'  => ($bb_cfg['board_email_sig']) ? str_replace('<br />', "\n", "-- \n". $bb_cfg['board_email_sig']) : '',
 					'U_GROUPCP'  => make_url(GROUP_URL . $group_id),
 				));
+				
 				$emailer->send();
 				$emailer->reset();
 			}
@@ -366,43 +361,32 @@ else
 				// Email users when they are approved
 				if (!empty($_POST['approve']) && $bb_cfg['groupcp_send_email'])
 				{
-					$sql_select = "SELECT user_email
+					$sql_select = "SELECT username, user_email, user_lang
 						FROM ". BB_USERS ."
 						WHERE user_id IN($sql_in)";
 
 					if (!$result = DB()->sql_query($sql_select))
 					{
-						message_die(GENERAL_ERROR, 'Could not get user email information', '', __LINE__, __FILE__, $sql);
+						message_die(GENERAL_ERROR, 'Could not get user email information', '', __LINE__, __FILE__, $sql_select);
 					}
-
-					$bcc_list = array();
-					while ($row = DB()->sql_fetchrow($result))
-					{
-						$bcc_list[] = $row['user_email'];
-					}
-
-					$group_name = $group_info['group_name'];
 
 					require(INC_DIR .'emailer.class.php');
 					$emailer = new emailer($bb_cfg['smtp_delivery']);
 
-					$emailer->from($bb_cfg['board_email']);
-					$emailer->replyto($bb_cfg['board_email']);
+					$emailer->from($bb_cfg['sitename'] ." <{$bb_cfg['board_email']}>");
 
-					for ($i=0, $cnt=count($bcc_list); $i < $cnt; $i++)
+					foreach (DB()->fetch_rowset($sql_select) as $row)
 					{
-						$emailer->bcc($bcc_list[$i]);
+						$emailer->use_template('group_approved', $row['user_lang']);
+						$emailer->email_address($row['username'] ." <{$row['user_email']}>");
 					}
-
-					$emailer->use_template('group_approved');
-					$emailer->set_subject($lang['GROUP_APPROVED']);
-
+					
 					$emailer->assign_vars(array(
 						'SITENAME'   => $bb_cfg['sitename'],
-						'GROUP_NAME' => $group_name,
-						'EMAIL_SIG'  => ($bb_cfg['board_email_sig']) ? str_replace('<br />', "\n", "-- \n". $bb_cfg['board_email_sig']) : '',
+						'GROUP_NAME' => $group_info['group_name'],
 						'U_GROUPCP'  => make_url(GROUP_URL . $group_id),
 					));
+					
 					$emailer->send();
 					$emailer->reset();
 				}

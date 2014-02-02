@@ -41,7 +41,8 @@ define('XS_TAG_ENDIF', 8);
 define('XS_TAG_BEGINELSE', 11);
 
 
-class Template {
+class Template 
+{
 	var $classname = "Template";
 
 	// variable that holds all the data we'll be substituting into
@@ -251,7 +252,7 @@ class Template {
 	{
 		$this->cur_tpl = $filename;
 
-		global $lang, $bb_cfg, $user;
+		global $lang, $bb_cfg, $user, $tr_cfg;
 
 		$L =& $lang;
 		$V =& $this->vars;

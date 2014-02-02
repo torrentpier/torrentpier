@@ -105,7 +105,7 @@ ajax.callback.posts = function(data){
 		onkeyup  = "storeCaret(this);"
 	>{MESSAGE}</textarea>
 
-<!-- IF USER_RUS -->	
+<!-- IF USER_RUS -->
 <div id="translit_opt" class="mrg_4" style="display: none;">
 	<table cellspacing="0" class="translit_expl borderless bCenter">
 	<tr>
@@ -180,7 +180,7 @@ $('#post-submit-btn').click(function(event){
 });
 $('#post-js-warn').hide();
 $('#post-buttons-block').show();
-$('#post-submit-btn').removeAttr('disabled'); 
+$('#post-submit-btn').removeAttr('disabled');
 
 // Called before form submitting.
 var submitted = false;
@@ -201,11 +201,16 @@ function checkForm(form) {
 	if(form.message.value.length < 100 && submitted)
 	{
 		setTimeout(function() {
+			if ($('input[name="notify"]').attr('checked') == 'checked') {
+				var notify = 1;
+			}
+
 			ajax.exec({
-				action: 'posts',
-				type: 'add',
-				message: $('textarea#message').val(),
-				topic_id: {TOPIC_ID}
+				action   : 'posts',
+				type     : 'add',
+				message  : $('textarea#message').val(),
+				topic_id : {TOPIC_ID},
+				notify   : notify,
 			});
 		}, 100);
 		return false;

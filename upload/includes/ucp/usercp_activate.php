@@ -47,22 +47,19 @@ if ( $row = DB()->sql_fetchrow($result) )
 
 		if ( intval($bb_cfg['require_activation']) == USER_ACTIVATION_ADMIN && $sql_update_pass == '' )
 		{
-			include(INC_DIR . 'emailer.class.php');
+			require(INC_DIR .'emailer.class.php');
 			$emailer = new emailer($bb_cfg['smtp_delivery']);
 
-			$emailer->from($bb_cfg['board_email']);
-			$emailer->replyto($bb_cfg['board_email']);
-
+			$emailer->from($bb_cfg['sitename'] ." <{$bb_cfg['board_email']}>");
+			$emailer->email_address($row['username'] ." <{$row['user_email']}>");
+			
 			$emailer->use_template('admin_welcome_activated', $row['user_lang']);
-			$emailer->email_address($row['user_email']);
-			$emailer->set_subject($lang['ACCOUNT_ACTIVATED_SUBJECT']);
 
 			$emailer->assign_vars(array(
 				'SITENAME' => $bb_cfg['sitename'],
 				'USERNAME' => $row['username'],
 				'PASSWORD' => $row['user_newpasswd'],
-				'EMAIL_SIG' => (!empty($bb_cfg['board_email_sig'])) ? str_replace('<br />', "\n", "-- \n" . $bb_cfg['board_email_sig']) : '')
-			);
+			));
 			$emailer->send();
 			$emailer->reset();
 

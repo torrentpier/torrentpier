@@ -16,8 +16,8 @@ if ($exec_return_status && !$bb_cfg['emailer_disabled'] && $bb_cfg['tech_admin_e
 	require_once(INC_DIR .'emailer.class.php');
 	$emailer = new emailer($bb_cfg['smtp_delivery']);
 
-	$emailer->from($bb_cfg['board_email']);
-	$emailer->replyto($bb_cfg['board_email']);
+	$emailer->from($bb_cfg['sitename'] ." <{$bb_cfg['board_email']}>");
+	$emailer->replyto($bb_cfg['sitename'] ." <{$bb_cfg['board_email']}>");
 
 	$emailer->use_template('blank');
 	$emailer->email_address($bb_cfg['tech_admin_email']);

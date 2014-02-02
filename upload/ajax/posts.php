@@ -78,7 +78,7 @@ switch($this->request['type'])
 
 		// Use trim to get rid of spaces placed there by MS-SQL 2000
 		$quote_username = (trim($post['post_username']) != '') ? $post['post_username'] : get_username($post['poster_id']);
-		$message = "[quote=\"". $quote_username ."\"][qpost=". $post['post_id'] ."]". $post['post_text'] ."[/quote]\n";
+		$message = "[quote=\"". $quote_username ."\"][qpost=". $post['post_id'] ."]". $post['post_text'] ."[/quote]\r";
 		// hide user passkey
 		$message = preg_replace('#(?<=\?uk=)[a-zA-Z0-9]{10}(?=&)#', 'passkey', $message);
 		// hide sid
@@ -91,7 +91,7 @@ switch($this->request['type'])
 
 		if ($post['post_id'] == $post['topic_first_post_id'])
 		{
-			$message = "[quote]". $post['topic_title'] ."[/quote]\n";
+			$message = "[quote]". $post['topic_title'] ."[/quote]\r";
 		}
 		if (mb_strlen($message, 'UTF-8') > 1000)
 		{
@@ -138,7 +138,7 @@ switch($this->request['type'])
 							$this->ajax_die(sprintf($lang['MAX_SMILIES_PER_POST'], $bb_cfg['max_smilies']));
 						}
 					}
-					DB()->query("UPDATE ". BB_POSTS_TEXT ." SET post_text = '". DB()->escape($text) ."' WHERE post_id = $post_id LIMIT 1");
+					DB()->query("UPDATE ". BB_POSTS_TEXT ." SET post_text = '". DB()->escape($text) ."' WHERE post_id = $post_id");
 					if ($post['topic_last_post_id'] != $post['post_id'] && $userdata['user_id'] == $post['poster_id'])
 					{
 						DB()->query("UPDATE ". BB_POSTS ." SET post_edit_time = '". TIMENOW ."', post_edit_count = post_edit_count + 1 WHERE post_id = $post_id LIMIT 1");
@@ -298,8 +298,14 @@ switch($this->request['type'])
 			'post_id'        => $post_id,
 			'post_text'      => $message,
 		));
-
-		$this->response['redirect'] = make_url(POST_URL . $post_id .'#'. $post_id);
+		
+		if ($bb_cfg['topic_notify_enabled'])
+		{
+			$notify  = !empty($this->request['notify']);
+			user_notification('reply', $post, $post['topic_title'], $post['forum_id'], $topic_id, $notify);
+		}
+		
+		$this->response['redirect'] = make_url(POST_URL ."$post_id#$post_id");
 	break;
 
 	default:

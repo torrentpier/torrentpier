@@ -10,12 +10,14 @@ require('./common.php');
 $ajax->init();
 
 // Handle "board disabled via ON/OFF trigger"
-if (file_exists(BB_DISABLED)) {
+if (file_exists(BB_DISABLED)) 
+{
 	$ajax->ajax_die($bb_cfg['board_disabled_msg']);
 }
 
 // Load actions required modules
-switch ($ajax->action) {
+switch ($ajax->action) 
+{
 	case 'view_post':
 		require(INC_DIR . 'bbcode.php');
 		break;
@@ -110,35 +112,42 @@ class ajax_common
 		global $lang;
 
 		// Exit if we already have errors
-		if (!empty($this->response['error_code'])) {
+		if (!empty($this->response['error_code'])) 
+		{
 			$this->send();
 		}
 
 		// Check that requested action is valid
 		$action = $this->action;
 
-		if (!$action || !is_string($action)) {
+		if (!$action || !is_string($action)) 
+		{
 			$this->ajax_die('no action specified');
-		} elseif (!$action_params =& $this->valid_actions[$action]) {
+		} 
+		elseif (!$action_params =& $this->valid_actions[$action]) 
+		{
 			$this->ajax_die('invalid action: ' . $action);
 		}
 
 		// Auth check
-		switch ($action_params[AJAX_AUTH]) {
+		switch ($action_params[AJAX_AUTH]) 
+		{
 			// GUEST
 			case 'guest':
 				break;
 
 			// USER
 			case 'user':
-				if (IS_GUEST) {
+				if (IS_GUEST) 
+				{
 					$this->ajax_die($lang['NEED_TO_LOGIN_FIRST']);
 				}
 				break;
 
 			// MOD
 			case 'mod':
-				if (!IS_AM) {
+				if (!IS_AM) 
+				{
 					$this->ajax_die($lang['ONLY_FOR_MOD']);
 				}
 				$this->check_admin_session();
@@ -146,7 +155,8 @@ class ajax_common
 
 			// ADMIN
 			case 'admin':
-				if (!IS_ADMIN) {
+				if (!IS_ADMIN) 
+				{
 					$this->ajax_die($lang['ONLY_FOR_ADMIN']);
 				}
 				$this->check_admin_session();
@@ -154,7 +164,8 @@ class ajax_common
 
 			// SUPER_ADMIN
 			case 'super_admin':
-				if (!IS_SUPER_ADMIN) {
+				if (!IS_SUPER_ADMIN) 
+				{
 					$this->ajax_die($lang['ONLY_FOR_SUPER_ADMIN']);
 				}
 				$this->check_admin_session();
@@ -198,7 +209,8 @@ class ajax_common
 	{
 		$this->response['action'] = $this->action;
 
-		if (DBG_USER && SQL_DEBUG && !empty($_COOKIE['sql_log'])) {
+		if (DBG_USER && SQL_DEBUG && !empty($_COOKIE['sql_log'])) 
+		{
 			$this->response['sql_log'] = get_sql_log();
 		}
 
@@ -211,16 +223,20 @@ class ajax_common
 	 */
 	function ob_handler($contents)
 	{
-		if (DBG_USER) {
-			if ($contents) {
+		if (DBG_USER) 
+		{
+			if ($contents) 
+			{
 				$this->response['raw_output'] = $contents;
 			}
 		}
 
 		$response_js = bb_json_encode($this->response);
 
-		if (GZIP_OUTPUT_ALLOWED && !defined('NO_GZIP')) {
-			if (UA_GZIP_SUPPORTED && strlen($response_js) > 2000) {
+		if (GZIP_OUTPUT_ALLOWED && !defined('NO_GZIP')) 
+		{
+			if (UA_GZIP_SUPPORTED && strlen($response_js) > 2000) 
+			{
 				header('Content-Encoding: gzip');
 				$response_js = gzencode($response_js, 1);
 			}
@@ -236,15 +252,20 @@ class ajax_common
 	{
 		global $user;
 
-		if (!$user->data['session_admin']) {
-			if (empty($this->request['user_password'])) {
+		if (!$user->data['session_admin']) 
+		{
+			if (empty($this->request['user_password'])) 
+			{
 				$this->prompt_for_password();
-			} else {
+			} 
+			else 
+			{
 				$login_args = array(
 					'login_username' => $user->data['username'],
 					'login_password' => $_POST['user_password'],
 				);
-				if (!$user->login($login_args, true)) {
+				if (!$user->login($login_args, true)) 
+				{
 					$this->ajax_die('Wrong password');
 				}
 			}
@@ -281,7 +302,8 @@ class ajax_common
 
 		$is_auth = auth(AUTH_MOD, $forum_id, $userdata);
 
-		if (!$is_auth['auth_mod']) {
+		if (!$is_auth['auth_mod']) 
+		{
 			$this->ajax_die($lang['ONLY_FOR_MOD']);
 		}
 	}

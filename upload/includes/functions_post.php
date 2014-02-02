@@ -330,163 +330,101 @@ function delete_post($mode, $post_data, &$message, &$meta, $forum_id, $topic_id,
 //
 // Handle user notification on new post
 //
-function user_notification($mode, &$post_data, &$topic_title, &$forum_id, &$topic_id, &$post_id, &$notify_user)
+function user_notification($mode, &$post_data, &$topic_title, &$forum_id, &$topic_id, &$notify_user)
 {
-	global $bb_cfg, $lang, $user, $userdata;
+	global $bb_cfg, $lang, $userdata;
 
 	if (!$bb_cfg['topic_notify_enabled'])
 	{
 		return;
 	}
 
-	$current_time = TIMENOW;
-
 	if ($mode != 'delete')
 	{
 		if ($mode == 'reply')
 		{
-			$sql = "SELECT ban_userid
-				FROM " . BB_BANLIST;
-			if (!($result = DB()->sql_query($sql)))
+			$update_watched_sql = $user_id_sql = array();
+			
+			$sql = DB()->fetch_rowset("SELECT ban_userid FROM ". BB_BANLIST ." WHERE ban_userid != 0");
+			
+			foreach ($sql as $row)
 			{
-				message_die(GENERAL_ERROR, 'Could not obtain banlist', '', __LINE__, __FILE__, $sql);
+				$user_id_sql[] = ','. $row['ban_userid'];
 			}
+			$user_id_sql = join('', $user_id_sql);
 
-			$user_id_sql = '';
-			while ($row = DB()->sql_fetchrow($result))
-			{
-				if (isset($row['ban_userid']) && !empty($row['ban_userid']))
-				{
-					$user_id_sql .= ', ' . $row['ban_userid'];
-				}
-			}
-
-			$sql = "SELECT u.user_id, u.user_email, u.user_lang
+			$watch_list = DB()->fetch_rowset("SELECT u.username, u.user_id, u.user_email, u.user_lang
 				FROM " . BB_TOPICS_WATCH . " tw, " . BB_USERS . " u
 				WHERE tw.topic_id = $topic_id
-					AND tw.user_id NOT IN (" . $userdata['user_id'] . ", " . BOT_UID . ", " . GUEST_UID . $user_id_sql . ")
-					AND tw.notify_status = " . TOPIC_WATCH_UN_NOTIFIED . "
-					AND u.user_id = tw.user_id";
-			if (!($result = DB()->sql_query($sql)))
+					AND tw.user_id NOT IN (". $userdata['user_id'] .", ". EXCLUDED_USERS_CSV . $user_id_sql .")
+					AND tw.notify_status = ". TOPIC_WATCH_NOTIFIED ."
+					AND u.user_id = tw.user_id
+			");
+
+			if ($watch_list)
 			{
-				message_die(GENERAL_ERROR, 'Could not obtain list of topic watchers', '', __LINE__, __FILE__, $sql);
+				require(INC_DIR .'emailer.class.php');
+				$emailer = new emailer($bb_cfg['smtp_delivery']);
+				
+				$orig_word = $replacement_word = array();
+				obtain_word_list($orig_word, $replacement_word);
+				
+				if (count($orig_word))
+				{
+					$topic_title = preg_replace($orig_word, $replacement_word, $topic_title);
+				}
+				
+				$u_topic = make_url(TOPIC_URL . $topic_id .'&view=newest#newest');
+				$unwatch_topic = make_url(TOPIC_URL ."$topic_id&unwatch=topic");
+				
+				foreach ($watch_list as $row)
+				{
+					$emailer->from($bb_cfg['sitename'] ." <{$bb_cfg['board_email']}>");
+					$emailer->email_address($row['username'] ." <{$row['user_email']}>");
+					$emailer->use_template('topic_notify', $row['user_lang']);
+
+					$emailer->assign_vars(array(
+						'TOPIC_TITLE'           => html_entity_decode($topic_title),
+						'SITENAME'              => $bb_cfg['sitename'],
+						'USERNAME'              => $row['username'],
+						'U_TOPIC'               => $u_topic,
+						'U_STOP_WATCHING_TOPIC' => $unwatch_topic,
+					));
+
+					$emailer->send();
+					$emailer->reset();
+					
+					$update_watched_sql[] = $row['user_id'];
+				}
+				$update_watched_sql = join(',', $update_watched_sql);
 			}
 
-			$update_watched_sql = '';
-			$bcc_list_ary = array();
-
-			if ($row = DB()->sql_fetchrow($result))
+			if ($update_watched_sql)
 			{
-				// Sixty second limit
-				@set_time_limit(60);
-
-				do
-				{
-					if ($row['user_email'] != '')
-					{
-						$bcc_list_ary[$row['user_lang']][] = $row['user_email'];
-					}
-					$update_watched_sql .= ($update_watched_sql != '') ? ', ' . $row['user_id'] : $row['user_id'];
-				}
-				while ($row = DB()->sql_fetchrow($result));
-
-				if (sizeof($bcc_list_ary))
-				{
-					include(INC_DIR .'emailer.class.php');
-					$emailer = new emailer($bb_cfg['smtp_delivery']);
-
-					$script_name = preg_replace('/^\/?(.*?)\/?$/', '\1', trim($bb_cfg['script_path']));
-					$script_name = ($script_name != '') ? $script_name . '/viewtopic.php' : 'viewtopic.php';
-					$server_name = trim($bb_cfg['server_name']);
-					$server_protocol = ($bb_cfg['cookie_secure']) ? 'https://' : 'http://';
-					$server_port = ($bb_cfg['server_port'] <> 80) ? ':' . trim($bb_cfg['server_port']) . '/' : '/';
-
-					$orig_word = array();
-					$replacement_word = array();
-					obtain_word_list($orig_word, $replacement_word);
-
-					$emailer->from($bb_cfg['board_email']);
-					$emailer->replyto($bb_cfg['board_email']);
-
-					if (count($orig_word))
-					{
-						$topic_title = preg_replace($orig_word, $replacement_word, $topic_title);
-					}
-
-					@reset($bcc_list_ary);
-					while (list($user_lang, $bcc_list) = each($bcc_list_ary))
-					{
-						$emailer->use_template('topic_notify', $user_lang);
-
-						for ($i = 0; $i < count($bcc_list); $i++)
-						{
-							$emailer->bcc($bcc_list[$i]);
-						}
-
-						// The Topic_reply_notification lang string below will be used
-						// if for some reason the mail template subject cannot be read
-						// ... note it will not necessarily be in the posters own language!
-						$emailer->set_subject($lang['TOPIC_REPLY_NOTIFICATION']);
-
-						// This is a nasty kludge to remove the username var ... till (if?)
-						// translators update their templates
-						$emailer->msg = preg_replace('#[ ]?{USERNAME}#', '', $emailer->msg);
-
-						$emailer->assign_vars(array(
-							'TOPIC_TITLE' => $topic_title,
-							'SITENAME' => $bb_cfg['sitename'],
-							'USERNAME'    => $user->name,
-							'EMAIL_SIG' => (!empty($bb_cfg['board_email_sig'])) ? str_replace('<br />', "\n", "-- \n" . $bb_cfg['board_email_sig']) : '',
-							'U_TOPIC' => $server_protocol . $server_name . $server_port . $script_name . '?' . POST_POST_URL . "=$post_id#$post_id",
-							'U_STOP_WATCHING_TOPIC' => $server_protocol . $server_name . $server_port . $script_name . '?' . POST_TOPIC_URL . "=$topic_id&unwatch=topic")
-						);
-
-						$emailer->send();
-						$emailer->reset();
-					}
-				}
-			}
-			DB()->sql_freeresult($result);
-
-			if ($update_watched_sql != '')
-			{
-				$sql = "UPDATE " . BB_TOPICS_WATCH . "
-					SET notify_status = " . TOPIC_WATCH_NOTIFIED . "
+				DB()->query("UPDATE ". BB_TOPICS_WATCH ."
+					SET notify_status = ". TOPIC_WATCH_UN_NOTIFIED ."
 					WHERE topic_id = $topic_id
-						AND user_id IN ($update_watched_sql)";
-				DB()->sql_query($sql);
+						AND user_id IN ($update_watched_sql)
+				");
 			}
 		}
 
-		$sql = "SELECT topic_id
-			FROM " . BB_TOPICS_WATCH . "
+		$topic_watch = DB()->fetch_row("SELECT topic_id
+			FROM ". BB_TOPICS_WATCH ."
 			WHERE topic_id = $topic_id
-				AND user_id = " . $userdata['user_id'];
-		if (!($result = DB()->sql_query($sql)))
-		{
-			message_die(GENERAL_ERROR, 'Could not obtain topic watch information', '', __LINE__, __FILE__, $sql);
-		}
+				AND user_id = {$userdata['user_id']}
+		", 'topic_id');
 
-		$row = DB()->sql_fetchrow($result);
-
-		if (!$notify_user && !empty($row['topic_id']))
+		if (!$notify_user && !empty($topic_watch))
 		{
-			$sql = "DELETE FROM " . BB_TOPICS_WATCH . "
-				WHERE topic_id = $topic_id
-					AND user_id = " . $userdata['user_id'];
-			if (!DB()->sql_query($sql))
-			{
-				message_die(GENERAL_ERROR, 'Could not delete topic watch information', '', __LINE__, __FILE__, $sql);
-			}
+			DB()->query("DELETE FROM ". BB_TOPICS_WATCH ." WHERE topic_id = $topic_id AND user_id = {$userdata['user_id']}");
 		}
-		else if ($notify_user && empty($row['topic_id']))
+		else if ($notify_user && empty($topic_watch))
 		{
-			$sql = "INSERT INTO " . BB_TOPICS_WATCH . " (user_id, topic_id, notify_status)
-				VALUES (" . $userdata['user_id'] . ", $topic_id, 0)";
-			if (!DB()->sql_query($sql))
-			{
-				message_die(GENERAL_ERROR, 'Could not insert topic watch information', '', __LINE__, __FILE__, $sql);
-			}
+			DB()->query("
+				INSERT INTO " . BB_TOPICS_WATCH . " (user_id, topic_id, notify_status)
+				VALUES (". $userdata['user_id'] .", $topic_id, ". TOPIC_WATCH_NOTIFIED .") 
+			");
 		}
 	}
 }
@@ -494,8 +432,6 @@ function user_notification($mode, &$post_data, &$topic_title, &$forum_id, &$topi
 function insert_post ($mode, $topic_id, $forum_id = '', $old_forum_id = '', $new_topic_id = '', $new_topic_title = '', $old_topic_id = '', $message = '', $poster_id = '')
 {
 	global $userdata, $lang;
-
-	require(DEFAULT_LANG_DIR .'lang_bot.php');
 
 	if (!$topic_id) return;
 

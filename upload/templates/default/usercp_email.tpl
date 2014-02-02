@@ -25,10 +25,6 @@
 	<td><textarea name="message" rows="25" cols="80">{MESSAGE}</textarea></td>
 </tr>
 <tr>
-	<td valign="top"><b>{L_OPTIONS}</b></td>
-	<td><label><input type="checkbox" name="cc_email" value="1" /> {L_CC_EMAIL}</label></td>
-</tr>
-<tr>
 	<td colspan="2" class="catBottom">
 		<input type="submit" name="submit" class="main" value="{L_SEND_EMAIL}" />
 	</td>
