@@ -1117,7 +1117,7 @@ else if ( $submit || $refresh || $mode != '' )
 					'NAME_FROM'   => $userdata['username'],
 					'MSG_SUBJECT' => html_entity_decode($privmsg_subject),
 					'SITENAME'    => $bb_cfg['sitename'],
-					'U_INBOX'     => make_url(PM_URL ."?folder=inbox$pm&mode=read&p=". $privmsg_sent_id),
+					'U_INBOX'     => make_url(PM_URL . "?folder=inbox&mode=read&p=". $privmsg_sent_id),
 				));
 
 				$emailer->send();

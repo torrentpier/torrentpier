@@ -84,21 +84,21 @@ ajax.callback.manage_user = function(data) {
 		<td>
 			<a href="#" id="datastore" onclick="ajax.manage_user('clear_datastore'); return false;">{L_DATASTORE}</a>,&nbsp;
 			<a href="#" id="cache" onclick="ajax.manage_user('clear_cache'); return false;">{L_ALL_CACHE}</a>,&nbsp;
-			<a href="#" id="template_cache" onclick="ajax.manage_user('clear_template_cache'); return false;">{L_TEMPLATES}</a>&nbsp;
+			<a href="#" id="template_cache" onclick="ajax.manage_user('clear_template_cache'); return false;">{L_TEMPLATES}</a>
 		</td>
 	</tr>
 	<tr>
 		<td><b>{L_UPDATE}:</b></td>
 		<td>
-			<a href="{U_UPDATE_USER_LEVEL}">{L_USER_LEVELS}</a>,&nbsp;
-			<!-- IF $bb_cfg['search_engine_type'] == "sphinx" --><a href="#" id="indexer" onclick="ajax.manage_user('indexer'); return false;">{L_INDEXER}</a><!-- ENDIF -->
+			<a href="{U_UPDATE_USER_LEVEL}">{L_USER_LEVELS}</a>
+			<!-- IF $bb_cfg['search_engine_type'] == "sphinx" -->,&nbsp;<a href="#" id="indexer" onclick="ajax.manage_user('indexer'); return false;">{L_INDEXER}</a><!-- ENDIF -->
 		</td>
 	</tr>
 	<tr>
 		<td><b>{L_SYNCHRONIZE}:</b></td>
 		<td>
 			<a href="{U_SYNC_TOPICS}">{L_TOPICS}</a>,&nbsp;
-			<a href="{U_SYNC_USER_POSTS}">{L_USER_POSTS_COUNT}</a>&nbsp;
+			<a href="{U_SYNC_USER_POSTS}">{L_USER_POSTS_COUNT}</a>
 		</td>
 	</tr>
 	<tr>

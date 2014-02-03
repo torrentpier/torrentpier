@@ -50,7 +50,7 @@ if (!defined('WORD_LIST_OBTAINED'))
 switch($this->request['type'])
 {
 	case 'delete';
-		if ($post['post_id'] != $post['topic_first_post_id'] && ($is_auth['auth_mod'] || ($userdata['user_id'] == $post['poster_id'] && $is_auth['auth_delete'] && $post['topic_last_post_id'] == $post['post_id'] && $post['post_time'] + 3600*3 > TIMENOW)))
+		if ($post['post_id'] != $post['topic_first_post_id'] && $is_auth['auth_delete'] && ($is_auth['auth_mod'] || ($userdata['user_id'] == $post['poster_id'] && $post['topic_last_post_id'] == $post['post_id'] && $post['post_time'] + 3600*3 > TIMENOW)))
 		{
 			if (empty($this->request['confirmed']))
 			{
@@ -62,14 +62,14 @@ switch($this->request['type'])
 		}
 		else
 		{
-			$this->ajax_die(sprintf($lang['DELETE_OWN_POSTS'], strip_tags($is_auth['auth_delete_type'])));
+			$this->ajax_die(sprintf($lang['SORRY_AUTH_DELETE'], strip_tags($is_auth['auth_delete_type'])));
 		}
 	break;
 
 	case 'reply';
-		if(bf($userdata['user_opt'], 'user_opt', 'allow_post'))
+		if (bf($userdata['user_opt'], 'user_opt', 'allow_post'))
 		{
-			$this->ajax_die($lang['RULES_REPLY_CANNOT']);
+			$this->ajax_die(strip_tags($lang['RULES_REPLY_CANNOT']));
 		}
 		elseif(!$is_auth['auth_reply'])
 		{
@@ -113,6 +113,10 @@ switch($this->request['type'])
 
 	case 'edit':
 	case 'editor':
+		if (bf($userdata['user_opt'], 'user_opt', 'allow_post_edit'))
+		{
+			$this->ajax_die($lang['POST_EDIT_CANNOT']);
+		}
 		if ($post['poster_id'] != $userdata['user_id'] && !$is_auth['auth_mod'])
 		{
 			$this->ajax_die($lang['EDIT_OWN_POSTS']);
@@ -224,7 +228,7 @@ switch($this->request['type'])
 
 		if (bf($userdata['user_opt'], 'user_opt', 'allow_post'))
 		{
-			$this->ajax_die($lang['RULES_REPLY_CANNOT']);
+			$this->ajax_die(strip_tags($lang['RULES_REPLY_CANNOT']));
 		}
 		elseif (!$is_auth['auth_reply'])
 		{

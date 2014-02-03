@@ -1,10 +1,15 @@
 <?php
 
+if (isset($_REQUEST['GLOBALS'])) die();
+
 ignore_user_abort(true);
 define('TIMESTART', utime());
 define('TIMENOW',   time());
 
-if (isset($_REQUEST['GLOBALS']) || isset($_FILES['GLOBALS'])) die();
+if (empty($_SERVER['REMOTE_ADDR']))     $_SERVER['REMOTE_ADDR'] = '127.0.0.1';
+if (empty($_SERVER['HTTP_USER_AGENT'])) $_SERVER['HTTP_USER_AGENT'] = '';
+if (empty($_SERVER['HTTP_REFERER']))    $_SERVER['HTTP_REFERER'] = '';
+if (empty($_SERVER['SERVER_NAME']))     $_SERVER['SERVER_NAME'] = '';
 
 if (!defined('BB_ROOT')) define('BB_ROOT', './');
 if (!defined('IN_FORUM') && !defined('IN_TRACKER')) define('IN_FORUM', true);

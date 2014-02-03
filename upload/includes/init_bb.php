@@ -177,7 +177,6 @@ define('TOPIC_WATCH_UN_NOTIFIED', 0);
 define('POST_NORMAL',          0);
 define('POST_STICKY',          1);
 define('POST_ANNOUNCE',        2);
-define('POST_GLOBAL_ANNOUNCE', 3);
 
 // Search types
 define('SEARCH_TYPE_POST',     0);

@@ -126,13 +126,12 @@ function initSpoilers(context)
 }
 function initExternalLinks(context)
 {
-  	var context = context || 'body';
-  	if (ExternalLinks_InNewWindow) {
-  		$("a.postLink:not([href*='"+ window.location.hostname +"/'])", context).attr({ target: '_blank' });
-  		//$("a.postLink:not([@href*='"+ window.location.hostname +"/'])", context).replaceWith('<span style="color: red;">{L_LINKS_ARE_FORBIDDEN}</span>');
-  	}
+	var context = context || 'body';
+	if (ExternalLinks_InNewWindow) {
+		$("a.postLink:not([href*='"+ window.location.hostname +"/'])", context).attr({ target: '_blank' });
+	}
 }
-function fixPostImage ($img)
+function fixPostImage($img)
 {
 	var banned_image_hosts = /imagebanana|hidebehind/i;  // imageshack
 	var src = $img[0].src;
@@ -171,7 +170,7 @@ function initMedia(context)
 	}
 }
 $(document).ready(function(){
-  	$('div.post_wrap, div.signature').each(function(){ initPostBBCode( $(this) ) });
+	$('div.post_wrap, div.signature').each(function(){ initPostBBCode( $(this) ) });
 });
 </script>
 <!-- ENDIF / INCLUDE_BBCODE_JS -->
@@ -185,32 +184,32 @@ var LOGGED_IN     = {LOGGED_IN};
 var InfoWinParams = 'HEIGHT=510,resizable=yes,WIDTH=780';
 
 var user = {
-  	opt_js: {USER_OPTIONS_JS},
+	opt_js: {USER_OPTIONS_JS},
 
-  	set: function(opt, val, days, reload) {
-  		this.opt_js[opt] = val;
-  		setCookie('opt_js', $.toJSON(this.opt_js), days);
-  		if (reload) {
-  			window.location.reload();
-  		}
-  	}
+	set: function(opt, val, days, reload) {
+		this.opt_js[opt] = val;
+		setCookie('opt_js', $.toJSON(this.opt_js), days);
+		if (reload) {
+			window.location.reload();
+		}
+	}
 }
 <!-- IF SHOW_JUMPBOX -->
 $(document).ready(function(){
-  	$("div.jumpbox").html('\
-  		<span id="jumpbox-container"> \
-  		<select id="jumpbox"> \
-  			<option id="jumpbox-title" value="-1">&nbsp;&raquo;&raquo; {L_JUMPBOX_TITLE} &nbsp;</option> \
-  		</select> \
-  		</span> \
-  		<input id="jumpbox-submit" type="button" class="lite" value="{L_GO}" /> \
-  	');
-  	$('#jumpbox-container').one('click', function(){
-  		$('#jumpbox-title').html('&nbsp;&nbsp; {L_LOADING} ... &nbsp;');
-  		var jumpbox_src = '{AJAX_HTML_DIR}' + ({LOGGED_IN} ? 'jumpbox_user.html' : 'jumpbox_guest.html');
-  		$(this).load(jumpbox_src);
-  		$('#jumpbox-submit').click(function(){ window.location.href='{FORUM_URL}'+$('#jumpbox').val(); });
-  	});
+	$("div.jumpbox").html('\
+		<span id="jumpbox-container"> \
+		<select id="jumpbox"> \
+			<option id="jumpbox-title" value="-1">&nbsp;&raquo;&raquo; {L_JUMPBOX_TITLE} &nbsp;</option> \
+		</select> \
+		</span> \
+		<input id="jumpbox-submit" type="button" class="lite" value="{L_GO}" /> \
+	');
+	$('#jumpbox-container').one('click', function(){
+		$('#jumpbox-title').html('&nbsp;&nbsp; {L_LOADING} ... &nbsp;');
+		var jumpbox_src = '{AJAX_HTML_DIR}' + ({LOGGED_IN} ? 'jumpbox_user.html' : 'jumpbox_guest.html');
+		$(this).load(jumpbox_src);
+		$('#jumpbox-submit').click(function(){ window.location.href='{FORUM_URL}'+$('#jumpbox').val(); });
+	});
 });
 <!-- ENDIF -->
 
@@ -218,17 +217,17 @@ var ajax = new Ajax('{SITE_URL}{$bb_cfg['ajax_url']}', 'POST', 'json');
 
 function getElText (e)
 {
-  	var t = '';
-  	if (e.textContent !== undefined) { t = e.textContent; } else if (e.innerText !== undefined) { t = e.innerText; } else { t = jQuery(e).text(); }
-  	return t;
+	var t = '';
+	if (e.textContent !== undefined) { t = e.textContent; } else if (e.innerText !== undefined) { t = e.innerText; } else { t = jQuery(e).text(); }
+	return t;
 }
 function escHTML (txt)
 {
   	return txt.replace(/</g, '&lt;');
 }
 <!-- IF USE_TABLESORTER -->
-$(document).ready(function(){
-  	$('.tablesorter').tablesorter(); //	{debug: true}
+$(document).ready(function() {
+	$('.tablesorter').tablesorter();
 });
 <!-- ENDIF -->
 
@@ -284,13 +283,13 @@ input[type="checkbox"] { margin-bottom: -1px; }
 var dev = true;
 function OpenInEditor ($file, $line)
 {
-  	$editor_path = '{EDITOR_PATH}';
-  	$editor_args = '{EDITOR_ARGS}';
+	$editor_path = '{EDITOR_PATH}';
+	$editor_args = '{EDITOR_ARGS}';
 
-  	$url = BB_ROOT +'develop/open_editor.php';
-  	$url += '?prog='+ $editor_path +'&args='+ $editor_args.sprintf($file, $line);
+	$url = BB_ROOT +'develop/open_editor.php';
+	$url += '?prog='+ $editor_path +'&args='+ $editor_args.sprintf($file, $line);
 
-  	window.open($url,'','height=1,width=1,left=1,top=1,resizable=yes,scrollbars=no,toolbar=no');
+	window.open($url,'','height=1,width=1,left=1,top=1,resizable=yes,scrollbars=no,toolbar=no');
 }
 </script>
 <!-- ENDIF / INCLUDE_DEVELOP_JS -->
@@ -431,7 +430,7 @@ if (top != self) {
 <div id="logo">
 	<!--<h1>{SITENAME}</h1>
 	<h6>{SITE_DESCRIPTION}</h6> -->
-	<a href="{U_INDEX}"><img src="images/logo/logo.png" alt="{SITENAME}" /></a>
+	<a href="{U_INDEX}"><img src="images/logo/logo_me.png" alt="{SITENAME}" /></a>
 </div>
 <!--/logo-->
 

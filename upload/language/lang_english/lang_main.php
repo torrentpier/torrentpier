@@ -3193,3 +3193,5 @@ $lang['ACCOUNT_STATUS'] = 'Account Status';
 $lang['SORT_OPTIONS'] = 'Sort options:';
 $lang['LAST_VISIT'] = 'Last Visit';
 $lang['DAY'] = 'Day';
+
+$lang['POST_EDIT_CANNOT'] = 'Sorry, but you cannot edit posts';

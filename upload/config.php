@@ -54,9 +54,9 @@ $domain_name = 'torrentpier.me';                    // Enter here your primary d
 $domain_name = (!empty($_SERVER['SERVER_NAME'])) ? $_SERVER['SERVER_NAME'] : $domain_name;
 
 // Increase number of revision after update
-$bb_cfg['tp_version'] = '2.6 (unstable)';
+$bb_cfg['tp_version'] = '2.6 (RC)';
 $bb_cfg['tp_release_date'] = '02-02-2014';
-$bb_cfg['tp_release_state'] = 'R580';
+$bb_cfg['tp_release_state'] = 'R581';
 
 // Database
 $charset  = 'utf8';
@@ -245,7 +245,10 @@ $bb_cfg['pm_url']      = 'privmsg.php';  #  "http://{$domain_name}/privmsg.php"
 // Language
 setlocale(LC_ALL, 'ru_RU.UTF-8');
 setlocale(LC_NUMERIC, 'C');
+
+$bb_cfg['charset']       = 'utf8';
 $bb_cfg['auto_language'] = true;
+
 if (!empty($_SERVER['HTTP_ACCEPT_LANGUAGE']) && $bb_cfg['auto_language'])
 {
 	if (substr($_SERVER['HTTP_ACCEPT_LANGUAGE'], 0, 2) == 'ru')

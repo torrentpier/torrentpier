@@ -104,7 +104,7 @@ class torrent
 				}
 				array_deep($f['path'], 'clean_tor_dirname');
 
-				$length = isset($f['length']) ? $f['length'] : 0;
+				$length = isset($f['length']) ? (int) $f['length'] : 0;
 				$subdir_count = count($f['path']) - 1;
 
 				if ($subdir_count > 0)
@@ -145,7 +145,7 @@ class torrent
 		{
 			$this->multiple = false;
 			$name = isset($info['name']) ? clean_tor_dirname($info['name']) : '';
-			$length = isset($info['length']) ? $info['length'] : 0;
+			$length = isset($info['length']) ? (int) $info['length'] : 0;
 
 			$this->files_ary['/'][] = $this->build_file_item($name, $length);
 			natsort($this->files_ary['/']);
