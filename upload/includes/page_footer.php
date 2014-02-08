@@ -9,7 +9,6 @@ if (!empty($template))
 	$template->assign_vars(array(
 		'SIMPLE_FOOTER'    => !empty($gen_simple_header),
 		'POWERED'          => base64_decode($lang['POWERED']),
-		'TRANSLATION_INFO' => isset($lang['TRANSLATION_INFO']) ? $lang['TRANSLATION_INFO'] : '',
 		'SHOW_ADMIN_LINK'  => (IS_ADMIN && !defined('IN_ADMIN')),
 		'ADMIN_LINK_HREF'  => "admin/index.php",
 

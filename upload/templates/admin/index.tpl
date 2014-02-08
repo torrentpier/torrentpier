@@ -10,16 +10,9 @@
 </head>
 
 <frameset cols="220,*" rows="*" border="1" framespacing="1" frameborder="yes">
-  <frame src="{S_FRAME_NAV}" name="nav" marginwidth="0" marginheight="0" scrolling="auto">
-  <frame src="{S_FRAME_MAIN}" name="main" marginwidth="0" marginheight="0" scrolling="auto">
+	<frame src="index.php?pane=left" name="nav" marginwidth="0" marginheight="0" scrolling="auto">
+	<frame src="index.php?pane=right" name="main" marginwidth="0" marginheight="0" scrolling="auto">
 </frameset>
-
-<noframes>
-	<body bgcolor="#FFFFFF" text="#000000">
-		<p>Sorry, your browser doesn't seem to support frames</p>
-	</body>
-</noframes>
-
 </html>
 <!--========================================================================-->
 <!-- ENDIF / TPL_ADMIN_FRAMESET -->
@@ -62,18 +55,21 @@ table.forumline { margin: 0 auto; }
 <!-- IF TPL_ADMIN_MAIN -->
 <!--========================================================================-->
 <script type="text/javascript">
-ajax.manage_user = function(mode) {
+ajax.manage_admin = function(mode) {
 	ajax.exec({
-		action  : 'manage_user',
+		action  : 'manage_admin',
 		mode    : mode,
 		user_id : ''
 	});
 }
-ajax.callback.manage_user = function(data) {
+ajax.callback.manage_admin = function(data) {
 	$('#cache').html(data.cache_html);
 	$('#datastore').html(data.datastore_html);
-	$('#indexer').html(data.indexer);
-	$('#template_cache').html(data.template_cache);
+	$('#indexer').html(data.indexer_html);
+	$('#template_cache').html(data.template_cache_html);
+	$('#update_user_level').html(data.update_user_level_html);
+	$('#sync_topics').html(data.sync_topics_html);
+	$('#sync_user_posts').html(data.sync_user_posts_html);
 }
 </script>
 <br />
@@ -82,23 +78,23 @@ ajax.callback.manage_user = function(data) {
 	<tr>
 		<td><b>{L_CLEAR_CACHE}:</b></td>
 		<td>
-			<a href="#" id="datastore" onclick="ajax.manage_user('clear_datastore'); return false;">{L_DATASTORE}</a>,&nbsp;
-			<a href="#" id="cache" onclick="ajax.manage_user('clear_cache'); return false;">{L_ALL_CACHE}</a>,&nbsp;
-			<a href="#" id="template_cache" onclick="ajax.manage_user('clear_template_cache'); return false;">{L_TEMPLATES}</a>
+			<a href="#" id="datastore" onclick="ajax.manage_admin('clear_datastore'); return false;">{L_DATASTORE}</a>,&nbsp;
+			<a href="#" id="cache" onclick="ajax.manage_admin('clear_cache'); return false;">{L_ALL_CACHE}</a>,&nbsp;
+			<a href="#" id="template_cache" onclick="ajax.manage_admin('clear_template_cache'); return false;">{L_TEMPLATES}</a>
 		</td>
 	</tr>
 	<tr>
 		<td><b>{L_UPDATE}:</b></td>
 		<td>
-			<a href="{U_UPDATE_USER_LEVEL}">{L_USER_LEVELS}</a>
-			<!-- IF $bb_cfg['search_engine_type'] == "sphinx" -->,&nbsp;<a href="#" id="indexer" onclick="ajax.manage_user('indexer'); return false;">{L_INDEXER}</a><!-- ENDIF -->
+			<a href="#" id="update_user_level" onclick="ajax.manage_admin('update_user_level'); return false;">{L_USER_LEVELS}</a>
+			<!-- IF $bb_cfg['search_engine_type'] == "sphinx" -->,&nbsp;<a href="#" id="indexer" onclick="ajax.manage_admin('indexer'); return false;">{L_INDEXER}</a><!-- ENDIF -->
 		</td>
 	</tr>
 	<tr>
 		<td><b>{L_SYNCHRONIZE}:</b></td>
 		<td>
-			<a href="{U_SYNC_TOPICS}">{L_TOPICS}</a>,&nbsp;
-			<a href="{U_SYNC_USER_POSTS}">{L_USER_POSTS_COUNT}</a>
+			<a href="#" id="sync_topics" onclick="ajax.manage_admin('sync_topics'); return false;">{L_TOPICS}</a>,&nbsp;
+			<a href="#" id="sync_user_posts" onclick="ajax.manage_admin('sync_user_posts'); return false;">{L_USER_POSTS_COUNT}</a>
 		</td>
 	</tr>
 	<tr>
@@ -116,13 +112,15 @@ ajax.callback.manage_user = function(data) {
 	</tr>
 	<tr>
 		<td class="row1" nowrap="nowrap"  width="25%">{L_TP_VERSION}:</td>
-		<td class="row2"><b>{$bb_cfg['tp_version']} ({$bb_cfg['tp_release_state']})</b></td>
+		<td class="row2"><b>{$bb_cfg['tp_version']} [{$bb_cfg['tp_release_state']}]</b></td>
 	</tr>
 	<tr>
 		<td class="row1" nowrap="nowrap"  width="25%">{L_TP_RELEASE_DATE}:</td>
 		<td class="row2"><b>{$bb_cfg['tp_release_date']}</b></td>
 	</tr>
 </table>
+<br />
+
 <h3>{L_FORUM_STATS}</h3>
 
 <table class="forumline">
@@ -163,6 +161,7 @@ ajax.callback.manage_user = function(data) {
 		<td class="row2"><b>{GZIP_COMPRESSION}</b></td>
 	</tr>
 </table>
+<br />
 
 <a name="online"></a>
 <h3>{L_WHOSONLINE}</h3>
@@ -198,4 +197,3 @@ ajax.callback.manage_user = function(data) {
 
 <!--========================================================================-->
 <!-- ENDIF / TPL_ADMIN_MAIN -->
-

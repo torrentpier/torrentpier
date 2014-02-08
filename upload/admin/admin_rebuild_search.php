@@ -1,7 +1,5 @@
 <?php
 
-// Based on "Rebuild Search Mod" by chatasos [http://www.phpbb.com/phpBB/viewtopic.php?t=329629]
-
 // ACP Header - START
 if (!empty($setmodules))
 {

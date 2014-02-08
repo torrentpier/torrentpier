@@ -9,13 +9,6 @@
  *
  */
 
-/**
- * Original authors: Nathan Codding of the phpBB group, CyberAlien
- * The interface was originally inspired by PHPLib templates
- * IF, ELSEIF, ENDIF tags are backported from phpBB 2.2
- * Thanks to DMaJ007 for idea on how to include some extra tags.
- */
-
 if (!defined('BB_ROOT'))
 {
 	die(basename(__FILE__));
@@ -569,7 +562,7 @@ class Template
 			$code = file_get_contents($filename);
 		}
 
-		// Replace phpBB 2.2 <!-- (END)PHP --> tags
+		// Replace <!-- (END)PHP --> tags
 		$search = array('<!-- PHP -->', '<!-- ENDPHP -->');
 		$replace = array('<'.'?php ', ' ?'.'>');
 		$code = str_replace($search, $replace, $code);

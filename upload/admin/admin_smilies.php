@@ -32,7 +32,7 @@ $dir = @opendir(BB_ROOT . $bb_cfg['smilies_path']);
 
 while($file = @readdir($dir))
 {
-	if( !@is_dir(phpbb_realpath(BB_ROOT . $bb_cfg['smilies_path'] . '/' . $file)) )
+	if( !@is_dir(bb_realpath(BB_ROOT . $bb_cfg['smilies_path'] . '/' . $file)) )
 	{
 		$img_size = @getimagesize(BB_ROOT . $bb_cfg['smilies_path'] . '/' . $file);
 
@@ -322,7 +322,7 @@ else if ( $mode != '' )
 			//
 			$smile_code = ( isset($_POST['smile_code']) ) ? trim($_POST['smile_code']) : trim($_GET['smile_code']);
 			$smile_url = ( isset($_POST['smile_url']) ) ? trim($_POST['smile_url']) : trim($_GET['smile_url']);
-			$smile_url = phpbb_ltrim(basename($smile_url), "'");
+			$smile_url = bb_ltrim(basename($smile_url), "'");
 			$smile_emotion = ( isset($_POST['smile_emotion']) ) ? trim($_POST['smile_emotion']) : trim($_GET['smile_emotion']);
 			$smile_id = ( isset($_POST['smile_id']) ) ? intval($_POST['smile_id']) : intval($_GET['smile_id']);
 
@@ -366,7 +366,7 @@ else if ( $mode != '' )
 			//
 			$smile_code = ( isset($_POST['smile_code']) ) ? $_POST['smile_code'] : $_GET['smile_code'];
 			$smile_url = ( isset($_POST['smile_url']) ) ? $_POST['smile_url'] : $_GET['smile_url'];
-			$smile_url = phpbb_ltrim(basename($smile_url), "'");
+			$smile_url = bb_ltrim(basename($smile_url), "'");
 			$smile_emotion = ( isset($_POST['smile_emotion']) ) ? $_POST['smile_emotion'] : $_GET['smile_emotion'];
 			$smile_code = trim($smile_code);
 			$smile_url = trim($smile_url);

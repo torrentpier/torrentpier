@@ -659,6 +659,7 @@ INSERT INTO `bb_cron` VALUES (18, 1, 'Seeder last seen', 'tr_update_seeder_last_
 INSERT INTO `bb_cron` VALUES (19, 1, 'Captcha', 'captcha_gen_gc.php', 'daily', NULL, '05:00:00', 120, '', '', NULL, 0, '', 0, 0, 0);
 INSERT INTO `bb_cron` VALUES (20, 1, 'Tracker dl-complete count', 'tr_complete_count.php', 'interval', NULL, NULL, 255, '', '', '06:00:00', 0, '', 0, 0, 0);
 INSERT INTO `bb_cron` VALUES (21, 1, 'Cache garbage collector', 'cache_gc.php', 'interval', NULL, NULL, 255, '', '', '00:05:00', 0, '', 0, 0, 0);
+INSERT INTO `bb_cron` VALUES (22, 1, 'Attach maintenance', 'attach_maintenance.php', 'daily', NULL, '05:00:00', 40, '', '', NULL, 1, '', 0, 1, 0);
 
 -- --------------------------------------------------------
 

@@ -32,7 +32,7 @@ switch ($ajax->action)
 	case 'view_torrent':
 	case 'mod_action':
 	case 'change_tor_status':
-	case 'gen_passkey';
+	case 'gen_passkey':
 		require(BB_ROOT . 'attach_mod/attachment_mod.php');
 		require(INC_DIR . 'functions_torrent.php');
 		break;
@@ -47,6 +47,7 @@ switch ($ajax->action)
 		break;
 
 	case 'manage_user':
+	case 'manage_admin':
 		require(INC_DIR . 'functions_admin.php');
 		break;
 
@@ -75,6 +76,7 @@ class ajax_common
 		'change_user_rank'  => array('admin'),
 		'change_user_opt'   => array('admin'),
 		'manage_user'       => array('admin'),
+		'manage_admin'      => array('admin'),
 
 		'mod_action'        => array('mod'),
 		'topic_tpl'         => array('mod'),
@@ -376,6 +378,11 @@ class ajax_common
 	function manage_user()
 	{
 		require(AJAX_DIR . 'manage_user.php');
+	}
+
+	function manage_admin()
+	{
+		require(AJAX_DIR . 'manage_admin.php');
 	}
 
 	function topic_tpl()

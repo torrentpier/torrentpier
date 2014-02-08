@@ -168,7 +168,7 @@ function attachment_quota_settings($admin_mode, $submit = false, $mode)
 
 	if ($admin_mode == 'group' && !$submit && isset($_POST['edit']))
 	{
-		// Get group id again, we do not trust phpBB here, Mods may be installed ;)
+		// Get group id again
 		$group_id = get_var(POST_GROUPS_URL, 0);
 
 		// Show the contents

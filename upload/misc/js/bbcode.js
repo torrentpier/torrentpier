@@ -190,7 +190,7 @@ BBCode.prototype = {
     return e.returnValue = false;
   },
 
-  // Available key combinations and these interpretaions for phpBB are
+  // Available key combinations and these interpretaions for BB are
   //     TAB              - Insert TAB char
   //     CTRL-TAB         - Next form field (usual TAB)
   //     SHIFT-ALT-PAGEUP - Add an Attachment
@@ -226,7 +226,7 @@ BBCode.prototype = {
       return this._cancelEvent(e);
     }
 
-    // Hot keys (PHPbb-specific!!!).
+    // Hot keys
     var form = this.textarea.form;
     var submitter = null;
     if (e.keyCode == this.VK_PAGE_UP &&  e.shiftKey && !e.ctrlKey &&  e.altKey)
@@ -294,7 +294,6 @@ BBCode.prototype = {
     if (text.indexOf("\n") >= 0) text = "\n" + text + "\n";
     return text;
   }
-
 }
 
 // Emulation of innerText for Mozilla.
@@ -441,5 +440,4 @@ function transliterate (msg, e)
 		if (e) e.disabled = false;
 	}, 1);
 }
-
 // Translit END

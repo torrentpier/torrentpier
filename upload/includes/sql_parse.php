@@ -1,32 +1,4 @@
 <?php
-/***************************************************************************
-*                             sql_parse.php
-*                              -------------------
-*     begin                : Thu May 31, 2001
-*     copyright            : (C) 2001 The phpBB Group
-*     email                : support@phpbb.com
-*
-*     $Id: sql_parse.php,v 1.8 2002/03/18 23:53:12 psotfx Exp $
-*
-****************************************************************************/
-
-/***************************************************************************
- *
- *   This program is free software; you can redistribute it and/or modify
- *   it under the terms of the GNU General Public License as published by
- *   the Free Software Foundation; either version 2 of the License, or
- *   (at your option) any later version.
- *
- ***************************************************************************/
-
-/***************************************************************************
-*
-*	These functions are mainly for use in the db_utilities under the admin
-*	however in order to make these functions available elsewhere, specifically
-*	in the installation phase of phpBB I have seperated out a couple of
-*	functions into this file.  JLH
-*
-\***************************************************************************/
 
 if (!defined('BB_ROOT')) die(basename(__FILE__));
 

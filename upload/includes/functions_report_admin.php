@@ -78,7 +78,7 @@ function report_modules_inactive($mode = 'all', $module = null)
 
 		while ($file = @readdir($dir))
 		{
-			if (!preg_match('#(.*)\.' . phpbb_preg_quote('php', '#') . '$#', $file, $matches))
+			if (!preg_match('#(.*)\.' . bb_preg_quote('php', '#') . '$#', $file, $matches))
 			{
 				continue;
 			}

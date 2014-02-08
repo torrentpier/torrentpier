@@ -2,17 +2,15 @@
 
 require('./pagestart.php');
 
-//
 // Generate relevant output
-//
-if( isset($_GET['pane']) && $_GET['pane'] == 'left' )
+if (isset($_GET['pane']) && $_GET['pane'] == 'left')
 {
 	$dir = @opendir('.');
 
 	$setmodules = 1;
-	while( $file = @readdir($dir) )
+	while ($file = @readdir($dir))
 	{
-		if( preg_match('/^admin_.*?\.php$/', $file) )
+		if (preg_match('/^admin_.*?\.php$/', $file))
 		{
 			include('./' . $file);
 		}
@@ -30,9 +28,9 @@ if( isset($_GET['pane']) && $_GET['pane'] == 'left' )
 
 	ksort($module);
 
-	while( list($cat, $action_array) = each($module) )
+	while (list($cat, $action_array) = each($module))
 	{
-		$cat = ( !empty($lang[strtoupper($cat)]) ) ? $lang[strtoupper($cat)] : preg_replace('/_/', ' ', $cat);
+		$cat = (!empty($lang[strtoupper($cat)])) ? $lang[strtoupper($cat)] : preg_replace('/_/', ' ', $cat);
 
 		$template->assign_block_vars('catrow', array(
 			'ADMIN_CATEGORY' => $cat,
@@ -41,7 +39,7 @@ if( isset($_GET['pane']) && $_GET['pane'] == 'left' )
 		ksort($action_array);
 
 		$row_count = 0;
-		while( list($action, $file)	= each($action_array) )
+		while (list($action, $file)	= each($action_array))
 		{
 			$row_class = !($row_count % 2) ? 'row1' : 'row2';
 
@@ -56,22 +54,18 @@ if( isset($_GET['pane']) && $_GET['pane'] == 'left' )
 		}
 	}
 }
-elseif( isset($_GET['pane']) && $_GET['pane'] == 'right' )
+elseif (isset($_GET['pane']) && $_GET['pane'] == 'right')
 {
 	$template->assign_vars(array(
 		'TPL_ADMIN_MAIN' => true,
 	));
 
-	//
 	// Get forum statistics
-	//
-	$total_posts = get_db_stat('postcount');
-	$total_users = get_db_stat('usercount');
+	$total_posts  = get_db_stat('postcount');
+	$total_users  = get_db_stat('usercount');
 	$total_topics = get_db_stat('topiccount');
-
-	$start_date = bb_date($bb_cfg['board_startdate']);
-
-	$boarddays = ( TIMENOW - $bb_cfg['board_startdate'] ) / 86400;
+	$start_date   = bb_date($bb_cfg['board_startdate']);
+	$boarddays    = (TIMENOW - $bb_cfg['board_startdate']) / 86400;
 
 	$posts_per_day = sprintf('%.2f', $total_posts / $boarddays);
 	$topics_per_day = sprintf('%.2f', $total_topics / $boarddays);
@@ -90,12 +84,10 @@ elseif( isset($_GET['pane']) && $_GET['pane'] == 'right' )
 		}
 		@closedir($avatar_dir);
 
-
 		$avatar_dir_size = humn_size($avatar_dir_size);
 	}
 	else
 	{
-		// Couldn't open Avatar dir.
 		$avatar_dir_size = $lang['NOT_AVAILABLE'];
 	}
 
@@ -114,13 +106,7 @@ elseif( isset($_GET['pane']) && $_GET['pane'] == 'right' )
 		$users_per_day = $total_users;
 	}
 
-	//
 	// DB size ... MySQL only
-	//
-	// This code is heavily influenced by a similar routine
-	// in phpMyAdmin 2.2.0
-	//
-
 	$sql = "SELECT VERSION() AS mysql_version";
 	if ($result = DB()->sql_query($sql))
 	{
@@ -169,20 +155,17 @@ elseif( isset($_GET['pane']) && $_GET['pane'] == 'right' )
 		'TOPICS_PER_DAY'   => $topics_per_day,
 		'USERS_PER_DAY'    => $users_per_day,
 		'AVATAR_DIR_SIZE'  => $avatar_dir_size,
-		'DB_SIZE'		   => $dbsize,
-		'GZIP_COMPRESSION' => ( $bb_cfg['gzip_compress'] ) ? $lang['ON'] : $lang['OFF'],
+		'DB_SIZE'          => $dbsize,
+		'GZIP_COMPRESSION' => ($bb_cfg['gzip_compress']) ? $lang['ON'] : $lang['OFF'],
 	));
-	//
-	// End forum statistics
-	//
+
 	if (@$_GET['users_online'])
 	{
 		$template->assign_vars(array(
 			'SHOW_USERS_ONLINE' => true,
 		));
-		//
+
 		// Get users online information.
-		//
 		$sql = "SELECT u.user_id, u.username, u.user_rank, s.session_time AS user_session_time, u.user_opt, s.session_logged_in, s.session_ip, s.session_start
 			FROM " . BB_USERS . " u, " . BB_SESSIONS . " s
 			WHERE s.session_logged_in = 1
@@ -248,9 +231,7 @@ elseif( isset($_GET['pane']) && $_GET['pane'] == 'right' )
 			}
 		}
 
-		//
 		// Guest users
-		//
 		if( count($onlinerow_guest) )
 		{
 			$guest_users = 0;
@@ -277,42 +258,15 @@ elseif( isset($_GET['pane']) && $_GET['pane'] == 'right' )
 	else
 	{
 		$template->assign_vars(array(
-			'USERS_ONLINE_HREF' => "index.php?pane=right&users_online=1&sid={$userdata['session_id']}",
+			'USERS_ONLINE_HREF' => "index.php?pane=right&users_online=1",
 		));
 	}
-
-	$template->assign_vars(array(
-		'U_UPDATE_USER_LEVEL' => "index.php?update_user_level=1",
-		'U_SYNC_TOPICS'       => "index.php?sync_topics=1",
-		'U_SYNC_USER_POSTS'   => "index.php?sync_user_posts=1",
-	));
-}
-elseif (isset($_REQUEST['update_user_level']))
-{
-	require(INC_DIR .'functions_group.php');
-	update_user_level('all');
-	bb_die($lang['USER_LEVELS_UPDATED']);
-}
-elseif (isset($_REQUEST['sync_topics']))
-{
-	sync('topic', 'all');
-	sync('forum', 'all');
-	bb_die($lang['TOPICS_DATA_SYNCHRONIZED']);
-}
-elseif (isset($_REQUEST['sync_user_posts']))
-{
-	sync('user_posts', 'all');
-	bb_die($lang['USER POSTS COUNT SYNCHRONIZED']);
 }
 else
 {
-	//
 	// Generate frameset
-	//
 	$template->assign_vars(array(
 		'TPL_ADMIN_FRAMESET' => true,
-		'S_FRAME_NAV'        => "index.php?pane=left",
-		'S_FRAME_MAIN'       => "index.php?pane=right",
 	));
 	send_no_cache_headers();
 	print_page('index.tpl', 'admin', 'no_header');
@@ -320,9 +274,7 @@ else
 
 print_page('index.tpl', 'admin');
 
-//
 // Functions
-//
 function inarray($needle, $haystack)
 {
 	for($i = 0; $i < sizeof($haystack); $i++ )

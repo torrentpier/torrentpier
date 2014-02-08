@@ -9,53 +9,8 @@ $user_id = $this->request['user_id'];
 
 switch ($mode)
 {
-	case 'clear_cache':
-		$gc_cache = array(
-			'bb_cache',
-			'tr_cache',
-			'session_cache',
-			'bb_cap_sid',
-			'bb_login_err',
-			'bb_poll_data',
-		);
-
-		// foreach ($bb_cfg['cache']['engines'] as $cache_name => $cache_val)
-		foreach ($gc_cache as $cache_name)
-		{
-			CACHE($cache_name)->rm();
-		}
-
-		$this->response['cache_html'] = '<span class="seed bold">'. $lang['ALL_CACHE_CLEARED'] .'</span>';
-	break;
-
-	case 'clear_datastore':
-		global $datastore;
-
-		$datastore->clean();
-
-		$this->response['datastore_html'] = '<span class="seed bold">'. $lang['DATASTORE_CLEARED'] .'</span>';
-	break;
-
-	case 'clear_template_cache':
-		global $template;
-
-		$match = 'tpl_';
-		$match_len = strlen($match);
-		$dir = $template->cachedir;
-		$res = @opendir($dir);
-		while (($file = readdir($res)) !== false)
-		{
-			if (substr($file, 0, $match_len) === $match)
-			{
-				@unlink($dir . $file);
-			}
-		}
-		closedir($res);
-
-		$this->response['template_cache'] = '<span class="seed bold">'. $lang['ALL_CACHE_CLEARED'] .'</span>';
-	break;
-
 	case 'delete_profile':
+
 		if ($userdata['user_id'] == $user_id) $this->ajax_die($lang['USER_DELETE_ME']);
 		if (empty($this->request['confirmed'])) $this->prompt_for_confirm($lang['USER_DELETE_CONFIRM']);
 
@@ -67,9 +22,11 @@ switch ($mode)
 			$this->response['info'] = $lang['USER_DELETED'];
 		}
 		else $this->ajax_die($lang['USER_DELETE_CSV']);
+
 	break;
 
 	case 'delete_topics':
+
 		if (empty($this->request['confirmed']) && $userdata['user_id'] == $user_id) $this->prompt_for_confirm($lang['DELETE_USER_POSTS_ME']);
 		if (empty($this->request['confirmed'])) $this->prompt_for_confirm($lang['DELETE_USER_ALL_POSTS_CONFIRM']);
 
@@ -82,9 +39,11 @@ switch ($mode)
 			$this->response['info'] = $lang['USER_DELETED_POSTS'];
 		}
 		else $this->ajax_die($lang['NOT_ADMIN']);
+
 	break;
 
 	case 'delete_message':
+
 		if (empty($this->request['confirmed']) && $userdata['user_id'] == $user_id) $this->prompt_for_confirm($lang['DELETE_USER_POSTS_ME']);
 		if (empty($this->request['confirmed'])) $this->prompt_for_confirm($lang['DELETE_USER_POSTS_CONFIRM']);
 
@@ -95,17 +54,21 @@ switch ($mode)
 			$this->response['info'] = $lang['USER_DELETED_POSTS'];
 		}
 		else $this->ajax_die($lang['NOT_ADMIN']);
+
 	break;
 
 	case 'user_activate':
+
 		if (empty($this->request['confirmed'])) $this->prompt_for_confirm($lang['DEACTIVATE_CONFIRM']);
 
 		DB()->query("UPDATE ". BB_USERS ." SET user_active = '1' WHERE user_id = ". $user_id);
 
 		$this->response['info'] = $lang['USER_ACTIVATE_ON'];
+
 	break;
 
 	case 'user_deactivate':
+
 		if ($userdata['user_id'] == $user_id) $this->ajax_die($lang['USER_DEACTIVATE_ME']);
 		if (empty($this->request['confirmed'])) $this->prompt_for_confirm($lang['ACTIVATE_CONFIRM']);
 
@@ -113,23 +76,7 @@ switch ($mode)
 		delete_user_sessions($user_id);
 
 		$this->response['info'] = $lang['USER_ACTIVATE_OFF'];
-	break;
 
-	case "indexer":
-		exec("indexer --config {$bb_cfg['sphinx_config_path']} --all --rotate", $result);
-		if (!is_file($bb_cfg['sphinx_config_path'].".log"))
-		{
-			file_put_contents($bb_cfg['sphinx_config_path'].".log", "####Logger from dimka3210.####".date("H:i:s", TIMENOW)."##############################\r\n\r\n\r\n\r\n", FILE_APPEND);
-		}
-		file_put_contents($bb_cfg['sphinx_config_path'].".log", "##############################".date("H:i:s", TIMENOW)."##############################\r\n", FILE_APPEND);
-		foreach ($result as $row)
-		{
-			file_put_contents($bb_cfg['sphinx_config_path'].".log", $row."\r\n", FILE_APPEND);
-		}
-		file_put_contents($bb_cfg['sphinx_config_path'].".log", "\r\n", FILE_APPEND);
-		file_put_contents($bb_cfg['sphinx_config_path'].".log", "\r\n", FILE_APPEND);
-
-		$this->response['indexer'] = '<span class="seed bold">'. $lang['INDEXER'] ."</span>";
 	break;
 }
 

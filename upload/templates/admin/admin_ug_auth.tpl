@@ -284,7 +284,7 @@ function mark_changed (f_id, acl_id)
 	<td class="row1 tCenter pad_8">
 		<p class="mrg_12">
 			<input type="text" class="post" name="username" maxlength="50" size="20" />
-			<input type="button" name="usersubmit" value="{L_FIND_USERNAME}" onclick="window.open('{U_SEARCH_USER}', '_phpbbsearch', 'HEIGHT=250,resizable=yes,WIDTH=400');return false;" />
+			<input type="button" name="usersubmit" value="{L_FIND_USERNAME}" onclick="window.open('{U_SEARCH_USER}', '_bbsearch', 'HEIGHT=250,resizable=yes,WIDTH=400');return false;" />
 		</p>
 		<p class="mrg_12">
 			<input type="submit" name="submituser" value="{L_LOOK_UP_USER}" class="bold" />

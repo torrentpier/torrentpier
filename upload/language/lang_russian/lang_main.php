@@ -1,7 +1,6 @@
 <?php
 
 $lang['CONTENT_ENCODING'] = 'UTF-8';
-$lang['TRANSLATION_INFO'] = '';
 
 //
 // Common, these terms are used
@@ -94,6 +93,7 @@ $lang['CLICK_RETURN_GROUP'] = '%sВернуться к информации о �
 $lang['ADMIN_PANEL'] = 'Администраторский раздел';
 $lang['ALL_CACHE'] = 'Весь кеш';
 $lang['ALL_CACHE_CLEARED'] = 'Кеш очищен';
+$lang['ALL_TEMPLATE_CLEARED'] = 'Кеш шаблона очищен';
 $lang['DATASTORE'] = 'Datastore';
 $lang['DATASTORE_CLEARED'] = 'Datastore очищен';
 $lang['BOARD_DISABLE'] = 'Извините, эти форумы отключены. Попробуйте зайти попозже';

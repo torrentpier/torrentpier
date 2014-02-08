@@ -188,7 +188,7 @@ class ads_common
 //
 define('AUTH_LIST_ALL', 0);
 
-// forum's ACL types (phpbb_forums: auth_view, auth_read... values)
+// forum's ACL types (bb_forums: auth_view, auth_read... values)
 define('AUTH_REG',   1);
 define('AUTH_ACL',   2);
 define('AUTH_ADMIN', 5);
@@ -1344,13 +1344,13 @@ function get_db_stat($mode)
 function clean_username($username)
 {
 	$username = mb_substr(htmlspecialchars(str_replace("\'", "'", trim($username))), 0, 25, 'UTF-8');
-	$username = phpbb_rtrim($username, "\\");
+	$username = bb_rtrim($username, "\\");
 	$username = str_replace("'", "\'", $username);
 
 	return $username;
 }
 
-function phpbb_ltrim($str, $charlist = false)
+function bb_ltrim($str, $charlist = false)
 {
 	if ($charlist === false)
 	{
@@ -1362,7 +1362,7 @@ function phpbb_ltrim($str, $charlist = false)
 	return $str;
 }
 
-function phpbb_rtrim($str, $charlist = false)
+function bb_rtrim($str, $charlist = false)
 {
 	if ($charlist === false)
 	{
@@ -1804,7 +1804,7 @@ function generate_pagination($base_url, $num_items, $per_page, $start_item, $add
 // This does exactly what preg_quote() does in PHP 4-ish
 // If you just need the 1-parameter preg_quote call, then don't bother using this.
 //
-function phpbb_preg_quote($str, $delimiter)
+function bb_preg_quote($str, $delimiter)
 {
 	$text = preg_quote($str);
 	$text = str_replace($delimiter, '\\' . $delimiter, $text);
@@ -1928,7 +1928,7 @@ function message_die ($msg_code, $msg_text = '', $msg_title = '', $err_line = ''
 			// Critical errors mean we cannot rely on _ANY_ DB information being
 			// available so we're going to dump out a simple echo'd statement
 			if (!$msg_text)  $msg_text = $lang['A_CRITICAL_ERROR'];
-			if (!$msg_title) $msg_title = 'phpBB : <b>Critical Error</b>';
+			if (!$msg_title) $msg_title = 'BB : <b>Critical Error</b>';
 			break;
 	}
 	// Add on DEBUG info if we've enabled debug mode and this is an error. This
@@ -1981,7 +1981,7 @@ function bb_simple_die ($txt)
 	die($txt);
 }
 
-function phpbb_realpath($path)
+function bb_realpath($path)
 {
 	return (!@function_exists('realpath') || !@realpath(INC_DIR . 'functions.php')) ? $path : @realpath($path);
 }

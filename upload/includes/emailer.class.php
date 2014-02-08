@@ -100,11 +100,11 @@ class emailer
 		{
 			$tpl_file = LANG_ROOT_DIR ."lang_$template_lang/email/$template_file.tpl";
 
-			if (!@file_exists(@phpbb_realpath($tpl_file)))
+			if (!@file_exists(@bb_realpath($tpl_file)))
 			{
 				$tpl_file = LANG_ROOT_DIR ."lang_{$bb_cfg['default_lang']}/email/$template_file.tpl";
 
-				if (!@file_exists(@phpbb_realpath($tpl_file)))
+				if (!@file_exists(@bb_realpath($tpl_file)))
 				{
 					message_die(GENERAL_ERROR, 'Could not find email template file :: ' . $template_file, '', __LINE__, __FILE__);
 				}

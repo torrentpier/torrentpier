@@ -152,12 +152,12 @@ switch ($mode)
 		{
 			$template->assign_block_vars('switch_avatar_block', array());
 
-			if ($bb_cfg['allow_avatar_upload'] && file_exists(@phpbb_realpath('./' . $bb_cfg['avatar_path'])))
+			if ($bb_cfg['allow_avatar_upload'] && file_exists(@bb_realpath('./' . $bb_cfg['avatar_path'])))
 			{
 				$template->assign_block_vars('switch_avatar_block.switch_avatar_local_upload', array());
 			}
 
-			if ($bb_cfg['allow_avatar_local'] && file_exists(@phpbb_realpath('./' . $bb_cfg['avatar_gallery_path'])))
+			if ($bb_cfg['allow_avatar_local'] && file_exists(@bb_realpath('./' . $bb_cfg['avatar_gallery_path'])))
 			{
 				$template->assign_block_vars('switch_avatar_block.switch_avatar_local_gallery', array());
 			}
