@@ -123,7 +123,6 @@ $template->assign_vars(array(
 	'GENDER'               => ($bb_cfg['gender'] && $profiledata['user_gender']) ? $lang['GENDER_SELECT'][$profiledata['user_gender']] : '',
 	'BIRTHDAY'             => ($bb_cfg['birthday_enabled'] && $profiledata['user_birthday'] != '0000-00-00') ? date('Y-m-d', strtotime($profiledata['user_birthday'])) : '',
 	'AGE'                  => ($bb_cfg['birthday_enabled'] && $profiledata['user_birthday'] != '0000-00-00') ? birthday_age($profiledata['user_birthday']) : '',
-	'AVATAR_IMG'           => get_avatar($profiledata['user_avatar'], $profiledata['user_avatar_type'], !bf($profiledata['user_opt'], 'user_opt', 'allow_avatar')),
 
 	'L_VIEWING_PROFILE'    => sprintf($lang['VIEWING_USER_PROFILE'], $profiledata['username']),
 
@@ -131,14 +130,17 @@ $template->assign_vars(array(
 	'U_SEARCH_TOPICS'      => "search.php?uid={$profiledata['user_id']}&amp;myt=1",
 	'U_SEARCH_RELEASES'    => "tracker.php?rid={$profiledata['user_id']}#results",
 
+	'AVATAR_IMG'           => get_avatar($profiledata['user_id'], $profiledata['avatar_ext_id'], !bf($profiledata['user_opt'], 'user_opt', 'allow_avatar')),
+	'AVATAR_DISALLOWED'    => bf($profiledata['user_opt'], 'user_opt', 'allow_avatar'),
+
 	'S_PROFILE_ACTION'     => 'profile.php',
 
 	'SIGNATURE'            => $signature,
-    'SHOW_PASSKEY'         => (IS_ADMIN || $profile_user_id),
+	'SHOW_PASSKEY'         => (IS_ADMIN || $profile_user_id),
 	'SHOW_ROLE'            => (IS_AM || $profile_user_id || $profiledata['user_active']),
 	'GROUP_MEMBERSHIP'     => false,
 	'TRAF_STATS'           => !(IS_AM || $profile_user_id),
-	'U_MANAGE'			   => (IS_ADMIN) ? "profile.php?mode=editprofile&amp;u={$profiledata['user_id']}" : 'profile.php?mode=editprofile',
+	'U_MANAGE'             => (IS_ADMIN) ? "profile.php?mode=editprofile&amp;u={$profiledata['user_id']}" : 'profile.php?mode=editprofile',
 ));
 
 if (IS_ADMIN)

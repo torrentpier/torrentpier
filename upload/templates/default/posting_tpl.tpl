@@ -662,7 +662,7 @@ TPL.el_attr = {
 	//авто мультимедийки
 	avto_mm_type: ['SEL', 'Тип мультимедиа ', '', ''],
 	manga_type: ['SEL', 'Тип', '', ''],
-	manga_completeness_with_header: ['SEL', 'Завершённость релиза', '', ''],
+	manga_completeness_with_header: ['SEL', 'Завершенность релиза', '', ''],
 	sub_format: ['SEL', 'Формат субтитров', '', ''],
 	orig_audio: ['SEL', 'Оригинальная аудиодорожка', '', ''],
 	orig_audio_serial: ['SEL', 'Оригинальная аудиодорожка', '', ''],
@@ -733,7 +733,7 @@ TPL.el_attr = {
 	video_format_iphone: ['SEL', 'Формат', '', ''],
 	video_codec_iphone: ['SEL', 'Видео кодек', '', ''],
 	cover_iphone: ['SEL', 'Вшитая обложка', '', ''],
-	tag_iphone: ['SEL', 'Доп. теги (режиссёр, актёры и т.д.)', '', ''],
+	tag_iphone: ['SEL', 'Доп. теги (режиссер, актеры и т.д.)', '', ''],
 	show_iphone: ['SEL', 'Телешоу/видеоклип ', '', ''],
 	chapter_iphone: ['SEL', 'Главы', '', ''],
 	series_iphone: ['SEL', 'Серия/сезон', '', ''],
@@ -1719,7 +1719,7 @@ TPL.selects = {
 		'manhua'
 		],
 	manga_completeness_with_header: [
-		'&raquo; Завершённость',
+		'&raquo; Завершенность',
 		'complete',
 		'incomplete'
 		],

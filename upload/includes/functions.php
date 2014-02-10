@@ -2,6 +2,31 @@
 
 if (!defined('BB_ROOT')) die(basename(__FILE__));
 
+function get_path_from_id ($id, $ext_id, $base_path, $first_div, $sec_div)
+{
+	global $bb_cfg;
+	$ext = isset($bb_cfg['file_id_ext'][$ext_id]) ? $bb_cfg['file_id_ext'][$ext_id] : '';
+	return ($base_path ? "$base_path/" : '') . floor($id/$first_div) .'/'. ($id % $sec_div) .'/'. $id . ($ext ? ".$ext" : '');
+}
+
+function get_avatar_path ($id, $ext_id, $base_path = '')
+{
+	return get_path_from_id($id, $ext_id, $base_path, 5000000, 100);
+}
+
+function delete_avatar ($user_id, $avatar_ext_id)
+{
+	global $bb_cfg;
+	$avatar_file = ($avatar_ext_id) ? get_avatar_path($user_id, $avatar_ext_id, $bb_cfg['avatars']['upload_path']) : '';
+	return ($avatar_file && file_exists($avatar_file)) ? @unlink($avatar_file) : false;
+}
+
+function get_attach_path ($id)
+{
+	global $bb_cfg;
+	return get_path_from_id($id, '', $bb_cfg['attach']['upload_path'], 1000000, 100);
+}
+
 function get_tracks ($type)
 {
 	static $pattern = '#^a:\d+:{[i:;\d]+}$#';
@@ -242,7 +267,7 @@ $bf['user_opt'] = array(
 	'notify_pm'        => 6,  // Сообщать о новых ЛС
 	'allow_passkey'    => 7,  // Запрет на добавление passkey, он же запрет на скачивание торрентов
 	'hide_porn_forums' => 8,  // Скрывать pron форумы
-	'allow_gallery'    => 9,  // Не используемое (запрет использования галереи)
+	'allow_gallery'    => 9,  // Неиспользуемое (запрет использования галереи)
 	'hide_ads'         => 10, // Запрет на показ рекламы
 	'allow_topic'      => 11, // Запрет на создание новых тем
 	'allow_post'       => 12, // Запрет на отправку сообщений
@@ -2797,30 +2822,6 @@ function create_magnet($infohash, $auth_key, $logged_in)
 	return '<a href="magnet:?xt=urn:btih:'. bin2hex($infohash) .'&tr='. urlencode($bb_cfg['bt_announce_url'] . $passkey_url) .'"><img src="'. $images['icon_magnet'] .'" width="12" height="12" border="0" /></a>';
 }
 
-function get_avatar ($avatar, $type, $allow_avatar = true, $height = '', $width = '')
-{
-	global $bb_cfg;
-
-	$height = ($height != '') ? 'height="'. $height .'"' : '';
-	$width  = ($width != '') ? 'width="'. $width .'"' : '';
-
-	$user_avatar = '<img src="'. $bb_cfg['no_avatar'] .'" alt="" border="0" '. $height .' '. $width .'/>';
-
-	if ($allow_avatar)
-	{
-		switch($type)
-		{
-			case USER_AVATAR_UPLOAD:
-				$user_avatar = ( $bb_cfg['allow_avatar_upload'] ) ? '<img src="'. $bb_cfg['avatar_path'] .'/'. $avatar .'" alt="" border="0" '. $height .' '. $width .'/>' : '';
-				break;
-			case USER_AVATAR_GALLERY:
-				$user_avatar = ( $bb_cfg['allow_avatar_local'] ) ? '<img src="'. $bb_cfg['avatar_gallery_path'] .'/'. $avatar .'" alt="" border="0" '. $height .' '. $width .'/>' : '';
-				break;
-		}
-	}
-	return $user_avatar;
-}
-
 function set_die_append_msg ($forum_id = null, $topic_id = null)
 {
 	global $lang, $template;
@@ -2857,13 +2858,6 @@ function CAPTCHA ()
 	}
 
 	return $captcha_obj;
-}
-
-function get_path_from_id ($id, $ext_id, $base_path, $first_div, $sec_div)
-{
-	global $bb_cfg;
-	$ext = isset($bb_cfg['file_id_ext'][$ext_id]) ? $bb_cfg['file_id_ext'][$ext_id] : '';
-	return ($base_path ? "$base_path/" : '') . ($id % $sec_div) .'/'. $id . ($ext ? ".$ext" : '');
 }
 
 function send_pm ($user_id, $subject, $message, $poster_id = BOT_UID)
@@ -2934,4 +2928,27 @@ function profile_url ($data)
 	}
 
 	return $profile;
+}
+
+function get_avatar ($user_id, $ext_id, $allow_avatar = true, $size = true)
+{
+	global $bb_cfg;
+
+	if ($size)
+	{
+		// TODO
+	}
+
+	$user_avatar = '<img src="'. $bb_cfg['avatars']['upload_path'] . $bb_cfg['avatars']['no_avatar'] .'" alt="'. $user_id .'" "/>';
+
+	if ($user_id == BOT_UID && $bb_cfg['avatars']['bot_avatar'])
+	{
+		$user_avatar = '<img src="'. $bb_cfg['avatars']['upload_path'] . $bb_cfg['avatars']['bot_avatar'] .'" alt="'. $user_id .'" />';
+	}
+	elseif ($allow_avatar && $ext_id)
+	{
+		$user_avatar = '<img src="'. $bb_cfg['avatars']['upload_path'] . get_avatar_path($user_id, $ext_id) .'" alt="'. $user_id .'" />';
+	}
+
+	return $user_avatar;
 }

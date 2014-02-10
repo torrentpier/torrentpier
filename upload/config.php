@@ -55,8 +55,8 @@ $domain_name = (!empty($_SERVER['SERVER_NAME'])) ? $_SERVER['SERVER_NAME'] : $do
 
 // Increase number of revision after update
 $bb_cfg['tp_version'] = '2.6 (RC)';
-$bb_cfg['tp_release_date'] = '09-02-2014';
-$bb_cfg['tp_release_state'] = 'R582';
+$bb_cfg['tp_release_date'] = '11-02-2014';
+$bb_cfg['tp_release_state'] = 'R583';
 
 // Database
 $charset  = 'utf8';
@@ -314,10 +314,11 @@ $bb_cfg['max_last_visit_days']     = 14;           // days
 $bb_cfg['last_visit_update_intrv'] = 3600;         // sec
 
 // Registration
-$bb_cfg['invalid_logins']          = 5;            // Кол-во неверных попыток ввода пароля, перед выводом проверки капчи
-$bb_cfg['new_user_reg_disabled']   = false;        // Disable new user registrations
-$bb_cfg['unique_ip']               = false;        // Deny registration of several accounts by one ip
-$bb_cfg['new_user_reg_restricted'] = false;
+$bb_cfg['invalid_logins']          = 5;            // Количество неверных попыток ввода пароля, перед выводом проверки капчей
+$bb_cfg['new_user_reg_disabled']   = false;        // Запретить регистрацию новых учетных записей
+$bb_cfg['unique_ip']               = false;        // Запретить регистрацию нескольких учетных записей с одного ip
+$bb_cfg['new_user_reg_restricted'] = false;        // Ограничить регистрацию новых пользователей по времени с 01:00 до 17:00
+$bb_cfg['reg_email_activation']    = false;        // Требовать активацию учетной записи по email
 
 // Email
 $bb_cfg['emailer_disabled']        = false;
@@ -511,6 +512,39 @@ $bb_cfg['ad_blocks'] = array(
 	'index' => array(
 		200 => 'главная, под новостями',
 	),
+);
+
+// Attachments
+$bb_cfg['attach'] = array(
+	'upload_path'           => BB_ROOT . 'torrents', // without '/'
+	'max_size'              => 250*1024,             // bytes
+);
+
+$bb_cfg['file_id_ext'] = array(
+	1  => 'gif',
+	2  => 'gz',
+	3  => 'jpg',
+	4  => 'png',
+	5  => 'rar',
+	6  => 'tar',
+	7  => 'tiff',
+	8  => 'torrent',
+	9  => 'zip',
+);
+
+$bb_cfg['tor_forums_allowed_ext'] = array('torrent', 'zip', 'rar'); // для разделов с раздачами
+$bb_cfg['gen_forums_allowed_ext'] = array('zip', 'rar');            // для обычных разделов
+
+// Avatars
+$bb_cfg['avatars'] = array(
+	'allowed_ext' => array('gif','jpg','png'),    // разрешенные форматы файлов
+	'bot_avatar'  => 'gallery/bot.gif',           // аватара бота
+	'max_size'    => 15*1024,                     // размер аватары в байтах
+	'max_height'  => 100,                         // высота аватара в px
+	'max_width'   => 100,                         // ширина аватара в px
+	'no_avatar'   => 'gallery/noavatar.png',      // дефолтная аватара
+	'upload_path' => BB_ROOT . 'images/avatars/', // путь к директории с аватарами
+	'up_allowed'  => true,                        // разрешить загрузку аватар
 );
 
 // Misc

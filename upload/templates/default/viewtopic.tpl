@@ -377,7 +377,7 @@ function build_poll_add_form (src_el)
 
 	<!-- IF postrow.POSTER_BOT -->
 		<!-- IF SHOW_BOT_NICK --><p class="nick">{postrow.POSTER_NAME}</p><!-- ENDIF -->
-		<p class="avatar">{postrow.POSTER_AVATAR}</p>
+		<!-- IF postrow.POSTER_AVATAR --><p class="avatar">{postrow.POSTER_AVATAR}</p><!-- ENDIF -->
 	<!-- ELSE -->
 		<!-- IF QUICK_REPLY -->
 		<p class="nick" title="{L_INS_NAME_TIP}" onmouseout="bbcode.refreshSelection(false);" onmouseover="bbcode.refreshSelection(true);" onclick="bbcode.onclickPoster('{postrow.POSTER_NAME_JS}', {postrow.POST_ID});">

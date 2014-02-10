@@ -148,10 +148,10 @@ $(document).ready(function(){
 			<tr{sfull.srow.ROW_BGR}>
 				<td class="tLeft" title="{sfull.srow.UPD_EXP_TIME}"><b>{sfull.srow.NAME}</b></td>
 				<td>{sfull.srow.COMPL_PRC}</td>
-				<td>{sfull.srow.UP_TOTAL}</td>
-				<td>{sfull.srow.DOWN_TOTAL}</td>
-				<td class="seedmed">{sfull.srow.SPEED_UP}</td>
-				<td class="leechmed">{sfull.srow.SPEED_DOWN}</td>
+				<td><u>{sfull.srow.UP_TOTAL_RAW}</u>{sfull.srow.UP_TOTAL}</td>
+				<td><u>{sfull.srow.DOWN_TOTAL_RAW}</u>{sfull.srow.DOWN_TOTAL}</td>
+				<td class="seedmed"><u>{sfull.srow.SPEED_UP_RAW}</u>{sfull.srow.SPEED_UP}</td>
+				<td class="leechmed"><u>{sfull.srow.SPEED_DOWN_RAW}</u>{sfull.srow.SPEED_DOWN}</td>
 				<!-- BEGIN ip -->
 				<td>{sfull.srow.ip.IP}</td>
 				<!-- END ip -->
@@ -197,10 +197,10 @@ $(document).ready(function(){
 			<tr{lfull.lrow.ROW_BGR}>
 				<td class="tLeft" title="{lfull.lrow.UPD_EXP_TIME}"><b>{lfull.lrow.NAME}</b></td>
 				<td title="{lfull.lrow.TOR_RATIO}">{lfull.lrow.COMPL_PRC}</td>
-				<td>{lfull.lrow.UP_TOTAL}</td>
-				<td>{lfull.lrow.DOWN_TOTAL}</td>
-				<td class="seedmed">{lfull.lrow.SPEED_UP}</td>
-				<td class="leechmed">{lfull.lrow.SPEED_DOWN}</td>
+				<td><u>{lfull.lrow.UP_TOTAL_RAW}</u>{lfull.lrow.UP_TOTAL}</td>
+				<td><u>{lfull.lrow.DOWN_TOTAL_RAW}</u>{lfull.lrow.DOWN_TOTAL}</td>
+				<td class="seedmed"><u>{lfull.lrow.SPEED_UP_RAW}</u>{lfull.lrow.SPEED_UP}</td>
+				<td class="leechmed"><u>{lfull.lrow.SPEED_DOWN_RAW}</u>{lfull.lrow.SPEED_DOWN}</td>
 				<!-- BEGIN ip -->
 				<td>{lfull.lrow.ip.IP}</td>
 				<!-- END ip -->

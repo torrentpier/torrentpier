@@ -131,7 +131,7 @@ function html2text (str)
 <div id="vote-btn-a" class="mrg_8 tCenter">[ <a href="#" onclick="build_votes(); return false;" class="gen"><b>{L_SUBMIT_VOTE}</b></a> ]</div>
 <div id="vote-btn-input" class="mrg_6 tCenter" style="display: none;"><input type="button" onclick="submit_vote(); return false;" value="{L_SUBMIT_VOTE}" class="bold" /></div>
 <!-- ELSE -->
-<div class="mrg_8 tCenter">[ <b>Опрос завершён</b> ]</div>
+<div class="mrg_8 tCenter">[ <b>Опрос завершен</b> ]</div>
 <!-- ENDIF -->
 
 <div id="votes-sum-block" class="mrg_8 tCenter">Всего проголосовало: <span id="votes-sum-val"></span><b></b></div>

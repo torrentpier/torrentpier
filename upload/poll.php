@@ -63,7 +63,7 @@ switch ($mode)
 		}
 		if (!poll_is_active($t_data))
 		{
-			bb_die('Этот опрос уже завершён');
+			bb_die('Этот опрос уже завершен');
 		}
 		if (!$vote_id)
 		{
@@ -90,7 +90,7 @@ switch ($mode)
 
 		CACHE('bb_poll_data')->rm("poll_$topic_id");
 
-		bb_die('Спасибо! Ваш голос учтён');
+		bb_die('Спасибо! Ваш голос учтен');
 		break;
 
 	// возобновить возможность голосовать
@@ -110,7 +110,7 @@ switch ($mode)
 			bb_die('Опрос не найден');
 		}
 		DB()->query("UPDATE ". BB_TOPICS ." SET topic_vote = ". POLL_FINISHED ." WHERE topic_id = $topic_id LIMIT 1");
-		bb_die('Опрос завершён');
+		bb_die('Опрос завершен');
 		break;
 
 	// удаление
@@ -120,7 +120,7 @@ switch ($mode)
 			bb_die('Опрос не найден');
 		}
 		$poll->delete_poll($topic_id);
-		bb_die('Опрос удалён');
+		bb_die('Опрос удален');
 		break;
 
 	// добавление
@@ -151,7 +151,7 @@ switch ($mode)
 		}
 		$poll->insert_votes_into_db($topic_id);
 		CACHE('bb_poll_data')->rm("poll_$topic_id");
-		bb_die('Опрос изменён и старые результаты удалены');
+		bb_die('Опрос изменен и старые результаты удалены');
 		break;
 
 	default:

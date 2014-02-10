@@ -604,7 +604,6 @@ if ($post_mode)
 				'POST_DATE'    => bb_date($post['post_time'], $bb_cfg['post_date_format']),
 				'IS_UNREAD'    => is_unread($post['post_time'], $topic_id, $forum_id),
 				'MESSAGE'      => ($chars_val == $show_all) ? get_parsed_post($post, 'full') : get_parsed_post($post, 'briefly'),
-				'AVATAR'       => '',
 				'POSTED_AFTER' => '',
 				'QUOTE'        => $quote_btn,
 				'EDIT'         => $edit_btn,

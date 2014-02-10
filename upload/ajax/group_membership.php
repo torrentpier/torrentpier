@@ -40,7 +40,7 @@ switch ($mode)
 			}
 			else
 			{
-				// скрытая группа и сам юзер не является её членом
+				// скрытая группа и сам юзер не является ее членом
 				if ($row['group_type'] == GROUP_HIDDEN && !$row['can_view'])
 				{
 					continue;

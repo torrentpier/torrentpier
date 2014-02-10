@@ -507,17 +507,10 @@ CREATE TABLE IF NOT EXISTS `bb_config` (
 --
 
 INSERT INTO `bb_config` VALUES ('allow_autologin', '1');
-INSERT INTO `bb_config` VALUES ('allow_avatar_local', '1');
-INSERT INTO `bb_config` VALUES ('allow_avatar_upload', '1');
 INSERT INTO `bb_config` VALUES ('allow_bbcode', '1');
 INSERT INTO `bb_config` VALUES ('allow_namechange', '0');
 INSERT INTO `bb_config` VALUES ('allow_sig', '1');
 INSERT INTO `bb_config` VALUES ('allow_smilies', '1');
-INSERT INTO `bb_config` VALUES ('avatar_filesize', '100000');
-INSERT INTO `bb_config` VALUES ('avatar_gallery_path', 'images/avatars/gallery');
-INSERT INTO `bb_config` VALUES ('avatar_max_height', '100');
-INSERT INTO `bb_config` VALUES ('avatar_max_width', '100');
-INSERT INTO `bb_config` VALUES ('avatar_path', 'images/avatars');
 INSERT INTO `bb_config` VALUES ('board_disable', '0');
 INSERT INTO `bb_config` VALUES ('board_startdate', '');
 INSERT INTO `bb_config` VALUES ('board_timezone', '0');
@@ -566,7 +559,6 @@ INSERT INTO `bb_config` VALUES ('posts_per_page', '15');
 INSERT INTO `bb_config` VALUES ('prune_enable', '1');
 INSERT INTO `bb_config` VALUES ('record_online_date', '1211477508');
 INSERT INTO `bb_config` VALUES ('record_online_users', '2');
-INSERT INTO `bb_config` VALUES ('require_activation', '0');
 INSERT INTO `bb_config` VALUES ('seed_bonus_enabled', '1');
 INSERT INTO `bb_config` VALUES ('seed_bonus_release', '');
 INSERT INTO `bb_config` VALUES ('seed_bonus_points', '');
@@ -588,7 +580,6 @@ INSERT INTO `bb_config` VALUES ('cron_enabled', '1');
 INSERT INTO `bb_config` VALUES ('cron_check_interval', '300');
 INSERT INTO `bb_config` VALUES ('reports_enabled', '1');
 INSERT INTO `bb_config` VALUES ('magnet_links_enabled', '1');
-INSERT INTO `bb_config` VALUES ('no_avatar', 'images/avatars/gallery/noavatar.png');
 INSERT INTO `bb_config` VALUES ('gender', '1');
 INSERT INTO `bb_config` VALUES ('callseed', '0');
 INSERT INTO `bb_config` VALUES ('tor_stats', '1');
@@ -601,7 +592,7 @@ INSERT INTO `bb_config` VALUES ('max_net_title', '50');
 INSERT INTO `bb_config` VALUES ('network_news_count', '5');
 INSERT INTO `bb_config` VALUES ('network_news_forum_id', '2');
 INSERT INTO `bb_config` VALUES ('whois_info', 'http://ip-whois.net/ip_geo.php?ip=');
-INSERT INTO `bb_config` VALUES ('show_mod_index', '1');
+INSERT INTO `bb_config` VALUES ('show_mod_index', '0');
 INSERT INTO `bb_config` VALUES ('premod', '0');
 INSERT INTO `bb_config` VALUES ('new_tpls', '1');
 INSERT INTO `bb_config` VALUES ('tor_comment', '1');
@@ -640,7 +631,7 @@ CREATE TABLE IF NOT EXISTS `bb_cron` (
 
 INSERT INTO `bb_cron` VALUES (1, 0, 'Site backup', 'site_backup.php', 'daily', '1', '05:00:00', 10, '', '', NULL, 1, '', 0, 1, 0);
 INSERT INTO `bb_cron` VALUES (2, 0, 'DB backup', 'db_backup.php', 'daily', '1', '05:00:00', 20, '', '', NULL, 1, '', 0, 1, 0);
-INSERT INTO `bb_cron` VALUES (3, 1, 'Avatars cleanup', 'avatars_cleanup.php', 'weekly', '1', '05:00:00', 30, '', '', NULL, 1, '', 0, 1, 0);
+INSERT INTO `bb_cron` VALUES (3, 1, 'Attach maintenance', 'attach_maintenance.php', 'daily', NULL, '05:00:00', 40, '', '', NULL, 1, '', 0, 1, 0);
 INSERT INTO `bb_cron` VALUES (4, 1, 'Board maintenance', 'bb_maintenance.php', 'daily', NULL, '05:00:00', 40, '', '', NULL, 1, '', 0, 1, 0);
 INSERT INTO `bb_cron` VALUES (5, 1, 'Prune forums', 'prune_forums.php', 'daily', NULL, '05:00:00', 50, '', '', NULL, 1, '', 0, 1, 0);
 INSERT INTO `bb_cron` VALUES (6, 1, 'Prune topic moved stubs', 'prune_topic_moved.php', 'daily', NULL, '05:00:00', 60, '', '', NULL, 1, '', 0, 1, 0);
@@ -659,7 +650,6 @@ INSERT INTO `bb_cron` VALUES (18, 1, 'Seeder last seen', 'tr_update_seeder_last_
 INSERT INTO `bb_cron` VALUES (19, 1, 'Captcha', 'captcha_gen_gc.php', 'daily', NULL, '05:00:00', 120, '', '', NULL, 0, '', 0, 0, 0);
 INSERT INTO `bb_cron` VALUES (20, 1, 'Tracker dl-complete count', 'tr_complete_count.php', 'interval', NULL, NULL, 255, '', '', '06:00:00', 0, '', 0, 0, 0);
 INSERT INTO `bb_cron` VALUES (21, 1, 'Cache garbage collector', 'cache_gc.php', 'interval', NULL, NULL, 255, '', '', '00:05:00', 0, '', 0, 0, 0);
-INSERT INTO `bb_cron` VALUES (22, 1, 'Attach maintenance', 'attach_maintenance.php', 'daily', NULL, '05:00:00', 40, '', '', NULL, 1, '', 0, 1, 0);
 
 -- --------------------------------------------------------
 
@@ -950,7 +940,7 @@ CREATE TABLE IF NOT EXISTS `bb_posts_text` (
 -- Дамп данных таблицы `bb_posts_text`
 --
 
-INSERT INTO `bb_posts_text` VALUES (1, '[list]\n[*]Переделан поиск по топикам с выбором типа [none, mysql, sphinx] (только в tracker.php)\n[*]Удалены bbcode_uid и переход на class.bbcode\n[*]Изменён метод и способ кеширования (memcache, sqlite, db_sqlite, redis, eaccelerator, apc, xcache, filecache)\n[*]Изменён способ подключения к БД и отказ от глобальной переменной $db\n[*]Улучшенный дебагер\n[*]Полностью переписан и упрощен файл регистрации\n[*]Переписана капча (в том числе при быстром ответе у гостя)\n[*]Удаление файлов torrent.php и torstatus.php и перенос их функций в ajax\n[*]Ajax цитирование, изменение, редактирование, удаление сообщений\n[/list]');
+INSERT INTO `bb_posts_text` VALUES (1, '[list]\n[*]Переделан поиск по топикам с выбором типа [none, mysql, sphinx] (только в tracker.php)\n[*]Удалены bbcode_uid и переход на class.bbcode\n[*]Изменен метод и способ кеширования (memcache, sqlite, db_sqlite, redis, eaccelerator, apc, xcache, filecache)\n[*]Изменен способ подключения к БД и отказ от глобальной переменной $db\n[*]Улучшенный дебагер\n[*]Полностью переписан и упрощен файл регистрации\n[*]Переписана капча (в том числе при быстром ответе у гостя)\n[*]Удаление файлов torrent.php и torstatus.php и перенос их функций в ajax\n[*]Ajax цитирование, изменение, редактирование, удаление сообщений\n[/list]');
 
 -- --------------------------------------------------------
 
@@ -1383,8 +1373,7 @@ CREATE TABLE IF NOT EXISTS `bb_users` (
   `user_last_privmsg` int(11) NOT NULL DEFAULT '0',
   `user_opt` int(11) NOT NULL DEFAULT '0',
   `user_rank` int(11) NOT NULL DEFAULT '0',
-  `user_avatar` varchar(100) NOT NULL DEFAULT '',
-  `user_avatar_type` tinyint(4) NOT NULL DEFAULT '0',
+  `avatar_ext_id` tinyint(4) NOT NULL,
   `user_gender` tinyint(1) NOT NULL DEFAULT '0',
   `user_birthday` date NOT NULL DEFAULT '0000-00-00',
   `user_next_birthday_greeting` int(11) NOT NULL DEFAULT '0',
@@ -1412,9 +1401,9 @@ CREATE TABLE IF NOT EXISTS `bb_users` (
 -- Дамп данных таблицы `bb_users`
 --
 
-INSERT INTO `bb_users` VALUES (-1, 0, 'Guest', 'd41d8cd98f00b204e9800998ecf8427e', 0, 0, '0', 0, '0', 0, 0, 0.00, '', 0, 0, 0, 0, 0, '', 0, 0, 0, 0, '', '', '', '', '', '', '', '', '', '', '', 0, 0, 'default');
-INSERT INTO `bb_users` VALUES (2, 1, 'admin', 'c3284d0f94606de1fd2af172aba15bf3', 0, 0, '0', 0, '0', 1, 1, 4.00, '', 0, 0, 0, 304, 1, '', 1, 0, 0, 0, 'admin@admin.com', '', '', '', '', '', '', '', '', '', '', 0, 0, 'default');
-INSERT INTO `bb_users` VALUES (-746, 0, 'bot', 'd41d8cd98f00b204e9800998ecf8427e', 0, 0, '0', 0, '0', 0, 0, 0.00, '', 0, 0, 0, 144, 0, 'bot.gif', 1, 0, 0, 0, 'bot@bot.bot', '', '', '', '', '', '', '', '', '', '', 0, 0, 'default');
+INSERT INTO `bb_users` VALUES (-1, 0, 'Guest', 'd41d8cd98f00b204e9800998ecf8427e', 0, 0, '0', 0, '0', 0, 0, 0.00, '', 0, 0, 0, 0, 0, '', 0, 0, 0, '', '', '', '', '', '', '', '', '', '', '', 0, 0, 'default');
+INSERT INTO `bb_users` VALUES (2, 1, 'admin', 'c3284d0f94606de1fd2af172aba15bf3', 0, 0, '0', 0, '0', 1, 1, 4.00, '', 0, 0, 0, 304, 1, '', 0, 0, 0, 'admin@admin.com', '', '', '', '', '', '', '', '', '', '', 0, 0, 'default');
+INSERT INTO `bb_users` VALUES (-746, 0, 'bot', 'd41d8cd98f00b204e9800998ecf8427e', 0, 0, '0', 0, '0', 0, 0, 0.00, '', 0, 0, 0, 144, 0, '', 0, 0, 0, 'bot@bot.bot', '', '', '', '', '', '', '', '', '', '', 0, 0, 'default');
 
 -- --------------------------------------------------------
 

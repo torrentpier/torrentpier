@@ -33,14 +33,6 @@
 	</td>
 </tr>
 <tr>
-	<td><h4>{L_ACCT_ACTIVATION}</h4></td>
-	<td>
-		<div><label><input type="radio" name="require_activation" value="{ACTIVATION_NONE}" {ACTIVATION_NONE_CHECKED} />{L_ACC_NONE}</label></div>
-		<div><label><input type="radio" name="require_activation" value="{ACTIVATION_USER}" {ACTIVATION_USER_CHECKED} />{L_ACC_USER}</label></div>
-		<div><label><input type="radio" name="require_activation" value="{ACTIVATION_ADMIN}" {ACTIVATION_ADMIN_CHECKED} />{L_ACC_ADMIN}</label></div>
-	</td>
-</tr>
-<tr>
 	<td><h4>{L_ALLOW_AUTOLOGIN}</h4><h6>{L_ALLOW_AUTOLOGIN_EXPLAIN}</h6></td>
 	<td>
 	    <label><input type="radio" name="allow_autologin" value="1" <!-- IF ALLOW_AUTOLOGIN -->checked="checked"<!-- ENDIF --> />{L_YES}</label>&nbsp;&nbsp;
@@ -150,43 +142,6 @@
 	    <label><input type="radio" name="allow_namechange" value="1" <!-- IF ALLOW_NAMECHANGE -->checked="checked"<!-- ENDIF --> />{L_YES}</label>&nbsp;&nbsp;
 		<label><input type="radio" name="allow_namechange" value="0" <!-- IF not ALLOW_NAMECHANGE -->checked="checked"<!-- ENDIF --> />{L_NO}</label>
 	</td>
-</tr>
-<tr>
-	<th colspan="2">{L_AVATAR_SETTINGS}</th>
-</tr>
-<tr>
-	<td><h4>{L_ALLOW_LOCAL}</h4></td>
-	<td>
-	    <label><input type="radio" name="allow_avatar_local" value="1" <!-- IF ALLOW_AVATARS_LOCAL -->checked="checked"<!-- ENDIF --> />{L_YES}</label>&nbsp;&nbsp;
-		<label><input type="radio" name="allow_avatar_local" value="0" <!-- IF not ALLOW_AVATARS_LOCAL -->checked="checked"<!-- ENDIF --> />{L_NO}</label>
-	</td>
-</tr>
-<tr>
-	<td><h4>{L_ALLOW_UPLOAD}</h4></td>
-	<td>
-	    <label><input type="radio" name="allow_avatar_upload" value="1" <!-- IF ALLOW_AVATAR_UPLOAD -->checked="checked"<!-- ENDIF --> />{L_YES}</label>&nbsp;&nbsp;
-		<label><input type="radio" name="allow_avatar_upload" value="0" <!-- IF not ALLOW_AVATAR_UPLOAD -->checked="checked"<!-- ENDIF --> />{L_NO}</label>
-	</td>
-</tr>
-<tr>
-	<td><h4>{L_MAX_FILESIZE}</h4><h6>{L_MAX_FILESIZE_EXPLAIN}</h6></td>
-	<td><input class="post" type="text" size="10" maxlength="10" name="avatar_filesize" value="{AVATAR_FILESIZE}" /> {L_BYTES}</td>
-</tr>
-<tr>
-	<td><h4>{L_MAX_AVATAR_SIZE}</h4><h6>{L_MAX_AVATAR_SIZE_EXPLAIN}</h6></td>
-	<td><input class="post" type="text" size="3" maxlength="4" name="avatar_max_height" value="{AVATAR_MAX_HEIGHT}" /> x <input class="post" type="text" size="3" maxlength="4" name="avatar_max_width" value="{AVATAR_MAX_WIDTH}"></td>
-</tr>
-<tr>
-	<td><h4>{L_AVATAR_STORAGE_PATH}</h4><h6>{L_AVATAR_STORAGE_PATH_EXPLAIN}</h6></td>
-	<td><input class="post" type="text" size="20" maxlength="255" name="avatar_path" value="{AVATAR_PATH}" /></td>
-</tr>
-<tr>
-	<td><h4>{L_AVATAR_GALLERY_PATH}</h4><h6>{L_AVATAR_GALLERY_PATH_EXPLAIN}</h6></td>
-	<td><input class="post" type="text" size="20" maxlength="255" name="avatar_gallery_path" value="{AVATAR_GALLERY_PATH}" /></td>
-</tr>
-<tr>
-	<td><h4>{L_NOAVATAR}</h4></td>
-	<td><input class="post" type="text" size="35" maxlength="255" name="no_avatar" value="{NO_AVATAR}" /></td>
 </tr>
 <tr>
     <th colspan="2">{L_EMAIL_SETTINGS}</th>

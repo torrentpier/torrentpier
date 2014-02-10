@@ -33,7 +33,7 @@
 	<td class="poster_info td1">
 
 		<p class="nick">{t.p.POSTER}</p>
-		<p><img src="{SPACER}" width="{TOPIC_LEFT_COL_SPACER_WITDH}" height="<!-- IF t.p.AVATAR -->2<!-- ELSE -->30<!-- ENDIF -->" alt="" /></p>
+		<p><img src="{SPACER}" width="{TOPIC_LEFT_COL_SPACER_WITDH}" height="30" alt="" /></p>
 
 	</td>
 	<td class="message td2">

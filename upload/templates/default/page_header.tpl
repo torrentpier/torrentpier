@@ -223,7 +223,7 @@ function getElText (e)
 }
 function escHTML (txt)
 {
-  	return txt.replace(/</g, '&lt;');
+	return txt.replace(/</g, '&lt;');
 }
 <!-- IF USE_TABLESORTER -->
 $(document).ready(function() {
@@ -254,23 +254,8 @@ function post2url (url, params) {
 }
 </script>
 
-<!--[if lte IE 6]><script type="text/javascript">
-$(ie6_make_clickable_labels);
-
-$(function(){
-	$('div.menu-sub').prepend('<iframe class="ie-fix-select-overlap"></iframe>'); // iframe for IE select box z-index issue
-	Menu.iframeFix = true;
-});
-</script><![endif]-->
-
-
 <!--[if gte IE 7]><style type="text/css">
 input[type="checkbox"] { margin-bottom: -1px; }
-</style><![endif]-->
-
-<!--[if lte IE 6]><style type="text/css">
-.forumline th { height: 24px; padding: 2px 4px; }
-.menu-sub iframe.ie-fix-select-overlap { display: none; display: block; position: absolute; z-index: -1; filter: mask(); }
 </style><![endif]-->
 
 <!--[if IE]><style type="text/css">
@@ -461,7 +446,6 @@ $(document).ready(function() {
 	<td width="40%">
 		{L_USER_WELCOME} &nbsp;<b class="med">{THIS_USER}</b>&nbsp; [ <a href="{U_LOGIN_LOGOUT}" onclick="return confirm('{L_CONFIRM_LOGOUT}');">{L_LOGOUT}</a> ]
 	</td>
-
 	<td style="padding: 2px;">
 		<div>
 			<form id="quick-search" action="" method="post" onsubmit="$(this).attr('action', $('#search-action').val());">
@@ -501,34 +485,22 @@ $(document).ready(function() {
 
 <!--login form-->
 <div class="topmenu">
-   <table width="100%" cellpadding="0" cellspacing="0">
-   <tr>
-        <td class="tCenter pad_2">
-            <a href="{U_REGISTER}" id="register_link"><b>{L_REGISTER}</b></a> &#0183;
-                <form action="{S_LOGIN_ACTION}" method="post">
-                    {L_USERNAME}: <input type="text" name="login_username" size="12" tabindex="1" accesskey="l" />
-                    {L_PASSWORD}: <input type="password" name="login_password" size="12" tabindex="2" />
-                    <label title="{L_AUTO_LOGIN}"><input type="checkbox" name="autologin" value="1" tabindex="3" checked="checked" />{L_REMEMBER}</label>&nbsp;
-                    <input type="submit" name="login" value="{L_LOGIN}" tabindex="4" />
-                </form> &#0183;
-            <a href="{U_SEND_PASSWORD}">{L_FORGOTTEN_PASSWORD}</a>
-        </td>
-    </tr>
-    </table>
+	<table width="100%" cellpadding="0" cellspacing="0">
+		<tr>
+			<td class="tCenter pad_2">
+				<a href="{U_REGISTER}" id="register_link"><b>{L_REGISTER}</b></a> &#0183;
+					<form action="{S_LOGIN_ACTION}" method="post">
+						{L_USERNAME}: <input type="text" name="login_username" size="12" tabindex="1" accesskey="l" />
+						{L_PASSWORD}: <input type="password" name="login_password" size="12" tabindex="2" />
+						<label title="{L_AUTO_LOGIN}"><input type="checkbox" name="autologin" value="1" tabindex="3" checked="checked" />{L_REMEMBER}</label>&nbsp;
+						<input type="submit" name="login" value="{L_LOGIN}" tabindex="4" />
+					</form> &#0183;
+				<a href="{U_SEND_PASSWORD}">{L_FORGOTTEN_PASSWORD}</a>
+			</td>
+		</tr>
+	</table>
 </div>
 <!--/login form-->
-<!-- ENDIF -->
-
-<!--breadcrumb-->
-<!--<div id="breadcrumb"></div>-->
-<!--/breadcrumb-->
-
-<!-- IF SHOW_IMPORTANT_INFO -->
-<!--important_info-->
-<!--<div id="important_info">
-important_info
-</div>-->
-<!--/important_info-->
 <!-- ENDIF -->
 
 </div>
@@ -578,7 +550,7 @@ important_info
 					<input style="width: 100px;" type="button" onclick="$('input.h-cat-cbx').attr('checked',false); $('input#sec_h_cat').click(); return false;" value="{L_RESET}">
 					<!-- ENDIF -->
 					<input id="sec_h_cat" type="button" onclick="set_h_cat();" style="width: 100px;" value="{L_SUBMIT}">
-				    <script type="text/javascript">
+					<script type="text/javascript">
 					function set_h_cat ()
 					{
 						h_cats = [];
@@ -603,76 +575,74 @@ important_info
 <!--page_content-->
 <div id="page_content">
 <table cellspacing="0" cellpadding="0" border="0" style="width: 100%;">
- <tr><!-- IF SHOW_SIDEBAR1 -->
-  <!--sidebar1-->
-  <td id="sidebar1">
-   <div id="sidebar1-wrap">
-
-     <!-- IF SHOW_BT_USERDATA --><div id="user_ratio">
-      <h3>{L_USER_RATIO}</h3>
-       <table cellpadding="0">
-	   <div align="center">{THIS_AVATAR}</div>
-       <tr><td>{L_USER_RATIO}</td><td><!-- IF DOWN_TOTAL_BYTES gt MIN_DL_BYTES --><b>{USER_RATIO}</b><!-- ELSE --><b>{L_NONE}</b> (DL < {MIN_DL_FOR_RATIO})<!-- ENDIF --></td></tr>
-       <tr><td>{L_DOWNLOADED}</td><td class="leechmed"><b>{DOWN_TOTAL}</b></td></tr>
-       <tr><td>{L_UPLOADED}</td><td class="seedmed"><b>{UP_TOTAL}</b></td></tr>
-       <tr><td>{L_RELEASED}</td><td class="seedmed">{RELEASED}</td></tr>
-       <tr><td>{L_BONUS}</td><td class="seedmed">{UP_BONUS}</td></tr>
-       <!-- IF $bb_cfg['seed_bonus_enabled'] --><tr><td>{L_SEED_BONUS}</td><td><a href="profile.php?mode=bonus"><span class="points bold">{POINTS}</span></a></td></tr><!-- ENDIF -->
-       </table>
-     </div><!-- ENDIF -->
-
-	<?php if (!empty($bb_cfg['sidebar1_static_content_path'])) include($bb_cfg['sidebar1_static_content_path']); ?>
-	<img width="210" class="spacer" src="{SPACER}" alt="" />
-
-   </div><!--/sidebar1-wrap-->
-  </td><!--/sidebar1-->
+<tr><!-- IF SHOW_SIDEBAR1 -->
+	<!--sidebar1-->
+	<td id="sidebar1">
+		<div id="sidebar1-wrap">
+			<!-- IF SHOW_BT_USERDATA --><div id="user_ratio">
+				<h3>{L_USER_RATIO}</h3>
+				<table cellpadding="0">
+					<!-- IF not AVATAR_DISALLOWED --><div align="center">{THIS_AVATAR}</div><!-- ENDIF -->
+					<!-- IF AVATAR_DISALLOWED --><div align="center">{L_AVATAR_DISABLE}</div><!-- ENDIF -->
+					<tr><td>{L_USER_RATIO}</td><td><!-- IF DOWN_TOTAL_BYTES gt MIN_DL_BYTES --><b>{USER_RATIO}</b><!-- ELSE --><b>{L_NONE}</b> (DL < {MIN_DL_FOR_RATIO})<!-- ENDIF --></td></tr>
+					<tr><td>{L_DOWNLOADED}</td><td class="leechmed"><b>{DOWN_TOTAL}</b></td></tr>
+					<tr><td>{L_UPLOADED}</td><td class="seedmed"><b>{UP_TOTAL}</b></td></tr>
+					<tr><td>{L_RELEASED}</td><td class="seedmed">{RELEASED}</td></tr>
+					<tr><td>{L_BONUS}</td><td class="seedmed">{UP_BONUS}</td></tr>
+					<!-- IF $bb_cfg['seed_bonus_enabled'] --><tr><td>{L_SEED_BONUS}</td><td><a href="profile.php?mode=bonus"><span class="points bold">{POINTS}</span></a></td></tr><!-- ENDIF -->
+				</table>
+			</div><!-- ENDIF -->
+			<?php if (!empty($bb_cfg['sidebar1_static_content_path'])) include($bb_cfg['sidebar1_static_content_path']); ?>
+			<img width="210" class="spacer" src="{SPACER}" alt="" />
+		</div><!--/sidebar1-wrap-->
+	</td><!--/sidebar1-->
 <!-- ENDIF -->
 
 <!--main_content-->
 <td id="main_content">
-    <div id="main_content_wrap">
-        <div id="latest_news">
-            <table cellspacing="0" cellpadding="0" width="100%">
-                <tr>
-                    <!-- IF SHOW_LATEST_NEWS -->
-                    <td width="50%">
-                        <h3>{L_LATEST_NEWS}</h3>
-                        <table cellpadding="0">
-                            <!-- BEGIN news -->
-                            <tr>
-                                <td><div class="news_date">{news.NEWS_TIME}</div></td>
-                                <td width="100%">
-                                    <div class="news_title<!-- IF news.NEWS_IS_NEW --> new<!-- ENDIF -->"><a href="{TOPIC_URL}{news.NEWS_TOPIC_ID}">{news.NEWS_TITLE}</a></div>
-                                </td>
-                            </tr>
-                            <!-- END news -->
-                        </table>
-                     </td>
-                     <!-- ENDIF -->
+	<div id="main_content_wrap">
+		<div id="latest_news">
+			<table cellspacing="0" cellpadding="0" width="100%">
+				<tr>
+					<!-- IF SHOW_LATEST_NEWS -->
+					<td width="50%">
+						<h3>{L_LATEST_NEWS}</h3>
+						<table cellpadding="0">
+							<!-- BEGIN news -->
+							<tr>
+								<td><div class="news_date">{news.NEWS_TIME}</div></td>
+								<td width="100%">
+									<div class="news_title<!-- IF news.NEWS_IS_NEW --> new<!-- ENDIF -->"><a href="{TOPIC_URL}{news.NEWS_TOPIC_ID}">{news.NEWS_TITLE}</a></div>
+								</td>
+							</tr>
+							<!-- END news -->
+						</table>
+					</td>
+					<!-- ENDIF -->
 
-                     <!-- IF SHOW_NETWORK_NEWS -->
-                     <td width="50%">
-                        <h3>{L_NETWORK_NEWS}</h3>
-                        <table cellpadding="0">
-                            <!-- BEGIN net -->
-                            <tr>
-                                <td><div class="news_date">{net.NEWS_TIME}</div></td>
-                                <td width="100%">
-                                    <div class="news_title<!-- IF net.NEWS_IS_NEW --> new<!-- ENDIF -->"><a href="{TOPIC_URL}{net.NEWS_TOPIC_ID}">{net.NEWS_TITLE}</a></div>
-                                </td>
-                            </tr>
-                            <!-- END net -->
-                         </table>
-                     </td>
-                     <!-- ENDIF -->
-                </tr>
-             </table>
-        </div>
+					<!-- IF SHOW_NETWORK_NEWS -->
+						<td width="50%">
+						<h3>{L_NETWORK_NEWS}</h3>
+						<table cellpadding="0">
+							<!-- BEGIN net -->
+							<tr>
+								<td><div class="news_date">{net.NEWS_TIME}</div></td>
+								<td width="100%">
+									<div class="news_title<!-- IF net.NEWS_IS_NEW --> new<!-- ENDIF -->"><a href="{TOPIC_URL}{net.NEWS_TOPIC_ID}">{net.NEWS_TITLE}</a></div>
+								</td>
+							</tr>
+							<!-- END net -->
+						</table>
+					</td>
+					<!-- ENDIF -->
+				</tr>
+			</table>
+		</div>
 
 <!-- IF AD_BLOCK_200 -->
-        <div id="ad-200">{AD_BLOCK_200}</div><!--/ad-200-->
+	<div id="ad-200">{AD_BLOCK_200}</div><!--/ad-200-->
 <!-- ELSEIF AD_BLOCK_100 -->
-        <div id="ad-100">{AD_BLOCK_100}</div><!--/ad-100-->
+	<div id="ad-100">{AD_BLOCK_100}</div><!--/ad-100-->
 <!-- ENDIF / AD_BLOCK_100 -->
 
 <!--=======================-->

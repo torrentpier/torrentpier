@@ -83,6 +83,7 @@ class ajax_common
 		'group_membership'  => array('mod'),
 		'post_mod_comment'  => array('mod'),
 
+		'avatar'            => array('user'),
 		'gen_passkey'       => array('user'),
 		'change_torrent'    => array('user'),
 		'change_tor_status' => array('user'),
@@ -398,5 +399,10 @@ class ajax_common
 	function view_profile()
 	{
 		require(AJAX_DIR . 'view_profile.php');
+	}
+
+	function avatar()
+	{
+		require(AJAX_DIR . 'avatar.php');
 	}
 }

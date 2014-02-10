@@ -514,7 +514,6 @@ $lang['REGISTRATION_INFO'] = 'Registration Information';
 $lang['PROFILE_INFO'] = 'Profile Information';
 $lang['PROFILE_INFO_WARN'] = 'This information will be publicly viewable';
 $lang['AVATAR_PANEL'] = 'Avatar control panel';
-$lang['AVATAR_GALLERY'] = 'Avatar gallery';
 
 $lang['WEBSITE'] = 'Website';
 $lang['LOCATION'] = 'Location';
@@ -598,9 +597,6 @@ $lang['RESET_AUTOLOGIN_EXPL'] = '';
 $lang['AVATAR'] = 'Avatar';
 $lang['AVATAR_EXPLAIN'] = 'Displays a small graphic image below your details in posts. Only one image can be displayed at a time, its width can be no greater than %d pixels, the height no greater than %d pixels, and the file size no more than %d KB.';
 $lang['UPLOAD_AVATAR_FILE'] = 'Upload Avatar from your machine';
-$lang['PICK_LOCAL_AVATAR'] = 'Select Avatar from the gallery';
-$lang['SELECT_FROM_GALLERY'] = 'Select Avatar from gallery';
-$lang['VIEW_AVATAR_GALLERY'] = 'Show gallery';
 
 $lang['SELECT_AVATAR'] = 'Select avatar';
 $lang['RETURN_PROFILE'] = 'Return to profile';
@@ -635,7 +631,7 @@ $lang['FIELDS_EMPTY'] = 'You must fill in the required fields.';
 $lang['AVATAR_FILETYPE'] = 'The avatar filetype must be .jpg, .gif or .png';
 $lang['AVATAR_FILESIZE'] = 'The avatar image file size must be less than %d KB'; // The avatar image file size must be less than 6 KB
 $lang['AVATAR_IMAGESIZE'] = 'The avatar must be less than %d pixels wide and %d pixels high';
-$lang['AVATAR_DISABLE'] = 'You are not allowed to use an avatar.';
+$lang['AVATAR_DISABLE'] = 'Forbidden to show avatar';
 
 $lang['WELCOME_SUBJECT'] = 'Welcome to %s Forums'; // Welcome to my.com forums
 $lang['NEW_ACCOUNT_SUBJECT'] = 'New user account';
@@ -643,9 +639,7 @@ $lang['ACCOUNT_ACTIVATED_SUBJECT'] = 'Account Activated';
 
 $lang['ACCOUNT_ADDED'] = 'Thank you for registering. Your account has been created. You may now log in with your username and password';
 $lang['ACCOUNT_INACTIVE'] = 'Your account has been created. However, this forum requires account activation. An activation key has been sent to the e-mail address you provided. Please check your e-mail for further information';
-$lang['ACCOUNT_INACTIVE_ADMIN'] = 'Your account has been created. However, this forum requires account activation by the administrator. An e-mail has been sent to them and you will be informed when your account has been activated';
 $lang['ACCOUNT_ACTIVE'] = 'Your account has just been activated. Thank you for registering';
-$lang['ACCOUNT_ACTIVE_ADMIN'] = 'The account has just been activated';
 $lang['REACTIVATE'] = 'Reactivate your account!';
 $lang['ALREADY_ACTIVATED'] = 'You have already activated your account';
 
@@ -1978,18 +1972,6 @@ $lang['MAX_SIG_LENGTH'] = 'Maximum signature length';
 $lang['MAX_SIG_LENGTH_EXPLAIN'] = 'Maximum number of characters in user signatures';
 $lang['ALLOW_NAME_CHANGE'] = 'Allow Username changes';
 
-$lang['AVATAR_SETTINGS'] = 'Avatar Settings';
-$lang['ALLOW_LOCAL'] = 'Enable gallery avatars';
-$lang['ALLOW_UPLOAD'] = 'Enable avatar uploading';
-$lang['MAX_FILESIZE'] = 'Maximum Avatar File Size';
-$lang['MAX_FILESIZE_EXPLAIN'] = 'For uploaded avatar files';
-$lang['MAX_AVATAR_SIZE'] = 'Maximum Avatar Dimensions';
-$lang['MAX_AVATAR_SIZE_EXPLAIN'] = '(Height x Width in pixels)';
-$lang['AVATAR_STORAGE_PATH'] = 'Avatar Storage Path';
-$lang['AVATAR_STORAGE_PATH_EXPLAIN'] = 'Path under your phpBB root dir, e.g. images/avatars';
-$lang['AVATAR_GALLERY_PATH'] = 'Avatar Gallery Path';
-$lang['AVATAR_GALLERY_PATH_EXPLAIN'] = 'Path under your phpBB root dir for pre-loaded images, e.g. images/avatars/gallery';
-
 $lang['EMAIL_SETTINGS'] = 'Email Settings';
 
 // Visual Confirmation
@@ -3195,3 +3177,4 @@ $lang['LAST_VISIT'] = 'Last Visit';
 $lang['DAY'] = 'Day';
 
 $lang['POST_EDIT_CANNOT'] = 'Sorry, but you cannot edit posts';
+$lang['FORUMS_IN_CAT'] = 'forums in that category';

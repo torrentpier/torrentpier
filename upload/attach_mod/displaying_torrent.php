@@ -493,15 +493,19 @@ if ($tor_reged && $tor_info)
 					$tr[$x]++;
 
 					$template->assign_block_vars("$x_full.$x_row", array(
-						'ROW_BGR'      => $row_bgr,
-						'NAME'         => ($peer['update_time']) ? $name : "<s>$name</s>",
-						'COMPL_PRC'    => $compl_perc,
-						'UP_TOTAL'     => ($max_up_id[$x] == $pid)      ? "<b>$up_tot</b>"   : $up_tot,
-						'DOWN_TOTAL'   => ($max_down_id[$x] == $pid)    ? "<b>$down_tot</b>" : $down_tot,
-						'SPEED_UP'     => ($max_sp_up_id[$x] == $pid)   ? "<b>$sp_up</b>"    : $sp_up,
-						'SPEED_DOWN'   => ($max_sp_down_id[$x] == $pid) ? "<b>$sp_down</b>"  : $sp_down,
-						'UPD_EXP_TIME' => ($peer['update_time']) ? $lang['DL_UPD'] . bb_date($peer['update_time'], 'd-M-y H:i') .' &middot; '. delta_time($peer['update_time']) . $lang['TOR_BACK']  : $lang['DL_STOPPED'],
-						'TOR_RATIO'    => ($up_ratio) ? "UL/DL ratio: $up_ratio"  : '',
+						'ROW_BGR'        => $row_bgr,
+						'NAME'           => ($peer['update_time']) ? $name : "<s>$name</s>",
+						'COMPL_PRC'      => $compl_perc,
+						'UP_TOTAL'       => ($max_up_id[$x] == $pid)      ? "<b>$up_tot</b>"   : $up_tot,
+						'DOWN_TOTAL'     => ($max_down_id[$x] == $pid)    ? "<b>$down_tot</b>" : $down_tot,
+						'SPEED_UP'       => ($max_sp_up_id[$x] == $pid)   ? "<b>$sp_up</b>"    : $sp_up,
+						'SPEED_DOWN'     => ($max_sp_down_id[$x] == $pid) ? "<b>$sp_down</b>"  : $sp_down,
+						'UP_TOTAL_RAW'   => $peer['uploaded'],
+						'DOWN_TOTAL_RAW' => $peer['downloaded'],
+						'SPEED_UP_RAW'   => $peer['speed_up'],
+						'SPEED_DOWN_RAW' => $peer['speed_down'],
+						'UPD_EXP_TIME'   => ($peer['update_time']) ? $lang['DL_UPD'] . bb_date($peer['update_time'], 'd-M-y H:i') .' &middot; '. delta_time($peer['update_time']) . $lang['TOR_BACK']  : $lang['DL_STOPPED'],
+						'TOR_RATIO'      => ($up_ratio) ? $lang['USER_RATIO'] . "UL/DL: $up_ratio" : '',
 					));
 
 					if ($ip)

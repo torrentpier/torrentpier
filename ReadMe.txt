@@ -3,7 +3,7 @@
 ********************
 
 Распаковываем на сервер содержимое папки upload.
-Заходим в phpmyadmin, открываем или создаём новую базу, потом импортируем дамп (install/sql/mysql.sql)
+Заходим в phpmyadmin, открываем или создаем новую базу, потом импортируем дамп (install/sql/mysql.sql)
 Правим файл конфигурации config.php (изменяем данные входа в БД, остальное по усмотрению)
 
 * Файлы favicon.ico (меняем на свою иконку, если есть), robots.txt(допуск или запрет ботам поисковиков к серверу, блокирует не все, меняем адреса в строках Host: и Sitemap: на свои адреса)
@@ -28,7 +28,6 @@
 - files/thumbs
 - images
 - images/avatars
-- images/avatars/gallery
 - images/captcha
 - images/logo
 - images/ranks

@@ -96,7 +96,7 @@ switch ($mode)
 	case 'sync_topics':
 
 		sync('topic', 'all');
-		sync('forum', 'all');
+		sync_all_forums();
 
 		$this->response['sync_topics_html'] = '<span class="seed bold">'. $lang['TOPICS_DATA_SYNCHRONIZED'] .'</span>';
 

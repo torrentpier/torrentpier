@@ -9,7 +9,9 @@ if (!empty($setmodules))
 require('./pagestart.php');
 // ACP Header - END
 
-require(INC_DIR  .'functions_group.php');
+require(INC_DIR .'functions_group.php');
+
+array_deep($_POST, 'trim');
 
 $s = '';
 
@@ -126,11 +128,6 @@ if ($mode)
 
 			$forumstatus == ( FORUM_LOCKED ) ? $forumlocked = 'selected="selected"' : $forumunlocked = 'selected="selected"';
 
-			// These two options ($lang['STATUS_UNLOCKED'] and $lang['STATUS_LOCKED']) seem to be missing from
-			// the language files.
-			$lang['STATUS_UNLOCKED'] = isset($lang['STATUS_UNLOCKED']) ? $lang['STATUS_UNLOCKED'] : 'Unlocked';
-			$lang['STATUS_LOCKED'] = isset($lang['STATUS_LOCKED']) ? $lang['STATUS_LOCKED'] : 'Locked';
-
 			$statuslist = '<option value="' . FORUM_UNLOCKED . '" '. $forumunlocked .'>' . $lang['STATUS_UNLOCKED'] . '</option>\n';
 			$statuslist .= '<option value="' . FORUM_LOCKED . '" '. $forumlocked .'>' . $lang['STATUS_LOCKED'] . '</option>\n';
 
@@ -176,8 +173,8 @@ if ($mode)
 			// Create a forum in the DB
 			//
 			$cat_id = intval($_POST[POST_CAT_URL]);
-			$forum_name = DB()->escape(trim($_POST['forumname']));
-			$forum_desc = DB()->escape(trim($_POST['forumdesc']));
+			$forum_name = (string) $_POST['forumname'];
+			$forum_desc = (string) $_POST['forumdesc'];
 			$forum_status = intval($_POST['forumstatus']);
 
 			$prune_days = intval($_POST['prune_days']);
@@ -224,8 +221,11 @@ if ($mode)
 				$value_sql .= ", $value";
 			}
 
+			$forum_name_sql = DB()->escape($forum_name);
+			$forum_desc_sql = DB()->escape($forum_desc);
+
 			$columns = ' forum_name,   cat_id,   forum_desc,   forum_order,  forum_status,  prune_days,  forum_parent,  show_on_index,  forum_display_sort,  forum_display_order,  forum_tpl_id,  allow_reg_tracker,  allow_porno_topic,  self_moderated'. $field_sql;
-			$values = "'$forum_name', $cat_id, '$forum_desc', $forum_order, $forum_status, $prune_days, $forum_parent, $show_on_index, $forum_display_sort, $forum_display_order, $forum_tpl_id, $allow_reg_tracker, $allow_porno_topic, $self_moderated". $value_sql;
+			$values = "'$forum_name_sql', $cat_id, '$forum_desc_sql', $forum_order, $forum_status, $prune_days, $forum_parent, $show_on_index, $forum_display_sort, $forum_display_order, $forum_tpl_id, $allow_reg_tracker, $allow_porno_topic, $self_moderated". $value_sql;
 
 			DB()->query("INSERT INTO ". BB_FORUMS ." ($columns) VALUES ($values)");
 
@@ -243,8 +243,8 @@ if ($mode)
 			//
 			$cat_id = intval($_POST[POST_CAT_URL]);
 			$forum_id = intval($_POST[POST_FORUM_URL]);
-			$forum_name = DB()->escape(trim($_POST['forumname']));
-			$forum_desc = DB()->escape(trim($_POST['forumdesc']));
+			$forum_name = (string) $_POST['forumname'];
+			$forum_desc = (string) $_POST['forumdesc'];
 			$forum_status = intval($_POST['forumstatus']);
 			$prune_days = intval($_POST['prune_days']);
 
@@ -294,11 +294,14 @@ if ($mode)
 				$forum_order = $cat_forums[$old_cat_id]['f'][$old_parent]['forum_order'] - 5;
 			}
 
+			$forum_name_sql = DB()->escape($forum_name);
+			$forum_desc_sql = DB()->escape($forum_desc);
+
 			DB()->query("
 				UPDATE ". BB_FORUMS ." SET
-					forum_name          = '$forum_name',
+					forum_name          = '$forum_name_sql',
 					cat_id              = $cat_id,
-					forum_desc          = '$forum_desc',
+					forum_desc          = '$forum_desc_sql',
 					forum_order         = $forum_order,
 					forum_status        = $forum_status,
 					prune_days          = $prune_days,
@@ -469,26 +472,26 @@ if ($mode)
 					message_die(GENERAL_ERROR, "Ambiguous forum ID's", "", __LINE__, __FILE__);
 				}
 
-				// Update topics
-				DB()->query("
-					UPDATE ". BB_TOPICS ." SET
-						forum_id = $to_id
-					WHERE forum_id = $from_id
-				");
+				DB()->query("UPDATE ". BB_TOPICS ." SET forum_id = $to_id WHERE forum_id = $from_id");
+				DB()->query("UPDATE ". BB_BT_TORRENTS ." SET forum_id = $to_id WHERE forum_id = $from_id");
 
-				// Update posts
-				DB()->query("
-					UPDATE ". BB_POSTS ." SET
-						forum_id = $to_id
-					WHERE forum_id = $from_id
-				");
-
-				// Update torrents
-				DB()->query("
-					UPDATE ". BB_BT_TORRENTS ." SET
-						forum_id = $to_id
-					WHERE forum_id = $from_id
-				");
+				$row = DB()->fetch_row("SELECT MIN(post_id) AS start_id, MAX(post_id) AS finish_id FROM ". BB_POSTS);
+				$start_id  = (int) $row['start_id'];
+				$finish_id = (int) $row['finish_id'];
+				$per_cycle = 10000;
+				while (true)
+				{
+					set_time_limit(600);
+					$end_id = $start_id + $per_cycle - 1;
+					DB()->query("
+						UPDATE ". BB_POSTS ." SET forum_id = $to_id WHERE post_id BETWEEN $start_id AND $end_id AND forum_id = $from_id
+					");
+					if ($end_id > $finish_id)
+					{
+						break;
+					}
+					$start_id += $per_cycle;
+				}
 
 				sync('forum', $to_id);
 			}
@@ -607,6 +610,7 @@ if ($mode)
 			{
 				if ($forum_info['forum_parent'] && $prev_forum['forum_parent'] != $forum_info['forum_parent'])
 				{
+					$show_main_page = true;
 					break;
 				}
 				else if ($move_down_forum_id = get_prev_root_forum_id($forums, $forum_order))
@@ -622,6 +626,7 @@ if ($mode)
 			{
 				if ($forum_info['forum_parent'] && $next_forum['forum_parent'] != $forum_info['forum_parent'])
 				{
+					$show_main_page = true;
 					break;
 				}
 				else if ($move_up_forum_id = get_next_root_forum_id($forums, $forum_order))
@@ -640,36 +645,26 @@ if ($mode)
 
 			if ($forum_info['forum_parent'])
 			{
-				$sql = 'UPDATE ' . BB_FORUMS . " SET
+				DB()->query("
+					UPDATE ". BB_FORUMS ." SET
 						forum_order = forum_order + $move
-					WHERE forum_id = $forum_id";
-
-				if (!DB()->sql_query($sql))
-				{
-					message_die(GENERAL_ERROR, "Couldn't change forum order", '', __LINE__, __FILE__, $sql);
-				}
+					WHERE forum_id = $forum_id
+				");
 			}
 			else if ($move_down_forum_id)
 			{
-				$sql = 'UPDATE '. BB_FORUMS ." SET
+				DB()->query("
+					UPDATE ". BB_FORUMS ." SET
 						forum_order = forum_order + $move_down_ord_val
 					WHERE cat_id = $cat_id
-						AND forum_order >= $move_down_forum_order";
-
-				if (!DB()->sql_query($sql))
-				{
-					message_die(GENERAL_ERROR, "Couldn't change forum order", '', __LINE__, __FILE__, $sql);
-				}
-
-				$sql = 'UPDATE '. BB_FORUMS ." SET
+						AND forum_order >= $move_down_forum_order
+				");
+				DB()->query("
+					UPDATE ". BB_FORUMS ." SET
 						forum_order = forum_order - $move_up_ord_val
 					WHERE forum_id = $move_up_forum_id
-						 OR forum_parent = $move_up_forum_id";
-
-				if (!DB()->sql_query($sql))
-				{
-					message_die(GENERAL_ERROR, "Couldn't change forum order", '', __LINE__, __FILE__, $sql);
-				}
+						 OR forum_parent = $move_up_forum_id
+				");
 			}
 
 			renumber_order('forum', $forum_info['cat_id']);
@@ -773,13 +768,14 @@ if (!$mode || $show_main_page)
 
 		$template->assign_vars(array(
 			'U_ALL_FORUMS' => "admin_forums.php?c=all",
+			'FORUMS_COUNT' => $total_forums,
 		));
 
 		for($i = 0; $i < $total_categories; $i++)
 		{
 			$cat_id = $category_rows[$i]['cat_id'];
 
-			$template->assign_block_vars('catrow', array(
+			$template->assign_block_vars("c", array(
 				'S_ADD_FORUM_SUBMIT' => "addforum[$cat_id]",
 				'S_ADD_FORUM_NAME'   => "forumname[$cat_id]",
 
@@ -804,7 +800,7 @@ if (!$mode || $show_main_page)
 				if ($forum_rows[$j]['cat_id'] == $cat_id)
 				{
 
-					$template->assign_block_vars('catrow.forumrow',	array(
+					$template->assign_block_vars("c.f", array(
 						'FORUM_NAME' => htmlCHR($forum_rows[$j]['forum_name']),
 						'FORUM_DESC' => htmlCHR($forum_rows[$j]['forum_desc']),
 						'NUM_TOPICS' => $forum_rows[$j]['forum_topics'],
@@ -822,6 +818,7 @@ if (!$mode || $show_main_page)
 						'ADD_SUB_HREF'      => "admin_forums.php?mode=addforum&amp;forum_parent={$forum_rows[$j]['forum_id']}",
 						'U_VIEWFORUM'       => BB_ROOT ."viewforum.php?f=$forum_id",
 						'U_FORUM_EDIT'      => "admin_forums.php?mode=editforum&amp;f=$forum_id",
+						'U_FORUM_PERM'      => "admin_forumauth.php?f=$forum_id",
 						'U_FORUM_DELETE'    => "admin_forums.php?mode=deleteforum&amp;f=$forum_id",
 						'U_FORUM_MOVE_UP'   => "admin_forums.php?mode=forum_order&amp;move=-15&amp;f=$forum_id&amp;c=$req_cat_id",
 						'U_FORUM_MOVE_DOWN' => "admin_forums.php?mode=forum_order&amp;move=15&amp;f=$forum_id&amp;c=$req_cat_id",
@@ -925,16 +922,17 @@ function get_list($mode, $id, $select)
 
 	$catlist = '';
 
-   while( $row = DB()->sql_fetchrow($result) )
-   {
-	  	  $s = '';
-		  if ($row[$idfield] == $id)
-		  {
-			  $s = ' selected="selected"';
-		  }
-		  $catlist .= '<option value="'. $row[$idfield] .'"'.$s.'>&nbsp;' . htmlCHR(str_short($row[$namefield], 60)) . '</option>\n';
-   }
-   return($catlist);
+	while( $row = DB()->sql_fetchrow($result) )
+	{
+		$s = '';
+		if ($row[$idfield] == $id)
+		{
+			$s = ' selected="selected"';
+		}
+		$catlist .= '<option value="'. $row[$idfield] .'"'.$s.'>&nbsp;' . htmlCHR(str_short($row[$namefield], 60)) . '</option>\n';
+	}
+
+	return($catlist);
 }
 
 function renumber_order($mode, $cat = 0)

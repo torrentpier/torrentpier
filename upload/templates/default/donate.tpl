@@ -20,7 +20,7 @@
 			<tbody>
 			<tr>
 				<td><b>Валюта</b></td>
-				<td align="center"><b>Кошелёк</b></td>
+				<td align="center"><b>Кошелек</b></td>
 			</tr>
 			<tr>
 				<td>Евро</td>

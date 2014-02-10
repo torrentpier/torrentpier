@@ -19,6 +19,18 @@ ajax.callback.edit_user_profile = function(data){
 	ajax.restoreEditable(data.edit_id, data.new_value);
 };
 
+// avatar
+ajax.avatar = function(mode, uid) {
+	ajax.exec({
+		action  : 'avatar',
+		mode    : mode,
+		user_id : uid
+	});
+}
+ajax.callback.avatar = function(data) {
+	$('#avatar-img').html(data.avatar_html);
+}
+
 // change_user_rank
 ajax.change_user_rank = function(uid, rank_id) {
 	$('#rank-msg').html('<i class="loading-1">{L_LOADING}</i>');
@@ -188,7 +200,16 @@ ajax.callback.view_profile = function(data) {
 <tr>
 	<td class="row1 vTop tCenter" width="30%">
 
-		<p class="mrg_4">{AVATAR_IMG}</p>
+		<div id="avatar-img" class="mrg_4 med">
+			<!-- IF AVATAR_IMG -->
+				<!-- IF not AVATAR_DISALLOWED or #IS_AM -->{AVATAR_IMG}<!-- ENDIF -->
+				<!-- IF IS_ADMIN -->
+					<p id="avatar-adm" class="med mrg_4"><a href="#" onclick="if (window.confirm('Удалить аватар?')){ ajax.avatar('delete', {PROFILE_USER_ID}); } return false;" class="adm">[{L_DELETE}]</a></p>
+				<!-- ENDIF -->
+			<!-- ELSE / !AVATAR_IMG -->{L_NOAVATAR}
+			<!-- ENDIF -->
+			<!-- IF AVATAR_DISALLOWED --><p class="mrg_4 med">{L_AVATAR_DISABLE}</p><!-- ENDIF -->
+		</div>
 		<p class="small mrg_4">
 		<!-- IF IS_ADMIN -->
 			{RANK_SELECT}

@@ -149,12 +149,6 @@ define('EXCLUDED_USERS_CSV', implode(',', $excluded_users));
 // User related
 define('USER_ACTIVATION_NONE',  0);
 define('USER_ACTIVATION_SELF',  1);
-define('USER_ACTIVATION_ADMIN', 2);
-
-define('USER_AVATAR_NONE',    0);
-define('USER_AVATAR_UPLOAD',  1);
-define('USER_AVATAR_REMOTE',  2); // не используется
-define('USER_AVATAR_GALLERY', 3);
 
 // Group settings
 define('GROUP_OPEN',   0);

@@ -161,7 +161,7 @@ if ( $mode == 'read' )
 	//
 	// Major query obtains the message ...
 	//
-	$sql = "SELECT u.username, u.user_id, u.user_posts, u.user_from, u.user_email, u.user_regdate, u.user_rank, u.user_avatar,
+	$sql = "SELECT u.username, u.user_id, u.user_posts, u.user_from, u.user_email, u.user_regdate, u.user_rank,
 			u2.username AS to_username, u2.user_id AS to_user_id, u2.user_rank as to_user_rank,
 			pm.*, pmt.privmsgs_text
 		FROM " . BB_PRIVMSGS . " pm, " . BB_PRIVMSGS_TEXT . " pmt, " . BB_USERS . " u, " . BB_USERS . " u2
@@ -483,7 +483,6 @@ if ( $mode == 'read' )
 		'POSTER_JOINED'  => (@$poster_joined) ? $poster_joined : '',
 		'POSTER_POSTS'   => (@$poster_posts) ? $poster_posts : '',
 		'POSTER_FROM'    => (@$poster_from) ? $poster_from : '',
-		'POSTER_AVATAR'  => (@$poster_avatar) ? $poster_avatar : '',
 		'POST_SUBJECT'   => $post_subject,
 		'POST_DATE'      => $post_date,
 		'PM_MESSAGE'     => $private_message,

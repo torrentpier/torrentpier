@@ -22,63 +22,64 @@ function toggle_cat_list (val)
 <p>{L_FORUM_EDIT_DELETE_EXPLAIN}</p>
 <br />
 
-<form name="frm" action="{S_FORUM_ACTION}" method="post">
+<form method="post" action="{S_FORUM_ACTION}" name="frm">
 {S_HIDDEN_FIELDS}
-{SID_HIDDEN}
 
-<table class="forumline">
+<table class="forumline pad_4">
+<col class="row1" width="20%">
+<col class="row2" width="80%">
 	<tr>
 		<th colspan="2">{L_FORUM_SETTINGS}</th>
 	</tr>
 	<tr>
-		<td class="row1">{L_FORUM_NAME}</td>
-		<td class="row2"><input style="width: 96%;" type="text" name="forumname" value="{FORUM_NAME}" class="post" /></td>
+		<td>{L_FORUM_NAME}</td>
+		<td><input style="width: 96%;" type="text" name="forumname" value="{FORUM_NAME}" class="post" /></td>
 	</tr>
 	<tr>
-		<td class="row1">{L_FORUM_DESC}</td>
-		<td class="row2"><textarea style="width: 96%;" rows="2" wrap="virtual" name="forumdesc" class="post">{DESCRIPTION}</textarea></td>
+		<td>{L_FORUM_DESC}</td>
+		<td><textarea style="width: 96%;" rows="2" wrap="virtual" name="forumdesc" class="post">{DESCRIPTION}</textarea></td>
 	</tr>
 	<tr>
-		<td class="row1">{L_SF_PARENT_FORUM}</td>
-		<td class="row2"><select onchange="toggle_cat_list(this.value)" name="forum_parent">{S_PARENT_FORUM}</select></td>
+		<td>{L_SF_PARENT_FORUM}</td>
+		<td><select onchange="toggle_cat_list(this.value)" name="forum_parent">{S_PARENT_FORUM}</select></td>
 	</tr>
 	<tr id="cat_list" class="{CAT_LIST_CLASS}">
-		<td class="row1">{L_CATEGORY}</td>
-		<td class="row2"><select name="c">{S_CAT_LIST}</select></td>
+		<td>{L_CATEGORY}</td>
+		<td><select name="c">{S_CAT_LIST}</select></td>
 	</tr>
 	<tr id="show_on_index" class="{SHOW_ON_INDEX_CLASS}">
-		<td class="row1">{L_SF_SHOW_ON_INDEX}</td>	
-		<td class="row2">
-		    <label><input type="radio" name="show_on_index" value="1" <!-- IF SHOW_ON_INDEX -->checked="checked"<!-- ENDIF -->  />{L_YES}</label>&nbsp;&nbsp;
+		<td>{L_SF_SHOW_ON_INDEX}</td>
+		<td>
+			<label><input type="radio" name="show_on_index" value="1" <!-- IF SHOW_ON_INDEX -->checked="checked"<!-- ENDIF -->  />{L_YES}</label>&nbsp;&nbsp;
 			<label><input type="radio" name="show_on_index" value="0" <!-- IF not SHOW_ON_INDEX -->checked="checked"<!-- ENDIF --> />{L_NO}</label>
-		</td>		
+		</td>
 	</tr>
 	<tr>
-		<td class="row1">{L_FORUM_STATUS}</td>
-		<td class="row2"><select name="forumstatus">{S_STATUS_LIST}</select></td>
+		<td>{L_FORUM_STATUS}</td>
+		<td><select name="forumstatus">{S_STATUS_LIST}</select></td>
 	</tr>
 	<tr>
-	    <td class="row1">{L_REG_TORRENTS}</td>
-	    <td class="row2">{ALLOW_REG_TRACKER} &nbsp; {L_SELF_MODERATED}: {SELF_MODERATED}  &nbsp; {L_ALLOW_PORNO_TOPIC}: {ALLOW_PORNO_TOPIC}</td>
-    </tr>
+		<td>{L_REG_TORRENTS}</td>
+		<td>{ALLOW_REG_TRACKER} &nbsp; {L_SELF_MODERATED}: {SELF_MODERATED}  &nbsp; {L_ALLOW_PORNO_TOPIC}: {ALLOW_PORNO_TOPIC}</td>
+	</tr>
 	<tr>
-	    <td class="row1">{L_DESIGNER}</td>
-	    <td class="row2">{TPL_SELECT} - {L_FOR_NEW_TEMPLATE}</td>
-    </tr>
+		<td>{L_DESIGNER}</td>
+		<td>{TPL_SELECT} - {L_FOR_NEW_TEMPLATE}</td>
+	</tr>
 	<tr>
-	    <td class="row1">{L_FORUM_PRUNING}</td>
-	    <td class="row2">{L_PRUNE_DAYS} <input type="text" name="prune_days" value="{PRUNE_DAYS}" size="4" class="post" /> {L_DAYS} &nbsp;<i class="med">(0 = {L_DISABLED})</span></td>
-    </tr>
+		<td>{L_FORUM_PRUNING}</td>
+		<td>{L_PRUNE_DAYS} <input type="text" name="prune_days" value="{PRUNE_DAYS}" size="4" class="post" /> {L_DAYS} &nbsp;<i class="med">(0 = {L_DISABLED})</span></td>
+	</tr>
 	<tr>
-		<td class="row1">{L_SORT_BY}</td>
-		<td class="row2">
+		<td>{L_SORT_BY}</td>
+		<td>
 			<select name="forum_display_sort">{S_FORUM_DISPLAY_SORT_LIST}</select>&nbsp;
 			<select name="forum_display_order">{S_FORUM_DISPLAY_ORDER_LIST}</select>&nbsp;
 		</td>
 	</tr>
 	<tr>
 		<td class="catBottom" colspan="2">
-		    <input type="submit" name="submit" value="{S_SUBMIT_VALUE}" class="mainoption" />
+			<input type="submit" name="submit" value="{S_SUBMIT_VALUE}" class="mainoption" />
 		</td>
 	</tr>
 </table>
@@ -95,9 +96,8 @@ function toggle_cat_list (val)
 <p>{L_EDIT_CATEGORY_EXPLAIN}</p>
 <br />
 
-<form action="{S_FORUM_ACTION}" method="post">
+<form method="post" action="{S_FORUM_ACTION}">
 {S_HIDDEN_FIELDS}
-{SID_HIDDEN}
 
 <table class="forumline">
 <col class="row1">
@@ -107,7 +107,7 @@ function toggle_cat_list (val)
 <tr>
 	<td class="pad_12 tCenter">
 		{L_CATEGORY}:
-		<input type="text" name="cat_title" size="35" value="{CAT_TITLE}" />&nbsp;
+		<input type="text" name="cat_title" size="60" value="{CAT_TITLE}" />&nbsp;
 		<input type="submit" name="submit" value="{S_SUBMIT_VALUE}" class="bold" />
 	</td>
 </tr>
@@ -126,9 +126,8 @@ function toggle_cat_list (val)
 <p>{L_FORUM_DELETE_EXPLAIN}</p>
 <br />
 
-<form action="{S_FORUM_ACTION}" method="post">
+<form method="post" action="{S_FORUM_ACTION}">
 {S_HIDDEN_FIELDS}
-{SID_HIDDEN}
 
 <table class="forumline">
 <col class="row1" width="30%">
@@ -178,49 +177,61 @@ function hl (id, on)
 }
 </script>
 
-<h1>{L_FORUM_TITLE}</h1>
+<h1>{L_FORUM_TITLE} <!-- IF FORUMS_COUNT --><b class="gen">[{L_FORUMS_IN_CAT}: {FORUMS_COUNT}]</b><!-- ENDIF --></h1>
 
 <p>{L_FORUM_EDIT_DELETE_EXPLAIN}</p>
 <br />
 
 <form method="post" action="{S_FORUM_ACTION}">
-{SID_HIDDEN}
 
-<!-- BEGIN catrow -->
+<!-- BEGIN c -->
 <table class="forumline">
 	<tr class="row3">
-		<td class="tCenter"><a class="gen" title="{L_MOVE_UP}" href="{catrow.U_CAT_MOVE_UP}"><b>&nbsp;&#8593;&nbsp;</b></a><a class="gen" title="{L_MOVE_DOWN}" href="{catrow.U_CAT_MOVE_DOWN}"><b>&nbsp;&#8595;&nbsp;</b></a></td>
+		<td class="tCenter"><a class="gen" title="{L_MOVE_UP}" href="{c.U_CAT_MOVE_UP}"><b>&nbsp;&#8593;&nbsp;</b></a><a class="gen" title="{L_MOVE_DOWN}" href="{c.U_CAT_MOVE_DOWN}"><b>&nbsp;&#8595;&nbsp;</b></a></td>
 		<td colspan="5" width="100%" class="nowrap">
 			<span class="floatL">
-				<a href="{catrow.U_VIEWCAT}"><span class="gen"><b>{catrow.CAT_DESC}</b></span></a>
+				<a href="{c.U_VIEWCAT}"><span class="gen"><b>{c.CAT_DESC}</b></span></a>
 			</span>
 			<span class="nowrap floatR">
-				<a class="gen" href="{catrow.U_CREATE_FORUM}">{L_CREATE_FORUM}</a>
-				|
-				<a class="gen" href="{catrow.U_CAT_EDIT}">{L_EDIT}</a>
-				|
-				<a class="gen" href="{catrow.U_CAT_DELETE}">{L_DELETE}</a>
+				<a class="gen" href="{c.U_CREATE_FORUM}">{L_CREATE_FORUM}</a>
+				&middot;
+				<a class="gen" href="{c.U_CAT_EDIT}">{L_EDIT}</a>
+				&middot;
+				<a class="gen" href="{c.U_CAT_DELETE}">{L_DELETE}</a>
 			</span>
 		</td>
-		<td class="small">{L_PRUNE}</td>
+		<td>{L_PRUNE}</td>
 	</tr>
-	<!-- BEGIN forumrow -->
-	<tr class="row1 hl-tr" onmouseover="hl('fname_{catrow.forumrow.FORUM_ID}', 1);" onmouseout="hl('fname_{catrow.forumrow.FORUM_ID}', 0);">
-		<td class="gen" align="center"><a class="gen" title="{L_MOVE_UP}" href="{catrow.forumrow.U_FORUM_MOVE_UP}"><b>&nbsp;&#8593;&nbsp;</b></a><a class="gen" title="{L_MOVE_DOWN}" href="{catrow.forumrow.U_FORUM_MOVE_DOWN}"><b>&nbsp;&#8595;&nbsp;</b></a></td>
-		<td width="100%" {catrow.forumrow.SF_PAD}><a title="{catrow.forumrow.FORUM_DESC}" class="{catrow.forumrow.FORUM_NAME_CLASS}" href="{catrow.forumrow.U_VIEWFORUM}" target="_new"><!-- IF catrow.forumrow.SHOW_ON_INDEX --><b><!-- ENDIF --><span id="fname_{catrow.forumrow.FORUM_ID}">{catrow.forumrow.FORUM_NAME}</span><!-- IF catrow.forumrow.SHOW_ON_INDEX --></b><!-- ENDIF --></a>&nbsp;&nbsp;<em class="med" style="color: grey">{L_TOPICS_SHORT}:</em> <span class="med">{catrow.forumrow.NUM_TOPICS}</span> <em class="med" style="color: grey">{L_POSTS_SHORT}:</em> <span class="med">{catrow.forumrow.NUM_POSTS}</span></td>
-		<td class="med" align="center"><a class="med" href="{catrow.forumrow.U_FORUM_EDIT}">&nbsp;{L_EDIT}&nbsp;</a></td>
-		<td class="small" align="center" nowrap="nowrap"><a class="small" href="{catrow.forumrow.ADD_SUB_HREF}" title="Add subforum">&nbsp;+sub&nbsp;</a><!-- <span title="Order index">{catrow.forumrow.ORDER} [{catrow.forumrow.FORUM_ID}-{catrow.forumrow.FORUM_PARENT}]</span> --></td>
-		<td class="med" align="center"><a class="med" href="{catrow.forumrow.U_FORUM_RESYNC}">&nbsp;{L_RESYNC}&nbsp;</a></td>
-		<td class="med" align="center"><a class="med" href="{catrow.forumrow.U_FORUM_DELETE}">&nbsp;{L_REMOVE}&nbsp;</a></td>
-		<td class="small" align="center" nowrap="nowrap">{catrow.forumrow.PRUNE_DAYS}</td>
+	<!-- BEGIN f -->
+	<tr class="row1 hl-tr" onmouseover="hl('fname_{c.f.FORUM_ID}', 1);" onmouseout="hl('fname_{c.f.FORUM_ID}', 0);">
+		<td class="gen" align="center"><a class="gen" title="{L_MOVE_UP}" href="{c.f.U_FORUM_MOVE_UP}"><b>&nbsp;&#8593;&nbsp;</b></a><a class="gen" title="{L_MOVE_DOWN}" href="{c.f.U_FORUM_MOVE_DOWN}"><b>&nbsp;&#8595;&nbsp;</b></a></td>
+		<td class="small" align="center" nowrap="nowrap"><a class="small" href="{c.f.ADD_SUB_HREF}" title="Add subforum">&nbsp;+sub&nbsp;</a><!-- <span title="Order index">{c.f.ORDER} [{c.f.FORUM_ID}-{c.f.FORUM_PARENT}]</span> --></td>
+		<td width="100%" {c.f.SF_PAD}><a title="{c.f.FORUM_DESC}" class="{c.f.FORUM_NAME_CLASS}" href="{c.f.U_VIEWFORUM}" target="_new"><!-- IF c.f.SHOW_ON_INDEX --><b><!-- ENDIF --><span id="fname_{c.f.FORUM_ID}">{c.f.FORUM_NAME}</span><!-- IF c.f.SHOW_ON_INDEX --></b><!-- ENDIF --></a></td>
+		<td class="small tCenter" title="{L_TOPICS_SHORT}"><em class="med" style="color: grey">{L_TOPICS_SHORT}:</em> {c.f.NUM_TOPICS}</td>
+		<td class="small tCenter" title="{L_POSTS_SHORT}"><em class="med" style="color: grey">{L_POSTS_SHORT}:</em> {c.f.NUM_POSTS}</td>
+		<td class="med nowrap tCenter">
+			&nbsp;
+			<a class="med" href="{c.f.U_FORUM_EDIT}">edit</a>
+			&nbsp;&middot;&nbsp;
+			<a class="med" href="{c.f.U_FORUM_PERM}">perm</a>
+			&nbsp;&middot;&nbsp;
+			<a class="med" href="{c.f.U_FORUM_RESYNC}">sync</a>
+			&nbsp;&middot;&nbsp;
+			<a class="med" href="{c.f.U_FORUM_DELETE}">x</a>
+			&nbsp;
+		</td>
+		<td class="small" align="center" nowrap="nowrap"><b>{c.f.PRUNE_DAYS}</b></td>
 	</tr>
-	<!-- END forumrow -->
+	<!-- END f -->
 </table>
-<!-- END catrow -->
+<!-- END c -->
 
 <table class="forumline">
 	<tr>
-		<td colspan="7" class="row3"><input class="post" type="text" name="categoryname" /> <input type="submit" name="addcategory" value="{L_CREATE_CATEGORY}" /></td>
+		<td class="row3">
+			<input class="post" type="text" name="categoryname" />
+			<input type="submit" name="addcategory" value="{L_CREATE_CATEGORY}" />
+		</td>
 	</tr>
 </table>
 
@@ -229,7 +240,6 @@ function hl (id, on)
 <br />
 <p><a href="{U_ALL_FORUMS}"><b>{L_SHOW_ALL_FORUMS_ON_ONE_PAGE}</b></a></p>
 <br />
-
 
 <!--========================================================================-->
 <!-- ENDIF / TPL_FORUMS_LIST -->

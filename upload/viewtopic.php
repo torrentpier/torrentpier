@@ -363,7 +363,7 @@ if ($t_data['topic_show_first_post'] && $start)
 		SELECT
 		  u.username, u.user_id, u.user_rank, u.user_posts, u.user_from,
 		  u.user_regdate, u.user_sig,
-		  u.user_avatar, u.user_avatar_type,
+		  u.avatar_ext_id,
 		  u.user_opt, u.user_gender, u.user_birthday,
 		  p.*,
 		  h.post_html, IF(h.post_html IS NULL, pt.post_text, NULL) AS post_text
@@ -381,7 +381,7 @@ $sql = "
 	SELECT
 	  u.username, u.user_id, u.user_rank, u.user_posts, u.user_from,
 	  u.user_regdate, u.user_sig,
-	  u.user_avatar, u.user_avatar_type,
+	  u.avatar_ext_id,
 	  u.user_opt, u.user_gender, u.user_birthday,
 	  p.*,
 	  h.post_html, IF(h.post_html IS NULL, pt.post_text, NULL) AS post_text
@@ -698,7 +698,7 @@ for($i = 0; $i < $total_posts; $i++)
 	$poster_avatar = '';
 	if ( !$user->opt_js['h_av'] && $poster_id != GUEST_UID )
 	{
-		$poster_avatar = get_avatar($postrow[$i]['user_avatar'], $postrow[$i]['user_avatar_type'], !bf($postrow[$i]['user_opt'], 'user_opt', 'allow_avatar'));
+		$poster_avatar = get_avatar($postrow[$i]['user_id'], $postrow[$i]['avatar_ext_id'], !bf($postrow[$i]['user_opt'], 'user_opt', 'allow_avatar'));
 	}
 
 	$poster_rank = $rank_image = '';

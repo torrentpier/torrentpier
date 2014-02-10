@@ -6,8 +6,8 @@ require_once(INC_DIR .'functions_admin.php');
 
 // Синхронизация
 sync('topic', 'all');
-sync('forum', 'all');
 sync('user_posts', 'all');
+sync_all_forums();
 
 // Чистка bb_poll_users
 if ($poll_max_days = (int) $bb_cfg['poll_max_days'])

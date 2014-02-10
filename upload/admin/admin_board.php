@@ -38,16 +38,6 @@ else
 
 		$new[$config_name] = isset($_POST[$config_name]) ? $_POST[$config_name] : $default_config[$config_name];
 
-		// Attempt to prevent a mistake with this value.
-		if ($config_name == 'avatar_path')
-		{
-			$new['avatar_path'] = trim($new['avatar_path']);
-			if (strstr($new['avatar_path'], "\0") || !is_dir(BB_ROOT . $new['avatar_path']) || !is_writable(BB_ROOT . $new['avatar_path']))
-			{
-				$new['avatar_path'] = $default_config['avatar_path'];
-			}
-		}
-
 		if (isset($_POST['submit']) && $row['config_value'] != $new[$config_name])
 		{
 			if ($config_name == 'seed_bonus_points' || $config_name == 'seed_bonus_release') $new[$config_name] = serialize($new[$config_name]);
@@ -146,13 +136,6 @@ switch($mode)
 			'CONFIG_SITE_DESCRIPTION' => htmlCHR($new['site_desc']),
 			'DISABLE_BOARD' => ($new['board_disable']) ? true : false,
 
-			'ACTIVATION_NONE' => USER_ACTIVATION_NONE,
-			'ACTIVATION_NONE_CHECKED' => ($new['require_activation'] == USER_ACTIVATION_NONE) ? 'checked="checked"' : '',
-			'ACTIVATION_USER' => USER_ACTIVATION_SELF,
-			'ACTIVATION_USER_CHECKED' => ($new['require_activation'] == USER_ACTIVATION_SELF) ? 'checked="checked"' : '',
-			'ACTIVATION_ADMIN' => USER_ACTIVATION_ADMIN,
-			'ACTIVATION_ADMIN_CHECKED' => ($new['require_activation'] == USER_ACTIVATION_ADMIN) ? 'checked="checked"' : '',
-
 			'ALLOW_AUTOLOGIN' => ($new['allow_autologin']) ? true : false,
 			'AUTOLOGIN_TIME' => (int) $new['max_autologin_time'],
 			'MAX_POLL_OPTIONS' => $new['max_poll_options'],
@@ -171,14 +154,6 @@ switch($mode)
 			'ALLOW_SIG' => ($new['allow_sig']) ? true : false,
 			'SIG_SIZE' => $new['max_sig_chars'],
 			'ALLOW_NAMECHANGE' => ($new['allow_namechange']) ? true : false,
-			'ALLOW_AVATARS_LOCAL' => ($new['allow_avatar_local']) ? true : false,
-			'ALLOW_AVATAR_UPLOAD' => ($new['allow_avatar_upload']) ? true : false,
-			'AVATAR_FILESIZE' => $new['avatar_filesize'],
-			'AVATAR_MAX_HEIGHT' => $new['avatar_max_height'],
-			'AVATAR_MAX_WIDTH' => $new['avatar_max_width'],
-			'AVATAR_PATH' => $new['avatar_path'],
-			'AVATAR_GALLERY_PATH' => $new['avatar_gallery_path'],
-			'NO_AVATAR' => $new['no_avatar'],
 			'SMILIES_PATH' => $new['smilies_path'],
 		));
 	break;

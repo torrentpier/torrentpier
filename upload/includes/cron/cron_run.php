@@ -48,6 +48,7 @@ foreach ($cron_jobs as $job)
 			$msg[] = 'start';
 			$msg[] = date('m-d');
 			$msg[] = date('H:i:s');
+			$msg[] = sprintf('%-4s', round(sys('la'), 1));
 			$msg[] = sprintf('%05d', getmypid());
 			$msg[] = $job['cron_title'];
 			$msg = join(LOG_SEPR, $msg);
@@ -59,7 +60,7 @@ foreach ($cron_jobs as $job)
 			DB()->log_next_query(100000, $cron_sql_log_file);
 		}
 
-		@set_time_limit(600);
+		set_time_limit(600);
 		require($job_script);
 
 		if ($job['log_sql_queries'])
@@ -74,6 +75,7 @@ foreach ($cron_jobs as $job)
 			$msg[] = '  end';
 			$msg[] = date('m-d');
 			$msg[] = date('H:i:s');
+			$msg[] = sprintf('%-4s', round(sys('la'), 1));
 			$msg[] = sprintf('%05d', getmypid());
 			$msg[] = round(utime() - $cron_start_time) .'/'. round(utime() - TIMESTART) . ' sec';
 			$msg = join(LOG_SEPR, $msg);
@@ -112,7 +114,12 @@ foreach ($cron_jobs as $job)
 			LIMIT 1
 		");
 
-		sleep(3);
+		sleep(1);
+
+		if (utime() - TIMESTART > 600)
+		{
+			return;  // чтобы daily скрипты не блокировали надолго interval'ные
+		}
 	}
 	else
 	{

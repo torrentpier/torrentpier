@@ -430,7 +430,7 @@ elseif ( ($submit || $confirm) && !$topic_has_new_posts )
 					}
 					$sub_forums[] = $forum_id;
 					$sub_forums = join(',', $sub_forums);
-					// Подсчёт проверенных релизов в форумах раздела
+					// Подсчет проверенных релизов в форумах раздела
 					$count_checked_releases = DB()->fetch_row("
 						SELECT COUNT(*) AS checked_releases
 						FROM ". BB_BT_TORRENTS ."

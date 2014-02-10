@@ -191,18 +191,6 @@ function ie_copyTextToClipboard (fromNode)
 	return txt.execCommand("Copy");
 }
 
-// Clickable LABELs in IE
-// based on http://web.tampabay.rr.com/bmerkey/examples/clickable-labels.html
-function ie6_make_clickable_labels ()
-{
-	var labels = document.getElementsByTagName("label");
-	for (var i=0, len=labels.length; i<len; i++) {
-		if (!labels[i].getAttribute("htmlFor")) {
-			labels[i].onclick = function() { this.children[0].click(); }
-		}
-	}
-}
-
 //
 // Menus
 //

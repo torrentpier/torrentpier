@@ -227,58 +227,38 @@ ajax.callback.posts = function(data){
 	<td><input type="text" name="dateformat" value="{DATE_FORMAT}" maxlength="14" /></td>
 </tr>
 <!-- ENDIF -->
-<!-- BEGIN not_avatar_block -->
 <tr>
 	<th colspan="2">{L_AVATAR_PANEL}</th>
 </tr>
+<!-- IF AVATAR_DISALLOWED -->
 <tr>
-	<td colspan="2">
-		<table class="borderless bCenter w80">
-		<tr>
-			<td>{L_AVATAR_DISABLE}</td>
-			<td class="tCenter nowrap med">
-				<p>{L_CURRENT_IMAGE}</p>
-				<p class="mrg_6">{USER_AVATAR}</p>
-			</td>
-		</tr>
-		</table>
-	</td>
+	<td colspan="2" class="tCenter pad_12">Опция управления аватарой отключена за нарушение <a href="{$bb_cfg['terms_and_conditions_url']}"><b>правил форума</b></a></td>
 </tr>
-<!-- END not_avatar_block -->
-<!-- BEGIN switch_avatar_block -->
-<tr>
-	<th colspan="2">{L_AVATAR_PANEL}</th>
-</tr>
+<!-- ELSE -->
 <tr>
 	<td colspan="2">
 		<table class="borderless bCenter w80 med">
-		<tr>
-			<td>{AVATAR_EXPLAIN}</td>
-			<td class="tCenter nowrap">
-				<p>{L_CURRENT_IMAGE}</p>
-				<p class="mrg_6">{USER_AVATAR}</p>
-				<p><label><input type="checkbox" name="avatardel" /> {L_DELETE_IMAGE}</label></p>
-			</td>
-		</tr>
+			<tr>
+				<td>Небольшое изображение под информацией о вас в сообщениях. Ширина не более {$bb_cfg['avatars']['max_width']} пикселов, высота не более {$bb_cfg['avatars']['max_height']} пикселов и объемом не более {$bb_cfg['avatars']['max_size']} байт</td>
+				<td class="tCenter nowrap">
+					<p>{L_CURRENT_IMAGE}</p>
+					<p class="mrg_6"><!-- IF AVATAR_URL_PATH --><img src="{AVATARS_URL}/{AVATAR_URL_PATH}" alt="avatar" /><!-- ELSE -->--<!-- ENDIF --></p>
+					<p><label><input type="checkbox" name="delete_avatar" <!-- IF not AVATAR_URL_PATH -->disabled="disabled"<!-- ENDIF --> /> {L_DELETE_IMAGE}</label></p>
+				</td>
+			</tr>
 		</table>
 	</td>
 </tr>
-<!-- BEGIN switch_avatar_local_upload -->
+<!-- IF $bb_cfg['avatars']['up_allowed'] -->
 <tr>
 	<td>{L_UPLOAD_AVATAR_FILE}:</td>
 	<td>
+		<input type="hidden" name="MAX_FILE_SIZE" value="{$bb_cfg['avatars']['max_size']}" />
 		<input type="file" name="avatar" size="40" />
-		<input type="hidden" name="MAX_FILE_SIZE" value="{AVATAR_SIZE}" />
 	</td>
 </tr>
-<!-- END switch_avatar_local_upload -->
-<!-- BEGIN switch_avatar_local_gallery -->
-<tr>
-	<td>{L_AVATAR_GALLERY}:</td>
-	<td><input type="submit" name="avatargallery" value="{L_VIEW_AVATAR_GALLERY}" class="lite" /></td>
-</tr>
-<!-- END switch_avatar_local_gallery -->
-<!-- END switch_avatar_block -->
+<!-- ENDIF -->
+<!-- ENDIF / !AVATAR_DISALLOWED -->
 <!-- ENDIF / EDIT_PROFILE -->
 
 <!-- IF SHOW_REG_AGREEMENT -->
