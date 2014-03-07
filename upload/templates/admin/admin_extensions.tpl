@@ -77,7 +77,7 @@
 	  <th>&nbsp;{L_ALLOWED}&nbsp;</th>
 	  <th>&nbsp;{L_DOWNLOAD_MODE}&nbsp;</th>
 	  <th>&nbsp;{L_UPLOAD_ICON}&nbsp;</th>
-	  <th>&nbsp;{L_MAX_FILESIZE}&nbsp;</th>
+	  <th>&nbsp;{L_MAX_FILESIZE_ATTACH}&nbsp;</th>
 	  <th>&nbsp;{L_ALLOWED_FORUMS}&nbsp;</th>
 	  <th>&nbsp;{L_ADD_NEW}&nbsp;</th>
 	</tr>

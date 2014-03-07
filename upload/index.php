@@ -113,7 +113,6 @@ $sql = "
 	 LEFT JOIN ". BB_USERS      ." u ON(u.user_id = p.poster_id)
 	ORDER BY c.cat_order, f.forum_order
 ";
-$cat_forums = array();
 
 $replace_in_parent = array(
 	'last_post_id',
@@ -128,6 +127,7 @@ $replace_in_parent = array(
 $cache_name = 'index_sql_' . md5($sql);
 if (!$cat_forums = CACHE('bb_cache')->get($cache_name))
 {
+	$cat_forums = array();
 	foreach (DB()->fetch_rowset($sql) as $row)
 	{
 		if (!$cat_id = $row['cat_id'] OR !$forum_id = $row['forum_id'])
@@ -242,17 +242,17 @@ $template->assign_vars(array(
 // Build index page
 foreach ($cat_forums as $cid => $c)
 {
-    $template->assign_block_vars('h_c', array(
+	$template->assign_block_vars('h_c', array(
 		'H_C_ID'     => $cid,
 		'H_C_TITLE'  => $cat_title_html[$cid],
 		'H_C_CHEKED' => in_array($cid, preg_split("/[-]+/", $hide_cat_opt)) ? 'checked' : '',
 	));
 
-    $template->assign_vars(array(
+	$template->assign_vars(array(
 		'H_C_AL_MESS'  => ($hide_cat_opt && !$showhide) ? true : false
 	));
 
-    if (!$showhide && isset($hide_cat_user[$cid]))
+	if (!$showhide && isset($hide_cat_user[$cid]))
 	{
 		continue;
 	}
@@ -349,25 +349,25 @@ if ($bb_cfg['show_latest_news'])
 // Network news
 if ($bb_cfg['show_network_news'])
 {
-    if (!$network_news = $datastore->get('network_news'))
+	if (!$network_news = $datastore->get('network_news'))
 	{
-	    $datastore->update('network_news');
+		$datastore->update('network_news');
 		$network_news = $datastore->get('network_news');
 	}
 
-    $template->assign_vars(array(
-        'SHOW_NETWORK_NEWS' => true,
-    ));
+	$template->assign_vars(array(
+		'SHOW_NETWORK_NEWS' => true,
+	));
 
-   foreach ($network_news as $net)
-    {
-        $template->assign_block_vars('net', array(
+	foreach ($network_news as $net)
+	{
+		$template->assign_block_vars('net', array(
 			'NEWS_TOPIC_ID' => $net['topic_id'],
 			'NEWS_TITLE'    => str_short($net['topic_title'], $bb_cfg['max_net_title']),
 			'NEWS_TIME'     => bb_date($net['topic_time'], 'd-M', 'false'),
 			'NEWS_IS_NEW'   => is_unread($net['topic_time'], $net['topic_id'], $net['forum_id']),
-        ));
-    }
+		));
+	}
 }
 
 if ($bb_cfg['birthday_check_day'] && $bb_cfg['birthday_enabled'])

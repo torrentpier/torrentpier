@@ -8,8 +8,6 @@ Disallow: /posting.php
 Disallow: /privmsg.php
 Disallow: /profile.php
 Disallow: /viewonline.php
-Crawl-delay: 0.3
-Host: torrentpier.me
-Clean-param: sid /*.php
 
+Host: torrentpier.me
 Sitemap: http://torrentpier.me/sitemap.php

@@ -55,8 +55,8 @@ $domain_name = (!empty($_SERVER['SERVER_NAME'])) ? $_SERVER['SERVER_NAME'] : $do
 
 // Increase number of revision after update
 $bb_cfg['tp_version'] = '2.6 (RC)';
-$bb_cfg['tp_release_date'] = '11-02-2014';
-$bb_cfg['tp_release_state'] = 'R583';
+$bb_cfg['tp_release_date'] = '08-03-2014';
+$bb_cfg['tp_release_state'] = 'R584';
 
 // Database
 $charset  = 'utf8';
@@ -472,7 +472,7 @@ $bb_cfg['search_min_word_len']        = 3;
 $bb_cfg['search_max_word_len']        = 35;
 $bb_cfg['limit_max_search_results']   = false;
 $bb_cfg['tidy_post']                  = true;
-$bb_cfg['spam_filter_file_path']      = ''; //BB_PATH .'/misc/spam_filter_words.txt';
+$bb_cfg['spam_filter_file_path']      = '';        //BB_PATH .'/misc/spam_filter_words.txt';
 
 // Posting
 $bb_cfg['prevent_multiposting']  = true;           // replace "reply" with "edit last msg" if user (not admin or mod) is last topic poster
@@ -537,14 +537,14 @@ $bb_cfg['gen_forums_allowed_ext'] = array('zip', 'rar');            // для о
 
 // Avatars
 $bb_cfg['avatars'] = array(
-	'allowed_ext' => array('gif','jpg','png'),    // разрешенные форматы файлов
-	'bot_avatar'  => 'gallery/bot.gif',           // аватара бота
-	'max_size'    => 15*1024,                     // размер аватары в байтах
-	'max_height'  => 100,                         // высота аватара в px
-	'max_width'   => 100,                         // ширина аватара в px
-	'no_avatar'   => 'gallery/noavatar.png',      // дефолтная аватара
-	'upload_path' => BB_ROOT . 'images/avatars/', // путь к директории с аватарами
-	'up_allowed'  => true,                        // разрешить загрузку аватар
+	'allowed_ext' => array('gif','jpg','jpeg','png'), // разрешенные форматы файлов
+	'bot_avatar'  => 'gallery/bot.gif',               // аватара бота
+	'max_size'    => 512*1024,                        // размер аватары в байтах
+	'max_height'  => 100,                             // высота аватара в px
+	'max_width'   => 100,                             // ширина аватара в px
+	'no_avatar'   => 'gallery/noavatar.png',          // дефолтная аватара
+	'upload_path' => BB_ROOT . 'images/avatars/',     // путь к директории с аватарами
+	'up_allowed'  => true,                            // разрешить загрузку аватар
 );
 
 // Misc

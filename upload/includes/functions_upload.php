@@ -31,8 +31,8 @@ class upload_common
 
 		$lang['upload_error_common'] = 'Ошибка загрузки файла';
 		$lang['upload_errors'] = array(
-			UPLOAD_ERR_INI_SIZE   => 'превышен максимальный размер (upload_max_filesize)',
-			UPLOAD_ERR_FORM_SIZE  => 'превышен максимальный размер (MAX_FILE_SIZE)',
+			UPLOAD_ERR_INI_SIZE   => 'превышен максимальный размер файлов для сервера',
+			UPLOAD_ERR_FORM_SIZE  => 'превышен максимальный размер загружаемого файла',
 			UPLOAD_ERR_PARTIAL    => 'файл был загружен частично',
 			UPLOAD_ERR_NO_FILE    => 'файл не был загружен',
 			UPLOAD_ERR_NO_TMP_DIR => 'временная директория не найдена',

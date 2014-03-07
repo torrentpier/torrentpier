@@ -63,7 +63,6 @@ DROP TABLE IF EXISTS `bb_sessions`;
 DROP TABLE IF EXISTS `bb_smilies`;
 DROP TABLE IF EXISTS `bb_topics`;
 DROP TABLE IF EXISTS `bb_topics_watch`;
-DROP TABLE IF EXISTS `bb_topic_templates`;
 DROP TABLE IF EXISTS `bb_topic_tpl`;
 DROP TABLE IF EXISTS `bb_users`;
 DROP TABLE IF EXISTS `bb_user_group`;
@@ -779,7 +778,6 @@ CREATE TABLE IF NOT EXISTS `bb_forums` (
   `show_on_index` tinyint(1) NOT NULL DEFAULT '1',
   `forum_display_sort` tinyint(1) NOT NULL DEFAULT '0',
   `forum_display_order` tinyint(1) NOT NULL DEFAULT '0',
-  `topic_tpl_id` smallint(6) NOT NULL DEFAULT '0',
   PRIMARY KEY (`forum_id`),
   KEY `forums_order` (`forum_order`),
   KEY `cat_id` (`cat_id`),
@@ -791,7 +789,7 @@ CREATE TABLE IF NOT EXISTS `bb_forums` (
 -- Дамп данных таблицы `bb_forums`
 --
 
-INSERT INTO `bb_forums` VALUES (1, 1, 'Ваш первый форум', 'Описание вашего первого форума.', 0, 10, 1, 1, 1, 0, 0, 0, 0, 1, 1, 1, 1, 3, 3, 1, 1, 1, 1, 0, 0, 0, 0, 1, 0, 0, 0);
+INSERT INTO `bb_forums` VALUES (1, 1, 'Ваш первый форум', 'Описание вашего первого форума.', 0, 10, 1, 1, 1, 0, 0, 0, 0, 1, 1, 1, 1, 3, 3, 1, 1, 1, 1, 0, 0, 0, 0, 1, 0, 0);
 
 -- --------------------------------------------------------
 
@@ -1292,41 +1290,6 @@ CREATE TABLE IF NOT EXISTS `bb_topics_watch` (
   KEY `user_id` (`user_id`),
   KEY `notify_status` (`notify_status`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
-
--- --------------------------------------------------------
-
---
--- Структура таблицы `bb_topic_templates`
---
-
-CREATE TABLE IF NOT EXISTS `bb_topic_templates` (
-  `tpl_id` smallint(6) NOT NULL AUTO_INCREMENT,
-  `tpl_name` varchar(20) NOT NULL DEFAULT '',
-  `tpl_script` varchar(30) NOT NULL DEFAULT '',
-  `tpl_template` varchar(30) NOT NULL DEFAULT '',
-  `tpl_desc` varchar(255) NOT NULL DEFAULT '',
-  PRIMARY KEY (`tpl_id`),
-  UNIQUE KEY `tpl_name` (`tpl_name`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8;
-
---
--- Дамп данных таблицы `bb_topic_templates`
---
-
-INSERT INTO `bb_topic_templates` VALUES (1, 'video', 'video', 'video', 'Video (basic)');
-INSERT INTO `bb_topic_templates` VALUES (2, 'video_home', 'video', 'video_home', 'Video (home)');
-INSERT INTO `bb_topic_templates` VALUES (3, 'video_simple', 'video', 'video_simple', 'Video (simple)');
-INSERT INTO `bb_topic_templates` VALUES (4, 'video_lesson', 'video', 'video_lesson', 'Video (lesson)');
-INSERT INTO `bb_topic_templates` VALUES (5, 'games', 'games', 'games', 'Games');
-INSERT INTO `bb_topic_templates` VALUES (6, 'games_ps', 'games', 'games_ps', 'Games PS/PS2');
-INSERT INTO `bb_topic_templates` VALUES (7, 'games_psp', 'games', 'games_psp', 'Games PSP');
-INSERT INTO `bb_topic_templates` VALUES (8, 'games_xbox', 'games', 'games_xbox', 'Games XBOX');
-INSERT INTO `bb_topic_templates` VALUES (9, 'progs', 'progs', 'progs', 'Programs');
-INSERT INTO `bb_topic_templates` VALUES (10, 'progs_mac', 'progs', 'progs_mac', 'Programs Mac OS');
-INSERT INTO `bb_topic_templates` VALUES (11, 'music', 'music', 'music', 'Music');
-INSERT INTO `bb_topic_templates` VALUES (12, 'books', 'books', 'books', 'Books');
-INSERT INTO `bb_topic_templates` VALUES (13, 'audiobooks', 'audiobooks', 'audiobooks', 'Audiobooks');
-INSERT INTO `bb_topic_templates` VALUES (14, 'sport', 'sport', 'sport', 'Sport');
 
 -- --------------------------------------------------------
 

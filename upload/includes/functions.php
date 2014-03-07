@@ -1564,57 +1564,58 @@ function setup_style ()
 // Create date/time from format and timezone
 function bb_date ($gmepoch, $format = false, $tz = null)
 {
-    global $bb_cfg, $lang, $userdata;
+	global $bb_cfg, $lang, $userdata;
 
-    if (!$format) $format = $bb_cfg['default_dateformat'];
-    if (empty($lang))require_once($bb_cfg['default_lang_dir'] .'lang_main.php');
+	if (!$format) $format = $bb_cfg['default_dateformat'];
+	if (empty($lang)) require_once($bb_cfg['default_lang_dir'] .'lang_main.php');
 
-    if (is_null($tz) || $tz == 'false')
-    {
-        if (empty($userdata['session_logged_in']))
-        {
-            $tz2 = $bb_cfg['board_timezone'];
-        }
-        else $tz2 = $userdata['user_timezone'];
-    }
-    elseif (is_numeric($tz)) $tz2 = $tz;
+	if (is_null($tz) || $tz == 'false')
+	{
+		if (empty($userdata['session_logged_in']))
+		{
+			$tz2 = $bb_cfg['board_timezone'];
+		}
+		else $tz2 = $userdata['user_timezone'];
+	}
+	elseif (is_numeric($tz)) $tz2 = $tz;
 
-    $date = gmdate($format, $gmepoch + (3600 * $tz2));
+	$date = gmdate($format, $gmepoch + (3600 * $tz2));
 
-    if($tz != 'false')
-    {
-        $time_format = " H:i";
+	if ($tz != 'false')
+	{
+		$time_format = " H:i";
 
-        $today = gmdate("d", TIMENOW + (3600 * $tz2));
-        $month = gmdate("m", TIMENOW + (3600 * $tz2));
-        $year  = gmdate("Y", TIMENOW + (3600 * $tz2));
+		$today = gmdate("d", TIMENOW + (3600 * $tz2));
+		$month = gmdate("m", TIMENOW + (3600 * $tz2));
+		$year  = gmdate("Y", TIMENOW + (3600 * $tz2));
 
-        $date_today = gmdate("d", $gmepoch + (3600 * $tz2));
-        $date_month = gmdate("m", $gmepoch + (3600 * $tz2));
-        $date_year  = gmdate("Y", $gmepoch + (3600 * $tz2));
+		$date_today = gmdate("d", $gmepoch + (3600 * $tz2));
+		$date_month = gmdate("m", $gmepoch + (3600 * $tz2));
+		$date_year  = gmdate("Y", $gmepoch + (3600 * $tz2));
 
-        if ($date_today == $today && $date_month == $month && $date_year == $year)
-        {
-            $date = 'today' . gmdate($time_format, $gmepoch + (3600 * $tz2));
-        }
-        elseif ($today != 1 && $date_today == ($today-1) && $date_month == $month && $date_year == $year)
-        {
-            $date = 'yesterday' . gmdate($time_format, $gmepoch + (3600 * $tz2));
-        }
-        elseif ($today == 1 && $month != 1)
-        {
-            $yesterday = date ("t", mktime(0, 0, 0, ($month-1), 1, $year));
-            if ($date_today == $yesterday && $date_month == ($month-1) && $date_year == $year)
-                $date = 'yesterday' . gmdate($time_format, $gmepoch + (3600 * $tz2));
-        }
-        elseif ($today == 1 && $month == 1)
-        {
-            $yesterday = date ("t", mktime(0, 0, 0, 12, 1, ($year -1)));
-            if ($date_today == $yesterday && $date_month == 12 && $date_year == ($year-1))
-                $date = 'yesterday' . gmdate($time_format, $gmepoch + (3600 * $tz));
-        }
-    }
-    return ($bb_cfg['translate_dates']) ? strtr(strtoupper($date), $lang['DATETIME']) : $date;
+		if ($date_today == $today && $date_month == $month && $date_year == $year)
+		{
+			$date = 'today' . gmdate($time_format, $gmepoch + (3600 * $tz2));
+		}
+		elseif ($today != 1 && $date_today == ($today-1) && $date_month == $month && $date_year == $year)
+		{
+			$date = 'yesterday' . gmdate($time_format, $gmepoch + (3600 * $tz2));
+		}
+		elseif ($today == 1 && $month != 1)
+		{
+			$yesterday = date ("t", mktime(0, 0, 0, ($month-1), 1, $year));
+			if ($date_today == $yesterday && $date_month == ($month-1) && $date_year == $year)
+				$date = 'yesterday' . gmdate($time_format, $gmepoch + (3600 * $tz2));
+		}
+		elseif ($today == 1 && $month == 1)
+		{
+			$yesterday = date ("t", mktime(0, 0, 0, 12, 1, ($year -1)));
+			if ($date_today == $yesterday && $date_month == 12 && $date_year == ($year-1))
+				$date = 'yesterday' . gmdate($time_format, $gmepoch + (3600 * $tz));
+		}
+	}
+
+	return ($bb_cfg['translate_dates']) ? strtr(strtoupper($date), $lang['DATETIME']) : $date;
 }
 
 // Birthday
@@ -1624,8 +1625,7 @@ function bb_date ($gmepoch, $format = false, $tz = null)
 // from 1901 - 2099. it returns a "like" UNIX timestamp divided by 86400, so
 // calculation from the originate php date and mktime is easy.
 // mkrealdate, returns the number of day (with sign) from 1.1.1970.
-
-function mkrealdate($day, $month, $birth_year)
+function mkrealdate ($day, $month, $birth_year)
 {
 	// define epoch
 	$epoch = 0;
@@ -1692,15 +1692,15 @@ function mkrealdate($day, $month, $birth_year)
 // UNIX users should replace this function with the below code, since this should be faster
 //
 
-function realdate($date, $format = "Ymd")
+function realdate ($date, $format = "Ymd")
 {
-	if(!$date) return;
-	return bb_date($date*86400+1, $format, 0);
+	if (!$date) return;
+	return bb_date($date*86400 + 1, $format, 0);
 }
 
-function birthday_age($date, $list = 0)
+function birthday_age ($date, $list = 0)
 {
-	if(!$date) return;
+	if (!$date) return;
 	return delta_time(mktime(11, 0, 0, date('m', strtotime($date)), date('d', strtotime($date)), (date('Y', strtotime($date)) - $list)));
 }
 
@@ -1708,7 +1708,7 @@ function birthday_age($date, $list = 0)
 // Pagination routine, generates
 // page number sequence
 //
-function generate_pagination($base_url, $num_items, $per_page, $start_item, $add_prevnext_text = TRUE)
+function generate_pagination ($base_url, $num_items, $per_page, $start_item, $add_prevnext_text = TRUE)
 {
 	global $lang, $template;
 

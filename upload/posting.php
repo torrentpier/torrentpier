@@ -8,14 +8,11 @@ require(INC_DIR .'bbcode.php');
 require(INC_DIR .'functions_post.php');
 require(BB_ROOT .'attach_mod/attachment_mod.php');
 
-$page_cfg['load_tpl_vars'] = array(
-	'post_icons',
-);
+$page_cfg['load_tpl_vars'] = array('post_icons');
 
 $submit      = (bool) @$_REQUEST['post'];
 $preview     = (bool) @$_REQUEST['preview'];
 $delete      = (bool) @$_REQUEST['delete'];
-$topic_tpl   = (bool) @$_REQUEST['tpl'];
 
 $forum_id = (int) @$_REQUEST[POST_FORUM_URL];
 $topic_id = (int) @$_REQUEST[POST_TOPIC_URL];
@@ -46,17 +43,12 @@ $user->session_start();
 
 set_die_append_msg($forum_id, $topic_id);
 
-if ($mode == 'new_rel')
-{
-	require(INC_DIR .'posting_tpl.php');
-	exit;
-}
-
 // What auth type do we need to check?
 $is_auth = array();
 switch ($mode)
 {
 	case 'newtopic':
+	case 'new_rel':
 		if (bf($userdata['user_opt'], 'user_opt', 'allow_topic'))
 		{
 			bb_die($lang['RULES_POST_CANNOT']);
@@ -108,6 +100,7 @@ $post_data = array();
 switch ($mode)
 {
 	case 'newtopic':
+	case 'new_rel':
 		if (!$forum_id)
 		{
 			message_die(GENERAL_MESSAGE, $lang['FORUM_NOT_EXIST']);
@@ -169,7 +162,7 @@ if ($post_info = DB()->fetch_row($sql))
 	{
 		message_die(GENERAL_MESSAGE, $lang['FORUM_LOCKED']);
 	}
-	elseif ($mode != 'newtopic' && $post_info['topic_status'] == TOPIC_LOCKED && !$is_auth['auth_mod'])
+	elseif ($mode != 'newtopic' && $mode != 'new_rel' && $post_info['topic_status'] == TOPIC_LOCKED && !$is_auth['auth_mod'])
 	{
 		message_die(GENERAL_MESSAGE, $lang['TOPIC_LOCKED']);
 	}
@@ -231,6 +224,9 @@ if (!$is_auth[$is_auth_type])
 		case 'newtopic':
 			$redirect = "mode=newtopic&f=$forum_id";
 			break;
+		case 'new_rel':
+			$redirect = "mode=new_rel&f=$forum_id";
+			break;
 		case 'reply':
 			$redirect = "mode=reply&t=$topic_id";
 			break;
@@ -241,10 +237,10 @@ if (!$is_auth[$is_auth_type])
 		default:
 			$redirect = '';
 	}
-	redirect(LOGIN_URL . "?redirect=/posting.php?$redirect");
+	redirect(LOGIN_URL . "?redirect=/". POSTING_URL ."?$redirect");
 }
 
-if ($mode == 'newtopic' && $topic_tpl && $post_info['topic_tpl_id'])
+if ($mode == 'new_rel')
 {
 	if ($tor_status = join(',', $bb_cfg['tor_cannot_new']))
 	{
@@ -263,7 +259,8 @@ if ($mode == 'newtopic' && $topic_tpl && $post_info['topic_tpl_id'])
 		}
 		if ($topics) bb_die($topics . $lang['UNEXECUTED_RELEASE']);
 	}
-	require(INC_DIR .'topic_templates.php');
+	require(INC_DIR .'posting_tpl.php');
+	exit;
 }
 
 // Notify
@@ -277,12 +274,7 @@ else
 
 	if (!IS_GUEST && $mode != 'newtopic' && !$notify_user)
 	{
-		$notify_user = (int) DB()->fetch_row("
-			SELECT topic_id
-			FROM ". BB_TOPICS_WATCH ."
-			WHERE topic_id = $topic_id
-			  AND user_id = ". $userdata['user_id'] ."
-		");
+		$notify_user = (int) DB()->fetch_row("SELECT topic_id FROM ". BB_TOPICS_WATCH ." WHERE topic_id = $topic_id AND user_id = ". $userdata['user_id']);
 	}
 }
 

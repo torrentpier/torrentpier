@@ -372,7 +372,6 @@ define('BB_SEARCH_REBUILD',       'bb_search_rebuild');
 define('BB_SEARCH',               'bb_search_results');
 define('BB_SESSIONS',             'bb_sessions');
 define('BB_SMILIES',              'bb_smilies');
-define('BB_TOPIC_TPL_OLD',        'bb_topic_templates');
 define('BB_TOPIC_TPL',            'bb_topic_tpl');
 define('BB_TOPICS',               'bb_topics');
 define('BB_TOPICS_WATCH',         'bb_topics_watch');
@@ -588,7 +587,7 @@ $dl_status_css = array(
 );
 
 // Show 'Board is disabled' message if needed
-if ($bb_cfg['board_disable'] && !defined('IN_ADMIN') && !defined('IN_LOGIN'))
+if ($bb_cfg['board_disable'] && !defined('IN_ADMIN') && !defined('IN_LOGIN') && !defined('IN_AJAX'))
 {
 	message_die(GENERAL_MESSAGE, 'BOARD_DISABLE');
 }

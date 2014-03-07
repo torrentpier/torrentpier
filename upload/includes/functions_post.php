@@ -346,21 +346,22 @@ function user_notification($mode, &$post_data, &$topic_title, &$forum_id, &$topi
 		if ($mode == 'reply')
 		{
 			$update_watched_sql = $user_id_sql = array();
-			
+
 			$sql = DB()->fetch_rowset("SELECT ban_userid FROM ". BB_BANLIST ." WHERE ban_userid != 0");
-			
+
 			foreach ($sql as $row)
 			{
 				$user_id_sql[] = ','. $row['ban_userid'];
 			}
 			$user_id_sql = join('', $user_id_sql);
 
-			$watch_list = DB()->fetch_rowset("SELECT u.username, u.user_id, u.user_email, u.user_lang
+			$watch_list = DB()->fetch_rowset("SELECT u.username, u.user_id, u.user_active, u.user_email, u.user_lang
 				FROM " . BB_TOPICS_WATCH . " tw, " . BB_USERS . " u
 				WHERE tw.topic_id = $topic_id
 					AND tw.user_id NOT IN (". $userdata['user_id'] .", ". EXCLUDED_USERS_CSV . $user_id_sql .")
 					AND tw.notify_status = ". TOPIC_WATCH_NOTIFIED ."
 					AND u.user_id = tw.user_id
+					AND u.user_active = 1
 			");
 
 			if ($watch_list)
@@ -411,11 +412,7 @@ function user_notification($mode, &$post_data, &$topic_title, &$forum_id, &$topi
 			}
 		}
 
-		$topic_watch = DB()->fetch_row("SELECT topic_id
-			FROM ". BB_TOPICS_WATCH ."
-			WHERE topic_id = $topic_id
-				AND user_id = {$userdata['user_id']}
-		", 'topic_id');
+		$topic_watch = DB()->fetch_row("SELECT topic_id FROM ". BB_TOPICS_WATCH ." WHERE topic_id = $topic_id AND user_id = {$userdata['user_id']}", 'topic_id');
 
 		if (!$notify_user && !empty($topic_watch))
 		{

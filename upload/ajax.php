@@ -10,7 +10,7 @@ require('./common.php');
 $ajax->init();
 
 // Handle "board disabled via ON/OFF trigger"
-if (file_exists(BB_DISABLED)) 
+if (file_exists(BB_DISABLED) || $bb_cfg['board_disable'])
 {
 	$ajax->ajax_die($bb_cfg['board_disabled_msg']);
 }
