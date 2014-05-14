@@ -37,10 +37,10 @@ class user_common
 	 *  Defaults options for guests
 	 */
 	var $opt_js_guest = array(
-		'h_av'     => 1,
-		'h_rnk_i'  => 1,
-		'h_smile'  => 1,
-		'h_sig'    => 1,
+		'h_av'     => 1,     // hide avatar
+		'h_rnk_i'  => 1,     // hide rank images
+		'h_smile'  => 1,     // hide smilies
+		'h_sig'    => 1,     // hide signatures
 	);
 
 	/**
@@ -755,7 +755,7 @@ class user_common
 			$excluded[] = $not_auth;
 		}
 
-		if(bf($this->opt, 'user_opt', 'hide_porn_forums'))
+		if (bf($this->opt, 'user_opt', 'hide_porn_forums'))
 		{
 			global $datastore;
 
@@ -765,9 +765,12 @@ class user_common
 				$forums = $datastore->get('cat_forums');
 			}
 
-			foreach($forums['forum'] as $key => $row)
+			if (isset($forums['forum']))
 			{
-                if($row['allow_porno_topic']) $excluded[] = $row['forum_id'];
+				foreach ($forums['forum'] as $key => $row)
+				{
+					if ($row['allow_porno_topic']) $excluded[] = $row['forum_id'];
+				}
 			}
 		}
 

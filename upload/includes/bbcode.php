@@ -781,8 +781,6 @@ class bbcode
 	*/
 	function tidy ($text)
 	{
-		if (!function_exists('tidy_repair_string')) die('(see $bb_cfg[\'tidy_post\'] in config.php)');
-
 		$text = tidy_repair_string($text, $this->tidy_cfg, 'utf8');
 		return $text;
 	}

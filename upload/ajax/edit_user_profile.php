@@ -123,7 +123,6 @@ switch ($field)
 		{
 			$this->ajax_die($lang['INVALID_DATE'] . $this->request['value']);
 		}
-		$value = $value - (3600 * -1);
 		$this->response['new_value'] = bb_date($value);
 		break;
 

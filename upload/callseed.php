@@ -48,30 +48,7 @@ function call_seed($topic_id, $t_info, $to_user_id)
 	$subj = DB()->escape($subj);
 	$text = DB()->escape($text);
 
-	$sql = "INSERT INTO ". BB_PRIVMSGS ." (privmsgs_type, privmsgs_subject, privmsgs_from_userid, privmsgs_to_userid, privmsgs_date, privmsgs_ip)
-	VALUES (". PRIVMSGS_NEW_MAIL .",'$subj',{$userdata['user_id']},$to_user_id,". TIMENOW .",'". USER_IP ."')";
-	if (!DB()->sql_query($sql)) {
-		$msg_error = "MSG";
-		return;
-	}
-
-	$id = DB()->sql_nextid();
-
-	$sql = "INSERT INTO ". BB_PRIVMSGS_TEXT ." VALUES($id, '$text')";
-	if (!DB()->sql_query($sql)) {
-		$msg_error = "MSG_TEXT";
-		return;
-	}
-
-	$sql = "UPDATE ". BB_USERS ." SET
-		user_new_privmsg = user_new_privmsg + 1,
-		user_last_privmsg = ". TIMENOW .",
-		user_newest_pm_id = $id
-		WHERE user_id = $to_user_id";
-	if (!DB()->sql_query($sql)) {
-		$msg_error = "POPUP";
-		return;
-	}
+	send_pm($to_user_id, $subj, $text, $userdata['user_id']);
 }
 
 	$u_id = array();

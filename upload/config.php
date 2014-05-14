@@ -55,8 +55,8 @@ $domain_name = (!empty($_SERVER['SERVER_NAME'])) ? $_SERVER['SERVER_NAME'] : $do
 
 // Increase number of revision after update
 $bb_cfg['tp_version'] = '2.6 (RC)';
-$bb_cfg['tp_release_date'] = '08-03-2014';
-$bb_cfg['tp_release_state'] = 'R584';
+$bb_cfg['tp_release_date'] = '15-05-2014';
+$bb_cfg['tp_release_state'] = 'R585';
 
 // Database
 $charset  = 'utf8';
@@ -148,9 +148,9 @@ $bb_cfg['what_is_torrent_url_help']  = 'viewtopic.php?t=2'; // Что такое
 $bb_cfg['ratio_url_help']            = 'viewtopic.php?t=3'; // Рейтинг и ограничения
 $bb_cfg['search_help_url']           = 'viewtopic.php?t=4'; // Помощь по поиску
 
-$bb_cfg['bt_min_ratio_allow_dl_tor'] = 0;          // 0 - disable
-$bb_cfg['bt_min_ratio_warning']      = 0;          // 0 - disable
-$bb_cfg['bt_min_ratio_dl_button']    = 0;          // 0 - disable
+$bb_cfg['bt_min_ratio_allow_dl_tor'] = 0.3;          // 0 - disable
+$bb_cfg['bt_min_ratio_warning']      = 0.6;          // 0 - disable
+$bb_cfg['bt_min_ratio_dl_button']    = 0.5;          // 0 - disable
 
 $tr_cfg = array(
 	'autoclean'             => true,
@@ -414,10 +414,13 @@ else
 }
 ini_set('error_log', LOG_DIR .'php_err.log');
 
-// magic quotes
-if (get_magic_quotes_gpc()) die('set magic_quotes off');
-// json
-if (!function_exists('json_encode')) die('not json_encode');
+// Check some variable
+// Magic quotes
+if (get_magic_quotes_gpc()) die('Set magic_quotes off');
+// JSON
+if (!function_exists('json_encode')) die('Json_encode not installed');
+// Tidy
+if (!function_exists('tidy_repair_string')) die('Set $bb_cfg[\'tidy_post\'] = false in config.php');
 
 // Triggers
 define('BB_ENABLED',   TRIGGERS_DIR .'$on');

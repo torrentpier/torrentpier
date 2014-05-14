@@ -18,7 +18,7 @@ switch ($mode)
 	case 'save':
 		if (!$tpl_id = (int) $this->request['tpl_id'])
 		{
-			$this->ajax_die('empty tpl_id');
+			$this->ajax_die('Выбранный шаблон не найден, создайте новый (empty tpl_id)');
 		}
 		if (!$tpl_data = DB()->fetch_row("SELECT * FROM ". BB_TOPIC_TPL ." WHERE tpl_id = $tpl_id LIMIT 1"))
 		{
@@ -94,7 +94,7 @@ switch ($mode)
 	case 'assign':
 		if (!$tpl_id = (int) $this->request['tpl_id'])
 		{
-			$this->ajax_die('empty tpl_id');
+			$this->ajax_die('Выбранный шаблон не найден, создайте новый (empty tpl_id)');
 		}
 		if (!$forum_id = (int) $this->request['forum_id'])
 		{

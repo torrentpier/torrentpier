@@ -436,7 +436,6 @@ if ( count($orig_word) )
 // templating vars
 //
 $new_topic_url = POSTING_URL . "?mode=newtopic&amp;f=$forum_id";
-$new_topic_url .= ($t_data['topic_tpl_id']) ? '&tpl=1' : '';
 $reply_topic_url = POSTING_URL . "?mode=reply&amp;t=$topic_id";
 $view_forum_url = "viewforum.php?f=$forum_id";
 $view_prev_topic_url = "viewtopic.php?t=$topic_id&amp;view=previous#newest";
