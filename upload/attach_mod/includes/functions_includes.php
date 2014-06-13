@@ -29,10 +29,7 @@ function attach_build_auth_levels($is_auth, &$s_auth_can)
 	}
 
 	// If you want to have the rules window link within the forum view too, comment out the two lines, and comment the third line
-//	$rules_link = '(<a href="' . BB_ROOT . 'attach_rules.php?f=' . $forum_id . '" target="_blank">Rules</a>)';
-//	$s_auth_can .= ( ( $is_auth['auth_attachments'] ) ? $rules_link . ' ' . $lang['RULES_ATTACH_CAN'] : $lang['RULES_ATTACH_CANNOT'] ) . '<br />';
 	$s_auth_can .= (($is_auth['auth_attachments']) ? $lang['RULES_ATTACH_CAN'] : $lang['RULES_ATTACH_CANNOT'] ) . '<br />';
-
 	$s_auth_can .= (($is_auth['auth_download']) ? $lang['RULES_DOWNLOAD_CAN'] : $lang['RULES_DOWNLOAD_CANNOT'] ) . '<br />';
 }
 
@@ -206,8 +203,8 @@ function attachment_quota_settings($admin_mode, $submit = false, $mode)
 		DB()->sql_freeresult($result);
 
 		$template->assign_vars(array(
-			'S_SELECT_UPLOAD_QUOTA'	=> quota_limit_select('group_upload_quota', $upload_quota),
-			'S_SELECT_PM_QUOTA'		=> quota_limit_select('group_pm_quota', $pm_quota),
+			'S_SELECT_UPLOAD_QUOTA' => quota_limit_select('group_upload_quota', $upload_quota),
+			'S_SELECT_PM_QUOTA'     => quota_limit_select('group_pm_quota', $pm_quota),
 		));
 	}
 

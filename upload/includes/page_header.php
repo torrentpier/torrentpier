@@ -8,8 +8,6 @@ if (defined('PAGE_HEADER_SENT')) return;
 global $page_cfg, $userdata, $user, $ads, $bb_cfg, $template, $lang, $images;
 
 $logged_in = (int) !empty($userdata['session_logged_in']);
-$is_admin  = ($logged_in && IS_ADMIN);
-$is_mod    = ($logged_in && IS_MOD);
 
 // Generate logged in/logged out status
 if ($logged_in)
@@ -169,7 +167,7 @@ $template->assign_vars(array(
 	'SIMPLE_HEADER'      => !empty($gen_simple_header),
 
 	'IN_ADMIN'           => defined('IN_ADMIN'),
-	'SHOW_ADS'           => (!$logged_in || isset($bb_cfg['show_ads_users'][$user->id]) || (!($is_admin || $is_mod) && $user->show_ads)),
+	'SHOW_ADS'           => (!$logged_in || isset($bb_cfg['show_ads_users'][$user->id]) || (!IS_AM && $user->show_ads)),
 	'USER_HIDE_CAT'      => (BB_SCRIPT == 'index'),
 
 	'USER_RUS'           => ($userdata['user_lang'] != 'english') ? true : false,

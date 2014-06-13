@@ -55,8 +55,8 @@ $domain_name = (!empty($_SERVER['SERVER_NAME'])) ? $_SERVER['SERVER_NAME'] : $do
 
 // Increase number of revision after update
 $bb_cfg['tp_version'] = '2.6 (RC)';
-$bb_cfg['tp_release_date'] = '15-05-2014';
-$bb_cfg['tp_release_state'] = 'R585';
+$bb_cfg['tp_release_date'] = '13-06-2014';
+$bb_cfg['tp_release_state'] = 'R586';
 
 // Database
 $charset  = 'utf8';
@@ -419,8 +419,6 @@ ini_set('error_log', LOG_DIR .'php_err.log');
 if (get_magic_quotes_gpc()) die('Set magic_quotes off');
 // JSON
 if (!function_exists('json_encode')) die('Json_encode not installed');
-// Tidy
-if (!function_exists('tidy_repair_string')) die('Set $bb_cfg[\'tidy_post\'] = false in config.php');
 
 // Triggers
 define('BB_ENABLED',   TRIGGERS_DIR .'$on');
@@ -499,6 +497,9 @@ $bb_cfg['user_not_active_days_keep']    = 180;     // inactive users but only wi
 
 // GroupCP
 $bb_cfg['groupcp_members_per_page']     = 300;
+
+// Tidy
+if ($bb_cfg['tidy_post'] && !function_exists('tidy_repair_string') or !extension_loaded('tidy')) die('Set $bb_cfg[\'tidy_post\'] = false in config.php');
 
 // Ads
 $bb_cfg['show_ads'] = false;
