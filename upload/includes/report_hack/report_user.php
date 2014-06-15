@@ -21,7 +21,7 @@ class report_user extends report_module
 	function subject_url($id, $non_html_amp = false)
 	{
 		$sep = ($non_html_amp) ? '&' : '&amp;';
-		return 'profile.php?mode=viewprofile'. $sep. POST_USERS_URL .'=' . (int) $id;
+		return 'profile.php?mode=viewprofile' . $sep . POST_USERS_URL . '=' . (int)$id;
 	}
 
 	//
@@ -31,9 +31,8 @@ class report_user extends report_module
 	{
 		$sql = 'SELECT username
 			FROM ' . BB_USERS . '
-			WHERE user_id = ' . (int) $report_subject;
-		if (!$result = DB()->sql_query($sql))
-		{
+			WHERE user_id = ' . (int)$report_subject;
+		if (!$result = DB()->sql_query($sql)) {
 			message_die(GENERAL_ERROR, 'Could not obtain report subject', '', __LINE__, __FILE__, $sql);
 		}
 

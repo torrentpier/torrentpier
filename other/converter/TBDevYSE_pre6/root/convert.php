@@ -11,7 +11,7 @@ require (BB_ROOT .'converter/functions.php');
 // Start session management
 $user->session_start();
 
-//if (!IS_ADMIN) die("Restricted access");
+if (!IS_ADMIN) die("Restricted access");
 while (@ob_end_flush());
 ob_implicit_flush();
 
@@ -54,33 +54,33 @@ else
 if (CONVERT_USERS)
 {
 	if (CLEAN)
-	{		
+	{
 		tp_users_cleanup();
 		print_ok ("Users cleared");
 	}
-	
+
 	$max_uid = (int) get_max_val(BB_USERS, 'user_id');
 	$max_uid = ($max_uid > 1) ? $max_uid : 1;
 
 	$users_count = (int) get_count(TB_USERS_TABLE, 'id');
 	$loops = (int) ceil($users_count / C_USERS_PER_ONCE);
 	$pass = array();
-	
+
 	switch(TR_TYPE)
-	{		
+	{
 		case 'yse':
 			$_sql = 'avatar, ';
 			break;
-			
+
 		default:
 			$_sql = '';
 			break;
 	}
-	
+
 	for ($i = 0; $i < $loops; $i++)
 	{
 		$start = $i * C_USERS_PER_ONCE;
-		$offset = C_USERS_PER_ONCE;		
+		$offset = C_USERS_PER_ONCE;
 		
 		$sql = "
 			SELECT 
@@ -93,18 +93,18 @@ if (CONVERT_USERS)
 
 		$users = DB()->fetch_rowset($sql);
 		DB()->sql_freeresult();	
-		
+
 		foreach ($users as $user)
 		{
 			$user['id'] += $max_uid;
 			$user['password'] = make_rand_str(15);
 			convert_user($user);
-			$pass[] = array( 
+			$pass[] = array(
 				'tb_user_id'  => $user['id'] - $max_uid,
 				'username'    => $user['username'],
 				'new_passwd'  => $user['password'],
-			);	
-		}		
+			);
+		}
 	}
 	$passf = fopen('./converter/passwords.php', 'w');
 	$to_write  = "<?php \n";
@@ -121,7 +121,7 @@ if (CONVERT_TORRENTS)
 {
 	require_once(INC_DIR .'functions_post.php');
 	require_once(INC_DIR .'bbcode.php');
-	
+
 	if (CLEAN)
 	{
 		tp_categories_cleanup();
@@ -129,13 +129,13 @@ if (CONVERT_TORRENTS)
 		tp_topics_cleanup();
 		print_ok ("Categories, forums and topics cleared");
 	}
-	
+
 	$max_uid = !empty($max_uid) ? $max_uid : 1;
 
-	//Create a category for torrents	
-	$max_cat_id = (int) get_max_val(BB_CATEGORIES, 'cat_id');	
+	//Create a category for torrents
+	$max_cat_id = (int) get_max_val(BB_CATEGORIES, 'cat_id');
 	$tr_cat_id = $max_cat_id + 1;
-	
+
 	$tp_cat_data = array(
 		"cat_id"       => $tr_cat_id,
 		"cat_title"    => 'Tracker',
@@ -143,12 +143,12 @@ if (CONVERT_TORRENTS)
 	tp_add_category($tp_cat_data);
 	set_auto_increment(BB_CATEGORIES, 'cat_id');
 	unset($tp_cat_data);
-	
+
 	$cats = $db->fetch_rowset("SELECT id, sort, name FROM ". TB_CATEGORIES_TABLE);
 	DB()->sql_freeresult();
-	
+
 	$max_forum_id = (int) get_max_val(BB_FORUMS, 'forum_id');
-	
+
 	foreach ($cats as $cat)
 	{
 		$cat['id'] += $max_forum_id;
@@ -158,7 +158,7 @@ if (CONVERT_TORRENTS)
 	set_auto_increment(BB_FORUMS, 'forum_id');
 	print_ok ("Categories from TBDev converted");
 	unset($cats);
-	
+
 	// Start of torrents converting	
 	switch(TR_TYPE)
 	{		
@@ -174,18 +174,18 @@ if (CONVERT_TORRENTS)
 			$_sql = '';
 			break;
 	}
-	
-	$max_topic_id  = (int) get_max_val(BB_TOPICS, 'topic_id');	
+
+	$max_topic_id  = (int) get_max_val(BB_TOPICS, 'topic_id');
 	$max_post_id   = (int) get_max_val(BB_POSTS, 'post_id');
 	$max_attach_id = (int) get_max_val(BB_ATTACHMENTS, 'attach_id');
-		
+
 	$torrents_count = (int) get_count(TB_TORRENTS_TABLE, 'id');
 	$loops = (int) ceil($torrents_count / C_TORRENTS_PER_ONCE);
-	
+
 	for ($i = 0; $i < $loops; $i++)
 	{
 		$start = $i * C_TORRENTS_PER_ONCE;
-		$offset = C_TORRENTS_PER_ONCE;	
+		$offset = C_TORRENTS_PER_ONCE;
 		$sql = "
 			SELECT 
 				id, info_hash, name, filename, search_text, descr, $_sql
@@ -194,7 +194,7 @@ if (CONVERT_TORRENTS)
 			FROM ". TB_TORRENTS_TABLE ."
 			ORDER BY id
 			LIMIT $start, $offset";
-	
+
 		$torrents = DB()->fetch_rowset($sql);
 		DB()->sql_freeresult();
 		
@@ -213,7 +213,7 @@ if (CONVERT_TORRENTS)
 	set_auto_increment(BB_POSTS,   'post_id');
 	print_ok ("Total $torrents_count torrents from TBDev converted");
 	unset($torrents);
-	
+
 	if (CONVERT_COMMENTS)
 	{
 		$max_post_id   = (int) get_max_val(BB_POSTS, 'post_id');
@@ -251,11 +251,6 @@ if (CONVERT_TORRENTS)
 		set_auto_increment(BB_POSTS, 'post_id');
 		print_ok ("Total $comments_count comments from TBDev converted");
 	}
-}
-
-if (CONVERT_MYBB_FORUMS)
-{	
-	
 }
 
 ?>

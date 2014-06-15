@@ -51,7 +51,7 @@
 									<option value="clear" class="report_cleared">{L_STATUS_CLEARED}</option>
 									<option value="process" class="report_process">{L_STATUS_IN_PROCESS}</option>
 									<option value="open" class="report_open">{L_STATUS_OPEN}</option>
-								</option>
+								</optgroup>
 							</select>
 							<noscript>
 								<input type="submit" name="submit" class="liteoption" value="{L_SUBMIT}" />

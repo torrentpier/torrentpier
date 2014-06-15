@@ -6,9 +6,11 @@
 		<td align="right" class="med" nowrap="nowrap">{L_SORT_BY}:&nbsp;{S_MODE_SELECT}&nbsp;&nbsp;{L_ORDER}&nbsp;{S_ORDER_SELECT}&nbsp;&nbsp;<input type="submit" name="submit" value="{L_SUBMIT}" /></td>
 	</tr>
 	<tr>
-      <td align="right" nowrap="nowrap"><span class="genmed">
-      <input type="text" class="post" name="username" maxlength="25" size="25" tabindex="1" value="{S_USERNAME}" />&nbsp;<input type="submit" name="submituser" value="{L_FIND_USERNAME}" class="mainoption" />
-      </span></td>
+		<td align="right" nowrap="nowrap">
+			<span class="genmed">
+				<input type="text" class="post" name="username" maxlength="25" size="25" tabindex="1" value="{S_USERNAME}" />&nbsp;<input type="submit" name="submituser" value="{L_FIND_USERNAME}" class="mainoption" />
+			</span>
+		</td>
 	</tr>
  	<tr>
 		<td align="right" class="med">{L_SORT_PER_LETTER}:&nbsp;{S_LETTER_SELECT}{S_LETTER_HIDDEN}</td>
@@ -28,10 +30,10 @@
 	<th class="{sorter: 'digit'}" ><b class="tbs-text">{L_POSTS_SHORT}</b></th>
 	<th class="{sorter: false}" ><b class="tbs-text">{L_WEBSITE}</b></th>
 	<!-- BEGIN no_username -->
-    <tr>
-      <td class="row1" align="center" colspan="9"><span class="gen">&nbsp;{no_username.NO_USER_ID_SPECIFIED}&nbsp;</span></td>
-    </tr>
-    <!-- END no_username -->
+	<tr>
+		<td class="row1" align="center" colspan="9"><span class="gen">&nbsp;{no_username.NO_USER_ID_SPECIFIED}&nbsp;</span></td>
+	</tr>
+	<!-- END no_username -->
 </tr>
 </thead>
 <!-- BEGIN memberrow -->

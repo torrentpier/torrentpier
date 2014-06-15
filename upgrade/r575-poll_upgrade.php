@@ -34,7 +34,7 @@ if ($confirm)
 	");
 
 	DB()->query("
-		INSERT INTO bb_poll_votes
+		INSERT IGNORE INTO bb_poll_votes
 			(topic_id, vote_id, vote_text, vote_result)
 		SELECT
 			topic_id, 0, vote_text, 0
@@ -42,7 +42,7 @@ if ($confirm)
 	");
 
 	DB()->query("
-		INSERT INTO bb_poll_votes
+		INSERT IGNORE INTO bb_poll_votes
 			(topic_id, vote_id, vote_text, vote_result)
 		SELECT
 			d.topic_id, r.vote_option_id, r.vote_option_text, r.vote_result
@@ -52,7 +52,7 @@ if ($confirm)
 	");
 
 	DB()->query("
-		INSERT INTO bb_poll_users
+		INSERT IGNORE INTO bb_poll_users
 			(topic_id, user_id, vote_ip)
 		SELECT
 			d.topic_id, v.vote_user_id, v.vote_user_ip

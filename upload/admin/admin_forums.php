@@ -231,6 +231,7 @@ if ($mode)
 
 			renumber_order('forum', $cat_id);
 			$datastore->update('cat_forums');
+			CACHE('bb_cache')->rm();
 
 			$message = $lang['FORUMS_UPDATED'] . '<br /><br />' . sprintf($lang['CLICK_RETURN_FORUMADMIN'], '<a href="admin_forums.php?c='. $cat_id .'">', '</a>') . '<br /><br />' . sprintf($lang['CLICK_RETURN_ADMIN_INDEX'], '<a href="index.php?pane=right">', '</a>');
 			message_die(GENERAL_MESSAGE, $message);
@@ -327,6 +328,7 @@ if ($mode)
 			$cat_forums = get_cat_forums();
 			$fix = fix_orphan_sf();
 			$datastore->update('cat_forums');
+			CACHE('bb_cache')->rm();
 
 			$message = $lang['FORUMS_UPDATED'] . '<br /><br />';
 			$message .= ($fix) ? "$fix<br /><br />" : '';
@@ -356,6 +358,7 @@ if ($mode)
 			DB()->query("INSERT INTO ". BB_CATEGORIES . $args);
 
 			$datastore->update('cat_forums');
+			CACHE('bb_cache')->rm();
 
 			$message = $lang['FORUMS_UPDATED'] . '<br /><br />' . sprintf($lang['CLICK_RETURN_FORUMADMIN'], '<a href="admin_forums.php">', '</a>') . '<br /><br />' . sprintf($lang['CLICK_RETURN_ADMIN_INDEX'], '<a href="index.php?pane=right">', '</a>');
 			message_die(GENERAL_MESSAGE, $message);
@@ -412,6 +415,7 @@ if ($mode)
 			}
 
 			$datastore->update('cat_forums');
+			CACHE('bb_cache')->rm();
 
 			$message = $lang['FORUMS_UPDATED'] . '<br /><br />' . sprintf($lang['CLICK_RETURN_FORUMADMIN'], '<a href="admin_forums.php">', '</a>') . '<br /><br />' . sprintf($lang['CLICK_RETURN_ADMIN_INDEX'], '<a href="index.php?pane=right">', '</a>');
 			message_die(GENERAL_MESSAGE, $message);
@@ -504,6 +508,7 @@ if ($mode)
 			fix_orphan_sf();
 			update_user_level('all');
 			$datastore->update('cat_forums');
+			CACHE('bb_cache')->rm();
 
 			$message = $lang['FORUMS_UPDATED'] . '<br /><br />' . sprintf($lang['CLICK_RETURN_FORUMADMIN'], '<a href="admin_forums.php">', '</a>') . '<br /><br />' . sprintf($lang['CLICK_RETURN_ADMIN_INDEX'], '<a href="index.php?pane=right">', '</a>');
 			message_die(GENERAL_MESSAGE, $message);
@@ -579,6 +584,7 @@ if ($mode)
 			$cat_forums = get_cat_forums();
 			$fix = fix_orphan_sf();
 			$datastore->update('cat_forums');
+			CACHE('bb_cache')->rm();
 
 			$message = $lang['FORUMS_UPDATED'] . '<br /><br />';
 			$message .= ($fix) ? "$fix<br /><br />" : '';
@@ -669,6 +675,7 @@ if ($mode)
 
 			renumber_order('forum', $forum_info['cat_id']);
 			$datastore->update('cat_forums');
+			CACHE('bb_cache')->rm();
 
 			$show_main_page = true;
 			break;
@@ -685,6 +692,7 @@ if ($mode)
 
 			renumber_order('category');
 			$datastore->update('cat_forums');
+			CACHE('bb_cache')->rm();
 
 			$show_main_page = true;
 			break;
@@ -692,6 +700,7 @@ if ($mode)
 		case 'forum_sync':
 			sync('forum', intval($_GET['f']));
 			$datastore->update('cat_forums');
+			CACHE('bb_cache')->rm();
 
 			$show_main_page = true;
 			break;
@@ -856,8 +865,7 @@ function get_info($mode, $id)
 			message_die(GENERAL_ERROR, "Wrong mode for generating select list", '', __LINE__, __FILE__);
 			break;
 	}
-	$sql = "SELECT count(*) as total
-		FROM $table";
+	$sql = "SELECT count(*) as total FROM $table";
 	if( !$result = DB()->sql_query($sql) )
 	{
 		message_die(GENERAL_ERROR, "Couldn't get Forum/Category information", '', __LINE__, __FILE__, $sql);
@@ -865,9 +873,7 @@ function get_info($mode, $id)
 	$count = DB()->sql_fetchrow($result);
 	$count = $count['total'];
 
-	$sql = "SELECT *
-		FROM $table
-		WHERE $idfield = $id";
+	$sql = "SELECT * FROM $table WHERE $idfield = $id";
 
 	if( !$result = DB()->sql_query($sql) )
 	{
@@ -907,8 +913,7 @@ function get_list($mode, $id, $select)
 			break;
 	}
 
-	$sql = "SELECT *
-		FROM $table";
+	$sql = "SELECT * FROM $table";
 	if( $select == 0 )
 	{
 		$sql .= " WHERE $idfield <> $id";
@@ -972,13 +977,10 @@ function renumber_order($mode, $cat = 0)
 	}
 
 	$i = 10;
-	$inc = 10;
 
 	while( $row = DB()->sql_fetchrow($result) )
 	{
-		$sql = "UPDATE $table
-			SET $orderfield = $i
-			WHERE $idfield = " . $row[$idfield];
+		$sql = "UPDATE $table SET $orderfield = $i WHERE $idfield = " . $row[$idfield];
 		if( !DB()->sql_query($sql) )
 		{
 			message_die(GENERAL_ERROR, "Couldn't update order fields", '', __LINE__, __FILE__, $sql);

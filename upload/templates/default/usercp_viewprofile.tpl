@@ -460,7 +460,7 @@ ajax.callback.view_profile = function(data) {
 				    <td id="u_up_total"><span class="editable bold seedmed">{UP_TOTAL}</span></td>
 				    <td id="u_up_release"><span class="editable bold seedmed">{RELEASED}</span></td>
 				    <td id="u_up_bonus"><span class="editable bold seedmed">{UP_BONUS}</span></td>
-				    <!-- IF $bb_cfg['seed_bonus_enabled'] --><td id="user_points"><span class="editable bold points">{USER_POINTS}</b></td><!-- ENDIF -->
+				    <!-- IF $bb_cfg['seed_bonus_enabled'] --><td id="user_points"><span class="editable bold points">{USER_POINTS}</span></td><!-- ENDIF -->
 			    </tr>
 			    <tr class="row5">
 				    <td colspan="1">{L_MAX_SPEED}</td>

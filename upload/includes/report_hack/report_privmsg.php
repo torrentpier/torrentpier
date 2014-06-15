@@ -22,37 +22,31 @@ class report_privmsg extends report_module
 	{
 		$sql = 'UPDATE ' . BB_PRIVMSGS . '
 			SET privmsgs_reported = 0';
-		if (!DB()->sql_query($sql))
-		{
+		if (!DB()->sql_query($sql)) {
 			message_die(GENERAL_ERROR, 'Could not reset privmsgs reported flag', '', __LINE__, __FILE__, $sql);
 		}
 
-		if (!$uninstall)
-		{
+		if (!$uninstall) {
 			$sql = 'SELECT report_subject
 				FROM ' . BB_REPORTS . '
 				WHERE report_module_id = ' . $this->id . '
 					AND report_status NOT IN(' . REPORT_CLEARED . ', ' . REPORT_DELETE . ')
 				GROUP BY report_subject';
-			if (!$result = DB()->sql_query($sql))
-			{
+			if (!$result = DB()->sql_query($sql)) {
 				message_die(GENERAL_ERROR, 'Could not obtain open reports', '', __LINE__, __FILE__, $sql);
 			}
 
 			$open_ids = array();
-			while ($row = DB()->sql_fetchrow($result))
-			{
+			while ($row = DB()->sql_fetchrow($result)) {
 				$open_ids[] = $row['report_subject'];
 			}
 			DB()->sql_freeresult($result);
 
-			if (!empty($open_ids))
-			{
+			if (!empty($open_ids)) {
 				$sql = 'UPDATE ' . BB_PRIVMSGS . '
 					SET privmsgs_reported = 1
 					WHERE privmsgs_id IN(' . implode(', ', $open_ids) . ')';
-				if (!DB()->sql_query($sql))
-				{
+				if (!DB()->sql_query($sql)) {
 					message_die(GENERAL_ERROR, 'Could not sync privmsgs reported flag', '', __LINE__, __FILE__, $sql);
 				}
 			}
@@ -66,9 +60,8 @@ class report_privmsg extends report_module
 	{
 		$sql = 'UPDATE ' . BB_PRIVMSGS . '
 			SET privmsgs_reported = 1
-			WHERE privmsgs_id = ' . (int) $report_subject;
-		if (!DB()->sql_query($sql))
-		{
+			WHERE privmsgs_id = ' . (int)$report_subject;
+		if (!DB()->sql_query($sql)) {
 			message_die(GENERAL_ERROR, 'Could not update privmsgs reported flag', '', __LINE__, __FILE__, $sql);
 		}
 	}
@@ -78,12 +71,11 @@ class report_privmsg extends report_module
 	//
 	function action_update_status($report_subjects, $report_status)
 	{
-		switch ($report_status)
-		{
+		switch ($report_status) {
 			case REPORT_CLEARED:
 			case REPORT_DELETE:
 				$this->action_delete($report_subjects);
-			break;
+				break;
 
 			default:
 				report_prepare_subjects($report_subjects, true);
@@ -91,11 +83,10 @@ class report_privmsg extends report_module
 				$sql = 'UPDATE ' . BB_PRIVMSGS . '
 					SET privmsgs_reported = 1
 					WHERE privmsgs_id IN(' . implode(', ', $report_subjects) . ')';
-				if (!DB()->sql_query($sql))
-				{
+				if (!DB()->sql_query($sql)) {
 					message_die(GENERAL_ERROR, 'Could not update privmsgs reported flag', '', __LINE__, __FILE__, $sql);
 				}
-			break;
+				break;
 		}
 	}
 
@@ -113,45 +104,37 @@ class report_privmsg extends report_module
 				AND report_subject IN(' . implode(', ', $report_subjects) . ')
 				AND report_status NOT IN(' . REPORT_CLEARED . ', ' . REPORT_DELETE . ')
 			GROUP BY report_subject';
-		if (!$result = DB()->sql_query($sql))
-		{
+		if (!$result = DB()->sql_query($sql)) {
 			message_die(GENERAL_ERROR, 'Could not get open reports', '', __LINE__, __FILE__, $sql);
 		}
 
 		$open_ids = array();
-		while ($row = DB()->sql_fetchrow($result))
-		{
+		while ($row = DB()->sql_fetchrow($result)) {
 			$open_ids[] = $row['report_subject'];
 		}
 		DB()->sql_freeresult($result);
 
-		if (!empty($open_ids))
-		{
+		if (!empty($open_ids)) {
 			$sql = 'UPDATE ' . BB_PRIVMSGS . '
 				SET privmsgs_reported = 1
 				WHERE privmsgs_id IN(' . implode(', ', $open_ids) . ')';
-			if (!DB()->sql_query($sql))
-			{
+			if (!DB()->sql_query($sql)) {
 				message_die(GENERAL_ERROR, 'Could not update topic reported flag', '', __LINE__, __FILE__, $sql);
 			}
 		}
 
 		$clear_ids = array();
-		foreach ($report_subjects as $report_subject)
-		{
-			if (!in_array($report_subject, $open_ids))
-			{
+		foreach ($report_subjects as $report_subject) {
+			if (!in_array($report_subject, $open_ids)) {
 				$clear_ids[] = $report_subject;
 			}
 		}
 
-		if (!empty($clear_ids))
-		{
+		if (!empty($clear_ids)) {
 			$sql = 'UPDATE ' . BB_PRIVMSGS . '
 				SET privmsgs_reported = 0
 				WHERE privmsgs_id IN(' . implode(', ', $clear_ids) . ')';
-			if (!DB()->sql_query($sql))
-			{
+			if (!DB()->sql_query($sql)) {
 				message_die(GENERAL_ERROR, 'Could not update topic reported flag', '', __LINE__, __FILE__, $sql);
 			}
 		}
@@ -163,7 +146,7 @@ class report_privmsg extends report_module
 	function subject_url($report_subject, $non_html_amp = false)
 	{
 		$sep = ($non_html_amp) ? '&' : '&amp;';
-		return PM_URL . '?mode=read'.$sep . POST_POST_URL . '=' . (int) $report_subject;
+		return PM_URL . '?mode=read' . $sep . POST_POST_URL . '=' . (int)$report_subject;
 	}
 
 	//
@@ -176,9 +159,8 @@ class report_privmsg extends report_module
 		$sql = 'SELECT privmsgs_subject
 			FROM ' . BB_PRIVMSGS . '
 			WHERE privmsgs_to_userid = ' . $userdata['user_id'] . '
-				AND privmsgs_id = ' . (int) $report_subject;
-		if (!$result = DB()->sql_query($sql))
-		{
+				AND privmsgs_id = ' . (int)$report_subject;
+		if (!$result = DB()->sql_query($sql)) {
 			message_die(GENERAL_ERROR, 'Could not obtain report subject', '', __LINE__, __FILE__, $sql);
 		}
 
@@ -199,17 +181,15 @@ class report_privmsg extends report_module
 				ON pt.privmsgs_text_id = privmsgs_id
 			LEFT JOIN ' . BB_USERS . ' u
 				ON u.user_id = p.privmsgs_from_userid
-			WHERE privmsgs_id = ' . (int) $report_subject;
-		if (!$result = DB()->sql_query($sql))
-		{
+			WHERE privmsgs_id = ' . (int)$report_subject;
+		if (!$result = DB()->sql_query($sql)) {
 			message_die(GENERAL_ERROR, "Could not obtain report subject details", '', __LINE__, __FILE__, $sql);
 		}
 
 		$row = DB()->sql_fetchrow($result);
 		DB()->sql_freeresult($result);
 
-		if (!$row)
-		{
+		if (!$row) {
 			return false;
 		}
 
@@ -238,8 +218,7 @@ class report_privmsg extends report_module
 		$orig_word = $replacement_word = array();
 		obtain_word_list($orig_word, $replacement_word);
 
-		if (!empty($orig_word))
-		{
+		if (!empty($orig_word)) {
 			$subject = preg_replace($orig_word, $replacement_word, $subject);
 			$message = preg_replace($orig_word, $replacement_word, $message);
 		}

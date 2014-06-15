@@ -1,7 +1,6 @@
 <?php
 
-if (!defined('BB_ROOT'))
-{
+if (!defined('BB_ROOT')) {
 	die(basename(__FILE__));
 }
 
@@ -15,14 +14,12 @@ function report_counts_obtain()
 		LEFT JOIN ' . BB_REPORTS . ' r
 			ON r.report_module_id = rm.report_module_id
 		GROUP BY rm.report_module_id';
-	if (!$result = DB()->sql_query($sql))
-	{
+	if (!$result = DB()->sql_query($sql)) {
 		message_die(GENERAL_ERROR, 'Could not obtain report counts', '', __LINE__, __FILE__, $sql);
 	}
 
 	$report_counts = array();
-	while ($row = DB()->sql_fetchrow($result))
-	{
+	while ($row = DB()->sql_fetchrow($result)) {
 		$report_counts[$row['report_module_id']] = $row['report_count'];
 	}
 	DB()->sql_freeresult($result);
@@ -40,14 +37,12 @@ function report_reason_counts_obtain()
 		LEFT JOIN ' . BB_REPORTS_REASONS . ' rr
 			ON rr.report_module_id = rm.report_module_id
 		GROUP BY rm.report_module_id';
-	if (!$result = DB()->sql_query($sql))
-	{
+	if (!$result = DB()->sql_query($sql)) {
 		message_die(GENERAL_ERROR, 'Could not obtain report reason counts', '', __LINE__, __FILE__, $sql);
 	}
 
 	$report_reason_counts = array();
-	while ($row = DB()->sql_fetchrow($result))
-	{
+	while ($row = DB()->sql_fetchrow($result)) {
 		$report_reason_counts[$row['report_module_id']] = $row['reason_count'];
 	}
 	DB()->sql_freeresult($result);
@@ -63,8 +58,7 @@ function report_modules_inactive($mode = 'all', $module = null)
 	global $bb_cfg;
 	static $modules;
 
-	if (!isset($modules))
-	{
+	if (!isset($modules)) {
 		if (!class_exists("report_module"))
 			include(INC_DIR . "report_module.php");
 
@@ -72,21 +66,18 @@ function report_modules_inactive($mode = 'all', $module = null)
 
 		$deny_modes = array('open', 'process', 'clear', 'delete', 'reported');
 
-		$dir = @opendir(INC_DIR .'report_hack');
+		$dir = @opendir(INC_DIR . 'report_hack');
 
 		$modules = array();
 
-		while ($file = @readdir($dir))
-		{
-			if (!preg_match('#(.*)\.' . bb_preg_quote('php', '#') . '$#', $file, $matches))
-			{
+		while ($file = @readdir($dir)) {
+			if (!preg_match('#(.*)\.' . bb_preg_quote('php', '#') . '$#', $file, $matches)) {
 				continue;
 			}
 
 			// exclude installed modules
 			$module_name = $matches[1];
-			if (isset($installed_modules[$module_name]))
-			{
+			if (isset($installed_modules[$module_name])) {
 				continue;
 			}
 
@@ -96,9 +87,8 @@ function report_modules_inactive($mode = 'all', $module = null)
 			// Include language file
 			$lang = array();
 
-			$lang_file = LANG_ROOT_DIR ."lang_{$bb_cfg['default_lang']}/report_hack/lang_$module_name.php";
-			if (file_exists($lang_file))
-			{
+			$lang_file = LANG_ROOT_DIR . "lang_{$bb_cfg['default_lang']}/report_hack/lang_$module_name.php";
+			if (file_exists($lang_file)) {
 				include($lang_file);
 			}
 
@@ -108,12 +98,10 @@ function report_modules_inactive($mode = 'all', $module = null)
 			//
 			// Check validity of the module
 			//
-			if (!empty($modules[$module_name]->mode) && in_array($modules[$module_name]->mode, $deny_modes))
-			{
+			if (!empty($modules[$module_name]->mode) && in_array($modules[$module_name]->mode, $deny_modes)) {
 				unset($modules[$module_name]);
 			}
-			if (!isset($modules[$module_name]->id) || !isset($modules[$module_name]->data) || !isset($modules[$module_name]->lang) || !isset($modules[$module_name]->duplicates))
-			{
+			if (!isset($modules[$module_name]->id) || !isset($modules[$module_name]->data) || !isset($modules[$module_name]->lang) || !isset($modules[$module_name]->duplicates)) {
 				unset($modules[$module_name]);
 			}
 		}
@@ -121,24 +109,22 @@ function report_modules_inactive($mode = 'all', $module = null)
 		@closedir($dir);
 	}
 
-	switch ($mode)
-	{
+	switch ($mode) {
 		case 'all':
 			return $modules;
-		break;
+			break;
 
 		case 'name':
-			if (!isset($module))
-			{
+			if (!isset($module)) {
 				return false;
 			}
 
 			return (isset($modules[$module])) ? $modules[$module] : false;
-		break;
+			break;
 
 		default:
 			return false;
-		break;
+			break;
 	}
 }
 
@@ -149,12 +135,11 @@ function report_auth_select($block_name, $default, $select_items = array(REPORT_
 {
 	global $lang, $template;
 
-	foreach ($select_items as $value)
-	{
+	foreach ($select_items as $value) {
 		$template->assign_block_vars($block_name, array(
-			'VALUE' => $value,
-			'TITLE' => $lang['REPORT_AUTH'][$value],
-			'SELECTED' => ($value == $default) ? ' selected="selected"' : '')
+				'VALUE' => $value,
+				'TITLE' => $lang['REPORT_AUTH'][$value],
+				'SELECTED' => ($value == $default) ? ' selected="selected"' : '')
 		);
 	}
 }
@@ -169,10 +154,8 @@ function report_module_install($module_notify, $module_prune, $module_name, $aut
 	//
 	// Check module
 	//
-	if ($check)
-	{
-		if (!$report_module = report_modules_inactive('name', $module_name))
-		{
+	if ($check) {
+		if (!$report_module = report_modules_inactive('name', $module_name)) {
 			return false;
 		}
 	}
@@ -182,8 +165,7 @@ function report_module_install($module_notify, $module_prune, $module_name, $aut
 	//
 	$sql = 'SELECT MAX(report_module_order) AS max_order
 		FROM ' . BB_REPORTS_MODULES;
-	if (!$result = DB()->sql_query($sql))
-	{
+	if (!$result = DB()->sql_query($sql)) {
 		message_die(GENERAL_ERROR, 'Could not obtain max order', '', __LINE__, __FILE__, $sql);
 	}
 
@@ -195,11 +177,10 @@ function report_module_install($module_notify, $module_prune, $module_name, $aut
 	//
 	$sql = 'INSERT INTO ' . BB_REPORTS_MODULES . ' (report_module_order, report_module_notify, report_module_prune,
 		report_module_name, auth_write, auth_view, auth_notify, auth_delete)
-		VALUES(' . ($max_order + 1) . ', ' . (int) $module_notify . ', ' . (int) $module_prune . ",
-			'" . DB()->escape($module_name) . "', " . (int) $auth_write . ', ' . (int) $auth_view . ',
-			' . (int) $auth_notify . ', ' . (int) $auth_delete . ')';
-	if (!DB()->sql_query($sql))
-	{
+		VALUES(' . ($max_order + 1) . ', ' . (int)$module_notify . ', ' . (int)$module_prune . ",
+			'" . DB()->escape($module_name) . "', " . (int)$auth_write . ', ' . (int)$auth_view . ',
+			' . (int)$auth_notify . ', ' . (int)$auth_delete . ')';
+	if (!DB()->sql_query($sql)) {
 		message_die(GENERAL_ERROR, 'Could not install report module', '', __LINE__, __FILE__, $sql);
 	}
 
@@ -208,8 +189,7 @@ function report_module_install($module_notify, $module_prune, $module_name, $aut
 	//
 	// Clean modules cache
 	//
-	if ($bb_cfg['report_modules_cache'])
-	{
+	if ($bb_cfg['report_modules_cache']) {
 		report_modules_cache_clean();
 	}
 
@@ -225,23 +205,21 @@ function report_module_edit($module_id, $module_notify, $module_prune, $auth_wri
 
 	$sql = 'UPDATE ' . BB_REPORTS_MODULES . '
 		SET
-			report_module_notify = ' . (int) $module_notify . ',
-			report_module_prune = ' . (int) $module_prune . ',
-			auth_write = ' . (int) $auth_write . ',
-			auth_view = ' . (int) $auth_view . ',
-			auth_notify = ' . (int) $auth_notify . ',
-			auth_delete = ' . (int) $auth_delete . '
-		WHERE report_module_id = ' . (int) $module_id;
-	if (!DB()->sql_query($sql))
-	{
+			report_module_notify = ' . (int)$module_notify . ',
+			report_module_prune = ' . (int)$module_prune . ',
+			auth_write = ' . (int)$auth_write . ',
+			auth_view = ' . (int)$auth_view . ',
+			auth_notify = ' . (int)$auth_notify . ',
+			auth_delete = ' . (int)$auth_delete . '
+		WHERE report_module_id = ' . (int)$module_id;
+	if (!DB()->sql_query($sql)) {
 		message_die(GENERAL_ERROR, 'Could not edit report module', '', __LINE__, __FILE__, $sql);
 	}
 
 	//
 	// Clean modules cache
 	//
-	if ($bb_cfg['report_modules_cache'])
-	{
+	if ($bb_cfg['report_modules_cache']) {
 		report_modules_cache_clean();
 	}
 }
@@ -253,45 +231,40 @@ function report_module_move($mode, $module_id, $steps = 1)
 {
 	global $bb_cfg;
 
-	if (!$report_module = report_modules('id', $module_id))
-	{
+	if (!$report_module = report_modules('id', $module_id)) {
 		return false;
 	}
 
-	switch ($mode)
-	{
+	switch ($mode) {
 		case 'up':
 			$sql = 'UPDATE ' . BB_REPORTS_MODULES . "
 				SET report_module_order = report_module_order + 1
-				WHERE report_module_order >= " . ($report_module->data['report_module_order'] - (int) $steps) . '
+				WHERE report_module_order >= " . ($report_module->data['report_module_order'] - (int)$steps) . '
 					AND report_module_order < ' . $report_module->data['report_module_order'];
-		break;
+			break;
 
 		case 'down':
 			$sql = 'UPDATE ' . BB_REPORTS_MODULES . "
 				SET report_module_order = report_module_order - 1
-				WHERE report_module_order <= " . ($report_module->data['report_module_order'] + (int) $steps) . '
+				WHERE report_module_order <= " . ($report_module->data['report_module_order'] + (int)$steps) . '
 					AND report_module_order > ' . $report_module->data['report_module_order'];
-		break;
+			break;
 
 		default:
 			return false;
-		break;
+			break;
 	}
 
-	if (!DB()->sql_query($sql))
-	{
+	if (!DB()->sql_query($sql)) {
 		message_die(GENERAL_ERROR, 'Could not update module order', '', __LINE__, __FILE__, $sql);
 	}
 
-	if (DB()->affected_rows())
-	{
+	if (DB()->affected_rows()) {
 		$op = ($mode == 'up') ? '-' : '+';
 		$sql = 'UPDATE ' . BB_REPORTS_MODULES . "
 			SET report_module_order = report_module_order $op 1
-			WHERE report_module_id = " . (int) $module_id;
-		if (!DB()->sql_query($sql))
-		{
+			WHERE report_module_id = " . (int)$module_id;
+		if (!DB()->sql_query($sql)) {
 			message_die(GENERAL_ERROR, 'Could not update module order', '', __LINE__, __FILE__, $sql);
 		}
 	}
@@ -301,8 +274,7 @@ function report_module_move($mode, $module_id, $steps = 1)
 	//
 	// Clean modules cache
 	//
-	if ($bb_cfg['report_modules_cache'])
-	{
+	if ($bb_cfg['report_modules_cache']) {
 		report_modules_cache_clean();
 	}
 
@@ -321,15 +293,13 @@ function report_module_uninstall($module_id)
 	//
 	$sql = 'SELECT report_id
 		FROM ' . BB_REPORTS . '
-		WHERE report_module_id = ' . (int) $module_id;
-	if (!$result = DB()->sql_query($sql))
-	{
+		WHERE report_module_id = ' . (int)$module_id;
+	if (!$result = DB()->sql_query($sql)) {
 		message_die(GENERAL_ERROR, 'Could not obtain report ids', '', __LINE__, __FILE__, $sql);
 	}
 
 	$report_ids = array();
-	while ($row = DB()->sql_fetchrow($result))
-	{
+	while ($row = DB()->sql_fetchrow($result)) {
 		$report_ids = $row['report_id'];
 	}
 	DB()->sql_freeresult($result);
@@ -341,8 +311,7 @@ function report_module_uninstall($module_id)
 	// Sync module
 	//
 	$report_module = report_modules('id', $module_id);
-	if (method_exists($report_module, 'sync'))
-	{
+	if (method_exists($report_module, 'sync')) {
 		$report_module->sync(true);
 	}
 
@@ -352,8 +321,7 @@ function report_module_uninstall($module_id)
 	$sql = 'UPDATE ' . BB_REPORTS_MODULES . '
 		SET report_module_order = report_module_order - 1
 		WHERE report_module_order > ' . $report_module->data['report_module_order'];
-	if (!DB()->sql_query($sql))
-	{
+	if (!DB()->sql_query($sql)) {
 		message_die(GENERAL_ERROR, 'Could not update module order', '', __LINE__, __FILE__, $sql);
 	}
 
@@ -361,9 +329,8 @@ function report_module_uninstall($module_id)
 	// Delete report reasons
 	//
 	$sql = 'DELETE FROM ' . BB_REPORTS_REASONS . '
-		WHERE report_module_id = ' . (int) $module_id;
-	if (!DB()->sql_query($sql))
-	{
+		WHERE report_module_id = ' . (int)$module_id;
+	if (!DB()->sql_query($sql)) {
 		message_die(GENERAL_ERROR, 'Could not delete report reasons', '', __LINE__, __FILE__, $sql);
 	}
 
@@ -371,17 +338,15 @@ function report_module_uninstall($module_id)
 	// Delete module
 	//
 	$sql = 'DELETE FROM ' . BB_REPORTS_MODULES . '
-		WHERE report_module_id = ' . (int) $module_id;
-	if (!DB()->sql_query($sql))
-	{
+		WHERE report_module_id = ' . (int)$module_id;
+	if (!DB()->sql_query($sql)) {
 		message_die(GENERAL_ERROR, 'Could not delete report module', '', __LINE__, __FILE__, $sql);
 	}
 
 	//
 	// Clean modules cache
 	//
-	if ($bb_cfg['report_modules_cache'])
-	{
+	if ($bb_cfg['report_modules_cache']) {
 		report_modules_cache_clean();
 	}
 }
@@ -393,9 +358,8 @@ function report_reason_obtain($reason_id)
 {
 	$sql = 'SELECT report_reason_desc
 		FROM ' . BB_REPORTS_REASONS . '
-		WHERE report_reason_id = ' . (int) $reason_id;
-	if (!$result = DB()->sql_query($sql))
-	{
+		WHERE report_reason_id = ' . (int)$reason_id;
+	if (!$result = DB()->sql_query($sql)) {
 		message_die(GENERAL_ERROR, 'Could not obtain report reason', '', __LINE__, __FILE__, $sql);
 	}
 
@@ -415,8 +379,7 @@ function report_reason_insert($module_id, $reason_desc)
 	//
 	$sql = 'SELECT MAX(report_reason_order) AS max_order
 		FROM ' . BB_REPORTS_REASONS;
-	if (!$result = DB()->sql_query($sql))
-	{
+	if (!$result = DB()->sql_query($sql)) {
 		message_die(GENERAL_ERROR, 'Could not obtain max order', '', __LINE__, __FILE__, $sql);
 	}
 
@@ -427,9 +390,8 @@ function report_reason_insert($module_id, $reason_desc)
 	// Insert reason
 	//
 	$sql = 'INSERT INTO ' . BB_REPORTS_REASONS . ' (report_module_id, report_reason_order, report_reason_desc)
-		VALUES(' . (int) $module_id . ', ' . ($max_order + 1) . ", '" . DB()->escape($reason_desc) . "')";
-	if (!DB()->sql_query($sql))
-	{
+		VALUES(' . (int)$module_id . ', ' . ($max_order + 1) . ", '" . DB()->escape($reason_desc) . "')";
+	if (!DB()->sql_query($sql)) {
 		message_die(GENERAL_ERROR, 'Could not insert report reason', '', __LINE__, __FILE__, $sql);
 	}
 
@@ -443,11 +405,10 @@ function report_reason_edit($reason_id, $module_id, $reason_desc)
 {
 	$sql = 'UPDATE ' . BB_REPORTS_REASONS . '
 		SET
-			report_module_id = ' . (int) $module_id . ",
+			report_module_id = ' . (int)$module_id . ",
 			report_reason_desc = '" . DB()->escape($reason_desc) . "'
-		WHERE report_reason_id = " . (int) $reason_id;
-	if (!DB()->sql_query($sql))
-	{
+		WHERE report_reason_id = " . (int)$reason_id;
+	if (!DB()->sql_query($sql)) {
 		message_die(GENERAL_ERROR, 'Could not update report reason', '', __LINE__, __FILE__, $sql);
 	}
 }
@@ -462,56 +423,50 @@ function report_reason_move($mode, $reason_id, $steps = 1)
 	//
 	$sql = 'SELECT report_module_id, report_reason_order
 		FROM ' . BB_REPORTS_REASONS . '
-		WHERE report_reason_id = ' . (int) $reason_id;
-	if (!$result = DB()->sql_query($sql))
-	{
+		WHERE report_reason_id = ' . (int)$reason_id;
+	if (!$result = DB()->sql_query($sql)) {
 		message_die(GENERAL_ERROR, 'Could not obtain report reason order', '', __LINE__, __FILE__, $sql);
 	}
 
 	$row = DB()->sql_fetchrow($result);
 	DB()->sql_freeresult($result);
 
-	if (!$row)
-	{
+	if (!$row) {
 		return false;
 	}
 
-	switch ($mode)
-	{
+	switch ($mode) {
 		case 'up':
 			$sql = 'UPDATE ' . BB_REPORTS_REASONS . '
 				SET report_reason_order = report_reason_order + 1
 				WHERE report_module_id = ' . $row['report_module_id'] . '
-					AND report_reason_order >= ' . ($row['report_reason_order'] - (int) $steps) . '
+					AND report_reason_order >= ' . ($row['report_reason_order'] - (int)$steps) . '
 					AND report_reason_order < ' . $row['report_reason_order'];
-		break;
+			break;
 
 		case 'down':
 			$sql = 'UPDATE ' . BB_REPORTS_REASONS . '
 				SET report_reason_order = report_reason_order - 1
 				WHERE report_module_id = ' . $row['report_module_id'] . '
-					AND report_reason_order <= ' . ($row['report_reason_order'] + (int) $steps) . '
+					AND report_reason_order <= ' . ($row['report_reason_order'] + (int)$steps) . '
 					AND report_reason_order > ' . $row['report_reason_order'];
-		break;
+			break;
 
 		default:
 			return false;
-		break;
+			break;
 	}
 
-	if (!DB()->sql_query($sql))
-	{
+	if (!DB()->sql_query($sql)) {
 		message_die(GENERAL_ERROR, 'Could not update report reason order', '', __LINE__, __FILE__, $sql);
 	}
 
-	if (DB()->affected_rows())
-	{
+	if (DB()->affected_rows()) {
 		$op = ($mode == 'up') ? '-' : '+';
 		$sql = 'UPDATE ' . BB_REPORTS_REASONS . "
 			SET report_reason_order = report_reason_order $op 1
-			WHERE report_reason_id = " . (int) $reason_id;
-		if (!DB()->sql_query($sql))
-		{
+			WHERE report_reason_id = " . (int)$reason_id;
+		if (!DB()->sql_query($sql)) {
 			message_die(GENERAL_ERROR, 'Could not update report reason order', '', __LINE__, __FILE__, $sql);
 		}
 	}
@@ -531,17 +486,15 @@ function report_reason_delete($reason_id)
 	//
 	$sql = 'SELECT report_module_id, report_reason_order
 		FROM ' . BB_REPORTS_REASONS . '
-		WHERE report_reason_id = ' . (int) $reason_id;
-	if (!$result = DB()->sql_query($sql))
-	{
+		WHERE report_reason_id = ' . (int)$reason_id;
+	if (!$result = DB()->sql_query($sql)) {
 		message_die(GENERAL_ERROR, 'Could not obtain report reason', '', __LINE__, __FILE__, $sql);
 	}
 
 	$row = DB()->sql_fetchrow($result);
 	DB()->sql_freeresult($result);
 
-	if (!$row)
-	{
+	if (!$row) {
 		return;
 	}
 
@@ -552,8 +505,7 @@ function report_reason_delete($reason_id)
 		SET report_reason_order = report_reason_order - 1
 		WHERE report_module_id = ' . $row['report_module_id'] . '
 			AND report_reason_order > ' . $row['report_reason_order'];
-	if (!DB()->sql_query($sql))
-	{
+	if (!DB()->sql_query($sql)) {
 		message_die(GENERAL_ERROR, 'Could not update report reason order', '', __LINE__, __FILE__, $sql);
 	}
 
@@ -561,9 +513,8 @@ function report_reason_delete($reason_id)
 	// Delete report reason
 	//
 	$sql = 'DELETE FROM ' . BB_REPORTS_REASONS . '
-		WHERE report_reason_id = ' . (int) $reason_id;
-	if (!DB()->sql_query($sql))
-	{
+		WHERE report_reason_id = ' . (int)$reason_id;
+	if (!DB()->sql_query($sql)) {
 		message_die(GENERAL_ERROR, 'Could not delete report reason', '', __LINE__, __FILE__, $sql);
 	}
 }

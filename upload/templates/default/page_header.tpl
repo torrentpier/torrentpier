@@ -388,14 +388,14 @@ $(document).ready(function() {
 					<input id="only_new_posts" type="checkbox" <!-- IF ONLY_NEW_POSTS_ON -->{CHECKED}<!-- ENDIF -->
 						onclick="
 							user.set('only_new', ( this.checked ? {ONLY_NEW_POSTS} : 0 ), 365, true);
-							$('#only_new_topics').attr('checked', 0);
+							$('#only_new_topics').attr('checked', false);
 						" />{L_ONLY_NEW_POSTS}
 				</label>
 				<label>
 					<input id="only_new_topics" type="checkbox" <!-- IF ONLY_NEW_TOPICS_ON -->{CHECKED}<!-- ENDIF -->
 						onclick="
 							user.set('only_new', ( this.checked ? {ONLY_NEW_TOPICS} : 0 ), 365, true);
-							$('#only_new_posts').attr('checked', 0);
+							$('#only_new_posts').attr('checked', false);
 						" />{L_ONLY_NEW_TOPICS}
 				</label>
 			</div>
@@ -412,7 +412,7 @@ $(document).ready(function() {
 				<div class="spacer_6"></div>
 				<div class="tCenter">
 					<!-- IF H_C_AL_MESS -->
-					<input style="width: 100px;" type="button" onclick="$('input.h-cat-cbx').attr('checked',false); $('input#sec_h_cat').click(); return false;" value="{L_RESET}">
+					<input style="width: 100px;" type="button" onclick="$('input.h-cat-cbx').attr('checked', false); $('input#sec_h_cat').click(); return false;" value="{L_RESET}">
 					<!-- ENDIF -->
 					<input id="sec_h_cat" type="button" onclick="set_h_cat();" style="width: 100px;" value="{L_SUBMIT}">
 					<script type="text/javascript">

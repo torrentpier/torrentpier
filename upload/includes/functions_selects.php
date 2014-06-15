@@ -47,7 +47,7 @@ function tz_select ($default, $select_name = 'timezone')
 {
 	global $sys_timezone, $lang;
 
-	if ( !isset($default) )
+	if (!isset($default))
 	{
 		$default == $sys_timezone;
 	}

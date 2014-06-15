@@ -68,7 +68,7 @@ function toggle_cat_list (val)
 	</tr>
 	<tr>
 		<td>{L_FORUM_PRUNING}</td>
-		<td>{L_PRUNE_DAYS} <input type="text" name="prune_days" value="{PRUNE_DAYS}" size="4" class="post" /> {L_DAYS} &nbsp;<i class="med">(0 = {L_DISABLED})</span></td>
+		<td>{L_PRUNE_DAYS} <input type="text" name="prune_days" value="{PRUNE_DAYS}" size="4" class="post" /> {L_DAYS} &nbsp;<i class="med">(0 = {L_DISABLED})</i></td>
 	</tr>
 	<tr>
 		<td>{L_SORT_BY}</td>
