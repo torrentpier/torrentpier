@@ -98,11 +98,11 @@ class emailer
 
 		if (empty($this->tpl_msg[$template_lang . $template_file]))
 		{
-			$tpl_file = LANG_ROOT_DIR ."lang_$template_lang/email/$template_file.tpl";
+			$tpl_file = LANG_ROOT_DIR ."$template_lang/email/$template_file.tpl";
 
 			if (!@file_exists(@bb_realpath($tpl_file)))
 			{
-				$tpl_file = LANG_ROOT_DIR ."lang_{$bb_cfg['default_lang']}/email/$template_file.tpl";
+				$tpl_file = LANG_ROOT_DIR ."{$bb_cfg['default_lang']}/email/$template_file.tpl";
 
 				if (!@file_exists(@bb_realpath($tpl_file)))
 				{
@@ -131,7 +131,7 @@ class emailer
 	}
 
 	// Send the mail out to the recipients set previously in var $this->address
-	function send ()
+	function send ($email_format = 'text')
 	{
 		global $bb_cfg, $lang;
 
@@ -196,7 +196,8 @@ class emailer
 		$bcc = (@count($this->addresses['bcc'])) ? implode(', ', $this->addresses['bcc']) : '';
 
 		// Build header
-		$this->extra_headers = (($this->reply_to != '') ? "Reply-to: $this->reply_to\n" : '') . (($this->from != '') ? "From: $this->from\n" : "From: " . $bb_cfg['board_email'] . "\n") . "Return-Path: " . $bb_cfg['board_email'] . "\nMessage-ID: <" . md5(uniqid(TIMENOW)) . "@" . $bb_cfg['server_name'] . ">\nMIME-Version: 1.0\nContent-type: text/plain; charset=" . $this->encoding . "\nContent-transfer-encoding: 8bit\nDate: " . date('r', TIMENOW) . "\nX-Priority: 0\nX-MSMail-Priority: Normal\nX-Mailer: Microsoft Office Outlook, Build 11.0.5510\nX-MimeOLE: Produced By Microsoft MimeOLE V6.00.2800.1441\nX-Sender: " . $bb_cfg['board_email'] . "\n" . $this->extra_headers . (($cc != '') ? "Cc: $cc\n" : '')  . (($bcc != '') ? "Bcc: $bcc\n" : '');
+		$type = ($email_format == 'html') ? 'html' : 'plain';
+		$this->extra_headers = (($this->reply_to != '') ? "Reply-to: $this->reply_to\n" : '') . (($this->from != '') ? "From: $this->from\n" : "From: " . $bb_cfg['board_email'] . "\n") . "Return-Path: " . $bb_cfg['board_email'] . "\nMessage-ID: <" . md5(uniqid(TIMENOW)) . "@" . $bb_cfg['server_name'] . ">\nMIME-Version: 1.0\nContent-type: text/$type; charset=" . $this->encoding . "\nContent-transfer-encoding: 8bit\nDate: " . date('r', TIMENOW) . "\nX-Priority: 0\nX-MSMail-Priority: Normal\nX-Mailer: Microsoft Office Outlook, Build 11.0.5510\nX-MimeOLE: Produced By Microsoft MimeOLE V6.00.2800.1441\nX-Sender: " . $bb_cfg['board_email'] . "\n" . $this->extra_headers . (($cc != '') ? "Cc: $cc\n" : '')  . (($bcc != '') ? "Bcc: $bcc\n" : '');
 
 		// Send message
 		if ($this->use_smtp)

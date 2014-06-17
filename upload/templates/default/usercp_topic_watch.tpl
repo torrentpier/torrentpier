@@ -126,5 +126,3 @@ td.topic_id { cursor: pointer; }
 </tr>
 </tfoot>
 </table>
-
-

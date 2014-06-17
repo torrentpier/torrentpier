@@ -1,4 +1,3 @@
-
 <!-- IF TPL_ADMIN_USER_SEARCH_MAIN -->
 <!--========================================================================-->
 
@@ -20,7 +19,7 @@
 		<td class="row2"><span class="small">{L_SEARCH_USERNAME_EXPLAIN}</span></td>
 	</tr>
 	<tr>
-	  <td class="row3"><img src="{SPACER}" width="1" height="1" alt="."></td>
+		<td class="row3"><img src="{SPACER}" width="1" height="1" alt="."></td>
 	</tr>
 	<tr>
 		<td class="row1" nowrap="nowrap"><span class="gen"><b>{L_EMAIL_ADDRESS}:</b>&nbsp;<input class="post" type="text" name="email" maxlength="255" size="25" />&nbsp;<input type="submit" class="post2" name="search_email" value="{L_SEARCH}" /> {L_REGULAR_EXPRESSION} <input type="checkbox" name="search_email_regex" value="true" /></span></td>
@@ -29,7 +28,7 @@
 		<td class="row2"><span class="small">{L_SEARCH_EMAIL_EXPLAIN}</span></td>
 	</tr>
 	<tr>
-	  <td class="row3"><img src="{SPACER}" width="1" height="1" alt="."></td>
+		<td class="row3"><img src="{SPACER}" width="1" height="1" alt="."></td>
 	</tr>
 	<tr>
 		<td class="row1" nowrap="nowrap"><span class="gen"><b>{L_IP_ADDRESS}:</b>&nbsp;<input class="post" type="text" name="ip_address" maxlength="255" size="25" />&nbsp;<input type="submit" class="post2" name="search_ip" value="{L_SEARCH}" /></span></td>
@@ -38,7 +37,7 @@
 		<td class="row2"><span class="small">{L_SEARCH_IP_EXPLAIN}</span></td>
 	</tr>
 	<tr>
-	  <td class="row3"><img src="{SPACER}" width="1" height="1" alt="."></td>
+		<td class="row3"><img src="{SPACER}" width="1" height="1" alt="."></td>
 	</tr>
 	<tr>
 		<td class="row1" nowrap="nowrap"><span class="gen"><b>{L_SEARCH_USERS_JOINED}</b>&nbsp;<select name="date_type" class="post"><option value="before" selected="selected">{L_BEFORE}</option><option value="after">{L_AFTER}</option></select>&nbsp;<input class="post" type="text" name="date_year" value="{YEAR}" size="4" maxlength="4" />/<input class="post" type="text" name="date_month" value="{MONTH}" size="2" maxlength="2" />/<input class="post" type="text" name="date_day" value="{DAY}" maxlength="2" size="2" />&nbsp;<input type="submit" class="post2" name="search_joindate" value="{L_SEARCH}" /></span></td>
@@ -47,7 +46,7 @@
 		<td class="row2"><span class="small">{L_SEARCH_USERS_JOINED_EXPLAIN}</span></td>
 	</tr>
 	<tr>
-	  <td class="row3"><img src="{SPACER}" width="1" height="1" alt="."></td>
+		<td class="row3"><img src="{SPACER}" width="1" height="1" alt="."></td>
 	</tr>
 	<!-- BEGIN groups_exist -->
 	<tr>
@@ -57,7 +56,7 @@
 		<td class="row2"><span class="small">{L_SEARCH_USERS_GROUPS_EXPLAIN}</span></td>
 	</tr>
 	<tr>
-	  <td class="row3"><img src="{SPACER}" width="1" height="1" alt="."></td>
+		<td class="row3"><img src="{SPACER}" width="1" height="1" alt="."></td>
 	</tr>
 	<!-- END groups_exist -->
 	<!-- BEGIN ranks_exist -->
@@ -68,7 +67,7 @@
 		<td class="row2"><span class="small">{L_SEARCH_USERS_RANKS_EXPLAIN}</span></td>
 	</tr>
 	<tr>
-	  <td class="row3"><img src="{SPACER}" width="1" height="1" alt="."></td>
+		<td class="row3"><img src="{SPACER}" width="1" height="1" alt="."></td>
 	</tr>
 	<!-- END ranks_exist -->
 	<tr>
@@ -78,16 +77,16 @@
 		<td class="row2"><span class="small">{L_SEARCH_USERS_POSTCOUNT_EXPLAIN}</span></td>
 	</tr>
 	<tr>
-	  <td class="row3"><img src="{SPACER}" width="1" height="1" alt="."></td>
+		<td class="row3"><img src="{SPACER}" width="1" height="1" alt="."></td>
 	</tr>
 	<tr>
-		<td class="row1" nowrap="nowrap"><span class="gen"><b>{L_USERFIELD}:</b>&nbsp;<select name="userfield_type"><option value="icq" selected="selected">{L_ICQ}</option><option value="skype">{L_SKYPE}</option><option value="website">{L_WEBSITE}</option><option value="location">{L_LOCATION}</option><option value="interests">{L_INTERESTS}</option></select>&nbsp;<input class="post" type="text" name="userfield_value" maxlength="25" size="25" />&nbsp;<input type="submit" class="post2" name="search_userfield" value="{L_SEARCH}" /> {L_REGULAR_EXPRESSION} <input type="checkbox" name="search_userfield_regex" value="true" /></span></td>
+		<td class="row1" nowrap="nowrap"><span class="gen"><b>{L_USERFIELD}:</b>&nbsp;<select name="userfield_type"><option value="icq" selected="selected">{L_ICQ}</option><option value="skype">{L_SKYPE}</option><option value="twitter">{L_TWITTER}</option><option value="website">{L_WEBSITE}</option><option value="location">{L_LOCATION}</option><option value="interests">{L_INTERESTS}</option></select>&nbsp;<input class="post" type="text" name="userfield_value" maxlength="25" size="25" />&nbsp;<input type="submit" class="post2" name="search_userfield" value="{L_SEARCH}" /> {L_REGULAR_EXPRESSION} <input type="checkbox" name="search_userfield_regex" value="true" /></span></td>
 	</tr>
 	<tr>
 		<td class="row2"><span class="small">{L_SEARCH_USERS_USERFIELD_EXPLAIN}</span></td>
 	</tr>
 	<tr>
-	  <td class="row3"><img src="{SPACER}" width="1" height="1" alt="."></td>
+		<td class="row3"><img src="{SPACER}" width="1" height="1" alt="."></td>
 	</tr>
 	<tr>
 		<td class="row1" nowrap="nowrap"><span class="gen"><b>{L_SEARCH_USERS_LASTVISITED}</b>&nbsp;<select name="lastvisited_type"><option value="in">{L_IN_THE_LAST}</option><option value="after">{L_AFTER_THE_LAST}</option></select>&nbsp;<select name="lastvisited_days">{LASTVISITED_LIST}</select>&nbsp;<input type="submit" class="post2" name="search_lastvisited" value="{L_SEARCH}" /></span></td>
@@ -96,7 +95,7 @@
 		<td class="row2"><span class="small">{L_SEARCH_USERS_LASTVISITED_EXPLAIN}</span></td>
 	</tr>
 	<tr>
-	  <td class="row3"><img src="{SPACER}" width="1" height="1" alt="."></td>
+		<td class="row3"><img src="{SPACER}" width="1" height="1" alt="."></td>
 	</tr>
 	<tr>
 		<td class="row1" nowrap="nowrap"><span class="gen"><b>{L_BOARD_LANG}:</b>&nbsp;{LANGUAGE_LIST}&nbsp;<input type="submit" class="post2" name="search_language" value="{L_SEARCH}" /></span></td>
@@ -105,7 +104,7 @@
 		<td class="row2"><span class="small">{L_SEARCH_USERS_LANGUAGE_EXPLAIN}</span></td>
 	</tr>
 	<tr>
-	  <td class="row3"><img src="{SPACER}" width="1" height="1" alt="."></td>
+		<td class="row3"><img src="{SPACER}" width="1" height="1" alt="."></td>
 	</tr>
 	<tr>
 		<td class="row1" nowrap="nowrap"><span class="gen"><b>{L_TIMEZONE}:</b>&nbsp;{TIMEZONE_LIST}&nbsp;<input type="submit" class="post2" name="search_timezone" value="{L_SEARCH}" /></span></td>
@@ -114,7 +113,7 @@
 		<td class="row2"><span class="small">{L_SEARCH_USERS_TIMEZONE_EXPLAIN}</span></td>
 	</tr>
 	<tr>
-	  <td class="row3"><img src="{SPACER}" width="1" height="1" alt="."></td>
+		<td class="row3"><img src="{SPACER}" width="1" height="1" alt="."></td>
 	</tr>
 	<!-- BEGIN forums_exist -->
 	<tr>
@@ -124,7 +123,7 @@
 		<td class="row2"><span class="small">{L_SEARCH_USERS_MODERATORS_EXPLAIN}</span></td>
 	</tr>
 	<tr>
-	  <td class="row3"><img src="{SPACER}" width="1" height="1" alt="."></td>
+		<td class="row3"><img src="{SPACER}" width="1" height="1" alt="."></td>
 	</tr>
 	<!-- END forums_exist -->
 	<tr>
@@ -201,4 +200,3 @@
 
 <!--========================================================================-->
 <!-- ENDIF / TPL_ADMIN_USER_SEARCH_RESULTS -->
-

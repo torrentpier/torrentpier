@@ -92,6 +92,7 @@ $(document).ready(function(){
 <var class="ajax-params">{action: "edit_user_profile", id: "user_interests"}</var>
 <var class="ajax-params">{action: "edit_user_profile", id: "user_icq"}</var>
 <var class="ajax-params">{action: "edit_user_profile", id: "user_skype"}</var>
+<var class="ajax-params">{action: "edit_user_profile", id: "user_twitter"}</var>
 <var class="ajax-params">{action: "edit_user_profile", id: "user_gender", editableType: "yesno-gender"}</var>
 <var class="ajax-params">{action: "edit_user_profile", id: "user_birthday"}</var>
 <var class="ajax-params">{action: "edit_user_profile", id: "u_up_total"}</var>
@@ -253,6 +254,17 @@ ajax.callback.view_profile = function(data) {
 			<td class="tLeft med" id="user_skype">
 				<span class="editable">{SKYPE}
 					<a href="skype:{SKYPE}"><img align="middle" src="http://mystatus.skype.com/smallicon/{SKYPE}" width="16" height="16"></a>
+				</span>
+			</td>
+		</tr>
+		<!-- ENDIF -->
+		<!-- IF TWITTER -->
+		<tr>
+			<th>{L_TWITTER}:</th>
+			<td class="tLeft med" id="user_twitter">
+				<span class="editable">
+					<a href="http://twitter.com/{TWITTER}" class="twitter-follow-button" data-show-count="false" data-lang="ru">{L_READ} @{TWITTER}</a>
+					<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
 				</span>
 			</td>
 		</tr>

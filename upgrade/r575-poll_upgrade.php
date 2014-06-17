@@ -2,7 +2,7 @@
 
 define('IN_FORUM', true);
 define('BB_ROOT', './');
-require(BB_ROOT .'common.php');
+require(BB_ROOT . 'common.php');
 
 $user->session_start();
 
@@ -11,8 +11,7 @@ if (!IS_SUPER_ADMIN) bb_die($lang['ONLY_FOR_SUPER_ADMIN']);
 
 $confirm = request_var('confirm', '');
 
-if ($confirm)
-{
+if ($confirm) {
 	DB()->query("
 		CREATE TABLE IF NOT EXISTS `bb_poll_users` (
 		  `topic_id` int(10) unsigned NOT NULL,
@@ -67,9 +66,7 @@ if ($confirm)
 	DB()->query("DROP TABLE IF EXISTS bb_vote_voters");
 
 	bb_die('<h1 style="color: green">База данных обновлена</h1>');
-}
-else
-{
+} else {
 	$msg = '<form method="POST">';
 	$msg .= '<h1 style="color: red">!!! Перед тем как нажать на кнопку, сделайте бекап базы данных !!!</h1><br />';
 	$msg .= '<input type="submit" name="confirm" value="Начать обновление Базы Данных (R575)" style="height: 30px; font:bold 14px Arial, Helvetica, sans-serif;" />';

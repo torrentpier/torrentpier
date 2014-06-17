@@ -72,9 +72,13 @@ $lang['VIEW_LATEST_POST'] = 'View latest post';
 $lang['VIEW_NEWEST_POST'] = 'View newest post';
 $lang['PAGE_OF'] = 'Page <b>%d</b> of <b>%s</b>';
 
-$lang['ICQ'] = 'ICQ Number';
+$lang['ICQ'] = 'ICQ';
+
 $lang['SKYPE'] = 'Skype';
-$lang['SKYPE_ERROR'] = 'You entered an invalid login';
+$lang['SKYPE_ERROR'] = 'You entered an invalid Skype login';
+
+$lang['TWITTER'] = 'Twitter';
+$lang['TWITTER_ERROR'] = 'You entered an invalid Twitter login';
 
 $lang['FORUM_INDEX'] = '%s Forum Index';  // eg. sitename Forum Index, %s can be removed if you prefer
 
@@ -1037,7 +1041,7 @@ $lang['SORRY_AUTH_VIEW_ATTACH'] = 'Sorry but you are not authorized to view or d
 
 // Viewtopic -> Display of Attachments
 $lang['DESCRIPTION'] = 'Description'; // used in Administration Panel too...
-$lang['DOWNLOAD'] = 'Download'; // this Language Variable is defined in lang_admin.php too, but we are unable to access it from the main Language File
+$lang['DOWNLOAD'] = 'Download'; // this Language Variable is defined in admin.php too, but we are unable to access it from the main Language File
 $lang['FILESIZE'] = 'Filesize';
 $lang['VIEWED'] = 'Viewed';
 $lang['DOWNLOAD_NUMBER'] = '%d times'; // replace %d with count
@@ -1373,7 +1377,7 @@ $lang['HIDDEN']  = 'Hidden';
 // That's all, Folks!
 // -------------------------------------------------
 
-// from lang_admin
+// from admin
 $lang['NOT_ADMIN'] = 'You are not authorised to administer this board';
 
 $lang['COOKIES_REQUIRED'] = 'Cookies must be enabled!';
@@ -2961,6 +2965,7 @@ $lang['SEARCH_FOR_POSTCOUNT_RANGE'] = 'Searching for users with a post count bet
 $lang['SEARCH_FOR_POSTCOUNT_EQUALS'] = 'Searching for users with a post count value of %d';
 $lang['SEARCH_FOR_USERFIELD_ICQ'] = 'Searching for users with a ICQ address matching %s';
 $lang['SEARCH_FOR_USERFIELD_SKYPE'] = 'Searching for users with an Skype matching %s';
+$lang['SEARCH_FOR_USERFIELD_TWITTER'] = 'Searching for users with an Twitter matching %s';
 $lang['SEARCH_FOR_USERFIELD_WEBSITE'] = 'Searching for users with an Website matching %s';
 $lang['SEARCH_FOR_USERFIELD_LOCATION'] = 'Searching for users with a Location matching %s';
 $lang['SEARCH_FOR_USERFIELD_INTERESTS'] = 'Searching for users with their Interests field matching %s';

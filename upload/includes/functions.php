@@ -1567,7 +1567,7 @@ function bb_date ($gmepoch, $format = false, $tz = null)
 	global $bb_cfg, $lang, $userdata;
 
 	if (!$format) $format = $bb_cfg['default_dateformat'];
-	if (empty($lang)) require_once($bb_cfg['default_lang_dir'] .'lang_main.php');
+	if (empty($lang)) require_once($bb_cfg['default_lang_dir'] .'main.php');
 
 	if (is_null($tz) || $tz == 'false')
 	{
@@ -1918,7 +1918,7 @@ function message_die ($msg_code, $msg_text = '', $msg_title = '', $err_line = ''
 
 	if (empty($lang))
 	{
-		require($bb_cfg['default_lang_dir'] .'lang_main.php');
+		require($bb_cfg['default_lang_dir'] .'main.php');
 	}
 	if (empty($userdata) && ($msg_code == GENERAL_MESSAGE || $msg_code == GENERAL_ERROR))
 	{

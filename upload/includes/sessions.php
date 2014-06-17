@@ -591,15 +591,15 @@ class user_common
 
 		if (defined('LANG_DIR')) return;  // prevent multiple calling
 
-		define('DEFAULT_LANG_DIR', LANG_ROOT_DIR .'lang_'. $bb_cfg['default_lang'] .'/');
-		define('ENGLISH_LANG_DIR', LANG_ROOT_DIR .'lang_english/');
+		define('DEFAULT_LANG_DIR', LANG_ROOT_DIR . $bb_cfg['default_lang'] .'/');
+		define('ENGLISH_LANG_DIR', LANG_ROOT_DIR .'en/');
 
 		if ($this->data['user_id'] != GUEST_UID)
 		{
 			if ($this->data['user_lang'] && $this->data['user_lang'] != $bb_cfg['default_lang'])
 			{
 				$bb_cfg['default_lang'] = basename($this->data['user_lang']);
-				define('LANG_DIR', LANG_ROOT_DIR .'lang_'. $bb_cfg['default_lang'] .'/');
+				define('LANG_DIR', LANG_ROOT_DIR . $bb_cfg['default_lang'] .'/');
 			}
 
 			if (isset($this->data['user_timezone']))
@@ -613,7 +613,7 @@ class user_common
 
 		if (!defined('LANG_DIR')) define('LANG_DIR', DEFAULT_LANG_DIR);
 
-		require(LANG_DIR .'lang_main.php');
+		require(LANG_DIR .'main.php');
 
 		$theme = setup_style();
 		$DeltaTime = new Date_Delta();

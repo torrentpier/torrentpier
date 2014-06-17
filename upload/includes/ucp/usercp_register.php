@@ -112,6 +112,7 @@ switch ($mode)
 			'avatar_ext_id'    => true,
 			'user_icq'         => true,
 			'user_skype'       => true,
+			'user_twitter'     => true,
 			'user_website'     => true,
 			'user_from'        => true,
 			'user_sig'         => true,
@@ -558,6 +559,23 @@ foreach ($profile_fields as $field => $can_edit)
 		break;
 
 	/**
+	 *  Twitter
+	 */
+	case 'user_twitter':
+		$twitter = isset($_POST['user_twitter']) ? (string) $_POST['user_twitter'] : $pr_data['user_twitter'];
+		if ($submit && $twitter != $pr_data['user_twitter'])
+		{
+			if ($twitter != '' && !preg_match("#^[a-zA-Z0-9_]{1,15}$#", $twitter))
+			{
+				$errors[] = $lang['TWITTER_ERROR'];
+			}
+			$pr_data['user_twitter'] = $twitter;
+			$db_data['user_twitter'] = (string) $twitter;
+		}
+		$tp_data['USER_TWITTER'] = $pr_data['user_twitter'];
+		break;
+
+	/**
 	*  Выбор шаблона (edit)
 	*/
 	case 'tpl_name':
@@ -772,8 +790,8 @@ $template->assign_vars(array(
 	'SHOW_PASS'          => ($adm_edit || ($mode == 'register' && IS_ADMIN)),
 	'CAPTCHA_HTML'       => ($need_captcha) ? CAPTCHA()->get_html() : '',
 
-	'LANGUAGE_SELECT'    => language_select($user_lang, 'user_lang'),
-	'TIMEZONE_SELECT'    => tz_select($user_timezone, 'user_timezone'),
+	'LANGUAGE_SELECT'    => language_select($pr_data['user_lang'], 'user_lang'),
+	'TIMEZONE_SELECT'    => tz_select($pr_data['user_timezone'], 'user_timezone'),
 	'USER_TIMEZONE'      => $pr_data['user_timezone'],
 
 	'AVATAR_EXPLAIN'     => sprintf($lang['AVATAR_EXPLAIN'], $bb_cfg['avatars']['max_width'], $bb_cfg['avatars']['max_height'], (round($bb_cfg['avatars']['max_size'] / 1024))),

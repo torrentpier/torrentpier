@@ -3,41 +3,23 @@
 if (!defined('BB_ROOT')) die(basename(__FILE__));
 
 //
-// Pick a language, any language
+// Languages
 //
-function language_select ($default, $select_name = "language", $dirname="language")
+function language_select ($default_lang, $select_name = 'language')
 {
 	global $bb_cfg;
-	if(!$default) $default = $bb_cfg['default_lang'];
 
-	$dir = opendir(BB_ROOT . $dirname);
-
-	$lang = array();
-	while ( $file = readdir($dir) )
+	$lang_select = '<select name="'. $select_name .'">';
+	$x = 0;
+	foreach ($bb_cfg['languages'] as $folder => $name)
 	{
-		if (preg_match('#^lang_#i', $file) && !is_file(@bb_realpath(BB_ROOT . $dirname . '/' . $file)) && !is_link(@bb_realpath(BB_ROOT . $dirname . '/' . $file)))
-		{
-			$filename = trim(str_replace("lang_", "", $file));
-			$displayname = preg_replace("/^(.*?)_(.*)$/", "\\1 [ \\2 ]", $filename);
-			$displayname = preg_replace("/\[(.*?)_(.*)\]/", "[ \\1 - \\2 ]", $displayname);
-			$lang[$displayname] = $filename;
-		}
-	}
-
-	closedir($dir);
-
-	@asort($lang);
-	@reset($lang);
-
-	$lang_select = '<select name="' . $select_name . '">';
-	while ( list($displayname, $filename) = @each($lang) )
-	{
-		$selected = ( strtolower($default) == strtolower($filename) ) ? ' selected="selected"' : '';
-		$lang_select .= '<option value="' . $filename . '"' . $selected . '>' . ucwords($displayname) . '</option>';
+		$selected = '';
+		if ($folder == $default_lang) $selected = ' selected="selected"';
+		$lang_select .= '<option value="'. $folder .'"'. $selected .'>'. $name .'</option>';
+		$x++;
 	}
 	$lang_select .= '</select>';
-
-	return $lang_select;
+	return ($x > 1) ? $lang_select : '';
 }
 
 //
@@ -79,6 +61,6 @@ function templates_select ($default_style, $select_name = 'tpl_name')
 		$templates_select .= '<option value="'. $folder .'"'. $selected .'>'. $name .'</option>';
 		$x++;
 	}
-	$templates_select .= '</select>&nbsp;';
+	$templates_select .= '</select>';
 	return ($x > 1) ? $templates_select : '';
 }

@@ -117,7 +117,7 @@ function report_modules($mode = 'all', $module = null)
 
 			// Include language file
 			$lang = array();
-			$lang_file = LANG_ROOT_DIR . "lang_{$bb_cfg['default_lang']}/report_hack/lang_{$row['report_module_name']}.php";
+			$lang_file = LANG_ROOT_DIR . "{$bb_cfg['default_lang']}/report_hack/{$row['report_module_name']}.php";
 			if (file_exists($lang_file)) {
 				include($lang_file);
 			}
@@ -504,7 +504,7 @@ function &report_notify_lang($language)
 			global $lang;
 		} else {
 			$lang = array();
-			include(LANG_ROOT_DIR . "lang_$language/lang_main.php");
+			include(LANG_ROOT_DIR . "$language/main.php");
 		}
 
 		$languages[$language] = $lang;

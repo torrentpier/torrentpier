@@ -143,7 +143,7 @@ switch($mode)
 			'TOPICS_PER_PAGE' => $new['topics_per_page'],
 			'POSTS_PER_PAGE' => $new['posts_per_page'],
 			'HOT_TOPIC' => $new['hot_threshold'],
-			'LANG_SELECT' => language_select($new['default_lang'], 'default_lang', 'language'),
+			'LANG_SELECT' => language_select($new['default_lang'], 'language'),
 			'DEFAULT_DATEFORMAT' => $new['default_dateformat'],
 			'TIMEZONE_SELECT' => tz_select($new['board_timezone'], 'board_timezone'),
 			'MAX_LOGIN_ATTEMPTS' => $new['max_login_attempts'],

@@ -55,8 +55,8 @@ $domain_name = (!empty($_SERVER['SERVER_NAME'])) ? $_SERVER['SERVER_NAME'] : $do
 
 // Increase number of revision after update
 $bb_cfg['tp_version'] = '2.6 (RC)';
-$bb_cfg['tp_release_date'] = '15-06-2014';
-$bb_cfg['tp_release_state'] = 'R587';
+$bb_cfg['tp_release_date'] = '18-06-2014';
+$bb_cfg['tp_release_state'] = 'R588';
 
 // Database
 $charset  = 'utf8';
@@ -253,20 +253,33 @@ if (!empty($_SERVER['HTTP_ACCEPT_LANGUAGE']) && $bb_cfg['auto_language'])
 {
 	if (substr($_SERVER['HTTP_ACCEPT_LANGUAGE'], 0, 2) == 'ru')
 	{
-		$bb_cfg['default_lang_dir'] = LANG_ROOT_DIR .'lang_russian/';
-		$bb_cfg['default_lang'] = 'russian';
+		$bb_cfg['default_lang_dir'] = LANG_ROOT_DIR .'ru/';
+		$bb_cfg['default_lang'] = 'ru';
+	}
+	else if (substr($_SERVER['HTTP_ACCEPT_LANGUAGE'], 0, 2) == 'ua')
+	{
+		$bb_cfg['default_lang_dir'] = LANG_ROOT_DIR .'ua/';
+		$bb_cfg['default_lang'] = 'ua';
 	}
 	else
 	{
-		$bb_cfg['default_lang_dir'] = LANG_ROOT_DIR .'lang_english/';
-		$bb_cfg['default_lang'] = 'english';
+		$bb_cfg['default_lang_dir'] = LANG_ROOT_DIR .'en/';
+		$bb_cfg['default_lang'] = 'en';
 	}
 }
 else
 {
-	if (isset($bb_cfg['default_lang']) && $bb_cfg['default_lang'] == 'russian') $bb_cfg['default_lang_dir'] = LANG_ROOT_DIR .'lang_russian/';
-	else $bb_cfg['default_lang_dir'] = LANG_ROOT_DIR .'lang_english/';
+	if (isset($bb_cfg['default_lang']) && $bb_cfg['default_lang'] == 'ru') $bb_cfg['default_lang_dir'] = LANG_ROOT_DIR .'ru/';
+	else if (isset($bb_cfg['default_lang']) && $bb_cfg['default_lang'] == 'ua') $bb_cfg['default_lang_dir'] = LANG_ROOT_DIR .'ua/';
+	else $bb_cfg['default_lang_dir'] = LANG_ROOT_DIR .'en/';
 }
+
+$bb_cfg['languages'] = array(
+//	'folder'	=> 'Name',
+	'ru'		=> 'Русский',
+	'ua'		=> 'Український',
+	'en'		=> 'English',
+);
 
 // Templates
 define('ADMIN_TPL_DIR', TEMPLATES_DIR .'/admin/');

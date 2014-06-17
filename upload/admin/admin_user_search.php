@@ -904,6 +904,10 @@ else
 					$text = sprintf($lang['SEARCH_FOR_USERFIELD_SKYPE'],$text);
 					$field = 'user_skype';
 					break;
+				case 'twitter':
+					$text = sprintf($lang['SEARCH_FOR_USERFIELD_TWITTER'],$text);
+					$field = 'user_twitter';
+					break;
 				case 'website':
 					$text = sprintf($lang['SEARCH_FOR_USERFIELD_WEBSITE'],$text);
 					$field = 'user_website';

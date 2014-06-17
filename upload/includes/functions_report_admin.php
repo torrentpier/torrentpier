@@ -87,7 +87,7 @@ function report_modules_inactive($mode = 'all', $module = null)
 			// Include language file
 			$lang = array();
 
-			$lang_file = LANG_ROOT_DIR . "lang_{$bb_cfg['default_lang']}/report_hack/lang_$module_name.php";
+			$lang_file = LANG_ROOT_DIR . "{$bb_cfg['default_lang']}/report_hack/$module_name.php";
 			if (file_exists($lang_file)) {
 				include($lang_file);
 			}

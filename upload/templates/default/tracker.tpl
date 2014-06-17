@@ -244,11 +244,11 @@ $(function(){
 					<p class="chbox">{SEED_EXIST_CHBOX}</p>
 					<p class="chbox">{ONLY_NEW_CHBOX}[{MINIPOST_IMG_NEW}]&nbsp;</p>
 					<p>
-					    <label>
-		                    <input type="checkbox" <!-- IF HIDE_CONTENTS -->{CHECKED}<!-- ENDIF -->
-							    onclick="user.set('h_tsp', this.checked ? 1 : 0);"
-		                    />&nbsp;{L_HIDE_CONTENTS}
-	                    </label>
+						<label>
+							<input type="checkbox" <!-- IF HIDE_CONTENTS -->{CHECKED}<!-- ENDIF -->
+								onclick="user.set('h_tsp', this.checked ? 1 : 0);"
+							/>&nbsp;{L_HIDE_CONTENTS}
+						</label>
 					</p>
 					<!-- IF $tr_cfg['gold_silver_enabled'] --><p class="chbox">{TOR_TYPE_CHBOX}</p><!-- ENDIF -->
 				</div>

@@ -21,13 +21,13 @@ function attach_mod_get_lang($language_file)
 	global $attach_config, $bb_cfg;
 
 	$language = $bb_cfg['default_lang'];
-	if (!file_exists(LANG_ROOT_DIR ."lang_$language/$language_file.php"))
+	if (!file_exists(LANG_ROOT_DIR ."$language/$language_file.php"))
 	{
 		$language = $attach_config['board_lang'];
 
-		if (!file_exists(LANG_ROOT_DIR ."lang_$language/$language_file.php"))
+		if (!file_exists(LANG_ROOT_DIR ."$language/$language_file.php"))
 		{
-			message_die(GENERAL_MESSAGE, 'Attachment Mod language file does not exist: language/lang_' . $language . '/' . $language_file . '.php');
+			message_die(GENERAL_MESSAGE, 'Attachment Mod language file does not exist: language/' . $language . '/' . $language_file . '.php');
 		}
 		else
 		{

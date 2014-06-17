@@ -29,7 +29,9 @@ function toggle_cbox (cb_id, tr_id)
   <th colspan="2">{L_TOPIC_SPLIT}</th>
 	</tr>
 	<tr>
-  <td class="row2" colspan="2" align="center"><span class="small">{L_SPLIT_TOPIC_EXPLAIN}</span></td>
+		<td class="row2" colspan="2" align="center">
+			<span class="small">{L_SPLIT_TOPIC_EXPLAIN}</span>
+		</td>
 	</tr>
 	<tr>
 	 <td class="row1" nowrap="nowrap"><span class="gen">{L_NEW_TOPIC_TITLE}</span></td>
@@ -53,11 +55,11 @@ function toggle_cbox (cb_id, tr_id)
 	</tr>
 	<!-- //bot end -->
 	<tr>
-	    <td colspan="2" class="catBottom">
+		<td colspan="2" class="catBottom">
 			<input type="submit" name="delete_posts" value="{L_DELETE_POSTS}" style="width: 140px;" />
-            <input type="submit" name="split_type_all" value="{L_SPLIT_POSTS}" style="width: 215px;" />
-            <input type="submit" name="split_type_beyond" value="{L_SPLIT_AFTER}" style="width: 280px;" />
-	    </td>
+			<input type="submit" name="split_type_all" value="{L_SPLIT_POSTS}" style="width: 215px;" />
+			<input type="submit" name="split_type_beyond" value="{L_SPLIT_AFTER}" style="width: 280px;" />
+		</td>
 	</tr>
 </table>
 <div><img src="{SPACER}" alt="" width="1" height="6" /></div>

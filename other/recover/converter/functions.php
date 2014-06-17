@@ -76,12 +76,12 @@ function tp_user_level($tb_class)
 }
 
 function convert_user($user)
-{	
+{
 	$user_data = array(
 		"user_id"          => $user['id'],
 		"user_active"      => ($user['enabled'] == 'yes') ? true : false,
 		"username"         => $user['username'],
-		"user_password"    => md5($user['password']),	
+		"user_password"    => md5($user['password']),
 		"user_lastvisit"   => $user['last_access'],
 		"user_regdate"     => $user['added'],
 		"user_level"       => tp_user_level($user['class']),
@@ -92,10 +92,11 @@ function convert_user($user)
 		"user_avatar_type" => !empty($user['avatar']) ? 2 : null,
 		"user_email"       => $user['email'],
 		"user_website"     => $user['website'],
-		"user_icq"         => $user['icq'],		
-		"user_skype"       => $user['skype'],	 // Added	
-		"user_gender"      => $user['gender'],		 // Added
-		"user_birthday"    => $user['user_birthday'],	 // Added	
+		"user_icq"         => $user['icq'],
+		"user_skype"       => $user['skype'],
+		"user_twitter"     => $user['twitter'],
+		"user_gender"      => $user['gender'],
+		"user_birthday"    => $user['user_birthday'],
 	);
 
 	$columns = $values = array();
@@ -250,7 +251,7 @@ function append_images($tor)
 			}
 			if(!empty($tor['image2'])) 
 			{
-				$screens = '[spoiler="Скриншоты"][img]'.make_img_path($tor['image2'])."[/img][/spoiler]";
+				$screens = '[spoiler="РЎРєСЂРёРЅС€РѕС‚С‹"][img]'.make_img_path($tor['image2'])."[/img][/spoiler]";
 			}
 			break;
 		case 'sky':
@@ -261,7 +262,7 @@ function append_images($tor)
 			$has_screens = !empty($tor['screenshot1']) || !empty($tor['screenshot2']) || !empty($tor['screenshot3']) || !empty($tor['screenshot4']);
 			if ($has_screens)
 			{
-				$screens .= '[spoiler="Скриншоты"]';
+				$screens .= '[spoiler="РЎРєСЂРёРЅС€РѕС‚С‹"]';
 				for ($i = 1; $i<=4; $i++)
 				{
 					if(!empty($tor['screenshot'.$i])) 

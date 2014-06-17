@@ -72,8 +72,12 @@ $lang['VIEW_NEWEST_POST'] = 'Перейти к первому непрочита
 $lang['PAGE_OF'] = 'Страница <b>%d</b> из <b>%s</b>';
 
 $lang['ICQ'] = 'ICQ';
+
 $lang['SKYPE'] = 'Skype';
-$lang['SKYPE_ERROR'] = 'Вы ввели некорректный логин';
+$lang['SKYPE_ERROR'] = 'Вы ввели некорректный логин Skype';
+
+$lang['TWITTER'] = 'Twitter';
+$lang['TWITTER_ERROR'] = 'Вы ввели некорректный логин Twitter';
 
 $lang['FORUM_INDEX'] = 'Список форумов %s';
 
@@ -1041,7 +1045,7 @@ $lang['SORRY_AUTH_VIEW_ATTACH'] = 'Вы <b>не можете</b> просмат�
 
 // Viewtopic -> Display of Attachments
 $lang['DESCRIPTION'] = 'Описание'; // used in Administration Panel too...
-$lang['DOWNLOAD'] = 'Скачать'; // this Language Variable is defined in lang_admin.php too, but we are unable to access it from the main Language File
+$lang['DOWNLOAD'] = 'Скачать'; // this Language Variable is defined in admin.php too, but we are unable to access it from the main Language File
 $lang['FILESIZE'] = 'Размер';
 $lang['VIEWED'] = 'Просмотров';
 $lang['DOWNLOAD_NUMBER'] = '%d раз'; // replace %d with count
@@ -1268,7 +1272,7 @@ $lang['BT_7_DAYS_FOR']   = 'посл. неделю';
 $lang['BT_2_WEEKS_FOR']  = 'посл. 2 недели';
 $lang['BT_1_MONTH_FOR']  = 'последний месяц';
 $lang['BT_1_DAY']    = 'день';
-$lang['BT_3_DAYS']    = '3 дня';
+$lang['BT_3_DAYS']   = '3 дня';
 $lang['BT_7_DAYS']   = 'неделю';
 $lang['BT_2_WEEKS']  = '2 недели';
 $lang['BT_1_MONTH']  = 'месяц';
@@ -1377,7 +1381,7 @@ $lang['HIDDEN']  = 'Скрыт';
 // That's all, Folks!
 // -------------------------------------------------
 
-// from lang_admin
+// from admin
 $lang['NOT_ADMIN'] = 'У вас нет прав на администрирование';
 
 $lang['COOKIES_REQUIRED'] = 'Куки должны быть включены!';
@@ -1666,18 +1670,18 @@ $lang['CENTER'] = 'По центру';
 $lang['JUSTIFY'] = 'По ширине';
 $lang['HOR_LINE'] = 'Горизонтальная линия (Ctrl+8)';
 $lang['NEW_LINE'] = 'Перенос на новую строку';
-$lang['BOLD'] = 'Жирный текст: [b]текст[/b]  (Ctrl+B)';
-$lang['ITALIC'] = 'Наклонный текст: [i]текст[/i]  (Ctrl+I)';
-$lang['UNDERLINE'] = 'Подчеркнутый текст: [u]текст[/u]  (Ctrl+U)';
-$lang['STRIKEOUT'] = 'Зачеркнутый текст: [s]текст[/s]  (Ctrl+S)';
-$lang['QUOTE_TITLE'] = 'Цитата: [quote]текст[/quote]  (Ctrl+Q)';
+$lang['BOLD'] = 'Жирный текст: [b]текст[/b] (Ctrl+B)';
+$lang['ITALIC'] = 'Наклонный текст: [i]текст[/i] (Ctrl+I)';
+$lang['UNDERLINE'] = 'Подчеркнутый текст: [u]текст[/u] (Ctrl+U)';
+$lang['STRIKEOUT'] = 'Зачеркнутый текст: [s]текст[/s] (Ctrl+S)';
+$lang['QUOTE_TITLE'] = 'Цитата: [quote]текст[/quote] (Ctrl+Q)';
 $lang['IMG_TITLE'] = 'Вставить картинку: [img]http://image_url[/img]  (Ctrl+R)';
 $lang['URL'] = 'Ссылка';
 $lang['URL_TITLE'] = 'Ссылка (Ctrl+W)';
-$lang['CODE_TITLE'] = 'Код: [code]код[/code]  (Ctrl+K)';
+$lang['CODE_TITLE'] = 'Код: [code]код[/code] (Ctrl+K)';
 $lang['LIST'] = 'Список';
 $lang['LIST_TITLE'] = 'Список: [list]текст[/list] (Ctrl+L)';
-$lang['LIST_ITEM'] = 'Нумерованный список: [list=]текст[/list]  (Ctrl+O)';
+$lang['LIST_ITEM'] = 'Нумерованный список: [list=]текст[/list] (Ctrl+O)';
 $lang['QUOTE_SEL'] = 'Цит.выдел';
 $lang['TRANSLIT'] = 'Транслит';
 $lang['TRANSLIT_TITLE'] = 'Перевести выделение из транслита на русский';
@@ -2973,6 +2977,7 @@ $lang['SEARCH_FOR_POSTCOUNT_RANGE'] = 'Поиск пользователей с 
 $lang['SEARCH_FOR_POSTCOUNT_EQUALS'] = 'Поиск пользователей с количеством сообщений %d';
 $lang['SEARCH_FOR_USERFIELD_ICQ'] = 'Поиск пользователей с адресом ICQ %s';
 $lang['SEARCH_FOR_USERFIELD_SKYPE'] = 'Поиск пользователей с логином в Skype %s';
+$lang['SEARCH_FOR_USERFIELD_TWITTER'] = 'Поиск пользователей с логином в Twitter %s';
 $lang['SEARCH_FOR_USERFIELD_WEBSITE'] = 'Поиск пользователей, чей веб-сайт %s';
 $lang['SEARCH_FOR_USERFIELD_LOCATION'] = 'Поиск пользователей из %s';
 $lang['SEARCH_FOR_USERFIELD_INTERESTS'] = 'Поиск пользователей с интересами %s';

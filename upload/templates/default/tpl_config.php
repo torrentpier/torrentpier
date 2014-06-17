@@ -7,7 +7,7 @@ $template_name = basename(dirname(__FILE__));
 
 $_img  = BB_ROOT . 'images/';
 $_main = BB_ROOT . basename(TEMPLATES_DIR) .'/'. $template_name .'/images/';
-$_lang = $_main . basename('lang_'. $bb_cfg['default_lang']) .'/';
+$_lang = $_main . basename($bb_cfg['default_lang']) .'/';
 
 // post_buttons
 $images['icon_quote']          = $_lang .'icon_quote.gif';
