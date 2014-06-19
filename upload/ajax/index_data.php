@@ -19,7 +19,7 @@ switch($mode)
 		{
 			foreach($stats['birthday_week_list'] as $week)
 			{
-				$html[] = profile_url($week) .' <span class="small">('. birthday_age($week['age']) .')</span>';
+				$html[] = profile_url($week) .' <span class="small">('. birthday_age($week['user_birthday']) .')</span>';
 			}
 			$html = sprintf($lang['BIRTHDAY_WEEK'], $bb_cfg['birthday_check_day'], join(', ', $html));
 		}
@@ -36,7 +36,7 @@ switch($mode)
 		{
 			foreach($stats['birthday_today_list'] as $today)
 			{
-				$html[] = profile_url($today) .' <span class="small">('. birthday_age($today['age'], 1) .')</span>';
+				$html[] = profile_url($today) .' <span class="small">('. birthday_age($today['user_birthday']) .')</span>';
 			}
 			$html = $lang['BIRTHDAY_TODAY'] . join(', ', $html);
 		}

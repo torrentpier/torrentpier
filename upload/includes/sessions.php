@@ -755,7 +755,7 @@ class user_common
 			$excluded[] = $not_auth;
 		}
 
-		if (bf($this->opt, 'user_opt', 'hide_porn_forums'))
+		if (bf($this->opt, 'user_opt', 'user_porn_forums'))
 		{
 			global $datastore;
 
@@ -789,7 +789,7 @@ class user_common
 	{
 		global $datastore, $bb_cfg;
 
-		if ($bb_cfg['show_ads'] && !bf($this->opt, 'user_opt', 'hide_ads') && !defined('IN_ADMIN') && !defined('IN_AJAX'))
+		if ($bb_cfg['show_ads'] && !bf($this->opt, 'user_opt', 'user_hide_ads') && !defined('IN_ADMIN') && !defined('IN_AJAX'))
 		{
 			$datastore->enqueue('ads');
 			$this->show_ads = true;

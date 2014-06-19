@@ -1,5 +1,20 @@
-
+<style type="text/css">
+.prof-tbl * { -moz-box-sizing: border-box; box-sizing: border-box; }
+input[name="username"], input[name="user_email"], input[name="cur_pass"], input[name="new_pass"] {
+	width: 255px;
+}
+.prof-tbl td { padding: 4px 6px; }
+.prof-title { text-align: right; }
+.prof-tbl h6 { margin: 4px 0 4px 4px; color: #444444; line-height: 100%; display: inline-block; }
+</style>
 <script type="text/javascript">
+$(function(){
+	var tab_idx = 100;
+	$('input,select,textarea', '#prof-form').not(':hidden').not(':disabled').each(function(){
+		$(this).attr({ tabindex: ++tab_idx });
+	});
+});
+
 ajax.callback.user_register = function(data){
 	$('#'+ data.mode).html(data.html);
 };
@@ -18,7 +33,7 @@ ajax.callback.user_register = function(data){
 
 <p class="nav"><a href="{U_INDEX}">{T_INDEX}</a></p>
 
-<form method="post" action="profile.php<!-- IF IS_ADMIN && PR_USER_ID -->?u={PR_USER_ID}<!-- ENDIF -->" class="tokenized" enctype="multipart/form-data">
+<form id="prof-form" method="post" action="profile.php<!-- IF IS_ADMIN && PR_USER_ID -->?u={PR_USER_ID}<!-- ENDIF -->" class="tokenized" enctype="multipart/form-data">
 <input type="hidden" name="mode" value="{MODE}" />
 <input type="hidden" name="reg_agreed" value="1" />
 <!-- IF NEW_USER --><input type="hidden" name="admin" value="1" /><!-- ENDIF -->
@@ -35,41 +50,41 @@ document.write('<input type="hidden" name="user_timezone" value="'+tz+'" />');
 <input type="hidden" name="user_timezone" value="{USER_TIMEZONE}" />
 <!-- ENDIF -->
 
-<table class="forumline usercp_register">
+<table class="forumline prof-tbl">
 <col class="row1" width="35%">
 <col class="row2" width="65%">
 <tbody class="pad_4">
 <tr>
 	<th colspan="2">{L_REGISTRATION_INFO}</th>
 </tr>
-<tr class="row3 med">
-	<td class="bold" colspan="2">{L_ITEMS_REQUIRED}</td>
+<tr>
+	<td class="row2 small tCenter" colspan="2">{L_ITEMS_REQUIRED}</td>
 </tr>
 <tr>
-	<td>{L_USERNAME}: *</td>
+	<td class="prof-title">{L_USERNAME}: *</td>
 	<td><!-- IF CAN_EDIT_USERNAME --><input id="username" onBlur="ajax.exec({ action: 'user_register', mode: 'check_name', username: $('#username').val()}); return false;" type="text" name="username" size="35" maxlength="25" value="{USERNAME}" /><!-- ELSE --><b>{USERNAME}</b><!-- ENDIF -->
     <span id="check_name"></span></td>	
 </tr>
 <tr>
-	<td>{L_EMAIL}: * <!-- IF EDIT_PROFILE --><!-- ELSE IF $bb_cfg['reg_email_activation'] --><h6>{L_EMAIL_EXPLAIN}</h6><!-- ENDIF --></td>
+	<td class="prof-title">{L_EMAIL}: * <!-- IF EDIT_PROFILE --><!-- ELSE IF $bb_cfg['reg_email_activation'] --><h6>{L_EMAIL_EXPLAIN}</h6><!-- ENDIF --></td>
 	<td><input id="email" onBlur="ajax.exec({ action: 'user_register', mode: 'check_email', email: $('#email').val()}); return false;" type="text" name="user_email" size="35" maxlength="40" value="{USER_EMAIL}" <!-- IF EDIT_PROFILE --><!-- IF $bb_cfg['emailer_disabled'] -->readonly="readonly" style="color: gray;"<!-- ENDIF --><!-- ENDIF --> />
 	<span id="check_email"></span></td>	
 </tr>
 <!-- IF EDIT_PROFILE and not ADM_EDIT -->
 <tr>
-	<td>{L_CURRENT_PASSWORD}: * <h6>{L_CONFIRM_PASSWORD_EXPLAIN}</h6></td>
+	<td class="prof-title">{L_CURRENT_PASSWORD}: * <h6>{L_CONFIRM_PASSWORD_EXPLAIN}</h6></td>
 	<td><input type="password" name="cur_pass" size="35" maxlength="32" value="" /></td>
 </tr>
 <!-- ENDIF -->
 <tr>
-	<td><!-- IF EDIT_PROFILE -->{L_NEW_PASSWORD}: * <h6>{L_PASSWORD_IF_CHANGED}</h6><!-- ELSE -->{L_PASSWORD}: *<!-- ENDIF --></td>
+	<td class="prof-title"><!-- IF EDIT_PROFILE -->{L_NEW_PASSWORD}: * <h6>{L_PASSWORD_IF_CHANGED}</h6><!-- ELSE -->{L_PASSWORD}: *<!-- ENDIF --></td>
 	<td>
 	    <input id="pass" type="<!-- IF SHOW_PASS -->text<!-- ELSE -->password<!-- ENDIF -->" name="new_pass" size="35" maxlength="32" value="" />&nbsp;
 	    <span id="autocomplete" title="{L_AUTOCOMPLETE}">&#9668;</span> &nbsp;<i class="med">{L_PASSWORD_LONG}</i>
 	</td>
 </tr>
 <tr>
-	<td>{L_CONFIRM_PASSWORD}: * <!-- IF EDIT_PROFILE --><h6>{L_PASSWORD_CONFIRM_IF_CHANGED}</h6><!-- ENDIF --></td>
+	<td class="prof-title">{L_CONFIRM_PASSWORD}: * <!-- IF EDIT_PROFILE --><h6>{L_PASSWORD_CONFIRM_IF_CHANGED}</h6><!-- ENDIF --></td>
 	<td>
 	    <input id="pass_confirm" onBlur="ajax.exec({ action: 'user_register', mode: 'check_pass', pass: $('#pass').val(), pass_confirm: $('#pass_confirm').val() }); return false;" type="<!-- IF SHOW_PASS -->text<!-- ELSE -->password<!-- ENDIF -->" name="cfm_pass" size="35" maxlength="32" value="" />
 	    <span id="check_pass"></span>
@@ -77,14 +92,14 @@ document.write('<input type="hidden" name="user_timezone" value="'+tz+'" />');
 </tr>
 <!-- IF CAPTCHA_HTML -->
 <tr>
-	<td>{L_CONFIRM_CODE}:</td>
-	<td><span id="refresh_captcha">{CAPTCHA_HTML}</span> <img align="middle" src="./images/pic_loading.gif" title="{L_UPDATE}" onclick="ajax.exec({ action: 'user_register', mode: 'refresh_captcha'}); return false;" /></td>
+	<td class="prof-title">{L_CONFIRM_CODE}: *</td>
+	<td><span id="refresh_captcha">{CAPTCHA_HTML}</span> <img align="middle" src="{SITE_URL}images/pic_loading.gif" title="{L_UPDATE}" onclick="ajax.exec({ action: 'user_register', mode: 'refresh_captcha'}); return false;" /></td>
 </tr>
 <!-- ENDIF -->
 <!-- IF EDIT_PROFILE -->
 <!-- IF not ADM_EDIT -->
 <tr>
-	<td>{L_AUTOLOGIN}:</td>
+	<td class="prof-title">{L_AUTOLOGIN}:</td>
 	<td><a href="{U_RESET_AUTOLOGIN}">{L_RESET_AUTOLOGIN}</a><h6>{L_RESET_AUTOLOGIN_EXPL}</h6></td>
 </tr>
 <!-- ENDIF -->
@@ -93,42 +108,42 @@ document.write('<input type="hidden" name="user_timezone" value="'+tz+'" />');
 </tr>
 <!-- IF $bb_cfg['gender'] -->
 <tr>
-	<td>{L_GENDER}:</td>
+	<td class="prof-title">{L_GENDER}:</td>
 	<td>{USER_GENDER}</td>
 </tr>
 <!-- ENDIF -->
-<!-- IF BIRTHDAY -->
+<!-- IF $bb_cfg['birthday_enabled'] -->
 <tr>
-	<td>{L_BIRTHDAY}:</td>
-	<td>{BIRTHDAY}</td>
+	<td class="prof-title">{L_BIRTHDAY}:</td>
+	<td><input type="date" name="user_birthday" value="{USER_BIRTHDAY}" /></td>
 </tr>
 <!-- ENDIF -->
 <tr>
-	<td>ICQ:</td>
+	<td class="prof-title">ICQ:</td>
 	<td><input type="text" name="user_icq" size="30" maxlength="15" value="{USER_ICQ}" /></td>
 </tr>
 <tr>
-	<td>{L_SKYPE}:</td>
+	<td class="prof-title">{L_SKYPE}:</td>
 	<td><input type="text" name="user_skype" size="30" maxlength="32" value="{USER_SKYPE}" /></td>
 </tr>
 <tr>
-	<td>{L_TWITTER}:</td>
+	<td class="prof-title">{L_TWITTER}:</td>
 	<td><input type="text" name="user_twitter" size="30" maxlength="15" value="{USER_TWITTER}" /></td>
 </tr>
 <tr>
-	<td>{L_WEBSITE}:</td>
+	<td class="prof-title">{L_WEBSITE}:</td>
 	<td><input type="text" name="user_website" size="50" maxlength="100" value="{USER_WEBSITE}" /></td>
 </tr>
 <tr>
-	<td>{L_OCCUPATION}:</td>
+	<td class="prof-title">{L_OCCUPATION}:</td>
 	<td><input type="text" name="user_occ" size="50" maxlength="100" value="{USER_OCC}" /></td>
 </tr>
 <tr>
-	<td>{L_INTERESTS}:</td>
+	<td class="prof-title">{L_INTERESTS}:</td>
 	<td><input type="text" name="user_interests" size="50" maxlength="150" value="{USER_INTERESTS}" /></td>
 </tr>
 <tr>
-	<td>{L_LOCATION}:</td>
+	<td class="prof-title">{L_LOCATION}:</td>
 	<td>
 		<div><input type="text" name="user_from" size="50" maxlength="100" value="{USER_FROM}" /></div>
 	</td>
@@ -136,7 +151,7 @@ document.write('<input type="hidden" name="user_timezone" value="'+tz+'" />');
 <!-- ENDIF -->
 <!-- IF $bb_cfg['allow_change']['language'] -->
 <tr>
-	<td>{L_BOARD_LANG}:</td>
+	<td class="prof-title">{L_BOARD_LANG}:</td>
 	<td>{LANGUAGE_SELECT}</td>
 </tr>
 <!-- ENDIF -->
@@ -146,10 +161,10 @@ document.write('<input type="hidden" name="user_timezone" value="'+tz+'" />');
 </tr>
 <!-- IF TEMPLATES_SELECT -->
 <tr>
-	<td>{L_FORUM_STYLE}</td>
+	<td class="prof-title">{L_FORUM_STYLE}</td>
 	<td>
 		<div style="margin: 3px 0;">
-		{TEMPLATES_SELECT}
+			{TEMPLATES_SELECT}
 		</div>
 	</td>
 </tr>
@@ -169,7 +184,7 @@ ajax.callback.posts = function(data){
 </script>
 <!-- ENDIF -->
 <tr>
-	<td>{L_SIGNATURE}:<h6>{SIGNATURE_EXPLAIN}</h6></td>
+	<td class="prof-title">{L_SIGNATURE}:<h6>{SIGNATURE_EXPLAIN}</h6></td>
 	<!-- IF SIG_DISALLOWED -->
 	<td class="tCenter">{L_SIGNATURE_DISABLE}</td>
 	<!-- ELSE -->
@@ -181,53 +196,60 @@ ajax.callback.posts = function(data){
 </tr>
 
 <tr>
-	<td>{L_PUBLIC_VIEW_EMAIL}:</td>
+	<td class="prof-title">{L_PUBLIC_VIEW_EMAIL}:</td>
 	<td>
-		<label><input type="radio" name="viewemail" value="1" <!-- IF VIEWEMAIL -->checked="checked"<!-- ENDIF --> />{L_YES}</label>&nbsp;&nbsp;
-		<label><input type="radio" name="viewemail" value="0" <!-- IF not VIEWEMAIL -->checked="checked"<!-- ENDIF --> />{L_NO}</label>
+		<label><input type="radio" name="user_viewemail" value="1" <!-- IF USER_VIEWEMAIL -->checked="checked"<!-- ENDIF --> />{L_YES}</label>&nbsp;&nbsp;
+		<label><input type="radio" name="user_viewemail" value="0" <!-- IF not USER_VIEWEMAIL -->checked="checked"<!-- ENDIF --> />{L_NO}</label>
 	</td>
 </tr>
 <tr>
-	<td>{L_HIDE_USER}:</td>
+	<td class="prof-title">{L_HIDE_USER}:</td>
 	<td>
-		<label><input type="radio" name="allow_viewonline" value="1" <!-- IF ALLOW_VIEWONLINE -->checked="checked"<!-- ENDIF --> />{L_YES}</label>&nbsp;&nbsp;
-		<label><input type="radio" name="allow_viewonline" value="0" <!-- IF not ALLOW_VIEWONLINE -->checked="checked"<!-- ENDIF --> />{L_NO}</label>
+		<label><input type="radio" name="user_viewonline" value="1" <!-- IF USER_VIEWONLINE -->checked="checked"<!-- ENDIF --> />{L_YES}</label>&nbsp;&nbsp;
+		<label><input type="radio" name="user_viewonline" value="0" <!-- IF not USER_VIEWONLINE -->checked="checked"<!-- ENDIF --> />{L_NO}</label>
 	</td>
 </tr>
 <tr>
-	<td>{L_DENY_VISITORS}:</td>
+	<td class="prof-title">{L_DENY_VISITORS}:</td>
 	<td>
-		<label><input type="radio" name="allow_dls" value="0" <!-- IF not ALLOW_DLS -->checked="checked"<!-- ENDIF --> />{L_YES}</label>&nbsp;&nbsp;
-		<label><input type="radio" name="allow_dls" value="1" <!-- IF ALLOW_DLS -->checked="checked"<!-- ENDIF --> />{L_NO}</label>
+		<label><input type="radio" name="user_dls" value="1" <!-- IF USER_DLS -->checked="checked"<!-- ENDIF --> />{L_YES}</label>&nbsp;&nbsp;
+		<label><input type="radio" name="user_dls" value="0" <!-- IF not USER_DLS -->checked="checked"<!-- ENDIF --> />{L_NO}</label>
 	</td>
 </tr>
 <tr>
-	<td>{L_ALWAYS_NOTIFY}:<h6>{L_ALWAYS_NOTIFY_EXPLAIN}</h6></td>
+	<td class="prof-title">{L_ALWAYS_NOTIFY}:<h6>{L_ALWAYS_NOTIFY_EXPLAIN}</h6></td>
 	<td>
-		<label><input type="radio" name="notify" value="1" <!-- IF NOTIFY -->checked="checked"<!-- ENDIF --> />{L_YES}</label>&nbsp;&nbsp;
-		<label><input type="radio" name="notify" value="0" <!-- IF not NOTIFY -->checked="checked"<!-- ENDIF --> />{L_NO}</label>
+		<label><input type="radio" name="user_notify" value="1" <!-- IF USER_NOTIFY -->checked="checked"<!-- ENDIF --> />{L_YES}</label>&nbsp;&nbsp;
+		<label><input type="radio" name="user_notify" value="0" <!-- IF not USER_NOTIFY -->checked="checked"<!-- ENDIF --> />{L_NO}</label>
 	</td>
 </tr>
 
 <!-- IF $bb_cfg['pm_notify_enabled'] -->
 <tr>
-	<td>{L_NOTIFY_ON_PRIVMSG}:</td>
+	<td class="prof-title">{L_NOTIFY_ON_PRIVMSG}:</td>
 	<td>
-		<label><input type="radio" name="notify_pm" value="1" <!-- IF NOTIFY_PM -->checked="checked"<!-- ENDIF --> />{L_YES}</label>&nbsp;&nbsp;
-		<label><input type="radio" name="notify_pm" value="0" <!-- IF not NOTIFY_PM -->checked="checked"<!-- ENDIF --> />{L_NO}</label>
+		<label><input type="radio" name="user_notify_pm" value="1" <!-- IF USER_NOTIFY_PM -->checked="checked"<!-- ENDIF --> />{L_YES}</label>&nbsp;&nbsp;
+		<label><input type="radio" name="user_notify_pm" value="0" <!-- IF not USER_NOTIFY_PM -->checked="checked"<!-- ENDIF --> />{L_NO}</label>
 	</td>
 </tr>
 <!-- ENDIF -->
 <tr>
-	<td>{L_HIDE_PORN_FORUMS}:</td>
+	<td class="prof-title">{L_CALLSEED}:<h6>{L_CALLSEED_EXPLAIN}</h6></td>
 	<td>
-		<label><input type="radio" name="hide_porn_forums" value="1" <!-- IF HIDE_PORN_FORUMS -->checked="checked"<!-- ENDIF --> />{L_YES}</label>&nbsp;&nbsp;
-		<label><input type="radio" name="hide_porn_forums" value="0" <!-- IF not HIDE_PORN_FORUMS -->checked="checked"<!-- ENDIF --> />{L_NO}</label>
+		<label><input type="radio" name="user_callseed" value="1" <!-- IF USER_CALLSEED -->checked="checked"<!-- ENDIF --> />{L_YES}</label>&nbsp;&nbsp;
+		<label><input type="radio" name="user_callseed" value="0" <!-- IF not USER_CALLSEED -->checked="checked"<!-- ENDIF --> />{L_NO}</label>
+	</td>
+</tr>
+<tr>
+	<td class="prof-title">{L_HIDE_PORN_FORUMS}:</td>
+	<td>
+		<label><input type="radio" name="user_porn_forums" value="1" <!-- IF USER_PORN_FORUMS -->checked="checked"<!-- ENDIF --> />{L_YES}</label>&nbsp;&nbsp;
+		<label><input type="radio" name="user_porn_forums" value="0" <!-- IF not USER_PORN_FORUMS -->checked="checked"<!-- ENDIF --> />{L_NO}</label>
 	</td>
 </tr>
 <!-- IF SHOW_DATEFORMAT -->
 <tr>
-	<td>{L_DATE_FORMAT}:<h6>{L_DATE_FORMAT_EXPLAIN}</h6></td>
+	<td class="prof-title">{L_DATE_FORMAT}:<h6>{L_DATE_FORMAT_EXPLAIN}</h6></td>
 	<td><input type="text" name="dateformat" value="{DATE_FORMAT}" maxlength="14" /></td>
 </tr>
 <!-- ENDIF -->
@@ -241,27 +263,30 @@ ajax.callback.posts = function(data){
 <!-- ELSE -->
 <tr>
 	<td colspan="2">
-		<table class="borderless bCenter w80 med">
-			<tr>
-				<td>Небольшое изображение под информацией о вас в сообщениях. Ширина не более {$bb_cfg['avatars']['max_width']} пикселов, высота не более {$bb_cfg['avatars']['max_height']} пикселов и объемом не более {$bb_cfg['avatars']['max_size']} байт</td>
-				<td class="tCenter nowrap">
-					<p>{L_CURRENT_IMAGE}</p>
-					<p class="mrg_6"><!-- IF AVATAR_URL_PATH --><img src="{AVATARS_URL}/{AVATAR_URL_PATH}" alt="avatar" /><!-- ELSE -->--<!-- ENDIF --></p>
-					<p><label><input type="checkbox" name="delete_avatar" <!-- IF not AVATAR_URL_PATH -->disabled="disabled"<!-- ENDIF --> /> {L_DELETE_IMAGE}</label></p>
-				</td>
-			</tr>
+		<table class="borderless bCenter med" style="width: 600px;">
+		<col class="w60">
+		<col class="w40">
+		<tr>
+			<td>
+				Изображение под вашим именем в сообщениях<br />
+				Максимальные ШИРИНАхВЫСОТА {$bb_cfg['avatars']['max_width']}x{$bb_cfg['avatars']['max_height']} пикселов<br />
+				Максимальный объём {AVATARS_MAX_SIZE}<br />
+
+				<!-- IF $bb_cfg['avatars']['up_allowed'] -->
+				<div class="spacer_4"></div>
+				{L_UPLOAD_AVATAR_FILE}:
+				<input type="hidden" name="MAX_FILE_SIZE" value="{$bb_cfg['avatars']['max_size']}" />
+				<input type="file" name="avatar" />
+				<!-- ENDIF -->
+			</td>
+			<td class="tCenter nowrap">
+				<p class="mrg_6"><!-- IF AVATAR_URL_PATH --><img src="{AVATARS_URL}/{AVATAR_URL_PATH}" alt="avatar" /><!-- ELSE -->--<!-- ENDIF --></p>
+				<p><label><input type="checkbox" name="delete_avatar" <!-- IF not AVATAR_URL_PATH -->disabled="disabled"<!-- ENDIF --> /> {L_DELETE_IMAGE}</label></p>
+			</td>
+		</tr>
 		</table>
 	</td>
 </tr>
-<!-- IF $bb_cfg['avatars']['up_allowed'] -->
-<tr>
-	<td>{L_UPLOAD_AVATAR_FILE}:</td>
-	<td>
-		<input type="hidden" name="MAX_FILE_SIZE" value="{$bb_cfg['avatars']['max_size']}" />
-		<input type="file" name="avatar" size="40" />
-	</td>
-</tr>
-<!-- ENDIF -->
 <!-- ENDIF / !AVATAR_DISALLOWED -->
 <!-- ENDIF / EDIT_PROFILE -->
 

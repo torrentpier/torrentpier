@@ -117,7 +117,7 @@ class Template
 	 */
 	function Template($root = '.')
 	{
-		global $lang;
+		global $bb_cfg, $lang;
 
 		// setting pointer "vars"
 		$this->vars = &$this->_tpldata['.'][0];
@@ -126,6 +126,7 @@ class Template
 		$this->root = $root;
 		$this->tpl = basename($root);
 		$this->lang =& $lang;
+		$this->use_cache = $bb_cfg['xs_use_cache'];
 	}
 
 	/**

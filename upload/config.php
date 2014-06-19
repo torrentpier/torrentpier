@@ -55,8 +55,8 @@ $domain_name = (!empty($_SERVER['SERVER_NAME'])) ? $_SERVER['SERVER_NAME'] : $do
 
 // Increase number of revision after update
 $bb_cfg['tp_version'] = '2.6 (RC)';
-$bb_cfg['tp_release_date'] = '18-06-2014';
-$bb_cfg['tp_release_state'] = 'R588';
+$bb_cfg['tp_release_date'] = '19-06-2014';
+$bb_cfg['tp_release_state'] = 'R589';
 
 // Database
 $charset  = 'utf8';
@@ -111,7 +111,6 @@ $bb_cfg['cache']['engines'] = array(
 	'bb_login_err'   => array('filecache',   array()),
 	'bb_poll_data'   => array('filecache',   array()),
 );
-
 // Datastore
 // Available datastore types: memcache, sqlite, redis, eaccelerator, apc, xcache  (default filecache)
 $bb_cfg['datastore_type'] = 'filecache';
@@ -556,7 +555,7 @@ $bb_cfg['gen_forums_allowed_ext'] = array('zip', 'rar');            // для о
 $bb_cfg['avatars'] = array(
 	'allowed_ext' => array('gif','jpg','jpeg','png'), // разрешенные форматы файлов
 	'bot_avatar'  => 'gallery/bot.gif',               // аватара бота
-	'max_size'    => 512*1024,                        // размер аватары в байтах
+	'max_size'    => 50*1024,                         // размер аватары в байтах
 	'max_height'  => 100,                             // высота аватара в px
 	'max_width'   => 100,                             // ширина аватара в px
 	'no_avatar'   => 'gallery/noavatar.png',          // дефолтная аватара

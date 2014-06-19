@@ -13,23 +13,14 @@
 ************************************
 
 Устанавливаем права доступа на данные папки 777, на файлы внутри этих папок (кроме .htaccess) 666:
-- ajax
 - ajax/html
 - cache
 - cache/filecache
-- cache/filecache/bb_cache
-- cache/filecache/bb_cap_sid
-- cache/filecache/bb_login_err
-- cache/filecache/bb_poll_data
-- cache/filecache/datastore
-- cache/filecache/session_cache
-- cache/filecache/tr_cache
 - files
 - files/thumbs
 - images
 - images/avatars
 - images/captcha
-- images/logo
 - images/ranks
 - images/smiles
 - log
@@ -47,7 +38,6 @@ magic_quotes_gpc = Off
 ************************************
 
 php5-tidy
-php5-sqlite
 
 ************************************
 ** Необходимый запуск cron.php    **

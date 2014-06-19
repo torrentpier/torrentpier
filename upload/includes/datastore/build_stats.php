@@ -38,52 +38,53 @@ if ($bb_cfg['tor_stats'])
 // gender stat
 if ($bb_cfg['gender'])
 {
-	$sql = DB()->fetch_rowset("SELECT user_gender FROM ". BB_USERS ." WHERE user_id NOT IN(". EXCLUDED_USERS_CSV .")");
-	$data['male'] = $data['female'] = $data['unselect'] = 0;
-
-	foreach ($sql as $row)
-	{
-		if($row['user_gender'] == MALE) $data['male']++;
-		if($row['user_gender'] == FEMALE) $data['female']++;
-		if(!$row['user_gender']) $data['unselect']++;
-	}
+	$male     = DB()->fetch_row("SELECT COUNT(user_id) AS male FROM ". BB_USERS ." WHERE user_gender = ". MALE ." AND user_id NOT IN(". EXCLUDED_USERS_CSV .")");
+	$female   = DB()->fetch_row("SELECT COUNT(user_id) AS female FROM ". BB_USERS ." WHERE user_gender = ". FEMALE ." AND user_id NOT IN(". EXCLUDED_USERS_CSV .")");
+	$unselect = DB()->fetch_row("SELECT COUNT(user_id) AS unselect FROM ". BB_USERS ." WHERE user_gender = 0 AND user_id NOT IN(". EXCLUDED_USERS_CSV .")");
+	
+	$data['male'] = $male['male'];
+	$data['female'] = $female['female'];
+	$data['unselect'] = $unselect['unselect'];
 }
 
 // birthday stat
 if ($bb_cfg['birthday_check_day'] && $bb_cfg['birthday_enabled'])
 {
-	$sql = DB()->fetch_rowset("SELECT user_id, username, user_birthday, user_rank FROM ". BB_USERS ." WHERE user_id NOT IN(". EXCLUDED_USERS_CSV .") AND user_birthday != '0000-00-00' AND user_active = 1 ORDER BY user_level DESC, username");
-	$this_year = bb_date(TIMENOW, 'Y', 'false');
-	$date_today = bb_date(TIMENOW, 'Ymd', 'false');
-	$date_forward = bb_date(TIMENOW + ($bb_cfg['birthday_check_day']*86400), 'Ymd', 'false');
+	$sql = DB()->fetch_rowset("SELECT user_id, username, user_rank , user_birthday
+		FROM ". BB_USERS ." 
+		WHERE user_id NOT IN(". EXCLUDED_USERS_CSV .") 
+			AND user_birthday IS not NULL 
+			AND user_active = 1 
+		ORDER BY user_level DESC, username
+	");
+
+	$date_today   = bb_date(TIMENOW, 'md', 'false');
+	$date_forward = bb_date(TIMENOW + ($bb_cfg['birthday_check_day']*86400), 'md', 'false');
 
 	$birthday_today_list = $birthday_week_list = array();
 
 	foreach ($sql as $row)
 	{
 		$user_birthday = date('md', strtotime($row['user_birthday']));
-		$user_birthday2 = $this_year . $user_birthday;
 
-		if ($user_birthday2 < $date_today) $user_birthday2 += 10000;
-
-		if ($user_birthday2 > $date_today  && $user_birthday2 <= $date_forward)
+		if ($user_birthday > $date_today  && $user_birthday <= $date_forward)
 		{
 			// user are having birthday within the next days
 			$birthday_week_list[] = array(
-				'user_id'   => $row['user_id'],
-				'username'  => $row['username'],
-				'user_rank' => $row['user_rank'],
-				'age'       => $row['user_birthday'],
+				'user_id'        => $row['user_id'],
+				'username'       => $row['username'],
+				'user_rank'      => $row['user_rank'],
+				'user_birthday'  => $row['user_birthday'],
 			);
 		}
-		elseif ($user_birthday2 == $date_today)
+		elseif ($user_birthday == $date_today)
 		{
 			//user have birthday today
 			$birthday_today_list[] = array(
-				'user_id'   => $row['user_id'],
-				'username'  => $row['username'],
-				'user_rank' => $row['user_rank'],
-				'age'       => $row['user_birthday'],
+				'user_id'         => $row['user_id'],
+				'username'        => $row['username'],
+				'user_rank'       => $row['user_rank'],
+				'user_birthday'   => $row['user_birthday'],
 			);
 		}
 	}

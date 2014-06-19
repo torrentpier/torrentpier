@@ -10,19 +10,12 @@ switch ($mode)
 {
 	case 'clear_cache':
 
-		$gc_cache = array(
-			'bb_cache',
-			'tr_cache',
-			'session_cache',
-			'bb_cap_sid',
-			'bb_login_err',
-			'bb_poll_data',
-		);
-
-		// foreach ($bb_cfg['cache']['engines'] as $cache_name => $cache_val)
-		foreach ($gc_cache as $cache_name)
+		foreach ($bb_cfg['cache']['engines'] as $cache_name => $cache_val)
 		{
-			CACHE($cache_name)->rm();
+			if (!in_array('db_sqlite', $cache_val))
+			{
+				CACHE($cache_name)->rm();
+			}
 		}
 
 		$this->response['cache_html'] = '<span class="seed bold">'. $lang['ALL_CACHE_CLEARED'] .'</span>';

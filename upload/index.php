@@ -106,11 +106,11 @@ $sql = "
 		t.topic_id AS last_topic_id, t.topic_title AS last_topic_title,
 		u.user_id AS last_post_user_id, u.user_rank AS last_post_user_rank,
 		IF(p.poster_id = $anon, p.post_username, u.username) AS last_post_username
-	FROM       ". BB_CATEGORIES ." c
-	INNER JOIN ". BB_FORUMS     ." f ON($forums_join_sql)
+	FROM         ". BB_CATEGORIES ." c
+	INNER JOIN   ". BB_FORUMS     ." f ON($forums_join_sql)
 	$join_p_type ". BB_POSTS      ." p ON($posts_join_sql)
 	$join_t_type ". BB_TOPICS     ." t ON($topics_join_sql)
-	 LEFT JOIN ". BB_USERS      ." u ON(u.user_id = p.poster_id)
+	LEFT JOIN    ". BB_USERS      ." u ON(u.user_id = p.poster_id)
 	ORDER BY c.cat_order, f.forum_order
 ";
 
@@ -168,8 +168,7 @@ if (!$cat_forums = CACHE('bb_cache')->get($cache_name))
 		$cat_forums[$cat_id]['f'][$forum_id] = $row;
 	}
 	CACHE('bb_cache')->set($cache_name, $cat_forums, 180);
-	unset($row);
-	unset($forums);
+	unset($row, $forums);
 	$datastore->rm('cat_forums');
 }
 
@@ -194,7 +193,7 @@ if (!empty($mod))
 	{
 		foreach ($group_ids as $group_id)
 		{
-			$moderators[$forum_id][] = '<a href="'. (GROUP_URL . $group_id) .'">'. $mod['name_groups'][$group_id] .'</a>';
+			$moderators[$forum_id][] = '<a href="'. GROUP_URL . $group_id .'">'. $mod['name_groups'][$group_id] .'</a>';
 		}
 	}
 }
@@ -202,44 +201,8 @@ if (!empty($mod))
 unset($mod);
 $datastore->rm('moderators');
 
-if (!$forums_count = count($cat_forums) AND $viewcat)
-{
-	redirect("index.php");
-}
-
-$template->assign_vars(array(
-	'SHOW_FORUMS'           => $forums_count,
-	'PAGE_TITLE'            => ($viewcat) ? $cat_title_html[$viewcat] : $lang['HOME'],
-	'NO_FORUMS_MSG'         => ($only_new) ? $lang['NO_NEW_POSTS'] : $lang['NO_FORUMS'],
-
-	'TOTAL_TOPICS'          => sprintf($lang['POSTED_TOPICS_TOTAL'], $stats['topiccount']),
-	'TOTAL_POSTS'           => sprintf($lang['POSTED_ARTICLES_TOTAL'], $stats['postcount']),
-	'TOTAL_USERS'           => sprintf($lang['REGISTERED_USERS_TOTAL'], $stats['usercount']),
-	'TOTAL_GENDER'          => ($bb_cfg['gender']) ? sprintf($lang['USERS_TOTAL_GENDER'], $stats['male'], $stats['female'], $stats['unselect']) : '',
-	'NEWEST_USER'           => sprintf($lang['NEWEST_USER'], profile_url($stats['newestuser'])),
-
-	// Tracker stats
-	'TORRENTS_STAT'         => ($bb_cfg['tor_stats']) ? sprintf($lang['TORRENTS_STAT'], $stats['torrentcount'], humn_size($stats['size'])) : '',
-	'PEERS_STAT'            => ($bb_cfg['tor_stats']) ? sprintf($lang['PEERS_STAT'], $stats['peers'], $stats['seeders'], $stats['leechers']) : '',
-	'SPEED_STAT'            => ($bb_cfg['tor_stats']) ? sprintf($lang['SPEED_STAT'], humn_size($stats['speed']) .'/s') : '',
-	'SHOW_MOD_INDEX'        => $bb_cfg['show_mod_index'],
-	'FORUM_IMG'             => $images['forum'],
-	'FORUM_NEW_IMG'         => $images['forum_new'],
-	'FORUM_LOCKED_IMG'      => $images['forum_locked'],
-
-	'SHOW_ONLY_NEW_MENU'    => true,
-	'ONLY_NEW_POSTS_ON'     => ($only_new == ONLY_NEW_POSTS),
-	'ONLY_NEW_TOPICS_ON'    => ($only_new == ONLY_NEW_TOPICS),
-
-	'U_SEARCH_NEW'          => "search.php?new=1",
-	'U_SEARCH_SELF_BY_MY'   => "search.php?uid={$userdata['user_id']}&amp;o=1",
-	'U_SEARCH_LATEST'       => "search.php?search_id=latest",
-	'U_SEARCH_UNANSWERED'   => "search.php?search_id=unanswered",
-
-	'SHOW_LAST_TOPIC'       => $show_last_topic,
-));
-
 // Build index page
+$forums_count = 0;
 foreach ($cat_forums as $cid => $c)
 {
 	$template->assign_block_vars('h_c', array(
@@ -252,7 +215,7 @@ foreach ($cat_forums as $cid => $c)
 		'H_C_AL_MESS'  => ($hide_cat_opt && !$showhide) ? true : false
 	));
 
-	if (!$showhide && isset($hide_cat_user[$cid]))
+	if (!$showhide && isset($hide_cat_user[$cid]) && !$viewcat)
 	{
 		continue;
 	}
@@ -260,7 +223,7 @@ foreach ($cat_forums as $cid => $c)
 	$template->assign_block_vars('c', array(
 		'CAT_ID'    => $cid,
 		'CAT_TITLE' => $cat_title_html[$cid],
-		'U_VIEWCAT' => "index.php?c=$cid",
+		'U_VIEWCAT' => CAT_URL . $cid,
 	));
 
 	foreach ($c['f'] as $fid => $f)
@@ -271,6 +234,7 @@ foreach ($cat_forums as $cid => $c)
 		}
 		$is_sf = $f['forum_parent'];
 
+		$forums_count++;
 		$new = is_unread($f['last_post_time'], $f['last_topic_id'], $f['forum_id']) ? '_new' : '';
 		$folder_image = ($is_sf) ? $images["icon_minipost{$new}"] : $images["forum{$new}"];
 
@@ -315,6 +279,38 @@ foreach ($cat_forums as $cid => $c)
 		}
 	}
 }
+
+$template->assign_vars(array(
+	'SHOW_FORUMS'           => $forums_count,
+	'PAGE_TITLE'            => ($viewcat) ? $cat_title_html[$viewcat] : $lang['HOME'],
+	'NO_FORUMS_MSG'         => ($only_new) ? $lang['NO_NEW_POSTS'] : $lang['NO_FORUMS'],
+
+	'TOTAL_TOPICS'          => sprintf($lang['POSTED_TOPICS_TOTAL'], $stats['topiccount']),
+	'TOTAL_POSTS'           => sprintf($lang['POSTED_ARTICLES_TOTAL'], $stats['postcount']),
+	'TOTAL_USERS'           => sprintf($lang['REGISTERED_USERS_TOTAL'], $stats['usercount']),
+	'TOTAL_GENDER'          => ($bb_cfg['gender']) ? sprintf($lang['USERS_TOTAL_GENDER'], $stats['male'], $stats['female'], $stats['unselect']) : '',
+	'NEWEST_USER'           => sprintf($lang['NEWEST_USER'], profile_url($stats['newestuser'])),
+
+	// Tracker stats
+	'TORRENTS_STAT'         => ($bb_cfg['tor_stats']) ? sprintf($lang['TORRENTS_STAT'], $stats['torrentcount'], humn_size($stats['size'])) : '',
+	'PEERS_STAT'            => ($bb_cfg['tor_stats']) ? sprintf($lang['PEERS_STAT'], $stats['peers'], $stats['seeders'], $stats['leechers']) : '',
+	'SPEED_STAT'            => ($bb_cfg['tor_stats']) ? sprintf($lang['SPEED_STAT'], humn_size($stats['speed']) .'/s') : '',
+	'SHOW_MOD_INDEX'        => $bb_cfg['show_mod_index'],
+	'FORUM_IMG'             => $images['forum'],
+	'FORUM_NEW_IMG'         => $images['forum_new'],
+	'FORUM_LOCKED_IMG'      => $images['forum_locked'],
+
+	'SHOW_ONLY_NEW_MENU'    => true,
+	'ONLY_NEW_POSTS_ON'     => ($only_new == ONLY_NEW_POSTS),
+	'ONLY_NEW_TOPICS_ON'    => ($only_new == ONLY_NEW_TOPICS),
+
+	'U_SEARCH_NEW'          => "search.php?new=1",
+	'U_SEARCH_SELF_BY_MY'   => "search.php?uid={$userdata['user_id']}&amp;o=1",
+	'U_SEARCH_LATEST'       => "search.php?search_id=latest",
+	'U_SEARCH_UNANSWERED'   => "search.php?search_id=unanswered",
+
+	'SHOW_LAST_TOPIC'       => $show_last_topic,
+));
 
 // Set tpl vars for bt_userdata
 if ($bb_cfg['bt_show_dl_stat_on_index'] && !IS_GUEST)
@@ -374,7 +370,7 @@ if ($bb_cfg['birthday_check_day'] && $bb_cfg['birthday_enabled'])
 {
 	$week_list = $today_list = array();
 	$week_all = $today_all = false;
-
+	
 	if ($stats['birthday_week_list'])
 	{
 		shuffle($stats['birthday_week_list']);
@@ -386,7 +382,7 @@ if ($bb_cfg['birthday_check_day'] && $bb_cfg['birthday_enabled'])
 				continue;
 			}
 
-			$week_list[] = profile_url($week) .' <span class="small">('. birthday_age($week['age']) .')</span>';
+			$week_list[] = profile_url($week) .' <span class="small">('. birthday_age($week['user_birthday']) .')</span>';
 		}
 		$week_all = ($week_all) ? '&nbsp;<a class="txtb" href="#" onclick="ajax.exec({action: \'index_data\', mode: \'birthday_week\'}); return false;" title="'. $lang['ALL'] .'">...</a>' : '';
 		$week_list = sprintf($lang['BIRTHDAY_WEEK'], $bb_cfg['birthday_check_day'], join(', ', $week_list)) . $week_all;
@@ -404,7 +400,7 @@ if ($bb_cfg['birthday_check_day'] && $bb_cfg['birthday_enabled'])
 				continue;
 			}
 
-			$today_list[] = profile_url($today) .' <span class="small">('. birthday_age($today['age']) .')</span>';
+			$today_list[] = profile_url($today) .' <span class="small">('. birthday_age($today['user_birthday']) .')</span>';
 		}
 		$today_all = ($today_all) ? '&nbsp;<a class="txtb" href="#" onclick="ajax.exec({action: \'index_data\', mode: \'birthday_today\'}); return false;" title="'. $lang['ALL'] .'">...</a>' : '';
 		$today_list = $lang['BIRTHDAY_TODAY'] . join(', ', $today_list) . $today_all;
@@ -420,9 +416,9 @@ if ($bb_cfg['birthday_check_day'] && $bb_cfg['birthday_enabled'])
 // Allow cron
 if (IS_AM)
 {
-	if (@file_exists(CRON_RUNNING))
+	if (file_exists(CRON_RUNNING))
 	{
-		if (@file_exists(CRON_ALLOWED))
+		if (file_exists(CRON_ALLOWED))
 		{
 			unlink (CRON_ALLOWED);
 		}

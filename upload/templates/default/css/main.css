@@ -79,7 +79,7 @@ body, th, td, font {
 			position: relative; width: 100%;
 		}
 		#page_content {
-			padding: 12px 4px 0; margin: 0 auto;
+			padding: 12px 10px 0; margin: 0 auto;
 			clear: both; position: relative;
 			}
 			#sidebar1 {}
@@ -412,7 +412,7 @@ table.forumline {
 .forumline th {
 	border: 1px solid #B7C0C5; border-width: 1px; border-top-color: #92A3A4;
 	padding: 6px 3px 4px; color: #000000; background-color: #CFD4D8;
-	font-size: 10px; text-transform: uppercase;
+	font-size: 9px !important; text-transform: uppercase;
 }
 .forumline td {
 	border: 1px solid #B7C0C5; border-width: 0 1px 1px;

@@ -121,7 +121,7 @@ $forum_topic_data =& $t_data;
 $topic_id = $t_data['topic_id'];
 $forum_id = $t_data['forum_id'];
 
-if($t_data['allow_porno_topic'] && bf($userdata['user_opt'], 'user_opt', 'hide_porn_forums')) bb_die($lang['ERROR_PORNO_FORUM']);
+if($t_data['allow_porno_topic'] && bf($userdata['user_opt'], 'user_opt', 'user_porn_forums')) bb_die($lang['ERROR_PORNO_FORUM']);
 
 if ($userdata['session_admin'] && !empty($_REQUEST['mod']))
 {
@@ -697,7 +697,7 @@ for($i = 0; $i < $total_posts; $i++)
 	$poster_avatar = '';
 	if ( !$user->opt_js['h_av'] && $poster_id != GUEST_UID )
 	{
-		$poster_avatar = get_avatar($postrow[$i]['user_id'], $postrow[$i]['avatar_ext_id'], !bf($postrow[$i]['user_opt'], 'user_opt', 'allow_avatar'));
+		$poster_avatar = get_avatar($postrow[$i]['user_id'], $postrow[$i]['avatar_ext_id'], !bf($postrow[$i]['user_opt'], 'user_opt', 'dis_avatar'));
 	}
 
 	$poster_rank = $rank_image = '';
@@ -736,7 +736,7 @@ for($i = 0; $i < $total_posts; $i++)
 
 	$user_sig = ($bb_cfg['allow_sig'] && !$user->opt_js['h_sig'] && $postrow[$i]['user_sig']) ? $postrow[$i]['user_sig'] : '';
 
-	if (bf($postrow[$i]['user_opt'], 'user_opt', 'allow_sig'))
+	if (bf($postrow[$i]['user_opt'], 'user_opt', 'dis_sig'))
 	{
 		$user_sig = $lang['SIGNATURE_DISABLE'];
 	}
@@ -918,7 +918,7 @@ if ($bb_cfg['show_quick_reply'])
 
 		if (!IS_GUEST)
 		{
-			$notify_user = bf($userdata['user_opt'], 'user_opt', 'notify');
+			$notify_user = bf($userdata['user_opt'], 'user_opt', 'user_notify');
 
 			$template->assign_vars(array(
 				'QR_NOTIFY_CHECKED'    => ($notify_user) ? $notify_user && $is_watching_topic : $is_watching_topic,

@@ -508,6 +508,7 @@ $lang['OUTBOX_EXPL'] = '';
 // Profiles/Registration
 //
 $lang['VIEWING_USER_PROFILE'] = 'Viewing profile :: %s';
+$lang['VIEWING_MY_PROFILE']   = 'My profile [ <a href="%s">Settings / Change profile</a> ]';
 
 $lang['DISABLED_USER'] = 'Account disabled';
 $lang['MANAGE_USER'] = 'Administration';
@@ -554,7 +555,7 @@ $lang['ALWAYS_NOTIFY_EXPLAIN'] = 'Sends an e-mail when someone replies to a topi
 $lang['BOARD_LANG'] = 'Board Language';
 $lang['GENDER'] = 'Gender';
 $lang['GENDER_SELECT'] = array(
-	0 => 'Unselect',
+	0 => 'Unknown',
 	1 => 'Male',
 	2 => 'Female'
 );
@@ -600,7 +601,7 @@ $lang['RESET_AUTOLOGIN_EXPL'] = '';
 
 $lang['AVATAR'] = 'Avatar';
 $lang['AVATAR_EXPLAIN'] = 'Displays a small graphic image below your details in posts. Only one image can be displayed at a time, its width can be no greater than %d pixels, the height no greater than %d pixels, and the file size no more than %d KB.';
-$lang['UPLOAD_AVATAR_FILE'] = 'Upload Avatar from your machine';
+$lang['UPLOAD_AVATAR_FILE'] = 'Upload Avatar';
 
 $lang['SELECT_AVATAR'] = 'Select avatar';
 $lang['RETURN_PROFILE'] = 'Return to profile';
@@ -1159,8 +1160,8 @@ $lang['SPEED_DOWN'] = 'Speed Down';
 $lang['SEEDERS'] = 'Seeders';
 $lang['LEECHERS'] = 'Leechers';
 $lang['RELEASING'] = 'Self';
-$lang['SEEDING'] = 'Seeding';
-$lang['LEECHING'] = 'Leeching';
+$lang['SEEDING'] = 'Seed';
+$lang['LEECHING'] = 'Leech';
 $lang['IS_REGISTERED'] = 'Registered';
 $lang['MAGNET'] = 'Magnet';
 
@@ -1315,9 +1316,7 @@ $lang['NOT_TORRENT'] = 'This file is not torrent';
 $lang['ONLY_1_TOR_PER_POST'] = 'You can register only one torrent in one post';
 $lang['ONLY_1_TOR_PER_TOPIC'] = 'You can register only one torrent in one topic';
 $lang['VIEWING_USER_BT_PROFILE'] = 'Viewing torrent-profile :: %s'; // %s is username
-$lang['CUR_ACTIVE_DLS'] = 'Currently active torrents';
-$lang['CUR_ACTIVE_DLS_ERROR'] = 'User does not download and seeding';
-$lang['CUR_ACTIVE_DLS_DISALLOWED'] = 'Browse the user denied active torrents';
+$lang['CUR_ACTIVE_DLS'] = 'Active torrents';
 
 $lang['TD_TRAF'] = 'Today';
 $lang['YS_TRAF'] = 'Yesterday';
@@ -1555,8 +1554,6 @@ $lang['NOTICE'] = '!ATTENTION!';
 $lang['POWERED'] = 'UG93ZXJlZCBieSA8YSB0YXJnZXQ9Il9ibGFuayIgaHJlZj0iaHR0cDovL3RvcnJlbnRwaWVyLm1lIj5Ub3JyZW50UGllciBJSTwvYT4gJmNvcHk7IE1laXRoYXIsIFRvcnJlbnRQaWVyIElJIFRlYW0=';
 $lang['COPY'] = 'The site does not give electronic versions of products, and is engaged only in a collecting and cataloguing of the references sent and published at a forum by our readers. If you are the legal owner of any submitted material and do not wish that the reference to him{it} was in our catalogue, contact us and we shall immediately remove her. Files for an exchange on tracker are given by users of a site, and the administration does not bear the responsibility for their maintenance. The request to not fill in the files protected by copyrights, and also files of the illegal maintenance!';
 
-$lang['CALLSEED'] = 'Downloaded the call';
-
 // FILELIST
 $lang['FILELIST'] = 'Filelist';
 $lang['COLLAPSE'] = 'Collapse directory';
@@ -1736,7 +1733,6 @@ $lang['INDEXER'] = "Reindex search";
 $lang['FORUM_STYLE'] = 'Forum style';
 
 $lang['LINKS_ARE_FORBIDDEN'] = 'Links are forbidden';
-$lang['YOU_ARE_BEING_CHEATED'] = 'Looks like you are being cheated<br />Site is opened in frame. The current address is';
 
 $lang['DONATION'] = 'Donation';
 
@@ -2861,18 +2857,13 @@ $lang['BOT_TOPIC_MOVED_FROM_TO'] = 'Topic has been moved from forum [b]%s[/b] to
 $lang['BOT_MESS_SPLITS'] = 'Topic has been split. New topic - [b]%s[/b][br][br]%s';
 $lang['BOT_TOPIC_SPLITS'] = 'Topic has been split from [b]%s[/b][br][br]%s';
 
-$lang['CALLSEED_SUBJ'] = 'Download help %s';
-$lang['CALLSEED_TEXT'] = 'Hello!<br><br>Your help is needed in the release <a href="viewtopic.php?t=%s" target=_blank>%s :: %s </a><br>If you decide to help, but already deleted the torrent file, you can download it <a href="download.php?id=%s">this</a><br><br>I hope for your help!';
-
-$lang['CALLSEED_MSG_OK']   = '<b>Message (PM) has been sent to all those who downloaded this release</b>';
-$lang['CALLSEED_MSG_SPAM'] = '<b><font color=red>Request has already been once successfully sent</b> (Probably not you)</font>
-			<br><br>The next opportunity to send a request to be <b>%s</b> hours<!-- <b>%s</b> minute -->. <br>
-			Call you can download it only once in <b>day</b>';
-$lang['CALLSEED_MSG_MSG']  = 'Error sending message';
-$lang['CALLSEED_MSG_MSG_TEXT']  = 'Error saving text messages';
-$lang['CALLSEED_MSG_POPUP']     = 'Error of popup';
-$lang['CALLSEED_MSG_TIME']      = 'Unable to set the last query';
-$lang['CALLSEED_HAVE_SEED']    = 'Topic does not require help (<b>Seeders:</b> %d, <b>Leechers:</b> %d)';
+$lang['CALLSEED'] = 'Downloaded the call';
+$lang['CALLSEED_EXPLAIN'] = 'Take notice with a request to return to the distribution?';
+$lang['CALLSEED_SUBJECT'] = 'Download help %s';
+$lang['CALLSEED_TEXT'] = 'Hello![br]Your help is needed in the release [url=%s]%s[/url][br]If you decide to help, but already deleted the torrent file, you can download it [url=%s]this[/url][br][br]I hope for your help!';
+$lang['CALLSEED_MSG_OK']   = 'Message has been sent to all those who downloaded this release';
+$lang['CALLSEED_MSG_SPAM'] = 'Request has already been once successfully sent (Probably not you)<br /><br />The next opportunity to send a request to be <b>%s</b>.';
+$lang['CALLSEED_HAVE_SEED']    = 'Topic does not require help (<b>Seeders:</b> %d)';
 
 $lang['LOG_ACTION']['LOG_TYPE'] = array(
 	'mod_topic_delete' => 'Topic:<br /> <b>deleted</b>',

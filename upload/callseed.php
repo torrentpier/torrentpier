@@ -8,134 +8,87 @@ require(BB_ROOT . 'common.php');
 // Init userdata
 $user->session_start(array('req_login' => true));
 
-set_die_append_msg();
-
-require(INC_DIR .'bbcode.php');
-
-function topic_info($topic_id)
-{
-	$sql = "  SELECT tor.poster_id, tor.forum_id, tor.attach_id, t.topic_title, f.forum_name
-				FROM ". BB_BT_TORRENTS ." tor , ". BB_TOPICS ." t, ". BB_FORUMS ." f
-				WHERE tor.topic_id = $topic_id
-					AND t.topic_id = tor.topic_id
-					AND f.forum_id = tor.forum_id
-				LIMIT 1";
-	$row = DB()->fetch_row($sql);
-
-	$t = array(
-		"topic_title"  => $row['topic_title'],
-		"forum_title"  => $row['forum_name'],
-		"attach_id"    => $row['attach_id'],
-		"topic_poster" => $row['poster_id'],
-		"forum_id"     => $row['forum_id'],
-	);
-
-	return $t;
-}
-
-function call_seed($topic_id, $t_info, $to_user_id)
-{
-	global $userdata, $lang, $msg_error;
-
-	$sql = "UPDATE ". BB_BT_TORRENTS ." SET call_seed_time=". TIMENOW ." WHERE topic_id = $topic_id";
-	if (!DB()->sql_query($sql)) {
-		$msg_error = "TIME";
-		return;
-	}
-
-	$subj = sprintf ($lang['CALLSEED_SUBJ'], $t_info['topic_title']);
-	$text = sprintf ($lang['CALLSEED_TEXT'], $topic_id, $t_info['forum_title'], $t_info['topic_title'], $t_info['attach_id']);
-	$subj = DB()->escape($subj);
-	$text = DB()->escape($text);
-
-	send_pm($to_user_id, $subj, $text, $userdata['user_id']);
-}
-
-	$u_id = array();
-	$topic_id = request_var('t', 0);
-	$t_info = topic_info($topic_id);
-	$forum_id = $t_info['forum_id'];
-	$msg_error = "OK";
-
-	$sql = "SELECT call_seed_time FROM ". BB_BT_TORRENTS ." WHERE topic_id = $topic_id LIMIT 1";
-	if($row = DB()->fetch_row($sql))
-	{
-		$pr_time = $row['call_seed_time'];
-		$pause = 86400; //1 day
-		$cp = TIMENOW - $pr_time;
-		$pcp = $pause - $cp;
-		if($cp <= $pause)
-		{
-			$cur_pause_hour = floor($pcp/3600);
-			$cur_pause_min = floor($pcp/60);
-			$msg_error = "SPAM";
-		}
-	}
-	else
-	{
-		message_die(GENERAL_ERROR, 'Topic does not callseed time', '', __LINE__, __FILE__);
-	}
-
-	// check have_seed
-	if ($msg_error == "OK")
-	{
-		$sql = "SELECT seeders, leechers FROM ". BB_BT_TRACKER_SNAP ." WHERE topic_id = $topic_id LIMIT 1";
-		$row = DB()->fetch_row($sql);
-		if ($row['seeders'] <= 2)
-		{
-			$sql = "SELECT user_id FROM ". BB_BT_DLSTATUS ." WHERE topic_id = $topic_id AND user_id NOT IN ({$userdata['user_id']}, ". EXCLUDED_USERS_CSV .")";
-
-			foreach(DB()->fetch_rowset($sql) as $row)
-			{
-				$u_id[] = $row['user_id'];
-			}
-			if (!in_array($t_info['topic_poster'], $u_id))
-			{
-				$u_id[] = $t_info['topic_poster'];
-			}
-			array_unique($u_id);
-
-			foreach($u_id as $i=>$user_id)
-			{
-				if ($msg_error != "OK") break;
-
-				call_seed($topic_id, $t_info, $user_id);
-			}
-		}
-		else
-		{
-			$seeders = $row['seeders'];
-			$leechers = $row['leechers'];
-			$msg_error = "HAVE_SEED";
-		}
-	}
-
-	$msg = '';
-	meta_refresh(TOPIC_URL . $topic_id, 8);
-
-	switch($msg_error) {
-		case "OK":
-			$msg .= $lang['CALLSEED_MSG_OK'];
-			break;
-		case "SPAM":
-			$msg .= sprintf ($lang['CALLSEED_MSG_SPAM'], $cur_pause_hour, $cur_pause_min);
-			break;
-		case "MSG":
-			$msg .= $lang['CALLSEED_MSG_MSG'];
-			break;
-		case "MSG_TEXT":
-			$msg .= $lang['CALLSEED_MSG_MSG_TEXT'];
-			break;
-		case "POPUP":
-			$msg .= $lang['CALLSEED_MSG_POPUP'];
-			break;
-		case "TIME":
-			$msg .= $lang['CALLSEED_MSG_TIME'];
-			break;
-		case "HAVE_SEED":
-			$msg .= sprintf ($lang['CALLSEED_HAVE_SEED'], $seeders, $leechers);
-			break;
-	}
+$topic_id = (int) request_var('t', 0);
+$t_data   = topic_info($topic_id);
+$forum_id = $t_data['forum_id'];
 
 set_die_append_msg($forum_id, $topic_id);
-bb_die($msg);
+
+if ($t_data['seeders'] > 2)
+{
+	bb_die(sprintf($lang['CALLSEED_HAVE_SEED'], $t_data['seeders']));
+}
+elseif ($t_data['call_seed_time'] > (TIMENOW - 86400))
+{
+	$time_left = delta_time($t_data['call_seed_time'] + 86400, TIMENOW, 'days');
+	bb_die(sprintf($lang['CALLSEED_MSG_SPAM'], $time_left));
+}
+
+$ban_user_id = array();
+
+$sql = DB()->fetch_rowset("SELECT ban_userid FROM ". BB_BANLIST ." WHERE ban_userid != 0");
+
+foreach ($sql as $row)
+{
+	$ban_user_id[] = ','. $row['ban_userid'];
+}
+$ban_user_id = join('', $ban_user_id);
+
+$user_list = DB()->fetch_rowset("
+	SELECT DISTINCT dl.user_id, u.user_opt, tr.user_id as active_dl
+	FROM ". BB_BT_DLSTATUS     ." dl
+	LEFT JOIN ". BB_USERS      ." u  ON(u.user_id = dl.user_id)
+	LEFT JOIN ". BB_BT_TRACKER ." tr ON(tr.user_id = dl.user_id)
+	WHERE dl.topic_id = $topic_id
+		AND dl.user_status IN (". DL_STATUS_COMPLETE.", ". DL_STATUS_DOWN.")
+		AND dl.user_id NOT IN ({$userdata['user_id']}, ". EXCLUDED_USERS_CSV . $ban_user_id .")
+		AND u.user_active = 1
+	GROUP BY dl.user_id
+");
+
+$subject = sprintf($lang['CALLSEED_SUBJECT'], $t_data['topic_title']);
+$message = sprintf($lang['CALLSEED_TEXT'], make_url(TOPIC_URL . $topic_id), $t_data['topic_title'], make_url(DOWNLOAD_URL . $t_data['attach_id']));
+
+if ($user_list)
+{
+	foreach ($user_list as $row)
+	{
+		if (!empty($row['active_dl'])) continue;
+
+		if (bf($row['user_opt'], 'user_opt', 'user_callseed'))
+		{
+			send_pm($row['user_id'], $subject, $message, BOT_UID);
+		}
+	}
+}
+else
+{
+	send_pm($t_data['poster_id'], $subject, $message, BOT_UID);
+}
+
+DB()->query("UPDATE ". BB_BT_TORRENTS ." SET call_seed_time = ". TIMENOW ." WHERE topic_id = $topic_id LIMIT 1");
+
+meta_refresh(TOPIC_URL . $topic_id);
+bb_die($lang['CALLSEED_MSG_OK']);
+
+function topic_info ($topic_id)
+{
+	global $lang;
+
+	$sql = "
+		SELECT
+			tor.poster_id, tor.forum_id, tor.attach_id, tor.call_seed_time,
+			t.topic_title, sn.seeders
+		FROM      ". BB_BT_TORRENTS     ." tor
+		LEFT JOIN ". BB_TOPICS          ." t  USING(topic_id)
+		LEFT JOIN ". BB_BT_TRACKER_SNAP ." sn USING(topic_id)
+		WHERE tor.topic_id = $topic_id
+	";
+
+	if (!$torrent = DB()->fetch_row($sql))
+	{
+		message_die(GENERAL_ERROR, $lang['TOPIC_POST_NOT_EXIST']);
+	}
+
+	return $torrent;
+}

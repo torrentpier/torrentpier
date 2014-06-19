@@ -46,13 +46,12 @@
 
 <div id="forums_wrap">
 
-<!-- IF SHOW_FORUMS -->
-
 <!-- IF H_C_AL_MESS -->
 <div class="row1 med tCenter pad_4 border bw_TRBL" style="margin: 4px 0;">{L_HIDE_CAT_MESS}</div>
-<div class="spacer_6"></div>
+<div class="spacer_2"></div>
 <!-- ENDIF -->
 
+<!-- IF SHOW_FORUMS -->
 <!-- BEGIN c -->
 <div class="category">
 	<h3 class="cat_title"><a href="{c.U_VIEWCAT}">{c.CAT_TITLE}</a></h3>
@@ -142,7 +141,7 @@
 <table class="forumline">
 	<tr><td class="row1 tCenter pad_8">{NO_FORUMS_MSG}</td></tr>
 </table>
-<div class="spacer_10"></div>
+<div class="spacer_6"></div>
 
 <!-- ENDIF -->
 

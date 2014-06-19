@@ -49,7 +49,7 @@ switch ($mode)
 {
 	case 'newtopic':
 	case 'new_rel':
-		if (bf($userdata['user_opt'], 'user_opt', 'allow_topic'))
+		if (bf($userdata['user_opt'], 'user_opt', 'dis_topic'))
 		{
 			bb_die($lang['RULES_POST_CANNOT']);
 		}
@@ -69,7 +69,7 @@ switch ($mode)
 
 	case 'reply':
 	case 'quote':
-		if (bf($userdata['user_opt'], 'user_opt', 'allow_post'))
+		if (bf($userdata['user_opt'], 'user_opt', 'dis_post'))
 		{
 			bb_die($lang['RULES_REPLY_CANNOT']);
 		}
@@ -77,7 +77,7 @@ switch ($mode)
 	break;
 
 	case 'editpost':
-		if (bf($userdata['user_opt'], 'user_opt', 'allow_post_edit'))
+		if (bf($userdata['user_opt'], 'user_opt', 'dis_post_edit'))
 		{
 			bb_die($lang['RULES_EDIT_CANNOT']);
 		}
@@ -270,7 +270,7 @@ if ($submit || $refresh)
 }
 else
 {
-	$notify_user = bf($userdata['user_opt'], 'user_opt', 'notify');
+	$notify_user = bf($userdata['user_opt'], 'user_opt', 'user_notify');
 
 	if (!IS_GUEST && $mode != 'newtopic' && !$notify_user)
 	{

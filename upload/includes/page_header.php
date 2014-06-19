@@ -170,7 +170,7 @@ $template->assign_vars(array(
 	'SHOW_ADS'           => (!$logged_in || isset($bb_cfg['show_ads_users'][$user->id]) || (!IS_AM && $user->show_ads)),
 	'USER_HIDE_CAT'      => (BB_SCRIPT == 'index'),
 
-	'USER_RUS'           => ($userdata['user_lang'] != 'english') ? true : false,
+	'USER_LANG'           => $userdata['user_lang'],
 
 	'INCLUDE_BBCODE_JS'  => !empty($page_cfg['include_bbcode_js']),
 	'USER_OPTIONS_JS'    => (IS_GUEST) ? '{}' : bb_json_encode($user->opt_js),
@@ -206,8 +206,8 @@ $template->assign_vars(array(
 	'SESSION_USER_ID'    => $userdata['user_id'],
 	'POINTS'             => $userdata['user_points'],
 	'THIS_USER'          => profile_url($userdata),
-	'THIS_AVATAR'        => get_avatar($userdata['user_id'], $userdata['avatar_ext_id'], !bf($userdata['user_opt'], 'user_opt', 'allow_avatar')),
-	'AVATAR_DISALLOWED'  => bf($userdata['user_opt'], 'user_opt', 'allow_avatar'),
+	'THIS_AVATAR'        => get_avatar($userdata['user_id'], $userdata['avatar_ext_id'], !bf($userdata['user_opt'], 'user_opt', 'dis_avatar')),
+	'AVATAR_DISALLOWED'  => bf($userdata['user_opt'], 'user_opt', 'dis_avatar'),
 	'SHOW_LOGIN_LINK'    => !defined('IN_LOGIN'),
 	'AUTOLOGIN_DISABLED' => !$bb_cfg['allow_autologin'],
 	'S_LOGIN_ACTION'     => LOGIN_URL,

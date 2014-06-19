@@ -396,7 +396,7 @@ function send_torrent_with_passkey ($filename)
 		message_die(GENERAL_ERROR, $lang['PASSKEY_ERR_TOR_NOT_REG']);
 	}
 
-	if (bf($userdata['user_opt'], 'user_opt', 'allow_passkey') && !IS_GUEST)
+	if (bf($userdata['user_opt'], 'user_opt', 'dis_passkey') && !IS_GUEST)
 	{
 		message_die(GENERAL_ERROR, 'Could not add passkey');
 	}
@@ -511,7 +511,7 @@ function generate_passkey ($user_id, $force_generate = false)
 		}
 		if ($row = DB()->sql_fetchrow($result))
 		{
-			if (bf($row['user_opt'], 'user_opt', 'allow_passkey'))
+			if (bf($row['user_opt'], 'user_opt', 'dis_passkey'))
 			{
 				message_die(GENERAL_MESSAGE, $lang['NOT_AUTHORISED']);
 			}

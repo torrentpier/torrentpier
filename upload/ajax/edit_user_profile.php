@@ -57,43 +57,28 @@ switch ($field)
 
 	case 'user_birthday':
 		if (!$bb_cfg['birthday_enabled']) $this->ajax_die($lang['MODULE_OFF']);
-		$data = explode('-', $value);
-		$b_day  = (isset($data[2])) ? (int) $data[2] : '';
-		$b_md   = (isset($data[1])) ? (int) $data[1] : '';
-		$b_year = (isset($data[0])) ? (int) $data[0] : '';
+		$birthday_date = date_parse($value);
 
-		if ($b_day || $b_md || $b_year)
+		if (!empty($birthday_date['year']))
 		{
-			if ((bb_date(TIMENOW, 'Y', 'false') - $b_year) > $bb_cfg['birthday_max_age'])
-			{
-				$this->ajax_die(sprintf($lang['BIRTHDAY_TO_HIGH'], $bb_cfg['birthday_max_age']));
-			}
-			elseif ((bb_date(TIMENOW, 'Y', 'false') - $b_year) < $bb_cfg['birthday_min_age'])
-			{
-				$this->ajax_die(sprintf($lang['BIRTHDAY_TO_LOW'], $bb_cfg['birthday_min_age']));
-			}
-			if (!checkdate($b_md, $b_day, $b_year))
+			if (strtotime($value) >= TIMENOW)
 			{
 				$this->ajax_die($lang['WRONG_BIRTHDAY_FORMAT']);
 			}
-			else
+			elseif (bb_date(TIMENOW, 'Y', 'false') - $birthday_date['year'] > $bb_cfg['birthday_max_age'])
 			{
-				$value = "$b_year-$b_md-$b_day";
-				$next_birthday_greeting = (date('md') < $b_md . (($b_day <= 9) ? '0' : '') . $b_day) ? date('Y') : date('Y')+1;
+				$this->ajax_die(sprintf($lang['BIRTHDAY_TO_HIGH'], $bb_cfg['birthday_max_age']));
+			}
+			elseif (bb_date(TIMENOW, 'Y', 'false') - $birthday_date['year'] < $bb_cfg['birthday_min_age'])
+			{
+				$this->ajax_die(sprintf($lang['BIRTHDAY_TO_LOW'], $bb_cfg['birthday_min_age']));
 			}
 		}
-		else
-		{
-			$value = '';
-			$next_birthday_greeting = 0;
-		}
-		DB()->query("UPDATE $table SET user_next_birthday_greeting = $next_birthday_greeting WHERE user_id = $user_id LIMIT 1");
 
-		$this->response['new_value']  = $this->request['value'];
+		$this->response['new_value'] = $this->request['value'];
 		break;
 
 	case 'user_icq':
-		$value = (int) $value;
 		if ($value && !preg_match('#^\d{6,15}$#', $value))
 		{
 			$this->ajax_die($lang['ICQ_ERROR']);
@@ -131,7 +116,7 @@ switch ($field)
 		{
 			$this->ajax_die($lang['INVALID_DATE'] . $this->request['value']);
 		}
-		$this->response['new_value'] = bb_date($value);
+		$this->response['new_value'] = bb_date($value, 'Y-m-d H:i', 'false');
 		break;
 
 	case 'u_up_total':

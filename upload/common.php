@@ -14,6 +14,8 @@ if (empty($_SERVER['SERVER_NAME']))     $_SERVER['SERVER_NAME'] = '';
 if (!defined('BB_ROOT')) define('BB_ROOT', './');
 if (!defined('IN_FORUM') && !defined('IN_TRACKER')) define('IN_FORUM', true);
 
+header('X-Frame-Options: SAMEORIGIN');
+
 // Get initial config
 require(BB_ROOT .'config.php');
 

@@ -194,25 +194,25 @@ elseif (isset($_GET['pane']) && $_GET['pane'] == 'right')
 
 		if( count($onlinerow_reg) )
 		{
-			$registered_users = 0;
+			$registered_users = $hidden_users = 0;
 
 			for($i=0, $cnt=count($onlinerow_reg); $i < $cnt; $i++)
 			{
-				if( !inarray($onlinerow_reg[$i]['user_id'], $reg_userid_ary) )
+				if (!in_array($onlinerow_reg[$i]['user_id'], $reg_userid_ary))
 				{
 					$reg_userid_ary[] = $onlinerow_reg[$i]['user_id'];
 
 					$username = $onlinerow_reg[$i]['username'];
 
-					if( !bf($onlinerow_reg[$i]['user_opt'], 'user_opt', 'allow_viewonline'))
+					if (bf($onlinerow_reg[$i]['user_opt'], 'user_opt', 'user_viewonline'))
 					{
-						$registered_users++;
-						$hidden = FALSE;
+						$hidden_users++;
+						$hidden = TRUE;
 					}
 					else
 					{
-						@$hidden_users++;
-						$hidden = TRUE;
+						$registered_users++;
+						$hidden = FALSE;
 					}
 
 					$row_class = 'row1';

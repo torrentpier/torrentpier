@@ -219,7 +219,7 @@ if ($tor_reged && $tor_info)
 			'TOR_FROZEN'      => (!IS_AM) ? (isset($bb_cfg['tor_frozen'][$tor_info['tor_status']]) && !(isset($bb_cfg['tor_frozen_author_download'][$tor_info['tor_status']]) && $userdata['user_id'] == $tor_info['poster_id'])) ? true : '' : '',
 			'TOR_STATUS_TEXT' => $lang['TOR_STATUS_NAME'][$tor_info['tor_status']],
 			'TOR_STATUS_ICON' => $bb_cfg['tor_icons'][$tor_info['tor_status']],
-			'TOR_STATUS_BY'   => ($tor_info['checked_user_id'] && $is_auth['auth_mod']) ? ('<span title="'. bb_date($tor_info['checked_time'], 'd-M-Y H:i') .'"> &middot; '. profile_url($tor_info) .' &middot; <i>'. delta_time($tor_info['checked_time']) . $lang['TOR_BACK'] .'</i></span>') : '',
+			'TOR_STATUS_BY'   => ($tor_info['checked_user_id'] && $is_auth['auth_mod']) ? ('<span title="'. bb_date($tor_info['checked_time']) .'"> &middot; '. profile_url($tor_info) .' &middot; <i>'. delta_time($tor_info['checked_time']) . $lang['TOR_BACK'] .'</i></span>') : '',
 			'TOR_STATUS_SELECT' => build_select('sel_status', array_flip($lang['TOR_STATUS_NAME']), TOR_APPROVED),
 			'TOR_STATUS_REPLY' => $bb_cfg['tor_comment'] && !IS_GUEST && in_array($tor_info['tor_status'], $bb_cfg['tor_reply']) && $userdata['user_id'] == $tor_info['poster_id'] && $t_data['topic_status'] != TOPIC_LOCKED,
 			//end torrent status mod
@@ -599,5 +599,5 @@ $template->assign_vars(array(
 	'SEED_EXIST'        => ($seeders || defined('SEEDER_EXIST')),
 	'LEECH_EXIST'       => ($leechers || defined('LEECHER_EXIST')),
 	'TOR_HELP_LINKS'    => $bb_cfg['tor_help_links'],
-	'CALL_SEED'         => ($bb_cfg['callseed'] && $tor_reged && !isset($bb_cfg['tor_no_tor_act'][$tor_info['tor_status']])),
+	'CALL_SEED'         => ($bb_cfg['callseed'] && $tor_reged && !isset($bb_cfg['tor_no_tor_act'][$tor_info['tor_status']]) && $seed_count < 3 && $tor_info['call_seed_time'] < (TIMENOW - 86400)),
 ));

@@ -87,7 +87,6 @@ class ajax_common
 		'gen_passkey'       => array('user'),
 		'change_torrent'    => array('user'),
 		'change_tor_status' => array('user'),
-		'view_profile'      => array('user'),
 
 		'view_post'         => array('guest'),
 		'view_torrent'      => array('guest'),
@@ -394,11 +393,6 @@ class ajax_common
 	function index_data()
 	{
 		require(AJAX_DIR . 'index_data.php');
-	}
-
-	function view_profile()
-	{
-		require(AJAX_DIR . 'view_profile.php');
 	}
 
 	function avatar()

@@ -991,7 +991,7 @@ else if ( $submit || $refresh || $mode != '' )
 		//
 		// Has admin prevented user from sending PM's?
 		//
-		if ( bf($userdata['user_opt'], 'user_opt', 'allow_pm') )
+		if (bf($userdata['user_opt'], 'user_opt', 'dis_pm'))
 		{
 			bb_die($lang['CANNOT_SEND_PRIVMSG']);
 		}
@@ -1101,7 +1101,7 @@ else if ( $submit || $refresh || $mode != '' )
 
 			cache_rm_user_sessions ($to_userdata['user_id']);
 
-			if ( bf($to_userdata['user_opt'], 'user_opt', 'notify_pm') && !empty($to_userdata['user_email']) && $to_userdata['user_active'] && $bb_cfg['pm_notify_enabled'] )
+			if (bf($to_userdata['user_opt'], 'user_opt', 'user_notify_pm') && $to_userdata['user_active'] && $bb_cfg['pm_notify_enabled'])
 			{
 				require(INC_DIR .'emailer.class.php');
 				$emailer = new emailer($bb_cfg['smtp_delivery']);
@@ -1116,7 +1116,7 @@ else if ( $submit || $refresh || $mode != '' )
 					'NAME_FROM'   => $userdata['username'],
 					'MSG_SUBJECT' => html_entity_decode($privmsg_subject),
 					'SITENAME'    => $bb_cfg['sitename'],
-					'U_INBOX'     => make_url(PM_URL . "?folder=inbox&mode=read&p=". $privmsg_sent_id),
+					'U_INBOX'     => make_url(PM_URL ."?folder=inbox&mode=read&p=$privmsg_sent_id"),
 				));
 
 				$emailer->send();
@@ -1136,7 +1136,7 @@ else if ( $submit || $refresh || $mode != '' )
 		$to_username = (isset($_POST['username']) ) ? clean_username($_POST['username']) : '';
 
 		$privmsg_subject = ( isset($_POST['subject']) ) ? clean_title($_POST['subject']) : '';
-		$privmsg_message = ( isset($_POST['message']) ) ? trim($_POST['message']) : '';
+		$privmsg_message = ( isset($_POST['message']) ) ? prepare_message($_POST['message']) : '';
 
 		//
 		// Do mode specific things
@@ -1269,7 +1269,7 @@ else if ( $submit || $refresh || $mode != '' )
 	//
 	// Has admin prevented user from sending PM's?
 	//
-	if ( bf($userdata['user_opt'], 'user_opt', 'allow_pm') && $mode != 'edit' )
+	if (bf($userdata['user_opt'], 'user_opt', 'dis_pm') && $mode != 'edit')
 	{
 		$message = ($lang['CANNOT_SEND_PRIVMSG']);
 	}
@@ -1429,8 +1429,7 @@ else
 		'body' => 'privmsgs.tpl')
 	);
 
-	$orig_word = array();
-	$replacement_word = array();
+	$orig_word = $replacement_word = array();
 	obtain_word_list($orig_word, $replacement_word);
 
 	//

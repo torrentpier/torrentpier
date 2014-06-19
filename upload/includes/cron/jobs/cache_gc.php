@@ -2,16 +2,9 @@
 
 if (!defined('BB_ROOT')) die(basename(__FILE__));
 
-$gc_cache = array(
-	'bb_cache',
-	'tr_cache',
-	'session_cache',
-	'bb_cap_sid',
-	'bb_login_err',
-	'bb_poll_data',
-);
+global $cron_runtime_log
 
-foreach ($gc_cache as $cache_name)
+foreach ($bb_cfg['cache']['engines'] as $cache_name => $cache_val)
 {
 	if (method_exists(CACHE($cache_name), 'gc'))
 	{

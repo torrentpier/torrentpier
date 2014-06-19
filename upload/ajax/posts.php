@@ -67,7 +67,7 @@ switch($this->request['type'])
 	break;
 
 	case 'reply';
-		if (bf($userdata['user_opt'], 'user_opt', 'allow_post'))
+		if (bf($userdata['user_opt'], 'user_opt', 'dis_post'))
 		{
 			$this->ajax_die(strip_tags($lang['RULES_REPLY_CANNOT']));
 		}
@@ -113,7 +113,7 @@ switch($this->request['type'])
 
 	case 'edit':
 	case 'editor':
-		if (bf($userdata['user_opt'], 'user_opt', 'allow_post_edit'))
+		if (bf($userdata['user_opt'], 'user_opt', 'dis_post_edit'))
 		{
 			$this->ajax_die($lang['POST_EDIT_CANNOT']);
 		}
@@ -226,7 +226,7 @@ switch($this->request['type'])
 			$this->ajax_die('empty topic_id');
 		}
 
-		if (bf($userdata['user_opt'], 'user_opt', 'allow_post'))
+		if (bf($userdata['user_opt'], 'user_opt', 'dis_post'))
 		{
 			$this->ajax_die(strip_tags($lang['RULES_REPLY_CANNOT']));
 		}

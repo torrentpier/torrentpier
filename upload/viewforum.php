@@ -132,7 +132,7 @@ if (!$forums = $datastore->get('cat_forums'))
 	$forums = $datastore->get('cat_forums');
 }
 
-if($forums['forum'][$forum_id]['allow_porno_topic'] && bf($userdata['user_opt'], 'user_opt', 'hide_porn_forums')) bb_die($lang['ERROR_PORNO_FORUM']);
+if($forums['forum'][$forum_id]['allow_porno_topic'] && bf($userdata['user_opt'], 'user_opt', 'user_porn_forums')) bb_die($lang['ERROR_PORNO_FORUM']);
 
 if (!$forum_data['forum_parent'] && isset($forums['f'][$forum_id]['subforums']) && $show_subforums)
 {

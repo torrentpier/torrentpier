@@ -225,23 +225,21 @@ function go_to_page ()
 <!-- ELSE -->
 <!--======-->
 
-<script type="text/javascript">
-if (top != self) {
-	allowed_self = /^(translate\.googleusercontent\.com)$/;
-	if (!self.location.hostname.match(allowed_self)) {
-		$(function(){
-			$('body').html('<center><h1><br /><br />{L_YOU_ARE_BEING_CHEATED}&nbsp;'+ self.location.hostname +'</h1></center>');
-		});
-	}
-}
-</script>
-
 <!--page_container-->
 <div id="page_container">
 <a name="top"></a>
 
 <!--page_header-->
 <div id="page_header">
+
+<div id="old-browser-warn" style="background: #FFF227; padding: 8px 0 10px; text-align: center; font-size: 14px; display: none; ">
+	<b>Вы используете устаревший браузер. Сайт может отображаться некорректно.</b>
+</div>
+<script>
+if ( (typeof(window.opera) != "undefined" && window.opera.version() < 12) || (window.attachEvent && !window.addEventListener) /* IE < 9 */ ) {
+	document.getElementById('old-browser-warn').style.display = '';
+}
+</script>
 
 <!--main_nav-->
 <div id="main-nav" <!-- IF HAVE_NEW_PM -->class="new-pm"<!-- ENDIF --> style="height: 17px;">

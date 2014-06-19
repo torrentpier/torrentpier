@@ -45,7 +45,7 @@ if (IS_ADMIN)
 	$rank_select = build_select('rank-sel', $rank_select, $user_rank);
 }
 
-if (bf($profiledata['user_opt'], 'user_opt', 'viewemail') || $profiledata['user_id'] == $userdata['user_id'] || IS_AM)
+if (bf($profiledata['user_opt'], 'user_opt', 'user_viewemail') || $profiledata['user_id'] == $userdata['user_id'] || IS_AM)
 {
 	$email_uri = ($bb_cfg['board_email_form']) ? 'profile.php?mode=email&amp;'. POST_USERS_URL .'='. $profiledata['user_id'] : 'mailto:'. $profiledata['user_email'];
 	$email = '<a class="editable" href="'. $email_uri .'">'. $profiledata['user_email'] .'</a>';
@@ -80,7 +80,7 @@ $profile_user_id = ($profiledata['user_id'] == $userdata['user_id']);
 
 $signature = ($bb_cfg['allow_sig'] && $profiledata['user_sig']) ? $profiledata['user_sig'] : '';
 
-if(bf($profiledata['user_opt'], 'user_opt', 'allow_sig'))
+if(bf($profiledata['user_opt'], 'user_opt', 'dis_sig'))
 {
 	if($profile_user_id)
 	{
@@ -110,38 +110,35 @@ $template->assign_vars(array(
 	'EMAIL'                => $email,
 	'WWW'                  => $profiledata['user_website'],
 	'ICQ'                  => $profiledata['user_icq'],
-	'LAST_VISIT_TIME'      => ($profiledata['user_lastvisit']) ? (bf($profiledata['user_opt'], 'user_opt', 'allow_viewonline') && !IS_ADMIN) ? $lang['HIDDEN_USER'] : bb_date($profiledata['user_lastvisit'], 'Y-m-d H:i', 'false') : $lang['NEVER'],
-	'LAST_ACTIVITY_TIME'   => ($profiledata['user_session_time']) ? (bf($profiledata['user_opt'], 'user_opt', 'allow_viewonline') && !IS_ADMIN) ? $lang['HIDDEN_USER'] : bb_date($profiledata['user_session_time'], 'Y-m-d H:i', 'false') : $lang['NEVER'],
-	'ALLOW_DLS'            => bf($profiledata['user_opt'], 'user_opt', 'allow_dls'),
-	'LOCATION'             => $profiledata['user_from'],
+	'LAST_VISIT_TIME'      => ($profiledata['user_lastvisit']) ? (bf($profiledata['user_opt'], 'user_opt', 'user_viewonline') && !IS_ADMIN) ? $lang['HIDDEN_USER'] : bb_date($profiledata['user_lastvisit'], 'Y-m-d H:i', 'false') : $lang['NEVER'],
+	'LAST_ACTIVITY_TIME'   => ($profiledata['user_session_time']) ? (bf($profiledata['user_opt'], 'user_opt', 'user_viewonline') && !IS_ADMIN) ? $lang['HIDDEN_USER'] : bb_date($profiledata['user_session_time'], 'Y-m-d H:i', 'false') : $lang['NEVER'],
 
 	'USER_ACTIVE'          => $profiledata['user_active'],
+	'LOCATION'             => $profiledata['user_from'],
 	'OCCUPATION'           => $profiledata['user_occ'],
 	'INTERESTS'            => $profiledata['user_interests'],
 	'SKYPE'                => $profiledata['user_skype'],
 	'TWITTER'              => $profiledata['user_twitter'],
 	'USER_POINTS'          => $profiledata['user_points'],
 	'GENDER'               => ($bb_cfg['gender'] && $profiledata['user_gender']) ? $lang['GENDER_SELECT'][$profiledata['user_gender']] : '',
-	'BIRTHDAY'             => ($bb_cfg['birthday_enabled'] && $profiledata['user_birthday'] != '0000-00-00') ? date('Y-m-d', strtotime($profiledata['user_birthday'])) : '',
+	'BIRTHDAY'             => ($bb_cfg['birthday_enabled'] && $profiledata['user_birthday'] != '0000-00-00') ? $profiledata['user_birthday'] : '',
 	'AGE'                  => ($bb_cfg['birthday_enabled'] && $profiledata['user_birthday'] != '0000-00-00') ? birthday_age($profiledata['user_birthday']) : '',
 
 	'L_VIEWING_PROFILE'    => sprintf($lang['VIEWING_USER_PROFILE'], $profiledata['username']),
+	'L_MY_PROFILE'         => sprintf($lang['VIEWING_MY_PROFILE'], 'profile.php?mode=editprofile'),
 
 	'U_SEARCH_USER'        => "search.php?search_author=1&amp;uid={$profiledata['user_id']}",
 	'U_SEARCH_TOPICS'      => "search.php?uid={$profiledata['user_id']}&amp;myt=1",
 	'U_SEARCH_RELEASES'    => "tracker.php?rid={$profiledata['user_id']}#results",
 
-	'AVATAR_IMG'           => get_avatar($profiledata['user_id'], $profiledata['avatar_ext_id'], !bf($profiledata['user_opt'], 'user_opt', 'allow_avatar')),
-	'AVATAR_DISALLOWED'    => bf($profiledata['user_opt'], 'user_opt', 'allow_avatar'),
-
-	'S_PROFILE_ACTION'     => 'profile.php',
+	'AVATAR_IMG'           => get_avatar($profiledata['user_id'], $profiledata['avatar_ext_id'], !bf($profiledata['user_opt'], 'user_opt', 'dis_avatar')),
+	'AVATAR_DISALLOWED'    => bf($profiledata['user_opt'], 'user_opt', 'dis_avatar'),
 
 	'SIGNATURE'            => $signature,
 	'SHOW_PASSKEY'         => (IS_ADMIN || $profile_user_id),
 	'SHOW_ROLE'            => (IS_AM || $profile_user_id || $profiledata['user_active']),
 	'GROUP_MEMBERSHIP'     => false,
 	'TRAF_STATS'           => !(IS_AM || $profile_user_id),
-	'U_MANAGE'             => (IS_ADMIN) ? "profile.php?mode=editprofile&amp;u={$profiledata['user_id']}" : 'profile.php?mode=editprofile',
 ));
 
 if (IS_ADMIN)
@@ -190,6 +187,12 @@ else if (IS_MOD)
 	));
 }
 
+// Show users torrent-profile
+if (IS_AM || $profile_user_id || !bf($profiledata['user_opt'], 'user_opt', 'user_dls'))
+{
+    require(INC_DIR .'ucp/usercp_viewtorrent.php');
+}
+
 // Ajax bt_userdata
 if (IS_AM || $profile_user_id)
 {
@@ -199,43 +202,39 @@ else
 {
 	$template->assign_vars(array(
 		'DOWN_TOTAL_BYTES' => false,
-		'MIN_DL_BYTES' => false,
+		'MIN_DL_BYTES'     => false,
 	));
 }
 
 if (IS_ADMIN)
 {
-	$template->assign_vars(array(
-		'EDITABLE_TPLS' => true,
-		'U_PERMISSIONS' => "admin/admin_ug_auth.php?mode=user&amp;u={$profiledata['user_id']}",
-	));
-
 	$ajax_user_opt = bb_json_encode(array(
-		'allow_avatar'     => bf($profiledata['user_opt'], 'user_opt', 'allow_avatar'),
-		'allow_sig'        => bf($profiledata['user_opt'], 'user_opt', 'allow_sig'),
-		'allow_passkey'    => bf($profiledata['user_opt'], 'user_opt', 'allow_passkey'),
-		'allow_pm'         => bf($profiledata['user_opt'], 'user_opt', 'allow_pm'),
-		'allow_post'       => bf($profiledata['user_opt'], 'user_opt', 'allow_post'),
-		'allow_post_edit'  => bf($profiledata['user_opt'], 'user_opt', 'allow_post_edit'),
-		'allow_topic'      => bf($profiledata['user_opt'], 'user_opt', 'allow_topic'),
+		'dis_avatar'       => bf($profiledata['user_opt'], 'user_opt', 'dis_avatar'),
+		'dis_sig'          => bf($profiledata['user_opt'], 'user_opt', 'dis_sig'),
+		'dis_passkey'      => bf($profiledata['user_opt'], 'user_opt', 'dis_passkey'),
+		'dis_pm'           => bf($profiledata['user_opt'], 'user_opt', 'dis_pm'),
+		'dis_post'         => bf($profiledata['user_opt'], 'user_opt', 'dis_post'),
+		'dis_post_edit'    => bf($profiledata['user_opt'], 'user_opt', 'dis_post_edit'),
+		'dis_topic'        => bf($profiledata['user_opt'], 'user_opt', 'dis_topic'),
 	));
 
 	$template->assign_vars(array(
 		'EDITABLE_TPLS'    => true,
 		'AJAX_USER_OPT'    => $ajax_user_opt,
-		'EMAIL_ADDRESS'    => htmlCHR($profiledata['user_email']),
+		'U_MANAGE'         => "profile.php?mode=editprofile&amp;u={$profiledata['user_id']}",
+		'U_PERMISSIONS'    => "admin/admin_ug_auth.php?mode=user&amp;u={$profiledata['user_id']}",
 	));
 }
 
 $user_restrictions = array();
 
-if (bf($profiledata['user_opt'], 'user_opt', 'allow_avatar'))    $user_restrictions[] = $lang['HIDE_AVATARS'];
-if (bf($profiledata['user_opt'], 'user_opt', 'allow_sig'))     $user_restrictions[] = $lang['SHOW_CAPTION'];
-if (bf($profiledata['user_opt'], 'user_opt', 'allow_passkey'))   $user_restrictions[] = $lang['DOWNLOAD_TORRENT'];
-if (bf($profiledata['user_opt'], 'user_opt', 'allow_pm'))        $user_restrictions[] = $lang['SEND_PM'];
-if (bf($profiledata['user_opt'], 'user_opt', 'allow_post'))      $user_restrictions[] = $lang['SEND_MESSAGE'];
-if (bf($profiledata['user_opt'], 'user_opt', 'allow_post_edit')) $user_restrictions[] = $lang['EDIT_POST'];
-if (bf($profiledata['user_opt'], 'user_opt', 'allow_topic'))     $user_restrictions[] = $lang['NEW_THREADS'];
+if (bf($profiledata['user_opt'], 'user_opt', 'dis_avatar'))      $user_restrictions[] = $lang['HIDE_AVATARS'];
+if (bf($profiledata['user_opt'], 'user_opt', 'dis_sig'))         $user_restrictions[] = $lang['SHOW_CAPTION'];
+if (bf($profiledata['user_opt'], 'user_opt', 'dis_passkey'))     $user_restrictions[] = $lang['DOWNLOAD_TORRENT'];
+if (bf($profiledata['user_opt'], 'user_opt', 'dis_pm'))          $user_restrictions[] = $lang['SEND_PM'];
+if (bf($profiledata['user_opt'], 'user_opt', 'dis_post'))        $user_restrictions[] = $lang['SEND_MESSAGE'];
+if (bf($profiledata['user_opt'], 'user_opt', 'dis_post_edit'))   $user_restrictions[] = $lang['EDIT_POST'];
+if (bf($profiledata['user_opt'], 'user_opt', 'dis_topic'))       $user_restrictions[] = $lang['NEW_THREADS'];
 
 $template->assign_var('USER_RESTRICTIONS', join('</li><li>', $user_restrictions));
 

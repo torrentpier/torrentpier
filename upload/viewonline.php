@@ -46,19 +46,19 @@ $prev_ip = '';
 
 $user_id = 0;
 
-while ( $row = DB()->sql_fetchrow($result) )
+while ($row = DB()->sql_fetchrow($result))
 {
 	$view_online = false;
 
-	if ( $row['session_logged_in'] )
+	if ($row['session_logged_in'])
 	{
 		$user_id = $row['user_id'];
 
-		if ( $user_id != $prev_user )
+		if ($user_id != $prev_user)
 		{
 			$username = profile_url($row);
 
-			if ( bf($row['user_opt'], 'user_opt', 'allow_viewonline') )
+			if (bf($row['user_opt'], 'user_opt', 'user_viewonline'))
 			{
 				$view_online = IS_AM;
 				$hidden_users++;
@@ -78,7 +78,7 @@ while ( $row = DB()->sql_fetchrow($result) )
 	}
 	else
 	{
-		if ( $row['session_ip'] != $prev_ip )
+		if ($row['session_ip'] != $prev_ip)
 		{
 			$username = $lang['GUEST'];
 			$view_online = true;
@@ -92,7 +92,7 @@ while ( $row = DB()->sql_fetchrow($result) )
 	$prev_ip = $row['session_ip'];
 	$user_ip = hexdec(substr($prev_ip, 0, 2)) . '.' . hexdec(substr($prev_ip, 2, 2)) . '.' . hexdec(substr($prev_ip, 4, 2)) . '.' . hexdec(substr($prev_ip, 6, 2));
 
-	if ( $view_online )
+	if ($view_online)
 	{
 		$row_class = !($which_counter % 2) ? 'row1' : 'row2';
 

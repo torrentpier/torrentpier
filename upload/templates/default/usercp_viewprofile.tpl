@@ -111,15 +111,22 @@ ajax.callback.manage_user = function(data) {
 
 <!-- IF IS_AM -->
 <script type="text/javascript">
+ajax.ip_load = false;
 ajax.mod_action = function(mode) {
-	ajax.exec({
-		action  : 'mod_action',
-		mode    : mode,
-		user_id : {PROFILE_USER_ID}
-	});
+if(!ajax.ip_load) {
+    ajax.exec({
+        action  : 'mod_action',
+        mode    : mode,
+        user_id : {PROFILE_USER_ID}
+    });
 }
+else
+{
+    $('#ip_list').toggle();
+}};
 ajax.callback.mod_action = function(data) {
-	$('#ip_list').toggle().html(data.ip_list_html);
+    $('#ip_list').html(data.ip_list_html);
+	ajax.ip_load = true;
 }
 </script>
 <script type="text/javascript">
@@ -164,33 +171,24 @@ ajax.callback.gen_passkey = function(data){
 </script>
 <!-- ENDIF / SHOW_PASSKEY -->
 
-<script type="text/javascript">
-ajax.view_profile = function(mode) {
-	ajax.exec({
-		action  : 'view_profile',
-		mode    : mode,
-		user_id : {PROFILE_USER_ID}
-	});
-}
-ajax.callback.view_profile = function(data) {
-	$('#active_torrents').html(data.active_torrents);
-}
-</script>
 
 <style type="text/css">
 #traf-stats-tbl { width: 468px; background: #F9F9F9; border: 1px solid #A5AFB4; border-collapse: separate; }
 #traf-stats-tbl th, #traf-stats-tbl td { padding: 2px 10px 3px; text-align: center; white-space: nowrap; font-size: 11px; }
 #traf-stats-tbl th { padding: 2px <!-- IF $bb_cfg['seed_bonus_enabled'] -->11<!-- ELSE -->22<!-- ENDIF -->px 3px; }
+.pagetitle a { font-size: 16px; }
 </style>
 
-<a name="editprofile"></a>
-<h1 class="pagetitle">{L_VIEWING_PROFILE}</h1>
+<h1 class="pagetitle"><!-- IF PROFILE_USER -->{L_MY_PROFILE}<!-- ELSE -->{L_VIEWING_PROFILE}<!-- ENDIF --></h1>
 
 <div class="nav">
 	<p class="floatL"><a href="{U_INDEX}">{T_INDEX}</a></p>
+	<!-- IF IS_ADMIN -->
 	<p class="floatR">
-	<!-- IF IS_ADMIN || PROFILE_USER --><a href="{U_MANAGE}">{L_EDIT_PROFILE}</a><!-- ENDIF -->
-	<!-- IF IS_ADMIN --> &middot; <a href="{U_PERMISSIONS}">{L_PERMISSIONS}</a><!-- ENDIF -->
+		<a href="{U_MANAGE}">{L_PROFILE}</a> &middot;
+		<a href="{U_PERMISSIONS}">{L_PERMISSIONS}</a>
+	</p>
+	<!-- ENDIF -->
 	<div class="clear"></div>
 </div>
 
@@ -203,9 +201,9 @@ ajax.callback.view_profile = function(data) {
 
 		<div id="avatar-img" class="mrg_4 med">
 			<!-- IF AVATAR_IMG -->
-				<!-- IF not AVATAR_DISALLOWED or #IS_AM -->{AVATAR_IMG}<!-- ENDIF -->
+				<!-- IF not AVATAR_DISALLOWED or #IS_AM --><span id="avatar-img">{AVATAR_IMG}</span><!-- ENDIF -->
 				<!-- IF IS_ADMIN -->
-					<p id="avatar-adm" class="med mrg_4"><a href="#" onclick="if (window.confirm('Удалить аватар?')){ ajax.avatar('delete', {PROFILE_USER_ID}); } return false;" class="adm">[{L_DELETE}]</a></p>
+					<p id="avatar-adm" class="med mrg_4">[ <a href="#" onclick="if (window.confirm('Удалить аватар?')){ ajax.avatar('delete', {PROFILE_USER_ID}); } return false;" class="adm">{L_DELETE}</a> ]</p>
 				<!-- ENDIF -->
 			<!-- ELSE / !AVATAR_IMG -->{L_NOAVATAR}
 			<!-- ENDIF -->
@@ -259,12 +257,12 @@ ajax.callback.view_profile = function(data) {
 		</tr>
 		<!-- ENDIF -->
 		<!-- IF TWITTER -->
+		<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
 		<tr>
 			<th>{L_TWITTER}:</th>
 			<td class="tLeft med" id="user_twitter">
 				<span class="editable">
-					<a href="http://twitter.com/{TWITTER}" class="twitter-follow-button" data-show-count="false" data-lang="ru">{L_READ} @{TWITTER}</a>
-					<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+					<a href="https://twitter.com/{TWITTER}" class="twitter-follow-button" data-show-count="false" data-lang="{USER_LANG}">{TWITTER}</a>
 				</span>
 			</td>
 		</tr>
@@ -326,13 +324,13 @@ ajax.callback.view_profile = function(data) {
 			            </fieldset>
 						<fieldset class="mrg_6"><legend>{L_BAN_USER}</legend>
 						<div class="tLeft" style="padding: 2px 6px 6px; display: block;" id="user-opt">
-							<label><input type="checkbox" name="allow_avatar"/>{L_HIDE_AVATARS}</label>
-							<label><input type="checkbox" name="allow_sig"/>{L_SHOW_CAPTION}</label>
-							<label><input type="checkbox" name="allow_passkey"/>{L_DOWNLOAD_TORRENT}</label>
-							<label><input type="checkbox" name="allow_pm"/>{L_SEND_PM}</label>
-							<label><input type="checkbox" name="allow_post"/>{L_SEND_MESSAGE}</label>
-							<label><input type="checkbox" name="allow_post_edit"/>{L_EDIT_POST}</label>
-							<label><input type="checkbox" name="allow_topic"/>{L_NEW_THREADS}</label>
+							<label><input type="checkbox" name="dis_avatar"/>{L_HIDE_AVATARS}</label>
+							<label><input type="checkbox" name="dis_sig"/>{L_SHOW_CAPTION}</label>
+							<label><input type="checkbox" name="dis_passkey"/>{L_DOWNLOAD_TORRENT}</label>
+							<label><input type="checkbox" name="dis_pm"/>{L_SEND_PM}</label>
+							<label><input type="checkbox" name="dis_post"/>{L_SEND_MESSAGE}</label>
+							<label><input type="checkbox" name="dis_post_edit"/>{L_EDIT_POST}</label>
+							<label><input type="checkbox" name="dis_topic"/>{L_NEW_THREADS}</label>
 						</div>
 						</fieldset>
 						<div id="user-opt-save" class="hidden tCenter">
@@ -356,14 +354,13 @@ ajax.callback.view_profile = function(data) {
 				<td>
 				    <b>{LAST_ACTIVITY_TIME}</b>
 					<!-- IF TRAF_STATS --><span id="traf-stats-span">[ <a href="#" id="traf-stats-btn" class="med" onclick="ajax.index_data('get_traf_stats'); return false;">{L_VIEWING_USER_BT_PROFILE}</a> ]</span><!-- ENDIF -->
-					[ <a href="#torrent" class="med" onclick="ajax.view_profile('active_torrents'); return false;">{L_CUR_ACTIVE_DLS}</a> ]
 				</td>
 			</tr>
 			<tr>
 				<th>{L_TOTAL_POSTS}:</th>
 				<td>
 					<p>
-						<b>{POSTS}</b>&nbsp;
+						<b>{POSTS}</b>
 						[ <a href="{U_SEARCH_USER}" class="med">{L_SEARCH_USER_POSTS}</a> ]
 						[ <a href="{U_SEARCH_TOPICS}" class="med">{L_SEARCH_USER_TOPICS}</a> ]
 						[ <a class="med" href="{U_SEARCH_RELEASES}">{L_SEARCH_RELEASES}</a> ]
@@ -485,7 +482,8 @@ ajax.callback.view_profile = function(data) {
 			</td>
 		</tr>
 
-		</table><!--/user_details-->
+		</table>
+		<!--/user_details-->
 
 	<!-- IF IS_AM --><span id="ip_list"></span><!-- ENDIF -->
 
@@ -505,20 +503,86 @@ ajax.callback.view_profile = function(data) {
 </tr>
 <!-- END switch_report_user -->
 
-</table><!--/user_profile-->
+</table>
+<!--/user_profile-->
 
-<div id="active_torrents"></div>
+<a name="torrent"></a>
+<div class="spacer_8"></div>
+<!-- IF USER_DLS -->
+<style type="text/css">
+#dls-tbl u { display: none; }
+.dls-type, .dls-f { padding: 4px; text-align: center; }
+.dls-cnt { font-size: 16px; font-weight: normal; }
+</style>
+<script type="text/javascript">
+$(function(){
+	$('#dls-tbl').tablesorter();
+});
+</script>
 
-<!--bottom_info-->
-<div class="bottom_info">
+<h1 class="pagetitle tCenter">{L_CUR_ACTIVE_DLS} <span class="dls-cnt">({L_RELEASINGS}, {L_SEEDINGS}, {L_LEECHINGS})</span></h1>
 
-	<div class="spacer_6"></div>
+<div class="sectionMain">
+<table class="forumline tablesorter" id="dls-tbl">
+<thead>
+<tr>
+	<th class="{sorter: 'digit'}"><b class="tbs-text">{L_TYPE}</b></th>
+	<th class="{sorter: 'text'}" width="25%"><b class="tbs-text">{L_FORUM}</b></th>
+	<th class="{sorter: 'text'}" width="75%"><b class="tbs-text">{L_TOPICS}</b></th>
+	<th class="{sorter: false}">{L_TORRENT}</th>
+</tr>
+</thead>
 
-	<div id="timezone">
-		<p>{LAST_VISIT_DATE}</p>
-		<p>{CURRENT_TIME}</p>
-		<p>{S_TIMEZONE}</p>
-	</div>
-	<div class="clear"></div>
+<!-- BEGIN released -->
+<tr class="{released.ROW_CLASS}">
+	<td class="dls-type"><u>0</u><b class="seedmed">{L_RELEASING}</b></td>
+	<td class="dls-f"><a class="gen" href="{released.U_VIEW_FORUM}">{released.FORUM_NAME}</a></td>
+	<td class="pad_4"><a class="med tLink" href="{released.U_VIEW_TOPIC}">{released.TOR_TYPE}<b>{released.TOPIC_TITLE}</a></td>
+	<td class="tCenter med nowrap pad_2">
+		<p><b class="seedmed">{released.TOPIC_SEEDERS}</b> | <b class="leechmed">{released.TOPIC_LEECHERS}</b></p>
+		<p style="padding-top: 2px" class="seedsmall">{released.SPEED_UP}</p>
+	</td>
+</tr>
+<!-- END released -->
 
-</div><!--/bottom_info-->
+<!-- BEGIN seed -->
+<tr class="{seed.ROW_CLASS}">
+	<td class="dls-type"><u>1</u><span class="seedmed">{L_SEEDING}</span></td>
+	<td class="dls-f"><a class="gen" href="{seed.U_VIEW_FORUM}">{seed.FORUM_NAME}</a></td>
+	<td class="pad_4"><a class="med tLink" href="{seed.U_VIEW_TOPIC}">{seed.TOR_TYPE}<b>{seed.TOPIC_TITLE}</b></a></td>
+	<td class="tCenter med nowrap pad_2">
+		<p><b class="seedmed">{seed.TOPIC_SEEDERS}</b> | <b class="leechmed">{seed.TOPIC_LEECHERS}</b></p>
+		<p style="padding-top: 2px" class="seedsmall">{seed.SPEED_UP}</p>
+	</td>
+</tr>
+<!-- END seed -->
+
+<!-- BEGIN leech -->
+<tr class="{leech.ROW_CLASS}">
+	<td class="dls-type"><u>2</u><span class="leechmed">{L_LEECHING}</span></td>
+	<td class="dls-f"><a class="gen" href="{leech.U_VIEW_FORUM}">{leech.FORUM_NAME}</a></td>
+	<td class="pad_4"><a class="med tLink" href="{leech.U_VIEW_TOPIC}">{leech.TOR_TYPE}<b>{leech.TOPIC_TITLE}</b></a></td>
+	<td class="tCenter med nowrap pad_2">
+		<p><b class="seedmed">{leech.TOPIC_SEEDERS}</b> | <b class="leechmed">{leech.TOPIC_LEECHERS}</b></p>
+		<p style="padding-top: 2px" class="seedsmall">{leech.SPEED_DOWN}</p>
+	</td>
+</tr>
+<!-- END leech -->
+<tfoot>
+<tr class="row2 tCenter">
+	<td colspan="4" class="catBottom pad_6">&nbsp;</td>
+</tr>
+</tfoot>
+</table>
+</div>
+<br />
+<!-- ELSE -->
+	<h1 class="pagetitle tCenter">{L_CUR_ACTIVE_DLS}: <span class="normal">{L_NO}</span></h1>
+<!-- ENDIF -->
+
+<!-- IF SHOW_SEARCH_DL -->
+<div class="tCenter">
+	<a class="gen" href="{U_SEARCH}?dlu={PROFILE_USER_ID}&dlw=1">{L_SEARCH_DL_WILL_DOWNLOADS}</a> :: 
+	<a class="gen" href="{U_SEARCH}?dlu={PROFILE_USER_ID}&dlc=1">{L_SEARCH_DL_COMPLETE_DOWNLOADS}</a>
+</div>
+<!-- ENDIF -->
