@@ -2,7 +2,7 @@
 
 if (!defined('BB_ROOT')) die(basename(__FILE__));
 
-global $cron_runtime_log
+global $cron_runtime_log;
 
 foreach ($bb_cfg['cache']['engines'] as $cache_name => $cache_val)
 {

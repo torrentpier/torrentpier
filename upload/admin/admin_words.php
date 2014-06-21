@@ -99,6 +99,7 @@ if( $mode != '' )
 			message_die(GENERAL_ERROR, "Could not insert data into words table", $lang['ERROR'], __LINE__, __FILE__, $sql);
 		}
 
+		CACHE('bb_cache')->rm('censored');
 		$message .= '<br /><br />' . sprintf($lang['CLICK_RETURN_WORDADMIN'], '<a href="admin_words.php">', '</a>') . '<br /><br />' . sprintf($lang['CLICK_RETURN_ADMIN_INDEX'], '<a href="index.php?pane=right">', '</a>');
 
 		message_die(GENERAL_MESSAGE, $message);
@@ -117,6 +118,8 @@ if( $mode != '' )
 				message_die(GENERAL_ERROR, "Could not remove data from words table", $lang['ERROR'], __LINE__, __FILE__, $sql);
 			}
 
+			CACHE('bb_cache')->rm('censored');
+			
 			$message = $lang['WORD_REMOVED'] . '<br /><br />' . sprintf($lang['CLICK_RETURN_WORDADMIN'], '<a href="admin_words.php">', '</a>') . '<br /><br />' . sprintf($lang['CLICK_RETURN_ADMIN_INDEX'], '<a href="index.php?pane=right">', '</a>');
 
 			message_die(GENERAL_MESSAGE, $message);

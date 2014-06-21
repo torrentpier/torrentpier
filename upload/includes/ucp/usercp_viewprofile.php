@@ -132,7 +132,6 @@ $template->assign_vars(array(
 	'U_SEARCH_RELEASES'    => "tracker.php?rid={$profiledata['user_id']}#results",
 
 	'AVATAR_IMG'           => get_avatar($profiledata['user_id'], $profiledata['avatar_ext_id'], !bf($profiledata['user_opt'], 'user_opt', 'dis_avatar')),
-	'AVATAR_DISALLOWED'    => bf($profiledata['user_opt'], 'user_opt', 'dis_avatar'),
 
 	'SIGNATURE'            => $signature,
 	'SHOW_PASSKEY'         => (IS_ADMIN || $profile_user_id),

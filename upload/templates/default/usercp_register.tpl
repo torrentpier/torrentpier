@@ -66,25 +66,25 @@ document.write('<input type="hidden" name="user_timezone" value="'+tz+'" />');
     <span id="check_name"></span></td>	
 </tr>
 <tr>
-	<td class="prof-title">{L_EMAIL}: * <!-- IF EDIT_PROFILE --><!-- ELSE IF $bb_cfg['reg_email_activation'] --><h6>{L_EMAIL_EXPLAIN}</h6><!-- ENDIF --></td>
+	<td class="prof-title">{L_EMAIL}: * <!-- IF EDIT_PROFILE --><!-- ELSE IF $bb_cfg['reg_email_activation'] --><br /><h6>{L_EMAIL_EXPLAIN}</h6><!-- ENDIF --></td>
 	<td><input id="email" onBlur="ajax.exec({ action: 'user_register', mode: 'check_email', email: $('#email').val()}); return false;" type="text" name="user_email" size="35" maxlength="40" value="{USER_EMAIL}" <!-- IF EDIT_PROFILE --><!-- IF $bb_cfg['emailer_disabled'] -->readonly="readonly" style="color: gray;"<!-- ENDIF --><!-- ENDIF --> />
 	<span id="check_email"></span></td>	
 </tr>
 <!-- IF EDIT_PROFILE and not ADM_EDIT -->
 <tr>
-	<td class="prof-title">{L_CURRENT_PASSWORD}: * <h6>{L_CONFIRM_PASSWORD_EXPLAIN}</h6></td>
+	<td class="prof-title">{L_CURRENT_PASSWORD}: * <br /><h6>{L_CONFIRM_PASSWORD_EXPLAIN}</h6></td>
 	<td><input type="password" name="cur_pass" size="35" maxlength="32" value="" /></td>
 </tr>
 <!-- ENDIF -->
 <tr>
-	<td class="prof-title"><!-- IF EDIT_PROFILE -->{L_NEW_PASSWORD}: * <h6>{L_PASSWORD_IF_CHANGED}</h6><!-- ELSE -->{L_PASSWORD}: *<!-- ENDIF --></td>
+	<td class="prof-title"><!-- IF EDIT_PROFILE -->{L_NEW_PASSWORD}: * <br /><h6>{L_PASSWORD_IF_CHANGED}</h6><!-- ELSE -->{L_PASSWORD}: *<!-- ENDIF --></td>
 	<td>
 	    <input id="pass" type="<!-- IF SHOW_PASS -->text<!-- ELSE -->password<!-- ENDIF -->" name="new_pass" size="35" maxlength="32" value="" />&nbsp;
 	    <span id="autocomplete" title="{L_AUTOCOMPLETE}">&#9668;</span> &nbsp;<i class="med">{L_PASSWORD_LONG}</i>
 	</td>
 </tr>
 <tr>
-	<td class="prof-title">{L_CONFIRM_PASSWORD}: * <!-- IF EDIT_PROFILE --><h6>{L_PASSWORD_CONFIRM_IF_CHANGED}</h6><!-- ENDIF --></td>
+	<td class="prof-title">{L_CONFIRM_PASSWORD}: * <!-- IF EDIT_PROFILE --><br /><h6>{L_PASSWORD_CONFIRM_IF_CHANGED}</h6><!-- ENDIF --></td>
 	<td>
 	    <input id="pass_confirm" onBlur="ajax.exec({ action: 'user_register', mode: 'check_pass', pass: $('#pass').val(), pass_confirm: $('#pass_confirm').val() }); return false;" type="<!-- IF SHOW_PASS -->text<!-- ELSE -->password<!-- ENDIF -->" name="cfm_pass" size="35" maxlength="32" value="" />
 	    <span id="check_pass"></span>
@@ -100,7 +100,7 @@ document.write('<input type="hidden" name="user_timezone" value="'+tz+'" />');
 <!-- IF not ADM_EDIT -->
 <tr>
 	<td class="prof-title">{L_AUTOLOGIN}:</td>
-	<td><a href="{U_RESET_AUTOLOGIN}">{L_RESET_AUTOLOGIN}</a><h6>{L_RESET_AUTOLOGIN_EXPL}</h6></td>
+	<td><a href="{U_RESET_AUTOLOGIN}">{L_RESET_AUTOLOGIN}</a><br /><h6>{L_RESET_AUTOLOGIN_EXPL}</h6></td>
 </tr>
 <!-- ENDIF -->
 <tr>
@@ -184,7 +184,7 @@ ajax.callback.posts = function(data){
 </script>
 <!-- ENDIF -->
 <tr>
-	<td class="prof-title">{L_SIGNATURE}:<h6>{SIGNATURE_EXPLAIN}</h6></td>
+	<td class="prof-title">{L_SIGNATURE}: <br /><h6>{SIGNATURE_EXPLAIN}</h6></td>
 	<!-- IF SIG_DISALLOWED -->
 	<td class="tCenter">{L_SIGNATURE_DISABLE}</td>
 	<!-- ELSE -->
@@ -217,7 +217,7 @@ ajax.callback.posts = function(data){
 	</td>
 </tr>
 <tr>
-	<td class="prof-title">{L_ALWAYS_NOTIFY}:<h6>{L_ALWAYS_NOTIFY_EXPLAIN}</h6></td>
+	<td class="prof-title">{L_ALWAYS_NOTIFY}: <br /><h6>{L_ALWAYS_NOTIFY_EXPLAIN}</h6></td>
 	<td>
 		<label><input type="radio" name="user_notify" value="1" <!-- IF USER_NOTIFY -->checked="checked"<!-- ENDIF --> />{L_YES}</label>&nbsp;&nbsp;
 		<label><input type="radio" name="user_notify" value="0" <!-- IF not USER_NOTIFY -->checked="checked"<!-- ENDIF --> />{L_NO}</label>
@@ -234,7 +234,7 @@ ajax.callback.posts = function(data){
 </tr>
 <!-- ENDIF -->
 <tr>
-	<td class="prof-title">{L_CALLSEED}:<h6>{L_CALLSEED_EXPLAIN}</h6></td>
+	<td class="prof-title">{L_CALLSEED}: <br /><h6>{L_CALLSEED_EXPLAIN}</h6></td>
 	<td>
 		<label><input type="radio" name="user_callseed" value="1" <!-- IF USER_CALLSEED -->checked="checked"<!-- ENDIF --> />{L_YES}</label>&nbsp;&nbsp;
 		<label><input type="radio" name="user_callseed" value="0" <!-- IF not USER_CALLSEED -->checked="checked"<!-- ENDIF --> />{L_NO}</label>
@@ -249,7 +249,7 @@ ajax.callback.posts = function(data){
 </tr>
 <!-- IF SHOW_DATEFORMAT -->
 <tr>
-	<td class="prof-title">{L_DATE_FORMAT}:<h6>{L_DATE_FORMAT_EXPLAIN}</h6></td>
+	<td class="prof-title">{L_DATE_FORMAT}: <br /><h6>{L_DATE_FORMAT_EXPLAIN}</h6></td>
 	<td><input type="text" name="dateformat" value="{DATE_FORMAT}" maxlength="14" /></td>
 </tr>
 <!-- ENDIF -->

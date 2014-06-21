@@ -207,7 +207,6 @@ $template->assign_vars(array(
 	'POINTS'             => $userdata['user_points'],
 	'THIS_USER'          => profile_url($userdata),
 	'THIS_AVATAR'        => get_avatar($userdata['user_id'], $userdata['avatar_ext_id'], !bf($userdata['user_opt'], 'user_opt', 'dis_avatar')),
-	'AVATAR_DISALLOWED'  => bf($userdata['user_opt'], 'user_opt', 'dis_avatar'),
 	'SHOW_LOGIN_LINK'    => !defined('IN_LOGIN'),
 	'AUTOLOGIN_DISABLED' => !$bb_cfg['allow_autologin'],
 	'S_LOGIN_ACTION'     => LOGIN_URL,

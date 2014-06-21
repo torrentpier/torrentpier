@@ -227,21 +227,20 @@ if ($moderation)
 	));
 }
 
-if ($parent_id = $t_data['forum_parent'])
-{
-	if (!$forums = $datastore->get('cat_forums'))
-	{
-		$datastore->update('cat_forums');
-		$forums = $datastore->get('cat_forums');
-	}
 
-	$template->assign_vars(array(
-		'HAS_PARENT_FORUM'  => true,
-		'PARENT_FORUM_HREF'	=> FORUM_URL . $parent_id,
-		'PARENT_FORUM_NAME' => htmlCHR($forums['f'][$parent_id]['forum_name']),
-	));
-	unset($forums);
+if (!$forums = $datastore->get('cat_forums'))
+{
+	$datastore->update('cat_forums');
+	$forums = $datastore->get('cat_forums');
 }
+
+$template->assign_vars(array(
+	'CAT_TITLE'         => $forums['cat_title_html'][$t_data['cat_id']],
+	'U_VIEWCAT'         => CAT_URL . $t_data['cat_id'],
+	'PARENT_FORUM_HREF'	=> ($parent_id = $t_data['forum_parent']) ? FORUM_URL . $parent_id : '',
+	'PARENT_FORUM_NAME' => ($parent_id = $t_data['forum_parent']) ? htmlCHR($forums['f'][$parent_id]['forum_name']) : '',
+));
+unset($forums);
 $datastore->rm('cat_forums');
 
 if ($post_id && !empty($t_data['prev_posts']))
@@ -361,16 +360,18 @@ if ($t_data['topic_show_first_post'] && $start)
 {
 	$first_post = DB()->fetch_rowset("
 		SELECT
-		  u.username, u.user_id, u.user_rank, u.user_posts, u.user_from,
-		  u.user_regdate, u.user_sig,
-		  u.avatar_ext_id,
-		  u.user_opt, u.user_gender, u.user_birthday,
-		  p.*,
-		  h.post_html, IF(h.post_html IS NULL, pt.post_text, NULL) AS post_text
+			u.username, u.user_id, u.user_rank, u.user_posts, u.user_from,
+			u.user_regdate, u.user_sig,
+			u.avatar_ext_id,
+			u.user_opt, u.user_gender, u.user_birthday,
+			p.*,
+			u2.username as mc_username, u2.user_rank as mc_user_rank,
+			h.post_html, IF(h.post_html IS NULL, pt.post_text, NULL) AS post_text
 		FROM      ". BB_POSTS      ." p
 		LEFT JOIN ". BB_USERS      ." u  ON(u.user_id = p.poster_id)
 		LEFT JOIN ". BB_POSTS_TEXT ." pt ON(pt.post_id = p.post_id)
 		LEFT JOIN ". BB_POSTS_HTML ." h  ON(h.post_id = p.post_id)
+		LEFT JOIN ". BB_USERS      ." u2 ON(u2.user_id = p.mc_user_id)
 		WHERE
 			p.post_id = {$t_data['topic_first_post_id']}
 		LIMIT 1
@@ -379,26 +380,23 @@ if ($t_data['topic_show_first_post'] && $start)
 // 2. All others posts
 $sql = "
 	SELECT
-	  u.username, u.user_id, u.user_rank, u.user_posts, u.user_from,
-	  u.user_regdate, u.user_sig,
-	  u.avatar_ext_id,
-	  u.user_opt, u.user_gender, u.user_birthday,
-	  p.*,
-	  h.post_html, IF(h.post_html IS NULL, pt.post_text, NULL) AS post_text
+		u.username, u.user_id, u.user_rank, u.user_posts, u.user_from,
+		u.user_regdate, u.user_sig,
+		u.avatar_ext_id,
+		u.user_opt, u.user_gender, u.user_birthday,
+		p.*,
+		u2.username as mc_username, u2.user_rank as mc_user_rank,
+		h.post_html, IF(h.post_html IS NULL, pt.post_text, NULL) AS post_text
 	FROM      ". BB_POSTS      ." p
 	LEFT JOIN ". BB_USERS      ." u  ON(u.user_id = p.poster_id)
 	LEFT JOIN ". BB_POSTS_TEXT ." pt ON(pt.post_id = p.post_id)
 	LEFT JOIN ". BB_POSTS_HTML ." h  ON(h.post_id = p.post_id)
-	WHERE
-	    p.topic_id = $topic_id
-	  $limit_posts_time
-	GROUP BY
-	  p.post_id
-	ORDER BY
-	  p.post_time
-	  $post_order
-	LIMIT
-	  $start, $posts_per_page
+	LEFT JOIN ". BB_USERS      ." u2 ON(u2.user_id = p.mc_user_id)
+	WHERE p.topic_id = $topic_id
+		$limit_posts_time
+	GROUP BY p.post_id
+	ORDER BY p.post_time $post_order
+	LIMIT $start, $posts_per_page
 ";
 
 if ($postrow = DB()->fetch_rowset($sql))
@@ -685,19 +683,24 @@ $this_date = bb_date(TIMENOW ,'md', 'false');
 for($i = 0; $i < $total_posts; $i++)
 {
 	$poster_id        = $postrow[$i]['user_id'];
-	$poster           = ( $poster_id == GUEST_UID ) ? $lang['GUEST'] : $postrow[$i]['username'];
-	$poster_birthday  = ($postrow[$i]['user_id'] != GUEST_UID) ? date('md', strtotime($postrow[$i]['user_birthday'])) : '';
+	$poster           = ($poster_id == GUEST_UID) ? $lang['GUEST'] : $postrow[$i]['username'];
+	$poster_birthday  = ($poster_id != GUEST_UID) ? date('md', strtotime($postrow[$i]['user_birthday'])) : '';
 	$post_date        = bb_date($postrow[$i]['post_time'], $bb_cfg['post_date_format']);
 	$max_post_time    = max($max_post_time, $postrow[$i]['post_time']);
-	$poster_posts     = ( $postrow[$i]['user_id'] != GUEST_UID ) ? $postrow[$i]['user_posts'] : '';
-	$poster_from      = ( $postrow[$i]['user_from'] && $postrow[$i]['user_id'] != GUEST_UID ) ? $postrow[$i]['user_from'] : '';
-	$poster_joined    = ( $postrow[$i]['user_id'] != GUEST_UID ) ? $lang['JOINED'] . ': ' . bb_date($postrow[$i]['user_regdate'], $bb_cfg['date_format']) : '';
-	$poster_longevity = ( $postrow[$i]['user_id'] != GUEST_UID ) ? delta_time($postrow[$i]['user_regdate']) : '';
+	$poster_posts     = ($poster_id != GUEST_UID) ? $postrow[$i]['user_posts'] : '';
+	$poster_from      = ($postrow[$i]['user_from'] && $poster_id != GUEST_UID ) ? $postrow[$i]['user_from'] : '';
+	$poster_joined    = ($poster_id != GUEST_UID) ? $lang['JOINED'] . ': ' . bb_date($postrow[$i]['user_regdate'], $bb_cfg['date_format']) : '';
+	$poster_longevity = ($poster_id != GUEST_UID) ? delta_time($postrow[$i]['user_regdate']) : '';
+	$post_id          = $postrow[$i]['post_id'];
+	
+	$mc_type          = $postrow[$i]['mc_type'];
+	$mc_comment       = $postrow[$i]['mc_comment'];
+	$mc_user_id       = profile_url(array('username' => $postrow[$i]['mc_username'], 'user_id' => $postrow[$i]['mc_user_id'], 'user_rank' => $postrow[$i]['mc_user_rank']));
 
 	$poster_avatar = '';
 	if ( !$user->opt_js['h_av'] && $poster_id != GUEST_UID )
 	{
-		$poster_avatar = get_avatar($postrow[$i]['user_id'], $postrow[$i]['avatar_ext_id'], !bf($postrow[$i]['user_opt'], 'user_opt', 'dis_avatar'));
+		$poster_avatar = get_avatar($poster_id, $postrow[$i]['avatar_ext_id'], !bf($postrow[$i]['user_opt'], 'user_opt', 'dis_avatar'));
 	}
 
 	$poster_rank = $rank_image = '';
@@ -729,7 +732,7 @@ for($i = 0; $i < $total_posts; $i++)
 		$edit_btn = (($userdata['user_id'] == $poster_id && $is_auth['auth_edit']) || $is_auth['auth_mod']);
 		$ip_btn = ($is_auth['auth_mod'] || IS_MOD);
 	}
-	$delpost_btn = ($postrow[$i]['post_id'] != $t_data['topic_first_post_id'] && ($is_auth['auth_mod'] || ($userdata['user_id'] == $poster_id && $is_auth['auth_delete'] && $t_data['topic_last_post_id'] == $postrow[$i]['post_id'] && $postrow[$i]['post_time'] + 3600*3 > TIMENOW)));
+	$delpost_btn = ($post_id != $t_data['topic_first_post_id'] && ($is_auth['auth_mod'] || ($userdata['user_id'] == $poster_id && $is_auth['auth_delete'] && $t_data['topic_last_post_id'] == $post_id && $postrow[$i]['post_time'] + 3600*3 > TIMENOW)));
 
 	// Parse message and sig
 	$message = get_parsed_post($postrow[$i]);
@@ -784,7 +787,7 @@ for($i = 0; $i < $total_posts; $i++)
 			$report_auth = ($userdata['user_level'] == ADMIN || (!$bb_cfg['report_list_admin'] && (!$bb_cfg['report_subject_auth'] || $is_auth['auth_mod'])));
 			if ($report_post->auth_check('auth_view') && $report_auth)
 			{
-				$temp_url = "report.php?mode=reported&amp;" . POST_CAT_URL . '=' . $report_post->id . '&amp;id=' . $postrow[$i]['post_id'];
+				$temp_url = "report.php?mode=reported&amp;" . POST_CAT_URL . '=' . $report_post->id . '&amp;id=' . $post_id;
 				$target = ($bb_cfg['report_new_window']) ? ' target="_blank"' : '';
 				$report_img = '<a href="' . $temp_url . '"' . $target . '><img src="' . $images['icon_reported'] . '" alt="' . $report_post->lang['DUPLICATE_REPORT'] . '" title="' . $report_post->lang['DUPLICATE_REPORT'] . '" border="0" /></a>';
 				$report = '<a href="' . $temp_url . '"' . $target . '>[' . $report_post->lang['DUPLICATE_REPORT'] . ']</a>';
@@ -797,7 +800,7 @@ for($i = 0; $i < $total_posts; $i++)
 		}
 		else
 		{
-			$temp_url = "report.php?mode=" . $report_post->mode . '&amp;id=' . $postrow[$i]['post_id'];
+			$temp_url = "report.php?mode=" . $report_post->mode . '&amp;id=' . $post_id;
 			$report_img = '<a href="' . $temp_url . '"><img src="' . $images['icon_report'] . '" alt="' . $report_post->lang['WRITE_REPORT'] . '" title="' . $report_post->lang['WRITE_REPORT'] . '" border="0" /></a>';
 			$report = '<a class="txtb" href="' . $temp_url . '">[' . $report_post->lang['WRITE_REPORT'] . ']</a>';
 		}
@@ -820,21 +823,36 @@ for($i = 0; $i < $total_posts; $i++)
 			$gender = '';
 			break;
 	}
-
-	$post_mod_comment_html = '';
-	if ($postrow[$i]['post_mod_comment_type'] == 1)
+	
+	// mod comment
+	switch($mc_type)
 	{
-		$post_mod_comment_html = '<div class="mcBlock"><table cellspacing="0" cellpadding="0" border="0"><tr><td class="mcTd1C">K</td><td class="mcTd2C"><a href="profile.php?mode=viewprofile&u='. $postrow[$i]['post_mc_mod_id'] .'">'. $postrow[$i]['post_mc_mod_name'] .'</a> '. $lang['WROTE'] .':<br /><br />'. bbcode2html($postrow[$i]['post_mod_comment']) .'</td></tr></table></div>';
+		case 1: // Комментарий
+			$mc_class = 'success';
+			break;
+		case 2: // Информация
+			$mc_class = 'info';
+			break;
+		case 3: // Предупреждение
+			$mc_class = 'warning';
+			break;
+		case 4: // Нарушение
+			$mc_class = 'danger';
+			break;
+		default:
+			$mc_class = '';
+			break;
 	}
-	elseif ($postrow[$i]['post_mod_comment_type'] == 2)
+	$mc_select_type = array();
+	foreach ($lang['MC_COMMENT'] as $key => $value)
 	{
-		$post_mod_comment_html = '<div class="mcBlock"><table cellspacing="0" cellpadding="0" border="0"><tr><td class="mcTd1W">!</td><td class="mcTd2W"><a href="profile.php?mode=viewprofile&u='. $postrow[$i]['post_mc_mod_id'] .'">'. $postrow[$i]['post_mc_mod_name'] .'</a> '. $lang['WROTE'] .':<br /><br />'. bbcode2html($postrow[$i]['post_mod_comment']) .'</td></tr></table></div>';
+		$mc_select_type[$key] = $value['type'];
 	}
 
 	$template->assign_block_vars('postrow', array(
 		'ROW_CLASS'          => !($i % 2) ? 'row1' : 'row2',
-		'POST_ID'            => $postrow[$i]['post_id'],
-		'IS_NEWEST'          => ($postrow[$i]['post_id'] == $newest),
+		'POST_ID'            => $post_id,
+		'IS_NEWEST'          => ($post_id == $newest),
 		'POSTER_NAME'        => profile_url(array('username' => $poster, 'user_rank' => $user_rank)),
 		'POSTER_NAME_JS'     => addslashes($poster),
 		'POSTER_RANK'        => $poster_rank,
@@ -850,7 +868,7 @@ for($i = 0; $i < $total_posts; $i++)
 		'POSTER_GENDER'      => ($bb_cfg['gender'] && $gender) ? $gender : '',
 		'POSTED_AFTER'       => ($prev_post_time) ? delta_time($postrow[$i]['post_time'], $prev_post_time) : '',
 		'IS_UNREAD'          => is_unread($postrow[$i]['post_time'], $topic_id, $forum_id),
-		'IS_FIRST_POST'      => (!$start && ($postrow[$i]['post_id'] == $t_data['topic_first_post_id'])),
+		'IS_FIRST_POST'      => (!$start && ($post_id == $t_data['topic_first_post_id'])),
 		'MOD_CHECKBOX'       => ($moderation && ($start || defined('SPLIT_FORM_START'))),
 		'POSTER_AVATAR'      => $poster_avatar,
 		'POST_NUMBER'        => ($i + $start + 1),
@@ -870,17 +888,19 @@ for($i = 0; $i < $total_posts; $i++)
 		'REPORT'             => ($bb_cfg['text_buttons']) ? $report : $report_img,
 		'POSTER_BIRTHDAY'    => ($bb_cfg['birthday_enabled'] && $this_date == $poster_birthday) ? '<img src="'. $images['icon_birthday'] .'" alt="" title="'. $lang['HAPPY_BIRTHDAY'] .'" border="0" />' : '',
 
-		'POST_MOD_COMMENT'   => ($postrow[$i]['post_mod_comment'] && $postrow[$i]['post_mod_comment_type']) ? $post_mod_comment_html : '',
-		'POST_MC_BBCODE'     => str_replace("\n", '\n', addslashes($postrow[$i]['post_mod_comment'])),
-		'POST_MC_TYPE'       => $postrow[$i]['post_mod_comment_type'],
-	));
+		'MC_COMMENT'         => ($mc_type) ? bbcode2html($mc_comment) : '',
+		'MC_BBCODE'          => ($mc_type) ? $mc_comment : '',
+		'MC_CLASS'           => $mc_class,
+		'MC_TITLE'           => sprintf($lang['MC_COMMENT'][$mc_type]['title'], $mc_user_id),
+		'MC_SELECT_TYPE'     => build_select("mc_type_$post_id", array_flip($mc_select_type), $mc_type),
+	));	
 
 	if ($postrow[$i]['post_attachment'] && $is_auth['auth_download'] && function_exists('display_post_attachments'))
 	{
-		display_post_attachments($postrow[$i]['post_id'], $postrow[$i]['post_attachment']);
+		display_post_attachments($post_id, $postrow[$i]['post_attachment']);
 	}
 
-	if ($moderation && !defined('SPLIT_FORM_START') && ($start || $postrow[$i]['post_id'] == $t_data['topic_first_post_id']))
+	if ($moderation && !defined('SPLIT_FORM_START') && ($start || $post_id == $t_data['topic_first_post_id']))
 	{
 		define('SPLIT_FORM_START', TRUE);
 	}

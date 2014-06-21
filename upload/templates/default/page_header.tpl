@@ -159,7 +159,10 @@ function OpenInEditor ($file, $line)
 </div>
 <div id="editable-tpl-yesno-select" style="display: none;">
 	<span class="editable-inputs nowrap" style="display: none;">
-		<select class="editable-value"><option value="1">{L_YES}</option><option value="0">{L_NO}</option></select>
+		<select class="editable-value">
+			<option value="1">&nbsp;{L_YES}&nbsp;</option>
+			<option value="0">&nbsp;{L_NO}&nbsp;</option>
+		</select>
 		<input type="button" class="editable-submit" value="&raquo;" style="width: 30px; font-weight: bold;" />
 		<input type="button" class="editable-cancel" value="x" style="width: 30px;" />
 	</span>
@@ -174,9 +177,25 @@ function OpenInEditor ($file, $line)
 </div>
 <div id="editable-tpl-yesno-gender" style="display: none;">
 	<span class="editable-inputs nowrap" style="display: none;">
-		<label><input class="editable-value" type="radio" name="editable-value" value="1">{$lang['GENDER_SELECT'][1]}</label>
-		<label><input class="editable-value" type="radio" name="editable-value" value="2">{$lang['GENDER_SELECT'][2]}</label>&nbsp;
-		<label><input class="editable-value" type="radio" name="editable-value" value="0">{$lang['GENDER_SELECT'][0]}</label>
+		<select class="editable-value">
+			<option value="0">&nbsp;{$lang['GENDER_SELECT'][0]}&nbsp;</option>
+			<option value="1">&nbsp;{$lang['GENDER_SELECT'][1]}&nbsp;</option>
+			<option value="2">&nbsp;{$lang['GENDER_SELECT'][2]}&nbsp;</option>
+		</select>
+		<input type="button" class="editable-submit" value="&raquo;" style="width: 30px; font-weight: bold;">
+		<input type="button" class="editable-cancel" value="x" style="width: 30px;">
+	</span>
+</div>
+<div id="editable-tpl-yesno-twitter" style="display: none;">
+	<span class="editable-inputs nowrap" style="display: none;">
+		<input type="text" class="editable-value" value="{TWITTER}" />
+		<input type="button" class="editable-submit" value="&raquo;" style="width: 30px; font-weight: bold;">
+		<input type="button" class="editable-cancel" value="x" style="width: 30px;">
+	</span>
+</div>
+<div id="editable-tpl-yesno-birthday" style="display: none;">
+	<span class="editable-inputs nowrap" style="display: none;">
+		<input type="date" class="editable-value" value="{BIRTHDAY}" />
 		<input type="button" class="editable-submit" value="&raquo;" style="width: 30px; font-weight: bold;">
 		<input type="button" class="editable-cancel" value="x" style="width: 30px;">
 	</span>
@@ -445,8 +464,7 @@ $(document).ready(function() {
 			<!-- IF SHOW_BT_USERDATA --><div id="user_ratio">
 				<h3>{L_USER_RATIO}</h3>
 				<table cellpadding="0">
-					<!-- IF not AVATAR_DISALLOWED --><div align="center">{THIS_AVATAR}</div><!-- ENDIF -->
-					<!-- IF AVATAR_DISALLOWED --><div align="center">{L_AVATAR_DISABLE}</div><!-- ENDIF -->
+					<div align="center">{THIS_AVATAR}</div>
 					<tr><td>{L_USER_RATIO}</td><td><!-- IF DOWN_TOTAL_BYTES gt MIN_DL_BYTES --><b>{USER_RATIO}</b><!-- ELSE --><b>{L_NONE}</b> (DL < {MIN_DL_FOR_RATIO})<!-- ENDIF --></td></tr>
 					<tr><td>{L_DOWNLOADED}</td><td class="leechmed"><b>{DOWN_TOTAL}</b></td></tr>
 					<tr><td>{L_UPLOADED}</td><td class="seedmed"><b>{UP_TOTAL}</b></td></tr>

@@ -977,8 +977,8 @@ $lang['TZ']['11'] = 'GMT + 11';
 $lang['TZ']['12'] = 'GMT + 12';
 $lang['TZ']['13'] = 'GMT + 13';
 
-$lang['DATETIME']['TODAY'] = 'Сегодня';
-$lang['DATETIME']['YESTERDAY'] = 'Вчера';
+$lang['DATETIME']['TODAY'] = 'Сегодня, в';
+$lang['DATETIME']['YESTERDAY'] = 'Вчера, в';
 
 $lang['DATETIME']['SUNDAY'] = 'Воскресенье';
 $lang['DATETIME']['MONDAY'] = 'Понедельник';
@@ -3022,3 +3022,31 @@ $lang['DAY'] = 'День';
 
 $lang['POST_EDIT_CANNOT'] = 'Извините, вы не можете редактировать сообщения';
 $lang['FORUMS_IN_CAT'] = 'форумов в этой категории';
+
+$lang['MC_TITLE'] = 'Модераторский комментарий';
+$lang['MC_LEGEND'] = 'Тип комментария';
+$lang['MC_FAQ'] = 'Введенный Вами текст будет отображаться под этим сообщением';
+$lang['MC_COMMENT_PM_SUBJECT'] = "%s в Вашем сообщении";
+$lang['MC_COMMENT_PM_MSG'] = "Здравствуйте, [b]%s[/b]\nМодератор оставил в Вашем сообщении [url=%s][b]%s[/b][/url][quote]\n%s\n[/quote]";
+$lang['MC_COMMENT'] = array(
+	0 => array(
+		'title' => '',
+		'type'  => 'Удалить комментарий',
+	),
+	1 => array(
+		'title' => 'Комментарий от %s',
+		'type'  => 'Комментарий',
+	),
+	2 => array(
+		'title' => 'Информация от %s',
+		'type'  => 'Информация',
+	),
+	3 => array(
+		'title' => 'Предупреждение от %s',
+		'type'  => 'Предупреждение',
+	),
+	4 => array(
+		'title' => 'Нарушение от %s',
+		'type'  => 'Нарушение',
+	),
+);

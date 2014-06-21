@@ -879,10 +879,9 @@ CREATE TABLE IF NOT EXISTS `bb_posts` (
   `post_attachment` tinyint(1) NOT NULL DEFAULT '0',
   `post_reported` tinyint(1) NOT NULL DEFAULT '0',
   `user_post` tinyint(1) NOT NULL DEFAULT '1',
-  `post_mod_comment` TEXT NOT NULL DEFAULT  '',
-  `post_mod_comment_type` TINYINT( 1 ) NOT NULL DEFAULT  '0',
-  `post_mc_mod_id` mediumint(8) NOT NULL,
-  `post_mc_mod_name` varchar(25) NOT NULL DEFAULT '',
+  `mc_comment` TEXT NOT NULL DEFAULT  '',
+  `mc_type` TINYINT( 1 ) NOT NULL DEFAULT  '0',
+  `mc_user_id` mediumint(8) NOT NULL,
   PRIMARY KEY (`post_id`),
   KEY `topic_id` (`topic_id`),
   KEY `poster_id` (`poster_id`),
@@ -894,7 +893,7 @@ CREATE TABLE IF NOT EXISTS `bb_posts` (
 -- Дамп данных таблицы `bb_posts`
 --
 
-INSERT INTO `bb_posts` VALUES (1, 1, 1, 2, UNIX_TIMESTAMP(), '', '', 0, 0, 0, 0, 1, '', 0, 0, '');
+INSERT INTO `bb_posts` VALUES (1, 1, 1, 2, UNIX_TIMESTAMP(), '', '', 0, 0, 0, 0, 1, '', 0, 0);
 
 -- --------------------------------------------------------
 

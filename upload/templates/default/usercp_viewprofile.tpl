@@ -29,6 +29,7 @@ ajax.avatar = function(mode, uid) {
 }
 ajax.callback.avatar = function(data) {
 	$('#avatar-img').html(data.avatar_html);
+	$('#avatar-adm').hide();
 }
 
 // change_user_rank
@@ -42,6 +43,7 @@ ajax.change_user_rank = function(uid, rank_id) {
 }
 ajax.callback.change_user_rank = function(data) {
 	$('#rank-msg').html(data.html);
+	$('#rank-name').html(data.rank_name);
 }
 
 ajax.user_opt = {AJAX_USER_OPT};
@@ -92,9 +94,9 @@ $(document).ready(function(){
 <var class="ajax-params">{action: "edit_user_profile", id: "user_interests"}</var>
 <var class="ajax-params">{action: "edit_user_profile", id: "user_icq"}</var>
 <var class="ajax-params">{action: "edit_user_profile", id: "user_skype"}</var>
-<var class="ajax-params">{action: "edit_user_profile", id: "user_twitter"}</var>
-<var class="ajax-params">{action: "edit_user_profile", id: "user_gender", editableType: "yesno-gender"}</var>
-<var class="ajax-params">{action: "edit_user_profile", id: "user_birthday"}</var>
+<var class="ajax-params">{action: "edit_user_profile", id: "user_twitter",  editableType: "yesno-twitter"}</var>
+<var class="ajax-params">{action: "edit_user_profile", id: "user_gender",   editableType: "yesno-gender"}</var>
+<var class="ajax-params">{action: "edit_user_profile", id: "user_birthday", editableType: "yesno-birthday"}</var>
 <var class="ajax-params">{action: "edit_user_profile", id: "u_up_total"}</var>
 <var class="ajax-params">{action: "edit_user_profile", id: "u_down_total"}</var>
 <var class="ajax-params">{action: "edit_user_profile", id: "u_up_release"}</var>
@@ -200,14 +202,10 @@ ajax.callback.gen_passkey = function(data){
 	<td class="row1 vTop tCenter" width="30%">
 
 		<div id="avatar-img" class="mrg_4 med">
-			<!-- IF AVATAR_IMG -->
-				<!-- IF not AVATAR_DISALLOWED or #IS_AM --><span id="avatar-img">{AVATAR_IMG}</span><!-- ENDIF -->
-				<!-- IF IS_ADMIN -->
-					<p id="avatar-adm" class="med mrg_4">[ <a href="#" onclick="if (window.confirm('Удалить аватар?')){ ajax.avatar('delete', {PROFILE_USER_ID}); } return false;" class="adm">{L_DELETE}</a> ]</p>
-				<!-- ENDIF -->
-			<!-- ELSE / !AVATAR_IMG -->{L_NOAVATAR}
+			{AVATAR_IMG}
+			<!-- IF IS_ADMIN || PROFILE_USER -->
+			<p id="avatar-adm" class="med mrg_4">[ <a href="#" onclick="if (window.confirm('Удалить аватар?')){ ajax.avatar('delete', {PROFILE_USER_ID}); } return false;" class="adm">Удалить аватар</a> ]</p>
 			<!-- ENDIF -->
-			<!-- IF AVATAR_DISALLOWED --><p class="mrg_4 med">{L_AVATAR_DISABLE}</p><!-- ENDIF -->
 		</div>
 		<p class="small mrg_4">
 		<!-- IF IS_ADMIN -->
@@ -221,6 +219,8 @@ ajax.callback.gen_passkey = function(data){
 		<!-- ENDIF -->
 		</p>
 		<h4 class="cat border bw_TB" id="username">{L_CONTACT} <span class="editable bold">{USERNAME}</span></h4>
+
+		<div class="spacer_4"></div>
 
 		<table class="nowrap borderless user_contacts w100">
 		<!-- IF EMAIL -->
@@ -267,7 +267,8 @@ ajax.callback.gen_passkey = function(data){
 			</td>
 		</tr>
 		<!-- ENDIF -->
-		</table><!--/user_contacts-->
+		</table>
+		<!--/user_contacts-->
 
 		<!-- IF USER_RESTRICTIONS -->
 		<fieldset class="mrg_6">
@@ -292,7 +293,7 @@ ajax.callback.gen_passkey = function(data){
 			<tr>
 				<th>{L_ROLE}</th>
 				<td id="role">
-					<b>{POSTER_RANK}</b>
+					<b id="rank-name">{POSTER_RANK}</b>
 					<!-- IF GROUP_MEMBERSHIP and IS_MOD -->
 					<span id="gr-mod-a">[ <a href="#" class="med" onclick="ajax.group_membership('get_group_list'); $('#gr-mem-tr').show(); $('#gr-mod-a').hide(); return false;">{L_MEMBERSHIP_IN}</a> ]</span>
 					<!-- ENDIF -->
@@ -422,7 +423,7 @@ ajax.callback.gen_passkey = function(data){
 			<!-- IF GENDER -->
 			<tr>
 				<th>{L_GENDER}:</th>
-				<td id="user_gender"><b class="editable">{GENDER}</b></td>
+				<td id="user_gender"><span class="med editable">{GENDER}</span></td>
 			</tr>
 			<!-- ENDIF -->
 			<!-- IF BIRTHDAY -->

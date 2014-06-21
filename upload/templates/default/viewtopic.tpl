@@ -118,16 +118,7 @@ ajax.callback.mod_action = function(data) {
 	$tt_td.html(ajax.tte_orig_html);
 	$('.tt-text', $tt_td).html(data.topic_title);
 }
-ajax.post_mod_comment = function(post_id, mc_text) {
-	if ($('#mc_type_'+post_id+'_0').attr('checked') == 'checked') {
-		var mc_type = 0;
-	}
-	else if ($('#mc_type_'+post_id+'_1').attr('checked') == 'checked') {
-		var mc_type = 1;
-	}
-	else if ($('#mc_type_'+post_id+'_2').attr('checked') == 'checked') {
-		var mc_type = 2;
-	}
+ajax.post_mod_comment = function(post_id, mc_text, mc_type) {
 	ajax.exec({
 		action  : 'post_mod_comment',
 		post_id : post_id,
@@ -136,14 +127,16 @@ ajax.post_mod_comment = function(post_id, mc_text) {
 	});
 }
 ajax.callback.post_mod_comment = function(data) {
-	if (data.type == 0) {
-		$('#pc_'+ data.post_id).html('');
+	if (data.mc_type == 0) {
+		$('#mc_text_'+ data.post_id).attr('value', '');
+		$('#pc_'+ data.post_id).hide();
 	}
-	else if (data.type == 1) {
-		$('#pc_'+ data.post_id).html(data.html);
-	}
-	else if (data.type == 2) {
-		$('#pc_'+ data.post_id).html(data.html);
+	else {
+		$('#pc_'+ data.post_id +' h4').html(data.mc_title);
+		$('#mc_comment_'+ data.post_id).html(data.mc_text);
+		$('#mc_class_'+ data.post_id).attr('class', 'alert alert-'+ data.mc_class);
+		initPostBBCode('#pc_'+ data.post_id);
+		$('#pc_'+ data.post_id).show();
 	}
 }
 </script>
@@ -169,8 +162,9 @@ ajax.callback.post_mod_comment = function(data) {
 		<a href="{U_POST_REPLY_TOPIC}"><img src="{REPLY_IMG}" alt="{T_POST_REPLY}" /></a>
 	</td>
 	<td class="nav w100" style="padding-left: 8px;">
-		<a href="{U_INDEX}">{T_INDEX}</a>
-		<!-- IF HAS_PARENT_FORUM --> <em>&raquo;</em>&nbsp;<a href="{PARENT_FORUM_HREF}">{PARENT_FORUM_NAME}</a><!-- ENDIF -->
+		<a href="{U_INDEX}">{L_HOME}</a>&nbsp;<em>&raquo;</em>
+		<a href="{U_VIEWCAT}">{CAT_TITLE}</a>
+		<!-- IF PARENT_FORUM_NAME --><em>&raquo;</em>&nbsp;<a href="{PARENT_FORUM_HREF}">{PARENT_FORUM_NAME}</a><!-- ENDIF -->
 		<em>&raquo;</em>&nbsp;<a href="{U_VIEW_FORUM}">{FORUM_NAME}</a>
 	</td>
 </tr>
@@ -352,25 +346,6 @@ function build_poll_add_form (src_el)
 </tr>
 
 <!-- BEGIN postrow -->
-<!-- IF AUTH_MOD -->
-<div class="menu-sub" id="mc_{postrow.POST_ID}">
-	<div class="nowrap mc-bord">
-		<p class="mc-th">{L_COMMENT}</p>
-		<div class="nowrap mc">
-			<input type="radio" name="mc_type_{postrow.POST_ID}" id="mc_type_{postrow.POST_ID}_0" value="0" <!-- IF postrow.POST_MC_TYPE == 0 -->checked="checked"<!-- ENDIF --> /> {L_DELETE} {L_COMMENT} <br />
-			<input type="radio" name="mc_type_{postrow.POST_ID}" id="mc_type_{postrow.POST_ID}_1" value="1" <!-- IF postrow.POST_MC_TYPE == 1 -->checked="checked"<!-- ENDIF --> /> {L_COMMENT} <br />
-			<input type="radio" name="mc_type_{postrow.POST_ID}" id="mc_type_{postrow.POST_ID}_2" value="2" <!-- IF postrow.POST_MC_TYPE == 2 -->checked="checked"<!-- ENDIF --> /> {L_WARNING} <br />
-			<textarea name="mc_text_{postrow.POST_ID}" cols="40" rows="3" id="mc_text_{postrow.POST_ID}"></textarea>
-			<script type="text/javascript">
-				$('#mc_text_{postrow.POST_ID}').val("{postrow.POST_MC_BBCODE}");
-			</script>
-		</div>
-		<div class="mc-but">
-			<input type="button" style="width:100px; cursor:pointer;" value="{L_SUBMIT}" onclick="ajax.post_mod_comment({postrow.POST_ID}, $('#mc_text_{postrow.POST_ID}').val());" />
-		</div>
-	</div>
-</div>
-<!-- ENDIF -->
 <tbody id="post_{postrow.POST_ID}" class="{postrow.ROW_CLASS}">
 <tr>
 	<td class="poster_info td1"><a name="{postrow.POST_ID}"></a><!-- IF postrow.IS_NEWEST --><a name="newest"></a><!-- ENDIF -->
@@ -415,14 +390,14 @@ function build_poll_add_form (src_el)
 			<!-- IF postrow.MOD_CHECKBOX --><input type="checkbox" class="select_post" onclick="set_hid_chbox('{postrow.POST_ID}');"><!-- ENDIF -->
 
 			<p style="float: right;<!-- IF TEXT_BUTTONS --> padding: 3px 2px 4px;<!-- ELSE --> padding: 1px 6px 2px;<!-- ENDIF -->" class="post_btn_1">
-				<!-- IF AUTH_MOD --><a class="txtb menu-root mc_b" href="#mc_{postrow.POST_ID}">{MC_IMG}</a>{POST_BTN_SPACER}<!-- ENDIF -->
-				<!-- IF postrow.IS_FIRST_POST and CAN_ADD_POLL --><a href="#" onclick="return build_poll_add_form(this);" class="txtb">{L_TOPIC_POLL}</a>&nbsp;<!-- ENDIF -->
+				<!-- IF postrow.IS_FIRST_POST and CAN_ADD_POLL --><a href="#" onclick="return build_poll_add_form(this);" class="txtb">{POLL_IMG}</a><!-- ENDIF -->
 				<!-- IF postrow.QUOTE --><a class="txtb" href="<!-- IF $bb_cfg['use_ajax_posts'] -->" onclick="ajax.exec({ action: 'posts', post_id: {postrow.POST_ID}, type: 'reply'}); return false;<!-- ELSE -->{QUOTE_URL}{postrow.POST_ID}<!-- ENDIF -->">{QUOTE_IMG}</a>{POST_BTN_SPACER}<!-- ENDIF -->
 				<!-- IF postrow.EDIT --><a class="txtb" href="<!-- IF $bb_cfg['use_ajax_posts'] -->" onclick="edit_post({postrow.POST_ID}, 'edit'); return false;<!-- ELSE -->{EDIT_POST_URL}{postrow.POST_ID}<!-- ENDIF -->">{EDIT_POST_IMG}</a>{POST_BTN_SPACER}<!-- ENDIF -->
 				<!-- IF postrow.DELETE --><a class="txtb" href="<!-- IF $bb_cfg['use_ajax_posts'] -->" onclick="ajax.exec({ action: 'posts', post_id: {postrow.POST_ID}, type: 'delete'}); return false;<!-- ELSE -->{DELETE_POST_URL}{postrow.POST_ID}<!-- ENDIF -->">{DELETE_POST_IMG}</a>{POST_BTN_SPACER}<!-- ENDIF -->
 				<!-- IF postrow.IP --><a class="txtb" href="{IP_POST_URL}{postrow.POST_ID}&amp;t={TOPIC_ID}">{IP_POST_IMG}</a>{POST_BTN_SPACER}<!-- ENDIF -->
 				<!-- IF postrow.REPORT -->{postrow.REPORT}{POST_BTN_SPACER}<!-- ENDIF -->
 				<!-- IF AUTH_MOD -->
+					<a class="menu-root menu-alt1" href="#mc_{postrow.POST_ID}">{MC_IMG}</a>{POST_BTN_SPACER}
 					<!-- IF not IN_MODERATION --><a class="txtb" href="{PAGE_URL}&amp;mod=1&amp;start={PAGE_START}#{postrow.POST_ID}">{MOD_POST_IMG}</a>{POST_BTN_SPACER}<!-- ENDIF -->
 				<!-- ENDIF -->
 			</p>
@@ -431,14 +406,49 @@ function build_poll_add_form (src_el)
 
 		<div class="post_body">
 			<div class="post_wrap">
-			    <span id="pp_{postrow.POST_ID}">{postrow.MESSAGE}</span>
-				<div id="pc_{postrow.POST_ID}">{postrow.POST_MOD_COMMENT}</div>
 				<span id="pe_{postrow.POST_ID}"></span>
+				<span id="pp_{postrow.POST_ID}">{postrow.MESSAGE}</span>
+				<div id="pc_{postrow.POST_ID}" <!-- IF not postrow.MC_COMMENT -->style="display: none;"<!-- ENDIF -->>
+					<div id="mc_class_{postrow.POST_ID}" class="alert alert-{postrow.MC_CLASS}" style="width: 92%;">
+						<h4 class="alert-heading">{postrow.MC_TITLE}</h4><hr />
+						<div id="mc_comment_{postrow.POST_ID}">{postrow.MC_COMMENT}</div>
+					</div>
+				</div>
 				{postrow.ATTACHMENTS}
 			</div><!--/post_wrap-->
 			<!-- IF postrow.SIGNATURE -->{postrow.SIGNATURE}<!-- ENDIF -->
 			<!-- IF postrow.EDITED_MESSAGE --><div class="last_edited">{postrow.EDITED_MESSAGE}</div><!-- ENDIF -->
 		</div><!--/post_body-->
+		
+		<!-- IF AUTH_MOD -->
+		<div class="menu-sub" id="mc_{postrow.POST_ID}">
+		<table cellspacing="1" cellpadding="4">
+		<tr>
+			<th>{L_MC_TITLE}</th>
+		</tr>
+		<tr>
+			<td>
+			<fieldset>
+				<legend>{L_MC_LEGEND}</legend>
+				<div class="pad_4">
+					{postrow.MC_SELECT_TYPE}
+				</div>
+				</fieldset>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<textarea name="mc_text_{postrow.POST_ID}" rows="10" cols="60" id="mc_text_{postrow.POST_ID}" placeholder="{L_MC_FAQ}">{postrow.MC_BBCODE}</textarea>
+			</td>
+		</tr>
+		<tr>
+			<td class="cat tCenter pad_4">
+				<input type="button" value="{L_SUBMIT}" onclick="ajax.post_mod_comment({postrow.POST_ID}, $('#mc_text_{postrow.POST_ID}').val(), $('#mc_type_{postrow.POST_ID}').val());" />
+			</td>
+		</tr>
+		</table>
+		</div>
+		<!-- ENDIF / AUTH_MOD -->
 
 	</td>
 </tr>
@@ -596,8 +606,9 @@ $(document).ready(function(){
 		<a href="{U_POST_REPLY_TOPIC}"><img src="{REPLY_IMG}" alt="{T_POST_REPLY}" /></a>
 	</td>
 	<td class="nav w100" style="padding-left: 8px;">
-		<a href="{U_INDEX}">{T_INDEX}</a>
-		<!-- IF HAS_PARENT_FORUM --> <em>&raquo;</em>&nbsp;<a href="{PARENT_FORUM_HREF}">{PARENT_FORUM_NAME}</a><!-- ENDIF -->
+		<a href="{U_INDEX}">{L_HOME}</a>&nbsp;<em>&raquo;</em>
+		<a href="{U_VIEWCAT}">{CAT_TITLE}</a>
+		<!-- IF PARENT_FORUM_NAME --><em>&raquo;</em>&nbsp;<a href="{PARENT_FORUM_HREF}">{PARENT_FORUM_NAME}</a><!-- ENDIF -->
 		<em>&raquo;</em>&nbsp;<a href="{U_VIEW_FORUM}">{FORUM_NAME}</a>
 	</td>
 </tr>

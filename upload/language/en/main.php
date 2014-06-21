@@ -3010,3 +3010,31 @@ $lang['DAY'] = 'Day';
 
 $lang['POST_EDIT_CANNOT'] = 'Sorry, but you cannot edit posts';
 $lang['FORUMS_IN_CAT'] = 'forums in that category';
+
+$lang['MC_TITLE'] = 'Сomment Moderation';
+$lang['MC_LEGEND'] = 'Type a comment';
+$lang['MC_FAQ'] = 'Entered text will be displayed under this message';
+$lang['MC_COMMENT_PM_SUBJECT'] = "%s in your message";
+$lang['MC_COMMENT_PM_MSG'] = "Hello, [b]%s[/b]\nModerator left in your message [url=%s][b]%s[/b][/url][quote]\n%s\n[/quote]";
+$lang['MC_COMMENT'] = array(
+	0 => array(
+		'title' => '',
+		'type'  => 'Delete comment',
+	),
+	1 => array(
+		'title' => 'Сomment from %s',
+		'type'  => 'Сomment',
+	),
+	2 => array(
+		'title' => 'Information from %s',
+		'type'  => 'Information',
+	),
+	3 => array(
+		'title' => 'Warning from %s',
+		'type'  => 'Warning',
+	),
+	4 => array(
+		'title' => 'Violation from %s',
+		'type'  => 'Violation',
+	),
+);

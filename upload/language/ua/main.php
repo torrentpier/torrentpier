@@ -974,8 +974,8 @@ $lang['TZ']['11'] = 'GMT + 11';
 $lang['TZ']['12'] = 'GMT + 12';
 $lang['TZ']['13'] = 'GMT + 13';
 
-$lang['DATETIME']['TODAY'] = 'Сьогодні';
-$lang['DATETIME']['YESTERDAY'] = 'Вчора';
+$lang['DATETIME']['TODAY'] = 'Сьогодні, в';
+$lang['DATETIME']['YESTERDAY'] = 'Вчора, в';
 
 $lang['DATETIME']['SUNDAY'] = 'Неділя';
 $lang['DATETIME']['MONDAY'] = 'Понеділок';
@@ -3019,3 +3019,31 @@ $lang['DAY'] = 'День';
 
 $lang['POST_EDIT_CANNOT'] = 'Вибачте, але ви не можете редагувати повідомлення';
 $lang['FORUMS_IN_CAT'] = 'форумів у цій категорії';
+
+$lang['MC_TITLE'] = 'Модераторському коментар';
+$lang['MC_LEGEND'] = 'Тип коментаря';
+$lang['MC_FAQ'] = 'Введена Вами текст буде відображатися під цим повідомленням';
+$lang['MC_COMMENT_PM_SUBJECT'] = "%s у Вашому повідомленні";
+$lang['MC_COMMENT_PM_MSG'] = "Здрастуйте, [b]%s[/b]\nМодератор залишив у Вашому повідомленні [url=%s][b]%s[/b][/url][quote]\n%s\n[/quote] ";
+$lang['MC_COMMENT'] = array(
+	0 => array(
+		'title' => '',
+		'type'  => 'Видалити коментар',
+	),
+	1 => array(
+		'title' => 'Коментар від %s',
+		'type'  => 'Коментар',
+	),
+	2 => array(
+		'title' => 'Информація від %s',
+		'type'  => 'Информація',
+	),
+	3 => array(
+		'title' => 'Попередження від %s',
+		'type'  => 'Попередження',
+	),
+	4 => array(
+		'title' => 'Порушення від %s',
+		'type'  => 'Порушення',
+	),
+);

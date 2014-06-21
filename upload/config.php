@@ -55,8 +55,8 @@ $domain_name = (!empty($_SERVER['SERVER_NAME'])) ? $_SERVER['SERVER_NAME'] : $do
 
 // Increase number of revision after update
 $bb_cfg['tp_version'] = '2.6 (RC)';
-$bb_cfg['tp_release_date'] = '19-06-2014';
-$bb_cfg['tp_release_state'] = 'R589';
+$bb_cfg['tp_release_date'] = '21-06-2014';
+$bb_cfg['tp_release_state'] = 'R590';
 
 // Database
 $charset  = 'utf8';
@@ -310,7 +310,7 @@ $bb_cfg['topic_tpl']['overall_header'] = TEMPLATES_DIR .'topic_tpl_overall_heade
 $bb_cfg['topic_tpl']['rules_video']    = TEMPLATES_DIR .'topic_tpl_rules_video.html';
 
 // Cookie
-$bb_cfg['cookie_domain'] = ($domain_name != $_SERVER['SERVER_ADDR']) ? ".$domain_name" : ''; # '.yourdomain.com'
+$bb_cfg['cookie_domain'] = in_array($domain_name, array(getenv('SERVER_ADDR'), 'localhost')) ? '' : ".$domain_name";
 $bb_cfg['cookie_secure'] = (!empty($_SERVER['HTTPS']) ? 1 : 0); # 0
 $bb_cfg['cookie_prefix'] = 'bb_';                  # 'bb_'
 

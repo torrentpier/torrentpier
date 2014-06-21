@@ -21,4 +21,7 @@ DB()->query("UPDATE ". BB_USERS ." SET user_rank = $rank_id WHERE user_id = $use
 
 cache_rm_user_sessions($user_id);
 
-$this->response['html'] = ($rank_id != 0) ? $lang['AWARDED_RANK'] . ' <b> '. $ranks[$rank_id]['rank_title'] .'</b>' : $lang['SHOT_RANK'];
+$user_rank = ($rank_id) ? '<span class="'. $ranks[$rank_id]['rank_style'] .'">'. $ranks[$rank_id]['rank_title'] .'</span>' : '';
+
+$this->response['html'] = ($rank_id) ? $lang['AWARDED_RANK'] . "<b> $user_rank </b>" : $lang['SHOT_RANK'];
+$this->response['rank_name'] = ($rank_id) ? $user_rank : $lang['USER'];

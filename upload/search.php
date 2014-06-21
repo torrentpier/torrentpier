@@ -62,6 +62,12 @@ else if(isset($_POST['add_my_post']))
 	redirect("search.php?u={$user->id}");
 }
 
+//
+// Define censored word matches
+//
+$orig_word = $replacement_word = array();
+obtain_word_list($orig_word, $replacement_word);
+
 $tracking_topics = get_tracks('topic');
 $tracking_forums = get_tracks('forum');
 
@@ -581,12 +587,18 @@ if ($post_mode)
 		$topic_id    = (int) $topic_id;
 		$forum_id    = (int) $first_post['forum_id'];
 		$is_unread_t = is_unread($first_post['topic_last_post_time'], $topic_id, $forum_id);
+		$topic_title = $first_post['topic_title'];
+		
+		if (count($orig_word))
+		{
+			$topic_title = preg_replace($orig_word, $replacement_word, $topic_title);
+		}
 
 		$template->assign_block_vars('t', array(
 			'FORUM_ID'    => $forum_id,
 			'FORUM_NAME'  => $forum_name_html[$forum_id],
 			'TOPIC_ID'    => $topic_id,
-			'TOPIC_TITLE' => $first_post['topic_title'],
+			'TOPIC_TITLE' => $topic_title,
 			'TOPIC_ICON'  => get_topic_icon($first_post, $is_unread_t),
 		));
 
@@ -596,6 +608,13 @@ if ($post_mode)
 		// Topic posts block
 		foreach ($topic_posts as $row_num => $post)
 		{
+			$message = get_parsed_post($post);
+
+			if (count($orig_word))
+			{
+				$message = preg_replace($orig_word, $replacement_word, $message);
+			}
+			
 			$template->assign_block_vars('t.p', array(
 				'ROW_NUM'      => $row_num,
 				'POSTER_ID'    => $post['poster_id'],
@@ -603,7 +622,7 @@ if ($post_mode)
 				'POST_ID'      => $post['post_id'],
 				'POST_DATE'    => bb_date($post['post_time'], $bb_cfg['post_date_format']),
 				'IS_UNREAD'    => is_unread($post['post_time'], $topic_id, $forum_id),
-				'MESSAGE'      => ($chars_val == $show_all) ? get_parsed_post($post, 'full') : get_parsed_post($post, 'briefly'),
+				'MESSAGE'      => $message,
 				'POSTED_AFTER' => '',
 				'QUOTE'        => $quote_btn,
 				'EDIT'         => $edit_btn,

@@ -225,15 +225,7 @@ if (!$forum_data['forum_parent'] && isset($forums['f'][$forum_id]['subforums']) 
 		}
 	}
 }
-elseif ($parent_id = $forum_data['forum_parent'])
-{
-	$template->assign_vars(array(
-		'HAS_PARENT_FORUM'  => true,
-		'PARENT_FORUM_HREF'	=> FORUM_URL . $forum_data['forum_parent'],
-		'PARENT_FORUM_NAME' => $forums['forum_name_html'][$parent_id],
-	));
-}
-unset($forums, $rowset);
+unset($rowset);
 $datastore->rm('cat_forums');
 
 // Topics per page
@@ -591,6 +583,12 @@ $template->assign_vars(array(
 	'MOD_REDIRECT_URL' => $mod_redirect_url,
 	'MODERATION_ON'    => $moderation,
 	'PRUNE_DAYS'       => $forum_data['prune_days'],
+	
+	'CAT_ID'              => $forum_data['cat_id'],
+	'CAT_TITLE'           => $forums['cat_title_html'][$forum_data['cat_id']],
+	'U_VIEWCAT'           => CAT_URL . $forum_data['cat_id'],
+	'PARENT_FORUM_HREF'	  => ($parent_id = $forum_data['forum_parent']) ? FORUM_URL . $forum_data['forum_parent'] : '',
+	'PARENT_FORUM_NAME'   => ($parent_id = $forum_data['forum_parent']) ? $forums['forum_name_html'][$parent_id] : '',
 ));
 
 print_page('viewforum.tpl');

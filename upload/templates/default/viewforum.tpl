@@ -302,8 +302,9 @@ td.topic_id { cursor: pointer; }
 	<tr>
 		<td><a href="{U_POST_NEW_TOPIC}"><img src="{POST_IMG}" alt="{T_POST_NEW_TOPIC}" /></a></td>
 		<td class="nav" width="100%">
-			&nbsp;<a href="{U_INDEX}">{T_INDEX}</a>
-			<!-- IF HAS_PARENT_FORUM --><em>&raquo;</em>&nbsp;<a href="{PARENT_FORUM_HREF}">{PARENT_FORUM_NAME}</a><!-- ENDIF -->
+			&nbsp;<a href="{U_INDEX}">{L_HOME}</a>&nbsp;<em>&raquo;</em>
+			<a href="{U_VIEWCAT}">{CAT_TITLE}</a>
+			<!-- IF PARENT_FORUM_NAME --><em>&raquo;</em>&nbsp;<a href="{PARENT_FORUM_HREF}">{PARENT_FORUM_NAME}</a><!-- ENDIF -->
 			<em>&raquo;</em>&nbsp;<a href="{U_VIEW_FORUM}">{FORUM_NAME}</a>
 		</td>
 	</tr>
@@ -606,8 +607,9 @@ td.topic_id { cursor: pointer; }
 	<tr>
 		<td><a href="{U_POST_NEW_TOPIC}"><img src="{POST_IMG}" alt="{T_POST_NEW_TOPIC}" /></a></td>
 		<td class="nav" width="100%">
-			&nbsp;<a href="{U_INDEX}">{T_INDEX}</a>
-			<!-- IF HAS_PARENT_FORUM --><em>&raquo;</em>&nbsp;<a href="{PARENT_FORUM_HREF}">{PARENT_FORUM_NAME}</a><!-- ENDIF -->
+			&nbsp;<a href="{U_INDEX}">{L_HOME}</a>&nbsp;<em>&raquo;</em>
+			<a href="{U_VIEWCAT}">{CAT_TITLE}</a>
+			<!-- IF PARENT_FORUM_NAME --><em>&raquo;</em>&nbsp;<a href="{PARENT_FORUM_HREF}">{PARENT_FORUM_NAME}</a><!-- ENDIF -->
 			<em>&raquo;</em>&nbsp;<a href="{U_VIEW_FORUM}">{FORUM_NAME}</a>
 		</td>
 	</tr>

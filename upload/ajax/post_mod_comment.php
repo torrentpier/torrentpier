@@ -4,26 +4,59 @@ if (!defined('IN_AJAX')) die(basename(__FILE__));
 
 global $lang, $userdata;
 
-$post_id = (int) $this->request['post_id'];
-$post = DB()->fetch_row("SELECT t.*, f.*, p.*, pt.post_text
-			FROM ". BB_TOPICS ." t, ". BB_FORUMS ." f, ". BB_POSTS ." p, ". BB_POSTS_TEXT ." pt
-			WHERE p.post_id = $post_id
-				AND t.topic_id = p.topic_id
-				AND f.forum_id = t.forum_id
-				AND p.post_id  = pt.post_id
-			LIMIT 1");
-if (!$post) $this->ajax_die('not post');
+$post_id    = (int) $this->request['post_id'];
+$mc_type    = (int) $this->request['mc_type'];
+$mc_text    = (string) $this->request['mc_text'];
+if (!$mc_text = prepare_message($mc_text)) $this->ajax_die($lang['EMPTY_MESSAGE']);
 
-$type = (int) $this->request['mc_type'];
-$text = (string) $this->request['mc_text'];
-$text = prepare_message($text);
-if (!$text) $this->ajax_die('no text');
+$post = DB()->fetch_row("
+	SELECT 
+		p.post_id, p.poster_id,
+		u.username, u.user_id, u.user_rank
+	FROM      ". BB_POSTS      ." p
+	LEFT JOIN ". BB_USERS      ." u  ON(u.user_id = p.mc_user_id)
+	WHERE p.post_id = $post_id
+");
+if(!$post) $this->ajax_die('not post');
 
-DB()->query("UPDATE ". BB_POSTS ." SET post_mod_comment = '". DB()->escape($text) ."', post_mod_comment_type = $type, post_mc_mod_id = ". $userdata['user_id'] .", post_mc_mod_name = '". $userdata['username'] ."' WHERE post_id = $post_id LIMIT 1");
+$data = array(
+	'mc_comment' => ($mc_type) ? $mc_text : '',
+	'mc_type'    => $mc_type,
+	'mc_user_id' => ($mc_type) ? $userdata['user_id'] : 0,
+);
+$sql_args = DB()->build_array('UPDATE', $data);
+DB()->query("UPDATE ". BB_POSTS ." SET $sql_args WHERE post_id = $post_id");
 
-$this->response['type'] = $type;
-$this->response['post_id'] = $post_id;
+if ($mc_type && $post['poster_id'] != $userdata['user_id'])
+{
+	$subject = sprintf($lang['MC_COMMENT_PM_SUBJECT'], $lang['MC_COMMENT'][$mc_type]['type']);
+	$message = sprintf($lang['MC_COMMENT_PM_MSG'], get_username($post['poster_id']), make_url(POST_URL ."$post_id#$post_id"), $lang['MC_COMMENT'][$mc_type]['type'], $mc_text);
+	
+	send_pm($post['poster_id'], $subject, $message);
+	cache_rm_user_sessions($post['poster_id']);
+}
 
-if ($type == 0) $this->response['html'] = '';
-elseif ($type == 1) $this->response['html'] = '<div class="mcBlock"><table cellspacing="0" cellpadding="0" border="0"><tr><td class="mcTd1C">K</td><td class="mcTd2C">'. profile_url($userdata) .'&nbsp;'. $lang['WROTE'] .':<br /><br />'. bbcode2html($text) .'</td></tr></table></div>';
-elseif ($type == 2) $this->response['html'] = '<div class="mcBlock"><table cellspacing="0" cellpadding="0" border="0"><tr><td class="mcTd1W">!</td><td class="mcTd2W">'. profile_url($userdata) .'&nbsp;'. $lang['WROTE'] .':<br /><br />'. bbcode2html($text) .'</td></tr></table></div>';
+switch($mc_type)
+{
+	case 1: // Комментарий
+		$mc_class = 'success';
+		break;
+	case 2: // Информация
+		$mc_class = 'info';
+		break;
+	case 3: // Предупреждение
+		$mc_class = 'warning';
+		break;
+	case 4: // Нарушение
+		$mc_class = 'danger';
+		break;
+	default:
+		$mc_class = '';
+		break;
+}
+
+$this->response['mc_type']  = $mc_type;
+$this->response['post_id']  = $post_id;
+$this->response['mc_title'] = sprintf($lang['MC_COMMENT'][$mc_type]['title'], profile_url($userdata));
+$this->response['mc_text']  = bbcode2html($mc_text);
+$this->response['mc_class'] = $mc_class;

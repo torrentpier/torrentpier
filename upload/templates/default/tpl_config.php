@@ -23,6 +23,7 @@ $images['icon_www']            = $_lang .'icon_www.gif';
 $images['icon_icq']            = $_lang .'icon_icq_add.gif';
 
 $images['icon_mc']             = $_lang .'icon_mc.gif';
+$images['icon_poll']           = $_lang .'icon_poll.gif';
 
 $images['icon_birthday']       = $_main .'icon_birthday.gif';
 $images['icon_male']           = $_main .'icon_male.gif';
@@ -146,6 +147,7 @@ if (!empty($page_cfg['load_tpl_vars']) AND $vars = array_flip($page_cfg['load_tp
 			'IP_POST_IMG'     => ($bb_cfg['text_buttons']) ? $lang['VIEW_IP_TXTB']          : '<img src="'. $images['icon_ip']      .'" alt="'.$lang['VIEW_IP_TXTB'].'" title="'. $lang['VIEW_IP'] .'" />',
 			'MOD_POST_IMG'    => ($bb_cfg['text_buttons']) ? $lang['MODERATE_POST_TXTB']    : '<img src="'. $images['icon_mod']     .'" alt="'.$lang['MODERATE_POST_TXTB'].'" title="'. $lang['MODERATE_POST'] .'" />',
 			'MC_IMG'          => ($bb_cfg['text_buttons']) ? '['.$lang['COMMENT'].']'       : '<img src="'. $images['icon_mc']      .'" alt="['.$lang['COMMENT'].']" title="'.$lang['COMMENT'].'" />',
+			'POLL_IMG'          => ($bb_cfg['text_buttons']) ? $lang['TOPIC_POLL'] : '<img src="'. $images['icon_poll'] .'" alt="'.$lang['TOPIC_POLL'] .'" title="'. $lang['ADD_POLL'] .'" />',
 
 			'QUOTE_URL'       => BB_ROOT . POSTING_URL . "?mode=quote&amp;p=",
 			'EDIT_POST_URL'   => BB_ROOT . POSTING_URL . "?mode=editpost&amp;p=",
