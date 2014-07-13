@@ -18,7 +18,7 @@ if (!empty($template))
 	$template->pparse('page_footer');
 }
 
-$show_dbg_info = (DBG_USER && IS_ADMIN && !defined('IN_ADMIN'));
+$show_dbg_info = (DBG_USER && IS_ADMIN && !(isset($_GET['pane']) && $_GET['pane'] == 'left'));
 
 if(!$bb_cfg['gzip_compress'])
 {
@@ -75,7 +75,7 @@ echo '
 	</div><!--/body_container-->
 ';
 
-if (DBG_USER && (SQL_DEBUG || PROFILER) && !defined('IN_ADMIN'))
+if (DBG_USER && (SQL_DEBUG || PROFILER) && !(isset($_GET['pane']) && $_GET['pane'] == 'left'))
 {
 	require(INC_DIR . 'page_footer_dev.php');
 }

@@ -113,11 +113,11 @@ ajax.edit_topic_title = function(topic_title) {
 		topic_id    : {TOPIC_ID},
 		topic_title : topic_title
 	});
-}
+};
 ajax.callback.mod_action = function(data) {
 	$tt_td.html(ajax.tte_orig_html);
 	$('.tt-text', $tt_td).html(data.topic_title);
-}
+};
 ajax.post_mod_comment = function(post_id, mc_text, mc_type) {
 	ajax.exec({
 		action  : 'post_mod_comment',
@@ -125,7 +125,7 @@ ajax.post_mod_comment = function(post_id, mc_text, mc_type) {
 		mc_type : mc_type,
 		mc_text : mc_text
 	});
-}
+};
 ajax.callback.post_mod_comment = function(data) {
 	if (data.mc_type == 0) {
 		$('#mc_text_'+ data.post_id).attr('value', '');
@@ -138,7 +138,7 @@ ajax.callback.post_mod_comment = function(data) {
 		initPostBBCode('#pc_'+ data.post_id);
 		$('#pc_'+ data.post_id).show();
 	}
-}
+};
 </script>
 <a style="cursor: help; color: #800000;" title="{L_EDIT_TOPIC_TITLE}" onclick="edit_topic_title('edit'); return false" href="#">&para;</a>
 
@@ -239,15 +239,15 @@ function build_poll_add_form (src_el)
 	<tr>
 
 		<!-- IF AUTH_MOD -->
-		<td class="small bold nowrap" style="padding: 0px 0px 0px 4px;">
+		<td class="small bold nowrap" style="padding: 0 0 0 4px;">
 			<!-- IF IN_MODERATION -->{L_MODERATE_TOPIC}<!-- ELSE --><a href="{PAGE_URL}&amp;mod=1&amp;start={PAGE_START}" class="small bold">{L_MODERATE_TOPIC}</a><!-- ENDIF -->
 			&nbsp;<span style="color:#CDCDCD;">|</span>&nbsp;
 			<a class="small bold" href="{PIN_HREF}">{PIN_TITLE}</a>
 		</td>
 		<!-- IF SELECT_PPP -->
-		<td class="med" style="padding: 0px 4px 2px 4px;">|</td>
-		<td class="small nowrap" style="padding: 0px 0px 0px 0px;">{L_SELECT_POSTS_PER_PAGE}</td>
-		<td class="small nowrap" style="padding: 0px 0px 0px 3px;">
+		<td class="med" style="padding: 0 4px 2px 4px;">|</td>
+		<td class="small nowrap" style="padding: 0 0 0 0;">{L_SELECT_POSTS_PER_PAGE}</td>
+		<td class="small nowrap" style="padding: 0 0 0 3px;">
 			<form id="ppp" action="{PAGE_URL_PPP}" method="post">{SELECT_PPP}</form>
 		</td>
 		<!-- ENDIF / SELECT_PPP -->
@@ -261,7 +261,7 @@ function build_poll_add_form (src_el)
 			<!-- ENDIF / LOGGED_IN -->
 		</td>
 
-		<td class="nowrap" style="padding: 0px 4px 2px 4px;">
+		<td class="nowrap" style="padding: 0 4px 2px 4px;">
 			<form action="search.php?t={TOPIC_ID}&amp;dm=1&amp;s=1" method="post">
 				<input id="search-text" type="text" name="nm" class="hint" style="width: 150px;" placeholder="{L_SEARCH_IN_TOPIC}" required />
 				<input type="submit" class="bold" value="&raquo;" style="width: 30px;" />

@@ -55,8 +55,8 @@ $domain_name = (!empty($_SERVER['SERVER_NAME'])) ? $_SERVER['SERVER_NAME'] : $do
 
 // Increase number of revision after update
 $bb_cfg['tp_version'] = '2.6 (RC)';
-$bb_cfg['tp_release_date'] = '21-06-2014';
-$bb_cfg['tp_release_state'] = 'R590';
+$bb_cfg['tp_release_date'] = '13-07-2014';
+$bb_cfg['tp_release_state'] = 'R591';
 
 // Database
 $charset  = 'utf8';
@@ -212,7 +212,7 @@ $bb_cfg['dl_cancel_days_keep']   = 30;
 $bb_cfg['torstat_days_keep']     = 60;          // days to keep user's per-torrent stats
 
 // Tor-Help
-$bb_cfg['torhelp_enabled']       = false;        // find dead torrents (without seeder) that user might help seeding
+$bb_cfg['torhelp_enabled']       = false;       // find dead torrents (without seeder) that user might help seeding
 
 $page_cfg['show_torhelp'] = array(
 #	BB_SCRIPT => true
@@ -242,11 +242,8 @@ $bb_cfg['posting_url'] = 'posting.php';  #  "http://{$domain_name}/posting.php"
 $bb_cfg['pm_url']      = 'privmsg.php';  #  "http://{$domain_name}/privmsg.php"
 
 // Language
-setlocale(LC_ALL, 'ru_RU.UTF-8');
-setlocale(LC_NUMERIC, 'C');
-
-$bb_cfg['charset']       = 'utf8';
-$bb_cfg['auto_language'] = true;
+$bb_cfg['charset']       = 'utf8'; // page charset
+$bb_cfg['auto_language'] = true;   // select user-preferred language automatically
 
 if (!empty($_SERVER['HTTP_ACCEPT_LANGUAGE']) && $bb_cfg['auto_language'])
 {
@@ -285,7 +282,7 @@ define('ADMIN_TPL_DIR', TEMPLATES_DIR .'/admin/');
 
 $bb_cfg['templates'] = array(
 //	'folder'	=> 'Name',
-	'default'	=> 'Стандартный'
+	'default'	=> 'Стандартный',
 );
 
 $bb_cfg['tpl_name']   = 'default';
@@ -300,14 +297,8 @@ $page_cfg['show_sidebar1'] = array(
 );
 $page_cfg['show_sidebar2'] = array(
 #	BB_SCRIPT => true
-	'index' => false,
+	'index' => true,
 );
-
-$bb_cfg['sidebar1_static_content_path'] = BB_PATH .'/misc/html/sidebar1.html';
-$bb_cfg['sidebar2_static_content_path'] = BB_PATH .'/misc/html/sidebar2.html';
-
-$bb_cfg['topic_tpl']['overall_header'] = TEMPLATES_DIR .'topic_tpl_overall_header.html';
-$bb_cfg['topic_tpl']['rules_video']    = TEMPLATES_DIR .'topic_tpl_rules_video.html';
 
 // Cookie
 $bb_cfg['cookie_domain'] = in_array($domain_name, array(getenv('SERVER_ADDR'), 'localhost')) ? '' : ".$domain_name";
@@ -439,10 +430,10 @@ define('CRON_ALLOWED', TRIGGERS_DIR .'cron_allowed');
 define('CRON_RUNNING', TRIGGERS_DIR .'cron_running');
 
 //Формат даты
-$bb_cfg['date_format']        = 'Y-m-d';
+$bb_cfg['date_format']             = 'Y-m-d';
 
 // Subforums
-$bb_cfg['sf_on_first_page_only'] = true;
+$bb_cfg['sf_on_first_page_only']   = true;
 
 // Forums
 $bb_cfg['allowed_topics_per_page'] = array(50, 100, 150, 200, 250, 300);
@@ -455,7 +446,7 @@ $bb_cfg['show_poster_joined'] = true;
 $bb_cfg['show_poster_posts']  = true;
 $bb_cfg['show_poster_from']   = true;
 $bb_cfg['show_bot_nick']      = false;
-$bb_cfg['text_buttons']       = false;              // replace EDIT, QUOTE... images with text links
+$bb_cfg['text_buttons']       = false;             // replace EDIT, QUOTE... images with text links
 $bb_cfg['parse_ed2k_links']   = true;              // make ed2k links clickable
 $bb_cfg['post_date_format']   = 'd-M-Y H:i';
 $bb_cfg['ext_link_new_win']   = true;              // open external links in new window
@@ -568,12 +559,12 @@ define('MEM_USAGE', function_exists('memory_get_usage'));
 
 $bb_cfg['mem_on_start'] = (MEM_USAGE) ? memory_get_usage() : 0;
 
-$bb_cfg['translate_dates'] = true;                 // in displaying time
+$bb_cfg['translate_dates'] = true; // in displaying time
 $bb_cfg['use_word_censor'] = true;
 
 $bb_cfg['last_visit_date_format'] = 'd-M H:i';
 $bb_cfg['last_post_date_format']  = 'd-M-y H:i';
-$bb_cfg['poll_max_days']         = 180;            // сколько дней с момента создания темы опрос будет активным
+$bb_cfg['poll_max_days']          = 180; // сколько дней с момента создания темы опрос будет активным
 
 $bb_cfg['allow_change'] = array(
 	'language'   => true,
@@ -590,8 +581,8 @@ $banned_user_agents = array(
 #	'wget',
 );
 
-$bb_cfg['porno_forums_screenshots_topic_id'] = 52267;
-$bb_cfg['trash_forum_id'] = 0;                     // (int)    27
+$bb_cfg['porno_forums_screenshots_topic_id'] = 0; // (int) 7
+$bb_cfg['trash_forum_id'] = 0;                    // (int) 7
 
 $bb_cfg['first_logon_redirect_url']    = 'index.php';
 $bb_cfg['terms_and_conditions_url']    = 'index.php';
@@ -599,11 +590,6 @@ $bb_cfg['terms_and_conditions_url']    = 'index.php';
 $bb_cfg['user_agreement_url']          = 'misc.php?do=info&show=user_agreement';
 $bb_cfg['copyright_holders_url']       = 'misc.php?do=info&show=copyright_holders';
 $bb_cfg['advert_url']                  = 'misc.php?do=info&show=advert';
-
-$bb_cfg['html_path']                   = BB_PATH .'/misc/html/';  #
-$bb_cfg['user_agreement_html_path']    = $bb_cfg['html_path'] .'user_agreement.html';  #
-$bb_cfg['copyright_holders_html_path'] = $bb_cfg['html_path'] .'copyright_holders.html';  #
-$bb_cfg['advert_html_path']            = $bb_cfg['html_path'] .'advert.html';  #
 
 // Captcha
 $bb_cfg['captcha'] = array(

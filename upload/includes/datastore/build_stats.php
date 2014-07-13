@@ -53,7 +53,7 @@ if ($bb_cfg['birthday_check_day'] && $bb_cfg['birthday_enabled'])
 	$sql = DB()->fetch_rowset("SELECT user_id, username, user_rank , user_birthday
 		FROM ". BB_USERS ." 
 		WHERE user_id NOT IN(". EXCLUDED_USERS_CSV .") 
-			AND user_birthday IS not NULL 
+			AND user_birthday != '0000-00-00'
 			AND user_active = 1 
 		ORDER BY user_level DESC, username
 	");

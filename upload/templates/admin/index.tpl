@@ -55,13 +55,13 @@ table.forumline { margin: 0 auto; }
 <!-- IF TPL_ADMIN_MAIN -->
 <!--========================================================================-->
 <script type="text/javascript">
-ajax.manage_admin = function(mode) {
+ajax.manage_admin = function (mode) {
 	ajax.exec({
 		action  : 'manage_admin',
 		mode    : mode,
 		user_id : ''
 	});
-}
+};
 ajax.callback.manage_admin = function(data) {
 	$('#cache').html(data.cache_html);
 	$('#datastore').html(data.datastore_html);

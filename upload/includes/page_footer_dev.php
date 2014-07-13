@@ -26,7 +26,7 @@
 	background-color: #F5F5F5;
 	padding-bottom: 1px;
 	border: solid #F5F5F5;
-	border-width: 0px 0px 1px 0px;
+	border-width: 0 0 1px 0;
 	cursor: pointer;
 }
 .sqlLogHead {

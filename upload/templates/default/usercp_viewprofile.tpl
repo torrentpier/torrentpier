@@ -20,31 +20,31 @@ ajax.callback.edit_user_profile = function(data){
 };
 
 // avatar
-ajax.avatar = function(mode, uid) {
+ajax.avatar = function (mode, uid) {
 	ajax.exec({
 		action  : 'avatar',
 		mode    : mode,
 		user_id : uid
 	});
-}
-ajax.callback.avatar = function(data) {
+};
+ajax.callback.avatar = function (data) {
 	$('#avatar-img').html(data.avatar_html);
 	$('#avatar-adm').hide();
-}
+};
 
 // change_user_rank
-ajax.change_user_rank = function(uid, rank_id) {
+ajax.change_user_rank = function (uid, rank_id) {
 	$('#rank-msg').html('<i class="loading-1">{L_LOADING}</i>');
 	ajax.exec({
 		action  : 'change_user_rank',
 		user_id : uid,
 		rank_id : rank_id
 	});
-}
-ajax.callback.change_user_rank = function(data) {
+};
+ajax.callback.change_user_rank = function (data) {
 	$('#rank-msg').html(data.html);
 	$('#rank-name').html(data.rank_name);
-}
+};
 
 ajax.user_opt = {AJAX_USER_OPT};
 
@@ -56,10 +56,10 @@ ajax.change_user_opt = function() {
 		user_opt : $.toJSON(ajax.user_opt)
 	});
 };
-ajax.callback.change_user_opt = function(data){
+ajax.callback.change_user_opt = function (data) {
 	$('#user-opt-resp').html(data.resp_html);
 	$('#user-opt-save-btn').removeAttr('disabled');
-}
+};
 
 $(document).ready(function(){
 	$('#user-opt').find('input[type=checkbox]').click(function(){
@@ -139,10 +139,10 @@ ajax.group_membership = function(mode) {
 		mode    : mode,
 		user_id : {PROFILE_USER_ID}
 	});
-}
+};
 ajax.callback.group_membership = function(data) {
 	$('#gr-mem-list').html(data.group_list_html);
-}
+};
 </script>
 <!-- ENDIF / IS_AM -->
 
@@ -154,14 +154,14 @@ ajax.index_data = function(mode) {
 		mode    : mode,
 		user_id : {PROFILE_USER_ID}
 	});
-}
+};
 ajax.callback.index_data = function(data) {
 	$('#traf-stats-tbl').html(data.html);
 	$('#bt_user_ratio').html(data.user_ratio);
 	$('#traf-stats-span').hide();
 	$('#traf-stats-tbl').show();
 	$('#bt_user_ratio').show();
-}
+};
 </script>
 <!-- ENDIF -->
 

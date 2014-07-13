@@ -389,7 +389,7 @@ var TPL = {
 		TPL.reset_f_errors();
 		var msg_header = [];
 		var msg_poster = '';
-		var msg_body = []
+		var msg_body = [];
 		var msg_els = TPL.get_msg_els( $('#tpl-src-msg').val(), true );
 
 		$.each(msg_els, function(el,at){
@@ -4073,11 +4073,11 @@ ajax.posts = function(message, res_id) {
 		message : message,
 		res_id  : res_id
 	});
-}
+};
 ajax.callback.posts = function(data) {
 	$('#'+data.res_id).html(data.message_html).append('<div class="clear"></div>');
 	initPostBBCode('#'+data.res_id);
-}
+};
 
 // topic_tpl
 ajax.topic_tpl = function(mode, params) {
@@ -4150,7 +4150,7 @@ ajax.topic_tpl = function(mode, params) {
 		default:
 			alert('invalid mode: '+ mode);
 	}
-}
+};
 ajax.callback.topic_tpl = function(data) {
 	switch (data.mode) {
 		case 'load':
@@ -4184,7 +4184,7 @@ ajax.callback.topic_tpl = function(data) {
 			$('#tpl-new-resp').html('новый шаблон создан (в списке выбора он появится после перезагрузки страницы)');
 			break;
 	}
-}
+};
 
 function tpl_build_form ()
 {

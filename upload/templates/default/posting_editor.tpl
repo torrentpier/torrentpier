@@ -92,7 +92,7 @@ ajax.callback.posts = function(data){
 	<input type="button" value="{L_LIST}" name="codeList" title="{L_LIST_TITLE}"  style="width: 60px;"/>
 	<input type="button" value="1." name="codeOpt" title="{L_LIST_ITEM}" style="width: 30px;" />&nbsp;
 	<input type="button" value="{L_QUOTE_SEL}" name="quoteselected" title="{L_QUOTE_SELECTED}" onmouseout="bbcode.refreshSelection(false);" onmouseover="bbcode.refreshSelection(true);" onclick="bbcode.onclickQuoteSel();" />&nbsp;
-    <!-- IF USER_LANG != 'en' -->
+	<!-- IF USER_LANG != 'en' -->
 	<input type="button" value="{L_TRANSLIT}" name="Translit" title="{L_TRANSLIT_TITLE}" style="width: 68px;" onclick="transliterate(document.post.message, this);" /> <a href="#" onclick="toggle_block('translit_opt'); return false"><span style="color: darkred"><b>?</b></span></a>
 	<!-- ENDIF -->
 </div>

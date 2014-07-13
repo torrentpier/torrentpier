@@ -19,7 +19,7 @@ function toggle_cbox (cb_id, tr_id)
 
 <table width="100%">
 	<tr>
-  <td style="padding-left: 0px;" class="nav"><a href="{U_INDEX}" class="nav">{T_INDEX}</a><span class="nav">
+  <td style="padding-left: 0;" class="nav"><a href="{U_INDEX}" class="nav">{T_INDEX}</a><span class="nav">
 		&raquo;&nbsp;<a href="{U_VIEW_FORUM}" class="nav">{FORUM_NAME}</a></span></td>
 	</tr>
 </table>
@@ -43,7 +43,7 @@ function toggle_cbox (cb_id, tr_id)
 	</tr>
 	<!-- //bot -->
 	<tr>
-		<td colspan="2" class="row2" align="center" style="padding: 0px">
+		<td colspan="2" class="row2" align="center" style="padding: 0">
 		<table class="borderless">
 			<tr>
 				 <td class="row2" align="center"><span class="gen"><input type="checkbox" name="after_split_to_old" id="after_split_to_old" checked="checked" /><label for="after_split_to_old"> {L_BOT_AFTER_SPLIT_TO_OLD}</label></span></td>

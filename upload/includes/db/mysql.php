@@ -960,7 +960,7 @@ class sql_db
 			if (!$html_table && $row)
 			{
 				$html_table = true;
-				$this->explain_hold .= '<table width="100%" cellpadding="3" cellspacing="1" class="bodyline" style="border-width: 0px;"><tr>';
+				$this->explain_hold .= '<table width="100%" cellpadding="3" cellspacing="1" class="bodyline" style="border-width: 0;"><tr>';
 				foreach (array_keys($row) as $val)
 				{
 					$this->explain_hold .= '<td class="row3 gensmall" align="center"><b>'. $val .'</b></td>';

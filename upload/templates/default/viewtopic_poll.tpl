@@ -78,7 +78,7 @@ function submit_vote ()
 
 function build_poll_edit_form ()
 {
-	$('#poll').empty().append( $('#poll-edit-tpl').contents() )
+	$('#poll').empty().append($('#poll-edit-tpl').contents());
 	$('#poll-legend').html('Изменить опрос');
 	$('#poll-edit-submit-btn').click(function(){
 		return poll_manage('poll_edit', 'Изменить опрос (старые результаты будут удалены)?');

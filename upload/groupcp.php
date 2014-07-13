@@ -22,17 +22,17 @@ function generate_user_info(&$row, $date_format, $group_mod, &$from, &$posts, &$
 	$pm     = ($bb_cfg['text_buttons']) ? '<a class="txtb" href="'. (PM_URL . "?mode=post&amp;". POST_USERS_URL ."=".$row['user_id']) .'">'. $lang['SEND_PM_TXTB'] .'</a>' : '<a href="' . (PM_URL . "?mode=post&amp;". POST_USERS_URL ."=".$row['user_id']) .'"><img src="' . $images['icon_pm'] . '" alt="' . $lang['SEND_PRIVATE_MESSAGE'] . '" title="' . $lang['SEND_PRIVATE_MESSAGE'] . '" border="0" /></a>';
 
 	if (bf($row['user_opt'], 'user_opt', 'user_viewemail') || $group_mod)
-    {
-       	$email_uri = ($bb_cfg['board_email_form']) ? ("profile.php?mode=email&amp;". POST_USERS_URL ."=".$row['user_id']) : 'mailto:'. $row['user_email'];
-       	$email = '<a class="editable" href="'. $email_uri .'">'. $row['user_email'] .'</a>';
-    }
-    else $email = '';
+	{
+		$email_uri = ($bb_cfg['board_email_form']) ? ("profile.php?mode=email&amp;". POST_USERS_URL ."=".$row['user_id']) : 'mailto:'. $row['user_email'];
+		$email = '<a class="editable" href="'. $email_uri .'">'. $row['user_email'] .'</a>';
+	}
+	else $email = '';
 
-    if ($row['user_website'])
-    {
-        $www = ($bb_cfg['text_buttons']) ? '<a class="txtb" href="'. $row['user_website'] .'"  target="_userwww">'. $lang['VISIT_WEBSITE_TXTB'] .'</a>' : '<a class="txtb" href="'. $row['user_website'] .'" target="_userwww"><img src="' . $images['icon_www'] . '" alt="' . $lang['VISIT_WEBSITE'] . '" title="' . $lang['VISIT_WEBSITE'] . '" border="0" /></a>';
-    }
-    else $www = '';
+	if ($row['user_website'])
+	{
+		$www = ($bb_cfg['text_buttons']) ? '<a class="txtb" href="'. $row['user_website'] .'"  target="_userwww">'. $lang['VISIT_WEBSITE_TXTB'] .'</a>' : '<a class="txtb" href="'. $row['user_website'] .'" target="_userwww"><img src="' . $images['icon_www'] . '" alt="' . $lang['VISIT_WEBSITE'] . '" title="' . $lang['VISIT_WEBSITE'] . '" border="0" /></a>';
+	}
+	else $www = '';
 
 	return;
 }
@@ -139,20 +139,20 @@ if (!$group_id)
 		$options = '';
 		foreach ($params as $name => $data)
 		{
-     		$text  = htmlCHR(str_short(rtrim($name), HTML_SELECT_MAX_LENGTH));
+			$text  = htmlCHR(str_short(rtrim($name), HTML_SELECT_MAX_LENGTH));
 
-     		$members = ($data['m']) ? $lang['MEMBERS_IN_GROUP'] .': '. $data['m'] : $lang['NO_GROUP_MEMBERS'];
-     		$candidates  = ($data['c']) ? $lang['PENDING_MEMBERS'] .': '. $data['c'] : $lang['NO_PENDING_GROUP_MEMBERS'];
+			$members = ($data['m']) ? $lang['MEMBERS_IN_GROUP'] .': '. $data['m'] : $lang['NO_GROUP_MEMBERS'];
+			$candidates  = ($data['c']) ? $lang['PENDING_MEMBERS'] .': '. $data['c'] : $lang['NO_PENDING_GROUP_MEMBERS'];
 
 			$options .= '<li class="pad_2"><a href="'. GROUP_URL . $data['id'] .'" class="med bold">'. $text .'</a></li>';
 			$options .= '<ul><li class="seedmed">'. $members .'</li>';
-            if(IS_AM)
-            {
-	            $options .= '<li class="leechmed">'. $candidates .'</li>';
-            }
-            $options .= '</ul>';
+			if (IS_AM)
+			{
+				$options .= '<li class="leechmed">'. $candidates .'</li>';
+			}
+			$options .= '</ul>';
 
-        }
+		}
 		return $options;
 	}
 

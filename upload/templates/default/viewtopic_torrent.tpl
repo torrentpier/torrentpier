@@ -6,8 +6,9 @@
 <script type="text/javascript">
 $(document).ready(function(){
 	$('table.tablesorter').tablesorter({
-		sortList: [[4,1]]	});
-    });
+		sortList: [[4,1]]
+	});
+});
 </script>
 
 <tr>

@@ -247,7 +247,7 @@
 <!-- {QUOTA_LIMIT_SETTINGS} -->
 
 <!-- BEGIN switch_quota_limit_desc -->
-<center><h1>{L_QUOTA_LIMIT_DESC}</h1></center>
+<div align="center"><h1>{L_QUOTA_LIMIT_DESC}</h1></div>
 <table width="99%" align="center">
 	<tr>
 		<td width="49%">

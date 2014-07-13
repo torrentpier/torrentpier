@@ -107,7 +107,7 @@ ajax.edit_topic_title = function(topic_id, topic_title) {
 		topic_id    : topic_id,
 		topic_title : topic_title
 	});
-}
+};
 
 function mod_action (mode)
 {
@@ -137,7 +137,7 @@ ajax.mod_action = function(topic_ids, mode, status) {
 		topic_ids : topic_ids,
 		status    : status
 	});
-}
+};
 
 ajax.callback.mod_action = function(data) {
 	if(data.topics) {
@@ -150,7 +150,7 @@ ajax.callback.mod_action = function(data) {
 		$tt_td.html(ajax.tte_orig_html);
 		$('.tt-text', $tt_td).html(data.topic_title);
 	}
-}
+};
 </script>
 
 <div id="mod-action-content" style="display: none;">
@@ -379,7 +379,7 @@ td.topic_id { cursor: pointer; }
 	<table cellspacing="0" cellpadding="0" class="borderless w100">
 	<tr>
 		<!-- IF AUTH_MOD -->
-		<td class="small bold nowrap" style="padding: 0px 0px 0px 4px;">
+		<td class="small bold nowrap" style="padding: 0 0 0 4px;">
 			<span id="show_mod_options"><a href="#" class="small bold">{L_MODERATE_FORUM}</a></span>
 		</td>
 		<td class="med" style="padding: 0 4px 2px 4px;color:#CDCDCD">|</td>
@@ -410,7 +410,7 @@ td.topic_id { cursor: pointer; }
 			<!-- ENDIF / LOGGED_IN -->
 		</td>
 
-		<td class="nowrap" style="padding: 0px 4px 2px 4px;">
+		<td class="nowrap" style="padding: 0 4px 2px 4px;">
 			<form action="{PAGE_URL}" method="post">
 				<input id="search-text" type="text" name="nm"
 				<!-- IF TITLE_MATCH -->

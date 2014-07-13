@@ -8,7 +8,7 @@ $mode = (string) $this->request['mode'];
 $html = '';
 
 switch($mode)
-{	
+{
 	case 'birthday_week':
 		$stats = $datastore->get('stats');
 		$datastore->enqueue(array(

@@ -7,11 +7,10 @@
 		<!--sidebar2-->
 		<td id="sidebar2">
 		<div id="sidebar2-wrap">
-		
-		
-			<?php if (!empty($bb_cfg['sidebar2_static_content_path'])) include($bb_cfg['sidebar2_static_content_path']); ?>
+			<!-- IF HTML_SIDEBAR_2 -->
+				<?php include($V['HTML_SIDEBAR_2']); ?>
+			<!-- ENDIF -->
 			<img width="210" class="spacer" src="{SPACER}" alt="" />
-			
 		</div><!--/sidebar2_wrap-->
 		</td><!--/sidebar2-->
 	<!-- ENDIF -->
@@ -27,20 +26,20 @@
 
 		<br /><br />
 
-		<!-- IF $bb_cfg['user_agreement_html_path'] -->
 		<div class="med bold tCenter">
+			<!-- IF HTML_AGREEMENT -->
 			<a href="{$bb_cfg['user_agreement_url']}" onclick="window.open(this.href, '', InfoWinParams); return false;">{L_USER_AGREEMENT}</a>
-			<!-- IF $bb_cfg['copyright_holders_html_path'] -->
+			<!-- ENDIF -->
+			<!-- IF HTML_COPYRIGHT -->
 			<span class="normal">&nbsp;|&nbsp;</span>
 			<a href="{$bb_cfg['copyright_holders_url']}" onclick="window.open(this.href, '', InfoWinParams); return false;">{L_COPYRIGHT_HOLDERS}</a>
 			<!-- ENDIF -->
-			<!-- IF $bb_cfg['advert_html_path'] -->
+			<!-- IF HTML_ADVERT -->
 			<span class="normal">&nbsp;|&nbsp;</span>
 			<a href="{$bb_cfg['advert_url']}" onclick="window.open(this.href, '', InfoWinParams); return false;">{L_ADVERT}</a>
 			<!-- ENDIF -->
 		</div>
 		<br />
-		<!-- ENDIF -->
 
 		<!-- IF SHOW_ADMIN_LINK -->
 		<div class="tiny tCenter"><a href="{ADMIN_LINK_HREF}">{L_ADMIN_PANEL}</a></div>

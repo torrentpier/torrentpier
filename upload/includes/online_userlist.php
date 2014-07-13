@@ -149,5 +149,5 @@ $online['cnt'] = $online_short['cnt'] = <<<HTML
 ]
 HTML;
 
-CACHE('bb_cache')->set('online', $online, 45);
-CACHE('bb_cache')->set('online_short', $online_short, 45);
+CACHE('bb_cache')->set('online_'.$userdata['user_lang'], $online, 45);
+CACHE('bb_cache')->set('online_short_'.$userdata['user_lang'], $online_short, 45);

@@ -109,7 +109,7 @@ elseif ($do == 'info')
 	}
 	$req_mode = clean_filename(basename($req_mode));
 
-	$html_dir = $bb_cfg['html_path'];
+	$html_dir = LANG_DIR . 'html/';
 	$require = file_exists($html_dir . $req_mode .'.html') ? $html_dir . $req_mode .'.html' : $html_dir . 'not_found.html';
 
 	$in_info = true;
@@ -133,7 +133,7 @@ elseif ($do == 'info')
 	</style>
 
 	<br />
-				<?php require($require) ?>
+	<?php require($require) ?>
 	</body>
 	</html>
 	<?php

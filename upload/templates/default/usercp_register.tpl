@@ -161,7 +161,7 @@ document.write('<input type="hidden" name="user_timezone" value="'+tz+'" />');
 </tr>
 <!-- IF TEMPLATES_SELECT -->
 <tr>
-	<td class="prof-title">{L_FORUM_STYLE}</td>
+	<td class="prof-title">{L_FORUM_STYLE}:</td>
 	<td>
 		<div style="margin: 3px 0;">
 			{TEMPLATES_SELECT}
@@ -195,6 +195,7 @@ ajax.callback.posts = function(data){
 	<!-- ENDIF -->
 </tr>
 
+<!-- IF IS_ADMIN -->
 <tr>
 	<td class="prof-title">{L_PUBLIC_VIEW_EMAIL}:</td>
 	<td>
@@ -202,6 +203,7 @@ ajax.callback.posts = function(data){
 		<label><input type="radio" name="user_viewemail" value="0" <!-- IF not USER_VIEWEMAIL -->checked="checked"<!-- ENDIF --> />{L_NO}</label>
 	</td>
 </tr>
+<!-- ENDIF -->
 <tr>
 	<td class="prof-title">{L_HIDE_USER}:</td>
 	<td>
@@ -217,7 +219,7 @@ ajax.callback.posts = function(data){
 	</td>
 </tr>
 <tr>
-	<td class="prof-title">{L_ALWAYS_NOTIFY}: <br /><h6>{L_ALWAYS_NOTIFY_EXPLAIN}</h6></td>
+	<td class="prof-title">{L_ALWAYS_NOTIFY}:<br /><h6>{L_ALWAYS_NOTIFY_EXPLAIN}</h6></td>
 	<td>
 		<label><input type="radio" name="user_notify" value="1" <!-- IF USER_NOTIFY -->checked="checked"<!-- ENDIF --> />{L_YES}</label>&nbsp;&nbsp;
 		<label><input type="radio" name="user_notify" value="0" <!-- IF not USER_NOTIFY -->checked="checked"<!-- ENDIF --> />{L_NO}</label>
@@ -234,7 +236,7 @@ ajax.callback.posts = function(data){
 </tr>
 <!-- ENDIF -->
 <tr>
-	<td class="prof-title">{L_CALLSEED}: <br /><h6>{L_CALLSEED_EXPLAIN}</h6></td>
+	<td class="prof-title">{L_CALLSEED}:<br /><h6>{L_CALLSEED_EXPLAIN}</h6></td>
 	<td>
 		<label><input type="radio" name="user_callseed" value="1" <!-- IF USER_CALLSEED -->checked="checked"<!-- ENDIF --> />{L_YES}</label>&nbsp;&nbsp;
 		<label><input type="radio" name="user_callseed" value="0" <!-- IF not USER_CALLSEED -->checked="checked"<!-- ENDIF --> />{L_NO}</label>
@@ -249,7 +251,7 @@ ajax.callback.posts = function(data){
 </tr>
 <!-- IF SHOW_DATEFORMAT -->
 <tr>
-	<td class="prof-title">{L_DATE_FORMAT}: <br /><h6>{L_DATE_FORMAT_EXPLAIN}</h6></td>
+	<td class="prof-title">{L_DATE_FORMAT}:<br /><h6>{L_DATE_FORMAT_EXPLAIN}</h6></td>
 	<td><input type="text" name="dateformat" value="{DATE_FORMAT}" maxlength="14" /></td>
 </tr>
 <!-- ENDIF -->
@@ -297,7 +299,7 @@ ajax.callback.posts = function(data){
 		<fieldset class="pad_6">
 		<legend class="med bold mrg_2 warnColor1">{L_USER_AGREEMENT_HEAD}</legend>
 			<div class="bCenter">
-				<?php include($bb_cfg['user_agreement_html_path']) ?>
+				<?php include($V['HTML_AGREEMENT']); ?>
 			</div>
 			<p class="med bold mrg_4 tCenter"><label><input type="checkbox" value="" checked="checked" disabled="disabled" /> {L_USER_AGREEMENT_AGREE}</label></p>
 		</fieldset>

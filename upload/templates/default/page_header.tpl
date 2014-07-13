@@ -22,7 +22,7 @@
 </script>
 <script type="text/javascript">
 var bb_url      = '{SITE_URL}';
-var bbl = { "code": "{L_CODE}", "wrote": "{L_WROTE}", "quote": "{L_QUOTE}", "quoted_post": "{L_GOTO_QUOTED_POST}", "loading": "{L_LOADING}", "spoiler_head": "{L_SPOILER_HEAD}", "spoiler_close": "{L_SPOILER_CLOSE}", "links_are": "{L_LINKS_ARE_FORBIDDEN}", "scr_rules": "{L_SCREENSHOTS_RULES}", "play_on": "{L_PLAY_ON_CURPAGE}" }
+var bbl = { "code": "{L_CODE}", "wrote": "{L_WROTE}", "quote": "{L_QUOTE}", "quoted_post": "{L_GOTO_QUOTED_POST}", "loading": "{L_LOADING}", "spoiler_head": "{L_SPOILER_HEAD}", "spoiler_close": "{L_SPOILER_CLOSE}", "links_are": "{L_LINKS_ARE_FORBIDDEN}", "scr_rules": "{L_SCREENSHOTS_RULES}", "play_on": "{L_PLAY_ON_CURPAGE}" };
 
 var postImg_MaxWidth = screen.width - {POST_IMG_WIDTH_DECR_JS};
 var postImgAligned_MaxWidth = Math.round(screen.width/3);
@@ -50,14 +50,14 @@ var InfoWinParams = 'HEIGHT=510,resizable=yes,WIDTH=780';
 var user = {
 	opt_js: {USER_OPTIONS_JS},
 
-	set: function(opt, val, days, reload) {
+	set: function (opt, val, days, reload) {
 		this.opt_js[opt] = val;
 		setCookie('opt_js', $.toJSON(this.opt_js), days);
 		if (reload) {
 			window.location.reload();
 		}
 	}
-}
+};
 
 <!-- IF SHOW_JUMPBOX -->
 $(document).ready(function(){
@@ -326,7 +326,7 @@ $(document).ready(function() {
 <table width="100%" cellpadding="0" cellspacing="0">
 <tr>
 	<td width="40%">
-		{L_USER_WELCOME} &nbsp;<b class="med">{THIS_USER}</b>&nbsp; [ <a href="{U_LOGIN_LOGOUT}" onclick="return confirm('{L_CONFIRM_LOGOUT}');">{L_LOGOUT}</a> ]
+		{L_USER_WELCOME}&nbsp;<b class="med">{THIS_USER}</b>&nbsp;[ <a href="{U_LOGIN_LOGOUT}" onclick="return confirm('{L_CONFIRM_LOGOUT}');">{L_LOGOUT}</a> ]
 	</td>
 	<td style="padding: 2px;">
 		<div>
@@ -473,7 +473,9 @@ $(document).ready(function() {
 					<!-- IF $bb_cfg['seed_bonus_enabled'] --><tr><td>{L_SEED_BONUS}</td><td><a href="profile.php?mode=bonus"><span class="points bold">{POINTS}</span></a></td></tr><!-- ENDIF -->
 				</table>
 			</div><!-- ENDIF -->
-			<?php if (!empty($bb_cfg['sidebar1_static_content_path'])) include($bb_cfg['sidebar1_static_content_path']); ?>
+			<!-- IF HTML_SIDEBAR_1 -->
+				<?php include($V['HTML_SIDEBAR_1']); ?>
+			<!-- ENDIF -->
 			<img width="210" class="spacer" src="{SPACER}" alt="" />
 		</div><!--/sidebar1-wrap-->
 	</td><!--/sidebar1-->

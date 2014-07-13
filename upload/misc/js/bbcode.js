@@ -19,7 +19,7 @@ BBCode.prototype = {
 
 	// Create new BBCode control
 	construct: function(textarea) {
-		this.textarea = textarea
+		this.textarea = textarea;
 		this.tags     = new Object();
 		// Tag for quoting
 		this.addTag(
@@ -253,7 +253,7 @@ BBCode.prototype = {
 		tag.key       = key;
 		tag.ctrlKey   = ctrlKey;
 		tag.multiline = multiline;
-		tag.elt       = this.textarea.form[id]
+		tag.elt       = this.textarea.form[id];
 		this.tags[id] = tag;
 		// Setup events.
 		var elt = tag.elt;
@@ -294,7 +294,7 @@ BBCode.prototype = {
 		if (text.indexOf("\n") >= 0) text = "\n" + text + "\n";
 		return text;
 	}
-}
+};
 
 // Emulation of innerText for Mozilla.
 if (window.HTMLElement && window.HTMLElement.prototype.__defineSetter__) {

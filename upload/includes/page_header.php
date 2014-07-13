@@ -23,7 +23,7 @@ else
 if (defined('SHOW_ONLINE') && SHOW_ONLINE)
 {
 	$online_full = !empty($_REQUEST['online_full']);
-	$online_list = ($online_full) ? 'online' : 'online_short';
+	$online_list = ($online_full) ? 'online_'.$userdata['user_lang'] : 'online_short_'.$userdata['user_lang'];
 
 	${$online_list} = array(
 		'stat'     => '',
@@ -170,7 +170,7 @@ $template->assign_vars(array(
 	'SHOW_ADS'           => (!$logged_in || isset($bb_cfg['show_ads_users'][$user->id]) || (!IS_AM && $user->show_ads)),
 	'USER_HIDE_CAT'      => (BB_SCRIPT == 'index'),
 
-	'USER_LANG'           => $userdata['user_lang'],
+	'USER_LANG'          => $userdata['user_lang'],
 
 	'INCLUDE_BBCODE_JS'  => !empty($page_cfg['include_bbcode_js']),
 	'USER_OPTIONS_JS'    => (IS_GUEST) ? '{}' : bb_json_encode($user->opt_js),
@@ -229,6 +229,12 @@ $template->assign_vars(array(
 
 	'SHOW_SIDEBAR1'      => (!empty($page_cfg['show_sidebar1'][BB_SCRIPT]) || $bb_cfg['show_sidebar1_on_every_page']),
 	'SHOW_SIDEBAR2'      => (!empty($page_cfg['show_sidebar2'][BB_SCRIPT]) || $bb_cfg['show_sidebar2_on_every_page']),
+
+	'HTML_AGREEMENT'     => LANG_DIR . 'html/user_agreement.html',
+	'HTML_COPYRIGHT'     => LANG_DIR . 'html/copyright_holders.html',
+	'HTML_ADVERT'        => LANG_DIR . 'html/advert.html',
+	'HTML_SIDEBAR_1'     => LANG_DIR . 'html/sidebar1.html',
+	'HTML_SIDEBAR_2'     => LANG_DIR . 'html/sidebar2.html',
 
 	// Common urls
 	'AVATARS_URL'        => "images/avatars",

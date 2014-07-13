@@ -73,7 +73,7 @@ table.log_filters td {
 							</div>
 						</fieldset>
 					</td>
-					<td valign="top" class="row1" style="padding: 0px;">
+					<td valign="top" class="row1" style="padding: 0;">
 						<fieldset>
 						<legend>{L_ACTS_LOG_SORT_BY}</legend>
 							<div>
@@ -90,7 +90,7 @@ table.log_filters td {
 		</td>
 	</tr>
 	<tr>
-		<td class="catBottom" style="padding: 0px; height: 26px">
+		<td class="catBottom" style="padding: 0; height: 26px">
 			<span class="med"><input type="submit" class="liteoption" value="&nbsp;{L_SEARCH}&nbsp;" name="submit" /></span>
 		</td>
 	</tr>

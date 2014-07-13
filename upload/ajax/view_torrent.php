@@ -104,7 +104,7 @@ class torrent
 				}
 				array_deep($f['path'], 'clean_tor_dirname');
 
-				$length = isset($f['length']) ? (int) $f['length'] : 0;
+				$length = isset($f['length']) ? (float) $f['length'] : 0;
 				$subdir_count = count($f['path']) - 1;
 
 				if ($subdir_count > 0)

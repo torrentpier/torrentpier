@@ -90,7 +90,7 @@ tr.hl-tr:hover td { background-color: #CFC !important; }
 	<td nowrap="nowrap" class="med tCenter">{list.SCHEDULE}</td>
 	<td nowrap="nowrap" align="center">{list.LAST_RUN}</td>
 	<td nowrap="nowrap" align="center">{list.NEXT_RUN}</td>
-	<td nowrap="nowrap" align="center"><font color="#505050"><b><span class="leechmed">{list.RUN_COUNT}</span></b></font></td>
+	<td nowrap="nowrap" align="center"><span style="color: #505050;" class="leechmed"><b>{list.RUN_COUNT}</b></span></td>
 	<td nowrap="nowrap" align="center">
 		<a href="admin_cron.php?mode=run&id={list.CRON_ID}"><img src="{SITE_URL}images/icon_sync.gif" alt="[Run]" title="{L_CRON_RUN}" /></a>
 		<a href="admin_cron.php?mode=edit&id={list.CRON_ID}"><img src="{SITE_URL}images/icon_edit.gif" alt="[Edit]" title="{L_CRON_EDIT_HEAD_EDIT}" /></a>

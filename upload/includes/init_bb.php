@@ -535,9 +535,9 @@ $datastore->enqueue(array(
 ));
 
 // Дата старта вашего проекта
-if(!$bb_cfg['board_startdate'])
+if (!$bb_cfg['board_startdate'])
 {
-    bb_update_config(array('board_startdate' => TIMENOW));
+	bb_update_config(array('board_startdate' => TIMENOW));
 	DB()->query("UPDATE ". BB_USERS ." SET user_regdate = ". TIMENOW ." WHERE user_id IN(2, ". EXCLUDED_USERS_CSV .")");
 }
 

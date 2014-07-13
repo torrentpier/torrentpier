@@ -268,7 +268,7 @@ $bf['user_opt'] = array(
 	'user_notify'        => 5,  // Сообщать об ответах в отслеживаемых темах
 	'user_notify_pm'     => 6,  // Сообщать о новых ЛС
 	'dis_passkey'        => 7,  // Запрет на добавление passkey, он же запрет на скачивание торрентов
-	'user_porn_forums'   => 8,  // Скрывать pron форумы
+	'user_porn_forums'   => 8,  // Скрывать контент 18+
 	'user_callseed'      => 9,  // Позвать скачавших
 	'user_hide_ads'      => 10, // Запрет на показ рекламы
 	'dis_topic'          => 11, // Запрет на создание новых тем
@@ -1978,14 +1978,6 @@ function redirect ($url)
 	}
 
 	$redirect_url = $server_protocol . $server_name . $server_port . $script_name . preg_replace('#^\/?(.*?)\/?$#', '/\1', $url);
-
-	// Redirect via an HTML form for PITA webservers
-	if (@preg_match('/Microsoft|WebSTAR|Xitami/', getenv('SERVER_SOFTWARE')))
-	{
-		header('Refresh: 0; URL='. $redirect_url);
-		echo '<!DOCTYPE html><html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta http-equiv="refresh" content="0; url='. $redirect_url .'"><title>Redirect</title></head><body><div align="center">If your browser does not support meta redirection please click <a href="'. $redirect_url .'">HERE</a> to be redirected</div></body></html>';
-		exit;
-	}
 
 	// Behave as per HTTP/1.1 spec for others
 	header('Location: '. $redirect_url);

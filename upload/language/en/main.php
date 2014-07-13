@@ -112,8 +112,8 @@ $lang['DISPLAYING_OPTIONS'] = 'Displaying options';
 //
 $lang['REGISTERED_USERS'] = 'Registered Users:';
 $lang['BROWSING_FORUM'] = 'Users browsing this forum:';
-$lang['ONLINE_USERS'] = 'In total there are <b>%1$d</b> users online: %2$d Registered and %3$d Guests';
-$lang['RECORD_ONLINE_USERS'] = 'The Most users ever online was <b>%s</b> on %s'; // first %s = number of users, second %s is the date.
+$lang['ONLINE_USERS'] = 'In total there are <b>%1$d</b> users online: %2$d registered and %3$d guests';
+$lang['RECORD_ONLINE_USERS'] = 'The most users ever online was <b>%s</b> on %s'; // first %s = number of users, second %s is the date.
 
 $lang['ONLINE_ADMIN'] = 'Administrator';
 $lang['ONLINE_MOD'] = 'Moderator';
@@ -185,12 +185,12 @@ $lang['USER_WELCOME'] = 'Welcome,';
 // Index page
 //
 $lang['HOME'] = 'Home';
-$lang['NO_POSTS'] = 'No Posts';
+$lang['NO_POSTS'] = 'No posts';
 $lang['NO_FORUMS'] = 'This board has no forums';
 
 $lang['PRIVATE_MESSAGE'] = 'Private Message';
 $lang['PRIVATE_MESSAGES'] = 'Private Messages';
-$lang['WHOSONLINE'] = 'Who is Online';
+$lang['WHOSONLINE'] = 'Who is online';
 
 $lang['MARK_ALL_FORUMS_READ'] = 'Mark all forums read';
 $lang['FORUMS_MARKED_READ'] = 'All forums have been marked read';
@@ -206,7 +206,7 @@ $lang['VIEW_FORUM'] = 'View Forum';
 
 $lang['FORUM_NOT_EXIST'] = 'The forum you selected does not exist.';
 $lang['REACHED_ON_ERROR'] = 'You have reached this page in error.';
-$lang['ERROR_PORNO_FORUM'] = 'This type of forums was hidden in your profile by you';
+$lang['ERROR_PORNO_FORUM'] = 'This type of forums (18+) was hidden in your profile by you';
 
 $lang['DISPLAY_TOPICS'] = 'Display topics from previous';
 $lang['ALL_TOPICS'] = 'All Topics';
@@ -548,11 +548,11 @@ $lang['NO_SEND_ACCOUNT_INACTIVE'] = 'Sorry, but your password cannot be retrieve
 $lang['NO_SEND_ACCOUNT'] = 'Sorry, but your password cannot be retrieved. Please contact the forum administrator for more information';
 
 $lang['ALWAYS_ADD_SIG'] = 'Always attach my signature';
-$lang['HIDE_PORN_FORUMS'] = 'Hide porno forums';
+$lang['HIDE_PORN_FORUMS'] = 'Hide content 18+';
 $lang['ALWAYS_NOTIFY'] = 'Always notify me of replies';
 $lang['ALWAYS_NOTIFY_EXPLAIN'] = 'Sends an e-mail when someone replies to a topic you have posted in. This can be changed whenever you post.';
 
-$lang['BOARD_LANG'] = 'Board Language';
+$lang['BOARD_LANG'] = 'Board language';
 $lang['GENDER'] = 'Gender';
 $lang['GENDER_SELECT'] = array(
 	0 => 'Unknown',
@@ -669,11 +669,11 @@ $lang['SEND_EMAIL'] = 'Send e-mail';
 $lang['EMPTY_SUBJECT_EMAIL'] = 'You must specify a subject for the e-mail.';
 $lang['EMPTY_MESSAGE_EMAIL'] = 'You must enter a message to be e-mailed.';
 
-$lang['USER_AGREEMENT'] = 'User Agreement';
+$lang['USER_AGREEMENT'] = 'User agreement';
 $lang['USER_AGREEMENT_HEAD'] = 'In order to proceed, you must agree with the following rules';
-$lang['USER_AGREEMENT_AGREE'] = 'I have read and agree to the User Agreement above';
+$lang['USER_AGREEMENT_AGREE'] = 'I have read and agree to the User agreement above';
 
-$lang['COPYRIGHT_HOLDERS'] = 'For Copyright Holders';
+$lang['COPYRIGHT_HOLDERS'] = 'For copyright holders';
 $lang['ADVERT'] = 'Advertise on this site';
 
 //
@@ -720,12 +720,12 @@ $lang['GROUP_OPEN'] = 'Open group';
 $lang['GROUP_CLOSED'] = 'Closed group';
 $lang['GROUP_HIDDEN'] = 'Hidden group';
 
-$lang["GROUP_MEMBER_MOD"] = 'Group moderator';
-$lang["GROUP_MEMBER_MEMBER"] = 'Current memberships';
-$lang["GROUP_MEMBER_PENDING"] = 'Memberships pending';
-$lang["GROUP_MEMBER_OPEN"] = 'Open groups';
-$lang["GROUP_MEMBER_CLOSED"] = 'Closed groups';
-$lang["GROUP_MEMBER_HIDDEN"] = 'Hidden groups';
+$lang['GROUP_MEMBER_MOD'] = 'Group moderator';
+$lang['GROUP_MEMBER_MEMBER'] = 'Current memberships';
+$lang['GROUP_MEMBER_PENDING'] = 'Memberships pending';
+$lang['GROUP_MEMBER_OPEN'] = 'Open groups';
+$lang['GROUP_MEMBER_CLOSED'] = 'Closed groups';
+$lang['GROUP_MEMBER_HIDDEN'] = 'Hidden groups';
 
 $lang['NO_GROUPS_EXIST'] = 'No Groups Exist';
 $lang['GROUP_NOT_EXIST'] = 'That user group does not exist';
@@ -1421,7 +1421,7 @@ $lang['BOT_AFTER_SPLIT_TO_NEW'] = 'Add bot-message about split to <b>new topic</
 $lang['QUICK_REPLY'] = 'Quick Reply';
 $lang['INS_NAME_TIP'] = 'Insert name or selected text.';
 $lang['QUOTE_SELECTED'] = 'Quote selected';
-$lang['TRANSLIT_RULES'] = 'Translit Rules';
+$lang['TRANSLIT_RULES'] = 'Translit rules';
 $lang['QR_ATTACHSIG'] = 'Attach signature';
 $lang['QR_NOTIFY'] = 'Notify on reply';
 $lang['QR_DISABLE'] = 'Disable';
@@ -1552,7 +1552,7 @@ $lang['TRACKER_S'] = 'on tracker';
 // copyright
 $lang['NOTICE'] = '!ATTENTION!';
 $lang['POWERED'] = 'UG93ZXJlZCBieSA8YSB0YXJnZXQ9Il9ibGFuayIgaHJlZj0iaHR0cDovL3RvcnJlbnRwaWVyLm1lIj5Ub3JyZW50UGllciBJSTwvYT4gJmNvcHk7IE1laXRoYXIsIFRvcnJlbnRQaWVyIElJIFRlYW0=';
-$lang['COPY'] = 'The site does not give electronic versions of products, and is engaged only in a collecting and cataloguing of the references sent and published at a forum by our readers. If you are the legal owner of any submitted material and do not wish that the reference to him{it} was in our catalogue, contact us and we shall immediately remove her. Files for an exchange on tracker are given by users of a site, and the administration does not bear the responsibility for their maintenance. The request to not fill in the files protected by copyrights, and also files of the illegal maintenance!';
+$lang['COPY'] = 'The site does not give electronic versions of products, and is engaged only in a collecting and cataloguing of the references sent and published at a forum by our readers. If you are the legal owner of any submitted material and do not wish that the reference to it was in our catalogue, contact us and we shall immediately remove her. Files for an exchange on tracker are given by users of a site, and the administration does not bear the responsibility for their maintenance. The request to not fill in the files protected by copyrights, and also files of the illegal maintenance!';
 
 // FILELIST
 $lang['FILELIST'] = 'Filelist';
@@ -1716,16 +1716,16 @@ $lang['DEL_LIST_MY_MESSAGE_INFO'] = 'After removal of up to update the <b>entire
 $lang['DEL_LIST_INFO'] = 'To delete an order from the list, click on the icon to the left of the names of any section';
 
 // Watched topics
-$lang['WATCHED_TOPICS'] = 'Watched Topics';
+$lang['WATCHED_TOPICS'] = 'Watched topics';
 $lang['NO_WATCHED_TOPICS'] = 'You are not watching any topics';
 
 // set_die_append_msg
 $lang['INDEX_RETURN'] = 'Back to home page';
-$lang['FORUM_RETURN'] = 'Back to Forum';
+$lang['FORUM_RETURN'] = 'Back to forum';
 $lang['TOPIC_RETURN'] = 'Back to the topic';
 $lang['POST_RETURN']  = 'Go to post';
 $lang['PROFILE_EDIT_RETURN'] = 'Return to editing';
-$lang['PROFILE_RETURN'] = 'Go to the Profile';
+$lang['PROFILE_RETURN'] = 'Go to the profile';
 
 $lang['WARNING'] = 'Warning';
 $lang['INDEXER'] = "Reindex search";
@@ -2624,7 +2624,7 @@ $lang['BT_SELECT_FORUMS_EXPL'] = 'hold down <i>Ctrl</i> while selecting multiple
 $lang['REG_TORRENTS'] = 'Register torrents';
 $lang['DISALLOWED'] = 'Prohibited';
 $lang['ALLOW_REG_TRACKER'] = 'Allowed forums for registering .torrents on tracker';
-$lang['ALLOW_PORNO_TOPIC'] = 'Allow post porno topics';
+$lang['ALLOW_PORNO_TOPIC'] = 'Allowed to post content 18+';
 $lang['SHOW_DL_BUTTONS'] = 'Show buttons for manually changing DL-status';
 $lang['SELF_MODERATED'] = 'Users can <b>move</b> their topics to another forum';
 
@@ -2750,10 +2750,7 @@ $lang['CLICK_RETURN_JOBS_ADDED'] = '%sReturn to the addition problem%s';
 $lang['CLICK_RETURN_JOBS'] = '%sBack to the Task Scheduler%s';
 
 $lang['REBUILD_SEARCH'] = 'Rebuild Search Index';
-$lang['REBUILD_SEARCH_DESC'] = 'This mod will index every post in your forum, rebuilding the search tables.
-You can stop whenever you like and the next time you run it again you\'ll have the option of continuing from where you left off.<br /><br />
-It may take a long time to show its progress (depending on "Posts per cycle" and "Time limit"),
-so please do not move from its progress page until it is complete, unless of course you want to interrupt it.';
+$lang['REBUILD_SEARCH_DESC'] = 'This mod will index every post in your forum, rebuilding the search tables. You can stop whenever you like and the next time you run it again you\'ll have the option of continuing from where you left off.<br /><br />It may take a long time to show its progress (depending on "Posts per cycle" and "Time limit"), so please do not move from its progress page until it is complete, unless of course you want to interrupt it.';
 
 //
 // Input screen
@@ -2849,7 +2846,6 @@ $lang['REBUILD_SEARCH_ABORTED'] = 'Rebuild search aborted at post_id %s.<br /><b
 $lang['WRONG_INPUT'] = 'You have entered some wrong values. Please check your input and try again.';
 
 // Buttons
-$lang['NEXT'] = 'Next';
 $lang['PROCESSING'] = 'Processing...';
 $lang['FINISHED'] = 'Finished';
 
@@ -3011,7 +3007,7 @@ $lang['DAY'] = 'Day';
 $lang['POST_EDIT_CANNOT'] = 'Sorry, but you cannot edit posts';
 $lang['FORUMS_IN_CAT'] = 'forums in that category';
 
-$lang['MC_TITLE'] = 'Сomment Moderation';
+$lang['MC_TITLE'] = 'Comment Moderation';
 $lang['MC_LEGEND'] = 'Type a comment';
 $lang['MC_FAQ'] = 'Entered text will be displayed under this message';
 $lang['MC_COMMENT_PM_SUBJECT'] = "%s in your message";
@@ -3022,8 +3018,8 @@ $lang['MC_COMMENT'] = array(
 		'type'  => 'Delete comment',
 	),
 	1 => array(
-		'title' => 'Сomment from %s',
-		'type'  => 'Сomment',
+		'title' => 'Comment from %s',
+		'type'  => 'Comment',
 	),
 	2 => array(
 		'title' => 'Information from %s',

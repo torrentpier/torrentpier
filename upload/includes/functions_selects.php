@@ -19,7 +19,7 @@ function language_select ($default_lang, $select_name = 'language')
 		$x++;
 	}
 	$lang_select .= '</select>';
-	return ($x > 1) ? $lang_select : '';
+	return ($x > 1) ? $lang_select : reset($bb_cfg['languages']);
 }
 
 //
@@ -62,5 +62,5 @@ function templates_select ($default_style, $select_name = 'tpl_name')
 		$x++;
 	}
 	$templates_select .= '</select>';
-	return ($x > 1) ? $templates_select : '';
+	return ($x > 1) ? $templates_select : reset($bb_cfg['templates']);
 }

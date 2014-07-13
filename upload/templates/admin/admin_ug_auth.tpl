@@ -50,14 +50,14 @@ thead tr {
 	font-weight: bold;
 	color: #FFF5EE;
 	background: #006666;
-	padding: 1px 2px 0px 2px;
+	padding: 1px 2px 0 2px;
 }
 .yesDisabled {
 	font-size: 11px;
 	font-weight: normal;
 	color: #E4E4E4;
 	background: #00888A;
-	padding: 1px 2px 0px 2px;
+	padding: 1px 2px 0 2px;
 	cursor: default;
 }
 .yesMOD {

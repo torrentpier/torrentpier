@@ -11,13 +11,11 @@ if (!$mc_text = prepare_message($mc_text)) $this->ajax_die($lang['EMPTY_MESSAGE'
 
 $post = DB()->fetch_row("
 	SELECT 
-		p.post_id, p.poster_id,
-		u.username, u.user_id, u.user_rank
+		p.post_id, p.poster_id
 	FROM      ". BB_POSTS      ." p
-	LEFT JOIN ". BB_USERS      ." u  ON(u.user_id = p.mc_user_id)
 	WHERE p.post_id = $post_id
 ");
-if(!$post) $this->ajax_die('not post');
+if (!$post) $this->ajax_die('not post');
 
 $data = array(
 	'mc_comment' => ($mc_type) ? $mc_text : '',
@@ -31,7 +29,7 @@ if ($mc_type && $post['poster_id'] != $userdata['user_id'])
 {
 	$subject = sprintf($lang['MC_COMMENT_PM_SUBJECT'], $lang['MC_COMMENT'][$mc_type]['type']);
 	$message = sprintf($lang['MC_COMMENT_PM_MSG'], get_username($post['poster_id']), make_url(POST_URL ."$post_id#$post_id"), $lang['MC_COMMENT'][$mc_type]['type'], $mc_text);
-	
+
 	send_pm($post['poster_id'], $subject, $message);
 	cache_rm_user_sessions($post['poster_id']);
 }

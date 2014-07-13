@@ -28,53 +28,53 @@
 <tr>
 	<td><h4>{L_FORUMS_DISABLE}</h4><h6>{L_BOARD_DISABLE_EXPLAIN}</h6></td>
 	<td>
-	    <label><input type="radio" name="board_disable" value="1" <!-- IF DISABLE_BOARD -->checked="checked"<!-- ENDIF --> />{L_YES}</label>&nbsp;&nbsp;
+		<label><input type="radio" name="board_disable" value="1" <!-- IF DISABLE_BOARD -->checked="checked"<!-- ENDIF --> />{L_YES}</label>&nbsp;&nbsp;
 		<label><input type="radio" name="board_disable" value="0" <!-- IF not DISABLE_BOARD -->checked="checked"<!-- ENDIF --> />{L_NO}</label>
 	</td>
 </tr>
 <tr>
 	<td><h4>{L_ALLOW_AUTOLOGIN}</h4><h6>{L_ALLOW_AUTOLOGIN_EXPLAIN}</h6></td>
 	<td>
-	    <label><input type="radio" name="allow_autologin" value="1" <!-- IF ALLOW_AUTOLOGIN -->checked="checked"<!-- ENDIF --> />{L_YES}</label>&nbsp;&nbsp;
+		<label><input type="radio" name="allow_autologin" value="1" <!-- IF ALLOW_AUTOLOGIN -->checked="checked"<!-- ENDIF --> />{L_YES}</label>&nbsp;&nbsp;
 		<label><input type="radio" name="allow_autologin" value="0" <!-- IF not ALLOW_AUTOLOGIN -->checked="checked"<!-- ENDIF --> />{L_NO}</label>
 	</td>
 </tr>
 <tr>
 	<td><h4>{L_AUTOLOGIN_TIME}</h4><h6>{L_AUTOLOGIN_TIME_EXPLAIN}</h6></td>
 	<td>
-	    <input class="post" type="text" size="3" maxlength="4" name="max_autologin_time" value="{AUTOLOGIN_TIME}" /> {L_DAYS}
+		<input class="post" type="text" size="3" maxlength="4" name="max_autologin_time" value="{AUTOLOGIN_TIME}" /> {L_DAYS}
 	</td>
 </tr>
 <tr>
 	<td><h4>{L_FLOOD_INTERVAL}</h4><h6>{L_FLOOD_INTERVAL_EXPLAIN}</h6></td>
 	<td>
-	    <input class="post" type="text" size="3" maxlength="4" name="flood_interval" value="{FLOOD_INTERVAL}" /> {L_SEC}
+		<input class="post" type="text" size="3" maxlength="4" name="flood_interval" value="{FLOOD_INTERVAL}" /> {L_SEC}
 	</td>
 </tr>
 <!--
 <tr>
 	<td><h4>{L_MAX_LOGIN_ATTEMPTS}</h4><h6>{L_MAX_LOGIN_ATTEMPTS_EXPLAIN}</h6></td>
 	<td>
-	    <input class="post" type="text" size="3" maxlength="4" name="max_login_attempts" value="{MAX_LOGIN_ATTEMPTS}" />
+		<input class="post" type="text" size="3" maxlength="4" name="max_login_attempts" value="{MAX_LOGIN_ATTEMPTS}" />
 	</td>
 </tr>
 <tr>
 	<td><h4>{L_LOGIN_RESET_TIME}</h4><h6>{L_LOGIN_RESET_TIME_EXPLAIN}</h6></td>
 	<td>
-	    <input class="post" type="text" size="3" maxlength="4" name="login_reset_time" value="{LOGIN_RESET_TIME}" />
+		<input class="post" type="text" size="3" maxlength="4" name="login_reset_time" value="{LOGIN_RESET_TIME}" />
 	</td>
 </tr>
 -->
 <tr>
 	<td><h4>{L_TOPICS_PER_PAGE}</h4></td>
 	<td>
-	    <input class="post" type="text" name="topics_per_page" size="5" maxlength="4" value="{TOPICS_PER_PAGE}" />
+		<input class="post" type="text" name="topics_per_page" size="5" maxlength="4" value="{TOPICS_PER_PAGE}" />
 	</td>
 </tr>
 <tr>
 	<td><h4>{L_POSTS_PER_PAGE}</h4></td>
 	<td>
-	    <input class="post" type="text" name="posts_per_page" size="5" maxlength="4" value="{POSTS_PER_PAGE}" />
+		<input class="post" type="text" name="posts_per_page" size="5" maxlength="4" value="{POSTS_PER_PAGE}" />
 	</td>
 </tr>
 <tr>
@@ -96,7 +96,7 @@
 <tr>
 	<td><h4>{L_ENABLE_PRUNE}</h4></td>
 	<td>
-	    <label><input type="radio" name="prune_enable" value="1" <!-- IF PRUNE_ENABLE -->checked="checked"<!-- ENDIF --> />{L_YES}</label>&nbsp;&nbsp;
+		<label><input type="radio" name="prune_enable" value="1" <!-- IF PRUNE_ENABLE -->checked="checked"<!-- ENDIF --> />{L_YES}</label>&nbsp;&nbsp;
 		<label><input type="radio" name="prune_enable" value="0" <!-- IF not PRUNE_ENABLE -->checked="checked"<!-- ENDIF --> />{L_NO}</label>
 	</td>
 </tr>
@@ -110,14 +110,14 @@
 <tr>
 	<td><h4>{L_ALLOW_BBCODE}</h4></td>
 	<td>
-	    <label><input type="radio" name="allow_bbcode" value="1" <!-- IF ALLOW_BBCODE -->checked="checked"<!-- ENDIF --> />{L_YES}</label>&nbsp;&nbsp;
+		<label><input type="radio" name="allow_bbcode" value="1" <!-- IF ALLOW_BBCODE -->checked="checked"<!-- ENDIF --> />{L_YES}</label>&nbsp;&nbsp;
 		<label><input type="radio" name="allow_bbcode" value="0" <!-- IF not ALLOW_BBCODE -->checked="checked"<!-- ENDIF --> />{L_NO}</label>
 	</td>
 </tr>
 <tr>
 	<td><h4>{L_ALLOW_SMILIES}</h4></td>
 	<td>
-	    <label><input type="radio" name="allow_smilies" value="1" <!-- IF ALLOW_SMILIES -->checked="checked"<!-- ENDIF --> />{L_YES}</label>&nbsp;&nbsp;
+		<label><input type="radio" name="allow_smilies" value="1" <!-- IF ALLOW_SMILIES -->checked="checked"<!-- ENDIF --> />{L_YES}</label>&nbsp;&nbsp;
 		<label><input type="radio" name="allow_smilies" value="0" <!-- IF not ALLOW_SMILIES -->checked="checked"<!-- ENDIF --> />{L_NO}</label>
 	</td>
 </tr>
@@ -128,7 +128,7 @@
 <tr>
 	<td><h4>{L_ALLOW_SIG}</h4></td>
 	<td>
-	    <label><input type="radio" name="allow_sig" value="1" <!-- IF ALLOW_SIG -->checked="checked"<!-- ENDIF --> />{L_YES}</label>&nbsp;&nbsp;
+		<label><input type="radio" name="allow_sig" value="1" <!-- IF ALLOW_SIG -->checked="checked"<!-- ENDIF --> />{L_YES}</label>&nbsp;&nbsp;
 		<label><input type="radio" name="allow_sig" value="0" <!-- IF not ALLOW_SIG -->checked="checked"<!-- ENDIF --> />{L_NO}</label>
 	</td>
 </tr>
@@ -139,19 +139,10 @@
 <tr>
 	<td><h4>{L_ALLOW_NAME_CHANGE}</h4></td>
 	<td>
-	    <label><input type="radio" name="allow_namechange" value="1" <!-- IF ALLOW_NAMECHANGE -->checked="checked"<!-- ENDIF --> />{L_YES}</label>&nbsp;&nbsp;
+		<label><input type="radio" name="allow_namechange" value="1" <!-- IF ALLOW_NAMECHANGE -->checked="checked"<!-- ENDIF --> />{L_YES}</label>&nbsp;&nbsp;
 		<label><input type="radio" name="allow_namechange" value="0" <!-- IF not ALLOW_NAMECHANGE -->checked="checked"<!-- ENDIF --> />{L_NO}</label>
 	</td>
 </tr>
-<tr>
-    <th colspan="2">{L_EMAIL_SETTINGS}</th>
-</tr>
-<tr>
-    <td colspan="2" class="pad_0 tCenter">
-        <p class="warnColor1 warnBorder1 pad_10">Changes disabled (see <b>Email section</b> in config.php)</p>
-    </td>
-</tr>
-
 <!-- ENDIF / CONFIG -->
 
 <!-- IF CONFIG_MODS -->
@@ -176,35 +167,35 @@
 <tr>
 	<td><h4>{L_REPORT_MODULE}</h4></td>
 	<td>
-	    <label><input type="radio" name="reports_enabled" value="1" <!-- IF REPORTS_ENABLED -->checked="checked"<!-- ENDIF --> />{L_ENABLED}</label>&nbsp;&nbsp;
+		<label><input type="radio" name="reports_enabled" value="1" <!-- IF REPORTS_ENABLED -->checked="checked"<!-- ENDIF --> />{L_ENABLED}</label>&nbsp;&nbsp;
 		<label><input type="radio" name="reports_enabled" value="0" <!-- IF not REPORTS_ENABLED -->checked="checked"<!-- ENDIF --> />{L_DISABLED}</label>
 	</td>
 </tr>
 <tr>
 	<td><h4>{L_MAGNET}</h4></td>
 	<td>
-	    <label><input type="radio" name="magnet_links_enabled" value="1" <!-- IF MAGNET_LINKS_ENABLED -->checked="checked"<!-- ENDIF --> />{L_ENABLED}</label>&nbsp;&nbsp;
+		<label><input type="radio" name="magnet_links_enabled" value="1" <!-- IF MAGNET_LINKS_ENABLED -->checked="checked"<!-- ENDIF --> />{L_ENABLED}</label>&nbsp;&nbsp;
 		<label><input type="radio" name="magnet_links_enabled" value="0" <!-- IF not MAGNET_LINKS_ENABLED -->checked="checked"<!-- ENDIF --> />{L_DISABLED}</label>
 	</td>
 </tr>
 <tr>
 	<td><h4>{L_GENDER}</h4></td>
 	<td>
-	    <label><input type="radio" name="gender" value="1" <!-- IF GENDER -->checked="checked"<!-- ENDIF --> />{L_ENABLED}</label>&nbsp;&nbsp;
+		<label><input type="radio" name="gender" value="1" <!-- IF GENDER -->checked="checked"<!-- ENDIF --> />{L_ENABLED}</label>&nbsp;&nbsp;
 		<label><input type="radio" name="gender" value="0" <!-- IF not GENDER -->checked="checked"<!-- ENDIF --> />{L_DISABLED}</label>
 	</td>
 </tr>
 <tr>
 	<td><h4>{L_CALLSEED}</h4></td>
 	<td>
-	    <label><input type="radio" name="callseed" value="1" <!-- IF CALLSEED -->checked="checked"<!-- ENDIF --> />{L_ENABLED}</label>&nbsp;&nbsp;
+		<label><input type="radio" name="callseed" value="1" <!-- IF CALLSEED -->checked="checked"<!-- ENDIF --> />{L_ENABLED}</label>&nbsp;&nbsp;
 		<label><input type="radio" name="callseed" value="0" <!-- IF not CALLSEED -->checked="checked"<!-- ENDIF --> />{L_DISABLED}</label>
 	</td>
 </tr>
 <tr>
 	<td><h4>{L_TRACKER_STATS}</h4></td>
 	<td>
-	    <label><input type="radio" name="tor_stats" value="1" <!-- IF TOR_STATS -->checked="checked"<!-- ENDIF --> />{L_ENABLED}</label>&nbsp;&nbsp;
+		<label><input type="radio" name="tor_stats" value="1" <!-- IF TOR_STATS -->checked="checked"<!-- ENDIF --> />{L_ENABLED}</label>&nbsp;&nbsp;
 		<label><input type="radio" name="tor_stats" value="0" <!-- IF not TOR_STATS -->checked="checked"<!-- ENDIF --> />{L_DISABLED}</label>
 	</td>
 </tr>
@@ -215,28 +206,28 @@
 <tr>
 	<td><h4>{L_SHOW_MOD_HOME_PAGE}</h4></td>
 	<td>
-	    <label><input type="radio" name="show_mod_index" value="1" <!-- IF SHOW_MOD_INDEX -->checked="checked"<!-- ENDIF --> />{L_ENABLED}</label>&nbsp;&nbsp;
+		<label><input type="radio" name="show_mod_index" value="1" <!-- IF SHOW_MOD_INDEX -->checked="checked"<!-- ENDIF --> />{L_ENABLED}</label>&nbsp;&nbsp;
 		<label><input type="radio" name="show_mod_index" value="0" <!-- IF not SHOW_MOD_INDEX -->checked="checked"<!-- ENDIF --> />{L_DISABLED}</label>
 	</td>
 </tr>
 <tr>
 	<td>{L_PREMOD_HELP}</td>
 	<td>
-	    <label><input type="radio" name="premod" value="1" <!-- IF PREMOD -->checked="checked"<!-- ENDIF --> />{L_ENABLED}</label>&nbsp;&nbsp;
+		<label><input type="radio" name="premod" value="1" <!-- IF PREMOD -->checked="checked"<!-- ENDIF --> />{L_ENABLED}</label>&nbsp;&nbsp;
 		<label><input type="radio" name="premod" value="0" <!-- IF not PREMOD -->checked="checked"<!-- ENDIF --> />{L_DISABLED}</label>
 	</td>
 </tr>
 <tr>
 	<td>{L_TOR_COMMENT}</td>
 	<td>
-	    <label><input type="radio" name="tor_comment" value="1" <!-- IF TOR_COMMENT -->checked="checked"<!-- ENDIF --> />{L_ENABLED}</label>&nbsp;&nbsp;
+		<label><input type="radio" name="tor_comment" value="1" <!-- IF TOR_COMMENT -->checked="checked"<!-- ENDIF --> />{L_ENABLED}</label>&nbsp;&nbsp;
 		<label><input type="radio" name="tor_comment" value="0" <!-- IF not TOR_COMMENT -->checked="checked"<!-- ENDIF --> />{L_DISABLED}</label>
 	</td>
 </tr>
 <tr>
 	<td><h4>{L_DESIGNER}</h4></td>
 	<td>
-	    <label><input type="radio" name="new_tpls" value="1" <!-- IF NEW_TPLS -->checked="checked"<!-- ENDIF --> />{L_ENABLED}</label>&nbsp;&nbsp;
+		<label><input type="radio" name="new_tpls" value="1" <!-- IF NEW_TPLS -->checked="checked"<!-- ENDIF --> />{L_ENABLED}</label>&nbsp;&nbsp;
 		<label><input type="radio" name="new_tpls" value="0" <!-- IF not NEW_TPLS -->checked="checked"<!-- ENDIF --> />{L_DISABLED}</label>
 	</td>
 </tr>
@@ -247,7 +238,7 @@
 <tr>
 	<td><h4>{L_LATEST_NEWS}</h4></td>
 	<td>
-	    <label><input type="radio" name="show_latest_news" value="1" <!-- IF SHOW_LATEST_NEWS -->checked="checked"<!-- ENDIF --> />{L_ENABLED}</label>&nbsp;&nbsp;
+		<label><input type="radio" name="show_latest_news" value="1" <!-- IF SHOW_LATEST_NEWS -->checked="checked"<!-- ENDIF --> />{L_ENABLED}</label>&nbsp;&nbsp;
 		<label><input type="radio" name="show_latest_news" value="0" <!-- IF not SHOW_LATEST_NEWS -->checked="checked"<!-- ENDIF --> />{L_DISABLED}</label>
 	</td>
 </tr>
@@ -270,7 +261,7 @@
 <tr>
 	<td><h4>{L_NETWORK_NEWS}</h4></td>
 	<td>
-	    <label><input type="radio" name="show_network_news" value="1" <!-- IF SHOW_NETWORK_NEWS -->checked="checked"<!-- ENDIF --> />{L_ENABLED}</label>&nbsp;&nbsp;
+		<label><input type="radio" name="show_network_news" value="1" <!-- IF SHOW_NETWORK_NEWS -->checked="checked"<!-- ENDIF --> />{L_ENABLED}</label>&nbsp;&nbsp;
 		<label><input type="radio" name="show_network_news" value="0" <!-- IF not SHOW_NETWORK_NEWS -->checked="checked"<!-- ENDIF --> />{L_DISABLED}</label>
 	</td>
 </tr>
@@ -293,7 +284,7 @@
 <tr>
 	<td><h4>{L_BIRTHDAY_ENABLE}</h4></td>
 	<td>
-	    <label><input type="radio" name="birthday_enabled" value="1" <!-- IF BIRTHDAY_ENABLED -->checked="checked"<!-- ENDIF --> />{L_ENABLED}</label>&nbsp;&nbsp;
+		<label><input type="radio" name="birthday_enabled" value="1" <!-- IF BIRTHDAY_ENABLED -->checked="checked"<!-- ENDIF --> />{L_ENABLED}</label>&nbsp;&nbsp;
 		<label><input type="radio" name="birthday_enabled" value="0" <!-- IF not BIRTHDAY_ENABLED -->checked="checked"<!-- ENDIF --> />{L_DISABLED}</label>
 	</td>
 </tr>
@@ -316,7 +307,7 @@
 <tr>
 	<td><h4>{L_SEED_BONUS}</h4></td>
 	<td>
-	    <label><input type="radio" name="seed_bonus_enabled" value="1" <!-- IF SEED_BONUS_ENABLED -->checked="checked"<!-- ENDIF --> />{L_ENABLED}</label>&nbsp;&nbsp;
+		<label><input type="radio" name="seed_bonus_enabled" value="1" <!-- IF SEED_BONUS_ENABLED -->checked="checked"<!-- ENDIF --> />{L_ENABLED}</label>&nbsp;&nbsp;
 		<label><input type="radio" name="seed_bonus_enabled" value="0" <!-- IF not SEED_BONUS_ENABLED -->checked="checked"<!-- ENDIF --> />{L_DISABLED}</label>
 	</td>
 </tr>
@@ -327,7 +318,7 @@
 <tr id="seed_bonus_{seed_bonus.RELEASE}">
 	<td>{L_SEED_BONUS_ADD}</td>
 	<td>
-	    <input class="post" type="text" size="5" name="seed_bonus_release[]" value="{seed_bonus.RELEASE}" />&nbsp;{L_SEED_BONUS_RELEASE} <br />
+		<input class="post" type="text" size="5" name="seed_bonus_release[]" value="{seed_bonus.RELEASE}" />&nbsp;{L_SEED_BONUS_RELEASE} <br />
 		<input class="post" type="text" size="5" name="seed_bonus_points[]" value="{seed_bonus.POINTS}" />&nbsp;{L_SEED_BONUS_POINTS} &nbsp;
 		<input onclick="$('#seed_bonus_{seed_bonus.RELEASE}').remove();" class="post" type="button" size="2" value="{L_DELETE}" />
 	</td>
@@ -337,7 +328,7 @@
 <tr id="seed_bonus">
 	<td>{L_SEED_BONUS_ADD}</td>
 	<td>
-	    <input class="post" type="text" size="5" name="seed_bonus_release[]" value="" />&nbsp;{L_SEED_BONUS_RELEASE} <br />
+		<input class="post" type="text" size="5" name="seed_bonus_release[]" value="" />&nbsp;{L_SEED_BONUS_RELEASE} <br />
 		<input class="post" type="text" size="5" name="seed_bonus_points[]" value="" />&nbsp;{L_SEED_BONUS_POINTS}
 		<input onclick="$('#seed_bonus').clone().appendTo('.seed_bonus');" class="post" type="button" size="2" value="+" />
 		<input onclick="$('#seed_bonus').remove();" class="post" type="button" size="2" value="-" />
@@ -360,7 +351,7 @@
 <tr id="bonus_upload_{bonus_upload.UP}">
 	<td><h4>{L_SEED_BONUS_ROPORTION}</h4><h6></h6></td>
 	<td>
-	    <input class="post" type="text" size="5" name="bonus_upload[]" value="{bonus_upload.UP}" />&nbsp;{L_GB} <br />
+		<input class="post" type="text" size="5" name="bonus_upload[]" value="{bonus_upload.UP}" />&nbsp;{L_GB} <br />
 		<input class="post" type="text" size="5" name="bonus_upload_price[]" value="{bonus_upload.PRICE}" />&nbsp;{L_PRICE}
 		<input onclick="$('#bonus_upload_{bonus_upload.UP}').remove();" class="post" type="button" size="2" value="{L_DELETE}" />
 	</td>
@@ -370,7 +361,7 @@
 <tr id="bonus_upload">
 	<td><h4>{L_SEED_BONUS_ROPORTION}</h4><h6></h6></td>
 	<td>
-	    <input class="post" type="text" size="5" name="bonus_upload[]" value="" />&nbsp;{L_GB} <br />
+		<input class="post" type="text" size="5" name="bonus_upload[]" value="" />&nbsp;{L_GB} <br />
 		<input class="post" type="text" size="5" name="bonus_upload_price[]" value="" />&nbsp;{L_PRICE}
 		<input onclick="$('#bonus_upload').clone().appendTo('.bonus_upload');" class="post" type="button" size="2" value="+" />
 		<input onclick="$('#bonus_upload').remove();" class="post" type="button" size="2" value="-" />

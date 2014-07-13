@@ -24,16 +24,16 @@ $showSourceNext = 15;
 <script type="text/javascript">
 function showParam(i) {
 	currentParam = i;
-	document.getElementById('paramHide').style.display = ''
-	document.getElementById('paramSpace').style.display = ''
-	document.getElementById('param').style.display = ''
-	document.getElementById('param').innerHTML = '<pre>' + document.getElementById('param' + i).innerHTML + '</pre>'
+	document.getElementById('paramHide').style.display = '';
+	document.getElementById('paramSpace').style.display = '';
+	document.getElementById('param').style.display = '';
+	document.getElementById('param').innerHTML = '<pre>' + document.getElementById('param' + i).innerHTML + '</pre>';
 }
 function hideParam() {
 	currentParam = -1;
-	document.getElementById('paramHide').style.display = 'none'
-	document.getElementById('paramSpace').style.display = 'none'
-	document.getElementById('param').style.display = 'none'
+	document.getElementById('paramHide').style.display = 'none';
+	document.getElementById('paramSpace').style.display = 'none';
+	document.getElementById('param').style.display = 'none';
 }
 function showOrHideParam(i) {
 	if (currentParam == i) {

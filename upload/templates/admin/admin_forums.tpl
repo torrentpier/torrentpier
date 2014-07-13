@@ -167,7 +167,7 @@ function toggle_cat_list (val)
 <!--========================================================================-->
 
 <style type="text/css">
-table.forumline + table.forumline { border-top-width: 0px; }
+table.forumline + table.forumline { border-top-width: 0; }
 </style>
 
 <script type="text/javascript">
