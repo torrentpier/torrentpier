@@ -114,33 +114,6 @@ function create_thumbnail($source, $new_file, $mimetype)
 
 	$tmp_path = $old_file = '';
 
-	if (intval($attach_config['allow_ftp_upload']))
-	{
-		$old_file = $new_file;
-
-		$tmp_path = explode('/', $source);
-		$tmp_path[count($tmp_path)-1] = '';
-		$tmp_path = implode('/', $tmp_path);
-
-		if ($tmp_path == '')
-		{
-			$tmp_path = '/tmp';
-		}
-
-		$value = trim($tmp_path);
-
-		if ($value[strlen($value)-1] == '/')
-		{
-			$value[strlen($value)-1] = ' ';
-		}
-
-		//
-		$new_file = tempnam(trim($value), 't00000');
-
-		// We remove it now because it gets created again later
-		@unlink($new_file);
-	}
-
 	$used_imagick = false;
 
 	if (is_imagick())
@@ -210,20 +183,7 @@ function create_thumbnail($source, $new_file, $mimetype)
 		return false;
 	}
 
-	if (intval($attach_config['allow_ftp_upload']))
-	{
-		$result = ftp_file($new_file, $old_file, $mimetype, true); // True for disable error-mode
-		@unlink($new_file);
-
-		if (!$result)
-		{
-			return false;
-		}
-	}
-	else
-	{
-		@chmod($new_file, 0664);
-	}
+	@chmod($new_file, 0664);
 
 	return true;
 }

@@ -98,6 +98,13 @@ ajax.callback.manage_admin = function(data) {
 		</td>
 	</tr>
 	<tr>
+		<td><b>{L_STATISTICS}:</b></td>
+		<td>
+			<a href="../stats/tr_stats.php" target="_blank">tr_stats.php</a>,&nbsp;
+			<a href="../stats/tracker.php" target="_blank">tracker.php</a>
+		</td>
+	</tr>
+	<tr>
 		<td><b>{L_ADMIN}:</b></td>
 		<td>
 			<a href="../profile.php?mode=register&admin=1">{L_CREATE_PROFILE}</a>

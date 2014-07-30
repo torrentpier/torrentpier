@@ -14,20 +14,13 @@ require('./pagestart.php');
 
 $error = false;
 
-if (!intval($attach_config['allow_ftp_upload']))
+if ( ($attach_config['upload_dir'][0] == '/') || ( ($attach_config['upload_dir'][0] != '/') && ($attach_config['upload_dir'][1] == ':') ) )
 {
-	if ( ($attach_config['upload_dir'][0] == '/') || ( ($attach_config['upload_dir'][0] != '/') && ($attach_config['upload_dir'][1] == ':') ) )
-	{
-		$upload_dir = $attach_config['upload_dir'];
-	}
-	else
-	{
-		$upload_dir = '../' . $attach_config['upload_dir'];
-	}
+	$upload_dir = $attach_config['upload_dir'];
 }
 else
 {
-	$upload_dir = $attach_config['download_path'];
+	$upload_dir = '../' . $attach_config['upload_dir'];
 }
 
 include(BB_ROOT .'attach_mod/includes/functions_selects.php');
@@ -52,12 +45,11 @@ $check_image_cat = (isset($_POST['cat_settings'])) ? TRUE : FALSE;
 $search_imagick = (isset($_POST['search_imagick'])) ? TRUE : FALSE;
 
 // Re-evaluate the Attachment Configuration
-$sql = 'SELECT *
-FROM ' . BB_ATTACH_CONFIG;
+$sql = 'SELECT * FROM ' . BB_ATTACH_CONFIG;
 
-if(!$result = DB()->sql_query($sql))
+if (!$result = DB()->sql_query($sql))
 {
-	message_die(GENERAL_ERROR, 'Could not find Attachment Config Table', '', __LINE__, __FILE__, $sql);
+	bb_die('Could not find attachment config table #1');
 }
 
 while ($row = DB()->sql_fetchrow($result))
@@ -114,20 +106,6 @@ while ($row = DB()->sql_fetchrow($result))
 			$new_attach[$config_name] = ( $pm_size == 'kb' ) ? round($new_attach[$config_name] * 1024) : ( ($pm_size == 'mb') ? round($new_attach[$config_name] * 1048576) : $new_attach[$config_name] );
 		}
 
-		if ($config_name == 'ftp_server' || $config_name == 'ftp_path' || $config_name == 'download_path')
-		{
-			$value = trim($new_attach[$config_name]);
-
-			if (strlen($value) && substr($value, -1) == '/')
-			{
-				if(strlen($value)) $value = substr($value, 0, strlen($value)-1);
-				else $value = '';
-			}
-
-			$new_attach[$config_name] = trim($value);
-
-		}
-
 		if ($config_name == 'max_filesize')
 		{
 			$old_size = $attach_config[$config_name];
@@ -140,9 +118,9 @@ while ($row = DB()->sql_fetchrow($result))
 					SET max_filesize = ' . (int) $new_size . '
 					WHERE max_filesize = ' . (int) $old_size;
 
-				if ( !($result_2 = DB()->sql_query($sql)) )
+				if (!($result_2 = DB()->sql_query($sql)))
 				{
-					message_die(GENERAL_ERROR, 'Could not update Extension Group informations', '', __LINE__, __FILE__, $sql);
+					bb_die('Could not update extension group information');
 				}
 
 			}
@@ -158,9 +136,9 @@ while ($row = DB()->sql_fetchrow($result))
 				WHERE config_name = '" . attach_mod_sql_escape($config_name) . "'";
 		}
 
-		if( !DB()->sql_query($sql) )
+		if (!DB()->sql_query($sql))
 		{
-			message_die(GENERAL_ERROR, 'Failed to update attachment configuration for ' . $config_name, '', __LINE__, __FILE__, $sql);
+			bb_die('Failed to update attachment configuration for ' . $config_name);
 		}
 
 		if ($config_name == 'max_filesize' || $config_name == 'attachment_quota' || $config_name == 'max_filesize_pm')
@@ -234,12 +212,11 @@ if ($check_upload)
 	// Some tests...
 	$attach_config = array();
 
-	$sql = 'SELECT *
-	FROM ' . BB_ATTACH_CONFIG;
+	$sql = 'SELECT * FROM ' . BB_ATTACH_CONFIG;
 
-	if ( !($result = DB()->sql_query($sql)) )
+	if (!($result = DB()->sql_query($sql)))
 	{
-		message_die(GENERAL_ERROR, 'Could not find Attachment Config Table', '', __LINE__, __FILE__, $sql);
+		bb_die('Could not find attachment config table #2');
 	}
 
 	$row = DB()->sql_fetchrowset($result);
@@ -262,112 +239,36 @@ if ($check_upload)
 
 	$error = false;
 
-	// Does the target directory exist, is it a directory and writeable. (only test if ftp upload is disabled)
-	if (intval($attach_config['allow_ftp_upload']) == 0)
+	// Does the target directory exist, is it a directory and writeable
+	if ( !@file_exists(@amod_realpath($upload_dir)) )
 	{
-		if ( !@file_exists(@amod_realpath($upload_dir)) )
-		{
-			$error = true;
-			$error_msg = sprintf($lang['DIRECTORY_DOES_NOT_EXIST'], $attach_config['upload_dir']) . '<br />';
-		}
-
-		if (!$error && !is_dir($upload_dir))
-		{
-			$error = TRUE;
-			$error_msg = sprintf($lang['DIRECTORY_IS_NOT_A_DIR'], $attach_config['upload_dir']) . '<br />';
-		}
-
-		if (!$error)
-		{
-			if ( !($fp = @fopen($upload_dir . '/0_000000.000', 'w')) )
-			{
-				$error = TRUE;
-				$error_msg = sprintf($lang['DIRECTORY_NOT_WRITEABLE'], $attach_config['upload_dir']) . '<br />';
-			}
-			else
-			{
-				@fclose($fp);
-				unlink_attach($upload_dir . '/0_000000.000');
-			}
-		}
+		$error = true;
+		$error_msg = sprintf($lang['DIRECTORY_DOES_NOT_EXIST'], $attach_config['upload_dir']) . '<br />';
 	}
-	else
+
+	if (!$error && !is_dir($upload_dir))
 	{
-		// Check FTP Settings
-		$server = ( empty($attach_config['ftp_server']) ) ? 'localhost' : $attach_config['ftp_server'];
+		$error = TRUE;
+		$error_msg = sprintf($lang['DIRECTORY_IS_NOT_A_DIR'], $attach_config['upload_dir']) . '<br />';
+	}
 
-		$conn_id = @ftp_connect($server);
-
-		if (!$conn_id)
+	if (!$error)
+	{
+		if ( !($fp = @fopen($upload_dir . '/0_000000.000', 'w')) )
 		{
 			$error = TRUE;
-			$error_msg = sprintf($lang['FTP_ERROR_CONNECT'], $server) . '<br />';
+			$error_msg = sprintf($lang['DIRECTORY_NOT_WRITEABLE'], $attach_config['upload_dir']) . '<br />';
 		}
-
-		$login_result = @ftp_login($conn_id, $attach_config['ftp_user'], $attach_config['ftp_pass']);
-
-		if ( (!$login_result) && (!$error) )
+		else
 		{
-			$error = TRUE;
-			$error_msg = sprintf($lang['FTP_ERROR_LOGIN'], $attach_config['ftp_user']) . '<br />';
-		}
-
-		if (!@ftp_pasv($conn_id, intval($attach_config['ftp_pasv_mode'])))
-		{
-			$error = TRUE;
-			$error_msg = $lang['FTP_ERROR_PASV_MODE'];
-		}
-
-		if (!$error)
-		{
-			// Check Upload
-			$tmpfname = @tempnam('/tmp', 't0000');
-
-			@unlink($tmpfname); // unlink for safety on php4.0.3+
-
-			$fp = @fopen($tmpfname, 'w');
-
-			@fwrite($fp, 'test');
-
 			@fclose($fp);
-
-			$result = @ftp_chdir($conn_id, $attach_config['ftp_path']);
-
-			if (!$result)
-			{
-				$error = TRUE;
-				$error_msg = sprintf($lang['FTP_ERROR_PATH'], $attach_config['ftp_path']) . '<br />';
-			}
-			else
-			{
-				$res = @ftp_put($conn_id, 't0000', $tmpfname, FTP_ASCII);
-
-				if (!$res)
-				{
-					$error = TRUE;
-					$error_msg = sprintf($lang['FTP_ERROR_UPLOAD'], $attach_config['ftp_path']) . '<br />';
-				}
-				else
-				{
-					$res = @ftp_delete($conn_id, 't0000');
-
-					if (!$res)
-					{
-						$error = TRUE;
-						$error_msg = sprintf($lang['FTP_ERROR_DELETE'], $attach_config['ftp_path']) . '<br />';
-					}
-				}
-			}
-
-			@ftp_quit($conn_id);
-
-			@unlink($tmpfname);
+			unlink_attach($upload_dir . '/0_000000.000');
 		}
 	}
 
 	if (!$error)
 	{
-		message_die(GENERAL_MESSAGE, $lang['TEST_SETTINGS_SUCCESSFUL'] . '<br /><br />' . sprintf($lang['CLICK_RETURN_ATTACH_CONFIG'], '<a href="admin_attachments.php?mode=manage">', '</a>') . '<br /><br />' . sprintf($lang['CLICK_RETURN_ADMIN_INDEX'], '<a href="index.php?pane=right">', '</a>'));
+		bb_die($lang['TEST_SETTINGS_SUCCESSFUL'] . '<br /><br />' . sprintf($lang['CLICK_RETURN_ATTACH_CONFIG'], '<a href="admin_attachments.php?mode=manage">', '</a>') . '<br /><br />' . sprintf($lang['CLICK_RETURN_ADMIN_INDEX'], '<a href="index.php?pane=right">', '</a>'));
 	}
 }
 
@@ -376,27 +277,18 @@ if ($submit && $mode == 'manage')
 {
 	if (!$error)
 	{
-		message_die(GENERAL_MESSAGE, $lang['ATTACH_CONFIG_UPDATED'] . '<br /><br />' . sprintf($lang['CLICK_RETURN_ATTACH_CONFIG'], '<a href="admin_attachments.php?mode=manage">', '</a>') . '<br /><br />' . sprintf($lang['CLICK_RETURN_ADMIN_INDEX'], '<a href="index.php?pane=right">', '</a>'));
+		bb_die($lang['ATTACH_CONFIG_UPDATED'] . '<br /><br />' . sprintf($lang['CLICK_RETURN_ATTACH_CONFIG'], '<a href="admin_attachments.php?mode=manage">', '</a>') . '<br /><br />' . sprintf($lang['CLICK_RETURN_ADMIN_INDEX'], '<a href="index.php?pane=right">', '</a>'));
 	}
 }
 
 if ($mode == 'manage')
 {
-	$yes_no_switches = array('disable_mod', 'allow_pm_attach', 'allow_ftp_upload', 'display_order', 'ftp_pasv_mode');
+	$yes_no_switches = array('disable_mod', 'allow_pm_attach', 'display_order');
 
 	for ($i = 0; $i < sizeof($yes_no_switches); $i++)
 	{
 		eval("\$" . $yes_no_switches[$i] . "_yes = ( \$new_attach['" . $yes_no_switches[$i] . "'] != '0' ) ? 'checked=\"checked\"' : '';");
 		eval("\$" . $yes_no_switches[$i] . "_no = ( \$new_attach['" . $yes_no_switches[$i] . "'] == '0' ) ? 'checked=\"checked\"' : '';");
-	}
-
-	if (!function_exists('ftp_connect'))
-	{
-		$template->assign_block_vars('switch_no_ftp', array());
-	}
-	else
-	{
-		$template->assign_block_vars('switch_ftp', array());
 	}
 
 	$template->assign_vars(array(
@@ -416,19 +308,10 @@ if ($mode == 'manage')
 		'MAX_FILESIZE_PM' => $new_attach['max_filesize_pm'],
 		'MAX_ATTACHMENTS' => $new_attach['max_attachments'],
 		'MAX_ATTACHMENTS_PM' => $new_attach['max_attachments_pm'],
-		'FTP_SERVER' => $new_attach['ftp_server'],
-		'FTP_PATH' => $new_attach['ftp_path'],
-		'FTP_USER' => $new_attach['ftp_user'],
-		'FTP_PASS' => $new_attach['ftp_pass'],
-		'DOWNLOAD_PATH' => $new_attach['download_path'],
 		'DISABLE_MOD_YES' => $disable_mod_yes,
 		'DISABLE_MOD_NO' => $disable_mod_no,
 		'PM_ATTACH_YES' => $allow_pm_attach_yes,
 		'PM_ATTACH_NO' => $allow_pm_attach_no,
-		'FTP_UPLOAD_YES' => $allow_ftp_upload_yes,
-		'FTP_UPLOAD_NO' => $allow_ftp_upload_no,
-		'FTP_PASV_MODE_YES' => $ftp_pasv_mode_yes,
-		'FTP_PASV_MODE_NO' => $ftp_pasv_mode_no,
 		'DISPLAY_ORDER_ASC' => $display_order_yes,
 		'DISPLAY_ORDER_DESC' => $display_order_no,
 	));
@@ -438,28 +321,21 @@ if ($submit && $mode == 'cats')
 {
 	if (!$error)
 	{
-		message_die(GENERAL_MESSAGE, $lang['ATTACH_CONFIG_UPDATED'] . '<br /><br />' . sprintf($lang['CLICK_RETURN_ATTACH_CONFIG'], '<a href="admin_attachments.php?mode=cats">', '</a>') . '<br /><br />' . sprintf($lang['CLICK_RETURN_ADMIN_INDEX'], '<a href="index.php?pane=right">', '</a>'));
+		bb_die($lang['ATTACH_CONFIG_UPDATED'] . '<br /><br />' . sprintf($lang['CLICK_RETURN_ATTACH_CONFIG'], '<a href="admin_attachments.php?mode=cats">', '</a>') . '<br /><br />' . sprintf($lang['CLICK_RETURN_ADMIN_INDEX'], '<a href="index.php?pane=right">', '</a>'));
 	}
 }
 
 if ($mode == 'cats')
 {
 	$s_assigned_group_images = $lang['NONE'];
-	$s_assigned_group_streams = $lang['NONE'];
-	$s_assigned_group_flash = $lang['NONE'];
 
-	$sql = 'SELECT group_name, cat_id
-		FROM ' . BB_EXTENSION_GROUPS . '
-		WHERE cat_id > 0
-		ORDER BY cat_id';
+	$sql = 'SELECT group_name, cat_id FROM ' . BB_EXTENSION_GROUPS . ' WHERE cat_id > 0 ORDER BY cat_id';
 
 	$s_assigned_group_images = array();
-	$s_assigned_group_streams = array();
-	$s_assigned_group_flash = array();
 
-	if ( !($result = DB()->sql_query($sql)) )
+	if (!($result = DB()->sql_query($sql)))
 	{
-		message_die(GENERAL_ERROR, 'Could not get Group Names from ' . BB_EXTENSION_GROUPS, '', __LINE__, __FILE__, $sql);
+		bb_die('Could not get group names from ' . BB_EXTENSION_GROUPS);
 	}
 
 	$row = DB()->sql_fetchrowset($result);
@@ -470,14 +346,6 @@ if ($mode == 'cats')
 		if ($row[$i]['cat_id'] == IMAGE_CAT)
 		{
 			$s_assigned_group_images[] = $row[$i]['group_name'];
-		}
-		else if ($row[$i]['cat_id'] == STREAM_CAT)
-		{
-			$s_assigned_group_streams[] = $row[$i]['group_name'];
-		}
-		else if ($row[$i]['cat_id'] == SWF_CAT)
-		{
-			$s_assigned_group_flash[] = $row[$i]['group_name'];
 		}
 	}
 
@@ -515,8 +383,8 @@ if ($mode == 'cats')
 		'USE_GD2_YES' => $use_gd2_yes,
 		'USE_GD2_NO' => $use_gd2_no,
 		'S_ASSIGNED_GROUP_IMAGES' => implode(', ', $s_assigned_group_images),
-		'S_ATTACH_ACTION' => 'admin_attachments.php?mode=cats')
-	);
+		'S_ATTACH_ACTION' => 'admin_attachments.php?mode=cats',
+	));
 }
 
 // Check Cat Settings
@@ -525,12 +393,11 @@ if ($check_image_cat)
 	// Some tests...
 	$attach_config = array();
 
-	$sql = 'SELECT *
-	FROM ' . BB_ATTACH_CONFIG;
+	$sql = 'SELECT * FROM ' . BB_ATTACH_CONFIG;
 
-	if ( !($result = DB()->sql_query($sql)) )
+	if (!($result = DB()->sql_query($sql)))
 	{
-		message_die(GENERAL_ERROR, 'Could not find Attachment Config Table', '', __LINE__, __FILE__, $sql);
+		bb_die('Could not find attachment config table #3');
 	}
 
 	$row = DB()->sql_fetchrowset($result);
@@ -555,127 +422,42 @@ if ($check_image_cat)
 
 	$error = false;
 
-	// Does the target directory exist, is it a directory and writeable. (only test if ftp upload is disabled)
-	if (intval($attach_config['allow_ftp_upload']) == 0 && intval($attach_config['img_create_thumbnail']) == 1)
+	// Does the target directory exist, is it a directory and writeable
+	if ( !@file_exists(@amod_realpath($upload_dir)) )
 	{
+		@mkdir($upload_dir, 0755);
+		@chmod($upload_dir, 0777);
+
 		if ( !@file_exists(@amod_realpath($upload_dir)) )
 		{
-			@mkdir($upload_dir, 0755);
-			@chmod($upload_dir, 0777);
-
-			if ( !@file_exists(@amod_realpath($upload_dir)) )
-			{
-				$error = TRUE;
-				$error_msg = sprintf($lang['DIRECTORY_DOES_NOT_EXIST'], $upload_dir) . '<br />';
-			}
-
-		}
-
-		if (!$error && !is_dir($upload_dir))
-		{
 			$error = TRUE;
-			$error_msg = sprintf($lang['DIRECTORY_IS_NOT_A_DIR'], $upload_dir) . '<br />';
-		}
-
-		if (!$error)
-		{
-			if ( !($fp = @fopen($upload_dir . '/0_000000.000', 'w')) )
-			{
-				$error = TRUE;
-				$error_msg = sprintf($lang['DIRECTORY_NOT_WRITEABLE'], $upload_dir) . '<br />';
-			}
-			else
-			{
-				@fclose($fp);
-				@unlink($upload_dir . '/0_000000.000');
-			}
+			$error_msg = sprintf($lang['DIRECTORY_DOES_NOT_EXIST'], $upload_dir) . '<br />';
 		}
 	}
-	else if (intval($attach_config['allow_ftp_upload']) && intval($attach_config['img_create_thumbnail']))
+
+	if (!$error && !is_dir($upload_dir))
 	{
-		// Check FTP Settings
-		$server = ( empty($attach_config['ftp_server']) ) ? 'localhost' : $attach_config['ftp_server'];
+		$error = TRUE;
+		$error_msg = sprintf($lang['DIRECTORY_IS_NOT_A_DIR'], $upload_dir) . '<br />';
+	}
 
-		$conn_id = @ftp_connect($server);
-
-		if (!$conn_id)
+	if (!$error)
+	{
+		if ( !($fp = @fopen($upload_dir . '/0_000000.000', 'w')) )
 		{
 			$error = TRUE;
-			$error_msg = sprintf($lang['FTP_ERROR_CONNECT'], $server) . '<br />';
+			$error_msg = sprintf($lang['DIRECTORY_NOT_WRITEABLE'], $upload_dir) . '<br />';
 		}
-
-		$login_result = @ftp_login($conn_id, $attach_config['ftp_user'], $attach_config['ftp_pass']);
-
-		if (!$login_result && !$error)
+		else
 		{
-			$error = TRUE;
-			$error_msg = sprintf($lang['FTP_ERROR_LOGIN'], $attach_config['ftp_user']) . '<br />';
-		}
-
-		if (!@ftp_pasv($conn_id, intval($attach_config['ftp_pasv_mode'])))
-		{
-			$error = TRUE;
-			$error_msg = $lang['FTP_ERROR_PASV_MODE'];
-		}
-
-		if (!$error)
-		{
-			// Check Upload
-			$tmpfname = @tempnam('/tmp', 't0000');
-
-			@unlink($tmpfname); // unlink for safety on php4.0.3+
-
-			$fp = @fopen($tmpfname, 'w');
-
-			@fwrite($fp, 'test');
-
 			@fclose($fp);
-
-			$result = @ftp_chdir($conn_id, $attach_config['ftp_path'] . '/' . THUMB_DIR);
-
-			if (!$result)
-			{
-				@ftp_mkdir($conn_id, $attach_config['ftp_path'] . '/' . THUMB_DIR);
-			}
-
-			$result = @ftp_chdir($conn_id, $attach_config['ftp_path'] . '/' . THUMB_DIR);
-
-			if (!$result)
-			{
-
-				$error = TRUE;
-				$error_msg = sprintf($lang['FTP_ERROR_PATH'], $attach_config['ftp_path'] . '/' . THUMB_DIR) . '<br />';
-			}
-			else
-			{
-				$res = @ftp_put($conn_id, 't0000', $tmpfname, FTP_ASCII);
-
-				if (!$res)
-				{
-					$error = TRUE;
-					$error_msg = sprintf($lang['FTP_ERROR_UPLOAD'], $attach_config['ftp_path'] . '/' . THUMB_DIR) . '<br />';
-				}
-				else
-				{
-					$res = @ftp_delete($conn_id, 't0000');
-
-					if (!$res)
-					{
-						$error = TRUE;
-						$error_msg = sprintf($lang['FTP_ERROR_DELETE'], $attach_config['ftp_path'] . '/' . THUMB_DIR) . '<br />';
-					}
-				}
-			}
-
-			@ftp_quit($conn_id);
-
-			@unlink($tmpfname);
+			@unlink($upload_dir . '/0_000000.000');
 		}
 	}
 
 	if (!$error)
 	{
-		message_die(GENERAL_MESSAGE, $lang['TEST_SETTINGS_SUCCESSFUL'] . '<br /><br />' . sprintf($lang['CLICK_RETURN_ATTACH_CONFIG'], '<a href="admin_attachments.php?mode=cats">', '</a>') . '<br /><br />' . sprintf($lang['CLICK_RETURN_ADMIN_INDEX'], '<a href="index.php?pane=right">', '</a>'));
+		bb_die($lang['TEST_SETTINGS_SUCCESSFUL'] . '<br /><br />' . sprintf($lang['CLICK_RETURN_ATTACH_CONFIG'], '<a href="admin_attachments.php?mode=cats">', '</a>') . '<br /><br />' . sprintf($lang['CLICK_RETURN_ADMIN_INDEX'], '<a href="index.php?pane=right">', '</a>'));
 	}
 }
 
@@ -698,9 +480,9 @@ if ($submit && $mode == 'quota')
 			SET quota_desc = '" . attach_mod_sql_escape($quota_desc_list[$i]) . "', quota_limit = " . (int) $filesize_list[$i] . "
 			WHERE quota_limit_id = " . (int) $quota_change_list[$i];
 
-		if ( !(DB()->sql_query($sql)) )
+		if (!(DB()->sql_query($sql)))
 		{
-			message_die(GENERAL_ERROR, 'Couldn\'t update Quota Limits', '', __LINE__, __FILE__, $sql);
+			bb_die('Could not update quota limits');
 		}
 	}
 
@@ -711,23 +493,19 @@ if ($submit && $mode == 'quota')
 
 	if ($quota_id_sql != '')
 	{
-		$sql = 'DELETE
-		FROM ' . BB_QUOTA_LIMITS . '
-		WHERE quota_limit_id IN (' . $quota_id_sql . ')';
+		$sql = 'DELETE FROM ' . BB_QUOTA_LIMITS . ' WHERE quota_limit_id IN (' . $quota_id_sql . ')';
 
-		if ( !($result = DB()->sql_query($sql)) )
+		if (!($result = DB()->sql_query($sql)))
 		{
-			message_die(GENERAL_ERROR, 'Could not delete Quota Limits', '', __LINE__, __FILE__, $sql);
+			bb_die('Could not delete quota limits');
 		}
 
 		// Delete Quotas linked to this setting
-		$sql = 'DELETE
-		FROM ' . BB_QUOTA . '
-		WHERE quota_limit_id IN (' . $quota_id_sql . ')';
+		$sql = 'DELETE FROM ' . BB_QUOTA . ' WHERE quota_limit_id IN (' . $quota_id_sql . ')';
 
-		if ( !($result = DB()->sql_query($sql)) )
+		if (!($result = DB()->sql_query($sql)))
 		{
-			message_die(GENERAL_ERROR, 'Could not delete Quotas', '', __LINE__, __FILE__, $sql);
+			bb_die('Could not delete quotas');
 		}
 	}
 
@@ -740,12 +518,11 @@ if ($submit && $mode == 'quota')
 	if ($quota_desc != '' && $add)
 	{
 		// check Quota Description
-		$sql = 'SELECT quota_desc
-			FROM ' . BB_QUOTA_LIMITS;
+		$sql = 'SELECT quota_desc FROM ' . BB_QUOTA_LIMITS;
 
 		if (!($result = DB()->sql_query($sql)))
 		{
-			message_die(GENERAL_ERROR, 'Could not query Quota Limits Table', '', __LINE__, __FILE__, $sql);
+			bb_die('Could not query quota limits table');
 		}
 
 		$row = DB()->sql_fetchrowset($result);
@@ -775,9 +552,9 @@ if ($submit && $mode == 'quota')
 			$sql = "INSERT INTO " . BB_QUOTA_LIMITS . " (quota_desc, quota_limit)
 			VALUES ('" . attach_mod_sql_escape($quota_desc) . "', " . (int) $filesize . ")";
 
-			if ( !(DB()->sql_query($sql)) )
+			if (!(DB()->sql_query($sql)))
 			{
-				message_die(GENERAL_ERROR, 'Could not add Quota Limit', '', __LINE__, __FILE__, $sql);
+				bb_die('Could not add quota limit');
 			}
 		}
 
@@ -785,9 +562,7 @@ if ($submit && $mode == 'quota')
 
 	if (!$error)
 	{
-		$message = $lang['ATTACH_CONFIG_UPDATED'] . '<br /><br />' . sprintf($lang['CLICK_RETURN_ATTACH_CONFIG'], '<a href="admin_attachments.php?mode=quota">', '</a>') . '<br /><br />' . sprintf($lang['CLICK_RETURN_ADMIN_INDEX'], '<a href="index.php?pane=right">', '</a>');
-
-		message_die(GENERAL_MESSAGE, $message);
+		bb_die($lang['ATTACH_CONFIG_UPDATED'] . '<br /><br />' . sprintf($lang['CLICK_RETURN_ATTACH_CONFIG'], '<a href="admin_attachments.php?mode=quota">', '</a>') . '<br /><br />' . sprintf($lang['CLICK_RETURN_ADMIN_INDEX'], '<a href="index.php?pane=right">', '</a>'));
 	}
 
 }
@@ -810,14 +585,14 @@ if ($mode == 'quota')
 		'TPL_ATTACH_QUOTA' => true,
 		'MAX_FILESIZE' => $max_add_filesize,
 		'S_FILESIZE' => size_select('add_size_select', $size),
-		'S_ATTACH_ACTION' => 'admin_attachments.php?mode=quota')
-	);
+		'S_ATTACH_ACTION' => 'admin_attachments.php?mode=quota',
+	));
 
 	$sql = "SELECT * FROM " . BB_QUOTA_LIMITS . " ORDER BY quota_limit DESC";
 
-	if ( !($result = DB()->sql_query($sql)) )
+	if (!($result = DB()->sql_query($sql)))
 	{
-		message_die(GENERAL_ERROR, 'Could not get quota limits', '', __LINE__, __FILE__, $sql);
+		bb_die('Could not get quota limits #1');
 	}
 
 	$rows = DB()->sql_fetchrowset($result);
@@ -841,8 +616,8 @@ if ($mode == 'quota')
 			'QUOTA_ID' => $rows[$i]['quota_limit_id'],
 			'S_FILESIZE' => size_select('size_select_list[]', $size_format),
 			'U_VIEW' => "admin_attachments.php?mode=$mode&amp;e_mode=view_quota&amp;quota_id=" . $rows[$i]['quota_limit_id'],
-			'MAX_FILESIZE' => $rows[$i]['quota_limit'])
-		);
+			'MAX_FILESIZE' => $rows[$i]['quota_limit'],
+		));
 	}
 }
 
@@ -852,16 +627,16 @@ if ($mode == 'quota' && $e_mode == 'view_quota')
 
 	if (!$quota_id)
 	{
-		message_die(GENERAL_MESSAGE, 'Invalid Call');
+		bb_die('Invalid call');
 	}
 
 	$template->assign_block_vars('switch_quota_limit_desc', array());
 
 	$sql = "SELECT * FROM " . BB_QUOTA_LIMITS . " WHERE quota_limit_id = " . (int) $quota_id . " LIMIT 1";
 
-	if ( !($result = DB()->sql_query($sql)) )
+	if (!($result = DB()->sql_query($sql)))
 	{
-		message_die(GENERAL_ERROR, 'Could not get quota limits', '', __LINE__, __FILE__, $sql);
+		bb_die('Could not get quota limits #2');
 	}
 
 	$row = DB()->sql_fetchrow($result);
@@ -877,9 +652,9 @@ if ($mode == 'quota' && $e_mode == 'view_quota')
 			AND q.user_id <> 0
 			AND q.user_id = u.user_id';
 
-	if ( !($result = DB()->sql_query($sql)) )
+	if (!($result = DB()->sql_query($sql)))
 	{
-		message_die(GENERAL_ERROR, 'Could not get quota limits', '', __LINE__, __FILE__, $sql);
+		bb_die('Could not get quota limits #3');
 	}
 
 	$rows = DB()->sql_fetchrowset($result);
@@ -892,15 +667,15 @@ if ($mode == 'quota' && $e_mode == 'view_quota')
 		{
 			$template->assign_block_vars('users_upload_row', array(
 				'USER_ID' => $rows[$i]['user_id'],
-				'USERNAME' => $rows[$i]['username'])
-			);
+				'USERNAME' => $rows[$i]['username'],
+			));
 		}
 		else if ($rows[$i]['quota_type'] == QUOTA_PM_LIMIT)
 		{
 			$template->assign_block_vars('users_pm_row', array(
 				'USER_ID' => $rows[$i]['user_id'],
-				'USERNAME' => $rows[$i]['username'])
-			);
+				'USERNAME' => $rows[$i]['username'],
+			));
 		}
 	}
 
@@ -910,9 +685,9 @@ if ($mode == 'quota' && $e_mode == 'view_quota')
 			AND q.group_id <> 0
 			AND q.group_id = g.group_id';
 
-	if ( !($result = DB()->sql_query($sql)) )
+	if (!($result = DB()->sql_query($sql)))
 	{
-		message_die(GENERAL_ERROR, 'Could not get quota limits', '', __LINE__, __FILE__, $sql);
+		bb_die('Could not get quota limits #4');
 	}
 
 	$rows = DB()->sql_fetchrowset($result);
@@ -925,15 +700,15 @@ if ($mode == 'quota' && $e_mode == 'view_quota')
 		{
 			$template->assign_block_vars('groups_upload_row', array(
 				'GROUP_ID' => $rows[$i]['group_id'],
-				'GROUPNAME' => $rows[$i]['group_name'])
-			);
+				'GROUPNAME' => $rows[$i]['group_name'],
+			));
 		}
 		else if ($rows[$i]['quota_type'] == QUOTA_PM_LIMIT)
 		{
 			$template->assign_block_vars('groups_pm_row', array(
 				'GROUP_ID' => $rows[$i]['group_id'],
-				'GROUPNAME' => $rows[$i]['group_name'])
-			);
+				'GROUPNAME' => $rows[$i]['group_name'],
+			));
 		}
 	}
 }

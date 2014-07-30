@@ -37,9 +37,9 @@ if ( isset($_POST['submit']) )
 			$sql = "UPDATE " . BB_USERS . "
 				SET user_newpasswd = '$user_password', user_actkey = '$user_actkey'
 				WHERE user_id = " . $row['user_id'];
-			if ( !DB()->sql_query($sql) )
+			if (!DB()->sql_query($sql))
 			{
-				message_die(GENERAL_ERROR, 'Could not update new password information', '', __LINE__, __FILE__, $sql);
+				bb_die('Could not update new password information');
 			}
 
 			require(INC_DIR .'emailer.class.php');
@@ -68,7 +68,7 @@ if ( isset($_POST['submit']) )
 	}
 	else
 	{
-		message_die(GENERAL_ERROR, 'Could not obtain user information for sendpassword', '', __LINE__, __FILE__, $sql);
+		bb_die('Could not obtain user information for sendpassword');
 	}
 }
 else

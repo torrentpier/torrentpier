@@ -11,13 +11,11 @@ function group_select($select_name, $default_group = 0)
 {
 	global $lang;
 
-	$sql = 'SELECT group_id, group_name
-		FROM ' . BB_EXTENSION_GROUPS . '
-		ORDER BY group_name';
+	$sql = 'SELECT group_id, group_name FROM ' . BB_EXTENSION_GROUPS . ' ORDER BY group_name';
 
 	if (!($result = DB()->sql_query($sql)))
 	{
-		message_die(GENERAL_ERROR, "Couldn't query Extension Groups Table", "", __LINE__, __FILE__, $sql);
+		bb_die('Could not query extension groups table #1');
 	}
 
 	$group_select = '<select name="' . $select_name . '">';
@@ -66,7 +64,7 @@ function download_select($select_name, $group_id = 0)
 
 		if (!($result = DB()->sql_query($sql)))
 		{
-			message_die(GENERAL_ERROR, "Couldn't query Extension Groups Table", "", __LINE__, __FILE__, $sql);
+			bb_die('Could not query extension groups table #2');
 		}
 		$row = DB()->sql_fetchrow($result);
 		DB()->sql_freeresult($result);
@@ -107,12 +105,11 @@ function category_select($select_name, $group_id = 0)
 {
 	global $types_category, $modes_category;
 
-	$sql = 'SELECT group_id, cat_id
-		FROM ' . BB_EXTENSION_GROUPS;
+	$sql = 'SELECT group_id, cat_id FROM ' . BB_EXTENSION_GROUPS;
 
-	if ( !($result = DB()->sql_query($sql)) )
+	if (!($result = DB()->sql_query($sql)))
 	{
-		message_die(GENERAL_ERROR, "Couldn't select Category", "", __LINE__, __FILE__, $sql);
+		bb_die('Could not select category');
 	}
 
 	$rows = DB()->sql_fetchrowset($result);
@@ -192,13 +189,11 @@ function quota_limit_select($select_name, $default_quota = 0)
 {
 	global $lang;
 
-	$sql = 'SELECT quota_limit_id, quota_desc
-		FROM ' . BB_QUOTA_LIMITS . '
-		ORDER BY quota_limit ASC';
+	$sql = 'SELECT quota_limit_id, quota_desc FROM ' . BB_QUOTA_LIMITS . ' ORDER BY quota_limit ASC';
 
-	if ( !($result = DB()->sql_query($sql)) )
+	if (!($result = DB()->sql_query($sql)))
 	{
-		message_die(GENERAL_ERROR, "Couldn't query Quota Limits Table", "", __LINE__, __FILE__, $sql);
+		bb_die('Could not query quota limits table #1');
 	}
 
 	$quota_select = '<select name="' . $select_name . '">';
@@ -228,13 +223,11 @@ function default_quota_limit_select($select_name, $default_quota = 0)
 {
 	global $lang;
 
-	$sql = 'SELECT quota_limit_id, quota_desc
-		FROM ' . BB_QUOTA_LIMITS . '
-		ORDER BY quota_limit ASC';
+	$sql = 'SELECT quota_limit_id, quota_desc FROM ' . BB_QUOTA_LIMITS . ' ORDER BY quota_limit ASC';
 
-	if ( !($result = DB()->sql_query($sql)) )
+	if (!($result = DB()->sql_query($sql)))
 	{
-		message_die(GENERAL_ERROR, "Couldn't query Quota Limits Table", "", __LINE__, __FILE__, $sql);
+		bb_die('Could not query quota limits table #2');
 	}
 
 	$quota_select = '<select name="' . $select_name . '">';

@@ -115,7 +115,7 @@ if ($topic_id)
 
 	if (!$topic_row = DB()->fetch_row($sql))
 	{
-		message_die(GENERAL_MESSAGE, 'Topic_post_not_exist');
+		bb_die('Topic post not exist');
 	}
 
 	$forum_id = $topic_row['forum_id'];
@@ -128,7 +128,7 @@ elseif ($forum_id)
 
 	if (!$topic_row = DB()->fetch_row($sql))
 	{
-		message_die(GENERAL_MESSAGE, 'Forum_not_exist');
+		bb_die('Forum not exist');
 	}
 
 	$forum_name = $topic_row['forum_name'];
@@ -136,7 +136,7 @@ elseif ($forum_id)
 }
 else
 {
-	message_die(GENERAL_MESSAGE, 'Invalid request');
+	bb_die('Invalid request');
 }
 
 // Start session management
@@ -179,7 +179,7 @@ elseif ($mode == 'move' && !$is_auth['auth_mod'])
 // Exit if user not authorized
 if (!$is_auth['auth_mod'])
 {
-	message_die(GENERAL_MESSAGE, $lang['NOT_MODERATOR'], $lang['NOT_AUTHORISED']);
+	bb_die($lang['NOT_MODERATOR']);
 }
 
 // Redirect to login page if not admin session
@@ -207,7 +207,7 @@ switch ($mode)
 
 		if (empty($_POST['topic_id_list']) && empty($topic_id))
 		{
-			message_die(GENERAL_MESSAGE, $lang['NONE_SELECTED']);
+			bb_die($lang['NONE_SELECTED']);
 		}
 
 		$req_topics = isset($_POST['topic_id_list']) ? $_POST['topic_id_list'] : $topic_id;
@@ -215,7 +215,7 @@ switch ($mode)
 
 		if (!$req_topics OR !$topic_csv = get_id_csv($req_topics))
 		{
-			message_die(GENERAL_MESSAGE, $lang['NONE_SELECTED']);
+			bb_die($lang['NONE_SELECTED']);
 		}
 
 		$hidden_fields = array(
@@ -241,20 +241,20 @@ switch ($mode)
 
 		if (!$is_auth['auth_delete'])
 		{
-			message_die(GENERAL_MESSAGE, sprintf($lang['SORRY_AUTH_DELETE'], $is_auth['auth_delete_type']));
+			bb_die(sprintf($lang['SORRY_AUTH_DELETE'], $is_auth['auth_delete_type']));
 		}
 
 		if ($confirmed)
 		{
 			$result = topic_delete($req_topics, $forum_id);
 
-		    //Обновление кеша новостей на главной
+			//Обновление кеша новостей на главной
 			$news_forums = array_flip(explode(',', $bb_cfg['latest_news_forum_id']));
-		    if(isset($news_forums[$forum_id]) && $bb_cfg['show_latest_news'] && $result)
-		    {
-			    $datastore->enqueue('latest_news');
-			    $datastore->update('latest_news');
-		    }
+			if(isset($news_forums[$forum_id]) && $bb_cfg['show_latest_news'] && $result)
+			{
+				$datastore->enqueue('latest_news');
+				$datastore->update('latest_news');
+			}
 
 			$net_forums = array_flip(explode(',', $bb_cfg['network_news_forum_id']));
 			if(isset($net_forums[$forum_id]) && $bb_cfg['show_network_news'] && $result)
@@ -264,7 +264,7 @@ switch ($mode)
 			}
 
 			$msg = ($result) ? $lang['TOPICS_REMOVED'] : $lang['NO_TOPICS_REMOVED'];
-			message_die(GENERAL_MESSAGE, return_msg_mcp($msg));
+			bb_die(return_msg_mcp($msg));
 		}
 		else
 		{
@@ -284,7 +284,7 @@ switch ($mode)
 			$new_forum_id = (int) $_POST['new_forum'];
 			$result = topic_move($req_topics, $new_forum_id, $forum_id, isset($_POST['move_leave_shadow']), isset($_POST['insert_bot_msg']));
 
-            //Обновление кеша новостей на главной
+			//Обновление кеша новостей на главной
 			$news_forums = array_flip(explode(',', $bb_cfg['latest_news_forum_id']));
 			if((isset($news_forums[$forum_id]) || isset($news_forums[$new_forum_id])) && $bb_cfg['show_latest_news'] && $result)
 			{
@@ -300,7 +300,7 @@ switch ($mode)
 			}
 
 			$msg = ($result) ? $lang['TOPICS_MOVED'] : $lang['NO_TOPICS_MOVED'];
-			message_die(GENERAL_MESSAGE, return_msg_mcp($msg));
+			bb_die(return_msg_mcp($msg));
 		}
 		else
 		{
@@ -358,7 +358,7 @@ switch ($mode)
 
 		if (!$topic_csv = get_id_csv($topic_csv))
 		{
-			message_die(GENERAL_MESSAGE, $lang['NONE_SELECTED']);
+			bb_die($lang['NONE_SELECTED']);
 		}
 
 		DB()->query("
@@ -380,7 +380,7 @@ switch ($mode)
 		}
 
 		$msg = ($lock) ? $lang['TOPICS_LOCKED'] : $lang['TOPICS_UNLOCKED'];
-		message_die(GENERAL_MESSAGE, return_msg_mcp($msg));
+		bb_die(return_msg_mcp($msg));
 
 	break;
 
@@ -404,7 +404,7 @@ switch ($mode)
 		}
 
 		$msg = ($set_download) ? $lang['TOPICS_DOWN_SETS'] : $lang['TOPICS_DOWN_UNSETS'];
-		message_die(GENERAL_MESSAGE, return_msg_mcp($msg));
+		bb_die(return_msg_mcp($msg));
 
 		break;
 
@@ -438,7 +438,7 @@ switch ($mode)
 
 				if (!$result = DB()->sql_query($sql))
 				{
-					message_die(GENERAL_ERROR, 'Could not get post id information', '', __LINE__, __FILE__, $sql);
+					bb_die('Could not get post id information');
 				}
 				if ($rowset = DB()->sql_fetchrowset($result))
 				{
@@ -460,7 +460,7 @@ switch ($mode)
 				ORDER BY post_time ASC";
 			if (!($result = DB()->sql_query($sql)))
 			{
-				message_die(GENERAL_ERROR, 'Could not get post information', '', __LINE__, __FILE__, $sql);
+				bb_die('Could not get post information');
 			}
 
 			if ($row = DB()->sql_fetchrow($result))
@@ -481,22 +481,21 @@ switch ($mode)
 				$post_subject = clean_title($_POST['subject']);
 				if (empty($post_subject))
 				{
-					message_die(GENERAL_MESSAGE, $lang['EMPTY_SUBJECT']);
+					bb_die($lang['EMPTY_SUBJECT']);
 				}
 
 				$new_forum_id = intval($_POST['new_forum_id']);
 				$topic_time = TIMENOW;
 
-				$sql = 'SELECT forum_id FROM ' . BB_FORUMS . '
-					WHERE forum_id = ' . $new_forum_id;
+				$sql = 'SELECT forum_id FROM ' . BB_FORUMS . ' WHERE forum_id = ' . $new_forum_id;
 				if ( !($result = DB()->sql_query($sql)) )
 				{
-					message_die(GENERAL_ERROR, 'Could not select from forums table', '', __LINE__, __FILE__, $sql);
+					bb_die('Could not select from forums table');
 				}
 
 				if (!DB()->sql_fetchrow($result))
 				{
-					message_die(GENERAL_MESSAGE, 'New forum does not exist');
+					bb_die('New forum does not exist');
 				}
 
 				DB()->sql_freeresult($result);
@@ -507,7 +506,7 @@ switch ($mode)
 					VALUES ('" . DB()->escape($post_subject) . "', $first_poster, " . $topic_time . ", $new_forum_id, " . TOPIC_UNLOCKED . ", " . POST_NORMAL . ", $first_post_id)";
 				if (!(DB()->sql_query($sql)))
 				{
-					message_die(GENERAL_ERROR, 'Could not insert new topic', '', __LINE__, __FILE__, $sql);
+					bb_die('Could not insert new topic');
 				}
 
 				$new_topic_id = DB()->sql_nextid();
@@ -520,17 +519,15 @@ switch ($mode)
 						AND user_id IN ($user_id_sql)";
 				if (!DB()->sql_query($sql))
 				{
-					message_die(GENERAL_ERROR, 'Could not update topics watch table', '', __LINE__, __FILE__, $sql);
+					bb_die('Could not update topics watch table');
 				}
 
 				$sql_where = (!empty($_POST['split_type_beyond'])) ? " post_time >= $post_time AND topic_id = $topic_id" : "post_id IN ($post_id_sql)";
 
-				$sql = 	"UPDATE " . BB_POSTS . "
-					SET topic_id = $new_topic_id, forum_id = $new_forum_id
-					WHERE $sql_where";
+				$sql = "UPDATE " . BB_POSTS . " SET topic_id = $new_topic_id, forum_id = $new_forum_id WHERE $sql_where";
 				if (!DB()->sql_query($sql))
 				{
-					message_die(GENERAL_ERROR, 'Could not update posts table', '', __LINE__, __FILE__, $sql);
+					bb_die('Could not update posts table');
 				}
 
 				//bot
@@ -542,7 +539,6 @@ switch ($mode)
 				{
 					insert_post('after_split_to_new', $new_topic_id, $new_forum_id, $forum_id, $new_topic_id, '', $topic_id);
 				}
-				//bot end
 
 				sync('topic', array($topic_id, $new_topic_id));
 				sync('forum', array($forum_id, $new_forum_id));
@@ -550,7 +546,6 @@ switch ($mode)
 				//bot
 				$message = $lang['TOPIC_SPLIT'] .'<br /><br /><a href="' . "viewtopic.php?". POST_TOPIC_URL ."=$topic_id&amp;sid=". $userdata['session_id'] .'">'. $lang['TOPIC_SPLIT_OLD'] .'</a>';
 				$message .= ' &nbsp;::&nbsp; <a href="' . "viewtopic.php?". POST_TOPIC_URL ."=$new_topic_id&amp;sid=". $userdata['session_id'] .'">'. $lang['TOPIC_SPLIT_NEW'] .'</a>';
-				//bot end
 
 				// Log action
 				$log_action->mod('mod_topic_split', array(
@@ -562,24 +557,22 @@ switch ($mode)
 					'topic_title_new' => htmlCHR($_POST['subject']),
 				));
 
-				message_die(GENERAL_MESSAGE, $message);
+				bb_die($message);
 			}
 		}
-		//mpd
 		elseif ($post_id_sql && $delete_posts)
 		{
 			if (!$is_auth['auth_delete'])
 			{
-				message_die(GENERAL_MESSAGE, sprintf($lang['SORRY_AUTH_DELETE'], $is_auth['auth_delete_type']));
+				bb_die(sprintf($lang['SORRY_AUTH_DELETE'], $is_auth['auth_delete_type']));
 			}
 
 			// Delete posts
 			$result = post_delete(explode(',', $post_id_sql));
 
 			$msg = ($result) ? $lang['DELETE_POSTS_SUCCESFULLY'] : 'No posts were removed';
-			message_die(GENERAL_MESSAGE, return_msg_mcp($msg));
+			bb_die(return_msg_mcp($msg));
 		}
-		//mpd end
 		else
 		{
 			$sql = "SELECT u.username, p.*, pt.post_text, p.post_username
@@ -590,7 +583,7 @@ switch ($mode)
 				ORDER BY p.post_time ASC";
 			if ( !($result = DB()->sql_query($sql)) )
 			{
-				message_die(GENERAL_ERROR, 'Could not get topic/post information', '', __LINE__, __FILE__, $sql);
+				bb_die('Could not get topic / post information');
 			}
 
 			$s_hidden_fields = '<input type="hidden" name="sid" value="' . $userdata['session_id'] . '" /><input type="hidden" name="' . POST_FORUM_URL . '" value="' . $forum_id . '" /><input type="hidden" name="' . POST_TOPIC_URL . '" value="' . $topic_id . '" /><input type="hidden" name="mode" value="split" />';
@@ -600,11 +593,11 @@ switch ($mode)
 				$postrow = DB()->sql_fetchrowset($result);
 
 				$template->assign_vars(array(
-					'FORUM_NAME' => htmlCHR($forum_name),
-					'U_VIEW_FORUM' => FORUM_URL . $forum_id,
-					'S_SPLIT_ACTION' => "modcp.php",
+					'FORUM_NAME'      => htmlCHR($forum_name),
+					'U_VIEW_FORUM'    => FORUM_URL . $forum_id,
+					'S_SPLIT_ACTION'  => 'modcp.php',
 					'S_HIDDEN_FIELDS' => $s_hidden_fields,
-					'S_FORUM_SELECT' => get_forum_select('admin', 'new_forum_id', $forum_id),
+					'S_FORUM_SELECT'  => get_forum_select('admin', 'new_forum_id', $forum_id),
 				));
 
 				for($i = 0; $i < $total_posts; $i++)
@@ -626,15 +619,14 @@ switch ($mode)
 					$row_class = !($i % 2) ? 'row1' : 'row2';
 
 					$template->assign_block_vars('postrow', array(
-						'ROW_CLASS' => $row_class,
+						'ROW_CLASS'   => $row_class,
 						'POSTER_NAME' => wbr($poster),
-						'POST_DATE' => $post_date,
-						'MESSAGE' => $message,
-
-						'CHECKBOX' => (defined('BEGIN_CHECKBOX')) ? TRUE : FALSE,
-						'POST_ID'  => $post_id,
-						'ROW_ID'   => $i,
-						'CB_ID'    => 'cb_'. $i
+						'POST_DATE'   => $post_date,
+						'MESSAGE'     => $message,
+						'CHECKBOX'    => (defined('BEGIN_CHECKBOX')) ? TRUE : FALSE,
+						'POST_ID'     => $post_id,
+						'ROW_ID'      => $i,
+						'CB_ID'       => 'cb_'. $i,
 					));
 
 					if ($post_id == $topic_first_post_id)
@@ -652,51 +644,43 @@ switch ($mode)
 
 		$rdns_ip_num = ( isset($_GET['rdns']) ) ? $_GET['rdns'] : "";
 
-		if ( !$post_id )
+		if (!$post_id)
 		{
-			message_die(GENERAL_MESSAGE, $lang['NO_SUCH_POST']);
+			bb_die($lang['NO_SUCH_POST']);
 		}
 
-		// Look up relevent data for this post
-		$sql = "SELECT *
-			FROM " . BB_POSTS . "
-			WHERE post_id = $post_id
-				AND forum_id = $forum_id";
-		if ( !($result = DB()->sql_query($sql)) )
+		// Look up relevant data for this post
+		$sql = "SELECT * FROM " . BB_POSTS . " WHERE post_id = $post_id AND forum_id = $forum_id";
+		if (!($result = DB()->sql_query($sql)))
 		{
-			message_die(GENERAL_ERROR, 'Could not get poster IP information', '', __LINE__, __FILE__, $sql);
+			bb_die('Could not get poster IP information');
 		}
 
-		if ( !($post_row = DB()->sql_fetchrow($result)) )
+		if (!($post_row = DB()->sql_fetchrow($result)))
 		{
-			message_die(GENERAL_MESSAGE, $lang['NO_SUCH_POST']);
+			bb_die($lang['NO_SUCH_POST']);
 		}
 
 		$ip_this_post = decode_ip($post_row['poster_ip']);
-		$ip_this_post = ( $rdns_ip_num == $ip_this_post ) ? gethostbyaddr($ip_this_post) : $ip_this_post;
+		$ip_this_post = ($rdns_ip_num == $ip_this_post) ? gethostbyaddr($ip_this_post) : $ip_this_post;
 
 		$poster_id = $post_row['poster_id'];
 
 		$template->assign_vars(array(
-			'TPL_MODCP_IP'   => true,
-			'IP'             => $ip_this_post,
-			'U_LOOKUP_IP'    => "modcp.php?mode=ip&amp;" . POST_POST_URL . "=$post_id&amp;" . POST_TOPIC_URL . "=$topic_id&amp;rdns=$ip_this_post&amp;sid=" . $userdata['session_id'])
-		);
+			'TPL_MODCP_IP' => true,
+			'IP'           => $ip_this_post,
+			'U_LOOKUP_IP'  => "modcp.php?mode=ip&amp;" . POST_POST_URL . "=$post_id&amp;" . POST_TOPIC_URL . "=$topic_id&amp;rdns=$ip_this_post&amp;sid=" . $userdata['session_id'],
+		));
 
 		//
 		// Get other IP's this user has posted under
 		//
 		$where_sql = ($poster_id == $anon) ? "post_username = '{$post_row['post_username']}'" : "poster_id = $poster_id";
 
-		$sql = "SELECT poster_ip, COUNT(*) AS postings
-			FROM " . BB_POSTS . "
-			WHERE $where_sql
-			GROUP BY poster_ip
-			ORDER BY postings DESC
-			LIMIT 100";
+		$sql = "SELECT poster_ip, COUNT(*) AS postings FROM " . BB_POSTS . " WHERE $where_sql GROUP BY poster_ip ORDER BY postings DESC LIMIT 100";
 		if ( !($result = DB()->sql_query($sql)) )
 		{
-			message_die(GENERAL_ERROR, 'Could not get IP information for this user', '', __LINE__, __FILE__, $sql);
+			bb_die('Could not get IP information for this user');
 		}
 
 		if ( $row = DB()->sql_fetchrow($result) )
@@ -742,7 +726,7 @@ switch ($mode)
 			LIMIT 100";
 		if ( !($result = DB()->sql_query($sql)) )
 		{
-			message_die(GENERAL_ERROR, 'Could not get posters information based on IP', '', __LINE__, __FILE__, $sql);
+			bb_die('Could not get posters information based on IP');
 		}
 
 		if ( $row = DB()->sql_fetchrow($result) )
@@ -795,7 +779,7 @@ switch ($mode)
 
 			if (!$topic_csv = get_id_csv($topic_csv))
 			{
-				message_die(GENERAL_MESSAGE, $lang['NONE_SELECTED']);
+				bb_die($lang['NONE_SELECTED']);
 			}
 
 			DB()->query("
@@ -805,7 +789,7 @@ switch ($mode)
 			");
 
 			$msg = ($pin) ? $lang['POST_PINNED'] : $lang['POST_UNPINNED'];
-			message_die(GENERAL_MESSAGE, return_msg_mcp($msg));
+			bb_die(return_msg_mcp($msg));
 		}
 		elseif ($topic_id)
 		{
@@ -829,7 +813,7 @@ switch ($mode)
 
 			if (!$topic_csv = get_id_csv($topic_csv))
 			{
-				message_die(GENERAL_MESSAGE, $lang['NONE_SELECTED']);
+				bb_die($lang['NONE_SELECTED']);
 			}
 
 			DB()->query("
@@ -839,7 +823,7 @@ switch ($mode)
 			");
 
 			$msg = ($pin) ? $lang['POST_PINNED'] : $lang['POST_UNPINNED'];
-			message_die(GENERAL_MESSAGE, return_msg_mcp($msg));
+			bb_die(return_msg_mcp($msg));
 		}
 		break;
 

@@ -11,7 +11,7 @@ function update_table_bool ($table_name, $key, $field_name, $field_def_val)
 
 	if (!$result = DB()->sql_query($sql))
 	{
-		message_die(GENERAL_ERROR, "Could not update $table_name", '', __LINE__, __FILE__, $sql);
+		bb_die('Could not update '. $table_name);
 	}
 
 	if (isset($_POST[$field_name]))
@@ -33,7 +33,7 @@ function update_table_bool ($table_name, $key, $field_name, $field_def_val)
 
 			if (!$result = DB()->sql_query($sql))
 			{
-				message_die(GENERAL_ERROR, "Could not update $table_name", '', __LINE__, __FILE__, $sql);
+				bb_die('Could not update '. $table_name);
 			}
 		}
 	}

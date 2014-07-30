@@ -27,7 +27,7 @@ function attach_mod_get_lang($language_file)
 
 		if (!file_exists(LANG_ROOT_DIR ."$language/$language_file.php"))
 		{
-			message_die(GENERAL_MESSAGE, 'Attachment Mod language file does not exist: language/' . $language . '/' . $language_file . '.php');
+			bb_die('Attachment mod language file does not exist: language/' . $language . '/' . $language_file . '.php');
 		}
 		else
 		{
@@ -51,9 +51,9 @@ function get_config()
 
 	$sql = 'SELECT * FROM ' . BB_ATTACH_CONFIG;
 
-	if ( !($result = DB()->sql_query($sql)) )
+	if (!($result = DB()->sql_query($sql)))
 	{
-		message_die(GENERAL_ERROR, 'Could not query attachment information', '', __LINE__, __FILE__, $sql);
+		bb_die('Could not query attachment information');
 	}
 
 	while ($row = DB()->sql_fetchrow($result))
@@ -79,11 +79,4 @@ if (!($attach_config = CACHE('bb_cache')->get('attach_config')))
 include(BB_ROOT .'attach_mod/displaying.php');
 include(BB_ROOT .'attach_mod/posting_attachments.php');
 
-if (!intval($attach_config['allow_ftp_upload']))
-{
-	$upload_dir = $attach_config['upload_dir'];
-}
-else
-{
-	$upload_dir = $attach_config['download_path'];
-}
+$upload_dir = $attach_config['upload_dir'];

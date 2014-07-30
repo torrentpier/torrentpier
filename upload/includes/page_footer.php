@@ -11,7 +11,6 @@ if (!empty($template))
 		'POWERED'          => base64_decode($lang['POWERED']),
 		'SHOW_ADMIN_LINK'  => (IS_ADMIN && !defined('IN_ADMIN')),
 		'ADMIN_LINK_HREF'  => "admin/index.php",
-
 	));
 
 	$template->set_filenames(array('page_footer' => 'page_footer.tpl'));
@@ -31,7 +30,6 @@ if ($show_dbg_info)
 	$gen_time_txt = sprintf('%.3f', $gen_time);
 	$gzip_text = (UA_GZIP_SUPPORTED) ? 'GZIP ' : '<s>GZIP</s> ';
 	$gzip_text .= ($bb_cfg['gzip_compress']) ? $lang['ON'] : $lang['OFF'];
-	$debug_text = (DEBUG) ? 'Debug ON' : 'Debug OFF';
 
 	$stat = '[&nbsp; '. $lang['EXECUTION_TIME'] ." $gen_time_txt ". $lang['SEC'];
 
@@ -75,7 +73,7 @@ echo '
 	</div><!--/body_container-->
 ';
 
-if (DBG_USER && (SQL_DEBUG || PROFILER) && !(isset($_GET['pane']) && $_GET['pane'] == 'left'))
+if (DBG_USER && SQL_DEBUG && !(isset($_GET['pane']) && $_GET['pane'] == 'left'))
 {
 	require(INC_DIR . 'page_footer_dev.php');
 }
@@ -90,12 +88,6 @@ if (isset($log_ip_resp[USER_IP]) || isset($log_ip_resp[CLIENT_IP]))
 	bb_log($str, $file);
 }
 ### LOG END ###
-
-if (DBG_USER && !empty($GLOBALS['timer_markers']))
-{
-	$GLOBALS['timer']->stop();
-	$GLOBALS['timer']->display();
-}
 
 echo '
 	</body>

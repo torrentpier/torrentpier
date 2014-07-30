@@ -302,7 +302,7 @@ class Template
 		}
 		if (!$this->loadfile($handle))
 		{
-			die("Template->pparse(): Couldn't load template file for handle $handle");
+			die("Template->pparse(): Could not load template file for handle $handle");
 		}
 		// actually compile the template now.
 		if (empty($this->compiled_code[$handle]))

@@ -79,8 +79,7 @@ if ($submit && $confirm)
 
 	$datastore->update('cat_forums');
 
-	$message = $lang['CONFIG_UPD'] .'<br /><br />'. sprintf($lang['RETURN_CONFIG'], '<a href="admin_bt_forum_cfg.php">', '</a>') .'<br /><br />'. sprintf($lang['CLICK_RETURN_ADMIN_INDEX'], '<a href="index.php?pane=right">', '</a>');
-	message_die(GENERAL_MESSAGE, $message);
+	bb_die($lang['CONFIG_UPD'] .'<br /><br />'. sprintf($lang['RETURN_CONFIG'], '<a href="admin_bt_forum_cfg.php">', '</a>') .'<br /><br />'. sprintf($lang['CLICK_RETURN_ADMIN_INDEX'], '<a href="index.php?pane=right">', '</a>'));
 }
 
 // Set template vars
@@ -103,7 +102,7 @@ $sql = "SELECT f.*
 
 if (!$result = DB()->sql_query($sql))
 {
-	message_die(GENERAL_ERROR, 'Could not obtain forum names', '', __LINE__, __FILE__, $sql);
+	bb_die('Could not obtain forum names');
 }
 
 $rowset = DB()->sql_fetchrowset($result);

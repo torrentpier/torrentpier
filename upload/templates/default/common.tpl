@@ -1,10 +1,10 @@
-<!-- IF TPL_GENERAL_MESSAGE -->
+<!-- IF TPL_BB_DIE -->
 <!--========================================================================-->
 
 <!-- IF IN_ADMIN --><br /><br /><!-- ELSE --><div class="spacer_10"></div><!-- ENDIF -->
 
 <table class="forumline message">
-	<tr><th>{MESSAGE_TITLE}</th></tr>
+	<tr><th>{L_INFORMATION}</th></tr>
 	<tr><td>
 		<div class="mrg_16">{MESSAGE_TEXT}</div>
 		<div class="mrg_12">{BB_DIE_APPEND_MSG}</div>
@@ -14,7 +14,7 @@
 <!-- IF IN_ADMIN --><br /><br /><!-- ELSE --><div class="spacer_10"></div><!-- ENDIF -->
 
 <!--========================================================================-->
-<!-- ENDIF / TPL_GENERAL_MESSAGE -->
+<!-- ENDIF / TPL_BB_DIE -->
 
 <!-- IF TPL_CONFIRM -->
 <!--========================================================================-->

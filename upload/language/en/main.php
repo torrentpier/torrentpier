@@ -7,7 +7,7 @@ $lang['CONTENT_ENCODING'] = 'UTF-8';
 // Common, these terms are used
 // extensively on several pages
 //
-$lang['ADMIN'] = 'Administration';
+$lang['ADMIN'] = 'Administrating';
 $lang['FORUM'] = 'Forum';
 $lang['CATEGORY'] = 'Category';
 $lang['HIDE_CAT'] = 'Hide categories';
@@ -44,7 +44,7 @@ $lang['3_MONTHS'] = '3 Months';
 $lang['6_MONTHS'] = '6 Months';
 $lang['1_YEAR'] = '1 Year';
 
-$lang['GO'] = 'Jump to';
+$lang['GO'] = 'Go to';
 $lang['SUBMIT'] = 'Submit';
 $lang['RESET'] = 'Reset';
 $lang['CANCEL'] = 'Cancel';
@@ -60,14 +60,14 @@ $lang['SELECT_ACTION'] = 'Select action';
 
 $lang['NEXT_PAGE'] = 'Next';
 $lang['PREVIOUS_PAGE'] = 'Previous';
-$lang['GOTO_PAGE'] = 'Goto page';
+$lang['GOTO_PAGE'] = 'Go to page';
 $lang['GOTO_SHORT'] = 'Page';
 $lang['JOINED'] = 'Joined';
 $lang['LONGEVITY'] = 'Longevity';
 $lang['IP_ADDRESS'] = 'IP Address';
 $lang['POSTED_AFTER'] = 'after';
 
-$lang['SELECT_FORUM'] = 'Select a forum';
+$lang['SELECT_FORUM'] = 'Select forum';
 $lang['VIEW_LATEST_POST'] = 'View latest post';
 $lang['VIEW_NEWEST_POST'] = 'View newest post';
 $lang['PAGE_OF'] = 'Page <b>%d</b> of <b>%s</b>';
@@ -91,8 +91,8 @@ $lang['REPLY_WITH_QUOTE'] = 'Reply with quote';
 $lang['CLICK_RETURN_TOPIC'] = 'Click %sHere%s to return to the topic'; // %s's here are for uris, do not remove!
 $lang['CLICK_RETURN_LOGIN'] = 'Click %sHere%s to try again';
 $lang['CLICK_RETURN_FORUM'] = 'Click %sHere%s to return to the forum';
-$lang['CLICK_VIEW_MESSAGE'] = 'Click %sHere%s to view your message';
-$lang['CLICK_RETURN_MODCP'] = 'Click %sHere%s to return to the Moderator Control Panel';
+$lang['CLICK_VIEW_MESSAGE'] = 'Click %sHere%s to return to your message';
+$lang['CLICK_RETURN_MODCP'] = 'Click %sHere%s to return to Moderator Control Panel';
 $lang['CLICK_RETURN_GROUP'] = 'Click %sHere%s to return to group information';
 
 $lang['ADMIN_PANEL'] = 'Go to Administration Panel';
@@ -101,7 +101,7 @@ $lang['ALL_CACHE_CLEARED'] = 'Cache has been cleared';
 $lang['ALL_TEMPLATE_CLEARED'] = 'Template cache has been cleared';
 $lang['DATASTORE'] = 'Datastore';
 $lang['DATASTORE_CLEARED'] = 'Datastore has been cleared';
-$lang['BOARD_DISABLE'] = 'Sorry, but this board is currently unavailable.  Please try again later.';
+$lang['BOARD_DISABLE'] = 'Sorry, this board is currently not available. Please try again later.';
 
 $lang['LOADING'] = 'Loading...';
 $lang['JUMPBOX_TITLE'] = 'Select forum';
@@ -119,8 +119,7 @@ $lang['ONLINE_ADMIN'] = 'Administrator';
 $lang['ONLINE_MOD'] = 'Moderator';
 $lang['ONLINE_GROUP_MEMBER'] = 'Group member';
 
-$lang['YOU_LAST_VISIT'] = 'Your last visit was on: <span class="tz_time">%s</span>';
-$lang['CURRENT_TIME'] = 'The time now is: <span class="tz_time">%s</span>';
+$lang['CURRENT_TIME'] = 'Current time is: <span class="tz_time">%s</span>';
 
 $lang['SEARCH_NEW'] = 'View newest posts';
 $lang['SEARCH_SELF'] = 'My posts';
@@ -170,14 +169,14 @@ $lang['FORUM_LOCKED_MAIN'] = 'Forum is locked';
 //
 // Login
 //
-$lang['ENTER_PASSWORD'] = 'Please enter your username and password to log in.';
+$lang['ENTER_PASSWORD'] = 'Please enter username and password to log in.';
 $lang['LOGIN'] = 'Log in';
 $lang['LOGOUT'] = 'Log out';
 $lang['CONFIRM_LOGOUT'] = 'Are you sure you want to log out?';
 
-$lang['FORGOTTEN_PASSWORD'] = 'Forgot password?';
-$lang['AUTO_LOGIN'] = 'Log me on automatically each visit';
-$lang['ERROR_LOGIN'] = 'You have specified an incorrect or inactive username, or an invalid password.';
+$lang['FORGOTTEN_PASSWORD'] = 'Password forgotten?';
+$lang['AUTO_LOGIN'] = 'Log me on automatically';
+$lang['ERROR_LOGIN'] = 'The username you submitted is incorrect or invalid, or the password is invalid.';
 $lang['REMEMBER'] = 'Remember';
 $lang['USER_WELCOME'] = 'Welcome,';
 
@@ -192,8 +191,8 @@ $lang['PRIVATE_MESSAGE'] = 'Private Message';
 $lang['PRIVATE_MESSAGES'] = 'Private Messages';
 $lang['WHOSONLINE'] = 'Who is online';
 
-$lang['MARK_ALL_FORUMS_READ'] = 'Mark all forums read';
-$lang['FORUMS_MARKED_READ'] = 'All forums have been marked read';
+$lang['MARK_ALL_FORUMS_READ'] = 'Flag all forums as read';
+$lang['FORUMS_MARKED_READ'] = 'All forums flagged as read';
 
 $lang['LATEST_NEWS'] = 'Latest news';
 $lang['NETWORK_NEWS'] = 'Network news';
@@ -208,7 +207,7 @@ $lang['FORUM_NOT_EXIST'] = 'The forum you selected does not exist.';
 $lang['REACHED_ON_ERROR'] = 'You have reached this page in error.';
 $lang['ERROR_PORNO_FORUM'] = 'This type of forums (18+) was hidden in your profile by you';
 
-$lang['DISPLAY_TOPICS'] = 'Display topics from previous';
+$lang['DISPLAY_TOPICS'] = 'Display topics';
 $lang['ALL_TOPICS'] = 'All Topics';
 $lang['MODERATE_FORUM'] = 'Moderate this forum';
 $lang['TITLE_SEARCH_HINT'] = 'search title...';
@@ -249,9 +248,9 @@ $lang['VIEW_RESULTS'] = 'View Results';
 $lang['NO_NEWER_TOPICS'] = 'There are no newer topics in this forum';
 $lang['NO_OLDER_TOPICS'] = 'There are no older topics in this forum';
 $lang['TOPIC_POST_NOT_EXIST'] = 'The topic or post you requested does not exist';
-$lang['NO_POSTS_TOPIC'] = 'No posts exist for this topic';
+$lang['NO_POSTS_TOPIC'] = 'There are no posts in this topic';
 
-$lang['DISPLAY_POSTS'] = 'Display posts from previous';
+$lang['DISPLAY_POSTS'] = 'Display posts';
 $lang['ALL_POSTS'] = 'All Posts';
 $lang['NEWEST_FIRST'] = 'Newest First';
 $lang['OLDEST_FIRST'] = 'Oldest First';
@@ -260,32 +259,30 @@ $lang['BACK_TO_TOP'] = 'Back to top';
 
 $lang['READ_PROFILE'] = 'View user\'s profile';
 $lang['VISIT_WEBSITE'] = 'Visit poster\'s website';
-$lang['VIEW_IP'] = 'View IP address of poster';
+$lang['VIEW_IP'] = 'View poster IP address';
 $lang['MODERATE_POST'] = 'Moderate posts';
 $lang['DELETE_POST'] = 'Delete this post';
 
 $lang['WROTE'] = 'wrote'; // proceeds the username and is followed by the quoted text
-$lang['QUOTE'] = 'Quote'; // comes before bbcode quote output.
-$lang['CODE'] = 'Code'; // comes before bbcode code output.
-$lang['CODE_COPIED'] = 'Code copied to clipboard';
-$lang['CODE_COPY'] = 'copy to clipboard';
+$lang['QUOTE'] = 'Quote'; // comes before bbcode quote output
+$lang['CODE'] = 'Code'; // comes before bbcode code output
 $lang['SPOILER_HEAD'] = 'hidden text';
 $lang['SPOILER_CLOSE'] = 'turn';
-$lang['PLAY_ON_CURPAGE'] = 'Start playing on the current page';
+$lang['PLAY_ON_CURPAGE'] = 'Start playing on current page';
 
 $lang['EDITED_TIME_TOTAL'] = 'Last edited by %s on %s; edited %d time in total'; // Last edited by me on 12 Oct 2001; edited 1 time in total
 $lang['EDITED_TIMES_TOTAL'] = 'Last edited by %s on %s; edited %d times in total'; // Last edited by me on 12 Oct 2001; edited 2 times in total
 
-$lang['LOCK_TOPIC'] = 'Lock this topic';
-$lang['UNLOCK_TOPIC'] = 'Unlock this topic';
-$lang['MOVE_TOPIC'] = 'Move this topic';
-$lang['DELETE_TOPIC'] = 'Delete this topic';
-$lang['SPLIT_TOPIC'] = 'Split this topic';
+$lang['LOCK_TOPIC'] = 'Lock the topic';
+$lang['UNLOCK_TOPIC'] = 'Unlock the topic';
+$lang['MOVE_TOPIC'] = 'Move the topic';
+$lang['DELETE_TOPIC'] = 'Delete the topic';
+$lang['SPLIT_TOPIC'] = 'Split the topic';
 
-$lang['STOP_WATCHING_TOPIC'] = 'Stop watching this topic';
-$lang['START_WATCHING_TOPIC'] = 'Watch this topic for replies';
-$lang['NO_LONGER_WATCHING'] = 'You are no longer watching this topic';
-$lang['YOU_ARE_WATCHING'] = 'You are watching this topic now';
+$lang['STOP_WATCHING_TOPIC'] = 'Stop following the topic';
+$lang['START_WATCHING_TOPIC'] = 'Follow the topic for replies';
+$lang['NO_LONGER_WATCHING'] = 'You are no longer following this topic';
+$lang['YOU_ARE_WATCHING'] = 'You are following this topic now';
 
 $lang['TOTAL_VOTES'] = 'Total Votes';
 $lang['SEARCH_IN_TOPIC'] = 'search in topic...';
@@ -308,24 +305,24 @@ $lang['SELECT_POSTS_PER_PAGE'] = 'posts per page';
 //
 $lang['TOPIC_REVIEW'] = 'Topic review';
 
-$lang['NO_POST_MODE'] = 'No post mode specified'; // If posting.php is called without a mode (newtopic/reply/delete/etc, shouldn't be shown normaly)
+$lang['NO_POST_MODE'] = 'No post mode selected'; // If posting.php is called without a mode (newtopic/reply/delete/etc, shouldn't be shown normaly)
 
-$lang['POST_A_NEW_TOPIC'] = 'Post a new topic';
-$lang['POST_A_REPLY'] = 'Post a reply';
+$lang['POST_A_NEW_TOPIC'] = 'Post new topic';
+$lang['POST_A_REPLY'] = 'Post new reply';
 $lang['POST_TOPIC_AS'] = 'Post topic as';
 $lang['EDIT_POST'] = 'Edit post';
 $lang['EDIT_TOPIC_TITLE'] = 'Edit topic title';
 $lang['EDIT_POST_NOT_1'] = 'You are not allowed ';
 $lang['EDIT_POST_NOT_2'] = 'You can not ';
-$lang['EDIT_POST_AJAX'] = 'You can not edit the message with the status ';
+$lang['EDIT_POST_AJAX'] = 'You can not edit post with the status ';
 $lang['AFTER_THE_LAPSE'] = 'after the lapse of ';
 
-$lang['DONT_MESSAGE_TITLE'] = 'You have not specified the message header';
+$lang['DONT_MESSAGE_TITLE'] = 'You should specify message title';
 $lang['INVALID_TOPIC_ID'] = 'Topic Absent!';
 $lang['INVALID_TOPIC_ID_DB'] = 'Topic does not exist in the database!';
 
 $lang['NOT_POST'] = 'Absent Message';
-$lang['NOT_EDIT_TOR_STATUS'] = 'You may not edit your distributions with the status';
+$lang['NOT_EDIT_TOR_STATUS'] = 'You can not edit release with the status';
 $lang['TOR_STATUS_DAYS'] = 'days';
 
 $lang['OPTIONS'] = 'Options';
@@ -371,10 +368,10 @@ $lang['DAYS'] = 'Days';
 $lang['POLL_FOR_EXPLAIN'] = '[ Enter 0 or leave blank for a never-ending poll ]';
 $lang['DELETE_POLL'] = 'Delete Poll';
 
-$lang['MAX_SMILIES_PER_POST'] = 'Limit of %s emoticons in a message exceeded.';
+$lang['MAX_SMILIES_PER_POST'] = 'Emoticons limit of %s emoticons exceeded.';
 
 $lang['ATTACH_SIGNATURE'] = 'Attach signature (signatures can be changed in profile)';
-$lang['NOTIFY'] = 'Notify me when a reply is posted';
+$lang['NOTIFY'] = 'Notify me when on replies';
 
 $lang['STORED'] = 'Your message has been entered successfully.';
 $lang['EDITED'] = 'The message has been changed';
@@ -454,10 +451,10 @@ $lang['SAVE_MARKED'] = 'Save Marked';
 $lang['SAVE_MESSAGE'] = 'Save Message';
 $lang['DELETE_MESSAGE'] = 'Delete Message';
 
-$lang['DISPLAY_MESSAGES'] = 'Display messages from previous'; // Followed by number of days/weeks/months
+$lang['DISPLAY_MESSAGES'] = 'Display messages'; // Followed by number of days/weeks/months
 $lang['ALL_MESSAGES'] = 'All Messages';
 
-$lang['NO_MESSAGES_FOLDER'] = 'You have no messages in this folder';
+$lang['NO_MESSAGES_FOLDER'] = 'There are no messages in this folder';
 
 $lang['PM_DISABLED'] = 'Private messaging has been disabled on this board.';
 $lang['CANNOT_SEND_PRIVMSG'] = 'Sorry, but the administrator has prevented you from sending private messages.';
@@ -486,9 +483,9 @@ $lang['SELECT_USERNAME'] = 'Select a Username';
 $lang['FIND'] = 'Find';
 $lang['NO_MATCH'] = 'No matches found.';
 
-$lang['NO_PM_ID'] = 'No post ID was specified';
-$lang['NO_SUCH_FOLDER'] = 'No such folder exists';
-$lang['NO_FOLDER'] = 'No folder was specified';
+$lang['NO_PM_ID'] = 'Please specify post ID';
+$lang['NO_SUCH_FOLDER'] = 'Folder is not found';
+$lang['NO_FOLDER'] = 'Please specify the folder';
 
 $lang['MARK_ALL'] = 'Mark all';
 $lang['UNMARK_ALL'] = 'Unmark all';
@@ -517,14 +514,14 @@ $lang['PREFERENCES'] = 'Preferences';
 $lang['ITEMS_REQUIRED'] = 'Items marked with a * are required unless stated otherwise.';
 $lang['REGISTRATION_INFO'] = 'Registration Information';
 $lang['PROFILE_INFO'] = 'Profile Information';
-$lang['PROFILE_INFO_WARN'] = 'This information will be publicly viewable';
+$lang['PROFILE_INFO_WARN'] = 'Publicly available information';
 $lang['AVATAR_PANEL'] = 'Avatar control panel';
 
 $lang['WEBSITE'] = 'Website';
 $lang['LOCATION'] = 'Location';
 $lang['CONTACT'] = 'Contact';
 $lang['EMAIL_ADDRESS'] = 'E-mail address';
-$lang['SEND_PRIVATE_MESSAGE'] = 'Send pm';
+$lang['SEND_PRIVATE_MESSAGE'] = 'Send private message';
 $lang['HIDDEN_EMAIL'] = '[ Hidden ]';
 $lang['INTERESTS'] = 'Interests';
 $lang['OCCUPATION'] = 'Occupation';
@@ -1015,19 +1012,10 @@ $lang['DATETIME']['NOV'] = 'Nov';
 $lang['DATETIME']['DEC'] = 'Dec';
 
 //
-// Errors (not related to a
-// specific failure on a page)
+// Errors
 //
 $lang['INFORMATION'] = 'Information';
-$lang['CRITICAL_INFORMATION'] = 'Critical Information';
-
-$lang['GENERAL_ERROR'] = 'Error';
-$lang['CRITICAL_ERROR'] = 'Critical Error';
-$lang['AN_ERROR_OCCURED'] = 'An Error Occurred';
-$lang['A_CRITICAL_ERROR'] = 'A Critical Error Occurred';
-
 $lang['ADMIN_REAUTHENTICATE'] = 'To administer/moderate the board you must re-authenticate yourself.';
-$lang['LOGIN_ATTEMPTS_EXCEEDED'] = 'The maximum number of %s login attempts has been exceeded. You are not allowed to login for the next %s minutes.';
 
 //
 // Attachment Mod Main Language Variables
@@ -1068,7 +1056,7 @@ $lang['UPLOAD_NEW_VERSION'] = 'Upload New Version';
 
 // Errors -> Posting Attachments
 $lang['INVALID_FILENAME'] = '%s is an invalid filename'; // replace %s with given filename
-$lang['ATTACHMENT_PHP_SIZE_NA'] = 'The Attachment is too big.<br />Couldn\'t get the maximum Size defined in PHP.<br />The Attachment Mod is unable to determine the maximum Upload Size defined in the php.ini.';
+$lang['ATTACHMENT_PHP_SIZE_NA'] = 'The Attachment is too big.<br />Could not get the maximum Size defined in PHP.<br />The Attachment Mod is unable to determine the maximum Upload Size defined in the php.ini.';
 $lang['ATTACHMENT_PHP_SIZE_OVERRUN'] = 'The Attachment is too big.<br />Maximum Upload Size: %d MB.<br />Please note that this Size is defined in php.ini, this means it\'s set by PHP and the Attachment Mod can not override this value.'; // replace %d with ini_get('upload_max_filesize')
 $lang['DISALLOWED_EXTENSION'] = 'The Extension %s is not allowed'; // replace %s with extension (e.g. .php)
 $lang['DISALLOWED_EXTENSION_WITHIN_FORUM'] = 'You are not allowed to post Files with the Extension %s within this Forum'; // replace %s with the Extension
@@ -1098,16 +1086,9 @@ $lang['CONFIRM_DELETE_PM_ATTACHMENTS'] = 'Are you sure you want to delete all At
 // General Error Messages
 $lang['ATTACHMENT_FEATURE_DISABLED'] = 'The Attachment Feature is disabled.';
 
-$lang['DIRECTORY_DOES_NOT_EXIST'] = 'The Directory \'%s\' does not exist or couldn\'t be found.'; // replace %s with directory
+$lang['DIRECTORY_DOES_NOT_EXIST'] = 'The Directory \'%s\' does not exist or Could not be found.'; // replace %s with directory
 $lang['DIRECTORY_IS_NOT_A_DIR'] = 'Please check if \'%s\' is a directory.'; // replace %s with directory
-$lang['DIRECTORY_NOT_WRITEABLE'] = 'Directory \'%s\' is not writeable. You\'ll have to create the upload path and chmod it to 777 (or change the owner to you httpd-servers owner) to upload files.<br />If you have only plain ftp-access change the \'Attribute\' of the directory to rwxrwxrwx.'; // replace %s with directory
-
-$lang['FTP_ERROR_CONNECT'] = 'Could not connect to FTP Server: \'%s\'. Please check your FTP-Settings.';
-$lang['FTP_ERROR_LOGIN'] = 'Could not login to FTP Server. The Username \'%s\' or the Password is wrong. Please check your FTP-Settings.';
-$lang['FTP_ERROR_PATH'] = 'Could not access ftp directory: \'%s\'. Please check your FTP Settings.';
-$lang['FTP_ERROR_UPLOAD'] = 'Could not upload files to ftp directory: \'%s\'. Please check your FTP Settings.';
-$lang['FTP_ERROR_DELETE'] = 'Could not delete files in ftp directory: \'%s\'. Please check your FTP Settings.<br />Another reason for this error could be the non-existence of the Attachment, please check this first in Shadow Attachments.';
-$lang['FTP_ERROR_PASV_MODE'] = 'Unable to enable/disable FTP Passive Mode';
+$lang['DIRECTORY_NOT_WRITEABLE'] = 'Directory \'%s\' is not writeable. You\'ll have to create the upload path and chmod it to 777 (or change the owner to you httpd-servers owner) to upload files.<br />If you have only plain FTP-access change the \'Attribute\' of the directory to rwxrwxrwx.'; // replace %s with directory
 
 // Attach Rules Window
 $lang['RULES_PAGE'] = 'Attachment Rules';
@@ -1351,8 +1332,8 @@ $lang['OPEN_IN_SAME_WINDOW'] = 'open in same window';
 $lang['SHOW_TIME_TOPICS'] = 'show time of the creation topics';
 $lang['SHOW_CURSOR'] = 'highlight the row under the cursor';
 
-$lang['BT_LOW_RATIO_FUNC'] = "You can't use this option (ratio is too low)";
-$lang['BT_LOW_RATIO_FOR_DL'] = "With ratio <b>%s</b> you can't download torrents";
+$lang['BT_LOW_RATIO_FUNC'] = "You can not use this option (ratio is too low)";
+$lang['BT_LOW_RATIO_FOR_DL'] = "With ratio <b>%s</b> you can not download torrents";
 $lang['BT_RATIO_WARNING_MSG'] = 'If your ratio falls below %s, you will not be able to download Torrents! <a href="%s"><b>More about the rating.</b></a>';
 
 $lang['SEEDER_LAST_SEEN'] = 'Seeder not seen: <b>%s</b>';
@@ -1734,8 +1715,6 @@ $lang['FORUM_STYLE'] = 'Forum style';
 
 $lang['LINKS_ARE_FORBIDDEN'] = 'Links are forbidden';
 
-$lang['DONATION'] = 'Donation';
-
 $lang['GENERAL'] = 'General Admin';
 $lang['USERS'] = 'User Admin';
 $lang['GROUPS'] = 'Group Admin';
@@ -1789,6 +1768,7 @@ $lang['CREATE_PROFILE'] = 'Create profile';
 
 $lang['TP_VERSION']      = 'TorrentPier version';
 $lang['TP_RELEASE_DATE'] = 'Release date';
+$lang['PHP_INFO'] = 'Information about PHP';
 
 $lang['CLICK_RETURN_ADMIN_INDEX'] = 'Click %sHere%s to return to the Admin Index';
 
@@ -2074,7 +2054,7 @@ $lang['USER_ADMIN_EXPLAIN'] = 'Here you can change your users\' information and 
 
 $lang['LOOK_UP_USER'] = 'Look up user';
 
-$lang['ADMIN_USER_FAIL'] = 'Couldn\'t update the user\'s profile.';
+$lang['ADMIN_USER_FAIL'] = 'Could not update the user\'s profile.';
 $lang['ADMIN_USER_UPDATED'] = 'The user\'s profile has been updated successfully.';
 $lang['CLICK_RETURN_USERADMIN'] = 'Click %sHere%s to return to User Administration';
 
@@ -2204,20 +2184,6 @@ $lang['DISALLOW_SUCCESSFUL'] = 'The disallowed username has been added successfu
 $lang['DISALLOWED_ALREADY'] = 'The name you entered could not be disallowed. It either already exists in the list, exists in the word censor list, or a matching username is present.';
 
 $lang['CLICK_RETURN_DISALLOWADMIN'] = 'Click %sHere%s to return to Disallow Username Administration';
-
-// FTP
-$lang['ATTACHMENT_FTP_SETTINGS'] = 'Setting up an FTP upload for attachments';
-$lang['FTP_CHOOSE'] = 'Choose Download Method';
-$lang['FTP_OPTION'] = '<br />Since FTP extensions are enabled in this version of PHP you may also be given the option of first trying to automatically FTP the config file into place.';
-$lang['FTP_INSTRUCTS'] = 'You have chosen to FTP the file to the account containing phpBB 2 automatically.  Please enter the information below to facilitate this process. Note that the FTP path should be the exact path via FTP to your phpBB2 installation as if you were FTPing to it using any normal client.';
-$lang['FTP_INFO'] = 'Enter Your FTP Information';
-$lang['ATTEMPT_FTP'] = 'Attempt to FTP config file into place';
-$lang['SEND_FILE'] = 'Just send the file to me and I\'ll FTP it manually';
-$lang['FTP_PATH'] = 'FTP path to phpBB 2';
-$lang['FTP_USERNAME'] = 'Your FTP Username';
-$lang['FTP_PASSWORD'] = 'Your FTP Password';
-$lang['TRANSFER_CONFIG'] = 'Start Transfer';
-$lang['NOFTP_CONFIG'] = 'The attempt to FTP the config file into place failed.  Please download the config file and FTP it into place manually.';
 
 //
 // Version Check
@@ -2403,22 +2369,8 @@ $lang['DISABLE_MOD'] = 'Disable Attachment Mod';
 $lang['DISABLE_MOD_EXPLAIN'] = 'This option is mainly for testing new templates or themes, it disables all Attachment Functions except the Admin Panel.';
 $lang['PM_ATTACHMENTS'] = 'Allow Attachments in Private Messages';
 $lang['PM_ATTACHMENTS_EXPLAIN'] = 'Allow/Disallow attaching files to Private Messages.';
-$lang['FTP_UPLOAD'] = 'Enable FTP Upload';
-$lang['FTP_UPLOAD_EXPLAIN'] = 'Enable/Disable the FTP Upload option. If you set it to yes, you have to define the Attachment FTP Settings and the Upload Directory is no longer used.';
 $lang['ATTACHMENT_TOPIC_REVIEW'] = 'Show applications in the review of communications topics when writing an answer?';
 $lang['ATTACHMENT_TOPIC_REVIEW_EXPLAIN'] = 'If you put a "yes", all applications will be displayed in the review of communications topics.';
-
-$lang['FTP_SERVER'] = 'FTP Upload Server';
-$lang['FTP_SERVER_EXPLAIN'] = 'Here you can enter the IP-Address or FTP-Hostname of the Server used for your uploaded files. If you leave this field empty, the Server on which your phpBB2 Board is installed will be used. Please note that it is not allowed to add ftp:// or something else to the address, just plain ftp.foo.com or, which is a lot faster, the plain IP Address.';
-
-$lang['ATTACH_FTP_PATH'] = 'FTP Path to your upload directory';
-$lang['ATTACH_FTP_PATH_EXPLAIN'] = 'The Directory where your Attachments will be stored. This Directory doesn\'t have to be chmodded. Please don\'t enter your IP or FTP-Address here, this input field is only for the FTP Path.<br />For example: /home/web/uploads';
-$lang['FTP_DOWNLOAD_PATH'] = 'Download Link to FTP Path';
-$lang['FTP_DOWNLOAD_PATH_EXPLAIN'] = 'Enter the URL to your FTP Path, where your Attachments are stored.<br />If you are using a Remote FTP Server, please enter the complete url, for example http://www.mystorage.com/phpBB2/upload.<br />If you are using your Local Host to store your Files, you are able to enter the url path relative to your phpBB2 Directory, for example \'upload\'.<br />A trailing slash will be removed. Leave this field empty, if the FTP Path is not accessible from the Internet. With this field empty you are unable to use the physical download method.';
-$lang['FTP_PASSIVE_MODE'] = 'Enable FTP Passive Mode';
-$lang['FTP_PASSIVE_MODE_EXPLAIN'] = 'The PASV command requests that the remote server open a port for the data connection and return the address of that port. The remote server listens on that port and the client connects to it.';
-
-$lang['NO_FTP_EXTENSIONS_INSTALLED'] = 'You are not able to use the FTP Upload Methods, because FTP Extensions are not compiled into your PHP Installation.';
 
 // Attachments -> Shadow Attachments
 $lang['SHADOW_ATTACHMENTS_EXPLAIN'] = 'Here you can delete attachment data from postings when the files are missing from your filesystem, and delete files that are no longer attached to any postings. You can download or view a file if you click on it; if no link is present, the file does not exist.';
@@ -2447,8 +2399,6 @@ $lang['MANAGE_EXTENSION_GROUPS'] = 'Manage Extension Groups';
 $lang['MANAGE_EXTENSION_GROUPS_EXPLAIN'] = 'Here you can add, delete and modify your Extension Groups, you can disable Extension Groups, assign a special Category to them, change the download mechanism and you can define a Upload Icon which will be displayed in front of an Attachment belonging to the Group.';
 $lang['SPECIAL_CATEGORY'] = 'Special Category';
 $lang['CATEGORY_IMAGES'] = 'Images';
-$lang['CATEGORY_STREAM_FILES'] = 'Stream Files';
-$lang['CATEGORY_SWF_FILES'] = 'Flash Files';
 $lang['ALLOWED'] = 'Allowed';
 $lang['ALLOWED_FORUMS'] = 'Allowed Forums';
 $lang['EXT_GROUP_PERMISSIONS'] = 'Group Permissions';
@@ -2461,7 +2411,6 @@ $lang['EXTENSION_GROUP_EXIST'] = 'The Extension Group %s already exist'; // repl
 $lang['MANAGE_CATEGORIES'] = 'Manage Special Categories';
 $lang['MANAGE_CATEGORIES_EXPLAIN'] = 'Here you can configure the Special Categories. You can set up Special Parameters and Conditions for the Special Categorys assigned to an Extension Group.';
 $lang['SETTINGS_CAT_IMAGES'] = 'Settings for Special Category: Images';
-$lang['SETTINGS_CAT_STREAMS'] = 'Settings for Special Category: Stream Files';
 $lang['SETTINGS_CAT_FLASH'] = 'Settings for Special Category: Flash Files';
 $lang['DISPLAY_INLINED'] = 'Display Images Inlined';
 $lang['DISPLAY_INLINED_EXPLAIN'] = 'Choose whether to display images directly within the post (yes) or to display images as a link ?';
@@ -2928,14 +2877,12 @@ $lang['SEARCH_INVALID_POSTCOUNT'] = 'Invalid Post Count entered to Search';
 $lang['SEARCH_INVALID_USERFIELD'] = 'Invalid Userfield data entered';
 $lang['SEARCH_INVALID_LASTVISITED'] = 'Invalid data entered for Last Visited search';
 $lang['SEARCH_INVALID_LANGUAGE'] = 'Invalid Language Selected';
-$lang['SEARCH_INVALID_STYLE'] = 'Invalid Style Selected';
 $lang['SEARCH_INVALID_TIMEZONE'] = 'Invalid Timezone Selected';
 $lang['SEARCH_INVALID_MODERATORS'] = 'Invalid Forum Selected';
 $lang['SEARCH_INVALID'] = 'Invalid Search';
 $lang['SEARCH_INVALID_DAY'] = 'The day you entered was invalid';
 $lang['SEARCH_INVALID_MONTH'] = 'The month you entered was invalid';
 $lang['SEARCH_INVALID_YEAR'] = 'The year you entered was invalid';
-$lang['SEARCH_NO_REGEXP'] = 'Your database does not support Regular Expression searching.';
 $lang['SEARCH_FOR_USERNAME'] = 'Searching usernames matching %s';
 $lang['SEARCH_FOR_EMAIL'] = 'Searching email addresses matching %s';
 $lang['SEARCH_FOR_IP'] = 'Searching IP addresses matching %s';
@@ -2965,8 +2912,8 @@ $lang['SEARCH_FOR_STYLE'] = 'Searching for users who have set %s as their style'
 $lang['SEARCH_FOR_MODERATORS'] = 'Search for moderators of the Forum -> %s';
 $lang['SEARCH_USERS_ADVANCED'] = 'Advanced User Search';
 $lang['SEARCH_USERS_EXPLAIN'] = 'This Module allows you to perform advanced searches for users on a wide range of criteria. Please read the descriptions under each field to understand each search option completely.';
-$lang['SEARCH_USERNAME_EXPLAIN'] = 'Here you can perform a case insensitive search for usernames. If you would like to match part of the username, use * (an asterix) as a wildcard. Checking the Regular Expressions box will allow you to search based on your regex pattern.';
-$lang['SEARCH_EMAIL_EXPLAIN'] = 'Enter an expression to match a user\'s email address. This is case insensitive. If you want to do a partial match, use * (an asterix) as a wildcard. Checking the Regular Expressions box will allow you to search based on your regex pattern.';
+$lang['SEARCH_USERNAME_EXPLAIN'] = 'Here you can perform a case insensitive search for usernames. If you would like to match part of the username, use * (an asterix) as a wildcard.';
+$lang['SEARCH_EMAIL_EXPLAIN'] = 'Enter an expression to match a user\'s email address. This is case insensitive. If you want to do a partial match, use * (an asterix) as a wildcard.';
 $lang['SEARCH_IP_EXPLAIN'] = 'Search for users by a specific IP address (xxx.xxx.xxx.xxx), wildcard (xxx.xxx.xxx.*) or range (xxx.xxx.xxx.xxx-yyy.yyy.yyy.yyy). Note: the last quad .255 is considered the range of all the IPs in that quad. If you enter 10.0.0.255, it is just like entering 10.0.0.* (No IP is assigned .255 for that matter, it is reserved). Where you may encounter this is in ranges, 10.0.0.5-10.0.0.255 is the same as "10.0.0.*" . You should really enter 10.0.0.5-10.0.0.254 .';
 $lang['SEARCH_USERS_JOINED'] = 'Users that joined';
 $lang['SEARCH_USERS_LASTVISITED'] = 'Users whom have visited';
@@ -2986,14 +2933,13 @@ $lang['GREATER_THAN'] = 'Greater than';
 $lang['LESS_THAN'] = 'Less than';
 $lang['SEARCH_USERS_POSTCOUNT_EXPLAIN'] = 'You can search for users based on the Postcount value. You can either search by a specific value, greater than or lesser than a value or between two values. To do the range search, select "Equals" then put the beginning and ending values of the range separated by a dash (-), e.g. 10-15';
 $lang['USERFIELD'] = 'Userfield';
-$lang['SEARCH_USERS_USERFIELD_EXPLAIN'] = 'Search for users based on various profile fields. Wildcards are supported using an asterix (*). Checking the Regular Expressions box will allow you to search based on your regex pattern.';
+$lang['SEARCH_USERS_USERFIELD_EXPLAIN'] = 'Search for users based on various profile fields. Wildcards are supported using an asterix (*).';
 $lang['SEARCH_USERS_LASTVISITED_EXPLAIN'] = 'You can search for users based on their last login date using this search option';
 $lang['SEARCH_USERS_LANGUAGE_EXPLAIN'] = 'This will display users whom have selected a specific language in their Profile';
 $lang['SEARCH_USERS_TIMEZONE_EXPLAIN'] = 'Users who have selected a specific timezone in their profile';
 $lang['SEARCH_USERS_STYLE_EXPLAIN'] = 'Display users who have selected a specific style.';
 $lang['MODERATORS_OF'] = 'Moderators of';
 $lang['SEARCH_USERS_MODERATORS_EXPLAIN'] = 'Search for users with Moderating permissions to a specific forum. Moderating permissions are recoginised either by User Permissions or by being in a Group with the right Group Permssions.';
-$lang['REGULAR_EXPRESSION'] = 'Regular Expression?';
 
 $lang['SEARCH_USERS_NEW'] = '%s yielded %d result(s). Perform <a href="%s">another search</a>.';
 $lang['BANNED'] = 'Banned';

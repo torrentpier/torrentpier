@@ -67,11 +67,11 @@ if (isset($report_module))
 	//
 	if (!$report_module->auth_check('auth_write'))
 	{
-		message_die(GENERAL_MESSAGE, $report_module->lang['AUTH_WRITE_ERROR'] . $report_module->return_link($report_subject_id) . $return_links['index']);
+		bb_die($report_module->lang['AUTH_WRITE_ERROR'] . $report_module->return_link($report_subject_id) . $return_links['index']);
 	}
 	else if (!$report_module->duplicates && report_duplicate_check($report_module->id, $report_subject_id))
 	{
-		message_die(GENERAL_MESSAGE, $report_module->lang['DUPLICATE_ERROR'] . $report_module->return_link($report_subject_id) . $return_links['index']);
+		bb_die($report_module->lang['DUPLICATE_ERROR'] . $report_module->return_link($report_subject_id) . $return_links['index']);
 	}
 
 	if (isset($_POST['submit']))
@@ -115,7 +115,7 @@ if (isset($report_module))
 
 			report_insert($report_module->id, $report_subject_id, $report_reason, $report_title, $report_desc, false);
 
-			message_die(GENERAL_MESSAGE, $lang['REPORT_INSERTED'] . $report_module->return_link($report_subject_id) . $return_links['index']);
+			bb_die($lang['REPORT_INSERTED'] . $report_module->return_link($report_subject_id) . $return_links['index']);
 		}
 	}
 	else if (isset($_POST['cancel']))
@@ -139,8 +139,8 @@ if (isset($report_module))
 		foreach ($errors as $error)
 		{
 			$template->assign_block_vars('switch_report_errors.report_errors', array(
-				'MESSAGE' => $error)
-			);
+				'MESSAGE' => $error,
+			));
 		}
 	}
 
@@ -156,8 +156,8 @@ if (isset($report_module))
 			$template->assign_block_vars('switch_report_reasons.report_reasons', array(
 				'ID' => $reason_id,
 				'DESC' => $reason_desc,
-				'CHECKED' => (isset($report_reason) && $report_reason == $reason_id) ? ' selected="selected"' : '')
-			);
+				'CHECKED' => (isset($report_reason) && $report_reason == $reason_id) ? ' selected="selected"' : '',
+			));
 		}
 	}
 
@@ -179,7 +179,7 @@ if (isset($report_module))
 		}
 		else
 		{
-			message_die(GENERAL_MESSAGE, $report_module->lang['WRITE_REPORT_ERROR'] . $return_links['index']);
+			bb_die($report_module->lang['WRITE_REPORT_ERROR'] . $return_links['index']);
 		}
 	}
 	//
@@ -199,8 +199,8 @@ if (isset($report_module))
 		'L_WRITE_REPORT' => $report_module->lang['WRITE_REPORT'],
 		'L_WRITE_REPORT_EXPLAIN' => $report_module->lang['WRITE_REPORT_EXPLAIN'],
 		'REPORT_TITLE' => (!method_exists($report_module, 'subject_obtain') && isset($report_title)) ? stripslashes($report_title) : '',
-		'REPORT_DESC' => (isset($report_desc)) ? stripslashes($report_desc) : '')
-	);
+		'REPORT_DESC' => (isset($report_desc)) ? stripslashes($report_desc) : '',
+	));
 
 	$template->pparse('body');
 	include(PAGE_FOOTER);
@@ -260,7 +260,7 @@ else
 			if (empty($reports))
 			{
 				meta_refresh('report.php', 3);
-				message_die(GENERAL_MESSAGE, $lang['NO_REPORTS_SELECTED'] . $return_links['list'] . $return_links['index']);
+				bb_die($lang['NO_REPORTS_SELECTED'] . $return_links['list'] . $return_links['index']);
 			}
 
 			//
@@ -290,8 +290,8 @@ else
 
 			$template->assign_vars(array(
 				'S_CONFIRM_ACTION' => "report.php",
-				'S_HIDDEN_FIELDS' => $hidden_fields)
-			);
+				'S_HIDDEN_FIELDS' => $hidden_fields,
+			));
 
 			//
 			// Change reports status
@@ -325,20 +325,20 @@ else
 
 					$return_link = ($single_report) ? '<br /><br />' . sprintf($lang['CLICK_RETURN_REPORT'], '<a href="' . ("report.php?" . POST_REPORT_URL . '=' . $reports[0]) . '">', '</a>') : '';
 					$message = ($single_report) ? 'REPORT_CHANGED' : 'REPORTS_CHANGED';
-					message_die(GENERAL_MESSAGE, $lang[$message] . $return_link . $return_links['list'] . $return_links['index']);
+					bb_die($lang[$message] . $return_link . $return_links['list'] . $return_links['index']);
 				}
 
 				$page_title = ($single_report) ? $lang['CHANGE_REPORT'] : $lang['CHANGE_REPORTS'];
 
 				include(PAGE_HEADER);
 				$template->set_filenames(array(
-					'body' => 'report_change_body.tpl')
-				);
+					'body' => 'report_change_body.tpl',
+				));
 
 				$template->assign_vars(array(
 					'MESSAGE_TITLE' => $page_title,
-					'MESSAGE_TEXT' => ($single_report) ? $lang['CHANGE_REPORT_EXPLAIN'] : $lang['CHANGE_REPORTS_EXPLAIN'])
-				);
+					'MESSAGE_TEXT' => ($single_report) ? $lang['CHANGE_REPORT_EXPLAIN'] : $lang['CHANGE_REPORTS_EXPLAIN'],
+				));
 
 				$template->pparse('body');
 				include(PAGE_FOOTER);
@@ -351,14 +351,12 @@ else
 				if (isset($_POST['confirm']))
 				{
 					reports_delete($reports);
-
-                    meta_refresh('report.php', 3);
-
+					meta_refresh('report.php', 3);
 					$message = ($single_report) ? 'REPORT_DELETED' : 'REPORTS_DELETED';
-					message_die(GENERAL_MESSAGE, $lang[$message] . $return_links['list'] . $return_links['index']);
+					bb_die($lang[$message] . $return_links['list'] . $return_links['index']);
 				}
 
-                print_confirmation(array(
+				print_confirmation(array(
 					'CONFIRM_TITLE' => ($single_report) ? $lang['DELETE_REPORT'] : $lang['DELETE_REPORTS'],
 					'QUESTION'      => ($single_report) ? $lang['DELETE_REPORT_EXPLAIN'] : $lang['DELETE_REPORTS_EXPLAIN'],
 					'FORM_ACTION'   => "report.php",
@@ -373,7 +371,7 @@ else
 
 			if (empty($cat) || empty($report_subject_id) || !isset($report_modules[$cat]))
 			{
-				message_die(GENERAL_MESSAGE, $lang['REPORT_NOT_SUPPORTED'] . $return_links['index']);
+				bb_die($lang['REPORT_NOT_SUPPORTED'] . $return_links['index']);
 			}
 
 			$report_module =& $report_modules[$cat];
@@ -389,7 +387,7 @@ else
 					$report_module->sync();
 				}
 
-				message_die(GENERAL_MESSAGE, $lang['NO_REPORTS_FOUND'] . $report_module->return_link($report_subject_id) . $return_links['index']);
+				bb_die($lang['NO_REPORTS_FOUND'] . $report_module->return_link($report_subject_id) . $return_links['index']);
 			}
 			//
 			// Redirect to the open report
@@ -403,16 +401,16 @@ else
 			$page_title = $lang['OPEN_REPORTS'];
 			include(PAGE_HEADER);
 			$template->set_filenames(array(
-				'body' => 'report_open_body.tpl')
-			);
+				'body' => 'report_open_body.tpl',
+			));
 
 			$template->assign_vars(array(
 				'S_REPORT_ACTION', "report.php",
 
 				'L_STATUS_CLEARED' => $lang['REPORT_STATUS'][REPORT_CLEARED],
 				'L_STATUS_IN_PROCESS' => $lang['REPORT_STATUS'][REPORT_IN_PROCESS],
-				'L_STATUS_OPEN' => $lang['REPORT_STATUS'][REPORT_OPEN])
-			);
+				'L_STATUS_OPEN' => $lang['REPORT_STATUS'][REPORT_OPEN],
+			));
 
 			//
 			// Show list with open reports
@@ -425,8 +423,8 @@ else
 					'ID' => $report['report_id'],
 					'TITLE' => $report['report_title'],
 					'AUTHOR' => profile_url($report),
-					'TIME' => bb_date($report['report_time']))
-				);
+					'TIME' => bb_date($report['report_time']),
+				));
 			}
 
 			$template->pparse('body');
@@ -447,8 +445,8 @@ else
 
 				'L_STATUS_CLEARED' => $lang['REPORT_STATUS'][REPORT_CLEARED],
 				'L_STATUS_IN_PROCESS' => $lang['REPORT_STATUS'][REPORT_IN_PROCESS],
-				'L_STATUS_OPEN' => $lang['REPORT_STATUS'][REPORT_OPEN])
-			);
+				'L_STATUS_OPEN' => $lang['REPORT_STATUS'][REPORT_OPEN],
+			));
 
 			$cat = (isset($_GET[POST_CAT_URL])) ? (int) $_GET[POST_CAT_URL] : null;
 			$cat_url = (!empty($cat)) ? '&amp;' . POST_CAT_URL . "=$cat" : '';
@@ -473,9 +471,8 @@ else
 
 				$template->assign_block_vars('report_modules', array(
 					'U_SHOW' => "report.php?" . POST_CAT_URL . '=' . $report_module->id,
-
-					'TITLE' => $report_module->lang['REPORT_LIST_TITLE'])
-				);
+					'TITLE' => $report_module->lang['REPORT_LIST_TITLE'],
+				));
 
 				//
 				// No reports in this category, display no reports message
@@ -505,14 +502,13 @@ else
 				{
 					$template->assign_block_vars('report_modules.reports', array(
 						'U_SHOW' => "report.php?" . POST_REPORT_URL . '=' . $report['report_id'] . $cat_url,
-
 						'ROW_CLASS' => $report_status_classes[$report['report_status']],
 						'ID' => $report['report_id'],
 						'TITLE' => (strlen($report['report_title'] > 53)) ? substr($report['report_title'], 0, 50) . '...' : $report['report_title'],
 						'AUTHOR' => profile_url($report),
 						'TIME' => bb_date($report['report_time']),
-						'STATUS' => $lang['REPORT_STATUS'][$report['report_status']])
-					);
+						'STATUS' => $lang['REPORT_STATUS'][$report['report_status']],
+					));
 
 					if (isset($_GET[POST_REPORT_URL]) && $_GET[POST_REPORT_URL] == $report['report_id'])
 					{
@@ -537,7 +533,7 @@ else
 
 				if (!$report = report_obtain((int) $_GET[POST_REPORT_URL]))
 				{
-					message_die(GENERAL_MESSAGE, $lang['REPORT_NOT_EXISTS'] . $return_links['list'] . $return_links['index']);
+					bb_die($lang['REPORT_NOT_EXISTS'] . $return_links['list'] . $return_links['index']);
 				}
 
 				if ($report['report_status'] == REPORT_NEW)
@@ -572,8 +568,8 @@ else
 								$template->assign_block_vars('report_subject.switch_subject.switch_url', array());
 								$template->assign_vars(array(
 									'S_REPORT_SUBJECT_TARGET' => ($bb_cfg['report_new_window']) ? ' target="_blank"' : '',
-									'U_REPORT_SUBJECT' => $report_module->subject_url($report['report_subject']))
-								);
+									'U_REPORT_SUBJECT' => $report_module->subject_url($report['report_subject']),
+								));
 							}
 						}
 
@@ -586,8 +582,8 @@ else
 							{
 								$template->assign_block_vars('report_subject.details', array(
 									'TITLE' => $report_module->lang[strtoupper($detail_title)],
-									'VALUE' => $detail_value)
-								);
+									'VALUE' => $detail_value,
+								));
 							}
 						}
 					}
@@ -613,8 +609,8 @@ else
 							$template->assign_block_vars('report_subject.switch_subject.switch_url', array());
 							$template->assign_vars(array(
 								'S_REPORT_SUBJECT_TARGET' => ($bb_cfg['report_new_window']) ? ' target="_blank"' : '',
-								'U_REPORT_SUBJECT' => $report_module->subject_url($report['report_subject']))
-							);
+								'U_REPORT_SUBJECT' => $report_module->subject_url($report['report_subject']),
+							));
 						}
 					}
 					else
@@ -669,9 +665,8 @@ else
 							'STATUS' => $report_change_status,
 							'USER' => $report_change_user,
 							'TIME' => $report_change_time,
-
-							'TEXT' => $report_change_text)
-						);
+							'TEXT' => $report_change_text,
+						));
 					}
 
 					//
@@ -679,8 +674,8 @@ else
 					//
 					$template->assign_vars(array(
 						'REPORT_LAST_CHANGE_TIME' => $report_change_time,
-						'REPORT_LAST_CHANGE_USER' => profile_url($report_change))
-					);
+						'REPORT_LAST_CHANGE_USER' => profile_url($report_change),
+					));
 				}
 
 				//
@@ -693,17 +688,15 @@ else
 
 				$template->assign_vars(array(
 					'S_HIDDEN_FIELDS' => '<input type="hidden" name="' . POST_REPORT_URL . '" value="' . $report['report_id'] . '" />',
-
 					'U_REPORT_AUTHOR_PRIVMSG' => PM_URL . "?mode=post&amp;" . POST_USERS_URL . '=' . $report['user_id'],
-
 					'REPORT_TYPE' => $report_module->lang['REPORT_TYPE'],
 					'REPORT_TITLE' => $report['report_title'],
 					'REPORT_AUTHOR' => profile_url($report),
 					'REPORT_TIME' => bb_date($report['report_time']),
 					'REPORT_DESC' => bbcode2html($report['report_desc']),
 					'REPORT_STATUS' => $lang['REPORT_STATUS'][$report['report_status']],
-					'REPORT_STATUS_CLASS' => $report_status_classes[$report['report_status']])
-				);
+					'REPORT_STATUS_CLASS' => $report_status_classes[$report['report_status']],
+				));
 			}
 			//
 			// Show report index page
@@ -722,14 +715,10 @@ else
 				{
 					$template->assign_block_vars('report_statistics', array(
 						'STATISTIC' => $lang[strtoupper($stat_lang)],
-						'VALUE' => report_statistics($stat_mode))
-					);
+						'VALUE' => report_statistics($stat_mode),
+					));
 				}
 
-				/*
-				if ($userdata['user_level'] == ADMIN)
-				{
-				*/
 				$deleted_reports = reports_deleted_obtain();
 				if (!empty($deleted_reports))
 				{
@@ -740,19 +729,15 @@ else
 
 						$template->assign_block_vars('switch_deleted_reports.deleted_reports', array(
 							'U_SHOW' => "report.php?" . POST_REPORT_URL . '=' . $report['report_id'] . $cat_url,
-
 							'ID' => $report['report_id'],
 							'TITLE' => $report['report_title'],
 							'TYPE' => $report_module->lang['REPORT_TYPE'],
 							'AUTHOR' => profile_url($report),
 							'TIME' => bb_date($report['report_time']),
-							'STATUS' => $lang['REPORT_STATUS'][REPORT_DELETE])
-						);
+							'STATUS' => $lang['REPORT_STATUS'][REPORT_DELETE],
+						));
 					}
 				}
-				/*
-				}
-				*/
 			}
 
 			$template->assign_var_from_handle('REPORT_VIEW', 'report_view');
@@ -762,7 +747,7 @@ else
 		break;
 
 		default:
-			message_die(GENERAL_MESSAGE, $lang['REPORT_NOT_SUPPORTED'] . $return_links['index']);
+			bb_die($lang['REPORT_NOT_SUPPORTED'] . $return_links['index']);
 		break;
 	}
 }

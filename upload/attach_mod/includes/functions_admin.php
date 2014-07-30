@@ -31,7 +31,7 @@ function process_quota_settings($mode, $id, $quota_type, $quota_limit_id = 0)
 
 			if( !($result = DB()->sql_query($sql)) )
 			{
-				message_die(GENERAL_ERROR, 'Could not get Entry', '', __LINE__, __FILE__, $sql);
+				bb_die('Could not get entry #1');
 			}
 
 			if (DB()->num_rows($result) == 0)
@@ -57,7 +57,7 @@ function process_quota_settings($mode, $id, $quota_type, $quota_limit_id = 0)
 
 		if (!($result = DB()->sql_query($sql)))
 		{
-			message_die(GENERAL_ERROR, 'Unable to update quota Settings', '', __LINE__, __FILE__, $sql);
+			bb_die('Unable to update quota settings');
 		}
 
 	}
@@ -69,9 +69,9 @@ function process_quota_settings($mode, $id, $quota_type, $quota_limit_id = 0)
 				WHERE group_id = $id
 					AND quota_type = $quota_type";
 
-			if( !($result = DB()->sql_query($sql)) )
+			if (!($result = DB()->sql_query($sql)))
 			{
-				message_die(GENERAL_ERROR, 'Unable to delete quota Settings', '', __LINE__, __FILE__, $sql);
+				bb_die('Unable to delete quota settings');
 			}
 		}
 		else
@@ -82,9 +82,9 @@ function process_quota_settings($mode, $id, $quota_type, $quota_limit_id = 0)
 				WHERE group_id = $id
 					AND quota_type = $quota_type";
 
-			if( !($result = DB()->sql_query($sql)) )
+			if (!($result = DB()->sql_query($sql)))
 			{
-				message_die(GENERAL_ERROR, 'Could not get Entry', '', __LINE__, __FILE__, $sql);
+				bb_die('Could not get entry #2');
 			}
 
 			if (DB()->num_rows($result) == 0)
@@ -100,7 +100,7 @@ function process_quota_settings($mode, $id, $quota_type, $quota_limit_id = 0)
 
 			if (!DB()->sql_query($sql))
 			{
-				message_die(GENERAL_ERROR, 'Unable to update quota Settings', '', __LINE__, __FILE__, $sql);
+				bb_die('Unable to update quota settings');
 			}
 		}
 	}
@@ -168,60 +168,21 @@ function get_formatted_dirsize()
 
 	$upload_dir_size = 0;
 
-	if (!intval($attach_config['allow_ftp_upload']))
+	if ($dirname = @opendir($upload_dir))
 	{
-		if ($dirname = @opendir($upload_dir))
+		while ($file = @readdir($dirname))
 		{
-			while ($file = @readdir($dirname))
+			if ($file != 'index.php' && $file != '.htaccess' && !is_dir($upload_dir . '/' . $file) && !is_link($upload_dir . '/' . $file))
 			{
-				if ($file != 'index.php' && $file != '.htaccess' && !is_dir($upload_dir . '/' . $file) && !is_link($upload_dir . '/' . $file))
-				{
-					$upload_dir_size += @filesize($upload_dir . '/' . $file);
-				}
+				$upload_dir_size += @filesize($upload_dir . '/' . $file);
 			}
-			@closedir($dirname);
 		}
-		else
-		{
-			$upload_dir_size = $lang['NOT_AVAILABLE'];
-			return $upload_dir_size;
-		}
+		@closedir($dirname);
 	}
 	else
 	{
-		$conn_id = attach_init_ftp();
-
-		$file_listing = array();
-
-		$file_listing = @ftp_rawlist($conn_id, '');
-
-		if (!$file_listing)
-		{
-			$upload_dir_size = $lang['NOT_AVAILABLE'];
-			return $upload_dir_size;
-		}
-
-		for ($i = 0; $i < count($file_listing); $i++)
-		{
-			if (preg_match("/([-d])[rwxst-]{9}.* ([0-9]*) ([a-zA-Z]+[0-9: ]*[0-9]) ([0-9]{2}:[0-9]{2}) (.+)/", $file_listing[$i], $regs))
-			{
-				if ($regs[1] == 'd')
-				{
-					$dirinfo[0] = 1;	// Directory == 1
-				}
-				$dirinfo[1] = $regs[2]; // Size
-				$dirinfo[2] = $regs[3]; // Date
-				$dirinfo[3] = $regs[4]; // Filename
-				$dirinfo[4] = $regs[5]; // Time
-			}
-
-			if ($dirinfo[0] != 1 && $dirinfo[4] != 'index.php' && $dirinfo[4] != '.htaccess')
-			{
-				$upload_dir_size += $dirinfo[1];
-			}
-		}
-
-		@ftp_quit($conn_id);
+		$upload_dir_size = $lang['NOT_AVAILABLE'];
+		return $upload_dir_size;
 	}
 
 	return humn_size($upload_dir_size);
@@ -255,13 +216,11 @@ function search_attachments($order_by, &$total_rows)
 		$search_author = str_replace('*', '%', attach_mod_sql_escape($search_author));
 
 		// We need the post_id's, because we want to query the Attachment Table
-		$sql = 'SELECT user_id
-			FROM ' . BB_USERS . "
-			WHERE username LIKE '$search_author'";
+		$sql = 'SELECT user_id FROM ' . BB_USERS . " WHERE username LIKE '$search_author'";
 
 		if (!($result = DB()->sql_query($sql)))
 		{
-			message_die(GENERAL_ERROR, 'Couldn\'t obtain list of matching users (searching for: ' . $search_author . ')', '', __LINE__, __FILE__, $sql);
+			bb_die('Could not obtain list of matching users (searching for: ' . $search_author . ')');
 		}
 
 		$matching_userids = '';
@@ -277,7 +236,7 @@ function search_attachments($order_by, &$total_rows)
 		}
 		else
 		{
-			message_die(GENERAL_MESSAGE, $lang['NO_ATTACH_SEARCH_MATCH']);
+			bb_die($lang['NO_ATTACH_SEARCH_MATCH']);
 		}
 
 		$where_sql[] = ' (t.user_id_1 IN (' . $matching_userids . ')) ';
@@ -352,7 +311,7 @@ function search_attachments($order_by, &$total_rows)
 
 	if (!($result = DB()->sql_query($sql)))
 	{
-		message_die(GENERAL_ERROR, 'Couldn\'t query attachments', '', __LINE__, __FILE__, $sql);
+		bb_die('Could not query attachments #1');
 	}
 
 	$attachments = DB()->sql_fetchrowset($result);
@@ -361,12 +320,12 @@ function search_attachments($order_by, &$total_rows)
 
 	if ($num_attach == 0)
 	{
-		message_die(GENERAL_MESSAGE, $lang['NO_ATTACH_SEARCH_MATCH']);
+		bb_die($lang['NO_ATTACH_SEARCH_MATCH']);
 	}
 
 	if (!($result = DB()->sql_query($total_rows_sql)))
 	{
-		message_die(GENERAL_ERROR, 'Could not query attachments', '', __LINE__, __FILE__, $sql);
+		bb_die('Could not query attachments #2');
 	}
 
 	$total_rows = DB()->num_rows($result);

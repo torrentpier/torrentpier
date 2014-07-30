@@ -74,43 +74,22 @@ BBCode.prototype = {
 		return false;
 	},
 
-	// For stupid Opera - save selection before mouseover the button
-	refreshSelection: function(get) {
-		if (get) this.stext = this.getSelection()[0];
-		else this.stext = '';
-	},
-
-	// Return current selection and range (if exists).
-	// In Opera, this function must be called periodically (on mouse over,
-	// for example), because on click stupid Opera breaks up the selection.
+	// Return current selection and range (if exists)
 	getSelection: function() {
 		var w = window;
 		var text='', range;
-		if (w.getSelection) {
-		  // Opera & Mozilla?
-		  text = w.getSelection();
-		} else if (w.document.getSelection) {
-		  // the Navigator 4.0x code
-		  text = w.document.getSelection();
-		} else if (w.document.selection && w.document.selection.createRange) {
-		  // the Internet Explorer 4.0x code
-		  range = w.document.selection.createRange();
-		  text = range.text;
-		} else {
-		  return [null, null];
-		}
 		if (text == '') text = this.stext;
 		text = ""+text;
 		text = text.replace("/^\s+|\s+$/g", "");
 		return [text, range];
 	},
 
-	// Insert string at cursor position of textarea.
+	// Insert string at cursor position of textarea
 	insertAtCursor: function(text) {
-		// Focus is placed to textarea.
+		// Focus is placed to textarea
 		var t = this.textarea;
 		t.focus();
-		// Insert the string.
+		// Insert the string
 		if (document.selection && document.selection.createRange) {
 		  var r = document.selection.createRange();
 		  if (!this.replaceOnInsert) r.collapse();
@@ -125,11 +104,11 @@ BBCode.prototype = {
 		} else{
 		  t.value += text;
 		}
-		// For IE.
+		// For IE
 		setTimeout(function() { t.focus() }, 100);
 	},
 
-	// Surround piece of textarea text with tags.
+	// Surround piece of textarea text with tags
 	surround: function(open, close, fTrans) {
 		var t = this.textarea;
 		t.focus();
@@ -142,42 +121,42 @@ BBCode.prototype = {
 
 		var notEmpty = text != null && text != '';
 
-		// Surround.
+		// Surround
 		if (range) {
-		  var notEmpty = text != null && text != '';
-		  var newText = open + fTrans(text) + (close? close : '');
-		  range.text = newText;
-		  range.collapse();
-		  if (text != '') {
-			// Correction for stupid IE: \r for moveStart is 0 character.
-			var delta = 0;
-			for (var i=0; i<newText.length; i++) if (newText.charAt(i)=='\r') delta++;
-			range.moveStart("character", -close.length-text.length-open.length+delta);
-			range.moveEnd("character", -0);
-		  } else {
-			range.moveEnd("character", -close.length);
-		  }
-		  if (!this.collapseAfterInsert) range.select();
+			var notEmpty = text != null && text != '';
+			var newText = open + fTrans(text) + (close? close : '');
+			range.text = newText;
+			range.collapse();
+			if (text != '') {
+				// Correction for stupid IE: \r for moveStart is 0 character
+				var delta = 0;
+				for (var i=0; i<newText.length; i++) if (newText.charAt(i)=='\r') delta++;
+				range.moveStart("character", -close.length-text.length-open.length+delta);
+				range.moveEnd("character", -0);
+			} else {
+				range.moveEnd("character", -close.length);
+			}
+			if (!this.collapseAfterInsert) range.select();
 		} else if (t.setSelectionRange) {
-		  var start = t.selectionStart;
-		  var end   = t.selectionEnd;
-		  var top   = t.scrollTop;
-		  var sel1  = t.value.substr(0, start);
-		  var sel2  = t.value.substr(end);
-		  var sel   = fTrans(t.value.substr(start, end-start));
-		  var inner = open + sel + close;
-		  t.value   = sel1 + inner + sel2;
-		  if (sel != '') {
-			t.setSelectionRange(start, start+inner.length);
-			notEmpty = true;
-		  } else {
-			t.setSelectionRange(start+open.length, start+open.length);
-			notEmpty = false;
-		  }
-		  t.scrollTop = top;
-		  if (this.collapseAfterInsert) t.setSelectionRange(start+inner.length, start+inner.length);
+			var start = t.selectionStart;
+			var end   = t.selectionEnd;
+			var top   = t.scrollTop;
+			var sel1  = t.value.substr(0, start);
+			var sel2  = t.value.substr(end);
+			 var sel   = fTrans(t.value.substr(start, end-start));
+			var inner = open + sel + close;
+			t.value   = sel1 + inner + sel2;
+			if (sel != '') {
+				t.setSelectionRange(start, start+inner.length);
+				notEmpty = true;
+			} else {
+				t.setSelectionRange(start+open.length, start+open.length);
+				notEmpty = false;
+			}
+			t.scrollTop = top;
+			if (this.collapseAfterInsert) t.setSelectionRange(start+inner.length, start+inner.length);
 		} else {
-		  t.value += open + text + close;
+			t.value += open + text + close;
 		}
 		this.collapseAfterInsert = false;
 		return notEmpty;
@@ -191,53 +170,50 @@ BBCode.prototype = {
 	},
 
 	// Available key combinations and these interpretaions for BB are
-	//     TAB              - Insert TAB char
-	//     CTRL-TAB         - Next form field (usual TAB)
-	//     SHIFT-ALT-PAGEUP - Add an Attachment
-	//     ALT-ENTER        - Preview
-	//     CTRL-ENTER       - Submit
-	// The values of virtual codes of keys passed through event.keyCode are
-	// Rumata, http://forum.dklab.ru/about/todo/BistrieKlavishiDlyaOtpravkiForm.html
+	// TAB              - Insert TAB char
+	// CTRL-TAB         - Next form field (usual TAB)
+	// SHIFT-ALT-PAGEUP - Add an Attachment
+	// ALT-ENTER        - Preview
+	// CTRL-ENTER       - Submit
 	onKeyPress: function(e, type) {
 		// Try to match all the hot keys.
 		var key = String.fromCharCode(e.keyCode? e.keyCode : e.charCode);
 		for (var id in this.tags) {
-		  var tag = this.tags[id];
-		  // Pressed control key?..
-		  if (tag.ctrlKey && !e[tag.ctrlKey+"Key"]) continue;
-		  // Pressed needed key?
-		  if (!tag.key || key.toUpperCase() != tag.key.toUpperCase()) continue;
-		  // OK. Insert.
-		  if (e.type == "keydown") this.insertTag(id);
-		  // Reset event.
-		  return this._cancelEvent(e);
+			var tag = this.tags[id];
+			// Pressed control key?
+			if (tag.ctrlKey && !e[tag.ctrlKey+"Key"]) continue;
+			// Pressed needed key?
+			if (!tag.key || key.toUpperCase() != tag.key.toUpperCase()) continue;
+			// Insert
+			if (e.type == "keydown") this.insertTag(id);
+			// Reset event
+			  return this._cancelEvent(e);
 		}
 
 		// Tab
 		if (type == 'press' && e.keyCode == this.VK_TAB && !e.shiftKey && !e.ctrlKey && !e.altKey) {
-		//this.surround("\t", "");
-		  this.insertAtCursor('[tab]');
-		  return this._cancelEvent(e);
+			this.insertAtCursor('[tab]');
+			return this._cancelEvent(e);
 		}
 
 		// Ctrl+Tab
 		if (e.keyCode == this.VK_TAB && !e.shiftKey && e.ctrlKey && !e.altKey) {
-		  this.textarea.form.post.focus();
-		  return this._cancelEvent(e);
+			this.textarea.form.post.focus();
+			return this._cancelEvent(e);
 		}
 
 		// Hot keys
 		var form = this.textarea.form;
 		var submitter = null;
 		if (e.keyCode == this.VK_PAGE_UP &&  e.shiftKey && !e.ctrlKey &&  e.altKey)
-		  submitter = form.add_attachment_box;
+			submitter = form.add_attachment_box;
 		if (e.keyCode == this.VK_ENTER   &&!e.shiftKey && !e.ctrlKey &&  e.altKey)
-		  submitter = form.preview;
+			submitter = form.preview;
 		if (e.keyCode == this.VK_ENTER   && !e.shiftKey &&  e.ctrlKey && !e.altKey)
-		  submitter = form.post;
+			submitter = form.post;
 		if (submitter) {
-		  submitter.click();
-		  return this._cancelEvent(e);
+			submitter.click();
+			return this._cancelEvent(e);
 		}
 
 		return true;
@@ -255,18 +231,20 @@ BBCode.prototype = {
 		tag.multiline = multiline;
 		tag.elt       = this.textarea.form[id];
 		this.tags[id] = tag;
-		// Setup events.
+		// Setup events
 		var elt = tag.elt;
 		if (elt) {
-		  var th = this;
-		  if (elt.type && elt.type.toUpperCase()=="BUTTON") {
-			addEvent(elt, 'click', function() { th.insertTag(id); return false; });
-		  }
-		  if (elt.tagName && elt.tagName.toUpperCase()=="SELECT") {
-			addEvent(elt, 'change', function() { th.insertTag(id); return false; });
-		  }
-		} else {
-		  if (id && id.indexOf('_') != 0) return alert("addTag('"+id+"'): no such element in the form");
+			var th = this;
+			if (elt.type && elt.type.toUpperCase()=="BUTTON") {
+				addEvent(elt, 'click', function() { th.insertTag(id); return false; });
+			}
+			if (elt.tagName && elt.tagName.toUpperCase()=="SELECT") {
+				addEvent(elt, 'change', function() { th.insertTag(id); return false; });
+			}
+		}
+		else
+		{
+			if (id && id.indexOf('_') != 0) return alert("addTag('"+id+"'): no such element in the form");
 		}
 	},
 

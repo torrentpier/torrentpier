@@ -50,12 +50,9 @@ function get_sql_log_html ($db_obj, $log_name)
 		$time = sprintf('%.4f', $dbg['time']);
 		$perc = @sprintf('[%2d]', $dbg['time']*100/$db_obj->sql_timetotal);
 		$info = !empty($dbg['info']) ? $dbg['info'] .' ['. $dbg['src'] .']' : $dbg['src'];
-		$file = addslashes($dbg['file']);
-		$line = $dbg['line'];
-		$edit = (DEBUG === true) ? "OpenInEditor('$file', $line);" : '';
 
 		$log .= ''
-		. '<div class="sqlLogRow" title="'. $info .'" ondblclick="'. $edit .'">'
+		. '<div class="sqlLogRow" title="'. $info .'">'
 		.  '<span style="letter-spacing: -1px;">'. $time .' </span>'
 		.  '<span title="Copy to clipboard" onclick="$.copyToClipboard( $(\'#'. $id .'\').text() );" style="color: gray; letter-spacing: -1px;">'. $perc .'</span>'
 		.  ' '

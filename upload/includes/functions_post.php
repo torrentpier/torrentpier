@@ -89,7 +89,7 @@ function submit_post($mode, &$post_data, &$message, &$meta, &$forum_id, &$topic_
 			{
 				if (TIMENOW - $row['last_post_time'] < $bb_cfg['flood_interval'])
 				{
-					message_die(GENERAL_MESSAGE, $lang['FLOOD_ERROR']);
+					bb_die($lang['FLOOD_ERROR']);
 				}
 			}
 		}
@@ -114,7 +114,7 @@ function submit_post($mode, &$post_data, &$message, &$meta, &$forum_id, &$topic_
 
 			if ($last_msg == $post_message)
 			{
-				message_die(GENERAL_MESSAGE, $lang['DOUBLE_POST_ERROR']);
+				bb_die($lang['DOUBLE_POST_ERROR']);
 			}
 		}
 	}
@@ -145,7 +145,7 @@ function submit_post($mode, &$post_data, &$message, &$meta, &$forum_id, &$topic_
 
 		if (!DB()->sql_query($sql))
 		{
-			message_die(GENERAL_ERROR, 'Error in posting', '', __LINE__, __FILE__, $sql);
+			bb_die('Error in posting #1');
 		}
 
 		if ($mode == 'newtopic')
@@ -166,7 +166,7 @@ function submit_post($mode, &$post_data, &$message, &$meta, &$forum_id, &$topic_
 	$sql = ($mode != "editpost") ? "INSERT INTO " . BB_POSTS . " (topic_id, forum_id, poster_id, post_username, post_time, poster_ip) VALUES ($topic_id, $forum_id, " . $userdata['user_id'] . ", '$post_username', $current_time, '". USER_IP ."')" : "UPDATE " . BB_POSTS . " SET post_username = '$post_username'" . $edited_sql . " WHERE post_id = $post_id";
 	if (!DB()->sql_query($sql))
 	{
-		message_die(GENERAL_ERROR, 'Error in posting', '', __LINE__, __FILE__, $sql);
+		bb_die('Error in posting #2');
 	}
 
 	if ($mode != 'editpost')
@@ -177,7 +177,7 @@ function submit_post($mode, &$post_data, &$message, &$meta, &$forum_id, &$topic_
 	$sql = ($mode != 'editpost') ? "INSERT INTO " . BB_POSTS_TEXT . " (post_id, post_text) VALUES ($post_id, '$post_message')" : "UPDATE " . BB_POSTS_TEXT . " SET post_text = '$post_message' WHERE post_id = $post_id";
 	if (!DB()->sql_query($sql))
 	{
-		message_die(GENERAL_ERROR, 'Error in posting', '', __LINE__, __FILE__, $sql);
+		bb_die('Error in posting #3');
 	}
 
 	if ($userdata['user_id'] != BOT_UID)
@@ -245,7 +245,7 @@ function update_post_stats($mode, $post_data, $forum_id, $topic_id, $post_id, $u
 					WHERE topic_id = $topic_id";
 				if (!($result = DB()->sql_query($sql)))
 				{
-					message_die(GENERAL_ERROR, 'Error in deleting post', '', __LINE__, __FILE__, $sql);
+					bb_die('Error in deleting post #1');
 				}
 
 				if ($row = DB()->sql_fetchrow($result))
@@ -261,7 +261,7 @@ function update_post_stats($mode, $post_data, $forum_id, $topic_id, $post_id, $u
 					WHERE forum_id = $forum_id";
 				if (!($result = DB()->sql_query($sql)))
 				{
-					message_die(GENERAL_ERROR, 'Error in deleting post', '', __LINE__, __FILE__, $sql);
+					bb_die('Error in deleting post #2');
 				}
 
 				if ($row = DB()->sql_fetchrow($result))
@@ -275,7 +275,7 @@ function update_post_stats($mode, $post_data, $forum_id, $topic_id, $post_id, $u
 			$sql = "SELECT MIN(post_id) AS first_post_id FROM " . BB_POSTS . " WHERE topic_id = $topic_id";
 			if (!($result = DB()->sql_query($sql)))
 			{
-				message_die(GENERAL_ERROR, 'Error in deleting post', '', __LINE__, __FILE__, $sql);
+				bb_die('Error in deleting post #3');
 			}
 
 			if ($row = DB()->sql_fetchrow($result))
@@ -297,7 +297,7 @@ function update_post_stats($mode, $post_data, $forum_id, $topic_id, $post_id, $u
 	$sql = "UPDATE " . BB_FORUMS . " SET $forum_update_sql WHERE forum_id = $forum_id";
 	if (!DB()->sql_query($sql))
 	{
-		message_die(GENERAL_ERROR, 'Error in posting', '', __LINE__, __FILE__, $sql);
+		bb_die('Error in posting #4');
 	}
 
 	if ($topic_update_sql != '')
@@ -305,14 +305,14 @@ function update_post_stats($mode, $post_data, $forum_id, $topic_id, $post_id, $u
 		$sql = "UPDATE " . BB_TOPICS . " SET $topic_update_sql WHERE topic_id = $topic_id";
 		if (!DB()->sql_query($sql))
 		{
-			message_die(GENERAL_ERROR, 'Error in posting', '', __LINE__, __FILE__, $sql);
+			bb_die('Error in posting #5');
 		}
 	}
 
 	$sql = "UPDATE " . BB_USERS . " SET user_posts = user_posts $sign WHERE user_id = $user_id";
 	if (!DB()->sql_query($sql))
 	{
-		message_die(GENERAL_ERROR, 'Error in posting', '', __LINE__, __FILE__, $sql);
+		bb_die('Error in posting #6');
 	}
 }
 

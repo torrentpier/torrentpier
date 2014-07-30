@@ -45,8 +45,7 @@ if (isset($_REQUEST['cancel_button']))
 		");
 	}
 
-	$message = sprintf($lang['REBUILD_SEARCH_ABORTED'], $last_session_data['end_post_id']) .'<br /><br />'. sprintf($lang['CLICK_RETURN_REBUILD_SEARCH'], '<a href="admin_rebuild_search.php">', '</a>');
-	message_die(GENERAL_MESSAGE, $message);
+	bb_die(sprintf($lang['REBUILD_SEARCH_ABORTED'], $last_session_data['end_post_id']) .'<br /><br />'. sprintf($lang['CLICK_RETURN_REBUILD_SEARCH'], '<a href="admin_rebuild_search.php">', '</a>'));
 }
 
 // from which post to start processing
@@ -137,16 +136,11 @@ $refresh_rate = isset($_REQUEST['refresh_rate']) ? (int) $_REQUEST['refresh_rate
 // check if the user gave wrong input
 if ($mode == 'submit')
 {
-	if ($session_posts_processing <= 0 || $post_limit <= 0 || $refresh_rate <= 0 || $time_limit <=0)
+	if (($session_posts_processing || $post_limit || $refresh_rate || $time_limit) <= 0)
 	{
-		$message = $lang['WRONG_INPUT'] .'<br /><br />'. sprintf($lang['CLICK_RETURN_REBUILD_SEARCH'], '<a href="admin_rebuild_search.php">', '</a>');
-		message_die(GENERAL_MESSAGE, $message);
+		bb_die($lang['WRONG_INPUT'] .'<br /><br />'. sprintf($lang['CLICK_RETURN_REBUILD_SEARCH'], '<a href="admin_rebuild_search.php">', '</a>'));
 	}
 }
-
-//---------------------------------------------------------------------
-// Main code starts from here
-//
 
 // Increase maximum execution time in case of a lot of posts, but don't complain about it if it isn't allowed.
 @set_time_limit($time_limit + 20);

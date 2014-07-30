@@ -18,7 +18,7 @@ if (IS_GUEST)
 
 if (!IS_ADMIN)
 {
-	message_die(GENERAL_MESSAGE, $lang['NOT_ADMIN']);
+	bb_die($lang['NOT_ADMIN']);
 }
 
 if (!$userdata['session_admin'])

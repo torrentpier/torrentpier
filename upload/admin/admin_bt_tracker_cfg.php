@@ -20,7 +20,7 @@ $confirmed    = isset($_POST['confirm']);
 // All config names with default values
 $default_cfg_str = array(
 	'off_reason'             => 'Tracker is disabled',
-	'browser_redirect_url'   => 'http://yourdomain.com/',
+	'browser_redirect_url'   => 'http://demo.torrentpier.me/',
 );
 
 $default_cfg_bool = array(
@@ -60,7 +60,7 @@ $template->assign_vars(array(
 	'DISABLE_SUBMIT'     => true,
 
 	'S_HIDDEN_FIELDS' => '',
-	'S_CONFIG_ACTION' => "admin_bt_tracker_cfg.php",
+	'S_CONFIG_ACTION' => 'admin_bt_tracker_cfg.php',
 ));
 
 print_page('admin_bt_tracker_cfg.tpl', 'admin');

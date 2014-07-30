@@ -77,7 +77,7 @@ if ($submit && $mode == 'user')
 	{
 		if ($userdata['user_id'] == $user_id || $user_id == GUEST_UID || $user_id == BOT_UID)
 		{
-			bb_die("Couldn't update admin status");
+			bb_die("Could not update admin status");
 		}
 
 		DB()->query("UPDATE ". BB_USERS ." SET user_level = ". ADMIN ." WHERE user_id = $user_id LIMIT 1");
@@ -97,7 +97,7 @@ if ($submit && $mode == 'user')
 		// ignore if you're trying to change yourself from an admin to user!
 		if ($userdata['user_id'] == $user_id)
 		{
-			bb_die("Couldn't update admin status<br /><br />Couldn't change yourself from an admin to user");
+			bb_die("Could not update admin status<br /><br />Could not change yourself from an admin to user");
 		}
 		// Update users level, reset to USER
 		DB()->query("UPDATE ". BB_USERS ." SET user_level = ". USER ." WHERE user_id = $user_id LIMIT 1");

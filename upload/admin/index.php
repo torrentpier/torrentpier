@@ -173,9 +173,9 @@ elseif (isset($_GET['pane']) && $_GET['pane'] == 'right')
 				AND u.user_id <> " . GUEST_UID . "
 				AND s.session_time >= " . ( TIMENOW - 300 ) . "
 			ORDER BY s.session_ip ASC, s.session_time DESC";
-		if(!$result = DB()->sql_query($sql))
+		if (!$result = DB()->sql_query($sql))
 		{
-			message_die(GENERAL_ERROR, "Couldn't obtain regd user/online information.", '', __LINE__, __FILE__, $sql);
+			bb_die('Could not obtain reged user / online information');
 		}
 		$onlinerow_reg = DB()->sql_fetchrowset($result);
 
@@ -184,19 +184,19 @@ elseif (isset($_GET['pane']) && $_GET['pane'] == 'right')
 			WHERE session_logged_in = 0
 				AND session_time >= " . ( TIMENOW - 300 ) . "
 			ORDER BY session_ip ASC, session_time DESC";
-		if(!$result = DB()->sql_query($sql))
+		if (!$result = DB()->sql_query($sql))
 		{
-			message_die(GENERAL_ERROR, "Couldn't obtain guest user/online information.", '', __LINE__, __FILE__, $sql);
+			bb_die('Could not obtain guest user / online information');
 		}
 		$onlinerow_guest = DB()->sql_fetchrowset($result);
 
 		$reg_userid_ary = array();
 
-		if( count($onlinerow_reg) )
+		if (count($onlinerow_reg))
 		{
 			$registered_users = $hidden_users = 0;
 
-			for($i=0, $cnt=count($onlinerow_reg); $i < $cnt; $i++)
+			for ($i=0, $cnt=count($onlinerow_reg); $i < $cnt; $i++)
 			{
 				if (!in_array($onlinerow_reg[$i]['user_id'], $reg_userid_ary))
 				{
@@ -222,8 +222,8 @@ elseif (isset($_GET['pane']) && $_GET['pane'] == 'right')
 					$template->assign_block_vars('reg_user_row', array(
 						'ROW_CLASS'  => $row_class,
 						'USER'       => profile_url($onlinerow_reg[$i]),
-						'STARTED'    => bb_date($onlinerow_reg[$i]['session_start'], 'H:i', 'false'),
-						'LASTUPDATE' => bb_date($onlinerow_reg[$i]['user_session_time'], 'H:i', 'false'),
+						'STARTED'    => bb_date($onlinerow_reg[$i]['session_start'], 'H:i', false),
+						'LASTUPDATE' => bb_date($onlinerow_reg[$i]['user_session_time'], 'H:i', false),
 						'IP_ADDRESS' => $reg_ip,
 						'U_WHOIS_IP' => $bb_cfg['whois_info'] . $reg_ip,
 					));
@@ -247,8 +247,8 @@ elseif (isset($_GET['pane']) && $_GET['pane'] == 'right')
 
 				$template->assign_block_vars('guest_user_row', array(
 					'ROW_CLASS'  => $row_class,
-					'STARTED'    => bb_date($onlinerow_guest[$i]['session_start'], 'H:i', 'false'),
-					'LASTUPDATE' => bb_date($onlinerow_guest[$i]['session_time'], 'H:i' , 'false'),
+					'STARTED'    => bb_date($onlinerow_guest[$i]['session_start'], 'H:i', false),
+					'LASTUPDATE' => bb_date($onlinerow_guest[$i]['session_time'], 'H:i' , false),
 					'IP_ADDRESS' => $guest_ip,
 					'U_WHOIS_IP' => $bb_cfg['whois_info'] . $guest_ip,
 				));
@@ -275,11 +275,11 @@ else
 print_page('index.tpl', 'admin');
 
 // Functions
-function inarray($needle, $haystack)
+function inarray ($needle, $haystack)
 {
-	for($i = 0; $i < sizeof($haystack); $i++ )
+	for ($i = 0; $i < sizeof($haystack); $i++)
 	{
-		if( $haystack[$i] == $needle )
+		if ($haystack[$i] == $needle)
 		{
 			return true;
 		}

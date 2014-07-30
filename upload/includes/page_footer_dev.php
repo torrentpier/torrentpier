@@ -89,76 +89,14 @@ function fixSqlLog() {
 </script>
 	<div class="sqlLogHead">
 ';
-if (PROFILER) {
-	echo '
-		<fieldset class="med" style="padding: 2px 4px 4px;">
-		<legend>Profiling</legend>
-			min time:
-			<input style="width: 60px;" id="prof_min_time" type="text" value="'. (!empty($_COOKIE['prof_min_time']) ? $_COOKIE['prof_min_time'] : '0.1%') .'" />
-			<input type="button" value="go" onclick="setProfMinTime(); window.location.reload();" />
-			<label><input type="checkbox" onclick="setCookie(\'prof_enabled\', this.checked ? 1 : 0, \'SESSION\'); setProfMinTime(); setProfCookie(this.checked ? 1 : 0); window.location.reload();" '. (!empty($_COOKIE['prof_enabled']) ? HTML_CHECKED : '') .' />enable </label>
-		</fieldset>
-	';
-}
-if (DEBUG) {
-	echo '
-		<fieldset class="med" style="padding: 2px 4px 4px;">
-		<legend>Debug</legend>
-			<label><input type="checkbox" onclick="setCookie(\'debug_enabled\', this.checked ? 1 : 0, \'SESSION\'); setDebugCookie(this.checked ? 1 : 0); window.location.reload();" '. (!empty($_COOKIE['debug_enabled']) ? HTML_CHECKED : '') .' />enable </label>
-		</fieldset>
-	';
-}
 
 echo '</div><!-- / sqlLogHead -->';
- 
+
 if ($sql_log)
 {
-echo '<div class="sqlLog" id="sqlLog">
-'. ($sql_log ? $sql_log : '') .'
-'. (UA_IE ? '<br />' : '') .'
-</div><!-- / sqlLog -->
-
-<br clear="all" />
-';
+	echo '<div class="sqlLog" id="sqlLog">'. ($sql_log ? $sql_log : '') .'</div><!-- / sqlLog --><br clear="all" />';
 }
-
-if (PROFILER && !empty($_COOKIE['prof_enabled']))
-{
-	require(DEV_DIR .'profiler/profiler.php');
-	$profiler = profiler::init(PROFILER);
-
-	$min_time = !empty($_COOKIE['prof_min_time']) ? $_COOKIE['prof_min_time'] : '0.1%';
-	$profiler->print_profile_data($min_time);
-}
-
 ?>
 <script type="text/javascript">
 $(document).ready(fixSqlLog);
-
-function setProfMinTime ()
-{
-	var minTime = $p('prof_min_time').value;
-	setCookie('prof_min_time', (minTime ? minTime : '0.1%'));
-}
-
-function setProfCookie (val)
-{
-	// http://support.nusphere.com/viewtopic.php?t=586
-	if (!val) {
-		deleteCookie('DBGSESSID', '/');
-	}
-	else {
-		// СЛОМАНО!! профайлер работает только по нажатию кнопки на тулбаре phpEd, после чего кука сбрасывается
-		setCookie('DBGSESSID', '1@clienthost:7869;d=1,p=1', 'SESSION', '/');
-	}
-}
-function setDebugCookie (val)
-{
-	if (!val) {
-		deleteCookie('DBGSESSID', '/');
-	}
-	else {
-		setCookie('DBGSESSID', '1@clienthost:7869;d=1,p=0,c=1', 'SESSION', '/');
-	}
-}
 </script>

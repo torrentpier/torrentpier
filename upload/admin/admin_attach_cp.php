@@ -11,20 +11,13 @@ require('./pagestart.php');
 
 $total_attachments = 0;
 
-if (!intval($attach_config['allow_ftp_upload']))
+if ( ($attach_config['upload_dir'][0] == '/') || ( ($attach_config['upload_dir'][0] != '/') && ($attach_config['upload_dir'][1] == ':') ) )
 {
-	if ( ($attach_config['upload_dir'][0] == '/') || ( ($attach_config['upload_dir'][0] != '/') && ($attach_config['upload_dir'][1] == ':') ) )
-	{
-		$upload_dir = $attach_config['upload_dir'];
-	}
-	else
-	{
-		$upload_dir = '../' . $attach_config['upload_dir'];
-	}
+	$upload_dir = $attach_config['upload_dir'];
 }
 else
 {
-	$upload_dir = $attach_config['download_path'];
+	$upload_dir = '../' . $attach_config['upload_dir'];
 }
 
 include(BB_ROOT .'attach_mod/includes/functions_selects.php');
@@ -211,8 +204,8 @@ else if ($delete && sizeof($delete_id_list) > 0)
 // Assign Default Template Vars
 $template->assign_vars(array(
 	'S_VIEW_SELECT' => $select_view,
-	'S_MODE_ACTION' => 'admin_attach_cp.php')
-);
+	'S_MODE_ACTION' => 'admin_attach_cp.php',
+));
 
 if ($submit_change && $view == 'attachments')
 {
@@ -233,9 +226,9 @@ if ($submit_change && $view == 'attachments')
 		FROM ' . BB_ATTACHMENTS_DESC . '
 		ORDER BY attach_id';
 
-	if ( !($result = DB()->sql_query($sql)) )
+	if (!($result = DB()->sql_query($sql)))
 	{
-		message_die(GENERAL_ERROR, 'Couldn\'t get Attachment informations', '', __LINE__, __FILE__, $sql);
+		bb_die('Could not get attachment informations');
 	}
 
 	while ( $attachrow = DB()->sql_fetchrow($result) )
@@ -250,7 +243,7 @@ if ($submit_change && $view == 'attachments')
 
 				if (!DB()->sql_query($sql))
 				{
-					message_die(GENERAL_ERROR, 'Couldn\'t update Attachments Informations', '', __LINE__, __FILE__, $sql);
+					bb_die('Could not update attachments informations');
 				}
 			}
 		}
@@ -287,15 +280,14 @@ if ($view == 'stats')
 
 	$template->assign_vars(array(
 		'TPL_ATTACH_STATISTICS' => true,
-
 		'TOTAL_FILESIZE' => $upload_dir_size,
 		'ATTACH_QUOTA' => $attachment_quota,
 		'NUMBER_OF_ATTACHMENTS' => $number_of_attachments,
 		'NUMBER_OF_POSTS' => $number_of_posts,
 		'NUMBER_OF_PMS' => $number_of_pms,
 		'NUMBER_OF_TOPICS' => $number_of_topics,
-		'NUMBER_OF_USERS' => $number_of_users)
-	);
+		'NUMBER_OF_USERS' => $number_of_users,
+	));
 
 }
 
@@ -309,9 +301,9 @@ if ($view == 'search')
 	WHERE f.cat_id = c.cat_id
 	ORDER BY c.cat_id, f.forum_order";
 
-	if ( !($result = DB()->sql_query($sql)) )
+	if (!($result = DB()->sql_query($sql)))
 	{
-		message_die(GENERAL_ERROR, 'Could not obtain forum_name/forum_id', '', __LINE__, __FILE__, $sql);
+		bb_die('Could not obtain forum_name / forum_id');
 	}
 
 	$s_forums = '';
@@ -339,17 +331,16 @@ if ($view == 'search')
 	}
 	else
 	{
-		message_die(GENERAL_MESSAGE, $lang['NO_SEARCHABLE_FORUMS']);
+		bb_die($lang['NO_SEARCHABLE_FORUMS']);
 	}
 
 	$template->assign_vars(array(
 		'TPL_ATTACH_SEARCH' => true,
-
 		'S_FORUM_OPTIONS' => $s_forums,
 		'S_CATEGORY_OPTIONS' => $s_categories,
 		'S_SORT_OPTIONS' => $select_sort_mode,
-		'S_SORT_ORDER' => $select_sort_order)
-	);
+		'S_SORT_ORDER' => $select_sort_order,
+	));
 }
 
 // Username
@@ -357,10 +348,9 @@ if ($view == 'username')
 {
 	$template->assign_vars(array(
 		'TPL_ATTACH_USER' => true,
-
 		'S_MODE_SELECT' => $select_sort_mode,
-		'S_ORDER_SELECT' => $select_sort_order)
-	);
+		'S_ORDER_SELECT' => $select_sort_order,
+	));
 	$total_rows = 0;
 	bb_die('removed');
 }
@@ -375,23 +365,20 @@ if ($view == 'attachments')
 
 	$template->assign_vars(array(
 		'TPL_ATTACH_ATTACHMENTS' => true,
-
 		'S_MODE_SELECT' => $select_sort_mode,
-		'S_ORDER_SELECT' => $select_sort_order)
-	);
+		'S_ORDER_SELECT' => $select_sort_order,
+	));
 
 	$total_rows = 0;
 
 	// Are we called from Username ?
 	if ($user_based)
 	{
-		$sql = "SELECT username
-		FROM " . BB_USERS . "
-		WHERE user_id = " . intval($uid);
+		$sql = "SELECT username FROM " . BB_USERS . " WHERE user_id = " . intval($uid);
 
-		if ( !($result = DB()->sql_query($sql)) )
+		if (!($result = DB()->sql_query($sql)))
 		{
-			message_die(GENERAL_ERROR, 'Error getting username', '', __LINE__, __FILE__, $sql);
+			bb_die('Error getting username');
 		}
 
 		$row = DB()->sql_fetchrow($result);
@@ -404,17 +391,17 @@ if ($view == 'attachments')
 
 		$template->assign_vars(array(
 			'S_USER_HIDDEN' => $s_hidden,
-			'L_STATISTICS_FOR_USER' => sprintf($lang['STATISTICS_FOR_USER'], $username))
-		);
+			'L_STATISTICS_FOR_USER' => sprintf($lang['STATISTICS_FOR_USER'], $username),
+		));
 
 		$sql = "SELECT attach_id
 		FROM " . BB_ATTACHMENTS . "
 		WHERE user_id_1 = " . intval($uid) . "
 		GROUP BY attach_id";
 
-		if ( !($result = DB()->sql_query($sql)) )
+		if (!($result = DB()->sql_query($sql)))
 		{
-			message_die(GENERAL_ERROR, 'Couldn\'t query attachments', '', __LINE__, __FILE__, $sql);
+			bb_die('Could not query attachments #1');
 		}
 
 		$attach_ids = DB()->sql_fetchrowset($result);
@@ -423,7 +410,7 @@ if ($view == 'attachments')
 
 		if ($num_attach_ids == 0)
 		{
-			message_die(GENERAL_MESSAGE, 'For some reason no Attachments are assigned to the User "' . $username . '".');
+			bb_die('For some reason no attachments are assigned to the user ' . $username);
 		}
 
 		$total_rows = $num_attach_ids;
@@ -440,9 +427,9 @@ if ($view == 'attachments')
 		WHERE a.attach_id IN (" . implode(', ', $attach_id) . ") " .
 		$order_by;
 
-	    if ( !($result = DB()->sql_query($sql)) )
+		if (!($result = DB()->sql_query($sql)))
 		{
-			message_die(GENERAL_ERROR, 'Couldn\'t query attachments', '', __LINE__, __FILE__, $sql);
+			bb_die('Could not query attachments #2');
 		}
 
 		$attachments = DB()->sql_fetchrowset($result);
@@ -480,9 +467,9 @@ if ($view == 'attachments')
 			FROM " . BB_ATTACHMENTS . "
 			WHERE attach_id = " . intval($attachments[$i]['attach_id']);
 
-			if ( !($result = DB()->sql_query($sql)) )
+			if (!($result = DB()->sql_query($sql)))
 			{
-				message_die(GENERAL_ERROR, 'Couldn\'t query attachments', '', __LINE__, __FILE__, $sql);
+				bb_die('Could not query attachments #3');
 			}
 
 			$ids = DB()->sql_fetchrowset($result);
@@ -498,9 +485,9 @@ if ($view == 'attachments')
 					WHERE p.post_id = " . intval($ids[$j]['post_id']) . " AND p.topic_id = t.topic_id
 					GROUP BY t.topic_id, t.topic_title";
 
-					if ( !($result = DB()->sql_query($sql)) )
+					if (!($result = DB()->sql_query($sql)))
 					{
-						message_die(GENERAL_ERROR, 'Couldn\'t query topic', '', __LINE__, __FILE__, $sql);
+						bb_die('Could not query topic');
 					}
 
 					$row = DB()->sql_fetchrow($result);
@@ -530,18 +517,18 @@ if ($view == 'attachments')
 				'ROW_NUMBER' => $i + ( @$_GET['start'] + 1 ),
 				'ROW_CLASS' => $row_class,
 
-				'FILENAME'		=> htmlspecialchars($attachments[$i]['real_filename']),
-				'COMMENT'		=> htmlspecialchars($attachments[$i]['comment']),
+				'FILENAME' => htmlspecialchars($attachments[$i]['real_filename']),
+				'COMMENT' => htmlspecialchars($attachments[$i]['comment']),
 				'EXTENSION' => $attachments[$i]['extension'],
-				'SIZE' => round(($attachments[$i]['filesize'] / MEGABYTE), 2),
+				'SIZE' => round(($attachments[$i]['filesize'] / 1024), 2),
 				'DOWNLOAD_COUNT' => $attachments[$i]['download_count'],
 				'POST_TIME' => bb_date($attachments[$i]['filetime']),
 				'POST_TITLE' => $post_titles,
 
 				'S_DELETE_BOX' => $delete_box,
 				'S_HIDDEN' => $hidden_field,
-				'U_VIEW_ATTACHMENT'	=> BB_ROOT . 'download.php?id=' . $attachments[$i]['attach_id'])
-			);
+				'U_VIEW_ATTACHMENT' => BB_ROOT . 'download.php?id=' . $attachments[$i]['attach_id'],
+			));
 
 		}
 	}
@@ -552,9 +539,9 @@ if ($view == 'attachments')
 		{
 			$sql = "SELECT attach_id FROM " . BB_ATTACHMENTS_DESC;
 
-			if ( !($result = DB()->sql_query($sql)) )
+			if (!($result = DB()->sql_query($sql)))
 			{
-				message_die(GENERAL_ERROR, 'Could not query Attachment Description Table', '', __LINE__, __FILE__, $sql);
+				bb_die('Could not query attachment description table');
 			}
 
 			$total_rows = DB()->num_rows($result);

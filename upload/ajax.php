@@ -12,7 +12,7 @@ $ajax->init();
 // Handle "board disabled via ON/OFF trigger"
 if (file_exists(BB_DISABLED) || $bb_cfg['board_disable'])
 {
-	$ajax->ajax_die($bb_cfg['board_disabled_msg']);
+	$ajax->ajax_die($lang['BOARD_DISABLE']);
 }
 
 // Load actions required modules
@@ -22,6 +22,7 @@ switch ($ajax->action)
 		require(INC_DIR . 'bbcode.php');
 		break;
 
+	case 'chat':
 	case 'posts':
 	case 'post_mod_comment':
 		require(INC_DIR . 'bbcode.php');
@@ -71,7 +72,7 @@ class ajax_common
 	var $response = array();
 
 	var $valid_actions = array(
-		//   ACTION NAME             AJAX_AUTH
+		// ACTION NAME         AJAX_AUTH
 		'edit_user_profile' => array('admin'),
 		'change_user_rank'  => array('admin'),
 		'change_user_opt'   => array('admin'),
@@ -84,6 +85,7 @@ class ajax_common
 		'post_mod_comment'  => array('mod'),
 
 		'avatar'            => array('user'),
+		'chat'              => array('user'),
 		'gen_passkey'       => array('user'),
 		'change_torrent'    => array('user'),
 		'change_tor_status' => array('user'),
@@ -398,5 +400,10 @@ class ajax_common
 	function avatar()
 	{
 		require(AJAX_DIR . 'avatar.php');
+	}
+
+	function chat()
+	{
+		require(AJAX_DIR . 'chat.php');
 	}
 }

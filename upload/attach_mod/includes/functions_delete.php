@@ -47,9 +47,9 @@ function delete_attachment($post_id_array = 0, $attach_id_array = 0, $page = 0, 
 				WHERE attach_id IN (' . implode(', ', $attach_id_array) . ")
 			GROUP BY $p_id";
 
-		if ( !($result = DB()->sql_query($sql)) )
+		if (!($result = DB()->sql_query($sql)))
 		{
-			message_die(GENERAL_ERROR, 'Could not select ids', '', __LINE__, __FILE__, $sql);
+			bb_die('Could not select ids');
 		}
 
 		$num_post_list = DB()->num_rows($result);
@@ -108,9 +108,9 @@ function delete_attachment($post_id_array = 0, $attach_id_array = 0, $page = 0, 
 			FROM ' . BB_ATTACHMENTS . " $whereclause
 			GROUP BY attach_id";
 
-		if ( !($result = DB()->sql_query($sql)) )
+		if (!($result = DB()->sql_query($sql)))
 		{
-			message_die(GENERAL_ERROR, 'Could not select Attachment Ids', '', __LINE__, __FILE__, $sql);
+			bb_die('Could not select attachment id #1');
 		}
 
 		$num_attach_list = DB()->num_rows($result);
@@ -160,21 +160,19 @@ function delete_attachment($post_id_array = 0, $attach_id_array = 0, $page = 0, 
 			WHERE attach_id IN (' . implode(', ', $attach_id_array) . ")
 				AND $sql_id IN (" . implode(', ', $post_id_array) . ')';
 
-		if ( !(DB()->sql_query($sql)) )
+		if (!(DB()->sql_query($sql)))
 		{
-			message_die(GENERAL_ERROR, $lang['ERROR_DELETED_ATTACHMENTS'], '', __LINE__, __FILE__, $sql);
+			bb_die($lang['ERROR_DELETED_ATTACHMENTS']);
 		}
 
 		//bt
 		if ($sql_id == 'post_id')
 		{
-			$sql = "SELECT topic_id
-				FROM ". BB_BT_TORRENTS ."
-				WHERE attach_id IN(". implode(',', $attach_id_array) .")";
+			$sql = "SELECT topic_id FROM ". BB_BT_TORRENTS ." WHERE attach_id IN(". implode(',', $attach_id_array) .")";
 
 			if (!$result = DB()->sql_query($sql))
 			{
-				message_die(GENERAL_ERROR, $lang['ERROR_DELETED_ATTACHMENTS'], '', __LINE__, __FILE__, $sql);
+				bb_die($lang['ERROR_DELETED_ATTACHMENTS']);
 			}
 
 			$torrents_sql = array();
@@ -192,7 +190,7 @@ function delete_attachment($post_id_array = 0, $attach_id_array = 0, $page = 0, 
 
 				if (!DB()->sql_query($sql))
 				{
-					message_die(GENERAL_ERROR, 'Could not delete peers', '', __LINE__, __FILE__, $sql);
+					bb_die('Could not delete peers');
 				}
 			}
 			// Delete torrents
@@ -201,7 +199,7 @@ function delete_attachment($post_id_array = 0, $attach_id_array = 0, $page = 0, 
 
 			if (!DB()->sql_query($sql))
 			{
-				message_die(GENERAL_ERROR, $lang['ERROR_DELETED_ATTACHMENTS'], '', __LINE__, __FILE__, $sql);
+				bb_die($lang['ERROR_DELETED_ATTACHMENTS']);
 			}
 		}
 		//bt end
@@ -212,9 +210,9 @@ function delete_attachment($post_id_array = 0, $attach_id_array = 0, $page = 0, 
 				FROM ' . BB_ATTACHMENTS . '
 						WHERE attach_id = ' . (int) $attach_id_array[$i];
 
-			if ( !($result = DB()->sql_query($sql)) )
+			if (!($result = DB()->sql_query($sql)))
 			{
-				message_die(GENERAL_ERROR, 'Could not select Attachment Ids', '', __LINE__, __FILE__, $sql);
+				bb_die('Could not select Attachment id #2');
 			}
 
 				$num_rows = DB()->num_rows($result);
@@ -226,9 +224,9 @@ function delete_attachment($post_id_array = 0, $attach_id_array = 0, $page = 0, 
 						FROM ' . BB_ATTACHMENTS_DESC . '
 							WHERE attach_id = ' . (int) $attach_id_array[$i];
 
-					if ( !($result = DB()->sql_query($sql)) )
+					if (!($result = DB()->sql_query($sql)))
 					{
-						message_die(GENERAL_ERROR, 'Couldn\'t query attach description table', '', __LINE__, __FILE__, $sql);
+						bb_die('Could not query attach description table');
 					}
 					$num_rows = DB()->num_rows($result);
 
@@ -248,12 +246,11 @@ function delete_attachment($post_id_array = 0, $attach_id_array = 0, $page = 0, 
 								unlink_attach($attachments[$j]['physical_filename'], MODE_THUMBNAIL);
 							}
 
-							$sql = 'DELETE FROM ' . BB_ATTACHMENTS_DESC . '
-								WHERE attach_id = ' . (int) $attachments[$j]['attach_id'];
+							$sql = 'DELETE FROM ' . BB_ATTACHMENTS_DESC . ' WHERE attach_id = ' . (int) $attachments[$j]['attach_id'];
 
-							if ( !(DB()->sql_query($sql)) )
+							if (!(DB()->sql_query($sql)))
 							{
-								message_die(GENERAL_ERROR, $lang['ERROR_DELETED_ATTACHMENTS'], '', __LINE__, __FILE__, $sql);
+								bb_die($lang['ERROR_DELETED_ATTACHMENTS']);
 							}
 						}
 					}
@@ -273,9 +270,9 @@ function delete_attachment($post_id_array = 0, $attach_id_array = 0, $page = 0, 
 			WHERE post_id IN (' . implode(', ', $post_id_array) . ')
 			GROUP BY topic_id';
 
-		if ( !($result = DB()->sql_query($sql)) )
+		if (!($result = DB()->sql_query($sql)))
 		{
-			message_die(GENERAL_ERROR, 'Couldn\'t select Topic ID', '', __LINE__, __FILE__, $sql);
+			bb_die('Could not select topic id');
 		}
 
 		while ($row = DB()->sql_fetchrow($result))

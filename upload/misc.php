@@ -33,7 +33,7 @@ if ($do == 'attach_rules')
 
 	if (!($result = DB()->sql_query($sql)))
 	{
-		message_die(GENERAL_ERROR, 'Could not query Extension Groups.', '', __LINE__, __FILE__, $sql);
+		bb_die('Could not query extension groups');
 	}
 
 	$allowed_filesize = array();
@@ -59,8 +59,8 @@ if ($do == 'attach_rules')
 			$max_filesize = (!$det_filesize) ? $lang['UNLIMITED'] : humn_size($det_filesize);
 
 			$template->assign_block_vars('group_row', array(
-				'GROUP_RULE_HEADER' => sprintf($lang['GROUP_RULE_HEADER'], $group_name, $max_filesize))
-			);
+				'GROUP_RULE_HEADER' => sprintf($lang['GROUP_RULE_HEADER'], $group_name, $max_filesize),
+			));
 
 			$sql = 'SELECT extension
 				FROM ' . BB_EXTENSIONS . "
@@ -69,7 +69,7 @@ if ($do == 'attach_rules')
 
 			if (!($result = DB()->sql_query($sql)))
 			{
-				message_die(GENERAL_ERROR, 'Could not query Extensions.', '', __LINE__, __FILE__, $sql);
+				bb_die('Could not query extensions');
 			}
 
 			$e_rows = DB()->sql_fetchrowset($result);
@@ -79,15 +79,15 @@ if ($do == 'attach_rules')
 			for ($j = 0; $j < $e_num_rows; $j++)
 			{
 				$template->assign_block_vars('group_row.extension_row', array(
-					'EXTENSION' => $e_rows[$j]['extension'])
-				);
+					'EXTENSION' => $e_rows[$j]['extension'],
+				));
 			}
 		}
 	}
 
 	$template->assign_vars(array(
-		'PAGE_TITLE' => $lang['ATTACH_RULES_TITLE'])
-	);
+		'PAGE_TITLE' => $lang['ATTACH_RULES_TITLE'],
+	));
 
 	if ($nothing)
 	{
@@ -140,5 +140,5 @@ elseif ($do == 'info')
 }
 else 
 {
-	message_die(GENERAL_ERROR, 'Invalid mode <br /> <a href="javascript:history.go(-1)">'.mb_convert_case($lang['BACK'], MB_CASE_TITLE).'</a>');
+	bb_die('Invalid mode');
 }

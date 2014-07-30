@@ -639,15 +639,10 @@ if ($t_data['topic_attachment'])
 //
 // Update the topic view counter
 //
-$sql = "INSERT INTO ". BUF_TOPIC_VIEW ."
-	(topic_id,  topic_views) VALUES
-	($topic_id, 1)
-	ON DUPLICATE KEY UPDATE
-	topic_views = topic_views + 1";
-
-if ( !DB()->sql_query($sql) )
+$sql = "INSERT INTO ". BUF_TOPIC_VIEW ." (topic_id,  topic_views) VALUES ($topic_id, 1) ON DUPLICATE KEY UPDATE topic_views = topic_views + 1";
+if (!DB()->sql_query($sql))
 {
-	message_die(GENERAL_ERROR, "Could not update topic views.", '', __LINE__, __FILE__, $sql);
+	bb_die('Could not update topic views');
 }
 
 //
@@ -678,7 +673,7 @@ $prev_post_time = $max_post_time = 0;
 require_once(INC_DIR ."functions_report.php");
 $report_post = report_modules('name', 'report_post');
 
-$this_date = bb_date(TIMENOW ,'md', 'false');
+$this_date = bb_date(TIMENOW ,'md', false);
 
 for($i = 0; $i < $total_posts; $i++)
 {
@@ -692,7 +687,6 @@ for($i = 0; $i < $total_posts; $i++)
 	$poster_joined    = ($poster_id != GUEST_UID) ? $lang['JOINED'] . ': ' . bb_date($postrow[$i]['user_regdate'], $bb_cfg['date_format']) : '';
 	$poster_longevity = ($poster_id != GUEST_UID) ? delta_time($postrow[$i]['user_regdate']) : '';
 	$post_id          = $postrow[$i]['post_id'];
-	
 	$mc_type          = $postrow[$i]['mc_type'];
 	$mc_comment       = $postrow[$i]['mc_comment'];
 	$mc_user_id       = profile_url(array('username' => $postrow[$i]['mc_username'], 'user_id' => $postrow[$i]['mc_user_id'], 'user_rank' => $postrow[$i]['mc_user_rank']));
@@ -810,21 +804,7 @@ for($i = 0; $i < $total_posts; $i++)
 		$report_img = $report = '';
 	}
 
-	// Gender
-	switch($postrow[$i]['user_gender'])
-	{
-		case MALE:
-			$gender = '<img src="'. $images['icon_male'] .'" alt="" title="'. $lang['GENDER_SELECT'][1] .'" border="0" />';
-			break;
-		case FEMALE:
-			$gender = '<img src="'. $images['icon_female'] .'" alt="" title="'. $lang['GENDER_SELECT'][2] .'" border="0" />';
-			break;
-		default:
-			$gender = '';
-			break;
-	}
-	
-	// mod comment
+	// Mod comment
 	switch($mc_type)
 	{
 		case 1: // Комментарий
@@ -865,7 +845,7 @@ for($i = 0; $i < $total_posts; $i++)
 		'POSTER_BOT'         => ($poster_id == BOT_UID),
 		'POSTER_ID'          => $poster_id,
 		'POSTER_AUTHOR'      => ($poster_id == $t_data['topic_poster']),
-		'POSTER_GENDER'      => ($bb_cfg['gender'] && $gender) ? $gender : '',
+		'POSTER_GENDER'      => ($bb_cfg['gender']) ? gender_image($postrow[$i]['user_gender']) : '',
 		'POSTED_AFTER'       => ($prev_post_time) ? delta_time($postrow[$i]['post_time'], $prev_post_time) : '',
 		'IS_UNREAD'          => is_unread($postrow[$i]['post_time'], $topic_id, $forum_id),
 		'IS_FIRST_POST'      => (!$start && ($post_id == $t_data['topic_first_post_id'])),

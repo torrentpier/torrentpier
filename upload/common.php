@@ -26,7 +26,7 @@ define('FULL_URL', $server_protocol . $bb_cfg['server_name'] . $server_port . $b
 unset($server_protocol, $server_port);
 
 // Debug options
-define('DBG_USER', (isset($_COOKIE[COOKIE_DBG]) || DEBUG === true));
+define('DBG_USER', (isset($_COOKIE[COOKIE_DBG])));
 
 // Board/Tracker shared constants and functions
 define('BB_BT_TORRENTS',      'bb_bt_torrents');
@@ -2065,7 +2065,7 @@ function make_rand_str ($len = 10)
 	return substr($str, 0, $len);
 }
 
-// bencode: based on OpenTracker [http://whitsoftdev.com/opentracker]
+// bencode: based on OpenTracker
 function bencode ($var)
 {
 	if (is_string($var))

@@ -1,4 +1,3 @@
-
 <!-- IF TPL_AUTH_UG_MAIN -->
 <!--========================================================================-->
 
@@ -6,9 +5,6 @@
 #page_content {
 	padding: 0;
 }
-/* "Fixed table header CSS" based on http://web.tampabay.rr.com/bmerkey/examples/nonscroll-table-header.html by bmerkey@tampabay.rr.com */
-
-/* Fix Table header START */
 div.tScrollContainer {
 	margin-top: -1px;
 	overflow: auto;
@@ -23,8 +19,6 @@ thead tr {
 	position: relative;
 	top: expression($p("tScrollCont").scrollTop); /* IE5+ only */
 }
-/* Fix Table header END */
-
 .tPerm {
 	background-color: #B4BBC8; margin-top: -2px;
 }

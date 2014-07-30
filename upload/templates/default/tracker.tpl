@@ -128,37 +128,19 @@ var FSN = {
 		});
 
 		$('#fs-nav-ul').treeview({ collapsed: true });
-		// фикс для FF2, чтобы меню не выстраивалось лесенкой
-		if ($.browser.mozilla && parseFloat($.browser.version) <= 1.8) {
-			$('#fs-nav-list ul').after('<div style="margin-top: 1px;"></div>');
-		}
 
 		$('#fs-sel-cat').bind('change', function(){
 			var i = $(this).val();
 			if (FSN.sel_width == null) {
 				FSN.sel_width = $select.width() + 4;
 			}
-			// опера не понимает <optgroup> при популяции селекта [http://dev.jquery.com/ticket/3040]
-			if ($.browser.opera) {
-				if (i == 'all') {
-					$select.empty().append('<option id="fs--1" value="-1">&nbsp;{L_ALL_AVAILABLE}</option>\n');
-					$.each(FSN.fs_og, function(i, v){
-					 $select.append( $(document.createElement('optgroup')).attr('label', FSN.fs_lb[i]).append(FSN.fs_og[i]) );
-					});
-				}
-				else {
-					$select.empty().append( $(document.createElement('optgroup')).attr('label', FSN.fs_lb[i]).append(FSN.fs_og[i]) );
-				}
+			if (i == 'all') {
+				var fs_html = FSN.fs_all;
 			}
 			else {
-				if (i == 'all') {
-					var fs_html = FSN.fs_all;
-				}
-				else {
-					var fs_html = '<optgroup label="'+ FSN.fs_lb[i] +'">'+ FSN.fs_og[i] +'</optgroup>';
-				}
-				$select.html(fs_html).focus();
+				var fs_html = '<optgroup label="'+ FSN.fs_lb[i] +'">'+ FSN.fs_og[i] +'</optgroup>';
 			}
+			$select.html(fs_html).focus();
 			if (i == 'all') {
 				$('#fs-nav-menu').show();
 			}
@@ -464,7 +446,6 @@ $(function(){
 	<div class="spacer_4"></div>
 
 	<div id="timezone">
-		<p>{LAST_VISIT_DATE}</p>
 		<p>{CURRENT_TIME}</p>
 		<p>{S_TIMEZONE}</p>
 	</div>

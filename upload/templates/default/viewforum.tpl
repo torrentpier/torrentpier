@@ -629,7 +629,6 @@ td.topic_id { cursor: pointer; }
 <div class="jumpbox"></div>
 
 <div id="timezone">
-	<p>{LAST_VISIT_DATE}</p>
 	<p>{CURRENT_TIME}</p>
 	<p>{S_TIMEZONE}</p>
 </div>

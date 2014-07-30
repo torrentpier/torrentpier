@@ -88,7 +88,7 @@ class emailer
 
 		if (trim($template_file) == '')
 		{
-			message_die(GENERAL_ERROR, 'No template file set', '', __LINE__, __FILE__);
+			bb_die('No template file set');
 		}
 
 		if (trim($template_lang) == '')
@@ -106,13 +106,13 @@ class emailer
 
 				if (!@file_exists(@bb_realpath($tpl_file)))
 				{
-					message_die(GENERAL_ERROR, 'Could not find email template file :: ' . $template_file, '', __LINE__, __FILE__);
+					bb_die('Could not find email template file :: ' . $template_file);
 				}
 			}
 
 			if (!($fd = @fopen($tpl_file, 'r')))
 			{
-				message_die(GENERAL_ERROR, 'Failed opening template file :: ' . $tpl_file, '', __LINE__, __FILE__);
+				bb_die('Failed opening template file :: ' . $tpl_file);
 			}
 
 			$this->tpl_msg[$template_lang . $template_file] = fread($fd, filesize($tpl_file));
@@ -219,7 +219,7 @@ class emailer
 		// Did it work?
 		if (!$result)
 		{
-			message_die(GENERAL_ERROR, 'Failed sending email :: ' . (($this->use_smtp) ? 'SMTP' : 'PHP') . ' :: ' . $result, '', __LINE__, __FILE__);
+			bb_die('Failed sending email :: ' . (($this->use_smtp) ? 'SMTP' : 'PHP') . ' :: ' . $result);
 		}
 
 		return true;

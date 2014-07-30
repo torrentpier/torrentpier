@@ -1,48 +1,61 @@
 <?php
 
 /**
-  * Database
-  * Cache
-    - Tracker Cache
-    - Forum Cache
-    - Session Cache
-    - Datastore
-  * Tracker
-  * Torrents
-    - Ratio limits
-    - Seeding torrents limit
-    - DL-Status (days to keep)
-    - Tor-Stats (days to keep)
-    - Tor-Help
-  * Path
-  * Language
-  * Templates
-  * Cookie
-  * Server
-    - Backup
-    - GZip
-  * Sessions
-  * Registration
-  * Email
-  * AJAX
-  * Debug
-  * Special users (dbg_users, unlimited_users, super_admins)
-  * LOG
-  * Error reporting
+ * Domain name
+ * Version info
+ * Database
+   - Charset
+   - Config
+   - Aliases
+ * Cache
+   - Config
+   - Datastore
+ * Server
+   - Cloudflare
+   - Script versions
+   - Backup script
+   - GZip
+ * Tracker
+ * FAQ url
+ * Torrents
+   - Ratio limits
+   - Seeding torrents limit
+   - DL-Status (days to keep)
+   - Tor-Stats (days to keep)
+   - Tor-Help
+ * Path
+ * URL's
+ * Language
+ * Templates
+ * Cookie
+ * Sessions
+ * Registration
+ * Email
+ * AJAX
+ * Debug
+ * Special users (dbg_users, unlimited_users, super_admins)
+ * LOG
+ * Error reporting
+ * Triggers
+ * Date format
 
-  * Subforums
-  * Forums
-  * Topics
-  * Posts
-  * Search
-  * Actions log
-  * Users
-  * GroupCP
+ * Subforums
+ * Forums
+ * Topics
+ * Posts
+ * Search
+ * Posting
+ * PM
+ * Actions log
+ * Users
+ * GroupCP
 
-  * Ads
-  * Misc
-  * Captcha
-
+ * Tidy
+ * Ads
+ * Attachments
+ * Avatars
+ * Misc
+ * Captcha
 **/
 
 if (!defined('BB_ROOT')) die(basename(__FILE__));
@@ -50,13 +63,13 @@ if (!defined('BB_ROOT')) die(basename(__FILE__));
 $bb_cfg = $tr_cfg = $page_cfg = array();
 
 // Primary domain name
-$domain_name = 'torrentpier.me';                    // Enter here your primary domain name of your site
+$domain_name = 'torrentpier.me';  // enter here your primary domain name of your site
 $domain_name = (!empty($_SERVER['SERVER_NAME'])) ? $_SERVER['SERVER_NAME'] : $domain_name;
 
-// Increase number of revision after update
-$bb_cfg['tp_version'] = '2.6 (RC)';
-$bb_cfg['tp_release_date'] = '13-07-2014';
-$bb_cfg['tp_release_state'] = 'R591';
+// Version info
+$bb_cfg['tp_version'] = '2.0.9 (RC)';
+$bb_cfg['tp_release_date'] = '30-07-2014';
+$bb_cfg['tp_release_state'] = 'R592';
 
 // Database
 $charset  = 'utf8';
@@ -88,7 +101,7 @@ $bb_cfg['db_alias'] = array(
 // Cache
 $bb_cfg['cache']['pconnect'] = true;
 $bb_cfg['cache']['db_dir']   = realpath(BB_ROOT) .'/cache/filecache/';
-$bb_cfg['cache']['prefix']   = '';  // Префикс кеша 'tp_2'
+$bb_cfg['cache']['prefix']   = 'tp_';  // Префикс кеша 'tp_2'
 $bb_cfg['cache']['memcache'] = array(
 	'host'         => '127.0.0.1',
 	'port'         => 11211,
@@ -120,12 +133,15 @@ $bb_cfg['server_name'] = $domain_name;                                          
 $bb_cfg['server_port'] = (!empty($_SERVER['SERVER_PORT'])) ? $_SERVER['SERVER_PORT'] : 80; // The port your server is running on
 $bb_cfg['script_path'] = '/';                                                              // The path where FORUM is located relative to the domain name
 
+// Cloudflare
+if (isset($_SERVER['HTTP_CF_CONNECTING_IP']))
+{
+	$_SERVER['REMOTE_ADDR'] = $_SERVER['HTTP_CF_CONNECTING_IP'];
+}
+
 // Increase number after changing js or css
 $bb_cfg['js_ver']             = 1;
 $bb_cfg['css_ver']            = 1;
-
-// Information messages
-$bb_cfg['board_disabled_msg'] = 'форум временно отключен'; // 'forums temporarily disabled'; // show this msg if board has been disabled via ON/OFF trigger
 
 // Backup
 $bb_cfg['db_backup_shell_cmd']     = '';           // '/path/to/db_backup.sh 2>&1'
@@ -141,12 +157,13 @@ $bb_cfg['ignore_reported_ip'] = false;             // Ignore IP reported by clie
 $bb_cfg['verify_reported_ip'] = true;              // Verify IP reported by client against $_SERVER['HTTP_X_FORWARDED_FOR']
 $bb_cfg['allow_internal_ip']  = false;             // Allow internal IP (10.xx.. etc.)
 
-// FAQ URL help link
+// FAQ url help link
 $bb_cfg['how_to_download_url_help']  = 'viewtopic.php?t=1'; // Как скачивать?
 $bb_cfg['what_is_torrent_url_help']  = 'viewtopic.php?t=2'; // Что такое торрент?
 $bb_cfg['ratio_url_help']            = 'viewtopic.php?t=3'; // Рейтинг и ограничения
 $bb_cfg['search_help_url']           = 'viewtopic.php?t=4'; // Помощь по поиску
 
+// Torrents
 $bb_cfg['bt_min_ratio_allow_dl_tor'] = 0.3;          // 0 - disable
 $bb_cfg['bt_min_ratio_warning']      = 0.6;          // 0 - disable
 $bb_cfg['bt_min_ratio_dl_button']    = 0.5;          // 0 - disable
@@ -179,7 +196,6 @@ $bb_cfg['show_dl_status_in_forum']  = true;
 $bb_cfg['show_tor_info_in_dl_list'] = true;
 $bb_cfg['allow_dl_list_names_mode'] = true;
 
-// Torrents
 $bb_cfg['torrent_name_style'] = true; // use torrent name style [yoursite.com].txxx.torrent
 $bb_cfg['tor_help_links']     = '';
 
@@ -227,7 +243,6 @@ define('BB_PATH',       realpath(BB_ROOT)     );  // absolute pathname to the fo
 define('ADMIN_DIR',     BB_PATH .'/admin/'    );
 define('CACHE_DIR',     BB_PATH .'/cache/'    );
 define('CFG_DIR',       BB_PATH .'/config/'   );
-define('DEV_DIR',       BB_PATH .'/develop/'  );
 define('INC_DIR',       BB_PATH .'/includes/' );
 define('LANG_ROOT_DIR', BB_PATH .'/language/' );
 define('LOG_DIR',       BB_PATH .'/log/'      );
@@ -235,7 +250,7 @@ define('TEMPLATES_DIR', BB_PATH .'/templates/');
 define('TRIGGERS_DIR',  BB_PATH .'/triggers/' );
 define('LOCKS_DIR',     BB_PATH .'/locks/'    );
 
-// URLs
+// URL's
 $bb_cfg['ajax_url']    = 'ajax.php';     #  "http://{$_SERVER['SERVER_NAME']}/ajax.php"
 $bb_cfg['login_url']   = 'login.php';    #  "http://{$domain_name}/login.php"
 $bb_cfg['posting_url'] = 'posting.php';  #  "http://{$domain_name}/posting.php"
@@ -271,18 +286,18 @@ else
 }
 
 $bb_cfg['languages'] = array(
-//	'folder'	=> 'Name',
-	'ru'		=> 'Русский',
-	'ua'		=> 'Український',
-	'en'		=> 'English',
+//	'folder'  => 'Name',
+	'ru'      => 'Русский',
+	'ua'      => 'Український',
+	'en'      => 'English',
 );
 
 // Templates
 define('ADMIN_TPL_DIR', TEMPLATES_DIR .'/admin/');
 
 $bb_cfg['templates'] = array(
-//	'folder'	=> 'Name',
-	'default'	=> 'Стандартный',
+//	'folder'  => 'Name',
+	'default' => 'Стандартный',
 );
 
 $bb_cfg['tpl_name']   = 'default';
@@ -293,19 +308,17 @@ $bb_cfg['show_sidebar2_on_every_page'] = false;
 
 $page_cfg['show_sidebar1'] = array(
 #	BB_SCRIPT => true
-	'index'  => true,
+	'index'   => true,
 );
 $page_cfg['show_sidebar2'] = array(
 #	BB_SCRIPT => true
-	'index' => true,
+	'index'   => true,
 );
 
 // Cookie
 $bb_cfg['cookie_domain'] = in_array($domain_name, array(getenv('SERVER_ADDR'), 'localhost')) ? '' : ".$domain_name";
-$bb_cfg['cookie_secure'] = (!empty($_SERVER['HTTPS']) ? 1 : 0); # 0
-$bb_cfg['cookie_prefix'] = 'bb_';                  # 'bb_'
-
-define('COOKIE_DBG', 'bb_dbg');                    // debug cookie name
+$bb_cfg['cookie_secure'] = (!empty($_SERVER['HTTPS']) ? 1 : 0);
+$bb_cfg['cookie_prefix'] = 'bb_'; // 'bb_'
 
 // Sessions
 $bb_cfg['session_update_intrv']    = 180;          // sec
@@ -350,19 +363,15 @@ define('AJAX_HTML_DIR', BB_ROOT .'ajax/html/');
 define('AJAX_DIR',      BB_ROOT .'ajax/');
 
 // Debug
-define('DEBUG',           false);                  // !!! "DEBUG" should be ALWAYS DISABLED on production environment !!!
-define('DBG_LOG',         false);
-define('DBG_TIME',        true);                   // false, true или рабочая секудна (при 3 - запись в лог будет только если текущее время кратно 3)
-define('DBG_LOG_GENTIME', true);
-define('DBG_LOG_ERRORS',  true);
-define('PROFILER',        false);                  // Profiler extension name, or FALSE to disable (supported: 'dbg')
-
-define('SQL_DEBUG',            true);
-define('SQL_LOG_ERRORS',       true);              // all SQL_xxx options enabled only if SQL_DEBUG == TRUE
-define('SQL_CALC_QUERY_TIME',  true);              // for stats
-define('SQL_LOG_SLOW_QUERIES', true);
-define('SQL_SLOW_QUERY_TIME',  10);                // sec
-define('SQL_PREPEND_SRC_COMM', false);             // prepend source file(line) comment to sql query
+define('DBG_LOG',              false);    // enable forum debug (off on production)
+define('DBG_TRACKER',          false);    // enable tracker debug (off on production)
+define('COOKIE_DBG',           'bb_dbg'); // debug cookie name
+define('SQL_DEBUG',            true);     // enable forum sql & cache debug
+define('SQL_LOG_ERRORS',       true);     // all SQL_xxx options enabled only if SQL_DEBUG == TRUE
+define('SQL_CALC_QUERY_TIME',  true);     // for stats
+define('SQL_LOG_SLOW_QUERIES', true);     // log sql slow queries
+define('SQL_SLOW_QUERY_TIME',  10);       // slow query in seconds
+define('SQL_PREPEND_SRC_COMM', false);    // prepend source file comment to sql query
 
 // Special users
 $bb_cfg['dbg_users'] = array(
@@ -403,19 +412,10 @@ $log_ip_resp = array(
 );
 
 // Error reporting
-if (DEBUG)
-{
-	error_reporting(E_ALL);
-	ini_set('display_errors', 1);
-	ini_set('log_errors',     0);
-}
-else
-{
-	error_reporting(E_ALL); # E_ALL & ~E_NOTICE
-	ini_set('display_errors', 0);
-	ini_set('log_errors',     1);
-}
-ini_set('error_log', LOG_DIR .'php_err.log');
+ini_set('error_reporting', E_ALL);
+ini_set('display_errors',  0);
+ini_set('log_errors',      1);
+ini_set('error_log',       LOG_DIR .'php_err.log');
 
 // Check some variable
 // Magic quotes
@@ -429,7 +429,7 @@ define('BB_DISABLED',  TRIGGERS_DIR .'$off');
 define('CRON_ALLOWED', TRIGGERS_DIR .'cron_allowed');
 define('CRON_RUNNING', TRIGGERS_DIR .'cron_running');
 
-//Формат даты
+// Date format
 $bb_cfg['date_format']             = 'Y-m-d';
 
 // Subforums
@@ -455,7 +455,7 @@ $bb_cfg['topic_moved_days_keep'] = 7;              // remove topic moved links a
 
 $bb_cfg['allowed_posts_per_page'] = array(15, 30, 50, 100);
 $bb_cfg['user_signature_start'] = '<div class="signature"><br />_________________<br />';
-$bb_cfg['user_signature_end']	= '</div>';	       //Это позволит использовать html теги, которые требуют закрытия. Например <table> или <font color>
+$bb_cfg['user_signature_end']	= '</div>';        // Это позволит использовать html теги, которые требуют закрытия. Например <table> или <font color>
 
 // Posts
 $bb_cfg['use_posts_cache']       = true;           // if you switch from ON to OFF, you need to TRUNCATE `bb_posts_html` table

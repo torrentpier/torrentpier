@@ -7,7 +7,7 @@ $template_name = basename(dirname(__FILE__));
 
 $_img  = BB_ROOT . 'images/';
 $_main = BB_ROOT . basename(TEMPLATES_DIR) .'/'. $template_name .'/images/';
-$_lang = $_main . basename($bb_cfg['default_lang']) .'/';
+$_lang = $_main . 'lang/' . basename($bb_cfg['default_lang']) .'/';
 
 // post_buttons
 $images['icon_quote']          = $_lang .'icon_quote.gif';
@@ -28,6 +28,7 @@ $images['icon_poll']           = $_lang .'icon_poll.gif';
 $images['icon_birthday']       = $_main .'icon_birthday.gif';
 $images['icon_male']           = $_main .'icon_male.gif';
 $images['icon_female']         = $_main .'icon_female.gif';
+$images['icon_nogender']       = $_main .'icon_nogender.gif';
 
 // post_icons
 $images['icon_minipost']       = $_main .'icon_minipost.gif';

@@ -21,12 +21,12 @@ $user->session_start(array('req_login' => $bb_cfg['bt_tor_browse_only_reg']));
 set_die_append_msg();
 
 $tor_search_limit    = (IS_AM) ? 2000 : 500;
-$forum_select_size   = (UA_OPERA) ? 21 : 24;   // forum select box max rows
-$max_forum_name_len  = 60;                     // inside forum select box
+$forum_select_size   = 24; // forum select box max rows
+$max_forum_name_len  = 60; // inside forum select box
 $max_forums_selected = 50;
 $title_match_max_len = 60;
 $poster_name_max_len = 25;
-$tor_colspan         = 13;                     // torrents table colspan with all columns
+$tor_colspan         = 13; // torrents table colspan with all columns
 $per_page            = $bb_cfg['topics_per_page'];
 $tracker_url         = basename(__FILE__);
 
@@ -791,7 +791,7 @@ if ($allowed_forums)
 				'VIEWS'        => $tor['topic_views'],
 				'ADDED_RAW'    => $tor['reg_time'],
 				'ADDED_TIME'   => bb_date($tor['reg_time'], $time_format),
-				'ADDED_DATE'   => bb_date($tor['reg_time'], $date_format, 'false'),
+				'ADDED_DATE'   => bb_date($tor['reg_time'], $date_format, false),
 			));
 		}
 	}
@@ -821,7 +821,7 @@ if ($tor_count)
 
 if(empty($cat_forum))
 {
-	message_die(GENERAL_MESSAGE, $lang['BT_NO_SEARCHABLE_FORUMS']);
+	bb_die($lang['BT_NO_SEARCHABLE_FORUMS']);
 }
 
 // Forum select

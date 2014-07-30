@@ -190,8 +190,7 @@ $template->assign_vars(array(
 	'FORUM_PATH'         => FORUM_PATH,
 	'FULL_URL'           => FULL_URL,
 
-	'LAST_VISIT_DATE'    => ($logged_in) ? sprintf($lang['YOU_LAST_VISIT'], bb_date($userdata['user_lastvisit'], $bb_cfg['last_visit_date_format'])) : '',
-	'CURRENT_TIME'       => sprintf($lang['CURRENT_TIME'], bb_date(TIMENOW, $bb_cfg['last_visit_date_format'])),
+	'CURRENT_TIME'       => sprintf($lang['CURRENT_TIME'], bb_date(TIMENOW, $bb_cfg['last_visit_date_format'], false)),
 	'S_TIMEZONE'         => sprintf($lang['ALL_TIMES'], $lang[''.str_replace(',', '.', floatval($bb_cfg['board_timezone'])).'']),
 
 	'PM_INFO'            => $pm_info,
@@ -256,7 +255,6 @@ $template->assign_vars(array(
 	'ONLY_NEW_TOPICS'    => ONLY_NEW_TOPICS,
 
 	// Misc
-	'DEBUG'              => DEBUG,
 	'BOT_UID'            => BOT_UID,
 	'COOKIE_MARK'        => COOKIE_MARK,
 	'SID'                => $userdata['session_id'],
@@ -301,15 +299,6 @@ if (!empty($page_cfg['show_torhelp'][BB_SCRIPT]) && !empty($userdata['torhelp'])
 	}
 }
 
-if (DBG_USER)
-{
-	$template->assign_vars(array(
-		'INCLUDE_DEVELOP_JS' => true,
-		'EDITOR_PATH'        => @addslashes($bb_cfg['dbg']['editor_path']),
-		'EDITOR_ARGS'        => @addslashes($bb_cfg['dbg']['editor_args']),
-	));
-}
-
 // Ads
 if ($user->show_ads)
 {
@@ -328,18 +317,12 @@ if ($user->show_ads)
 $in_out = ($logged_in) ? 'in' : 'out';
 $template->assign_block_vars("switch_user_logged_{$in_out}", array());
 
-// Work around for "current" Apache 2 + PHP module which seems to not
-// cope with private cache control setting
-if (!empty($_SERVER['SERVER_SOFTWARE']) && strstr($_SERVER['SERVER_SOFTWARE'], 'Apache/2'))
-{
-	header('Cache-Control: no-cache, pre-check=0, post-check=0');
-}
-else
+if (!IS_GUEST)
 {
 	header('Cache-Control: private, pre-check=0, post-check=0, max-age=0');
+	header('Expires: 0');
+	header('Pragma: no-cache');
 }
-header('Expires: 0');
-header('Pragma: no-cache');
 
 $template->set_filenames(array('page_header' => 'page_header.tpl'));
 $template->pparse('page_header');

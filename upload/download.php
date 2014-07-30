@@ -24,16 +24,13 @@ function send_file_to_browser($attachment, $upload_dir)
 
 	$gotit = false;
 
-	if (!intval($attach_config['allow_ftp_upload']))
+	if (@!file_exists(@amod_realpath($filename)))
 	{
-		if (@!file_exists(@amod_realpath($filename)))
-		{
-			message_die(GENERAL_ERROR, $lang['ERROR_NO_ATTACHMENT'] . "<br /><br />" . $filename.  "<br /><br />" .$lang['TOR_NOT_FOUND']);
-		}
-		else
-		{
-			$gotit = true;
-		}
+		bb_die($lang['ERROR_NO_ATTACHMENT'] . "<br /><br />" . $filename. "<br /><br />" .$lang['TOR_NOT_FOUND']);
+	}
+	else
+	{
+		$gotit = true;
 	}
 
 	//
@@ -49,47 +46,11 @@ function send_file_to_browser($attachment, $upload_dir)
 		$HTTP_USER_AGENT = '';
 	}
 
-	if (preg_match('/Opera(\/| )([0-9].[0-9]{1,2})/', $HTTP_USER_AGENT, $log_version))
-	{
-		$browser_version = $log_version[2];
-		$browser_agent = 'opera';
-	}
-	elseif (preg_match('/MSIE ([0-9].[0-9]{1,2})/', $HTTP_USER_AGENT, $log_version))
-	{
-		$browser_version = $log_version[1];
-		$browser_agent = 'ie';
-	}
-	elseif (preg_match('/OmniWeb\/([0-9].[0-9]{1,2})/', $HTTP_USER_AGENT, $log_version))
-	{
-		$browser_version = $log_version[1];
-		$browser_agent = 'omniweb';
-	}
-	elseif (preg_match('/Netscape([0-9]{1})/', $HTTP_USER_AGENT, $log_version))
-	{
-		$browser_version = $log_version[1];
-		$browser_agent = 'netscape';
-	}
-	elseif (preg_match('/Mozilla\/([0-9].[0-9]{1,2})/', $HTTP_USER_AGENT, $log_version))
-	{
-		$browser_version = $log_version[1];
-		$browser_agent = 'mozilla';
-	}
-	elseif (preg_match('/Konqueror\/([0-9].[0-9]{1,2})/', $HTTP_USER_AGENT, $log_version))
-	{
-		$browser_version = $log_version[1];
-		$browser_agent = 'konqueror';
-	}
-	else
-	{
-		$browser_version = 0;
-		$browser_agent = 'other';
-	}
-
-	// Correct the mime type - we force application/octetstream for all files, except images
+	// Correct the mime type - we force application/octet-stream for all files, except images
 	// Please do not change this, it is a security precaution
 	if (!strstr($attachment['mimetype'], 'image'))
 	{
-		$attachment['mimetype'] = ($browser_agent == 'ie' || $browser_agent == 'opera') ? 'application/octetstream' : 'application/octet-stream';
+		$attachment['mimetype'] = 'application/octet-stream';
 	}
 
 	//bt
@@ -120,43 +81,9 @@ function send_file_to_browser($attachment, $upload_dir)
 		}
 		readfile($filename);
 	}
-	elseif (!$gotit && intval($attach_config['allow_ftp_upload']))
-	{
-		$conn_id = attach_init_ftp();
-
-		$ini_val = ( @phpversion() >= '4.0.0' ) ? 'ini_get' : 'get_cfg_var';
-
-		$tmp_path = ( !@$ini_val('safe_mode') ) ? '/tmp' : $upload_dir;
-		$tmp_filename = @tempnam($tmp_path, 't0000');
-
-		@unlink($tmp_filename);
-
-		$mode = FTP_BINARY;
-		if ( (preg_match("/text/i", $attachment['mimetype'])) || (preg_match("/html/i", $attachment['mimetype'])) )
-		{
-			$mode = FTP_ASCII;
-		}
-
-		$result = @ftp_get($conn_id, $tmp_filename, $filename, $mode);
-
-		if (!$result)
-		{
-			message_die(GENERAL_ERROR, $lang['ERROR_NO_ATTACHMENT'] . "<br /><br />" . $filename.  "<br /><br />" .$lang['TOR_NOT_FOUND']);
-		}
-
-		@ftp_quit($conn_id);
-
-		$size = @filesize($tmp_filename);
-		if ($size)
-		{
-			header("Content-length: $size");
-		}
-		readfile($tmp_filename);
-		@unlink($tmp_filename);
-	}
 	else
 	{
-		message_die(GENERAL_ERROR, $lang['ERROR_NO_ATTACHMENT'] . "<br /><br />" . $filename.  "<br /><br />" .$lang['TOR_NOT_FOUND']);
+		bb_die($lang['ERROR_NO_ATTACHMENT'] . "<br /><br />" . $filename. "<br /><br />" .$lang['TOR_NOT_FOUND']);
 	}
 
 	exit;
@@ -171,26 +98,24 @@ set_die_append_msg();
 
 if (!$download_id)
 {
-	message_die(GENERAL_ERROR, $lang['NO_ATTACHMENT_SELECTED']);
+	bb_die($lang['NO_ATTACHMENT_SELECTED']);
 }
 
 if ($attach_config['disable_mod'] && !IS_ADMIN)
 {
-	message_die(GENERAL_MESSAGE, $lang['ATTACHMENT_FEATURE_DISABLED']);
+	bb_die($lang['ATTACHMENT_FEATURE_DISABLED']);
 }
 
-$sql = 'SELECT *
-	FROM ' . BB_ATTACHMENTS_DESC . '
-	WHERE attach_id = ' . (int) $download_id;
+$sql = 'SELECT * FROM ' . BB_ATTACHMENTS_DESC . ' WHERE attach_id = ' . (int) $download_id;
 
 if (!($result = DB()->sql_query($sql)))
 {
-	message_die(GENERAL_ERROR, 'Could not query attachment informations', '', __LINE__, __FILE__, $sql);
+	bb_die('Could not query attachment information #1');
 }
 
 if (!($attachment = DB()->sql_fetchrow($result)))
 {
-	message_die(GENERAL_MESSAGE, $lang['ERROR_NO_ATTACHMENT']);
+	bb_die($lang['ERROR_NO_ATTACHMENT']);
 }
 
 $attachment['physical_filename'] = basename($attachment['physical_filename']);
@@ -200,13 +125,11 @@ DB()->sql_freeresult($result);
 // get forum_id for attachment authorization or private message authorization
 $authorised = false;
 
-$sql = 'SELECT *
-	FROM ' . BB_ATTACHMENTS . '
-	WHERE attach_id = ' . (int) $attachment['attach_id'];
+$sql = 'SELECT * FROM ' . BB_ATTACHMENTS . ' WHERE attach_id = ' . (int) $attachment['attach_id'];
 
 if (!($result = DB()->sql_query($sql)))
 {
-	message_die(GENERAL_ERROR, 'Could not query attachment informations', '', __LINE__, __FILE__, $sql);
+	bb_die('Could not query attachment information #2');
 }
 
 $auth_pages = DB()->sql_fetchrowset($result);
@@ -218,13 +141,11 @@ for ($i = 0; $i < $num_auth_pages && $authorised == false; $i++)
 
 	if ($auth_pages[$i]['post_id'] != 0)
 	{
-		$sql = 'SELECT forum_id, topic_id
-			FROM ' . BB_POSTS . '
-			WHERE post_id = ' . (int) $auth_pages[$i]['post_id'];
+		$sql = 'SELECT forum_id, topic_id FROM ' . BB_POSTS . ' WHERE post_id = ' . (int) $auth_pages[$i]['post_id'];
 
-		if ( !($result = DB()->sql_query($sql)) )
+		if (!($result = DB()->sql_query($sql)))
 		{
-			message_die(GENERAL_ERROR, 'Could not query post information', '', __LINE__, __FILE__, $sql);
+			bb_die('Could not query post information');
 		}
 
 		$row = DB()->sql_fetchrow($result);
@@ -246,7 +167,7 @@ for ($i = 0; $i < $num_auth_pages && $authorised == false; $i++)
 
 if (!$authorised)
 {
-	message_die(GENERAL_MESSAGE, $lang['SORRY_AUTH_VIEW_ATTACH']);
+	bb_die($lang['SORRY_AUTH_VIEW_ATTACH']);
 }
 
 $datastore->rm('cat_forums');
@@ -264,10 +185,10 @@ for ($i = 0; $i < $num_rows; $i++)
 	$download_mode[$extension] = $rows[$i]['download_mode'];
 }
 
-// disallowed ?
+// Disallowed
 if (!in_array($attachment['extension'], $allowed_extensions) && !IS_ADMIN)
 {
-	message_die(GENERAL_MESSAGE, sprintf($lang['EXTENSION_DISABLED_AFTER_POSTING'], $attachment['extension']));
+	bb_die(sprintf($lang['EXTENSION_DISABLED_AFTER_POSTING'], $attachment['extension']));
 }
 
 $download_mode = intval($download_mode[$attachment['extension']]);
@@ -284,28 +205,14 @@ if (!$thumbnail)
 
 	if (!DB()->sql_query($sql))
 	{
-		message_die(GENERAL_ERROR, 'Couldn\'t update attachment download count', '', __LINE__, __FILE__, $sql);
+		bb_die('Could not update attachment download count');
 	}
 }
 
 // Determine the 'presenting'-method
 if ($download_mode == PHYSICAL_LINK)
 {
-	if (intval($attach_config['allow_ftp_upload']))
-	{
-		if (trim($attach_config['download_path']) == '')
-		{
-			message_die(GENERAL_ERROR, 'Physical Download not possible with the current Attachment Setting');
-		}
-
-		$url = make_url($attach_config['download_path']) . '/' . $attachment['physical_filename'];
-	}
-	else
-	{
-		$url = make_url($upload_dir . '/' . $attachment['physical_filename']);
-	}
-
-	// Behave as per HTTP/1.1 spec for others
+	$url = make_url($upload_dir . '/' . $attachment['physical_filename']);
 	header('Location: ' . $url);
 	exit;
 }
@@ -332,15 +239,6 @@ else
 		require(PAGE_FOOTER);
 	}
 
-	if (intval($attach_config['allow_ftp_upload']))
-	{
-		// We do not need a download path, we are not downloading physically
-		send_file_to_browser($attachment, '');
-		exit;
-	}
-	else
-	{
-		send_file_to_browser($attachment, $upload_dir);
-		exit;
-	}
+	send_file_to_browser($attachment, $upload_dir);
+	exit;
 }

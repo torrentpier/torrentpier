@@ -40,20 +40,13 @@ function attachment_quota_settings($admin_mode, $submit = false, $mode)
 {
 	global $template, $lang, $attach_config;
 
-	if (!intval($attach_config['allow_ftp_upload']))
+	if ($attach_config['upload_dir'][0] == '/' || ($attach_config['upload_dir'][0] != '/' && $attach_config['upload_dir'][1] == ':'))
 	{
-		if ($attach_config['upload_dir'][0] == '/' || ($attach_config['upload_dir'][0] != '/' && $attach_config['upload_dir'][1] == ':'))
-		{
-			$upload_dir = $attach_config['upload_dir'];
-		}
-		else
-		{
-			$upload_dir = BB_ROOT . $attach_config['upload_dir'];
-		}
+		$upload_dir = $attach_config['upload_dir'];
 	}
 	else
 	{
-		$upload_dir = $attach_config['download_path'];
+		$upload_dir = BB_ROOT . $attach_config['upload_dir'];
 	}
 
 	include(BB_ROOT .'attach_mod/includes/functions_selects.php');
@@ -74,7 +67,7 @@ function attachment_quota_settings($admin_mode, $submit = false, $mode)
 
 			if (!$user_id && !$u_name)
 			{
-				message_die(GENERAL_MESSAGE, $lang['NO_USER_ID_SPECIFIED'] );
+				bb_die($lang['NO_USER_ID_SPECIFIED'] );
 			}
 
 			if ($user_id)
@@ -95,7 +88,7 @@ function attachment_quota_settings($admin_mode, $submit = false, $mode)
 
 			if (!$user_id)
 			{
-				message_die(GENERAL_MESSAGE, $lang['NO_USER_ID_SPECIFIED'] );
+				bb_die($lang['NO_USER_ID_SPECIFIED'] );
 			}
 		}
 	}
@@ -103,12 +96,11 @@ function attachment_quota_settings($admin_mode, $submit = false, $mode)
 	if ($admin_mode == 'user' && !$submit && $mode != 'save')
 	{
 		// Show the contents
-		$sql = 'SELECT quota_limit_id, quota_type FROM ' . BB_QUOTA . '
-			WHERE user_id = ' . (int) $user_id;
+		$sql = 'SELECT quota_limit_id, quota_type FROM ' . BB_QUOTA . ' WHERE user_id = ' . (int) $user_id;
 
-		if( !($result = DB()->sql_query($sql)) )
+		if (!($result = DB()->sql_query($sql)))
 		{
-			message_die(GENERAL_ERROR, 'Unable to get Quota Settings', '', __LINE__, __FILE__, $sql);
+			bb_die('Unable to get quota settings #1');
 		}
 
 		$pm_quota = $upload_quota = 0;
@@ -169,12 +161,11 @@ function attachment_quota_settings($admin_mode, $submit = false, $mode)
 		$group_id = get_var(POST_GROUPS_URL, 0);
 
 		// Show the contents
-		$sql = 'SELECT quota_limit_id, quota_type FROM ' . BB_QUOTA . '
-			WHERE group_id = ' . (int) $group_id;
+		$sql = 'SELECT quota_limit_id, quota_type FROM ' . BB_QUOTA . ' WHERE group_id = ' . (int) $group_id;
 
-		if( !($result = DB()->sql_query($sql)) )
+		if (!($result = DB()->sql_query($sql)))
 		{
-			message_die(GENERAL_ERROR, 'Unable to get Quota Settings', '', __LINE__, __FILE__, $sql);
+			bb_die('Unable to get quota settings #2');
 		}
 
 		$pm_quota = $upload_quota = 0;

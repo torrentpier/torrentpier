@@ -33,7 +33,7 @@ class report_user extends report_module
 			FROM ' . BB_USERS . '
 			WHERE user_id = ' . (int)$report_subject;
 		if (!$result = DB()->sql_query($sql)) {
-			message_die(GENERAL_ERROR, 'Could not obtain report subject', '', __LINE__, __FILE__, $sql);
+			bb_die('Could not obtain report subject');
 		}
 
 		$row = DB()->sql_fetchrow($result);

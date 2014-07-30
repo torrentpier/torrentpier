@@ -1,4 +1,3 @@
-
 <!-- IF TPL_ATTACH_SPECIAL_CATEGORIES -->
 <!--========================================================================-->
 
@@ -140,48 +139,6 @@
 		<td class="row1" width="80%">{L_PM_ATTACHMENTS}<br /><span class="small">{L_PM_ATTACHMENTS_EXPLAIN}</span></td>
 		<td class="row2"><input type="radio" name="allow_pm_attach" value="1" {PM_ATTACH_YES} /> {L_YES}&nbsp;&nbsp;<input type="radio" name="allow_pm_attach" value="0" {PM_ATTACH_NO} /> {L_NO}</td>
 	</tr>
-<!-- BEGIN switch_ftp -->
-	<tr>
-		<td class="row1" width="80%">{L_FTP_UPLOAD}<br /><span class="small">{L_FTP_UPLOAD_EXPLAIN}</span></td>
-		<td class="row2"><input type="radio" name="allow_ftp_upload" value="1" {FTP_UPLOAD_YES} /> {L_YES}&nbsp;&nbsp;<input type="radio" name="allow_ftp_upload" value="0" {FTP_UPLOAD_NO} /> {L_NO}</td>
-	</tr>
-	<tr>
-	  <th colspan="2">{L_FTP_INFO}</th>
-	</tr>
-	<tr>
-		<td class="row1" width="80%">{L_FTP_SERVER}<br /><span class="small">{L_FTP_SERVER_EXPLAIN}</span></td>
-		<td class="row2"><input type="text" size="20" maxlength="100" name="ftp_server" class="post" value="{FTP_SERVER}" /></td>
-	</tr>
-	<tr>
-		<td class="row1" width="80%">{L_ATTACH_FTP_PATH}<br /><span class="small">{L_ATTACH_FTP_PATH_EXPLAIN}</span></td>
-		<td class="row2"><input type="text" size="20" maxlength="100" name="ftp_path" class="post" value="{FTP_PATH}" /></td>
-	</tr>
-	<tr>
-		<td class="row1" width="80%">{L_FTP_DOWNLOAD_PATH}<br /><span class="small">{L_FTP_DOWNLOAD_PATH_EXPLAIN}</span></td>
-		<td class="row2"><input type="text" size="20" maxlength="100" name="download_path" class="post" value="{DOWNLOAD_PATH}" /></td>
-	</tr>
-	<tr>
-		<td class="row1" width="80%">{L_FTP_PASSIVE_MODE}<br /><span class="small">{L_FTP_PASSIVE_MODE_EXPLAIN}</span></td>
-		<td class="row2"><input type="radio" name="ftp_pasv_mode" value="1" {FTP_PASV_MODE_YES} /> {L_YES}&nbsp;&nbsp;<input type="radio" name="ftp_pasv_mode" value="0" {FTP_PASV_MODE_NO} /> {L_NO}</td>
-	</tr>
-	<tr>
-		<td class="row1" width="80%">{L_FTP_USERNAME}</td>
-		<td class="row2"><input type="text" size="20" maxlength="100" name="ftp_user" class="post" value="{FTP_USER}" /></td>
-	</tr>
-	<tr>
-		<td class="row1" width="80%">{L_FTP_PASSWORD}</td>
-		<td class="row2"><input type="password" size="10" maxlength="20" name="ftp_pass" class="post" value="{FTP_PASS}" /></td>
-	</tr>
-<!-- END switch_ftp -->
-<!-- BEGIN switch_no_ftp -->
-	<input type="hidden" name="allow_ftp_upload" value="0" />
-	<tr>
-	  <th colspan="2">{L_FTP_INFO}</th>
-	</tr>
-	<tr>
-	  <td class="row1" colspan="2" align="center"><span class="gen">{L_NO_FTP_EXTENSIONS_INSTALLED}</span></td>
-	</tr>
-<!-- END switch_no_ftp -->
 	<tr>
 		<td class="catBottom" colspan="2">{S_HIDDEN_FIELDS}<input type="submit" name="submit" value="{L_SUBMIT}" class="mainoption" />&nbsp;&nbsp;<input type="reset" value="{L_RESET}" class="liteoption" />&nbsp;&nbsp;<input type="submit" name="settings" value="{L_TEST_SETTINGS}" class="liteoption" /></td>
 	</tr>

@@ -73,7 +73,7 @@ function report_modules_obtain()
 			FROM ' . BB_REPORTS_MODULES . '
 			ORDER BY report_module_order';
 		if (!$result = DB()->sql_query($sql)) {
-			message_die(GENERAL_ERROR, 'Could not obtain report modules', '', __LINE__, __FILE__, $sql);
+			bb_die('Could not obtain report modules');
 		}
 
 		$modules = DB()->sql_fetchrowset($result);
@@ -284,7 +284,7 @@ function report_notify($mode)
 			if ($report['report_reason_id']) {
 				$sql = 'SELECT report_reason_desc FROM ' . BB_REPORTS_REASONS . ' WHERE report_reason_id = ' . $report['report_reason_id'];
 				if (!$result = DB()->sql_query($sql)) {
-					message_die(GENERAL_ERROR, 'Could not obtain report reason desc', '', __LINE__, __FILE__, $sql);
+					bb_die('Could not obtain report reason desc');
 				}
 
 				$row = DB()->sql_fetchrow($result);
@@ -303,7 +303,7 @@ function report_notify($mode)
 					AND user_level ' . $user_level_sql . '
 					AND user_id <> ' . $userdata['user_id'];
 			if (!$result = DB()->sql_query($sql)) {
-				message_die(GENERAL_ERROR, 'Could not obtain administrators and moderators', '', __LINE__, __FILE__, $sql);
+				bb_die('Could not obtain administrators and moderators #1');
 			}
 
 			$notify_users[$report['report_id']] = array();
@@ -349,7 +349,7 @@ function report_notify($mode)
 					ON u.user_id = rc.user_id
 				WHERE r.report_id IN(' . implode(', ', $report_ids) . ')';
 			if (!$result = DB()->sql_query($sql)) {
-				message_die(GENERAL_ERROR, 'Could not obtain report information', '', __LINE__, __FILE__, $sql);
+				bb_die('Could not obtain report information');
 			}
 
 			$auth_check_array = array();
@@ -376,7 +376,7 @@ function report_notify($mode)
 					AND user_level ' . $user_level_sql . '
 					AND user_id <> ' . $userdata['user_id'];
 			if (!$result = DB()->sql_query($sql)) {
-				message_die(GENERAL_ERROR, 'Could not obtain administrators and moderators', '', __LINE__, __FILE__, $sql);
+				bb_die('Could not obtain administrators and moderators #2');
 			}
 
 			$auth_options = array('auth_view', 'auth_notify');
@@ -530,7 +530,7 @@ function report_count_obtain()
 		if (!CACHE('bb_cache')->get('report_count_obtain_exp') || (CACHE('bb_cache')->get('report_count_obtain_exp') + 300) < TIMENOW) {
 			$sql = 'SELECT COUNT(report_id) AS report_count FROM ' . BB_REPORTS . ' WHERE report_status IN(' . REPORT_NEW . ', ' . REPORT_OPEN . ')';
 			if (!$result = DB()->sql_query($sql)) {
-				message_die(GENERAL_ERROR, 'Could not obtain report count', '', __LINE__, __FILE__, $sql);
+				bb_die('Could not obtain report count #1');
 			}
 			$report_count = DB()->sql_fetchfield('report_count', 0, $result);
 			DB()->sql_freeresult($result);
@@ -548,7 +548,7 @@ function report_count_obtain()
 			WHERE report_status IN(' . REPORT_NEW . ', ' . REPORT_OPEN . ')
 				AND rm.auth_view <= ' . REPORT_AUTH_MOD;
 		if (!$result = DB()->sql_query($sql)) {
-			message_die(GENERAL_ERROR, 'Could not obtain report count', '', __LINE__, __FILE__, $sql);
+			bb_die('Could not obtain report count #2');
 		}
 
 		$report_count = DB()->sql_fetchfield('report_count', 0, $result);
@@ -558,7 +558,7 @@ function report_count_obtain()
 			FROM ' . BB_REPORTS . '
 			WHERE report_status IN(' . REPORT_NEW . ', ' . REPORT_OPEN . ')';
 		if (!$result = DB()->sql_query($sql)) {
-			message_die(GENERAL_ERROR, 'Could not check report auth', '', __LINE__, __FILE__, $sql);
+			bb_die('Could not check report auth');
 		}
 
 		$reports = DB()->sql_fetchrowset($result);
@@ -598,7 +598,7 @@ function reports_obtain($module_id = null, $auth_check = true)
 			$where_sql
 		ORDER BY r.report_status ASC, r.report_time DESC";
 	if (!$result = DB()->sql_query($sql)) {
-		message_die(GENERAL_ERROR, 'Could not obtain reports', '', __LINE__, __FILE__, $sql);
+		bb_die('Could not obtain reports #1');
 	}
 
 	$rows = DB()->sql_fetchrowset($result);
@@ -648,7 +648,7 @@ function reports_open_obtain($module_id, $report_subject, $auth_check = true)
 			AND r.report_subject = ' . (int)$report_subject . '
 		ORDER BY r.report_status ASC, r.report_time DESC';
 	if (!$result = DB()->sql_query($sql)) {
-		message_die(GENERAL_ERROR, 'Could not obtain open reports', '', __LINE__, __FILE__, $sql);
+		bb_die('Could not obtain open reports');
 	}
 
 	$reports = DB()->sql_fetchrowset($result);
@@ -686,7 +686,7 @@ function reports_deleted_obtain($auth_check = true)
 		WHERE r.report_status = ' . REPORT_DELETE . '
 		ORDER BY r.report_time DESC';
 	if (!$result = DB()->sql_query($sql)) {
-		message_die(GENERAL_ERROR, 'Could not obtain deleted reports', '', __LINE__, __FILE__, $sql);
+		bb_die('Could not obtain deleted reports');
 	}
 
 	$reports = DB()->sql_fetchrowset($result);
@@ -727,7 +727,7 @@ function report_obtain($report_id, $auth_check = true)
 			ON u.user_id = r.user_id
 		WHERE r.report_id = ' . (int)$report_id;
 	if (!$result = DB()->sql_query($sql)) {
-		message_die(GENERAL_ERROR, 'Could not obtain report', '', __LINE__, __FILE__, $sql);
+		bb_die('Could not obtain reports #2');
 	}
 
 	$report = DB()->sql_fetchrow($result);
@@ -771,7 +771,7 @@ function report_changes_obtain($report_id)
 		WHERE rc.report_id = ' . (int)$report_id . '
 		ORDER BY rc.report_change_time';
 	if (!$result = DB()->sql_query($sql)) {
-		message_die(GENERAL_ERROR, 'Could not obtain report changes', '', __LINE__, __FILE__, $sql);
+		bb_die('Could not obtain report changes');
 	}
 
 	$report_changes = DB()->sql_fetchrowset($result);
@@ -795,7 +795,7 @@ function report_duplicate_check($module_id, $report_subject)
 			AND report_subject = ' . (int)$report_subject . '
 			AND report_status NOT IN(' . REPORT_CLEARED . ', ' . REPORT_DELETE . ')';
 	if (!$result = DB()->sql_query($sql)) {
-		message_die(GENERAL_ERROR, 'Could not check for duplicate reports', '', __LINE__, __FILE__, $sql);
+		bb_die('Could not check for duplicate reports');
 	}
 
 	$count = DB()->sql_fetchfield('count', 0, $result);
@@ -820,7 +820,7 @@ function report_prune($module_id, $prune_time)
 			AND r.report_status IN(' . REPORT_CLEARED . ', ' . REPORT_DELETE . ')
 			AND rc.report_change_time < ' . (TIMENOW - (int)$prune_time);
 	if (!$result = DB()->sql_query($sql)) {
-		message_die(GENERAL_ERROR, 'Could not obtain old reports', '', __LINE__, __FILE__, $sql);
+		bb_die('Could not obtain old reports #1');
 	}
 
 	$reports = $report_ids = array();
@@ -839,7 +839,7 @@ function report_prune($module_id, $prune_time)
 	// Set last prune date
 	$sql = 'UPDATE ' . BB_REPORTS_MODULES . ' SET report_module_last_prune = ' . TIMENOW . ' WHERE report_module_id = ' . (int)$module_id;
 	if (!DB()->sql_query($sql)) {
-		message_die(GENERAL_ERROR, 'Could not delete old reports', '', __LINE__, __FILE__, $sql);
+		bb_die('Could not delete old reports #2');
 	}
 }
 
@@ -880,7 +880,7 @@ function report_insert($module_id, $report_subject, $report_reason, $report_titl
 			' . (int)$report_subject . ", $report_subject_data_sql, '" . DB()->escape($report_title) . "',
 			'" . DB()->escape($report_desc) . "')";
 	if (!DB()->sql_query($sql)) {
-		message_die(GENERAL_ERROR, 'Could not insert report', '', __LINE__, __FILE__, $sql);
+		bb_die('Could not insert report');
 	}
 
 	$report_id = DB()->sql_nextid();
@@ -913,7 +913,7 @@ function report_insert($module_id, $report_subject, $report_reason, $report_titl
 	if (isset($bb_cfg['report_hack_count'])) {
 		$sql = 'UPDATE ' . BB_CONFIG . " SET config_value = config_value + 1 WHERE config_name = 'report_hack_count'";
 		if (!DB()->sql_query($sql)) {
-			message_die(GENERAL_ERROR, 'Could not update report hack count', '', __LINE__, __FILE__, $sql);
+			bb_die('Could not update report hack count');
 		}
 	}
 
@@ -943,7 +943,7 @@ function reports_update_status($report_ids, $report_status, $comment = '', $auth
 			FROM ' . BB_REPORTS . '
 			WHERE report_id IN(' . implode(', ', $report_ids) . ')';
 		if (!$result = DB()->sql_query($sql)) {
-			message_die(GENERAL_ERROR, 'Could not obtain reports', '', __LINE__, __FILE__, $sql);
+			bb_die('Could not obtain reports #3');
 		}
 
 		$reports = DB()->sql_fetchrowset($result);
@@ -969,7 +969,7 @@ function reports_update_status($report_ids, $report_status, $comment = '', $auth
 		$sql = 'INSERT INTO ' . BB_REPORTS_CHANGES . " (report_id, user_id, report_change_time, report_status, report_change_comment)
 			VALUES($report_id, " . $userdata['user_id'] . ', ' . TIMENOW . ", $report_status, '$comment')";
 		if (!DB()->sql_query($sql)) {
-			message_die(GENERAL_ERROR, 'Could not insert report change', __LINE__, __FILE__, $sql);
+			bb_die('Could not insert report change');
 		}
 
 		$change_id = DB()->sql_nextid();
@@ -981,7 +981,7 @@ function reports_update_status($report_ids, $report_status, $comment = '', $auth
 				report_last_change = " . (int)$change_id . "
 			WHERE report_id = $report_id";
 		if (!DB()->sql_query($sql)) {
-			message_die(GENERAL_ERROR, 'Could not update reports status', '', __LINE__, __FILE__, $sql);
+			bb_die('Could not update reports status');
 		}
 	}
 
@@ -1016,7 +1016,7 @@ function reports_delete($report_ids, $auth_check = true, $module_action = true)
 			FROM ' . BB_REPORTS . '
 			WHERE report_id IN(' . implode(', ', $report_ids) . ')';
 		if (!$result = DB()->sql_query($sql)) {
-			message_die(GENERAL_ERROR, 'Could not obtain reports', '', __LINE__, __FILE__, $sql);
+			bb_die('Could not obtain reports #4');
 		}
 
 		$reports = DB()->sql_fetchrowset($result);
@@ -1055,13 +1055,13 @@ function reports_delete($report_ids, $auth_check = true, $module_action = true)
 	// Delete reports
 	$sql = 'DELETE FROM ' . BB_REPORTS . " WHERE report_id IN($reports_sql)";
 	if (!DB()->sql_query($sql)) {
-		message_die(GENERAL_ERROR, 'Could not delete reports', '', __LINE__, __FILE__, $sql);
+		bb_die('Could not delete reports');
 	}
 
 	// Delete report status changes
 	$sql = 'DELETE FROM ' . BB_REPORTS_CHANGES . " WHERE report_id IN($reports_sql)";
 	if (!DB()->sql_query($sql)) {
-		message_die(GENERAL_ERROR, 'Could not delete reports changes', '', __LINE__, __FILE__, $sql);
+		bb_die('Could not delete reports changes');
 	}
 
 	// Execute module action
@@ -1089,7 +1089,7 @@ function report_statistics($mode)
 			$sql = 'SELECT COUNT(report_id) AS report_count
 				FROM ' . BB_REPORTS;
 			if (!$result = DB()->sql_query($sql)) {
-				message_die(GENERAL_ERROR, 'Could not obtain report statistics', '', __LINE__, __FILE__, $sql);
+				bb_die('Could not obtain report statistics');
 			}
 
 			$report_count = DB()->sql_fetchfield('report_count', 0, $result);
@@ -1130,7 +1130,7 @@ function user_moderated_forums($user_id)
 				AND aa.forum_perm = 8
 			GROUP BY aa.forum_id';
 		if (!$result = DB()->sql_query($sql)) {
-			message_die(GENERAL_ERROR, 'Could not obtain moderated forums', '', __LINE__, __FILE__, $sql);
+			bb_die('Could not obtain moderated forums');
 		}
 
 		$moderators[$user_id] = array();

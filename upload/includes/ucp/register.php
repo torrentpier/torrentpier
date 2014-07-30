@@ -346,11 +346,11 @@ foreach ($profile_fields as $field => $can_edit)
 					{
 						$errors[] = $lang['WRONG_BIRTHDAY_FORMAT'];
 					}
-					elseif (bb_date(TIMENOW, 'Y', 'false') - $birthday_date['year'] > $bb_cfg['birthday_max_age'])
+					elseif (bb_date(TIMENOW, 'Y', false) - $birthday_date['year'] > $bb_cfg['birthday_max_age'])
 					{
 						$errors[] = sprintf($lang['BIRTHDAY_TO_HIGH'], $bb_cfg['birthday_max_age']);
 					}
-					elseif (bb_date(TIMENOW, 'Y', 'false') - $birthday_date['year'] < $bb_cfg['birthday_min_age'])
+					elseif (bb_date(TIMENOW, 'Y', false) - $birthday_date['year'] < $bb_cfg['birthday_min_age'])
 					{
 						$errors[] = sprintf($lang['BIRTHDAY_TO_LOW'], $bb_cfg['birthday_min_age']);
 					}

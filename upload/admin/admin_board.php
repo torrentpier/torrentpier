@@ -26,7 +26,7 @@ $return_links = array(
 $sql = "SELECT * FROM " . BB_CONFIG;
 if(!$result = DB()->sql_query($sql))
 {
-	message_die(CRITICAL_ERROR, "Could not query config information in admin_board", "", __LINE__, __FILE__, $sql);
+	bb_die('Could not query config information in admin_board');
 }
 else
 {
@@ -47,16 +47,9 @@ else
 		}
 	}
 
-	if( isset($_POST['submit']) )
+	if (isset($_POST['submit']))
 	{
-		if ($mode == 'config')
-		{
-			message_die(GENERAL_MESSAGE, $lang['CONFIG_UPDATED'] . $return_links['config'] . $return_links['index']);
-		}
-		elseif ($mode == 'config_mods')
-		{
-			message_die(GENERAL_MESSAGE, $lang['CONFIG_UPDATED'] . $return_links['config_mods'] . $return_links['index']);
-		}
+		bb_die($lang['CONFIG_UPDATED'] . $return_links[$mode] . $return_links['index']);
 	}
 }
 

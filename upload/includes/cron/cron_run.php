@@ -123,7 +123,7 @@ foreach ($cron_jobs as $job)
 	}
 	else
 	{
-		$cron_err_msg = "Can't run \"{$job['cron_title']}\" : file \"$job_script\" not found". LOG_LF;
+		$cron_err_msg = "Can not run \"{$job['cron_title']}\" : file \"$job_script\" not found". LOG_LF;
 		bb_log($cron_err_msg, 'cron_error');
 	}
 }

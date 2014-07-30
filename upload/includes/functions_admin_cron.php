@@ -6,12 +6,10 @@ function run_jobs($jobs)
 
 	define('IN_CRON', true);
 
-	$sql = "SELECT cron_script
-			FROM " . BB_CRON ."
-			WHERE cron_id IN ($jobs)";
+	$sql = "SELECT cron_script FROM " . BB_CRON ." WHERE cron_id IN ($jobs)";
 	if (!$result = DB()->sql_query($sql))
 	{
-		message_die(GENERAL_ERROR, 'Could not obtain cron script', '', __LINE__, __FILE__, $sql);
+		bb_die('Could not obtain cron script');
 	}
 
 	while ($row = DB()->sql_fetchrow($result))
@@ -84,19 +82,19 @@ function insert_cron_job($cron_arr)
 {
 	$row = DB()->fetch_row("SELECT cron_title, cron_script FROM ". BB_CRON ." WHERE cron_title = '". $_POST['cron_title'] ."' or cron_script = '". $_POST['cron_script'] ."' ");
 
-    if($row)
+	if ($row)
 	{
-	    global $lang;
+		global $lang;
 
 		if ($_POST['cron_script'] == $row['cron_script'])
 		{
-		    $langmode = $lang['SCRIPT_DUPLICATE'];
+			$langmode = $lang['SCRIPT_DUPLICATE'];
 		}
 		else $langmode = $lang['TITLE_DUPLICATE'];
 
 		$message = $langmode . "<br /><br />" . sprintf($lang['CLICK_RETURN_JOBS_ADDED'], "<a href=\"javascript:history.back(-1)\">", "</a>") . "<br /><br />" . sprintf($lang['CLICK_RETURN_JOBS'], "<a href=\"admin_cron.php?mode=list\">", "</a>") . "<br /><br />" . sprintf($lang['CLICK_RETURN_ADMIN_INDEX'], "<a href=\"index.php?pane=right\">", "</a>");
 
-		message_die(GENERAL_MESSAGE, $message);
+		bb_die($message);
 	}
 
 	$cron_active = $cron_arr['cron_active'];

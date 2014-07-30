@@ -180,46 +180,6 @@ function is_forum_authed($auth_cache, $check_forum_id)
 }
 
 /**
-* Init FTP Session
-*/
-function attach_init_ftp($mode = false)
-{
-	global $lang, $attach_config;
-
-	$server = (trim($attach_config['ftp_server']) == '') ? 'localhost' : trim($attach_config['ftp_server']);
-
-	$ftp_path = ($mode == MODE_THUMBNAIL) ? trim($attach_config['ftp_path']) . '/' . THUMB_DIR : trim($attach_config['ftp_path']);
-
-	$conn_id = @ftp_connect($server);
-
-	if (!$conn_id)
-	{
-		message_die(GENERAL_ERROR, sprintf($lang['FTP_ERROR_CONNECT'], $server));
-	}
-
-	$login_result = @ftp_login($conn_id, $attach_config['ftp_user'], $attach_config['ftp_pass']);
-
-	if (!$login_result)
-	{
-		message_die(GENERAL_ERROR, sprintf($lang['FTP_ERROR_LOGIN'], $attach_config['ftp_user']));
-	}
-
-	if (!@ftp_pasv($conn_id, intval($attach_config['ftp_pasv_mode'])))
-	{
-		message_die(GENERAL_ERROR, $lang['FTP_ERROR_PASV_MODE']);
-	}
-
-	$result = @ftp_chdir($conn_id, $ftp_path);
-
-	if (!$result)
-	{
-		message_die(GENERAL_ERROR, sprintf($lang['FTP_ERROR_PATH'], $ftp_path));
-	}
-
-	return $conn_id;
-}
-
-/**
 * Deletes an Attachment
 */
 function unlink_attach($filename, $mode = false)
@@ -228,81 +188,18 @@ function unlink_attach($filename, $mode = false)
 
 	$filename = basename($filename);
 
-	if (!intval($attach_config['allow_ftp_upload']))
+	if ($mode == MODE_THUMBNAIL)
 	{
-		if ($mode == MODE_THUMBNAIL)
-		{
-			$filename = $upload_dir . '/' . THUMB_DIR . '/t_' . $filename;
-		}
-		else
-		{
-			$filename = $upload_dir . '/' . $filename;
-		}
-
-		$deleted = @unlink($filename);
-
+		$filename = $upload_dir . '/' . THUMB_DIR . '/t_' . $filename;
 	}
 	else
 	{
-		$conn_id = attach_init_ftp($mode);
-
-		if ($mode == MODE_THUMBNAIL)
-		{
-			$filename = 't_' . $filename;
-		}
-
-		$res = @ftp_delete($conn_id, $filename);
-		if (!$res)
-		{
-			return $deleted;
-		}
-
-		@ftp_quit($conn_id);
-
-		$deleted = true;
+		$filename = $upload_dir . '/' . $filename;
 	}
+
+	$deleted = @unlink($filename);
 
 	return $deleted;
-}
-
-/**
-* FTP File to Location
-*/
-function ftp_file($source_file, $dest_file, $mimetype, $disable_error_mode = false)
-{
-	global $attach_config, $lang, $error, $error_msg;
-
-	$conn_id = attach_init_ftp();
-
-	// Binary or Ascii ?
-	$mode = FTP_BINARY;
-	if (preg_match("/text/i", $mimetype) || preg_match("/html/i", $mimetype))
-	{
-		$mode = FTP_ASCII;
-	}
-
-	$res = @ftp_put($conn_id, $dest_file, $source_file, $mode);
-
-	if (!$res && !$disable_error_mode)
-	{
-		$error = true;
-		if (!empty($error_msg))
-		{
-			$error_msg .= '<br />';
-		}
-		$error_msg = sprintf($lang['FTP_ERROR_UPLOAD'], $attach_config['ftp_path']) . '<br />';
-		@ftp_quit($conn_id);
-		return false;
-	}
-
-	if (!$res)
-	{
-		return false;
-	}
-
-	@ftp_site($conn_id, 'CHMOD 0644 ' . $dest_file);
-	@ftp_quit($conn_id);
-	return true;
 }
 
 /**
@@ -314,50 +211,13 @@ function attachment_exists($filename)
 
 	$filename = basename($filename);
 
-	if (!intval($attach_config['allow_ftp_upload']))
+	if (!@file_exists(@amod_realpath($upload_dir . '/' . $filename)))
 	{
-		if (!@file_exists(@amod_realpath($upload_dir . '/' . $filename)))
-		{
-			return false;
-		}
-		else
-		{
-			return true;
-		}
+		return false;
 	}
 	else
 	{
-		$found = false;
-
-		$conn_id = attach_init_ftp();
-
-		$file_listing = array();
-
-		$file_listing = @ftp_rawlist($conn_id, $filename);
-
-		for ($i = 0, $size = sizeof($file_listing); $i < $size; $i++)
-		{
-			if (preg_match("/([-d])[rwxst-]{9}.* ([0-9]*) ([a-zA-Z]+[0-9: ]*[0-9]) ([0-9]{2}:[0-9]{2}) (.+)/", $file_listing[$i], $regs))
-			{
-				if ($regs[1] == 'd')
-				{
-					$dirinfo[0] = 1;	// Directory == 1
-				}
-				$dirinfo[1] = $regs[2]; // Size
-				$dirinfo[2] = $regs[3]; // Date
-				$dirinfo[3] = $regs[4]; // Filename
-				$dirinfo[4] = $regs[5]; // Time
-			}
-
-			if ($dirinfo[0] != 1 && $dirinfo[4] == $filename)
-			{
-				$found = true;
-			}
-		}
-
-		@ftp_quit($conn_id);
-
-		return $found;
+		return true;
 	}
 }
 
@@ -370,51 +230,13 @@ function thumbnail_exists($filename)
 
 	$filename = basename($filename);
 
-	if (!intval($attach_config['allow_ftp_upload']))
+	if (!@file_exists(@amod_realpath($upload_dir . '/' . THUMB_DIR . '/t_' . $filename)))
 	{
-		if (!@file_exists(@amod_realpath($upload_dir . '/' . THUMB_DIR . '/t_' . $filename)))
-		{
-			return false;
-		}
-		else
-		{
-			return true;
-		}
+		return false;
 	}
 	else
 	{
-		$found = false;
-
-		$conn_id = attach_init_ftp(MODE_THUMBNAIL);
-
-		$file_listing = array();
-
-		$filename = 't_' . $filename;
-		$file_listing = @ftp_rawlist($conn_id, $filename);
-
-		for ($i = 0, $size = sizeof($file_listing); $i < $size; $i++)
-		{
-			if (preg_match("/([-d])[rwxst-]{9}.* ([0-9]*) ([a-zA-Z]+[0-9: ]*[0-9]) ([0-9]{2}:[0-9]{2}) (.+)/", $file_listing[$i], $regs))
-			{
-				if ($regs[1] == 'd')
-				{
-					$dirinfo[0] = 1;	// Directory == 1
-				}
-				$dirinfo[1] = $regs[2]; // Size
-				$dirinfo[2] = $regs[3]; // Date
-				$dirinfo[3] = $regs[4]; // Filename
-				$dirinfo[4] = $regs[5]; // Time
-			}
-
-			if ($dirinfo[0] != 1 && $dirinfo[4] == $filename)
-			{
-				$found = true;
-			}
-		}
-
-		@ftp_quit($conn_id);
-
-		return $found;
+		return true;
 	}
 }
 
@@ -437,7 +259,7 @@ function physical_filename_already_stored($filename)
 
 	if (!($result = DB()->sql_query($sql)))
 	{
-		message_die(GENERAL_ERROR, 'Could not get attachment information for filename: ' . htmlspecialchars($filename), '', __LINE__, __FILE__, $sql);
+		bb_die('Could not get attachment information for filename: ' . htmlspecialchars($filename));
 	}
 	$num_rows = DB()->num_rows($result);
 	DB()->sql_freeresult($result);
@@ -482,9 +304,9 @@ function get_attachments_from_post($post_id_array)
 			AND a.attach_id = d.attach_id
 		ORDER BY d.filetime $display_order";
 
-	if ( !($result = DB()->sql_query($sql)) )
+	if (!($result = DB()->sql_query($sql)))
 	{
-		message_die(GENERAL_ERROR, 'Could not get Attachment Informations for post number ' . $post_id_array, '', __LINE__, __FILE__, $sql);
+		bb_die('Could not get attachment informations for post number ' . $post_id_array);
 	}
 
 	$num_rows = DB()->num_rows($result);
@@ -516,13 +338,11 @@ function get_total_attach_filesize($attach_ids)
 		return 0;
 	}
 
-	$sql = 'SELECT filesize
-		FROM ' . BB_ATTACHMENTS_DESC . "
-		WHERE attach_id IN ($attach_ids)";
+	$sql = 'SELECT filesize FROM ' . BB_ATTACHMENTS_DESC . " WHERE attach_id IN ($attach_ids)";
 
-	if ( !($result = DB()->sql_query($sql)) )
+	if (!($result = DB()->sql_query($sql)))
 	{
-		message_die(GENERAL_ERROR, 'Could not query Total Filesize', '', __LINE__, __FILE__, $sql);
+		bb_die('Could not query total filesize');
 	}
 
 	$total_filesize = 0;
@@ -659,7 +479,7 @@ function user_in_group($user_id, $group_id)
 
 	if (!($result = DB()->sql_query($sql)))
 	{
-		message_die(GENERAL_ERROR, 'Could not get User Group', '', __LINE__, __FILE__, $sql);
+		bb_die('Could not get user group');
 	}
 
 	$num_rows = DB()->num_rows($result);

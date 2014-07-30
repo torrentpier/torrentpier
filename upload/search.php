@@ -851,7 +851,7 @@ redirect(basename(__FILE__));
 // ----------------------------------------------------------- //
 // Functions
 //
-function fetch_search_ids ($sql, $search_type = SEARCH_TYPE_POST, $redirect_to_result = UA_IE)
+function fetch_search_ids ($sql, $search_type = SEARCH_TYPE_POST)
 {
 	global $lang, $search_id, $session_id, $items_found, $per_page;
 
@@ -867,9 +867,8 @@ function fetch_search_ids ($sql, $search_type = SEARCH_TYPE_POST, $redirect_to_r
 
 	// Save results in DB
 	$search_id = make_rand_str(SEARCH_ID_LENGTH);
-	$redirect  = ($redirect_to_result && isset($_POST['submit']));
 
-	if ($items_count > $per_page || $redirect)
+	if ($items_count > $per_page)
 	{
 		$search_array = join(',', $items_found);
 
@@ -895,11 +894,6 @@ function fetch_search_ids ($sql, $search_type = SEARCH_TYPE_POST, $redirect_to_r
 		$values = "'$session_id', $search_type, '$search_id', ". TIMENOW .", '$search_settings', '$search_array'";
 
 		DB()->query("REPLACE INTO ". BB_SEARCH ." ($columns) VALUES ($values)");
-	}
-
-	if ($redirect)
-	{
-		redirect("search.php?id=$search_id");
 	}
 
 	return array_slice($items_found, 0, $per_page);

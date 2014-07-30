@@ -19,7 +19,7 @@ if( isset($_POST['add_name']) )
 
 	if ($disallowed_user == '')
 	{
-		message_die(GENERAL_MESSAGE, $lang['FIELDS_EMPTY']);
+		bb_die($lang['FIELDS_EMPTY']);
 	}
 	if( !validate_username($disallowed_user) )
 	{
@@ -27,19 +27,18 @@ if( isset($_POST['add_name']) )
 	}
 	else
 	{
-		$sql = "INSERT INTO " . BB_DISALLOW . " (disallow_username)
-			VALUES('" . DB()->escape($disallowed_user) . "')";
+		$sql = "INSERT INTO " . BB_DISALLOW . " (disallow_username) VALUES('" . DB()->escape($disallowed_user) . "')";
 		$result = DB()->sql_query( $sql );
-		if ( !$result )
+		if (!$result)
 		{
-			message_die(GENERAL_ERROR, "Could not add disallowed user.", '',__LINE__, __FILE__, $sql);
+			bb_die('Could not add disallowed user');
 		}
 		$message = $lang['DISALLOW_SUCCESSFUL'];
 	}
 
 	$message .= '<br /><br />'. sprintf($lang['CLICK_RETURN_DISALLOWADMIN'], '<a href="admin_disallow.php">', '</a>') . '<br /><br />'. sprintf($lang['CLICK_RETURN_ADMIN_INDEX'], '<a href="index.php?pane=right">', '</a>');
 
-	message_die(GENERAL_MESSAGE, $message);
+	bb_die($message);
 }
 elseif (isset($_POST['delete_name']))
 {
@@ -47,14 +46,14 @@ elseif (isset($_POST['delete_name']))
 
 	$sql = "DELETE FROM " . BB_DISALLOW . " WHERE disallow_id = $disallowed_id";
 	$result = DB()->sql_query($sql);
-	if( !$result )
+	if (!$result)
 	{
-		message_die(GENERAL_ERROR, "Couldn't removed disallowed user.", '',__LINE__, __FILE__, $sql);
+		bb_die('Could not removed disallowed user');
 	}
 
 	$message .= $lang['DISALLOWED_DELETED'] .'<br /><br />'. sprintf($lang['CLICK_RETURN_DISALLOWADMIN'], '<a href="admin_disallow.php">', '</a>') .'<br /><br />'. sprintf($lang['CLICK_RETURN_ADMIN_INDEX'], '<a href="index.php?pane=right">', '</a>');
 
-	message_die(GENERAL_MESSAGE, $message);
+	bb_die($message);
 
 }
 
@@ -63,9 +62,9 @@ elseif (isset($_POST['delete_name']))
 //
 $sql = "SELECT * FROM " . BB_DISALLOW;
 $result = DB()->sql_query($sql);
-if( !$result )
+if (!$result)
 {
-	message_die(GENERAL_ERROR, "Couldn't get disallowed users.", '', __LINE__, __FILE__, $sql );
+	bb_die('Could not get disallowed users');
 }
 
 $disallowed = DB()->sql_fetchrowset($result);
@@ -92,7 +91,7 @@ $disallow_select .= '</select>';
 
 $template->assign_vars(array(
 	'S_DISALLOW_SELECT' => $disallow_select,
-	'S_FORM_ACTION'     => "admin_disallow.php",
+	'S_FORM_ACTION'     => 'admin_disallow.php',
 ));
 
 print_page('admin_disallow.tpl', 'admin');

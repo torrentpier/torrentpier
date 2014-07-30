@@ -791,7 +791,7 @@ class sql_db
 	{
 		if (error_reporting())
 		{
-			if (DEBUG === true)
+			if (DBG_LOG === true)
 			{
 				$err = $this->sql_error();
 				$msg .= "\n". trim(sprintf('#%06d %s', $err['code'], $err['message']));
@@ -940,19 +940,16 @@ class sql_db
 			$id   = $this->dbg_id-1;
 			$htid = 'expl-'. intval($this->link) .'-'. $id;
 			$dbg  = $this->dbg[$id];
-			$file = addslashes($dbg['file']);
-			$line = $dbg['line'];
-			$edit = (DEBUG === true) ? "OpenInEditor('$file', $line);" : '';
 
 			$this->explain_out .= '
 				<table width="98%" cellpadding="0" cellspacing="0" class="bodyline row2 bCenter" style="border-bottom: 0px;">
 				<tr>
-					<th style="height: 22px; cursor: pointer;" align="left" title="Open in editor (double click)" ondblclick="'. $edit .'">&nbsp;'. $dbg['src'] .'&nbsp; ['. sprintf('%.4f', $dbg['time']) .' s]&nbsp; <i>'. $dbg['info'] .'</i></th>
+					<th style="height: 22px; cursor: pointer;" align="left">&nbsp;'. $dbg['src'] .'&nbsp; ['. sprintf('%.4f', $dbg['time']) .' s]&nbsp; <i>'. $dbg['info'] .'</i></th>
 					<th style="height: 22px; cursor: pointer;" align="right" title="Copy to clipboard" onclick="$.copyToClipboard( $(\'#'. $htid .'\').text() );">'. "$this->db_server.$this->selected_db" .' :: Query #'. ($this->num_queries+1) .'&nbsp;</th>
 				</tr>
 				<tr><td colspan="2">'. $this->explain_hold .'</td></tr>
 				</table>
-				<div class="sqlLog"><div id="'. $htid .'" class="sqlLogRow sqlExplain" style="padding: 0px;">'. short_query($dbg['sql'], true) .'&nbsp;&nbsp;'. (UA_IE ? '<br /><br />' : '') .'</div></div>
+				<div class="sqlLog"><div id="'. $htid .'" class="sqlLogRow sqlExplain" style="padding: 0px;">'. short_query($dbg['sql'], true) .'&nbsp;&nbsp;</div></div>
 				<br />';
 			break;
 

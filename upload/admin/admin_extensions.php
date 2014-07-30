@@ -17,20 +17,13 @@ register_shutdown_function('update_attach_extensions');
 require('./pagestart.php');
 // ACP Header - END
 
-if (!intval($attach_config['allow_ftp_upload']))
+if ( ($attach_config['upload_dir'][0] == '/') || ( ($attach_config['upload_dir'][0] != '/') && ($attach_config['upload_dir'][1] == ':') ) )
 {
-	if ( ($attach_config['upload_dir'][0] == '/') || ( ($attach_config['upload_dir'][0] != '/') && ($attach_config['upload_dir'][1] == ':') ) )
-	{
-		$upload_dir = $attach_config['upload_dir'];
-	}
-	else
-	{
-		$upload_dir = BB_ROOT . $attach_config['upload_dir'];
-	}
+	$upload_dir = $attach_config['upload_dir'];
 }
 else
 {
-	$upload_dir = $attach_config['download_path'];
+	$upload_dir = BB_ROOT . $attach_config['upload_dir'];
 }
 
 include(BB_ROOT .'attach_mod/includes/functions_selects.php');
@@ -46,8 +39,8 @@ if (!isset($lang['TEST_SETTINGS_SUCCESSFUL']))
 $types_download = array(INLINE_LINK, PHYSICAL_LINK);
 $modes_download = array('inline', 'physical');
 
-$types_category = array(IMAGE_CAT, STREAM_CAT, SWF_CAT);
-$modes_category = array($lang['CATEGORY_IMAGES'], $lang['CATEGORY_STREAM_FILES'], $lang['CATEGORY_SWF_FILES']);
+$types_category = array(IMAGE_CAT);
+$modes_category = array($lang['CATEGORY_IMAGES']);
 
 $size = get_var('size', '');
 $mode = get_var('mode', '');
@@ -60,9 +53,9 @@ $attach_config = array();
 
 $sql = 'SELECT * FROM '. BB_ATTACH_CONFIG;
 
-if ( !($result = DB()->sql_query($sql)) )
+if (!($result = DB()->sql_query($sql)))
 {
-	message_die(GENERAL_ERROR, 'Could not query attachment information', '', __LINE__, __FILE__, $sql);
+	bb_die('Could not query attachment information');
 }
 
 while ($row = DB()->sql_fetchrow($result))
@@ -89,9 +82,9 @@ if ($submit && $mode == 'extensions')
 	}
 
 	$sql = 'SELECT * FROM ' . BB_EXTENSIONS . ' ORDER BY ext_id';
-	if ( !($result = DB()->sql_query($sql)) )
+	if (!($result = DB()->sql_query($sql)))
 	{
-		message_die(GENERAL_ERROR, 'Couldn\'t get Extension Informations.', '', __LINE__, __FILE__, $sql);
+		bb_die('Could not get extension informations #1');
 	}
 
 	$num_rows = DB()->num_rows($result);
@@ -114,7 +107,7 @@ if ($submit && $mode == 'extensions')
 
 				if (!DB()->sql_query($sql))
 				{
-					message_die(GENERAL_ERROR, 'Couldn\'t update Extension Informations', '', __LINE__, __FILE__, $sql);
+					bb_die('Could not update extension informations');
 				}
 			}
 		}
@@ -127,13 +120,11 @@ if ($submit && $mode == 'extensions')
 
 	if ($extension_id_sql != '')
 	{
-		$sql = 'DELETE
-		FROM ' . BB_EXTENSIONS . '
-		WHERE ext_id IN (' . $extension_id_sql . ')';
+		$sql = 'DELETE FROM ' . BB_EXTENSIONS . ' WHERE ext_id IN (' . $extension_id_sql . ')';
 
 		if( !$result = DB()->sql_query($sql) )
 		{
-			message_die(GENERAL_ERROR, 'Could not delete Extensions', '', __LINE__, __FILE__, $sql);
+			bb_die('Could not delete extensions');
 		}
 	}
 
@@ -146,19 +137,18 @@ if ($submit && $mode == 'extensions')
 	if ($extension != '' && $add)
 	{
 		$template->assign_vars(array(
-			'ADD_EXTENSION'			=> $extension,
-			'ADD_EXTENSION_EXPLAIN'	=> $extension_explain)
-		);
+			'ADD_EXTENSION' => $extension,
+			'ADD_EXTENSION_EXPLAIN' => $extension_explain,
+		));
 
 		if (!@$error)
 		{
 			// check extension
-			$sql = 'SELECT extension
-				FROM ' . BB_EXTENSIONS;
+			$sql = 'SELECT extension FROM ' . BB_EXTENSIONS;
 
 			if (!($result = DB()->sql_query($sql)))
 			{
-				message_die(GENERAL_ERROR, 'Could not query Extensions', '', __LINE__, __FILE__, $sql);
+				bb_die('Could not query extensions');
 			}
 
 			$row = DB()->sql_fetchrowset($result);
@@ -193,7 +183,7 @@ if ($submit && $mode == 'extensions')
 
 				if (!DB()->sql_query($sql))
 				{
-					message_die(GENERAL_ERROR, 'Could not add Extension', '', __LINE__, __FILE__, $sql);
+					bb_die('Could not add extension');
 				}
 
 			}
@@ -202,9 +192,7 @@ if ($submit && $mode == 'extensions')
 
 	if (!@$error)
 	{
-		$message = $lang['ATTACH_CONFIG_UPDATED'] . '<br /><br />' . sprintf($lang['CLICK_RETURN_ATTACH_CONFIG'], '<a href="admin_extensions.php?mode=extensions">', '</a>') . '<br /><br />' . sprintf($lang['CLICK_RETURN_ADMIN_INDEX'], '<a href="index.php?pane=right">', '</a>');
-
-		message_die(GENERAL_MESSAGE, $message);
+		bb_die($lang['ATTACH_CONFIG_UPDATED'] . '<br /><br />' . sprintf($lang['CLICK_RETURN_ATTACH_CONFIG'], '<a href="admin_extensions.php?mode=extensions">', '</a>') . '<br /><br />' . sprintf($lang['CLICK_RETURN_ADMIN_INDEX'], '<a href="index.php?pane=right">', '</a>'));
 	}
 }
 
@@ -213,9 +201,9 @@ if ($mode == 'extensions')
 	// Extensions
 	$template->assign_vars(array(
 		'TPL_ATTACH_EXTENSIONS' => true,
-		'S_CANCEL_ACTION' => "admin_extensions.php?mode=extensions",
-		'S_ATTACH_ACTION' => "admin_extensions.php?mode=extensions")
-	);
+		'S_CANCEL_ACTION' => 'admin_extensions.php?mode=extensions',
+		'S_ATTACH_ACTION' => 'admin_extensions.php?mode=extensions',
+	));
 
 	if ($submit)
 	{
@@ -230,13 +218,11 @@ if ($mode == 'extensions')
 		);
 	}
 
-	$sql = 'SELECT *
-		FROM ' . BB_EXTENSIONS . '
-		ORDER BY group_id';
+	$sql = 'SELECT * FROM ' . BB_EXTENSIONS . ' ORDER BY group_id';
 
 	if (!($result = DB()->sql_query($sql)))
 	{
-		message_die(GENERAL_ERROR, 'Couldn\'t get Extension informations', '', __LINE__, __FILE__, $sql);
+		bb_die('Could not get extension informations #2');
 	}
 
 	$extension_row = DB()->sql_fetchrowset($result);
@@ -318,7 +304,7 @@ if ($submit && $mode == 'groups')
 
 		if (!(DB()->sql_query($sql)))
 		{
-			message_die(GENERAL_ERROR, 'Couldn\'t update Extension Groups Informations', '', __LINE__, __FILE__, $sql);
+			bb_die('Could not update extension groups informations');
 		}
 	}
 
@@ -335,7 +321,7 @@ if ($submit && $mode == 'groups')
 
 		if (!($result = DB()->sql_query($sql)))
 		{
-			message_die(GENERAL_ERROR, 'Could not delete Extension Groups', '', __LINE__, __FILE__, $sql);
+			bb_die('Could not delete extension groups');
 		}
 
 		// Set corresponding Extensions to a pending Group
@@ -345,7 +331,7 @@ if ($submit && $mode == 'groups')
 
 		if (!$result = DB()->sql_query($sql))
 		{
-			message_die(GENERAL_ERROR, 'Could not assign Extensions to Pending Group.', '', __LINE__, __FILE__, $sql);
+			bb_die('Could not assign extensions to pending group');
 		}
 	}
 
@@ -363,12 +349,11 @@ if ($submit && $mode == 'groups')
 	if ($extension_group != '' && $add)
 	{
 		// check Extension Group
-		$sql = 'SELECT group_name
-			FROM ' . BB_EXTENSION_GROUPS;
+		$sql = 'SELECT group_name FROM ' . BB_EXTENSION_GROUPS;
 
 		if (!($result = DB()->sql_query($sql)))
 		{
-			message_die(GENERAL_ERROR, 'Could not query Extension Groups Table', '', __LINE__, __FILE__, $sql);
+			bb_die('Could not query extension groups table');
 		}
 
 		$row = DB()->sql_fetchrowset($result);
@@ -409,7 +394,7 @@ if ($submit && $mode == 'groups')
 
 			if (!(DB()->sql_query($sql)))
 			{
-				message_die(GENERAL_ERROR, 'Could not add Extension Group', '', __LINE__, __FILE__, $sql);
+				bb_die('Could not add extension group');
 			}
 		}
 
@@ -417,9 +402,7 @@ if ($submit && $mode == 'groups')
 
 	if (!@$error)
 	{
-		$message = $lang['ATTACH_CONFIG_UPDATED'] . '<br /><br />' . sprintf($lang['CLICK_RETURN_ATTACH_CONFIG'], '<a href="admin_extensions.php?mode=groups">', '</a>') . '<br /><br />' . sprintf($lang['CLICK_RETURN_ADMIN_INDEX'], '<a href="index.php?pane=right">', '</a>');
-
-		message_die(GENERAL_MESSAGE, $message);
+		bb_die($lang['ATTACH_CONFIG_UPDATED'] . '<br /><br />' . sprintf($lang['CLICK_RETURN_ATTACH_CONFIG'], '<a href="admin_extensions.php?mode=groups">', '</a>') . '<br /><br />' . sprintf($lang['CLICK_RETURN_ADMIN_INDEX'], '<a href="index.php?pane=right">', '</a>'));
 	}
 }
 
@@ -455,12 +438,11 @@ if ($mode == 'groups')
 		'S_ATTACH_ACTION' => "admin_extensions.php?mode=groups")
 	);
 
-	$sql = 'SELECT *
-		FROM ' . BB_EXTENSION_GROUPS;
+	$sql = 'SELECT * FROM ' . BB_EXTENSION_GROUPS;
 
 	if (!($result = DB()->sql_query($sql)))
 	{
-		message_die(GENERAL_ERROR, 'Couldn\'t get Extension Group informations', '', __LINE__, __FILE__, $sql);
+		bb_die('Could not get extension group informations');
 	}
 
 	$extension_group = DB()->sql_fetchrowset($result);
@@ -506,13 +488,11 @@ if ($mode == 'groups')
 
 		if ($viewgroup && $viewgroup == $extension_group[$i]['group_id'])
 		{
-			$sql = 'SELECT comment, extension
-				FROM ' . BB_EXTENSIONS . '
-				WHERE group_id = ' . (int) $viewgroup;
+			$sql = 'SELECT comment, extension FROM ' . BB_EXTENSIONS . ' WHERE group_id = ' . (int) $viewgroup;
 
 			if (!$result = DB()->sql_query($sql))
 			{
-				message_die(GENERAL_ERROR, 'Couldn\'t get Extension informations', '', __LINE__, __FILE__, $sql);
+				bb_die('Could not get extension informations #3');
 			}
 
 			$extension = DB()->sql_fetchrowset($result);
@@ -551,7 +531,7 @@ if (@$add_forum && $e_mode == 'perm' && $group)
 
 	for ($i = 0; $i < sizeof($add_forums_list); $i++)
 	{
-		if ($add_forums_list[$i] == GPERM_ALL)
+		if ($add_forums_list[$i] == 0)
 		{
 			$add_all_forums = TRUE;
 		}
@@ -563,7 +543,7 @@ if (@$add_forum && $e_mode == 'perm' && $group)
 		$sql = 'UPDATE ' . BB_EXTENSION_GROUPS . " SET forum_permissions = '' WHERE group_id = " . (int) $group;
 		if (!($result = DB()->sql_query($sql)))
 		{
-			message_die(GENERAL_ERROR, 'Could not update Permissions', '', __LINE__, __FILE__, $sql);
+			bb_die('Could not update permissions #1');
 		}
 	}
 
@@ -577,7 +557,7 @@ if (@$add_forum && $e_mode == 'perm' && $group)
 
 		if (!($result = DB()->sql_query($sql)))
 		{
-			message_die(GENERAL_ERROR, 'Could not get Group Permissions from ' . BB_EXTENSION_GROUPS, '', __LINE__, __FILE__, $sql);
+			bb_die('Could not get group permissions from ' . BB_EXTENSION_GROUPS);
 		}
 
 		$row = DB()->sql_fetchrow($result);
@@ -607,7 +587,7 @@ if (@$add_forum && $e_mode == 'perm' && $group)
 
 		if (!($result = DB()->sql_query($sql)))
 		{
-			message_die(GENERAL_ERROR, 'Could not update Permissions', '', __LINE__, __FILE__, $sql);
+			bb_die('Could not update permissions #2');
 		}
 	}
 
@@ -626,7 +606,7 @@ if (@$delete_forum && $e_mode == 'perm' && $group)
 
 	if (!($result = DB()->sql_query($sql)))
 	{
-		message_die(GENERAL_ERROR, 'Could not get Group Permissions from ' . BB_EXTENSION_GROUPS, '', __LINE__, __FILE__, $sql);
+		bb_die('Could not get group permissions from ' . BB_EXTENSION_GROUPS);
 	}
 
 	$row = DB()->sql_fetchrow($result);
@@ -650,7 +630,7 @@ if (@$delete_forum && $e_mode == 'perm' && $group)
 
 	if (!($result = DB()->sql_query($sql)))
 	{
-		message_die(GENERAL_ERROR, 'Could not update Permissions', '', __LINE__, __FILE__, $sql);
+		bb_die('Could not update permissions #3');
 	}
 }
 
@@ -664,7 +644,7 @@ if ($e_mode == 'perm' && $group)
 
 	if (!($result = DB()->sql_query($sql)))
 	{
-		message_die(GENERAL_ERROR, 'Could not get Group Name from ' . BB_EXTENSION_GROUPS, '', __LINE__, __FILE__, $sql);
+		bb_die('Could not get group name from ' . BB_EXTENSION_GROUPS);
 	}
 
 	$row = DB()->sql_fetchrow($result);
@@ -686,9 +666,9 @@ if ($e_mode == 'perm' && $group)
 		$act_id = 0;
 		$forum_p = auth_unpack($allowed_forums);
 		$sql = "SELECT forum_id, forum_name FROM " . BB_FORUMS . " WHERE forum_id IN (" . implode(', ', $forum_p) . ")";
-		if ( !($result = DB()->sql_query($sql)) )
+		if (!($result = DB()->sql_query($sql)))
 		{
-			message_die(GENERAL_ERROR, 'Could not get Forum Names', '', __LINE__, __FILE__, $sql);
+			bb_die('Could not get forum names');
 		}
 
 		while ($row = DB()->sql_fetchrow($result))
@@ -713,13 +693,13 @@ if ($e_mode == 'perm' && $group)
 		'A_PERM_ACTION' => "admin_extensions.php?mode=groups&amp;e_mode=perm&amp;e_group=$group")
 	);
 
-	$forum_option_values = array(GPERM_ALL => $lang['PERM_ALL_FORUMS']);
+	$forum_option_values = array(0 => $lang['PERM_ALL_FORUMS']);
 
 	$sql = "SELECT forum_id, forum_name FROM " . BB_FORUMS;
 
-	if ( !($result = DB()->sql_query($sql)) )
+	if (!($result = DB()->sql_query($sql)))
 	{
-		message_die(GENERAL_ERROR, 'Could not get Forums', '', __LINE__, __FILE__, $sql);
+		bb_die('Could not get forums #1');
 	}
 
 	while ($row = DB()->sql_fetchrow($result))
@@ -740,9 +720,9 @@ if ($e_mode == 'perm' && $group)
 
 	$sql = "SELECT forum_id, forum_name FROM " . BB_FORUMS . " WHERE auth_attachments < " . AUTH_ADMIN;
 
-	if ( !($f_result = DB()->sql_query($sql)) )
+	if (!($f_result = DB()->sql_query($sql)))
 	{
-		message_die(GENERAL_ERROR, 'Could not get Forums.', '', __LINE__, __FILE__, $sql);
+		bb_die('Could not get forums #2');
 	}
 
 	while ($row = DB()->sql_fetchrow($f_result))
@@ -754,9 +734,9 @@ if ($e_mode == 'perm' && $group)
 		WHERE allow_group = 1
 		ORDER BY group_name ASC";
 
-		if ( !($result = DB()->sql_query($sql)) )
+		if (!($result = DB()->sql_query($sql)))
 		{
-			message_die(GENERAL_ERROR, 'Could not query Extension Groups.', '', __LINE__, __FILE__, $sql);
+			bb_die('Could not query extension groups');
 		}
 
 		$rows = DB()->sql_fetchrowset($result);

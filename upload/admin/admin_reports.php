@@ -57,7 +57,7 @@ if ($mode == 'config')
 		bb_update_config($config_update);
 		report_modules_cache_clean();
 
-		message_die(GENERAL_MESSAGE, $lang['REPORT_CONFIG_UPDATED'] . $return_links['config'] . $return_links['index']);
+		bb_die($lang['REPORT_CONFIG_UPDATED'] . $return_links['config'] . $return_links['index']);
 	}
 	else
 	{
@@ -86,7 +86,7 @@ else if (isset($_POST[POST_CAT_URL]) || isset($_GET[POST_CAT_URL]))
 
 	if (!$report_module = report_modules('id', $module_id))
 	{
-		message_die(GENERAL_MESSAGE, $lang['REPORT_MODULE_NOT_EXISTS'] . $return_links['admin'] . $return_links['index']);
+		bb_die($lang['REPORT_MODULE_NOT_EXISTS'] . $return_links['admin'] . $return_links['index']);
 	}
 
 	switch ($mode)
@@ -107,7 +107,7 @@ else if (isset($_POST[POST_CAT_URL]) || isset($_GET[POST_CAT_URL]))
 
 				report_module_edit($module_id, $module_notify, $module_prune, $auth_write, $auth_view, $auth_notify, $auth_delete);
 
-				message_die(GENERAL_MESSAGE, $lang['REPORT_MODULE_EDITED'] . $return_links['admin'] . $return_links['index']);
+				bb_die($lang['REPORT_MODULE_EDITED'] . $return_links['admin'] . $return_links['index']);
 			}
 			else if (isset($_POST['cancel']))
 			{
@@ -179,7 +179,7 @@ else if (isset($_POST[POST_CAT_URL]) || isset($_GET[POST_CAT_URL]))
 
 								report_reason_edit($reason_id, $module_id, $reason_desc);
 
-								message_die(GENERAL_MESSAGE, $lang['REPORT_REASON_EDITED'] . $return_links['reasons'] . $return_links['admin'] . $return_links['index']);
+								bb_die($lang['REPORT_REASON_EDITED'] . $return_links['reasons'] . $return_links['admin'] . $return_links['index']);
 							}
 						}
 						else if (isset($_POST['cancel']))
@@ -203,7 +203,7 @@ else if (isset($_POST[POST_CAT_URL]) || isset($_GET[POST_CAT_URL]))
 
 						if (!$report_reason = report_reason_obtain($reason_id))
 						{
-							message_die(GENERAL_MESSAGE, $lang['REPORT_REASON_NOT_EXISTS'] . $return_links['reasons'] . $return_links['admin'] . $return_links['index']);
+							bb_die($lang['REPORT_REASON_NOT_EXISTS'] . $return_links['reasons'] . $return_links['admin'] . $return_links['index']);
 						}
 
 						if (isset($reason_desc))
@@ -240,7 +240,7 @@ else if (isset($_POST[POST_CAT_URL]) || isset($_GET[POST_CAT_URL]))
 						{
 							report_reason_delete($reason_id);
 
-							message_die(GENERAL_MESSAGE, $lang['REPORT_REASON_DELETED'] . $return_links['reasons'] . $return_links['admin'] . $return_links['index']);
+							bb_die($lang['REPORT_REASON_DELETED'] . $return_links['reasons'] . $return_links['admin'] . $return_links['index']);
 						}
 						else if (isset($_POST['cancel']))
 						{
@@ -259,7 +259,7 @@ else if (isset($_POST[POST_CAT_URL]) || isset($_GET[POST_CAT_URL]))
 					break;
 
 					default:
-						message_die(GENERAL_MESSAGE, $lang['REPORT_NOT_SUPPORTED'] . $return_links['reasons'] . $return_links['admin'] . $return_links['index']);
+						bb_die($lang['REPORT_NOT_SUPPORTED'] . $return_links['reasons'] . $return_links['admin'] . $return_links['index']);
 					break;
 				}
 			}
@@ -291,7 +291,7 @@ else if (isset($_POST[POST_CAT_URL]) || isset($_GET[POST_CAT_URL]))
 
 								report_reason_insert($module_id, $reason_desc);
 
-								message_die(GENERAL_MESSAGE, $lang['REPORT_REASON_ADDED'] . $return_links['reasons'] . $return_links['admin'] . $return_links['index']);
+								bb_die($lang['REPORT_REASON_ADDED'] . $return_links['reasons'] . $return_links['admin'] . $return_links['index']);
 							}
 						}
 						else if (isset($_POST['cancel']))
@@ -354,7 +354,7 @@ else if (isset($_POST[POST_CAT_URL]) || isset($_GET[POST_CAT_URL]))
 					break;
 
 					default:
-						message_die(GENERAL_MESSAGE, $lang['REPORT_NOT_SUPPORTED'] . $return_links['reasons'] . $return_links['admin'] . $return_links['index']);
+						bb_die($lang['REPORT_NOT_SUPPORTED'] . $return_links['reasons'] . $return_links['admin'] . $return_links['index']);
 					break;
 				}
 			}
@@ -376,12 +376,12 @@ else if (isset($_POST[POST_CAT_URL]) || isset($_GET[POST_CAT_URL]))
 		case 'sync':
 			if (!method_exists($report_module, 'sync'))
 			{
-				message_die(GENERAL_MESSAGE, $lang['REPORT_NOT_SUPPORTED'] . $return_links['admin'] . $return_links['index']);
+				bb_die($lang['REPORT_NOT_SUPPORTED'] . $return_links['admin'] . $return_links['index']);
 			}
 
 			$report_module->sync();
 
-			message_die(GENERAL_MESSAGE, $lang['REPORT_MODULE_SYNCED'] . $return_links['admin'] . $return_links['index']);
+			bb_die($lang['REPORT_MODULE_SYNCED'] . $return_links['admin'] . $return_links['index']);
 		break;
 
 		//
@@ -392,7 +392,7 @@ else if (isset($_POST[POST_CAT_URL]) || isset($_GET[POST_CAT_URL]))
 			{
 				report_module_uninstall($module_id);
 
-				message_die(GENERAL_MESSAGE, $lang['REPORT_MODULE_UNINSTALLED'] . $return_links['admin'] . $return_links['index']);
+				bb_die($lang['REPORT_MODULE_UNINSTALLED'] . $return_links['admin'] . $return_links['index']);
 			}
 			else if (isset($_POST['cancel']))
 			{
@@ -410,7 +410,7 @@ else if (isset($_POST[POST_CAT_URL]) || isset($_GET[POST_CAT_URL]))
 		break;
 
 		default:
-			message_die(GENERAL_MESSAGE, $lang['REPORT_NOT_SUPPORTED'] . $return_links['admin'] . $return_links['index']);
+			bb_die($lang['REPORT_NOT_SUPPORTED'] . $return_links['admin'] . $return_links['index']);
 		break;
 	}
 }
@@ -420,7 +420,7 @@ else if (isset($_POST['module']) || isset($_GET['module']))
 
 	if (!$report_module = report_modules_inactive('name', $module_name))
 	{
-		message_die(GENERAL_MESSAGE, $lang['REPORT_MODULE_NOT_EXISTS'] . $return_links['admin'] . $return_links['index']);
+		bb_die($lang['REPORT_MODULE_NOT_EXISTS'] . $return_links['admin'] . $return_links['index']);
 	}
 
 	switch ($mode)
@@ -441,7 +441,7 @@ else if (isset($_POST['module']) || isset($_GET['module']))
 
 				report_module_install($module_notify, $module_prune, $module_name, $auth_write, $auth_view, $auth_notify, $auth_delete, false);
 
-				message_die(GENERAL_MESSAGE, $lang['REPORT_MODULE_INSTALLED'] . $return_links['admin'] . $return_links['index']);
+				bb_die($lang['REPORT_MODULE_INSTALLED'] . $return_links['admin'] . $return_links['index']);
 			}
 			else if (isset($_POST['cancel']))
 			{
@@ -474,7 +474,7 @@ else if (isset($_POST['module']) || isset($_GET['module']))
 		break;
 
 		default:
-			message_die(GENERAL_MESSAGE, $lang['REPORT_NOT_SUPPORTED'] . $return_links['admin'] . $return_links['index']);
+			bb_die($lang['REPORT_NOT_SUPPORTED'] . $return_links['admin'] . $return_links['index']);
 		break;
 	}
 }
@@ -554,7 +554,7 @@ else
 		break;
 
 		default:
-			message_die(GENERAL_MESSAGE, $lang['REPORT_NOT_SUPPORTED'] . $return_links['admin'] . $return_links['index']);
+			bb_die($lang['REPORT_NOT_SUPPORTED'] . $return_links['admin'] . $return_links['index']);
 		break;
 	}
 }

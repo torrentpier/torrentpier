@@ -18,4 +18,4 @@ Quick guide:
 	'for_tbdev/announce.php'
 
 Cheers, RoadTrain.
-http://torrentpier.info/
+http://torrentpier.me/

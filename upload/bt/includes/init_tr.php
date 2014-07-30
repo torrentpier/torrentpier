@@ -12,7 +12,7 @@ function tracker_exit ()
 {
 	global $DBS;
 
-	if (DBG_LOG && DBG_LOG_GENTIME)
+	if (DBG_LOG && DBG_TRACKER)
 	{
 		if ($gen_time = utime() - TIMESTART)
 		{
@@ -44,10 +44,7 @@ function error_exit ($msg = '')
 {
 	if (DBG_LOG) dbg_log(' ', '!err-'. clean_filename($msg));
 
-	if (!DEBUG)
-	{
-		silent_exit();
-	}
+	silent_exit();
 
 	echo bencode(array('failure reason' => str_compact($msg)));
 
@@ -430,7 +427,7 @@ class sql_db
 		{
 			if (!$msg) $msg = 'DB Error';
 
-			if (DEBUG === true)
+			if (DBG_TRACKER === true)
 			{
 				$err = $this->sql_error();
 				$msg .= trim(sprintf(' #%06d %s', $err['code'], $err['message']));

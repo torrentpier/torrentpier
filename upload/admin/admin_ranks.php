@@ -50,15 +50,15 @@ if ($mode != '')
 
 		if ($mode == 'edit')
 		{
-			if(empty($rank_id))
+			if (empty($rank_id))
 			{
-				message_die(GENERAL_MESSAGE, $lang['MUST_SELECT_RANK']);
+				bb_die($lang['MUST_SELECT_RANK']);
 			}
 
 			$sql = "SELECT * FROM " . BB_RANKS . " WHERE rank_id = $rank_id";
-			if(!$result = DB()->sql_query($sql))
+			if (!$result = DB()->sql_query($sql))
 			{
-				message_die(GENERAL_ERROR, "Couldn't obtain rank data", '', __LINE__, __FILE__, $sql);
+				bb_die('Could not obtain ranks data #1');
 			}
 
 			$rank_info = DB()->sql_fetchrow($result);
@@ -104,7 +104,7 @@ if ($mode != '')
 
 		if ($rank_title == '')
 		{
-			message_die(GENERAL_MESSAGE, $lang['MUST_SELECT_RANK']);
+			bb_die($lang['MUST_SELECT_RANK']);
 		}
 
 		if ($special_rank == 1)
@@ -131,7 +131,7 @@ if ($mode != '')
 				$sql = "UPDATE " . BB_USERS . " SET user_rank = 0 WHERE user_rank = $rank_id";
 				if (!$result = DB()->sql_query($sql))
 				{
-					message_die(GENERAL_ERROR, $lang['NO_UPDATE_RANKS'], '', __LINE__, __FILE__, $sql);
+					bb_die($lang['NO_UPDATE_RANKS']);
 				}
 			}
 			$sql = "UPDATE " . BB_RANKS . "
@@ -154,15 +154,14 @@ if ($mode != '')
 
 		if (!$result = DB()->sql_query($sql))
 		{
-			message_die(GENERAL_ERROR, "Couldn't update/insert into ranks table", '', __LINE__, __FILE__, $sql);
+			bb_die('Could not update / insert into ranks table');
 		}
 
 		$message .= '<br /><br />' . sprintf($lang['CLICK_RETURN_RANKADMIN'], '<a href="admin_ranks.php">', '</a>') . '<br /><br />' . sprintf($lang['CLICK_RETURN_ADMIN_INDEX'], '<a href="index.php?pane=right">', '</a>');
 
 		$datastore->update('ranks');
 
-		message_die(GENERAL_MESSAGE, $message);
-
+		bb_die($message);
 	}
 	elseif ($mode == 'delete')
 	{
@@ -185,29 +184,27 @@ if ($mode != '')
 
 			if (!$result = DB()->sql_query($sql))
 			{
-				message_die(GENERAL_ERROR, "Couldn't delete rank data", '', __LINE__, __FILE__, $sql);
+				bb_die('Could not delete rank data');
 			}
 
 			$sql = "UPDATE " . BB_USERS . " SET user_rank = 0 WHERE user_rank = $rank_id";
 			if (!$result = DB()->sql_query($sql))
 			{
-				message_die(GENERAL_ERROR, $lang['NO_UPDATE_RANKS'], '', __LINE__, __FILE__, $sql);
+				bb_die($lang['NO_UPDATE_RANKS']);
 			}
-
-			$message = $lang['RANK_REMOVED'] . '<br /><br />' . sprintf($lang['CLICK_RETURN_RANKADMIN'], '<a href="admin_ranks.php">', '</a>') . '<br /><br />' . sprintf($lang['CLICK_RETURN_ADMIN_INDEX'], '<a href="index.php?pane=right">', '</a>');
 
 			$datastore->update('ranks');
 
-			message_die(GENERAL_MESSAGE, $message);
+			bb_die($lang['RANK_REMOVED'] . '<br /><br />' . sprintf($lang['CLICK_RETURN_RANKADMIN'], '<a href="admin_ranks.php">', '</a>') . '<br /><br />' . sprintf($lang['CLICK_RETURN_ADMIN_INDEX'], '<a href="index.php?pane=right">', '</a>'));
 		}
 		else
 		{
-			message_die(GENERAL_MESSAGE, $lang['MUST_SELECT_RANK']);
+			bb_die($lang['MUST_SELECT_RANK']);
 		}
 	}
 	else
 	{
-		message_die(GENERAL_MESSAGE, 'Invalid mode');
+		bb_die('Invalid mode');
 	}
 }
 else
@@ -216,12 +213,11 @@ else
 	// Show the default page
 	//
 	$sql = "SELECT * FROM " . BB_RANKS . " ORDER BY rank_min, rank_title";
-	if(!$result = DB()->sql_query($sql))
+	if (!$result = DB()->sql_query($sql))
 	{
-		message_die(GENERAL_ERROR, "Couldn't obtain ranks data", '', __LINE__, __FILE__, $sql);
+		bb_die('Could not obtain ranks data #2');
 	}
 	$rank_count = DB()->num_rows($result);
-
 	$rank_rows = DB()->sql_fetchrowset($result);
 
 	$template->assign_vars(array(

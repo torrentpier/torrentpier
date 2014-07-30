@@ -26,7 +26,7 @@ $tor = DB()->fetch_row("
 
 if (!$tor) $this->ajax_die($lang['TORRENT_FAILED']);
 
-switch($mode)
+switch ($mode)
 {
 	case 'status':
 		$new_status = (int) $this->request['status'];
@@ -96,7 +96,7 @@ switch($mode)
 		$subject = sprintf($lang['TOR_AUTH_TITLE'], $tor['topic_title']);
 		$message = sprintf($lang['TOR_AUTH_MSG'], get_username($tor['checked_user_id']), make_url(TOPIC_URL . $tor['topic_id']), $tor['topic_title']);
 
-		if($comment && $comment != $lang['COMMENT']) $message .= "\n\n[b]". $lang['COMMENT'] .'[/b]: '. $comment;
+		if ($comment && $comment != $lang['COMMENT']) $message .= "\n\n[b]". $lang['COMMENT'] .'[/b]: '. $comment;
 
 		send_pm($tor['checked_user_id'], $subject, $message, $userdata['user_id']);
 		cache_rm_user_sessions($tor['checked_user_id']);

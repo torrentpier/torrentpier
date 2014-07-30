@@ -188,8 +188,7 @@ switch($mode)
 
 	case 'delete':
 		delete_jobs($job_id);
-		$message = $lang['JOB_REMOVED'] . '<br /><br />' . sprintf($lang['CLICK_RETURN_JOBS'], '<a href="admin_cron.php?mode=list">', '</a>') . '<br /><br />' . sprintf($lang['CLICK_RETURN_ADMIN_INDEX'], '<a href="index.php?pane=right">', '</a>');
-		message_die(GENERAL_MESSAGE, $message);
+		bb_die($lang['JOB_REMOVED'] . '<br /><br />' . sprintf($lang['CLICK_RETURN_JOBS'], '<a href="admin_cron.php?mode=list">', '</a>') . '<br /><br />' . sprintf($lang['CLICK_RETURN_ADMIN_INDEX'], '<a href="index.php?pane=right">', '</a>'));
 	break;
 }
 
@@ -221,14 +220,13 @@ if ($submit)
 		{
 			insert_cron_job($_POST);
 		}
-		else bb_die();
+		else bb_die('Mode error');
 
 		redirect('admin/'.basename(__FILE__) . '?mode=list');
 	}
 	else
 	{
-		$message = validate_cron_post($_POST);
-		message_die(GENERAL_MESSAGE, $message);
+		bb_die(validate_cron_post($_POST));
 	}
 }
 

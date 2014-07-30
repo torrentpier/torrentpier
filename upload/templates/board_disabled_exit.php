@@ -32,7 +32,7 @@ if (!empty($_POST['message']))
 
 	<br />
 	<br />
-	<p style="margin: 1em 0; text-align: center;"><?php echo $bb_cfg['board_disabled_msg']; ?></p>
+	<p style="margin: 1em 0; text-align: center;"><?php echo $L['BOARD_DISABLE']; ?></p>
 
 	<?php if ($message) { ?>
 	<br />

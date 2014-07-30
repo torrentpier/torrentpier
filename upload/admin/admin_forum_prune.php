@@ -14,20 +14,15 @@ $all_forums = -1;
 $pruned_total = 0;
 $prune_performed = false;
 
-function return_msg_prune ($status_msg)
-{
-	return $status_msg;
-}
-
 if (isset($_REQUEST['submit']))
 {
 	if (!$var =& $_REQUEST['f'] OR !$f_selected = get_id_ary($var))
 	{
-		message_die(GENERAL_MESSAGE, return_msg_prune('Forum not selected'));
+		bb_die('Forum not selected');
 	}
 	if (!$var =& $_REQUEST['prunedays'] OR !$prunedays = abs(intval($var)))
 	{
-		message_die(GENERAL_MESSAGE, return_msg_prune($lang['NOT_DAYS']));
+		bb_die($lang['NOT_DAYS']);
 	}
 
 	$prunetime = TIMENOW - 86400*$prunedays;
@@ -51,11 +46,11 @@ if (isset($_REQUEST['submit']))
 	}
 	if (!$prune_performed)
 	{
-		message_die(GENERAL_MESSAGE, return_msg_prune($lang['NONE_SELECTED']));
+		bb_die($lang['NONE_SELECTED']);
 	}
 	if (!$pruned_total)
 	{
-		message_die(GENERAL_MESSAGE, return_msg_prune($lang['NO_SEARCH_MATCH']));
+		bb_die($lang['NO_SEARCH_MATCH']);
 	}
 }
 

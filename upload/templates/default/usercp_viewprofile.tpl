@@ -240,7 +240,7 @@ ajax.callback.gen_passkey = function(data){
 			<th>{L_ICQ}:</th>
 			<td class="tLeft med" id="user_icq">
 				<span class="editable">{ICQ}
-					<a href="http://www.icq.com/people/searched=1&uin={ICQ}"><img align="middle" src="http://web.icq.com/whitepages/online?icq={ICQ}&img=5"></a>
+					<a href="http://www.icq.com/people/{ICQ}"><img align="middle" src="http://web.icq.com/whitepages/online?icq={ICQ}&img=5"></a>
 				</span>
 			</td>
 		</tr>

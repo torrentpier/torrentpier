@@ -36,7 +36,7 @@ if ($mode == 'set_dl_status' || $mode == 'set_topics_dl_status')
 	}
 	else
 	{
-		message_die(GENERAL_ERROR, 'Invalid download status');
+		bb_die('Invalid download status');
 	}
 }
 
@@ -80,28 +80,23 @@ if (@$_POST['cancel'])
 	redirect("$redirect_type?$redirect");
 }
 
-//
 // Delete DL-list
-//
 if ($mode == 'dl_delete' && $topic_id)
 {
 	if (!IS_ADMIN)
 	{
-		$sql = "SELECT forum_id
-			FROM ". BB_TOPICS ."
-				WHERE topic_id = $topic_id
-			LIMIT 1";
+		$sql = "SELECT forum_id FROM ". BB_TOPICS ." WHERE topic_id = $topic_id LIMIT 1";
 
 		if (!$row = DB()->sql_fetchrow(DB()->sql_query($sql)))
 		{
-			message_die(GENERAL_ERROR, 'Could not obtain forum_id for this topic', '', __LINE__, __FILE__, $sql);
+			bb_die('Could not obtain forum_id for this topic');
 		}
 
 		$is_auth = auth(AUTH_ALL, $row['forum_id'], $userdata);
 
 		if (!$is_auth['auth_mod'])
 		{
-			message_die(GENERAL_MESSAGE, $lang['NOT_MODERATOR'], $lang['NOT_AUTHORISED']);
+			bb_die($lang['NOT_MODERATOR']);
 		}
 	}
 
@@ -123,10 +118,7 @@ if ($mode == 'dl_delete' && $topic_id)
 	redirect("$redirect_type?$redirect");
 }
 
-//
 // Update DL status
-//
-
 $req_topics_ary = $topics_ary = array();
 
 // Get topics selected by user
@@ -134,7 +126,7 @@ if ($mode == 'set_topics_dl_status')
 {
 	if (!isset($_POST['dl_topics_id_list']) || !is_array($_POST['dl_topics_id_list']))
 	{
-		message_die(GENERAL_MESSAGE, $lang['NONE_SELECTED']);
+		bb_die($lang['NONE_SELECTED']);
 	}
 
 	foreach ($_POST['dl_topics_id_list'] as $topic_id)
@@ -172,7 +164,7 @@ if ($topics_ary && ($mode == 'set_dl_status' || $mode == 'set_topics_dl_status')
 	}
 	$new_dlstatus_sql = DB()->build_array('MULTI_INSERT', $new_dlstatus_ary);
 
-    DB()->query("REPLACE INTO ". BB_BT_DLSTATUS ." $new_dlstatus_sql");
+	DB()->query("REPLACE INTO ". BB_BT_DLSTATUS ." $new_dlstatus_sql");
 
 	redirect("$redirect_type?$redirect");
 }

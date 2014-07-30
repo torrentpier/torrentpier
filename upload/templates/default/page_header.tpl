@@ -4,9 +4,9 @@
 <title><!-- IF PAGE_TITLE -->{PAGE_TITLE} :: {SITENAME}<!-- ELSE -->{SITENAME}<!-- ENDIF --></title>
 <meta http-equiv="Content-Type" content="text/html; charset={L_CONTENT_ENCODING}" />
 <meta http-equiv="Content-Style-Type" content="text/css" />
+<meta property="og:image" content="{SITE_URL}images/logo/logo.png" />
 {META}
 <link rel="stylesheet" href="{STYLESHEET}?v={$bb_cfg['css_ver']}" type="text/css">
-<link rel="icon" type="image/png" href="{SITE_URL}images/logo/logo_big.png" />
 <link rel="shortcut icon" href="{SITE_URL}favicon.ico" type="image/x-icon">
 <link rel="search" type="application/opensearchdescription+xml" href="{SITE_URL}opensearch_desc.xml" title="{SITENAME} (Forum)" />
 <link rel="search" type="application/opensearchdescription+xml" href="{SITE_URL}opensearch_desc_bt.xml" title="{SITENAME} (Tracker)" />
@@ -29,12 +29,6 @@ var postImgAligned_MaxWidth = Math.round(screen.width/3);
 var attachImg_MaxWidth = screen.width - {ATTACH_IMG_WIDTH_DECR_JS};
 var ExternalLinks_InNewWindow = '{EXT_LINK_NEW_WIN}';
 var hidePostImg = false;
-
-function copyText_writeLink(node)
-{
-	if (!is_ie) return;
-	document.write('<p style="float: right;"><a class="txtb" onclick="if (ie_copyTextToClipboard('+node+')) alert(\'{L_CODE_COPIED}\'); return false;" href="#">{L_CODE_COPY}</a></p>');
-}
 </script>
 <!-- ENDIF / INCLUDE_BBCODE_JS -->
 
@@ -128,21 +122,6 @@ input[type="checkbox"] { margin-bottom: -1px; }
 .fieldsets div > p { margin-bottom: 0; }
 </style><![endif]-->
 
-<!-- IF INCLUDE_DEVELOP_JS -->
-<script type="text/javascript">
-var dev = true;
-function OpenInEditor ($file, $line)
-{
-	$editor_path = '{EDITOR_PATH}';
-	$editor_args = '{EDITOR_ARGS}';
-
-	$url = BB_ROOT +'develop/open_editor.php';
-	$url += '?prog='+ $editor_path +'&args='+ $editor_args.sprintf($file, $line);
-
-	window.open($url,'','height=1,width=1,left=1,top=1,resizable=yes,scrollbars=no,toolbar=no');
-}
-</script>
-<!-- ENDIF / INCLUDE_DEVELOP_JS -->
 <style type="text/css">
 	.menu-sub, #ajax-loading, #ajax-error, var.ajax-params, .sp-title, .q-post { display: none; }
 </style>
@@ -255,7 +234,7 @@ function go_to_page ()
 	<b>Вы используете устаревший браузер. Сайт может отображаться некорректно.</b>
 </div>
 <script>
-if ( (typeof(window.opera) != "undefined" && window.opera.version() < 12) || (window.attachEvent && !window.addEventListener) /* IE < 9 */ ) {
+if ( (typeof(window.opera) != "undefined" && window.opera.version() < 13) || (window.attachEvent && !window.addEventListener) /* IE < 9 */ ) {
 	document.getElementById('old-browser-warn').style.display = '';
 }
 </script>
@@ -297,7 +276,7 @@ if ( (typeof(window.opera) != "undefined" && window.opera.version() < 12) || (wi
 <div id="logo">
 	<!--<h1>{SITENAME}</h1>
 	<h6>{SITE_DESCRIPTION}</h6> -->
-	<a href="{U_INDEX}"><img src="images/logo/logo_me.png" alt="{SITENAME}" /></a>
+	<a href="{U_INDEX}"><img src="images/logo/logo.png" alt="{SITENAME}" /></a>
 </div>
 <!--/logo-->
 
@@ -347,8 +326,7 @@ $(document).ready(function() {
 		<a href="{U_WRITE_REPORT}">{L_WRITE_REPORT}</a> &#0183;
 		<!-- END switch_report_general -->
 		<a href="{U_OPTIONS}"><b>{L_OPTIONS}</b></a> &#0183;
-		<a href="{U_CUR_DOWNLOADS}">{L_PROFILE}</a> <a href="#dls-menu" class="menu-root menu-alt1">&#9660;</a> &#0183;
-		<a href="{U_SEARCH_SELF_BY_LAST}">{L_SEARCH_SELF}</a>
+		<a href="{U_CUR_DOWNLOADS}">{L_PROFILE}</a> <a href="#dls-menu" class="menu-root menu-alt1">&#9660;</a>
 	</td>
 </tr>
 </table>

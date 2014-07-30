@@ -129,11 +129,11 @@ if( isset($_POST['submit']) )
 			$sql = "UPDATE " . BB_FORUMS . " SET $sql WHERE forum_id = $forum_id";
 		}
 
-		if ( $sql != '' )
+		if ($sql != '')
 		{
-			if ( !DB()->sql_query($sql) )
+			if (!DB()->sql_query($sql))
 			{
-				message_die(GENERAL_ERROR, 'Could not update auth table', '', __LINE__, __FILE__, $sql);
+				bb_die('Could not update auth table #1');
 			}
 		}
 
@@ -142,11 +142,11 @@ if( isset($_POST['submit']) )
 	}
 	elseif (!empty($cat_id))
 	{
-		for($i = 0; $i < count($forum_auth_fields); $i++)
+		for ($i = 0; $i < count($forum_auth_fields); $i++)
 		{
 			$value = intval($_POST[$forum_auth_fields[$i]]);
 
-			if ( $forum_auth_fields[$i] == 'auth_vote' )
+			if ($forum_auth_fields[$i] == 'auth_vote')
 			{
 				if ( $_POST['auth_vote'] == AUTH_ALL )
 				{
@@ -159,11 +159,11 @@ if( isset($_POST['submit']) )
 
 		$sql = "UPDATE " . BB_FORUMS . " SET $sql WHERE cat_id = $cat_id";
 
-		if ( $sql != '' )
+		if ($sql != '')
 		{
-			if ( !DB()->sql_query($sql) )
+			if (!DB()->sql_query($sql))
 			{
-				message_die(GENERAL_ERROR, 'Could not update auth table', '', __LINE__, __FILE__, $sql);
+				bb_die('Could not update auth table #2');
 			}
 		}
 
@@ -171,8 +171,7 @@ if( isset($_POST['submit']) )
 	}
 
 	$datastore->update('cat_forums');
-	$message = $lang['FORUM_AUTH_UPDATED'] . '<br /><br />' . sprintf($lang['CLICK_RETURN_FORUMAUTH'],  '<a href="admin_forumauth_list.php">', "</a>");
-	message_die(GENERAL_MESSAGE, $message);
+	bb_die($lang['FORUM_AUTH_UPDATED'] . '<br /><br />' . sprintf($lang['CLICK_RETURN_FORUMAUTH'],  '<a href="admin_forumauth_list.php">', "</a>"));
 
 } // End of submit
 
@@ -186,9 +185,9 @@ $sql = "SELECT f.*
 	WHERE c.cat_id = f.cat_id
 	$forum_sql $cat_sql
 	ORDER BY c.cat_order ASC, f.forum_order ASC";
-if ( !($result = DB()->sql_query($sql)) )
+if (!($result = DB()->sql_query($sql)))
 {
-	message_die(GENERAL_ERROR, "Couldn't obtain forum list", "", __LINE__, __FILE__, $sql);
+	bb_die('Could not obtain forum list');
 }
 
 $forum_rows = DB()->sql_fetchrowset($result);
@@ -205,20 +204,20 @@ if( empty($forum_id) && empty($cat_id) )
 		'S_COLUMN_SPAN' => count($forum_auth_fields)+1,
 	));
 
-	for ($i=0; $i<count($forum_auth_fields); $i++)
+	for ($i = 0; $i<count($forum_auth_fields); $i++)
 	{
 		$template->assign_block_vars('forum_auth_titles', array(
-			'CELL_TITLE' => $field_names[$forum_auth_fields[$i]])
-		);
+			'CELL_TITLE' => $field_names[$forum_auth_fields[$i]],
+		));
 	}
 
 	// Obtain the category list
 	$sql = "SELECT c.cat_id, c.cat_title, c.cat_order
 		FROM " . BB_CATEGORIES . " c
 		ORDER BY c.cat_order";
-	if( !($result = DB()->sql_query($sql)) )
+	if (!($result = DB()->sql_query($sql)))
 	{
-		message_die(GENERAL_ERROR, 'Could not query categories list', '', __LINE__, __FILE__, $sql);
+		bb_die('Could not query categories list #1');
 	}
 
 	$category_rows = DB()->sql_fetchrowset($result);
@@ -274,11 +273,11 @@ else
 	// first display the current details for all forums
 	// in the category
 	//
-	for ($i=0; $i<count($forum_auth_fields); $i++)
+	for ($i = 0; $i<count($forum_auth_fields); $i++)
 	{
 		$template->assign_block_vars('forum_auth_titles', array(
-			'CELL_TITLE' => $field_names[$forum_auth_fields[$i]])
-		);
+			'CELL_TITLE' => $field_names[$forum_auth_fields[$i]],
+		));
 	}
 
 	// obtain the category list
@@ -286,9 +285,9 @@ else
 		FROM " . BB_CATEGORIES . " c
 		WHERE c.cat_id = $cat_id
 		ORDER BY c.cat_order";
-	if( !($result = DB()->sql_query($sql)) )
+	if (!($result = DB()->sql_query($sql)))
 	{
-		message_die(GENERAL_ERROR, 'Could not query categories list', '', __LINE__, __FILE__, $sql);
+		bb_die('Could not query categories list #2');
 	}
 
 	$category_rows = DB()->sql_fetchrowset($result);

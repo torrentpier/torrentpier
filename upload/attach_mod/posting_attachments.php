@@ -94,7 +94,7 @@ class attach_parent
 
 				if (!($result = DB()->sql_query($sql)))
 				{
-					message_die(GENERAL_ERROR, 'Could not get User Group', '', __LINE__, __FILE__, $sql);
+					bb_die('Could not get user group');
 				}
 
 				$rows = DB()->sql_fetchrowset($result);
@@ -121,7 +121,7 @@ class attach_parent
 
 					if (!($result = DB()->sql_query($sql)))
 					{
-						message_die(GENERAL_ERROR, 'Could not get Group Quota', '', __LINE__, __FILE__, $sql);
+						bb_die('Could not get group quota');
 					}
 
 					if (DB()->num_rows($result) > 0)
@@ -147,7 +147,7 @@ class attach_parent
 
 				if (!($result = DB()->sql_query($sql)))
 				{
-					message_die(GENERAL_ERROR, 'Could not get User Quota', '', __LINE__, __FILE__, $sql);
+					bb_die('Could not get user quota');
 				}
 
 				if (DB()->num_rows($result) > 0)
@@ -178,7 +178,7 @@ class attach_parent
 
 				if (!($result = DB()->sql_query($sql)))
 				{
-					message_die(GENERAL_ERROR, 'Could not get Default Quota Limit', '', __LINE__, __FILE__, $sql);
+					bb_die('Could not get default quota limit');
 				}
 
 				if (DB()->num_rows($result) > 0)
@@ -425,13 +425,11 @@ class attach_parent
 							}
 							else
 							{
-								$sql = 'UPDATE ' . BB_ATTACHMENTS_DESC . '
-									SET thumbnail = 0
-									WHERE attach_id = ' . (int) $actual_id_list[$i];
+								$sql = 'UPDATE ' . BB_ATTACHMENTS_DESC . ' SET thumbnail = 0 WHERE attach_id = ' . (int) $actual_id_list[$i];
 
 								if (!(DB()->sql_query($sql)))
 								{
-									message_die(GENERAL_ERROR, 'Unable to update ' . BB_ATTACHMENTS_DESC . ' Table.', '', __LINE__, __FILE__, $sql);
+									bb_die('Unable to update ' . BB_ATTACHMENTS_DESC);
 								}
 							}
 						}
@@ -490,7 +488,7 @@ class attach_parent
 
 						if (!($result = DB()->sql_query($sql)))
 						{
-							message_die(GENERAL_ERROR, 'Unable to select old Attachment Entry.', '', __LINE__, __FILE__, $sql);
+							bb_die('Unable to select old attachment entry');
 						}
 
 						if (DB()->num_rows($result) != 1)
@@ -525,7 +523,7 @@ class attach_parent
 
 						if (!(DB()->sql_query($sql)))
 						{
-							message_die(GENERAL_ERROR, 'Unable to update the Attachment.', '', __LINE__, __FILE__, $sql);
+							bb_die('Unable to update the attachment');
 						}
 
 						// Delete the Old Attachment
@@ -637,7 +635,7 @@ class attach_parent
 
 					if (!(DB()->sql_query($sql)))
 					{
-						message_die(GENERAL_ERROR, 'Unable to update the File Comment.', '', __LINE__, __FILE__, $sql);
+						bb_die('Unable to update the file comment');
 					}
 				}
 				else
@@ -663,7 +661,7 @@ class attach_parent
 
 					if (!(DB()->sql_query($sql)))
 					{
-						message_die(GENERAL_ERROR, 'Couldn\'t store Attachment.<br />Your ' . $message_type . ' has been stored.', '', __LINE__, __FILE__, $sql);
+						bb_die('Could not store Attachment.<br />Your '. $message_type .' has been stored');
 					}
 
 					$attach_id = DB()->sql_nextid();
@@ -683,9 +681,9 @@ class attach_parent
 
 					$sql = 'INSERT INTO ' . BB_ATTACHMENTS . ' ' . attach_mod_sql_build_array('INSERT', $sql_ary);
 
-					if ( !(DB()->sql_query($sql)) )
+					if (!(DB()->sql_query($sql)))
 					{
-						message_die(GENERAL_ERROR, 'Couldn\'t store Attachment.<br />Your ' . $message_type . ' has been stored.', '', __LINE__, __FILE__, $sql);
+						bb_die('Could not store Attachment.<br />Your '. $message_type .' has been stored');
 					}
 				}
 			}
@@ -714,7 +712,7 @@ class attach_parent
 				// Inform the user that his post has been created, but nothing is attached
 				if (!(DB()->sql_query($sql)))
 				{
-					message_die(GENERAL_ERROR, 'Couldn\'t store Attachment.<br />Your ' . $message_type . ' has been stored.', '', __LINE__, __FILE__, $sql);
+					bb_die('Could not store Attachment.<br />Your '. $message_type .' has been stored');
 				}
 
 				$attach_id = DB()->sql_nextid();
@@ -729,7 +727,7 @@ class attach_parent
 
 				if (!(DB()->sql_query($sql)))
 				{
-					message_die(GENERAL_ERROR, 'Couldn\'t store Attachment.<br />Your ' . $message_type . ' has been stored.', '', __LINE__, __FILE__, $sql);
+					bb_die('Could not store Attachment.<br />Your '. $message_type .' has been stored');
 				}
 			}
 		}
@@ -848,18 +846,15 @@ class attach_parent
 
 		if ($this->post_attach)
 		{
-//		$r_file = trim(basename(htmlspecialchars($this->filename)));
 			$r_file = trim(basename($this->filename));
 			$file = $_FILES['fileupload']['tmp_name'];
 			$this->type = $_FILES['fileupload']['type'];
 
 			if (isset($_FILES['fileupload']['size']) && $_FILES['fileupload']['size'] == 0)
 			{
-				message_die(GENERAL_ERROR, 'Tried to upload empty file');
+				bb_die('Tried to upload empty file');
 			}
 
-			// Opera add the name to the mime type
-			$this->type = (strstr($this->type, '; name')) ? str_replace(strstr($this->type, '; name'), '', $this->type) : $this->type;
 			$this->type = strtolower($this->type);
 			$this->extension = strtolower(get_extension($this->filename));
 
@@ -874,7 +869,7 @@ class attach_parent
 
 			if (!($result = DB()->sql_query($sql)))
 			{
-				message_die(GENERAL_ERROR, 'Could not query Extensions.', '', __LINE__, __FILE__, $sql);
+				bb_die('Could not query extensions');
 			}
 
 			$row = DB()->sql_fetchrow($result);
@@ -903,7 +898,7 @@ class attach_parent
 				{
 					$error_msg .= '<br />';
 				}
-				$ini_val = ( phpversion() >= '4.0.0' ) ? 'ini_get' : 'get_cfg_var';
+				$ini_val = 'ini_get';
 
 				$max_size = @$ini_val('upload_max_filesize');
 
@@ -1008,7 +1003,7 @@ class attach_parent
 					}
 					if ($i == $max_try)
 					{
-						message_die(GENERAL_ERROR, 'Could not create filename for attachment', '', __LINE__, __FILE__);
+						bb_die('Could not create filename for attachment');
 					}
 				}
 				$this->attach_filename = $new_physical_filename;
@@ -1029,36 +1024,22 @@ class attach_parent
 			// Upload Attachment
 			if (!$error)
 			{
-				if (!(intval($attach_config['allow_ftp_upload'])))
+				// Descide the Upload method
+				$ini_val = 'ini_get';
+
+				$safe_mode = @$ini_val('safe_mode');
+
+				if (@$ini_val('open_basedir'))
 				{
-					// Descide the Upload method
-					$ini_val = ( phpversion() >= '4.0.0' ) ? 'ini_get' : 'get_cfg_var';
-
-					$safe_mode = @$ini_val('safe_mode');
-
-					if (@$ini_val('open_basedir'))
-					{
-						if ( @phpversion() < '4.0.3' )
-						{
-							$upload_mode = 'copy';
-						}
-						else
-						{
-							$upload_mode = 'move';
-						}
-					}
-					else if ( @$ini_val('safe_mode') )
-					{
-						$upload_mode = 'move';
-					}
-					else
-					{
-						$upload_mode = 'copy';
-					}
+					$upload_mode = 'move';
+				}
+				else if ( @$ini_val('safe_mode') )
+				{
+					$upload_mode = 'move';
 				}
 				else
 				{
-					$upload_mode = 'ftp';
+					$upload_mode = 'copy';
 				}
 
 				// Ok, upload the Attachment
@@ -1071,7 +1052,7 @@ class attach_parent
 			// Now, check filesize parameters
 			if (!$error)
 			{
-				if ($upload_mode != 'ftp' && !$this->filesize)
+				if (!$this->filesize)
 				{
 					$this->filesize = intval(@filesize($upload_dir . '/' . $this->attach_filename));
 				}
@@ -1116,7 +1097,7 @@ class attach_parent
 
 				if (!($result = DB()->sql_query($sql)))
 				{
-					message_die(GENERAL_ERROR, 'Could not query total filesize', '', __LINE__, __FILE__, $sql);
+					bb_die('Could not query total filesize #1');
 				}
 
 				$row = DB()->sql_fetchrow($result);
@@ -1148,7 +1129,7 @@ class attach_parent
 
 				if (!($result = DB()->sql_query($sql)))
 				{
-					message_die(GENERAL_ERROR, 'Couldn\'t query attachments', '', __LINE__, __FILE__, $sql);
+					bb_die('Could not query attachments');
 				}
 
 				$attach_ids = DB()->sql_fetchrowset($result);
@@ -1171,7 +1152,7 @@ class attach_parent
 
 					if (!($result = DB()->sql_query($sql)))
 					{
-						message_die(GENERAL_ERROR, 'Could not query total filesize', '', __LINE__, __FILE__, $sql);
+						bb_die('Could not query total filesize #2');
 					}
 
 					$row = DB()->sql_fetchrow($result);
@@ -1215,14 +1196,14 @@ class attach_parent
 		}
 	}
 
-	// Copy the temporary attachment to the right location (copy, move_uploaded_file or ftp)
+	// Copy the temporary attachment to the right location (copy, move_uploaded_file)
 	function move_uploaded_attachment($upload_mode, $file)
 	{
 		global $error, $error_msg, $lang, $upload_dir;
 
 		if (!is_uploaded_file($file))
 		{
-			message_die(GENERAL_ERROR, 'Unable to upload file. The given source has not been uploaded.', __LINE__, __FILE__);
+			bb_die('Unable to upload file. The given source has not been uploaded');
 		}
 
 		switch ($upload_mode)
@@ -1264,25 +1245,13 @@ class attach_parent
 				@chmod($upload_dir . '/' . $this->attach_filename, 0666);
 
 			break;
-
-			case 'ftp':
-				ftp_file($file, basename($this->attach_filename), $this->type);
-			break;
 		}
 
 		if (!$error && $this->thumbnail == 1)
 		{
-			if ($upload_mode == 'ftp')
-			{
-				$source = $file;
-				$dest_file = THUMB_DIR . '/t_' . basename($this->attach_filename);
-			}
-			else
-			{
-				$source = $upload_dir . '/' . basename($this->attach_filename);
-				$dest_file = amod_realpath($upload_dir);
-				$dest_file .= '/' . THUMB_DIR . '/t_' . basename($this->attach_filename);
-			}
+			$source = $upload_dir . '/' . basename($this->attach_filename);
+			$dest_file = amod_realpath($upload_dir);
+			$dest_file .= '/' . THUMB_DIR . '/t_' . basename($this->attach_filename);
 
 			if (!create_thumbnail($source, $dest_file, $this->type))
 			{
@@ -1325,34 +1294,28 @@ class attach_posting extends attach_parent
 
 			if ((sizeof($this->attachment_list) > 0 || $this->post_attach) && !isset($_POST['update_attachment']))
 			{
-				$sql = 'UPDATE ' . BB_POSTS . '
-					SET post_attachment = 1
-					WHERE post_id = ' . (int) $post_id;
+				$sql = 'UPDATE ' . BB_POSTS . ' SET post_attachment = 1 WHERE post_id = ' . (int) $post_id;
 
 				if (!(DB()->sql_query($sql)))
 				{
-					message_die(GENERAL_ERROR, 'Unable to update Posts Table.', '', __LINE__, __FILE__, $sql);
+					bb_die('Unable to update posts table');
 				}
 
-				$sql = 'SELECT topic_id
-					FROM ' . BB_POSTS . '
-					WHERE post_id = ' . (int) $post_id;
+				$sql = 'SELECT topic_id FROM ' . BB_POSTS . ' WHERE post_id = ' . (int) $post_id;
 
 				if (!($result = DB()->sql_query($sql)))
 				{
-					message_die(GENERAL_ERROR, 'Unable to select Posts Table.', '', __LINE__, __FILE__, $sql);
+					bb_die('Unable to select posts table');
 				}
 
 				$row = DB()->sql_fetchrow($result);
 				DB()->sql_freeresult($result);
 
-				$sql = 'UPDATE ' . BB_TOPICS . '
-					SET topic_attachment = 1
-					WHERE topic_id = ' . (int) $row['topic_id'];
+				$sql = 'UPDATE ' . BB_TOPICS . ' SET topic_attachment = 1 WHERE topic_id = ' . (int) $row['topic_id'];
 
 				if (!(DB()->sql_query($sql)))
 				{
-					message_die(GENERAL_ERROR, 'Unable to update Topics Table.', '', __LINE__, __FILE__, $sql);
+					bb_die('Unable to update topics table');
 				}
 			}
 		}

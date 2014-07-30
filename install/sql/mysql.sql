@@ -125,16 +125,9 @@ INSERT INTO `bb_attachments_config` VALUES ('max_attachments', '1');
 INSERT INTO `bb_attachments_config` VALUES ('max_attachments_pm', '1');
 INSERT INTO `bb_attachments_config` VALUES ('disable_mod', '0');
 INSERT INTO `bb_attachments_config` VALUES ('allow_pm_attach', '1');
-INSERT INTO `bb_attachments_config` VALUES ('allow_ftp_upload', '0');
 INSERT INTO `bb_attachments_config` VALUES ('attach_version', '2.3.14');
 INSERT INTO `bb_attachments_config` VALUES ('default_upload_quota', '0');
 INSERT INTO `bb_attachments_config` VALUES ('default_pm_quota', '0');
-INSERT INTO `bb_attachments_config` VALUES ('ftp_server', '');
-INSERT INTO `bb_attachments_config` VALUES ('ftp_path', '');
-INSERT INTO `bb_attachments_config` VALUES ('download_path', '');
-INSERT INTO `bb_attachments_config` VALUES ('ftp_user', '');
-INSERT INTO `bb_attachments_config` VALUES ('ftp_pass', '');
-INSERT INTO `bb_attachments_config` VALUES ('ftp_pasv_mode', '1');
 INSERT INTO `bb_attachments_config` VALUES ('img_display_inlined', '1');
 INSERT INTO `bb_attachments_config` VALUES ('img_max_width', '200');
 INSERT INTO `bb_attachments_config` VALUES ('img_max_height', '200');
@@ -706,9 +699,7 @@ INSERT INTO `bb_extensions` VALUES (23, 4, 'ai', '');
 INSERT INTO `bb_extensions` VALUES (24, 4, 'ps', '');
 INSERT INTO `bb_extensions` VALUES (25, 4, 'ppt', '');
 INSERT INTO `bb_extensions` VALUES (26, 5, 'rm', '');
-INSERT INTO `bb_extensions` VALUES (27, 6, 'wma', '');
-INSERT INTO `bb_extensions` VALUES (28, 7, 'swf', '');
-INSERT INTO `bb_extensions` VALUES (29, 8, 'torrent', '');
+INSERT INTO `bb_extensions` VALUES (29, 6, 'torrent', '');
 
 -- --------------------------------------------------------
 
@@ -734,12 +725,10 @@ CREATE TABLE IF NOT EXISTS `bb_extension_groups` (
 
 INSERT INTO `bb_extension_groups` VALUES (1, 'Images', 1, 1, 1, '', 262144, '');
 INSERT INTO `bb_extension_groups` VALUES (2, 'Archives', 0, 1, 1, '', 262144, '');
-INSERT INTO `bb_extension_groups` VALUES (3, 'Plain Text', 0, 0, 1, '', 262144, '');
+INSERT INTO `bb_extension_groups` VALUES (3, 'Plain text', 0, 0, 1, '', 262144, '');
 INSERT INTO `bb_extension_groups` VALUES (4, 'Documents', 0, 0, 1, '', 262144, '');
-INSERT INTO `bb_extension_groups` VALUES (5, 'Real Media', 0, 0, 2, '', 262144, '');
-INSERT INTO `bb_extension_groups` VALUES (6, 'Streams', 2, 0, 1, '', 262144, '');
-INSERT INTO `bb_extension_groups` VALUES (7, 'Flash Files', 3, 0, 1, '', 262144, '');
-INSERT INTO `bb_extension_groups` VALUES (8, 'Torrent', 0, 1, 1, '', 122880, '');
+INSERT INTO `bb_extension_groups` VALUES (5, 'Real media', 0, 0, 2, '', 262144, '');
+INSERT INTO `bb_extension_groups` VALUES (6, 'Torrent', 0, 1, 1, '', 122880, '');
 
 -- --------------------------------------------------------
 

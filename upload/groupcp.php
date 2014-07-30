@@ -171,7 +171,7 @@ if (!$group_id)
 		$template->assign_vars(array(
 			'SELECT_GROUP'       => true,
 			'PAGE_TITLE'         => $lang['GROUP_CONTROL_PANEL'],
-			'S_USERGROUP_ACTION' => "groupcp.php",
+			'S_USERGROUP_ACTION' => 'groupcp.php',
 			'S_HIDDEN_FIELDS'    => $s_hidden_fields,
 		));
 	}
@@ -368,7 +368,7 @@ else
 
 					if (!$result = DB()->sql_query($sql_select))
 					{
-						message_die(GENERAL_ERROR, 'Could not get user email information', '', __LINE__, __FILE__, $sql_select);
+						bb_die('Could not get user email information');
 					}
 
 					require(INC_DIR .'emailer.class.php');
@@ -531,33 +531,32 @@ else
 
 	$i = 0;
 	$template->assign_vars(array(
-		'ROW_NUMBER'    => $i + ( $start + 1 ),
-		'GROUP_INFO' => true,
-		'PAGE_TITLE' => $lang['GROUP_CONTROL_PANEL'],
-
-		'GROUP_NAME' => htmlCHR($group_info['group_name']),
-		'GROUP_DESCRIPTION' => $group_info['group_description'],
-		'GROUP_DETAILS' => $group_details,
-		'MOD_USER' => profile_url($group_moderator),
-		'MOD_FROM' => $from,
-		'MOD_JOINED' => $joined,
-		'MOD_POSTS' => $posts,
-		'MOD_PM' => $pm,
-		'MOD_EMAIL' => $email,
-		'MOD_WWW' => $www,
-		'MOD_TIME' => ( !empty($group_info['group_time']) ) ? bb_date($group_info['group_time']) : $lang['NONE'],
-		'U_SEARCH_USER' => "search.php?mode=searchuser",
-		'GROUP_TYPE' => $group_type,
-		'S_GROUP_OPEN_TYPE' => GROUP_OPEN,
-		'S_GROUP_CLOSED_TYPE' => GROUP_CLOSED,
-		'S_GROUP_HIDDEN_TYPE' => GROUP_HIDDEN,
-		'S_GROUP_OPEN_CHECKED' => ($group_info['group_type'] == GROUP_OPEN) ? ' checked="checked"' : '',
+		'ROW_NUMBER'             => $i + ($start + 1),
+		'GROUP_INFO'             => true,
+		'PAGE_TITLE'             => $lang['GROUP_CONTROL_PANEL'],
+		'GROUP_NAME'             => htmlCHR($group_info['group_name']),
+		'GROUP_DESCRIPTION'      => $group_info['group_description'],
+		'GROUP_DETAILS'          => $group_details,
+		'MOD_USER'               => profile_url($group_moderator),
+		'MOD_FROM'               => $from,
+		'MOD_JOINED'             => $joined,
+		'MOD_POSTS'              => $posts,
+		'MOD_PM'                 => $pm,
+		'MOD_EMAIL'              => $email,
+		'MOD_WWW'                => $www,
+		'MOD_TIME'               => (!empty($group_info['group_time'])) ? bb_date($group_info['group_time']) : $lang['NONE'],
+		'U_SEARCH_USER'          => "search.php?mode=searchuser",
+		'GROUP_TYPE'             => $group_type,
+		'S_GROUP_OPEN_TYPE'      => GROUP_OPEN,
+		'S_GROUP_CLOSED_TYPE'    => GROUP_CLOSED,
+		'S_GROUP_HIDDEN_TYPE'    => GROUP_HIDDEN,
+		'S_GROUP_OPEN_CHECKED'   => ($group_info['group_type'] == GROUP_OPEN) ? ' checked="checked"' : '',
 		'S_GROUP_CLOSED_CHECKED' => ($group_info['group_type'] == GROUP_CLOSED) ? ' checked="checked"' : '',
 		'S_GROUP_HIDDEN_CHECKED' => ($group_info['group_type'] == GROUP_HIDDEN) ? ' checked="checked"' : '',
-		'S_HIDDEN_FIELDS' => $s_hidden_fields,
-		'S_MODE_SELECT' => $select_sort_mode,
-		'S_ORDER_SELECT' => $select_sort_order,
-		'S_GROUPCP_ACTION' => "groupcp.php?" . POST_GROUPS_URL . "=$group_id",
+		'S_HIDDEN_FIELDS'        => $s_hidden_fields,
+		'S_MODE_SELECT'          => $select_sort_mode,
+		'S_ORDER_SELECT'         => $select_sort_order,
+		'S_GROUPCP_ACTION'       => "groupcp.php?" . POST_GROUPS_URL . "=$group_id",
 	));
 
 	// Dump out the remaining users
@@ -572,17 +571,17 @@ else
 			$row_class = !($i % 2) ? 'row1' : 'row2';
 
 			$template->assign_block_vars('member', array(
-				'ROW_NUMBER'    => $i + ( $start + 1 ),
-				'ROW_CLASS' => $row_class,
-				'USER' => profile_url($member),
-				'FROM' => $from,
-				'JOINED' => $joined,
-				'POSTS' => $posts,
-				'USER_ID' => $user_id,
-				'PM' => $pm,
-				'EMAIL' => $email,
-				'WWW' => $www,
-				'TIME' => $user_time,
+				'ROW_NUMBER' => $i + ( $start + 1 ),
+				'ROW_CLASS'  => $row_class,
+				'USER'       => profile_url($member),
+				'FROM'       => $from,
+				'JOINED'     => $joined,
+				'POSTS'      => $posts,
+				'USER_ID'    => $user_id,
+				'PM'         => $pm,
+				'EMAIL'      => $email,
+				'WWW'        => $www,
+				'TIME'       => $user_time,
 			));
 
 			if ($is_moderator)
@@ -622,13 +621,13 @@ else
 
 			$template->assign_block_vars('pending', array(
 				'ROW_CLASS' => $row_class,
-				'USER' => profile_url($member),
-				'FROM' => $from,
-				'JOINED' => $joined,
-				'POSTS' => $posts,
-				'USER_ID' => $user_id,
-				'PM' => $pm,
-				'EMAIL' => $email,
+				'USER'      => profile_url($member),
+				'FROM'      => $from,
+				'JOINED'    => $joined,
+				'POSTS'     => $posts,
+				'USER_ID'   => $user_id,
+				'PM'        => $pm,
+				'EMAIL'     => $email,
 			));
 		}
 

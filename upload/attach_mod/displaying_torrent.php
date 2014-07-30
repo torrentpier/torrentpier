@@ -120,7 +120,7 @@ else
 
 	if (!$result = DB()->sql_query($sql))
 	{
-		 message_die(GENERAL_ERROR, 'Could not obtain torrent information', '', __LINE__, __FILE__, $sql);
+		 bb_die('Could not obtain torrent information');
 	}
 	$tor_info = DB()->sql_fetchrow($result);
 	DB()->sql_freeresult($result);

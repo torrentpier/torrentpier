@@ -1,7 +1,7 @@
 <!-- IF TORHELP_TOPICS -->
 	<!-- INCLUDE torhelp.tpl -->
 	<div class="spacer_6"></div>
-<!-- ENDIF / TORHELP_TOPICS -->
+<!-- ENDIF -->
 
 <div id="forums_list_wrap">
 
@@ -221,7 +221,6 @@
 <div class="bottom_info">
 
 	<div id="timezone">
-		<p>{LAST_VISIT_DATE}</p>
 		<p>{CURRENT_TIME}</p>
 		<p>{S_TIMEZONE}</p>
 	</div>

@@ -587,7 +587,7 @@ table.smilies td { padding: 3px; text-align: center; }
 	margin-top: -8px; width: 210px; padding: 0 6px 0 3px; vertical-align: top;
 }
 #sidebar2 h3 {
-	padding: 0 0 4px 0; margin: 8px 0 2px 0;
+	padding: 0 0 4px 0; margin: 0 0 2px 0;
 	color: #333333; text-indent: 0.5em;
 	background: transparent url(../images/hr200_ltr_gradient.jpg) no-repeat left bottom;
 }
@@ -954,22 +954,23 @@ var.ajax-params { display: none; }
 	position: fixed; top:0 !important; z-index: 2000; padding: 4px; font-size: 11px;
 	max-width: 400px; max-height: 200px; white-space: nowrap; display: none;
 }
-#ajax-loading { 
-    background: rgba(0,0,0, 0.5) url(../images/loading_1.gif) no-repeat center center;
-	float: right; 
-	width: 85px; 
+#ajax-loading {
+	display: none;
+	background: rgba(0,0,0, 0.5) url(../images/loading_1.gif) no-repeat center center;
+	float: right;
+	width: 85px;
 	height: 30px;
-	border-bottom-left-radius: 10px; 
-	-webkit-border-bottom-left-radius:  10px; 
-	-khtml-border-bottom-left-radius:  10px; 
+	border-bottom-left-radius: 10px;
+	-webkit-border-bottom-left-radius:  10px;
+	-khtml-border-bottom-left-radius:  10px;
 }
-#ajax-error { 
-    background: #d32031 url(../images/loading_1.gif) no-repeat center center;
-    float: right; 
-	min-width: 200px; 
+#ajax-error {
+	background: #d32031 url(../images/loading_1.gif) no-repeat center center;
+	float: right;
+	min-width: 200px;
 	height: 30px;
-	border-bottom-left-radius: 10px; 
-	-webkit-border-bottom-left-radius:  10px; 
+	border-bottom-left-radius: 10px;
+	-webkit-border-bottom-left-radius:  10px;
 	-khtml-border-bottom-left-radius:  10px;
 }
 .editable-container { cursor: pointer; }

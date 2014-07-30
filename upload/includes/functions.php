@@ -1267,20 +1267,13 @@ function get_attachments_dir ($cfg = null)
 		$cfg = bb_get_config(BB_ATTACH_CONFIG, true, false);
 	}
 
-	if (!$cfg['allow_ftp_upload'])
+	if ($cfg['upload_dir'][0] == '/' || ($cfg['upload_dir'][0] != '/' && $cfg['upload_dir'][1] == ':'))
 	{
-		if ($cfg['upload_dir'][0] == '/' || ($cfg['upload_dir'][0] != '/' && $cfg['upload_dir'][1] == ':'))
-		{
-			return $cfg['upload_dir'];
-		}
-		else
-		{
-			return BB_ROOT . $cfg['upload_dir'];
-		}
+		return $cfg['upload_dir'];
 	}
 	else
 	{
-		return $cfg['download_path'];
+		return BB_ROOT . $cfg['upload_dir'];
 	}
 }
 
@@ -1377,7 +1370,7 @@ function clean_username($username)
 	return $username;
 }
 
-function bb_ltrim($str, $charlist = false)
+function bb_ltrim ($str, $charlist = false)
 {
 	if ($charlist === false)
 	{
@@ -1389,7 +1382,7 @@ function bb_ltrim($str, $charlist = false)
 	return $str;
 }
 
-function bb_rtrim($str, $charlist = false)
+function bb_rtrim ($str, $charlist = false)
 {
 	if ($charlist === false)
 	{
@@ -1563,55 +1556,54 @@ function setup_style ()
 	return $theme;
 }
 
-// Create date/time from format and timezone
-function bb_date ($gmepoch, $format = false, $tz = null)
+// Create date / time with format and friendly date
+function bb_date ($gmepoch, $format = false, $friendly_date = true)
 {
 	global $bb_cfg, $lang, $userdata;
 
 	if (!$format) $format = $bb_cfg['default_dateformat'];
 	if (empty($lang)) require_once($bb_cfg['default_lang_dir'] .'main.php');
 
-	if (is_null($tz) || $tz == 'false')
+	if (empty($userdata['session_logged_in']))
 	{
-		if (empty($userdata['session_logged_in']))
-		{
-			$tz2 = $bb_cfg['board_timezone'];
-		}
-		else $tz2 = $userdata['user_timezone'];
+		$tz = $bb_cfg['board_timezone'];
 	}
-	elseif (is_numeric($tz)) $tz2 = $tz;
-
-	$date = gmdate($format, $gmepoch + (3600 * $tz2));
-
-	if ($tz != 'false')
+	else
 	{
-		$time_format = " H:i";
+		$tz = $userdata['user_timezone'];
+	}
 
-		$today = gmdate("d", TIMENOW + (3600 * $tz2));
-		$month = gmdate("m", TIMENOW + (3600 * $tz2));
-		$year  = gmdate("Y", TIMENOW + (3600 * $tz2));
+	$date = gmdate($format, $gmepoch + (3600 * $tz));
 
-		$date_today = gmdate("d", $gmepoch + (3600 * $tz2));
-		$date_month = gmdate("m", $gmepoch + (3600 * $tz2));
-		$date_year  = gmdate("Y", $gmepoch + (3600 * $tz2));
+	if ($friendly_date)
+	{
+		$time_format = ' H:i';
+
+		$today = gmdate('d', TIMENOW + (3600 * $tz));
+		$month = gmdate('m', TIMENOW + (3600 * $tz));
+		$year  = gmdate('Y', TIMENOW + (3600 * $tz));
+
+		$date_today = gmdate('d', $gmepoch + (3600 * $tz));
+		$date_month = gmdate('m', $gmepoch + (3600 * $tz));
+		$date_year  = gmdate('Y', $gmepoch + (3600 * $tz));
 
 		if ($date_today == $today && $date_month == $month && $date_year == $year)
 		{
-			$date = 'today' . gmdate($time_format, $gmepoch + (3600 * $tz2));
+			$date = 'today' . gmdate($time_format, $gmepoch + (3600 * $tz));
 		}
 		elseif ($today != 1 && $date_today == ($today-1) && $date_month == $month && $date_year == $year)
 		{
-			$date = 'yesterday' . gmdate($time_format, $gmepoch + (3600 * $tz2));
+			$date = 'yesterday' . gmdate($time_format, $gmepoch + (3600 * $tz));
 		}
 		elseif ($today == 1 && $month != 1)
 		{
-			$yesterday = date ("t", mktime(0, 0, 0, ($month-1), 1, $year));
+			$yesterday = date ('t', mktime(0, 0, 0, ($month-1), 1, $year));
 			if ($date_today == $yesterday && $date_month == ($month-1) && $date_year == $year)
-				$date = 'yesterday' . gmdate($time_format, $gmepoch + (3600 * $tz2));
+				$date = 'yesterday' . gmdate($time_format, $gmepoch + (3600 * $tz));
 		}
 		elseif ($today == 1 && $month == 1)
 		{
-			$yesterday = date ("t", mktime(0, 0, 0, 12, 1, ($year -1)));
+			$yesterday = date ('t', mktime(0, 0, 0, 12, 1, ($year -1)));
 			if ($date_today == $yesterday && $date_month == 12 && $date_year == ($year-1))
 				$date = 'yesterday' . gmdate($time_format, $gmepoch + (3600 * $tz));
 		}
@@ -1802,55 +1794,35 @@ function smiley_sort ($a, $b)
 
 function bb_die ($msg_text)
 {
+	global $ajax, $bb_cfg, $lang, $template, $theme, $userdata;
+
 	if (defined('IN_AJAX'))
 	{
-		$GLOBALS['ajax']->ajax_die($msg_text);
+		$ajax->ajax_die($msg_text);
 	}
-	message_die(GENERAL_MESSAGE, $msg_text);
-}
 
-function message_die ($msg_code, $msg_text = '', $msg_title = '', $err_line = '', $err_file = '', $sql = '')
-{
-	global $DBS, $template, $bb_cfg, $theme, $lang, $userdata;
-
+	// Check
 	if (defined('HAS_DIED'))
 	{
 		trigger_error(__FUNCTION__ .' was called multiple times', E_USER_ERROR);
 	}
 	define('HAS_DIED', 1);
 	define('DISABLE_CACHING_OUTPUT', true);
-	$sql_store = $sql;
-	$debug_text = '';
 
-	// Get SQL error if we are debugging. Do this as soon as possible to prevent
-	// subsequent queries from overwriting the status of sql_error()
-	if (DEBUG && ($msg_code == GENERAL_ERROR || $msg_code == CRITICAL_ERROR))
-	{
-		if (!empty($DBS) && $sql_store)
-		{
-			$sql_error = $DBS->sql_error();
-			$debug_text .= "<br /><br />SQL Error : {$sql_error['code']}<br /><br />{$sql_error['message']}";
-		}
-		if ($sql_store)
-		{
-			$debug_text .= "<br /><br />$sql_store";
-		}
-		if ($sql_store && $err_line && $err_file)
-		{
-			$debug_text .= "</br /><br />Line : {$err_line}<br />File : ". basename($err_file);
-		}
-	}
-
+	// If empty lang
 	if (empty($lang))
 	{
 		require($bb_cfg['default_lang_dir'] .'main.php');
 	}
-	if (empty($userdata) && ($msg_code == GENERAL_MESSAGE || $msg_code == GENERAL_ERROR))
+
+	// If empty session
+	if (empty($userdata))
 	{
 		$userdata = session_pagestart();
 	}
+
 	// If the header hasn't been output then do it
-	if (!defined('PAGE_HEADER_SENT') && $msg_code != CRITICAL_ERROR)
+	if (!defined('PAGE_HEADER_SENT'))
 	{
 		if (empty($template))
 		{
@@ -1863,58 +1835,16 @@ function message_die ($msg_code, $msg_text = '', $msg_title = '', $err_line = ''
 		require(PAGE_HEADER);
 	}
 
-	switch ($msg_code)
-	{
-		case GENERAL_MESSAGE:
-			if (!$msg_title) $msg_title = $lang['INFORMATION'];
-			break;
+	$template->assign_vars(array(
+		'TPL_BB_DIE'   => true,
+		'MESSAGE_TEXT' => $msg_text,
+	));
 
-		case GENERAL_ERROR:
-			if (!$msg_text)  $msg_text = $lang['AN_ERROR_OCCURED'];
-			if (!$msg_title) $msg_title = $lang['GENERAL_ERROR'];
-			break;
+	$template->set_filenames(array('bb_die' => 'common.tpl'));
+	$template->pparse('bb_die');
 
-		case CRITICAL_ERROR:
-			// Critical errors mean we cannot rely on _ANY_ DB information being
-			// available so we're going to dump out a simple echo'd statement
-			if (!$msg_text)  $msg_text = $lang['A_CRITICAL_ERROR'];
-			if (!$msg_title) $msg_title = 'BB : <b>Critical Error</b>';
-			break;
-	}
-	// Add on DEBUG info if we've enabled debug mode and this is an error. This
-	// prevents debug info being output for general messages should DEBUG be
-	// set TRUE by accident (preventing confusion for the end user!)
-	if (DEBUG && ($msg_code == GENERAL_ERROR || $msg_code == CRITICAL_ERROR))
-	{
-		if ($debug_text)
-		{
-			$msg_text .= '<br /><br /><b><u>DEBUG MODE</u></b>'. $debug_text;
-		}
-	}
+	require(PAGE_FOOTER);
 
-	if ($msg_code != CRITICAL_ERROR)
-	{
-		if (!empty($lang[$msg_text]))
-		{
-			$msg_text = $lang[$msg_text];
-		}
-
-		$template->assign_vars(array(
-			'TPL_GENERAL_MESSAGE' => true,
-
-			'MESSAGE_TITLE' => $msg_title,
-			'MESSAGE_TEXT'  => $msg_text,
-		));
-
-		$template->set_filenames(array('message_die' => 'common.tpl'));
-		$template->pparse('message_die');
-
-		require(PAGE_FOOTER);
-	}
-	else
-	{
-		echo "<html>\n<body>\n". $msg_title ."\n<br /><br />\n". $msg_text ."</body>\n</html>";
-	}
 	exit;
 }
 
@@ -1961,7 +1891,7 @@ function redirect ($url)
 
 	if (strstr(urldecode($url), "\n") || strstr(urldecode($url), "\r") || strstr(urldecode($url), ';url'))
 	{
-		message_die(CRITICAL_ERROR, 'Tried to redirect to potentially insecure url.');
+		bb_die('Tried to redirect to potentially insecure url');
 	}
 
 	$url = trim($url);
@@ -2867,4 +2797,32 @@ function get_avatar ($user_id, $ext_id, $allow_avatar = true, $size = true, $hei
 	}
 
 	return $user_avatar;
+}
+
+function gender_image ($gender)
+{
+	global $bb_cfg, $lang, $images;
+
+	if (!$bb_cfg['gender'])
+	{
+		$user_gender = '';
+		return $user_gender;
+	}
+	else
+	{
+		switch ($gender)
+		{
+			case MALE:
+				$user_gender = '<img src="'. $images['icon_male'] .'" alt="'. $lang['GENDER_SELECT'][1] .'" title="'. $lang['GENDER_SELECT'][1] .'" border="0" />';
+				break;
+			case FEMALE:
+				$user_gender = '<img src="'. $images['icon_female'] .'" alt="'. $lang['GENDER_SELECT'][1] .'" title="'. $lang['GENDER_SELECT'][2] .'" border="0" />';
+				break;
+			default:
+				$user_gender = '<img src="'. $images['icon_nogender'] .'" alt="'. $lang['GENDER_SELECT'][0] .'" title="'. $lang['GENDER_SELECT'][0] .'" border="0" />';
+				break;
+		}
+	}
+
+	return $user_gender;
 }

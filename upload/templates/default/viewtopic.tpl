@@ -355,7 +355,7 @@ function build_poll_add_form (src_el)
 		<!-- IF postrow.POSTER_AVATAR --><p class="avatar">{postrow.POSTER_AVATAR}</p><!-- ENDIF -->
 	<!-- ELSE -->
 		<!-- IF QUICK_REPLY -->
-		<p class="nick" title="{L_INS_NAME_TIP}" onmouseout="bbcode.refreshSelection(false);" onmouseover="bbcode.refreshSelection(true);" onclick="bbcode.onclickPoster('{postrow.POSTER_NAME_JS}', {postrow.POST_ID});">
+		<p class="nick" title="{L_INS_NAME_TIP}" onclick="bbcode.onclickPoster('{postrow.POSTER_NAME_JS}', {postrow.POST_ID});">
 			<a href="#" onclick="return false;">{postrow.POSTER_NAME}</a> <!-- IF postrow.POSTER_AUTHOR --><sup>&reg;</sup><!-- ENDIF -->
 		</p>
 		<!-- ELSE -->
@@ -620,7 +620,6 @@ $(document).ready(function(){
 	<div class="jumpbox"></div>
 
 	<div id="timezone">
-		<p>{LAST_VISIT_DATE}</p>
 		<p>{CURRENT_TIME}</p>
 		<p>{S_TIMEZONE}</p>
 	</div>

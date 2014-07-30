@@ -46,7 +46,7 @@ class report_module
 			ORDER BY report_reason_order';
 		if (!$result = DB()->sql_query($sql))
 		{
-			message_die(GENERAL_ERROR, 'Could not obtain report reasons', '', __LINE__, __FILE__, $sql);
+			bb_die('Could not obtain report reasons');
 		}
 
 		$rows = array();

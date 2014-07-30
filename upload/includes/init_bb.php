@@ -119,17 +119,12 @@ function bb_setcookie ($name, $val, $lifetime = COOKIE_PERSIST, $httponly = fals
 // Debug options
 if (DBG_USER)
 {
-	error_reporting(E_ALL);
-	ini_set('display_errors', 1);
+	ini_set('error_reporting', E_ALL);
+	ini_set('display_errors',  1);
 }
 else
 {
 	unset($_COOKIE['explain']);
-}
-
-if (DEBUG === true)
-{
-	require(DEV_DIR .'init_debug.php');
 }
 
 define('DELETED', -1);
@@ -177,11 +172,7 @@ define('POST_ANNOUNCE',        2);
 define('SEARCH_TYPE_POST',     0);
 define('SEARCH_TYPE_TRACKER',  1);
 
-// Error codes
-define('GENERAL_MESSAGE',      200);
-define('GENERAL_ERROR',        202);
-define('CRITICAL_ERROR',       204);
-
+// Ajax error codes
 define('E_AJAX_GENERAL_ERROR', 1000);
 define('E_AJAX_NEED_LOGIN',    1001);
 
@@ -212,17 +203,11 @@ define('PHYSICAL_LINK', 2);
 // Categories
 define('NONE_CAT',   0);
 define('IMAGE_CAT',  1);
-define('STREAM_CAT', 2);
-define('SWF_CAT',    3);
 
 // Misc
-define('MEGABYTE',              1024);
 define('ADMIN_MAX_ATTACHMENTS', 50);
 define('THUMB_DIR',             'thumbs');
 define('MODE_THUMBNAIL',        1);
-
-// Forum Extension Group Permissions
-define('GPERM_ALL', 0); // ALL FORUMS
 
 // Quota Types
 define('QUOTA_UPLOAD_LIMIT', 1);
@@ -314,6 +299,7 @@ $bb_cfg['tor_cannot_edit'] = array(
 	TOR_CONSUMED      => true,
 	TOR_DUP           => true,
 );
+
 // Запрет на создание новых раздач если стоит статус недооформлено/неоформлено/сомнительно
 $bb_cfg['tor_cannot_new'] = array(TOR_NEED_EDIT, TOR_NO_DESC, TOR_DOUBTFUL);
 
@@ -322,10 +308,10 @@ $bb_cfg['tor_reply'] = array(TOR_NEED_EDIT, TOR_NO_DESC, TOR_DOUBTFUL);
 
 // Если такой статус у релиза, то статистика раздачи будет скрыта
 $bb_cfg['tor_no_tor_act'] = array(
-	TOR_CLOSED			=> true,
-	TOR_DUP				=> true,
-	TOR_CLOSED_CPHOLD	=> true,
-	TOR_CONSUMED		=> true,
+	TOR_CLOSED        => true,
+	TOR_DUP           => true,
+	TOR_CLOSED_CPHOLD => true,
+	TOR_CONSUMED      => true,
 );
 
 // Table names
@@ -346,6 +332,7 @@ define('BB_BT_TORHELP',           'bb_bt_torhelp');
 define('BB_BT_TORSTAT',           'bb_bt_torstat');
 define('BB_CATEGORIES',           'bb_categories');
 define('BB_CAPTCHA',              'bb_captcha');
+define('BB_CHAT',                 'bb_chat');
 define('BB_CONFIG',               'bb_config');
 define('BB_CRON',                 'bb_cron');
 define('BB_DISALLOW',             'bb_disallow');
@@ -412,8 +399,6 @@ define('BONUS_URL',    'profile.php?mode=bonus');
 define('TOPIC_URL',    'viewtopic.php?t=');
 
 define('USER_AGENT', strtolower($_SERVER['HTTP_USER_AGENT']));
-define('UA_OPERA',   strpos(USER_AGENT, 'pera'));
-define('UA_IE',      strpos(USER_AGENT, 'msie'));
 
 define('HTML_SELECT_MAX_LENGTH', 60);
 define('HTML_WBR_LENGTH',        12);
@@ -590,5 +575,5 @@ $dl_status_css = array(
 // Show 'Board is disabled' message if needed
 if ($bb_cfg['board_disable'] && !defined('IN_ADMIN') && !defined('IN_LOGIN') && !defined('IN_AJAX'))
 {
-	message_die(GENERAL_MESSAGE, 'BOARD_DISABLE');
+	bb_die($lang['BOARD_DISABLE']);
 }

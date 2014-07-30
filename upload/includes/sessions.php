@@ -448,7 +448,7 @@ class user_common
 				}
 				else
 				{
-					trigger_error("Couldn't start session : login", E_USER_ERROR);
+					trigger_error("Could not start session : login", E_USER_ERROR);
 				}
 			}
 		}

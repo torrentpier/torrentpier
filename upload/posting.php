@@ -89,7 +89,7 @@ switch ($mode)
 	break;
 
 	default:
-		message_die(GENERAL_MESSAGE, $lang['NO_POST_MODE']);
+		bb_die($lang['NO_POST_MODE']);
 	break;
 }
 
@@ -103,7 +103,7 @@ switch ($mode)
 	case 'new_rel':
 		if (!$forum_id)
 		{
-			message_die(GENERAL_MESSAGE, $lang['FORUM_NOT_EXIST']);
+			bb_die($lang['FORUM_NOT_EXIST']);
 		}
 		$sql = "SELECT * FROM ". BB_FORUMS ." WHERE forum_id = $forum_id LIMIT 1";
 	break;
@@ -111,7 +111,7 @@ switch ($mode)
 	case 'reply':
 		if (!$topic_id)
 		{
-			message_die(GENERAL_MESSAGE, $lang['NO_TOPIC_ID']);
+			bb_die($lang['NO_TOPIC_ID']);
 		}
 		$sql = "SELECT f.*, t.*
 			FROM ". BB_FORUMS ." f, ". BB_TOPICS ." t
@@ -125,7 +125,7 @@ switch ($mode)
 	case 'delete':
 		if (!$post_id)
 		{
-			message_die(GENERAL_MESSAGE, $lang['NO_POST_ID']);
+			bb_die($lang['NO_POST_ID']);
 		}
 
 		$select_sql = 'SELECT f.*, t.*, p.*';
@@ -148,7 +148,7 @@ switch ($mode)
 	break;
 
 	default:
-		message_die(GENERAL_MESSAGE, $lang['NO_VALID_MODE']);
+		bb_die($lang['NO_VALID_MODE']);
 }
 
 if ($post_info = DB()->fetch_row($sql))
@@ -160,11 +160,11 @@ if ($post_info = DB()->fetch_row($sql))
 
 	if ($post_info['forum_status'] == FORUM_LOCKED && !$is_auth['auth_mod'])
 	{
-		message_die(GENERAL_MESSAGE, $lang['FORUM_LOCKED']);
+		bb_die($lang['FORUM_LOCKED']);
 	}
 	elseif ($mode != 'newtopic' && $mode != 'new_rel' && $post_info['topic_status'] == TOPIC_LOCKED && !$is_auth['auth_mod'])
 	{
-		message_die(GENERAL_MESSAGE, $lang['TOPIC_LOCKED']);
+		bb_die($lang['TOPIC_LOCKED']);
 	}
 
 	if ($mode == 'editpost' || $mode == 'delete')
@@ -207,7 +207,7 @@ if ($post_info = DB()->fetch_row($sql))
 }
 else
 {
-	message_die(GENERAL_MESSAGE, $lang['NO_SUCH_POST']);
+	bb_die($lang['NO_SUCH_POST']);
 }
 
 // The user is not authed, if they're not logged in then redirect
@@ -216,7 +216,7 @@ if (!$is_auth[$is_auth_type])
 {
 	if (!IS_GUEST)
 	{
-		message_die(GENERAL_MESSAGE, sprintf($lang['SORRY_'. strtoupper($is_auth_type)], $is_auth[$is_auth_type .'_type']));
+		bb_die(sprintf($lang['SORRY_'. strtoupper($is_auth_type)], $is_auth[$is_auth_type .'_type']));
 	}
 
 	switch ($mode)
@@ -455,7 +455,7 @@ elseif ( ($submit || $confirm) && !$topic_has_new_posts )
 			$return_message = $locked_warn . $return_message;
 		}
 
-		message_die(GENERAL_MESSAGE, $return_message);
+		bb_die($return_message);
 	}
 }
 
@@ -677,8 +677,8 @@ $template->assign_vars(array(
 	'S_TYPE_TOGGLE' => $topic_type_toggle,
 	'S_TOPIC_ID' => $topic_id,
 	'S_POST_ACTION' => POSTING_URL,
-	'S_HIDDEN_FORM_FIELDS' => $hidden_form_fields)
-);
+	'S_HIDDEN_FORM_FIELDS' => $hidden_form_fields,
+));
 
 if ($mode == 'newtopic' || $post_data['first_post'])
 {

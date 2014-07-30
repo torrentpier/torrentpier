@@ -30,9 +30,9 @@ $sql = "SELECT u.user_id, u.username, u.user_opt, u.user_rank, s.session_logged_
 	WHERE u.user_id = s.session_user_id
 		AND s.session_time >= ".( TIMENOW - 300 ) . "
 	ORDER BY u.username ASC, s.session_ip ASC";
-if ( !($result = DB()->sql_query($sql)) )
+if (!($result = DB()->sql_query($sql)))
 {
-	message_die(GENERAL_ERROR, 'Could not obtain regd user/online information', '', __LINE__, __FILE__, $sql);
+	bb_die('Could not obtain regd user / online information');
 }
 
 $guest_users = 0;

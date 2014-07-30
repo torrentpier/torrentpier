@@ -11,13 +11,13 @@ function server_parse($socket, $response, $line = __LINE__)
 	{
 		if (!($server_response = fgets($socket, 256)))
 		{
-			message_die(GENERAL_ERROR, "Couldn't get mail server response codes", "", $line, __FILE__);
+			bb_die('Could not get mail server response codes');
 		}
 	}
 
 	if (!(substr($server_response, 0, 3) == $response))
 	{
-		message_die(GENERAL_ERROR, "Ran into problems sending Mail. Response: $server_response", "", $line, __FILE__);
+		bb_die('Ran into problems sending mail. Response: '. $server_response);
 	}
 }
 
@@ -75,19 +75,19 @@ function smtpmail($mail_to, $subject, $message, $headers = '')
 
 	if (trim($subject) == '')
 	{
-		message_die(GENERAL_ERROR, "No email Subject specified", "", __LINE__, __FILE__);
+		bb_die('No email subject specified');
 	}
 
 	if (trim($message) == '')
 	{
-		message_die(GENERAL_ERROR, "Email message was blank", "", __LINE__, __FILE__);
+		bb_die('Email message was blank');
 	}
 
 	// Ok we have error checked as much as we can to this point let's get on
 	// it already.
 	if( !$socket = @fsockopen($bb_cfg['smtp_host'], 25, $errno, $errstr, 20) )
 	{
-		message_die(GENERAL_ERROR, "Could not connect to smtp host : $errno : $errstr", "", __LINE__, __FILE__);
+		bb_die('Could not connect to smtp host : '. $errno .' : '. $errstr);
 	}
 
 	// Wait for reply

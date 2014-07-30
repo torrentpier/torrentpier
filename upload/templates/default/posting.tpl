@@ -14,7 +14,7 @@
 <!-- BEGIN new_posts -->
 <tr class="{new_posts.ROW_CLASS}">
 	<td width="120" class="poster_info td1">
-		<p class="nick" onmouseout="bbcode.refreshSelection(false);" onmouseover="bbcode.refreshSelection(true);" onclick="bbcode.onclickPoster('{new_posts.POSTER_NAME_JS}');">
+		<p class="nick" onclick="bbcode.onclickPoster('{new_posts.POSTER_NAME_JS}');">
 			<a href="#" onclick="return false;">{new_posts.POSTER}</a>
 		</p>
 		<p><img src="{SPACER}" width="120" height="10" alt="" /></p>
@@ -167,7 +167,7 @@
 <!-- BEGIN review -->
 <tr class="{review.ROW_CLASS}">
 	<td width="120" class="poster_info td1">
-		<p class="nick" onmouseout="bbcode.refreshSelection(false);" onmouseover="bbcode.refreshSelection(true);" onclick="bbcode.onclickPoster('{review.POSTER_NAME_JS}');">
+		<p class="nick" onclick="bbcode.onclickPoster('{review.POSTER_NAME_JS}');">
 			<a href="#" onclick="return false;">{review.POSTER}</a>
 		</p>
 		<p><img src="{SPACER}" width="120" height="10" alt="" /></p>

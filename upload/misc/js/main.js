@@ -106,13 +106,8 @@ function toggle_disabled (id, val)
 	document.getElementById(id).disabled = (val) ? 0 : 1;
 }
 
-function rand (min, max)
-{
-	return min + Math.floor((max - min + 1) * Math.random());
-}
-
 //
-// Cookie functions [based on ???]
+// Cookie functions
 //
 /**
  * name       Name of the cookie
@@ -163,34 +158,6 @@ function deleteCookie (name, path, domain)
 	setCookie(name, '', -1, path, domain);
 }
 
-// Simple Javascript Browser/OS detection (based on "Harald Hope, Tapio Markula, http://techpatterns.com ver 2.0.1")
-var ua = navigator.userAgent;
-
-var os_win = ( navigator.appVersion.indexOf( 'Win' ) != -1 );
-var os_mac = ( navigator.appVersion.indexOf( 'Mac' ) != -1 );
-var os_lin = ( ua.indexOf( 'Linux' ) != -1 );
-
-var is_opera = ( ua.indexOf( 'Opera' ) != -1 );
-var is_konq  = ( ua.indexOf( 'Konqueror' ) != -1 );
-var is_saf   = ( ua.indexOf( 'Safari' ) != -1 );
-var is_moz   = ( ua.indexOf( 'Gecko' ) != -1 && !is_saf && !is_konq);
-var is_ie    = ( document.all && !is_opera );
-var is_ie4   = ( is_ie && !document.getElementById );
-
-// ie5x tests only for functionality
-// Opera will register true in this test if set to identify as IE 5
-var is_ie5x    = ( document.all && document.getElementById );
-var os_ie5mac  = ( os_mac && is_ie5x );
-var os_ie5xwin = ( os_win && is_ie5x );
-
-// Copy text to clipboard. Originally got from decompiled `php_manual_en.chm`.
-function ie_copyTextToClipboard (fromNode)
-{
-	var txt = document.body.createTextRange();
-	txt.moveToElementText(fromNode);
-	return txt.execCommand("Copy");
-}
-
 //
 // Menus
 //
@@ -198,7 +165,6 @@ var Menu = {
 	hideSpeed          : 'fast',
 	offsetCorrection_X : -4,
 	offsetCorrection_Y : 2,
-	iframeFix          : false,
 
 	activeMenuId       : null,  //  currently opened menu (from previous click)
 	clickedMenuId      : null,  //  menu to show up
@@ -246,9 +212,6 @@ var Menu = {
 			CSS.left = maxVisibleLeft;
 		}
 		this.$menu.css(CSS);
-		if (this.iframeFix) {
-			$('iframe.ie-fix-select-overlap', $menu).css({ width: $menu.width(), height: $menu.height() });
-		}
 	},
 
 	fixLocation: function() {
@@ -264,9 +227,6 @@ var Menu = {
 		var maxVisibleTop = Math.min(curTop, Math.max(0, tCorner - $menu.height()));
 		if (curTop != maxVisibleTop) {
 			$menu.css('top', maxVisibleTop);
-		}
-		if (this.iframeFix) {
-			$('iframe.ie-fix-select-overlap', $menu).css({ width: $menu.width(), height: $menu.height() });
 		}
 	},
 
@@ -308,7 +268,7 @@ var Menu = {
 	}
 };
 
-$(document).ready(function(){
+$(document).ready(function() {
 	// Menus
 	$('body').append($('div.menu-sub'));
 	$('a.menu-root')
@@ -439,7 +399,7 @@ Ajax.prototype = {
 
 	setStatusBoxPosition: function($el) {
 		var newTop = $(document).scrollTop();
-		var rCorner = $(document).scrollLeft() + $(window).width() - ($.browser.opera ? 14 : 8);
+		var rCorner = $(document).scrollLeft() + $(window).width() - 8;
 		var newLeft = Math.max(0, rCorner - $el.width());
 		$el.css({ top: newTop, left: newLeft });
 	},
@@ -518,38 +478,37 @@ $(document).ready(function(){
 
 /**
   * Autocomplete password
-  **/
-	var array_for_rand_pass = ["a", "A", "b", "B", "c", "C", "d", "D", "e", "E", "f", "F", "g", "G", "h", "H", "i", "I", "j", "J", "k", "K", "l", "L", "m", "M", "n", "N", "o", "O", "p", "P", "q", "Q", "r", "R", "s", "S", "t", "T", "u", "U", "v", "V", "w", "W", "x", "X", "y", "Y", "z", "Z", 0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
-	var array_rand = function (array) {
-		var array_length = array.length;
-		var result = Math.random() * array_length;
-		return Math.floor(result);
+ **/
+var array_for_rand_pass = ["a", "A", "b", "B", "c", "C", "d", "D", "e", "E", "f", "F", "g", "G", "h", "H", "i", "I", "j", "J", "k", "K", "l", "L", "m", "M", "n", "N", "o", "O", "p", "P", "q", "Q", "r", "R", "s", "S", "t", "T", "u", "U", "v", "V", "w", "W", "x", "X", "y", "Y", "z", "Z", 0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
+var array_rand = function (array) {
+	var array_length = array.length;
+	var result = Math.random() * array_length;
+	return Math.floor(result);
+};
 
-	};
+var autocomplete = function (noCenter) {
+	var string_result = ""; // Empty string
+	for (var i = 1; i <= 8; i++) {
+		string_result += array_for_rand_pass[array_rand(array_for_rand_pass)];
+	}
 
-	var autocomplete = function (noCenter) {
-		var string_result = ""; // Empty string
-		for (var i = 1; i <= 8; i++) {
-			string_result += array_for_rand_pass[array_rand(array_for_rand_pass)];
-		}
+	var _popup_left = (Math.ceil(window.screen.availWidth / 2) - 150);
+	var _popup_top = (Math.ceil(window.screen.availHeight / 2) - 50);
 
-		var _popup_left = (Math.ceil(window.screen.availWidth / 2) - 150);
-		var _popup_top = (Math.ceil(window.screen.availHeight / 2) - 50);
+	if (!noCenter) {
+		$("div#autocomplete_popup").css({
+			left:_popup_left + "px",
+			top:_popup_top + "px"
+		}).show(1000);
+	} else {
+		$("div#autocomplete_popup").show(1000);
+	}
 
-		if (!noCenter) {
-			$("div#autocomplete_popup").css({
-				left:_popup_left + "px",
-				top:_popup_top + "px"
-			}).show(1000);
-		} else {
-			$("div#autocomplete_popup").show(1000);
-		}
+	$("input#pass, input#pass_confirm, div#autocomplete_popup input").each(function () {
+		$(this).val(string_result);
+	});
+};
 
-		$("input#pass, input#pass_confirm, div#autocomplete_popup input").each(function () {
-			$(this).val(string_result);
-		});
-	};
-	
 $(document).ready(function () {
 	$("span#autocomplete").click(function() {
 		autocomplete();

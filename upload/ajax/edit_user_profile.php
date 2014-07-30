@@ -116,7 +116,7 @@ switch ($field)
 		{
 			$this->ajax_die($lang['INVALID_DATE'] . $this->request['value']);
 		}
-		$this->response['new_value'] = bb_date($value, 'Y-m-d H:i', 'false');
+		$this->response['new_value'] = bb_date($value, 'Y-m-d H:i', false);
 		break;
 
 	case 'u_up_total':

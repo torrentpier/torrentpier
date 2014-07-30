@@ -65,10 +65,10 @@ $select_sort_order .= '</select>';
 // Generate page
 //
 $template->assign_vars(array(
-	'S_MODE_SELECT' => $select_sort_mode,
+	'S_MODE_SELECT'  => $select_sort_mode,
 	'S_ORDER_SELECT' => $select_sort_order,
-	'S_MODE_ACTION' => "memberlist.php",
-	'S_USERNAME' => $paginationusername,
+	'S_MODE_ACTION'  => "memberlist.php",
+	'S_USERNAME'     => $paginationusername,
 ));
 
 switch( $mode )
@@ -147,8 +147,8 @@ $select_letter .= ':&nbsp;';
 $select_letter .= ($by_letter == 'all') ? '<b>'. $lang['ALL'] .'</b>' : '<a class="genmed" href="'. ("memberlist.php?letter=all&amp;mode=$mode&amp;order=$sort_order") .'">'. $lang['ALL'] .'</a>';
 
 $template->assign_vars(array(
-	'S_LETTER_SELECT'   => $select_letter,
-	'S_LETTER_HIDDEN'   => '<input type="hidden" name="letter" value="'. $by_letter .'">',
+	'S_LETTER_SELECT' => $select_letter,
+	'S_LETTER_HIDDEN' => '<input type="hidden" name="letter" value="'. $by_letter .'">',
 ));
 
 // per-letter selection end
@@ -202,8 +202,8 @@ if ($result = DB()->fetch_rowset($sql))
 			'PM'            => $pm,
 			'EMAIL'         => $email,
 			'WWW'           => $www,
-			'U_VIEWPROFILE' => "profile.php?mode=viewprofile&amp;". POST_USERS_URL ."=$user_id")
-		);
+			'U_VIEWPROFILE' => "profile.php?mode=viewprofile&amp;". POST_USERS_URL ."=$user_id",
+		));
 	}
 }
 else
@@ -221,7 +221,7 @@ if ( $mode != 'topten' || $bb_cfg['topics_per_page'] < 10 )
 	$sql .=	($letter_sql) ? " WHERE $letter_sql" : '';
 	if (!$result = DB()->sql_query($sql))
 	{
-		message_die(GENERAL_ERROR, 'Error getting total users', '', __LINE__, __FILE__, $sql);
+		bb_die('Error getting total users');
 	}
 	if ($total = DB()->sql_fetchrow($result))
 	{

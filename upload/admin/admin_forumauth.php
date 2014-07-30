@@ -99,13 +99,13 @@ if( isset($_POST['submit']) )
 		}
 		else
 		{
-			for($i = 0; $i < count($forum_auth_fields); $i++)
+			for ($i = 0; $i < count($forum_auth_fields); $i++)
 			{
 				$value = intval($_POST[$forum_auth_fields[$i]]);
 
-				if ( $forum_auth_fields[$i] == 'auth_vote' )
+				if ($forum_auth_fields[$i] == 'auth_vote')
 				{
-					if ( $_POST['auth_vote'] == AUTH_ALL )
+					if ($_POST['auth_vote'] == AUTH_ALL)
 					{
 						$value = AUTH_REG;
 					}
@@ -117,11 +117,11 @@ if( isset($_POST['submit']) )
 			$sql = "UPDATE " . BB_FORUMS . " SET $sql WHERE forum_id = $forum_id";
 		}
 
-		if ( $sql != '' )
+		if ($sql != '')
 		{
-			if ( !DB()->sql_query($sql) )
+			if (!DB()->sql_query($sql))
 			{
-				message_die(GENERAL_ERROR, 'Could not update auth table', '', __LINE__, __FILE__, $sql);
+				bb_die('Could not update auth table');
 			}
 		}
 
@@ -130,8 +130,7 @@ if( isset($_POST['submit']) )
 	}
 
 	$datastore->update('cat_forums');
-	$message = $lang['FORUM_AUTH_UPDATED'] . '<br /><br />' . sprintf($lang['CLICK_RETURN_FORUMAUTH'],  '<a href="'."admin_forumauth.php".'">', "</a>");
-	message_die(GENERAL_MESSAGE, $message);
+	bb_die($lang['FORUM_AUTH_UPDATED'] . '<br /><br />' . sprintf($lang['CLICK_RETURN_FORUMAUTH'],  '<a href="'."admin_forumauth.php".'">', "</a>"));
 
 } // End of submit
 
@@ -158,14 +157,14 @@ else
 	$forum_name = $forum_rows[0]['forum_name'];
 
 	@reset($simple_auth_ary);
-	while( list($key, $auth_levels) = each($simple_auth_ary))
+	while (list($key, $auth_levels) = each($simple_auth_ary))
 	{
 		$matched = 1;
-		for($k = 0; $k < count($auth_levels); $k++)
+		for ($k = 0; $k < count($auth_levels); $k++)
 		{
 			$matched_type = $key;
 
-			if ( $forum_rows[0][$forum_auth_fields[$k]] != $auth_levels[$k] )
+			if ($forum_rows[0][$forum_auth_fields[$k]] != $auth_levels[$k])
 			{
 				$matched = 0;
 			}
@@ -188,7 +187,7 @@ else
 
 	$s_column_span = 0;
 
-	if ( empty($adv) )
+	if (empty($adv))
 	{
 		$simple_auth = '<select name="simpleauth">';
 
@@ -213,11 +212,11 @@ else
 		// Output values of individual
 		// fields
 		//
-		for($j = 0; $j < count($forum_auth_fields); $j++)
+		for ($j = 0; $j < count($forum_auth_fields); $j++)
 		{
 			$custom_auth[$j] = '&nbsp;<select name="' . $forum_auth_fields[$j] . '">';
 
-			for($k = 0; $k < count($forum_auth_levels); $k++)
+			for ($k = 0; $k < count($forum_auth_levels); $k++)
 			{
 				$selected = ( $forum_rows[0][$forum_auth_fields[$j]] == $forum_auth_const[$k] ) ? ' selected="selected"' : '';
 				$custom_auth[$j] .= '<option value="' . $forum_auth_const[$k] . '"' . $selected . '>' . $lang['FORUM_' . strtoupper($forum_auth_levels[$k])] . '</OPTION>';

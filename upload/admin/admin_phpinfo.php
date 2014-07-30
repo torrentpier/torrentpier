@@ -3,7 +3,7 @@
 // ACP Header - START
 if (!empty($setmodules))
 {
-	$module['General']['PHP Info'] = basename(__FILE__);
+	$module['General']['Php_info'] = basename(__FILE__);
 	return;
 }
 require('./pagestart.php');

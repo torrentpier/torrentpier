@@ -1,4 +1,3 @@
-
 <style type="text/css">
 td.rel-inputs { padding-left: 6px; }
 .rel-el      { margin: 2px 6px 2px 0; }
@@ -4034,7 +4033,7 @@ TPL.el_abrs = [
 	'tablet_mac_prog_abr'
 ];
 function preg_quote (str) {
-	return (str+'').replace(/([\\\.\+\*\?\[\^\]\$\(\)\{\}\=\!\<\>\|\:])/g, "\\$1");  // http://kevin.vanzonneveld.net
+	return (str+'').replace(/([\\\.\+\*\?\[\^\]\$\(\)\{\}\=\!\<\>\|\:])/g, "\\$1");
 }
 
 <!-- IF EDIT_TPL -->
@@ -4054,7 +4053,7 @@ TPL.build_el_id_select = function(){
 	var s = '<select><option value="">&raquo;&raquo; Другие элементы &nbsp;</option>';
 	s += '<option value="`текст...`">Текст...</option>';
 	s += '<option value="`BR`">Новая строка</option>';
-	var q = /"/g;  //"
+	var q = /"/g;
 	$.each(TPL.el_id, function(id,desc){
 		var v = desc.replace(q, '&quot;');
 		if (v == '') return true; // continue
@@ -4234,8 +4233,6 @@ function tpl_build_msg (scroll)
 }
 
 function str_pad ( input, pad_length, pad_string, pad_type ) {
-	// http://kevin.vanzonneveld.net
-
 	if (pad_string == null) {
 		pad_string = ' ';
 	}

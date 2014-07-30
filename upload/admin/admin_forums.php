@@ -192,14 +192,14 @@ if ($mode)
 
 			if (!$forum_name)
 			{
-				message_die(GENERAL_ERROR, "Can't create a forum without a name");
+				bb_die('Can not create a forum without a name');
 			}
 
 			if ($forum_parent)
 			{
 				if (!$parent = get_forum_data($forum_parent))
 				{
-					message_die(GENERAL_ERROR, "Parent forum with <b>id=$forum_parent</b> not found");
+					bb_die('Parent forum with id <b>'. $forum_parent .'</b> not found');
 				}
 
 				$cat_id = $parent['cat_id'];
@@ -233,8 +233,7 @@ if ($mode)
 			$datastore->update('cat_forums');
 			CACHE('bb_cache')->rm();
 
-			$message = $lang['FORUMS_UPDATED'] . '<br /><br />' . sprintf($lang['CLICK_RETURN_FORUMADMIN'], '<a href="admin_forums.php?c='. $cat_id .'">', '</a>') . '<br /><br />' . sprintf($lang['CLICK_RETURN_ADMIN_INDEX'], '<a href="index.php?pane=right">', '</a>');
-			message_die(GENERAL_MESSAGE, $message);
+			bb_die($lang['FORUMS_UPDATED'] . '<br /><br />' . sprintf($lang['CLICK_RETURN_FORUMADMIN'], '<a href="admin_forums.php?c='. $cat_id .'">', '</a>') . '<br /><br />' . sprintf($lang['CLICK_RETURN_ADMIN_INDEX'], '<a href="index.php?pane=right">', '</a>'));
 
 			break;
 
@@ -265,14 +264,14 @@ if ($mode)
 
 			if (!$forum_name)
 			{
-				message_die(GENERAL_ERROR, "Can't modify a forum without a name");
+				bb_die('Can not modify a forum without a name');
 			}
 
 			if ($forum_parent)
 			{
 				if (!$parent = get_forum_data($forum_parent))
 				{
-					message_die(GENERAL_ERROR, "Parent forum with <b>id=$forum_parent</b> not found");
+					bb_die('Parent forum with id <b>'. $forum_parent .'</b> not found');
 				}
 
 				$cat_id = $parent['cat_id'];
@@ -281,7 +280,7 @@ if ($mode)
 
 				if ($forum_id == $forum_parent)
 				{
-					message_die(GENERAL_ERROR, "Ambiguous forum ID's. Please select other parent forum", '', __LINE__, __FILE__);
+					bb_die('Ambiguous forum ID. Please select other parent forum');
 				}
 			}
 			else if ($cat_id != $old_cat_id)
@@ -333,7 +332,7 @@ if ($mode)
 			$message = $lang['FORUMS_UPDATED'] . '<br /><br />';
 			$message .= ($fix) ? "$fix<br /><br />" : '';
 			$message .= sprintf($lang['CLICK_RETURN_FORUMADMIN'], '<a href="admin_forums.php?c='. $cat_id .'">', '</a>') . '<br /><br />' . sprintf($lang['CLICK_RETURN_ADMIN_INDEX'], '<a href="index.php?pane=right">', '</a>');
-			message_die(GENERAL_MESSAGE, $message);
+			bb_die($message);
 
 			break;
 
@@ -360,8 +359,7 @@ if ($mode)
 			$datastore->update('cat_forums');
 			CACHE('bb_cache')->rm();
 
-			$message = $lang['FORUMS_UPDATED'] . '<br /><br />' . sprintf($lang['CLICK_RETURN_FORUMADMIN'], '<a href="admin_forums.php">', '</a>') . '<br /><br />' . sprintf($lang['CLICK_RETURN_ADMIN_INDEX'], '<a href="index.php?pane=right">', '</a>');
-			message_die(GENERAL_MESSAGE, $message);
+			bb_die($lang['FORUMS_UPDATED'] . '<br /><br />' . sprintf($lang['CLICK_RETURN_FORUMADMIN'], '<a href="admin_forums.php">', '</a>') . '<br /><br />' . sprintf($lang['CLICK_RETURN_ADMIN_INDEX'], '<a href="index.php?pane=right">', '</a>'));
 
 			break;
 
@@ -417,8 +415,7 @@ if ($mode)
 			$datastore->update('cat_forums');
 			CACHE('bb_cache')->rm();
 
-			$message = $lang['FORUMS_UPDATED'] . '<br /><br />' . sprintf($lang['CLICK_RETURN_FORUMADMIN'], '<a href="admin_forums.php">', '</a>') . '<br /><br />' . sprintf($lang['CLICK_RETURN_ADMIN_INDEX'], '<a href="index.php?pane=right">', '</a>');
-			message_die(GENERAL_MESSAGE, $message);
+			bb_die($lang['FORUMS_UPDATED'] . '<br /><br />' . sprintf($lang['CLICK_RETURN_FORUMADMIN'], '<a href="admin_forums.php">', '</a>') . '<br /><br />' . sprintf($lang['CLICK_RETURN_ADMIN_INDEX'], '<a href="index.php?pane=right">', '</a>'));
 
 			break;
 
@@ -473,7 +470,7 @@ if ($mode)
 
 				if (DB()->num_rows($result) != 2)
 				{
-					message_die(GENERAL_ERROR, "Ambiguous forum ID's", "", __LINE__, __FILE__);
+					bb_die('Ambiguous forum ID');
 				}
 
 				DB()->query("UPDATE ". BB_TOPICS ." SET forum_id = $to_id WHERE forum_id = $from_id");
@@ -510,15 +507,12 @@ if ($mode)
 			$datastore->update('cat_forums');
 			CACHE('bb_cache')->rm();
 
-			$message = $lang['FORUMS_UPDATED'] . '<br /><br />' . sprintf($lang['CLICK_RETURN_FORUMADMIN'], '<a href="admin_forums.php">', '</a>') . '<br /><br />' . sprintf($lang['CLICK_RETURN_ADMIN_INDEX'], '<a href="index.php?pane=right">', '</a>');
-			message_die(GENERAL_MESSAGE, $message);
+			bb_die($lang['FORUMS_UPDATED'] . '<br /><br />' . sprintf($lang['CLICK_RETURN_FORUMADMIN'], '<a href="admin_forums.php">', '</a>') . '<br /><br />' . sprintf($lang['CLICK_RETURN_ADMIN_INDEX'], '<a href="index.php?pane=right">', '</a>'));
 
 			break;
 
 		case 'deletecat':
-			//
 			// Show form to delete a category
-			//
 			$cat_id  = (int) $_GET['c'];
 			$catinfo = get_info('category', $cat_id);
 			$categories_count = $catinfo['number'];
@@ -529,7 +523,7 @@ if ($mode)
 
 				if ($row['forums_count'] > 0)
 				{
-					message_die(GENERAL_ERROR, $lang['MUST_DELETE_FORUMS']);
+					bb_die($lang['MUST_DELETE_FORUMS']);
 				}
 				else
 				{
@@ -558,9 +552,7 @@ if ($mode)
 			break;
 
 		case 'movedelcat':
-			//
 			// Move or delete a category in the DB
-			//
 			$from_id = (int) $_POST['from_id'];
 			$to_id   = (int) $_POST['to_id'];
 
@@ -589,14 +581,12 @@ if ($mode)
 			$message = $lang['FORUMS_UPDATED'] . '<br /><br />';
 			$message .= ($fix) ? "$fix<br /><br />" : '';
 			$message .= sprintf($lang['CLICK_RETURN_FORUMADMIN'], '<a href="admin_forums.php">', '</a>') . '<br /><br />' . sprintf($lang['CLICK_RETURN_ADMIN_INDEX'], '<a href="index.php?pane=right">', '</a>');
-			message_die(GENERAL_MESSAGE, $message);
+			bb_die($message);
 
 			break;
 
 		case 'forum_order':
-			//
 			// Change order of forums
-			//
 			$move = intval($_GET['move']);
 			$forum_id = intval($_GET[POST_FORUM_URL]);
 
@@ -706,7 +696,7 @@ if ($mode)
 			break;
 
 		default:
-			message_die(GENERAL_MESSAGE, $lang['NO_MODE']);
+			bb_die($lang['NO_MODE']);
 
 			break;
 	}
@@ -717,19 +707,17 @@ if (!$mode || $show_main_page)
 	$template->assign_vars(array(
 		'TPL_FORUMS_LIST' => true,
 
-		'S_FORUM_ACTION' => "admin_forums.php",
-		'L_FORUM_TITLE' => $lang['FORUM_ADMIN_MAIN']
+		'S_FORUM_ACTION' => 'admin_forums.php',
+		'L_FORUM_TITLE' => $lang['FORUM_ADMIN_MAIN'],
 	));
 
-	$sql = "SELECT cat_id, cat_title, cat_order
-		FROM " . BB_CATEGORIES . "
-		ORDER BY cat_order";
-	if( !$q_categories = DB()->sql_query($sql) )
+	$sql = "SELECT cat_id, cat_title, cat_order FROM " . BB_CATEGORIES . " ORDER BY cat_order";
+	if (!$q_categories = DB()->sql_query($sql))
 	{
-		message_die(GENERAL_ERROR, "Could not query categories list", "", __LINE__, __FILE__, $sql);
+		bb_die('Could not query categories list');
 	}
 
-	if( $total_categories = DB()->num_rows($q_categories) )
+	if ($total_categories = DB()->num_rows($q_categories))
 	{
 		$category_rows = DB()->sql_fetchrowset($q_categories);
 
@@ -752,23 +740,18 @@ if (!$mode || $show_main_page)
 			$where_cat_sql = "WHERE cat_id = '-1'";
 		}
 
-		$sql = "SELECT *
-			FROM ". BB_FORUMS ."
-				$where_cat_sql
-			ORDER BY cat_id, forum_order";
-		if(!$q_forums = DB()->sql_query($sql))
+		$sql = "SELECT * FROM ". BB_FORUMS ." $where_cat_sql ORDER BY cat_id, forum_order";
+		if (!$q_forums = DB()->sql_query($sql))
 		{
-			message_die(GENERAL_ERROR, "Could not query forums information", '', __LINE__, __FILE__, $sql);
+			bb_die('Could not query forums information');
 		}
 
-		if( $total_forums = DB()->num_rows($q_forums) )
+		if ($total_forums = DB()->num_rows($q_forums))
 		{
 			$forum_rows = DB()->sql_fetchrowset($q_forums);
 		}
 
-		//
 		// Okay, let's build the index
-		//
 		$gen_cat = array();
 
 		$bgr_class_1    = 'prow1';
@@ -776,11 +759,11 @@ if (!$mode || $show_main_page)
 		$bgr_class_over = 'prow3';
 
 		$template->assign_vars(array(
-			'U_ALL_FORUMS' => "admin_forums.php?c=all",
+			'U_ALL_FORUMS' => 'admin_forums.php?c=all',
 			'FORUMS_COUNT' => $total_forums,
 		));
 
-		for($i = 0; $i < $total_categories; $i++)
+		for ($i = 0; $i < $total_categories; $i++)
 		{
 			$cat_id = $category_rows[$i]['cat_id'];
 
@@ -799,7 +782,7 @@ if (!$mode || $show_main_page)
 				'U_CREATE_FORUM'  => "admin_forums.php?mode=addforum&amp;c=$cat_id",
 			));
 
-			for($j = 0; $j < $total_forums; $j++)
+			for ($j = 0; $j < $total_forums; $j++)
 			{
 				$forum_id = $forum_rows[$j]['forum_id'];
 
@@ -842,10 +825,8 @@ if (!$mode || $show_main_page)
 
 print_page('admin_forums.tpl', 'admin');
 
-//
 // Functions
-//
-function get_info($mode, $id)
+function get_info ($mode, $id)
 {
 	switch($mode)
 	{
@@ -862,27 +843,27 @@ function get_info($mode, $id)
 			break;
 
 		default:
-			message_die(GENERAL_ERROR, "Wrong mode for generating select list", '', __LINE__, __FILE__);
+			bb_die('Wrong mode for generating select list #1');
 			break;
 	}
 	$sql = "SELECT count(*) as total FROM $table";
 	if( !$result = DB()->sql_query($sql) )
 	{
-		message_die(GENERAL_ERROR, "Couldn't get Forum/Category information", '', __LINE__, __FILE__, $sql);
+		bb_die('Could not get forum / category information #1');
 	}
 	$count = DB()->sql_fetchrow($result);
 	$count = $count['total'];
 
 	$sql = "SELECT * FROM $table WHERE $idfield = $id";
 
-	if( !$result = DB()->sql_query($sql) )
+	if (!$result = DB()->sql_query($sql))
 	{
-		message_die(GENERAL_ERROR, "Couldn't get Forum/Category information", '', __LINE__, __FILE__, $sql);
+		bb_die('Could not get forum / category information #2');
 	}
 
-	if( DB()->num_rows($result) != 1 )
+	if (DB()->num_rows($result) != 1)
 	{
-		message_die(GENERAL_ERROR, "Forum/Category doesn't exist or multiple forums/categories with ID $id", '', __LINE__, __FILE__);
+		bb_die('Forum / category does not exist or multiple forums / categories with ID '. $id);
 	}
 
 	$return = DB()->sql_fetchrow($result);
@@ -890,7 +871,7 @@ function get_info($mode, $id)
 	return $return;
 }
 
-function get_list($mode, $id, $select)
+function get_list ($mode, $id, $select)
 {
 	switch($mode)
 	{
@@ -909,7 +890,7 @@ function get_list($mode, $id, $select)
 			break;
 
 		default:
-			message_die(GENERAL_ERROR, "Wrong mode for generating select list", '', __LINE__, __FILE__);
+			bb_die('Wrong mode for generating select list #2');
 			break;
 	}
 
@@ -922,7 +903,7 @@ function get_list($mode, $id, $select)
 
 	if( !$result = DB()->sql_query($sql) )
 	{
-		message_die(GENERAL_ERROR, "Couldn't get list of Categories/Forums", '', __LINE__, __FILE__, $sql);
+		bb_die('Could not get list of categories / forums #1');
 	}
 
 	$catlist = '';
@@ -940,7 +921,7 @@ function get_list($mode, $id, $select)
 	return($catlist);
 }
 
-function renumber_order($mode, $cat = 0)
+function renumber_order ($mode, $cat = 0)
 {
 	switch($mode)
 	{
@@ -959,7 +940,7 @@ function renumber_order($mode, $cat = 0)
 			break;
 
 		default:
-			message_die(GENERAL_ERROR, "Wrong mode for generating select list", '', __LINE__, __FILE__);
+			bb_die('Wrong mode for generating select list #3');
 			break;
 	}
 
@@ -971,26 +952,26 @@ function renumber_order($mode, $cat = 0)
 	$sql .= " ORDER BY $orderfield ASC";
 
 
-	if( !$result = DB()->sql_query($sql) )
+	if (!$result = DB()->sql_query($sql))
 	{
-		message_die(GENERAL_ERROR, "Couldn't get list of Categories", '', __LINE__, __FILE__, $sql);
+		bb_die('Could not get list of categories / forums #2');
 	}
 
 	$i = 10;
 
-	while( $row = DB()->sql_fetchrow($result) )
+	while ($row = DB()->sql_fetchrow($result))
 	{
 		$sql = "UPDATE $table SET $orderfield = $i WHERE $idfield = " . $row[$idfield];
-		if( !DB()->sql_query($sql) )
+		if (!DB()->sql_query($sql))
 		{
-			message_die(GENERAL_ERROR, "Couldn't update order fields", '', __LINE__, __FILE__, $sql);
+			bb_die('Could not update order fields');
 		}
 		$i += 10;
 	}
 
 	if (!$result = DB()->sql_query($sql))
 	{
-		message_die(GENERAL_ERROR, "Couldn't get list of Categories", '', __LINE__, __FILE__, $sql);
+		bb_die('Could not get list of categories / forums #3');
 	}
 
 }
@@ -1013,7 +994,7 @@ function get_cat_forums ($cat_id = FALSE)
 
 	if (!$result = DB()->sql_query($sql))
 	{
-		message_die(GENERAL_ERROR, "Couldn't get list of Categories", '', __LINE__, __FILE__, $sql);
+		bb_die('Could not get list of categories / forums #4');
 	}
 
 	if ($rowset = DB()->sql_fetchrowset($result))
@@ -1123,14 +1104,11 @@ function fix_orphan_sf ($orphan_sf_sql = '', $show_mess = FALSE)
 
 	if ($orphan_sf_sql)
 	{
-		$sql = "UPDATE ". BB_FORUMS ." SET
-				forum_parent = 0,
-				show_on_index = 1
-			WHERE forum_id IN($orphan_sf_sql)";
+		$sql = "UPDATE ". BB_FORUMS ." SET forum_parent = 0, show_on_index = 1 WHERE forum_id IN($orphan_sf_sql)";
 
 		if (!DB()->sql_query($sql))
 		{
-			message_die(GENERAL_ERROR, "Couldn't change subforums data", '', __LINE__, __FILE__, $sql);
+			bb_die('Could not change subforums data');
 		}
 
 		if ($affectedrows = DB()->affected_rows())
@@ -1143,7 +1121,7 @@ function fix_orphan_sf ($orphan_sf_sql = '', $show_mess = FALSE)
 			$message  = $done_mess .'<br /><br />';
 			$message .= sprintf($lang['CLICK_RETURN_FORUMADMIN'], '<a href="admin_forums.php">', '</a>') .'<br /><br />';
 			$message .= sprintf($lang['CLICK_RETURN_ADMIN_INDEX'], '<a href="index.php?pane=right">', '</a>');
-			message_die(GENERAL_MESSAGE, $message);
+			bb_die($message);
 		}
 	}
 
@@ -1212,12 +1190,12 @@ function check_name_dup ($mode, $name, $die_on_error = true)
 
 	if ($mode == 'cat')
 	{
-		$what_checked = 'Category';
+		$what_checked = 'category';
 		$sql = "SELECT cat_id FROM ". BB_CATEGORIES ." WHERE cat_title = '$name_sql'";
 	}
 	else
 	{
-		$what_checked = 'Forum';
+		$what_checked = 'forum';
 		$sql = "SELECT forum_id FROM ". BB_FORUMS ." WHERE forum_name = '$name_sql'";
 	}
 
@@ -1225,7 +1203,7 @@ function check_name_dup ($mode, $name, $die_on_error = true)
 
 	if ($name_is_dup && $die_on_error)
 	{
-		bb_die("This $what_checked name taken, please choose something else");
+		bb_die('This '. $what_checked .' name taken, please choose something else');
 	}
 
 	return $name_is_dup;

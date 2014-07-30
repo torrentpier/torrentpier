@@ -24,7 +24,7 @@ class report_post extends report_module
 		$sql = 'UPDATE ' . BB_POSTS . '
 			SET post_reported = 0';
 		if (!DB()->sql_query($sql)) {
-			message_die(GENERAL_ERROR, 'Could not reset post reported flag', '', __LINE__, __FILE__, $sql);
+			bb_die('Could not reset post reported flag');
 		}
 
 		if (!$uninstall) {
@@ -34,7 +34,7 @@ class report_post extends report_module
 					AND report_status NOT IN(' . REPORT_CLEARED . ', ' . REPORT_DELETE . ')
 				GROUP BY report_subject';
 			if (!$result = DB()->sql_query($sql)) {
-				message_die(GENERAL_ERROR, 'Could not obtain open reports', '', __LINE__, __FILE__, $sql);
+				bb_die('Could not obtain open reports');
 			}
 
 			$open_ids = array();
@@ -48,7 +48,7 @@ class report_post extends report_module
 					SET post_reported = 1
 					WHERE post_id IN(' . implode(', ', $open_ids) . ')';
 				if (!DB()->sql_query($sql)) {
-					message_die(GENERAL_ERROR, 'Could not sync post reported flag', '', __LINE__, __FILE__, $sql);
+					bb_die('Could not sync post reported flag');
 				}
 			}
 		}
@@ -63,7 +63,7 @@ class report_post extends report_module
 			SET post_reported = 1
 			WHERE post_id = ' . (int)$report_subject;
 		if (!DB()->sql_query($sql)) {
-			message_die(GENERAL_ERROR, 'Could not update post reported flag', '', __LINE__, __FILE__, $sql);
+			bb_die('Could not update post reported flag #1');
 		}
 	}
 
@@ -85,7 +85,7 @@ class report_post extends report_module
 					SET post_reported = 1
 					WHERE post_id IN(' . implode(', ', $report_subjects) . ')';
 				if (!DB()->sql_query($sql)) {
-					message_die(GENERAL_ERROR, 'Could not update post reported flag', '', __LINE__, __FILE__, $sql);
+					bb_die('Could not update post reported flag #2');
 				}
 				break;
 		}
@@ -106,7 +106,7 @@ class report_post extends report_module
 				AND report_status NOT IN(' . REPORT_CLEARED . ', ' . REPORT_DELETE . ')
 			GROUP BY report_subject';
 		if (!$result = DB()->sql_query($sql)) {
-			message_die(GENERAL_ERROR, 'Could not get open reports', '', __LINE__, __FILE__, $sql);
+			bb_die('Could not get open reports');
 		}
 
 		$open_ids = array();
@@ -120,7 +120,7 @@ class report_post extends report_module
 				SET post_reported = 1
 				WHERE post_id IN(' . implode(', ', $open_ids) . ')';
 			if (!DB()->sql_query($sql)) {
-				message_die(GENERAL_ERROR, 'Could not update post reported flag', '', __LINE__, __FILE__, $sql);
+				bb_die('Could not update post reported flag #3');
 			}
 		}
 
@@ -136,7 +136,7 @@ class report_post extends report_module
 				SET post_reported = 0
 				WHERE post_id IN(' . implode(', ', $clear_ids) . ')';
 			if (!DB()->sql_query($sql)) {
-				message_die(GENERAL_ERROR, 'Could not update post reported flag', '', __LINE__, __FILE__, $sql);
+				bb_die('Could not update post reported flag #4');
 			}
 		}
 	}
@@ -163,7 +163,7 @@ class report_post extends report_module
 				ON t.topic_id = p.topic_id
 			WHERE p.post_id = ' . (int)$report_subject;
 		if (!$result = DB()->sql_query($sql)) {
-			message_die(GENERAL_ERROR, 'Could not obtain report subject', '', __LINE__, __FILE__, $sql);
+			bb_die('Could not obtain report subject');
 		}
 
 		$row = DB()->sql_fetchrow($result);
@@ -192,7 +192,7 @@ class report_post extends report_module
 			FROM ' . BB_POSTS . '
 			WHERE post_id = ' . (int)$report_subject;
 		if (!$result = DB()->sql_query($sql)) {
-			message_die(GENERAL_ERROR, 'Could not obtain report subject data', '', __LINE__, __FILE__, $sql);
+			bb_die('Could not obtain report subject data');
 		}
 
 		$row = DB()->sql_fetchrow($result);
@@ -231,7 +231,7 @@ class report_post extends report_module
 				FROM ' . BB_POSTS . '
 				WHERE post_id IN(' . implode(', ', $check_posts) . ')';
 			if (!$result = DB()->sql_query($sql)) {
-				message_die(GENERAL_ERROR, 'Could not obtain current forum ids', '', __LINE__, __FILE__, $sql);
+				bb_die('Could not obtain current forum ids');
 			}
 
 			while ($row = DB()->sql_fetchrow($result)) {

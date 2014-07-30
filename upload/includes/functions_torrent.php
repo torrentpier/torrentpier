@@ -31,7 +31,7 @@ function get_torrent_info ($attach_id)
 
 	if (!$torrent = DB()->fetch_row($sql))
 	{
-		message_die(GENERAL_ERROR, $lang['INVALID_ATTACH_ID']);
+		bb_die($lang['INVALID_ATTACH_ID']);
 	}
 
 	return $torrent;
@@ -47,12 +47,11 @@ function torrent_auth_check ($forum_id, $poster_id)
 
 	if ($poster_id != $userdata['user_id'] && !$is_auth['auth_mod'])
 	{
-		message_die(GENERAL_MESSAGE, $lang['NOT_MODERATOR'], $lang['NOT_AUTHORISED']);
+		bb_die($lang['NOT_MODERATOR']);
 	}
 	else if (!$is_auth['auth_view'] || !$is_auth['auth_attachments'] || $attach_config['disable_mod'])
 	{
-		$message = sprintf($lang['SORRY_AUTH_READ'], $is_auth['auth_read_type']);
-		message_die(GENERAL_MESSAGE, $message);
+		bb_die(sprintf($lang['SORRY_AUTH_READ'], $is_auth['auth_read_type']));
 	}
 	return $is_auth;
 }
@@ -76,11 +75,11 @@ function tracker_unregister ($attach_id, $mode = '')
 	{
 		if (!$torrent)
 		{
-			message_die(GENERAL_ERROR, $lang['TOR_NOT_FOUND']);
+			bb_die($lang['TOR_NOT_FOUND']);
 		}
 		if (!$torrent['tracker_status'])
 		{
-			message_die(GENERAL_ERROR, 'Torrent already unregistered');
+			bb_die('Torrent already unregistered');
 		}
 		torrent_auth_check($forum_id, $torrent['poster_id']);
 	}
@@ -91,7 +90,7 @@ function tracker_unregister ($attach_id, $mode = '')
 
 		if (!$result = DB()->sql_query($sql))
 		{
-			message_die(GENERAL_ERROR, 'Could not query torrent information', '', __LINE__, __FILE__, $sql);
+			bb_die('Could not query torrent information');
 		}
 		if ($row = DB()->sql_fetchrow($result))
 		{
@@ -106,7 +105,7 @@ function tracker_unregister ($attach_id, $mode = '')
 
 		if (!$result = DB()->sql_query($sql))
 		{
-			message_die(GENERAL_ERROR, 'Could not update topics table', '', __LINE__, __FILE__, $sql);
+			bb_die('Could not update topics table #1');
 		}
 	}
 
@@ -115,7 +114,7 @@ function tracker_unregister ($attach_id, $mode = '')
 
 	if (!DB()->sql_query($sql))
 	{
-		message_die(GENERAL_ERROR, 'Could not delete peers', '', __LINE__, __FILE__, $sql);
+		bb_die('Could not delete peers');
 	}
 
 	// Delete torrent
@@ -123,7 +122,7 @@ function tracker_unregister ($attach_id, $mode = '')
 
 	if (!DB()->sql_query($sql))
 	{
-		message_die(GENERAL_ERROR, 'Could not delete torrent from torrents table', '', __LINE__, __FILE__, $sql);
+		bb_die('Could not delete torrent from torrents table');
 	}
 
 	// Update tracker_status
@@ -131,7 +130,7 @@ function tracker_unregister ($attach_id, $mode = '')
 
 	if (!DB()->sql_query($sql))
 	{
-		message_die(GENERAL_ERROR, 'Could not update torrent status', '', __LINE__, __FILE__, $sql);
+		bb_die('Could not update torrent status #1');
 	}
 
 	if ($mode == 'request')
@@ -150,7 +149,7 @@ function delete_torrent ($attach_id, $mode = '')
 
 	if (!$torrent = get_torrent_info($attach_id))
 	{
-		message_die(GENERAL_ERROR, $lang['TOR_NOT_FOUND']);
+		bb_die($lang['TOR_NOT_FOUND']);
 	}
 
 	$topic_id  = $torrent['topic_id'];
@@ -159,7 +158,7 @@ function delete_torrent ($attach_id, $mode = '')
 
 	if ($torrent['extension'] !== TORRENT_EXT)
 	{
-		message_die(GENERAL_ERROR, $lang['NOT_TORRENT']);
+		bb_die($lang['NOT_TORRENT']);
 	}
 
 	torrent_auth_check($forum_id, $poster_id);
@@ -316,7 +315,7 @@ function tracker_register ($attach_id, $mode = '', $tor_status = TOR_NOT_APPROVE
 		{
 			return torrent_error_exit($lang['BT_REG_FAIL_SAME_HASH']);
 		}
-		message_die(GENERAL_ERROR, 'Could not register torrent on tracker', '', __LINE__, __FILE__, $sql);
+		bb_die('Could not register torrent on tracker');
 	}
 
 	// update tracker status for this attachment
@@ -324,7 +323,7 @@ function tracker_register ($attach_id, $mode = '', $tor_status = TOR_NOT_APPROVE
 
 	if (!DB()->sql_query($sql))
 	{
-		message_die(GENERAL_ERROR, 'Could not update torrent status', '', __LINE__, __FILE__, $sql);
+		bb_die('Could not update torrent status #2');
 	}
 
 	// set DL-Type for topic
@@ -334,7 +333,7 @@ function tracker_register ($attach_id, $mode = '', $tor_status = TOR_NOT_APPROVE
 
 		if (!$result = DB()->sql_query($sql))
 		{
-			message_die(GENERAL_ERROR, 'Could not update topics table', '', __LINE__, __FILE__, $sql);
+			bb_die('Could not update topics table #2');
 		}
 	}
 
@@ -368,7 +367,7 @@ function send_torrent_with_passkey ($filename)
 
 	if (!$passkey_key = $bb_cfg['passkey_key'])
 	{
-		message_die(GENERAL_ERROR, 'Could not add passkey (wrong config $bb_cfg[\'passkey_key\'])');
+		bb_die('Could not add passkey (wrong config $bb_cfg[\'passkey_key\'])');
 	}
 
 	// Get $post_id & $poster_id
@@ -386,19 +385,19 @@ function send_torrent_with_passkey ($filename)
 	$topic_id_sql = 'SELECT topic_id FROM ' . BB_POSTS . ' WHERE post_id = ' . (int) $post_id;
 	if (!($topic_id_result = DB()->sql_query($topic_id_sql)))
 	{
-		message_die(GENERAL_ERROR, 'Could not query post information', '', __LINE__, __FILE__, $topic_id_sql);
+		bb_die('Could not query post information');
 	}
 	$topic_id_row = DB()->sql_fetchrow($topic_id_result);
 	$topic_id = $topic_id_row['topic_id'];
 
 	if (!$attachment['tracker_status'])
 	{
-		message_die(GENERAL_ERROR, $lang['PASSKEY_ERR_TOR_NOT_REG']);
+		bb_die($lang['PASSKEY_ERR_TOR_NOT_REG']);
 	}
 
 	if (bf($userdata['user_opt'], 'user_opt', 'dis_passkey') && !IS_GUEST)
 	{
-		message_die(GENERAL_ERROR, 'Could not add passkey');
+		bb_die('Could not add passkey');
 	}
 
 	if ($bt_userdata = get_bt_userdata($user_id))
@@ -431,8 +430,7 @@ function send_torrent_with_passkey ($filename)
 
 			if (!isset($dl['user_status']) || $dl['user_status'] != DL_STATUS_COMPLETE)
 			{
-				$mess = sprintf($lang['BT_LOW_RATIO_FOR_DL'], round($user_ratio, 2), "search.php?dlu=$user_id&amp;dlc=1");
-				message_die(GENERAL_ERROR, $mess);
+				bb_die(sprintf($lang['BT_LOW_RATIO_FOR_DL'], round($user_ratio, 2), "search.php?dlu=$user_id&amp;dlc=1"));
 			}
 		}
 	}
@@ -442,7 +440,7 @@ function send_torrent_with_passkey ($filename)
 
 	if (!$tor = bdecode_file($filename))
 	{
-		message_die(GENERAL_ERROR, 'This is not a bencoded file');
+		bb_die('This is not a bencoded file');
 	}
 
 	$announce = strval($ann_url . "?$passkey_key=$passkey_val");
@@ -507,13 +505,13 @@ function generate_passkey ($user_id, $force_generate = false)
 
 		if (!$result = DB()->sql_query($sql))
 		{
-			message_die(GENERAL_ERROR, 'Could not query userdata for passkey', '', __LINE__, __FILE__, $sql);
+			bb_die('Could not query userdata for passkey');
 		}
 		if ($row = DB()->sql_fetchrow($result))
 		{
 			if (bf($row['user_opt'], 'user_opt', 'dis_passkey'))
 			{
-				message_die(GENERAL_MESSAGE, $lang['NOT_AUTHORISED']);
+				bb_die($lang['NOT_AUTHORISED']);
 			}
 		}
 	}
@@ -558,7 +556,7 @@ function get_registered_torrents ($id, $mode)
 
 	if (!$result = DB()->sql_query($sql))
 	{
-		message_die(GENERAL_ERROR, 'Could not query torrent id', '', __LINE__, __FILE__, $sql);
+		bb_die('Could not query torrent id');
 	}
 
 	if ($rowset = @DB()->sql_fetchrowset($result))
@@ -589,7 +587,7 @@ function torrent_error_exit ($message)
 	bb_die($msg . $message);
 }
 
-// bdecode: based on OpenTracker [http://whitsoftdev.com/opentracker]
+// bdecode: based on OpenTracker
 function bdecode_file ($filename)
 {
 	$file_contents = file_get_contents($filename);
