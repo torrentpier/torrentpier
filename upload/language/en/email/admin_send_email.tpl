@@ -4,7 +4,7 @@ The following is an email sent to you by an administrator of "{SITENAME}". If th
 
 {BOARD_EMAIL}
 
-Include this full email (particularly the headers). 
+Include this full email (particularly the headers).
 
 Message sent to you follows:
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~

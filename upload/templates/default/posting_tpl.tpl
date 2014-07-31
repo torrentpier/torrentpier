@@ -571,7 +571,6 @@ var TPL = {
 	submit_fn : {}
 };
 
-
 /*
   -------------------------------------------------------------------------------------------------
   -- el_attr --------------------------------------------------------------------------------------
@@ -4722,7 +4721,6 @@ $(function(){
 <div id="tyt_faq_url"> <a href="http://rutracker.org/forum/viewtopic.php?t=2135853" target="_blank"><b>тут</b></a> </div>
 <!--/tyt_faq_url-->
 
-
 <!--wtf_faq_url-->
 <div id="wtf_faq_url"> <a href="http://rutracker.org/forum/viewtopic.php?t=488848#other" target="_blank"><b>Что это значит?</b></a> </div>
 <!--/wtf_faq_url-->
@@ -4766,7 +4764,6 @@ $(function(){
 <!--file_list-->
 <div id="file_list"> <a href="http://rutracker.org/forum/viewtopic.php?p=21307338#21307338" target="_blank"><b>Как создать список файлов?</b></a></div>
 <!--/file_list-->
-
 
 <!--faq_traclist-->
 <div id="faq_traclist"> <a href="http://rutracker.org/forum/viewtopic.php?t=2525182" target="_blank"><b>Как быстро создать треклист с указанием битрейта</b></a></div>

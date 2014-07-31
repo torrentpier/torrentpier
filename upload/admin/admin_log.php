@@ -245,7 +245,6 @@ else
 
 generate_pagination($url, $items_count, $per_page, $start);
 
-
 $filter = array();
 
 if ($log_rowset)

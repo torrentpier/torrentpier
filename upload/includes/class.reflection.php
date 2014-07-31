@@ -17,7 +17,7 @@
  * Useful links
  *   http://www.ilia.ws/archives/205-Type-hinting-for-PHP-5.3.html
  *   http://php.net/manual/en/language.oop5.typehinting.php
- * 
+ *
  * @example  ReflectionTypeHint_example.php
  * @link     http://code.google.com/p/php5-reflection-type-hint/
  * @license  http://creativecommons.org/licenses/by-sa/3.0/

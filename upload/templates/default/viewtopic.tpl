@@ -419,7 +419,7 @@ function build_poll_add_form (src_el)
 			<!-- IF postrow.SIGNATURE -->{postrow.SIGNATURE}<!-- ENDIF -->
 			<!-- IF postrow.EDITED_MESSAGE --><div class="last_edited">{postrow.EDITED_MESSAGE}</div><!-- ENDIF -->
 		</div><!--/post_body-->
-		
+
 		<!-- IF AUTH_MOD -->
 		<div class="menu-sub" id="mc_{postrow.POST_ID}">
 		<table cellspacing="1" cellpadding="4">
@@ -583,22 +583,6 @@ function build_poll_add_form (src_el)
 	</td>
 </tr>
 </table>
-
-<!-- IF PORNO_FORUM -->
-<script type="text/javascript">
-// block Imageshack images
-$(document).ready(function(){
- $("div.post_body")
-   .find("img.postImg[@src*='imageshack']")
-     .attr({ src: "images/smiles/tr_oops.gif", alt: "{L_SCREENSHOTS_RULES_TOPIC}" })
-     .wrap('<a href="viewtopic.php?t={$bb_cfg['porno_forums_screenshots_topic_id']}"></a>')
-   .end()
-   .find("a.postLink[@href*='imageshack']")
-     .attr({ href: "viewtopic.php?t={$bb_cfg['porno_forums_screenshots_topic_id']}" })
-     .text("{L_SCREENSHOTS_RULES_TOPIC}");
-});
-</script>
-<!-- ENDIF -->
 
 <table cellpadding="0" class="w100" style="padding-top: 2px;">
 <tr>

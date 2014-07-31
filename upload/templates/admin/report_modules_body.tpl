@@ -42,7 +42,7 @@
 	</tr>
 	<!-- END switch_no_modules -->
 	<!-- END installed_modules -->
-	
+
 	<!-- BEGIN inactive_modules -->
 	<tr class="row3 med">
 	    <td colspan="3" class="catTitle">{L_INACTIVE_MODULES}</td>

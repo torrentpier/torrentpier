@@ -1,22 +1,6 @@
 <?php
 
 /**
-* Setup Basic Authentication
-*/
-// moved to auth
-
-/**
-* Setup Forum Authentication (admin/admin_forumauth.php)
-*/
-//admin/admin_forumauth.php
-
-
-/**
-* Setup Usergroup Authentication
-*/
-//admin/admin_ug_auth.php
-
-/**
 * Setup s_auth_can in viewforum and viewtopic (viewtopic.php/viewforum.php)
 */
 function attach_build_auth_levels($is_auth, &$s_auth_can)

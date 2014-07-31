@@ -120,7 +120,7 @@ $template->assign_vars(array(
 	'SKYPE'                => $profiledata['user_skype'],
 	'TWITTER'              => $profiledata['user_twitter'],
 	'USER_POINTS'          => $profiledata['user_points'],
-	'GENDER'               => ($bb_cfg['gender'] && $profiledata['user_gender']) ? $lang['GENDER_SELECT'][$profiledata['user_gender']] : '',
+	'GENDER'               => ($bb_cfg['gender']) ? $lang['GENDER_SELECT'][$profiledata['user_gender']] : '',
 	'BIRTHDAY'             => ($bb_cfg['birthday_enabled'] && $profiledata['user_birthday'] != '0000-00-00') ? $profiledata['user_birthday'] : '',
 	'AGE'                  => ($bb_cfg['birthday_enabled'] && $profiledata['user_birthday'] != '0000-00-00') ? birthday_age($profiledata['user_birthday']) : '',
 
@@ -189,13 +189,13 @@ else if (IS_MOD)
 // Show users torrent-profile
 if (IS_AM || $profile_user_id || !bf($profiledata['user_opt'], 'user_opt', 'user_dls'))
 {
-    require(INC_DIR .'ucp/viewtorrent.php');
+	require(INC_DIR .'ucp/viewtorrent.php');
 }
 
 // Ajax bt_userdata
 if (IS_AM || $profile_user_id)
 {
-    show_bt_userdata($profiledata['user_id']);
+	show_bt_userdata($profiledata['user_id']);
 }
 else
 {
@@ -227,13 +227,13 @@ if (IS_ADMIN)
 
 $user_restrictions = array();
 
-if (bf($profiledata['user_opt'], 'user_opt', 'dis_avatar'))      $user_restrictions[] = $lang['HIDE_AVATARS'];
-if (bf($profiledata['user_opt'], 'user_opt', 'dis_sig'))         $user_restrictions[] = $lang['SHOW_CAPTION'];
-if (bf($profiledata['user_opt'], 'user_opt', 'dis_passkey'))     $user_restrictions[] = $lang['DOWNLOAD_TORRENT'];
-if (bf($profiledata['user_opt'], 'user_opt', 'dis_pm'))          $user_restrictions[] = $lang['SEND_PM'];
-if (bf($profiledata['user_opt'], 'user_opt', 'dis_post'))        $user_restrictions[] = $lang['SEND_MESSAGE'];
-if (bf($profiledata['user_opt'], 'user_opt', 'dis_post_edit'))   $user_restrictions[] = $lang['EDIT_POST'];
-if (bf($profiledata['user_opt'], 'user_opt', 'dis_topic'))       $user_restrictions[] = $lang['NEW_THREADS'];
+if (bf($profiledata['user_opt'], 'user_opt', 'dis_avatar'))    $user_restrictions[] = $lang['HIDE_AVATARS'];
+if (bf($profiledata['user_opt'], 'user_opt', 'dis_sig'))       $user_restrictions[] = $lang['SHOW_CAPTION'];
+if (bf($profiledata['user_opt'], 'user_opt', 'dis_passkey'))   $user_restrictions[] = $lang['DOWNLOAD_TORRENT'];
+if (bf($profiledata['user_opt'], 'user_opt', 'dis_pm'))        $user_restrictions[] = $lang['SEND_PM'];
+if (bf($profiledata['user_opt'], 'user_opt', 'dis_post'))      $user_restrictions[] = $lang['SEND_MESSAGE'];
+if (bf($profiledata['user_opt'], 'user_opt', 'dis_post_edit')) $user_restrictions[] = $lang['EDIT_POST'];
+if (bf($profiledata['user_opt'], 'user_opt', 'dis_topic'))     $user_restrictions[] = $lang['NEW_THREADS'];
 
 $template->assign_var('USER_RESTRICTIONS', join('</li><li>', $user_restrictions));
 

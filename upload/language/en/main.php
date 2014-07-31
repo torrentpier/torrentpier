@@ -234,7 +234,6 @@ $lang['RULES_MODERATE'] = 'You <b>can</b> moderate this forum';
 
 $lang['NO_TOPICS_POST_ONE'] = 'There are no posts in this forum.<br />Click on the <b>Post New Topic</b> link on this page to post one.';
 
-
 //
 // Viewtopic
 //
@@ -696,7 +695,6 @@ $lang['ASC'] = 'Ascending';
 $lang['DESC'] = 'Descending';
 $lang['ORDER'] = 'Order';
 
-
 //
 // Group control panel
 //
@@ -841,7 +839,6 @@ $lang['NOT_MODERATOR'] = 'You are not a moderator of this forum.';
 $lang['NOT_AUTHORISED'] = 'Not Authorised';
 
 $lang['YOU_BEEN_BANNED'] = 'You have been banned from this forum.<br />Please contact the webmaster or board administrator for more information.';
-
 
 //
 // Viewonline

@@ -109,7 +109,6 @@
 
 </form>
 
-
 <div class="bottom_info">
 
 	<div class="spacer_4"></div>

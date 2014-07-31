@@ -30,7 +30,7 @@
 </form>
 
 <script type="text/javascript">
-function checkForm(formObj) 
+function checkForm(formObj)
 {
 	formErrors = false;
 

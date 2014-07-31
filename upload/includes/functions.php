@@ -2313,7 +2313,6 @@ function poll_is_active ($t_data)
 	return ($t_data['topic_vote'] == 1 && $t_data['topic_time'] > TIMENOW - $bb_cfg['poll_max_days']*86400);
 }
 
-
 function print_confirmation ($tpl_vars)
 {
 	global $template, $lang;
@@ -2778,7 +2777,7 @@ function get_avatar ($user_id, $ext_id, $allow_avatar = true, $size = true, $hei
 	{
 		// TODO
 	}
-	
+
 	$height = ($height != '') ? 'height="'. $height .'"' : '';
 	$width  = ($width != '') ? 'width="'. $width .'"' : '';
 
@@ -2813,13 +2812,13 @@ function gender_image ($gender)
 		switch ($gender)
 		{
 			case MALE:
-				$user_gender = '<img src="'. $images['icon_male'] .'" alt="'. $lang['GENDER_SELECT'][1] .'" title="'. $lang['GENDER_SELECT'][1] .'" border="0" />';
+				$user_gender = '<img src="'. $images['icon_male'] .'" alt="'. $lang['GENDER_SELECT'][MALE] .'" title="'. $lang['GENDER_SELECT'][MALE] .'" border="0" />';
 				break;
 			case FEMALE:
-				$user_gender = '<img src="'. $images['icon_female'] .'" alt="'. $lang['GENDER_SELECT'][1] .'" title="'. $lang['GENDER_SELECT'][2] .'" border="0" />';
+				$user_gender = '<img src="'. $images['icon_female'] .'" alt="'. $lang['GENDER_SELECT'][FEMALE] .'" title="'. $lang['GENDER_SELECT'][FEMALE] .'" border="0" />';
 				break;
 			default:
-				$user_gender = '<img src="'. $images['icon_nogender'] .'" alt="'. $lang['GENDER_SELECT'][0] .'" title="'. $lang['GENDER_SELECT'][0] .'" border="0" />';
+				$user_gender = '<img src="'. $images['icon_nogender'] .'" alt="'. $lang['GENDER_SELECT'][NOGENDER] .'" title="'. $lang['GENDER_SELECT'][NOGENDER] .'" border="0" />';
 				break;
 		}
 	}

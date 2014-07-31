@@ -148,7 +148,7 @@ switch ($field)
 		$btu[$field] = $value;
 		$this->response['update_ids']['u_ratio'] = (string) get_bt_ratio($btu);
 		break;
-		
+
 	case 'user_points':
 		$value = htmlCHR($value);
 		$value = (float) str_replace(',', '.', $this->request['value']);

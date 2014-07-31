@@ -164,7 +164,6 @@ for ($i = 0; $i < $num_auth_pages && $authorised == false; $i++)
 	}
 }
 
-
 if (!$authorised)
 {
 	bb_die($lang['SORRY_AUTH_VIEW_ATTACH']);

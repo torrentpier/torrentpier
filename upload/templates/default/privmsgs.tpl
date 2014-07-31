@@ -2,22 +2,6 @@
 
 <div id="pm_header">
 	<!-- IF PM_BOX_SIZE_INFO -->
-	<table class="bordered pm_box_size pad_2 floatL">
-	<tr>
-		<td colspan="3" class="row1 med tCenter nowrap">{BOX_SIZE_STATUS}</td>
-	</tr>
-	<tr>
-		<td colspan="3" class="row3">
-			<div class="spacer_8 progress" style="width: {INBOX_LIMIT_IMG_WIDTH}px;"></div>
-		</td>
-	</tr>
-	<tr class="row1 small">
-		<td width="30%">0%</td>
-		<td width="40%" class="tCenter">50%</td>
-		<td width="30%" class="tRight">100%</td>
-	</tr>
-	</table>
-
 	<table class="bordered pm_box_size pad_2 floatR">
 	<tr>
 		<td colspan="3" class="row1 med tCenter nowrap">{BOX_SIZE_STATUS}</td>

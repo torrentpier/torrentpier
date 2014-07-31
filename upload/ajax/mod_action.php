@@ -72,13 +72,13 @@ switch ($mode)
 		if (!$user_id) $this->ajax_die($lang['NO_USER_ID_SPECIFIED']);
 
 		$reg_ip = DB()->fetch_rowset("SELECT username, user_id, user_rank FROM ". BB_USERS ."
-			WHERE user_reg_ip = '{$profiledata['user_reg_ip']}' 
+			WHERE user_reg_ip = '{$profiledata['user_reg_ip']}'
 				AND user_reg_ip != ''
 				AND user_id != {$profiledata['user_id']}
 			ORDER BY username ASC");
 
-		$last_ip = DB()->fetch_rowset("SELECT username, user_id, user_rank FROM " .BB_USERS ." 
-			WHERE user_last_ip = '{$profiledata['user_last_ip']}' 
+		$last_ip = DB()->fetch_rowset("SELECT username, user_id, user_rank FROM " .BB_USERS ."
+			WHERE user_last_ip = '{$profiledata['user_last_ip']}'
 				AND user_last_ip != ''
 				AND user_id != {$profiledata['user_id']}");
 
@@ -101,7 +101,7 @@ switch ($mode)
 				$link_last_ip .= profile_url($row) .' ';
 			}
 		}
-		
+
 		if ($profiledata['user_level'] == ADMIN && !IS_ADMIN) $reg_ip = $last_ip = $lang['HIDDEN'];
 		elseif ($profiledata['user_level'] == MOD && IS_MOD)  $reg_ip = $last_ip = $lang['HIDDEN'];
 		else

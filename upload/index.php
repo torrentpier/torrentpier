@@ -24,7 +24,7 @@ if ($bb_cfg['show_latest_news'])
 }
 if ($bb_cfg['show_network_news'])
 {
-   $datastore->enqueue('network_news');
+	$datastore->enqueue('network_news');
 }
 
 // Init userdata
@@ -368,7 +368,7 @@ if ($bb_cfg['birthday_check_day'] && $bb_cfg['birthday_enabled'])
 {
 	$week_list = $today_list = array();
 	$week_all = $today_all = false;
-	
+
 	if ($stats['birthday_week_list'])
 	{
 		shuffle($stats['birthday_week_list']);

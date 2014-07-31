@@ -79,7 +79,7 @@ class torrent
 	function build_filelist_array ()
 	{
 		global $lang;
-		
+
 		$info = $this->tor_decoded['info'];
 
 		if (isset($info['name.utf-8']))

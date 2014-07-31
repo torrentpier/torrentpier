@@ -76,7 +76,6 @@ else
 	$sort_order = 'ASC';
 }
 
-
 // Pagination ?
 $do_pagination = ($view != 'stats' && $view != 'search') ? true : false;
 

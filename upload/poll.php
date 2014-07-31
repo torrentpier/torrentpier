@@ -162,7 +162,6 @@ switch ($mode)
 // Functions
 //
 
-
 class bb_poll
 {
 	var $err_msg    = '';

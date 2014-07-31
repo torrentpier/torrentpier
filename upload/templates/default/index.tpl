@@ -116,11 +116,6 @@
 					</p>
 				<!-- END last -->
 
-				<p class="f_stat_inline hidden">
-					<span class="f_stat_topics"><em>{L_TOPICS_SHORT}:</em> {c.f.TOPICS}</span>
-					<span class="f_stat_posts"><em>{L_POSTS_SHORT}:</em> {c.f.POSTS}</span>
-				</p>
-
 			<!-- ELSE / start of !c.f.POSTS -->
 				{L_NO_POSTS}
 			<!-- ENDIF -->

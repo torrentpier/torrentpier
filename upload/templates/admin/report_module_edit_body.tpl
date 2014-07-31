@@ -3,7 +3,7 @@
 		<tr>
 			<th class="thHead" colspan="2">{L_EDIT_REPORT_MODULE}</th>
 		</tr>
-		<tr> 
+		<tr>
 			<td class="row1" width="40%" valign="top"><span class="gen">{L_REPORT_MODULE}:</span></td>
 			<td class="row2">
 				<span class="gen">{MODULE_TITLE}</span><br />

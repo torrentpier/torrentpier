@@ -21,7 +21,6 @@
 	<h4 class="tCenter mrg_16">{L_ENTER_PASSWORD}</h4>
 	<!-- ENDIF -->
 
-
 	<div class="mrg_16">
 	<table class="borderless bCenter">
 	<tr>

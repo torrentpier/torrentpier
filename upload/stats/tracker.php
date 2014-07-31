@@ -4,18 +4,11 @@ define('IN_ADMIN', true);
 define('BB_ROOT', './../');
 require(BB_ROOT .'common.php');
 
-
-############################################################################
-
 $peers_in_last_minutes = array(30, 15, 5, 1);
 $peers_in_last_sec_limit = 300;
 
-############################################################################
-
-
 $announce_interval = intval($bb_cfg['announce_interval']);
 $stat = array();
-
 
 define('TMP_TRACKER_TABLE', 'tmp_tracker');
 
@@ -39,7 +32,6 @@ $stat += DB()->fetch_row("SELECT COUNT(*) AS p_within_ann FROM ". TMP_TRACKER_TA
 // All peers, "max_peer_time"
 $stat += DB()->fetch_row("SELECT COUNT(*) AS p_all, SUM(speed_up) as speed_up, SUM(speed_down) as speed_down, UNIX_TIMESTAMP() - MIN(update_time) AS max_peer_time, UNIX_TIMESTAMP() - MAX(update_time) AS last_peer_time FROM ". TMP_TRACKER_TABLE);
 
-
 // Active users
 $stat += DB()->fetch_row("SELECT COUNT(DISTINCT user_id) AS u_bt_active FROM ". TMP_TRACKER_TABLE);
 // All bt-users
@@ -47,14 +39,12 @@ $stat += DB()->fetch_row("SELECT COUNT(*) AS u_bt_all FROM ". BB_BT_USERS);
 // All bb-users
 $stat += DB()->fetch_row("SELECT COUNT(*) AS u_bb_all FROM ". BB_USERS);
 
-
 // Active torrents
 $stat += DB()->fetch_row("SELECT COUNT(DISTINCT topic_id) AS tor_active FROM ". TMP_TRACKER_TABLE);
 // With seeder
 $stat += DB()->fetch_row("SELECT COUNT(DISTINCT topic_id) AS tor_with_seeder FROM ". TMP_TRACKER_TABLE ." WHERE seeder = 1");
 // All torrents
 $stat += DB()->fetch_row("SELECT COUNT(*) AS tor_all, SUM(size) AS torrents_size FROM ". BB_BT_TORRENTS);
-
 
 // Last xx minutes
 $peers_in_last_min = array();

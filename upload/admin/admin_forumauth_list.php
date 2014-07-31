@@ -9,7 +9,6 @@ if (!empty($setmodules))
 require('./pagestart.php');
 // ACP Header - END
 
-
 //  View  Read  Post  Reply  Edit  Delete  Sticky  Announce  Vote  Poll  PostAttach  Download
 $simple_auth_ary = array(
 /* Public */     0 => array(AUTH_ALL,  AUTH_ALL,  AUTH_ALL,  AUTH_ALL,  AUTH_REG,  AUTH_REG,  AUTH_MOD,  AUTH_MOD,  AUTH_REG,  AUTH_REG,  AUTH_REG,  AUTH_ALL), // Public

@@ -71,7 +71,7 @@
 </tr>
 <tr id="view_message" class="hidden">
 	<td colspan="2">
-	    <div class="view-message"></div>
+		<div class="view-message"></div>
 	</td>
 </tr>
 <!-- IF POSTING_USERNAME -->
@@ -109,9 +109,8 @@
 		</tr>
 		<!-- END switch_smilies_extra -->
 		</table><!--/smilies-->
-
- </td>
- <td class="vTop pad_0 w100"><!-- INCLUDE posting_editor.tpl --></td>
+	</td>
+	<td class="vTop pad_0 w100"><!-- INCLUDE posting_editor.tpl --></td>
 </tr>
 <!-- IF IN_PM -->
 <!-- ELSEIF LOGGED_IN -->

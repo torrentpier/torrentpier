@@ -139,7 +139,7 @@ a.seed:visited, a.seedmed:visited, a.seedsmall:visited {
 	color: #006600; text-decoration: none;
 }
 a.points,         a.pointsmed,         a.pointssmall,
-a.points:visited, a.pointsmed:visited, a.pointssmall:visited, .points 
+a.points:visited, a.pointsmed:visited, a.pointssmall:visited, .points
 {
 	color: blue; text-decoration: none;
 }
@@ -1533,4 +1533,3 @@ div#autocomplete_popup span.regenerate {
 	background-repeat: repeat-x;
 	border-color: #dca7a7;
 }
-  

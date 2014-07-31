@@ -1,5 +1,5 @@
 <table cellspacing="2" cellpadding="2" border="0" width="100%">
-	<tr> 
+	<tr>
 		<td class="nav"><a href="{U_INDEX}" class="nav">{T_INDEX}</a></td>
 	</tr>
 </table>

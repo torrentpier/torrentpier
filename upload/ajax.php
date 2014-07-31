@@ -116,7 +116,7 @@ class ajax_common
 		global $lang;
 
 		// Exit if we already have errors
-		if (!empty($this->response['error_code'])) 
+		if (!empty($this->response['error_code']))
 		{
 			$this->send();
 		}
@@ -127,7 +127,7 @@ class ajax_common
 		if (!$action || !is_string($action))
 		{
 			$this->ajax_die('no action specified');
-		} 
+		}
 		elseif (!$action_params =& $this->valid_actions[$action])
 		{
 			$this->ajax_die('invalid action: ' . $action);

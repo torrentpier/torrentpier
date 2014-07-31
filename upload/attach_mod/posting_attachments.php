@@ -9,7 +9,6 @@ define('FILENAME_CRYPTIC',        false);
 define('FILENAME_CRYPTIC_LENGTH', 64);
 define('FILENAME_TRANSLITERATE',  true);
 
-
 class attach_parent
 {
 	var $post_attach = false;

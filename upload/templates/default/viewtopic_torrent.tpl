@@ -47,7 +47,7 @@ $(document).ready(function(){
 			{L_SIZE}:&nbsp; <b>{TOR_SIZE}</b>&nbsp; &nbsp;|&nbsp; &nbsp;
 			{L_IS_REGISTERED}:&nbsp; <b>{TOR_LONGEVITY}</b>&nbsp; &nbsp;|&nbsp; &nbsp;
 			{L_COMPLETED}:&nbsp; <b>{TOR_COMPLETED}</b>
-	</td>	
+	</td>
 </tr>
 <!-- ENDIF / SHOW_DL_LIST_TOR_INFO -->
 
@@ -109,7 +109,7 @@ $(document).ready(function(){
 
 		<tr>
 		<td colspan="2">
-		
+
 		<!-- IF SEEDER_LAST_SEEN -->
 		<div id="last_seed_info" class="row5 w60 mrg_4 bCenter">
 			<p class="mrg_10">{SEEDER_LAST_SEEN}</p>

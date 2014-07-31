@@ -2390,7 +2390,7 @@ class UTF8
 	/**
 	 * Convert UTF-16 / UCS-2 encoding string to UTF-8.
 	 * Surrogates UTF-16 are supported!
-	 * 
+	 *
 	 * In Russian:
 	 * Преобразует строку из кодировки UTF-16 / UCS-2 в UTF-8.
 	 * Суррогаты UTF-16 поддерживаются!
@@ -3077,7 +3077,6 @@ class UTF8
 		if (! ReflectionTypeHint::isValid()) return false;
 		return self::convert_case($data, CASE_UPPER);
 	}
-
 
 	/**
 	 * Convert all HTML entities to native UTF-8 characters

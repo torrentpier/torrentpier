@@ -1,13 +1,13 @@
 <form action="{S_REPORT_ACTION}" method="post">
 	<table cellpadding="2" cellspacing="2" border="0" width="100%" align="center">
-		<tr> 
+		<tr>
 			<td class="nav"><a href="{U_INDEX}" class="nav">{T_INDEX}</a></td>
 		</tr>
 	</table>
-	
+
 	<!-- BEGIN switch_report_errors -->
 	<table cellpadding="4" cellspacing="1" border="0" width="80%" align="center" class="forumline">
-		<tr> 
+		<tr>
 			<td class="row1" align="center"><span class="gen">
 				<!-- BEGIN report_errors -->
 				{switch_report_errors.report_errors.MESSAGE}<br />
@@ -17,9 +17,9 @@
 	</table>
 	<br />
 	<!-- END switch_report_errors -->
-	
+
 	<table cellpadding="4" cellspacing="1" border="0" width="80%" align="center" class="forumline">
-		<tr> 
+		<tr>
 			<th class="thHead" colspan="2">{L_WRITE_REPORT}</th>
 		</tr>
 		<tr>

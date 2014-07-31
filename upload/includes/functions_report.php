@@ -581,7 +581,6 @@ function report_count_obtain()
 	return $report_count;
 }
 
-
 //
 // Obtains reports (for a specific report module if $module_id is defined)
 // Includes authorisation check if $auth_check is set to true.

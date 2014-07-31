@@ -406,7 +406,7 @@ function user_notification($mode, &$post_data, &$topic_title, &$forum_id, &$topi
 			if ($update_watched_sql)
 			{
 				DB()->query("UPDATE ". BB_TOPICS_WATCH ."
-					SET notify_status = ". TOPIC_WATCH_UN_NOTIFIED ."
+					SET notify_status = ". TOPIC_WATCH_UNNOTIFIED ."
 					WHERE topic_id = $topic_id
 						AND user_id IN ($update_watched_sql)
 				");
@@ -423,7 +423,7 @@ function user_notification($mode, &$post_data, &$topic_title, &$forum_id, &$topi
 		{
 			DB()->query("
 				INSERT INTO " . BB_TOPICS_WATCH . " (user_id, topic_id, notify_status)
-				VALUES (". $userdata['user_id'] .", $topic_id, ". TOPIC_WATCH_NOTIFIED .") 
+				VALUES (". $userdata['user_id'] .", $topic_id, ". TOPIC_WATCH_NOTIFIED .")
 			");
 		}
 	}

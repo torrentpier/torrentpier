@@ -138,7 +138,7 @@ elseif ($do == 'info')
 	</html>
 	<?php
 }
-else 
+else
 {
 	bb_die('Invalid mode');
 }

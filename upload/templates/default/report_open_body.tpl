@@ -39,7 +39,7 @@ function checked_toggle(form, status)
 </script>
 
 <table cellpadding="2" cellspacing="2" border="0" width="80%" align="center">
-	<tr> 
+	<tr>
 		<td class="nav"><a href="{U_INDEX}" class="nav">{L_HOME}</a></td>
 	</tr>
 </table>
@@ -81,7 +81,7 @@ function checked_toggle(form, status)
 </form>
 
 <table cellspacing="2" cellpadding="2" border="0" width="80%" align="center">
-	<tr> 
+	<tr>
 		<td class="gensmall">
 			<a href="javascript:checked_toggle('report_list_open',true)" class="gensmall">{L_MARK_ALL}</a> ::
 			<a href="javascript:checked_switch('report_list_open')" class="gensmall">{L_INVERT_SELECT}</a>

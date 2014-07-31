@@ -14,8 +14,8 @@ Quick guide:
    copy two files: automatically generated 'converter/passwords.php' and 'for_tbdev/pass.php' to your TBDevYSE root and run pass.php
    (Don't forget to remove these files after completion).
    You allow to change message text, see $msg in pass.php for this.
-10. If you want to redirect peers from older announce to new announce everytime, replace original TBDev's announce.php with  
-	'for_tbdev/announce.php'
+10. If you want to redirect peers from older announce to new announce everytime, replace original TBDev's announce.php with
+   'for_tbdev/announce.php'
 
 Cheers, RoadTrain.
 http://torrentpier.me/

@@ -43,7 +43,7 @@ if ($row = DB()->fetch_row($sql))
 		{
 			$subject = trim(html_entity_decode($_POST['subject']));
 			$message = trim(html_entity_decode($_POST['message']));
-			
+
 			if(!$subject)  $errors[] = $lang['EMPTY_SUBJECT_EMAIL'];
 			if(!$message)  $errors[] = $lang['EMPTY_MESSAGE_EMAIL'];
 

@@ -69,7 +69,7 @@ class Text_LangCorrect
 
 	#английский (all)
 	private $en = '[a-zA-Z]';
-	
+
 	#английский (uppercase)
 	private $en_uc = '[A-Z]';
 
@@ -2822,7 +2822,7 @@ class Text_LangCorrect
 
 	/**
 	 * Исправляет клавиатурные опечатки в тексте.
-	 * 
+	 *
 	 * @param   scalar|null   $s       Текст в кодировке UTF-8.
 	 * @param   int           $mode    Константы self::SIMILAR_CHARS и/или self::KEYBOARD_LAYOUT,
 	 *                                 (их можно комбинировать). Описание констант см. выше.
@@ -3055,7 +3055,7 @@ class Text_LangCorrect
 
 		#если в $word были спецсимволы, а в $s их уже нет, возвращаем $s
 		if ($is_sc && ! preg_match('/' . $this->sc . '/sSX', $s)) return $s;
-		
+
 		#если в $s спецсимволов больше чем букв, возвращаем $word
 		$sc_count = 0;
 		$s = preg_replace('/' . $this->sc . '/sSX', '', $s, -1, $sc_count);
