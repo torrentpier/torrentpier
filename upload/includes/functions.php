@@ -2510,14 +2510,11 @@ function init_sphinx ()
 
 	if (!isset($sphinx))
 	{
-		require(INC_DIR .'sphinxapi.php');
+		require(INC_DIR .'api.sphinx.php');
 		$sphinx = new SphinxClient();
 
 		$sphinx->SetConnectTimeout(5);
-#		$sphinx->SetMaxQueryTime(2);
 		$sphinx->SetRankingMode(SPH_RANK_NONE);
-#		$sphinx->SetMatchMode(SPH_MATCH_BOOLEAN);
-#		$sphinx->SetSortMode($mode, $sortby="");
 	}
 }
 
@@ -2552,10 +2549,6 @@ function get_title_match_topics ($title_match_sql, $forum_ids = array())
 		if ($forum_ids)
 		{
 			$sphinx->SetFilter('forum_id', $forum_ids, false);
-		}
-		if (preg_match('#^"[^"]+"$#u', $title_match_sql))
-		{
-			$sphinx->SetMatchMode(SPH_MATCH_PHRASE);
 		}
 		if ($result = $sphinx->Query($title_match_sql, $where, $userdata['username'] .' ('. CLIENT_IP .')'))
 		{
