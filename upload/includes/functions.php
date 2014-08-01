@@ -1048,7 +1048,7 @@ function select_get_val ($key, &$val, $options_ary, $default, $num = true)
 *
 * @access private
 */
-function set_var(&$result, $var, $type, $multibyte = false, $strip = true)
+function set_var (&$result, $var, $type, $multibyte = false, $strip = true)
 {
 	settype($var, $type);
 	$result = $var;
@@ -1077,7 +1077,7 @@ function set_var(&$result, $var, $type, $multibyte = false, $strip = true)
 *
 * Used to get passed variable
 */
-function request_var($var_name, $default, $multibyte = false, $cookie = false)
+function request_var ($var_name, $default, $multibyte = false, $cookie = false)
 {
 	if (!$cookie && isset($_COOKIE[$var_name]))
 	{
@@ -1311,27 +1311,21 @@ function bb_update_config ($params, $table = BB_CONFIG)
 	bb_get_config($table, true, true);
 }
 
-function get_db_stat($mode)
+function get_db_stat ($mode)
 {
-	switch( $mode )
+	switch ($mode)
 	{
 		case 'usercount':
-			$sql = "SELECT COUNT(user_id) AS total
-				FROM " . BB_USERS;
+			$sql = "SELECT COUNT(user_id) AS total FROM " . BB_USERS;
 			break;
 
 		case 'newestuser':
-			$sql = "SELECT user_id, username
-				FROM " . BB_USERS . "
-				WHERE user_id <> " . GUEST_UID . "
-				ORDER BY user_id DESC
-				LIMIT 1";
+			$sql = "SELECT user_id, username FROM " . BB_USERS . " WHERE user_id <> " . GUEST_UID . " ORDER BY user_id DESC LIMIT 1";
 			break;
 
 		case 'postcount':
 		case 'topiccount':
-			$sql = "SELECT SUM(forum_topics) AS topic_total, SUM(forum_posts) AS post_total
-				FROM " . BB_FORUMS;
+			$sql = "SELECT SUM(forum_topics) AS topic_total, SUM(forum_posts) AS post_total FROM " . BB_FORUMS;
 			break;
 	}
 
@@ -1342,7 +1336,7 @@ function get_db_stat($mode)
 
 	$row = DB()->sql_fetchrow($result);
 
-	switch ( $mode )
+	switch ($mode)
 	{
 		case 'usercount':
 			return $row['total'];
@@ -1361,7 +1355,7 @@ function get_db_stat($mode)
 	return false;
 }
 
-function clean_username($username)
+function clean_username ($username)
 {
 	$username = mb_substr(htmlspecialchars(str_replace("\'", "'", trim($username))), 0, 25, 'UTF-8');
 	$username = bb_rtrim($username, "\\");
@@ -1650,7 +1644,7 @@ function generate_pagination ($base_url, $num_items, $per_page, $start_item, $ad
 
 	$total_pages = ceil($num_items/$per_page);
 
-	if ( $total_pages == 1 || $num_items == 0 )
+	if ($total_pages == 1 || $num_items == 0)
 	{
 		return '';
 	}
@@ -1658,20 +1652,20 @@ function generate_pagination ($base_url, $num_items, $per_page, $start_item, $ad
 	$on_page = floor($start_item / $per_page) + 1;
 
 	$page_string = '';
-	if ( $total_pages > ((2*($begin_end + $from_middle)) + 2) )
+	if ($total_pages > ((2*($begin_end + $from_middle)) + 2))
 	{
 		$init_page_max = ( $total_pages > $begin_end ) ? $begin_end : $total_pages;
-		for($i = 1; $i < $init_page_max + 1; $i++)
+		for ($i = 1; $i < $init_page_max + 1; $i++)
 		{
 			$page_string .= ( $i == $on_page ) ? '<b>' . $i . '</b>' : '<a href="' . $base_url . "&amp;start=" . ( ( $i - 1 ) * $per_page ) . '">' . $i . '</a>';
-			if ( $i <  $init_page_max )
+			if ($i <  $init_page_max)
 			{
 				$page_string .= ", ";
 			}
 		}
-		if ( $total_pages > $begin_end )
+		if ($total_pages > $begin_end)
 		{
-			if ( $on_page > 1  && $on_page < $total_pages )
+			if ($on_page > 1  && $on_page < $total_pages)
 			{
 				$page_string .= ( $on_page > ($begin_end + $from_middle + 1) ) ? ' ... ' : ', ';
 
@@ -1679,10 +1673,10 @@ function generate_pagination ($base_url, $num_items, $per_page, $start_item, $ad
 
 				$init_page_max = ( $on_page < $total_pages - ($begin_end + $from_middle) ) ? $on_page : $total_pages - ($begin_end + $from_middle);
 
-				for($i = $init_page_min - $from_middle; $i < $init_page_max + ($from_middle + 1); $i++)
+				for ($i = $init_page_min - $from_middle; $i < $init_page_max + ($from_middle + 1); $i++)
 				{
 					$page_string .= ($i == $on_page) ? '<b>' . $i . '</b>' : '<a href="' . $base_url . "&amp;start=" . ( ( $i - 1 ) * $per_page ) . '">' . $i . '</a>';
-					if ( $i <  $init_page_max + $from_middle )
+					if ($i <  $init_page_max + $from_middle)
 					{
 						$page_string .= ', ';
 					}
@@ -1693,10 +1687,10 @@ function generate_pagination ($base_url, $num_items, $per_page, $start_item, $ad
 			{
 				$page_string .= '&nbsp;...&nbsp;';
 			}
-			for($i = $total_pages - ($begin_end - 1); $i < $total_pages + 1; $i++)
+			for ($i = $total_pages - ($begin_end - 1); $i < $total_pages + 1; $i++)
 			{
 				$page_string .= ( $i == $on_page ) ? '<b>' . $i . '</b>'  : '<a href="' . $base_url . "&amp;start=" . ( ( $i - 1 ) * $per_page ) . '">' . $i . '</a>';
-				if( $i <  $total_pages )
+				if ($i <  $total_pages)
 				{
 					$page_string .= ", ";
 				}
@@ -1705,24 +1699,24 @@ function generate_pagination ($base_url, $num_items, $per_page, $start_item, $ad
 	}
 	else
 	{
-		for($i = 1; $i < $total_pages + 1; $i++)
+		for ($i = 1; $i < $total_pages + 1; $i++)
 		{
 			$page_string .= ( $i == $on_page ) ? '<b>' . $i . '</b>' : '<a href="' . $base_url . "&amp;start=" . ( ( $i - 1 ) * $per_page ) . '">' . $i . '</a>';
-			if ( $i <  $total_pages )
+			if ($i <  $total_pages)
 			{
 				$page_string .= ', ';
 			}
 		}
 	}
 
-	if ( $add_prevnext_text )
+	if ($add_prevnext_text)
 	{
-		if ( $on_page > 1 )
+		if ($on_page > 1)
 		{
 			$page_string = ' <a href="' . $base_url . "&amp;start=" . ( ( $on_page - 2 ) * $per_page ) . '">' . $lang['PREVIOUS_PAGE'] . '</a>&nbsp;&nbsp;' . $page_string;
 		}
 
-		if ( $on_page < $total_pages )
+		if ($on_page < $total_pages)
 		{
 			$page_string .= '&nbsp;&nbsp;<a href="' . $base_url . "&amp;start=" . ( $on_page * $per_page ) . '">' . $lang['NEXT_PAGE'] . '</a>';
 		}
@@ -1746,7 +1740,7 @@ function generate_pagination ($base_url, $num_items, $per_page, $start_item, $ad
 // This does exactly what preg_quote() does in PHP 4-ish
 // If you just need the 1-parameter preg_quote call, then don't bother using this.
 //
-function bb_preg_quote($str, $delimiter)
+function bb_preg_quote ($str, $delimiter)
 {
 	$text = preg_quote($str);
 	$text = str_replace($delimiter, '\\' . $delimiter, $text);
@@ -1759,7 +1753,7 @@ function bb_preg_quote($str, $delimiter)
 // calling script, note that the vars are passed as references this just makes it easier
 // to return both sets of arrays
 //
-function obtain_word_list(&$orig_word, &$replacement_word)
+function obtain_word_list (&$orig_word, &$replacement_word)
 {
 	global $bb_cfg;
 
@@ -1861,7 +1855,7 @@ function bb_simple_die ($txt)
 	die($txt);
 }
 
-function bb_realpath($path)
+function bb_realpath ($path)
 {
 	return (!@function_exists('realpath') || !@realpath(INC_DIR . 'functions.php')) ? $path : @realpath($path);
 }
@@ -1871,13 +1865,11 @@ function login_redirect ($url = '')
 	redirect(LOGIN_URL . '?redirect='. (($url) ? $url : $_SERVER['REQUEST_URI']));
 }
 
-function meta_refresh($url, $time = 5)
+function meta_refresh ($url, $time = 5)
 {
 	global $template;
 
-	$template->assign_var(
-		'META' , '<meta http-equiv="refresh" content="' . $time . ';url=' . $url . '" />'
-	);
+	$template->assign_var('META', '<meta http-equiv="refresh" content="' . $time . ';url=' . $url . '" />');
 }
 
 function redirect ($url)
@@ -1914,10 +1906,8 @@ function redirect ($url)
 	exit;
 }
 
-//-- mod : topic display order ---------------------------------------------------------------------
-//-- add
 // build a list of the sortable fields or return field name
-function get_forum_display_sort_option($selected_row=0, $action='list', $list='sort')
+function get_forum_display_sort_option ($selected_row = 0, $action = 'list', $list = 'sort')
 {
 	global $lang;
 
@@ -1958,7 +1948,6 @@ function get_forum_display_sort_option($selected_row=0, $action='list', $list='s
 	}
 	return $res;
 }
-//-- fin mod : topic display order -----------------------------------------------------------------
 
 function topic_attachment_image($switch_attachment)
 {
@@ -2010,12 +1999,12 @@ if (!function_exists('array_combine'))
 		$key_count   = count($keys);
 		$value_count = count($values);
 		if ($key_count !== $value_count) {
-			user_error('array_combine() Both parameters should have equal number of elements', E_USER_WARNING);
+			user_error('array_combine() both parameters should have equal number of elements', E_USER_WARNING);
 			return false;
 		}
 
 		if ($key_count === 0 || $value_count === 0) {
-			user_error('array_combine() Both parameters should have number of elements at least 0', E_USER_WARNING);
+			user_error('array_combine() both parameters should have number of elements at least 0', E_USER_WARNING);
 			return false;
 		}
 
@@ -2482,12 +2471,6 @@ function clean_text_match ($text, $ltrim_star = true, $remove_stopwords = false,
 	$ltrim_chars = ($ltrim_star) ? ' *-!' : ' ';
 	$wrap_with_quotes = preg_match('#^"[^"]+"$#', $text);
 
-#	$min_word_len = max(2, $bb_cfg['search_min_word_len'] - 1);
-#	$max_word_len = $bb_cfg['search_max_word_len'];
-
-#	$text = preg_replace('#\b\w{1,'. $min_word_len .'}\b#', '', $text);
-#	$text = preg_replace('#\b\w{'. $max_word_len .',}\b#', '', $text);
-
 	$text = ' '. str_compact(ltrim($text, $ltrim_chars)) .' ';
 
 	if ($remove_stopwords)
@@ -2497,23 +2480,19 @@ function clean_text_match ($text, $ltrim_star = true, $remove_stopwords = false,
 
 	if ($bb_cfg['search_engine_type'] == 'sphinx')
 	{
-		$text = preg_replace('#(?<=\S)\-#u', ' ', $text);                    // "1-2-3" -> "1 2 3"
-		$text = preg_replace('#[^0-9a-zA-Zа-яА-ЯёЁ\-_*|]#u', ' ', $text);    // допустимые символы (кроме " которые отдельно)
-		$text = str_replace('-', ' -', $text);                              // - только в начале слова
-		$text = str_replace('*', '* ', $text);                              // * только в конце слова
-		$text = preg_replace('#\s*\|\s*#u', '|', $text);                     // "| " -> "|"
-		$text = preg_replace('#\|+#u', ' | ', $text);                        // "||" -> "|"
-		$text = preg_replace('#(?<=\s)[\-*]+\s#u', ' ', $text);              // одиночные " - ", " * "
+		$text = preg_replace('#(?<=\S)\-#u', ' ', $text);                 // "1-2-3" -> "1 2 3"
+		$text = preg_replace('#[^0-9a-zA-Zа-яА-ЯёЁ\-_*|]#u', ' ', $text); // допустимые символы (кроме " которые отдельно)
+		$text = str_replace('-', ' -', $text);                            // - только в начале слова
+		$text = str_replace('*', '* ', $text);                            // * только в конце слова
+		$text = preg_replace('#\s*\|\s*#u', '|', $text);                  // "| " -> "|"
+		$text = preg_replace('#\|+#u', ' | ', $text);                     // "||" -> "|"
+		$text = preg_replace('#(?<=\s)[\-*]+\s#u', ' ', $text);           // одиночные " - ", " * "
 		$text = trim($text, ' -|');
 		$text = str_compact($text);
 		$text_match_sql = ($wrap_with_quotes && $text != '') ? '"'. $text .'"' : $text;
 	}
 	else
 	{
-#		if ($all_words)
-#		{
-#			$text = preg_replace('#\s(\b\w)#', ' +$1', $text);
-#		}
 		$text_match_sql = DB()->escape(trim($text));
 	}
 
@@ -2521,7 +2500,8 @@ function clean_text_match ($text, $ltrim_star = true, $remove_stopwords = false,
 	{
 		bb_die($lang['NO_SEARCH_MATCH']);
 	}
-    return $text_match_sql;
+
+	return $text_match_sql;
 }
 
 function init_sphinx ()
@@ -2660,7 +2640,7 @@ function pad_with_space ($str)
 	return ($str) ? " $str " : $str;
 }
 
-function create_magnet($infohash, $auth_key, $logged_in)
+function create_magnet ($infohash, $auth_key, $logged_in)
 {
 	global $bb_cfg, $_GET, $userdata, $images;
 
@@ -2679,7 +2659,7 @@ function set_die_append_msg ($forum_id = null, $topic_id = null)
 	$template->assign_var('BB_DIE_APPEND_MSG', $msg);
 }
 
-function set_pr_die_append_msg($pr_uid)
+function set_pr_die_append_msg ($pr_uid)
 {
 	global $lang, $template;
 
