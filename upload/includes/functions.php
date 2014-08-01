@@ -2516,7 +2516,7 @@ function init_sphinx ()
 		$sphinx->SetConnectTimeout(5);
 #		$sphinx->SetMaxQueryTime(2);
 		$sphinx->SetRankingMode(SPH_RANK_NONE);
-		$sphinx->SetMatchMode(SPH_MATCH_BOOLEAN);
+#		$sphinx->SetMatchMode(SPH_MATCH_BOOLEAN);
 #		$sphinx->SetSortMode($mode, $sortby="");
 	}
 }
