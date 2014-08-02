@@ -1539,7 +1539,7 @@ $lang['EXPAND']   = 'Expand';
 $lang['SWITCH']   = 'Switch';
 $lang['EMPTY_ATTACH_ID']   = 'Missing file identifier!';
 $lang['TOR_NOT_FOUND'] = 'File is missing on the server!';
-$lang['ERROR_BUILD'] = 'Error: unable to build a list of files';
+$lang['ERROR_BUILD'] = 'The content of this torrent file can not be viewed on the site (it was not possible to build a list of files)';
 $lang['TORFILE_INVALID'] = 'Torrent file is corrupt';
 // FILELIST
 
