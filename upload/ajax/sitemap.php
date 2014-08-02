@@ -14,9 +14,9 @@ switch ($mode)
 		$map->create();
 		if (@file_exists(BB_ROOT. "/sitemap/sitemap.xml"))
 		{
-			$html .= 'Файл индекса создан <b>'.bb_date(TIMENOW, $bb_cfg['post_date_format']).'</b>  доступен по адресу: <a href="'.make_url('/sitemap/sitemap.xml').'" target="_blank">'.make_url('/sitemap/sitemap.xml').'</a>';
+			$html .= 'Файл sitemap создан: <b>'.bb_date(TIMENOW, $bb_cfg['post_date_format']).'</b> и доступен по адресу: <a href="'.make_url('/sitemap/sitemap.xml').'" target="_blank">'.make_url('/sitemap/sitemap.xml').'</a>';
 		} else {
-			$html .= 'Файл индекса не создан';
+			$html .= 'Файл sitemap еще не создан';
 		}
 	break;
 

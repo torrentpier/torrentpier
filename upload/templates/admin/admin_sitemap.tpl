@@ -73,49 +73,51 @@ ajax.callback.sitemap = function(data) {
 }
 </script>
 
-<h1>Меню управления Sitemap</h1>
+<h1>Управление картой сайта</h1>
 
 <form action="admin_sitemap.php" method="post">
 <table class="forumline">
 	<tr class="row1">
-		<td width="25%"><span class="gen"><b>Информация</b></span></td>
+		<td width="25%"><span class="gen"><b>{L_INFORMATION}:</b></span></td>
 		<td class="td_pads"><div id="mess_time">{MESSAGE}</div></td>
 	</tr>
 	<tr class="row1">
-		<td width="25%"><span class="gen"><b>Опции</b></span></td>
+		<td width="25%"><span class="gen"><b>Опции:</b></span></td>
 		<td class="td_pads">
-			<a href="#" class="btn btn-success" onclick="ajax.sitemap('create'); return false;">Создать / Обновить файл карты сайта</a>&nbsp;&nbsp;&nbsp;<a href="#" class="btn btn-warning" onclick="ajax.sitemap('search_update'); return false;">Уведомить поисковые системы о наличии новой версии карты сайта</a><br />
+			<a href="#" class="btn btn-success" onclick="ajax.sitemap('create'); return false;">Создать / обновить файл карты сайта</a>&nbsp;&nbsp;
+			<a href="#" class="btn btn-warning" onclick="ajax.sitemap('search_update'); return false;">Уведомить поисковые системы о наличии новой версии карты сайта</a><br />
 			<div id="sitemap"></div>
 		</td>
 	</tr>
 	<tr>
-	  <th colspan="2">Дополнительные страницы для Sitemap</th>
+		<th colspan="2">Что сделать дальше?</th>
+	</tr>
+	<tr>
+		<td class="row1" colspan="2">
+			<p>1. Зарегистрируйте ваш сайт в <a href="http://www.google.com/webmasters/" target="_blank">Google Webmaster</a> с использованием вашей учетной записи Google.</p>
+			<p>2. Зайдите в раздел "Файлы Sitemap" и нажмите кнопку "Добавление/проверка файла sitemap".</p>
+			<p>3. Зарегистрируйте ваш сайт в <a href="http://webmaster.yandex.ru/sites/" target="_blank">Yandex Webmaster</a> с использованием вашей учетной записи.</p>
+			<p>4. <a href="http://webmaster.yandex.ru/site/map.xml" target="_blank">Добавьте карту</a> зарегистрированного вами сайта.</p>
+		</td>
+	</tr>
+	<tr>
+	  <th colspan="2">Дополнительные страницы для sitemap</th>
 	</tr>
 	<tr class="row1">
 		<td class="row1">
-			<span class="gen"><b>Дополнительные страницы</b></span><br />
-			<p>Здесь можно написать дополнительные страницы, например <b>http://domain.ru/faq.php</b></p><br />
-			<b><p>Cсылки должны начинаться с http://</p></b>
+			<span class="gen"><b>Дополнительные страницы:</b></span>
 		</td>
 		<td>
-			<textarea name="static_sitemap" rows="5" cols="50">{STATIC_SITEMAP}</textarea>
+			<textarea name="static_sitemap" rows="5" cols="70">{STATIC_SITEMAP}</textarea><br />
+			<p>Здесь вы можете указать дополнительные страницы сайта (например <b>http://torrentpier.me/memberlist.php</b>),
+				которые должны быть включены в создаваемый файл вами файл sitemap. <b style="color: #993300;">Каждая ссылка
+				должна начинаться с http(s):// и новой строки!</b></p>
 		</td>
 	</tr>
 	<tr>
 		<td class="catBottom" colspan="2">
 			<input type="submit" name="submit" value="{L_SUBMIT}" class="mainoption" />&nbsp;&nbsp;
 			<input type="reset" value="{L_RESET}" class="liteoption" />
-		</td>
-	</tr>
-	<tr>
-		<th colspan="2">Описание</th>
-	</tr>
-	<tr>
-		<td class="row1" colspan="2">
-			<p>1. Необходимо зарегистрироваться в <a href="https://www.google.com/accounts/ServiceLogin?service=sitemaps&passive=true" target="_blank">Google Sitemaps</a> с использованием вашей учетной записи Google.</p><br />
-			<p>2. Перейдите по ссылке "Добавьте вашу карту сайта".</p><br />
-			<p>3. Необходимо зарегистрироваться в <a href="http://webmaster.yandex.ru/sites/" target="_blank">Yandex Webmaster</a> с использованием вашей учетной записи.</p><br />
-			<p>4. Добавить карту сайта в <a href="http://webmaster.yandex.ru/site/map.xml" target="_blank">Yandex Webmaster</a></p><br />
 		</td>
 	</tr>
 </table>

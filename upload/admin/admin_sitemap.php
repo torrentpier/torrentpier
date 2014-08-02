@@ -41,8 +41,8 @@ else
 	}
 }
 
-$s_mess = 'Файл индекса создан <b>'.bb_date($new['sitemap_time'], $bb_cfg['post_date_format']).'</b> доступен по адресу: <a href="'.make_url('/sitemap/sitemap.xml').'" target="_blank">'.make_url('/sitemap/sitemap.xml').'</a>';
-$message = (@file_exists(BB_ROOT. "/sitemap/sitemap.xml")) ? $s_mess : 'Файл индекса не создан';
+$s_mess = 'Файл sitemap создан: <b>'.bb_date($new['sitemap_time'], $bb_cfg['post_date_format']).'</b> и доступен по адресу: <a href="'.make_url('/sitemap/sitemap.xml').'" target="_blank">'.make_url('/sitemap/sitemap.xml').'</a>';
+$message = (@file_exists(BB_ROOT. "/sitemap/sitemap.xml")) ? $s_mess : 'Файл sitemap еще не создан';
 
 $template->assign_vars(array(
 	'STATIC_SITEMAP' => $new['static_sitemap'],
