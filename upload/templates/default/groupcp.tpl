@@ -56,15 +56,21 @@
 </tr>
 <tr><td colspan="2"><h2>{GROUP_NAME}</h2></td></tr>
 <tr>
-	<td align="center" valign="top">
-		<div style="height:100px;width:100px;background:#285e8e;">&nbsp;</div>
-	</td>
-	<td valign="top">
-		<!-- IF GROUP_DESCRIPTION -->
-		{GROUP_DESCRIPTION}
-		<!-- ENDIF / GROUP_DESCRIPTION -->
-	</td>
+    <td align="center" valign="top">
+        <div style="height:100px;width:100px;background:#285e8e;">&nbsp;</div>
+    </td>
+    <td valign="top">
+        <!-- IF GROUP_DESCRIPTION -->
+        <div class="post_wrap">{GROUP_DESCRIPTION}</div>
+        <!-- ENDIF / GROUP_DESCRIPTION -->
+    </td>
 </tr>
+<!-- IF RELEASE_GROUP -->
+<tr>
+    <td>{L_GROUP_TYPE}</td>
+    <td>{L_RELEASE_GROUP}</td>
+</tr>
+<!-- ENDIF -->
 <tr>
 	<td>{L_GROUP_TIME}</td>
 	<td>{MOD_TIME}</td>
@@ -83,8 +89,8 @@
 </tr>
 <!-- BEGIN switch_mod_option -->
 <tr>
-	<td>Настройка группы:</td>
-	<td><a href="{U_GROUP_CONFIG}">Перейти в панель управления группой</a></td>
+    <td>{L_GROUP_CONFIGURATION}:</td>
+    <td><a href="{U_GROUP_CONFIG}">{L_GROUP_GOTO_CONFIG}</a></td>
 </tr>
 <!-- END switch_mod_option -->
 </table>
@@ -154,13 +160,13 @@
 
 <!-- BEGIN switch_no_members -->
 <tr>
-	<td colspan="10" class="row1 tCenter pad_10">{L_NO_GROUP_MEMBERS}</td>
+	<td colspan="11" class="row1 tCenter pad_10">{L_NO_GROUP_MEMBERS}</td>
 </tr>
 <!-- END switch_no_members -->
 
 <!-- BEGIN switch_hidden_group -->
 <tr>
-	<td colspan="10" class="row1 tCenter">{L_HIDDEN_GROUP_MEMBERS}</td>
+	<td colspan="11" class="row1 tCenter">{L_HIDDEN_GROUP_MEMBERS}</td>
 </tr>
 <!-- END switch_hidden_group -->
 
@@ -197,7 +203,8 @@
 <table class="forumline">
 <thead>
 <tr>
-	<th class="{sorter: false}" ><b class="tbs-text">{L_SELECT}</b></th>
+    <th class="{sorter: false}" ><b class="tbs-text">#</b></th>
+    <th class="{sorter: false}" ><b class="tbs-text">{L_AVATAR}</b></th>
 	<th class="{sorter: 'text'}" ><b class="tbs-text">{L_USERNAME}</b></th>
 	<th class="{sorter: false}" ><b class="tbs-text">{L_PM}</b></th>
 	<th class="{sorter: 'text'}" ><b class="tbs-text">{L_EMAIL}</b></th>
@@ -207,12 +214,13 @@
 	<th class="{sorter: false}" ><b class="tbs-text">{L_WEBSITE}</b></th>
 </tr>
 <tr>
-    <td class="catTitle" colspan="8">{L_PENDING_MEMBERS}</td>
+    <td class="catTitle" colspan="9">{L_PENDING_MEMBERS}</td>
 </tr>
 </thead>
 <!-- BEGIN pending -->
 <tr class="{pending.ROW_CLASS} tCenter">
-	<td><input type="checkbox" name="pending_members[]" value="{pending.USER_ID}"/></td>
+	<td width="3%"><input type="checkbox" name="pending_members[]" value="{pending.USER_ID}"/></td>
+    <td width="3%">{pending.AVATAR_IMG}</td>
 	<td>{pending.USER}</td>
 	<td>{pending.PM}</td>
 	<td>{pending.EMAIL}</td>
@@ -224,7 +232,7 @@
 <!-- END pending -->
 <tfoot>
 <tr>
-	<td class="cat" colspan="8">
+	<td class="cat" colspan="9">
 		<input type="submit" name="approve" value="{L_APPROVE_SELECTED}" onclick="return confirm('{L_APPROVE_SELECTED}?');" class="mainoption" />
 		&nbsp;
 		<input type="submit" name="deny" value="{L_DENY_SELECTED}" onclick="return confirm('{L_DENY_SELECTED}?');" class="liteoption" />

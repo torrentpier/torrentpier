@@ -71,7 +71,7 @@ if ($is_moderator)
 
     $template->set_filenames(array('body' => 'group_config.tpl'));
 
-    $template->assign_vars(array('PAGE_TITLE' => 'Настройка группы'));
+    $template->assign_vars(array('PAGE_TITLE' => $lang['GROUP_CONFIGURATION']));
 
     require(PAGE_HEADER);
 

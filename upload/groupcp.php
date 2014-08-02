@@ -73,7 +73,7 @@ if (!$group_id)
 
 	$sql = "
 		SELECT
-			g.group_name, g.group_description, g.group_id, g.group_type,
+			g.group_name, g.group_description, g.group_id, g.group_type, g.release_group,
 			IF(ug.user_id IS NOT NULL, IF(ug.user_pending = 1, $pending, $member), 0) AS membership,
 			g.group_moderator, u.username AS moderator_name,
 			IF(g.group_moderator = ug.user_id, 1, 0) AS is_group_mod,
@@ -130,7 +130,7 @@ if (!$group_id)
 			continue;
 		}
 
-		$data = array('id' => $row['group_id'], 'm' => ($row['members'] - $row['candidates']), 'c' => $row['candidates']);
+		$data = array('id' => $row['group_id'], 'm' => ($row['members'] - $row['candidates']), 'c' => $row['candidates'], 'rg' => $row['release_group']);
 
 		$groups[$type][$row['group_name']] = $data;
 	}
@@ -140,15 +140,17 @@ if (!$group_id)
 		global $lang;
 
 		$options = '';
+
 		foreach ($params as $name => $data)
 		{
 			$text  = htmlCHR(str_short(rtrim($name), HTML_SELECT_MAX_LENGTH));
 
-			$members = ($data['m']) ? $lang['MEMBERS_IN_GROUP'] .': '. $data['m'] : $lang['NO_GROUP_MEMBERS'];
+            $members = ($data['m']) ? $lang['MEMBERS_IN_GROUP'] .': '. $data['m'] : $lang['NO_GROUP_MEMBERS'];
 			$candidates  = ($data['c']) ? $lang['PENDING_MEMBERS'] .': '. $data['c'] : $lang['NO_PENDING_GROUP_MEMBERS'];
 
-			$options .= '<li class="pad_2"><a href="'. GROUP_URL . $data['id'] .'" class="med bold">'. $text .'</a></li>';
-			$options .= '<ul><li class="seedmed">'. $members .'</li>';
+            $options .= '<li class="pad_2"><a href="'. GROUP_URL . $data['id'] .'" class="med bold">'. $text .'</a></li>';
+            $options .= ($data['rg']) ? '<ul><li class="med">'. $lang['RELEASE_GROUP'] .'</li>' : '';
+			$options .= '<li class="seedmed">'. $members .'</li>';
 			if (IS_AM)
 			{
 				$options .= '<li class="leechmed">'. $candidates .'</li>';
@@ -412,7 +414,7 @@ else
 	if ($is_moderator)
 	{
 		$modgroup_pending_list = DB()->fetch_rowset("
-			SELECT u.username, u.user_rank, u.user_id, u.user_opt, u.user_posts, u.user_regdate, u.user_from, u.user_website, u.user_email
+			SELECT u.username, u.avatar_ext_id, u.user_rank, u.user_id, u.user_opt, u.user_posts, u.user_regdate, u.user_from, u.user_website, u.user_email
 			FROM ". BB_USER_GROUP ." ug, ". BB_USERS ." u
 			WHERE ug.group_id = $group_id
 				AND ug.user_pending = 1
@@ -522,8 +524,11 @@ else
 		'MOD_WWW'                => $www,
 		'MOD_TIME'               => (!empty($group_info['group_time'])) ? bb_date($group_info['group_time']) : $lang['NONE'],
 		'U_SEARCH_USER'          => "search.php?mode=searchuser",
-		'U_GROUP_CONFIG'         => "group_config.php?g=$group_id",
-		'GROUP_TYPE'             => $group_type,
+
+        'U_GROUP_CONFIG'         => "group_config.php?g=$group_id",
+		'RELEASE_GROUP'          => ($group_info['release_group']) ? true : false,
+        'GROUP_TYPE'             => $group_type,
+
 		'S_GROUP_OPEN_TYPE'      => GROUP_OPEN,
 		'S_GROUP_CLOSED_TYPE'    => GROUP_CLOSED,
 		'S_GROUP_HIDDEN_TYPE'    => GROUP_HIDDEN,
@@ -591,7 +596,7 @@ else
 		{
 			$user_id = $member['user_id'];
 
-			generate_user_info($member, $bb_cfg['default_dateformat'], $is_moderator, $from, $posts, $joined, $pm, $email, $www, $user_time);
+			generate_user_info($member, $bb_cfg['default_dateformat'], $is_moderator, $from, $posts, $joined, $pm, $email, $www, $user_time, $avatar);
 
 			$row_class = !($i % 2) ? 'row1' : 'row2';
 
@@ -599,6 +604,7 @@ else
 
 			$template->assign_block_vars('pending', array(
 				'ROW_CLASS' => $row_class,
+                'AVATAR_IMG'=> $avatar,
 				'USER'      => profile_url($member),
 				'FROM'      => $from,
 				'JOINED'    => $joined,
