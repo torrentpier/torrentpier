@@ -2576,7 +2576,7 @@ $lang['SELF_MODERATED'] = 'Users can <b>move</b> their topics to another forum';
 
 $lang['BT_ANNOUNCE_URL_HEAD'] = 'Announce URL';
 $lang['BT_ANNOUNCE_URL'] = 'Announce url';
-$lang['BT_ANNOUNCE_URL_EXPL'] = 'you can define additional allowed urls in "includes/announce_urls.php"';
+$lang['BT_ANNOUNCE_URL_EXPL'] = 'you can define additional allowed urls in "includes/torrent_announce_urls.php"';
 $lang['BT_DISABLE_DHT'] = 'Disable DHT network';
 $lang['BT_DISABLE_DHT_EXPL'] = 'Disable Peer Exchange and DHT (recommended for private networks, only url announce)';
 $lang['BT_CHECK_ANNOUNCE_URL'] = 'Verify announce url';

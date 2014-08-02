@@ -2576,7 +2576,7 @@ $lang['SELF_MODERATED'] = 'Автор топика может перенести
 
 $lang['BT_ANNOUNCE_URL_HEAD'] = 'Announce URL';
 $lang['BT_ANNOUNCE_URL'] = 'Announce url';
-$lang['BT_ANNOUNCE_URL_EXPL'] = 'дополнительные разрешенные адреса можно задать в "includes/announce_urls.php"';
+$lang['BT_ANNOUNCE_URL_EXPL'] = 'дополнительные разрешенные адреса можно задать в "includes/torrent_announce_urls.php"';
 $lang['BT_DISABLE_DHT'] = 'Запретить DHT сети';
 $lang['BT_DISABLE_DHT_EXPL'] = 'Запретить обмен пирами и DHT (рекомендовано для приватных сетей, только url announce)';
 $lang['BT_CHECK_ANNOUNCE_URL'] = 'Проверять announce url';
