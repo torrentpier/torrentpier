@@ -56,19 +56,19 @@
 </tr>
 <tr><td colspan="2"><h2>{GROUP_NAME}</h2></td></tr>
 <tr>
-    <td align="center" valign="top">
-        <div style="height:100px;width:100px;background:#285e8e;">&nbsp;</div>
-    </td>
-    <td valign="top">
-        <!-- IF GROUP_DESCRIPTION -->
-        <div class="post_wrap">{GROUP_DESCRIPTION}</div>
-        <!-- ENDIF / GROUP_DESCRIPTION -->
-    </td>
+	<td align="center" valign="top">
+		<div style="height:100px;width:100px;background:#285e8e;">&nbsp;</div>
+	</td>
+	<td valign="top">
+		<!-- IF GROUP_DESCRIPTION -->
+		<div class="post_wrap">{GROUP_DESCRIPTION}</div>
+		<!-- ENDIF / GROUP_DESCRIPTION -->
+	</td>
 </tr>
 <!-- IF RELEASE_GROUP -->
 <tr>
-    <td>{L_GROUP_TYPE}</td>
-    <td>{L_RELEASE_GROUP}</td>
+	<td>{L_GROUP_TYPE}</td>
+	<td>{L_RELEASE_GROUP}</td>
 </tr>
 <!-- ENDIF -->
 <tr>
@@ -89,8 +89,8 @@
 </tr>
 <!-- BEGIN switch_mod_option -->
 <tr>
-    <td>{L_GROUP_CONFIGURATION}:</td>
-    <td><a href="{U_GROUP_CONFIG}">{L_GROUP_GOTO_CONFIG}</a></td>
+	<td>{L_GROUP_CONFIGURATION}:</td>
+	<td><a href="{U_GROUP_CONFIG}">{L_GROUP_GOTO_CONFIG}</a></td>
 </tr>
 <!-- END switch_mod_option -->
 </table>
@@ -203,8 +203,8 @@
 <table class="forumline">
 <thead>
 <tr>
-    <th class="{sorter: false}" ><b class="tbs-text">#</b></th>
-    <th class="{sorter: false}" ><b class="tbs-text">{L_AVATAR}</b></th>
+	<th class="{sorter: false}" ><b class="tbs-text">#</b></th>
+	<th class="{sorter: false}" ><b class="tbs-text">{L_AVATAR}</b></th>
 	<th class="{sorter: 'text'}" ><b class="tbs-text">{L_USERNAME}</b></th>
 	<th class="{sorter: false}" ><b class="tbs-text">{L_PM}</b></th>
 	<th class="{sorter: 'text'}" ><b class="tbs-text">{L_EMAIL}</b></th>
@@ -214,13 +214,13 @@
 	<th class="{sorter: false}" ><b class="tbs-text">{L_WEBSITE}</b></th>
 </tr>
 <tr>
-    <td class="catTitle" colspan="9">{L_PENDING_MEMBERS}</td>
+	<td class="catTitle" colspan="9">{L_PENDING_MEMBERS}</td>
 </tr>
 </thead>
 <!-- BEGIN pending -->
 <tr class="{pending.ROW_CLASS} tCenter">
 	<td width="3%"><input type="checkbox" name="pending_members[]" value="{pending.USER_ID}"/></td>
-    <td width="3%">{pending.AVATAR_IMG}</td>
+	<td width="3%">{pending.AVATAR_IMG}</td>
 	<td>{pending.USER}</td>
 	<td>{pending.PM}</td>
 	<td>{pending.EMAIL}</td>

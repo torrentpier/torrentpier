@@ -34,11 +34,11 @@
 	</td>
 </tr>
 <tr>
-    <td>{L_RELEASE_GROUP}</td>
-    <td>
-        <label><input type="radio" name="release_group" value="1" <!-- IF RELEASE_GROUP -->checked="checked"<!-- ENDIF --> />{L_YES}</label>&nbsp;&nbsp;
-        <label><input type="radio" name="release_group" value="0" <!-- IF not RELEASE_GROUP -->checked="checked"<!-- ENDIF --> />{L_NO}</label>
-    </td>
+	<td>{L_RELEASE_GROUP}</td>
+	<td>
+		<label><input type="radio" name="release_group" value="1" <!-- IF RELEASE_GROUP -->checked="checked"<!-- ENDIF --> />{L_YES}</label>&nbsp;&nbsp;
+		<label><input type="radio" name="release_group" value="0" <!-- IF not RELEASE_GROUP -->checked="checked"<!-- ENDIF --> />{L_NO}</label>
+	</td>
 </tr>
 <!-- BEGIN group_edit -->
 <tr>
@@ -107,4 +107,3 @@
 
 <!--========================================================================-->
 <!-- ENDIF / TPL_GROUP_SELECT -->
-

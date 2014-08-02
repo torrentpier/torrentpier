@@ -145,11 +145,11 @@ if (!$group_id)
 		{
 			$text  = htmlCHR(str_short(rtrim($name), HTML_SELECT_MAX_LENGTH));
 
-            $members = ($data['m']) ? $lang['MEMBERS_IN_GROUP'] .': '. $data['m'] : $lang['NO_GROUP_MEMBERS'];
+			$members = ($data['m']) ? $lang['MEMBERS_IN_GROUP'] .': '. $data['m'] : $lang['NO_GROUP_MEMBERS'];
 			$candidates  = ($data['c']) ? $lang['PENDING_MEMBERS'] .': '. $data['c'] : $lang['NO_PENDING_GROUP_MEMBERS'];
 
-            $options .= '<li class="pad_2"><a href="'. GROUP_URL . $data['id'] .'" class="med bold">'. $text .'</a></li>';
-            $options .= ($data['rg']) ? '<ul><li class="med">'. $lang['RELEASE_GROUP'] .'</li>' : '';
+			$options .= '<li class="pad_2"><a href="'. GROUP_URL . $data['id'] .'" class="med bold">'. $text .'</a></li>';
+			$options .= ($data['rg']) ? '<ul><li class="med">'. $lang['RELEASE_GROUP'] .'</li>' : '';
 			$options .= '<li class="seedmed">'. $members .'</li>';
 			if (IS_AM)
 			{
@@ -525,9 +525,9 @@ else
 		'MOD_TIME'               => (!empty($group_info['group_time'])) ? bb_date($group_info['group_time']) : $lang['NONE'],
 		'U_SEARCH_USER'          => "search.php?mode=searchuser",
 
-        'U_GROUP_CONFIG'         => "group_config.php?g=$group_id",
+		'U_GROUP_CONFIG'         => "group_config.php?g=$group_id",
 		'RELEASE_GROUP'          => ($group_info['release_group']) ? true : false,
-        'GROUP_TYPE'             => $group_type,
+		'GROUP_TYPE'             => $group_type,
 
 		'S_GROUP_OPEN_TYPE'      => GROUP_OPEN,
 		'S_GROUP_CLOSED_TYPE'    => GROUP_CLOSED,
@@ -604,7 +604,7 @@ else
 
 			$template->assign_block_vars('pending', array(
 				'ROW_CLASS' => $row_class,
-                'AVATAR_IMG'=> $avatar,
+				'AVATAR_IMG'=> $avatar,
 				'USER'      => profile_url($member),
 				'FROM'      => $from,
 				'JOINED'    => $joined,
