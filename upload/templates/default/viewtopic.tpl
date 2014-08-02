@@ -42,8 +42,8 @@ ajax.callback.posts = function(data) {
 	if(data.html){
 		$('#pp_'+ data.post_id).show().html(data.html);
 		initPostBBCode('#pp_'+ data.post_id);
-	    $('#pe_'+ data.post_id).hide();
-	    ajax.open_edit = false;
+		$('#pe_'+ data.post_id).hide();
+		ajax.open_edit = false;
 	} else if(data.text){
 		ajax.open_edit = data.post_id;
 		$('#pe_'+ data.post_id).html(data.text);
@@ -54,10 +54,10 @@ ajax.callback.posts = function(data) {
 		$('tbody#post_'+ data.post_id).hide();
 	}
 	if(data.quote) $('textarea#message').attr('value', $('textarea#message').val() + data.message +' ').focus();
-    if(data.message_html){
-	    $('#view_message').show();
-	    $('.view-message').html(data.message_html);
-	    initPostBBCode('.view-message');
+	if(data.message_html){
+		$('#view_message').show();
+			$('.view-message').html(data.message_html);
+			initPostBBCode('.view-message');
 			var maxH   = screen.height - 490;
 		$('.view-message').css({ maxHeight: maxH });
 	}
