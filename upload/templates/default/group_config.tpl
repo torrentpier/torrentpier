@@ -33,7 +33,7 @@
                 <textarea cols="80" id="group_description" rows="6" >{GROUP_DESCRIPTION}</textarea>
             </p>
             <p>
-                <input type="button" value="{L_AJAX_PREVIEW}" onclick="ajax.exec({ action: 'posts', type: 'view_message', message: $('textarea#group_description').val()});ajax.callback.posts=function(data){$('div#preview').show().html(data.message_html)}">
+                <input type="button" value="{L_AJAX_PREVIEW}" onclick="ajax.exec({ action: 'posts', type: 'view_message', message: $('textarea#group_description').val()});ajax.callback.posts=function(data){$('div#preview').html(data.message_html);initPostBBCode('div#preview')}">
                 <input type="button" value="{L_SAVE}" onclick="javascript:manage_group('group_description',$('textarea#group_description').val())">
             </p>
         </td>
