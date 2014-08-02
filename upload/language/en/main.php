@@ -699,8 +699,6 @@ $lang['ORDER'] = 'Order';
 // Group control panel
 //
 $lang['GROUP_CONTROL_PANEL'] = 'User Groups';
-$lang['GROUP_CONFIGURATION'] = 'Group Configuration';
-$lang['GROUP_GOTO_CONFIG'] = 'Go to Group Configuration panel';
 $lang['GROUP_RETURN'] = 'Return to User Group page';
 $lang['MEMBERSHIP_DETAILS'] = 'Group Membership Details';
 $lang['JOIN_A_GROUP'] = 'Join a Group';

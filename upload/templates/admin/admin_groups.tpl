@@ -33,13 +33,6 @@
 		<div><input type="radio" name="group_type" value="{S_GROUP_HIDDEN_TYPE}" {S_GROUP_HIDDEN_CHECKED} />	{L_GROUP_HIDDEN}</div>
 	</td>
 </tr>
-<tr>
-    <td>{L_RELEASE_GROUP}</td>
-    <td>
-        <label><input type="radio" name="release_group" value="1" <!-- IF RELEASE_GROUP -->checked="checked"<!-- ENDIF --> />{L_YES}</label>&nbsp;&nbsp;
-        <label><input type="radio" name="release_group" value="0" <!-- IF not RELEASE_GROUP -->checked="checked"<!-- ENDIF --> />{L_NO}</label>
-    </td>
-</tr>
 <!-- BEGIN group_edit -->
 <tr>
 	<td>{L_DELETE_OLD_GROUP_MOD}</td>

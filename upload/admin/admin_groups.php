@@ -30,7 +30,6 @@ if (!empty($_POST['edit']) || !empty($_POST['new']))
 			'group_moderator'   => $row['group_moderator'],
 			'group_mod_name'    => $row['moderator_name'],
 			'group_type'        => $row['group_type'],
-            'release_group'     => $row['release_group'],
 		);
 		$mode = 'editgroup';
 		$template->assign_block_vars('group_edit', array());
@@ -43,7 +42,6 @@ if (!empty($_POST['edit']) || !empty($_POST['new']))
 			'group_moderator'   => '',
 			'group_mod_name'    => '',
 			'group_type'        => GROUP_OPEN,
-            'release_group'     => 0,
 		);
 		$mode = 'newgroup';
 	}
@@ -68,7 +66,6 @@ if (!empty($_POST['edit']) || !empty($_POST['new']))
 		'S_GROUP_OPEN_CHECKED'   => ($group_info['group_type'] == GROUP_OPEN) ? HTML_CHECKED : '',
 		'S_GROUP_CLOSED_CHECKED' => ($group_info['group_type'] == GROUP_CLOSED) ? HTML_CHECKED : '',
 		'S_GROUP_HIDDEN_CHECKED' => ($group_info['group_type'] == GROUP_HIDDEN ) ? HTML_CHECKED : '',
-        'RELEASE_GROUP'          => ($group_info['release_group']) ? true : false,
 		'S_GROUP_ACTION'         => "admin_groups.php",
 		'S_HIDDEN_FIELDS'        => $s_hidden_fields,
 	));
@@ -93,7 +90,6 @@ else if (!empty($_POST['group_update']))
 	else
 	{
 		$group_type = isset($_POST['group_type']) ? intval($_POST['group_type']) : GROUP_OPEN;
-        $release_group = isset($_POST['release_group']) ? intval($_POST['release_group']) : 0;
 		$group_name = isset($_POST['group_name']) ? trim($_POST['group_name']) : '';
 		$group_desc = isset($_POST['group_description']) ? trim($_POST['group_description']) : '';
 
@@ -116,7 +112,6 @@ else if (!empty($_POST['group_update']))
 
 		$sql_ary = array(
 			'group_type'        => (int) $group_type,
-            'release_group'     => (int) $release_group,
 			'group_name'        => (string) $group_name,
 			'group_description' => (string) $group_desc,
 			'group_moderator'   => (int) $group_moderator,

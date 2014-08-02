@@ -2,7 +2,7 @@
 
 if (!defined('IN_AJAX')) die(basename(__FILE__));
 
-global $bb_cfg, $userdata, $lang;
+global $bb_cfg, $lang;
 
 if (!$group_id = intval($this->request['group_id']) OR !$group_info = get_group_data($group_id))
 {
@@ -15,10 +15,7 @@ if (!$mode = (string) $this->request['mode'])
 
 $value = $this->request['value'] = (string) (isset($this->request['value'])) ? $this->request['value'] : 0;
 
-if (!IS_ADMIN && $userdata['user_id'] != $group_info['group_moderator'])
-{
-    $this->ajax_die($lang['ONLY_FOR_MOD']);
-}
+// TODO Check for permissions
 
 switch ($mode)
 {
