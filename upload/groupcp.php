@@ -4,14 +4,16 @@ define('IN_FORUM',   true);
 define('BB_SCRIPT', 'groupcp');
 define('BB_ROOT', './');
 require(BB_ROOT ."common.php");
+require(INC_DIR .'bbcode.php');
 require(INC_DIR .'functions_group.php');
 
+$page_cfg['include_bbcode_js'] = true;
 $page_cfg['use_tablesorter'] = true;
 
 $s_member_groups = $s_pending_groups = $s_member_groups_opt = $s_pending_groups_opt = '';
 $select_sort_mode = $select_sort_order = '';
 
-function generate_user_info(&$row, $date_format, $group_mod, &$from, &$posts, &$joined, &$pm, &$email, &$www, &$user_time)
+function generate_user_info(&$row, $date_format, $group_mod, &$from, &$posts, &$joined, &$pm, &$email, &$www, &$user_time, &$avatar)
 {
 	global $lang, $images, $bb_cfg;
 
@@ -20,6 +22,7 @@ function generate_user_info(&$row, $date_format, $group_mod, &$from, &$posts, &$
 	$user_time   = ( !empty($row['user_time']) ) ? bb_date($row['user_time']) : $lang['NONE'];
 	$posts  = ( $row['user_posts'] ) ? $row['user_posts'] : 0;
 	$pm     = ($bb_cfg['text_buttons']) ? '<a class="txtb" href="'. (PM_URL . "?mode=post&amp;". POST_USERS_URL ."=".$row['user_id']) .'">'. $lang['SEND_PM_TXTB'] .'</a>' : '<a href="' . (PM_URL . "?mode=post&amp;". POST_USERS_URL ."=".$row['user_id']) .'"><img src="' . $images['icon_pm'] . '" alt="' . $lang['SEND_PRIVATE_MESSAGE'] . '" title="' . $lang['SEND_PRIVATE_MESSAGE'] . '" border="0" /></a>';
+    $avatar = get_avatar($row['user_id'], $row['avatar_ext_id'], !bf($row['user_opt'], 'user_opt', 'dis_avatar'), true, 50, 50);
 
 	if (bf($row['user_opt'], 'user_opt', 'user_viewemail') || $group_mod)
 	{
@@ -183,34 +186,6 @@ if (!$group_id)
 		}
 		else bb_die($lang['NO_GROUPS_EXIST']);
 	}
-}
-else if (!empty($_POST['groupstatus']))
-{
-	if (!$is_moderator)
-	{
-		bb_die($lang['NOT_GROUP_MODERATOR']);
-	}
-
-	$new_group_type = (int) $_POST['group_type'];
-
-	if (!in_array($new_group_type, array(GROUP_OPEN, GROUP_CLOSED, GROUP_HIDDEN), true))
-	{
-		bb_die("Invalid group type: $new_group_type");
-	}
-
-	DB()->query("
-		UPDATE ". BB_GROUPS ." SET
-			group_type = $new_group_type
-		WHERE group_id = $group_id
-			AND group_single_user = 0
-		LIMIT 1
-	");
-
-	$message = $lang['GROUP_TYPE_UPDATED'] .'<br /><br />';
-	$message .= sprintf($lang['CLICK_RETURN_GROUP'], '<a href="'. GROUP_URL ."$group_id" .'">', '</a>') .'<br /><br />';
-	$message .= sprintf($lang['CLICK_RETURN_INDEX'], '<a href="'. "index.php" .'">', '</a>');
-
-	bb_die($message);
 }
 else if (@$_POST['joingroup'])
 {
@@ -420,7 +395,7 @@ else
 
 	// Members
 	$group_members = DB()->fetch_rowset("
-		SELECT u.username, u.user_rank, u.user_id, u.user_opt, u.user_posts, u.user_regdate, u.user_from, u.user_website, u.user_email, ug.user_pending, ug.user_time
+		SELECT u.username, u.avatar_ext_id, u.user_rank, u.user_id, u.user_opt, u.user_posts, u.user_regdate, u.user_from, u.user_website, u.user_email, ug.user_pending, ug.user_time
 		FROM ". BB_USER_GROUP ." ug, ". BB_USERS ." u
 		WHERE ug.group_id = $group_id
 			AND ug.user_pending = 0
@@ -513,7 +488,7 @@ else
 	$username = $group_moderator['username'];
 	$user_id = $group_moderator['user_id'];
 
-	generate_user_info($group_moderator, $bb_cfg['default_dateformat'], $is_moderator, $from, $posts, $joined, $pm, $email, $www, $user_time);
+	generate_user_info($group_moderator, $bb_cfg['default_dateformat'], $is_moderator, $from, $posts, $joined, $pm, $email, $www, $user_time, $avatar);
 
 	$group_type = '';
 	if ($group_info['group_type'] == GROUP_OPEN)
@@ -535,9 +510,10 @@ else
 		'GROUP_INFO'             => true,
 		'PAGE_TITLE'             => $lang['GROUP_CONTROL_PANEL'],
 		'GROUP_NAME'             => htmlCHR($group_info['group_name']),
-		'GROUP_DESCRIPTION'      => $group_info['group_description'],
-		'GROUP_DETAILS'          => $group_details,
+		'GROUP_DESCRIPTION'      => bbcode2html($group_info['group_description']),
+        'GROUP_DETAILS'          => $group_details,
 		'MOD_USER'               => profile_url($group_moderator),
+        'MOD_AVATAR'             => $avatar,
 		'MOD_FROM'               => $from,
 		'MOD_JOINED'             => $joined,
 		'MOD_POSTS'              => $posts,
@@ -546,6 +522,7 @@ else
 		'MOD_WWW'                => $www,
 		'MOD_TIME'               => (!empty($group_info['group_time'])) ? bb_date($group_info['group_time']) : $lang['NONE'],
 		'U_SEARCH_USER'          => "search.php?mode=searchuser",
+        'U_GROUP_CONFIG'         => "group-config.php?g=$group_id",
 		'GROUP_TYPE'             => $group_type,
 		'S_GROUP_OPEN_TYPE'      => GROUP_OPEN,
 		'S_GROUP_CLOSED_TYPE'    => GROUP_CLOSED,
@@ -564,7 +541,7 @@ else
 	{
 		$user_id = $member['user_id'];
 
-		generate_user_info($member, $bb_cfg['default_dateformat'], $is_moderator, $from, $posts, $joined, $pm, $email, $www, $user_time);
+		generate_user_info($member, $bb_cfg['default_dateformat'], $is_moderator, $from, $posts, $joined, $pm, $email, $www, $user_time, $avatar);
 
 		if ($group_info['group_type'] != GROUP_HIDDEN || $is_group_member || $is_moderator)
 		{
@@ -574,6 +551,7 @@ else
 				'ROW_NUMBER' => $i + ( $start + 1 ),
 				'ROW_CLASS'  => $row_class,
 				'USER'       => profile_url($member),
+                'AVATAR_IMG' => $avatar,
 				'FROM'       => $from,
 				'JOINED'     => $joined,
 				'POSTS'      => $posts,

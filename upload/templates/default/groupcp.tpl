@@ -54,16 +54,21 @@
 <tr>
 	<th colspan="2">{L_GROUP_INFORMATION}</th>
 </tr>
+<tr><td colspan="2"><h2>{GROUP_NAME}</h2></td></tr>
 <tr>
-	<td>{L_GROUP_NAME}:</td>
-	<td><b>{GROUP_NAME}</b></td>
+    <td align="center" valign="top">
+        <div style="height:100px;width:100px;background:#285e8e;">&nbsp;</div>
+    </td>
+    <td valign="top">
+        <!-- IF GROUP_DESCRIPTION -->
+        {GROUP_DESCRIPTION}
+        <!-- ENDIF / GROUP_DESCRIPTION -->
+    </td>
 </tr>
-<!-- IF GROUP_DESCRIPTION -->
 <tr>
-	<td>{L_GROUP_DESCRIPTION}:</td>
-	<td>{GROUP_DESCRIPTION}</td>
+    <td>{L_GROUP_TIME}</td>
+    <td>{MOD_TIME}</td>
 </tr>
-<!-- ENDIF / GROUP_DESCRIPTION -->
 <tr>
 	<td>{L_GROUP_MEMBERSHIP}:</td>
 	<td><p>{GROUP_DETAILS}
@@ -78,15 +83,8 @@
 </tr>
 <!-- BEGIN switch_mod_option -->
 <tr>
-	<td>{L_GROUP_TYPE}:</td>
-	<td>
-		<p>
-			<label><input type="radio" name="group_type" value="{S_GROUP_OPEN_TYPE}" {S_GROUP_OPEN_CHECKED} />{L_GROUP_OPEN}</label> &nbsp;&nbsp;
-			<label><input type="radio" name="group_type" value="{S_GROUP_CLOSED_TYPE}" {S_GROUP_CLOSED_CHECKED} />{L_GROUP_CLOSED}</label> &nbsp;&nbsp;
-			<label><input type="radio" name="group_type" value="{S_GROUP_HIDDEN_TYPE}" {S_GROUP_HIDDEN_CHECKED} />{L_GROUP_HIDDEN}</label>
-			&nbsp; <input class="mainoption" type="submit" name="groupstatus" value="{L_UPDATE}" />
-		</p>
-	</td>
+    <td>Настройка группы:</td>
+    <td><a href="{U_GROUP_CONFIG}">Перейти в панель управления группой</a></td>
 </tr>
 <!-- END switch_mod_option -->
 </table>
@@ -102,6 +100,7 @@
 <thead>
 <tr>
 	<th class="{sorter: 'digit'}" ><b class="tbs-text">#</b></th>
+    <th class="{sorter: false}" ><b class="tbs-text">{L_AVATAR}</b></th>
 	<th class="{sorter: 'text'}" ><b class="tbs-text">{L_USERNAME}</b></th>
 	<th class="{sorter: false}" ><b class="tbs-text">{L_PM}</b></th>
 	<th class="{sorter: 'text'}" ><b class="tbs-text">{L_EMAIL}</b></th>
@@ -113,10 +112,11 @@
 	<th class="{sorter: false}" ><b class="tbs-text">#</b></th>
 </tr>
 <tr>
-	<td colspan="10" class="catTitle">{L_GROUP_MODERATOR}</td>
+	<td colspan="11" class="catTitle">{L_GROUP_MODERATOR}</td>
 </tr>
 <tr class="row1 tCenter">
 	<td width="3%">{ROW_NUMBER}</td>
+    <td width="3%" align="center">{MOD_AVATAR}</td>
 	<td><b>{MOD_USER}</b></td>
 	<td>{MOD_PM}</td>
 	<td>{MOD_EMAIL}</td>
@@ -128,13 +128,14 @@
 	<td width="3%">&nbsp;</td>
 </tr>
 <tr>
-	<td colspan="10" class="catTitle">{L_GROUP_MEMBERS}</td>
+	<td colspan="11" class="catTitle">{L_GROUP_MEMBERS}</td>
 </tr>
 </thead>
 
 <!-- BEGIN member -->
 <tr class="{member.ROW_CLASS} tCenter">
 	<td width="3%">{member.ROW_NUMBER}</td>
+    <td width="3%" align="center">{member.AVATAR_IMG}</td>
 	<td>{member.USER}</td>
 	<td>{member.PM}</td>
 	<td>{member.EMAIL}</td>
@@ -166,7 +167,7 @@
 <!-- BEGIN switch_mod_option -->
 <tfoot>
 <tr>
-	<td colspan="10" class="cat" style="padding: 2px 12px;">
+	<td colspan="11" class="cat" style="padding: 2px 12px;">
 		<p id="add_group_member" class="floatL">
 			<input type="text" name="username" maxlength="50" size="20" />
 			<input type="submit" name="add" value="{L_ADD_MEMBER}" class="mainoption" />

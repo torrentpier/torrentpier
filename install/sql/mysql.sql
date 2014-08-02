@@ -790,13 +790,14 @@ CREATE TABLE IF NOT EXISTS `bb_groups` (
   `group_id` mediumint(8) NOT NULL AUTO_INCREMENT,
   `group_time` int(11) NOT NULL DEFAULT '0',
   `group_type` tinyint(4) NOT NULL DEFAULT '1',
+  `release_group` tinyint(4) NOT NULL DEFAULT '0',
   `group_name` varchar(40) NOT NULL DEFAULT '',
-  `group_description` varchar(255) NOT NULL DEFAULT '',
+  `group_description` text NOT NULL DEFAULT '',
   `group_moderator` mediumint(8) NOT NULL DEFAULT '0',
   `group_single_user` tinyint(1) NOT NULL DEFAULT '1',
   PRIMARY KEY (`group_id`),
   KEY `group_single_user` (`group_single_user`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 

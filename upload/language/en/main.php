@@ -699,6 +699,7 @@ $lang['ORDER'] = 'Order';
 // Group control panel
 //
 $lang['GROUP_CONTROL_PANEL'] = 'User Groups';
+$lang['GROUP_RETURN'] = 'Return to User Group page';
 $lang['MEMBERSHIP_DETAILS'] = 'Group Membership Details';
 $lang['JOIN_A_GROUP'] = 'Join a Group';
 
@@ -709,6 +710,9 @@ $lang['GROUP_MEMBERSHIP'] = 'Group membership';
 $lang['GROUP_MEMBERS'] = 'Group Members';
 $lang['GROUP_MODERATOR'] = 'Group Moderator';
 $lang['PENDING_MEMBERS'] = 'Pending Members';
+
+$lang['GROUP_TIME'] = 'Created';
+$lang['RELEASE_GROUP'] = 'Release Group';
 
 $lang['GROUP_TYPE'] = 'Group type';
 $lang['GROUP_OPEN'] = 'Open group';
@@ -724,6 +728,7 @@ $lang['GROUP_MEMBER_HIDDEN'] = 'Hidden groups';
 
 $lang['NO_GROUPS_EXIST'] = 'No Groups Exist';
 $lang['GROUP_NOT_EXIST'] = 'That user group does not exist';
+$lang['NO_GROUP_ID_SPECIFIED'] = 'Group ID is not specified';
 
 $lang['NO_GROUP_MEMBERS'] = 'This group has no members';
 $lang['HIDDEN_GROUP_MEMBERS'] = 'This group is hidden; you cannot view its membership';
