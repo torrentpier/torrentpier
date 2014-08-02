@@ -17,7 +17,7 @@
 	<td class="pad_4">
 	<table class="bordered wAuto bCenter">
 	<tr class="row2">
-	    <!-- BEGIN groups -->
+		<!-- BEGIN groups -->
 		<td class="pad_8 med bold">{groups.MEMBERSHIP}</td>
 		<!-- END groups -->
 	</tr>
@@ -56,18 +56,18 @@
 </tr>
 <tr><td colspan="2"><h2>{GROUP_NAME}</h2></td></tr>
 <tr>
-    <td align="center" valign="top">
-        <div style="height:100px;width:100px;background:#285e8e;">&nbsp;</div>
-    </td>
-    <td valign="top">
-        <!-- IF GROUP_DESCRIPTION -->
-        {GROUP_DESCRIPTION}
-        <!-- ENDIF / GROUP_DESCRIPTION -->
-    </td>
+	<td align="center" valign="top">
+		<div style="height:100px;width:100px;background:#285e8e;">&nbsp;</div>
+	</td>
+	<td valign="top">
+		<!-- IF GROUP_DESCRIPTION -->
+		{GROUP_DESCRIPTION}
+		<!-- ENDIF / GROUP_DESCRIPTION -->
+	</td>
 </tr>
 <tr>
-    <td>{L_GROUP_TIME}</td>
-    <td>{MOD_TIME}</td>
+	<td>{L_GROUP_TIME}</td>
+	<td>{MOD_TIME}</td>
 </tr>
 <tr>
 	<td>{L_GROUP_MEMBERSHIP}:</td>
@@ -83,8 +83,8 @@
 </tr>
 <!-- BEGIN switch_mod_option -->
 <tr>
-    <td>Настройка группы:</td>
-    <td><a href="{U_GROUP_CONFIG}">Перейти в панель управления группой</a></td>
+	<td>Настройка группы:</td>
+	<td><a href="{U_GROUP_CONFIG}">Перейти в панель управления группой</a></td>
 </tr>
 <!-- END switch_mod_option -->
 </table>
@@ -100,7 +100,7 @@
 <thead>
 <tr>
 	<th class="{sorter: 'digit'}" ><b class="tbs-text">#</b></th>
-    <th class="{sorter: false}" ><b class="tbs-text">{L_AVATAR}</b></th>
+	<th class="{sorter: false}" ><b class="tbs-text">{L_AVATAR}</b></th>
 	<th class="{sorter: 'text'}" ><b class="tbs-text">{L_USERNAME}</b></th>
 	<th class="{sorter: false}" ><b class="tbs-text">{L_PM}</b></th>
 	<th class="{sorter: 'text'}" ><b class="tbs-text">{L_EMAIL}</b></th>
@@ -116,7 +116,7 @@
 </tr>
 <tr class="row1 tCenter">
 	<td width="3%">{ROW_NUMBER}</td>
-    <td width="3%" align="center">{MOD_AVATAR}</td>
+	<td width="3%" align="center">{MOD_AVATAR}</td>
 	<td><b>{MOD_USER}</b></td>
 	<td>{MOD_PM}</td>
 	<td>{MOD_EMAIL}</td>
@@ -135,7 +135,7 @@
 <!-- BEGIN member -->
 <tr class="{member.ROW_CLASS} tCenter">
 	<td width="3%">{member.ROW_NUMBER}</td>
-    <td width="3%" align="center">{member.AVATAR_IMG}</td>
+	<td width="3%" align="center">{member.AVATAR_IMG}</td>
 	<td>{member.USER}</td>
 	<td>{member.PM}</td>
 	<td>{member.EMAIL}</td>

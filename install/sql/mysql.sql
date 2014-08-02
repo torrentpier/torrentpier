@@ -797,7 +797,7 @@ CREATE TABLE IF NOT EXISTS `bb_groups` (
   `group_single_user` tinyint(1) NOT NULL DEFAULT '1',
   PRIMARY KEY (`group_id`),
   KEY `group_single_user` (`group_single_user`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 

@@ -1,7 +1,7 @@
 <?php
 
 define('IN_FORUM', true);
-define('BB_SCRIPT', 'group-config');
+define('BB_SCRIPT', 'group_config');
 define('BB_ROOT', './');
 require(BB_ROOT .'common.php');
 require(INC_DIR .'functions_group.php');
@@ -69,7 +69,7 @@ if ($is_moderator)
         'RELEASE_GROUP'          => ($group_info['release_group']) ? true : false,
     ));
 
-    $template->set_filenames(array('body' => 'group-config.tpl'));
+    $template->set_filenames(array('body' => 'group_config.tpl'));
 
     $template->assign_vars(array('PAGE_TITLE' => 'Настройка группы'));
 

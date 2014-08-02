@@ -10,8 +10,8 @@
             console.log(data);
         }
     }
-
 </script>
+
 <h1 class="pagetitle">{PAGE_TITLE}<!-- IF GROUP_NAME --> :: {GROUP_NAME}<!-- ENDIF --></h1>
 <p class="nav"><a href="{U_GROUP_URL}">{L_GROUP_RETURN}</a></p>
 <form action="{S_GROUPCP_ACTION}" method="post">
