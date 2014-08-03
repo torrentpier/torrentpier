@@ -39,7 +39,7 @@ if ($is_moderator)
     if ($submit)
     {
 
-        if (!empty($_FILES['avatar']['name']) && $bb_cfg['avatars']['up_allowed'])
+        if (!empty($_FILES['avatar']['name']) && $bb_cfg['group_avatars']['up_allowed'])
         {
             require(INC_DIR .'functions_upload.php');
             $upload = new upload_common();
@@ -90,7 +90,7 @@ if ($is_moderator)
 		'S_HIDDEN_FIELDS'        => $s_hidden_fields,
 		'S_GROUP_CONFIG_ACTION'  => "group_config.php?" . POST_GROUPS_URL . "=$group_id",
 
-        'AVATAR_EXPLAIN'     => sprintf($lang['AVATAR_EXPLAIN'], $bb_cfg['avatars']['max_width'], $bb_cfg['avatars']['max_height'], (round($bb_cfg['avatars']['max_size'] / 1024))),
+        'AVATAR_EXPLAIN'     => sprintf($lang['AVATAR_EXPLAIN'], $bb_cfg['group_avatars']['max_width'], $bb_cfg['group_avatars']['max_height'], (round($bb_cfg['group_avatars']['max_size'] / 1024))),
         'AVATAR_URL_PATH'    => ($group_info['avatar_ext_id']) ? get_avatar_path(GROUP_AVATAR_MASK . $group_id, $group_info['avatar_ext_id']) : '',
 
 		'RELEASE_GROUP'      => ($group_info['release_group']) ? true : false,

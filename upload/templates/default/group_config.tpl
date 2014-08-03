@@ -70,7 +70,7 @@ function manage_group(mode, value) {
 		</td>
 		<td valign="top">
 			<div id="avatar_explain" class="med">{AVATAR_EXPLAIN}</div><br/>
-			<!-- IF $bb_cfg['avatars']['up_allowed'] -->
+			<!-- IF $bb_cfg['group_avatars']['up_allowed'] -->
 				<form action="{S_GROUP_CONFIG_ACTION}" method="post" enctype="multipart/form-data">
 					{S_HIDDEN_FIELDS}
 					<input type="hidden" name="MAX_FILE_SIZE" value="{$bb_cfg['avatars']['max_size']}" />
