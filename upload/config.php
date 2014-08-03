@@ -553,6 +553,16 @@ $bb_cfg['avatars'] = array(
 	'up_allowed'  => true,                            // разрешить загрузку аватар
 );
 
+$bb_cfg['group_avatars'] = array(
+    'allowed_ext' => array('gif','jpg','jpeg','png'), // разрешенные форматы файлов
+    'max_size'    => 50*1024,                         // размер аватары в байтах
+    'max_height'  => 300,                             // высота аватара в px
+    'max_width'   => 250,                             // ширина аватара в px
+    'no_avatar'   => 'gallery/noavatar.png',          // дефолтная аватара
+    'upload_path' => BB_ROOT . 'images/avatars/',     // путь к директории с аватарами
+    'up_allowed'  => true,                            // разрешить загрузку аватар
+);
+
 // Misc
 define('MEM_USAGE', function_exists('memory_get_usage'));
 

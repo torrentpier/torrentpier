@@ -39,17 +39,12 @@ if ($is_moderator)
     if ($submit)
     {
 
-        if (isset($_POST['delete_avatar']))
-        {
-            delete_avatar(GROUP_AVATAR_MASK . $group_id, $group_info['avatar_ext_id']);
-            $avatar_ext_id = 0;
-        }
-        else if (!empty($_FILES['avatar']['name']) && $bb_cfg['avatars']['up_allowed'])
+        if (!empty($_FILES['avatar']['name']) && $bb_cfg['avatars']['up_allowed'])
         {
             require(INC_DIR .'functions_upload.php');
             $upload = new upload_common();
 
-            if ($upload->init($bb_cfg['avatars'], $_FILES['avatar']) AND $upload->store('avatar', array("user_id" => GROUP_AVATAR_MASK . $group_id, "avatar_ext_id" => $group_info['avatar_ext_id'])))
+            if ($upload->init($bb_cfg['group_avatars'], $_FILES['avatar']) AND $upload->store('avatar', array("user_id" => GROUP_AVATAR_MASK . $group_id, "avatar_ext_id" => $group_info['avatar_ext_id'])))
             {
                 $avatar_ext_id  = (int) $upload->file_ext_id;
             }
