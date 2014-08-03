@@ -631,7 +631,7 @@ require(INC_DIR .'torrent_show_dl_list.php');
 
 if ($t_data['topic_attachment'])
 {
-	require(BB_ROOT .'attach_mod/attachment_mod.php');
+	require(ATTACH_DIR .'attachment_mod.php');
 	init_display_post_attachments($t_data['topic_attachment']);
 }
 

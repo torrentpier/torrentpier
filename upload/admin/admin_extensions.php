@@ -26,7 +26,7 @@ else
 	$upload_dir = BB_ROOT . $attach_config['upload_dir'];
 }
 
-include(BB_ROOT .'attach_mod/includes/functions_selects.php');
+include(ATTACH_DIR .'includes/functions_selects.php');
 
 // Check if the language got included
 if (!isset($lang['TEST_SETTINGS_SUCCESSFUL']))

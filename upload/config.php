@@ -239,16 +239,16 @@ $page_cfg['show_torhelp'] = array(
 // Path (trailing slash '/' at the end: XX_PATH - without, XX_DIR - with)
 define('DIR_SEPR', DIRECTORY_SEPARATOR);
 
-define('BB_PATH',       realpath(BB_ROOT)     );  // absolute pathname to the forum root
-define('ADMIN_DIR',     BB_PATH .'/admin/'    );
-define('CACHE_DIR',     BB_PATH .'/cache/'    );
-define('CFG_DIR',       BB_PATH .'/config/'   );
-define('INC_DIR',       BB_PATH .'/includes/' );
-define('LANG_ROOT_DIR', BB_PATH .'/language/' );
-define('LOG_DIR',       BB_PATH .'/log/'      );
-define('TEMPLATES_DIR', BB_PATH .'/templates/');
-define('TRIGGERS_DIR',  BB_PATH .'/triggers/' );
-define('LOCKS_DIR',     BB_PATH .'/locks/'    );
+define('BB_PATH',       realpath(BB_ROOT)      );  // absolute pathname to the forum root
+define('ADMIN_DIR',     BB_PATH .'/admin/'     );
+define('ATTACH_DIR',    BB_PATH .'/attach_mod/');
+define('CACHE_DIR',     BB_PATH .'/cache/'     );
+define('CFG_DIR',       BB_PATH .'/config/'    );
+define('INC_DIR',       BB_PATH .'/includes/'  );
+define('LANG_ROOT_DIR', BB_PATH .'/language/'  );
+define('LOG_DIR',       BB_PATH .'/log/'       );
+define('TEMPLATES_DIR', BB_PATH .'/templates/' );
+define('TRIGGERS_DIR',  BB_PATH .'/triggers/'  );
 
 // URL's
 $bb_cfg['ajax_url']    = 'ajax.php';     #  "http://{$_SERVER['SERVER_NAME']}/ajax.php"

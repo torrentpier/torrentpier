@@ -2,11 +2,11 @@
 
 if (!defined('IN_FORUM')) die("Hacking attempt");
 
-require(BB_ROOT .'attach_mod/includes/functions_includes.php');
-require(BB_ROOT .'attach_mod/includes/functions_attach.php');
-require(BB_ROOT .'attach_mod/includes/functions_delete.php');
-require(BB_ROOT .'attach_mod/includes/functions_thumbs.php');
-require(BB_ROOT .'attach_mod/includes/functions_filetypes.php');
+require(ATTACH_DIR .'includes/functions_includes.php');
+require(ATTACH_DIR .'includes/functions_attach.php');
+require(ATTACH_DIR .'includes/functions_delete.php');
+require(ATTACH_DIR .'includes/functions_thumbs.php');
+require(ATTACH_DIR .'includes/functions_filetypes.php');
 
 if (defined('ATTACH_INSTALL'))
 {
@@ -76,7 +76,7 @@ if (!($attach_config = CACHE('bb_cache')->get('attach_config')))
 	CACHE('bb_cache')->set('attach_config', $attach_config, 86400);
 }
 
-include(BB_ROOT .'attach_mod/displaying.php');
-include(BB_ROOT .'attach_mod/posting_attachments.php');
+include(ATTACH_DIR .'displaying.php');
+include(ATTACH_DIR .'posting_attachments.php');
 
 $upload_dir = $attach_config['upload_dir'];

@@ -33,9 +33,9 @@ function attachment_quota_settings($admin_mode, $submit = false, $mode)
 		$upload_dir = BB_ROOT . $attach_config['upload_dir'];
 	}
 
-	include(BB_ROOT .'attach_mod/includes/functions_selects.php');
+	include(ATTACH_DIR .'includes/functions_selects.php');
 	if (!function_exists("process_quota_settings"))
-		include(BB_ROOT . 'attach_mod/includes/functions_admin.php');
+		include(ATTACH_DIR . 'includes/functions_admin.php');
 
 	$user_id = 0;
 

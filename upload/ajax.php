@@ -34,12 +34,12 @@ switch ($ajax->action)
 	case 'mod_action':
 	case 'change_tor_status':
 	case 'gen_passkey':
-		require(BB_ROOT . 'attach_mod/attachment_mod.php');
+		require(ATTACH_DIR . 'attachment_mod.php');
 		require(INC_DIR . 'functions_torrent.php');
 		break;
 
 	case 'change_torrent':
-		require(BB_ROOT . 'attach_mod/attachment_mod.php');
+		require(ATTACH_DIR . 'attachment_mod.php');
 		require(INC_DIR . 'functions_torrent.php');
 		break;
 
