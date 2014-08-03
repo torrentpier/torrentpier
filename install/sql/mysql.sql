@@ -788,6 +788,7 @@ INSERT INTO `bb_forums` VALUES (1, 1, 'Ваш первый форум', 'Опи�
 
 CREATE TABLE IF NOT EXISTS `bb_groups` (
   `group_id` mediumint(8) NOT NULL AUTO_INCREMENT,
+  `avatar_ext_id` int(15) NOT NULL DEFAULT '0',
   `group_time` int(11) NOT NULL DEFAULT '0',
   `group_type` tinyint(4) NOT NULL DEFAULT '1',
   `release_group` tinyint(4) NOT NULL DEFAULT '0',
