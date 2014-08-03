@@ -57,7 +57,7 @@
 <tr><td colspan="2"><h2>{GROUP_NAME}</h2></td></tr>
 <tr>
 	<td align="center" valign="top">
-		<div style="height:100px;width:100px;background:#285e8e;">&nbsp;</div>
+		{GROUP_AVATAR}
 	</td>
 	<td valign="top">
 		<!-- IF GROUP_DESCRIPTION -->

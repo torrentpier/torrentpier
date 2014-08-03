@@ -15,6 +15,8 @@ $group_id = isset($_REQUEST[POST_GROUPS_URL]) ? intval($_REQUEST[POST_GROUPS_URL
 $group_info = array();
 $is_moderator = false;
 
+$submit   = !empty($_POST['submit']);
+
 if ($group_id)
 {
 	if (!$group_info = get_group_data($group_id))
@@ -31,9 +33,37 @@ if ($group_id)
 if ($is_moderator)
 {
 
-	// TODO Creation Date, Admin panel, Avatar, Some tasty features
+	// TODO Creation Date, Admin panel, Some tasty features
 
-	$group_type = '';
+    // Avatar
+    if ($submit)
+    {
+
+        if (isset($_POST['delete_avatar']))
+        {
+            delete_avatar(GROUP_AVATAR_MASK . $group_id, $group_info['avatar_ext_id']);
+            $avatar_ext_id = 0;
+        }
+        else if (!empty($_FILES['avatar']['name']) && $bb_cfg['avatars']['up_allowed'])
+        {
+            require(INC_DIR .'functions_upload.php');
+            $upload = new upload_common();
+
+            if ($upload->init($bb_cfg['avatars'], $_FILES['avatar']) AND $upload->store('avatar', array("user_id" => GROUP_AVATAR_MASK . $group_id, "avatar_ext_id" => $group_info['avatar_ext_id'])))
+            {
+                $avatar_ext_id  = (int) $upload->file_ext_id;
+            }
+            else
+            {
+                bb_die(implode($upload->errors));
+            }
+        }
+
+        DB()->query("UPDATE ". BB_GROUPS ." SET avatar_ext_id = $avatar_ext_id WHERE group_id = $group_id LIMIT 1");
+
+    }
+
+    $group_type = '';
 	if ($group_info['group_type'] == GROUP_OPEN)
 	{
 		$group_type = $lang['GROUP_OPEN'];
@@ -63,8 +93,12 @@ if ($is_moderator)
 		'S_GROUP_CLOSED_CHECKED' => ($group_info['group_type'] == GROUP_CLOSED) ? ' checked="checked"' : '',
 		'S_GROUP_HIDDEN_CHECKED' => ($group_info['group_type'] == GROUP_HIDDEN) ? ' checked="checked"' : '',
 		'S_HIDDEN_FIELDS'        => $s_hidden_fields,
-		'S_GROUPCP_ACTION'       => "groupcp.php?" . POST_GROUPS_URL . "=$group_id",
-		'RELEASE_GROUP'          => ($group_info['release_group']) ? true : false,
+		'S_GROUP_CONFIG_ACTION'  => "group_config.php?" . POST_GROUPS_URL . "=$group_id",
+
+        'AVATAR_EXPLAIN'     => sprintf($lang['AVATAR_EXPLAIN'], $bb_cfg['avatars']['max_width'], $bb_cfg['avatars']['max_height'], (round($bb_cfg['avatars']['max_size'] / 1024))),
+        'AVATAR_URL_PATH'    => ($group_info['avatar_ext_id']) ? get_avatar_path(GROUP_AVATAR_MASK . $group_id, $group_info['avatar_ext_id']) : '',
+
+		'RELEASE_GROUP'      => ($group_info['release_group']) ? true : false,
 	));
 
 	$template->set_filenames(array('body' => 'group_config.tpl'));

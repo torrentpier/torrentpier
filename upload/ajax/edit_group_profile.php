@@ -36,6 +36,13 @@ switch ($mode)
 		$this->response['new_value'] = $value;
 		break;
 
+    case 'delete_avatar':
+        delete_avatar(GROUP_AVATAR_MASK . $group_id, $group_info['avatar_ext_id']);
+        $value = 0;
+        $mode = 'avatar_ext_id';
+        $this->response['act'] = $value;
+        break;
+
 	default:
 		$this->ajax_die('Unknown mode');
 }

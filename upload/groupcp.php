@@ -513,6 +513,7 @@ else
 		'PAGE_TITLE'             => $lang['GROUP_CONTROL_PANEL'],
 		'GROUP_NAME'             => htmlCHR($group_info['group_name']),
 		'GROUP_DESCRIPTION'      => bbcode2html($group_info['group_description']),
+        'GROUP_AVATAR'           => get_avatar(GROUP_AVATAR_MASK . $group_id, $group_info['avatar_ext_id'], true),
 		'GROUP_DETAILS'          => $group_details,
 		'MOD_USER'               => profile_url($group_moderator),
 		'MOD_AVATAR'             => $avatar,
