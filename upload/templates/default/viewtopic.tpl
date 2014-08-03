@@ -397,7 +397,7 @@ function build_poll_add_form (src_el)
 				<!-- IF postrow.IP --><a class="txtb" href="{IP_POST_URL}{postrow.POST_ID}&amp;t={TOPIC_ID}">{IP_POST_IMG}</a>{POST_BTN_SPACER}<!-- ENDIF -->
 				<!-- IF postrow.REPORT -->{postrow.REPORT}{POST_BTN_SPACER}<!-- ENDIF -->
 				<!-- IF AUTH_MOD -->
-					<a class="menu-root menu-alt1" href="#mc_{postrow.POST_ID}">{MC_IMG}</a>{POST_BTN_SPACER}
+					<a class="menu-root menu-alt1 txtb" href="#mc_{postrow.POST_ID}">{MC_IMG}</a>{POST_BTN_SPACER}
 					<!-- IF not IN_MODERATION --><a class="txtb" href="{PAGE_URL}&amp;mod=1&amp;start={PAGE_START}#{postrow.POST_ID}">{MOD_POST_IMG}</a>{POST_BTN_SPACER}<!-- ENDIF -->
 				<!-- ENDIF -->
 			</p>
