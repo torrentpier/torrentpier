@@ -127,7 +127,6 @@
 
 <!-- BEGIN tor_reged -->
 
-
 <!-- IF TOR_BLOCKED -->
 <table id="tor_blocked" class="error">
 	<tr><td><p class="error_msg">{TOR_BLOCKED_MSG}</p></td></tr>
@@ -204,7 +203,7 @@
 			<!-- IF $bb_cfg['tor_comment'] -->
 			<input type="text" id="comment" placeholder="{L_COMMENT}" />
 			<!-- ENDIF -->
-			
+
 			<!-- IF AUTH_MOD -->
 			<span id="tor-{postrow.attach.tor_reged.ATTACH_ID}">{postrow.attach.tor_reged.TOR_STATUS_SELECT}</span>
 			<a href="#" onclick="ajax.change_tor_status('status'); return false;"><input type="submit" value="{L_EDIT}" class="liteoption" /></a>

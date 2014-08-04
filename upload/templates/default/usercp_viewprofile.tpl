@@ -115,22 +115,23 @@ ajax.callback.manage_user = function(data) {
 <script type="text/javascript">
 ajax.ip_load = false;
 ajax.mod_action = function(mode) {
-if(!ajax.ip_load) {
-    ajax.exec({
-        action  : 'mod_action',
-        mode    : mode,
-        user_id : {PROFILE_USER_ID}
-    });
+if (!ajax.ip_load) {
+	ajax.exec({
+		action  : 'mod_action',
+		mode    : mode,
+		user_id : {PROFILE_USER_ID}
+	});
 }
 else
 {
-    $('#ip_list').toggle();
+	$('#ip_list').toggle();
 }};
 ajax.callback.mod_action = function(data) {
-    $('#ip_list').html(data.ip_list_html);
+	$('#ip_list').html(data.ip_list_html);
 	ajax.ip_load = true;
 }
 </script>
+
 <script type="text/javascript">
 ajax.group_membership = function(mode) {
 	$('#gr-mem-list').html('<i class="loading-1">{L_LOADING}</i>');
@@ -172,7 +173,6 @@ ajax.callback.gen_passkey = function(data){
 };
 </script>
 <!-- ENDIF / SHOW_PASSKEY -->
-
 
 <style type="text/css">
 #traf-stats-tbl { width: 468px; background: #F9F9F9; border: 1px solid #A5AFB4; border-collapse: separate; }
@@ -314,25 +314,26 @@ ajax.callback.gen_passkey = function(data){
 					<span class="editable bold">{USER_REGDATE}</span>
 					<!-- IF IS_ADMIN -->
 					[ <a href="#admin" class="menu-root menu-alt1"><span class="adm">{L_MANAGE_USER}</span></a> ]
-		            <div class="menu-sub row1 border bw_TRBL" id="admin">
-			            <fieldset class="mrg_6">
-			            <div class="tLeft" style="padding: 5px 6px 6px; display: block; font-size: 13px;">
-				            <a href="#" onclick="ajax.exec({action : 'manage_user', mode: '<!-- IF USER_ACTIVE -->user_deactivate<!-- ELSE -->user_activate<!-- ENDIF -->', user_id : {PROFILE_USER_ID}}); return false;" class="<!-- IF USER_ACTIVE -->adm<!-- ELSE -->seed bold<!-- ENDIF -->"><!-- IF USER_ACTIVE -->{L_USER_DEACTIVATE}<!-- ELSE -->{L_USER_ACTIVATE}<!-- ENDIF --></a> <br />
-					        <a href="#" onclick="ajax.exec({action : 'manage_user', mode: 'delete_profile', user_id : '{PROFILE_USER_ID}'}); return false;" class="adm">{L_USER_DELETE_EXPLAIN}</a> <br />
-							<a href="#" onclick="ajax.exec({action : 'manage_user', mode: 'delete_topics', user_id : '{PROFILE_USER_ID}'}); return false;" class="adm">{L_DELETE_USER_ALL_POSTS}</a> <br />
-                            <a href="#" onclick="ajax.exec({action : 'manage_user', mode: 'delete_message', user_id : '{PROFILE_USER_ID}'}); return false;" class="adm">{L_DELETE_USER_POSTS}</a> <br />
-			            </div>
-			            </fieldset>
-						<fieldset class="mrg_6"><legend>{L_BAN_USER}</legend>
-						<div class="tLeft" style="padding: 2px 6px 6px; display: block;" id="user-opt">
-							<label><input type="checkbox" name="dis_avatar"/>{L_HIDE_AVATARS}</label>
-							<label><input type="checkbox" name="dis_sig"/>{L_SHOW_CAPTION}</label>
-							<label><input type="checkbox" name="dis_passkey"/>{L_DOWNLOAD_TORRENT}</label>
-							<label><input type="checkbox" name="dis_pm"/>{L_SEND_PM}</label>
-							<label><input type="checkbox" name="dis_post"/>{L_SEND_MESSAGE}</label>
-							<label><input type="checkbox" name="dis_post_edit"/>{L_EDIT_POST}</label>
-							<label><input type="checkbox" name="dis_topic"/>{L_NEW_THREADS}</label>
-						</div>
+					<div class="menu-sub row1 border bw_TRBL" id="admin">
+						<fieldset class="mrg_6">
+							<div class="tLeft" style="padding: 5px 6px 6px; display: block; font-size: 13px;">
+								<a href="#" onclick="ajax.exec({action : 'manage_user', mode: '<!-- IF USER_ACTIVE -->user_deactivate<!-- ELSE -->user_activate<!-- ENDIF -->', user_id : {PROFILE_USER_ID}}); return false;" class="<!-- IF USER_ACTIVE -->adm<!-- ELSE -->seed bold<!-- ENDIF -->"><!-- IF USER_ACTIVE -->{L_USER_DEACTIVATE}<!-- ELSE -->{L_USER_ACTIVATE}<!-- ENDIF --></a> <br />
+								<a href="#" onclick="ajax.exec({action : 'manage_user', mode: 'delete_profile', user_id : '{PROFILE_USER_ID}'}); return false;" class="adm">{L_USER_DELETE_EXPLAIN}</a> <br />
+								<a href="#" onclick="ajax.exec({action : 'manage_user', mode: 'delete_topics', user_id : '{PROFILE_USER_ID}'}); return false;" class="adm">{L_DELETE_USER_ALL_POSTS}</a> <br />
+								<a href="#" onclick="ajax.exec({action : 'manage_user', mode: 'delete_message', user_id : '{PROFILE_USER_ID}'}); return false;" class="adm">{L_DELETE_USER_POSTS}</a> <br />
+							</div>
+						</fieldset>
+						<fieldset class="mrg_6">
+							<legend>{L_BAN_USER}</legend>
+							<div class="tLeft" style="padding: 2px 6px 6px; display: block;" id="user-opt">
+								<label><input type="checkbox" name="dis_avatar"/>{L_HIDE_AVATARS}</label>
+								<label><input type="checkbox" name="dis_sig"/>{L_SHOW_CAPTION}</label>
+								<label><input type="checkbox" name="dis_passkey"/>{L_DOWNLOAD_TORRENT}</label>
+								<label><input type="checkbox" name="dis_pm"/>{L_SEND_PM}</label>
+								<label><input type="checkbox" name="dis_post"/>{L_SEND_MESSAGE}</label>
+								<label><input type="checkbox" name="dis_post_edit"/>{L_EDIT_POST}</label>
+								<label><input type="checkbox" name="dis_topic"/>{L_NEW_THREADS}</label>
+							</div>
 						</fieldset>
 						<div id="user-opt-save" class="hidden tCenter">
 							<p><input id="user-opt-save-btn" class="bold long" type="button" value="{L_SUBMIT}" /></p>
@@ -350,10 +351,10 @@ ajax.callback.gen_passkey = function(data){
 				</td>
 			</tr>
 
-		    <tr>
+			<tr>
 				<th class="nowrap">{L_LAST_ACTIVITY}:</th>
 				<td>
-				    <b>{LAST_ACTIVITY_TIME}</b>
+					<b>{LAST_ACTIVITY_TIME}</b>
 					<!-- IF TRAF_STATS --><span id="traf-stats-span">[ <a href="#" id="traf-stats-btn" class="med" onclick="ajax.index_data('get_traf_stats'); return false;">{L_VIEWING_USER_BT_PROFILE}</a> ]</span><!-- ENDIF -->
 				</td>
 			</tr>
@@ -371,30 +372,30 @@ ajax.callback.gen_passkey = function(data){
 			</tr>
 
 			<tr id="bt_user_ratio" <!-- IF TRAF_STATS -->style="display: none;"<!-- ENDIF -->>
-			    <th>{L_USER_RATIO}:</th>
-			    <td>
-				    <!-- IF DOWN_TOTAL_BYTES gt MIN_DL_BYTES -->
-				    <b id="u_ratio" class="gen">{USER_RATIO}</b>
-				    [<a class="gen" href="#" onclick="toggle_block('ratio-expl'); return false;">?</a>]
-				    <!-- ELSE -->
-				    <span class="med" title="{L_IT_WILL_BE_DOWN} {MIN_DL_FOR_RATIO}"><b>{L_NONE}</b> (DL < {MIN_DL_FOR_RATIO})</span>
-				    <!-- ENDIF -->
+				<th>{L_USER_RATIO}:</th>
+				<td>
+					<!-- IF DOWN_TOTAL_BYTES gt MIN_DL_BYTES -->
+					<b id="u_ratio" class="gen">{USER_RATIO}</b>
+					[<a class="gen" href="#" onclick="toggle_block('ratio-expl'); return false;">?</a>]
+					<!-- ELSE -->
+					<span class="med" title="{L_IT_WILL_BE_DOWN} {MIN_DL_FOR_RATIO}"><b>{L_NONE}</b> (DL < {MIN_DL_FOR_RATIO})</span>
+					<!-- ENDIF -->
 
 					<!-- IF SHOW_PASSKEY -->
 					[ {L_BT_PASSKEY}:  <span id="passkey-btn"><a class="med" href="#" onclick="$('#passkey-gen').show(); $('#passkey-btn').hide(); return false;">{L_BT_PASSKEY_VIEW}</a></span>
 					<span id="passkey-gen" class="med" style="display: none;">
 						<b id="passkey" class="med bold">{AUTH_KEY}</b>&nbsp;
-				        <a href="#" onclick="ajax.exec({ action: 'gen_passkey', user_id  : {PROFILE_USER_ID} }); return false;">{L_BT_GEN_PASSKEY}</a>
+						<a href="#" onclick="ajax.exec({ action: 'gen_passkey', user_id  : {PROFILE_USER_ID} }); return false;">{L_BT_GEN_PASSKEY}</a>
 					</span> ]
 					<!-- ENDIF -->
-			    </td>
-		    </tr>
+				</td>
+			</tr>
 
-		    <tr id="ratio-expl" style="display: none;">
-			    <td colspan="2" class="med tCenter">
+			<tr id="ratio-expl" style="display: none;">
+				<td colspan="2" class="med tCenter">
 				( {L_UPLOADED} <b class="seedmed">{UP_TOTAL}</b> + {L_RELEASED} <b class="seedmed">{RELEASED}</b> + {L_BONUS} <b class="seedmed">{UP_BONUS}</b> ) / {L_DOWNLOADED} <b class="leechmed">{DOWN_TOTAL}</b>
-			    </td>
-		    </tr>
+				</td>
+			</tr>
 
 			<!-- IF LOCATION -->
 			<tr>
@@ -436,53 +437,50 @@ ajax.callback.gen_passkey = function(data){
 				<td><b>{AGE}</b></td>
 			</tr>
 			<!-- ENDIF -->
-		    <tr>
-			    <td colspan="2" class="pad_4">
-
-			    <table id="traf-stats-tbl" <!-- IF TRAF_STATS -->style="display: none;"<!-- ENDIF --> class="bCenter borderless" cellspacing="1">
-			    <tr class="row3">
-				    <th class="stats-ext"></th>
-				    <th>{L_DOWNLOADED}</th>
-				    <th>{L_UPLOADED}</th>
-				    <th>{L_RELEASED}</th>
-				    <th>{L_BONUS}</th>
-				    <!-- IF $bb_cfg['seed_bonus_enabled'] --><th>{L_SEED_BONUS}</th><!-- ENDIF -->
-			    </tr>
-			    <tr class="row1 stats-ext">
-			    	<td>{L_TD_TRAF}</td>
-			    	<td class="leech">{TD_DL}</td>
-			    	<td class="seed">{TD_UL}</td>
-			    	<td class="seed">{TD_REL}</td>
-				    <td class="seed">{TD_BONUS}</td>
-				    <!-- IF $bb_cfg['seed_bonus_enabled'] --><td class="points">{TD_POINTS}</td><!-- ENDIF -->
-			    </tr>
-			    <tr class="row5 stats-ext">
-				    <td>{L_YS_TRAF}</td>
-				    <td class="leech">{YS_DL}</td>
-				    <td class="seed">{YS_UL}</td>
-				    <td class="seed">{YS_REL}</td>
-				    <td class="seed">{YS_BONUS}</td>
-				    <!-- IF $bb_cfg['seed_bonus_enabled'] --><td class="points">{YS_POINTS}</td><!-- ENDIF -->
-			    </tr>
-			    <tr class="row1">
-				    <td class="stats-ext">{L_TOTAL_TRAF}</td>
-				    <td id="u_down_total"><span class="editable bold leechmed">{DOWN_TOTAL}</span></td>
-				    <td id="u_up_total"><span class="editable bold seedmed">{UP_TOTAL}</span></td>
-				    <td id="u_up_release"><span class="editable bold seedmed">{RELEASED}</span></td>
-				    <td id="u_up_bonus"><span class="editable bold seedmed">{UP_BONUS}</span></td>
-				    <!-- IF $bb_cfg['seed_bonus_enabled'] --><td id="user_points"><span class="editable bold points">{USER_POINTS}</span></td><!-- ENDIF -->
-			    </tr>
-			    <tr class="row5">
-				    <td colspan="1">{L_MAX_SPEED}</td>
-				    <td colspan="2">{L_DL_DL_SPEED}: {SPEED_DOWN}</td>
-				    <td colspan="2">{L_DL_UL_SPEED}: {SPEED_UP}</td>
-				    <!-- IF $bb_cfg['seed_bonus_enabled'] --><td colspan="1"><!-- IF PROFILE_USER --><a href="profile.php?mode=bonus">{L_EXCHANGE}</a><!-- ENDIF --></td><!-- ENDIF -->
-			    </tr>
-			</table>
-
-			</td>
-		</tr>
-
+			<tr>
+				<td colspan="2" class="pad_4">
+					<table id="traf-stats-tbl" <!-- IF TRAF_STATS -->style="display: none;"<!-- ENDIF --> class="bCenter borderless" cellspacing="1">
+						<tr class="row3">
+							<th class="stats-ext"></th>
+							<th>{L_DOWNLOADED}</th>
+							<th>{L_UPLOADED}</th>
+							<th>{L_RELEASED}</th>
+							<th>{L_BONUS}</th>
+							<!-- IF $bb_cfg['seed_bonus_enabled'] --><th>{L_SEED_BONUS}</th><!-- ENDIF -->
+						</tr>
+						<tr class="row1 stats-ext">
+							<td>{L_TD_TRAF}</td>
+							<td class="leech">{TD_DL}</td>
+							<td class="seed">{TD_UL}</td>
+							<td class="seed">{TD_REL}</td>
+							<td class="seed">{TD_BONUS}</td>
+							<!-- IF $bb_cfg['seed_bonus_enabled'] --><td class="points">{TD_POINTS}</td><!-- ENDIF -->
+						</tr>
+						<tr class="row5 stats-ext">
+							<td>{L_YS_TRAF}</td>
+							<td class="leech">{YS_DL}</td>
+							<td class="seed">{YS_UL}</td>
+							<td class="seed">{YS_REL}</td>
+							<td class="seed">{YS_BONUS}</td>
+							<!-- IF $bb_cfg['seed_bonus_enabled'] --><td class="points">{YS_POINTS}</td><!-- ENDIF -->
+						</tr>
+						<tr class="row1">
+							<td class="stats-ext">{L_TOTAL_TRAF}</td>
+							<td id="u_down_total"><span class="editable bold leechmed">{DOWN_TOTAL}</span></td>
+							<td id="u_up_total"><span class="editable bold seedmed">{UP_TOTAL}</span></td>
+							<td id="u_up_release"><span class="editable bold seedmed">{RELEASED}</span></td>
+							<td id="u_up_bonus"><span class="editable bold seedmed">{UP_BONUS}</span></td>
+							<!-- IF $bb_cfg['seed_bonus_enabled'] --><td id="user_points"><span class="editable bold points">{USER_POINTS}</span></td><!-- ENDIF -->
+						</tr>
+						<tr class="row5">
+							<td colspan="1">{L_MAX_SPEED}</td>
+							<td colspan="2">{L_DL_DL_SPEED}: {SPEED_DOWN}</td>
+							<td colspan="2">{L_DL_UL_SPEED}: {SPEED_UP}</td>
+							<!-- IF $bb_cfg['seed_bonus_enabled'] --><td colspan="1"><!-- IF PROFILE_USER --><a href="profile.php?mode=bonus">{L_EXCHANGE}</a><!-- ENDIF --></td><!-- ENDIF -->
+						</tr>
+					</table>
+				</td>
+			</tr>
 		</table>
 		<!--/user_details-->
 
@@ -493,7 +491,7 @@ ajax.callback.gen_passkey = function(data){
 <!-- IF SIGNATURE -->
 <tr>
 	<td class="row1 pad_4" colspan="2">
-	    <div class="signature">{SIGNATURE}</div>
+		<div class="signature">{SIGNATURE}</div>
 	</td>
 </tr>
 <!-- ENDIF -->
@@ -583,7 +581,7 @@ $(function(){
 
 <!-- IF SHOW_SEARCH_DL -->
 <div class="tCenter">
-	<a class="gen" href="{U_SEARCH}?dlu={PROFILE_USER_ID}&dlw=1">{L_SEARCH_DL_WILL_DOWNLOADS}</a> :: 
+	<a class="gen" href="{U_SEARCH}?dlu={PROFILE_USER_ID}&dlw=1">{L_SEARCH_DL_WILL_DOWNLOADS}</a> ::
 	<a class="gen" href="{U_SEARCH}?dlu={PROFILE_USER_ID}&dlc=1">{L_SEARCH_DL_COMPLETE_DOWNLOADS}</a>
 </div>
 <!-- ENDIF -->

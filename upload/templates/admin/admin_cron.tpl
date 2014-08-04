@@ -124,7 +124,6 @@ tr.hl-tr:hover td { background-color: #CFC !important; }
 <!-- IF TPL_CRON_EDIT -->
 <h1>{L_CRON_EDIT_HEAD}</h1>
 
-
 <a href="admin_cron.php?mode=list">{L_CRON_LIST}</a>
 <br /><br />
 

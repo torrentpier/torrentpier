@@ -10,7 +10,7 @@ $mc_text    = (string) $this->request['mc_text'];
 if (!$mc_text = prepare_message($mc_text)) $this->ajax_die($lang['EMPTY_MESSAGE']);
 
 $post = DB()->fetch_row("
-	SELECT 
+	SELECT
 		p.post_id, p.poster_id
 	FROM      ". BB_POSTS      ." p
 	WHERE p.post_id = $post_id

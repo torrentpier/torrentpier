@@ -21,7 +21,7 @@ function hex2bin($h)
 }
 
 function get_max_val($table_name, $column)
-{	
+{
 	$row = DB()->fetch_row("SELECT MAX($column) AS $column FROM $table_name LIMIT 1");
 	return $row[$column];
 }
@@ -43,19 +43,9 @@ function set_auto_increment($table_name, $column, $val = null)
 	DB()->query("ALTER TABLE $table_name auto_increment = $val");
 }
 
-//Users functions
+// Users functions
 function tp_users_cleanup()
 {
-	/*
-	if (!function_exists('user_delete')) require_once(INC_DIR .'functions_admin.php');
-	
-	if ($row = DB()->fetch_row("SELECT user_id FROM ". BB_USERS ." WHERE user_id NOT IN(". EXCLUDED_USERS_CSV .');'))
-	{
-		foreach ($row as $user)
-		{
-			user_delete($user['user_id']);
-		}
-	}*/
 	DB()->query('DELETE FROM '. BB_USERS .' WHERE user_id NOT IN('. EXCLUDED_USERS_CSV .')');
 	DB()->query('TRUNCATE '. BB_BT_USERS);
 }
@@ -91,7 +81,7 @@ function convert_user($user)
 		"user_id"          => $user['id'],
 		"user_active"      => ($user['enabled'] == 'yes') ? true : false,
 		"username"         => $user['username'],
-		"user_password"    => md5($user['password']),	
+		"user_password"    => md5($user['password']),
 		"user_lastvisit"   => $user['last_access'],
 		"user_regdate"     => $user['added'],
 		"user_level"       => tp_user_level($user['class']),
@@ -101,11 +91,11 @@ function convert_user($user)
 		"user_avatar"      => !empty($user['avatar']) ? $user['avatar'] : null,
 		"user_avatar_type" => !empty($user['avatar']) ? 2 : null,
 		"user_email"       => $user['email'],
-		"user_website"     => $user['website'],		
+		"user_website"     => $user['website'],
 	);
 
 	$columns = $values = array();
-	
+
 	foreach ($user_data as $column => $value)
 	{
 		$columns[] = $column;
@@ -113,9 +103,9 @@ function convert_user($user)
 	}
 	$sql_columns = implode(',', $columns);
 	$sql_values = implode(',', $values);
-	
+
 	DB()->query("INSERT IGNORE INTO ". BB_USERS . " ($sql_columns) VALUES($sql_values);");
-	
+
 	$bt_user_data = array(
 		"user_id"      => $user['id'],
 		"auth_key"     => make_rand_str(BT_AUTH_KEY_LENGTH),
@@ -123,7 +113,7 @@ function convert_user($user)
 		"u_down_total" => $user['downloaded'],
 	);
 	$columns = $values = array();
-	
+
 	foreach ($bt_user_data as $column => $value)
 	{
 		$columns[] = $column;
@@ -131,7 +121,7 @@ function convert_user($user)
 	}
 	$sql_bt_columns = implode(',', $columns);
 	$sql_bt_values = implode(',', $values);
-	
+
 	DB()->query("INSERT IGNORE INTO ". BB_BT_USERS . " ($sql_bt_columns) VALUES($sql_bt_values);");
 }
 
@@ -143,7 +133,7 @@ function tp_categories_cleanup()
 
 function tp_add_category_old($id, $cat_title)
 {
-	DB()->query("INSERT IGNORE INTO ". BB_CATEGORIES ." (cat_id, cat_title) 
+	DB()->query("INSERT IGNORE INTO ". BB_CATEGORIES ." (cat_id, cat_title)
 				VALUES ($id, '". DB()->escape($cat_title) ."')");
 	return;
 }
@@ -151,7 +141,7 @@ function tp_add_category_old($id, $cat_title)
 function tp_add_category($cat_data)
 {
 	$columns = $values = array();
-	
+
 	foreach ($cat_data as $column => $value)
 	{
 		$columns[] = $column;
@@ -159,7 +149,7 @@ function tp_add_category($cat_data)
 	}
 	$sql_bt_columns = implode(',', $columns);
 	$sql_bt_values = implode(',', $values);
-	
+
 	DB()->query("INSERT IGNORE INTO ". BB_CATEGORIES . " ($sql_bt_columns) VALUES($sql_bt_values);");
 }
 
@@ -173,16 +163,7 @@ function tp_topics_cleanup()
 	DB()->query("TRUNCATE ". BB_POSTS_SEARCH);
 	DB()->query("TRUNCATE ". BB_POSTS_TEXT);
 	DB()->query("TRUNCATE ". BB_TOPICS);
-	/*if (!function_exists('topic_delete')) require_once(INC_DIR .'functions_admin.php');	
-	
-	if ($row = DB()->fetch_row("SELECT topic_id FROM ". BB_TOPICS))
-	{
-		foreach ($row as $topic)
-		{
-			topic_delete($topic['topic_id']);
-		}
-	}*/
-	
+
 	return;
 }
 
@@ -196,7 +177,7 @@ function tp_add_topic($topic_data)
 	}
 	$sql_columns = implode(',', $columns);
 	$sql_values = implode(',', $values);
-	
+
 	DB()->query("INSERT IGNORE INTO ". BB_TOPICS . " ($sql_columns) VALUES($sql_values);");
 	return;
 }
@@ -213,7 +194,7 @@ function tp_add_post($post_data)
 		}
 		$sql_columns = implode(',', $columns);
 		$sql_values = implode(',', $values);
-	
+
 		DB()->query("INSERT IGNORE INTO bb_{$key} ($sql_columns) VALUES($sql_values);");
 	}
 	return;
@@ -231,7 +212,7 @@ function tp_add_attach($attach_data)
 		}
 		$sql_columns = implode(',', $columns);
 		$sql_values = implode(',', $values);
-	
+
 		DB()->query("INSERT IGNORE INTO bb_{$key} ($sql_columns) VALUES($sql_values);");
 	}
 	return;
@@ -248,19 +229,19 @@ function append_images($tor)
 {
 	$poster = $screens = '';
 	switch(TR_TYPE)
-	{		
+	{
 		case 'yse':
-			if(!empty($tor['image1'])) 
+			if(!empty($tor['image1']))
 			{
 				$poster = "[img=right]".make_img_path($tor['image1'])."[/img]";
 			}
-			if(!empty($tor['image2'])) 
+			if(!empty($tor['image2']))
 			{
 				$screens = '[spoiler="Скриншоты"][img]'.make_img_path($tor['image2'])."[/img][/spoiler]";
 			}
 			break;
 		case 'sky':
-			if(!empty($tor['poster'])) 
+			if(!empty($tor['poster']))
 			{
 				$poster = "[img=right]".make_img_path($tor['poster'])."[/img]";
 			}
@@ -270,7 +251,7 @@ function append_images($tor)
 				$screens .= '[spoiler="Скриншоты"]';
 				for ($i = 1; $i<=4; $i++)
 				{
-					if(!empty($tor['screenshot'.$i])) 
+					if(!empty($tor['screenshot'.$i]))
 					{
 						$screens .= "[img]".make_img_path($tor['screenshot'.$i])."[/img] \n";
 					}
@@ -299,9 +280,8 @@ function convert_torrent($torrent)
 		"topic_last_post_time" => $torrent['added'],
 	);
 	tp_add_topic($topic_data);
-	//$post_text = prepare_message($torrent['descr'], true, true);
 	$post_text = stripslashes(prepare_message(addslashes(unprepare_message($torrent['descr'])), true, true));
-	
+
 	$post_data = array(
 		"posts"        => array(
 							"post_id"    => $torrent['post_id'],
@@ -321,7 +301,7 @@ function convert_torrent($torrent)
 					      ),
 	);
 	tp_add_post($post_data);
-	
+
 	$attach_data = array(
 		"attachments"        => array(
 									"attach_id" => $torrent['attach_id'],
@@ -340,11 +320,11 @@ function convert_torrent($torrent)
 								),
 	);
 	tp_add_attach($attach_data);
-	
+
 	//Torrents
 	if (BDECODE)
 	{
-		$filename = get_attachments_dir() .'/'. $torrent['id'] .".torrent";	
+		$filename = get_attachments_dir() .'/'. $torrent['id'] .".torrent";
 		if (!file_exists($filename))
 		{
 			return;
@@ -359,7 +339,7 @@ function convert_torrent($torrent)
 	{
 		$info_hash_sql = hex2bin($torrent['info_hash']);
 	}
-	
+
 	$torrent_data = array(
 		"info_hash"      => $info_hash_sql,
 		"post_id"        => $torrent['post_id'],
@@ -374,7 +354,7 @@ function convert_torrent($torrent)
 	);
 
 	$columns = $values = array();
-	
+
 	foreach ($torrent_data as $column => $value)
 	{
 		$columns[] = $column;
@@ -382,16 +362,16 @@ function convert_torrent($torrent)
 	}
 	$sql_columns = implode(', ', $columns);
 	$sql_values = implode(', ', $values);
-	
+
 	DB()->query("INSERT IGNORE INTO ". BB_BT_TORRENTS . " ($sql_columns) VALUES($sql_values);");
 	return;
 }
 
-//Comments functions
+// Comments functions
 function convert_comment($comment)
 {
 	$post_text = prepare_message($comment['text'], true, true);
-	
+
 	$post_data = array(
 		"posts"        => array(
 							"post_id"    => $comment['id'],
@@ -409,7 +389,6 @@ function convert_comment($comment)
 					      ),
 	);
 	tp_add_post($post_data);
-	//add_search_words($comment['id'], stripslashes($post_text));
 	return;
 }
 
@@ -431,7 +410,7 @@ function convert_cat($forum, $allow_torrents = true)
 	);
 
 	$columns = $values = array();
-	
+
 	foreach ($forum_data as $column => $value)
 	{
 		$columns[] = $column;
@@ -439,7 +418,7 @@ function convert_cat($forum, $allow_torrents = true)
 	}
 	$sql_columns = implode(',', $columns);
 	$sql_values = implode(',', $values);
-	
+
 	DB()->query("INSERT IGNORE INTO ". BB_FORUMS . " ($sql_columns) VALUES($sql_values);");
 	return;
 }

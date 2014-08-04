@@ -6,7 +6,7 @@ define('BB_ROOT', './');
 require(BB_ROOT ."common.php");
 require(INC_DIR .'bbcode.php');
 require(INC_DIR .'functions_post.php');
-require(BB_ROOT .'attach_mod/attachment_mod.php');
+require(ATTACH_DIR .'attachment_mod.php');
 
 $page_cfg['load_tpl_vars'] = array('post_icons');
 

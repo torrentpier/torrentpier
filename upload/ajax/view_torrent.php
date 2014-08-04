@@ -10,6 +10,9 @@ if (!isset($this->request['attach_id']))
 }
 $attach_id = (int) $this->request['attach_id'];
 
+global $bnc_error;
+$bnc_error = 0;
+
 $torrent = DB()->fetch_row("SELECT at.attach_id, at.physical_filename FROM ". BB_ATTACHMENTS_DESC ." at WHERE at.attach_id = $attach_id LIMIT 1");
 if (!$torrent) $this->ajax_die($lang['EMPTY_ATTACH_ID']);
 $filename = get_attachments_dir() .'/'. $torrent['physical_filename'];
@@ -79,7 +82,7 @@ class torrent
 	function build_filelist_array ()
 	{
 		global $lang;
-		
+
 		$info = $this->tor_decoded['info'];
 
 		if (isset($info['name.utf-8']))
@@ -126,7 +129,8 @@ class torrent
 						{
 							if (is_string($cur_files_ary))
 							{
-								bb_die($lang['ERROR_BUILD']);
+								$GLOBALS['bnc_error'] = 1;
+								break(1);
 							}
 							$cur_files_ary[] = $this->build_file_item($name, $length);
 						}
@@ -168,5 +172,7 @@ function clean_tor_dirname ($dirname)
 {
 	return str_replace(array('[', ']', '<', '>', "'"), array('&#91;', '&#93;', '&lt;', '&gt;', '&#039;'), $dirname);
 }
+
+if ($bnc_error) $tor_filelist = '<b style="color: #993300;">'.$lang['ERROR_BUILD'].'</b><br /><br />'.$tor_filelist;
 
 $this->response['html'] = $tor_filelist;

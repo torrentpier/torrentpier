@@ -42,7 +42,6 @@
 <!--========================================================================-->
 <!-- ENDIF / SELECT_GROUP -->
 
-
 <!-- IF GROUP_INFO -->
 <!--========================================================================-->
 
@@ -217,7 +216,7 @@
 	<td>{pending.PM}</td>
 	<td>{pending.EMAIL}</td>
 	<td>{pending.FROM}</td>
-	<td class="small">{pending.JOINED}</td>
+	<td>{pending.JOINED}</td>
 	<td>{pending.POSTS}</td>
 	<td>{pending.WWW}</td>
 </tr>

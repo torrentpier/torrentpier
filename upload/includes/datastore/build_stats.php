@@ -41,7 +41,7 @@ if ($bb_cfg['gender'])
 	$male     = DB()->fetch_row("SELECT COUNT(user_id) AS male FROM ". BB_USERS ." WHERE user_gender = ". MALE ." AND user_id NOT IN(". EXCLUDED_USERS_CSV .")");
 	$female   = DB()->fetch_row("SELECT COUNT(user_id) AS female FROM ". BB_USERS ." WHERE user_gender = ". FEMALE ." AND user_id NOT IN(". EXCLUDED_USERS_CSV .")");
 	$unselect = DB()->fetch_row("SELECT COUNT(user_id) AS unselect FROM ". BB_USERS ." WHERE user_gender = 0 AND user_id NOT IN(". EXCLUDED_USERS_CSV .")");
-	
+
 	$data['male'] = $male['male'];
 	$data['female'] = $female['female'];
 	$data['unselect'] = $unselect['unselect'];
@@ -51,10 +51,10 @@ if ($bb_cfg['gender'])
 if ($bb_cfg['birthday_check_day'] && $bb_cfg['birthday_enabled'])
 {
 	$sql = DB()->fetch_rowset("SELECT user_id, username, user_rank , user_birthday
-		FROM ". BB_USERS ." 
-		WHERE user_id NOT IN(". EXCLUDED_USERS_CSV .") 
+		FROM ". BB_USERS ."
+		WHERE user_id NOT IN(". EXCLUDED_USERS_CSV .")
 			AND user_birthday != '0000-00-00'
-			AND user_active = 1 
+			AND user_active = 1
 		ORDER BY user_level DESC, username
 	");
 

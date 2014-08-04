@@ -588,7 +588,7 @@ if ($post_mode)
 		$forum_id    = (int) $first_post['forum_id'];
 		$is_unread_t = is_unread($first_post['topic_last_post_time'], $topic_id, $forum_id);
 		$topic_title = $first_post['topic_title'];
-		
+
 		if (count($orig_word))
 		{
 			$topic_title = preg_replace($orig_word, $replacement_word, $topic_title);
@@ -614,7 +614,7 @@ if ($post_mode)
 			{
 				$message = preg_replace($orig_word, $replacement_word, $message);
 			}
-			
+
 			$template->assign_block_vars('t.p', array(
 				'ROW_NUM'      => $row_num,
 				'POSTER_ID'    => $post['poster_id'],
@@ -700,21 +700,21 @@ else
 					<br /><br />
 					<a href="index.php">'. $lang['INDEX_RETURN'] .'</a>
 				');
-			}	
+			}
 		}
 		if ($my_topics)  $SQL['WHERE'][] = "t.topic_poster = $poster_id_val";
 
 		if ($text_match_sql)
 		{
 			$search_match_topics_csv = '';
-            $title_match_topics = get_title_match_topics($text_match_sql, $forum_selected);
+			$title_match_topics = get_title_match_topics($text_match_sql, $forum_selected);
 
 			if (!$search_match_topics_csv = join(',', $title_match_topics))
 			{
 				bb_die($lang['NO_SEARCH_MATCH']);
 			}
 
-            $where_id = ($title_match) ? 't.topic_id' : 'p.post_id';
+			$where_id = ($title_match) ? 't.topic_id' : 'p.post_id';
 
 			$SQL['WHERE'][] = "$where_id IN($search_match_topics_csv)";
 			prevent_huge_searches($SQL);

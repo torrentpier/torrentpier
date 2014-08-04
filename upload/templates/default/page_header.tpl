@@ -249,7 +249,7 @@ if ( (typeof(window.opera) != "undefined" && window.opera.version() < 13) || (wi
 			<a href="{U_SEARCH}"><b>{L_SEARCH}</b></a><span style="color:#CDCDCD;">|</span>
 			<a href="{U_TERMS}"><b style="color: #993300;">{L_TERMS}</b></a><span style="color:#CDCDCD;">|</span>
 			<a href="{U_GROUP_CP}"><b>{L_USERGROUPS}</b></a><span style="color:#CDCDCD;">|</span>
-			<a href="{U_MEMBERLIST}"><b>{L_MEMBERLIST}</b></a><span style="color:#CDCDCD;">|</span>
+			<a href="{U_MEMBERLIST}"><b>{L_MEMBERLIST}</b></a>
 		</td>
 		<td class="nowrap" align="right">
 			<!-- BEGIN switch_report_list -->
@@ -517,14 +517,6 @@ $(document).ready(function() {
 </table>
 </div>
 <!-- ENDIF / ERROR_MESSAGE -->
-
-<!-- IF INFO_MESSAGE -->
-<div class="info_msg_wrap">
-<table class="info_msg">
-	<tr><td><div class="msg">{INFO_MESSAGE}</div></td></tr>
-</table>
-</div>
-<!-- ENDIF / INFO_MESSAGE -->
 
 <!-- page_header.tpl END -->
 <!-- module_xx.tpl START -->

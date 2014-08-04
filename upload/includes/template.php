@@ -33,8 +33,7 @@ define('XS_TAG_ELSEIF', 7);
 define('XS_TAG_ENDIF', 8);
 define('XS_TAG_BEGINELSE', 11);
 
-
-class Template 
+class Template
 {
 	var $classname = "Template";
 
@@ -527,7 +526,6 @@ class Template
 
 		return $varref;
 	}
-
 
 	/**
 	 * Generates a reference to the array of data values for the given
@@ -1133,7 +1131,6 @@ class Template
 
 		return $tokens;
 	}
-
 
 	/**
 	 * Compiles code and writes to cache if needed

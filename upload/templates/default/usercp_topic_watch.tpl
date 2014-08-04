@@ -61,7 +61,6 @@ td.topic_id { cursor: pointer; }
 </form>
 </div>
 
-
 <table id="post-row" style="display: none;">
 <tr>
 	<td class="row2" colspan="7">

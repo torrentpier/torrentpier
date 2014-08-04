@@ -161,7 +161,7 @@ define('TOPIC_LOCKED',            1);
 define('TOPIC_MOVED',             2);
 
 define('TOPIC_WATCH_NOTIFIED',    1);
-define('TOPIC_WATCH_UN_NOTIFIED', 0);
+define('TOPIC_WATCH_UNNOTIFIED',  0);
 
 // Topic types
 define('POST_NORMAL',          0);
@@ -240,6 +240,7 @@ define('POST_REPORT_REASON_URL', 'r');
 // Gender
 define('MALE',          1);
 define('FEMALE',        2);
+define('NOGENDER',      0);
 
 // Poll
 # 1 - обычный опрос
@@ -428,7 +429,7 @@ if (!empty($banned_user_agents))
 	{
 		if (strstr(USER_AGENT, $agent))
 		{
-			$filename = 'Skachivajte fajly brauzerom (скачивайте файлы браузером)';
+			$filename = 'Download files by using browser';
 			$output = '@';
 			header('Content-Type: text/plain');
 			header('Content-Disposition: attachment; filename="'. $filename .'"');

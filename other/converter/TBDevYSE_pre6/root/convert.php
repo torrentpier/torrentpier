@@ -81,18 +81,18 @@ if (CONVERT_USERS)
 	{
 		$start = $i * C_USERS_PER_ONCE;
 		$offset = C_USERS_PER_ONCE;
-		
+
 		$sql = "
-			SELECT 
-				id, username, email, status, UNIX_TIMESTAMP(added) AS added, UNIX_TIMESTAMP(last_access) AS last_access, 
+			SELECT
+				id, username, email, status, UNIX_TIMESTAMP(added) AS added, UNIX_TIMESTAMP(last_access) AS last_access,
 				class, icq, msn, aim, yahoo, website, $_sql
 				uploaded, downloaded, enabled, language
-			FROM ". TB_USERS_TABLE ." 
+			FROM ". TB_USERS_TABLE ."
 			ORDER BY id
 			LIMIT $start, $offset";
 
 		$users = DB()->fetch_rowset($sql);
-		DB()->sql_freeresult();	
+		DB()->sql_freeresult();
 
 		foreach ($users as $user)
 		{
@@ -159,17 +159,17 @@ if (CONVERT_TORRENTS)
 	print_ok ("Categories from TBDev converted");
 	unset($cats);
 
-	// Start of torrents converting	
+	// Start of torrents converting
 	switch(TR_TYPE)
-	{		
+	{
 		case 'yse':
 			$_sql = 'image1, image2, ';
 			break;
-			
+
 		case 'sky':
 			$_sql = 'poster, screenshot1, screenshot2, screenshot3, screenshot4, ';
 			break;
-			
+
 		default:
 			$_sql = '';
 			break;
@@ -187,9 +187,9 @@ if (CONVERT_TORRENTS)
 		$start = $i * C_TORRENTS_PER_ONCE;
 		$offset = C_TORRENTS_PER_ONCE;
 		$sql = "
-			SELECT 
+			SELECT
 				id, info_hash, name, filename, search_text, descr, $_sql
-				category, UNIX_TIMESTAMP(added) AS added, size, views, 
+				category, UNIX_TIMESTAMP(added) AS added, size, views,
 				UNIX_TIMESTAMP(last_action) AS lastseed, times_completed, owner, sticky
 			FROM ". TB_TORRENTS_TABLE ."
 			ORDER BY id
@@ -197,7 +197,7 @@ if (CONVERT_TORRENTS)
 
 		$torrents = DB()->fetch_rowset($sql);
 		DB()->sql_freeresult();
-		
+
 		foreach ($torrents as $torrent)
 		{
 			$torrent['topic_id']  = $torrent['id'] + $max_topic_id;
@@ -219,16 +219,16 @@ if (CONVERT_TORRENTS)
 		$max_post_id   = (int) get_max_val(BB_POSTS, 'post_id');
 		$max_topic_id  = (int) get_max_val(BB_TOPICS, 'topic_id');
 		$max_attach_id = (int) get_max_val(BB_ATTACHMENTS, 'attach_id');
-		
+
 		$comments_count = (int) get_count(TB_COMMENTS_TABLE, 'id');
 		$loops = (int) ceil($comments_count / C_COMMENTS_PER_ONCE);
-		
+
 		for ($i = 0; $i < $loops; $i++)
 		{
 			$start = $i * C_COMMENTS_PER_ONCE;
-			$offset = C_COMMENTS_PER_ONCE;	
+			$offset = C_COMMENTS_PER_ONCE;
 			$sql = "
-				SELECT 
+				SELECT
 					c.id, c.user, c.torrent, c.text, tor.category,
 					UNIX_TIMESTAMP(c.added) AS added, UNIX_TIMESTAMP(c.editedat) AS editedat, c.ip
 				FROM ". TB_COMMENTS_TABLE ." c
@@ -236,10 +236,10 @@ if (CONVERT_TORRENTS)
 				WHERE c.torrent <> 0
 				ORDER BY c.id
 				LIMIT $start, $offset";
-	
+
 			$comments = DB()->fetch_rowset($sql);
 			DB()->sql_freeresult();
-		
+
 			foreach ($comments as $comment)
 			{
 				$comment['user'] += $max_uid;

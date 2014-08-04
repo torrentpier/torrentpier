@@ -42,8 +42,8 @@ ajax.callback.posts = function(data) {
 	if(data.html){
 		$('#pp_'+ data.post_id).show().html(data.html);
 		initPostBBCode('#pp_'+ data.post_id);
-	    $('#pe_'+ data.post_id).hide();
-	    ajax.open_edit = false;
+		$('#pe_'+ data.post_id).hide();
+		ajax.open_edit = false;
 	} else if(data.text){
 		ajax.open_edit = data.post_id;
 		$('#pe_'+ data.post_id).html(data.text);
@@ -54,10 +54,10 @@ ajax.callback.posts = function(data) {
 		$('tbody#post_'+ data.post_id).hide();
 	}
 	if(data.quote) $('textarea#message').attr('value', $('textarea#message').val() + data.message +' ').focus();
-    if(data.message_html){
-	    $('#view_message').show();
-	    $('.view-message').html(data.message_html);
-	    initPostBBCode('.view-message');
+	if(data.message_html){
+		$('#view_message').show();
+			$('.view-message').html(data.message_html);
+			initPostBBCode('.view-message');
 			var maxH   = screen.height - 490;
 		$('.view-message').css({ maxHeight: maxH });
 	}
@@ -397,7 +397,7 @@ function build_poll_add_form (src_el)
 				<!-- IF postrow.IP --><a class="txtb" href="{IP_POST_URL}{postrow.POST_ID}&amp;t={TOPIC_ID}">{IP_POST_IMG}</a>{POST_BTN_SPACER}<!-- ENDIF -->
 				<!-- IF postrow.REPORT -->{postrow.REPORT}{POST_BTN_SPACER}<!-- ENDIF -->
 				<!-- IF AUTH_MOD -->
-					<a class="menu-root menu-alt1" href="#mc_{postrow.POST_ID}">{MC_IMG}</a>{POST_BTN_SPACER}
+					<a class="menu-root menu-alt1 txtb" href="#mc_{postrow.POST_ID}">{MC_IMG}</a>{POST_BTN_SPACER}
 					<!-- IF not IN_MODERATION --><a class="txtb" href="{PAGE_URL}&amp;mod=1&amp;start={PAGE_START}#{postrow.POST_ID}">{MOD_POST_IMG}</a>{POST_BTN_SPACER}<!-- ENDIF -->
 				<!-- ENDIF -->
 			</p>
@@ -419,7 +419,7 @@ function build_poll_add_form (src_el)
 			<!-- IF postrow.SIGNATURE -->{postrow.SIGNATURE}<!-- ENDIF -->
 			<!-- IF postrow.EDITED_MESSAGE --><div class="last_edited">{postrow.EDITED_MESSAGE}</div><!-- ENDIF -->
 		</div><!--/post_body-->
-		
+
 		<!-- IF AUTH_MOD -->
 		<div class="menu-sub" id="mc_{postrow.POST_ID}">
 		<table cellspacing="1" cellpadding="4">
@@ -583,22 +583,6 @@ function build_poll_add_form (src_el)
 	</td>
 </tr>
 </table>
-
-<!-- IF PORNO_FORUM -->
-<script type="text/javascript">
-// block Imageshack images
-$(document).ready(function(){
- $("div.post_body")
-   .find("img.postImg[@src*='imageshack']")
-     .attr({ src: "images/smiles/tr_oops.gif", alt: "{L_SCREENSHOTS_RULES_TOPIC}" })
-     .wrap('<a href="viewtopic.php?t={$bb_cfg['porno_forums_screenshots_topic_id']}"></a>')
-   .end()
-   .find("a.postLink[@href*='imageshack']")
-     .attr({ href: "viewtopic.php?t={$bb_cfg['porno_forums_screenshots_topic_id']}" })
-     .text("{L_SCREENSHOTS_RULES_TOPIC}");
-});
-</script>
-<!-- ENDIF -->
 
 <table cellpadding="0" class="w100" style="padding-top: 2px;">
 <tr>

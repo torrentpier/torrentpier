@@ -234,7 +234,6 @@ $lang['RULES_MODERATE'] = 'You <b>can</b> moderate this forum';
 
 $lang['NO_TOPICS_POST_ONE'] = 'There are no posts in this forum.<br />Click on the <b>Post New Topic</b> link on this page to post one.';
 
-
 //
 // Viewtopic
 //
@@ -696,7 +695,6 @@ $lang['ASC'] = 'Ascending';
 $lang['DESC'] = 'Descending';
 $lang['ORDER'] = 'Order';
 
-
 //
 // Group control panel
 //
@@ -842,14 +840,9 @@ $lang['NOT_AUTHORISED'] = 'Not Authorised';
 
 $lang['YOU_BEEN_BANNED'] = 'You have been banned from this forum.<br />Please contact the webmaster or board administrator for more information.';
 
-
 //
 // Viewonline
 //
-$lang['REG_USERS_ONLINE'] = 'Who is online registered users: %d and ';
-$lang['HIDDEN_USERS_ONLINE'] = 'hidden users: %d';
-$lang['GUEST_USERS_ONLINE'] = 'Online Guests: %d';
-$lang['ALL_USERS_ONLINE'] = 'All users:';
 $lang['ONLINE_EXPLAIN'] = 'users active over the past five minutes';
 $lang['LAST_UPDATED'] = 'Last Updated';
 
@@ -1542,7 +1535,7 @@ $lang['EXPAND']   = 'Expand';
 $lang['SWITCH']   = 'Switch';
 $lang['EMPTY_ATTACH_ID']   = 'Missing file identifier!';
 $lang['TOR_NOT_FOUND'] = 'File is missing on the server!';
-$lang['ERROR_BUILD'] = 'Error: unable to build a list of files';
+$lang['ERROR_BUILD'] = 'The content of this torrent file can not be viewed on the site (it was not possible to build a list of files)';
 $lang['TORFILE_INVALID'] = 'Torrent file is corrupt';
 // FILELIST
 
@@ -2579,7 +2572,7 @@ $lang['SELF_MODERATED'] = 'Users can <b>move</b> their topics to another forum';
 
 $lang['BT_ANNOUNCE_URL_HEAD'] = 'Announce URL';
 $lang['BT_ANNOUNCE_URL'] = 'Announce url';
-$lang['BT_ANNOUNCE_URL_EXPL'] = 'you can define additional allowed urls in "includes/announce_urls.php"';
+$lang['BT_ANNOUNCE_URL_EXPL'] = 'you can define additional allowed urls in "includes/torrent_announce_urls.php"';
 $lang['BT_DISABLE_DHT'] = 'Disable DHT network';
 $lang['BT_DISABLE_DHT_EXPL'] = 'Disable Peer Exchange and DHT (recommended for private networks, only url announce)';
 $lang['BT_CHECK_ANNOUNCE_URL'] = 'Verify announce url';
@@ -2980,3 +2973,24 @@ $lang['MC_COMMENT'] = array(
 		'type'  => 'Violation',
 	),
 );
+
+$lang['SITEMAP'] = 'Sitemap';
+$lang['SITEMAP_ADMIN'] = 'Manage sitemap';
+$lang['SITEMAP_CREATED'] = 'Sitemap created';
+$lang['SITEMAP_AVAILABLE'] = 'and is available at';
+$lang['SITEMAP_NOT_CREATED'] = 'Sitemap is not yet created';
+$lang['SITEMAP_NOTIFY_SEARCH'] = 'Notification of the search engine';
+$lang['SITEMAP_SENT'] = 'send completed';
+$lang['SITEMAP_ERROR'] = 'sending error';
+$lang['SITEMAP_OPTIONS'] = 'Options';
+$lang['SITEMAP_CREATE'] = 'Create / update the sitemap';
+$lang['SITEMAP_NOTIFY'] = 'Notify search engines about new version of sitemap';
+$lang['SITEMAP_WHAT_NEXT'] = 'What to do next?';
+$lang['SITEMAP_GOOGLE_1'] = 'Register your site at <a href="http://www.google.com/webmasters/" target="_blank">Google Webmaster</a> using your Google account.';
+$lang['SITEMAP_GOOGLE_2'] = '<a href="https://www.google.com/webmasters/tools/sitemap-list" target="_blank">Add sitemap</a> of site you registered.';
+$lang['SITEMAP_YANDEX_1'] = 'Register your site at <a href="http://webmaster.yandex.ru/sites/" target="_blank">Yandex Webmaster</a> using your Yandex account.';
+$lang['SITEMAP_YANDEX_2'] = '<a href="http://webmaster.yandex.ru/site/map.xml" target="_blank">Add sitemap</a> of site you registered.';
+$lang['SITEMAP_ADD_TITLE'] = 'Additional pages for sitemap';
+$lang['SITEMAP_ADD_PAGE'] = 'Additional pages';
+$lang['SITEMAP_ADD_EXP_1'] = 'You can specify additional pages on your site (for example, <b>http://torrentpier.me/memberlist.php</b>) which should be included in your sitemap file that you creating.';
+$lang['SITEMAP_ADD_EXP_2'] = 'Each reference must begin with http(s):// and a new line!';

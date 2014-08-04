@@ -93,7 +93,7 @@ switch ($mode)
 	*/
 	case 'editprofile':
 		if (IS_GUEST) login_redirect();
-		
+
 		// field => can_edit
 		$profile_fields = array(
 			'user_active'      => IS_ADMIN,
@@ -355,7 +355,7 @@ foreach ($profile_fields as $field => $can_edit)
 						$errors[] = sprintf($lang['BIRTHDAY_TO_LOW'], $bb_cfg['birthday_min_age']);
 					}
 				}
-			
+
 				$pr_data['user_birthday'] = $user_birthday;
 				$db_data['user_birthday'] = $user_birthday;
 			}
@@ -521,7 +521,6 @@ foreach ($profile_fields as $field => $can_edit)
 			}
 			$tp_data['USER_OCC'] = $pr_data['user_occ'];
 			break;
-			
 
 		/**
 		*  Интересы
@@ -553,8 +552,7 @@ foreach ($profile_fields as $field => $can_edit)
 			}
 			$tp_data['USER_SKYPE'] = $pr_data['user_skype'];
 			break;
-			
-			
+
 		/**
 		*  Twitter
 		*/
@@ -571,7 +569,7 @@ foreach ($profile_fields as $field => $can_edit)
 			}
 			$tp_data['USER_TWITTER'] = $pr_data['user_twitter'];
 			break;
-			
+
 		/**
 		*  Выбор шаблона (edit)
 		*/

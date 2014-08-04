@@ -68,8 +68,8 @@ $domain_name = (!empty($_SERVER['SERVER_NAME'])) ? $_SERVER['SERVER_NAME'] : $do
 
 // Version info
 $bb_cfg['tp_version'] = '2.0.9 (RC)';
-$bb_cfg['tp_release_date'] = '30-07-2014';
-$bb_cfg['tp_release_state'] = 'R592';
+$bb_cfg['tp_release_date'] = '04-08-2014';
+$bb_cfg['tp_release_state'] = 'R593';
 
 // Database
 $charset  = 'utf8';
@@ -239,16 +239,16 @@ $page_cfg['show_torhelp'] = array(
 // Path (trailing slash '/' at the end: XX_PATH - without, XX_DIR - with)
 define('DIR_SEPR', DIRECTORY_SEPARATOR);
 
-define('BB_PATH',       realpath(BB_ROOT)     );  // absolute pathname to the forum root
-define('ADMIN_DIR',     BB_PATH .'/admin/'    );
-define('CACHE_DIR',     BB_PATH .'/cache/'    );
-define('CFG_DIR',       BB_PATH .'/config/'   );
-define('INC_DIR',       BB_PATH .'/includes/' );
-define('LANG_ROOT_DIR', BB_PATH .'/language/' );
-define('LOG_DIR',       BB_PATH .'/log/'      );
-define('TEMPLATES_DIR', BB_PATH .'/templates/');
-define('TRIGGERS_DIR',  BB_PATH .'/triggers/' );
-define('LOCKS_DIR',     BB_PATH .'/locks/'    );
+define('BB_PATH',       realpath(BB_ROOT)      );  // absolute pathname to the forum root
+define('ADMIN_DIR',     BB_PATH .'/admin/'     );
+define('ATTACH_DIR',    BB_PATH .'/attach_mod/');
+define('CACHE_DIR',     BB_PATH .'/cache/'     );
+define('CFG_DIR',       BB_PATH .'/config/'    );
+define('INC_DIR',       BB_PATH .'/includes/'  );
+define('LANG_ROOT_DIR', BB_PATH .'/language/'  );
+define('LOG_DIR',       BB_PATH .'/log/'       );
+define('TEMPLATES_DIR', BB_PATH .'/templates/' );
+define('TRIGGERS_DIR',  BB_PATH .'/triggers/'  );
 
 // URL's
 $bb_cfg['ajax_url']    = 'ajax.php';     #  "http://{$_SERVER['SERVER_NAME']}/ajax.php"
@@ -451,11 +451,11 @@ $bb_cfg['parse_ed2k_links']   = true;              // make ed2k links clickable
 $bb_cfg['post_date_format']   = 'd-M-Y H:i';
 $bb_cfg['ext_link_new_win']   = true;              // open external links in new window
 
-$bb_cfg['topic_moved_days_keep'] = 7;              // remove topic moved links after xx days (or FALSE to disable)
+$bb_cfg['topic_moved_days_keep']  = 7;              // remove topic moved links after xx days (or FALSE to disable)
 
 $bb_cfg['allowed_posts_per_page'] = array(15, 30, 50, 100);
-$bb_cfg['user_signature_start'] = '<div class="signature"><br />_________________<br />';
-$bb_cfg['user_signature_end']	= '</div>';        // Это позволит использовать html теги, которые требуют закрытия. Например <table> или <font color>
+$bb_cfg['user_signature_start']   = '<div class="signature"><br />_________________<br />';
+$bb_cfg['user_signature_end']     = '</div>';        // Это позволит использовать html теги, которые требуют закрытия. Например <table> или <font color>
 
 // Posts
 $bb_cfg['use_posts_cache']       = true;           // if you switch from ON to OFF, you need to TRUNCATE `bb_posts_html` table
@@ -475,7 +475,6 @@ $bb_cfg['max_search_words_per_post']  = 200;
 $bb_cfg['search_min_word_len']        = 3;
 $bb_cfg['search_max_word_len']        = 35;
 $bb_cfg['limit_max_search_results']   = false;
-$bb_cfg['tidy_post']                  = true;
 $bb_cfg['spam_filter_file_path']      = '';        //BB_PATH .'/misc/spam_filter_words.txt';
 
 // Posting
@@ -502,7 +501,7 @@ $bb_cfg['user_not_active_days_keep']    = 180;     // inactive users but only wi
 $bb_cfg['groupcp_members_per_page']     = 300;
 
 // Tidy
-if ($bb_cfg['tidy_post'] && !function_exists('tidy_repair_string') or !extension_loaded('tidy')) die('Set $bb_cfg[\'tidy_post\'] = false in config.php');
+$bb_cfg['tidy_post'] = (!extension_loaded('tidy')) ? false : true;
 
 // Ads
 $bb_cfg['show_ads'] = false;
@@ -581,15 +580,14 @@ $banned_user_agents = array(
 #	'wget',
 );
 
-$bb_cfg['porno_forums_screenshots_topic_id'] = 0; // (int) 7
-$bb_cfg['trash_forum_id'] = 0;                    // (int) 7
+$bb_cfg['trash_forum_id'] = 0; // (int) 7
 
-$bb_cfg['first_logon_redirect_url']    = 'index.php';
-$bb_cfg['terms_and_conditions_url']    = 'index.php';
+$bb_cfg['first_logon_redirect_url'] = 'index.php';
+$bb_cfg['terms_and_conditions_url'] = 'index.php';
 
-$bb_cfg['user_agreement_url']          = 'misc.php?do=info&show=user_agreement';
-$bb_cfg['copyright_holders_url']       = 'misc.php?do=info&show=copyright_holders';
-$bb_cfg['advert_url']                  = 'misc.php?do=info&show=advert';
+$bb_cfg['user_agreement_url']       = 'misc.php?do=info&show=user_agreement';
+$bb_cfg['copyright_holders_url']    = 'misc.php?do=info&show=copyright_holders';
+$bb_cfg['advert_url']               = 'misc.php?do=info&show=advert';
 
 // Captcha
 $bb_cfg['captcha'] = array(

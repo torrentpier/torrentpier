@@ -6,7 +6,7 @@
 		<td class="row1" style="padding: 10px">
 			<span class="maintitle">{L_STATISTICS}:</span><br /><br />
 			<table cellspacing="1" cellpadding="4" border="0" width="90%" align="center" class="forumline">
-				<tr> 
+				<tr>
 					<th class="thCornerL" width="50%">{L_STATISTIC}</th>
 					<th class="thCornerR">{L_VALUE}</th>
 				</tr>
@@ -17,12 +17,9 @@
 				</tr>
 				<!-- END report_statistics -->
 			</table>
-			
 			<br />
-			
 			<!-- BEGIN switch_deleted_reports -->
 			<span class="maintitle">{L_DELETED_REPORTS}:</span><br /><br />
-			
 			<form action="{S_REPORT_ACTION}" method="post" id="report_list_deleted" style="margin: 0">
 				<table cellspacing="1" cellpadding="4" border="0" width="90%" align="center" class="forumline">
 					<tr>
@@ -60,16 +57,16 @@
 					</tr>
 				</table>
 			</form>
-			
+
 			<table cellspacing="2" cellpadding="2" border="0" width="90%" align="center">
-				<tr> 
+				<tr>
 					<td class="gensmall">
 						<a href="javascript:checked_toggle('report_list_deleted',true)" class="gensmall">{L_MARK_ALL}</a> ::
 						<a href="javascript:checked_switch('report_list_deleted')" class="gensmall">{L_INVERT_SELECT}</a>
 					</td>
 				</tr>
 			</table>
-			
+
 			<br />
 			<!-- END switch_deleted_reports -->
 		</td>

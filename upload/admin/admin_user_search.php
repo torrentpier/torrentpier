@@ -795,10 +795,7 @@ else
 			$base_url .= '&search_moderators=true&moderators_forum='. rawurlencode(stripslashes($moderators_forum));
 			$moderators_forum = intval($moderators_forum);
 
-			$sql = "SELECT forum_name
-						FROM ".BB_FORUMS."
-							WHERE forum_id = ".$moderators_forum;
-
+			$sql = "SELECT forum_name FROM ".BB_FORUMS." WHERE forum_id = ".$moderators_forum;
 
 			if (!$result = DB()->sql_query($sql))
 			{

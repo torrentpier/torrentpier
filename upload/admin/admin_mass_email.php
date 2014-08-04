@@ -36,10 +36,10 @@ if (isset($_POST['submit']))
 		if ($group_id != -1)
 		{
 			$user_list = DB()->fetch_rowset("
-				SELECT u.username, u.user_email, u.user_lang 
-				FROM ". BB_USERS ." u, ". BB_USER_GROUP ." ug 
-				WHERE ug.group_id = $group_id 
-					AND ug.user_pending = 0 
+				SELECT u.username, u.user_email, u.user_lang
+				FROM ". BB_USERS ." u, ". BB_USER_GROUP ." ug
+				WHERE ug.group_id = $group_id
+					AND ug.user_pending = 0
 					AND u.user_id = ug.user_id
 					AND u.user_active = 1
 					AND u.user_id NOT IN(". EXCLUDED_USERS_CSV . $user_id_sql .")
@@ -48,8 +48,8 @@ if (isset($_POST['submit']))
 		else
 		{
 			$user_list = DB()->fetch_rowset("
-				SELECT username, user_email, user_lang 
-				FROM ". BB_USERS ." 
+				SELECT username, user_email, user_lang
+				FROM ". BB_USERS ."
 				WHERE user_active = 1
 					AND user_id NOT IN(". EXCLUDED_USERS_CSV . $user_id_sql .")
 			");

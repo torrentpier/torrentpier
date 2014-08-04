@@ -951,7 +951,6 @@ function renumber_order ($mode, $cat = 0)
 	}
 	$sql .= " ORDER BY $orderfield ASC";
 
-
 	if (!$result = DB()->sql_query($sql))
 	{
 		bb_die('Could not get list of categories / forums #2');

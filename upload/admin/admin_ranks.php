@@ -36,7 +36,6 @@ else
 	}
 }
 
-
 if ($mode != '')
 {
 	if ($mode == 'edit' || $mode == 'add')

@@ -116,11 +116,6 @@
 					</p>
 				<!-- END last -->
 
-				<p class="f_stat_inline hidden">
-					<span class="f_stat_topics"><em>{L_TOPICS_SHORT}:</em> {c.f.TOPICS}</span>
-					<span class="f_stat_posts"><em>{L_POSTS_SHORT}:</em> {c.f.POSTS}</span>
-				</p>
-
 			<!-- ELSE / start of !c.f.POSTS -->
 				{L_NO_POSTS}
 			<!-- ENDIF -->
@@ -156,7 +151,7 @@
 <!-- ENDIF -->
 
 <div id="board_stats">
-	<h3 class="cat_title"><a href="{U_VIEWONLINE}">{L_WHOSONLINE}</a></h3>
+	<h3 class="cat_title">{L_WHOSONLINE}</h3>
 	<div id="board_stats_wrap">
 
 	<table class="forums">

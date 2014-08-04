@@ -42,10 +42,10 @@ mysql_close();
 mysql_query("SET NAMES $dbcharset");
 
 // Get passkey for TorrentPier
-$user_id += USER_ID_DIFF; 
+$user_id += USER_ID_DIFF;
 $res = mysql_query("SELECT auth_key FROM bb_bt_users WHERE user_id = $user_id") or err(mysql_error());
 
-if (mysql_affected_rows() == 0) 
+if (mysql_affected_rows() == 0)
 {
 	err('Passkey doesn\'t created on new tracker or user doesn\'t exist');
 }

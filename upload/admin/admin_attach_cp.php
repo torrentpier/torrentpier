@@ -20,7 +20,7 @@ else
 	$upload_dir = '../' . $attach_config['upload_dir'];
 }
 
-include(BB_ROOT .'attach_mod/includes/functions_selects.php');
+include(ATTACH_DIR .'includes/functions_selects.php');
 
 // Check if the language got included
 if (!isset($lang['TEST_SETTINGS_SUCCESSFUL']))
@@ -75,7 +75,6 @@ else
 	$mode_types_text = array();
 	$sort_order = 'ASC';
 }
-
 
 // Pagination ?
 $do_pagination = ($view != 'stats' && $view != 'search') ? true : false;

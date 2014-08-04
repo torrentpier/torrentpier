@@ -1,22 +1,6 @@
 <?php
 
 /**
-* Setup Basic Authentication
-*/
-// moved to auth
-
-/**
-* Setup Forum Authentication (admin/admin_forumauth.php)
-*/
-//admin/admin_forumauth.php
-
-
-/**
-* Setup Usergroup Authentication
-*/
-//admin/admin_ug_auth.php
-
-/**
 * Setup s_auth_can in viewforum and viewtopic (viewtopic.php/viewforum.php)
 */
 function attach_build_auth_levels($is_auth, &$s_auth_can)
@@ -49,9 +33,9 @@ function attachment_quota_settings($admin_mode, $submit = false, $mode)
 		$upload_dir = BB_ROOT . $attach_config['upload_dir'];
 	}
 
-	include(BB_ROOT .'attach_mod/includes/functions_selects.php');
+	include(ATTACH_DIR .'includes/functions_selects.php');
 	if (!function_exists("process_quota_settings"))
-		include(BB_ROOT . 'attach_mod/includes/functions_admin.php');
+		include(ATTACH_DIR . 'includes/functions_admin.php');
 
 	$user_id = 0;
 

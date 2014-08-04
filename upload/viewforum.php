@@ -583,7 +583,7 @@ $template->assign_vars(array(
 	'MOD_REDIRECT_URL' => $mod_redirect_url,
 	'MODERATION_ON'    => $moderation,
 	'PRUNE_DAYS'       => $forum_data['prune_days'],
-	
+
 	'CAT_ID'              => $forum_data['cat_id'],
 	'CAT_TITLE'           => $forums['cat_title_html'][$forum_data['cat_id']],
 	'U_VIEWCAT'           => CAT_URL . $forum_data['cat_id'],

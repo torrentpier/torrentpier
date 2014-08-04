@@ -34,12 +34,12 @@ switch ($ajax->action)
 	case 'mod_action':
 	case 'change_tor_status':
 	case 'gen_passkey':
-		require(BB_ROOT . 'attach_mod/attachment_mod.php');
+		require(ATTACH_DIR . 'attachment_mod.php');
 		require(INC_DIR . 'functions_torrent.php');
 		break;
 
 	case 'change_torrent':
-		require(BB_ROOT . 'attach_mod/attachment_mod.php');
+		require(ATTACH_DIR . 'attachment_mod.php');
 		require(INC_DIR . 'functions_torrent.php');
 		break;
 
@@ -54,6 +54,10 @@ switch ($ajax->action)
 
 	case 'group_membership':
 		require(INC_DIR . 'functions_group.php');
+		break;
+
+	case 'sitemap';
+		require(INC_DIR .'class.sitemap.php');
 		break;
 }
 
@@ -78,6 +82,7 @@ class ajax_common
 		'change_user_opt'   => array('admin'),
 		'manage_user'       => array('admin'),
 		'manage_admin'      => array('admin'),
+		'sitemap'           => array('admin'),
 
 		'mod_action'        => array('mod'),
 		'topic_tpl'         => array('mod'),
@@ -116,7 +121,7 @@ class ajax_common
 		global $lang;
 
 		// Exit if we already have errors
-		if (!empty($this->response['error_code'])) 
+		if (!empty($this->response['error_code']))
 		{
 			$this->send();
 		}
@@ -127,7 +132,7 @@ class ajax_common
 		if (!$action || !is_string($action))
 		{
 			$this->ajax_die('no action specified');
-		} 
+		}
 		elseif (!$action_params =& $this->valid_actions[$action])
 		{
 			$this->ajax_die('invalid action: ' . $action);
@@ -405,5 +410,10 @@ class ajax_common
 	function chat()
 	{
 		require(AJAX_DIR . 'chat.php');
+	}
+
+	function sitemap()
+	{
+		require(AJAX_DIR .'sitemap.php');
 	}
 }

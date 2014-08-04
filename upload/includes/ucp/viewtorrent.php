@@ -13,9 +13,9 @@ $not_auth_forums_sql = ($excluded_forums_csv) ? "
 " : '';
 
 $sql = DB()->fetch_rowset("
-	SELECT 
-		f.forum_id, f.forum_name, t.topic_title, 
-		tor.tor_type, tor.size, 
+	SELECT
+		f.forum_id, f.forum_name, t.topic_title,
+		tor.tor_type, tor.size,
 		sn.seeders, sn.leechers, tr.*
 	FROM ". BB_FORUMS ." f, ". BB_TOPICS ." t, ". BB_BT_TRACKER ." tr, ". BB_BT_TORRENTS ." tor, ". BB_BT_TRACKER_SNAP ." sn
 	WHERE tr.user_id = {$profiledata['user_id']}
@@ -51,18 +51,18 @@ if ($releasing)
 		$is_gold = '';
 		if ($tr_cfg['gold_silver_enabled'])
 		{
-		    if ($row['tor_type'] == TOR_TYPE_GOLD)
-		    {
-                $is_gold = '<img src="images/tor_gold.gif" width="16" height="15" title="'. $lang['GOLD'] .'" />&nbsp;';
-            }
-            elseif ($row['tor_type'] == TOR_TYPE_SILVER)
-            {
-                $is_gold = '<img src="images/tor_silver.gif" width="16" height="15" title="'. $lang['SILVER'] .'" />&nbsp;';
-            }
-        }
+			if ($row['tor_type'] == TOR_TYPE_GOLD)
+			{
+				$is_gold = '<img src="images/tor_gold.gif" width="16" height="15" title="'. $lang['GOLD'] .'" />&nbsp;';
+			}
+			elseif ($row['tor_type'] == TOR_TYPE_SILVER)
+			{
+				$is_gold = '<img src="images/tor_silver.gif" width="16" height="15" title="'. $lang['SILVER'] .'" />&nbsp;';
+			}
+		}
 
 		$topic_title = wbr($row['topic_title']);
-		
+
 		$template->assign_block_vars('released', array(
 			'ROW_CLASS'      => !($i % 2) ? 'row1' : 'row2',
 			'FORUM_NAME'     => htmlCHR($row['forum_name']),
@@ -70,11 +70,11 @@ if ($releasing)
 			'U_VIEW_FORUM'   => FORUM_URL . $row['forum_id'],
 			'U_VIEW_TOPIC'   => TOPIC_URL . $row['topic_id'],
 			'TOR_TYPE'       => $is_gold,
-			'TOPIC_SEEDERS'  => ($row['seeders'])  ? $row['seeders'] : 0, 
-            'TOPIC_LEECHERS' => ($row['leechers']) ? $row['leechers'] : 0,
+			'TOPIC_SEEDERS'  => ($row['seeders'])  ? $row['seeders'] : 0,
+			'TOPIC_LEECHERS' => ($row['leechers']) ? $row['leechers'] : 0,
 			'SPEED_UP'       => ($row['speed_up']) ? humn_size($row['speed_up'], 0, 'KB') .'/s' : '-',
 		));
-		
+
 		$releasing_count++;
 	}
 }
@@ -86,18 +86,18 @@ if ($seeding)
 		$is_gold = '';
 		if ($tr_cfg['gold_silver_enabled'])
 		{
-		    if ($row['tor_type'] == TOR_TYPE_GOLD)
-		    {
-                $is_gold = '<img src="images/tor_gold.gif" width="16" height="15" title="'. $lang['GOLD'] .'" />&nbsp;';
-            }
-            elseif ($row['tor_type'] == TOR_TYPE_SILVER)
-            {
-		        $is_gold = '<img src="images/tor_silver.gif" width="16" height="15" title="'. $lang['SILVER'] .'" />&nbsp;';
-            }
-        }
+			if ($row['tor_type'] == TOR_TYPE_GOLD)
+			{
+				$is_gold = '<img src="images/tor_gold.gif" width="16" height="15" title="'. $lang['GOLD'] .'" />&nbsp;';
+			}
+			elseif ($row['tor_type'] == TOR_TYPE_SILVER)
+			{
+				$is_gold = '<img src="images/tor_silver.gif" width="16" height="15" title="'. $lang['SILVER'] .'" />&nbsp;';
+			}
+		}
 
 		$topic_title = wbr($row['topic_title']);
-		
+
 		$template->assign_block_vars('seed', array(
 			'ROW_CLASS'      => !($i % 2) ? 'row1' : 'row2',
 			'FORUM_NAME'     => htmlCHR($row['forum_name']),
@@ -105,11 +105,11 @@ if ($seeding)
 			'U_VIEW_FORUM'   => FORUM_URL . $row['forum_id'],
 			'U_VIEW_TOPIC'   => TOPIC_URL . $row['topic_id'],
 			'TOR_TYPE'       => $is_gold,
-			'TOPIC_SEEDERS'  => ($row['seeders'])  ? $row['seeders'] : 0, 
-            'TOPIC_LEECHERS' => ($row['leechers']) ? $row['leechers'] : 0,
+			'TOPIC_SEEDERS'  => ($row['seeders'])  ? $row['seeders'] : 0,
+			'TOPIC_LEECHERS' => ($row['leechers']) ? $row['leechers'] : 0,
 			'SPEED_UP'       => ($row['speed_up']) ? humn_size($row['speed_up'], 0, 'KB') .'/s' : '-',
 		));
-		
+
 		$seeding_count++;
 	}
 }
@@ -121,20 +121,20 @@ if ($leeching)
 		$is_gold = '';
 		if ($tr_cfg['gold_silver_enabled'])
 		{
-		    if ($row['tor_type'] == TOR_TYPE_GOLD)
-		    {
-                $is_gold = '<img src="images/tor_gold.gif" width="16" height="15" title="'.$lang['GOLD'].'" />&nbsp;';
-            }
-            elseif ($row['tor_type'] == TOR_TYPE_SILVER)
-            {
-                $is_gold = '<img src="images/tor_silver.gif" width="16" height="15" title="'.$lang['SILVER'].'" />&nbsp;';
-            }
-        }
+			if ($row['tor_type'] == TOR_TYPE_GOLD)
+			{
+				$is_gold = '<img src="images/tor_gold.gif" width="16" height="15" title="'.$lang['GOLD'].'" />&nbsp;';
+			}
+			elseif ($row['tor_type'] == TOR_TYPE_SILVER)
+			{
+				$is_gold = '<img src="images/tor_silver.gif" width="16" height="15" title="'.$lang['SILVER'].'" />&nbsp;';
+			}
+		}
 
 		$compl_size  = ($row['remain'] && $row['size'] && $row['size'] > $row['remain']) ? ($row['size'] - $row['remain']) : 0;
 		$compl_perc  = ($compl_size) ? floor($compl_size * 100 / $row['size']) : 0;
 		$topic_title = wbr($row['topic_title']);
-		
+
 		$template->assign_block_vars('leech', array(
 			'ROW_CLASS'      => !($i % 2) ? 'row1' : 'row2',
 			'FORUM_NAME'     => htmlCHR($row['forum_name']),
@@ -143,11 +143,11 @@ if ($leeching)
 			'U_VIEW_TOPIC'   => TOPIC_URL . $row['topic_id'],
 			'COMPL_PERC'     => $compl_perc,
 			'TOR_TYPE'       => $is_gold,
-			'TOPIC_SEEDERS'  => ($row['seeders'])  ? $row['seeders'] : 0, 
-            'TOPIC_LEECHERS' => ($row['leechers']) ? $row['leechers'] : 0,
+			'TOPIC_SEEDERS'  => ($row['seeders'])  ? $row['seeders'] : 0,
+			'TOPIC_LEECHERS' => ($row['leechers']) ? $row['leechers'] : 0,
 			'SPEED_DOWN'     => ($row['speed_down']) ? humn_size($row['speed_down'], 0, 'KB') .'/s' : '-',
 		));
-		
+
 		$leeching_count++;
 	}
 }

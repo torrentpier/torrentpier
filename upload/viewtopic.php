@@ -227,7 +227,6 @@ if ($moderation)
 	));
 }
 
-
 if (!$forums = $datastore->get('cat_forums'))
 {
 	$datastore->update('cat_forums');
@@ -632,7 +631,7 @@ require(INC_DIR .'torrent_show_dl_list.php');
 
 if ($t_data['topic_attachment'])
 {
-	require(BB_ROOT .'attach_mod/attachment_mod.php');
+	require(ATTACH_DIR .'attachment_mod.php');
 	init_display_post_attachments($t_data['topic_attachment']);
 }
 
@@ -873,7 +872,7 @@ for($i = 0; $i < $total_posts; $i++)
 		'MC_CLASS'           => $mc_class,
 		'MC_TITLE'           => sprintf($lang['MC_COMMENT'][$mc_type]['title'], $mc_user_id),
 		'MC_SELECT_TYPE'     => build_select("mc_type_$post_id", array_flip($mc_select_type), $mc_type),
-	));	
+	));
 
 	if ($postrow[$i]['post_attachment'] && $is_auth['auth_download'] && function_exists('display_post_attachments'))
 	{

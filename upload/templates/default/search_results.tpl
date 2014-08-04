@@ -84,7 +84,6 @@ $(document).ready(function(){
 		return false;
 	});
 
-
 	$('td.topic_id').click(function(){
 		if (!ajax.in_edit_mode) {
 			$('#show-edit-btn a').click();

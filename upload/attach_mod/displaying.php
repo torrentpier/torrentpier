@@ -344,7 +344,7 @@ function display_attachments($post_id)
 			// bt
 			if ($link && ($attachments['_'. $post_id][$i]['extension'] === TORRENT_EXT))
 			{
-				include(BB_ROOT .'attach_mod/displaying_torrent.php');
+				include(ATTACH_DIR .'displaying_torrent.php');
 			}
 			else if ($link)
 			{

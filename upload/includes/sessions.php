@@ -657,9 +657,6 @@ class user_common
 			bb_setcookie(COOKIE_TOPIC, '');
 			bb_setcookie(COOKIE_FORUM, '');
 			bb_setcookie(COOKIE_MARK,  '');
-
-			// Info message
-	#		$template->assign_var('INFO_MESSAGE', $lang['FORUMS_MARKED_READ']);
 		}
 	}
 
@@ -796,7 +793,6 @@ class user_common
 		}
 	}
 }
-
 
 //
 // userdata cache

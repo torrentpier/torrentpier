@@ -1,7 +1,7 @@
 <form action="{S_REPORT_ACTION}" method="post">
 	<!-- BEGIN switch_report_errors -->
 	<table cellpadding="4" cellspacing="1" border="0" width="100%" align="center" class="forumline">
-		<tr> 
+		<tr>
 			<td class="row1" align="center"><span class="gen">
 				<!-- BEGIN report_errors -->
 				{switch_report_errors.report_errors.MESSAGE}<br />
@@ -11,7 +11,7 @@
 	</table>
 	<br />
 	<!-- END switch_report_errors -->
-	
+
 	<table width="100%" cellpadding="4" cellspacing="1" border="0" class="forumline" align="center">
 		<tr>
 			<th class="thHead" colspan="2">{L_ADD_REASON}</th>

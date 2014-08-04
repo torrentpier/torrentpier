@@ -96,9 +96,7 @@ table.log_filters td {
 	</tr>
 </table>
 
-
 <div class="spacer_8"></div>
-
 
 <table class="forumline">
 	<tr>
@@ -208,7 +206,7 @@ table.log_filters td {
 	</div>
 	</td>
 	<!-- ENDIF -->
-	
+
 </tr></table>
 </fieldset>
 <!-- ENDIF -->
