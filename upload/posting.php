@@ -30,6 +30,7 @@ $topic_type = (@$_POST['topictype']) ? (int) $_POST['topictype'] : POST_NORMAL;
 $topic_type = in_array($topic_type, array(POST_NORMAL, POST_STICKY, POST_ANNOUNCE)) ? $topic_type : POST_NORMAL;
 
 $selected_rg = 0;
+$switch_poster_rg_sig = 0;
 
 if ($mode == 'smilies')
 {
@@ -698,7 +699,7 @@ $template->assign_vars(array(
 	'MESSAGE'               => $message,
 
     'POSTER_RELEASE_GROUPS' => ($poster_release_groups) ? $poster_release_groups : '',
-    'ATTACH_POSTER_RG_SIG'  => $switch_poster_rg_sig,
+    'ATTACH_POSTER_RG_SIG'  => ($switch_poster_rg_sig) ? $switch_poster_rg_sig : false,
 
 	'U_VIEWTOPIC'           => ( $mode == 'reply' ) ? "viewtopic.php?" . POST_TOPIC_URL . "=$topic_id&amp;postorder=desc" : '',
 
