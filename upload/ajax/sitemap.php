@@ -55,7 +55,7 @@ switch ($mode)
 		if ($map->send_url("http://search.yahooapis.com/SiteExplorerService/V1/ping?sitemap=", $map_link)) {
 			$html .= '<br />'.$lang['SITEMAP_NOTIFY_SEARCH'].' Yahoo: <font style="color: green;">'.$lang['SITEMAP_SENT'].'</font>';
 		} else {
-			$html .= '<br />'.$lang['SITEMAP_NOTIFY_SEARCH'].' Yahoo: <font style="color: red;">'.$lang['SITEMAP_ERROR'].'</font> URL: <a href="http://search.yahooapis.com/SiteExplorerService/V1/ping?sitemap='.urlencode($map_link).'" target="_blank">http://rpc.weblogs.com/pingSiteForm?name=InfraBlog&url='.$map_link.'</a>';
+			$html .= '<br />'.$lang['SITEMAP_NOTIFY_SEARCH'].' Yahoo: <font style="color: red;">'.$lang['SITEMAP_ERROR'].'</font> URL: <a href="http://search.yahooapis.com/SiteExplorerService/V1/ping?sitemap='.urlencode($map_link).'" target="_blank">http://search.yahooapis.com/SiteExplorerService/V1/ping?sitemap='.$map_link.'</a>';
 		}
 	break;
 }
