@@ -151,7 +151,7 @@
 <!-- ENDIF -->
 
 <div id="board_stats">
-	<h3 class="cat_title"><a href="{U_VIEWONLINE}">{L_WHOSONLINE}</a></h3>
+	<h3 class="cat_title">{L_WHOSONLINE}</h3>
 	<div id="board_stats_wrap">
 
 	<table class="forums">

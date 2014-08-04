@@ -7,7 +7,6 @@ Disallow: /modcp.php
 Disallow: /posting.php
 Disallow: /privmsg.php
 Disallow: /profile.php
-Disallow: /viewonline.php
 
 Host: torrentpier.me
-Sitemap: http://torrentpier.me/sitemap.php
+Sitemap: http://torrentpier.me/sitemap/sitemap.xml

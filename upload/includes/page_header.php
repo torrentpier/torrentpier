@@ -46,7 +46,6 @@ if (defined('SHOW_ONLINE') && SHOW_ONLINE)
 		'LOGGED_IN_USER_LIST' => ${$online_list}['userlist'],
 		'USERS_ONLINE_COUNTS' => ${$online_list}['cnt'],
 		'RECORD_USERS'        => sprintf($lang['RECORD_ONLINE_USERS'], $bb_cfg['record_online_users'], bb_date($bb_cfg['record_online_date'])),
-		'U_VIEWONLINE'        => "viewonline.php",
 	));
 }
 
