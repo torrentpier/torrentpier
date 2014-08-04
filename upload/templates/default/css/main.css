@@ -434,7 +434,7 @@ table.message td {
 }
 
 .cat, td.cat, td.catTitle, td.catHead, td.catBottom {
-	padding: 5px 4px 6px;
+	padding: 5px 4px 0;
 	background: #E0E5E9 url(../images/cellpic.gif) repeat-x;
 }
 .catTitle {
