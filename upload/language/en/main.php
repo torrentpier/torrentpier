@@ -2973,3 +2973,24 @@ $lang['MC_COMMENT'] = array(
 		'type'  => 'Violation',
 	),
 );
+
+$lang['SITEMAP'] = 'Sitemap';
+$lang['SITEMAP_ADMIN'] = 'Manage sitemap';
+$lang['SITEMAP_CREATED'] = 'Sitemap created';
+$lang['SITEMAP_AVAILABLE'] = 'and is available at';
+$lang['SITEMAP_NOT_CREATED'] = 'Sitemap is not yet created';
+$lang['SITEMAP_NOTIFY_SEARCH'] = 'Notification of the search engine';
+$lang['SITEMAP_SENT'] = 'send completed';
+$lang['SITEMAP_ERROR'] = 'sending error';
+$lang['SITEMAP_OPTIONS'] = 'Options';
+$lang['SITEMAP_CREATE'] = 'Create / update the sitemap';
+$lang['SITEMAP_NOTIFY'] = 'Notify search engines about new version of sitemap';
+$lang['SITEMAP_WHAT_NEXT'] = 'What to do next?';
+$lang['SITEMAP_GOOGLE_1'] = 'Register your site at <a href="http://www.google.com/webmasters/" target="_blank">Google Webmaster</a> using your Google account.';
+$lang['SITEMAP_GOOGLE_2'] = '<a href="https://www.google.com/webmasters/tools/sitemap-list" target="_blank">Add sitemap</a> of site you registered.';
+$lang['SITEMAP_YANDEX_1'] = 'Register your site at <a href="http://webmaster.yandex.ru/sites/" target="_blank">Yandex Webmaster</a> using your Yandex account.';
+$lang['SITEMAP_YANDEX_2'] = '<a href="http://webmaster.yandex.ru/site/map.xml" target="_blank">Add sitemap</a> of site you registered.';
+$lang['SITEMAP_ADD_TITLE'] = 'Additional pages for sitemap';
+$lang['SITEMAP_ADD_PAGE'] = 'Additional pages';
+$lang['SITEMAP_ADD_EXP_1'] = 'You can specify additional pages on your site (for example, <b>http://torrentpier.me/memberlist.php</b>) which should be included in your sitemap file that you creating.';
+$lang['SITEMAP_ADD_EXP_2'] = 'Each reference must begin with http(s):// and a new line!';

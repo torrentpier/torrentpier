@@ -55,6 +55,10 @@ switch ($ajax->action)
 	case 'group_membership':
 		require(INC_DIR . 'functions_group.php');
 		break;
+
+	case 'sitemap';
+		require(INC_DIR .'class.sitemap.php');
+		break;
 }
 
 // position in $ajax->valid_actions['xxx']
@@ -78,6 +82,7 @@ class ajax_common
 		'change_user_opt'   => array('admin'),
 		'manage_user'       => array('admin'),
 		'manage_admin'      => array('admin'),
+		'sitemap'           => array('admin'),
 
 		'mod_action'        => array('mod'),
 		'topic_tpl'         => array('mod'),
@@ -405,5 +410,10 @@ class ajax_common
 	function chat()
 	{
 		require(AJAX_DIR . 'chat.php');
+	}
+
+	function sitemap()
+	{
+		require(AJAX_DIR .'sitemap.php');
 	}
 }

@@ -557,8 +557,10 @@ INSERT INTO `bb_config` VALUES ('seed_bonus_points', '');
 INSERT INTO `bb_config` VALUES ('seed_bonus_tor_size', '0');
 INSERT INTO `bb_config` VALUES ('seed_bonus_user_regdate', '0');
 INSERT INTO `bb_config` VALUES ('site_desc', 'A little text to describe your forum');
+INSERT INTO `bb_config` VALUES ('sitemap_time', '');
 INSERT INTO `bb_config` VALUES ('sitename', 'TorrentPier II - Torrent Tracker');
 INSERT INTO `bb_config` VALUES ('smilies_path', 'images/smiles');
+INSERT INTO `bb_config` VALUES ('static_sitemap', '');
 INSERT INTO `bb_config` VALUES ('topics_per_page', '50');
 INSERT INTO `bb_config` VALUES ('xs_use_cache', '1');
 INSERT INTO `bb_config` VALUES ('active_ads', '');
@@ -642,6 +644,7 @@ INSERT INTO `bb_cron` VALUES (18, 1, 'Seeder last seen', 'tr_update_seeder_last_
 INSERT INTO `bb_cron` VALUES (19, 1, 'Captcha', 'captcha_gen_gc.php', 'daily', NULL, '05:00:00', 120, '', '', NULL, 0, '', 0, 0, 0);
 INSERT INTO `bb_cron` VALUES (20, 1, 'Tracker dl-complete count', 'tr_complete_count.php', 'interval', NULL, NULL, 255, '', '', '06:00:00', 0, '', 0, 0, 0);
 INSERT INTO `bb_cron` VALUES (21, 1, 'Cache garbage collector', 'cache_gc.php', 'interval', NULL, NULL, 255, '', '', '00:05:00', 0, '', 0, 0, 0);
+INSERT INTO `bb_cron` VALUES (22, 1, 'Sitemap update', 'sitemap.php', 'daily', NULL, '06:00:00', 30, '', '', NULL, 0, '', 0, 0, 0);
 
 -- --------------------------------------------------------
 
