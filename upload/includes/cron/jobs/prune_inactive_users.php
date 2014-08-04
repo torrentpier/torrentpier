@@ -2,11 +2,9 @@
 
 if (!defined('BB_ROOT')) die(basename(__FILE__));
 
-$users_per_cycle = 1000;
-
 require_once(INC_DIR .'functions_admin.php');
 
-$not_del_users = EXCLUDED_USERS_CSV;
+$users_per_cycle = 1000;
 
 while (true)
 {
@@ -21,7 +19,7 @@ while (true)
 			AND user_lastvisit    = 0
 			AND user_session_time = 0
 			AND user_regdate      <= ". (TIMENOW - 86400 * $not_activated_days) ."
-			AND user_id           NOT IN($not_del_users)
+			AND user_id           NOT IN(". EXCLUDED_USERS_CSV .")
 			LIMIT $users_per_cycle");
 
 		foreach ($sql as $row)
@@ -36,7 +34,7 @@ while (true)
 			WHERE user_level   = 0
 			AND user_posts     = 0
 			AND user_lastvisit <= ". (TIMENOW - 86400 * $not_active_days) ."
-			AND user_id        NOT IN($not_del_users)
+			AND user_id        NOT IN(". EXCLUDED_USERS_CSV .")
 			LIMIT $users_per_cycle");
 
 		foreach ($sql as $row)
