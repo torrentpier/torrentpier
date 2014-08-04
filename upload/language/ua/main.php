@@ -2977,3 +2977,24 @@ $lang['MC_COMMENT'] = array(
 		'type'  => 'Порушення',
 	),
 );
+
+$lang['SITEMAP'] = 'Карта сайту (sitemap)';
+$lang['SITEMAP_ADMIN'] = 'Управління картою сайту (sitemap)';
+$lang['SITEMAP_CREATED'] = 'Файл sitemap створений';
+$lang['SITEMAP_AVAILABLE'] = 'і доступний за адресою';
+$lang['SITEMAP_NOT_CREATED'] = 'Файл sitemap ще не створено';
+$lang['SITEMAP_NOTIFY_SEARCH'] = 'Повідомлення пошукової системи';
+$lang['SITEMAP_SENT'] = 'відправка завершена';
+$lang['SITEMAP_ERROR'] = 'помилка відсилання';
+$lang['SITEMAP_OPTIONS'] = 'Опції';
+$lang['SITEMAP_CREATE'] = 'Створити / оновити файл sitemap';
+$lang['SITEMAP_NOTIFY'] = 'Повідомити пошукові системи про наявність нової версії файлу sitemap';
+$lang['SITEMAP_WHAT_NEXT'] = 'Що зробити далі?';
+$lang['SITEMAP_GOOGLE_1'] = 'Зареєструйте ваш сайт в <a href="http://www.google.com/webmasters/" target="_blank">Google Webmaster</a> з використанням вашого облікового запису Google.';
+$lang['SITEMAP_GOOGLE_2'] = '<a href="https://www.google.com/webmasters/tools/sitemap-list" target="_blank">Додайте файл sitemap</a> зареєстрованого вами сайту.';
+$lang['SITEMAP_YANDEX_1'] = 'Зареєструйте ваш сайт в <a href="http://webmaster.yandex.ru/sites/" target="_blank">Yandex Webmaster</a> з використанням вашого облікового запису Yandex.';
+$lang['SITEMAP_YANDEX_2'] = '<a href="http://webmaster.yandex.ru/site/map.xml" target="_blank">Додайте файл sitemap</a> зареєстрованого вами сайту.';
+$lang['SITEMAP_ADD_TITLE'] = 'Додаткові сторінки для sitemap';
+$lang['SITEMAP_ADD_PAGE'] = 'Додаткові сторінки';
+$lang['SITEMAP_ADD_EXP_1'] = 'Тут ви можете вказати додаткові сторінки сайту (наприклад <b>http://torrentpier.me/memberlist.php</b>), які повинні бути включені в створюваний файл вами файл sitemap.';
+$lang['SITEMAP_ADD_EXP_2'] = 'Кожне посилання має починатись з http(s):// і нової рядки!';

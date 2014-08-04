@@ -73,7 +73,7 @@ ajax.callback.sitemap = function(data) {
 }
 </script>
 
-<h1>Управление картой сайта</h1>
+<h1>{L_SITEMAP_ADMIN}</h1>
 
 <form action="admin_sitemap.php" method="post">
 <table class="forumline">
@@ -82,36 +82,34 @@ ajax.callback.sitemap = function(data) {
 		<td class="td_pads"><div id="mess_time">{MESSAGE}</div></td>
 	</tr>
 	<tr class="row1">
-		<td width="25%"><span class="gen"><b>Опции:</b></span></td>
+		<td width="25%"><span class="gen"><b>{L_SITEMAP_OPTIONS}:</b></span></td>
 		<td class="td_pads">
-			<a href="#" class="btn btn-success" onclick="ajax.sitemap('create'); return false;">Создать / обновить файл карты сайта</a>&nbsp;&nbsp;
-			<a href="#" class="btn btn-warning" onclick="ajax.sitemap('search_update'); return false;">Уведомить поисковые системы о наличии новой версии карты сайта</a><br />
+			<a href="#" class="btn btn-success" onclick="ajax.sitemap('create'); return false;">{L_SITEMAP_CREATE}</a>&nbsp;&nbsp;
+			<a href="#" class="btn btn-warning" onclick="ajax.sitemap('search_update'); return false;">{L_SITEMAP_NOTIFY}</a><br />
 			<div id="sitemap"></div>
 		</td>
 	</tr>
 	<tr>
-		<th colspan="2">Что сделать дальше?</th>
+		<th colspan="2">{L_SITEMAP_WHAT_NEXT}</th>
 	</tr>
 	<tr>
 		<td class="row1" colspan="2">
-			<p>1. Зарегистрируйте ваш сайт в <a href="http://www.google.com/webmasters/" target="_blank">Google Webmaster</a> с использованием вашей учетной записи Google.</p>
-			<p>2. Зайдите в раздел "Файлы Sitemap" и нажмите кнопку "Добавление/проверка файла sitemap".</p>
-			<p>3. Зарегистрируйте ваш сайт в <a href="http://webmaster.yandex.ru/sites/" target="_blank">Yandex Webmaster</a> с использованием вашей учетной записи.</p>
-			<p>4. <a href="http://webmaster.yandex.ru/site/map.xml" target="_blank">Добавьте карту</a> зарегистрированного вами сайта.</p>
+			<p>1. {L_SITEMAP_GOOGLE_1}</p>
+			<p>2. {L_SITEMAP_GOOGLE_2}</p>
+			<p>3. {L_SITEMAP_YANDEX_1}</p>
+			<p>4. {L_SITEMAP_YANDEX_2}</p>
 		</td>
 	</tr>
 	<tr>
-	  <th colspan="2">Дополнительные страницы для sitemap</th>
+	  <th colspan="2">{L_SITEMAP_ADD_TITLE}</th>
 	</tr>
 	<tr class="row1">
 		<td class="row1">
-			<span class="gen"><b>Дополнительные страницы:</b></span>
+			<span class="gen"><b>{L_SITEMAP_ADD_PAGE}:</b></span>
 		</td>
 		<td>
 			<textarea name="static_sitemap" rows="5" cols="70">{STATIC_SITEMAP}</textarea><br />
-			<p>Здесь вы можете указать дополнительные страницы сайта (например <b>http://torrentpier.me/memberlist.php</b>),
-				которые должны быть включены в создаваемый файл вами файл sitemap. <b style="color: #993300;">Каждая ссылка
-				должна начинаться с http(s):// и новой строки!</b></p>
+			<p>{L_SITEMAP_ADD_EXP_1} <b style="color: #993300;">{L_SITEMAP_ADD_EXP_2}</b></p>
 		</td>
 	</tr>
 	<tr>
