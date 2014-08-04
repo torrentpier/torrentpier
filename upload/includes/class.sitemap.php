@@ -2,12 +2,12 @@
 
 class sitemap
 {
-	var $home = "";
-	var $limit = 0;
+	var $home           = "";
+	var $limit          = 0;
 	var $topic_priority = "0.5";
-	var $stat_priority = "0.5";
-	var $priority = "0.6";
-	var $cat_priority = "0.7";
+	var $stat_priority  = "0.5";
+	var $priority       = "0.6";
+	var $cat_priority   = "0.7";
 
 	function sitemap () {
 		global $bb_cfg;
