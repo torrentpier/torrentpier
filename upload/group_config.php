@@ -79,6 +79,7 @@ if ($is_moderator)
 		'GROUP_NAME'             => htmlCHR($group_info['group_name']),
 		'GROUP_ID'               => $group_id,
 		'GROUP_DESCRIPTION'      => htmlCHR($group_info['group_description']),
+        'GROUP_SIGNATURE'        => htmlCHR($group_info['group_signature']),
 		'U_GROUP_URL'            => GROUP_URL . $group_id,
 		'GROUP_TYPE'             => $group_type,
 		'S_GROUP_OPEN_TYPE'      => GROUP_OPEN,

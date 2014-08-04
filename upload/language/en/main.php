@@ -773,6 +773,12 @@ $lang['UNSUBSCRIBE_GROUP'] = 'Unsubscribe';
 $lang['VIEW_INFORMATION'] = 'View Information';
 $lang['MEMBERS_IN_GROUP'] = 'Members in group';
 
+// Release Groups
+$lang['POST_RELEASE_FROM_GROUP'] = 'Post release from group';
+$lang['CHOOSE_RELEASE_GROUP'] = 'Select release group';
+$lang['ATTACH_RG_SIG'] = 'Attach release group signature';
+$lang['RELEASE_FROM_RG'] = 'Release was prepared by';
+
 //
 // Search
 //

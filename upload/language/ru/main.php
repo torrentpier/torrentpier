@@ -773,6 +773,12 @@ $lang['UNSUBSCRIBE_GROUP'] = 'Выйти из группы';
 $lang['VIEW_INFORMATION'] = 'Просмотреть информацию';
 $lang['MEMBERS_IN_GROUP'] = 'Кол-во участников';
 
+// Release Groups
+$lang['POST_RELEASE_FROM_GROUP'] = 'Создать релиз от группы';
+$lang['CHOOSE_RELEASE_GROUP'] = 'Выбрать релиз группу';
+$lang['ATTACH_RG_SIG'] = 'Добавить подпись релиз группы';
+$lang['RELEASE_FROM_RG'] = 'Релиз подготовлен';
+
 //
 // Search
 //

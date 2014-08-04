@@ -116,7 +116,7 @@
 <!-- ELSEIF LOGGED_IN -->
 <tr>
 	<td class="row1 vTop pad_4" valign="top">
-		<p><b>{L_OPTIONS}</b></p>
+		<p><b>{L_OPTIONS}:</b></p>
 	</td>
 	<td class="row2">
 	<div class="floatL">
@@ -138,14 +138,26 @@
 	</td>
 </tr>
 <!-- ENDIF / LOGGED_IN -->
+<!-- IF ATTACHBOX -->
+<tr>
+	<td><b>{L_POST_RELEASE_FROM_GROUP}:</b></td>
+	<td>
+		<select name="poster_release_group">
+			<option value="-1">{L_CHOOSE_RELEASE_GROUP}</option>
+			{POSTER_RELEASE_GROUPS}
+		</select>
+		<label><input type="checkbox" name="attach_poster_rg_sig" <!-- IF ATTACH_POSTER_RG_SIG -->checked<!-- ENDIF -->/> {L_ATTACH_RG_SIG}</label>
+	</td>
+</tr>
+<!-- ENDIF -->
 <!-- BEGIN switch_type_toggle -->
+
 <tr>
 	<td colspan="2" class="row2 tCenter pad_6">{S_TYPE_TOGGLE}</td>
 </tr>
 <!-- END switch_type_toggle -->
 
 <!-- IF ATTACHBOX --><!-- INCLUDE posting_attach.tpl --><!-- ENDIF -->
-
 </table>
 
 </form>
