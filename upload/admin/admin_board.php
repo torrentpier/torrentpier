@@ -41,7 +41,7 @@ else
 		if (isset($_POST['submit']) && $row['config_value'] != $new[$config_name])
 		{
 			if ($config_name == ('seed_bonus_points' || 'seed_bonus_release' || 'bonus_upload' || 'bonus_upload_price')) $new[$config_name] = serialize(str_replace(',', '.', $new[$config_name]));
-			bb_update_config(array($config_name => $new[$config_name]));
+			bb_update_config(array($config_name => unserialize($new[$config_name])));
 		}
 	}
 
