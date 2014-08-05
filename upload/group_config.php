@@ -52,10 +52,9 @@ if ($is_moderator)
             {
                 bb_die(implode($upload->errors));
             }
+
+            DB()->query("UPDATE ". BB_GROUPS ." SET avatar_ext_id = $avatar_ext_id WHERE group_id = $group_id LIMIT 1");
         }
-
-        DB()->query("UPDATE ". BB_GROUPS ." SET avatar_ext_id = $avatar_ext_id WHERE group_id = $group_id LIMIT 1");
-
     }
 
     $group_type = '';

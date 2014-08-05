@@ -410,11 +410,11 @@ function build_poll_add_form (src_el)
 				<span id="pp_{postrow.POST_ID}">{postrow.MESSAGE}</span>
 				<!-- IF postrow.RG_NAME -->
 				<div align="center">
-					<table id="pg_{postrow.POST_ID}" style="border:1px solid #DEDEDE;border-left:4px solid #DEDEDE;">
+					<table id="pg_{postrow.POST_ID}" style="border-left:4px solid #DEDEDE;">
 						<tr><td colspan="2" align="left" valign="middle" style="border-bottom:1px solid #DEDEDE;padding:5px;" class="genmed bold">{L_RELEASE_FROM_RG}:</td></tr>
 						<tr>
 							<td style="padding:5px;">{postrow.RG_AVATAR}</td>
-							<td align="left" valign="top" style="padding:5px;"><a href="RG_URL" class="med bold"><h2>{postrow.RG_NAME}</h2></a></td>
+							<td align="left" style="padding:5px;" width="350px"><a href="{postrow.RG_URL}" class="med bold"><h1>{postrow.RG_NAME}</h1></a></td>
 						</tr>
 					</table>
 				</div>
