@@ -138,7 +138,7 @@
 	</td>
 </tr>
 <!-- ENDIF / LOGGED_IN -->
-<!-- IF ATTACHBOX -->
+<!-- IF ATTACHBOX && POSTER_RELEASE_GROUPS -->
 <tr>
 	<td><b>{L_POST_RELEASE_FROM_GROUP}:</b></td>
 	<td>
