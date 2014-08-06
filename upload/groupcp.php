@@ -515,6 +515,7 @@ else
 		'GROUP_DESCRIPTION'      => bbcode2html($group_info['group_description']),
         'GROUP_AVATAR'           => get_avatar(GROUP_AVATAR_MASK . $group_id, $group_info['avatar_ext_id'], true),
 		'GROUP_DETAILS'          => $group_details,
+        'GROUP_TIME'             => (!empty($group_info['group_time'])) ? sprintf('%s <span class="posted_since">(%s)</span>', bb_date($group_info['group_time']), delta_time($group_info['group_time'])) : $lang['NONE'],
 		'MOD_USER'               => profile_url($group_moderator),
 		'MOD_AVATAR'             => $avatar,
 		'MOD_FROM'               => $from,
@@ -523,7 +524,7 @@ else
 		'MOD_PM'                 => $pm,
 		'MOD_EMAIL'              => $email,
 		'MOD_WWW'                => $www,
-		'MOD_TIME'               => (!empty($group_info['group_time'])) ? bb_date($group_info['group_time']) : $lang['NONE'],
+		'MOD_TIME'               => (!empty($group_info['mod_time'])) ? bb_date($group_info['mod_time']) : $lang['NONE'],
 		'U_SEARCH_USER'          => "search.php?mode=searchuser",
 
 		'U_GROUP_CONFIG'         => "group_config.php?g=$group_id",

@@ -33,7 +33,7 @@ if ($group_id)
 if ($is_moderator)
 {
 
-	// TODO Creation Date, Admin panel, Some tasty features
+	// TODO Admin panel, Some tasty features
 
     // Avatar
     if ($submit)

@@ -73,7 +73,7 @@
 <!-- ENDIF -->
 <tr>
 	<td>{L_GROUP_TIME}</td>
-	<td>{MOD_TIME}</td>
+	<td>{GROUP_TIME}</td>
 </tr>
 <tr>
 	<td>{L_GROUP_MEMBERSHIP}:</td>
