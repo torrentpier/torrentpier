@@ -257,7 +257,7 @@ class user_common
 
 			if (DB()->fetch_row($sql))
 			{
-				bb_exit('~');
+				header('Location: http://torrentpier.me/pages/banned/');
 			}
 		}
 
