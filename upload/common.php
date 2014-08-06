@@ -29,10 +29,10 @@ unset($server_protocol, $server_port);
 define('DBG_USER', (isset($_COOKIE[COOKIE_DBG])));
 
 // Board/Tracker shared constants and functions
-define('BB_BT_TORRENTS',      'bb_bt_torrents');
-define('BB_BT_TRACKER',       'bb_bt_tracker');
-define('BB_BT_TRACKER_SNAP',  'bb_bt_tracker_snap');
-define('BB_BT_USERS',         'bb_bt_users');
+define('BB_BT_TORRENTS',     'bb_bt_torrents');
+define('BB_BT_TRACKER',      'bb_bt_tracker');
+define('BB_BT_TRACKER_SNAP', 'bb_bt_tracker_snap');
+define('BB_BT_USERS',        'bb_bt_users');
 
 define('BT_AUTH_KEY_LENGTH', 10);
 
@@ -173,7 +173,7 @@ class CACHES
 						$this->ref[$cache_name] =& $this->obj[$cache_name];
 						break;
 
-                    case 'db_sqlite':
+					case 'db_sqlite':
 						if (!isset($this->obj[$cache_name]))
 						{
 							$cache_cfg['pconnect']     = $this->cfg['pconnect'];
@@ -186,13 +186,13 @@ class CACHES
 						$this->ref[$cache_name] =& $this->obj[$cache_name];
 						break;
 
-                    case 'redis':
-                        if (!isset($this->obj[$cache_name]))
+					case 'redis':
+						if (!isset($this->obj[$cache_name]))
 						{
 							$this->obj[$cache_name] = new cache_redis($this->cfg['redis'], $this->cfg['prefix']);
 						}
 						$this->ref[$cache_name] =& $this->obj[$cache_name];
-	                    break;
+						break;
 
 					case 'eaccelerator':
 						if (!isset($this->obj[$cache_name]))
@@ -202,7 +202,7 @@ class CACHES
 						$this->ref[$cache_name] =& $this->obj[$cache_name];
 						break;
 
-                    case 'apc':
+					case 'apc':
 						if (!isset($this->obj[$cache_name]))
 						{
 							$this->obj[$cache_name] = new cache_apc($this->cfg['prefix']);
@@ -470,8 +470,8 @@ class cache_sqlite extends cache_common
 		}
 		$this->db->shard($name);
 		$cached_items = array();
-		$this->prefix_len   = strlen($this->prefix);
-		$this->prefix_sql   = sqlite_escape_string($this->prefix);
+		$this->prefix_len = strlen($this->prefix);
+		$this->prefix_sql = sqlite_escape_string($this->prefix);
 
 		$name_ary = $name_sql = (array) $name;
 		array_deep($name_sql, 'sqlite_escape_string');
@@ -514,7 +514,7 @@ class cache_sqlite extends cache_common
 	function set ($name, $value, $ttl = 604800)
 	{
 		$this->db->shard($this->prefix . $name);
-		$name_sql   = sqlite_escape_string($this->prefix . $name);
+		$name_sql  = sqlite_escape_string($this->prefix . $name);
 		$expire    = TIMENOW + $ttl;
 		$value_sql = sqlite_escape_string(serialize($value));
 

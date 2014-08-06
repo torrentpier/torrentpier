@@ -1,8 +1,7 @@
 <?php
 
-define('IN_FORUM',   true);
+define('IN_FORUM', true);
 define('BB_SCRIPT', 'dl_list');
-define('IN_SERVICE', true);
 define('BB_ROOT', './');
 require(BB_ROOT .'common.php');
 
@@ -109,7 +108,7 @@ if ($mode == 'dl_delete' && $topic_id)
 
 		print_confirmation(array(
 			'QUESTION'      => $lang['DL_LIST_DEL_CONFIRM'],
-			'FORM_ACTION'   => "dl_list.php",
+			'FORM_ACTION'   => 'dl_list.php',
 			'HIDDEN_FIELDS' => build_hidden_fields($hidden_fields),
 		));
 	}

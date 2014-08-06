@@ -236,17 +236,17 @@ function append_images($tor)
 	switch(TR_TYPE)
 	{
 		case 'yse':
-			if(!empty($tor['image1']))
+			if (!empty($tor['image1']))
 			{
 				$poster = "[img=right]".make_img_path($tor['image1'])."[/img]";
 			}
-			if(!empty($tor['image2']))
+			if (!empty($tor['image2']))
 			{
 				$screens = '[spoiler="Скриншоты"][img]'.make_img_path($tor['image2'])."[/img][/spoiler]";
 			}
 			break;
 		case 'sky':
-			if(!empty($tor['poster']))
+			if (!empty($tor['poster']))
 			{
 				$poster = "[img=right]".make_img_path($tor['poster'])."[/img]";
 			}
@@ -254,9 +254,9 @@ function append_images($tor)
 			if ($has_screens)
 			{
 				$screens .= '[spoiler="Скриншоты"]';
-				for ($i = 1; $i<=4; $i++)
+				for ($i = 1; $i <= 4; $i++)
 				{
-					if(!empty($tor['screenshot'.$i]))
+					if (!empty($tor['screenshot'.$i]))
 					{
 						$screens .= "[img]".make_img_path($tor['screenshot'.$i])."[/img] \n";
 					}

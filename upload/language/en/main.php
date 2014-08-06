@@ -101,7 +101,8 @@ $lang['ALL_CACHE_CLEARED'] = 'Cache has been cleared';
 $lang['ALL_TEMPLATE_CLEARED'] = 'Template cache has been cleared';
 $lang['DATASTORE'] = 'Datastore';
 $lang['DATASTORE_CLEARED'] = 'Datastore has been cleared';
-$lang['BOARD_DISABLE'] = 'Sorry, this board is currently not available. Please try again later.';
+$lang['BOARD_DISABLE'] = 'Sorry, this forum is disabled. Try to come back later';
+$lang['BOARD_DISABLE_CRON'] = 'Forum is down for maintenance. Try to come back later';
 
 $lang['LOADING'] = 'Loading...';
 $lang['JUMPBOX_TITLE'] = 'Select forum';
@@ -2776,8 +2777,6 @@ $lang['SIZE_DATABASE'] = 'Database size';
 $lang['ACTIVE_PARAMETERS'] = 'Active parameters';
 $lang['POSTS_LAST_CYCLE'] = 'Processed post(s) on last cycle';
 $lang['BOARD_STATUS'] = 'Board status';
-$lang['BOARD_DISABLED'] = 'Disabled';
-$lang['BOARD_ENABLED'] = 'Enabled';
 
 $lang['INFO_ESTIMATED_VALUES'] = '(*) All the estimated values are calculated approximately<br />
 			based on the current completed percent and may not represent the actual final values.<br />

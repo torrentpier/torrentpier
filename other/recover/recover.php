@@ -1,7 +1,6 @@
 <?php
 
 define('IN_FORUM', true);
-define('IN_SERVICE', true);
 define('BB_ROOT', './');
 require(BB_ROOT .'common.php');
 require(INC_DIR .'functions_torrent.php');

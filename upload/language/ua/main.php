@@ -101,7 +101,8 @@ $lang['ALL_CACHE_CLEARED'] = 'Кеш очищено';
 $lang['ALL_TEMPLATE_CLEARED'] = 'Кеш шаблону очищено';
 $lang['DATASTORE'] = 'Datastore';
 $lang['DATASTORE_CLEARED'] = 'Datastore очищено';
-$lang['BOARD_DISABLE'] = 'Вибачте, ці форуми відключені. Спробуйте зайти пізніше';
+$lang['BOARD_DISABLE'] = 'Вибачте, цей форум відключений. Спробуйте зайти пізніше';
+$lang['BOARD_DISABLE_CRON'] = 'Форум відключений на технічне обслуговування. Спробуйте зайти пізніше';
 
 $lang['LOADING'] = 'Завантаження...';
 $lang['JUMPBOX_TITLE'] = 'Оберіть форум для переходу';
@@ -2776,8 +2777,6 @@ $lang['SIZE_DATABASE'] = 'Розмір БД';
 $lang['ACTIVE_PARAMETERS'] = 'Активні параметри';
 $lang['POSTS_LAST_CYCLE'] = 'Оброблена(і) запис(и) на останньому циклі';
 $lang['BOARD_STATUS'] = 'Статус форуму';
-$lang['BOARD_DISABLED'] = 'Вимкнено';
-$lang['BOARD_ENABLED'] = 'Включений';
 
 $lang['INFO_ESTIMATED_VALUES'] = '(*) Всі оцінні значення розраховуються приблизно<br />
 на основі поточного завершеного відсотка і не можуть представляти фактичного кінцевого значення.<br />

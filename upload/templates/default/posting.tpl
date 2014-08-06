@@ -79,7 +79,7 @@
 	<td><b>{L_USERNAME}</b></td>
 	<td>
 		<input type="text" name="username" size="25" maxlength="25" tabindex="1" value="{USERNAME}" />&nbsp;
-		<input type="submit" name="usersubmit" class="lite" value="{L_FIND_USERNAME}" onclick="window.open('{U_SEARCH_USER}', '_bbsearch', 'HEIGHT=250,resizable=yes,WIDTH=400');return false;" />
+		<input type="submit" name="usersubmit" class="lite" value="{L_FIND_USERNAME}" onclick="window.open('{U_SEARCH_USER}', '_bbsearch', IWP_US);return false;" />
 	</td>
 </tr>
 <!-- ENDIF -->
@@ -105,7 +105,7 @@
 		<!-- END smilies_row -->
 		<!-- BEGIN switch_smilies_extra -->
 		<tr>
-			<td colspan="{S_SMILIES_COLSPAN}"><a href="{U_MORE_SMILIES}" onclick="window.open('{U_MORE_SMILIES}', '_bbsmilies', 'HEIGHT=420,resizable=yes,scrollbars=yes,WIDTH=470'); return false;" target="_bbsmilies" class="med">{L_MORE_EMOTICONS}</a></td>
+			<td colspan="{S_SMILIES_COLSPAN}"><a href="{U_MORE_SMILIES}" onclick="window.open('{U_MORE_SMILIES}', '_bbsmilies', IWP_SM); return false;" target="_bbsmilies" class="med">{L_MORE_EMOTICONS}</a></td>
 		</tr>
 		<!-- END switch_smilies_extra -->
 		</table><!--/smilies-->

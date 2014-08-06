@@ -263,7 +263,7 @@ $(function(){
 				<fieldset>
 				<legend>{L_AUTHOR}</legend>
 				<div>
-					<p class="input"><input style="width: 40%" <!-- IF POSTER_ERROR -->style="color: red"<!-- ELSE --> class="post"<!-- ENDIF --> type="text" size="16" maxlength="{POSTER_NAME_MAX}" name="{POSTER_NAME_NAME}" value="{POSTER_NAME_VAL}" /> <input style="width: 40%;" type="button" value="{L_FIND_USERNAME}" onclick="window.open('{U_SEARCH_USER}', '_bbsearch', 'HEIGHT=250,resizable=yes,WIDTH=400'); return false;" /></p>
+					<p class="input"><input style="width: 40%" <!-- IF POSTER_ERROR -->style="color: red"<!-- ELSE --> class="post"<!-- ENDIF --> type="text" size="16" maxlength="{POSTER_NAME_MAX}" name="{POSTER_NAME_NAME}" value="{POSTER_NAME_VAL}" /> <input style="width: 40%;" type="button" value="{L_FIND_USERNAME}" onclick="window.open('{U_SEARCH_USER}', '_bbsearch', IWP_US); return false;" /></p>
 				</div>
 				</fieldset>
 				<fieldset>

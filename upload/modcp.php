@@ -250,14 +250,14 @@ switch ($mode)
 
 			//Обновление кеша новостей на главной
 			$news_forums = array_flip(explode(',', $bb_cfg['latest_news_forum_id']));
-			if(isset($news_forums[$forum_id]) && $bb_cfg['show_latest_news'] && $result)
+			if (isset($news_forums[$forum_id]) && $bb_cfg['show_latest_news'] && $result)
 			{
 				$datastore->enqueue('latest_news');
 				$datastore->update('latest_news');
 			}
 
 			$net_forums = array_flip(explode(',', $bb_cfg['network_news_forum_id']));
-			if(isset($net_forums[$forum_id]) && $bb_cfg['show_network_news'] && $result)
+			if (isset($net_forums[$forum_id]) && $bb_cfg['show_network_news'] && $result)
 			{
 				$datastore->enqueue('network_news');
 				$datastore->update('network_news');
@@ -286,14 +286,14 @@ switch ($mode)
 
 			//Обновление кеша новостей на главной
 			$news_forums = array_flip(explode(',', $bb_cfg['latest_news_forum_id']));
-			if((isset($news_forums[$forum_id]) || isset($news_forums[$new_forum_id])) && $bb_cfg['show_latest_news'] && $result)
+			if ((isset($news_forums[$forum_id]) || isset($news_forums[$new_forum_id])) && $bb_cfg['show_latest_news'] && $result)
 			{
 				$datastore->enqueue('latest_news');
 				$datastore->update('latest_news');
 			}
 
 			$net_forums = array_flip(explode(',', $bb_cfg['network_news_forum_id']));
-			if((isset($net_forums[$forum_id]) || isset($net_forums[$new_forum_id])) && $bb_cfg['show_network_news'] && $result)
+			if ((isset($net_forums[$forum_id]) || isset($net_forums[$new_forum_id])) && $bb_cfg['show_network_news'] && $result)
 			{
 				$datastore->enqueue('network_news');
 				$datastore->update('network_news');
@@ -588,7 +588,7 @@ switch ($mode)
 
 			$s_hidden_fields = '<input type="hidden" name="sid" value="' . $userdata['session_id'] . '" /><input type="hidden" name="' . POST_FORUM_URL . '" value="' . $forum_id . '" /><input type="hidden" name="' . POST_TOPIC_URL . '" value="' . $topic_id . '" /><input type="hidden" name="mode" value="split" />';
 
-			if( ( $total_posts = DB()->num_rows($result) ) > 0 )
+			if (($total_posts = DB()->num_rows($result)) > 0)
 			{
 				$postrow = DB()->sql_fetchrowset($result);
 
@@ -600,7 +600,7 @@ switch ($mode)
 					'S_FORUM_SELECT'  => get_forum_select('admin', 'new_forum_id', $forum_id),
 				));
 
-				for($i = 0; $i < $total_posts; $i++)
+				for ($i = 0; $i < $total_posts; $i++)
 				{
 					$post_id = $postrow[$i]['post_id'];
 					$poster_id = $postrow[$i]['poster_id'];
@@ -758,7 +758,7 @@ switch ($mode)
 		$pin = ($mode == 'post_pin');
 		$new_topic_status = ($pin) ? 1 : 0;
 
-		if(count($topic_csv))
+		if (count($topic_csv))
 		{
 			$sql = "
 				SELECT topic_id, topic_title

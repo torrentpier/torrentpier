@@ -354,12 +354,12 @@ else
 	$s_hidden_fields = '<input type="hidden" name="' . POST_CAT_URL . '" value="' . $cat_id . '">';
 
 	$template->assign_vars(array(
-		'TPL_AUTH_CAT' => true,
-		'CAT_NAME' => htmlCHR($cat_name),
-		'S_FORUMAUTH_ACTION' => "admin_forumauth_list.php",
-		'S_COLUMN_SPAN' => count($forum_auth_fields)+1,
-		'S_HIDDEN_FIELDS' => $s_hidden_fields)
-	);
+		'TPL_AUTH_CAT'       => true,
+		'CAT_NAME'           => htmlCHR($cat_name),
+		'S_FORUMAUTH_ACTION' => 'admin_forumauth_list.php',
+		'S_COLUMN_SPAN'      => count($forum_auth_fields) + 1,
+		'S_HIDDEN_FIELDS'    => $s_hidden_fields,
+	));
 }
 
 print_page('admin_forumauth_list.tpl', 'admin');
