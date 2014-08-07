@@ -623,9 +623,9 @@ class bbcode
 		static $spam_words = null;
 		static $spam_replace = ' СПАМ';
 
-		if (isset($text))
+		if (isset($this))
 		{
-			$found_spam =& $text->found_spam;
+			$found_spam =& $this->found_spam;
 		}
 
 		// set $spam_words and $spam_replace
