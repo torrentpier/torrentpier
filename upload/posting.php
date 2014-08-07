@@ -698,7 +698,7 @@ $template->assign_vars(array(
 	'SUBJECT'               => $subject,
 	'MESSAGE'               => $message,
 
-    'POSTER_RELEASE_GROUPS' => ($poster_release_groups) ? $poster_release_groups : '',
+    'POSTER_RELEASE_GROUPS' => isset($poster_release_groups) && !empty($poster_release_groups) ? $poster_release_groups : '',
     'ATTACH_POSTER_RG_SIG'  => ($switch_poster_rg_sig) ? $switch_poster_rg_sig : false,
 
 	'U_VIEWTOPIC'           => ( $mode == 'reply' ) ? "viewtopic.php?" . POST_TOPIC_URL . "=$topic_id&amp;postorder=desc" : '',

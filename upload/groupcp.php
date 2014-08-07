@@ -47,7 +47,7 @@ set_die_append_msg();
 $group_id = isset($_REQUEST[POST_GROUPS_URL]) ? intval($_REQUEST[POST_GROUPS_URL]) : null;
 $start    = isset($_REQUEST['start']) ? abs(intval($_REQUEST['start'])) : 0;
 $per_page = $bb_cfg['groupcp_members_per_page'];
-$view_mode = isset($_REQUEST['view']) ? $_REQUEST['view'] : null;
+$view_mode = isset($_REQUEST['view']) ? (string) $_REQUEST['view'] : null;
 
 $group_info = array();
 $is_moderator = false;
