@@ -1,16 +1,13 @@
 <?php
 
-// ACP Header - START
 if (!empty($setmodules))
 {
-	if(IS_SUPER_ADMIN){
-	$module['TorrentPier']['Tracker_Config'] = basename(__FILE__);}
+	if (IS_SUPER_ADMIN) $module['TP']['TRACKER_CONFIG'] = basename(__FILE__);
 	return;
 }
 require('./pagestart.php');
-// ACP Header - END
 
-if(!IS_SUPER_ADMIN) bb_die($lang['NOT_ADMIN']);
+if (!IS_SUPER_ADMIN) bb_die($lang['NOT_ADMIN']);
 
 require(INC_DIR .'functions_admin_torrent.php');
 

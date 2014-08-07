@@ -1,13 +1,11 @@
 <?php
 
-// ACP Header - START
 if (!empty($setmodules))
 {
-	$module['Forums']['Manage'] = basename(__FILE__);
+	$module['FORUMS']['MANAGE'] = basename(__FILE__);
 	return;
 }
 require('./pagestart.php');
-// ACP Header - END
 
 require(INC_DIR .'functions_group.php');
 

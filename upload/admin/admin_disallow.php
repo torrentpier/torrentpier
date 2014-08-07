@@ -1,17 +1,15 @@
 <?php
 
-// ACP Header - START
 if (!empty($setmodules))
 {
-	$module['Users']['Disallow'] = basename(__FILE__);
+	$module['USERS']['DISALLOW'] = basename(__FILE__);
 	return;
 }
 require('./pagestart.php');
-// ACP Header - END
 
 $message = '';
 
-if( isset($_POST['add_name']) )
+if (isset($_POST['add_name']))
 {
 	include(INC_DIR .'functions_validate.php');
 
@@ -75,13 +73,13 @@ $disallowed = DB()->sql_fetchrowset($result);
 //
 $disallow_select = '<select name="disallowed_id">';
 
-if( count($disallowed) <= 0 )
+if (count($disallowed) <= 0)
 {
 	$disallow_select .= '<option value="">' . $lang['NO_DISALLOWED'] . '</option>';
 }
 else
 {
-	for( $i = 0; $i < count($disallowed); $i++ )
+	for ($i = 0; $i < count($disallowed); $i++)
 	{
 		$disallow_select .= '<option value="' . $disallowed[$i]['disallow_id'] . '">' . $disallowed[$i]['disallow_username'] . '</option>';
 	}

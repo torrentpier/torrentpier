@@ -9,10 +9,14 @@ require('./common.php');
 
 $ajax->init();
 
-// Handle "board disabled via ON/OFF trigger"
-if (file_exists(BB_DISABLED) || $bb_cfg['board_disable'])
+// Exit if board is disabled via ON/OFF trigger or by admin
+if ($bb_cfg['board_disable'])
 {
 	$ajax->ajax_die($lang['BOARD_DISABLE']);
+}
+else if (file_exists(BB_DISABLED))
+{
+	$ajax->ajax_die($lang['BOARD_DISABLE_CRON']);
 }
 
 // Load actions required modules

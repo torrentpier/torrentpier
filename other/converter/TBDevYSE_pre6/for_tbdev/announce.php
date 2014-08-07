@@ -17,7 +17,7 @@ require_once('./include/core_announce.php');
 
 $passkey = @$_GET['passkey'];
 
-if(!$passkey)
+if (!$passkey)
 {
 	err('Passkey required');
 }

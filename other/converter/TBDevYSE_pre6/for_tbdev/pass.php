@@ -29,7 +29,7 @@ if (empty($_POST['confirm']))
 }
 else
 {
-	if(!file_exists('passwords.php')) stderr($tracker_lang['error'], 'passwords.php not exists');
+	if (!file_exists('passwords.php')) stderr($tracker_lang['error'], 'passwords.php not exists');
 
 	include('passwords.php');
 	stdhead();

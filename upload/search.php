@@ -695,7 +695,7 @@ else
 			{
 				$template->assign_var('BB_DIE_APPEND_MSG', '
 					<form id="mod-action" method="POST" action="search.php">
-					    <input type="submit" name="add_my_post" value="'. $lang['RESTORE_ALL_POSTS'] .'" class="bold" onclick="if (!window.confirm( this.value +\'?\' )){ return false };" />
+						<input type="submit" name="add_my_post" value="'. $lang['RESTORE_ALL_POSTS'] .'" class="bold" onclick="if (!window.confirm( this.value +\'?\' )){ return false };" />
 					</form>
 					<br /><br />
 					<a href="index.php">'. $lang['INDEX_RETURN'] .'</a>
@@ -830,7 +830,7 @@ if ($items_display)
 	$pages = (!$items_count) ? 1 : ceil($items_count / $per_page);
 	$url = ($search_id) ? url_arg($url, 'id', $search_id) : $url;
 
-    generate_pagination($url, $items_count, $per_page, $start);
+	generate_pagination($url, $items_count, $per_page, $start);
 
 	$template->assign_vars(array(
 		'PAGE_TITLE'       => $lang['SEARCH'],
@@ -917,18 +917,12 @@ function prevent_huge_searches ($SQL)
 				bb_die('Too_many_search_results');
 			}
 		}
-### TEMP ###
-#		preg_match("#MATCH \((\w).*?\) AGAINST \('(.*?)' IN BOOLEAN MODE\)#", stripslashes($SQL['WHERE'][count($SQL['WHERE'])-1]), $m);
-#		$msg = date('m-d | H:i:s | ') . sprintf('%-18s', $GLOBALS['userdata']['username']) .' | '. sprintf('%04d', $row['rows_count']) .' | '. $m[1] .' | '. sprintf('%-40s', $m[2]) .' | ';
-#		bb_log($msg . str_compact(DB()->build_sql($SQL)) . LOG_LF, 'sql_text_search');
-### / TEMP ###
 	}
 }
 
 function username_search ($search_match)
 {
-	global $template, $lang;
-	global $gen_simple_header;
+	global $template, $lang, $gen_simple_header;
 
 	$username_list = '';
 

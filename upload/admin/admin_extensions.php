@@ -1,23 +1,20 @@
 <?php
 
-// ACP Header - START
 if (!empty($setmodules))
 {
 	$filename = basename(__FILE__);
-	$module['Attachments']['Extension_control'] = $filename .'?mode=extensions';
-	$module['Attachments']['Extension_group_manage'] = $filename .'?mode=groups';
+	$module['ATTACHMENTS']['EXTENSION_CONTROL'] = $filename .'?mode=extensions';
+	$module['ATTACHMENTS']['EXTENSION_GROUP_MANAGE'] = $filename .'?mode=groups';
 	return;
 }
+require('./pagestart.php');
 
 function update_attach_extensions () {
-  $GLOBALS['datastore']->update('attach_extensions');
+	$GLOBALS['datastore']->update('attach_extensions');
 }
 register_shutdown_function('update_attach_extensions');
 
-require('./pagestart.php');
-// ACP Header - END
-
-if ( ($attach_config['upload_dir'][0] == '/') || ( ($attach_config['upload_dir'][0] != '/') && ($attach_config['upload_dir'][1] == ':') ) )
+if (($attach_config['upload_dir'][0] == '/') || (($attach_config['upload_dir'][0] != '/') && ($attach_config['upload_dir'][1] == ':')))
 {
 	$upload_dir = $attach_config['upload_dir'];
 }
@@ -434,9 +431,9 @@ if ($mode == 'groups')
 		'S_FILESIZE' => size_select('add_size_select', $size),
 		'S_ADD_DOWNLOAD_MODE' => download_select('add_download_mode'),
 		'S_SELECT_CAT' => category_select('add_category'),
-		'S_CANCEL_ACTION' => "admin_extensions.php?mode=groups",
-		'S_ATTACH_ACTION' => "admin_extensions.php?mode=groups")
-	);
+		'S_CANCEL_ACTION' => 'admin_extensions.php?mode=groups',
+		'S_ATTACH_ACTION' => 'admin_extensions.php?mode=groups',
+	));
 
 	$sql = 'SELECT * FROM ' . BB_EXTENSION_GROUPS;
 
@@ -483,8 +480,8 @@ if ($mode == 'groups')
 			'MAX_FILESIZE' => $extension_group[$i]['max_filesize'],
 			'CAT_BOX' => ( $viewgroup == $extension_group[$i]['group_id'] ) ? '+' : '-',
 			'U_VIEWGROUP' => ( $viewgroup == $extension_group[$i]['group_id'] ) ? "admin_extensions.php?mode=groups" : "admin_extensions.php?mode=groups&" . POST_GROUPS_URL . "=" . $extension_group[$i]['group_id'],
-			'U_FORUM_PERMISSIONS' => "admin_extensions.php?mode=$mode&amp;e_mode=perm&amp;e_group=" . $extension_group[$i]['group_id'])
-		);
+			'U_FORUM_PERMISSIONS' => "admin_extensions.php?mode=$mode&amp;e_mode=perm&amp;e_group=" . $extension_group[$i]['group_id'],
+		));
 
 		if ($viewgroup && $viewgroup == $extension_group[$i]['group_id'])
 		{
@@ -690,8 +687,8 @@ if ($e_mode == 'perm' && $group)
 	$template->assign_vars(array(
 		'TPL_ATTACH_EXTENSION_GROUPS_PERMISSIONS' => true,
 		'L_GROUP_PERMISSIONS_TITLE' => sprintf($lang['GROUP_PERMISSIONS_TITLE_ADMIN'], trim($group_name)),
-		'A_PERM_ACTION' => "admin_extensions.php?mode=groups&amp;e_mode=perm&amp;e_group=$group")
-	);
+		'A_PERM_ACTION' => "admin_extensions.php?mode=groups&amp;e_mode=perm&amp;e_group=$group",
+	));
 
 	$forum_option_values = array(0 => $lang['PERM_ALL_FORUMS']);
 

@@ -5,55 +5,6 @@ if (PHP_VERSION < '5.3') die('TorrentPier II requires PHP version 5.3+. Your PHP
 if (!defined('BB_SCRIPT')) define('BB_SCRIPT', 'undefined');
 if (!defined('BB_CFG_LOADED')) trigger_error('bb_cfg not loaded', E_USER_ERROR);
 
-// Exit if board is disabled via ON/OFF trigger
-if (!defined('IN_ADMIN') && !defined('IN_AJAX') && !defined('IN_SERVICE'))
-{
-	if (file_exists(BB_DISABLED))
-	{
-		cron_release_deadlock();  // Если нужна разблокировка в случае залипания крона, отключающего форум
-		header('HTTP/1.0 503 Service Unavailable');
-		require(TEMPLATES_DIR .'board_disabled_exit.php');
-	}
-}
-
-//
-// Cron functions
-//
-function cron_release_deadlock ()
-{
-	if (file_exists(CRON_RUNNING))
-	{
-		if (TIMENOW - filemtime(CRON_RUNNING) > 2400)
-		{
-			cron_enable_board();
-			cron_release_file_lock();
-		}
-	}
-}
-
-function cron_release_file_lock ()
-{
-	$lock_released = @rename(CRON_RUNNING, CRON_ALLOWED);
-	cron_touch_lock_file(CRON_ALLOWED);
-}
-
-function cron_touch_lock_file ($lock_file)
-{
-	file_write(make_rand_str(20), $lock_file, 0, true, true);
-}
-
-function cron_enable_board ()
-{
-	@rename(BB_DISABLED, BB_ENABLED);
-#	bb_update_config(array('board_disable' => 0));
-}
-
-function cron_disable_board ()
-{
-	@rename(BB_ENABLED, BB_DISABLED);
-#	bb_update_config(array('board_disable' => 1));
-}
-
 // Define some basic configuration arrays
 unset($stopwords, $synonyms_match, $synonyms_replace);
 $userdata = $theme = $images = $lang = $nav_links = $bf = $attach_config = array();
@@ -528,7 +479,7 @@ if (!$bb_cfg['board_startdate'])
 }
 
 // Cron
-if ((empty($_POST) && !defined('IN_ADMIN') && !defined('IN_AJAX') && !defined('IN_SERVICE') && !file_exists(CRON_RUNNING) && ($bb_cfg['cron_enabled'] || defined('START_CRON'))) || defined('FORCE_CRON'))
+if ((empty($_POST) && !defined('IN_ADMIN') && !defined('IN_AJAX') && !file_exists(CRON_RUNNING) && ($bb_cfg['cron_enabled'] || defined('START_CRON'))) || defined('FORCE_CRON'))
 {
 	if (TIMENOW - $bb_cfg['cron_last_check'] > $bb_cfg['cron_check_interval'])
 	{
@@ -573,8 +524,55 @@ $dl_status_css = array(
 	DL_STATUS_CANCEL   => 'dlCancel',
 );
 
-// Show 'Board is disabled' message if needed
-if ($bb_cfg['board_disable'] && !defined('IN_ADMIN') && !defined('IN_LOGIN') && !defined('IN_AJAX'))
+// Exit if board is disabled via ON/OFF trigger or by admin
+if (($bb_cfg['board_disable'] || file_exists(BB_DISABLED)) && !defined('IN_ADMIN') && !defined('IN_AJAX') && !defined('IN_LOGIN'))
 {
-	bb_die($lang['BOARD_DISABLE']);
+	header('HTTP/1.0 503 Service Unavailable');
+	if ($bb_cfg['board_disable'])
+	{
+		// admin lock
+		send_no_cache_headers();
+		bb_die('BOARD_DISABLE');
+	}
+	else if (file_exists(BB_DISABLED))
+	{
+		// trigger lock
+		cron_release_deadlock();
+		send_no_cache_headers();
+		bb_die('BOARD_DISABLE_CRON');
+	}
+}
+
+// Cron functions
+function cron_release_deadlock ()
+{
+	if (file_exists(CRON_RUNNING))
+	{
+		if (TIMENOW - filemtime(CRON_RUNNING) > 2400)
+		{
+			cron_enable_board();
+			cron_release_file_lock();
+		}
+	}
+}
+
+function cron_release_file_lock ()
+{
+	$lock_released = @rename(CRON_RUNNING, CRON_ALLOWED);
+	cron_touch_lock_file(CRON_ALLOWED);
+}
+
+function cron_touch_lock_file ($lock_file)
+{
+	file_write(make_rand_str(20), $lock_file, 0, true, true);
+}
+
+function cron_enable_board ()
+{
+	@rename(BB_DISABLED, BB_ENABLED);
+}
+
+function cron_disable_board ()
+{
+	@rename(BB_ENABLED, BB_DISABLED);
 }

@@ -170,7 +170,7 @@
 		<p id="add_group_member" class="floatL">
 			<input type="text" name="username" maxlength="50" size="20" />
 			<input type="submit" name="add" value="{L_ADD_MEMBER}" class="mainoption" />
-			<input type="button" name="usersubmit" value="{L_FIND_USERNAME}" class="liteoption" onclick="window.open('{U_SEARCH_USER}', '_bbsearch', 'HEIGHT=250,resizable=yes,WIDTH=400');return false;" />
+			<input type="button" name="usersubmit" value="{L_FIND_USERNAME}" class="liteoption" onclick="window.open('{U_SEARCH_USER}', '_bbsearch', IWP_US);return false;" />
 		</p>
 		<p class="floatR" style="padding-top: 1px;">
 			<input type="submit" name="remove" value="{L_REMOVE_SELECTED}" class="mainoption" onclick="return confirm('{L_REMOVE_SELECTED}?');" />

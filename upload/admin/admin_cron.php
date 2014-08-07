@@ -1,12 +1,8 @@
 <?php
 
-// ACP Header - START
 if (!empty($setmodules))
 {
-	if (IS_SUPER_ADMIN)
-	{
-		$module['TorrentPier']['Cron'] = basename(__FILE__) . '?mode=list';
-	}
+	if (IS_SUPER_ADMIN) $module['TP']['CRON'] = basename(__FILE__) . '?mode=list';
 	return;
 }
 
@@ -24,7 +20,6 @@ if ($mode == 'run' && !$job_id)
 	redirect('admin/'.basename(__FILE__) . '?mode=list');
 }
 else require('./pagestart.php');
-// ACP Header - END
 
 if (!IS_SUPER_ADMIN) bb_die($lang['NOT_ADMIN']);
 
@@ -52,7 +47,7 @@ $template->assign_vars(array(
 	'CRON_CHECK_INTERVAL' => $new['cron_check_interval'],
 ));
 
-switch($mode)
+switch ($mode)
 {
 	case 'list':
 		$sql = DB()->fetch_rowset("SELECT * FROM ". BB_CRON ." ORDER BY cron_id");
@@ -60,7 +55,7 @@ switch($mode)
 		foreach ($sql as $i => $row)
 		{
 			$template->assign_block_vars('list', array(
-				'ROW_CLASS'	  => !($i % 2) ? 'row2' : 'row1',
+				'ROW_CLASS'   => !($i % 2) ? 'row2' : 'row1',
 				'JOB_ID'      => $i + 1,
 				'CRON_ID'     => $row['cron_id'],
 				'CRON_ACTIVE' => $row['cron_active'] ? '<img src="../images/icon_run.gif" alt="'. $lang['YES'] .'" />' : '<img src="../images/icon_delete.gif" alt="'. $lang['NO'] .'" />',
@@ -212,7 +207,7 @@ if ($submit)
 	}
 	else if (validate_cron_post($_POST) == 1)
 	{
-		if($_POST['mode'] == 'edit')
+		if ($_POST['mode'] == 'edit')
 		{
 			update_cron_job($_POST);
 		}

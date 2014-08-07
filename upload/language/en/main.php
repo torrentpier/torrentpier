@@ -101,7 +101,8 @@ $lang['ALL_CACHE_CLEARED'] = 'Cache has been cleared';
 $lang['ALL_TEMPLATE_CLEARED'] = 'Template cache has been cleared';
 $lang['DATASTORE'] = 'Datastore';
 $lang['DATASTORE_CLEARED'] = 'Datastore has been cleared';
-$lang['BOARD_DISABLE'] = 'Sorry, this board is currently not available. Please try again later.';
+$lang['BOARD_DISABLE'] = 'Sorry, this forum is disabled. Try to come back later';
+$lang['BOARD_DISABLE_CRON'] = 'Forum is down for maintenance. Try to come back later';
 
 $lang['LOADING'] = 'Loading...';
 $lang['JUMPBOX_TITLE'] = 'Select forum';
@@ -1713,7 +1714,7 @@ $lang['USERS'] = 'User Admin';
 $lang['GROUPS'] = 'Group Admin';
 $lang['FORUMS'] = 'Forum Admin';
 $lang['MODS'] = 'Modifications';
-$lang['TORRENTPIER'] = 'Product configuration';
+$lang['TP'] = 'TorrentPier II';
 
 $lang['CONFIGURATION'] = 'Configuration';
 $lang['MANAGE'] = 'Management';
@@ -1939,7 +1940,7 @@ $lang['ENABLE_PRUNE'] = 'Enable Forum Pruning';
 $lang['ALLOW_BBCODE'] = 'Allow BBCode';
 $lang['ALLOW_SMILIES'] = 'Allow Smilies';
 $lang['SMILIES_PATH'] = 'Smilies Storage Path';
-$lang['SMILIES_PATH_EXPLAIN'] = 'Path under your phpBB root dir, e.g. images/smiles';
+$lang['SMILIES_PATH_EXPLAIN'] = 'Path under your TorrentPier II root dir, e.g. images/smiles';
 $lang['ALLOW_SIG'] = 'Allow Signatures';
 $lang['MAX_SIG_LENGTH'] = 'Maximum signature length';
 $lang['MAX_SIG_LENGTH_EXPLAIN'] = 'Maximum number of characters in user signatures';
@@ -2334,7 +2335,7 @@ $lang['ATTACH_NUMBER_SETTINGS'] = 'Attachment Number Settings';
 $lang['ATTACH_OPTIONS_SETTINGS'] = 'Attachment Options';
 
 $lang['UPLOAD_DIRECTORY'] = 'Upload Directory';
-$lang['UPLOAD_DIRECTORY_EXPLAIN'] = 'Enter the relative path from your phpBB2 installation to the Attachments upload directory. For example, enter \'files\' if your phpBB2 Installation is located at http://www.yourdomain.com/phpBB2 and the Attachment Upload Directory is located at http://www.yourdomain.com/phpBB2/files.';
+$lang['UPLOAD_DIRECTORY_EXPLAIN'] = 'Enter the relative path from your TorrentPier II installation to the Attachments upload directory. For example, enter \'files\' if your TorrentPier II Installation is located at http://www.yourdomain.com/torrentpier and the Attachment Upload Directory is located at http://www.yourdomain.com/torrentpier/files.';
 $lang['ATTACH_IMG_PATH'] = 'Attachment Posting Icon';
 $lang['ATTACH_IMG_PATH_EXPLAIN'] = 'This Image is displayed next to Attachment Links in individual Postings. Leave this field empty if you don\'t want an icon to be displayed. This Setting will be overwritten by the Settings in Extension Groups Management.';
 $lang['ATTACH_TOPIC_ICON'] = 'Attachment Topic Icon';
@@ -2776,8 +2777,6 @@ $lang['SIZE_DATABASE'] = 'Database size';
 $lang['ACTIVE_PARAMETERS'] = 'Active parameters';
 $lang['POSTS_LAST_CYCLE'] = 'Processed post(s) on last cycle';
 $lang['BOARD_STATUS'] = 'Board status';
-$lang['BOARD_DISABLED'] = 'Disabled';
-$lang['BOARD_ENABLED'] = 'Enabled';
 
 $lang['INFO_ESTIMATED_VALUES'] = '(*) All the estimated values are calculated approximately<br />
 			based on the current completed percent and may not represent the actual final values.<br />
@@ -2990,6 +2989,8 @@ $lang['SITEMAP_GOOGLE_1'] = 'Register your site at <a href="http://www.google.co
 $lang['SITEMAP_GOOGLE_2'] = '<a href="https://www.google.com/webmasters/tools/sitemap-list" target="_blank">Add sitemap</a> of site you registered.';
 $lang['SITEMAP_YANDEX_1'] = 'Register your site at <a href="http://webmaster.yandex.ru/sites/" target="_blank">Yandex Webmaster</a> using your Yandex account.';
 $lang['SITEMAP_YANDEX_2'] = '<a href="http://webmaster.yandex.ru/site/map.xml" target="_blank">Add sitemap</a> of site you registered.';
+$lang['SITEMAP_BING_1'] = 'Register your site at <a href="https://www.bing.com/webmaster/" target="_blank">Bing Webmaster</a> using your Microsoft account.';
+$lang['SITEMAP_BING_2'] = 'Add sitemap of site you registered in its settings.';
 $lang['SITEMAP_ADD_TITLE'] = 'Additional pages for sitemap';
 $lang['SITEMAP_ADD_PAGE'] = 'Additional pages';
 $lang['SITEMAP_ADD_EXP_1'] = 'You can specify additional pages on your site (for example, <b>http://torrentpier.me/memberlist.php</b>) which should be included in your sitemap file that you creating.';

@@ -536,7 +536,7 @@ class bbcode
 			'[/size]'    => '</span>',
 			'[/align]'   => '</span>',
 			'[/font]'    => '</span>',
-			'[tab]'      => ' ',
+			'[tab]'      => '&nbsp;&nbsp;&nbsp;&nbsp;',
 			'[br]'       => "\n\n",
 			'[hr]'       => $tpl['hr'],
 			'[b]'        => '<span class="post-b">',
@@ -623,9 +623,9 @@ class bbcode
 		static $spam_words = null;
 		static $spam_replace = ' СПАМ';
 
-		if (isset($this))
+		if (isset($text))
 		{
-			$found_spam =& $this->found_spam;
+			$found_spam =& $text->found_spam;
 		}
 
 		// set $spam_words and $spam_replace

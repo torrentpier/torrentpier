@@ -1,13 +1,11 @@
 <?php
 
-// ACP Header - START
 if (!empty($setmodules))
 {
-	$module['Forums']['Permissions'] = basename(__FILE__);
+	$module['FORUMS']['PERMISSIONS'] = basename(__FILE__);
 	return;
 }
 require('./pagestart.php');
-// ACP Header - END
 
 $forum_auth_fields = array(
 	'auth_view',
@@ -146,8 +144,8 @@ if (empty($forum_id))
 	// Output the selection table if no forum id was specified
 	$template->assign_vars(array(
 		'TPL_AUTH_SELECT_FORUM' => true,
-		'S_AUTH_ACTION'  => "admin_forumauth.php",
-		'S_AUTH_SELECT'  => get_forum_select('admin', 'f', null, 80),
+		'S_AUTH_ACTION' => 'admin_forumauth.php',
+		'S_AUTH_SELECT' => get_forum_select('admin', 'f', null, 80),
 	));
 
 }
@@ -243,11 +241,11 @@ else
 
 	$template->assign_vars(array(
 		'TPL_EDIT_FORUM_AUTH' => true,
-		'FORUM_NAME' => htmlCHR($forum_name),
-		'U_SWITCH_MODE' => $u_switch_mode,
-		'S_FORUMAUTH_ACTION' => "admin_forumauth.php",
-		'S_COLUMN_SPAN' => $s_column_span,
-		'S_HIDDEN_FIELDS' => $s_hidden_fields,
+		'FORUM_NAME'          => htmlCHR($forum_name),
+		'U_SWITCH_MODE'       => $u_switch_mode,
+		'S_FORUMAUTH_ACTION'  => 'admin_forumauth.php',
+		'S_COLUMN_SPAN'       => $s_column_span,
+		'S_HIDDEN_FIELDS'     => $s_hidden_fields,
 	));
 }
 

@@ -33,13 +33,15 @@ var hidePostImg = false;
 <!-- ENDIF / INCLUDE_BBCODE_JS -->
 
 <script type="text/javascript">
-var BB_ROOT       = "{#BB_ROOT}";
-var cookieDomain  = "{$bb_cfg['cookie_domain']}";
-var cookiePath    = "{$bb_cfg['script_path']}";
-var cookieSecure  = {$bb_cfg['cookie_secure']};
-var cookiePrefix  = "{$bb_cfg['cookie_prefix']}";
-var LOGGED_IN     = {LOGGED_IN};
-var InfoWinParams = 'HEIGHT=510,resizable=yes,WIDTH=780';
+var BB_ROOT      = "{#BB_ROOT}";
+var cookieDomain = "{$bb_cfg['cookie_domain']}";
+var cookiePath   = "{$bb_cfg['script_path']}";
+var cookiePrefix = "{$bb_cfg['cookie_prefix']}";
+var cookieSecure = {$bb_cfg['cookie_secure']};
+var LOGGED_IN    = {LOGGED_IN};
+var IWP          = 'HEIGHT=510,WIDTH=780,resizable=yes';
+var IWP_US       = 'HEIGHT=250,WIDTH=400,resizable=yes';
+var IWP_SM       = 'HEIGHT=420,WIDTH=470,resizable=yes,scrollbars=yes';
 
 var user = {
 	opt_js: {USER_OPTIONS_JS},

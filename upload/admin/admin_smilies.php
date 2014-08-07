@@ -1,17 +1,14 @@
 <?php
 
-// ACP Header - START
 if (!empty($setmodules))
 {
-	$module['General']['Smilies'] = basename(__FILE__);
+	$module['GENERAL']['SMILIES'] = basename(__FILE__);
 	return;
 }
-
 require('./pagestart.php');
-// ACP Header - END
 
 // Check to see what mode we should operate in
-if( isset($_POST['mode']) || isset($_GET['mode']) )
+if (isset($_POST['mode']) || isset($_GET['mode']))
 {
 	$mode = ( isset($_POST['mode']) ) ? $_POST['mode'] : $_GET['mode'];
 	$mode = htmlspecialchars($mode);

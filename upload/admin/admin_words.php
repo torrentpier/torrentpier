@@ -1,13 +1,11 @@
 <?php
 
-// ACP Header - START
 if (!empty($setmodules))
 {
-	$module['General']['Word_Censor'] = basename(__FILE__);
+	$module['GENERAL']['WORD_CENSOR'] = basename(__FILE__);
 	return;
 }
 require('./pagestart.php');
-// ACP Header - END
 
 if (!$bb_cfg['use_word_censor'])
 {

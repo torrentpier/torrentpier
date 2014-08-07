@@ -2,7 +2,7 @@
 
 if (!empty($setmodules))
 {
-	$module['Mods']['SITEMAP'] = basename(__FILE__);
+	$module['MODS']['SITEMAP'] = basename(__FILE__);
 	return;
 }
 require('./pagestart.php');

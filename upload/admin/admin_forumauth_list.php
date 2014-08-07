@@ -1,13 +1,11 @@
 <?php
 
-// ACP Header - START
 if (!empty($setmodules))
 {
-	$module['Forums']['Permissions_List'] = basename(__FILE__);
+	$module['FORUMS']['PERMISSIONS_LIST'] = basename(__FILE__);
 	return;
 }
 require('./pagestart.php');
-// ACP Header - END
 
 //  View  Read  Post  Reply  Edit  Delete  Sticky  Announce  Vote  Poll  PostAttach  Download
 $simple_auth_ary = array(
@@ -354,12 +352,12 @@ else
 	$s_hidden_fields = '<input type="hidden" name="' . POST_CAT_URL . '" value="' . $cat_id . '">';
 
 	$template->assign_vars(array(
-		'TPL_AUTH_CAT' => true,
-		'CAT_NAME' => htmlCHR($cat_name),
-		'S_FORUMAUTH_ACTION' => "admin_forumauth_list.php",
-		'S_COLUMN_SPAN' => count($forum_auth_fields)+1,
-		'S_HIDDEN_FIELDS' => $s_hidden_fields)
-	);
+		'TPL_AUTH_CAT'       => true,
+		'CAT_NAME'           => htmlCHR($cat_name),
+		'S_FORUMAUTH_ACTION' => 'admin_forumauth_list.php',
+		'S_COLUMN_SPAN'      => count($forum_auth_fields) + 1,
+		'S_HIDDEN_FIELDS'    => $s_hidden_fields,
+	));
 }
 
 print_page('admin_forumauth_list.tpl', 'admin');

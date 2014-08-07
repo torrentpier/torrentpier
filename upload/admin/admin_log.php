@@ -1,13 +1,11 @@
 <?php
 
-// ACP Header - START
 if (!empty($setmodules))
 {
-	$module['Users']['Actions_log'] = basename(__FILE__);
+	$module['USERS']['ACTIONS_LOG'] = basename(__FILE__);
 	return;
 }
 require('./pagestart.php');
-// ACP Header - END
 
 $datastore->enqueue(array(
 	'moderators',

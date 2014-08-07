@@ -1829,6 +1829,12 @@ function bb_die ($msg_text)
 		require(PAGE_HEADER);
 	}
 
+	// Check for lang variable
+	if (!empty($lang[$msg_text]))
+	{
+		$msg_text = $lang[$msg_text];
+	}
+
 	$template->assign_vars(array(
 		'TPL_BB_DIE'   => true,
 		'MESSAGE_TEXT' => $msg_text,

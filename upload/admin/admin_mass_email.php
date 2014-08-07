@@ -1,13 +1,11 @@
 <?php
 
-// ACP Header - START
 if (!empty($setmodules))
 {
-	$module['Mods']['Mass_Email'] = basename(__FILE__);
+	$module['MODS']['MASS_EMAIL'] = basename(__FILE__);
 	return;
 }
 require('./pagestart.php');
-// ACP Header - END
 
 @set_time_limit(1200);
 

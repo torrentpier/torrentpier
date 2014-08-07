@@ -5,32 +5,33 @@ require('./pagestart.php');
 // Generate relevant output
 if (isset($_GET['pane']) && $_GET['pane'] == 'left')
 {
-	$dir = @opendir('.');
-
-	$setmodules = 1;
-	while ($file = @readdir($dir))
+	if (!$module = CACHE('bb_cache')->get('admin_module'))
 	{
-		if (preg_match('/^admin_.*?\.php$/', $file))
+		$dir = @opendir('.');
+		$setmodules = 1;
+		while ($file = @readdir($dir))
 		{
-			include('./' . $file);
+			if (preg_match('/^admin_.*?\.php$/', $file))
+			{
+				include('./' . $file);
+			}
 		}
+		unset($setmodules);
+		@closedir($dir);
+		CACHE('bb_cache')->set('admin_module', $module, 600);
 	}
-
-	@closedir($dir);
-
-	unset($setmodules);
 
 	$template->assign_vars(array(
 		'TPL_ADMIN_NAVIGATE' => true,
-		'U_FORUM_INDEX' => "../index.php",
-		'U_ADMIN_INDEX' => "index.php?pane=right",
+		'U_FORUM_INDEX' => '../index.php',
+		'U_ADMIN_INDEX' => 'index.php?pane=right',
 	));
 
 	ksort($module);
 
 	while (list($cat, $action_array) = each($module))
 	{
-		$cat = (!empty($lang[strtoupper($cat)])) ? $lang[strtoupper($cat)] : preg_replace('/_/', ' ', $cat);
+		$cat = (!empty($lang[$cat])) ? $lang[$cat] : preg_replace('/_/', ' ', $cat);
 
 		$template->assign_block_vars('catrow', array(
 			'ADMIN_CATEGORY' => $cat,
@@ -39,17 +40,17 @@ if (isset($_GET['pane']) && $_GET['pane'] == 'left')
 		ksort($action_array);
 
 		$row_count = 0;
-		while (list($action, $file)	= each($action_array))
+		while (list($action, $file) = each($action_array))
 		{
 			$row_class = !($row_count % 2) ? 'row1' : 'row2';
 
-			$action = ( !empty($lang[strtoupper($action)]) ) ? $lang[strtoupper($action)] : preg_replace('/_/', ' ', $action);
+			$action = (!empty($lang[$action])) ? $lang[$action] : preg_replace('/_/', ' ', $action);
 
 			$template->assign_block_vars('catrow.modulerow', array(
 				'ROW_CLASS' => $row_class,
 				'ADMIN_MODULE' => $action,
-				'U_ADMIN_MODULE' => $file)
-			);
+				'U_ADMIN_MODULE' => $file,
+			));
 			$row_count++;
 		}
 	}
@@ -67,9 +68,9 @@ elseif (isset($_GET['pane']) && $_GET['pane'] == 'right')
 	$start_date   = bb_date($bb_cfg['board_startdate']);
 	$boarddays    = (TIMENOW - $bb_cfg['board_startdate']) / 86400;
 
-	$posts_per_day = sprintf('%.2f', $total_posts / $boarddays);
+	$posts_per_day  = sprintf('%.2f', $total_posts / $boarddays);
 	$topics_per_day = sprintf('%.2f', $total_topics / $boarddays);
-	$users_per_day = sprintf('%.2f', $total_users / $boarddays);
+	$users_per_day  = sprintf('%.2f', $total_users / $boarddays);
 
 	$avatar_dir_size = 0;
 
@@ -91,17 +92,17 @@ elseif (isset($_GET['pane']) && $_GET['pane'] == 'right')
 		$avatar_dir_size = $lang['NOT_AVAILABLE'];
 	}
 
-	if(intval($posts_per_day) > $total_posts)
+	if (intval($posts_per_day) > $total_posts)
 	{
 		$posts_per_day = $total_posts;
 	}
 
-	if(intval($topics_per_day) > $total_topics)
+	if (intval($topics_per_day) > $total_topics)
 	{
 		$topics_per_day = $total_topics;
 	}
 
-	if($users_per_day > $total_users)
+	if ($users_per_day > $total_users)
 	{
 		$users_per_day = $total_users;
 	}
@@ -196,7 +197,7 @@ elseif (isset($_GET['pane']) && $_GET['pane'] == 'right')
 		{
 			$registered_users = $hidden_users = 0;
 
-			for ($i=0, $cnt=count($onlinerow_reg); $i < $cnt; $i++)
+			for ($i = 0, $cnt = count($onlinerow_reg); $i < $cnt; $i++)
 			{
 				if (!in_array($onlinerow_reg[$i]['user_id'], $reg_userid_ary))
 				{
@@ -232,11 +233,11 @@ elseif (isset($_GET['pane']) && $_GET['pane'] == 'right')
 		}
 
 		// Guest users
-		if( count($onlinerow_guest) )
+		if (count($onlinerow_guest))
 		{
 			$guest_users = 0;
 
-			for($i = 0; $i < count($onlinerow_guest); $i++)
+			for ($i = 0; $i < count($onlinerow_guest); $i++)
 			{
 				$guest_userip_ary[] = $onlinerow_guest[$i]['session_ip'];
 				$guest_users++;
@@ -258,7 +259,7 @@ elseif (isset($_GET['pane']) && $_GET['pane'] == 'right')
 	else
 	{
 		$template->assign_vars(array(
-			'USERS_ONLINE_HREF' => "index.php?pane=right&users_online=1",
+			'USERS_ONLINE_HREF' => 'index.php?pane=right&users_online=1',
 		));
 	}
 }

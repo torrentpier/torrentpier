@@ -231,17 +231,17 @@ function append_images($tor)
 	switch(TR_TYPE)
 	{
 		case 'yse':
-			if(!empty($tor['image1']))
+			if (!empty($tor['image1']))
 			{
 				$poster = "[img=right]".make_img_path($tor['image1'])."[/img]";
 			}
-			if(!empty($tor['image2']))
+			if (!empty($tor['image2']))
 			{
 				$screens = '[spoiler="Скриншоты"][img]'.make_img_path($tor['image2'])."[/img][/spoiler]";
 			}
 			break;
 		case 'sky':
-			if(!empty($tor['poster']))
+			if (!empty($tor['poster']))
 			{
 				$poster = "[img=right]".make_img_path($tor['poster'])."[/img]";
 			}
@@ -249,9 +249,9 @@ function append_images($tor)
 			if ($has_screens)
 			{
 				$screens .= '[spoiler="Скриншоты"]';
-				for ($i = 1; $i<=4; $i++)
+				for ($i = 1; $i <= 4; $i++)
 				{
-					if(!empty($tor['screenshot'.$i]))
+					if (!empty($tor['screenshot'.$i]))
 					{
 						$screens .= "[img]".make_img_path($tor['screenshot'.$i])."[/img] \n";
 					}
@@ -347,7 +347,7 @@ function convert_torrent($torrent)
 		"topic_id"       => $torrent['topic_id'],
 		"forum_id"       => $torrent['category'],
 		"attach_id"      => $torrent['attach_id'],
-		"size"   	     => $torrent['size'],
+		"size"           => $torrent['size'],
 		"reg_time"       => $torrent['added'],
 		"complete_count" => $torrent['times_completed'],
 		"seeder_last_seen" => $torrent['lastseed'],
@@ -406,7 +406,7 @@ function convert_cat($forum, $allow_torrents = true)
 		"forum_name"   => $forum['name'],
 		"forum_order"  => $forum['sort'],
 		"allow_reg_tracker" => $allow_torrents,
-		"allow_porno_topic"    => $allow_torrents,
+		"allow_porno_topic" => $allow_torrents,
 	);
 
 	$columns = $values = array();

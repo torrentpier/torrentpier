@@ -1,16 +1,13 @@
 <?php
 
-// ACP Header - START
 if (!empty($setmodules))
 {
-	$module['Forums']['Prune'] = basename(__FILE__);
+	$module['FORUMS']['PRUNE'] = basename(__FILE__);
 	return;
 }
 require('./pagestart.php');
-// ACP Header - END
 
 $all_forums = -1;
-
 $pruned_total = 0;
 $prune_performed = false;
 
