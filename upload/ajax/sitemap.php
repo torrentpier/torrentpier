@@ -40,22 +40,16 @@ switch ($mode)
 			$html .= '<br />'.$lang['SITEMAP_NOTIFY_SEARCH'].' Yandex: <font style="color: red;">'.$lang['SITEMAP_ERROR'].'</font> URL: <a href="http://ping.blogs.yandex.ru/ping?sitemap='.urlencode($map_link).'" target="_blank">http://ping.blogs.yandex.ru/ping?sitemap='.$map_link.'</a>';
 		}
 
-		if ($map->send_url("http://www.bing.com/webmaster/ping.aspx?siteMap=", $map_link)) {
+		if ($map->send_url("http://www.bing.com/ping?sitemap=", $map_link)) {
 			$html .= '<br />'.$lang['SITEMAP_NOTIFY_SEARCH'].' Bing: <font style="color: green;">'.$lang['SITEMAP_SENT'].'</font>';
 		} else {
-			$html .= '<br />'.$lang['SITEMAP_NOTIFY_SEARCH'].' Bing: <font style="color: red;">'.$lang['SITEMAP_ERROR'].'</font> URL: <a href="http://www.bing.com/webmaster/ping.aspx?siteMap='.urlencode($map_link).'" target="_blank">http://www.bing.com/webmaster/ping.aspx?siteMap='.$map_link.'</a>';
+			$html .= '<br />'.$lang['SITEMAP_NOTIFY_SEARCH'].' Bing: <font style="color: red;">'.$lang['SITEMAP_ERROR'].'</font> URL: <a href="http://www.bing.com/ping?sitemap='.urlencode($map_link).'" target="_blank">http://www.bing.com/ping?sitemap='.$map_link.'</a>';
 		}
 
 		if (strpos($map->send_url("http://rpc.weblogs.com/pingSiteForm?name=InfraBlog&url=", $map_link), "Thanks for the ping") !== false) {
 			$html .= '<br />'.$lang['SITEMAP_NOTIFY_SEARCH'].' Weblogs: <font style="color: green;">'.$lang['SITEMAP_SENT'].'</font>';
 		} else {
 			$html .= '<br />'.$lang['SITEMAP_NOTIFY_SEARCH'].' Weblogs: <font style="color: red;">'.$lang['SITEMAP_ERROR'].'</font> URL: <a href="http://rpc.weblogs.com/pingSiteForm?name=InfraBlog&url='.urlencode($map_link).'" target="_blank">http://rpc.weblogs.com/pingSiteForm?name=InfraBlog&url='.$map_link.'</a>';
-		}
-
-		if ($map->send_url("http://search.yahooapis.com/SiteExplorerService/V1/ping?sitemap=", $map_link)) {
-			$html .= '<br />'.$lang['SITEMAP_NOTIFY_SEARCH'].' Yahoo: <font style="color: green;">'.$lang['SITEMAP_SENT'].'</font>';
-		} else {
-			$html .= '<br />'.$lang['SITEMAP_NOTIFY_SEARCH'].' Yahoo: <font style="color: red;">'.$lang['SITEMAP_ERROR'].'</font> URL: <a href="http://search.yahooapis.com/SiteExplorerService/V1/ping?sitemap='.urlencode($map_link).'" target="_blank">http://search.yahooapis.com/SiteExplorerService/V1/ping?sitemap='.$map_link.'</a>';
 		}
 	break;
 }

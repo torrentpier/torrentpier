@@ -13,7 +13,6 @@ if (@file_exists(BB_ROOT. "/sitemap/sitemap.xml"))
 
 	$map->send_url("http://google.com/webmasters/sitemaps/ping?sitemap=", $map_link);
 	$map->send_url("http://ping.blogs.yandex.ru/ping?sitemap=", $map_link);
-	$map->send_url("http://www.bing.com/webmaster/ping.aspx?siteMap=", $map_link);
+	$map->send_url("http://www.bing.com/ping?sitemap=", $map_link);
 	$map->send_url("http://rpc.weblogs.com/pingSiteForm?name=InfraBlog&url=", $map_link);
-	$map->send_url("http://search.yahooapis.com/SiteExplorerService/V1/ping?sitemap=", $map_link);
 }

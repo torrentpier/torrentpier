@@ -98,6 +98,8 @@ ajax.callback.sitemap = function(data) {
 			<p>2. {L_SITEMAP_GOOGLE_2}</p>
 			<p>3. {L_SITEMAP_YANDEX_1}</p>
 			<p>4. {L_SITEMAP_YANDEX_2}</p>
+			<p>5. {L_SITEMAP_BING_1}</p>
+			<p>6. {L_SITEMAP_BING_2}</p>
 		</td>
 	</tr>
 	<tr>

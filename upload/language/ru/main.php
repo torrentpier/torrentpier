@@ -2989,6 +2989,8 @@ $lang['SITEMAP_GOOGLE_1'] = 'Зарегистрируйте ваш сайт в <
 $lang['SITEMAP_GOOGLE_2'] = '<a href="https://www.google.com/webmasters/tools/sitemap-list" target="_blank">Добавьте файл sitemap</a> зарегистрированного вами сайта.';
 $lang['SITEMAP_YANDEX_1'] = 'Зарегистрируйте ваш сайт в <a href="http://webmaster.yandex.ru/sites/" target="_blank">Yandex Webmaster</a> с использованием вашей учетной записи Yandex.';
 $lang['SITEMAP_YANDEX_2'] = '<a href="http://webmaster.yandex.ru/site/map.xml" target="_blank">Добавьте файл sitemap</a> зарегистрированного вами сайта.';
+$lang['SITEMAP_BING_1'] = 'Зарегистрируйте ваш сайт в <a href="https://www.bing.com/webmaster/" target="_blank">Bing Webmaster</a> с использованием вашей учетной записи Microsoft.';
+$lang['SITEMAP_BING_2'] = 'Добавьте файл sitemap зарегистрированного вами сайта в его настройках.';
 $lang['SITEMAP_ADD_TITLE'] = 'Дополнительные страницы для sitemap';
 $lang['SITEMAP_ADD_PAGE'] = 'Дополнительные страницы';
 $lang['SITEMAP_ADD_EXP_1'] = 'Здесь вы можете указать дополнительные страницы сайта (например <b>http://torrentpier.me/memberlist.php</b>), которые должны быть включены в создаваемый файл вами файл sitemap.';
