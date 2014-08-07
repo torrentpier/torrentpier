@@ -93,12 +93,15 @@
 	<td><a href="{U_GROUP_CONFIG}">{L_GROUP_GOTO_CONFIG}</a></td>
 </tr>
 <!-- END switch_mod_option -->
+
 </table>
 
 </form>
 
 <div class="spacer_10"></div>
+<p class="nav"><a href="{U_GROUP_MEMBERS}" name="members">{L_GROUP_MEMBERS}</a>&nbsp;::&nbsp;<a href="{U_GROUP_RELEASES}" name="releases">{L_GROUPS_RELEASES}</a></p>
 
+<!-- IF MEMBERS -->
 <form action="{S_GROUPCP_ACTION}" method="post" name="post">
 {S_HIDDEN_FIELDS}
 
@@ -241,8 +244,52 @@
 </tfoot>
 </table>
 <!-- ENDIF / PENDING_USERS -->
-
+	
 </form>
+<!-- ENDIF / MEMBERS -->
+
+<!-- IF RELEASES -->
+<table class="forumline tablesorter">
+	<thead>
+	<tr>
+		<th class="{sorter: false}" ><b class="tbs-text">#</b></th>
+		<th class="{sorter: false}" ><b class="tbs-text">{L_AVATAR}</b></th>
+		<th class="{sorter: 'text'}" ><b class="tbs-text">{L_USERNAME}</b></th>
+		<th class="{sorter: 'text'}" ><b class="tbs-text">{L_TOPIC}</b></th>
+		<th class="{sorter: 'text'}" ><b class="tbs-text">{L_FORUM}</b></th>
+		<th class="{sorter: 'digit'}" width="3%"><b class="tbs-text">{L_BT_CREATED}</b></th>
+	</tr>
+	<tr>
+		<td class="catTitle" colspan="9">{L_GROUPS_RELEASES}</td>
+	</tr>
+	</thead>
+	<!-- BEGIN releases -->
+	<tr class="{releases.ROW_CLASS} tCenter">
+		<td width="3%">{releases.ROW_NUMBER}</td>
+		<td width="3%">{releases.AVATAR_IMG}</td>
+		<td><b>{releases.RELEASER}</b></td>
+		<td>{releases.RELEASE_NAME}</td>
+		<td>{releases.RELEASE_FORUM}</td>
+		<td>{releases.RELEASE_TIME}</td>
+	</tr>
+	<!-- END releases -->
+	<tfoot>
+	<tr>
+		<td class="cat" colspan="9">&nbsp;</td>
+	</tr>
+	</tfoot>
+</table>
+
+<div class="bottom_info">
+
+	<div class="nav">
+		<p style="float: left">{PAGE_NUMBER}</p>
+		<p style="float: right">{PAGINATION}</p>
+		<div class="clear"></div>
+	</div>
+
+</div>
+<!-- ENDIF / RELEASES -->
 
 <!--========================================================================-->
 <!-- ENDIF / GROUP_INFO -->

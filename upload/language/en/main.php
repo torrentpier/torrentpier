@@ -778,6 +778,7 @@ $lang['POST_RELEASE_FROM_GROUP'] = 'Post release from group';
 $lang['CHOOSE_RELEASE_GROUP'] = 'Select release group';
 $lang['ATTACH_RG_SIG'] = 'Attach release group signature';
 $lang['RELEASE_FROM_RG'] = 'Release was prepared by';
+$lang['GROUPS_RELEASES'] = 'Group\'s releases';
 
 //
 // Search

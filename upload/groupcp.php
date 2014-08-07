@@ -22,7 +22,7 @@ function generate_user_info(&$row, $date_format, $group_mod, &$from, &$posts, &$
 	$user_time   = ( !empty($row['user_time']) ) ? bb_date($row['user_time']) : $lang['NONE'];
 	$posts  = ( $row['user_posts'] ) ? $row['user_posts'] : 0;
 	$pm     = ($bb_cfg['text_buttons']) ? '<a class="txtb" href="'. (PM_URL . "?mode=post&amp;". POST_USERS_URL ."=".$row['user_id']) .'">'. $lang['SEND_PM_TXTB'] .'</a>' : '<a href="' . (PM_URL . "?mode=post&amp;". POST_USERS_URL ."=".$row['user_id']) .'"><img src="' . $images['icon_pm'] . '" alt="' . $lang['SEND_PRIVATE_MESSAGE'] . '" title="' . $lang['SEND_PRIVATE_MESSAGE'] . '" border="0" /></a>';
-	$avatar = get_avatar($row['user_id'], $row['avatar_ext_id'], !bf($row['user_opt'], 'user_opt', 'dis_avatar'), true, 50, 50);
+	$avatar = get_avatar($row['user_id'], $row['avatar_ext_id'], !bf($row['user_opt'], 'user_opt', 'dis_avatar'), 50, 50);
 
 	if (bf($row['user_opt'], 'user_opt', 'user_viewemail') || $group_mod)
 	{
@@ -47,6 +47,7 @@ set_die_append_msg();
 $group_id = isset($_REQUEST[POST_GROUPS_URL]) ? intval($_REQUEST[POST_GROUPS_URL]) : null;
 $start    = isset($_REQUEST['start']) ? abs(intval($_REQUEST['start'])) : 0;
 $per_page = $bb_cfg['groupcp_members_per_page'];
+$view_mode = isset($_REQUEST['view']) ? $_REQUEST['view'] : null;
 
 $group_info = array();
 $is_moderator = false;
@@ -380,51 +381,6 @@ else
 		WHERE user_id = ". $group_info['group_moderator'] ."
 	");
 
-	// Members
-	$count_members = DB()->fetch_rowset("
-		SELECT u.username, u.user_rank, u.user_id, u.user_opt, u.user_posts, u.user_regdate, u.user_from, u.user_website, u.user_email, ug.user_pending, ug.user_time
-		FROM ". BB_USER_GROUP ." ug, ". BB_USERS ." u
-		WHERE ug.group_id = $group_id
-			AND ug.user_pending = 0
-			AND ug.user_id <> ". $group_moderator['user_id'] ."
-			AND u.user_id = ug.user_id
-		ORDER BY u.username
-	");
-	$count_members = count($count_members);
-
-	// Get user information for this group
-	$modgroup_pending_count = 0;
-
-	// Members
-	$group_members = DB()->fetch_rowset("
-		SELECT u.username, u.avatar_ext_id, u.user_rank, u.user_id, u.user_opt, u.user_posts, u.user_regdate, u.user_from, u.user_website, u.user_email, ug.user_pending, ug.user_time
-		FROM ". BB_USER_GROUP ." ug, ". BB_USERS ." u
-		WHERE ug.group_id = $group_id
-			AND ug.user_pending = 0
-			AND ug.user_id <> ". $group_moderator['user_id'] ."
-			AND u.user_id = ug.user_id
-		ORDER BY u.username
-		LIMIT $start, $per_page
-	");
-	$members_count = count($group_members);
-
-	generate_pagination(GROUP_URL . $group_id, $count_members, $per_page, $start);
-
-	// Pending
-	if ($is_moderator)
-	{
-		$modgroup_pending_list = DB()->fetch_rowset("
-			SELECT u.username, u.avatar_ext_id, u.user_rank, u.user_id, u.user_opt, u.user_posts, u.user_regdate, u.user_from, u.user_website, u.user_email
-			FROM ". BB_USER_GROUP ." ug, ". BB_USERS ." u
-			WHERE ug.group_id = $group_id
-				AND ug.user_pending = 1
-				AND u.user_id = ug.user_id
-			ORDER BY u.username
-			LIMIT 200
-		");
-		$modgroup_pending_count = count($modgroup_pending_list);
-	}
-
 	// Current user membership
 	$is_group_member = $is_group_pending_member = false;
 
@@ -527,6 +483,9 @@ else
 		'MOD_TIME'               => (!empty($group_info['mod_time'])) ? bb_date($group_info['mod_time']) : $lang['NONE'],
 		'U_SEARCH_USER'          => "search.php?mode=searchuser",
 
+        'U_GROUP_RELEASES'       => "groupcp.php?view=releases&amp;". POST_GROUPS_URL ."=$group_id",
+        'U_GROUP_MEMBERS'        => "groupcp.php?view=members&amp;". POST_GROUPS_URL ."=$group_id",
+
 		'U_GROUP_CONFIG'         => "group_config.php?g=$group_id",
 		'RELEASE_GROUP'          => ($group_info['release_group']) ? true : false,
 		'GROUP_TYPE'             => $group_type,
@@ -543,84 +502,189 @@ else
 		'S_GROUPCP_ACTION'       => "groupcp.php?" . POST_GROUPS_URL . "=$group_id",
 	));
 
-	// Dump out the remaining users
-	foreach ($group_members as $i => $member)
-	{
-		$user_id = $member['user_id'];
+    switch($view_mode)
+    {
+        case 'releases':
 
-		generate_user_info($member, $bb_cfg['default_dateformat'], $is_moderator, $from, $posts, $joined, $pm, $email, $www, $user_time, $avatar);
+            // TODO Correct SQL to posts with attach and limit them, optimization
 
-		if ($group_info['group_type'] != GROUP_HIDDEN || $is_group_member || $is_moderator)
-		{
-			$row_class = !($i % 2) ? 'row1' : 'row2';
+            // Count releases for pagination
+            $all_releases = DB()->fetch_rowset("
+            SELECT p.topic_id, p.forum_id, p.poster_id, t.topic_title, t.topic_time, f.forum_name, u.username, u.avatar_ext_id, u.user_opt, u.user_rank
+            FROM ". BB_POSTS ." p
+            LEFT JOIN ". BB_TOPICS ." t ON(p.topic_id = t.topic_id)
+            LEFT JOIN ". BB_FORUMS ." f ON(p.forum_id= f.forum_id)
+            LEFT JOIN ". BB_USERS ." u ON(p.poster_id = u.user_id)
+            WHERE p.poster_rg_id = $group_id
+            ORDER BY t.topic_time DESC
+            ");
 
-			$template->assign_block_vars('member', array(
-				'ROW_NUMBER' => $i + ( $start + 1 ),
-				'ROW_CLASS'  => $row_class,
-				'USER'       => profile_url($member),
-				'AVATAR_IMG' => $avatar,
-				'FROM'       => $from,
-				'JOINED'     => $joined,
-				'POSTS'      => $posts,
-				'USER_ID'    => $user_id,
-				'PM'         => $pm,
-				'EMAIL'      => $email,
-				'WWW'        => $www,
-				'TIME'       => $user_time,
-			));
+            $count_releases = count($all_releases);
 
-			if ($is_moderator)
-			{
-				$template->assign_block_vars('member.switch_mod_option', array());
-			}
-		}
-	}
+            generate_pagination(GROUP_URL . $group_id ."&amp;view=releases", $count_releases, $per_page, $start);
 
-	// No group members
-	if (!$members_count)
-	{
-		$template->assign_block_vars('switch_no_members', array());
-	}
+            $sql = "SELECT p.topic_id, p.forum_id, p.poster_id, t.topic_title, t.topic_time, f.forum_name, u.username, u.avatar_ext_id, u.user_opt, u.user_rank
+                    FROM ". BB_POSTS ." p
+                    LEFT JOIN ". BB_TOPICS ." t ON(p.topic_id = t.topic_id)
+                    LEFT JOIN ". BB_FORUMS ." f ON(p.forum_id= f.forum_id)
+                    LEFT JOIN ". BB_USERS ." u ON(p.poster_id = u.user_id)
+                    WHERE p.poster_rg_id = $group_id
+                    ORDER BY t.topic_time DESC
+                    LIMIT $start, $per_page";
 
-	// No group members
-	if ($group_info['group_type'] == GROUP_HIDDEN && !$is_group_member && !$is_moderator)
-	{
-		$template->assign_block_vars('switch_hidden_group', array());
-	}
+            if (!$releases = DB()->fetch_rowset($sql))
+            {
+                bb_die('Could not get releases data');
+            }
 
-	//
-	// We've displayed the members who belong to the group, now we
-	// do that pending memebers...
-	//
-	if ($is_moderator && $modgroup_pending_list)
-	{
-		foreach ($modgroup_pending_list as $i => $member)
-		{
-			$user_id = $member['user_id'];
+            foreach ($releases as $i => $release)
+            {
+                $row_class = !($i % 2) ? 'row1' : 'row2';
 
-			generate_user_info($member, $bb_cfg['default_dateformat'], $is_moderator, $from, $posts, $joined, $pm, $email, $www, $user_time, $avatar);
+                $template->assign_block_vars('releases', array(
+                    'ROW_NUMBER'    => $i + ( $start + 1 ),
+                    'ROW_CLASS'     => $row_class,
+                    'RELEASER'      => profile_url(array('user_id' => $release['poster_id'], 'username' => $release['username'], 'user_rank' => $release['user_rank'])),
+                    'AVATAR_IMG'    => get_avatar($release['poster_id'], $release['avatar_ext_id'], !bf($release['user_opt'], 'user_opt', 'dis_avatar'), 50, 50),
+                    'RELEASE_NAME'  => sprintf('<a href="%s">%s</a>', TOPIC_URL . $release['topic_id'], htmlCHR($release['topic_title'])),
+                    'RELEASE_TIME'  => bb_date($release['topic_time']),
+                    'RELEASE_FORUM' => sprintf('<a href="%s">%s</a>', FORUM_URL . $release['forum_id'], htmlCHR($release['forum_name'])),
+                ));
+            }
 
-			$row_class = !($i % 2) ? 'row1' : 'row2';
+            $template->assign_vars(array('RELEASES' => true));
 
-			$user_select = '<input type="checkbox" name="member[]" value="'. $user_id .'">';
+            break;
+        case 'members':
+        default:
 
-			$template->assign_block_vars('pending', array(
-				'ROW_CLASS' => $row_class,
-				'AVATAR_IMG'=> $avatar,
-				'USER'      => profile_url($member),
-				'FROM'      => $from,
-				'JOINED'    => $joined,
-				'POSTS'     => $posts,
-				'USER_ID'   => $user_id,
-				'PM'        => $pm,
-				'EMAIL'     => $email,
-			));
-		}
+        // Members
+        $count_members = DB()->fetch_rowset("
+		SELECT u.username, u.user_rank, u.user_id, u.user_opt, u.user_posts, u.user_regdate, u.user_from, u.user_website, u.user_email, ug.user_pending, ug.user_time
+		FROM ". BB_USER_GROUP ." ug, ". BB_USERS ." u
+		WHERE ug.group_id = $group_id
+			AND ug.user_pending = 0
+			AND ug.user_id <> ". $group_moderator['user_id'] ."
+			AND u.user_id = ug.user_id
+		ORDER BY u.username
+	");
+        $count_members = count($count_members);
 
-		$template->assign_vars(array(
-			'PENDING_USERS' => true,
-		));
-	}
+        // Get user information for this group
+        $modgroup_pending_count = 0;
+
+        // Members
+        $group_members = DB()->fetch_rowset("
+		SELECT u.username, u.avatar_ext_id, u.user_rank, u.user_id, u.user_opt, u.user_posts, u.user_regdate, u.user_from, u.user_website, u.user_email, ug.user_pending, ug.user_time
+		FROM ". BB_USER_GROUP ." ug, ". BB_USERS ." u
+		WHERE ug.group_id = $group_id
+			AND ug.user_pending = 0
+			AND ug.user_id <> ". $group_moderator['user_id'] ."
+			AND u.user_id = ug.user_id
+		ORDER BY u.username
+		LIMIT $start, $per_page
+	");
+        $members_count = count($group_members);
+
+        generate_pagination(GROUP_URL . $group_id, $count_members, $per_page, $start);
+
+            // Dump out the remaining users
+            foreach ($group_members as $i => $member)
+            {
+                $user_id = $member['user_id'];
+
+                generate_user_info($member, $bb_cfg['default_dateformat'], $is_moderator, $from, $posts, $joined, $pm, $email, $www, $user_time, $avatar);
+
+                if ($group_info['group_type'] != GROUP_HIDDEN || $is_group_member || $is_moderator)
+                {
+                    $row_class = !($i % 2) ? 'row1' : 'row2';
+
+                    $template->assign_block_vars('member', array(
+                        'ROW_NUMBER' => $i + ( $start + 1 ),
+                        'ROW_CLASS'  => $row_class,
+                        'USER'       => profile_url($member),
+                        'AVATAR_IMG' => $avatar,
+                        'FROM'       => $from,
+                        'JOINED'     => $joined,
+                        'POSTS'      => $posts,
+                        'USER_ID'    => $user_id,
+                        'PM'         => $pm,
+                        'EMAIL'      => $email,
+                        'WWW'        => $www,
+                        'TIME'       => $user_time,
+                    ));
+
+                    if ($is_moderator)
+                    {
+                        $template->assign_block_vars('member.switch_mod_option', array());
+                    }
+                }
+            }
+
+            // No group members
+            if (!$members_count)
+            {
+                $template->assign_block_vars('switch_no_members', array());
+            }
+
+            // No group members
+            if ($group_info['group_type'] == GROUP_HIDDEN && !$is_group_member && !$is_moderator)
+            {
+                $template->assign_block_vars('switch_hidden_group', array());
+            }
+
+            //
+            // We've displayed the members who belong to the group, now we
+            // do that pending memebers...
+            //
+
+        // Pending
+        if ($is_moderator)
+        {
+            $modgroup_pending_list = DB()->fetch_rowset("
+			SELECT u.username, u.avatar_ext_id, u.user_rank, u.user_id, u.user_opt, u.user_posts, u.user_regdate, u.user_from, u.user_website, u.user_email
+			FROM ". BB_USER_GROUP ." ug, ". BB_USERS ." u
+			WHERE ug.group_id = $group_id
+				AND ug.user_pending = 1
+				AND u.user_id = ug.user_id
+			ORDER BY u.username
+			LIMIT 200
+		");
+            $modgroup_pending_count = count($modgroup_pending_list);
+        }
+
+            if ($is_moderator && $modgroup_pending_list)
+            {
+                foreach ($modgroup_pending_list as $i => $member)
+                {
+                    $user_id = $member['user_id'];
+
+                    generate_user_info($member, $bb_cfg['default_dateformat'], $is_moderator, $from, $posts, $joined, $pm, $email, $www, $user_time, $avatar);
+
+                    $row_class = !($i % 2) ? 'row1' : 'row2';
+
+                    $user_select = '<input type="checkbox" name="member[]" value="'. $user_id .'">';
+
+                    $template->assign_block_vars('pending', array(
+                        'ROW_CLASS' => $row_class,
+                        'AVATAR_IMG'=> $avatar,
+                        'USER'      => profile_url($member),
+                        'FROM'      => $from,
+                        'JOINED'    => $joined,
+                        'POSTS'     => $posts,
+                        'USER_ID'   => $user_id,
+                        'PM'        => $pm,
+                        'EMAIL'     => $email,
+                    ));
+                }
+
+                $template->assign_vars(array(
+                    'PENDING_USERS' => true,
+                ));
+            }
+
+            $template->assign_vars(array('MEMBERS' => true));
+    }
 
 	if ($is_moderator)
 	{

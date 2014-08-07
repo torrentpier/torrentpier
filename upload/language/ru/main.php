@@ -778,6 +778,7 @@ $lang['POST_RELEASE_FROM_GROUP'] = 'Создать релиз от группы'
 $lang['CHOOSE_RELEASE_GROUP'] = 'Выбрать релиз группу';
 $lang['ATTACH_RG_SIG'] = 'Добавить подпись релиз группы';
 $lang['RELEASE_FROM_RG'] = 'Релиз подготовлен';
+$lang['GROUPS_RELEASES'] = 'Релизы группы';
 
 //
 // Search

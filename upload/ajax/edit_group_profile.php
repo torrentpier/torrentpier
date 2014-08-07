@@ -25,7 +25,7 @@ switch ($mode)
     case 'group_name':
     case 'group_signature':
     case 'group_description':
-        $value = htmlCHR($value);
+        $value = htmlCHR($value, false, ENT_NOQUOTES);
         $this->response['new_value'] = $value;
         break;
 
