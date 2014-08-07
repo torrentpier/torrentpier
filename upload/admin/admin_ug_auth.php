@@ -1,16 +1,14 @@
 <?php
 
-$max_forum_name_length = 50;
-
-// ACP Header - START
 if (!empty($setmodules))
 {
-	$module['Users']['Permissions']  = basename(__FILE__) .'?mode=user';
-	$module['Groups']['Permissions'] = basename(__FILE__) .'?mode=group';
+	$module['USERS']['PERMISSIONS']  = basename(__FILE__) .'?mode=user';
+	$module['GROUPS']['PERMISSIONS'] = basename(__FILE__) .'?mode=group';
 	return;
 }
 require('./pagestart.php');
-// ACP Header - END
+
+$max_forum_name_length = 50;
 
 require(INC_DIR .'functions_group.php');
 

@@ -1,13 +1,11 @@
 <?php
 
-// ACP Header - START
 if (!empty($setmodules))
 {
-	$module['Forums']['Permissions_List'] = basename(__FILE__);
+	$module['FORUMS']['PERMISSIONS_LIST'] = basename(__FILE__);
 	return;
 }
 require('./pagestart.php');
-// ACP Header - END
 
 //  View  Read  Post  Reply  Edit  Delete  Sticky  Announce  Vote  Poll  PostAttach  Download
 $simple_auth_ary = array(

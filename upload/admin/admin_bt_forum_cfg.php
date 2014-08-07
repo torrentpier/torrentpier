@@ -1,13 +1,11 @@
 <?php
 
-// ACP Header - START
 if (!empty($setmodules))
 {
-	$module['TorrentPier']['Forum_Config'] = basename(__FILE__);
+	$module['TP']['FORUM_CONFIG'] = basename(__FILE__);
 	return;
 }
 require('./pagestart.php');
-// ACP Header - END
 
 $max_forum_name_len = 30;
 $max_forum_rows     = 25;

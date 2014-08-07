@@ -1714,7 +1714,7 @@ $lang['USERS'] = 'User Admin';
 $lang['GROUPS'] = 'Group Admin';
 $lang['FORUMS'] = 'Forum Admin';
 $lang['MODS'] = 'Modifications';
-$lang['TORRENTPIER'] = 'Product configuration';
+$lang['TP'] = 'TorrentPier II';
 
 $lang['CONFIGURATION'] = 'Configuration';
 $lang['MANAGE'] = 'Management';
@@ -1940,7 +1940,7 @@ $lang['ENABLE_PRUNE'] = 'Enable Forum Pruning';
 $lang['ALLOW_BBCODE'] = 'Allow BBCode';
 $lang['ALLOW_SMILIES'] = 'Allow Smilies';
 $lang['SMILIES_PATH'] = 'Smilies Storage Path';
-$lang['SMILIES_PATH_EXPLAIN'] = 'Path under your phpBB root dir, e.g. images/smiles';
+$lang['SMILIES_PATH_EXPLAIN'] = 'Path under your TorrentPier II root dir, e.g. images/smiles';
 $lang['ALLOW_SIG'] = 'Allow Signatures';
 $lang['MAX_SIG_LENGTH'] = 'Maximum signature length';
 $lang['MAX_SIG_LENGTH_EXPLAIN'] = 'Maximum number of characters in user signatures';
@@ -2335,7 +2335,7 @@ $lang['ATTACH_NUMBER_SETTINGS'] = 'Attachment Number Settings';
 $lang['ATTACH_OPTIONS_SETTINGS'] = 'Attachment Options';
 
 $lang['UPLOAD_DIRECTORY'] = 'Upload Directory';
-$lang['UPLOAD_DIRECTORY_EXPLAIN'] = 'Enter the relative path from your phpBB2 installation to the Attachments upload directory. For example, enter \'files\' if your phpBB2 Installation is located at http://www.yourdomain.com/phpBB2 and the Attachment Upload Directory is located at http://www.yourdomain.com/phpBB2/files.';
+$lang['UPLOAD_DIRECTORY_EXPLAIN'] = 'Enter the relative path from your TorrentPier II installation to the Attachments upload directory. For example, enter \'files\' if your TorrentPier II Installation is located at http://www.yourdomain.com/torrentpier and the Attachment Upload Directory is located at http://www.yourdomain.com/torrentpier/files.';
 $lang['ATTACH_IMG_PATH'] = 'Attachment Posting Icon';
 $lang['ATTACH_IMG_PATH_EXPLAIN'] = 'This Image is displayed next to Attachment Links in individual Postings. Leave this field empty if you don\'t want an icon to be displayed. This Setting will be overwritten by the Settings in Extension Groups Management.';
 $lang['ATTACH_TOPIC_ICON'] = 'Attachment Topic Icon';

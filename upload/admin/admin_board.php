@@ -1,14 +1,12 @@
 <?php
 
-// ACP Header - START
 if (!empty($setmodules))
 {
-	$module['General']['Configuration'] = basename(__FILE__) .'?mode=config';
-	$module['Mods']['Configuration'] = basename(__FILE__) .'?mode=config_mods';
+	$module['GENERAL']['CONFIGURATION'] = basename(__FILE__) .'?mode=config';
+	$module['MODS']['CONFIGURATION'] = basename(__FILE__) .'?mode=config_mods';
 	return;
 }
 require('./pagestart.php');
-// ACP Header - END
 
 require(INC_DIR .'functions_selects.php');
 
@@ -24,13 +22,13 @@ $return_links = array(
 // Pull all config data
 //
 $sql = "SELECT * FROM " . BB_CONFIG;
-if(!$result = DB()->sql_query($sql))
+if (!$result = DB()->sql_query($sql))
 {
 	bb_die('Could not query config information in admin_board');
 }
 else
 {
-	while( $row = DB()->sql_fetchrow($result) )
+	while ($row = DB()->sql_fetchrow($result))
 	{
 		$config_name = $row['config_name'];
 		$config_value = $row['config_value'];
@@ -51,7 +49,7 @@ else
 	}
 }
 
-switch($mode)
+switch ($mode)
 {
 	case 'config_mods':
 		$template->assign_vars(array(

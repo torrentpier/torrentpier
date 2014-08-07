@@ -1,19 +1,16 @@
 <?php
 
-// ACP Header - START
 if (!empty($setmodules))
 {
-	$module['Users']['Ranks'] = basename(__FILE__);
+	$module['USERS']['RANKS'] = basename(__FILE__);
 	return;
 }
-
 require('./pagestart.php');
-// ACP Header - END
 
 $_POST['special_rank'] = 1;
 $_POST['min_posts'] = -1;
 
-if(isset($_GET['mode']) || isset($_POST['mode']))
+if (isset($_GET['mode']) || isset($_POST['mode']))
 {
 	$mode = isset($_GET['mode']) ? $_GET['mode'] : $_POST['mode'];
 }

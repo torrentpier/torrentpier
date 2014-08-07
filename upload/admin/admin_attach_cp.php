@@ -1,17 +1,15 @@
 <?php
 
-// ACP Header - START
 if (!empty($setmodules))
 {
-	$module['Attachments']['Control_Panel'] = basename(__FILE__);
+	$module['ATTACHMENTS']['CONTROL_PANEL'] = basename(__FILE__);
 	return;
 }
 require('./pagestart.php');
-// ACP Header - END
 
 $total_attachments = 0;
 
-if ( ($attach_config['upload_dir'][0] == '/') || ( ($attach_config['upload_dir'][0] != '/') && ($attach_config['upload_dir'][1] == ':') ) )
+if (($attach_config['upload_dir'][0] == '/') || (($attach_config['upload_dir'][0] != '/') && ($attach_config['upload_dir'][1] == ':')))
 {
 	$upload_dir = $attach_config['upload_dir'];
 }

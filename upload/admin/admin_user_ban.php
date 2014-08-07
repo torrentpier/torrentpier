@@ -1,15 +1,13 @@
 <?php
 
-// ACP Header - START
 if (!empty($setmodules))
 {
-	$module['Users']['Ban_Management'] = basename(__FILE__);
+	$module['USERS']['BAN_MANAGEMENT'] = basename(__FILE__);
 	return;
 }
 require('./pagestart.php');
-// ACP Header - END
 
-if ( isset($_POST['submit']) )
+if (isset($_POST['submit']))
 {
 	$user_bansql = '';
 	$email_bansql = '';

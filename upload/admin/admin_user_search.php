@@ -1,13 +1,11 @@
 <?php
 
-// ACP Header - START
 if (!empty($setmodules))
 {
-	$module['Users']['Search'] = basename(__FILE__);
+	$module['USERS']['SEARCH'] = basename(__FILE__);
 	return;
 }
 require('./pagestart.php');
-// ACP Header - END
 
 array_deep($_POST, 'trim');
 

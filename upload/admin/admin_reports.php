@@ -2,11 +2,9 @@
 
 if (!empty($setmodules))
 {
-	if($bb_cfg['reports_enabled']){
-	$module['Mods']['REPORTS'] = basename(__FILE__) .'?mode=config';}
+	if ($bb_cfg['reports_enabled']) $module['MODS']['REPORTS'] = basename(__FILE__) .'?mode=config';
 	return;
 }
-
 require('./pagestart.php');
 
 require(INC_DIR . 'functions_report.php');

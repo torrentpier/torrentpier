@@ -1,23 +1,20 @@
 <?php
 
-// ACP Header - START
 if (!empty($setmodules))
 {
 	$filename = basename(__FILE__);
-	$module['Attachments']['Extension_control'] = $filename .'?mode=extensions';
-	$module['Attachments']['Extension_group_manage'] = $filename .'?mode=groups';
+	$module['ATTACHMENTS']['EXTENSION_CONTROL'] = $filename .'?mode=extensions';
+	$module['ATTACHMENTS']['EXTENSION_GROUP_MANAGE'] = $filename .'?mode=groups';
 	return;
 }
+require('./pagestart.php');
 
 function update_attach_extensions () {
-  $GLOBALS['datastore']->update('attach_extensions');
+	$GLOBALS['datastore']->update('attach_extensions');
 }
 register_shutdown_function('update_attach_extensions');
 
-require('./pagestart.php');
-// ACP Header - END
-
-if ( ($attach_config['upload_dir'][0] == '/') || ( ($attach_config['upload_dir'][0] != '/') && ($attach_config['upload_dir'][1] == ':') ) )
+if (($attach_config['upload_dir'][0] == '/') || (($attach_config['upload_dir'][0] != '/') && ($attach_config['upload_dir'][1] == ':')))
 {
 	$upload_dir = $attach_config['upload_dir'];
 }

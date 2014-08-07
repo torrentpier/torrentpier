@@ -5,20 +5,21 @@ require('./pagestart.php');
 // Generate relevant output
 if (isset($_GET['pane']) && $_GET['pane'] == 'left')
 {
-	$dir = @opendir('.');
-
-	$setmodules = 1;
-	while ($file = @readdir($dir))
+	if (!$module = CACHE('bb_cache')->get('admin_module'))
 	{
-		if (preg_match('/^admin_.*?\.php$/', $file))
+		$dir = @opendir('.');
+		$setmodules = 1;
+		while ($file = @readdir($dir))
 		{
-			include('./' . $file);
+			if (preg_match('/^admin_.*?\.php$/', $file))
+			{
+				include('./' . $file);
+			}
 		}
+		unset($setmodules);
+		@closedir($dir);
+		CACHE('bb_cache')->set('admin_module', $module, 600);
 	}
-
-	@closedir($dir);
-
-	unset($setmodules);
 
 	$template->assign_vars(array(
 		'TPL_ADMIN_NAVIGATE' => true,
@@ -30,7 +31,7 @@ if (isset($_GET['pane']) && $_GET['pane'] == 'left')
 
 	while (list($cat, $action_array) = each($module))
 	{
-		$cat = (!empty($lang[strtoupper($cat)])) ? $lang[strtoupper($cat)] : preg_replace('/_/', ' ', $cat);
+		$cat = (!empty($lang[$cat])) ? $lang[$cat] : preg_replace('/_/', ' ', $cat);
 
 		$template->assign_block_vars('catrow', array(
 			'ADMIN_CATEGORY' => $cat,
@@ -43,7 +44,7 @@ if (isset($_GET['pane']) && $_GET['pane'] == 'left')
 		{
 			$row_class = !($row_count % 2) ? 'row1' : 'row2';
 
-			$action = ( !empty($lang[strtoupper($action)]) ) ? $lang[strtoupper($action)] : preg_replace('/_/', ' ', $action);
+			$action = (!empty($lang[$action])) ? $lang[$action] : preg_replace('/_/', ' ', $action);
 
 			$template->assign_block_vars('catrow.modulerow', array(
 				'ROW_CLASS' => $row_class,
