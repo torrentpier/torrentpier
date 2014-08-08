@@ -1255,11 +1255,6 @@ $lang['DL_DOWN'] = 'Downloading';
 $lang['DL_COMPLETE'] = 'Complete';
 $lang['DL_CANCEL'] = 'Cancel';
 
-$lang['DLWILL_2'] = 'Will download';
-$lang['DLDOWN_2'] = 'Downloading';
-$lang['DLCOMPLETE_2'] = 'Complete';
-$lang['DLCANCEL_2'] = 'Cancel';
-
 $lang['DL_LIST_DEL'] = 'Clear DL-List';
 $lang['DL_LIST_DEL_CONFIRM'] = 'Delete DL-List for this topic?';
 $lang['SHOW_DL_LIST'] = 'Show DL-List';
@@ -1326,7 +1321,6 @@ $lang['OPEN_IN_SAME_WINDOW'] = 'open in same window';
 $lang['SHOW_TIME_TOPICS'] = 'show time of the creation topics';
 $lang['SHOW_CURSOR'] = 'highlight the row under the cursor';
 
-$lang['BT_LOW_RATIO_FUNC'] = "You can not use this option (ratio is too low)";
 $lang['BT_LOW_RATIO_FOR_DL'] = "With ratio <b>%s</b> you can not download torrents";
 $lang['BT_RATIO_WARNING_MSG'] = 'If your ratio falls below %s, you will not be able to download Torrents! <a href="%s"><b>More about the rating.</b></a>';
 

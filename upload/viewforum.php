@@ -480,7 +480,6 @@ foreach ($topic_rowset as $topic)
 		}
 	}
 
-	// Gold/Silver releases mod
 	$is_gold = '';
 	if ($tr_cfg['gold_silver_enabled'] && isset($topic['tor_type']))
 	{
@@ -493,7 +492,6 @@ foreach ($topic_rowset as $topic)
 			$is_gold = '<img src="images/tor_silver.gif" width="16" height="15" title="'.$lang['SILVER'].'" alt="" />&nbsp;';
 		}
 	}
-	// END Gold/Silver releases mod
 
 	$template->assign_block_vars('t', array(
 		'FORUM_ID'         => $forum_id,

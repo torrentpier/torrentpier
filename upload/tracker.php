@@ -738,7 +738,6 @@ if ($allowed_forums)
 			$forum_id  = (!$hide_forum && isset($tor['forum_id'])) ? $tor['forum_id'] : '';
 			$poster_id = (!$hide_author && isset($tor['poster_id'])) ? $tor['poster_id'] : '';
 
-			// Gold/Silver releases mod
 			$is_gold = '';
 			if ($tr_cfg['gold_silver_enabled'])
 			{
@@ -751,7 +750,6 @@ if ($allowed_forums)
 					$is_gold = '<img src="images/tor_silver.gif" width="16" height="15" title="'.$lang['SILVER'].'" alt="" />&nbsp;';
 				}
 			}
-			// END Gold/Silver releases mod
 
 			$template->assign_block_vars('tor', array(
 				'CAT_ID'       => $cat_id,
@@ -811,7 +809,7 @@ if ($tor_count)
 	$search_matches = ($tor_count == 1) ? sprintf($lang['FOUND_SEARCH_MATCH'], $tor_count) : sprintf($lang['FOUND_SEARCH_MATCHES'], $tor_count);
 	$search_max = "(max: $tor_search_limit)";
 
-    generate_pagination($base_url, $tor_count, $per_page, $start);
+	generate_pagination($base_url, $tor_count, $per_page, $start);
 
 	$template->assign_vars(array(
 		'MATCHES'     => $search_matches,

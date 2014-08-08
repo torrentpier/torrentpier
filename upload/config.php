@@ -164,9 +164,8 @@ $bb_cfg['ratio_url_help']            = 'viewtopic.php?t=3'; // Рейтинг и
 $bb_cfg['search_help_url']           = 'viewtopic.php?t=4'; // Помощь по поиску
 
 // Torrents
-$bb_cfg['bt_min_ratio_allow_dl_tor'] = 0.3;          // 0 - disable
-$bb_cfg['bt_min_ratio_warning']      = 0.6;          // 0 - disable
-$bb_cfg['bt_min_ratio_dl_button']    = 0.5;          // 0 - disable
+$bb_cfg['bt_min_ratio_allow_dl_tor'] = 0.3;        // 0 - disable
+$bb_cfg['bt_min_ratio_warning']      = 0.6;        // 0 - disable
 
 $tr_cfg = array(
 	'autoclean'             => true,
@@ -218,9 +217,9 @@ $rating_limits = array(
 	'0.6' => 3,
 );
 
-// DL-Status
-$bb_cfg['dl_will_days_keep']     = 60;          // days to keep user's dlstatus records
-$bb_cfg['dl_down_days_keep']     = 30;
+// DL-Status (days to keep user's dlstatus records)
+$bb_cfg['dl_will_days_keep']     = 360;
+$bb_cfg['dl_down_days_keep']     = 180;
 $bb_cfg['dl_complete_days_keep'] = 180;
 $bb_cfg['dl_cancel_days_keep']   = 30;
 

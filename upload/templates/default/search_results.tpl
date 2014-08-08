@@ -190,7 +190,7 @@ function show_edit_options ()
 <!-- IF MY_POSTS -->
 <tr id="mod-action-row">
 	<td colspan="6" id="mod-action-cell" class="row2">
-	    <span id="ed-list-desc" class="small">{L_DEL_LIST_INFO}</span>
+		<span id="ed-list-desc" class="small">{L_DEL_LIST_INFO}</span>
 	</td>
 </tr>
 <!-- ENDIF -->
