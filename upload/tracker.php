@@ -738,19 +738,6 @@ if ($allowed_forums)
 			$forum_id  = (!$hide_forum && isset($tor['forum_id'])) ? $tor['forum_id'] : '';
 			$poster_id = (!$hide_author && isset($tor['poster_id'])) ? $tor['poster_id'] : '';
 
-			$is_gold = '';
-			if ($tr_cfg['gold_silver_enabled'])
-			{
-				if ($tor['tor_type'] == TOR_TYPE_GOLD)
-				{
-					$is_gold = '<img src="images/tor_gold.gif" width="16" height="15" title="'.$lang['GOLD'].'" alt="" />&nbsp;';
-				}
-				elseif ($tor['tor_type'] == TOR_TYPE_SILVER)
-				{
-					$is_gold = '<img src="images/tor_silver.gif" width="16" height="15" title="'.$lang['SILVER'].'" alt="" />&nbsp;';
-				}
-			}
-
 			$template->assign_block_vars('tor', array(
 				'CAT_ID'       => $cat_id,
 				'CAT_TITLE'    => ($cat_id) ? $cat_title_html[$cat_id] : '',
@@ -771,7 +758,7 @@ if ($allowed_forums)
 
 				'ATTACH_ID'    => $att_id,
 				'MAGNET'       => $tor_magnet,
-				'TOR_TYPE'     => $is_gold,
+				'TOR_TYPE'     => is_gold($tor['tor_type']),
 
 				'TOR_FROZEN'   => (!IS_AM) ? isset($bb_cfg['tor_frozen'][$tor['tor_status']]) : '',
 				'TOR_STATUS_ICON' => $bb_cfg['tor_icons'][$tor['tor_status']],

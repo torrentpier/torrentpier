@@ -2809,3 +2809,31 @@ function gender_image ($gender)
 
 	return $user_gender;
 }
+
+function is_gold ($type)
+{
+	global $lang, $tr_cfg;
+
+	if (!$tr_cfg['gold_silver_enabled'])
+	{
+		$is_gold = '';
+		return $is_gold;
+	}
+	else
+	{
+		switch ($type)
+		{
+			case TOR_TYPE_GOLD:
+				$is_gold = '<img src="images/tor_gold.gif" width="16" height="15" title="'. $lang['GOLD'] .'" />&nbsp;';
+				break;
+			case TOR_TYPE_SILVER:
+				$is_gold = '<img src="images/tor_silver.gif" width="16" height="15" title="'. $lang['SILVER'] .'" />&nbsp;';
+				break;
+			default:
+				$is_gold = '';
+				break;
+		}
+	}
+
+	return $is_gold;
+}

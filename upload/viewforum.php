@@ -480,19 +480,6 @@ foreach ($topic_rowset as $topic)
 		}
 	}
 
-	$is_gold = '';
-	if ($tr_cfg['gold_silver_enabled'] && isset($topic['tor_type']))
-	{
-		if ($topic['tor_type'] == TOR_TYPE_GOLD)
-		{
-			$is_gold = '<img src="images/tor_gold.gif" width="16" height="15" title="'.$lang['GOLD'].'" alt="" />&nbsp;';
-		}
-		elseif ($topic['tor_type'] == TOR_TYPE_SILVER)
-		{
-			$is_gold = '<img src="images/tor_silver.gif" width="16" height="15" title="'.$lang['SILVER'].'" alt="" />&nbsp;';
-		}
-	}
-
 	$template->assign_block_vars('t', array(
 		'FORUM_ID'         => $forum_id,
 		'TOPIC_ID'         => $topic_id,
@@ -506,7 +493,7 @@ foreach ($topic_rowset as $topic)
 		'VIEWS'            => $topic['topic_views'],
 		'TOR_STALED'       => ($forum_data['allow_reg_tracker'] && !($t_type == POST_ANNOUNCE || $t_type == POST_STICKY || $topic['tor_size'])),
 		'TOR_FROZEN'       => isset($topic['tor_status']) ? ((!IS_AM) ? isset($bb_cfg['tor_frozen'][$topic['tor_status']]) : '') : '',
-		'TOR_TYPE'         => $is_gold,
+		'TOR_TYPE'         => is_gold($topic['tor_type']),
 
 		'TOR_STATUS_ICON'  => isset($topic['tor_status']) ? $bb_cfg['tor_icons'][$topic['tor_status']] : '',
 		'TOR_STATUS_TEXT'  => isset($topic['tor_status']) ? $lang['TOR_STATUS_NAME'][$topic['tor_status']] : '',
