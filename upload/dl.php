@@ -1,7 +1,7 @@
 <?php
 
 define('IN_FORUM', true);
-define('BB_SCRIPT', 'download');
+define('BB_SCRIPT', 'dl');
 define('NO_GZIP', true);
 define('BB_ROOT',  './');
 require(BB_ROOT .'common.php');
