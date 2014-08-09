@@ -267,6 +267,12 @@ $(function(){
 				</div>
 				</fieldset>
 				<fieldset>
+					<legend>{L_GROUPS_RELEASES}</legend>
+					<div>
+						<p class="select">{S_RG_SELECT}</p>
+					</div>
+				</fieldset>
+				<fieldset>
 				<legend>{L_TITLE_MATCH}</legend>
 				<div>
 					<p class="input">

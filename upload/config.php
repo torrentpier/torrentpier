@@ -498,7 +498,7 @@ $bb_cfg['user_not_activated_days_keep'] = 7;       // "not activated" == "not fi
 $bb_cfg['user_not_active_days_keep']    = 180;     // inactive users but only with no posts
 
 // GroupCP
-$bb_cfg['groupcp_members_per_page']     = 300;
+$bb_cfg['groupcp_members_per_page']     = 50;
 
 // Tidy
 $bb_cfg['tidy_post'] = (!extension_loaded('tidy')) ? false : true;

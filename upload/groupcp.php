@@ -49,6 +49,8 @@ $start    = isset($_REQUEST['start']) ? abs(intval($_REQUEST['start'])) : 0;
 $per_page = $bb_cfg['groupcp_members_per_page'];
 $view_mode = isset($_REQUEST['view']) ? (string) $_REQUEST['view'] : null;
 
+$releases_limit = 50;
+
 $group_info = array();
 $is_moderator = false;
 
@@ -482,6 +484,7 @@ else
 		'MOD_WWW'                => $www,
 		'MOD_TIME'               => (!empty($group_info['mod_time'])) ? bb_date($group_info['mod_time']) : $lang['NONE'],
 		'U_SEARCH_USER'          => "search.php?mode=searchuser",
+		'U_SEARCH_RELEASES'		 => "tracker.php?srg=$group_id",
 
         'U_GROUP_RELEASES'       => "groupcp.php?view=releases&amp;". POST_GROUPS_URL ."=$group_id",
         'U_GROUP_MEMBERS'        => "groupcp.php?view=members&amp;". POST_GROUPS_URL ."=$group_id",
@@ -508,6 +511,8 @@ else
 
             // TODO Correct SQL to posts with attach and limit them, optimization
 
+			if (!$group_info['release_group']) bb_die($lang['NOT_A_RELEASE_GROUP']);
+
             // Count releases for pagination
             $all_releases = DB()->fetch_rowset("
             SELECT p.topic_id, p.forum_id, p.poster_id, t.topic_title, t.topic_time, f.forum_name, u.username, u.avatar_ext_id, u.user_opt, u.user_rank
@@ -517,6 +522,7 @@ else
             LEFT JOIN ". BB_USERS ." u ON(p.poster_id = u.user_id)
             WHERE p.poster_rg_id = $group_id
             ORDER BY t.topic_time DESC
+            LIMIT $releases_limit
             ");
 
             $count_releases = count($all_releases);

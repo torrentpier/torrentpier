@@ -779,6 +779,8 @@ $lang['CHOOSE_RELEASE_GROUP'] = 'Select release group';
 $lang['ATTACH_RG_SIG'] = 'Attach release group signature';
 $lang['RELEASE_FROM_RG'] = 'Release was prepared by';
 $lang['GROUPS_RELEASES'] = 'Group\'s releases';
+$lang['MORE_RELEASES'] = 'All releases';
+$lang['NOT_A_RELEASE_GROUP'] = 'This group is not a release group';
 
 //
 // Search

@@ -779,6 +779,8 @@ $lang['CHOOSE_RELEASE_GROUP'] = 'Выбрать релиз группу';
 $lang['ATTACH_RG_SIG'] = 'Добавить подпись релиз группы';
 $lang['RELEASE_FROM_RG'] = 'Релиз подготовлен';
 $lang['GROUPS_RELEASES'] = 'Релизы группы';
+$lang['MORE_RELEASES'] = 'Все релизы';
+$lang['NOT_A_RELEASE_GROUP'] = 'Эта группа не является релиз группой';
 
 //
 // Search

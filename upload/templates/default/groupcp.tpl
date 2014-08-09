@@ -99,7 +99,7 @@
 </form>
 
 <div class="spacer_10"></div>
-<p class="nav"><a href="{U_GROUP_MEMBERS}" name="members">{L_GROUP_MEMBERS}</a>&nbsp;::&nbsp;<a href="{U_GROUP_RELEASES}" name="releases">{L_GROUPS_RELEASES}</a></p>
+<p class="nav"><a href="{U_GROUP_MEMBERS}" name="members">{L_GROUP_MEMBERS}</a>&nbsp; <!-- IF RELEASE_GROUP -->::&nbsp;<a href="{U_GROUP_RELEASES}" name="releases">{L_GROUPS_RELEASES}</a><!-- ENDIF --></p>
 
 <!-- IF MEMBERS -->
 <form action="{S_GROUPCP_ACTION}" method="post" name="post">
@@ -275,7 +275,7 @@
 	<!-- END releases -->
 	<tfoot>
 	<tr>
-		<td class="cat" colspan="9">&nbsp;</td>
+		<td class="cat" colspan="9" align="center"><b><a href="{U_SEARCH_RELEASES}">{L_MORE_RELEASES}</a></b></td>
 	</tr>
 	</tfoot>
 </table>
