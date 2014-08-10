@@ -179,7 +179,7 @@ if (!$is_auth['auth_read'])
 	{
 		$redirect = ($post_id) ? POST_URL ."$post_id#$post_id" : TOPIC_URL . $topic_id;
 		$redirect .= ($start && !$post_id) ? "&start=$start" : '';
-		redirect(LOGIN_URL . "?redirect=viewtopic.php&$redirect");
+		redirect(LOGIN_URL . "?redirect=$redirect");
 	}
 	bb_die($lang['TOPIC_POST_NOT_EXIST']);
 }
@@ -313,7 +313,7 @@ if ($bb_cfg['topic_notify_enabled'])
 		{
 			if ($_GET['unwatch'] == 'topic')
 			{
-				redirect(LOGIN_URL . "?redirect=viewtopic.php&t=$topic_id&unwatch=topic");
+				redirect(LOGIN_URL . "?redirect=". TOPIC_URL . "$topic_id&unwatch=topic");
 			}
 		}
 	}
@@ -434,9 +434,9 @@ if ( count($orig_word) )
 //
 $new_topic_url = POSTING_URL . "?mode=newtopic&amp;f=$forum_id";
 $reply_topic_url = POSTING_URL . "?mode=reply&amp;t=$topic_id";
-$view_forum_url = "viewforum.php?f=$forum_id";
-$view_prev_topic_url = "viewtopic.php?t=$topic_id&amp;view=previous#newest";
-$view_next_topic_url = "viewtopic.php?t=$topic_id&amp;view=next#newest";
+$view_forum_url = FORUM_URL . $forum_id;
+$view_prev_topic_url = TOPIC_URL ."$topic_id&amp;view=previous#newest";
+$view_next_topic_url = TOPIC_URL ."$topic_id&amp;view=next#newest";
 
 $reply_img = ( $t_data['forum_status'] == FORUM_LOCKED || $t_data['topic_status'] == TOPIC_LOCKED) ? $images['reply_locked'] : $images['reply_new'];
 $reply_alt = ( $t_data['forum_status'] == FORUM_LOCKED || $t_data['topic_status'] == TOPIC_LOCKED) ? $lang['TOPIC_LOCKED_SHORT'] : $lang['REPLY_TO_TOPIC'];
@@ -518,13 +518,13 @@ if ( $can_watch_topic )
 {
 	if ( $is_watching_topic )
 	{
-		$s_watching_topic = "<a href=\"viewtopic.php?" . POST_TOPIC_URL . "=$topic_id&amp;unwatch=topic&amp;start=$start&amp;sid=" . $userdata['session_id'] . '">' . $lang['STOP_WATCHING_TOPIC'] . '</a>';
-		$s_watching_topic_img = ( isset($images['topic_un_watch']) ) ? "<a href=\"viewtopic.php?" . POST_TOPIC_URL . "=$topic_id&amp;unwatch=topic&amp;start=$start&amp;sid=" . $userdata['session_id'] . '"><img src="' . $images['topic_un_watch'] . '" alt="' . $lang['STOP_WATCHING_TOPIC'] . '" title="' . $lang['STOP_WATCHING_TOPIC'] . '" border="0"></a>' : '';
+		$s_watching_topic = "<a href=\"". TOPIC_URL ."$topic_id&amp;unwatch=topic&amp;start=$start&amp;sid=" . $userdata['session_id'] . '">' . $lang['STOP_WATCHING_TOPIC'] . '</a>';
+		$s_watching_topic_img = ( isset($images['topic_un_watch']) ) ? "<a href=\"" . TOPIC_URL . "$topic_id&amp;unwatch=topic&amp;start=$start&amp;sid=" . $userdata['session_id'] . '"><img src="' . $images['topic_un_watch'] . '" alt="' . $lang['STOP_WATCHING_TOPIC'] . '" title="' . $lang['STOP_WATCHING_TOPIC'] . '" border="0"></a>' : '';
 	}
 	else
 	{
-		$s_watching_topic = "<a href=\"viewtopic.php?" . POST_TOPIC_URL . "=$topic_id&amp;watch=topic&amp;start=$start&amp;sid=" . $userdata['session_id'] . '">' . $lang['START_WATCHING_TOPIC'] . '</a>';
-		$s_watching_topic_img = ( isset($images['Topic_watch']) ) ? "<a href=\"viewtopic.php?" . POST_TOPIC_URL . "=$topic_id&amp;watch=topic&amp;start=$start&amp;sid=" . $userdata['session_id'] . '"><img src="' . $images['Topic_watch'] . '" alt="' . $lang['START_WATCHING_TOPIC'] . '" title="' . $lang['START_WATCHING_TOPIC'] . '" border="0"></a>' : '';
+		$s_watching_topic = "<a href=\"". TOPIC_URL ."$topic_id&amp;watch=topic&amp;start=$start&amp;sid=" . $userdata['session_id'] . '">' . $lang['START_WATCHING_TOPIC'] . '</a>';
+		$s_watching_topic_img = ( isset($images['Topic_watch']) ) ? "<a href=\"". TOPIC_URL ."$topic_id&amp;watch=topic&amp;start=$start&amp;sid=" . $userdata['session_id'] . '"><img src="' . $images['Topic_watch'] . '" alt="' . $lang['START_WATCHING_TOPIC'] . '" title="' . $lang['START_WATCHING_TOPIC'] . '" border="0"></a>' : '';
 	}
 }
 
@@ -601,7 +601,7 @@ $template->assign_vars(array(
 
 	'S_SELECT_POST_DAYS'  => build_select('postdays', array_flip($sel_previous_days), $post_days),
 	'S_SELECT_POST_ORDER' => build_select('postorder', $sel_post_order_ary, $post_order),
-	'S_POST_DAYS_ACTION'  => "viewtopic.php?t=$topic_id&amp;start=$start",
+	'S_POST_DAYS_ACTION'  => TOPIC_URL ."$topic_id&amp;start=$start",
 	'S_AUTH_LIST'         => $s_auth_can,
 	'S_TOPIC_ADMIN'       => $topic_mod,
 	'S_WATCH_TOPIC'       => $s_watching_topic,

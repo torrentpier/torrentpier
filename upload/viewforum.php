@@ -68,9 +68,8 @@ if (!$is_auth['auth_view'])
 {
 	if (IS_GUEST)
 	{
-		$redirect = "f=$forum_id";
 		$redirect .= ($start) ? "&start=$start" : '';
-		redirect(LOGIN_URL . "?redirect=viewforum.php&$redirect");
+		redirect(LOGIN_URL . "?redirect=". FORUM_URL . $forum_id ."&$redirect");
 	}
 	// The user is not authed to read this forum ...
 	$message = sprintf($lang['SORRY_AUTH_VIEW'], $is_auth['auth_view_type']);
@@ -282,7 +281,7 @@ if (!empty($_REQUEST['topicdays']))
 // Correct $start value
 if ($start > $forum_topics)
 {
-	redirect("viewforum.php?f=$forum_id");
+	redirect(FORUM_URL . $forum_id);
 }
 
 // Generate SORT and ORDER selects

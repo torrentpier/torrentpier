@@ -671,7 +671,7 @@ $template->assign_vars(array(
 	'SUBJECT' => $subject,
 	'MESSAGE' => $message,
 
-	'U_VIEWTOPIC' => ( $mode == 'reply' ) ? "viewtopic.php?" . POST_TOPIC_URL . "=$topic_id&amp;postorder=desc" : '',
+	'U_VIEWTOPIC' => ( $mode == 'reply' ) ? POST_URL ."$topic_id&amp;postorder=desc" : '',
 
 	'S_NOTIFY_CHECKED' => ( $notify_user ) ? 'checked="checked"' : '',
 	'S_TYPE_TOGGLE' => $topic_type_toggle,
