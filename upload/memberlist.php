@@ -202,7 +202,7 @@ if ($result = DB()->fetch_rowset($sql))
 			'PM'            => $pm,
 			'EMAIL'         => $email,
 			'WWW'           => $www,
-			'U_VIEWPROFILE' => "profile.php?mode=viewprofile&amp;". POST_USERS_URL ."=$user_id",
+			'U_VIEWPROFILE' => PROFILE_URL . $user_id,
 		));
 	}
 }
