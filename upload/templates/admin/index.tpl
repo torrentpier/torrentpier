@@ -70,9 +70,27 @@ ajax.callback.manage_admin = function(data) {
 	$('#update_user_level').html(data.update_user_level_html);
 	$('#sync_topics').html(data.sync_topics_html);
 	$('#sync_user_posts').html(data.sync_user_posts_html);
+	$('#unlock_cron').html(data.unlock_cron_html);
 }
 </script>
+
 <br />
+
+<!-- IF ADMIN_LOCK_CRON -->
+<div class="alert alert-danger" style="width: 95%;">
+	<h4 class="alert-heading">{L_ADMIN_DISABLE_CRON_TITLE}</h4><hr>
+	<a href="#" id="unlock_cron" onclick="ajax.manage_admin('unlock_cron'); return false;">{L_ADMIN_UNLOCK_CRON}</a>
+	({L_ADMIN_DISABLE_CRON})
+</div>
+<!-- ENDIF -->
+
+<!-- IF ADMIN_LOCK -->
+<div class="alert alert-danger" style="width: 95%;">
+	<h4 class="alert-heading">{L_ADMIN_DISABLE_TITLE}</h4><hr>
+	<a href="admin_board.php?mode=config">{L_ADMIN_UNLOCK}</a>
+	({L_ADMIN_DISABLE})
+</div>
+<!-- ENDIF -->
 
 <table>
 	<tr>

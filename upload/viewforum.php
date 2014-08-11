@@ -69,7 +69,7 @@ if (!$is_auth['auth_view'])
 	if (IS_GUEST)
 	{
 		$redirect = ($start) ? "&start=$start" : '';
-		redirect(LOGIN_URL . "?redirect=". FORUM_URL . $forum_id ."&$redirect");
+		redirect(LOGIN_URL . "?redirect=". FORUM_URL . $forum_id . $redirect);
 	}
 	// The user is not authed to read this forum ...
 	$message = sprintf($lang['SORRY_AUTH_VIEW'], $is_auth['auth_view_type']);
@@ -268,7 +268,7 @@ if (!empty($_REQUEST['topicdays']))
 			SELECT COUNT(*) AS forum_topics
 			FROM ". BB_TOPICS ."
 			WHERE forum_id = $forum_id
-				AND topic_last_post_time > ". (TIMENOW - 86400*$req_topic_days) ."
+				AND topic_last_post_time > ". (TIMENOW - 86400 * $req_topic_days) ."
 		";
 
 		if ($row = DB()->fetch_row($sql))
@@ -492,7 +492,7 @@ foreach ($topic_rowset as $topic)
 		'VIEWS'            => $topic['topic_views'],
 		'TOR_STALED'       => ($forum_data['allow_reg_tracker'] && !($t_type == POST_ANNOUNCE || $t_type == POST_STICKY || $topic['tor_size'])),
 		'TOR_FROZEN'       => isset($topic['tor_status']) ? ((!IS_AM) ? isset($bb_cfg['tor_frozen'][$topic['tor_status']]) : '') : '',
-		'TOR_TYPE'         => is_gold($topic['tor_type']),
+		'TOR_TYPE'         => isset($topic['tor_type']) ? is_gold($topic['tor_type']) : '',
 
 		'TOR_STATUS_ICON'  => isset($topic['tor_status']) ? $bb_cfg['tor_icons'][$topic['tor_status']] : '',
 		'TOR_STATUS_TEXT'  => isset($topic['tor_status']) ? $lang['TOR_STATUS_NAME'][$topic['tor_status']] : '',
