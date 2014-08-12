@@ -2996,3 +2996,5 @@ $lang['SITEMAP_ADD_TITLE'] = 'Додаткові сторінки для sitemap
 $lang['SITEMAP_ADD_PAGE'] = 'Додаткові сторінки';
 $lang['SITEMAP_ADD_EXP_1'] = 'Тут ви можете вказати додаткові сторінки сайту (наприклад <b>http://torrentpier.me/memberlist.php</b>), які повинні бути включені в створюваний файл вами файл sitemap.';
 $lang['SITEMAP_ADD_EXP_2'] = 'Кожне посилання має починатись з http(s):// і нової рядки!';
+
+$lang['FORUM_MAP'] = 'Карта форумів';

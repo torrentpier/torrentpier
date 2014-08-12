@@ -2996,3 +2996,5 @@ $lang['SITEMAP_ADD_TITLE'] = 'Additional pages for sitemap';
 $lang['SITEMAP_ADD_PAGE'] = 'Additional pages';
 $lang['SITEMAP_ADD_EXP_1'] = 'You can specify additional pages on your site (for example, <b>http://torrentpier.me/memberlist.php</b>) which should be included in your sitemap file that you creating.';
 $lang['SITEMAP_ADD_EXP_2'] = 'Each reference must begin with http(s):// and a new line!';
+
+$lang['FORUM_MAP'] = 'Forums\' map';
