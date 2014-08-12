@@ -280,7 +280,7 @@ foreach ($cat_forums as $cid => $c)
 
 $template->assign_vars(array(
 	'SHOW_FORUMS'           => $forums_count,
-	'SHOW_MAP'              => isset($_GET['map']) ? true : false,
+	'SHOW_MAP'              => isset($_GET['map']),
 	'PAGE_TITLE'            => ($viewcat) ? $cat_title_html[$viewcat] : $lang['HOME'],
 	'NO_FORUMS_MSG'         => ($only_new) ? $lang['NO_NEW_POSTS'] : $lang['NO_FORUMS'],
 
@@ -427,7 +427,6 @@ if (IS_AM)
 
 // Display page
 define('SHOW_ONLINE', $show_online_users);
-
 
 if (isset($_GET['map'])) $template->assign_vars(array('PAGE_TITLE' => $lang['FORUM_MAP']));
 
