@@ -135,7 +135,8 @@ $lang['SEARCH_SELF_BY_LAST'] = 'времени последнего сообще
 $lang['SEARCH_SELF_BY_MY'] = 'времени моего сообщения';
 $lang['SEARCH_UNANSWERED'] = 'Сообщения без ответов';
 $lang['SEARCH_UNANSWERED_SHORT'] = 'без ответов';
-$lang['SEARCH_LATEST'] = 'Последние';
+$lang['SEARCH_LATEST'] = 'Последние темы';
+$lang['LATEST_RELEASES'] = 'Последние раздачи';
 
 $lang['REGISTER'] = 'Регистрация';
 $lang['PROFILE'] = 'Профиль';
@@ -1227,7 +1228,7 @@ $lang['SEL_CHAPTERS'] = 'Ссылка на выбранные разделы';
 $lang['NOT_SEL_CHAPTERS'] = 'Вы не выбрали разделы';
 $lang['SEL_CHAPTERS_HELP'] = 'Вы можете выбрать максимум %s разделов';
 $lang['HIDE_CONTENTS'] = 'Скрыть содержимое {...}';
-$lang['FILTER_BY_NAME'] = '<i>фильтр по названию</i>';
+$lang['FILTER_BY_NAME'] = '<i>Фильтр по названию</i>';
 
 $lang['BT_ONLY_ACTIVE'] = 'Активные (есть сидер или личер)';
 $lang['BT_ONLY_MY'] = 'Мои раздачи';

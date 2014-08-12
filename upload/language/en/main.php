@@ -135,7 +135,8 @@ $lang['SEARCH_SELF_BY_LAST'] = 'last post time';
 $lang['SEARCH_SELF_BY_MY'] = 'my post time';
 $lang['SEARCH_UNANSWERED'] = 'View unanswered posts';
 $lang['SEARCH_UNANSWERED_SHORT'] = 'unanswered';
-$lang['SEARCH_LATEST'] = 'latest';
+$lang['SEARCH_LATEST'] = 'Latest topics';
+$lang['LATEST_RELEASES'] = 'Latest releases';
 
 $lang['REGISTER'] = 'Register';
 $lang['PROFILE'] = 'Profile';
@@ -1227,7 +1228,7 @@ $lang['SEL_CHAPTERS'] = 'Link to the selected partitions';
 $lang['NOT_SEL_CHAPTERS'] = 'You have not selected topics';
 $lang['SEL_CHAPTERS_HELP'] = 'You can select a maximum %s partition';
 $lang['HIDE_CONTENTS'] = 'Hide the contents of {...}';
-$lang['FILTER_BY_NAME'] = '<i>filter by name </i>';
+$lang['FILTER_BY_NAME'] = '<i>Filter by name </i>';
 
 $lang['BT_ONLY_ACTIVE'] = 'Active';
 $lang['BT_ONLY_MY'] = 'My releases';

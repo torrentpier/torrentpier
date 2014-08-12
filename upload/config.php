@@ -141,8 +141,8 @@ if (isset($_SERVER['HTTP_CF_CONNECTING_IP']))
 }
 
 // Increase number after changing js or css
-$bb_cfg['js_ver']             = 1;
-$bb_cfg['css_ver']            = 1;
+$bb_cfg['js_ver']             = 2;
+$bb_cfg['css_ver']            = 2;
 
 // Backup
 $bb_cfg['db_backup_shell_cmd']     = '';           // '/path/to/db_backup.sh 2>&1'
@@ -600,7 +600,7 @@ $bb_cfg['captcha'] = array(
 // Atom feed
 $bb_cfg['atom'] = array(
 	'path' => BB_PATH .'/atom/',
-	'url'  => "http://{$domain_name}/atom",
+	'url'  => './atom',
 );
 
 define('BB_CFG_LOADED', true);
