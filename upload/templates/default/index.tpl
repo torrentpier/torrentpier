@@ -13,9 +13,9 @@
 <div id="forums_top_links">
 	<div class="floatL">
 		<a href="{U_SEARCH_NEW}" class="med">{L_SEARCH_NEW}</a> &#0183;
-		<a href="{U_SEARCH_SELF_BY_LAST}" class="med">{L_SEARCH_SELF}</a> <a href="#search-my-posts" class="menu-root menu-alt1">{OPEN_MENU_IMG_ALT1}</a> &#0183;
+		<a href="{U_SEARCH_SELF_BY_LAST}" class="med">{L_SEARCH_SELF}</a> <a href="#search-my-posts" class="menu-root menu-alt1">{OPEN_MENU_IMG_ALT}</a> &#0183;
 		<a href="{U_SEARCH_LATEST}" class="med">{L_SEARCH_LATEST}</a> &#0183;
-		<a href="{U_INDEX}?map=1" class="med bold">{L_FORUM_MAP}</a>
+		<a href="{U_INDEX}?map=1" class="med bold">{FEED_IMG_ALT} {L_FORUM_MAP}</a>
 	</div>
 	<div class="floatR med bold">
 		<a class="menu-root" href="#only-new-options">{L_DISPLAYING_OPTIONS}</a>
