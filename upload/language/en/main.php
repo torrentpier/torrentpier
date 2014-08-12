@@ -1282,7 +1282,7 @@ $lang['SEARCH_DL_COMPLETE_DOWNLOADS']   = 'Completed Downloads';
 $lang['SEARCH_DL_CANCEL'] = 'Canceled';
 $lang['CUR_DOWNLOADS'] = 'Current Downloads';
 $lang['CUR_UPLOADS']   = 'Current Uploads';
-$lang['SEARCH_RELEASES'] = 'Find releases';
+$lang['SEARCH_RELEASES'] = 'Releases';
 $lang['TOR_SEARCH_TITLE'] = 'Torrent search options';
 $lang['OPEN_TOPIC'] = 'Open topic';
 
@@ -2999,3 +2999,9 @@ $lang['SITEMAP_ADD_EXP_1'] = 'You can specify additional pages on your site (for
 $lang['SITEMAP_ADD_EXP_2'] = 'Each reference must begin with http(s):// and a new line!';
 
 $lang['FORUM_MAP'] = 'Forums\' map';
+$lang['ATOM_FEED'] = 'Feed';
+$lang['ATOM_ERROR'] = 'Error generating feed';
+$lang['ATOM_SUBSCRIBE'] = 'Subscribe to the feed';
+$lang['ATOM_NO_MODE'] = 'Do not specify a mode for the feed';
+$lang['ATOM_NO_FORUM'] = 'This forum does not have a feed (no ongoing topics)';
+$lang['ATOM_NO_USER'] = 'This user does not have a feed (no ongoing topics)';

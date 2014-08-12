@@ -1282,7 +1282,7 @@ $lang['SEARCH_DL_COMPLETE_DOWNLOADS'] = 'Минулі закачування';
 $lang['SEARCH_DL_CANCEL'] = 'Скасовані';
 $lang['CUR_DOWNLOADS'] = 'Поточні закачування';
 $lang['CUR_UPLOADS'] = 'Поточні роздачі';
-$lang['SEARCH_RELEASES'] = 'Знайти роздачі';
+$lang['SEARCH_RELEASES'] = 'Роздачі';
 $lang['TOR_SEARCH_TITLE'] = 'Опції показу торрентів';
 $lang['OPEN_TOPIC'] = 'Відкрити топік';
 
@@ -2999,3 +2999,9 @@ $lang['SITEMAP_ADD_EXP_1'] = 'Тут ви можете вказати додат
 $lang['SITEMAP_ADD_EXP_2'] = 'Кожне посилання має починатись з http(s):// і нової рядки!';
 
 $lang['FORUM_MAP'] = 'Карта форумів';
+$lang['ATOM_FEED'] = 'Стрічка';
+$lang['ATOM_ERROR'] = 'Помилка створення стрічки';
+$lang['ATOM_SUBSCRIBE'] = 'Підписка на стрічку';
+$lang['ATOM_NO_MODE'] = 'Не вказано режим для стрічки';
+$lang['ATOM_NO_FORUM'] = 'Для цього форуму немає стрічки (немає початих тем)';
+$lang['ATOM_NO_USER'] = 'Для цього користувача немає стрічки (немає початих тем)';

@@ -165,7 +165,7 @@ function create_atom ($file_path, $mode, $id, $title, $topics)
 		$date = bb_date($last_time, 'Y-m-d', 0);
 		$time = bb_date($last_time, 'H:i:s', 0);
 		$updated = '';
-		$checktime = TIMENOW - 604800; // неделя
+		$checktime = TIMENOW - 604800; // неделя (week)
 		if ($topic['topic_first_post_edit_time'] && $topic['topic_first_post_edit_time'] > $checktime) $updated = '[Обновлено] ';
 		$atom .= "<entry>\n";
 		$atom .= "	<title type=\"html\"><![CDATA[$updated$topic_title$tor_size]]></title>\n";

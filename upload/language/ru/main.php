@@ -1282,7 +1282,7 @@ $lang['SEARCH_DL_COMPLETE_DOWNLOADS']   = 'Прошлые закачки';
 $lang['SEARCH_DL_CANCEL'] = 'Отмененные';
 $lang['CUR_DOWNLOADS'] = 'Текущие закачки';
 $lang['CUR_UPLOADS']   = 'Текущие раздачи';
-$lang['SEARCH_RELEASES'] = 'Найти раздачи';
+$lang['SEARCH_RELEASES'] = 'Раздачи';
 $lang['TOR_SEARCH_TITLE'] = 'Опции показа торрентов';
 $lang['OPEN_TOPIC'] = 'Открыть топик';
 
@@ -2999,3 +2999,9 @@ $lang['SITEMAP_ADD_EXP_1'] = 'Здесь вы можете указать доп
 $lang['SITEMAP_ADD_EXP_2'] = 'Каждая ссылка должна начинаться с http(s):// и новой строки!';
 
 $lang['FORUM_MAP'] = 'Карта форумов';
+$lang['ATOM_FEED'] = 'Лента';
+$lang['ATOM_ERROR'] = 'Ошибка генерации ленты';
+$lang['ATOM_SUBSCRIBE'] = 'Подписка на ленту';
+$lang['ATOM_NO_MODE'] = 'Не указан режим для ленты';
+$lang['ATOM_NO_FORUM'] = 'Для этого форума нет ленты (нет начатых тем)';
+$lang['ATOM_NO_USER'] = 'Для этого пользователя нет ленты (нет начатых тем)';

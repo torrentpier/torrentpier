@@ -365,8 +365,9 @@ ajax.callback.gen_passkey = function(data){
 						<b>{POSTS}</b>
 						[ <a href="{U_SEARCH_USER}" class="med">{L_SEARCH_USER_POSTS}</a> ]
 						[ <a href="{U_SEARCH_TOPICS}" class="med">{L_SEARCH_USER_TOPICS}</a> ]
-						[ <a class="med" href="{U_SEARCH_RELEASES}">{L_SEARCH_RELEASES}</a> ]
-						<!-- IF PROFILE_USER -->[ <a class="med" href="{U_WATCHED_TOPICS}">{L_WATCHED_TOPICS}</a> ]<!-- ENDIF -->
+						[ <a href="{U_SEARCH_RELEASES}" class="med">{L_SEARCH_RELEASES}</a> ]
+						<!-- IF PROFILE_USER -->[ <a href="{U_WATCHED_TOPICS}" class="med">{L_WATCHED_TOPICS}</a> ]<!-- ENDIF -->
+						[ <a title="{L_ATOM_SUBSCRIBE}" href="#" onclick="return post2url('feed.php', {mode: 'get_feed_url', type: 'u', id: {PROFILE_USER_ID}})">{FEED_IMG}</a> ]
 					</p>
 				</td>
 			</tr>
