@@ -1257,10 +1257,10 @@ $lang['BT_2_WEEKS']  = '2 weeks';
 $lang['BT_1_MONTH']  = 'month';
 
 $lang['DL_LIST_AND_TORRENT_ACTIVITY'] = 'DL-List and Torrent activity';
-$lang['DL_WILL'] = 'Will download';
-$lang['DL_DOWN'] = 'Downloading';
-$lang['DL_COMPLETE'] = 'Complete';
-$lang['DL_CANCEL'] = 'Cancel';
+$lang['DLWILL'] = 'Will download';
+$lang['DLDOWN'] = 'Downloading';
+$lang['DLCOMPLETE'] = 'Complete';
+$lang['DLCANCEL'] = 'Cancel';
 
 $lang['DL_LIST_DEL'] = 'Clear DL-List';
 $lang['DL_LIST_DEL_CONFIRM'] = 'Delete DL-List for this topic?';
@@ -2601,10 +2601,10 @@ $lang['BT_SHOW_DL_LIST'] = 'Show DL-List in Download topics';
 $lang['BT_DL_LIST_ONLY_1ST_PAGE'] = 'Show DL-List only on first page in topics';
 $lang['BT_DL_LIST_ONLY_COUNT'] = 'Show only number of users';
 $lang['BT_SHOW_DL_LIST_BUTTONS'] = 'Show buttons for manually changing DL-status';
-$lang['BT_SHOW_DL_BUT_WILL'] = $lang['DL_WILL'];
-$lang['BT_SHOW_DL_BUT_DOWN'] = $lang['DL_DOWN'];
-$lang['BT_SHOW_DL_BUT_COMPL'] = $lang['DL_COMPLETE'];
-$lang['BT_SHOW_DL_BUT_CANCEL'] = $lang['DL_CANCEL'];
+$lang['BT_SHOW_DL_BUT_WILL'] = $lang['DLWILL'];
+$lang['BT_SHOW_DL_BUT_DOWN'] = $lang['DLDOWN'];
+$lang['BT_SHOW_DL_BUT_COMPL'] = $lang['DLCOMPLETE'];
+$lang['BT_SHOW_DL_BUT_CANCEL'] = $lang['DLCANCEL'];
 
 $lang['BT_ADD_AUTH_KEY_HEAD'] = 'Passkey';
 $lang['BT_ADD_AUTH_KEY'] = 'Enable adding passkey to the torrent-files before downloading';

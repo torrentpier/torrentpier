@@ -25,14 +25,14 @@ TorrentPier II - движок торрент-трекера, написанны�
 - atom
 - cache
 - cache/filecache
-- files
-- files/thumbs
 - images
 - images/avatars
 - images/captcha
 - images/ranks
 - images/smiles
 - log
+- old_files
+- old_files/thumbs
 - sitemap
 - triggers
 
