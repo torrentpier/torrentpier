@@ -131,7 +131,7 @@ class captcha_common
 		CACHE('bb_cap_sid')->set('c_sid_'. $this->new_cap_sid, $this->new_cap_code, $this->key_ttl*2);
 	}
 
-    function get_img_url ($id)
+	function get_img_url ($id)
 	{
 		return $this->get_path($id, $this->cfg['img_url']);
 	}
@@ -215,8 +215,6 @@ class captcha_kcaptcha extends captcha_common
 		$credits = $bb_cfg['server_name']; # if empty, HTTP_HOST will be shown
 
 		# CAPTCHA image colors (RGB, 0-255)
-		//$foreground_color = array(0, 0, 0);
-		//$background_color = array(220, 230, 255);
 		$foreground_color = array(mt_rand(0,100), mt_rand(0,100), mt_rand(0,100));
 		$background_color = array(mt_rand(200,255), mt_rand(200,255), mt_rand(200,255));
 
@@ -316,7 +314,7 @@ class captcha_kcaptcha extends captcha_common
 
 		$center=$x/2;
 
-		// credits. To remove, see configuration file
+		// credits
 		$img2=imagecreatetruecolor($width, $height+($show_credits?12:0));
 		$foreground=imagecolorallocate($img2, $foreground_color[0], $foreground_color[1], $foreground_color[2]);
 		$background=imagecolorallocate($img2, $background_color[0], $background_color[1], $background_color[2]);
@@ -390,8 +388,6 @@ class captcha_kcaptcha extends captcha_common
 		file_write('', $img_path, null, true, true);
 
 		imagejpeg($img2, $img_path, $jpeg_quality);
-#		imagegif($img2, $img_path);
-#		imagepng($img2, $img_path);
 
 		imagedestroy($img2);
 

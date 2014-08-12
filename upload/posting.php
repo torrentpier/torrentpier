@@ -353,7 +353,7 @@ elseif ( ($submit || $confirm) && !$topic_has_new_posts )
 	$return_message = '';
 	$return_meta = '';
 
-	switch ( $mode )
+	switch ($mode)
 	{
 		case 'editpost':
 		case 'newtopic':
@@ -443,6 +443,11 @@ elseif ( ($submit || $confirm) && !$topic_has_new_posts )
 				else tracker_register(TORRENT_ATTACH_ID, 'newtopic', TOR_NOT_APPROVED);
 			}
 		}
+
+		// Update user atom feed
+		require_once(INC_DIR .'functions_atom.php');
+		$topic_poster = (int) DB()->fetch_row("SELECT topic_poster FROM ". BB_TOPICS ." WHERE topic_id = $topic_id LIMIT 1", 'topic_poster');
+		update_user_feed($topic_poster, get_username($topic_poster));
 
 		if ($mode == 'reply' && $post_info['topic_status'] == TOPIC_LOCKED)
 		{

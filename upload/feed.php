@@ -50,14 +50,14 @@ if ($mode == 'get_feed_url' && ($type == 'f' || $type == 'u') && $id >= 0)
 		{
 			bb_simple_die('Invalid type of query #3');
 		}
-		if (file_exists($bb_cfg['atom']['path'] .'/u/'. floor($id/5000000) .'/'. ($id % 100) .'/'. $id .'.atom') && filemtime($bb_cfg['atom']['path'] .'/u/'. floor($id/5000000) .'/'. ($id % 100) .'/'. $id .'.atom') > $timecheck)
+		if (file_exists($bb_cfg['atom']['path'] .'/u/'. floor($id/5000) .'/'. ($id % 100) .'/'. $id .'.atom') && filemtime($bb_cfg['atom']['path'] .'/u/'. floor($id/5000) .'/'. ($id % 100) .'/'. $id .'.atom') > $timecheck)
 		{
-			redirect($bb_cfg['atom']['url'] .'/u/'. floor($id/5000000) .'/'. ($id % 100) .'/'. $id .'.atom');
+			redirect($bb_cfg['atom']['url'] .'/u/'. floor($id/5000) .'/'. ($id % 100) .'/'. $id .'.atom');
 		}
 		else
 		{
 			require_once(INC_DIR .'functions_atom.php');
-			if (update_user_feed($id, $username)) redirect($bb_cfg['atom']['url'] .'/u/'. floor($id/5000000) .'/'. ($id % 100) .'/'. $id .'.atom');
+			if (update_user_feed($id, $username)) redirect($bb_cfg['atom']['url'] .'/u/'. floor($id/5000) .'/'. ($id % 100) .'/'. $id .'.atom');
 			else bb_simple_die('No feed for this user (no topics)');
 		}
 	}

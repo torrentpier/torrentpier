@@ -11,7 +11,7 @@ function get_path_from_id ($id, $ext_id, $base_path, $first_div, $sec_div)
 
 function get_avatar_path ($id, $ext_id, $base_path = '')
 {
-	return get_path_from_id($id, $ext_id, $base_path, 5000000, 100);
+	return get_path_from_id($id, $ext_id, $base_path, 5000, 100);
 }
 
 function delete_avatar ($user_id, $avatar_ext_id)
@@ -24,7 +24,7 @@ function delete_avatar ($user_id, $avatar_ext_id)
 function get_attach_path ($id)
 {
 	global $bb_cfg;
-	return get_path_from_id($id, '', $bb_cfg['attach']['upload_path'], 1000000, 100);
+	return get_path_from_id($id, '', $bb_cfg['attach']['upload_path'], 1000, 100);
 }
 
 function get_tracks ($type)

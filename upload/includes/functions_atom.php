@@ -79,7 +79,7 @@ function update_forum_feed ($forum_id, $forum_data)
 function update_user_feed ($user_id, $username)
 {
 	global $bb_cfg;
-	$file_path = $bb_cfg['atom']['path'] .'/u/'. floor($user_id/5000000) .'/'. ($user_id % 100) .'/'. $user_id .'.atom';
+	$file_path = $bb_cfg['atom']['path'] .'/u/'. floor($user_id/5000) .'/'. ($user_id % 100) .'/'. $user_id .'.atom';
 	$sql = "
 		SELECT
 			t.topic_id, t.topic_title, t.topic_status,
@@ -154,7 +154,7 @@ function create_atom ($file_path, $mode, $id, $title, $topics)
 		$orig_word = array();
 		$replacement_word = array();
 		obtain_word_list($orig_word, $replacement_word);
-		if ( count($orig_word) )
+		if (count($orig_word))
 		{
 			$topic_title = preg_replace($orig_word, $replacement_word, $topic_title);
 		}

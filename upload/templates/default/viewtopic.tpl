@@ -5,7 +5,6 @@
 <!-- IF HIDE_POST_IMG -->img.postImg, div.postImg-wrap { display: none; }<!-- ENDIF -->
 <!-- IF HIDE_SMILE -->.smile { display: none; }<!-- ENDIF -->
 <!-- IF HIDE_SIGNATURE -->.signature { display: none; }<!-- ENDIF -->
-
 </style>
 <!-- IF SPOILER_OPENED -->
 <script type="text/javascript">
@@ -19,7 +18,7 @@
 ajax.open_edit = false;
 function edit_post(post_id, type, text) {
 	if(ajax.open_edit && ajax.open_edit != post_id) {
-	    alert('{L_AJAX_EDIT_OPEN}');
+		alert('{L_AJAX_EDIT_OPEN}');
 	} else{
 		if(ajax.open_edit && !text){
 			$('#pp_'+ post_id).show();
@@ -27,12 +26,12 @@ function edit_post(post_id, type, text) {
 		} else{
 			$('#pp_'+ post_id).hide();
 			$('#pe_'+ post_id).show();
-
 			ajax.exec({
-				action  : 'posts',
-				post_id : post_id,
-				text    : text,
-				type    : type
+				action   : 'posts',
+				post_id  : post_id,
+				topic_id : {TOPIC_ID},
+				text     : text,
+				type     : type
 			});
 		}
 		ajax.open_edit = false;
@@ -199,7 +198,6 @@ function poll_manage (mode, confirm_msg)
 	$('#poll-submit-btn').click();
 	return false;
 }
-
 function build_poll_add_form (src_el)
 {
 	$('#poll').empty().append( $('#poll-edit-tpl').contents() ).show();
@@ -237,7 +235,6 @@ function build_poll_add_form (src_el)
 
 	<table cellspacing="0" cellpadding="0" class="borderless w100">
 	<tr>
-
 		<!-- IF AUTH_MOD -->
 		<td class="small bold nowrap" style="padding: 0 0 0 4px;">
 			<!-- IF IN_MODERATION -->{L_MODERATE_TOPIC}<!-- ELSE --><a href="{PAGE_URL}&amp;mod=1&amp;start={PAGE_START}" class="small bold">{L_MODERATE_TOPIC}</a><!-- ENDIF -->

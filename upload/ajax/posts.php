@@ -57,6 +57,13 @@ switch($this->request['type'])
 				$this->prompt_for_confirm($lang['CONFIRM_DELETE']);
 			}
 			post_delete($post_id);
+
+			// Update user atom feed
+			require_once(INC_DIR .'functions_atom.php');
+			$topic_id = (int) $this->request['topic_id'];
+			$topic_poster = (int) DB()->fetch_row("SELECT topic_poster FROM ". BB_TOPICS ." WHERE topic_id = $topic_id LIMIT 1", 'topic_poster');
+			update_user_feed($topic_poster, get_username($topic_poster));
+
 			$this->response['hide']    = true;
 			$this->response['post_id'] = $post_id;
 		}
@@ -157,6 +164,12 @@ switch($this->request['type'])
 				}
 			}
 			else $this->ajax_die($lang['EMPTY_MESSAGE']);
+
+			// Update user atom feed
+			require_once(INC_DIR .'functions_atom.php');
+			$topic_id = (int) $this->request['topic_id'];
+			$topic_poster = (int) DB()->fetch_row("SELECT topic_poster FROM ". BB_TOPICS ." WHERE topic_id = $topic_id LIMIT 1", 'topic_poster');
+			update_user_feed($topic_poster, get_username($topic_poster));
 
 			$this->response['html'] = bbcode2html($text);
 		}
@@ -308,6 +321,12 @@ switch($this->request['type'])
 			$notify  = !empty($this->request['notify']);
 			user_notification('reply', $post, $post['topic_title'], $post['forum_id'], $topic_id, $notify);
 		}
+
+		// Update user atom feed
+		require_once(INC_DIR .'functions_atom.php');
+		$topic_id = (int) $this->request['topic_id'];
+		$topic_poster = (int) DB()->fetch_row("SELECT topic_poster FROM ". BB_TOPICS ." WHERE topic_id = $topic_id LIMIT 1", 'topic_poster');
+		update_user_feed($topic_poster, get_username($topic_poster));
 
 		$this->response['redirect'] = make_url(POST_URL . "$post_id#$post_id");
 	break;

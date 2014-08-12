@@ -670,7 +670,7 @@ function post_delete ($mode_or_post_id, $user_id = null, $exclude_first = true)
 
 function user_delete ($user_id, $delete_posts = false)
 {
-	global $log_action;
+	global $bb_cfg, $log_action;
 
 	if (!$user_csv = get_id_csv($user_id))
 	{
@@ -755,6 +755,13 @@ function user_delete ($user_id, $delete_posts = false)
 
 	DB()->query("UPDATE ". BB_PRIVMSGS ." SET privmsgs_from_userid = ". DELETED ." WHERE privmsgs_from_userid IN($user_csv)");
 	DB()->query("UPDATE ". BB_PRIVMSGS ." SET privmsgs_to_userid = ". DELETED ." WHERE privmsgs_to_userid IN($user_csv)");
+
+	// Delete user feed
+	foreach (explode(',', $user_csv) as $user_id)
+	{
+		$file_path = $bb_cfg['atom']['path'] .'/u/'. floor($user_id/5000) .'/'. ($user_id % 100) .'/'. $user_id .'.atom';
+		@unlink($file_path);
+	}
 }
 
 function get_usernames_for_log ($user_id)
