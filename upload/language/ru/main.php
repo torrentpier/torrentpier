@@ -1257,10 +1257,10 @@ $lang['BT_2_WEEKS']  = '2 недели';
 $lang['BT_1_MONTH']  = 'месяц';
 
 $lang['DL_LIST_AND_TORRENT_ACTIVITY'] = 'Статистика раздачи';
-$lang['DL_WILL'] = 'Буду качать';
-$lang['DL_DOWN'] = 'Качаю';
-$lang['DL_COMPLETE'] = 'Скачал';
-$lang['DL_CANCEL'] = 'Отмена';
+$lang['DLWILL'] = 'Буду качать';
+$lang['DLDOWN'] = 'Качаю';
+$lang['DLCOMPLETE'] = 'Скачал';
+$lang['DLCANCEL'] = 'Отмена';
 
 $lang['DL_LIST_DEL'] = 'Очистить DL-List';
 $lang['DL_LIST_DEL_CONFIRM'] = 'Вы уверены, что хотите удалить DL-List для этого топика?';
@@ -2601,10 +2601,10 @@ $lang['BT_SHOW_DL_LIST'] = 'Показывать DL-List при просмотр
 $lang['BT_DL_LIST_ONLY_1ST_PAGE'] = 'Показывать DL-List только на первой странице топика';
 $lang['BT_DL_LIST_ONLY_COUNT'] = 'Показывать только количество';
 $lang['BT_SHOW_DL_LIST_BUTTONS'] = 'Показывать кнопки для изменения DL-статуса';
-$lang['BT_SHOW_DL_BUT_WILL'] = $lang['DL_WILL'];
-$lang['BT_SHOW_DL_BUT_DOWN'] = $lang['DL_DOWN'];
-$lang['BT_SHOW_DL_BUT_COMPL'] = $lang['DL_COMPLETE'];
-$lang['BT_SHOW_DL_BUT_CANCEL'] = $lang['DL_CANCEL'];
+$lang['BT_SHOW_DL_BUT_WILL'] = $lang['DLWILL'];
+$lang['BT_SHOW_DL_BUT_DOWN'] = $lang['DLDOWN'];
+$lang['BT_SHOW_DL_BUT_COMPL'] = $lang['DLCOMPLETE'];
+$lang['BT_SHOW_DL_BUT_CANCEL'] = $lang['DLCANCEL'];
 
 $lang['BT_ADD_AUTH_KEY_HEAD'] = 'Passkey';
 $lang['BT_ADD_AUTH_KEY'] = 'Aвтодобавление passkey к торрент-файлам перед их скачиванием';

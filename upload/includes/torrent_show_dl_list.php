@@ -90,10 +90,11 @@ if ($show_dl_list)
 				$dl_cat[$i] = "<span class=$desc>". $dl_cat[$i] .'</span>';
 
 				$template->assign_block_vars('dl_users.users_row', array(
-					'DL_OPTION_NAME'     => $lang[strtoupper($desc) .'_2'],
+					'DL_OPTION_NAME'     => $lang[strtoupper($desc)],
 					'DL_OPTION_USERS'    => $dl_cat[$i],
 					'DL_COUNT'           => $dl_count[$i],
-					'DL_USERS_DIV_STYLE' => $dl_users_div_style));
+					'DL_USERS_DIV_STYLE' => $dl_users_div_style,
+				));
 			}
 			else if ($dl_count[$i] && $count_mode)
 			{
@@ -102,8 +103,9 @@ if ($show_dl_list)
 					continue;
 				}
 				$template->assign_block_vars('dl_counts.count_row', array(
-					'DL_OPTION_NAME'   => $lang[strtoupper($desc) .'_2'],
-					'DL_OPTION_USERS'  => $dl_count[$i]));
+					'DL_OPTION_NAME'  => $lang[strtoupper($desc)],
+					'DL_OPTION_USERS' => $dl_count[$i],
+				));
 			}
 		}
 	}
