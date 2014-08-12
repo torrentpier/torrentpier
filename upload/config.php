@@ -56,6 +56,7 @@
  * Avatars
  * Misc
  * Captcha
+ * Atom feed
 **/
 
 if (!defined('BB_ROOT')) die(basename(__FILE__));
@@ -68,8 +69,8 @@ $domain_name = (!empty($_SERVER['SERVER_NAME'])) ? $_SERVER['SERVER_NAME'] : $do
 
 // Version info
 $bb_cfg['tp_version'] = '2.0.9 (RC)';
-$bb_cfg['tp_release_date'] = '07-08-2014';
-$bb_cfg['tp_release_state'] = 'R594b';
+$bb_cfg['tp_release_date'] = '12-08-2014';
+$bb_cfg['tp_release_state'] = 'R595';
 
 // Database
 $charset  = 'utf8';
@@ -590,10 +591,16 @@ $bb_cfg['advert_url']               = 'misc.php?do=info&show=advert';
 
 // Captcha
 $bb_cfg['captcha'] = array(
-	'disabled' => false,
+	'disabled'   => false,
 	'secret_key' => 'secret_key',
-	'img_url'    => './images/captcha/',           # without '/'
-	'img_path'   => BB_PATH .'/images/captcha/',   # without '/'
+	'img_url'    => './images/captcha/',
+	'img_path'   => BB_PATH .'/images/captcha/',
+);
+
+// Atom feed
+$bb_cfg['atom'] = array(
+	'path' => BB_PATH .'/atom/',
+	'url'  => "http://{$domain_name}/atom",
 );
 
 define('BB_CFG_LOADED', true);
