@@ -445,9 +445,7 @@ elseif ( ($submit || $confirm) && !$topic_has_new_posts )
 		}
 
 		// Update user atom feed
-		require_once(INC_DIR .'functions_atom.php');
-		$topic_poster = (int) DB()->fetch_row("SELECT topic_poster FROM ". BB_TOPICS ." WHERE topic_id = $topic_id LIMIT 1", 'topic_poster');
-		update_user_feed($topic_poster, get_username($topic_poster));
+		update_atom($topic_id);
 
 		if ($mode == 'reply' && $post_info['topic_status'] == TOPIC_LOCKED)
 		{
