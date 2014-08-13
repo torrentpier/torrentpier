@@ -904,39 +904,6 @@ $lang['LOOKUP_IP'] = 'Посмотреть хост для IP';
 //
 $lang['ALL_TIMES'] = 'Часовой пояс: <span class="tz_time">%s</span>'; // This is followed by UTC and the timezone offset
 
-$lang['-12'] = 'UTC - 12';
-$lang['-11'] = 'UTC - 11';
-$lang['-10'] = 'UTC - 10';
-$lang['-9'] = 'UTC - 9';
-$lang['-8'] = 'UTC - 8';
-$lang['-7'] = 'UTC - 7';
-$lang['-6'] = 'UTC - 6';
-$lang['-5'] = 'UTC - 5';
-$lang['-4'] = 'UTC - 4';
-$lang['-3.5'] = 'UTC - 3:30';
-$lang['-3'] = 'UTC - 3';
-$lang['-2'] = 'UTC - 2';
-$lang['-1'] = 'UTC - 1';
-$lang['0'] = 'UTC ± 0';
-$lang['1'] = 'UTC + 1';
-$lang['2'] = 'UTC + 2';
-$lang['3'] = 'UTC + 3';
-$lang['3.5'] = 'UTC + 3:30';
-$lang['4'] = 'UTC + 4';
-$lang['4.5'] = 'UTC + 4:30';
-$lang['5'] = 'UTC + 5';
-$lang['5.5'] = 'UTC + 5:30';
-$lang['6'] = 'UTC + 6';
-$lang['6.5'] = 'UTC + 6:30';
-$lang['7'] = 'UTC + 7';
-$lang['8'] = 'UTC + 8';
-$lang['9'] = 'UTC + 9';
-$lang['9.5'] = 'UTC + 9:30';
-$lang['10'] = 'UTC + 10';
-$lang['11'] = 'UTC + 11';
-$lang['12'] = 'UTC + 12';
-$lang['13'] = 'UTC + 13';
-
 // это для выпадающего меню, раньше тут еще были города
 $lang['TZ']['-12'] = 'UTC - 12';
 $lang['TZ']['-11'] = 'UTC - 11';

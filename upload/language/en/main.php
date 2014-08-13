@@ -902,40 +902,7 @@ $lang['LOOKUP_IP'] = 'Look up IP address';
 //
 // Timezones ... for display on each page
 //
-$lang['ALL_TIMES'] = 'All times are <span class="tz_time">%s</span>'; // eg. All times are UTC - 12 Hours (times from next block)
-
-$lang['-12'] = 'UTC - 12';
-$lang['-11'] = 'UTC - 11';
-$lang['-10'] = 'UTC - 10';
-$lang['-9'] = 'UTC - 9';
-$lang['-8'] = 'UTC - 8';
-$lang['-7'] = 'UTC - 7';
-$lang['-6'] = 'UTC - 6';
-$lang['-5'] = 'UTC - 5';
-$lang['-4'] = 'UTC - 4';
-$lang['-3.5'] = 'UTC - 3.5';
-$lang['-3'] = 'UTC - 3';
-$lang['-2'] = 'UTC - 2';
-$lang['-1'] = 'UTC - 1';
-$lang['0'] = 'UTC ± 0';
-$lang['1'] = 'UTC + 1';
-$lang['2'] = 'UTC + 2';
-$lang['3'] = 'UTC + 3';
-$lang['3.5'] = 'UTC + 3.5';
-$lang['4'] = 'UTC + 4';
-$lang['4.5'] = 'UTC + 4.5';
-$lang['5'] = 'UTC + 5';
-$lang['5.5'] = 'UTC + 5.5';
-$lang['6'] = 'UTC + 6';
-$lang['6.5'] = 'UTC + 6.5';
-$lang['7'] = 'UTC + 7';
-$lang['8'] = 'UTC + 8';
-$lang['9'] = 'UTC + 9';
-$lang['9.5'] = 'UTC + 9.5';
-$lang['10'] = 'UTC + 10';
-$lang['11'] = 'UTC + 11';
-$lang['12'] = 'UTC + 12';
-$lang['13'] = 'UTC + 13';
+$lang['ALL_TIMES'] = 'All times are <span class="tz_time">%s</span>'; // This is followed by UTC and the timezone offset
 
 // These are displayed in the timezone select box
 $lang['TZ']['-12'] = 'UTC - 12';
