@@ -599,7 +599,7 @@ $bb_cfg['captcha'] = array(
 
 // Atom feed
 $bb_cfg['atom'] = array(
-	'path' => BB_PATH .'/atom/',
+	'path' => BB_PATH .'/atom',
 	'url'  => './atom',
 );
 
