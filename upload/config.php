@@ -69,7 +69,7 @@ $domain_name = (!empty($_SERVER['SERVER_NAME'])) ? $_SERVER['SERVER_NAME'] : $do
 
 // Version info
 $bb_cfg['tp_version'] = '2.0.9 (RC)';
-$bb_cfg['tp_release_date'] = '12-08-2014';
+$bb_cfg['tp_release_date'] = '14-08-2014';
 $bb_cfg['tp_release_state'] = 'R595';
 
 // Database
@@ -141,8 +141,8 @@ if (isset($_SERVER['HTTP_CF_CONNECTING_IP']))
 }
 
 // Increase number after changing js or css
-$bb_cfg['js_ver']             = 2;
-$bb_cfg['css_ver']            = 2;
+$bb_cfg['js_ver']             = 1;
+$bb_cfg['css_ver']            = 1;
 
 // Backup
 $bb_cfg['db_backup_shell_cmd']     = '';           // '/path/to/db_backup.sh 2>&1'
