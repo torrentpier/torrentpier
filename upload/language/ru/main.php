@@ -135,7 +135,8 @@ $lang['SEARCH_SELF_BY_LAST'] = 'времени последнего сообще
 $lang['SEARCH_SELF_BY_MY'] = 'времени моего сообщения';
 $lang['SEARCH_UNANSWERED'] = 'Сообщения без ответов';
 $lang['SEARCH_UNANSWERED_SHORT'] = 'без ответов';
-$lang['SEARCH_LATEST'] = 'Последние';
+$lang['SEARCH_LATEST'] = 'Последние темы';
+$lang['LATEST_RELEASES'] = 'Последние раздачи';
 
 $lang['REGISTER'] = 'Регистрация';
 $lang['PROFILE'] = 'Профиль';
@@ -1194,7 +1195,7 @@ $lang['SEL_CHAPTERS'] = 'Ссылка на выбранные разделы';
 $lang['NOT_SEL_CHAPTERS'] = 'Вы не выбрали разделы';
 $lang['SEL_CHAPTERS_HELP'] = 'Вы можете выбрать максимум %s разделов';
 $lang['HIDE_CONTENTS'] = 'Скрыть содержимое {...}';
-$lang['FILTER_BY_NAME'] = '<i>фильтр по названию</i>';
+$lang['FILTER_BY_NAME'] = '<i>Фильтр по названию</i>';
 
 $lang['BT_ONLY_ACTIVE'] = 'Активные (есть сидер или личер)';
 $lang['BT_ONLY_MY'] = 'Мои раздачи';
@@ -1248,7 +1249,7 @@ $lang['SEARCH_DL_COMPLETE_DOWNLOADS']   = 'Прошлые закачки';
 $lang['SEARCH_DL_CANCEL'] = 'Отмененные';
 $lang['CUR_DOWNLOADS'] = 'Текущие закачки';
 $lang['CUR_UPLOADS']   = 'Текущие раздачи';
-$lang['SEARCH_RELEASES'] = 'Найти раздачи';
+$lang['SEARCH_RELEASES'] = 'Раздачи';
 $lang['TOR_SEARCH_TITLE'] = 'Опции показа торрентов';
 $lang['OPEN_TOPIC'] = 'Открыть топик';
 
@@ -2965,3 +2966,9 @@ $lang['SITEMAP_ADD_EXP_1'] = 'Здесь вы можете указать доп
 $lang['SITEMAP_ADD_EXP_2'] = 'Каждая ссылка должна начинаться с http(s):// и новой строки!';
 
 $lang['FORUM_MAP'] = 'Карта форумов';
+$lang['ATOM_FEED'] = 'Лента';
+$lang['ATOM_ERROR'] = 'Ошибка генерации ленты';
+$lang['ATOM_SUBSCRIBE'] = 'Подписка на ленту';
+$lang['ATOM_NO_MODE'] = 'Не указан режим для ленты';
+$lang['ATOM_NO_FORUM'] = 'Для этого форума нет ленты (нет начатых тем)';
+$lang['ATOM_NO_USER'] = 'Для этого пользователя нет ленты (нет начатых тем)';

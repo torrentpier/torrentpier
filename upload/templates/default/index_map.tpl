@@ -1,15 +1,16 @@
 <style type="text/css">
-#f-map a  { font-size: 12px; text-decoration: none; }
+#f-map a  { font-size: 12px; text-decoration: none; padding-left: 8px; }
 #f-map li { margin: 4px 0 0 6px; }
 #f-map .b { font-weight: bold; }
 ul.tree-root { margin-left: 0; }
-ul.tree-root ul > li { list-style: disc; }
-ul.tree-root ul ul > li { list-style: circle; }
-ul.tree-root > li { list-style: none !important; padding: 0; margin-left: 0 !important; }
+ul.tree-root > li > ul { margin-left: 0; }
+ul.tree-root li { list-style: none; }
+ul.tree-root > li { padding: 0; margin-left: 0 !important; }
 .c_title {
-	display: block; margin: 9px 0; padding: 0 0 5px 3px; border-bottom: 1px solid #B7C0C5;
+	display: block; margin: 9px 0; padding: 0 0 5px 5px; border-bottom: 1px solid #B7C0C5;
 	color: #800000; font-size: 13px; font-weight: bold; letter-spacing: 1px;
 }
+ul.tree-root img   { cursor: pointer; }
 a.hl, a.hl:visited { color: #1515FF; }
 </style>
 
@@ -26,6 +27,11 @@ function qs_highlight_found ()
 		a.className = '';
 	}
 }
+function open_feed (f_id)
+{
+	$('#feed-id').val(f_id);
+	$('#feed-form').submit();
+}
 $(function(){
 	$('#q-search').focus().quicksearch('#f-map li', {
 		delay     : 300,
@@ -33,17 +39,27 @@ $(function(){
 		show      : qs_highlight_found,
 		onAfter   : function(){ $('#f-load').hide(); $('#f-map').show(); }
 	});
-	$.each($('#f-map a'), function(i,a){
-		$(a).attr('href', 'viewforum.php?f='+ $(a).attr('href'));
+	$.each($('#f-map a'), function(i,a) {
+		var f_id = $(a).attr('href');
+		$(a)
+			.attr('href', 'viewforum.php?f='+ f_id)
+			.before('<img class="feed-small" src="{IMG}feed.png" alt="feed" onclick="open_feed('+ f_id +')">')
+		;
 	});
-	$.each($('span.c_title'), function(i,el){
+	$.each($('span.c_title'), function(i,el) {
 		$(el).text( this.title );
 		this.title = '';
 	});
 });
 </script>
 
-<div class="row1 pad_8 border bw_TRBL" style="margin-top: 4px;">
+<form id="feed-form" method="post" action="feed.php" target="_blank" style="display: none;">
+	<input type="hidden" name="mode" value="get_feed_url">
+	<input type="hidden" name="type" value="f">
+	<input id="feed-id" type="hidden" name="id" value="">
+</form>
+
+<div class="f-map-wrap row1 pad_8">
 	<div style="margin: 20px 56px;">
 		<div style="padding: 0 0 12px 3px;">
 			<form autocomplete="off">
@@ -55,20 +71,29 @@ $(function(){
 		<div id="f-map" style="display: none;">
 			<!-- BEGIN c -->
 			<ul class="tree-root">
-				<li><span class="b"><span class="c_title" title="{c.CAT_TITLE}" name="{c.CAT_TITLE}"></span></span>
-				<!-- BEGIN f -->
-				<ul>
-					<li><span class="b"><a href="{c.f.FORUM_ID}">{c.f.FORUM_NAME}</a></span>
-						<!-- IF c.f.LAST_SF_ID -->
-						<ul>
-							<!-- BEGIN sf -->
-							<li><span><a href="{c.f.sf.SF_ID}">{c.f.sf.SF_NAME}</a></span></li>
-							<!-- END sf -->
-						</ul>
-						<!-- ENDIF -->
-					</li>
-				</ul>
-				<!-- END f -->
+				<li>
+					<span class="b">
+						<span class="c_title" title="{c.CAT_TITLE}"></span>
+					</span>
+					<!-- BEGIN f -->
+					<ul>
+						<li>
+							<span class="b">
+								<a href="{c.f.FORUM_ID}">{c.f.FORUM_NAME}</a>
+							</span>
+							<!-- IF c.f.LAST_SF_ID -->
+							<ul>
+								<!-- BEGIN sf -->
+								<li>
+									<span><a href="{c.f.sf.SF_ID}">{c.f.sf.SF_NAME}</a></span>
+								</li>
+								<!-- END sf -->
+							</ul>
+							<!-- ENDIF -->
+						</li>
+					</ul>
+					<!-- END f -->
+				</li>
 			</ul>
 			<!-- END c -->
 		</div>

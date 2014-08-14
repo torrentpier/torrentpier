@@ -135,7 +135,8 @@ $lang['SEARCH_SELF_BY_LAST'] = 'last post time';
 $lang['SEARCH_SELF_BY_MY'] = 'my post time';
 $lang['SEARCH_UNANSWERED'] = 'View unanswered posts';
 $lang['SEARCH_UNANSWERED_SHORT'] = 'unanswered';
-$lang['SEARCH_LATEST'] = 'latest';
+$lang['SEARCH_LATEST'] = 'Latest topics';
+$lang['LATEST_RELEASES'] = 'Latest releases';
 
 $lang['REGISTER'] = 'Register';
 $lang['PROFILE'] = 'Profile';
@@ -1194,7 +1195,7 @@ $lang['SEL_CHAPTERS'] = 'Link to the selected partitions';
 $lang['NOT_SEL_CHAPTERS'] = 'You have not selected topics';
 $lang['SEL_CHAPTERS_HELP'] = 'You can select a maximum %s partition';
 $lang['HIDE_CONTENTS'] = 'Hide the contents of {...}';
-$lang['FILTER_BY_NAME'] = '<i>filter by name </i>';
+$lang['FILTER_BY_NAME'] = '<i>Filter by name </i>';
 
 $lang['BT_ONLY_ACTIVE'] = 'Active';
 $lang['BT_ONLY_MY'] = 'My releases';
@@ -1248,7 +1249,7 @@ $lang['SEARCH_DL_COMPLETE_DOWNLOADS']   = 'Completed Downloads';
 $lang['SEARCH_DL_CANCEL'] = 'Canceled';
 $lang['CUR_DOWNLOADS'] = 'Current Downloads';
 $lang['CUR_UPLOADS']   = 'Current Uploads';
-$lang['SEARCH_RELEASES'] = 'Find releases';
+$lang['SEARCH_RELEASES'] = 'Releases';
 $lang['TOR_SEARCH_TITLE'] = 'Torrent search options';
 $lang['OPEN_TOPIC'] = 'Open topic';
 
@@ -2965,3 +2966,9 @@ $lang['SITEMAP_ADD_EXP_1'] = 'You can specify additional pages on your site (for
 $lang['SITEMAP_ADD_EXP_2'] = 'Each reference must begin with http(s):// and a new line!';
 
 $lang['FORUM_MAP'] = 'Forums\' map';
+$lang['ATOM_FEED'] = 'Feed';
+$lang['ATOM_ERROR'] = 'Error generating feed';
+$lang['ATOM_SUBSCRIBE'] = 'Subscribe to the feed';
+$lang['ATOM_NO_MODE'] = 'Do not specify a mode for the feed';
+$lang['ATOM_NO_FORUM'] = 'This forum does not have a feed (no ongoing topics)';
+$lang['ATOM_NO_USER'] = 'This user does not have a feed (no ongoing topics)';

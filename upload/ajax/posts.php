@@ -57,6 +57,10 @@ switch($this->request['type'])
 				$this->prompt_for_confirm($lang['CONFIRM_DELETE']);
 			}
 			post_delete($post_id);
+
+			// Update atom feed
+			update_atom('topic', (int) $this->request['topic_id']);
+
 			$this->response['hide']    = true;
 			$this->response['post_id'] = $post_id;
 		}
@@ -157,6 +161,9 @@ switch($this->request['type'])
 				}
 			}
 			else $this->ajax_die($lang['EMPTY_MESSAGE']);
+
+			// Update atom feed
+			update_atom('topic', (int) $this->request['topic_id']);
 
 			$this->response['html'] = bbcode2html($text);
 		}
@@ -308,6 +315,9 @@ switch($this->request['type'])
 			$notify  = !empty($this->request['notify']);
 			user_notification('reply', $post, $post['topic_title'], $post['forum_id'], $topic_id, $notify);
 		}
+
+		// Update atom feed
+		update_atom('topic', (int) $this->request['topic_id']);
 
 		$this->response['redirect'] = make_url(POST_URL . "$post_id#$post_id");
 	break;

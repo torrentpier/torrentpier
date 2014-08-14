@@ -277,6 +277,13 @@ function topic_delete ($mode_or_topic_id, $forum_id = null, $prune_time = 0, $pr
 			GROUP BY p.poster_id
 	");
 
+	// Get array for atom update
+	$atom_csv = array();
+	foreach (DB()->fetch_rowset('SELECT user_id FROM '.$tmp_user_posts) as $at)
+	{
+		$atom_csv[] = $at['user_id'];
+	}
+
 	DB()->query("
 		UPDATE
 			$tmp_user_posts tmp, ". BB_USERS ." u
@@ -383,6 +390,12 @@ function topic_delete ($mode_or_topic_id, $forum_id = null, $prune_time = 0, $pr
 
 	// Sync
 	sync('forum', array_keys($sync_forums));
+
+	// Update atom feed
+	foreach ($atom_csv as $atom)
+	{
+		update_atom('user', $atom);
+	}
 
 	DB()->query("DROP TEMPORARY TABLE $tmp_delete_topics");
 
@@ -663,6 +676,16 @@ function post_delete ($mode_or_post_id, $user_id = null, $exclude_first = true)
 	sync('forum', array_keys($sync_forums));
 	sync('user_posts', $sync_users);
 
+	// Update atom feed
+	foreach ($sync_topics as $atom_topic)
+	{
+		update_atom('topic', $atom_topic);
+	}
+	foreach ($sync_users as $atom_user)
+	{
+		update_atom('user', $atom_user);
+	}
+
 	DB()->query("DROP TEMPORARY TABLE $tmp_delete_posts");
 
 	return $deleted_posts_count;
@@ -670,7 +693,7 @@ function post_delete ($mode_or_post_id, $user_id = null, $exclude_first = true)
 
 function user_delete ($user_id, $delete_posts = false)
 {
-	global $log_action;
+	global $bb_cfg, $log_action;
 
 	if (!$user_csv = get_id_csv($user_id))
 	{
@@ -755,6 +778,13 @@ function user_delete ($user_id, $delete_posts = false)
 
 	DB()->query("UPDATE ". BB_PRIVMSGS ." SET privmsgs_from_userid = ". DELETED ." WHERE privmsgs_from_userid IN($user_csv)");
 	DB()->query("UPDATE ". BB_PRIVMSGS ." SET privmsgs_to_userid = ". DELETED ." WHERE privmsgs_to_userid IN($user_csv)");
+
+	// Delete user feed
+	foreach (explode(',', $user_csv) as $user_id)
+	{
+		$file_path = $bb_cfg['atom']['path'] .'/u/'. floor($user_id/5000) .'/'. ($user_id % 100) .'/'. $user_id .'.atom';
+		@unlink($file_path);
+	}
 }
 
 function get_usernames_for_log ($user_id)

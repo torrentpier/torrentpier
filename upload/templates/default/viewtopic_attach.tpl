@@ -4,7 +4,7 @@
 
 <!-- BEGIN denyrow -->
 <fieldset class="attach">
-<legend>{ATTACHMENT_ICON} {L_ATTACHMENT}</legend>
+<legend>{TOPIC_ATTACH_ICON} {L_ATTACHMENT}</legend>
 	<p class="attach_link denied">{postrow.attach.denyrow.L_DENIED}</p>
 </fieldset>
 
@@ -13,7 +13,7 @@
 
 <!-- BEGIN cat_images -->
 <fieldset class="attach">
-<legend>{ATTACHMENT_ICON} {L_ATTACHMENT} ({postrow.attach.cat_images.FILESIZE})</legend>
+<legend>{TOPIC_ATTACH_ICON} {L_ATTACHMENT} ({postrow.attach.cat_images.FILESIZE})</legend>
 	<p class="tCenter pad_6">
 		<img src="{postrow.attach.cat_images.IMG_SRC}" id="attachImg" class="postImg" alt="img" border="0" />
 	</p>
@@ -29,7 +29,7 @@
 
 <!-- BEGIN cat_thumb_images -->
 <fieldset class="attach">
-<legend>{ATTACHMENT_ICON} {L_ATTACHMENT_THUMBNAIL}</legend>
+<legend>{TOPIC_ATTACH_ICON} {L_ATTACHMENT_THUMBNAIL}</legend>
 	<p class="attach_link">
 		<a href="{postrow.attach.cat_thumb_images.IMG_SRC}" target="_blank"><img src="{postrow.attach.cat_thumb_images.IMG_THUMB_SRC}" alt="{postrow.attach.cat_thumb_images.DOWNLOAD_NAME}" border="0" /></a>
 	</p>
