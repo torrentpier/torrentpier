@@ -22,16 +22,17 @@ TorrentPier II - движок торрент-трекера, написанны�
 
 Исходя из настроек вашего сервера, устанавливаем рекомендуемые права доступа (chmod) на указанные папки **777**, а на файлы внутри этих папок (кроме файлов **.htaccess** и **.keep**) **666**:
 - ajax/html
+- atom
 - cache
 - cache/filecache
-- files
-- files/thumbs
 - images
 - images/avatars
 - images/captcha
 - images/ranks
 - images/smiles
 - log
+- old_files
+- old_files/thumbs
 - sitemap
 - triggers
 

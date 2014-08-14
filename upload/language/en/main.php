@@ -103,6 +103,13 @@ $lang['DATASTORE'] = 'Datastore';
 $lang['DATASTORE_CLEARED'] = 'Datastore has been cleared';
 $lang['BOARD_DISABLE'] = 'Sorry, this forum is disabled. Try to come back later';
 $lang['BOARD_DISABLE_CRON'] = 'Forum is down for maintenance. Try to come back later';
+$lang['ADMIN_DISABLE'] = 'the forum is disabled by administrator, you can enable it at any time';
+$lang['ADMIN_DISABLE_CRON'] = 'forum locked by the trigger cron job, you can remove a lock at any time';
+$lang['ADMIN_DISABLE_TITLE'] = 'The forum is disabled';
+$lang['ADMIN_DISABLE_CRON_TITLE'] = 'Forum is down for maintenance';
+$lang['ADMIN_UNLOCK'] = 'Enable forum';
+$lang['ADMIN_UNLOCKED'] = 'Unlocked';
+$lang['ADMIN_UNLOCK_CRON'] = 'Remove lock';
 
 $lang['LOADING'] = 'Loading...';
 $lang['JUMPBOX_TITLE'] = 'Select forum';
@@ -128,7 +135,8 @@ $lang['SEARCH_SELF_BY_LAST'] = 'last post time';
 $lang['SEARCH_SELF_BY_MY'] = 'my post time';
 $lang['SEARCH_UNANSWERED'] = 'View unanswered posts';
 $lang['SEARCH_UNANSWERED_SHORT'] = 'unanswered';
-$lang['SEARCH_LATEST'] = 'latest';
+$lang['SEARCH_LATEST'] = 'Latest topics';
+$lang['LATEST_RELEASES'] = 'Latest releases';
 
 $lang['REGISTER'] = 'Register';
 $lang['PROFILE'] = 'Profile';
@@ -895,74 +903,41 @@ $lang['LOOKUP_IP'] = 'Look up IP address';
 //
 // Timezones ... for display on each page
 //
-$lang['ALL_TIMES'] = 'All times are <span class="tz_time">%s</span>'; // eg. All times are GMT - 12 Hours (times from next block)
-
-$lang['-12'] = 'GMT - 12 Hours';
-$lang['-11'] = 'GMT - 11 Hours';
-$lang['-10'] = 'GMT - 10 Hours';
-$lang['-9'] = 'GMT - 9 Hours';
-$lang['-8'] = 'GMT - 8 Hours';
-$lang['-7'] = 'GMT - 7 Hours';
-$lang['-6'] = 'GMT - 6 Hours';
-$lang['-5'] = 'GMT - 5 Hours';
-$lang['-4'] = 'GMT - 4 Hours';
-$lang['-3.5'] = 'GMT - 3.5 Hours';
-$lang['-3'] = 'GMT - 3 Hours';
-$lang['-2'] = 'GMT - 2 Hours';
-$lang['-1'] = 'GMT - 1 Hours';
-$lang['0'] = 'GMT';
-$lang['1'] = 'GMT + 1 Hour';
-$lang['2'] = 'GMT + 2 Hours';
-$lang['3'] = 'GMT + 3 Hours';
-$lang['3.5'] = 'GMT + 3.5 Hours';
-$lang['4'] = 'GMT + 4 Hours';
-$lang['4.5'] = 'GMT + 4.5 Hours';
-$lang['5'] = 'GMT + 5 Hours';
-$lang['5.5'] = 'GMT + 5.5 Hours';
-$lang['6'] = 'GMT + 6 Hours';
-$lang['6.5'] = 'GMT + 6.5 Hours';
-$lang['7'] = 'GMT + 7 Hours';
-$lang['8'] = 'GMT + 8 Hours';
-$lang['9'] = 'GMT + 9 Hours';
-$lang['9.5'] = 'GMT + 9.5 Hours';
-$lang['10'] = 'GMT + 10 Hours';
-$lang['11'] = 'GMT + 11 Hours';
-$lang['12'] = 'GMT + 12 Hours';
-$lang['13'] = 'GMT + 13 Hours';
+$lang['ALL_TIMES'] = 'All times are <span class="tz_time">%s</span>'; // This is followed by UTC and the timezone offset
 
 // These are displayed in the timezone select box
-$lang['TZ']['-12'] = 'GMT - 12 Hours';
-$lang['TZ']['-11'] = 'GMT - 11 Hours';
-$lang['TZ']['-10'] = 'GMT - 10 Hours';
-$lang['TZ']['-9'] = 'GMT - 9 Hours';
-$lang['TZ']['-8'] = 'GMT - 8 Hours';
-$lang['TZ']['-7'] = 'GMT - 7 Hours';
-$lang['TZ']['-6'] = 'GMT - 6 Hours';
-$lang['TZ']['-5'] = 'GMT - 5 Hours';
-$lang['TZ']['-4'] = 'GMT - 4 Hours';
-$lang['TZ']['-3.5'] = 'GMT - 3.5 Hours';
-$lang['TZ']['-3'] = 'GMT - 3 Hours';
-$lang['TZ']['-2'] = 'GMT - 2 Hours';
-$lang['TZ']['-1'] = 'GMT - 1 Hours';
-$lang['TZ']['0'] = 'GMT';
-$lang['TZ']['1'] = 'GMT + 1 Hour';
-$lang['TZ']['2'] = 'GMT + 2 Hours';
-$lang['TZ']['3'] = 'GMT + 3 Hours';
-$lang['TZ']['3.5'] = 'GMT + 3.5 Hours';
-$lang['TZ']['4'] = 'GMT + 4 Hours';
-$lang['TZ']['4.5'] = 'GMT + 4.5 Hours';
-$lang['TZ']['5'] = 'GMT + 5 Hours';
-$lang['TZ']['5.5'] = 'GMT + 5.5 Hours';
-$lang['TZ']['6'] = 'GMT + 6 Hours';
-$lang['TZ']['6.5'] = 'GMT + 6.5 Hours';
-$lang['TZ']['7'] = 'GMT + 7 Hours';
-$lang['TZ']['8'] = 'GMT + 8 Hours';
-$lang['TZ']['9'] = 'GMT + 9 Hours';
-$lang['TZ']['9.5'] = 'GMT + 9.5 Hours';
-$lang['TZ']['10'] = 'GMT + 10 Hours';
-$lang['TZ']['11'] = 'GMT + 11 Hours';
-$lang['TZ']['12'] = 'GMT + 12 Hours';
-$lang['TZ']['13'] = 'GMT + 13 Hours';
+$lang['TZ']['-12'] = 'UTC - 12';
+$lang['TZ']['-11'] = 'UTC - 11';
+$lang['TZ']['-10'] = 'UTC - 10';
+$lang['TZ']['-9'] = 'UTC - 9';
+$lang['TZ']['-8'] = 'UTC - 8';
+$lang['TZ']['-7'] = 'UTC - 7';
+$lang['TZ']['-6'] = 'UTC - 6';
+$lang['TZ']['-5'] = 'UTC - 5';
+$lang['TZ']['-4'] = 'UTC - 4';
+$lang['TZ']['-3.5'] = 'UTC - 3.5';
+$lang['TZ']['-3'] = 'UTC - 3';
+$lang['TZ']['-2'] = 'UTC - 2';
+$lang['TZ']['-1'] = 'UTC - 1';
+$lang['TZ']['0'] = 'UTC ± 0';
+$lang['TZ']['1'] = 'UTC + 1';
+$lang['TZ']['2'] = 'UTC + 2';
+$lang['TZ']['3'] = 'UTC + 3';
+$lang['TZ']['3.5'] = 'UTC + 3.5';
+$lang['TZ']['4'] = 'UTC + 4';
+$lang['TZ']['4.5'] = 'UTC + 4.5';
+$lang['TZ']['5'] = 'UTC + 5';
+$lang['TZ']['5.5'] = 'UTC + 5.5';
+$lang['TZ']['6'] = 'UTC + 6';
+$lang['TZ']['6.5'] = 'UTC + 6.5';
+$lang['TZ']['7'] = 'UTC + 7';
+$lang['TZ']['8'] = 'UTC + 8';
+$lang['TZ']['9'] = 'UTC + 9';
+$lang['TZ']['9.5'] = 'UTC + 9.5';
+$lang['TZ']['10'] = 'UTC + 10';
+$lang['TZ']['11'] = 'UTC + 11';
+$lang['TZ']['12'] = 'UTC + 12';
+$lang['TZ']['13'] = 'UTC + 13';
 
 $lang['DATETIME']['TODAY'] = 'Today';
 $lang['DATETIME']['YESTERDAY'] = 'Yesterday';
@@ -1220,7 +1195,7 @@ $lang['SEL_CHAPTERS'] = 'Link to the selected partitions';
 $lang['NOT_SEL_CHAPTERS'] = 'You have not selected topics';
 $lang['SEL_CHAPTERS_HELP'] = 'You can select a maximum %s partition';
 $lang['HIDE_CONTENTS'] = 'Hide the contents of {...}';
-$lang['FILTER_BY_NAME'] = '<i>filter by name </i>';
+$lang['FILTER_BY_NAME'] = '<i>Filter by name </i>';
 
 $lang['BT_ONLY_ACTIVE'] = 'Active';
 $lang['BT_ONLY_MY'] = 'My releases';
@@ -1250,15 +1225,10 @@ $lang['BT_2_WEEKS']  = '2 weeks';
 $lang['BT_1_MONTH']  = 'month';
 
 $lang['DL_LIST_AND_TORRENT_ACTIVITY'] = 'DL-List and Torrent activity';
-$lang['DL_WILL'] = 'Will download';
-$lang['DL_DOWN'] = 'Downloading';
-$lang['DL_COMPLETE'] = 'Complete';
-$lang['DL_CANCEL'] = 'Cancel';
-
-$lang['DLWILL_2'] = 'Will download';
-$lang['DLDOWN_2'] = 'Downloading';
-$lang['DLCOMPLETE_2'] = 'Complete';
-$lang['DLCANCEL_2'] = 'Cancel';
+$lang['DLWILL'] = 'Will download';
+$lang['DLDOWN'] = 'Downloading';
+$lang['DLCOMPLETE'] = 'Complete';
+$lang['DLCANCEL'] = 'Cancel';
 
 $lang['DL_LIST_DEL'] = 'Clear DL-List';
 $lang['DL_LIST_DEL_CONFIRM'] = 'Delete DL-List for this topic?';
@@ -1279,7 +1249,7 @@ $lang['SEARCH_DL_COMPLETE_DOWNLOADS']   = 'Completed Downloads';
 $lang['SEARCH_DL_CANCEL'] = 'Canceled';
 $lang['CUR_DOWNLOADS'] = 'Current Downloads';
 $lang['CUR_UPLOADS']   = 'Current Uploads';
-$lang['SEARCH_RELEASES'] = 'Find releases';
+$lang['SEARCH_RELEASES'] = 'Releases';
 $lang['TOR_SEARCH_TITLE'] = 'Torrent search options';
 $lang['OPEN_TOPIC'] = 'Open topic';
 
@@ -1326,7 +1296,6 @@ $lang['OPEN_IN_SAME_WINDOW'] = 'open in same window';
 $lang['SHOW_TIME_TOPICS'] = 'show time of the creation topics';
 $lang['SHOW_CURSOR'] = 'highlight the row under the cursor';
 
-$lang['BT_LOW_RATIO_FUNC'] = "You can not use this option (ratio is too low)";
 $lang['BT_LOW_RATIO_FOR_DL'] = "With ratio <b>%s</b> you can not download torrents";
 $lang['BT_RATIO_WARNING_MSG'] = 'If your ratio falls below %s, you will not be able to download Torrents! <a href="%s"><b>More about the rating.</b></a>';
 
@@ -1790,7 +1759,7 @@ $lang['USER_LEVELS_UPDATED'] = 'User levels have been updated';
 $lang['SYNCHRONIZE'] = 'Synchronize';
 $lang['TOPICS_DATA_SYNCHRONIZED'] = 'Topics data have been synchronized';
 $lang['USER_POSTS_COUNT'] = 'User posts count';
-$lang['USER POSTS COUNT SYNCHRONIZED'] = 'User posts count has been synchronized';
+$lang['USER_POSTS_COUNT_SYNCHRONIZED'] = 'User posts count has been synchronized';
 
 // Online Userlist
 $lang['SHOW_ONLINE_USERLIST'] = 'Show the list of online users';
@@ -2600,10 +2569,10 @@ $lang['BT_SHOW_DL_LIST'] = 'Show DL-List in Download topics';
 $lang['BT_DL_LIST_ONLY_1ST_PAGE'] = 'Show DL-List only on first page in topics';
 $lang['BT_DL_LIST_ONLY_COUNT'] = 'Show only number of users';
 $lang['BT_SHOW_DL_LIST_BUTTONS'] = 'Show buttons for manually changing DL-status';
-$lang['BT_SHOW_DL_BUT_WILL'] = $lang['DL_WILL'];
-$lang['BT_SHOW_DL_BUT_DOWN'] = $lang['DL_DOWN'];
-$lang['BT_SHOW_DL_BUT_COMPL'] = $lang['DL_COMPLETE'];
-$lang['BT_SHOW_DL_BUT_CANCEL'] = $lang['DL_CANCEL'];
+$lang['BT_SHOW_DL_BUT_WILL'] = $lang['DLWILL'];
+$lang['BT_SHOW_DL_BUT_DOWN'] = $lang['DLDOWN'];
+$lang['BT_SHOW_DL_BUT_COMPL'] = $lang['DLCOMPLETE'];
+$lang['BT_SHOW_DL_BUT_CANCEL'] = $lang['DLCANCEL'];
 
 $lang['BT_ADD_AUTH_KEY_HEAD'] = 'Passkey';
 $lang['BT_ADD_AUTH_KEY'] = 'Enable adding passkey to the torrent-files before downloading';
@@ -2899,7 +2868,7 @@ $lang['SEARCH_FOR_USERFIELD_OCCUPATION'] = 'Searching for users with their Occup
 $lang['SEARCH_FOR_LASTVISITED_INTHELAST'] = 'Searching for users who have visited in the last %s %s';
 $lang['SEARCH_FOR_LASTVISITED_AFTERTHELAST'] = 'Searching for users who have visited after the last %s %s';
 $lang['SEARCH_FOR_LANGUAGE'] = 'Searching for users who have set %s as their language';
-$lang['SEARCH_FOR_TIMEZONE'] = 'Searching for users who have set GMT %s as their timezone';
+$lang['SEARCH_FOR_TIMEZONE'] = 'Searching for users who have set UTC %s as their timezone';
 $lang['SEARCH_FOR_STYLE'] = 'Searching for users who have set %s as their style';
 $lang['SEARCH_FOR_MODERATORS'] = 'Search for moderators of the Forum -> %s';
 $lang['SEARCH_USERS_ADVANCED'] = 'Advanced User Search';
@@ -2995,3 +2964,11 @@ $lang['SITEMAP_ADD_TITLE'] = 'Additional pages for sitemap';
 $lang['SITEMAP_ADD_PAGE'] = 'Additional pages';
 $lang['SITEMAP_ADD_EXP_1'] = 'You can specify additional pages on your site (for example, <b>http://torrentpier.me/memberlist.php</b>) which should be included in your sitemap file that you creating.';
 $lang['SITEMAP_ADD_EXP_2'] = 'Each reference must begin with http(s):// and a new line!';
+
+$lang['FORUM_MAP'] = 'Forums\' map';
+$lang['ATOM_FEED'] = 'Feed';
+$lang['ATOM_ERROR'] = 'Error generating feed';
+$lang['ATOM_SUBSCRIBE'] = 'Subscribe to the feed';
+$lang['ATOM_NO_MODE'] = 'Do not specify a mode for the feed';
+$lang['ATOM_NO_FORUM'] = 'This forum does not have a feed (no ongoing topics)';
+$lang['ATOM_NO_USER'] = 'This user does not have a feed (no ongoing topics)';

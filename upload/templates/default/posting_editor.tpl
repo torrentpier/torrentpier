@@ -1,31 +1,25 @@
 <!-- IF QUICK_REPLY -->
 <!-- ELSE -->
 <script type="text/javascript">
-ajax.callback.posts = function(data){
-    $('#view_message').show();
-	    $('.view-message').html(data.message_html);
-	    initPostBBCode('.view-message');
-			var maxH   = screen.height - 490;
-		$('.view-message').css({ maxHeight: maxH });
+ajax.callback.posts = function(data) {
+	$('#view_message').show();
+	$('.view-message').html(data.message_html);
+	initPostBBCode('.view-message');
+	var maxH = screen.height - 490;
+	$('.view-message').css({maxHeight: maxH});
 };
 </script>
 <div class="mrg_4" style="padding-left:2px;">
 <select name="fontFace">
 	<option style="font-family: Verdana" value="-1" selected="selected">{L_QR_FONT_SEL}:</option>
-	<option style="font-family: Courier" value="Courier">&nbsp;Courier</option>
-	<option style="font-family: Courier New" value="Courier New">&nbsp;Courier New</option>
-	<option style="font-family: monospace" value="monospace">&nbsp;monospace</option>
-	<option style="font-family: Fixedsys" value="Fixedsys">&nbsp;Fixedsys</option>
+	<option style="font-family: monospace" value="monospace">&nbsp;Monospace</option>
+	<option style="font-family: serif" value="serif">&nbsp;Serif</option>
+	<option style="font-family: sans-serif" value="sans-serif">&nbsp;Sans Serif</option>
+	<option style="font-family: cursive" value="cursive">&nbsp;Cursive</option>
 	<option style="font-family: Arial" value="Arial">&nbsp;Arial</option>
-	<option style="font-family: Comic Sans MS" value="Comic Sans MS">&nbsp;Comic Sans</option>
-	<option style="font-family: Georgia" value="Georgia">&nbsp;Georgia</option>
 	<option style="font-family: Tahoma" value="Tahoma">&nbsp;Tahoma</option>
-	<option style="font-family: Times New Roman" value="Times New Roman">&nbsp;Times</option>
-	<option style="font-family: serif" value="serif">&nbsp;serif</option>
-	<option style="font-family: sans-serif" value="sans-serif">&nbsp;sans-serif</option>
-	<option style="font-family: cursive" value="cursive">&nbsp;cursive</option>
-	<option style="font-family: fantasy" value="fantasy">&nbsp;fantasy</option>
-	<option style="font-family: Monotype Corsiva" value="Monotype Corsiva">&nbsp;Monotype</option>
+	<option style="font-family: Georgia" value="Georgia">&nbsp;Georgia</option>
+	<option style="font-family: Fixedsys" value="Fixedsys">&nbsp;Fixedsys</option>
 </select>
 &nbsp;
 <select name="codeColor" class="text_color">
@@ -60,11 +54,11 @@ ajax.callback.posts = function(data){
 </select>
 &nbsp;
 <select name="codeAlign" class="text_size">
-   <option value="left" selected="selected">{L_ALIGN}</option>
-   <option value="left">&nbsp;{L_LEFT}</option>
-   <option value="right">&nbsp;{L_RIGHT}</option>
-   <option value="center">&nbsp;{L_CENTER}</option>
-   <option value="justify">&nbsp;{L_JUSTIFY}</option>
+	<option value="left" selected="selected">{L_ALIGN}</option>
+	<option value="left">&nbsp;{L_LEFT}</option>
+	<option value="right">&nbsp;{L_RIGHT}</option>
+	<option value="center">&nbsp;{L_CENTER}</option>
+	<option value="justify">&nbsp;{L_JUSTIFY}</option>
 </select>
 &nbsp;
 <span class="buttons">

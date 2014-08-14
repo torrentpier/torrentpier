@@ -12,9 +12,10 @@
 <!-- IF LOGGED_IN -->
 <div id="forums_top_links">
 	<div class="floatL">
-		<a href="{U_SEARCH_NEW}" class="med"><b>{L_SEARCH_NEW}</b></a> &#0183;
-		<a href="{U_SEARCH_SELF_BY_LAST}" class="med">{L_SEARCH_SELF}</a> <a href="#search-my-posts" class="menu-root menu-alt1">{OPEN_MENU_IMG_ALT1}</a> &#0183;
-		<a href="{U_SEARCH_LATEST}" class="med">{L_SEARCH_LATEST}</a>
+		<a href="{U_SEARCH_LATEST}" class="med">{L_SEARCH_LATEST}</a> &#0183;
+		<a href="{U_SEARCH_SELF_BY_LAST}" class="med">{L_SEARCH_SELF}</a> <a href="#search-my-posts" class="menu-root menu-alt1">{OPEN_MENU_IMG_ALT}</a> &#0183;
+		<a href="{SITE_URL}atom/f/0.atom" class="med">{FEED_IMG} {L_LATEST_RELEASES}</a> &#0183;
+		<a href="{U_INDEX}?map=1" class="med bold">{FEED_IMG} {L_FORUM_MAP}</a>
 	</div>
 	<div class="floatR med bold">
 		<a class="menu-root" href="#only-new-options">{L_DISPLAYING_OPTIONS}</a>
@@ -52,6 +53,11 @@
 <!-- ENDIF -->
 
 <!-- IF SHOW_FORUMS -->
+
+<!-- IF SHOW_MAP -->
+	<!-- INCLUDE index_map.tpl -->
+<!-- ELSE -->
+
 <!-- BEGIN c -->
 <div class="category">
 	<h3 class="cat_title"><a href="{c.U_VIEWCAT}">{c.CAT_TITLE}</a></h3>
@@ -131,7 +137,9 @@
 <div class="cat_separator"></div>
 <!-- END c -->
 
-<!-- ELSE / start of !SHOW_FORUMS -->
+<!-- ENDIF / SHOW_MAP -->
+
+<!-- ELSE / SHOW_FORUMS -->
 
 <table class="forumline">
 	<tr><td class="row1 tCenter pad_8">{NO_FORUMS_MSG}</td></tr>
@@ -146,6 +154,7 @@
 
 <!-- IF LOGGED_IN and SHOW_FORUMS -->
 <div id="mark_all_forums_read">
+	<a href="{U_SEARCH_NEW}" class="med">{L_SEARCH_NEW}</a> &#0183;
 	<a href="{U_INDEX}" class="med" onclick="setCookie('{COOKIE_MARK}', 'all_forums');">{L_MARK_ALL_FORUMS_READ}</a>
 </div>
 <!-- ENDIF -->
@@ -179,11 +188,11 @@
 				};
 				</script>
 				<div class="hr1" style="margin: 5px 0 4px;"></div>
-                <p id="birthday_today" class="birthday">{WHOSBIRTHDAY_TODAY}</p>
-                <p id="birthday_week" class="birthday">{WHOSBIRTHDAY_WEEK}</p>
+				<p id="birthday_today" class="birthday">{WHOSBIRTHDAY_TODAY}</p>
+				<p id="birthday_week" class="birthday">{WHOSBIRTHDAY_WEEK}</p>
 				<!-- ENDIF -->
 
-                <div class="hr1" style="margin: 5px 0 4px;"></div>
+				<div class="hr1" style="margin: 5px 0 4px;"></div>
 
 				<p>{TOTAL_USERS_ONLINE}<!-- IF IS_ADMIN --> &nbsp;{USERS_ONLINE_COUNTS}<!-- ENDIF --></p>
 				<p>{RECORD_USERS}</p>

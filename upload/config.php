@@ -56,6 +56,7 @@
  * Avatars
  * Misc
  * Captcha
+ * Atom feed
 **/
 
 if (!defined('BB_ROOT')) die(basename(__FILE__));
@@ -68,8 +69,8 @@ $domain_name = (!empty($_SERVER['SERVER_NAME'])) ? $_SERVER['SERVER_NAME'] : $do
 
 // Version info
 $bb_cfg['tp_version'] = '2.0.9 (RC)';
-$bb_cfg['tp_release_date'] = '07-08-2014';
-$bb_cfg['tp_release_state'] = 'R594b';
+$bb_cfg['tp_release_date'] = '14-08-2014';
+$bb_cfg['tp_release_state'] = 'R595';
 
 // Database
 $charset  = 'utf8';
@@ -164,9 +165,8 @@ $bb_cfg['ratio_url_help']            = 'viewtopic.php?t=3'; // Рейтинг и
 $bb_cfg['search_help_url']           = 'viewtopic.php?t=4'; // Помощь по поиску
 
 // Torrents
-$bb_cfg['bt_min_ratio_allow_dl_tor'] = 0.3;          // 0 - disable
-$bb_cfg['bt_min_ratio_warning']      = 0.6;          // 0 - disable
-$bb_cfg['bt_min_ratio_dl_button']    = 0.5;          // 0 - disable
+$bb_cfg['bt_min_ratio_allow_dl_tor'] = 0.3;        // 0 - disable
+$bb_cfg['bt_min_ratio_warning']      = 0.6;        // 0 - disable
 
 $tr_cfg = array(
 	'autoclean'             => true,
@@ -218,9 +218,9 @@ $rating_limits = array(
 	'0.6' => 3,
 );
 
-// DL-Status
-$bb_cfg['dl_will_days_keep']     = 60;          // days to keep user's dlstatus records
-$bb_cfg['dl_down_days_keep']     = 30;
+// DL-Status (days to keep user's dlstatus records)
+$bb_cfg['dl_will_days_keep']     = 360;
+$bb_cfg['dl_down_days_keep']     = 180;
 $bb_cfg['dl_complete_days_keep'] = 180;
 $bb_cfg['dl_cancel_days_keep']   = 30;
 
@@ -591,10 +591,16 @@ $bb_cfg['advert_url']               = 'misc.php?do=info&show=advert';
 
 // Captcha
 $bb_cfg['captcha'] = array(
-	'disabled' => false,
+	'disabled'   => false,
 	'secret_key' => 'secret_key',
-	'img_url'    => './images/captcha/',           # without '/'
-	'img_path'   => BB_PATH .'/images/captcha/',   # without '/'
+	'img_url'    => './images/captcha/',         # with '/'
+	'img_path'   => BB_PATH .'/images/captcha/', # with '/'
+);
+
+// Atom feed
+$bb_cfg['atom'] = array(
+	'path' => BB_PATH .'/atom', # without '/'
+	'url'  => './atom',         # without '/'
 );
 
 define('BB_CFG_LOADED', true);

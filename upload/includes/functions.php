@@ -11,7 +11,7 @@ function get_path_from_id ($id, $ext_id, $base_path, $first_div, $sec_div)
 
 function get_avatar_path ($id, $ext_id, $base_path = '')
 {
-	return get_path_from_id($id, $ext_id, $base_path, 5000000, 100);
+	return get_path_from_id($id, $ext_id, $base_path, 5000, 100);
 }
 
 function delete_avatar ($user_id, $avatar_ext_id)
@@ -24,7 +24,7 @@ function delete_avatar ($user_id, $avatar_ext_id)
 function get_attach_path ($id)
 {
 	global $bb_cfg;
-	return get_path_from_id($id, '', $bb_cfg['attach']['upload_path'], 1000000, 100);
+	return get_path_from_id($id, '', $bb_cfg['attach']['upload_path'], 1000, 100);
 }
 
 function get_tracks ($type)
@@ -2808,4 +2808,49 @@ function gender_image ($gender)
 	}
 
 	return $user_gender;
+}
+
+function is_gold ($type)
+{
+	global $lang, $tr_cfg;
+
+	if (!$tr_cfg['gold_silver_enabled'])
+	{
+		$is_gold = '';
+		return $is_gold;
+	}
+	else
+	{
+		switch ($type)
+		{
+			case TOR_TYPE_GOLD:
+				$is_gold = '<img src="images/tor_gold.gif" width="16" height="15" title="'. $lang['GOLD'] .'" />&nbsp;';
+				break;
+			case TOR_TYPE_SILVER:
+				$is_gold = '<img src="images/tor_silver.gif" width="16" height="15" title="'. $lang['SILVER'] .'" />&nbsp;';
+				break;
+			default:
+				$is_gold = '';
+				break;
+		}
+	}
+
+	return $is_gold;
+}
+
+function update_atom ($type, $id)
+{
+	require_once(INC_DIR .'functions_atom.php');
+
+	switch ($type)
+	{
+		case 'user':
+			update_user_feed($id, get_username($id));
+			break;
+
+		case 'topic':
+			$topic_poster = (int) DB()->fetch_row("SELECT topic_poster FROM ". BB_TOPICS ." WHERE topic_id = $id LIMIT 1", 'topic_poster');
+			update_user_feed($topic_poster, get_username($topic_poster));
+			break;
+	}
 }

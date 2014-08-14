@@ -99,11 +99,6 @@ function display_post_attachments($post_id, $switch_attachment)
 	{
 		display_attachments($post_id);
 	}
-	else
-	{
-		// Display Notice (attachment there but not having permissions to view it)
-		// Not included because this would mean template and language file changes (at this stage this is not a wise step. ;))
-	}
 }
 
 /**
@@ -271,31 +266,23 @@ function display_attachments($post_id)
 			if ($image)
 			{
 				// Images
-				// NOTE: If you want to use the download.php everytime an image is displayed inlined, replace the
-				// Section between BEGIN and END with (Without the // of course):
-				//	$img_source = BB_ROOT . 'download.php?id=' . $attachments['_' . $post_id][$i]['attach_id'];
-				//	$download_link = TRUE;
-				// Check if we can reach the file or if it is stored outside of the webroot
 				if ($attach_config['upload_dir'][0] == '/' || ( $attach_config['upload_dir'][0] != '/' && $attach_config['upload_dir'][1] == ':'))
 				{
-					$img_source = BB_ROOT . 'download.php?id=' . $attachments['_' . $post_id][$i]['attach_id'];
+					$img_source = BB_ROOT . DOWNLOAD_URL . $attachments['_' . $post_id][$i]['attach_id'];
 					$download_link = TRUE;
 				}
 				else
 				{
-					// BEGIN
 					$img_source = $filename;
 					$download_link = FALSE;
-					// END
 				}
 
 				$template->assign_block_vars('postrow.attach.cat_images', array(
-					'DOWNLOAD_NAME' => $display_name,
+					'DOWNLOAD_NAME'  => $display_name,
 					'S_UPLOAD_IMAGE' => $upload_image,
-
-					'IMG_SRC' => $img_source,
-					'FILESIZE' => $filesize,
-					'COMMENT' => $comment,
+					'IMG_SRC'        => $img_source,
+					'FILESIZE'       => $filesize,
+					'COMMENT'        => $comment,
 				));
 
 				// Directly Viewed Image ... update the download count
@@ -315,29 +302,22 @@ function display_attachments($post_id)
 			if ($thumbnail)
 			{
 				// Images, but display Thumbnail
-				// NOTE: If you want to use the download.php everytime an thumnmail is displayed inlined, replace the
-				// Section between BEGIN and END with (Without the // of course):
-				//	$thumb_source = BB_ROOT . 'download.php?id=' . $attachments['_' . $post_id][$i]['attach_id'] . '&thumb=1';
-				// Check if we can reach the file or if it is stored outside of the webroot
 				if ($attach_config['upload_dir'][0] == '/' || ( $attach_config['upload_dir'][0] != '/' && $attach_config['upload_dir'][1] == ':'))
 				{
-					$thumb_source = BB_ROOT . 'download.php?id=' . $attachments['_' . $post_id][$i]['attach_id'] . '&thumb=1';
+					$thumb_source = BB_ROOT . DOWNLOAD_URL . $attachments['_' . $post_id][$i]['attach_id'] . '&thumb=1';
 				}
 				else
 				{
-					// BEGIN
 					$thumb_source = $thumbnail_filename;
-					// END
 				}
 
 				$template->assign_block_vars('postrow.attach.cat_thumb_images', array(
-					'DOWNLOAD_NAME' => $display_name,
+					'DOWNLOAD_NAME'  => $display_name,
 					'S_UPLOAD_IMAGE' => $upload_image,
-
-					'IMG_SRC' => BB_ROOT . 'download.php?id=' . $attachments['_' . $post_id][$i]['attach_id'],
-					'IMG_THUMB_SRC' => $thumb_source,
-					'FILESIZE' => $filesize,
-					'COMMENT' => $comment,
+					'IMG_SRC'        => BB_ROOT . DOWNLOAD_URL . $attachments['_' . $post_id][$i]['attach_id'],
+					'IMG_THUMB_SRC'  => $thumb_source,
+					'FILESIZE'       => $filesize,
+					'COMMENT'        => $comment,
 				));
 			}
 
@@ -352,15 +332,13 @@ function display_attachments($post_id)
 
 				// display attachment
 				$template->assign_block_vars('postrow.attach.attachrow', array(
-					'U_DOWNLOAD_LINK'	=> BB_ROOT . 'download.php?id=' . $attachments['_' . $post_id][$i]['attach_id'],
-					'S_UPLOAD_IMAGE' => $upload_image,
-
-					'DOWNLOAD_NAME' => $display_name,
-					'FILESIZE' => $filesize,
-					'COMMENT' => $comment,
-					'TARGET_BLANK' => $target_blank,
-
-					'DOWNLOAD_COUNT' => sprintf($lang['DOWNLOAD_NUMBER'], $attachments['_' . $post_id][$i]['download_count']),
+					'U_DOWNLOAD_LINK' => BB_ROOT . DOWNLOAD_URL . $attachments['_' . $post_id][$i]['attach_id'],
+					'S_UPLOAD_IMAGE'  => $upload_image,
+					'DOWNLOAD_NAME'   => $display_name,
+					'FILESIZE'        => $filesize,
+					'COMMENT'         => $comment,
+					'TARGET_BLANK'    => $target_blank,
+					'DOWNLOAD_COUNT'  => sprintf($lang['DOWNLOAD_NUMBER'], $attachments['_' . $post_id][$i]['download_count']),
 				));
 			}
 		}

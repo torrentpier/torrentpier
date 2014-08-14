@@ -190,17 +190,17 @@ function show_edit_options ()
 <!-- IF MY_POSTS -->
 <tr id="mod-action-row">
 	<td colspan="6" id="mod-action-cell" class="row2">
-	    <span id="ed-list-desc" class="small">{L_DEL_LIST_INFO}</span>
+		<span id="ed-list-desc" class="small">{L_DEL_LIST_INFO}</span>
 	</td>
 </tr>
 <!-- ENDIF -->
 <tr>
 	<td class="row2" colspan="6">
 		<!-- IF DL_CONTROLS -->
-		<input type="submit" name="dl_set_will" value="{L_DL_WILL}" class="liteoption" />
-		<input type="submit" name="dl_set_down" value="{L_DL_DOWN}" class="liteoption" />
-		<input type="submit" name="dl_set_complete" value="{L_DL_COMPLETE}" class="liteoption" />
-		<input type="submit" name="dl_set_cancel" value="{L_DL_CANCEL}" class="liteoption" />
+		<input type="submit" name="dl_set_will" value="{L_DLWILL}" class="liteoption" />
+		<input type="submit" name="dl_set_down" value="{L_DLDOWN}" class="liteoption" />
+		<input type="submit" name="dl_set_complete" value="{L_DLCOMPLETE}" class="liteoption" />
+		<input type="submit" name="dl_set_cancel" value="{L_DLCANCEL}" class="liteoption" />
 		<input type="hidden" name="redirect_type" value="search" />
 		<input type="hidden" name="mode" value="set_topics_dl_status" />
 		<!-- ELSE -->

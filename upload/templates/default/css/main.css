@@ -434,7 +434,7 @@ table.message td {
 }
 
 .cat, td.cat, td.catTitle, td.catHead, td.catBottom {
-	padding: 5px 4px 0;
+	padding: 5px 4px 6px;
 	background: #E0E5E9 url(../images/cellpic.gif) repeat-x;
 }
 .catTitle {
@@ -732,6 +732,8 @@ td.last_td      { border-right-width: 0 !important; }
 #online_explain { float: right; }
 #online_userlist a { white-space: nowrap; }
 #forums_top_nav { display: none; }
+
+.f-map-wrap { margin-top: -1px; border: 1px solid #DEDEDE; }
 /* ---------------------------------- *
      Forums on viewforum page
  * ---------------------------------- */

@@ -4,6 +4,10 @@ define('IN_ADMIN', true);
 define('BB_ROOT', './../');
 require(BB_ROOT .'common.php');
 
+$user->session_start();
+
+if (!IS_ADMIN) die('Unauthorized');
+
 $peers_in_last_minutes = array(30, 15, 5, 1);
 $peers_in_last_sec_limit = 300;
 
