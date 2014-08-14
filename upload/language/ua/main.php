@@ -2555,7 +2555,7 @@ $lang['USE_AUTH_KEY_EXPL'] = 'включити авторизацію по passk
 $lang['AUTH_KEY_NAME'] = "Ім'я ключа passkey";
 $lang['AUTH_KEY_NAME_EXPL'] = "ім'я ключа, який буде додаватися до GET запиті до announce url для ідентифікації користувача";
 $lang['ALLOW_GUEST_DL'] = "Дозволити 'гостям' (неавторизованим юзерам) доступ до трекера";
-
+$lang['RETRACKER_LOCAL'] = 'Додавати retracker.local';
 //
 // Forum config
 //

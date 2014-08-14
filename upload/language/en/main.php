@@ -2555,6 +2555,7 @@ $lang['USE_AUTH_KEY_EXPL'] = 'enable check for passkey';
 $lang['AUTH_KEY_NAME'] = 'Passkey name';
 $lang['AUTH_KEY_NAME_EXPL'] = 'passkey key name in GET request';
 $lang['ALLOW_GUEST_DL'] = 'Allow guest access to tracker';
+$lang['RETRACKER_LOCAL'] = 'Add retracker.local';
 
 //
 // Forum config

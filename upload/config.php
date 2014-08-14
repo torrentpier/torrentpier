@@ -188,6 +188,8 @@ $tr_cfg = array(
 	'limit_leech_ips'       => 0,
 	'tor_topic_up'          => true,
 	'gold_silver_enabled'   => true,
+    'retracker_local'       => false,
+    'retracker_local_host'  => 'http://retracker.local',
 );
 
 $bb_cfg['show_dl_status_in_search'] = true;

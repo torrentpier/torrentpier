@@ -27,6 +27,7 @@ $default_cfg_bool = array(
 	'update_dlstat'          => 1,
 	'limit_active_tor'       => 0,
 	'limit_concurrent_ips'   => 0,
+    'retracker_local'        => 0
 );
 
 $default_cfg_num = array(

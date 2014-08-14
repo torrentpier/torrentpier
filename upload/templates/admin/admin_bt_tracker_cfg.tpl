@@ -51,7 +51,14 @@
 	<td><h4>{L_ALLOW_GUEST_DL}</h4><!-- IF L_ALLOW_GUEST_DL_EXPL --><h6>{L_ALLOW_GUEST_DL_EXPL}</h6><!-- ENDIF --></td>
 	<td>&nbsp; <!-- IF $bb_cfg['bt_tor_browse_only_reg'] -->{L_NO}<!-- ELSE -->{L_YES}<!-- ENDIF --></td>
 </tr>
-
+<tr>
+    <td><h4>{L_RETRACKER_LOCAL}</h4></td>
+    <td>
+        <label for="retracker_true">
+            <input type="radio" name="retracker" id="retracker_true" value="1" {RETRACKER_LOCAL_YES} /> {L_YES}&nbsp;</label>
+        <label for="retracker_false">&nbsp;<input type="radio" name="retracker" id="retracker_false" value="0" {RETRACKER_LOCAL_NO} /> {L_NO} &nbsp;</label>
+    </td>
+</tr>
 <tr>
 	<th colspan="2">{L_LIMIT_ACTIVE_TOR_HEAD}</th>
 </tr>

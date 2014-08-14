@@ -354,7 +354,7 @@ function tracker_register ($attach_id, $mode = '', $tor_status = TOR_NOT_APPROVE
 
 function send_torrent_with_passkey ($filename)
 {
-	global $attachment, $auth_pages, $userdata, $bb_cfg, $lang;
+	global $attachment, $auth_pages, $userdata, $bb_cfg, $tr_cfg, $lang;
 
 	if (!$bb_cfg['bt_add_auth_key'] || $attachment['extension'] !== TORRENT_EXT || !$size = @filesize($filename))
 	{
@@ -456,10 +456,18 @@ function send_torrent_with_passkey ($filename)
 	{
 		unset($tor['announce-list']);
 	}
-	elseif (@$tor['announce-list'])
+	elseif (isset($tor['announce-list']))
 	{
 		$tor['announce-list'] = array_merge($tor['announce-list'], array(array($announce)));
 	}
+
+    // Add retracker.local
+    if (isset($tr_cfg['retracker_local']) && $tr_cfg['retracker_local']) {
+        if (!isset($tor['announce-list'])) {
+            $tor['announce-list'] = array();
+        }
+        $tor['announce-list'][] = array($tr_cfg['retracker_local_host']);
+    }
 
 	// Add publisher & topic url
 	$publisher_name = $bb_cfg['server_name'];
