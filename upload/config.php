@@ -593,14 +593,14 @@ $bb_cfg['advert_url']               = 'misc.php?do=info&show=advert';
 $bb_cfg['captcha'] = array(
 	'disabled'   => false,
 	'secret_key' => 'secret_key',
-	'img_url'    => './images/captcha/',
-	'img_path'   => BB_PATH .'/images/captcha/',
+	'img_url'    => './images/captcha/',         # with '/'
+	'img_path'   => BB_PATH .'/images/captcha/', # with '/'
 );
 
 // Atom feed
 $bb_cfg['atom'] = array(
-	'path' => BB_PATH .'/atom',
-	'url'  => './atom',
+	'path' => BB_PATH .'/atom', # without '/'
+	'url'  => './atom',         # without '/'
 );
 
 define('BB_CFG_LOADED', true);
