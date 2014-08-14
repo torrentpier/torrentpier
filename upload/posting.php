@@ -444,8 +444,8 @@ elseif ( ($submit || $confirm) && !$topic_has_new_posts )
 			}
 		}
 
-		// Update user atom feed
-		update_atom($topic_id);
+		// Update atom feed
+		update_atom('topic', $topic_id);
 
 		if ($mode == 'reply' && $post_info['topic_status'] == TOPIC_LOCKED)
 		{

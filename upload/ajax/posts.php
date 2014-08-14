@@ -58,8 +58,8 @@ switch($this->request['type'])
 			}
 			post_delete($post_id);
 
-			// Update user atom feed
-			update_atom((int) $this->request['topic_id']);
+			// Update atom feed
+			update_atom('topic', (int) $this->request['topic_id']);
 
 			$this->response['hide']    = true;
 			$this->response['post_id'] = $post_id;
@@ -162,8 +162,8 @@ switch($this->request['type'])
 			}
 			else $this->ajax_die($lang['EMPTY_MESSAGE']);
 
-			// Update user atom feed
-			update_atom((int) $this->request['topic_id']);
+			// Update atom feed
+			update_atom('topic', (int) $this->request['topic_id']);
 
 			$this->response['html'] = bbcode2html($text);
 		}
@@ -316,8 +316,8 @@ switch($this->request['type'])
 			user_notification('reply', $post, $post['topic_title'], $post['forum_id'], $topic_id, $notify);
 		}
 
-		// Update user atom feed
-		update_atom((int) $this->request['topic_id']);
+		// Update atom feed
+		update_atom('topic', (int) $this->request['topic_id']);
 
 		$this->response['redirect'] = make_url(POST_URL . "$post_id#$post_id");
 	break;

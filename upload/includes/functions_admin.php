@@ -277,6 +277,13 @@ function topic_delete ($mode_or_topic_id, $forum_id = null, $prune_time = 0, $pr
 			GROUP BY p.poster_id
 	");
 
+	// Get array for atom update
+	$atom_csv = array();
+	foreach (DB()->fetch_rowset('SELECT user_id FROM '.$tmp_user_posts) as $at)
+	{
+		$atom_csv[] = $at['user_id'];
+	}
+
 	DB()->query("
 		UPDATE
 			$tmp_user_posts tmp, ". BB_USERS ." u
@@ -383,6 +390,12 @@ function topic_delete ($mode_or_topic_id, $forum_id = null, $prune_time = 0, $pr
 
 	// Sync
 	sync('forum', array_keys($sync_forums));
+
+	// Update atom feed
+	foreach ($atom_csv as $atom)
+	{
+		update_atom('user', $atom);
+	}
 
 	DB()->query("DROP TEMPORARY TABLE $tmp_delete_topics");
 
@@ -662,6 +675,16 @@ function post_delete ($mode_or_post_id, $user_id = null, $exclude_first = true)
 	sync('topic', $sync_topics);
 	sync('forum', array_keys($sync_forums));
 	sync('user_posts', $sync_users);
+
+	// Update atom feed
+	foreach ($sync_topics as $atom_topic)
+	{
+		update_atom('topic', $atom_topic);
+	}
+	foreach ($sync_users as $atom_user)
+	{
+		update_atom('user', $atom_user);
+	}
 
 	DB()->query("DROP TEMPORARY TABLE $tmp_delete_posts");
 
