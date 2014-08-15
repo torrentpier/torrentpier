@@ -556,7 +556,7 @@ else
 		'S_HIDDEN_FIELDS'        => $s_hidden_fields,
 		'S_MODE_SELECT'          => $select_sort_mode,
 		'S_ORDER_SELECT'         => $select_sort_order,
-		'S_GROUPCP_ACTION'       => "groupcp.php?" . POST_GROUPS_URL . "=$group_id",
+		'S_GROUPCP_ACTION'       => GROUP_URL . $group_id,
 	));
 
 	// Dump out the remaining users

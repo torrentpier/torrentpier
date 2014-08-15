@@ -61,7 +61,7 @@ $images['folder_dl_hot_new']   = $_main .'folder_dl_hot_new.gif';
 // attach_icons
 $images['icon_clip']           = $_img .'icon_clip.gif';
 $images['icon_dn']             = $_img .'icon_dn.gif';
-$images['icon_magnet']        = $_img .'magnet.png';
+$images['icon_magnet']         = $_img .'magnet.png';
 
 // posting_icons
 $images['post_new']            = $_lang .'post.gif';
@@ -100,7 +100,7 @@ $images['voting_graphic'][1]   = $_main .'voting_bar.gif';
 $images['voting_graphic'][2]   = $_main .'voting_bar.gif';
 $images['voting_graphic'][3]   = $_main .'voting_bar.gif';
 $images['voting_graphic'][4]   = $_main .'voting_bar.gif';
-$images['progress_bar']	       = $_main .'progress_bar.gif';
+$images['progress_bar']        = $_main .'progress_bar.gif';
 $images['progress_bar_full']   = $_main .'progress_bar_full.gif';
 
 // Report
@@ -120,20 +120,16 @@ $bb_cfg['post_img_width_decr']     = 52;    // decrement for posted images width
 $bb_cfg['attach_img_width_decr']   = 130;   // decrement for attach images width (px)
 
 $template->assign_vars(array(
-	'IMG' => $_main,
-
-	'TEXT_BUTTONS'        => $bb_cfg['text_buttons'],
-	'POST_BTN_SPACER'     => ($bb_cfg['text_buttons']) ? '&nbsp;' : '',
-	'TOPIC_ATTACH_ICON'   => '<img src="images/icon_clip.gif" alt="" />',
-	'ATTACHMENT_ICON'     => '<img src="images/icon_clip.gif" alt="" />',
-	'OPEN_MENU_IMG_ALT1'  => '<img src="'. $_main .'menu_open_1.gif" class="menu-alt1" alt="" />',
-
-	'TOPIC_LEFT_COL_SPACER_WITDH' => $bb_cfg['topic_left_column_witdh'] - 8,  // 8px padding
-// Images auto-resize
+	'IMG'                         => $_main,
+	'TEXT_BUTTONS'                => $bb_cfg['text_buttons'],
+	'POST_BTN_SPACER'             => ($bb_cfg['text_buttons']) ? '&nbsp;' : '',
+	'TOPIC_ATTACH_ICON'           => '<img src="images/icon_clip.gif" alt="" />',
+	'OPEN_MENU_IMG_ALT'           => '<img src="'. $_main .'menu_open_1.gif" class="menu-alt1" alt="" />',
+	'TOPIC_LEFT_COL_SPACER_WITDH' => $bb_cfg['topic_left_column_witdh'] - 8, // 8px padding
 	'POST_IMG_WIDTH_DECR_JS'      => $bb_cfg['topic_left_column_witdh'] + $bb_cfg['post_img_width_decr'],
 	'ATTACH_IMG_WIDTH_DECR_JS'    => $bb_cfg['topic_left_column_witdh'] + $bb_cfg['attach_img_width_decr'],
-
-	'MAGNET_LINKS'        => $bb_cfg['magnet_links_enabled'],
+	'MAGNET_LINKS'                => $bb_cfg['magnet_links_enabled'],
+	'FEED_IMG'                    => '<img src="'. $_main .'feed.png" class="feed-small" alt="'. $lang['ATOM_FEED'] .'" />',
 ));
 
 // post_buttons

@@ -232,10 +232,10 @@ $(document).ready(function(){
 	&nbsp;
 	<!-- IF DL_BUTTONS -->
 	<form method="POST" action="{S_DL_ACTION}">{DL_HIDDEN_FIELDS}
-		<!-- IF DL_BUT_WILL --><input type="submit" name="dl_set_will" value="{L_DL_WILL}" class="liteoption" />&nbsp;<!-- ENDIF -->
-		<!-- IF DL_BUT_DOWN --><input type="submit" name="dl_set_down" value="{L_DL_DOWN}" class="liteoption" />&nbsp;<!-- ENDIF -->
-		<!-- IF DL_BUT_COMPL --><input type="submit" name="dl_set_complete" value="{L_DL_COMPLETE}" class="liteoption" />&nbsp;<!-- ENDIF -->
-		<!-- IF DL_BUT_CANCEL --><input type="submit" name="dl_set_cancel" value="{L_DL_CANCEL}" class="liteoption" /><!-- ENDIF -->
+		<!-- IF DL_BUT_WILL --><input type="submit" name="dl_set_will" value="{L_DLWILL}" class="liteoption" />&nbsp;<!-- ENDIF -->
+		<!-- IF DL_BUT_DOWN --><input type="submit" name="dl_set_down" value="{L_DLDOWN}" class="liteoption" />&nbsp;<!-- ENDIF -->
+		<!-- IF DL_BUT_COMPL --><input type="submit" name="dl_set_complete" value="{L_DLCOMPLETE}" class="liteoption" />&nbsp;<!-- ENDIF -->
+		<!-- IF DL_BUT_CANCEL --><input type="submit" name="dl_set_cancel" value="{L_DLCANCEL}" class="liteoption" /><!-- ENDIF -->
 	</form>
 	<!-- ENDIF -->
 	<!-- IF CALL_SEED --><form action="callseed.php?t={TOPIC_ID}" method="post"><input type="submit" value="{L_CALLSEED}" class="liteoption" />&nbsp;</form><!-- ENDIF -->

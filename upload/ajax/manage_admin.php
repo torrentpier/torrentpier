@@ -99,7 +99,15 @@ switch ($mode)
 
 		sync('user_posts', 'all');
 
-		$this->response['sync_user_posts_html'] = '<span class="seed bold">'. $lang['USER POSTS COUNT SYNCHRONIZED'] .'</span>';
+		$this->response['sync_user_posts_html'] = '<span class="seed bold">'. $lang['USER_POSTS_COUNT_SYNCHRONIZED'] .'</span>';
+
+	break;
+
+	case 'unlock_cron':
+
+		cron_enable_board();
+
+		$this->response['unlock_cron_html'] = '<span class="seed bold">'. $lang['ADMIN_UNLOCKED'] .'</span>';
 
 	break;
 }

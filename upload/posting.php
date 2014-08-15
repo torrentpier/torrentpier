@@ -353,7 +353,7 @@ elseif ( ($submit || $confirm) && !$topic_has_new_posts )
 	$return_message = '';
 	$return_meta = '';
 
-	switch ( $mode )
+	switch ($mode)
 	{
 		case 'editpost':
 		case 'newtopic':
@@ -443,6 +443,9 @@ elseif ( ($submit || $confirm) && !$topic_has_new_posts )
 				else tracker_register(TORRENT_ATTACH_ID, 'newtopic', TOR_NOT_APPROVED);
 			}
 		}
+
+		// Update atom feed
+		update_atom('topic', $topic_id);
 
 		if ($mode == 'reply' && $post_info['topic_status'] == TOPIC_LOCKED)
 		{
@@ -671,7 +674,7 @@ $template->assign_vars(array(
 	'SUBJECT' => $subject,
 	'MESSAGE' => $message,
 
-	'U_VIEWTOPIC' => ( $mode == 'reply' ) ? "viewtopic.php?" . POST_TOPIC_URL . "=$topic_id&amp;postorder=desc" : '',
+	'U_VIEWTOPIC' => ( $mode == 'reply' ) ? TOPIC_URL . $topic_id . "&amp;postorder=desc" : '',
 
 	'S_NOTIFY_CHECKED' => ( $notify_user ) ? 'checked="checked"' : '',
 	'S_TYPE_TOGGLE' => $topic_type_toggle,

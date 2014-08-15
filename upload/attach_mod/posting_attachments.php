@@ -806,7 +806,7 @@ class attach_parent
 				}
 				else
 				{
-					$download_link = BB_ROOT . 'download.php?id=' . $this->attachment_id_list[$i];
+					$download_link = BB_ROOT . DOWNLOAD_URL . $this->attachment_id_list[$i];
 				}
 
 				$template->assign_block_vars('attach_row', array(

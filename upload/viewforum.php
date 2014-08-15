@@ -68,9 +68,8 @@ if (!$is_auth['auth_view'])
 {
 	if (IS_GUEST)
 	{
-		$redirect = "f=$forum_id";
-		$redirect .= ($start) ? "&start=$start" : '';
-		redirect(LOGIN_URL . "?redirect=viewforum.php&$redirect");
+		$redirect = ($start) ? "&start=$start" : '';
+		redirect(LOGIN_URL . "?redirect=". FORUM_URL . $forum_id . $redirect);
 	}
 	// The user is not authed to read this forum ...
 	$message = sprintf($lang['SORRY_AUTH_VIEW'], $is_auth['auth_view_type']);
@@ -269,7 +268,7 @@ if (!empty($_REQUEST['topicdays']))
 			SELECT COUNT(*) AS forum_topics
 			FROM ". BB_TOPICS ."
 			WHERE forum_id = $forum_id
-				AND topic_last_post_time > ". (TIMENOW - 86400*$req_topic_days) ."
+				AND topic_last_post_time > ". (TIMENOW - 86400 * $req_topic_days) ."
 		";
 
 		if ($row = DB()->fetch_row($sql))
@@ -282,7 +281,7 @@ if (!empty($_REQUEST['topicdays']))
 // Correct $start value
 if ($start > $forum_topics)
 {
-	redirect("viewforum.php?f=$forum_id");
+	redirect(FORUM_URL . $forum_id);
 }
 
 // Generate SORT and ORDER selects
@@ -480,21 +479,6 @@ foreach ($topic_rowset as $topic)
 		}
 	}
 
-	// Gold/Silver releases mod
-	$is_gold = '';
-	if ($tr_cfg['gold_silver_enabled'] && isset($topic['tor_type']))
-	{
-		if ($topic['tor_type'] == TOR_TYPE_GOLD)
-		{
-			$is_gold = '<img src="images/tor_gold.gif" width="16" height="15" title="'.$lang['GOLD'].'" alt="" />&nbsp;';
-		}
-		elseif ($topic['tor_type'] == TOR_TYPE_SILVER)
-		{
-			$is_gold = '<img src="images/tor_silver.gif" width="16" height="15" title="'.$lang['SILVER'].'" alt="" />&nbsp;';
-		}
-	}
-	// END Gold/Silver releases mod
-
 	$template->assign_block_vars('t', array(
 		'FORUM_ID'         => $forum_id,
 		'TOPIC_ID'         => $topic_id,
@@ -508,7 +492,7 @@ foreach ($topic_rowset as $topic)
 		'VIEWS'            => $topic['topic_views'],
 		'TOR_STALED'       => ($forum_data['allow_reg_tracker'] && !($t_type == POST_ANNOUNCE || $t_type == POST_STICKY || $topic['tor_size'])),
 		'TOR_FROZEN'       => isset($topic['tor_status']) ? ((!IS_AM) ? isset($bb_cfg['tor_frozen'][$topic['tor_status']]) : '') : '',
-		'TOR_TYPE'         => $is_gold,
+		'TOR_TYPE'         => isset($topic['tor_type']) ? is_gold($topic['tor_type']) : '',
 
 		'TOR_STATUS_ICON'  => isset($topic['tor_status']) ? $bb_cfg['tor_icons'][$topic['tor_status']] : '',
 		'TOR_STATUS_TEXT'  => isset($topic['tor_status']) ? $lang['TOR_STATUS_NAME'][$topic['tor_status']] : '',

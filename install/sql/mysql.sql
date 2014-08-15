@@ -114,7 +114,7 @@ CREATE TABLE IF NOT EXISTS `bb_attachments_config` (
 -- Дамп данных таблицы `bb_attachments_config`
 --
 
-INSERT INTO `bb_attachments_config` VALUES ('upload_dir', 'files');
+INSERT INTO `bb_attachments_config` VALUES ('upload_dir', 'old_files');
 INSERT INTO `bb_attachments_config` VALUES ('upload_img', 'images/icon_clip.gif');
 INSERT INTO `bb_attachments_config` VALUES ('topic_icon', 'images/icon_clip.gif');
 INSERT INTO `bb_attachments_config` VALUES ('display_order', '0');
@@ -645,6 +645,7 @@ INSERT INTO `bb_cron` VALUES (19, 1, 'Captcha', 'captcha_gen_gc.php', 'daily', N
 INSERT INTO `bb_cron` VALUES (20, 1, 'Tracker dl-complete count', 'tr_complete_count.php', 'interval', NULL, NULL, 255, '', '', '06:00:00', 0, '', 0, 0, 0);
 INSERT INTO `bb_cron` VALUES (21, 1, 'Cache garbage collector', 'cache_gc.php', 'interval', NULL, NULL, 255, '', '', '00:05:00', 0, '', 0, 0, 0);
 INSERT INTO `bb_cron` VALUES (22, 1, 'Sitemap update', 'sitemap.php', 'daily', NULL, '06:00:00', 30, '', '', NULL, 0, '', 0, 0, 0);
+INSERT INTO `bb_cron` VALUES (23, 1, 'Update forums atom', 'update_forums_atom.php', 'interval', NULL, NULL, 255, '', '', '00:15:00', 0, '', 0, 0, 0);
 
 -- --------------------------------------------------------
 

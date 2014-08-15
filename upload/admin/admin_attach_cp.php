@@ -524,7 +524,7 @@ if ($view == 'attachments')
 
 				'S_DELETE_BOX' => $delete_box,
 				'S_HIDDEN' => $hidden_field,
-				'U_VIEW_ATTACHMENT' => BB_ROOT . 'download.php?id=' . $attachments[$i]['attach_id'],
+				'U_VIEW_ATTACHMENT' => BB_ROOT . DOWNLOAD_URL . $attachments[$i]['attach_id'],
 			));
 
 		}

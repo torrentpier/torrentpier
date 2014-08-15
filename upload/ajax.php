@@ -9,14 +9,20 @@ require('./common.php');
 
 $ajax->init();
 
+// Init userdata
+$user->session_start();
+
 // Exit if board is disabled via ON/OFF trigger or by admin
-if ($bb_cfg['board_disable'])
+if ($ajax->action != 'manage_admin')
 {
-	$ajax->ajax_die($lang['BOARD_DISABLE']);
-}
-else if (file_exists(BB_DISABLED))
-{
-	$ajax->ajax_die($lang['BOARD_DISABLE_CRON']);
+	if ($bb_cfg['board_disable'])
+	{
+		$ajax->ajax_die($lang['BOARD_DISABLE']);
+	}
+	else if (file_exists(BB_DISABLED))
+	{
+		$ajax->ajax_die($lang['BOARD_DISABLE_CRON']);
+	}
 }
 
 // Load actions required modules
@@ -65,10 +71,9 @@ switch ($ajax->action)
 		break;
 }
 
-// position in $ajax->valid_actions['xxx']
-define('AJAX_AUTH', 0); //  'guest', 'user', 'mod', 'admin', 'super_admin'
+// Position in $ajax->valid_actions['xxx']
+define('AJAX_AUTH', 0); // 'guest', 'user', 'mod', 'admin', 'super_admin'
 
-$user->session_start();
 $ajax->exec();
 
 //

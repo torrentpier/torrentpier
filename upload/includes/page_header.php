@@ -190,7 +190,7 @@ $template->assign_vars(array(
 	'FULL_URL'           => FULL_URL,
 
 	'CURRENT_TIME'       => sprintf($lang['CURRENT_TIME'], bb_date(TIMENOW, $bb_cfg['last_visit_date_format'], false)),
-	'S_TIMEZONE'         => sprintf($lang['ALL_TIMES'], $lang[''.str_replace(',', '.', floatval($bb_cfg['board_timezone'])).'']),
+	'S_TIMEZONE'         => preg_replace('/\(.*?\)/', '', sprintf($lang['ALL_TIMES'], $lang['TZ'][str_replace(',', '.', floatval($bb_cfg['board_timezone']))])),
 
 	'PM_INFO'            => $pm_info,
 	'PRIVMSG_IMG'        => $icon_pm,
