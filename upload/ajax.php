@@ -32,7 +32,6 @@ switch ($ajax->action)
 		require(INC_DIR . 'bbcode.php');
 		break;
 
-	case 'chat':
 	case 'posts':
 	case 'post_mod_comment':
 		require(INC_DIR . 'bbcode.php');
@@ -99,7 +98,6 @@ class ajax_common
 		'post_mod_comment'  => array('mod'),
 
 		'avatar'            => array('user'),
-		'chat'              => array('user'),
 		'gen_passkey'       => array('user'),
 		'change_torrent'    => array('user'),
 		'change_tor_status' => array('user'),
@@ -414,11 +412,6 @@ class ajax_common
 	function avatar()
 	{
 		require(AJAX_DIR . 'avatar.php');
-	}
-
-	function chat()
-	{
-		require(AJAX_DIR . 'chat.php');
 	}
 
 	function sitemap()
