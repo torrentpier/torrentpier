@@ -21,10 +21,10 @@ function qs_highlight_found ()
 	var a = $('a:first', this);
 	var q = $('#q-search').val().toLowerCase();
 	if (q != '' && a.text().toLowerCase().indexOf(q) != -1) {
-        a.html(a.text().replace(q, '<b style="color:#1515ff">' + q + '</b>'));
+		a.html(a.text().replace(q, '<b style="color:#1515ff">' + q + '</b>'));
 	}
 	else {
-        a.html(a.text());
+		a.html(a.text());
 	}
 }
 function open_feed (f_id)
