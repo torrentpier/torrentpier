@@ -370,7 +370,7 @@ foreach ($profile_fields as $field => $can_edit)
 			$reg_mode = ($mode == 'register');
 
 			$update_user_opt = array(
-			#	'user_opt_name'  => ($reg_mode) ? #reg_setting : #in_login_change
+			#	'user_opt_name'  => ($reg_mode) ? #reg_value : #in_login_change
 				'user_viewemail'      => ($reg_mode) ? false : true,
 				'user_viewonline'     => ($reg_mode) ? false : true,
 				'user_notify'         => ($reg_mode) ? true  : true,
@@ -378,6 +378,7 @@ foreach ($profile_fields as $field => $can_edit)
 				'user_porn_forums'    => ($reg_mode) ? false : true,
 				'user_dls'            => ($reg_mode) ? false : true,
 				'user_callseed'       => ($reg_mode) ? true  : true,
+				'user_retracker'      => ($reg_mode) ? true  : true,
 			);
 
 			foreach ($update_user_opt as $opt => $can_change_opt)

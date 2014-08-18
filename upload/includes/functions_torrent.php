@@ -354,7 +354,7 @@ function tracker_register ($attach_id, $mode = '', $tor_status = TOR_NOT_APPROVE
 
 function send_torrent_with_passkey ($filename)
 {
-	global $attachment, $auth_pages, $userdata, $bb_cfg, $lang;
+	global $attachment, $auth_pages, $userdata, $bb_cfg, $tr_cfg, $lang;
 
 	if (!$bb_cfg['bt_add_auth_key'] || $attachment['extension'] !== TORRENT_EXT || !$size = @filesize($filename))
 	{
@@ -446,7 +446,7 @@ function send_torrent_with_passkey ($filename)
 	$announce = strval($ann_url . "?$passkey_key=$passkey_val");
 
 	// Replace original announce url with tracker default
-	if ($bb_cfg['bt_replace_ann_url'] || !@$tor['announce'])
+	if ($bb_cfg['bt_replace_ann_url'] || !isset($tor['announce']))
 	{
 		$tor['announce'] = $announce;
 	}
@@ -456,9 +456,28 @@ function send_torrent_with_passkey ($filename)
 	{
 		unset($tor['announce-list']);
 	}
-	elseif (@$tor['announce-list'])
+	elseif (isset($tor['announce-list']))
 	{
 		$tor['announce-list'] = array_merge($tor['announce-list'], array(array($announce)));
+	}
+
+	// Add retracker
+	if (isset($tr_cfg['retracker']) && $tr_cfg['retracker'])
+	{
+		if (bf($userdata['user_opt'], 'user_opt', 'user_retracker'))
+		{
+			if (!isset($tor['announce-list']))
+			{
+				$tor['announce-list'] = array(
+					array($announce),
+					array($tr_cfg['retracker_host'])
+				);
+			}
+			else
+			{
+				$tor['announce-list'] = array_merge($tor['announce-list'], array(array($tr_cfg['retracker_host'])));
+			}
+		}
 	}
 
 	// Add publisher & topic url

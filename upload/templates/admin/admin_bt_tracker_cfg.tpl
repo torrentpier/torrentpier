@@ -51,7 +51,6 @@
 	<td><h4>{L_ALLOW_GUEST_DL}</h4><!-- IF L_ALLOW_GUEST_DL_EXPL --><h6>{L_ALLOW_GUEST_DL_EXPL}</h6><!-- ENDIF --></td>
 	<td>&nbsp; <!-- IF $bb_cfg['bt_tor_browse_only_reg'] -->{L_NO}<!-- ELSE -->{L_YES}<!-- ENDIF --></td>
 </tr>
-
 <tr>
 	<th colspan="2">{L_LIMIT_ACTIVE_TOR_HEAD}</th>
 </tr>
@@ -104,9 +103,13 @@
 	<td><label for="update_dlstat1"><input type="radio" name="update_dlstat" id="update_dlstat1" value="1" {UPDATE_DLSTAT_YES} /> {L_UPDATE_DLSTAT_YES}&nbsp;</label><label for="update_dlstat2">&nbsp;<input type="radio" name="update_dlstat" id="update_dlstat2" value="0" {UPDATE_DLSTAT_NO} /> {L_UPDATE_DLSTAT_NO} &nbsp;</label></td>
 </tr>
 <tr>
+	<td><h4>{L_ADD_RETRACKER}</h4></td>
+	<td><label for="retracker_true"><input type="radio" name="retracker" id="retracker_true" value="1" {RETRACKER_YES} /> {L_YES}&nbsp;</label><label for="retracker_false">&nbsp;<input type="radio" name="retracker" id="retracker_false" value="0" {RETRACKER_NO} /> {L_NO} &nbsp;</label></td>
+</tr>
+<tr>
 	<td><h4>{L_GOLD} / {L_SILVER}</h4></td>
 	<td>
-	    <label><input type="radio" name="gold_silver_enabled" value="1" <!-- IF GOLD_SILVER_ENABLED -->checked="checked"<!-- ENDIF --> />{L_ENABLED}</label>&nbsp;&nbsp;
+		<label><input type="radio" name="gold_silver_enabled" value="1" <!-- IF GOLD_SILVER_ENABLED -->checked="checked"<!-- ENDIF --> />{L_ENABLED}</label>
 		<label><input type="radio" name="gold_silver_enabled" value="0" <!-- IF not GOLD_SILVER_ENABLED -->checked="checked"<!-- ENDIF --> />{L_DISABLED}</label>
 	</td>
 </tr>
@@ -129,4 +132,3 @@
 </form>
 
 <br clear="all" />
-

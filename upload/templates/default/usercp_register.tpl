@@ -212,20 +212,12 @@ ajax.callback.posts = function(data){
 	</td>
 </tr>
 <tr>
-	<td class="prof-title">{L_DENY_VISITORS}:</td>
-	<td>
-		<label><input type="radio" name="user_dls" value="1" <!-- IF USER_DLS -->checked="checked"<!-- ENDIF --> />{L_YES}</label>&nbsp;&nbsp;
-		<label><input type="radio" name="user_dls" value="0" <!-- IF not USER_DLS -->checked="checked"<!-- ENDIF --> />{L_NO}</label>
-	</td>
-</tr>
-<tr>
 	<td class="prof-title">{L_ALWAYS_NOTIFY}:<br /><h6>{L_ALWAYS_NOTIFY_EXPLAIN}</h6></td>
 	<td>
 		<label><input type="radio" name="user_notify" value="1" <!-- IF USER_NOTIFY -->checked="checked"<!-- ENDIF --> />{L_YES}</label>&nbsp;&nbsp;
 		<label><input type="radio" name="user_notify" value="0" <!-- IF not USER_NOTIFY -->checked="checked"<!-- ENDIF --> />{L_NO}</label>
 	</td>
 </tr>
-
 <!-- IF $bb_cfg['pm_notify_enabled'] -->
 <tr>
 	<td class="prof-title">{L_NOTIFY_ON_PRIVMSG}:</td>
@@ -235,12 +227,14 @@ ajax.callback.posts = function(data){
 	</td>
 </tr>
 <!-- ENDIF -->
+<!-- IF SHOW_DATEFORMAT -->
 <tr>
-	<td class="prof-title">{L_CALLSEED}:<br /><h6>{L_CALLSEED_EXPLAIN}</h6></td>
-	<td>
-		<label><input type="radio" name="user_callseed" value="1" <!-- IF USER_CALLSEED -->checked="checked"<!-- ENDIF --> />{L_YES}</label>&nbsp;&nbsp;
-		<label><input type="radio" name="user_callseed" value="0" <!-- IF not USER_CALLSEED -->checked="checked"<!-- ENDIF --> />{L_NO}</label>
-	</td>
+	<td class="prof-title">{L_DATE_FORMAT}:<br /><h6>{L_DATE_FORMAT_EXPLAIN}</h6></td>
+	<td><input type="text" name="dateformat" value="{DATE_FORMAT}" maxlength="14" /></td>
+</tr>
+<!-- ENDIF -->
+<tr>
+	<th colspan="2">{L_UCP_DOWNLOADS}</th>
 </tr>
 <tr>
 	<td class="prof-title">{L_HIDE_PORN_FORUMS}:</td>
@@ -249,12 +243,27 @@ ajax.callback.posts = function(data){
 		<label><input type="radio" name="user_porn_forums" value="0" <!-- IF not USER_PORN_FORUMS -->checked="checked"<!-- ENDIF --> />{L_NO}</label>
 	</td>
 </tr>
-<!-- IF SHOW_DATEFORMAT -->
 <tr>
-	<td class="prof-title">{L_DATE_FORMAT}:<br /><h6>{L_DATE_FORMAT_EXPLAIN}</h6></td>
-	<td><input type="text" name="dateformat" value="{DATE_FORMAT}" maxlength="14" /></td>
+	<td class="prof-title">{L_ADD_RETRACKER}:</td>
+	<td>
+		<label><input type="radio" name="user_retracker" value="1" <!-- IF USER_RETRACKER -->checked="checked"<!-- ENDIF --> />{L_YES}</label>&nbsp;&nbsp;
+		<label><input type="radio" name="user_retracker" value="0" <!-- IF not USER_RETRACKER -->checked="checked"<!-- ENDIF --> />{L_NO}</label>
+	</td>
 </tr>
-<!-- ENDIF -->
+<tr>
+	<td class="prof-title">{L_HIDE_DOWNLOADS}:</td>
+	<td>
+		<label><input type="radio" name="user_dls" value="1" <!-- IF USER_DLS -->checked="checked"<!-- ENDIF --> />{L_YES}</label>&nbsp;&nbsp;
+		<label><input type="radio" name="user_dls" value="0" <!-- IF not USER_DLS -->checked="checked"<!-- ENDIF --> />{L_NO}</label>
+	</td>
+</tr>
+<tr>
+	<td class="prof-title">{L_CALLSEED_EXPLAIN}:</td>
+	<td>
+		<label><input type="radio" name="user_callseed" value="1" <!-- IF USER_CALLSEED -->checked="checked"<!-- ENDIF --> />{L_YES}</label>&nbsp;&nbsp;
+		<label><input type="radio" name="user_callseed" value="0" <!-- IF not USER_CALLSEED -->checked="checked"<!-- ENDIF --> />{L_NO}</label>
+	</td>
+</tr>
 <tr>
 	<th colspan="2">{L_AVATAR_PANEL}</th>
 </tr>
