@@ -1777,16 +1777,6 @@ function obtain_word_list (&$orig_word, &$replacement_word)
 	return true;
 }
 
-function smiley_sort ($a, $b)
-{
-	if (strlen($a['code']) == strlen($b['code']))
-	{
-		return 0;
-	}
-
-	return (strlen($a['code']) > strlen($b['code'])) ? -1 : 1;
-}
-
 function bb_die ($msg_text)
 {
 	global $ajax, $bb_cfg, $lang, $template, $theme, $userdata;

@@ -1228,7 +1228,6 @@ INSERT INTO `bb_smilies` VALUES (52, ':bz:', 'bz.gif', 'bz');
 INSERT INTO `bb_smilies` VALUES (53, ':ca:', 'ca.gif', 'ca');
 INSERT INTO `bb_smilies` VALUES (54, ':cb:', 'cb.gif', 'cb');
 INSERT INTO `bb_smilies` VALUES (55, ':cc:', 'cc.gif', 'cc');
-INSERT INTO `bb_smilies` VALUES (56, ':cd:', 'cd.gif', 'cd');
 
 -- --------------------------------------------------------
 

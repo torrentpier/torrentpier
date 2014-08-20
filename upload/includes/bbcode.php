@@ -497,10 +497,9 @@ class bbcode
 	*/
 	function init_replacements ()
 	{
-		$tpl         = $this->tpl;
-		$img_url_exp = '(https?:)?//[^\s\?&;=\#\"<>]+?\.(jpg|jpeg|gif|png)([a-z0-9/?&%;][^\[\]]*)?';
-		$email_exp   = '[a-z0-9&\-_.]+?@[\w\-]+\.([\w\-\.]+\.)?[\w]+';
-		$url_exp     = '[\w\#!$%&~/.\-;:=,?@а-яА-Я\[\]+]+?';
+		$tpl       = $this->tpl;
+		$img_exp   = '(https?:)?//[^\s\?&;=\#\"<>]+?\.(jpg|jpeg|gif|png)([a-z0-9/?&%;][^\[\]]*)?';
+		$email_exp = '[a-z0-9&\-_.]+?@[\w\-]+\.([\w\-\.]+\.)?[\w]+';
 
 		$this->preg = array(
 			'#\[quote="(.+?)"\]#isu'                                 => $tpl['quote_username_open'],
@@ -514,12 +513,8 @@ class bbcode
 			'#\[size=([1-2]?[0-9])\]#isu'                            => '<span style="font-size: $1px; line-height: normal;">',
 			'#\[align=(left|right|center|justify)\]#isu'             => '<span class="post-align" style="text-align: $1;">',
 			'#\[font="([\w\- \']+)"\]#isu'                           => '<span style="font-family: $1;">',
-			"#\[img\]($img_url_exp)\[/img\]#isu"                     => $tpl['img'],
-			"#\[img=(left|right)\]($img_url_exp)\[/img\]\s*#isu"     => $tpl['img_aligned'],
-			"#\[url\](https?://$url_exp)\[/url\]#isu"                => '<a href="$1" class="postLink">$1</a>',
-			"#\[url\](www\.$url_exp)\[/url\]#isu"                    => '<a href="http://$1" class="postLink">$1</a>',
-			"#\[url=(https?://$url_exp)\]([^?\n\t].*?)\[/url\]#isu"  => '<a href="$1" class="postLink">$2</a>',
-			"#\[url=(www\.$url_exp)\]([^?\n\t].*?)\[/url\]#isu"      => '<a href="http://$1" class="postLink">$2</a>',
+			"#\[img\]($img_exp)\[/img\]#isu"                         => $tpl['img'],
+			"#\[img=(left|right|center)\]($img_exp)\[/img\]\s*#isu"  => $tpl['img_aligned'],
 			"#\[email\]($email_exp)\[/email\]#isu"                   => '<a href="mailto:$1">$1</a>',
 			"#\[qpost=([0-9]*)\]#isu"                                => '<u class="q-post">$1</u>',
 		);
@@ -570,14 +565,21 @@ class bbcode
 		$text = $this->clean_up($text);
 		$text = $this->spam_filter($text);
 
-		// парсинг тегов
+		// Tag parse
 		if (strpos($text, '[') !== false)
 		{
-			// [CODE]
+			// [code]
 			$text = preg_replace_callback('#(\s*)\[code\](.+?)\[/code\](\s*)#s', array(&$this, 'code_callback'), $text);
 
 			// Escape tags inside tiltes in [quote="tilte"]
 			$text = preg_replace_callback('#(\[(quote|spoiler)=")(.+?)("\])#', array(&$this, 'escape_tiltes_callback'), $text);
+
+			// [url]
+			$url_exp = '[\w\#!$%&~/.\-;:=,?@а-яА-Я\[\]+]+?';
+			$text = preg_replace_callback("#\[url\](https?://$url_exp)\[/url\]#isu", array(&$this, 'url_callback'), $text);
+			$text = preg_replace_callback("#\[url\](www\.$url_exp)\[/url\]#isu", array(&$this, 'url_callback'), $text);
+			$text = preg_replace_callback("#\[url=(https?://$url_exp)\]([^?\n\t].*?)\[/url\]#isu", array(&$this, 'url_callback'), $text);
+			$text = preg_replace_callback("#\[url=(www\.$url_exp)\]([^?\n\t].*?)\[/url\]#isu", array(&$this, 'url_callback'), $text);
 
 			// Normalize block level tags wrapped with new lines
 			$block_tags = join('|', $this->block_tags);
@@ -693,6 +695,28 @@ class bbcode
 	}
 
 	/**
+	* [url] callback
+	*/
+	function url_callback ($m)
+	{
+		global $bb_cfg;
+
+		$url = trim($m[1]);
+		$url_name = (isset($m[2])) ? trim($m[2]) : $url;
+
+		if (in_array(parse_url($url, PHP_URL_HOST), $bb_cfg['nofollow']['allowed_url']) || $bb_cfg['nofollow']['disabled'])
+		{
+			$link = "<a href=\"$url\" class=\"postLink\">$url_name</a>";
+		}
+		else
+		{
+			$link = "<a href=\"$url\" class=\"postLink\" rel=\"nofollow\">$url_name</a>";
+		}
+
+		return $link;
+	}
+
+	/**
 	* Escape tags inside tiltes in [quote="tilte"]
 	*/
 	function escape_tiltes_callback ($m)
@@ -739,11 +763,22 @@ class bbcode
 	*/
 	function make_url_clickable_callback ($m)
 	{
+		global $bb_cfg;
+
 		$max_len = 70;
 		$href    = $m[1];
 		$name    = (mb_strlen($href, 'UTF-8') > $max_len) ? mb_substr($href, 0, $max_len - 19) .'...'. mb_substr($href, -16) : $href;
 
-		return "<a href=\"$href\" class=\"postLink\">$name</a>";
+		if (in_array(parse_url($href, PHP_URL_HOST), $bb_cfg['nofollow']['allowed_url']) || $bb_cfg['nofollow']['disabled'])
+		{
+			$link = "<a href=\"$href\" class=\"postLink\">$name</a>";
+		}
+		else
+		{
+			$link = "<a href=\"$href\" class=\"postLink\" rel=\"nofollow\">$name</a>";
+		}
+
+		return $link;
 	}
 
 	/**
