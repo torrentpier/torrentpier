@@ -32,19 +32,6 @@ function send_file_to_browser($attachment, $upload_dir)
 		$gotit = true;
 	}
 
-	//
-	// Determine the Browser the User is using, because of some nasty incompatibilities.
-	// Most of the methods used in this function are from phpMyAdmin. :)
-	//
-	if (!empty($_SERVER['HTTP_USER_AGENT']))
-	{
-		$HTTP_USER_AGENT = $_SERVER['HTTP_USER_AGENT'];
-	}
-	elseif (!isset($HTTP_USER_AGENT))
-	{
-		$HTTP_USER_AGENT = '';
-	}
-
 	// Correct the mime type - we force application/octet-stream for all files, except images
 	// Please do not change this, it is a security precaution
 	if (!strstr($attachment['mimetype'], 'image'))
@@ -62,8 +49,8 @@ function send_file_to_browser($attachment, $upload_dir)
 	// Now the tricky part... let's dance
 	header('Pragma: public');
 	$real_filename = clean_filename(basename($attachment['real_filename']));
-	$mimetype = "{$attachment['mimetype']};";
-	$charset = (@$lang['CONTENT_ENCODING']) ? "charset={$lang['CONTENT_ENCODING']};" : '';
+	$mimetype = $attachment['mimetype'].';';
+	$charset = (isset($lang['CONTENT_ENCODING'])) ? "charset={$lang['CONTENT_ENCODING']};" : '';
 
 	// Send out the Headers
 	header("Content-Type: $mimetype $charset name=\"$real_filename\"");

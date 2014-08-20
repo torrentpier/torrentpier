@@ -93,7 +93,7 @@ if ($topic_id)
 	$sql = "SELECT t.*, f.*, tw.notify_status
 		FROM ". BB_TOPICS            ." t
 		LEFT JOIN ". BB_FORUMS       ." f USING(forum_id)
-		LEFT JOIN ". BB_TOPICS_WATCH ." tw ON(tw.topic_id = t.topic_id AND user_id = {$userdata['user_id']})
+		LEFT JOIN ". BB_TOPICS_WATCH ." tw ON(tw.topic_id = t.topic_id AND tw.user_id = {$userdata['user_id']})
 		WHERE t.topic_id = $topic_id
 	";
 }
@@ -103,7 +103,7 @@ elseif ($post_id)
 		FROM ". BB_TOPICS            ." t
 		LEFT JOIN ". BB_FORUMS       ." f  USING(forum_id)
 		LEFT JOIN ". BB_POSTS        ." p  USING(topic_id)
-		LEFT JOIN ". BB_TOPICS_WATCH ." tw ON(tw.topic_id = t.topic_id AND user_id = {$userdata['user_id']})
+		LEFT JOIN ". BB_TOPICS_WATCH ." tw ON(tw.topic_id = t.topic_id AND tw.user_id = {$userdata['user_id']})
 		WHERE p.post_id = $post_id
 	";
 }

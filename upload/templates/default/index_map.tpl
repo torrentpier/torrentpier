@@ -18,13 +18,13 @@ a.hl, a.hl:visited { color: #1515FF; }
 function qs_highlight_found ()
 {
 	this.style.display = '';
-	var a = $('a:first', this)[0];
+	var a = $('a:first', this);
 	var q = $('#q-search').val().toLowerCase();
-	if (q != '' && a.innerHTML.toLowerCase().indexOf(q) != -1) {
-		a.className = 'hl';
+	if (q != '' && a.text().toLowerCase().indexOf(q) != -1) {
+		a.html(a.text().replace(q, '<b style="color:#1515ff">' + q + '</b>'));
 	}
 	else {
-		a.className = '';
+		a.html(a.text());
 	}
 }
 function open_feed (f_id)

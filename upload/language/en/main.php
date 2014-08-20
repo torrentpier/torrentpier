@@ -1114,6 +1114,8 @@ $lang['SEEDING'] = 'Seed';
 $lang['LEECHING'] = 'Leech';
 $lang['IS_REGISTERED'] = 'Registered';
 $lang['MAGNET'] = 'Magnet';
+$lang['DC_MAGNET'] = 'Search in DC++ by filename';
+$lang['DC_MAGNET_EXT'] = 'Search in DC++ by extension';
 
 //torrent status mod
 $lang['TOR_STATUS'] = 'Status';
@@ -1515,7 +1517,8 @@ $lang['ICQ_ERROR'] = 'The field of "ICQ" may contain only icq number';
 $lang['INVALID_DATE'] = 'Error date ';
 $lang['PROFILE_USER'] = 'Viewing profile';
 $lang['GOOD_UPDATE'] = 'was successfully changed';
-$lang['DENY_VISITORS'] = 'Hide the current list of downloads on your profile';
+$lang['UCP_DOWNLOADS'] = 'Downloads';
+$lang['HIDE_DOWNLOADS'] = 'Hide the current list of downloads on your profile';
 $lang['BAN_USER'] = 'To prevent a user';
 $lang['USER_NOT_ALLOWED'] = 'Users are not permitted';
 $lang['HIDE_AVATARS'] = 'Show avatars';
@@ -2524,6 +2527,7 @@ $lang['USE_AUTH_KEY_EXPL'] = 'enable check for passkey';
 $lang['AUTH_KEY_NAME'] = 'Passkey name';
 $lang['AUTH_KEY_NAME_EXPL'] = 'passkey key name in GET request';
 $lang['ALLOW_GUEST_DL'] = 'Allow guest access to tracker';
+$lang['ADD_RETRACKER'] = 'Add retracker in torrent files';
 
 //
 // Forum config
@@ -2764,7 +2768,7 @@ $lang['BOT_MESS_SPLITS'] = 'Topic has been split. New topic - [b]%s[/b][br][br]%
 $lang['BOT_TOPIC_SPLITS'] = 'Topic has been split from [b]%s[/b][br][br]%s';
 
 $lang['CALLSEED'] = 'Downloaded the call';
-$lang['CALLSEED_EXPLAIN'] = 'Take notice with a request to return to the distribution?';
+$lang['CALLSEED_EXPLAIN'] = 'Take notice with a request to return to the distribution';
 $lang['CALLSEED_SUBJECT'] = 'Download help %s';
 $lang['CALLSEED_TEXT'] = 'Hello![br]Your help is needed in the release [url=%s]%s[/url][br]If you decide to help, but already deleted the torrent file, you can download it [url=%s]this[/url][br][br]I hope for your help!';
 $lang['CALLSEED_MSG_OK']   = 'Message has been sent to all those who downloaded this release';

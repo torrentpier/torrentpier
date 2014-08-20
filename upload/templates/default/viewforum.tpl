@@ -405,7 +405,8 @@ td.topic_id { cursor: pointer; }
 		<td class="small bold nowrap tRight w100">
 			&nbsp;
 			<!-- IF LOGGED_IN -->
-			<a class="small" href="{U_SEARCH_SELF}">{L_SEARCH_SELF}</a> &nbsp;<span style="color:#CDCDCD;">|</span>&nbsp;
+			<a class="small" href="#" onclick="return post2url('feed.php', {mode: 'get_feed_url', type: 'f', id: '{FORUM_ID}'})">{FEED_IMG} {L_ATOM_SUBSCRIBE}</a>&nbsp;&#0183;
+			<a class="small" href="{U_SEARCH_SELF}">{L_SEARCH_SELF}</a>&nbsp;&#0183;
 			<a class="menu-root" href="#only-new-options">{L_DISPLAYING_OPTIONS}</a>
 			<!-- ENDIF / LOGGED_IN -->
 		</td>

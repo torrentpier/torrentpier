@@ -275,6 +275,7 @@ $bf['user_opt'] = array(
 	'dis_post'           => 12, // Запрет на отправку сообщений
 	'dis_post_edit'      => 13, // Запрет на редактирование сообщений
 	'user_dls'           => 14, // Скрывать список текущих закачек в профиле
+	'user_retracker'     => 15, // Добавлять ретрекер к скачиваемым торрентам
 );
 
 function bit2dec ($bit_num)
@@ -1774,16 +1775,6 @@ function obtain_word_list (&$orig_word, &$replacement_word)
 	}
 
 	return true;
-}
-
-function smiley_sort ($a, $b)
-{
-	if (strlen($a['code']) == strlen($b['code']))
-	{
-		return 0;
-	}
-
-	return (strlen($a['code']) > strlen($b['code'])) ? -1 : 1;
 }
 
 function bb_die ($msg_text)

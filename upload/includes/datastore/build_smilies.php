@@ -7,7 +7,7 @@ global $bb_cfg;
 $smilies = array();
 
 $rowset = DB()->fetch_rowset("SELECT * FROM ". BB_SMILIES);
-usort($rowset, 'smiley_sort');
+sort($rowset);
 
 foreach ($rowset as $smile)
 {

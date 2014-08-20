@@ -284,7 +284,6 @@ define('BB_BT_TORHELP',           'bb_bt_torhelp');
 define('BB_BT_TORSTAT',           'bb_bt_torstat');
 define('BB_CATEGORIES',           'bb_categories');
 define('BB_CAPTCHA',              'bb_captcha');
-define('BB_CHAT',                 'bb_chat');
 define('BB_CONFIG',               'bb_config');
 define('BB_CRON',                 'bb_cron');
 define('BB_DISALLOW',             'bb_disallow');

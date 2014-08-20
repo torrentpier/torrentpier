@@ -1114,6 +1114,8 @@ $lang['SEEDING'] = 'Сідер';
 $lang['LEECHING'] = 'Лічер';
 $lang['IS_REGISTERED'] = 'Зареєстрований';
 $lang['MAGNET'] = 'Magnet';
+$lang['DC_MAGNET'] = 'Пошук в DC++ по імені файлу';
+$lang['DC_MAGNET_EXT'] = 'Пошук в DC++ по розширенню';
 
 //torrent status mod
 $lang['TOR_STATUS'] = 'Статус';
@@ -1515,7 +1517,8 @@ $lang['ICQ_ERROR'] = 'Поле "ICQ" може містити тільки ном
 $lang['INVALID_DATE'] = 'Помилка дати ';
 $lang['PROFILE_USER'] = 'Профіль користувача';
 $lang['GOOD_UPDATE'] = 'був успішно змінен';
-$lang['DENY_VISITORS'] = 'Приховувати список поточних завантажень в профілі';
+$lang['UCP_DOWNLOADS'] = 'Завантажити';
+$lang['HIDE_DOWNLOADS'] = 'Приховувати список поточних завантажень в профілі';
 $lang['BAN_USER'] = 'Заборонити користувачу';
 $lang['USER_NOT_ALLOWED'] = 'Користувачеві заборонено';
 $lang['HIDE_AVATARS'] = 'Показувати аватар';
@@ -2441,7 +2444,7 @@ $lang['ATTACHMENTS_PER_DAY'] = 'Прикріплень за день';
 
 // Control Panel -> Attachments
 $lang['STATISTICS_FOR_USER'] = 'Статистика додатків для %s'; // replace %s with username
-$lang['DOWNLOAD'] = 'Завантажити';
+$lang['DOWNLOADS'] = 'Завантажити';
 $lang['POST_TIME'] = 'Дата повідомлення';
 $lang['POSTED_IN_TOPIC'] = 'Розміщене в темі';
 $lang['SUBMIT_CHANGES'] = 'Зберегти зміни';
@@ -2524,6 +2527,7 @@ $lang['USE_AUTH_KEY_EXPL'] = 'включити авторизацію по passk
 $lang['AUTH_KEY_NAME'] = "Ім'я ключа passkey";
 $lang['AUTH_KEY_NAME_EXPL'] = "ім'я ключа, який буде додаватися до GET запиті до announce url для ідентифікації користувача";
 $lang['ALLOW_GUEST_DL'] = "Дозволити 'гостям' (неавторизованим юзерам) доступ до трекера";
+$lang['ADD_RETRACKER'] = 'Додавати ретрекер в торрент-файли';
 
 //
 // Forum config
@@ -2764,7 +2768,7 @@ $lang['BOT_MESS_SPLITS'] = 'Повідомлення з цієї теми бул
 $lang['BOT_TOPIC_SPLITS'] = 'Тема була виділена з [b]%s[/b][br][br]%s';
 
 $lang['CALLSEED'] = 'Покликати, кто завантажил';
-$lang['CALLSEED_EXPLAIN'] = 'Приймати повідомлення з проханням повернутися на роздачу?';
+$lang['CALLSEED_EXPLAIN'] = 'Приймати повідомлення з проханням повернутися на роздачу';
 $lang['CALLSEED_SUBJECT'] = 'Допоможіть завантажити %s';
 $lang['CALLSEED_TEXT'] = 'Привіт![br]Ваша допомога необхідна в роздачі [url=%s]%s[/url][br]Якщо ви вирішили допомогти, але вже видалили торрент-файл, можете завантажити його [url=%s]здесь[/url][br][br]Сподіваюся на вашу допомогу!';
 $lang['CALLSEED_MSG_OK']   = 'Повідомлення успішно відправлено всім скачавшим даний реліз';

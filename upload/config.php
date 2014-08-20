@@ -57,6 +57,7 @@
  * Misc
  * Captcha
  * Atom feed
+ * Nofollow
 **/
 
 if (!defined('BB_ROOT')) die(basename(__FILE__));
@@ -69,8 +70,8 @@ $domain_name = (!empty($_SERVER['SERVER_NAME'])) ? $_SERVER['SERVER_NAME'] : $do
 
 // Version info
 $bb_cfg['tp_version'] = '2.0.9 (RC)';
-$bb_cfg['tp_release_date'] = '14-08-2014';
-$bb_cfg['tp_release_state'] = 'R595';
+$bb_cfg['tp_release_date'] = '20-08-2014';
+$bb_cfg['tp_release_state'] = 'R596';
 
 // Database
 $charset  = 'utf8';
@@ -188,6 +189,8 @@ $tr_cfg = array(
 	'limit_leech_ips'       => 0,
 	'tor_topic_up'          => true,
 	'gold_silver_enabled'   => true,
+	'retracker'             => true,
+	'retracker_host'        => 'http://retracker.local/announce',
 );
 
 $bb_cfg['show_dl_status_in_search'] = true;
@@ -601,6 +604,12 @@ $bb_cfg['captcha'] = array(
 $bb_cfg['atom'] = array(
 	'path' => BB_PATH .'/atom', # without '/'
 	'url'  => './atom',         # without '/'
+);
+
+// Nofollow
+$bb_cfg['nofollow'] = array(
+	'disabled'    => false,
+	'allowed_url' => array($domain_name), // 'allowed.site', 'www.allowed.site'
 );
 
 define('BB_CFG_LOADED', true);

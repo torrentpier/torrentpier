@@ -62,6 +62,8 @@ $images['folder_dl_hot_new']   = $_main .'folder_dl_hot_new.gif';
 $images['icon_clip']           = $_img .'icon_clip.gif';
 $images['icon_dn']             = $_img .'icon_dn.gif';
 $images['icon_magnet']         = $_img .'magnet.png';
+$images['icon_dc_magnet']      = $_img .'dc_magnet.png';
+$images['icon_dc_magnet_ext']  = $_img .'dc_magnet_ext.png';
 
 // posting_icons
 $images['post_new']            = $_lang .'post.gif';
