@@ -181,15 +181,14 @@ if ($post_info = DB()->fetch_row($sql))
 		// Can this user edit/delete the post?
 		if ($post_info['poster_id'] != $userdata['user_id'] && !$is_auth['auth_mod'])
 		{
-			$message = ($delete || $mode == 'delete') ? $lang['DELETE_OWN_POSTS'] : $lang['EDIT_OWN_POSTS'];
+			$auth_err = ($delete || $mode == 'delete') ? $lang['DELETE_OWN_POSTS'] : $lang['EDIT_OWN_POSTS'];
 		}
 		elseif (!$post_data['last_post'] && !$is_auth['auth_mod'] && ($mode == 'delete' || $delete))
 		{
-			$message = $lang['CANNOT_DELETE_REPLIED'];
+			$auth_err = $lang['CANNOT_DELETE_REPLIED'];
 		}
 
-		set_die_append_msg($forum_id, $topic_id);
-		if(isset($message)) bb_die($message);
+		if (isset($auth_err)) bb_die($auth_err);
 	}
 	else
 	{

@@ -70,8 +70,8 @@ $domain_name = (!empty($_SERVER['SERVER_NAME'])) ? $_SERVER['SERVER_NAME'] : $do
 
 // Version info
 $bb_cfg['tp_version'] = '2.0.9 (RC)';
-$bb_cfg['tp_release_date'] = '20-08-2014';
-$bb_cfg['tp_release_state'] = 'R596';
+$bb_cfg['tp_release_date'] = '23-08-2014';
+$bb_cfg['tp_release_state'] = 'R597';
 
 // Database
 $charset  = 'utf8';

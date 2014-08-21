@@ -407,7 +407,7 @@ table.forumline {
 	font-size: 9px !important; text-transform: uppercase;
 }
 .forumline td {
-	border: 1px solid #B7C0C5; border-width: 0 1px 1px;
+	border: solid #B7C0C5; border-width: 0 1px 1px;
 }
 .forumline th, .thHead {
 	padding: 6px 8px 7px; text-align: center;
