@@ -1,6 +1,6 @@
 <?php
 
-setlocale(LC_ALL, 'ua_UA.UTF-8');
+setlocale(LC_ALL, 'uk_UA.UTF-8');
 $lang['CONTENT_ENCODING'] = 'UTF-8';
 
 //
