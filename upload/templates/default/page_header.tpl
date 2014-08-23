@@ -309,7 +309,7 @@ $(document).ready(function() {
 	<td width="40%">
 		{L_USER_WELCOME}&nbsp;<b class="med">{THIS_USER}</b>&nbsp;[ <a href="{U_LOGIN_LOGOUT}" onclick="return confirm('{L_CONFIRM_LOGOUT}');">{L_LOGOUT}</a> ]
 	</td>
-	<td style="padding: 2px;">
+	<td style="padding: 3px;">
 		<div>
 			<form id="quick-search" action="" method="post" onsubmit="$(this).attr('action', $('#search-action').val());">
 				<input type="hidden" name="max" value="1" />
