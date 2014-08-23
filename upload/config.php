@@ -265,15 +265,11 @@ $bb_cfg['auto_language'] = true;   // select user-preferred language automatical
 
 if (!empty($_SERVER['HTTP_ACCEPT_LANGUAGE']) && $bb_cfg['auto_language'])
 {
-	if (substr($_SERVER['HTTP_ACCEPT_LANGUAGE'], 0, 2) == 'ru')
+	$user_lang = substr($_SERVER['HTTP_ACCEPT_LANGUAGE'], 0, 2);
+	if (file_exists(LANG_ROOT_DIR . $user_lang .'/'))
 	{
-		$bb_cfg['default_lang_dir'] = LANG_ROOT_DIR .'ru/';
-		$bb_cfg['default_lang'] = 'ru';
-	}
-	else if (substr($_SERVER['HTTP_ACCEPT_LANGUAGE'], 0, 2) == 'uk')
-	{
-		$bb_cfg['default_lang_dir'] = LANG_ROOT_DIR .'uk/';
-		$bb_cfg['default_lang'] = 'uk';
+		$bb_cfg['default_lang_dir'] = LANG_ROOT_DIR . $user_lang .'/';
+		$bb_cfg['default_lang'] = $user_lang;
 	}
 	else
 	{
@@ -283,9 +279,14 @@ if (!empty($_SERVER['HTTP_ACCEPT_LANGUAGE']) && $bb_cfg['auto_language'])
 }
 else
 {
-	if (isset($bb_cfg['default_lang']) && $bb_cfg['default_lang'] == 'ru') $bb_cfg['default_lang_dir'] = LANG_ROOT_DIR .'ru/';
-	else if (isset($bb_cfg['default_lang']) && $bb_cfg['default_lang'] == 'uk') $bb_cfg['default_lang_dir'] = LANG_ROOT_DIR .'uk/';
-	else $bb_cfg['default_lang_dir'] = LANG_ROOT_DIR .'en/';
+	if (isset($bb_cfg['default_lang']) && file_exists(LANG_ROOT_DIR . $bb_cfg['default_lang'] .'/'))
+	{
+		$bb_cfg['default_lang_dir'] = LANG_ROOT_DIR . $bb_cfg['default_lang'] .'/';
+	}
+	else
+	{
+		$bb_cfg['default_lang_dir'] = LANG_ROOT_DIR .'en/';
+	}
 }
 
 $bb_cfg['languages'] = array(
