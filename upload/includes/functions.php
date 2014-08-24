@@ -2845,3 +2845,26 @@ function update_atom ($type, $id)
 			break;
 	}
 }
+
+function hash_search ($hash)
+{
+	global $lang;
+
+	$hash = htmlCHR(trim($hash));
+
+	if (!isset($hash) || mb_strlen($hash, 'UTF-8') != 40)
+	{
+		bb_die(sprintf($lang['HASH_INVALID'], $hash));
+	}
+
+	$info_hash = DB()->escape(pack("H*", $hash));
+
+	if ($row = DB()->fetch_row("SELECT topic_id FROM " . BB_BT_TORRENTS . " WHERE info_hash = '$info_hash'"))
+	{
+		redirect(TOPIC_URL . $row['topic_id']);
+	}
+	else
+	{
+		bb_die(sprintf($lang['HASH_NOT_FOUND'], $hash));
+	}
+}

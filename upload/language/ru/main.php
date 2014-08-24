@@ -1494,6 +1494,7 @@ $lang['REPORTS_DELETED'] = 'Выбранные сообщения удалены
 $lang['SEARCH_S'] = 'поиск…';
 $lang['FORUM_S'] = 'по форуму';
 $lang['TRACKER_S'] = 'по трекеру';
+$lang['HASH_S'] = 'по info_hash';
 
 // copyright
 $lang['NOTICE'] = '!ВНИМАНИЕ!';
@@ -2976,3 +2977,6 @@ $lang['ATOM_SUBSCRIBE'] = 'Подписка на ленту';
 $lang['ATOM_NO_MODE'] = 'Не указан режим для ленты';
 $lang['ATOM_NO_FORUM'] = 'Для этого форума нет ленты (нет начатых тем)';
 $lang['ATOM_NO_USER'] = 'Для этого пользователя нет ленты (нет начатых тем)';
+
+$lang['HASH_INVALID'] = 'Хэш %s некорректен';
+$lang['HASH_NOT_FOUND'] = 'Раздача с хэшем %s не найдена';

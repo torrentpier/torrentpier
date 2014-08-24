@@ -220,31 +220,32 @@ foreach ($s_not_seen_opt as $val => $opt)
 }
 
 $GPC = array(
-#	  var_name              key_name def_value   GPC type
-	'all_words'     => array('allw', 1,           CHBOX),
-	'active'        => array('a',    0,           CHBOX),
-	'cat'           => array('c',    null,        REQUEST),
-	'dl_cancel'     => array('dla',  0,           CHBOX),
-	'dl_compl'      => array('dlc',  0,           CHBOX),
-	'dl_down'       => array('dld',  0,           CHBOX),
-	'dl_will'       => array('dlw',  0,           CHBOX),
-	'forum'         => array('f',    $search_all, REQUEST),
-	'my'            => array('my',   0,           CHBOX),
-	'new'           => array('new',  0,           CHBOX),
-	'title_match'   => array('nm',   null,        REQUEST),
-	'order'         => array('o',    $ord_posted, SELECT),
-	'poster_id'     => array('pid',  null,        GET),
-	'poster_name'   => array('pn',   null,        REQUEST),
-	'user_releases' => array('rid',  null,        GET),
-	'sort'          => array('s',    $sort_desc,  SELECT),
-	'seed_exist'    => array('sd',   0,           CHBOX),
-	'show_author'   => array('da',   1,           CHBOX),
-	'show_cat'      => array('dc',   0,           CHBOX),
-	'show_forum'    => array('df',   1,           CHBOX),
-	'show_speed'    => array('ds',   0,           CHBOX),
-	's_not_seen'    => array('sns',  $search_all, SELECT),
-	'time'          => array('tm',   $search_all, SELECT),
-	'tor_type'      => array('tor_type', 0,        CHBOX),
+#	var_name                 key_name    def_value    GPC type
+	'all_words'     => array('allw',     1,           CHBOX),
+	'active'        => array('a',        0,           CHBOX),
+	'cat'           => array('c',        null,        REQUEST),
+	'dl_cancel'     => array('dla',      0,           CHBOX),
+	'dl_compl'      => array('dlc',      0,           CHBOX),
+	'dl_down'       => array('dld',      0,           CHBOX),
+	'dl_will'       => array('dlw',      0,           CHBOX),
+	'forum'         => array('f',        $search_all, REQUEST),
+	'my'            => array('my',       0,           CHBOX),
+	'new'           => array('new',      0,           CHBOX),
+	'title_match'   => array('nm',       null,        REQUEST),
+	'order'         => array('o',        $ord_posted, SELECT),
+	'poster_id'     => array('pid',      null,        GET),
+	'poster_name'   => array('pn',       null,        REQUEST),
+	'user_releases' => array('rid',      null,        GET),
+	'sort'          => array('s',        $sort_desc,  SELECT),
+	'seed_exist'    => array('sd',       0,           CHBOX),
+	'show_author'   => array('da',       1,           CHBOX),
+	'show_cat'      => array('dc',       0,           CHBOX),
+	'show_forum'    => array('df',       1,           CHBOX),
+	'show_speed'    => array('ds',       0,           CHBOX),
+	's_not_seen'    => array('sns',      $search_all, SELECT),
+	'time'          => array('tm',       $search_all, SELECT),
+	'tor_type'      => array('tor_type', 0,           CHBOX),
+	'hash'          => array('hash',     null,        REQUEST),
 );
 
 // Define all GPC vars with default values
@@ -423,6 +424,11 @@ if (!$set_default)
 				$poster_id_val = $req_poster_id;
 			}
 		}
+	}
+
+	if (isset($_REQUEST[$hash_key]))
+	{
+		hash_search($_REQUEST[$hash_key]);
 	}
 
 	if ($tm =& $_REQUEST[$title_match_key] AND is_string($tm))
