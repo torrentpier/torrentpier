@@ -313,10 +313,10 @@ td.topic_id { cursor: pointer; }
 <!-- IF SHOW_SUBFORUMS -->
 <table class="forumline forum">
 <col class="row1">
-<col class="row1" width="60%">
+<col class="row1" width="65%">
 <col class="row2" width="10%">
 <col class="row2" width="10%">
-<col class="row2" width="20%">
+<col class="row2" width="15%">
 <tr>
 	<th colspan="2">{L_FORUM}</th>
 	<th>{L_TOPICS}</th>
@@ -434,10 +434,10 @@ td.topic_id { cursor: pointer; }
 <table class="forumline forum" id="forum-table">
 <col class="row1">
 <col class="row1">
-<col class="row1" width="70%">
+<col class="row1" width="75%">
 <col class="row2" width="5%">
 <col class="row2" width="5%">
-<col class="row2" width="20%">
+<col class="row2" width="15%">
 <tr>
 	<th colspan="3">{L_TOPICS}</th>
 	<th>{L_TORRENT}</th>
