@@ -1494,6 +1494,7 @@ $lang['REPORTS_DELETED'] = 'The selected reports were deleted.';//
 $lang['SEARCH_S'] = 'search...';
 $lang['FORUM_S'] = 'on forum';
 $lang['TRACKER_S'] = 'on tracker';
+$lang['HASH_S'] = 'by info_hash';
 
 // copyright
 $lang['NOTICE'] = '!ATTENTION!';
@@ -2976,3 +2977,6 @@ $lang['ATOM_SUBSCRIBE'] = 'Subscribe to the feed';
 $lang['ATOM_NO_MODE'] = 'Do not specify a mode for the feed';
 $lang['ATOM_NO_FORUM'] = 'This forum does not have a feed (no ongoing topics)';
 $lang['ATOM_NO_USER'] = 'This user does not have a feed (no ongoing topics)';
+
+$lang['HASH_INVALID'] = 'Hash %s is invalid';
+$lang['HASH_NOT_FOUND'] = 'Release with hash %s not found';

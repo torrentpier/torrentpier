@@ -230,6 +230,7 @@ if ($tor_reged && $tor_info)
 			'DL_TITLE_CLASS'  => (isset($bt_userdata['user_status'])) ? $dl_status_css[$bt_userdata['user_status']] : 'gen',
 			'FILESIZE'        => $tor_file_size,
 			'MAGNET'          => $tor_magnet,
+			'HASH'            => strtoupper(bin2hex($tor_info['info_hash'])),
 			'DOWNLOAD_COUNT'  => sprintf($lang['DOWNLOAD_NUMBER'], $download_count),
 			'REGED_TIME'      => bb_date($tor_info['reg_time']),
 			'REGED_DELTA'     => delta_time($tor_info['reg_time']),

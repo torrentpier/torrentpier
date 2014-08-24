@@ -147,19 +147,20 @@
 		<th colspan="3" class="{postrow.attach.tor_reged.DL_LINK_CLASS}">{postrow.attach.tor_reged.DOWNLOAD_NAME}<!-- IF postrow.attach.tor_reged.TOR_FROZEN == 0 --><!-- IF MAGNET_LINKS -->&nbsp;{postrow.attach.tor_reged.MAGNET}<!-- ENDIF --><!-- ENDIF --></th>
 	</tr>
 	<!-- IF postrow.attach.tor_reged.TOR_SILVER_GOLD == 2 && $tr_cfg['gold_silver_enabled'] -->
-    <tr class="row4">
-        <th colspan="3" class="row7"><img src="images/tor_silver.gif" width="16" height="15" title="{L_SILVER}" />&nbsp;{L_SILVER_STATUS}&nbsp;<img src="images/tor_silver.gif" width="16" height="15" title="{L_SILVER}" /></th>
-    </tr>
-    <!-- ELSEIF postrow.attach.tor_reged.TOR_SILVER_GOLD == 1 && $tr_cfg['gold_silver_enabled'] -->
-    <tr class="row4">
-        <th colspan="3" class="row7"><img src="images/tor_gold.gif" width="16" height="15" title="{L_GOLD}" />&nbsp;{L_GOLD_STATUS}&nbsp;<img src="images/tor_gold.gif" width="16" height="15" title="{L_GOLD}" /></th>
-    </tr>
-    <!-- ENDIF -->
+	<tr class="row4">
+		<th colspan="3" class="row7"><img src="images/tor_silver.gif" width="16" height="15" title="{L_SILVER}" />&nbsp;{L_SILVER_STATUS}&nbsp;<img src="images/tor_silver.gif" width="16" height="15" title="{L_SILVER}" /></th>
+	</tr>
+	<!-- ELSEIF postrow.attach.tor_reged.TOR_SILVER_GOLD == 1 && $tr_cfg['gold_silver_enabled'] -->
+	<tr class="row4">
+		<th colspan="3" class="row7"><img src="images/tor_gold.gif" width="16" height="15" title="{L_GOLD}" />&nbsp;{L_GOLD_STATUS}&nbsp;<img src="images/tor_gold.gif" width="16" height="15" title="{L_GOLD}" /></th>
+	</tr>
+	<!-- ENDIF -->
 	<tr class="row1">
 		<td width="15%">{L_TORRENT}:</td>
 		<td width="70%">
-			{postrow.attach.tor_reged.TRACKER_LINK} &nbsp;
+			{postrow.attach.tor_reged.TRACKER_LINK}
 			[ <span title="{postrow.attach.tor_reged.REGED_DELTA}">{postrow.attach.tor_reged.REGED_TIME}</span> ]
+			&#0183; {postrow.attach.tor_reged.HASH}
 		</td>
 		<td width="15%" rowspan="4" class="tCenter pad_6">
 			<!-- IF postrow.attach.tor_reged.TOR_FROZEN -->
@@ -190,12 +191,12 @@
 					});
 				};
 				ajax.callback.change_tor_status = function(data) {
-					<!-- IF AUTH_MOD -->
-					    $('#tor-'+ data.attach_id +'-status').html(data.status);
-					<!-- ELSEIF postrow.attach.tor_reged.TOR_STATUS_REPLY -->
-					    $('#tor_comment').html('{L_TOR_AUTH_SENT_COMMENT}');
-					<!-- ENDIF -->
-						$('#comment').attr('value', '');
+				<!-- IF AUTH_MOD -->
+					$('#tor-'+ data.attach_id +'-status').html(data.status);
+				<!-- ELSEIF postrow.attach.tor_reged.TOR_STATUS_REPLY -->
+					$('#tor_comment').html('{L_TOR_AUTH_SENT_COMMENT}');
+				<!-- ENDIF -->
+					$('#comment').attr('value', '');
 				};
 			</script>
 
@@ -231,8 +232,8 @@
 		<td colspan="3">
 		<script type="text/javascript">
 		ajax.callback.change_torrent = function(data) {
-		    if(data.title) alert(data.title);
-		    if(data.url) document.location.href = data.url;
+			if (data.title) alert(data.title);
+			if (data.url) document.location.href = data.url;
 		};
 		</script>
 		<!-- IF TOR_CONTROLS -->
@@ -265,9 +266,7 @@
 				<!-- ENDIF -->
 				<!-- ENDIF -->
 			</select>
-
 			<a href="#" onclick="change_torrents($('#tor-{postrow.attach.tor_reged.ATTACH_ID} select').val()); return false;"><input type="submit" value="{L_EDIT}" class="liteoption" /></a>
-
 		<!-- ELSEIF TOR_HELP_LINKS -->
 		{TOR_HELP_LINKS}
 		<!-- ELSE -->
@@ -350,8 +349,8 @@ $('#tor-filelist-btn').click(function(){
 	<tr>
 		<!--<td></td>-->
 		<td>
-		    <div id="tor-fl-treecontrol">
-			    <a href="#">{L_COLLAPSE}</a>&middot;
+			<div id="tor-fl-treecontrol">
+				<a href="#">{L_COLLAPSE}</a>&middot;
 				<a href="#">{L_EXPAND}</a>&middot;
 				<a href="#">{L_SWITCH}</a>
 			</div>

@@ -289,10 +289,10 @@ a.postLink-name, a.postLink-name:visited { text-decoration: none; }
  * ---------------------------------- */
 .infobox {
 	border: 1px #B7C0C5 solid; background: #EFEFEF; padding: 1px;
-	}
-	.infobox h1 {
-		background: #D1D7DC; font-size: 1.2em; padding: 0 0.6em 2px;
-	}
+}
+.infobox h1 {
+	background: #D1D7DC; font-size: 1.2em; padding: 0 0.6em 2px;
+}
 /* ---------------------------------- *
      Inputs, buttons, forms
  * ---------------------------------- */
@@ -882,6 +882,9 @@ fieldset.attach { width: 95%; margin: 14px auto; padding: 2px; clear: both; }
 a.tr-dl, a.dl-link:link { font-weight: bold; }
 a.dl-link { font-size: 13px; text-decoration: none; }
 a.tr-dl:visited, a.f-dl:visited, a.dl-link:visited { color: #5493B4; font-weight: normal; }
+.a-hash { color: #000066 !important; cursor: pointer; }
+.a-hash:hover { color: #DD6900 !important; text-decoration: underline !important; }
+.a-hash:active, .a-hash:focus { color: #DD6900 !important; text-decoration: underline !important; }
 
 .seed-leech { padding-left: 1px; padding-right: 0; }
 .tr_tm { margin-top: 2px; font-size: 10px; color: #676767; }

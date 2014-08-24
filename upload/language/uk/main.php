@@ -1,6 +1,6 @@
 <?php
 
-setlocale(LC_ALL, 'ua_UA.UTF-8');
+setlocale(LC_ALL, 'uk_UA.UTF-8');
 $lang['CONTENT_ENCODING'] = 'UTF-8';
 
 //
@@ -1494,6 +1494,7 @@ $lang['REPORTS_DELETED'] = 'Вибрані повідомлення видале
 $lang['SEARCH_S'] = 'пошук...';
 $lang['FORUM_S'] = 'по форуму';
 $lang['TRACKER_S'] = 'по трекеру';
+$lang['HASH_S'] = 'по info_hash';
 
 // copyright
 $lang['NOTICE'] = '!УВАГА!';
@@ -2976,3 +2977,6 @@ $lang['ATOM_SUBSCRIBE'] = 'Підписка на стрічку';
 $lang['ATOM_NO_MODE'] = 'Не вказано режим для стрічки';
 $lang['ATOM_NO_FORUM'] = 'Для цього форуму немає стрічки (немає початих тем)';
 $lang['ATOM_NO_USER'] = 'Для цього користувача немає стрічки (немає початих тем)';
+
+$lang['HASH_INVALID'] = 'Хеш %s некоректний';
+$lang['HASH_NOT_FOUND'] = 'Роздача з хешем %s не знайдено';

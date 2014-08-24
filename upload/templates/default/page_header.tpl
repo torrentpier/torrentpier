@@ -309,15 +309,16 @@ $(document).ready(function() {
 	<td width="40%">
 		{L_USER_WELCOME}&nbsp;<b class="med">{THIS_USER}</b>&nbsp;[ <a href="{U_LOGIN_LOGOUT}" onclick="return confirm('{L_CONFIRM_LOGOUT}');">{L_LOGOUT}</a> ]
 	</td>
-	<td style="padding: 2px;">
+	<td style="padding: 3px;">
 		<div>
-			<form id="quick-search" action="" method="post" onsubmit="$(this).attr('action', $('#search-action').val());">
+			<form id="quick-search" action="" method="post" onsubmit="$(this).attr('action', $('#search-action').val()); if($('#search-action option:selected').attr('class') == 'hash') $('#search-text').attr('name', 'hash');">
 				<input type="hidden" name="max" value="1" />
 				<input type="hidden" name="to" value="1" />
 				<input id="search-text" type="text" name="nm" placeholder="{L_SEARCH_S}" required />
 				<select id="search-action">
 					<option value="tracker.php#results" selected="selected"> {L_TRACKER_S} </option>
 					<option value="search.php"> {L_FORUM_S} </option>
+					<option value="tracker.php" class="hash"> {L_HASH_S} </option>
 				</select>
 				<input type="submit" class="med" value="{L_SEARCH}" style="width: 55px;" />
 			</form>
