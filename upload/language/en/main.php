@@ -1281,7 +1281,7 @@ $lang['SPMODE_FULL'] = 'Show peers in full details';
 // Seed Bonus
 $lang['MY_BONUS'] = 'My bonus (%s bonuses in stock)';
 $lang['BONUS_SELECT'] = 'Select';
-$lang['SEED_BONUS'] = 'Seed Bonus';
+$lang['SEED_BONUS'] = 'Seed bonus';
 $lang['EXCHANGE'] = 'Exchange';
 $lang['EXCHANGE_BONUS'] = 'Exchange of seed bonuses';
 $lang['BONUS_UPLOAD_DESC'] = '<b>%s to distribution</b> <br /> To exchange bonus points on %1$s traffic which will be added on to the sum of your distribution.';
@@ -1289,8 +1289,8 @@ $lang['BONUS_UPLOAD_PRICE'] = '<b class="%s">%s</b>';
 $lang['PRICE'] = 'Price';
 $lang['EXCHANGE_NOT'] = 'The exchange not available';
 $lang['BONUS_SUCCES'] = 'To you it is successfully enlisted %s';
-$lang['BONUS_NOT_SUCCES'] = '<span class="leech">You do not have bonuses available. More Seeding!</span>';
-$lang['BONUS_RETURN'] = 'Return to the Seed Exchange Bonus';
+$lang['BONUS_NOT_SUCCES'] = '<span class="leech">You do not have bonuses available. More seeding!</span>';
+$lang['BONUS_RETURN'] = 'Return to the seed bonus exchange';
 
 $lang['TRACKER'] = 'Tracker';
 $lang['OPEN_TOPICS'] = 'Open topics';

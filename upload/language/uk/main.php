@@ -1281,16 +1281,16 @@ $lang['SPMODE_FULL'] = 'Детальна статистика піров';
 // Seed Bonus
 $lang['MY_BONUS'] = 'Мій бонус (%s бонусів в наявності)';
 $lang['BONUS_SELECT'] = 'Вибір';
-$lang['SEED_BONUS'] = 'СидБонус';
+$lang['SEED_BONUS'] = 'Сидбонус';
 $lang['EXCHANGE'] = 'Обміняти';
-$lang['EXCHANGE_BONUS'] = 'Обмін сид бонусів';
+$lang['EXCHANGE_BONUS'] = 'Обмін сидбонусів';
 $lang['BONUS_UPLOAD_DESC'] = '<b>%s до роздачі</b> <br /> Обміняти бонусні бали на %1$s трафіку, який буде додано до суми вашої роздачі.';
 $lang['BONUS_UPLOAD_PRICE'] = '<b class="%s">%s</b>';
 $lang['PRICE'] = 'Ціна';
 $lang['EXCHANGE_NOT'] = 'Обмін не доступний';
 $lang['BONUS_SUCCES'] = 'Обмін проведений вдало! Вам додано %s';
-$lang['BONUS_NOT_SUCCES'] = '<span class="витоків">У вас недостатньо Бонусів в наявності. Більше сидируйте!</span>';
-$lang['BONUS_RETURN'] = 'Повернутися до обміну Сид бонусів';
+$lang['BONUS_NOT_SUCCES'] = '<span class="витоків">У вас недостатньо бонусів в наявності. Більше сидируйте!</span>';
+$lang['BONUS_RETURN'] = 'Повернутися до обміну сидбонусів';
 
 $lang['TRACKER'] = 'Трекер';
 $lang['OPEN_TOPICS'] = 'Відкривати топіки';

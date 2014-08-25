@@ -1281,16 +1281,16 @@ $lang['SPMODE_FULL'] = 'Подробная статистика пиров';
 // Seed Bonus
 $lang['MY_BONUS'] = 'Мой бонус (%s бонусов в наличии)';
 $lang['BONUS_SELECT'] = 'Выбор';
-$lang['SEED_BONUS'] = 'СидБонус';
+$lang['SEED_BONUS'] = 'Сидбонус';
 $lang['EXCHANGE'] = 'Обменять';
-$lang['EXCHANGE_BONUS'] = 'Обмен сид бонусов';
+$lang['EXCHANGE_BONUS'] = 'Обмен сидбонусов';
 $lang['BONUS_UPLOAD_DESC'] = '<b>%s к раздаче</b> <br /> Обменять бонусные очки на %1$s трафика, который будет приплюсован к сумме вашей раздачи.';
 $lang['BONUS_UPLOAD_PRICE'] = '<b class="%s">%s</b>';
 $lang['PRICE'] = 'Цена';
 $lang['EXCHANGE_NOT'] = 'Обмен не доступен';
 $lang['BONUS_SUCCES'] = 'Обмен произведен удачно! Вам прибавлено %s';
-$lang['BONUS_NOT_SUCCES'] = '<span class="leech">У вас недостаточно Бонусов в наличии. Больше сидируйте!</span>';
-$lang['BONUS_RETURN'] = 'Вернуться к обмену Сид бонусов';
+$lang['BONUS_NOT_SUCCES'] = '<span class="leech">У вас недостаточно бонусов в наличии. Больше сидируйте!</span>';
+$lang['BONUS_RETURN'] = 'Вернуться к обмену сидбонусов';
 
 $lang['TRACKER'] = 'Трекер';
 $lang['OPEN_TOPICS'] = 'Открывать топики';
