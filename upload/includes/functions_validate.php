@@ -74,7 +74,7 @@ function validate_email ($email, $check_ban_and_taken = true)
 {
 	global $lang, $userdata;
 
-	if (!$email || !preg_match('#^([_a-z\d])[a-z\d\.\-_]+@[a-z\d\-]+\.([a-z\d\-]+\.)*?[a-z]{2,4}$#i', $email))
+	if (!$email || !filter_var($email, FILTER_VALIDATE_EMAIL))
 	{
 		return $lang['EMAIL_INVALID'];
 	}
