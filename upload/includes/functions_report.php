@@ -78,7 +78,7 @@ function report_modules_obtain()
 
 		$modules = DB()->sql_fetchrowset($result);
 		DB()->sql_freeresult($result);
-		CACHE('bb_cache')->set('report_modules_obtain', $modules, 300);
+		CACHE('bb_cache')->set('report_modules_obtain', $modules, 600);
 	}
 
 	if (empty($modules)) {
@@ -527,17 +527,15 @@ function report_count_obtain()
 	}
 
 	if ($userdata['user_level'] == ADMIN) {
-		if (!CACHE('bb_cache')->get('report_count_obtain_exp') || (CACHE('bb_cache')->get('report_count_obtain_exp') + 300) < TIMENOW) {
+		if (!$report_count = CACHE('bb_cache')->get('report_count_obtain')) {
 			$sql = 'SELECT COUNT(report_id) AS report_count FROM ' . BB_REPORTS . ' WHERE report_status IN(' . REPORT_NEW . ', ' . REPORT_OPEN . ')';
 			if (!$result = DB()->sql_query($sql)) {
 				bb_die('Could not obtain report count #1');
 			}
 			$report_count = DB()->sql_fetchfield('report_count', 0, $result);
 			DB()->sql_freeresult($result);
-			CACHE('bb_cache')->set('report_count_obtain', $report_count, 300);
-			CACHE('bb_cache')->set('report_count_obtain_exp', (TIMENOW + 300), 300);
+			CACHE('bb_cache')->set('report_count_obtain', $report_count, 600);
 		}
-		$report_count = CACHE('bb_cache')->get('report_count_obtain');
 	} else if ($userdata['user_level'] != MOD) {
 		$report_count = 0;
 	} else if (!$bb_cfg['report_subject_auth']) {
@@ -917,7 +915,6 @@ function report_insert($module_id, $report_subject, $report_reason, $report_titl
 	}
 
 	CACHE('bb_cache')->rm('report_count_obtain');
-	CACHE('bb_cache')->rm('report_count_obtain_exp');
 
 	return $report_id;
 }
@@ -995,7 +992,6 @@ function reports_update_status($report_ids, $report_status, $comment = '', $auth
 	}
 
 	CACHE('bb_cache')->rm('report_count_obtain');
-	CACHE('bb_cache')->rm('report_count_obtain_exp');
 }
 
 //
@@ -1069,7 +1065,6 @@ function reports_delete($report_ids, $auth_check = true, $module_action = true)
 	}
 
 	CACHE('bb_cache')->rm('report_count_obtain');
-	CACHE('bb_cache')->rm('report_count_obtain_exp');
 }
 
 //

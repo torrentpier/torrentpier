@@ -1210,11 +1210,19 @@ function wbr ($text, $max_word_length = HTML_WBR_LENGTH)
 
 function get_bt_userdata ($user_id)
 {
-	return DB()->fetch_row("SELECT bt.*, SUM(tr.speed_up) as speed_up, SUM(tr.speed_down) as speed_down
-                            FROM      ". BB_BT_USERS   ." bt
-                            LEFT JOIN ". BB_BT_TRACKER ." tr ON (bt.user_id = tr.user_id)
-                            WHERE bt.user_id = ". (int) $user_id ."
-                            GROUP BY bt.user_id");
+	if (!$btu = CACHE('bb_cache')->get('btu_' . $user_id))
+	{
+		$btu = DB()->fetch_row("
+			SELECT bt.*, SUM(tr.speed_up) AS speed_up, SUM(tr.speed_down) AS speed_down
+			FROM      ". BB_BT_USERS   ." bt
+			LEFT JOIN ". BB_BT_TRACKER ." tr ON (bt.user_id = tr.user_id)
+			WHERE bt.user_id = ". (int) $user_id ."
+			GROUP BY bt.user_id
+			LIMIT 1
+		");
+		CACHE('bb_cache')->set('btu_' . $user_id, $btu, 300);
+	}
+	return $btu;
 }
 
 function get_bt_ratio ($btu)
