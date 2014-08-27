@@ -123,6 +123,20 @@ INSERT INTO `bb_cron` VALUES (23, 1, 'Update forums atom', 'update_forums_atom.p
 UPDATE `bb_attachments_config` SET `config_value` = 'old_files' WHERE `config_name` = 'upload_dir';
                                                                                       // изменено 595 ↑
 DELETE FROM `bb_smilies` WHERE `code` = ':cd:';                                       // удалено 596
+ALTER TABLE `bb_groups` CHANGE `group_description` `group_description` text NOT NULL DEFAULT '';
+                                                                                      // изменено 598 ↑
+ALTER TABLE `bb_groups` ADD `avatar_ext_id` int(15) NOT NULL DEFAULT '0' AFTER `group_id`;
+                                                                                      // добавлено 598 ↑
+ALTER TABLE `bb_groups` ADD `mod_time` INT(11) NOT NULL DEFAULT '0' AFTER `group_time`;
+                                                                                      // добавлено 598 ↑
+ALTER TABLE `bb_groups` ADD `release_group` tinyint(4) NOT NULL DEFAULT '0' AFTER `group_type`;
+                                                                                      // добавлено 598 ↑
+ALTER TABLE `bb_groups` ADD `group_signature` text NOT NULL DEFAULT '' AFTER `group_description`;
+                                                                                      // добавлено 598 ↑
+ALTER TABLE `bb_posts` ADD `poster_rg_id` mediumint(8) NOT NULL DEFAULT '0' AFTER `poster_ip`;
+                                                                                      // добавлено 598 ↑
+ALTER TABLE `bb_posts` ADD `attach_rg_sig` tinyint(4) NOT NULL DEFAULT '0' AFTER `poster_rg_id`;
+                                                                                      // добавлено 598 ↑
 
 Удаленные файлы/папки:
 

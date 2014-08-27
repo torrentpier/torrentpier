@@ -1,12 +1,3 @@
--- phpMyAdmin SQL Dump
--- version 3.4.10.1
--- http://www.phpmyadmin.net
---
--- Хост: localhost
--- Время создания: Мар 08 2012 г., 16:00
--- Версия сервера: 5.5.20
--- Версия PHP: 5.3.10
-
 SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 
 --
@@ -792,10 +783,14 @@ INSERT INTO `bb_forums` VALUES (1, 1, 'Ваш первый форум', 'Опи�
 
 CREATE TABLE IF NOT EXISTS `bb_groups` (
   `group_id` mediumint(8) NOT NULL AUTO_INCREMENT,
-  `group_time` int(11) NOT NULL DEFAULT '0',
+  `avatar_ext_id` int(15) NOT NULL DEFAULT '0',
+  `group_time` INT(11) NOT NULL DEFAULT '0',
+  `mod_time` INT(11) NOT NULL DEFAULT '0',
   `group_type` tinyint(4) NOT NULL DEFAULT '1',
+  `release_group` tinyint(4) NOT NULL DEFAULT '0',
   `group_name` varchar(40) NOT NULL DEFAULT '',
-  `group_description` varchar(255) NOT NULL DEFAULT '',
+  `group_description` text NOT NULL DEFAULT '',
+  `group_signature` text NOT NULL DEFAULT '',
   `group_moderator` mediumint(8) NOT NULL DEFAULT '0',
   `group_single_user` tinyint(1) NOT NULL DEFAULT '1',
   PRIMARY KEY (`group_id`),
@@ -866,6 +861,8 @@ CREATE TABLE IF NOT EXISTS `bb_posts` (
   `poster_id` mediumint(8) NOT NULL DEFAULT '0',
   `post_time` int(11) NOT NULL DEFAULT '0',
   `poster_ip` char(32) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL DEFAULT '',
+  `poster_rg_id` mediumint(8) NOT NULL DEFAULT '0',
+  `attach_rg_sig` tinyint(4) NOT NULL DEFAULT '0',
   `post_username` varchar(25) NOT NULL DEFAULT '',
   `post_edit_time` int(11) NOT NULL DEFAULT '0',
   `post_edit_count` smallint(5) unsigned NOT NULL DEFAULT '0',
@@ -886,7 +883,7 @@ CREATE TABLE IF NOT EXISTS `bb_posts` (
 -- Дамп данных таблицы `bb_posts`
 --
 
-INSERT INTO `bb_posts` VALUES (1, 1, 1, 2, UNIX_TIMESTAMP(), '', '', 0, 0, 0, 0, 1, '', 0, 0);
+INSERT INTO `bb_posts` VALUES (1, 1, 1, 2, UNIX_TIMESTAMP(), '', 0, 0, '', 0, 0, 0, 0, 1, '', 0, 0);
 
 -- --------------------------------------------------------
 
@@ -930,7 +927,7 @@ CREATE TABLE IF NOT EXISTS `bb_posts_text` (
 -- Дамп данных таблицы `bb_posts_text`
 --
 
-INSERT INTO `bb_posts_text` VALUES (1, '[list]\n[*]Переделан поиск по топикам с выбором типа [none, mysql, sphinx] (только в tracker.php)\n[*]Удалены bbcode_uid и переход на class.bbcode\n[*]Изменен метод и способ кеширования (memcache, sqlite, db_sqlite, redis, eaccelerator, apc, xcache, filecache)\n[*]Изменен способ подключения к БД и отказ от глобальной переменной $db\n[*]Улучшенный дебагер\n[*]Полностью переписан и упрощен файл регистрации\n[*]Переписана капча (в том числе при быстром ответе у гостя)\n[*]Удаление файлов torrent.php и torstatus.php и перенос их функций в ajax\n[*]Ajax цитирование, изменение, редактирование, удаление сообщений\n[/list]');
+INSERT INTO `bb_posts_text` VALUES (1, 'Благодарим вас за установку новой версии TorrentPier II!\n\nЧто делать дальше? Сперва настройте ваш сайт в администраторском разделе. Измените базовые опции: заголовок сайта, число сообщений на страницу, часовой пояс, язык по-умолчанию, настройки сидбонусов, дней рождения и т.д. Создайте несколько форумов, а также не забудьте переименовать или удалить этот. Обязательно настройте возможность создания релизов в созданных вами разделах и добавьте [url=http://torrentpier.me/threads/25867/]шаблоны оформления раздач[/url] для них. Если у вас возникнут вопросы или потребность в дополнительных модификациях, [url=http://torrentpier.me/]посетите наш форум[/url].\n\nТакже напоминаем, что у проекта TorrentPier II есть несколько сайтов, которые могут оказаться полезны для вас:\n[list]\n[*]Форум: http://torrentpier.me/\n[*]Демо-версия: http://get.torrentpier.me/\n[*]Инструкция: http://faq.torrentpier.me/\n[*]Центр загрузки: http://get.torrentpier.me/\n[*]Перевод на другие языки: http://translate.torrentpier.me/\n[/list]\nНе забудьте добавить их себе в закладки и регулярно проверять наличие новых версий движка на нашем форуме, для своевременного обновления.\n\nНе сомневаемся, вам под силу создать самый лучший трекер. Удачи!');
 
 -- --------------------------------------------------------
 

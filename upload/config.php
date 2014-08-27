@@ -54,6 +54,7 @@
  * Ads
  * Attachments
  * Avatars
+ * Group avatars
  * Misc
  * Captcha
  * Atom feed
@@ -69,9 +70,9 @@ $domain_name = 'torrentpier.me';  // enter here your primary domain name of your
 $domain_name = (!empty($_SERVER['SERVER_NAME'])) ? $_SERVER['SERVER_NAME'] : $domain_name;
 
 // Version info
-$bb_cfg['tp_version'] = '2.0.9 (RC)';
-$bb_cfg['tp_release_date'] = '24-08-2014';
-$bb_cfg['tp_release_state'] = 'R597';
+$bb_cfg['tp_version'] = '2.1 (RC)';
+$bb_cfg['tp_release_date'] = '27-08-2014';
+$bb_cfg['tp_release_state'] = 'R598';
 
 // Database
 $charset  = 'utf8';
@@ -502,7 +503,7 @@ $bb_cfg['user_not_activated_days_keep'] = 7;       // "not activated" == "not fi
 $bb_cfg['user_not_active_days_keep']    = 180;     // inactive users but only with no posts
 
 // GroupCP
-$bb_cfg['groupcp_members_per_page']     = 300;
+$bb_cfg['groupcp_members_per_page']     = 50;
 
 // Tidy
 $bb_cfg['tidy_post'] = (!extension_loaded('tidy')) ? false : true;
@@ -549,9 +550,20 @@ $bb_cfg['gen_forums_allowed_ext'] = array('zip', 'rar');            // для о
 $bb_cfg['avatars'] = array(
 	'allowed_ext' => array('gif','jpg','jpeg','png'), // разрешенные форматы файлов
 	'bot_avatar'  => 'gallery/bot.gif',               // аватара бота
-	'max_size'    => 50*1024,                         // размер аватары в байтах
+	'max_size'    => 100*1024,                        // размер аватары в байтах
 	'max_height'  => 100,                             // высота аватара в px
 	'max_width'   => 100,                             // ширина аватара в px
+	'no_avatar'   => 'gallery/noavatar.png',          // дефолтная аватара
+	'upload_path' => BB_ROOT . 'images/avatars/',     // путь к директории с аватарами
+	'up_allowed'  => true,                            // разрешить загрузку аватар
+);
+
+// Group avatars
+$bb_cfg['group_avatars'] = array(
+	'allowed_ext' => array('gif','jpg','jpeg','png'), // разрешенные форматы файлов
+	'max_size'    => 100*1024,                        // размер аватары в байтах
+	'max_height'  => 300,                             // высота аватара в px
+	'max_width'   => 300,                             // ширина аватара в px
 	'no_avatar'   => 'gallery/noavatar.png',          // дефолтная аватара
 	'upload_path' => BB_ROOT . 'images/avatars/',     // путь к директории с аватарами
 	'up_allowed'  => true,                            // разрешить загрузку аватар

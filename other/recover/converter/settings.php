@@ -16,4 +16,3 @@ define('C_COMMENTS_PER_ONCE', 400); // Number of comments converting per once
 //Mybb forums & topics
 define('CONVERT_MYBB_FORUMS', false); // Converting forums is enabled?
 define('C_FORUMS_PER_ONCE',   100); // Number of forums converting per once
-

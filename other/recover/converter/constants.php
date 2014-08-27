@@ -1,6 +1,6 @@
 <?php
 
-if (!defined('EXCLUDED_USERS_CSV')) { define('EXCLUDED_USERS_CSV', join(',', array(GUEST_UID,	BOT_UID,))); }
+if (!defined('EXCLUDED_USERS_CSV')) { define('EXCLUDED_USERS_CSV', join(',', array(GUEST_UID, BOT_UID,))); }
 define('TB_USERS_TABLE',      'users');
 define('TB_CATEGORIES_TABLE', 'categories');
 define('TB_TORRENTS_TABLE',   'torrents');

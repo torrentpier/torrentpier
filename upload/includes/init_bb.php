@@ -197,6 +197,9 @@ define('NOGENDER',      0);
 # 1 - обычный опрос
 define('POLL_FINISHED', 2);
 
+// Group avatars
+define('GROUP_AVATAR_MASK', 999000);
+
 // Torrents     (reserved: -1)
 define('TOR_NOT_APPROVED',  0);   // не проверено
 define('TOR_CLOSED',        1);   // закрыто

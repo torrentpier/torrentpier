@@ -7,6 +7,7 @@ require(BB_ROOT .'common.php');
 require(INC_DIR .'class.utf8.php');
 require(INC_DIR .'class.correct.php');
 require(INC_DIR .'class.reflection.php');
+require(INC_DIR .'functions_group.php');
 
 // Page config
 $page_cfg['include_bbcode_js'] = true;
@@ -21,7 +22,7 @@ $user->session_start(array('req_login' => $bb_cfg['bt_tor_browse_only_reg']));
 set_die_append_msg();
 
 $tor_search_limit    = (IS_AM) ? 2000 : 500;
-$forum_select_size   = 24; // forum select box max rows
+$forum_select_size   = 25; // forum select box max rows
 $max_forum_name_len  = 60; // inside forum select box
 $max_forums_selected = 50;
 $title_match_max_len = 60;
@@ -51,6 +52,7 @@ $row_num = $tor_count = 0;
 $torrents_tbl = BB_BT_TORRENTS     .' tor';
 $cat_tbl      = BB_CATEGORIES      .' c';
 $forums_tbl   = BB_FORUMS          .' f';
+$posts_tbl    = BB_POSTS           .' p';
 $topics_tbl   = BB_TOPICS          .' t';
 $users_tbl    = BB_USERS           .' u';
 $tracker_tbl  = BB_BT_TRACKER      .' tr';
@@ -219,6 +221,29 @@ foreach ($s_not_seen_opt as $val => $opt)
 	$s_not_seen_select[$opt['lang']] = $val;
 }
 
+if ($release_groups = get_group_data('all'))
+{
+	$s_rg_opt = array(
+		$search_all => array(
+			'lang' => $lang['GROUPS_RELEASES'],
+			'sql'  => 0,
+	));
+	foreach ($release_groups as $rg)
+	{
+		if ($rg['release_group'])
+		{
+			$s_rg_opt[$rg['group_id']] = array(
+				'lang' => $rg['group_name'],
+				'sql'  => $rg['group_id'],
+			);
+		}
+	}
+	foreach ($s_rg_opt as $val => $opt)
+	{
+		$s_release_group_select[$opt['lang']] = $val;
+	}
+}
+
 $GPC = array(
 #	var_name                 key_name    def_value    GPC type
 	'all_words'     => array('allw',     1,           CHBOX),
@@ -242,6 +267,7 @@ $GPC = array(
 	'show_cat'      => array('dc',       0,           CHBOX),
 	'show_forum'    => array('df',       1,           CHBOX),
 	'show_speed'    => array('ds',       0,           CHBOX),
+	's_rg'          => array('srg',      $search_all, SELECT),
 	's_not_seen'    => array('sns',      $search_all, SELECT),
 	'time'          => array('tm',       $search_all, SELECT),
 	'tor_type'      => array('tor_type', 0,           CHBOX),
@@ -451,21 +477,23 @@ if ($dl_will_val)   $dl_status[] = DL_STATUS_WILL;
 $dl_status_csv = join(',', $dl_status);
 
 // Switches
-$only_new    = ($new_val && !IS_GUEST);
-$seed_exist  = (bool) $seed_exist_val;
-$only_active = ($active_val || $seed_exist);
-$dl_search   = ($dl_status && !IS_GUEST);
-$only_my     = ($my_val && !IS_GUEST && !$dl_search);
-$prev_days   = ($time_val != $search_all);
-$poster_id   = (bool) $poster_id_val;
-$title_match = (bool) $title_match_sql;
-$s_not_seen  = ($s_not_seen_val != $search_all);
-$tor_type    = (bool) $tor_type_val;
+$seed_exist      = (bool) $seed_exist_val;
+$poster_id       = (bool) $poster_id_val;
+$title_match     = (bool) $title_match_sql;
+$tor_type        = (bool) $tor_type_val;
 
-$hide_cat    = intval(!$show_cat_val);
-$hide_forum  = intval(!$show_forum_val);
-$hide_author = intval(!$show_author_val);
-$hide_speed  = intval(!$show_speed_val);
+$hide_cat        = intval(!$show_cat_val);
+$hide_forum      = intval(!$show_forum_val);
+$hide_author     = intval(!$show_author_val);
+$hide_speed      = intval(!$show_speed_val);
+
+$only_new        = ($new_val && !IS_GUEST);
+$only_active     = ($active_val || $seed_exist);
+$dl_search       = ($dl_status && !IS_GUEST);
+$only_my         = ($my_val && !IS_GUEST && !$dl_search);
+$prev_days       = ($time_val != $search_all);
+$s_release_group = ($s_rg_val != $search_all);
+$s_not_seen      = ($s_not_seen_val != $search_all);
 
 if ($s_not_seen_val != $search_all)
 {
@@ -482,7 +510,7 @@ if ($dl_search)
 
 if ($allowed_forums)
 {
-    // Save current search settings
+	// Save current search settings
 	$save_in_db = array(
 		'all_words',
 		'active',
@@ -497,6 +525,7 @@ if ($allowed_forums)
 		'poster_id',
 		'poster_name',
 		's_not_seen',
+		's_rg',
 		'seed_exist',
 		'show_author',
 		'show_cat',
@@ -512,7 +541,7 @@ if ($allowed_forums)
 	}
 	$curr_set_sql = DB()->escape(serialize($curr_set));
 
-    // Text search
+	// Text search
 	$search_match_topics_csv = '';
 
 	if ($title_match)
@@ -534,6 +563,7 @@ if ($allowed_forums)
 	{
 		$reg_time         = $time_opt[$time_val]['sql'];
 		$poster_id_sql    = (int) $poster_id_val;
+		$rg_id_sql        = (int) $s_rg_val;
 		$s_seen_time      = $s_not_seen_opt[$s_not_seen_val]['sql'];
 		$s_seen_sign      = ($s_not_seen_val == $never) ? '=' : '<';
 		$s_seen_exclude   = ($s_not_seen_val == $never) ? '' : "AND tor.seeder_last_seen != 0";
@@ -569,6 +599,10 @@ if ($allowed_forums)
 				AND dl.user_status IN($dl_status_csv)
 			)";
 		}
+		if ($s_release_group)
+		{
+			$SQL['LEFT JOIN'][] = "$posts_tbl ON(p.topic_id = tor.topic_id)";
+		}
 
 		// WHERE
 		$title_match_notfound_flag = false;
@@ -587,6 +621,10 @@ if ($allowed_forums)
 		if ($poster_id)
 		{
 			$SQL['WHERE'][] = "tor.poster_id = $poster_id_sql";
+		}
+		if ($s_release_group)
+		{
+			$SQL['WHERE'][] = "p.poster_rg_id = $rg_id_sql";
 		}
 		if ($only_new)
 		{
@@ -917,6 +955,7 @@ $template->assign_vars(array(
 	'ORDER_SELECT'      => build_select($order_key, $order_select, $order_val),
 	'TIME_SELECT'       => build_select($time_key, $time_select, $time_val),
 	'S_NOT_SEEN_SELECT' => build_select($s_not_seen_key, $s_not_seen_select, $s_not_seen_val),
+	'S_RG_SELECT'       => build_select($s_rg_key, $s_release_group_select, $s_rg_val),
 	'TOR_SEARCH_ACTION' => $tracker_url,
 	'TOR_COLSPAN'       => $tor_colspan,
 	'TITLE_MATCH_MAX'   => $title_match_max_len,

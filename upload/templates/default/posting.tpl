@@ -94,7 +94,6 @@
 <tr>
 	<td class="vTop pad_4">
 		<p><b>{L_MESSAGE}</b></p>
-
 		<table id="smilies" class="smilies borderless mrg_16">
 		<!-- BEGIN smilies_row -->
 		<tr>
@@ -115,10 +114,10 @@
 <!-- IF IN_PM -->
 <!-- ELSEIF LOGGED_IN -->
 <tr>
-	<td class="row1 vTop pad_4" valign="top">
+	<td class="vTop pad_4" valign="top">
 		<p><b>{L_OPTIONS}</b></p>
 	</td>
-	<td class="row2">
+	<td>
 	<div class="floatL">
 		<table class="borderless inline">
 		<!-- IF SHOW_UPDATE_POST_TIME -->
@@ -138,14 +137,24 @@
 	</td>
 </tr>
 <!-- ENDIF / LOGGED_IN -->
+<!-- IF ATTACHBOX && POSTER_RGROUPS -->
+<tr>
+	<td class="vTop pad_4" valign="top"><b>{L_POST_RELEASE_FROM_GROUP}</b></td>
+	<td>
+		<select name="poster_rg">
+			<option value="-1">{L_CHOOSE_RELEASE_GROUP}</option>
+			{POSTER_RGROUPS}
+		</select>
+		<label><input type="checkbox" name="attach_rg_sig" <!-- IF ATTACH_RG_SIG -->checked<!-- ENDIF -->/> {L_ATTACH_RG_SIG}</label>
+	</td>
+</tr>
+<!-- ENDIF -->
 <!-- BEGIN switch_type_toggle -->
 <tr>
 	<td colspan="2" class="row2 tCenter pad_6">{S_TYPE_TOGGLE}</td>
 </tr>
 <!-- END switch_type_toggle -->
-
 <!-- IF ATTACHBOX --><!-- INCLUDE posting_attach.tpl --><!-- ENDIF -->
-
 </table>
 
 </form>

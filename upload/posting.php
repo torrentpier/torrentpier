@@ -29,6 +29,10 @@ $orig_word = $replacement_word = array();
 $topic_type = (@$_POST['topictype']) ? (int) $_POST['topictype'] : POST_NORMAL;
 $topic_type = in_array($topic_type, array(POST_NORMAL, POST_STICKY, POST_ANNOUNCE)) ? $topic_type : POST_NORMAL;
 
+$selected_rg = 0;
+$switch_rg_sig = 0;
+$switch_poster_rg_sig = 0;
+
 if ($mode == 'smilies')
 {
 	generate_smilies('window');
@@ -177,6 +181,9 @@ if ($post_info = DB()->fetch_row($sql))
 		$post_data['last_topic'] = ($post_info['forum_last_post_id'] == $post_id);
 		$post_data['topic_type'] = $post_info['topic_type'];
 		$post_data['poster_id'] = $post_info['poster_id'];
+
+		$selected_rg = $post_info['poster_rg_id'];
+		$switch_rg_sig = ($post_info['attach_rg_sig']) ? true : false;
 
 		// Can this user edit/delete the post?
 		if ($post_info['poster_id'] != $userdata['user_id'] && !$is_auth['auth_mod'])
@@ -360,6 +367,8 @@ elseif ( ($submit || $confirm) && !$topic_has_new_posts )
 			$username = ( !empty($_POST['username']) ) ? clean_username($_POST['username']) : '';
 			$subject = ( !empty($_POST['subject']) ) ? clean_title($_POST['subject']) : '';
 			$message = ( !empty($_POST['message']) ) ? prepare_message($_POST['message']) : '';
+			$attach_rg_sig = (isset($_POST['attach_rg_sig']) && isset($_POST['poster_rg']) && $_POST['poster_rg'] != -1) ? 1 : 0;
+			$poster_rg_id = (isset($_POST['poster_rg']) && $_POST['poster_rg'] != -1) ? (int) $_POST['poster_rg'] : 0;
 
 			prepare_post($mode, $post_data, $error_msg, $username, $subject, $message);
 
@@ -367,7 +376,7 @@ elseif ( ($submit || $confirm) && !$topic_has_new_posts )
 			{
 				$topic_type = ( isset($post_data['topic_type']) && $topic_type != $post_data['topic_type'] && !$is_auth['auth_sticky'] && !$is_auth['auth_announce'] ) ? $post_data['topic_type'] : $topic_type;
 
-				submit_post($mode, $post_data, $return_message, $return_meta, $forum_id, $topic_id, $post_id, $topic_type, DB()->escape($username), DB()->escape($subject), DB()->escape($message), $update_post_time);
+				submit_post($mode, $post_data, $return_message, $return_meta, $forum_id, $topic_id, $post_id, $topic_type, DB()->escape($username), DB()->escape($subject), DB()->escape($message), $update_post_time, $poster_rg_id, $attach_rg_sig);
 
 				$post_url = POST_URL ."$post_id#$post_id";
 				$post_msg = ($mode == 'editpost') ? $lang['EDITED']: $lang['STORED'];
@@ -513,10 +522,9 @@ else
 			}
 
 			if ($post_info['post_attachment'] && !IS_AM) $message = $post_info['topic_title'];
-
-			// Use trim to get rid of spaces placed there by MS-SQL 2000
-			$quote_username = ( trim($post_info['post_username']) != '' ) ? $post_info['post_username'] : $post_info['username'];
+			$quote_username = ($post_info['post_username'] != '') ? $post_info['post_username'] : $post_info['username'];
 			$message = '[quote="'. $quote_username .'"][qpost='. $post_info['post_id'] .']' . $message . '[/quote]';
+
 			// hide user passkey
 			$message = preg_replace('#(?<=\?uk=)[a-zA-Z0-9]{10}(?=&)#', 'passkey', $message);
 			// hide sid
@@ -632,6 +640,25 @@ if ($post_info['allow_reg_tracker'] && $post_data['first_post'] && ($topic_dl_ty
 }
 //bt end
 
+// Get poster release group data
+if ($userdata['user_level'] == GROUP_MEMBER || IS_AM)
+{
+	$poster_rgroups = '';
+
+	$sql = "SELECT ug.group_id, g.group_name, g.release_group
+		FROM ". BB_USER_GROUP ." ug
+		INNER JOIN ". BB_GROUPS ." g ON(g.group_id = ug.group_id)
+		WHERE ug.user_id = {$userdata['user_id']}
+			AND g.release_group = 1
+		ORDER BY g.group_name";
+
+	foreach (DB()->fetch_rowset($sql) as $row)
+	{
+		$selected_opt = ($row['group_id'] == $selected_rg) ? 'selected' : '';
+		$poster_rgroups .= '<option value="'. $row['group_id'] .'" '. $selected_opt .'>'. $row['group_name'] .'</option>';
+	}
+}
+
 $hidden_form_fields = '<input type="hidden" name="mode" value="' . $mode . '" />';
 
 switch( $mode )
@@ -661,24 +688,27 @@ $template->set_filenames(array(
 
 // Output the data to the template
 $template->assign_vars(array(
-	'FORUM_NAME' => htmlCHR($forum_name),
-	'PAGE_TITLE' => $page_title,
-	'POSTING_TYPE_TITLE' => $page_title,
-	'POSTING_TOPIC_ID' => ($mode != 'newtopic') ? $topic_id : '',
-	'POSTING_TOPIC_TITLE' => ($mode != 'newtopic') ? wbr($post_info['topic_title']) : '',
-	'U_VIEW_FORUM' => "viewforum.php?" . POST_FORUM_URL . "=$forum_id",
+	'FORUM_NAME'           => htmlCHR($forum_name),
+	'PAGE_TITLE'           => $page_title,
+	'POSTING_TYPE_TITLE'   => $page_title,
+	'POSTING_TOPIC_ID'     => ($mode != 'newtopic') ? $topic_id : '',
+	'POSTING_TOPIC_TITLE'  => ($mode != 'newtopic') ? wbr($post_info['topic_title']) : '',
+	'U_VIEW_FORUM'         => "viewforum.php?" . POST_FORUM_URL . "=$forum_id",
 
-	'USERNAME' => @$username,
-	'CAPTCHA_HTML' => (IS_GUEST) ? CAPTCHA()->get_html() : '',
-	'SUBJECT' => $subject,
-	'MESSAGE' => $message,
+	'USERNAME'             => @$username,
+	'CAPTCHA_HTML'         => (IS_GUEST) ? CAPTCHA()->get_html() : '',
+	'SUBJECT'              => $subject,
+	'MESSAGE'              => $message,
 
-	'U_VIEWTOPIC' => ( $mode == 'reply' ) ? TOPIC_URL . $topic_id . "&amp;postorder=desc" : '',
+	'POSTER_RGROUPS'       => isset($poster_rgroups) && !empty($poster_rgroups) ? $poster_rgroups : '',
+	'ATTACH_RG_SIG'        => ($switch_rg_sig) ? $switch_rg_sig : false,
 
-	'S_NOTIFY_CHECKED' => ( $notify_user ) ? 'checked="checked"' : '',
-	'S_TYPE_TOGGLE' => $topic_type_toggle,
-	'S_TOPIC_ID' => $topic_id,
-	'S_POST_ACTION' => POSTING_URL,
+	'U_VIEWTOPIC'          => ($mode == 'reply') ? "viewtopic.php?" . POST_TOPIC_URL . "=$topic_id&amp;postorder=desc" : '',
+
+	'S_NOTIFY_CHECKED'     => ($notify_user) ? 'checked="checked"' : '',
+	'S_TYPE_TOGGLE'        => $topic_type_toggle,
+	'S_TOPIC_ID'           => $topic_id,
+	'S_POST_ACTION'        => POSTING_URL,
 	'S_HIDDEN_FORM_FIELDS' => $hidden_form_fields,
 ));
 

@@ -363,7 +363,7 @@ if ($t_data['topic_show_first_post'] && $start)
 			u.user_regdate, u.user_sig,
 			u.avatar_ext_id,
 			u.user_opt, u.user_gender, u.user_birthday,
-			p.*,
+			p.*, g.group_name, g.group_id, g.group_signature, g.avatar_ext_id as rg_avatar_id,
 			u2.username as mc_username, u2.user_rank as mc_user_rank,
 			h.post_html, IF(h.post_html IS NULL, pt.post_text, NULL) AS post_text
 		FROM      ". BB_POSTS      ." p
@@ -371,6 +371,7 @@ if ($t_data['topic_show_first_post'] && $start)
 		LEFT JOIN ". BB_POSTS_TEXT ." pt ON(pt.post_id = p.post_id)
 		LEFT JOIN ". BB_POSTS_HTML ." h  ON(h.post_id = p.post_id)
 		LEFT JOIN ". BB_USERS      ." u2 ON(u2.user_id = p.mc_user_id)
+		LEFT JOIN ". BB_GROUPS     ." g ON(g.group_id = p.poster_rg_id)
 		WHERE
 			p.post_id = {$t_data['topic_first_post_id']}
 		LIMIT 1
@@ -383,7 +384,7 @@ $sql = "
 		u.user_regdate, u.user_sig,
 		u.avatar_ext_id,
 		u.user_opt, u.user_gender, u.user_birthday,
-		p.*,
+		p.*, g.group_name, g.group_id, g.group_signature, g.avatar_ext_id as rg_avatar_id,
 		u2.username as mc_username, u2.user_rank as mc_user_rank,
 		h.post_html, IF(h.post_html IS NULL, pt.post_text, NULL) AS post_text
 	FROM      ". BB_POSTS      ." p
@@ -391,6 +392,7 @@ $sql = "
 	LEFT JOIN ". BB_POSTS_TEXT ." pt ON(pt.post_id = p.post_id)
 	LEFT JOIN ". BB_POSTS_HTML ." h  ON(h.post_id = p.post_id)
 	LEFT JOIN ". BB_USERS      ." u2 ON(u2.user_id = p.mc_user_id)
+	LEFT JOIN ". BB_GROUPS     ." g ON(g.group_id = p.poster_rg_id)
 	WHERE p.topic_id = $topic_id
 		$limit_posts_time
 	GROUP BY p.post_id
@@ -690,6 +692,11 @@ for($i = 0; $i < $total_posts; $i++)
 	$mc_comment       = $postrow[$i]['mc_comment'];
 	$mc_user_id       = profile_url(array('username' => $postrow[$i]['mc_username'], 'user_id' => $postrow[$i]['mc_user_id'], 'user_rank' => $postrow[$i]['mc_user_rank']));
 
+	$rg_id            = ($postrow[$i]['poster_rg_id']) ? $postrow[$i]['poster_rg_id'] : 0;
+	$rg_avatar        = get_avatar(GROUP_AVATAR_MASK . $rg_id, $postrow[$i]['rg_avatar_id']);
+	$rg_name          = ($postrow[$i]['group_name']) ? htmlCHR($postrow[$i]['group_name']) : '';
+	$rg_signature     = ($postrow[$i]['group_signature']) ? bbcode2html(htmlCHR($postrow[$i]['group_signature'])) : '';
+
 	$poster_avatar = '';
 	if ( !$user->opt_js['h_av'] && $poster_id != GUEST_UID )
 	{
@@ -872,6 +879,12 @@ for($i = 0; $i < $total_posts; $i++)
 		'MC_CLASS'           => $mc_class,
 		'MC_TITLE'           => sprintf($lang['MC_COMMENT'][$mc_type]['title'], $mc_user_id),
 		'MC_SELECT_TYPE'     => build_select("mc_type_$post_id", array_flip($mc_select_type), $mc_type),
+
+		'RG_AVATAR'          => $rg_avatar,
+		'RG_NAME'            => $rg_name,
+		'RG_URL'             => GROUP_URL . $rg_id,
+		'RG_FIND_URL'        => 'tracker.php?srg='. $rg_id,
+		'RG_SIG'             => $rg_signature,
 	));
 
 	if ($postrow[$i]['post_attachment'] && $is_auth['auth_download'] && function_exists('display_post_attachments'))

@@ -216,6 +216,12 @@ $(function(){
 					<p class="select">{S_NOT_SEEN_SELECT}</p>
 				</div>
 				</fieldset>
+				<fieldset>
+				<legend>{L_GROUPS_RELEASES}</legend>
+				<div>
+					<p class="select">{S_RG_SELECT}</p>
+				</div>
+				</fieldset>
 			</td>
 			<td width="30%">
 				<fieldset>
@@ -239,14 +245,18 @@ $(function(){
 				<legend>{L_MY_DOWNLOADS}</legend>
 				<div>
 					<table class="borderless my_downloads" cellspacing="0">
-					<tr>
-						<td>{DL_COMPL_CHBOX}</td>
-						<td>{DL_WILL_CHBOX}</td>
-					</tr>
-					<tr>
-						<td>{DL_DOWN_CHBOX}</td>
-						<td>{DL_CANCEL_CHBOX}</td>
-					</tr>
+						<tr>
+							<td>{DL_COMPL_CHBOX}</td>
+						</tr>
+						<tr>
+							<td>{DL_WILL_CHBOX}</td>
+						</tr>
+						<tr>
+							<td>{DL_DOWN_CHBOX}</td>
+						</tr>
+						<tr>
+							<td>{DL_CANCEL_CHBOX}</td>
+						</tr>
 					</table>
 				</div>
 				</fieldset>

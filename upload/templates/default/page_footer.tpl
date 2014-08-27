@@ -1,4 +1,4 @@
-<!-- IF SIMPLE_FOOTER --><!-- ELSEIF IN_ADMIN --><!-- ELSE -->
+<!-- IF SIMPLE_FOOTER --><div class="copyright tCenter" id="t2t">{POWERED}</div><!-- ELSEIF IN_ADMIN --><!-- ELSE -->
 
 	</div><!--/main_content_wrap-->
 	</td><!--/main_content-->
@@ -47,7 +47,7 @@
 		<!-- ENDIF -->
 
 		<div class="copyright tCenter" id="t2t">
-			{POWERED} <br />
+			{POWERED}<br />
 		</div>
 
 	</div>
@@ -65,9 +65,7 @@
 <!-- ENDIF -->
 
 <!-- IF ONLOAD_FOCUS_ID -->
-
 <script type="text/javascript">
 $p('{ONLOAD_FOCUS_ID}').focus();
 </script>
-
 <!-- ENDIF -->

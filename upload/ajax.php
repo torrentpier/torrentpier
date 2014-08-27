@@ -62,6 +62,7 @@ switch ($ajax->action)
 		break;
 
 	case 'group_membership':
+	case 'manage_group':
 		require(INC_DIR . 'functions_group.php');
 		break;
 
@@ -101,6 +102,7 @@ class ajax_common
 		'gen_passkey'       => array('user'),
 		'change_torrent'    => array('user'),
 		'change_tor_status' => array('user'),
+		'manage_group'      => array('user'),
 
 		'view_post'         => array('guest'),
 		'view_torrent'      => array('guest'),
@@ -347,6 +349,11 @@ class ajax_common
 	function group_membership()
 	{
 		require(AJAX_DIR . 'group_membership.php');
+	}
+
+	function manage_group()
+	{
+		require(AJAX_DIR . 'edit_group_profile.php');
 	}
 
 	function post_mod_comment()
