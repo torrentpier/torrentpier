@@ -2759,7 +2759,7 @@ function get_avatar ($user_id, $ext_id, $allow_avatar = true, $size = true, $hei
 
 	if ($size)
 	{
-		// TODO
+		// TODO размеры: s, m, l + кеширование
 	}
 
 	$height = ($height != '') ? 'height="'. $height .'"' : '';
