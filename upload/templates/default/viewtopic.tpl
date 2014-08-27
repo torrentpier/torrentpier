@@ -406,19 +406,17 @@ function build_poll_add_form (src_el)
 				<span id="pe_{postrow.POST_ID}"></span>
 				<span id="pp_{postrow.POST_ID}">{postrow.MESSAGE}</span>
 				<!-- IF postrow.RG_NAME -->
-				<div align="center">
-					<table id="pg_{postrow.POST_ID}" style="border-left:4px solid #DEDEDE;">
-						<tr><td colspan="2" align="left" valign="middle" style="border-bottom:1px solid #DEDEDE;padding:5px;" class="genmed bold">{L_RELEASE_FROM_RG}:</td></tr>
-						<tr>
-							<td style="padding:5px;">{postrow.RG_AVATAR}</td>
-							<td align="left" style="padding:5px;" width="350px"><a href="{postrow.RG_URL}" class="med bold"><h1>{postrow.RG_NAME}</h1></a></td>
-						</tr>
-					</table>
+				<div id="pg_{postrow.POST_ID}" class="alert alert-warning" style="width: 93%;">
+					<h4 class="alert-heading">{L_RELEASE_FROM_RG} <a href="{postrow.RG_URL}">{postrow.RG_NAME}</a></h4>
+					<div id="pg_info_{postrow.POST_ID}">
+						<!-- IF postrow.RG_AVATAR --><hr /><a href="{postrow.RG_URL}">{postrow.RG_AVATAR}</a><!-- ENDIF -->
+						<!-- IF postrow.RG_SIG --><hr /><div id="rg_sig">{postrow.RG_SIG}</div><!-- ENDIF -->
+						<hr /><a href="{postrow.RG_FIND_URL}">{L_MORE_RELEASES}</a>
+					</div>
 				</div>
 				<!-- ENDIF -->
-				<!-- IF postrow.RG_SIG --><div id="rg_sig">{postrow.RG_SIG}</div><!-- ENDIF -->
 				<div id="pc_{postrow.POST_ID}" <!-- IF not postrow.MC_COMMENT -->style="display: none;"<!-- ENDIF -->>
-					<div id="mc_class_{postrow.POST_ID}" class="alert alert-{postrow.MC_CLASS}" style="width: 92%;">
+					<div id="mc_class_{postrow.POST_ID}" class="alert alert-{postrow.MC_CLASS}" style="width: 93%;">
 						<h4 class="alert-heading">{postrow.MC_TITLE}</h4><hr />
 						<div id="mc_comment_{postrow.POST_ID}">{postrow.MC_COMMENT}</div>
 					</div>

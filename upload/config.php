@@ -550,7 +550,7 @@ $bb_cfg['gen_forums_allowed_ext'] = array('zip', 'rar');            // для о
 $bb_cfg['avatars'] = array(
 	'allowed_ext' => array('gif','jpg','jpeg','png'), // разрешенные форматы файлов
 	'bot_avatar'  => 'gallery/bot.gif',               // аватара бота
-	'max_size'    => 50*1024,                         // размер аватары в байтах
+	'max_size'    => 100*1024,                        // размер аватары в байтах
 	'max_height'  => 100,                             // высота аватара в px
 	'max_width'   => 100,                             // ширина аватара в px
 	'no_avatar'   => 'gallery/noavatar.png',          // дефолтная аватара
@@ -561,7 +561,7 @@ $bb_cfg['avatars'] = array(
 // Group avatars
 $bb_cfg['group_avatars'] = array(
 	'allowed_ext' => array('gif','jpg','jpeg','png'), // разрешенные форматы файлов
-	'max_size'    => 50*1024,                         // размер аватары в байтах
+	'max_size'    => 100*1024,                        // размер аватары в байтах
 	'max_height'  => 300,                             // высота аватара в px
 	'max_width'   => 300,                             // ширина аватара в px
 	'no_avatar'   => 'gallery/noavatar.png',          // дефолтная аватара

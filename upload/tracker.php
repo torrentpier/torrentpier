@@ -22,7 +22,7 @@ $user->session_start(array('req_login' => $bb_cfg['bt_tor_browse_only_reg']));
 set_die_append_msg();
 
 $tor_search_limit    = (IS_AM) ? 2000 : 500;
-$forum_select_size   = 26; // forum select box max rows
+$forum_select_size   = 25; // forum select box max rows
 $max_forum_name_len  = 60; // inside forum select box
 $max_forums_selected = 50;
 $title_match_max_len = 60;
@@ -477,14 +477,6 @@ if ($dl_will_val)   $dl_status[] = DL_STATUS_WILL;
 $dl_status_csv = join(',', $dl_status);
 
 // Switches
-$only_new        = ($new_val && !IS_GUEST);
-$only_active     = ($active_val || $seed_exist);
-$dl_search       = ($dl_status && !IS_GUEST);
-$only_my         = ($my_val && !IS_GUEST && !$dl_search);
-$prev_days       = ($time_val != $search_all);
-$s_release_group = ($s_rg_val != $search_all);
-$s_not_seen      = ($s_not_seen_val != $search_all);
-
 $seed_exist      = (bool) $seed_exist_val;
 $poster_id       = (bool) $poster_id_val;
 $title_match     = (bool) $title_match_sql;
@@ -494,6 +486,14 @@ $hide_cat        = intval(!$show_cat_val);
 $hide_forum      = intval(!$show_forum_val);
 $hide_author     = intval(!$show_author_val);
 $hide_speed      = intval(!$show_speed_val);
+
+$only_new        = ($new_val && !IS_GUEST);
+$only_active     = ($active_val || $seed_exist);
+$dl_search       = ($dl_status && !IS_GUEST);
+$only_my         = ($my_val && !IS_GUEST && !$dl_search);
+$prev_days       = ($time_val != $search_all);
+$s_release_group = ($s_rg_val != $search_all);
+$s_not_seen      = ($s_not_seen_val != $search_all);
 
 if ($s_not_seen_val != $search_all)
 {

@@ -717,6 +717,7 @@ $lang['JOIN_A_GROUP'] = 'Join a Group';
 $lang['GROUP_INFORMATION'] = 'Group Information';
 $lang['GROUP_NAME'] = 'Group name';
 $lang['GROUP_DESCRIPTION'] = 'Group description';
+$lang['GROUP_SIGNATURE'] = 'Group signature';
 $lang['GROUP_MEMBERSHIP'] = 'Group membership';
 $lang['GROUP_MEMBERS'] = 'Group Members';
 $lang['GROUP_MODERATOR'] = 'Group Moderator';
@@ -785,10 +786,10 @@ $lang['MEMBERS_IN_GROUP'] = 'Members in group';
 // Release Groups
 $lang['POST_RELEASE_FROM_GROUP'] = 'Post release from group';
 $lang['CHOOSE_RELEASE_GROUP'] = 'Select release group';
-$lang['ATTACH_RG_SIG'] = 'Attach release group signature';
+$lang['ATTACH_RG_SIG'] = 'attach release group signature';
 $lang['RELEASE_FROM_RG'] = 'Release was prepared by';
 $lang['GROUPS_RELEASES'] = 'Group\'s releases';
-$lang['MORE_RELEASES'] = 'All releases';
+$lang['MORE_RELEASES'] = 'Find all releases of the group';
 $lang['NOT_A_RELEASE_GROUP'] = 'This group is not a release group';
 
 //

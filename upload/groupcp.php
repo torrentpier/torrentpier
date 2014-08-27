@@ -149,7 +149,7 @@ if (!$group_id)
 			$candidates  = ($data['c']) ? $lang['PENDING_MEMBERS'] .': '. $data['c'] : $lang['NO_PENDING_GROUP_MEMBERS'];
 
 			$options .= '<li class="pad_2"><a href="'. GROUP_URL . $data['id'] .'" class="med bold">'. $text .'</a></li>';
-			$options .= ($data['rg']) ? '<ul><li class="med">'. $lang['RELEASE_GROUP'] .'</li>' : '';
+			$options .= ($data['rg']) ? '<ul><li class="med">'. $lang['RELEASE_GROUP'] .'</li>' : '<ul>';
 			$options .= '<li class="seedmed">'. $members .'</li>';
 			if (IS_AM)
 			{
@@ -212,6 +212,7 @@ else if (@$_POST['joingroup'])
 	}
 	if ($row['user_id'])
 	{
+		set_die_append_msg(false, false, $group_id);
 		bb_die($lang['ALREADY_MEMBER_GROUP']);
 	}
 
@@ -238,21 +239,15 @@ else if (@$_POST['joingroup'])
 		$emailer->reset();
 	}
 
-	$message = $lang['GROUP_JOINED'] .'<br /><br />';
-	$message .= sprintf($lang['CLICK_RETURN_GROUP'], '<a href="'. GROUP_URL ."$group_id" .'">', '</a>') .'<br /><br />';
-	$message .= sprintf($lang['CLICK_RETURN_INDEX'], '<a href="'. "index.php" .'">', '</a>');
-
-	bb_die($message);
+	set_die_append_msg(false, false, $group_id);
+	bb_die($lang['GROUP_JOINED']);
 }
 else if (!empty($_POST['unsub']) || !empty($_POST['unsubpending']))
 {
 	delete_user_group($group_id, $userdata['user_id']);
 
-	$message = $lang['UNSUB_SUCCESS'] .'<br /><br />';
-	$message .= sprintf($lang['CLICK_RETURN_GROUP'], '<a href="'. GROUP_URL ."$group_id" .'">', '</a>') .'<br /><br />';
-	$message .= sprintf($lang['CLICK_RETURN_INDEX'], '<a href="'. "index.php" .'">', '</a>');
-
-	bb_die($message);
+	set_die_append_msg(false, false, $group_id);
+	bb_die($lang['UNSUB_SUCCESS']);
 }
 else
 {
@@ -467,6 +462,7 @@ else
 		'PAGE_TITLE'             => $lang['GROUP_CONTROL_PANEL'],
 		'GROUP_NAME'             => htmlCHR($group_info['group_name']),
 		'GROUP_DESCRIPTION'      => bbcode2html($group_info['group_description']),
+		'GROUP_SIGNATURE'        => bbcode2html($group_info['group_signature']),
 		'GROUP_AVATAR'           => get_avatar(GROUP_AVATAR_MASK . $group_id, $group_info['avatar_ext_id'], true),
 		'GROUP_DETAILS'          => $group_details,
 		'GROUP_TIME'             => (!empty($group_info['group_time'])) ? sprintf('%s <span class="posted_since">(%s)</span>', bb_date($group_info['group_time']), delta_time($group_info['group_time'])) : $lang['NONE'],
@@ -505,7 +501,11 @@ else
 		case 'releases':
 			// TODO Correct SQL to posts with attach and limit them, optimization
 
-			if (!$group_info['release_group']) bb_die($lang['NOT_A_RELEASE_GROUP']);
+			if (!$group_info['release_group'])
+			{
+				set_die_append_msg(false, false, $group_id);
+				bb_die($lang['NOT_A_RELEASE_GROUP']);
+			}
 
 			// Count releases for pagination
 			$all_releases = DB()->fetch_rowset("
@@ -535,7 +535,8 @@ else
 
 			if (!$releases = DB()->fetch_rowset($sql))
 			{
-				bb_die('Could not get releases data');
+				set_die_append_msg(false, false, $group_id);
+				bb_die($lang['NO_SEARCH_MATCH']);
 			}
 
 			foreach ($releases as $i => $release)

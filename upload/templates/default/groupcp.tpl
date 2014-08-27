@@ -25,7 +25,7 @@
 		<!-- BEGIN groups -->
 		<td class="vTop pad_4">
 			<ul>
-			    {groups.GROUP_SELECT}
+				{groups.GROUP_SELECT}
 			</ul>
 		</td>
 		<!-- END groups -->
@@ -64,17 +64,25 @@
 	<td valign="top">
 		<!-- IF GROUP_DESCRIPTION -->
 		<div class="post_wrap">{GROUP_DESCRIPTION}</div>
+		<!-- ELSE -->
+			-
 		<!-- ENDIF / GROUP_DESCRIPTION -->
 	</td>
 </tr>
+<!-- IF GROUP_SIGNATURE -->
+<tr>
+	<td>{L_GROUP_SIGNATURE}:</td>
+	<td><div class="post_wrap">{GROUP_SIGNATURE}</div></td>
+</tr>
+<!-- ENDIF / GROUP_SIGNATURE -->
 <!-- IF RELEASE_GROUP -->
 <tr>
-	<td>{L_GROUP_TYPE}</td>
+	<td>{L_GROUP_TYPE}:</td>
 	<td>{L_RELEASE_GROUP}</td>
 </tr>
 <!-- ENDIF -->
 <tr>
-	<td>{L_GROUP_TIME}</td>
+	<td>{L_GROUP_TIME}:</td>
 	<td>{GROUP_TIME}</td>
 </tr>
 <tr>
@@ -103,7 +111,7 @@
 </form>
 
 <div class="spacer_10"></div>
-<p class="nav"><a href="{U_GROUP_MEMBERS}" name="members">{L_GROUP_MEMBERS}</a>&nbsp; <!-- IF RELEASE_GROUP -->::&nbsp;<a href="{U_GROUP_RELEASES}" name="releases">{L_GROUPS_RELEASES}</a><!-- ENDIF --></p>
+<p class="nav"><a href="{U_GROUP_MEMBERS}" name="members">{L_GROUP_MEMBERS}</a><!-- IF RELEASE_GROUP -->&nbsp;::&nbsp;<a href="{U_GROUP_RELEASES}" name="releases">{L_GROUPS_RELEASES}</a><!-- ENDIF --></p>
 
 <!-- IF MEMBERS -->
 <form action="{S_GROUPCP_ACTION}" method="post" name="post">
@@ -197,13 +205,11 @@
 </table>
 
 <div class="bottom_info">
-
 	<div class="nav">
 		<p style="float: left">{PAGE_NUMBER}</p>
 		<p style="float: right">{PAGINATION}</p>
 		<div class="clear"></div>
 	</div>
-
 </div><!--/bottom_info-->
 
 <!-- IF PENDING_USERS -->

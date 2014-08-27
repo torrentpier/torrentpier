@@ -717,6 +717,7 @@ $lang['JOIN_A_GROUP'] = 'Вступити в групу';
 $lang['GROUP_INFORMATION'] = 'Інформація про групі';
 $lang['GROUP_NAME'] = 'Назва групи';
 $lang['GROUP_DESCRIPTION'] = 'Опис групи';
+$lang['GROUP_SIGNATURE'] = 'Підпис групи';
 $lang['GROUP_MEMBERSHIP'] = 'Членство в групі';
 $lang['GROUP_MEMBERS'] = 'Учасники групи';
 $lang['GROUP_MODERATOR'] = 'Модератор групи';
@@ -785,10 +786,10 @@ $lang['MEMBERS_IN_GROUP'] = 'Кількість учасників';
 // Release Groups
 $lang['POST_RELEASE_FROM_GROUP'] = 'Створити реліз від групи';
 $lang['CHOOSE_RELEASE_GROUP'] = 'Вибрати реліз групи';
-$lang['ATTACH_RG_SIG'] = 'Додати підпис реліз групи';
+$lang['ATTACH_RG_SIG'] = 'додати підпис реліз групи';
 $lang['RELEASE_FROM_RG'] = 'Реліз підготовлений';
 $lang['GROUPS_RELEASES'] = 'Релізи групи';
-$lang['MORE_RELEASES'] = 'Всі релізи';
+$lang['MORE_RELEASES'] = 'Знайти усі релізи групи';
 $lang['NOT_A_RELEASE_GROUP'] = 'Ця група не є реліз групою';
 
 //
@@ -2061,7 +2062,7 @@ $lang['DELETED_GROUP'] = 'Група була успішно видалено';
 $lang['CREATE_NEW_GROUP'] = 'Створити нову групу';
 $lang['EDIT_GROUP'] = 'Змінити групу';
 $lang['GROUP_STATUS'] = 'Статус групи';
-$lang['GROUP_DELETE'] = 'Видалити групу.';
+$lang['GROUP_DELETE'] = 'Видалити групу';
 $lang['GROUP_DELETE_CHECK'] = 'Видалити цю групу';
 $lang['SUBMIT_GROUP_CHANGES'] = 'Зберегти зміни';
 $lang['RESET_GROUP_CHANGES'] = 'Відмінити зміни';

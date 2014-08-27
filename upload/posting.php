@@ -30,6 +30,7 @@ $topic_type = (@$_POST['topictype']) ? (int) $_POST['topictype'] : POST_NORMAL;
 $topic_type = in_array($topic_type, array(POST_NORMAL, POST_STICKY, POST_ANNOUNCE)) ? $topic_type : POST_NORMAL;
 
 $selected_rg = 0;
+$switch_rg_sig = 0;
 $switch_poster_rg_sig = 0;
 
 if ($mode == 'smilies')

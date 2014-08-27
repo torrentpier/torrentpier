@@ -2651,13 +2651,14 @@ function create_magnet ($infohash, $auth_key, $logged_in)
 	return '<a href="magnet:?xt=urn:btih:'. bin2hex($infohash) .'&tr='. urlencode($bb_cfg['bt_announce_url'] . $passkey_url) .'"><img src="'. $images['icon_magnet'] .'" width="12" height="12" border="0" /></a>';
 }
 
-function set_die_append_msg ($forum_id = null, $topic_id = null)
+function set_die_append_msg ($forum_id = null, $topic_id = null, $group_id = null)
 {
 	global $lang, $template;
 
 	$msg = '';
 	$msg .= ($topic_id) ? '<p class="mrg_10"><a href="'. TOPIC_URL . $topic_id .'">'. $lang['TOPIC_RETURN'] .'</a></p>' : '';
 	$msg .= ($forum_id) ? '<p class="mrg_10"><a href="'. FORUM_URL . $forum_id .'">'. $lang['FORUM_RETURN'] .'</a></p>' : '';
+	$msg .= ($group_id) ? '<p class="mrg_10"><a href="'. GROUP_URL . $group_id .'">'. $lang['GROUP_RETURN'] .'</a></p>' : '';
 	$msg .= '<p class="mrg_10"><a href="index.php">'. $lang['INDEX_RETURN'] .'</a></p>';
 	$template->assign_var('BB_DIE_APPEND_MSG', $msg);
 }
