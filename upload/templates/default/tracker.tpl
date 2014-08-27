@@ -267,6 +267,12 @@ $(function(){
 				</div>
 				</fieldset>
 				<fieldset>
+				<legend>{L_GROUPS_RELEASES}</legend>
+				<div>
+					<p class="select">{S_RG_SELECT}</p>
+				</div>
+				</fieldset>
+				<fieldset>
 				<legend><span class="a-hash bold" onclick="$(this).addClass('bold').next().removeClass('bold'); $('#title_search').attr('name','{TITLE_MATCH_NAME}');">{L_TITLE_MATCH}</span>&nbsp;&middot;&nbsp;<span class="a-hash" onclick="$(this).addClass('bold').prev().removeClass('bold'); $('#title_search').attr('name','hash');">{L_HASH_S}</span></legend>
 				<div>
 					<p class="input">

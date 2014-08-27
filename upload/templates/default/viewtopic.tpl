@@ -405,6 +405,18 @@ function build_poll_add_form (src_el)
 			<div class="post_wrap">
 				<span id="pe_{postrow.POST_ID}"></span>
 				<span id="pp_{postrow.POST_ID}">{postrow.MESSAGE}</span>
+				<!-- IF postrow.RG_NAME -->
+				<div align="center">
+					<table id="pg_{postrow.POST_ID}" style="border-left:4px solid #DEDEDE;">
+						<tr><td colspan="2" align="left" valign="middle" style="border-bottom:1px solid #DEDEDE;padding:5px;" class="genmed bold">{L_RELEASE_FROM_RG}:</td></tr>
+						<tr>
+							<td style="padding:5px;">{postrow.RG_AVATAR}</td>
+							<td align="left" style="padding:5px;" width="350px"><a href="{postrow.RG_URL}" class="med bold"><h1>{postrow.RG_NAME}</h1></a></td>
+						</tr>
+					</table>
+				</div>
+				<!-- ENDIF -->
+				<!-- IF postrow.RG_SIG --><div id="rg_sig">{postrow.RG_SIG}</div><!-- ENDIF -->
 				<div id="pc_{postrow.POST_ID}" <!-- IF not postrow.MC_COMMENT -->style="display: none;"<!-- ENDIF -->>
 					<div id="mc_class_{postrow.POST_ID}" class="alert alert-{postrow.MC_CLASS}" style="width: 92%;">
 						<h4 class="alert-heading">{postrow.MC_TITLE}</h4><hr />

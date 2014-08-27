@@ -72,6 +72,8 @@ function delete_group ($group_id)
 		WHERE ug.group_id = $group_id
 	");
 
+	DB()->query("UPDATE " . BB_POSTS . " SET attach_rg_sig = 0, poster_rg_id = 0 WHERE poster_rg_id = ". $group_id);
+
 	update_user_level('all');
 }
 

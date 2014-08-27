@@ -138,14 +138,24 @@
 	</td>
 </tr>
 <!-- ENDIF / LOGGED_IN -->
+<!-- IF ATTACHBOX && POSTER_RGROUPS -->
+<tr>
+	<td><b>{L_POST_RELEASE_FROM_GROUP}:</b></td>
+	<td>
+		<select name="poster_rg">
+			<option value="-1">{L_CHOOSE_RELEASE_GROUP}</option>
+			{POSTER_RGROUPS}
+		</select>
+		<label><input type="checkbox" name="attach_rg_sig" <!-- IF ATTACH_RG_SIG -->checked<!-- ENDIF -->/> {L_ATTACH_RG_SIG}</label>
+	</td>
+</tr>
+<!-- ENDIF -->
 <!-- BEGIN switch_type_toggle -->
 <tr>
 	<td colspan="2" class="row2 tCenter pad_6">{S_TYPE_TOGGLE}</td>
 </tr>
 <!-- END switch_type_toggle -->
-
 <!-- IF ATTACHBOX --><!-- INCLUDE posting_attach.tpl --><!-- ENDIF -->
-
 </table>
 
 </form>

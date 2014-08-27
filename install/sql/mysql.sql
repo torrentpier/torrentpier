@@ -1,12 +1,3 @@
--- phpMyAdmin SQL Dump
--- version 3.4.10.1
--- http://www.phpmyadmin.net
---
--- Хост: localhost
--- Время создания: Мар 08 2012 г., 16:00
--- Версия сервера: 5.5.20
--- Версия PHP: 5.3.10
-
 SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 
 --
@@ -792,10 +783,14 @@ INSERT INTO `bb_forums` VALUES (1, 1, 'Ваш первый форум', 'Опи�
 
 CREATE TABLE IF NOT EXISTS `bb_groups` (
   `group_id` mediumint(8) NOT NULL AUTO_INCREMENT,
-  `group_time` int(11) NOT NULL DEFAULT '0',
+  `avatar_ext_id` int(15) NOT NULL DEFAULT '0',
+  `group_time` INT(11) NOT NULL DEFAULT '0',
+  `mod_time` INT(11) NOT NULL DEFAULT '0',
   `group_type` tinyint(4) NOT NULL DEFAULT '1',
+  `release_group` tinyint(4) NOT NULL DEFAULT '0',
   `group_name` varchar(40) NOT NULL DEFAULT '',
-  `group_description` varchar(255) NOT NULL DEFAULT '',
+  `group_description` text NOT NULL DEFAULT '',
+  `group_signature` text NOT NULL DEFAULT '',
   `group_moderator` mediumint(8) NOT NULL DEFAULT '0',
   `group_single_user` tinyint(1) NOT NULL DEFAULT '1',
   PRIMARY KEY (`group_id`),
@@ -866,6 +861,8 @@ CREATE TABLE IF NOT EXISTS `bb_posts` (
   `poster_id` mediumint(8) NOT NULL DEFAULT '0',
   `post_time` int(11) NOT NULL DEFAULT '0',
   `poster_ip` char(32) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL DEFAULT '',
+  `poster_rg_id` mediumint(8) NOT NULL DEFAULT '0',
+  `attach_rg_sig` tinyint(4) NOT NULL DEFAULT '0',
   `post_username` varchar(25) NOT NULL DEFAULT '',
   `post_edit_time` int(11) NOT NULL DEFAULT '0',
   `post_edit_count` smallint(5) unsigned NOT NULL DEFAULT '0',
@@ -886,7 +883,7 @@ CREATE TABLE IF NOT EXISTS `bb_posts` (
 -- Дамп данных таблицы `bb_posts`
 --
 
-INSERT INTO `bb_posts` VALUES (1, 1, 1, 2, UNIX_TIMESTAMP(), '', '', 0, 0, 0, 0, 1, '', 0, 0);
+INSERT INTO `bb_posts` VALUES (1, 1, 1, 2, UNIX_TIMESTAMP(), '', 0, 0, '', 0, 0, 0, 0, 1, '', 0, 0);
 
 -- --------------------------------------------------------
 

@@ -708,6 +708,9 @@ $lang['ORDER'] = 'Order';
 // Group control panel
 //
 $lang['GROUP_CONTROL_PANEL'] = 'User Groups';
+$lang['GROUP_CONFIGURATION'] = 'Group Configuration';
+$lang['GROUP_GOTO_CONFIG'] = 'Go to Group Configuration panel';
+$lang['GROUP_RETURN'] = 'Return to User Group page';
 $lang['MEMBERSHIP_DETAILS'] = 'Group Membership Details';
 $lang['JOIN_A_GROUP'] = 'Join a Group';
 
@@ -718,6 +721,9 @@ $lang['GROUP_MEMBERSHIP'] = 'Group membership';
 $lang['GROUP_MEMBERS'] = 'Group Members';
 $lang['GROUP_MODERATOR'] = 'Group Moderator';
 $lang['PENDING_MEMBERS'] = 'Pending Members';
+
+$lang['GROUP_TIME'] = 'Created';
+$lang['RELEASE_GROUP'] = 'Release Group';
 
 $lang['GROUP_TYPE'] = 'Group type';
 $lang['GROUP_OPEN'] = 'Open group';
@@ -733,6 +739,7 @@ $lang['GROUP_MEMBER_HIDDEN'] = 'Hidden groups';
 
 $lang['NO_GROUPS_EXIST'] = 'No Groups Exist';
 $lang['GROUP_NOT_EXIST'] = 'That user group does not exist';
+$lang['NO_GROUP_ID_SPECIFIED'] = 'Group ID is not specified';
 
 $lang['NO_GROUP_MEMBERS'] = 'This group has no members';
 $lang['HIDDEN_GROUP_MEMBERS'] = 'This group is hidden; you cannot view its membership';
@@ -774,6 +781,15 @@ $lang['SUBSCRIBE'] = 'Subscribe';
 $lang['UNSUBSCRIBE_GROUP'] = 'Unsubscribe';
 $lang['VIEW_INFORMATION'] = 'View Information';
 $lang['MEMBERS_IN_GROUP'] = 'Members in group';
+
+// Release Groups
+$lang['POST_RELEASE_FROM_GROUP'] = 'Post release from group';
+$lang['CHOOSE_RELEASE_GROUP'] = 'Select release group';
+$lang['ATTACH_RG_SIG'] = 'Attach release group signature';
+$lang['RELEASE_FROM_RG'] = 'Release was prepared by';
+$lang['GROUPS_RELEASES'] = 'Group\'s releases';
+$lang['MORE_RELEASES'] = 'All releases';
+$lang['NOT_A_RELEASE_GROUP'] = 'This group is not a release group';
 
 //
 // Search
@@ -1123,17 +1139,17 @@ $lang['TOR_STATUS_SELECT_ACTION'] = 'Select status';
 $lang['TOR_STATUS_NOT_SELECT'] = 'You have not selected status.';
 $lang['TOR_STATUS_SELECT_ALL'] = 'All statuses';
 $lang['TOR_STATUS_NAME'] = array(
-    TOR_NOT_APPROVED  => 'not checked',
-    TOR_CLOSED        => 'closed',
-    TOR_APPROVED      => 'checked',
-    TOR_NEED_EDIT     => 'not formalized until',
-    TOR_NO_DESC       => 'not formalized',
-    TOR_DUP           => 'repeat',
-    TOR_CLOSED_CPHOLD => 'closed right',
-    TOR_CONSUMED      => 'absorbed',
-    TOR_DOUBTFUL      => 'doubtful',
-    TOR_CHECKING      => 'verified',
-    TOR_TMP           => 'temporary',
+	TOR_NOT_APPROVED  => 'not checked',
+	TOR_CLOSED        => 'closed',
+	TOR_APPROVED      => 'checked',
+	TOR_NEED_EDIT     => 'not formalized until',
+	TOR_NO_DESC       => 'not formalized',
+	TOR_DUP           => 'repeat',
+	TOR_CLOSED_CPHOLD => 'closed right',
+	TOR_CONSUMED      => 'absorbed',
+	TOR_DOUBTFUL      => 'doubtful',
+	TOR_CHECKING      => 'verified',
+	TOR_TMP           => 'temporary',
 	TOR_PREMOD        => 'pre-moderation',
 );
 $lang['TOR_STATUS_FAILED'] = 'Such status does not exist!';
