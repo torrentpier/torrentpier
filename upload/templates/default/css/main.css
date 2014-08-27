@@ -1501,6 +1501,13 @@ div#autocomplete_popup span.regenerate {
 .alert-danger .alert-link {
 	color: #843534;
 }
+.alert-gray {
+	background-color: #dee3e7;
+	border-color: #a5afb4;
+}
+.alert-gray hr {
+	border-top-color: #a5afb4;
+}
 
 /**
   * Alert theme
@@ -1508,7 +1515,7 @@ div#autocomplete_popup span.regenerate {
 .alert {
 	text-shadow: 0 1px 0 rgba(255, 255, 255, .2);
 	-webkit-box-shadow: inset 0 1px 0 rgba(255, 255, 255, .25), 0 1px 2px rgba(0, 0, 0, .05);
-		  box-shadow: inset 0 1px 0 rgba(255, 255, 255, .25), 0 1px 2px rgba(0, 0, 0, .05);
+	box-shadow: inset 0 1px 0 rgba(255, 255, 255, .25), 0 1px 2px rgba(0, 0, 0, .05);
 }
 .alert-success {
 	background-image: -webkit-linear-gradient(top, #dff0d8 0%, #c8e5bc 100%);
