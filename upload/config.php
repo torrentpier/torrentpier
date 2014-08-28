@@ -48,7 +48,7 @@
  * PM
  * Actions log
  * Users
- * GroupCP
+ * Groups
 
  * Tidy
  * Ads
@@ -356,7 +356,7 @@ $bb_cfg['board_email_sitename']    = $domain_name; // sitename used in all email
 
 $bb_cfg['topic_notify_enabled']    = true;
 $bb_cfg['pm_notify_enabled']       = true;
-$bb_cfg['groupcp_send_email']      = true;
+$bb_cfg['group_send_email']        = true;
 $bb_cfg['email_change_disabled']   = false;        // disable changing email by user
 
 $bb_cfg['tech_admin_email']        = 'admin@' . $domain_name;  // email for sending error reports
@@ -502,8 +502,8 @@ $bb_cfg['color_nick']                   = true;    // Окраска ников 
 $bb_cfg['user_not_activated_days_keep'] = 7;       // "not activated" == "not finished registration"
 $bb_cfg['user_not_active_days_keep']    = 180;     // inactive users but only with no posts
 
-// GroupCP
-$bb_cfg['groupcp_members_per_page']     = 50;
+// Groups
+$bb_cfg['group_members_per_page']       = 50;
 
 // Tidy
 $bb_cfg['tidy_post'] = (!extension_loaded('tidy')) ? false : true;

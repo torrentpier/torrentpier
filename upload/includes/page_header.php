@@ -211,7 +211,7 @@ $template->assign_vars(array(
 
 	'U_CUR_DOWNLOADS'    => PROFILE_URL . $userdata['user_id'],
 	'U_FORUM'            => "viewforum.php",
-	'U_GROUP_CP'         => "groupcp.php",
+	'U_GROUPS'           => "group.php",
 	'U_LOGIN_LOGOUT'     => $u_login_logout,
 	'U_MEMBERLIST'       => "memberlist.php",
 	'U_MODCP'            => "modcp.php",

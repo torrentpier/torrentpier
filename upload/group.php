@@ -1,7 +1,7 @@
 <?php
 
 define('IN_FORUM',   true);
-define('BB_SCRIPT', 'groupcp');
+define('BB_SCRIPT', 'group');
 define('BB_ROOT', './');
 require(BB_ROOT .'common.php');
 require(INC_DIR .'bbcode.php');
@@ -45,7 +45,7 @@ set_die_append_msg();
 
 $group_id  = isset($_REQUEST[POST_GROUPS_URL]) ? intval($_REQUEST[POST_GROUPS_URL]) : null;
 $start     = isset($_REQUEST['start']) ? abs(intval($_REQUEST['start'])) : 0;
-$per_page  = $bb_cfg['groupcp_members_per_page'];
+$per_page  = $bb_cfg['group_members_per_page'];
 $view_mode = isset($_REQUEST['view']) ? (string) $_REQUEST['view'] : null;
 $rel_limit = 50;
 
@@ -175,7 +175,7 @@ if (!$group_id)
 		$template->assign_vars(array(
 			'SELECT_GROUP'       => true,
 			'PAGE_TITLE'         => $lang['GROUP_CONTROL_PANEL'],
-			'S_USERGROUP_ACTION' => 'groupcp.php',
+			'S_USERGROUP_ACTION' => 'group.php',
 			'S_HIDDEN_FIELDS'    => $s_hidden_fields,
 		));
 	}
@@ -218,7 +218,7 @@ else if (@$_POST['joingroup'])
 
 	add_user_into_group($group_id, $userdata['user_id'], 1, TIMENOW);
 
-	if ($bb_cfg['groupcp_send_email'])
+	if ($bb_cfg['group_send_email'])
 	{
 		require(INC_DIR .'emailer.class.php');
 		$emailer = new emailer($bb_cfg['smtp_delivery']);
@@ -232,7 +232,7 @@ else if (@$_POST['joingroup'])
 			'USER'            => $userdata['username'],
 			'SITENAME'        => $bb_cfg['sitename'],
 			'GROUP_MODERATOR' => $moderator['username'],
-			'U_GROUPCP'       => make_url(GROUP_URL . $group_id),
+			'U_GROUP'         => make_url(GROUP_URL . $group_id),
 		));
 
 		$emailer->send();
@@ -270,7 +270,7 @@ else
 
 			add_user_into_group($group_id, $row['user_id']);
 
-			if ($bb_cfg['groupcp_send_email'])
+			if ($bb_cfg['group_send_email'])
 			{
 				require(INC_DIR .'emailer.class.php');
 				$emailer = new emailer($bb_cfg['smtp_delivery']);
@@ -283,7 +283,7 @@ else
 				$emailer->assign_vars(array(
 					'SITENAME'   => $bb_cfg['sitename'],
 					'GROUP_NAME' => $group_info['group_name'],
-					'U_GROUPCP'  => make_url(GROUP_URL . $group_id),
+					'U_GROUP'    => make_url(GROUP_URL . $group_id),
 				));
 
 				$emailer->send();
@@ -331,7 +331,7 @@ else
 					}
 				}
 				// Email users when they are approved
-				if (!empty($_POST['approve']) && $bb_cfg['groupcp_send_email'])
+				if (!empty($_POST['approve']) && $bb_cfg['group_send_email'])
 				{
 					$sql_select = "SELECT username, user_email, user_lang
 						FROM ". BB_USERS ."
@@ -356,7 +356,7 @@ else
 					$emailer->assign_vars(array(
 						'SITENAME'   => $bb_cfg['sitename'],
 						'GROUP_NAME' => $group_info['group_name'],
-						'U_GROUPCP'  => make_url(GROUP_URL . $group_id),
+						'U_GROUP'    => make_url(GROUP_URL . $group_id),
 					));
 
 					$emailer->send();
@@ -477,9 +477,9 @@ else
 		'MOD_TIME'               => (!empty($group_info['mod_time'])) ? bb_date($group_info['mod_time']) : $lang['NONE'],
 		'U_SEARCH_USER'          => "search.php?mode=searchuser",
 		'U_SEARCH_RELEASES'      => "tracker.php?srg=$group_id",
-		'U_GROUP_RELEASES'       => "groupcp.php?view=releases&amp;". POST_GROUPS_URL ."=$group_id",
-		'U_GROUP_MEMBERS'        => "groupcp.php?view=members&amp;". POST_GROUPS_URL ."=$group_id",
-		'U_GROUP_CONFIG'         => "group_config.php?g=$group_id",
+		'U_GROUP_RELEASES'       => "group.php?view=releases&amp;". POST_GROUPS_URL ."=$group_id",
+		'U_GROUP_MEMBERS'        => "group.php?view=members&amp;". POST_GROUPS_URL ."=$group_id",
+		'U_GROUP_CONFIG'         => "group_edit.php?g=$group_id",
 		'RELEASE_GROUP'          => ($group_info['release_group']) ? true : false,
 		'GROUP_TYPE'             => $group_type,
 
@@ -493,7 +493,7 @@ else
 		'S_MODE_SELECT'          => $select_sort_mode,
 		'S_ORDER_SELECT'         => $select_sort_order,
 
-		'S_GROUPCP_ACTION'       => "groupcp.php?" . POST_GROUPS_URL . "=$group_id",
+		'S_GROUP_ACTION'         => "group.php?" . POST_GROUPS_URL . "=$group_id",
 	));
 
 	switch ($view_mode)
@@ -693,4 +693,4 @@ else
 	}
 }
 
-print_page('groupcp.tpl');
+print_page('group.tpl');

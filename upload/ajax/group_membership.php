@@ -30,7 +30,7 @@ switch ($mode)
 		{
 			$class  = ($row['user_pending']) ? 'med' : 'med bold';
 			$class .= ($row['group_moderator'] == $user_id) ? ' colorMod' : '';
-			$href   = "groupcp.php?g={$row['group_id']}";
+			$href   = "group.php?g={$row['group_id']}";
 
 			if (IS_ADMIN)
 			{
