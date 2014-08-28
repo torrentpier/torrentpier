@@ -78,6 +78,11 @@ BBCode.prototype = {
 	getSelection: function() {
 		var w = window;
 		var text='', range;
+		if (w.getSelection) {
+			text = w.getSelection();
+		} else {
+			return [null, null];
+		}
 		if (text == '') text = this.stext;
 		text = ""+text;
 		text = text.replace("/^\s+|\s+$/g", "");
