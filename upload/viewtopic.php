@@ -885,6 +885,7 @@ for($i = 0; $i < $total_posts; $i++)
 		'RG_URL'             => GROUP_URL . $rg_id,
 		'RG_FIND_URL'        => 'tracker.php?srg='. $rg_id,
 		'RG_SIG'             => $rg_signature,
+		'RG_SIG_ATTACH'      => $postrow[$i]['attach_rg_sig'],
 	));
 
 	if ($postrow[$i]['post_attachment'] && $is_auth['auth_download'] && function_exists('display_post_attachments'))
@@ -922,10 +923,10 @@ if ($bb_cfg['show_quick_reply'])
 	if ($is_auth['auth_reply'] && !($t_data['forum_status'] == FORUM_LOCKED || $t_data['topic_status'] == TOPIC_LOCKED))
 	{
 		$template->assign_vars(array(
-			'QUICK_REPLY'     => true,
-			'QR_POST_ACTION'  => POSTING_URL,
-			'QR_TOPIC_ID'     => $topic_id,
-			'CAPTCHA_HTML'    => (IS_GUEST) ? CAPTCHA()->get_html() : '',
+			'QUICK_REPLY'    => true,
+			'QR_POST_ACTION' => POSTING_URL,
+			'QR_TOPIC_ID'    => $topic_id,
+			'CAPTCHA_HTML'   => (IS_GUEST) ? CAPTCHA()->get_html() : '',
 		));
 
 		if (!IS_GUEST)
@@ -933,7 +934,7 @@ if ($bb_cfg['show_quick_reply'])
 			$notify_user = bf($userdata['user_opt'], 'user_opt', 'user_notify');
 
 			$template->assign_vars(array(
-				'QR_NOTIFY_CHECKED'    => ($notify_user) ? $notify_user && $is_watching_topic : $is_watching_topic,
+				'QR_NOTIFY_CHECKED' => ($notify_user) ? $notify_user && $is_watching_topic : $is_watching_topic,
 			));
 		}
 	}

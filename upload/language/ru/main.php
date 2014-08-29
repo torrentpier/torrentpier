@@ -785,7 +785,7 @@ $lang['MEMBERS_IN_GROUP'] = 'Кол-во участников';
 
 // Release Groups
 $lang['POST_RELEASE_FROM_GROUP'] = 'Создать релиз от группы';
-$lang['CHOOSE_RELEASE_GROUP'] = 'Выбрать релиз группу';
+$lang['CHOOSE_RELEASE_GROUP'] = 'не выбрано';
 $lang['ATTACH_RG_SIG'] = 'добавить подпись релиз группы';
 $lang['RELEASE_FROM_RG'] = 'Релиз подготовлен';
 $lang['GROUPS_RELEASES'] = 'Релизы группы';

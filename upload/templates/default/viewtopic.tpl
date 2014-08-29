@@ -410,7 +410,7 @@ function build_poll_add_form (src_el)
 					<h4 class="alert-heading">{L_RELEASE_FROM_RG} <a href="{postrow.RG_URL}">{postrow.RG_NAME}</a></h4>
 					<div id="pg_info_{postrow.POST_ID}">
 						<!-- IF postrow.RG_AVATAR --><hr /><a href="{postrow.RG_URL}">{postrow.RG_AVATAR}</a><!-- ENDIF -->
-						<!-- IF postrow.RG_SIG --><hr /><div id="rg_sig">{postrow.RG_SIG}</div><!-- ENDIF -->
+						<!-- IF postrow.RG_SIG and postrow.RG_SIG_ATTACH --><hr /><div id="rg_sig">{postrow.RG_SIG}</div><!-- ENDIF -->
 						<hr /><a href="{postrow.RG_FIND_URL}">{L_MORE_RELEASES}</a>
 					</div>
 				</div>
