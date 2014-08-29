@@ -59,6 +59,7 @@
  * Captcha
  * Atom feed
  * Nofollow
+ * Local config
 **/
 
 if (!defined('BB_ROOT')) die(basename(__FILE__));
@@ -71,8 +72,8 @@ $domain_name = (!empty($_SERVER['SERVER_NAME'])) ? $_SERVER['SERVER_NAME'] : $do
 
 // Version info
 $bb_cfg['tp_version'] = '2.1 (RC)';
-$bb_cfg['tp_release_date'] = '27-08-2014';
-$bb_cfg['tp_release_state'] = 'R598';
+$bb_cfg['tp_release_date'] = '30-08-2014';
+$bb_cfg['tp_release_state'] = 'R599';
 
 // Database
 $charset  = 'utf8';
@@ -624,5 +625,11 @@ $bb_cfg['nofollow'] = array(
 	'disabled'    => false,
 	'allowed_url' => array($domain_name), // 'allowed.site', 'www.allowed.site'
 );
+
+// Local config
+if (file_exists('config.local.php'))
+{
+	include_once('config.local.php');
+}
 
 define('BB_CFG_LOADED', true);
