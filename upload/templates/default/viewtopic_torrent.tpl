@@ -132,11 +132,11 @@ $(document).ready(function(){
 			<thead>
 			<tr>
 				<th class="{sorter: 'text'}"><b class="tbs-text">{L_DL_USER}</b><img width="130" class="spacer" src="{SPACER}" alt="" /></th>
-		        <th class="{sorter: 'digit'}" title="{L_DL_FORMULA}"><b class="tbs-text">{L_DL_ULR}</b><img width="40" class="spacer" src="{SPACER}" alt="" /></th>
-		        <th class="{sorter: 'digit'}"><b class="tbs-text">{L_DL_UL}</b><img width="70" class="spacer" src="{SPACER}" alt="" /></th>
-		        <th class="{sorter: 'digit'}"><b class="tbs-text">{L_DL_DL}</b><img width="70" class="spacer" src="{SPACER}" alt="" /></th>
-		        <th class="{sorter: 'digit'}"><b class="tbs-text">{L_DL_UL_SPEED}</b><img width="75" class="spacer" src="{SPACER}" alt="" /></th>
-		        <th class="{sorter: 'digit'}"><b class="tbs-text">{L_DL_DL_SPEED}</b><img width="75" class="spacer" src="{SPACER}" alt="" /></th>
+				<th class="{sorter: 'digit'}" title="{L_DL_FORMULA}"><b class="tbs-text">{L_DL_ULR}</b><img width="40" class="spacer" src="{SPACER}" alt="" /></th>
+				<th class="{sorter: 'digit'}"><b class="tbs-text">{L_DL_UL}</b><img width="70" class="spacer" src="{SPACER}" alt="" /></th>
+				<th class="{sorter: 'digit'}"><b class="tbs-text">{L_DL_DL}</b><img width="70" class="spacer" src="{SPACER}" alt="" /></th>
+				<th class="{sorter: 'digit'}"><b class="tbs-text">{L_DL_UL_SPEED}</b><img width="75" class="spacer" src="{SPACER}" alt="" /></th>
+				<th class="{sorter: 'digit'}"><b class="tbs-text">{L_DL_DL_SPEED}</b><img width="75" class="spacer" src="{SPACER}" alt="" /></th>
 				<!-- BEGIN iphead -->
 				<th class="{sorter: 'digit'}"><b class="tbs-text">{L_IP_ADDRESS}</b><img width="75" class="spacer" src="{SPACER}" alt="" /></th>
 				<!-- END iphead -->
@@ -181,11 +181,11 @@ $(document).ready(function(){
 			<thead>
 			<tr>
 				<th class="{sorter: 'text'}"><b class="tbs-text">{L_DL_USER}</b><img width="130" class="spacer" src="{SPACER}" alt="" /></th>
-		        <th class="{sorter: 'digit'}" title="{L_DL_PERCENT}"><b class="tbs-text">%</b><img width="40" class="spacer" src="{SPACER}" alt="" /></th>
-		        <th class="{sorter: 'digit'}"><b class="tbs-text">{L_DL_UL}</b><img width="70" class="spacer" src="{SPACER}" alt="" /></th>
-		        <th class="{sorter: 'digit'}"><b class="tbs-text">{L_DL_DL}</b><img width="70" class="spacer" src="{SPACER}" alt="" /></th>
-		        <th class="{sorter: 'digit'}"><b class="tbs-text">{L_DL_UL_SPEED}</b><img width="75" class="spacer" src="{SPACER}" alt="" /></th>
-		        <th class="{sorter: 'digit'}"><b class="tbs-text">{L_DL_DL_SPEED}</b><img width="75" class="spacer" src="{SPACER}" alt="" /></th>
+				<th class="{sorter: 'digit'}" title="{L_DL_PERCENT}"><b class="tbs-text">%</b><img width="40" class="spacer" src="{SPACER}" alt="" /></th>
+				<th class="{sorter: 'digit'}"><b class="tbs-text">{L_DL_UL}</b><img width="70" class="spacer" src="{SPACER}" alt="" /></th>
+				<th class="{sorter: 'digit'}"><b class="tbs-text">{L_DL_DL}</b><img width="70" class="spacer" src="{SPACER}" alt="" /></th>
+				<th class="{sorter: 'digit'}"><b class="tbs-text">{L_DL_UL_SPEED}</b><img width="75" class="spacer" src="{SPACER}" alt="" /></th>
+				<th class="{sorter: 'digit'}"><b class="tbs-text">{L_DL_DL_SPEED}</b><img width="75" class="spacer" src="{SPACER}" alt="" /></th>
 				<!-- BEGIN iphead -->
 				<th class="{sorter: 'digit'}"><b class="tbs-text">{L_IP_ADDRESS}</b><img width="75" class="spacer" src="{SPACER}" alt="" /></th>
 				<!-- END iphead -->

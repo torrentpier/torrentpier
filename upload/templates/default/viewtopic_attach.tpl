@@ -347,7 +347,6 @@ $('#tor-filelist-btn').click(function(){
 <div id="fl-tbl-wrap">
 	<table class="w100 borderless" cellspacing="0" cellpadding="0">
 	<tr>
-		<!--<td></td>-->
 		<td>
 			<div id="tor-fl-treecontrol">
 				<a href="#">{L_COLLAPSE}</a>&middot;
@@ -357,7 +356,6 @@ $('#tor-filelist-btn').click(function(){
 		</td>
 	</tr>
 	<tr>
-		<!--<td class="vTop"><div id="tor-fl-bgn" class="border bw_TRBL med row1">YOUR ADS BLOCK</div></td>-->
 		<td class="vTop" style="width: 100%;"><div id="tor-filelist" class="border bw_TRBL med row1"><span class="loading-1">{L_LOADING}</span></div></td>
 	</tr>
 	</table>

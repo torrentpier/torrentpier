@@ -19,7 +19,7 @@
 <!-- IF TPL_CONFIRM -->
 <!--========================================================================-->
 
-	<form action="{FORM_ACTION}" method="{FORM_METHOD}">
+<form action="{FORM_ACTION}" method="{FORM_METHOD}">
 	{HIDDEN_FIELDS}
 
 	<div class="spacer_10"></div>
@@ -46,8 +46,8 @@
 		</tr>
 	</table>
 
-	</form>
-	<div class="spacer_10"></div>
+</form>
+<div class="spacer_10"></div>
 
 <!--========================================================================-->
 <!-- ENDIF / TPL_CONFIRM -->

@@ -236,7 +236,7 @@ function go_to_page ()
 	<b>Вы используете устаревший браузер. Сайт может отображаться некорректно.</b>
 </div>
 <script>
-if ( (typeof(window.opera) != "undefined" && window.opera.version() < 13) || (window.attachEvent && !window.addEventListener) /* IE < 9 */ ) {
+if ( (typeof(window.opera) != "undefined" && window.opera.version() < 12) || (window.attachEvent && !window.addEventListener) /* IE < 9 */ ) {
 	document.getElementById('old-browser-warn').style.display = '';
 }
 </script>
@@ -295,7 +295,7 @@ ajax.callback.index_data = function(data) {};
 $(document).ready(function() {
 	x = new Date();
 	tz = -x.getTimezoneOffset()/60;
-	if (tz != <?php echo $bb_cfg['board_timezone']?>)
+	if (tz != {BOARD_TIMEZONE})
 	{
 		ajax.index_data(tz);
 	}

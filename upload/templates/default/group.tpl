@@ -105,7 +105,6 @@
 	</td>
 </tr>
 <!-- END switch_mod_option -->
-
 </table>
 
 </form>

@@ -76,7 +76,7 @@ td.topic_id { cursor: pointer; }
 <tr>
 	<td width="100%">
 		<h1 class="maintitle">{PAGE_TITLE}</h1>
-        <div id="forums_top_links" class="nav">
+		<div id="forums_top_links" class="nav">
 			<a href="{U_INDEX}">{T_INDEX}</a>&nbsp;<em>&middot;</em>
 			<span id="show-edit-btn"><a href="#">{L_EDIT_MY_MESSAGE_LIST}</a></span>
 			<span id="edit-sel-topics" style="display: none;"><a href="#" class="bold adm" onclick="$('input.topic-chbox').trigger('click'); return false;">{L_SELECT_INVERT}</a></span><em>&middot;</em>
@@ -90,29 +90,29 @@ td.topic_id { cursor: pointer; }
 <table width="100%" class="forumline tablesorter">
 <thead>
 <tr>
-    <th class="{sorter: 'text'}"></th>
-    <th class="{sorter: 'text'}" width="25%"><b class="tbs-text">{L_FORUM}</b></th>
-    <th class="{sorter: 'text'}" width="75%"><b class="tbs-text">{L_TOPIC}</b></th>
-    <th class="{sorter: 'text'}"><b class="tbs-text">{L_AUTHOR}</b></th>
-    <th width="80" class="{sorter: 'text'}"><b class="tbs-text">{L_REPLIES}</b></th>
-    <th width="120" class="{sorter: 'text'} nowrap"><b class="tbs-text">{L_LASTPOST}</b></th>
+	<th class="{sorter: 'text'}"></th>
+	<th class="{sorter: 'text'}" width="25%"><b class="tbs-text">{L_FORUM}</b></th>
+	<th class="{sorter: 'text'}" width="75%"><b class="tbs-text">{L_TOPIC}</b></th>
+	<th class="{sorter: 'text'}"><b class="tbs-text">{L_AUTHOR}</b></th>
+	<th width="80" class="{sorter: 'text'}"><b class="tbs-text">{L_REPLIES}</b></th>
+	<th width="120" class="{sorter: 'text'} nowrap"><b class="tbs-text">{L_LASTPOST}</b></th>
 </tr>
 </thead>
 <!-- BEGIN watch -->
 <tr class="tCenter {watch.ROW_CLASS}" id="tr-{watch.TOPIC_ID}">
-    <td id="{watch.TOPIC_ID}" class="topic_id">
-	    <span style="display: none;">{watch.TOPIC_ICON}</span>
-	    <img class="topic_icon" src="{watch.TOPIC_ICON}">
+	<td id="{watch.TOPIC_ID}" class="topic_id">
+		<span style="display: none;">{watch.TOPIC_ICON}</span>
+		<img class="topic_icon" src="{watch.TOPIC_ICON}">
 	</td>
 	<td><a href="{watch.U_FORUM}" class="genmed">{watch.FORUM_TITLE}</a></td>
-    <td class="tLeft nowrap">
-	    <a class="topictitle" title="{watch.FULL_TOPIC_TITLE}" href="{watch.U_TOPIC}">{watch.TOPIC_TITLE}</a>
-	    <!-- IF watch.PAGINATION --><br /><span class="topicPG">&nbsp;[{ICON_GOTOPOST}{L_GOTO_SHORT} {watch.PAGINATION} ]</span><!-- ENDIF -->
+	<td class="tLeft nowrap">
+		<a class="topictitle" title="{watch.FULL_TOPIC_TITLE}" href="{watch.U_TOPIC}">{watch.TOPIC_TITLE}</a>
+		<!-- IF watch.PAGINATION --><br /><span class="topicPG">&nbsp;[{ICON_GOTOPOST}{L_GOTO_SHORT} {watch.PAGINATION} ]</span><!-- ENDIF -->
 	</td>
-    <td>{watch.AUTHOR}</td>
-    <td class="gensmall">{watch.REPLIES}</td>
-    <td class="gensmall nowrap">
-	    {watch.LAST_POST}<!-- IF watch.IS_UNREAD --><a href="{TOPIC_URL}{watch.TOPIC_ID}{NEWEST_URL}">{ICON_NEWEST_REPLY}</a><!-- ELSE -->
+	<td>{watch.AUTHOR}</td>
+	<td class="gensmall">{watch.REPLIES}</td>
+	<td class="gensmall nowrap">
+		{watch.LAST_POST}<!-- IF watch.IS_UNREAD --><a href="{TOPIC_URL}{watch.TOPIC_ID}{NEWEST_URL}">{ICON_NEWEST_REPLY}</a><!-- ELSE -->
 		<a href="{POST_URL}{watch.LAST_POST_ID}#{watch.LAST_POST_ID}">{ICON_LATEST_REPLY}</a><!-- ENDIF -->
 	</td>
 </tr>
