@@ -55,7 +55,7 @@ switch ($mode)
 	case 'poll_vote':
 		if (!$t_data['topic_vote'])
 		{
-			bb_die('Опрос не найден');
+			bb_die($lang['POST_HAS_NO_POLL']);
 		}
 		if ($t_data['topic_status'] == TOPIC_LOCKED)
 		{
@@ -67,11 +67,11 @@ switch ($mode)
 		}
 		if (!$vote_id)
 		{
-			bb_die('Вы не выбрали, за что голосуете');
+			bb_die($lang['NO_VOTE_OPTION']);
 		}
 		if (DB()->fetch_row("SELECT 1 FROM ". BB_POLL_USERS ." WHERE topic_id = $topic_id AND user_id = {$userdata['user_id']} LIMIT 1"))
 		{
-			bb_die('Вы уже голосовали');
+			bb_die($lang['ALREADY_VOTED']);
 		}
 
 		DB()->query("
@@ -83,21 +83,21 @@ switch ($mode)
 		");
 		if (DB()->affected_rows() != 1)
 		{
-			bb_die('Вы не выбрали, за что голосуете');
+			bb_die($lang['NO_VOTE_OPTION']);
 		}
 
 		DB()->query("INSERT IGNORE INTO ". BB_POLL_USERS ." (topic_id, user_id, vote_ip, vote_dt) VALUES ($topic_id, {$userdata['user_id']}, '". USER_IP ."', ". TIMENOW .")");
 
 		CACHE('bb_poll_data')->rm("poll_$topic_id");
 
-		bb_die('Спасибо! Ваш голос учтен');
+		bb_die($lang['VOTE_CAST']);
 		break;
 
 	// возобновить возможность голосовать
 	case 'poll_start':
 		if (!$t_data['topic_vote'])
 		{
-			bb_die('Опрос не найден');
+			bb_die($lang['POST_HAS_NO_POLL']);
 		}
 		DB()->query("UPDATE ". BB_TOPICS ." SET topic_vote = 1 WHERE topic_id = $topic_id LIMIT 1");
 		bb_die('Опрос включен');
@@ -107,7 +107,7 @@ switch ($mode)
 	case 'poll_finish':
 		if (!$t_data['topic_vote'])
 		{
-			bb_die('Опрос не найден');
+			bb_die($lang['POST_HAS_NO_POLL']);
 		}
 		DB()->query("UPDATE ". BB_TOPICS ." SET topic_vote = ". POLL_FINISHED ." WHERE topic_id = $topic_id LIMIT 1");
 		bb_die('Опрос завершен');
@@ -117,7 +117,7 @@ switch ($mode)
 	case 'poll_delete':
 		if (!$t_data['topic_vote'])
 		{
-			bb_die('Опрос не найден');
+			bb_die($lang['POST_HAS_NO_POLL']);
 		}
 		$poll->delete_poll($topic_id);
 		bb_die('Опрос удален');
@@ -142,7 +142,7 @@ switch ($mode)
 	case 'poll_edit':
 		if (!$t_data['topic_vote'])
 		{
-			bb_die('Опрос не найден');
+			bb_die($lang['POST_HAS_NO_POLL']);
 		}
 		$poll->build_poll_data($_POST);
 		if ($poll->err_msg)
@@ -165,7 +165,7 @@ switch ($mode)
 class bb_poll
 {
 	var $err_msg    = '';
-	var $poll_votes = array();  // array(vote_id => vote_text)
+	var $poll_votes = array(); // array(vote_id => vote_text)
 	var $max_votes  = 0;
 
 	function bb_poll ()
@@ -182,9 +182,10 @@ class bb_poll
 
 		if (!$poll_caption = str_compact($poll_caption))
 		{
-			return $this->err_msg = 'Вы должны указать заголовок';
+			global $lang;
+			return $this->err_msg = $lang['EMPTY_POLL_TITLE'];
 		}
-		$this->poll_votes[] = $poll_caption;  // заголовок имеет vote_id = 0
+		$this->poll_votes[] = $poll_caption; // заголовок имеет vote_id = 0
 
 		foreach (explode("\n", $poll_votes) as $vote)
 		{

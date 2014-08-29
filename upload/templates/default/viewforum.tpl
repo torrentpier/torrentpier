@@ -270,25 +270,25 @@ td.topic_id { cursor: pointer; }
 			<h1 class="maintitle"><a href="{U_VIEW_FORUM}">{FORUM_NAME}</a></h1>
 
 			<p class="small" id="moderators"><a style="text-decoration: none;" href="#">{L_MODERATORS}</a></p>
-            <script type="text/javascript">
-                $(document).ready(function(){
-                    $("#moderators a").one('click', function(){
-                    $('#moderators').html($('#moderators').text());
-                        ajax.index_data();
-                            return false;
-                    });
-                });
-                ajax.index_data = function() {
-                    ajax.exec({
-                        action   : 'index_data',
-                        mode     : 'get_forum_mods',
-                        forum_id : {FORUM_ID}
-                    });
-                };
-                ajax.callback.index_data = function(data) {
-                    $('#moderators').append(data.html);
-                };
-            </script>
+			<script type="text/javascript">
+				$(document).ready(function(){
+					$("#moderators a").one('click', function(){
+						$('#moderators').html($('#moderators').text());
+						ajax.index_data();
+						return false;
+					});
+				});
+				ajax.index_data = function() {
+					ajax.exec({
+						action   : 'index_data',
+						mode     : 'get_forum_mods',
+						forum_id : {FORUM_ID}
+					});
+				};
+				ajax.callback.index_data = function(data) {
+					$('#moderators').append(data.html);
+				};
+			</script>
 
 			<!-- IF SHOW_ONLINE_LIST -->
 			<p class="small">{LOGGED_IN_USER_LIST}</p>

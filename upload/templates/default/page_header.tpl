@@ -236,7 +236,7 @@ function go_to_page ()
 	<b>Вы используете устаревший браузер. Сайт может отображаться некорректно.</b>
 </div>
 <script>
-if ( (typeof(window.opera) != "undefined" && window.opera.version() < 13) || (window.attachEvent && !window.addEventListener) /* IE < 9 */ ) {
+if ( (typeof(window.opera) != "undefined" && window.opera.version() < 12) || (window.attachEvent && !window.addEventListener) /* IE < 9 */ ) {
 	document.getElementById('old-browser-warn').style.display = '';
 }
 </script>
@@ -250,7 +250,7 @@ if ( (typeof(window.opera) != "undefined" && window.opera.version() < 13) || (wi
 			<a href="{U_TRACKER}"><b>{L_TRACKER}</b></a><span style="color:#CDCDCD;">|</span>
 			<a href="{U_SEARCH}"><b>{L_SEARCH}</b></a><span style="color:#CDCDCD;">|</span>
 			<a href="{U_TERMS}"><b style="color: #993300;">{L_TERMS}</b></a><span style="color:#CDCDCD;">|</span>
-			<a href="{U_GROUP_CP}"><b>{L_USERGROUPS}</b></a><span style="color:#CDCDCD;">|</span>
+			<a href="{U_GROUPS}"><b>{L_USERGROUPS}</b></a><span style="color:#CDCDCD;">|</span>
 			<a href="{U_MEMBERLIST}"><b>{L_MEMBERLIST}</b></a>
 		</td>
 		<td class="nowrap" align="right">
@@ -295,7 +295,7 @@ ajax.callback.index_data = function(data) {};
 $(document).ready(function() {
 	x = new Date();
 	tz = -x.getTimezoneOffset()/60;
-	if (tz != <?php echo $bb_cfg['board_timezone']?>)
+	if (tz != {BOARD_TIMEZONE})
 	{
 		ajax.index_data(tz);
 	}

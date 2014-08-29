@@ -48,7 +48,7 @@
  * PM
  * Actions log
  * Users
- * GroupCP
+ * Groups
 
  * Tidy
  * Ads
@@ -59,6 +59,7 @@
  * Captcha
  * Atom feed
  * Nofollow
+ * Local config
 **/
 
 if (!defined('BB_ROOT')) die(basename(__FILE__));
@@ -71,8 +72,8 @@ $domain_name = (!empty($_SERVER['SERVER_NAME'])) ? $_SERVER['SERVER_NAME'] : $do
 
 // Version info
 $bb_cfg['tp_version'] = '2.1 (RC)';
-$bb_cfg['tp_release_date'] = '27-08-2014';
-$bb_cfg['tp_release_state'] = 'R598';
+$bb_cfg['tp_release_date'] = '30-08-2014';
+$bb_cfg['tp_release_state'] = 'R599';
 
 // Database
 $charset  = 'utf8';
@@ -356,7 +357,7 @@ $bb_cfg['board_email_sitename']    = $domain_name; // sitename used in all email
 
 $bb_cfg['topic_notify_enabled']    = true;
 $bb_cfg['pm_notify_enabled']       = true;
-$bb_cfg['groupcp_send_email']      = true;
+$bb_cfg['group_send_email']        = true;
 $bb_cfg['email_change_disabled']   = false;        // disable changing email by user
 
 $bb_cfg['tech_admin_email']        = 'admin@' . $domain_name;  // email for sending error reports
@@ -502,8 +503,8 @@ $bb_cfg['color_nick']                   = true;    // Окраска ников 
 $bb_cfg['user_not_activated_days_keep'] = 7;       // "not activated" == "not finished registration"
 $bb_cfg['user_not_active_days_keep']    = 180;     // inactive users but only with no posts
 
-// GroupCP
-$bb_cfg['groupcp_members_per_page']     = 50;
+// Groups
+$bb_cfg['group_members_per_page']       = 50;
 
 // Tidy
 $bb_cfg['tidy_post'] = (!extension_loaded('tidy')) ? false : true;
@@ -624,5 +625,11 @@ $bb_cfg['nofollow'] = array(
 	'disabled'    => false,
 	'allowed_url' => array($domain_name), // 'allowed.site', 'www.allowed.site'
 );
+
+// Local config
+if (file_exists('config.local.php'))
+{
+	include_once('config.local.php');
+}
 
 define('BB_CFG_LOADED', true);

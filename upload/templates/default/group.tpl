@@ -45,7 +45,7 @@
 <!-- IF GROUP_INFO -->
 <!--========================================================================-->
 
-<form action="{S_GROUPCP_ACTION}" method="post">
+<form action="{S_GROUP_ACTION}" method="post">
 {S_HIDDEN_FIELDS}
 
 <table class="forumline pad_4">
@@ -105,7 +105,6 @@
 	</td>
 </tr>
 <!-- END switch_mod_option -->
-
 </table>
 
 </form>
@@ -114,7 +113,7 @@
 <p class="nav"><a href="{U_GROUP_MEMBERS}" name="members">{L_GROUP_MEMBERS}</a><!-- IF RELEASE_GROUP -->&nbsp;::&nbsp;<a href="{U_GROUP_RELEASES}" name="releases">{L_GROUPS_RELEASES}</a><!-- ENDIF --></p>
 
 <!-- IF MEMBERS -->
-<form action="{S_GROUPCP_ACTION}" method="post" name="post">
+<form action="{S_GROUP_ACTION}" method="post" name="post">
 {S_HIDDEN_FIELDS}
 
 <table class="forumline tablesorter">

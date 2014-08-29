@@ -1,6 +1,6 @@
 User-agent: *
 Disallow: /dl.php
-Disallow: /groupcp.php
+Disallow: /group.php
 Disallow: /login.php
 Disallow: /memberlist.php
 Disallow: /modcp.php

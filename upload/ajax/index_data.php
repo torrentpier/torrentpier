@@ -65,7 +65,7 @@ switch($mode)
 		{
 			foreach ($mod['mod_groups'][$forum_id] as $group_id)
 			{
-				$moderators[] = '<a href="'. "groupcp.php?". POST_GROUPS_URL ."=". $group_id .'">'. $mod['name_groups'][$group_id] .'</a>';
+				$moderators[] = '<a href="'. "group.php?". POST_GROUPS_URL ."=". $group_id .'">'. $mod['name_groups'][$group_id] .'</a>';
 			}
 		}
 
@@ -99,7 +99,7 @@ switch($mode)
 
 		$html = '
 			<tr class="row3">
-				<th style="padding: 0;" class="stats-ext"></th>
+				<th style="padding: 0;"></th>
 				<th>'. $lang['DOWNLOADED'] .'</th>
 				<th>'. $lang['UPLOADED'] .'</th>
 				<th>'. $lang['RELEASED'] .'</th>
@@ -107,7 +107,7 @@ switch($mode)
 		$html .= ($bb_cfg['seed_bonus_enabled']) ? '<th>'. $lang['SEED_BONUS'] .'</th>' : '';
 		$html .= '</tr>
 			<tr class="row1">
-				<td class="stats-ext">'. $lang['TOTAL_TRAF'] .'</td>
+				<td>'. $lang['TOTAL_TRAF'] .'</td>
 				<td id="u_down_total"><span class="editable bold leechmed">'. humn_size($btu['u_down_total']) .'</span></td>
 				<td id="u_up_total"><span class="editable bold seedmed">' .humn_size($btu['u_up_total']) .'</span></td>
 				<td id="u_up_release"><span class="editable bold seedmed">'. humn_size($btu['u_up_release']) .'</span></td>

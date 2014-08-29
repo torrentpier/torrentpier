@@ -225,7 +225,7 @@ if ($release_groups = get_group_data('all'))
 {
 	$s_rg_opt = array(
 		$search_all => array(
-			'lang' => $lang['GROUPS_RELEASES'],
+			'lang' => $lang['CHOOSE_RELEASE_GROUP'],
 			'sql'  => 0,
 	));
 	foreach ($release_groups as $rg)

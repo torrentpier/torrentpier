@@ -191,6 +191,7 @@ $template->assign_vars(array(
 
 	'CURRENT_TIME'       => sprintf($lang['CURRENT_TIME'], bb_date(TIMENOW, $bb_cfg['last_visit_date_format'], false)),
 	'S_TIMEZONE'         => preg_replace('/\(.*?\)/', '', sprintf($lang['ALL_TIMES'], $lang['TZ'][str_replace(',', '.', floatval($bb_cfg['board_timezone']))])),
+	'BOARD_TIMEZONE'     => $bb_cfg['board_timezone'],
 
 	'PM_INFO'            => $pm_info,
 	'PRIVMSG_IMG'        => $icon_pm,
@@ -211,7 +212,7 @@ $template->assign_vars(array(
 
 	'U_CUR_DOWNLOADS'    => PROFILE_URL . $userdata['user_id'],
 	'U_FORUM'            => "viewforum.php",
-	'U_GROUP_CP'         => "groupcp.php",
+	'U_GROUPS'           => "group.php",
 	'U_LOGIN_LOGOUT'     => $u_login_logout,
 	'U_MEMBERLIST'       => "memberlist.php",
 	'U_MODCP'            => "modcp.php",

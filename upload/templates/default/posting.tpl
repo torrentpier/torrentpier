@@ -136,7 +136,6 @@
 	</div>
 	</td>
 </tr>
-<!-- ENDIF / LOGGED_IN -->
 <!-- IF ATTACHBOX && POSTER_RGROUPS -->
 <tr>
 	<td class="vTop pad_4" valign="top"><b>{L_POST_RELEASE_FROM_GROUP}</b></td>
@@ -149,6 +148,7 @@
 	</td>
 </tr>
 <!-- ENDIF -->
+<!-- ENDIF / LOGGED_IN -->
 <!-- BEGIN switch_type_toggle -->
 <tr>
 	<td colspan="2" class="row2 tCenter pad_6">{S_TYPE_TOGGLE}</td>

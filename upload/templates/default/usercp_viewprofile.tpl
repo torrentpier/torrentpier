@@ -178,6 +178,9 @@ ajax.callback.gen_passkey = function(data){
 #traf-stats-tbl { width: 468px; background: #F9F9F9; border: 1px solid #A5AFB4; border-collapse: separate; }
 #traf-stats-tbl th, #traf-stats-tbl td { padding: 2px 10px 3px; text-align: center; white-space: nowrap; font-size: 11px; }
 #traf-stats-tbl th { padding: 2px <!-- IF $bb_cfg['seed_bonus_enabled'] -->11<!-- ELSE -->22<!-- ENDIF -->px 3px; }
+<!-- IF TRAF_STATS -->
+#traf-stats-tbl th { padding: 2px 30px 3px; }
+<!-- ENDIF -->
 .pagetitle a { font-size: 16px; }
 </style>
 
@@ -425,7 +428,7 @@ ajax.callback.gen_passkey = function(data){
 			<!-- IF GENDER -->
 			<tr>
 				<th>{L_GENDER}:</th>
-				<td id="user_gender"><span class="med editable">{GENDER}</span></td>
+				<td id="user_gender"><span class="editable">{GENDER}</span></td>
 			</tr>
 			<!-- ENDIF -->
 			<!-- IF BIRTHDAY -->
@@ -442,14 +445,14 @@ ajax.callback.gen_passkey = function(data){
 				<td colspan="2" class="pad_4">
 					<table id="traf-stats-tbl" <!-- IF TRAF_STATS -->style="display: none;"<!-- ENDIF --> class="bCenter borderless" cellspacing="1">
 						<tr class="row3">
-							<th class="stats-ext"></th>
+							<th></th>
 							<th>{L_DOWNLOADED}</th>
 							<th>{L_UPLOADED}</th>
 							<th>{L_RELEASED}</th>
 							<th>{L_BONUS}</th>
 							<!-- IF $bb_cfg['seed_bonus_enabled'] --><th>{L_SEED_BONUS}</th><!-- ENDIF -->
 						</tr>
-						<tr class="row1 stats-ext">
+						<tr class="row1">
 							<td>{L_TD_TRAF}</td>
 							<td class="leech">{TD_DL}</td>
 							<td class="seed">{TD_UL}</td>
@@ -457,7 +460,7 @@ ajax.callback.gen_passkey = function(data){
 							<td class="seed">{TD_BONUS}</td>
 							<!-- IF $bb_cfg['seed_bonus_enabled'] --><td class="points">{TD_POINTS}</td><!-- ENDIF -->
 						</tr>
-						<tr class="row5 stats-ext">
+						<tr class="row5">
 							<td>{L_YS_TRAF}</td>
 							<td class="leech">{YS_DL}</td>
 							<td class="seed">{YS_UL}</td>
@@ -466,7 +469,7 @@ ajax.callback.gen_passkey = function(data){
 							<!-- IF $bb_cfg['seed_bonus_enabled'] --><td class="points">{YS_POINTS}</td><!-- ENDIF -->
 						</tr>
 						<tr class="row1">
-							<td class="stats-ext">{L_TOTAL_TRAF}</td>
+							<td>{L_TOTAL_TRAF}</td>
 							<td id="u_down_total"><span class="editable bold leechmed">{DOWN_TOTAL}</span></td>
 							<td id="u_up_total"><span class="editable bold seedmed">{UP_TOTAL}</span></td>
 							<td id="u_up_release"><span class="editable bold seedmed">{RELEASED}</span></td>

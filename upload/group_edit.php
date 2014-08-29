@@ -1,7 +1,7 @@
 <?php
 
 define('IN_FORUM', true);
-define('BB_SCRIPT', 'group_config');
+define('BB_SCRIPT', 'group_edit');
 define('BB_ROOT', './');
 require(BB_ROOT .'common.php');
 require(INC_DIR .'functions_group.php');
@@ -86,7 +86,7 @@ if ($is_moderator)
 		'S_GROUP_CLOSED_CHECKED' => ($group_info['group_type'] == GROUP_CLOSED) ? ' checked="checked"' : '',
 		'S_GROUP_HIDDEN_CHECKED' => ($group_info['group_type'] == GROUP_HIDDEN) ? ' checked="checked"' : '',
 		'S_HIDDEN_FIELDS'        => $s_hidden_fields,
-		'S_GROUP_CONFIG_ACTION'  => "group_config.php?" . POST_GROUPS_URL . "=$group_id",
+		'S_GROUP_CONFIG_ACTION'  => "group_edit.php?" . POST_GROUPS_URL . "=$group_id",
 
 		'AVATAR_EXPLAIN'     => sprintf($lang['AVATAR_EXPLAIN'], $bb_cfg['group_avatars']['max_width'], $bb_cfg['group_avatars']['max_height'], (round($bb_cfg['group_avatars']['max_size'] / 1024))),
 		'AVATAR_URL_PATH'    => ($group_info['avatar_ext_id']) ? get_avatar_path(GROUP_AVATAR_MASK . $group_id, $group_info['avatar_ext_id']) : '',
@@ -94,7 +94,7 @@ if ($is_moderator)
 		'RELEASE_GROUP'      => ($group_info['release_group']) ? true : false,
 	));
 
-	$template->set_filenames(array('body' => 'group_config.tpl'));
+	$template->set_filenames(array('body' => 'group_edit.tpl'));
 	$template->assign_vars(array('PAGE_TITLE' => $lang['GROUP_CONFIGURATION']));
 
 	require(PAGE_HEADER);

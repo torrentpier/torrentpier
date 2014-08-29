@@ -14,12 +14,12 @@
 
 <table class="forumline tCenter">
 <tr>
-    <th colspan="3">{MY_BONUS}</th>
+	<th colspan="3">{MY_BONUS}</th>
 </tr>
 <tr class="row3 med">
-    <td class="bold tCenter">{L_DESCRIPTION}</td>
-    <td class="bold tCenter">{L_PRICE}</td>
-    <td class="bold tCenter">{L_BONUS_SELECT}</td>
+	<td class="bold tCenter">{L_DESCRIPTION}</td>
+	<td class="bold tCenter">{L_PRICE}</td>
+	<td class="bold tCenter">{L_BONUS_SELECT}</td>
 </tr>
 
 <!-- BEGIN bonus_upload -->
