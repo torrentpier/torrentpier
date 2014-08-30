@@ -137,6 +137,7 @@ ALTER TABLE `bb_posts` ADD `poster_rg_id` mediumint(8) NOT NULL DEFAULT '0' AFTE
                                                                                       // добавлено 598 ↑
 ALTER TABLE `bb_posts` ADD `attach_rg_sig` tinyint(4) NOT NULL DEFAULT '0' AFTER `poster_rg_id`;
                                                                                       // добавлено 598 ↑
+INSERT INTO `bb_config` VALUES ('terms', '');                                         // добавлено 599b
 
 Удаленные файлы/папки:
 
