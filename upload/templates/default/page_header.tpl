@@ -21,8 +21,8 @@
 	window.encURL = encodeURIComponent;
 </script>
 <script type="text/javascript">
-var bb_url      = '{SITE_URL}';
-var bbl = { "code": "{L_CODE}", "wrote": "{L_WROTE}", "quote": "{L_QUOTE}", "quoted_post": "{L_GOTO_QUOTED_POST}", "loading": "{L_LOADING}", "spoiler_head": "{L_SPOILER_HEAD}", "spoiler_close": "{L_SPOILER_CLOSE}", "links_are": "{L_LINKS_ARE_FORBIDDEN}", "scr_rules": "{L_SCREENSHOTS_RULES}", "play_on": "{L_PLAY_ON_CURPAGE}" };
+var bb_url = '{SITE_URL}';
+var bbl    = { "code": "{L_CODE}", "wrote": "{L_WROTE}", "quote": "{L_QUOTE}", "quoted_post": "{L_GOTO_QUOTED_POST}", "loading": "{L_LOADING}", "spoiler_head": "{L_SPOILER_HEAD}", "spoiler_close": "{L_SPOILER_CLOSE}", "links_are": "{L_LINKS_ARE_FORBIDDEN}", "scr_rules": "{L_SCREENSHOTS_RULES}", "play_on": "{L_PLAY_ON_CURPAGE}" };
 
 var postImg_MaxWidth = screen.width - {POST_IMG_WIDTH_DECR_JS};
 var postImgAligned_MaxWidth = Math.round(screen.width/3);

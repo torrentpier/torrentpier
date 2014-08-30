@@ -1,32 +1,18 @@
 <?php
-/**
- * User: dimka3210
- * Date: 30.08.14
- * Time: 15:15
- */
 
+define('BB_SCRIPT', 'terms');
 define('BB_ROOT', './');
-require(BB_ROOT . 'common.php');
-require(INC_DIR . 'bbcode.php');
+require(BB_ROOT .'common.php');
+require(INC_DIR .'bbcode.php');
 
+// Start session management
 $user->session_start();
 
-$message = '';
-$sql = "SELECT config_value FROM " . BB_CONFIG . " WHERE config_name='" . TERMS_KEY . "'";
-
-if ($result = DB()->sql_query($sql)) {
-    $row = DB()->sql_fetchrow($result);
-    $message = $row['config_value'];
-}
-
-if (!$message && IS_ADMIN) {
-    $message = sprintf($lang['TERMS_ADMIN_EMPTY_TEXT'], $domain_name);
-} elseif (!$message) {
-    redirect('/');
-}
+if (!$bb_cfg['terms'] && !IS_ADMIN) redirect('index.php');
 
 $template->assign_vars(array(
-    'TERMS_HTML' => bbcode2html($message)
+	'TERMS_EDIT' => bbcode2html(sprintf($lang['TERMS_EMPTY_TEXT'], $domain_name)),
+	'TERMS_HTML' => bbcode2html($bb_cfg['terms']),
 ));
 
 print_page('terms.tpl');

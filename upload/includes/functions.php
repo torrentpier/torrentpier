@@ -1288,7 +1288,7 @@ function get_attachments_dir ($cfg = null)
 
 function bb_get_config ($table, $from_db = false, $update_cache = true)
 {
-	if ($from_db OR !$cfg = CACHE('bb_cache')->get("config_{$table}"))
+	if ($from_db OR !$cfg = CACHE('bb_config')->get("config_{$table}"))
 	{
 		$cfg = array();
 		foreach (DB()->fetch_rowset("SELECT * FROM $table") as $row)
@@ -1297,7 +1297,7 @@ function bb_get_config ($table, $from_db = false, $update_cache = true)
 		}
 		if ($update_cache)
 		{
-			CACHE('bb_cache')->set("config_{$table}", $cfg);
+			CACHE('bb_config')->set("config_{$table}", $cfg);
 		}
 	}
 	return $cfg;
@@ -1316,6 +1316,7 @@ function bb_update_config ($params, $table = BB_CONFIG)
 	$updates = DB()->build_array('MULTI_INSERT', $updates);
 
 	DB()->query("REPLACE INTO $table $updates");
+
 	// Update cache
 	bb_get_config($table, true, true);
 }

@@ -1,32 +1,25 @@
 <?php
 
-if (!empty($setmodules)) {
-    $module['GENERAL']['TERMS'] = basename(__FILE__);
-    return;
+if (!empty($setmodules))
+{
+	$module['GENERAL']['TERMS'] = basename(__FILE__);
+	return;
 }
-
 require('./pagestart.php');
-require(INC_DIR . 'bbcode.php');
 
-if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    bb_update_config(array(TERMS_KEY => $_POST['message']));
-}
+require(INC_DIR .'bbcode.php');
 
-$message = '';
-$sql = "SELECT config_value FROM " . BB_CONFIG . " WHERE config_name='" . TERMS_KEY . "'";
-
-if ($result = DB()->sql_query($sql)) {
-    $row = DB()->sql_fetchrow($result);
-    $message = $row['config_value'];
+if (isset($_POST['post']) && $bb_cfg['terms'] != $_POST['message'])
+{
+	bb_update_config(array('terms' => $_POST['message']));
+	bb_die($lang['CONFIG_UPDATED']);
 }
 
 $template->assign_vars(array(
-    'S_CONFIG_ACTION' => 'admin_terms.php',
-    'CONFIG' => true,
-    'MESSAGE' => $message,
-    'EXT_LINK_NEW_WIN' => $bb_cfg['ext_link_new_win'],
-    'PREVIEW_HTML' => (isset($_REQUEST['preview'])) ? bbcode2html($message) : ''
-
+	'S_ACTION'     => 'admin_terms.php',
+	'EXT_LINK_NW'  => $bb_cfg['ext_link_new_win'],
+	'MESSAGE'      => ($bb_cfg['terms']) ? $bb_cfg['terms'] : '',
+	'PREVIEW_HTML' => (isset($_REQUEST['preview'])) ? bbcode2html($_POST['message']) : '',
 ));
 
 print_page('admin_terms.tpl', 'admin');

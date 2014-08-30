@@ -72,8 +72,8 @@ $domain_name = (!empty($_SERVER['SERVER_NAME'])) ? $_SERVER['SERVER_NAME'] : $do
 
 // Version info
 $bb_cfg['tp_version'] = '2.1 (RC)';
-$bb_cfg['tp_release_date'] = '30-08-2014';
-$bb_cfg['tp_release_state'] = 'R599';
+$bb_cfg['tp_release_date'] = '31-08-2014';
+$bb_cfg['tp_release_state'] = 'R599b';
 
 // Database
 $charset  = 'utf8';
@@ -88,18 +88,18 @@ $bb_cfg['db']['db1'] = array('localhost', 'dbase', 'user', 'pass', $charset, $pc
 $bb_cfg['db_alias'] = array(
 //	'alias'  => 'srv_name'
 #	db1
-	'log'    => 'db1',  // BB_LOG
-	'search' => 'db1',  // BB_TOPIC_SEARCH
-	'sres'   => 'db1',  // BB_BT_USER_SETTINGS, BB_SEARCH_RESULTS
-	'u_ses'  => 'db1',  // BB_USER_SES, BB_USER_LASTVISIT
+	'log'    => 'db1', // BB_LOG
+	'search' => 'db1', // BB_TOPIC_SEARCH
+	'sres'   => 'db1', // BB_BT_USER_SETTINGS, BB_SEARCH_RESULTS
+	'u_ses'  => 'db1', // BB_USER_SES, BB_USER_LASTVISIT
 #	db2
-	'dls'    => 'db1',  // BB_BT_DLS_*
-	'ip'     => 'db1',  // BB_POSTS_IP
-	'ut'     => 'db1',  // BB_TOPICS_USER_POSTED
+	'dls'    => 'db1', // BB_BT_DLS_*
+	'ip'     => 'db1', // BB_POSTS_IP
+	'ut'     => 'db1', // BB_TOPICS_USER_POSTED
 #	db3
-	'cap'    => 'db1',  // BB_CAPTCHA
-	'pm'     => 'db1',  // BB_PRIVMSGS, BB_PRIVMSGS_TEXT
-	'pt'     => 'db1',  // BB_POSTS_TEXT
+	'cap'    => 'db1', // BB_CAPTCHA
+	'pm'     => 'db1', // BB_PRIVMSGS, BB_PRIVMSGS_TEXT
+	'pt'     => 'db1', // BB_POSTS_TEXT
 );
 
 // Cache
@@ -121,12 +121,13 @@ $bb_cfg['cache']['redis']  = array(
 // Available cache types: memcache, sqlite, redis, eaccelerator, apc, xcache (default of filecache)
 # name => array( (string) type, (array) cfg )
 $bb_cfg['cache']['engines'] = array(
-	'bb_cache'       => array('filecache',   array()),
-	'tr_cache'       => array('filecache',   array()),
-	'session_cache'  => array('filecache',   array()),
-	'bb_cap_sid'     => array('filecache',   array()),
-	'bb_login_err'   => array('filecache',   array()),
-	'bb_poll_data'   => array('filecache',   array()),
+	'bb_cache'      => array('filecache', array()),
+	'bb_config'     => array('filecache', array()),
+	'tr_cache'      => array('filecache', array()),
+	'session_cache' => array('filecache', array()),
+	'bb_cap_sid'    => array('filecache', array()),
+	'bb_login_err'  => array('filecache', array()),
+	'bb_poll_data'  => array('filecache', array()),
 );
 // Datastore
 // Available datastore types: memcache, sqlite, redis, eaccelerator, apc, xcache  (default filecache)
@@ -148,8 +149,8 @@ $bb_cfg['js_ver']             = 1;
 $bb_cfg['css_ver']            = 1;
 
 // Backup
-$bb_cfg['db_backup_shell_cmd']     = '';           // '/path/to/db_backup.sh 2>&1'
-$bb_cfg['site_backup_shell_cmd']   = '';
+$bb_cfg['db_backup_shell_cmd']   = '';             // '/path/to/db_backup.sh 2>&1'
+$bb_cfg['site_backup_shell_cmd'] = '';
 
 // GZip
 $bb_cfg['gzip_compress']      = true;              // compress output
@@ -292,10 +293,10 @@ else
 }
 
 $bb_cfg['languages'] = array(
-//	'folder'  => 'Name',
-	'ru'      => 'Русский',
-	'uk'      => 'Український',
-	'en'      => 'English',
+//	'folder' => 'Name',
+	'ru'     => 'Русский',
+	'uk'     => 'Український',
+	'en'     => 'English',
 );
 
 // Templates
