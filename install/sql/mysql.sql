@@ -581,6 +581,7 @@ INSERT INTO `bb_config` VALUES ('show_mod_index', '0');
 INSERT INTO `bb_config` VALUES ('premod', '0');
 INSERT INTO `bb_config` VALUES ('new_tpls', '1');
 INSERT INTO `bb_config` VALUES ('tor_comment', '1');
+INSERT INTO `bb_config` VALUES ('terms', '');
 
 -- --------------------------------------------------------
 

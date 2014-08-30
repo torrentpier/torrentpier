@@ -215,18 +215,18 @@ define('TOR_TMP',           10);  // временная
 define('TOR_PREMOD',        11);  // премодерация
 
 $bb_cfg['tor_icons'] = array(
-    TOR_NOT_APPROVED  => '<span class="tor-icon tor-not-approved">*</span>',
-    TOR_CLOSED        => '<span class="tor-icon tor-closed">x</span>',
-    TOR_APPROVED      => '<span class="tor-icon tor-approved">&radic;</span>',
-    TOR_NEED_EDIT     => '<span class="tor-icon tor-need-edit">?</span>',
-    TOR_NO_DESC       => '<span class="tor-icon tor-no-desc">!</span>',
-    TOR_DUP           => '<span class="tor-icon tor-dup">D</span>',
-    TOR_CLOSED_CPHOLD => '<span class="tor-icon tor-closed-cp">&copy;</span>',
-    TOR_CONSUMED      => '<span class="tor-icon tor-consumed">&sum;</span>',
-    TOR_DOUBTFUL      => '<span class="tor-icon tor-approved">#</span>',
-    TOR_CHECKING      => '<span class="tor-icon tor-checking">%</span>',
-    TOR_TMP           => '<span class="tor-icon tor-dup">T</span>',
-    TOR_PREMOD        => '<span class="tor-icon tor-dup">&#8719;</span>',
+	TOR_NOT_APPROVED  => '<span class="tor-icon tor-not-approved">*</span>',
+	TOR_CLOSED        => '<span class="tor-icon tor-closed">x</span>',
+	TOR_APPROVED      => '<span class="tor-icon tor-approved">&radic;</span>',
+	TOR_NEED_EDIT     => '<span class="tor-icon tor-need-edit">?</span>',
+	TOR_NO_DESC       => '<span class="tor-icon tor-no-desc">!</span>',
+	TOR_DUP           => '<span class="tor-icon tor-dup">D</span>',
+	TOR_CLOSED_CPHOLD => '<span class="tor-icon tor-closed-cp">&copy;</span>',
+	TOR_CONSUMED      => '<span class="tor-icon tor-consumed">&sum;</span>',
+	TOR_DOUBTFUL      => '<span class="tor-icon tor-approved">#</span>',
+	TOR_CHECKING      => '<span class="tor-icon tor-checking">%</span>',
+	TOR_TMP           => '<span class="tor-icon tor-dup">T</span>',
+	TOR_PREMOD        => '<span class="tor-icon tor-dup">&#8719;</span>',
 );
 
 // Запрет на скачивание
@@ -468,10 +468,8 @@ $html = new html_common();
 $log_action = new log_action();
 $ads = new ads_common();
 
-// !!! Temporarily (??) 'cat_forums' always enqueued
-$datastore->enqueue(array(
-	'cat_forums',
-));
+// TODO temporarily 'cat_forums' always enqueued
+$datastore->enqueue(array('cat_forums'));
 
 // Дата старта вашего проекта
 if (!$bb_cfg['board_startdate'])
@@ -488,13 +486,13 @@ if ((empty($_POST) && !defined('IN_ADMIN') && !defined('IN_AJAX') && !file_exist
 		// Update cron_last_check
 		bb_update_config(array('cron_last_check' => (TIMENOW + 10)));
 
-		define('CRON_LOG_ENABLED', true);   // global ON/OFF
-		define('CRON_FORCE_LOG',   false);  // always log regardless of job settings
+		define('CRON_LOG_ENABLED', true);  // global ON/OFF
+		define('CRON_FORCE_LOG',   false); // always log regardless of job settings
 
 		define('CRON_DIR',      INC_DIR  .'cron/');
 		define('CRON_JOB_DIR',  CRON_DIR .'jobs/');
-		define('CRON_LOG_DIR',  'cron/');            // inside LOG_DIR
-		define('CRON_LOG_FILE', 'cron');             // without ext
+		define('CRON_LOG_DIR',  'cron/'); // inside LOG_DIR
+		define('CRON_LOG_FILE', 'cron');  // without ext
 
 		bb_log(date('H:i:s - ') . getmypid() .' -x-- DB-LOCK try'. LOG_LF, CRON_LOG_DIR .'cron_check');
 

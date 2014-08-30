@@ -1,11 +1,11 @@
 <script type="text/javascript">
 $(document).ready(function() {
-    $("#check_all").click(function () {
-        if (!$("#check_all").is(":checked"))
-            $(".checkbox").removeAttr("checked");
-        else
-            $(".checkbox").attr("checked","checked");
-    });
+	$("#check_all").click(function () {
+		if (!$("#check_all").is(":checked"))
+			$(".checkbox").removeAttr("checked");
+		else
+			$(".checkbox").attr("checked","checked");
+	});
 });
 </script>
 
@@ -24,60 +24,59 @@ tr.hl-tr:hover td { background-color: #CFC !important; }
 <input class="text" type="hidden" name="mode" value="{S_MODE}" />
 
 <table cellpadding="2" cellspacing="0" width="100%">
-<tr>
-	<td width="80%">
-		<h1>{L_CRON}</h1>
-
-        <a href="admin_cron.php?mode=add">{L_CRON_EDIT_HEAD_ADD}</a>
-	</td>
-	<td width="20%" class="vBottom tRight nowrap med">
-	<!-- IF TPL_CRON_LIST -->
-        <table id="cron_<!-- IF CRON_ENABLED -->true<!-- ELSE -->false<!-- ENDIF -->" class="cron_<!-- IF CRON_ENABLED -->true<!-- ELSE -->false<!-- ENDIF -->">
-	        <tr>
-			    <td>{L_CRON_ENABLED}</td>
-	            <td>
-				    <label><input type="radio" name="cron_enabled" value="1" <!-- IF CRON_ENABLED -->checked="checked"<!-- ENDIF --> />{L_YES}</label>&nbsp;&nbsp;
-					<label><input type="radio" name="cron_enabled" value="0" <!-- IF not CRON_ENABLED -->checked="checked"<!-- ENDIF --> />{L_NO}</label>
-				</td>
-				<td>{L_CRON_CHECK_INTERVAL}</td>
-	            <td>
-				    <input class="post" type="text" size="10" maxlength="255" name="cron_check_interval" value="{CRON_CHECK_INTERVAL}" />
-                </td>
-				<td>
-				    <input type="submit" name="submit" value="{L_SUBMIT}" class="mainoption" />
-                </td>
-			</tr>
-        </table>
-	<!-- ELSE IF CRON_RUNNING -->
-        <table id="tor_blocked" class="error">
-	        <tr>
-			    <td>
-				    <p class="error_msg">{L_CRON_WORKS} <a href="admin_cron.php?mode=repair"><b>{L_REPAIR_CRON}</b></a></p>
-				</td>
-			</tr>
-        </table>
-    <!-- ENDIF -->
-	</td>
-</tr>
+	<tr>
+		<td width="80%">
+			<h1>{L_CRON}</h1>
+			<a href="admin_cron.php?mode=add">{L_CRON_EDIT_HEAD_ADD}</a>
+		</td>
+		<td width="20%" class="vBottom tRight nowrap med">
+		<!-- IF TPL_CRON_LIST -->
+			<table id="cron_<!-- IF CRON_ENABLED -->true<!-- ELSE -->false<!-- ENDIF -->" class="cron_<!-- IF CRON_ENABLED -->true<!-- ELSE -->false<!-- ENDIF -->">
+				<tr>
+					<td>{L_CRON_ENABLED}</td>
+					<td>
+						<label><input type="radio" name="cron_enabled" value="1" <!-- IF CRON_ENABLED -->checked="checked"<!-- ENDIF --> />{L_YES}</label>&nbsp;&nbsp;
+						<label><input type="radio" name="cron_enabled" value="0" <!-- IF not CRON_ENABLED -->checked="checked"<!-- ENDIF --> />{L_NO}</label>
+					</td>
+					<td>{L_CRON_CHECK_INTERVAL}</td>
+					<td>
+						<input class="post" type="text" size="10" maxlength="255" name="cron_check_interval" value="{CRON_CHECK_INTERVAL}" />
+					</td>
+					<td>
+						<input type="submit" name="submit" value="{L_SUBMIT}" class="mainoption" />
+					</td>
+				</tr>
+			</table>
+		<!-- ELSE IF CRON_RUNNING -->
+			<table id="tor_blocked" class="error">
+				<tr>
+					<td>
+						<p class="error_msg">{L_CRON_WORKS} <a href="admin_cron.php?mode=repair"><b>{L_REPAIR_CRON}</b></a></p>
+					</td>
+				</tr>
+			</table>
+		<!-- ENDIF -->
+		</td>
+	</tr>
 </table>
 <br />
 
 <table class="forumline">
 <tr>
-    <th colspan="10">{L_CRON_LIST}</th>
+	<th colspan="10">{L_CRON_LIST}</th>
 </tr>
 
 <tr class="row3 med tCenter">
-    <td><input type="checkbox" id="check_all"></td>
-    <td>{L_CRON_ID}</td>
-    <td>{L_CRON_ACTIVE}</td>
-    <td>{L_CRON_TITLE}</td>
-    <td>{L_CRON_SCRIPT}</td>
-    <td>{L_CRON_SCHEDULE}</td>
-    <td>{L_CRON_LAST_RUN}</td>
-    <td>{L_CRON_NEXT_RUN}</td>
-    <td>{L_CRON_RUN_COUNT}</td>
-    <td>{L_CRON_MANAGE}</td>
+	<td><input type="checkbox" id="check_all"></td>
+	<td>{L_CRON_ID}</td>
+	<td>{L_CRON_ACTIVE}</td>
+	<td>{L_CRON_TITLE}</td>
+	<td>{L_CRON_SCRIPT}</td>
+	<td>{L_CRON_SCHEDULE}</td>
+	<td>{L_CRON_LAST_RUN}</td>
+	<td>{L_CRON_NEXT_RUN}</td>
+	<td>{L_CRON_RUN_COUNT}</td>
+	<td>{L_CRON_MANAGE}</td>
 </tr>
 
 <!-- BEGIN list -->
@@ -101,20 +100,20 @@ tr.hl-tr:hover td { background-color: #CFC !important; }
 </table>
 
 <table class="forumline">
-<tr>
-    <td colspan="2" class="catBottom">
-	    {L_WITH_SELECTED}
-	    <select name="cron_action" id="cron_select" >
-		    <option value="" selected="selected" class="select-action">&raquo; {L_NOTHING}</option>
-		    <option value="run">{L_CRON_RUN}</option>
-		    <option value="delete">{L_CRON_DEL}</option>
-		    <option value="disable">{L_CRON_DISABLE}</option>
-		    <option value="enable">{L_CRON_ENABLE}</option>
-	    </select>
-	    <label><input onclick="toggle_disabled('send', this.checked)" type="checkbox" name="confirm" value="1" /></label>&nbsp;
-	    <input type="submit" name="submit" id="send" value="{L_SUBMIT}" class="mainoption" disabled="disabled" />
-    </td>
-</tr>
+	<tr>
+		<td colspan="2" class="catBottom">
+			{L_WITH_SELECTED}
+			<select name="cron_action" id="cron_select" >
+				<option value="" selected="selected" class="select-action">&raquo; {L_NOTHING}</option>
+				<option value="run">{L_CRON_RUN}</option>
+				<option value="delete">{L_CRON_DEL}</option>
+				<option value="disable">{L_CRON_DISABLE}</option>
+				<option value="enable">{L_CRON_ENABLE}</option>
+			</select>
+			<label><input onclick="toggle_disabled('send', this.checked)" type="checkbox" name="confirm" value="1" /></label>&nbsp;
+			<input type="submit" name="submit" id="send" value="{L_SUBMIT}" class="mainoption" disabled="disabled" />
+		</td>
+	</tr>
 </table>
 </form>
 <br />
@@ -142,12 +141,12 @@ tr.hl-tr:hover td { background-color: #CFC !important; }
 </tr>
 <tr>
 	<td>
-	    <h4>{L_CRON_ACTIVE}</h4>
+		<h4>{L_CRON_ACTIVE}</h4>
 		<h6>{L_CRON_ACTIVE_EXPL}</h6>
 	</td>
 	<td>
-	    <label><input type="radio" name="cron_active" value="1" <!-- IF CRON_ACTIVE -->checked="checked"<!-- ENDIF --> />{L_YES}</label>&nbsp;&nbsp;
-	    <label><input type="radio" name="cron_active" value="0" <!-- IF not CRON_ACTIVE -->checked="checked"<!-- ENDIF --> />{L_NO}</label>
+		<label><input type="radio" name="cron_active" value="1" <!-- IF CRON_ACTIVE -->checked="checked"<!-- ENDIF --> />{L_YES}</label>&nbsp;&nbsp;
+		<label><input type="radio" name="cron_active" value="0" <!-- IF not CRON_ACTIVE -->checked="checked"<!-- ENDIF --> />{L_NO}</label>
 	</td>
 </tr>
 <tr>
@@ -189,7 +188,7 @@ tr.hl-tr:hover td { background-color: #CFC !important; }
 <tr>
 	<td><h4>{L_LOG_ENABLED}</h4></td>
 	<td>
-	    <label><input type="radio" name="log_enabled" value="1" <!-- IF LOG_ENABLED -->checked="checked"<!-- ENDIF --> />{L_YES}</label>&nbsp;&nbsp;
+		<label><input type="radio" name="log_enabled" value="1" <!-- IF LOG_ENABLED -->checked="checked"<!-- ENDIF --> />{L_YES}</label>&nbsp;&nbsp;
 		<label><input type="radio" name="log_enabled" value="0" <!-- IF not LOG_ENABLED -->checked="checked"<!-- ENDIF --> />{L_NO}</label>
 	</td>
 </tr>
@@ -200,14 +199,14 @@ tr.hl-tr:hover td { background-color: #CFC !important; }
 <tr>
 	<td><h4>{L_LOG_SQL_QUERIES}</h4></td>
 	<td>
-	    <label><input type="radio" name="log_sql_queries" value="1" <!-- IF LOG_SQL_QUERIES -->checked="checked"<!-- ENDIF --> />{L_YES}</label>&nbsp;&nbsp;
+		<label><input type="radio" name="log_sql_queries" value="1" <!-- IF LOG_SQL_QUERIES -->checked="checked"<!-- ENDIF --> />{L_YES}</label>&nbsp;&nbsp;
 		<label><input type="radio" name="log_sql_queries" value="0" <!-- IF not LOG_SQL_QUERIES -->checked="checked"<!-- ENDIF --> />{L_NO}</label>
 	</td>
 </tr>
 <tr>
 	<td><h4>{L_FORUM_DISABLE}</h4><h6>{L_BOARD_DISABLE_EXPL}</h6></td>
 	<td>
-	    <label><input type="radio" name="disable_board" value="1" <!-- IF DISABLE_BOARD -->checked="checked"<!-- ENDIF --> />{L_YES}</label>&nbsp;&nbsp;
+		<label><input type="radio" name="disable_board" value="1" <!-- IF DISABLE_BOARD -->checked="checked"<!-- ENDIF --> />{L_YES}</label>&nbsp;&nbsp;
 		<label><input type="radio" name="disable_board" value="0" <!-- IF not DISABLE_BOARD -->checked="checked"<!-- ENDIF --> />{L_NO}</label>
 	</td>
 </tr>
