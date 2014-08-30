@@ -48,6 +48,8 @@ define('TOR_TYPE_SILVER',     2);
 define('GUEST_UID', -1);
 define('BOT_UID',   -746);
 
+define('TERMS_KEY', 'terms');
+
 // DBS
 class DBS
 {

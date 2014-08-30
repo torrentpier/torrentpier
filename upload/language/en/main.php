@@ -2878,3 +2878,5 @@ $lang['ATOM_NO_USER'] = 'This user does not have a feed (no ongoing topics)';
 
 $lang['HASH_INVALID'] = 'Hash %s is invalid';
 $lang['HASH_NOT_FOUND'] = 'Release with hash %s not found';
+
+$lang['TERMS_ADMIN_EMPTY_TEXT'] = '[align=center]The text of this page is edited at [url]http://%s/admin/admin_terms.php[/url][/align]';
