@@ -2881,3 +2881,14 @@ $lang['HASH_NOT_FOUND'] = 'Release with hash %s not found';
 
 $lang['TERMS_EMPTY_TEXT'] = '[align=center]The text of this page is edited at: [url=http://%s/admin/admin_terms.php]admin/admin_terms.php[/url]. This line can see only administrators.[/align]';
 $lang['TERMS_EXPLAIN'] = 'On this page, you can specify the text of the basic rules of the resource is displayed to users.';
+
+$lang['TR_STATS'] = array(
+	0 => 'inactive users in 30 days',
+	1 => 'inactive users for 90 days',
+	2 => 'medium size distributions on the tracker (many megabytes)',
+	3 => 'how many total hands on the tracker',
+	4 => 'how many live hands (there is at least 1 led)',
+	5 => 'how many hands where that seeding more than 5 seeds',
+	6 => 'how many of us uploaders (those who filled at least 1 hand)',
+	7 => 'how many uploaders over the last 30 days',
+);

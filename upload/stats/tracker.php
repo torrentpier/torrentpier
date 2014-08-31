@@ -6,7 +6,7 @@ require(BB_ROOT .'common.php');
 
 $user->session_start();
 
-if (!IS_ADMIN) die('Unauthorized');
+if (!IS_ADMIN) bb_die($lang['NOT_AUTHORISED']);
 
 $peers_in_last_minutes = array(30, 15, 5, 1);
 $peers_in_last_sec_limit = 300;
@@ -79,7 +79,7 @@ ob_start('commify_ob');
 
 echo '<html><body><head></head>';
 echo '
-<br /><br /><br />
+<br /><br />
 <table border="1" cellspacing="0" cellpadding="6" align="center">
 <col width="40%">
 <col width="60%">
