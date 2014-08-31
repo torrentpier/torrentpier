@@ -1,4 +1,3 @@
-
 <h1>{L_TERMS}</h1>
 
 <p>{L_TERMS_EXPLAIN}</p>

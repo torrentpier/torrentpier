@@ -207,7 +207,7 @@ ajax.callback.gen_passkey = function(data){
 		<div id="avatar-img" class="mrg_4 med">
 			{AVATAR_IMG}
 			<!-- IF IS_ADMIN || PROFILE_USER -->
-			<p id="avatar-adm" class="med mrg_4">[ <a href="#" onclick="if (window.confirm('Удалить аватар?')){ ajax.avatar('delete', {PROFILE_USER_ID}); } return false;" class="adm">Удалить аватар</a> ]</p>
+			<p id="avatar-adm" class="med mrg_4">[ <a href="#" onclick="if (window.confirm('{L_AVATAR_DELETE}?')){ ajax.avatar('delete', {PROFILE_USER_ID}); } return false;" class="adm">{L_AVATAR_DELETE}</a> ]</p>
 			<!-- ENDIF -->
 		</div>
 		<p class="small mrg_4">

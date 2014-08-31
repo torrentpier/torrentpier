@@ -213,7 +213,7 @@ else
 		$message .= '<div class="mrg_10">'. CAPTCHA()->get_html() .'</div>';
 		$message .= '<input type="hidden" name="redirect_url" value="'. $redirect_url .'" />';
 		$message .= '<input type="submit" class="bold" value="'. $lang['SUBMIT'] .'" /> &nbsp;';
-		$message .= '<input type="button" class="bold" value="Вернуться обратно" onclick="document.location.href = \''. $redirect_url .'\';" />';
+		$message .= '<input type="button" class="bold" value="'. $lang['GO_BACK'] .'" onclick="document.location.href = \''. $redirect_url .'\';" />';
 		$message .= '</form>';
 
 		$template->assign_vars(array(

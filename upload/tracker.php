@@ -461,9 +461,16 @@ if (!$set_default)
 	{
 		if ($tmp = mb_substr(trim($tm), 0, $title_match_max_len))
 		{
-			// Autocorrect wrong keyboard layout
-			$tlc             = new Text_LangCorrect();
-			$title_match_val = $tlc->parse($tlc->parse($tmp, 1), 2);
+			if ($bb_cfg['autocorrect_wkl'])
+			{
+				// Autocorrect wrong keyboard layout
+				$tlc = new Text_LangCorrect();
+				$title_match_val = $tlc->parse($tlc->parse($tmp, 1), 2);
+			}
+			else
+			{
+				$title_match_val = $tmp;
+			}
 			$title_match_sql = clean_text_match($title_match_val, true, false, false);
 		}
 	}

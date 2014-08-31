@@ -430,11 +430,18 @@ if (!$items_found)
 	// Search words
 	if ($var =& $_REQUEST[$text_match_key])
 	{
-		if ($tmp = substr(trim($var), 0, $text_match_max_len))
+		if ($tmp = mb_substr(trim($var), 0, $text_match_max_len))
 		{
-			// Autocorrect wrong keyboard layout
-			$tlc             = new Text_LangCorrect();
-			$title_match_val = $tlc->parse($tlc->parse($tmp, 1), 2);
+			if ($bb_cfg['autocorrect_wkl'])
+			{
+				// Autocorrect wrong keyboard layout
+				$tlc = new Text_LangCorrect();
+				$title_match_val = $tlc->parse($tlc->parse($tmp, 1), 2);
+			}
+			else
+			{
+				$title_match_val = $tmp;
+			}
 			$text_match_sql = clean_text_match($title_match_val, $all_words_val, false, true);
 		}
 	}
@@ -571,7 +578,7 @@ if ($post_mode)
 	{
 		if (empty($tmp[$post_id]))
 		{
-			continue;  // if post was deleted but still remain in search results
+			continue; // if post was deleted but still remain in search results
 		}
 		$topic_id = $tmp[$post_id]['topic_id'];
 		$sorted_rows[$topic_id][] = $tmp[$post_id];

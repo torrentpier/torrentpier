@@ -201,7 +201,7 @@ function poll_manage (mode, confirm_msg)
 function build_poll_add_form (src_el)
 {
 	$('#poll').empty().append( $('#poll-edit-tpl').contents() ).show();
-	$('#poll-legend').html('Добавить опрос');
+	$('#poll-legend').html('{L_ADD_POLL}');
 	$('#poll-edit-submit-btn').click(function(){
 		return poll_manage('poll_add');
 	});
@@ -213,12 +213,12 @@ function build_poll_add_form (src_el)
 	<table class="med bCenter"><tr><td>
 	<fieldset style="padding: 0 8px;">
 	<legend id="poll-legend"></legend>
-		<div style="margin-top: 4px;">заголовок опроса:</div>
+		<div style="margin-top: 4px;">{L_NEW_POLL_M_TITLE}:</div>
 		<input id="poll-caption-inp" name="poll_caption" type="text" value="" class="bold" style="width: 550px;" />
-		<div class="med" style="margin-top: 4px;">варианты ответа:</div>
+		<div class="med" style="margin-top: 4px;">{L_NEW_POLL_M_VOTES}:</div>
 		<textarea id="poll-votes-inp" rows="8" cols="10" wrap="off" class="gen" style="width: 550px;"></textarea>
-		<div class="med mrg_4"><i>каждая строка соответствует одному варианту ответа (максимум: {$bb_cfg['max_poll_options']} вариантов)</i></div>
-		<div class="mrg_8 tCenter"><input id="poll-edit-submit-btn" type="button" value="Отправить" class="bold" style="width: 100px;" /></div>
+		<div class="med mrg_4"><i>{L_NEW_POLL_M_EXPLAIN}: {$bb_cfg['max_poll_options']})</i></div>
+		<div class="mrg_8 tCenter"><input id="poll-edit-submit-btn" type="button" value="{L_SUBMIT}" class="bold" style="width: 100px;" /></div>
 	</fieldset>
 	</td></tr></table>
 </div>

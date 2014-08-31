@@ -24,7 +24,7 @@ if (!$topic_id)
 }
 if (!$t_data = DB()->fetch_row("SELECT * FROM ". BB_TOPICS ." WHERE topic_id = $topic_id LIMIT 1"))
 {
-	bb_die('Тема не найдена');
+	bb_die('Topic not found');
 }
 
 // проверка прав
@@ -32,16 +32,16 @@ if ($mode != 'poll_vote')
 {
 	if ($t_data['topic_poster'] != $userdata['user_id'])
 	{
-		if (!IS_AM) bb_die('Нет прав');
+		if (!IS_AM) bb_die($lang['NOT_AUTHORISED']);
 	}
 }
 
 // проверка на возможность вносить изменения
 if ($mode == 'poll_delete')
 {
-	if ($t_data['topic_time'] < TIMENOW - $bb_cfg['poll_max_days']*86400)
+	if ($t_data['topic_time'] < TIMENOW - $bb_cfg['poll_max_days'] * 86400)
 	{
-		bb_die("Время для этого опроса ({$bb_cfg['poll_max_days']} дней с момента создания темы) уже закончилось");
+		bb_die(sprintf($lang['NEW_POLL_DAYS'], $bb_cfg['poll_max_days']));
 	}
 	if (!IS_ADMIN && ($t_data['topic_vote'] != POLL_FINISHED))
 	{
@@ -63,7 +63,7 @@ switch ($mode)
 		}
 		if (!poll_is_active($t_data))
 		{
-			bb_die('Этот опрос уже завершен');
+			bb_die($lang['NEW_POLL_ENDED']);
 		}
 		if (!$vote_id)
 		{
@@ -100,7 +100,7 @@ switch ($mode)
 			bb_die($lang['POST_HAS_NO_POLL']);
 		}
 		DB()->query("UPDATE ". BB_TOPICS ." SET topic_vote = 1 WHERE topic_id = $topic_id LIMIT 1");
-		bb_die('Опрос включен');
+		bb_die($lang['NEW_POLL_START']);
 		break;
 
 	// завершить опрос
@@ -110,7 +110,7 @@ switch ($mode)
 			bb_die($lang['POST_HAS_NO_POLL']);
 		}
 		DB()->query("UPDATE ". BB_TOPICS ." SET topic_vote = ". POLL_FINISHED ." WHERE topic_id = $topic_id LIMIT 1");
-		bb_die('Опрос завершен');
+		bb_die($lang['NEW_POLL_END']);
 		break;
 
 	// удаление
@@ -120,14 +120,14 @@ switch ($mode)
 			bb_die($lang['POST_HAS_NO_POLL']);
 		}
 		$poll->delete_poll($topic_id);
-		bb_die('Опрос удален');
+		bb_die($lang['NEW_POLL_DELETE']);
 		break;
 
 	// добавление
 	case 'poll_add':
 		if ($t_data['topic_vote'])
 		{
-			bb_die('Тема уже имеет опрос');
+			bb_die($lang['NEW_POLL_ALREADY']);
 		}
 		$poll->build_poll_data($_POST);
 		if ($poll->err_msg)
@@ -135,7 +135,7 @@ switch ($mode)
 			bb_die($poll->err_msg);
 		}
 		$poll->insert_votes_into_db($topic_id);
-		bb_die('Опрос добавлен');
+		bb_die($lang['NEW_POLL_ADDED']);
 		break;
 
 	// редакторование
@@ -151,21 +151,18 @@ switch ($mode)
 		}
 		$poll->insert_votes_into_db($topic_id);
 		CACHE('bb_poll_data')->rm("poll_$topic_id");
-		bb_die('Опрос изменен и старые результаты удалены');
+		bb_die($lang['NEW_POLL_RESULTS']);
 		break;
 
 	default:
-		bb_die("Invalid mode: ". htmlCHR($mode));
+		bb_die('Invalid mode: '. htmlCHR($mode));
 }
 
-// ----------------------------------------------------------- //
 // Functions
-//
-
 class bb_poll
 {
 	var $err_msg    = '';
-	var $poll_votes = array(); // array(vote_id => vote_text)
+	var $poll_votes = array();
 	var $max_votes  = 0;
 
 	function bb_poll ()
@@ -199,7 +196,8 @@ class bb_poll
 		// проверять на "< 3" -- 2 варианта ответа + заголовок
 		if (count($this->poll_votes) < 3 || count($this->poll_votes) > $this->max_votes + 1)
 		{
-			return $this->err_msg = "Вы должны правильно указать варианты ответа (минимум 2, максимум {$this->max_votes})";
+			global $lang;
+			return $this->err_msg = sprintf($lang['NEW_POLL_VOTES'], $this->max_votes);
 		}
 	}
 

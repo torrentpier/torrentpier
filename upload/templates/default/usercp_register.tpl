@@ -269,7 +269,7 @@ ajax.callback.posts = function(data){
 </tr>
 <!-- IF AVATAR_DISALLOWED -->
 <tr>
-	<td colspan="2" class="tCenter pad_12">Опция управления аватарой отключена за нарушение <a href="{$bb_cfg['terms_and_conditions_url']}"><b>правил форума</b></a></td>
+	<td colspan="2" class="tCenter pad_12">{AVATAR_DIS_EXPLAIN}</td>
 </tr>
 <!-- ELSE -->
 <tr>
@@ -279,10 +279,7 @@ ajax.callback.posts = function(data){
 		<col class="w40">
 		<tr>
 			<td>
-				Изображение под вашим именем в сообщениях<br />
-				Максимальные ШИРИНАхВЫСОТА {$bb_cfg['avatars']['max_width']}x{$bb_cfg['avatars']['max_height']} пикселов<br />
-				Максимальный объём {AVATARS_MAX_SIZE}<br />
-
+				{AVATAR_EXPLAIN}
 				<!-- IF $bb_cfg['avatars']['up_allowed'] -->
 				<div class="spacer_4"></div>
 				{L_UPLOAD_AVATAR_FILE}:

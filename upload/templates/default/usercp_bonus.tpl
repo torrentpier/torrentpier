@@ -1,4 +1,3 @@
-
 <span class="maintitle">{PAGE_TITLE}</span>
 
 <table width="100%">

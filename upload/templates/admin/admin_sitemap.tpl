@@ -103,7 +103,7 @@ ajax.callback.sitemap = function(data) {
 		</td>
 	</tr>
 	<tr>
-	  <th colspan="2">{L_SITEMAP_ADD_TITLE}</th>
+		<th colspan="2">{L_SITEMAP_ADD_TITLE}</th>
 	</tr>
 	<tr class="row1">
 		<td class="row1">

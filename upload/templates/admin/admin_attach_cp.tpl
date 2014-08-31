@@ -1,4 +1,3 @@
-
 <h1>{L_CONTROL_PANEL_TITLE}</h1>
 
 <p>{L_CONTROL_PANEL_EXPLAIN}</p>
@@ -189,51 +188,52 @@
 </script>
 
 <form method="post" name="attach_list" action="{S_MODE_ACTION}">
-	<table width="100%">
+<table width="100%">
 	<tr>
-	  <td align="right" nowrap="nowrap"><span class="med">{L_VIEW}:&nbsp;{S_VIEW_SELECT}&nbsp;&nbsp;{L_SORT_BY}:&nbsp;{S_MODE_SELECT}&nbsp;&nbsp;{L_ORDER}&nbsp;{S_ORDER_SELECT}&nbsp;&nbsp;
-		<input type="submit" name="submit" value="{L_SUBMIT}" class="liteoption" />
-		</span>
-	  </td>
+		<td align="right" nowrap="nowrap">
+			<span class="med">{L_VIEW}:&nbsp;{S_VIEW_SELECT}&nbsp;&nbsp;{L_SORT_BY}:&nbsp;{S_MODE_SELECT}&nbsp;&nbsp;{L_ORDER}&nbsp;{S_ORDER_SELECT}&nbsp;&nbsp;
+				<input type="submit" name="submit" value="{L_SUBMIT}" class="liteoption" />
+			</span>
+		</td>
 	</tr>
-  </table>
-  <table class="forumline">
+</table>
+<table class="forumline">
 	<tr>
-	  <th>#</th>
-	  <th>{L_FILENAME}</th>
-	  <th>{L_FILE_COMMENT}</th>
-	  <th>{L_EXTENSION}</th>
-	  <th>{L_SIZE}</th>
-	  <th>{L_DOWNLOADS}</th>
-	  <th>{L_POST_TIME}</th>
-	  <th>{L_POSTED_IN_TOPIC}</th>
-	  <th>{L_DELETE}</th>
+		<th>#</th>
+		<th>{L_FILENAME}</th>
+		<th>{L_FILE_COMMENT}</th>
+		<th>{L_EXTENSION}</th>
+		<th>{L_SIZE}</th>
+		<th>{L_DOWNLOADS}</th>
+		<th>{L_POST_TIME}</th>
+		<th>{L_POSTED_IN_TOPIC}</th>
+		<th>{L_DELETE}</th>
 	</tr>
 	<!-- BEGIN attachrow -->
 	<tr>
-	  <td class="{attachrow.ROW_CLASS}" align="center"><span class="gen">&nbsp;{attachrow.ROW_NUMBER}&nbsp;</span></td>
-	  <td class="{attachrow.ROW_CLASS}" align="center"><span class="gen"><a href="{attachrow.U_VIEW_ATTACHMENT}" class="gen" target="_blank">{attachrow.FILENAME}</a></span></td>
-	  <td class="{attachrow.ROW_CLASS}" align="center"><span class="gen"><input type="text" size="40" maxlength="200" name="attach_comment_list[]" value="{attachrow.COMMENT}" class="post" /></span></td>
-	  <td class="{attachrow.ROW_CLASS}" align="center"><span class="gen">{attachrow.EXTENSION}</span></td>
-	  <td class="{attachrow.ROW_CLASS}" align="center"><span class="gen"><b>{attachrow.SIZE}</b></span></td>
-	  <td class="{attachrow.ROW_CLASS}" align="center"><span class="gen"><input type="text" size="5" maxlength="10" name="attach_count_list[]" value="{attachrow.DOWNLOAD_COUNT}" class="post" /></span></td>
-	  <td class="{attachrow.ROW_CLASS}" align="center"><span class="small">{attachrow.POST_TIME}</span></td>
-	  <td class="{attachrow.ROW_CLASS}" align="center"><span class="gen">{attachrow.POST_TITLE}</span></td>
-	  <td class="{attachrow.ROW_CLASS}" align="center">{attachrow.S_DELETE_BOX}</td>
-	  {attachrow.S_HIDDEN}
+		<td class="{attachrow.ROW_CLASS}" align="center"><span class="gen">&nbsp;{attachrow.ROW_NUMBER}&nbsp;</span></td>
+		<td class="{attachrow.ROW_CLASS}" align="center"><span class="gen"><a href="{attachrow.U_VIEW_ATTACHMENT}" class="gen" target="_blank">{attachrow.FILENAME}</a></span></td>
+		<td class="{attachrow.ROW_CLASS}" align="center"><span class="gen"><input type="text" size="40" maxlength="200" name="attach_comment_list[]" value="{attachrow.COMMENT}" class="post" /></span></td>
+		<td class="{attachrow.ROW_CLASS}" align="center"><span class="gen">{attachrow.EXTENSION}</span></td>
+		<td class="{attachrow.ROW_CLASS}" align="center"><span class="gen"><b>{attachrow.SIZE}</b></span></td>
+		<td class="{attachrow.ROW_CLASS}" align="center"><span class="gen"><input type="text" size="5" maxlength="10" name="attach_count_list[]" value="{attachrow.DOWNLOAD_COUNT}" class="post" /></span></td>
+		<td class="{attachrow.ROW_CLASS}" align="center"><span class="small">{attachrow.POST_TIME}</span></td>
+		<td class="{attachrow.ROW_CLASS}" align="center"><span class="gen">{attachrow.POST_TITLE}</span></td>
+		<td class="{attachrow.ROW_CLASS}" align="center">{attachrow.S_DELETE_BOX}</td>
+		{attachrow.S_HIDDEN}
 	</tr>
 	<!-- END attachrow -->
 	<tr>
-	  <td class="catBottom" colspan="9">
-		<input type="submit" name="submit_change" value="{L_SUBMIT_CHANGES}" class="mainoption" />
-		&nbsp;
-		<input type="submit" name="delete" value="{L_DELETE_MARKED}" class="liteoption" />
-	  </td>
+		<td class="catBottom" colspan="9">
+			<input type="submit" name="submit_change" value="{L_SUBMIT_CHANGES}" class="mainoption" />
+			&nbsp;
+			<input type="submit" name="delete" value="{L_DELETE_MARKED}" class="liteoption" />
+		</td>
 	</tr>
-  </table>
+</table>
 
 <!-- BEGIN switch_user_based -->
-  {S_USER_HIDDEN}
+	{S_USER_HIDDEN}
 <!-- END switch_user_based -->
 
 <table width="100%">

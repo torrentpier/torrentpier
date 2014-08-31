@@ -10,7 +10,7 @@ $sql = "SELECT forum_name, allow_reg_tracker, forum_tpl_id FROM ". BB_FORUMS ." 
 
 if (!$forum_id OR !$f_data = DB()->fetch_row($sql))
 {
-	bb_die('Форум не найден');
+	bb_die($lang['FORUM_NOT_EXIST']);
 }
 // tpl_data
 $tpl_data = array();
@@ -25,7 +25,7 @@ if (!$f_data['forum_tpl_id'] OR !$tpl_data = DB()->fetch_row($sql))
 }
 
 $template->assign_vars(array(
-	'PAGE_TITLE'         => 'Новый релиз',
+	'PAGE_TITLE'         => $lang['NEW_RELEASE'],
 	'FORUM_NAME'         => $f_data['forum_name'],
 	'FORUM_ID'           => $forum_id,
 	'TPL_FORM_ACTION'    => POSTING_URL . "?mode=newtopic&amp;f=$forum_id",

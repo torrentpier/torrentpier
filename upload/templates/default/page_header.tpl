@@ -233,7 +233,7 @@ function go_to_page ()
 <div id="page_header">
 
 <div id="old-browser-warn" style="background: #FFF227; padding: 8px 0 10px; text-align: center; font-size: 14px; display: none; ">
-	<b>Вы используете устаревший браузер. Сайт может отображаться некорректно.</b>
+	<b>{L_OLD_BROWSER}</b>
 </div>
 <script>
 if ( (typeof(window.opera) != "undefined" && window.opera.version() < 12) || (window.attachEvent && !window.addEventListener) /* IE < 9 */ ) {

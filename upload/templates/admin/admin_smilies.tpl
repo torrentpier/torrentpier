@@ -1,10 +1,9 @@
-
 <!-- IF TPL_SMILE_MAIN -->
 <!--========================================================================-->
 
 <h1>{L_SMILEY_TITLE}</h1>
 
-<P>{L_SMILE_DESC}</p>
+<p>{L_SMILE_DESC}</p>
 <br />
 
 <form method="post" action="{S_SMILEY_ACTION}">
@@ -115,4 +114,3 @@ function update_smiley(newimage)
 
 <!--========================================================================-->
 <!-- ENDIF / TPL_SMILE_IMPORT -->
-

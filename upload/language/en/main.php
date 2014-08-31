@@ -235,8 +235,8 @@ $lang['VIEW_TOPIC'] = 'View topic';
 
 $lang['GUEST'] = 'Guest';
 $lang['POST_SUBJECT'] = 'Post subject';
-$lang['SUBMIT_VOTE'] = 'Submit Vote';
-$lang['VIEW_RESULTS'] = 'View Results';
+$lang['SUBMIT_VOTE'] = 'Submit vote';
+$lang['VIEW_RESULTS'] = 'View results';
 
 $lang['NO_NEWER_TOPICS'] = 'There are no newer topics in this forum';
 $lang['NO_OLDER_TOPICS'] = 'There are no older topics in this forum';
@@ -326,29 +326,29 @@ $lang['POST_DOWNLOAD'] = 'Download';
 $lang['CONFIRM_DELETE'] = 'Are you sure you want to delete this post?';
 $lang['CONFIRM_DELETE_POLL'] = 'Are you sure you want to delete this poll?';
 
-$lang['FLOOD_ERROR'] = 'You cannot make another post so soon after your last; please try again in a short while.';
-$lang['EMPTY_SUBJECT'] = 'You must specify a subject.';
-$lang['EMPTY_MESSAGE'] = 'You must enter a message.';
-$lang['FORUM_LOCKED'] = 'This forum is locked: you cannot post, reply to, or edit topics.';
-$lang['TOPIC_LOCKED'] = 'This topic is locked: you cannot edit posts or make replies.';
+$lang['FLOOD_ERROR'] = 'You cannot make another post so soon after your last; please try again in a short while';
+$lang['EMPTY_SUBJECT'] = 'You must specify a subject';
+$lang['EMPTY_MESSAGE'] = 'You must enter a message';
+$lang['FORUM_LOCKED'] = 'This forum is locked: you cannot post, reply to, or edit topics';
+$lang['TOPIC_LOCKED'] = 'This topic is locked: you cannot edit posts or make replies';
 $lang['TOPIC_LOCKED_SHORT'] = 'Topic locked';
 $lang['NO_POST_ID'] = 'You must select a post to edit';
 $lang['NO_TOPIC_ID'] = 'You must select a topic to reply to';
-$lang['NO_VALID_MODE'] = 'You can only post, reply, edit, or quote messages. Please return and try again.';
-$lang['NO_SUCH_POST'] = 'There is no such post. Please return and try again.';
-$lang['EDIT_OWN_POSTS'] = 'Sorry, but you can only edit your own posts.';
-$lang['DELETE_OWN_POSTS'] = 'Sorry, but you can only delete your own posts.';
-$lang['CANNOT_DELETE_REPLIED'] = 'Sorry, but you may not delete posts that have been replied to.';
-$lang['CANNOT_DELETE_POLL'] = 'Sorry, but you cannot delete an active poll.';
-$lang['EMPTY_POLL_TITLE'] = 'You must enter a title for your poll.';
-$lang['TO_FEW_POLL_OPTIONS'] = 'You must enter at least two poll options.';
-$lang['TO_MANY_POLL_OPTIONS'] = 'You have tried to enter too many poll options.';
-$lang['POST_HAS_NO_POLL'] = 'This post has no poll.';
-$lang['ALREADY_VOTED'] = 'You have already voted in this poll.';
-$lang['NO_VOTE_OPTION'] = 'You must specify an option when voting.';
+$lang['NO_VALID_MODE'] = 'You can only post, reply, edit, or quote messages. Please return and try again';
+$lang['NO_SUCH_POST'] = 'There is no such post. Please return and try again';
+$lang['EDIT_OWN_POSTS'] = 'Sorry, but you can only edit your own posts';
+$lang['DELETE_OWN_POSTS'] = 'Sorry, but you can only delete your own posts';
+$lang['CANNOT_DELETE_REPLIED'] = 'Sorry, but you may not delete posts that have been replied to';
+$lang['CANNOT_DELETE_POLL'] = 'Sorry, but you cannot delete an active poll';
+$lang['EMPTY_POLL_TITLE'] = 'You must enter a title for your poll';
+$lang['TO_FEW_POLL_OPTIONS'] = 'You must enter at least two poll options';
+$lang['TO_MANY_POLL_OPTIONS'] = 'You have tried to enter too many poll options';
+$lang['POST_HAS_NO_POLL'] = 'This post has no poll';
+$lang['ALREADY_VOTED'] = 'You have already voted in this poll';
+$lang['NO_VOTE_OPTION'] = 'You must specify an option when voting';
 $lang['LOCKED_WARN'] = 'You posted into locked topic!';
 
-$lang['ADD_POLL'] = 'Add a Poll';
+$lang['ADD_POLL'] = 'Add a poll';
 $lang['ADD_POLL_EXPLAIN'] = 'If you do not want to add a poll to your topic, leave the fields blank.';
 $lang['POLL_QUESTION'] = 'Poll question';
 $lang['POLL_OPTION'] = 'Poll option';
@@ -357,7 +357,7 @@ $lang['UPDATE'] = 'Update';
 $lang['POLL_FOR'] = 'Run poll for';
 $lang['DAYS'] = 'Days';
 $lang['POLL_FOR_EXPLAIN'] = '[ Enter 0 or leave blank for a never-ending poll ]';
-$lang['DELETE_POLL'] = 'Delete Poll';
+$lang['DELETE_POLL'] = 'Delete poll';
 
 $lang['MAX_SMILIES_PER_POST'] = 'Emoticons limit of %s emoticons exceeded.';
 
@@ -581,20 +581,22 @@ $lang['PASSWORD_CONFIRM_IF_CHANGED'] = 'You only need to confirm your password i
 
 $lang['AUTOLOGIN'] = 'Autologin';
 $lang['RESET_AUTOLOGIN'] = 'Reset autologin key';
-$lang['RESET_AUTOLOGIN_EXPL'] = '';
+$lang['RESET_AUTOLOGIN_EXPL'] = 'including all the places you\'ve visited the forum enabled auto-login';
 
 $lang['AVATAR'] = 'Avatar';
 $lang['AVATAR_EXPLAIN'] = 'Displays a small graphic image below your details in posts. Only one image can be displayed at a time, its width can be no greater than %d pixels, the height no greater than %d pixels, and the file size no more than %d KB.';
-$lang['UPLOAD_AVATAR_FILE'] = 'Upload Avatar';
+$lang['AVATAR_DELETE'] = 'Delete avatar';
+$lang['AVATAR_DISABLE'] = 'Avatar control option disabled for violation <a href="%s"><b>forum rules</b></a>';
+$lang['UPLOAD_AVATAR_FILE'] = 'Upload avatar';
 
 $lang['SELECT_AVATAR'] = 'Select avatar';
 $lang['RETURN_PROFILE'] = 'Return to profile';
 $lang['SELECT_CATEGORY'] = 'Select category';
 
-$lang['DELETE_IMAGE'] = 'Delete Image';
-$lang['CURRENT_IMAGE'] = 'Current Image';
+$lang['DELETE_IMAGE'] = 'Delete image';
+$lang['CURRENT_IMAGE'] = 'Current image';
 
-$lang['NOTIFY_ON_PRIVMSG'] = 'Notify on new Private Message';
+$lang['NOTIFY_ON_PRIVMSG'] = 'Notify on new private message';
 $lang['HIDE_USER'] = 'Hide your online status';
 $lang['HIDDEN_USER'] = 'Hidden user';
 
@@ -617,10 +619,6 @@ $lang['EMAIL_TOO_LONG'] = 'Your email is too long.';
 $lang['SIGNATURE_TOO_LONG'] = 'Your signature is too long.';
 $lang['SIGNATURE_ERROR_HTML'] = 'The signature can contain only BBCode';
 $lang['FIELDS_EMPTY'] = 'You must fill in the required fields.';
-$lang['AVATAR_FILETYPE'] = 'The avatar filetype must be .jpg, .gif or .png';
-$lang['AVATAR_FILESIZE'] = 'The avatar image file size must be less than %d KB'; // The avatar image file size must be less than 6 KB
-$lang['AVATAR_IMAGESIZE'] = 'The avatar must be less than %d pixels wide and %d pixels high';
-$lang['AVATAR_DISABLE'] = 'Forbidden to show avatar';
 
 $lang['WELCOME_SUBJECT'] = 'Welcome to %s Forums'; // Welcome to my.com forums
 $lang['NEW_ACCOUNT_SUBJECT'] = 'New user account';
@@ -1909,6 +1907,7 @@ $lang['SET_PRUNE_DATA'] = 'You have turned on auto-prune for this forum but did 
 $lang['MOVE_AND_DELETE'] = 'Move and Delete';
 
 $lang['DELETE_ALL_POSTS'] = 'Delete all posts';
+$lang['DELETE_ALL_TOPICS'] = 'Delete all topics, including announcements and sticky';
 $lang['NOWHERE_TO_MOVE'] = 'Nowhere to move to';
 
 $lang['EDIT_CATEGORY'] = 'Edit Category';
@@ -2533,7 +2532,8 @@ $lang['CRON_DISABLE'] = 'Disable';
 $lang['CRON_ENABLE'] = 'Enable';
 
 $lang['RUN_MAIN_CRON'] = 'Start cron';
-$lang['ADD_JOB'] = 'Add cron';
+$lang['ADD_JOB'] = 'Add cron job';
+$lang['DELETE_JOB'] = 'Are you sure you want to delete cron job?';
 $lang['CRON_WORKS'] = 'Cron is now works or is broken -> ';
 $lang['REPAIR_CRON'] = 'Repair Cron';
 
@@ -2881,3 +2881,52 @@ $lang['HASH_NOT_FOUND'] = 'Release with hash %s not found';
 
 $lang['TERMS_EMPTY_TEXT'] = '[align=center]The text of this page is edited at: [url=http://%s/admin/admin_terms.php]admin/admin_terms.php[/url]. This line can see only administrators.[/align]';
 $lang['TERMS_EXPLAIN'] = 'On this page, you can specify the text of the basic rules of the resource is displayed to users.';
+
+$lang['TR_STATS'] = array(
+	0 => 'inactive users in 30 days',
+	1 => 'inactive users for 90 days',
+	2 => 'medium size distributions on the tracker (many megabytes)',
+	3 => 'how many total hands on the tracker',
+	4 => 'how many live hands (there is at least 1 led)',
+	5 => 'how many hands where that seeding more than 5 seeds',
+	6 => 'how many of us uploaders (those who filled at least 1 hand)',
+	7 => 'how many uploaders over the last 30 days',
+);
+
+$lang['NEW_POLL_START'] = 'Poll enabled';
+$lang['NEW_POLL_END'] = 'Poll completed';
+$lang['NEW_POLL_ENDED'] = 'This poll has already been completed';
+$lang['NEW_POLL_DELETE'] = 'Poll deleted';
+$lang['NEW_POLL_ADDED'] = 'Poll added';
+$lang['NEW_POLL_ALREADY'] = 'Theme already has a poll';
+$lang['NEW_POLL_RESULTS'] = 'Poll changed and the old results deleted';
+$lang['NEW_POLL_VOTES'] = 'You must enter a correct response options (minimum 2, maximum is %s)';
+$lang['NEW_POLL_DAYS'] = 'The time of the poll (%s days from the moment of creation theme) already ended';
+$lang['NEW_POLL_U_NOSEL'] = 'You have not selected that vote';
+$lang['NEW_POLL_U_CHANGE'] = 'Edit poll';
+$lang['NEW_POLL_U_EDIT'] = 'Change the poll (the old results will be deleted)';
+$lang['NEW_POLL_U_VOTED'] = 'All voted';
+$lang['NEW_POLL_U_START'] = 'Enable poll';
+$lang['NEW_POLL_U_END'] = 'Finish poll';
+$lang['NEW_POLL_M_TITLE'] = 'Title of poll';
+$lang['NEW_POLL_M_VOTES'] = 'Options';
+$lang['NEW_POLL_M_EXPLAIN'] = 'Each row corresponds to one answer (max';
+
+$lang['OLD_BROWSER'] = 'You are using an outdated browser. The website will not display correctly.';
+$lang['GO_BACK'] = 'Go back';
+
+$lang['UPLOAD_ERROR_COMMON'] = 'File upload error';
+$lang['UPLOAD_ERROR_SIZE'] = 'The uploaded file exceeds the maximum size of %s';
+$lang['UPLOAD_ERROR_FORMAT'] = 'Invalid file type of image';
+$lang['UPLOAD_ERROR_DIMENSIONS'] = 'Image dimensions exceed the maximum allowable %sx%s px';
+$lang['UPLOAD_ERROR_NOT_IMAGE'] = 'The uploaded file is not an image';
+$lang['UPLOAD_ERROR_NOT_ALLOWED'] = 'Extension %s for downloads is not allowed';
+$lang['UPLOAD_ERRORS'] = array(
+	UPLOAD_ERR_INI_SIZE   => 'you have exceeded the maximum file size for the server',
+	UPLOAD_ERR_FORM_SIZE  => 'you have exceeded the maximum file upload size',
+	UPLOAD_ERR_PARTIAL    => 'the file was partially downloaded',
+	UPLOAD_ERR_NO_FILE    => 'file was not uploaded',
+	UPLOAD_ERR_NO_TMP_DIR => 'temporary directory not found',
+	UPLOAD_ERR_CANT_WRITE => 'write error',
+	UPLOAD_ERR_EXTENSION  => 'upload stopped by extension',
+);

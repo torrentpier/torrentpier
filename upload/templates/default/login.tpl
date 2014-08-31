@@ -1,4 +1,3 @@
-
 <h1 class="pagetitle">{PAGE_TITLE}</h1>
 
 <form action="{S_LOGIN_ACTION}" method="post">

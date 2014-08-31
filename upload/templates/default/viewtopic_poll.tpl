@@ -1,11 +1,10 @@
-
 <script type="text/javascript">
 var bb_poll = {};
-bb_poll.data        = {POLL_VOTES_JS};  // [["заголовок", "result"], ...]
+bb_poll.data        = {POLL_VOTES_JS}; // [["заголовок", "result"], ...]
 bb_poll.title       = '';
 bb_poll.votes_data  = {};
 bb_poll.votes_sum   = 0;
-bb_poll.max_img_len = 205;   // 100% = this length
+bb_poll.max_img_len = 205; // 100% = this length
 
 $(function(){
 	$.each(bb_poll.data, function(vote_id, vote_data){
@@ -66,7 +65,7 @@ function submit_vote ()
 	var $voted_id = $('input.vote-inp:checked');
 
 	if ($voted_id.length == 0) {
-		alert('Вы не выбрали, за что голосуете');
+		alert('{L_NEW_POLL_U_NOSEL}');
 	}
 	else {
 		$('#poll-mode').val('poll_vote');
@@ -79,9 +78,9 @@ function submit_vote ()
 function build_poll_edit_form ()
 {
 	$('#poll').empty().append($('#poll-edit-tpl').contents());
-	$('#poll-legend').html('Изменить опрос');
+	$('#poll-legend').html('{L_NEW_POLL_U_CHANGE}');
 	$('#poll-edit-submit-btn').click(function(){
-		return poll_manage('poll_edit', 'Изменить опрос (старые результаты будут удалены)?');
+		return poll_manage('poll_edit', '{L_NEW_POLL_U_EDIT}?');
 	});
 
 	$('#poll-caption-inp').val( html2text(bb_poll.title) );
@@ -131,10 +130,10 @@ function html2text (str)
 <div id="vote-btn-a" class="mrg_8 tCenter">[ <a href="#" onclick="build_votes(); return false;" class="gen"><b>{L_SUBMIT_VOTE}</b></a> ]</div>
 <div id="vote-btn-input" class="mrg_6 tCenter" style="display: none;"><input type="button" onclick="submit_vote(); return false;" value="{L_SUBMIT_VOTE}" class="bold" /></div>
 <!-- ELSE -->
-<div class="mrg_8 tCenter">[ <b>Опрос завершен</b> ]</div>
+<div class="mrg_8 tCenter">[ <b>{L_NEW_POLL_END}</b> ]</div>
 <!-- ENDIF -->
 
-<div id="votes-sum-block" class="mrg_8 tCenter">Всего проголосовало: <span id="votes-sum-val"></span><b></b></div>
+<div id="votes-sum-block" class="mrg_8 tCenter">{L_NEW_POLL_U_VOTED}: <span id="votes-sum-val"></span><b></b></div>
 
 <!-- IF CAN_MANAGE_POLL -->
 <div id="poll-manage" class="mrg_8 tCenter">
@@ -142,9 +141,9 @@ function html2text (str)
 	<!-- IF POLL_IS_EDITABLE -->
 	[ <a href="#" onclick="return build_poll_edit_form();" class="med">{L_EDIT}</a> ]&nbsp;&nbsp;
 		<!-- IF POLL_IS_FINISHED -->
-		[ <a href="#" onclick="return poll_manage('poll_start', 'Включить опрос?');" class="med">Включить опрос</a> ]&nbsp;&nbsp;
+		[ <a href="#" onclick="return poll_manage('poll_start', '{L_NEW_POLL_U_START}?');" class="med">{L_NEW_POLL_U_START}</a> ]
 		<!-- ELSE -->
-		[ <a href="#" onclick="return poll_manage('poll_finish', 'Завершить опрос?');" class="med">Завершить опрос</a> ]&nbsp;&nbsp;
+		[ <a href="#" onclick="return poll_manage('poll_finish', '{L_NEW_POLL_U_END}?');" class="med">{L_NEW_POLL_U_END}</a> ]
 		<!-- ENDIF -->
 	<!-- ENDIF -->
 </div>

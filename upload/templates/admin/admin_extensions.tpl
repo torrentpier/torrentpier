@@ -1,4 +1,3 @@
-
 <!-- IF TPL_ATTACH_EXTENSIONS -->
 <!--========================================================================-->
 
@@ -217,4 +216,3 @@
 <!-- ENDIF / TPL_ATTACH_EXTENSION_GROUPS_PERMISSIONS -->
 
 <br clear="all" />
-

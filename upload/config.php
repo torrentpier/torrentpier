@@ -71,9 +71,9 @@ $domain_name = 'torrentpier.me';  // enter here your primary domain name of your
 $domain_name = (!empty($_SERVER['SERVER_NAME'])) ? $_SERVER['SERVER_NAME'] : $domain_name;
 
 // Version info
-$bb_cfg['tp_version'] = '2.1 (RC)';
-$bb_cfg['tp_release_date'] = '31-08-2014';
-$bb_cfg['tp_release_state'] = 'R599b';
+$bb_cfg['tp_version'] = '2.1 (STABLE)';
+$bb_cfg['tp_release_date'] = '01-09-2014';
+$bb_cfg['tp_release_state'] = 'R600';
 
 // Database
 $charset  = 'utf8';
@@ -81,9 +81,11 @@ $pconnect = false;
 
 // Настройка баз данных ['db']['srv_name'] => (array) srv_cfg;
 // порядок параметров srv_cfg (хост, название базы, пользователь, пароль, charset, pconnect);
-$bb_cfg['db']['db1'] = array('localhost', 'dbase', 'user', 'pass', $charset, $pconnect);
-//$bb_cfg['db']['db2'] = array('localhost2', 'dbase2', 'user2', 'pass2', $charset, $pconnect);
-//$bb_cfg['db']['db3'] = array('localhost3', 'dbase3', 'user2', 'pass3', $charset, $pconnect);
+$bb_cfg['db'] = array(
+	'db1' => array('localhost', 'dbase', 'user', 'pass', $charset, $pconnect),
+	//'db2' => array('localhost2', 'dbase2', 'user2', 'pass2', $charset, $pconnect),
+	//'db3' => array('localhost3', 'dbase3', 'user2', 'pass3', $charset, $pconnect),
+);
 
 $bb_cfg['db_alias'] = array(
 //	'alias'  => 'srv_name'
@@ -482,7 +484,8 @@ $bb_cfg['max_search_words_per_post']  = 200;
 $bb_cfg['search_min_word_len']        = 3;
 $bb_cfg['search_max_word_len']        = 35;
 $bb_cfg['limit_max_search_results']   = false;
-$bb_cfg['spam_filter_file_path']      = '';        //BB_PATH .'/misc/spam_filter_words.txt';
+$bb_cfg['spam_filter_file_path']      = '';        // BB_PATH .'/misc/spam_filter_words.txt';
+$bb_cfg['autocorrect_wkl']            = true;      // autocorrect wrong keyboard layout
 
 // Posting
 $bb_cfg['prevent_multiposting']  = true;           // replace "reply" with "edit last msg" if user (not admin or mod) is last topic poster
