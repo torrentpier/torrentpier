@@ -14,6 +14,13 @@ $user->session_start();
 set_die_append_msg();
 if (!IS_SUPER_ADMIN) bb_die($lang['ONLY_FOR_SUPER_ADMIN']);
 
+bb_die('
+	<h1 style="color: red">Для обновления до стабильной ревизии R600, вам необходимо воспользоваться <a
+	href="http://torrentpier.me/threads/26146/">инструкцией, опубликованной в данной теме</a> на нашем форуме.
+	Вы также можете заглянуть в исходный код этого скрипта, в нем опубликована схема изменений от ревизии 400,
+	до ревизии 600. Не забывайте про бекап базы данных перед обновлением!</h1>
+');
+
 /*
 
 Схема изенений r400->r600 для написания конвертера.
@@ -25,7 +32,9 @@ ALTER TABLE `bb_posts` ADD `post_mod_comment` TEXT NOT NULL DEFAULT '';         
 ALTER TABLE `bb_posts` ADD `post_mod_comment_type` TINYINT( 1 ) NOT NULL DEFAULT '0'; // добавлено 458
 ALTER TABLE `bb_posts` ADD `post_mc_mod_id` mediumint(8) NOT NULL;                    // добавлено 458
 ALTER TABLE `bb_posts` ADD `post_mc_mod_name` varchar(25) NOT NULL DEFAULT '';        // добавлено 458
+
 // 496 - отдельный конвертер
+
 ALTER TABLE `bb_users` ADD `tpl_name` varchar(255) NOT NULL DEFAULT 'default';        // добавлено 507
 UPDATE `bb_config` SET `config_value` = '1' WHERE `config_name` = 'bt_unset_dltype_on_tor_unreg';
                                                                                       // изменено 508 ↑
@@ -56,12 +65,16 @@ DELETE FROM `bb_config` WHERE `config_name` = 'bt_add_comment';                 
 DELETE FROM `bb_config` WHERE `config_name` = 'bt_add_publisher';                     // удалено 565
 DELETE FROM `bb_config` WHERE `config_name` = 'bt_gen_passkey_on_reg';                // удалено 565
 DROP TABLE IF EXISTS `sph_counter`;                                                   // удалено 571
+
 // 571 - отдельный конвертер
+
 DELETE FROM `bb_config` WHERE `config_name` = 'max_inbox_privmsgs';                   // удалено 573
 DELETE FROM `bb_config` WHERE `config_name` = 'max_savebox_privmsgs';                 // удалено 573
 DELETE FROM `bb_config` WHERE `config_name` = 'max_sentbox_privmsgs';                 // удалено 573
 DELETE FROM `bb_config` WHERE `config_name` = 'privmsg_disable';                      // удалено 573
+
 // 575 - отдельный конвертер
+
 DELETE FROM `bb_config` WHERE `config_name` = 'config_id';                            // удалено 579
 DELETE FROM `bb_config` WHERE `config_name` = 'sendmail_fix';                         // удалено 579
 DELETE FROM `bb_config` WHERE `config_name` = 'version';                              // удалено 579
@@ -86,13 +99,17 @@ DELETE FROM `bb_config` WHERE `config_name` = 'no_avatar';                      
 UPDATE `bb_config` SET `config_value` = '0' WHERE `config_name` = 'show_mod_index';   // изменено 583
 DELETE FROM `bb_cron` WHERE `cron_script` = 'avatars_cleanup.php';                    // удалено 583
 UPDATE `bb_cron` SET `cron_id` = '30' WHERE `cron_script` = 'attach_maintenance.php'; // изменено 583
+
 // 583 - отдельный конвертер
+
 DROP TABLE IF EXISTS `bb_topic_templates`;                                            // удалено 584
 ALTER TABLE `bb_forums` DROP `topic_tpl_id`;                                          // удалено 584
 UPDATE `bb_config` SET `config_value` = 'http://ip-whois.net/ip_geos.php?ip=' WHERE `config_name` = 'whois_info';
                                                                                       // обновлено 586 ↑
 UPDATE `bb_config` SET `config_value` = 'ru' WHERE `config_name` = 'default_lang';    // обновлено 588
+
 // 588 - отдельный конвертер
+
 ALTER TABLE `bb_users` DROP `user_next_birthday_greeting`;                            // удалено 589
 ALTER TABLE `bb_posts` CHANGE `post_mod_comment` `mc_comment` TEXT CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT '';
                                                                                       // изменено 590 ↑
