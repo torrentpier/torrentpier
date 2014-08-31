@@ -765,6 +765,7 @@ $template->assign_vars(array(
 
 	'AVATAR_EXPLAIN'     => sprintf($lang['AVATAR_EXPLAIN'], $bb_cfg['avatars']['max_width'], $bb_cfg['avatars']['max_height'], (round($bb_cfg['avatars']['max_size'] / 1024))),
 	'AVATAR_DISALLOWED'  => bf($pr_data['user_opt'], 'user_opt', 'dis_avatar'),
+	'AVATAR_DIS_EXPLAIN' => sprintf($lang['AVATAR_DISABLE'], $bb_cfg['terms_and_conditions_url']),
 
 	'SIGNATURE_EXPLAIN'  => sprintf($lang['SIGNATURE_EXPLAIN'], $bb_cfg['max_sig_chars']),
 	'SIG_DISALLOWED'     => bf($pr_data['user_opt'], 'user_opt', 'dis_sig'),

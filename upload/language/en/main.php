@@ -586,6 +586,7 @@ $lang['RESET_AUTOLOGIN_EXPL'] = 'including all the places you\'ve visited the fo
 $lang['AVATAR'] = 'Avatar';
 $lang['AVATAR_EXPLAIN'] = 'Displays a small graphic image below your details in posts. Only one image can be displayed at a time, its width can be no greater than %d pixels, the height no greater than %d pixels, and the file size no more than %d KB.';
 $lang['AVATAR_DELETE'] = 'Delete avatar';
+$lang['AVATAR_DISABLE'] = 'Avatar control option disabled for violation <a href="%s"><b>forum rules</b></a>';
 $lang['UPLOAD_AVATAR_FILE'] = 'Upload avatar';
 
 $lang['SELECT_AVATAR'] = 'Select avatar';
@@ -618,10 +619,6 @@ $lang['EMAIL_TOO_LONG'] = 'Your email is too long.';
 $lang['SIGNATURE_TOO_LONG'] = 'Your signature is too long.';
 $lang['SIGNATURE_ERROR_HTML'] = 'The signature can contain only BBCode';
 $lang['FIELDS_EMPTY'] = 'You must fill in the required fields.';
-$lang['AVATAR_FILETYPE'] = 'The avatar filetype must be .jpg, .gif or .png';
-$lang['AVATAR_FILESIZE'] = 'The avatar image file size must be less than %d KB'; // The avatar image file size must be less than 6 KB
-$lang['AVATAR_IMAGESIZE'] = 'The avatar must be less than %d pixels wide and %d pixels high';
-$lang['AVATAR_DISABLE'] = 'Forbidden to show avatar';
 
 $lang['WELCOME_SUBJECT'] = 'Welcome to %s Forums'; // Welcome to my.com forums
 $lang['NEW_ACCOUNT_SUBJECT'] = 'New user account';
