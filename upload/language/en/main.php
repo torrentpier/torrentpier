@@ -585,7 +585,8 @@ $lang['RESET_AUTOLOGIN_EXPL'] = 'including all the places you\'ve visited the fo
 
 $lang['AVATAR'] = 'Avatar';
 $lang['AVATAR_EXPLAIN'] = 'Displays a small graphic image below your details in posts. Only one image can be displayed at a time, its width can be no greater than %d pixels, the height no greater than %d pixels, and the file size no more than %d KB.';
-$lang['UPLOAD_AVATAR_FILE'] = 'Upload Avatar';
+$lang['AVATAR_DELETE'] = 'Delete avatar';
+$lang['UPLOAD_AVATAR_FILE'] = 'Upload avatar';
 
 $lang['SELECT_AVATAR'] = 'Select avatar';
 $lang['RETURN_PROFILE'] = 'Return to profile';
@@ -2916,3 +2917,19 @@ $lang['NEW_POLL_M_EXPLAIN'] = 'Each row corresponds to one answer (max';
 
 $lang['OLD_BROWSER'] = 'You are using an outdated browser. The website will not display correctly.';
 $lang['GO_BACK'] = 'Go back';
+
+$lang['UPLOAD_ERROR_COMMON'] = 'File upload error';
+$lang['UPLOAD_ERROR_SIZE'] = 'The uploaded file exceeds the maximum size of %s';
+$lang['UPLOAD_ERROR_FORMAT'] = 'Invalid file type of image';
+$lang['UPLOAD_ERROR_DIMENSIONS'] = 'Image dimensions exceed the maximum allowable %sx%s px';
+$lang['UPLOAD_ERROR_NOT_IMAGE'] = 'The uploaded file is not an image';
+$lang['UPLOAD_ERROR_NOT_ALLOWED'] = 'Extension %s for downloads is not allowed';
+$lang['UPLOAD_ERRORS'] = array(
+	UPLOAD_ERR_INI_SIZE   => 'you have exceeded the maximum file size for the server',
+	UPLOAD_ERR_FORM_SIZE  => 'you have exceeded the maximum file upload size',
+	UPLOAD_ERR_PARTIAL    => 'the file was partially downloaded',
+	UPLOAD_ERR_NO_FILE    => 'file was not uploaded',
+	UPLOAD_ERR_NO_TMP_DIR => 'temporary directory not found',
+	UPLOAD_ERR_CANT_WRITE => 'write error',
+	UPLOAD_ERR_EXTENSION  => 'upload stopped by extension',
+);

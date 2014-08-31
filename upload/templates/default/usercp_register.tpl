@@ -281,7 +281,7 @@ ajax.callback.posts = function(data){
 			<td>
 				Изображение под вашим именем в сообщениях<br />
 				Максимальные ШИРИНАхВЫСОТА {$bb_cfg['avatars']['max_width']}x{$bb_cfg['avatars']['max_height']} пикселов<br />
-				Максимальный объём {AVATARS_MAX_SIZE}<br />
+				Максимальный объем {AVATARS_MAX_SIZE}<br />
 
 				<!-- IF $bb_cfg['avatars']['up_allowed'] -->
 				<div class="spacer_4"></div>
