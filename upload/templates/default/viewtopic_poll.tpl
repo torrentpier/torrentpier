@@ -65,7 +65,7 @@ function submit_vote ()
 	var $voted_id = $('input.vote-inp:checked');
 
 	if ($voted_id.length == 0) {
-		alert('Вы не выбрали, за что голосуете');
+		alert('{L_NEW_POLL_U_NOSEL}');
 	}
 	else {
 		$('#poll-mode').val('poll_vote');

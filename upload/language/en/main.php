@@ -1909,6 +1909,7 @@ $lang['SET_PRUNE_DATA'] = 'You have turned on auto-prune for this forum but did 
 $lang['MOVE_AND_DELETE'] = 'Move and Delete';
 
 $lang['DELETE_ALL_POSTS'] = 'Delete all posts';
+$lang['DELETE_ALL_TOPICS'] = 'Delete all topics, including announcements and sticky';
 $lang['NOWHERE_TO_MOVE'] = 'Nowhere to move to';
 
 $lang['EDIT_CATEGORY'] = 'Edit Category';
@@ -2533,7 +2534,8 @@ $lang['CRON_DISABLE'] = 'Disable';
 $lang['CRON_ENABLE'] = 'Enable';
 
 $lang['RUN_MAIN_CRON'] = 'Start cron';
-$lang['ADD_JOB'] = 'Add cron';
+$lang['ADD_JOB'] = 'Add cron job';
+$lang['DELETE_JOB'] = 'Are you sure you want to delete cron job?';
 $lang['CRON_WORKS'] = 'Cron is now works or is broken -> ';
 $lang['REPAIR_CRON'] = 'Repair Cron';
 
@@ -2911,3 +2913,6 @@ $lang['NEW_POLL_U_END'] = 'Finish poll';
 $lang['NEW_POLL_M_TITLE'] = 'Title of poll';
 $lang['NEW_POLL_M_VOTES'] = 'Options';
 $lang['NEW_POLL_M_EXPLAIN'] = 'Each row corresponds to one answer (max';
+
+$lang['OLD_BROWSER'] = 'You are using an outdated browser. The website will not display correctly.';
+$lang['GO_BACK'] = 'Go back';
