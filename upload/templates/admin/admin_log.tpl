@@ -1,4 +1,3 @@
-
 <style type="text/css">
 .log_msg { max-height: 100px; overflow: auto; }
 table.log_filters { padding: 6px; width: 100%; }

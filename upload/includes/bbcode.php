@@ -578,7 +578,7 @@ class bbcode
 			$url_exp = '[\w\#!$%&~/.\-;:=,?@а-яА-Я\[\]+]+?';
 			$text = preg_replace_callback("#\[url\]((?:https?://)?$url_exp)\[/url\]#isu", array(&$this, 'url_callback'), $text);
 			$text = preg_replace_callback("#\[url\](www\.$url_exp)\[/url\]#isu", array(&$this, 'url_callback'), $text);
-			$text = preg_replace_callback("#\[url=(https?://$url_exp)\]([^?\n\t].*?)\[/url\]#isu", array(&$this, 'url_callback'), $text);
+			$text = preg_replace_callback("#\[url=((?:https?://)?$url_exp)\]([^?\n\t].*?)\[/url\]#isu", array(&$this, 'url_callback'), $text);
 			$text = preg_replace_callback("#\[url=(www\.$url_exp)\]([^?\n\t].*?)\[/url\]#isu", array(&$this, 'url_callback'), $text);
 
 			// Normalize block level tags wrapped with new lines
@@ -619,7 +619,7 @@ class bbcode
 	/**
 	* Spam filter
 	*/
-	static function spam_filter ($text)
+	private function spam_filter ($text)
 	{
 		global $bb_cfg;
 		static $spam_words = null;

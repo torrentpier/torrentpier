@@ -158,14 +158,11 @@ switch ($mode)
 		bb_die("Invalid mode: ". htmlCHR($mode));
 }
 
-// ----------------------------------------------------------- //
 // Functions
-//
-
 class bb_poll
 {
 	var $err_msg    = '';
-	var $poll_votes = array(); // array(vote_id => vote_text)
+	var $poll_votes = array();
 	var $max_votes  = 0;
 
 	function bb_poll ()

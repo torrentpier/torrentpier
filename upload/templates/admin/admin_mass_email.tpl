@@ -1,4 +1,3 @@
-
 <h1>{L_EMAIL}</h1>
 
 <p>{L_MASS_EMAIL_EXPLAIN}</p>

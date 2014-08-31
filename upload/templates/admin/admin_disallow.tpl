@@ -1,4 +1,3 @@
-
 <h1>{L_DISALLOW_CONTROL}</h1>
 
 <p>{L_DISALLOW_EXPLAIN}</p>

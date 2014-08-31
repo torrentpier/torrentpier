@@ -1,11 +1,10 @@
-
 <script type="text/javascript">
 var bb_poll = {};
-bb_poll.data        = {POLL_VOTES_JS};  // [["заголовок", "result"], ...]
+bb_poll.data        = {POLL_VOTES_JS}; // [["заголовок", "result"], ...]
 bb_poll.title       = '';
 bb_poll.votes_data  = {};
 bb_poll.votes_sum   = 0;
-bb_poll.max_img_len = 205;   // 100% = this length
+bb_poll.max_img_len = 205; // 100% = this length
 
 $(function(){
 	$.each(bb_poll.data, function(vote_id, vote_data){

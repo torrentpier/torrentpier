@@ -19,14 +19,18 @@ function toggle_cbox (cb_id, tr_id)
 
 <table width="100%">
 	<tr>
-  <td style="padding-left: 0;" class="nav"><a href="{U_INDEX}" class="nav">{T_INDEX}</a><span class="nav">
-		&raquo;&nbsp;<a href="{U_VIEW_FORUM}" class="nav">{FORUM_NAME}</a></span></td>
+		<td style="padding-left: 0;" class="nav">
+			<a href="{U_INDEX}" class="nav">{T_INDEX}</a>
+			<span class="nav">
+				&raquo;&nbsp;<a href="{U_VIEW_FORUM}" class="nav">{FORUM_NAME}</a>
+			</span>
+		</td>
 	</tr>
 </table>
 
 <table class="forumline">
 	<tr>
-  <th colspan="2">{L_TOPIC_SPLIT}</th>
+		<th colspan="2">{L_TOPIC_SPLIT}</th>
 	</tr>
 	<tr>
 		<td class="row2" colspan="2" align="center">
@@ -34,12 +38,12 @@ function toggle_cbox (cb_id, tr_id)
 		</td>
 	</tr>
 	<tr>
-	 <td class="row1" nowrap="nowrap"><span class="gen">{L_NEW_TOPIC_TITLE}</span></td>
-	 <td class="row2"><input class="post" type="text" size="35" style="width: 500px" maxlength="120" name="subject" /></td>
+		<td class="row1" nowrap="nowrap"><span class="gen">{L_NEW_TOPIC_TITLE}</span></td>
+		<td class="row2"><input class="post" type="text" size="35" style="width: 500px" maxlength="120" name="subject" /></td>
 	</tr>
 	<tr>
-	 <td class="row1" nowrap="nowrap"><span class="gen">{L_FORUM_FOR_NEW_TOPIC}</span></td>
-	 <td class="row2">{S_FORUM_SELECT}</td>
+		<td class="row1" nowrap="nowrap"><span class="gen">{L_FORUM_FOR_NEW_TOPIC}</span></td>
+		<td class="row2">{S_FORUM_SELECT}</td>
 	</tr>
 	<!-- //bot -->
 	<tr>
@@ -66,22 +70,22 @@ function toggle_cbox (cb_id, tr_id)
 
 <table class="topic" cellpadding="0" cellspacing="0">
 	<tr>
-	 <th class="thHead td1">#</th>
-	 <th class="thHead td1">{L_AUTHOR}</th>
-	 <th class="thHead td2">{L_MESSAGE}</th>
+		<th class="thHead td1">#</th>
+		<th class="thHead td1">{L_AUTHOR}</th>
+		<th class="thHead td2">{L_MESSAGE}</th>
 	</tr>
 	<!-- BEGIN postrow -->
 	<tr <!-- IF postrow.CHECKBOX -->id="{postrow.ROW_ID}" onclick="toggle_cbox('{postrow.CB_ID}', '{postrow.ROW_ID}');"<!-- ENDIF --> class="{postrow.ROW_CLASS}">
-	 <td class="td1 tCenter"><!-- IF postrow.CHECKBOX --><input type="checkbox" name="post_id_list[]" value="{postrow.POST_ID}" id="{postrow.CB_ID}" onclick="toggle_cbox('{postrow.CB_ID}', '{postrow.ROW_ID}');" /><!-- ENDIF --></td>
-	 <td class="td1 vTop pad_2">
-	 	<p><b>{postrow.POSTER_NAME}</b></p>
-	 	<p class="small nowrap">{postrow.POST_DATE}</p>
-	 </td>
-	 <td class="message td2" width="100%">
+		<td class="td1 tCenter"><!-- IF postrow.CHECKBOX --><input type="checkbox" name="post_id_list[]" value="{postrow.POST_ID}" id="{postrow.CB_ID}" onclick="toggle_cbox('{postrow.CB_ID}', '{postrow.ROW_ID}');" /><!-- ENDIF --></td>
+		<td class="td1 vTop pad_2">
+			<p><b>{postrow.POSTER_NAME}</b></p>
+			<p class="small nowrap">{postrow.POST_DATE}</p>
+		</td>
+		<td class="message td2" width="100%">
 			<div class="post_wrap">
 				<div class="post_body">{postrow.MESSAGE}</div>
 			</div>
-	 </td>
+		</td>
 	</tr>
 	<!-- END postrow -->
 	<tr>

@@ -1,4 +1,3 @@
-
 <h1>{L_FORUM_PRUNE}</h1>
 
 <p>{L_FORUM_PRUNE_EXPLAIN}</p>
