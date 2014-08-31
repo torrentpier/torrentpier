@@ -484,7 +484,8 @@ $bb_cfg['max_search_words_per_post']  = 200;
 $bb_cfg['search_min_word_len']        = 3;
 $bb_cfg['search_max_word_len']        = 35;
 $bb_cfg['limit_max_search_results']   = false;
-$bb_cfg['spam_filter_file_path']      = '';        //BB_PATH .'/misc/spam_filter_words.txt';
+$bb_cfg['spam_filter_file_path']      = '';        // BB_PATH .'/misc/spam_filter_words.txt';
+$bb_cfg['autocorrect_wkl']            = true;      // autocorrect wrong keyboard layout
 
 // Posting
 $bb_cfg['prevent_multiposting']  = true;           // replace "reply" with "edit last msg" if user (not admin or mod) is last topic poster
