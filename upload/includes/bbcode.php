@@ -576,7 +576,7 @@ class bbcode
 
 			// [url]
 			$url_exp = '[\w\#!$%&~/.\-;:=,?@а-яА-Я\[\]+]+?';
-			$text = preg_replace_callback("#\[url\]((?:https?://)?$url_exp)\[/url\]#isu", array(&$this, 'url_callback'), $text);
+			$text = preg_replace_callback("#\[url\]((https?://)?$url_exp)\[/url\]#isu", array(&$this, 'url_callback'), $text);
 			$text = preg_replace_callback("#\[url\](www\.$url_exp)\[/url\]#isu", array(&$this, 'url_callback'), $text);
 			$text = preg_replace_callback("#\[url=(https?://$url_exp)\]([^?\n\t].*?)\[/url\]#isu", array(&$this, 'url_callback'), $text);
 			$text = preg_replace_callback("#\[url=(www\.$url_exp)\]([^?\n\t].*?)\[/url\]#isu", array(&$this, 'url_callback'), $text);
