@@ -235,8 +235,8 @@ $lang['VIEW_TOPIC'] = 'View topic';
 
 $lang['GUEST'] = 'Guest';
 $lang['POST_SUBJECT'] = 'Post subject';
-$lang['SUBMIT_VOTE'] = 'Submit Vote';
-$lang['VIEW_RESULTS'] = 'View Results';
+$lang['SUBMIT_VOTE'] = 'Submit vote';
+$lang['VIEW_RESULTS'] = 'View results';
 
 $lang['NO_NEWER_TOPICS'] = 'There are no newer topics in this forum';
 $lang['NO_OLDER_TOPICS'] = 'There are no older topics in this forum';
@@ -326,29 +326,29 @@ $lang['POST_DOWNLOAD'] = 'Download';
 $lang['CONFIRM_DELETE'] = 'Are you sure you want to delete this post?';
 $lang['CONFIRM_DELETE_POLL'] = 'Are you sure you want to delete this poll?';
 
-$lang['FLOOD_ERROR'] = 'You cannot make another post so soon after your last; please try again in a short while.';
-$lang['EMPTY_SUBJECT'] = 'You must specify a subject.';
-$lang['EMPTY_MESSAGE'] = 'You must enter a message.';
-$lang['FORUM_LOCKED'] = 'This forum is locked: you cannot post, reply to, or edit topics.';
-$lang['TOPIC_LOCKED'] = 'This topic is locked: you cannot edit posts or make replies.';
+$lang['FLOOD_ERROR'] = 'You cannot make another post so soon after your last; please try again in a short while';
+$lang['EMPTY_SUBJECT'] = 'You must specify a subject';
+$lang['EMPTY_MESSAGE'] = 'You must enter a message';
+$lang['FORUM_LOCKED'] = 'This forum is locked: you cannot post, reply to, or edit topics';
+$lang['TOPIC_LOCKED'] = 'This topic is locked: you cannot edit posts or make replies';
 $lang['TOPIC_LOCKED_SHORT'] = 'Topic locked';
 $lang['NO_POST_ID'] = 'You must select a post to edit';
 $lang['NO_TOPIC_ID'] = 'You must select a topic to reply to';
-$lang['NO_VALID_MODE'] = 'You can only post, reply, edit, or quote messages. Please return and try again.';
-$lang['NO_SUCH_POST'] = 'There is no such post. Please return and try again.';
-$lang['EDIT_OWN_POSTS'] = 'Sorry, but you can only edit your own posts.';
-$lang['DELETE_OWN_POSTS'] = 'Sorry, but you can only delete your own posts.';
-$lang['CANNOT_DELETE_REPLIED'] = 'Sorry, but you may not delete posts that have been replied to.';
-$lang['CANNOT_DELETE_POLL'] = 'Sorry, but you cannot delete an active poll.';
-$lang['EMPTY_POLL_TITLE'] = 'You must enter a title for your poll.';
-$lang['TO_FEW_POLL_OPTIONS'] = 'You must enter at least two poll options.';
-$lang['TO_MANY_POLL_OPTIONS'] = 'You have tried to enter too many poll options.';
-$lang['POST_HAS_NO_POLL'] = 'This post has no poll.';
-$lang['ALREADY_VOTED'] = 'You have already voted in this poll.';
-$lang['NO_VOTE_OPTION'] = 'You must specify an option when voting.';
+$lang['NO_VALID_MODE'] = 'You can only post, reply, edit, or quote messages. Please return and try again';
+$lang['NO_SUCH_POST'] = 'There is no such post. Please return and try again';
+$lang['EDIT_OWN_POSTS'] = 'Sorry, but you can only edit your own posts';
+$lang['DELETE_OWN_POSTS'] = 'Sorry, but you can only delete your own posts';
+$lang['CANNOT_DELETE_REPLIED'] = 'Sorry, but you may not delete posts that have been replied to';
+$lang['CANNOT_DELETE_POLL'] = 'Sorry, but you cannot delete an active poll';
+$lang['EMPTY_POLL_TITLE'] = 'You must enter a title for your poll';
+$lang['TO_FEW_POLL_OPTIONS'] = 'You must enter at least two poll options';
+$lang['TO_MANY_POLL_OPTIONS'] = 'You have tried to enter too many poll options';
+$lang['POST_HAS_NO_POLL'] = 'This post has no poll';
+$lang['ALREADY_VOTED'] = 'You have already voted in this poll';
+$lang['NO_VOTE_OPTION'] = 'You must specify an option when voting';
 $lang['LOCKED_WARN'] = 'You posted into locked topic!';
 
-$lang['ADD_POLL'] = 'Add a Poll';
+$lang['ADD_POLL'] = 'Add a poll';
 $lang['ADD_POLL_EXPLAIN'] = 'If you do not want to add a poll to your topic, leave the fields blank.';
 $lang['POLL_QUESTION'] = 'Poll question';
 $lang['POLL_OPTION'] = 'Poll option';
@@ -357,7 +357,7 @@ $lang['UPDATE'] = 'Update';
 $lang['POLL_FOR'] = 'Run poll for';
 $lang['DAYS'] = 'Days';
 $lang['POLL_FOR_EXPLAIN'] = '[ Enter 0 or leave blank for a never-ending poll ]';
-$lang['DELETE_POLL'] = 'Delete Poll';
+$lang['DELETE_POLL'] = 'Delete poll';
 
 $lang['MAX_SMILIES_PER_POST'] = 'Emoticons limit of %s emoticons exceeded.';
 
@@ -581,7 +581,7 @@ $lang['PASSWORD_CONFIRM_IF_CHANGED'] = 'You only need to confirm your password i
 
 $lang['AUTOLOGIN'] = 'Autologin';
 $lang['RESET_AUTOLOGIN'] = 'Reset autologin key';
-$lang['RESET_AUTOLOGIN_EXPL'] = '';
+$lang['RESET_AUTOLOGIN_EXPL'] = 'including all the places you\'ve visited the forum enabled auto-login';
 
 $lang['AVATAR'] = 'Avatar';
 $lang['AVATAR_EXPLAIN'] = 'Displays a small graphic image below your details in posts. Only one image can be displayed at a time, its width can be no greater than %d pixels, the height no greater than %d pixels, and the file size no more than %d KB.';
@@ -591,10 +591,10 @@ $lang['SELECT_AVATAR'] = 'Select avatar';
 $lang['RETURN_PROFILE'] = 'Return to profile';
 $lang['SELECT_CATEGORY'] = 'Select category';
 
-$lang['DELETE_IMAGE'] = 'Delete Image';
-$lang['CURRENT_IMAGE'] = 'Current Image';
+$lang['DELETE_IMAGE'] = 'Delete image';
+$lang['CURRENT_IMAGE'] = 'Current image';
 
-$lang['NOTIFY_ON_PRIVMSG'] = 'Notify on new Private Message';
+$lang['NOTIFY_ON_PRIVMSG'] = 'Notify on new private message';
 $lang['HIDE_USER'] = 'Hide your online status';
 $lang['HIDDEN_USER'] = 'Hidden user';
 
@@ -2892,3 +2892,22 @@ $lang['TR_STATS'] = array(
 	6 => 'how many of us uploaders (those who filled at least 1 hand)',
 	7 => 'how many uploaders over the last 30 days',
 );
+
+$lang['NEW_POLL_START'] = 'Poll enabled';
+$lang['NEW_POLL_END'] = 'Poll completed';
+$lang['NEW_POLL_ENDED'] = 'This poll has already been completed';
+$lang['NEW_POLL_DELETE'] = 'Poll deleted';
+$lang['NEW_POLL_ADDED'] = 'Poll added';
+$lang['NEW_POLL_ALREADY'] = 'Theme already has a poll';
+$lang['NEW_POLL_RESULTS'] = 'Poll changed and the old results deleted';
+$lang['NEW_POLL_VOTES'] = 'You must enter a correct response options (minimum 2, maximum is %s)';
+$lang['NEW_POLL_DAYS'] = 'The time of the poll (%s days from the moment of creation theme) already ended';
+$lang['NEW_POLL_U_NOSEL'] = 'You have not selected that vote';
+$lang['NEW_POLL_U_CHANGE'] = 'Edit poll';
+$lang['NEW_POLL_U_EDIT'] = 'Change the poll (the old results will be deleted)';
+$lang['NEW_POLL_U_VOTED'] = 'All voted';
+$lang['NEW_POLL_U_START'] = 'Enable poll';
+$lang['NEW_POLL_U_END'] = 'Finish poll';
+$lang['NEW_POLL_M_TITLE'] = 'Title of poll';
+$lang['NEW_POLL_M_VOTES'] = 'Options';
+$lang['NEW_POLL_M_EXPLAIN'] = 'Each row corresponds to one answer (max';
