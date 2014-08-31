@@ -576,7 +576,7 @@ class bbcode
 
 			// [url]
 			$url_exp = '[\w\#!$%&~/.\-;:=,?@а-яА-Я\[\]+]+?';
-			$text = preg_replace_callback("#\[url\]((https?://)?$url_exp)\[/url\]#isu", array(&$this, 'url_callback'), $text);
+			$text = preg_replace_callback("#\[url\]((?:https?://)?$url_exp)\[/url\]#isu", array(&$this, 'url_callback'), $text);
 			$text = preg_replace_callback("#\[url\](www\.$url_exp)\[/url\]#isu", array(&$this, 'url_callback'), $text);
 			$text = preg_replace_callback("#\[url=(https?://$url_exp)\]([^?\n\t].*?)\[/url\]#isu", array(&$this, 'url_callback'), $text);
 			$text = preg_replace_callback("#\[url=(www\.$url_exp)\]([^?\n\t].*?)\[/url\]#isu", array(&$this, 'url_callback'), $text);
@@ -704,10 +704,7 @@ class bbcode
 		$url = trim($m[1]);
 		$url_name = (isset($m[2])) ? trim($m[2]) : $url;
 
-
-        if (!preg_match("#^http://#", $url)) {
-            $url = 'http://' . $url;
-        }
+		if (!preg_match("#^http://#", $url)) $url = 'http://' . $url;
 
 		if (in_array(parse_url($url, PHP_URL_HOST), $bb_cfg['nofollow']['allowed_url']) || $bb_cfg['nofollow']['disabled'])
 		{
