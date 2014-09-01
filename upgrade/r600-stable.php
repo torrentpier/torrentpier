@@ -98,7 +98,7 @@ DELETE FROM `bb_config` WHERE `config_name` = 'require_activation';             
 DELETE FROM `bb_config` WHERE `config_name` = 'no_avatar';                            // удалено 583
 UPDATE `bb_config` SET `config_value` = '0' WHERE `config_name` = 'show_mod_index';   // изменено 583
 DELETE FROM `bb_cron` WHERE `cron_script` = 'avatars_cleanup.php';                    // удалено 583
-UPDATE `bb_cron` SET `cron_id` = '30' WHERE `cron_script` = 'attach_maintenance.php'; // изменено 583
+UPDATE `bb_cron` SET `cron_id` = '3' WHERE `cron_script` = 'attach_maintenance.php';  // изменено 583
 
 // 583 - отдельный конвертер
 
