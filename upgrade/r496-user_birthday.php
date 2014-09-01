@@ -19,7 +19,7 @@ if ($confirm) {
 
 	foreach (DB()->fetch_rowset($sql) as $row)
 	{
-		$birthday = realdate($row['user_birthday_old'], 'Y-m-d');
+		$birthday = bb_date($row['user_birthday_old'] * 86400 + 1, 'Y-m-d', 0);
 		DB()->query("UPDATE ". BB_USERS ." SET user_birthday = '". $birthday ."' WHERE user_id = ". $row['user_id'] ."");
 	}
 
