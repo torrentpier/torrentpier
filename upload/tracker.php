@@ -243,6 +243,11 @@ if ($release_groups = get_group_data('all'))
 		$s_release_group_select[$opt['lang']] = $val;
 	}
 }
+else
+{
+	$s_rg_opt = '';
+	$s_release_group_select = array($lang['CHOOSE_RELEASE_GROUP'] => 0);
+}
 
 $GPC = array(
 #	var_name                 key_name    def_value    GPC type
