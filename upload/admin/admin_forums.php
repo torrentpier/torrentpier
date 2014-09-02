@@ -831,13 +831,11 @@ function get_info ($mode, $id)
 		case 'category':
 			$table = BB_CATEGORIES;
 			$idfield = 'cat_id';
-			$namefield = 'cat_title';
 			break;
 
 		case 'forum':
 			$table = BB_FORUMS;
 			$idfield = 'forum_id';
-			$namefield = 'forum_name';
 			break;
 
 		default:
