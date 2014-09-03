@@ -606,8 +606,8 @@ $bb_cfg['trash_forum_id'] = 0; // (int) 7
 $bb_cfg['first_logon_redirect_url'] = 'index.php';
 $bb_cfg['terms_and_conditions_url'] = 'terms.php';
 
-$bb_cfg['user_agreement_url']       = 'misc.php?do=info&show=user_agreement';
-$bb_cfg['copyright_holders_url']    = 'misc.php?do=info&show=copyright_holders';
+$bb_cfg['user_agreement_url']       = 'misc.php?do=info&amp;show=user_agreement';
+$bb_cfg['copyright_holders_url']    = 'misc.php?do=info&amp;show=copyright_holders';
 $bb_cfg['advert_url']               = 'misc.php?do=info&show=advert';
 
 // Captcha
