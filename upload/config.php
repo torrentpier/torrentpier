@@ -120,7 +120,7 @@ $bb_cfg['cache']['redis']  = array(
 	'con_required' => true,
 );
 
-// Available cache types: memcache, sqlite, redis, eaccelerator, apc, xcache (default of filecache)
+// Available cache types: memcache, sqlite, redis, apc, xcache (default of filecache)
 # name => array( (string) type, (array) cfg )
 $bb_cfg['cache']['engines'] = array(
 	'bb_cache'      => array('filecache', array()),
@@ -132,7 +132,7 @@ $bb_cfg['cache']['engines'] = array(
 	'bb_poll_data'  => array('filecache', array()),
 );
 // Datastore
-// Available datastore types: memcache, sqlite, redis, eaccelerator, apc, xcache  (default filecache)
+// Available datastore types: memcache, sqlite, redis, apc, xcache  (default filecache)
 $bb_cfg['datastore_type'] = 'filecache';
 
 // Server
