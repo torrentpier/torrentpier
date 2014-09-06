@@ -257,7 +257,7 @@ define('LANG_ROOT_DIR', BB_PATH .'/data/language/' );
 define('LOG_DIR',       BB_PATH .'/data/log/'      );
 define('TEMPLATES_DIR', BB_PATH .'/templates/'     );
 define('TRIGGERS_DIR',  BB_PATH .'/triggers/'      );
-define('SITEMAP_DIR',   BB_PATH .'/upload/sitemap/');
+define('UPLOAD_DIR',    BB_PATH .'/upload/'		   );
 define('AJAX_HTML_DIR', BB_PATH .'/data/ajax/html/');
 define('AJAX_DIR',      BB_PATH .'/data/ajax/'	   );
 
@@ -558,7 +558,7 @@ $bb_cfg['avatars'] = array(
 	'max_height'  => 100,                             // высота аватара в px
 	'max_width'   => 100,                             // ширина аватара в px
 	'no_avatar'   => 'gallery/noavatar.png',          // дефолтная аватара
-	'upload_path' => BB_ROOT . 'images/avatars/',     // путь к директории с аватарами
+	'upload_path' => BB_ROOT . 'upload/avatars/',     // путь к директории с аватарами
 	'up_allowed'  => true,                            // разрешить загрузку аватар
 );
 
@@ -569,7 +569,7 @@ $bb_cfg['group_avatars'] = array(
 	'max_height'  => 300,                             // высота аватара в px
 	'max_width'   => 300,                             // ширина аватара в px
 	'no_avatar'   => 'gallery/noavatar.png',          // дефолтная аватара
-	'upload_path' => BB_ROOT . 'images/avatars/',     // путь к директории с аватарами
+	'upload_path' => BB_ROOT . 'upload/avatars/',     // путь к директории с аватарами
 	'up_allowed'  => true,                            // разрешить загрузку аватар
 );
 
@@ -613,8 +613,8 @@ $bb_cfg['advert_url']               = 'misc.php?do=info&show=advert';
 $bb_cfg['captcha'] = array(
 	'disabled'   => false,
 	'secret_key' => 'secret_key',
-	'img_url'    => './images/captcha/',         # with '/'
-	'img_path'   => BB_PATH .'/images/captcha/', # with '/'
+	'img_url'    => './upload/captcha/',         # with '/'
+	'img_path'   => UPLOAD_DIR .'captcha/', # with '/'
 );
 
 // Atom feed
