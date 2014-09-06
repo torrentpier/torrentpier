@@ -247,16 +247,19 @@ $page_cfg['show_torhelp'] = array(
 // Path (trailing slash '/' at the end: XX_PATH - without, XX_DIR - with)
 define('DIR_SEPR', DIRECTORY_SEPARATOR);
 
-define('BB_PATH',       realpath(BB_ROOT)      );  // absolute pathname to the forum root
-define('ADMIN_DIR',     BB_PATH .'/admin/'     );
-define('ATTACH_DIR',    BB_PATH .'/attach_mod/');
-define('CACHE_DIR',     BB_PATH .'/cache/'     );
-define('CFG_DIR',       BB_PATH .'/config/'    );
-define('INC_DIR',       BB_PATH .'/includes/'  );
-define('LANG_ROOT_DIR', BB_PATH .'/language/'  );
-define('LOG_DIR',       BB_PATH .'/log/'       );
-define('TEMPLATES_DIR', BB_PATH .'/templates/' );
-define('TRIGGERS_DIR',  BB_PATH .'/triggers/'  );
+define('BB_PATH',       realpath(BB_ROOT)          );  // absolute pathname to the forum root
+define('ADMIN_DIR',     BB_PATH .'/admin/'     	   );
+define('ATTACH_DIR',    BB_PATH .'/attach_mod/'	   );
+define('CACHE_DIR',     BB_PATH .'/cache/'     	   );
+define('CFG_DIR',       BB_PATH .'/config/'   	   );
+define('INC_DIR',       BB_PATH .'/data/includes/' );
+define('LANG_ROOT_DIR', BB_PATH .'/data/language/' );
+define('LOG_DIR',       BB_PATH .'/data/log/'      );
+define('TEMPLATES_DIR', BB_PATH .'/templates/'     );
+define('TRIGGERS_DIR',  BB_PATH .'/triggers/'      );
+define('SITEMAP_DIR',   BB_PATH .'/upload/sitemap/');
+define('AJAX_HTML_DIR', BB_PATH .'/data/ajax/html/');
+define('AJAX_DIR',      BB_PATH .'/data/ajax/'	   );
 
 // URL's
 $bb_cfg['ajax_url']    = 'ajax.php';     #  "http://{$_SERVER['SERVER_NAME']}/ajax.php"
@@ -366,10 +369,6 @@ $bb_cfg['email_change_disabled']   = false;        // disable changing email by 
 $bb_cfg['tech_admin_email']        = 'admin@' . $domain_name;  // email for sending error reports
 $bb_cfg['abuse_email']             = 'abuse@' . $domain_name;
 $bb_cfg['adv_email']               = 'adv@'   . $domain_name;
-
-// AJAX
-define('AJAX_HTML_DIR', BB_ROOT .'ajax/html/');
-define('AJAX_DIR',      BB_ROOT .'ajax/');
 
 // Debug
 define('DBG_LOG',              false);    // enable forum debug (off on production)

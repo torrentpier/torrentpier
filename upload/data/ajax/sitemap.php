@@ -12,8 +12,7 @@ switch ($mode)
 {
 	case 'create':
 		$map->create();
-		if (@file_exists(BB_ROOT. "/sitemap/sitemap.xml"))
-		{
+		if (@file_exists(SITEMAP_DIR. "sitemap.xml")) {
 			$html .= $lang['SITEMAP_CREATED'].': <b>'.bb_date(TIMENOW, $bb_cfg['post_date_format']).'</b> '.$lang['SITEMAP_AVAILABLE'].': <a href="'.make_url('/sitemap/sitemap.xml').'" target="_blank">'.make_url('/sitemap/sitemap.xml').'</a>';
 		} else {
 			$html .= $lang['SITEMAP_NOT_CREATED'];
@@ -21,12 +20,9 @@ switch ($mode)
 	break;
 
 	case 'search_update':
-		if (!@file_exists(BB_ROOT. "/sitemap/sitemap.xml"))
-		{
-			$map->create();
-		}
+		if (!@file_exists(SITEMAP_DIR. "sitemap.xml")) $map->create();
 
-		$map_link = make_url('/sitemap/sitemap.xml');
+		$map_link = make_url(SITEMAP_DIR.'sitemap.xml');
 
 		if (strpos($map->send_url("http://google.com/webmasters/sitemaps/ping?sitemap=", $map_link), "successfully added") !== false) {
 			$html .= '<br />'.$lang['SITEMAP_NOTIFY_SEARCH'].' Google: <font style="color: green;">'.$lang['SITEMAP_SENT'].'</font>';

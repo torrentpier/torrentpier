@@ -105,7 +105,7 @@ CREATE TABLE IF NOT EXISTS `bb_attachments_config` (
 -- Дамп данных таблицы `bb_attachments_config`
 --
 
-INSERT INTO `bb_attachments_config` VALUES ('upload_dir', 'old_files');
+INSERT INTO `bb_attachments_config` VALUES ('upload_dir', 'upload/torrent_files');
 INSERT INTO `bb_attachments_config` VALUES ('upload_img', 'images/icon_clip.gif');
 INSERT INTO `bb_attachments_config` VALUES ('topic_icon', 'images/icon_clip.gif');
 INSERT INTO `bb_attachments_config` VALUES ('display_order', '0');
