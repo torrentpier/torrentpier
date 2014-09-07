@@ -657,6 +657,7 @@ $lang['USER_AGREEMENT_AGREE'] = "Я прочитав УГОДУ і зобов'я
 
 $lang['COPYRIGHT_HOLDERS'] = 'Для правовласників';
 $lang['ADVERT'] = 'Реклама на сайті';
+$lang['NOT_FOUND'] = 'Файл не знайдено';
 
 // Visual confirmation system strings
 $lang['CONFIRM_CODE_WRONG'] = 'Ви ввели неправильний код підтвердження';
@@ -1031,13 +1032,6 @@ $lang['ATTACHMENT_FEATURE_DISABLED'] = 'Функція вкладень вимк
 $lang['DIRECTORY_DOES_NOT_EXIST'] = 'Директорія \'%s\' не існує або не може бути знайдено.'; // replace %s with directory
 $lang['DIRECTORY_IS_NOT_A_DIR'] = 'будь Ласка, перевірте чи є \'%s\' директорією.'; // replace %s with directory
 $lang['DIRECTORY_NOT_WRITEABLE'] = 'Директорія \'%s\' недоступна для запису. Вам потрібно створити директорію для закачувань і виконати chmod 777 (або змінити власника httpd-servers) для закачування файлів на сервер.<br />Якщо у вас тільки FTP доступ до сервера змініть \'Атрибути\' директорії на rwxrwxrwx.'; // replace %s with directory
-
-// Attach Rules Window
-$lang['RULES_PAGE'] = 'Правила вкладень';
-$lang['ATTACH_RULES_TITLE'] = 'Дозволені групи розширень та їх розмір';
-$lang['GROUP_RULE_HEADER'] = '%s -> Максимальний загальний розмір: %s'; // Replace first %s with Extension Group, second one with the Size STRING
-$lang['ALLOWED_EXTENSIONS_AND_SIZES'] = 'Дозволені розширення та їх розмір';
-$lang['NOTE_USER_EMPTY_GROUP_PERMISSIONS'] = 'УВАГА:<br />Ви можете відправляти вкладення в цей форум, <br />але, так як ні одній групі розширень не дозволено бути вкладеною тут, <br />ви не можете нічого відправити. Якщо ви спробуєте, <br />то отримаєте повідомлення про помилку.<br />';
 
 // Quota Variables
 $lang['UPLOAD_QUOTA'] = 'Розмір';

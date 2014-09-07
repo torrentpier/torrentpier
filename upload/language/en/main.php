@@ -657,6 +657,7 @@ $lang['USER_AGREEMENT_AGREE'] = 'I have read and agree to the User agreement abo
 
 $lang['COPYRIGHT_HOLDERS'] = 'For copyright holders';
 $lang['ADVERT'] = 'Advertise on this site';
+$lang['NOT_FOUND'] = 'File not found';
 
 // Visual confirmation system strings
 $lang['CONFIRM_CODE_WRONG'] = 'The confirmation code you entered was incorrect';
@@ -1031,13 +1032,6 @@ $lang['ATTACHMENT_FEATURE_DISABLED'] = 'The Attachment Feature is disabled.';
 $lang['DIRECTORY_DOES_NOT_EXIST'] = 'The Directory \'%s\' does not exist or Could not be found.'; // replace %s with directory
 $lang['DIRECTORY_IS_NOT_A_DIR'] = 'Please check if \'%s\' is a directory.'; // replace %s with directory
 $lang['DIRECTORY_NOT_WRITEABLE'] = 'Directory \'%s\' is not writeable. You\'ll have to create the upload path and chmod it to 777 (or change the owner to you httpd-servers owner) to upload files.<br />If you have only plain FTP-access change the \'Attribute\' of the directory to rwxrwxrwx.'; // replace %s with directory
-
-// Attach Rules Window
-$lang['RULES_PAGE'] = 'Attachment Rules';
-$lang['ATTACH_RULES_TITLE'] = 'Allowed Extension Groups and their Sizes';
-$lang['GROUP_RULE_HEADER'] = '%s -> Maximum Upload Size: %s'; // Replace first %s with Extension Group, second one with the Size STRING
-$lang['ALLOWED_EXTENSIONS_AND_SIZES'] = 'Allowed Extensions and Sizes';
-$lang['NOTE_USER_EMPTY_GROUP_PERMISSIONS'] = 'NOTE:<br />You are normally allowed to attach files within this Forum, <br />but since no Extension Group is allowed to be attached here, <br />you are unable to attach anything. If you try, <br />you will receive an Error Message.<br />';
 
 // Quota Variables
 $lang['UPLOAD_QUOTA'] = 'Upload Quota';

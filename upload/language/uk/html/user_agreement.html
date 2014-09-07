@@ -1,25 +1,10 @@
-<?php if (isset($in_info)) {?>
-<title>УГОДА</title>
-
-<div id="infobox-wrap" class="bCenter row1">
-	<fieldset class="pad_6">
-	<legend class="med bold mrg_2 warnColor1">УГОДА</legend>
-		<div class="bCenter">
-
-<style type="text/css">
-
-#infobox-body p { margin-top: 1em; margin-bottom: 1em; }
-
-</style>
-<?php }?>
-
 <div id="infobox-body">
 
 <p>
 
-<h1>УГОДА</h1>
+<p><h1>УГОДА</h1></p>
 
-<h3>ПРО САЙТ</h3>
+<p><h3>ПРО САЙТ</h3></p>
 
 <p>Інтернет - ресурс (сайт) <a href="http://<?php echo ($bb_cfg['server_port'] != 80) ? "{$bb_cfg['server_name']}:{$bb_cfg['server_port']}" : $bb_cfg['server_name']; ?>"><?php echo $bb_cfg['sitename']?></a> (надалі - Ресурс) є інтернет-сайтом, що дозволяє користувачам обмінюватися один з одним інформацією по протоколу біт-торрент, а також у вільній формі, що надає засоби для контролю цілісності інформації, що передається (за допомогою hash-файлів).</p>
 
@@ -97,9 +82,3 @@
 </p>
 
 </div><!--/infobox-body-->
-<?php if (isset($in_info)) {?>
-</div>
-	</fieldset>
-	<p class="gen tRight pad_6"><a href="javascript:window.close();" class="gen">[ Закрити ]</a></p>
-</div><!--/infobox-wrap-->
-<?php }?>
