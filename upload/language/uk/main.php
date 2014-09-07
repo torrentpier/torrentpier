@@ -1389,8 +1389,8 @@ $lang['STATUS'] = 'Статус';
 $lang['LAST_CHANGED_BY'] = 'Остання зміна';
 $lang['CHANGES'] = 'Змінити';
 $lang['ACTION'] = 'Дія';
-$lang['COMMENT'] = 'Коментар';
 $lang['REASON'] = 'Причина';
+$lang['COMMENT'] = 'Коментар';
 
 // search
 $lang['SEARCH_S'] = 'пошук...';
