@@ -704,7 +704,7 @@ class bbcode
 		$url = trim($m[1]);
 		$url_name = (isset($m[2])) ? trim($m[2]) : $url;
 
-		if (!preg_match("#^http://#", $url) && !preg_match("/^#/", $url)) $url = 'http://' . $url;
+		if (!preg_match("#^https?://#isu", $url) && !preg_match("/^#/", $url)) $url = 'http://' . $url;
 
 		if (in_array(parse_url($url, PHP_URL_HOST), $bb_cfg['nofollow']['allowed_url']) || $bb_cfg['nofollow']['disabled'])
 		{
