@@ -49,7 +49,7 @@
 <tr>
 	<td colspan="2" class="row1 gen pad_4">
 		<div class="post_wrap"><div class="post_body">{PM_MESSAGE}</div></div>
-		<div class="clearB tRight">{QUOTE_PM_IMG} {EDIT_PM_IMG} {REPORT_PM_IMG}</div>
+		<div class="clearB tRight">{QUOTE_PM_IMG} {EDIT_PM_IMG}</div>
  </td>
 </tr>
 <tr>

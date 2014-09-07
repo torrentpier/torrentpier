@@ -56,7 +56,6 @@ switch ($mode)
 			'S_CONFIG_ACTION'         => 'admin_board.php?mode=config_mods',
 			'CONFIG_MODS'             => true,
 
-			'REPORTS_ENABLED'         => $new['reports_enabled'],
 			'MAGNET_LINKS_ENABLED'    => $new['magnet_links_enabled'],
 			'GENDER'                  => $new['gender'],
 			'CALLSEED'                => $new['callseed'],

@@ -484,34 +484,6 @@ elseif (($t_data['topic_poster'] == $userdata['user_id']) && $userdata['session_
 	$topic_mod .= "<a href=\"modcp.php?" . POST_TOPIC_URL . "=$topic_id&amp;mode=move&amp;sid=" . $userdata['session_id'] . '"><img src="' . $images['topic_mod_move'] . '" alt="' . $lang['MOVE_TOPIC'] . '" title="' . $lang['MOVE_TOPIC'] . '" border="0" /></a>&nbsp;';
 }
 
-// Get report topic module and create report link
-require_once(INC_DIR ."functions_report.php");
-$report_topic = report_modules('name', 'report_topic');
-
-if ($report_topic && $report_topic->auth_check('auth_write'))
-{
-	if ($forum_topic_data['topic_reported'])
-	{
-		$report_auth = ($userdata['user_level'] == ADMIN || (!$bb_cfg['report_list_admin'] && (!$bb_cfg['report_subject_auth'] || $is_auth['auth_mod'])));
-		if ($report_topic->auth_check('auth_view') && $is_auth)
-		{
-			$target = ($bb_cfg['report_new_window']) ? ' target="_blank"' : '';
-			$s_report_topic ='&nbsp;<a href="' . ("report.php?mode=reported&amp;" . POST_CAT_URL . '=' . $report_topic->id . "&amp;id=$topic_id") . '"' . $target . '><img src="' . $images['topic_mod_reported'] . '" alt="' . $report_topic->lang['DUPLICATE_REPORT'] . '" title="' . $report_topic->lang['DUPLICATE_REPORT'] . '" border="0" /></a>&nbsp;';
-		}
-		else
-		{
-			$s_report_topic = '&nbsp;<img src="' . $images['topic_mod_reported'] . '" alt="' . $report_topic->lang['DUPLICATE_REPORT'] . '" title="' . $report_topic->lang['DUPLICATE_REPORT'] . '" border="0" />&nbsp;';
-		}
-	}
-	else
-	{
-		$s_report_topic = '&nbsp;<a href="' . ("report.php?mode=" . $report_topic->mode . "&amp;id=$topic_id") . '"><img src="' . $images['topic_mod_report'] . '" alt="' . $report_topic->lang['WRITE_REPORT'] . '" title="' . $report_topic->lang['WRITE_REPORT'] . '" border="0" /></a>&nbsp;';
-	}
-
-	$topic_mod .= $s_report_topic;
-	$template->assign_var('S_REPORT_TOPIC', $s_report_topic);
-}
-
 //
 // Topic watch information
 //
@@ -670,10 +642,6 @@ if ($topic_has_poll)
 
 $prev_post_time = $max_post_time = 0;
 
-// Report
-require_once(INC_DIR ."functions_report.php");
-$report_post = report_modules('name', 'report_post');
-
 $this_date = bb_date(TIMENOW ,'md', false);
 
 for($i = 0; $i < $total_posts; $i++)
@@ -779,37 +747,6 @@ for($i = 0; $i < $total_posts; $i++)
 	// Again this will be handled by the templating code at some point
 	$pg_row_class = !($i % 2) ? 'row2' : 'row1';
 
-	// Create report links
-	if ($report_post && $report_post->auth_check('auth_write'))
-	{
-		if ($postrow[$i]['post_reported'])
-		{
-			$report_auth = ($userdata['user_level'] == ADMIN || (!$bb_cfg['report_list_admin'] && (!$bb_cfg['report_subject_auth'] || $is_auth['auth_mod'])));
-			if ($report_post->auth_check('auth_view') && $report_auth)
-			{
-				$temp_url = "report.php?mode=reported&amp;" . POST_CAT_URL . '=' . $report_post->id . '&amp;id=' . $post_id;
-				$target = ($bb_cfg['report_new_window']) ? ' target="_blank"' : '';
-				$report_img = '<a href="' . $temp_url . '"' . $target . '><img src="' . $images['icon_reported'] . '" alt="' . $report_post->lang['DUPLICATE_REPORT'] . '" title="' . $report_post->lang['DUPLICATE_REPORT'] . '" border="0" /></a>';
-				$report = '<a href="' . $temp_url . '"' . $target . '>[' . $report_post->lang['DUPLICATE_REPORT'] . ']</a>';
-			}
-			else
-			{
-				$report_img = '<img src="' . $images['icon_reported'] . '" alt="' . $report_post->lang['DUPLICATE_REPORT'] . '" title="' . $report_post->lang['DUPLICATE_REPORT'] . '" border="0" />';
-				$report = '['. $report_post->lang['DUPLICATE_REPORT'] .']';
-			}
-		}
-		else
-		{
-			$temp_url = "report.php?mode=" . $report_post->mode . '&amp;id=' . $post_id;
-			$report_img = '<a href="' . $temp_url . '"><img src="' . $images['icon_report'] . '" alt="' . $report_post->lang['WRITE_REPORT'] . '" title="' . $report_post->lang['WRITE_REPORT'] . '" border="0" /></a>';
-			$report = '<a class="txtb" href="' . $temp_url . '">[' . $report_post->lang['WRITE_REPORT'] . ']</a>';
-		}
-	}
-	else
-	{
-		$report_img = $report = '';
-	}
-
 	// Mod comment
 	switch($mc_type)
 	{
@@ -871,7 +808,6 @@ for($i = 0; $i < $total_posts; $i++)
 		'DELETE'             => $delpost_btn,
 		'IP'                 => $ip_btn,
 
-		'REPORT'             => ($bb_cfg['text_buttons']) ? $report : $report_img,
 		'POSTER_BIRTHDAY'    => ($bb_cfg['birthday_enabled'] && $this_date == $poster_birthday) ? '<img src="'. $images['icon_birthday'] .'" alt="" title="'. $lang['HAPPY_BIRTHDAY'] .'" border="0" />' : '',
 
 		'MC_COMMENT'         => ($mc_type) ? bbcode2html($mc_comment) : '',

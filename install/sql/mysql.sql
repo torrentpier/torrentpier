@@ -44,10 +44,6 @@ DROP TABLE IF EXISTS `bb_privmsgs`;
 DROP TABLE IF EXISTS `bb_privmsgs_text`;
 DROP TABLE IF EXISTS `bb_quota_limits`;
 DROP TABLE IF EXISTS `bb_ranks`;
-DROP TABLE IF EXISTS `bb_reports`;
-DROP TABLE IF EXISTS `bb_reports_changes`;
-DROP TABLE IF EXISTS `bb_reports_modules`;
-DROP TABLE IF EXISTS `bb_reports_reasons`;
 DROP TABLE IF EXISTS `bb_search_rebuild`;
 DROP TABLE IF EXISTS `bb_search_results`;
 DROP TABLE IF EXISTS `bb_sessions`;
@@ -555,15 +551,8 @@ INSERT INTO `bb_config` VALUES ('static_sitemap', '');
 INSERT INTO `bb_config` VALUES ('topics_per_page', '50');
 INSERT INTO `bb_config` VALUES ('xs_use_cache', '1');
 INSERT INTO `bb_config` VALUES ('active_ads', '');
-INSERT INTO `bb_config` VALUES ('report_subject_auth', '1');
-INSERT INTO `bb_config` VALUES ('report_modules_cache', '1');
-INSERT INTO `bb_config` VALUES ('report_hack_count', '0');
-INSERT INTO `bb_config` VALUES ('report_notify', '0');
-INSERT INTO `bb_config` VALUES ('report_list_admin', '0');
-INSERT INTO `bb_config` VALUES ('report_new_window', '0');
 INSERT INTO `bb_config` VALUES ('cron_enabled', '1');
 INSERT INTO `bb_config` VALUES ('cron_check_interval', '300');
-INSERT INTO `bb_config` VALUES ('reports_enabled', '1');
 INSERT INTO `bb_config` VALUES ('magnet_links_enabled', '1');
 INSERT INTO `bb_config` VALUES ('gender', '1');
 INSERT INTO `bb_config` VALUES ('callseed', '0');
@@ -868,7 +857,6 @@ CREATE TABLE IF NOT EXISTS `bb_posts` (
   `post_edit_time` int(11) NOT NULL DEFAULT '0',
   `post_edit_count` smallint(5) unsigned NOT NULL DEFAULT '0',
   `post_attachment` tinyint(1) NOT NULL DEFAULT '0',
-  `post_reported` tinyint(1) NOT NULL DEFAULT '0',
   `user_post` tinyint(1) NOT NULL DEFAULT '1',
   `mc_comment` TEXT NOT NULL DEFAULT  '',
   `mc_type` TINYINT( 1 ) NOT NULL DEFAULT  '0',
@@ -884,7 +872,7 @@ CREATE TABLE IF NOT EXISTS `bb_posts` (
 -- Дамп данных таблицы `bb_posts`
 --
 
-INSERT INTO `bb_posts` VALUES (1, 1, 1, 2, UNIX_TIMESTAMP(), '', 0, 0, '', 0, 0, 0, 0, 1, '', 0, 0);
+INSERT INTO `bb_posts` VALUES (1, 1, 1, 2, UNIX_TIMESTAMP(), '', 0, 0, '', 0, 0, 0, 1, '', 0, 0);
 
 -- --------------------------------------------------------
 
@@ -944,7 +932,6 @@ CREATE TABLE IF NOT EXISTS `bb_privmsgs` (
   `privmsgs_to_userid` mediumint(8) NOT NULL DEFAULT '0',
   `privmsgs_date` int(11) NOT NULL DEFAULT '0',
   `privmsgs_ip` varchar(32) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL DEFAULT '',
-  `privmsgs_reported` tinyint(1) NOT NULL DEFAULT '0',
   PRIMARY KEY (`privmsgs_id`),
   KEY `privmsgs_from_userid` (`privmsgs_from_userid`),
   KEY `privmsgs_to_userid` (`privmsgs_to_userid`)
@@ -1004,100 +991,6 @@ CREATE TABLE IF NOT EXISTS `bb_ranks` (
 --
 
 INSERT INTO `bb_ranks` VALUES (1, 'Администратор', -1, 1, 'images/ranks/admin.png', 'colorAdmin');
-
--- --------------------------------------------------------
-
---
--- Структура таблицы `bb_reports`
---
-
-CREATE TABLE IF NOT EXISTS `bb_reports` (
-  `report_id` mediumint(8) unsigned NOT NULL AUTO_INCREMENT,
-  `user_id` mediumint(8) NOT NULL,
-  `report_time` int(11) NOT NULL,
-  `report_last_change` mediumint(8) unsigned DEFAULT NULL,
-  `report_module_id` mediumint(8) unsigned NOT NULL,
-  `report_status` tinyint(1) NOT NULL,
-  `report_reason_id` mediumint(8) unsigned NOT NULL,
-  `report_subject` int(11) NOT NULL,
-  `report_subject_data` mediumtext,
-  `report_title` varchar(255) NOT NULL,
-  `report_desc` text NOT NULL,
-  PRIMARY KEY (`report_id`),
-  KEY `user_id` (`user_id`),
-  KEY `report_time` (`report_time`),
-  KEY `report_type_id` (`report_module_id`),
-  KEY `report_status` (`report_status`),
-  KEY `report_reason_id` (`report_reason_id`),
-  KEY `report_subject` (`report_subject`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
-
--- --------------------------------------------------------
-
---
--- Структура таблицы `bb_reports_changes`
---
-
-CREATE TABLE IF NOT EXISTS `bb_reports_changes` (
-  `report_change_id` mediumint(8) unsigned NOT NULL AUTO_INCREMENT,
-  `report_id` mediumint(8) unsigned NOT NULL,
-  `user_id` mediumint(8) NOT NULL,
-  `report_change_time` int(11) NOT NULL,
-  `report_status` tinyint(1) NOT NULL,
-  `report_change_comment` text NOT NULL,
-  PRIMARY KEY (`report_change_id`),
-  KEY `report_id` (`report_id`),
-  KEY `user_id` (`user_id`),
-  KEY `report_change_time` (`report_change_time`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
-
--- --------------------------------------------------------
-
---
--- Структура таблицы `bb_reports_modules`
---
-
-CREATE TABLE IF NOT EXISTS `bb_reports_modules` (
-  `report_module_id` mediumint(8) unsigned NOT NULL AUTO_INCREMENT,
-  `report_module_order` mediumint(8) unsigned NOT NULL,
-  `report_module_notify` tinyint(1) NOT NULL,
-  `report_module_prune` smallint(6) NOT NULL,
-  `report_module_last_prune` int(11) DEFAULT NULL,
-  `report_module_name` varchar(50) NOT NULL,
-  `auth_write` tinyint(1) NOT NULL,
-  `auth_view` tinyint(1) NOT NULL,
-  `auth_notify` tinyint(1) NOT NULL,
-  `auth_delete` tinyint(1) NOT NULL,
-  PRIMARY KEY (`report_module_id`),
-  KEY `report_module_order` (`report_module_order`),
-  KEY `auth_view` (`auth_view`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8;
-
---
--- Дамп данных таблицы `bb_reports_modules`
---
-
-INSERT INTO `bb_reports_modules` VALUES (1, 1, 0, 0, NULL, 'report_general', 0, 1, 1, 1);
-INSERT INTO `bb_reports_modules` VALUES (2, 2, 0, 0, NULL, 'report_post', 0, 1, 1, 1);
-INSERT INTO `bb_reports_modules` VALUES (3, 3, 0, 0, NULL, 'report_topic', 0, 1, 1, 1);
-INSERT INTO `bb_reports_modules` VALUES (4, 4, 0, 0, NULL, 'report_user', 0, 1, 1, 1);
-INSERT INTO `bb_reports_modules` VALUES (5, 5, 0, 0, NULL, 'report_privmsg', 0, 1, 1, 1);
-
--- --------------------------------------------------------
-
---
--- Структура таблицы `bb_reports_reasons`
---
-
-CREATE TABLE IF NOT EXISTS `bb_reports_reasons` (
-  `report_reason_id` mediumint(8) unsigned NOT NULL AUTO_INCREMENT,
-  `report_module_id` mediumint(8) unsigned NOT NULL,
-  `report_reason_order` mediumint(8) unsigned NOT NULL,
-  `report_reason_desc` varchar(255) NOT NULL,
-  PRIMARY KEY (`report_reason_id`),
-  KEY `report_type_id` (`report_module_id`),
-  KEY `report_reason_order` (`report_reason_order`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -1248,7 +1141,6 @@ CREATE TABLE IF NOT EXISTS `bb_topics` (
   `topic_last_post_id` mediumint(8) unsigned NOT NULL DEFAULT '0',
   `topic_moved_id` mediumint(8) unsigned NOT NULL DEFAULT '0',
   `topic_attachment` tinyint(1) NOT NULL DEFAULT '0',
-  `topic_reported` tinyint(1) NOT NULL DEFAULT '0',
   `topic_dl_type` tinyint(1) NOT NULL DEFAULT '0',
   `topic_last_post_time` int(11) NOT NULL DEFAULT '0',
   `topic_show_first_post` tinyint(1) unsigned NOT NULL DEFAULT '0',
@@ -1263,7 +1155,7 @@ CREATE TABLE IF NOT EXISTS `bb_topics` (
 -- Дамп данных таблицы `bb_topics`
 --
 
-INSERT INTO `bb_topics` VALUES (1, 1, 'Добро пожаловать в TorrentPier II', 2, UNIX_TIMESTAMP(), 2, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 972086460, 0);
+INSERT INTO `bb_topics` VALUES (1, 1, 'Добро пожаловать в TorrentPier II', 2, UNIX_TIMESTAMP(), 2, 0, 0, 0, 0, 1, 1, 0, 0, 0, UNIX_TIMESTAMP(), 0);
 
 -- --------------------------------------------------------
 

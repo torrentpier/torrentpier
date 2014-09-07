@@ -1381,71 +1381,16 @@ $lang['ONLY_NEW_POSTS'] = 'тільки нові повідомлення';
 $lang['ONLY_NEW_TOPICS'] = 'тільки нові теми';
 
 $lang['TORHELP_TITLE'] = 'Цим роздачам необхідна ваша допомога!';
-
-// Reports
-$lang['REPORTS'] = 'Порушення';
-$lang['REPORTS_DISABLE'] = 'Система порушень відключена';
-$lang['NEW_REPORT'] = ': одне відкрито';
-$lang['NEW_REPORTS'] = ': %d відкрито';
-$lang['NO_NEW_REPORTS'] = ': немає відкритих';
-$lang['REPORT_INDEX'] = 'Повний список порушень';
 $lang['STATISTICS'] = 'Статистика';
 $lang['STATISTIC'] = 'Параметр';
 $lang['VALUE'] = 'Значення';
-$lang['REPORT_COUNT'] = 'Поточне число повідомлень';
-$lang['REPORT_MODULES_COUNT'] = 'Кількість модулів';
-$lang['REPORT_HACK_COUNT'] = 'Загальне число повідомлень';
-$lang['DELETED_REPORTS'] = 'Повідомлення, позначені для видалення';
-$lang['REPORT_TYPE'] = 'Тип повідомлення';
-$lang['REPORT_BY'] = 'від';
-$lang['NO_REPORTS'] = 'Немає повідомлень';
 $lang['INVERT_SELECT'] = 'Звернути виділення';
-$lang['REPORTED_BY'] = 'Повідомлення';
-$lang['REPORTED_TIME'] = 'Дата повідомлення';
 $lang['STATUS'] = 'Статус';
 $lang['LAST_CHANGED_BY'] = 'Остання зміна';
 $lang['CHANGES'] = 'Змінити';
-$lang['REPORT_CHANGE_TEXT'] = 'Відзначено як "%1$s" користувачем %2$s %3$s.';
-$lang['REPORT_CHANGE_TEXT_COMMENT'] = 'Відзначено як "%1$s" користувачем %2$s %3$s:<br />%4$s';
-$lang['REPORT_CHANGE_DELETE_TEXT'] = 'Відзначено для видалення користувачем %1$s %2$s.';
 $lang['ACTION'] = 'Дія';
-$lang['REPORT_MARK'] = 'Відмітити як';
-$lang['OPEN_REPORTS'] = 'відкриті повідомлення';
-$lang['NO_REPORTS_FOUND'] = 'Відповідних повідомлень не знайдено.';
-$lang['NO_REPORTS_SELECTED'] = 'Не було виділено жодного повідомлення.';
-$lang['REPORT_NOT_EXISTS'] = 'Вибране повідомлення не існує.';
-$lang['REPORT_NOT_SUPPORTED'] = 'Ця опція не підтримується.';
-$lang['CLICK_RETURN_REPORT'] = '%sВернуться до повідомлення%s';
-$lang['CLICK_RETURN_REPORT_LIST'] = '%sВернуться до списку повідомлень%s';
-
-$lang['REPORT_STATUS'] = array(
-	REPORT_NEW => 'Нове',
-	REPORT_OPEN => 'Відкрито',
-	REPORT_IN_PROCESS => 'В обробці',
-	REPORT_CLEARED => 'Закрито',
-	REPORT_DELETE => 'Відзначено для видалення',
-);
-
-$lang['REASON'] = 'Причина';
-$lang['REPORT_SUBJECT'] = 'Тема';
-$lang['REPORT_TITLE_EMPTY'] = 'Необхідно ввести заголовок повідомлення.';
-$lang['REPORT_DESC_EMPTY'] = 'Необхідно ввести повідомлення.';
-$lang['REPORT_INSERTED'] = 'Повідомлення було відправлено адміністрації.';
-
-$lang['CHANGE_REPORT'] = 'Редагувати повідомлення';
-$lang['CHANGE_REPORTS'] = 'Редагувати повідомлення';
-$lang['CHANGE_REPORT_EXPLAIN'] = 'Ви впевнені, що хочете змінити статус вибраного повідомлення?';
-$lang['CHANGE_REPORTS_EXPLAIN'] = 'Ви впевнені, що хочете змінити статус вибраних повідомлень?';
 $lang['COMMENT'] = 'Коментар';
-$lang['REPORT_CHANGED'] = 'Статус вибраного повідомлення було змінено.';
-$lang['REPORTS_CHANGED'] = 'Статус вибрані повідомлення було змінено.';
-
-$lang['DELETE_REPORT'] = 'Видалити повідомлення';
-$lang['DELETE_REPORTS'] = 'Видалити повідомлення';
-$lang['DELETE_REPORT_EXPLAIN'] = 'Ви впевнені, що хочете видалити вибране повідомлення?';
-$lang['DELETE_REPORTS_EXPLAIN'] = 'Ви впевнені, що бажаєте видалити вибрані повідомлення?';
-$lang['REPORT_DELETED'] = 'Вибране повідомлення видалено.';
-$lang['REPORTS_DELETED'] = 'Вибрані повідомлення видалено.';
+$lang['REASON'] = 'Причина';
 
 // search
 $lang['SEARCH_S'] = 'пошук...';
@@ -2114,73 +2059,7 @@ $lang['SF_SHOW_ON_INDEX'] = 'Показувати на головній';
 $lang['SF_PARENT_FORUM'] = 'Батьківський форум';
 $lang['SF_NO_PARENT'] = 'Немає батьківського форуму';
 $lang['TEMPLATE'] = 'Шаблон';
-
-// Reports
-$lang['REPORT_CONFIG_EXPLAIN'] = 'На цій сторінці знаходяться основні налаштування модуля "Повідомлення про порушення".';
-$lang['REPORT_SUBJECT_AUTH'] = 'Індивідуальні права доступу';
-$lang['REPORT_SUBJECT_AUTH_EXPLAIN'] = 'Якщо опція включена, то модератори зможуть переглядати і редагувати тільки повідомлення про порушення в модерованих ними форумах.';
-$lang['REPORT_MODULES_CACHE'] = 'Кешувати модулі у файлах';
-$lang['REPORT_MODULES_CACHE_EXPLAIN'] = 'Зауваження: права доступу до директорії cache в режим "повний доступ на запис і читання" (<em>CHMOD 777</em>).';
-$lang['REPORT_NOTIFY'] = 'Повідомлення по e-mail';
-$lang['REPORT_NOTIFY_CHANGE'] = 'про зміни статусів і нових повідомлень';
-$lang['REPORT_NOTIFY_NEW'] = 'про нові повідомлення';
-$lang['REPORT_LIST_ADMIN'] = 'Список повідомлень доступний тільки адміністратору';
-$lang['REPORT_NEW_WINDOW'] = 'Відкривати сторінку з порушенням в новому вікні';
-$lang['REPORT_NEW_WINDOW_EXPLAIN'] = 'Ця опція так само впливає на вид посилань на формі відправки повідомлення про порушення на сторінках перегляду тим.';
-$lang['REPORT_CONFIG_UPDATED'] = 'Конфигурцію оновлено.';
-$lang['CLICK_RETURN_REPORT_CONFIG'] = '%sНатиснить%s для повернення до налаштувань модуля.';
-
-$lang['MODULES_REASONS'] = 'Модулі та Причини';
-$lang['REPORT_ADMIN_EXPLAIN'] = 'На цій сторінці ви можете встановити новий модуль, змінити настройки модуля або видалити вже встановлений модуль. Так само тут ви можете задати встановити Причини написання повідомлень про порушення для кожного модуля.';
-$lang['REPORT_MODULE'] = 'Модуль Повідомлень про порушення';
-$lang['INSTALLED_MODULES'] = 'Встановлені модулі';
-$lang['NO_MODULES_INSTALLED'] = 'Немає встановлених модулів';
-$lang['REASONS'] = 'Причини (%d)';
 $lang['SYNC'] = 'Синхронізувати';
-$lang['UNINSTALL'] = 'Видалити';
-$lang['INSTALL2'] = 'Встановити';
-$lang['INACTIVE_MODULES'] = 'Неактивні модулі';
-$lang['NO_MODULES_INACTIVE'] = 'Немає неактивних модулів';
-$lang['REPORT_MODULE_NOT_EXISTS'] = 'Обраний модуль не існує.';
-$lang['CLICK_RETURN_REPORT_ADMIN'] = '%sНатиснить%s для повернення до налаштувань Модулів і Причин.';
-
-$lang['BACK_MODULES'] = 'Назад до модулів';
-$lang['REPORT_REASON'] = 'Причина написання повідомлення';
-$lang['NO_REASONS'] = 'Немає особливих Причин для цього модуля';
-$lang['ADD_REASON'] = 'Додати Причину';
-$lang['EDIT_REASON'] = 'Редагувати Причину';
-$lang['REASON_DESC_EXPLAIN'] = 'Якщо назва співпаде з мовної мінливой, то буде використана мінлива.';
-$lang['REASON_DESC_EMPTY'] = 'Нобхідно ввести текст Причини.';
-$lang['REPORT_REASON_ADDED'] = 'Причину додано.';
-$lang['REPORT_REASON_EDITED'] = 'Причина відредагована.';
-$lang['DELETE_REASON'] = 'Видалити Причину';
-$lang['DELETE_REPORT_REASON_EXPLAIN'] = 'Ви впевнені, що хочете видалити обрану Причину?';
-$lang['REPORT_REASON_DELETED'] = 'Причину видалено.';
-$lang['REPORT_REASON_NOT_EXISTS'] = 'Обрана Причина не існує.';
-$lang['CLICK_RETURN_REPORT_REASONS'] = '%sНатиснить%s для повернення до налаштувань Причин повідомлень про порушення.';
-
-$lang['REPORT_MODULE_SYNCED'] = 'Модуль синхронізований.';
-
-$lang['UNINSTALL_REPORT_MODULE'] = 'Видалити модуль';
-$lang['UNINSTALL_REPORT_MODULE_EXPLAIN'] = 'Ви впевнені, що хочете видалити вибраний модуль? <br />Зауваження: всі повідомлення для цього модуля буде видалено.';
-$lang['REPORT_MODULE_UNINSTALLED'] = 'Модуль видалено.';
-
-$lang['INSTALL_REPORT_MODULE'] = 'Встановити модуль';
-$lang['EDIT_REPORT_MODULE'] = 'Редагувати настройки модуля';
-$lang['REPORT_PRUNE'] = 'Очистити повідомлення';
-$lang['REPORT_PRUNE_EXPLAIN'] = 'Зыкрытые та позначені для видалення повідомлення автоматично будуть видалені через <var>x</var> днів. Значення <em>zero</em> відключає автоматичне чищення.';
-$lang['REPORT_PERMISSIONS'] = 'Права доступу';
-$lang['WRITE'] = 'Написати';
-$lang['REPORT_AUTH'] = array(
-	REPORT_AUTH_USER => 'Користувачі',
-	REPORT_AUTH_MOD => 'Модератори',
-	REPORT_AUTH_CONFIRM => 'Модератори (після підтвердження)',
-	REPORT_AUTH_ADMIN => 'Адміністратори'
-);
-$lang['REPORT_AUTH_NOTIFY_EXPLAIN'] = 'Модератори будуть повідомлені тільки, якщо вони можуть переглядати і редагувати повідомлення.';
-$lang['REPORT_AUTH_DELETE_EXPLAIN'] = 'Якщо вибрано <em>Модератори (після підтвердження)</em>, видалення повідомлення повинно бути підтверджено адміністратором.';
-$lang['REPORT_MODULE_INSTALLED'] = 'Модуль видалено.';
-$lang['REPORT_MODULE_EDITED'] = 'Модуль відредагований.';
 
 // Mods
 $lang['MAX_NEWS_TITLE'] = 'Макс. довжина новини';

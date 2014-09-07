@@ -108,60 +108,6 @@ $template->assign_vars(array(
 ));
 
 // The following assigns all _common_ variables that may be used at any point in a template
-// Report
-//
-// Report list link
-//
-if ($bb_cfg['reports_enabled'])
-{
-	if (empty($gen_simple_header) && ($userdata['user_level'] == ADMIN || (!$bb_cfg['report_list_admin'] && $userdata['user_level'] == MOD)))
-	{
-		if (!function_exists("report_count_obtain"))
-			include(INC_DIR . "functions_report.php");
-
-		$report_count = report_count_obtain();
-		if ($report_count > 0)
-		{
-			$template->assign_block_vars('switch_report_list_new', array());
-
-			$report_list = $lang['REPORTS'];
-			$report_list .= ($report_count == 1) ? $lang['NEW_REPORT'] : sprintf($lang['NEW_REPORTS'], $report_count);
-		}
-		else
-		{
-			$template->assign_block_vars('switch_report_list', array());
-
-			$report_list = $lang['REPORTS'] . $lang['NO_NEW_REPORTS'];
-		}
-	}
-	else
-	{
-		$report_list = '';
-	}
-	//
-	// Get report general module and create report link
-	//
-	if (empty($gen_simple_header))
-	{
-		if (!function_exists("report_count_obtain"))
-			include(INC_DIR . "functions_report.php");
-
-		$report_general = report_modules('name', 'report_general');
-
-		if ($report_general && $report_general->auth_check('auth_write'))
-		{
-			$template->assign_block_vars('switch_report_general', array());
-
-			$template->assign_vars(array(
-				'U_WRITE_REPORT' => "report.php?mode=" . $report_general->mode,
-				'L_WRITE_REPORT' => $report_general->lang['WRITE_REPORT'])
-			);
-		}
-	}
-}
-else $report_list = '';
-// Report [END]
-
 $template->assign_vars(array(
 	'SIMPLE_HEADER'      => !empty($gen_simple_header),
 
@@ -195,11 +141,6 @@ $template->assign_vars(array(
 
 	'PM_INFO'            => $pm_info,
 	'PRIVMSG_IMG'        => $icon_pm,
-
-	// Report
-	'REPORT_LIST'        => $report_list,
-	'U_REPORT_LIST'      => "report.php",
-	// Report [END]
 
 	'LOGGED_IN'          => $logged_in,
 	'SESSION_USER_ID'    => $userdata['user_id'],

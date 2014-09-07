@@ -165,13 +165,6 @@
 	<th colspan="2">{L_CONFIG_MODS}</th>
 </tr>
 <tr>
-	<td><h4>{L_REPORT_MODULE}</h4></td>
-	<td>
-		<label><input type="radio" name="reports_enabled" value="1" <!-- IF REPORTS_ENABLED -->checked="checked"<!-- ENDIF --> />{L_ENABLED}</label>&nbsp;&nbsp;
-		<label><input type="radio" name="reports_enabled" value="0" <!-- IF not REPORTS_ENABLED -->checked="checked"<!-- ENDIF --> />{L_DISABLED}</label>
-	</td>
-</tr>
-<tr>
 	<td><h4>{L_MAGNET}</h4></td>
 	<td>
 		<label><input type="radio" name="magnet_links_enabled" value="1" <!-- IF MAGNET_LINKS_ENABLED -->checked="checked"<!-- ENDIF --> />{L_ENABLED}</label>&nbsp;&nbsp;

@@ -40,7 +40,6 @@
 	* Page footer
 	* Menus
 	* Misc
-	* Reports
 	* Shortcuts
 	* YouTube Panel
 */
@@ -1077,69 +1076,6 @@ pre, .pre {
 .warnBorder1 { border: 1px solid #A52A2A; }
 .warningBox1 { border: 1px solid #A52A2A; color: #993300; padding: 12px; }
 .warningBox2 { color: #993300 !important; background: #FFD9B2; border: 2px solid #CC6600; padding: 8px; }
-
-/* ================================================================ *
-     Reports
- * ================================================================ */
-/* Color pixel */
-div.report_pixel {
-	height: 1em;
-	width: 1em;
-	float: left;
-	margin-right: 3px
-}
-
-/* Report list colors */
-td.report_cleared, div.report_cleared {
-	background-color: #7ce380;
-}
-
-td.report_process, div.report_process {
-	background-color: #ffc267;
-}
-
-td.report_open, div.report_open {
-	background-color: #f2a0a7;
-}
-
-td.report_new, div.report_new {
-	background-color: #f88085;
-}
-
-td.report_delete, div.report_delete {
-	background-color: #9eabb2;
-}
-
-/* Report mode select */
-select.report_mode option {
-	margin: 1px 0
-}
-
-select.report_mode optgroup {
-	background-color: #FFF;
-	color: #000;
-	font-style: normal;
-	font-weight: bold;
-	margin-left: 3px
-}
-
-select.report_mode optgroup option {
-	border-left: 1.3em solid;
-	padding-left: 2px;
-	margin-left: 1px;
-}
-
-select.report_mode option.report_cleared {
-	border-color: #1e6731
-}
-
-select.report_mode option.report_process {
-	border-color: #e6721b
-}
-
-select.report_mode option.report_open {
-	border-color: #8b201d
-}
 
 /* ================================================================ *
      Shortcuts
