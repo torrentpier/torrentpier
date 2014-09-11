@@ -16,3 +16,5 @@ DELETE FROM `bb_config` WHERE `config_name` = 'reports_enabled';
 ALTER TABLE `bb_posts` DROP COLUMN `post_reported`;
 ALTER TABLE `bb_privmsgs` DROP COLUMN `privmsgs_reported`;
 ALTER TABLE `bb_topics` DROP COLUMN `topic_reported`;
+DELETE FROM `bb_cron` WHERE `cron_script` = 'site_backup.php';
+DELETE FROM `bb_cron` WHERE `cron_script` = 'db_backup.php';

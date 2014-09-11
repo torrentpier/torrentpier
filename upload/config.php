@@ -13,7 +13,6 @@
  * Server
    - Cloudflare
    - Script versions
-   - Backup script
    - GZip
  * Tracker
  * FAQ url
@@ -72,7 +71,7 @@ $domain_name = (!empty($_SERVER['SERVER_NAME'])) ? $_SERVER['SERVER_NAME'] : $do
 
 // Version info
 $bb_cfg['tp_version'] = '2.1.1';
-$bb_cfg['tp_release_date'] = '07-09-2014';
+$bb_cfg['tp_release_date'] = '11-09-2014';
 $bb_cfg['tp_release_state'] = 'ALPHA';
 
 // Database
@@ -147,12 +146,7 @@ if (isset($_SERVER['HTTP_CF_CONNECTING_IP']))
 }
 
 // Increase number after changing js or css
-$bb_cfg['js_ver']             = 1;
-$bb_cfg['css_ver']            = 1;
-
-// Backup
-$bb_cfg['db_backup_shell_cmd']   = '';             // '/path/to/db_backup.sh 2>&1'
-$bb_cfg['site_backup_shell_cmd'] = '';
+$bb_cfg['js_ver'] = $bb_cfg['css_ver'] = 1;
 
 // GZip
 $bb_cfg['gzip_compress']      = true;              // compress output

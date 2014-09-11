@@ -604,29 +604,27 @@ CREATE TABLE IF NOT EXISTS `bb_cron` (
 -- Дамп данных таблицы `bb_cron`
 --
 
-INSERT INTO `bb_cron` VALUES (1, 0, 'Site backup', 'site_backup.php', 'daily', '1', '05:00:00', 10, '', '', NULL, 1, '', 0, 1, 0);
-INSERT INTO `bb_cron` VALUES (2, 0, 'DB backup', 'db_backup.php', 'daily', '1', '05:00:00', 20, '', '', NULL, 1, '', 0, 1, 0);
-INSERT INTO `bb_cron` VALUES (3, 1, 'Attach maintenance', 'attach_maintenance.php', 'daily', NULL, '05:00:00', 40, '', '', NULL, 1, '', 0, 1, 0);
-INSERT INTO `bb_cron` VALUES (4, 1, 'Board maintenance', 'bb_maintenance.php', 'daily', NULL, '05:00:00', 40, '', '', NULL, 1, '', 0, 1, 0);
-INSERT INTO `bb_cron` VALUES (5, 1, 'Prune forums', 'prune_forums.php', 'daily', NULL, '05:00:00', 50, '', '', NULL, 1, '', 0, 1, 0);
-INSERT INTO `bb_cron` VALUES (6, 1, 'Prune topic moved stubs', 'prune_topic_moved.php', 'daily', NULL, '05:00:00', 60, '', '', NULL, 1, '', 0, 1, 0);
-INSERT INTO `bb_cron` VALUES (7, 1, 'Logs cleanup', 'clean_log.php', 'daily', NULL, '05:00:00', 70, '', '', NULL, 1, '', 0, 1, 0);
-INSERT INTO `bb_cron` VALUES (8, 1, 'Tracker maintenance', 'tr_maintenance.php', 'daily', NULL, '05:00:00', 90, '', '', NULL, 1, '', 0, 1, 0);
-INSERT INTO `bb_cron` VALUES (9, 1, 'Clean dlstat', 'clean_dlstat.php', 'daily', NULL, '05:00:00', 100, '', '', NULL, 1, '', 0, 1, 0);
-INSERT INTO `bb_cron` VALUES (10, 1, 'Prune inactive users', 'prune_inactive_users.php', 'daily', NULL, '05:00:00', 110, '', '', NULL, 1, '', 0, 1, 0);
-INSERT INTO `bb_cron` VALUES (11, 1, 'Sessions cleanup', 'sessions_cleanup.php', 'interval', NULL, NULL, 255, '', '', '00:03:00', 0, '', 0, 0, 0);
-INSERT INTO `bb_cron` VALUES (12, 1, 'DS update ''cat_forums''', 'ds_update_cat_forums.php', 'interval', NULL, NULL, 255, '', '', '00:05:00', 0, '', 0, 0, 0);
-INSERT INTO `bb_cron` VALUES (13, 1, 'DS update ''stats''', 'ds_update_stats.php', 'interval', NULL, NULL, 255, '', '', '00:10:00', 0, '', 0, 0, 0);
-INSERT INTO `bb_cron` VALUES (14, 1, 'Flash topic view', 'flash_topic_view.php', 'interval', NULL, NULL, 255, '', '', '00:10:00', 0, '', 0, 0, 0);
-INSERT INTO `bb_cron` VALUES (15, 1, 'Clean search results', 'clean_search_results.php', 'interval', NULL, NULL, 255, '', '', '00:10:00', 0, '', 0, 0, 0);
-INSERT INTO `bb_cron` VALUES (16, 1, 'Tracker cleanup and dlstat', 'tr_cleanup_and_dlstat.php', 'interval', NULL, NULL, 20, '', '', '00:15:00', 0, '', 0, 0, 0);
-INSERT INTO `bb_cron` VALUES (17, 1, 'Make tracker snapshot', 'tr_make_snapshot.php', 'interval', NULL, NULL, 10, '', '', '00:10:00', 0, '', 0, 0, 0);
-INSERT INTO `bb_cron` VALUES (18, 1, 'Seeder last seen', 'tr_update_seeder_last_seen.php', 'interval', NULL, NULL, 255, '', '', '01:00:00', 0, '', 0, 0, 0);
-INSERT INTO `bb_cron` VALUES (19, 1, 'Captcha', 'captcha_gen_gc.php', 'daily', NULL, '05:00:00', 120, '', '', NULL, 0, '', 0, 0, 0);
-INSERT INTO `bb_cron` VALUES (20, 1, 'Tracker dl-complete count', 'tr_complete_count.php', 'interval', NULL, NULL, 255, '', '', '06:00:00', 0, '', 0, 0, 0);
-INSERT INTO `bb_cron` VALUES (21, 1, 'Cache garbage collector', 'cache_gc.php', 'interval', NULL, NULL, 255, '', '', '00:05:00', 0, '', 0, 0, 0);
-INSERT INTO `bb_cron` VALUES (22, 1, 'Sitemap update', 'sitemap.php', 'daily', NULL, '06:00:00', 30, '', '', NULL, 0, '', 0, 0, 0);
-INSERT INTO `bb_cron` VALUES (23, 1, 'Update forums atom', 'update_forums_atom.php', 'interval', NULL, NULL, 255, '', '', '00:15:00', 0, '', 0, 0, 0);
+INSERT INTO `bb_cron` VALUES (1, 1, 'Attach maintenance', 'attach_maintenance.php', 'daily', NULL, '05:00:00', 40, '', '', NULL, 1, '', 0, 1, 0);
+INSERT INTO `bb_cron` VALUES (2, 1, 'Board maintenance', 'bb_maintenance.php', 'daily', NULL, '05:00:00', 40, '', '', NULL, 1, '', 0, 1, 0);
+INSERT INTO `bb_cron` VALUES (3, 1, 'Prune forums', 'prune_forums.php', 'daily', NULL, '05:00:00', 50, '', '', NULL, 1, '', 0, 1, 0);
+INSERT INTO `bb_cron` VALUES (4, 1, 'Prune topic moved stubs', 'prune_topic_moved.php', 'daily', NULL, '05:00:00', 60, '', '', NULL, 1, '', 0, 1, 0);
+INSERT INTO `bb_cron` VALUES (5, 1, 'Logs cleanup', 'clean_log.php', 'daily', NULL, '05:00:00', 70, '', '', NULL, 1, '', 0, 1, 0);
+INSERT INTO `bb_cron` VALUES (6, 1, 'Tracker maintenance', 'tr_maintenance.php', 'daily', NULL, '05:00:00', 90, '', '', NULL, 1, '', 0, 1, 0);
+INSERT INTO `bb_cron` VALUES (7, 1, 'Clean dlstat', 'clean_dlstat.php', 'daily', NULL, '05:00:00', 100, '', '', NULL, 1, '', 0, 1, 0);
+INSERT INTO `bb_cron` VALUES (8, 1, 'Prune inactive users', 'prune_inactive_users.php', 'daily', NULL, '05:00:00', 110, '', '', NULL, 1, '', 0, 1, 0);
+INSERT INTO `bb_cron` VALUES (9, 1, 'Sessions cleanup', 'sessions_cleanup.php', 'interval', NULL, NULL, 255, '', '', '00:03:00', 0, '', 0, 0, 0);
+INSERT INTO `bb_cron` VALUES (10, 1, 'DS update ''cat_forums''', 'ds_update_cat_forums.php', 'interval', NULL, NULL, 255, '', '', '00:05:00', 0, '', 0, 0, 0);
+INSERT INTO `bb_cron` VALUES (11, 1, 'DS update ''stats''', 'ds_update_stats.php', 'interval', NULL, NULL, 255, '', '', '00:10:00', 0, '', 0, 0, 0);
+INSERT INTO `bb_cron` VALUES (12, 1, 'Flash topic view', 'flash_topic_view.php', 'interval', NULL, NULL, 255, '', '', '00:10:00', 0, '', 0, 0, 0);
+INSERT INTO `bb_cron` VALUES (13, 1, 'Clean search results', 'clean_search_results.php', 'interval', NULL, NULL, 255, '', '', '00:10:00', 0, '', 0, 0, 0);
+INSERT INTO `bb_cron` VALUES (14, 1, 'Tracker cleanup and dlstat', 'tr_cleanup_and_dlstat.php', 'interval', NULL, NULL, 20, '', '', '00:15:00', 0, '', 0, 0, 0);
+INSERT INTO `bb_cron` VALUES (15, 1, 'Make tracker snapshot', 'tr_make_snapshot.php', 'interval', NULL, NULL, 10, '', '', '00:10:00', 0, '', 0, 0, 0);
+INSERT INTO `bb_cron` VALUES (16, 1, 'Seeder last seen', 'tr_update_seeder_last_seen.php', 'interval', NULL, NULL, 255, '', '', '01:00:00', 0, '', 0, 0, 0);
+INSERT INTO `bb_cron` VALUES (17, 1, 'Captcha', 'captcha_gen_gc.php', 'daily', NULL, '05:00:00', 120, '', '', NULL, 0, '', 0, 0, 0);
+INSERT INTO `bb_cron` VALUES (18, 1, 'Tracker dl-complete count', 'tr_complete_count.php', 'interval', NULL, NULL, 255, '', '', '06:00:00', 0, '', 0, 0, 0);
+INSERT INTO `bb_cron` VALUES (19, 1, 'Cache garbage collector', 'cache_gc.php', 'interval', NULL, NULL, 255, '', '', '00:05:00', 0, '', 0, 0, 0);
+INSERT INTO `bb_cron` VALUES (20, 1, 'Sitemap update', 'sitemap.php', 'daily', NULL, '06:00:00', 30, '', '', NULL, 0, '', 0, 0, 0);
+INSERT INTO `bb_cron` VALUES (21, 1, 'Update forums atom', 'update_forums_atom.php', 'interval', NULL, NULL, 255, '', '', '00:15:00', 0, '', 0, 0, 0);
 
 -- --------------------------------------------------------
 
