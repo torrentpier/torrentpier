@@ -194,14 +194,6 @@ class CACHES
 						$this->ref[$cache_name] =& $this->obj[$cache_name];
 						break;
 
-					case 'eaccelerator':
-						if (!isset($this->obj[$cache_name]))
-						{
-							$this->obj[$cache_name] = new cache_eaccelerator($this->cfg['prefix']);
-						}
-						$this->ref[$cache_name] =& $this->obj[$cache_name];
-						break;
-
 					case 'apc':
 						if (!isset($this->obj[$cache_name]))
 						{
@@ -824,61 +816,6 @@ class cache_redis extends cache_common
 	function is_installed ()
 	{
 		return class_exists('Redis');
-	}
-}
-
-class cache_eaccelerator extends cache_common
-{
-	var $used   = true;
-	var $engine = 'eAccelerator';
-	var $prefix = null;
-
-	function cache_eaccelerator ($prefix = null)
-	{
-		if (!$this->is_installed())
-		{
-			die('Error: eAccelerator extension not installed');
-		}
-		$this->dbg_enabled = sql_dbg_enabled();
-		$this->prefix = $prefix;
-	}
-
-	function get ($name, $get_miss_key_callback = '', $ttl = 0)
-	{
-		$this->cur_query = "cache->get('$name')";
-		$this->debug('start');
-		$this->debug('stop');
-		$this->cur_query = null;
-		$this->num_queries++;
-
-		return eaccelerator_get($this->prefix . $name);
-	}
-
-	function set ($name, $value, $ttl = 0)
-	{
-		$this->cur_query = "cache->set('$name')";
-		$this->debug('start');
-		$this->debug('stop');
-		$this->cur_query = null;
-		$this->num_queries++;
-
-		return eaccelerator_put($this->prefix . $name, $value, $ttl);
-	}
-
-	function rm ($name = '')
-	{
-		$this->cur_query = "cache->rm('$name')";
-		$this->debug('start');
-		$this->debug('stop');
-		$this->cur_query = null;
-		$this->num_queries++;
-
-		return eaccelerator_rm($this->prefix . $name);
-	}
-
-	function is_installed ()
-	{
-		return function_exists('eaccelerator_get');
 	}
 }
 
@@ -1575,74 +1512,6 @@ class datastore_redis extends datastore_common
 	}
 }
 
-class datastore_eaccelerator extends datastore_common
-{
-	var $engine    = 'eAccelerator';
-	var $prefix    = null;
-
-	function datastore_eaccelerator ($prefix = null)
-	{
-		if (!$this->is_installed())
-		{
-			die('Error: eAccelerator extension not installed');
-		}
-		$this->dbg_enabled = sql_dbg_enabled();
-		$this->prefix = $prefix;
-	}
-
-	function store ($title, $var)
-	{
-		$this->data[$title] = $var;
-
-		$this->cur_query = "cache->set('$title')";
-		$this->debug('start');
-		$this->debug('stop');
-		$this->cur_query = null;
-		$this->num_queries++;
-
-		eaccelerator_put($this->prefix . $title, $var);
-	}
-
-	function clean ()
-	{
-		foreach ($this->known_items as $title => $script_name)
-		{
-			$this->cur_query = "cache->rm('$title')";
-			$this->debug('start');
-			$this->debug('stop');
-			$this->cur_query = null;
-			$this->num_queries++;
-
-			eaccelerator_rm($this->prefix . $title);
-		}
-	}
-
-	function _fetch_from_store ()
-	{
-		if (!$items = $this->queued_items)
-		{
-			$src = $this->_debug_find_caller('enqueue');
-			trigger_error("Datastore: item '$item' already enqueued [$src]", E_USER_ERROR);
-		}
-
-		foreach ($items as $item)
-		{
-			$this->cur_query = "cache->get('$item')";
-			$this->debug('start');
-			$this->debug('stop');
-			$this->cur_query = null;
-			$this->num_queries++;
-
-			$this->data[$item] = eaccelerator_get($this->prefix . $item);
-		}
-	}
-
-	function is_installed ()
-	{
-		return function_exists('eaccelerator_get');
-	}
-}
-
 class datastore_xcache extends datastore_common
 {
 	var $prefix = null;
@@ -1882,10 +1751,6 @@ switch ($bb_cfg['datastore_type'])
 
 	case 'redis':
 		$datastore = new datastore_redis($bb_cfg['cache']['redis'], $bb_cfg['cache']['prefix']);
-		break;
-
-	case 'eaccelerator':
-		$datastore = new datastore_eaccelerator($bb_cfg['cache']['prefix']);
 		break;
 
 	case 'xcache':

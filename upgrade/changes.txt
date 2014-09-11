@@ -1,0 +1,20 @@
+Схема изменений начиная с версии 2.1 (R600):
+
+Изменения в базе:
+
+DROP TABLE IF EXISTS `bb_reports`;
+DROP TABLE IF EXISTS `bb_reports_changes`;
+DROP TABLE IF EXISTS `bb_reports_modules`;
+DROP TABLE IF EXISTS `bb_reports_reasons`;
+DELETE FROM `bb_config` WHERE `config_name` = 'report_subject_auth';
+DELETE FROM `bb_config` WHERE `config_name` = 'report_modules_cache';
+DELETE FROM `bb_config` WHERE `config_name` = 'report_hack_count';
+DELETE FROM `bb_config` WHERE `config_name` = 'report_notify';
+DELETE FROM `bb_config` WHERE `config_name` = 'report_list_admin';
+DELETE FROM `bb_config` WHERE `config_name` = 'report_new_window';
+DELETE FROM `bb_config` WHERE `config_name` = 'reports_enabled';
+ALTER TABLE `bb_posts` DROP COLUMN `post_reported`;
+ALTER TABLE `bb_privmsgs` DROP COLUMN `privmsgs_reported`;
+ALTER TABLE `bb_topics` DROP COLUMN `topic_reported`;
+DELETE FROM `bb_cron` WHERE `cron_script` = 'site_backup.php';
+DELETE FROM `bb_cron` WHERE `cron_script` = 'db_backup.php';

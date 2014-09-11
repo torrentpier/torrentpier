@@ -360,37 +360,6 @@ if ($mode == 'read')
 		$l_box_name = $lang['SENT'];
 	}
 
-	// Report
-	//
-	// Get report privmsg module and create report links
-	//
-	if ($folder == 'inbox')
-	{
-		include(INC_DIR ."functions_report.php");
-		$report_privmsg = report_modules('name', 'report_privmsg');
-
-		if ($report_privmsg && $report_privmsg->auth_check('auth_write'))
-		{
-			if ($privmsg['privmsgs_reported'])
-			{
-				$report_img = '<img src="' . $images['icon_reported'] . '" alt="' . $report_privmsg->lang['DUPLICATE_REPORT'] . '" title="' . $report_privmsg->lang['DUPLICATE_REPORT'] . '" border="0" />';
-				$report = $report_privmsg->lang['DUPLICATE_REPORT'];
-			}
-			else
-			{
-				$temp_url = "report.php?mode=" . $report_privmsg->mode . "&amp;id=$privmsg_id";
-				$report_img = '<a href="' . $temp_url . '"><img src="' . $images['icon_report'] . '" alt="' . $report_privmsg->lang['WRITE_REPORT'] . '" title="' . $report_privmsg->lang['WRITE_REPORT'] . '" border="0" /></a>';
-				$report = '<a href="' . $temp_url . '">' . $report_privmsg->lang['WRITE_REPORT'] . '</a>';
-			}
-
-			$template->assign_vars(array(
-				'REPORT_PM_IMG' => $report_img,
-				'REPORT_PM' => $report,
-			));
-		}
-	}
-	// Report [END]
-
 	$s_hidden_fields = '<input type="hidden" name="mark[]" value="' . $privmsgs_id . '" />';
 
 	$page_title = $lang['READ_PM'];

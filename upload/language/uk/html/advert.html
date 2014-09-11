@@ -1,17 +1,4 @@
-<title>РЕКЛАМА НА САЙТІ</title>
-
-<div id="infobox-wrap" class="bCenter row1">
-	<fieldset class="pad_6">
-	<legend class="med bold mrg_2 warnColor1">РЕКЛАМА НА САЙТІ</legend>
-		<div class="bCenter">
-			<style type="text/css">
-				#infobox-body p { margin-top: 1em; margin-bottom: 1em; }
-			</style>
-			<div id="infobox-body">
-				<h2 class="bold">Розміщення реклами на <a href="http://<?php echo ($bb_cfg['server_port'] != 80) ? "{$bb_cfg['server_name']}:{$bb_cfg['server_port']}" : $bb_cfg['server_name']; ?>"><?php echo $bb_cfg['sitename']?></a></h2>
-				<p>З питань розміщення реклами звертайтесь за адресою: <strong><a href="mailto:<?php echo $bb_cfg['adv_email']; ?>" class="gen"><?php echo $bb_cfg['adv_email']; ?></a></strong></p>
-			</div><!--/infobox-body-->
-		</div>
-	</fieldset>
-	<p class="gen tRight pad_6"><a href="javascript:window.close();" class="gen">[ Закрити ]</a></p>
-</div><!--/infobox-wrap-->
+<div id="infobox-body">
+	<h2 class="bold">Розміщення реклами на <a href="http://<?php echo ($bb_cfg['server_port'] != 80) ? "{$bb_cfg['server_name']}:{$bb_cfg['server_port']}" : $bb_cfg['server_name']; ?>"><?php echo $bb_cfg['sitename']?></a></h2>
+	<p>З питань розміщення реклами звертайтесь за адресою: <strong><a href="mailto:<?php echo $bb_cfg['adv_email']; ?>" class="gen"><?php echo $bb_cfg['adv_email']; ?></a></strong></p>
+</div><!--/infobox-body-->

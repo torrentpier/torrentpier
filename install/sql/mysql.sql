@@ -44,10 +44,6 @@ DROP TABLE IF EXISTS `bb_privmsgs`;
 DROP TABLE IF EXISTS `bb_privmsgs_text`;
 DROP TABLE IF EXISTS `bb_quota_limits`;
 DROP TABLE IF EXISTS `bb_ranks`;
-DROP TABLE IF EXISTS `bb_reports`;
-DROP TABLE IF EXISTS `bb_reports_changes`;
-DROP TABLE IF EXISTS `bb_reports_modules`;
-DROP TABLE IF EXISTS `bb_reports_reasons`;
 DROP TABLE IF EXISTS `bb_search_rebuild`;
 DROP TABLE IF EXISTS `bb_search_results`;
 DROP TABLE IF EXISTS `bb_sessions`;
@@ -555,15 +551,8 @@ INSERT INTO `bb_config` VALUES ('static_sitemap', '');
 INSERT INTO `bb_config` VALUES ('topics_per_page', '50');
 INSERT INTO `bb_config` VALUES ('xs_use_cache', '1');
 INSERT INTO `bb_config` VALUES ('active_ads', '');
-INSERT INTO `bb_config` VALUES ('report_subject_auth', '1');
-INSERT INTO `bb_config` VALUES ('report_modules_cache', '1');
-INSERT INTO `bb_config` VALUES ('report_hack_count', '0');
-INSERT INTO `bb_config` VALUES ('report_notify', '0');
-INSERT INTO `bb_config` VALUES ('report_list_admin', '0');
-INSERT INTO `bb_config` VALUES ('report_new_window', '0');
 INSERT INTO `bb_config` VALUES ('cron_enabled', '1');
 INSERT INTO `bb_config` VALUES ('cron_check_interval', '300');
-INSERT INTO `bb_config` VALUES ('reports_enabled', '1');
 INSERT INTO `bb_config` VALUES ('magnet_links_enabled', '1');
 INSERT INTO `bb_config` VALUES ('gender', '1');
 INSERT INTO `bb_config` VALUES ('callseed', '0');
@@ -615,29 +604,27 @@ CREATE TABLE IF NOT EXISTS `bb_cron` (
 -- Дамп данных таблицы `bb_cron`
 --
 
-INSERT INTO `bb_cron` VALUES (1, 0, 'Site backup', 'site_backup.php', 'daily', '1', '05:00:00', 10, '', '', NULL, 1, '', 0, 1, 0);
-INSERT INTO `bb_cron` VALUES (2, 0, 'DB backup', 'db_backup.php', 'daily', '1', '05:00:00', 20, '', '', NULL, 1, '', 0, 1, 0);
-INSERT INTO `bb_cron` VALUES (3, 1, 'Attach maintenance', 'attach_maintenance.php', 'daily', NULL, '05:00:00', 40, '', '', NULL, 1, '', 0, 1, 0);
-INSERT INTO `bb_cron` VALUES (4, 1, 'Board maintenance', 'bb_maintenance.php', 'daily', NULL, '05:00:00', 40, '', '', NULL, 1, '', 0, 1, 0);
-INSERT INTO `bb_cron` VALUES (5, 1, 'Prune forums', 'prune_forums.php', 'daily', NULL, '05:00:00', 50, '', '', NULL, 1, '', 0, 1, 0);
-INSERT INTO `bb_cron` VALUES (6, 1, 'Prune topic moved stubs', 'prune_topic_moved.php', 'daily', NULL, '05:00:00', 60, '', '', NULL, 1, '', 0, 1, 0);
-INSERT INTO `bb_cron` VALUES (7, 1, 'Logs cleanup', 'clean_log.php', 'daily', NULL, '05:00:00', 70, '', '', NULL, 1, '', 0, 1, 0);
-INSERT INTO `bb_cron` VALUES (8, 1, 'Tracker maintenance', 'tr_maintenance.php', 'daily', NULL, '05:00:00', 90, '', '', NULL, 1, '', 0, 1, 0);
-INSERT INTO `bb_cron` VALUES (9, 1, 'Clean dlstat', 'clean_dlstat.php', 'daily', NULL, '05:00:00', 100, '', '', NULL, 1, '', 0, 1, 0);
-INSERT INTO `bb_cron` VALUES (10, 1, 'Prune inactive users', 'prune_inactive_users.php', 'daily', NULL, '05:00:00', 110, '', '', NULL, 1, '', 0, 1, 0);
-INSERT INTO `bb_cron` VALUES (11, 1, 'Sessions cleanup', 'sessions_cleanup.php', 'interval', NULL, NULL, 255, '', '', '00:03:00', 0, '', 0, 0, 0);
-INSERT INTO `bb_cron` VALUES (12, 1, 'DS update ''cat_forums''', 'ds_update_cat_forums.php', 'interval', NULL, NULL, 255, '', '', '00:05:00', 0, '', 0, 0, 0);
-INSERT INTO `bb_cron` VALUES (13, 1, 'DS update ''stats''', 'ds_update_stats.php', 'interval', NULL, NULL, 255, '', '', '00:10:00', 0, '', 0, 0, 0);
-INSERT INTO `bb_cron` VALUES (14, 1, 'Flash topic view', 'flash_topic_view.php', 'interval', NULL, NULL, 255, '', '', '00:10:00', 0, '', 0, 0, 0);
-INSERT INTO `bb_cron` VALUES (15, 1, 'Clean search results', 'clean_search_results.php', 'interval', NULL, NULL, 255, '', '', '00:10:00', 0, '', 0, 0, 0);
-INSERT INTO `bb_cron` VALUES (16, 1, 'Tracker cleanup and dlstat', 'tr_cleanup_and_dlstat.php', 'interval', NULL, NULL, 20, '', '', '00:15:00', 0, '', 0, 0, 0);
-INSERT INTO `bb_cron` VALUES (17, 1, 'Make tracker snapshot', 'tr_make_snapshot.php', 'interval', NULL, NULL, 10, '', '', '00:10:00', 0, '', 0, 0, 0);
-INSERT INTO `bb_cron` VALUES (18, 1, 'Seeder last seen', 'tr_update_seeder_last_seen.php', 'interval', NULL, NULL, 255, '', '', '01:00:00', 0, '', 0, 0, 0);
-INSERT INTO `bb_cron` VALUES (19, 1, 'Captcha', 'captcha_gen_gc.php', 'daily', NULL, '05:00:00', 120, '', '', NULL, 0, '', 0, 0, 0);
-INSERT INTO `bb_cron` VALUES (20, 1, 'Tracker dl-complete count', 'tr_complete_count.php', 'interval', NULL, NULL, 255, '', '', '06:00:00', 0, '', 0, 0, 0);
-INSERT INTO `bb_cron` VALUES (21, 1, 'Cache garbage collector', 'cache_gc.php', 'interval', NULL, NULL, 255, '', '', '00:05:00', 0, '', 0, 0, 0);
-INSERT INTO `bb_cron` VALUES (22, 1, 'Sitemap update', 'sitemap.php', 'daily', NULL, '06:00:00', 30, '', '', NULL, 0, '', 0, 0, 0);
-INSERT INTO `bb_cron` VALUES (23, 1, 'Update forums atom', 'update_forums_atom.php', 'interval', NULL, NULL, 255, '', '', '00:15:00', 0, '', 0, 0, 0);
+INSERT INTO `bb_cron` VALUES (1, 1, 'Attach maintenance', 'attach_maintenance.php', 'daily', NULL, '05:00:00', 40, '', '', NULL, 1, '', 0, 1, 0);
+INSERT INTO `bb_cron` VALUES (2, 1, 'Board maintenance', 'bb_maintenance.php', 'daily', NULL, '05:00:00', 40, '', '', NULL, 1, '', 0, 1, 0);
+INSERT INTO `bb_cron` VALUES (3, 1, 'Prune forums', 'prune_forums.php', 'daily', NULL, '05:00:00', 50, '', '', NULL, 1, '', 0, 1, 0);
+INSERT INTO `bb_cron` VALUES (4, 1, 'Prune topic moved stubs', 'prune_topic_moved.php', 'daily', NULL, '05:00:00', 60, '', '', NULL, 1, '', 0, 1, 0);
+INSERT INTO `bb_cron` VALUES (5, 1, 'Logs cleanup', 'clean_log.php', 'daily', NULL, '05:00:00', 70, '', '', NULL, 1, '', 0, 1, 0);
+INSERT INTO `bb_cron` VALUES (6, 1, 'Tracker maintenance', 'tr_maintenance.php', 'daily', NULL, '05:00:00', 90, '', '', NULL, 1, '', 0, 1, 0);
+INSERT INTO `bb_cron` VALUES (7, 1, 'Clean dlstat', 'clean_dlstat.php', 'daily', NULL, '05:00:00', 100, '', '', NULL, 1, '', 0, 1, 0);
+INSERT INTO `bb_cron` VALUES (8, 1, 'Prune inactive users', 'prune_inactive_users.php', 'daily', NULL, '05:00:00', 110, '', '', NULL, 1, '', 0, 1, 0);
+INSERT INTO `bb_cron` VALUES (9, 1, 'Sessions cleanup', 'sessions_cleanup.php', 'interval', NULL, NULL, 255, '', '', '00:03:00', 0, '', 0, 0, 0);
+INSERT INTO `bb_cron` VALUES (10, 1, 'DS update ''cat_forums''', 'ds_update_cat_forums.php', 'interval', NULL, NULL, 255, '', '', '00:05:00', 0, '', 0, 0, 0);
+INSERT INTO `bb_cron` VALUES (11, 1, 'DS update ''stats''', 'ds_update_stats.php', 'interval', NULL, NULL, 255, '', '', '00:10:00', 0, '', 0, 0, 0);
+INSERT INTO `bb_cron` VALUES (12, 1, 'Flash topic view', 'flash_topic_view.php', 'interval', NULL, NULL, 255, '', '', '00:10:00', 0, '', 0, 0, 0);
+INSERT INTO `bb_cron` VALUES (13, 1, 'Clean search results', 'clean_search_results.php', 'interval', NULL, NULL, 255, '', '', '00:10:00', 0, '', 0, 0, 0);
+INSERT INTO `bb_cron` VALUES (14, 1, 'Tracker cleanup and dlstat', 'tr_cleanup_and_dlstat.php', 'interval', NULL, NULL, 20, '', '', '00:15:00', 0, '', 0, 0, 0);
+INSERT INTO `bb_cron` VALUES (15, 1, 'Make tracker snapshot', 'tr_make_snapshot.php', 'interval', NULL, NULL, 10, '', '', '00:10:00', 0, '', 0, 0, 0);
+INSERT INTO `bb_cron` VALUES (16, 1, 'Seeder last seen', 'tr_update_seeder_last_seen.php', 'interval', NULL, NULL, 255, '', '', '01:00:00', 0, '', 0, 0, 0);
+INSERT INTO `bb_cron` VALUES (17, 1, 'Captcha', 'captcha_gen_gc.php', 'daily', NULL, '05:00:00', 120, '', '', NULL, 0, '', 0, 0, 0);
+INSERT INTO `bb_cron` VALUES (18, 1, 'Tracker dl-complete count', 'tr_complete_count.php', 'interval', NULL, NULL, 255, '', '', '06:00:00', 0, '', 0, 0, 0);
+INSERT INTO `bb_cron` VALUES (19, 1, 'Cache garbage collector', 'cache_gc.php', 'interval', NULL, NULL, 255, '', '', '00:05:00', 0, '', 0, 0, 0);
+INSERT INTO `bb_cron` VALUES (20, 1, 'Sitemap update', 'sitemap.php', 'daily', NULL, '06:00:00', 30, '', '', NULL, 0, '', 0, 0, 0);
+INSERT INTO `bb_cron` VALUES (21, 1, 'Update forums atom', 'update_forums_atom.php', 'interval', NULL, NULL, 255, '', '', '00:15:00', 0, '', 0, 0, 0);
 
 -- --------------------------------------------------------
 
@@ -868,7 +855,6 @@ CREATE TABLE IF NOT EXISTS `bb_posts` (
   `post_edit_time` int(11) NOT NULL DEFAULT '0',
   `post_edit_count` smallint(5) unsigned NOT NULL DEFAULT '0',
   `post_attachment` tinyint(1) NOT NULL DEFAULT '0',
-  `post_reported` tinyint(1) NOT NULL DEFAULT '0',
   `user_post` tinyint(1) NOT NULL DEFAULT '1',
   `mc_comment` TEXT NOT NULL DEFAULT  '',
   `mc_type` TINYINT( 1 ) NOT NULL DEFAULT  '0',
@@ -884,7 +870,7 @@ CREATE TABLE IF NOT EXISTS `bb_posts` (
 -- Дамп данных таблицы `bb_posts`
 --
 
-INSERT INTO `bb_posts` VALUES (1, 1, 1, 2, UNIX_TIMESTAMP(), '', 0, 0, '', 0, 0, 0, 0, 1, '', 0, 0);
+INSERT INTO `bb_posts` VALUES (1, 1, 1, 2, UNIX_TIMESTAMP(), '', 0, 0, '', 0, 0, 0, 1, '', 0, 0);
 
 -- --------------------------------------------------------
 
@@ -944,7 +930,6 @@ CREATE TABLE IF NOT EXISTS `bb_privmsgs` (
   `privmsgs_to_userid` mediumint(8) NOT NULL DEFAULT '0',
   `privmsgs_date` int(11) NOT NULL DEFAULT '0',
   `privmsgs_ip` varchar(32) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL DEFAULT '',
-  `privmsgs_reported` tinyint(1) NOT NULL DEFAULT '0',
   PRIMARY KEY (`privmsgs_id`),
   KEY `privmsgs_from_userid` (`privmsgs_from_userid`),
   KEY `privmsgs_to_userid` (`privmsgs_to_userid`)
@@ -1004,100 +989,6 @@ CREATE TABLE IF NOT EXISTS `bb_ranks` (
 --
 
 INSERT INTO `bb_ranks` VALUES (1, 'Администратор', -1, 1, 'images/ranks/admin.png', 'colorAdmin');
-
--- --------------------------------------------------------
-
---
--- Структура таблицы `bb_reports`
---
-
-CREATE TABLE IF NOT EXISTS `bb_reports` (
-  `report_id` mediumint(8) unsigned NOT NULL AUTO_INCREMENT,
-  `user_id` mediumint(8) NOT NULL,
-  `report_time` int(11) NOT NULL,
-  `report_last_change` mediumint(8) unsigned DEFAULT NULL,
-  `report_module_id` mediumint(8) unsigned NOT NULL,
-  `report_status` tinyint(1) NOT NULL,
-  `report_reason_id` mediumint(8) unsigned NOT NULL,
-  `report_subject` int(11) NOT NULL,
-  `report_subject_data` mediumtext,
-  `report_title` varchar(255) NOT NULL,
-  `report_desc` text NOT NULL,
-  PRIMARY KEY (`report_id`),
-  KEY `user_id` (`user_id`),
-  KEY `report_time` (`report_time`),
-  KEY `report_type_id` (`report_module_id`),
-  KEY `report_status` (`report_status`),
-  KEY `report_reason_id` (`report_reason_id`),
-  KEY `report_subject` (`report_subject`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
-
--- --------------------------------------------------------
-
---
--- Структура таблицы `bb_reports_changes`
---
-
-CREATE TABLE IF NOT EXISTS `bb_reports_changes` (
-  `report_change_id` mediumint(8) unsigned NOT NULL AUTO_INCREMENT,
-  `report_id` mediumint(8) unsigned NOT NULL,
-  `user_id` mediumint(8) NOT NULL,
-  `report_change_time` int(11) NOT NULL,
-  `report_status` tinyint(1) NOT NULL,
-  `report_change_comment` text NOT NULL,
-  PRIMARY KEY (`report_change_id`),
-  KEY `report_id` (`report_id`),
-  KEY `user_id` (`user_id`),
-  KEY `report_change_time` (`report_change_time`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
-
--- --------------------------------------------------------
-
---
--- Структура таблицы `bb_reports_modules`
---
-
-CREATE TABLE IF NOT EXISTS `bb_reports_modules` (
-  `report_module_id` mediumint(8) unsigned NOT NULL AUTO_INCREMENT,
-  `report_module_order` mediumint(8) unsigned NOT NULL,
-  `report_module_notify` tinyint(1) NOT NULL,
-  `report_module_prune` smallint(6) NOT NULL,
-  `report_module_last_prune` int(11) DEFAULT NULL,
-  `report_module_name` varchar(50) NOT NULL,
-  `auth_write` tinyint(1) NOT NULL,
-  `auth_view` tinyint(1) NOT NULL,
-  `auth_notify` tinyint(1) NOT NULL,
-  `auth_delete` tinyint(1) NOT NULL,
-  PRIMARY KEY (`report_module_id`),
-  KEY `report_module_order` (`report_module_order`),
-  KEY `auth_view` (`auth_view`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8;
-
---
--- Дамп данных таблицы `bb_reports_modules`
---
-
-INSERT INTO `bb_reports_modules` VALUES (1, 1, 0, 0, NULL, 'report_general', 0, 1, 1, 1);
-INSERT INTO `bb_reports_modules` VALUES (2, 2, 0, 0, NULL, 'report_post', 0, 1, 1, 1);
-INSERT INTO `bb_reports_modules` VALUES (3, 3, 0, 0, NULL, 'report_topic', 0, 1, 1, 1);
-INSERT INTO `bb_reports_modules` VALUES (4, 4, 0, 0, NULL, 'report_user', 0, 1, 1, 1);
-INSERT INTO `bb_reports_modules` VALUES (5, 5, 0, 0, NULL, 'report_privmsg', 0, 1, 1, 1);
-
--- --------------------------------------------------------
-
---
--- Структура таблицы `bb_reports_reasons`
---
-
-CREATE TABLE IF NOT EXISTS `bb_reports_reasons` (
-  `report_reason_id` mediumint(8) unsigned NOT NULL AUTO_INCREMENT,
-  `report_module_id` mediumint(8) unsigned NOT NULL,
-  `report_reason_order` mediumint(8) unsigned NOT NULL,
-  `report_reason_desc` varchar(255) NOT NULL,
-  PRIMARY KEY (`report_reason_id`),
-  KEY `report_type_id` (`report_module_id`),
-  KEY `report_reason_order` (`report_reason_order`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -1248,7 +1139,6 @@ CREATE TABLE IF NOT EXISTS `bb_topics` (
   `topic_last_post_id` mediumint(8) unsigned NOT NULL DEFAULT '0',
   `topic_moved_id` mediumint(8) unsigned NOT NULL DEFAULT '0',
   `topic_attachment` tinyint(1) NOT NULL DEFAULT '0',
-  `topic_reported` tinyint(1) NOT NULL DEFAULT '0',
   `topic_dl_type` tinyint(1) NOT NULL DEFAULT '0',
   `topic_last_post_time` int(11) NOT NULL DEFAULT '0',
   `topic_show_first_post` tinyint(1) unsigned NOT NULL DEFAULT '0',
@@ -1263,7 +1153,7 @@ CREATE TABLE IF NOT EXISTS `bb_topics` (
 -- Дамп данных таблицы `bb_topics`
 --
 
-INSERT INTO `bb_topics` VALUES (1, 1, 'Добро пожаловать в TorrentPier II', 2, UNIX_TIMESTAMP(), 2, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 972086460, 0);
+INSERT INTO `bb_topics` VALUES (1, 1, 'Добро пожаловать в TorrentPier II', 2, UNIX_TIMESTAMP(), 2, 0, 0, 0, 0, 1, 1, 0, 0, 0, UNIX_TIMESTAMP(), 0);
 
 -- --------------------------------------------------------
 

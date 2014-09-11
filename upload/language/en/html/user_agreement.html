@@ -1,25 +1,10 @@
-<?php if (isset($in_info)) {?>
-<title>USER AGREEMENT</title>
-
-<div id="infobox-wrap" class="bCenter row1">
-	<fieldset class="pad_6">
-	<legend class="med bold mrg_2 warnColor1">USER AGREEMENT</legend>
-		<div class="bCenter">
-
-<style type="text/css">
-
-#infobox-body p { margin-top: 1em; margin-bottom: 1em; }
-
-</style>
-<?php }?>
-
 <div id="infobox-body">
 
 <p>
 
-<h1>USER AGREEMENT</h1>
+<p><h1>USER AGREEMENT</h1></p>
 
-<h3>ABOUT SITE</h3>
+<p><h3>ABOUT SITE</h3></p>
 
 <p>Internet - resource (website) <a href="http://<?php echo ($bb_cfg['server_port'] != 80) ? "{$bb_cfg['server_name']}:{$bb_cfg['server_port']}" : $bb_cfg['server_name']; ?>"><?php echo $bb_cfg['sitename']?></a> (hereinafter - Resource) is an internet site that allows users to share information with each other via bit-torrent, as well as in free form, and provides a means to monitor the integrity of information transmitted (via hash-files).</p>
 
@@ -97,9 +82,3 @@
 </p>
 
 </div><!--/infobox-body-->
-<?php if (isset($in_info)) {?>
-</div>
-	</fieldset>
-	<p class="gen tRight pad_6"><a href="javascript:window.close();" class="gen">[ Close ]</a></p>
-</div><!--/infobox-wrap-->
-<?php }?>

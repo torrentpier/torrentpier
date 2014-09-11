@@ -13,7 +13,6 @@
  * Server
    - Cloudflare
    - Script versions
-   - Backup script
    - GZip
  * Tracker
  * FAQ url
@@ -71,9 +70,9 @@ $domain_name = 'torrentpier.me';  // enter here your primary domain name of your
 $domain_name = (!empty($_SERVER['SERVER_NAME'])) ? $_SERVER['SERVER_NAME'] : $domain_name;
 
 // Version info
-$bb_cfg['tp_version'] = '2.1 (STABLE)';
-$bb_cfg['tp_release_date'] = '07-09-2014';
-$bb_cfg['tp_release_state'] = 'R600';
+$bb_cfg['tp_version'] = '2.1.1';
+$bb_cfg['tp_release_date'] = '11-09-2014';
+$bb_cfg['tp_release_state'] = 'ALPHA';
 
 // Database
 $charset  = 'utf8';
@@ -120,7 +119,7 @@ $bb_cfg['cache']['redis']  = array(
 	'con_required' => true,
 );
 
-// Available cache types: memcache, sqlite, redis, eaccelerator, apc, xcache (default of filecache)
+// Available cache types: memcache, sqlite, redis, apc, xcache (default of filecache)
 # name => array( (string) type, (array) cfg )
 $bb_cfg['cache']['engines'] = array(
 	'bb_cache'      => array('filecache', array()),
@@ -132,7 +131,7 @@ $bb_cfg['cache']['engines'] = array(
 	'bb_poll_data'  => array('filecache', array()),
 );
 // Datastore
-// Available datastore types: memcache, sqlite, redis, eaccelerator, apc, xcache  (default filecache)
+// Available datastore types: memcache, sqlite, redis, apc, xcache  (default filecache)
 $bb_cfg['datastore_type'] = 'filecache';
 
 // Server
@@ -147,12 +146,7 @@ if (isset($_SERVER['HTTP_CF_CONNECTING_IP']))
 }
 
 // Increase number after changing js or css
-$bb_cfg['js_ver']             = 1;
-$bb_cfg['css_ver']            = 1;
-
-// Backup
-$bb_cfg['db_backup_shell_cmd']   = '';             // '/path/to/db_backup.sh 2>&1'
-$bb_cfg['site_backup_shell_cmd'] = '';
+$bb_cfg['js_ver'] = $bb_cfg['css_ver'] = 1;
 
 // GZip
 $bb_cfg['gzip_compress']      = true;              // compress output
@@ -606,9 +600,9 @@ $bb_cfg['trash_forum_id'] = 0; // (int) 7
 $bb_cfg['first_logon_redirect_url'] = 'index.php';
 $bb_cfg['terms_and_conditions_url'] = 'terms.php';
 
-$bb_cfg['user_agreement_url']       = 'misc.php?do=info&show=user_agreement';
-$bb_cfg['copyright_holders_url']    = 'misc.php?do=info&show=copyright_holders';
-$bb_cfg['advert_url']               = 'misc.php?do=info&show=advert';
+$bb_cfg['user_agreement_url']       = 'info.php?show=user_agreement';
+$bb_cfg['copyright_holders_url']    = 'info.php?show=copyright_holders';
+$bb_cfg['advert_url']               = 'info.php?show=advert';
 
 // Captcha
 $bb_cfg['captcha'] = array(

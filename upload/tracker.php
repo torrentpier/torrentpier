@@ -978,9 +978,9 @@ $template->assign_vars(array(
 	'SHOW_FORUM'        => $show_forum_val,
 	'SHOW_AUTHOR'       => $show_author_val,
 	'SHOW_SPEED'        => $show_speed_val,
-    'MAX_FS'            => $max_forums_selected,
-    'L_MAX_FS'          => sprintf($lang['SEL_CHAPTERS_HELP'], $max_forums_selected),
-    'TRACKER_URL'       => make_url('tracker.php?'),
+	'MAX_FS'            => $max_forums_selected,
+	'L_MAX_FS'          => sprintf($lang['SEL_CHAPTERS_HELP'], $max_forums_selected),
+	'TRACKER_URL'       => make_url('tracker.php?'),
 
 	'TR_CAT_URL'        => "$tracker_url?$cat_key=",
 	'TR_FORUM_URL'      => "$tracker_url?$forum_key=",

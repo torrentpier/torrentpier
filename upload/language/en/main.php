@@ -657,6 +657,7 @@ $lang['USER_AGREEMENT_AGREE'] = 'I have read and agree to the User agreement abo
 
 $lang['COPYRIGHT_HOLDERS'] = 'For copyright holders';
 $lang['ADVERT'] = 'Advertise on this site';
+$lang['NOT_FOUND'] = 'File not found';
 
 // Visual confirmation system strings
 $lang['CONFIRM_CODE_WRONG'] = 'The confirmation code you entered was incorrect';
@@ -1032,13 +1033,6 @@ $lang['DIRECTORY_DOES_NOT_EXIST'] = 'The Directory \'%s\' does not exist or Coul
 $lang['DIRECTORY_IS_NOT_A_DIR'] = 'Please check if \'%s\' is a directory.'; // replace %s with directory
 $lang['DIRECTORY_NOT_WRITEABLE'] = 'Directory \'%s\' is not writeable. You\'ll have to create the upload path and chmod it to 777 (or change the owner to you httpd-servers owner) to upload files.<br />If you have only plain FTP-access change the \'Attribute\' of the directory to rwxrwxrwx.'; // replace %s with directory
 
-// Attach Rules Window
-$lang['RULES_PAGE'] = 'Attachment Rules';
-$lang['ATTACH_RULES_TITLE'] = 'Allowed Extension Groups and their Sizes';
-$lang['GROUP_RULE_HEADER'] = '%s -> Maximum Upload Size: %s'; // Replace first %s with Extension Group, second one with the Size STRING
-$lang['ALLOWED_EXTENSIONS_AND_SIZES'] = 'Allowed Extensions and Sizes';
-$lang['NOTE_USER_EMPTY_GROUP_PERMISSIONS'] = 'NOTE:<br />You are normally allowed to attach files within this Forum, <br />but since no Extension Group is allowed to be attached here, <br />you are unable to attach anything. If you try, <br />you will receive an Error Message.<br />';
-
 // Quota Variables
 $lang['UPLOAD_QUOTA'] = 'Upload Quota';
 $lang['PM_QUOTA'] = 'PM Quota';
@@ -1381,71 +1375,16 @@ $lang['ONLY_NEW_POSTS'] = 'only new posts';
 $lang['ONLY_NEW_TOPICS'] = 'only new topics';
 
 $lang['TORHELP_TITLE'] = 'Please help seeding these torrents!';
-
-// Reports (need to translate it!)
-$lang['REPORTS'] = 'Reports';
-$lang['REPORTS_DISABLE'] = 'Reports disabled';
-$lang['NEW_REPORT'] = ' (one open)';
-$lang['NEW_REPORTS'] = ' (%d open)';
-$lang['NO_NEW_REPORTS'] = ': no new Reports';
-$lang['REPORT_INDEX'] = 'Index';
 $lang['STATISTICS'] = 'Statistics';
 $lang['STATISTIC'] = 'Statistic';
 $lang['VALUE'] = 'Value';
-$lang['REPORT_COUNT'] = 'Current report count';
-$lang['REPORT_MODULES_COUNT'] = 'Report modules count';
-$lang['REPORT_HACK_COUNT'] = 'Overall report count';
-$lang['DELETED_REPORTS'] = 'Reports suggested for deletion';
-$lang['REPORT_TYPE'] = 'Report type';
-$lang['REPORT_BY'] = 'by';
-$lang['NO_REPORTS'] = 'No reports';
 $lang['INVERT_SELECT'] = 'Invert selection';
-$lang['REPORTED_BY'] = 'Reported by';
-$lang['REPORTED_TIME'] = 'Reported on';
 $lang['STATUS'] = 'Status';
 $lang['LAST_CHANGED_BY'] = 'Last changed by';
 $lang['CHANGES'] = 'Changes';
-$lang['REPORT_CHANGE_TEXT'] = 'Marked as "%1$s" by %2$s on %3$s.';
-$lang['REPORT_CHANGE_TEXT_COMMENT'] = 'Marked as "%1$s" by %2$s on %3$s:<br />%4$s';
-$lang['REPORT_CHANGE_DELETE_TEXT'] = 'Suggested for deletion by %1$s on %2$s.';
 $lang['ACTION'] = 'Action';
-$lang['REPORT_MARK'] = 'Mark as';
-$lang['OPEN_REPORTS'] = 'Offene Meldungen';
-$lang['NO_REPORTS_FOUND'] = 'No matching reports found.';
-$lang['NO_REPORTS_SELECTED'] = 'No reports were selected.';
-$lang['REPORT_NOT_EXISTS'] = 'The selected report doesn\'t exist.';
-$lang['REPORT_NOT_SUPPORTED'] = 'This feature isn\'t supported.';
-$lang['CLICK_RETURN_REPORT'] = '%sClick here%s to return to the report.';
-$lang['CLICK_RETURN_REPORT_LIST'] = '%sClick here%s to return to the report list.';
-
-$lang['REPORT_STATUS'] = array(
-	REPORT_NEW => 'new',
-	REPORT_OPEN => 'open',
-	REPORT_IN_PROCESS => 'in process',
-	REPORT_CLEARED => 'cleared',
-	REPORT_DELETE => 'suggested for deletion',
-);
-
 $lang['REASON'] = 'Reason';
-$lang['REPORT_SUBJECT'] = 'Subject';
-$lang['REPORT_TITLE_EMPTY'] = 'You must enter a title of the report.';
-$lang['REPORT_DESC_EMPTY'] = 'You must enter a message.';
-$lang['REPORT_INSERTED'] = 'The report was sent to the team.';
-
-$lang['CHANGE_REPORT'] = 'Change report';
-$lang['CHANGE_REPORTS'] = 'Change reports';
-$lang['CHANGE_REPORT_EXPLAIN'] = 'Are you sure you want to change the status of the selected report?';
-$lang['CHANGE_REPORTS_EXPLAIN'] = 'Are you sure you want to change the status of the selected reports?';
 $lang['COMMENT'] = 'Comment';
-$lang['REPORT_CHANGED'] = 'The status of the selected report was changed.';
-$lang['REPORTS_CHANGED'] = 'The status of the selected reports was changed.';
-
-$lang['DELETE_REPORT'] = 'Delete report';
-$lang['DELETE_REPORTS'] = 'Delete reports';
-$lang['DELETE_REPORT_EXPLAIN'] = 'Are you sure you want to delete the selected report?';
-$lang['DELETE_REPORTS_EXPLAIN'] = 'Are you sure you want to delete the selected reports?';
-$lang['REPORT_DELETED'] = 'The selected report was deleted.';
-$lang['REPORTS_DELETED'] = 'The selected reports were deleted.';
 
 // search
 $lang['SEARCH_S'] = 'search...';
@@ -2114,73 +2053,7 @@ $lang['SF_SHOW_ON_INDEX'] = 'Show on main page';
 $lang['SF_PARENT_FORUM'] = 'Parent forum';
 $lang['SF_NO_PARENT'] = 'No parent forum';
 $lang['TEMPLATE'] = 'Template';
-
-// Reports (need to translate!)
-$lang['REPORT_CONFIG_EXPLAIN'] = 'On this page you can change the general configuration of the report feature.';
-$lang['REPORT_SUBJECT_AUTH'] = 'Individual permissions';
-$lang['REPORT_SUBJECT_AUTH_EXPLAIN'] = 'If this setting is enabled, moderators can only view reports they can edit. For example a post report will be hidden if the user isn\'t a moderator of the forum the post belongs to.';
-$lang['REPORT_MODULES_CACHE'] = 'Cache modules in a file';
-$lang['REPORT_MODULES_CACHE_EXPLAIN'] = 'Note: The cache directory must be set to <em>CHMOD 777</em> (full write permissions).';
-$lang['REPORT_NOTIFY'] = 'Email notification';
-$lang['REPORT_NOTIFY_CHANGE'] = 'on status changes and new reports';
-$lang['REPORT_NOTIFY_NEW'] = 'on new reports';
-$lang['REPORT_LIST_ADMIN'] = 'Admin-only report list';
-$lang['REPORT_NEW_WINDOW'] = 'Open subjects in a new window';
-$lang['REPORT_NEW_WINDOW_EXPLAIN'] = 'This setting also affects direct links to the reports at the view topic page.';
-$lang['REPORT_CONFIG_UPDATED'] = 'The configuration has been updated.';
-$lang['CLICK_RETURN_REPORT_CONFIG'] = 'Click %sHere%s to return to the configuration.';
-
-$lang['MODULES_REASONS'] = 'Modules and Reasons';
-$lang['REPORT_ADMIN_EXPLAIN'] = 'On this page you can install new report modules and edit or uninstall currently installed modules. In addition you can set up predefined reasons for every report module.';
-$lang['REPORT_MODULE'] = 'Report module';
-$lang['INSTALLED_MODULES'] = 'Installed modules';
-$lang['NO_MODULES_INSTALLED'] = 'No modules installed';
-$lang['REASONS'] = 'Reasons (%d)';
 $lang['SYNC'] = 'Sync';
-$lang['UNINSTALL'] = 'Uninstall';
-$lang['INSTALL2'] = 'Install';
-$lang['INACTIVE_MODULES'] = 'Inactive modules';
-$lang['NO_MODULES_INACTIVE'] = 'No inactive modules';
-$lang['REPORT_MODULE_NOT_EXISTS'] = 'The selected module doesn\'t exist.';
-$lang['CLICK_RETURN_REPORT_ADMIN'] = 'Click %sHere%s to return to the Modules &amp; Reasons administration.';
-
-$lang['BACK_MODULES'] = 'Back to the modules';
-$lang['REPORT_REASON'] = 'Report reason';
-$lang['NO_REASONS'] = 'No reasons for this module';
-$lang['ADD_REASON'] = 'Add reason';
-$lang['EDIT_REASON'] = 'Edit reason';
-$lang['REASON_DESC_EXPLAIN'] = 'If the description matches with a language variable, the variable will be used instead.';
-$lang['REASON_DESC_EMPTY'] = 'You must enter a report reason.';
-$lang['REPORT_REASON_ADDED'] = 'The report reason has been added.';
-$lang['REPORT_REASON_EDITED'] = 'The report reason has been edited.';
-$lang['DELETE_REASON'] = 'Delete reason';
-$lang['DELETE_REPORT_REASON_EXPLAIN'] = 'Are you sure you want to delete the selected report reason?';
-$lang['REPORT_REASON_DELETED'] = 'The report reason has been deleted.';
-$lang['REPORT_REASON_NOT_EXISTS'] = 'The selected report reason doesn\'t exist.';
-$lang['CLICK_RETURN_REPORT_REASONS'] = 'Click %sHere%s to return to the report reasons administration.';
-
-$lang['REPORT_MODULE_SYNCED'] = 'The module has been synced.';
-
-$lang['UNINSTALL_REPORT_MODULE'] = 'Uninstall module';
-$lang['UNINSTALL_REPORT_MODULE_EXPLAIN'] = 'Are you sure you want to uninstall the selected report module? <br />Note: All reports in the module will be deleted, too.';
-$lang['REPORT_MODULE_UNINSTALLED'] = 'The module has been uninstalled.';
-
-$lang['INSTALL_REPORT_MODULE'] = 'Install module';
-$lang['EDIT_REPORT_MODULE'] = 'Edit module';
-$lang['REPORT_PRUNE'] = 'Prune reports';
-$lang['REPORT_PRUNE_EXPLAIN'] = 'Cleared reports and reports marked for deletion will be deleted automatically after <var>x</var> days. Set to <em>zero</em> to disable the feature.';
-$lang['REPORT_PERMISSIONS'] = 'Report permissions';
-$lang['WRITE'] = 'Write';
-$lang['REPORT_AUTH'] = array(
-	REPORT_AUTH_USER => 'Users',
-	REPORT_AUTH_MOD => 'Moderators',
-	REPORT_AUTH_CONFIRM => 'Moderators (after confirmation)',
-	REPORT_AUTH_ADMIN => 'Administrators'
-);
-$lang['REPORT_AUTH_NOTIFY_EXPLAIN'] = 'Moderators will only be notified if they can view and edit the report.';
-$lang['REPORT_AUTH_DELETE_EXPLAIN'] = 'If you select <em>Moderators (after confirmation)</em>, deletions have to be confirmed by an administrator.';
-$lang['REPORT_MODULE_INSTALLED'] = 'The module has been installed.';
-$lang['REPORT_MODULE_EDITED'] = 'The module has been edited.';
 
 // Mods
 $lang['MAX_NEWS_TITLE'] = 'Max. length of the news';

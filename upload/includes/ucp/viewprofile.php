@@ -55,23 +55,6 @@ else
 	$email = '';
 }
 
-// Report
-//
-// Get report user module and create report link
-//
-include(INC_DIR ."functions_report.php");
-$report_user = report_modules('name', 'report_user');
-
-if ($report_user && $report_user->auth_check('auth_write'))
-{
-	$template->assign_block_vars('switch_report_user', array());
-	$template->assign_vars(array(
-		'U_REPORT_USER' => 'report.php?mode='. $report_user->mode .'&amp;id='. $profiledata['user_id'],
-		'L_REPORT_USER' => $report_user->lang['WRITE_REPORT'])
-	);
-}
-// Report [END]
-
 //
 // Generate page
 //

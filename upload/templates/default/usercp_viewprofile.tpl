@@ -487,9 +487,7 @@ ajax.callback.gen_passkey = function(data){
 			</tr>
 		</table>
 		<!--/user_details-->
-
 	<!-- IF IS_AM --><span id="ip_list"></span><!-- ENDIF -->
-
 	</td>
 </tr>
 <!-- IF SIGNATURE -->
@@ -499,13 +497,6 @@ ajax.callback.gen_passkey = function(data){
 	</td>
 </tr>
 <!-- ENDIF -->
-
-<!-- BEGIN switch_report_user -->
-<tr>
-	<td class="catBottom" align="center" colspan="2"><a href="{U_REPORT_USER}" class="gen">{L_REPORT_USER}</a></td>
-</tr>
-<!-- END switch_report_user -->
-
 </table>
 <!--/user_profile-->
 

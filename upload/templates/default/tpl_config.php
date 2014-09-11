@@ -105,13 +105,6 @@ $images['voting_graphic'][4]   = $_main .'voting_bar.gif';
 $images['progress_bar']        = $_main .'progress_bar.gif';
 $images['progress_bar_full']   = $_main .'progress_bar_full.gif';
 
-// Report
-$images['icon_report']         = $_main .'icon_report.gif';
-$images['icon_reported']       = $_main .'icon_reported.gif';
-$images['topic_mod_report']    = $_main .'topic_report.gif';
-$images['topic_mod_reported']  = $_main .'topic_reported.gif';
-// Report [END]
-
 // Vote graphic length defines the maximum length of a vote result graphic, ie. 100% = this length
 $bb_cfg['vote_graphic_length']     = 205;
 $bb_cfg['privmsg_graphic_length']  = 175;

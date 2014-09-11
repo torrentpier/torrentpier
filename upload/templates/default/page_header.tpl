@@ -254,13 +254,6 @@ if ( (typeof(window.opera) != "undefined" && window.opera.version() < 12) || (wi
 			<a href="{U_MEMBERLIST}"><b>{L_MEMBERLIST}</b></a>
 		</td>
 		<td class="nowrap" align="right">
-			<!-- BEGIN switch_report_list -->
-				<a href="{U_REPORT_LIST}" class="mainmenu">{REPORT_LIST}</a> &#0183;
-			<!-- END switch_report_list -->
-			<!-- BEGIN switch_report_list_new -->
-				<strong><a href="{U_REPORT_LIST}" class="mainmenu">{REPORT_LIST} &#0183; </a></strong>
-			<!-- END switch_report_list_new -->
-
 			<!-- IF LOGGED_IN -->
 				<!-- IF HAVE_NEW_PM || HAVE_UNREAD_PM -->
 					<a href="{U_READ_PM}" class="new-pm-link"><b>{L_PRIVATE_MESSAGES}: {PM_INFO}</b></a>
@@ -325,9 +318,6 @@ $(document).ready(function() {
 		</div>
 	</td>
 	<td width="50%" class="tRight">
-		<!-- BEGIN switch_report_general -->
-		<a href="{U_WRITE_REPORT}">{L_WRITE_REPORT}</a> &#0183;
-		<!-- END switch_report_general -->
 		<a href="{U_OPTIONS}"><b>{L_OPTIONS}</b></a> &#0183;
 		<a href="{U_CUR_DOWNLOADS}">{L_PROFILE}</a> <a href="#dls-menu" class="menu-root menu-alt1">&#9660;</a>
 	</td>

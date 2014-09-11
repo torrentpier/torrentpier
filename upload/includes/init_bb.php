@@ -3,7 +3,7 @@
 if (!defined('BB_ROOT')) die(basename(__FILE__));
 if (PHP_VERSION < '5.3') die('TorrentPier II requires PHP version 5.3+. Your PHP version '. PHP_VERSION);
 if (!defined('BB_SCRIPT')) define('BB_SCRIPT', 'undefined');
-if (!defined('BB_CFG_LOADED')) trigger_error('bb_cfg not loaded', E_USER_ERROR);
+if (!defined('BB_CFG_LOADED')) trigger_error('File config.php not loaded', E_USER_ERROR);
 
 // Define some basic configuration arrays
 unset($stopwords, $synonyms_match, $synonyms_replace);
@@ -168,26 +168,6 @@ define('QUOTA_PM_LIMIT',     2);
 define('TOR_STATUS_NORMAL', 0);
 define('TOR_STATUS_FROZEN', 1);
 
-// Report
-// Report status constants
-define('REPORT_NEW', 0);
-define('REPORT_OPEN', 1);
-define('REPORT_IN_PROCESS', 2);
-define('REPORT_CLEARED', 3);
-define('REPORT_DELETE', 4);
-// Report authorisation constants
-define('REPORT_AUTH_USER', 0);
-define('REPORT_AUTH_MOD', 1);
-define('REPORT_AUTH_CONFIRM', 2);
-define('REPORT_AUTH_ADMIN', 3);
-// Report notification constants
-define('REPORT_NOTIFY_NEW', 1);
-define('REPORT_NOTIFY_CHANGE', 2);
-// Other report constants
-define('POST_REPORT_URL', 'r');
-define('POST_REPORT_REASON_URL', 'r');
-// Report [END]
-
 // Gender
 define('MALE',          1);
 define('FEMALE',        2);
@@ -306,10 +286,6 @@ define('BB_PRIVMSGS_TEXT',        'bb_privmsgs_text');
 define('BB_QUOTA_LIMITS',         'bb_quota_limits');
 define('BB_QUOTA',                'bb_attach_quota');
 define('BB_RANKS',                'bb_ranks');
-define('BB_REPORTS',              'bb_reports');         // Report
-define('BB_REPORTS_CHANGES',      'bb_reports_changes'); // Report Change's
-define('BB_REPORTS_MODULES',      'bb_reports_modules'); // Report Module Table
-define('BB_REPORTS_REASONS',      'bb_reports_reasons'); // Report Reasons
 define('BB_SEARCH_REBUILD',       'bb_search_rebuild');
 define('BB_SEARCH',               'bb_search_results');
 define('BB_SESSIONS',             'bb_sessions');

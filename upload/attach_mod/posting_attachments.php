@@ -749,10 +749,7 @@ class attach_parent
 		$s_hidden = '<input type="hidden" name="add_attachment_body" value="' . $value_add . '" />';
 		$s_hidden .= '<input type="hidden" name="posted_attachments_body" value="' . $value_posted . '" />';
 
-		$u_rules_id = $forum_id;
-
 		$template->assign_vars(array(
-			'RULES' => '<a href="'."misc.php?do=attach_rules&f=$u_rules_id".'" target="_blank">'. $lang['ALLOWED_EXTENSIONS_AND_SIZES'] .'</a>',
 			'ADD_ATTACH_HIDDEN_FIELDS' => $s_hidden,
 		));
 
@@ -783,12 +780,11 @@ class attach_parent
 		if ($this->add_attachment_body)
 		{
 			$template->assign_vars(array(
-				'TPL_ADD_ATTACHMENT'   => true,
-				'FILE_COMMENT' => htmlspecialchars($this->file_comment),
-				'FILESIZE'     => $attach_config['max_filesize'],
-				'FILENAME'     => htmlspecialchars($this->filename),
-
-				'S_FORM_ENCTYPE' => 'enctype="multipart/form-data"',
+				'TPL_ADD_ATTACHMENT' => true,
+				'FILE_COMMENT'       => htmlspecialchars($this->file_comment),
+				'FILESIZE'           => $attach_config['max_filesize'],
+				'FILENAME'           => htmlspecialchars($this->filename),
+				'S_FORM_ENCTYPE'     => 'enctype="multipart/form-data"',
 			));
 		}
 
@@ -810,13 +806,12 @@ class attach_parent
 				}
 
 				$template->assign_block_vars('attach_row', array(
-					'FILE_NAME'			=> @htmlspecialchars($this->attachment_filename_list[$i]),
-					'ATTACH_FILENAME'	=> @$this->attachment_list[$i],
-					'FILE_COMMENT'		=> @htmlspecialchars($this->attachment_comment_list[$i]),
-					'ATTACH_ID'			=> @$this->attachment_id_list[$i],
-
-					'U_VIEW_ATTACHMENT'	=> $download_link)
-				);
+					'FILE_NAME'         => @htmlspecialchars($this->attachment_filename_list[$i]),
+					'ATTACH_FILENAME'   => @$this->attachment_list[$i],
+					'FILE_COMMENT'      => @htmlspecialchars($this->attachment_comment_list[$i]),
+					'ATTACH_ID'         => @$this->attachment_id_list[$i],
+					'U_VIEW_ATTACHMENT' => $download_link,
+				));
 
 				// Thumbnail there ? And is the User Admin or Mod ? Then present the 'Delete Thumbnail' Button
 				if (@intval($this->attachment_thumbnail_list[$i]) == 1 && ((isset($is_auth['auth_mod']) && $is_auth['auth_mod']) || IS_ADMIN))
