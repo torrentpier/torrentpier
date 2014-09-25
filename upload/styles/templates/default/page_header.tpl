@@ -11,11 +11,11 @@
 <link rel="search" type="application/opensearchdescription+xml" href="{SITE_URL}opensearch_desc.xml" title="{SITENAME} (Forum)" />
 <link rel="search" type="application/opensearchdescription+xml" href="{SITE_URL}opensearch_desc_bt.xml" title="{SITENAME} (Tracker)" />
 
-<script type="text/javascript" src="{SITE_URL}misc/js/jquery.pack.js?v={$bb_cfg['js_ver']}"></script>
-<script type="text/javascript" src="{SITE_URL}misc/js/main.js?v={$bb_cfg['js_ver']}"></script>
+<script type="text/javascript" src="{SITE_URL}styles/js/jquery.pack.js?v={$bb_cfg['js_ver']}"></script>
+<script type="text/javascript" src="{SITE_URL}styles/js/main.js?v={$bb_cfg['js_ver']}"></script>
 
 <!-- IF INCLUDE_BBCODE_JS -->
-<script type="text/javascript" src="{SITE_URL}misc/js/bbcode.js?v={$bb_cfg['js_ver']}"></script>
+<script type="text/javascript" src="{SITE_URL}styles/js/bbcode.js?v={$bb_cfg['js_ver']}"></script>
 <script type="text/javascript">
 	window.BB = {};
 	window.encURL = encodeURIComponent;

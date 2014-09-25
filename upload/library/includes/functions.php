@@ -1542,11 +1542,11 @@ function setup_style ()
 	}
 
 	$template = new Template(TEMPLATES_DIR . $tpl_dir_name);
-	$css_dir = basename(TEMPLATES_DIR) ."/$tpl_dir_name/css/";
+	$css_dir = 'styles/' . basename(TEMPLATES_DIR) . '/' . $tpl_dir_name . '/css/';
 
 	$template->assign_vars(array(
 		'BB_ROOT'          => BB_ROOT,
-		'SPACER'           => make_url('/images/spacer.gif'),
+		'SPACER'           => make_url('styles/images/spacer.gif'),
 		'STYLESHEET'       => make_url($css_dir . $stylesheet),
 		'EXT_LINK_NEW_WIN' => $bb_cfg['ext_link_new_win'],
 		'TPL_DIR'          => make_url($css_dir),

@@ -5,8 +5,8 @@ global $bb_cfg, $page_cfg, $template, $images, $lang;
 $width = $height = array();
 $template_name = basename(dirname(__FILE__));
 
-$_img  = BB_ROOT . 'images/';
-$_main = BB_ROOT . basename(TEMPLATES_DIR) .'/'. $template_name .'/images/';
+$_img  = BB_ROOT . 'styles/images/';
+$_main = BB_ROOT . 'styles/' . basename(TEMPLATES_DIR) . '/'. $template_name .'/images/';
 $_lang = $_main . 'lang/' . basename($bb_cfg['default_lang']) .'/';
 
 // post_buttons
@@ -118,7 +118,7 @@ $template->assign_vars(array(
 	'IMG'                         => $_main,
 	'TEXT_BUTTONS'                => $bb_cfg['text_buttons'],
 	'POST_BTN_SPACER'             => ($bb_cfg['text_buttons']) ? '&nbsp;' : '',
-	'TOPIC_ATTACH_ICON'           => '<img src="images/icon_clip.gif" alt="" />',
+	'TOPIC_ATTACH_ICON'           => '<img src="'. $_main .'icon_clip.gif" alt="" />',
 	'OPEN_MENU_IMG_ALT'           => '<img src="'. $_main .'menu_open_1.gif" class="menu-alt1" alt="" />',
 	'TOPIC_LEFT_COL_SPACER_WITDH' => $bb_cfg['topic_left_column_witdh'] - 8, // 8px padding
 	'POST_IMG_WIDTH_DECR_JS'      => $bb_cfg['topic_left_column_witdh'] + $bb_cfg['post_img_width_decr'],

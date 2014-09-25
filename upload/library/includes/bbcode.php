@@ -863,7 +863,7 @@ class words_rate
 	function words_rate ()
 	{
 		// слова начинающиеся на..
-		$del_list = file_get_contents(BB_ROOT .'/misc/words_rate_del_list.txt');
+		$del_list = file_get_contents(BB_ROOT .'/library/words_rate_del_list.txt');
 		$del_list = str_compact($del_list);
 		$del_list = str_replace(' ', '|', preg_quote($del_list, '/'));
 		$del_exp  = '/\b('.$del_list.')[\w\-]*/i';

@@ -14,7 +14,7 @@ switch ($mode)
 		$map->create();
 		if (@file_exists(SITEMAP_DIR. 'sitemap.xml'))
 		{
-			$html .= $lang['SITEMAP_CREATED'].': <b>'.bb_date(TIMENOW, $bb_cfg['post_date_format']).'</b> '.$lang['SITEMAP_AVAILABLE'].': <a href="'.make_url('/sitemap/sitemap.xml').'" target="_blank">'.make_url('/sitemap/sitemap.xml').'</a>';
+			$html .= $lang['SITEMAP_CREATED'].': <b>'.bb_date(TIMENOW, $bb_cfg['post_date_format']).'</b> '.$lang['SITEMAP_AVAILABLE'].': <a href="'.make_url('sitemap.xml').'" target="_blank">'.make_url('sitemap.xml').'</a>';
 		} else {
 			$html .= $lang['SITEMAP_NOT_CREATED'];
 		}

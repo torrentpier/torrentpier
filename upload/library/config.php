@@ -205,8 +205,8 @@ $bb_cfg['seeder_last_seen_days_keep']  = 0; // сколько дней наза�
 $bb_cfg['seeder_never_seen_days_keep'] = 0; // сколько дней имеется статус "Сида не было никогда"
 
 // Ratio limits
-define('TR_RATING_LIMITS', true);                  // ON/OFF
-define('MIN_DL_FOR_RATIO', 10737418240);           // 10 GB in bytes, 0 - disable
+define('TR_RATING_LIMITS', true);        // ON/OFF
+define('MIN_DL_FOR_RATIO', 10737418240); // 10 GB in bytes, 0 - disable
 
 // Don't change the order of ratios (from 0 to 1)
 // rating < 0.4 -- allow only 1 torrent for leeching
@@ -226,10 +226,10 @@ $bb_cfg['dl_complete_days_keep'] = 180;
 $bb_cfg['dl_cancel_days_keep']   = 30;
 
 // Tor-Stats
-$bb_cfg['torstat_days_keep']     = 60;          // days to keep user's per-torrent stats
+$bb_cfg['torstat_days_keep']     = 60;    // days to keep user's per-torrent stats
 
 // Tor-Help
-$bb_cfg['torhelp_enabled']       = false;       // find dead torrents (without seeder) that user might help seeding
+$bb_cfg['torhelp_enabled']       = false; // find dead torrents (without seeder) that user might help seeding
 
 $page_cfg['show_torhelp'] = array(
 #	BB_SCRIPT => true
@@ -524,8 +524,8 @@ $bb_cfg['ad_blocks'] = array(
 
 // Attachments
 $bb_cfg['attach'] = array(
-	'upload_path'           => BB_ROOT . 'torrents', // without '/'
-	'max_size'              => 250*1024,             // bytes
+	'upload_path'           => DATA_DIR . 'torrent_files', // without '/'
+	'max_size'              => 250*1024,                   // bytes
 );
 
 $bb_cfg['file_id_ext'] = array(
@@ -551,7 +551,7 @@ $bb_cfg['avatars'] = array(
 	'max_height'  => 100,                             // высота аватара в px
 	'max_width'   => 100,                             // ширина аватара в px
 	'no_avatar'   => 'gallery/noavatar.png',          // дефолтная аватара
-	'upload_path' => DATA_DIR . 'avatars/',           // путь к директории с аватарами
+	'upload_path' => BB_ROOT . 'data/avatars/',       // путь к директории с аватарами
 	'up_allowed'  => true,                            // разрешить загрузку аватар
 );
 
@@ -562,7 +562,7 @@ $bb_cfg['group_avatars'] = array(
 	'max_height'  => 300,                             // высота аватара в px
 	'max_width'   => 300,                             // ширина аватара в px
 	'no_avatar'   => 'gallery/noavatar.png',          // дефолтная аватара
-	'upload_path' => DATA_DIR . 'avatars/',           // путь к директории с аватарами
+	'upload_path' => BB_ROOT . 'data/avatars/',       // путь к директории с аватарами
 	'up_allowed'  => true,                            // разрешить загрузку аватар
 );
 
@@ -606,8 +606,8 @@ $bb_cfg['advert_url']               = 'info.php?show=advert';
 $bb_cfg['captcha'] = array(
 	'disabled'   => false,
 	'secret_key' => 'secret_key',
-	'img_url'    => './internal_data/captcha/', # with '/'
 	'img_path'   => INT_DATA_DIR .'captcha/',   # with '/'
+	'img_url'    => './internal_data/captcha/', # with '/'
 );
 
 // Atom feed
