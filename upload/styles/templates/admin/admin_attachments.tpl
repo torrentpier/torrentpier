@@ -73,7 +73,7 @@
 	</tr>
 	<tr>
 		<td class="row1" width="80%">{L_ATTACH_TOPIC_ICON}<br /><span class="small">{L_ATTACH_TOPIC_ICON_EXPLAIN}</span></td>
-		<td class="row2"><input type="text" size="25" maxlength="100" name="topic_icon" class="post" value="{TOPIC_ICON}" readonly="readonly" /></td>
+		<td class="row2"><input type="text" size="25" maxlength="100" name="topic_icon" class="post" value="{TOPIC_ICON}" /></td>
 	</tr>
 	<tr>
 		<td class="row1" width="80%">{L_ATTACH_DISPLAY_ORDER}<br /><span class="small">{L_ATTACH_DISPLAY_ORDER_EXPLAIN}</span></td>

@@ -623,9 +623,9 @@ $bb_cfg['nofollow'] = array(
 );
 
 // Local config
-if (file_exists('config.local.php'))
+if (file_exists(BB_ROOT. '/library/config.local.php'))
 {
-	include_once('config.local.php');
+	include_once(BB_ROOT. '/library/config.local.php');
 }
 
 define('BB_CFG_LOADED', true);
