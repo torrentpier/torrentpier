@@ -31,14 +31,10 @@ TorrentPier II - движок торрент-трекера, написанны�
 - internal_data/ajax_html
 - internal_data/atom
 - internal_data/cache
-- internal_data/cache/filecache
 - internal_data/captcha
 - internal_data/log
 - internal_data/sitemap
 - internal_data/triggers
-- styles/images
-- styles/images/ranks
-- styles/images/smiles
 
 ## Необходимые настройки php
 
