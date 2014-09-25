@@ -6,7 +6,7 @@ global $bb_cfg, $lang, $userdata;
 
 $mode = (string) $this->request['mode'];
 
-$html = '<img src="./images/good.gif">';
+$html = '<img src="./styles/images/good.gif">';
 switch($mode)
 {
 	case 'check_name':
@@ -14,11 +14,11 @@ switch($mode)
 
 		if (empty($username))
 		{
-			$html = '<img src="./images/bad.gif"> <span class="leechmed bold">'. $lang['CHOOSE_A_NAME'] .'</span>';
+			$html = '<img src="./styles/images/bad.gif"> <span class="leechmed bold">'. $lang['CHOOSE_A_NAME'] .'</span>';
 		}
 		elseif($err = validate_username($username))
 		{
-			$html = '<img src="./images/bad.gif"> <span class="leechmed bold">'. $err .'</span>';
+			$html = '<img src="./styles/images/bad.gif"> <span class="leechmed bold">'. $err .'</span>';
 		}
 	break;
 
@@ -27,11 +27,11 @@ switch($mode)
 
 		if (empty($email))
 		{
-			$html = '<img src="./images/bad.gif"> <span class="leechmed bold">'. $lang['CHOOSE_E_MAIL'] .'</span>';
+			$html = '<img src="./styles/images/bad.gif"> <span class="leechmed bold">'. $lang['CHOOSE_E_MAIL'] .'</span>';
 		}
 		elseif($err = validate_email($email))
 		{
-			$html = '<img src="./images/bad.gif"> <span class="leechmed bold">'. $err .'</span>';
+			$html = '<img src="./styles/images/bad.gif"> <span class="leechmed bold">'. $err .'</span>';
 		}
 	break;
 
@@ -40,28 +40,28 @@ switch($mode)
 		$pass_confirm = (string) $this->request['pass_confirm'];
 		if (empty($pass) || empty($pass_confirm))
 		{
-			$html = '<img src="./images/bad.gif"> <span class="leechmed bold">'. $lang['CHOOSE_PASS'] .'</span>';
+			$html = '<img src="./styles/images/bad.gif"> <span class="leechmed bold">'. $lang['CHOOSE_PASS'] .'</span>';
 		}
 		else
 		{
 			if ($pass != $pass_confirm)
 			{
-				$html = '<img src="./images/bad.gif"> <span class="leechmed bold">'. $lang['CHOOSE_PASS_ERR'] .'</span>';
+				$html = '<img src="./styles/images/bad.gif"> <span class="leechmed bold">'. $lang['CHOOSE_PASS_ERR'] .'</span>';
 			}
 			else
 			{
 				if (mb_strlen($pass, 'UTF-8') > 20)
 				{
-					$html = '<img src="./images/bad.gif"> <span class="leechmed bold">'. sprintf($lang['CHOOSE_PASS_ERR_MAX'], 20) .'</span>';
+					$html = '<img src="./styles/images/bad.gif"> <span class="leechmed bold">'. sprintf($lang['CHOOSE_PASS_ERR_MAX'], 20) .'</span>';
 				}
 				elseif (mb_strlen($pass, 'UTF-8') < 5)
 				{
-					$html = '<img src="./images/bad.gif"> <span class="leechmed bold">'. sprintf($lang['CHOOSE_PASS_ERR_MIN'], 5) .'</span>';
+					$html = '<img src="./styles/images/bad.gif"> <span class="leechmed bold">'. sprintf($lang['CHOOSE_PASS_ERR_MIN'], 5) .'</span>';
 				}
 				else
 				{
 					$text = (IS_GUEST) ? $lang['CHOOSE_PASS_REG_OK'] : $lang['CHOOSE_PASS_OK'];
-					$html = '<img src="./images/good.gif"> <span class="seedmed bold">'. $text .'</span>';
+					$html = '<img src="./styles/images/good.gif"> <span class="seedmed bold">'. $text .'</span>';
 				}
 			}
 		}

@@ -177,7 +177,7 @@ $template->assign_vars(array(
 	'HTML_SIDEBAR_2'     => LANG_DIR . 'html/sidebar2.html',
 
 	// Common urls
-	'AVATARS_URL'        => "images/avatars",
+	'AVATARS_URL'        => 'data/avatars',
 	'CAT_URL'            => BB_ROOT . CAT_URL,
 	'DOWNLOAD_URL'       => BB_ROOT . DOWNLOAD_URL,
 	'FORUM_URL'          => BB_ROOT . FORUM_URL,

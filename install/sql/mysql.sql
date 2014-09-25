@@ -102,8 +102,8 @@ CREATE TABLE IF NOT EXISTS `bb_attachments_config` (
 --
 
 INSERT INTO `bb_attachments_config` VALUES ('upload_dir', 'data/old_files');
-INSERT INTO `bb_attachments_config` VALUES ('upload_img', 'images/icon_clip.gif');
-INSERT INTO `bb_attachments_config` VALUES ('topic_icon', 'images/icon_clip.gif');
+INSERT INTO `bb_attachments_config` VALUES ('upload_img', 'styles/images/icon_clip.gif');
+INSERT INTO `bb_attachments_config` VALUES ('topic_icon', 'styles/images/icon_clip.gif');
 INSERT INTO `bb_attachments_config` VALUES ('display_order', '0');
 INSERT INTO `bb_attachments_config` VALUES ('max_filesize', '262144');
 INSERT INTO `bb_attachments_config` VALUES ('attachment_quota', '52428800');
@@ -546,7 +546,7 @@ INSERT INTO `bb_config` VALUES ('seed_bonus_user_regdate', '0');
 INSERT INTO `bb_config` VALUES ('site_desc', 'A little text to describe your forum');
 INSERT INTO `bb_config` VALUES ('sitemap_time', '');
 INSERT INTO `bb_config` VALUES ('sitename', 'TorrentPier II - Torrent Tracker');
-INSERT INTO `bb_config` VALUES ('smilies_path', 'images/smiles');
+INSERT INTO `bb_config` VALUES ('smilies_path', 'styles/images/smiles');
 INSERT INTO `bb_config` VALUES ('static_sitemap', '');
 INSERT INTO `bb_config` VALUES ('topics_per_page', '50');
 INSERT INTO `bb_config` VALUES ('xs_use_cache', '1');
@@ -988,7 +988,7 @@ CREATE TABLE IF NOT EXISTS `bb_ranks` (
 -- Дамп данных таблицы `bb_ranks`
 --
 
-INSERT INTO `bb_ranks` VALUES (1, 'Администратор', -1, 1, 'images/ranks/admin.png', 'colorAdmin');
+INSERT INTO `bb_ranks` VALUES (1, 'Администратор', -1, 1, 'styles/images/ranks/admin.png', 'colorAdmin');
 
 -- --------------------------------------------------------
 

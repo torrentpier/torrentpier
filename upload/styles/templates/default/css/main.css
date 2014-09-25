@@ -517,7 +517,7 @@ table.smilies td { padding: 3px; text-align: center; }
  * ---------------------------------- */
 #main-nav {
 	padding: 4px 10px; margin: 0;
-	border: solid #C3CBD1 /*#CFD4D8*/; border-width: 0 0 1px 0; background: #eff0f3 /*url('../images/cellpic.gif')*/;
+	border: solid #C3CBD1; border-width: 0 0 1px 0; background: #eff0f3;
 	}
 	#main-nav b { padding: 0 4px 0 1px; }
 	#main-nav a { color: #444; text-decoration: none; }

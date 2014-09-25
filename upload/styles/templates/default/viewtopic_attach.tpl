@@ -148,11 +148,11 @@
 	</tr>
 	<!-- IF postrow.attach.tor_reged.TOR_SILVER_GOLD == 2 && $tr_cfg['gold_silver_enabled'] -->
 	<tr class="row4">
-		<th colspan="3" class="row7"><img src="images/tor_silver.gif" width="16" height="15" title="{L_SILVER}" />&nbsp;{L_SILVER_STATUS}&nbsp;<img src="images/tor_silver.gif" width="16" height="15" title="{L_SILVER}" /></th>
+		<th colspan="3" class="row7"><img src="styles/images/tor_silver.gif" width="16" height="15" title="{L_SILVER}" />&nbsp;{L_SILVER_STATUS}&nbsp;<img src="styles/images/tor_silver.gif" width="16" height="15" title="{L_SILVER}" /></th>
 	</tr>
 	<!-- ELSEIF postrow.attach.tor_reged.TOR_SILVER_GOLD == 1 && $tr_cfg['gold_silver_enabled'] -->
 	<tr class="row4">
-		<th colspan="3" class="row7"><img src="images/tor_gold.gif" width="16" height="15" title="{L_GOLD}" />&nbsp;{L_GOLD_STATUS}&nbsp;<img src="images/tor_gold.gif" width="16" height="15" title="{L_GOLD}" /></th>
+		<th colspan="3" class="row7"><img src="styles/images/tor_gold.gif" width="16" height="15" title="{L_GOLD}" />&nbsp;{L_GOLD_STATUS}&nbsp;<img src="styles/images/tor_gold.gif" width="16" height="15" title="{L_GOLD}" /></th>
 	</tr>
 	<!-- ENDIF -->
 	<tr class="row1">
@@ -335,8 +335,8 @@ $('#tor-filelist-btn').click(function(){
 #tor-filelist i { color: #7A7A7A; padding-left: 4px; }
 #tor-filelist s { color: #0000FF; text-decoration: none; }
 #tor-filelist .b > s { color: #800000; }
-#tor-filelist .b { font-weight: bold; padding-left: 20px; background: transparent url('images/folder.gif') no-repeat 3px 50%;}
-#tor-filelist ul li span { padding-left: 20px; background: transparent url('images/page.gif') no-repeat 3px 50%;}
+#tor-filelist .b { font-weight: bold; padding-left: 20px; background: transparent url('styles/images/folder.gif') no-repeat 3px 50%;}
+#tor-filelist ul li span { padding-left: 20px; background: transparent url('styles/images/page.gif') no-repeat 3px 50%;}
 #tor-filelist .tor-root-dir { font-size: 13px; font-weight: bold; line-height: 12px; padding-left: 4px; }
 #tor-fl-treecontrol { padding: 2px 0 4px; }
 #tor-fl-treecontrol a { padding: 0 8px; font-size: 11px; text-decoration: none; }
