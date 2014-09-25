@@ -181,33 +181,33 @@ class sitemap
 			$pages_count = @ceil($row['count'] / 40000);
 
 			$sitemap = $this->build_index($pages_count);
-			$handler = fopen(BB_ROOT. "/sitemap/sitemap.xml", "wb+");
+			$handler = fopen(SITEMAP_DIR. "sitemap.xml", "wb+");
 			fwrite($handler, $sitemap);
 			fclose($handler);
-			@chmod(BB_ROOT. "/sitemap/sitemap.xml", 0666);
+			@chmod(SITEMAP_DIR. "sitemap.xml", 0666);
 
 			$sitemap = $this->build_stat();
-			$handler = fopen(BB_ROOT. "/sitemap/sitemap1.xml", "wb+");
+			$handler = fopen(SITEMAP_DIR. "sitemap1.xml", "wb+");
 			fwrite($handler, $sitemap);
 			fclose($handler);
-			@chmod(BB_ROOT. "/sitemap/sitemap.xml", 0666);
+			@chmod(SITEMAP_DIR. "sitemap.xml", 0666);
 
 			for ($i = 0; $i < $pages_count; $i++) {
 				$t = $i + 2;
 				$n = $i + 1;
 
 				$sitemap = $this->build_map_topic($n);
-				$handler = fopen(BB_ROOT. "/sitemap/sitemap{$t}.xml", "wb+");
+				$handler = fopen(SITEMAP_DIR. "sitemap{$t}.xml", "wb+");
 				fwrite($handler, $sitemap);
 				fclose($handler);
-				@chmod(BB_ROOT. "/sitemap/sitemap{$t}.xml", 0666);
+				@chmod(SITEMAP_DIR. "sitemap{$t}.xml", 0666);
 			}
 		} else {
 			$sitemap = $this->build_map();
-			$handler = fopen(BB_ROOT. "/sitemap/sitemap.xml", "wb+");
+			$handler = fopen(SITEMAP_DIR. "sitemap.xml", "wb+");
 			fwrite($handler, $sitemap);
 			fclose($handler);
-			@chmod(BB_ROOT. "/sitemap/sitemap.xml", 0666);
+			@chmod(SITEMAP_DIR. "sitemap.xml", 0666);
 		}
 
 		$params['sitemap_time'] = TIMENOW;

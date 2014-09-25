@@ -453,7 +453,7 @@ class sql_db
 		{
 			if ($trace['file'] !== __FILE__)
 			{
-				$source = str_replace(BB_PATH . DIRECTORY_SEPARATOR, '', $trace['file']) .'('. $trace['line'] .')';
+				$source = str_replace(BB_PATH, '', $trace['file']) .'('. $trace['line'] .')';
 				break;
 			}
 		}

@@ -30,7 +30,6 @@
  * Sessions
  * Registration
  * Email
- * AJAX
  * Debug
  * Special users (dbg_users, unlimited_users, super_admins)
  * LOG
@@ -105,7 +104,7 @@ $bb_cfg['db_alias'] = array(
 
 // Cache
 $bb_cfg['cache']['pconnect'] = true;
-$bb_cfg['cache']['db_dir']   = realpath(BB_ROOT) .'/cache/filecache/';
+$bb_cfg['cache']['db_dir']   = realpath(BB_ROOT) .'/internal_data/cache/filecache/';
 $bb_cfg['cache']['prefix']   = 'tp_';  // Префикс кеша 'tp_2'
 $bb_cfg['cache']['memcache'] = array(
 	'host'         => '127.0.0.1',
@@ -239,18 +238,21 @@ $page_cfg['show_torhelp'] = array(
 );
 
 // Path (trailing slash '/' at the end: XX_PATH - without, XX_DIR - with)
-define('DIR_SEPR', DIRECTORY_SEPARATOR);
-
-define('BB_PATH',       realpath(BB_ROOT)      );  // absolute pathname to the forum root
-define('ADMIN_DIR',     BB_PATH .'/admin/'     );
-define('ATTACH_DIR',    BB_PATH .'/attach_mod/');
-define('CACHE_DIR',     BB_PATH .'/cache/'     );
-define('CFG_DIR',       BB_PATH .'/config/'    );
-define('INC_DIR',       BB_PATH .'/includes/'  );
-define('LANG_ROOT_DIR', BB_PATH .'/language/'  );
-define('LOG_DIR',       BB_PATH .'/log/'       );
-define('TEMPLATES_DIR', BB_PATH .'/templates/' );
-define('TRIGGERS_DIR',  BB_PATH .'/triggers/'  );
+define('BB_PATH',       realpath(BB_ROOT)                   );
+define('ADMIN_DIR',     BB_PATH .'/admin/'                  );
+define('DATA_DIR',      BB_PATH .'/data/'                   );
+define('INT_DATA_DIR',  BB_PATH .'/internal_data/'          );
+define('AJAX_HTML_DIR', BB_ROOT .'/internal_data/ajax_html/');
+define('CACHE_DIR',     BB_PATH .'/internal_data/cache/'    );
+define('LOG_DIR',       BB_PATH .'/internal_data/log/'      );
+define('SITEMAP_DIR',   BB_PATH .'/internal_data/sitemap/'  );
+define('TRIGGERS_DIR',  BB_PATH .'/internal_data/triggers/' );
+define('AJAX_DIR',      BB_ROOT .'/library/ajax/'           );
+define('ATTACH_DIR',    BB_PATH .'/library/attach_mod/'     );
+define('CFG_DIR',       BB_PATH .'/library/config/'         );
+define('INC_DIR',       BB_PATH .'/library/includes/'       );
+define('LANG_ROOT_DIR', BB_PATH .'/library/language/'       );
+define('TEMPLATES_DIR', BB_PATH .'/styles/templates/'       );
 
 // URL's
 $bb_cfg['ajax_url']    = 'ajax.php';     #  "http://{$_SERVER['SERVER_NAME']}/ajax.php"
@@ -360,10 +362,6 @@ $bb_cfg['email_change_disabled']   = false;        // disable changing email by 
 $bb_cfg['tech_admin_email']        = 'admin@' . $domain_name;  // email for sending error reports
 $bb_cfg['abuse_email']             = 'abuse@' . $domain_name;
 $bb_cfg['adv_email']               = 'adv@'   . $domain_name;
-
-// AJAX
-define('AJAX_HTML_DIR', BB_ROOT .'ajax/html/');
-define('AJAX_DIR',      BB_ROOT .'ajax/');
 
 // Debug
 define('DBG_LOG',              false);    // enable forum debug (off on production)
@@ -505,7 +503,7 @@ $bb_cfg['user_not_active_days_keep']    = 180;     // inactive users but only wi
 $bb_cfg['group_members_per_page']       = 50;
 
 // Tidy
-$bb_cfg['tidy_post'] = (!extension_loaded('tidy')) ? false : true;
+$bb_cfg['tidy_post'] = (!in_array('tidy', get_loaded_extensions())) ? false : true;
 
 // Ads
 $bb_cfg['show_ads'] = false;
@@ -553,7 +551,7 @@ $bb_cfg['avatars'] = array(
 	'max_height'  => 100,                             // высота аватара в px
 	'max_width'   => 100,                             // ширина аватара в px
 	'no_avatar'   => 'gallery/noavatar.png',          // дефолтная аватара
-	'upload_path' => BB_ROOT . 'images/avatars/',     // путь к директории с аватарами
+	'upload_path' => DATA_DIR . 'avatars/',           // путь к директории с аватарами
 	'up_allowed'  => true,                            // разрешить загрузку аватар
 );
 
@@ -564,7 +562,7 @@ $bb_cfg['group_avatars'] = array(
 	'max_height'  => 300,                             // высота аватара в px
 	'max_width'   => 300,                             // ширина аватара в px
 	'no_avatar'   => 'gallery/noavatar.png',          // дефолтная аватара
-	'upload_path' => BB_ROOT . 'images/avatars/',     // путь к директории с аватарами
+	'upload_path' => DATA_DIR . 'avatars/',           // путь к директории с аватарами
 	'up_allowed'  => true,                            // разрешить загрузку аватар
 );
 
@@ -608,14 +606,14 @@ $bb_cfg['advert_url']               = 'info.php?show=advert';
 $bb_cfg['captcha'] = array(
 	'disabled'   => false,
 	'secret_key' => 'secret_key',
-	'img_url'    => './images/captcha/',         # with '/'
-	'img_path'   => BB_PATH .'/images/captcha/', # with '/'
+	'img_url'    => './internal_data/captcha/', # with '/'
+	'img_path'   => INT_DATA_DIR .'captcha/',   # with '/'
 );
 
 // Atom feed
 $bb_cfg['atom'] = array(
-	'path' => BB_PATH .'/atom', # without '/'
-	'url'  => './atom',         # without '/'
+	'path' => INT_DATA_DIR .'atom',   # without '/'
+	'url'  => './internal_data/atom', # without '/'
 );
 
 // Nofollow

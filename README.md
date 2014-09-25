@@ -10,7 +10,7 @@ TorrentPier II - движок торрент-трекера, написанны�
 1. Распаковываем на сервер содержимое папки **upload**
 
 2. Создаем базу данных, в которую при помощи phpmyadmin (или любого другого удобного инструмента) импортируем дамп, расположенный в папке **install/sql/mysql.sql**
-3. Правим файл конфигурации **config.php**, загруженный на сервер:
+3. Правим файл конфигурации **library/config.php**, загруженный на сервер:
 > ***'db1' => array('localhost', 'dbase', 'user', 'pass', $charset, $pconnect)***    
 В данной строке изменяем данные входа в базу данных    
 ***$domain_name = 'torrentpier.me';***    
@@ -25,20 +25,20 @@ TorrentPier II - движок торрент-трекера, написанны�
 ## Права доступа на папки и файлы
 
 Исходя из настроек вашего сервера, устанавливаем рекомендуемые права доступа (chmod) на указанные папки **777**, а на файлы внутри этих папок (кроме файлов **.htaccess** и **.keep**) **666**:
-- ajax/html
-- atom
-- cache
-- cache/filecache
-- images
-- images/avatars
-- images/captcha
-- images/ranks
-- images/smiles
-- log
-- old_files
-- old_files/thumbs
-- sitemap
-- triggers
+- data/avatars
+- data/old_files
+- data/torrent_files
+- internal_data/ajax_html
+- internal_data/atom
+- internal_data/cache
+- internal_data/cache/filecache
+- internal_data/captcha
+- internal_data/log
+- internal_data/sitemap
+- internal_data/triggers
+- styles/images
+- styles/images/ranks
+- styles/images/smiles
 
 ## Необходимые настройки php
 

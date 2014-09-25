@@ -17,7 +17,7 @@ if (!defined('IN_FORUM') && !defined('IN_TRACKER')) define('IN_FORUM', true);
 header('X-Frame-Options: SAMEORIGIN');
 
 // Get initial config
-require(BB_ROOT .'config.php');
+require(BB_ROOT .'library/config.php');
 
 $server_protocol = ($bb_cfg['cookie_secure']) ? 'https://' : 'http://';
 $server_port = ($bb_cfg['server_port'] != 80) ? ':'. $bb_cfg['server_port'] : '';

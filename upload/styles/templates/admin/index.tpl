@@ -117,8 +117,8 @@ ajax.callback.manage_admin = function(data) {
 	<tr>
 		<td><b>{L_STATISTICS}:</b></td>
 		<td>
-			<a href="../stats/tr_stats.php" target="_blank">tr_stats.php</a>,&nbsp;
-			<a href="../stats/tracker.php" target="_blank">tracker.php</a>
+			<a href="stats/tr_stats.php" target="_blank">tr_stats.php</a>,&nbsp;
+			<a href="stats/tracker.php" target="_blank">tracker.php</a>
 		</td>
 	</tr>
 	<tr>
