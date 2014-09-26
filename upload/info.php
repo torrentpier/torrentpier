@@ -46,7 +46,7 @@ $require = file_exists($html_dir . $info['src']) ? $html_dir . $info['src'] : $h
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 	<meta http-equiv="Content-Style-Type" content="text/css" />
-	<link rel="stylesheet" href="./templates/default/css/main.css" type="text/css">
+	<link rel="stylesheet" href="./styles/templates/default/css/main.css" type="text/css">
 </head>
 <body>
 <style type="text/css">
