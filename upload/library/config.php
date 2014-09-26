@@ -65,12 +65,12 @@ if (!defined('BB_ROOT')) die(basename(__FILE__));
 $bb_cfg = $tr_cfg = $page_cfg = array();
 
 // Primary domain name
-$domain_name = 'torrentpier.me';  // enter here your primary domain name of your site
+$domain_name = 'torrentpier.me'; // enter here your primary domain name of your site
 $domain_name = (!empty($_SERVER['SERVER_NAME'])) ? $_SERVER['SERVER_NAME'] : $domain_name;
 
 // Version info
-$bb_cfg['tp_version'] = '2.1.1';
-$bb_cfg['tp_release_date'] = '11-09-2014';
+$bb_cfg['tp_version'] = '2.1.2';
+$bb_cfg['tp_release_date'] = '27-09-2014';
 $bb_cfg['tp_release_state'] = 'ALPHA';
 
 // Database
