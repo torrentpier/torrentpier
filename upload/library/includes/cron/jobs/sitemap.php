@@ -2,7 +2,7 @@
 
 if (!defined('BB_ROOT')) die(basename(__FILE__));
 
-require(INC_DIR .'class.sitemap.php');
+require(INC_DIR .'classes/sitemap.php');
 
 $map = new sitemap();
 $map->create();

@@ -2516,7 +2516,7 @@ function init_sphinx ()
 
 	if (!isset($sphinx))
 	{
-		require(INC_DIR .'api.sphinx.php');
+		require(INC_DIR .'api/sphinx.php');
 		$sphinx = new SphinxClient();
 
 		$sphinx->SetConnectTimeout(5);

@@ -44,12 +44,12 @@ if ($row = DB()->fetch_row($sql))
 			$subject = trim(html_entity_decode($_POST['subject']));
 			$message = trim(html_entity_decode($_POST['message']));
 
-			if(!$subject)  $errors[] = $lang['EMPTY_SUBJECT_EMAIL'];
-			if(!$message)  $errors[] = $lang['EMPTY_MESSAGE_EMAIL'];
+			if (!$subject) $errors[] = $lang['EMPTY_SUBJECT_EMAIL'];
+			if (!$message) $errors[] = $lang['EMPTY_MESSAGE_EMAIL'];
 
 			if (!$errors)
 			{
-				require(INC_DIR .'emailer.class.php');
+				require(INC_DIR .'classes/emailer.php');
 				$emailer = new emailer($bb_cfg['smtp_delivery']);
 
 				$emailer->from($userdata['username'] ." <{$userdata['user_email']}>");
