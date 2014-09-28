@@ -422,7 +422,6 @@ function add_search_words ($post_id, $post_message, $topic_title = '', $only_ret
 	global $bb_cfg;
 
 	$text  = $topic_title .' '. $post_message;
-	$text  = strip_bbcode_uid($text);
 	$words = ($text) ? extract_search_words($text) : array();
 
 	if ($only_return_words || $bb_cfg['search_engine_type'] == 'sphinx')
@@ -839,16 +838,6 @@ function bbcode2html ($text)
 		$text = preg_replace($orig_word, $replacement_word, $text);
 	}
 	return $bbcode->bbcode2html($text);
-}
-
-function strip_bbcode_uid ($text)
-{
-	$text = str_replace('[tab]',   ' ',     $text);
-	$text = str_replace('&quot;',  '"',     $text);
-	$text = str_replace('code:1:', 'code:', $text);
-	$text = str_replace('list:u:', 'list:', $text);
-	$text = str_replace('list:o:', 'list:', $text);
-	return $text;
 }
 
 class words_rate
