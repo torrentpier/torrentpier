@@ -605,7 +605,7 @@ CREATE TABLE IF NOT EXISTS `bb_cron` (
 --
 
 INSERT INTO `bb_cron` VALUES (1, 1, 'Attach maintenance', 'attach_maintenance.php', 'daily', NULL, '05:00:00', 40, '', '', NULL, 1, '', 0, 1, 0);
-INSERT INTO `bb_cron` VALUES (2, 1, 'Board maintenance', 'bb_maintenance.php', 'daily', NULL, '05:00:00', 40, '', '', NULL, 1, '', 0, 1, 0);
+INSERT INTO `bb_cron` VALUES (2, 1, 'Board maintenance', 'board_maintenance.php', 'daily', NULL, '05:00:00', 40, '', '', NULL, 1, '', 0, 1, 0);
 INSERT INTO `bb_cron` VALUES (3, 1, 'Prune forums', 'prune_forums.php', 'daily', NULL, '05:00:00', 50, '', '', NULL, 1, '', 0, 1, 0);
 INSERT INTO `bb_cron` VALUES (4, 1, 'Prune topic moved stubs', 'prune_topic_moved.php', 'daily', NULL, '05:00:00', 60, '', '', NULL, 1, '', 0, 1, 0);
 INSERT INTO `bb_cron` VALUES (5, 1, 'Logs cleanup', 'clean_log.php', 'daily', NULL, '05:00:00', 70, '', '', NULL, 1, '', 0, 1, 0);
