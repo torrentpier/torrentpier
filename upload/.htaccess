@@ -10,3 +10,4 @@ deny from all
 
 RewriteEngine On
 RewriteRule ^sitemap.xml$ internal_data/sitemap/sitemap.xml [L]
+RewriteRule ^/internal_data/atom/(.*) /atom$1 [L]

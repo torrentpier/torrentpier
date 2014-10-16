@@ -429,7 +429,7 @@ function make_url ($path)
 require(INC_DIR .'functions.php');
 require(INC_DIR .'sessions.php');
 require(INC_DIR .'template.php');
-require(INC_DIR .'classes/mysql.php');
+require(INC_DIR .'core/mysql.php');
 
 define('SQL_LAYER', 'mysql');
 

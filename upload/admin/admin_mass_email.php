@@ -53,7 +53,7 @@ if (isset($_POST['submit']))
 			");
 		}
 
-		require(INC_DIR .'classes/emailer.php');
+		require(CLASS_DIR .'emailer.php');
 
 		foreach ($user_list as $i => $row)
 		{

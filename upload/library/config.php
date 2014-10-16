@@ -238,21 +238,22 @@ $page_cfg['show_torhelp'] = array(
 );
 
 // Path (trailing slash '/' at the end: XX_PATH - without, XX_DIR - with)
-define('BB_PATH',       realpath(BB_ROOT)                   );
-define('ADMIN_DIR',     BB_PATH .'/admin/'                  );
-define('DATA_DIR',      BB_PATH .'/data/'                   );
-define('INT_DATA_DIR',  BB_PATH .'/internal_data/'          );
-define('AJAX_HTML_DIR', BB_ROOT .'/internal_data/ajax_html/');
-define('CACHE_DIR',     BB_PATH .'/internal_data/cache/'    );
-define('LOG_DIR',       BB_PATH .'/internal_data/log/'      );
-define('SITEMAP_DIR',   BB_PATH .'/internal_data/sitemap/'  );
-define('TRIGGERS_DIR',  BB_PATH .'/internal_data/triggers/' );
-define('AJAX_DIR',      BB_ROOT .'/library/ajax/'           );
-define('ATTACH_DIR',    BB_PATH .'/library/attach_mod/'     );
-define('CFG_DIR',       BB_PATH .'/library/config/'         );
-define('INC_DIR',       BB_PATH .'/library/includes/'       );
-define('LANG_ROOT_DIR', BB_PATH .'/library/language/'       );
-define('TEMPLATES_DIR', BB_PATH .'/styles/templates/'       );
+define('BB_PATH',       realpath(BB_ROOT)                    );
+define('ADMIN_DIR',     BB_PATH .'/admin/'                   );
+define('DATA_DIR',      BB_PATH .'/data/'                    );
+define('INT_DATA_DIR',  BB_PATH .'/internal_data/'           );
+define('AJAX_HTML_DIR', BB_ROOT .'/internal_data/ajax_html/' );
+define('CACHE_DIR',     BB_PATH .'/internal_data/cache/'     );
+define('LOG_DIR',       BB_PATH .'/internal_data/log/'       );
+define('SITEMAP_DIR',   BB_PATH .'/internal_data/sitemap/'   );
+define('TRIGGERS_DIR',  BB_PATH .'/internal_data/triggers/'  );
+define('AJAX_DIR',      BB_ROOT .'/library/ajax/'            );
+define('ATTACH_DIR',    BB_PATH .'/library/attach_mod/'      );
+define('CFG_DIR',       BB_PATH .'/library/config/'          );
+define('INC_DIR',       BB_PATH .'/library/includes/'        );
+define('CLASS_DIR',     BB_PATH .'/library/includes/classes/');
+define('LANG_ROOT_DIR', BB_PATH .'/library/language/'        );
+define('TEMPLATES_DIR', BB_PATH .'/styles/templates/'        );
 
 // URL's
 $bb_cfg['ajax_url']    = 'ajax.php';     #  "http://{$_SERVER['SERVER_NAME']}/ajax.php"

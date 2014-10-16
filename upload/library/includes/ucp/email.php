@@ -49,7 +49,7 @@ if ($row = DB()->fetch_row($sql))
 
 			if (!$errors)
 			{
-				require(INC_DIR .'classes/emailer.php');
+				require(CLASS_DIR .'emailer.php');
 				$emailer = new emailer($bb_cfg['smtp_delivery']);
 
 				$emailer->from($userdata['username'] ." <{$userdata['user_email']}>");

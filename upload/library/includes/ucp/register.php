@@ -649,7 +649,7 @@ if ($submit && !$errors)
 				$email_template = 'user_welcome';
 			}
 
-			require(INC_DIR .'classes/emailer.php');
+			require(CLASS_DIR .'emailer.php');
 			$emailer = new emailer($bb_cfg['smtp_delivery']);
 
 			$emailer->from($bb_cfg['sitename'] ." <{$bb_cfg['board_email']}>");
@@ -688,7 +688,7 @@ if ($submit && !$errors)
 				$pr_data['user_actkey'] = $user_actkey;
 				$db_data['user_actkey'] = $user_actkey;
 
-				require(INC_DIR .'classes/emailer.php');
+				require(CLASS_DIR .'emailer.php');
 				$emailer = new emailer($bb_cfg['smtp_delivery']);
 
  				$emailer->from($bb_cfg['sitename'] ." <{$bb_cfg['board_email']}>");
