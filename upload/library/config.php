@@ -70,7 +70,7 @@ $domain_name = (!empty($_SERVER['SERVER_NAME'])) ? $_SERVER['SERVER_NAME'] : $do
 
 // Version info
 $bb_cfg['tp_version'] = '2.1.2';
-$bb_cfg['tp_release_date'] = '27-09-2014';
+$bb_cfg['tp_release_date'] = '17-10-2014';
 $bb_cfg['tp_release_state'] = 'ALPHA';
 
 // Database
@@ -198,7 +198,7 @@ $bb_cfg['show_tor_info_in_dl_list'] = true;
 $bb_cfg['allow_dl_list_names_mode'] = true;
 
 $bb_cfg['torrent_name_style'] = true; // use torrent name style [yoursite.com].txxx.torrent
-$bb_cfg['tor_help_links']     = '';
+$bb_cfg['tor_help_links']     = 'terms.php';
 
 // Сколько дней сохранять торрент зарегистрированным / Days to keep torrent registered, if:
 $bb_cfg['seeder_last_seen_days_keep']  = 0; // сколько дней назад был сид последний раз
