@@ -9,4 +9,4 @@ Disallow: /privmsg.php
 Disallow: /profile.php
 
 Host: torrentpier.me
-Sitemap: http://torrentpier.me/sitemap/sitemap.xml
+Sitemap: http://torrentpier.me/sitemap.xml

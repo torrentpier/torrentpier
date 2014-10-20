@@ -18,3 +18,4 @@ ALTER TABLE `bb_privmsgs` DROP COLUMN `privmsgs_reported`;
 ALTER TABLE `bb_topics` DROP COLUMN `topic_reported`;
 DELETE FROM `bb_cron` WHERE `cron_script` = 'site_backup.php';
 DELETE FROM `bb_cron` WHERE `cron_script` = 'db_backup.php';
+UPDATE `bb_cron` SET `cron_script` = 'board_maintenance.php' WHERE `cron_script` = 'bb_maintenance.php';

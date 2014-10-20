@@ -7,3 +7,7 @@ Options All -Indexes
 <FilesMatch "\.(.*sql|tpl|inc|db|log)|(config|common).php$">
 deny from all
 </FilesMatch>
+
+RewriteEngine On
+RewriteRule ^sitemap.xml$ internal_data/sitemap/sitemap.xml [L]
+RewriteRule ^/internal_data/atom/(.*) /atom$1 [L]

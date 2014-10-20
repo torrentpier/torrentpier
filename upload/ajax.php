@@ -67,7 +67,7 @@ switch ($ajax->action)
 		break;
 
 	case 'sitemap';
-		require(INC_DIR .'class.sitemap.php');
+		require(CLASS_DIR .'sitemap.php');
 		break;
 }
 

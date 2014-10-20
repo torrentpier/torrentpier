@@ -5,9 +5,9 @@ define('BB_ROOT', './');
 require(BB_ROOT . 'common.php');
 
 require(INC_DIR . 'bbcode.php');
-require(INC_DIR . 'class.utf8.php');
-require(INC_DIR . 'class.correct.php');
-require(INC_DIR . 'class.reflection.php');
+require(CLASS_DIR . 'utf8.php');
+require(CLASS_DIR . 'correct.php');
+require(CLASS_DIR . 'reflection.php');
 
 $page_cfg['load_tpl_vars'] = array(
 	'post_buttons',

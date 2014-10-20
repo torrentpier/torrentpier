@@ -101,9 +101,9 @@ CREATE TABLE IF NOT EXISTS `bb_attachments_config` (
 -- Дамп данных таблицы `bb_attachments_config`
 --
 
-INSERT INTO `bb_attachments_config` VALUES ('upload_dir', 'old_files');
-INSERT INTO `bb_attachments_config` VALUES ('upload_img', 'images/icon_clip.gif');
-INSERT INTO `bb_attachments_config` VALUES ('topic_icon', 'images/icon_clip.gif');
+INSERT INTO `bb_attachments_config` VALUES ('upload_dir', 'data/old_files');
+INSERT INTO `bb_attachments_config` VALUES ('upload_img', 'styles/images/icon_clip.gif');
+INSERT INTO `bb_attachments_config` VALUES ('topic_icon', 'styles/images/icon_clip.gif');
 INSERT INTO `bb_attachments_config` VALUES ('display_order', '0');
 INSERT INTO `bb_attachments_config` VALUES ('max_filesize', '262144');
 INSERT INTO `bb_attachments_config` VALUES ('attachment_quota', '52428800');
@@ -546,7 +546,7 @@ INSERT INTO `bb_config` VALUES ('seed_bonus_user_regdate', '0');
 INSERT INTO `bb_config` VALUES ('site_desc', 'A little text to describe your forum');
 INSERT INTO `bb_config` VALUES ('sitemap_time', '');
 INSERT INTO `bb_config` VALUES ('sitename', 'TorrentPier II - Torrent Tracker');
-INSERT INTO `bb_config` VALUES ('smilies_path', 'images/smiles');
+INSERT INTO `bb_config` VALUES ('smilies_path', 'styles/images/smiles');
 INSERT INTO `bb_config` VALUES ('static_sitemap', '');
 INSERT INTO `bb_config` VALUES ('topics_per_page', '50');
 INSERT INTO `bb_config` VALUES ('xs_use_cache', '1');
@@ -605,7 +605,7 @@ CREATE TABLE IF NOT EXISTS `bb_cron` (
 --
 
 INSERT INTO `bb_cron` VALUES (1, 1, 'Attach maintenance', 'attach_maintenance.php', 'daily', NULL, '05:00:00', 40, '', '', NULL, 1, '', 0, 1, 0);
-INSERT INTO `bb_cron` VALUES (2, 1, 'Board maintenance', 'bb_maintenance.php', 'daily', NULL, '05:00:00', 40, '', '', NULL, 1, '', 0, 1, 0);
+INSERT INTO `bb_cron` VALUES (2, 1, 'Board maintenance', 'board_maintenance.php', 'daily', NULL, '05:00:00', 40, '', '', NULL, 1, '', 0, 1, 0);
 INSERT INTO `bb_cron` VALUES (3, 1, 'Prune forums', 'prune_forums.php', 'daily', NULL, '05:00:00', 50, '', '', NULL, 1, '', 0, 1, 0);
 INSERT INTO `bb_cron` VALUES (4, 1, 'Prune topic moved stubs', 'prune_topic_moved.php', 'daily', NULL, '05:00:00', 60, '', '', NULL, 1, '', 0, 1, 0);
 INSERT INTO `bb_cron` VALUES (5, 1, 'Logs cleanup', 'clean_log.php', 'daily', NULL, '05:00:00', 70, '', '', NULL, 1, '', 0, 1, 0);
@@ -988,7 +988,7 @@ CREATE TABLE IF NOT EXISTS `bb_ranks` (
 -- Дамп данных таблицы `bb_ranks`
 --
 
-INSERT INTO `bb_ranks` VALUES (1, 'Администратор', -1, 1, 'images/ranks/admin.png', 'colorAdmin');
+INSERT INTO `bb_ranks` VALUES (1, 'Администратор', -1, 1, 'styles/images/ranks/admin.png', 'colorAdmin');
 
 -- --------------------------------------------------------
 
