@@ -70,7 +70,7 @@ $domain_name = (!empty($_SERVER['SERVER_NAME'])) ? $_SERVER['SERVER_NAME'] : $do
 
 // Version info
 $bb_cfg['tp_version'] = '2.1.2';
-$bb_cfg['tp_release_date'] = '17-10-2014';
+$bb_cfg['tp_release_date'] = '20-10-2014';
 $bb_cfg['tp_release_state'] = 'ALPHA';
 
 // Database
@@ -252,6 +252,7 @@ define('ATTACH_DIR',    BB_PATH .'/library/attach_mod/'      );
 define('CFG_DIR',       BB_PATH .'/library/config/'          );
 define('INC_DIR',       BB_PATH .'/library/includes/'        );
 define('CLASS_DIR',     BB_PATH .'/library/includes/classes/');
+define('UCP_DIR',       BB_PATH .'/library/includes/ucp/'    );
 define('LANG_ROOT_DIR', BB_PATH .'/library/language/'        );
 define('TEMPLATES_DIR', BB_PATH .'/styles/templates/'        );
 

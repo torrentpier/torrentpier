@@ -172,7 +172,7 @@ else if (IS_MOD)
 // Show users torrent-profile
 if (IS_AM || $profile_user_id || !bf($profiledata['user_opt'], 'user_opt', 'user_dls'))
 {
-	require(INC_DIR .'ucp/viewtorrent.php');
+	require(UCP_DIR .'viewtorrent.php');
 }
 
 // Ajax bt_userdata
