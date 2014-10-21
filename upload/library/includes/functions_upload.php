@@ -104,12 +104,12 @@ class upload_common
 			}
 		}
 		// check ext
-		if (!isset($this->ext_ids[$this->file_ext]) || !in_array($this->file_ext, $this->cfg['allowed_ext'], true))
+		if ($uploaded_only && (!isset($this->ext_ids[$this->file_ext]) || !in_array($this->file_ext, $this->cfg['allowed_ext'], true)))
 		{
 			$this->errors[] = sprintf($lang['UPLOAD_ERROR_NOT_ALLOWED'], htmlCHR($this->file_ext));
 			return false;
 		}
-		$this->file_ext_id = $this->ext_ids[$this->file_ext];
+		$this->file_ext_id = @$this->ext_ids[$this->file_ext];
 
 		return true;
 	}
