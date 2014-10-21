@@ -1966,17 +1966,6 @@ function topic_attachment_image($switch_attachment)
 	return '<img src="styles/images/icon_clip.gif" alt="" border="0" /> ';
 }
 
-function transliterate ($str)
-{
-	static $translit_table;
-
-	if (!isset($translit_table))
-	{
-		require(DEFAULT_LANG_DIR .'translit_table.php');
-	}
-	return strtr($str, $translit_table);
-}
-
 /**
  * array_combine()
  *

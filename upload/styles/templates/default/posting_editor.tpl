@@ -85,63 +85,16 @@ ajax.callback.posts = function(data) {
 	<input type="button" value="{L_CODE}" name="codeCode" title="{L_CODE_TITLE}" style="width: 43px;" />
 	<input type="button" value="{L_LIST}" name="codeList" title="{L_LIST_TITLE}"  style="width: 60px;"/>
 	<input type="button" value="1." name="codeOpt" title="{L_LIST_ITEM}" style="width: 30px;" />&nbsp;
-	<input type="button" value="{L_QUOTE_SEL}" name="quoteselected" title="{L_QUOTE_SELECTED}" onclick="bbcode.onclickQuoteSel();" />&nbsp;
-	<!-- IF USER_LANG != 'en' -->
-	<input type="button" value="{L_TRANSLIT}" name="Translit" title="{L_TRANSLIT_TITLE}" style="width: 68px;" onclick="transliterate(document.post.message, this);" /> <a href="#" onclick="toggle_block('translit_opt'); return false"><span style="color: darkred"><b>?</b></span></a>
-	<!-- ENDIF -->
+	<input type="button" value="{L_QUOTE_SEL}" name="quoteselected" title="{L_QUOTE_SELECTED}" onclick="bbcode.onclickQuoteSel();" />
 </div>
 
-	<textarea
-		class="editor mrg_4" name="message" id="message" rows="18" cols="92"
-		onfocus  = "storeCaret(this);"
-		onselect = "storeCaret(this);"
-		onclick  = "storeCaret(this);"
-		onkeyup  = "storeCaret(this);"
-	>{MESSAGE}</textarea>
-
-<!-- IF USER_LANG != 'en' -->
-<div id="translit_opt" class="mrg_4" style="display: none;">
-	<table cellspacing="0" class="translit_expl borderless bCenter">
-	<tr>
-		<th>А</th><td>-</td><td>a</td>
-		<th>Д</th><td>-</td><td>d</td>
-		<th>И</th><td>-</td><td>i</td>
-		<th>М</th><td>-</td><td>m</td>
-		<th>Р</th><td>-</td><td>r</td>
-		<th>Ф</th><td>-</td><td>f</td>
-		<th>Ш</th><td>-</td><td>sh</td>
-		<th>Ы</th><td>-</td><td>y</td>
-	</tr><tr>
-		<th>Б</th><td>-</td><td>b</td>
-		<th>Е</th><td>-</td><td>e</td>
-		<th>Й</th><td>-</td><td>j</td>
-		<th>Н</th><td>-</td><td>n</td>
-		<th>С</th><td>-</td><td>s</td>
-		<th>Х</th><td>-</td><td>h,x</td>
-		<th>Щ</th><td>-</td><td>sz,w</td>
-		<th>Э</th><td>-</td><td>eh</td>
-	</tr><tr>
-		<th>В</th><td>-</td><td>v</td>
-		<th>Ж</th><td>-</td><td>zh</td>
-		<th>К</th><td>-</td><td>k</td>
-		<th>О</th><td>-</td><td>o</td>
-		<th>Т</th><td>-</td><td>t</td>
-		<th>Ц</th><td>-</td><td>c</td>
-		<th>Ь</th><td>-</td><td>'</td>
-		<th>Ю</th><td>-</td><td>ju</td>
-	</tr><tr>
-		<th>Г</th><td>-</td><td>g</td>
-		<th>З</th><td>-</td><td>z</td>
-		<th>Л</th><td>-</td><td>l</td>
-		<th>П</th><td>-</td><td>p</td>
-		<th>У</th><td>-</td><td>u</td>
-		<th>Ч</th><td>-</td><td>ch</td>
-		<th>Ъ</th><td>-</td><td>#</td>
-		<th>Я</th><td>-</td><td>ja</td>
-	</tr>
-	</table>
-</div>
-<!-- ENDIF -->
+<textarea
+	class="editor mrg_4" name="message" id="message" rows="18" cols="92"
+	onfocus  = "storeCaret(this);"
+	onselect = "storeCaret(this);"
+	onclick  = "storeCaret(this);"
+	onkeyup  = "storeCaret(this);"
+>{MESSAGE}</textarea>
 
 <div class="mrg_8 tCenter">
 	<div id="post-buttons-block" style="display: none;">
@@ -157,7 +110,6 @@ ajax.callback.posts = function(data) {
 function dis_submit_btn ()
 {
 	$('#post-submit-btn').attr('disabled', 1);
-	//debounce('post-submit-btn', 3000);
 }
 
 function debounce (el_id, time_ms)

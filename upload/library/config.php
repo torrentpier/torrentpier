@@ -69,8 +69,8 @@ $domain_name = 'torrentpier.me'; // enter here your primary domain name of your 
 $domain_name = (!empty($_SERVER['SERVER_NAME'])) ? $_SERVER['SERVER_NAME'] : $domain_name;
 
 // Version info
-$bb_cfg['tp_version'] = '2.1.2';
-$bb_cfg['tp_release_date'] = '20-10-2014';
+$bb_cfg['tp_version'] = '2.1.3';
+$bb_cfg['tp_release_date'] = '**-10-2014';
 $bb_cfg['tp_release_state'] = 'ALPHA';
 
 // Database

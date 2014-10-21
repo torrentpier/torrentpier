@@ -109,7 +109,7 @@ class upload_common
 			$this->errors[] = sprintf($lang['UPLOAD_ERROR_NOT_ALLOWED'], htmlCHR($this->file_ext));
 			return false;
 		}
-		$this->file_ext_id = @$this->ext_ids[$this->file_ext];
+		$this->file_ext_id = $this->ext_ids[$this->file_ext];
 
 		return true;
 	}

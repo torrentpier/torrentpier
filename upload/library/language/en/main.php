@@ -1325,7 +1325,6 @@ $lang['BOT_AFTER_SPLIT_TO_NEW'] = 'Add bot-message about split to <b>new topic</
 $lang['QUICK_REPLY'] = 'Quick Reply';
 $lang['INS_NAME_TIP'] = 'Insert name or selected text.';
 $lang['QUOTE_SELECTED'] = 'Quote selected';
-$lang['TRANSLIT_RULES'] = 'Translit rules';
 $lang['QR_ATTACHSIG'] = 'Attach signature';
 $lang['QR_NOTIFY'] = 'Notify on reply';
 $lang['QR_DISABLE'] = 'Disable';
@@ -1517,8 +1516,6 @@ $lang['LIST'] = 'List';
 $lang['LIST_TITLE'] = 'List: [list]text[/list] (Ctrl+l)';
 $lang['LIST_ITEM'] = 'Ordered list: [list=]text[/list] (Ctrl+O)';
 $lang['QUOTE_SEL'] = 'Quote selected';
-$lang['TRANSLIT'] = 'Translit';
-$lang['TRANSLIT_TITLE'] = 'Translit selected to russian';
 $lang['JAVASCRIPT_ON'] = 'Heads necessary to send messages to enable JavaScript';
 
 $lang['NEW'] = 'New';
