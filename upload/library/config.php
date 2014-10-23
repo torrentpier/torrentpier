@@ -15,6 +15,7 @@
    - Script versions
    - GZip
  * Tracker
+ * Ocelot
  * FAQ url
  * Torrents
    - Ratio limits
@@ -156,6 +157,15 @@ $bb_cfg['passkey_key']        = 'uk';              // Passkey key name in GET re
 $bb_cfg['ignore_reported_ip'] = false;             // Ignore IP reported by client
 $bb_cfg['verify_reported_ip'] = true;              // Verify IP reported by client against $_SERVER['HTTP_X_FORWARDED_FOR']
 $bb_cfg['allow_internal_ip']  = false;             // Allow internal IP (10.xx.. etc.)
+
+// Ocelot
+$bb_cfg['ocelot'] = array(
+	'enabled' => false,
+	'host'    => $domain_name,
+	'url'     => 'http://'. $domain_name .':34000/',
+	'secret'  => 'some_10_chars', // 10 chars
+	'stats'   => 'some_10_chars', // 10 chars
+);
 
 // FAQ url help link
 $bb_cfg['how_to_download_url_help']  = 'viewtopic.php?t=1'; // Как скачивать?
