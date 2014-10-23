@@ -136,7 +136,8 @@
 	</div>
 	</td>
 </tr>
-<!-- IF ATTACHBOX && POSTER_RGROUPS -->
+<!-- IF ATTACHBOX -->
+<!-- IF POSTER_RGROUPS -->
 <tr>
 	<td class="vTop pad_4" valign="top"><b>{L_POST_RELEASE_FROM_GROUP}</b></td>
 	<td>
@@ -147,7 +148,8 @@
 		<label><input type="checkbox" name="attach_rg_sig" <!-- IF ATTACH_RG_SIG -->checked<!-- ENDIF -->/> {L_ATTACH_RG_SIG}</label>
 	</td>
 </tr>
-<!-- ENDIF -->
+<!-- ENDIF / POSTER_RGROUPS -->
+<!-- ENDIF / ATTACHBOX -->
 <!-- ENDIF / LOGGED_IN -->
 <!-- BEGIN switch_type_toggle -->
 <tr>

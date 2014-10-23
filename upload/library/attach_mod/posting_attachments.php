@@ -7,7 +7,6 @@ define('FILENAME_PREFIX_LENGTH',  6);
 define('FILENAME_MAX_LENGTH',     180);
 define('FILENAME_CRYPTIC',        false);
 define('FILENAME_CRYPTIC_LENGTH', 64);
-define('FILENAME_TRANSLITERATE',  true);
 
 class attach_parent
 {
@@ -963,10 +962,6 @@ class attach_parent
 				if (FILENAME_CRYPTIC)
 				{
 					$this->attach_filename = make_rand_str(FILENAME_CRYPTIC_LENGTH);
-				}
-				else if (FILENAME_TRANSLITERATE)
-				{
-					$this->attach_filename = transliterate($this->attach_filename);
 				}
 				else
 				{ // original
