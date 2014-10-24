@@ -61,7 +61,7 @@ function tracker_unregister ($attach_id, $mode = '')
 	global $lang, $bb_cfg;
 
 	$attach_id = (int) $attach_id;
-	$post_id = $topic_id = $forum_id = null;
+	$post_id = $topic_id = $forum_id = $info_hash = null;
 
 	// Get torrent info
 	if ($torrent = get_torrent_info($attach_id))
@@ -115,6 +115,16 @@ function tracker_unregister ($attach_id, $mode = '')
 	if (!DB()->sql_query($sql))
 	{
 		bb_die('Could not delete peers');
+	}
+
+	// Ocelot
+	if ($bb_cfg['ocelot']['enabled'])
+	{
+		if ($row = DB()->fetch_row("SELECT info_hash FROM ". BB_BT_TORRENTS ." WHERE attach_id = $attach_id LIMIT 1"))
+		{
+			$info_hash = $row['info_hash'];
+		}
+		ocelot_update_tracker('delete_torrent', array('info_hash' => rawurlencode($info_hash), 'id' => $topic_id));
 	}
 
 	// Delete torrent
@@ -206,9 +216,21 @@ function change_tor_type ($attach_id, $tor_status_gold)
 
 	if (!IS_AM) bb_die($lang['ONLY_FOR_MOD']);
 
-	$topic_id = $torrent['topic_id'];
+	$topic_id        = $torrent['topic_id'];
 	$tor_status_gold = intval($tor_status_gold);
+	$info_hash       = null;
+
 	DB()->query("UPDATE ". BB_BT_TORRENTS ." SET tor_type = $tor_status_gold WHERE topic_id = $topic_id LIMIT 1");
+
+	// Ocelot
+	if ($bb_cfg['ocelot']['enabled'])
+	{
+		if ($row = DB()->fetch_row("SELECT info_hash FROM ". BB_BT_TORRENTS ." WHERE topic_id = $topic_id LIMIT 1"))
+		{
+			$info_hash = $row['info_hash'];
+		}
+		ocelot_update_tracker('update_torrent', array('info_hash' => rawurlencode($info_hash), 'freetorrent' => $tor_status_gold));
+	}
 }
 
 function tracker_register ($attach_id, $mode = '', $tor_status = TOR_NOT_APPROVED, $reg_time = TIMENOW)
@@ -227,6 +249,7 @@ function tracker_register ($attach_id, $mode = '', $tor_status = TOR_NOT_APPROVE
 	$topic_id  = $torrent['topic_id'];
 	$forum_id  = $torrent['forum_id'];
 	$poster_id = $torrent['poster_id'];
+	$info_hash = null;
 
 	if ($torrent['extension'] !== TORRENT_EXT) return torrent_error_exit($lang['NOT_TORRENT']);
 	if (!$torrent['allow_reg_tracker']) return torrent_error_exit($lang['REG_NOT_ALLOWED_IN_THIS_FORUM']);
@@ -274,6 +297,12 @@ function tracker_register ($attach_id, $mode = '', $tor_status = TOR_NOT_APPROVE
 	$info_hash     = pack('H*', sha1(bencode($info)));
 	$info_hash_sql = rtrim(DB()->escape($info_hash), ' ');
 	$info_hash_md5 = md5($info_hash);
+
+	// Ocelot
+	if ($bb_cfg['ocelot']['enabled'])
+	{
+		ocelot_update_tracker('add_torrent', array('info_hash' => rawurlencode($info_hash), 'id' => $topic_id, 'freetorrent' => 0));
+	}
 
 	if ($row = DB()->fetch_row("SELECT topic_id FROM ". BB_BT_TORRENTS ." WHERE info_hash = '$info_hash_sql' LIMIT 1"))
 	{
@@ -411,6 +440,10 @@ function send_torrent_with_passkey ($filename)
 		{
 			bb_simple_die('Could not generate passkey');
 		}
+		elseif ($bb_cfg['ocelot']['enabled'])
+		{
+			ocelot_update_tracker('add_user', array('id' => $user_id ,'passkey' => $passkey_val));
+		}
 	}
 
 	// Ratio limits
@@ -443,7 +476,7 @@ function send_torrent_with_passkey ($filename)
 		bb_die('This is not a bencoded file');
 	}
 
-	$announce = strval($ann_url . "?$passkey_key=$passkey_val");
+	$announce = $bb_cfg['ocelot']['enabled'] ? strval($bb_cfg['ocelot']['url'] .$passkey_val. "/announce") : strval($ann_url . "?$passkey_key=$passkey_val");
 
 	// Replace original announce url with tracker default
 	if ($bb_cfg['bt_replace_ann_url'] || !isset($tor['announce']))
@@ -464,7 +497,7 @@ function send_torrent_with_passkey ($filename)
 	// Add retracker
 	if (isset($tr_cfg['retracker']) && $tr_cfg['retracker'])
 	{
-		if (bf($userdata['user_opt'], 'user_opt', 'user_retracker'))
+		if (bf($userdata['user_opt'], 'user_opt', 'user_retracker') || IS_GUEST)
 		{
 			if (!isset($tor['announce-list']))
 			{
@@ -513,7 +546,7 @@ function send_torrent_with_passkey ($filename)
 
 function generate_passkey ($user_id, $force_generate = false)
 {
-	global $lang, $sql;
+	global $bb_cfg, $lang, $sql;
 
 	$user_id = (int) $user_id;
 
@@ -538,6 +571,12 @@ function generate_passkey ($user_id, $force_generate = false)
 	for ($i=0; $i < 20; $i++)
 	{
 		$passkey_val = make_rand_str(BT_AUTH_KEY_LENGTH);
+		$old_passkey = null;
+
+		if ($row = DB()->fetch_row("SELECT auth_key FROM ". BB_BT_USERS ." WHERE user_id = $user_id LIMIT 1"))
+		{
+			$old_passkey = $row['auth_key'];
+		}
 
 		// Insert new row
 		DB()->query("INSERT IGNORE INTO ". BB_BT_USERS ." (user_id, auth_key) VALUES ($user_id, '$passkey_val')");
@@ -551,6 +590,11 @@ function generate_passkey ($user_id, $force_generate = false)
 
 		if (DB()->affected_rows() == 1)
 		{
+			// Ocelot
+			if ($bb_cfg['ocelot']['enabled'])
+			{
+				ocelot_update_tracker('change_passkey', array('oldpasskey' => $old_passkey,'newpasskey' => $passkey_val));
+			}
 			return $passkey_val;
 		}
 	}
@@ -604,6 +648,86 @@ function torrent_error_exit ($message)
 	}
 
 	bb_die($msg . $message);
+}
+
+function ocelot_update_tracker ($action, $updates)
+{
+	global $bb_cfg;
+
+	$get = $bb_cfg['ocelot']['secret'] . "/update?action=$action";
+
+	foreach ($updates as $key => $value)
+	{
+		$get .= "&$key=$value";
+	}
+
+	$max_attempts = 3;
+	$err = false;
+
+	if (ocelot_send_request($get, $max_attempts, $err) === false)
+	{
+		return false;
+	}
+
+	return true;
+}
+
+function ocelot_send_request ($get, $max_attempts = 1, &$err = false)
+{
+	global $bb_cfg;
+
+	$header = "GET /$get HTTP/1.1\r\nConnection: Close\r\n\r\n";
+	$attempts = $sleep = $success = $response = 0;
+	$start_time = microtime(true);
+
+	while (!$success && $attempts++ < $max_attempts)
+	{
+		if ($sleep)
+		{
+			sleep($sleep);
+		}
+
+		// Send request
+		$file = fsockopen($bb_cfg['ocelot']['host'], $bb_cfg['ocelot']['port'], $error_num, $error_string);
+		if ($file)
+		{
+			if (fwrite($file, $header) === false)
+			{
+				$err = "Failed to fwrite()";
+				$sleep = 3;
+				continue;
+			}
+		}
+		else
+		{
+			$err = "Failed to fsockopen() - $error_num - $error_string";
+			$sleep = 6;
+			continue;
+		}
+
+		// Check for response
+		while (!feof($file))
+		{
+			$response .= fread($file, 1024);
+		}
+		$data_start = strpos($response, "\r\n\r\n") + 4;
+		$data_end = strrpos($response, "\n");
+		if ($data_end > $data_start)
+		{
+			$data = substr($response, $data_start, $data_end - $data_start);
+		}
+		else
+		{
+			$data = "";
+		}
+		$status = substr($response, $data_end + 1);
+		if ($status == "success")
+		{
+			$success = true;
+		}
+	}
+
+	return $success;
 }
 
 // bdecode: based on OpenTracker

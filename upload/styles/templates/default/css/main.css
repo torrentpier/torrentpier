@@ -465,16 +465,11 @@ table.pm_box_size { width: 175px; margin: 8px 2px; }
 	.pm_box_size b { font-size: 10px; }
 	.pm_nav td { padding: 4px; font-size: 14px; font-weight: bold; }
 
-table.translit_expl th {
-	width: 30px; padding-right: 8px; font-weight: bold; text-align: right;
-}
-table.translit_expl td { width: 14px; }
-
 table.user_contacts th { text-align: right; white-space: nowrap; }
-    .user_contacts td { text-align: left; padding: 2px 6px; white-space: nowrap; }
+	.user_contacts td { text-align: left; padding: 2px 6px; white-space: nowrap; }
 
 table.user_details th { padding: 2px 6px; text-align: right; vertical-align: top; }
-    .user_details td { width: 70%; }
+	.user_details td { width: 70%; }
 
 table.usercp_register h6 {
 	margin: 0.3em 0.4em; color: #444444; line-height: 100%;

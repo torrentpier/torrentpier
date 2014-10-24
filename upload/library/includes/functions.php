@@ -1963,18 +1963,7 @@ function topic_attachment_image($switch_attachment)
 	{
 		return '';
 	}
-	return '<img src="images/icon_clip.gif" alt="" border="0" /> ';
-}
-
-function transliterate ($str)
-{
-	static $translit_table;
-
-	if (!isset($translit_table))
-	{
-		require(DEFAULT_LANG_DIR .'translit_table.php');
-	}
-	return strtr($str, $translit_table);
+	return '<img src="styles/images/icon_clip.gif" alt="" border="0" /> ';
 }
 
 /**
@@ -2825,10 +2814,10 @@ function is_gold ($type)
 		switch ($type)
 		{
 			case TOR_TYPE_GOLD:
-				$is_gold = '<img src="images/tor_gold.gif" width="16" height="15" title="'. $lang['GOLD'] .'" />&nbsp;';
+				$is_gold = '<img src="styles/images/tor_gold.gif" width="16" height="15" title="'. $lang['GOLD'] .'" />&nbsp;';
 				break;
 			case TOR_TYPE_SILVER:
-				$is_gold = '<img src="images/tor_silver.gif" width="16" height="15" title="'. $lang['SILVER'] .'" />&nbsp;';
+				$is_gold = '<img src="styles/images/tor_silver.gif" width="16" height="15" title="'. $lang['SILVER'] .'" />&nbsp;';
 				break;
 			default:
 				$is_gold = '';

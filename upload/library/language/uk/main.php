@@ -1325,7 +1325,6 @@ $lang['BOT_AFTER_SPLIT_TO_NEW'] = 'Додати повідомлення про 
 $lang['QUICK_REPLY'] = 'Швидка відповідь';
 $lang['INS_NAME_TIP'] = "Вставити ім'я або виділений шматок повідомлення.";
 $lang['QUOTE_SELECTED'] = 'Цитувати виділений текст';
-$lang['TRANSLIT_RULES'] = 'Правила трансліту';
 $lang['QR_ATTACHSIG'] = 'Приєднати підпис';
 $lang['QR_NOTIFY'] = 'Повідомляти про відповіді';
 $lang['QR_DISABLE'] = 'Відключити';
@@ -1517,8 +1516,6 @@ $lang['LIST'] = 'Список';
 $lang['LIST_TITLE'] = 'Список: [list]текст[/list] (Ctrl+L)';
 $lang['LIST_ITEM'] = 'Нумерований список: [list=]текст[/list] (Ctrl+O)';
 $lang['QUOTE_SEL'] = 'Цит.виділ';
-$lang['TRANSLIT'] = 'Трансліт';
-$lang['TRANSLIT_TITLE'] = 'Перевести виділення з трансліту на українську';
 $lang['JAVASCRIPT_ON'] = 'Для надсилання повідомлень необхідно включити JavaScript';
 
 $lang['NEW'] = 'Нове';
