@@ -31,7 +31,10 @@ CREATE TABLE IF NOT EXISTS `bb_bt_tracker` (
   `up_add` bigint(20) unsigned NOT NULL DEFAULT '0',
   `down_add` bigint(20) unsigned NOT NULL DEFAULT '0',
   `update_time` int(11) NOT NULL DEFAULT '0',
-  `complete_percent` bigint(20) NOT NULL DEFAULT '0'
+  `complete_percent` bigint(20) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`peer_hash`),
+  KEY `topic_id` (`topic_id`),
+  KEY `user_id` (`user_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -46,5 +49,6 @@ CREATE TABLE IF NOT EXISTS `bb_bt_tracker_snap` (
   `leechers` mediumint(8) unsigned NOT NULL DEFAULT '0',
   `speed_up` int(10) unsigned NOT NULL DEFAULT '0',
   `speed_down` int(10) unsigned NOT NULL DEFAULT '0',
-  `complete` int(11) NOT NULL
+  `complete` int(11) NOT NULL,
+  PRIMARY KEY (`topic_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;

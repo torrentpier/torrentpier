@@ -83,8 +83,7 @@ function smtpmail($mail_to, $subject, $message, $headers = '')
 		bb_die('Email message was blank');
 	}
 
-	// Ok we have error checked as much as we can to this point let's get on
-	// it already.
+	// Ok we have error checked as much as we can to this point let's get on it already
 	$ssl = ($bb_cfg['smtp_ssl']) ? 'ssl://' : '';
 	if( !$socket = @fsockopen($ssl . $bb_cfg['smtp_host'], $bb_cfg['smtp_port'], $errno, $errstr, 20) )
 	{

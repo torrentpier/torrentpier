@@ -1,6 +1,7 @@
 <?php
 
 /**
+ * Script versions
  * Domain name
  * Version info
  * Database
@@ -12,7 +13,6 @@
    - Datastore
  * Server
    - Cloudflare
-   - Script versions
    - GZip
  * Tracker
  * Ocelot
@@ -74,7 +74,7 @@ $domain_name = (!empty($_SERVER['SERVER_NAME'])) ? $_SERVER['SERVER_NAME'] : $do
 
 // Version info
 $bb_cfg['tp_version'] = '2.1.3';
-$bb_cfg['tp_release_date'] = '**-10-2014';
+$bb_cfg['tp_release_date'] = '24-10-2014';
 $bb_cfg['tp_release_state'] = 'ALPHA';
 
 // Database
@@ -109,7 +109,7 @@ $bb_cfg['db_alias'] = array(
 // Cache
 $bb_cfg['cache']['pconnect'] = true;
 $bb_cfg['cache']['db_dir']   = realpath(BB_ROOT) .'/internal_data/cache/filecache/';
-$bb_cfg['cache']['prefix']   = '';  // Префикс кеша 'tp_2'
+$bb_cfg['cache']['prefix']   = 'tp_';  // Префикс кеша ('tp_')
 $bb_cfg['cache']['memcache'] = array(
 	'host'         => '127.0.0.1',
 	'port'         => 11211,
@@ -162,9 +162,10 @@ $bb_cfg['allow_internal_ip']  = false;             // Allow internal IP (10.xx..
 $bb_cfg['ocelot'] = array(
 	'enabled' => false,
 	'host'    => $domain_name,
-	'url'     => "http://$domain_name:34000/",
-	'secret'  => 'some_10_chars', // 10 chars
-	'stats'   => 'some_10_chars', // 10 chars
+	'port'    => 34000,
+	'url'     => "http://$domain_name:34000/", // with '/'
+	'secret'  => 'some_10_chars',              // 10 chars
+	'stats'   => 'some_10_chars',              // 10 chars
 );
 
 // FAQ url help link
@@ -374,7 +375,7 @@ $bb_cfg['pm_notify_enabled']       = true;
 $bb_cfg['group_send_email']        = true;
 $bb_cfg['email_change_disabled']   = false;        // disable changing email by user
 
-$bb_cfg['tech_admin_email']        = "admin@$domain_name";  // email for sending error reports
+$bb_cfg['tech_admin_email']        = "admin@$domain_name"; // email for sending error reports
 $bb_cfg['abuse_email']             = "abuse@$domain_name";
 $bb_cfg['adv_email']               = "adv@$domain_name";
 
