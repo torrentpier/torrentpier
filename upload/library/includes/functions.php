@@ -1868,7 +1868,7 @@ function bb_realpath ($path)
 
 function login_redirect ($url = '')
 {
-	redirect(LOGIN_URL . '?redirect='. (($url) ? $url : $_SERVER['REQUEST_URI']));
+    redirect(LOGIN_URL . '?redirect='. (($url) ? $url : (isset($_SERVER['REQUEST_URI']) ?: '/')));
 }
 
 function meta_refresh ($url, $time = 5)
