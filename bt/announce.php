@@ -187,7 +187,7 @@ function msg_die ($msg)
 
 // Start announcer
 define('TR_ROOT', './');
-require(TR_ROOT .'includes/init_tr.php');
+require(TR_ROOT . 'includes/init_tr.php');
 
 $seeder  = ($left == 0) ? 1 : 0;
 $stopped = ($event === 'stopped');

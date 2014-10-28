@@ -59,4 +59,4 @@ unset($res, $user, $dbpasswd, $passkey, $user_id);
 
 // Execute TP's announce
 chdir(TP_ROOT .'bt/');
-require ('announce.php');
+require('announce.php');

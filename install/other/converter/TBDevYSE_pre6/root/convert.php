@@ -3,9 +3,9 @@
 define ('IN_FORUM', true);
 define ('BB_ROOT', './');
 require (BB_ROOT .'common.php');
-require (BB_ROOT .'converter/constants.php');
-require (BB_ROOT .'converter/settings.php');
-require (BB_ROOT .'converter/functions.php');
+require(BB_ROOT . 'converter/constants.php');
+require(BB_ROOT . 'converter/settings.php');
+require(BB_ROOT . 'converter/functions.php');
 
 // Start session management
 $user->session_start();

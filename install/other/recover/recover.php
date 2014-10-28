@@ -4,8 +4,8 @@ define('IN_FORUM', true);
 define('BB_ROOT', './');
 require(BB_ROOT .'common.php');
 require(INC_DIR .'functions_torrent.php');
-require(BB_ROOT .'converter/settings.php');
-require(BB_ROOT .'converter/functions.php');
+require(BB_ROOT . 'converter/settings.php');
+require(BB_ROOT . 'converter/functions.php');
 
 // Init userdata
 $user->session_start();
