@@ -4,7 +4,7 @@ AddDefaultCharset UTF-8
 ## Access control
 Options All -Indexes
 
-<FilesMatch "\.(.*sql|tpl|inc|db|log)|(config|common).php$">
+<FilesMatch "\.(.*sql|tpl|inc|db|log|md)|(config|common).php$">
 deny from all
 </FilesMatch>
 
