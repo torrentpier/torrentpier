@@ -108,7 +108,7 @@ $letters_range .= '-';
 $letters_range .= iconv('windows-1251', 'UTF-8', chr(255));
 $select_letter = $letter_sql = '';
 
-$by_letter_req = (@$_REQUEST['letter']) ? strtolower(trim($_REQUEST['letter'])) : false;
+$by_letter_req = isset($_REQUEST['letter']) ? strtolower(trim($_REQUEST['letter'])) : false;
 
 if ($by_letter_req)
 {

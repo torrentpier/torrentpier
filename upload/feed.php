@@ -7,9 +7,9 @@ require(BB_ROOT .'common.php');
 
 $user->session_start(array('req_login' => true));
 
-$mode = (string) @$_REQUEST['mode'];
-$type = (string) @$_POST['type'];
-$id   = (int) @$_POST['id'];
+$mode = isset($_REQUEST['mode']) ? $_REQUEST['mode'] : '';
+$type = isset($_POST['type']) ? $_POST['type'] : '';
+$id   = isset($_POST['id']) ? $_POST['id'] : 0;
 $timecheck = TIMENOW - 600;
 
 if (!$mode) bb_simple_die($lang['ATOM_NO_MODE']);

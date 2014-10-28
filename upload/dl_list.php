@@ -5,9 +5,9 @@ define('BB_SCRIPT', 'dl_list');
 define('BB_ROOT', './');
 require(BB_ROOT .'common.php');
 
-$forum_id  = (@$_REQUEST[POST_FORUM_URL]) ? (int) $_REQUEST[POST_FORUM_URL] : 0;
-$topic_id  = (@$_REQUEST[POST_TOPIC_URL]) ? (int) $_REQUEST[POST_TOPIC_URL] : 0;
-$mode      = (@$_REQUEST['mode']) ? (string) $_REQUEST['mode'] : '';
+$forum_id  = isset($_REQUEST[POST_FORUM_URL]) ? (int) $_REQUEST[POST_FORUM_URL] : 0;
+$topic_id  = isset($_REQUEST[POST_TOPIC_URL]) ? (int) $_REQUEST[POST_TOPIC_URL] : 0;
+$mode      = isset($_REQUEST['mode']) ? (string) $_REQUEST['mode'] : '';
 $confirmed = isset($_POST['confirm']);
 
 // Get new DL-status
@@ -40,9 +40,9 @@ if ($mode == 'set_dl_status' || $mode == 'set_topics_dl_status')
 }
 
 // Define redirect URL
-$full_url = (@$_POST['full_url']) ? str_replace('&amp;', '&', htmlspecialchars($_POST['full_url'])) : '';
+$full_url = isset($_POST['full_url']) ? str_replace('&amp;', '&', htmlspecialchars($_POST['full_url'])) : '';
 
-if (@$_POST['redirect_type'] == 'search')
+if (isset($_POST['redirect_type']) && $_POST['redirect_type'] == 'search')
 {
 	$redirect_type = "search.php";
 	$redirect = ($full_url) ? $full_url : "$dl_key=1";
@@ -65,7 +65,7 @@ if (!$userdata['session_logged_in'])
 }
 
 // Check if user did not confirm
-if (@$_POST['cancel'])
+if (isset($_POST['cancel']) && $_POST['cancel'])
 {
 	redirect("$redirect_type?$redirect");
 }

@@ -58,10 +58,22 @@ function validate_topics ($forum_id, &$req_topics, &$topic_titles)
 	$topic_titles = $valid_titles;
 }
 
+/**
+ * @param $request_index
+ * @param $mod_action
+ * @return bool
+ */
+function validate_mode_condition($request_index, $mod_action='') {
+    if (!$mod_action) {
+        $mod_action = $request_index;
+    }
+    return (isset($_REQUEST[$request_index]) || (isset($_POST['mod_action']) && $_POST['mod_action'] === $mod_action));
+}
+
 // Obtain initial vars
-$forum_id = (int) @$_REQUEST['f'];
-$topic_id = (int) @$_REQUEST['t'];
-$post_id  = (int) @$_REQUEST['p'];
+$forum_id = isset($_REQUEST['f']) ? $_REQUEST['f'] : 0;
+$topic_id = isset($_REQUEST['t']) ? $_REQUEST['t'] : 0;
+$post_id  = isset($_REQUEST['p']) ? $_REQUEST['p'] : 0;
 
 $start = isset($_REQUEST['start']) ? abs(intval($_REQUEST['start'])) : 0;
 $confirmed = isset($_POST['confirm']);
@@ -74,27 +86,27 @@ if (isset($_REQUEST['mode']))
 }
 else
 {
-	if (isset($_REQUEST['delete']) || @$_POST['mod_action'] === 'topic_delete')
+	if (validate_mode_condition('delete', 'topic_delete'))
 	{
 		$mode = 'delete';
 	}
-	elseif (isset($_REQUEST['move']) || @$_POST['mod_action'] === 'topic_move')
+	elseif (validate_mode_condition('move', 'topic_move'))
 	{
 		$mode = 'move';
 	}
-	elseif (isset($_REQUEST['lock']) || @$_POST['mod_action'] === 'topic_lock')
+	elseif (validate_mode_condition('lock', 'topic_lock'))
 	{
 		$mode = 'lock';
 	}
-	elseif (isset($_REQUEST['unlock']) || @$_POST['mod_action'] === 'topic_unlock')
+	elseif (validate_mode_condition('unlock', 'topic_unlock'))
 	{
 		$mode = 'unlock';
 	}
-	elseif (isset($_REQUEST['post_pin']) || @$_POST['mod_action'] === 'post_pin')
+	elseif (validate_mode_condition('post_pin'))
 	{
 		$mode = 'post_pin';
 	}
-	elseif (isset($_REQUEST['post_unpin']) || @$_POST['mod_action'] === 'post_unpin')
+	elseif (validate_mode_condition('post_unpin'))
 	{
 		$mode = 'post_unpin';
 	}

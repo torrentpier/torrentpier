@@ -57,8 +57,8 @@ if (isset($_REQUEST['admin']) && !IS_AM) bb_die($lang['NOT_ADMIN']);
 $mod_admin_login = (IS_AM && !$user->data['session_admin']);
 
 // login username & password
-$login_username = ($mod_admin_login) ? $userdata['username'] : (string) @$_POST['login_username'];
-$login_password = (string) @$_POST['login_password'];
+$login_username = ($mod_admin_login) ? $userdata['username'] : (isset($_POST['login_username']) ? $_POST['login_username'] : '');
+$login_password = isset($_POST['login_password']) ? $_POST['login_password'] : '';
 
 // Проверка на неверную комбинацию логин/пароль
 $need_captcha = false;

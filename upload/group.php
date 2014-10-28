@@ -188,7 +188,7 @@ if (!$group_id)
 		else bb_die($lang['NO_GROUPS_EXIST']);
 	}
 }
-else if (@$_POST['joingroup'])
+else if (isset($_POST['joingroup']) && $_POST['joingroup'])
 {
 	if ($group_info['group_type'] != GROUP_OPEN)
 	{
@@ -263,7 +263,7 @@ else
 
 		if (!empty($_POST['add']))
 		{
-			if (!$row = get_userdata(@$_POST['username'], true))
+			if (isset($_POST['username']) && !($row = get_userdata($_POST['username'], true)))
 			{
 				bb_die($lang['COULD_NOT_ADD_USER']);
 			}
