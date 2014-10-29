@@ -1,3 +1,4 @@
+### TorrentPier ###
 .idea/
 data/avatars/**/
 data/old_files/
@@ -10,9 +11,24 @@ internal_data/log/
 internal_data/sitemap/*.xml
 internal_data/triggers/
 
+### Archives ###
 *.log
 *.zip
 *.rar
 *.tar
 *.gz
 *.torrent
+
+### Windows ###
+Thumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+*.lnk
+
+### OSX ###
+.DS_Store
+.AppleDouble
+.LSOverride
+._*
+.Spotlight-V100
+.Trashes
