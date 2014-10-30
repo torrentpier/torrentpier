@@ -577,27 +577,27 @@ CREATE TABLE IF NOT EXISTS `bb_cron` (
 -- ----------------------------
 -- Records of bb_cron
 -- ----------------------------
-INSERT INTO `bb_cron` VALUES ('1', '1', 'Attach maintenance', 'attach_maintenance.php', 'daily', null, '05:00:00', '40', '0000-00-00 00:00:00', '0000-00-00 00:00:00', null, '1', '', '0', '1', '0');
-INSERT INTO `bb_cron` VALUES ('2', '1', 'Board maintenance', 'board_maintenance.php', 'daily', null, '05:00:00', '40', '0000-00-00 00:00:00', '0000-00-00 00:00:00', null, '1', '', '0', '1', '0');
-INSERT INTO `bb_cron` VALUES ('3', '1', 'Prune forums', 'prune_forums.php', 'daily', null, '05:00:00', '50', '0000-00-00 00:00:00', '0000-00-00 00:00:00', null, '1', '', '0', '1', '0');
-INSERT INTO `bb_cron` VALUES ('4', '1', 'Prune topic moved stubs', 'prune_topic_moved.php', 'daily', null, '05:00:00', '60', '0000-00-00 00:00:00', '0000-00-00 00:00:00', null, '1', '', '0', '1', '0');
-INSERT INTO `bb_cron` VALUES ('5', '1', 'Logs cleanup', 'clean_log.php', 'daily', null, '05:00:00', '70', '0000-00-00 00:00:00', '0000-00-00 00:00:00', null, '1', '', '0', '1', '0');
-INSERT INTO `bb_cron` VALUES ('6', '1', 'Tracker maintenance', 'tr_maintenance.php', 'daily', null, '05:00:00', '90', '0000-00-00 00:00:00', '0000-00-00 00:00:00', null, '1', '', '0', '1', '0');
-INSERT INTO `bb_cron` VALUES ('7', '1', 'Clean dlstat', 'clean_dlstat.php', 'daily', null, '05:00:00', '100', '0000-00-00 00:00:00', '0000-00-00 00:00:00', null, '1', '', '0', '1', '0');
-INSERT INTO `bb_cron` VALUES ('8', '1', 'Prune inactive users', 'prune_inactive_users.php', 'daily', null, '05:00:00', '110', '0000-00-00 00:00:00', '0000-00-00 00:00:00', null, '1', '', '0', '1', '0');
-INSERT INTO `bb_cron` VALUES ('9', '1', 'Sessions cleanup', 'sessions_cleanup.php', 'interval', null, null, '255', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '00:03:00', '0', '', '0', '0', '0');
-INSERT INTO `bb_cron` VALUES ('10', '1', 'DS update \'cat_forums\'', 'ds_update_cat_forums.php', 'interval', null, null, '255', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '00:05:00', '0', '', '0', '0', '0');
-INSERT INTO `bb_cron` VALUES ('11', '1', 'DS update \'stats\'', 'ds_update_stats.php', 'interval', null, null, '255', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '00:10:00', '0', '', '0', '0', '0');
-INSERT INTO `bb_cron` VALUES ('12', '1', 'Flash topic view', 'flash_topic_view.php', 'interval', null, null, '255', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '00:10:00', '0', '', '0', '0', '0');
-INSERT INTO `bb_cron` VALUES ('13', '1', 'Clean search results', 'clean_search_results.php', 'interval', null, null, '255', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '00:10:00', '0', '', '0', '0', '0');
-INSERT INTO `bb_cron` VALUES ('14', '1', 'Tracker cleanup and dlstat', 'tr_cleanup_and_dlstat.php', 'interval', null, null, '20', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '00:15:00', '0', '', '0', '0', '0');
-INSERT INTO `bb_cron` VALUES ('15', '1', 'Make tracker snapshot', 'tr_make_snapshot.php', 'interval', null, null, '10', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '00:10:00', '0', '', '0', '0', '0');
-INSERT INTO `bb_cron` VALUES ('16', '1', 'Seeder last seen', 'tr_update_seeder_last_seen.php', 'interval', null, null, '255', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '01:00:00', '0', '', '0', '0', '0');
-INSERT INTO `bb_cron` VALUES ('17', '1', 'Captcha', 'captcha_gen_gc.php', 'daily', null, '05:00:00', '120', '0000-00-00 00:00:00', '0000-00-00 00:00:00', null, '0', '', '0', '0', '0');
-INSERT INTO `bb_cron` VALUES ('18', '1', 'Tracker dl-complete count', 'tr_complete_count.php', 'interval', null, null, '255', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '06:00:00', '0', '', '0', '0', '0');
-INSERT INTO `bb_cron` VALUES ('19', '1', 'Cache garbage collector', 'cache_gc.php', 'interval', null, null, '255', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '00:05:00', '0', '', '0', '0', '0');
-INSERT INTO `bb_cron` VALUES ('20', '1', 'Sitemap update', 'sitemap.php', 'daily', null, '06:00:00', '30', '0000-00-00 00:00:00', '0000-00-00 00:00:00', null, '0', '', '0', '0', '0');
-INSERT INTO `bb_cron` VALUES ('21', '1', 'Update forums atom', 'update_forums_atom.php', 'interval', null, null, '255', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '00:15:00', '0', '', '0', '0', '0');
+INSERT INTO `bb_cron` VALUES ('', '1', 'Attach maintenance', 'attach_maintenance.php', 'daily', null, '05:00:00', '40', '', '', null, '1', '', '0', '1', '0');
+INSERT INTO `bb_cron` VALUES ('', '1', 'Board maintenance', 'board_maintenance.php', 'daily', null, '05:00:00', '40', '', '', null, '1', '', '0', '1', '0');
+INSERT INTO `bb_cron` VALUES ('', '1', 'Prune forums', 'prune_forums.php', 'daily', null, '05:00:00', '50', '', '', null, '1', '', '0', '1', '0');
+INSERT INTO `bb_cron` VALUES ('', '1', 'Prune topic moved stubs', 'prune_topic_moved.php', 'daily', null, '05:00:00', '60', '', '', null, '1', '', '0', '1', '0');
+INSERT INTO `bb_cron` VALUES ('', '1', 'Logs cleanup', 'clean_log.php', 'daily', null, '05:00:00', '70', '', '', null, '1', '', '0', '1', '0');
+INSERT INTO `bb_cron` VALUES ('', '1', 'Tracker maintenance', 'tr_maintenance.php', 'daily', null, '05:00:00', '90', '', '', null, '1', '', '0', '1', '0');
+INSERT INTO `bb_cron` VALUES ('', '1', 'Clean dlstat', 'clean_dlstat.php', 'daily', null, '05:00:00', '100', '', '', null, '1', '', '0', '1', '0');
+INSERT INTO `bb_cron` VALUES ('', '1', 'Prune inactive users', 'prune_inactive_users.php', 'daily', null, '05:00:00', '110', '', '', null, '1', '', '0', '1', '0');
+INSERT INTO `bb_cron` VALUES ('', '1', 'Sessions cleanup', 'sessions_cleanup.php', 'interval', null, null, '255', '', '', '00:03:00', '0', '', '0', '0', '0');
+INSERT INTO `bb_cron` VALUES ('', '1', 'DS update \'cat_forums\'', 'ds_update_cat_forums.php', 'interval', null, null, '255', '', '', '00:05:00', '0', '', '0', '0', '0');
+INSERT INTO `bb_cron` VALUES ('', '1', 'DS update \'stats\'', 'ds_update_stats.php', 'interval', null, null, '255', '', '', '00:10:00', '0', '', '0', '0', '0');
+INSERT INTO `bb_cron` VALUES ('', '1', 'Flash topic view', 'flash_topic_view.php', 'interval', null, null, '255', '', '', '00:10:00', '0', '', '0', '0', '0');
+INSERT INTO `bb_cron` VALUES ('', '1', 'Clean search results', 'clean_search_results.php', 'interval', null, null, '255', '', '', '00:10:00', '0', '', '0', '0', '0');
+INSERT INTO `bb_cron` VALUES ('', '1', 'Tracker cleanup and dlstat', 'tr_cleanup_and_dlstat.php', 'interval', null, null, '20', '', '', '00:15:00', '0', '', '0', '0', '0');
+INSERT INTO `bb_cron` VALUES ('', '1', 'Make tracker snapshot', 'tr_make_snapshot.php', 'interval', null, null, '10', '', '', '00:10:00', '0', '', '0', '0', '0');
+INSERT INTO `bb_cron` VALUES ('', '1', 'Seeder last seen', 'tr_update_seeder_last_seen.php', 'interval', null, null, '255', '', '', '01:00:00', '0', '', '0', '0', '0');
+INSERT INTO `bb_cron` VALUES ('', '1', 'Captcha', 'captcha_gen_gc.php', 'daily', null, '05:00:00', '120', '', '', null, '0', '', '0', '0', '0');
+INSERT INTO `bb_cron` VALUES ('', '1', 'Tracker dl-complete count', 'tr_complete_count.php', 'interval', null, null, '255', '', '', '06:00:00', '0', '', '0', '0', '0');
+INSERT INTO `bb_cron` VALUES ('', '1', 'Cache garbage collector', 'cache_gc.php', 'interval', null, null, '255', '', '', '00:05:00', '0', '', '0', '0', '0');
+INSERT INTO `bb_cron` VALUES ('', '1', 'Sitemap update', 'sitemap.php', 'daily', null, '06:00:00', '30', '', '', null, '0', '', '0', '0', '0');
+INSERT INTO `bb_cron` VALUES ('', '1', 'Update forums atom', 'update_forums_atom.php', 'interval', null, null, '255', '', '', '00:15:00', '0', '', '0', '0', '0');
 
 -- ----------------------------
 -- Table structure for `bb_disallow`
@@ -628,33 +628,33 @@ CREATE TABLE IF NOT EXISTS `bb_extensions` (
 -- ----------------------------
 -- Records of bb_extensions
 -- ----------------------------
-INSERT INTO `bb_extensions` VALUES ('1', '1', 'gif', '');
-INSERT INTO `bb_extensions` VALUES ('2', '1', 'png', '');
-INSERT INTO `bb_extensions` VALUES ('3', '1', 'jpeg', '');
-INSERT INTO `bb_extensions` VALUES ('4', '1', 'jpg', '');
-INSERT INTO `bb_extensions` VALUES ('5', '1', 'tif', '');
-INSERT INTO `bb_extensions` VALUES ('6', '1', 'tga', '');
-INSERT INTO `bb_extensions` VALUES ('7', '2', 'gtar', '');
-INSERT INTO `bb_extensions` VALUES ('8', '2', 'gz', '');
-INSERT INTO `bb_extensions` VALUES ('9', '2', 'tar', '');
-INSERT INTO `bb_extensions` VALUES ('10', '2', 'zip', '');
-INSERT INTO `bb_extensions` VALUES ('11', '2', 'rar', '');
-INSERT INTO `bb_extensions` VALUES ('12', '2', 'ace', '');
-INSERT INTO `bb_extensions` VALUES ('13', '3', 'txt', '');
-INSERT INTO `bb_extensions` VALUES ('14', '3', 'c', '');
-INSERT INTO `bb_extensions` VALUES ('15', '3', 'h', '');
-INSERT INTO `bb_extensions` VALUES ('16', '3', 'cpp', '');
-INSERT INTO `bb_extensions` VALUES ('17', '3', 'hpp', '');
-INSERT INTO `bb_extensions` VALUES ('18', '3', 'diz', '');
-INSERT INTO `bb_extensions` VALUES ('19', '4', 'xls', '');
-INSERT INTO `bb_extensions` VALUES ('20', '4', 'doc', '');
-INSERT INTO `bb_extensions` VALUES ('21', '4', 'dot', '');
-INSERT INTO `bb_extensions` VALUES ('22', '4', 'pdf', '');
-INSERT INTO `bb_extensions` VALUES ('23', '4', 'ai', '');
-INSERT INTO `bb_extensions` VALUES ('24', '4', 'ps', '');
-INSERT INTO `bb_extensions` VALUES ('25', '4', 'ppt', '');
-INSERT INTO `bb_extensions` VALUES ('26', '5', 'rm', '');
-INSERT INTO `bb_extensions` VALUES ('29', '6', 'torrent', '');
+INSERT INTO `bb_extensions` VALUES ('', '1', 'gif', '');
+INSERT INTO `bb_extensions` VALUES ('', '1', 'png', '');
+INSERT INTO `bb_extensions` VALUES ('', '1', 'jpeg', '');
+INSERT INTO `bb_extensions` VALUES ('', '1', 'jpg', '');
+INSERT INTO `bb_extensions` VALUES ('', '1', 'tif', '');
+INSERT INTO `bb_extensions` VALUES ('', '1', 'tga', '');
+INSERT INTO `bb_extensions` VALUES ('', '2', 'gtar', '');
+INSERT INTO `bb_extensions` VALUES ('', '2', 'gz', '');
+INSERT INTO `bb_extensions` VALUES ('', '2', 'tar', '');
+INSERT INTO `bb_extensions` VALUES ('', '2', 'zip', '');
+INSERT INTO `bb_extensions` VALUES ('', '2', 'rar', '');
+INSERT INTO `bb_extensions` VALUES ('', '2', 'ace', '');
+INSERT INTO `bb_extensions` VALUES ('', '3', 'txt', '');
+INSERT INTO `bb_extensions` VALUES ('', '3', 'c', '');
+INSERT INTO `bb_extensions` VALUES ('', '3', 'h', '');
+INSERT INTO `bb_extensions` VALUES ('', '3', 'cpp', '');
+INSERT INTO `bb_extensions` VALUES ('', '3', 'hpp', '');
+INSERT INTO `bb_extensions` VALUES ('', '3', 'diz', '');
+INSERT INTO `bb_extensions` VALUES ('', '4', 'xls', '');
+INSERT INTO `bb_extensions` VALUES ('', '4', 'doc', '');
+INSERT INTO `bb_extensions` VALUES ('', '4', 'dot', '');
+INSERT INTO `bb_extensions` VALUES ('', '4', 'pdf', '');
+INSERT INTO `bb_extensions` VALUES ('', '4', 'ai', '');
+INSERT INTO `bb_extensions` VALUES ('', '4', 'ps', '');
+INSERT INTO `bb_extensions` VALUES ('', '4', 'ppt', '');
+INSERT INTO `bb_extensions` VALUES ('', '5', 'rm', '');
+INSERT INTO `bb_extensions` VALUES ('', '6', 'torrent', '');
 
 -- ----------------------------
 -- Table structure for `bb_extension_groups`
@@ -675,12 +675,12 @@ CREATE TABLE IF NOT EXISTS `bb_extension_groups` (
 -- ----------------------------
 -- Records of bb_extension_groups
 -- ----------------------------
-INSERT INTO `bb_extension_groups` VALUES ('1', 'Images', '1', '1', '1', '', '262144', '');
-INSERT INTO `bb_extension_groups` VALUES ('2', 'Archives', '0', '1', '1', '', '262144', '');
-INSERT INTO `bb_extension_groups` VALUES ('3', 'Plain text', '0', '0', '1', '', '262144', '');
-INSERT INTO `bb_extension_groups` VALUES ('4', 'Documents', '0', '0', '1', '', '262144', '');
-INSERT INTO `bb_extension_groups` VALUES ('5', 'Real media', '0', '0', '2', '', '262144', '');
-INSERT INTO `bb_extension_groups` VALUES ('6', 'Torrent', '0', '1', '1', '', '122880', '');
+INSERT INTO `bb_extension_groups` VALUES ('', 'Images', '1', '1', '1', '', '262144', '');
+INSERT INTO `bb_extension_groups` VALUES ('', 'Archives', '0', '1', '1', '', '262144', '');
+INSERT INTO `bb_extension_groups` VALUES ('', 'Plain text', '0', '0', '1', '', '262144', '');
+INSERT INTO `bb_extension_groups` VALUES ('', 'Documents', '0', '0', '1', '', '262144', '');
+INSERT INTO `bb_extension_groups` VALUES ('', 'Real media', '0', '0', '2', '', '262144', '');
+INSERT INTO `bb_extension_groups` VALUES ('', 'Torrent', '0', '1', '1', '', '122880', '');
 
 -- ----------------------------
 -- Table structure for `bb_forums`
@@ -958,7 +958,7 @@ CREATE TABLE IF NOT EXISTS `bb_ranks` (
 -- ----------------------------
 -- Records of bb_ranks
 -- ----------------------------
-INSERT INTO `bb_ranks` VALUES ('1', 'Администратор', '-1', '1', 'styles/images/ranks/admin.png', 'colorAdmin');
+INSERT INTO `bb_ranks` VALUES ('', 'Администратор', '-1', '1', 'styles/images/ranks/admin.png', 'colorAdmin');
 
 -- ----------------------------
 -- Table structure for `bb_search_rebuild`
@@ -1035,61 +1035,61 @@ CREATE TABLE IF NOT EXISTS `bb_smilies` (
 -- ----------------------------
 -- Records of bb_smilies
 -- ----------------------------
-INSERT INTO `bb_smilies` VALUES ('1', ':aa:', 'aa.gif', 'aa');
-INSERT INTO `bb_smilies` VALUES ('2', ':ab:', 'ab.gif', 'ab');
-INSERT INTO `bb_smilies` VALUES ('3', ':ac:', 'ac.gif', 'ac');
-INSERT INTO `bb_smilies` VALUES ('4', ':ad:', 'ad.gif', 'ad');
-INSERT INTO `bb_smilies` VALUES ('5', ':ae:', 'ae.gif', 'ae');
-INSERT INTO `bb_smilies` VALUES ('6', ':af:', 'af.gif', 'af');
-INSERT INTO `bb_smilies` VALUES ('7', ':ag:', 'ag.gif', 'ag');
-INSERT INTO `bb_smilies` VALUES ('8', ':ah:', 'ah.gif', 'ah');
-INSERT INTO `bb_smilies` VALUES ('9', ':ai:', 'ai.gif', 'ai');
-INSERT INTO `bb_smilies` VALUES ('10', ':aj:', 'aj.gif', 'aj');
-INSERT INTO `bb_smilies` VALUES ('11', ':ak:', 'ak.gif', 'ak');
-INSERT INTO `bb_smilies` VALUES ('12', ':al:', 'al.gif', 'al');
-INSERT INTO `bb_smilies` VALUES ('13', ':am:', 'am.gif', 'am');
-INSERT INTO `bb_smilies` VALUES ('14', ':an:', 'an.gif', 'an');
-INSERT INTO `bb_smilies` VALUES ('15', ':ao:', 'ao.gif', 'ao');
-INSERT INTO `bb_smilies` VALUES ('16', ':ap:', 'ap.gif', 'ap');
-INSERT INTO `bb_smilies` VALUES ('17', ':aq:', 'aq.gif', 'aq');
-INSERT INTO `bb_smilies` VALUES ('18', ':ar:', 'ar.gif', 'ar');
-INSERT INTO `bb_smilies` VALUES ('19', ':as:', 'as.gif', 'as');
-INSERT INTO `bb_smilies` VALUES ('20', ':at:', 'at.gif', 'at');
-INSERT INTO `bb_smilies` VALUES ('21', ':au:', 'au.gif', 'au');
-INSERT INTO `bb_smilies` VALUES ('22', ':av:', 'av.gif', 'av');
-INSERT INTO `bb_smilies` VALUES ('23', ':aw:', 'aw.gif', 'aw');
-INSERT INTO `bb_smilies` VALUES ('24', ':ax:', 'ax.gif', 'ax');
-INSERT INTO `bb_smilies` VALUES ('25', ':ay:', 'ay.gif', 'ay');
-INSERT INTO `bb_smilies` VALUES ('26', ':az:', 'az.gif', 'az');
-INSERT INTO `bb_smilies` VALUES ('27', ':ba:', 'ba.gif', 'ba');
-INSERT INTO `bb_smilies` VALUES ('28', ':bb:', 'bb.gif', 'bb');
-INSERT INTO `bb_smilies` VALUES ('29', ':bc:', 'bc.gif', 'bc');
-INSERT INTO `bb_smilies` VALUES ('30', ':bd:', 'bd.gif', 'bd');
-INSERT INTO `bb_smilies` VALUES ('31', ':be:', 'be.gif', 'be');
-INSERT INTO `bb_smilies` VALUES ('32', ':bf:', 'bf.gif', 'bf');
-INSERT INTO `bb_smilies` VALUES ('33', ':bg:', 'bg.gif', 'bg');
-INSERT INTO `bb_smilies` VALUES ('34', ':bh:', 'bh.gif', 'bh');
-INSERT INTO `bb_smilies` VALUES ('35', ':bi:', 'bi.gif', 'bi');
-INSERT INTO `bb_smilies` VALUES ('36', ':bj:', 'bj.gif', 'bj');
-INSERT INTO `bb_smilies` VALUES ('37', ':bk:', 'bk.gif', 'bk');
-INSERT INTO `bb_smilies` VALUES ('38', ':bl:', 'bl.gif', 'bl');
-INSERT INTO `bb_smilies` VALUES ('39', ':bm:', 'bm.gif', 'bm');
-INSERT INTO `bb_smilies` VALUES ('40', ':bn:', 'bn.gif', 'bn');
-INSERT INTO `bb_smilies` VALUES ('41', ':bo:', 'bo.gif', 'bo');
-INSERT INTO `bb_smilies` VALUES ('42', ':bp:', 'bp.gif', 'bp');
-INSERT INTO `bb_smilies` VALUES ('43', ':bq:', 'bq.gif', 'bq');
-INSERT INTO `bb_smilies` VALUES ('44', ':br:', 'br.gif', 'br');
-INSERT INTO `bb_smilies` VALUES ('45', ':bs:', 'bs.gif', 'bs');
-INSERT INTO `bb_smilies` VALUES ('46', ':bt:', 'bt.gif', 'bt');
-INSERT INTO `bb_smilies` VALUES ('47', ':bu:', 'bu.gif', 'bu');
-INSERT INTO `bb_smilies` VALUES ('48', ':bv:', 'bv.gif', 'bv');
-INSERT INTO `bb_smilies` VALUES ('49', ':bw:', 'bw.gif', 'bw');
-INSERT INTO `bb_smilies` VALUES ('50', ':bx:', 'bx.gif', 'bx');
-INSERT INTO `bb_smilies` VALUES ('51', ':by:', 'by.gif', 'by');
-INSERT INTO `bb_smilies` VALUES ('52', ':bz:', 'bz.gif', 'bz');
-INSERT INTO `bb_smilies` VALUES ('53', ':ca:', 'ca.gif', 'ca');
-INSERT INTO `bb_smilies` VALUES ('54', ':cb:', 'cb.gif', 'cb');
-INSERT INTO `bb_smilies` VALUES ('55', ':cc:', 'cc.gif', 'cc');
+INSERT INTO `bb_smilies` VALUES ('', ':aa:', 'aa.gif', 'aa');
+INSERT INTO `bb_smilies` VALUES ('', ':ab:', 'ab.gif', 'ab');
+INSERT INTO `bb_smilies` VALUES ('', ':ac:', 'ac.gif', 'ac');
+INSERT INTO `bb_smilies` VALUES ('', ':ad:', 'ad.gif', 'ad');
+INSERT INTO `bb_smilies` VALUES ('', ':ae:', 'ae.gif', 'ae');
+INSERT INTO `bb_smilies` VALUES ('', ':af:', 'af.gif', 'af');
+INSERT INTO `bb_smilies` VALUES ('', ':ag:', 'ag.gif', 'ag');
+INSERT INTO `bb_smilies` VALUES ('', ':ah:', 'ah.gif', 'ah');
+INSERT INTO `bb_smilies` VALUES ('', ':ai:', 'ai.gif', 'ai');
+INSERT INTO `bb_smilies` VALUES ('', ':aj:', 'aj.gif', 'aj');
+INSERT INTO `bb_smilies` VALUES ('', ':ak:', 'ak.gif', 'ak');
+INSERT INTO `bb_smilies` VALUES ('', ':al:', 'al.gif', 'al');
+INSERT INTO `bb_smilies` VALUES ('', ':am:', 'am.gif', 'am');
+INSERT INTO `bb_smilies` VALUES ('', ':an:', 'an.gif', 'an');
+INSERT INTO `bb_smilies` VALUES ('', ':ao:', 'ao.gif', 'ao');
+INSERT INTO `bb_smilies` VALUES ('', ':ap:', 'ap.gif', 'ap');
+INSERT INTO `bb_smilies` VALUES ('', ':aq:', 'aq.gif', 'aq');
+INSERT INTO `bb_smilies` VALUES ('', ':ar:', 'ar.gif', 'ar');
+INSERT INTO `bb_smilies` VALUES ('', ':as:', 'as.gif', 'as');
+INSERT INTO `bb_smilies` VALUES ('', ':at:', 'at.gif', 'at');
+INSERT INTO `bb_smilies` VALUES ('', ':au:', 'au.gif', 'au');
+INSERT INTO `bb_smilies` VALUES ('', ':av:', 'av.gif', 'av');
+INSERT INTO `bb_smilies` VALUES ('', ':aw:', 'aw.gif', 'aw');
+INSERT INTO `bb_smilies` VALUES ('', ':ax:', 'ax.gif', 'ax');
+INSERT INTO `bb_smilies` VALUES ('', ':ay:', 'ay.gif', 'ay');
+INSERT INTO `bb_smilies` VALUES ('', ':az:', 'az.gif', 'az');
+INSERT INTO `bb_smilies` VALUES ('', ':ba:', 'ba.gif', 'ba');
+INSERT INTO `bb_smilies` VALUES ('', ':bb:', 'bb.gif', 'bb');
+INSERT INTO `bb_smilies` VALUES ('', ':bc:', 'bc.gif', 'bc');
+INSERT INTO `bb_smilies` VALUES ('', ':bd:', 'bd.gif', 'bd');
+INSERT INTO `bb_smilies` VALUES ('', ':be:', 'be.gif', 'be');
+INSERT INTO `bb_smilies` VALUES ('', ':bf:', 'bf.gif', 'bf');
+INSERT INTO `bb_smilies` VALUES ('', ':bg:', 'bg.gif', 'bg');
+INSERT INTO `bb_smilies` VALUES ('', ':bh:', 'bh.gif', 'bh');
+INSERT INTO `bb_smilies` VALUES ('', ':bi:', 'bi.gif', 'bi');
+INSERT INTO `bb_smilies` VALUES ('', ':bj:', 'bj.gif', 'bj');
+INSERT INTO `bb_smilies` VALUES ('', ':bk:', 'bk.gif', 'bk');
+INSERT INTO `bb_smilies` VALUES ('', ':bl:', 'bl.gif', 'bl');
+INSERT INTO `bb_smilies` VALUES ('', ':bm:', 'bm.gif', 'bm');
+INSERT INTO `bb_smilies` VALUES ('', ':bn:', 'bn.gif', 'bn');
+INSERT INTO `bb_smilies` VALUES ('', ':bo:', 'bo.gif', 'bo');
+INSERT INTO `bb_smilies` VALUES ('', ':bp:', 'bp.gif', 'bp');
+INSERT INTO `bb_smilies` VALUES ('', ':bq:', 'bq.gif', 'bq');
+INSERT INTO `bb_smilies` VALUES ('', ':br:', 'br.gif', 'br');
+INSERT INTO `bb_smilies` VALUES ('', ':bs:', 'bs.gif', 'bs');
+INSERT INTO `bb_smilies` VALUES ('', ':bt:', 'bt.gif', 'bt');
+INSERT INTO `bb_smilies` VALUES ('', ':bu:', 'bu.gif', 'bu');
+INSERT INTO `bb_smilies` VALUES ('', ':bv:', 'bv.gif', 'bv');
+INSERT INTO `bb_smilies` VALUES ('', ':bw:', 'bw.gif', 'bw');
+INSERT INTO `bb_smilies` VALUES ('', ':bx:', 'bx.gif', 'bx');
+INSERT INTO `bb_smilies` VALUES ('', ':by:', 'by.gif', 'by');
+INSERT INTO `bb_smilies` VALUES ('', ':bz:', 'bz.gif', 'bz');
+INSERT INTO `bb_smilies` VALUES ('', ':ca:', 'ca.gif', 'ca');
+INSERT INTO `bb_smilies` VALUES ('', ':cb:', 'cb.gif', 'cb');
+INSERT INTO `bb_smilies` VALUES ('', ':cc:', 'cc.gif', 'cc');
 
 -- ----------------------------
 -- Table structure for `bb_topics`
