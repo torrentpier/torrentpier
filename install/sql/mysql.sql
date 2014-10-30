@@ -330,6 +330,7 @@ CREATE TABLE IF NOT EXISTS `bb_bt_tracker` (
   `ip` char(8) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL DEFAULT '0',
   `ipv6` varchar(32) DEFAULT NULL,
   `port` smallint(5) unsigned NOT NULL DEFAULT '0',
+  `client` varchar(51) NOT NULL DEFAULT 'Unknown',
   `seeder` tinyint(1) NOT NULL DEFAULT '0',
   `releaser` tinyint(1) NOT NULL DEFAULT '0',
   `tor_type` tinyint(1) NOT NULL DEFAULT '0',
@@ -342,6 +343,7 @@ CREATE TABLE IF NOT EXISTS `bb_bt_tracker` (
   `down_add` bigint(20) unsigned NOT NULL DEFAULT '0',
   `update_time` int(11) NOT NULL DEFAULT '0',
   `complete_percent` bigint(20) NOT NULL DEFAULT '0',
+  `complete` int(11) NOT NULL DEFAULT '0',
   PRIMARY KEY (`peer_hash`),
   KEY `topic_id` (`topic_id`),
   KEY `user_id` (`user_id`)
