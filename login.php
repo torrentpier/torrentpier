@@ -62,10 +62,10 @@ $login_password = isset($_POST['login_password']) ? $_POST['login_password'] : '
 
 // Проверка на неверную комбинацию логин/пароль
 $need_captcha = false;
-if(!$mod_admin_login)
+if (!$mod_admin_login)
 {
 	$need_captcha = CACHE('bb_login_err')->get('l_err_'. USER_IP);
-	if($need_captcha < $bb_cfg['invalid_logins']) $need_captcha = false;
+	if ($need_captcha < $bb_cfg['invalid_logins']) $need_captcha = false;
 }
 
 // login

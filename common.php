@@ -2087,15 +2087,15 @@ function log_request ($file = '', $prepend_str = false, $add_post = true)
 	if (!empty($user->data)) $str[] = $user->id ."\t". html_entity_decode($user->name);
 	$str[] = sprintf('%-15s', $_SERVER['REMOTE_ADDR']);
 
-    if (isset($_SERVER['REQUEST_URI'])) {
-        $str[] = $_SERVER['REQUEST_URI'];
-    }
-    if (isset($_SERVER['HTTP_USER_AGENT'])) {
-        $str[] = $_SERVER['HTTP_USER_AGENT'];
-    }
-    if (isset($_SERVER['HTTP_REFERER'])) {
-        $str[] = $_SERVER['HTTP_REFERER'];
-    }
+	if (isset($_SERVER['REQUEST_URI'])) {
+		$str[] = $_SERVER['REQUEST_URI'];
+	}
+	if (isset($_SERVER['HTTP_USER_AGENT'])) {
+		$str[] = $_SERVER['HTTP_USER_AGENT'];
+	}
+	if (isset($_SERVER['HTTP_REFERER'])) {
+		$str[] = $_SERVER['HTTP_REFERER'];
+	}
 
 	if (!empty($_POST) && $add_post) $str[] = "post: ". str_compact(urldecode(http_build_query($_POST)));
 	$str = join("\t", $str) . "\n";

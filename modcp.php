@@ -64,10 +64,10 @@ function validate_topics ($forum_id, &$req_topics, &$topic_titles)
  * @return bool
  */
 function validate_mode_condition($request_index, $mod_action='') {
-    if (!$mod_action) {
-        $mod_action = $request_index;
-    }
-    return (isset($_REQUEST[$request_index]) || (isset($_POST['mod_action']) && $_POST['mod_action'] === $mod_action));
+	if (!$mod_action) {
+		$mod_action = $request_index;
+	}
+	return (isset($_REQUEST[$request_index]) || (isset($_POST['mod_action']) && $_POST['mod_action'] === $mod_action));
 }
 
 // Obtain initial vars
