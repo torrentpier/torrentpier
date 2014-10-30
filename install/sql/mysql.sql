@@ -1,4 +1,4 @@
-SET FOREIGN_KEY_CHECKS=0;
+SET SQL_MODE = "";
 
 -- ----------------------------
 -- Table structure for `bb_ads`
@@ -254,7 +254,7 @@ CREATE TABLE IF NOT EXISTS `bb_bt_torhelp` (
 -- ----------------------------
 DROP TABLE IF EXISTS `bb_bt_torrents`;
 CREATE TABLE IF NOT EXISTS `bb_bt_torrents` (
-  `info_hash` varbinary(20) NOT NULL,
+  `info_hash` varbinary(20) NOT NULL DEFAULT '',
   `post_id` mediumint(8) unsigned NOT NULL DEFAULT '0',
   `poster_id` mediumint(9) NOT NULL DEFAULT '0',
   `topic_id` mediumint(8) unsigned NOT NULL DEFAULT '0',
@@ -269,8 +269,8 @@ CREATE TABLE IF NOT EXISTS `bb_bt_torrents` (
   `checked_user_id` mediumint(8) NOT NULL DEFAULT '0',
   `checked_time` int(11) NOT NULL DEFAULT '0',
   `tor_type` tinyint(1) NOT NULL DEFAULT '0',
-  `speed_up` int(11) NOT NULL,
-  `speed_down` int(11) NOT NULL,
+  `speed_up` int(11) NOT NULL DEFAULT '0',
+  `speed_down` int(11) NOT NULL DEFAULT '0',
   PRIMARY KEY (`info_hash`),
   UNIQUE KEY `post_id` (`post_id`),
   UNIQUE KEY `topic_id` (`topic_id`),
@@ -325,7 +325,7 @@ DROP TABLE IF EXISTS `bb_bt_tracker`;
 CREATE TABLE IF NOT EXISTS `bb_bt_tracker` (
   `peer_hash` varchar(32) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL DEFAULT '',
   `topic_id` mediumint(8) unsigned NOT NULL DEFAULT '0',
-  `peer_id` varchar(20) NOT NULL,
+  `peer_id` varchar(20) NOT NULL DEFAULT '0',
   `user_id` mediumint(9) NOT NULL DEFAULT '0',
   `ip` char(8) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL DEFAULT '0',
   `ipv6` varchar(32) DEFAULT NULL,
@@ -417,8 +417,8 @@ CREATE TABLE IF NOT EXISTS `bb_bt_user_settings` (
 -- ----------------------------
 DROP TABLE IF EXISTS `bb_captcha`;
 CREATE TABLE IF NOT EXISTS `bb_captcha` (
-  `cap_id` int(10) NOT NULL,
-  `cap_code` char(6) NOT NULL,
+  `cap_id` int(10) NOT NULL DEFAULT '0',
+  `cap_code` char(6) NOT NULL DEFAULT '',
   `cap_expire` int(11) NOT NULL DEFAULT '0',
   PRIMARY KEY (`cap_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
@@ -496,7 +496,7 @@ INSERT INTO `bb_config` VALUES ('bt_show_peers_mode', '1');
 INSERT INTO `bb_config` VALUES ('bt_show_port_only_moder', '1');
 INSERT INTO `bb_config` VALUES ('bt_tor_browse_only_reg', '0');
 INSERT INTO `bb_config` VALUES ('bt_unset_dltype_on_tor_unreg', '1');
-INSERT INTO `bb_config` VALUES ('cron_last_check', '1211477514');
+INSERT INTO `bb_config` VALUES ('cron_last_check', '0');
 INSERT INTO `bb_config` VALUES ('default_dateformat', 'Y-m-d H:i');
 INSERT INTO `bb_config` VALUES ('default_lang', 'ru');
 INSERT INTO `bb_config` VALUES ('flood_interval', '15');
@@ -524,7 +524,7 @@ INSERT INTO `bb_config` VALUES ('topics_per_page', '50');
 INSERT INTO `bb_config` VALUES ('xs_use_cache', '1');
 INSERT INTO `bb_config` VALUES ('active_ads', '');
 INSERT INTO `bb_config` VALUES ('cron_enabled', '1');
-INSERT INTO `bb_config` VALUES ('cron_check_interval', '300');
+INSERT INTO `bb_config` VALUES ('cron_check_interval', '180');
 INSERT INTO `bb_config` VALUES ('magnet_links_enabled', '1');
 INSERT INTO `bb_config` VALUES ('gender', '1');
 INSERT INTO `bb_config` VALUES ('callseed', '0');
@@ -556,10 +556,10 @@ CREATE TABLE IF NOT EXISTS `bb_cron` (
   `schedule` enum('hourly','daily','weekly','monthly','interval') NOT NULL DEFAULT 'daily',
   `run_day` enum('1','2','3','4','5','6','7','8','9','10','11','12','13','14','15','16','17','18','19','20','21','22','23','24','25','26','27','28') DEFAULT NULL,
   `run_time` time DEFAULT '04:00:00',
-  `run_order` tinyint(4) unsigned NOT NULL,
+  `run_order` tinyint(4) unsigned NOT NULL DEFAULT '0',
   `last_run` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
   `next_run` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
-  `run_interval` time DEFAULT NULL,
+  `run_interval` time DEFAULT NULL DEFAULT '0',
   `log_enabled` tinyint(1) NOT NULL DEFAULT '0',
   `log_file` char(120) NOT NULL DEFAULT '',
   `log_sql_queries` tinyint(4) NOT NULL DEFAULT '0',
@@ -573,27 +573,27 @@ CREATE TABLE IF NOT EXISTS `bb_cron` (
 -- ----------------------------
 -- Records of bb_cron
 -- ----------------------------
-INSERT INTO `bb_cron` VALUES ('', '1', 'Attach maintenance', 'attach_maintenance.php', 'daily', null, '05:00:00', '40', '', '', null, '1', '', '0', '1', '0');
-INSERT INTO `bb_cron` VALUES ('', '1', 'Board maintenance', 'board_maintenance.php', 'daily', null, '05:00:00', '40', '', '', null, '1', '', '0', '1', '0');
-INSERT INTO `bb_cron` VALUES ('', '1', 'Prune forums', 'prune_forums.php', 'daily', null, '05:00:00', '50', '', '', null, '1', '', '0', '1', '0');
-INSERT INTO `bb_cron` VALUES ('', '1', 'Prune topic moved stubs', 'prune_topic_moved.php', 'daily', null, '05:00:00', '60', '', '', null, '1', '', '0', '1', '0');
-INSERT INTO `bb_cron` VALUES ('', '1', 'Logs cleanup', 'clean_log.php', 'daily', null, '05:00:00', '70', '', '', null, '1', '', '0', '1', '0');
-INSERT INTO `bb_cron` VALUES ('', '1', 'Tracker maintenance', 'tr_maintenance.php', 'daily', null, '05:00:00', '90', '', '', null, '1', '', '0', '1', '0');
-INSERT INTO `bb_cron` VALUES ('', '1', 'Clean dlstat', 'clean_dlstat.php', 'daily', null, '05:00:00', '100', '', '', null, '1', '', '0', '1', '0');
-INSERT INTO `bb_cron` VALUES ('', '1', 'Prune inactive users', 'prune_inactive_users.php', 'daily', null, '05:00:00', '110', '', '', null, '1', '', '0', '1', '0');
-INSERT INTO `bb_cron` VALUES ('', '1', 'Sessions cleanup', 'sessions_cleanup.php', 'interval', null, null, '255', '', '', '00:03:00', '0', '', '0', '0', '0');
-INSERT INTO `bb_cron` VALUES ('', '1', 'DS update \'cat_forums\'', 'ds_update_cat_forums.php', 'interval', null, null, '255', '', '', '00:05:00', '0', '', '0', '0', '0');
-INSERT INTO `bb_cron` VALUES ('', '1', 'DS update \'stats\'', 'ds_update_stats.php', 'interval', null, null, '255', '', '', '00:10:00', '0', '', '0', '0', '0');
-INSERT INTO `bb_cron` VALUES ('', '1', 'Flash topic view', 'flash_topic_view.php', 'interval', null, null, '255', '', '', '00:10:00', '0', '', '0', '0', '0');
-INSERT INTO `bb_cron` VALUES ('', '1', 'Clean search results', 'clean_search_results.php', 'interval', null, null, '255', '', '', '00:10:00', '0', '', '0', '0', '0');
-INSERT INTO `bb_cron` VALUES ('', '1', 'Tracker cleanup and dlstat', 'tr_cleanup_and_dlstat.php', 'interval', null, null, '20', '', '', '00:15:00', '0', '', '0', '0', '0');
-INSERT INTO `bb_cron` VALUES ('', '1', 'Make tracker snapshot', 'tr_make_snapshot.php', 'interval', null, null, '10', '', '', '00:10:00', '0', '', '0', '0', '0');
-INSERT INTO `bb_cron` VALUES ('', '1', 'Seeder last seen', 'tr_update_seeder_last_seen.php', 'interval', null, null, '255', '', '', '01:00:00', '0', '', '0', '0', '0');
-INSERT INTO `bb_cron` VALUES ('', '1', 'Captcha', 'captcha_gen_gc.php', 'daily', null, '05:00:00', '120', '', '', null, '0', '', '0', '0', '0');
-INSERT INTO `bb_cron` VALUES ('', '1', 'Tracker dl-complete count', 'tr_complete_count.php', 'interval', null, null, '255', '', '', '06:00:00', '0', '', '0', '0', '0');
-INSERT INTO `bb_cron` VALUES ('', '1', 'Cache garbage collector', 'cache_gc.php', 'interval', null, null, '255', '', '', '00:05:00', '0', '', '0', '0', '0');
-INSERT INTO `bb_cron` VALUES ('', '1', 'Sitemap update', 'sitemap.php', 'daily', null, '06:00:00', '30', '', '', null, '0', '', '0', '0', '0');
-INSERT INTO `bb_cron` VALUES ('', '1', 'Update forums atom', 'update_forums_atom.php', 'interval', null, null, '255', '', '', '00:15:00', '0', '', '0', '0', '0');
+INSERT INTO `bb_cron` VALUES ('', '1', 'Attach maintenance', 'attach_maintenance.php', 'daily', '', '05:00:00', '40', '', '', '', '1', '', '0', '1', '0');
+INSERT INTO `bb_cron` VALUES ('', '1', 'Board maintenance', 'board_maintenance.php', 'daily', '', '05:00:00', '40', '', '', '', '1', '', '0', '1', '0');
+INSERT INTO `bb_cron` VALUES ('', '1', 'Prune forums', 'prune_forums.php', 'daily', '', '05:00:00', '50', '', '', '', '1', '', '0', '1', '0');
+INSERT INTO `bb_cron` VALUES ('', '1', 'Prune topic moved stubs', 'prune_topic_moved.php', 'daily', '', '05:00:00', '60', '', '', '', '1', '', '0', '1', '0');
+INSERT INTO `bb_cron` VALUES ('', '1', 'Logs cleanup', 'clean_log.php', 'daily', '', '05:00:00', '70', '', '', '', '1', '', '0', '1', '0');
+INSERT INTO `bb_cron` VALUES ('', '1', 'Tracker maintenance', 'tr_maintenance.php', 'daily', '', '05:00:00', '90', '', '', '', '1', '', '0', '1', '0');
+INSERT INTO `bb_cron` VALUES ('', '1', 'Clean dlstat', 'clean_dlstat.php', 'daily', '', '05:00:00', '100', '', '', '', '1', '', '0', '1', '0');
+INSERT INTO `bb_cron` VALUES ('', '1', 'Prune inactive users', 'prune_inactive_users.php', 'daily', '', '05:00:00', '110', '', '', '', '1', '', '0', '1', '0');
+INSERT INTO `bb_cron` VALUES ('', '1', 'Sessions cleanup', 'sessions_cleanup.php', 'interval', '', '', '255', '', '', '00:03:00', '0', '', '0', '0', '0');
+INSERT INTO `bb_cron` VALUES ('', '1', 'DS update cat_forums', 'ds_update_cat_forums.php', 'interval', '', '', '255', '', '', '00:05:00', '0', '', '0', '0', '0');
+INSERT INTO `bb_cron` VALUES ('', '1', 'DS update stats', 'ds_update_stats.php', 'interval', '', '', '255', '', '', '00:10:00', '0', '', '0', '0', '0');
+INSERT INTO `bb_cron` VALUES ('', '1', 'Flash topic view', 'flash_topic_view.php', 'interval', '', '', '255', '', '', '00:10:00', '0', '', '0', '0', '0');
+INSERT INTO `bb_cron` VALUES ('', '1', 'Clean search results', 'clean_search_results.php', 'interval', '', '', '255', '', '', '00:10:00', '0', '', '0', '0', '0');
+INSERT INTO `bb_cron` VALUES ('', '1', 'Tracker cleanup and dlstat', 'tr_cleanup_and_dlstat.php', 'interval', '', '', '20', '', '', '00:15:00', '0', '', '0', '0', '0');
+INSERT INTO `bb_cron` VALUES ('', '1', 'Make tracker snapshot', 'tr_make_snapshot.php', 'interval', '', '', '10', '', '', '00:10:00', '0', '', '0', '0', '0');
+INSERT INTO `bb_cron` VALUES ('', '1', 'Seeder last seen', 'tr_update_seeder_last_seen.php', 'interval', '', '', '255', '', '', '01:00:00', '0', '', '0', '0', '0');
+INSERT INTO `bb_cron` VALUES ('', '1', 'Captcha', 'captcha_gen_gc.php', 'daily', '', '05:00:00', '120', '', '', '', '0', '', '0', '0', '0');
+INSERT INTO `bb_cron` VALUES ('', '1', 'Tracker dl-complete count', 'tr_complete_count.php', 'interval', '', '', '255', '', '', '06:00:00', '0', '', '0', '0', '0');
+INSERT INTO `bb_cron` VALUES ('', '1', 'Cache garbage collector', 'cache_gc.php', 'interval', '', '', '255', '', '', '00:05:00', '0', '', '0', '0', '0');
+INSERT INTO `bb_cron` VALUES ('', '1', 'Sitemap update', 'sitemap.php', 'daily', '', '06:00:00', '30', '', '', '', '0', '', '0', '0', '0');
+INSERT INTO `bb_cron` VALUES ('', '1', 'Update forums atom', 'update_forums_atom.php', 'interval', '', '', '255', '', '', '00:15:00', '0', '', '0', '0', '0');
 
 -- ----------------------------
 -- Table structure for `bb_disallow`
@@ -737,8 +737,8 @@ CREATE TABLE IF NOT EXISTS `bb_groups` (
   `group_type` tinyint(4) NOT NULL DEFAULT '1',
   `release_group` tinyint(4) NOT NULL DEFAULT '0',
   `group_name` varchar(40) NOT NULL DEFAULT '',
-  `group_description` text NOT NULL DEFAULT '',
-  `group_signature` text NOT NULL DEFAULT '',
+  `group_description` text NOT NULL,
+  `group_signature` text NOT NULL,
   `group_moderator` mediumint(8) NOT NULL DEFAULT '0',
   `group_single_user` tinyint(1) NOT NULL DEFAULT '1',
   PRIMARY KEY (`group_id`),
@@ -824,9 +824,9 @@ CREATE TABLE IF NOT EXISTS `bb_posts` (
   `post_edit_count` smallint(5) unsigned NOT NULL DEFAULT '0',
   `post_attachment` tinyint(1) NOT NULL DEFAULT '0',
   `user_post` tinyint(1) NOT NULL DEFAULT '1',
-  `mc_comment` text NOT NULL DEFAULT  '',
+  `mc_comment` text NOT NULL,
   `mc_type` tinyint(1) NOT NULL DEFAULT '0',
-  `mc_user_id` mediumint(8) NOT NULL,
+  `mc_user_id` mediumint(8) NOT NULL DEFAULT '0',
   PRIMARY KEY (`post_id`),
   KEY `topic_id` (`topic_id`),
   KEY `poster_id` (`poster_id`),
@@ -846,7 +846,7 @@ DROP TABLE IF EXISTS `bb_posts_html`;
 CREATE TABLE IF NOT EXISTS `bb_posts_html` (
   `post_id` mediumint(9) NOT NULL DEFAULT '0',
   `post_html_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  `post_html` mediumtext NOT NULL,
+  `post_html` mediumtext NOT NULL DEFAULT '',
   PRIMARY KEY (`post_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
@@ -1172,18 +1172,18 @@ CREATE TABLE IF NOT EXISTS `bb_users` (
   `user_session_time` int(11) NOT NULL DEFAULT '0',
   `user_lastvisit` int(11) NOT NULL DEFAULT '0',
   `user_last_ip` char(32) NOT NULL DEFAULT '',
-  `user_regdate` int(11) NOT NULL,
+  `user_regdate` int(11) NOT NULL DEFAULT '0',
   `user_reg_ip` char(32) NOT NULL DEFAULT '',
   `user_level` tinyint(4) NOT NULL DEFAULT '0',
   `user_posts` mediumint(8) unsigned NOT NULL DEFAULT '0',
   `user_timezone` decimal(5,2) NOT NULL DEFAULT '0.00',
-  `user_lang` varchar(255) NOT NULL DEFAULT 'russian',
+  `user_lang` varchar(255) NOT NULL DEFAULT 'ru',
   `user_new_privmsg` smallint(5) unsigned NOT NULL DEFAULT '0',
   `user_unread_privmsg` smallint(5) unsigned NOT NULL DEFAULT '0',
   `user_last_privmsg` int(11) NOT NULL DEFAULT '0',
   `user_opt` int(11) NOT NULL DEFAULT '0',
   `user_rank` int(11) NOT NULL DEFAULT '0',
-  `avatar_ext_id` tinyint(4) NOT NULL,
+  `avatar_ext_id` tinyint(4) NOT NULL DEFAULT '0',
   `user_gender` tinyint(1) NOT NULL DEFAULT '0',
   `user_birthday` date NOT NULL DEFAULT '0000-00-00',
   `user_email` varchar(255) NOT NULL DEFAULT '',
@@ -1222,7 +1222,7 @@ CREATE TABLE IF NOT EXISTS `bb_user_group` (
   `group_id` mediumint(8) NOT NULL DEFAULT '0',
   `user_id` mediumint(8) NOT NULL DEFAULT '0',
   `user_pending` tinyint(1) NOT NULL DEFAULT '0',
-  `user_time` int(11) NOT NULL,
+  `user_time` int(11) NOT NULL DEFAULT '0',
   PRIMARY KEY (`group_id`,`user_id`),
   KEY `user_id` (`user_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
