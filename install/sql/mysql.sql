@@ -465,7 +465,7 @@ INSERT INTO `bb_config` VALUES ('allow_namechange', '0');
 INSERT INTO `bb_config` VALUES ('allow_sig', '1');
 INSERT INTO `bb_config` VALUES ('allow_smilies', '1');
 INSERT INTO `bb_config` VALUES ('board_disable', '0');
-INSERT INTO `bb_config` VALUES ('board_startdate', '');
+INSERT INTO `bb_config` VALUES ('board_startdate', UNIX_TIMESTAMP());
 INSERT INTO `bb_config` VALUES ('board_timezone', '0');
 INSERT INTO `bb_config` VALUES ('bonus_upload', '');
 INSERT INTO `bb_config` VALUES ('bonus_upload_price', '');
@@ -510,8 +510,8 @@ INSERT INTO `bb_config` VALUES ('max_poll_options', '6');
 INSERT INTO `bb_config` VALUES ('max_sig_chars', '255');
 INSERT INTO `bb_config` VALUES ('posts_per_page', '15');
 INSERT INTO `bb_config` VALUES ('prune_enable', '1');
-INSERT INTO `bb_config` VALUES ('record_online_date', '1211477508');
-INSERT INTO `bb_config` VALUES ('record_online_users', '2');
+INSERT INTO `bb_config` VALUES ('record_online_date', UNIX_TIMESTAMP());
+INSERT INTO `bb_config` VALUES ('record_online_users', '0');
 INSERT INTO `bb_config` VALUES ('seed_bonus_enabled', '1');
 INSERT INTO `bb_config` VALUES ('seed_bonus_release', '');
 INSERT INTO `bb_config` VALUES ('seed_bonus_points', '');
@@ -1212,9 +1212,9 @@ CREATE TABLE IF NOT EXISTS `bb_users` (
 -- ----------------------------
 -- Records of bb_users
 -- ----------------------------
-INSERT INTO `bb_users` VALUES ('-1', '0', 'Guest', 'd41d8cd98f00b204e9800998ecf8427e', '0', '0', '0', UNIX_TIMESTAMP(), '0', '0', '0', '3.00', '', '0', '0', '0', '0', '0', '0', '0', '0000-00-00', '', '', '', '', '', '', '', '', '', '', '', '', '0', '0.00', 'default');
-INSERT INTO `bb_users` VALUES ('2', '1', 'admin', 'c3284d0f94606de1fd2af172aba15bf3', '0', '0', '0', UNIX_TIMESTAMP(), '0', '1', '1', '3.00', '', '0', '0', '0', '304', '1', '0', '0', '0000-00-00', 'admin@torrentpier.me', '', '', '', '', '', '', '', '', '', '', '', '0', '0.00', 'default');
-INSERT INTO `bb_users` VALUES ('-746', '0', 'bot', 'd41d8cd98f00b204e9800998ecf8427e', '0', '0', '0', UNIX_TIMESTAMP(), '0', '0', '0', '3.00', '', '0', '0', '0', '144', '0', '0', '0', '0000-00-00', 'bot@torrentpier.me', '', '', '', '', '', '', '', '', '', '', '', '0', '0.00', 'default');
+INSERT INTO `bb_users` VALUES ('-1', '0', 'Guest', 'd41d8cd98f00b204e9800998ecf8427e', '0', '0', '0', UNIX_TIMESTAMP(), '0', '0', '0', '', '', '0', '0', '0', '0', '0', '0', '0', '0000-00-00', '', '', '', '', '', '', '', '', '', '', '', '', '0', '0.00', 'default');
+INSERT INTO `bb_users` VALUES ('-746', '0', 'bot', 'd41d8cd98f00b204e9800998ecf8427e', '0', '0', '0', UNIX_TIMESTAMP(), '0', '0', '0', '', '', '0', '0', '0', '144', '0', '0', '0', '0000-00-00', 'bot@torrentpier.me', '', '', '', '', '', '', '', '', '', '', '', '0', '0.00', 'default');
+INSERT INTO `bb_users` VALUES ('2', '1', 'admin', 'c3284d0f94606de1fd2af172aba15bf3', '0', '0', '0', UNIX_TIMESTAMP(), '0', '1', '1', '', '', '0', '0', '0', '304', '1', '0', '0', '0000-00-00', 'admin@torrentpier.me', '', '', '', '', '', '', '', '', '', '', '', '0', '0.00', 'default');
 
 -- ----------------------------
 -- Table structure for `bb_user_group`
