@@ -1,5 +1,7 @@
 <?php
 
+if (!defined('BB_ROOT')) die(basename(__FILE__));
+
 //
 // $Id: sphinxapi.php 2055 2009-11-06 23:09:58Z shodan $
 //

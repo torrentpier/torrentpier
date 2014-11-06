@@ -1,4 +1,7 @@
 <?php
+
+if (!defined('BB_ROOT')) die(basename(__FILE__));
+
 /**
  * Automatic correction of the language for words in the text because of the wrong keyboard layout
  * Автоматическое исправление языка для слов в тексте из-за неправильной раскладки клавиатуры

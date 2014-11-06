@@ -381,7 +381,7 @@ if ($bb_cfg['birthday_check_day'] && $bb_cfg['birthday_enabled'])
 				continue;
 			}
 
-			$week_list[] = profile_url($week) .' <span class="small">('. birthday_age($week['user_birthday']) .')</span>';
+			$week_list[] = profile_url($week) .' <span class="small">('. birthday_age($week['user_birthday']-1) .')</span>';
 		}
 		$week_all = ($week_all) ? '&nbsp;<a class="txtb" href="#" onclick="ajax.exec({action: \'index_data\', mode: \'birthday_week\'}); return false;" title="'. $lang['ALL'] .'">...</a>' : '';
 		$week_list = sprintf($lang['BIRTHDAY_WEEK'], $bb_cfg['birthday_check_day'], join(', ', $week_list)) . $week_all;

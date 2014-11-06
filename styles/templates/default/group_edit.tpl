@@ -68,19 +68,11 @@ function manage_group(mode, value) {
 	</tr>
 	<tr>
 		<td>
-			{L_AVATAR}:
-			<!-- IF AVATAR_URL_PATH -->
-			<br /><br />
+			{L_AVATAR}: <br /><br />
 			<div id="avatar" align="center">
-				<p>
-					<img src="{AVATARS_URL}/{AVATAR_URL_PATH}" alt="avatar" />
-				</p>
-				<br />
-				<p>
-					<input type="button" name="delete_avatar" value="{L_DELETE_IMAGE}" onclick="manage_group(this.name,this.value)" />
-				</p>
+				<p>{AVATAR_IMG}</p><br />
+				<p><input type="button" name="delete_avatar" value="{L_DELETE_IMAGE}" onclick="manage_group(this.name,this.value)" /></p>
 			</div>
-			<!-- ENDIF -->
 		</td>
 		<td valign="top">
 			<div id="avatar_explain" class="med">{AVATAR_EXPLAIN}</div>

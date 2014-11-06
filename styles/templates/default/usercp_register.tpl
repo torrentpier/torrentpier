@@ -288,8 +288,8 @@ ajax.callback.posts = function(data){
 				<!-- ENDIF -->
 			</td>
 			<td class="tCenter nowrap">
-				<p class="mrg_6"><!-- IF AVATAR_URL_PATH --><img src="{AVATARS_URL}/{AVATAR_URL_PATH}" alt="avatar" /><!-- ELSE -->--<!-- ENDIF --></p>
-				<p><label><input type="checkbox" name="delete_avatar" <!-- IF not AVATAR_URL_PATH -->disabled="disabled"<!-- ENDIF --> /> {L_DELETE_IMAGE}</label></p>
+				<p class="mrg_6">{AVATAR_IMG}</p>
+				<p><label><input type="checkbox" name="delete_avatar" /> {L_DELETE_IMAGE}</label></p>
 			</td>
 		</tr>
 		</table>
