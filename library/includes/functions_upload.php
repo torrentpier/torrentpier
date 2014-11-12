@@ -1,5 +1,7 @@
 <?php
 
+if (!defined('BB_ROOT')) die(basename(__FILE__));
+
 class upload_common
 {
 	var $cfg = array(
@@ -121,7 +123,7 @@ class upload_common
 		if ($mode == 'avatar')
 		{
 			delete_avatar($params['user_id'], $params['avatar_ext_id']);
-			$file_path = get_avatar_path($params['user_id'], $this->file_ext_id, $bb_cfg['avatars']['upload_path']);
+			$file_path = get_avatar_path($params['user_id'], $this->file_ext_id);
 			return $this->_move($file_path);
 		}
 		else if ($mode == 'attach')

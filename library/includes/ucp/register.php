@@ -766,14 +766,13 @@ $template->assign_vars(array(
 	'AVATAR_EXPLAIN'     => sprintf($lang['AVATAR_EXPLAIN'], $bb_cfg['avatars']['max_width'], $bb_cfg['avatars']['max_height'], (round($bb_cfg['avatars']['max_size'] / 1024))),
 	'AVATAR_DISALLOWED'  => bf($pr_data['user_opt'], 'user_opt', 'dis_avatar'),
 	'AVATAR_DIS_EXPLAIN' => sprintf($lang['AVATAR_DISABLE'], $bb_cfg['terms_and_conditions_url']),
+	'AVATAR_IMG'         => get_avatar($pr_data['user_id'], $pr_data['avatar_ext_id'], !bf($pr_data['user_opt'], 'user_opt', 'dis_avatar')),
 
 	'SIGNATURE_EXPLAIN'  => sprintf($lang['SIGNATURE_EXPLAIN'], $bb_cfg['max_sig_chars']),
 	'SIG_DISALLOWED'     => bf($pr_data['user_opt'], 'user_opt', 'dis_sig'),
 
 	'PR_USER_ID'         => $pr_data['user_id'],
 	'U_RESET_AUTOLOGIN'  => LOGIN_URL . "?logout=1&amp;reset_autologin=1&amp;sid={$userdata['session_id']}",
-
-	'AVATAR_URL_PATH'    => ($pr_data['avatar_ext_id']) ? get_avatar_path($pr_data['user_id'], $pr_data['avatar_ext_id']) : '',
 ));
 
 print_page('usercp_register.tpl');

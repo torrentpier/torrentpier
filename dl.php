@@ -207,7 +207,7 @@ else
 	{
 		global $template;
 
-		$redirect_url = isset($_POST['redirect_url']) ? $_POST['redirect_url'] : (isset($_SERVER['HTTP_REFERER']) ? $_SERVER['HTTP_REFERER'] : '/' );
+		$redirect_url = isset($_POST['redirect_url']) ? $_POST['redirect_url'] : (isset($_SERVER['HTTP_REFERER']) ? $_SERVER['HTTP_REFERER'] : '/');
 		$message = '<form action="'. DOWNLOAD_URL . $attachment['attach_id'] .'" method="post">';
 		$message .= $lang['CONFIRM_CODE'];
 		$message .= '<div class="mrg_10">'. CAPTCHA()->get_html() .'</div>';

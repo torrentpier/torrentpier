@@ -9,22 +9,25 @@ function get_path_from_id ($id, $ext_id, $base_path, $first_div, $sec_div)
 	return ($base_path ? "$base_path/" : '') . floor($id/$first_div) .'/'. ($id % $sec_div) .'/'. $id . ($ext ? ".$ext" : '');
 }
 
-function get_avatar_path ($id, $ext_id, $base_path = '')
-{
-	return get_path_from_id($id, $ext_id, $base_path, 5000, 100);
-}
-
 function delete_avatar ($user_id, $avatar_ext_id)
 {
 	global $bb_cfg;
-	$avatar_file = ($avatar_ext_id) ? get_avatar_path($user_id, $avatar_ext_id, $bb_cfg['avatars']['upload_path']) : '';
+	$avatar_file = ($avatar_ext_id) ? get_avatar_path($user_id, $avatar_ext_id) : '';
 	return ($avatar_file && file_exists($avatar_file)) ? @unlink($avatar_file) : false;
 }
 
-function get_attach_path ($id)
+function get_avatar_path ($id, $ext_id, $base_path = null, $first_div = 10000, $sec_div = 100)
 {
 	global $bb_cfg;
-	return get_path_from_id($id, '', $bb_cfg['attach']['upload_path'], 1000, 100);
+	$base_path = isset($base_path) ? $base_path : $bb_cfg['avatars']['upload_path'];
+	return get_path_from_id($id, $ext_id, $base_path, $first_div, $sec_div);
+}
+
+function get_attach_path ($id, $ext_id = '', $base_path = null, $first_div = 10000, $sec_div = 100)
+{
+	global $bb_cfg;
+	$base_path = isset($base_path) ? $base_path : $bb_cfg['attach']['upload_path'];
+	return get_path_from_id($id, $ext_id, $base_path, $first_div, $sec_div);
 }
 
 function get_tracks ($type)
@@ -1868,7 +1871,7 @@ function bb_realpath ($path)
 
 function login_redirect ($url = '')
 {
-    redirect(LOGIN_URL . '?redirect='. (($url) ? $url : (isset($_SERVER['REQUEST_URI']) ? $_SERVER['REQUEST_URI'] : '/')));
+	redirect(LOGIN_URL . '?redirect='. (($url) ? $url : (isset($_SERVER['REQUEST_URI']) ? $_SERVER['REQUEST_URI'] : '/')));
 }
 
 function meta_refresh ($url, $time = 5)
@@ -2755,17 +2758,17 @@ function get_avatar ($user_id, $ext_id, $allow_avatar = true, $size = true, $hei
 	$height = ($height != '') ? 'height="'. $height .'"' : '';
 	$width  = ($width != '') ? 'width="'. $width .'"' : '';
 
-	$user_avatar = '<img src="'. $bb_cfg['avatars']['upload_path'] . $bb_cfg['avatars']['no_avatar'] .'" alt="'. $user_id .'" '. $height .' '. $width .' />';
+	$user_avatar = '<img src="'. make_url($bb_cfg['avatars']['upload_path'] . $bb_cfg['avatars']['no_avatar']) .'" alt="'. $user_id .'" '. $height .' '. $width .' />';
 
 	if ($user_id == BOT_UID && $bb_cfg['avatars']['bot_avatar'])
 	{
-		$user_avatar = '<img src="'. $bb_cfg['avatars']['upload_path'] . $bb_cfg['avatars']['bot_avatar'] .'" alt="'. $user_id .'" '. $height .' '. $width .' />';
+		$user_avatar = '<img src="'. make_url($bb_cfg['avatars']['upload_path'] . $bb_cfg['avatars']['bot_avatar']) .'" alt="'. $user_id .'" '. $height .' '. $width .' />';
 	}
-	elseif ($allow_avatar && $ext_id)
+	else if ($allow_avatar && $ext_id)
 	{
-		if (file_exists($bb_cfg['avatars']['upload_path'] . get_avatar_path($user_id, $ext_id)))
+		if (file_exists(get_avatar_path($user_id, $ext_id)))
 		{
-			$user_avatar = '<img src="'. $bb_cfg['avatars']['upload_path'] . get_avatar_path($user_id, $ext_id) .'" alt="'. $user_id .'" '. $height .' '. $width .' />';
+			$user_avatar = '<img src="'. make_url(get_avatar_path($user_id, $ext_id)) .'" alt="'. $user_id .'" '. $height .' '. $width .' />';
 		}
 	}
 
