@@ -28,10 +28,10 @@ class sitemap
 	function build_index ($count) {
 		$lm = date('c');
 		$map = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<sitemapindex xmlns=\"http://www.sitemaps.org/schemas/sitemap/0.9\">\n";
-		$map .= "<sitemap>\n<loc>".make_url(substr(SITEMAP_DIR, 3))."/sitemap1.xml</loc>\n<lastmod>{$lm}</lastmod>\n</sitemap>\n";
+		$map .= "<sitemap>\n<loc>{$this->home}internal_data/sitemap/sitemap1.xml</loc>\n<lastmod>{$lm}</lastmod>\n</sitemap>\n";
 		for ($i = 0; $i < $count; $i++) {
 			$t = $i + 2;
-			$map .= "<sitemap>\n<loc>".make_url(substr(SITEMAP_DIR, 3))."/sitemap{$t}.xml</loc>\n<lastmod>{$lm}</lastmod>\n</sitemap>\n";
+			$map .= "<sitemap>\n<loc>{$this->home}internal_data/sitemap/sitemap{$t}.xml</loc>\n<lastmod>{$lm}</lastmod>\n</sitemap>\n";
 		}
 		$map .= "</sitemapindex>";
 

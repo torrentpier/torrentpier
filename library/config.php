@@ -50,6 +50,7 @@
  * Tidy
  * Ads
  * Misc
+ * Extensions
  * Attachments
  * Avatars
  * Group avatars
@@ -572,12 +573,7 @@ $bb_cfg['user_agreement_url']       = 'info.php?show=user_agreement';
 $bb_cfg['copyright_holders_url']    = 'info.php?show=copyright_holders';
 $bb_cfg['advert_url']               = 'info.php?show=advert';
 
-// Attachments
-$bb_cfg['attach'] = array(
-	'upload_path' => DATA_DIR . 'torrent_files',      // путь к директории с torrent файлами
-	'max_size'    => 250*1024,                        // размер аватары в байтах
-);
-
+// Extensions
 $bb_cfg['file_id_ext'] = array(
 	1 => 'gif',
 	2 => 'gz',
@@ -588,6 +584,12 @@ $bb_cfg['file_id_ext'] = array(
 	7 => 'tiff',
 	8 => 'torrent',
 	9 => 'zip',
+);
+
+// Attachments
+$bb_cfg['attach'] = array(
+	'upload_path' => DATA_DIR . 'torrent_files',      // путь к директории с torrent файлами
+	'max_size'    => 250*1024,                        // размер аватары в байтах
 );
 
 $bb_cfg['tor_forums_allowed_ext'] = array('torrent', 'zip', 'rar'); // для разделов с раздачами
