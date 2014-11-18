@@ -37,7 +37,6 @@
  * Error reporting
  * Triggers
  * Date format
-
  * Subforums
  * Forums
  * Topics
@@ -48,13 +47,12 @@
  * Actions log
  * Users
  * Groups
-
  * Tidy
  * Ads
+ * Misc
  * Attachments
  * Avatars
  * Group avatars
- * Misc
  * Captcha
  * Atom feed
  * Nofollow
@@ -253,10 +251,10 @@ define('BB_PATH',       realpath(BB_ROOT)                    );
 define('ADMIN_DIR',     BB_PATH .'/admin/'                   );
 define('DATA_DIR',      BB_PATH .'/data/'                    );
 define('INT_DATA_DIR',  BB_PATH .'/internal_data/'           );
-define('AJAX_HTML_DIR', BB_ROOT .'internal_data/ajax_html/' );
+define('AJAX_HTML_DIR', BB_ROOT .'/internal_data/ajax_html/' );
 define('CACHE_DIR',     BB_PATH .'/internal_data/cache/'     );
 define('LOG_DIR',       BB_PATH .'/internal_data/log/'       );
-define('SITEMAP_DIR',   BB_PATH .'internal_data/sitemap/'   );
+define('SITEMAP_DIR',   BB_PATH .'/internal_data/sitemap/'   );
 define('TRIGGERS_DIR',  BB_PATH .'/internal_data/triggers/'  );
 define('AJAX_DIR',      BB_ROOT .'/library/ajax/'            );
 define('ATTACH_DIR',    BB_PATH .'/library/attach_mod/'      );
@@ -463,16 +461,16 @@ $bb_cfg['show_poster_joined']     = true;
 $bb_cfg['show_poster_posts']      = true;
 $bb_cfg['show_poster_from']       = true;
 $bb_cfg['show_bot_nick']          = false;
-$bb_cfg['text_buttons']           = false;             // replace EDIT, QUOTE... images with text links
-$bb_cfg['parse_ed2k_links']       = true;              // make ed2k links clickable
+$bb_cfg['text_buttons']           = false;         // replace EDIT, QUOTE... images with text links
+$bb_cfg['parse_ed2k_links']       = true;          // make ed2k links clickable
 $bb_cfg['post_date_format']       = 'd-M-Y H:i';
-$bb_cfg['ext_link_new_win']       = true;              // open external links in new window
+$bb_cfg['ext_link_new_win']       = true;          // open external links in new window
 
-$bb_cfg['topic_moved_days_keep']  = 7;              // remove topic moved links after xx days (or FALSE to disable)
+$bb_cfg['topic_moved_days_keep']  = 7;             // remove topic moved links after xx days (or FALSE to disable)
 
 $bb_cfg['allowed_posts_per_page'] = array(15, 30, 50, 100);
 $bb_cfg['user_signature_start']   = '<div class="signature"><br />_________________<br />';
-$bb_cfg['user_signature_end']     = '</div>';        // Это позволит использовать html теги, которые требуют закрытия. Например <table> или <font color>
+$bb_cfg['user_signature_end']     = '</div>';      // Это позволит использовать html теги, которые требуют закрытия. Например <table> или <font color>
 
 // Posts
 $bb_cfg['use_posts_cache']       = true;           // if you switch from ON to OFF, you need to TRUNCATE `bb_posts_html` table
@@ -574,68 +572,68 @@ $bb_cfg['user_agreement_url']       = 'info.php?show=user_agreement';
 $bb_cfg['copyright_holders_url']    = 'info.php?show=copyright_holders';
 $bb_cfg['advert_url']               = 'info.php?show=advert';
 
+// Attachments
+$bb_cfg['attach'] = array(
+	'upload_path' => DATA_DIR . 'torrent_files',      // путь к директории с torrent файлами
+	'max_size'    => 250*1024,                        // размер аватары в байтах
+);
+
 $bb_cfg['file_id_ext'] = array(
-	1   => 'gif',
-	2   => 'gz',
-	3   => 'jpg',
-	4   => 'png',
-	5   => 'rar',
-	6   => 'tar',
-	7   => 'tiff',
-	8   => 'torrent',
-	9   => 'zip',
+	1 => 'gif',
+	2 => 'gz',
+	3 => 'jpg',
+	4 => 'png',
+	5 => 'rar',
+	6 => 'tar',
+	7 => 'tiff',
+	8 => 'torrent',
+	9 => 'zip',
 );
 
 $bb_cfg['tor_forums_allowed_ext'] = array('torrent', 'zip', 'rar'); // для разделов с раздачами
 $bb_cfg['gen_forums_allowed_ext'] = array('zip', 'rar');            // для обычных разделов
 
-// Attachments
-$bb_cfg['attach'] = array(
-	'upload_path'  =>  DATA_DIR . 'torrent_files',      // путь к директории с torrent файлами
-	'max_size'     =>  250*1024,                        // размер аватары в байтах
-);
-
 // Avatars
 $bb_cfg['avatars'] = array(
-	'allowed_ext'  =>  array('gif','jpg','jpeg','png'), // разрешенные форматы файлов
-	'bot_avatar'   =>  'gallery/bot.gif',               // аватара бота
-	'max_size'     =>  100*1024,                        // размер аватары в байтах
-	'max_height'   =>  100,                             // высота аватара в px
-	'max_width'    =>  100,                             // ширина аватара в px
-	'no_avatar'    =>  'gallery/noavatar.png',          // дефолтная аватара
-	'upload_path'  =>  BB_ROOT . 'data/avatars/',       // путь к директории с аватарами
-	'up_allowed'   =>  true,                            // разрешить загрузку аватар
+	'allowed_ext' => array('gif','jpg','jpeg','png'), // разрешенные форматы файлов
+	'bot_avatar'  => 'gallery/bot.gif',               // аватара бота
+	'max_size'    => 100*1024,                        // размер аватары в байтах
+	'max_height'  => 100,                             // высота аватара в px
+	'max_width'   => 100,                             // ширина аватара в px
+	'no_avatar'   => 'gallery/noavatar.png',          // дефолтная аватара
+	'upload_path' => BB_ROOT . 'data/avatars/',       // путь к директории с аватарами
+	'up_allowed'  => true,                            // разрешить загрузку аватар
 );
 
 // Group avatars
 $bb_cfg['group_avatars'] = array(
-	'allowed_ext'  =>  array('gif','jpg','jpeg','png'), // разрешенные форматы файлов
-	'max_size'     =>  300*1024,                        // размер аватары в байтах
-	'max_height'   =>  300,                             // высота аватара в px
-	'max_width'    =>  300,                             // ширина аватара в px
-	'no_avatar'    =>  'gallery/noavatar.png',          // дефолтная аватара
-	'upload_path'  =>  BB_ROOT . 'data/avatars/',       // путь к директории с аватарами
-	'up_allowed'   =>  true,                            // разрешить загрузку аватар
+	'allowed_ext' => array('gif','jpg','jpeg','png'), // разрешенные форматы файлов
+	'max_size'    => 300*1024,                        // размер аватары в байтах
+	'max_height'  => 300,                             // высота аватара в px
+	'max_width'   => 300,                             // ширина аватара в px
+	'no_avatar'   => 'gallery/noavatar.png',          // дефолтная аватара
+	'upload_path' => BB_ROOT . 'data/avatars/',       // путь к директории с аватарами
+	'up_allowed'  => true,                            // разрешить загрузку аватар
 );
 
 // Captcha
 $bb_cfg['captcha'] = array(
 	'disabled'   => false,
 	'secret_key' => 'secret_key',
-	'img_path'   => INT_DATA_DIR .'captcha/',           // with '/'
-	'img_url'    => './internal_data/captcha/',         // with '/'
+	'img_path'   => INT_DATA_DIR .'captcha/',         // with ending slash
+	'img_url'    => './internal_data/captcha/',       // with ending slash
 );
 
 // Atom feed
 $bb_cfg['atom'] = array(
-	'path' => INT_DATA_DIR .'atom',                     // without '/'
-	'url'  => './internal_data/atom',                   // without '/'
+	'path' => INT_DATA_DIR .'atom',                   // without ending slash
+	'url'  => './internal_data/atom',                 // without ending slash
 );
 
 // Nofollow
 $bb_cfg['nofollow'] = array(
 	'disabled'    => false,
-	'allowed_url' => array($domain_name),               // 'allowed.site', 'www.allowed.site'
+	'allowed_url' => array($domain_name),             // 'allowed.site', 'www.allowed.site'
 );
 
 // Local config

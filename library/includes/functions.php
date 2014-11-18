@@ -9,13 +9,6 @@ function get_path_from_id ($id, $ext_id, $base_path, $first_div, $sec_div)
 	return ($base_path ? "$base_path/" : '') . floor($id/$first_div) .'/'. ($id % $sec_div) .'/'. $id . ($ext ? ".$ext" : '');
 }
 
-function delete_avatar ($user_id, $avatar_ext_id)
-{
-	global $bb_cfg;
-	$avatar_file = ($avatar_ext_id) ? get_avatar_path($user_id, $avatar_ext_id) : '';
-	return ($avatar_file && file_exists($avatar_file)) ? @unlink($avatar_file) : false;
-}
-
 function get_avatar_path ($id, $ext_id, $base_path = null, $first_div = 10000, $sec_div = 100)
 {
 	global $bb_cfg;
@@ -28,6 +21,12 @@ function get_attach_path ($id, $ext_id = '', $base_path = null, $first_div = 100
 	global $bb_cfg;
 	$base_path = isset($base_path) ? $base_path : $bb_cfg['attach']['upload_path'];
 	return get_path_from_id($id, $ext_id, $base_path, $first_div, $sec_div);
+}
+
+function delete_avatar ($user_id, $avatar_ext_id)
+{
+	$avatar_file = ($avatar_ext_id) ? get_avatar_path($user_id, $avatar_ext_id) : '';
+	return ($avatar_file && file_exists($avatar_file)) ? @unlink($avatar_file) : false;
 }
 
 function get_tracks ($type)

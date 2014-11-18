@@ -19,9 +19,10 @@ header('X-Frame-Options: SAMEORIGIN');
 // Get initial config
 require(BB_ROOT . 'library/config.php');
 
-$server_protocol = '//';
+$server_protocol = ($bb_cfg['cookie_secure']) ? 'https://' : 'http://';
+$server_port = (in_array($bb_cfg['server_port'], array(80, 443))) ? '' : ':' . $bb_cfg['server_port'];
 define('FORUM_PATH', $bb_cfg['script_path']);
-define('FULL_URL', $server_protocol . $bb_cfg['server_name'] . $bb_cfg['script_path']);
+define('FULL_URL', $server_protocol . $bb_cfg['server_name'] . $server_port . $bb_cfg['script_path']);
 unset($server_protocol, $server_port);
 
 // Debug options

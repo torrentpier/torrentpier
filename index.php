@@ -373,14 +373,13 @@ if ($bb_cfg['birthday_check_day'] && $bb_cfg['birthday_enabled'])
 	if ($stats['birthday_week_list'])
 	{
 		shuffle($stats['birthday_week_list']);
-		foreach($stats['birthday_week_list'] as $i => $week)
+		foreach ($stats['birthday_week_list'] as $i => $week)
 		{
-			if($i >= 5)
+			if ($i >= 5)
 			{
 				$week_all = true;
 				continue;
 			}
-
 			$week_list[] = profile_url($week) .' <span class="small">('. birthday_age($week['user_birthday']-1) .')</span>';
 		}
 		$week_all = ($week_all) ? '&nbsp;<a class="txtb" href="#" onclick="ajax.exec({action: \'index_data\', mode: \'birthday_week\'}); return false;" title="'. $lang['ALL'] .'">...</a>' : '';
@@ -391,14 +390,13 @@ if ($bb_cfg['birthday_check_day'] && $bb_cfg['birthday_enabled'])
 	if ($stats['birthday_today_list'])
 	{
 		shuffle($stats['birthday_today_list']);
-		foreach($stats['birthday_today_list'] as $i => $today)
+		foreach ($stats['birthday_today_list'] as $i => $today)
 		{
-			if($i >= 5)
+			if ($i >= 5)
 			{
 				$today_all = true;
 				continue;
 			}
-
 			$today_list[] = profile_url($today) .' <span class="small">('. birthday_age($today['user_birthday']) .')</span>';
 		}
 		$today_all = ($today_all) ? '&nbsp;<a class="txtb" href="#" onclick="ajax.exec({action: \'index_data\', mode: \'birthday_today\'}); return false;" title="'. $lang['ALL'] .'">...</a>' : '';

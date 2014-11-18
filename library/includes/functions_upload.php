@@ -118,8 +118,6 @@ class upload_common
 
 	function store ($mode = '', $params = array())
 	{
-		global $bb_cfg;
-
 		if ($mode == 'avatar')
 		{
 			delete_avatar($params['user_id'], $params['avatar_ext_id']);
