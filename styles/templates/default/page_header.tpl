@@ -304,7 +304,7 @@ $(document).ready(function() {
 	</td>
 	<td style="padding: 3px;">
 		<div>
-			<form id="quick-search" action="" method="post" onsubmit="$(this).attr('action', $('#search-action').val()); if($('#search-action option:selected').attr('class') == 'hash') $('#search-text').attr('name', 'hash');">
+			<form id="quick-search" action="" method="get" onsubmit="$(this).attr('action', $('#search-action').val()); if($('#search-action option:selected').attr('class') == 'hash') $('#search-text').attr('name', 'hash');">
 				<input type="hidden" name="max" value="1" />
 				<input type="hidden" name="to" value="1" />
 				<input id="search-text" type="text" name="nm" placeholder="{L_SEARCH_S}" required />

@@ -411,12 +411,6 @@ function hide_bb_path ($path)
 	return ltrim(str_replace(BB_PATH, '', $path), '/\\');
 }
 
-function tr_drop_request ($drop_type)
-{
-	if (DBG_LOG) dbg_log(' ', "request-dropped-$drop_type");
-	dummy_exit(mt_rand(60, 600));
-}
-
 function sys ($param)
 {
 	switch ($param)
@@ -511,7 +505,7 @@ else if (defined('IN_TRACKER'))
 		// Exit if tracker is disabled via ON/OFF trigger
 		if (file_exists(BB_DISABLED))
 		{
-			dummy_exit(mt_rand(60, 2400));  #  die('d14:failure reason20:temporarily disablede');
+			dummy_exit(mt_rand(60, 2400));
 		}
 	}
 }

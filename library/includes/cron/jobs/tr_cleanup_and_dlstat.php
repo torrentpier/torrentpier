@@ -71,15 +71,15 @@ if ($tr_cfg['update_dlstat'])
 	// Set "only 1 seeder" bonus
 	DB()->query("
 		UPDATE
-		  ". NEW_BB_BT_LAST_TORSTAT  ." tb,
-		  ". BB_BT_TRACKER_SNAP      ." sn
+			". NEW_BB_BT_LAST_TORSTAT  ." tb,
+			". BB_BT_TRACKER_SNAP      ." sn
 		SET
-		  tb.bonus_add = tb.up_add
+			tb.bonus_add = tb.up_add
 		WHERE
-		      tb.topic_id = sn.topic_id
-		  AND sn.seeders = 1
-		  AND tb.up_add != 0
-		  AND tb.dl_status = ". DL_STATUS_COMPLETE ."
+			tb.topic_id = sn.topic_id
+				AND sn.seeders = 1
+				AND tb.up_add != 0
+				AND tb.dl_status = ". DL_STATUS_COMPLETE ."
 	");
 
 	// Get SUMMARIZED user's dlstat
@@ -154,7 +154,7 @@ DB()->query("DROP TABLE IF EXISTS ". NEW_BB_BT_LAST_USERSTAT .", ". OLD_BB_BT_LA
 
 DB()->expect_slow_query(10);
 
-if($bb_cfg['seed_bonus_enabled'] && $bb_cfg['seed_bonus_points'] && $bb_cfg['seed_bonus_release'])
+if ($bb_cfg['seed_bonus_enabled'] && $bb_cfg['seed_bonus_points'] && $bb_cfg['seed_bonus_release'])
 {
 	DB()->query("
 		CREATE TEMPORARY TABLE tmp_bonus (
@@ -163,7 +163,7 @@ if($bb_cfg['seed_bonus_enabled'] && $bb_cfg['seed_bonus_points'] && $bb_cfg['see
 		) ENGINE = MEMORY
 	");
 
-    $tor_size = ($bb_cfg['seed_bonus_tor_size'] * 1073741824);
+	$tor_size = ($bb_cfg['seed_bonus_tor_size'] * 1073741824);
 
 	DB()->query("INSERT INTO tmp_bonus
 		SELECT bt.user_id, count(bt.seeder) AS release_count
@@ -174,18 +174,18 @@ if($bb_cfg['seed_bonus_enabled'] && $bb_cfg['seed_bonus_points'] && $bb_cfg['see
 			GROUP BY user_id
 	");
 
-	$seed_bonus = unserialize($bb_cfg['seed_bonus_points']);
-	$seed_release = unserialize($bb_cfg['seed_bonus_release']);
+	$seed_bonus = (float) unserialize($bb_cfg['seed_bonus_points']);
+	$seed_release = (int) unserialize($bb_cfg['seed_bonus_release']);
 
-    foreach($seed_bonus as $i => $points)
-    {
-	    if(!$points || !$seed_release[$i]) continue;
+	foreach($seed_bonus as $i => $points)
+	{
+		if (!$points || !$seed_release[$i]) continue;
 
-        $user_points  = ($points / 4);
-        $release      = $seed_release[$i];
-        $user_regdate = (TIMENOW - $bb_cfg['seed_bonus_user_regdate'] * 86400);
+		$user_points  = ($points / 4);
+		$release      = $seed_release[$i];
+		$user_regdate = (TIMENOW - $bb_cfg['seed_bonus_user_regdate'] * 86400);
 
-        DB()->query("
+		DB()->query("
 			UPDATE ". BB_USERS ." u, ". BB_BT_USERS ." bu, tmp_bonus b
 			SET
 				u.user_points       = u.user_points + $user_points,
@@ -199,7 +199,7 @@ if($bb_cfg['seed_bonus_enabled'] && $bb_cfg['seed_bonus_points'] && $bb_cfg['see
 				AND u.user_active   =  1
 				AND u.user_id       not IN(". EXCLUDED_USERS_CSV .")
 		");
-    }
+	}
 
 	DB()->query("DROP TEMPORARY TABLE IF EXISTS tmp_bonus");
 }
