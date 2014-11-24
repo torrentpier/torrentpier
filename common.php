@@ -36,6 +36,11 @@ define('BB_BT_USERS',        'bb_bt_users');
 
 define('BT_AUTH_KEY_LENGTH', 10);
 
+define('PEER_HASH_PREFIX',   'peer_');
+define('PEERS_LIST_PREFIX',  'peers_list_');
+define('PEER_HASH_EXPIRE',   round($bb_cfg['announce_interval'] * (0.85 * $tr_cfg['expire_factor']))); // sec
+define('PEERS_LIST_EXPIRE',  round($bb_cfg['announce_interval'] * 0.7)); // sec
+
 define('DL_STATUS_RELEASER', -1);
 define('DL_STATUS_DOWN',      0);
 define('DL_STATUS_COMPLETE',  1);
@@ -51,8 +56,8 @@ define('BOT_UID',   -746);
 /**
  * Database
  */
+// Core DB class
 require(CORE_DIR . 'dbs.php');
-
 $DBS = new DBS($bb_cfg);
 
 function DB ($db_alias = 'db1')
@@ -64,21 +69,13 @@ function DB ($db_alias = 'db1')
 /**
  * Cache
  */
-define('PEER_HASH_PREFIX',  'peer_');
-define('PEERS_LIST_PREFIX', 'peers_list_');
-define('PEER_HASH_EXPIRE',  round($bb_cfg['announce_interval'] * (0.85 * $tr_cfg['expire_factor']))); // sec
-define('PEERS_LIST_EXPIRE', round($bb_cfg['announce_interval'] * 0.7)); // sec
+// Main cache class
+require(INC_DIR . 'cache/common.php');
+// Main datastore class
+require(INC_DIR . 'datastore/common.php');
 
-if (!function_exists('sqlite_escape_string'))
-{
-	function sqlite_escape_string($string)
-	{
-		return SQLite3::escapeString($string);
-	}
-}
-
+// Core CACHE class
 require(CORE_DIR . 'caches.php');
-
 $CACHES = new CACHES($bb_cfg);
 
 function CACHE ($cache_name)
@@ -87,13 +84,9 @@ function CACHE ($cache_name)
 	return $CACHES->get_cache_obj($cache_name);
 }
 
-// Main cache class
-require(INC_DIR . 'cache/common.php');
-
 // Common cache classes
 require(INC_DIR . 'cache/memcache.php');
 require(INC_DIR . 'cache/sqlite.php');
-require(INC_DIR . 'cache/sqlite_common.php');
 require(INC_DIR . 'cache/redis.php');
 require(INC_DIR . 'cache/apc.php');
 require(INC_DIR . 'cache/xcache.php');
@@ -102,18 +95,15 @@ require(INC_DIR . 'cache/file.php');
 /**
 * Datastore
 */
-// Main datastore class
-require(INC_DIR . 'datastore/common.php');
-
 // Common datastore classes
 require(INC_DIR . 'datastore/memcache.php');
 require(INC_DIR . 'datastore/sqlite.php');
 require(INC_DIR . 'datastore/redis.php');
-require(INC_DIR . 'datastore/xcache.php');
 require(INC_DIR . 'datastore/apc.php');
+require(INC_DIR . 'datastore/xcache.php');
 require(INC_DIR . 'datastore/file.php');
 
-// Initialize Datastore
+// Initialize datastore
 switch ($bb_cfg['datastore_type'])
 {
 	case 'memcache':
@@ -133,12 +123,12 @@ switch ($bb_cfg['datastore_type'])
 		$datastore = new datastore_redis($bb_cfg['cache']['redis'], $bb_cfg['cache']['prefix']);
 		break;
 
-	case 'xcache':
-		$datastore = new datastore_xcache($bb_cfg['cache']['prefix']);
-		break;
-
 	case 'apc':
 		$datastore = new datastore_apc($bb_cfg['cache']['prefix']);
+		break;
+
+	case 'xcache':
+		$datastore = new datastore_xcache($bb_cfg['cache']['prefix']);
 		break;
 
 	case 'filecache':

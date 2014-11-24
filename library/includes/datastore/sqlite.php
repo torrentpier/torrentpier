@@ -31,8 +31,8 @@ class datastore_sqlite extends datastore_common
 	{
 		$this->data[$item_name] = $item_data;
 
-		$ds_title = sqlite_escape_string($this->prefix . $item_name);
-		$ds_data  = sqlite_escape_string(serialize($item_data));
+		$ds_title = SQLite3::escapeString($this->prefix . $item_name);
+		$ds_data  = SQLite3::escapeString(serialize($item_data));
 
 		$result = $this->db->query("REPLACE INTO ". $this->cfg['table_name'] ." (ds_title, ds_data) VALUES ('$ds_title', '$ds_data')");
 
@@ -49,9 +49,9 @@ class datastore_sqlite extends datastore_common
 		if (!$items = $this->queued_items) return;
 
 		$prefix_len = strlen($this->prefix);
-		$prefix_sql = sqlite_escape_string($this->prefix);
+		$prefix_sql = SQLite3::escapeString($this->prefix);
 
-		array_deep($items, 'sqlite_escape_string');
+		array_deep($items, 'SQLite3::escapeString');
 		$items_list = $prefix_sql . join("','$prefix_sql", $items);
 
 		$rowset = $this->db->fetch_rowset("SELECT ds_title, ds_data FROM ". $this->cfg['table_name'] ." WHERE ds_title IN ('$items_list')");
