@@ -10,6 +10,7 @@ internal_data/captcha/**/
 internal_data/log/
 internal_data/sitemap/*.xml
 internal_data/triggers/
+library/config.local.php
 
 ### Archives ###
 *.log
