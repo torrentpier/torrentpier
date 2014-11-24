@@ -19,6 +19,10 @@ header('X-Frame-Options: SAMEORIGIN');
 // Get initial config
 require(BB_ROOT . 'library/config.php');
 
+// Load Zend Framework
+require(CLASS_DIR . 'zendLoader.php');
+ZendLoader::getInstance()->setupAutoloader(BB_ROOT . '/library');
+
 $server_protocol = ($bb_cfg['cookie_secure']) ? 'https://' : 'http://';
 $server_port = (in_array($bb_cfg['server_port'], array(80, 443))) ? '' : ':' . $bb_cfg['server_port'];
 define('FORUM_PATH', $bb_cfg['script_path']);
