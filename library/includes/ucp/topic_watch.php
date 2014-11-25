@@ -93,7 +93,7 @@ if ($watch_count > 0)
 }
 else
 {
-	meta_refresh(BB_ROOT, '3');
+	meta_refresh('index.php', 3);
 	bb_die($lang['NO_WATCHED_TOPICS']);
 }
 

@@ -73,7 +73,7 @@ $domain_name = (!empty($_SERVER['SERVER_NAME'])) ? $_SERVER['SERVER_NAME'] : $do
 
 // Version info
 $bb_cfg['tp_version'] = '2.1.4';
-$bb_cfg['tp_release_date'] = '**-11-2014';
+$bb_cfg['tp_release_date'] = '26-11-2014';
 $bb_cfg['tp_release_state'] = 'ALPHA';
 $bb_cfg['tp_zf_version'] = '2.3.3';
 

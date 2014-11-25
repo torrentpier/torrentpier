@@ -114,6 +114,7 @@ else
 
 if (!$t_data = DB()->fetch_row($sql))
 {
+	meta_refresh('index.php' , 10);
 	bb_die($lang['TOPIC_POST_NOT_EXIST']);
 }
 

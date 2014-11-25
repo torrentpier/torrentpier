@@ -20,8 +20,10 @@ header('X-Frame-Options: SAMEORIGIN');
 require(BB_ROOT . 'library/config.php');
 
 // Load Zend Framework
-require_once(BB_ROOT . 'library/Zend/Loader/AutoloaderFactory.php');
-Zend\Loader\AutoloaderFactory::factory(array());
+use Zend\Loader\StandardAutoloader;
+require(BB_ROOT . 'library/Zend/Loader/StandardAutoloader.php');
+$loader = new StandardAutoloader(array('autoregister_zf' => true));
+$loader->register();
 
 $server_protocol = ($bb_cfg['cookie_secure']) ? 'https://' : 'http://';
 $server_port = (in_array($bb_cfg['server_port'], array(80, 443))) ? '' : ':' . $bb_cfg['server_port'];
