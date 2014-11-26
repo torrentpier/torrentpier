@@ -1,0 +1,18 @@
+## set default server charset
+AddDefaultCharset UTF-8
+
+## folder listing access control
+Options All -Indexes
+
+## sitemap and atom rewrite
+RewriteEngine On
+RewriteRule ^sitemap.xml$ internal_data/sitemap/sitemap.xml [L]
+RewriteRule ^/internal_data/atom/(.*) /atom$1 [L]
+
+## deny access to git folder
+RedirectMatch 404 /\\.git(/|$)
+
+## deny access to system files
+<FilesMatch "\.(.*sql|tpl|db|inc|log|md)|(config|common).php$">
+deny from all
+</FilesMatch>

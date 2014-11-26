@@ -1,0 +1,25 @@
+{
+    "name": "zendframework/zend-permissions-acl",
+    "description": "provides a lightweight and flexible access control list (ACL) implementation for privileges management",
+    "license": "BSD-3-Clause",
+    "keywords": [
+        "zf2",
+        "acl"
+    ],
+    "homepage": "https://github.com/zendframework/zf2",
+    "autoload": {
+        "psr-0": {
+            "Zend\\Permissions\\Acl\\": ""
+        }
+    },
+    "target-dir": "Zend/Permissions/Acl",
+    "require": {
+        "php": ">=5.3.23"
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "2.3-dev",
+            "dev-develop": "2.4-dev"
+        }
+    }
+}

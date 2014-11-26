@@ -1,0 +1,35 @@
+### TorrentPier ###
+.idea/
+data/avatars/**/
+data/old_files/
+data/torrent_files/
+internal_data/ajax_html/*.html
+internal_data/atom/
+internal_data/cache/
+internal_data/captcha/**/
+internal_data/log/
+internal_data/sitemap/*.xml
+internal_data/triggers/
+library/config.local.php
+
+### Archives ###
+*.log
+*.zip
+*.rar
+*.tar
+*.gz
+*.torrent
+
+### Windows ###
+Thumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+*.lnk
+
+### OSX ###
+.DS_Store
+.AppleDouble
+.LSOverride
+._*
+.Spotlight-V100
+.Trashes
