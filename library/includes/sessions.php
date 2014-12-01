@@ -671,7 +671,7 @@ class user_common
 		}
 		else if (!empty($_COOKIE['opt_js']))
 		{
-			$opt_js = bb_json_decode($_COOKIE['opt_js']);
+			$opt_js = Zend\Json\Json::decode($_COOKIE['opt_js']);
 
 			if (is_array($opt_js))
 			{
