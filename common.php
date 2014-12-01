@@ -25,6 +25,9 @@ require(BB_ROOT . 'library/Zend/Loader/StandardAutoloader.php');
 $loader = new StandardAutoloader(array('autoregister_zf' => true));
 $loader->register();
 
+// ZF use
+use Zend\Json;
+
 $server_protocol = ($bb_cfg['cookie_secure']) ? 'https://' : 'http://';
 $server_port = (in_array($bb_cfg['server_port'], array(80, 443))) ? '' : ':' . $bb_cfg['server_port'];
 define('FORUM_PATH', $bb_cfg['script_path']);
