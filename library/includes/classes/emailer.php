@@ -98,11 +98,11 @@ class emailer
 
 		if (empty($this->tpl_msg[$template_lang . $template_file]))
 		{
-			$tpl_file = LANG_ROOT_DIR ."$template_lang/email/$template_file.tpl";
+			$tpl_file = LANG_ROOT_DIR ."$template_lang/email/$template_file.html";
 
 			if (!@file_exists(@bb_realpath($tpl_file)))
 			{
-				$tpl_file = LANG_ROOT_DIR ."{$bb_cfg['default_lang']}/email/$template_file.tpl";
+				$tpl_file = LANG_ROOT_DIR ."{$bb_cfg['default_lang']}/email/$template_file.html";
 
 				if (!@file_exists(@bb_realpath($tpl_file)))
 				{
