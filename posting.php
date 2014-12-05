@@ -696,7 +696,7 @@ $template->assign_vars(array(
 	'U_VIEW_FORUM'         => "viewforum.php?" . POST_FORUM_URL . "=$forum_id",
 
 	'USERNAME'             => @$username,
-	'CAPTCHA_HTML'         => (IS_GUEST) ? CAPTCHA()->get_html() : '',
+	'CAPTCHA_HTML'         => (IS_GUEST) ? bb_captcha('get') : '',
 	'SUBJECT'              => $subject,
 	'MESSAGE'              => $message,
 

@@ -415,21 +415,6 @@ CREATE TABLE IF NOT EXISTS `bb_bt_user_settings` (
 -- ----------------------------
 
 -- ----------------------------
--- Table structure for `bb_captcha`
--- ----------------------------
-DROP TABLE IF EXISTS `bb_captcha`;
-CREATE TABLE IF NOT EXISTS `bb_captcha` (
-  `cap_id` int(10) NOT NULL DEFAULT '0',
-  `cap_code` char(6) NOT NULL DEFAULT '',
-  `cap_expire` int(11) NOT NULL DEFAULT '0',
-  PRIMARY KEY (`cap_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
-
--- ----------------------------
--- Records of bb_captcha
--- ----------------------------
-
--- ----------------------------
 -- Table structure for `bb_categories`
 -- ----------------------------
 DROP TABLE IF EXISTS `bb_categories`;
@@ -591,7 +576,6 @@ INSERT INTO `bb_cron` VALUES ('', '1', 'Clean search results', 'clean_search_res
 INSERT INTO `bb_cron` VALUES ('', '1', 'Tracker cleanup and dlstat', 'tr_cleanup_and_dlstat.php', 'interval', '', '', '20', '', '', '00:15:00', '0', '', '0', '0', '0');
 INSERT INTO `bb_cron` VALUES ('', '1', 'Make tracker snapshot', 'tr_make_snapshot.php', 'interval', '', '', '10', '', '', '00:10:00', '0', '', '0', '0', '0');
 INSERT INTO `bb_cron` VALUES ('', '1', 'Seeder last seen', 'tr_update_seeder_last_seen.php', 'interval', '', '', '255', '', '', '01:00:00', '0', '', '0', '0', '0');
-INSERT INTO `bb_cron` VALUES ('', '1', 'Captcha', 'captcha_gen_gc.php', 'daily', '', '05:00:00', '120', '', '', '', '0', '', '0', '0', '0');
 INSERT INTO `bb_cron` VALUES ('', '1', 'Tracker dl-complete count', 'tr_complete_count.php', 'interval', '', '', '255', '', '', '06:00:00', '0', '', '0', '0', '0');
 INSERT INTO `bb_cron` VALUES ('', '1', 'Cache garbage collector', 'cache_gc.php', 'interval', '', '', '255', '', '', '00:05:00', '0', '', '0', '0', '0');
 INSERT INTO `bb_cron` VALUES ('', '1', 'Sitemap update', 'sitemap.php', 'daily', '', '06:00:00', '30', '', '', '', '0', '', '0', '0', '0');

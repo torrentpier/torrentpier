@@ -32,7 +32,7 @@
 	</tr>
 	<!-- IF CAPTCHA_HTML -->
 	<tr>
-		<td class="tRight nowrap">{L_CODE}</td>
+		<td class="tRight nowrap">{L_CAPTCHA}:</td>
 		<td>{CAPTCHA_HTML}</td>
 	</tr>
 	<!-- ENDIF -->

@@ -27,6 +27,7 @@ if (!defined('BB_ROOT')) die(basename(__FILE__));
  * @author   Nasibullin Rinat
  * @version  1.1.0
  */
+
 class ReflectionTypeHint
 {
 	protected static $hints = array(

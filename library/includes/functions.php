@@ -2588,20 +2588,6 @@ function set_pr_die_append_msg ($pr_uid)
 	');
 }
 
-function CAPTCHA ()
-{
-	static $captcha_obj = null;
-
-	if ($captcha_obj === null)
-	{
-		global $bb_cfg;
-		require(INC_DIR .'captcha/captcha.php');
-		$captcha_obj = new captcha_kcaptcha($bb_cfg['captcha']);
-	}
-
-	return $captcha_obj;
-}
-
 function send_pm ($user_id, $subject, $message, $poster_id = BOT_UID)
 {
 	global $userdata;
@@ -2788,4 +2774,54 @@ function hash_search ($hash)
 	{
 		bb_die(sprintf($lang['HASH_NOT_FOUND'], $hash));
 	}
+}
+
+function bb_captcha ($mode, $callback = '')
+{
+	global $bb_cfg, $userdata;
+
+	require_once(CLASS_DIR .'recaptcha.php');
+
+	$secret = $bb_cfg['captcha']['secret_key'];
+	$public = $bb_cfg['captcha']['public_key'];
+	$theme  = $bb_cfg['captcha']['theme'];
+	$lang   = $bb_cfg['lang'][$userdata['user_lang']]['captcha'];
+
+	$reCaptcha = new ReCaptcha($secret);
+
+	switch ($mode)
+	{
+		case 'get':
+			return "
+				<script type=\"text/javascript\">
+					var onloadCallback = function() {
+						grecaptcha.render('tp-captcha', {
+							'sitekey'  : '" . $public . "',
+							'theme'    : '" . $theme . "',
+							'callback' : '" . $callback . "'
+						});
+					};
+				</script>
+				<div id=\"tp-captcha\"></div>
+				<script src=\"https://www.google.com/recaptcha/api.js?onload=onloadCallback&hl=" . $lang . "&render=explicit\" async defer></script>";
+			break;
+
+		case 'check':
+			$resp = null;
+			$error = null;
+			$g_resp = request_var('g-recaptcha-response', '');
+			if ($g_resp) {
+				$resp = $reCaptcha->verifyResponse($_SERVER["REMOTE_ADDR"], $g_resp);
+			}
+			if ($resp != null && $resp->success) {
+				return true;
+			} else {
+				return false;
+			}
+			break;
+
+		default:
+			bb_simple_die(__FUNCTION__ .": invalid mode '$mode'");
+	}
+	return false;
 }

@@ -48,6 +48,7 @@ if (!defined('BB_ROOT')) die(basename(__FILE__));
  * @author   Nasibullin Rinat
  * @version  1.4.3
  */
+
 class Text_LangCorrect
 {
 	/**

@@ -84,9 +84,9 @@ if (isset($_POST['login']))
 	}
 
 	// Captcha
-	if ($need_captcha && !CAPTCHA()->verify_code())
+	if ($need_captcha && !bb_captcha('check') && !$bb_cfg['captcha']['disabled'])
 	{
-		$login_errors[] = $lang['CONFIRM_CODE_WRONG'];
+		$login_errors[] = $lang['CAPTCHA_WRONG'];
 	}
 
 	if (!$login_errors)
@@ -126,7 +126,7 @@ if (IS_GUEST || $mod_admin_login)
 		'ERROR_MESSAGE'   => join('<br />', $login_errors),
 		'ADMIN_LOGIN'     => $mod_admin_login,
 		'REDIRECT_URL'    => htmlCHR($redirect_url),
-		'CAPTCHA_HTML'    => ($need_captcha) ? CAPTCHA()->get_html() : '',
+		'CAPTCHA_HTML'    => ($need_captcha && !$bb_cfg['captcha']['disabled']) ? bb_captcha('get') : '',
 		'PAGE_TITLE'      => $lang['LOGIN'],
 		'S_LOGIN_ACTION'  => LOGIN_URL,
 	));

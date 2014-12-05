@@ -863,7 +863,7 @@ if ($bb_cfg['show_quick_reply'])
 			'QUICK_REPLY'    => true,
 			'QR_POST_ACTION' => POSTING_URL,
 			'QR_TOPIC_ID'    => $topic_id,
-			'CAPTCHA_HTML'   => (IS_GUEST) ? CAPTCHA()->get_html() : '',
+			'CAPTCHA_HTML'   => (IS_GUEST) ? bb_captcha('get') : '',
 		));
 
 		if (!IS_GUEST)

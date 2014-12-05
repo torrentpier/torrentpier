@@ -98,7 +98,7 @@ ajax.callback.posts = function(data) {
 
 <div class="mrg_8 tCenter">
 	<div id="post-buttons-block" style="display: none;">
-		<div class="pad_4">{CAPTCHA_HTML}</div>
+		<div class="pad_4" align="center">{CAPTCHA_HTML}</div>
 		<input type="submit" name="preview" value="{L_PREVIEW}" id="post-preview-btn" onclick="$('#post-submit').remove();">&nbsp;&nbsp;
 		<input onclick="submitted = true;" title="Ctrl+Enter" type="submit" name="post" class="bold" value="{L_SUBMIT}" id="post-submit-btn">&nbsp;&nbsp;
 		<input type="button" value="{L_AJAX_PREVIEW}" onclick="ajax.exec({ action: 'posts', type: 'view_message', message: $('textarea#message').val()});">

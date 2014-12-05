@@ -1,8 +1,5 @@
 <?php
 
-setlocale(LC_ALL, 'eu_US.UTF-8');
-$lang['CONTENT_ENCODING'] = 'UTF-8';
-
 // Common, these terms are used extensively on several pages
 $lang['ADMIN'] = 'Administrating';
 $lang['FORUM'] = 'Forum';
@@ -658,12 +655,6 @@ $lang['USER_AGREEMENT_AGREE'] = 'I have read and agree to the User agreement abo
 $lang['COPYRIGHT_HOLDERS'] = 'For copyright holders';
 $lang['ADVERT'] = 'Advertise on this site';
 $lang['NOT_FOUND'] = 'File not found';
-
-// Visual confirmation system strings
-$lang['CONFIRM_CODE_WRONG'] = 'The confirmation code you entered was incorrect';
-$lang['CONFIRM_CODE_IMPAIRED'] = 'If you are visually impaired or cannot otherwise read this code please contact the %sAdministrator%s for help.';
-$lang['CONFIRM_CODE'] = 'Confirmation code';
-$lang['CONFIRM_CODE_EXPLAIN'] = 'Enter the code exactly as you see it. The code is case sensitive and zero has a diagonal line through it.';
 
 // Memberslist
 $lang['SORT'] = 'Sort';
@@ -2801,3 +2792,7 @@ $lang['UPLOAD_ERRORS'] = array(
 	UPLOAD_ERR_CANT_WRITE => 'write error',
 	UPLOAD_ERR_EXTENSION  => 'upload stopped by extension',
 );
+
+// Captcha
+$lang['CAPTCHA'] = 'Check that you are not a robot';
+$lang['CAPTCHA_WRONG'] = 'You could not confirm that you are not a robot';

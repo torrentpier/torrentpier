@@ -17,7 +17,7 @@ $thumbnail = request_var('thumb', 0);
 // Send file to browser
 function send_file_to_browser($attachment, $upload_dir)
 {
-	global $lang, $attach_config;
+	global $bb_cfg, $lang, $userdata;
 
 	$filename = ($upload_dir == '') ? $attachment['physical_filename'] : $upload_dir . '/' . $attachment['physical_filename'];
 
@@ -50,7 +50,7 @@ function send_file_to_browser($attachment, $upload_dir)
 	header('Pragma: public');
 	$real_filename = clean_filename(basename($attachment['real_filename']));
 	$mimetype = $attachment['mimetype'].';';
-	$charset = (isset($lang['CONTENT_ENCODING'])) ? "charset={$lang['CONTENT_ENCODING']};" : '';
+	$charset = "charset={$bb_cfg['lang'][$userdata['user_lang']]['encoding']};";
 
 	// Send out the Headers
 	header("Content-Type: $mimetype $charset name=\"$real_filename\"");
@@ -203,14 +203,14 @@ if ($download_mode == PHYSICAL_LINK)
 }
 else
 {
-	if (IS_GUEST && !CAPTCHA()->verify_code())
+	if (IS_GUEST && !bb_captcha('check'))
 	{
 		global $template;
 
 		$redirect_url = isset($_POST['redirect_url']) ? $_POST['redirect_url'] : (isset($_SERVER['HTTP_REFERER']) ? $_SERVER['HTTP_REFERER'] : '/');
 		$message = '<form action="'. DOWNLOAD_URL . $attachment['attach_id'] .'" method="post">';
-		$message .= $lang['CONFIRM_CODE'];
-		$message .= '<div class="mrg_10">'. CAPTCHA()->get_html() .'</div>';
+		$message .= $lang['CAPTCHA'].':';
+		$message .= '<div  class="mrg_10" align="center">'. bb_captcha('get') .'</div>';
 		$message .= '<input type="hidden" name="redirect_url" value="'. $redirect_url .'" />';
 		$message .= '<input type="submit" class="bold" value="'. $lang['SUBMIT'] .'" /> &nbsp;';
 		$message .= '<input type="button" class="bold" value="'. $lang['GO_BACK'] .'" onclick="document.location.href = \''. $redirect_url .'\';" />';

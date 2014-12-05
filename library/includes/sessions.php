@@ -614,6 +614,7 @@ class user_common
 		if (!defined('LANG_DIR')) define('LANG_DIR', DEFAULT_LANG_DIR);
 
 		require(LANG_DIR .'main.php');
+		setlocale(LC_ALL, $bb_cfg['lang'][$this->data['user_lang']]['locale']);
 
 		$theme = setup_style();
 		$DeltaTime = new Date_Delta();

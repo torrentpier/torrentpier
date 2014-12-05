@@ -73,7 +73,7 @@ $domain_name = (!empty($_SERVER['SERVER_NAME'])) ? $_SERVER['SERVER_NAME'] : $do
 
 // Version info
 $bb_cfg['tp_version'] = '2.1.5';
-$bb_cfg['tp_release_date'] = '**-12-2014';
+$bb_cfg['tp_release_date'] = '06-12-2014';
 $bb_cfg['tp_release_state'] = 'ALPHA';
 $bb_cfg['tp_zf_version'] = '2.3.3';
 
@@ -101,7 +101,6 @@ $bb_cfg['db_alias'] = array(
 	'ip'     => 'db1', // BB_POSTS_IP
 	'ut'     => 'db1', // BB_TOPICS_USER_POSTED
 #	db3
-	'cap'    => 'db1', // BB_CAPTCHA
 	'pm'     => 'db1', // BB_PRIVMSGS, BB_PRIVMSGS_TEXT
 	'pt'     => 'db1', // BB_POSTS_TEXT
 );
@@ -305,11 +304,25 @@ else
 	}
 }
 
-$bb_cfg['languages'] = array(
-//	'folder' => 'Name',
-	'ru'     => 'Русский',
-	'uk'     => 'Український',
-	'en'     => 'English',
+$bb_cfg['lang'] = array(
+	'ru' => array(
+		'name'     => 'Русский',
+		'locale'   => 'ru_RU.UTF-8',
+		'encoding' => 'UTF-8',
+		'captcha'  => 'ru',
+	),
+	'uk' => array(
+		'name'     => 'Український',
+		'locale'   => 'uk_UA.UTF-8',
+		'encoding' => 'UTF-8',
+		'captcha'  => 'uk',
+	),
+	'en' => array(
+		'name'     => 'English',
+		'locale'   => 'en_US.UTF-8',
+		'encoding' => 'UTF-8',
+		'captcha'  => 'en',
+	),
 );
 
 // Templates
@@ -621,11 +634,12 @@ $bb_cfg['group_avatars'] = array(
 );
 
 // Captcha
+// Get a Google reCAPTCHA API Key: https://www.google.com/recaptcha/admin
 $bb_cfg['captcha'] = array(
 	'disabled'   => false,
-	'secret_key' => 'secret_key',
-	'img_path'   => INT_DATA_DIR .'captcha/',         // with ending slash
-	'img_url'    => './internal_data/captcha/',       // with ending slash
+	'public_key' => '', // your public key
+	'secret_key' => '', // your secret key
+	'theme'      => 'light', // light or dark
 );
 
 // Atom feed
