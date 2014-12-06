@@ -78,17 +78,6 @@ if (DBG_USER && SQL_DEBUG && !(isset($_GET['pane']) && $_GET['pane'] == 'left'))
 	require(INC_DIR . 'page_footer_dev.php');
 }
 
-##### LOG #####
-global $log_ip_resp;
-
-if (isset($log_ip_resp[USER_IP]) || isset($log_ip_resp[CLIENT_IP]))
-{
-	$str = date('H:i:s') . LOG_SEPR . preg_replace("#\s+#", ' ', $contents) . LOG_LF;
-	$file = 'sessions/'. date('m-d') .'_{'. USER_IP .'}_'. CLIENT_IP .'_resp';
-	bb_log($str, $file);
-}
-### LOG END ###
-
 echo '
 	</body>
 	</html>

@@ -33,7 +33,7 @@
  * Email
  * Debug
  * Special users (dbg_users, unlimited_users, super_admins)
- * LOG
+ * Log options
  * Error reporting
  * Triggers
  * Date format
@@ -367,7 +367,7 @@ $bb_cfg['invalid_logins']          = 5;            // Количество не�
 $bb_cfg['new_user_reg_disabled']   = false;        // Запретить регистрацию новых учетных записей
 $bb_cfg['unique_ip']               = false;        // Запретить регистрацию нескольких учетных записей с одного ip
 $bb_cfg['new_user_reg_restricted'] = false;        // Ограничить регистрацию новых пользователей по времени с 01:00 до 17:00
-$bb_cfg['reg_email_activation']    = false;        // Требовать активацию учетной записи по email
+$bb_cfg['reg_email_activation']    = true;         // Требовать активацию учетной записи по email
 
 // Email
 $bb_cfg['emailer_disabled']        = false;
@@ -425,22 +425,6 @@ define('LOG_EXT',      'log');
 define('LOG_SEPR',     ' | ');
 define('LOG_LF',       "\n");
 define('LOG_MAX_SIZE', 1048576); // bytes
-
-// Log request
-$log_ip_req = array(
-#	'127.0.0.1' => 'user1',  // CLIENT_IP => 'name'
-#	'7f000001'  => 'user2',  // USER_IP   => 'name'
-);
-
-$log_passkey = array(
-#	'passkey' => 'log_filename',
-);
-
-// Log response
-$log_ip_resp = array(
-#	'127.0.0.1' => 'user1',  // CLIENT_IP => 'name'
-#	'7f000001'  => 'user2',  // USER_IP   => 'name'
-);
 
 // Error reporting
 ini_set('error_reporting', E_ALL);

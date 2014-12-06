@@ -131,25 +131,6 @@ class user_common
 			}
 		}
 
-		##### LOG #####
-		global $log_ip_req;
-
-		if (isset($log_ip_req[USER_IP]) || isset($log_ip_req[CLIENT_IP]))
-		{
-			$file = 'sessions/'. date('m-d') .'_{'. USER_IP .'}_'. CLIENT_IP;
-			$str = array();
-			$str[] = date('H:i:s');
-			$str[] = (@$this->sessiondata['uid']) ? sprintf('%06d', strval($this->sessiondata['uid'])) : 'guest ';
-			$str[] = (@$this->data['session_start']) ? gmdate('H:i:s', $this->data['session_start']) : 'guest   ';
-			$str[] = (@$this->sessiondata['sid']) ? sprintf('%-12s', strval($this->sessiondata['sid'])) : 'none        ';
-			$str[] = $_SERVER['REQUEST_URI'];
-		#	$str[] = 'REFERER: '. $_SERVER['HTTP_REFERER'];
-			$str[] = @$_SERVER['HTTP_USER_AGENT'];
-			$str = join(LOG_SEPR, $str) . LOG_LF;
-			bb_log($str, $file);
-		}
-		### LOG END ###
-
 		// Did the session exist in the DB?
 		if ($this->data)
 		{
