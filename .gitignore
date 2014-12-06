@@ -1,6 +1,6 @@
 ### TorrentPier ###
 .idea/
-data/avatars/**/
+data/avatars/
 data/old_files/
 data/torrent_files/
 internal_data/ajax_html/*.html
@@ -32,3 +32,5 @@ $RECYCLE.BIN/
 ._*
 .Spotlight-V100
 .Trashes
+*.orig
+*.rej
