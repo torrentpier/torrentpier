@@ -574,7 +574,7 @@ INSERT INTO `bb_cron` VALUES ('', '1', 'DS update stats', 'ds_update_stats.php',
 INSERT INTO `bb_cron` VALUES ('', '1', 'Flash topic view', 'flash_topic_view.php', 'interval', '', '', '255', '', '', '00:10:00', '0', '', '0', '0', '0');
 INSERT INTO `bb_cron` VALUES ('', '1', 'Clean search results', 'clean_search_results.php', 'interval', '', '', '255', '', '', '00:10:00', '0', '', '0', '0', '0');
 INSERT INTO `bb_cron` VALUES ('', '1', 'Tracker cleanup and dlstat', 'tr_cleanup_and_dlstat.php', 'interval', '', '', '20', '', '', '00:15:00', '0', '', '0', '0', '0');
-INSERT INTO `bb_cron` VALUES ('', '1', 'Accrual seedbonus', 'tr_seed_bonus.php', 'interval', '', '', '25', '', '', '00:10:00', '0', '', '0', '0', '0');
+INSERT INTO `bb_cron` VALUES ('', '1', 'Accrual seedbonus', 'tr_seed_bonus.php', 'interval', '', '', '25', '', '', '00:15:00', '0', '', '0', '0', '0');
 INSERT INTO `bb_cron` VALUES ('', '1', 'Make tracker snapshot', 'tr_make_snapshot.php', 'interval', '', '', '10', '', '', '00:10:00', '0', '', '0', '0', '0');
 INSERT INTO `bb_cron` VALUES ('', '1', 'Seeder last seen', 'tr_update_seeder_last_seen.php', 'interval', '', '', '255', '', '', '01:00:00', '0', '', '0', '0', '0');
 INSERT INTO `bb_cron` VALUES ('', '1', 'Tracker dl-complete count', 'tr_complete_count.php', 'interval', '', '', '255', '', '', '06:00:00', '0', '', '0', '0', '0');

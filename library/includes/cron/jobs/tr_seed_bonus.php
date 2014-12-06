@@ -38,11 +38,11 @@ if ($bb_cfg['seed_bonus_enabled'] && $bb_cfg['seed_bonus_points'] && $bb_cfg['se
 		DB()->query("
 			UPDATE ". BB_USERS ." u, ". BB_BT_USERS ." bu, tmp_bonus b
 			SET
-				u.user_points       = u.user_points + $user_points,
-				bu.points_today     = bu.points_today + $user_points,
+				u.user_points       = u.user_points + '$user_points',
+				bu.points_today     = bu.points_today + '$user_points',
 				b.user_id           = 0
 			WHERE
-			    b.user_id           =  u.user_id
+				b.user_id           =  u.user_id
 				AND bu.user_id      =  u.user_id
 				AND b.release_count <= $release
 				AND u.user_regdate  <  $user_regdate
