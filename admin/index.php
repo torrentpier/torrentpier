@@ -23,8 +23,8 @@ if (isset($_GET['pane']) && $_GET['pane'] == 'left')
 
 	$template->assign_vars(array(
 		'TPL_ADMIN_NAVIGATE' => true,
-		'U_FORUM_INDEX' => '../index.php',
-		'U_ADMIN_INDEX' => 'index.php?pane=right',
+		'U_FORUM_INDEX'      => '../index.php',
+		'U_ADMIN_INDEX'      => 'index.php?pane=right',
 	));
 
 	ksort($module);
@@ -269,6 +269,7 @@ else
 {
 	// Generate frameset
 	$template->assign_vars(array(
+		'CONTENT_ENCODING'   => $bb_cfg['lang'][$userdata['user_lang']]['encoding'],
 		'TPL_ADMIN_FRAMESET' => true,
 	));
 	send_no_cache_headers();

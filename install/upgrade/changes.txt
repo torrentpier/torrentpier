@@ -23,3 +23,4 @@ UPDATE `bb_cron` SET `cron_script` = 'board_maintenance.php' WHERE `cron_script`
 // 2.1.5
 DROP TABLE IF EXISTS `bb_captcha`;
 DELETE FROM `bb_cron` WHERE `cron_script` = 'captcha_gen_gc.php';
+INSERT INTO `bb_cron` VALUES ('', '1', 'Accrual seedbonus', 'tr_seed_bonus.php', 'interval', '', '', '25', '', '', '00:10:00', '0', '', '0', '0', '0');
