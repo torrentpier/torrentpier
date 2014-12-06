@@ -66,10 +66,6 @@ switch($mode)
 			}
 		}
 	break;
-
-	case 'refresh_captcha';
-		$html = CAPTCHA()->get_html();
-	break;
 }
 
 $this->response['html'] = $html;

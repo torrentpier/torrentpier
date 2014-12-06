@@ -26,8 +26,8 @@ ajax.callback.user_register = function(data){
 </tr>
 <!-- IF CAPTCHA_HTML -->
 <tr>
-	<td>{L_CONFIRM_CODE}:</td>
-	<td><span id="refresh_captcha">{CAPTCHA_HTML}</span> <img align="middle" src="./styles/images/pic_loading.gif" title="{L_UPDATE}" onclick="ajax.exec({ action: 'user_register', mode: 'refresh_captcha'}); return false;"></td>
+	<td>{L_CAPTCHA}: *</td>
+	<td>{CAPTCHA_HTML}</td>
 </tr>
 <!-- ENDIF -->
 <tr>

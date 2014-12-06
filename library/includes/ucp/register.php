@@ -148,14 +148,14 @@ switch ($mode)
 		trigger_error("invalid mode: $mode", E_USER_ERROR);
 }
 
-// CAPTCHA
-$need_captcha = ($mode == 'register' && !IS_ADMIN);
+// Captcha
+$need_captcha = ($mode == 'register' && !IS_ADMIN && !$bb_cfg['captcha']['disabled']);
 
 if ($submit)
 {
-	if ($need_captcha && !CAPTCHA()->verify_code())
+	if ($need_captcha && !bb_captcha('check'))
 	{
-		$errors[] = $lang['CONFIRM_CODE_WRONG'];
+		$errors[] = $lang['CAPTCHA_WRONG'];
 	}
 }
 
@@ -653,7 +653,7 @@ if ($submit && !$errors)
 			$emailer = new emailer($bb_cfg['smtp_delivery']);
 
 			$emailer->from($bb_cfg['sitename'] ." <{$bb_cfg['board_email']}>");
-			$emailer->email_address("$username <$email>");
+			$emailer->email_address($username ." <{$email}>");
 
 			$emailer->use_template($email_template, $user_lang);
 
@@ -691,9 +691,10 @@ if ($submit && !$errors)
 				require(CLASS_DIR .'emailer.php');
 				$emailer = new emailer($bb_cfg['smtp_delivery']);
 
- 				$emailer->from($bb_cfg['sitename'] ." <{$bb_cfg['board_email']}>");
+				$emailer->from($bb_cfg['sitename'] ." <{$bb_cfg['board_email']}>");
+				$emailer->email_address($username ." <{$email}>");
+
 				$emailer->use_template('user_activate', $pr_data['user_lang']);
-				$emailer->email_address("$username <$email>");
 
 				$emailer->assign_vars(array(
 					'SITENAME'   => $bb_cfg['sitename'],
@@ -726,11 +727,11 @@ if ($submit && !$errors)
 
 			cache_rm_user_sessions ($pr_data['user_id']);
 
-			if($adm_edit)
+			if ($adm_edit)
 			{
 				bb_die($lang['PROFILE_USER'] . ' <b>'. profile_url($pr_data) .'</b> '. $lang['GOOD_UPDATE']);
 			}
-			elseif(!$pr_data['user_active'])
+			elseif (!$pr_data['user_active'])
 			{
 				bb_die($lang['PROFILE_UPDATED_INACTIVE']);
 			}
@@ -757,7 +758,7 @@ $template->assign_vars(array(
 	'EDIT_PROFILE'       => ($mode == 'editprofile'),
 	'ADM_EDIT'           => $adm_edit,
 	'SHOW_PASS'          => ($adm_edit || ($mode == 'register' && IS_ADMIN)),
-	'CAPTCHA_HTML'       => ($need_captcha) ? CAPTCHA()->get_html() : '',
+	'CAPTCHA_HTML'       => ($need_captcha) ? bb_captcha('get') : '',
 
 	'LANGUAGE_SELECT'    => language_select($pr_data['user_lang'], 'user_lang'),
 	'TIMEZONE_SELECT'    => tz_select($pr_data['user_timezone'], 'user_timezone'),

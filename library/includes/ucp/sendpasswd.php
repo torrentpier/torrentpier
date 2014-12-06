@@ -6,16 +6,14 @@ set_die_append_msg();
 
 if ($bb_cfg['emailer_disabled']) bb_die($lang['EMAILER_DISABLED']);
 
-$need_captcha = ($_GET['mode'] == 'sendpassword' && !IS_ADMIN);
+$need_captcha = ($_GET['mode'] == 'sendpassword' && !IS_ADMIN && !$bb_cfg['captcha']['disabled']);
 
-if ( isset($_POST['submit']) )
+if (isset($_POST['submit']))
 {
-	if ($need_captcha && !CAPTCHA()->verify_code())	bb_die($lang['CONFIRM_CODE_WRONG']);
-	$email = ( !empty($_POST['email']) ) ? trim(strip_tags(htmlspecialchars($_POST['email']))) : '';
-	$sql = "SELECT *
-		FROM " . BB_USERS . "
-		WHERE user_email = '" . DB()->escape($email)."'";
-	if ( $result = DB()->sql_query($sql) )
+	if ($need_captcha && !bb_captcha('check')) bb_die($lang['CAPTCHA_WRONG']);
+	$email = (!empty($_POST['email'])) ? trim(strip_tags(htmlspecialchars($_POST['email']))) : '';
+	$sql = "SELECT * FROM " . BB_USERS . " WHERE user_email = '" . DB()->escape($email)."'";
+	if ($result = DB()->sql_query($sql))
 	{
 		if ( $row = DB()->sql_fetchrow($result) )
 		{
@@ -77,10 +75,10 @@ else
 }
 
 $template->assign_vars(array(
-	'USERNAME' => $username,
-	'EMAIL' => $email,
-	'CAPTCHA_HTML'       => ($need_captcha) ? CAPTCHA()->get_html() : '',
-	'S_HIDDEN_FIELDS' => '',
+	'USERNAME'         => $username,
+	'EMAIL'            => $email,
+	'CAPTCHA_HTML'     => ($need_captcha) ? bb_captcha('get') : '',
+	'S_HIDDEN_FIELDS'  => '',
 	'S_PROFILE_ACTION' => "profile.php?mode=sendpassword",
 ));
 

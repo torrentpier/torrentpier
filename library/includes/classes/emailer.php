@@ -98,11 +98,11 @@ class emailer
 
 		if (empty($this->tpl_msg[$template_lang . $template_file]))
 		{
-			$tpl_file = LANG_ROOT_DIR ."$template_lang/email/$template_file.tpl";
+			$tpl_file = LANG_ROOT_DIR ."$template_lang/email/$template_file.html";
 
 			if (!@file_exists(@bb_realpath($tpl_file)))
 			{
-				$tpl_file = LANG_ROOT_DIR ."{$bb_cfg['default_lang']}/email/$template_file.tpl";
+				$tpl_file = LANG_ROOT_DIR ."{$bb_cfg['default_lang']}/email/$template_file.html";
 
 				if (!@file_exists(@bb_realpath($tpl_file)))
 				{
@@ -133,7 +133,7 @@ class emailer
 	// Send the mail out to the recipients set previously in var $this->address
 	function send ($email_format = 'text')
 	{
-		global $bb_cfg, $lang;
+		global $bb_cfg, $userdata;
 
 		if ($bb_cfg['emailer_disabled'])
 		{
@@ -176,12 +176,12 @@ class emailer
 
 		if (preg_match('#^(Charset:(.*?))$#m', $this->msg, $match))
 		{
-			$this->encoding = (trim($match[2]) != '') ? trim($match[2]) : trim($lang['CONTENT_ENCODING']);
+			$this->encoding = (trim($match[2]) != '') ? trim($match[2]) : trim($bb_cfg['lang'][$userdata['user_lang']]['encoding']);
 			$drop_header .= '[\r\n]*?' . preg_quote($match[1], '#');
 		}
 		else
 		{
-			$this->encoding = trim($lang['CONTENT_ENCODING']);
+			$this->encoding = trim($bb_cfg['lang'][$userdata['user_lang']]['encoding']);
 		}
 		$this->subject = $this->encode($this->subject);
 

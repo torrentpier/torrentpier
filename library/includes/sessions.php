@@ -131,25 +131,6 @@ class user_common
 			}
 		}
 
-		##### LOG #####
-		global $log_ip_req;
-
-		if (isset($log_ip_req[USER_IP]) || isset($log_ip_req[CLIENT_IP]))
-		{
-			$file = 'sessions/'. date('m-d') .'_{'. USER_IP .'}_'. CLIENT_IP;
-			$str = array();
-			$str[] = date('H:i:s');
-			$str[] = (@$this->sessiondata['uid']) ? sprintf('%06d', strval($this->sessiondata['uid'])) : 'guest ';
-			$str[] = (@$this->data['session_start']) ? gmdate('H:i:s', $this->data['session_start']) : 'guest   ';
-			$str[] = (@$this->sessiondata['sid']) ? sprintf('%-12s', strval($this->sessiondata['sid'])) : 'none        ';
-			$str[] = $_SERVER['REQUEST_URI'];
-		#	$str[] = 'REFERER: '. $_SERVER['HTTP_REFERER'];
-			$str[] = @$_SERVER['HTTP_USER_AGENT'];
-			$str = join(LOG_SEPR, $str) . LOG_LF;
-			bb_log($str, $file);
-		}
-		### LOG END ###
-
 		// Did the session exist in the DB?
 		if ($this->data)
 		{
@@ -614,6 +595,7 @@ class user_common
 		if (!defined('LANG_DIR')) define('LANG_DIR', DEFAULT_LANG_DIR);
 
 		require(LANG_DIR .'main.php');
+		setlocale(LC_ALL, $bb_cfg['lang'][$this->data['user_lang']]['locale']);
 
 		$theme = setup_style();
 		$DeltaTime = new Date_Delta();
@@ -671,7 +653,7 @@ class user_common
 		}
 		else if (!empty($_COOKIE['opt_js']))
 		{
-			$opt_js = bb_json_decode($_COOKIE['opt_js']);
+			$opt_js = Zend\Json\Json::decode($_COOKIE['opt_js'], Zend\Json\Json::TYPE_ARRAY);
 
 			if (is_array($opt_js))
 			{

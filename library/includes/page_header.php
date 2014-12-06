@@ -110,6 +110,7 @@ $template->assign_vars(array(
 // The following assigns all _common_ variables that may be used at any point in a template
 $template->assign_vars(array(
 	'SIMPLE_HEADER'      => !empty($gen_simple_header),
+	'CONTENT_ENCODING'   => $bb_cfg['lang'][$userdata['user_lang']]['encoding'],
 
 	'IN_ADMIN'           => defined('IN_ADMIN'),
 	'SHOW_ADS'           => (!$logged_in || isset($bb_cfg['show_ads_users'][$user->id]) || (!IS_AM && $user->show_ads)),
@@ -118,7 +119,7 @@ $template->assign_vars(array(
 	'USER_LANG'          => $userdata['user_lang'],
 
 	'INCLUDE_BBCODE_JS'  => !empty($page_cfg['include_bbcode_js']),
-	'USER_OPTIONS_JS'    => (IS_GUEST) ? '{}' : bb_json_encode($user->opt_js),
+	'USER_OPTIONS_JS'    => (IS_GUEST) ? '{}' : Zend\Json\Json::encode($user->opt_js),
 
 	'USE_TABLESORTER'    => !empty($page_cfg['use_tablesorter']),
 

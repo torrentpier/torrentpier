@@ -62,6 +62,7 @@ if (!defined('BB_ROOT')) die(basename(__FILE__));
  * @author   Nasibullin Rinat
  * @version  2.2.2
  */
+
 class UTF8
 {
 	#REPLACEMENT CHARACTER (for broken char)

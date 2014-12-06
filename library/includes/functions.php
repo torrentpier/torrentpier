@@ -2287,7 +2287,7 @@ function get_poll_data_items_js ($topic_id)
 	}
 	foreach ($items as $k => $v)
 	{
-		$items[$k] = php2js($v);
+		$items[$k] = Zend\Json\Json::encode($v);
 	}
 
 	return is_array($topic_id) ? $items : $items[$topic_id];
@@ -2296,7 +2296,7 @@ function get_poll_data_items_js ($topic_id)
 function poll_is_active ($t_data)
 {
 	global $bb_cfg;
-	return ($t_data['topic_vote'] == 1 && $t_data['topic_time'] > TIMENOW - $bb_cfg['poll_max_days']*86400);
+	return ($t_data['topic_vote'] == 1 && $t_data['topic_time'] > TIMENOW - $bb_cfg['poll_max_days'] * 86400);
 }
 
 function print_confirmation ($tpl_vars)
@@ -2370,86 +2370,6 @@ function caching_output ($enabled, $mode, $cache_var_name, $ttl = 300)
 		{
 			CACHE('bb_cache')->set($cache_var_name, $output, $ttl);
 		}
-	}
-}
-
-//
-// Ajax
-//
-/**
- *  Encode PHP var to JSON (PHP -> JS)
- */
-function bb_json_encode ($data)
-{
-	return json_encode($data);
-}
-
-/**
- *  Decode JSON to PHP (JS -> PHP)
- */
-function bb_json_decode ($data)
-{
-	if (!is_string($data)) trigger_error('invalid argument for '. __FUNCTION__, E_USER_ERROR);
-	return json_decode($data, true);
-}
-
-/**
- * -- from JsHttpRequest --
- * Convert a PHP scalar, array or hash to JS scalar/array/hash. This function is
- * an analog of json_encode(), but it can work with a non-UTF8 input and does not
- * analyze the passed data. Output format must be fully JSON compatible.
- *
- * @param mixed $a   Any structure to convert to JS.
- * @return string    JavaScript equivalent structure.
- */
-function php2js ($a = false)
-{
-	if (is_null($a)) return 'null';
-	if ($a === false) return 'false';
-	if ($a === true) return 'true';
-	if (is_scalar($a))
-	{
-		if (is_float($a))
-		{
-			// Always use "." for floats.
-			$a = str_replace(",", ".", strval($a));
-		}
-		// All scalars are converted to strings to avoid indeterminism.
-		// PHP's "1" and 1 are equal for all PHP operators, but
-		// JS's "1" and 1 are not. So if we pass "1" or 1 from the PHP backend,
-		// we should get the same result in the JS frontend (string).
-		// Character replacements for JSON.
-		static $jsonReplaces = array(
-			array("\\", "/", "\n", "\t", "\r", "\b", "\f", '"'),
-			array('\\\\', '\\/', '\\n', '\\t', '\\r', '\\b', '\\f', '\"'),
-		);
-		return '"'. str_replace($jsonReplaces[0], $jsonReplaces[1], $a) .'"';
-	}
-	$isList = true;
-	for ($i = 0, reset($a); $i < count($a); $i++, next($a))
-	{
-		if (key($a) !== $i)
-		{
-			$isList = false;
-			break;
-		}
-	}
-	$result = array();
-	if ($isList)
-	{
-		foreach ($a as $v)
-		{
-			$result[] = php2js($v);
-		}
-		return '[ '. join(', ', $result) .' ]';
-	}
-	else
-	{
-		foreach ($a as $k => $v)
-		{
-			$result[] = php2js($k) .': '. php2js($v);
-		}
-		return '{ '. join(', ', $result) .' }';
 	}
 }
 
@@ -2668,20 +2588,6 @@ function set_pr_die_append_msg ($pr_uid)
 	');
 }
 
-function CAPTCHA ()
-{
-	static $captcha_obj = null;
-
-	if ($captcha_obj === null)
-	{
-		global $bb_cfg;
-		require(INC_DIR .'captcha/captcha.php');
-		$captcha_obj = new captcha_kcaptcha($bb_cfg['captcha']);
-	}
-
-	return $captcha_obj;
-}
-
 function send_pm ($user_id, $subject, $message, $poster_id = BOT_UID)
 {
 	global $userdata;
@@ -2868,4 +2774,54 @@ function hash_search ($hash)
 	{
 		bb_die(sprintf($lang['HASH_NOT_FOUND'], $hash));
 	}
+}
+
+function bb_captcha ($mode, $callback = '')
+{
+	global $bb_cfg, $userdata;
+
+	require_once(CLASS_DIR .'recaptcha.php');
+
+	$secret = $bb_cfg['captcha']['secret_key'];
+	$public = $bb_cfg['captcha']['public_key'];
+	$theme  = $bb_cfg['captcha']['theme'];
+	$lang   = $bb_cfg['lang'][$userdata['user_lang']]['captcha'];
+
+	$reCaptcha = new ReCaptcha($secret);
+
+	switch ($mode)
+	{
+		case 'get':
+			return "
+				<script type=\"text/javascript\">
+					var onloadCallback = function() {
+						grecaptcha.render('tp-captcha', {
+							'sitekey'  : '" . $public . "',
+							'theme'    : '" . $theme . "',
+							'callback' : '" . $callback . "'
+						});
+					};
+				</script>
+				<div id=\"tp-captcha\"></div>
+				<script src=\"https://www.google.com/recaptcha/api.js?onload=onloadCallback&hl=" . $lang . "&render=explicit\" async defer></script>";
+			break;
+
+		case 'check':
+			$resp = null;
+			$error = null;
+			$g_resp = request_var('g-recaptcha-response', '');
+			if ($g_resp) {
+				$resp = $reCaptcha->verifyResponse($_SERVER["REMOTE_ADDR"], $g_resp);
+			}
+			if ($resp != null && $resp->success) {
+				return true;
+			} else {
+				return false;
+			}
+			break;
+
+		default:
+			bb_simple_die(__FUNCTION__ .": invalid mode '$mode'");
+	}
+	return false;
 }

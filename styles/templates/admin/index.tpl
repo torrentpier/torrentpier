@@ -3,7 +3,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<meta http-equiv="Content-Type" content="text/html; charset={L_CONTENT_ENCODING}" />
+	<meta http-equiv="Content-Type" content="text/html; charset={CONTENT_ENCODING}" />
 	<meta http-equiv="Content-Style-Type" content="text/css" />
 	<title>{L_ADMIN}</title>
 </head>

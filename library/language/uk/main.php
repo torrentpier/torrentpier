@@ -1,8 +1,5 @@
 <?php
 
-setlocale(LC_ALL, 'uk_UA.UTF-8');
-$lang['CONTENT_ENCODING'] = 'UTF-8';
-
 // Common, these terms are used extensively on several pages
 $lang['ADMIN'] = 'Адміністрування';
 $lang['FORUM'] = 'Форум';
@@ -658,12 +655,6 @@ $lang['USER_AGREEMENT_AGREE'] = "Я прочитав УГОДУ і зобов'я
 $lang['COPYRIGHT_HOLDERS'] = 'Для правовласників';
 $lang['ADVERT'] = 'Реклама на сайті';
 $lang['NOT_FOUND'] = 'Файл не знайдено';
-
-// Visual confirmation system strings
-$lang['CONFIRM_CODE_WRONG'] = 'Ви ввели неправильний код підтвердження';
-$lang['CONFIRM_CODE_IMPAIRED'] = 'Якщо у вас поганий зір або ви не можете прочитати цей код по якійсь іншій причині, то зверніться за допомогою до %sАдміністратору%s.';
-$lang['CONFIRM_CODE'] = 'Код підтвердження';
-$lang['CONFIRM_CODE_EXPLAIN'] = 'Введіть код точно так, як ви його бачите. Код є реєстро-залежним, а символ нуля має косу лінію всередині цифри.';
 
 // Memberslist
 $lang['SORT'] = 'Упорядкувати';
@@ -2801,3 +2792,7 @@ $lang['UPLOAD_ERRORS'] = array(
 	UPLOAD_ERR_CANT_WRITE => 'помилка запису',
 	UPLOAD_ERR_EXTENSION  => 'завантаження зупинено через розширення',
 );
+
+// Captcha
+$lang['CAPTCHA'] = 'Перевірка, що ви не робот';
+$lang['CAPTCHA_WRONG'] = 'Ви не змогли підтвердити, що ви не робот';
