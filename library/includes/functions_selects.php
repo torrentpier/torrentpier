@@ -9,6 +9,7 @@ function language_select ($default_lang, $select_name = 'language')
 {
 	global $bb_cfg;
 
+	$lang_default = reset($bb_cfg['lang']);
 	$lang_select = '<select name="'. $select_name .'">';
 	$x = 0;
 	foreach ($bb_cfg['lang'] as $key => $data)
@@ -19,7 +20,7 @@ function language_select ($default_lang, $select_name = 'language')
 		$x++;
 	}
 	$lang_select .= '</select>';
-	return ($x > 1) ? $lang_select : reset($bb_cfg['lang'])['name'];
+	return ($x > 1) ? $lang_select : $lang_default['name'];
 }
 
 //
