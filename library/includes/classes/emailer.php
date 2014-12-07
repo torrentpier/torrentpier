@@ -2,6 +2,8 @@
 
 if (!defined('BB_ROOT')) die(basename(__FILE__));
 
+use Zend\Mail;
+
 class emailer
 {
 	var $msg, $subject, $extra_headers;

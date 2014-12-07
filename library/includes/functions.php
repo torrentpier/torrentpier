@@ -950,7 +950,7 @@ function humn_size ($size, $rounder = null, $min = null, $space = '&nbsp;')
 	}
 	else
 	{
-		for ($i=1, $cnt=count($sizes); ($i < $cnt && $size >= 1024); $i++)
+		for ($i = 1, $cnt = count($sizes); ($i < $cnt && $size >= 1024); $i++)
 		{
 			$size = $size / 1024;
 			$ext  = $sizes[$i];
@@ -1075,6 +1075,7 @@ function set_var (&$result, $var, $type, $multibyte = false, $strip = true)
 		$result = ($strip) ? stripslashes($result) : $result;
 	}
 }
+
 /**
 * request_var
 *
@@ -1749,18 +1750,6 @@ function generate_pagination ($base_url, $num_items, $per_page, $start_item, $ad
 }
 
 //
-// This does exactly what preg_quote() does in PHP 4-ish
-// If you just need the 1-parameter preg_quote call, then don't bother using this.
-//
-function bb_preg_quote ($str, $delimiter)
-{
-	$text = preg_quote($str);
-	$text = str_replace($delimiter, '\\' . $delimiter, $text);
-
-	return $text;
-}
-
-//
 // Obtain list of naughty words and build preg style replacement arrays for use by the
 // calling script, note that the vars are passed as references this just makes it easier
 // to return both sets of arrays
@@ -1780,7 +1769,6 @@ function obtain_word_list (&$orig_word, &$replacement_word)
 
 	foreach($sql as $row)
 	{
-		//$orig_word[] = '#(?<!\S)(' . str_replace('\*', '\S*?', preg_quote($row['word'], '#')) . ')(?!\S)#iu';
 		$orig_word[] = '#(?<![\p{Nd}\p{L}_])(' . str_replace('\*', '[\p{Nd}\p{L}_]*?', preg_quote($row['word'], '#')) . ')(?![\p{Nd}\p{L}_])#iu';
 		$replacement_word[] = $row['replacement'];
 	}
@@ -1920,12 +1908,12 @@ function get_forum_display_sort_option ($selected_row = 0, $action = 'list', $li
 	global $lang;
 
 	$forum_display_sort = array(
-		'lang_key'	=> array('LASTPOST', 'SORT_TOPIC_TITLE', 'SORT_TIME'),
-		'fields'	=> array('t.topic_last_post_time', 't.topic_title', 't.topic_time'),
+		'lang_key' => array('LASTPOST', 'SORT_TOPIC_TITLE', 'SORT_TIME'),
+		'fields'   => array('t.topic_last_post_time', 't.topic_title', 't.topic_time'),
 	);
 	$forum_display_order = array(
-		'lang_key'	=> array('DESC', 'ASC'),
-		'fields'	=> array('DESC', 'ASC'),
+		'lang_key' => array('DESC', 'ASC'),
+		'fields'   => array('DESC', 'ASC'),
 	);
 
 	// get the good list
@@ -1955,110 +1943,6 @@ function get_forum_display_sort_option ($selected_row = 0, $action = 'list', $li
 		$res = $listrow['fields'][$selected_row];
 	}
 	return $res;
-}
-
-function topic_attachment_image($switch_attachment)
-{
-	global $is_auth;
-
-	if (!$switch_attachment || !($is_auth['auth_download'] && $is_auth['auth_view']))
-	{
-		return '';
-	}
-	return '<img src="styles/images/icon_clip.gif" alt="" border="0" /> ';
-}
-
-/**
- * array_combine()
- *
- * @package  PHP_Compat
- * @link     http://php.net/function.array_combine
- * @author   Aidan Lister <aidan@php.net>
- * @version  $Revision: 1.21 $
- * @since    PHP 5
- */
-if (!function_exists('array_combine'))
-{
-	function array_combine($keys, $values)
-	{
-		if (!is_array($keys)) {
-			user_error('array_combine() expects parameter 1 to be array, ' .
-				gettype($keys) . ' given', E_USER_WARNING);
-			return;
-		}
-
-		if (!is_array($values)) {
-			user_error('array_combine() expects parameter 2 to be array, ' .
-				gettype($values) . ' given', E_USER_WARNING);
-			return;
-		}
-
-		$key_count   = count($keys);
-		$value_count = count($values);
-		if ($key_count !== $value_count) {
-			user_error('array_combine() both parameters should have equal number of elements', E_USER_WARNING);
-			return false;
-		}
-
-		if ($key_count === 0 || $value_count === 0) {
-			user_error('array_combine() both parameters should have number of elements at least 0', E_USER_WARNING);
-			return false;
-		}
-
-		$keys   = array_values($keys);
-		$values = array_values($values);
-
-		$combined = array();
-		for ($i = 0; $i < $key_count; $i++) {
-			$combined[$keys[$i]] = $values[$i];
-		}
-
-		return $combined;
-	}
-}
-
-/**
- * array_intersect_key()
- *
- * @package     PHP_Compat
- * @link        http://php.net/function.array_intersect_key
- * @author      Tom Buskens <ortega@php.net>
- * @version     $Revision: 1.4 $
- * @since       PHP 5.0.2
- */
-if (!function_exists('array_intersect_key')) {
-    function array_intersect_key()
-    {
-        $args = func_get_args();
-        if (count($args) < 2) {
-            user_error('Wrong parameter count for array_intersect_key()', E_USER_WARNING);
-            return;
-        }
-
-        // Check arrays
-        $array_count = count($args);
-        for ($i = 0; $i !== $array_count; $i++) {
-            if (!is_array($args[$i])) {
-                user_error('array_intersect_key() Argument #' .
-                    ($i + 1) . ' is not an array', E_USER_WARNING);
-                return;
-            }
-        }
-
-        // Compare entries
-        $result = array();
-        foreach ($args[0] as $key1 => $value1) {
-            for ($i = 1; $i !== $array_count; $i++) {
-                foreach ($args[$i] as $key2 => $value2) {
-                    if ((string) $key1 === (string) $key2) {
-                        $result[$key1] = $value1;
-                    }
-                }
-            }
-        }
-
-        return $result;
-    }
 }
 
 function clear_dl_list ($topics_csv)

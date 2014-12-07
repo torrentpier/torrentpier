@@ -654,7 +654,6 @@ if ($submit && !$errors)
 
 			$emailer->from($bb_cfg['sitename'] ." <{$bb_cfg['board_email']}>");
 			$emailer->email_address($username ." <{$email}>");
-
 			$emailer->use_template($email_template, $user_lang);
 
 			$emailer->assign_vars(array(
@@ -662,7 +661,6 @@ if ($submit && !$errors)
 				'WELCOME_MSG' => sprintf($lang['WELCOME_SUBJECT'], $bb_cfg['sitename']),
 				'USERNAME'    => html_entity_decode($username),
 				'PASSWORD'    => $new_pass,
-
 				'U_ACTIVATE'  => make_url('profile.php?mode=activate&' . POST_USERS_URL . '=' . $new_user_id . '&act_key=' . $db_data['user_actkey'])
 			));
 
@@ -693,7 +691,6 @@ if ($submit && !$errors)
 
 				$emailer->from($bb_cfg['sitename'] ." <{$bb_cfg['board_email']}>");
 				$emailer->email_address($username ." <{$email}>");
-
 				$emailer->use_template('user_activate', $pr_data['user_lang']);
 
 				$emailer->assign_vars(array(

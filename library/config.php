@@ -379,6 +379,18 @@ $bb_cfg['smtp_port']               = 25;    // SMTP server port
 $bb_cfg['smtp_username']           = '';    // enter a username if your SMTP server requires it
 $bb_cfg['smtp_password']           = '';    // enter a password if your SMTP server requires it
 
+$bb_cfg['smtp'] = array(
+	'name'              => 'yandex.ru',
+	'host'              => 'smtp.yandex.ru',
+	'port'              => 465,
+	'connection_class'  => 'login',
+	'connection_config' => array(
+		'username' => '',
+		'password' => '',
+		'ssl'      => 'ssl',
+	),
+);
+
 $bb_cfg['board_email']             = "noreply@$domain_name"; // admin email address
 $bb_cfg['board_email_form']        = false;        // can users send email to each other via board
 $bb_cfg['board_email_sig']         = '';           // this text will be attached to all emails the board sends
@@ -494,8 +506,8 @@ $bb_cfg['spam_filter_file_path']      = '';        // BB_PATH .'/misc/spam_filte
 $bb_cfg['autocorrect_wkl']            = true;      // autocorrect wrong keyboard layout
 
 // Posting
-$bb_cfg['prevent_multiposting']  = true;           // replace "reply" with "edit last msg" if user (not admin or mod) is last topic poster
-$bb_cfg['max_smilies']           = 10;             // Максимальное число смайлов в посте (0 - без ограничения)
+$bb_cfg['prevent_multiposting'] = true;           // replace "reply" with "edit last msg" if user (not admin or mod) is last topic poster
+$bb_cfg['max_smilies']          = 10;             // Максимальное число смайлов в посте (0 - без ограничения)
 
 // PM
 $bb_cfg['privmsg_disable']      = false;           // отключить систему личных сообщений на форуме

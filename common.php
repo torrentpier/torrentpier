@@ -25,7 +25,7 @@ require(BB_ROOT . 'library/Zend/Loader/StandardAutoloader.php');
 $loader = new StandardAutoloader(array('autoregister_zf' => true));
 $loader->register();
 
-// ZF use
+// ZF global use
 use Zend\Json;
 
 $server_protocol = ($bb_cfg['cookie_secure']) ? 'https://' : 'http://';
