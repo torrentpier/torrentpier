@@ -2664,14 +2664,14 @@ function bb_captcha ($mode, $callback = '')
 {
 	global $bb_cfg, $userdata;
 
-	require_once(CLASS_DIR .'recaptcha.php');
+	require_once(CLASS_DIR . 'recaptcha.php');
 
 	$secret = $bb_cfg['captcha']['secret_key'];
 	$public = $bb_cfg['captcha']['public_key'];
 	$theme  = $bb_cfg['captcha']['theme'];
 	$lang   = $bb_cfg['lang'][$userdata['user_lang']]['captcha'];
 
-	$reCaptcha = new ReCaptcha($secret);
+	$reCaptcha = new Google\ReCaptcha\Client($secret);
 
 	switch ($mode)
 	{
@@ -2692,12 +2692,15 @@ function bb_captcha ($mode, $callback = '')
 
 		case 'check':
 			$resp = null;
-			$error = null;
 			$g_resp = request_var('g-recaptcha-response', '');
 			if ($g_resp) {
-				$resp = $reCaptcha->verifyResponse($_SERVER["REMOTE_ADDR"], $g_resp);
+				try {
+					$resp = $reCaptcha->verifyResponse($_SERVER["REMOTE_ADDR"], $g_resp);
+				} catch (ReCaptchaException $e) {
+					$e->getError();
+				}
 			}
-			if ($resp != null && $resp->success) {
+			if (is_object($resp) && $resp->success === true) {
 				return true;
 			} else {
 				return false;
@@ -2705,7 +2708,7 @@ function bb_captcha ($mode, $callback = '')
 			break;
 
 		default:
-			bb_simple_die(__FUNCTION__ .": invalid mode '$mode'");
+			bb_simple_die(__FUNCTION__ . ": invalid mode '$mode'");
 	}
 	return false;
 }
