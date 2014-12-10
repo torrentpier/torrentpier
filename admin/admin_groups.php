@@ -12,8 +12,6 @@ require(INC_DIR .'functions_group.php');
 $group_id = isset($_REQUEST[POST_GROUPS_URL]) ? intval($_REQUEST[POST_GROUPS_URL]) : 0;
 $mode     = isset($_REQUEST['mode']) ? strval($_REQUEST['mode']) : '';
 
-attachment_quota_settings('group', isset($_POST['group_update']), $mode);
-
 if (!empty($_POST['edit']) || !empty($_POST['new']))
 {
 	if (!empty($_POST['edit']))

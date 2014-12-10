@@ -540,7 +540,6 @@ CREATE TABLE IF NOT EXISTS `bb_cron` (
 -- ----------------------------
 -- Records of bb_cron
 -- ----------------------------
-INSERT INTO `bb_cron` VALUES ('', '1', 'Attach maintenance', 'attach_maintenance.php', 'daily', '', '05:00:00', '40', '', '', '', '1', '', '0', '1', '0');
 INSERT INTO `bb_cron` VALUES ('', '1', 'Board maintenance', 'board_maintenance.php', 'daily', '', '05:00:00', '40', '', '', '', '1', '', '0', '1', '0');
 INSERT INTO `bb_cron` VALUES ('', '1', 'Prune forums', 'prune_forums.php', 'daily', '', '05:00:00', '50', '', '', '', '1', '', '0', '1', '0');
 INSERT INTO `bb_cron` VALUES ('', '1', 'Prune topic moved stubs', 'prune_topic_moved.php', 'daily', '', '05:00:00', '60', '', '', '', '1', '', '0', '1', '0');

@@ -57,3 +57,4 @@ INSERT INTO `bb_cron` VALUES ('', '1', 'Accrual seedbonus', 'tr_seed_bonus.php',
 // 2.1.6
 DROP TABLE IF EXISTS `bb_ads`;
 DELETE FROM `bb_config` WHERE `config_name` = 'active_ads';
+DELETE FROM `bb_cron` WHERE `cron_script` = 'attach_maintenance.php';

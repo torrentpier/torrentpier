@@ -177,7 +177,6 @@ BBCode.prototype = {
 	// Available key combinations and these interpretaions for BB are
 	// TAB              - Insert TAB char
 	// CTRL-TAB         - Next form field (usual TAB)
-	// SHIFT-ALT-PAGEUP - Add an Attachment
 	// ALT-ENTER        - Preview
 	// CTRL-ENTER       - Submit
 	onKeyPress: function(e, type) {
@@ -210,8 +209,6 @@ BBCode.prototype = {
 		// Hot keys
 		var form = this.textarea.form;
 		var submitter = null;
-		if (e.keyCode == this.VK_PAGE_UP &&  e.shiftKey && !e.ctrlKey &&  e.altKey)
-			submitter = form.add_attachment_box;
 		if (e.keyCode == this.VK_ENTER   &&!e.shiftKey && !e.ctrlKey &&  e.altKey)
 			submitter = form.preview;
 		if (e.keyCode == this.VK_ENTER   && !e.shiftKey &&  e.ctrlKey && !e.altKey)
