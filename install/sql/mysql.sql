@@ -1,25 +1,6 @@
 SET SQL_MODE = "";
 
 -- ----------------------------
--- Table structure for `bb_ads`
--- ----------------------------
-DROP TABLE IF EXISTS `bb_ads`;
-CREATE TABLE IF NOT EXISTS `bb_ads` (
-  `ad_id` mediumint(8) unsigned NOT NULL AUTO_INCREMENT,
-  `ad_block_ids` varchar(255) NOT NULL DEFAULT '',
-  `ad_start_time` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
-  `ad_active_days` smallint(6) NOT NULL DEFAULT '0',
-  `ad_status` tinyint(4) NOT NULL DEFAULT '1',
-  `ad_desc` varchar(255) NOT NULL DEFAULT '',
-  `ad_html` text NOT NULL,
-  PRIMARY KEY (`ad_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
-
--- ----------------------------
--- Records of bb_ads
--- ----------------------------
-
--- ----------------------------
 -- Table structure for `bb_attachments`
 -- ----------------------------
 DROP TABLE IF EXISTS `bb_attachments`;
@@ -509,7 +490,6 @@ INSERT INTO `bb_config` VALUES ('smilies_path', 'styles/images/smiles');
 INSERT INTO `bb_config` VALUES ('static_sitemap', '');
 INSERT INTO `bb_config` VALUES ('topics_per_page', '50');
 INSERT INTO `bb_config` VALUES ('xs_use_cache', '1');
-INSERT INTO `bb_config` VALUES ('active_ads', '');
 INSERT INTO `bb_config` VALUES ('cron_enabled', '1');
 INSERT INTO `bb_config` VALUES ('cron_check_interval', '180');
 INSERT INTO `bb_config` VALUES ('magnet_links_enabled', '1');

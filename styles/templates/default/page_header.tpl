@@ -279,9 +279,9 @@ if ( (typeof(window.opera) != "undefined" && window.opera.version() < 12) || (wi
 <script type="text/javascript">
 ajax.index_data = function(tz) {
 	ajax.exec({
-		action  : 'index_data',
-		mode    : 'change_tz',
-		tz      : tz
+		action : 'index_data',
+		mode   : 'change_tz',
+		tz     : tz
 	});
 };
 ajax.callback.index_data = function(data) {};
@@ -492,12 +492,6 @@ $(document).ready(function() {
 				</tr>
 			</table>
 		</div>
-
-<!-- IF AD_BLOCK_200 -->
-	<div id="ad-200">{AD_BLOCK_200}</div><!--/ad-200-->
-<!-- ELSEIF AD_BLOCK_100 -->
-	<div id="ad-100">{AD_BLOCK_100}</div><!--/ad-100-->
-<!-- ENDIF / AD_BLOCK_100 -->
 
 <!--=======================-->
 <!-- ENDIF / COMMON_HEADER -->

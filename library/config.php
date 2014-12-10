@@ -48,7 +48,6 @@
  * Users
  * Groups
  * Tidy
- * Ads
  * Misc
  * Extensions
  * Attachments
@@ -530,23 +529,6 @@ $bb_cfg['group_members_per_page']       = 50;
 
 // Tidy
 $bb_cfg['tidy_post'] = (!in_array('tidy', get_loaded_extensions())) ? false : true;
-
-// Ads
-$bb_cfg['show_ads'] = false;
-$bb_cfg['show_ads_users'] = array(
-#	user_id => 'name',
-	2      => 'admin',
-);
-
-// block_type => [block_id => block_desc]
-$bb_cfg['ad_blocks'] = array(
-	'trans' => array(
-		100 => 'сквозная сверху',
-	),
-	'index' => array(
-		200 => 'главная, под новостями',
-	),
-);
 
 // Misc
 define('MEM_USAGE', function_exists('memory_get_usage'));

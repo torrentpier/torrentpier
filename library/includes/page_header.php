@@ -5,7 +5,7 @@ if (defined('PAGE_HEADER_SENT')) return;
 
 // Parse and show the overall page header
 
-global $page_cfg, $userdata, $user, $ads, $bb_cfg, $template, $lang, $images;
+global $page_cfg, $userdata, $user, $bb_cfg, $template, $lang, $images;
 
 $logged_in = (int) !empty($userdata['session_logged_in']);
 
@@ -113,7 +113,6 @@ $template->assign_vars(array(
 	'CONTENT_ENCODING'   => $bb_cfg['lang'][$userdata['user_lang']]['encoding'],
 
 	'IN_ADMIN'           => defined('IN_ADMIN'),
-	'SHOW_ADS'           => (!$logged_in || isset($bb_cfg['show_ads_users'][$user->id]) || (!IS_AM && $user->show_ads)),
 	'USER_HIDE_CAT'      => (BB_SCRIPT == 'index'),
 
 	'USER_LANG'          => $userdata['user_lang'],
@@ -238,20 +237,6 @@ if (!empty($page_cfg['show_torhelp'][BB_SCRIPT]) && !empty($userdata['torhelp'])
 		$template->assign_vars(array(
 			'TORHELP_TOPICS'  => join("</li>\n<li>", $torhelp_topics),
 		));
-	}
-}
-
-// Ads
-if ($user->show_ads)
-{
-	$load_ads = array('trans');
-	if (defined('BB_SCRIPT'))
-	{
-		$load_ads[] = BB_SCRIPT;
-	}
-	foreach ($ads->get($load_ads) as $block_id => $ad_html)
-	{
-		$template->assign_var("AD_BLOCK_{$block_id}", $ad_html);
 	}
 }
 

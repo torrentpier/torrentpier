@@ -252,7 +252,6 @@ $bb_cfg['tor_no_tor_act'] = array(
 // Table names
 define('BUF_TOPIC_VIEW',          'buf_topic_view');
 define('BUF_LAST_SEEDER',         'buf_last_seeder');
-define('BB_ADS',                  'bb_ads');
 define('BB_ATTACH_CONFIG',        'bb_attachments_config');
 define('BB_ATTACHMENTS_DESC',     'bb_attachments_desc');
 define('BB_ATTACHMENTS',          'bb_attachments');
@@ -441,7 +440,6 @@ if (DBG_USER) require(INC_DIR .'functions_dev.php');
 
 $html = new html_common();
 $log_action = new log_action();
-$ads = new ads_common();
 
 // TODO temporarily 'cat_forums' always enqueued
 $datastore->enqueue(array('cat_forums'));

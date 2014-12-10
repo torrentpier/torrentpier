@@ -114,103 +114,6 @@ function is_unread ($ref, $topic_id = 0, $forum_id = 0)
 }
 
 //
-// Ads
-//
-class ads_common
-{
-	var $ad_blocks  = array();
-	var $active_ads = array();
-
-	/**
-	*  Constructor
-	*/
-	function ads_common ()
-	{
-		global $bb_cfg;
-
-		$this->ad_blocks  =& $bb_cfg['ad_blocks'];
-		$this->active_ads = !empty($bb_cfg['active_ads']) ? @unserialize($bb_cfg['active_ads']) : array();
-	}
-
-	/**
-	*  Get ads to show for each block
-	*/
-	function get ($block_types)
-	{
-		$ads = array();
-
-		if ($this->active_ads)
-		{
-			$block_ids = $this->get_block_ids($block_types);
-
-			if ($ad_ids = $this->get_ad_ids($block_ids))
-			{
-				$ad_html = $this->get_ads_html();
-
-				foreach ($ad_ids as $block_id => $ad_id)
-				{
-					$ads[$block_id] =& $ad_html[$ad_id];
-				}
-			}
-		}
-
-		return $ads;
-	}
-
-	/**
-	*  Get ads html
-	*/
-	function get_ads_html ()
-	{
-		global $datastore;
-		if (!$ads_html = $datastore->get('ads'))
-		{
-			$datastore->update('ads');
-			$ads_html = $datastore->get('ads');
-		}
-
-		return $ads_html;
-	}
-
-	/**
-	*  Get block_ids for specified block_types
-	*/
-	function get_block_ids ($block_types)
-	{
-		$block_ids = array();
-
-		foreach ($block_types as $block_type)
-		{
-			if ($blocks =& $this->ad_blocks[$block_type])
-			{
-				$block_ids = array_merge($block_ids, array_keys($blocks));
-			}
-		}
-
-		return $block_ids;
-	}
-
-	/**
-	*  Get ad_ids for specified blocks
-	*/
-	function get_ad_ids ($block_ids)
-	{
-		$ad_ids = array();
-
-		foreach ($block_ids as $block_id)
-		{
-			if ($ads =& $this->active_ads[$block_id])
-			{
-				shuffle($ads);
-				$ad_ids[$block_id] = $ads[0];
-			}
-		}
-
-		return $ad_ids;
-	}
-}
-
-//
 // Auth
 //
 define('AUTH_LIST_ALL', 0);
@@ -272,7 +175,7 @@ $bf['user_opt'] = array(
 	'dis_passkey'        => 7,  // Запрет на добавление passkey, он же запрет на скачивание торрентов
 	'user_porn_forums'   => 8,  // Скрывать контент 18+
 	'user_callseed'      => 9,  // Позвать скачавших
-	'user_hide_ads'      => 10, // Запрет на показ рекламы
+	'user_hide_ads'      => 10, // TODO: не используется
 	'dis_topic'          => 11, // Запрет на создание новых тем
 	'dis_post'           => 12, // Запрет на отправку сообщений
 	'dis_post_edit'      => 13, // Запрет на редактирование сообщений

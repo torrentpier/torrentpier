@@ -63,11 +63,6 @@ class user_common
 	var $id = null;
 
 	/**
-	*  Misc
-	*/
-	var $show_ads = false;
-
-	/**
 	*  Constructor
 	*/
 	function user_common ()
@@ -607,7 +602,6 @@ class user_common
 		}
 
 		$this->load_opt_js();
-		$this->enqueue_ads();
 	}
 
 	/**
@@ -758,20 +752,6 @@ class user_common
 			case   'csv': return join(',', $excluded);
 			case 'array': return $excluded;
 			case  'flip': return array_flip(explode(',', $excluded));
-		}
-	}
-
-	/**
-	*  Enqueue ads
-	*/
-	function enqueue_ads ()
-	{
-		global $datastore, $bb_cfg;
-
-		if ($bb_cfg['show_ads'] && !bf($this->opt, 'user_opt', 'user_hide_ads') && !defined('IN_ADMIN') && !defined('IN_AJAX'))
-		{
-			$datastore->enqueue('ads');
-			$this->show_ads = true;
 		}
 	}
 }
