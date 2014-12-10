@@ -72,8 +72,8 @@ $domain_name = 'torrentpier.me'; // enter here your primary domain name of your 
 $domain_name = (!empty($_SERVER['SERVER_NAME'])) ? $_SERVER['SERVER_NAME'] : $domain_name;
 
 // Version info
-$bb_cfg['tp_version'] = '2.1.5';
-$bb_cfg['tp_release_date'] = '06-12-2014';
+$bb_cfg['tp_version'] = '2.1.6';
+$bb_cfg['tp_release_date'] = '14-12-2014';
 $bb_cfg['tp_release_state'] = 'ALPHA';
 $bb_cfg['tp_zf_version'] = '2.3.3';
 
@@ -600,7 +600,7 @@ $bb_cfg['file_id_ext'] = array(
 // Attachments
 $bb_cfg['attach'] = array(
 	'upload_path' => DATA_DIR . 'torrent_files',      // путь к директории с torrent файлами
-	'max_size'    => 250*1024,                        // размер аватары в байтах
+	'max_size'    => 5*1024*1024,                     // максимальный размер файла в байтах
 );
 
 $bb_cfg['tor_forums_allowed_ext'] = array('torrent', 'zip', 'rar'); // для разделов с раздачами

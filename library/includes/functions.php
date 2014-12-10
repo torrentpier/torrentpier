@@ -2696,7 +2696,7 @@ function bb_captcha ($mode, $callback = '')
 			if ($g_resp) {
 				try {
 					$resp = $reCaptcha->verifyResponse($_SERVER["REMOTE_ADDR"], $g_resp);
-				} catch (ReCaptchaException $e) {
+				} catch (Google\ReCaptcha\Exception $e) {
 					$e->getError();
 				}
 			}
