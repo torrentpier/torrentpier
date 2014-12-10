@@ -830,23 +830,3 @@ function delete_user_sessions ($user_id)
 	$user_id = get_id_csv($user_id);
 	DB()->query("DELETE FROM ". BB_SESSIONS ." WHERE session_user_id IN($user_id)");
 }
-
-// deprecated
-function session_begin ($userdata, $page_id = 0, $enable_autologin = false, $auto_created = false)
-{
-	global $user;
-
-	$user->session_create($userdata, $auto_created);
-
-	return $user->data;
-}
-
-// deprecated
-function session_pagestart ($user_ip = USER_IP, $page_id = 0, $req_login = false)
-{
-	global $user;
-
-	$user->session_start(array('req_login' => $req_login));
-
-	return $user->data;
-}
