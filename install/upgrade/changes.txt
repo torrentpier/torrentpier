@@ -53,3 +53,7 @@ ALTER TABLE `bb_bt_tracker` ADD `complete` INT(11) NOT NULL DEFAULT '0' AFTER `c
 DROP TABLE IF EXISTS `bb_captcha`;
 DELETE FROM `bb_cron` WHERE `cron_script` = 'captcha_gen_gc.php';
 INSERT INTO `bb_cron` VALUES ('', '1', 'Accrual seedbonus', 'tr_seed_bonus.php', 'interval', '', '', '25', '', '', '00:15:00', '0', '', '0', '0', '0');
+
+// 2.1.6
+DROP TABLE IF EXISTS `bb_ads`;
+DELETE FROM `bb_config` WHERE `config_name` = 'active_ads';
