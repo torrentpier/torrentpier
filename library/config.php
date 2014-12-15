@@ -72,7 +72,7 @@ $domain_name = (!empty($_SERVER['SERVER_NAME'])) ? $_SERVER['SERVER_NAME'] : $do
 
 // Version info
 $bb_cfg['tp_version'] = '2.1.6';
-$bb_cfg['tp_release_date'] = '14-12-2014';
+$bb_cfg['tp_release_date'] = '20-12-2014';
 $bb_cfg['tp_release_state'] = 'ALPHA';
 $bb_cfg['tp_zf_version'] = '2.3.3';
 
@@ -127,7 +127,6 @@ $bb_cfg['cache']['engines'] = array(
 	'bb_config'     => array('filecache', array()),
 	'tr_cache'      => array('filecache', array()),
 	'session_cache' => array('filecache', array()),
-	'bb_cap_sid'    => array('filecache', array()),
 	'bb_login_err'  => array('filecache', array()),
 	'bb_poll_data'  => array('filecache', array()),
 );

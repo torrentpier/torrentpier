@@ -429,8 +429,6 @@ require(INC_DIR .'sessions.php');
 require(INC_DIR .'template.php');
 require(CORE_DIR .'mysql.php');
 
-define('SQL_LAYER', 'mysql');
-
 $bb_cfg = array_merge(bb_get_config(BB_CONFIG), $bb_cfg);
 
 $user = new user_common();
