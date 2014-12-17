@@ -658,7 +658,6 @@ td.topic_id { cursor: pointer; }
 
 <table width="100%" cellspacing="0">
 <tr>
-	<td width="40%" class="small"><span>{S_AUTH_LIST}</span></td>
 	<td width="60%" valign="top">
 		<table class="bRight small">
 		<tr>

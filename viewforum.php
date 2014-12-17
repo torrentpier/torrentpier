@@ -408,18 +408,6 @@ $template->assign_vars(array(
 	'S_DISPLAY_ORDER'     => $s_display_order,
 ));
 
-// User authorisation levels output
-$u_auth = array();
-$u_auth[] = ($is_auth['auth_post']) ? $lang['RULES_POST_CAN'] : $lang['RULES_POST_CANNOT'];
-$u_auth[] = ($is_auth['auth_reply']) ? $lang['RULES_REPLY_CAN'] : $lang['RULES_REPLY_CANNOT'];
-$u_auth[] = ($is_auth['auth_edit']) ? $lang['RULES_EDIT_CAN'] : $lang['RULES_EDIT_CANNOT'];
-$u_auth[] = ($is_auth['auth_delete']) ? $lang['RULES_DELETE_CAN'] : $lang['RULES_DELETE_CANNOT'];
-$u_auth[] = ($is_auth['auth_vote']) ? $lang['RULES_VOTE_CAN'] : $lang['RULES_VOTE_CANNOT'];
-$u_auth[] = ($is_auth['auth_attachments']) ? $lang['RULES_ATTACH_CAN'] : $lang['RULES_ATTACH_CANNOT'];
-$u_auth[] = ($is_auth['auth_download']) ? $lang['RULES_DOWNLOAD_CAN'] : $lang['RULES_DOWNLOAD_CANNOT'];
-$u_auth[] = ($is_auth['auth_mod']) ? $lang['RULES_MODERATE'] : '';
-$u_auth = join("<br />\n", $u_auth);
-
 $template->assign_vars(array(
 	'SHOW_JUMPBOX'        => true,
 	'PAGE_TITLE'          => htmlCHR($forum_data['forum_name']),
@@ -442,7 +430,6 @@ $template->assign_vars(array(
 	'TITLE_MATCH'         => htmlCHR($title_match),
 	'SELECT_TPP'          => ($select_tpp) ? build_select('tpp', $select_tpp, $topics_per_page, null, null, 'onchange="$(\'#tpp\').submit();"') : '',
 	'T_POST_NEW_TOPIC'    => ($forum_data['forum_status'] == FORUM_LOCKED) ? $lang['FORUM_LOCKED'] : $post_new_topic,
-	'S_AUTH_LIST'         => $u_auth,
 	'U_VIEW_FORUM'        => FORUM_URL . $forum_id,
 	'U_MARK_READ'         => FORUM_URL . $forum_id ."&amp;mark=topics",
 	'U_SEARCH_SELF'       => "search.php?uid={$userdata['user_id']}&f=$forum_id",

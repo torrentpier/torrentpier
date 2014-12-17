@@ -242,9 +242,7 @@ if ($post_id && !empty($t_data['prev_posts']))
 	$start = floor(($t_data['prev_posts'] - 1) / $posts_per_page) * $posts_per_page;
 }
 
-//
 // Is user watching this thread?
-//
 $can_watch_topic = $is_watching_topic = false;
 
 if ($bb_cfg['topic_notify_enabled'])
@@ -252,7 +250,6 @@ if ($bb_cfg['topic_notify_enabled'])
 	if ($userdata['session_logged_in'])
 	{
 		$can_watch_topic = TRUE;
-
 		if (!empty($t_data['notify_status']) && $t_data['notify_status'])
 		{
 			if (isset($_GET['unwatch']))
@@ -260,18 +257,14 @@ if ($bb_cfg['topic_notify_enabled'])
 				if ($_GET['unwatch'] == 'topic')
 				{
 					$is_watching_topic = 0;
-
 					DB()->query("DELETE FROM ". BB_TOPICS_WATCH ." WHERE topic_id = $topic_id AND user_id = {$userdata['user_id']}");
 				}
-
 				set_die_append_msg($forum_id, $topic_id);
 				bb_die($lang['NO_LONGER_WATCHING']);
-
 			}
 			else
 			{
 				$is_watching_topic = TRUE;
-
 				if (!$t_data['notify_status'])
 				{
 					DB()->query("UPDATE ". BB_TOPICS_WATCH ." SET notify_status = ". TOPIC_WATCH_NOTIFIED ." WHERE topic_id = $topic_id AND user_id = {$userdata['user_id']}");
@@ -285,16 +278,13 @@ if ($bb_cfg['topic_notify_enabled'])
 				if ($_GET['watch'] == 'topic')
 				{
 					$is_watching_topic = TRUE;
-
 					DB()->query("
 						INSERT INTO ". BB_TOPICS_WATCH ." (user_id, topic_id, notify_status)
 						VALUES (". $userdata['user_id'] .", $topic_id, ". TOPIC_WATCH_NOTIFIED .")
 					");
 				}
-
 				set_die_append_msg($forum_id, $topic_id);
 				bb_die($lang['YOU_ARE_WATCHING']);
-
 			}
 			else
 			{
@@ -441,59 +431,34 @@ $reply_alt = ( $t_data['forum_status'] == FORUM_LOCKED || $t_data['topic_status'
 // Set 'body' template for attach_mod
 $template->set_filenames(array('body' => 'viewtopic.tpl'));
 
-//
-// User authorisation levels output
-//
-$s_auth_can = (($is_auth['auth_post']) ? $lang['RULES_POST_CAN'] : $lang['RULES_POST_CANNOT']) . '<br />';
-$s_auth_can .= (($is_auth['auth_reply']) ? $lang['RULES_REPLY_CAN'] : $lang['RULES_REPLY_CANNOT']) . '<br />';
-$s_auth_can .= (($is_auth['auth_edit']) ? $lang['RULES_EDIT_CAN'] : $lang['RULES_EDIT_CANNOT']) . '<br />';
-$s_auth_can .= (($is_auth['auth_delete']) ? $lang['RULES_DELETE_CAN'] : $lang['RULES_DELETE_CANNOT']) . '<br />';
-$s_auth_can .= (($is_auth['auth_vote']) ? $lang['RULES_VOTE_CAN'] : $lang['RULES_VOTE_CANNOT']) . '<br />';
-$s_auth_can .= (($is_auth['auth_attachments']) ? $lang['RULES_ATTACH_CAN'] : $lang['RULES_ATTACH_CANNOT']) . '<br />';
-$s_auth_can .= (($is_auth['auth_download']) ? $lang['RULES_DOWNLOAD_CAN'] : $lang['RULES_DOWNLOAD_CANNOT']) . '<br />';
-
+// Moderator output
 $topic_mod = '';
-
 if ($is_auth['auth_mod'])
 {
-	$s_auth_can .= $lang['RULES_MODERATE'];
-	$topic_mod .= "<a href=\"modcp.php?" . POST_TOPIC_URL . "=$topic_id&amp;mode=delete&amp;sid=" . $userdata['session_id'] . '"><img src="' . $images['topic_mod_delete'] . '" alt="' . $lang['DELETE_TOPIC'] . '" title="' . $lang['DELETE_TOPIC'] . '" border="0" /></a>&nbsp;';
-	$topic_mod .= "<a href=\"modcp.php?" . POST_TOPIC_URL . "=$topic_id&amp;mode=move&amp;sid=" . $userdata['session_id'] . '"><img src="' . $images['topic_mod_move'] . '" alt="' . $lang['MOVE_TOPIC'] . '" title="' . $lang['MOVE_TOPIC'] . '" border="0" /></a>&nbsp;';
-	$topic_mod .= ( $t_data['topic_status'] == TOPIC_UNLOCKED ) ? "<a href=\"modcp.php?" . POST_TOPIC_URL . "=$topic_id&amp;mode=lock&amp;sid=" . $userdata['session_id'] . '"><img src="' . $images['topic_mod_lock'] . '" alt="' . $lang['LOCK_TOPIC'] . '" title="' . $lang['LOCK_TOPIC'] . '" border="0" /></a>&nbsp;' : "<a href=\"modcp.php?" . POST_TOPIC_URL . "=$topic_id&amp;mode=unlock&amp;sid=" . $userdata['session_id'] . '"><img src="' . $images['topic_mod_unlock'] . '" alt="' . $lang['UNLOCK_TOPIC'] . '" title="' . $lang['UNLOCK_TOPIC'] . '" border="0" /></a>&nbsp;';
-	$topic_mod .= "<a href=\"modcp.php?" . POST_TOPIC_URL . "=$topic_id&amp;mode=split&amp;sid=" . $userdata['session_id'] . '"><img src="' . $images['topic_mod_split'] . '" alt="' . $lang['SPLIT_TOPIC'] . '" title="' . $lang['SPLIT_TOPIC'] . '" border="0" /></a>&nbsp;';
-
-	if ($t_data['allow_reg_tracker'] || $t_data['topic_dl_type'] == TOPIC_DL_TYPE_DL || IS_ADMIN)
-	{
-		if ($t_data['topic_dl_type'] == TOPIC_DL_TYPE_DL)
-		{
-			$topic_mod .= "<a href=\"modcp.php?" . POST_TOPIC_URL . "=$topic_id&amp;mode=unset_download&amp;sid=" . $userdata['session_id'] . '"><img src="' . $images['topic_normal'] . '" alt="' . $lang['UNSET_DL_STATUS'] . '" title="' . $lang['UNSET_DL_STATUS'] . '" border="0" /></a>';
-		}
-		else
-		{
-			$topic_mod .= "<a href=\"modcp.php?" . POST_TOPIC_URL . "=$topic_id&amp;mode=set_download&amp;sid=" . $userdata['session_id'] . '"><img src="' . $images['topic_dl'] . '" alt="' . $lang['SET_DL_STATUS'] . '" title="' . $lang['SET_DL_STATUS'] . '" border="0" /></a>';
-		}
-	}
+	$locked = ($t_data['topic_status'] == TOPIC_LOCKED);
+	$topic_mod .= "<a href='modcp.php?" . POST_TOPIC_URL . "=$topic_id&amp;mode=delete'><img src='{$images['topic_mod_delete']}' alt='{$lang['DELETE_TOPIC']}' title='{$lang['DELETE_TOPIC']}' border='0' /></a>&nbsp;";
+	$topic_mod .= "<a href='modcp.php?" . POST_TOPIC_URL . "=$topic_id&amp;mode=move'><img src='{$images['topic_mod_move']}' alt='{$lang['MOVE_TOPIC']}' title='{$lang['MOVE_TOPIC']}' border='0 /></a>&nbsp;";
+	$topic_mod .= ($locked) ? "<a href='modcp.php?" . POST_TOPIC_URL . "=$topic_id&amp;mode=unlock'><img src='{$images['topic_mod_unlock']}' alt='{$lang['UNLOCK_TOPIC']}' title='{$lang['UNLOCK_TOPIC']}' border='0' /></a>&nbsp;" : "<a href='modcp.php?" . POST_TOPIC_URL . "=$topic_id&amp;mode=lock'><img src='{$images['topic_mod_lock']}' alt='{$lang['LOCK_TOPIC']}' title='{$lang['LOCK_TOPIC']}' border='0' /></a>&nbsp;";
+	$topic_mod .= "<a href='modcp.php?" . POST_TOPIC_URL . "=$topic_id&amp;mode=split'><img src='{$images['topic_mod_split']}' alt='{$lang['SPLIT_TOPIC']}' title='{$lang['SPLIT_TOPIC']}' border='0' /></a>&nbsp;";
 }
 elseif (($t_data['topic_poster'] == $userdata['user_id']) && $userdata['session_logged_in'] && $t_data['self_moderated'])
 {
-	$topic_mod .= "<a href=\"modcp.php?" . POST_TOPIC_URL . "=$topic_id&amp;mode=move&amp;sid=" . $userdata['session_id'] . '"><img src="' . $images['topic_mod_move'] . '" alt="' . $lang['MOVE_TOPIC'] . '" title="' . $lang['MOVE_TOPIC'] . '" border="0" /></a>&nbsp;';
+	$topic_mod .= "<a href='modcp.php?" . POST_TOPIC_URL . "=$topic_id&amp;mode=move'><img src='{$images['topic_mod_move']}' alt='{$lang['MOVE_TOPIC']}' title='{$lang['MOVE_TOPIC']}' border='0' /></a>&nbsp;";
 }
 
-//
 // Topic watch information
-//
 $s_watching_topic = $s_watching_topic_img = '';
 if ($can_watch_topic)
 {
 	if ($is_watching_topic)
 	{
-		$s_watching_topic = "<a href=\"". TOPIC_URL . $topic_id ."&amp;unwatch=topic&amp;start=$start&amp;sid=" . $userdata['session_id'] . '">' . $lang['STOP_WATCHING_TOPIC'] . '</a>';
-		$s_watching_topic_img = (isset($images['topic_un_watch'])) ? "<a href=\"" . TOPIC_URL . "$topic_id&amp;unwatch=topic&amp;start=$start&amp;sid=" . $userdata['session_id'] . '"><img src="' . $images['topic_un_watch'] . '" alt="' . $lang['STOP_WATCHING_TOPIC'] . '" title="' . $lang['STOP_WATCHING_TOPIC'] . '" border="0"></a>' : '';
+		$s_watching_topic = "<a href='". TOPIC_URL . $topic_id ."&amp;unwatch=topic'>{$lang['STOP_WATCHING_TOPIC']}</a>";
+		$s_watching_topic_img = (isset($images['topic_un_watch'])) ? "<a href='" . TOPIC_URL . "$topic_id&amp;unwatch=topic'><img src='{$images['topic_un_watch']}' alt='{$lang['STOP_WATCHING_TOPIC']}' title='{$lang['STOP_WATCHING_TOPIC']}' border='0'></a>" : '';
 	}
 	else
 	{
-		$s_watching_topic = "<a href=\"". TOPIC_URL . $topic_id ."&amp;watch=topic&amp;start=$start&amp;sid=" . $userdata['session_id'] . '">' . $lang['START_WATCHING_TOPIC'] . '</a>';
-		$s_watching_topic_img = (isset($images['Topic_watch'])) ? "<a href=\"". TOPIC_URL ."$topic_id&amp;watch=topic&amp;start=$start&amp;sid=" . $userdata['session_id'] . '"><img src="' . $images['Topic_watch'] . '" alt="' . $lang['START_WATCHING_TOPIC'] . '" title="' . $lang['START_WATCHING_TOPIC'] . '" border="0"></a>' : '';
+		$s_watching_topic = "<a href='". TOPIC_URL . $topic_id ."&amp;watch=topic'>{$lang['START_WATCHING_TOPIC']}</a>";
+		$s_watching_topic_img = (isset($images['topic_watch'])) ? "<a href='". TOPIC_URL ."$topic_id&amp;watch=topic'><img src='{$images['topic_watch']}' alt='{$lang['START_WATCHING_TOPIC']}' title='{$lang['START_WATCHING_TOPIC']}' border='0'></a>" : '';
 	}
 }
 
@@ -507,9 +472,7 @@ $pg_url .= ($posts_per_page != $bb_cfg['posts_per_page']) ? "&amp;ppp=$posts_per
 
 generate_pagination($pg_url, $total_replies, $posts_per_page, $start);
 
-//
 // Selects
-//
 $sel_previous_days = array(
 	0   => $lang['ALL_POSTS'],
 	1   => $lang['1_DAY'],
@@ -571,7 +534,6 @@ $template->assign_vars(array(
 	'S_SELECT_POST_DAYS'  => build_select('postdays', array_flip($sel_previous_days), $post_days),
 	'S_SELECT_POST_ORDER' => build_select('postorder', $sel_post_order_ary, $post_order),
 	'S_POST_DAYS_ACTION'  => TOPIC_URL . $topic_id . "&amp;start=$start",
-	'S_AUTH_LIST'         => $s_auth_can,
 	'S_TOPIC_ADMIN'       => $topic_mod,
 	'S_WATCH_TOPIC'       => $s_watching_topic,
 	'S_WATCH_TOPIC_IMG'   => $s_watching_topic_img,
@@ -883,7 +845,7 @@ $template->assign_vars(array(
 if (IS_ADMIN)
 {
 	$template->assign_vars(array(
-		'U_LOGS' => "admin/admin_log.php?sid={$userdata['session_id']}&amp;t=$topic_id&amp;db=900",
+		'U_LOGS' => "admin/admin_log.php?t=$topic_id&amp;db=365",
 	));
 }
 

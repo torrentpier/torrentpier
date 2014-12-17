@@ -619,25 +619,19 @@ function build_poll_add_form (src_el)
 
 <table width="100%">
 <tr>
-	<td width="40%" valign="top" nowrap="nowrap"><span class="small">{S_WATCH_TOPIC}</span><br />
-	<div class="small">
-<!-- IF S_TOPIC_ADMIN -->
-		<br clear="all" />
-		<div style="float: left;">{S_TOPIC_ADMIN}</div>
-<!-- ENDIF -->
-<!-- IF IS_ADMIN -->
-		<div class="med" style="float: right;">
-		Admin:&nbsp;
-		<a href="{U_LOGS}">{L_LOGS}</a>&nbsp;
+	<td valign="top" nowrap="nowrap">
+		<div class="small">
+			<!-- IF S_TOPIC_ADMIN -->
+			<br clear="all" />
+			<div style="float: left;">{L_MANAGE}: {S_TOPIC_ADMIN}</div>
+			<!-- ENDIF -->
+			<br clear="all" />
+			<div style="float: left;">{S_WATCH_TOPIC}</div>
+			<!-- IF IS_ADMIN -->
+			<br clear="all" />
+			<div style="float: left;"><a href="{U_LOGS}">{L_LOGS}</a></div>
+			<!-- ENDIF -->
 		</div>
-<!-- ENDIF -->
-<!-- IF S_DL_DELETE -->
-		<br clear="all" />
-		<div style="float: left;">{S_DL_DELETE}</div>
-<!-- ENDIF -->
-		<br clear="all" />
-		<div style="float: left;">{S_AUTH_LIST}</div>
-	</div>
 	</td>
 </tr>
 </table>

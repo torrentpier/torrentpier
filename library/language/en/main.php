@@ -213,18 +213,6 @@ $lang['TOPIC_POLL'] = '[ Poll ]';
 $lang['MARK_TOPICS_READ'] = 'Mark all topics read';
 $lang['TOPICS_MARKED_READ'] = 'The topics for this forum have just been marked read';
 
-$lang['RULES_POST_CAN'] = 'You <b>can</b> post new topics in this forum';
-$lang['RULES_POST_CANNOT'] = 'You <b>cannot</b> post new topics in this forum';
-$lang['RULES_REPLY_CAN'] = 'You <b>can</b> reply to topics in this forum';
-$lang['RULES_REPLY_CANNOT'] = 'You <b>cannot</b> reply to topics in this forum';
-$lang['RULES_EDIT_CAN'] = 'You <b>can</b> edit your posts in this forum';
-$lang['RULES_EDIT_CANNOT'] = 'You <b>cannot</b> edit your posts in this forum';
-$lang['RULES_DELETE_CAN'] = 'You <b>can</b> delete your posts in this forum';
-$lang['RULES_DELETE_CANNOT'] = 'You <b>cannot</b> delete your posts in this forum';
-$lang['RULES_VOTE_CAN'] = 'You <b>can</b> vote in polls in this forum';
-$lang['RULES_VOTE_CANNOT'] = 'You <b>cannot</b> vote in polls in this forum';
-$lang['RULES_MODERATE'] = 'You <b>can</b> moderate this forum';
-
 $lang['NO_TOPICS_POST_ONE'] = 'There are no posts in this forum.<br />Click on the <b>Post New Topic</b> link on this page to post one.';
 
 // Viewtopic
