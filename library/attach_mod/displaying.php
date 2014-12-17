@@ -17,7 +17,6 @@ function init_complete_extensions_data()
 
 	if (!$extension_informations = get_extension_informations())
 	{
-		$extension_informations = $GLOBALS['datastore']->update('attach_extensions'); //get_extension_informations()
 		$extension_informations = get_extension_informations();
 	}
 	$allowed_extensions = array();

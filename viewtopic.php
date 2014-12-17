@@ -131,12 +131,6 @@ if ($userdata['session_admin'] && !empty($_REQUEST['mod']))
 		$datastore->enqueue(array('viewtopic_forum_select'));
 	}
 }
-if ($t_data['topic_attachment'])
-{
-	$datastore->enqueue(array(
-		'attach_extensions',
-	));
-}
 
 // Find newest post
 if (($next_topic_id || @$_GET['view'] === 'newest') && !IS_GUEST && $topic_id)

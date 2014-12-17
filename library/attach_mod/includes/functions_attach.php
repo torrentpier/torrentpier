@@ -361,7 +361,7 @@ function get_total_attach_filesize($attach_ids)
 */
 function get_extension_informations()
 {
-	return $GLOBALS['datastore']->get('attach_extensions');
+	return; //$GLOBALS['datastore']->get('attach_extensions');
 }
 
 //

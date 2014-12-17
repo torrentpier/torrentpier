@@ -33,7 +33,6 @@ class datastore_common
 		'moderators'             => 'build_moderators.php',
 		'stats'                  => 'build_stats.php',
 		'ranks'                  => 'build_ranks.php',
-		'attach_extensions'      => 'build_attach_extensions.php',
 		'smile_replacements'     => 'build_smilies.php',
 	);
 

@@ -7,10 +7,6 @@ define('BB_ROOT',  './');
 require(BB_ROOT .'common.php');
 require(ATTACH_DIR .'attachment_mod.php');
 
-$datastore->enqueue(array(
-	'attach_extensions',
-));
-
 $download_id = request_var('id', 0);
 $thumbnail = request_var('thumb', 0);
 
