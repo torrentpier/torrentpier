@@ -1,3 +1,0 @@
-<?php
-
-$passwords = array();
