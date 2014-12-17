@@ -1,7 +1,5 @@
 <?php
 
-if (!defined('IN_FORUM')) die("Hacking attempt");
-
 require(ATTACH_DIR .'includes/functions_includes.php');
 require(ATTACH_DIR .'includes/functions_attach.php');
 require(ATTACH_DIR .'includes/functions_delete.php');

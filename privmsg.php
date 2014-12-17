@@ -1,6 +1,5 @@
 <?php
 
-define('IN_FORUM',   true);
 define('BB_SCRIPT', 'pm');
 define('IN_PM',     true);
 define('BB_ROOT', './');

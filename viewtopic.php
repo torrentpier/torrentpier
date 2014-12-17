@@ -1,6 +1,5 @@
 <?php
 
-define('IN_FORUM', true);
 define('BB_SCRIPT', 'topic');
 define('BB_ROOT', './');
 require(BB_ROOT .'common.php');
@@ -60,32 +59,6 @@ if (!$topic_id && !$post_id)
 
 $tracking_topics = get_tracks('topic');
 $tracking_forums = get_tracks('forum');
-
-// Find topic id if user requested a newer or older topic
-if ($topic_id && isset($_GET['view']) && ($_GET['view'] == 'next' || $_GET['view'] == 'previous'))
-{
-	$sql_condition = ($_GET['view'] == 'next') ? '>' : '<';
-	$sql_ordering = ($_GET['view'] == 'next') ? 'ASC' : 'DESC';
-
-	$sql = "SELECT t.topic_id
-		FROM ". BB_TOPICS ." t, ". BB_TOPICS ." t2
-		WHERE t2.topic_id = $topic_id
-			AND t.forum_id = t2.forum_id
-			AND t.topic_moved_id = 0
-			AND t.topic_last_post_id $sql_condition t2.topic_last_post_id
-		ORDER BY t.topic_last_post_id $sql_ordering
-		LIMIT 1";
-
-	if ($row = DB()->fetch_row($sql))
-	{
-		$next_topic_id = $topic_id = $row['topic_id'];
-	}
-	else
-	{
-		$message = ($_GET['view'] == 'next') ? $lang['NO_NEWER_TOPICS'] : $lang['NO_OLDER_TOPICS'];
-		bb_die($message);
-	}
-}
 
 // Get forum/topic data
 if ($topic_id)

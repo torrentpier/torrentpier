@@ -1,7 +1,5 @@
 <?php
 
-if (!defined('IN_FORUM')) die("Hacking attempt");
-
 $allowed_extensions = array();
 $display_categories = array();
 $download_modes = array();

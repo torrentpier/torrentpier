@@ -1,7 +1,5 @@
 <?php
 
-if (!defined('IN_FORUM')) die("Hacking attempt");
-
 $imagick = '';
 
 /**

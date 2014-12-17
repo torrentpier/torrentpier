@@ -12,7 +12,6 @@ if (empty($_SERVER['HTTP_REFERER']))    $_SERVER['HTTP_REFERER'] = '';
 if (empty($_SERVER['SERVER_NAME']))     $_SERVER['SERVER_NAME'] = '';
 
 if (!defined('BB_ROOT')) define('BB_ROOT', './');
-if (!defined('IN_FORUM') && !defined('IN_TRACKER')) define('IN_FORUM', true);
 
 header('X-Frame-Options: SAMEORIGIN');
 
@@ -476,7 +475,7 @@ function log_request ($file = '', $prepend_str = false, $add_post = true)
 }
 
 // Board init
-if (defined('IN_FORUM'))
+if (!defined('IN_TRACKER'))
 {
 	require(INC_DIR .'init_bb.php');
 }

@@ -1,7 +1,5 @@
 <?php
 
-if (!defined('IN_FORUM')) die("Hacking attempt");
-
 define('FILENAME_PREFIX',         false);
 define('FILENAME_PREFIX_LENGTH',  6);
 define('FILENAME_MAX_LENGTH',     180);

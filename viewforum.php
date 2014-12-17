@@ -1,6 +1,5 @@
 <?php
 
-define('IN_FORUM',   true);
 define('BB_SCRIPT', 'forum');
 define('BB_ROOT', './');
 require(BB_ROOT . 'common.php');
