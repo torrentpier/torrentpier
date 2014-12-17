@@ -58,3 +58,6 @@ INSERT INTO `bb_cron` VALUES ('', '1', 'Accrual seedbonus', 'tr_seed_bonus.php',
 DROP TABLE IF EXISTS `bb_ads`;
 DELETE FROM `bb_config` WHERE `config_name` = 'active_ads';
 DELETE FROM `bb_cron` WHERE `cron_script` = 'attach_maintenance.php';
+DROP TABLE IF EXISTS `bb_attachments_config`;
+DROP TABLE IF EXISTS `bb_attach_quota`;
+DROP TABLE IF EXISTS `bb_quota_limits`;

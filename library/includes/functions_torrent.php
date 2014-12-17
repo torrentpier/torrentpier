@@ -180,7 +180,7 @@ function delete_torrent ($attach_id, $mode = '')
 
 function change_tor_status ($attach_id, $new_tor_status)
 {
-	global $topic_id, $userdata;
+	global $lang, $topic_id, $userdata;
 
 	$attach_id = (int) $attach_id;
 	$new_tor_status = (int) $new_tor_status;
@@ -378,7 +378,7 @@ function tracker_register ($attach_id, $mode = '', $tor_status = TOR_NOT_APPROVE
 		bb_die($mess);
 	}
 
-	return;
+	return true;
 }
 
 function send_torrent_with_passkey ($filename)

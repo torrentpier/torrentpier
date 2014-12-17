@@ -27,7 +27,7 @@ function base64_pack($number)
 
 	if ($number > 4096)
 	{
-		return;
+		return false;
 	}
 	else if ($number < $base)
 	{

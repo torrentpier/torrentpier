@@ -1525,7 +1525,7 @@ function bb_date ($gmepoch, $format = false, $friendly_date = true)
 function birthday_age ($date)
 {
 	global $bb_cfg;
-	if (!$date) return;
+	if (!$date) return false;
 
 	$tz = TIMENOW + (3600 * $bb_cfg['board_timezone']);
 	return delta_time(strtotime($date, $tz));
@@ -1661,7 +1661,7 @@ function obtain_word_list (&$orig_word, &$replacement_word)
 {
 	global $bb_cfg;
 
-	if (!$bb_cfg['use_word_censor']) return;
+	if (!$bb_cfg['use_word_censor']) return false;
 
 	if (!$sql = CACHE('bb_cache')->get('censored'))
 	{
