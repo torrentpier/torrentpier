@@ -349,7 +349,7 @@ if ($lp_info && $lp_info['update_time'] < TIMENOW)
 $up_add = ($lp_info && $uploaded > $lp_info['uploaded']) ? $uploaded - $lp_info['uploaded'] : 0;
 $down_add = ($lp_info && $downloaded > $lp_info['downloaded']) ? $downloaded - $lp_info['downloaded'] : 0;
 
-// Gold/Silver releases
+// Gold / silver releases
 if ($tr_cfg['gold_silver_enabled'] && $down_add)
 {
 	if ($tor_type == TOR_TYPE_GOLD)
@@ -363,7 +363,10 @@ if ($tr_cfg['gold_silver_enabled'] && $down_add)
 	}
 }
 
-// Insert/update peer info
+// Freeleech
+if ($tr_cfg['freeleech'] && $down_add) $down_add = 0;
+
+// Insert / update peer info
 $peer_info_updated = false;
 $update_time = ($stopped) ? 0 : TIMENOW;
 

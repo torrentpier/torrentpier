@@ -197,6 +197,7 @@ $tr_cfg = array(
 	'gold_silver_enabled'   => true,
 	'retracker'             => true,
 	'retracker_host'        => 'http://retracker.local/announce',
+	'freeleech'             => false,
 );
 
 $bb_cfg['show_dl_status_in_search'] = true;
@@ -441,12 +442,6 @@ ini_set('error_reporting', E_ALL);
 ini_set('display_errors',  0);
 ini_set('log_errors',      1);
 ini_set('error_log',       LOG_DIR .'php_err.log');
-
-// Check some variable
-// Magic quotes
-if (get_magic_quotes_gpc()) die('Set magic_quotes off');
-// JSON
-if (!function_exists('json_encode')) die('Json_encode not installed');
 
 // Triggers
 define('BB_ENABLED',   TRIGGERS_DIR .'$on');
