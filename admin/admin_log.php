@@ -135,9 +135,6 @@ if ($var =& $_REQUEST[$topic_key])
 	$url = ($topic_csv) ? url_arg($url, $topic_key, $topic_csv) : $url;
 }
 
-// Order
-$order_val = 'log_time';
-
 // Sort
 $sort_val = $def_sort;
 
@@ -188,42 +185,20 @@ if ($var =& $_REQUEST[$title_match_key])
 //
 // SQL
 //
-$select = "SELECT *";
+$where = " WHERE l.log_time BETWEEN '$time_start_val' AND '$time_end_val'";
+$where .= ($type_csv) ? " AND l.log_type_id IN($type_csv)" : '';
+$where .= ($user_csv) ? " AND l.log_user_id IN($user_csv)" : '';
+$where .= ($forum_csv) ? " AND l.log_forum_id IN($forum_csv)" : '';
+$where .= ($topic_csv) ? " AND l.log_topic_id IN($topic_csv)" : '';
+$where .= ($title_match_sql) ? " AND MATCH (l.log_topic_title) AGAINST ('$title_match_sql' IN BOOLEAN MODE)" : '';
 
-$from = "FROM ". BB_LOG;
-
-$where = "
-	WHERE log_time BETWEEN $time_start_val AND $time_end_val
-";
-$where .= ($type_csv) ? "
-		AND log_type_id IN($type_csv)
-" :	'';
-$where .= ($user_csv) ? "
-		AND log_user_id IN($user_csv)
-" :	'';
-$where .= ($forum_csv) ? "
-		AND log_forum_id IN($forum_csv)
-" :	'';
-$where .= ($topic_csv) ? "
-		AND log_topic_id IN($topic_csv)
-" :	'';
-$where .= ($title_match_sql) ? "
-		AND MATCH (log_topic_title) AGAINST ('$title_match_sql' IN BOOLEAN MODE)
-" :	'';
-
-$order = "ORDER BY $order_val";
-
-$sort = $sort_val;
-
-$limit = "LIMIT $start, ". ($per_page + 1);
-
-$sql = "
-	$select
-	$from
+$sql = "SELECT l.*, u.*
+	FROM ". BB_LOG ." l 
+	LEFT JOIN ". BB_USERS ." u ON(u.user_id = l.log_user_id)
 	$where
-	$order
-		$sort
-	$limit
+	ORDER BY l.log_time
+	$sort_val
+	LIMIT $start, ". ($per_page + 1)."
 ";
 
 $log_rowset = DB()->fetch_rowset($sql);
@@ -302,7 +277,7 @@ if ($log_rowset)
 			'ACTION_HREF_S'    => url_arg($url, $type_key, $row['log_type_id']),
 
 			'USER_ID'          => $row['log_user_id'],
-			'USERNAME'         => $row['log_username'],
+			'USERNAME'         => profile_url($row),
 			'USER_HREF_S'      => url_arg($url, $user_key, $row['log_user_id']),
 			'USER_IP'          => decode_ip($row['log_user_ip']),
 
@@ -351,12 +326,12 @@ if ($log_rowset)
 			$filter['forums'][$forum_name] = true;
 		}
 		// Users
-		if ($user_csv && empty($filter['users'][$row['log_username']]))
+		if ($user_csv && empty($filter['users']))
 		{
 			$template->assign_block_vars('users', array(
-				'USERNAME' => $row['log_username'],
+				'USERNAME' => profile_url($row),
 			));
-			$filter['users'][$row['log_username']] = true;
+			$filter['users'] = true;
 		}
 	}
 

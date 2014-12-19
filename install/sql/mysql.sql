@@ -666,7 +666,6 @@ DROP TABLE IF EXISTS `bb_log`;
 CREATE TABLE IF NOT EXISTS `bb_log` (
   `log_type_id` mediumint(8) unsigned NOT NULL DEFAULT '0',
   `log_user_id` mediumint(9) NOT NULL DEFAULT '0',
-  `log_username` varchar(25) NOT NULL DEFAULT '',
   `log_user_ip` varchar(32) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL DEFAULT '',
   `log_forum_id` smallint(5) unsigned NOT NULL DEFAULT '0',
   `log_forum_id_new` smallint(5) unsigned NOT NULL DEFAULT '0',
