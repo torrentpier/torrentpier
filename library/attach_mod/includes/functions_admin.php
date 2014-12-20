@@ -1,12 +1,5 @@
 <?php
 
-/**
-* All Attachment Functions only needed in Admin
-*/
-
-/**
-* Set/Change Quotas
-*/
 function process_quota_settings($mode, $id, $quota_type, $quota_limit_id = 0)
 {
 	$id = (int) $id;

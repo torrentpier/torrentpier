@@ -5,22 +5,23 @@ define('BB_ROOT', './');
 require(BB_ROOT .'common.php');
 require(INC_DIR .'bbcode.php');
 
-$user->session_start();
-
 $datastore->enqueue(array(
 	'ranks',
 ));
-
-$topic_id = isset($_GET[POST_TOPIC_URL]) ? (int) $_GET[POST_TOPIC_URL] : 0;
-$post_id  = (!$topic_id && isset($_GET[POST_POST_URL])) ? (int) $_GET[POST_POST_URL] : 0;
-$start    = isset($_GET['start']) ? abs(intval($_GET['start'])) : 0;
-$newest   = 0;
 
 $page_cfg['load_tpl_vars'] = array(
 	'post_buttons',
 	'post_icons',
 	'topic_icons',
 );
+
+$user->session_start();
+
+$topic_id = isset($_GET[POST_TOPIC_URL]) ? (int) $_GET[POST_TOPIC_URL] : 0;
+$post_id  = (!$topic_id && isset($_GET[POST_POST_URL])) ? (int) $_GET[POST_POST_URL] : 0;
+$start    = isset($_GET['start']) ? abs(intval($_GET['start'])) : 0;
+$newest   = 0;
+
 
 // Posts per page
 $posts_per_page = $bb_cfg['posts_per_page'];
@@ -374,24 +375,17 @@ if (!$ranks = $datastore->get('ranks'))
 	$ranks = $datastore->get('ranks');
 }
 
-//
 // Define censored word matches
-//
 $orig_word = $replacement_word = array();
 obtain_word_list($orig_word, $replacement_word);
 
-//
 // Censor topic title
-//
-if ( count($orig_word) )
+if (count($orig_word))
 {
 	$topic_title = preg_replace($orig_word, $replacement_word, $topic_title);
 }
 
-//
-// Post, reply and other URL generation for
-// templating vars
-//
+// Post, reply and other URL generation for templating vars
 $new_topic_url = POSTING_URL . "?mode=newtopic&amp;f=" . $forum_id;
 $reply_topic_url = POSTING_URL . "?mode=reply&amp;t=" . $topic_id;
 $view_forum_url = FORUM_URL . $forum_id;
@@ -649,19 +643,12 @@ for($i = 0; $i < $total_posts; $i++)
 	// Replace naughty words
 	if (count($orig_word))
 	{
-		if ($user_sig)
-		{
-			$user_sig = str_replace('\"', '"', substr(@preg_replace('#(\>(((?>([^><]+|(?R)))*)\<))#se', "@preg_replace(\$orig_word, \$replacement_word, '\\0')", '>' . $user_sig . '<'), 1, -1));
-		}
-
+		if ($user_sig) $user_sig = str_replace('\"', '"', substr(@preg_replace('#(\>(((?>([^><]+|(?R)))*)\<))#se', "@preg_replace(\$orig_word, \$replacement_word, '\\0')", '>' . $user_sig . '<'), 1, -1));
 		$message = str_replace('\"', '"', substr(@preg_replace('#(\>(((?>([^><]+|(?R)))*)\<))#se', "@preg_replace(\$orig_word, \$replacement_word, '\\0')", '>' . $message . '<'), 1, -1));
 	}
 
 	// Replace newlines (we use this rather than nl2br because till recently it wasn't XHTML compliant)
-	if ($user_sig)
-	{
-		$user_sig = $bb_cfg['user_signature_start'] . $user_sig . $bb_cfg['user_signature_end'];
-	}
+	if ($user_sig) $user_sig = $bb_cfg['user_signature_start'] . $user_sig . $bb_cfg['user_signature_end'];
 
 	// Editing information
 	if ($postrow[$i]['post_edit_count'])
@@ -702,6 +689,8 @@ for($i = 0; $i < $total_posts; $i++)
 		$mc_select_type[$key] = $value['type'];
 	}
 
+	$is_first_post = ($post_id == $t_data['topic_first_post_id']);
+
 	$template->assign_block_vars('postrow', array(
 		'ROW_CLASS'          => !($i % 2) ? 'row1' : 'row2',
 		'POST_ID'            => $post_id,
@@ -721,7 +710,7 @@ for($i = 0; $i < $total_posts; $i++)
 		'POSTER_GENDER'      => ($bb_cfg['gender']) ? gender_image($postrow[$i]['user_gender']) : '',
 		'POSTED_AFTER'       => ($prev_post_time) ? delta_time($postrow[$i]['post_time'], $prev_post_time) : '',
 		'IS_UNREAD'          => is_unread($postrow[$i]['post_time'], $topic_id, $forum_id),
-		'IS_FIRST_POST'      => (!$start && ($post_id == $t_data['topic_first_post_id'])),
+		'IS_FIRST_POST'      => (!$start && $is_first_post),
 		'MOD_CHECKBOX'       => ($moderation && ($start || defined('SPLIT_FORM_START'))),
 		'POSTER_AVATAR'      => $poster_avatar,
 		'POST_NUMBER'        => ($i + $start + 1),
@@ -759,7 +748,26 @@ for($i = 0; $i < $total_posts; $i++)
 		display_post_attachments($post_id, $postrow[$i]['post_attachment']);
 	}
 
-	if ($moderation && !defined('SPLIT_FORM_START') && ($start || $post_id == $t_data['topic_first_post_id']))
+	if ($is_first_post && $t_data['attach_ext_id'])
+	{
+		if (IS_GUEST)
+		{
+			$template->assign_var('SHOW_GUEST_DL_STUB', ($t_data['attach_ext_id'] == 8));
+		}
+		else if ($t_data['attach_ext_id'] == 8)
+		{
+			require(INC_DIR .'viewtopic_torrent.php');
+		}
+		else
+		{
+			$template->assign_vars(array(
+				'SHOW_ATTACH_DL_LINK' => true,
+				'ATTACH_FILESIZE'     => humn_size($t_data['filesize']),
+			));
+		}
+	}
+
+	if ($moderation && !defined('SPLIT_FORM_START') && ($start || $is_first_post))
 	{
 		define('SPLIT_FORM_START', TRUE);
 	}

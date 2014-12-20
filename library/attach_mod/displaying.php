@@ -185,10 +185,6 @@ function display_attachments($post_id)
 
 	for ($i = 0; $i < $num_attachments; $i++)
 	{
-		// Some basic things...
-		$filename = $upload_dir . '/' . basename($attachments['_' . $post_id][$i]['physical_filename']);
-		$thumbnail_filename = $upload_dir . '/' . THUMB_DIR . '/t_' . basename($attachments['_' . $post_id][$i]['physical_filename']);
-
 		$upload_image = '';
 
 		if ($attach_config['upload_img'] && empty($upload_icons[$attachments['_' . $post_id][$i]['extension']]))
@@ -225,97 +221,9 @@ function display_attachments($post_id)
 			$thumbnail = FALSE;
 			$link = FALSE;
 
-			if (@intval($display_categories[$attachments['_' . $post_id][$i]['extension']]) == IMAGE_CAT && intval($attach_config['img_display_inlined']))
-			{
-				if (intval($attach_config['img_link_width']) != 0 || intval($attach_config['img_link_height']) != 0)
-				{
-					list($width, $height) = image_getdimension($filename);
-
-					if ($width == 0 && $height == 0)
-					{
-						$image = TRUE;
-					}
-					else
-					{
-						if ($width <= intval($attach_config['img_link_width']) && $height <= intval($attach_config['img_link_height']))
-						{
-							$image = TRUE;
-						}
-					}
-				}
-				else
-				{
-					$image = TRUE;
-				}
-			}
-
-			if (@intval($display_categories[$attachments['_' . $post_id][$i]['extension']]) == IMAGE_CAT && $attachments['_' . $post_id][$i]['thumbnail'] == 1)
-			{
-				$thumbnail = TRUE;
-				$image = FALSE;
-			}
-
 			if (!$image && !$thumbnail)
 			{
 				$link = TRUE;
-			}
-
-			if ($image)
-			{
-				// Images
-				if ($attach_config['upload_dir'][0] == '/' || ( $attach_config['upload_dir'][0] != '/' && $attach_config['upload_dir'][1] == ':'))
-				{
-					$img_source = BB_ROOT . DOWNLOAD_URL . $attachments['_' . $post_id][$i]['attach_id'];
-					$download_link = TRUE;
-				}
-				else
-				{
-					$img_source = $filename;
-					$download_link = FALSE;
-				}
-
-				$template->assign_block_vars('postrow.attach.cat_images', array(
-					'DOWNLOAD_NAME'  => $display_name,
-					'S_UPLOAD_IMAGE' => $upload_image,
-					'IMG_SRC'        => $img_source,
-					'FILESIZE'       => $filesize,
-					'COMMENT'        => $comment,
-				));
-
-				// Directly Viewed Image ... update the download count
-				if (!$download_link)
-				{
-					$sql = 'UPDATE ' . BB_ATTACHMENTS_DESC . '
-						SET download_count = download_count + 1
-						WHERE attach_id = ' . (int) $attachments['_' . $post_id][$i]['attach_id'];
-
-					if (!(DB()->sql_query($sql)))
-					{
-						bb_die('Could not update attachment download count');
-					}
-				}
-			}
-
-			if ($thumbnail)
-			{
-				// Images, but display Thumbnail
-				if ($attach_config['upload_dir'][0] == '/' || ( $attach_config['upload_dir'][0] != '/' && $attach_config['upload_dir'][1] == ':'))
-				{
-					$thumb_source = BB_ROOT . DOWNLOAD_URL . $attachments['_' . $post_id][$i]['attach_id'] . '&thumb=1';
-				}
-				else
-				{
-					$thumb_source = $thumbnail_filename;
-				}
-
-				$template->assign_block_vars('postrow.attach.cat_thumb_images', array(
-					'DOWNLOAD_NAME'  => $display_name,
-					'S_UPLOAD_IMAGE' => $upload_image,
-					'IMG_SRC'        => BB_ROOT . DOWNLOAD_URL . $attachments['_' . $post_id][$i]['attach_id'],
-					'IMG_THUMB_SRC'  => $thumb_source,
-					'FILESIZE'       => $filesize,
-					'COMMENT'        => $comment,
-				));
 			}
 
 			// bt

@@ -1,25 +1,5 @@
 <?php
 
-/**
-* All Attachment Functions needed everywhere
-*/
-
-/**
-* html_entity_decode replacement (from php manual)
-*/
-if (!function_exists('html_entity_decode'))
-{
-	function html_entity_decode($given_html, $quote_style = ENT_QUOTES)
-	{
-		$trans_table = array_flip(get_html_translation_table(HTML_SPECIALCHARS, $quote_style));
-		$trans_table['&#39;'] = "'";
-		return (strtr($given_html, $trans_table));
-	}
-}
-
-/**
-* A simple dectobase64 function
-*/
 function base64_pack($number)
 {
 	$chars = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ+-';
@@ -51,9 +31,6 @@ function base64_pack($number)
 	return $hexval;
 }
 
-/**
-* base64todec function
-*/
 function base64_unpack($string)
 {
 	$chars = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ+-';
@@ -74,10 +51,6 @@ function base64_unpack($string)
 	return $number;
 }
 
-/**
-* Per Forum based Extension Group Permissions (Encode Number) -> Theoretically up to 158 Forums saveable. :)
-* We are using a base of 64, but splitting it to one-char and two-char numbers. :)
-*/
 function auth_pack($auth_array)
 {
 	$one_char_encoding = '#';
@@ -105,9 +78,6 @@ function auth_pack($auth_array)
 	return $auth_cache;
 }
 
-/**
-* Reverse the auth_pack process
-*/
 function auth_unpack($auth_cache)
 {
 	$one_char_encoding = '#';
@@ -138,9 +108,6 @@ function auth_unpack($auth_cache)
 	return $auth;
 }
 
-/**
-* Used for determining if Forum ID is authed, please use this Function on all Posting Screens
-*/
 function is_forum_authed($auth_cache, $check_forum_id)
 {
 	$one_char_encoding = '#';
@@ -179,9 +146,6 @@ function is_forum_authed($auth_cache, $check_forum_id)
 	return false;
 }
 
-/**
-* Deletes an Attachment
-*/
 function unlink_attach($filename, $mode = false)
 {
 	global $upload_dir, $attach_config;
@@ -202,9 +166,6 @@ function unlink_attach($filename, $mode = false)
 	return $deleted;
 }
 
-/**
-* Check if Attachment exist
-*/
 function attachment_exists($filename)
 {
 	global $upload_dir, $attach_config;
@@ -221,28 +182,6 @@ function attachment_exists($filename)
 	}
 }
 
-/**
-* Check if Thumbnail exist
-*/
-function thumbnail_exists($filename)
-{
-	global $upload_dir, $attach_config;
-
-	$filename = basename($filename);
-
-	if (!@file_exists(@amod_realpath($upload_dir . '/' . THUMB_DIR . '/t_' . $filename)))
-	{
-		return false;
-	}
-	else
-	{
-		return true;
-	}
-}
-
-/**
-* Physical Filename stored already ?
-*/
 function physical_filename_already_stored($filename)
 {
 	if ($filename == '')
@@ -267,9 +206,6 @@ function physical_filename_already_stored($filename)
 	return ($num_rows == 0) ? false : true;
 }
 
-/**
-* get all attachments from a post (could be an post array too)
-*/
 function get_attachments_from_post($post_id_array)
 {
 	global $attach_config;
@@ -321,9 +257,6 @@ function get_attachments_from_post($post_id_array)
 	return $attachments;
 }
 
-/**
-* Count Filesize of Attachments in Database based on the attachment id
-*/
 function get_total_attach_filesize($attach_ids)
 {
 	if (!is_array($attach_ids) || !sizeof($attach_ids))
@@ -361,7 +294,7 @@ function get_total_attach_filesize($attach_ids)
 */
 function get_extension_informations()
 {
-	return; //$GLOBALS['datastore']->get('attach_extensions');
+	return;
 }
 
 //
