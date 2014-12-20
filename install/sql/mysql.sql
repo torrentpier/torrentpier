@@ -1,47 +1,6 @@
 SET SQL_MODE = "";
 
 -- ----------------------------
--- Table structure for `bb_attachments`
--- ----------------------------
-DROP TABLE IF EXISTS `bb_attachments`;
-CREATE TABLE IF NOT EXISTS `bb_attachments` (
-  `attach_id` mediumint(8) unsigned NOT NULL DEFAULT '0',
-  `post_id` mediumint(8) unsigned NOT NULL DEFAULT '0',
-  `user_id_1` mediumint(8) NOT NULL DEFAULT '0',
-  PRIMARY KEY (`attach_id`,`post_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
-
--- ----------------------------
--- Records of bb_attachments
--- ----------------------------
-
--- ----------------------------
--- Table structure for `bb_attachments_desc`
--- ----------------------------
-DROP TABLE IF EXISTS `bb_attachments_desc`;
-CREATE TABLE IF NOT EXISTS `bb_attachments_desc` (
-  `attach_id` mediumint(8) unsigned NOT NULL AUTO_INCREMENT,
-  `physical_filename` varchar(255) NOT NULL DEFAULT '',
-  `real_filename` varchar(255) NOT NULL DEFAULT '',
-  `download_count` mediumint(8) unsigned NOT NULL DEFAULT '0',
-  `comment` varchar(255) NOT NULL DEFAULT '',
-  `extension` varchar(100) NOT NULL DEFAULT '',
-  `mimetype` varchar(100) NOT NULL DEFAULT '',
-  `filesize` int(20) NOT NULL DEFAULT '0',
-  `filetime` int(11) NOT NULL DEFAULT '0',
-  `thumbnail` tinyint(1) NOT NULL DEFAULT '0',
-  `tracker_status` tinyint(1) NOT NULL DEFAULT '0',
-  PRIMARY KEY (`attach_id`),
-  KEY `filetime` (`filetime`),
-  KEY `filesize` (`filesize`),
-  KEY `physical_filename` (`physical_filename`(10))
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
-
--- ----------------------------
--- Records of bb_attachments_desc
--- ----------------------------
-
--- ----------------------------
 -- Table structure for `bb_auth_access`
 -- ----------------------------
 DROP TABLE IF EXISTS `bb_auth_access`;
@@ -185,7 +144,6 @@ CREATE TABLE IF NOT EXISTS `bb_bt_torrents` (
   `poster_id` mediumint(9) NOT NULL DEFAULT '0',
   `topic_id` mediumint(8) unsigned NOT NULL DEFAULT '0',
   `forum_id` smallint(5) unsigned NOT NULL DEFAULT '0',
-  `attach_id` mediumint(8) unsigned NOT NULL DEFAULT '0',
   `size` bigint(20) unsigned NOT NULL DEFAULT '0',
   `reg_time` int(11) NOT NULL DEFAULT '0',
   `call_seed_time` int(11) NOT NULL DEFAULT '0',
@@ -200,7 +158,6 @@ CREATE TABLE IF NOT EXISTS `bb_bt_torrents` (
   PRIMARY KEY (`info_hash`),
   UNIQUE KEY `post_id` (`post_id`),
   UNIQUE KEY `topic_id` (`topic_id`),
-  UNIQUE KEY `attach_id` (`attach_id`),
   KEY `reg_time` (`reg_time`),
   KEY `forum_id` (`forum_id`),
   KEY `poster_id` (`poster_id`)
@@ -731,7 +688,6 @@ CREATE TABLE IF NOT EXISTS `bb_posts` (
   `post_username` varchar(25) NOT NULL DEFAULT '',
   `post_edit_time` int(11) NOT NULL DEFAULT '0',
   `post_edit_count` smallint(5) unsigned NOT NULL DEFAULT '0',
-  `post_attachment` tinyint(1) NOT NULL DEFAULT '0',
   `user_post` tinyint(1) NOT NULL DEFAULT '1',
   `mc_comment` text NOT NULL,
   `mc_type` tinyint(1) NOT NULL DEFAULT '0',
@@ -996,7 +952,6 @@ CREATE TABLE IF NOT EXISTS `bb_topics` (
   `topic_first_post_id` mediumint(8) unsigned NOT NULL DEFAULT '0',
   `topic_last_post_id` mediumint(8) unsigned NOT NULL DEFAULT '0',
   `topic_moved_id` mediumint(8) unsigned NOT NULL DEFAULT '0',
-  `topic_attachment` tinyint(1) NOT NULL DEFAULT '0',
   `topic_dl_type` tinyint(1) NOT NULL DEFAULT '0',
   `attach_ext_id` tinyint(4) NOT NULL DEFAULT '0',
   `filesize` mediumint(8) unsigned NOT NULL DEFAULT '0',

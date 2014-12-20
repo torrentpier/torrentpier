@@ -529,7 +529,7 @@ require(INC_DIR .'torrent_show_dl_list.php');
 
 if ($t_data['topic_attachment'])
 {
-	require(ATTACH_DIR .'attachment_mod.php');
+	require(INC_DIR .'old_attachment.php');
 	init_display_post_attachments($t_data['topic_attachment']);
 }
 

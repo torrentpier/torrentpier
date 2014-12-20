@@ -1,37 +1,96 @@
 <?php
 
-$allowed_extensions = array();
-$display_categories = array();
-$download_modes = array();
-$upload_icons = array();
-$attachments = array();
+function get_attachments_from_post($post_id_array)
+{
+	global $attach_config;
+
+	$attachments = array();
+
+	if (!is_array($post_id_array))
+	{
+		if (empty($post_id_array))
+		{
+			return $attachments;
+		}
+
+		$post_id = intval($post_id_array);
+
+		$post_id_array = array();
+		$post_id_array[] = $post_id;
+	}
+
+	$post_id_array = implode(', ', array_map('intval', $post_id_array));
+
+	if ($post_id_array == '')
+	{
+		return $attachments;
+	}
+
+	$display_order = (intval($attach_config['display_order']) == 0) ? 'DESC' : 'ASC';
+
+	$sql = 'SELECT a.post_id, d.*
+		FROM ' . BB_ATTACHMENTS . ' a, ' . BB_ATTACHMENTS_DESC . " d
+		WHERE a.post_id IN ($post_id_array)
+			AND a.attach_id = d.attach_id
+		ORDER BY d.filetime $display_order";
+
+	if (!($result = DB()->sql_query($sql)))
+	{
+		bb_die('Could not get attachment informations for post number ' . $post_id_array);
+	}
+
+	$num_rows = DB()->num_rows($result);
+	$attachments = DB()->sql_fetchrowset($result);
+	DB()->sql_freeresult($result);
+
+	if ($num_rows == 0)
+	{
+		return array();
+	}
+
+	return $attachments;
+}
+
 
 /**
-* Create needed arrays for Extension Assignments
+* Get attachment mod configuration
 */
-function init_complete_extensions_data()
+function get_config()
 {
-	global $allowed_extensions, $display_categories, $download_modes, $upload_icons;
+	global $bb_cfg;
 
-	if (!$extension_informations = get_extension_informations())
-	{
-		$extension_informations = get_extension_informations();
-	}
-	$allowed_extensions = array();
+	$attach_config = array();
 
-	for ($i = 0, $size = sizeof($extension_informations); $i < $size; $i++)
+	$sql = 'SELECT * FROM ' . BB_ATTACH_CONFIG;
+
+	if (!($result = DB()->sql_query($sql)))
 	{
-		$extension = strtolower(trim($extension_informations[$i]['extension']));
-		$allowed_extensions[] = $extension;
-		$display_categories[$extension] = intval($extension_informations[$i]['cat_id']);
-		$download_modes[$extension] = intval($extension_informations[$i]['download_mode']);
-		$upload_icons[$extension] = trim($extension_informations[$i]['upload_icon']);
+		bb_die('Could not query attachment information');
 	}
+
+	while ($row = DB()->sql_fetchrow($result))
+	{
+		$attach_config[$row['config_name']] = trim($row['config_value']);
+	}
+
+	// We assign the original default board language here, because it gets overwritten later with the users default language
+	$attach_config['board_lang'] = trim($bb_cfg['default_lang']);
+
+	return $attach_config;
+}
+
+// Get Attachment Config
+$attach_config = array();
+
+if (!$attach_config = CACHE('bb_cache')->get('attach_config'))
+{
+	$attach_config = get_config();
+	CACHE('bb_cache')->set('attach_config', $attach_config, 86400);
 }
 
 /**
-* Writing Data into plain Template Vars
-*/
+ * Writing Data into plain Template Vars
+ */
 function init_display_template($template_var, $replacement, $filename = 'viewtopic_attach.tpl')
 {
 	global $template;
@@ -81,8 +140,8 @@ function init_display_template($template_var, $replacement, $filename = 'viewtop
 }
 
 /**
-* Display Attachments in Posts
-*/
+ * Display Attachments in Posts
+ */
 function display_post_attachments($post_id, $switch_attachment)
 {
 	global $attach_config, $is_auth;
@@ -99,8 +158,8 @@ function display_post_attachments($post_id, $switch_attachment)
 }
 
 /**
-* Initializes some templating variables for displaying Attachments in Posts
-*/
+ * Initializes some templating variables for displaying Attachments in Posts
+ */
 function init_display_post_attachments($switch_attachment)
 {
 	global $attach_config, $is_auth, $template, $lang, $postrow, $total_posts, $attachments, $forum_row, $t_data;
@@ -158,18 +217,8 @@ function init_display_post_attachments($switch_attachment)
 
 	init_display_template('body', '{postrow.ATTACHMENTS}');
 
-	init_complete_extensions_data();
 }
 
-/**
-* END ATTACHMENT DISPLAY IN POSTS
-*/
-
-/**
-* Assign Variables and Definitions based on the fetched Attachments - internal
-* used by all displaying functions, the Data was collected before, it's only dependend on the template used. :)
-* before this function is usable, init_display_attachments have to be called for specific pages (pm, posting, review etc...)
-*/
 function display_attachments($post_id)
 {
 	global $template, $upload_dir, $userdata, $allowed_extensions, $display_categories, $download_modes, $lang, $attachments, $upload_icons, $attach_config;
@@ -204,48 +253,22 @@ function display_attachments($post_id)
 
 		$denied = false;
 
-		// Admin is allowed to view forbidden Attachments, but the error-message is displayed too to inform the Admin
-		if (!in_array($attachments['_' . $post_id][$i]['extension'], $allowed_extensions))
-		{
-			$denied = true;
-
-			$template->assign_block_vars('postrow.attach.denyrow', array(
-				'L_DENIED' => sprintf($lang['EXTENSION_DISABLED_AFTER_POSTING'], $attachments['_' . $post_id][$i]['extension']))
-			);
-		}
-
 		if (!$denied || IS_ADMIN)
 		{
-			// define category
-			$image = FALSE;
-			$thumbnail = FALSE;
-			$link = FALSE;
+			$target_blank = ( (@intval($display_categories[$attachments['_' . $post_id][$i]['extension']]) == IMAGE_CAT) ) ? 'target="_blank"' : '';
 
-			if (!$image && !$thumbnail)
-			{
-				$link = TRUE;
-			}
-
-			// bt
-			if ($link && ($attachments['_'. $post_id][$i]['extension'] === TORRENT_EXT))
-			{
-				include(ATTACH_DIR .'displaying_torrent.php');
-			}
-			else if ($link)
-			{
-				$target_blank = ( (@intval($display_categories[$attachments['_' . $post_id][$i]['extension']]) == IMAGE_CAT) ) ? 'target="_blank"' : '';
-
-				// display attachment
-				$template->assign_block_vars('postrow.attach.attachrow', array(
-					'U_DOWNLOAD_LINK' => BB_ROOT . DOWNLOAD_URL . $attachments['_' . $post_id][$i]['attach_id'],
-					'S_UPLOAD_IMAGE'  => $upload_image,
-					'DOWNLOAD_NAME'   => $display_name,
-					'FILESIZE'        => $filesize,
-					'COMMENT'         => $comment,
-					'TARGET_BLANK'    => $target_blank,
-					'DOWNLOAD_COUNT'  => sprintf($lang['DOWNLOAD_NUMBER'], $attachments['_' . $post_id][$i]['download_count']),
-				));
-			}
+			// display attachment
+			$template->assign_block_vars('postrow.attach.attachrow', array(
+				'U_DOWNLOAD_LINK' => BB_ROOT . DOWNLOAD_URL . $attachments['_' . $post_id][$i]['attach_id'],
+				'S_UPLOAD_IMAGE'  => $upload_image,
+				'DOWNLOAD_NAME'   => $display_name,
+				'FILESIZE'        => $filesize,
+				'COMMENT'         => $comment,
+				'TARGET_BLANK'    => $target_blank,
+				'DOWNLOAD_COUNT'  => sprintf($lang['DOWNLOAD_NUMBER'], $attachments['_' . $post_id][$i]['download_count']),
+			));
 		}
 	}
 }
+
+$upload_dir = $attach_config['upload_dir'];

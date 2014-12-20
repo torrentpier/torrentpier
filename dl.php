@@ -4,7 +4,6 @@ define('BB_SCRIPT', 'dl');
 define('NO_GZIP', true);
 define('BB_ROOT',  './');
 require(BB_ROOT .'common.php');
-require(ATTACH_DIR .'attachment_mod.php');
 
 $download_id = request_var('id', 0);
 $thumbnail = request_var('thumb', 0);
@@ -17,15 +16,6 @@ function send_file_to_browser($attachment, $upload_dir)
 	$filename = ($upload_dir == '') ? $attachment['physical_filename'] : $upload_dir . '/' . $attachment['physical_filename'];
 
 	$gotit = false;
-
-	if (@!file_exists(@amod_realpath($filename)))
-	{
-		bb_die($lang['ERROR_NO_ATTACHMENT'] . "<br /><br />" . $filename. "<br /><br />" .$lang['TOR_NOT_FOUND']);
-	}
-	else
-	{
-		$gotit = true;
-	}
 
 	// Correct the mime type - we force application/octet-stream for all files, except images
 	// Please do not change this, it is a security precaution
@@ -80,11 +70,6 @@ set_die_append_msg();
 if (!$download_id)
 {
 	bb_die($lang['NO_ATTACHMENT_SELECTED']);
-}
-
-if ($attach_config['disable_mod'] && !IS_ADMIN)
-{
-	bb_die($lang['ATTACHMENT_FEATURE_DISABLED']);
 }
 
 $sql = 'SELECT * FROM ' . BB_ATTACHMENTS_DESC . ' WHERE attach_id = ' . (int) $download_id;
@@ -152,52 +137,14 @@ if (!$authorised)
 
 $datastore->rm('cat_forums');
 
-//
-// Get Information on currently allowed Extensions
-//
-$rows = get_extension_informations();
-$num_rows = count($rows);
-
-for ($i = 0; $i < $num_rows; $i++)
-{
-	$extension = strtolower(trim($rows[$i]['extension']));
-	$allowed_extensions[] = $extension;
-	$download_mode[$extension] = $rows[$i]['download_mode'];
-}
-
-// Disallowed
-if (!in_array($attachment['extension'], $allowed_extensions) && !IS_ADMIN)
-{
-	bb_die(sprintf($lang['EXTENSION_DISABLED_AFTER_POSTING'], $attachment['extension']));
-}
-
-$download_mode = intval($download_mode[$attachment['extension']]);
-
-if ($thumbnail)
-{
-	$attachment['physical_filename'] = THUMB_DIR . '/t_' . $attachment['physical_filename'];
-}
-
-// Update download count
-if (!$thumbnail)
-{
 	$sql = 'UPDATE ' . BB_ATTACHMENTS_DESC . ' SET download_count = download_count + 1 WHERE attach_id = ' . (int) $attachment['attach_id'];
 
 	if (!DB()->sql_query($sql))
 	{
 		bb_die('Could not update attachment download count');
 	}
-}
 
-// Determine the 'presenting'-method
-if ($download_mode == PHYSICAL_LINK)
-{
-	$url = make_url($upload_dir . '/' . $attachment['physical_filename']);
-	header('Location: ' . $url);
-	exit;
-}
-else
-{
+
 	if (IS_GUEST && !bb_captcha('check'))
 	{
 		global $template;
@@ -219,6 +166,5 @@ else
 		require(PAGE_FOOTER);
 	}
 
-	send_file_to_browser($attachment, $upload_dir);
+	send_file_to_browser($attachment, '');
 	exit;
-}

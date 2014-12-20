@@ -303,33 +303,6 @@ function topic_delete ($mode_or_topic_id, $forum_id = null, $prune_time = 0, $pr
 		LEFT JOIN ". BB_POLL_USERS   ." pu USING(topic_id)
 	");
 
-	// Delete attachments (from disk)
-	$attach_dir = get_attachments_dir();
-
-	$result = DB()->query("
-		SELECT
-			d.physical_filename
-		FROM
-			". $tmp_delete_topics     ." del,
-			". BB_POSTS            ." p,
-			". BB_ATTACHMENTS      ." a,
-			". BB_ATTACHMENTS_DESC ." d
-		WHERE
-			    p.topic_id = del.topic_id
-			AND a.post_id = p.post_id
-			AND d.attach_id = a.attach_id
-	");
-
-	while ($row = DB()->fetch_next($result))
-	{
-		if ($filename = basename($row['physical_filename']))
-		{
-			@unlink("$attach_dir/". $filename);
-			@unlink("$attach_dir/". THUMB_DIR .'/t_'. $filename);
-		}
-	}
-	unset($row, $result);
-
 	// Delete posts, posts_text, attachments (from DB)
 	DB()->query("
 		DELETE p, pt, ps, a, d, ph
@@ -613,31 +586,6 @@ function post_delete ($mode_or_post_id, $user_id = null, $exclude_first = true)
 		DB()->query("DROP TEMPORARY TABLE $tmp_delete_posts");
 		return 0;
 	}
-
-	// Delete attachments (from disk)
-	$attach_dir = get_attachments_dir();
-
-	$result = DB()->query("
-		SELECT
-			d.physical_filename
-		FROM
-			". $tmp_delete_posts      ." del,
-			". BB_ATTACHMENTS      ." a,
-			". BB_ATTACHMENTS_DESC ." d
-		WHERE
-			    a.post_id = del.post_id
-			AND d.attach_id = a.attach_id
-	");
-
-	while ($row = DB()->fetch_next($result))
-	{
-		if ($filename = basename($row['physical_filename']))
-		{
-			@unlink("$attach_dir/". $filename);
-			@unlink("$attach_dir/". THUMB_DIR .'/t_'. $filename);
-		}
-	}
-	unset($row, $result);
 
 	// Delete posts, posts_text, attachments (from DB)
 	DB()->query("

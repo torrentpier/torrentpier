@@ -5,7 +5,6 @@ define('BB_ROOT', './');
 require(BB_ROOT ."common.php");
 require(INC_DIR .'bbcode.php');
 require(INC_DIR .'functions_post.php');
-require(ATTACH_DIR .'attachment_mod.php');
 
 $page_cfg['load_tpl_vars'] = array('post_icons');
 
@@ -284,8 +283,6 @@ else
 }
 
 $update_post_time = !empty($_POST['update_post_time']);
-
-execute_posting_attachment_handling();
 
 // если за время пока вы писали ответ, в топике появились новые сообщения, перед тем как ваше сообщение будет отправлено, выводится предупреждение с обзором этих сообщений
 $topic_has_new_posts = false;
