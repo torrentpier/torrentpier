@@ -182,9 +182,7 @@ if ($var =& $_REQUEST[$title_match_key])
 	}
 }
 
-//
 // SQL
-//
 $where = " WHERE l.log_time BETWEEN '$time_start_val' AND '$time_end_val'";
 $where .= ($type_csv) ? " AND l.log_type_id IN($type_csv)" : '';
 $where .= ($user_csv) ? " AND l.log_user_id IN($user_csv)" : '';
@@ -193,7 +191,7 @@ $where .= ($topic_csv) ? " AND l.log_topic_id IN($topic_csv)" : '';
 $where .= ($title_match_sql) ? " AND MATCH (l.log_topic_title) AGAINST ('$title_match_sql' IN BOOLEAN MODE)" : '';
 
 $sql = "SELECT l.*, u.*
-	FROM ". BB_LOG ." l 
+	FROM ". BB_LOG ." l
 	LEFT JOIN ". BB_USERS ." u ON(u.user_id = l.log_user_id)
 	$where
 	ORDER BY l.log_time
@@ -265,7 +263,7 @@ if ($log_rowset)
 			break;
 		}
 
-		$msg .= " $row[log_msg]";
+		$msg .= " {$row['log_msg']}";
 
 		$row_class = !($row_num & 1) ? $row_class_1 : $row_class_2;
 
@@ -347,13 +345,8 @@ else
 	$template->assign_block_vars('log_not_found', array());
 }
 
-//
-// Selects
-//
+// Select
 $log_type_select = array($lang['ACTS_LOG_ALL_ACTIONS'] => $all_types) + $log_action->log_type_select;
-
-// Order select
-$order_options = '<option value="">&nbsp;'.$lang['ACTS_LOG_TIME'].'&nbsp;</option>';
 
 $template->assign_vars(array(
 	'LOG_COLSPAN'       => 4,
@@ -367,9 +360,6 @@ $template->assign_vars(array(
 	'TITLE_MATCH_MAX'   => $title_match_max_len,
 	'TITLE_MATCH_NAME'  => $title_match_key,
 	'TITLE_MATCH_VAL'   => $title_match_val,
-
-	'ORDER_NAME'        => '',
-	'ORDER_OPTIONS'     => $order_options,
 
 	'SORT_NAME'         => $sort_key,
 	'SORT_ASC'          => $sort_asc,

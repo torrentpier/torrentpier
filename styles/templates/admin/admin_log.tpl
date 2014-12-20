@@ -53,11 +53,11 @@ table.log_filters td {
 				<tr>
 					<td valign="top" class="row1">
 						<fieldset>
-						<legend>{L_ACTS_LOG_LOGS_FROM} <span style="font-size: 9px;">(<i>{L_ACTS_LOG_FIRST}{FIRST_LOG_TIME}</i>)</span></legend>
+						<legend>{L_ACTS_LOG_LOGS_FROM} ({L_ACTS_LOG_FIRST}: {FIRST_LOG_TIME})</legend>
 						<div>
 							<p class="input nowrap">
 								<input class="post" type="text" size="10" maxlength="20" name="{DATETIME_NAME}" value="{DATETIME_VAL}" />
-								&amp;
+								{L_ACTS_LOG_OR}
 								<input class="post" type="text" size="2" maxlength="5" name="{DAYSBACK_NAME}" value="{DAYSBACK_VAL}" />
 								{L_ACTS_LOG_DAYS_BACK}
 							</p>
@@ -72,14 +72,13 @@ table.log_filters td {
 							</div>
 						</fieldset>
 					</td>
-					<td valign="top" class="row1" style="padding: 0;">
-						<fieldset>
+					<td valign="top" class="row1">
+						<fieldset style="height: 45px; width: 110px;">
 						<legend>{L_ACTS_LOG_SORT_BY}</legend>
 							<div>
 								<p class="select nowrap">
-									<select class="post" name="{ORDER_NAME}">{ORDER_OPTIONS}</select>
-									<label><input id="sort_asc" type="radio" name="{SORT_NAME}" value="{SORT_ASC}" {SORT_ASC_CHECKED} /> A-Z</label>
-									<label><input id="sort_desc" type="radio" name="{SORT_NAME}" value="{SORT_DESC}" {SORT_DESC_CHECKED} /> Z-A</label>
+									<label><input id="sort_asc" type="radio" name="{SORT_NAME}" value="{SORT_ASC}" {SORT_ASC_CHECKED} /> {L_ASC}</label>
+									<label><input id="sort_desc" type="radio" name="{SORT_NAME}" value="{SORT_DESC}" {SORT_DESC_CHECKED} /> {L_DESC}</label>
 								</p>
 							</div>
 						</fieldset>
