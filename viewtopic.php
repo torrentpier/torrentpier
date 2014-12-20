@@ -5,25 +5,22 @@ define('BB_ROOT', './');
 require(BB_ROOT .'common.php');
 require(INC_DIR .'bbcode.php');
 
+$user->session_start();
+
 $datastore->enqueue(array(
 	'ranks',
 ));
+
+$topic_id = isset($_GET[POST_TOPIC_URL]) ? (int) $_GET[POST_TOPIC_URL] : 0;
+$post_id  = (!$topic_id && isset($_GET[POST_POST_URL])) ? (int) $_GET[POST_POST_URL] : 0;
+$start    = isset($_GET['start']) ? abs(intval($_GET['start'])) : 0;
+$newest   = 0;
 
 $page_cfg['load_tpl_vars'] = array(
 	'post_buttons',
 	'post_icons',
 	'topic_icons',
 );
-
-$newest = $next_topic_id = 0;
-$start  = isset($_GET['start']) ? abs(intval($_GET['start'])) : 0;
-$topic_id = isset($_GET[POST_TOPIC_URL]) ? (int) $_GET[POST_TOPIC_URL] : 0;
-$post_id  = (!$topic_id && isset($_GET[POST_POST_URL])) ? (int) $_GET[POST_POST_URL] : 0;
-
-// Start session
-$user->session_start();
-
-set_die_append_msg();
 
 // Posts per page
 $posts_per_page = $bb_cfg['posts_per_page'];
@@ -51,6 +48,8 @@ else
 {
 	$start = floor($start/$posts_per_page) * $posts_per_page;
 }
+
+set_die_append_msg();
 
 if (!$topic_id && !$post_id)
 {
@@ -105,12 +104,13 @@ if ($userdata['session_admin'] && !empty($_REQUEST['mod']))
 	}
 }
 
+set_die_append_msg($forum_id);
+
 // Find newest post
-if (($next_topic_id || @$_GET['view'] === 'newest') && !IS_GUEST && $topic_id)
+if (isset($_GET['view']) && $_GET['view'] === 'newest' && !IS_GUEST && $topic_id)
 {
 	$post_time = 'post_time >= '. get_last_read($topic_id, $forum_id);
-	$post_id_altern = ($next_topic_id) ? '' : ' OR post_id = '. $t_data['topic_last_post_id'];
-
+	$post_id_altern = ' OR post_id = '. $t_data['topic_last_post_id'];
 	$sql = "SELECT post_id, post_time
 		FROM ". BB_POSTS ."
 		WHERE topic_id = $topic_id
