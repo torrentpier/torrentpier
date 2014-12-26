@@ -257,7 +257,6 @@ define('LOG_DIR',       BB_PATH .'/internal_data/log/'       );
 define('SITEMAP_DIR',   BB_PATH .'/internal_data/sitemap/'   );
 define('TRIGGERS_DIR',  BB_PATH .'/internal_data/triggers/'  );
 define('AJAX_DIR',      BB_ROOT .'/library/ajax/'            );
-define('ATTACH_DIR',    BB_PATH .'/library/attach_mod/'      );
 define('CFG_DIR',       BB_PATH .'/library/config/'          );
 define('INC_DIR',       BB_PATH .'/library/includes/'        );
 define('CLASS_DIR',     BB_PATH .'/library/includes/classes/');
