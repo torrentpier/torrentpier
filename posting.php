@@ -67,7 +67,7 @@ switch ($mode)
 		{
 			$is_auth_type = 'auth_post';
 		}
-	break;
+		break;
 
 	case 'reply':
 	case 'quote':
@@ -76,7 +76,7 @@ switch ($mode)
 			bb_die($lang['RULES_REPLY_CANNOT']);
 		}
 		$is_auth_type = 'auth_reply';
-	break;
+		break;
 
 	case 'editpost':
 		if (bf($userdata['user_opt'], 'user_opt', 'dis_post_edit'))
@@ -84,15 +84,15 @@ switch ($mode)
 			bb_die($lang['RULES_EDIT_CANNOT']);
 		}
 		$is_auth_type = 'auth_edit';
-	break;
+		break;
 
 	case 'delete':
 		$is_auth_type = 'auth_delete';
-	break;
+		break;
 
 	default:
-		bb_die($lang['NO_POST_MODE']);
-	break;
+		bb_simple_die($lang['NO_POST_MODE']);
+		break;
 }
 
 // Here we do various lookups to find topic_id, forum_id, post_id etc.
@@ -103,32 +103,23 @@ switch ($mode)
 {
 	case 'newtopic':
 	case 'new_rel':
-		if (!$forum_id)
-		{
-			bb_die($lang['FORUM_NOT_EXIST']);
-		}
+		if (!$forum_id) bb_simple_die($lang['FORUM_NOT_EXIST']);
 		$sql = "SELECT * FROM ". BB_FORUMS ." WHERE forum_id = $forum_id LIMIT 1";
-	break;
+		break;
 
 	case 'reply':
-		if (!$topic_id)
-		{
-			bb_die($lang['NO_TOPIC_ID']);
-		}
+		if (!$topic_id) bb_simple_die($lang['NO_TOPIC_ID']);
 		$sql = "SELECT f.*, t.*
 			FROM ". BB_FORUMS ." f, ". BB_TOPICS ." t
 			WHERE t.topic_id = $topic_id
 				AND f.forum_id = t.forum_id
 			LIMIT 1";
-	break;
+		break;
 
 	case 'quote':
 	case 'editpost':
 	case 'delete':
-		if (!$post_id)
-		{
-			bb_die($lang['NO_POST_ID']);
-		}
+		if (!$post_id) bb_simple_die($lang['NO_POST_ID']);
 
 		$select_sql = 'SELECT f.*, t.*, p.*';
 		$select_sql .= (!$submit) ? ', pt.*, u.username, u.user_id' : '';
@@ -147,16 +138,18 @@ switch ($mode)
 		" : '';
 
 		$sql = "$select_sql $from_sql $where_sql LIMIT 1";
-	break;
+		break;
 
 	default:
-		bb_die($lang['NO_VALID_MODE']);
+		bb_simple_die($lang['NO_VALID_MODE']);
 }
 
 if ($post_info = DB()->fetch_row($sql))
 {
 	$forum_id = $post_info['forum_id'];
 	$forum_name = $post_info['forum_name'];
+
+	set_die_append_msg($forum_id);
 
 	$is_auth = auth(AUTH_ALL, $forum_id, $userdata, $post_info);
 
@@ -214,8 +207,8 @@ else
 	bb_die($lang['NO_SUCH_POST']);
 }
 
-// The user is not authed, if they're not logged in then redirect
-// them, else show them an error message
+$bb_cfg['attach']['allowed_ext'] = ($post_info['allow_reg_tracker']) ? $bb_cfg['tor_forums_allowed_ext'] : $bb_cfg['gen_forums_allowed_ext'];
+
 if (!$is_auth[$is_auth_type])
 {
 	if (!IS_GUEST)

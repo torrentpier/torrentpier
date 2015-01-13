@@ -422,8 +422,10 @@ function build_poll_add_form (src_el)
 				</div>
 				{postrow.ATTACHMENTS}
 			</div><!--/post_wrap-->
-			<!-- IF postrow.SIGNATURE -->{postrow.SIGNATURE}<!-- ENDIF -->
-			<!-- IF postrow.EDITED_MESSAGE --><div class="last_edited">{postrow.EDITED_MESSAGE}</div><!-- ENDIF -->
+			<!-- IF not postrow.IS_FIRST_POST -->
+				<!-- IF postrow.SIGNATURE -->{postrow.SIGNATURE}<!-- ENDIF -->
+				<!-- IF postrow.EDITED_MESSAGE --><div class="last_edited">{postrow.EDITED_MESSAGE}</div><!-- ENDIF -->
+			<!-- ENDIF -->
 		</div><!--/post_body-->
 
 		<!-- IF AUTH_MOD -->

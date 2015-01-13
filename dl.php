@@ -5,166 +5,95 @@ define('NO_GZIP', true);
 define('BB_ROOT',  './');
 require(BB_ROOT .'common.php');
 
-$download_id = request_var('id', 0);
-$thumbnail = request_var('thumb', 0);
-
-// Send file to browser
-function send_file_to_browser($attachment, $upload_dir)
+if (!$topic_id = (int) request_var('t', 0))
 {
-	global $bb_cfg, $lang, $userdata;
-
-	$filename = ($upload_dir == '') ? $attachment['physical_filename'] : $upload_dir . '/' . $attachment['physical_filename'];
-
-	$gotit = false;
-
-	// Correct the mime type - we force application/octet-stream for all files, except images
-	// Please do not change this, it is a security precaution
-	if (!strstr($attachment['mimetype'], 'image'))
-	{
-		$attachment['mimetype'] = 'application/octet-stream';
-	}
-
-	//bt
-	if (!(isset($_GET['original']) && !IS_USER))
-	{
-		include(INC_DIR .'functions_torrent.php');
-		send_torrent_with_passkey($filename);
-	}
-
-	// Now the tricky part... let's dance
-	header('Pragma: public');
-	$real_filename = clean_filename(basename($attachment['real_filename']));
-	$mimetype = $attachment['mimetype'].';';
-	$charset = "charset={$bb_cfg['lang'][$userdata['user_lang']]['encoding']};";
-
-	// Send out the Headers
-	header("Content-Type: $mimetype $charset name=\"$real_filename\"");
-	header("Content-Disposition: inline; filename=\"$real_filename\"");
-	unset($real_filename);
-
-	// Now send the File Contents to the Browser
-	if ($gotit)
-	{
-		$size = @filesize($filename);
-		if ($size)
-		{
-			header("Content-length: $size");
-		}
-		readfile($filename);
-	}
-	else
-	{
-		bb_die($lang['ERROR_NO_ATTACHMENT'] . "<br /><br />" . $filename. "<br /><br />" .$lang['TOR_NOT_FOUND']);
-	}
-
-	exit;
+	bb_simple_die('Ошибочный запрос: не указан topic_id'); // TODO
 }
 
-//
-// Start Session Management
-//
 $user->session_start();
 
-set_die_append_msg();
+global $bb_cfg, $lang, $userdata;
 
-if (!$download_id)
+// $t_data
+$sql = "
+		SELECT t.*, f.*
+		FROM ". BB_TOPICS ." t, ". BB_FORUMS ." f
+		WHERE t.topic_id = $topic_id
+			AND f.forum_id = t.forum_id
+		LIMIT 1
+";
+if (!$t_data = DB()->fetch_row($sql))
 {
-	bb_die($lang['NO_ATTACHMENT_SELECTED']);
+	bb_simple_die('Файл не найден [DB]'); // TODO
+}
+if (!$t_data['attach_ext_id'])
+{
+	bb_simple_die('Файл не найден [EXT_ID]'); // TODO
 }
 
-$sql = 'SELECT * FROM ' . BB_ATTACHMENTS_DESC . ' WHERE attach_id = ' . (int) $download_id;
+// Auth check
+$is_auth = auth(AUTH_ALL, $t_data['forum_id'], $userdata, $t_data);
+$guest_allow = false;
+if (!IS_GUEST) $guest_allow = true;
+if (IS_GUEST && $bb_cfg['guest_tracker']) $guest_allow = true;
+if ($t_data['attach_ext_id'] != 8 && !$is_auth['auth_download']) login_redirect($bb_cfg['dl_url'] . $topic_id);
+if ($t_data['attach_ext_id'] == 8 && (!$is_auth['auth_download'] || !$guest_allow)) login_redirect($bb_cfg['dl_url'] . $topic_id);
 
-if (!($result = DB()->sql_query($sql)))
+
+// Проверка рефёрера (не качать с других сайтов)
+$referer = (!empty($_SERVER['HTTP_REFERER'])) ? $_SERVER['HTTP_REFERER'] : '';
+if (!preg_match("/". $bb_cfg['server_name']."/", $referer)) exit;
+
+DB()->sql_query('UPDATE ' . BB_TOPICS . ' SET download_count = download_count + 1 WHERE topic_id = ' . (int) $t_data['topic_id']);
+
+// Captcha for guest
+if (IS_GUEST && !bb_captcha('check'))
 {
-	bb_die('Could not query attachment information #1');
+	global $template;
+
+	$redirect_url = isset($_POST['redirect_url']) ? $_POST['redirect_url'] : (isset($_SERVER['HTTP_REFERER']) ? $_SERVER['HTTP_REFERER'] : '/');
+	$message = '<form action="'. DOWNLOAD_URL . $attachment['attach_id'] .'" method="post">';
+	$message .= $lang['CAPTCHA'].':';
+	$message .= '<div  class="mrg_10" align="center">'. bb_captcha('get') .'</div>';
+	$message .= '<input type="hidden" name="redirect_url" value="'. $redirect_url .'" />';
+	$message .= '<input type="submit" class="bold" value="'. $lang['SUBMIT'] .'" /> &nbsp;';
+	$message .= '<input type="button" class="bold" value="'. $lang['GO_BACK'] .'" onclick="document.location.href = \''. $redirect_url .'\';" />';
+	$message .= '</form>';
+
+	$template->assign_vars(array(
+		'ERROR_MESSAGE' => $message,
+	));
+
+	require(PAGE_HEADER);
+	require(PAGE_FOOTER);
 }
 
-if (!($attachment = DB()->sql_fetchrow($result)))
+$t_data['user_id'] = $userdata['user_id'];
+$t_data['is_am']   = IS_AM;
+
+//die(var_dump($t_data));
+
+// Torrent
+if ($t_data['attach_ext_id'] == 8)
 {
-	bb_die($lang['ERROR_NO_ATTACHMENT']);
-}
-
-$attachment['physical_filename'] = basename($attachment['physical_filename']);
-
-DB()->sql_freeresult($result);
-
-// get forum_id for attachment authorization or private message authorization
-$authorised = false;
-
-$sql = 'SELECT * FROM ' . BB_ATTACHMENTS . ' WHERE attach_id = ' . (int) $attachment['attach_id'];
-
-if (!($result = DB()->sql_query($sql)))
-{
-	bb_die('Could not query attachment information #2');
-}
-
-$auth_pages = DB()->sql_fetchrowset($result);
-$num_auth_pages = DB()->num_rows($result);
-
-for ($i = 0; $i < $num_auth_pages && $authorised == false; $i++)
-{
-	$auth_pages[$i]['post_id'] = intval($auth_pages[$i]['post_id']);
-
-	if ($auth_pages[$i]['post_id'] != 0)
+	if (!(isset($_GET['original']) && !IS_USER))
 	{
-		$sql = 'SELECT forum_id, topic_id FROM ' . BB_POSTS . ' WHERE post_id = ' . (int) $auth_pages[$i]['post_id'];
-
-		if (!($result = DB()->sql_query($sql)))
-		{
-			bb_die('Could not query post information');
-		}
-
-		$row = DB()->sql_fetchrow($result);
-
-		$topic_id = $row['topic_id'];
-		$forum_id = $row['forum_id'];
-
-		$is_auth = array();
-		$is_auth = auth(AUTH_ALL, $forum_id, $userdata);
-		set_die_append_msg($forum_id, $topic_id);
-
-		if ($is_auth['auth_download'])
-		{
-			$authorised = TRUE;
-		}
+		require(INC_DIR .'functions_torrent.php');
+		send_torrent_with_passkey($t_data);
 	}
 }
 
-if (!$authorised)
+// All other
+$file_path = get_attach_path($topic_id);
+
+if (($file_contents = @file_get_contents($file_path)) === false)
 {
-	bb_die($lang['SORRY_AUTH_VIEW_ATTACH']);
+	bb_simple_die("Файл не найден [HDD]"); // TODO
 }
 
-$datastore->rm('cat_forums');
+$send_filename = "t-$topic_id.". $bb_cfg['file_id_ext'][$t_data['attach_ext_id']];
 
-	$sql = 'UPDATE ' . BB_ATTACHMENTS_DESC . ' SET download_count = download_count + 1 WHERE attach_id = ' . (int) $attachment['attach_id'];
+header("Content-Type: application/x-download; name=\"$send_filename\"");
+header("Content-Disposition: attachment; filename=\"$send_filename\"");
 
-	if (!DB()->sql_query($sql))
-	{
-		bb_die('Could not update attachment download count');
-	}
-
-
-	if (IS_GUEST && !bb_captcha('check'))
-	{
-		global $template;
-
-		$redirect_url = isset($_POST['redirect_url']) ? $_POST['redirect_url'] : (isset($_SERVER['HTTP_REFERER']) ? $_SERVER['HTTP_REFERER'] : '/');
-		$message = '<form action="'. DOWNLOAD_URL . $attachment['attach_id'] .'" method="post">';
-		$message .= $lang['CAPTCHA'].':';
-		$message .= '<div  class="mrg_10" align="center">'. bb_captcha('get') .'</div>';
-		$message .= '<input type="hidden" name="redirect_url" value="'. $redirect_url .'" />';
-		$message .= '<input type="submit" class="bold" value="'. $lang['SUBMIT'] .'" /> &nbsp;';
-		$message .= '<input type="button" class="bold" value="'. $lang['GO_BACK'] .'" onclick="document.location.href = \''. $redirect_url .'\';" />';
-		$message .= '</form>';
-
-		$template->assign_vars(array(
-			'ERROR_MESSAGE' => $message,
-		));
-
-		require(PAGE_HEADER);
-		require(PAGE_FOOTER);
-	}
-
-	send_file_to_browser($attachment, '');
-	exit;
+bb_exit($file_contents);
