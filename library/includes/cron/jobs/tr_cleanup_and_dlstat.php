@@ -93,6 +93,8 @@ if ($tr_cfg['update_dlstat'])
 	");
 
 	// Update TOTAL user's dlstat
+	// This is not needed if ocelot enabled. It's important.
+	if(!$bb_cfg['ocelot']['enabled']){
 	DB()->query("
 		UPDATE
 			". BB_BT_USERS             ." u,
@@ -108,7 +110,7 @@ if ($tr_cfg['update_dlstat'])
 			u.up_bonus_today   = u.up_bonus_today   + ub.bonus_add
 		WHERE u.user_id = ub.user_id
 	");
-
+	}
 	// Delete from dl_list what exists in BUF but not exsits in NEW
 	DB()->query("
 		DELETE dl

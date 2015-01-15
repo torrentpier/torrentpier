@@ -2560,6 +2560,9 @@ function create_magnet ($infohash, $auth_key, $logged_in)
 	global $bb_cfg, $_GET, $userdata, $images;
 
 	$passkey_url = ((!$logged_in || isset($_GET['no_passkey'])) && $bb_cfg['bt_tor_browse_only_reg']) ? '' : "?{$bb_cfg['passkey_key']}=$auth_key";
+	if($bb_cfg['ocelot']['enabled']){
+		return '<a href="magnet:?xt=urn:btih:'. bin2hex($infohash) .'&tr='. urlencode($bb_cfg['ocelot']['url'] .$auth_key. "/announce") .'"><img src="'. $images['icon_magnet'] .'" width="12" height="12" border="0" /></a>';
+	}
 	return '<a href="magnet:?xt=urn:btih:'. bin2hex($infohash) .'&tr='. urlencode($bb_cfg['bt_announce_url'] . $passkey_url) .'"><img src="'. $images['icon_magnet'] .'" width="12" height="12" border="0" /></a>';
 }
 
