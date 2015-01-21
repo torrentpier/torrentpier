@@ -19,7 +19,7 @@ $cfg = array();
 
 // All config names with default values
 $default_cfg_str = array(
-	'bt_announce_url'              => 'http://demo.torrentpier.me/bt/',
+	'bt_announce_url'              => 'https://demo.torrentpier.me/bt/',
 );
 
 $default_cfg_bool = array(
