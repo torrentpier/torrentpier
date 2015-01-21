@@ -93,21 +93,25 @@ if ($tr_cfg['update_dlstat'])
 	");
 
 	// Update TOTAL user's dlstat
-	DB()->query("
-		UPDATE
-			". BB_BT_USERS             ." u,
-			". NEW_BB_BT_LAST_USERSTAT ." ub
-		SET
-			u.u_up_total       = u.u_up_total       + ub.up_add,
-			u.u_down_total     = u.u_down_total     + ub.down_add,
-			u.u_up_release     = u.u_up_release     + ub.release_add,
-			u.u_up_bonus       = u.u_up_bonus       + ub.bonus_add,
-			u.up_today         = u.up_today         + ub.up_add,
-			u.down_today       = u.down_today       + ub.down_add,
-			u.up_release_today = u.up_release_today + ub.release_add,
-			u.up_bonus_today   = u.up_bonus_today   + ub.bonus_add
-		WHERE u.user_id = ub.user_id
-	");
+	// This is not needed if Ocelot enabled. It's important.
+	if (!$bb_cfg['ocelot']['enabled'])
+	{
+		DB()->query("
+			UPDATE
+				". BB_BT_USERS             ." u,
+				". NEW_BB_BT_LAST_USERSTAT ." ub
+			SET
+				u.u_up_total       = u.u_up_total       + ub.up_add,
+				u.u_down_total     = u.u_down_total     + ub.down_add,
+				u.u_up_release     = u.u_up_release     + ub.release_add,
+				u.u_up_bonus       = u.u_up_bonus       + ub.bonus_add,
+				u.up_today         = u.up_today         + ub.up_add,
+				u.down_today       = u.down_today       + ub.down_add,
+				u.up_release_today = u.up_release_today + ub.release_add,
+				u.up_bonus_today   = u.up_bonus_today   + ub.bonus_add
+			WHERE u.user_id = ub.user_id
+		");
+	}
 
 	// Delete from dl_list what exists in BUF but not exsits in NEW
 	DB()->query("
