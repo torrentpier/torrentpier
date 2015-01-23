@@ -3,7 +3,7 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2014 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
 
@@ -464,9 +464,8 @@ abstract class AbstractValidator implements
      * @return void
      * @throws Exception\InvalidArgumentException
      */
-    public static function setDefaultTranslator(
-        Translator\TranslatorInterface $translator = null, $textDomain = null
-    ) {
+    public static function setDefaultTranslator(Translator\TranslatorInterface $translator = null, $textDomain = null)
+    {
         static::$defaultTranslator = $translator;
         if (null !== $textDomain) {
             self::setDefaultTranslatorTextDomain($textDomain);
@@ -570,8 +569,6 @@ abstract class AbstractValidator implements
             return $message;
         }
 
-        return $translator->translate(
-            $message, $this->getTranslatorTextDomain()
-        );
+        return $translator->translate($message, $this->getTranslatorTextDomain());
     }
 }

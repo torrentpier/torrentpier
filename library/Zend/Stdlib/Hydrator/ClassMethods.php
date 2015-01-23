@@ -3,7 +3,7 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2014 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
 
@@ -109,9 +109,9 @@ class ClassMethods extends AbstractHydrator implements HydratorOptionsInterface
     public function extract($object)
     {
         if (!is_object($object)) {
-            throw new Exception\BadMethodCallException(sprintf(
-                '%s expects the provided $object to be a PHP object)', __METHOD__
-            ));
+            throw new Exception\BadMethodCallException(
+                sprintf('%s expects the provided $object to be a PHP object)', __METHOD__)
+            );
         }
 
         $filter = null;
@@ -168,9 +168,9 @@ class ClassMethods extends AbstractHydrator implements HydratorOptionsInterface
     public function hydrate(array $data, $object)
     {
         if (!is_object($object)) {
-            throw new Exception\BadMethodCallException(sprintf(
-                '%s expects the provided $object to be a PHP object)', __METHOD__
-            ));
+            throw new Exception\BadMethodCallException(
+                sprintf('%s expects the provided $object to be a PHP object)', __METHOD__)
+            );
         }
 
         foreach ($data as $property => $value) {

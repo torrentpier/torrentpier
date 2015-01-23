@@ -3,7 +3,7 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2014 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
 
@@ -39,19 +39,13 @@ abstract class Rand
             return false;
         }
 
-        if (function_exists('openssl_random_pseudo_bytes')
-            && ((PHP_VERSION_ID >= 50304)
-            || strtoupper(substr(PHP_OS, 0, 3)) !== 'WIN')
-        ) {
+        if (function_exists('openssl_random_pseudo_bytes')) {
             $bytes = openssl_random_pseudo_bytes($length, $usable);
             if (true === $usable) {
                 return $bytes;
             }
         }
-        if (function_exists('mcrypt_create_iv')
-            && ((PHP_VERSION_ID >= 50307)
-            || strtoupper(substr(PHP_OS, 0, 3)) !== 'WIN')
-        ) {
+        if (function_exists('mcrypt_create_iv')) {
             $bytes = mcrypt_create_iv($length, MCRYPT_DEV_URANDOM);
             if ($bytes !== false && strlen($bytes) === $length) {
                 return $bytes;

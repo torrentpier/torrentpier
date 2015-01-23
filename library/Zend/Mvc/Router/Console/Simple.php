@@ -52,7 +52,7 @@ class Simple implements RouteInterface
      * @param  array                                    $aliases
      * @param  null|array|Traversable|FilterChain       $filters
      * @param  null|array|Traversable|ValidatorChain    $validators
-     * @throws InvalidArgumentException
+     * @throws Exception\InvalidArgumentException
      */
     public function __construct(
         $routeOrRouteMatcher,
@@ -79,7 +79,7 @@ class Simple implements RouteInterface
      *
      * @see    \Zend\Mvc\Router\RouteInterface::factory()
      * @param  array|Traversable $options
-     * @throws InvalidArgumentException
+     * @throws Exception\InvalidArgumentException
      * @return self
      */
     public static function factory($options = array())
@@ -111,7 +111,6 @@ class Simple implements RouteInterface
         if (!isset($options['filters'])) {
             $options['filters'] = null;
         }
-
 
         return new static(
             $options['route'],

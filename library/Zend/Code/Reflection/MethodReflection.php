@@ -3,7 +3,7 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2014 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
 
@@ -211,7 +211,7 @@ class MethodReflection extends PhpReflectionMethod implements ReflectionInterfac
      * @param bool $bodyOnly
      * @return string
      */
-    protected function extractMethodContents($bodyOnly=false)
+    protected function extractMethodContents($bodyOnly = false)
     {
         $fileName = $this->getDeclaringClass()->getFileName();
 
@@ -438,7 +438,7 @@ class MethodReflection extends PhpReflectionMethod implements ReflectionInterfac
     {
         $isValid = false;
         $count = count($haystack);
-        for ($i = $position+1;$i < $count; $i++) {
+        for ($i = $position+1; $i < $count; $i++) {
             $tokenType = (is_array($haystack[$i])) ? token_name($haystack[$i][0]) : $haystack[$i];
             $tokenValue = (is_array($haystack[$i])) ? $haystack[$i][1] : $haystack[$i];
 

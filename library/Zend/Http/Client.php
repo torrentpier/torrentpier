@@ -3,7 +3,7 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2014 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
 
@@ -54,7 +54,7 @@ class Client implements Stdlib\DispatchableInterface
     protected $request;
 
     /**
-     * @var Client/Adapter
+     * @var Client\Adapter\AdapterInterface
      */
     protected $adapter;
 
@@ -261,7 +261,6 @@ class Client implements Stdlib\DispatchableInterface
         }
         return $this->response;
     }
-
 
     /**
      * Get the last request (as a string)
@@ -864,6 +863,9 @@ class Client implements Stdlib\DispatchableInterface
             // method
             $method = $this->getRequest()->getMethod();
 
+            // this is so the correct Encoding Type is set
+            $this->setMethod($method);
+
             // body
             $body = $this->prepareBody();
 
@@ -938,7 +940,6 @@ class Client implements Stdlib\DispatchableInterface
                     $this->resetParameters(false, false);
                     $this->setMethod(Request::METHOD_GET);
                 }
-
 
                 // If we got a well formed absolute URI
                 if (($scheme = substr($location, 0, 6)) &&
@@ -1369,8 +1370,13 @@ class Client implements Stdlib\DispatchableInterface
             }
         }
         // HTTP connection
-        $this->lastRawRequest = $this->adapter->write($method,
-            $uri, $this->config['httpversion'], $headers, $body);
+        $this->lastRawRequest = $this->adapter->write(
+            $method,
+            $uri,
+            $this->config['httpversion'],
+            $headers,
+            $body
+        );
 
         return $this->adapter->read();
     }

@@ -3,7 +3,7 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2014 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
 
@@ -207,9 +207,9 @@ class Select extends AbstractSql implements SqlInterface, PreparableSqlInterface
      */
     public function quantifier($quantifier)
     {
-        if (!is_string($quantifier) && !$quantifier instanceof Expression) {
+        if (!is_string($quantifier) && !$quantifier instanceof ExpressionInterface) {
             throw new Exception\InvalidArgumentException(
-                'Quantifier must be one of DISTINCT, ALL, or some platform specific Expression object'
+                'Quantifier must be one of DISTINCT, ALL, or some platform specific object implementing ExpressionInterface'
             );
         }
         $this->quantifier = $quantifier;
@@ -823,7 +823,7 @@ class Select extends AbstractSql implements SqlInterface, PreparableSqlInterface
         }
         $orders = array();
         foreach ($this->order as $k => $v) {
-            if ($v instanceof Expression) {
+            if ($v instanceof ExpressionInterface) {
                 /** @var $orderParts \Zend\Db\Adapter\StatementContainer */
                 $orderParts = $this->processExpression($v, $platform, $driver);
                 if ($parameterContainer) {

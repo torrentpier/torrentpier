@@ -3,7 +3,7 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2014 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
 
@@ -126,7 +126,7 @@ class Client implements ServerClient
     }
 
 
-   /**
+    /**
      * The request of the last method call
      *
      * @return \Zend\XmlRpc\Request
@@ -251,7 +251,7 @@ class Client implements ServerClient
      * @return mixed
      * @throws \Zend\XmlRpc\Client\Exception\FaultException
      */
-    public function call($method, $params=array())
+    public function call($method, $params = array())
     {
         if (!$this->skipSystemLookup() && ('system.' != substr($method, 0, 7))) {
             // Ensure empty array/struct params are cast correctly
@@ -323,7 +323,7 @@ class Client implements ServerClient
             throw new Client\Exception\FaultException(
                 $fault->getMessage(),
                 $fault->getCode()
-                );
+            );
         }
 
         return $this->lastResponse->getReturnValue();

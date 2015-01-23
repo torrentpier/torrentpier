@@ -3,7 +3,7 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2014 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
 
@@ -85,8 +85,13 @@ class HeadMeta extends Placeholder\Container\AbstractStandalone
      * @param  string $placement
      * @return HeadMeta
      */
-    public function __invoke($content = null, $keyValue = null, $keyType = 'name', $modifiers = array(), $placement = Placeholder\Container\AbstractContainer::APPEND)
-    {
+    public function __invoke(
+        $content = null,
+        $keyValue = null,
+        $keyType = 'name',
+        $modifiers = array(),
+        $placement = Placeholder\Container\AbstractContainer::APPEND
+    ) {
         if ((null !== $content) && (null !== $keyValue)) {
             $item   = $this->createData($keyType, $keyValue, $content, $modifiers);
             $action = strtolower($placement);
@@ -261,7 +266,10 @@ class HeadMeta extends Placeholder\Container\AbstractStandalone
             $modifiersString
         );
 
-        if (isset($item->modifiers['conditional']) && !empty($item->modifiers['conditional']) && is_string($item->modifiers['conditional'])) {
+        if (isset($item->modifiers['conditional'])
+            && !empty($item->modifiers['conditional'])
+            && is_string($item->modifiers['conditional'])
+        ) {
             // inner wrap with comment end and start if !IE
             if (str_replace(' ', '', $item->modifiers['conditional']) === '!IE') {
                 $meta = '<!-->' . $meta . '<!--';

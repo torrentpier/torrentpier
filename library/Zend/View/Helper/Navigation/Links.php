@@ -3,7 +3,7 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2014 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
 
@@ -125,9 +125,7 @@ class Links extends AbstractHelper
         $result = preg_match('/find(Rel|Rev)(.+)/', $method, $match);
         ErrorHandler::stop();
         if ($result) {
-            return $this->findRelation($arguments[0],
-                                       strtolower($match[1]),
-                                       strtolower($match[2]));
+            return $this->findRelation($arguments[0], strtolower($match[1]), strtolower($match[2]));
         }
 
         return parent::__call($method, $arguments);
@@ -409,8 +407,7 @@ class Links extends AbstractHelper
     {
         $found = null;
         $break = false;
-        $iterator = new RecursiveIteratorIterator($this->findRoot($page),
-                RecursiveIteratorIterator::SELF_FIRST);
+        $iterator = new RecursiveIteratorIterator($this->findRoot($page), RecursiveIteratorIterator::SELF_FIRST);
         foreach ($iterator as $intermediate) {
             if ($intermediate === $page) {
                 // current page; break at next accepted page
@@ -443,8 +440,9 @@ class Links extends AbstractHelper
         $found = null;
         $prev = null;
         $iterator = new RecursiveIteratorIterator(
-                $this->findRoot($page),
-                RecursiveIteratorIterator::SELF_FIRST);
+            $this->findRoot($page),
+            RecursiveIteratorIterator::SELF_FIRST
+        );
         foreach ($iterator as $intermediate) {
             if (!$this->accept($intermediate)) {
                 continue;

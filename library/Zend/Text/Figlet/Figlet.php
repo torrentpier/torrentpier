@@ -3,7 +3,7 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2014 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
 
@@ -954,8 +954,7 @@ class Figlet
         // Check if gzip support is required
         if (substr($fontFile, -3) === '.gz') {
             if (!function_exists('gzcompress')) {
-                throw new Exception\RuntimeException('GZIP library is required for '
-                                                     . 'gzip compressed font files');
+                throw new Exception\RuntimeException('GZIP library is required for gzip compressed font files');
             }
 
             $fontFile   = 'compress.zlib://' . $fontFile;
@@ -979,15 +978,17 @@ class Figlet
         $magic = $this->_readMagic($fp);
 
         // Get the header
-        $numsRead = sscanf(fgets($fp, 1000),
-                           '%*c%c %d %*d %d %d %d %d %d',
-                           $this->hardBlank,
-                           $this->charHeight,
-                           $this->maxLength,
-                           $smush,
-                           $cmtLines,
-                           $rightToLeft,
-                           $this->fontSmush);
+        $numsRead = sscanf(
+            fgets($fp, 1000),
+            '%*c%c %d %*d %d %d %d %d %d',
+            $this->hardBlank,
+            $this->charHeight,
+            $this->maxLength,
+            $smush,
+            $cmtLines,
+            $rightToLeft,
+            $this->fontSmush
+        );
 
         if ($magic !== self::FONTFILE_MAGIC_NUMBER || $numsRead < 5) {
             throw new Exception\UnexpectedValueException($fontFile . ': Not a FIGlet 2 font file');

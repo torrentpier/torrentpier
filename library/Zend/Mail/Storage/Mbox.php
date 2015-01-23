@@ -3,7 +3,7 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2014 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
 
@@ -54,7 +54,6 @@ class Mbox extends AbstractStorage
         return count($this->positions);
     }
 
-
     /**
      * Get a list of messages with number and size
      *
@@ -76,7 +75,6 @@ class Mbox extends AbstractStorage
         return $result;
     }
 
-
     /**
      * Get positions for mail message or throw exception if id is invalid
      *
@@ -92,7 +90,6 @@ class Mbox extends AbstractStorage
 
         return $this->positions[$id - 1];
     }
-
 
     /**
      * Fetch a message
