@@ -279,8 +279,6 @@ $lang['MODERATE_TOPIC'] = 'Модерировать этот топик';
 $lang['SELECT_POSTS_PER_PAGE'] = 'сообщ. на страницу';
 
 // Posting/Replying (Not private messaging!)
-$lang['TOPIC_REVIEW'] = 'Обзор темы';
-
 $lang['NO_POST_MODE'] = 'Не указан режим сообщения';
 
 $lang['POST_A_NEW_TOPIC'] = 'Начать новую тему';

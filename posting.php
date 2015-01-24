@@ -6,11 +6,14 @@ require(BB_ROOT ."common.php");
 require(INC_DIR .'bbcode.php');
 require(INC_DIR .'functions_post.php');
 
+// Start session management
+$user->session_start();
+
 $page_cfg['load_tpl_vars'] = array('post_icons');
 
-$submit      = (bool) @$_REQUEST['post'];
-$preview     = (bool) @$_REQUEST['preview'];
-$delete      = (bool) @$_REQUEST['delete'];
+$submit   = (bool) @$_REQUEST['post'];
+$preview  = (bool) @$_REQUEST['preview'];
+$delete   = (bool) @$_REQUEST['delete'];
 
 $forum_id = (int) @$_REQUEST[POST_FORUM_URL];
 $topic_id = (int) @$_REQUEST[POST_TOPIC_URL];
@@ -20,7 +23,6 @@ $mode = (string) @$_REQUEST['mode'];
 
 $confirm = isset($_POST['confirm']);
 
-$refresh = $preview;
 $orig_word = $replacement_word = array();
 
 // Set topic type
@@ -40,8 +42,7 @@ if ($mode == 'smilies')
 $tracking_topics = get_tracks('topic');
 $tracking_forums = get_tracks('forum');
 
-// Start session management
-$user->session_start();
+
 
 set_die_append_msg($forum_id, $topic_id);
 
@@ -261,7 +262,7 @@ if ($mode == 'new_rel')
 }
 
 // Notify
-if ($submit || $refresh)
+if ($submit || $preview)
 {
 	$notify_user = (int) !empty($_POST['notify']);
 }
@@ -317,23 +318,17 @@ if (!IS_GUEST && $mode != 'newtopic' && ($submit || $preview || $mode == 'quote'
 	}
 }
 
-// --------------------
-//  What shall we do?
-//
-if ( ( $delete || $mode == 'delete' ) && !$confirm )
+// Confirm deletion
+if ($mode == 'delete' && !$confirm)
 {
 	if (isset($_POST['cancel']))
 	{
 		redirect(POST_URL . "$post_id#$post_id");
 	}
-	//
-	// Confirm deletion
-	//
 	$hidden_fields = array(
 		'p'    => $post_id,
 		'mode' => 'delete',
 	);
-
 	print_confirmation(array(
 		'QUESTION'      => $lang['CONFIRM_DELETE'],
 		'FORM_ACTION'   => POSTING_URL,
@@ -353,11 +348,11 @@ elseif ( ($submit || $confirm) && !$topic_has_new_posts )
 		case 'editpost':
 		case 'newtopic':
 		case 'reply':
-			$username = ( !empty($_POST['username']) ) ? clean_username($_POST['username']) : '';
-			$subject = ( !empty($_POST['subject']) ) ? clean_title($_POST['subject']) : '';
-			$message = ( !empty($_POST['message']) ) ? prepare_message($_POST['message']) : '';
+			$username      = (!empty($_POST['username'])) ? clean_username($_POST['username']) : '';
+			$subject       = (!empty($_POST['subject'])) ? clean_title($_POST['subject']) : '';
+			$message       = (!empty($_POST['message'])) ? prepare_message($_POST['message']) : '';
 			$attach_rg_sig = (isset($_POST['attach_rg_sig']) && isset($_POST['poster_rg']) && $_POST['poster_rg'] != -1) ? 1 : 0;
-			$poster_rg_id = (isset($_POST['poster_rg']) && $_POST['poster_rg'] != -1) ? (int) $_POST['poster_rg'] : 0;
+			$poster_rg_id  = (isset($_POST['poster_rg']) && $_POST['poster_rg'] != -1) ? (int)$_POST['poster_rg'] : 0;
 
 			prepare_post($mode, $post_data, $error_msg, $username, $subject, $message);
 
@@ -459,7 +454,7 @@ elseif ( ($submit || $confirm) && !$topic_has_new_posts )
 	}
 }
 
-if ($refresh || $error_msg || ($submit && $topic_has_new_posts))
+if ($preview || $error_msg || ($submit && $topic_has_new_posts))
 {
 	$username = ( !empty($_POST['username']) ) ? clean_username($_POST['username']) : '';
 	$subject = ( !empty($_POST['subject']) ) ? clean_title($_POST['subject']) : '';
@@ -588,46 +583,9 @@ if ( $mode == 'newtopic' || ( $mode == 'editpost' && $post_data['first_post'] ) 
 
 	if ( $topic_type_toggle != '' )
 	{
-		$topic_type_toggle = $lang['POST_TOPIC_AS'] . ': <label><input type="radio" name="topictype" value="' . POST_NORMAL .'"' . ( (!isset($post_data['topic_type']) || $post_data['topic_type'] == POST_NORMAL || $topic_type == POST_NORMAL) ? ' checked="checked"' : '' ) . ' /> ' . $lang['POST_NORMAL'] . '</label>&nbsp;&nbsp;' . $topic_type_toggle;
+		$topic_type_toggle = '<label><input type="radio" name="topictype" value="' . POST_NORMAL .'"' . ( (!isset($post_data['topic_type']) || $post_data['topic_type'] == POST_NORMAL || $topic_type == POST_NORMAL) ? ' checked="checked"' : '' ) . ' /> ' . $lang['POST_NORMAL'] . '</label>&nbsp;&nbsp;' . $topic_type_toggle;
 	}
 }
-//bt
-$topic_dl_type = (isset($post_info['topic_dl_type'])) ? $post_info['topic_dl_type'] : 0;
-
-if ($post_info['allow_reg_tracker'] && $post_data['first_post'] && ($topic_dl_type || $is_auth['auth_mod']))
-{
-	$sql = "
-		SELECT tor.attach_id
-		FROM ". BB_POSTS ." p
-		LEFT JOIN ". BB_BT_TORRENTS ." tor ON (p.post_id = tor.post_id)
-		WHERE p.post_id = $post_id
-	";
-	$result = DB()->fetch_row($sql);
-	if (!empty($result['attach_id']))
-	{
-		if (!$topic_type_toggle)
-		{
-			$topic_type_toggle = $lang['POST_TOPIC_AS'] . ': ';
-		}
-
-		$dl_ds = $dl_ch = $dl_hid = '';
-		$dl_type_name = 'topic_dl_type';
-		$dl_type_val = ($topic_dl_type) ? 1 : 0;
-
-		if (!$post_info['allow_reg_tracker'] && !$is_auth['auth_mod'])
-		{
-			$dl_ds = ' disabled="disabled" ';
-			$dl_hid = '<input type="hidden" name="topic_dl_type" value="'. $dl_type_val .'" />';
-			$dl_type_name = '';
-		}
-
-		$dl_ch = ($mode == 'editpost' && $post_data['first_post'] && $topic_dl_type) ? ' checked="checked" ' : '';
-
-		$topic_type_toggle .= '<nobr><input type="checkbox" name="'. $dl_type_name .'" id="topic_dl_type_id" '. $dl_ds . $dl_ch .' /><label for="topic_dl_type_id"> '.$lang['POST_DOWNLOAD'].'</label></nobr>';
-		$topic_type_toggle .= $dl_hid;
-	}
-}
-//bt end
 
 // Get poster release group data
 if ($userdata['user_level'] == GROUP_MEMBER || IS_AM)
@@ -648,23 +606,25 @@ if ($userdata['user_level'] == GROUP_MEMBER || IS_AM)
 	}
 }
 
-$hidden_form_fields = '<input type="hidden" name="mode" value="' . $mode . '" />';
+$hidden_fields = array(
+	'mode' => $mode,
+	'f'    => $forum_id,
+	't'    => $topic_id,
+	'p'    => $post_id,
+);
 
-switch( $mode )
+switch ($mode)
 {
 	case 'newtopic':
 		$page_title = $lang['POST_A_NEW_TOPIC'];
-		$hidden_form_fields .= '<input type="hidden" name="' . POST_FORUM_URL . '" value="' . $forum_id . '" />';
 		break;
 
 	case 'reply':
 		$page_title = $lang['POST_A_REPLY'];
-		$hidden_form_fields .= '<input type="hidden" name="' . POST_TOPIC_URL . '" value="' . $topic_id . '" />';
 		break;
 
 	case 'editpost':
 		$page_title = $lang['EDIT_POST'];
-		$hidden_form_fields .= '<input type="hidden" name="' . POST_POST_URL . '" value="' . $post_id . '" />';
 		break;
 }
 
@@ -675,35 +635,34 @@ $template->set_filenames(array(
 	'body' => 'posting.tpl',
 ));
 
-// Output the data to the template
 $template->assign_vars(array(
 	'FORUM_NAME'           => htmlCHR($forum_name),
 	'PAGE_TITLE'           => $page_title,
 	'POSTING_TYPE_TITLE'   => $page_title,
 	'POSTING_TOPIC_ID'     => ($mode != 'newtopic') ? $topic_id : '',
 	'POSTING_TOPIC_TITLE'  => ($mode != 'newtopic') ? wbr($post_info['topic_title']) : '',
-	'U_VIEW_FORUM'         => "viewforum.php?" . POST_FORUM_URL . "=$forum_id",
 
-	'USERNAME'             => @$username,
 	'CAPTCHA_HTML'         => (IS_GUEST) ? bb_captcha('get') : '',
-	'SUBJECT'              => $subject,
-	'MESSAGE'              => $message,
 
 	'POSTER_RGROUPS'       => isset($poster_rgroups) && !empty($poster_rgroups) ? $poster_rgroups : '',
 	'ATTACH_RG_SIG'        => ($switch_rg_sig) ? $switch_rg_sig : false,
-
-	'U_VIEWTOPIC'          => ($mode == 'reply') ? "viewtopic.php?" . POST_TOPIC_URL . "=$topic_id&amp;postorder=desc" : '',
-
-	'S_NOTIFY_CHECKED'     => ($notify_user) ? 'checked="checked"' : '',
-	'S_TYPE_TOGGLE'        => $topic_type_toggle,
-	'S_TOPIC_ID'           => $topic_id,
-	'S_POST_ACTION'        => POSTING_URL,
-	'S_HIDDEN_FORM_FIELDS' => $hidden_form_fields,
 ));
 
 if ($mode == 'newtopic' || $post_data['first_post'])
 {
-	$template->assign_var('POSTING_SUBJECT');
+	$file_attached = !empty($post_info['attach_ext_id']);
+	$allowed_ext = $bb_cfg['attach']['allowed_ext'];
+
+	$template->assign_vars(array(
+		'POSTING_SUBJECT' => true,
+		'SHOW_ATTACH'     => ($file_attached || $allowed_ext),
+		'S_FORM_ENCTYPE'  => 'enctype="multipart/form-data"',
+		'FILE_ATTACHED'   => $file_attached,
+		'ATTACH_MAX_SIZE' => humn_size($bb_cfg['attach']['max_size']),
+		'ALLOWED_EXT'     => ($allowed_ext) ? '*.' . join(', *.', $allowed_ext) : 'прикреплять запрещено',
+		'TOR_REQUIRED'    => !empty($_POST['tor_required']),
+		'POLL_TIP'        => ($mode == 'newtopic') ? 'Вы сможете добавить опрос после создания темы' : 'Вы можете добавить опрос со страницы просмотра темы', // TODO
+	));
 }
 
 // Update post time
@@ -715,11 +674,21 @@ if ($mode == 'editpost' && $post_data['last_post'] && !$post_data['first_post'])
 	));
 }
 
-// Topic review
-if( $mode == 'reply' && $is_auth['auth_read'] )
-{
-	topic_review($topic_id);
-}
+// Output the data to the template
+$template->assign_vars(array(
+	'SUBJECT'              => $subject,
+	'MESSAGE'              => $message,
+	'AUTH_MOD'             => $is_auth['auth_mod'],
+
+	'U_VIEWTOPIC'          => ($mode == 'reply') ? "viewtopic.php?" . POST_TOPIC_URL . "=$topic_id" : '',
+	'U_VIEW_FORUM'         => "viewforum.php?" . POST_FORUM_URL . "=$forum_id",
+
+	'S_NOTIFY_CHECKED'     => ($notify_user) ? 'checked="checked"' : '',
+	'S_TYPE_TOGGLE'        => $topic_type_toggle,
+	'S_TOPIC_ID'           => $topic_id,
+	'S_POST_ACTION'        => POSTING_URL,
+	'S_HIDDEN_FORM_FIELDS' => build_hidden_fields($hidden_fields),
+));
 
 require(PAGE_HEADER);
 

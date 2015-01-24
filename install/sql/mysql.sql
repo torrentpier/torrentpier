@@ -881,7 +881,6 @@ CREATE TABLE IF NOT EXISTS `bb_smilies` (
 INSERT INTO `bb_smilies` VALUES ('', ':aa:', 'aa.gif', 'aa');
 INSERT INTO `bb_smilies` VALUES ('', ':ab:', 'ab.gif', 'ab');
 INSERT INTO `bb_smilies` VALUES ('', ':ac:', 'ac.gif', 'ac');
-INSERT INTO `bb_smilies` VALUES ('', ':ad:', 'ad.gif', 'ad');
 INSERT INTO `bb_smilies` VALUES ('', ':ae:', 'ae.gif', 'ae');
 INSERT INTO `bb_smilies` VALUES ('', ':af:', 'af.gif', 'af');
 INSERT INTO `bb_smilies` VALUES ('', ':ag:', 'ag.gif', 'ag');
@@ -933,6 +932,7 @@ INSERT INTO `bb_smilies` VALUES ('', ':bz:', 'bz.gif', 'bz');
 INSERT INTO `bb_smilies` VALUES ('', ':ca:', 'ca.gif', 'ca');
 INSERT INTO `bb_smilies` VALUES ('', ':cb:', 'cb.gif', 'cb');
 INSERT INTO `bb_smilies` VALUES ('', ':cc:', 'cc.gif', 'cc');
+INSERT INTO `bb_smilies` VALUES ('', ':сd:', 'сd.gif', 'сd');
 
 -- ----------------------------
 -- Table structure for `bb_topics`

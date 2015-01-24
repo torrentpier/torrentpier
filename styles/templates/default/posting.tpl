@@ -56,10 +56,9 @@
 	<!-- IF POSTING_TOPIC_ID --><em>&raquo;</em> <a class="normal" href="{TOPIC_URL}{POSTING_TOPIC_ID}">{POSTING_TOPIC_TITLE}</a><!-- ENDIF -->
 </p>
 
-<form action="{S_POST_ACTION}" method="post" name="post" onsubmit="if(checkForm(this)){ dis_submit_btn(); }else{ return false; }" {S_FORM_ENCTYPE}>
+<form method="post" action="{S_POST_ACTION}" name="post" {S_FORM_ENCTYPE} class="tokenized" onsubmit="if(checkForm(this)){ dis_submit_btn(); }else{ return false; }">
 {S_HIDDEN_FORM_FIELDS}
-{ADD_ATTACH_HIDDEN_FIELDS}
-{POSTED_ATTACHMENTS_HIDDEN_FIELDS}
+<!-- IF TOR_REQUIRED --><input type="hidden" name="tor_required" value="1" /><!-- ENDIF -->
 
 <table class="bordered">
 <col class="row1">
@@ -98,7 +97,7 @@
 		<!-- BEGIN smilies_row -->
 		<tr>
 			<!-- BEGIN smilies_col -->
-			<td><a href="#" onclick="bbcode && bbcode.emoticon('{smilies_row.smilies_col.SMILEY_CODE}'); return false;"><img src="{smilies_row.smilies_col.SMILEY_IMG}" alt="" title="{smilies_row.smilies_col.SMILEY_DESC}" /></a></td>
+			<td><a href="#" onclick="bbcode.emoticon('{smilies_row.smilies_col.SMILEY_CODE}'); return false;"><img src="{smilies_row.smilies_col.SMILEY_IMG}" alt="" title="{smilies_row.smilies_col.SMILEY_DESC}" /></a></td>
 			<!-- END smilies_col -->
 		</tr>
 		<!-- END smilies_row -->
@@ -111,32 +110,37 @@
 	</td>
 	<td class="vTop pad_0 w100"><!-- INCLUDE posting_editor.tpl --></td>
 </tr>
-<!-- IF IN_PM -->
-<!-- ELSEIF LOGGED_IN -->
+
+<!-- IF SHOW_UPDATE_POST_TIME -->
 <tr>
-	<td class="vTop pad_4" valign="top">
+	<td class="row1 vTop pad_4" valign="top">
 		<p><b>{L_OPTIONS}</b></p>
 	</td>
-	<td>
-	<div class="floatL">
-		<table class="borderless inline">
-		<!-- IF SHOW_UPDATE_POST_TIME -->
-		<tr>
-			<td><input type="checkbox" id="update_post_time" name="update_post_time" <!-- IF UPDATE_POST_TIME_CHECKED -->checked="checked"<!-- ENDIF --> /></td>
-			<td><label for="update_post_time">{L_UPDATE_POST_TIME}</label></td>
-		</tr>
-		<!-- ENDIF -->
-		<!-- IF SHOW_NOTIFY_CHECKBOX -->
-		<tr>
-			<td><input type="checkbox" id="notify" name="notify" {S_NOTIFY_CHECKED} /></td>
-			<td><label for="notify">{L_NOTIFY}</label></td>
-		</tr>
-		<!-- ENDIF -->
-		</table>
-	</div>
+	<td class="row2">
+		<!-- IF IN_PM -->
+		<!-- ELSEIF LOGGED_IN -->
+		<div class="floatL">&nbsp;&nbsp;</div>
+		<div class="floatL">
+			<table class="borderless inline">
+				<!-- IF SHOW_UPDATE_POST_TIME -->
+				<tr>
+					<td><input type="checkbox" id="update_post_time" name="update_post_time" <!-- IF UPDATE_POST_TIME_CHECKED -->checked="checked"<!-- ENDIF --> /></td>
+					<td><label for="update_post_time">{L_UPDATE_POST_TIME}</label></td>
+				</tr>
+				<!-- ENDIF -->
+				<!-- IF SHOW_NOTIFY_CHECKBOX -->
+				<tr>
+					<td><input type="checkbox" id="notify" name="notify" {S_NOTIFY_CHECKED} /></td>
+					<td><label for="notify">{L_NOTIFY}</label></td>
+				</tr>
+				<!-- ENDIF -->
+			</table>
+		</div>
+		<!-- ENDIF / LOGGED_IN -->
 	</td>
 </tr>
-<!-- IF ATTACHBOX -->
+<!-- ENDIF -->
+
 <!-- IF POSTER_RGROUPS -->
 <tr>
 	<td class="vTop pad_4" valign="top"><b>{L_POST_RELEASE_FROM_GROUP}</b></td>
@@ -149,49 +153,80 @@
 	</td>
 </tr>
 <!-- ENDIF / POSTER_RGROUPS -->
-<!-- ENDIF / ATTACHBOX -->
-<!-- ENDIF / LOGGED_IN -->
+
 <!-- BEGIN switch_type_toggle -->
 <tr>
-	<td colspan="2" class="row2 tCenter pad_6">{S_TYPE_TOGGLE}</td>
+	<td class="vTop pad_4" valign="top"><b>{L_POST_TOPIC_AS}</b></td>
+	<td>
+		{S_TYPE_TOGGLE}
+	</td>
 </tr>
 <!-- END switch_type_toggle -->
-<!-- IF ATTACHBOX --><!-- INCLUDE posting_attach.tpl --><!-- ENDIF -->
+
+<!-- IF POLL_TIP -->
+<tr>
+	<td colspan="2" class="pad_4 med">{POLL_TIP}</td>
+</tr>
+<!-- ENDIF -->
+
 </table>
 
 </form>
 
-<!-- IF TPL_TOPIC_REVIEW -->
-<!--========================================================================-->
+<!-- IF SHOW_ATTACH -->
+<div style="display: none;">
 
-<div class="spacer_12"></div>
+	<div id="file-up-input">
+		<input type="hidden" name="MAX_FILE_SIZE" value="{$bb_cfg['attach']['max_size']}" />
+		<input type="file" name="attach" size="50" id="file-up-btn" />
+		&nbsp;
+		<a href="#" class="med" onclick="show_load_file_link(); return false;">удалить</a>
+	</div>
 
-<table class="topic" cellpadding="0" cellspacing="0">
-<tr>
-	<td colspan="2" class="catTitle td2">{L_TOPIC_REVIEW}</td>
-</tr>
-<tr>
-	<th class="thHead td1">{L_AUTHOR}</th>
-	<th class="thHead td2">{L_MESSAGE}</th>
-</tr>
-<!-- BEGIN review -->
-<tr class="{review.ROW_CLASS}">
-	<td width="120" class="poster_info td1">
-		<p class="nick" onclick="bbcode.onclickPoster('{review.POSTER_NAME_JS}');">
-			<a href="#" onclick="return false;">{review.POSTER}</a>
-		</p>
-		<p><img src="{SPACER}" width="120" height="10" alt="" /></p>
-	</td>
-	<td class="message td2">
-		<div class="post_head pad_4">{MINIPOST_IMG} {review.POST_DATE}</div>
-		<div class="post_wrap post_body">{review.MESSAGE}</div>
-	</td>
-</tr>
-<!-- END review -->
+	<div id="file-up-new">
+		<a id="file-up-a" href="#" class="med bold" onclick="show_file_up_input(); return false;">загрузить файл</a>&nbsp;
+	</div>
 
-</table>
+	<div id="file-up-del">
+		<a href="#" class="med bold" onclick="if (window.confirm(this.innerHTML+'?')){ ajax.del_attach() } return false;">удалить прикреплённый файл</a>
+	</div>
 
-<div class="spacer_12"></div>
+</div>
 
-<!--========================================================================-->
-<!-- ENDIF / TPL_TOPIC_REVIEW -->
+<script type="text/javascript">
+	$(document).ready(function(){
+		<!-- IF FILE_ATTACHED -->
+		$('#file-up-box').html( $('#file-up-del').html() );
+		<!-- ELSE -->
+		show_load_file_link();
+		<!-- ENDIF -->
+		$('#file-up').show();
+		$('#post-preview-btn').click(function(){
+			if ( $('#file-up-btn').val() ) {
+				return window.confirm('Вы можете прикрепить файл только вместе с отправкой сообщения.\n\nОтменить загрузку файла?\n ');
+			}
+		});
+	});
+
+	function show_load_file_link ()
+	{
+		$('#file-up-box').html( $('#file-up-new').html() );
+		$('#file-up-desc').show();
+	}
+	function show_file_up_input ()
+	{
+		$('#file-up-box').html( $('#file-up-input').html() );
+		$('#file-up-desc').html('выберите нужный файл, он будет загружен автоматически при отправке сообщения');
+	}
+
+	ajax.del_attach = function() {
+		ajax.exec({
+			action   : 'del_attach',
+			topic_id : '{POSTING_TOPIC_ID}'
+		});
+	};
+	ajax.callback.del_attach = function(data){
+		show_load_file_link();
+	}
+</script>
+<!-- ENDIF / SHOW_ATTACH -->

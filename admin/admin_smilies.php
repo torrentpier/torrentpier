@@ -253,14 +253,14 @@ else if ( $mode != '' )
 			$s_hidden_fields = '<input type="hidden" name="mode" value="save" /><input type="hidden" name="smile_id" value="'. $smile_data['smilies_id'] .'" />';
 
 			$template->assign_vars(array(
-				'TPL_SMILE_EDIT'	 => true,
-				'SMILEY_CODE'		 => $smile_data['code'],
-				'SMILEY_EMOTICON'	 => $smile_data['emoticon'],
-				'SMILEY_IMG'		 => BB_ROOT . $bb_cfg['smilies_path'] . '/' . $smiley_edit_img,
-				'S_SMILEY_ACTION'	 => "admin_smilies.php",
-				'S_HIDDEN_FIELDS'	 => $s_hidden_fields,
+				'TPL_SMILE_EDIT'     => true,
+				'SMILEY_CODE'        => $smile_data['code'],
+				'SMILEY_EMOTICON'    => $smile_data['emoticon'],
+				'SMILEY_IMG'         => BB_ROOT . $bb_cfg['smilies_path'] . '/' . $smiley_edit_img, // TODO
+				'S_SMILEY_ACTION'    => "admin_smilies.php",
+				'S_HIDDEN_FIELDS'    => $s_hidden_fields,
 				'S_FILENAME_OPTIONS' => $filename_list,
-				'S_SMILEY_BASEDIR'	 => BB_ROOT . $bb_cfg['smilies_path'],
+				'S_SMILEY_BASEDIR'   => BB_ROOT . $bb_cfg['smilies_path'],
 			));
 
 			break;

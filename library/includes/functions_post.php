@@ -505,38 +505,3 @@ function insert_post ($mode, $topic_id, $forum_id = '', $old_forum_id = '', $new
 
 	DB()->query("INSERT INTO ". BB_POSTS_TEXT ." ($post_text_columns) VALUES ($post_text_values)");
 }
-
-function topic_review ($topic_id)
-{
-	global $bb_cfg, $template;
-
-	// Fetch posts data
-	$review_posts = DB()->fetch_rowset("
-		SELECT
-			p.*, h.post_html, IF(h.post_html IS NULL, pt.post_text, NULL) AS post_text,
-			IF(p.poster_id = ". GUEST_UID .", p.post_username, u.username) AS username, u.user_rank
-		FROM      ". BB_POSTS      ." p
-		LEFT JOIN ". BB_USERS      ." u  ON(u.user_id = p.poster_id)
-		LEFT JOIN ". BB_POSTS_TEXT ." pt ON(pt.post_id = p.post_id)
-		LEFT JOIN ". BB_POSTS_HTML ." h  ON(h.post_id = p.post_id)
-		WHERE p.topic_id = ". (int) $topic_id ."
-		ORDER BY p.post_time DESC
-		LIMIT ". $bb_cfg['posts_per_page'] ."
-	");
-
-	// Topic posts block
-	foreach ($review_posts as $i => $post)
-	{
-		$template->assign_block_vars('review', array(
-			'ROW_CLASS'      => !($i % 2) ? 'row1' : 'row2',
-			'POSTER'         => profile_url($post),
-			'POSTER_NAME_JS' => addslashes($post['username']),
-			'POST_DATE'      => bb_date($post['post_time'], $bb_cfg['post_date_format']),
-			'MESSAGE'        => get_parsed_post($post),
-		));
-	}
-
-	$template->assign_vars(array(
-		'TPL_TOPIC_REVIEW' => (bool) $review_posts,
-	));
-}

@@ -279,8 +279,6 @@ $lang['MODERATE_TOPIC'] = 'Moderate this topic';
 $lang['SELECT_POSTS_PER_PAGE'] = 'posts per page';
 
 // Posting/Replying (Not private messaging!)
-$lang['TOPIC_REVIEW'] = 'Topic review';
-
 $lang['NO_POST_MODE'] = 'No post mode selected'; // If posting.php is called without a mode (newtopic/reply/delete/etc, shouldn't be shown normaly)
 
 $lang['POST_A_NEW_TOPIC'] = 'Post new topic';
