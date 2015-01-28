@@ -558,7 +558,7 @@ if ($allowed_forums)
 
 	if ($title_match)
 	{
-		$title_match_topics = get_title_match_topics($title_match_sql, $search_in_forums_ary);
+		$title_match_topics = get_title_match_topics(array('query' => $title_match_val, 'ids' => array(0 => $forum_id)));
 
 		if (!$search_match_topics_csv = join(',', $title_match_topics))
 		{

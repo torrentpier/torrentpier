@@ -2233,19 +2233,21 @@ function log_sphinx_error ($err_type, $err_msg, $query = '')
 	}
 }
 
-function get_title_match_topics ($title_match_sql, $forum_ids = array())
+function get_title_match_topics ($search)
 {
-	global $bb_cfg, $sphinx, $userdata, $title_match, $lang;
-
+	global $bb_cfg, $sphinx, $userdata, $lang;
+	
 	$where_ids = array();
-	if($forum_ids) $forum_ids = array_diff($forum_ids, array(0 => 0));
-	$title_match_sql = encode_text_match($title_match_sql);
+	
+	$forum_ids = (isset($search['ids']) && is_array($search['ids'])) ? array_diff($search['ids'], array(0 => 0)) : '';
+	
+	$title_match_sql = encode_text_match($search['query']);
 
-	if ($bb_cfg['search_engine_type'] == 'sphinx')
+	if ($bb_cfg['search_engine_type'])
 	{
 		init_sphinx();
 
-		$where = ($title_match) ? 'topics' : 'posts';
+		$where = (isset($search['topic_match'])) ? 'topics' : 'posts';
 
 		$sphinx->SetServer($bb_cfg['sphinx_topic_titles_host'], $bb_cfg['sphinx_topic_titles_port']);
 		if ($forum_ids)
@@ -2276,12 +2278,12 @@ function get_title_match_topics ($title_match_sql, $forum_ids = array())
 			log_sphinx_error('wrn', $warning, $title_match_sql);
 		}
 	}
-	else if ($bb_cfg['search_engine_type'] == 'mysql')
+	elseif(!$bb_cfg['search_engine_type'])
 	{
 		$where_forum = ($forum_ids) ? "AND forum_id IN(". join(',', $forum_ids) .")" : '';
 		$search_bool_mode = ($bb_cfg['allow_search_in_bool_mode']) ? ' IN BOOLEAN MODE' : '';
 
-		if($title_match)
+		if(isset($search['topic_match']))
 		{
 			$where_id = 'topic_id';
 			$sql = "SELECT topic_id FROM ". BB_TOPICS ."

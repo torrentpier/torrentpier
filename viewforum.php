@@ -331,7 +331,7 @@ if ($title_match =& $_REQUEST[$title_match_key])
 	if ($tmp = mb_substr(trim($title_match), 0, $title_match_max_len))
 	{
 		$title_match_val = clean_text_match($tmp, true, false, false);
-		$title_match_topics = get_title_match_topics($title_match_val, array(0 => $forum_id));
+		$title_match_topics = get_title_match_topics(array('query' => $title_match_val, 'ids' => array(0 => $forum_id), 'topic_match' => true));
 
 		if ($search_match_topics_csv = join(',', $title_match_topics))
 		{

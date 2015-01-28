@@ -516,7 +516,7 @@ if ($post_mode)
 		if ($text_match_sql)
 		{
 			$search_match_topics_csv = '';
-			$title_match_topics = get_title_match_topics($text_match_sql, $forum_selected);
+			$title_match_topics = get_title_match_topics(array('query' => $text_match_sql, 'ids' => $forum_selected));
 
 			if (!$search_match_topics_csv = join(',', $title_match_topics))
 			{
@@ -714,7 +714,7 @@ else
 		if ($text_match_sql)
 		{
 			$search_match_topics_csv = '';
-			$title_match_topics = get_title_match_topics($text_match_sql, $forum_selected);
+			$title_match_topics = get_title_match_topics(array('query' => $text_match_sql, 'ids' => $forum_selected));
 
 			if (!$search_match_topics_csv = join(',', $title_match_topics))
 			{
