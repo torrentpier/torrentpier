@@ -2179,7 +2179,7 @@ function clean_text_match ($text, $ltrim_star = true, $remove_stopwords = false,
 		$text = remove_stopwords($text);
 	}
 
-	if ($bb_cfg['search_engine_type'] == 'sphinx')
+	if ($bb_cfg['sphinx_enabled'])
 	{
 		$text = preg_replace('#(?<=\S)\-#u', ' ', $text);                 // "1-2-3" -> "1 2 3"
 		$text = preg_replace('#[^0-9a-zA-Zа-яА-ЯёЁ\-_*|]#u', ' ', $text); // допустимые символы (кроме " которые отдельно)
@@ -2233,17 +2233,15 @@ function log_sphinx_error ($err_type, $err_msg, $query = '')
 	}
 }
 
-function get_title_match_topics ($search)
+function get_title_match_topics($search)
 {
 	global $bb_cfg, $sphinx, $userdata, $lang;
-	
-	$where_ids = array();
-	
-	$forum_ids = (isset($search['ids']) && is_array($search['ids'])) ? array_diff($search['ids'], array(0 => 0)) : '';
-	
+
+	$where_ids       = array();
+	$forum_ids       = (isset($search['ids']) && is_array($search['ids'])) ? array_diff($search['ids'], array(0 => 0)) : '';
 	$title_match_sql = encode_text_match($search['query']);
 
-	if ($bb_cfg['search_engine_type'])
+	if ($bb_cfg['sphinx_enabled'])
 	{
 		init_sphinx();
 
@@ -2258,7 +2256,7 @@ function get_title_match_topics ($search)
 		{
 			$sphinx->SetMatchMode(SPH_MATCH_PHRASE);
 		}
-		if ($result = $sphinx->Query($title_match_sql, $where, $userdata['username'] .' ('. CLIENT_IP .')'))
+		if ($result = $sphinx->Query($title_match_sql, $where, $userdata['username'] . ' (' . CLIENT_IP . ')'))
 		{
 			if (!empty($result['matches']))
 			{
@@ -2278,23 +2276,23 @@ function get_title_match_topics ($search)
 			log_sphinx_error('wrn', $warning, $title_match_sql);
 		}
 	}
-	elseif(!$bb_cfg['search_engine_type'])
+	else
 	{
-		$where_forum = ($forum_ids) ? "AND forum_id IN(". join(',', $forum_ids) .")" : '';
+		$where_forum = ($forum_ids) ? "AND forum_id IN(" . join(',', $forum_ids) . ")" : '';
 		$search_bool_mode = ($bb_cfg['allow_search_in_bool_mode']) ? ' IN BOOLEAN MODE' : '';
 
-		if(isset($search['topic_match']))
+		if (isset($search['topic_match']))
 		{
 			$where_id = 'topic_id';
-			$sql = "SELECT topic_id FROM ". BB_TOPICS ."
+			$sql = "SELECT topic_id FROM " . BB_TOPICS . "
 					WHERE MATCH (topic_title) AGAINST ('$title_match_sql'$search_bool_mode)
 					$where_forum";
 		}
 		else
 		{
 			$where_id = 'post_id';
-			$sql = "SELECT p.post_id FROM ". BB_POSTS ." p, ". BB_POSTS_SEARCH ." ps
-				WHERE ps.post_id = p.post_id
+			$sql = "SELECT p.post_id FROM " . BB_POSTS . " p, " . BB_POSTS_SEARCH . " ps
+					WHERE ps.post_id = p.post_id
 					AND MATCH (ps.search_words) AGAINST ('$title_match_sql'$search_bool_mode)
 					$where_forum";
 		}
@@ -2303,10 +2301,6 @@ function get_title_match_topics ($search)
 		{
 			$where_ids[] = $row[$where_id];
 		}
-	}
-	else
-	{
-		bb_die($lang['SEARCH_OFF']);
 	}
 
 	return $where_ids;

@@ -104,7 +104,7 @@ ajax.callback.manage_admin = function(data) {
 		<td><b>{L_UPDATE}:</b></td>
 		<td>
 			<a href="#" id="update_user_level" onclick="ajax.manage_admin('update_user_level'); return false;">{L_USER_LEVELS}</a>
-			<!-- IF $bb_cfg['search_engine_type'] == "sphinx" -->,&nbsp;<a href="#" id="indexer" onclick="ajax.manage_admin('indexer'); return false;">{L_INDEXER}</a><!-- ENDIF -->
+			<!-- IF $bb_cfg['sphinx_enabled'] -->,&nbsp;<a href="#" id="indexer" onclick="ajax.manage_admin('indexer'); return false;">{L_INDEXER}</a><!-- ENDIF -->
 		</td>
 	</tr>
 	<tr>

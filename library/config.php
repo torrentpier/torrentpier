@@ -483,7 +483,7 @@ $bb_cfg['max_post_length']       = 120000;         // bytes
 $bb_cfg['use_ajax_posts']        = true;
 
 // Search
-$bb_cfg['search_engine_type']         = false;   // true/false -> sphinx/mysql 
+$bb_cfg['sphinx_enabled']             = false;     // if false mysql by default
 $bb_cfg['sphinx_topic_titles_host']   = '127.0.0.1';
 $bb_cfg['sphinx_topic_titles_port']   = 3312;
 $bb_cfg['sphinx_config_path']         = realpath("../install/sphinx/sphinx.conf");

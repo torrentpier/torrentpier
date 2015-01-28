@@ -424,7 +424,7 @@ function add_search_words ($post_id, $post_message, $topic_title = '', $only_ret
 	$text  = $topic_title .' '. $post_message;
 	$words = ($text) ? extract_search_words($text) : array();
 
-	if ($only_return_words || $bb_cfg['search_engine_type'] == 'sphinx')
+	if ($only_return_words || $bb_cfg['sphinx_enabled'])
 	{
 		return join("\n", $words);
 	}
