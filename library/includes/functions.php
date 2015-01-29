@@ -2285,7 +2285,7 @@ function get_title_match_topics($search)
 		{
 			$where_id = 'topic_id';
 			$sql = "SELECT topic_id FROM " . BB_TOPICS . "
-					WHERE MATCH (topic_title) AGAINST ('$title_match_sql'$search_bool_mode)
+					WHERE MATCH (topic_title) AGAINST ('$title_match_sql'$search_bool_mode) OR topic_title LIKE '%$title_match_sql%'
 					$where_forum";
 		}
 		else

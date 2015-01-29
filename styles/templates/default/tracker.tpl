@@ -181,7 +181,7 @@ $(function(){
 	<th class="thHead">{L_TOR_SEARCH_TITLE}</th>
 </tr>
 <tr>
-	<td class="row4" style="padding: 4px";>
+	<td class="row4" style="padding: 4px;">
 
 		<table class="fieldsets borderless bCenter pad_0" cellspacing="0">
 		<tr>

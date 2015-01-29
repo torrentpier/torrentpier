@@ -505,7 +505,7 @@ var autocomplete = function (noCenter) {
 		$("div#autocomplete_popup").show(1000);
 	}
 
-	$("input#pass, input#pass_confirm, div#autocomplete_popup input").each(function () {
+	$("[name='new_pass'],[name='cfm_pass'], div#autocomplete_popup input").each(function () {
 		$(this).val(string_result);
 	});
 };

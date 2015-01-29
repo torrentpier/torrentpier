@@ -888,7 +888,7 @@ foreach ($cat_forum['c'] as $cat_id => $forums_ary)
 
 	$opt .= "</optgroup>\n";
 }
-$search_all_opt = '<option value="'. $search_all .'" value="fs-'. $search_all .'"'. (($forum_val == $search_all) ? HTML_SELECTED : '') .'>&nbsp;'. htmlCHR($lang['ALL_AVAILABLE']) ."</option>\n";
+$search_all_opt = '<option value="'. $search_all .'" '. (($forum_val == $search_all) ? HTML_SELECTED : '') .'>&nbsp;'. htmlCHR($lang['ALL_AVAILABLE']) ."</option>\n";
 $cat_forum_select = "\n".'<select id="fs-main" style="width: 100%;" name="'. $forum_key .'[]" multiple="multiple" size="'. $forum_select_size ."\">\n". $search_all_opt . $opt ."</select>\n";
 
 // Sort dir

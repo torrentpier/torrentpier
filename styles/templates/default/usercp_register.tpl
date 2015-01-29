@@ -62,12 +62,12 @@ document.write('<input type="hidden" name="user_timezone" value="'+tz+'" />');
 </tr>
 <tr>
 	<td class="prof-title">{L_USERNAME}: *</td>
-	<td><!-- IF CAN_EDIT_USERNAME --><input id="username" onBlur="ajax.exec({ action: 'user_register', mode: 'check_name', username: $('#username').val()}); return false;" type="text" name="username" size="35" maxlength="25" value="{USERNAME}" /><!-- ELSE --><b>{USERNAME}</b><!-- ENDIF -->
+	<td><!-- IF CAN_EDIT_USERNAME --><input onBlur="ajax.exec({ action: 'user_register', mode: 'check_name', username: $('[name=\'username\']').val()}); return false;" type="text" name="username" size="35" maxlength="25" value="{USERNAME}" /><!-- ELSE --><b>{USERNAME}</b><!-- ENDIF -->
 	<span id="check_name"></span></td>
 </tr>
 <tr>
 	<td class="prof-title">{L_EMAIL}: * <!-- IF EDIT_PROFILE --><!-- ELSE IF $bb_cfg['reg_email_activation'] --><br /><h6>{L_EMAIL_EXPLAIN}</h6><!-- ENDIF --></td>
-	<td><input id="email" onBlur="ajax.exec({ action: 'user_register', mode: 'check_email', email: $('#email').val()}); return false;" type="text" name="user_email" size="35" maxlength="40" value="{USER_EMAIL}" <!-- IF EDIT_PROFILE --><!-- IF $bb_cfg['emailer_disabled'] -->readonly="readonly" style="color: gray;"<!-- ENDIF --><!-- ENDIF --> />
+	<td><input onBlur="ajax.exec({ action: 'user_register', mode: 'check_email', email: $('[name=\'user_email\']').val()}); return false;" type="text" name="user_email" size="35" maxlength="40" value="{USER_EMAIL}" <!-- IF EDIT_PROFILE --><!-- IF $bb_cfg['emailer_disabled'] -->readonly="readonly" style="color: gray;"<!-- ENDIF --><!-- ENDIF --> />
 	<span id="check_email"></span></td>
 </tr>
 <!-- IF EDIT_PROFILE and not ADM_EDIT -->
@@ -86,7 +86,7 @@ document.write('<input type="hidden" name="user_timezone" value="'+tz+'" />');
 <tr>
 	<td class="prof-title">{L_CONFIRM_PASSWORD}: * <!-- IF EDIT_PROFILE --><br /><h6>{L_PASSWORD_CONFIRM_IF_CHANGED}</h6><!-- ENDIF --></td>
 	<td>
-		<input id="pass_confirm" onBlur="ajax.exec({ action: 'user_register', mode: 'check_pass', pass: $('#pass').val(), pass_confirm: $('#pass_confirm').val() }); return false;" type="<!-- IF SHOW_PASS -->text<!-- ELSE -->password<!-- ENDIF -->" name="cfm_pass" size="35" maxlength="32" value="" />
+		<input onBlur="ajax.exec({ action: 'user_register', mode: 'check_pass', pass: $('[name=\'new_pass\']').val(), pass_confirm: $('#pass_confirm').val() }); return false;" type="<!-- IF SHOW_PASS -->text<!-- ELSE -->password<!-- ENDIF -->" name="cfm_pass" size="35" maxlength="32" value="" />
 		<span id="check_pass"></span>
 	</td>
 </tr>
