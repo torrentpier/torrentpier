@@ -136,15 +136,15 @@ ajax.callback.manage_admin = function(data) {
 	</tr>
 	<tr>
 		<td class="row1" nowrap="nowrap" width="25%">{L_TP_VERSION}:</td>
-		<td class="row2"><b>{$bb_cfg['tp_version']} [{$bb_cfg['tp_release_state']}]</b></td>
+		<td class="row2"><b>{TP_VERSION}</b></td>
 	</tr>
 	<tr>
 		<td class="row1" nowrap="nowrap" width="25%">{L_TP_RELEASE_DATE}:</td>
-		<td class="row2"><b>{$bb_cfg['tp_release_date']}</b></td>
+		<td class="row2"><b>{TP_RELEASE_DATE}</b></td>
 	</tr>
 	<tr>
 		<td class="row1" nowrap="nowrap" width="25%">{L_ZF_VERSION}:</td>
-		<td class="row2"><b>{$bb_cfg['tp_zf_version']}</b></td>
+		<td class="row2"><b>{ZF_VERSION}</b></td>
 	</tr>
 </table>
 <br />

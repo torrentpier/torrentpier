@@ -5,7 +5,7 @@ require('./pagestart.php');
 // Generate relevant output
 if (isset($_GET['pane']) && $_GET['pane'] == 'left')
 {
-	if (!$module = CACHE('bb_cache')->get('admin_module'))
+	if (!$module = CACHE('bb_cache')->get('admin_module' . $user->id))
 	{
 		$dir = @opendir('.');
 		$setmodules = 1;
@@ -18,7 +18,7 @@ if (isset($_GET['pane']) && $_GET['pane'] == 'left')
 		}
 		unset($setmodules);
 		@closedir($dir);
-		CACHE('bb_cache')->set('admin_module', $module, 600);
+		CACHE('bb_cache')->set('admin_module' . $user->id, $module, 600);
 	}
 
 	$template->assign_vars(array(
@@ -160,6 +160,9 @@ elseif (isset($_GET['pane']) && $_GET['pane'] == 'right')
 		'AVATAR_DIR_SIZE'  => $avatar_dir_size,
 		'DB_SIZE'          => $dbsize,
 		'GZIP_COMPRESSION' => ($bb_cfg['gzip_compress']) ? $lang['ON'] : $lang['OFF'],
+		'TP_VERSION'       => $bb_cfg['tp_version'] . (!empty($bb_cfg['tp_release_state']) ? ' :: ' . $bb_cfg['tp_release_state'] : ''),
+		'TP_RELEASE_DATE'  => $bb_cfg['tp_release_date'],
+		'ZF_VERSION'       => Zend\Version\Version::VERSION,
 	));
 
 	if (@$_GET['users_online'])
@@ -277,16 +280,3 @@ else
 }
 
 print_page('index.tpl', 'admin');
-
-// Functions
-function inarray ($needle, $haystack)
-{
-	for ($i = 0; $i < sizeof($haystack); $i++)
-	{
-		if ($haystack[$i] == $needle)
-		{
-			return true;
-		}
-	}
-	return false;
-}
