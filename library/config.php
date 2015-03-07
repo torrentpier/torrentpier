@@ -5,24 +5,24 @@
  * Domain name
  * Version info
  * Database
-   - Charset
-   - Config
-   - Aliases
+ * Charset
+ * Config
+ * Aliases
  * Cache
-   - Config
-   - Datastore
+ * Config
+ * Datastore
  * Server
-   - Cloudflare
-   - GZip
+ * Cloudflare
+ * GZip
  * Tracker
  * Ocelot
  * FAQ url
  * Torrents
-   - Ratio limits
-   - Seeding torrents limit
-   - DL-Status (days to keep)
-   - Tor-Stats (days to keep)
-   - Tor-Help
+ * Ratio limits
+ * Seeding torrents limit
+ * DL-Status (days to keep)
+ * Tor-Stats (days to keep)
+ * Tor-Help
  * Path
  * URL's
  * Language
@@ -82,7 +82,7 @@ $pconnect = false;
 // Настройка баз данных ['db']['srv_name'] => (array) srv_cfg;
 // порядок параметров srv_cfg (хост, название базы, пользователь, пароль, charset, pconnect);
 $bb_cfg['db'] = array(
-	'db1' => array('localhost', 'dbase', 'user', 'pass', $charset, $pconnect),
+	'db1' => array('localhost', 'tp_216', 'user', 'pass', $charset, $pconnect),
 	//'db2' => array('localhost2', 'dbase2', 'user2', 'pass2', $charset, $pconnect),
 	//'db3' => array('localhost3', 'dbase3', 'user2', 'pass3', $charset, $pconnect),
 );
