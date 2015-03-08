@@ -158,8 +158,8 @@ $bb_cfg['allow_internal_ip']  = false;             // Allow internal IP (10.xx..
 $bb_cfg['ocelot'] = array(
 	'enabled' => false,
 	'host'    => $domain_name,
-	'port'    => 34000,
-	'url'     => "http://$domain_name:34000/", // with '/'
+	'port'    => 2710,
+	'url'     => "http://$domain_name:2710/", // with '/'
 	'secret'  => 'some_10_chars',              // 10 chars
 	'stats'   => 'some_10_chars',              // 10 chars
 );
