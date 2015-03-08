@@ -72,7 +72,7 @@ $domain_name = (!empty($_SERVER['SERVER_NAME'])) ? $_SERVER['SERVER_NAME'] : $do
 
 // Version info
 $bb_cfg['tp_version']       = '2.1.6';
-$bb_cfg['tp_release_date']  = '**-01-2015';
+$bb_cfg['tp_release_date']  = '**-03-2015';
 $bb_cfg['tp_release_state'] = 'ALPHA';
 
 // Database
@@ -159,7 +159,7 @@ $bb_cfg['ocelot'] = array(
 	'enabled' => false,
 	'host'    => $domain_name,
 	'port'    => 2710,
-	'url'     => "http://$domain_name:2710/", // with '/'
+	'url'     => "http://$domain_name:2710/",  // with '/'
 	'secret'  => 'some_10_chars',              // 10 chars
 	'stats'   => 'some_10_chars',              // 10 chars
 );

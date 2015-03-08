@@ -453,7 +453,6 @@ class bbcode
 				'join-classes'      => false,
 				'join-styles'       => false,
 				'merge-divs'        => false,
-				'merge-spans'       => false,
 				'newline'           => 'LF',
 				'output-xhtml'      => true,
 				'preserve-entities' => true,
