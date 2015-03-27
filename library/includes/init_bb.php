@@ -12,7 +12,7 @@ $gen_simple_header = false;
 $user = null;
 
 // Obtain and encode user IP
-$client_ip = !empty($_SERVER['REMOTE_ADDR']) ? $_SERVER['REMOTE_ADDR'] : '127.0.0.1';
+$client_ip = (filter_var($_SERVER['REMOTE_ADDR'], FILTER_VALIDATE_IP)) ? $_SERVER['REMOTE_ADDR'] : '127.0.0.1';
 $user_ip = encode_ip($client_ip);
 define('CLIENT_IP', $client_ip);
 define('USER_IP',   $user_ip);
