@@ -37,7 +37,7 @@ table.log_filters td {
 					</td>
 					<td valign="top" class="row1">
 						<fieldset>
-						<legend>{L_ACTS_LOG_USER}</legend>
+						<legend>{L_USER}</legend>
 						<div>
 							<p class="select">{SEL_USERS}</p>
 						</div>
@@ -196,7 +196,7 @@ table.log_filters td {
 
 	<!-- IF FILTER_USERS -->
 	<td>
-	<p class="med bold">{L_ACTS_LOG_USER}:</p>
+	<p class="med bold">{L_USER}:</p>
 	<div>
 		<!-- BEGIN users -->
 		<p class="med mrg_4">{users.USERNAME}</p>

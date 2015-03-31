@@ -250,8 +250,8 @@ if ( (typeof(window.opera) != "undefined" && window.opera.version() < 12) || (wi
 			<a href="{U_TRACKER}"><b>{L_TRACKER}</b></a><span style="color:#CDCDCD;">|</span>
 			<a href="{U_SEARCH}"><b>{L_SEARCH}</b></a><span style="color:#CDCDCD;">|</span>
 			<a href="{U_TERMS}"><b style="color: #993300;">{L_TERMS}</b></a><span style="color:#CDCDCD;">|</span>
-			<a href="{U_GROUPS}"><b>{L_USERGROUPS}</b></a><span style="color:#CDCDCD;">|</span>
-			<a href="{U_MEMBERLIST}"><b>{L_MEMBERLIST}</b></a>
+			<a href="{U_GROUPS}"><b>{L_GROUPS}</b></a><span style="color:#CDCDCD;">|</span>
+			<a href="{U_MEMBERLIST}"><b>{L_USERS}</b></a>
 		</td>
 		<td class="nowrap" align="right">
 			<!-- IF LOGGED_IN -->
@@ -320,7 +320,7 @@ $(document).ready(function() {
 	<td width="50%" class="tRight">
 		<a href="{U_OPTIONS}"><b>{L_OPTIONS}</b></a> &#0183;
 		<a href="{U_CUR_DOWNLOADS}">{L_PROFILE}</a> <a href="#dls-menu" class="menu-root menu-alt1">&#9660;</a> &#0183;
-		<a href="{U_SEARCH_SELF_BY_LAST}" class="med">{L_SEARCH_SELF}</a>
+		<a href="{U_SEARCH_SELF_BY_LAST}" class="med">{L_MY_POSTS}</a>
 	</td>
 </tr>
 </table>

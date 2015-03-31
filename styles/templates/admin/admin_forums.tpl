@@ -35,7 +35,7 @@ function toggle_cat_list (val)
 		<td><input style="width: 96%;" type="text" name="forumname" value="{FORUM_NAME}" class="post" /></td>
 	</tr>
 	<tr>
-		<td>{L_FORUM_DESC}</td>
+		<td>{L_DESCRIPTION}</td>
 		<td><textarea style="width: 96%;" rows="2" wrap="virtual" name="forumdesc" class="post">{DESCRIPTION}</textarea></td>
 	</tr>
 	<tr>

@@ -13,7 +13,7 @@
 </tr>
 <tr>
 	<td><h4>{L_USERNAME}</h4><h6>{L_ADD_DISALLOW_EXPLAIN}</h6></td>
-	<td><input class="post" type="text" name="disallowed_user" size="30" />&nbsp;<input type="submit" name="add_name" value="{L_ADD_DISALLOW}" class="mainoption" /></td>
+	<td><input class="post" type="text" name="disallowed_user" size="30" />&nbsp;<input type="submit" name="add_name" value="{L_ADD_NEW}" class="mainoption" /></td>
 </tr>
 <tr>
 	<th colspan="2">{L_DELETE_DISALLOW_TITLE}</th>

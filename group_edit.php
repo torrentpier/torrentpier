@@ -71,7 +71,7 @@ if ($is_moderator)
 	$s_hidden_fields = '<input type="hidden" name="'. POST_GROUPS_URL .'" value="'. $group_id .'" />';
 
 	$template->assign_vars(array(
-		'PAGE_TITLE'             => $lang['GROUP_CONTROL_PANEL'],
+		'PAGE_TITLE'             => $lang['GROUPS'],
 		'GROUP_NAME'             => htmlCHR($group_info['group_name']),
 		'GROUP_ID'               => $group_id,
 		'GROUP_DESCRIPTION'      => htmlCHR($group_info['group_description']),

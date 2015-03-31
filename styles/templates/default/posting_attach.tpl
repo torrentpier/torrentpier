@@ -19,7 +19,7 @@
 	</td>
 </tr>
 <tr>
-	<td class="pad_4">{L_FILE_COMMENT}</td>
+	<td class="pad_4">{L_COMMENT}</td>
 	<td class="pad_4">
 		<input type="text" name="filecomment" size="45" maxlength="255" value="{FILE_COMMENT}" />
 		<input type="submit" class="bold" name="add_attachment" value="{L_ADD_ATTACHMENT}" />
@@ -42,7 +42,7 @@
 	<td class="row5"><a class="gen" href="{attach_row.U_VIEW_ATTACHMENT}" target="_blank"><b>{attach_row.FILE_NAME}</b></a></td>
 </tr>
 <tr>
-	<td class="row1">{L_FILE_COMMENT}</td>
+	<td class="row1">{L_COMMENT}</td>
 	<td class="row1">
 		<input type="text" name="comment_list[]" size="45" maxlength="255" value="{attach_row.FILE_COMMENT}" />&nbsp;
 		<input type="submit" name="edit_comment[{attach_row.ATTACH_FILENAME}]" value="{L_UPDATE_COMMENT}" />

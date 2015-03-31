@@ -151,7 +151,7 @@ $order_opt = array(
 		'sql'  => 'item_id',
 	),
 	$ord_last_p    => array(
-		'lang' => $lang['BT_LAST_POST'],
+		'lang' => $lang['LASTPOST'],
 		'sql'  => 't.topic_last_post_id',
 	),
 	$ord_created   => array(

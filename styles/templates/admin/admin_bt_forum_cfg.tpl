@@ -1,4 +1,4 @@
-<h1>{L_FORUM_CFG_TITLE}</h1>
+<h1>{L_FORUM_CONFIG}</h1>
 
 <form action="{S_CONFIG_ACTION}" method="post">
 {S_HIDDEN_FIELDS}
@@ -153,7 +153,7 @@
 </tr>
 
 <tr>
-	<th colspan="2">{L_BT_SHOW_DL_STAT_ON_INDEX_HEAD}</th>
+	<th colspan="2">{L_MISC}</th>
 </tr>
 <tr>
 	<td><h4>{L_BT_SHOW_DL_STAT_ON_INDEX}</h4></td>

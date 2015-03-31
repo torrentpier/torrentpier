@@ -225,11 +225,11 @@ function flip_mod (f_id, acl_id)
 	if (cb.value == 1) {
 		cb.value = 0;
 		td.className = 'noMOD';
-		td.innerHTML = '{T_MOD_NO}';
+		td.innerHTML = '{L_NO}';
 	} else {
 		cb.value = 1;
 		td.className = 'yesMOD';
-		td.innerHTML = '{T_MOD_YES}';
+		td.innerHTML = '{L_RANK_MODERATOR}';
 	}
 	mark_changed(f_id, acl_id);
 	return false;

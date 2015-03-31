@@ -1,4 +1,4 @@
-<h1>{L_TRACKER_CFG_TITLE}</h1>
+<h1>{L_TRACKER}</h1>
 
 <form action="{S_CONFIG_ACTION}" method="post">
 
@@ -6,7 +6,7 @@
 <col class="row1">
 <col class="row2">
 <tr>
-	<th colspan="2">{L_TRACKER_SETTINGS}</th>
+	<th colspan="2">{L_TRACKER_CONFIG}</th>
 </tr>
 <!-- IF DISABLE_SUBMIT -->
 <tr>
@@ -88,7 +88,7 @@
 </tr>
 
 <tr>
-	<th colspan="2">{L_ANNOUNCE_INTERVAL_HEAD}</th>
+	<th colspan="2">{L_MISC}</th>
 </tr>
 <tr>
 	<td><h4>{L_ANNOUNCE_INTERVAL}</h4><h5>$bb_cfg['announce_interval']</h5><h6>{L_ANNOUNCE_INTERVAL_EXPL}</h6></td>

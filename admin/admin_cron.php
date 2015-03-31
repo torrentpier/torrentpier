@@ -163,7 +163,6 @@ switch ($mode)
 			'S_MODE'            => 'add',
 			'SCHEDULE'          => build_select('schedule', $schedule, 'select', null, null),
 			'RUN_DAY'           => build_select('run_day', $run_day, 0, null, null),
-			'L_CRON_EDIT_HEAD'  => $lang['CRON_EDIT_HEAD_ADD'],
 			'CRON_ID'           => 'none',
 			'CRON_ACTIVE'       => 1,
 			'CRON_TITLE'        => '',

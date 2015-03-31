@@ -231,7 +231,7 @@ if ( $mode != 'topten' || $bb_cfg['topics_per_page'] < 10 )
 }
 
 $template->assign_vars(array(
-	'PAGE_TITLE' => $lang['MEMBERLIST'],
+	'PAGE_TITLE' => $lang['USERS'],
 ));
 
 print_page('memberlist.tpl');

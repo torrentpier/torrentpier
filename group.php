@@ -173,7 +173,7 @@ if (!$group_id)
 
 		$template->assign_vars(array(
 			'SELECT_GROUP'       => true,
-			'PAGE_TITLE'         => $lang['GROUP_CONTROL_PANEL'],
+			'PAGE_TITLE'         => $lang['GROUPS'],
 			'S_USERGROUP_ACTION' => 'group.php',
 			'S_HIDDEN_FIELDS'    => $s_hidden_fields,
 		));
@@ -458,7 +458,7 @@ else
 	$template->assign_vars(array(
 		'ROW_NUMBER'             => $i + ($start + 1),
 		'GROUP_INFO'             => true,
-		'PAGE_TITLE'             => $lang['GROUP_CONTROL_PANEL'],
+		'PAGE_TITLE'             => $lang['GROUPS'],
 		'GROUP_NAME'             => htmlCHR($group_info['group_name']),
 		'GROUP_DESCRIPTION'      => bbcode2html($group_info['group_description']),
 		'GROUP_SIGNATURE'        => bbcode2html($group_info['group_signature']),

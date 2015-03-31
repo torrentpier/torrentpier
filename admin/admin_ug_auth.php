@@ -232,7 +232,7 @@ if ($mode == 'user' && (!empty($_POST['username']) || $user_id))
 				'FORUM_NAME'   => str_short($forums['forum_name_html'][$f_id], $max_forum_name_length),
 				'SF_SPACER'    => ($f_data['forum_parent']) ? HTML_SF_SPACER : '',
 				'IS_MODERATOR' => (bool) $auth_mod,
-				'MOD_STATUS'   => ($auth_mod) ? $lang['MODERATOR'] : $lang['NONE'],
+				'MOD_STATUS'   => ($auth_mod) ? $lang['RANK_MODERATOR'] : $lang['NONE'],
 				'MOD_CLASS'    => ($auth_mod) ? (($disabled) ? 'yesDisabled' : 'yesMOD') : 'noMOD',
 				'AUTH_MOD_VAL' => ($auth_mod) ? 1 : 0,
 			));
@@ -293,33 +293,27 @@ if ($mode == 'user' && (!empty($_POST['username']) || $user_id))
 
 	$s_user_type = ($this_userdata['user_level'] == ADMIN) ? '
 		<select name="userlevel">
-			<option value="admin" selected="selected">'. $lang['AUTH_ADMIN'] .'</option>
-			<option value="user">'. $lang['AUTH_USER'] .'</option>
+			<option value="admin" selected="selected">'. $lang['RANK_ADMIN'] .'</option>
+			<option value="user">'. $lang['USER'] .'</option>
 		</select>
 	' : '
 		<select name="userlevel">
-			<option value="admin">'. $lang['AUTH_ADMIN'] .'</option>
-			<option value="user" selected="selected">'. $lang['AUTH_USER'] .'</option>
+			<option value="admin">'. $lang['RANK_ADMIN'] .'</option>
+			<option value="user" selected="selected">'. $lang['USER'] .'</option>
 		</select>
 	';
 
 	$template->assign_block_vars('switch_user_auth', array());
 
 	$template->assign_vars(array(
-		'TPL_AUTH_UG_MAIN' => true,
-
-		'USER_OR_GROUPNAME' => $this_userdata['username'],
-		'USER_LEVEL'        => $lang['USER_LEVEL'] .' : '. $s_user_type,
-		'USER_GROUP_MEMBERSHIPS' => $lang['GROUP_MEMBERSHIPS'],
-	));
-
-	$template->assign_vars(array(
+		'TPL_AUTH_UG_MAIN'    => true,
+		'USER_OR_GROUPNAME'   => $this_userdata['username'],
+		'USER_LEVEL'          => $lang['USER_LEVEL'] .' : '. $s_user_type,
 		'T_USER_OR_GROUPNAME' => $lang['USERNAME'],
 		'T_AUTH_TITLE'        => $lang['AUTH_CONTROL_USER'],
 		'T_AUTH_EXPLAIN'      => $lang['USER_AUTH_EXPLAIN'],
-
-		'S_COLUMN_SPAN'   => $s_column_span,
-		'S_HIDDEN_FIELDS' => $s_hidden_fields,
+		'S_COLUMN_SPAN'       => $s_column_span,
+		'S_HIDDEN_FIELDS'     => $s_hidden_fields,
 	));
 }
 else if ($mode == 'group' && $group_id)
@@ -365,7 +359,7 @@ else if ($mode == 'group' && $group_id)
 				'FORUM_NAME'   => str_short($forums['forum_name_html'][$f_id], $max_forum_name_length),
 				'SF_SPACER'    => ($f_data['forum_parent']) ? HTML_SF_SPACER : '',
 				'IS_MODERATOR' => (bool) $auth_mod,
-				'MOD_STATUS'   => ($auth_mod) ? $lang['MODERATOR'] : $lang['NO'],
+				'MOD_STATUS'   => ($auth_mod) ? $lang['RANK_MODERATOR'] : $lang['NO'],
 				'MOD_CLASS'    => ($auth_mod) ? 'yesMOD' : 'noMOD',
 				'AUTH_MOD_VAL' => ($auth_mod) ? 1 : 0,
 			));
@@ -426,7 +420,6 @@ else if ($mode == 'group' && $group_id)
 
 	$template->assign_vars(array(
 		'TPL_AUTH_UG_MAIN'    => true,
-
 		'T_USER_OR_GROUPNAME' => $lang['GROUP_NAME'],
 		'USER_LEVEL'          => false,
 		'T_AUTH_TITLE'        => $lang['AUTH_CONTROL_GROUP'],
@@ -464,8 +457,6 @@ else
 $template->assign_vars(array(
 	'YES_SIGN'      => $yes_sign,
 	'NO_SIGN'       => $no_sign,
-	'T_MOD_YES'     => $lang['MODERATOR'],
-	'T_MOD_NO'      => $lang['NO'],
 	'S_AUTH_ACTION' => "admin_ug_auth.php",
 	'SELECTED_CAT'  => !empty($_REQUEST['c']) ? $_REQUEST['c'] : '',
 	'U_ALL_FORUMS'  => !empty($base_url) ? "$base_url&amp;c=all" : '',

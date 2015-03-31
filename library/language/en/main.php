@@ -29,6 +29,14 @@ $lang['TYPE'] = 'Type';
 $lang['SEEDER'] = 'Seeder';
 $lang['LEECHER'] = 'Leecher';
 $lang['RELEASER'] = 'Releaser';
+$lang['SPEED'] = 'Speed';
+$lang['MISC'] = 'Misc';
+$lang['NEW_POSTS'] = 'New posts';
+$lang['NEW_POST'] = 'New post';
+$lang['MY_POSTS'] = 'My posts';
+$lang['RANK_ADMIN'] = 'Administrator';
+$lang['RANK_MODERATOR'] = 'Moderator';
+$lang['MODERATORS'] = 'Moderators';
 
 $lang['1_DAY'] = '1 Day';
 $lang['7_DAYS'] = '7 Days';
@@ -115,14 +123,8 @@ $lang['BROWSING_FORUM'] = 'Users browsing this forum:';
 $lang['ONLINE_USERS'] = 'In total there are <b>%1$d</b> users online: %2$d registered and %3$d guests';
 $lang['RECORD_ONLINE_USERS'] = 'The most users ever online was <b>%s</b> on %s'; // first %s = number of users, second %s is the date.
 
-$lang['ONLINE_ADMIN'] = 'Administrator';
-$lang['ONLINE_MOD'] = 'Moderator';
-$lang['ONLINE_GROUP_MEMBER'] = 'Group member';
-
 $lang['CURRENT_TIME'] = 'Current time is: <span class="tz_time">%s</span>';
 
-$lang['SEARCH_NEW'] = 'View newest posts';
-$lang['SEARCH_SELF'] = 'My posts';
 $lang['SEARCH_SELF_BY_LAST'] = 'last post time';
 $lang['SEARCH_SELF_BY_MY'] = 'my post time';
 $lang['SEARCH_UNANSWERED'] = 'View unanswered posts';
@@ -134,11 +136,7 @@ $lang['REGISTER'] = 'Register';
 $lang['PROFILE'] = 'Profile';
 $lang['EDIT_PROFILE'] = 'Edit profile';
 $lang['SEARCH'] = 'Search';
-$lang['MEMBERLIST'] = 'Memberlist';
-$lang['USERGROUPS'] = 'Usergroups';
 $lang['LASTPOST'] = 'Last Post';
-$lang['MODERATOR'] = 'Moderator';
-$lang['MODERATORS'] = 'Moderators';
 $lang['TERMS'] = 'Terms';
 $lang['NOTHING_HAS_CHANGED'] = 'Nothing has been changed';
 
@@ -158,8 +156,6 @@ $lang['SPEED_STAT'] = 'Total speed: <b>%s</b>&nbsp;'; // %s = total speed.
 
 $lang['NO_NEW_POSTS_LAST_VISIT'] = 'No new posts since your last visit';
 $lang['NO_NEW_POSTS'] = 'No new posts';
-$lang['NEW_POSTS'] = 'New posts';
-$lang['NEW_POST'] = 'New post';
 $lang['NO_NEW_POSTS_HOT'] = 'No new posts [ Popular ]';
 $lang['NEW_POSTS_HOT'] = 'New posts [ Popular ]';
 $lang['NEW_POSTS_LOCKED'] = 'New posts [ Locked ]';
@@ -297,7 +293,6 @@ $lang['INVALID_TOPIC_ID_DB'] = 'Topic does not exist in the database!';
 
 $lang['NOT_POST'] = 'Absent Message';
 $lang['NOT_EDIT_TOR_STATUS'] = 'You can not edit release with the status';
-$lang['TOR_STATUS_DAYS'] = 'days';
 
 $lang['OPTIONS'] = 'Options';
 
@@ -343,8 +338,6 @@ $lang['POLL_FOR_EXPLAIN'] = '[ Enter 0 or leave blank for a never-ending poll ]'
 $lang['DELETE_POLL'] = 'Delete poll';
 
 $lang['MAX_SMILIES_PER_POST'] = 'Emoticons limit of %s emoticons exceeded.';
-
-$lang['ATTACH_SIGNATURE'] = 'Attach signature (signatures can be changed in profile)';
 $lang['NOTIFY'] = 'Notify me when on replies';
 
 $lang['STORED'] = 'Your message has been entered successfully.';
@@ -374,14 +367,11 @@ $lang['COLOR_VIOLET'] = 'Violet';
 $lang['COLOR_WHITE'] = 'White';
 $lang['COLOR_BLACK'] = 'Black';
 
-$lang['FONT_SIZE'] = 'Font size';
 $lang['FONT_TINY'] = 'Tiny';
 $lang['FONT_SMALL'] = 'Small';
 $lang['FONT_NORMAL'] = 'Normal';
 $lang['FONT_LARGE'] = 'Large';
 $lang['FONT_HUGE'] = 'Huge';
-
-$lang['STYLES_TIP'] = 'Tip: Styles can be applied quickly to selected text.';
 
 $lang['NEW_POSTS_PREVIEW'] = 'Topic has new, edited or unread posts';
 
@@ -478,12 +468,10 @@ $lang['VIEWING_USER_PROFILE'] = 'Viewing profile :: %s';
 $lang['VIEWING_MY_PROFILE'] = 'My profile [ <a href="%s">Settings / Change profile</a> ]';
 
 $lang['DISABLED_USER'] = 'Account disabled';
-$lang['MANAGE_USER'] = 'Administration';
 
 $lang['PREFERENCES'] = 'Preferences';
 $lang['ITEMS_REQUIRED'] = 'Items marked with a * are required unless stated otherwise.';
 $lang['REGISTRATION_INFO'] = 'Registration Information';
-$lang['PROFILE_INFO'] = 'Profile Information';
 $lang['PROFILE_INFO_WARN'] = 'Publicly available information';
 $lang['AVATAR_PANEL'] = 'Avatar control panel';
 
@@ -768,8 +756,6 @@ $lang['SORT_BY'] = 'Sort by';
 $lang['SORT_TIME'] = 'Post Time';
 $lang['SORT_POST_SUBJECT'] = 'Post Subject';
 $lang['SORT_TOPIC_TITLE'] = 'Topic Title';
-$lang['SORT_AUTHOR'] = 'Author';
-$lang['SORT_FORUM'] = 'Forum';
 
 $lang['DISPLAY_RESULTS_AS'] = 'Display results as';
 $lang['ALL_AVAILABLE'] = 'All available';
@@ -950,7 +936,6 @@ $lang['SORRY_AUTH_VIEW_ATTACH'] = 'Sorry but you are not authorized to view or d
 // Viewtopic -> Display of Attachments
 $lang['DESCRIPTION'] = 'Description'; // used in Administration Panel too...
 $lang['DOWNLOAD'] = 'Download'; // this Language Variable is defined in admin.php too, but we are unable to access it from the main Language File
-$lang['FILESIZE'] = 'Filesize';
 $lang['VIEWED'] = 'Viewed';
 $lang['DOWNLOAD_NUMBER'] = '%d times'; // replace %d with count
 $lang['EXTENSION_DISABLED_AFTER_POSTING'] = 'The Extension \'%s\' was deactivated by an board admin, therefore this Attachment is not displayed.'; // used in Posts and PM's, replace %s with mime type
@@ -963,7 +948,6 @@ $lang['ADD_ATTACHMENT'] = 'Add Attachment';
 $lang['ADD_ATTACHMENT_TITLE'] = 'Add an Attachment';
 $lang['ADD_ATTACHMENT_EXPLAIN'] = 'If you do not want to add an Attachment to your Post, please leave the Fields blank';
 $lang['FILENAME'] = 'Filename';
-$lang['FILE_COMMENT'] = 'File Comment';
 
 // Posting/PM -> Posted Attachments
 $lang['POSTED_ATTACHMENTS'] = 'Posted Attachments';
@@ -1100,7 +1084,6 @@ $lang['TOR_AUTH_SENT_COMMENT'] = ' &middot; <span class="seed bold">The informat
 
 $lang['BT_TOPIC_TITLE'] = 'Topic title';
 $lang['BT_SEEDER_LAST_SEEN'] = 'Seed last seen';
-$lang['BT_SORT_FORUM'] = 'Forum';
 $lang['SIZE'] = 'Size';
 $lang['PIECE_LENGTH'] = 'Piece length';
 $lang['COMPLETED'] = 'Completed';
@@ -1108,7 +1091,6 @@ $lang['ADDED'] = 'Added';
 $lang['DELETE_TORRENT'] = 'Delete torrent';
 $lang['DELETE_MOVE_TORRENT'] = 'Delete and move topic';
 $lang['DL_TORRENT'] = 'Download .torrent';
-$lang['BT_LAST_POST'] = 'Last post';
 $lang['BT_CREATED'] = 'Topic posted';
 $lang['BT_REPLIES'] = 'Replies';
 $lang['BT_VIEWS'] = 'Views';
@@ -1139,10 +1121,6 @@ $lang['BT_ONLY_ACTIVE'] = 'Active';
 $lang['BT_ONLY_MY'] = 'My releases';
 $lang['BT_SEED_EXIST'] = 'Seeder exist';
 $lang['BT_ONLY_NEW'] = 'New from last visit';
-$lang['BT_SHOW_CAT'] = 'Category';
-$lang['BT_SHOW_FORUM'] = 'Forum';
-$lang['BT_SHOW_AUTHOR'] = 'Author';
-$lang['BT_SHOW_SPEED'] = 'Speed';
 $lang['SEED_NOT_SEEN'] = 'Seeder not seen';
 $lang['TITLE_MATCH'] = 'Title match';
 $lang['BT_USER_NOT_FOUND'] = 'not found';
@@ -1206,7 +1184,6 @@ $lang['YS_TRAF'] = 'Yesterday';
 $lang['TOTAL_TRAF'] = 'Total';
 
 $lang['USER_RATIO'] = 'Ratio';
-$lang['MAX_SPEED'] = 'Speed';
 $lang['DOWNLOADED'] = 'Downloaded';
 $lang['UPLOADED'] = 'Uploaded';
 $lang['RELEASED'] = 'Released';
@@ -1299,7 +1276,6 @@ $lang['QUOTE_SELECTED'] = 'Quote selected';
 $lang['QR_ATTACHSIG'] = 'Attach signature';
 $lang['QR_NOTIFY'] = 'Notify on reply';
 $lang['QR_DISABLE'] = 'Disable';
-$lang['QR_USERNAME'] = 'Name';
 $lang['NO_TEXT_SEL'] = 'Select a text anywhere on a page and try again';
 $lang['QR_FONT_SEL'] = 'Font face';
 $lang['QR_COLOR_SEL'] = 'Font color';
@@ -1496,7 +1472,6 @@ $lang['POST'] = 'Post';
 $lang['OLD'] = 'Old';
 
 // DL-List
-$lang['DL_USER'] = 'Username';
 $lang['DL_PERCENT'] = 'Complete percent';
 $lang['DL_UL'] = 'UL';
 $lang['DL_DL'] = 'DL';
@@ -1644,7 +1619,6 @@ $lang['MODERATOR_STATUS'] = 'Moderator status';
 
 $lang['ALLOWED_ACCESS'] = 'Allowed Access';
 $lang['DISALLOWED_ACCESS'] = 'Disallowed Access';
-$lang['IS_MODERATOR'] = 'Is Moderator';
 
 $lang['CONFLICT_WARNING'] = 'Authorisation Conflict Warning';
 $lang['CONFLICT_ACCESS_USERAUTH'] = 'This user still has access rights to this forum via group membership. You may want to alter the group permissions or remove this user the group to fully prevent them having access rights. The groups granting rights (and the forums involved) are noted below.';
@@ -1662,8 +1636,6 @@ $lang['ADMINISTRATORS'] = 'Administrators';
 $lang['FORUM_ALL'] = 'ALL';
 $lang['FORUM_REG'] = 'REG';
 $lang['FORUM_PRIVATE'] = 'PRIVATE';
-$lang['FORUM_MOD'] = 'MOD';
-$lang['FORUM_ADMIN'] = 'ADMIN';
 
 $lang['AUTH_VIEW'] = $lang['VIEW'] = 'View';
 $lang['AUTH_READ'] = $lang['READ'] = 'Read';
@@ -1681,8 +1653,6 @@ $lang['AUTH_DOWNLOAD'] = $lang['AUTH_DOWNLOAD'] = 'Download Files';
 $lang['SIMPLE_PERMISSION'] = 'Simple Permissions';
 
 $lang['USER_LEVEL'] = 'User Level';
-$lang['AUTH_USER'] = 'User';
-$lang['AUTH_ADMIN'] = 'Administrator';
 $lang['GROUP_MEMBERSHIPS'] = 'Usergroup memberships';
 $lang['USERGROUP_MEMBERS'] = 'This group has the following members';
 
@@ -1805,7 +1775,6 @@ $lang['STATUS_LOCKED'] = 'Locked';
 $lang['STATUS_UNLOCKED'] = 'Unlocked';
 $lang['FORUM_SETTINGS'] = 'General Forum Settings';
 $lang['FORUM_NAME'] = 'Forum name';
-$lang['FORUM_DESC'] = 'Description';
 $lang['FORUM_STATUS'] = 'Forum status';
 $lang['FORUM_PRUNING'] = 'Auto-pruning';
 
@@ -1973,7 +1942,6 @@ $lang['DELETE_DISALLOW'] = 'Delete';
 $lang['DELETE_DISALLOW_TITLE'] = 'Remove a Disallowed Username';
 $lang['DELETE_DISALLOW_EXPLAIN'] = 'You can remove a disallowed username by selecting the username from this list and clicking submit';
 
-$lang['ADD_DISALLOW'] = 'Add';
 $lang['ADD_DISALLOW_TITLE'] = 'Add a disallowed username';
 $lang['ADD_DISALLOW_EXPLAIN'] = 'You can disallow a username using the wildcard character * to match any character';
 
@@ -2191,39 +2159,14 @@ $lang['POST_TIME'] = 'Post Time';
 $lang['POSTED_IN_TOPIC'] = 'Posted in Topic';
 $lang['SUBMIT_CHANGES'] = 'Submit Changes';
 
-// Sort Types
-$lang['SORT_ATTACHMENTS'] = 'Attachments';
-$lang['SORT_SIZE'] = 'Size';
-$lang['SORT_FILENAME'] = 'Filename';
-$lang['SORT_COMMENT'] = 'Comment';
-$lang['SORT_EXTENSION'] = 'Extension';
-$lang['SORT_DOWNLOADS'] = 'Downloads';
-$lang['SORT_POSTTIME'] = 'Post Time';
-
-// View Types
-$lang['VIEW_STATISTIC'] = 'Statistics';
-$lang['VIEW_SEARCH'] = 'Search';
-$lang['VIEW_USERNAME'] = 'Username';
-$lang['VIEW_ATTACHMENTS'] = 'Attachments';
-
 // Successfully updated
 $lang['ATTACH_CONFIG_UPDATED'] = 'Attachment Configuration updated successfully';
 $lang['CLICK_RETURN_ATTACH_CONFIG'] = 'Click %sHere%s to return to Attachment Configuration';
 $lang['TEST_SETTINGS_SUCCESSFUL'] = 'Settings Test has been finished, configuration seems to be fine.';
 
-// Some basic definitions
-$lang['ATTACHMENTS'] = 'Attachments';
-$lang['EXTENSIONS'] = 'Extensions';
-$lang['EXTENSION'] = 'Extension';
-
 $lang['RETURN_CONFIG'] = '%sReturn to Configuration%s';
 $lang['CONFIG_UPD'] = 'Configuration Updated Successfully';
 $lang['SET_DEFAULTS'] = 'Restore defaults';
-
-// Tracker config
-$lang['TRACKER_CFG_TITLE'] = 'Tracker';
-$lang['FORUM_CFG_TITLE'] = 'Forum settings';
-$lang['TRACKER_SETTINGS'] = 'Tracker settings';
 
 $lang['CHANGES_DISABLED'] = 'Changes disabled (see <b>$tr_cfg</b> in config.php)';
 
@@ -2236,7 +2179,6 @@ $lang['COMPACT_MODE_EXPL'] = '"Yes" - tracker will only accept clients working i
 $lang['BROWSER_REDIRECT_URL'] = 'Browser redirect URL';
 $lang['BROWSER_REDIRECT_URL_EXPL'] = 'if user tries to open tracker URL in Web browser<br />leave blank to disable';
 
-$lang['ANNOUNCE_INTERVAL_HEAD'] = 'Misc';
 $lang['ANNOUNCE_INTERVAL'] = 'Announce interval';
 $lang['ANNOUNCE_INTERVAL_EXPL'] = 'peers should wait at least this many seconds between announcements';
 $lang['NUMWANT'] = 'Numwant value';
@@ -2324,7 +2266,6 @@ $lang['BT_TOR_BROWSE_ONLY_REG'] = 'Torrent browser (tracker.php) accessible only
 $lang['BT_SEARCH_BOOL_MODE'] = 'Allow boolean full-text searches';
 $lang['BT_SEARCH_BOOL_MODE_EXPL'] = 'use *, +, -,.. in searches';
 
-$lang['BT_SHOW_DL_STAT_ON_INDEX_HEAD'] = "Miscellaneous";
 $lang['BT_SHOW_DL_STAT_ON_INDEX'] = "Show users UL/DL statistics at the top of the forum's main page";
 $lang['BT_NEWTOPIC_AUTO_REG'] = 'Automatically register torrent on tracker for new topics';
 $lang['BT_SET_DLTYPE_ON_TOR_REG'] = 'Change topic status to "Download" while registering torrent on tracker';
@@ -2520,7 +2461,6 @@ $lang['ACTS_LOG_ALL_ACTIONS']  = 'All actions';
 $lang['ACTS_LOG_SEARCH_OPTIONS'] = 'Actions Log: Search options';
 $lang['ACTS_LOG_FORUM'] = 'Forum';
 $lang['ACTS_LOG_ACTION'] = 'Action';
-$lang['ACTS_LOG_USER'] = 'User';
 $lang['ACTS_LOG_LOGS_FROM'] = 'Logs from ';
 $lang['ACTS_LOG_FIRST'] = 'beginning with';
 $lang['ACTS_LOG_DAYS_BACK'] = 'days back';
@@ -2660,7 +2600,7 @@ $lang['MC_COMMENT'] = array(
 	),
 	1 => array(
 		'title' => 'Comment from %s',
-		'type'  => 'Comment',
+		'type'  => $lang['COMMENT'],
 	),
 	2 => array(
 		'title' => 'Information from %s',

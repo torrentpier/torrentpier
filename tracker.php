@@ -125,7 +125,7 @@ $order_opt = array(
 		'sql'  => 'tor.size',
 	),
 	$ord_last_p    => array(
-		'lang' => $lang['BT_LAST_POST'],
+		'lang' => $lang['LASTPOST'],
 		'sql'  => 't.topic_last_post_id',
 	),
 	$ord_last_s    => array(
@@ -904,10 +904,10 @@ $template->assign_vars(array(
 $tor_type_lang = $lang['GOLD'] . ' / ' . $lang['SILVER'];
 
 $template->assign_vars(array(
-	'SHOW_CAT_CHBOX'    => build_checkbox ($show_cat_key,    $lang['BT_SHOW_CAT'],        $show_cat_val),
-	'SHOW_FORUM_CHBOX'  => build_checkbox ($show_forum_key,  $lang['BT_SHOW_FORUM'],      $show_forum_val),
-	'SHOW_AUTHOR_CHBOX' => build_checkbox ($show_author_key, $lang['BT_SHOW_AUTHOR'],     $show_author_val),
-	'SHOW_SPEED_CHBOX'  => build_checkbox ($show_speed_key,  $lang['BT_SHOW_SPEED'],      $show_speed_val),
+	'SHOW_CAT_CHBOX'    => build_checkbox ($show_cat_key,    $lang['CATEGORY'],           $show_cat_val),
+	'SHOW_FORUM_CHBOX'  => build_checkbox ($show_forum_key,  $lang['FORUM'],              $show_forum_val),
+	'SHOW_AUTHOR_CHBOX' => build_checkbox ($show_author_key, $lang['AUTHOR'],             $show_author_val),
+	'SHOW_SPEED_CHBOX'  => build_checkbox ($show_speed_key,  $lang['SPEED'],              $show_speed_val),
 	'ALL_WORDS_CHBOX'   => build_checkbox ($all_words_key,   $lang['SEARCH_ALL_WORDS'],   $all_words_val),
 	'TOR_TYPE_CHBOX'    => build_checkbox ($tor_type_key,    $tor_type_lang,              $tor_type_val),
 

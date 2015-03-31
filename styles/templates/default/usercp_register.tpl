@@ -104,7 +104,7 @@ document.write('<input type="hidden" name="user_timezone" value="'+tz+'" />');
 </tr>
 <!-- ENDIF -->
 <tr>
-	<th colspan="2">{L_PROFILE_INFO}</th>
+	<th colspan="2">{L_PROFILE}</th>
 </tr>
 <!-- IF $bb_cfg['gender'] -->
 <tr>

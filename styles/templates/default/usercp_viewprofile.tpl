@@ -316,7 +316,7 @@ ajax.callback.gen_passkey = function(data){
 				<td id="user_regdate">
 					<span class="editable bold">{USER_REGDATE}</span>
 					<!-- IF IS_ADMIN -->
-					[ <a href="#admin" class="menu-root menu-alt1"><span class="adm">{L_MANAGE_USER}</span></a> ]
+					[ <a href="#admin" class="menu-root menu-alt1"><span class="adm">{L_ADMIN}</span></a> ]
 					<div class="menu-sub row1 border bw_TRBL" id="admin">
 						<fieldset class="mrg_6">
 							<div class="tLeft" style="padding: 5px 6px 6px; display: block; font-size: 13px;">
@@ -477,7 +477,7 @@ ajax.callback.gen_passkey = function(data){
 							<!-- IF $bb_cfg['seed_bonus_enabled'] --><td id="user_points"><span class="editable bold points">{USER_POINTS}</span></td><!-- ENDIF -->
 						</tr>
 						<tr class="row5">
-							<td colspan="1">{L_MAX_SPEED}</td>
+							<td colspan="1">{L_SPEED}</td>
 							<td colspan="2">{L_DL_DL_SPEED}: {SPEED_DOWN}</td>
 							<td colspan="2">{L_DL_UL_SPEED}: {SPEED_UP}</td>
 							<!-- IF $bb_cfg['seed_bonus_enabled'] --><td colspan="1"><!-- IF PROFILE_USER --><a href="profile.php?mode=bonus">{L_EXCHANGE}</a><!-- ENDIF --></td><!-- ENDIF -->

@@ -12,9 +12,9 @@
 <!-- IF LOGGED_IN -->
 <div id="forums_top_links">
 	<div class="floatL">
-		<a href="{U_SEARCH_NEW}" class="med bold">{L_SEARCH_NEW}</a> &#0183;
+		<a href="{U_NEW_POSTS}" class="med bold">{L_SEARCH_NEW}</a> &#0183;
 		<a href="{U_SEARCH_LATEST}" class="med">{L_SEARCH_LATEST}</a> &#0183;
-		<a href="{U_SEARCH_SELF_BY_LAST}" class="med">{L_SEARCH_SELF}</a> <a href="#search-my-posts" class="menu-root menu-alt1">{OPEN_MENU_IMG_ALT}</a> &#0183;
+		<a href="{U_SEARCH_SELF_BY_LAST}" class="med">{L_MY_POSTS}</a> <a href="#search-my-posts" class="menu-root menu-alt1">{OPEN_MENU_IMG_ALT}</a> &#0183;
 		<a href="{SITE_URL}internal_data/atom/f/0.atom" class="med">{FEED_IMG} {L_LATEST_RELEASES}</a> &#0183;
 		<a href="{U_INDEX}?map=1" class="med bold">{FEED_IMG} {L_FORUM_MAP}</a>
 	</div>
@@ -27,7 +27,7 @@
 <div class="menu-sub" id="search-my-posts">
 	<table cellspacing="1" cellpadding="4">
 	<tr>
-		<th>{L_SEARCH_SELF}</th>
+		<th>{L_MY_POSTS}</th>
 	</tr>
 	<tr>
 		<td>
@@ -206,9 +206,9 @@
 
 					<p id="online_time">{L_ONLINE_EXPLAIN}</p>
 					<p id="online_explain">
-						[ <span class="colorAdmin"><b>{L_ONLINE_ADMIN}</b></span> ]
-						[ <span class="colorMod"><b>{L_ONLINE_MOD}</b></span> ]
-						[ <span class="colorGroup"><b>{L_ONLINE_GROUP_MEMBER}</b></span> ]
+						[ <span class="colorAdmin"><b>{L_RANK_ADMIN}</b></span> ]
+						[ <span class="colorMod"><b>{L_RANK_MODERATOR}</b></span> ]
+						[ <span class="colorGroup"><b>{L_USER}</b></span> ]
 					</p>
 				<!-- ENDIF -->
 			</div>

@@ -131,7 +131,7 @@ $(document).ready(function(){
 			<table cellpadding="0" class="peers w100 med tablesorter" id="seeders-tbl">
 			<thead>
 			<tr>
-				<th class="{sorter: 'text'}"><b class="tbs-text">{L_DL_USER}</b><img width="130" class="spacer" src="{SPACER}" alt="" /></th>
+				<th class="{sorter: 'text'}"><b class="tbs-text">{L_USER}</b><img width="130" class="spacer" src="{SPACER}" alt="" /></th>
 				<th class="{sorter: 'digit'}" title="{L_DL_FORMULA}"><b class="tbs-text">{L_DL_ULR}</b><img width="40" class="spacer" src="{SPACER}" alt="" /></th>
 				<th class="{sorter: 'digit'}"><b class="tbs-text">{L_DL_UL}</b><img width="70" class="spacer" src="{SPACER}" alt="" /></th>
 				<th class="{sorter: 'digit'}"><b class="tbs-text">{L_DL_DL}</b><img width="70" class="spacer" src="{SPACER}" alt="" /></th>

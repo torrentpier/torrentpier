@@ -115,7 +115,7 @@ switch($mode)
 		$html .= ($bb_cfg['seed_bonus_enabled']) ? '<td id="user_points"><span class="editable bold points">'. $profiledata['user_points'] .'</b></td>' : '';
 		$html .= '</tr>
 			<tr class="row5">
-				<td colspan="1">'. $lang['MAX_SPEED'] .'</td>
+				<td colspan="1">'. $lang['SPEED'] .'</td>
 				<td colspan="2">'. $lang['DL_DL_SPEED'] .': '. $speed_down .'</span></td>
 				<td colspan="2">'. $lang['DL_UL_SPEED'] .': '. $speed_up .'</span></td>';
 		$html .= ($bb_cfg['seed_bonus_enabled']) ? '<td colspan="1"></td>' : '';

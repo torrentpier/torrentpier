@@ -253,7 +253,7 @@ function build_poll_add_form (src_el)
 		<td class="small bold nowrap tRight" width="100%">
 			&nbsp;
 			<!-- IF LOGGED_IN -->
-			<a class="small" href="{U_SEARCH_SELF}">{L_SEARCH_SELF}</a> &nbsp;<span style="color:#CDCDCD;">|</span>&nbsp;
+			<a class="small" href="{U_SEARCH_SELF}">{L_MY_POSTS}</a> &nbsp;<span style="color:#CDCDCD;">|</span>&nbsp;
 			<a class="menu-root" href="#topic-options">{L_DISPLAYING_OPTIONS}</a>
 			<!-- ENDIF / LOGGED_IN -->
 		</td>
@@ -560,7 +560,7 @@ function build_poll_add_form (src_el)
 		</div>
 		<div class="quick_reply_box bCenter">
 			<!-- IF not LOGGED_IN -->
-			<p class="mrg_6"><b>{L_QR_USERNAME}: </b><input type="text" name="username" size="20" maxlength="25" /></p>
+			<p class="mrg_6"><b>{L_VIEW_USERNAME}: </b><input type="text" name="username" size="20" maxlength="25" /></p>
 			<!-- ENDIF -->
 			<div class="spacer_2"></div>
 			<!-- INCLUDE posting_editor.tpl -->
