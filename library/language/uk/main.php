@@ -2600,7 +2600,7 @@ $lang['MC_COMMENT'] = array(
 	),
 	1 => array(
 		'title' => 'Коментар від %s',
-		'type'  => $lang['COMMENT'],
+		'type'  => 'Коментар',
 	),
 	2 => array(
 		'title' => 'Информація від %s',
