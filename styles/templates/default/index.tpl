@@ -12,7 +12,7 @@
 <!-- IF LOGGED_IN -->
 <div id="forums_top_links">
 	<div class="floatL">
-		<a href="{U_NEW_POSTS}" class="med bold">{L_SEARCH_NEW}</a> &#0183;
+		<a href="{U_SEARCH_NEW}" class="med bold">{L_NEW_POSTS}</a> &#0183;
 		<a href="{U_SEARCH_LATEST}" class="med">{L_SEARCH_LATEST}</a> &#0183;
 		<a href="{U_SEARCH_SELF_BY_LAST}" class="med">{L_MY_POSTS}</a> <a href="#search-my-posts" class="menu-root menu-alt1">{OPEN_MENU_IMG_ALT}</a> &#0183;
 		<a href="{SITE_URL}internal_data/atom/f/0.atom" class="med">{FEED_IMG} {L_LATEST_RELEASES}</a> &#0183;
