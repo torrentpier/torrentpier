@@ -347,7 +347,7 @@ $page_cfg['show_sidebar2'] = array(
 
 // Cookie
 $bb_cfg['cookie_domain'] = in_array($domain_name, array(getenv('SERVER_ADDR'), 'localhost')) ? '' : ".$domain_name";
-$bb_cfg['cookie_secure'] = (!empty($_SERVER['HTTPS']) ? 1 : 0);
+$bb_cfg['cookie_secure'] = (isset($_SERVER['HTTP_X_FORWARDED_PROTO']) == 'https') ? 1 : 0);
 $bb_cfg['cookie_prefix'] = 'bb_'; // 'bb_'
 
 // Sessions
