@@ -55,7 +55,7 @@ class ContentType implements HeaderInterface
             $parameters = array();
             foreach ($parts as $parameter) {
                 $parameter = trim($parameter);
-                if (!preg_match('/^(?P<key>[^\s\=]+)\=(?P<value>[^\s\=]*)$/', $parameter, $matches)) {
+                if (!preg_match('/^(?P<key>[^\s\=]+)\="?(?P<value>[^\s\"]*)"?$/', $parameter, $matches)) {
                     continue;
                 }
                 $parameters[$matches['key']] = $matches['value'];
@@ -216,7 +216,7 @@ class ContentType implements HeaderInterface
         if (isset($this->parameters['charset'])) {
             return $this->parameters['charset'];
         }
-        return null;
+        return;
     }
 
     /**

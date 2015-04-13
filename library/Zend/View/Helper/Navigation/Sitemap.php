@@ -208,10 +208,12 @@ class Sitemap extends AbstractHelper
                     $lastmod = date('c', $lastmod);
                 }
 
-                if (!$this->getUseSitemapValidators() ||
-                    $lastmodValidator->isValid($lastmod)) {
+                if (!$this->getUseSitemapValidators()
+                    || $lastmodValidator->isValid($lastmod)
+                ) {
+                    // Cast $lastmod to string in case no validation was used
                     $urlNode->appendChild(
-                        $dom->createElementNS(self::SITEMAP_NS, 'lastmod', $lastmod)
+                        $dom->createElementNS(self::SITEMAP_NS, 'lastmod', (string) $lastmod)
                     );
                 }
             }
@@ -289,7 +291,7 @@ class Sitemap extends AbstractHelper
             return $this->xmlEscape($url);
         }
 
-        return null;
+        return;
     }
 
     /**

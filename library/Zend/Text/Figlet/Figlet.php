@@ -831,12 +831,12 @@ class Figlet
         if ($this->previousCharWidth < 2 || $this->currentCharWidth < 2) {
             // Disallows overlapping if the previous character or the current
             // character has a width of one or zero.
-            return null;
+            return;
         }
 
         if (($this->smushMode & self::SM_SMUSH) === 0) {
             // Kerning
-            return null;
+            return;
         }
 
         if (($this->smushMode & 63) === 0) {
@@ -864,7 +864,7 @@ class Figlet
         }
 
         if ($leftChar === $this->hardBlank && $rightChar === $this->hardBlank) {
-            return null;
+            return;
         }
 
         if (($this->smushMode & self::SM_EQUAL) > 0) {
@@ -931,7 +931,7 @@ class Figlet
             }
         }
 
-        return null;
+        return;
     }
 
     /**
@@ -978,8 +978,9 @@ class Figlet
         $magic = $this->_readMagic($fp);
 
         // Get the header
+        $line = fgets($fp, 1000) ?: '';
         $numsRead = sscanf(
-            fgets($fp, 1000),
+            $line,
             '%*c%c %d %*d %d %d %d %d %d',
             $this->hardBlank,
             $this->charHeight,
@@ -1057,7 +1058,13 @@ class Figlet
         // At the end fetch all extended characters
         while (!feof($fp)) {
             // Get the Unicode
-            list($uniCode) = explode(' ', fgets($fp, 2048));
+            $uniCode = fgets($fp, 2048);
+
+            if (false === $uniCode) {
+                continue;
+            }
+
+            list($uniCode) = explode(' ', $uniCode);
 
             if (empty($uniCode)) {
                 continue;

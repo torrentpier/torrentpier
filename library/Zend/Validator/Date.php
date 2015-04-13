@@ -10,6 +10,7 @@
 namespace Zend\Validator;
 
 use DateTime;
+use DateTimeInterface;
 use Traversable;
 
 /**
@@ -54,7 +55,6 @@ class Date extends AbstractValidator
      * @var string
      */
     protected $format = self::FORMAT_DEFAULT;
-
 
     /**
      * Sets validator options
@@ -127,12 +127,13 @@ class Date extends AbstractValidator
      */
     protected function convertToDateTime($param, $addErrors = true)
     {
-        if ($param instanceof DateTime) {
+        // @TODO: when minimum dependency will be PHP 5.5, we can only keep check against DateTimeInterface
+        if ($param instanceof DateTime || $param instanceof DateTimeInterface) {
             return $param;
         }
 
         $type = gettype($param);
-        if (!in_array($type, array('string', 'integer', 'array'))) {
+        if (!in_array($type, array('string', 'integer', 'double', 'array'))) {
             if ($addErrors) {
                 $this->error(self::INVALID);
             }
@@ -152,6 +153,17 @@ class Date extends AbstractValidator
     protected function convertInteger($value)
     {
         return date_create("@$value");
+    }
+
+    /**
+     * Attempts to convert an double into a DateTime object
+     *
+     * @param  double $value
+     * @return bool|DateTime
+     */
+    protected function convertDouble($value)
+    {
+        return DateTime::createFromFormat('U', $value);
     }
 
     /**

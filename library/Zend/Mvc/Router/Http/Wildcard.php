@@ -74,7 +74,10 @@ class Wildcard implements RouteInterface
         if ($options instanceof Traversable) {
             $options = ArrayUtils::iteratorToArray($options);
         } elseif (!is_array($options)) {
-            throw new Exception\InvalidArgumentException(__METHOD__ . ' expects an array or Traversable set of options');
+            throw new Exception\InvalidArgumentException(sprintf(
+                '%s expects an array or Traversable set of options',
+                __METHOD__
+            ));
         }
 
         if (!isset($options['key_value_delimiter'])) {
@@ -103,25 +106,25 @@ class Wildcard implements RouteInterface
     public function match(Request $request, $pathOffset = null)
     {
         if (!method_exists($request, 'getUri')) {
-            return null;
+            return;
         }
 
         $uri  = $request->getUri();
-        $path = $uri->getPath();
+        $path = $uri->getPath() ?: '';
 
         if ($path === '/') {
             $path = '';
         }
 
         if ($pathOffset !== null) {
-            $path = substr($path, $pathOffset);
+            $path = substr($path, $pathOffset) ?: '';
         }
 
         $matches = array();
         $params  = explode($this->paramDelimiter, $path);
 
         if (count($params) > 1 && ($params[0] !== '' || end($params) === '')) {
-            return null;
+            return;
         }
 
         if ($this->keyValueDelimiter === $this->paramDelimiter) {

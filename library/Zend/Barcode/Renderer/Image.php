@@ -204,6 +204,11 @@ class Image extends AbstractRenderer
                 $height = $this->userHeight;
             }
 
+            // Cast width and height to ensure they are correct type for image
+            // operations
+            $width  = (int) $width;
+            $height = (int) $height;
+
             $this->resource = imagecreatetruecolor($width, $height);
 
             $white = imagecolorallocate($this->resource, 255, 255, 255);
@@ -238,8 +243,8 @@ class Image extends AbstractRenderer
             $this->resource,
             $this->leftOffset,
             $this->topOffset,
-            $this->leftOffset + $barcodeWidth - 1,
-            $this->topOffset + $barcodeHeight - 1,
+            (int) ($this->leftOffset + $barcodeWidth - 1),
+            (int) ($this->topOffset + $barcodeHeight - 1),
             $this->imageBackgroundColor
         );
     }
@@ -358,7 +363,7 @@ class Image extends AbstractRenderer
      * @param string $font
      * @param int $color
      * @param string $alignment
-     * @param float $orientation
+     * @param float|int $orientation
      * @throws Exception\RuntimeException
      */
     protected function drawText($text, $size, $position, $font, $color, $alignment = 'center', $orientation = 0)
@@ -382,7 +387,7 @@ class Image extends AbstractRenderer
                  * imagestring() doesn't allow orientation, if orientation
                  * needed: a TTF font is required.
                  * Throwing an exception here, allow to use automaticRenderError
-                 * to informe user of the problem instead of simply not drawing
+                 * to inform user of the problem instead of simply not drawing
                  * the text
                  */
                 throw new Exception\RuntimeException(

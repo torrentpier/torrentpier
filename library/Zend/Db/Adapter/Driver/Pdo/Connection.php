@@ -9,11 +9,10 @@
 
 namespace Zend\Db\Adapter\Driver\Pdo;
 
-use Zend\Db\Adapter\Driver\ConnectionInterface;
+use Zend\Db\Adapter\Driver\AbstractConnection;
 use Zend\Db\Adapter\Exception;
-use Zend\Db\Adapter\Profiler;
 
-class Connection implements ConnectionInterface, Profiler\ProfilerAwareInterface
+class Connection extends AbstractConnection
 {
     /**
      * @var Pdo
@@ -21,29 +20,9 @@ class Connection implements ConnectionInterface, Profiler\ProfilerAwareInterface
     protected $driver = null;
 
     /**
-     * @var Profiler\ProfilerInterface
-     */
-    protected $profiler = null;
-
-    /**
-     * @var string
-     */
-    protected $driverName = null;
-
-    /**
-     * @var array
-     */
-    protected $connectionParameters = array();
-
-    /**
      * @var \PDO
      */
     protected $resource = null;
-
-    /**
-     * @var bool
-     */
-    protected $inTransaction = false;
 
     /**
      * @var string
@@ -53,7 +32,7 @@ class Connection implements ConnectionInterface, Profiler\ProfilerAwareInterface
     /**
      * Constructor
      *
-     * @param array|\PDO|null $connectionParameters
+     * @param  array|\PDO|null                    $connectionParameters
      * @throws Exception\InvalidArgumentException
      */
     public function __construct($connectionParameters = null)
@@ -63,61 +42,35 @@ class Connection implements ConnectionInterface, Profiler\ProfilerAwareInterface
         } elseif ($connectionParameters instanceof \PDO) {
             $this->setResource($connectionParameters);
         } elseif (null !== $connectionParameters) {
-            throw new Exception\InvalidArgumentException('$connection must be an array of parameters, a PDO object or null');
+            throw new Exception\InvalidArgumentException(
+                '$connection must be an array of parameters, a PDO object or null'
+            );
         }
     }
 
     /**
      * Set driver
      *
-     * @param Pdo $driver
-     * @return Connection
+     * @param  Pdo  $driver
+     * @return self
      */
     public function setDriver(Pdo $driver)
     {
         $this->driver = $driver;
+
         return $this;
     }
 
     /**
-     * @param Profiler\ProfilerInterface $profiler
-     * @return Connection
-     */
-    public function setProfiler(Profiler\ProfilerInterface $profiler)
-    {
-        $this->profiler = $profiler;
-        return $this;
-    }
-
-    /**
-     * @return null|Profiler\ProfilerInterface
-     */
-    public function getProfiler()
-    {
-        return $this->profiler;
-    }
-
-    /**
-     * Get driver name
-     *
-     * @return null|string
-     */
-    public function getDriverName()
-    {
-        return $this->driverName;
-    }
-
-    /**
-     * Set connection parameters
-     *
-     * @param array $connectionParameters
-     * @return void
+     * {@inheritDoc}
      */
     public function setConnectionParameters(array $connectionParameters)
     {
         $this->connectionParameters = $connectionParameters;
         if (isset($connectionParameters['dsn'])) {
-            $this->driverName = substr($connectionParameters['dsn'], 0,
+            $this->driverName = substr(
+                $connectionParameters['dsn'],
+                0,
                 strpos($connectionParameters['dsn'], ':')
             );
         } elseif (isset($connectionParameters['pdodriver'])) {
@@ -131,16 +84,6 @@ class Connection implements ConnectionInterface, Profiler\ProfilerAwareInterface
     }
 
     /**
-     * Get connection parameters
-     *
-     * @return array
-     */
-    public function getConnectionParameters()
-    {
-        return $this->connectionParameters;
-    }
-
-    /**
      * Get the dsn string for this connection
      * @throws \Zend\Db\Adapter\Exception\RunTimeException
      * @return string
@@ -148,16 +91,16 @@ class Connection implements ConnectionInterface, Profiler\ProfilerAwareInterface
     public function getDsn()
     {
         if (!$this->dsn) {
-            throw new Exception\RunTimeException("The DSN has not been set or constructed from parameters in connect() for this Connection");
+            throw new Exception\RunTimeException(
+                'The DSN has not been set or constructed from parameters in connect() for this Connection'
+            );
         }
 
         return $this->dsn;
     }
 
     /**
-     * Get current schema
-     *
-     * @return string
+     * {@inheritDoc}
      */
     public function getCurrentSchema()
     {
@@ -186,6 +129,7 @@ class Connection implements ConnectionInterface, Profiler\ProfilerAwareInterface
         if ($result instanceof \PDOStatement) {
             return $result->fetchColumn();
         }
+
         return false;
     }
 
@@ -193,32 +137,19 @@ class Connection implements ConnectionInterface, Profiler\ProfilerAwareInterface
      * Set resource
      *
      * @param  \PDO $resource
-     * @return Connection
+     * @return self
      */
     public function setResource(\PDO $resource)
     {
         $this->resource = $resource;
         $this->driverName = strtolower($this->resource->getAttribute(\PDO::ATTR_DRIVER_NAME));
+
         return $this;
     }
 
     /**
-     * Get resource
+     * {@inheritDoc}
      *
-     * @return \PDO
-     */
-    public function getResource()
-    {
-        if (!$this->isConnected()) {
-            $this->connect();
-        }
-        return $this->resource;
-    }
-
-    /**
-     * Connect
-     *
-     * @return Connection
      * @throws Exception\InvalidConnectionParametersException
      * @throws Exception\RuntimeException
      */
@@ -236,9 +167,11 @@ class Connection implements ConnectionInterface, Profiler\ProfilerAwareInterface
                     $dsn = $value;
                     break;
                 case 'driver':
-                    $value = strtolower($value);
+                    $value = strtolower((string) $value);
                     if (strpos($value, 'pdo') === 0) {
-                        $pdoDriver = strtolower(substr(str_replace(array('-', '_', ' '), '', $value), 3));
+                        $pdoDriver = str_replace(array('-', '_', ' '), '', $value);
+                        $pdoDriver = substr($pdoDriver, 3) ?: '';
+                        $pdoDriver = strtolower($pdoDriver);
                     }
                     break;
                 case 'pdodriver':
@@ -335,9 +268,7 @@ class Connection implements ConnectionInterface, Profiler\ProfilerAwareInterface
     }
 
     /**
-     * Is connected
-     *
-     * @return bool
+     * {@inheritDoc}
      */
     public function isConnected()
     {
@@ -345,47 +276,26 @@ class Connection implements ConnectionInterface, Profiler\ProfilerAwareInterface
     }
 
     /**
-     * Disconnect
-     *
-     * @return Connection
-     */
-    public function disconnect()
-    {
-        if ($this->isConnected()) {
-            $this->resource = null;
-        }
-        return $this;
-    }
-
-    /**
-     * Begin transaction
-     *
-     * @return Connection
+     * {@inheritDoc}
      */
     public function beginTransaction()
     {
         if (!$this->isConnected()) {
             $this->connect();
         }
-        $this->resource->beginTransaction();
-        $this->inTransaction = true;
+
+        if (0 === $this->nestedTransactionsCount) {
+            $this->resource->beginTransaction();
+            $this->inTransaction = true;
+        }
+
+        $this->nestedTransactionsCount ++;
+
         return $this;
     }
 
     /**
-     * In transaction
-     *
-     * @return bool
-     */
-    public function inTransaction()
-    {
-        return $this->inTransaction;
-    }
-
-    /**
-     * Commit
-     *
-     * @return Connection
+     * {@inheritDoc}
      */
     public function commit()
     {
@@ -393,15 +303,25 @@ class Connection implements ConnectionInterface, Profiler\ProfilerAwareInterface
             $this->connect();
         }
 
-        $this->resource->commit();
-        $this->inTransaction = false;
+        if ($this->inTransaction) {
+            $this->nestedTransactionsCount -= 1;
+        }
+
+        /*
+         * This shouldn't check for being in a transaction since
+         * after issuing a SET autocommit=0; we have to commit too.
+         */
+        if (0 === $this->nestedTransactionsCount) {
+            $this->resource->commit();
+            $this->inTransaction = false;
+        }
+
         return $this;
     }
 
     /**
-     * Rollback
+     * {@inheritDoc}
      *
-     * @return Connection
      * @throws Exception\RuntimeException
      */
     public function rollback()
@@ -410,19 +330,21 @@ class Connection implements ConnectionInterface, Profiler\ProfilerAwareInterface
             throw new Exception\RuntimeException('Must be connected before you can rollback');
         }
 
-        if (!$this->inTransaction) {
+        if (!$this->inTransaction()) {
             throw new Exception\RuntimeException('Must call beginTransaction() before you can rollback');
         }
 
         $this->resource->rollBack();
+
+        $this->inTransaction           = false;
+        $this->nestedTransactionsCount = 0;
+
         return $this;
     }
 
     /**
-     * Execute
+     * {@inheritDoc}
      *
-     * @param $sql
-     * @return Result
      * @throws Exception\InvalidQueryException
      */
     public function execute($sql)
@@ -447,13 +369,14 @@ class Connection implements ConnectionInterface, Profiler\ProfilerAwareInterface
         }
 
         $result = $this->driver->createResult($resultResource, $sql);
+
         return $result;
     }
 
     /**
      * Prepare
      *
-     * @param string $sql
+     * @param  string    $sql
      * @return Statement
      */
     public function prepare($sql)
@@ -463,19 +386,20 @@ class Connection implements ConnectionInterface, Profiler\ProfilerAwareInterface
         }
 
         $statement = $this->driver->createStatement($sql);
+
         return $statement;
     }
 
     /**
-     * Get last generated id
+     * {@inheritDoc}
      *
-     * @param string $name
+     * @param  string            $name
      * @return string|null|false
      */
     public function getLastGeneratedValue($name = null)
     {
         if ($name === null && $this->driverName == 'pgsql') {
-            return null;
+            return;
         }
 
         try {
@@ -483,6 +407,7 @@ class Connection implements ConnectionInterface, Profiler\ProfilerAwareInterface
         } catch (\Exception $e) {
             // do nothing
         }
+
         return false;
     }
 }

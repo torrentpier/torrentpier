@@ -33,6 +33,13 @@ class InjectTemplateListener extends AbstractListenerAggregate
     protected $controllerMap = array();
 
     /**
+     * Flag to force the use of the route match controller param
+     *
+     * @var boolean
+     */
+    protected $preferRouteMatchController = false;
+
+    /**
      * {@inheritDoc}
      */
     public function attach(Events $events)
@@ -66,8 +73,10 @@ class InjectTemplateListener extends AbstractListenerAggregate
         if (is_object($controller)) {
             $controller = get_class($controller);
         }
-        if (!$controller) {
-            $controller = $routeMatch->getParam('controller', '');
+
+        $routeMatchController = $routeMatch->getParam('controller', '');
+        if (!$controller || ($this->preferRouteMatchController && $routeMatchController)) {
+            $controller = $routeMatchController;
         }
 
         $template = $this->mapController($controller);
@@ -122,6 +131,10 @@ class InjectTemplateListener extends AbstractListenerAggregate
      */
     public function mapController($controller)
     {
+        if (! is_string($controller)) {
+            return false;
+        }
+
         foreach ($this->controllerMap as $namespace => $replacement) {
             if (
                 // Allow disabling rule by setting value to false since config
@@ -137,7 +150,7 @@ class InjectTemplateListener extends AbstractListenerAggregate
             // Map namespace to $replacement if its value is string
             if (is_string($replacement)) {
                 $map = rtrim($replacement, '/') . '/';
-                $controller = substr($controller, strlen($namespace) + 1);
+                $controller = substr($controller, strlen($namespace) + 1) ?: '';
             }
 
             //strip Controller namespace(s) (but not classname)
@@ -226,5 +239,24 @@ class InjectTemplateListener extends AbstractListenerAggregate
         }
 
         return $controller;
+    }
+
+    /**
+     * Sets the flag to instruct the listener to prefer the route match controller param
+     * over the class name
+     *
+     * @param boolean $preferRouteMatchController
+     */
+    public function setPreferRouteMatchController($preferRouteMatchController)
+    {
+        $this->preferRouteMatchController = (bool) $preferRouteMatchController;
+    }
+
+    /**
+     * @return boolean
+     */
+    public function isPreferRouteMatchController()
+    {
+        return $this->preferRouteMatchController;
     }
 }

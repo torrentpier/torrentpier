@@ -24,11 +24,16 @@ use Zend\Form\FormFactoryAwareInterface;
 use Zend\Stdlib\ArrayUtils;
 
 /**
- * Parses a class' properties for annotations in order to create a form and
- * input filter definition.
+ * Parses the properties of a class for annotations in order to create a form
+ * and input filter definition.
  */
 class AnnotationBuilder implements EventManagerAwareInterface, FormFactoryAwareInterface
 {
+    /**
+     * @var Parser\DoctrineAnnotationParser
+     */
+    protected $annotationParser;
+
     /**
      * @var AnnotationManager
      */
@@ -56,6 +61,7 @@ class AnnotationBuilder implements EventManagerAwareInterface, FormFactoryAwareI
         'AllowEmpty',
         'Attributes',
         'ComposedObject',
+        'ContinueIfEmpty',
         'ErrorMessage',
         'Exclude',
         'Filter',
@@ -63,6 +69,7 @@ class AnnotationBuilder implements EventManagerAwareInterface, FormFactoryAwareI
         'Hydrator',
         'Input',
         'InputFilter',
+        'Instance',
         'Name',
         'Object',
         'Options',
@@ -71,6 +78,11 @@ class AnnotationBuilder implements EventManagerAwareInterface, FormFactoryAwareI
         'ValidationGroup',
         'Validator'
     );
+
+    /**
+     * @var bool
+     */
+    protected $preserveDefinedOrder = false;
 
     /**
      * Set form factory to use when building form from annotations
@@ -92,7 +104,7 @@ class AnnotationBuilder implements EventManagerAwareInterface, FormFactoryAwareI
      */
     public function setAnnotationManager(AnnotationManager $annotationManager)
     {
-        $parser = new Parser\DoctrineAnnotationParser();
+        $parser = $this->getAnnotationParser();
         foreach ($this->defaultAnnotations as $annotationName) {
             $class = __NAMESPACE__ . '\\' . $annotationName;
             $parser->registerAnnotation($class);
@@ -214,6 +226,8 @@ class AnnotationBuilder implements EventManagerAwareInterface, FormFactoryAwareI
 
         if (!isset($formSpec['input_filter'])) {
             $formSpec['input_filter'] = $filterSpec;
+        } elseif (is_array($formSpec['input_filter'])) {
+            $formSpec['input_filter'] = ArrayUtils::merge($filterSpec->getArrayCopy(), $formSpec['input_filter']);
         }
 
         return $formSpec;
@@ -333,8 +347,9 @@ class AnnotationBuilder implements EventManagerAwareInterface, FormFactoryAwareI
             ? $elementSpec['spec']['type']
             : 'Zend\Form\Element';
 
-        // Compose as a fieldset or an element, based on specification type
-        if (is_subclass_of($type, 'Zend\Form\FieldsetInterface')) {
+        // Compose as a fieldset or an element, based on specification type.
+        // If preserve defined order is true, all elements are composed as elements to keep their ordering
+        if (!$this->preserveDefinedOrder() && is_subclass_of($type, 'Zend\Form\FieldsetInterface')) {
             if (!isset($formSpec['fieldsets'])) {
                 $formSpec['fieldsets'] = array();
             }
@@ -345,6 +360,24 @@ class AnnotationBuilder implements EventManagerAwareInterface, FormFactoryAwareI
             }
             $formSpec['elements'][] = $elementSpec;
         }
+    }
+
+    /**
+     * @param bool $preserveDefinedOrder
+     * @return $this
+     */
+    public function setPreserveDefinedOrder($preserveDefinedOrder)
+    {
+        $this->preserveDefinedOrder = (bool) $preserveDefinedOrder;
+        return $this;
+    }
+
+    /**
+     * @return bool
+     */
+    public function preserveDefinedOrder()
+    {
+        return $this->preserveDefinedOrder;
     }
 
     /**
@@ -379,6 +412,18 @@ class AnnotationBuilder implements EventManagerAwareInterface, FormFactoryAwareI
             return (true === $r);
         });
         return (bool) $results->last();
+    }
+
+    /**
+     * @return \Zend\Code\Annotation\Parser\DoctrineAnnotationParser
+     */
+    public function getAnnotationParser()
+    {
+        if (null === $this->annotationParser) {
+            $this->annotationParser = new Parser\DoctrineAnnotationParser();
+        }
+
+        return $this->annotationParser;
     }
 
     /**
