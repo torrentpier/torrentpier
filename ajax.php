@@ -76,35 +76,35 @@ $ajax->exec();
 //
 class ajax_common
 {
-	var $request = array();
-	var $response = array();
+	var $request = [];
+	var $response = [];
 
-	var $valid_actions = array(
+	var $valid_actions = [
 		// ACTION NAME         AJAX_AUTH
-		'edit_user_profile' => array('admin'),
-		'change_user_rank'  => array('admin'),
-		'change_user_opt'   => array('admin'),
-		'manage_user'       => array('admin'),
-		'manage_admin'      => array('admin'),
-		'sitemap'           => array('admin'),
+		'edit_user_profile' => ['admin'],
+		'change_user_rank'  => ['admin'],
+		'change_user_opt'   => ['admin'],
+		'manage_user'       => ['admin'],
+		'manage_admin'      => ['admin'],
+		'sitemap'           => ['admin'],
 
-		'mod_action'        => array('mod'),
-		'topic_tpl'         => array('mod'),
-		'group_membership'  => array('mod'),
-		'post_mod_comment'  => array('mod'),
+		'mod_action'        => ['mod'],
+		'topic_tpl'         => ['mod'],
+		'group_membership'  => ['mod'],
+		'post_mod_comment'  => ['mod'],
 
-		'avatar'            => array('user'),
-		'gen_passkey'       => array('user'),
-		'change_torrent'    => array('user'),
-		'change_tor_status' => array('user'),
-		'manage_group'      => array('user'),
+		'avatar'            => ['user'],
+		'gen_passkey'       => ['user'],
+		'change_torrent'    => ['user'],
+		'change_tor_status' => ['user'],
+		'manage_group'      => ['user'],
 
-		'view_post'         => array('guest'),
-		'view_torrent'      => array('guest'),
-		'user_register'     => array('guest'),
-		'posts'             => array('guest'),
-		'index_data'        => array('guest'),
-	);
+		'view_post'         => ['guest'],
+		'view_torrent'      => ['guest'],
+		'user_register'     => ['guest'],
+		'posts'             => ['guest'],
+		'index_data'        => ['guest'],
+	];
 
 	var $action = null;
 
@@ -113,7 +113,7 @@ class ajax_common
 	 */
 	function ajax_common()
 	{
-		ob_start(array(&$this, 'ob_handler'));
+		ob_start([&$this, 'ob_handler']);
 		header('Content-Type: text/plain');
 	}
 
@@ -273,10 +273,10 @@ class ajax_common
 			}
 			else
 			{
-				$login_args = array(
+				$login_args = [
 					'login_username' => $user->data['username'],
 					'login_password' => $_POST['user_password'],
-				);
+				];
 				if (!$user->login($login_args, true))
 				{
 					$this->ajax_die('Wrong password');

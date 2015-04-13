@@ -2566,16 +2566,21 @@ function hash_search ($hash)
 
 function bb_captcha ($mode, $callback = '')
 {
-	global $bb_cfg, $userdata;
+	global $bb_cfg, $lang, $userdata;
 
-	require_once(CLASS_DIR . 'recaptcha.php');
+	require_once(TP_AUTO_DIR . 'ReCaptcha/ReCaptcha.php');
 
 	$secret = $bb_cfg['captcha']['secret_key'];
 	$public = $bb_cfg['captcha']['public_key'];
 	$theme  = $bb_cfg['captcha']['theme'];
 	$lang   = $bb_cfg['lang'][$userdata['user_lang']]['captcha'];
 
-	$reCaptcha = new Google\ReCaptcha\Client($secret);
+	if (!$public || !$secret)
+	{
+		bb_die($lang['CAPTCHA_SETTINGS']);
+	}
+
+	$reCaptcha = new \ReCaptcha\ReCaptcha($secret);
 
 	switch ($mode)
 	{
@@ -2595,19 +2600,11 @@ function bb_captcha ($mode, $callback = '')
 			break;
 
 		case 'check':
-			$resp = null;
 			$g_resp = request_var('g-recaptcha-response', '');
-			if ($g_resp) {
-				try {
-					$resp = $reCaptcha->verifyResponse($_SERVER["REMOTE_ADDR"], $g_resp);
-				} catch (Google\ReCaptcha\Exception $e) {
-					$e->getError();
-				}
-			}
-			if (is_object($resp) && $resp->success === true) {
+			$resp = $reCaptcha->verify($g_resp, $_SERVER['REMOTE_ADDR']);
+			if ($resp->isSuccess())
+			{
 				return true;
-			} else {
-				return false;
 			}
 			break;
 

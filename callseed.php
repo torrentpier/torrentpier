@@ -5,7 +5,7 @@ define('BB_ROOT', './');
 require(BB_ROOT . 'common.php');
 
 // Init userdata
-$user->session_start(array('req_login' => true));
+$user->session_start(['req_login' => true]);
 
 $topic_id = (int) request_var('t', 0);
 $t_data   = topic_info($topic_id);
@@ -23,7 +23,7 @@ elseif ($t_data['call_seed_time'] > (TIMENOW - 86400))
 	bb_die(sprintf($lang['CALLSEED_MSG_SPAM'], $time_left));
 }
 
-$ban_user_id = array();
+$ban_user_id = [];
 
 $sql = DB()->fetch_rowset("SELECT ban_userid FROM ". BB_BANLIST ." WHERE ban_userid != 0");
 
