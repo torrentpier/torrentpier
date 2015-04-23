@@ -284,7 +284,7 @@ function humn_size (size) {
 		size = size/1024;
 		i++;
 	}
-	size = new String(size);
+	size = String(size);
 	if (size.indexOf('.') != -1) {
 		size = size.substring(0, size.indexOf('.') + 3);
 	}

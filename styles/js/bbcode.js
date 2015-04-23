@@ -20,7 +20,7 @@ BBCode.prototype = {
 	// Create new BBCode control
 	construct: function(textarea) {
 		this.textarea = textarea;
-		this.tags     = new Object();
+		this.tags     = {};
 		// Tag for quoting
 		this.addTag(
 			'_quoter',
@@ -224,7 +224,7 @@ BBCode.prototype = {
 	// Adds a BB tag to the list
 	addTag: function(id, open, close, key, ctrlKey, multiline) {
 		if (!ctrlKey) ctrlKey = "ctrl";
-		var tag = new Object();
+		var tag       = {};
 		tag.id        = id;
 		tag.open      = open;
 		tag.close     = close;

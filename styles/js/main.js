@@ -1,5 +1,5 @@
 function $p() {
-	var elements = new Array();
+	var elements = [];
 	for (var i = 0; i < arguments.length; i++) {
 		var element = arguments[i];
 		if (typeof element == 'string')

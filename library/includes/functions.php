@@ -2570,10 +2570,10 @@ function bb_captcha ($mode, $callback = '')
 
 	require_once(TP_AUTO_DIR . 'ReCaptcha/ReCaptcha.php');
 
-	$secret = $bb_cfg['captcha']['secret_key'];
-	$public = $bb_cfg['captcha']['public_key'];
-	$theme  = $bb_cfg['captcha']['theme'];
-	$lang   = $bb_cfg['lang'][$userdata['user_lang']]['captcha'];
+	$secret   = $bb_cfg['captcha']['secret_key'];
+	$public   = $bb_cfg['captcha']['public_key'];
+	$cp_theme = $bb_cfg['captcha']['theme'];
+	$cp_lang  = $bb_cfg['lang'][$userdata['user_lang']]['captcha'];
 
 	if (!$public || !$secret)
 	{
@@ -2590,13 +2590,13 @@ function bb_captcha ($mode, $callback = '')
 					var onloadCallback = function() {
 						grecaptcha.render('tp-captcha', {
 							'sitekey'  : '" . $public . "',
-							'theme'    : '" . $theme . "',
+							'theme'    : '" . $cp_theme . "',
 							'callback' : '" . $callback . "'
 						});
 					};
 				</script>
 				<div id=\"tp-captcha\"></div>
-				<script src=\"https://www.google.com/recaptcha/api.js?onload=onloadCallback&hl=" . $lang . "&render=explicit\" async defer></script>";
+				<script src=\"https://www.google.com/recaptcha/api.js?onload=onloadCallback&hl=" . $cp_lang . "&render=explicit\" async defer></script>";
 			break;
 
 		case 'check':

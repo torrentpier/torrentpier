@@ -557,7 +557,7 @@ $template->assign_vars(array(
 	'CAT_ID'              => $forum_data['cat_id'],
 	'CAT_TITLE'           => $forums['cat_title_html'][$forum_data['cat_id']],
 	'U_VIEWCAT'           => CAT_URL . $forum_data['cat_id'],
-	'PARENT_FORUM_HREF'	  => ($parent_id = $forum_data['forum_parent']) ? FORUM_URL . $forum_data['forum_parent'] : '',
+	'PARENT_FORUM_HREF'   => ($parent_id = $forum_data['forum_parent']) ? FORUM_URL . $forum_data['forum_parent'] : '',
 	'PARENT_FORUM_NAME'   => ($parent_id = $forum_data['forum_parent']) ? $forums['forum_name_html'][$parent_id] : '',
 ));
 

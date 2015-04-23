@@ -134,8 +134,7 @@ function updateButton()
 		else
 		{
 			document.form_rebuild_progress.submit_button.value = label_next + " (" + ticker + ")";
-
-			ticker--;;
+			ticker--;
 			refresh = setTimeout("updateButton()", 1000);
 		}
 	}

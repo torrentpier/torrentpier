@@ -127,10 +127,10 @@ function show_edit_options ()
 <div id="mod-action-content" style="display: none;">
 <form id="mod-action" method="POST" action="{U_SEARCH}" target="_blank">
 	<table class="borderless pad_0" cellpadding="0" cellspacing="0">
-	    <tr>
-		    <td class="pad_4">
-		        <input type="submit" name="del_my_post" value="{L_DEL_LIST_MY_MESSAGE}" class="bold" onclick="if (!window.confirm( this.value +'?' )){ return false };" />
-	        </td>
+		<tr>
+			<td class="pad_4">
+				<input type="submit" name="del_my_post" value="{L_DEL_LIST_MY_MESSAGE}" class="bold" onclick="if (!window.confirm( this.value +'?' )){ return false }" />
+			</td>
 			<td class="med" style="padding: 0 8px;">{L_DEL_LIST_MY_MESSAGE_INFO}</td>
 		</tr>
 	</table>

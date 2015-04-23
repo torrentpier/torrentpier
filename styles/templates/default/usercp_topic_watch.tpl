@@ -55,9 +55,12 @@ td.topic_id { cursor: pointer; }
 <div id="mod-action-content" style="display: none;">
 <form id="mod-action" name="watch_form" method="post" action="{S_FORM_ACTION}">
 	<table class="borderless pad_0" cellpadding="0" cellspacing="0">
-	<tr><td class="pad_4">
-		<input type="submit" name="del_from_ut" value="{L_DEL_LIST_MY_MESSAGE}" onclick="if (!window.confirm( this.value +'?' )){ return false };" />
-	</tr></table>
+		<tr>
+			<td class="pad_4">
+				<input type="submit" name="del_from_ut" value="{L_DEL_LIST_MY_MESSAGE}" onclick="if (!window.confirm( this.value +'?' )){ return false }" />
+			</td>
+		</tr>
+	</table>
 </form>
 </div>
 
