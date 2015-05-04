@@ -573,7 +573,7 @@ class bbcode
 			$text = preg_replace_callback('#(\[(quote|spoiler)=")(.+?)("\])#', array(&$this, 'escape_tiltes_callback'), $text);
 
 			// [url]
-			$url_exp = '[\w\#!$%&~/.\-;:=,?@а-яА-Я()\[\]+]+?';
+			$url_exp = "[\w\#!$%&~/.\-;':=,?@а-яА-Я()\[\]+]+?";
 			$text = preg_replace_callback("#\[url\]((?:https?://)?$url_exp)\[/url\]#isu", array(&$this, 'url_callback'), $text);
 			$text = preg_replace_callback("#\[url\](www\.$url_exp)\[/url\]#isu", array(&$this, 'url_callback'), $text);
 			$text = preg_replace_callback("#\[url=((?:https?://)?$url_exp)\]([^?\n\t].*?)\[/url\]#isu", array(&$this, 'url_callback'), $text);
@@ -737,7 +737,7 @@ class bbcode
 			(?<![\"'=])
 			\b
 			(
-				https?://[\w\#!$%&~/.\-;:=?@а-яА-Я()\[\]+]+
+				https?://[\w\#!$%&~/.\-;':=?@а-яА-Я()\[\]+]+
 			)
 			(?![\"']|\[/url|\[/img|</a)
 			(?=[,!]?\s|[\)<!])
