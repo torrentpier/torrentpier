@@ -219,7 +219,6 @@ else if (isset($_POST['joingroup']) && $_POST['joingroup'])
 
 	if ($bb_cfg['group_send_email'])
 	{
-		require(CLASS_DIR .'emailer.php');
 		$emailer = new emailer($bb_cfg['smtp_delivery']);
 
 		$emailer->from($bb_cfg['sitename'] ." <{$bb_cfg['board_email']}>");
@@ -271,7 +270,6 @@ else
 
 			if ($bb_cfg['group_send_email'])
 			{
-				require(CLASS_DIR .'emailer.php');
 				$emailer = new emailer($bb_cfg['smtp_delivery']);
 
 				$emailer->from($bb_cfg['sitename'] ." <{$bb_cfg['board_email']}>");
@@ -341,7 +339,6 @@ else
 						bb_die('Could not get user email information');
 					}
 
-					require(CLASS_DIR .'emailer.php');
 					$emailer = new emailer($bb_cfg['smtp_delivery']);
 
 					$emailer->from($bb_cfg['sitename'] ." <{$bb_cfg['board_email']}>");

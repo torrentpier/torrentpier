@@ -367,7 +367,6 @@ function user_notification($mode, &$post_data, &$topic_title, &$forum_id, &$topi
 
 			if ($watch_list)
 			{
-				require(CLASS_DIR .'emailer.php');
 				$emailer = new emailer($bb_cfg['smtp_delivery']);
 
 				$orig_word = $replacement_word = array();

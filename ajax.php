@@ -60,10 +60,6 @@ switch ($ajax->action)
 	case 'manage_group':
 		require(INC_DIR . 'functions_group.php');
 		break;
-
-	case 'sitemap';
-		require(CLASS_DIR .'sitemap.php');
-		break;
 }
 
 // Position in $ajax->valid_actions['xxx']

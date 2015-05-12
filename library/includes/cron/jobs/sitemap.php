@@ -2,8 +2,6 @@
 
 if (!defined('BB_ROOT')) die(basename(__FILE__));
 
-require(CLASS_DIR .'sitemap.php');
-
 $map = new sitemap();
 $map->create();
 
