@@ -940,7 +940,7 @@ class Template
 	 * Compiles the given string of code, and returns the result in a string.
 	 * If "do_not_echo" is true, the returned code will not be directly executable,
 	 * but can be used as part of a variable assignment for use in assign_code_from_handle().
-	 * This function isn't used and kept only for compatibility with original template.php
+	 * This function isn't used and kept only for compatibility with original Template.php
 	 */
 	function compile($code, $do_not_echo = false, $retvar = '')
 	{
