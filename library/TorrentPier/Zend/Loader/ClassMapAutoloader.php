@@ -25,13 +25,13 @@ class ClassMapAutoloader implements SplAutoloader
      * Registry of map files that have already been loaded
      * @var array
      */
-    protected $mapsLoaded = array();
+    protected $mapsLoaded = [];
 
     /**
      * Class name/filename map
      * @var array
      */
-    protected $map = array();
+    protected $map = [];
 
     /**
      * Constructor
@@ -85,7 +85,7 @@ class ClassMapAutoloader implements SplAutoloader
 
         if (!is_array($map)) {
             require_once __DIR__ . '/Exception/InvalidArgumentException.php';
-            throw new Exception\InvalidArgumentException(sprintf(
+			throw new Exception\InvalidArgumentException(sprintf(
                 'Map file provided does not return a map. Map file: "%s"',
                 (isset($location) && is_string($location) ? $location : 'unexpected type: ' . gettype($map))
             ));
@@ -111,7 +111,7 @@ class ClassMapAutoloader implements SplAutoloader
     {
         if (!is_array($locations) && !($locations instanceof Traversable)) {
             require_once __DIR__ . '/Exception/InvalidArgumentException.php';
-            throw new Exception\InvalidArgumentException('Map list must be an array or implement Traversable');
+			throw new Exception\InvalidArgumentException('Map list must be an array or implement Traversable');
         }
         foreach ($locations as $location) {
             $this->registerAutoloadMap($location);
@@ -150,7 +150,7 @@ class ClassMapAutoloader implements SplAutoloader
      */
     public function register()
     {
-        spl_autoload_register(array($this, 'autoload'), true, true);
+        spl_autoload_register([$this, 'autoload'], true, true);
     }
 
     /**
@@ -168,7 +168,7 @@ class ClassMapAutoloader implements SplAutoloader
     {
         if (!file_exists($location)) {
             require_once __DIR__ . '/Exception/InvalidArgumentException.php';
-            throw new Exception\InvalidArgumentException(sprintf(
+			throw new Exception\InvalidArgumentException(sprintf(
                 'Map file provided does not exist. Map file: "%s"',
                 (is_string($location) ? $location : 'unexpected type: ' . gettype($location))
             ));
@@ -202,7 +202,7 @@ class ClassMapAutoloader implements SplAutoloader
         }
 
         $prefixLength  = 5 + strlen($match[1]);
-        $parts = explode('/', str_replace(array('/', '\\'), '/', substr($path, $prefixLength)));
+        $parts = explode('/', str_replace(['/', '\\'], '/', substr($path, $prefixLength)));
         $parts = array_values(array_filter($parts, function ($p) {
             return ($p !== '' && $p !== '.');
         }));

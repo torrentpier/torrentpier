@@ -7,7 +7,7 @@ if (!defined('BB_CFG_LOADED')) trigger_error('File config.php not loaded', E_USE
 
 // Define some basic configuration arrays
 unset($stopwords, $synonyms_match, $synonyms_replace);
-$userdata = $theme = $images = $lang = $nav_links = $bf = $attach_config = array();
+$userdata = $theme = $images = $lang = $nav_links = $bf = $attach_config = [];
 $gen_simple_header = false;
 $user = null;
 
@@ -87,10 +87,10 @@ define('MOD',          2);
 define('GROUP_MEMBER', 20);
 define('CP_HOLDER',    25);
 
-$excluded_users = array(
+$excluded_users = [
 	GUEST_UID,
 	BOT_UID,
-);
+];
 define('EXCLUDED_USERS_CSV', implode(',', $excluded_users));
 
 // User related
@@ -181,7 +181,7 @@ define('TOR_CHECKING',      9);   // проверяется
 define('TOR_TMP',           10);  // временная
 define('TOR_PREMOD',        11);  // премодерация
 
-$bb_cfg['tor_icons'] = array(
+$bb_cfg['tor_icons'] = [
 	TOR_NOT_APPROVED  => '<span class="tor-icon tor-not-approved">*</span>',
 	TOR_CLOSED        => '<span class="tor-icon tor-closed">x</span>',
 	TOR_APPROVED      => '<span class="tor-icon tor-approved">&radic;</span>',
@@ -194,10 +194,10 @@ $bb_cfg['tor_icons'] = array(
 	TOR_CHECKING      => '<span class="tor-icon tor-checking">%</span>',
 	TOR_TMP           => '<span class="tor-icon tor-dup">T</span>',
 	TOR_PREMOD        => '<span class="tor-icon tor-dup">&#8719;</span>',
-);
+];
 
 // Запрет на скачивание
-$bb_cfg['tor_frozen'] = array(
+$bb_cfg['tor_frozen'] = [
 	TOR_CHECKING      => true,
 	TOR_CLOSED        => true,
 	TOR_CLOSED_CPHOLD => true,
@@ -205,36 +205,36 @@ $bb_cfg['tor_frozen'] = array(
 	TOR_DUP           => true,
 	TOR_NO_DESC       => true,
 	TOR_PREMOD        => true,
-);
+];
 
 // Разрешение на скачку автором, если закрыто на скачивание.
-$bb_cfg['tor_frozen_author_download'] = array(
+$bb_cfg['tor_frozen_author_download'] = [
 	TOR_CHECKING      => true,
 	TOR_NO_DESC       => true,
 	TOR_PREMOD        => true,
-);
+];
 
 // Запрет на редактирование головного сообщения
-$bb_cfg['tor_cannot_edit'] = array(
+$bb_cfg['tor_cannot_edit'] = [
 	TOR_CHECKING      => true,
 	TOR_CLOSED        => true,
 	TOR_CONSUMED      => true,
 	TOR_DUP           => true,
-);
+];
 
 // Запрет на создание новых раздач если стоит статус недооформлено/неоформлено/сомнительно
-$bb_cfg['tor_cannot_new'] = array(TOR_NEED_EDIT, TOR_NO_DESC, TOR_DOUBTFUL);
+$bb_cfg['tor_cannot_new'] = [TOR_NEED_EDIT, TOR_NO_DESC, TOR_DOUBTFUL];
 
 // Разрешение на ответ релизера, если раздача исправлена.
-$bb_cfg['tor_reply'] = array(TOR_NEED_EDIT, TOR_NO_DESC, TOR_DOUBTFUL);
+$bb_cfg['tor_reply'] = [TOR_NEED_EDIT, TOR_NO_DESC, TOR_DOUBTFUL];
 
 // Если такой статус у релиза, то статистика раздачи будет скрыта
-$bb_cfg['tor_no_tor_act'] = array(
+$bb_cfg['tor_no_tor_act'] = [
 	TOR_CLOSED        => true,
 	TOR_DUP           => true,
 	TOR_CLOSED_CPHOLD => true,
 	TOR_CONSUMED      => true,
-);
+];
 
 // Table names
 define('BUF_TOPIC_VIEW',          'buf_topic_view');
@@ -335,6 +335,23 @@ define('REQUEST', 4);
 define('CHBOX',   5);
 define('SELECT',  6);
 
+define('ONLY_NEW_POSTS',  1);
+define('ONLY_NEW_TOPICS', 2);
+
+// Template system constants
+define('XS_TPL_PREFIX', 'tpl_');
+define('XS_USE_ISSET', '1');
+define('XS_TAG_NONE', 0);
+define('XS_TAG_BEGIN', 2);
+define('XS_TAG_END', 3);
+define('XS_TAG_INCLUDE', 4);
+define('XS_TAG_IF', 5);
+define('XS_TAG_ELSE', 6);
+define('XS_TAG_ELSEIF', 7);
+define('XS_TAG_ENDIF', 8);
+define('XS_TAG_BEGINELSE', 11);
+
+
 if (!empty($banned_user_agents))
 {
 	foreach ($banned_user_agents as $agent)
@@ -410,27 +427,27 @@ function make_url ($path = '')
 }
 
 require(INC_DIR .'functions.php');
-require(INC_DIR .'sessions.php');
-require(INC_DIR .'template.php');
 require(CORE_DIR .'mysql.php');
 
 $bb_cfg = array_merge(bb_get_config(BB_CONFIG), $bb_cfg);
 
-$user = new user_common();
+$user = new Sessions();
 $userdata =& $user->data;
 
 if (DBG_USER) require(INC_DIR .'functions_dev.php');
+
+
 
 $html = new html_common();
 $log_action = new log_action();
 
 // TODO temporarily 'cat_forums' always enqueued
-$datastore->enqueue(array('cat_forums'));
+$datastore->enqueue(['cat_forums']);
 
 // Дата старта вашего проекта
 if (!$bb_cfg['board_startdate'])
 {
-	bb_update_config(array('board_startdate' => TIMENOW));
+	bb_update_config(['board_startdate' => TIMENOW]);
 	DB()->query("UPDATE ". BB_USERS ." SET user_regdate = ". TIMENOW ." WHERE user_id IN(2, ". EXCLUDED_USERS_CSV .")");
 }
 
@@ -440,7 +457,7 @@ if ((empty($_POST) && !defined('IN_ADMIN') && !defined('IN_AJAX') && !file_exist
 	if (TIMENOW - $bb_cfg['cron_last_check'] > $bb_cfg['cron_check_interval'])
 	{
 		// Update cron_last_check
-		bb_update_config(array('cron_last_check' => (TIMENOW + 10)));
+		bb_update_config(['cron_last_check' => (TIMENOW + 10)]);
 
 		define('CRON_LOG_ENABLED', true);  // global ON/OFF
 		define('CRON_FORCE_LOG',   false); // always log regardless of job settings
@@ -464,21 +481,21 @@ if ((empty($_POST) && !defined('IN_ADMIN') && !defined('IN_AJAX') && !file_exist
 	}
 }
 
-$dl_link_css = array(
+$dl_link_css = [
 	DL_STATUS_RELEASER => 'genmed',
 	DL_STATUS_WILL     => 'dlWill',
 	DL_STATUS_DOWN     => 'leechmed',
 	DL_STATUS_COMPLETE => 'seedmed',
 	DL_STATUS_CANCEL   => 'dlCancel',
-);
+];
 
-$dl_status_css = array(
+$dl_status_css = [
 	DL_STATUS_RELEASER => 'genmed',
 	DL_STATUS_WILL     => 'dlWill',
 	DL_STATUS_DOWN     => 'dlDown',
 	DL_STATUS_COMPLETE => 'dlComplete',
 	DL_STATUS_CANCEL   => 'dlCancel',
-);
+];
 
 // Exit if board is disabled via ON/OFF trigger or by admin
 if (($bb_cfg['board_disable'] || file_exists(BB_DISABLED)) && !defined('IN_ADMIN') && !defined('IN_AJAX') && !defined('IN_LOGIN'))

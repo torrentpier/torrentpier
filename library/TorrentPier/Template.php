@@ -1,28 +1,5 @@
 <?php
 
-/**
- * Reserved prefixes:
- *
- *  "L_" - lang var, {L_VAR} is eq to $lang['VAR']
- *  "$"  - php var,  {$VAR}  is eq to $VAR (in $this->execute() scope!)
- *  "#"  - constant, {#CON}  is eq to CON
- *
- */
-
-if (!defined('BB_ROOT')) die(basename(__FILE__));
-
-// Template system constants
-define('XS_TPL_PREFIX', 'tpl_');
-define('XS_USE_ISSET', '1');
-define('XS_TAG_NONE', 0);
-define('XS_TAG_BEGIN', 2);
-define('XS_TAG_END', 3);
-define('XS_TAG_INCLUDE', 4);
-define('XS_TAG_IF', 5);
-define('XS_TAG_ELSE', 6);
-define('XS_TAG_ELSEIF', 7);
-define('XS_TAG_ENDIF', 8);
-define('XS_TAG_BEGINELSE', 11);
 
 class Template
 {
@@ -89,7 +66,7 @@ class Template
 	/**
 	 * Constructor. Installs XS mod on first run or updates it and sets the root dir.
 	 */
-	function Template($root = '.')
+	function __construct ($root = '.')
 	{
 		global $bb_cfg, $lang;
 
@@ -963,7 +940,7 @@ class Template
 	 * Compiles the given string of code, and returns the result in a string.
 	 * If "do_not_echo" is true, the returned code will not be directly executable,
 	 * but can be used as part of a variable assignment for use in assign_code_from_handle().
-	 * This function isn't used and kept only for compatibility with original template.php
+	 * This function isn't used and kept only for compatibility with original Template.php
 	 */
 	function compile($code, $do_not_echo = false, $retvar = '')
 	{

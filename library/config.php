@@ -125,7 +125,7 @@ $bb_cfg['cache']['engines'] = array(
 	'bb_cache'      => array('filecache', array()),
 	'bb_config'     => array('filecache', array()),
 	'tr_cache'      => array('filecache', array()),
-	'session_cache' => array('filecache', array()),
+	'bb_session'    => array('filecache', array()),
 	'bb_login_err'  => array('filecache', array()),
 	'bb_poll_data'  => array('filecache', array()),
 );
@@ -255,6 +255,7 @@ define('CACHE_DIR',     BB_PATH .'/internal_data/cache/'     );
 define('LOG_DIR',       BB_PATH .'/internal_data/log/'       );
 define('SITEMAP_DIR',   BB_PATH .'/internal_data/sitemap/'   );
 define('TRIGGERS_DIR',  BB_PATH .'/internal_data/triggers/'  );
+define('LIB_DIR',       BB_ROOT .'/library/'                 );
 define('AJAX_DIR',      BB_ROOT .'/library/ajax/'            );
 define('CFG_DIR',       BB_PATH .'/library/config/'          );
 define('INC_DIR',       BB_PATH .'/library/includes/'        );
@@ -262,9 +263,10 @@ define('CLASS_DIR',     BB_PATH .'/library/includes/classes/');
 define('CORE_DIR',      BB_PATH .'/library/includes/core/'   );
 define('UCP_DIR',       BB_PATH .'/library/includes/ucp/'    );
 define('LANG_ROOT_DIR', BB_PATH .'/library/language/'        );
-define('TP_AUTO_DIR',   BB_PATH .'/library/TorrentPier/'     );
+define('TP_DIR',        BB_PATH .'/library/TorrentPier/'     );
 define('IMAGES_DIR',    BB_PATH .'/styles/images/'           );
 define('TEMPLATES_DIR', BB_PATH .'/styles/templates/'        );
+define('ADMIN_TPL_DIR', TEMPLATES_DIR .'/admin/'             );
 
 // URL's
 $bb_cfg['ajax_url']    = 'ajax.php';     #  "http://{$_SERVER['SERVER_NAME']}/ajax.php"
@@ -322,9 +324,6 @@ $bb_cfg['lang'] = array(
 		'captcha'  => 'en',
 	),
 );
-
-// Templates
-define('ADMIN_TPL_DIR', TEMPLATES_DIR .'/admin/');
 
 $bb_cfg['templates'] = array(
 //	'folder'  => 'Name',

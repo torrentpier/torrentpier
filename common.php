@@ -17,18 +17,11 @@ header('X-Frame-Options: SAMEORIGIN');
 
 // Get initial config
 require(BB_ROOT . 'library/config.php');
-
-// Load Zend Framework
-use Zend\Loader\StandardAutoloader;
-require(BB_ROOT . 'library/Zend/Loader/StandardAutoloader.php');
-$loader = new StandardAutoloader(array('autoregister_zf' => true));
-$loader->register();
-
-// ZF global use
-use Zend\Json;
+require(TP_DIR . 'Autoloader.php');
+TorrentPier_Autoloader::getInstance()->setupAutoloader(TP_DIR);
 
 $server_protocol = ($bb_cfg['cookie_secure']) ? 'https://' : 'http://';
-$server_port = (in_array($bb_cfg['server_port'], array(80, 443))) ? '' : ':' . $bb_cfg['server_port'];
+$server_port = (in_array($bb_cfg['server_port'], [80, 443])) ? '' : ':' . $bb_cfg['server_port'];
 define('FORUM_PATH', $bb_cfg['script_path']);
 define('FULL_URL', $server_protocol . $bb_cfg['server_name'] . $server_port . $bb_cfg['script_path']);
 unset($server_protocol, $server_port);
@@ -68,24 +61,30 @@ define('BOT_UID',   -746);
 require(CORE_DIR . 'dbs.php');
 $DBS = new DBS($bb_cfg);
 
+/**
+ * @param string $db_alias
+ *
+ * @return sql_db()
+ */
 function DB ($db_alias = 'db1')
 {
 	global $DBS;
 	return $DBS->get_db_obj($db_alias);
 }
 
-/**
- * Cache
- */
-// Main cache class
+// cache
 require(INC_DIR . 'cache/common.php');
-// Main datastore class
 require(INC_DIR . 'datastore/common.php');
 
 // Core CACHE class
 require(CORE_DIR . 'caches.php');
 $CACHES = new CACHES($bb_cfg);
 
+/**
+ * @param $cache_name
+ *
+ * @return cache_common
+ */
 function CACHE ($cache_name)
 {
 	global $CACHES;
@@ -119,11 +118,11 @@ switch ($bb_cfg['datastore_type'])
 		break;
 
 	case 'sqlite':
-		$default_cfg = array(
+		$default_cfg = [
 			'db_file_path' => $bb_cfg['cache']['db_dir'] .'datastore.sqlite.db',
 			'pconnect'     => true,
 			'con_required' => true,
-		);
+		];
 		$datastore = new datastore_sqlite($default_cfg, $bb_cfg['cache']['prefix']);
 		break;
 
@@ -250,7 +249,7 @@ function verify_id ($id, $length)
 
 function clean_filename ($fname)
 {
-	static $s = array('\\', '/', ':', '*', '?', '"', '<', '>', '|', ' ');
+	static $s = ['\\', '/', ':', '*', '?', '"', '<', '>', '|', ' '];
 	return str_replace($s, '_', str_compact($fname));
 }
 
@@ -452,24 +451,36 @@ function log_request ($file = '', $prepend_str = false, $add_post = true)
 {
 	global $user;
 
-	$file = ($file) ? $file : 'req/'. date('m-d');
-	$str = array();
+	$file  = ($file) ? $file : 'req/' . date('m-d');
+	$str   = [];
 	$str[] = date('m-d H:i:s');
-	if ($prepend_str !== false) $str[] = $prepend_str;
-	if (!empty($user->data)) $str[] = $user->id ."\t". html_entity_decode($user->name);
+	if ($prepend_str !== false)
+	{
+		$str[] = $prepend_str;
+	}
+	if (!empty($user->data))
+	{
+		$str[] = $user->id . "\t" . html_entity_decode($user->name);
+	}
 	$str[] = sprintf('%-15s', $_SERVER['REMOTE_ADDR']);
 
-	if (isset($_SERVER['REQUEST_URI'])) {
+	if (isset($_SERVER['REQUEST_URI']))
+	{
 		$str[] = $_SERVER['REQUEST_URI'];
 	}
-	if (isset($_SERVER['HTTP_USER_AGENT'])) {
+	if (isset($_SERVER['HTTP_USER_AGENT']))
+	{
 		$str[] = $_SERVER['HTTP_USER_AGENT'];
 	}
-	if (isset($_SERVER['HTTP_REFERER'])) {
+	if (isset($_SERVER['HTTP_REFERER']))
+	{
 		$str[] = $_SERVER['HTTP_REFERER'];
 	}
 
-	if (!empty($_POST) && $add_post) $str[] = "post: ". str_compact(urldecode(http_build_query($_POST)));
+	if (!empty($_POST) && $add_post)
+	{
+		$str[] = "post: " . str_compact(urldecode(http_build_query($_POST)));
+	}
 	$str = join("\t", $str) . "\n";
 	bb_log($str, $file);
 }
@@ -486,11 +497,11 @@ else if (defined('IN_TRACKER'))
 
 	function dummy_exit ($interval = 1800)
 	{
-		$output = bencode(array(
+		$output = bencode([
 			'interval'     => (int)    $interval,
 			'min interval' => (int)    $interval,
 			'peers'        => (string) DUMMY_PEER,
-		));
+		]);
 
 		die($output);
 	}
