@@ -18,6 +18,11 @@ header('X-Frame-Options: SAMEORIGIN');
 // Get initial config
 require(BB_ROOT . 'library/config.php');
 
+$fileDir = dirname(__FILE__);
+
+require($fileDir . '/library/TorrentPier/Autoloader.php');
+TorrentPier_Autoloader::getInstance()->setupAutoloader($fileDir . '/library/TorrentPier');
+
 // Load Zend Framework
 use Zend\Loader\StandardAutoloader;
 require(BB_ROOT . 'library/Zend/Loader/StandardAutoloader.php');

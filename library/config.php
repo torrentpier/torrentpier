@@ -608,8 +608,8 @@ $bb_cfg['group_avatars'] = array(
 // Get a Google reCAPTCHA API Key: https://www.google.com/recaptcha/admin
 $bb_cfg['captcha'] = array(
 	'disabled'   => false,
-	'public_key' => '', // your public key
-	'secret_key' => '', // your secret key
+	'public_key' => '123', // your public key
+	'secret_key' => '123', // your secret key
 	'theme'      => 'light', // light or dark
 );
 
