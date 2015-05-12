@@ -411,8 +411,7 @@ foreach ($profile_fields as $field => $can_edit)
 				}
 				else if (!empty($_FILES['avatar']['name']) && $bb_cfg['avatars']['up_allowed'])
 				{
-					require(INC_DIR .'functions_upload.php');
-					$upload = new upload_common();
+					$upload = new Upload();
 
 					if ($upload->init($bb_cfg['avatars'], $_FILES['avatar']) AND $upload->store('avatar', $pr_data))
 					{

@@ -335,6 +335,23 @@ define('REQUEST', 4);
 define('CHBOX',   5);
 define('SELECT',  6);
 
+define('ONLY_NEW_POSTS',  1);
+define('ONLY_NEW_TOPICS', 2);
+
+// Template system constants
+define('XS_TPL_PREFIX', 'tpl_');
+define('XS_USE_ISSET', '1');
+define('XS_TAG_NONE', 0);
+define('XS_TAG_BEGIN', 2);
+define('XS_TAG_END', 3);
+define('XS_TAG_INCLUDE', 4);
+define('XS_TAG_IF', 5);
+define('XS_TAG_ELSE', 6);
+define('XS_TAG_ELSEIF', 7);
+define('XS_TAG_ENDIF', 8);
+define('XS_TAG_BEGINELSE', 11);
+
+
 if (!empty($banned_user_agents))
 {
 	foreach ($banned_user_agents as $agent)
@@ -410,13 +427,11 @@ function make_url ($path = '')
 }
 
 require(INC_DIR .'functions.php');
-require(INC_DIR .'sessions.php');
-require(INC_DIR .'template.php');
 require(CORE_DIR .'mysql.php');
 
 $bb_cfg = array_merge(bb_get_config(BB_CONFIG), $bb_cfg);
 
-$user = new user_common();
+$user = new Sessions();
 $userdata =& $user->data;
 
 if (DBG_USER) require(INC_DIR .'functions_dev.php');

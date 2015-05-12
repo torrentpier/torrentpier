@@ -1,44 +1,95 @@
 <?php
 
-if (!defined('BB_ROOT')) die(basename(__FILE__));
-
-class upload_common
+if (!defined('BB_ROOT'))
 {
-	var $cfg = array(
+	die(basename(__FILE__));
+}
+
+class Upload
+{
+	/**
+	 * @type array
+	 */
+	public $cfg = [
 		'max_size'    => 0,
 		'max_width'   => 0,
 		'max_height'  => 0,
-		'allowed_ext' => array(),
+		'allowed_ext' => [],
 		'upload_path' => '',
-	);
-	var $file = array(
-		'name'        => '',
-		'type'        => '',
-		'size'        => 0,
-		'tmp_name'    => '',
-		'error'       => UPLOAD_ERR_NO_FILE,
-	);
-	var $orig_name    = '';
-	var $file_path    = '';      // Stored file path
-	var $file_ext     = '';
-	var $file_ext_id  = '';
-	var $file_size    = '';
-	var $ext_ids      = array(); // array_flip($bb_cfg['file_id_ext'])
-	var $errors       = array();
-	var $img_types    = array(
+	];
+
+	/**
+	 * @type array
+	 */
+	public $file = [
+		'name'     => '',
+		'type'     => '',
+		'size'     => 0,
+		'tmp_name' => '',
+		'error'    => UPLOAD_ERR_NO_FILE,
+	];
+
+	/**
+	 * @type string
+	 */
+	public $orig_name = '';
+
+	/**
+	 * @type string
+	 */
+	public $file_path = '';
+
+	/**
+	 * @type string
+	 */
+	public $file_ext = '';
+
+	/**
+	 * @type string
+	 */
+	public $file_ext_id = '';
+
+	/**
+	 * @type string
+	 */
+	public $file_size = '';
+
+	/**
+	 * array_flip($bb_cfg['file_id_ext'])
+	 *
+	 * @type array
+	 */
+	public $ext_ids = [];
+
+	/**
+	 * @type array
+	 */
+	public $errors = [];
+
+	/**
+	 * @type array
+	 */
+	public $img_types = [
 		1 => 'gif',
 		2 => 'jpg',
 		3 => 'png',
 		6 => 'bmp',
 		7 => 'tiff',
 		8 => 'tiff',
-	);
+	];
 
-	function init ($cfg = array(), $post_params = array(), $uploaded_only = true)
+	/**
+	 * @param array $cfg
+	 * @param array $post_params
+	 * @param bool  $uploaded_only
+	 *
+	 * @return bool
+	 */
+	public function init ($cfg = [], $post_params = [], $uploaded_only = true)
 	{
 		global $bb_cfg, $lang;
 
-		$this->cfg = array_merge($this->cfg, $cfg);
+		$this->cfg  = array_merge($this->cfg, $cfg);
 		$this->file = $post_params;
 
 		// upload errors from $_FILES
@@ -47,34 +98,39 @@ class upload_common
 			$msg = $lang['UPLOAD_ERROR_COMMON'];
 			$msg .= ($err_desc =& $lang['UPLOAD_ERRORS'][$this->file['error']]) ? " ($err_desc)" : '';
 			$this->errors[] = $msg;
+
 			return false;
 		}
 		// file_exists
 		if (!file_exists($this->file['tmp_name']))
 		{
 			$this->errors[] = "Uploaded file not exists: {$this->file['tmp_name']}";
+
 			return false;
 		}
 		// size
 		if (!$this->file_size = filesize($this->file['tmp_name']))
 		{
 			$this->errors[] = "Uploaded file is empty: {$this->file['tmp_name']}";
+
 			return false;
 		}
 		if ($this->cfg['max_size'] && $this->file_size > $this->cfg['max_size'])
 		{
 			$this->errors[] = sprintf($lang['UPLOAD_ERROR_SIZE'], humn_size($this->cfg['max_size']));
+
 			return false;
 		}
 		// is_uploaded_file
 		if ($uploaded_only && !is_uploaded_file($this->file['tmp_name']))
 		{
 			$this->errors[] = "Not uploaded file: {$this->file['tmp_name']}";
+
 			return false;
 		}
 		// get ext
-		$this->ext_ids = array_flip($bb_cfg['file_id_ext']);
-		$file_name_ary = explode('.', $this->file['name']);
+		$this->ext_ids  = array_flip($bb_cfg['file_id_ext']);
+		$file_name_ary  = explode('.', $this->file['name']);
 		$this->file_ext = strtolower(end($file_name_ary));
 
 		// img
@@ -88,6 +144,7 @@ class upload_common
 				if (!$width || !$height || !$type || !isset($this->img_types[$type]))
 				{
 					$this->errors[] = $lang['UPLOAD_ERROR_FORMAT'];
+
 					return false;
 				}
 				$this->file_ext = $this->img_types[$type];
@@ -96,12 +153,14 @@ class upload_common
 				if (($this->cfg['max_width'] && $width > $this->cfg['max_width']) || ($this->cfg['max_height'] && $height > $this->cfg['max_height']))
 				{
 					$this->errors[] = sprintf($lang['UPLOAD_ERROR_DIMENSIONS'], $this->cfg['max_width'], $this->cfg['max_height']);
+
 					return false;
 				}
 			}
 			else
 			{
 				$this->errors[] = $lang['UPLOAD_ERROR_NOT_IMAGE'];
+
 				return false;
 			}
 		}
@@ -109,24 +168,33 @@ class upload_common
 		if ($uploaded_only && (!isset($this->ext_ids[$this->file_ext]) || !in_array($this->file_ext, $this->cfg['allowed_ext'], true)))
 		{
 			$this->errors[] = sprintf($lang['UPLOAD_ERROR_NOT_ALLOWED'], htmlCHR($this->file_ext));
+
 			return false;
 		}
-		$this->file_ext_id = $this->ext_ids[$this->file_ext];
+		$this->file_ext_id = @$this->ext_ids[$this->file_ext];
 
 		return true;
 	}
 
-	function store ($mode = '', $params = array())
+	/**
+	 * @param string $mode
+	 * @param array  $params
+	 *
+	 * @return bool
+	 */
+	public function store ($mode = '', $params = [])
 	{
 		if ($mode == 'avatar')
 		{
 			delete_avatar($params['user_id'], $params['avatar_ext_id']);
 			$file_path = get_avatar_path($params['user_id'], $this->file_ext_id);
+
 			return $this->_move($file_path);
 		}
 		else if ($mode == 'attach')
 		{
 			$file_path = get_attach_path($params['topic_id']);
+
 			return $this->_move($file_path);
 		}
 		else
@@ -135,7 +203,12 @@ class upload_common
 		}
 	}
 
-	function _move ($file_path)
+	/**
+	 * @param $file_path
+	 *
+	 * @return bool
+	 */
+	private function _move ($file_path)
 	{
 		$dir = dirname($file_path);
 		if (!file_exists($dir))
@@ -143,6 +216,7 @@ class upload_common
 			if (!bb_mkdir($dir))
 			{
 				$this->errors[] = "Cannot create dir: $dir";
+
 				return false;
 			}
 		}
@@ -151,6 +225,7 @@ class upload_common
 			if (!@copy($this->file['tmp_name'], $file_path))
 			{
 				$this->errors[] = 'Cannot copy tmp file';
+
 				return false;
 			}
 			@unlink($this->file['tmp_name']);

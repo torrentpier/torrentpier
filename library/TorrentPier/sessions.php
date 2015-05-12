@@ -1,24 +1,22 @@
 <?php
 
-if (!defined('BB_ROOT')) die(basename(__FILE__));
 
-define('ONLY_NEW_POSTS',  1);
-define('ONLY_NEW_TOPICS', 2);
-
-class user_common
+class Sessions
 {
 	/**
-	*  Config
-	*/
-	var $cfg = array(
+	 * @type array
+	 */
+	public $cfg = [
 		'req_login'         => false,    // requires user to be logged in
 		'req_session_admin' => false,    // requires active admin session (for moderation or admin actions)
-	);
+	];
 
 	/**
-	*  PHP-JS exchangeable options (JSON'ized as {USER_OPTIONS_JS} in TPL)
-	*/
-	var $opt_js = array(
+	 * PHP-JS exchangeable options (JSON'ized as {USER_OPTIONS_JS} in TPL)
+	 *
+	 * @type array
+	 */
+	public $opt_js = [
 		'only_new' => 0,     // show ony new posts or topics
 		'h_av'     => 0,     // hide avatar
 		'h_rnk_i'  => 0,     // hide rank images
@@ -31,54 +29,68 @@ class user_common
 		'hl_tr'    => 1,     // show cursor in tracker.php
 		'i_aft_l'  => 0,     // show images only after full loading
 		'h_tsp'    => 0,     // show released title {...}
-	);
+	];
 
 	/**
 	 *  Defaults options for guests
+	 *
+	 * @type array
 	 */
-	var $opt_js_guest = array(
-		'h_av'     => 1,     // hide avatar
-		'h_rnk_i'  => 1,     // hide rank images
-		'h_smile'  => 1,     // hide smilies
-		'h_sig'    => 1,     // hide signatures
-	);
+	public $opt_js_guest = [
+		'h_av'    => 1,     // hide avatar
+		'h_rnk_i' => 1,     // hide rank images
+		'h_smile' => 1,     // hide smilies
+		'h_sig'   => 1,     // hide signatures
+	];
 
 	/**
-	*  Sessiondata
-	*/
-	var $sessiondata = array(
+	 * Sessiondata
+	 *
+	 * @type array
+	 */
+	public $sessiondata = [
 		'uk'  => null,
 		'uid' => null,
 		'sid' => '',
-	);
+	];
 
 	/**
-	*  Old $userdata
-	*/
-	var $data = array();
+	 * Old $userdata
+	 *
+	 * @type array
+	 */
+	public $data = [];
 
 	/**
-	*  Shortcuts
-	*/
-	var $id = null;
+	 * Shortcuts
+	 *
+	 * @type
+	 */
+	public $id;
+	public $active;
+	public $name;
+	public $lastvisit;
+	public $regdate;
+	public $level;
+	public $opt;
 
-	/**
-	*  Constructor
-	*/
-	function user_common ()
+
+	function __construct ()
 	{
 		$this->get_sessiondata();
 	}
 
 	/**
-	*  Start session (restore existent session or create new)
-	*/
-	function session_start ($cfg = array())
+	 * @param array $cfg
+	 *
+	 * @return array|bool
+	 */
+	public function session_start ($cfg = [])
 	{
 		global $bb_cfg;
 
 		$update_sessions_table = false;
-		$this->cfg = array_merge($this->cfg, $cfg);
+		$this->cfg             = array_merge($this->cfg, $cfg);
 
 		$session_id = $this->sessiondata['sid'];
 
@@ -89,8 +101,8 @@ class user_common
 
 			$SQL['SELECT'][] = "u.*, s.*";
 
-			$SQL['FROM'][] = BB_SESSIONS ." s";
-			$SQL['INNER JOIN'][] = BB_USERS ." u ON(u.user_id = s.session_user_id)";
+			$SQL['FROM'][]       = BB_SESSIONS . " s";
+			$SQL['INNER JOIN'][] = BB_USERS . " u ON(u.user_id = s.session_user_id)";
 
 			if ($session_id)
 			{
@@ -98,16 +110,16 @@ class user_common
 
 				if ($bb_cfg['torhelp_enabled'])
 				{
-					$SQL['SELECT'][] = "th.topic_id_csv AS torhelp";
-					$SQL['LEFT JOIN'][] = BB_BT_TORHELP ." th ON(u.user_id = th.user_id)";
+					$SQL['SELECT'][]    = "th.topic_id_csv AS torhelp";
+					$SQL['LEFT JOIN'][] = BB_BT_TORHELP . " th ON(u.user_id = th.user_id)";
 				}
 
 				$userdata_cache_id = $session_id;
 			}
 			else
 			{
-				$SQL['WHERE'][] = "s.session_ip = '". USER_IP ."'";
-				$SQL['WHERE'][] = "s.session_user_id = ". GUEST_UID;
+				$SQL['WHERE'][] = "s.session_ip = '" . USER_IP . "'";
+				$SQL['WHERE'][] = "s.session_user_id = " . GUEST_UID;
 
 				$userdata_cache_id = USER_IP;
 			}
@@ -119,7 +131,7 @@ class user_common
 				if ($this->data && (TIMENOW - $this->data['session_time']) > $bb_cfg['session_update_intrv'])
 				{
 					$this->data['session_time'] = TIMENOW;
-					$update_sessions_table = true;
+					$update_sessions_table      = true;
 				}
 
 				cache_set_userdata($this->data);
@@ -147,8 +159,8 @@ class user_common
 				if ($update_sessions_table)
 				{
 					DB()->query("
-						UPDATE ". BB_SESSIONS ." SET
-							session_time = ". TIMENOW ."
+						UPDATE " . BB_SESSIONS . " SET
+							session_time = " . TIMENOW . "
 						WHERE session_id = '$session_id'
 						LIMIT 1
 					");
@@ -157,14 +169,14 @@ class user_common
 			}
 			else
 			{
-				$this->data = array();
+				$this->data = [];
 			}
 		}
 		// If we reach here then no (valid) session exists. So we'll create a new one,
 		// using the cookie user_id if available to pull basic user prefs.
 		if (!$this->data)
 		{
-			$login = false;
+			$login   = false;
 			$user_id = ($bb_cfg['allow_autologin'] && $this->sessiondata['uk'] && $this->sessiondata['uid']) ? $this->sessiondata['uid'] : GUEST_UID;
 
 			if ($userdata = get_userdata(intval($user_id), false, true))
@@ -185,13 +197,13 @@ class user_common
 			$this->session_create($userdata, true);
 		}
 
-		define('IS_GUEST',        (!$this->data['session_logged_in']));
-		define('IS_ADMIN',        (!IS_GUEST && $this->data['user_level'] == ADMIN));
-		define('IS_MOD',          (!IS_GUEST && $this->data['user_level'] == MOD));
+		define('IS_GUEST', (!$this->data['session_logged_in']));
+		define('IS_ADMIN', (!IS_GUEST && $this->data['user_level'] == ADMIN));
+		define('IS_MOD', (!IS_GUEST && $this->data['user_level'] == MOD));
 		define('IS_GROUP_MEMBER', (!IS_GUEST && $this->data['user_level'] == GROUP_MEMBER));
-		define('IS_USER',         (!IS_GUEST && $this->data['user_level'] == USER));
-		define('IS_SUPER_ADMIN',  (IS_ADMIN && isset($bb_cfg['super_admins'][$this->data['user_id']])));
-		define('IS_AM',           (IS_ADMIN || IS_MOD));
+		define('IS_USER', (!IS_GUEST && $this->data['user_level'] == USER));
+		define('IS_SUPER_ADMIN', (IS_ADMIN && isset($bb_cfg['super_admins'][$this->data['user_id']])));
+		define('IS_AM', (IS_ADMIN || IS_MOD));
 
 		$this->set_shortcuts();
 
@@ -207,18 +219,21 @@ class user_common
 	}
 
 	/**
-	*  Create new session for the given user
-	*/
-	function session_create ($userdata, $auto_created = false)
+	 * @param      $userdata
+	 * @param bool $auto_created
+	 *
+	 * @return array
+	 */
+	public function session_create ($userdata, $auto_created = false)
 	{
 		global $bb_cfg;
 
 		$this->data = $userdata;
 		$session_id = $this->sessiondata['sid'];
 
-		$login   = (int) ($this->data['user_id'] != GUEST_UID);
-		$is_user = ($this->data['user_level'] != ADMIN);
-		$user_id = (int) $this->data['user_id'];
+		$login             = (int) ($this->data['user_id'] != GUEST_UID);
+		$is_user           = ($this->data['user_level'] != ADMIN);
+		$user_id           = (int) $this->data['user_id'];
 		$mod_admin_session = ($this->data['user_level'] == ADMIN || $this->data['user_level'] == MOD);
 
 		// Initial ban check against user_id or IP address
@@ -226,10 +241,10 @@ class user_common
 		{
 			preg_match('#(..)(..)(..)(..)#', USER_IP, $ip);
 
-			$where_sql  = "ban_ip IN('". USER_IP ."', '$ip[1]$ip[2]$ip[3]ff', '$ip[1]$ip[2]ffff', '$ip[1]ffffff')";
+			$where_sql = "ban_ip IN('" . USER_IP . "', '$ip[1]$ip[2]$ip[3]ff', '$ip[1]$ip[2]ffff', '$ip[1]ffffff')";
 			$where_sql .= ($login) ? " OR ban_userid = $user_id" : '';
 
-			$sql = "SELECT ban_id FROM ". BB_BANLIST ." WHERE $where_sql LIMIT 1";
+			$sql = "SELECT ban_id FROM " . BB_BANLIST . " WHERE $where_sql LIMIT 1";
 
 			if (DB()->fetch_row($sql))
 			{
@@ -238,11 +253,11 @@ class user_common
 		}
 
 		// Create new session
-		for ($i=0, $max_try=5; $i <= $max_try; $i++)
+		for ($i = 0, $max_try = 5; $i <= $max_try; $i++)
 		{
 			$session_id = make_rand_str(SID_LENGTH);
 
-			$args = DB()->build_array('INSERT', array(
+			$args = DB()->build_array('INSERT', [
 				'session_id'        => (string) $session_id,
 				'session_user_id'   => (int) $user_id,
 				'session_start'     => (int) TIMENOW,
@@ -250,8 +265,8 @@ class user_common
 				'session_ip'        => (string) USER_IP,
 				'session_logged_in' => (int) $login,
 				'session_admin'     => (int) $mod_admin_session,
-			));
-			$sql = "INSERT INTO ". BB_SESSIONS . $args;
+			]);
+			$sql  = "INSERT INTO " . BB_SESSIONS . $args;
 
 			if (@DB()->query($sql))
 			{
@@ -274,17 +289,17 @@ class user_common
 			}
 			else if ($session_time < (TIMENOW - $bb_cfg['last_visit_update_intrv']))
 			{
-				$last_visit = max($session_time, (TIMENOW - 86400*$bb_cfg['max_last_visit_days']));
+				$last_visit = max($session_time, (TIMENOW - 86400 * $bb_cfg['max_last_visit_days']));
 			}
 
 			if ($last_visit != $this->data['user_lastvisit'])
 			{
 				DB()->query("
-					UPDATE ". BB_USERS ." SET
-						user_session_time = ". TIMENOW .",
+					UPDATE " . BB_USERS . " SET
+						user_session_time = " . TIMENOW . ",
 						user_lastvisit = $last_visit,
-						user_last_ip = '". USER_IP ."',
-						user_reg_ip = IF(user_reg_ip = '', '". USER_IP ."', user_reg_ip)
+						user_last_ip = '" . USER_IP . "',
+						user_reg_ip = IF(user_reg_ip = '', '" . USER_IP . "', user_reg_ip)
 					WHERE user_id = $user_id
 					LIMIT 1
 				");
@@ -305,13 +320,13 @@ class user_common
 			$this->sessiondata['uid'] = $user_id;
 			$this->sessiondata['sid'] = $session_id;
 		}
-		$this->data['session_id'] = $session_id;
-		$this->data['session_ip'] = USER_IP;
-		$this->data['session_user_id'] = $user_id;
+		$this->data['session_id']        = $session_id;
+		$this->data['session_ip']        = USER_IP;
+		$this->data['session_user_id']   = $user_id;
 		$this->data['session_logged_in'] = $login;
-		$this->data['session_start'] = TIMENOW;
-		$this->data['session_time'] = TIMENOW;
-		$this->data['session_admin'] = $mod_admin_session;
+		$this->data['session_start']     = TIMENOW;
+		$this->data['session_time']      = TIMENOW;
+		$this->data['session_admin']     = $mod_admin_session;
 
 		$this->set_session_cookies($user_id);
 
@@ -326,12 +341,13 @@ class user_common
 	}
 
 	/**
-	*  Initialize sessiondata stored in cookies
-	*/
-	function session_end ($update_lastvisit = false, $set_cookie = true)
+	 * @param bool $update_lastvisit
+	 * @param bool $set_cookie
+	 */
+	public function session_end ($update_lastvisit = false, $set_cookie = true)
 	{
 		DB()->query("
-			DELETE FROM ". BB_SESSIONS ."
+			DELETE FROM " . BB_SESSIONS . "
 			WHERE session_id = '{$this->data['session_id']}'
 		");
 
@@ -340,11 +356,11 @@ class user_common
 			if ($update_lastvisit)
 			{
 				DB()->query("
-					UPDATE ". BB_USERS ." SET
-						user_session_time = ". TIMENOW .",
-						user_lastvisit = ". TIMENOW .",
-						user_last_ip = '". USER_IP ."',
-						user_reg_ip = IF(user_reg_ip = '', '". USER_IP ."', user_reg_ip)
+					UPDATE " . BB_USERS . " SET
+						user_session_time = " . TIMENOW . ",
+						user_lastvisit = " . TIMENOW . ",
+						user_last_ip = '" . USER_IP . "',
+						user_reg_ip = IF(user_reg_ip = '', '" . USER_IP . "', user_reg_ip)
 					WHERE user_id = {$this->data['user_id']}
 					LIMIT 1
 				");
@@ -355,7 +371,7 @@ class user_common
 				$this->create_autologin_id($this->data, false);
 
 				DB()->query("
-					DELETE FROM ". BB_SESSIONS ."
+					DELETE FROM " . BB_SESSIONS . "
 					WHERE session_user_id = '{$this->data['user_id']}'
 				");
 			}
@@ -368,9 +384,12 @@ class user_common
 	}
 
 	/**
-	*  Login
-	*/
-	function login ($args, $mod_admin_login = false)
+	 * @param      $args
+	 * @param bool $mod_admin_login
+	 *
+	 * @return array
+	 */
+	public function login ($args, $mod_admin_login = false)
 	{
 		$username = !empty($args['login_username']) ? clean_username($args['login_username']) : '';
 		$password = !empty($args['login_password']) ? $args['login_password'] : '';
@@ -382,11 +401,11 @@ class user_common
 
 			$sql = "
 				SELECT *
-				FROM ". BB_USERS ."
+				FROM " . BB_USERS . "
 				WHERE username = '$username_sql'
 				  AND user_password = '$password_sql'
 				  AND user_active = 1
-				  AND user_id != ". GUEST_UID ."
+				  AND user_id != " . GUEST_UID . "
 				LIMIT 1
 			";
 
@@ -401,10 +420,10 @@ class user_common
 				if ($mod_admin_login)
 				{
 					DB()->query("
-						UPDATE ". BB_SESSIONS ." SET
-							session_admin = ". $this->data['user_level'] ."
-						WHERE session_user_id = ". $this->data['user_id'] ."
-							AND session_id = '". $this->data['session_id'] ."'
+						UPDATE " . BB_SESSIONS . " SET
+							session_admin = " . $this->data['user_level'] . "
+						WHERE session_user_id = " . $this->data['user_id'] . "
+							AND session_id = '" . $this->data['session_id'] . "'
 					");
 					$this->data['session_admin'] = $this->data['user_level'];
 					cache_update_userdata($this->data);
@@ -415,9 +434,9 @@ class user_common
 				{
 					// Removing guest sessions from this IP
 					DB()->query("
-						DELETE FROM ". BB_SESSIONS ."
-						WHERE session_ip = '". USER_IP ."'
-							AND session_user_id = ". GUEST_UID ."
+						DELETE FROM " . BB_SESSIONS . "
+						WHERE session_ip = '" . USER_IP . "'
+							AND session_user_id = " . GUEST_UID . "
 					");
 
 					return $new_session_userdata;
@@ -429,15 +448,12 @@ class user_common
 			}
 		}
 
-		return array();
+		return [];
 	}
 
-	/**
-	*  Initialize sessiondata stored in cookies
-	*/
-	function get_sessiondata ()
+	public function get_sessiondata ()
 	{
-		$sd_resv = !empty($_COOKIE[COOKIE_DATA]) ? @unserialize($_COOKIE[COOKIE_DATA]) : array();
+		$sd_resv = !empty($_COOKIE[COOKIE_DATA]) ? @unserialize($_COOKIE[COOKIE_DATA]) : [];
 
 		// autologin_id
 		if (!empty($sd_resv['uk']) && verify_id($sd_resv['uk'], LOGIN_KEY_LENGTH))
@@ -457,22 +473,22 @@ class user_common
 	}
 
 	/**
-	*  Store sessiondata in cookies
-	*/
-	function set_session_cookies ($user_id)
+	 * @param $user_id
+	 */
+	public function set_session_cookies ($user_id)
 	{
 		global $bb_cfg;
 
 		if ($user_id == GUEST_UID)
 		{
-			$delete_cookies = array(
+			$delete_cookies = [
 				COOKIE_DATA,
 				COOKIE_DBG,
 				'torhelp',
 				'explain',
 				'sql_log',
 				'sql_log_full',
-			);
+			];
 
 			foreach ($delete_cookies as $cookie)
 			{
@@ -499,9 +515,13 @@ class user_common
 	}
 
 	/**
-	*  Verify autologin_id
-	*/
-	function verify_autologin_id ($userdata, $expire_check = false, $create_new = true)
+	 * @param      $userdata
+	 * @param bool $expire_check
+	 * @param bool $create_new
+	 *
+	 * @return bool|string
+	 */
+	public function verify_autologin_id ($userdata, $expire_check = false, $create_new = true)
 	{
 		global $bb_cfg;
 
@@ -515,7 +535,7 @@ class user_common
 			}
 			else if ($autologin_id && $userdata['user_session_time'] && $bb_cfg['max_autologin_time'])
 			{
-				if (TIMENOW - $userdata['user_session_time'] > $bb_cfg['max_autologin_time']*86400)
+				if (TIMENOW - $userdata['user_session_time'] > $bb_cfg['max_autologin_time'] * 86400)
 				{
 					return $this->create_autologin_id($userdata, $create_new);
 				}
@@ -526,56 +546,58 @@ class user_common
 	}
 
 	/**
-	*  Create autologin_id
-	*/
-	function create_autologin_id ($userdata, $create_new = true)
+	 * @param      $userdata
+	 * @param bool $create_new
+	 *
+	 * @return string
+	 */
+	public function create_autologin_id ($userdata, $create_new = true)
 	{
 		$autologin_id = ($create_new) ? make_rand_str(LOGIN_KEY_LENGTH) : '';
 
 		DB()->query("
-			UPDATE ". BB_USERS ." SET
+			UPDATE " . BB_USERS . " SET
 				autologin_id = '$autologin_id'
-			WHERE user_id = ". (int) $userdata['user_id'] ."
+			WHERE user_id = " . (int) $userdata['user_id'] . "
 			LIMIT 1
 		");
 
 		return $autologin_id;
 	}
 
-	/**
-	 *  Set shortcuts
-	 */
-	function set_shortcuts ()
-	{
-		$this->id            =& $this->data['user_id'];
-		$this->active        =& $this->data['user_active'];
-		$this->name          =& $this->data['username'];
-		$this->lastvisit     =& $this->data['user_lastvisit'];
-		$this->regdate       =& $this->data['user_regdate'];
-		$this->level         =& $this->data['user_level'];
-		$this->opt           =& $this->data['user_opt'];
 
-		$this->ip            =  CLIENT_IP;
+	public function set_shortcuts ()
+	{
+		$this->id        =& $this->data['user_id'];
+		$this->active    =& $this->data['user_active'];
+		$this->name      =& $this->data['username'];
+		$this->lastvisit =& $this->data['user_lastvisit'];
+		$this->regdate   =& $this->data['user_regdate'];
+		$this->level     =& $this->data['user_level'];
+		$this->opt       =& $this->data['user_opt'];
+
+		$this->ip = CLIENT_IP;
 	}
 
-	/**
-	*  Initialise user settings
-	*/
-	function init_userprefs ()
+
+	public function init_userprefs ()
 	{
 		global $bb_cfg, $theme, $lang, $DeltaTime;
 
-		if (defined('LANG_DIR')) return;  // prevent multiple calling
+		if (defined('LANG_DIR'))
+		{
+			return;
+		}  // prevent multiple calling
 
-		define('DEFAULT_LANG_DIR', LANG_ROOT_DIR . $bb_cfg['default_lang'] .'/');
-		define('ENGLISH_LANG_DIR', LANG_ROOT_DIR .'en/');
+		define('DEFAULT_LANG_DIR', LANG_ROOT_DIR . $bb_cfg['default_lang'] . '/');
+		define('ENGLISH_LANG_DIR', LANG_ROOT_DIR . 'en/');
 
 		if ($this->data['user_id'] != GUEST_UID)
 		{
 			if ($this->data['user_lang'] && $this->data['user_lang'] != $bb_cfg['default_lang'])
 			{
 				$bb_cfg['default_lang'] = basename($this->data['user_lang']);
-				define('LANG_DIR', LANG_ROOT_DIR . $bb_cfg['default_lang'] .'/');
+				define('LANG_DIR', LANG_ROOT_DIR . $bb_cfg['default_lang'] . '/');
 			}
 
 			if (isset($this->data['user_timezone']))
@@ -584,15 +606,18 @@ class user_common
 			}
 		}
 
-		$this->data['user_lang']       = $bb_cfg['default_lang'];
-		$this->data['user_timezone']   = $bb_cfg['board_timezone'];
+		$this->data['user_lang']     = $bb_cfg['default_lang'];
+		$this->data['user_timezone'] = $bb_cfg['board_timezone'];
 
-		if (!defined('LANG_DIR')) define('LANG_DIR', DEFAULT_LANG_DIR);
+		if (!defined('LANG_DIR'))
+		{
+			define('LANG_DIR', DEFAULT_LANG_DIR);
+		}
 
-		require(LANG_DIR .'main.php');
+		require(LANG_DIR . 'main.php');
 		setlocale(LC_ALL, $bb_cfg['lang'][$this->data['user_lang']]['locale']);
 
-		$theme = setup_style();
+		$theme     = setup_style();
 		$DeltaTime = new Date_Delta();
 
 		// Handle marking posts read
@@ -605,16 +630,16 @@ class user_common
 	}
 
 	/**
-	*  Mark read
-	*/
-	function mark_read ($type)
+	 * @param $type
+	 */
+	public function mark_read ($type)
 	{
 		if ($type === 'all_forums')
 		{
 			// Update session time
 			DB()->query("
-				UPDATE ". BB_SESSIONS ." SET
-					session_time = ". TIMENOW ."
+				UPDATE " . BB_SESSIONS . " SET
+					session_time = " . TIMENOW . "
 				WHERE session_id = '{$this->data['session_id']}'
 				LIMIT 1
 			");
@@ -624,22 +649,19 @@ class user_common
 			$this->data['user_lastvisit'] = TIMENOW;
 
 			// Update lastvisit
-			db_update_userdata($this->data, array(
+			db_update_userdata($this->data, [
 				'user_session_time' => $this->data['session_time'],
 				'user_lastvisit'    => $this->data['user_lastvisit'],
-			));
+			]);
 
 			// Delete cookies
 			bb_setcookie(COOKIE_TOPIC, '');
 			bb_setcookie(COOKIE_FORUM, '');
-			bb_setcookie(COOKIE_MARK,  '');
+			bb_setcookie(COOKIE_MARK, '');
 		}
 	}
 
-	/**
-	*  Load misc options
-	*/
-	function load_opt_js ()
+	public function load_opt_js ()
 	{
 		if (IS_GUEST)
 		{
@@ -657,13 +679,18 @@ class user_common
 	}
 
 	/**
-	*  Get not auth forums
-	*/
-	function get_not_auth_forums ($auth_type)
+	 * @param $auth_type
+	 *
+	 * @return string
+	 */
+	public function get_not_auth_forums ($auth_type)
 	{
 		global $datastore;
 
-		if (IS_ADMIN) return '';
+		if (IS_ADMIN)
+		{
+			return '';
+		}
 
 		if (!$forums = $datastore->get('cat_forums'))
 		{
@@ -686,7 +713,7 @@ class user_common
 			}
 		}
 
-		$auth_field_match = array(
+		$auth_field_match = [
 			AUTH_VIEW       => 'auth_view',
 			AUTH_READ       => 'auth_read',
 			AUTH_POST       => 'auth_post',
@@ -699,11 +726,11 @@ class user_common
 			AUTH_POLLCREATE => 'auth_pollcreate',
 			AUTH_ATTACH     => 'auth_attachments',
 			AUTH_DOWNLOAD   => 'auth_download',
-		);
+		];
 
-		$not_auth_forums = array();
-		$auth_field = $auth_field_match[$auth_type];
-		$is_auth_ary = auth($auth_type, AUTH_LIST_ALL, $this->data);
+		$not_auth_forums = [];
+		$auth_field      = $auth_field_match[$auth_type];
+		$is_auth_ary     = auth($auth_type, AUTH_LIST_ALL, $this->data);
 
 		foreach ($is_auth_ary as $forum_id => $is_auth)
 		{
@@ -717,11 +744,14 @@ class user_common
 	}
 
 	/**
-	*  Get excluded forums
-	*/
-	function get_excluded_forums ($auth_type, $return_as = 'csv')
+	 * @param        $auth_type
+	 * @param string $return_as
+	 *
+	 * @return array|string
+	 */
+	public function get_excluded_forums ($auth_type, $return_as = 'csv')
 	{
-		$excluded = array();
+		$excluded = [];
 
 		if ($not_auth = $this->get_not_auth_forums($auth_type))
 		{
@@ -742,91 +772,22 @@ class user_common
 			{
 				foreach ($forums['forum'] as $key => $row)
 				{
-					if ($row['allow_porno_topic']) $excluded[] = $row['forum_id'];
+					if ($row['allow_porno_topic'])
+					{
+						$excluded[] = $row['forum_id'];
+					}
 				}
 			}
 		}
 
 		switch ($return_as)
 		{
-			case   'csv': return join(',', $excluded);
-			case 'array': return $excluded;
-			case  'flip': return array_flip(explode(',', $excluded));
+			case   'csv':
+				return join(',', $excluded);
+			case 'array':
+				return $excluded;
+			case  'flip':
+				return array_flip(explode(',', $excluded));
 		}
 	}
-}
-
-//
-// userdata cache
-//
-function ignore_cached_userdata ()
-{
-	return (defined('IN_PM')) ? true : false;
-}
-
-function cache_get_userdata ($id)
-{
-	if (ignore_cached_userdata()) return false;
-
-	return CACHE('session_cache')->get($id);
-}
-
-function cache_set_userdata ($userdata, $force = false)
-{
-	global $bb_cfg;
-
-	if (!$userdata || (ignore_cached_userdata() && !$force)) return false;
-
-	$id = ($userdata['user_id'] == GUEST_UID) ? $userdata['session_ip'] : $userdata['session_id'];
-	return CACHE('session_cache')->set($id, $userdata, $bb_cfg['session_update_intrv']);
-}
-
-function cache_rm_userdata ($userdata)
-{
-	if (!$userdata) return false;
-
-	$id = ($userdata['user_id'] == GUEST_UID) ? $userdata['session_ip'] : $userdata['session_id'];
-	return CACHE('session_cache')->rm($id);
-}
-
-// $user_id - array(id1,id2,..) or (string) id
-function cache_rm_user_sessions ($user_id)
-{
-	$user_id = get_id_csv($user_id);
-
-	$rowset = DB()->fetch_rowset("
-		SELECT session_id FROM ". BB_SESSIONS ." WHERE session_user_id IN($user_id)
-	");
-
-	foreach ($rowset as $row)
-	{
-		CACHE('session_cache')->rm($row['session_id']);
-	}
-}
-
-function cache_update_userdata ($userdata)
-{
-	return cache_set_userdata($userdata, true);
-}
-
-function db_update_userdata ($userdata, $sql_ary, $data_already_escaped = true)
-{
-	if (!$userdata) return false;
-
-	$sql_args = DB()->build_array('UPDATE', $sql_ary, $data_already_escaped);
-	DB()->query("UPDATE ". BB_USERS ." SET $sql_args WHERE user_id = {$userdata['user_id']}");
-
-	if (DB()->affected_rows())
-	{
-		cache_rm_userdata($userdata);
-	}
-}
-
-// $user_id - array(id1,id2,..) or (string) id
-function delete_user_sessions ($user_id)
-{
-	cache_rm_user_sessions($user_id);
-
-	$user_id = get_id_csv($user_id);
-	DB()->query("DELETE FROM ". BB_SESSIONS ." WHERE session_user_id IN($user_id)");
 }
