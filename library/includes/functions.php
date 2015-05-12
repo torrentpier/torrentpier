@@ -48,7 +48,7 @@ function get_tracks ($type)
 			trigger_error(__FUNCTION__ .": invalid type '$type'", E_USER_ERROR);
 	}
 	$tracks = !empty($_COOKIE[$c_name]) ? @unserialize($_COOKIE[$c_name]) : false;
-	return ($tracks) ? $tracks : array();
+	return ($tracks) ? $tracks : [];
 }
 
 function set_tracks ($cookie_name, &$tracking_ary, $tracks = null, $val = TIMENOW)
@@ -63,7 +63,7 @@ function set_tracks ($cookie_name, &$tracking_ary, $tracks = null, $val = TIMENO
 	{
 		if (!is_array($tracks))
 		{
-			$tracks = array($tracks => $val);
+			$tracks = [$tracks => $val];
 		}
 		foreach ($tracks as $key => $val)
 		{
@@ -146,7 +146,7 @@ define('UG_PERM_BOTH',       1);  // both user and group
 define('UG_PERM_USER_ONLY',  2);  // only personal user permissions
 define('UG_PERM_GROUP_ONLY', 3);  // only group permissions
 
-$bf['forum_perm'] = array(
+$bf['forum_perm'] = [
 	'auth_view'        => AUTH_VIEW,
 	'auth_read'        => AUTH_READ,
 	'auth_mod'         => AUTH_MOD,
@@ -160,9 +160,9 @@ $bf['forum_perm'] = array(
 	'auth_pollcreate'  => AUTH_POLLCREATE,
 	'auth_attachments' => AUTH_ATTACH,
 	'auth_download'    => AUTH_DOWNLOAD,
-);
+];
 
-$bf['user_opt'] = array(
+$bf['user_opt'] = [
 #   'dis_opt_name'       =>     ЗАПРЕТЫ используемые администраторами для пользователей
 #   'user_opt_name'      =>     НАСТРОЙКИ используемые пользователями
 	'user_viewemail'     => 0,  // Показывать e-mail
@@ -181,7 +181,7 @@ $bf['user_opt'] = array(
 	'dis_post_edit'      => 13, // Запрет на редактирование сообщений
 	'user_dls'           => 14, // Скрывать список текущих закачек в профиле
 	'user_retracker'     => 15, // Добавлять ретрекер к скачиваемым торрентам
-);
+];
 
 function bit2dec ($bit_num)
 {
@@ -245,13 +245,13 @@ function setbit (&$int, $bit_num, $on)
 	forum auth levels, this will prevent the auth function having to do its own
 	lookup
 */
-function auth ($type, $forum_id, $ug_data, $f_access = array(), $group_perm = UG_PERM_BOTH)
+function auth ($type, $forum_id, $ug_data, $f_access = [], $group_perm = UG_PERM_BOTH)
 {
 	global $lang, $bf, $datastore;
 
 	$is_guest = true;
 	$is_admin = false;
-	$auth = $auth_fields = $u_access = array();
+	$auth = $auth_fields = $u_access = [];
 	$add_auth_type_desc = ($forum_id != AUTH_LIST_ALL);
 
 	//
@@ -263,7 +263,7 @@ function auth ($type, $forum_id, $ug_data, $f_access = array(), $group_perm = UG
 	}
 	else if ($auth_type = array_search($type, $bf['forum_perm']))
 	{
-		$auth_fields = array($auth_type);
+		$auth_fields = [$auth_type];
 	}
 
 	if (empty($auth_fields))
@@ -296,7 +296,7 @@ function auth ($type, $forum_id, $ug_data, $f_access = array(), $group_perm = UG
 	else if (isset($f_access['forum_id']))
 	{
 		// Change passed $f_access format for later using in foreach()
-		$f_access = array($f_access['forum_id'] => $f_access);
+		$f_access = [$f_access['forum_id'] => $f_access];
 	}
 
 	if (empty($f_access))
@@ -439,14 +439,14 @@ function auth_check ($bf_ary, $bf_key, $perm_ary, $perm_key, $is_admin = false)
 
 class Date_Delta
 {
-	var $auto_granularity = array(
+	var $auto_granularity = [
 		60        => 'seconds',   // set granularity to "seconds" if delta less then 1 minute
 		10800     => 'minutes',   // 3 hours
 		259200    => 'hours',     // 3 days
 		31363200  => 'mday',      // 12 months
 		311040000 => 'mon',       // 10 years
-	);
-	var $intervals = array();
+	];
+	var $intervals = [];
 	var $format    = '';
 
 	// Creates new object.
@@ -487,7 +487,7 @@ class Date_Delta
 		if (!$delta) return false;
 
 		// Make spellable phrase.
-		$parts = array();
+		$parts = [];
 		$intervals = $GLOBALS['lang']['DELTA_TIME']['INTERVALS'];
 
 		foreach (array_reverse($delta) as $k => $n)
@@ -568,7 +568,7 @@ function delta_time ($timestamp_1, $timestamp_2 = TIMENOW, $granularity = 'auto'
 
 function get_select ($select, $selected = null, $return_as = 'html', $first_opt = '&raquo;&raquo; Выбрать ')
 {
-	$select_ary = array();
+	$select_ary = [];
 
 	switch ($select)
 	{
@@ -598,10 +598,10 @@ function get_select ($select, $selected = null, $return_as = 'html', $first_opt 
 class html_common
 {
 	var $options    = '';
-	var $attr       = array();
+	var $attr       = [];
 	var $cur_attr   = null;
 	var $max_length = HTML_SELECT_MAX_LENGTH;
-	var $selected   = array();
+	var $selected   = [];
 
 	function build_select ($name, $params, $selected = null, $max_length = HTML_SELECT_MAX_LENGTH, $multiple_size = null, $js = '')
 	{
@@ -611,7 +611,7 @@ class html_common
 		$this->selected = array_flip((array) $selected);
 		$this->max_length = $max_length;
 
-		$this->attr = array();
+		$this->attr = [];
 		$this->cur_attr =& $this->attr;
 
 		if (isset($params['__attributes']))
@@ -838,8 +838,8 @@ function commify ($number)
  */
 function humn_size ($size, $rounder = null, $min = null, $space = '&nbsp;')
 {
-	static $sizes   = array('B', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB');
-	static $rounders = array(0,   0,    0,    2,    3,    3,    3,    3,    3);
+	static $sizes   = ['B', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'];
+	static $rounders = [0,   0,    0,    2,    3,    3,    3,    3,    3];
 
 	$size = (float) $size;
 	$ext = $sizes[0];
@@ -961,7 +961,7 @@ function set_var (&$result, $var, $type, $multibyte = false, $strip = true)
 
 	if ($type == 'string')
 	{
-		$result = trim(htmlspecialchars(str_replace(array("\r\n", "\r"), array("\n", "\n"), $result)));
+		$result = trim(htmlspecialchars(str_replace(["\r\n", "\r"], ["\n", "\n"], $result)));
 
 		if (!empty($result))
 		{
@@ -990,14 +990,14 @@ function request_var ($var_name, $default, $multibyte = false, $cookie = false)
 	{
 		if (!isset($_GET[$var_name]) && !isset($_POST[$var_name]))
 		{
-			return (is_array($default)) ? array() : $default;
+			return (is_array($default)) ? [] : $default;
 		}
 		$_REQUEST[$var_name] = isset($_POST[$var_name]) ? $_POST[$var_name] : $_GET[$var_name];
 	}
 
 	if (!isset($_REQUEST[$var_name]) || (is_array($_REQUEST[$var_name]) && !is_array($default)) || (is_array($default) && !is_array($_REQUEST[$var_name])))
 	{
-		return (is_array($default)) ? array() : $default;
+		return (is_array($default)) ? [] : $default;
 	}
 
 	$var = $_REQUEST[$var_name];
@@ -1024,7 +1024,7 @@ function request_var ($var_name, $default, $multibyte = false, $cookie = false)
 	if (is_array($var))
 	{
 		$_var = $var;
-		$var = array();
+		$var = [];
 
 		foreach ($_var as $k => $v)
 		{
@@ -1063,11 +1063,11 @@ function get_username ($user_id)
 {
 	if (empty($user_id))
 	{
-		return is_array($user_id) ? array() : false;
+		return is_array($user_id) ? [] : false;
 	}
 	if (is_array($user_id))
 	{
-		$usernames = array();
+		$usernames = [];
 		foreach (DB()->fetch_rowset("SELECT user_id, username FROM ". BB_USERS ." WHERE user_id IN(". get_id_csv($user_id) .")") as $row)
 		{
 			$usernames[$row['user_id']] = $row['username'];
@@ -1146,7 +1146,7 @@ function show_bt_userdata ($user_id)
 
 	$btu = get_bt_userdata($user_id);
 
-	$template->assign_vars(array(
+	$template->assign_vars([
 		'SHOW_BT_USERDATA' => true,
 		'UP_TOTAL'         => humn_size($btu['u_up_total']),
 		'UP_BONUS'         => humn_size($btu['u_up_bonus']),
@@ -1172,7 +1172,7 @@ function show_bt_userdata ($user_id)
 
 		'SPEED_UP'         => humn_size($btu['speed_up'], 0, 'KB') .'/s',
 		'SPEED_DOWN'       => humn_size($btu['speed_down'], 0, 'KB') .'/s',
-	));
+	]);
 }
 
 function get_attachments_dir ($cfg = null)
@@ -1196,7 +1196,7 @@ function bb_get_config ($table, $from_db = false, $update_cache = true)
 {
 	if ($from_db OR !$cfg = CACHE('bb_config')->get("config_{$table}"))
 	{
-		$cfg = array();
+		$cfg = [];
 		foreach (DB()->fetch_rowset("SELECT * FROM $table") as $row)
 		{
 			$cfg[$row['config_name']] = $row['config_value'];
@@ -1211,13 +1211,13 @@ function bb_get_config ($table, $from_db = false, $update_cache = true)
 
 function bb_update_config ($params, $table = BB_CONFIG)
 {
-	$updates = array();
+	$updates = [];
 	foreach ($params as $name => $val)
 	{
-		$updates[] = array(
+		$updates[] = [
 			'config_name'  => $name,
 			'config_value' => $val,
-		);
+		];
 	}
 	$updates = DB()->build_array('MULTI_INSERT', $updates);
 
@@ -1317,7 +1317,7 @@ function get_userdata ($u, $force_name = false, $allow_guest = false)
 		}
 	}
 
-	$u_data = array();
+	$u_data = [];
 	$name_search = false;
 	$exclude_anon_sql = (!$allow_guest) ? "AND user_id != ". GUEST_UID : '';
 
@@ -1361,9 +1361,9 @@ function make_jumpbox ($selected = 0)
 		$jumpbox = $datastore->get('jumpbox');
 	}
 
-	$template->assign_vars(array(
+	$template->assign_vars([
 		'JUMPBOX' => (IS_GUEST) ? $jumpbox['guest'] : $jumpbox['user'],
-	));
+	]);
 }
 
 // $mode: array(not_auth_forum1,not_auth_forum2,..) or (string) 'mode'
@@ -1380,7 +1380,7 @@ function get_forum_select ($mode = 'guest', $name = POST_FORUM_URL, $selected = 
 	{
 		$max_length = HTML_SELECT_MAX_LENGTH;
 	}
-	$select = is_null($all_forums_option) ? array() : array($lang['ALL_AVAILABLE'] => $all_forums_option);
+	$select = is_null($all_forums_option) ? [] : [$lang['ALL_AVAILABLE'] => $all_forums_option];
 	if (!$forums = $datastore->get('cat_forums'))
 	{
 		$datastore->update('cat_forums');
@@ -1450,18 +1450,18 @@ function setup_style ()
 	$template = new Template(TEMPLATES_DIR . $tpl_dir_name);
 	$css_dir = 'styles/' . basename(TEMPLATES_DIR) . '/' . $tpl_dir_name . '/css/';
 
-	$template->assign_vars(array(
+	$template->assign_vars([
 		'BB_ROOT'          => BB_ROOT,
 		'SPACER'           => make_url('styles/images/spacer.gif'),
 		'STYLESHEET'       => make_url($css_dir . $stylesheet),
 		'EXT_LINK_NEW_WIN' => $bb_cfg['ext_link_new_win'],
 		'TPL_DIR'          => make_url($css_dir),
 		'SITE_URL'         => make_url('/'),
-	));
+	]);
 
 	require(TEMPLATES_DIR . $tpl_dir_name .'/tpl_config.php');
 
-	$theme = array('template_name' => $tpl_dir_name);
+	$theme = ['template_name' => $tpl_dir_name];
 
 	return $theme;
 }
@@ -1642,12 +1642,12 @@ function generate_pagination ($base_url, $num_items, $per_page, $start_item, $ad
 	$pagination = ($page_string) ? '<a class="menu-root" href="#pg-jump">'. $lang['GOTO_PAGE'] .'</a> :&nbsp;&nbsp;'. $page_string : '';
 	$pagination = str_replace('&amp;start=0', '', $pagination);
 
-	$template->assign_vars(array(
+	$template->assign_vars([
 		'PAGINATION'   => $pagination,
 		'PAGE_NUMBER'  => sprintf($lang['PAGE_OF'], ( floor($start_item/$per_page) + 1 ), ceil( $num_items / $per_page )),
 		'PG_BASE_URL'  => $base_url,
 		'PG_PER_PAGE'  => $per_page,
-	));
+	]);
 
 	return $pagination;
 }
@@ -1666,7 +1666,7 @@ function obtain_word_list (&$orig_word, &$replacement_word)
 	if (!$sql = CACHE('bb_cache')->get('censored'))
 	{
 		$sql = DB()->fetch_rowset("SELECT word, replacement FROM ". BB_WORDS);
-		if(!$sql) $sql = array(array('word' => 1, 'replacement' => 1));
+		if(!$sql) $sql = [['word' => 1, 'replacement' => 1]];
 		CACHE('bb_cache')->set('censored', $sql, 7200);
 	}
 
@@ -1728,12 +1728,12 @@ function bb_die ($msg_text)
 		$msg_text = $lang[$msg_text];
 	}
 
-	$template->assign_vars(array(
+	$template->assign_vars([
 		'TPL_BB_DIE'   => true,
 		'MESSAGE_TEXT' => $msg_text,
-	));
+	]);
 
-	$template->set_filenames(array('bb_die' => 'common.tpl'));
+	$template->set_filenames(['bb_die' => 'common.tpl']);
 	$template->pparse('bb_die');
 
 	require(PAGE_FOOTER);
@@ -1810,14 +1810,14 @@ function get_forum_display_sort_option ($selected_row = 0, $action = 'list', $li
 {
 	global $lang;
 
-	$forum_display_sort = array(
-		'lang_key' => array('LASTPOST', 'SORT_TOPIC_TITLE', 'SORT_TIME'),
-		'fields'   => array('t.topic_last_post_time', 't.topic_title', 't.topic_time'),
-	);
-	$forum_display_order = array(
-		'lang_key' => array('DESC', 'ASC'),
-		'fields'   => array('DESC', 'ASC'),
-	);
+	$forum_display_sort = [
+		'lang_key' => ['LASTPOST', 'SORT_TOPIC_TITLE', 'SORT_TIME'],
+		'fields'   => ['t.topic_last_post_time', 't.topic_title', 't.topic_time'],
+	];
+	$forum_display_order = [
+		'lang_key' => ['DESC', 'ASC'],
+		'fields'   => ['DESC', 'ASC'],
+	];
 
 	// get the good list
 	$list_name = 'forum_display_' . $list;
@@ -1893,7 +1893,7 @@ function cat_exists ($cat_id)
 //
 class log_action
 {
-	var $log_type = array(
+	var $log_type = [
 	#    LOG_TYPE_NAME   LOG_TYPE_ID
 		'mod_topic_delete'   => 1,
 		'mod_topic_move'     => 2,
@@ -1904,8 +1904,8 @@ class log_action
 		'adm_user_delete'    => 7,
 		'adm_user_ban'       => 8,
 		'adm_user_unban'     => 9,
-	);
-	var $log_type_select = array();
+	];
+	var $log_type_select = [];
 	var $log_disabled = false;
 
 	function init ()
@@ -1918,7 +1918,7 @@ class log_action
 		}
 	}
 
-	function mod ($type_name, $args = array())
+	function mod ($type_name, $args = [])
 	{
 		global $userdata;
 
@@ -1944,7 +1944,7 @@ class log_action
 			$session_ip = '';
 		}
 
-		$sql_ary = array(
+		$sql_ary = [
 			'log_type_id'         => (int)    $this->log_type["$type_name"],
 			'log_user_id'         => (int)    $user_id,
 			'log_user_ip'         => (string) $session_ip,
@@ -1956,13 +1956,13 @@ class log_action
 			'log_topic_title_new' => (string) $topic_title_new,
 			'log_time'            => (int)    TIMENOW,
 			'log_msg'             => (string) $log_msg,
-		);
+		];
 		$sql_args = DB()->build_array('INSERT', $sql_ary);
 
 		DB()->query("INSERT INTO ". BB_LOG ." $sql_args");
 	}
 
-	function admin ($type_name, $args = array())
+	function admin ($type_name, $args = [])
 	{
 		$this->mod($type_name, $args);
 	}
@@ -2047,9 +2047,9 @@ function get_poll_data_items_js ($topic_id)
 {
 	if (!$topic_id_csv = get_id_csv($topic_id))
 	{
-		return is_array($topic_id) ? array() : false;
+		return is_array($topic_id) ? [] : false;
 	}
-	$items = array();
+	$items = [];
 
 	if (!$poll_data = CACHE('bb_poll_data')->get("poll_$topic_id"))
 	{
@@ -2067,7 +2067,7 @@ function get_poll_data_items_js ($topic_id)
 		$opt_text_for_js   = htmlCHR($row['vote_text']);
 		$opt_result_for_js = (int) $row['vote_result'];
 
-		$items[$row['topic_id']][$row['vote_id']] = array($opt_text_for_js, $opt_result_for_js);
+		$items[$row['topic_id']][$row['vote_id']] = [$opt_text_for_js, $opt_result_for_js];
 	}
 	foreach ($items as $k => $v)
 	{
@@ -2087,11 +2087,11 @@ function print_confirmation ($tpl_vars)
 {
 	global $template, $lang;
 
-	$template->assign_vars(array(
+	$template->assign_vars([
 		'TPL_CONFIRM'   => true,
 		'CONFIRM_TITLE' => $lang['CONFIRM'],
 		'FORM_METHOD'   => 'post',
-	));
+	]);
 	$template->assign_vars($tpl_vars);
 
 	print_page('common.tpl');
@@ -2125,7 +2125,7 @@ function print_page ($args, $type = '', $mode = '')
 		require(PAGE_HEADER);
 	}
 
-	$template->set_filenames(array('body' => $tpl));
+	$template->set_filenames(['body' => $tpl]);
 	$template->pparse('body');
 
 	if ($mode !== 'no_footer')
@@ -2222,13 +2222,13 @@ function init_sphinx ()
 
 function log_sphinx_error ($err_type, $err_msg, $query = '')
 {
-	$ignore_err_txt = array(
+	$ignore_err_txt = [
 		'negation on top level',
 		'Query word length is less than min prefix length',
-	);
+	];
 	if (!count($ignore_err_txt) || !preg_match('#'. join('|', $ignore_err_txt) .'#i', $err_msg))
 	{
-		$orig_query = strtr($_REQUEST['nm'], array("\n" => '\n'));
+		$orig_query = strtr($_REQUEST['nm'], ["\n" => '\n']);
 		bb_log(date('m-d H:i:s') ." | $err_type | $err_msg | $orig_query | $query". LOG_LF, 'sphinx_error');
 	}
 }
@@ -2237,8 +2237,8 @@ function get_title_match_topics($search)
 {
 	global $bb_cfg, $sphinx, $userdata, $lang;
 
-	$where_ids       = array();
-	$forum_ids       = (isset($search['ids']) && is_array($search['ids'])) ? array_diff($search['ids'], array(0 => 0)) : '';
+	$where_ids       = [];
+	$forum_ids       = (isset($search['ids']) && is_array($search['ids'])) ? array_diff($search['ids'], [0 => 0]) : '';
 	$title_match_sql = encode_text_match($search['query']);
 
 	if ($bb_cfg['sphinx_enabled'])
@@ -2431,7 +2431,7 @@ function profile_url ($data)
 
 	$profile = '<span title="'. $title .'" class="'. $style .'">'. $username .'</span>';
 
-	if (!in_array($user_id, array('', GUEST_UID, BOT_UID)) && $username)
+	if (!in_array($user_id, ['', GUEST_UID, BOT_UID]) && $username)
 	{
 		$profile = '<a href="'. make_url(PROFILE_URL . $user_id) .'">'. $profile .'</a>';
 	}
@@ -2622,7 +2622,7 @@ function cache_get_userdata ($id)
 {
 	if (ignore_cached_userdata()) return false;
 
-	return CACHE('session_cache')->get($id);
+	return CACHE('bb_session')->get($id);
 }
 
 function cache_set_userdata ($userdata, $force = false)
@@ -2632,7 +2632,7 @@ function cache_set_userdata ($userdata, $force = false)
 	if (!$userdata || (ignore_cached_userdata() && !$force)) return false;
 
 	$id = ($userdata['user_id'] == GUEST_UID) ? $userdata['session_ip'] : $userdata['session_id'];
-	return CACHE('session_cache')->set($id, $userdata, $bb_cfg['session_update_intrv']);
+	return CACHE('bb_session')->set($id, $userdata, $bb_cfg['session_update_intrv']);
 }
 
 function cache_rm_userdata ($userdata)
@@ -2640,7 +2640,7 @@ function cache_rm_userdata ($userdata)
 	if (!$userdata) return false;
 
 	$id = ($userdata['user_id'] == GUEST_UID) ? $userdata['session_ip'] : $userdata['session_id'];
-	return CACHE('session_cache')->rm($id);
+	return CACHE('bb_session')->rm($id);
 }
 
 // $user_id - array(id1,id2,..) or (string) id
@@ -2654,7 +2654,7 @@ function cache_rm_user_sessions ($user_id)
 
 	foreach ($rowset as $row)
 	{
-		CACHE('session_cache')->rm($row['session_id']);
+		CACHE('bb_session')->rm($row['session_id']);
 	}
 }
 

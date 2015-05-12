@@ -125,7 +125,7 @@ $bb_cfg['cache']['engines'] = array(
 	'bb_cache'      => array('filecache', array()),
 	'bb_config'     => array('filecache', array()),
 	'tr_cache'      => array('filecache', array()),
-	'session_cache' => array('filecache', array()),
+	'bb_session'    => array('filecache', array()),
 	'bb_login_err'  => array('filecache', array()),
 	'bb_poll_data'  => array('filecache', array()),
 );
@@ -266,6 +266,7 @@ define('LANG_ROOT_DIR', BB_PATH .'/library/language/'        );
 define('TP_DIR',        BB_PATH .'/library/TorrentPier/'     );
 define('IMAGES_DIR',    BB_PATH .'/styles/images/'           );
 define('TEMPLATES_DIR', BB_PATH .'/styles/templates/'        );
+define('ADMIN_TPL_DIR', TEMPLATES_DIR .'/admin/'             );
 
 // URL's
 $bb_cfg['ajax_url']    = 'ajax.php';     #  "http://{$_SERVER['SERVER_NAME']}/ajax.php"
@@ -323,9 +324,6 @@ $bb_cfg['lang'] = array(
 		'captcha'  => 'en',
 	),
 );
-
-// Templates
-define('ADMIN_TPL_DIR', TEMPLATES_DIR .'/admin/');
 
 $bb_cfg['templates'] = array(
 //	'folder'  => 'Name',
@@ -609,8 +607,8 @@ $bb_cfg['group_avatars'] = array(
 // Get a Google reCAPTCHA API Key: https://www.google.com/recaptcha/admin
 $bb_cfg['captcha'] = array(
 	'disabled'   => false,
-	'public_key' => '123', // your public key
-	'secret_key' => '123', // your secret key
+	'public_key' => '', // your public key
+	'secret_key' => '', // your secret key
 	'theme'      => 'light', // light or dark
 );
 
