@@ -1,18 +1,8 @@
 <?php
 
 /**
-* A constant that must be made available for any other XenForo class to be included.
-*
-* @var boolean
-*/
-define('XENFORO_AUTOLOADER_SETUP', true);
-
-/**
-* Base XenForo autoloader class. This must be the first class loaded and setup as the
-* application/registry depends on it for loading classes.
-*
-* @package XenForo_Core
-*/
+ * Class TorrentPier_Autoloader
+ */
 class TorrentPier_Autoloader
 {
 	/**

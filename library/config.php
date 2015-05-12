@@ -255,6 +255,7 @@ define('CACHE_DIR',     BB_PATH .'/internal_data/cache/'     );
 define('LOG_DIR',       BB_PATH .'/internal_data/log/'       );
 define('SITEMAP_DIR',   BB_PATH .'/internal_data/sitemap/'   );
 define('TRIGGERS_DIR',  BB_PATH .'/internal_data/triggers/'  );
+define('LIB_DIR',       BB_ROOT .'/library/'                 );
 define('AJAX_DIR',      BB_ROOT .'/library/ajax/'            );
 define('CFG_DIR',       BB_PATH .'/library/config/'          );
 define('INC_DIR',       BB_PATH .'/library/includes/'        );
@@ -262,7 +263,7 @@ define('CLASS_DIR',     BB_PATH .'/library/includes/classes/');
 define('CORE_DIR',      BB_PATH .'/library/includes/core/'   );
 define('UCP_DIR',       BB_PATH .'/library/includes/ucp/'    );
 define('LANG_ROOT_DIR', BB_PATH .'/library/language/'        );
-define('TP_AUTO_DIR',   BB_PATH .'/library/TorrentPier/'     );
+define('TP_DIR',        BB_PATH .'/library/TorrentPier/'     );
 define('IMAGES_DIR',    BB_PATH .'/styles/images/'           );
 define('TEMPLATES_DIR', BB_PATH .'/styles/templates/'        );
 

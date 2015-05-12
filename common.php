@@ -17,23 +17,11 @@ header('X-Frame-Options: SAMEORIGIN');
 
 // Get initial config
 require(BB_ROOT . 'library/config.php');
-
-$fileDir = dirname(__FILE__);
-
-require($fileDir . '/library/TorrentPier/Autoloader.php');
-TorrentPier_Autoloader::getInstance()->setupAutoloader($fileDir . '/library/TorrentPier');
-
-// Load Zend Framework
-use Zend\Loader\StandardAutoloader;
-require(BB_ROOT . 'library/Zend/Loader/StandardAutoloader.php');
-$loader = new StandardAutoloader(array('autoregister_zf' => true));
-$loader->register();
-
-// ZF global use
-use Zend\Json;
+require(TP_DIR . 'Autoloader.php');
+TorrentPier_Autoloader::getInstance()->setupAutoloader(TP_DIR);
 
 $server_protocol = ($bb_cfg['cookie_secure']) ? 'https://' : 'http://';
-$server_port = (in_array($bb_cfg['server_port'], array(80, 443))) ? '' : ':' . $bb_cfg['server_port'];
+$server_port = (in_array($bb_cfg['server_port'], [80, 443])) ? '' : ':' . $bb_cfg['server_port'];
 define('FORUM_PATH', $bb_cfg['script_path']);
 define('FULL_URL', $server_protocol . $bb_cfg['server_name'] . $server_port . $bb_cfg['script_path']);
 unset($server_protocol, $server_port);
@@ -124,11 +112,11 @@ switch ($bb_cfg['datastore_type'])
 		break;
 
 	case 'sqlite':
-		$default_cfg = array(
+		$default_cfg = [
 			'db_file_path' => $bb_cfg['cache']['db_dir'] .'datastore.sqlite.db',
 			'pconnect'     => true,
 			'con_required' => true,
-		);
+		];
 		$datastore = new datastore_sqlite($default_cfg, $bb_cfg['cache']['prefix']);
 		break;
 
@@ -255,7 +243,7 @@ function verify_id ($id, $length)
 
 function clean_filename ($fname)
 {
-	static $s = array('\\', '/', ':', '*', '?', '"', '<', '>', '|', ' ');
+	static $s = ['\\', '/', ':', '*', '?', '"', '<', '>', '|', ' '];
 	return str_replace($s, '_', str_compact($fname));
 }
 
@@ -458,7 +446,7 @@ function log_request ($file = '', $prepend_str = false, $add_post = true)
 	global $user;
 
 	$file = ($file) ? $file : 'req/'. date('m-d');
-	$str = array();
+	$str = [];
 	$str[] = date('m-d H:i:s');
 	if ($prepend_str !== false) $str[] = $prepend_str;
 	if (!empty($user->data)) $str[] = $user->id ."\t". html_entity_decode($user->name);
@@ -491,11 +479,11 @@ else if (defined('IN_TRACKER'))
 
 	function dummy_exit ($interval = 1800)
 	{
-		$output = bencode(array(
+		$output = bencode([
 			'interval'     => (int)    $interval,
 			'min interval' => (int)    $interval,
 			'peers'        => (string) DUMMY_PEER,
-		));
+		]);
 
 		die($output);
 	}
