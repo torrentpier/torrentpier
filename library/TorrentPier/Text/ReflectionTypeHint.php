@@ -1,6 +1,5 @@
 <?php
 
-if (!defined('BB_ROOT')) die(basename(__FILE__));
 
 /**
  * A class for validating method parameters to allowed types via reflection.
@@ -28,7 +27,7 @@ if (!defined('BB_ROOT')) die(basename(__FILE__));
  * @version  1.1.0
  */
 
-class ReflectionTypeHint
+class Text_ReflectionTypeHint
 {
 	protected static $hints = array(
 		'int'      => 'is_int',

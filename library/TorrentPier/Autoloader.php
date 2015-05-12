@@ -34,10 +34,10 @@ class TorrentPier_Autoloader
 	}
 
 	/**
-	* Setup the autoloader. This causes the environment to be setup as necessary.
-	*
-	* @param string Path to application library directory. See {@link $_rootDir}
-	*/
+	 * Setup the autoloader. This causes the environment to be setup as necessary.
+	 *
+	 * @param $rootDir
+	 */
 	public function setupAutoloader($rootDir)
 	{
 		if ($this->_setup)
@@ -90,11 +90,6 @@ class TorrentPier_Autoloader
 			return true;
 		}
 
-		if (substr($class, 0, 5) == 'XFCP_')
-		{
-			throw new Exception('Cannot load class using XFCP. Load the class using the correct loader first.');
-		}
-
 		$filename = $this->autoloaderClassToFile($class);
 		if (!$filename)
 		{
@@ -103,7 +98,7 @@ class TorrentPier_Autoloader
 
 		if (file_exists($filename))
 		{
-			include($filename);
+			require_once($filename);
 			return (class_exists($class, false) || interface_exists($class, false));
 		}
 
@@ -111,12 +106,12 @@ class TorrentPier_Autoloader
 	}
 
 	/**
-	* Resolves a class name to an autoload path.
-	*
-	* @param string Name of class to autoload
-	*
-	* @return string|false False if the class contains invalid characters.
-	*/
+	 * Resolves a class name to an autoload path.
+	 *
+	 * @param $class
+	 *
+	 * @return bool|string
+	 */
 	public function autoloaderClassToFile($class)
 	{
 		if (preg_match('#[^a-zA-Z0-9_\\\\]#', $class))

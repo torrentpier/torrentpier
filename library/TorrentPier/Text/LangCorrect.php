@@ -1,7 +1,5 @@
 <?php
 
-if (!defined('BB_ROOT')) die(basename(__FILE__));
-
 /**
  * Automatic correction of the language for words in the text because of the wrong keyboard layout
  * Автоматическое исправление языка для слов в тексте из-за неправильной раскладки клавиатуры
@@ -99,32 +97,32 @@ class Text_LangCorrect
                      ';
 
 	#гласная (vowel) (lowercase)
-	private $vowel_lc = array(
+	private $vowel_lc = [
 		'tt' => '\xd0[\xb0\xb5\xb8\xbe]|\xd1[\x83\x8b\x8d\x8e\x8f\x91]  #аеиоуыэюяё (гласные, 10 шт.)
                 #| \xd0[\x90\x95\x98\x9e\xa3\xab\xad\xae\xaf\x81]       #АЕИОУЫЭЮЯЁ (гласные, 10 шт.)
                 ',
 		'en' => '[aeiouy]', #латинских 6 шт.
-	);
+	];
 
 	#согласная (consonant) + графические знаки для русского языка (ъ, ь) (lowercase)
-	private $consonant_lc = array(
+	private $consonant_lc = [
 		'tt' => '\xd0[\xb1-\xb4\xb6\xb7\xb9\xba-\xbd\xbf]|\xd1[\x80\x81\x82\x84-\x89\x8a\x8c]  #бвгджзйклмнпрстфхцчшщ ъь (согласные, 21+2 шт.)
                 #| \xd0[\x91-\x94\x96\x97\x99\x9a-\x9d\x9f-\xa2\xa4-\xa9\xaa\xac]              #БВГДЖЗЙКЛМНПРСТФХЦЧШЩ ЪЬ (согласные, 21+2 шт.)
                 ',
 		'en' => '[bcdfghjklmnpqrstvwxz]', #латинских 20 шт.
-	);
+	];
 
-	private $words_exceptions = array(
-		'tt' => array(
+	private $words_exceptions = [
+		'tt' => [
 			'трлн' => null,
 			'ющенко' => null,
 			'мебельград' => null,
 			'дэнис' => null,
-		),
-		'en' => array(
+		],
+		'en' => [
 			'heuer' => null,
-		),
-	);
+		],
+	];
 
 	#русские буквы, похожие на англ. (uppercase)
 	private $ru_similar_uc = "\xd0[\x90\x92\x95\x9a\x9c\x9d\x9e\xa0-\xa3\xa5]";
@@ -208,9 +206,9 @@ class Text_LangCorrect
 	private $is_flip = false;
 	private $method = 0;
 
-	private $table = array(
+	private $table = [
 		#метод 0: таблица исправления ошибочно набранных букв, которые выглядят одинаково (русский <--> английский)
-		0 => array(
+		0 => [
 			#lowercase          #UPPERCASE
 			"\xd0\xb0" => 'a',  "\xd0\x90" => 'A',
 			"\xd0\x92" => 'B',
@@ -224,9 +222,9 @@ class Text_LangCorrect
 			"\xd0\xa2" => 'T',
 			"\xd1\x83" => 'y',  "\xd0\xa3" => 'Y',
 			"\xd1\x85" => 'x',  "\xd0\xa5" => 'X',
-		),
+		],
 		#метод 1: таблица исправления ошибочно набранных букв в другой раскладке клавиатуры (русский <--> английский)
-		1 => array(
+		1 => [
 			#CASE_UPPER         #case_lower
 			"\xd0\x81" => '~',  "\xd1\x91" => '`', #Ё ё
 			"\xd0\x90" => 'F',  "\xd0\xb0" => 'f', #А а
@@ -262,12 +260,12 @@ class Text_LangCorrect
 			"\xd0\xad" => '"',  "\xd1\x8d" => "'", #Э э
 			"\xd0\xae" => '>',  "\xd1\x8e" => '.', #Ю ю
 			"\xd0\xaf" => 'Z',  "\xd1\x8f" => 'z', #Я я
-		),
-	);
+		],
+	];
 
 	#несуществующие N-граммы для гласных букв
-	private $vowels3_lc = array(
-		'en' => array(
+	private $vowels3_lc = [
+		'en' => [
 			'aea' => 0,
 			'aei' => 1,
 			'aeo' => 2,
@@ -356,8 +354,8 @@ class Text_LangCorrect
 			'you' => 85,
 			'yoy' => 86,
 			'yua' => 87,
-		),
-		'tt' => array(
+		],
+		'tt' => [
 			'аау' => 0,
 			'аео' => 1,
 			'аеу' => 2,
@@ -397,12 +395,12 @@ class Text_LangCorrect
 			'ояе' => 36,
 			'уео' => 37,
 			'уюю' => 38,
-		),
-	);
+		],
+	];
 
 	#несуществующие N-граммы для согласных букв
-	private $consonants4_lc = array(
-		'en' => array(
+	private $consonants4_lc = [
+		'en' => [
 			'bldg' => 0,
 			'blvd' => 1,
 			'bscr' => 2,
@@ -685,8 +683,8 @@ class Text_LangCorrect
 			'wspr' => 279,
 			'wstr' => 280,
 			'xthl' => 281,
-		),
-		'tt' => array(
+		],
+		'tt' => [
 			'блзд' => 0,
 			'бльд' => 1,
 			'брьс' => 2,
@@ -912,11 +910,11 @@ class Text_LangCorrect
 			'хтск' => 222,
 			'хтсм' => 223,
 			'цстр' => 224,
-		),
-	);
+		],
+	];
 
 	#несуществующие биграммы в начале и конце слов
-	private $bigrams = array(
+	private $bigrams = [
 		#ru
 		' ёё' => 0,
 		' ёа' => 0,
@@ -2788,7 +2786,7 @@ class Text_LangCorrect
 		'zw ' => 0,
 		'zx' => 0,
 		'zx ' => 0,
-	);
+	];
 
 	/**
 	 *
@@ -2796,7 +2794,7 @@ class Text_LangCorrect
 	 */
 	public function __construct(array $words_exceptions = null)
 	{
-		if (! ReflectionTypeHint::isValid()) return false;
+		if (! Text_ReflectionTypeHint::isValid()) return false;
 		#русский --> английский:
 		$this->en_correct  = '/(?: (?:' . $this->tt_f . ')
                                    (?: (?:' . $this->en_uniq . ') | (?:' . $this->en_sc . '){2} )
@@ -2817,10 +2815,10 @@ class Text_LangCorrect
                                    (?:' . $this->en_sc . ')
                                )
                               /sxSX';
-		$this->table_flip = array(
+		$this->table_flip = [
 			0 => array_flip($this->table[0]),
 			1 => array_flip($this->table[1]),
-		);
+		];
 		if (is_array($words_exceptions)) $this->words_exceptions += $words_exceptions;
 	}
 
@@ -2837,7 +2835,7 @@ class Text_LangCorrect
 	 */
 	public function parse($s, $mode = self::SIMILAR_CHARS, array &$words = null)
 	{
-		if (! ReflectionTypeHint::isValid()) return false;
+		if (! Text_ReflectionTypeHint::isValid()) return false;
 		if (! is_string($s)) return $s;
 
 		if ($mode < self::SIMILAR_CHARS || $mode > (self::SIMILAR_CHARS | self::KEYBOARD_LAYOUT | self::ADD_FIX))
@@ -2849,16 +2847,16 @@ class Text_LangCorrect
 		$this->mode = $mode;
 
 		#вырезаем и заменяем некоторые символы
-		$additional_chars = array(
+		$additional_chars = [
 			"\xc2\xad",  #"мягкие" переносы строк (&shy;)
-		);
+		];
 		#http://ru.wikipedia.org/wiki/Диакритические_знаки
-		$s = UTF8::diactrical_remove($s, $additional_chars, $is_can_restored = true, $restore_table);
+		$s = Text_UTF8::diactrical_remove($s, $additional_chars, $is_can_restored = true, $restore_table);
 
-		$this->words = array();
+		$this->words = [];
 		$s = $this->_parse1($s);
 		$s = $this->_parse2($s);
-		$s = UTF8::diactrical_restore($s, $restore_table);
+		$s = Text_UTF8::diactrical_restore($s, $restore_table);
 		$words = $this->words;
 		return $s;
 	}
@@ -2870,7 +2868,7 @@ class Text_LangCorrect
                                          | (' . $this->tt . ')  #2 русские буквы
                                          | (' . $this->sc . ')  #3 символы, которые м.б. набраны по ошибке в английской раскладке клавиатуры вместо русских букв
                                        ){3,}+
-                                      /sxSX', array($this, '_word'), $s);
+                                      /sxSX', [$this, '_word'], $s);
 	}
 
 	private function _parse2($s)
@@ -2890,7 +2888,7 @@ class Text_LangCorrect
                                            (?:' . $this->ru_similar . ')++
                                            (?= [\d-_/]*+ (?!' . $this->tt_uniq . ') )
                                        )
-                                      ~sxSX', array($this, '_entry'), $s);
+                                      ~sxSX', [$this, '_entry'], $s);
 	}
 
 	private function _entry(array &$a)
@@ -2906,7 +2904,7 @@ class Text_LangCorrect
 		$word = $a[0];
 		#var_export($a);
 
-		$suggestions = array();
+		$suggestions = [];
 
 		#если найдено слово из мешанины русских и латинских букв
 		if (! empty($a[1]) && ! empty($a[2]))
@@ -3017,7 +3015,7 @@ class Text_LangCorrect
 
 	private function _replace($word, $regexp)
 	{
-		do $word = preg_replace_callback($regexp, array(&$this, '_strtr'), $w = $word);
+		do $word = preg_replace_callback($regexp, [&$this, '_strtr'], $w = $word);
 		while ($w !== $word);
 		return $word;
 	}
@@ -3063,7 +3061,7 @@ class Text_LangCorrect
 		#если в $s спецсимволов больше чем букв, возвращаем $word
 		$sc_count = 0;
 		$s = preg_replace('/' . $this->sc . '/sSX', '', $s, -1, $sc_count);
-		if ($sc_count > 0 && $sc_count > UTF8::strlen($s)) return $word;
+		if ($sc_count > 0 && $sc_count > Text_UTF8::strlen($s)) return $word;
 
 		return reset($suggestions);
 	}
@@ -3071,7 +3069,7 @@ class Text_LangCorrect
 	#анализ на основе N-грамм русского и английского языка
 	private function _bigram_exists($word, $lang)
 	{
-		$word = ($lang === 'en') ? strtolower($word) : UTF8::lowercase($word);
+		$word = ($lang === 'en') ? strtolower($word) : Text_UTF8::lowercase($word);
 
 		#шаг 0.
 		#проверяем слова в списке слов-исключений
@@ -3090,14 +3088,14 @@ class Text_LangCorrect
 			&& ! array_key_exists($m[0], $this->vowels3_lc[$lang])) return true;
 
 		#шаг 3.
-		$length = UTF8::strlen($word);
+		$length = Text_UTF8::strlen($word);
 		for ($pos = 0, $limit = $length - 1; $pos < $limit; $pos++)
 		{
 			/*
             TODO  Качество проверки по несуществующим биграммам можно немного повысить,
             если учитывать не только начало и конец слова, но и все позиции биграмм в слове.
 			*/
-			$ss = UTF8::substr($word, $pos, 2);
+			$ss = Text_UTF8::substr($word, $pos, 2);
 			if ($pos === 0)              $ss = ' ' . $ss;  #beginning of word
 			elseif ($pos === $limit - 1) $ss = $ss . ' ';  #ending of word
 			if (array_key_exists($ss, $this->bigrams)) return true;

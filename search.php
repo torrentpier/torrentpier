@@ -3,19 +3,15 @@
 define('BB_SCRIPT', 'search');
 define('BB_ROOT', './');
 require(BB_ROOT . 'common.php');
-
 require(INC_DIR . 'bbcode.php');
-require(CLASS_DIR . 'utf8.php');
-require(CLASS_DIR . 'correct.php');
-require(CLASS_DIR . 'reflection.php');
 
-$page_cfg['load_tpl_vars'] = array(
+$page_cfg['load_tpl_vars'] = [
 	'post_buttons',
 	'post_icons',
 	'topic_icons',
-);
+];
 
-$user->session_start(array('req_login' => $bb_cfg['disable_search_for_guest']));
+$user->session_start(['req_login' => $bb_cfg['disable_search_for_guest']]);
 
 set_die_append_msg();
 
@@ -65,7 +61,7 @@ else if(isset($_POST['add_my_post']))
 //
 // Define censored word matches
 //
-$orig_word = $replacement_word = array();
+$orig_word = $replacement_word = [];
 obtain_word_list($orig_word, $replacement_word);
 
 $tracking_topics = get_tracks('topic');
@@ -145,138 +141,138 @@ $ord_last_p   = 5;
 $ord_created  = 6;
 
 // Order options
-$order_opt = array(
-	$ord_posted    => array(
+$order_opt = [
+	$ord_posted    => [
 		'lang' => $lang['SORT_TIME'],
 		'sql'  => 'item_id',
-	),
-	$ord_last_p    => array(
+	],
+	$ord_last_p    => [
 		'lang' => $lang['LASTPOST'],
 		'sql'  => 't.topic_last_post_id',
-	),
-	$ord_created   => array(
+	],
+	$ord_created   => [
 		'lang' => $lang['BT_CREATED'],
 		'sql'  => 't.topic_time',
-	),
-	$ord_name      => array(
+	],
+	$ord_name      => [
 		'lang' => $lang['SORT_TOPIC_TITLE'],
 		'sql'  => 't.topic_title',
-	),
-	$ord_repl      => array(
+	],
+	$ord_repl      => [
 		'lang' => $lang['REPLIES'],
 		'sql'  => 't.topic_replies',
-	),
-);
-$order_select = array();
+	],
+];
+$order_select = [];
 foreach ($order_opt as $val => $opt)
 {
 	$order_select[$opt['lang']] = $val;
 }
 
 // Sort direction
-$sort_opt = array(
-	$sort_asc  => array(
+$sort_opt = [
+	$sort_asc  => [
 		'lang' => $lang['ASC'],
 		'sql'  => ' ASC ',
-	),
-	$sort_desc => array(
+	],
+	$sort_desc => [
 		'lang' => $lang['DESC'],
 		'sql'  => ' DESC ',
-	),
-);
-$sort_select = array();
+	],
+];
+$sort_select = [];
 foreach ($sort_opt as $val => $opt)
 {
 	$sort_select[$opt['lang']] = $val;
 }
 
 // Previous days
-$time_opt = array(
-	$search_all => array(
+$time_opt = [
+	$search_all => [
 		'lang' => $lang['BT_ALL_DAYS_FOR'],
 		'sql'  => 0,
-	),
-	1  => array(
+	],
+	1  => [
 		'lang' => $lang['BT_1_DAY_FOR'],
 		'sql'  => TIMENOW - 86400,
-	),
-	3  => array(
+	],
+	3  => [
 		'lang' => $lang['BT_3_DAY_FOR'],
 		'sql'  => TIMENOW - 86400*3,
-	),
-	7  => array(
+	],
+	7  => [
 		'lang' => $lang['BT_7_DAYS_FOR'],
 		'sql'  => TIMENOW - 86400*7,
-	),
-	14 => array(
+	],
+	14 => [
 		'lang' => $lang['BT_2_WEEKS_FOR'],
 		'sql'  => TIMENOW - 86400*14,
-	),
-	30 => array(
+	],
+	30 => [
 		'lang' => $lang['BT_1_MONTH_FOR'],
 		'sql'  => TIMENOW - 86400*30,
-	),
-);
-$time_select = array();
+	],
+];
+$time_select = [];
 foreach ($time_opt as $val => $opt)
 {
 	$time_select[$opt['lang']] = $val;
 }
 
 // Display as
-$display_as_opt = array(
-	$as_topics => array(
+$display_as_opt = [
+	$as_topics => [
 		'lang' => $lang['TOPICS'],
-	),
-	$as_posts  => array(
+	],
+	$as_posts  => [
 		'lang' => $lang['MESSAGE'],
-	),
-);
-$display_as_select = array();
+	],
+];
+$display_as_select = [];
 foreach ($display_as_opt as $val => $opt)
 {
 	$display_as_select[$opt['lang']] = $val;
 }
 
 // Chars
-$chars_opt = array(
-	$show_all => array(
+$chars_opt = [
+	$show_all => [
 		'lang' => $lang['ALL_AVAILABLE'],
-	),
-	$show_briefly  => array(
+	],
+	$show_briefly  => [
 		'lang' => $lang['BRIEFLY'],
-	),
-);
-$chars_select = array();
+	],
+];
+$chars_select = [];
 foreach ($chars_opt as $val => $opt)
 {
 	$chars_select[$opt['lang']] = $val;
 }
 
-$GPC = array(
+$GPC = [
 #	  var_name              key_name  def_value    GPC type
-	'all_words'     => array('allw',  1,            CHBOX),
-	'cat'           => array('c',     null,         REQUEST),
-	'chars'         => array('ch',    $show_all,    SELECT),
-	'display_as'    => array('dm',    $as_topics,   SELECT),
-	'dl_cancel'     => array('dla',   0,            CHBOX),
-	'dl_compl'      => array('dlc',   0,            CHBOX),
-	'dl_down'       => array('dld',   0,            CHBOX),
-	'dl_user_id'    => array('dlu',   $user_id,     CHBOX),
-	'dl_will'       => array('dlw',   0,            CHBOX),
-	'forum'         => array('f',     $search_all,  REQUEST),
-	'my_topics'     => array('myt',   0,            CHBOX),
-	'new'           => array('new',   0,            CHBOX),
-	'new_topics'    => array('nt',    0,            CHBOX),
-	'order'         => array('o',     $ord_posted,  SELECT),
-	'poster_id'     => array('uid',   null,         REQUEST),
-	'poster_name'   => array('pn',    null,         REQUEST),
-	'sort'          => array('s',     $sort_desc,   SELECT),
-	'text_match'    => array('nm',    null,         REQUEST),
-	'time'          => array('tm',    $search_all,  SELECT),
-	'title_only'    => array('to',    0,            CHBOX),
-	'topic'         => array('t',     null,         REQUEST),
-);
+	'all_words'     => ['allw',  1,            CHBOX],
+	'cat'           => ['c',     null,         REQUEST],
+	'chars'         => ['ch',    $show_all,    SELECT],
+	'display_as'    => ['dm',    $as_topics,   SELECT],
+	'dl_cancel'     => ['dla',   0,            CHBOX],
+	'dl_compl'      => ['dlc',   0,            CHBOX],
+	'dl_down'       => ['dld',   0,            CHBOX],
+	'dl_user_id'    => ['dlu',   $user_id,     CHBOX],
+	'dl_will'       => ['dlw',   0,            CHBOX],
+	'forum'         => ['f',     $search_all,  REQUEST],
+	'my_topics'     => ['myt',   0,            CHBOX],
+	'new'           => ['new',   0,            CHBOX],
+	'new_topics'    => ['nt',    0,            CHBOX],
+	'order'         => ['o',     $ord_posted,  SELECT],
+	'poster_id'     => ['uid',   null,         REQUEST],
+	'poster_name'   => ['pn',    null,         REQUEST],
+	'sort'          => ['s',     $sort_desc,   SELECT],
+	'text_match'    => ['nm',    null,         REQUEST],
+	'time'          => ['tm',    $search_all,  SELECT],
+	'title_only'    => ['to',    0,            CHBOX],
+	'topic'         => ['t',     null,         REQUEST],
+];
 
 // Define all GPC vars with default values
 foreach ($GPC as $var_name => $var_options)
@@ -292,7 +288,7 @@ if (empty($_GET) && empty($_POST))
 	$forum_select_mode = explode(',', $excluded_forums_csv);
 	$forum_select = get_forum_select($forum_select_mode, "{$forum_key}[]", $search_all, $max_forum_name_len, $forum_select_size, 'style="width: 95%;"', $search_all);
 
-	$template->assign_vars(array(
+	$template->assign_vars([
 		'TPL_SEARCH_MAIN'   => true,
 		'PAGE_TITLE'        => $lang['SEARCH'],
 
@@ -323,7 +319,7 @@ if (empty($_GET) && empty($_POST))
 		'SORT_SELECT'       => build_select ($sort_key,  $sort_select,  $sort_val),
 		'CHARS_SELECT'      => '', # build_select ($chars_key, $chars_select, $chars_val),
 		'DISPLAY_AS_SELECT' => build_select ($display_as_key, $display_as_select, $display_as_val),
-	));
+	]);
 
 	print_page('search.tpl');
 }
@@ -336,9 +332,9 @@ if ($search_id)
 {
 	$row = DB()->fetch_row("
 		SELECT search_array, search_settings
-		FROM ". BB_SEARCH ."
+		FROM " . BB_SEARCH . "
 		WHERE session_id = '$session_id'
-			AND search_type = ". SEARCH_TYPE_POST ."
+			AND search_type = " . SEARCH_TYPE_POST . "
 			AND search_id = '$search_id'
 		LIMIT 1
 	");
@@ -375,17 +371,17 @@ if (!$items_found)
 	{
 		switch ($_REQUEST['search_id'])
 		{
-		case 'egosearch':
-			$egosearch = true;
-			$display_as_val = $as_topics;
-			if (empty($_REQUEST[$poster_id_key]))
-			{
-				$_REQUEST[$poster_id_key] = $user_id;
-			}
-			break;
-		case 'newposts':
-			$new_val = true;
-			break;
+			case 'egosearch':
+				$egosearch      = true;
+				$display_as_val = $as_topics;
+				if (empty($_REQUEST[$poster_id_key]))
+				{
+					$_REQUEST[$poster_id_key] = $user_id;
+				}
+				break;
+			case 'newposts':
+				$new_val = true;
+				break;
 		}
 	}
 
@@ -447,7 +443,7 @@ if (!$items_found)
 	}
 }
 
-$dl_status = array();
+$dl_status = [];
 if ($dl_cancel_val) $dl_status[] = DL_STATUS_CANCEL;
 if ($dl_compl_val)  $dl_status[] = DL_STATUS_COMPLETE;
 if ($dl_down_val)   $dl_status[] = DL_STATUS_DOWN;
@@ -480,7 +476,7 @@ if ($post_mode)
 	// Run initial search for post_ids
 	if (!$items_found)
 	{
-		$join_t = ($title_match || $my_topics || $new_topics || in_array($order_val, array($ord_last_p, $ord_created, $ord_name, $ord_repl)));
+		$join_t = ($title_match || $my_topics || $new_topics || in_array($order_val, [$ord_last_p, $ord_created, $ord_name, $ord_repl]));
 		$join_s = ($text_match_sql && !$title_match);
 		$join_p = ($my_posts || $join_s);
 
@@ -516,7 +512,7 @@ if ($post_mode)
 		if ($text_match_sql)
 		{
 			$search_match_topics_csv = '';
-			$title_match_topics = get_title_match_topics(array('query' => $text_match_sql, 'ids' => $forum_selected));
+			$title_match_topics = get_title_match_topics(['query' => $text_match_sql, 'ids' => $forum_selected]);
 
 			if (!$search_match_topics_csv = join(',', $title_match_topics))
 			{
@@ -547,19 +543,19 @@ if ($post_mode)
 
 	$sql = "
 		SELECT
-		  p.post_id AS item_id,
-		  t.*,
-		  p.*,
-		  h.post_html, IF(h.post_html IS NULL, pt.post_text, NULL) AS post_text,
-		  IF(p.poster_id = $anon_id, p.post_username, u.username) AS username, u.user_id, u.user_rank
+			p.post_id AS item_id,
+			t.*,
+			p.*,
+			h.post_html, IF(h.post_html IS NULL, pt.post_text, NULL) AS post_text,
+			IF(p.poster_id = $anon_id, p.post_username, u.username) AS username, u.user_id, u.user_rank
 		FROM       $posts_tbl
 		INNER JOIN $topics_tbl     ON(t.topic_id = p.topic_id)
 		INNER JOIN $posts_text_tbl ON(pt.post_id = p.post_id)
-		 LEFT JOIN $posts_html_tbl ON(h.post_id = pt.post_id)
+		LEFT  JOIN $posts_html_tbl ON(h.post_id = pt.post_id)
 		INNER JOIN $users_tbl      ON(u.user_id = p.poster_id)
 		WHERE
-		      p.post_id IN(". join(',', $items_display) .")
-		    $excluded_forums_sql
+			p.post_id IN(" . join(',', $items_display) . ")
+			$excluded_forums_sql
 		LIMIT $per_page
 	";
 
@@ -568,7 +564,7 @@ if ($post_mode)
 	{
 		bb_die($lang['NO_SEARCH_MATCH']);
 	}
-	$tmp = $sorted_rows = array();
+	$tmp = $sorted_rows = [];
 
 	foreach ($unsorted_rows as $row)
 	{
@@ -585,7 +581,7 @@ if ($post_mode)
 	}
 
 	// Output page
-	$new_tracks = array();
+	$new_tracks = [];
 
 	foreach ($sorted_rows as $topic_id => $topic_posts)
 	{
@@ -601,13 +597,13 @@ if ($post_mode)
 			$topic_title = preg_replace($orig_word, $replacement_word, $topic_title);
 		}
 
-		$template->assign_block_vars('t', array(
+		$template->assign_block_vars('t', [
 			'FORUM_ID'    => $forum_id,
 			'FORUM_NAME'  => $forum_name_html[$forum_id],
 			'TOPIC_ID'    => $topic_id,
 			'TOPIC_TITLE' => $topic_title,
 			'TOPIC_ICON'  => get_topic_icon($first_post, $is_unread_t),
-		));
+		]);
 
 		$quote_btn = true;
 		$edit_btn = $delpost_btn = $ip_btn = (IS_AM);
@@ -622,7 +618,7 @@ if ($post_mode)
 				$message = preg_replace($orig_word, $replacement_word, $message);
 			}
 
-			$template->assign_block_vars('t.p', array(
+			$template->assign_block_vars('t.p', [
 				'ROW_NUM'      => $row_num,
 				'POSTER_ID'    => $post['poster_id'],
 				'POSTER'       => profile_url($post),
@@ -635,7 +631,7 @@ if ($post_mode)
 				'EDIT'         => $edit_btn,
 				'DELETE'       => $delpost_btn,
 				'IP'           => $ip_btn,
-			));
+			]);
 
 			$curr_new_track_val = !empty($new_tracks[$topic_id]) ? $new_tracks[$topic_id] : 0;
 			$new_tracks[$topic_id] = max($curr_new_track_val, $post['post_time']);
@@ -654,7 +650,7 @@ else
 	// Run initial search for topic_ids
 	if (!$items_found)
 	{
-		$join_t  = ($title_match || $my_topics || $new_topics || $dl_search || $new_posts || in_array($order_val, array($ord_last_p, $ord_created, $ord_name, $ord_repl)));
+		$join_t  = ($title_match || $my_topics || $new_topics || $dl_search || $new_posts || in_array($order_val, [$ord_last_p, $ord_created, $ord_name, $ord_repl]));
 		$join_s  = ($text_match_sql && !$title_match);
 		$join_p  = ($my_posts || $join_s);
 		$join_dl = ($dl_search);
@@ -714,7 +710,7 @@ else
 		if ($text_match_sql)
 		{
 			$search_match_topics_csv = '';
-			$title_match_topics = get_title_match_topics(array('query' => $text_match_sql, 'ids' => $forum_selected));
+			$title_match_topics = get_title_match_topics(['query' => $text_match_sql, 'ids' => $forum_selected]);
 
 			if (!$search_match_topics_csv = join(',', $title_match_topics))
 			{
@@ -782,7 +778,7 @@ else
 	$SQL['LIMIT'][] = "$per_page";
 
 	// Fetch topics data
-	$topic_rows = array();
+	$topic_rows = [];
 	foreach (DB()->fetch_rowset($SQL) as $row)
 	{
 		$topic_rows[$row['topic_id']] = $row;
@@ -805,7 +801,7 @@ else
 		$is_unread = is_unread($topic['topic_last_post_time'], $topic_id, $forum_id);
 		$moved     = ($topic['topic_status'] == TOPIC_MOVED);
 
-		$template->assign_block_vars('t', array(
+		$template->assign_block_vars('t', [
 			'ROW_NUM'       => $row_num,
 			'FORUM_ID'      => $forum_id,
 			'FORUM_NAME'    => $forum_name_html[$forum_id],
@@ -823,11 +819,11 @@ else
 			'POLL'          => $topic['topic_vote'],
 			'DL_CLASS'      => isset($topic['dl_status']) ? $dl_link_css[$topic['dl_status']] : '',
 
-			'TOPIC_AUTHOR'  => profile_url(array('username' => $topic['first_username'], 'user_id' => $topic['first_user_id'], 'user_rank' => $topic['first_user_rank'])),
-			'LAST_POSTER'   => profile_url(array('username' => $topic['last_username'], 'user_id' => $topic['last_user_id'], 'user_rank' => $topic['last_user_rank'])),
+			'TOPIC_AUTHOR'  => profile_url(['username' => $topic['first_username'], 'user_id' => $topic['first_user_id'], 'user_rank' => $topic['first_user_rank']]),
+			'LAST_POSTER'   => profile_url(['username' => $topic['last_username'], 'user_id' => $topic['last_user_id'], 'user_rank' => $topic['last_user_rank']]),
 			'LAST_POST_TIME' => bb_date($topic['topic_last_post_time']),
 			'LAST_POST_ID'  => $topic['topic_last_post_id'],
-		));
+		]);
 	}
 }
 
@@ -839,7 +835,7 @@ if ($items_display)
 
 	generate_pagination($url, $items_count, $per_page, $start);
 
-	$template->assign_vars(array(
+	$template->assign_vars([
 		'PAGE_TITLE'       => $lang['SEARCH'],
 
 		'SEARCH_MATCHES'   => ($items_count) ? sprintf($lang['FOUND_SEARCH_MATCHES'], $items_count) : '',
@@ -848,7 +844,7 @@ if ($items_display)
 		'DL_CONTROLS'      => ($dl_search && $dl_user_id_val == $user_id),
 		'DL_ACTION'        => 'dl_list.php',
 		'MY_POSTS'         => (!$post_mode && $my_posts && $user->id == $poster_id_val),
-	));
+	]);
 
 	print_page('search_results.tpl');
 }
@@ -862,7 +858,7 @@ function fetch_search_ids ($sql, $search_type = SEARCH_TYPE_POST)
 {
 	global $lang, $search_id, $session_id, $items_found, $per_page;
 
-	$items_found = array();
+	$items_found = [];
 	foreach (DB()->fetch_rowset($sql) as $row)
 	{
 		$items_found[] = $row['item_id'];
@@ -879,18 +875,18 @@ function fetch_search_ids ($sql, $search_type = SEARCH_TYPE_POST)
 	{
 		$search_array = join(',', $items_found);
 
-		$save_in_db = array(
+		$save_in_db = [
 			'order',
 			'sort',
 			'display_as',
 			'chars',
-		);
+		];
 		if ($GLOBALS['dl_cancel_val']) $save_in_db[] = 'dl_cancel';
 		if ($GLOBALS['dl_compl_val'])  $save_in_db[] = 'dl_compl';
 		if ($GLOBALS['dl_down_val'])   $save_in_db[] = 'dl_down';
 		if ($GLOBALS['dl_will_val'])   $save_in_db[] = 'dl_will';
 
-		$curr_set = array();
+		$curr_set = [];
 		foreach ($save_in_db as $name)
 		{
 			$curr_set[$GLOBALS["{$name}_key"]] = $GLOBALS["{$name}_val"];
@@ -913,8 +909,8 @@ function prevent_huge_searches ($SQL)
 	if ($bb_cfg['limit_max_search_results'])
 	{
 		$SQL['select_options'][] = 'SQL_CALC_FOUND_ROWS';
-		$SQL['ORDER BY'] = array();
-		$SQL['LIMIT']    = array('0');
+		$SQL['ORDER BY'] = [];
+		$SQL['LIMIT']    = ['0'];
 
 		if (DB()->query($SQL) AND $row = DB()->fetch_row("SELECT FOUND_ROWS() AS rows_count"))
 		{
@@ -929,7 +925,7 @@ function prevent_huge_searches ($SQL)
 
 function username_search ($search_match)
 {
-	global $template, $lang, $gen_simple_header;
+	global $template, $lang;
 
 	$username_list = '';
 
@@ -959,7 +955,7 @@ function username_search ($search_match)
 
 	$input_name = isset($_REQUEST['input_name']) ? htmlCHR($_REQUEST['input_name']) : 'username';
 
-	$template->assign_vars(array(
+	$template->assign_vars([
 		'TPL_SEARCH_USERNAME' => true,
 
 		'PAGE_TITLE'        => $lang['SEARCH'],
@@ -967,7 +963,7 @@ function username_search ($search_match)
 		'INPUT_NAME'        => $input_name,
 		'USERNAME_OPTIONS'  => $username_list,
 		'SEARCH_ACTION'     => "search.php?mode=searchuser&amp;input_name=$input_name",
-	));
+	]);
 
 	print_page('search.tpl', 'simple');
 }
