@@ -2,14 +2,17 @@
 
 // @todo переписать
 
+/**
+ * Class emailer
+ */
 class emailer
 {
 	var $msg, $subject, $extra_headers;
 	var $addresses, $reply_to, $from;
 	var $use_smtp;
 
-	var $tpl_msg = array();
-	var $vars    = array();
+	var $tpl_msg = [];
+	var $vars    = [];
 
 	function emailer ($use_smtp/*$tpl_name, $sbj, $to_address*/)
 	{
@@ -29,17 +32,17 @@ class emailer
 	{
 		global $bb_cfg;
 
-		$this->vars = array(
+		$this->vars = [
 			'BOARD_EMAIL' => $bb_cfg['board_email'],
 			'SITENAME'    => $bb_cfg['board_email_sitename'],
 			'EMAIL_SIG'   => !empty($bb_cfg['board_email_sig']) ? "-- \n{$bb_cfg['board_email_sig']}" : '',
-		);
+		];
 	}
 
 	// Resets all the data (address, template file, etc etc to default
 	function reset ()
 	{
-		$this->addresses = array();
+		$this->addresses = [];
 		$this->msg = $this->extra_headers = '';
 		$this->set_default_vars();
 	}
@@ -163,7 +166,7 @@ class emailer
 		// We now try and pull a subject from the email body ... if it exists,
 		// do this here because the subject may contain a variable
 		$drop_header = '';
-		$match = array();
+		$match = [];
 		if (preg_match('#^(Subject:(.*?))$#m', $this->msg, $match))
 		{
 			$this->subject = (trim($match[2]) != '') ? trim($match[2]) : (($this->subject != '') ? $this->subject : 'No Subject');

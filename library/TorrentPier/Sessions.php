@@ -1,5 +1,8 @@
 <?php
 
+/**
+ * Class Sessions
+ */
 class Sessions
 {
 	/**

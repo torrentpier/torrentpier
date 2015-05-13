@@ -1,6 +1,5 @@
 <?php
 
-
 /**
  * A class for validating method parameters to allowed types via reflection.
  *

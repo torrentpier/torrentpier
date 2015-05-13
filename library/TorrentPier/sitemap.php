@@ -2,6 +2,9 @@
 
 // @todo переписать
 
+/**
+ * Class sitemap
+ */
 class sitemap
 {
 	var $home           = '';

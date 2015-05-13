@@ -86,12 +86,7 @@ define('ADMIN',        1);
 define('MOD',          2);
 define('GROUP_MEMBER', 20);
 define('CP_HOLDER',    25);
-
-$excluded_users = [
-	GUEST_UID,
-	BOT_UID,
-];
-define('EXCLUDED_USERS_CSV', implode(',', $excluded_users));
+define('EXCLUDED_USERS', implode(',', [GUEST_UID, BOT_UID]));
 
 // User related
 define('USER_ACTIVATION_NONE',  0);
@@ -351,7 +346,6 @@ define('XS_TAG_ELSEIF', 7);
 define('XS_TAG_ENDIF', 8);
 define('XS_TAG_BEGINELSE', 11);
 
-
 if (!empty($banned_user_agents))
 {
 	foreach ($banned_user_agents as $agent)
@@ -448,7 +442,7 @@ $datastore->enqueue(['cat_forums']);
 if (!$bb_cfg['board_startdate'])
 {
 	bb_update_config(['board_startdate' => TIMENOW]);
-	DB()->query("UPDATE ". BB_USERS ." SET user_regdate = ". TIMENOW ." WHERE user_id IN(2, ". EXCLUDED_USERS_CSV .")");
+	DB()->query("UPDATE ". BB_USERS ." SET user_regdate = ". TIMENOW ." WHERE user_id IN(2, ". EXCLUDED_USERS .")");
 }
 
 // Cron
