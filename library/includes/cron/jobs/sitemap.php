@@ -5,9 +5,9 @@ if (!defined('BB_ROOT')) die(basename(__FILE__));
 $map = new sitemap();
 $map->create();
 
-if (@file_exists(BB_ROOT. "/sitemap/sitemap.xml"))
+if (@file_exists(INT_DATA_DIR . '/sitemap/sitemap.xml'))
 {
-	$map_link = make_url('/sitemap/sitemap.xml');
+	$map_link = make_url(INT_DATA_DIR . '/sitemap/sitemap.xml');
 
 	$map->send_url("http://google.com/webmasters/sitemaps/ping?sitemap=", $map_link);
 	$map->send_url("http://ping.blogs.yandex.ru/ping?sitemap=", $map_link);

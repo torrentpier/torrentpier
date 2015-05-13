@@ -167,7 +167,7 @@ class Upload
 
 			return false;
 		}
-		$this->file_ext_id = @$this->ext_ids[$this->file_ext];
+		$this->file_ext_id = $this->ext_ids[$this->file_ext];
 
 		return true;
 	}
@@ -189,7 +189,7 @@ class Upload
 		}
 		else if ($mode == 'attach')
 		{
-			$file_path = get_attach_path($params['topic_id']);
+			$file_path = get_attach_path($params['topic_id'], $params['attach_ext_id']);
 
 			return $this->_move($file_path);
 		}

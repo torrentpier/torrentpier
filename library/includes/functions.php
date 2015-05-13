@@ -16,17 +16,23 @@ function get_avatar_path ($id, $ext_id, $base_path = null, $first_div = 10000, $
 	return get_path_from_id($id, $ext_id, $base_path, $first_div, $sec_div);
 }
 
-function get_attach_path ($id, $ext_id = '', $base_path = null, $first_div = 10000, $sec_div = 100)
+function get_attach_path ($id, $ext_id, $base_path = null, $first_div = 10000, $sec_div = 100)
 {
 	global $bb_cfg;
 	$base_path = isset($base_path) ? $base_path : $bb_cfg['attach']['upload_path'];
 	return get_path_from_id($id, $ext_id, $base_path, $first_div, $sec_div);
 }
 
-function delete_avatar ($user_id, $avatar_ext_id)
+function delete_avatar ($user_id, $ext_id)
 {
-	$avatar_file = ($avatar_ext_id) ? get_avatar_path($user_id, $avatar_ext_id) : '';
+	$avatar_file = ($ext_id) ? get_avatar_path($user_id, $ext_id) : '';
 	return ($avatar_file && file_exists($avatar_file)) ? @unlink($avatar_file) : false;
+}
+
+function delete_attach ($id, $ext_id)
+{
+	$attach_file = ($ext_id) ? get_attach_path($id, $ext_id) : '';
+	return ($attach_file && file_exists($attach_file)) ? @unlink($attach_file) : false;
 }
 
 function get_tracks ($type)

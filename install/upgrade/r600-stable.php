@@ -136,7 +136,7 @@ INSERT INTO `bb_cron` VALUES (22, 1, 'Sitemap update', 'sitemap.php', 'daily', N
                                                                                       // добавлено 593 ↑
 INSERT INTO `bb_cron` VALUES (23, 1, 'Update forums atom', 'update_forums_atom.php', 'interval', NULL, NULL, 255, '', '', '00:15:00', 0, '', 0, 0, 0);
                                                                                       // добавлено 595 ↑
-UPDATE `bb_attachments_config` SET `config_value` = 'old_files' WHERE `config_name` = 'upload_dir';
+UPDATE `bb_attachments_config` SET `config_value` = 'files' WHERE `config_name` = 'upload_dir';
                                                                                       // изменено 595 ↑
 DELETE FROM `bb_smilies` WHERE `code` = ':cd:';                                       // удалено 596
 ALTER TABLE `bb_groups` CHANGE `group_description` `group_description` text NOT NULL DEFAULT '';

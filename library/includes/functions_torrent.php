@@ -12,6 +12,7 @@ function get_torrent_info ($attach_id)
 		SELECT
 			a.post_id, d.physical_filename, d.extension, d.tracker_status,
 			t.topic_first_post_id,
+			t.attach_ext_id,
 			p.poster_id, p.topic_id, p.forum_id,
 			f.allow_reg_tracker
 		FROM
@@ -163,6 +164,7 @@ function delete_torrent ($attach_id, $mode = '')
 	}
 
 	$topic_id  = $torrent['topic_id'];
+	$ext_id    = $torrent['attach_ext_id'];
 	$forum_id  = $torrent['forum_id'];
 	$poster_id = $torrent['poster_id'];
 
@@ -174,6 +176,7 @@ function delete_torrent ($attach_id, $mode = '')
 	torrent_auth_check($forum_id, $poster_id);
 	tracker_unregister($attach_id);
 	delete_attachment(0, $attach_id);
+	delete_attach($topic_id, $ext_id);
 
 	return;
 }
@@ -259,7 +262,8 @@ function tracker_register ($attach_id, $mode = '', $tor_status = TOR_NOT_APPROVE
 
 	torrent_auth_check($forum_id, $torrent['poster_id']);
 
-	$filename = get_attachments_dir() .'/'. $torrent['physical_filename'];
+	$attach_dir = $bb_cfg['attach']['upload_path'];
+	$filename = $attach_dir .'/'. $torrent['physical_filename'];
 
 	if (!is_file($filename)) return torrent_error_exit('File name error');
 	if (!file_exists($filename)) return torrent_error_exit('File not exists');
@@ -528,7 +532,7 @@ function send_torrent_with_passkey ($filename)
 
 	// Send torrent
 	$output   = bencode($tor);
-	$dl_fname = ($bb_cfg['torrent_name_style'] ? '['.$bb_cfg['server_name'].'].t' . $topic_id . '.torrent' : clean_filename(basename($attachment['real_filename'])));
+	$dl_fname = '['.$bb_cfg['server_name'].'].t' . $topic_id . '.torrent';
 
 	if (!empty($_COOKIE['explain']))
 	{
