@@ -199,13 +199,13 @@ class Sessions
 			$this->session_create($userdata, true);
 		}
 
-		define('IS_GUEST', (!$this->data['session_logged_in']));
-		define('IS_ADMIN', (!IS_GUEST && $this->data['user_level'] == ADMIN));
-		define('IS_MOD', (!IS_GUEST && $this->data['user_level'] == MOD));
+		define('IS_GUEST',        (!$this->data['session_logged_in']));
+		define('IS_ADMIN',        (!IS_GUEST && $this->data['user_level'] == ADMIN));
+		define('IS_MOD',          (!IS_GUEST && $this->data['user_level'] == MOD));
 		define('IS_GROUP_MEMBER', (!IS_GUEST && $this->data['user_level'] == GROUP_MEMBER));
-		define('IS_USER', (!IS_GUEST && $this->data['user_level'] == USER));
-		define('IS_SUPER_ADMIN', (IS_ADMIN && isset($bb_cfg['super_admins'][$this->data['user_id']])));
-		define('IS_AM', (IS_ADMIN || IS_MOD));
+		define('IS_USER',         (!IS_GUEST && $this->data['user_level'] == USER));
+		define('IS_SUPER_ADMIN',  (IS_ADMIN && isset($bb_cfg['super_admins'][$this->data['user_id']])));
+		define('IS_AM',           (IS_ADMIN || IS_MOD));
 
 		$this->set_shortcuts();
 
