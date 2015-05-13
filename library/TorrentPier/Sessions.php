@@ -585,7 +585,7 @@ class Sessions
 
 	public function init_userprefs ()
 	{
-		global $bb_cfg, $theme;
+		global $bb_cfg, $theme, $lang;
 
 		if (defined('LANG_DIR'))
 		{
@@ -621,6 +621,7 @@ class Sessions
 		setlocale(LC_ALL, $bb_cfg['lang'][$this->data['user_lang']]['locale']);
 
 		$theme     = setup_style();
+		$DeltaTime = new Date_Delta();
 
 		// Handle marking posts read
 		if (!IS_GUEST && !empty($_COOKIE[COOKIE_MARK]))

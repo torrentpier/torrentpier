@@ -28,7 +28,7 @@ class Log_Action
 	 */
 	public $log_disabled = false;
 
-	public function __construct()
+	public function init()
 	{
 		global $lang;
 
