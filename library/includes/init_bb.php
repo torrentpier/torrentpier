@@ -430,8 +430,6 @@ $userdata =& $user->data;
 
 if (DBG_USER) require(INC_DIR .'functions_dev.php');
 
-
-
 $html = new Html_Common();
 $log_action = new Log_Action();
 

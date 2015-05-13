@@ -51,7 +51,6 @@ function get_attachments_from_post($post_id_array)
 	return $attachments;
 }
 
-
 /**
 * Get attachment mod configuration
 */

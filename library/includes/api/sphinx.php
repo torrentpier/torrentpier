@@ -359,7 +359,6 @@ function sphUnpackI64 ( $v )
 	return $neg . $h . $l;
 }
 
-
 function sphFixUint ( $value )
 {
 	if ( PHP_INT_SIZE>=8 )
@@ -374,7 +373,6 @@ function sphFixUint ( $value )
 		return sprintf ( "%u", $value );
 	}
 }
-
 
 /// sphinx searchd client class
 class SphinxClient extends cache_common
@@ -521,7 +519,6 @@ class SphinxClient extends cache_common
 		assert ( is_numeric($timeout) );
 		$this->_timeout = $timeout;
 	}
-
 
 	function _Send ( $handle, $data, $length )
 	{
@@ -1405,7 +1402,6 @@ class SphinxClient extends cache_common
 		$this->_MBPop ();
 		return $res;
 	}
-
 
 	/////////////////////////////////////////////////////////////////////////////
 	// keyword generation

@@ -22,7 +22,6 @@ $post_id  = (!$topic_id && isset($_GET[POST_POST_URL])) ? (int) $_GET[POST_POST_
 $start    = isset($_GET['start']) ? abs(intval($_GET['start'])) : 0;
 $newest   = 0;
 
-
 // Posts per page
 $posts_per_page = $bb_cfg['posts_per_page'];
 $select_ppp = '';

@@ -241,9 +241,7 @@ function auth ($type, $forum_id, $ug_data, $f_access = [], $group_perm = UG_PERM
 	$auth = $auth_fields = $u_access = [];
 	$add_auth_type_desc = ($forum_id != AUTH_LIST_ALL);
 
-	//
 	// Get $auth_fields
-	//
 	if ($type == AUTH_ALL)
 	{
 		$auth_fields = array_keys($bf['forum_perm']);
@@ -258,9 +256,7 @@ function auth ($type, $forum_id, $ug_data, $f_access = [], $group_perm = UG_PERM
 		trigger_error(__FUNCTION__ .'(): empty $auth_fields', E_USER_ERROR);
 	}
 
-	//
 	// Get $f_access
-	//
 	// If f_access has been passed, or auth is needed to return an array of forums
 	// then we need to pull the auth information on the given forum (or all forums)
 	if (empty($f_access))
@@ -291,9 +287,7 @@ function auth ($type, $forum_id, $ug_data, $f_access = [], $group_perm = UG_PERM
 		trigger_error(__FUNCTION__ .'(): empty $f_access', E_USER_ERROR);
 	}
 
-	//
 	// Get user or group permissions
-	//
 	$forum_match_sql = ($forum_id != AUTH_LIST_ALL) ? "AND aa.forum_id = ". (int) $forum_id : '';
 
 	// GROUP mode
@@ -448,8 +442,6 @@ function get_select ($select, $selected = null, $return_as = 'html', $first_opt 
 
 	return ($return_as == 'html') ? build_select($select_name, $select_ary, $selected) : $select_ary;
 }
-
-
 
 function build_select ($name, $params, $selected = null, $max_length = HTML_SELECT_MAX_LENGTH, $multiple_size = null, $js = '')
 {
@@ -1223,7 +1215,6 @@ function setup_style ()
 	return $theme;
 }
 
-
 function bb_date ($gmepoch, $format = false, $friendly_date = true)
 {
 	global $bb_cfg, $lang, $userdata;
@@ -1320,9 +1311,7 @@ function generate_pagination ($base_url, $num_items, $per_page, $start_item, $ad
 			if ($on_page > 1  && $on_page < $total_pages)
 			{
 				$page_string .= ( $on_page > ($begin_end + $from_middle + 1) ) ? ' ... ' : ', ';
-
 				$init_page_min = ( $on_page > ($begin_end + $from_middle) ) ? $on_page : ($begin_end + $from_middle + 1);
-
 				$init_page_max = ( $on_page < $total_pages - ($begin_end + $from_middle) ) ? $on_page : $total_pages - ($begin_end + $from_middle);
 
 				for ($i = $init_page_min - $from_middle; $i < $init_page_max + ($from_middle + 1); $i++)
@@ -1372,7 +1361,6 @@ function generate_pagination ($base_url, $num_items, $per_page, $start_item, $ad
 		{
 			$page_string .= '&nbsp;&nbsp;<a href="' . $base_url . "&amp;start=" . ( $on_page * $per_page ) . '">' . $lang['NEXT_PAGE'] . '</a>';
 		}
-
 	}
 
 	$pagination = ($page_string) ? '<a class="menu-root" href="#pg-jump">'. $lang['GOTO_PAGE'] .'</a> :&nbsp;&nbsp;'. $page_string : '';
@@ -1387,7 +1375,6 @@ function generate_pagination ($base_url, $num_items, $per_page, $start_item, $ad
 
 	return $pagination;
 }
-
 
 function obtain_word_list (&$orig_word, &$replacement_word)
 {
@@ -1537,7 +1524,6 @@ function redirect ($url)
 	exit;
 }
 
-
 function get_forum_display_sort_option ($selected_row = 0, $action = 'list', $list = 'sort')
 {
 	global $lang;
@@ -1553,7 +1539,6 @@ function get_forum_display_sort_option ($selected_row = 0, $action = 'list', $li
 
 	$list_name = 'forum_display_' . $list;
 	$listrow = $$list_name;
-
 
 	$res = '';
 	if ( $selected_row > count($listrow['lang_key']) )
@@ -1574,6 +1559,7 @@ function get_forum_display_sort_option ($selected_row = 0, $action = 'list', $li
 	{
 		$res = $listrow['fields'][$selected_row];
 	}
+
 	return $res;
 }
 
@@ -1583,14 +1569,12 @@ function clear_dl_list ($topics_csv)
 	DB()->query("DELETE FROM ". BB_BT_DLSTATUS_SNAP ." WHERE topic_id IN($topics_csv)");
 }
 
-
 function get_id_csv ($ids)
 {
 	$ids = array_values((array) $ids);
 	array_deep($ids, 'intval', 'one-dimensional');
 	return (string) join(',', $ids);
 }
-
 
 function get_id_ary ($ids)
 {
@@ -1688,7 +1672,6 @@ function build_topic_pagination ($url, $replies, $per_page)
 
 	return $pg;
 }
-
 
 function get_poll_data_items_js ($topic_id)
 {
@@ -1954,7 +1937,6 @@ function get_title_match_topics($search)
 }
 
 // для более корректного поиска по словам содержащим одиночную кавычку
-
 function encode_text_match ($txt)
 {
 	return str_replace("'", '&#039;', $txt);

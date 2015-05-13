@@ -39,7 +39,6 @@ if (IS_GUEST && $bb_cfg['guest_tracker']) $guest_allow = true;
 if ($t_data['attach_ext_id'] != 8 && !$is_auth['auth_download']) login_redirect($bb_cfg['dl_url'] . $topic_id);
 if ($t_data['attach_ext_id'] == 8 && (!$is_auth['auth_download'] || !$guest_allow)) login_redirect($bb_cfg['dl_url'] . $topic_id);
 
-
 // Проверка рефёрера (не качать с других сайтов)
 $referer = (!empty($_SERVER['HTTP_REFERER'])) ? $_SERVER['HTTP_REFERER'] : '';
 if (!preg_match("/". $bb_cfg['server_name']."/", $referer)) exit;
@@ -84,7 +83,7 @@ if ($t_data['attach_ext_id'] == 8)
 }
 
 // All other
-$file_path = get_attach_path($topic_id);
+$file_path = get_attach_path($topic_id, $t_data['attach_ext_id']);
 
 if (($file_contents = @file_get_contents($file_path)) === false)
 {

@@ -9,18 +9,22 @@ class Html_Common
 	 * @type string
 	 */
 	var $options = '';
+
 	/**
 	 * @type array
 	 */
 	var $attr = [];
+
 	/**
 	 * @type null
 	 */
 	var $cur_attr = null;
+
 	/**
 	 * @type int
 	 */
 	var $max_length = HTML_SELECT_MAX_LENGTH;
+
 	/**
 	 * @type array
 	 */
@@ -153,8 +157,7 @@ class Html_Common
 	 *
 	 * @return string
 	 */
-	public function build_checkbox ($name, $title, $checked = false, $disabled = false, $class = null, $id = null,
-$value = 1)
+	public function build_checkbox ($name, $title, $checked = false, $disabled = false, $class = null, $id = null, $value = 1)
 	{
 		$name     = ' name="' . $name . '" ';
 		$value    = ' value="' . $value . '" ';

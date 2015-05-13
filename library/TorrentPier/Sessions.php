@@ -76,7 +76,6 @@ class Sessions
 	public $level;
 	public $opt;
 
-
 	function __construct ()
 	{
 		$this->get_sessiondata();
@@ -568,7 +567,6 @@ class Sessions
 		return $autologin_id;
 	}
 
-
 	public function set_shortcuts ()
 	{
 		$this->id        =& $this->data['user_id'];
@@ -581,7 +579,6 @@ class Sessions
 
 		$this->ip = CLIENT_IP;
 	}
-
 
 	public function init_userprefs ()
 	{

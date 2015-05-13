@@ -19,10 +19,12 @@ class Log_Action
 		'adm_user_ban'       => 8,
 		'adm_user_unban'     => 9,
 	];
+
 	/**
 	 * @type array
 	 */
 	public $log_type_select = [];
+
 	/**
 	 * @type bool
 	 */

@@ -42,8 +42,6 @@ if ($mode == 'smilies')
 $tracking_topics = get_tracks('topic');
 $tracking_forums = get_tracks('forum');
 
-
-
 set_die_append_msg($forum_id, $topic_id);
 
 // What auth type do we need to check?
