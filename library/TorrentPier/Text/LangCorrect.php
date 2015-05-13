@@ -3091,10 +3091,6 @@ class Text_LangCorrect
 		$length = Text_UTF8::strlen($word);
 		for ($pos = 0, $limit = $length - 1; $pos < $limit; $pos++)
 		{
-			/*
-            TODO  Качество проверки по несуществующим биграммам можно немного повысить,
-            если учитывать не только начало и конец слова, но и все позиции биграмм в слове.
-			*/
 			$ss = Text_UTF8::substr($word, $pos, 2);
 			if ($pos === 0)              $ss = ' ' . $ss;  #beginning of word
 			elseif ($pos === $limit - 1) $ss = $ss . ' ';  #ending of word

@@ -3472,7 +3472,7 @@ class Text_UTF8
 		if (! Text_ReflectionTypeHint::isValid()) return false;
 		if (is_null($s)) return $s;
 
-		if (0) #TODO test speed
+		if (0)
 		{
 			$s = self::_convert($s, 'UTF-8', 'UTF-32');
 			if (! is_string($s)) return false;
