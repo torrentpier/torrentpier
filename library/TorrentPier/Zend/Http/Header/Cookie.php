@@ -22,17 +22,25 @@ class Cookie extends ArrayObject implements HeaderInterface
     public static function fromSetCookieArray(array $setCookies)
     {
         $nvPairs = array();
-        /* @var $setCookie SetCookie */
+
         foreach ($setCookies as $setCookie) {
-            if (!$setCookie instanceof SetCookie) {
-                throw new Exception\InvalidArgumentException(__CLASS__ . '::' . __METHOD__ . ' requires an array of SetCookie objects');
+            if (! $setCookie instanceof SetCookie) {
+                throw new Exception\InvalidArgumentException(sprintf(
+                    '%s requires an array of SetCookie objects',
+                    __METHOD__
+                ));
             }
+
             if (array_key_exists($setCookie->getName(), $nvPairs)) {
-                throw new Exception\InvalidArgumentException('Two cookies with the same name were provided to ' . __CLASS__ . '::' . __METHOD__);
+                throw new Exception\InvalidArgumentException(sprintf(
+                    'Two cookies with the same name were provided to %s',
+                    __METHOD__
+                ));
             }
 
             $nvPairs[$setCookie->getName()] = $setCookie->getValue();
         }
+
         return new static($nvPairs);
     }
 

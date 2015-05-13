@@ -72,7 +72,6 @@ class Converter
      * By setting the <var>$type</var>-parameter the conversion of a certain
      * type can be forced
      *
-     * @todo write more tests
      *
      * @param mixed $value The value to convert
      * @param int   $type  The conversion type to use
@@ -340,7 +339,15 @@ class Converter
                       . $time['offdir']
                       . str_pad($time['offsethours'], 2, '0', STR_PAD_LEFT)
                       . str_pad($time['offsetminutes'], 2, '0', STR_PAD_LEFT);
-        $date       = new DateTime($timestring);
+        try {
+            $date = new DateTime($timestring);
+        } catch (\Exception $e) {
+            throw new Exception\InvalidArgumentException(
+                'Invalid date format found',
+                0,
+                $e
+            );
+        }
         if ($asUtc) {
             $date->setTimezone(new DateTimeZone('UTC'));
         }

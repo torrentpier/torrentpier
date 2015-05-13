@@ -20,6 +20,11 @@ class Connection extends AbstractConnection
     protected $driver = null;
 
     /**
+     * @var null|int PostgreSQL connection type
+     */
+    protected $type = null;
+
+    /**
      * Constructor
      *
      * @param resource|array|null $connectionInfo
@@ -43,6 +48,26 @@ class Connection extends AbstractConnection
     {
         $this->driver = $driver;
 
+        return $this;
+    }
+
+    /**
+     * @param int|null $type
+     * @return self
+     */
+    public function setType($type)
+    {
+        $invalidConectionType = ($type !== PGSQL_CONNECT_FORCE_NEW);
+
+        // Compatibility with PHP < 5.6
+        if ($invalidConectionType && defined('PGSQL_CONNECT_ASYNC')) {
+            $invalidConectionType = ($type !== PGSQL_CONNECT_ASYNC);
+        }
+
+        if ($invalidConectionType) {
+            throw new Exception\InvalidArgumentException('Connection type is not valid. (See: http://php.net/manual/en/function.pg-connect.php)');
+        }
+        $this->type = $type;
         return $this;
     }
 
@@ -109,6 +134,7 @@ class Connection extends AbstractConnection
     public function disconnect()
     {
         pg_close($this->resource);
+        return $this;
     }
 
     /**
@@ -207,7 +233,7 @@ class Connection extends AbstractConnection
      */
     public function getLastGeneratedValue($name = null)
     {
-        if ($name == null) {
+        if ($name === null) {
             return;
         }
         $result = pg_query($this->resource, 'SELECT CURRVAL(\'' . str_replace('\'', '\\\'', $name) . '\') as "currval"');

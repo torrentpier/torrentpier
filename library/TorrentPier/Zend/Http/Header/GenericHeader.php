@@ -53,6 +53,10 @@ class GenericHeader implements HeaderInterface
             throw new Exception\InvalidArgumentException('Header must match with the format "name:value"');
         }
 
+        if (! HeaderValue::isValid($parts[1])) {
+            throw new Exception\InvalidArgumentException('Invalid header value detected');
+        }
+
         $parts[1] = ltrim($parts[1]);
 
         return $parts;
@@ -126,6 +130,7 @@ class GenericHeader implements HeaderInterface
     public function setFieldValue($fieldValue)
     {
         $fieldValue = (string) $fieldValue;
+        HeaderValue::assertValid($fieldValue);
 
         if (preg_match('/^\s+$/', $fieldValue)) {
             $fieldValue = '';

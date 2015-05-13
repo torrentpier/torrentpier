@@ -165,9 +165,10 @@ class Wsdl
     /**
      * Set the class map of php to wsdl mappings..
      *
+     * @param  array $classMap
      * @return self
      */
-    public function setClassMap($classMap)
+    public function setClassMap(array $classMap)
     {
         $this->classMap = $classMap;
         return $this;
@@ -587,7 +588,7 @@ class Wsdl
      */
     public function getSchema()
     {
-        if ($this->schema == null) {
+        if ($this->schema === null) {
             $this->addSchemaTypeSection();
         }
         return $this->schema;
