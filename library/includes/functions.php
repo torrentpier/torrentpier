@@ -223,34 +223,15 @@ function setbit (&$int, $bit_num, $on)
 	return ($on) ? $int |= (1 << $bit_num) : $int &= ~(1 << $bit_num);
 }
 
-/*
-	$type's accepted (pre-pend with AUTH_):
-	VIEW, READ, POST, REPLY, EDIT, DELETE, STICKY, ANNOUNCE, VOTE, POLLCREATE
-
-	Possible options ($type/forum_id combinations):
-
-	* If you include a type and forum_id then a specific lookup will be done and
-	the single result returned
-
-	* If you set type to AUTH_ALL and specify a forum_id an array of all auth types
-	will be returned
-
-	* If you provide a forum_id a specific lookup on that forum will be done
-
-	* If you set forum_id to AUTH_LIST_ALL and specify a type an array listing the
-	results for all forums will be returned
-
-	* If you set forum_id to AUTH_LIST_ALL and type to AUTH_ALL a multidimensional
-	array containing the auth permissions for all types and all forums for that
-	user is returned
-
-	All results are returned as associative arrays, even when a single auth type is
-	specified.
-
-	If available you can send an array (either one or two dimensional) containing the
-	forum auth levels, this will prevent the auth function having to do its own
-	lookup
-*/
+/**
+ * @param       $type
+ * @param       $forum_id
+ * @param       $ug_data
+ * @param array $f_access
+ * @param int   $group_perm
+ *
+ * @return array
+ */
 function auth ($type, $forum_id, $ug_data, $f_access = [], $group_perm = UG_PERM_BOTH)
 {
 	global $lang, $bf, $datastore;
@@ -380,16 +361,6 @@ function auth ($type, $forum_id, $ug_data, $f_access = [], $group_perm = UG_PERM
 		}
 	}
 
-	// If the user is logged on and the forum type is either ALL or REG then the user has access
-	//
-	// If the type if ACL, MOD or ADMIN then we need to see if the user has specific permissions
-	// to do whatever it is they want to do ... to do this we pull relevant information for the
-	// user (and any groups they belong to)
-	//
-	// Now we compare the users access level against the forums. We assume here that a moderator
-	// and admin automatically have access to an ACL forum, similarly we assume admins meet an
-	// auth requirement of MOD
-	//
 	foreach ($f_access as $f_id => $f_data)
 	{
 		$auth[$f_id]['auth_mod'] = auth_check('forum_perm', 'auth_mod', $u_access, $f_id, $is_admin);
@@ -443,133 +414,10 @@ function auth_check ($bf_ary, $bf_key, $perm_ary, $perm_key, $is_admin = false)
 	return bf($perm_ary[$perm_key], $bf_ary, $bf_key);
 }
 
-class Date_Delta
-{
-	var $auto_granularity = [
-		60        => 'seconds',   // set granularity to "seconds" if delta less then 1 minute
-		10800     => 'minutes',   // 3 hours
-		259200    => 'hours',     // 3 days
-		31363200  => 'mday',      // 12 months
-		311040000 => 'mon',       // 10 years
-	];
-	var $intervals = [];
-	var $format    = '';
-
-	// Creates new object.
-	function Date_Delta()
-	{
-		global $lang;
-
-		$this->intervals = $lang['DELTA_TIME']['INTERVALS'];
-		$this->format = $lang['DELTA_TIME']['FORMAT'];
-	}
-
-	// Makes the spellable phrase.
-	function spellDelta($first, $last, $from = 'auto')
-	{
-		if ($last < $first)
-		{
-			$old_first = $first;
-			$first = $last;
-			$last = $old_first;
-		}
-
-		if ($from == 'auto')
-		{
-			$from = 'year';
-			$diff = $last - $first;
-			foreach ($this->auto_granularity as $seconds_count => $granule)
-			{
-				if ($diff < $seconds_count)
-				{
-					$from = $granule;
-					break;
-				}
-			}
-		}
-
-		// Solve data delta.
-		$delta = $this->getDelta($first, $last);
-		if (!$delta) return false;
-
-		// Make spellable phrase.
-		$parts = [];
-		$intervals = $GLOBALS['lang']['DELTA_TIME']['INTERVALS'];
-
-		foreach (array_reverse($delta) as $k => $n)
-		{
-			if (!$n)
-			{
-				if ($k == $from)
-				{
-					if (!$parts)
-					{
-						$parts[] = declension($n, $this->intervals[$k], $this->format);
-					}
-					break;
-				}
-				continue;
-			}
-			$parts[] = declension($n, $this->intervals[$k], $this->format);
-			if ($k == $from) break;
-		}
-		return join(' ', $parts);
-	}
-
-	// returns the associative array with date deltas.
-	function getDelta($first, $last)
-	{
-		if ($last < $first) return false;
-
-		// Solve H:M:S part.
-		$hms = ($last - $first) % (3600 * 24);
-		$delta['seconds'] = $hms % 60;
-		$delta['minutes'] = floor($hms/60) % 60;
-		$delta['hours']   = floor($hms/3600) % 60;
-
-		// Now work only with date, delta time = 0.
-		$last -= $hms;
-		$f = getdate($first);
-		$l = getdate($last); // the same daytime as $first!
-
-		$dYear = $dMon = $dDay = 0;
-
-		// Delta day. Is negative, month overlapping.
-		$dDay += $l['mday'] - $f['mday'];
-		if ($dDay < 0) {
-			$monlen = $this->monthLength(date('Y', $first), date('m', $first));
-			$dDay += $monlen;
-			$dMon--;
-		}
-		$delta['mday'] = $dDay;
-
-		// Delta month. If negative, year overlapping.
-		$dMon += $l['mon'] - $f['mon'];
-		if ($dMon < 0) {
-			$dMon += 12;
-			$dYear --;
-		}
-		$delta['mon'] = $dMon;
-
-		// Delta year.
-		$dYear += $l['year'] - $f['year'];
-		$delta['year'] = $dYear;
-
-		return $delta;
-	}
-
-	// Returns the length (in days) of the specified month.
-	function monthLength($year, $mon)
-	{
-		$l = 28;
-		while (checkdate($mon, $l+1, $year)) $l++;
-		return $l;
-	}
-}
-
 function delta_time ($timestamp_1, $timestamp_2 = TIMENOW, $granularity = 'auto')
 {
-	return $GLOBALS['DeltaTime']->spellDelta($timestamp_1, $timestamp_2, $granularity);
+	$Delta = new Date_Delta();
+	return $Delta->spellDelta($timestamp_1, $timestamp_2, $granularity);
 }
 
 function get_select ($select, $selected = null, $return_as = 'html', $first_opt = '&raquo;&raquo; Выбрать ')
@@ -601,122 +449,7 @@ function get_select ($select, $selected = null, $return_as = 'html', $first_opt 
 	return ($return_as == 'html') ? build_select($select_name, $select_ary, $selected) : $select_ary;
 }
 
-class html_common
-{
-	var $options    = '';
-	var $attr       = [];
-	var $cur_attr   = null;
-	var $max_length = HTML_SELECT_MAX_LENGTH;
-	var $selected   = [];
 
-	function build_select ($name, $params, $selected = null, $max_length = HTML_SELECT_MAX_LENGTH, $multiple_size = null, $js = '')
-	{
-		if (empty($params)) return '';
-
-		$this->options = '';
-		$this->selected = array_flip((array) $selected);
-		$this->max_length = $max_length;
-
-		$this->attr = [];
-		$this->cur_attr =& $this->attr;
-
-		if (isset($params['__attributes']))
-		{
-			$this->attr = $params['__attributes'];
-			unset($params['__attributes']);
-		}
-
-		$this->_build_select_rec($params);
-
-		$select_params  = ($js) ? " $js" : '';
-		$select_params .= ($multiple_size) ? ' multiple="multiple" size="'. $multiple_size .'"' : '';
-		$select_params .= ' name="'. htmlCHR($name) .'"';
-		$select_params .= ' id="'. htmlCHR($name) .'"';
-
-		return "\n<select $select_params>\n". $this->options ."</select>\n";
-	}
-
-	function _build_select_rec ($params)
-	{
-		foreach ($params as $opt_name => $opt_val)
-		{
-			$opt_name = rtrim($opt_name);
-
-			if (is_array($opt_val))
-			{
-				$this->cur_attr =& $this->cur_attr[$opt_name];
-
-				$label = htmlCHR(str_short($opt_name, $this->max_length));
-
-				$this->options .= "\t<optgroup label=\"&nbsp;". $label ."\">\n";
-				$this->_build_select_rec($opt_val);
-				$this->options .= "\t</optgroup>\n";
-
-				$this->cur_attr =& $this->attr;
-			}
-			else
-			{
-				$text  = htmlCHR(str_short($opt_name, $this->max_length));
-				$value = ' value="'. htmlCHR($opt_val) .'"';
-
-				$class = isset($this->cur_attr[$opt_name]['class']) ? ' class="'. $this->cur_attr[$opt_name]['class'] .'"' : '';
-				$style = isset($this->cur_attr[$opt_name]['style']) ? ' style="'. $this->cur_attr[$opt_name]['style'] .'"' : '';
-
-				$selected = isset($this->selected[$opt_val]) ? HTML_SELECTED : '';
-				$disabled = isset($this->cur_attr[$opt_name]['disabled']) ? HTML_DISABLED : '';
-
-				$this->options .= "\t\t<option". $class . $style . $selected . $disabled . $value .'>&nbsp;'. $text ."&nbsp;</option>\n";
-			}
-		}
-	}
-
-	function array2html ($array, $ul = 'ul', $li = 'li')
-	{
-		$this->out = '';
-		$this->_array2html_rec($array, $ul, $li);
-		return "<$ul class=\"tree-root\">{$this->out}</$ul>";
-	}
-
-	function _array2html_rec ($array, $ul, $li)
-	{
-		foreach ($array as $k => $v)
-		{
-			if (is_array($v))
-			{
-				$this->out .= "<$li><span class=\"b\">$k</span><$ul>";
-				$this->_array2html_rec($v, $ul, $li);
-				$this->out .= "</$ul></$li>";
-			}
-			else
-			{
-				$this->out .= "<$li><span>$v</span></$li>";
-			}
-		}
-	}
-
-	// all arguments should be already htmlspecialchar()d (if needed)
-	function build_checkbox ($name, $title, $checked = false, $disabled = false, $class = null, $id = null, $value = 1)
-	{
-		$name     = ' name="'. $name .'" ';
-		$value    = ' value="'. $value .'" ';
-		$title    = ($class) ? '<span class="'. $class .'">'. $title .'</span>' : $title;
-		$id       = ($id) ? " id=\"$id\" " : '';
-		$checked  = ($checked) ? HTML_CHECKED : '';
-		$disabled = ($disabled) ? HTML_DISABLED : '';
-
-		return '<label><input type="checkbox" '. $id . $name . $value . $checked . $disabled .' />&nbsp;'. $title .'&nbsp;</label>';
-	}
-
-#	function build_option ($opt_name, $opt_val, $selected = null, $max_length = false)
-#	{
-#		return "\t\t<option value=\"". htmlCHR($opt_val) .'"'. (($selected) ? ' selected="selected"' : '') .'>'. htmlCHR(str_short($opt_name, $max_length)) ."</option>\n";
-#	}
-
-#	function build_optgroup ($label, $contents, $max_length = false)
-#	{
-#		return "\t<optgroup label=\"&nbsp;". htmlCHR(str_short($label, $max_length)) ."\">\n". $contents ."\t</optgroup>\n";
-#	}
-}
 
 function build_select ($name, $params, $selected = null, $max_length = HTML_SELECT_MAX_LENGTH, $multiple_size = null, $js = '')
 {
@@ -738,8 +471,10 @@ function replace_quote ($str, $double = true, $single = true)
 }
 
 /**
-* Build simple hidden fields from array
-*/
+ * @param $fields_ary
+ *
+ * @return string
+ */
 function build_hidden_fields ($fields_ary)
 {
 	$out = "\n";
@@ -765,6 +500,12 @@ function build_hidden_fields ($fields_ary)
 /**
  * Choost russian word declension based on numeric [from dklab.ru]
  * Example for $expressions: array("ответ", "ответа", "ответов")
+ *
+ * @param        $int
+ * @param        $expressions
+ * @param string $format
+ *
+ * @return string
  */
 function declension ($int, $expressions, $format = '%1$s %2$s')
 {
@@ -803,7 +544,16 @@ function declension ($int, $expressions, $format = '%1$s %2$s')
 	return ($format) ? sprintf($format, $int, $result) : $result;
 }
 
-// http://forum.dklab.ru/php/advises/UrlreplaceargChangesValueOfParameterInUrl.html
+/**
+ * @link http://forum.dklab.ru/php/advises/UrlreplaceargChangesValueOfParameterInUrl.html
+ *
+ * @param        $url
+ * @param        $arg
+ * @param        $value
+ * @param string $amp
+ *
+ * @return string
+ */
 function url_arg ($url, $arg, $value, $amp = '&amp;')
 {
 	$arg = preg_quote($arg, '/');
@@ -831,9 +581,6 @@ function url_arg ($url, $arg, $value, $amp = '&amp;')
 	return $url . $anchor;
 }
 
-/**
- * Adds commas between every group of thousands
- */
 function commify ($number)
 {
 	return number_format($number);
@@ -841,6 +588,13 @@ function commify ($number)
 
 /**
  * Returns a size formatted in a more human-friendly format, rounded to the nearest GB, MB, KB..
+ *
+ * @param        $size
+ * @param null   $rounder
+ * @param null   $min
+ * @param string $space
+ *
+ * @return string
  */
 function humn_size ($size, $rounder = null, $min = null, $space = '&nbsp;')
 {
@@ -953,13 +707,6 @@ function select_get_val ($key, &$val, $options_ary, $default, $num = true)
 	}
 }
 
-/**
-* set_var
-*
-* Set variable, used by {@link request_var the request_var function}
-*
-* @access private
-*/
 function set_var (&$result, $var, $type, $multibyte = false, $strip = true)
 {
 	settype($var, $type);
@@ -985,11 +732,6 @@ function set_var (&$result, $var, $type, $multibyte = false, $strip = true)
 	}
 }
 
-/**
-* request_var
-*
-* Used to get passed variable
-*/
 function request_var ($var_name, $default, $multibyte = false, $cookie = false)
 {
 	if (!$cookie && isset($_COOKIE[$var_name]))
@@ -1310,7 +1052,6 @@ function bb_rtrim ($str, $charlist = false)
 	return $str;
 }
 
-// Get Userdata, $u can be username or user_id. If $force_name is true, the username will be forced.
 function get_userdata ($u, $force_name = false, $allow_guest = false)
 {
 	if (!$u) return false;
@@ -1372,7 +1113,17 @@ function make_jumpbox ($selected = 0)
 	]);
 }
 
-// $mode: array(not_auth_forum1,not_auth_forum2,..) or (string) 'mode'
+/**
+ * @param string $mode
+ * @param string $name
+ * @param null   $selected
+ * @param int    $max_length
+ * @param null   $multiple_size
+ * @param string $js
+ * @param null   $all_forums_option
+ *
+ * @return string
+ */
 function get_forum_select ($mode = 'guest', $name = POST_FORUM_URL, $selected = null, $max_length = HTML_SELECT_MAX_LENGTH, $multiple_size = null, $js = '', $all_forums_option = null)
 {
 	global $lang, $datastore;
@@ -1472,7 +1223,7 @@ function setup_style ()
 	return $theme;
 }
 
-// Create date / time with format and friendly date
+
 function bb_date ($gmepoch, $format = false, $friendly_date = true)
 {
 	global $bb_cfg, $lang, $userdata;
@@ -1537,33 +1288,12 @@ function birthday_age ($date)
 	return delta_time(strtotime($date, $tz));
 }
 
-//
-// Pagination routine, generates
-// page number sequence
-//
 function generate_pagination ($base_url, $num_items, $per_page, $start_item, $add_prevnext_text = TRUE)
 {
 	global $lang, $template;
 
-// Pagination Mod
 	$begin_end = 3;
 	$from_middle = 1;
-/*
-	By default, $begin_end is 3, and $from_middle is 1, so on page 6 in a 12 page view, it will look like this:
-
-	a, d = $begin_end = 3
-	b, c = $from_middle = 1
-
- "begin"        "middle"           "end"
-    |              |                 |
-    |     a     b  |  c     d        |
-    |     |     |  |  |     |        |
-    v     v     v  v  v     v        v
-    1, 2, 3 ... 5, 6, 7 ... 10, 11, 12
-
-	Change $begin_end and $from_middle to suit your needs appropriately
-*/
-
 	$total_pages = ceil($num_items/$per_page);
 
 	if ($total_pages == 1 || $num_items == 0)
@@ -1658,11 +1388,7 @@ function generate_pagination ($base_url, $num_items, $per_page, $start_item, $ad
 	return $pagination;
 }
 
-//
-// Obtain list of naughty words and build preg style replacement arrays for use by the
-// calling script, note that the vars are passed as references this just makes it easier
-// to return both sets of arrays
-//
+
 function obtain_word_list (&$orig_word, &$replacement_word)
 {
 	global $bb_cfg;
@@ -1811,7 +1537,7 @@ function redirect ($url)
 	exit;
 }
 
-// build a list of the sortable fields or return field name
+
 function get_forum_display_sort_option ($selected_row = 0, $action = 'list', $list = 'sort')
 {
 	global $lang;
@@ -1825,18 +1551,16 @@ function get_forum_display_sort_option ($selected_row = 0, $action = 'list', $li
 		'fields'   => ['DESC', 'ASC'],
 	];
 
-	// get the good list
 	$list_name = 'forum_display_' . $list;
 	$listrow = $$list_name;
 
-	// init the result
+
 	$res = '';
 	if ( $selected_row > count($listrow['lang_key']) )
 	{
 		$selected_row = 0;
 	}
 
-	// build list
 	if ($action == 'list')
 	{
 		for ($i=0; $i < count($listrow['lang_key']); $i++)
@@ -1848,7 +1572,6 @@ function get_forum_display_sort_option ($selected_row = 0, $action = 'list', $li
 	}
 	else
 	{
-		// field
 		$res = $listrow['fields'][$selected_row];
 	}
 	return $res;
@@ -1860,7 +1583,7 @@ function clear_dl_list ($topics_csv)
 	DB()->query("DELETE FROM ". BB_BT_DLSTATUS_SNAP ." WHERE topic_id IN($topics_csv)");
 }
 
-// $ids - array(id1,id2,..) or (string) id
+
 function get_id_csv ($ids)
 {
 	$ids = array_values((array) $ids);
@@ -1868,7 +1591,7 @@ function get_id_csv ($ids)
 	return (string) join(',', $ids);
 }
 
-// $ids - array(id1,id2,..) or (string) id1,id2,..
+
 function get_id_ary ($ids)
 {
 	$ids = is_string($ids) ? explode(',', $ids) : array_values((array) $ids);
@@ -1892,86 +1615,6 @@ function forum_exists ($forum_id)
 function cat_exists ($cat_id)
 {
 	return DB()->fetch_row("SELECT cat_id FROM ". BB_CATEGORIES ." WHERE cat_id = $cat_id LIMIT 1");
-}
-
-//
-// Action Log
-//
-class log_action
-{
-	var $log_type = [
-	#    LOG_TYPE_NAME   LOG_TYPE_ID
-		'mod_topic_delete'   => 1,
-		'mod_topic_move'     => 2,
-		'mod_topic_lock'     => 3,
-		'mod_topic_unlock'   => 4,
-		'mod_post_delete'    => 5,
-		'mod_topic_split'    => 6,
-		'adm_user_delete'    => 7,
-		'adm_user_ban'       => 8,
-		'adm_user_unban'     => 9,
-	];
-	var $log_type_select = [];
-	var $log_disabled = false;
-
-	function init ()
-	{
-		global $lang, $bb_cfg;
-
-		foreach ($lang['LOG_ACTION']['LOG_TYPE'] as $log_type => $log_desc)
-		{
-			$this->log_type_select[strip_tags($log_desc)] = $this->log_type[$log_type];
-		}
-	}
-
-	function mod ($type_name, $args = [])
-	{
-		global $userdata;
-
-		if (empty($this->log_type)) $this->init();
-		if ($this->log_disabled) return;
-
-		$forum_id        =& $args['forum_id'];
-		$forum_id_new    =& $args['forum_id_new'];
-		$topic_id        =& $args['topic_id'];
-		$topic_id_new    =& $args['topic_id_new'];
-		$topic_title     =& $args['topic_title'];
-		$topic_title_new =& $args['topic_title_new'];
-		$log_msg         =& $args['log_msg'];
-
-		if (!empty($userdata))
-		{
-			$user_id    = $userdata['user_id'];
-			$session_ip = $userdata['session_ip'];
-		}
-		else
-		{
-			$user_id    = '';
-			$session_ip = '';
-		}
-
-		$sql_ary = [
-			'log_type_id'         => (int)    $this->log_type["$type_name"],
-			'log_user_id'         => (int)    $user_id,
-			'log_user_ip'         => (string) $session_ip,
-			'log_forum_id'        => (int)    $forum_id,
-			'log_forum_id_new'    => (int)    $forum_id_new,
-			'log_topic_id'        => (int)    $topic_id,
-			'log_topic_id_new'    => (int)    $topic_id_new,
-			'log_topic_title'     => (string) $topic_title,
-			'log_topic_title_new' => (string) $topic_title_new,
-			'log_time'            => (int)    TIMENOW,
-			'log_msg'             => (string) $log_msg,
-		];
-		$sql_args = DB()->build_array('INSERT', $sql_ary);
-
-		DB()->query("INSERT INTO ". BB_LOG ." $sql_args");
-	}
-
-	function admin ($type_name, $args = [])
-	{
-		$this->mod($type_name, $args);
-	}
 }
 
 function get_topic_icon ($topic, $is_unread = null)
@@ -2046,9 +1689,7 @@ function build_topic_pagination ($url, $replies, $per_page)
 	return $pg;
 }
 
-//
-// Poll
-//
+
 function get_poll_data_items_js ($topic_id)
 {
 	if (!$topic_id_csv = get_id_csv($topic_id))
@@ -2313,6 +1954,7 @@ function get_title_match_topics($search)
 }
 
 // для более корректного поиска по словам содержащим одиночную кавычку
+
 function encode_text_match ($txt)
 {
 	return str_replace("'", '&#039;', $txt);
@@ -2445,6 +2087,16 @@ function profile_url ($data)
 	return $profile;
 }
 
+/**
+ * @param        $user_id
+ * @param        $ext_id
+ * @param bool   $allow_avatar
+ * @param bool   $size
+ * @param string $height
+ * @param string $width
+ *
+ * @return string
+ */
 function get_avatar ($user_id, $ext_id, $allow_avatar = true, $size = true, $height = '', $width = '')
 {
 	global $bb_cfg;
@@ -2474,6 +2126,11 @@ function get_avatar ($user_id, $ext_id, $allow_avatar = true, $size = true, $hei
 	return $user_avatar;
 }
 
+/**
+ * @param $gender
+ *
+ * @return string
+ */
 function gender_image ($gender)
 {
 	global $bb_cfg, $lang, $images;
@@ -2502,6 +2159,11 @@ function gender_image ($gender)
 	return $user_gender;
 }
 
+/**
+ * @param $type
+ *
+ * @return string
+ */
 function is_gold ($type)
 {
 	global $lang, $tr_cfg;
@@ -2530,6 +2192,10 @@ function is_gold ($type)
 	return $is_gold;
 }
 
+/**
+ * @param $type
+ * @param $id
+ */
 function update_atom ($type, $id)
 {
 	require_once(INC_DIR .'functions_atom.php');
@@ -2547,6 +2213,9 @@ function update_atom ($type, $id)
 	}
 }
 
+/**
+ * @param $hash
+ */
 function hash_search ($hash)
 {
 	global $lang;
@@ -2570,6 +2239,12 @@ function hash_search ($hash)
 	}
 }
 
+/**
+ * @param        $mode
+ * @param string $callback
+ *
+ * @return bool|string
+ */
 function bb_captcha ($mode, $callback = '')
 {
 	global $bb_cfg, $lang, $userdata;
@@ -2619,11 +2294,19 @@ function bb_captcha ($mode, $callback = '')
 }
 
 ## Sessions ##
+/**
+ * @return bool
+ */
 function ignore_cached_userdata ()
 {
 	return (defined('IN_PM')) ? true : false;
 }
 
+/**
+ * @param $id
+ *
+ * @return array|bool
+ */
 function cache_get_userdata ($id)
 {
 	if (ignore_cached_userdata()) return false;
@@ -2631,6 +2314,12 @@ function cache_get_userdata ($id)
 	return CACHE('bb_session')->get($id);
 }
 
+/**
+ * @param      $userdata
+ * @param bool $force
+ *
+ * @return bool
+ */
 function cache_set_userdata ($userdata, $force = false)
 {
 	global $bb_cfg;
@@ -2641,6 +2330,11 @@ function cache_set_userdata ($userdata, $force = false)
 	return CACHE('bb_session')->set($id, $userdata, $bb_cfg['session_update_intrv']);
 }
 
+/**
+ * @param $userdata
+ *
+ * @return bool
+ */
 function cache_rm_userdata ($userdata)
 {
 	if (!$userdata) return false;
@@ -2649,7 +2343,9 @@ function cache_rm_userdata ($userdata)
 	return CACHE('bb_session')->rm($id);
 }
 
-// $user_id - array(id1,id2,..) or (string) id
+/**
+ * @param $user_id
+ */
 function cache_rm_user_sessions ($user_id)
 {
 	$user_id = get_id_csv($user_id);
@@ -2664,11 +2360,23 @@ function cache_rm_user_sessions ($user_id)
 	}
 }
 
+/**
+ * @param $userdata
+ *
+ * @return bool
+ */
 function cache_update_userdata ($userdata)
 {
 	return cache_set_userdata($userdata, true);
 }
 
+/**
+ * @param      $userdata
+ * @param      $sql_ary
+ * @param bool $data_already_escaped
+ *
+ * @return bool
+ */
 function db_update_userdata ($userdata, $sql_ary, $data_already_escaped = true)
 {
 	if (!$userdata) return false;
@@ -2682,7 +2390,9 @@ function db_update_userdata ($userdata, $sql_ary, $data_already_escaped = true)
 	}
 }
 
-// $user_id - array(id1,id2,..) or (string) id
+/**
+ * @param $user_id
+ */
 function delete_user_sessions ($user_id)
 {
 	cache_rm_user_sessions($user_id);

@@ -432,8 +432,8 @@ if (DBG_USER) require(INC_DIR .'functions_dev.php');
 
 
 
-$html = new html_common();
-$log_action = new log_action();
+$html = new Html_Common();
+$log_action = new Log_Action();
 
 // TODO temporarily 'cat_forums' always enqueued
 $datastore->enqueue(['cat_forums']);

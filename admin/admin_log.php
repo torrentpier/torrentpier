@@ -11,8 +11,6 @@ $datastore->enqueue(array(
 	'moderators',
 ));
 
-$log_action->init();
-
 $per_page            = 50;
 $row_class_1         = 'row1';
 $row_class_2         = 'row2';
