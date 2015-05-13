@@ -1,6 +1,8 @@
 <?php
 
-
+/**
+ * Class Upload
+ */
 class Upload
 {
 	/**

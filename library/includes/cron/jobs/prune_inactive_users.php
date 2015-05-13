@@ -19,7 +19,7 @@ while (true)
 			AND user_lastvisit    = 0
 			AND user_session_time = 0
 			AND user_regdate      <= ". (TIMENOW - 86400 * $not_activated_days) ."
-			AND user_id           NOT IN(". EXCLUDED_USERS_CSV .")
+			AND user_id           NOT IN(". EXCLUDED_USERS .")
 			LIMIT $users_per_cycle");
 
 		foreach ($sql as $row)
@@ -34,7 +34,7 @@ while (true)
 			WHERE user_level   = 0
 			AND user_posts     = 0
 			AND user_lastvisit <= ". (TIMENOW - 86400 * $not_active_days) ."
-			AND user_id        NOT IN(". EXCLUDED_USERS_CSV .")
+			AND user_id        NOT IN(". EXCLUDED_USERS .")
 			LIMIT $users_per_cycle");
 
 		foreach ($sql as $row)

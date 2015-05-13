@@ -1,19 +1,23 @@
 <?php
 
+// @todo заменить на Smarty или подобное
 
+/**
+ * Class Template
+ */
 class Template
 {
 	// Variable that holds all the data we'll be substituting into the compiled templates
 	// This will end up being a multi-dimensional array like this: $this->_tpldata[block.][iteration#][child.][iteration#][child2.][iteration#][variablename] == value
 	// If it's a root-level variable, it'll be like this: $this->vars[varname] == value  or  $this->_tpldata['.'][0][varname] == value
 	// Array "vars" is added for easier access to data
-	var $_tpldata = array('.' => array(0 => array()));
+	var $_tpldata = ['.' => [0 => []]];
 	var $vars;
 
 	// Hash of filenames for each template handle
-	var $files = array();
-	var $files_cache = array(); // array of cache files that exists
-	var $files_cache2 = array(); // array of cache files (exists or not exists)
+	var $files = [];
+	var $files_cache = []; // array of cache files that exists
+	var $files_cache2 = []; // array of cache files (exists or not exists)
 
 	// Root template directory
 	var $root = '';
@@ -28,10 +32,10 @@ class Template
 	var $tpldef = 'default';
 
 	// This will hash handle names to the compiled code for that handle
-	var $compiled_code = array();
+	var $compiled_code = [];
 
 	// This will hold the uncompiled code for that handle.
-	var $uncompiled_code = array();
+	var $uncompiled_code = [];
 
 	// Cache settings
 	var $use_cache = 1;
@@ -45,7 +49,7 @@ class Template
 	var $cur_tpl = '';
 
 	// List of replacements (tpl files in this list will be replaced with other tpl files)
-	var $replace = array();
+	var $replace = [];
 
 	// Counter for include
 	var $include_count = 0;
@@ -61,7 +65,7 @@ class Template
 	var $preparse = '';
 	var $postparse = '';
 
-	var $lang = array();
+	var $lang = [];
 
 	/**
 	 * Constructor. Installs XS mod on first run or updates it and sets the root dir.
@@ -86,7 +90,7 @@ class Template
 	 */
 	function destroy()
 	{
-		$this->_tpldata = array('.' => array(0 => array()));
+		$this->_tpldata = ['.' => [0 => []]];
 		$this->vars = &$this->_tpldata['.'][0];
 		$this->xs_started = 0;
 	}
@@ -444,8 +448,8 @@ class Template
 		}
 
 		// Replace <!-- (END)PHP --> tags
-		$search = array('<!-- PHP -->', '<!-- ENDPHP -->');
-		$replace = array('<' . '?php ', ' ?' . '>');
+		$search = ['<!-- PHP -->', '<!-- ENDPHP -->'];
+		$replace = ['<' . '?php ', ' ?' . '>'];
 		$code = str_replace($search, $replace, $code);
 
 		// Break it up into lines and put " -->" back
@@ -456,19 +460,19 @@ class Template
 		}
 
 		$block_nesting_level = 0;
-		$block_names = array();
+		$block_names = [];
 		$block_names[0] = ".";
-		$block_items = array();
+		$block_items = [];
 		$count_if = 0;
 
 		// Prepare array for compiled code
-		$compiled = array();
+		$compiled = [];
 
 		// Array of switches
-		$sw = array();
+		$sw = [];
 
 		// Replace all short php tags
-		$new_code = array();
+		$new_code = [];
 		$line_count = count($code_lines);
 		for ($i = 0; $i < $line_count; $i++) {
 			$line = $code_lines[$i];
@@ -729,11 +733,11 @@ class Template
 			return $code;
 		}
 		// Change template varrefs into PHP varrefs. This one will handle varrefs WITH namespaces
-		$varrefs = array();
+		$varrefs = [];
 		preg_match_all('#\{(([a-z0-9\-_]+?\.)+)([a-z0-9\-_]+?)\}#is', $code, $varrefs);
 		$varcount = sizeof($varrefs[1]);
-		$search = array();
-		$replace = array();
+		$search = [];
+		$replace = [];
 		for ($i = 0; $i < $varcount; $i++) {
 			$namespace = $varrefs[1][$i];
 			$varname = $varrefs[3][$i];
@@ -766,7 +770,7 @@ class Template
 
 		$tokens = $match[0];
 		$tokens_cnt = count($tokens);
-		$is_arg_stack = array();
+		$is_arg_stack = [];
 
 		for ($i = 0; $i < $tokens_cnt; $i++) {
 			$token = &$tokens[$i];

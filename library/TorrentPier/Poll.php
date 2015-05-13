@@ -14,6 +14,7 @@ class Poll
 	 * @type array
 	 */
 	private $_poll_votes = [];
+
 	/**
 	 * @type int
 	 */

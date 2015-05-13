@@ -47,7 +47,7 @@ if ($bb_cfg['seed_bonus_enabled'] && $bb_cfg['seed_bonus_points'] && $bb_cfg['se
 				AND b.release_count <= $release
 				AND u.user_regdate  <  $user_regdate
 				AND u.user_active   =  1
-				AND u.user_id       not IN(". EXCLUDED_USERS_CSV .")
+				AND u.user_id       not IN(". EXCLUDED_USERS .")
 		");
 	}
 

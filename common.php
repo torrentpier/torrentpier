@@ -72,7 +72,9 @@ function DB ($db_alias = 'db1')
 	return $DBS->get_db_obj($db_alias);
 }
 
-// cache
+/**
+ * Cache
+ */
 require(INC_DIR . 'cache/common.php');
 require(INC_DIR . 'datastore/common.php');
 
