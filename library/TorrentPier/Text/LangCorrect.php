@@ -2851,12 +2851,12 @@ class Text_LangCorrect
 			"\xc2\xad",  #"мягкие" переносы строк (&shy;)
 		];
 		#http://ru.wikipedia.org/wiki/Диакритические_знаки
-		$s = Text_UTF8::diactrical_remove($s, $additional_chars, $is_can_restored = true, $restore_table);
+		$s = Text_Utf8::diactrical_remove($s, $additional_chars, $is_can_restored = true, $restore_table);
 
 		$this->words = [];
 		$s = $this->_parse1($s);
 		$s = $this->_parse2($s);
-		$s = Text_UTF8::diactrical_restore($s, $restore_table);
+		$s = Text_Utf8::diactrical_restore($s, $restore_table);
 		$words = $this->words;
 		return $s;
 	}
@@ -3061,7 +3061,7 @@ class Text_LangCorrect
 		#если в $s спецсимволов больше чем букв, возвращаем $word
 		$sc_count = 0;
 		$s = preg_replace('/' . $this->sc . '/sSX', '', $s, -1, $sc_count);
-		if ($sc_count > 0 && $sc_count > Text_UTF8::strlen($s)) return $word;
+		if ($sc_count > 0 && $sc_count > Text_Utf8::strlen($s)) return $word;
 
 		return reset($suggestions);
 	}
@@ -3069,7 +3069,7 @@ class Text_LangCorrect
 	#анализ на основе N-грамм русского и английского языка
 	private function _bigram_exists($word, $lang)
 	{
-		$word = ($lang === 'en') ? strtolower($word) : Text_UTF8::lowercase($word);
+		$word = ($lang === 'en') ? strtolower($word) : Text_Utf8::lowercase($word);
 
 		#шаг 0.
 		#проверяем слова в списке слов-исключений
@@ -3088,10 +3088,10 @@ class Text_LangCorrect
 			&& ! array_key_exists($m[0], $this->vowels3_lc[$lang])) return true;
 
 		#шаг 3.
-		$length = Text_UTF8::strlen($word);
+		$length = Text_Utf8::strlen($word);
 		for ($pos = 0, $limit = $length - 1; $pos < $limit; $pos++)
 		{
-			$ss = Text_UTF8::substr($word, $pos, 2);
+			$ss = Text_Utf8::substr($word, $pos, 2);
 			if ($pos === 0)              $ss = ' ' . $ss;  #beginning of word
 			elseif ($pos === $limit - 1) $ss = $ss . ' ';  #ending of word
 			if (array_key_exists($ss, $this->bigrams)) return true;

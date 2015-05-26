@@ -61,7 +61,7 @@
  * @version  2.2.2
  */
 
-class Text_UTF8
+class Text_Utf8
 {
 	#REPLACEMENT CHARACTER (for broken char)
 	const REPLACEMENT_CHAR = "\xEF\xBF\xBD"; #U+FFFD
@@ -3199,11 +3199,11 @@ class Text_UTF8
 		if (self::is_ascii($s)) return '(?i:' . preg_quote($s, $delimiter) . ')'; #speed improve
 
 		$s_re = '';
-		$s_lc = Text_UTF8::lowercase($s); if ($s_lc === false) return false;
-		$s_uc = Text_UTF8::uppercase($s); if ($s_uc === false) return false;
+		$s_lc = Text_Utf8::lowercase($s); if ($s_lc === false) return false;
+		$s_uc = Text_Utf8::uppercase($s); if ($s_uc === false) return false;
 
-		$chars_lc = Text_UTF8::str_split($s_lc); if ($chars_lc === false) return false;
-		$chars_uc = Text_UTF8::str_split($s_uc); if ($chars_uc === false) return false;
+		$chars_lc = Text_Utf8::str_split($s_lc); if ($chars_lc === false) return false;
+		$chars_uc = Text_Utf8::str_split($s_uc); if ($chars_uc === false) return false;
 
 		foreach ($chars_lc as $i => $char)
 		{
@@ -3971,7 +3971,7 @@ class Text_UTF8
 		$high_cp = self::ord($high);
 		if ($low_cp === false || $high_cp === false) return false;
 		$a = range($low_cp, $high_cp, $step);
-		return array_map(['Text_UTF8', 'chr'], $a);
+		return array_map(['Text_Utf8', 'chr'], $a);
 	}
 
 	/**
