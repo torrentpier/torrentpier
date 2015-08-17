@@ -699,21 +699,31 @@ class bbcode
 	{
 		global $bb_cfg;
 
-		$url = trim($m[1]);
-		$url_name = (isset($m[2])) ? trim($m[2]) : $url;
+		//TODO: Refactoring. When will use DI.
+		$uri = new \Zend\Uri\Uri(trim($m[1]));
 
-		if (!preg_match("#^https?://#isu", $url) && !preg_match("/^#/", $url)) $url = 'http://' . $url;
+		if ($uri->isValid()) {
 
-		if (in_array(parse_url($url, PHP_URL_HOST), $bb_cfg['nofollow']['allowed_url']) || $bb_cfg['nofollow']['disabled'])
-		{
-			$link = "<a href=\"$url\" class=\"postLink\">$url_name</a>";
+			$title = isset($m[2]) && !empty(trim($m[2])) ? $m[2] : $uri->toString();
+
+			$attributes = [
+				'class' => 'postLink',
+				'href'  => $uri->toString(),
+				'title' => $uri->toString()
+			];
+
+			if (in_array($uri->getHost(), $bb_cfg['nofollow']['allowed_url']) || $bb_cfg['nofollow']['disabled']) {
+				$attributes['rel'] = 'nofollow';
+			}
+
+			foreach ($attributes as $key => $value) {
+				$attributes[$key] = $key . "=\"" . $value . "\"";
+			}
+
+			return '<a '.join(' ', $attributes).'>'.$title.'</a>';
 		}
-		else
-		{
-			$link = "<a href=\"$url\" class=\"postLink\" rel=\"nofollow\">$url_name</a>";
-		}
 
-		return $link;
+		return $m[2];
 	}
 
 	/**
