@@ -33,3 +33,5 @@ $RECYCLE.BIN/
 .Trashes
 *.orig
 *.rej
+
+/vendor/

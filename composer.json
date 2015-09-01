@@ -1,0 +1,7 @@
+{
+    "name": "diolektor/torrentpier",
+    "description": "Fork TorrentPier. Web torrent tracker.",
+    "type": "project",
+    "minimum-stability": "dev",
+    "require": {}
+}
