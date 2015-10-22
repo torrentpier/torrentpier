@@ -84,7 +84,7 @@ if ($t_data['attach_ext_id'] == 8)
 }
 
 // All other
-$file_path = get_attach_path($topic_id);
+$file_path = get_attach_path($topic_id, $t_data['attach_ext_id']);
 
 if (($file_contents = @file_get_contents($file_path)) === false)
 {

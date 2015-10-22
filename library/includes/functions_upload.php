@@ -126,7 +126,7 @@ class upload_common
 		}
 		else if ($mode == 'attach')
 		{
-			$file_path = get_attach_path($params['topic_id']);
+			$file_path = get_attach_path($params['topic_id'], $params['attach_ext_id']);
 			return $this->_move($file_path);
 		}
 		else

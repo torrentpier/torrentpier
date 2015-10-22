@@ -14,7 +14,7 @@ if ($confirm) {
 	DB()->query("ALTER TABLE ". BB_USERS ." CHANGE COLUMN user_birthday user_birthday_old int(11) NOT NULL DEFAULT 0 AFTER user_gender");
 	DB()->query("ALTER TABLE ". BB_USERS ." ADD user_birthday date NOT NULL DEFAULT '0000-00-00' AFTER user_gender");
 
-	$sql = "SELECT user_id, user_birthday_old FROM ". BB_USERS ." WHERE user_birthday_old != 0 AND user_id NOT IN ('". EXCLUDED_USERS_CSV ."')";
+	$sql = "SELECT user_id, user_birthday_old FROM ". BB_USERS ." WHERE user_birthday_old != 0 AND user_id NOT IN ('". EXCLUDED_USERS ."')";
 
 	foreach (DB()->fetch_rowset($sql) as $row)
 	{
