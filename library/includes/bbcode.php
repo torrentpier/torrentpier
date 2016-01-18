@@ -96,16 +96,11 @@ function prepare_message ($message)
 // Either in a window or inline
 function generate_smilies($mode)
 {
-	global $bb_cfg, $template, $lang, $user, $datastore;
+	global $bb_cfg, $template, $lang, $datastore;
 
 	$inline_columns = 4;
 	$inline_rows = 7;
 	$window_columns = 8;
-
-	if ($mode == 'window')
-	{
-		$user->session_start();
-	}
 
 	$data = $datastore->get('smile_replacements');
 
@@ -184,8 +179,6 @@ function generate_smilies($mode)
 	}
 }
 
-// some functions from vB
-// #############################################################################
 /**
 * Strips away [quote] tags and their contents from the specified string
 *
@@ -288,7 +281,6 @@ function strip_quotes ($text)
 	return $newtext;
 }
 
-// #############################################################################
 /**
  * Strips away bbcode from a given string, leaving plain text
  *

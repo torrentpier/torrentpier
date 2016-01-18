@@ -25,10 +25,11 @@ function sync ($type, $id)
 
 			DB()->query("
 				CREATE TEMPORARY TABLE $tmp_sync_forums (
-					forum_id           SMALLINT  UNSIGNED NOT NULL DEFAULT '0',
-					forum_last_post_id INT       UNSIGNED NOT NULL DEFAULT '0',
-					forum_posts        MEDIUMINT UNSIGNED NOT NULL DEFAULT '0',
-					forum_topics       MEDIUMINT UNSIGNED NOT NULL DEFAULT '0',
+					forum_id              SMALLINT  UNSIGNED NOT NULL DEFAULT '0',
+					forum_last_post_id    INT       UNSIGNED NOT NULL DEFAULT '0',
+					forum_last_topic_time INT       UNSIGNED NOT NULL DEFAULT '0',
+					forum_posts           MEDIUMINT UNSIGNED NOT NULL DEFAULT '0',
+					forum_topics          MEDIUMINT UNSIGNED NOT NULL DEFAULT '0',
 					PRIMARY KEY (forum_id)
 				) ENGINE = MEMORY
 			");
@@ -40,10 +41,11 @@ function sync ($type, $id)
 
 			DB()->query("
 				REPLACE INTO $tmp_sync_forums
-					(forum_id, forum_last_post_id, forum_posts, forum_topics)
+					(forum_id, forum_last_post_id, forum_last_topic_time, forum_posts, forum_topics)
 				SELECT
 					forum_id,
 					MAX(topic_last_post_id),
+					MAX(topic_time),
 					SUM(topic_replies) + COUNT(topic_id),
 					COUNT(topic_id)
 				FROM ". BB_TOPICS ."
@@ -55,9 +57,10 @@ function sync ($type, $id)
 				UPDATE
 					$tmp_sync_forums tmp, ". BB_FORUMS ." f
 				SET
-					f.forum_last_post_id = tmp.forum_last_post_id,
-					f.forum_posts        = tmp.forum_posts,
-					f.forum_topics       = tmp.forum_topics
+					f.forum_last_post_id    = tmp.forum_last_post_id,
+					f.forum_last_topic_time = tmp.forum_last_topic_time,
+					f.forum_posts           = tmp.forum_posts,
+					f.forum_topics          = tmp.forum_topics
 				WHERE
 					f.forum_id = tmp.forum_id
 			");
@@ -87,7 +90,6 @@ function sync ($type, $id)
 					topic_first_post_id  INT UNSIGNED NOT NULL DEFAULT '0',
 					topic_last_post_id   INT UNSIGNED NOT NULL DEFAULT '0',
 					topic_last_post_time INT UNSIGNED NOT NULL DEFAULT '0',
-					topic_attachment     INT UNSIGNED NOT NULL DEFAULT '0',
 					PRIMARY KEY (topic_id)
 				) ENGINE = MEMORY
 			");
@@ -102,11 +104,9 @@ function sync ($type, $id)
 					COUNT(p.post_id) AS total_posts,
 					MIN(p.post_id) AS topic_first_post_id,
 					MAX(p.post_id) AS topic_last_post_id,
-					MAX(p.post_time) AS topic_last_post_time,
-					IF(MAX(a.attach_id), 1, 0) AS topic_attachment
-				FROM      ". BB_TOPICS      ." t
-				LEFT JOIN ". BB_POSTS       ." p ON(p.topic_id = t.topic_id)
-				LEFT JOIN ". BB_ATTACHMENTS ." a ON(a.post_id = p.post_id)
+					MAX(p.post_time) AS topic_last_post_time
+				FROM      ". BB_TOPICS ." t
+				LEFT JOIN ". BB_POSTS  ." p ON(p.topic_id = t.topic_id)
 				WHERE t.topic_status != ". TOPIC_MOVED ."
 					$where_sql
 				GROUP BY t.topic_id
@@ -119,8 +119,7 @@ function sync ($type, $id)
 					t.topic_replies        = tmp.total_posts - 1,
 					t.topic_first_post_id  = tmp.topic_first_post_id,
 					t.topic_last_post_id   = tmp.topic_last_post_id,
-					t.topic_last_post_time = tmp.topic_last_post_time,
-					t.topic_attachment     = tmp.topic_attachment
+					t.topic_last_post_time = tmp.topic_last_post_time
 				WHERE
 					t.topic_id = tmp.topic_id
 			");
@@ -306,13 +305,11 @@ function topic_delete ($mode_or_topic_id, $forum_id = null, $prune_time = 0, $pr
 	// Delete posts, posts_text, attachments (from DB)
 	DB()->query("
 		DELETE p, pt, ps, a, d, ph
-		FROM      ". $tmp_delete_topics  ." del
-		LEFT JOIN ". BB_POSTS            ." p  ON(p.topic_id = del.topic_id)
-		LEFT JOIN ". BB_POSTS_TEXT       ." pt ON(pt.post_id = p.post_id)
-		LEFT JOIN ". BB_POSTS_HTML       ." ph ON(ph.post_id = p.post_id)
-		LEFT JOIN ". BB_POSTS_SEARCH     ." ps ON(ps.post_id = p.post_id)
-		LEFT JOIN ". BB_ATTACHMENTS      ." a  ON(a.post_id = p.post_id)
-		LEFT JOIN ". BB_ATTACHMENTS_DESC ." d  ON(d.attach_id = a.attach_id)
+		FROM      ". $tmp_delete_topics ." del
+		LEFT JOIN ". BB_POSTS           ." p  ON(p.topic_id = del.topic_id)
+		LEFT JOIN ". BB_POSTS_TEXT      ." pt ON(pt.post_id = p.post_id)
+		LEFT JOIN ". BB_POSTS_HTML      ." ph ON(ph.post_id = p.post_id)
+		LEFT JOIN ". BB_POSTS_SEARCH    ." ps ON(ps.post_id = p.post_id)
 	");
 
 	// Delete topics, topics watch
@@ -477,6 +474,85 @@ function topic_move ($topic_id, $to_forum_id, $from_forum_id = null, $leave_shad
 	return true;
 }
 
+function topic_lock_unlock ($topic_id, $mode, $forum_id = null)
+{
+	global $log_action;
+
+	if (!$topic_csv = get_id_csv($topic_id))
+	{
+		return false;
+	}
+	$new_topic_status = ($mode == 'lock') ? TOPIC_LOCKED : TOPIC_UNLOCKED;
+	$forum_sql = ($forum_id) ? " AND forum_id = ". (int) $forum_id : '';
+
+	$sql = "
+		SELECT topic_id, topic_title
+		FROM ". BB_TOPICS ."
+		WHERE topic_id IN($topic_csv)
+			AND topic_status != ". TOPIC_MOVED ."
+			AND topic_status != $new_topic_status
+			$forum_sql
+	";
+
+	$topic_ary = array();
+
+	foreach (DB()->fetch_rowset($sql) as $row)
+	{
+		$topic_ary[] = $row['topic_id'];
+		$log_topics[$row['topic_id']] = $row['topic_title'];
+	}
+
+	if (!$topic_csv = get_id_csv($topic_ary))
+	{
+		return false;
+	}
+
+	DB()->query("UPDATE ". BB_TOPICS ." SET topic_status = $new_topic_status WHERE topic_id IN($topic_csv)");
+
+	// Log action
+	$type = ($mode == 'lock') ? 'mod_topic_lock' : 'mod_topic_unlock';
+
+	foreach ($log_topics as $topic_id => $topic_title)
+	{
+		$log_action->mod($type, array(
+			'forum_id'    => $forum_id,
+			'topic_id'    => $topic_id,
+			'topic_title' => $topic_title,
+		));
+	}
+
+	return true;
+}
+
+function topic_stick_unstick ($topic_id, $mode, $forum_id = null)
+{
+	if (!$topic_csv = get_id_csv($topic_id))
+	{
+		return false;
+	}
+	$new_topic_type = ($mode == 'stick') ? POST_STICKY : POST_NORMAL;
+	$forum_sql = ($forum_id) ? " AND forum_id = ". (int) $forum_id : '';
+
+	$sql = "
+		SELECT topic_id
+		FROM ". BB_TOPICS ."
+		WHERE topic_id IN($topic_csv)
+			AND topic_status != ". TOPIC_MOVED ."
+			AND topic_type != $new_topic_type
+			$forum_sql
+	";
+	$topic_ary = DB()->fetch_rowset($sql, 'topic_id');
+
+	if (!$topic_csv = get_id_csv($topic_ary))
+	{
+		return false;
+	}
+
+	DB()->query("UPDATE ". BB_TOPICS ." SET topic_type = $new_topic_type WHERE topic_id IN($topic_csv)");
+
+	return ( DB()->affected_rows() > 0 );
+}
+
 // $exclude_first - в режиме удаления сообщений по списку исключать первое сообщение в теме
 function post_delete ($mode_or_post_id, $user_id = null, $exclude_first = true)
 {
@@ -587,17 +663,15 @@ function post_delete ($mode_or_post_id, $user_id = null, $exclude_first = true)
 		return 0;
 	}
 
-	// Delete posts, posts_text, attachments (from DB)
+	// Delete posts, posts_text
 	DB()->query("
-		DELETE p, pt, ps, tor, a, d, ph
-		FROM      ". $tmp_delete_posts   ." del
-		LEFT JOIN ". BB_POSTS            ." p   ON(p.post_id  = del.post_id)
-		LEFT JOIN ". BB_POSTS_TEXT       ." pt  ON(pt.post_id  = del.post_id)
-		LEFT JOIN ". BB_POSTS_HTML       ." ph  ON(ph.post_id  = del.post_id)
-		LEFT JOIN ". BB_POSTS_SEARCH     ." ps  ON(ps.post_id  = del.post_id)
-		LEFT JOIN ". BB_BT_TORRENTS      ." tor ON(tor.post_id = del.post_id)
-		LEFT JOIN ". BB_ATTACHMENTS      ." a   ON(a.post_id  = del.post_id)
-		LEFT JOIN ". BB_ATTACHMENTS_DESC ." d   ON(d.attach_id = a.attach_id)
+		DELETE p, pt, ps, tor, ph
+		FROM      ". $tmp_delete_posts ." del
+		LEFT JOIN ". BB_POSTS          ." p   ON(p.post_id  = del.post_id)
+		LEFT JOIN ". BB_POSTS_TEXT     ." pt  ON(pt.post_id  = del.post_id)
+		LEFT JOIN ". BB_POSTS_HTML     ." ph  ON(ph.post_id  = del.post_id)
+		LEFT JOIN ". BB_POSTS_SEARCH   ." ps  ON(ps.post_id  = del.post_id)
+		LEFT JOIN ". BB_BT_TORRENTS    ." tor ON(tor.topic_id = del.topic_id)
 	");
 
 	// Log action

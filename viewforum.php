@@ -117,8 +117,7 @@ if ($mark_read && !IS_GUEST)
 	set_tracks(COOKIE_FORUM, $tracking_forums, $forum_id);
 
 	set_die_append_msg($forum_id);
-	$message = $lang['TOPICS_MARKED_READ'];
-	bb_die($message);
+	bb_die($lang['TOPICS_MARKED_READ']);
 }
 
 // Subforums
@@ -310,7 +309,7 @@ if ($forum_data['allow_reg_tracker'])
 	}
 
 	$select_tor_sql = ',
-		bt.auth_key, tor.info_hash, tor.size AS tor_size, tor.reg_time, tor.complete_count, tor.seeder_last_seen, tor.attach_id, tor.tor_status, tor.tor_type,
+		bt.auth_key, tor.info_hash, tor.size AS tor_size, tor.reg_time, tor.complete_count, tor.seeder_last_seen, tor.tor_status, tor.tor_type,
 		sn.seeders, sn.leechers
 	';
 	$select_tor_sql .= ($join_dl) ? ', dl.user_status AS dl_status' : '';
@@ -483,10 +482,10 @@ foreach ($topic_rowset as $topic)
 		'TOR_STATUS_ICON'  => isset($topic['tor_status']) ? $bb_cfg['tor_icons'][$topic['tor_status']] : '',
 		'TOR_STATUS_TEXT'  => isset($topic['tor_status']) ? $lang['TOR_STATUS_NAME'][$topic['tor_status']] : '',
 
-		'ATTACH'           => $topic['topic_attachment'],
+		'ATTACH'           => $topic['attach_ext_id'],
 		'STATUS'           => $topic['topic_status'],
 		'TYPE'             => $topic['topic_type'],
-		'DL'               => ($topic['topic_dl_type'] == TOPIC_DL_TYPE_DL && !$forum_data['allow_reg_tracker']),
+		'DL'               => ($topic['tracker_status'] && !$forum_data['allow_reg_tracker']),
 		'POLL'             => $topic['topic_vote'],
 		'DL_CLASS'         => isset($topic['dl_status']) ? $dl_link_css[$topic['dl_status']] : '',
 
@@ -505,7 +504,6 @@ foreach ($topic_rowset as $topic)
 			'LEECHERS'   => (int) $topic['leechers'],
 			'TOR_SIZE'   => humn_size($topic['tor_size']),
 			'COMPL_CNT'  => (int) $topic['complete_count'],
-			'ATTACH_ID'  => $topic['attach_id'],
 			'MAGNET'     => $tor_magnet,
 		));
 	}

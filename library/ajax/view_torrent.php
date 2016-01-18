@@ -13,9 +13,9 @@ $attach_id = (int) $this->request['attach_id'];
 global $bnc_error;
 $bnc_error = 0;
 
-$torrent = DB()->fetch_row("SELECT at.attach_id, at.physical_filename FROM ". BB_ATTACHMENTS_DESC ." at WHERE at.attach_id = $attach_id LIMIT 1");
+//$torrent = DB()->fetch_row("SELECT at.attach_id, at.physical_filename FROM ". BB_ATTACHMENTS_DESC ." at WHERE at.attach_id = $attach_id LIMIT 1");
 if (!$torrent) $this->ajax_die($lang['EMPTY_ATTACH_ID']);
-$filename = get_attachments_dir() .'/'. $torrent['physical_filename'];
+//$filename = get_attachments_dir() .'/'. $torrent['physical_filename'];
 
 if (($file_contents = @file_get_contents($filename)) === false)
 {

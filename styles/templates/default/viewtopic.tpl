@@ -169,7 +169,8 @@ ajax.callback.post_mod_comment = function(data) {
 </tr>
 </table>
 
-<!-- IF SHOW_DL_LIST || SHOW_TOR_ACT --><!-- INCLUDE viewtopic_torrent.tpl --><!-- ENDIF -->
+<!-- IF SHOW_TOR_STATS --><!-- INCLUDE viewtopic_torrent.tpl --><!-- ENDIF -->
+<!-- INCLUDE viewtopic_tor_stats.tpl -->
 
 <!-- IF TOPIC_HAS_POLL or CAN_MANAGE_POLL -->
 <form id="poll-form" method="post" action="poll.php" style="display: none;">
@@ -420,7 +421,43 @@ function build_poll_add_form (src_el)
 						<div id="mc_comment_{postrow.POST_ID}">{postrow.MC_COMMENT}</div>
 					</div>
 				</div>
-				{postrow.ATTACHMENTS}
+
+				<!-- IF postrow.IS_FIRST_POST -->
+					<!-- IF SHOW_GUEST_DL_STUB -->
+
+							<!-- INCLUDE viewtopic_tor_guest.tpl -->
+
+					<!-- ELSEIF SHOW_TOR_NOT_REGGED -->
+
+						<div class="clear"></div>
+						<div class="spacer_8"></div>
+						<fieldset class="attach">
+							<legend>{TOPIC_ATTACH_ICON} {L_ATTACHMENT}</legend>
+							<p class="attach_link"><b>Торрент не зарегистрирован на трекере</b> <!-- IF TRACKER_REG_LINK -->&nbsp;[ {TRACKER_REG_LINK} ]<!-- ENDIF --></p>
+						</fieldset>
+						<div class="spacer_12"></div>
+
+					<!-- ELSEIF SHOW_TOR_REGGED -->
+
+						<!-- INCLUDE viewtopic_tor_attach.tpl -->
+
+					<!-- ELSEIF SHOW_ATTACH_DL_LINK -->
+
+						<div class="clear"></div>
+						<div class="spacer_8"></div>
+						<fieldset class="attach">
+							<legend>{TOPIC_ATTACH_ICON} {L_ATTACHMENT}</legend>
+							<p class="attach_link"><a href="{$bb_cfg['dl_url']}{TOPIC_ID}" class="dl-stub"><b>Скачать прикреплённый файл</b></a> &nbsp;<span class="med">({ATTACH_FILESIZE})</span></p>
+						</fieldset>
+
+					<!-- ELSEIF IS_GUEST -->
+
+						<div class="clear"></div>
+						<div class="spacer_6"></div>
+
+					<!-- ENDIF -->
+				<!-- ENDIF / IS_FIRST_POST -->
+
 			</div><!--/post_wrap-->
 			<!-- IF not postrow.IS_FIRST_POST -->
 				<!-- IF postrow.SIGNATURE -->{postrow.SIGNATURE}<!-- ENDIF -->

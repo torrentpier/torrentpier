@@ -399,11 +399,11 @@ switch ($mode)
 	case 'set_download':
 	case 'unset_download':
 		$set_download = ($mode == 'set_download');
-		$new_dl_type  = ($set_download) ? TOPIC_DL_TYPE_DL : TOPIC_DL_TYPE_NORMAL;
+		$new_dl_type  = ($set_download) ? 1 : 0;
 
 		DB()->query("
 			UPDATE ". BB_TOPICS ." SET
-				topic_dl_type = $new_dl_type
+				tracker_status = $new_dl_type
 			WHERE topic_id IN($topic_csv)
 				AND forum_id = $forum_id
 				AND topic_moved_id = 0

@@ -140,7 +140,6 @@ CREATE TABLE IF NOT EXISTS `bb_bt_torhelp` (
 DROP TABLE IF EXISTS `bb_bt_torrents`;
 CREATE TABLE IF NOT EXISTS `bb_bt_torrents` (
   `info_hash` varbinary(20) NOT NULL DEFAULT '',
-  `post_id` mediumint(8) unsigned NOT NULL DEFAULT '0',
   `poster_id` mediumint(9) NOT NULL DEFAULT '0',
   `topic_id` mediumint(8) unsigned NOT NULL DEFAULT '0',
   `forum_id` smallint(5) unsigned NOT NULL DEFAULT '0',
@@ -156,7 +155,6 @@ CREATE TABLE IF NOT EXISTS `bb_bt_torrents` (
   `speed_up` int(11) NOT NULL DEFAULT '0',
   `speed_down` int(11) NOT NULL DEFAULT '0',
   PRIMARY KEY (`info_hash`),
-  UNIQUE KEY `post_id` (`post_id`),
   UNIQUE KEY `topic_id` (`topic_id`),
   KEY `reg_time` (`reg_time`),
   KEY `forum_id` (`forum_id`),
@@ -341,11 +339,9 @@ INSERT INTO `bb_config` VALUES ('birthday_enabled', '1');
 INSERT INTO `bb_config` VALUES ('birthday_max_age', '99');
 INSERT INTO `bb_config` VALUES ('birthday_min_age', '10');
 INSERT INTO `bb_config` VALUES ('birthday_check_day', '7');
-INSERT INTO `bb_config` VALUES ('bt_add_auth_key', '1');
 INSERT INTO `bb_config` VALUES ('bt_allow_spmode_change', '1');
 INSERT INTO `bb_config` VALUES ('bt_announce_url', 'https://demo.torrentpier.me/bt/announce.php');
 INSERT INTO `bb_config` VALUES ('bt_disable_dht', '0');
-INSERT INTO `bb_config` VALUES ('bt_check_announce_url', '0');
 INSERT INTO `bb_config` VALUES ('bt_del_addit_ann_urls', '1');
 INSERT INTO `bb_config` VALUES ('bt_dl_list_only_1st_page', '1');
 INSERT INTO `bb_config` VALUES ('bt_dl_list_only_count', '1');
@@ -477,75 +473,6 @@ CREATE TABLE IF NOT EXISTS `bb_disallow` (
 -- ----------------------------
 
 -- ----------------------------
--- Table structure for `bb_extensions`
--- ----------------------------
-DROP TABLE IF EXISTS `bb_extensions`;
-CREATE TABLE IF NOT EXISTS `bb_extensions` (
-  `ext_id` mediumint(8) unsigned NOT NULL AUTO_INCREMENT,
-  `group_id` mediumint(8) unsigned NOT NULL DEFAULT '0',
-  `extension` varchar(100) NOT NULL DEFAULT '',
-  `comment` varchar(100) NOT NULL DEFAULT '',
-  PRIMARY KEY (`ext_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
-
--- ----------------------------
--- Records of bb_extensions
--- ----------------------------
-INSERT INTO `bb_extensions` VALUES ('', '1', 'gif', '');
-INSERT INTO `bb_extensions` VALUES ('', '1', 'png', '');
-INSERT INTO `bb_extensions` VALUES ('', '1', 'jpeg', '');
-INSERT INTO `bb_extensions` VALUES ('', '1', 'jpg', '');
-INSERT INTO `bb_extensions` VALUES ('', '1', 'tif', '');
-INSERT INTO `bb_extensions` VALUES ('', '1', 'tga', '');
-INSERT INTO `bb_extensions` VALUES ('', '2', 'gtar', '');
-INSERT INTO `bb_extensions` VALUES ('', '2', 'gz', '');
-INSERT INTO `bb_extensions` VALUES ('', '2', 'tar', '');
-INSERT INTO `bb_extensions` VALUES ('', '2', 'zip', '');
-INSERT INTO `bb_extensions` VALUES ('', '2', 'rar', '');
-INSERT INTO `bb_extensions` VALUES ('', '2', 'ace', '');
-INSERT INTO `bb_extensions` VALUES ('', '3', 'txt', '');
-INSERT INTO `bb_extensions` VALUES ('', '3', 'c', '');
-INSERT INTO `bb_extensions` VALUES ('', '3', 'h', '');
-INSERT INTO `bb_extensions` VALUES ('', '3', 'cpp', '');
-INSERT INTO `bb_extensions` VALUES ('', '3', 'hpp', '');
-INSERT INTO `bb_extensions` VALUES ('', '3', 'diz', '');
-INSERT INTO `bb_extensions` VALUES ('', '4', 'xls', '');
-INSERT INTO `bb_extensions` VALUES ('', '4', 'doc', '');
-INSERT INTO `bb_extensions` VALUES ('', '4', 'dot', '');
-INSERT INTO `bb_extensions` VALUES ('', '4', 'pdf', '');
-INSERT INTO `bb_extensions` VALUES ('', '4', 'ai', '');
-INSERT INTO `bb_extensions` VALUES ('', '4', 'ps', '');
-INSERT INTO `bb_extensions` VALUES ('', '4', 'ppt', '');
-INSERT INTO `bb_extensions` VALUES ('', '5', 'rm', '');
-INSERT INTO `bb_extensions` VALUES ('', '6', 'torrent', '');
-
--- ----------------------------
--- Table structure for `bb_extension_groups`
--- ----------------------------
-DROP TABLE IF EXISTS `bb_extension_groups`;
-CREATE TABLE IF NOT EXISTS `bb_extension_groups` (
-  `group_id` mediumint(8) NOT NULL AUTO_INCREMENT,
-  `group_name` varchar(20) NOT NULL DEFAULT '',
-  `cat_id` tinyint(2) NOT NULL DEFAULT '0',
-  `allow_group` tinyint(1) NOT NULL DEFAULT '0',
-  `download_mode` tinyint(1) unsigned NOT NULL DEFAULT '1',
-  `upload_icon` varchar(100) NOT NULL DEFAULT '',
-  `max_filesize` int(20) NOT NULL DEFAULT '0',
-  `forum_permissions` text NOT NULL,
-  PRIMARY KEY (`group_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
-
--- ----------------------------
--- Records of bb_extension_groups
--- ----------------------------
-INSERT INTO `bb_extension_groups` VALUES ('', 'Images', '1', '1', '1', '', '262144', '');
-INSERT INTO `bb_extension_groups` VALUES ('', 'Archives', '0', '1', '1', '', '262144', '');
-INSERT INTO `bb_extension_groups` VALUES ('', 'Plain text', '0', '0', '1', '', '262144', '');
-INSERT INTO `bb_extension_groups` VALUES ('', 'Documents', '0', '0', '1', '', '262144', '');
-INSERT INTO `bb_extension_groups` VALUES ('', 'Real media', '0', '0', '2', '', '262144', '');
-INSERT INTO `bb_extension_groups` VALUES ('', 'Torrent', '0', '1', '1', '', '122880', '');
-
--- ----------------------------
 -- Table structure for `bb_forums`
 -- ----------------------------
 DROP TABLE IF EXISTS `bb_forums`;
@@ -559,6 +486,7 @@ CREATE TABLE IF NOT EXISTS `bb_forums` (
   `forum_posts` mediumint(8) unsigned NOT NULL DEFAULT '0',
   `forum_topics` mediumint(8) unsigned NOT NULL DEFAULT '0',
   `forum_last_post_id` mediumint(8) unsigned NOT NULL DEFAULT '0',
+  `forum_last_topic_time` INT NOT NULL,
   `forum_tpl_id` smallint(6) NOT NULL DEFAULT '0',
   `prune_days` smallint(5) unsigned NOT NULL DEFAULT '0',
   `auth_view` tinyint(2) NOT NULL DEFAULT '0',
@@ -590,7 +518,7 @@ CREATE TABLE IF NOT EXISTS `bb_forums` (
 -- ----------------------------
 -- Records of bb_forums
 -- ----------------------------
-INSERT INTO `bb_forums` VALUES ('1', '1', 'Ваш первый форум', 'Описание вашего первого форума.', '0', '10', '1', '1', '1', '0', '0', '0', '0', '1', '1', '1', '1', '3', '3', '1', '1', '1', '1', '0', '0', '0', '0', '1', '0', '0');
+INSERT INTO `bb_forums` VALUES ('1', '1', 'Ваш первый форум', 'Описание вашего первого форума.', '0', '10', '1', '1', '1', '0', '0', '0', '0', '0', '1', '1', '1', '1', '3', '3', '1', '1', '1', '1', '0', '0', '0', '0', '1', '0', '0');
 
 -- ----------------------------
 -- Table structure for `bb_groups`

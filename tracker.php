@@ -662,10 +662,10 @@ if ($allowed_forums)
 		{
 			$SQL['WHERE'][] = "sn.seeders >= 1";
 		}
-        if ($tor_type)
-        {
-            $SQL['WHERE'][] = "tor.tor_type IN(1,2)";
-        }
+		if ($tor_type)
+		{
+			$SQL['WHERE'][] = "tor.tor_type IN(1,2)";
+		}
 
 		// ORDER
 		$SQL['ORDER BY'][] = "{$order_opt[$order_val]['sql']} {$sort_opt[$sort_val]['sql']}";
@@ -721,7 +721,7 @@ if ($allowed_forums)
 		// SELECT
 		$select = "
 			SELECT
-				tor.topic_id, tor.post_id, tor.attach_id, tor.size, tor.reg_time, tor.complete_count, tor.seeder_last_seen, tor.tor_status, tor.tor_type,
+				tor.topic_id, tor.size, tor.reg_time, tor.complete_count, tor.seeder_last_seen, tor.tor_status, tor.tor_type,
 				t.topic_title, t.topic_time, t.topic_replies, t.topic_views, sn.seeders, sn.leechers, tor.info_hash
 		";
 		$select .= (!$hide_speed)  ? ", sn.speed_up, sn.speed_down" : '';
@@ -779,7 +779,6 @@ if ($allowed_forums)
 			$seeds  = $tor['seeders'];
 			$leechs = $tor['leechers'];
 			$s_last = $tor['seeder_last_seen'];
-			$att_id = $tor['attach_id'];
 			$size   = $tor['size'];
 			$tor_magnet = create_magnet($tor['info_hash'], $passkey['auth_key'], $userdata['session_logged_in']);
 			$compl  = $tor['complete_count'];
@@ -812,7 +811,6 @@ if ($allowed_forums)
 				'IS_NEW'       => (!IS_GUEST && $tor['reg_time'] > $lastvisit),
 				'USER_AUTHOR'  => (!IS_GUEST && $poster_id == $user_id),
 
-				'ATTACH_ID'    => $att_id,
 				'MAGNET'       => $tor_magnet,
 				'TOR_TYPE'     => is_gold($tor['tor_type']),
 

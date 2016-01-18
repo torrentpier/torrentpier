@@ -31,7 +31,7 @@ function delete_avatar ($user_id, $avatar_ext_id)
 
 function get_tracks ($type)
 {
-	static $pattern = '#^a:\d+:{[i:;\d]+}$#';
+	$c_name = '';
 
 	switch ($type)
 	{
@@ -87,7 +87,7 @@ function set_tracks ($cookie_name, &$tracking_ary, $tracks = null, $val = TIMENO
 	if ($overflow > 0)
 	{
 		arsort($tracking_ary);
-		for ($i=0; $i < $overflow; $i++)
+		for ($i = 0; $i < $overflow; $i++)
 		{
 			array_pop($tracking_ary);
 		}
@@ -1999,7 +1999,7 @@ function get_topic_icon ($topic, $is_unread = null)
 			$folder = $images['folder_locked'];
 			$folder_new = $images['folder_locked_new'];
 		}
-		else if ($topic['topic_dl_type'] == TOPIC_DL_TYPE_DL)
+		else if ($topic['tracker_status'])
 		{
 			$folder = ($t_hot) ? $images['folder_dl_hot'] : $images['folder_dl'];
 			$folder_new = ($t_hot) ? $images['folder_dl_hot_new'] : $images['folder_dl_new'];

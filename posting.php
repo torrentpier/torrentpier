@@ -9,7 +9,7 @@ require(INC_DIR .'functions_post.php');
 // Start session management
 $user->session_start();
 
-$page_cfg['load_tpl_vars'] = array('post_icons');
+$page_cfg['load_tpl_vars'] = ['post_icons'];
 
 $submit   = (bool) @$_REQUEST['post'];
 $preview  = (bool) @$_REQUEST['preview'];
@@ -23,15 +23,13 @@ $mode = (string) @$_REQUEST['mode'];
 
 $confirm = isset($_POST['confirm']);
 
-$orig_word = $replacement_word = array();
+$orig_word = $replacement_word = [];
 
 // Set topic type
 $topic_type = (@$_POST['topictype']) ? (int) $_POST['topictype'] : POST_NORMAL;
-$topic_type = in_array($topic_type, array(POST_NORMAL, POST_STICKY, POST_ANNOUNCE)) ? $topic_type : POST_NORMAL;
+$topic_type = in_array($topic_type, [POST_NORMAL, POST_STICKY, POST_ANNOUNCE]) ? $topic_type : POST_NORMAL;
 
-$selected_rg = 0;
-$switch_rg_sig = 0;
-$switch_poster_rg_sig = 0;
+$selected_rg = $switch_rg_sig = $switch_poster_rg_sig = 0;
 
 if ($mode == 'smilies')
 {
@@ -384,7 +382,7 @@ elseif ( ($submit || $confirm) && !$topic_has_new_posts )
 			$user_id = ( $mode == 'reply' || $mode == 'newtopic' ) ? $userdata['user_id'] : $post_data['poster_id'];
 			update_post_stats($mode, $post_data, $forum_id, $topic_id, $post_id, $user_id);
 		}
-		$attachment_mod['posting']->insert_attachment($post_id);
+		//$attachment_mod['posting']->insert_attachment($post_id);
 
 		if (!$error_msg)
 		{
@@ -396,7 +394,42 @@ elseif ( ($submit || $confirm) && !$topic_has_new_posts )
 			set_tracks(COOKIE_TOPIC, $tracking_topics, $topic_id);
 		}
 
-		if (defined('TORRENT_ATTACH_ID') && $bb_cfg['bt_newtopic_auto_reg'] && !$error_msg)
+		// новая тема или редактирование 1-го сообщения и нет уже прикрепленного файла
+		$can_attach_file = (($mode == 'newtopic' || ($post_data['first_post'] && $mode == 'editpost')) && empty($post_info['attach_ext_id']));
+
+		if ($can_attach_file && !empty($_FILES['attach']['name']))
+		{
+			$upload = new Upload();
+
+			if ($upload->init($bb_cfg['attach'], $_FILES['attach']) AND $upload->store('attach', array('topic_id' => $topic_id)))
+			{
+				DB()->query("
+					UPDATE ". BB_TOPICS ." SET
+						attach_ext_id = ". (int) $upload->file_ext_id .",
+						filesize = ". (int) $upload->file_size ."
+					WHERE topic_id = $topic_id
+					LIMIT 1
+				");
+				if ($upload->file_ext_id == 8)
+				{
+					require_once(INC_DIR .'functions_torrent.php');
+					tracker_register($topic_id, 'newtopic', TOR_NOT_APPROVED);  # --> exit
+				}
+			}
+			else
+			{
+				$return_to_edit_link = '<a href="'. POSTING_URL .'?mode=editpost&amp;p='. $post_id .'">Вернуться к редактированию сообщения</a>';
+				$return_message = '
+					<span class="warnColor1">'. join('<br />', $upload->errors) ."</span>
+					<br /><br />
+					$return_to_edit_link
+					<br /><br /><hr /><br />
+					$return_message
+				";
+			}
+		}
+
+		/*if (defined('TORRENT_ATTACH_ID') && $bb_cfg['bt_newtopic_auto_reg'] && !$error_msg)
 		{
 			include(INC_DIR .'functions_torrent.php');
 			if (!DB()->fetch_row("SELECT attach_id FROM ". BB_BT_TORRENTS ." WHERE attach_id = ". TORRENT_ATTACH_ID))
@@ -434,7 +467,7 @@ elseif ( ($submit || $confirm) && !$topic_has_new_posts )
 				}
 				else tracker_register(TORRENT_ATTACH_ID, 'newtopic', TOR_NOT_APPROVED);
 			}
-		}
+		}*/
 
 		// Update atom feed
 		update_atom('topic', $topic_id);

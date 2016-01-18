@@ -2229,8 +2229,6 @@ $lang['BT_ANNOUNCE_URL'] = 'Announce url';
 $lang['BT_ANNOUNCE_URL_EXPL'] = 'додаткові дозволені адреси можна задати в "includes/torrent_announce_urls.php"';
 $lang['BT_DISABLE_DHT'] = 'Заборонити DHT мережі';
 $lang['BT_DISABLE_DHT_EXPL'] = 'Заборонити обмін пiрами та DHT (рекомендовано для приватних мереж, тільки url announce)';
-$lang['BT_CHECK_ANNOUNCE_URL'] = 'Перевіряти announce url';
-$lang['BT_CHECK_ANNOUNCE_URL_EXPL'] = 'дозволити реєстрацію на трекері тільки якщо announce url входить до списка дозволених';
 $lang['BT_REPLACE_ANN_URL'] = 'Заміняти announce url';
 $lang['BT_REPLACE_ANN_URL_EXPL'] = 'заміняти оригінальний announce url у .torrent файлах на ваш';
 $lang['BT_DEL_ADDIT_ANN_URLS'] = 'Видалити всі додаткові announce urls';
@@ -2257,9 +2255,6 @@ $lang['BT_SHOW_DL_BUT_WILL'] = $lang['DLWILL'];
 $lang['BT_SHOW_DL_BUT_DOWN'] = $lang['DLDOWN'];
 $lang['BT_SHOW_DL_BUT_COMPL'] = $lang['DLCOMPLETE'];
 $lang['BT_SHOW_DL_BUT_CANCEL'] = $lang['DLCANCEL'];
-
-$lang['BT_ADD_AUTH_KEY_HEAD'] = 'Passkey';
-$lang['BT_ADD_AUTH_KEY'] = 'Автододавання passkey до торрент-файлів перед їх скачуванням';
 
 $lang['BT_TOR_BROWSE_ONLY_REG_HEAD'] = 'Torrent browser (трекер)';
 $lang['BT_TOR_BROWSE_ONLY_REG'] = 'Torrent browser (tracker.php) не доступний для гостей';

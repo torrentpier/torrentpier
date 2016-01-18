@@ -146,11 +146,27 @@ if ($tor_auth)
 	}
 }
 
-if ($tor_reged && $tor_info)
+if (!$tor_reged)
 {
-	$tor_size = ($tor_info['size']) ? $tor_info['size'] : 0;
-	$tor_id   = $tor_info['topic_id'];
-	$tor_type = $tor_info['tor_type'];
+	$template->assign_vars(array(
+		'SHOW_TOR_NOT_REGGED' => true,
+		'TRACKER_REG_LINK'    => $tr_reg_link,
+	));
+}
+else
+{
+	$tor_info = DB()->fetch_row("SELECT * FROM ". BB_BT_TORRENTS ." WHERE topic_id = $topic_id LIMIT 1");
+}
+
+if ($tor_reged && !$tor_info)
+{
+	//DB()->query("UPDATE ". BB_TOPICS ." SET tracker_status = 0 WHERE topic_id = $topic_id LIMIT 1");
+	//bb_die('Torrent status fixed');
+}
+
+if ($tor_reged)
+{
+	$tor_size = (int) $tor_info['size'];
 
 	// Magnet link
 	$passkey = DB()->fetch_row("SELECT auth_key FROM ". BB_BT_USERS ." WHERE user_id = ". (int) $bt_user_id ." LIMIT 1");
@@ -175,7 +191,7 @@ if ($tor_reged && $tor_info)
 		$sql = "SELECT user_status
 			FROM ". BB_BT_DLSTATUS ."
 			WHERE user_id = $bt_user_id
-				AND topic_id = $bt_topic_id
+				AND topic_id = $topic_id
 			LIMIT 1";
 	}
 
@@ -201,7 +217,6 @@ if ($tor_reged && $tor_info)
 
 	if (!$dl_allowed)
 	{
-		$template->assign_block_vars('postrow.attach.tor_reged', array());
 		$template->assign_vars(array(
 			'TOR_BLOCKED'     => true,
 			'TOR_BLOCKED_MSG' => sprintf($lang['BT_LOW_RATIO_FOR_DL'], round($user_ratio, 2), "search.php?dlu=$bt_user_id&amp;dlc=1"),
@@ -209,47 +224,31 @@ if ($tor_reged && $tor_info)
 	}
 	else
 	{
-		$template->assign_block_vars('postrow.attach.tor_reged', array(
-			'DOWNLOAD_NAME'   => $display_name,
-			'TRACKER_LINK'    => $tracker_link,
-			'ATTACH_ID'       => $attach_id,
-			'TOR_SILVER_GOLD' => $tor_type,
+		$template->assign_vars(array(
+			'DOWNLOAD_NAME'   => '['.$bb_cfg['server_name'].'].t' . $topic_id . '.torrent',
+			'TOR_SILVER_GOLD' => $tor_info['tor_type'],
 
-			// torrent status mod
 			'TOR_FROZEN'      => (!IS_AM) ? (isset($bb_cfg['tor_frozen'][$tor_info['tor_status']]) && !(isset($bb_cfg['tor_frozen_author_download'][$tor_info['tor_status']]) && $userdata['user_id'] == $tor_info['poster_id'])) ? true : '' : '',
 			'TOR_STATUS_TEXT' => $lang['TOR_STATUS_NAME'][$tor_info['tor_status']],
 			'TOR_STATUS_ICON' => $bb_cfg['tor_icons'][$tor_info['tor_status']],
 			'TOR_STATUS_BY'   => ($tor_info['checked_user_id'] && $is_auth['auth_mod']) ? ('<span title="'. bb_date($tor_info['checked_time']) .'"> &middot; '. profile_url($tor_info) .' &middot; <i>'. delta_time($tor_info['checked_time']) . $lang['TOR_BACK'] .'</i></span>') : '',
 			'TOR_STATUS_SELECT' => build_select('sel_status', array_flip($lang['TOR_STATUS_NAME']), TOR_APPROVED),
 			'TOR_STATUS_REPLY' => $bb_cfg['tor_comment'] && !IS_GUEST && in_array($tor_info['tor_status'], $bb_cfg['tor_reply']) && $userdata['user_id'] == $tor_info['poster_id'] && $t_data['topic_status'] != TOPIC_LOCKED,
-			//end torrent status mod
 
-			'S_UPLOAD_IMAGE'  => $upload_image,
-			'U_DOWNLOAD_LINK' => $download_link,
 			'DL_LINK_CLASS'   => (isset($bt_userdata['user_status'])) ? $dl_link_css[$bt_userdata['user_status']] : 'genmed',
 			'DL_TITLE_CLASS'  => (isset($bt_userdata['user_status'])) ? $dl_status_css[$bt_userdata['user_status']] : 'gen',
 			'FILESIZE'        => $tor_file_size,
 			'MAGNET'          => $tor_magnet,
 			'HASH'            => strtoupper(bin2hex($tor_info['info_hash'])),
-			'DOWNLOAD_COUNT'  => sprintf($lang['DOWNLOAD_NUMBER'], $download_count),
+			'DOWNLOAD_COUNT'  => sprintf($lang['DOWNLOAD_NUMBER'], 666/*$download_count*/),
 			'REGED_TIME'      => bb_date($tor_info['reg_time']),
 			'REGED_DELTA'     => delta_time($tor_info['reg_time']),
 			'TORRENT_SIZE'    => humn_size($tor_size),
 			'COMPLETED'       => sprintf($lang['DOWNLOAD_NUMBER'], $tor_info['complete_count']),
-		));
 
-		if ($comment)
-		{
-			$template->assign_block_vars('postrow.attach.tor_reged.comment', array('COMMENT' => $comment));
-		}
-	}
-
-	if ($bb_cfg['show_tor_info_in_dl_list'])
-	{
-		$template->assign_vars(array(
-			'SHOW_DL_LIST'          => true,
-			'SHOW_DL_LIST_TOR_INFO' => true,
-
+			'SHOW_TOR_REGGED'  => true,
+			'TRACKER_REG_LINK' => $tr_reg_link,
+			'AUTH_MOD'         => $is_auth['auth_mod'],
 			'TOR_SIZE'      => humn_size($tor_size),
 			'TOR_LONGEVITY' => delta_time($tor_info['reg_time']),
 			'TOR_COMPLETED' => declension($tor_info['complete_count'], 'times'),
@@ -257,7 +256,20 @@ if ($tor_reged && $tor_info)
 	}
 
 	// Show peers
-	if ($show_peers)
+	if ($tor_info['tor_status'] == TOR_CLOSED_CPHOLD)
+	{
+		$closed_by_cphold = true;
+
+		$template->assign_vars(array(
+			'TOR_CLOSED_BY_CPHOLD' => true,
+			'TOR_CONTROLS'         => false,
+			'DL_BUTTONS'           => false,
+			'CPHOLD_UID'           => $tor_info['tor_status_uid'],
+			'CPHOLD_NAME'          => $tor_status_username,
+			'CAN_OPEN_CH_RELEASE'  => ($is_auth['auth_mod'] || IS_CP_HOLDER),
+		));
+	}
+	else
 	{
 		// Sorting order in full mode
 		if ($s_mode == 'full')
@@ -303,14 +315,14 @@ if ($tor_reged && $tor_info)
 		{
 			$sql = "SELECT seeders, leechers, speed_up, speed_down
 				FROM ". BB_BT_TRACKER_SNAP ."
-				WHERE topic_id = $tor_id
+				WHERE topic_id = $topic_id
 				LIMIT 1";
 		}
 		else if ($s_mode == 'names')
 		{
 			$sql = "SELECT tr.user_id, tr.ip, tr.port, tr.remain, tr.seeder, u.username, u.user_rank
 				FROM ". BB_BT_TRACKER ." tr, ". BB_USERS ." u
-				WHERE tr.topic_id = $tor_id
+				WHERE tr.topic_id = $topic_id
 					AND u.user_id = tr.user_id
 				GROUP BY tr.ip, tr.user_id, tr.port, tr.seeder
 				ORDER BY u.username
@@ -324,7 +336,7 @@ if ($tor_reged && $tor_info)
 					tr.complete_percent, u.username, u.user_rank
 				FROM ". BB_BT_TRACKER ." tr
 				LEFT JOIN ". BB_USERS ." u ON u.user_id = tr.user_id
-				WHERE tr.topic_id = $tor_id
+				WHERE tr.topic_id = $topic_id
 				GROUP BY tr.ip, tr.user_id, tr.port, tr.seeder
 				ORDER BY $full_mode_order $full_mode_sort_dir
 				LIMIT $show_peers_limit";
@@ -489,10 +501,6 @@ if ($tor_reged && $tor_info)
 					$sp_up    = ($peer['speed_up'])   ? humn_size($peer['speed_up'],   0, 'KB') .'/s' : '-';
 					$sp_down  = ($peer['speed_down']) ? humn_size($peer['speed_down'], 0, 'KB') .'/s' : '-';
 
-					$bgr_class = (!($tr[$x] % 2)) ? $bgr_class_1 : $bgr_class_2;
-					$row_bgr   = ($change_peers_bgr_over) ? " class=\"$bgr_class\" onmouseover=\"this.className='$bgr_class_over';\" onmouseout=\"this.className='$bgr_class';\"" : '';
-					$tr[$x]++;
-
 					$template->assign_block_vars("$x_full.$x_row", array(
 						'ROW_BGR'        => $row_bgr,
 						'NAME'           => ($peer['update_time']) ? $name : "<s>$name</s>",
@@ -569,7 +577,7 @@ if ($tor_reged && $tor_info)
 		}
 	}
 
-	$template->assign_block_vars('tor_title', array('U_DOWNLOAD_LINK' => $download_link));
+	//$template->assign_block_vars('tor_title', array('U_DOWNLOAD_LINK' => $download_link));
 
 	if ($peers_cnt > $max_peers_before_overflow && $s_mode == 'full')
 	{
@@ -586,15 +594,14 @@ if ($bb_cfg['bt_allow_spmode_change'] && $s_mode != 'full')
 {
 	$template->assign_vars(array(
 		'PEERS_FULL_LINK'  => true,
-		'SPMODE_FULL_HREF' => "viewtopic.php?". POST_TOPIC_URL ."=$bt_topic_id&amp;spmode=full#seeders",
+		'SPMODE_FULL_HREF' => "viewtopic.php?". POST_TOPIC_URL ."=$topic_id&amp;spmode=full#seeders",
 	));
 }
 
 $template->assign_vars(array(
-	'SHOW_DL_LIST_LINK' => (($bb_cfg['bt_show_dl_list'] || $bb_cfg['allow_dl_list_names_mode']) && $t_data['topic_dl_type'] == TOPIC_DL_TYPE_DL),
+	'SHOW_DL_LIST_LINK' => (($bb_cfg['bt_show_dl_list'] || $bb_cfg['allow_dl_list_names_mode']) && $t_data['tracker_status']),
 	'SHOW_TOR_ACT'      => ($tor_reged && $show_peers && (!isset($bb_cfg['tor_no_tor_act'][$tor_info['tor_status']]) || IS_AM)),
 	'S_MODE_COUNT'      => ($s_mode == 'count'),
-	'S_MODE_NAMES'      => ($s_mode == 'names'),
 	'S_MODE_FULL'       => ($s_mode == 'full'),
 	'PEER_EXIST'        => ($seeders || $leechers || defined('SEEDER_EXIST') || defined('LEECHER_EXIST')),
 	'SEED_EXIST'        => ($seeders || defined('SEEDER_EXIST')),

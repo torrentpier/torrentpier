@@ -96,6 +96,13 @@ ajax.callback.posts = function(data) {
 	onkeyup  = "storeCaret(this);"
 >{MESSAGE}</textarea>
 
+<!-- IF SHOW_ATTACH -->
+<div id="file-up" style="display: none;">
+    <div id="file-up-box"></div>
+    <div id="file-up-desc" class="small" style="display: none;">максимальный размер: <b>{ATTACH_MAX_SIZE}</b>, файлы: <b>{ALLOWED_EXT}</b></div>
+</div>
+<!-- ENDIF -->
+
 <div class="mrg_8 tCenter">
 	<div id="post-buttons-block" style="display: none;">
 		<div class="pad_4" align="center">{CAPTCHA_HTML}</div>
@@ -122,6 +129,14 @@ function debounce (el_id, time_ms)
 }
 
 $('#post-submit-btn').click(function(event){
+    <!-- IF TOR_REQUIRED -->
+    if ( $('#file-up-btn').val() == '' ) {
+        event.stopPropagation();
+        alert('Вы забыли прикрепить торрент файл (кликните "загрузить файл")');
+        $('#file-up-a').removeClass('med').addClass('adm').animate({fontSize: '24px'}, 200).animate({fontSize: '16px'}, 200);
+        return false;
+    }
+    <!-- ENDIF / TOR_REQUIRED -->
 	$('#post-submit-btn').after('<input id="post-submit" type="hidden" name="post" value="1" />');
 });
 $('#post-js-warn').hide();

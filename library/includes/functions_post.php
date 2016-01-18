@@ -121,11 +121,11 @@ function submit_post($mode, &$post_data, &$message, &$meta, &$forum_id, &$topic_
 
 	if ($mode == 'newtopic' || ($mode == 'editpost' && $post_data['first_post']))
 	{
-		$topic_dl_type = (isset($_POST['topic_dl_type']) && ($post_info['allow_reg_tracker'] || $is_auth['auth_mod'])) ? TOPIC_DL_TYPE_DL : TOPIC_DL_TYPE_NORMAL;
+		$topic_dl_type = (isset($_POST['tracker_status']) && ($post_info['allow_reg_tracker'] || $is_auth['auth_mod'])) ? 1 : 0;
 
 		$sql_insert = "
 			INSERT INTO
-				" . BB_TOPICS . " (topic_title, topic_poster, topic_time, forum_id, topic_status, topic_type, topic_dl_type)
+				" . BB_TOPICS . " (topic_title, topic_poster, topic_time, forum_id, topic_status, topic_type, tracker_status)
 			VALUES
 				('$post_subject', " . $userdata['user_id'] . ", $current_time, $forum_id, " . TOPIC_UNLOCKED . ", $topic_type, $topic_dl_type)
 		";
@@ -136,7 +136,7 @@ function submit_post($mode, &$post_data, &$message, &$meta, &$forum_id, &$topic_
 			SET
 				topic_title = '$post_subject',
 				topic_type = $topic_type,
-				topic_dl_type = $topic_dl_type
+				tracker_status = $topic_dl_type
 			WHERE
 				topic_id = $topic_id
 		";

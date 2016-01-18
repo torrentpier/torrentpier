@@ -118,7 +118,7 @@ $template->assign_vars(array(
 	'IMG'                         => $_main,
 	'TEXT_BUTTONS'                => $bb_cfg['text_buttons'],
 	'POST_BTN_SPACER'             => ($bb_cfg['text_buttons']) ? '&nbsp;' : '',
-	'TOPIC_ATTACH_ICON'           => '<img src="'. $_main .'icon_clip.gif" alt="" />',
+	'TOPIC_ATTACH_ICON'           => '<img src="'. $_img .'icon_clip.gif" alt="" />',
 	'OPEN_MENU_IMG_ALT'           => '<img src="'. $_main .'menu_open_1.gif" class="menu-alt1" alt="" />',
 	'TOPIC_LEFT_COL_SPACER_WITDH' => $bb_cfg['topic_left_column_witdh'] - 8, // 8px padding
 	'POST_IMG_WIDTH_DECR_JS'      => $bb_cfg['topic_left_column_witdh'] + $bb_cfg['post_img_width_decr'],
@@ -154,7 +154,6 @@ if (!empty($page_cfg['load_tpl_vars']) AND $vars = array_flip($page_cfg['load_tp
 
 			'EMAIL_URL'       => BB_ROOT ."profile.php?mode=email&amp;u=",
 			'FORUM_URL'       => BB_ROOT . FORUM_URL,
-			'ICQ_URL'         => 'http://www.icq.com/people/',
 			'PM_URL'          => BB_ROOT . PM_URL,
 			'PROFILE_URL'     => BB_ROOT . PROFILE_URL,
 		));

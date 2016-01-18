@@ -306,9 +306,8 @@ function tracker_register ($attach_id, $mode = '', $tor_status = TOR_NOT_APPROVE
 
 	if ($row = DB()->fetch_row("SELECT topic_id FROM ". BB_BT_TORRENTS ." WHERE info_hash = '$info_hash_sql' LIMIT 1"))
 	{
-		$msg = sprintf($lang['BT_REG_FAIL_SAME_HASH'], TOPIC_URL . $row['topic_id']);
-		bb_die($msg);
 		set_die_append_msg($forum_id, $topic_id);
+		bb_die(sprintf($lang['BT_REG_FAIL_SAME_HASH'], TOPIC_URL . $row['topic_id']));
 	}
 
 	$totallen = 0;
@@ -331,8 +330,8 @@ function tracker_register ($attach_id, $mode = '', $tor_status = TOR_NOT_APPROVE
 
 	$size = sprintf('%.0f', (float) $totallen);
 
-	$columns = ' info_hash,       post_id,  poster_id,  topic_id,  forum_id,  attach_id,    size,  reg_time,  tor_status';
-	$values = "'$info_hash_sql', $post_id, $poster_id, $topic_id, $forum_id, $attach_id, '$size', $reg_time, $tor_status";
+	$columns = ' info_hash,       poster_id,  topic_id,  forum_id,   size,   reg_time,  tor_status';
+	$values = "'$info_hash_sql', $poster_id, $topic_id, $forum_id, '$size', $reg_time, $tor_status";
 
 	$sql = "INSERT INTO ". BB_BT_TORRENTS ." ($columns) VALUES ($values)";
 
@@ -347,87 +346,97 @@ function tracker_register ($attach_id, $mode = '', $tor_status = TOR_NOT_APPROVE
 		bb_die('Could not register torrent on tracker');
 	}
 
-	// update tracker status for this attachment
-	$sql = 'UPDATE '. BB_ATTACHMENTS_DESC ." SET tracker_status = 1 WHERE attach_id = $attach_id LIMIT 1";
+	// Set topic status
+	DB()->query("UPDATE ". BB_TOPICS ." SET tracker_status = 1 WHERE topic_id = $topic_id LIMIT 1");
 
-	if (!DB()->sql_query($sql))
-	{
-		bb_die('Could not update torrent status #2');
-	}
-
-	// set DL-Type for topic
-	if ($bb_cfg['bt_set_dltype_on_tor_reg'])
-	{
-		$sql = 'UPDATE '. BB_TOPICS .' SET topic_dl_type = '. TOPIC_DL_TYPE_DL ." WHERE topic_id = $topic_id LIMIT 1";
-
-		if (!$result = DB()->sql_query($sql))
-		{
-			bb_die('Could not update topics table #2');
-		}
-	}
-
-	if ($tr_cfg['tor_topic_up'])
-	{
-		DB()->query("UPDATE ". BB_TOPICS ." SET topic_last_post_time = GREATEST(topic_last_post_time, ". (TIMENOW - 3*86400) .") WHERE topic_id = $topic_id LIMIT 1");
-	}
+	// Clean all peers for that torrent
+	tracker_rm_torrent($topic_id);
 
 	if ($reg_mode == 'request' || $reg_mode == 'newtopic')
 	{
 		set_die_append_msg($forum_id, $topic_id);
-		$mess = sprintf($lang['BT_REGISTERED'], DOWNLOAD_URL . $attach_id);
-		bb_die($mess);
+		bb_die(sprintf($lang['BT_REGISTERED'], DOWNLOAD_URL . $topic_id));
+	}
+	else if ($reg_mode == 'mcp_tor_register')
+	{
+		return 'OK';
 	}
 
 	return true;
 }
 
-function send_torrent_with_passkey ($filename)
+function delete_torrent ($topic_id)
 {
-	global $attachment, $auth_pages, $userdata, $bb_cfg, $tr_cfg, $lang;
+	tracker_unregister($topic_id);
+	delete_attach($topic_id, 8);
 
-	if (!$bb_cfg['bt_add_auth_key'] || $attachment['extension'] !== TORRENT_EXT || !$size = @filesize($filename))
+	return true;
+}
+
+function change_tor_status ($topic_id, $tor_status)
+{
+	global $topic_id, $userdata;
+
+	$tor_status = (int) $tor_status;
+
+	$tor = DB()->fetch_row("SELECT forum_id, poster_id FROM ". BB_BT_TORRENTS ." WHERE topic_id = ". intval($topic_id) ." LIMIT 1");
+
+	torrent_auth_check($tor['forum_id'], $tor['poster_id']);
+
+	DB()->query("
+		UPDATE ". BB_BT_TORRENTS ." SET
+			tor_status = $tor_status,
+			checked_user_id = {$userdata['user_id']},
+			checked_time = '". TIMENOW ."'
+		WHERE topic_id = $topic_id
+		LIMIT 1
+	");
+}
+
+// Set gold / silver type for torrent
+function change_tor_type ($topic_id, $tor_status_gold)
+{
+	global $lang, $bb_cfg;
+
+	if (!IS_AM) bb_die($lang['ONLY_FOR_MOD']);
+
+	$tor_status_gold = intval($tor_status_gold);
+	$info_hash       = null;
+
+	DB()->query("UPDATE ". BB_BT_TORRENTS ." SET tor_type = $tor_status_gold WHERE topic_id = $topic_id LIMIT 1");
+
+	// Ocelot
+	if ($bb_cfg['ocelot']['enabled'])
 	{
-		return;
-	}
-
-	$post_id = $poster_id = $passkey_val = '';
-	$user_id = $userdata['user_id'];
-	$attach_id = $attachment['attach_id'];
-
-	if (!$passkey_key = $bb_cfg['passkey_key'])
-	{
-		bb_die('Could not add passkey (wrong config $bb_cfg[\'passkey_key\'])');
-	}
-
-	// Get $post_id & $poster_id
-	foreach ($auth_pages as $rid => $row)
-	{
-		if ($row['attach_id'] == $attach_id)
+		if ($row = DB()->fetch_row("SELECT info_hash FROM ". BB_BT_TORRENTS ." WHERE topic_id = $topic_id LIMIT 1"))
 		{
-			$post_id = $row['post_id'];
-			$poster_id = $row['user_id_1'];
-			break;
+			$info_hash = $row['info_hash'];
 		}
+		ocelot_update_tracker('update_torrent', array('info_hash' => rawurlencode($info_hash), 'freetorrent' => $tor_status_gold));
 	}
+}
 
-	// Get $topic_id
-	$topic_id_sql = 'SELECT topic_id FROM ' . BB_POSTS . ' WHERE post_id = ' . (int) $post_id;
-	if (!($topic_id_result = DB()->sql_query($topic_id_sql)))
-	{
-		bb_die('Could not query post information');
-	}
-	$topic_id_row = DB()->sql_fetchrow($topic_id_result);
-	$topic_id = $topic_id_row['topic_id'];
+function send_torrent_with_passkey ($t_data)
+{
+	global $userdata, $bb_cfg, $tr_cfg, $lang;
 
-	if (!$attachment['tracker_status'])
+	$topic_id   = $t_data['topic_id'];
+	$poster_id  = $t_data['topic_poster'];
+	$user_id    = $t_data['user_id'];
+
+	// Запрет на скачивание закрытого или незарегистрированного торрента
+	$row = DB()->fetch_row("SELECT tor_status FROM ". BB_BT_TORRENTS ." WHERE topic_id = $topic_id LIMIT 1");
+
+	if (!isset($row['tor_status']))
 	{
 		bb_die($lang['PASSKEY_ERR_TOR_NOT_REG']);
 	}
-
-	if (bf($userdata['user_opt'], 'user_opt', 'dis_passkey') && !IS_GUEST)
+	else if (isset($bb_cfg['tor_frozen'][$row['tor_status']]))
 	{
-		bb_die('Could not add passkey');
+		if (!$t_data['is_am']) bb_die("Раздача имеет статус: <b>{$lang['tor_status'][$row['tor_status']]}</b><br /><br />Скачивание запрещено");
 	}
+
+	$passkey_val = '';
 
 	if ($bt_userdata = get_bt_userdata($user_id))
 	{
@@ -446,19 +455,16 @@ function send_torrent_with_passkey ($filename)
 		}
 	}
 
-	// Ratio limits
+	// Ratio limit for torrents dl
+	$user_ratio = get_bt_ratio($bt_userdata);
 	$min_ratio = $bb_cfg['bt_min_ratio_allow_dl_tor'];
 
-	if ($min_ratio && $user_id != $poster_id && ($user_ratio = get_bt_ratio($bt_userdata)) !== null)
+	if ($min_ratio && $user_id != $poster_id && !is_null($user_ratio))
 	{
-		if ($user_ratio < $min_ratio && $post_id)
+		if ($user_ratio < $min_ratio)
 		{
 			$dl = DB()->fetch_row("
-				SELECT dl.user_status
-				FROM ". BB_POSTS ." p
-				LEFT JOIN ". BB_BT_DLSTATUS ." dl ON dl.topic_id = p.topic_id AND dl.user_id = $user_id
-				WHERE p.post_id = $post_id
-				LIMIT 1
+				SELECT user_status FROM ". BB_BT_DLSTATUS ." WHERE topic_id = $topic_id AND user_id = $user_id LIMIT 1
 			");
 
 			if (!isset($dl['user_status']) || $dl['user_status'] != DL_STATUS_COMPLETE)
@@ -468,15 +474,67 @@ function send_torrent_with_passkey ($filename)
 		}
 	}
 
-	// Announce URL
-	$ann_url = $bb_cfg['bt_announce_url'];
+	/*
+	// лимит количества скачиваний торрент-файлов в день
+	if ($user_id != $poster_id && !$t_data['is_am'])
+	{
+		// лимит
+		$daily_dls_limit = 50;
 
+		if (!is_null($user_ratio) && $user_ratio >= 1 && $bt_userdata['u_up_total'] >= 107374182400 )// 100 GB
+		{
+			$daily_dls_limit = 100;
+		}
+
+		// число скачиваний
+		$daily_dls_cnt = (int) DB('dls')->fetch_row("SELECT dls_cnt FROM ". BB_USER_DLS_DAILY ." WHERE user_id = $user_id LIMIT 1", 'dls_cnt');
+
+		if ($daily_dls_cnt >= $daily_dls_limit)
+		{
+			// повторное скачивание
+			$can_redownload = DB('dls')->fetch_row("SELECT 1 FROM ". BB_BT_DLS_COUNT ." WHERE topic_id = $topic_id AND user_id = $user_id LIMIT 1");
+
+			if (!$can_redownload)
+			{
+				bb_log(join("\t", array(date('H:i:s'), $user->ip, $user->id, $topic_id))."\n", 'dls/'.date('m-d') .'-limit');
+				set_die_append_msg(null, $topic_id);
+				bb_die("Вы уже исчерпали суточный лимит скачиваний торрент-файлов<br /><br />Ваш текущий лимит: $daily_dls_limit в день");
+			}
+			else
+			{
+				bb_log(join("\t", array(date('H:i:s'), $user->ip, $user->id, $topic_id))."\n", 'dls/'.date('m-d') .'-redown');
+			}
+		}
+
+		// счетчик количества скачиваний торрент-файла (для `complete_count` в BB_BT_TORRENTS)
+		DB('dls')->query("INSERT IGNORE INTO ". BB_BT_DLS_COUNT ." (topic_id, user_id) VALUES ($topic_id, $user_id)");
+
+		// если файл еще не был скачан этим юзером, увеличиваем счетчик скачиваний
+		if (DB('dls')->affected_rows() > 0)
+		{
+			DB('dls')->query("
+					INSERT IGNORE INTO ". BB_USER_DLS_DAILY ." (user_id, dls_cnt) VALUES ($user_id, 1) ON DUPLICATE KEY UPDATE dls_cnt = dls_cnt + 1
+				");
+		}
+	}
+	*/
+
+	$filename = get_attach_path($topic_id, 8);
+	if (!file_exists($filename))
+	{
+		bb_simple_die('File not found');
+	}
 	if (!$tor = bdecode_file($filename))
 	{
-		bb_die('This is not a bencoded file');
+		bb_simple_die('This is not a bencoded file');
 	}
 
-	$announce = $bb_cfg['ocelot']['enabled'] ? strval($bb_cfg['ocelot']['url'] .$passkey_val. "/announce") : strval($ann_url . "?$passkey_key=$passkey_val");
+	// tor cleanup
+	unset($tor['codepage']);
+	unset($tor['nodes']);
+
+	// Announce URL
+	$announce = $bb_cfg['ocelot']['enabled'] ? strval($bb_cfg['ocelot']['url'] .$passkey_val. "/announce") : strval($bb_cfg['bt_announce_url'] . "?{$bb_cfg['passkey_key']}=$passkey_val");
 
 	// Replace original announce url with tracker default
 	if ($bb_cfg['bt_replace_ann_url'] || !isset($tor['announce']))
@@ -491,7 +549,7 @@ function send_torrent_with_passkey ($filename)
 	}
 	elseif (isset($tor['announce-list']))
 	{
-		$tor['announce-list'] = array_merge($tor['announce-list'], array(array($announce)));
+		$tor['announce-list'] = array_merge($tor['announce-list'], [[$announce]]);
 	}
 
 	// Add retracker
@@ -501,14 +559,14 @@ function send_torrent_with_passkey ($filename)
 		{
 			if (!isset($tor['announce-list']))
 			{
-				$tor['announce-list'] = array(
-					array($announce),
-					array($tr_cfg['retracker_host'])
-				);
+				$tor['announce-list'] = [
+					[$announce],
+					[$tr_cfg['retracker_host']]
+				];
 			}
 			else
 			{
-				$tor['announce-list'] = array_merge($tor['announce-list'], array(array($tr_cfg['retracker_host'])));
+				$tor['announce-list'] = array_merge($tor['announce-list'], [[$tr_cfg['retracker_host']]]);
 			}
 		}
 	}
@@ -546,7 +604,7 @@ function send_torrent_with_passkey ($filename)
 
 function generate_passkey ($user_id, $force_generate = false)
 {
-	global $bb_cfg, $lang, $sql;
+	global $bb_cfg, $lang;
 
 	$user_id = (int) $user_id;
 
@@ -567,6 +625,9 @@ function generate_passkey ($user_id, $force_generate = false)
 			}
 		}
 	}
+
+	// Delete all active user records in tracker
+	tracker_rm_user($user_id);
 
 	for ($i=0; $i < 20; $i++)
 	{
@@ -601,40 +662,14 @@ function generate_passkey ($user_id, $force_generate = false)
 	return false;
 }
 
-function tracker_rm_torrent ($topic_id)
-{
-	return DB()->sql_query("DELETE FROM ". BB_BT_TRACKER ." WHERE topic_id = ". (int) $topic_id);
-}
-
-function tracker_rm_user ($user_id)
-{
-	return DB()->sql_query("DELETE FROM ". BB_BT_TRACKER ." WHERE user_id = ". (int) $user_id);
-}
-
-function get_registered_torrents ($id, $mode)
-{
-	$field = ($mode == 'topic') ? 'topic_id' : 'post_id';
-
-	$sql = "SELECT topic_id FROM ". BB_BT_TORRENTS ." WHERE $field = $id LIMIT 1";
-
-	if (!$result = DB()->sql_query($sql))
-	{
-		bb_die('Could not query torrent id');
-	}
-
-	if ($rowset = @DB()->sql_fetchrowset($result))
-	{
-		return $rowset;
-	}
-	else
-	{
-		return false;
-	}
-}
-
 function torrent_error_exit ($message)
 {
 	global $reg_mode, $return_message, $lang;
+
+	if (isset($reg_mode) && $reg_mode == 'mcp_tor_register')
+	{
+		return $message;
+	}
 
 	$msg = '';
 
@@ -648,6 +683,16 @@ function torrent_error_exit ($message)
 	}
 
 	bb_die($msg . $message);
+}
+
+function tracker_rm_torrent ($topic_id)
+{
+	return DB()->sql_query("DELETE FROM ". BB_BT_TRACKER ." WHERE topic_id = ". (int) $topic_id);
+}
+
+function tracker_rm_user ($user_id)
+{
+	return DB()->sql_query("DELETE FROM ". BB_BT_TRACKER ." WHERE user_id = ". (int) $user_id);
 }
 
 function ocelot_update_tracker ($action, $updates)

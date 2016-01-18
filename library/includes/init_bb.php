@@ -234,9 +234,6 @@ $bb_cfg['tor_no_tor_act'] = array(
 // Table names
 define('BUF_TOPIC_VIEW',          'buf_topic_view');
 define('BUF_LAST_SEEDER',         'buf_last_seeder');
-define('BB_ATTACH_CONFIG',        'bb_attachments_config');
-define('BB_ATTACHMENTS_DESC',     'bb_attachments_desc');
-define('BB_ATTACHMENTS',          'bb_attachments');
 define('BB_AUTH_ACCESS_SNAP',     'bb_auth_access_snap');
 define('BB_AUTH_ACCESS',          'bb_auth_access');
 define('BB_BANLIST',              'bb_banlist');
@@ -250,8 +247,6 @@ define('BB_CATEGORIES',           'bb_categories');
 define('BB_CONFIG',               'bb_config');
 define('BB_CRON',                 'bb_cron');
 define('BB_DISALLOW',             'bb_disallow');
-define('BB_EXTENSION_GROUPS',     'bb_extension_groups');
-define('BB_EXTENSIONS',           'bb_extensions');
 define('BB_FORUMS',               'bb_forums');
 define('BB_GROUPS',               'bb_groups');
 define('BB_LOG',                  'bb_log');
@@ -274,11 +269,6 @@ define('BB_TOPICS_WATCH',         'bb_topics_watch');
 define('BB_USER_GROUP',           'bb_user_group');
 define('BB_USERS',                'bb_users');
 define('BB_WORDS',                'bb_words');
-
-define('TORRENT_EXT', 'torrent');
-
-define('TOPIC_DL_TYPE_NORMAL', 0);
-define('TOPIC_DL_TYPE_DL',     1);
 
 define('SHOW_PEERS_COUNT', 1);
 define('SHOW_PEERS_NAMES', 2);

@@ -2,15 +2,15 @@
 <script type="text/javascript">
 ajax.openedPosts = {};
 
-ajax.view_post = function(post_id, src) {
-	if (!ajax.openedPosts[post_id]) {
+ajax.view_post = function(topic_id, src) {
+	if (!ajax.openedPosts[topic_id]) {
 		ajax.exec({
 			action  : 'view_post',
-			post_id : post_id
+			topic_id : topic_id
 		});
 	}
 	else {
-		var $post = $('#post_'+post_id);
+		var $post = $('#post_'+topic_id);
 		if ($post.is(':visible')) {
 			$post.hide();
 		}	else {
@@ -21,29 +21,29 @@ ajax.view_post = function(post_id, src) {
 };
 
 ajax.callback.view_post = function(data) {
-	var post_id = data.post_id;
-	var $tor = $('#tor_'+post_id);
-	window.location.href='#tor_'+post_id;
+	var topic_id = data.topic_id;
+	var $tor = $('#tor_'+topic_id);
+	window.location.href='#tor_'+topic_id;
 	$('#post-row tr')
 		.clone()
-		.attr({ id: 'post_'+post_id })
+		.attr({ id: 'post_'+topic_id })
 		.find('div.post_body').html(data.post_html).end()
 		.find('a.tLink').attr({ href: $('a.tLink', $tor).attr('href') }).end()
 		.find('a.dLink').attr({ href: $('a.tr-dl', $tor).attr('href') }).end()
 		.insertAfter($tor)
 	;
-	initPostBBCode('#post_'+post_id);
+	initPostBBCode('#post_'+topic_id);
 	var maxH   = screen.height - 290;
 	var maxW   = screen.width - 60;
-	var $post  = $('div.post_wrap', $('#post_'+post_id));
-	var $links = $('div.post_links', $('#post_'+post_id));
+	var $post  = $('div.post_wrap', $('#post_'+topic_id));
+	var $links = $('div.post_links', $('#post_'+topic_id));
 	$post.css({ maxWidth: maxW, maxHeight: maxH });
 	$links.css({ maxWidth: maxW });
 	if ($.browser.msie) {
 		if ($post.height() > maxH) { $post.height(maxH); }
 		if ($post.width() > maxW)  { $post.width(maxW); $links.width(maxW); }
 	}
-	ajax.openedPosts[post_id] = true;
+	ajax.openedPosts[topic_id] = true;
 };
 </script>
 
@@ -393,7 +393,7 @@ $(function(){
 </tr>
 </thead>
 <!-- BEGIN tor -->
-<tr class="tCenter <!-- IF SHOW_CURSOR -->hl-tr<!-- ENDIF -->" id="tor_{tor.POST_ID}">
+<tr class="tCenter <!-- IF SHOW_CURSOR -->hl-tr<!-- ENDIF -->" id="tor_{tor.TOPIC_ID}">
 	<td class="row1"><!-- IF tor.USER_AUTHOR --><p style="padding-bottom: 3px">&nbsp;<b>&reg;</b>&nbsp;</p><!-- ELSEIF tor.IS_NEW -->{MINIPOST_IMG_NEW}<!-- ELSE -->{MINIPOST_IMG}<!-- ENDIF --></td>
 	<td class="row1 tCenter" title="{tor.TOR_STATUS_TEXT}">{tor.TOR_STATUS_ICON}</td>
 	<!-- IF SHOW_CAT -->
@@ -403,7 +403,7 @@ $(function(){
 	<td class="row1"><a class="gen" href="{TR_FORUM_URL}{tor.FORUM_ID}">{tor.FORUM_NAME}</a></td>
 	<!-- ENDIF -->
 	<td class="row4 med tLeft">
-		<a class="{tor.DL_CLASS}<!-- IF AJAX_TOPICS --> folded2<!-- ENDIF --> tLink" <!-- IF AJAX_TOPICS -->onclick="ajax.view_post({tor.POST_ID}, this); return false;"<!-- ENDIF --> href="{TOPIC_URL}{tor.TOPIC_ID}"><!-- IF tor.TOR_FROZEN -->{tor.TOPIC_TITLE}<!-- ELSE -->{tor.TOR_TYPE}<b>{tor.TOPIC_TITLE}</b><!-- ENDIF --></a>
+		<a class="{tor.DL_CLASS}<!-- IF AJAX_TOPICS --> folded2<!-- ENDIF --> tLink" <!-- IF AJAX_TOPICS -->onclick="ajax.view_post({tor.TOPIC_ID}, this); return false;"<!-- ENDIF --> href="{TOPIC_URL}{tor.TOPIC_ID}"><!-- IF tor.TOR_FROZEN -->{tor.TOPIC_TITLE}<!-- ELSE -->{tor.TOR_TYPE}<b>{tor.TOPIC_TITLE}</b><!-- ENDIF --></a>
 	    <!-- IF SHOW_TIME_TOPICS --><div class="tr_tm">{tor.TOPIC_TIME}</div><!-- ENDIF -->
 	</td>
 	<!-- IF SHOW_AUTHOR -->

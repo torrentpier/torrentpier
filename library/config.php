@@ -71,8 +71,8 @@ $domain_name = 'torrentpier.me'; // enter here your primary domain name of your 
 $domain_name = (!empty($_SERVER['SERVER_NAME'])) ? $_SERVER['SERVER_NAME'] : $domain_name;
 
 // Version info
-$bb_cfg['tp_version']       = '2.1.6';
-$bb_cfg['tp_release_date']  = '**-03-2015';
+$bb_cfg['tp_version']       = '2.2.0';
+$bb_cfg['tp_release_date']  = '1/06/2015';
 $bb_cfg['tp_release_state'] = 'ALPHA';
 
 // Database
@@ -192,7 +192,6 @@ $tr_cfg = array(
 	'limit_concurrent_ips'  => false,
 	'limit_seed_ips'        => 0,
 	'limit_leech_ips'       => 0,
-	'tor_topic_up'          => true,
 	'gold_silver_enabled'   => true,
 	'retracker'             => true,
 	'retracker_host'        => 'http://retracker.local/announce',
@@ -268,6 +267,7 @@ define('TEMPLATES_DIR', BB_PATH .'/styles/templates/'        );
 
 // URL's
 $bb_cfg['ajax_url']    = 'ajax.php';     #  "http://{$_SERVER['SERVER_NAME']}/ajax.php"
+$bb_cfg['dl_url']      = 'dl.php?t=';    #  "http://{$domain_name}/dl.php"
 $bb_cfg['login_url']   = 'login.php';    #  "http://{$domain_name}/login.php"
 $bb_cfg['posting_url'] = 'posting.php';  #  "http://{$domain_name}/posting.php"
 $bb_cfg['pm_url']      = 'privmsg.php';  #  "http://{$domain_name}/privmsg.php"

@@ -42,10 +42,6 @@
 	<td><label for="bt_disable_dht1"><input type="radio" name="bt_disable_dht" id="bt_disable_dht1" value="1" {BT_DISABLE_DHT_YES} /> {L_BT_DISABLE_DHT_YES}&nbsp;</label><label for="bt_disable_dht2">&nbsp;<input type="radio" name="bt_disable_dht" id="bt_disable_dht2" value="0" {BT_DISABLE_DHT_NO} /> {L_BT_DISABLE_DHT_NO} &nbsp;</label></td>
 </tr>
 <tr>
-	<td><h4>{L_BT_CHECK_ANNOUNCE_URL}</h4><h6>{L_BT_CHECK_ANNOUNCE_URL_EXPL}</h6></td>
-	<td><label for="bt_check_announce_url1"><input type="radio" name="bt_check_announce_url" id="bt_check_announce_url1" value="1" {BT_CHECK_ANNOUNCE_URL_YES} /> {L_BT_CHECK_ANNOUNCE_URL_YES}&nbsp;</label><label for="bt_check_announce_url2">&nbsp;<input type="radio" name="bt_check_announce_url" id="bt_check_announce_url2" value="0" {BT_CHECK_ANNOUNCE_URL_NO} /> {L_BT_CHECK_ANNOUNCE_URL_NO} &nbsp;</label></td>
-</tr>
-<tr>
 	<td><h4>{L_BT_REPLACE_ANN_URL}</h4><h6>{L_BT_REPLACE_ANN_URL_EXPL}</h6></td>
 	<td><label for="bt_replace_ann_url1"><input type="radio" name="bt_replace_ann_url" id="bt_replace_ann_url1" value="1" {BT_REPLACE_ANN_URL_YES} /> {L_BT_REPLACE_ANN_URL_YES}&nbsp;</label><label for="bt_replace_ann_url2">&nbsp;<input type="radio" name="bt_replace_ann_url" id="bt_replace_ann_url2" value="0" {BT_REPLACE_ANN_URL_NO} /> {L_BT_REPLACE_ANN_URL_NO} &nbsp;</label></td>
 </tr>
@@ -130,14 +126,6 @@
 <tr>
 	<td><h4>{L_BT_UNSET_DLTYPE_ON_TOR_UNREG}</h4></td>
 	<td><label for="bt_unset_dltype_on_tor_unreg1"><input type="radio" name="bt_unset_dltype_on_tor_unreg" id="bt_unset_dltype_on_tor_unreg1" value="1" {BT_UNSET_DLTYPE_ON_TOR_UNREG_YES} /> {L_BT_UNSET_DLTYPE_ON_TOR_UNREG_YES}&nbsp;</label><label for="bt_unset_dltype_on_tor_unreg2">&nbsp;<input type="radio" name="bt_unset_dltype_on_tor_unreg" id="bt_unset_dltype_on_tor_unreg2" value="0" {BT_UNSET_DLTYPE_ON_TOR_UNREG_NO} /> {L_BT_UNSET_DLTYPE_ON_TOR_UNREG_NO} &nbsp;</label></td>
-</tr>
-
-<tr>
-	<th colspan="2">{L_BT_ADD_AUTH_KEY_HEAD}</th>
-</tr>
-<tr>
-	<td><h4>{L_BT_ADD_AUTH_KEY}</h4></td>
-	<td><label for="bt_add_auth_key1"><input type="radio" name="bt_add_auth_key" id="bt_add_auth_key1" value="1" {BT_ADD_AUTH_KEY_YES} /> {L_BT_ADD_AUTH_KEY_YES}&nbsp;</label><label for="bt_add_auth_key2">&nbsp;<input type="radio" name="bt_add_auth_key" id="bt_add_auth_key2" value="0" {BT_ADD_AUTH_KEY_NO} /> {L_BT_ADD_AUTH_KEY_NO} &nbsp;</label></td>
 </tr>
 
 <tr>

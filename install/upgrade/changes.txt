@@ -65,3 +65,13 @@ ALTER TABLE `bb_topics` ADD `attach_ext_id` TINYINT(4) NOT NULL DEFAULT '0' AFTE
 ALTER TABLE `bb_topics` ADD `filesize` MEDIUMINT(8) UNSIGNED NOT NULL DEFAULT '0' AFTER `attach_ext_id`;
 DELETE FROM `bb_config` WHERE `config_name` = 'new_tpls';
 ALTER TABLE `bb_log` DROP COLUMN `log_username`;
+ALTER TABLE `bb_topics` CHANGE `topic_dl_type` `tracker_status` TINYINT(1) NOT NULL DEFAULT '0';
+ALTER TABLE `bb_topics` ADD `tracker_id` TINYINT(4) NOT NULL DEFAULT '0' AFTER `topic_moved_id`;
+ALTER TABLE `bb_bt_torrents` DROP `post_id`;
+DELETE FROM `bb_config` WHERE `config_name` = 'bt_add_auth_key';
+DELETE FROM `bb_config` WHERE `config_name` = 'bt_check_announce_url';
+ALTER TABLE `bb_forums` ADD `forum_last_topic_time` INT NOT NULL AFTER `forum_last_post_id`;
+DROP TABLE IF EXISTS `bb_extensions`;
+DROP TABLE IF EXISTS `bb_extension_groups`;
+define('BB_ATTACHMENTS_DESC', 'bb_attachments_desc'); - удалить при апгрейде
+define('BB_ATTACHMENTS', 'bb_attachments'); - удалить при апгрейде
