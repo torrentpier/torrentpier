@@ -732,8 +732,12 @@ function replace_quote ($str, $double = true, $single = true)
 }
 
 /**
-* Build simple hidden fields from array
-*/
+ * Build simple hidden fields from array
+ *
+ * @param $fields_ary
+ *
+ * @return string
+ */
 function build_hidden_fields ($fields_ary)
 {
 	$out = "\n";
@@ -759,6 +763,12 @@ function build_hidden_fields ($fields_ary)
 /**
  * Choost russian word declension based on numeric [from dklab.ru]
  * Example for $expressions: array("ответ", "ответа", "ответов")
+ *
+ * @param        $int
+ * @param        $expressions
+ * @param string $format
+ *
+ * @return string
  */
 function declension ($int, $expressions, $format = '%1$s %2$s')
 {
@@ -827,6 +837,10 @@ function url_arg ($url, $arg, $value, $amp = '&amp;')
 
 /**
  * Adds commas between every group of thousands
+ *
+ * @param $number
+ *
+ * @return string
  */
 function commify ($number)
 {
@@ -835,6 +849,13 @@ function commify ($number)
 
 /**
  * Returns a size formatted in a more human-friendly format, rounded to the nearest GB, MB, KB..
+ *
+ * @param        $size
+ * @param null   $rounder
+ * @param null   $min
+ * @param string $space
+ *
+ * @return string
  */
 function humn_size ($size, $rounder = null, $min = null, $space = '&nbsp;')
 {
@@ -948,12 +969,18 @@ function select_get_val ($key, &$val, $options_ary, $default, $num = true)
 }
 
 /**
-* set_var
-*
-* Set variable, used by {@link request_var the request_var function}
-*
-* @access private
-*/
+ * set_var
+ *
+ * Set variable, used by {@link request_var the request_var function}
+ *
+ * @access private
+ *
+ * @param      $result
+ * @param      $var
+ * @param      $type
+ * @param bool $multibyte
+ * @param bool $strip
+ */
 function set_var (&$result, $var, $type, $multibyte = false, $strip = true)
 {
 	settype($var, $type);
@@ -980,10 +1007,17 @@ function set_var (&$result, $var, $type, $multibyte = false, $strip = true)
 }
 
 /**
-* request_var
-*
-* Used to get passed variable
-*/
+ * request_var
+ *
+ * Used to get passed variable
+ *
+ * @param      $var_name
+ * @param      $default
+ * @param bool $multibyte
+ * @param bool $cookie
+ *
+ * @return array
+ */
 function request_var ($var_name, $default, $multibyte = false, $cookie = false)
 {
 	if (!$cookie && isset($_COOKIE[$var_name]))
@@ -2110,6 +2144,10 @@ function print_confirmation ($tpl_vars)
  *
  *  $mode = 'no_header'
  *          'no_footer'
+ *
+ * @param        $args
+ * @param string $type
+ * @param string $mode
  */
 function print_page ($args, $type = '', $mode = '')
 {

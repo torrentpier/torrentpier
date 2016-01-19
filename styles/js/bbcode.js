@@ -77,7 +77,7 @@ BBCode.prototype = {
 	// Return current selection and range (if exists)
 	getSelection: function() {
 		var w = window;
-		var text='', range;
+		var text = '', range;
 		if (w.getSelection) {
 			text = w.getSelection();
 		} else {

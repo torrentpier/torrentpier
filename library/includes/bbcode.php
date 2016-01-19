@@ -284,11 +284,15 @@ function strip_quotes ($text)
 /**
  * Strips away bbcode from a given string, leaving plain text
  *
- * @param	string	Text to be stripped of bbcode tags
- * @param	boolean	If true, strip away quote tags AND their contents
- * @param	boolean	If true, use the fast-and-dirty method rather than the shiny and nice method
+ * @param      string    Text to be stripped of bbcode tags
+ * @param bool $stripquotes
+ * @param bool $fast_and_dirty
+ * @param bool $showlinks
  *
- * @return	string
+ * @return string
+ * @internal param \If $boolean true, strip away quote tags AND their contents
+ * @internal param \If $boolean true, use the fast-and-dirty method rather than the shiny and nice method
+ *
  */
 function strip_bbcode ($message, $stripquotes = true, $fast_and_dirty = false, $showlinks = true)
 {
@@ -544,9 +548,13 @@ class bbcode
 	}
 
 	/**
-	* bbcode2html
-	* $text должен быть уже обработан htmlCHR($text, false, ENT_NOQUOTES);
-	*/
+	 * bbcode2html
+	 * $text должен быть уже обработан htmlCHR($text, false, ENT_NOQUOTES);
+	 *
+	 * @param $text
+	 *
+	 * @return string
+	 */
 	function bbcode2html ($text)
 	{
 		global $bb_cfg;
@@ -595,8 +603,12 @@ class bbcode
 	}
 
 	/**
-	* Clean up
-	*/
+	 * Clean up
+	 *
+	 * @param $text
+	 *
+	 * @return mixed|string
+	 */
 	static function clean_up ($text)
 	{
 		$text = trim($text);
@@ -607,8 +619,12 @@ class bbcode
 	}
 
 	/**
-	* Spam filter
-	*/
+	 * Spam filter
+	 *
+	 * @param $text
+	 *
+	 * @return mixed|string
+	 */
 	private function spam_filter ($text)
 	{
 		global $bb_cfg;
@@ -672,8 +688,12 @@ class bbcode
 	}
 
 	/**
-	* [code] callback
-	*/
+	 * [code] callback
+	 *
+	 * @param $m
+	 *
+	 * @return string
+	 */
 	function code_callback ($m)
 	{
 		$code = trim($m[2]);
@@ -685,8 +705,12 @@ class bbcode
 	}
 
 	/**
-	* [url] callback
-	*/
+	 * [url] callback
+	 *
+	 * @param $m
+	 *
+	 * @return string
+	 */
 	function url_callback ($m)
 	{
 		global $bb_cfg;
@@ -709,8 +733,12 @@ class bbcode
 	}
 
 	/**
-	* Escape tags inside tiltes in [quote="tilte"]
-	*/
+	 * Escape tags inside tiltes in [quote="tilte"]
+	 *
+	 * @param $m
+	 *
+	 * @return string
+	 */
 	function escape_tiltes_callback ($m)
 	{
 		$tilte = substr($m[3], 0, 250);
@@ -721,8 +749,12 @@ class bbcode
 	}
 
 	/**
-	* make_clickable
-	*/
+	 * make_clickable
+	 *
+	 * @param $text
+	 *
+	 * @return string
+	 */
 	function make_clickable ($text)
 	{
 		$url_regexp = "#
@@ -751,8 +783,12 @@ class bbcode
 	}
 
 	/**
-	* make_url_clickable_callback
-	*/
+	 * make_url_clickable_callback
+	 *
+	 * @param $m
+	 *
+	 * @return string
+	 */
 	function make_url_clickable_callback ($m)
 	{
 		global $bb_cfg;
@@ -774,8 +810,12 @@ class bbcode
 	}
 
 	/**
-	* smilies_pass
-	*/
+	 * smilies_pass
+	 *
+	 * @param $text
+	 *
+	 * @return mixed
+	 */
 	function smilies_pass ($text)
 	{
 		global $datastore;
@@ -794,8 +834,12 @@ class bbcode
 	}
 
 	/**
-	* new_line2html
-	*/
+	 * new_line2html
+	 *
+	 * @param $text
+	 *
+	 * @return mixed
+	 */
 	function new_line2html ($text)
 	{
 		$text = preg_replace('#\n{2,}#', '<span class="post-br"><br /></span>', $text);
@@ -804,8 +848,12 @@ class bbcode
 	}
 
 	/**
-	* tidy
-	*/
+	 * tidy
+	 *
+	 * @param $text
+	 *
+	 * @return string
+	 */
 	function tidy ($text)
 	{
 		$text = tidy_repair_string($text, $this->tidy_cfg, 'utf8');
@@ -852,8 +900,12 @@ class words_rate
 	}
 
 	/**
-	* возвращает "показатель полезности" сообщения используемый для автоудаления коротких сообщений типа "спасибо", "круто" и т.д.
-	*/
+	 * возвращает "показатель полезности" сообщения используемый для автоудаления коротких сообщений типа "спасибо", "круто" и т.д.
+	 *
+	 * @param $text
+	 *
+	 * @return int
+	 */
 	function get_words_rate ($text)
 	{
 		$this->words_rate    = 127;     // максимальное значение по умолчанию

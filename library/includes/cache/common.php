@@ -5,23 +5,42 @@ if (!defined('BB_ROOT')) die(basename(__FILE__));
 class cache_common
 {
 	var $used = false;
+
 	/**
 	 * Returns value of variable
+	 *
+	 * @param        $name
+	 * @param string $get_miss_key_callback
+	 * @param int    $ttl
+	 *
+	 * @return array|bool
 	 */
 	function get ($name, $get_miss_key_callback = '', $ttl = 604800)
 	{
 		if ($get_miss_key_callback) return $get_miss_key_callback($name);
 		return is_array($name) ? array() : false;
 	}
+
 	/**
 	 * Store value of variable
+	 *
+	 * @param     $name
+	 * @param     $value
+	 * @param int $ttl
+	 *
+	 * @return bool
 	 */
 	function set ($name, $value, $ttl = 604800)
 	{
 		return false;
 	}
+
 	/**
 	 * Remove variable
+	 *
+	 * @param string $name
+	 *
+	 * @return bool
 	 */
 	function rm ($name = '')
 	{

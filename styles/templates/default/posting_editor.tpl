@@ -171,7 +171,7 @@ function checkForm(form) {
 				type     : 'add',
 				message  : $('textarea#message').val(),
 				topic_id : {TOPIC_ID},
-				notify   : notify,
+				notify   : notify
 			});
 		}, 100);
 		return false;

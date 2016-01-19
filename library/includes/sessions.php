@@ -71,8 +71,12 @@ class user_common
 	}
 
 	/**
-	*  Start session (restore existent session or create new)
-	*/
+	 *  Start session (restore existent session or create new)
+	 *
+	 * @param array $cfg
+	 *
+	 * @return array|bool
+	 */
 	function session_start ($cfg = array())
 	{
 		global $bb_cfg;
@@ -207,8 +211,13 @@ class user_common
 	}
 
 	/**
-	*  Create new session for the given user
-	*/
+	 *  Create new session for the given user
+	 *
+	 * @param      $userdata
+	 * @param bool $auto_created
+	 *
+	 * @return array
+	 */
 	function session_create ($userdata, $auto_created = false)
 	{
 		global $bb_cfg;
@@ -326,8 +335,11 @@ class user_common
 	}
 
 	/**
-	*  Initialize sessiondata stored in cookies
-	*/
+	 *  Initialize sessiondata stored in cookies
+	 *
+	 * @param bool $update_lastvisit
+	 * @param bool $set_cookie
+	 */
 	function session_end ($update_lastvisit = false, $set_cookie = true)
 	{
 		DB()->query("
@@ -368,8 +380,13 @@ class user_common
 	}
 
 	/**
-	*  Login
-	*/
+	 *  Login
+	 *
+	 * @param      $args
+	 * @param bool $mod_admin_login
+	 *
+	 * @return array
+	 */
 	function login ($args, $mod_admin_login = false)
 	{
 		$username = !empty($args['login_username']) ? clean_username($args['login_username']) : '';
@@ -457,8 +474,10 @@ class user_common
 	}
 
 	/**
-	*  Store sessiondata in cookies
-	*/
+	 *  Store sessiondata in cookies
+	 *
+	 * @param $user_id
+	 */
 	function set_session_cookies ($user_id)
 	{
 		global $bb_cfg;
@@ -499,8 +518,14 @@ class user_common
 	}
 
 	/**
-	*  Verify autologin_id
-	*/
+	 *  Verify autologin_id
+	 *
+	 * @param      $userdata
+	 * @param bool $expire_check
+	 * @param bool $create_new
+	 *
+	 * @return bool|string
+	 */
 	function verify_autologin_id ($userdata, $expire_check = false, $create_new = true)
 	{
 		global $bb_cfg;
@@ -526,8 +551,13 @@ class user_common
 	}
 
 	/**
-	*  Create autologin_id
-	*/
+	 *  Create autologin_id
+	 *
+	 * @param      $userdata
+	 * @param bool $create_new
+	 *
+	 * @return string
+	 */
 	function create_autologin_id ($userdata, $create_new = true)
 	{
 		$autologin_id = ($create_new) ? make_rand_str(LOGIN_KEY_LENGTH) : '';
@@ -605,8 +635,10 @@ class user_common
 	}
 
 	/**
-	*  Mark read
-	*/
+	 *  Mark read
+	 *
+	 * @param $type
+	 */
 	function mark_read ($type)
 	{
 		if ($type === 'all_forums')
@@ -657,8 +689,12 @@ class user_common
 	}
 
 	/**
-	*  Get not auth forums
-	*/
+	 *  Get not auth forums
+	 *
+	 * @param $auth_type
+	 *
+	 * @return string
+	 */
 	function get_not_auth_forums ($auth_type)
 	{
 		global $datastore;
@@ -717,8 +753,13 @@ class user_common
 	}
 
 	/**
-	*  Get excluded forums
-	*/
+	 *  Get excluded forums
+	 *
+	 * @param        $auth_type
+	 * @param string $return_as
+	 *
+	 * @return array|string
+	 */
 	function get_excluded_forums ($auth_type, $return_as = 'csv')
 	{
 		$excluded = array();
@@ -820,6 +861,8 @@ function db_update_userdata ($userdata, $sql_ary, $data_already_escaped = true)
 	{
 		cache_rm_userdata($userdata);
 	}
+
+	return true;
 }
 
 // $user_id - array(id1,id2,..) or (string) id

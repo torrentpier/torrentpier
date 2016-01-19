@@ -702,7 +702,7 @@ else
 			{
 				$template->assign_var('BB_DIE_APPEND_MSG', '
 					<form id="mod-action" method="POST" action="search.php">
-						<input type="submit" name="add_my_post" value="'. $lang['RESTORE_ALL_POSTS'] .'" class="bold" onclick="if (!window.confirm( this.value +\'?\' )){ return false };" />
+						<input type="submit" name="add_my_post" value="'. $lang['RESTORE_ALL_POSTS'] .'" class="bold" onclick="if (!window.confirm( this.value +\'?\' )){ return false }" />
 					</form>
 					<br /><br />
 					<a href="index.php">'. $lang['INDEX_RETURN'] .'</a>

@@ -24,7 +24,7 @@ echo '
 
 foreach ($sql as $i => $query)
 {
-	$row = mysql_fetch_row(DB()->query($query));
+	$row = mysql_fetch_row(DB()->query($query)); // TODO: deprecated
 	echo "<tr><td>{$lang['TR_STATS'][$i]}</td><td><b>{$row[0]}</b></td>";
 }
 

@@ -56,7 +56,7 @@ class cache_xcache extends cache_common
 		{
 			xcache_clear_cache(XC_TYPE_PHP, 0);
 			xcache_clear_cache(XC_TYPE_VAR, 0);
-			return;
+			return true;
 		}
 	}
 

@@ -38,7 +38,7 @@
 						toggle_disabled('author', !this.checked);
 						toggle_disabled('{MY_TOPICS_ID}', this.checked);
 						if (this.checked) { $p('author').value = '{THIS_USER_NAME}'; }
-						else { $p('author').value = ''; $p('{MY_TOPICS_ID}').checked = 0; };
+						else { $p('author').value = ''; $p('{MY_TOPICS_ID}').checked = 0; }
 					"
 					name="{POSTER_ID_KEY}" value="{THIS_USER_ID}" />
 				{L_IN_MY_POSTS}
@@ -133,7 +133,7 @@ function refresh_username(selected_username)
 	opener.document.forms['post'].{INPUT_NAME}.value = selected_username;
 	opener.focus();
 	window.close();
-}
+};
 </script>
 
 <form method="post" name="search" action="{SEARCH_ACTION}">

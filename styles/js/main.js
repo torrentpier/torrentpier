@@ -117,7 +117,7 @@ function setCookie(name, value, days, path, domain, secure) {
 	}
 
 	document.cookie =
-		name + '=' + escape(value)
+		name + '=' + encodeURI(value)
 		+ ((expires) ? '; expires=' + expires : '')
 		+ ((path) ? '; path=' + path : ((cookiePath) ? '; path=' + cookiePath : ''))
 		+ ((domain) ? '; domain=' + domain : ((cookieDomain) ? '; domain=' + cookieDomain : ''))

@@ -90,6 +90,10 @@ if (!$attach_config = CACHE('bb_cache')->get('attach_config'))
 
 /**
  * Writing Data into plain Template Vars
+ *
+ * @param        $template_var
+ * @param        $replacement
+ * @param string $filename
  */
 function init_display_template($template_var, $replacement, $filename = 'viewtopic_attach.tpl')
 {
@@ -141,6 +145,9 @@ function init_display_template($template_var, $replacement, $filename = 'viewtop
 
 /**
  * Display Attachments in Posts
+ *
+ * @param $post_id
+ * @param $switch_attachment
  */
 function display_post_attachments($post_id, $switch_attachment)
 {
@@ -159,6 +166,8 @@ function display_post_attachments($post_id, $switch_attachment)
 
 /**
  * Initializes some templating variables for displaying Attachments in Posts
+ *
+ * @param $switch_attachment
  */
 function init_display_post_attachments($switch_attachment)
 {

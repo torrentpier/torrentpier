@@ -199,6 +199,8 @@ class bb_poll
 			global $lang;
 			return $this->err_msg = sprintf($lang['NEW_POLL_VOTES'], $this->max_votes);
 		}
+
+		return false;
 	}
 
 	function insert_votes_into_db ($topic_id)

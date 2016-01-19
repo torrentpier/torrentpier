@@ -88,6 +88,8 @@ class Template
 
 	/**
 	 * Constructor. Installs XS mod on first run or updates it and sets the root dir.
+	 *
+	 * @param string $root
 	 */
 	function Template($root = '.')
 	{
@@ -117,6 +119,11 @@ class Template
 	/**
 	 * Generates a full path+filename for the given filename, which can either
 	 * be an absolute name, or a name relative to the rootdir for this Template object
+	 *
+	 * @param      $filename
+	 * @param bool $xs_include
+	 *
+	 * @return string
 	 */
 	function make_filename($filename, $xs_include = false)
 	{
@@ -136,6 +143,10 @@ class Template
 	 * Converts template filename to cache filename
 	 * Returns empty string if non-cachable (for tpl files outside of root dir)
 	 * $filename should be absolute filename
+	 *
+	 * @param $filename
+	 *
+	 * @return string
 	 */
 	function make_filename_cache($filename)
 	{
@@ -146,6 +157,8 @@ class Template
 	/**
 	 * Sets the template filenames for handles. $filename_array
 	 * Should be a hash of handle => filename pairs
+	 *
+	 * @param $filenames
 	 */
 	function set_filenames($filenames)
 	{
@@ -156,6 +169,13 @@ class Template
 
 	/**
 	 * Assigns template filename for handle
+	 *
+	 * @param      $handle
+	 * @param      $filename
+	 * @param bool $xs_include
+	 * @param bool $quiet
+	 *
+	 * @return bool
 	 */
 	function set_filename($handle, $filename, $xs_include = false, $quiet = false)
 	{
@@ -198,6 +218,10 @@ class Template
 
 	/**
 	 * Includes file or executes code
+	 *
+	 * @param $filename
+	 * @param $code
+	 * @param $handle
 	 */
 	function execute($filename, $code, $handle)
 	{
@@ -218,6 +242,10 @@ class Template
 	/**
 	 * Load the file for the handle, compile the file, and run the compiled code
 	 * This will print out the results of executing the template
+	 *
+	 * @param $handle
+	 *
+	 * @return bool
 	 */
 	function pparse($handle)
 	{
@@ -271,6 +299,11 @@ class Template
 
 	/**
 	 * Precompile file
+	 *
+	 * @param $template
+	 * @param $filename
+	 *
+	 * @return bool
 	 */
 	function precompile($template, $filename)
 	{
@@ -323,6 +356,11 @@ class Template
 	 * Inserts the uncompiled code for $handle as the value of $varname in the root-level
 	 * This can be used to effectively include a template in the middle of another template
 	 * Note that all desired assignments to the variables in $handle should be done BEFORE calling this function
+	 *
+	 * @param $varname
+	 * @param $handle
+	 *
+	 * @return bool
 	 */
 	function assign_var_from_handle($varname, $handle)
 	{
@@ -336,6 +374,11 @@ class Template
 	/**
 	 * Block-level variable assignment. Adds a new block iteration with the given variable assignments
 	 * Note that this should only be called once per block iteration
+	 *
+	 * @param $blockname
+	 * @param $vararray
+	 *
+	 * @return bool
 	 */
 	function assign_block_vars($blockname, $vararray)
 	{
@@ -361,6 +404,8 @@ class Template
 	/**
 	 * Root-level variable assignment. Adds to current assignments, overriding
 	 * any existing variable assignment with the same name
+	 *
+	 * @param $vararray
 	 */
 	function assign_vars($vararray)
 	{
@@ -372,6 +417,9 @@ class Template
 	/**
 	 * Root-level variable assignment. Adds to current assignments, overriding
 	 * any existing variable assignment with the same name
+	 *
+	 * @param      $varname
+	 * @param bool $varval
 	 */
 	function assign_var($varname, $varval = true)
 	{
@@ -381,6 +429,8 @@ class Template
 	/**
 	 * Root-level. Adds to current assignments, appends
 	 * to any existing variable assignment with the same name
+	 *
+	 * @param $vararray
 	 */
 	function append_vars($vararray)
 	{
@@ -392,6 +442,10 @@ class Template
 	/**
 	 * If not already done, load the file for the given handle and populate
 	 * the uncompiled_code[] hash with its code. Do not compile
+	 *
+	 * @param $handle
+	 *
+	 * @return bool
 	 */
 	function loadfile($handle)
 	{
@@ -425,6 +479,11 @@ class Template
 	 * Generates a reference to the given variable inside the given (possibly nested) block namespace
 	 * This is a string of the form: $this->_tpldata['parent.'][$_parent_i]['$child1.'][$_child1_i]['$child2.'][$_child2_i]...['varname']
 	 * It's ready to be inserted into an "echo" line in one of the templates. NOTE: expects a trailing "." on the namespace
+	 *
+	 * @param $namespace
+	 * @param $varname
+	 *
+	 * @return string
 	 */
 	function generate_block_varref($namespace, $varname)
 	{
@@ -446,6 +505,11 @@ class Template
 	 * Generates a reference to the array of data values for the given (possibly nested) block namespace
 	 * This is a string of the form: $this->_tpldata['parent.'][$_parent_i]['$child1.'][$_child1_i]['$child2.'][$_child2_i]...['$childN.']
 	 * If $include_last_iterator is true, then [$_childN_i] will be appended to the form shown above. NOTE: does not expect a trailing "." on the blockname
+	 *
+	 * @param $blockname
+	 * @param $include_last_iterator
+	 *
+	 * @return string
 	 */
 	function generate_block_data_ref($blockname, $include_last_iterator)
 	{
@@ -945,10 +1009,16 @@ class Template
 
 	/**
 	 * Compiles code and writes to cache if needed
+	 *
+	 * @param $code
+	 * @param $handle
+	 * @param $cache_file
+	 *
+	 * @return string
 	 */
 	function compile2($code, $handle, $cache_file)
 	{
-		$code = $this->compile_code('', $code, XS_USE_ISSET);
+		$code = $this->compile_code('', $code);
 		if ($cache_file && !empty($this->use_cache) && !empty($this->auto_compile)) {
 			$res = $this->write_cache($cache_file, $code);
 			if ($handle && $res) {
@@ -964,10 +1034,16 @@ class Template
 	 * If "do_not_echo" is true, the returned code will not be directly executable,
 	 * but can be used as part of a variable assignment for use in assign_code_from_handle().
 	 * This function isn't used and kept only for compatibility with original template.php
+	 *
+	 * @param        $code
+	 * @param bool   $do_not_echo
+	 * @param string $retvar
+	 *
+	 * @return string
 	 */
 	function compile($code, $do_not_echo = false, $retvar = '')
 	{
-		$code = ' ?' . '>' . $this->compile_code('', $code, true) . '<' . "?php \n";
+		$code = ' ?' . '>' . $this->compile_code('', $code) . '<' . "?php \n";
 		if ($do_not_echo) {
 			$code = "ob_start();\n" . $code . "\n\${$retvar} = ob_get_contents();\nob_end_clean();\n";
 		}
@@ -976,6 +1052,9 @@ class Template
 
 	/**
 	 * Write cache to disk
+	 *
+	 * @param $filename
+	 * @param $code
 	 */
 	function write_cache($filename, $code)
 	{

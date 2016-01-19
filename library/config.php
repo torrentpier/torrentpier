@@ -72,7 +72,7 @@ $domain_name = (!empty($_SERVER['SERVER_NAME'])) ? $_SERVER['SERVER_NAME'] : $do
 
 // Version info
 $bb_cfg['tp_version']       = '2.2.0';
-$bb_cfg['tp_release_date']  = '1/06/2015';
+$bb_cfg['tp_release_date']  = '**/02/2016';
 $bb_cfg['tp_release_state'] = 'ALPHA';
 
 // Database
@@ -82,7 +82,7 @@ $pconnect = false;
 // Настройка баз данных ['db']['srv_name'] => (array) srv_cfg;
 // порядок параметров srv_cfg (хост, название базы, пользователь, пароль, charset, pconnect);
 $bb_cfg['db'] = array(
-	'db1' => array('localhost', 'tp_216', 'user', 'pass', $charset, $pconnect),
+	'db1' => array('localhost', 'tp_220', 'user', 'pass', $charset, $pconnect),
 	//'db2' => array('localhost2', 'dbase2', 'user2', 'pass2', $charset, $pconnect),
 	//'db3' => array('localhost3', 'dbase3', 'user2', 'pass3', $charset, $pconnect),
 );

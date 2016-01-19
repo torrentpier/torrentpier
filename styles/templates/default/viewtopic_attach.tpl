@@ -43,7 +43,7 @@
 			ajax.exec({
 				action    : 'change_torrent',
 				attach_id : {postrow.attach.tor_not_reged.ATTACH_ID},
-				type      : $('#tor-select-{postrow.attach.tor_not_reged.ATTACH_ID}').val(),
+				type      : $('#tor-select-{postrow.attach.tor_not_reged.ATTACH_ID}').val()
 			});
 		}
 		</script>
@@ -124,7 +124,7 @@
 						attach_id : {postrow.attach.tor_reged.ATTACH_ID},
 						mode      : mode,
 						status    : $('#sel_status').val(),
-						comment   : $('#comment').val(),
+						comment   : $('#comment').val()
 					});
 				};
 				ajax.callback.change_tor_status = function(data) {
@@ -180,7 +180,7 @@
 			ajax.exec({
 				action    : 'change_torrent',
 				attach_id : {postrow.attach.tor_reged.ATTACH_ID},
-				type      : $('#tor-select-{postrow.attach.tor_reged.ATTACH_ID}').val(),
+				type      : $('#tor-select-{postrow.attach.tor_reged.ATTACH_ID}').val()
 			});
 		}
 		</script>
