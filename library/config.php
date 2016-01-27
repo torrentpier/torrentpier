@@ -200,8 +200,6 @@ $tr_cfg = array(
 
 $bb_cfg['show_dl_status_in_search'] = true;
 $bb_cfg['show_dl_status_in_forum']  = true;
-
-$bb_cfg['show_tor_info_in_dl_list'] = true;
 $bb_cfg['allow_dl_list_names_mode'] = true;
 
 $bb_cfg['torrent_name_style'] = true; // use torrent name style [yoursite.com].txxx.torrent
@@ -542,14 +540,6 @@ $bb_cfg['allow_change'] = array(
 
 define('GZIP_OUTPUT_ALLOWED', (extension_loaded('zlib') && !ini_get('zlib.output_compression')));
 
-$banned_user_agents = array(
-// Download Master
-#	'download',
-#	'master',
-// Others
-#	'wget',
-);
-
 $bb_cfg['trash_forum_id'] = 0; // (int) 7
 
 $bb_cfg['first_logon_redirect_url'] = 'index.php';
@@ -578,8 +568,8 @@ $bb_cfg['attach'] = array(
 	'max_size'    => 5*1024*1024,                     // максимальный размер файла в байтах
 );
 
-$bb_cfg['tor_forums_allowed_ext'] = array('torrent', 'zip', 'rar'); // для разделов с раздачами
-$bb_cfg['gen_forums_allowed_ext'] = array('zip', 'rar');            // для обычных разделов
+$bb_cfg['tor_forums_allowed_ext'] = ['torrent', 'zip', 'rar']; // для разделов с раздачами
+$bb_cfg['gen_forums_allowed_ext'] = ['torrent', 'zip', 'rar']; // для обычных разделов
 
 // Avatars
 $bb_cfg['avatars'] = array(

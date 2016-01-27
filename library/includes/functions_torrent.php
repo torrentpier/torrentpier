@@ -2,74 +2,32 @@
 
 if (!defined('BB_ROOT')) die(basename(__FILE__));
 
-function get_torrent_info ($attach_id)
-{
-	global $lang;
-
-	$attach_id = intval($attach_id);
-
-	$sql = "
-		SELECT
-			a.post_id, d.physical_filename, d.extension, d.tracker_status,
-			t.topic_first_post_id,
-			p.poster_id, p.topic_id, p.forum_id,
-			f.allow_reg_tracker
-		FROM
-			". BB_ATTACHMENTS      ." a,
-			". BB_ATTACHMENTS_DESC ." d,
-			". BB_POSTS            ." p,
-			". BB_TOPICS           ." t,
-			". BB_FORUMS           ." f
-		WHERE
-			    a.attach_id = $attach_id
-			AND d.attach_id = $attach_id
-			AND p.post_id = a.post_id
-			AND t.topic_id = p.topic_id
-			AND f.forum_id = p.forum_id
-		LIMIT 1
-	";
-
-	if (!$torrent = DB()->fetch_row($sql))
-	{
-		bb_die($lang['INVALID_ATTACH_ID']);
-	}
-
-	return $torrent;
-}
-
 function torrent_auth_check ($forum_id, $poster_id)
 {
-	global $userdata, $lang, $attach_config;
+	global $lang, $userdata;
 
-	if (IS_ADMIN) return true;
-
-	$is_auth = auth(AUTH_ALL, $forum_id, $userdata);
-
-	if ($poster_id != $userdata['user_id'] && !$is_auth['auth_mod'])
+	if (IS_ADMIN || IS_CP_HOLDER || $poster_id == $userdata['user_id'])
 	{
-		bb_die($lang['NOT_MODERATOR']);
+		return true;
 	}
-	else if (!$is_auth['auth_view'] || !$is_auth['auth_attachments'] || $attach_config['disable_mod'])
+
+	if (IS_MOD)
 	{
-		bb_die(sprintf($lang['SORRY_AUTH_READ'], $is_auth['auth_read_type']));
+		$is_auth = auth(AUTH_MOD, $forum_id, $userdata);
+		if ($is_auth['auth_mod']) return true;
 	}
-	return $is_auth;
+
+	bb_die($lang['NOT_MODERATOR']);
 }
 
-function tracker_unregister ($attach_id, $mode = '')
+function tracker_unregister ($topic_id, $redirect_url = '')
 {
-	global $lang, $bb_cfg;
+	global $bb_cfg, $lang, $log_action;
 
-	$attach_id = (int) $attach_id;
-	$post_id = $topic_id = $forum_id = $info_hash = null;
-
-	// Get torrent info
-	if ($torrent = get_torrent_info($attach_id))
-	{
-		$post_id  = $torrent['post_id'];
-		$topic_id = $torrent['topic_id'];
-		$forum_id = $torrent['forum_id'];
-	}
+	$tor = DB()->fetch_row("
+		SELECT forum_id, tor_status FROM ". BB_BT_TORRENTS ." WHERE topic_id = ". intval($topic_id) ." LIMIT 1
+	");
+	$tor_status = isset($tor['tor_status']) ? $tor['tor_status'] : null;
 
 	if ($mode == 'request')
 	{

@@ -120,13 +120,14 @@ class upload_common
 	{
 		if ($mode == 'avatar')
 		{
-			delete_avatar($params['user_id'], $params['avatar_ext_id']);
+			delete_avatar($params['user_id'], $this->file_ext_id);
 			$file_path = get_avatar_path($params['user_id'], $this->file_ext_id);
 			return $this->_move($file_path);
 		}
 		else if ($mode == 'attach')
 		{
-			$file_path = get_attach_path($params['topic_id'], $params['attach_ext_id']);
+			delete_attach($params['topic_id'], $this->file_ext_id);
+			$file_path = get_attach_path($params['topic_id'], $this->file_ext_id);
 			return $this->_move($file_path);
 		}
 		else

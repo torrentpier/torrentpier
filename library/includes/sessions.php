@@ -192,6 +192,7 @@ class user_common
 		define('IS_GUEST',        (!$this->data['session_logged_in']));
 		define('IS_ADMIN',        (!IS_GUEST && $this->data['user_level'] == ADMIN));
 		define('IS_MOD',          (!IS_GUEST && $this->data['user_level'] == MOD));
+		define('IS_CP_HOLDER',    (!IS_GUEST && $this->data['user_level'] == CP_HOLDER));
 		define('IS_GROUP_MEMBER', (!IS_GUEST && $this->data['user_level'] == GROUP_MEMBER));
 		define('IS_USER',         (!IS_GUEST && $this->data['user_level'] == USER));
 		define('IS_SUPER_ADMIN',  (IS_ADMIN && isset($bb_cfg['super_admins'][$this->data['user_id']])));

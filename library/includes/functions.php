@@ -1209,23 +1209,6 @@ function show_bt_userdata ($user_id)
 	));
 }
 
-function get_attachments_dir ($cfg = null)
-{
-	if (!$cfg AND !$cfg = $GLOBALS['attach_config'])
-	{
-		$cfg = bb_get_config(BB_ATTACH_CONFIG, true, false);
-	}
-
-	if ($cfg['upload_dir'][0] == '/' || ($cfg['upload_dir'][0] != '/' && $cfg['upload_dir'][1] == ':'))
-	{
-		return $cfg['upload_dir'];
-	}
-	else
-	{
-		return BB_ROOT . $cfg['upload_dir'];
-	}
-}
-
 function bb_get_config ($table, $from_db = false, $update_cache = true)
 {
 	if ($from_db OR !$cfg = CACHE('bb_config')->get("config_{$table}"))
@@ -1927,7 +1910,7 @@ function cat_exists ($cat_id)
 //
 class log_action
 {
-	var $log_type = array(
+	var $log_type = [
 	#    LOG_TYPE_NAME   LOG_TYPE_ID
 		'mod_topic_delete'   => 1,
 		'mod_topic_move'     => 2,
@@ -1938,8 +1921,15 @@ class log_action
 		'adm_user_delete'    => 7,
 		'adm_user_ban'       => 8,
 		'adm_user_unban'     => 9,
-	);
-	var $log_type_select = array();
+		'tor_status_changed' => 10,
+		'att_delete'         => 11,
+		'tor_unreg'          => 12,
+		'tor_cphold_close'   => 13,
+		'adm_ban_ip'         => 14,
+		'adm_ban_email'      => 15,
+		'adm_ban_name'       => 16,
+	];
+	var $log_type_select = [];
 	var $log_disabled = false;
 
 	function init ()

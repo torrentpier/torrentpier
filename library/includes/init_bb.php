@@ -1,13 +1,14 @@
 <?php
 
 if (!defined('BB_ROOT')) die(basename(__FILE__));
-if (PHP_VERSION < '5.4') die('TorrentPier requires PHP version 5.4 and above. Your PHP version '. PHP_VERSION);
 if (!defined('BB_SCRIPT')) define('BB_SCRIPT', 'undefined');
 if (!defined('BB_CFG_LOADED')) trigger_error('File config.php not loaded', E_USER_ERROR);
 
+if (PHP_VERSION < '5.5') die('TorrentPier requires PHP version 5.5 and above (ZF requirement). Your PHP version is '. PHP_VERSION);
+
 // Define some basic configuration arrays
 unset($stopwords, $synonyms_match, $synonyms_replace);
-$userdata = $theme = $images = $lang = $nav_links = $bf = $attach_config = array();
+$userdata = $theme = $images = $lang = $nav_links = $bf = [];
 $gen_simple_header = false;
 $user = null;
 
@@ -320,20 +321,21 @@ define('REQUEST', 4);
 define('CHBOX',   5);
 define('SELECT',  6);
 
-if (!empty($banned_user_agents))
-{
-	foreach ($banned_user_agents as $agent)
-	{
-		if (strstr(USER_AGENT, $agent))
-		{
-			$filename = 'Download files by using browser';
-			$output = '@';
-			header('Content-Type: text/plain');
-			header('Content-Disposition: attachment; filename="'. $filename .'"');
-			die($output);
-		}
-	}
-}
+$dl_link_css = [
+	DL_STATUS_RELEASER => 'genmed',
+	DL_STATUS_WILL     => 'dlWill',
+	DL_STATUS_DOWN     => 'leechmed',
+	DL_STATUS_COMPLETE => 'seedmed',
+	DL_STATUS_CANCEL   => 'dlCancel',
+];
+
+$dl_status_css = [
+	DL_STATUS_RELEASER => 'genmed',
+	DL_STATUS_WILL     => 'dlWill',
+	DL_STATUS_DOWN     => 'dlDown',
+	DL_STATUS_COMPLETE => 'dlComplete',
+	DL_STATUS_CANCEL   => 'dlCancel',
+];
 
 // Functions
 function send_no_cache_headers ()
@@ -448,22 +450,6 @@ if ((empty($_POST) && !defined('IN_ADMIN') && !defined('IN_AJAX') && !file_exist
 		}
 	}
 }
-
-$dl_link_css = array(
-	DL_STATUS_RELEASER => 'genmed',
-	DL_STATUS_WILL     => 'dlWill',
-	DL_STATUS_DOWN     => 'leechmed',
-	DL_STATUS_COMPLETE => 'seedmed',
-	DL_STATUS_CANCEL   => 'dlCancel',
-);
-
-$dl_status_css = array(
-	DL_STATUS_RELEASER => 'genmed',
-	DL_STATUS_WILL     => 'dlWill',
-	DL_STATUS_DOWN     => 'dlDown',
-	DL_STATUS_COMPLETE => 'dlComplete',
-	DL_STATUS_CANCEL   => 'dlCancel',
-);
 
 // Exit if board is disabled via ON/OFF trigger or by admin
 if (($bb_cfg['board_disable'] || file_exists(BB_DISABLED)) && !defined('IN_ADMIN') && !defined('IN_AJAX') && !defined('IN_LOGIN'))
