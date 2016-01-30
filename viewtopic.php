@@ -527,12 +527,6 @@ $template->assign_vars(array(
 ));
 require(INC_DIR .'torrent_show_dl_list.php');
 
-if ($t_data['topic_attachment'])
-{
-	require(INC_DIR .'old_attachment.php');
-	init_display_post_attachments($t_data['topic_attachment']);
-}
-
 //
 // Update the topic view counter
 //
@@ -742,11 +736,6 @@ for($i = 0; $i < $total_posts; $i++)
 		'RG_SIG'             => $rg_signature,
 		'RG_SIG_ATTACH'      => $postrow[$i]['attach_rg_sig'],
 	));
-
-	if ($postrow[$i]['post_attachment'] && $is_auth['auth_download'] && function_exists('display_post_attachments'))
-	{
-		display_post_attachments($post_id, $postrow[$i]['post_attachment']);
-	}
 
 	if ($is_first_post && $t_data['attach_ext_id'])
 	{

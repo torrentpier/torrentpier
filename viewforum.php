@@ -485,7 +485,7 @@ foreach ($topic_rowset as $topic)
 		'ATTACH'           => $topic['attach_ext_id'],
 		'STATUS'           => $topic['topic_status'],
 		'TYPE'             => $topic['topic_type'],
-		'DL'               => ($topic['tracker_status'] && !$forum_data['allow_reg_tracker']),
+		'DL'               => !$forum_data['allow_reg_tracker'],
 		'POLL'             => $topic['topic_vote'],
 		'DL_CLASS'         => isset($topic['dl_status']) ? $dl_link_css[$topic['dl_status']] : '',
 
