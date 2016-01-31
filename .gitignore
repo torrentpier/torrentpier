@@ -9,6 +9,7 @@ internal_data/log/
 internal_data/sitemap/
 internal_data/triggers/
 library/config.local.php
+vendor
 
 ### Archives ###
 *.log

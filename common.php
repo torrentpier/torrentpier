@@ -18,9 +18,11 @@ header('X-Frame-Options: SAMEORIGIN');
 // Get initial config
 require(BB_ROOT . 'library/config.php');
 
+// Composer
+require(BB_ROOT . 'vendor/autoload.php');
+
 // Load Zend Framework
 use Zend\Loader\StandardAutoloader;
-require(BB_ROOT . 'library/Zend/Loader/StandardAutoloader.php');
 $loader = new StandardAutoloader(array('autoregister_zf' => true));
 $loader->register();
 
