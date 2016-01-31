@@ -2596,8 +2596,6 @@ function bb_captcha ($mode, $callback = '')
 {
 	global $bb_cfg, $lang, $userdata;
 
-	require_once(TP_AUTO_DIR . 'ReCaptcha/ReCaptcha.php');
-
 	$secret   = $bb_cfg['captcha']['secret_key'];
 	$public   = $bb_cfg['captcha']['public_key'];
 	$cp_theme = $bb_cfg['captcha']['theme'];
