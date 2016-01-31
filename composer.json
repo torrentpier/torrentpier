@@ -1,0 +1,25 @@
+{
+    "name": "torrentpier/torrentpier",
+    "description": "Bittorrent-tracker engine",
+    "version": "2.2.0-dev",
+    "type": "project",
+    "keywords": ["torrent","bittorrent","forum"],
+    "homepage": "https://torrentpier.me/",
+    "license": "GPL-3.0",
+    "authors": [],
+    "support": {
+        "issues" : "https://github.com/torrentpier/torrentpier/issues",
+        "forum": "https://torrentpier.me/",
+        "irc": "https://gitter.im/torrentpier/torrentpier",
+        "faq": "http://faq.torrentpier.me/"
+    },
+    "require": {
+        "php": ">=5.5.0",
+        "zendframework/zend-loader": "2.4.0",
+        "zendframework/zend-json": "2.4.0",
+        "zendframework/zend-mail": "2.4.0",
+        "zendframework/zend-version": "2.4.0"
+    },
+    "require-dev": {},
+    "prefer-stable": true
+}
