@@ -29,156 +29,45 @@ function tracker_unregister ($topic_id, $redirect_url = '')
 	");
 	$tor_status = isset($tor['tor_status']) ? $tor['tor_status'] : null;
 
-	if ($mode == 'request')
+	// удаление файла
+	if (defined('IN_AJAX'))
 	{
-		if (!$torrent)
+		if (is_null($tor_status))
 		{
-			bb_die($lang['TOR_NOT_FOUND']);
-		}
-		if (!$torrent['tracker_status'])
-		{
-			bb_die('Torrent already unregistered');
-		}
-		torrent_auth_check($forum_id, $torrent['poster_id']);
-	}
-
-	if (!$topic_id)
-	{
-		$sql = "SELECT topic_id FROM ". BB_BT_TORRENTS ." WHERE attach_id = $attach_id";
-
-		if (!$result = DB()->sql_query($sql))
-		{
-			bb_die('Could not query torrent information');
-		}
-		if ($row = DB()->sql_fetchrow($result))
-		{
-			$topic_id = $row['topic_id'];
+			return;
 		}
 	}
-
-	// Unset DL-Type for topic
-	if ($bb_cfg['bt_unset_dltype_on_tor_unreg'] && $topic_id)
+	// обычная разрегистрация
+	else
 	{
-		$sql = "UPDATE ". BB_TOPICS ." SET topic_dl_type = ". TOPIC_DL_TYPE_NORMAL ." WHERE topic_id = $topic_id LIMIT 1";
-
-		if (!$result = DB()->sql_query($sql))
+		if (is_null($tor_status))
 		{
-			bb_die('Could not update topics table #1');
+			bb_die('Торрент не зарегистрирован');
 		}
+		torrent_auth_check($tor['forum_id'], 0);
 	}
 
 	// Remove peers from tracker
-	$sql = "DELETE FROM ". BB_BT_TRACKER ." WHERE topic_id = $topic_id";
-
-	if (!DB()->sql_query($sql))
-	{
-		bb_die('Could not delete peers');
-	}
-
-	// Ocelot
-	if ($bb_cfg['ocelot']['enabled'])
-	{
-		if ($row = DB()->fetch_row("SELECT info_hash FROM ". BB_BT_TORRENTS ." WHERE attach_id = $attach_id LIMIT 1"))
-		{
-			$info_hash = $row['info_hash'];
-		}
-		ocelot_update_tracker('delete_torrent', array('info_hash' => rawurlencode($info_hash), 'id' => $topic_id));
-	}
+	tracker_rm_torrent($topic_id);
 
 	// Delete torrent
-	$sql = "DELETE FROM ". BB_BT_TORRENTS ." WHERE attach_id = $attach_id";
+	DB()->query("DELETE FROM ". BB_BT_TORRENTS ." WHERE topic_id = $topic_id LIMIT 1");
 
-	if (!DB()->sql_query($sql))
+	// Log action
+	if (IS_AM || IS_CP_HOLDER)
 	{
-		bb_die('Could not delete torrent from torrents table');
+		$log_action->mod('tor_unreg', array(
+			'forum_id'    => $tor['forum_id'],
+			'topic_id'    => $topic_id,
+			'topic_title' => get_topic_title($topic_id),
+		));
 	}
 
-	// Update tracker_status
-	$sql = "UPDATE ". BB_ATTACHMENTS_DESC ." SET tracker_status = 0 WHERE attach_id = $attach_id LIMIT 1";
-
-	if (!DB()->sql_query($sql))
+	// Unset DL-type for topic
+	if ($bb_cfg['bt_unset_dltype_on_tor_unreg'] && $topic_id)
 	{
-		bb_die('Could not update torrent status #1');
+		DB()->query("UPDATE ". BB_TOPICS ." SET topic_dl_type = 0 WHERE topic_id = $topic_id LIMIT 1");
 	}
-
-	if ($mode == 'request')
-	{
-		set_die_append_msg($forum_id, $topic_id);
-		bb_die($lang['BT_UNREGISTERED']);
-	}
-}
-
-function delete_torrent ($attach_id, $mode = '')
-{
-	global $lang, $reg_mode, $topic_id;
-
-	$attach_id = intval($attach_id);
-	$reg_mode = $mode;
-
-	if (!$torrent = get_torrent_info($attach_id))
-	{
-		bb_die($lang['TOR_NOT_FOUND']);
-	}
-
-	$topic_id  = $torrent['topic_id'];
-	$forum_id  = $torrent['forum_id'];
-	$poster_id = $torrent['poster_id'];
-
-	if ($torrent['extension'] !== TORRENT_EXT)
-	{
-		bb_die($lang['NOT_TORRENT']);
-	}
-
-	torrent_auth_check($forum_id, $poster_id);
-	tracker_unregister($attach_id);
-	delete_attachment(0, $attach_id);
-
-	return;
-}
-
-function change_tor_status ($attach_id, $new_tor_status)
-{
-	global $lang, $topic_id, $userdata;
-
-	$attach_id = (int) $attach_id;
-	$new_tor_status = (int) $new_tor_status;
-
-	if (!$torrent = get_torrent_info($attach_id))
-	{
-		bb_die($lang['TOR_NOT_FOUND']);
-	}
-
-	$topic_id = $torrent['topic_id'];
-
-	torrent_auth_check($torrent['forum_id'], $torrent['poster_id']);
-
-	DB()->query("
-		UPDATE ". BB_BT_TORRENTS ." SET
-			tor_status = $new_tor_status,
-			checked_user_id = {$userdata['user_id']},
-			checked_time = '". TIMENOW ."'
-		WHERE attach_id = $attach_id
-		LIMIT 1
-	");
-}
-
-// Set gold/silver type for torrent
-function change_tor_type ($attach_id, $tor_status_gold)
-{
-	global $topic_id, $lang, $bb_cfg;
-
-	if (!$torrent = get_torrent_info($attach_id))
-	{
-		bb_die($lang['TOR_NOT_FOUND']);
-	}
-
-	if (!IS_AM) bb_die($lang['ONLY_FOR_MOD']);
-
-	$topic_id        = $torrent['topic_id'];
-	$tor_status_gold = intval($tor_status_gold);
-	$info_hash       = null;
-
-	DB()->query("UPDATE ". BB_BT_TORRENTS ." SET tor_type = $tor_status_gold WHERE topic_id = $topic_id LIMIT 1");
 
 	// Ocelot
 	if ($bb_cfg['ocelot']['enabled'])
@@ -187,65 +76,104 @@ function change_tor_type ($attach_id, $tor_status_gold)
 		{
 			$info_hash = $row['info_hash'];
 		}
-		ocelot_update_tracker('update_torrent', array('info_hash' => rawurlencode($info_hash), 'freetorrent' => $tor_status_gold));
+		ocelot_update_tracker('delete_torrent', array('info_hash' => rawurlencode($info_hash), 'id' => $topic_id));
+	}
+
+	if (defined('IN_AJAX'))
+	{
+		return;
+	}
+	else if ($redirect_url)
+	{
+		redirect($redirect_url);
+	}
+	else
+	{
+		set_die_append_msg($tor['forum_id'], $topic_id);
+		bb_die($lang['BT_UNREGISTERED']);
 	}
 }
 
-function tracker_register ($attach_id, $mode = '', $tor_status = TOR_NOT_APPROVED, $reg_time = TIMENOW)
+function torrent_cp_close ($topic_id, $forum_id)
 {
-	global $bb_cfg, $lang, $reg_mode, $tr_cfg;
+	global $log_action, $userdata;
 
-	$attach_id = intval($attach_id);
+	DB()->query("
+		UPDATE ". BB_BT_TORRENTS ." SET
+			tor_status = ". TOR_CLOSED_CPHOLD .",
+			tor_status_time = ". TIMENOW .",
+			tor_status_uid = ". $userdata['user_id'] ."
+		WHERE topic_id = $topic_id
+		LIMIT 1
+	");
+
+	// Remove peers from tracker
+	tracker_rm_torrent($topic_id);
+
+	$log_action->mod('tor_cphold_close', array(
+		'forum_id'    => $forum_id,
+		'topic_id'    => $topic_id,
+		'topic_title' => get_topic_title($topic_id),
+	));
+
+	require_once(INC_DIR .'functions_admin.php');
+	topic_lock_unlock($topic_id, 'lock');
+}
+
+function tracker_register ($topic_id, $mode = '', $tor_status = TOR_NOT_APPROVED, $reg_time = TIMENOW)
+{
+	global $bb_cfg, $lang, $reg_mode;
+
 	$reg_mode = $mode;
 
-	if (!$torrent = get_torrent_info($attach_id))
+	$sql = "
+		SELECT
+			t.forum_id, t.post_id, t.poster_id, t.attach_ext_id, t.tracker_status,
+			f.allow_reg_tracker
+		FROM ". BB_TOPICS ." t, ". BB_FORUMS ." f
+		WHERE t.topic_id = ". intval($topic_id) ."
+			AND f.forum_id = t.forum_id
+		LIMIT 1
+	";
+	if (!$tor = DB()->fetch_row($sql))
 	{
-		bb_die($lang['TOR_NOT_FOUND']);
+		return torrent_error_exit('Invalid topic_id');
+	}
+	$post_id   = $tor['post_id'];
+	$forum_id  = $tor['forum_id'];
+	$poster_id = $tor['poster_id'];
+
+
+	if ($tor['attach_ext_id'] != 8) return torrent_error_exit($lang['NOT_TORRENT']);
+	if (!$tor['allow_reg_tracker']) return torrent_error_exit($lang['REG_NOT_ALLOWED_IN_THIS_FORUM']);
+	if ($post_id != $tor['topic_first_post_id']) return torrent_error_exit($lang['ALLOWED_ONLY_1ST_POST_REG']);
+	if ($tor['tracker_status']) return torrent_error_exit($lang['ALREADY_REG']);
+
+	if ($reg_mode != 'mcp_tor_register')
+	{
+		torrent_auth_check($forum_id, $poster_id);
 	}
 
-	$post_id   = $torrent['post_id'];
-	$topic_id  = $torrent['topic_id'];
-	$forum_id  = $torrent['forum_id'];
-	$poster_id = $torrent['poster_id'];
-	$info_hash = null;
+	$filename = get_attach_path($topic_id);
 
-	if ($torrent['extension'] !== TORRENT_EXT) return torrent_error_exit($lang['NOT_TORRENT']);
-	if (!$torrent['allow_reg_tracker']) return torrent_error_exit($lang['REG_NOT_ALLOWED_IN_THIS_FORUM']);
-	if ($post_id != $torrent['topic_first_post_id']) return torrent_error_exit($lang['ALLOWED_ONLY_1ST_POST_REG']);
-	if ($torrent['tracker_status']) return torrent_error_exit($lang['ALREADY_REG']);
-	if ($this_topic_torrents = get_registered_torrents($topic_id, 'topic')) return torrent_error_exit($lang['ONLY_1_TOR_PER_TOPIC']);
-
-	torrent_auth_check($forum_id, $torrent['poster_id']);
-
-	$filename = get_attachments_dir() .'/'. $torrent['physical_filename'];
-
-	if (!is_file($filename)) return torrent_error_exit('File name error');
-	if (!file_exists($filename)) return torrent_error_exit('File not exists');
-	if (!$tor = bdecode_file($filename)) return torrent_error_exit('This is not a bencoded file');
+	if (!file_exists($filename))
+	{
+		return torrent_error_exit($lang['NOT_FOUND']);
+	}
+	if (!$tor_decoded = bdecode_file($filename))
+	{
+		return torrent_error_exit($lang['TORFILE_INVALID']);
+	}
 
 	if ($bb_cfg['bt_disable_dht'])
 	{
-		$tor['info']['private'] = (int) 1;
+		$tor_decoded['info']['private'] = (int) 1;
 		$fp = fopen($filename, 'w+');
-		fwrite ($fp, bencode($tor));
-		fclose ($fp);
+		fwrite($fp, bencode($tor_decoded));
+		fclose($fp);
 	}
 
-	if ($bb_cfg['bt_check_announce_url'])
-	{
-		include(INC_DIR .'torrent_announce_urls.php');
-
-		$ann = (@$tor['announce']) ? $tor['announce'] : '';
-		$announce_urls['main_url'] = $bb_cfg['bt_announce_url'];
-
-		if (!$ann || !in_array($ann, $announce_urls))
-		{
-			$msg = sprintf($lang['INVALID_ANN_URL'], htmlspecialchars($ann), $announce_urls['main_url']);
-			return torrent_error_exit($msg);
-		}
-	}
-
-	$info = (@$tor['info']) ? $tor['info'] : array();
+	$info = (@$tor_decoded['info']) ? $tor_decoded['info'] : array();
 
 	if (!isset($info['name']) || !isset($info['piece length']) || !isset($info['pieces']) || strlen($info['pieces']) % 20 != 0)
 	{
@@ -264,8 +192,7 @@ function tracker_register ($attach_id, $mode = '', $tor_status = TOR_NOT_APPROVE
 
 	if ($row = DB()->fetch_row("SELECT topic_id FROM ". BB_BT_TORRENTS ." WHERE info_hash = '$info_hash_sql' LIMIT 1"))
 	{
-		set_die_append_msg($forum_id, $topic_id);
-		bb_die(sprintf($lang['BT_REG_FAIL_SAME_HASH'], TOPIC_URL . $row['topic_id']));
+		return torrent_error_exit(sprintf($lang['BT_REG_FAIL_SAME_HASH'], TOPIC_URL . $row['topic_id']));
 	}
 
 	$totallen = 0;
@@ -307,7 +234,7 @@ function tracker_register ($attach_id, $mode = '', $tor_status = TOR_NOT_APPROVE
 	// Set topic status
 	DB()->query("UPDATE ". BB_TOPICS ." SET tracker_status = 1 WHERE topic_id = $topic_id LIMIT 1");
 
-	// Clean all peers for that torrent
+	// Remove peers from tracker
 	tracker_rm_torrent($topic_id);
 
 	if ($reg_mode == 'request' || $reg_mode == 'newtopic')
@@ -354,7 +281,7 @@ function change_tor_status ($topic_id, $tor_status)
 // Set gold / silver type for torrent
 function change_tor_type ($topic_id, $tor_status_gold)
 {
-	global $lang, $bb_cfg;
+	global $bb_cfg, $lang;
 
 	if (!IS_AM) bb_die($lang['ONLY_FOR_MOD']);
 
@@ -376,7 +303,7 @@ function change_tor_type ($topic_id, $tor_status_gold)
 
 function send_torrent_with_passkey ($t_data)
 {
-	global $userdata, $bb_cfg, $tr_cfg, $lang;
+	global $bb_cfg, $lang, $tr_cfg, $userdata;
 
 	$topic_id   = $t_data['topic_id'];
 	$poster_id  = $t_data['topic_poster'];
@@ -391,7 +318,7 @@ function send_torrent_with_passkey ($t_data)
 	}
 	else if (isset($bb_cfg['tor_frozen'][$row['tor_status']]))
 	{
-		if (!$t_data['is_am']) bb_die("Раздача имеет статус: <b>{$lang['tor_status'][$row['tor_status']]}</b><br /><br />Скачивание запрещено");
+		if (!$t_data['is_am']) bb_die("Раздача имеет статус: <b>{$lang['tor_status'][$row['tor_status']]}</b><br /><br />Скачивание запрещено"); //todo перевести
 	}
 
 	$passkey_val = '';
@@ -432,7 +359,7 @@ function send_torrent_with_passkey ($t_data)
 		}
 	}
 
-	/*
+	/* todo активировать несколько позднее
 	// лимит количества скачиваний торрент-файлов в день
 	if ($user_id != $poster_id && !$t_data['is_am'])
 	{
@@ -480,11 +407,11 @@ function send_torrent_with_passkey ($t_data)
 	$filename = get_attach_path($topic_id, 8);
 	if (!file_exists($filename))
 	{
-		bb_simple_die('File not found');
+		bb_simple_die($lang['NOT_FOUND']);
 	}
 	if (!$tor = bdecode_file($filename))
 	{
-		bb_simple_die('This is not a bencoded file');
+		bb_simple_die($lang['TORFILE_INVALID']);
 	}
 
 	// tor cleanup
@@ -544,7 +471,7 @@ function send_torrent_with_passkey ($t_data)
 
 	// Send torrent
 	$output   = bencode($tor);
-	$dl_fname = ($bb_cfg['torrent_name_style'] ? '['.$bb_cfg['server_name'].'].t' . $topic_id . '.torrent' : clean_filename(basename($attachment['real_filename'])));
+	$dl_fname = '['.$bb_cfg['server_name'].'].t' . $topic_id . '.torrent';
 
 	if (!empty($_COOKIE['explain']))
 	{

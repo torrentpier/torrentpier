@@ -29,6 +29,12 @@ function delete_avatar ($user_id, $avatar_ext_id)
 	return ($avatar_file && file_exists($avatar_file)) ? @unlink($avatar_file) : false;
 }
 
+function delete_attach ($topic_id, $attach_ext_id)
+{
+	$attach_file = ($attach_ext_id) ? get_attach_path($topic_id, $attach_ext_id) : '';
+	return ($attach_file && file_exists($attach_file)) ? @unlink($attach_file) : false;
+}
+
 function get_tracks ($type)
 {
 	$c_name = '';

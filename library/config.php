@@ -202,9 +202,6 @@ $bb_cfg['show_dl_status_in_search'] = true;
 $bb_cfg['show_dl_status_in_forum']  = true;
 $bb_cfg['allow_dl_list_names_mode'] = true;
 
-$bb_cfg['torrent_name_style'] = true; // use torrent name style [yoursite.com].txxx.torrent
-$bb_cfg['tor_help_links']     = 'terms.php';
-
 // Сколько дней сохранять торрент зарегистрированным / Days to keep torrent registered, if:
 $bb_cfg['seeder_last_seen_days_keep']  = 0; // сколько дней назад был сид последний раз
 $bb_cfg['seeder_never_seen_days_keep'] = 0; // сколько дней имеется статус "Сида не было никогда"
@@ -543,6 +540,7 @@ $bb_cfg['trash_forum_id'] = 0; // (int) 7
 
 $bb_cfg['first_logon_redirect_url'] = 'index.php';
 $bb_cfg['terms_and_conditions_url'] = 'terms.php';
+$bb_cfg['tor_help_links']           = 'terms.php';
 
 $bb_cfg['user_agreement_url']       = 'info.php?show=user_agreement';
 $bb_cfg['copyright_holders_url']    = 'info.php?show=copyright_holders';
