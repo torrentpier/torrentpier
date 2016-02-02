@@ -38,11 +38,12 @@
 		"zendframework/zend-loader": "^2.5",
 		"zendframework/zend-mail": "^2.5",
 		"zendframework/zend-session": "^2.5",
-		"zendframework/zend-version": "^2.5"
+		"zendframework/zend-version": "^2.5",
+		"pimple/pimple": "^3.0"
 	},
 	"autoload": {
 		"psr-4": {
-			"TorrentPier\\": "library/"
+			"TorrentPier\\": "src/"
 		}
 	},
 	"minimum-stability": "stable",
