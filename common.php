@@ -39,6 +39,10 @@ $di->register(new \TorrentPier\ServiceProviders\DbServiceProvider, [
 	'config.db' => $di->config->db->toArray()
 ]);
 
+$di->register(new \TorrentPier\ServiceProviders\SphinxServiceProvider, [
+	'config.sphinx' => $di->config->sphinx->toArray()
+]);
+
 $bb_cfg        = $di->config->toArray();
 $page_cfg      = $di->config->page->toArray();
 $tr_cfg        = $di->config->tracker->toArray();
@@ -107,6 +111,9 @@ $DBS = new DBS([
 	'db_alias' => $bb_cfg['db_alias']
 ]);
 
+/**
+ * @deprecated
+ */
 function DB ($db_alias = 'db')
 {
 	global $DBS;

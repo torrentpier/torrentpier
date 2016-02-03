@@ -61,7 +61,7 @@
 
 if (!defined('BB_ROOT')) die(basename(__FILE__));
 
-$domain_name = 'torrentpier.me';
+$domain_name = 'tor.dev';
 
 $config = [
 	// Increase number after changing js or css
@@ -76,10 +76,19 @@ $config = [
 	// Database
 	'db' => [
 		'driver'   => 'Pdo_Mysql',
-		'hostname' => 'localhost',
+		'hostname' => '127.0.0.1',
 		'database' => 'tp_220',
-		'username' => 'root',
-		'password' => 'dev',
+		'username' => 'user',
+		'password' => 'pass',
+		'charset'  => 'utf8'
+	],
+
+	'sphinx' => [
+		'driver'   => 'Pdo_Mysql',
+		'hostname' => '127.0.0.1',
+		'username' => 'user',
+		'password' => 'pass',
+		'port'     => 9306,
 		'charset'  => 'utf8'
 	],
 
