@@ -2029,11 +2029,6 @@ function get_topic_icon ($topic, $is_unread = null)
 			$folder = $images['folder_locked'];
 			$folder_new = $images['folder_locked_new'];
 		}
-		else if ($topic['tracker_status'])
-		{
-			$folder = ($t_hot) ? $images['folder_dl_hot'] : $images['folder_dl'];
-			$folder_new = ($t_hot) ? $images['folder_dl_hot_new'] : $images['folder_dl_new'];
-		}
 
 		$folder_image = ($is_unread) ? $folder_new : $folder;
 	}
