@@ -15,11 +15,39 @@ if (!defined('BB_ROOT')) define('BB_ROOT', './');
 
 header('X-Frame-Options: SAMEORIGIN');
 
-// Get initial config
-require(BB_ROOT . 'library/config.php');
+// Cloudflare
+if (isset($_SERVER['HTTP_CF_CONNECTING_IP']))
+{
+	$_SERVER['REMOTE_ADDR'] = $_SERVER['HTTP_CF_CONNECTING_IP'];
+}
+
+require_once BB_ROOT . 'library/defines.php';
 
 // Composer
 require(BB_ROOT . 'vendor/autoload.php');
+
+require_once BB_ROOT . 'library/config.php';
+
+$di = new \TorrentPier\Di();
+
+$di->register(new \TorrentPier\ServiceProviders\ConfigServiceProvider, [
+	'config.file.system.main' => __DIR__ . '/library/config.php',
+	'config.file.local.main' => __DIR__ . '/library/config.local.php',
+]);
+
+$di->register(new \TorrentPier\ServiceProviders\DbServiceProvider, [
+	'config.db' => $di->config->db->toArray()
+]);
+
+$di->register(new \TorrentPier\ServiceProviders\SphinxServiceProvider, [
+	'config.sphinx' => $di->config->sphinx->toArray()
+]);
+
+$bb_cfg        = $di->config->toArray();
+$page_cfg      = $di->config->page->toArray();
+$tr_cfg        = $di->config->tracker->toArray();
+$rating_limits = $di->config->rating->toArray();
+define('BB_CFG_LOADED', true);
 
 // Load Zend Framework
 use Zend\Loader\StandardAutoloader;
@@ -65,12 +93,28 @@ define('BOT_UID',   -746);
 
 /**
  * Database
+ * @deprecated
  */
 // Core DB class
 require(CORE_DIR . 'dbs.php');
-$DBS = new DBS($bb_cfg);
+$DBS = new DBS([
+	'db' => [
+		'db' => [
+			$di->config->db->hostname,
+			$di->config->db->database,
+			$di->config->db->username,
+			$di->config->db->password,
+			$di->config->db->charset,
+			false
+		]
+	],
+	'db_alias' => $bb_cfg['db_alias']
+]);
 
-function DB ($db_alias = 'db1')
+/**
+ * @deprecated
+ */
+function DB ($db_alias = 'db')
 {
 	global $DBS;
 	return $DBS->get_db_obj($db_alias);
