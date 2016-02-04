@@ -498,7 +498,7 @@ else
 	switch ($view_mode)
 	{
 		case 'releases':
-			// TODO Correct SQL to posts with attach and limit them, optimization
+			// TODO: проверить на работу с новыми вложениями
 
 			if (!$group_info['release_group'])
 			{

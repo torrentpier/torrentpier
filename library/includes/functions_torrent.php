@@ -318,7 +318,7 @@ function send_torrent_with_passkey ($t_data)
 	}
 	else if (isset($bb_cfg['tor_frozen'][$row['tor_status']]))
 	{
-		if (!$t_data['is_am']) bb_die("Раздача имеет статус: <b>{$lang['tor_status'][$row['tor_status']]}</b><br /><br />Скачивание запрещено"); //todo перевести
+		if (!$t_data['is_am']) bb_die("Раздача имеет статус: <b>{$lang['tor_status'][$row['tor_status']]}</b><br /><br />Скачивание запрещено"); //TODO: перевести
 	}
 
 	$passkey_val = '';
@@ -359,7 +359,7 @@ function send_torrent_with_passkey ($t_data)
 		}
 	}
 
-	/* todo активировать несколько позднее
+	/* TODO: восстановить
 	// лимит количества скачиваний торрент-файлов в день
 	if ($user_id != $poster_id && !$t_data['is_am'])
 	{

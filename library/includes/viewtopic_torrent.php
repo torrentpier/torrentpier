@@ -28,13 +28,14 @@ $page_cfg['show_tor_status_select'] = ($is_auth['auth_mod'] || IS_CP_HOLDER);
 // Define show peers mode (count only || full details)
 $s_mode = (isset($_GET['spmode']) && $_GET['spmode'] == 'full') ? 'full' : 'count';
 
-$tor_file_size  = humn_size($t_data['filesize']);
-$tor_reged      = (bool) $t_data['tracker_status'];
+$bt_user_id    = $userdata['user_id'];
+$tor_file_size = humn_size($t_data['filesize']);
+$tor_reged     = (bool) $t_data['tracker_status'];
 
 $locked = ($t_data['forum_status'] == FORUM_LOCKED || $t_data['topic_status'] == TOPIC_LOCKED);
-$tor_auth = ($bt_user_id != GUEST_UID && (($bt_user_id == $poster_id && !$locked) || $is_auth['auth_mod']));
+$tor_auth = ($bt_user_id != GUEST_UID && (($bt_user_id == $poster_id && !$locked) || $is_auth['auth_mod'] || IS_CP_HOLDER));
 
-if ($tor_auth && $t_data['allow_reg_tracker'] && !$tor_reged && !IS_CP_HOLDER /* && $post_id == $t_data['topic_first_post_id']*/)
+if ($tor_auth && $t_data['allow_reg_tracker'] && !$tor_reged && !IS_CP_HOLDER && $post_id == $t_data['topic_first_post_id'])
 {
 	$tr_reg_link = '<a class="txtb" href="#" onclick="ajax.exec({ action: \'change_torrent\', t : '. $topic_id .', type: \'reg\'}); return false;">'. $lang['BT_REG_ON_TRACKER'] .'</a>';
 }
@@ -75,7 +76,7 @@ else
 if ($tor_reged && !$tor_info)
 {
 	//DB()->query("UPDATE ". BB_TOPICS ." SET tracker_status = 0 WHERE topic_id = $topic_id LIMIT 1");
-	//bb_die('Torrent status fixed');
+	//bb_die('Torrent status fixed'); //TODO: восстановить
 }
 
 if ($tor_reged)
@@ -96,7 +97,7 @@ if ($tor_reged)
 	{
 		$sql = "SELECT u.*, dl.user_status
 			FROM ". BB_BT_USERS ." u
-			LEFT JOIN ". BB_BT_DLSTATUS ." dl ON dl.user_id = $bt_user_id AND dl.topic_id = $bt_topic_id
+			LEFT JOIN ". BB_BT_DLSTATUS ." dl ON dl.user_id = $bt_user_id AND dl.topic_id = $topic_id
 			WHERE u.user_id = $bt_user_id
 			LIMIT 1";
 	}
@@ -113,7 +114,7 @@ if ($tor_reged)
 
 	$user_status = isset($bt_userdata['user_status']) ? $bt_userdata['user_status'] : null;
 
-	if (($min_ratio_dl || $min_ratio_warn) && $user_status != DL_STATUS_COMPLETE && $bt_user_id != $poster_id && $tor_type != TOR_TYPE_GOLD)
+	if (($min_ratio_dl || $min_ratio_warn) && $user_status != DL_STATUS_COMPLETE && $bt_user_id != $poster_id && $tor_info['tor_type'] != TOR_TYPE_GOLD)
 	{
 		if (($user_ratio = get_bt_ratio($bt_userdata)) !== null)
 		{
@@ -123,8 +124,8 @@ if ($tor_reged)
 		if ((isset($user_ratio) && isset($min_ratio_warn) && $user_ratio < $min_ratio_warn && TR_RATING_LIMITS) || ($bt_userdata['u_down_total'] < MIN_DL_FOR_RATIO))
 		{
 			$template->assign_vars(array(
-				'SHOW_RATIO_WARN'  => true,
-				'RATIO_WARN_MSG'   => sprintf($lang['BT_RATIO_WARNING_MSG'], $min_ratio_dl, $bb_cfg['ratio_url_help']),
+				'SHOW_RATIO_WARN' => true,
+				'RATIO_WARN_MSG'  => sprintf($lang['BT_RATIO_WARNING_MSG'], $min_ratio_dl, $bb_cfg['ratio_url_help']),
 			));
 		}
 	}
@@ -172,8 +173,6 @@ if ($tor_reged)
 	// Show peers
 	if ($tor_info['tor_status'] == TOR_CLOSED_CPHOLD)
 	{
-		$closed_by_cphold = true;
-
 		$template->assign_vars(array(
 			'TOR_CLOSED_BY_CPHOLD' => true,
 			'TOR_CONTROLS'         => false,

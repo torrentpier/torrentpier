@@ -31,8 +31,6 @@ if ($group_id)
 
 if ($is_moderator)
 {
-	// TODO Admin panel, some tasty features
-
 	// Avatar
 	if ($submit)
 	{

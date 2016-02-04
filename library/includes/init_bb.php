@@ -411,7 +411,7 @@ if (DBG_USER) require(INC_DIR .'functions_dev.php');
 $html = new html_common();
 $log_action = new log_action();
 
-// TODO temporarily 'cat_forums' always enqueued
+// TODO: удаление датастор
 $datastore->enqueue(array('cat_forums'));
 
 // Дата старта вашего проекта

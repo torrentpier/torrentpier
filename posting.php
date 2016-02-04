@@ -692,9 +692,9 @@ if ($mode == 'newtopic' || $post_data['first_post'])
 		'S_FORM_ENCTYPE'  => 'enctype="multipart/form-data"',
 		'FILE_ATTACHED'   => $file_attached,
 		'ATTACH_MAX_SIZE' => humn_size($bb_cfg['attach']['max_size']),
-		'ALLOWED_EXT'     => ($allowed_ext) ? '*.' . join(', *.', $allowed_ext) : 'прикреплять запрещено',
+		'ALLOWED_EXT'     => ($allowed_ext) ? '*.' . join(', *.', $allowed_ext) : 'прикреплять запрещено', // TODO: перевести
 		'TOR_REQUIRED'    => !empty($_POST['tor_required']),
-		'POLL_TIP'        => ($mode == 'newtopic') ? 'Вы сможете добавить опрос после создания темы' : 'Вы можете добавить опрос со страницы просмотра темы', // TODO
+		'POLL_TIP'        => ($mode == 'newtopic') ? 'Вы сможете добавить опрос после создания темы' : 'Вы можете добавить опрос со страницы просмотра темы', // TODO: перевести
 	));
 }
 

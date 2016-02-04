@@ -906,7 +906,6 @@ class sql_db
 		{
 		case 'start':
 			$this->explain_hold = '';
-			// TODO: добавить поддержку многотабличных запросов
 			if (preg_match('#UPDATE ([a-z0-9_]+).*?WHERE(.*)/#', $query, $m))
 			{
 				$query = "SELECT * FROM $m[1] WHERE $m[2]";

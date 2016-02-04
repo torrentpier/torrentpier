@@ -339,7 +339,7 @@ function topic_delete ($mode_or_topic_id, $forum_id = null, $prune_time = 0, $pr
 	// Log action
 	if ($prune)
 	{
-		// TODO
+		// TODO: логирование для массового удаления
 	}
 	else
 	{

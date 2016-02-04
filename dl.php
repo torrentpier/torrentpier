@@ -7,7 +7,7 @@ require(BB_ROOT .'common.php');
 
 if (!$topic_id = (int) request_var('t', 0))
 {
-	bb_simple_die('Ошибочный запрос: не указан topic_id'); // TODO
+	bb_simple_die('Ошибочный запрос: не указан topic_id'); // TODO: перевести
 }
 
 $user->session_start();
@@ -24,11 +24,11 @@ $sql = "
 ";
 if (!$t_data = DB()->fetch_row($sql))
 {
-	bb_simple_die('Файл не найден [DB]'); // TODO
+	bb_simple_die('Файл не найден [DB]'); // TODO: перевести
 }
 if (!$t_data['attach_ext_id'])
 {
-	bb_simple_die('Файл не найден [EXT_ID]'); // TODO
+	bb_simple_die('Файл не найден [EXT_ID]'); // TODO: перевести
 }
 
 // Auth check
@@ -88,7 +88,7 @@ $file_path = get_attach_path($topic_id, $t_data['attach_ext_id']);
 
 if (($file_contents = @file_get_contents($file_path)) === false)
 {
-	bb_simple_die("Файл не найден [HDD]"); // TODO
+	bb_simple_die("Файл не найден [HDD]"); // TODO: перевести
 }
 
 $send_filename = "t-$topic_id.". $bb_cfg['file_id_ext'][$t_data['attach_ext_id']];
