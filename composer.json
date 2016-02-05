@@ -26,6 +26,8 @@
 		"ext-mbstring": "*",
 		"ext-tidy": "*",
 		"google/recaptcha": "^1.0",
+		"pimple/pimple": "^3.0",
+		"ripaclub/sphinxsearch": "^0.8.0",
 		"rych/bencode": "^1.0",
 		"twig/twig": "^1.0",
 		"zendframework/zend-authentication": "^2.5",
@@ -42,7 +44,7 @@
 	},
 	"autoload": {
 		"psr-4": {
-			"TorrentPier\\": "library/"
+			"TorrentPier\\": "src/"
 		}
 	},
 	"minimum-stability": "stable",
