@@ -2101,7 +2101,7 @@ function get_poll_data_items_js ($topic_id)
 	}
 	foreach ($items as $k => $v)
 	{
-		$items[$k] = Zend\Json\Json::encode($v);
+		$items[$k] = \Zend\Json\Json::encode($v);
 	}
 
 	return is_array($topic_id) ? $items : $items[$topic_id];

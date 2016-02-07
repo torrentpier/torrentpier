@@ -5,7 +5,7 @@ if (!defined('IN_AJAX')) die(basename(__FILE__));
 global $bf, $lang;
 
 $user_id = (int) $this->request['user_id'];
-$new_opt = Zend\Json\Json::decode($this->request['user_opt'], Zend\Json\Json::TYPE_ARRAY);
+$new_opt = \Zend\Json\Json::decode($this->request['user_opt'], \Zend\Json\Json::TYPE_ARRAY);
 
 if (!$user_id OR !$u_data = get_userdata($user_id))
 {

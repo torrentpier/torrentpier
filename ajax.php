@@ -251,7 +251,7 @@ class ajax_common
 			}
 		}
 
-		$response_js = Zend\Json\Json::encode($this->response);
+		$response_js = \Zend\Json\Json::encode($this->response);
 
 		if (GZIP_OUTPUT_ALLOWED && !defined('NO_GZIP'))
 		{

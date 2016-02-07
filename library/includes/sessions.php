@@ -680,7 +680,7 @@ class user_common
 		}
 		else if (!empty($_COOKIE['opt_js']))
 		{
-			$opt_js = Zend\Json\Json::decode($_COOKIE['opt_js'], Zend\Json\Json::TYPE_ARRAY);
+			$opt_js = \Zend\Json\Json::decode($_COOKIE['opt_js'], \Zend\Json\Json::TYPE_ARRAY);
 
 			if (is_array($opt_js))
 			{

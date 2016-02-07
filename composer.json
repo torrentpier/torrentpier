@@ -29,6 +29,7 @@
 		"pimple/pimple": "^3.0",
 		"ripaclub/sphinxsearch": "^0.8.0",
 		"rych/bencode": "^1.0",
+		"twbs/bootstrap": "v4.0.0-alpha.2",
 		"twig/twig": "^1.0",
 		"zendframework/zend-authentication": "^2.5",
 		"zendframework/zend-cache": "^2.5",

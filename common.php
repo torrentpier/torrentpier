@@ -56,9 +56,6 @@ use Zend\Loader\StandardAutoloader;
 $loader = new StandardAutoloader(array('autoregister_zf' => true));
 $loader->register();
 
-// ZF global use
-use Zend\Json;
-
 $server_protocol = ($bb_cfg['cookie_secure']) ? 'https://' : 'http://';
 $server_port = (in_array($bb_cfg['server_port'], array(80, 443))) ? '' : ':' . $bb_cfg['server_port'];
 define('FORUM_PATH', $bb_cfg['script_path']);
@@ -135,6 +132,9 @@ require(INC_DIR . 'datastore/common.php');
 require(CORE_DIR . 'caches.php');
 $CACHES = new CACHES($bb_cfg);
 
+/**
+ * TODO: @deprecated
+ */
 function CACHE ($cache_name)
 {
 	global $CACHES;

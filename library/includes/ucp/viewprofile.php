@@ -190,7 +190,7 @@ else
 
 if (IS_ADMIN)
 {
-	$ajax_user_opt = Zend\Json\Json::encode(array(
+	$ajax_user_opt = \Zend\Json\Json::encode(array(
 		'dis_avatar'       => bf($profiledata['user_opt'], 'user_opt', 'dis_avatar'),
 		'dis_sig'          => bf($profiledata['user_opt'], 'user_opt', 'dis_sig'),
 		'dis_passkey'      => bf($profiledata['user_opt'], 'user_opt', 'dis_passkey'),
