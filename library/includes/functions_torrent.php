@@ -169,7 +169,7 @@ function tracker_register ($topic_id, $mode = '', $tor_status = TOR_NOT_APPROVED
 	{
 		$tor_decoded['info']['private'] = (int) 1;
 		$fp = fopen($filename, 'w+');
-		fwrite($fp, bencode($tor_decoded));
+		fwrite($fp, \Rych\Bencode\Bencode::encode($tor_decoded));
 		fclose($fp);
 	}
 
@@ -180,7 +180,7 @@ function tracker_register ($topic_id, $mode = '', $tor_status = TOR_NOT_APPROVED
 		return torrent_error_exit($lang['TORFILE_INVALID']);
 	}
 
-	$info_hash     = pack('H*', sha1(bencode($info)));
+	$info_hash     = pack('H*', sha1(\Rych\Bencode\Bencode::encode($info)));
 	$info_hash_sql = rtrim(DB()->escape($info_hash), ' ');
 	$info_hash_md5 = md5($info_hash);
 
@@ -470,7 +470,7 @@ function send_torrent_with_passkey ($t_data)
 	unset($tor['comment.utf-8']);
 
 	// Send torrent
-	$output   = bencode($tor);
+	$output   = \Rych\Bencode\Bencode::encode($tor);
 	$dl_fname = '['.$bb_cfg['server_name'].'].t' . $topic_id . '.torrent';
 
 	if (!empty($_COOKIE['explain']))

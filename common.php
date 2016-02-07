@@ -357,69 +357,6 @@ function make_rand_str ($len = 10)
 	return substr($str, 0, $len);
 }
 
-// bencode: based on OpenTracker
-function bencode ($var)
-{
-	if (is_string($var))
-	{
-		return strlen($var) .':'. $var;
-	}
-	else if (is_int($var))
-	{
-		return 'i'. $var .'e';
-	}
-	else if (is_float($var))
-	{
-		return 'i'. sprintf('%.0f', $var) .'e';
-	}
-	else if (is_array($var))
-	{
-		if (count($var) == 0)
-		{
-			return 'de';
-		}
-		else
-		{
-			$assoc = false;
-
-			foreach ($var as $key => $val)
-			{
-				if (!is_int($key))
-				{
-					$assoc = true;
-					break;
-				}
-			}
-
-			if ($assoc)
-			{
-				ksort($var, SORT_REGULAR);
-				$ret = 'd';
-
-				foreach ($var as $key => $val)
-				{
-					$ret .= bencode($key) . bencode($val);
-				}
-				return $ret .'e';
-			}
-			else
-			{
-				$ret = 'l';
-
-				foreach ($var as $val)
-				{
-					$ret .= bencode($val);
-				}
-				return $ret .'e';
-			}
-		}
-	}
-	else
-	{
-		trigger_error('bencode error: wrong data type', E_USER_ERROR);
-	}
-}
-
 function array_deep (&$var, $fn, $one_dimensional = false, $array_only = false)
 {
 	if (is_array($var))
@@ -535,7 +472,7 @@ else if (defined('IN_TRACKER'))
 
 	function dummy_exit ($interval = 1800)
 	{
-		$output = bencode(array(
+		$output = \Rych\Bencode\Bencode::encode(array(
 			'interval'     => (int)    $interval,
 			'min interval' => (int)    $interval,
 			'peers'        => (string) DUMMY_PEER,
