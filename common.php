@@ -45,6 +45,9 @@ $di->register(new \TorrentPier\ServiceProviders\SphinxServiceProvider, [
 	'config.sphinx' => $di->config->sphinx->toArray()
 ]);
 
+$di->register(new \TorrentPier\ServiceProviders\RequestServiceProvider());
+$di->register(new \TorrentPier\ServiceProviders\ResponseServiceProvider());
+
 $bb_cfg        = $di->config->toArray();
 $page_cfg      = $di->config->page->toArray();
 $tr_cfg        = $di->config->tracker->toArray();
