@@ -32,6 +32,11 @@ require_once(BB_ROOT . 'library/config.php');
 
 $di = new \TorrentPier\Di();
 
+// Todo: Need refactoring. Get locale from settings
+$di['settings.locale'] = function($di) {
+	return 'ru';
+};
+
 $di->register(new \TorrentPier\ServiceProviders\ConfigServiceProvider, [
 	'config.file.system.main' => __DIR__ . '/library/config.php',
 	'config.file.local.main' => __DIR__ . '/library/config.local.php',
@@ -47,6 +52,19 @@ $di->register(new \TorrentPier\ServiceProviders\SphinxServiceProvider, [
 
 $di->register(new \TorrentPier\ServiceProviders\RequestServiceProvider());
 $di->register(new \TorrentPier\ServiceProviders\ResponseServiceProvider());
+$di->register(new \TorrentPier\ServiceProviders\ViewServiceProvider());
+
+$di->register(new \TorrentPier\ServiceProviders\TranslationServiceProvider(), [
+	'config.debug' => $di->config->debug,
+	'config.translator.dir_cache' => $di->config->translator->dir_cache,
+	'config.translator.resources' => $di->config->translator->resources->toArray()
+]);
+
+$di->register(new \TorrentPier\ServiceProviders\TwigServiceProvider, [
+	'config.debug' => $di->config->debug,
+	'config.twig.dir_templates' => $di->config->twig->dir_templates,
+	'config.twig.dir_cache' => $di->config->twig->dir_cache
+]);
 
 $bb_cfg        = $di->config->toArray();
 $page_cfg      = $di->config->page->toArray();
