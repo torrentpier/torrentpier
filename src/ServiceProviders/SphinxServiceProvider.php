@@ -13,29 +13,30 @@ use Zend\Db\Adapter\Driver\Pdo\Pdo;
 
 class SphinxServiceProvider implements ServiceProviderInterface
 {
-	/**
-	 * @inheritdoc
-	 */
-	public function register(Container $container)
-	{
-		$container['sphinx'] = function($container) {
-			$platform = new SphinxQL();
-			$adapter = new Adapter($container['config.sphinx']);
+    /**
+     * {@inheritdoc}
+     */
+    public function register(Container $container)
+    {
+        $container['sphinx'] = function ($container) {
+            $platform = new SphinxQL();
+            $adapter = new Adapter($container['config.sphinx']);
 
-			$driver = $adapter->getDriver();
-			// Check driver
-			if ($driver instanceof Pdo && $driver->getDatabasePlatformName(Pdo::NAME_FORMAT_CAMELCASE) == 'Mysql' ) {
-				$driver->registerStatementPrototype(new Statement());
-			} elseif (!$driver instanceof Mysqli) {
-				$class = get_class($driver);
-				throw new UnsupportedDriverException(
-					$class . ' not supported. Use Zend\Db\Adapter\Driver\Pdo\Pdo or Zend\Db\Adapter\Driver\Mysqli\Mysqli'
-				);
-			}
+            $driver = $adapter->getDriver();
+            // Check driver
+            if ($driver instanceof Pdo && $driver->getDatabasePlatformName(Pdo::NAME_FORMAT_CAMELCASE) == 'Mysql') {
+                $driver->registerStatementPrototype(new Statement());
+            } elseif (!$driver instanceof Mysqli) {
+                $class = get_class($driver);
+                throw new UnsupportedDriverException(
+                    $class.' not supported. Use Zend\Db\Adapter\Driver\Pdo\Pdo or Zend\Db\Adapter\Driver\Mysqli\Mysqli'
+                );
+            }
 
-			$platform->setDriver($adapter->getDriver());
-			unset($container['config.sphinx']);
-			return $adapter;
-		};
-	}
+            $platform->setDriver($adapter->getDriver());
+            unset($container['config.sphinx']);
+
+            return $adapter;
+        };
+    }
 }
