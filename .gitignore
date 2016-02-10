@@ -1,5 +1,7 @@
 ### TorrentPier ###
 .idea/
+composer.phar
+composer.lock
 data/avatars/
 data/files/
 internal_data/ajax_html/

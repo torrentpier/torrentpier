@@ -31,7 +31,6 @@
 		"symfony/http-foundation": "^3.0",
 		"symfony/twig-bridge": "^3.0",
 		"symfony/translation": "^3.0",
-		"twbs/bootstrap": "v4.0.0-alpha.2",
 		"twig/twig": "^1.0",
 		"zendframework/zend-authentication": "^2.5",
 		"zendframework/zend-cache": "^2.5",

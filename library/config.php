@@ -16,14 +16,14 @@ $config = [
 
 	// Version info
 	'tp_version'       => '2.2.0',
-	'tp_release_date'  => '**/02/2016',
+	'tp_release_date'  => '**/**/2016',
 	'tp_release_state' => 'ALPHA',
 
 	// Database
 	'db' => [
 		'driver'   => 'Pdo_Mysql',
 		'hostname' => 'localhost',
-		'database' => 'database',
+		'database' => 'tp_220',
 		'username' => 'user',
 		'password' => 'pass',
 		'charset'  => 'utf8'
