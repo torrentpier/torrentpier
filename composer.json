@@ -1,7 +1,6 @@
 {
 	"name": "torrentpier/torrentpier",
 	"description": "TorrentPier. Bittorrent-tracker engine",
-	"version": "2.2.0-dev",
 	"type": "project",
 	"keywords": ["bittorrent","forum","torrent","tracker"],
 	"homepage": "https://torrentpier.me/",
@@ -29,6 +28,9 @@
 		"pimple/pimple": "^3.0",
 		"ripaclub/sphinxsearch": "^0.8.0",
 		"rych/bencode": "^1.0",
+		"symfony/http-foundation": "^3.0",
+		"symfony/twig-bridge": "^3.0",
+		"symfony/translation": "^3.0",
 		"twbs/bootstrap": "v4.0.0-alpha.2",
 		"twig/twig": "^1.0",
 		"zendframework/zend-authentication": "^2.5",
@@ -49,6 +51,5 @@
 		}
 	},
 	"minimum-stability": "stable",
-	"require-dev": {},
 	"prefer-stable": true
 }

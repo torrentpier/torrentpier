@@ -7,6 +7,9 @@ $domain_name = (!empty($_SERVER['SERVER_NAME'])) ? $_SERVER['SERVER_NAME'] : $do
 
 $config = [
 
+	// Debug (twig etc.)
+	'debug' => true,
+
 	// Increase number after changing js or css
 	'js_ver'  => 1,
 	'css_ver' => 1,
@@ -26,6 +29,7 @@ $config = [
 		'charset'  => 'utf8'
 	],
 
+	// Sphinx
 	'sphinx' => [
 		'driver'   => 'Pdo_Mysql',
 		'hostname' => 'localhost',
@@ -33,6 +37,27 @@ $config = [
 		'password' => 'pass',
 		'port'     => 9306,
 		'charset'  => 'utf8'
+	],
+
+	// Twig
+	'twig' => [
+		'dir_templates' => __DIR__ . '/../styles/templates/default',
+		'dir_cache'     => __DIR__ . '/../internal_data/cache',
+	],
+
+	// Translation
+	'translator' => [
+		'dir_cache' => __DIR__ . '/../internal_data/cache',
+		'resources' => [
+			[
+				'resource' => __DIR__ . '/../messages/ru.php',
+				'locale' => 'ru',
+			],
+			[
+				'resource' => __DIR__ . '/../messages/en.php',
+				'locale' => 'en',
+			]
+		]
 	],
 
 	// Aliases

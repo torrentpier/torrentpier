@@ -1,0 +1,10 @@
+<h1>{% trans %}Style guide{% endtrans %}</h1>
+
+<hr>
+
+<form action="/styleguide.php" method="get">
+    <input type="text" name="name" value="{{ name }}">
+    <button type="submit">{% trans %}Send{% endtrans %}</button>
+</form>
+
+<pre>{% trans with { '%name%': name|e } %}Hello, %name%{% endtrans %}</pre>
