@@ -23,7 +23,6 @@
 		"php": "^5.5 || ^7.0",
 		"ext-curl": "*",
 		"ext-mbstring": "*",
-		"ext-tidy": "*",
 		"google/recaptcha": "^1.0",
 		"pimple/pimple": "^3.0",
 		"ripaclub/sphinxsearch": "^0.8.0",
