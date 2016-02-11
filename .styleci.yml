@@ -1,3 +1,5 @@
+preset: psr2
+
 finder:
   name:
     - "*.php"
