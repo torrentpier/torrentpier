@@ -75,8 +75,8 @@ else
 
 if ($tor_reged && !$tor_info)
 {
-	//DB()->query("UPDATE ". BB_TOPICS ." SET tracker_status = 0 WHERE topic_id = $topic_id LIMIT 1");
-	//bb_die('Torrent status fixed'); //TODO: восстановить
+	DB()->query("UPDATE ". BB_TOPICS ." SET tracker_status = 0 WHERE topic_id = $topic_id LIMIT 1");
+	bb_die('Torrent status fixed'); //TODO: локализация
 }
 
 if ($tor_reged)
@@ -513,7 +513,7 @@ if ($bb_cfg['bt_allow_spmode_change'] && $s_mode != 'full')
 
 $template->assign_vars(array(
 	'SHOW_DL_LIST_LINK' => (($bb_cfg['bt_show_dl_list'] || $bb_cfg['allow_dl_list_names_mode']) && $t_data['tracker_status']),
-	'SHOW_TOR_ACT'      => ($tor_reged && $show_peers && (!isset($bb_cfg['tor_no_tor_act'][$tor_info['tor_status']]) || IS_AM)),
+	'SHOW_TOR_ACT'      => ($tor_reged && (!isset($bb_cfg['tor_no_tor_act'][$tor_info['tor_status']]) || IS_AM)),
 	'S_MODE_COUNT'      => ($s_mode == 'count'),
 	'S_MODE_FULL'       => ($s_mode == 'full'),
 	'PEER_EXIST'        => ($seeders || $leechers || defined('SEEDER_EXIST') || defined('LEECHER_EXIST')),

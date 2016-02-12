@@ -128,7 +128,7 @@ function tracker_register ($topic_id, $mode = '', $tor_status = TOR_NOT_APPROVED
 
 	$sql = "
 		SELECT
-			t.forum_id, t.post_id, t.poster_id, t.attach_ext_id, t.tracker_status,
+			t.forum_id, t.topic_poster, t.attach_ext_id, t.tracker_status,
 			f.allow_reg_tracker
 		FROM ". BB_TOPICS ." t, ". BB_FORUMS ." f
 		WHERE t.topic_id = ". intval($topic_id) ."
@@ -139,14 +139,12 @@ function tracker_register ($topic_id, $mode = '', $tor_status = TOR_NOT_APPROVED
 	{
 		return torrent_error_exit('Invalid topic_id');
 	}
-	$post_id   = $tor['post_id'];
 	$forum_id  = $tor['forum_id'];
-	$poster_id = $tor['poster_id'];
+	$poster_id = $tor['topic_poster'];
 
 
 	if ($tor['attach_ext_id'] != 8) return torrent_error_exit($lang['NOT_TORRENT']);
 	if (!$tor['allow_reg_tracker']) return torrent_error_exit($lang['REG_NOT_ALLOWED_IN_THIS_FORUM']);
-	if ($post_id != $tor['topic_first_post_id']) return torrent_error_exit($lang['ALLOWED_ONLY_1ST_POST_REG']);
 	if ($tor['tracker_status']) return torrent_error_exit($lang['ALREADY_REG']);
 
 	if ($reg_mode != 'mcp_tor_register')
@@ -154,7 +152,7 @@ function tracker_register ($topic_id, $mode = '', $tor_status = TOR_NOT_APPROVED
 		torrent_auth_check($forum_id, $poster_id);
 	}
 
-	$filename = get_attach_path($topic_id);
+	$filename = get_attach_path($topic_id, 8);
 
 	if (!file_exists($filename))
 	{

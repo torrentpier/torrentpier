@@ -40,8 +40,6 @@ if ($mode == 'smilies')
 $tracking_topics = get_tracks('topic');
 $tracking_forums = get_tracks('forum');
 
-
-
 set_die_append_msg($forum_id, $topic_id);
 
 // What auth type do we need to check?
@@ -94,8 +92,7 @@ switch ($mode)
 		break;
 }
 
-// Here we do various lookups to find topic_id, forum_id, post_id etc.
-// Doing it here prevents spoofing (eg. faking forum_id, topic_id or post_id
+// Various lookups to find topic_id, forum_id, post_id etc
 $error_msg = '';
 $post_data = array();
 switch ($mode)
@@ -382,7 +379,6 @@ elseif ( ($submit || $confirm) && !$topic_has_new_posts )
 			$user_id = ( $mode == 'reply' || $mode == 'newtopic' ) ? $userdata['user_id'] : $post_data['poster_id'];
 			update_post_stats($mode, $post_data, $forum_id, $topic_id, $post_id, $user_id);
 		}
-		//$attachment_mod['posting']->insert_attachment($post_id);
 
 		if (!$error_msg)
 		{
@@ -399,7 +395,8 @@ elseif ( ($submit || $confirm) && !$topic_has_new_posts )
 
 		if ($can_attach_file && !empty($_FILES['attach']['name']))
 		{
-			$upload = new Upload();
+            require(INC_DIR .'functions_upload.php');
+			$upload = new upload_common();
 
 			if ($upload->init($bb_cfg['attach'], $_FILES['attach']) AND $upload->store('attach', array('topic_id' => $topic_id)))
 			{
@@ -413,12 +410,36 @@ elseif ( ($submit || $confirm) && !$topic_has_new_posts )
 				if ($upload->file_ext_id == 8)
 				{
 					require_once(INC_DIR .'functions_torrent.php');
-					tracker_register($topic_id, 'newtopic', TOR_NOT_APPROVED);  # --> exit
+                    if ($bb_cfg['premod'])
+                    {
+                        // Получение списка id форумов начиная с parent
+                        $forum_parent = $forum_id;
+                        if ($post_info['forum_parent']) $forum_parent = $post_info['forum_parent'];
+                        $count_rowset = DB()->fetch_rowset("SELECT forum_id FROM ". BB_FORUMS ." WHERE forum_parent = $forum_parent");
+                        $sub_forums = array();
+                        foreach ($count_rowset as $count_row)
+                        {
+                            if ($count_row['forum_id'] != $forum_id) $sub_forums[] = $count_row['forum_id'];
+                        }
+                        $sub_forums[] = $forum_id;
+                        $sub_forums = join(',', $sub_forums);
+                        // Подсчет проверенных релизов в форумах раздела
+                        $count_checked_releases = DB()->fetch_row("SELECT COUNT(*) AS checked_releases FROM ". BB_BT_TORRENTS ." WHERE poster_id  = ". $userdata['user_id'] ." AND forum_id IN($sub_forums) AND tor_status IN(". TOR_APPROVED .",". TOR_DOUBTFUL .",". TOR_TMP .") LIMIT 1", 'checked_releases');
+                        if ($count_checked_releases || IS_AM)
+                        {
+                            tracker_register($topic_id, 'newtopic', TOR_NOT_APPROVED);
+                        }
+                        else
+                        {
+                            tracker_register($topic_id, 'newtopic', TOR_PREMOD);
+                        }
+                    }
+                    else tracker_register($topic_id, 'newtopic', TOR_NOT_APPROVED);
 				}
 			}
 			else
 			{
-				$return_to_edit_link = '<a href="'. POSTING_URL .'?mode=editpost&amp;p='. $post_id .'">Вернуться к редактированию сообщения</a>';
+				$return_to_edit_link = '<a href="'. POSTING_URL .'?mode=editpost&amp;p='. $post_id .'">Вернуться к редактированию сообщения</a>'; //TODO: локализация
 				$return_message = '
 					<span class="warnColor1">'. join('<br />', $upload->errors) ."</span>
 					<br /><br />
@@ -428,46 +449,6 @@ elseif ( ($submit || $confirm) && !$topic_has_new_posts )
 				";
 			}
 		}
-
-		/*if (defined('TORRENT_ATTACH_ID') && $bb_cfg['bt_newtopic_auto_reg'] && !$error_msg)
-		{
-			include(INC_DIR .'functions_torrent.php');
-			if (!DB()->fetch_row("SELECT attach_id FROM ". BB_BT_TORRENTS ." WHERE attach_id = ". TORRENT_ATTACH_ID))
-			{
-				if ($bb_cfg['premod'])
-				{
-					// Получение списка id форумов начиная с parent
-					$forum_parent = $forum_id;
-					if ($post_info['forum_parent']) $forum_parent = $post_info['forum_parent'];
-					$count_rowset = DB()->fetch_rowset("SELECT forum_id FROM ". BB_FORUMS ." WHERE forum_parent = $forum_parent");
-					$sub_forums = array();
-					foreach ($count_rowset as $count_row)
-					{
-						if ($count_row['forum_id'] != $forum_id) $sub_forums[] = $count_row['forum_id'];
-					}
-					$sub_forums[] = $forum_id;
-					$sub_forums = join(',', $sub_forums);
-					// Подсчет проверенных релизов в форумах раздела
-					$count_checked_releases = DB()->fetch_row("
-						SELECT COUNT(*) AS checked_releases
-						FROM ". BB_BT_TORRENTS ."
-						WHERE poster_id  = ". $userdata['user_id'] ."
-						  AND forum_id   IN($sub_forums)
-						  AND tor_status IN(". TOR_APPROVED .",". TOR_DOUBTFUL .",". TOR_TMP .")
-						LIMIT 1
-					", 'checked_releases');
-					if ($count_checked_releases || IS_AM)
-					{
-						tracker_register(TORRENT_ATTACH_ID, 'newtopic', TOR_NOT_APPROVED);
-					}
-					else
-					{
-						tracker_register(TORRENT_ATTACH_ID, 'newtopic', TOR_PREMOD);
-					}
-				}
-				else tracker_register(TORRENT_ATTACH_ID, 'newtopic', TOR_NOT_APPROVED);
-			}
-		}*/
 
 		// Update atom feed
 		update_atom('topic', $topic_id);
