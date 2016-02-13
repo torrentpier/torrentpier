@@ -22,7 +22,7 @@ $config = [
 	// Database
 	'db' => [
 		'driver'   => 'Pdo_Mysql',
-		'hostname' => 'localhost',
+		'hostname' => '127.0.0.1',
 		'database' => 'tp_220',
 		'username' => 'user',
 		'password' => 'pass',
@@ -31,8 +31,8 @@ $config = [
 
 	// Sphinx
 	'sphinx' => [
-		'driver'   => 'Pdo_Mysql',
-		'hostname' => 'localhost',
+		'driver'   => '{self.db.driver}',
+		'hostname' => '{self.db.hostname}',
 		'username' => 'user',
 		'password' => 'pass',
 		'port'     => 9306,
