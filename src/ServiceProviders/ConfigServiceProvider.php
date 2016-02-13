@@ -4,6 +4,7 @@ namespace TorrentPier\ServiceProviders;
 
 use Pimple\Container;
 use Pimple\ServiceProviderInterface;
+use TorrentPier\Config;
 use Zend\Config\Factory;
 
 class ConfigServiceProvider implements ServiceProviderInterface
@@ -14,10 +15,10 @@ class ConfigServiceProvider implements ServiceProviderInterface
     public function register(Container $container)
     {
         $container['config'] = function ($container) {
-            $config = Factory::fromFile($container['config.file.system.main'], true);
+            $config = new Config(Factory::fromFile($container['config.file.system.main']));
 
             if (isset($container['config.file.local.main']) && file_exists($container['config.file.local.main'])) {
-                $config->merge(Factory::fromFile($container['config.file.local.main'], true));
+                $config->merge(new Config(Factory::fromFile($container['config.file.local.main'])));
             }
 
             return $config;
