@@ -2608,12 +2608,10 @@ function bb_captcha ($mode, $callback = '')
 	$public   = $di->config->get('captcha.public_key');
 	$cp_theme = $di->config->get('captcha.theme');
 
-	if (!$public || !$secret)
+	if (!$public && !$secret)
 	{
 		bb_die($lang['CAPTCHA_SETTINGS']);
 	}
-
-	$reCaptcha = new \ReCaptcha\ReCaptcha($secret);
 
 	switch ($mode)
 	{
@@ -2633,8 +2631,10 @@ function bb_captcha ($mode, $callback = '')
 			break;
 
 		case 'check':
-			$g_resp = request_var('g-recaptcha-response', '');
-			$resp = $reCaptcha->verify($g_resp, $_SERVER['REMOTE_ADDR']);
+            $resp = $di->captcha->verify(
+                $di->request->get('g-recaptcha-response', ''),
+                $di->request->server->get('REMOTE_ADDR')
+            );
 			if ($resp->isSuccess())
 			{
 				return true;
