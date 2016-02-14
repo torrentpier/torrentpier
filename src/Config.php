@@ -69,4 +69,24 @@ class Config extends ZendConfig
 
         return $value;
     }
+
+    /**
+     * @inheritdoc
+     */
+    public function toArray()
+    {
+        $array = [];
+        $data  = $this->data;
+
+        /** @var self $value */
+        foreach ($data as $key => $value) {
+            if ($value instanceof self) {
+                $array[$key] = $value->toArray();
+            } else {
+                $array[$key] = $this->prepareValue($value);
+            }
+        }
+
+        return $array;
+    }
 }
