@@ -177,19 +177,16 @@ $config = [
 			'name'     => 'Русский',
 			'locale'   => 'ru_RU.UTF-8',
 			'encoding' => 'UTF-8',
-			'captcha'  => 'ru',
 		],
 		'uk' => [
 			'name'     => 'Український',
 			'locale'   => 'uk_UA.UTF-8',
 			'encoding' => 'UTF-8',
-			'captcha'  => 'uk',
 		],
 		'en' => [
 			'name'     => 'English',
 			'locale'   => 'en_US.UTF-8',
 			'encoding' => 'UTF-8',
-			'captcha'  => 'en',
 		],
 	],
 

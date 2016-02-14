@@ -2600,12 +2600,13 @@ function hash_search ($hash)
 
 function bb_captcha ($mode, $callback = '')
 {
-	global $bb_cfg, $lang, $userdata;
+	global $lang;
 
-	$secret   = $bb_cfg['captcha']['secret_key'];
-	$public   = $bb_cfg['captcha']['public_key'];
-	$cp_theme = $bb_cfg['captcha']['theme'];
-	$cp_lang  = $bb_cfg['lang'][$userdata['user_lang']]['captcha'];
+	$di = \TorrentPier\Di::getInstance();
+
+	$secret   = $di->config->get('captcha.secret_key');
+	$public   = $di->config->get('captcha.public_key');
+	$cp_theme = $di->config->get('captcha.theme');
 
 	if (!$public || !$secret)
 	{
@@ -2628,7 +2629,7 @@ function bb_captcha ($mode, $callback = '')
 					};
 				</script>
 				<div id=\"tp-captcha\"></div>
-				<script src=\"https://www.google.com/recaptcha/api.js?onload=onloadCallback&hl=" . $cp_lang . "&render=explicit\" async defer></script>";
+				<script src=\"https://www.google.com/recaptcha/api.js?onload=onloadCallback&render=explicit\" async defer></script>";
 			break;
 
 		case 'check':

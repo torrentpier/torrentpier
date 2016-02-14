@@ -358,7 +358,7 @@ if ($tor_reged)
 						if (!defined('SEEDER_EXIST'))
 						{
 							define('SEEDER_EXIST', true);
-							$seed_order_action = "viewtopic.php?". POST_TOPIC_URL ."=$bt_topic_id&amp;spmode=full#seeders";
+							$seed_order_action = "viewtopic.php?". POST_TOPIC_URL ."=$topic_id&amp;spmode=full#seeders";
 
 							$template->assign_block_vars("$x_full", array(
 								'SEED_ORD_ACT'   => $seed_order_action,
@@ -415,7 +415,6 @@ if ($tor_reged)
 					$sp_down  = ($peer['speed_down']) ? humn_size($peer['speed_down'], 0, 'KB') .'/s' : '-';
 
 					$template->assign_block_vars("$x_full.$x_row", array(
-						'ROW_BGR'        => $row_bgr,
 						'NAME'           => ($peer['update_time']) ? $name : "<s>$name</s>",
 						'COMPL_PRC'      => $compl_perc,
 						'UP_TOTAL'       => ($max_up_id[$x] == $pid)      ? "<b>$up_tot</b>"   : $up_tot,
