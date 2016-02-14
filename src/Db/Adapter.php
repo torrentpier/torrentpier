@@ -1,0 +1,197 @@
+<?php
+
+namespace TorrentPier\Db;
+
+use TorrentPier\Config;
+use Zend\Db\Adapter\Driver\ResultInterface;
+use Zend\Db\Adapter\Platform\PlatformInterface;
+use Zend\Db\Adapter\Profiler\ProfilerInterface;
+use Zend\Db\Exception\InvalidArgumentException;
+use Zend\Db\ResultSet\ResultSetInterface;
+use Zend\Db\Sql\Delete;
+use Zend\Db\Sql\Expression;
+use Zend\Db\Sql\Insert;
+use Zend\Db\Sql\Select;
+use Zend\Db\Sql\Sql;
+use Zend\Db\Sql\Update;
+use Zend\Db\Sql\Where;
+
+/**
+ * Class Adapter
+ * @package TorrentPier\Db
+ */
+class Adapter extends \Zend\Db\Adapter\Adapter
+{
+    /**
+     * @var Entity|null
+     */
+    protected $resultWrapper;
+
+    /**
+     * {@inheritdoc}
+     */
+    public function __construct($driver, PlatformInterface $platform = null, ResultSetInterface $queryResultPrototype = null, ProfilerInterface $profiler = null)
+    {
+        if ($driver instanceof Config) {
+            $driver = $driver->toArray();
+        }
+        parent::__construct($driver, $platform, $queryResultPrototype, $profiler);
+    }
+
+    /**
+     * Get sql object.
+     *
+     * @return Sql
+     */
+    protected function getSql()
+    {
+        return new Sql($this);
+    }
+
+    /**
+     * Prepare table name.
+     *
+     * @param $table
+     * @return mixed
+     */
+    protected function prepareTable($table)
+    {
+        $this->resultWrapper = null;
+
+        if (is_string($table) && class_exists($table)) {
+            $this->resultWrapper = new $table;
+            $table = $this->resultWrapper->table();
+        }
+
+        return $table;
+    }
+
+    /**
+     * Insert row to database.
+     *
+     * @param $table
+     * @param array $values
+     * @return mixed|null
+     *
+     * @throws InvalidArgumentException
+     */
+    public function insert($table, array $values)
+    {
+        $table = $this->prepareTable($table);
+        $sql = $this->getSql();
+
+
+        /** @var Insert $sqlInsert */
+        $sqlInsert = $sql->insert($table);
+        $sqlInsert->values($values);
+
+        $statementContainer = $sql->prepareStatementForSqlObject($sqlInsert);
+        /** @var ResultInterface $result */
+        $result = $statementContainer->execute();
+        return $result->getGeneratedValue();
+    }
+
+    /**
+     * Update rows in database.
+     *
+     * @param $table
+     * @param array $values
+     * @param Where|\Closure|string|array $where
+     * @return int
+     *
+     * @throws InvalidArgumentException
+     */
+    public function update($table, array $values, $where)
+    {
+        $table = $this->prepareTable($table);
+        $sql = $this->getSql();
+
+        /** @var Update $sqlUpdate */
+        $sqlUpdate = $sql->update($table);
+        $sqlUpdate->set($values);
+        $sqlUpdate->where($where);
+
+        $statementContainer = $sql->prepareStatementForSqlObject($sqlUpdate);
+        /** @var ResultInterface $result */
+        $result = $statementContainer->execute();
+        return $result->getAffectedRows();
+    }
+
+    /**
+     * Delete rows from database.
+     *
+     * @param string $table
+     * @param array $where
+     * @return int
+     */
+    public function delete($table, array $where)
+    {
+        $table = $this->prepareTable($table);
+        $sql = $this->getSql();
+
+        /** @var Delete $sqlDelete */
+        $sqlDelete = $sql->delete($table);
+        $sqlDelete->where($where);
+
+        $statementContainer = $sql->prepareStatementForSqlObject($sqlDelete);
+        /** @var ResultInterface $result */
+        $result = $statementContainer->execute();
+        return $result->getAffectedRows();
+    }
+
+    /**
+     * Select rows from database.
+     *
+     * @param $table
+     * @param null|\Closure|array $queryCallback
+     * @return PrepareStatement
+     * @throws InvalidArgumentException
+     */
+    public function select($table, $queryCallback = null)
+    {
+        $table = $this->prepareTable($table);
+        $sql = $this->getSql();
+
+        /** @var Select $sqlDelete */
+        $sqlSelect = $sql->select($table);
+
+        if ($queryCallback instanceof \Closure) {
+            call_user_func($queryCallback, $sqlSelect);
+        } elseif (is_array($queryCallback)) {
+            $sqlSelect->where($queryCallback);
+        }
+
+        $statementContainer = $sql->prepareStatementForSqlObject($sqlSelect);
+        return new PrepareStatement($statementContainer, $this->resultWrapper);
+    }
+
+    /**
+     * Count rows in database.
+     *
+     * @param $table
+     * @param null|\Closure|array $queryCallback
+     * @return int
+     * @throws InvalidArgumentException
+     */
+    public function count($table, $queryCallback = null)
+    {
+        $table = $this->prepareTable($table);
+        $sql = $this->getSql();
+
+        /** @var Select $sqlDelete */
+        $sqlSelect = $sql->select($table);
+
+        if ($queryCallback instanceof \Closure) {
+            call_user_func($queryCallback, $sqlSelect);
+        } elseif (is_array($queryCallback)) {
+            $sqlSelect->where($queryCallback);
+        }
+
+        $sqlSelect->columns(['count' => new Expression('COUNT(*)')]);
+
+        $statementContainer = $sql->prepareStatementForSqlObject($sqlSelect);
+        /** @var ResultInterface $result */
+        $result = $statementContainer->execute();
+        return $result->current()['count'];
+    }
+}
