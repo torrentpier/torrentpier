@@ -66,6 +66,10 @@ $di->register(new \TorrentPier\ServiceProviders\TwigServiceProvider, [
 	'config.twig.dir_cache' => $di->config->twig->dir_cache
 ]);
 
+$di->register(new \TorrentPier\ServiceProviders\CaptchaServiceProvider, [
+	'config.captcha.secret_key' => $di->config->captcha->secret_key
+]);
+
 $bb_cfg        = $di->config->toArray();
 $page_cfg      = $di->config->page->toArray();
 $tr_cfg        = $di->config->tracker->toArray();
