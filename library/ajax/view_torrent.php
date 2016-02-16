@@ -8,20 +8,19 @@ if (!isset($this->request['t']))
 {
 	$this->ajax_die($lang['EMPTY_ATTACH_ID']);
 }
-$attach_id = (int) $this->request['attach_id'];
+$topic_id = (int) $this->request['t'];
 
 global $bnc_error;
 $bnc_error = 0;
 
-//$torrent = DB()->fetch_row("SELECT at.attach_id, at.physical_filename FROM ". BB_ATTACHMENTS_DESC ." at WHERE at.attach_id = $attach_id LIMIT 1");
-if (!$torrent) $this->ajax_die($lang['EMPTY_ATTACH_ID']);
-//$filename = get_attachments_dir() .'/'. $torrent['physical_filename'];
+// Получение торрент-файла
+$file_path = get_attach_path($topic_id, 8);
 
-if (($file_contents = @file_get_contents($filename)) === false)
+if (($file_contents = @file_get_contents($file_path)) === false)
 {
 	if (IS_AM)
 	{
-		$this->ajax_die($lang['ERROR_NO_ATTACHMENT'] ."\n\n". htmlCHR($filename));
+		$this->ajax_die($lang['ERROR_NO_ATTACHMENT'] ."\n\n". htmlCHR($file_path));
 	}
 	else
 	{
