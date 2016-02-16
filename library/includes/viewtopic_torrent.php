@@ -76,7 +76,7 @@ else
 if ($tor_reged && !$tor_info)
 {
 	DB()->query("UPDATE ". BB_TOPICS ." SET tracker_status = 0 WHERE topic_id = $topic_id LIMIT 1");
-	bb_die('Torrent status fixed'); //TODO: локализация
+	bb_die('Torrent status fixed'); // TODO: локализация
 }
 
 if ($tor_reged)
@@ -155,11 +155,8 @@ if ($tor_reged)
 			'FILESIZE'        => $tor_file_size,
 			'MAGNET'          => $tor_magnet,
 			'HASH'            => strtoupper(bin2hex($tor_info['info_hash'])),
-			'DOWNLOAD_COUNT'  => sprintf($lang['DOWNLOAD_NUMBER'], 666/*$download_count*/),
+			'DOWNLOAD_COUNT'  => sprintf($lang['DOWNLOAD_NUMBER'], 666/*$download_count*/), // TODO: подсчет числа скачиваний вложения (?) или удалить
 			'REGED_TIME'      => bb_date($tor_info['reg_time']),
-			'REGED_DELTA'     => delta_time($tor_info['reg_time']),
-			'TORRENT_SIZE'    => humn_size($tor_size),
-			'COMPLETED'       => sprintf($lang['DOWNLOAD_NUMBER'], $tor_info['complete_count']),
 
 			'SHOW_TOR_REGGED'  => true,
 			'TRACKER_REG_LINK' => $tr_reg_link,

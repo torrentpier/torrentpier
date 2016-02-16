@@ -52,7 +52,7 @@ switch ($mode)
 		if ($tor['tor_status'] == TOR_CLOSED_CPHOLD)
 		{
 			if (!IS_ADMIN) $this->verify_mod_rights($tor['forum_id']);
-			DB()->query("UPDATE ". BB_TOPICS ." SET topic_status = ". TOPIC_UNLOCKED ." WHERE topic_id = {$tor['topic_id']} LIMIT 1");
+			DB()->query("UPDATE ". BB_TOPICS ." SET topic_status = ". TOPIC_UNLOCKED ." WHERE topic_id = {$topic_id} LIMIT 1");
 		}
 		else
 		{
@@ -80,7 +80,7 @@ switch ($mode)
 			if ($tor['poster_id'] > 0)
 			{
 				$subject = sprintf($lang['TOR_MOD_TITLE'], $tor['topic_title']);
-				$message = sprintf($lang['TOR_MOD_MSG'], get_username($tor['poster_id']), make_url(TOPIC_URL . $tor['topic_id']), $bb_cfg['tor_icons'][$new_status] .' '.$lang['TOR_STATUS_NAME'][$new_status]);
+				$message = sprintf($lang['TOR_MOD_MSG'], get_username($tor['poster_id']), make_url(TOPIC_URL . $topic_id), $bb_cfg['tor_icons'][$new_status] .' '.$lang['TOR_STATUS_NAME'][$new_status]);
 
 				if ($comment && $comment != $lang['COMMENT']) $message .= "\n\n[b]". $lang['COMMENT'] .'[/b]: '. $comment;
 
@@ -94,7 +94,7 @@ switch ($mode)
 		if (!$bb_cfg['tor_comment']) $this->ajax_die($lang['MODULE_OFF']);
 
 		$subject = sprintf($lang['TOR_AUTH_TITLE'], $tor['topic_title']);
-		$message = sprintf($lang['TOR_AUTH_MSG'], get_username($tor['checked_user_id']), make_url(TOPIC_URL . $tor['topic_id']), $tor['topic_title']);
+		$message = sprintf($lang['TOR_AUTH_MSG'], get_username($tor['checked_user_id']), make_url(TOPIC_URL . $topic_id), $tor['topic_title']);
 
 		if ($comment && $comment != $lang['COMMENT']) $message .= "\n\n[b]". $lang['COMMENT'] .'[/b]: '. $comment;
 

@@ -4,7 +4,7 @@ if (!defined('IN_AJAX')) die(basename(__FILE__));
 
 global $lang;
 
-if (!isset($this->request['attach_id']))
+if (!isset($this->request['t']))
 {
 	$this->ajax_die($lang['EMPTY_ATTACH_ID']);
 }

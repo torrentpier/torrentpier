@@ -302,9 +302,9 @@ function topic_delete ($mode_or_topic_id, $forum_id = null, $prune_time = 0, $pr
 		LEFT JOIN ". BB_POLL_USERS   ." pu USING(topic_id)
 	");
 
-	// Delete posts, posts_text, attachments (from DB)
+	// Delete posts, posts_text
 	DB()->query("
-		DELETE p, pt, ps, a, d, ph
+		DELETE p, pt, ph, ps
 		FROM      ". $tmp_delete_topics ." del
 		LEFT JOIN ". BB_POSTS           ." p  ON(p.topic_id = del.topic_id)
 		LEFT JOIN ". BB_POSTS_TEXT      ." pt ON(pt.post_id = p.post_id)
@@ -665,13 +665,12 @@ function post_delete ($mode_or_post_id, $user_id = null, $exclude_first = true)
 
 	// Delete posts, posts_text
 	DB()->query("
-		DELETE p, pt, ps, tor, ph
+		DELETE p, pt, ph, ps
 		FROM      ". $tmp_delete_posts ." del
 		LEFT JOIN ". BB_POSTS          ." p   ON(p.post_id  = del.post_id)
 		LEFT JOIN ". BB_POSTS_TEXT     ." pt  ON(pt.post_id  = del.post_id)
 		LEFT JOIN ". BB_POSTS_HTML     ." ph  ON(ph.post_id  = del.post_id)
 		LEFT JOIN ". BB_POSTS_SEARCH   ." ps  ON(ps.post_id  = del.post_id)
-		LEFT JOIN ". BB_BT_TORRENTS    ." tor ON(tor.topic_id = del.topic_id)
 	");
 
 	// Log action

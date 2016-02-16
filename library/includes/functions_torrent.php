@@ -66,7 +66,7 @@ function tracker_unregister ($topic_id, $redirect_url = '')
 	// Unset DL-type for topic
 	if ($bb_cfg['bt_unset_dltype_on_tor_unreg'] && $topic_id)
 	{
-		DB()->query("UPDATE ". BB_TOPICS ." SET topic_dl_type = 0 WHERE topic_id = $topic_id LIMIT 1");
+		DB()->query("UPDATE ". BB_TOPICS ." SET tracker_status = 0 WHERE topic_id = $topic_id LIMIT 1");
 	}
 
 	// Ocelot
@@ -258,7 +258,7 @@ function delete_torrent ($topic_id)
 
 function change_tor_status ($topic_id, $tor_status)
 {
-	global $topic_id, $userdata;
+	global $userdata;
 
 	$tor_status = (int) $tor_status;
 
