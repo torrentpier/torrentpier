@@ -182,24 +182,6 @@ CREATE TABLE IF NOT EXISTS `bb_bt_torstat` (
 -- ----------------------------
 
 -- ----------------------------
--- Table structure for `bb_bt_tor_dl_stat`
--- ----------------------------
-DROP TABLE IF EXISTS `bb_bt_tor_dl_stat`;
-CREATE TABLE IF NOT EXISTS `bb_bt_tor_dl_stat` (
-  `topic_id` mediumint(8) unsigned NOT NULL DEFAULT '0',
-  `user_id` mediumint(9) NOT NULL DEFAULT '0',
-  `attach_id` mediumint(8) unsigned NOT NULL DEFAULT '0',
-  `t_up_total` bigint(20) unsigned NOT NULL DEFAULT '0',
-  `t_down_total` bigint(20) unsigned NOT NULL DEFAULT '0',
-  `t_bonus_total` bigint(20) unsigned NOT NULL DEFAULT '0',
-  PRIMARY KEY (`topic_id`,`user_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
-
--- ----------------------------
--- Records of bb_bt_tor_dl_stat
--- ----------------------------
-
--- ----------------------------
 -- Table structure for `bb_bt_tracker`
 -- ----------------------------
 DROP TABLE IF EXISTS `bb_bt_tracker`;
@@ -882,6 +864,7 @@ CREATE TABLE IF NOT EXISTS `bb_topics` (
   `topic_moved_id` mediumint(8) unsigned NOT NULL DEFAULT '0',
   `topic_dl_type` tinyint(1) NOT NULL DEFAULT '0',
   `attach_ext_id` tinyint(4) NOT NULL DEFAULT '0',
+  `attach_dl_cnt` mediumint(8) unsigned NOT NULL DEFAULT '0',
   `filesize` mediumint(8) unsigned NOT NULL DEFAULT '0',
   `topic_last_post_time` int(11) NOT NULL DEFAULT '0',
   `topic_show_first_post` tinyint(1) unsigned NOT NULL DEFAULT '0',
@@ -895,7 +878,7 @@ CREATE TABLE IF NOT EXISTS `bb_topics` (
 -- ----------------------------
 -- Records of bb_topics
 -- ----------------------------
-INSERT INTO `bb_topics` VALUES ('1', '1', 'Добро пожаловать в TorrentPier', '2', UNIX_TIMESTAMP(), '2', '0', '0', '0', '0', '1', '1', '0', '0', '0', '0', UNIX_TIMESTAMP(), '0');
+INSERT INTO `bb_topics` VALUES ('1', '1', 'Добро пожаловать в TorrentPier', '2', UNIX_TIMESTAMP(), '2', '0', '0', '0', '0', '1', '1', '0', '0', '0', '0', '0', UNIX_TIMESTAMP(), '0');
 
 -- ----------------------------
 -- Table structure for `bb_topics_watch`

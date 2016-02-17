@@ -46,7 +46,7 @@ $user_list = DB()->fetch_rowset("
 ");
 
 $subject = sprintf($lang['CALLSEED_SUBJECT'], $t_data['topic_title']);
-$message = sprintf($lang['CALLSEED_TEXT'], make_url(TOPIC_URL . $topic_id), $t_data['topic_title'], make_url(DOWNLOAD_URL . $t_data['attach_id']));
+$message = sprintf($lang['CALLSEED_TEXT'], make_url(TOPIC_URL . $topic_id), $t_data['topic_title'], make_url(DOWNLOAD_URL . $topic_id));
 
 if ($user_list)
 {
@@ -76,7 +76,7 @@ function topic_info ($topic_id)
 
 	$sql = "
 		SELECT
-			tor.poster_id, tor.forum_id, tor.attach_id, tor.call_seed_time,
+			tor.poster_id, tor.forum_id, tor.call_seed_time,
 			t.topic_title, sn.seeders
 		FROM      ". BB_BT_TORRENTS     ." tor
 		LEFT JOIN ". BB_TOPICS          ." t  USING(topic_id)

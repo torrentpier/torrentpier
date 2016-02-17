@@ -140,30 +140,30 @@ if ($tor_reged)
 	else
 	{
 		$template->assign_vars(array(
-			'DOWNLOAD_NAME'   => '['.$bb_cfg['server_name'].'].t' . $topic_id . '.torrent',
-			'TOR_SILVER_GOLD' => $tor_info['tor_type'],
+			'DOWNLOAD_NAME'     => '['.$bb_cfg['server_name'].'].t' . $topic_id . '.torrent',
+			'TOR_SILVER_GOLD'   => $tor_info['tor_type'],
 
-			'TOR_FROZEN'      => (!IS_AM) ? (isset($bb_cfg['tor_frozen'][$tor_info['tor_status']]) && !(isset($bb_cfg['tor_frozen_author_download'][$tor_info['tor_status']]) && $userdata['user_id'] == $tor_info['poster_id'])) ? true : '' : '',
-			'TOR_STATUS_TEXT' => $lang['TOR_STATUS_NAME'][$tor_info['tor_status']],
-			'TOR_STATUS_ICON' => $bb_cfg['tor_icons'][$tor_info['tor_status']],
-			'TOR_STATUS_BY'   => ($tor_info['checked_user_id'] && $is_auth['auth_mod']) ? ('<span title="'. bb_date($tor_info['checked_time']) .'"> &middot; '. profile_url($tor_info) .' &middot; <i>'. delta_time($tor_info['checked_time']) . $lang['TOR_BACK'] .'</i></span>') : '',
+			'TOR_FROZEN'        => (!IS_AM) ? (isset($bb_cfg['tor_frozen'][$tor_info['tor_status']]) && !(isset($bb_cfg['tor_frozen_author_download'][$tor_info['tor_status']]) && $userdata['user_id'] == $tor_info['poster_id'])) ? true : '' : '',
+			'TOR_STATUS_TEXT'   => $lang['TOR_STATUS_NAME'][$tor_info['tor_status']],
+			'TOR_STATUS_ICON'   => $bb_cfg['tor_icons'][$tor_info['tor_status']],
+			'TOR_STATUS_BY'     => ($tor_info['checked_user_id'] && $is_auth['auth_mod']) ? ('<span title="'. bb_date($tor_info['checked_time']) .'"> &middot; '. profile_url($tor_info) .' &middot; <i>'. delta_time($tor_info['checked_time']) . $lang['TOR_BACK'] .'</i></span>') : '',
 			'TOR_STATUS_SELECT' => build_select('sel_status', array_flip($lang['TOR_STATUS_NAME']), TOR_APPROVED),
-			'TOR_STATUS_REPLY' => $bb_cfg['tor_comment'] && !IS_GUEST && in_array($tor_info['tor_status'], $bb_cfg['tor_reply']) && $userdata['user_id'] == $tor_info['poster_id'] && $t_data['topic_status'] != TOPIC_LOCKED,
+			'TOR_STATUS_REPLY'  => $bb_cfg['tor_comment'] && !IS_GUEST && in_array($tor_info['tor_status'], $bb_cfg['tor_reply']) && $userdata['user_id'] == $tor_info['poster_id'] && $t_data['topic_status'] != TOPIC_LOCKED,
 
-			'DL_LINK_CLASS'   => (isset($bt_userdata['user_status'])) ? $dl_link_css[$bt_userdata['user_status']] : 'genmed',
-			'DL_TITLE_CLASS'  => (isset($bt_userdata['user_status'])) ? $dl_status_css[$bt_userdata['user_status']] : 'gen',
-			'FILESIZE'        => $tor_file_size,
-			'MAGNET'          => $tor_magnet,
-			'HASH'            => strtoupper(bin2hex($tor_info['info_hash'])),
-			'DOWNLOAD_COUNT'  => sprintf($lang['DOWNLOAD_NUMBER'], 666/*$download_count*/), // TODO: подсчет числа скачиваний вложения (?) или удалить
-			'REGED_TIME'      => bb_date($tor_info['reg_time']),
+			'DL_LINK_CLASS'     => (isset($bt_userdata['user_status'])) ? $dl_link_css[$bt_userdata['user_status']] : 'genmed',
+			'DL_TITLE_CLASS'    => (isset($bt_userdata['user_status'])) ? $dl_status_css[$bt_userdata['user_status']] : 'gen',
+			'FILESIZE'          => $tor_file_size,
+			'MAGNET'            => $tor_magnet,
+			'HASH'              => strtoupper(bin2hex($tor_info['info_hash'])),
+			'DOWNLOAD_COUNT'    => declension($t_data['attach_dl_cnt'], 'times'),
+			'REGED_TIME'        => bb_date($tor_info['reg_time']),
 
-			'SHOW_TOR_REGGED'  => true,
-			'TRACKER_REG_LINK' => $tr_reg_link,
-			'AUTH_MOD'         => $is_auth['auth_mod'],
-			'TOR_SIZE'      => humn_size($tor_size),
-			'TOR_LONGEVITY' => delta_time($tor_info['reg_time']),
-			'TOR_COMPLETED' => declension($tor_info['complete_count'], 'times'),
+			'SHOW_TOR_REGGED'   => true,
+			'TRACKER_REG_LINK'  => $tr_reg_link,
+			'AUTH_MOD'          => $is_auth['auth_mod'],
+			'TOR_SIZE'          => humn_size($tor_size),
+			'TOR_LONGEVITY'     => delta_time($tor_info['reg_time']),
+			'TOR_COMPLETED'     => declension($tor_info['complete_count'], 'times'),
 		));
 	}
 

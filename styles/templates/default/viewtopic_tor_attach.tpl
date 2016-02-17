@@ -100,7 +100,7 @@
         </tr>
         <tr class="row1">
             <td>{L_COMPLETED}:</td>
-            <td><span title="{L_DOWNLOADED}: {DOWNLOAD_COUNT}">{TOR_COMPLETED}</span></td>
+            <td>{DOWNLOAD_COUNT}</td>
         </tr>
         <tr class="row1">
             <td>{L_SIZE}:</td>

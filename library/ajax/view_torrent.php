@@ -6,7 +6,7 @@ global $lang;
 
 if (!isset($this->request['t']))
 {
-	$this->ajax_die($lang['EMPTY_ATTACH_ID']);
+	$this->ajax_die('empty topic_id'); // TODO: перевести
 }
 $topic_id = (int) $this->request['t'];
 

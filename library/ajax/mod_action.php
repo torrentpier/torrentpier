@@ -18,14 +18,15 @@ switch ($mode)
 			$this->ajax_die($lang['STATUS_DOES_EXIST'] . $new_status);
 		}
 
-		$topic_ids = DB()->fetch_rowset("SELECT attach_id FROM ". BB_BT_TORRENTS ." WHERE topic_id IN($topics)", 'attach_id');
+		$topic_ids = explode(',', $topics);
 
-		foreach($topic_ids as $attach_id)
+		foreach($topic_ids as $topic_id)
 		{
-			change_tor_status($attach_id, $status);
+			change_tor_status($topic_id, $status);
 		}
+
 		$this->response['status'] = $bb_cfg['tor_icons'][$status];
-		$this->response['topics'] = explode(',', $topics);
+		$this->response['topics'] = $topic_ids;
 	break;
 
 	case 'edit_topic_title':
