@@ -41,7 +41,7 @@ $config = [
 
 	// Twig
 	'twig' => [
-		'dir_templates' => __DIR__ . '/../styles/templates/default',
+		'dir_templates' => __DIR__ . '/../templates/default',
 		'dir_cache'     => __DIR__ . '/../internal_data/cache',
 	],
 
