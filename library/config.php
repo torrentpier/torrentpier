@@ -477,7 +477,7 @@ $config = [
 		'retracker'             => true,
 		'retracker_host'        => 'http://retracker.local/announce',
 		'freeleech'             => false,
-		'guest_tracker'         => false,
+		'guest_tracker'         => true,
 	],
 
 	// Ratio settings

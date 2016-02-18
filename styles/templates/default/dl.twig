@@ -1,0 +1,9 @@
+<form action="{{ download_url }}" method="post">
+    {% trans %}Captcha{% endtrans %}:
+    <div>
+        {{ captcha|raw }}
+    </div>
+    <input type="hidden" name="redirect_url" value="{{ redirect_template }}"/>
+    <input type="submit" value="{% trans %}Submit{% endtrans %}"/>
+    <input type="button" value="{% trans %}Go back{% endtrans %}" onclick="location.href = '{{ redirect_template }}'"/>
+</form>
