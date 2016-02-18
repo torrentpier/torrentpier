@@ -35,7 +35,7 @@ $tor_reged     = (bool) $t_data['tracker_status'];
 $locked = ($t_data['forum_status'] == FORUM_LOCKED || $t_data['topic_status'] == TOPIC_LOCKED);
 $tor_auth = ($bt_user_id != GUEST_UID && (($bt_user_id == $poster_id && !$locked) || $is_auth['auth_mod'] || IS_CP_HOLDER));
 
-if ($tor_auth && $t_data['allow_reg_tracker'] && !$tor_reged && !IS_CP_HOLDER && $post_id == $t_data['topic_first_post_id'])
+if ($tor_auth && $t_data['allow_reg_tracker'] && !$tor_reged && !IS_CP_HOLDER)
 {
 	$tr_reg_link = '<a class="txtb" href="#" onclick="ajax.exec({ action: \'change_torrent\', t : '. $topic_id .', type: \'reg\'}); return false;">'. $lang['BT_REG_ON_TRACKER'] .'</a>';
 }
@@ -76,7 +76,7 @@ else
 if ($tor_reged && !$tor_info)
 {
 	DB()->query("UPDATE ". BB_TOPICS ." SET tracker_status = 0 WHERE topic_id = $topic_id LIMIT 1");
-	bb_die('Torrent status fixed'); // TODO: локализация
+	bb_die('Torrent status fixed'); // TODO: перевести
 }
 
 if ($tor_reged)

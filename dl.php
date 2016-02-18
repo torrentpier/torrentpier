@@ -1,9 +1,8 @@
 <?php
 
 define('BB_SCRIPT', 'dl');
-define('NO_GZIP', true);
 define('BB_ROOT', './');
-require(BB_ROOT . 'common.php');
+require_once __DIR__ . '/common.php';
 
 $di = \TorrentPier\Di::getInstance();
 
@@ -47,8 +46,9 @@ if (IS_GUEST && !bb_captcha('check')) {
     ]);
 
     $response = \Symfony\Component\HttpFoundation\Response::create();
-
     $response->setContent($content);
+
+    $response->prepare($di->request);
     $response->send();
 }
 

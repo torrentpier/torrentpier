@@ -439,7 +439,7 @@ elseif ( ($submit || $confirm) && !$topic_has_new_posts )
 			}
 			else
 			{
-				$return_to_edit_link = '<a href="'. POSTING_URL .'?mode=editpost&amp;p='. $post_id .'">Вернуться к редактированию сообщения</a>'; //TODO: локализация
+				$return_to_edit_link = '<a href="'. POSTING_URL .'?mode=editpost&amp;p='. $post_id .'">Вернуться к редактированию сообщения</a>'; //TODO: перевести
 				$return_message = '
 					<span class="warnColor1">'. join('<br />', $upload->errors) ."</span>
 					<br /><br />
