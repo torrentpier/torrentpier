@@ -51,7 +51,6 @@ $di->register(new \TorrentPier\ServiceProviders\SphinxServiceProvider, [
 ]);
 
 $di->register(new \TorrentPier\ServiceProviders\RequestServiceProvider());
-$di->register(new \TorrentPier\ServiceProviders\ResponseServiceProvider());
 $di->register(new \TorrentPier\ServiceProviders\ViewServiceProvider());
 
 $di->register(new \TorrentPier\ServiceProviders\TranslationServiceProvider(), [
