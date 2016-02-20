@@ -12,6 +12,7 @@ $content = $di->view->make('styleguide', [
     'name' => $di->request->get('name', $user->data['username'])
 ]);
 
+/** @var \Symfony\Component\HttpFoundation\Response $response */
 $response = \Symfony\Component\HttpFoundation\Response::create();
 $response->setContent($content);
 
