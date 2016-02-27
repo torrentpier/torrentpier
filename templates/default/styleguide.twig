@@ -8,3 +8,11 @@
 </form>
 
 <pre>{% trans with { '%name%': name|e } %}Hello, %name%{% endtrans %}</pre>
+
+
+<ul>
+    {% for user in users %}
+    <li>ID: {{ user.id }} => {{ user.name|e }} - {{ user.title|e }}</li>
+    {% endfor %}
+    <li>TOTAL: {{ users_count }}</li>
+</ul>

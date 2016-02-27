@@ -4,8 +4,8 @@ namespace TorrentPier\ServiceProviders;
 
 use Pimple\Container;
 use Pimple\ServiceProviderInterface;
-use TorrentPier\Config;
-use Zend\Db\Adapter\Adapter;
+use TorrentPier\Db\Adapter;
+use TorrentPier\Db\Connection;
 
 class DbServiceProvider implements ServiceProviderInterface
 {
@@ -15,15 +15,8 @@ class DbServiceProvider implements ServiceProviderInterface
     public function register(Container $container)
     {
         $container['db'] = function ($container) {
-            $config = $container['config.db'];
-
-            if ($config instanceof Config) {
-                $config = $config->toArray();
-            }
-
-            $adapter = new Adapter($config);
+            $adapter = new Adapter($container['config.db']);
             unset($container['config.db']);
-
             return $adapter;
         };
     }
