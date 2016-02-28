@@ -23,15 +23,13 @@ global $userdata;
 $t_data = $db->select(['t' => BB_TOPICS], function (\Zend\Db\Sql\Select $select) use ($topic_id) {
     $select->where(function (\Zend\Db\Sql\Where $where) use ($topic_id) {
         $where->equalTo('topic_id', $topic_id);
+        $where->greaterThan('attach_ext_id', 0);
     });
     $select->join(['f' => BB_FORUMS], 'f.forum_id = t.forum_id');
 })->one();
 
 if (!$t_data) {
-    bb_simple_die($di->translator->trans('File not found: %location%', ['%location%' => '[DB]']));
-}
-if (!$t_data->attach_ext_id) {
-    bb_simple_die($di->translator->trans('File not found: %location%', ['%location%' => '[EXT_ID]']));
+    bb_simple_die($di->translator->trans('File not found: %location%', ['%location%' => 'database']));
 }
 
 // Auth check
@@ -43,11 +41,7 @@ if (!IS_GUEST) {
 }
 
 // Downloads counter
-$dlCounter = $db->update(BB_TOPICS, [
-    'attach_dl_cnt' => 'attach_dl_cnt + 1'
-], [
-    'topic_id' => $topic_id
-]);
+$db->increment(BB_TOPICS, 'attach_dl_cnt', ['topic_id' => $topic_id]);
 
 // Captcha for guest
 if (IS_GUEST && !bb_captcha('check')) {
@@ -77,8 +71,8 @@ if ($t_data->attach_ext_id == 8) {
 // All other
 $file_path = get_attach_path($topic_id, $t_data->attach_ext_id);
 
-if (($file_contents = @file_get_contents($file_path)) === false) {
-    bb_simple_die($di->translator->trans('File not found: %location%', ['%location%' => '[HDD]']));
+if (!file_exists($file_path)) {
+    bb_simple_die($di->translator->trans('File not found: %location%', ['%location%' => 'HDD']));
 }
 
 $send_filename = "t-$topic_id." . $di->config->get('file_id_ext')[$t_data->attach_ext_id];

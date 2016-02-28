@@ -21,6 +21,7 @@ $config = [
 
 	// Database
 	'db' => [
+		'debug'    => '{self.debug}',
 		'driver'   => 'Pdo_Mysql',
 		'hostname' => '127.0.0.1',
 		'database' => 'tp_220',
@@ -31,6 +32,7 @@ $config = [
 
 	// Sphinx
 	'sphinx' => [
+		'debug'    => '{self.debug}',
 		'driver'   => '{self.db.driver}',
 		'hostname' => '{self.db.hostname}',
 		'username' => 'user',
