@@ -5,6 +5,7 @@ namespace TorrentPier\Db;
 use TorrentPier\Config;
 use Zend\Db\Adapter\Driver\ResultInterface;
 use Zend\Db\Adapter\Platform\PlatformInterface;
+use Zend\Db\Adapter\Profiler\Profiler;
 use Zend\Db\Adapter\Profiler\ProfilerInterface;
 use Zend\Db\Exception\InvalidArgumentException;
 use Zend\Db\ResultSet\ResultSetInterface;
@@ -35,6 +36,11 @@ class Adapter extends \Zend\Db\Adapter\Adapter
         if ($driver instanceof Config) {
             $driver = $driver->toArray();
         }
+
+        if ($profiler === null && is_array($driver) && !empty($driver['debug'])) {
+            $profiler = new Profiler();
+        }
+
         parent::__construct($driver, $platform, $queryResultPrototype, $profiler);
     }
 
@@ -72,7 +78,6 @@ class Adapter extends \Zend\Db\Adapter\Adapter
      * @param $table
      * @param array $values
      * @return mixed|null
-     *
      * @throws InvalidArgumentException
      */
     public function insert($table, array $values)
@@ -98,7 +103,6 @@ class Adapter extends \Zend\Db\Adapter\Adapter
      * @param array $values
      * @param Where|\Closure|string|array $where
      * @return int
-     *
      * @throws InvalidArgumentException
      */
     public function update($table, array $values, $where)
@@ -193,5 +197,39 @@ class Adapter extends \Zend\Db\Adapter\Adapter
         /** @var ResultInterface $result */
         $result = $statementContainer->execute();
         return $result->current()['count'];
+    }
+
+    /**
+     * Increment field by query.
+     *
+     * @param string $table
+     * @param string $field
+     * @param Where|\Closure|string|array $where
+     * @param int $num
+     * @return int
+     * @throws InvalidArgumentException
+     */
+    public function increment($table, $field, $where = null, $num = 1)
+    {
+        return $this->update($table, [
+            $field => new Expression('? + ?', [$field, $num], [Expression::TYPE_IDENTIFIER, Expression::TYPE_VALUE])
+        ], $where);
+    }
+
+    /**
+     * Decrement field by query.
+     *
+     * @param string $table
+     * @param string $field
+     * @param Where|\Closure|string|array $where
+     * @param int $num
+     * @return int
+     * @throws InvalidArgumentException
+     */
+    public function decrement($table, $field, $where = null, $num = 1)
+    {
+        return $this->update($table, [
+            $field => new Expression('? - ?', [$field, $num], [Expression::TYPE_IDENTIFIER, Expression::TYPE_VALUE])
+        ], $where);
     }
 }
