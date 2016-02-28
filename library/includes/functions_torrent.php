@@ -305,7 +305,7 @@ function send_torrent_with_passkey ($t_data)
 
 	$topic_id   = $t_data['topic_id'];
 	$poster_id  = $t_data['topic_poster'];
-	$user_id    = $t_data['user_id'];
+	$user_id    = $userdata['user_id'];
 
 	// Запрет на скачивание закрытого или незарегистрированного торрента
 	$row = DB()->fetch_row("SELECT tor_status FROM ". BB_BT_TORRENTS ." WHERE topic_id = $topic_id LIMIT 1");
@@ -316,7 +316,7 @@ function send_torrent_with_passkey ($t_data)
 	}
 	else if (isset($bb_cfg['tor_frozen'][$row['tor_status']]))
 	{
-		if (!$t_data['is_am']) bb_die("Раздача имеет статус: <b>{$lang['TOR_STATUS_NAME'][$row['tor_status']]}</b><br /><br />Скачивание запрещено"); //TODO: перевести
+		if (!IS_AM) bb_die("Раздача имеет статус: <b>{$lang['TOR_STATUS_NAME'][$row['tor_status']]}</b><br /><br />Скачивание запрещено"); //TODO: перевести
 	}
 
 	$passkey_val = '';
