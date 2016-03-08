@@ -34,7 +34,7 @@ $di = new \TorrentPier\Di();
 
 // TODO: Need to get locale from settings
 $di['settings.locale'] = function($di) {
-	return 'ru';
+	return 'en';
 };
 
 $di->register(new \TorrentPier\ServiceProviders\ConfigServiceProvider, [

@@ -1,0 +1,21 @@
+<table>
+    <tr>
+        <th>{% trans %}Terms{% endtrans %}</th>
+    </tr>
+    {% if termsHtml %}
+        <tr>
+            <td>
+                <div>
+                    {{ termsHtml|raw }}
+                </div>
+            </td>
+        </tr>
+    {% endif %}
+    {% if isAdmin %}
+        <tr>
+            <td>
+                {% trans %}The text on this page can be edited in the{% endtrans %} <a href="{{ transUrl }}">{{ transUrlName }}</a>. {% trans %}Only administrators see this line{% endtrans %}.
+            </td>
+        </tr>
+    {% endif %}
+</table>

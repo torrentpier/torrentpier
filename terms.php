@@ -2,17 +2,25 @@
 
 define('BB_SCRIPT', 'terms');
 define('BB_ROOT', './');
-require(BB_ROOT .'common.php');
-require(INC_DIR .'bbcode.php');
+require_once __DIR__ . '/common.php';
+require_once(INC_DIR . 'bbcode.php');
 
-// Start session management
+$di = \TorrentPier\Di::getInstance();
+
 $user->session_start();
 
-if (!$bb_cfg['terms'] && !IS_ADMIN) redirect('index.php');
+if (!$di->config->get('terms') && !IS_ADMIN) redirect('index.php');
 
-$template->assign_vars(array(
-	'TERMS_EDIT' => bbcode2html(sprintf($lang['TERMS_EMPTY_TEXT'], $domain_name)),
-	'TERMS_HTML' => bbcode2html($bb_cfg['terms']),
-));
+$content = $di->view->make('terms', [
+    'isAdmin' => IS_ADMIN,
+    'termsHtml' => bbcode2html($di->config->get('terms')),
+    'transUrl' => make_url('admin/admin_terms.php'),
+    'transUrlName' => $di->translator->trans('Control panel'),
+]);
 
-print_page('terms.tpl');
+/** @var \Symfony\Component\HttpFoundation\Response $response */
+$response = \Symfony\Component\HttpFoundation\Response::create();
+$response->setContent($content);
+
+$response->prepare($di->request);
+$response->send();
