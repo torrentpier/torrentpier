@@ -69,7 +69,7 @@ function update_forum_feed ($forum_id, $forum_data)
 	}
 	if (!count($topics))
 	{
-		@unlink($file_path);
+		unlink($file_path);
 		return false;
 	}
 	if (create_atom($file_path, 'f', $forum_id, htmlCHR($forum_data['forum_name']), $topics)) return true;
@@ -112,7 +112,7 @@ function update_user_feed ($user_id, $username)
 	}
 	if (!count($topics))
 	{
-		@unlink($file_path);
+		unlink($file_path);
 		return false;
 	}
 	if (create_atom($file_path, 'u', $user_id, wbr($username), $topics)) return true;
@@ -178,7 +178,7 @@ function create_atom ($file_path, $mode, $id, $title, $topics)
 		$atom .= "</entry>\n";
 	}
 	$atom .= "</feed>";
-	@unlink($file_path);
+	unlink($file_path);
 	$fp = fopen($file_path, "w");
 	fwrite($fp, $atom);
 	fclose ($fp);

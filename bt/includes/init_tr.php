@@ -35,7 +35,7 @@ function tracker_exit ()
 
 function silent_exit ()
 {
-	while (@ob_end_clean());
+	while (ob_end_clean());
 
 	tracker_exit();
 }
@@ -105,7 +105,7 @@ class sql_db
 		$this->selected_db = $this->select_db();
 
 		// Set charset
-		if ($this->cfg['charset'] && !@mysql_set_charset($this->cfg['charset'], $this->link))
+		if ($this->cfg['charset'] && !mysql_set_charset($this->cfg['charset'], $this->link))
 		{
 			if (!$this->sql_query("SET NAMES {$this->cfg['charset']}"))
 			{
@@ -476,12 +476,12 @@ class sql_db
 		$msg[] = str_compact($this->cur_query);
 		$msg[] = '';
 		$msg[] = 'Source  : '. $this->debug_find_source();
-		$msg[] = 'IP      : '. @$_SERVER['REMOTE_ADDR'];
+		$msg[] = 'IP      : '. $_SERVER['REMOTE_ADDR'];
 		$msg[] = 'Date    : '. date('Y-m-d H:i:s');
-		$msg[] = 'Agent   : '. @$_SERVER['HTTP_USER_AGENT'];
-		$msg[] = 'Req_URI : '. @$_SERVER['REQUEST_URI'];
-		$msg[] = 'Referer : '. @$_SERVER['HTTP_REFERER'];
-		$msg[] = 'Method  : '. @$_SERVER['REQUEST_METHOD'];
+		$msg[] = 'Agent   : '. $_SERVER['HTTP_USER_AGENT'];
+		$msg[] = 'Req_URI : '. $_SERVER['REQUEST_URI'];
+		$msg[] = 'Referer : '. $_SERVER['HTTP_REFERER'];
+		$msg[] = 'Method  : '. $_SERVER['REQUEST_METHOD'];
 		$msg[] = 'Request : '. trim(print_r($_REQUEST, true)) . str_repeat('_', 78) . LOG_LF;
 		$msg[] = '';
 		bb_log($msg, 'sql_error_tr');

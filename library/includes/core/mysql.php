@@ -67,7 +67,7 @@ class sql_db
 		$this->selected_db = $this->select_db();
 
 		// Set charset
-		if ($this->cfg['charset'] && !@mysql_set_charset($this->cfg['charset'], $this->link))
+		if ($this->cfg['charset'] && !mysql_set_charset($this->cfg['charset'], $this->link))
 		{
 			if (!$this->sql_query("SET NAMES {$this->cfg['charset']}"))
 			{
@@ -91,7 +91,7 @@ class sql_db
 
 		$connect_type = ($this->cfg['persist']) ? 'mysql_pconnect' : 'mysql_connect';
 
-		if (!$link = @$connect_type($this->cfg['dbhost'], $this->cfg['dbuser'], $this->cfg['dbpasswd']))
+		if (!$link = $connect_type($this->cfg['dbhost'], $this->cfg['dbuser'], $this->cfg['dbpasswd']))
 		{
 			$server = (DBG_USER) ? $this->cfg['dbhost'] : '';
 			header("HTTP/1.0 503 Service Unavailable");
@@ -115,7 +115,7 @@ class sql_db
 		$this->cur_query = ($this->dbg_enabled) ? "select db: {$this->cfg['dbname']}" : 'select db';
 		$this->debug('start');
 
-		if (!@mysql_select_db($this->cfg['dbname'], $this->link))
+		if (!mysql_select_db($this->cfg['dbname'], $this->link))
 		{
 			$database = (DBG_USER) ? $this->cfg['dbhost'] : '';
 			die("Could not select database $database");
@@ -213,7 +213,7 @@ class sql_db
 		{
 			if($rownum > -1)
 			{
-				$result = @mysql_result($query_id, $rownum, $field);
+				$result = mysql_result($query_id, $rownum, $field);
 			}
 			else
 			{
@@ -716,7 +716,7 @@ class sql_db
 			}
 		}
 
-		@define('IN_FIRST_SLOW_QUERY', true);
+		define('IN_FIRST_SLOW_QUERY', true);
 		CACHE('bb_cache')->set('dont_log_slow_query', $new_priority, $ignoring_time);
 	}
 
@@ -881,12 +881,12 @@ class sql_db
 		$msg[] = str_compact($this->cur_query);
 		$msg[] = '';
 		$msg[] = 'Source  : '. $this->debug_find_source() ." :: $this->db_server.$this->selected_db";
-		$msg[] = 'IP      : '. @$_SERVER['REMOTE_ADDR'];
+		$msg[] = 'IP      : '. $_SERVER['REMOTE_ADDR'];
 		$msg[] = 'Date    : '. date('Y-m-d H:i:s');
-		$msg[] = 'Agent   : '. @$_SERVER['HTTP_USER_AGENT'];
-		$msg[] = 'Req_URI : '. @$_SERVER['REQUEST_URI'];
-		$msg[] = 'Referer : '. @$_SERVER['HTTP_REFERER'];
-		$msg[] = 'Method  : '. @$_SERVER['REQUEST_METHOD'];
+		$msg[] = 'Agent   : '. $_SERVER['HTTP_USER_AGENT'];
+		$msg[] = 'Req_URI : '. $_SERVER['REQUEST_URI'];
+		$msg[] = 'Referer : '. $_SERVER['HTTP_REFERER'];
+		$msg[] = 'Method  : '. $_SERVER['REQUEST_METHOD'];
 		$msg[] = 'PID     : '. sprintf('%05d', getmypid());
 		$msg[] = 'Request : '. trim(print_r($_REQUEST, true)) . str_repeat('_', 78) . LOG_LF;
 		$msg[] = '';
@@ -919,9 +919,9 @@ class sql_db
 			{
 				$html_table = false;
 
-				if ($result = @mysql_query("EXPLAIN $query", $this->link))
+				if ($result = mysql_query("EXPLAIN $query", $this->link))
 				{
-					while ($row = @mysql_fetch_assoc($result))
+					while ($row = mysql_fetch_assoc($result))
 					{
 						$html_table = $this->explain('add_explain_row', $html_table, $row);
 					}

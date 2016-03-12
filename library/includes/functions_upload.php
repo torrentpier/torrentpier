@@ -147,16 +147,16 @@ class upload_common
 				return false;
 			}
 		}
-		if (!@rename($this->file['tmp_name'], $file_path))
+		if (!rename($this->file['tmp_name'], $file_path))
 		{
-			if (!@copy($this->file['tmp_name'], $file_path))
+			if (!copy($this->file['tmp_name'], $file_path))
 			{
 				$this->errors[] = 'Cannot copy tmp file';
 				return false;
 			}
-			@unlink($this->file['tmp_name']);
+			unlink($this->file['tmp_name']);
 		}
-		@chmod($file_path, 0664);
+		chmod($file_path, 0664);
 
 		return file_exists($file_path);
 	}

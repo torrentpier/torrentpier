@@ -194,12 +194,12 @@ class Template
 		// Creating cache filename
 		if ($can_cache) {
 			$this->files_cache2[$handle] = $this->make_filename_cache($this->files[$handle]);
-			if (@file_exists($this->files_cache2[$handle])) {
+			if (file_exists($this->files_cache2[$handle])) {
 				$this->files_cache[$handle] = $this->files_cache2[$handle];
 			}
 		}
 		// Checking if tpl and/or php file exists
-		if (empty($this->files_cache[$handle]) && !@file_exists($this->files[$handle])) {
+		if (empty($this->files_cache[$handle]) && !file_exists($this->files[$handle])) {
 			if ($quiet) {
 				return false;
 			}
@@ -207,8 +207,8 @@ class Template
 		}
 		// Checking if we should recompile cache
 		if (!empty($this->files_cache[$handle])) {
-			$cache_time = @filemtime($this->files_cache[$handle]);
-			if (@filemtime($this->files[$handle]) > $cache_time) {
+			$cache_time = filemtime($this->files_cache[$handle]);
+			if (filemtime($this->files[$handle]) > $cache_time) {
 				// File was changed, don't use cache file (will be recompled if configuration allowes it)
 				$this->files_cache[$handle] = '';
 			}
@@ -466,7 +466,7 @@ class Template
 
 		$filename = $this->files[$handle];
 
-		if (($str = @file_get_contents($filename)) === false) {
+		if (($str = file_get_contents($filename)) === false) {
 			die("Template->loadfile(): file $filename for handle $handle is empty");
 		}
 
@@ -967,7 +967,7 @@ class Template
 
 		switch ($expr_type) {
 			case 'even':
-				if (@$tokens[$expr_end] == 'by') {
+				if ($tokens[$expr_end] == 'by') {
 					$expr_end++;
 					$expr_arg = $tokens[$expr_end++];
 					$expr = "!(($is_arg	/ $expr_arg) % $expr_arg)";
@@ -977,7 +977,7 @@ class Template
 				break;
 
 			case 'odd':
-				if (@$tokens[$expr_end] == 'by') {
+				if ($tokens[$expr_end] == 'by') {
 					$expr_end++;
 					$expr_arg = $tokens[$expr_end++];
 					$expr = "(($is_arg / $expr_arg)	% $expr_arg)";
@@ -987,7 +987,7 @@ class Template
 				break;
 
 			case 'div':
-				if (@$tokens[$expr_end] == 'by') {
+				if ($tokens[$expr_end] == 'by') {
 					$expr_end++;
 					$expr_arg = $tokens[$expr_end++];
 					$expr = "!($is_arg % $expr_arg)";

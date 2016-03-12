@@ -7,7 +7,7 @@ require(CLASS_DIR .'sitemap.php');
 $map = new sitemap();
 $map->create();
 
-if (@file_exists(BB_ROOT. "/sitemap/sitemap.xml"))
+if (file_exists(BB_ROOT. "/sitemap/sitemap.xml"))
 {
 	$map_link = make_url('/sitemap/sitemap.xml');
 

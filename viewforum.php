@@ -41,7 +41,7 @@ if (!$forums = $datastore->get('cat_forums'))
 	$datastore->update('cat_forums');
 	$forums = $datastore->get('cat_forums');
 }
-if (!$forum_id OR !$forum_data = @$forums['forum'][$forum_id])
+if (!$forum_id OR !$forum_data = $forums['forum'][$forum_id])
 {
 	bb_die($lang['FORUM_NOT_EXIST']);
 }
@@ -83,7 +83,7 @@ $tor_status = -1;  //  all by default
 
 if ($is_auth['auth_mod'])
 {
-	$redirect = isset($_POST['redirect']) ? $_POST['redirect'] : @$_SERVER['REQUEST_URI'];
+	$redirect = isset($_POST['redirect']) ? $_POST['redirect'] : $_SERVER['REQUEST_URI'];
 	$redirect = url_arg($redirect, 'mod', 1, '&');
 	$mod_redirect_url = LOGIN_URL . "?redirect=$redirect&admin=1";
 
@@ -231,7 +231,7 @@ $select_tpp = '';
 
 if ($is_auth['auth_mod'])
 {
-	if ($req_tpp = abs(intval(@$_REQUEST['tpp'])) AND in_array($req_tpp, $bb_cfg['allowed_topics_per_page']))
+	if ($req_tpp = abs(intval($_REQUEST['tpp'])) AND in_array($req_tpp, $bb_cfg['allowed_topics_per_page']))
 	{
 		$topics_per_page = $req_tpp;
 	}

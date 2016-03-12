@@ -564,7 +564,7 @@ class SphinxClient extends cache_common
 		{
 			// we are in persistent connection mode, so we have a socket
 			// however, need to check whether it's still alive
-			if ( !@feof ( $this->_socket ) )
+			if ( !feof ( $this->_socket ) )
 				return $this->_socket;
 
 			// force reopen
@@ -587,9 +587,9 @@ class SphinxClient extends cache_common
 		}
 
 		if ( $this->_timeout<=0 )
-			$fp = @fsockopen ( $host, $port, $errno, $errstr );
+			$fp = fsockopen ( $host, $port, $errno, $errstr );
 		else
-			$fp = @fsockopen ( $host, $port, $errno, $errstr, $this->_timeout );
+			$fp = fsockopen ( $host, $port, $errno, $errstr, $this->_timeout );
 
 		if ( !$fp )
 		{

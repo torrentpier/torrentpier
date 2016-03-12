@@ -263,7 +263,7 @@ class user_common
 			));
 			$sql = "INSERT INTO ". BB_SESSIONS . $args;
 
-			if (@DB()->query($sql))
+			if (DB()->query($sql))
 			{
 				break;
 			}
@@ -455,7 +455,7 @@ class user_common
 	*/
 	function get_sessiondata ()
 	{
-		$sd_resv = !empty($_COOKIE[COOKIE_DATA]) ? @unserialize($_COOKIE[COOKIE_DATA]) : array();
+		$sd_resv = !empty($_COOKIE[COOKIE_DATA]) ? unserialize($_COOKIE[COOKIE_DATA]) : array();
 
 		// autologin_id
 		if (!empty($sd_resv['uk']) && verify_id($sd_resv['uk'], LOGIN_KEY_LENGTH))

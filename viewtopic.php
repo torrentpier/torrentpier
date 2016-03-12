@@ -29,7 +29,7 @@ $select_ppp = '';
 
 if ($userdata['session_admin'])
 {
-	if ($req_ppp = abs(intval(@$_REQUEST['ppp'])) AND in_array($req_ppp, $bb_cfg['allowed_posts_per_page']))
+	if ($req_ppp = abs(intval($_REQUEST['ppp'])) AND in_array($req_ppp, $bb_cfg['allowed_posts_per_page']))
 	{
 		$posts_per_page = $req_ppp;
 	}
@@ -165,7 +165,7 @@ $mod_redirect_url = '';
 
 if ($is_auth['auth_mod'])
 {
-	$redirect = isset($_POST['redirect']) ? $_POST['redirect'] : @$_SERVER['REQUEST_URI'];
+	$redirect = isset($_POST['redirect']) ? $_POST['redirect'] : $_SERVER['REQUEST_URI'];
 	$redirect = url_arg($redirect, 'mod', 1, '&');
 	$mod_redirect_url = LOGIN_URL . "?redirect=$redirect&admin=1";
 
@@ -637,8 +637,8 @@ for($i = 0; $i < $total_posts; $i++)
 	// Replace naughty words
 	if (count($orig_word))
 	{
-		if ($user_sig) $user_sig = str_replace('\"', '"', substr(@preg_replace('#(\>(((?>([^><]+|(?R)))*)\<))#se', "@preg_replace(\$orig_word, \$replacement_word, '\\0')", '>' . $user_sig . '<'), 1, -1));
-		$message = str_replace('\"', '"', substr(@preg_replace('#(\>(((?>([^><]+|(?R)))*)\<))#se', "@preg_replace(\$orig_word, \$replacement_word, '\\0')", '>' . $message . '<'), 1, -1));
+		if ($user_sig) $user_sig = str_replace('\"', '"', substr(preg_replace('#(\>(((?>([^><]+|(?R)))*)\<))#se', "@preg_replace(\$orig_word, \$replacement_word, '\\0')", '>' . $user_sig . '<'), 1, -1));
+		$message = str_replace('\"', '"', substr(preg_replace('#(\>(((?>([^><]+|(?R)))*)\<))#se', "@preg_replace(\$orig_word, \$replacement_word, '\\0')", '>' . $message . '<'), 1, -1));
 	}
 
 	// Replace newlines (we use this rather than nl2br because till recently it wasn't XHTML compliant)

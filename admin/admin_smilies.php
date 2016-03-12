@@ -21,13 +21,13 @@ else
 $delimeter  = '=+:';
 
 // Read a listing of uploaded smilies for use in the add or edit smliey code
-$dir = @opendir(BB_ROOT . $bb_cfg['smilies_path']);
+$dir = opendir(BB_ROOT . $bb_cfg['smilies_path']);
 
-while ($file = @readdir($dir))
+while ($file = readdir($dir))
 {
-	if (!@is_dir(bb_realpath(BB_ROOT . $bb_cfg['smilies_path'] . '/' . $file)))
+	if (!is_dir(bb_realpath(BB_ROOT . $bb_cfg['smilies_path'] . '/' . $file)))
 	{
-		$img_size = @getimagesize(BB_ROOT . $bb_cfg['smilies_path'] . '/' . $file);
+		$img_size = getimagesize(BB_ROOT . $bb_cfg['smilies_path'] . '/' . $file);
 
 		if ($img_size[0] && $img_size[1])
 		{
@@ -40,7 +40,7 @@ while ($file = @readdir($dir))
 	}
 }
 
-@closedir($dir);
+closedir($dir);
 
 // Select main mode
 if (isset($_GET['import_pack']) || isset($_POST['import_pack']))
@@ -78,7 +78,7 @@ if (isset($_GET['import_pack']) || isset($_POST['import_pack']))
 			}
 		}
 
-		$fcontents = @file(BB_ROOT . $bb_cfg['smilies_path'] . '/'. $smile_pak);
+		$fcontents = file(BB_ROOT . $bb_cfg['smilies_path'] . '/'. $smile_pak);
 
 		if (empty($fcontents))
 		{
@@ -133,7 +133,7 @@ if (isset($_GET['import_pack']) || isset($_POST['import_pack']))
 	{
 		// Display the script to get the smile_pak cfg file
 		$smile_paks_select = '<select name="smile_pak"><option value="">' . $lang['SELECT_PAK'] . '</option>';
-		while (list($key, $value) = @each($smiley_paks))
+		while (list($key, $value) = each($smiley_paks))
 		{
 			if (!empty($value))
 			{
@@ -341,7 +341,7 @@ else
 
 	$template->assign_vars(array(
 		'TPL_SMILE_MAIN' => true,
-		'S_HIDDEN_FIELDS' => @$s_hidden_fields,
+		'S_HIDDEN_FIELDS' => $s_hidden_fields,
 		'S_SMILEY_ACTION' => 'admin_smilies.php',
 	));
 

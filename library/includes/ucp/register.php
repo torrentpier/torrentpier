@@ -207,9 +207,9 @@ foreach ($profile_fields as $field => $can_edit)
 		case 'user_password':
 			if ($submit)
 			{
-				$cur_pass = (string) @$_POST['cur_pass'];
-				$new_pass = (string) @$_POST['new_pass'];
-				$cfm_pass = (string) @$_POST['cfm_pass'];
+				$cur_pass = (string) $_POST['cur_pass'];
+				$new_pass = (string) $_POST['new_pass'];
+				$cfm_pass = (string) $_POST['cfm_pass'];
 
 				// пароль для гостя и при смене пароля юзером
 				if (!empty($new_pass))

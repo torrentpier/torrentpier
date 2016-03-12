@@ -890,7 +890,7 @@ else
 
 	$select_sql .= "	ORDER BY ";
 
-	switch (strtolower(@$_GET['sort']))
+	switch (strtolower($_GET['sort']))
 	{
 		case 'regdate':
 			$sort = 'regdate';
@@ -918,7 +918,7 @@ else
 			$select_sql .= 'u.username';
 	}
 
-	switch (@$_GET['order'])
+	switch ($_GET['order'])
 	{
 		case 'DESC':
 			$order = 'DESC';
@@ -932,7 +932,7 @@ else
 
 	$select_sql .= " $order";
 
-	$page = ( isset($_GET['page']) ) ? intval($_GET['page']) : intval(trim(@$_POST['page']));
+	$page = ( isset($_GET['page']) ) ? intval($_GET['page']) : intval(trim($_POST['page']));
 
 	if ($page < 1)
 	{

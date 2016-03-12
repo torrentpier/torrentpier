@@ -171,7 +171,7 @@ function tracker_register ($topic_id, $mode = '', $tor_status = TOR_NOT_APPROVED
 		fclose($fp);
 	}
 
-	$info = (@$tor_decoded['info']) ? $tor_decoded['info'] : array();
+	$info = ($tor_decoded['info']) ? $tor_decoded['info'] : array();
 
 	if (!isset($info['name']) || !isset($info['piece length']) || !isset($info['pieces']) || strlen($info['pieces']) % 20 != 0)
 	{

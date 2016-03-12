@@ -36,7 +36,7 @@ elseif (!empty($_POST['redirect']))
 {
 	$redirect_url = str_replace('&amp;', '&', htmlspecialchars($_POST['redirect']));
 }
-elseif (!empty($_SERVER['HTTP_REFERER']) && ($parts = @parse_url($_SERVER['HTTP_REFERER'])))
+elseif (!empty($_SERVER['HTTP_REFERER']) && ($parts = parse_url($_SERVER['HTTP_REFERER'])))
 {
 	$redirect_url = (isset($parts['path']) ? $parts['path'] : "index.php") . (isset($parts['query']) ? '?'. $parts['query'] : '');
 }

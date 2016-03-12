@@ -7,9 +7,9 @@ if (isset($_GET['pane']) && $_GET['pane'] == 'left')
 {
 	if (!$module = CACHE('bb_cache')->get('admin_module' . $user->id))
 	{
-		$dir = @opendir('.');
+		$dir = opendir('.');
 		$setmodules = 1;
-		while ($file = @readdir($dir))
+		while ($file = readdir($dir))
 		{
 			if (preg_match('/^admin_.*?\.php$/', $file))
 			{
@@ -17,7 +17,7 @@ if (isset($_GET['pane']) && $_GET['pane'] == 'left')
 			}
 		}
 		unset($setmodules);
-		@closedir($dir);
+		closedir($dir);
 		CACHE('bb_cache')->set('admin_module' . $user->id, $module, 600);
 	}
 
@@ -76,16 +76,16 @@ elseif (isset($_GET['pane']) && $_GET['pane'] == 'right')
 
 	$avatar_dir_size = 0;
 
-	if ($avatar_dir = @opendir(BB_ROOT . $bb_cfg['avatar_path']))
+	if ($avatar_dir = opendir(BB_ROOT . $bb_cfg['avatar_path']))
 	{
-		while( $file = @readdir($avatar_dir) )
+		while( $file = readdir($avatar_dir) )
 		{
 			if( $file != '.' && $file != '..' )
 			{
-				$avatar_dir_size += @filesize(BB_ROOT . $bb_cfg['avatar_path'] . '/' . $file);
+				$avatar_dir_size += filesize(BB_ROOT . $bb_cfg['avatar_path'] . '/' . $file);
 			}
 		}
-		@closedir($avatar_dir);
+		closedir($avatar_dir);
 
 		$avatar_dir_size = humn_size($avatar_dir_size);
 	}
@@ -129,7 +129,7 @@ elseif (isset($_GET['pane']) && $_GET['pane'] == 'right')
 					$dbsize = 0;
 					for ($i = 0; $i < count($tabledata_ary); $i++)
 					{
-						if( @$tabledata_ary[$i]['Type'] != 'MRG_MYISAM' )
+						if( $tabledata_ary[$i]['Type'] != 'MRG_MYISAM' )
 						{
 							$dbsize += $tabledata_ary[$i]['Data_length'] + $tabledata_ary[$i]['Index_length'];
 						}
@@ -165,7 +165,7 @@ elseif (isset($_GET['pane']) && $_GET['pane'] == 'right')
 		'ZF_VERSION'       => Zend\Version\Version::VERSION,
 	));
 
-	if (@$_GET['users_online'])
+	if ($_GET['users_online'])
 	{
 		$template->assign_vars(array(
 			'SHOW_USERS_ONLINE' => true,

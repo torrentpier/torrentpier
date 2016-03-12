@@ -170,7 +170,7 @@ class sitemap
 
 			return $data;
 		} else {
-			return @file_get_contents($file);
+			return file_get_contents($file);
 		}
 	}
 
@@ -179,19 +179,19 @@ class sitemap
 
 		if (!$this->limit) $this->limit = $row['count'];
 		if ($this->limit > 40000) {
-			$pages_count = @ceil($row['count'] / 40000);
+			$pages_count = ceil($row['count'] / 40000);
 
 			$sitemap = $this->build_index($pages_count);
 			$handler = fopen(SITEMAP_DIR. "sitemap.xml", "wb+");
 			fwrite($handler, $sitemap);
 			fclose($handler);
-			@chmod(SITEMAP_DIR. "sitemap.xml", 0666);
+			chmod(SITEMAP_DIR. "sitemap.xml", 0666);
 
 			$sitemap = $this->build_stat();
 			$handler = fopen(SITEMAP_DIR. "sitemap1.xml", "wb+");
 			fwrite($handler, $sitemap);
 			fclose($handler);
-			@chmod(SITEMAP_DIR. "sitemap.xml", 0666);
+			chmod(SITEMAP_DIR. "sitemap.xml", 0666);
 
 			for ($i = 0; $i < $pages_count; $i++) {
 				$t = $i + 2;
@@ -201,14 +201,14 @@ class sitemap
 				$handler = fopen(SITEMAP_DIR. "sitemap{$t}.xml", "wb+");
 				fwrite($handler, $sitemap);
 				fclose($handler);
-				@chmod(SITEMAP_DIR. "sitemap{$t}.xml", 0666);
+				chmod(SITEMAP_DIR. "sitemap{$t}.xml", 0666);
 			}
 		} else {
 			$sitemap = $this->build_map();
 			$handler = fopen(SITEMAP_DIR. "sitemap.xml", "wb+");
 			fwrite($handler, $sitemap);
 			fclose($handler);
-			@chmod(SITEMAP_DIR. "sitemap.xml", 0666);
+			chmod(SITEMAP_DIR. "sitemap.xml", 0666);
 		}
 
 		$params['sitemap_time'] = TIMENOW;

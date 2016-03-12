@@ -127,7 +127,7 @@ function generate_smilies($mode)
 			$row = 0;
 			$col = 0;
 
-			while (list($smile_url, $data) = @each($rowset))
+			while (list($smile_url, $data) = each($rowset))
 			{
 				if (!$col)
 				{
@@ -401,7 +401,7 @@ function replace_synonyms ($text)
 
 	if (is_null($syn_match))
 	{
-		preg_match_all("#(\w+) (\w+)(\r?\n|$)#", @file_get_contents(LANG_DIR .'search_synonyms.txt'), $m);
+		preg_match_all("#(\w+) (\w+)(\r?\n|$)#", file_get_contents(LANG_DIR .'search_synonyms.txt'), $m);
 
 		$syn_match   = $m[2];
 		$syn_replace = $m[1];
