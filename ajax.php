@@ -12,10 +12,12 @@ $ajax->init();
 // Init userdata
 $user->session_start();
 
+$di = \TorrentPier\Di::getInstance();
+
 // Exit if board is disabled via ON/OFF trigger or by admin
 if ($ajax->action != 'manage_admin')
 {
-	if ($bb_cfg['board_disable'])
+	if ($di->config->get('board_disable'))
 	{
 		$ajax->ajax_die($lang['BOARD_DISABLE']);
 	}

@@ -370,12 +370,12 @@ function send_torrent_with_passkey ($t_data)
 		}
 
 		// число скачиваний
-		$daily_dls_cnt = (int) DB('dls')->fetch_row("SELECT dls_cnt FROM ". BB_USER_DLS_DAILY ." WHERE user_id = $user_id LIMIT 1", 'dls_cnt');
+		$daily_dls_cnt = (int) DB()->fetch_row("SELECT dls_cnt FROM ". BB_USER_DLS_DAILY ." WHERE user_id = $user_id LIMIT 1", 'dls_cnt');
 
 		if ($daily_dls_cnt >= $daily_dls_limit)
 		{
 			// повторное скачивание
-			$can_redownload = DB('dls')->fetch_row("SELECT 1 FROM ". BB_BT_DLS_COUNT ." WHERE topic_id = $topic_id AND user_id = $user_id LIMIT 1");
+			$can_redownload = DB()->fetch_row("SELECT 1 FROM ". BB_BT_DLS_COUNT ." WHERE topic_id = $topic_id AND user_id = $user_id LIMIT 1");
 
 			if (!$can_redownload)
 			{
@@ -390,12 +390,12 @@ function send_torrent_with_passkey ($t_data)
 		}
 
 		// счетчик количества скачиваний торрент-файла (для `complete_count` в BB_BT_TORRENTS)
-		DB('dls')->query("INSERT IGNORE INTO ". BB_BT_DLS_COUNT ." (topic_id, user_id) VALUES ($topic_id, $user_id)");
+		DB()->query("INSERT IGNORE INTO ". BB_BT_DLS_COUNT ." (topic_id, user_id) VALUES ($topic_id, $user_id)");
 
 		// если файл еще не был скачан этим юзером, увеличиваем счетчик скачиваний
-		if (DB('dls')->affected_rows() > 0)
+		if (DB()->affected_rows() > 0)
 		{
-			DB('dls')->query("
+			DB()->query("
 					INSERT IGNORE INTO ". BB_USER_DLS_DAILY ." (user_id, dls_cnt) VALUES ($user_id, 1) ON DUPLICATE KEY UPDATE dls_cnt = dls_cnt + 1
 				");
 		}
