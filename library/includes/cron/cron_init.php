@@ -13,7 +13,7 @@ function cron_get_file_lock ()
 	{
 #		bb_log(date('H:i:s - ') . getmypid() .' -x-- FILE-LOCK try'. LOG_LF, CRON_LOG_DIR .'cron_check');
 
-		$lock_obtained = @rename(CRON_ALLOWED, CRON_RUNNING);
+		$lock_obtained = rename(CRON_ALLOWED, CRON_RUNNING);
 	}
 	elseif (file_exists(CRON_RUNNING))
 	{
@@ -22,7 +22,7 @@ function cron_get_file_lock ()
 	elseif (!file_exists(CRON_ALLOWED) && !file_exists(CRON_RUNNING))
 	{
 		file_write('', CRON_ALLOWED);
-		$lock_obtained = @rename(CRON_ALLOWED, CRON_RUNNING);
+		$lock_obtained = rename(CRON_ALLOWED, CRON_RUNNING);
 	}
 
 	return $lock_obtained;
@@ -30,7 +30,7 @@ function cron_get_file_lock ()
 
 function cron_track_running ($mode)
 {
-	@define('CRON_STARTMARK', TRIGGERS_DIR .'cron_started_at_'. date('Y-m-d_H-i-s') .'_by_pid_'. getmypid());
+	define('CRON_STARTMARK', TRIGGERS_DIR .'cron_started_at_'. date('Y-m-d_H-i-s') .'_by_pid_'. getmypid());
 
 	if ($mode == 'start')
 	{
@@ -39,7 +39,7 @@ function cron_track_running ($mode)
 	}
 	elseif ($mode == 'end')
 	{
-		@unlink(CRON_STARTMARK);
+		unlink(CRON_STARTMARK);
 	}
 }
 

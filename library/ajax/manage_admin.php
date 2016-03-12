@@ -39,12 +39,12 @@ switch ($mode)
 		$match = 'tpl_';
 		$match_len = strlen($match);
 		$dir = $template->cachedir;
-		$res = @opendir($dir);
+		$res = opendir($dir);
 		while (($file = readdir($res)) !== false)
 		{
 			if (substr($file, 0, $match_len) === $match)
 			{
-				@unlink($dir . $file);
+				unlink($dir . $file);
 			}
 		}
 		closedir($res);

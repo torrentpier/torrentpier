@@ -133,7 +133,7 @@ switch ($mode)
 			$this->ajax_die($msg);
 		}
 		$sql = "UPDATE ". BB_TOPIC_TPL ." SET ". DB()->build_array('UPDATE', $sql_args) ." WHERE tpl_id = $tpl_id LIMIT 1";
-		if (!@DB()->query($sql))
+		if (!DB()->query($sql))
 		{
 			$sql_error = DB()->sql_error();
 		}
@@ -146,7 +146,7 @@ switch ($mode)
 	// создание нового шаблона
 	case 'new':
 		$sql = "INSERT INTO ". BB_TOPIC_TPL . DB()->build_array('INSERT', $sql_args);
-		if (!@DB()->query($sql))
+		if (!DB()->query($sql))
 		{
 			$sql_error = DB()->sql_error();
 		}

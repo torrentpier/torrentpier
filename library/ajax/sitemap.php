@@ -12,7 +12,7 @@ switch ($mode)
 {
 	case 'create':
 		$map->create();
-		if (@file_exists(SITEMAP_DIR. 'sitemap.xml'))
+		if (file_exists(SITEMAP_DIR. 'sitemap.xml'))
 		{
 			$html .= $lang['SITEMAP_CREATED'].': <b>'.bb_date(TIMENOW, $bb_cfg['post_date_format']).'</b> '.$lang['SITEMAP_AVAILABLE'].': <a href="'.make_url('sitemap.xml').'" target="_blank">'.make_url('sitemap.xml').'</a>';
 		} else {
@@ -21,7 +21,7 @@ switch ($mode)
 	break;
 
 	case 'search_update':
-		if (!@file_exists(SITEMAP_DIR. 'sitemap.xml')) $map->create();
+		if (!file_exists(SITEMAP_DIR. 'sitemap.xml')) $map->create();
 
 		$map_link = make_url(SITEMAP_DIR. 'sitemap.xml');
 

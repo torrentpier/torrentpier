@@ -26,13 +26,13 @@ function get_attach_path ($id, $ext_id = '', $base_path = null, $first_div = 100
 function delete_avatar ($user_id, $avatar_ext_id)
 {
 	$avatar_file = ($avatar_ext_id) ? get_avatar_path($user_id, $avatar_ext_id) : '';
-	return ($avatar_file && file_exists($avatar_file)) ? @unlink($avatar_file) : false;
+	return ($avatar_file && file_exists($avatar_file)) ? unlink($avatar_file) : false;
 }
 
 function delete_attach ($topic_id, $attach_ext_id)
 {
 	$attach_file = ($attach_ext_id) ? get_attach_path($topic_id, $attach_ext_id) : '';
-	return ($attach_file && file_exists($attach_file)) ? @unlink($attach_file) : false;
+	return ($attach_file && file_exists($attach_file)) ? unlink($attach_file) : false;
 }
 
 function get_tracks ($type)
@@ -53,7 +53,7 @@ function get_tracks ($type)
 		default:
 			trigger_error(__FUNCTION__ .": invalid type '$type'", E_USER_ERROR);
 	}
-	$tracks = !empty($_COOKIE[$c_name]) ? @unserialize($_COOKIE[$c_name]) : false;
+	$tracks = !empty($_COOKIE[$c_name]) ? unserialize($_COOKIE[$c_name]) : false;
 	return ($tracks) ? $tracks : array();
 }
 
@@ -1779,7 +1779,7 @@ function bb_simple_die ($txt)
 
 function bb_realpath ($path)
 {
-	return (!@function_exists('realpath') || !@realpath(INC_DIR . 'functions.php')) ? $path : @realpath($path);
+	return (!function_exists('realpath') || !realpath(INC_DIR . 'functions.php')) ? $path : realpath($path);
 }
 
 function login_redirect ($url = '')
@@ -2357,7 +2357,7 @@ function remove_stopwords ($text)
 
 	if (is_null($stopwords))
 	{
-		$stopwords = explode(' ', str_compact(@file_get_contents(LANG_DIR .'search_stopwords.txt')));
+		$stopwords = explode(' ', str_compact(file_get_contents(LANG_DIR .'search_stopwords.txt')));
 		array_deep($stopwords, 'pad_with_space');
 	}
 

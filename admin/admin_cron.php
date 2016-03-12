@@ -76,7 +76,7 @@ switch ($mode)
 		));
 
 		//detect cron status
-		if (@file_exists('../triggers/cron_running'))
+		if (file_exists('../triggers/cron_running'))
 		{
 			$template->assign_vars(array(
 				'CRON_RUNNING' => true,
@@ -85,7 +85,7 @@ switch ($mode)
 	break;
 
 	case 'repair':
-		if (@file_exists('../triggers/cron_running'))
+		if (file_exists('../triggers/cron_running'))
 		{
 			rename("../triggers/cron_running", "../triggers/cron_allowed");
 		}

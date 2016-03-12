@@ -4,8 +4,8 @@ if (!defined('IN_AJAX')) die(basename(__FILE__));
 
 global $user, $lang;
 
-$post_id  = (int) @$this->request['post_id'];
-$topic_id = (int) @$this->request['topic_id'];
+$post_id  = (int) $this->request['post_id'];
+$topic_id = (int) $this->request['topic_id'];
 
 if (!$post_id)
 {

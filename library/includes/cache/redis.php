@@ -29,7 +29,7 @@ class cache_redis extends cache_common
 		$this->cur_query = 'connect '. $this->cfg['host'] .':'. $this->cfg['port'];
 		$this->debug('start');
 
-		if (@$this->redis->connect($this->cfg['host'], $this->cfg['port']))
+		if ($this->redis->connect($this->cfg['host'], $this->cfg['port']))
 		{
 			$this->connected = true;
 		}

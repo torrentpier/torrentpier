@@ -20,14 +20,14 @@ define('REBUILD_SEARCH_COMPLETED', 2);  // when all the db posts have been proce
 //
 $def_post_limit   = 50;
 $def_refresh_rate = 3;
-$def_time_limit   = ($sys_time_limit = @ini_get('max_execution_time')) ? $sys_time_limit : 30;
+$def_time_limit   = ($sys_time_limit = ini_get('max_execution_time')) ? $sys_time_limit : 30;
 
 $last_session_data = get_rebuild_session_details('last', 'all');
 $last_session_id   = (int) $last_session_data['rebuild_session_id'];
 $max_post_id       = get_latest_post_id();
 $start_time        = TIMENOW;
 
-$mode = (string) @$_REQUEST['mode'];
+$mode = (string) $_REQUEST['mode'];
 
 // check if the user has choosen to stop processing
 if (isset($_REQUEST['cancel_button']))
@@ -46,7 +46,7 @@ if (isset($_REQUEST['cancel_button']))
 }
 
 // from which post to start processing
-$start = abs(intval(@$_REQUEST['start']));
+$start = abs(intval($_REQUEST['start']));
 
 // get the total number of posts in the db
 $total_posts = get_total_posts();
@@ -62,7 +62,7 @@ $session_posts_processed = ( $mode == 'refresh' ) ? get_processed_posts('session
 $total_posts_processing = $total_posts - $total_posts_processed;
 
 // how many posts to process in this session
-if ($session_posts_processing = @intval($_REQUEST['session_posts_processing']))
+if ($session_posts_processing = intval($_REQUEST['session_posts_processing']))
 {
 	if ($mode == 'submit')
 	{
@@ -140,7 +140,7 @@ if ($mode == 'submit')
 }
 
 // Increase maximum execution time in case of a lot of posts, but don't complain about it if it isn't allowed.
-@set_time_limit($time_limit + 20);
+set_time_limit($time_limit + 20);
 
 // check if we are should start processing
 if ($mode == 'submit' || $mode == 'refresh')
@@ -179,7 +179,7 @@ if ($mode == 'submit' || $mode == 'refresh')
 
 	while ($row = DB()->fetch_next($result) AND !$timer_expired)
 	{
-		@set_time_limit(600);
+		set_time_limit(600);
 		$start_post_id = ($num_rows == 0) ? $row['post_id'] : $start_post_id;
 		$end_post_id   = $row['post_id'];
 

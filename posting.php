@@ -11,22 +11,22 @@ $user->session_start();
 
 $page_cfg['load_tpl_vars'] = ['post_icons'];
 
-$submit   = (bool) @$_REQUEST['post'];
-$preview  = (bool) @$_REQUEST['preview'];
-$delete   = (bool) @$_REQUEST['delete'];
+$submit   = (bool) $_REQUEST['post'];
+$preview  = (bool) $_REQUEST['preview'];
+$delete   = (bool) $_REQUEST['delete'];
 
-$forum_id = (int) @$_REQUEST[POST_FORUM_URL];
-$topic_id = (int) @$_REQUEST[POST_TOPIC_URL];
-$post_id  = (int) @$_REQUEST[POST_POST_URL];
+$forum_id = (int) $_REQUEST[POST_FORUM_URL];
+$topic_id = (int) $_REQUEST[POST_TOPIC_URL];
+$post_id  = (int) $_REQUEST[POST_POST_URL];
 
-$mode = (string) @$_REQUEST['mode'];
+$mode = (string) $_REQUEST['mode'];
 
 $confirm = isset($_POST['confirm']);
 
 $orig_word = $replacement_word = [];
 
 // Set topic type
-$topic_type = (@$_POST['topictype']) ? (int) $_POST['topictype'] : POST_NORMAL;
+$topic_type = ($_POST['topictype']) ? (int) $_POST['topictype'] : POST_NORMAL;
 $topic_type = in_array($topic_type, [POST_NORMAL, POST_STICKY, POST_ANNOUNCE]) ? $topic_type : POST_NORMAL;
 
 $selected_rg = $switch_rg_sig = $switch_poster_rg_sig = 0;
@@ -278,7 +278,7 @@ $topic_has_new_posts = false;
 
 if (!IS_GUEST && $mode != 'newtopic' && ($submit || $preview || $mode == 'quote' || $mode == 'reply') && isset($_COOKIE[COOKIE_TOPIC]))
 {
-	if ($topic_last_read = max(intval(@$tracking_topics[$topic_id]), intval(@$tracking_forums[$forum_id])))
+	if ($topic_last_read = max(intval($tracking_topics[$topic_id]), intval($tracking_forums[$forum_id])))
 	{
 		$sql = "SELECT p.*, pt.post_text, u.username, u.user_rank
 			FROM ". BB_POSTS ." p, ". BB_POSTS_TEXT ." pt, ". BB_USERS ." u

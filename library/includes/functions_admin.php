@@ -802,7 +802,7 @@ function user_delete ($user_id, $delete_posts = false)
 	foreach (explode(',', $user_csv) as $user_id)
 	{
 		$file_path = $bb_cfg['atom']['path'] .'/u/'. floor($user_id/5000) .'/'. ($user_id % 100) .'/'. $user_id .'.atom';
-		@unlink($file_path);
+		unlink($file_path);
 	}
 }
 

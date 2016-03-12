@@ -102,17 +102,17 @@ class emailer
 		{
 			$tpl_file = LANG_ROOT_DIR ."$template_lang/email/$template_file.html";
 
-			if (!@file_exists(@bb_realpath($tpl_file)))
+			if (!file_exists(bb_realpath($tpl_file)))
 			{
 				$tpl_file = LANG_ROOT_DIR ."{$bb_cfg['default_lang']}/email/$template_file.html";
 
-				if (!@file_exists(@bb_realpath($tpl_file)))
+				if (!file_exists(bb_realpath($tpl_file)))
 				{
 					bb_die('Could not find email template file :: ' . $template_file);
 				}
 			}
 
-			if (!($fd = @fopen($tpl_file, 'r')))
+			if (!($fd = fopen($tpl_file, 'r')))
 			{
 				bb_die('Failed opening template file :: ' . $tpl_file);
 			}
@@ -192,10 +192,10 @@ class emailer
 			$this->msg = trim(preg_replace('#' . $drop_header . '#s', '', $this->msg));
 		}
 
-		$to = @$this->addresses['to'];
+		$to = $this->addresses['to'];
 
-		$cc = (@count($this->addresses['cc'])) ? implode(', ', $this->addresses['cc']) : '';
-		$bcc = (@count($this->addresses['bcc'])) ? implode(', ', $this->addresses['bcc']) : '';
+		$cc = (count($this->addresses['cc'])) ? implode(', ', $this->addresses['cc']) : '';
+		$bcc = (count($this->addresses['bcc'])) ? implode(', ', $this->addresses['bcc']) : '';
 
 		// Build header
 		$type = ($email_format == 'html') ? 'html' : 'plain';
@@ -215,7 +215,7 @@ class emailer
 		{
 			$to = ($to == '') ? ' ' : $to;
 
-			$result = @mail($to, $this->subject, preg_replace("#(?<!\r)\n#s", "\n", $this->msg), $this->extra_headers);
+			$result = mail($to, $this->subject, preg_replace("#(?<!\r)\n#s", "\n", $this->msg), $this->extra_headers);
 		}
 
 		// Did it work?

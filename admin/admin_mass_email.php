@@ -7,7 +7,7 @@ if (!empty($setmodules))
 }
 require('./pagestart.php');
 
-@set_time_limit(1200);
+set_time_limit(1200);
 
 $subject  = (string) trim(request_var('subject', ''));
 $message  = (string) request_var('message', '');
