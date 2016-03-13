@@ -10,9 +10,4 @@ abstract class Entity
     {
         return $this->table;
     }
-
-    public function initData($data)
-    {
-        return $this;
-    }
 }

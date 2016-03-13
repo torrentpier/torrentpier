@@ -13,6 +13,9 @@ class ConfigTest extends \PHPUnit_Framework_TestCase
      */
     public $config;
 
+    /**
+     * @inheritdoc
+     */
     public function setUp()
     {
         $data = [
@@ -28,23 +31,25 @@ class ConfigTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers \TorrentPier\Config::get
+     * Get value from array by key
+     *
+     * @see \TorrentPier\Config::get
      */
     public function testGet()
     {
-        $this->assertEquals($this->config->get('key1'), 'value1');
-        $this->assertEquals($this->config->get('key2.key3'), 'value2');
-        $this->assertEquals($this->config->get('key2.key4'), 'value1');
-        $this->assertEquals($this->config->get('key2.key5'), 'value1');
-        $this->assertEquals($this->config->get('key2')->get('key3'), 'value2');
+        static::assertEquals($this->config->get('key1'), 'value1');
+        static::assertEquals($this->config->get('key2.key3'), 'value2');
+        static::assertEquals($this->config->get('key2.key4'), 'value1');
+        static::assertEquals($this->config->get('key2.key5'), 'value1');
+        static::assertEquals($this->config->get('key2')->get('key3'), 'value2');
 
-        $this->assertEquals($this->config['key1'], 'value1');
-        $this->assertEquals($this->config['key2.key3'], 'value2');
-        $this->assertEquals($this->config['key2.key4'], 'value1');
-        $this->assertEquals($this->config['key2.key5'], 'value1');
-        $this->assertEquals($this->config['key2']['key3'], 'value2');
+        static::assertEquals($this->config['key1'], 'value1');
+        static::assertEquals($this->config['key2.key3'], 'value2');
+        static::assertEquals($this->config['key2.key4'], 'value1');
+        static::assertEquals($this->config['key2.key5'], 'value1');
+        static::assertEquals($this->config['key2']['key3'], 'value2');
 
-        $this->assertEquals($this->config['key2.key6'], null);
+        static::assertEquals($this->config['key2.key6'], null);
     }
 
     /**
@@ -52,7 +57,7 @@ class ConfigTest extends \PHPUnit_Framework_TestCase
      */
     public function testToArray()
     {
-        $this->assertEquals($this->config->toArray(), [
+        static::assertEquals($this->config->toArray(), [
             'key1' => 'value1',
             'key2' => [
                 'key3' => 'value2',

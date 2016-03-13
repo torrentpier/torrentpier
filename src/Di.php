@@ -24,7 +24,7 @@ class Di extends Container
             return static::$instance;
         }
 
-        throw new \Exception('The container has not been initialized');
+        throw new \RuntimeException('The container has not been initialized');
     }
 
     public function __get($id)
@@ -33,6 +33,6 @@ class Di extends Container
             return $this->offsetGet($id);
         }
 
-        throw new \Exception("Service '{$id}' is not registered in the container");
+        throw new \RuntimeException("Service '{$id}' is not registered in the container");
     }
 }
