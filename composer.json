@@ -41,7 +41,8 @@
 		"zendframework/zend-loader": "^2.5",
 		"zendframework/zend-mail": "^2.5",
 		"zendframework/zend-session": "^2.5",
-		"zendframework/zend-version": "^2.5"
+		"zendframework/zend-version": "^2.5",
+		"monolog/monolog": "^1.18"
 	},
 	"autoload": {
 		"psr-4": {

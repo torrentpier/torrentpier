@@ -35,6 +35,12 @@ $db = $di->db;
 //    });
 //});
 
+///** @var \Monolog\Logger $log */
+//$log = $di->log;
+//$log->debug('test debug information');
+
+\TorrentPier\Log::info('You will see the style guide');
+
 $query = function(\Zend\Db\Sql\Select $select) {
     $select->columns(['id' => 'user_id', 'name' => 'username']);
     $select->join(['t' => BB_TOPICS], 't.topic_poster = u.user_id', ['title' => 'topic_title']);
