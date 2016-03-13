@@ -7,3 +7,4 @@ finder:
     - "*Stub.php"
   path:
     - "src"
+    - "tests"

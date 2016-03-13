@@ -4,6 +4,10 @@ namespace TorrentPier;
 
 use Zend\Config\Config as ZendConfig;
 
+/**
+ * Class Config
+ * @package TorrentPier
+ */
 class Config extends ZendConfig
 {
     protected $root;
@@ -43,7 +47,7 @@ class Config extends ZendConfig
                 $result = $this;
                 foreach ($keys as $key) {
                     $result = $result->get($key);
-                    if ($result === null) {
+                    if (null === $result) {
                         break;
                     }
                 }
@@ -55,6 +59,12 @@ class Config extends ZendConfig
         return $this->prepareValue($result);
     }
 
+    /**
+     * Parse value
+     *
+     * @param mixed $value
+     * @return mixed
+     */
     protected function prepareValue($value)
     {
         if (is_string($value)) {
