@@ -3,6 +3,10 @@
 define('BB_SCRIPT', 'posting');
 define('BB_ROOT', './');
 require(BB_ROOT ."common.php");
+
+/** @var \TorrentPier\Di $di */
+$di = \TorrentPier\Di::getInstance();
+
 require(INC_DIR .'bbcode.php');
 require(INC_DIR .'functions_post.php');
 
@@ -11,13 +15,13 @@ $user->session_start();
 
 $page_cfg['load_tpl_vars'] = ['post_icons'];
 
-$submit   = (bool) $_REQUEST['post'];
-$preview  = (bool) $_REQUEST['preview'];
-$delete   = (bool) $_REQUEST['delete'];
+$submit   = $di->request->request->has('post');
+$preview  = $di->request->request->has('preview');
+$delete   = $di->request->request->has('delete');
 
-$forum_id = (int) $_REQUEST[POST_FORUM_URL];
-$topic_id = (int) $_REQUEST[POST_TOPIC_URL];
-$post_id  = (int) $_REQUEST[POST_POST_URL];
+$forum_id = $di->request->request->getInt(POST_FORUM_URL);
+$topic_id = $di->request->request->getInt(POST_TOPIC_URL);
+$post_id  = $di->request->request->getInt(POST_POST_URL);
 
 $mode = (string) $_REQUEST['mode'];
 
@@ -26,7 +30,7 @@ $confirm = isset($_POST['confirm']);
 $orig_word = $replacement_word = [];
 
 // Set topic type
-$topic_type = ($_POST['topictype']) ? (int) $_POST['topictype'] : POST_NORMAL;
+$topic_type = $di->request->request->getInt('topictype', POST_NORMAL);
 $topic_type = in_array($topic_type, [POST_NORMAL, POST_STICKY, POST_ANNOUNCE]) ? $topic_type : POST_NORMAL;
 
 $selected_rg = $switch_rg_sig = $switch_poster_rg_sig = 0;

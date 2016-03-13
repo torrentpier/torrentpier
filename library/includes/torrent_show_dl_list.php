@@ -2,6 +2,9 @@
 
 if (!defined('BB_ROOT')) die(basename(__FILE__));
 
+/** @var \TorrentPier\Di $di */
+$di = \TorrentPier\Di::getInstance();
+
 $show_canceled_in_count_mode  = false;
 $title_date_format            = 'Y-m-d';
 $dl_list_sql_limit            = 300;     // DL-List overall limit
@@ -12,15 +15,15 @@ $dl_users_div_style_overflow  = "padding: 6px; height: $dl_users_overflow_div_he
 
 $template->assign_vars(array('DL_BUTTONS' => false));
 
-$count_mode = ($bb_cfg['bt_dl_list_only_count'] && !($_GET['dl'] === 'names'));
+$count_mode = ($bb_cfg['bt_dl_list_only_count'] && !($di->request->get('dl') === 'names'));
 
-$dl_topic = ($t_data['tracker_status'] && !($bb_cfg['bt_dl_list_only_1st_page'] && $start));
-$show_dl_list = ($dl_topic && ($bb_cfg['bt_show_dl_list'] || ($bb_cfg['allow_dl_list_names_mode'] && $_GET['dl'] === 'names')));
+$dl_topic = (isset($t_data['tracker_status']) && !($bb_cfg['bt_dl_list_only_1st_page'] && $start));
+$show_dl_list = ($dl_topic && ($bb_cfg['bt_show_dl_list'] || ($bb_cfg['allow_dl_list_names_mode'] && $di->request->get('dl') === 'names')));
 $show_dl_buttons = ($dl_topic && $bb_cfg['bt_show_dl_list_buttons']);
 
 // link to clear DL-List
 $template->assign_vars(array('S_DL_DELETE' => false));
-if ($is_auth['auth_mod'] && $t_data['tracker_status'])
+if ($is_auth['auth_mod'] && isset($t_data['tracker_status']))
 {
 	$s_dl_delete = "<a href=\"dl_list.php?mode=dl_delete&amp;". POST_TOPIC_URL ."=$topic_id&amp;sid=". $userdata['session_id'] .'">'. $lang['DL_LIST_DEL'] .'</a>';
 	$template->assign_vars(array('S_DL_DELETE' => $s_dl_delete));

@@ -30,7 +30,7 @@ function cron_get_file_lock ()
 
 function cron_track_running ($mode)
 {
-	define('CRON_STARTMARK', TRIGGERS_DIR .'cron_started_at_'. date('Y-m-d_H-i-s') .'_by_pid_'. getmypid());
+    defined('CRON_STARTMARK') or define('CRON_STARTMARK', TRIGGERS_DIR .'cron_started_at_'. date('Y-m-d_H-i-s') .'_by_pid_'. getmypid());
 
 	if ($mode == 'start')
 	{

@@ -3,6 +3,10 @@
 define('BB_SCRIPT', 'topic');
 define('BB_ROOT', './');
 require(BB_ROOT .'common.php');
+
+/** @var \TorrentPier\Di $di */
+$di = \TorrentPier\Di::getInstance();
+
 require(INC_DIR .'bbcode.php');
 
 $datastore->enqueue(array(
@@ -29,7 +33,7 @@ $select_ppp = '';
 
 if ($userdata['session_admin'])
 {
-	if ($req_ppp = abs(intval($_REQUEST['ppp'])) AND in_array($req_ppp, $bb_cfg['allowed_posts_per_page']))
+	if ($req_ppp = $di->request->query->getInt('ppp') AND in_array($req_ppp, $bb_cfg['allowed_posts_per_page']))
 	{
 		$posts_per_page = $req_ppp;
 	}
