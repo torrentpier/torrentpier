@@ -9,6 +9,11 @@ $di = \TorrentPier\Di::getInstance();
 /** @var \TorrentPier\Db\Adapter $db */
 $db = $di->db;
 
+///** @var \Symfony\Component\HttpFoundation\Request $request */
+//$request = $di->request;
+//$request->request->has()
+
+
 //$id = $db->insert(BB_USERS, [
 //    'username' => 'user_' . rand(1, 50)
 //]);

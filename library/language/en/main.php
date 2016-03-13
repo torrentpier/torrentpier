@@ -2333,8 +2333,8 @@ $lang['BOARD_DISABLE_EXPL'] = 'disable board when this job is run';
 $lang['RUN_COUNTER'] = 'Run counter';
 
 $lang['JOB_REMOVED'] = 'The problem has been removed successfully';
-$lang['SCRIPT_DUPLICATE'] = 'Script <b>'. $_POST['cron_script'] .'</b> already exists!';
-$lang['TITLE_DUPLICATE'] = 'Task Name <b>'. $_POST['cron_title'] .'</b> already exists!';
+$lang['SCRIPT_DUPLICATE'] = 'Script <b> $_POST["cron_script"] </b> already exists!';
+$lang['TITLE_DUPLICATE'] = 'Task Name <b> $_POST["cron_title"] </b> already exists!';
 $lang['CLICK_RETURN_JOBS_ADDED'] = '%sReturn to the addition problem%s';
 $lang['CLICK_RETURN_JOBS'] = '%sBack to the Task Scheduler%s';
 

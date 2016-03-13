@@ -4,6 +4,9 @@ define('BB_SCRIPT', 'forum');
 define('BB_ROOT', './');
 require(BB_ROOT . 'common.php');
 
+/** @var \TorrentPier\Di $di */
+$di = \TorrentPier\Di::getInstance();
+
 $page_cfg['include_bbcode_js'] = true;
 
 $show_last_topic     = true;
@@ -231,7 +234,8 @@ $select_tpp = '';
 
 if ($is_auth['auth_mod'])
 {
-	if ($req_tpp = abs(intval($_REQUEST['tpp'])) AND in_array($req_tpp, $bb_cfg['allowed_topics_per_page']))
+
+	if ($req_tpp = $di->request->query->getInt('tpp') AND in_array($req_tpp, $bb_cfg['allowed_topics_per_page']))
 	{
 		$topics_per_page = $req_tpp;
 	}
@@ -260,7 +264,7 @@ $sel_previous_days = array(
 
 if (!empty($_REQUEST['topicdays']))
 {
-	if ($req_topic_days = abs(intval($_REQUEST['topicdays'])) AND isset($sel_previous_days[$req_topic_days]))
+	if ($req_topic_days = $di->request->query->getInt('topicdays') AND isset($sel_previous_days[$req_topic_days]))
 	{
 		$sql = "
 			SELECT COUNT(*) AS forum_topics
@@ -485,7 +489,7 @@ foreach ($topic_rowset as $topic)
 		'ATTACH'           => $topic['attach_ext_id'],
 		'STATUS'           => $topic['topic_status'],
 		'TYPE'             => $topic['topic_type'],
-		'DL'               => ($topic['tracker_status'] && !$forum_data['allow_reg_tracker']),
+		'DL'               => (isset($topic['tracker_status']) && !$forum_data['allow_reg_tracker']),
 		'POLL'             => $topic['topic_vote'],
 		'DL_CLASS'         => isset($topic['dl_status']) ? $dl_link_css[$topic['dl_status']] : '',
 

@@ -819,7 +819,7 @@ else
 			'ATTACH'        => $topic['attach_ext_id'],
 			'STATUS'        => $topic['topic_status'],
 			'TYPE'          => $topic['topic_type'],
-			'DL'            => $topic['tracker_status'],
+			'DL'            => isset($topic['tracker_status']) ? $topic['tracker_status'] : null,
 			'POLL'          => $topic['topic_vote'],
 			'DL_CLASS'      => isset($topic['dl_status']) ? $dl_link_css[$topic['dl_status']] : '',
 
