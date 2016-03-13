@@ -62,6 +62,18 @@ $config = [
 		]
 	],
 
+    // Log
+    'log' => [
+        'handlers' => [
+            function () {
+                return new \Monolog\Handler\StreamHandler(
+                    __DIR__.'/../internal_data/log/app.log',
+                    \Monolog\Logger::DEBUG
+                );
+            }
+        ]
+    ],
+
 	// Aliases
 	// TODO: удалить
 	'db_alias' => [
