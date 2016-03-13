@@ -44,6 +44,9 @@
 		"zendframework/zend-version": "^2.5",
 		"monolog/monolog": "^1.18"
 	},
+	"require-dev": {
+		"phpunit/phpunit": "^4.8"
+	},
 	"autoload": {
 		"psr-4": {
 			"TorrentPier\\": "src/"
