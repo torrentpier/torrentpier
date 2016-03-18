@@ -2,66 +2,68 @@
 
 define('BB_SCRIPT', 'feed');
 define('BB_ROOT', './');
-require(BB_ROOT .'common.php');
+require_once __DIR__ . '/common.php';
+require_once(INC_DIR . 'functions_atom.php');
 
-$user->session_start(array('req_login' => true));
+/** @var \TorrentPier\Di $di */
+$di = \TorrentPier\Di::getInstance();
 
-$mode = isset($_REQUEST['mode']) ? $_REQUEST['mode'] : '';
-$type = isset($_POST['type']) ? $_POST['type'] : '';
-$id   = isset($_POST['id']) ? $_POST['id'] : 0;
-$timecheck = TIMENOW - 600;
+/** @var \TorrentPier\Db\Adapter $db */
+$db = $di->db;
 
-if (!$mode) bb_simple_die($lang['ATOM_NO_MODE']);
+$user->session_start(['req_login' => true]);
 
-if ($mode == 'get_feed_url' && ($type == 'f' || $type == 'u') && $id >= 0)
-{
-	if ($type == 'f')
-	{
-		// Check if the user has actually sent a forum ID
-		$sql = "SELECT allow_reg_tracker, forum_name FROM ". BB_FORUMS ." WHERE forum_id = $id LIMIT 1";
-		if (!$forum_data = DB()->fetch_row($sql))
-		{
-			if ($id == 0)
-			{
-				$forum_data = array();
-			}
-			else bb_simple_die($lang['ATOM_ERROR'].' #1');
-		}
-		if (file_exists($bb_cfg['atom']['path'] .'/f/'. $id .'.atom') && filemtime($bb_cfg['atom']['path'] .'/f/'. $id .'.atom') > $timecheck)
-		{
-			redirect($bb_cfg['atom']['url'] .'/f/'. $id .'.atom');
-		}
-		else
-		{
-			require_once(INC_DIR .'functions_atom.php');
-			if (update_forum_feed($id, $forum_data)) redirect($bb_cfg['atom']['url'] .'/f/'. $id .'.atom');
-			else bb_simple_die($lang['ATOM_NO_FORUM']);
-		}
-	}
-	if ($type == 'u')
-	{
-		// Check if the user has actually sent a user ID
-		if ($id < 1)
-		{
-			bb_simple_die($lang['ATOM_ERROR'].' #2');
-		}
-		if (!$username = get_username($id))
-		{
-			bb_simple_die($lang['ATOM_ERROR'].' #3');
-		}
-		if (file_exists($bb_cfg['atom']['path'] .'/u/'. floor($id/5000) .'/'. ($id % 100) .'/'. $id .'.atom') && filemtime($bb_cfg['atom']['path'] .'/u/'. floor($id/5000) .'/'. ($id % 100) .'/'. $id .'.atom') > $timecheck)
-		{
-			redirect($bb_cfg['atom']['url'] .'/u/'. floor($id/5000) .'/'. ($id % 100) .'/'. $id .'.atom');
-		}
-		else
-		{
-			require_once(INC_DIR .'functions_atom.php');
-			if (update_user_feed($id, $username)) redirect($bb_cfg['atom']['url'] .'/u/'. floor($id/5000) .'/'. ($id % 100) .'/'. $id .'.atom');
-			else bb_simple_die($lang['ATOM_NO_USER']);
-		}
-	}
-}
-else
-{
-	bb_simple_die($lang['ATOM_ERROR'].' #4');
+$mode = $di->request->request->get('mode');
+$type = $di->request->request->get('type');
+$id = $di->request->query->getInt('id');
+
+if (!$mode) bb_simple_die($di->translator->trans('Do not specify a mode for the feed'));
+
+if ($mode == 'get_feed_url' && ($type == 'f' || $type == 'u') && $id >= 0) {
+    if ($type == 'f') {
+        /** @var \TorrentPier\Db\PrepareStatement $result */
+        $forum_data = $db->select(BB_FORUMS, function (\Zend\Db\Sql\Select $select) use ($id) {
+            $select->columns(['atom_tr_allowed' => 'allow_reg_tracker', 'atom_forum_name' => 'forum_name']);
+            $select->where(function (\Zend\Db\Sql\Where $where) use ($id) {
+                $where->equalTo('forum_id', $id);
+            });
+        })->one();
+
+        if (!$forum_data) {
+            if ($id == 0) {
+                $forum_data = [];
+            } else {
+                \TorrentPier\Log::error('No forum data to atom feed');
+            }
+        }
+        if (file_exists($di->config->get('atom.path') . '/f/' . $id . '.atom') && filemtime($di->config->get('atom.path') . '/f/' . $id . '.atom') > TIMENOW - 600) {
+            redirect($di->config->get('atom.url') . '/f/' . $id . '.atom');
+        } else {
+            if (update_forum_feed($id, $forum_data)) {
+                redirect($di->config->get('atom.url') . '/f/' . $id . '.atom');
+            } else {
+                bb_simple_die($di->translator->trans('This forum does not have a feed'));
+            }
+        }
+    }
+
+    if ($type == 'u') {
+        if ($id < 1) {
+            \TorrentPier\Log::error('Incorrect atom feed user_id');
+        }
+        if (!$username = get_username($id)) {
+            \TorrentPier\Log::error('Can not receive the username for atom feed');
+        }
+        if (file_exists($di->config->get('atom.path') . '/u/' . floor($id / 5000) . '/' . ($id % 100) . '/' . $id . '.atom') && filemtime($di->config->get('atom.path') . '/u/' . floor($id / 5000) . '/' . ($id % 100) . '/' . $id . '.atom') > TIMENOW - 600) {
+            redirect($di->config->get('atom.url') . '/u/' . floor($id / 5000) . '/' . ($id % 100) . '/' . $id . '.atom');
+        } else {
+            if (update_user_feed($id, $username)) {
+                redirect($di->config->get('atom.url') . '/u/' . floor($id / 5000) . '/' . ($id % 100) . '/' . $id . '.atom');
+            } else {
+                bb_simple_die($di->translator->trans('This user does not have a feed'));
+            }
+        }
+    }
+} else {
+    \TorrentPier\Log::error('Unknown atom feed mode');
 }

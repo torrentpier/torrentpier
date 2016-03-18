@@ -2,12 +2,15 @@
 
 define('BB_SCRIPT', 'callseed');
 define('BB_ROOT', './');
-require(BB_ROOT . 'common.php');
+require_once __DIR__ . '/common.php';
 
-// Init userdata
+/** @var \TorrentPier\Di $di */
+$di = \TorrentPier\Di::getInstance();
+
 $user->session_start(['req_login' => true]);
 
-$topic_id = (int) request_var('t', 0);
+$topic_id = $di->request->query->getInt('t');
+
 $t_data   = topic_info($topic_id);
 $forum_id = $t_data['forum_id'];
 

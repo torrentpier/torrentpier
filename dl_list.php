@@ -2,32 +2,35 @@
 
 define('BB_SCRIPT', 'dl_list');
 define('BB_ROOT', './');
-require(BB_ROOT .'common.php');
+require_once __DIR__ . '/common.php';
 
-$forum_id  = isset($_REQUEST[POST_FORUM_URL]) ? (int) $_REQUEST[POST_FORUM_URL] : 0;
-$topic_id  = isset($_REQUEST[POST_TOPIC_URL]) ? (int) $_REQUEST[POST_TOPIC_URL] : 0;
-$mode      = isset($_REQUEST['mode']) ? (string) $_REQUEST['mode'] : '';
-$confirmed = isset($_POST['confirm']);
+/** @var \TorrentPier\Di $di */
+$di = \TorrentPier\Di::getInstance();
+
+$forum_id  = $di->request->request->getInt(POST_FORUM_URL, 0);
+$topic_id  = $di->request->request->getInt(POST_TOPIC_URL, 0);
+$mode      = $di->request->request->get('mode');
+$confirmed = $di->request->request->has('confirm');
 
 // Get new DL-status
 if ($mode == 'set_dl_status' || $mode == 'set_topics_dl_status')
 {
-	if (isset($_POST['dl_set_will']))
+	if ($di->request->request->has('dl_set_will'))
 	{
 		$new_dl_status = DL_STATUS_WILL;
 		$dl_key = 'dlw';
 	}
-	elseif (isset($_POST['dl_set_down']))
+	elseif ($di->request->request->has('dl_set_down'))
 	{
 		$new_dl_status = DL_STATUS_DOWN;
 		$dl_key = 'dld';
 	}
-	elseif (isset($_POST['dl_set_complete']))
+	elseif ($di->request->request->has('dl_set_complete'))
 	{
 		$new_dl_status = DL_STATUS_COMPLETE;
 		$dl_key = 'dlc';
 	}
-	elseif (isset($_POST['dl_set_cancel']))
+	elseif ($di->request->request->has('dl_set_cancel'))
 	{
 		$new_dl_status = DL_STATUS_CANCEL;
 		$dl_key = 'dla';

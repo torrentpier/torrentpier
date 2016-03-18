@@ -4,6 +4,7 @@ define('BB_SCRIPT', 'dl');
 define('BB_ROOT', './');
 require_once __DIR__ . '/common.php';
 
+/** @var \TorrentPier\Di $di */
 $di = \TorrentPier\Di::getInstance();
 
 /** @var \TorrentPier\Db\Adapter $db */
