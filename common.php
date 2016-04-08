@@ -46,6 +46,10 @@ $di->register(new \TorrentPier\ServiceProviders\LogServiceProvider(), [
     'config.log.handlers' => $di->config->log->handlers
 ]);
 
+$di->register(new \TorrentPier\ServiceProviders\CacheServiceProvider(), [
+    'config.services.cache' => $di->config->services->cache->toArray()
+]);
+
 $di->register(new \TorrentPier\ServiceProviders\DbServiceProvider, [
 	'config.db' => $di->config->db->toArray()
 ]);

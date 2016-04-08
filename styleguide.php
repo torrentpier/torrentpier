@@ -7,8 +7,20 @@ require_once __DIR__ . '/common.php';
 /** @var \TorrentPier\Di $di */
 $di = \TorrentPier\Di::getInstance();
 
-/** @var \TorrentPier\Db\Adapter $db */
-$db = $di->db;
+/** @var \TorrentPier\Cache\Adapter $cache */
+$cache = $di->cache;
+
+//var_dump($cache);
+//
+$resultHas = $cache->has('key');
+$resultGet = $cache->get('key');
+$resultSet = $cache->set('key', [[1], [2]], 5);
+$resultStats = $cache->stats();
+
+var_dump($resultHas, $resultGet, $resultSet, $resultStats);
+
+///** @var \TorrentPier\Db\Adapter $db */
+//$db = $di->db;
 
 ///** @var \Symfony\Component\HttpFoundation\Request $request */
 //$request = $di->request;
@@ -39,26 +51,26 @@ $db = $di->db;
 //$log = $di->log;
 //$log->debug('test debug information');
 
-\TorrentPier\Log::info('You will see the style guide');
-
-$query = function(\Zend\Db\Sql\Select $select) {
-    $select->columns(['id' => 'user_id', 'name' => 'username']);
-    $select->join(['t' => BB_TOPICS], 't.topic_poster = u.user_id', ['title' => 'topic_title']);
-//    $select->where(['user_id > ?' => 0]);
-};
-
-$users = $db->select(['u' => BB_USERS], $query)->all();
-$usersCount = $db->count(['u' => BB_USERS], $query);
-
-$content = $di->view->make('styleguide', [
-    'name' => $di->request->get('name', 'Admin'),
-    'users' => $users,
-    'users_count' => $usersCount
-]);
-
-/** @var \Symfony\Component\HttpFoundation\Response $response */
-$response = \Symfony\Component\HttpFoundation\Response::create();
-$response->setContent($content);
-
-$response->prepare($di->request);
-$response->send();
+//\TorrentPier\Log::info('You will see the style guide');
+//
+//$query = function(\Zend\Db\Sql\Select $select) {
+//    $select->columns(['id' => 'user_id', 'name' => 'username']);
+//    $select->join(['t' => BB_TOPICS], 't.topic_poster = u.user_id', ['title' => 'topic_title']);
+////    $select->where(['user_id > ?' => 0]);
+//};
+//
+//$users = $db->select(['u' => BB_USERS], $query)->all();
+//$usersCount = $db->count(['u' => BB_USERS], $query);
+//
+//$content = $di->view->make('styleguide', [
+//    'name' => $di->request->get('name', 'Admin'),
+//    'users' => $users,
+//    'users_count' => $usersCount
+//]);
+//
+///** @var \Symfony\Component\HttpFoundation\Response $response */
+//$response = \Symfony\Component\HttpFoundation\Response::create();
+//$response->setContent($content);
+//
+//$response->prepare($di->request);
+//$response->send();
