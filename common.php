@@ -50,6 +50,8 @@ $di->register(new \TorrentPier\ServiceProviders\DbServiceProvider, [
 	'config.db' => $di->config->db->toArray()
 ]);
 
+$di->register(new \TorrentPier\ServiceProviders\AuthServiceProvider());
+
 $di->register(new \TorrentPier\ServiceProviders\SphinxServiceProvider, [
 	'config.sphinx' => $di->config->sphinx->toArray()
 ]);
