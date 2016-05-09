@@ -5,6 +5,7 @@ define('BB_ROOT', './');
 require_once __DIR__ . '/common.php';
 require_once(INC_DIR . 'bbcode.php');
 
+/** @var \TorrentPier\Di $di */
 $di = \TorrentPier\Di::getInstance();
 
 $user->session_start();

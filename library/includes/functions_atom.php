@@ -10,8 +10,8 @@ function update_forum_feed ($forum_id, $forum_data)
 	global $bb_cfg;
 	$file_path = $bb_cfg['atom']['path'] .'/f/'. $forum_id .'.atom';
 	$select_tor_sql = $join_tor_sql = '';
-	if ($forum_id == 0) $forum_data['forum_name'] = 'Общая по всем разделам';
-	if ($forum_id > 0 && $forum_data['allow_reg_tracker'])
+	if ($forum_id == 0) $forum_data['atom_forum_name'] = 'Общая по всем разделам';
+	if ($forum_id > 0 && $forum_data['atom_tr_allowed'])
 	{
 		$select_tor_sql = ', tor.size AS tor_size, tor.tor_status';
 		$join_tor_sql = "LEFT JOIN ". BB_BT_TORRENTS ." tor ON(t.topic_id = tor.topic_id)";
@@ -72,7 +72,7 @@ function update_forum_feed ($forum_id, $forum_data)
 		unlink($file_path);
 		return false;
 	}
-	if (create_atom($file_path, 'f', $forum_id, htmlCHR($forum_data['forum_name']), $topics)) return true;
+	if (create_atom($file_path, 'f', $forum_id, htmlCHR($forum_data['atom_forum_name']), $topics)) return true;
 	else return false;
 }
 
