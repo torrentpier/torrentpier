@@ -7,8 +7,41 @@ require_once __DIR__ . '/common.php';
 /** @var \TorrentPier\Di $di */
 $di = \TorrentPier\Di::getInstance();
 
-/** @var \TorrentPier\Db\Adapter $db */
-$db = $di->db;
+/** @var \Zend\Authentication\AuthenticationService $auth */
+$auth = $di->auth;
+
+
+
+//$auth = new \Zend\Authentication\AuthenticationService();
+
+//$auth->clearIdentity();
+
+////$auth->setAdapter($authAdapter);
+//
+//
+//$storage = new \Zend\Authentication\Storage\Session();
+//$auth->setStorage($storage);
+//
+////$user = null;
+////
+////if ($auth->hasIdentity()) {
+////    $user = $auth->getIdentity();
+////}
+//
+
+$authAdapter = new \TorrentPier\Authentication\Adapter\HashDoubleMD5();
+$authAdapter->setIdentity('admin')->setCredential('admin');
+
+//$auth->authenticate($authAdapter);
+
+var_dump(
+    $auth->authenticate($authAdapter)->isValid(),
+    $auth->hasIdentity(),
+    $auth->getIdentity()
+);
+
+///** @var \TorrentPier\Db\Adapter $db */
+//$db = $di->db;
 
 ///** @var \Symfony\Component\HttpFoundation\Request $request */
 //$request = $di->request;
@@ -39,26 +72,26 @@ $db = $di->db;
 //$log = $di->log;
 //$log->debug('test debug information');
 
-\TorrentPier\Log::info('You will see the style guide');
-
-$query = function(\Zend\Db\Sql\Select $select) {
-    $select->columns(['id' => 'user_id', 'name' => 'username']);
-    $select->join(['t' => BB_TOPICS], 't.topic_poster = u.user_id', ['title' => 'topic_title']);
-//    $select->where(['user_id > ?' => 0]);
-};
-
-$users = $db->select(['u' => BB_USERS], $query)->all();
-$usersCount = $db->count(['u' => BB_USERS], $query);
-
-$content = $di->view->make('styleguide', [
-    'name' => $di->request->get('name', 'Admin'),
-    'users' => $users,
-    'users_count' => $usersCount
-]);
-
-/** @var \Symfony\Component\HttpFoundation\Response $response */
-$response = \Symfony\Component\HttpFoundation\Response::create();
-$response->setContent($content);
-
-$response->prepare($di->request);
-$response->send();
+//\TorrentPier\Log::info('You will see the style guide');
+//
+//$query = function(\Zend\Db\Sql\Select $select) {
+//    $select->columns(['id' => 'user_id', 'name' => 'username']);
+//    $select->join(['t' => BB_TOPICS], 't.topic_poster = u.user_id', ['title' => 'topic_title']);
+////    $select->where(['user_id > ?' => 0]);
+//};
+//
+//$users = $db->select(['u' => BB_USERS], $query)->all();
+//$usersCount = $db->count(['u' => BB_USERS], $query);
+//
+//$content = $di->view->make('styleguide', [
+//    'name' => $di->request->get('name', 'Admin'),
+//    'users' => $users,
+//    'users_count' => $usersCount
+//]);
+//
+///** @var \Symfony\Component\HttpFoundation\Response $response */
+//$response = \Symfony\Component\HttpFoundation\Response::create();
+//$response->setContent($content);
+//
+//$response->prepare($di->request);
+//$response->send();
