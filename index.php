@@ -2,7 +2,13 @@
 
 define('BB_SCRIPT', 'index');
 define('BB_ROOT', './');
-require(BB_ROOT .'common.php');
+require_once __DIR__ . '/common.php';
+
+/** @var \TorrentPier\Di $di */
+$di = \TorrentPier\Di::getInstance();
+
+/** @var \TorrentPier\Cache\Adapter $cache */
+$cache = $di->cache;
 
 $page_cfg['load_tpl_vars'] = array(
 	'post_icons',
@@ -38,7 +44,10 @@ $req_page = 'index_page';
 $req_page .= ($viewcat) ? "_c{$viewcat}" : '';
 
 define('REQUESTED_PAGE', $req_page);
-caching_output(IS_GUEST, 'send', REQUESTED_PAGE .'_guest_'. $bb_cfg['default_lang']);
+
+if (IS_GUEST && $cache->has(REQUESTED_PAGE . '_guest_' . $di->config->get('default_lang'))) {
+	bb_exit($cache->get(REQUESTED_PAGE . '_guest_' . $di->config->get('default_lang')));
+}
 
 $hide_cat_opt  = isset($user->opt_js['h_cat']) ? (string) $user->opt_js['h_cat'] : 0;
 $hide_cat_user = array_flip(explode('-', $hide_cat_opt));
@@ -124,52 +133,42 @@ $replace_in_parent = array(
 );
 
 $cache_name = 'index_sql_' . md5($sql);
-if (!$cat_forums = CACHE('bb_cache')->get($cache_name))
-{
-	$cat_forums = array();
-	foreach (DB()->fetch_rowset($sql) as $row)
-	{
-		if (!$cat_id = $row['cat_id'] OR !$forum_id = $row['forum_id'])
-		{
+if (!$cache->has($cache_name)) {
+	$cat_forums = [];
+	foreach (DB()->fetch_rowset($sql) as $row) {
+		if (!$cat_id = $row['cat_id'] OR !$forum_id = $row['forum_id']) {
 			continue;
 		}
 
-		if ($parent_id = $row['forum_parent'])
-		{
-			if (!$parent =& $cat_forums[$cat_id]['f'][$parent_id])
-			{
+		if ($parent_id = $row['forum_parent']) {
+			if (!$parent =& $cat_forums[$cat_id]['f'][$parent_id]) {
 				$parent = $forums['f'][$parent_id];
 				$parent['last_post_time'] = 0;
 			}
-			if ($row['last_post_time'] > $parent['last_post_time'])
-			{
-				foreach ($replace_in_parent as $key)
-				{
+			if ($row['last_post_time'] > $parent['last_post_time']) {
+				foreach ($replace_in_parent as $key) {
 					$parent[$key] = $row[$key];
 				}
 			}
-			if ($show_subforums && $row['show_on_index'])
-			{
+			if ($show_subforums && $row['show_on_index']) {
 				$parent['last_sf_id'] = $forum_id;
-			}
-			else
-			{
+			} else {
 				continue;
 			}
-		}
-		else
-		{
+		} else {
 			$f =& $forums['f'][$forum_id];
-			$row['forum_desc']   = $f['forum_desc'];
-			$row['forum_posts']  = $f['forum_posts'];
+			$row['forum_desc'] = $f['forum_desc'];
+			$row['forum_posts'] = $f['forum_posts'];
 			$row['forum_topics'] = $f['forum_topics'];
 		}
 		$cat_forums[$cat_id]['f'][$forum_id] = $row;
 	}
-	CACHE('bb_cache')->set($cache_name, $cat_forums, 180);
+	$cache->set($cache_name, $cat_forums, 180);
 	unset($row, $forums);
 	$datastore->rm('cat_forums');
 }
+
+$cat_forums = $cache->get($cache_name);
 
 // Obtain list of moderators
 $moderators = array();

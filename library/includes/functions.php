@@ -1156,7 +1156,13 @@ function wbr ($text, $max_word_length = HTML_WBR_LENGTH)
 
 function get_bt_userdata ($user_id)
 {
-	if (!$btu = CACHE('bb_cache')->get('btu_' . $user_id))
+	/** @var \TorrentPier\Di $di */
+	$di = \TorrentPier\Di::getInstance();
+
+	/** @var \TorrentPier\Cache\Adapter $cache */
+	$cache = $di->cache;
+
+	if (!$cache->has('btu_' . $user_id))
 	{
 		$btu = DB()->fetch_row("
 			SELECT bt.*, SUM(tr.speed_up) AS speed_up, SUM(tr.speed_down) AS speed_down
@@ -1166,8 +1172,11 @@ function get_bt_userdata ($user_id)
 			GROUP BY bt.user_id
 			LIMIT 1
 		");
-		CACHE('bb_cache')->set('btu_' . $user_id, $btu, 300);
+		$cache->set('btu_' . $user_id, $btu, 300);
 	}
+
+	$btu = $cache->get('btu_' . $user_id);
+
 	return $btu;
 }
 
@@ -1217,18 +1226,26 @@ function show_bt_userdata ($user_id)
 
 function bb_get_config ($table, $from_db = false, $update_cache = true)
 {
-	if ($from_db OR !$cfg = CACHE('bb_config')->get("config_{$table}"))
-	{
-		$cfg = array();
-		foreach (DB()->fetch_rowset("SELECT * FROM $table") as $row)
-		{
-			$cfg[$row['config_name']] = $row['config_value'];
-		}
-		if ($update_cache)
-		{
-			CACHE('bb_config')->set("config_{$table}", $cfg);
+	/** @var \TorrentPier\Di $di */
+	$di = \TorrentPier\Di::getInstance();
+
+	/** @var \TorrentPier\Cache\Adapter $cache */
+	$cache = $di->cache;
+
+	$cfg = [];
+	if (!$cache->has('config_' . $table)) {
+		if ($from_db) {
+			foreach (DB()->fetch_rowset("SELECT * FROM $table") as $row) {
+				$cfg[$row['config_name']] = $row['config_value'];
+			}
+			if ($update_cache) {
+				$cache->set('config_' . $table, $cfg);
+			}
 		}
 	}
+
+	$cfg = $cache->get('config_' . $table);
+
 	return $cfg;
 }
 
@@ -1330,17 +1347,23 @@ function bb_rtrim ($str, $charlist = false)
 // Get Userdata, $u can be username or user_id. If $force_name is true, the username will be forced.
 function get_userdata ($u, $force_name = false, $allow_guest = false)
 {
+	/** @var \TorrentPier\Di $di */
+	$di = \TorrentPier\Di::getInstance();
+
+	/** @var \TorrentPier\Cache\Adapter $cache */
+	$cache = $di->cache;
+
 	if (!$u) return false;
 
 	if (intval($u) == GUEST_UID && $allow_guest)
 	{
-		if ($u_data = CACHE('bb_cache')->get('guest_userdata'))
+		if ($u_data = $cache->get('guest_userdata'))
 		{
 			return $u_data;
 		}
 	}
 
-	$u_data = array();
+	$u_data = [];
 	$name_search = false;
 	$exclude_anon_sql = (!$allow_guest) ? "AND user_id != ". GUEST_UID : '';
 
@@ -1368,7 +1391,7 @@ function get_userdata ($u, $force_name = false, $allow_guest = false)
 
 	if ($u_data['user_id'] == GUEST_UID)
 	{
-		CACHE('bb_cache')->set('guest_userdata', $u_data);
+		$cache->set('guest_userdata', $u_data);
 	}
 
 	return $u_data;
@@ -1684,17 +1707,23 @@ function obtain_word_list (&$orig_word, &$replacement_word)
 {
 	global $bb_cfg;
 
+	/** @var \TorrentPier\Di $di */
+	$di = \TorrentPier\Di::getInstance();
+
+	/** @var \TorrentPier\Cache\Adapter $cache */
+	$cache = $di->cache;
+
 	if (!$bb_cfg['use_word_censor']) return false;
 
-	if (!$sql = CACHE('bb_cache')->get('censored'))
-	{
-		$sql = DB()->fetch_rowset("SELECT word, replacement FROM ". BB_WORDS);
-		if(!$sql) $sql = array(array('word' => 1, 'replacement' => 1));
-		CACHE('bb_cache')->set('censored', $sql, 7200);
+	if (!$cache->has('censored')) {
+		$sql = DB()->fetch_rowset("SELECT word, replacement FROM " . BB_WORDS);
+		if (!$sql) $sql = [['word' => 1, 'replacement' => 1]];
+		$cache->set('censored', $sql, 7200);
 	}
 
-	foreach($sql as $row)
-	{
+	$sql = $cache->get('censored');
+
+	foreach ($sql as $row) {
 		$orig_word[] = '#(?<![\p{Nd}\p{L}_])(' . str_replace('\*', '[\p{Nd}\p{L}_]*?', preg_quote($row['word'], '#')) . ')(?![\p{Nd}\p{L}_])#iu';
 		$replacement_word[] = $row['replacement'];
 	}
@@ -2075,32 +2104,36 @@ function build_topic_pagination ($url, $replies, $per_page)
 //
 function get_poll_data_items_js ($topic_id)
 {
-	if (!$topic_id_csv = get_id_csv($topic_id))
-	{
-		return is_array($topic_id) ? array() : false;
-	}
-	$items = array();
+	/** @var \TorrentPier\Di $di */
+	$di = \TorrentPier\Di::getInstance();
 
-	if (!$poll_data = CACHE('bb_poll_data')->get("poll_$topic_id"))
-	{
+	/** @var \TorrentPier\Cache\Adapter $cache */
+	$cache = $di->cache;
+
+	if (!$topic_id_csv = get_id_csv($topic_id)) {
+		return is_array($topic_id) ? [] : false;
+	}
+	$items = [];
+
+	if (!$cache->has('poll_' . $topic_id)) {
 		$poll_data = DB()->fetch_rowset("
 			SELECT topic_id, vote_id, vote_text, vote_result
-			FROM ". BB_POLL_VOTES ."
+			FROM " . BB_POLL_VOTES . "
 			WHERE topic_id IN($topic_id_csv)
 			ORDER BY topic_id, vote_id
 		");
-		CACHE('bb_poll_data')->set("poll_$topic_id", $poll_data);
+		$cache->set('poll_' . $topic_id, $poll_data);
 	}
 
-	foreach ($poll_data as $row)
-	{
-		$opt_text_for_js   = htmlCHR($row['vote_text']);
-		$opt_result_for_js = (int) $row['vote_result'];
+	$poll_data = $cache->get('poll_' . $topic_id);
+
+	foreach ($poll_data as $row) {
+		$opt_text_for_js = htmlCHR($row['vote_text']);
+		$opt_result_for_js = (int)$row['vote_result'];
 
 		$items[$row['topic_id']][$row['vote_id']] = array($opt_text_for_js, $opt_result_for_js);
 	}
-	foreach ($items as $k => $v)
-	{
+	foreach ($items as $k => $v) {
 		$items[$k] = \Zend\Json\Json::encode($v);
 	}
 
@@ -2165,29 +2198,6 @@ function print_page ($args, $type = '', $mode = '')
 	if ($mode !== 'no_footer')
 	{
 		require(PAGE_FOOTER);
-	}
-}
-
-function caching_output ($enabled, $mode, $cache_var_name, $ttl = 300)
-{
-	if (!$enabled || !CACHE('bb_cache')->used)
-	{
-		return;
-	}
-
-	if ($mode == 'send')
-	{
-		if ($cached_contents = CACHE('bb_cache')->get($cache_var_name))
-		{
-			bb_exit($cached_contents);
-		}
-	}
-	else if ($mode == 'store')
-	{
-		if ($output = ob_get_contents())
-		{
-			CACHE('bb_cache')->set($cache_var_name, $output, $ttl);
-		}
 	}
 }
 

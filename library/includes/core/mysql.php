@@ -708,7 +708,13 @@ class sql_db
 	*/
 	function expect_slow_query ($ignoring_time = 60, $new_priority = 10)
 	{
-		if ($old_priority = CACHE('bb_cache')->get('dont_log_slow_query'))
+		/** @var \TorrentPier\Di $di */
+		$di = \TorrentPier\Di::getInstance();
+
+		/** @var \TorrentPier\Cache\Adapter $cache */
+		$cache = $di->cache;
+
+		if ($old_priority = $cache->get('dont_log_slow_query'))
 		{
 			if ($old_priority > $new_priority)
 			{
@@ -717,7 +723,8 @@ class sql_db
 		}
 
 		define('IN_FIRST_SLOW_QUERY', true);
-		CACHE('bb_cache')->set('dont_log_slow_query', $new_priority, $ignoring_time);
+
+		$cache->set('dont_log_slow_query', $new_priority, $ignoring_time);
 	}
 
 	/**
@@ -860,7 +867,13 @@ class sql_db
 	*/
 	function log_slow_query ($log_file = 'sql_slow_bb')
 	{
-		if (!defined('IN_FIRST_SLOW_QUERY') && CACHE('bb_cache')->get('dont_log_slow_query'))
+		/** @var \TorrentPier\Di $di */
+		$di = \TorrentPier\Di::getInstance();
+
+		/** @var \TorrentPier\Cache\Adapter $cache */
+		$cache = $di->cache;
+
+		if (!defined('IN_FIRST_SLOW_QUERY') && $cache->get('dont_log_slow_query'))
 		{
 			return;
 		}

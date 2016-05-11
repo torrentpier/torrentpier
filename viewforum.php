@@ -7,6 +7,9 @@ require(BB_ROOT . 'common.php');
 /** @var \TorrentPier\Di $di */
 $di = \TorrentPier\Di::getInstance();
 
+/** @var \TorrentPier\Cache\Adapter $cache */
+$cache = $di->cache;
+
 $page_cfg['include_bbcode_js'] = true;
 
 $show_last_topic     = true;
@@ -36,7 +39,10 @@ $req_page = "forum_f{$forum_id}";
 $req_page .= ($start) ? "_start{$start}" : '';
 
 define('REQUESTED_PAGE', $req_page);
-caching_output(IS_GUEST, 'send', REQUESTED_PAGE .'_guest');
+
+if (IS_GUEST && $cache->has(REQUESTED_PAGE . '_guest_' . $di->config->get('default_lang'))) {
+	bb_exit($cache->get(REQUESTED_PAGE . '_guest_' . $di->config->get('default_lang')));
+}
 
 set_die_append_msg();
 if (!$forums = $datastore->get('cat_forums'))

@@ -153,38 +153,10 @@ function DB ($db_alias = 'db')
 }
 
 /**
- * Cache
- */
-// Main cache class
-require(INC_DIR . 'cache/common.php');
-// Main datastore class
-require(INC_DIR . 'datastore/common.php');
-
-// Core CACHE class
-require(CORE_DIR . 'caches.php');
-$CACHES = new CACHES($bb_cfg);
-
-/**
+ * Datastore
  * TODO: @deprecated
  */
-function CACHE ($cache_name)
-{
-	global $CACHES;
-	return $CACHES->get_cache_obj($cache_name);
-}
-
-// Common cache classes
-require(INC_DIR . 'cache/memcache.php');
-require(INC_DIR . 'cache/sqlite.php');
-require(INC_DIR . 'cache/redis.php');
-require(INC_DIR . 'cache/apc.php');
-require(INC_DIR . 'cache/xcache.php');
-require(INC_DIR . 'cache/file.php');
-
-/**
-* Datastore
-*/
-// Common datastore classes
+require(INC_DIR . 'datastore/common.php');
 require(INC_DIR . 'datastore/memcache.php');
 require(INC_DIR . 'datastore/sqlite.php');
 require(INC_DIR . 'datastore/redis.php');

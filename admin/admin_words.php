@@ -7,6 +7,12 @@ if (!empty($setmodules))
 }
 require('./pagestart.php');
 
+/** @var \TorrentPier\Di $di */
+$di = \TorrentPier\Di::getInstance();
+
+/** @var \TorrentPier\Cache\Adapter $cache */
+$cache = $di->cache;
+
 if (!$bb_cfg['use_word_censor'])
 {
 	bb_die('Word censor disabled <br /><br /> ($bb_cfg[\'use_word_censor\'] in config.php)');
@@ -91,7 +97,7 @@ if ($mode != '')
 			bb_die('Could not insert data into words table');
 		}
 
-		CACHE('bb_cache')->rm('censored');
+		$cache->delete('censored');
 		$message .= '<br /><br />' . sprintf($lang['CLICK_RETURN_WORDADMIN'], '<a href="admin_words.php">', '</a>') . '<br /><br />' . sprintf($lang['CLICK_RETURN_ADMIN_INDEX'], '<a href="index.php?pane=right">', '</a>');
 
 		bb_die($message);
@@ -109,7 +115,7 @@ if ($mode != '')
 				bb_die('Could not remove data from words table');
 			}
 
-			CACHE('bb_cache')->rm('censored');
+			$cache->delete('censored');
 
 			bb_die($lang['WORD_REMOVED'] . '<br /><br />' . sprintf($lang['CLICK_RETURN_WORDADMIN'], '<a href="admin_words.php">', '</a>') . '<br /><br />' . sprintf($lang['CLICK_RETURN_ADMIN_INDEX'], '<a href="index.php?pane=right">', '</a>'));
 		}

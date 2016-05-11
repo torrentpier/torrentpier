@@ -4,6 +4,12 @@ if (!defined('BB_ROOT')) die(basename(__FILE__));
 
 global $lang;
 
+/** @var \TorrentPier\Di $di */
+$di = \TorrentPier\Di::getInstance();
+
+/** @var \TorrentPier\Cache\Adapter $cache */
+$cache = $di->cache;
+
 // Obtain user/online information
 $logged_online = $guests_online = 0;
 $time_online = TIMENOW - 300;
@@ -149,5 +155,5 @@ $online['cnt'] = $online_short['cnt'] = <<<HTML
 ]
 HTML;
 
-CACHE('bb_cache')->set('online_'.$userdata['user_lang'], $online, 60);
-CACHE('bb_cache')->set('online_short_'.$userdata['user_lang'], $online_short, 60);
+$cache->set('online_' . $userdata['user_lang'], $online, 60);
+$cache->set('online_short_' . $userdata['user_lang'], $online_short, 60);
