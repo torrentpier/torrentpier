@@ -29,7 +29,7 @@ if (!$ranks = $datastore->get('ranks'))
 }
 
 $poster_rank = $rank_image= $rank_style = $rank_select = '';
-if ($user_rank = $profiledata['user_rank'] AND isset($ranks[$user_rank]))
+if (($user_rank = $profiledata['user_rank']) && isset($ranks[$user_rank]))
 {
 	$rank_image = ($ranks[$user_rank]['rank_image']) ? '<img src="'. $ranks[$user_rank]['rank_image'] .'" alt="" title="" border="0" />' : '';
 	$poster_rank = $ranks[$user_rank]['rank_title'];

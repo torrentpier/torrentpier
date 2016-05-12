@@ -33,7 +33,7 @@ $select_ppp = '';
 
 if ($userdata['session_admin'])
 {
-	if ($req_ppp = $di->request->query->getInt('ppp') AND in_array($req_ppp, $bb_cfg['allowed_posts_per_page']))
+	if (($req_ppp = $di->request->query->getInt('ppp')) && in_array($req_ppp, $bb_cfg['allowed_posts_per_page']))
 	{
 		$posts_per_page = $req_ppp;
 	}
@@ -595,7 +595,7 @@ for($i = 0; $i < $total_posts; $i++)
 
 	$poster_rank = $rank_image = '';
 	$user_rank = $postrow[$i]['user_rank'];
-	if (!$user->opt_js['h_rnk_i'] AND isset($ranks[$user_rank]))
+	if (!$user->opt_js['h_rnk_i'] && isset($ranks[$user_rank]))
 	{
 		$rank_image = ($bb_cfg['show_rank_image'] && $ranks[$user_rank]['rank_image']) ? '<img src="'. $ranks[$user_rank]['rank_image'] .'" alt="" title="" border="0" />' : '';
 		$poster_rank = ($bb_cfg['show_rank_text']) ? $ranks[$user_rank]['rank_title'] : '';

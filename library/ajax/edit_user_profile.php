@@ -4,7 +4,7 @@ if (!defined('IN_AJAX')) die(basename(__FILE__));
 
 global $bb_cfg, $lang;
 
-if (!$user_id = intval($this->request['user_id']) OR !$profiledata = get_userdata($user_id))
+if (!($user_id = intval($this->request['user_id'])) || !($profiledata = get_userdata($user_id)))
 {
 	$this->ajax_die($lang['NO_USER_ID_SPECIFIED']);
 }
@@ -112,7 +112,7 @@ switch ($field)
 	case 'user_regdate':
 	case 'user_lastvisit':
 		$tz = TIMENOW + (3600 * $bb_cfg['board_timezone']);
-		if (($value = strtotime($value, $tz)) < $bb_cfg['board_startdate'] OR $value > TIMENOW)
+		if ((($value = strtotime($value, $tz)) < $bb_cfg['board_startdate']) || ($value > TIMENOW))
 		{
 			$this->ajax_die($lang['INVALID_DATE'] . $this->request['value']);
 		}

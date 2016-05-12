@@ -221,7 +221,7 @@ class sql_db
 	{
 		$num_rows = false;
 
-		if ($result OR $result = $this->result)
+		if ($result || ($result = $this->result))
 		{
 			$num_rows = is_resource($result) ? mysql_num_rows($result) : false;
 		}
@@ -368,13 +368,16 @@ class sql_db
 			$info[] = "$num rows";
 		}
 
-		if (is_resource($this->link) AND $ext = mysql_info($this->link))
+		if (is_resource($this->link) && ($ext = mysql_info($this->link)))
 		{
 			$info[] = "$ext";
 		}
-		elseif (!$num && ($aff = $this->affected_rows($this->result) AND $aff != -1))
+		elseif (!$num && ($aff = $this->affected_rows($this->result)))
 		{
-			$info[] = "$aff rows";
+			if ($aff != -1)
+			{
+				$info[] = "$aff rows";
+			}
 		}
 
 		return join(', ', $info);

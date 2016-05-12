@@ -78,7 +78,7 @@ $excluded_forums_csv = $user->get_excluded_forums(AUTH_VIEW);
 $only_new = $user->opt_js['only_new'];
 
 // Validate requested category id
-if ($viewcat AND !$viewcat =& $forums['c'][$viewcat]['cat_id'])
+if ($viewcat && !($viewcat =& $forums['c'][$viewcat]['cat_id']))
 {
 	redirect("index.php");
 }
@@ -136,7 +136,7 @@ $cache_name = 'index_sql_' . md5($sql);
 if (!$cache->has($cache_name)) {
 	$cat_forums = [];
 	foreach (DB()->fetch_rowset($sql) as $row) {
-		if (!$cat_id = $row['cat_id'] OR !$forum_id = $row['forum_id']) {
+		if (!($cat_id = $row['cat_id']) || !($forum_id = $row['forum_id'])) {
 			continue;
 		}
 

@@ -83,7 +83,7 @@ function submit_post($mode, &$post_data, &$message, &$meta, &$forum_id, &$topic_
 	{
 		$sql = "SELECT MAX(p.post_time) AS last_post_time FROM ". BB_POSTS ." p WHERE $where_sql";
 
-		if ($row = DB()->fetch_row($sql) AND $row['last_post_time'])
+		if (($row = DB()->fetch_row($sql)) && $row['last_post_time'])
 		{
 			if ($userdata['user_level'] == USER)
 			{

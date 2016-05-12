@@ -8,15 +8,15 @@ $edit_tpl_mode = ($can_edit_tpl && !empty($_REQUEST['edit_tpl']));
 // forum_data
 $sql = "SELECT forum_name, allow_reg_tracker, forum_tpl_id FROM ". BB_FORUMS ." WHERE forum_id = $forum_id LIMIT 1";
 
-if (!$forum_id OR !$f_data = DB()->fetch_row($sql))
+if (!$forum_id || !($f_data = DB()->fetch_row($sql)))
 {
 	bb_die($lang['FORUM_NOT_EXIST']);
 }
 // tpl_data
-$tpl_data = array();
+$tpl_data = [];
 $sql = "SELECT * FROM ". BB_TOPIC_TPL ." WHERE tpl_id = {$f_data['forum_tpl_id']} LIMIT 1";
 
-if (!$f_data['forum_tpl_id'] OR !$tpl_data = DB()->fetch_row($sql))
+if (!$f_data['forum_tpl_id'] || !($tpl_data = DB()->fetch_row($sql)))
 {
 	if (!$edit_tpl_mode)
 	{

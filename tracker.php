@@ -462,7 +462,7 @@ if (!$set_default)
 		hash_search($_REQUEST[$hash_key]);
 	}
 
-	if ($tm =& $_REQUEST[$title_match_key] AND is_string($tm))
+	if (($tm =& $_REQUEST[$title_match_key]) && is_string($tm))
 	{
 		if ($tmp = mb_substr(trim($tm), 0, $title_match_max_len))
 		{

@@ -50,7 +50,7 @@ if ($confirm) {
 			);
 			$upload = new upload_common();
 
-			if ($upload->init($bb_cfg['avatars'], $FILE, false) AND $upload->store('avatar', $row)) {
+			if ($upload->init($bb_cfg['avatars'], $FILE, false) && $upload->store('avatar', $row)) {
 				DB()->query("UPDATE " . BB_USERS . " SET avatar_ext_id = {$upload->file_ext_id} WHERE user_id = {$row['user_id']} LIMIT 1");
 				$avatars_ok++;
 			} else {
