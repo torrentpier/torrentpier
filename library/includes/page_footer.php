@@ -4,6 +4,12 @@ if (!defined('BB_ROOT')) die(basename(__FILE__));
 
 global $bb_cfg, $userdata, $template, $DBS, $lang;
 
+/** @var \TorrentPier\Di $di */
+$di = \TorrentPier\Di::getInstance();
+
+/** @var \TorrentPier\Cache\Adapter $cache */
+$cache = $di->cache;
+
 if (!empty($template))
 {
 	$template->assign_vars(array(
@@ -83,11 +89,11 @@ echo '
 	</html>
 ';
 
-if (defined('REQUESTED_PAGE') && !defined('DISABLE_CACHING_OUTPUT'))
-{
-	if (IS_GUEST === true)
-	{
-		caching_output(true, 'store', REQUESTED_PAGE .'_guest_'. $bb_cfg['default_lang']);
+if (defined('REQUESTED_PAGE') && !defined('DISABLE_CACHING_OUTPUT')) {
+	if (IS_GUEST === true) {
+		if ($output = ob_get_contents()) {
+			$cache->set(REQUESTED_PAGE . '_guest_' . $di->config->get('default_lang'), $output, 300);
+		}
 	}
 }
 

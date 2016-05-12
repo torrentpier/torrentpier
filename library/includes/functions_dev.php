@@ -4,25 +4,13 @@ if (!defined('BB_ROOT')) die(basename(__FILE__));
 
 function get_sql_log ()
 {
-	global $DBS, $CACHES, $sphinx, $datastore;
+	global $DBS, $sphinx, $datastore;
 
 	$log = '';
 
 	foreach ($DBS->srv as $srv_name => $db_obj)
 	{
 		$log .= !empty($db_obj) ? get_sql_log_html($db_obj, "$srv_name [MySQL]") : '';
-	}
-
-	foreach ($CACHES->obj as $cache_name => $cache_obj)
-	{
-		if (!empty($cache_obj->db))
-		{
-			$log .= get_sql_log_html($cache_obj->db, "cache: $cache_name [{$cache_obj->db->engine}]");
-		}
-		elseif (!empty($cache_obj->engine))
-		{
-			$log .= get_sql_log_html($cache_obj, "cache: $cache_name [{$cache_obj->engine}]");
-		}
 	}
 
 	$log .= !empty($sphinx) ? get_sql_log_html($sphinx, '$sphinx') : '';

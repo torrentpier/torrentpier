@@ -2,24 +2,30 @@
 
 require('./pagestart.php');
 
+/** @var \TorrentPier\Di $di */
+$di = \TorrentPier\Di::getInstance();
+
+/** @var \TorrentPier\Cache\Adapter $cache */
+$cache = $di->cache;
+
 // Generate relevant output
 if (isset($_GET['pane']) && $_GET['pane'] == 'left')
 {
-	if (!$module = CACHE('bb_cache')->get('admin_module' . $user->id))
-	{
+	$module = [];
+	if (!$cache->has('admin_module_' . $user->id)) {
 		$dir = opendir('.');
 		$setmodules = 1;
-		while ($file = readdir($dir))
-		{
-			if (preg_match('/^admin_.*?\.php$/', $file))
-			{
+		while ($file = readdir($dir)) {
+			if (preg_match('/^admin_.*?\.php$/', $file)) {
 				include('./' . $file);
 			}
 		}
 		unset($setmodules);
 		closedir($dir);
-		CACHE('bb_cache')->set('admin_module' . $user->id, $module, 600);
+		$cache->set('admin_module_' . $user->id, $module, 600);
 	}
+
+	$module = $cache->get('admin_module_' . $user->id);
 
 	$template->assign_vars(array(
 		'TPL_ADMIN_NAVIGATE' => true,

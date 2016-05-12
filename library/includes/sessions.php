@@ -808,32 +808,56 @@ function ignore_cached_userdata ()
 
 function cache_get_userdata ($id)
 {
+	/** @var \TorrentPier\Di $di */
+	$di = \TorrentPier\Di::getInstance();
+
+	/** @var \TorrentPier\Cache\Adapter $cache */
+	$cache = $di->cache;
+
 	if (ignore_cached_userdata()) return false;
 
-	return CACHE('session_cache')->get($id);
+	return $cache->get($id);
 }
 
 function cache_set_userdata ($userdata, $force = false)
 {
-	global $bb_cfg;
+	/** @var \TorrentPier\Di $di */
+	$di = \TorrentPier\Di::getInstance();
+
+	/** @var \TorrentPier\Cache\Adapter $cache */
+	$cache = $di->cache;
 
 	if (!$userdata || (ignore_cached_userdata() && !$force)) return false;
 
 	$id = ($userdata['user_id'] == GUEST_UID) ? $userdata['session_ip'] : $userdata['session_id'];
-	return CACHE('session_cache')->set($id, $userdata, $bb_cfg['session_update_intrv']);
+
+	return $cache->set($id, $userdata, $di->config->get('session_update_intrv'));
 }
 
 function cache_rm_userdata ($userdata)
 {
+	/** @var \TorrentPier\Di $di */
+	$di = \TorrentPier\Di::getInstance();
+
+	/** @var \TorrentPier\Cache\Adapter $cache */
+	$cache = $di->cache;
+
 	if (!$userdata) return false;
 
 	$id = ($userdata['user_id'] == GUEST_UID) ? $userdata['session_ip'] : $userdata['session_id'];
-	return CACHE('session_cache')->rm($id);
+
+	return $cache->delete($id);
 }
 
 // $user_id - array(id1,id2,..) or (string) id
 function cache_rm_user_sessions ($user_id)
 {
+	/** @var \TorrentPier\Di $di */
+	$di = \TorrentPier\Di::getInstance();
+
+	/** @var \TorrentPier\Cache\Adapter $cache */
+	$cache = $di->cache;
+
 	$user_id = get_id_csv($user_id);
 
 	$rowset = DB()->fetch_rowset("
@@ -842,7 +866,7 @@ function cache_rm_user_sessions ($user_id)
 
 	foreach ($rowset as $row)
 	{
-		CACHE('session_cache')->rm($row['session_id']);
+		$cache->delete($row['session_id']);
 	}
 }
 

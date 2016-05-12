@@ -7,9 +7,16 @@ if (!empty($setmodules))
 }
 require('./pagestart.php');
 
+/** @var \TorrentPier\Di $di */
+$di = \TorrentPier\Di::getInstance();
+
+/** @var \TorrentPier\Cache\Adapter $cache */
+$cache = $di->cache;
+
 if (request_var('submit', '')) {
 	if (bb_update_config(array('static_sitemap' => request_var('static_sitemap', '')))) {
-		CACHE('bb_config')->rm();
+		// TODO: delete only necessary cache
+		$cache->flush();
 	}
 	bb_die('<a href="admin_sitemap.php">' . $lang['GO_BACK'] . '</a>');
 }

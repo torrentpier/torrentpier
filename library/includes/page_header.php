@@ -7,15 +7,18 @@ if (defined('PAGE_HEADER_SENT')) return;
 
 global $page_cfg, $userdata, $user, $bb_cfg, $template, $lang, $images;
 
+/** @var \TorrentPier\Di $di */
+$di = \TorrentPier\Di::getInstance();
+
+/** @var \TorrentPier\Cache\Adapter $cache */
+$cache = $di->cache;
+
 $logged_in = (int) !empty($userdata['session_logged_in']);
 
 // Generate logged in/logged out status
-if ($logged_in)
-{
-	$u_login_logout = BB_ROOT . LOGIN_URL . "?logout=1";
-}
-else
-{
+if ($logged_in) {
+	$u_login_logout = BB_ROOT . LOGIN_URL . '?logout=1';
+} else {
 	$u_login_logout = BB_ROOT . LOGIN_URL;
 }
 
@@ -23,19 +26,19 @@ else
 if (defined('SHOW_ONLINE') && SHOW_ONLINE)
 {
 	$online_full = !empty($_REQUEST['online_full']);
-	$online_list = ($online_full) ? 'online_'.$userdata['user_lang'] : 'online_short_'.$userdata['user_lang'];
+	$online_list = ($online_full) ? 'online_' . $userdata['user_lang'] : 'online_short_' . $userdata['user_lang'];
 
-	${$online_list} = array(
+	${$online_list} = [
 		'stat'     => '',
 		'userlist' => '',
 		'cnt'      => '',
-	);
+	];
 
 	if (defined('IS_GUEST') && !(IS_GUEST || IS_USER))
 	{
 		$template->assign_var('SHOW_ONLINE_LIST');
 
-		if (!${$online_list} = CACHE('bb_cache')->get($online_list))
+		if (!${$online_list} = $cache->get($online_list))
 		{
 			require(INC_DIR .'online_userlist.php');
 		}

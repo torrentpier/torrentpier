@@ -4,19 +4,19 @@ if (!defined('IN_AJAX')) die(basename(__FILE__));
 
 global $userdata, $lang, $bb_cfg;
 
+/** @var \TorrentPier\Di $di */
+$di = \TorrentPier\Di::getInstance();
+
+/** @var \TorrentPier\Cache\Adapter $cache */
+$cache = $di->cache;
+
 $mode = (string) $this->request['mode'];
 
 switch ($mode)
 {
 	case 'clear_cache':
 
-		foreach ($bb_cfg['cache']['engines'] as $cache_name => $cache_val)
-		{
-			if (!in_array('db_sqlite', $cache_val))
-			{
-				CACHE($cache_name)->rm();
-			}
-		}
+		$cache->flush();
 
 		$this->response['cache_html'] = '<span class="seed bold">'. $lang['ALL_CACHE_CLEARED'] .'</span>';
 

@@ -1,9 +1,15 @@
 <?php
 
 define('BB_SCRIPT', 'login');
-define('IN_LOGIN', true);
 define('BB_ROOT', './');
-require(BB_ROOT .'common.php');
+define('IN_LOGIN', true);
+require_once __DIR__ . '/common.php';
+
+/** @var \TorrentPier\Di $di */
+$di = \TorrentPier\Di::getInstance();
+
+/** @var \TorrentPier\Cache\Adapter $cache */
+$cache = $di->cache;
 
 array_deep($_POST, 'trim');
 
@@ -63,7 +69,7 @@ $login_password = isset($_POST['login_password']) ? $_POST['login_password'] : '
 $need_captcha = false;
 if (!$mod_admin_login)
 {
-	$need_captcha = CACHE('bb_login_err')->get('l_err_'. USER_IP);
+	$need_captcha = $cache->has('l_err_'. USER_IP);
 	if ($need_captcha < $bb_cfg['invalid_logins']) $need_captcha = false;
 }
 
@@ -93,8 +99,8 @@ if (isset($_POST['login']))
 		if ($user->login($_POST, $mod_admin_login))
 		{
 			$redirect_url = (defined('FIRST_LOGON')) ? $bb_cfg['first_logon_redirect_url'] : $redirect_url;
-			// Обнуление при введении правильно комбинации логин/пароль
-			CACHE('bb_login_err')->set('l_err_'. USER_IP, 0, 3600);
+			// Удаление при введении правильной комбинации логин/пароль
+			$cache->delete('l_err_'. USER_IP);
 
 			if ($redirect_url == '/' . LOGIN_URL || $redirect_url == LOGIN_URL) $redirect_url = 'index.php';
 			redirect($redirect_url);
@@ -102,17 +108,13 @@ if (isset($_POST['login']))
 
 		$login_errors[] = $lang['ERROR_LOGIN'];
 
-		if (!$mod_admin_login)
-		{
-			$login_err = CACHE('bb_login_err')->get('l_err_'. USER_IP);
+		if (!$mod_admin_login) {
+			$login_err = $cache->get('l_err_' . USER_IP);
 			if ($login_err > $bb_cfg['invalid_logins']) $need_captcha = true;
-			if ($login_err > 50)
-			{
-				// TODO: блокировка IP
-			}
-			CACHE('bb_login_err')->set('l_err_'. USER_IP, ($login_err + 1), 3600);
+			$cache->set('l_err_' . USER_IP, ($login_err + 1), 3600);
+		} else {
+			$need_captcha = false;
 		}
-		else $need_captcha = false;
 	}
 }
 

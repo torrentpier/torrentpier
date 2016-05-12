@@ -19,14 +19,14 @@ $config = [
 	'tp_release_date'  => '**/**/2016',
 	'tp_release_state' => 'ALPHA',
 
-    'services' => [
-        'cache' => [
-            'adapter' => \TorrentPier\Cache\FileAdapter::class,
-            'options' => [
-                'directory' => __DIR__ . '/../internal_data/cache',
-            ],
-        ],
-    ],
+	'services' => [
+		'cache' => [
+			'adapter' => \TorrentPier\Cache\FileAdapter::class,
+			'options' => [
+				'directory' => __DIR__ . '/../internal_data/cache',
+			],
+		],
+	],
 
 	// Database
 	'db' => [

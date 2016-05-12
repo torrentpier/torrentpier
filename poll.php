@@ -1,7 +1,14 @@
 <?php
 
 define('BB_SCRIPT', 'vote');
-require('./common.php');
+define('BB_ROOT', './');
+require_once __DIR__ . '/common.php';
+
+/** @var \TorrentPier\Di $di */
+$di = \TorrentPier\Di::getInstance();
+
+/** @var \TorrentPier\Cache\Adapter $cache */
+$cache = $di->cache;
 
 $user->session_start(array('req_login' => true));
 
@@ -88,7 +95,7 @@ switch ($mode)
 
 		DB()->query("INSERT IGNORE INTO ". BB_POLL_USERS ." (topic_id, user_id, vote_ip, vote_dt) VALUES ($topic_id, {$userdata['user_id']}, '". USER_IP ."', ". TIMENOW .")");
 
-		CACHE('bb_poll_data')->rm("poll_$topic_id");
+		$cache->delete('poll_' . $topic_id);
 
 		bb_die($lang['VOTE_CAST']);
 		break;
@@ -150,7 +157,7 @@ switch ($mode)
 			bb_die($poll->err_msg);
 		}
 		$poll->insert_votes_into_db($topic_id);
-		CACHE('bb_poll_data')->rm("poll_$topic_id");
+		$cache->delete('poll_' . $topic_id);
 		bb_die($lang['NEW_POLL_RESULTS']);
 		break;
 
@@ -232,8 +239,15 @@ class bb_poll
 
 	function delete_votes_data ($topic_id)
 	{
-		DB()->query("DELETE FROM ". BB_POLL_VOTES ." WHERE topic_id = $topic_id");
-		DB()->query("DELETE FROM ". BB_POLL_USERS ." WHERE topic_id = $topic_id");
-		CACHE('bb_poll_data')->rm("poll_$topic_id");
+		/** @var \TorrentPier\Di $di */
+		$di = \TorrentPier\Di::getInstance();
+
+		/** @var \TorrentPier\Cache\Adapter $cache */
+		$cache = $di->cache;
+
+		DB()->query("DELETE FROM " . BB_POLL_VOTES . " WHERE topic_id = $topic_id");
+		DB()->query("DELETE FROM " . BB_POLL_USERS . " WHERE topic_id = $topic_id");
+
+		$cache->delete('poll_' . $topic_id);
 	}
 }
