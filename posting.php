@@ -402,7 +402,7 @@ elseif ( ($submit || $confirm) && !$topic_has_new_posts )
             require(INC_DIR .'functions_upload.php');
 			$upload = new upload_common();
 
-			if ($upload->init($bb_cfg['attach'], $_FILES['attach']) AND $upload->store('attach', array('topic_id' => $topic_id)))
+			if ($upload->init($bb_cfg['attach'], $_FILES['attach']) && $upload->store('attach', array('topic_id' => $topic_id)))
 			{
 				DB()->query("
 					UPDATE ". BB_TOPICS ." SET

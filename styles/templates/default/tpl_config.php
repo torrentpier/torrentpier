@@ -128,7 +128,7 @@ $template->assign_vars(array(
 ));
 
 // post_buttons
-if (!empty($page_cfg['load_tpl_vars']) AND $vars = array_flip($page_cfg['load_tpl_vars']))
+if (!empty($page_cfg['load_tpl_vars']) && ($vars = array_flip($page_cfg['load_tpl_vars'])))
 {
 	if (isset($vars['post_buttons']))
 	{

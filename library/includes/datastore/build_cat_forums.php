@@ -128,7 +128,7 @@ $this->store('viewtopic_forum_select', $data);
 //
 // latest_news
 //
-if ($bb_cfg['show_latest_news'] AND $news_forum_ids = $bb_cfg['latest_news_forum_id'])
+if ($bb_cfg['show_latest_news'] && ($news_forum_ids = $bb_cfg['latest_news_forum_id']))
 {
 	$news_count = max($bb_cfg['latest_news_count'], 1);
 
@@ -147,7 +147,7 @@ if ($bb_cfg['show_latest_news'] AND $news_forum_ids = $bb_cfg['latest_news_forum
 //
 // Network_news
 //
-if ($bb_cfg['show_network_news'] AND $net_forum_ids = $bb_cfg['network_news_forum_id'])
+if ($bb_cfg['show_network_news'] && ($net_forum_ids = $bb_cfg['network_news_forum_id']))
 {
 	$net_count = max($bb_cfg['network_news_count'], 1);
 

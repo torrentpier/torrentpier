@@ -7,7 +7,7 @@ global $bb_cfg, $lang, $user;
 $mode = (string) $this->request['mode'];
 $user_id = (int) $this->request['user_id'];
 
-if (!$user_id OR !$u_data = get_userdata($user_id))
+if (!$user_id || !($u_data = get_userdata($user_id)))
 {
 	$this->ajax_die('Invalid user_id');
 }

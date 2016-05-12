@@ -7,7 +7,7 @@ global $bf, $lang;
 $user_id = (int) $this->request['user_id'];
 $new_opt = \Zend\Json\Json::decode($this->request['user_opt'], \Zend\Json\Json::TYPE_ARRAY);
 
-if (!$user_id OR !$u_data = get_userdata($user_id))
+if (!$user_id || !($u_data = get_userdata($user_id)))
 {
 	$this->ajax_die('invalid user_id');
 }

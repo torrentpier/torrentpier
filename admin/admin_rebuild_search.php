@@ -177,7 +177,7 @@ if ($mode == 'submit' || $mode == 'refresh')
 	$timer_expired = false;
 	$words_sql = array();
 
-	while ($row = DB()->fetch_next($result) AND !$timer_expired)
+	while (($row = DB()->fetch_next($result)) && !$timer_expired)
 	{
 		set_time_limit(600);
 		$start_post_id = ($num_rows == 0) ? $row['post_id'] : $start_post_id;

@@ -253,7 +253,7 @@ switch($this->request['type'])
 		$where_sql = (IS_GUEST) ? "p.poster_ip = '". USER_IP ."'" : "p.poster_id = {$userdata['user_id']}";
 
 		$sql = "SELECT MAX(p.post_time) AS last_post_time FROM ". BB_POSTS ." p WHERE $where_sql";
-		if ($row = DB()->fetch_row($sql) AND $row['last_post_time'])
+		if (($row = DB()->fetch_row($sql)) && $row['last_post_time'])
 		{
 			if ($userdata['user_level'] == USER)
 			{

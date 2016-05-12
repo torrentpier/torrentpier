@@ -4,7 +4,7 @@ if (!defined('IN_AJAX')) die(basename(__FILE__));
 
 global $bb_cfg, $userdata, $lang;
 
-if (!$group_id = intval($this->request['group_id']) OR !$group_info = get_group_data($group_id))
+if (!($group_id = intval($this->request['group_id'])) || !($group_info = get_group_data($group_id)))
 {
 	$this->ajax_die($lang['NO_GROUP_ID_SPECIFIED']);
 }

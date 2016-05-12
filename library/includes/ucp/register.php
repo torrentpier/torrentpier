@@ -187,7 +187,7 @@ foreach ($profile_fields as $field => $can_edit)
 			if ($submit)
 			{
 				$err = validate_username($username);
-				if (!$errors AND $err && $mode == 'register')
+				if (!$errors && $err && ($mode == 'register'))
 				{
 					$errors[] = $err;
 				}
@@ -263,7 +263,7 @@ foreach ($profile_fields as $field => $can_edit)
 					{
 						$errors[] = $lang['CHOOSE_E_MAIL'];
 					}
-					if (!$errors AND $err = validate_email($email))
+					if (!$errors && ($err = validate_email($email)))
 					{
 						$errors[] = $err;
 					}
@@ -275,7 +275,7 @@ foreach ($profile_fields as $field => $can_edit)
 					{
 						$errors[] = $lang['CONFIRM_PASSWORD_EXPLAIN'];
 					}
-					if (!$errors AND $err = validate_email($email))
+					if (!$errors && ($err = validate_email($email)))
 					{
 						$errors[] = $err;
 					}
@@ -414,7 +414,7 @@ foreach ($profile_fields as $field => $can_edit)
 					require(INC_DIR .'functions_upload.php');
 					$upload = new upload_common();
 
-					if ($upload->init($bb_cfg['avatars'], $_FILES['avatar']) AND $upload->store('avatar', $pr_data))
+					if ($upload->init($bb_cfg['avatars'], $_FILES['avatar']) && $upload->store('avatar', $pr_data))
 					{
 						$pr_data['avatar_ext_id'] = $upload->file_ext_id;
 						$db_data['avatar_ext_id'] = (int) $upload->file_ext_id;

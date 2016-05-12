@@ -26,6 +26,16 @@ $config = [
 				'directory' => __DIR__ . '/../internal_data/cache',
 			],
 		],
+		/*'cache' => [
+			'adapter' => \TorrentPier\Cache\MemoryAdapter::class,
+			'options' => [
+				'servers' => [
+					'host' => '127.0.0.1',
+					'port' => 11211,
+					'weight' => 100,
+				],
+			],
+		],*/
 	],
 
 	// Database

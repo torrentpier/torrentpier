@@ -50,7 +50,7 @@ if (!$forums = $datastore->get('cat_forums'))
 	$datastore->update('cat_forums');
 	$forums = $datastore->get('cat_forums');
 }
-if (!$forum_id OR !$forum_data = $forums['forum'][$forum_id])
+if (!$forum_id || !($forum_data = $forums['forum'][$forum_id]))
 {
 	bb_die($lang['FORUM_NOT_EXIST']);
 }
@@ -241,7 +241,7 @@ $select_tpp = '';
 if ($is_auth['auth_mod'])
 {
 
-	if ($req_tpp = $di->request->query->getInt('tpp') AND in_array($req_tpp, $bb_cfg['allowed_topics_per_page']))
+	if (($req_tpp = $di->request->query->getInt('tpp')) && in_array($req_tpp, $bb_cfg['allowed_topics_per_page']))
 	{
 		$topics_per_page = $req_tpp;
 	}
@@ -270,7 +270,7 @@ $sel_previous_days = array(
 
 if (!empty($_REQUEST['topicdays']))
 {
-	if ($req_topic_days = $di->request->query->getInt('topicdays') AND isset($sel_previous_days[$req_topic_days]))
+	if (($req_topic_days = $di->request->query->getInt('topicdays')) && isset($sel_previous_days[$req_topic_days]))
 	{
 		$sql = "
 			SELECT COUNT(*) AS forum_topics

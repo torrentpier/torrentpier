@@ -73,7 +73,7 @@ function sync ($type, $id)
 
 			$all_topics = ($id === 'all');
 
-			if (!$all_topics AND !$topic_csv = get_id_csv($id))
+			if (!$all_topics && !($topic_csv = get_id_csv($id)))
 			{
 				break;
 			}
@@ -137,7 +137,7 @@ function sync ($type, $id)
 
 			$all_users = ($id === 'all');
 
-			if (!$all_users AND !$user_csv = get_id_csv($id))
+			if (!$all_users && !($user_csv = get_id_csv($id)))
 			{
 				break;
 			}
@@ -192,7 +192,7 @@ function topic_delete ($mode_or_topic_id, $forum_id = null, $prune_time = 0, $pr
 
 	$prune = ($mode_or_topic_id === 'prune');
 
-	if (!$prune AND !$topic_csv = get_id_csv($mode_or_topic_id))
+	if (!$prune && !($topic_csv = get_id_csv($mode_or_topic_id)))
 	{
 		return false;
 	}
@@ -409,7 +409,7 @@ function topic_move ($topic_id, $to_forum_id, $from_forum_id = null, $leave_shad
 		}
 	}
 
-	if (!$topics OR !$topic_csv = get_id_csv(array_keys($topics)))
+	if (!$topics || !($topic_csv = get_id_csv(array_keys($topics))))
 	{
 		return false;
 	}
