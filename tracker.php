@@ -4,9 +4,6 @@ define('BB_SCRIPT', 'tracker');
 define('BB_ROOT', './');
 require(BB_ROOT .'common.php');
 
-require(CLASS_DIR .'utf8.php');
-require(CLASS_DIR .'correct.php');
-require(CLASS_DIR .'reflection.php');
 require(INC_DIR .'functions_group.php');
 
 // Page config
@@ -466,16 +463,7 @@ if (!$set_default)
 	{
 		if ($tmp = mb_substr(trim($tm), 0, $title_match_max_len))
 		{
-			if ($bb_cfg['autocorrect_wkl'])
-			{
-				// Autocorrect wrong keyboard layout
-				$tlc = new Text_LangCorrect();
-				$title_match_val = $tlc->parse($tlc->parse($tmp, 1), 2);
-			}
-			else
-			{
-				$title_match_val = $tmp;
-			}
+			$title_match_val = $tmp;
 			$title_match_sql = clean_text_match($title_match_val, true, false, false);
 		}
 	}
