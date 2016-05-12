@@ -5,9 +5,6 @@ define('BB_ROOT', './');
 require(BB_ROOT . 'common.php');
 
 require(INC_DIR . 'bbcode.php');
-require(CLASS_DIR . 'utf8.php');
-require(CLASS_DIR . 'correct.php');
-require(CLASS_DIR . 'reflection.php');
 
 $page_cfg['load_tpl_vars'] = array(
 	'post_buttons',
@@ -432,16 +429,7 @@ if (!$items_found)
 	{
 		if ($tmp = mb_substr(trim($var), 0, $text_match_max_len))
 		{
-			if ($bb_cfg['autocorrect_wkl'])
-			{
-				// Autocorrect wrong keyboard layout
-				$tlc = new Text_LangCorrect();
-				$title_match_val = $tlc->parse($tlc->parse($tmp, 1), 2);
-			}
-			else
-			{
-				$title_match_val = $tmp;
-			}
+			$title_match_val = $tmp;
 			$text_match_sql = clean_text_match($title_match_val, $all_words_val, false, true);
 		}
 	}

@@ -352,7 +352,6 @@ $config = [
 	'search_max_word_len'        => 35,
 	'limit_max_search_results'   => false,
 	'spam_filter_file_path'      => '', // BB_PATH .'/misc/spam_filter_words.txt';
-	'autocorrect_wkl'            => true, // autocorrect wrong keyboard layout
 
 	// Posting
 	'prevent_multiposting' => true, // replace "reply" with "edit last msg" if user (not admin or mod) is last topic poster
