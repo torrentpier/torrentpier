@@ -2,6 +2,7 @@
 .idea/
 composer.phar
 composer.lock
+configs/local.php
 data/avatars
 data/torrent_files
 internal_data/ajax_html

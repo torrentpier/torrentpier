@@ -2,14 +2,15 @@
 
 if (!defined('BB_ROOT')) die(basename(__FILE__));
 
-global $bb_cfg;
+/** @var \TorrentPier\Di $di */
+$di = \TorrentPier\Di::getInstance();
 
 DB()->expect_slow_query(600);
 
 //
 // Make tracker snapshot
 //
-if (!$bb_cfg['ocelot']['enabled'])
+if (!$di->config->get('ocelot.enabled'))
 {
 	define('NEW_BB_BT_TRACKER_SNAP', 'new_tracker_snap');
 	define('OLD_BB_BT_TRACKER_SNAP', 'old_tracker_snap');
@@ -30,7 +31,7 @@ while (true)
 
 	$val = array();
 
-	if (!$bb_cfg['ocelot']['enabled'])
+	if (!$di->config->get('ocelot.enabled'))
 	{
 		$sql = "
 			SELECT
@@ -59,7 +60,7 @@ while (true)
 
 	if ($val)
 	{
-		if (!$bb_cfg['ocelot']['enabled'])
+		if (!$di->config->get('ocelot.enabled'))
 		{
 			DB()->query("
 				REPLACE INTO " . NEW_BB_BT_TRACKER_SNAP . "
@@ -91,7 +92,7 @@ while (true)
 	$start_id += $per_cycle;
 }
 
-if (!$bb_cfg['ocelot']['enabled'])
+if (!$di->config->get('ocelot.enabled'))
 {
 	DB()->query("
 		RENAME TABLE
@@ -112,7 +113,7 @@ DB()->query("DROP TABLE IF EXISTS ". NEW_BB_BT_DLSTATUS_SNAP .", ". OLD_BB_BT_DL
 
 DB()->query("CREATE TABLE ". NEW_BB_BT_DLSTATUS_SNAP ." LIKE ". BB_BT_DLSTATUS_SNAP);
 
-if ($bb_cfg['bt_show_dl_list'] && $bb_cfg['bt_dl_list_only_count'])
+if ($di->config->get('bt_show_dl_list') && $di->config->get('bt_dl_list_only_count'))
 {
 	DB()->query("
 		INSERT INTO ". NEW_BB_BT_DLSTATUS_SNAP ."
@@ -136,7 +137,7 @@ DB()->query("DROP TABLE IF EXISTS ". NEW_BB_BT_DLSTATUS_SNAP .", ". OLD_BB_BT_DL
 //
 // TORHELP
 //
-if ($bb_cfg['torhelp_enabled'])
+if ($di->config->get('torhelp_enabled'))
 {
 	$tor_min_seeders         = 0;   // "<="
 	$tor_min_leechers        = 2;   // ">="
@@ -182,7 +183,7 @@ if ($bb_cfg['torhelp_enabled'])
 			WHERE
 			      trsn.seeders          <=  $tor_min_seeders
 			  AND trsn.leechers         >=  $tor_min_leechers
-			  AND tor.forum_id          !=  ". (int) $bb_cfg['trash_forum_id'] ."
+			  AND tor.forum_id          !=  ". (int) $di->config->get('trash_forum_id') ."
 			  AND tor.complete_count    >=  $tor_min_completed
 			  AND tor.seeder_last_seen  <=  (UNIX_TIMESTAMP() - $tor_seed_last_seen_days*86400)
 			  AND dl.user_id            IN($online_users_csv)

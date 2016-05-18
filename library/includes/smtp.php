@@ -24,7 +24,8 @@ function server_parse($socket, $response, $line = __LINE__)
 // Replacement or substitute for PHP's mail command
 function smtpmail($mail_to, $subject, $message, $headers = '')
 {
-	global $bb_cfg;
+	/** @var \TorrentPier\Di $di */
+	$di = \TorrentPier\Di::getInstance();
 
 	// Fix any bare linefeeds in the message to make it RFC821 Compliant.
 	$message = preg_replace("#(?<!\r)\n#si", "\r\n", $message);
@@ -84,8 +85,8 @@ function smtpmail($mail_to, $subject, $message, $headers = '')
 	}
 
 	// Ok we have error checked as much as we can to this point let's get on it already
-	$ssl = ($bb_cfg['smtp_ssl']) ? 'ssl://' : '';
-	if( !$socket = fsockopen($ssl . $bb_cfg['smtp_host'], $bb_cfg['smtp_port'], $errno, $errstr, 20) )
+	$ssl = ($di->config->get('smtp_ssl')) ? 'ssl://' : '';
+	if( !$socket = fsockopen($ssl . $di->config->get('smtp_host'), $di->config->get('smtp_port'), $errno, $errstr, 20) )
 	{
 		bb_die('Could not connect to smtp host : '. $errno .' : '. $errstr);
 	}
@@ -95,29 +96,29 @@ function smtpmail($mail_to, $subject, $message, $headers = '')
 
 	// Do we want to use AUTH?, send RFC2554 EHLO, else send RFC821 HELO
 	// This improved as provided by SirSir to accomodate
-	if( !empty($bb_cfg['smtp_username']) && !empty($bb_cfg['smtp_password']) )
+	if( !empty($di->config->get('smtp_username')) && !empty($di->config->get('smtp_password')) )
 	{
-		fputs($socket, "EHLO " . $bb_cfg['smtp_host'] . "\r\n");
+		fputs($socket, "EHLO " . $di->config->get('smtp_host') . "\r\n");
 		server_parse($socket, "250", __LINE__);
 
 		fputs($socket, "AUTH LOGIN\r\n");
 		server_parse($socket, "334", __LINE__);
 
-		fputs($socket, base64_encode($bb_cfg['smtp_username']) . "\r\n");
+		fputs($socket, base64_encode($di->config->get('smtp_username')) . "\r\n");
 		server_parse($socket, "334", __LINE__);
 
-		fputs($socket, base64_encode($bb_cfg['smtp_password']) . "\r\n");
+		fputs($socket, base64_encode($di->config->get('smtp_password')) . "\r\n");
 		server_parse($socket, "235", __LINE__);
 	}
 	else
 	{
-		fputs($socket, "HELO " . $bb_cfg['smtp_host'] . "\r\n");
+		fputs($socket, "HELO " . $di->config->get('smtp_host') . "\r\n");
 		server_parse($socket, "250", __LINE__);
 	}
 
 	// From this point onward most server response codes should be 250
 	// Specify who the mail is from....
-	fputs($socket, "MAIL FROM: <" . $bb_cfg['board_email'] . ">\r\n");
+	fputs($socket, "MAIL FROM: <" . $di->config->get('board_email') . ">\r\n");
 	server_parse($socket, "250", __LINE__);
 
 	// Add an additional bit of error checking to the To field.

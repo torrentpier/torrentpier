@@ -44,12 +44,12 @@
 	<td>&nbsp; {L_YES}</td>
 </tr>
 <tr>
-	<td><h4>{L_AUTH_KEY_NAME}</h4><h5>$bb_cfg['passkey_key']</h5><h6>{L_AUTH_KEY_NAME_EXPL}</h6></td>
+	<td><h4>{L_AUTH_KEY_NAME}</h4><h5>$di->config->get('passkey_key')</h5><h6>{L_AUTH_KEY_NAME_EXPL}</h6></td>
 	<td>&nbsp; <b>{PASSKEY_KEY}</b></td>
 </tr>
 <tr>
 	<td><h4>{L_ALLOW_GUEST_DL}</h4><!-- IF L_ALLOW_GUEST_DL_EXPL --><h6>{L_ALLOW_GUEST_DL_EXPL}</h6><!-- ENDIF --></td>
-	<td>&nbsp; <!-- IF $bb_cfg['bt_tor_browse_only_reg'] -->{L_NO}<!-- ELSE -->{L_YES}<!-- ENDIF --></td>
+	<td>&nbsp; <!-- IF $di->config->get('bt_tor_browse_only_reg') -->{L_NO}<!-- ELSE -->{L_YES}<!-- ENDIF --></td>
 </tr>
 <tr>
 	<th colspan="2">{L_LIMIT_ACTIVE_TOR_HEAD}</th>
@@ -91,7 +91,7 @@
 	<th colspan="2">{L_MISC}</th>
 </tr>
 <tr>
-	<td><h4>{L_ANNOUNCE_INTERVAL}</h4><h5>$bb_cfg['announce_interval']</h5><h6>{L_ANNOUNCE_INTERVAL_EXPL}</h6></td>
+	<td><h4>{L_ANNOUNCE_INTERVAL}</h4><h5>$di->config->get('announce_interval')</h5><h6>{L_ANNOUNCE_INTERVAL_EXPL}</h6></td>
 	<td><span class="med">&nbsp; <b>{ANNOUNCE_INTERVAL}</b></span> <span class="med">seconds</span></td>
 </tr>
 <tr>
@@ -114,7 +114,7 @@
 	</td>
 </tr>
 <tr>
-	<td><h4>{L_IGNORE_GIVEN_IP}</h4><h5>$bb_cfg['ignore_reported_ip']</h5><h6><!-- IF L_IGNOR_GIVEN_IP_EXPL -->{L_IGNOR_GIVEN_IP_EXPL}<!-- ENDIF --></h6></td>
+	<td><h4>{L_IGNORE_GIVEN_IP}</h4><h5>$di->config->get('ignore_reported_ip')</h5><h6><!-- IF L_IGNOR_GIVEN_IP_EXPL -->{L_IGNOR_GIVEN_IP_EXPL}<!-- ENDIF --></h6></td>
 	<td>&nbsp; <!-- IF IGNORE_REPORTED_IP -->{L_YES}<!-- ELSE -->{L_NO}<!-- ENDIF --></td>
 </tr>
 <tr>

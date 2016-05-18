@@ -207,7 +207,7 @@ else
 	bb_die($lang['NO_SUCH_POST']);
 }
 
-$bb_cfg['attach']['allowed_ext'] = ($post_info['allow_reg_tracker']) ? $bb_cfg['tor_forums_allowed_ext'] : $bb_cfg['gen_forums_allowed_ext'];
+$attach_allowed_ext = ($post_info['allow_reg_tracker']) ? $di->config->get('tor_forums_allowed_ext') : $di->config->get('gen_forums_allowed_ext');
 
 if (!$is_auth[$is_auth_type])
 {
@@ -239,7 +239,7 @@ if (!$is_auth[$is_auth_type])
 
 if ($mode == 'new_rel')
 {
-	if ($tor_status = join(',', $bb_cfg['tor_cannot_new']))
+	if ($tor_status = join(',', $di->config->get('tor_cannot_new')))
 	{
 		$sql = DB()->fetch_rowset("SELECT t.topic_title, t.topic_id, tor.tor_status
 			FROM ". BB_BT_TORRENTS ." tor, ". BB_TOPICS ." t
@@ -250,9 +250,8 @@ if ($mode == 'new_rel')
 		");
 
 		$topics = '';
-		foreach($sql as $row)
-		{
-			$topics .= $bb_cfg['tor_icons'][$row['tor_status']] .'<a href="'. TOPIC_URL . $row['topic_id'] .'">'. $row['topic_title'] .'</a><div class="spacer_12"></div>';
+		foreach ($sql as $row) {
+			$topics .= $di->config->get('tor_icons.' . $row['tor_status']) . '<a href="' . TOPIC_URL . $row['topic_id'] . '">' . $row['topic_title'] . '</a><div class="spacer_12"></div>';
 		}
 		if ($topics) bb_die($topics . $lang['UNEXECUTED_RELEASE']);
 	}
@@ -291,7 +290,7 @@ if (!IS_GUEST && $mode != 'newtopic' && ($submit || $preview || $mode == 'quote'
 				AND pt.post_id = p.post_id
 				AND p.post_time > $topic_last_read
 			ORDER BY p.post_time
-			LIMIT ". $bb_cfg['posts_per_page'];
+			LIMIT ". $di->config->get('posts_per_page');
 
 		if ($rowset = DB()->fetch_rowset($sql))
 		{
@@ -303,7 +302,7 @@ if (!IS_GUEST && $mode != 'newtopic' && ($submit || $preview || $mode == 'quote'
 					'ROW_CLASS'      => !($i % 2) ? 'row1' : 'row2',
 					'POSTER'         => profile_url($row),
 					'POSTER_NAME_JS' => addslashes($row['username']),
-					'POST_DATE'      => bb_date($row['post_time'], $bb_cfg['post_date_format']),
+					'POST_DATE'      => bb_date($row['post_time'], $di->config->get('post_date_format')),
 					'MESSAGE'        => get_parsed_post($row),
 				));
 			}
@@ -402,7 +401,7 @@ elseif ( ($submit || $confirm) && !$topic_has_new_posts )
             require(INC_DIR .'functions_upload.php');
 			$upload = new upload_common();
 
-			if ($upload->init($bb_cfg['attach'], $_FILES['attach']) && $upload->store('attach', array('topic_id' => $topic_id)))
+			if ($upload->init($di->config->get('attach'), $_FILES['attach']) && $upload->store('attach', array('topic_id' => $topic_id)))
 			{
 				DB()->query("
 					UPDATE ". BB_TOPICS ." SET
@@ -414,7 +413,7 @@ elseif ( ($submit || $confirm) && !$topic_has_new_posts )
 				if ($upload->file_ext_id == 8)
 				{
 					require_once(INC_DIR .'functions_torrent.php');
-                    if ($bb_cfg['premod'])
+                    if ($di->config->get('premod'))
                     {
                         // Получение списка id форумов начиная с parent
                         $forum_parent = $forum_id;
@@ -669,14 +668,14 @@ $template->assign_vars(array(
 if ($mode == 'newtopic' || $post_data['first_post'])
 {
 	$file_attached = !empty($post_info['attach_ext_id']);
-	$allowed_ext = $bb_cfg['attach']['allowed_ext'];
+	$allowed_ext = $attach_allowed_ext;
 
 	$template->assign_vars(array(
 		'POSTING_SUBJECT' => true,
 		'SHOW_ATTACH'     => ($file_attached || $allowed_ext),
 		'S_FORM_ENCTYPE'  => 'enctype="multipart/form-data"',
 		'FILE_ATTACHED'   => $file_attached,
-		'ATTACH_MAX_SIZE' => humn_size($bb_cfg['attach']['max_size']),
+		'ATTACH_MAX_SIZE' => humn_size($di->config->get('attach.max_size')),
 		'ALLOWED_EXT'     => ($allowed_ext) ? '*.' . join(', *.', $allowed_ext) : 'прикреплять запрещено', // TODO: перевести
 		'TOR_REQUIRED'    => !empty($_POST['tor_required']),
 		'POLL_TIP'        => ($mode == 'newtopic') ? 'Вы сможете добавить опрос после создания темы' : 'Вы можете добавить опрос со страницы просмотра темы', // TODO: перевести

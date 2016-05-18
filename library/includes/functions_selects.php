@@ -7,11 +7,12 @@ if (!defined('BB_ROOT')) die(basename(__FILE__));
 //
 function language_select ($default_lang, $select_name = 'language')
 {
-	global $bb_cfg;
+	/** @var \TorrentPier\Di $di */
+	$di = \TorrentPier\Di::getInstance();
 
 	$lang_select = '<select name="'. $select_name .'">';
 	$x = 0;
-	foreach ($bb_cfg['lang'] as $key => $data)
+	foreach ($di->config->get('lang') as $key => $data)
 	{
 		$selected = '';
 		if ($key == $default_lang) $selected = ' selected="selected"';
@@ -19,7 +20,7 @@ function language_select ($default_lang, $select_name = 'language')
 		$x++;
 	}
 	$lang_select .= '</select>';
-	return ($x > 1) ? $lang_select : reset($bb_cfg['lang'])['name'];
+	return ($x > 1) ? $lang_select : reset($di->config->get('lang'))['name'];
 }
 
 //
@@ -31,7 +32,7 @@ function tz_select ($default, $select_name = 'timezone')
 
 	if (!isset($default))
 	{
-		$default == $sys_timezone;
+		$default = $sys_timezone;
 	}
 	$tz_select = '<select name="' . $select_name . '">';
 
@@ -50,11 +51,12 @@ function tz_select ($default, $select_name = 'timezone')
 //
 function templates_select ($default_style, $select_name = 'tpl_name')
 {
-	global $bb_cfg;
+	/** @var \TorrentPier\Di $di */
+	$di = \TorrentPier\Di::getInstance();
 
 	$templates_select = '<select name="'. $select_name .'">';
 	$x = 0;
-	foreach ($bb_cfg['templates'] as $folder => $name)
+	foreach ($di->config->get('templates') as $folder => $name)
 	{
 		$selected = '';
 		if ($folder == $default_style) $selected = ' selected="selected"';
@@ -62,5 +64,5 @@ function templates_select ($default_style, $select_name = 'tpl_name')
 		$x++;
 	}
 	$templates_select .= '</select>';
-	return ($x > 1) ? $templates_select : reset($bb_cfg['templates']);
+	return ($x > 1) ? $templates_select : reset($di->config->get('templates'));
 }

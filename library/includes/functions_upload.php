@@ -23,7 +23,7 @@ class upload_common
 	var $file_ext     = '';
 	var $file_ext_id  = '';
 	var $file_size    = '';
-	var $ext_ids      = array(); // array_flip($bb_cfg['file_id_ext'])
+	var $ext_ids      = array(); // array_flip($di->config->get('file_id_ext'))
 	var $errors       = array();
 	var $img_types    = array(
 		1 => 'gif',
@@ -36,7 +36,10 @@ class upload_common
 
 	function init ($cfg = array(), $post_params = array(), $uploaded_only = true)
 	{
-		global $bb_cfg, $lang;
+		global $lang;
+
+		/** @var \TorrentPier\Di $di */
+		$di = \TorrentPier\Di::getInstance();
 
 		$this->cfg = array_merge($this->cfg, $cfg);
 		$this->file = $post_params;
@@ -73,7 +76,7 @@ class upload_common
 			return false;
 		}
 		// get ext
-		$this->ext_ids = array_flip($bb_cfg['file_id_ext']);
+		$this->ext_ids = array_flip($di->config->get('file_id_ext'));
 		$file_name_ary = explode('.', $this->file['name']);
 		$this->file_ext = strtolower(end($file_name_ary));
 

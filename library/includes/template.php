@@ -93,7 +93,10 @@ class Template
 	 */
 	function Template($root = '.')
 	{
-		global $bb_cfg, $lang;
+		global $lang;
+
+		/** @var \TorrentPier\Di $di */
+		$di = \TorrentPier\Di::getInstance();
 
 		// setting pointer "vars"
 		$this->vars = &$this->_tpldata['.'][0];
@@ -102,7 +105,7 @@ class Template
 		$this->root = $root;
 		$this->tpl = basename($root);
 		$this->lang =& $lang;
-		$this->use_cache = $bb_cfg['xs_use_cache'];
+		$this->use_cache = $di->config->get('xs_use_cache');
 	}
 
 	/**
@@ -227,7 +230,10 @@ class Template
 	{
 		$this->cur_tpl = $filename;
 
-		global $lang, $bb_cfg, $user, $tr_cfg;
+		global $lang, $user, $tr_cfg;
+
+		/** @var \TorrentPier\Di $di */
+		$di = \TorrentPier\Di::getInstance();
 
 		$L =& $lang;
 		$V =& $this->vars;
@@ -1063,12 +1069,13 @@ class Template
 
 	function xs_startup()
 	{
-		global $bb_cfg;
+		/** @var \TorrentPier\Di $di */
+		$di = \TorrentPier\Di::getInstance();
 
 		if (empty($this->xs_started)) {
 			$this->xs_started = 1;
 			// Adding language variable
-			$this->vars['LANG'] = isset($this->vars['LANG']) ? $this->vars['LANG'] : $bb_cfg['default_lang'];
+			$this->vars['LANG'] = isset($this->vars['LANG']) ? $this->vars['LANG'] : $di->config->get('default_lang');
 			// Adding current template
 			$tpl = $this->root . '/';
 			if (substr($tpl, 0, 2) === './') {

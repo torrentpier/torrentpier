@@ -285,7 +285,7 @@ $(function(){
 					<p class="chbox med">
 						{ALL_WORDS_CHBOX}
 						&middot; <a class="med" href="#" onclick="return get_fs_link();">{L_SEL_CHAPTERS}</a>
-						<!-- IF $bb_cfg['search_help_url'] --> &middot; <a class="med" href="{$bb_cfg['search_help_url']}">{L_SEARCH_HELP_URL}</a><!-- ENDIF -->
+						<!-- IF $di->config->get('search_help_url') --> &middot; <a class="med" href="{$di->config->get('search_help_url')}">{L_SEARCH_HELP_URL}</a><!-- ENDIF -->
 					</p>
 				</div>
 				</fieldset>

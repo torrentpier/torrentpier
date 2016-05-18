@@ -2,7 +2,10 @@
 
 if (!defined('IN_AJAX')) die(basename(__FILE__));
 
-global $lang, $bb_cfg, $userdata;
+global $lang, $userdata;
+
+/** @var \TorrentPier\Di $di */
+$di = \TorrentPier\Di::getInstance();
 
 if (!isset($this->request['type']))
 {
@@ -138,12 +141,12 @@ switch($this->request['type'])
 			{
 				if ($text != $post['post_text'])
 				{
-					if ($bb_cfg['max_smilies'])
+					if ($di->config->get('max_smilies'))
 					{
-						$count_smilies = substr_count(bbcode2html($text), '<img class="smile" src="'. $bb_cfg['smilies_path']);
-						if ($count_smilies > $bb_cfg['max_smilies'])
+						$count_smilies = substr_count(bbcode2html($text), '<img class="smile" src="'. $di->config->get('smilies_path'));
+						if ($count_smilies > $di->config->get('max_smilies'))
 						{
-							$this->ajax_die(sprintf($lang['MAX_SMILIES_PER_POST'], $bb_cfg['max_smilies']));
+							$this->ajax_die(sprintf($lang['MAX_SMILIES_PER_POST'], $di->config->get('max_smilies')));
 						}
 					}
 					DB()->query("UPDATE ". BB_POSTS_TEXT ." SET post_text = '". DB()->escape($text) ."' WHERE post_id = $post_id LIMIT 1");
@@ -257,7 +260,7 @@ switch($this->request['type'])
 		{
 			if ($userdata['user_level'] == USER)
 			{
-				if (TIMENOW - $row['last_post_time'] < $bb_cfg['flood_interval'])
+				if (TIMENOW - $row['last_post_time'] < $di->config->get('flood_interval'))
 				{
 					$this->ajax_die($lang['FLOOD_ERROR']);
 				}
@@ -287,12 +290,12 @@ switch($this->request['type'])
 			}
 		}
 
-		if ($bb_cfg['max_smilies'])
+		if ($di->config->get('max_smilies'))
 		{
-			$count_smilies = substr_count(bbcode2html($message), '<img class="smile" src="'. $bb_cfg['smilies_path']);
-			if ($count_smilies > $bb_cfg['max_smilies'])
+			$count_smilies = substr_count(bbcode2html($message), '<img class="smile" src="'. $di->config->get('smilies_path'));
+			if ($count_smilies > $di->config->get('max_smilies'))
 			{
-				$this->ajax_die(sprintf($lang['MAX_SMILIES_PER_POST'], $bb_cfg['max_smilies']));
+				$this->ajax_die(sprintf($lang['MAX_SMILIES_PER_POST'], $di->config->get('max_smilies')));
 			}
 		}
 
@@ -310,7 +313,7 @@ switch($this->request['type'])
 			'post_text'      => $message,
 		));
 
-		if ($bb_cfg['topic_notify_enabled'])
+		if ($di->config->get('topic_notify_enabled'))
 		{
 			$notify  = !empty($this->request['notify']);
 			user_notification('reply', $post, $post['topic_title'], $post['forum_id'], $topic_id, $notify);

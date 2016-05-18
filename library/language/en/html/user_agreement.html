@@ -6,7 +6,7 @@
 
 <p><h3>ABOUT SITE</h3></p>
 
-<p>Internet - resource (website) <a href="http://<?php echo ($bb_cfg['server_port'] != 80) ? "{$bb_cfg['server_name']}:{$bb_cfg['server_port']}" : $bb_cfg['server_name']; ?>"><?php echo $bb_cfg['sitename']?></a> (hereinafter - Resource) is an internet site that allows users to share information with each other via bit-torrent, as well as in free form, and provides a means to monitor the integrity of information transmitted (via hash-files).</p>
+<p>Internet - resource (website) <a href="http://<?php echo ($di->config->get('server_port') != 80) ? "{$di->config->get('server_name')}:{$di->config->get('server_port')}" : $di->config->get('server_name'); ?>"><?php echo $di->config->get('sitename')?></a> (hereinafter - Resource) is an internet site that allows users to share information with each other via bit-torrent, as well as in free form, and provides a means to monitor the integrity of information transmitted (via hash-files).</p>
 
 <ol>
 

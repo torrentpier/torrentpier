@@ -2,6 +2,9 @@
 
 if (!defined('BB_ROOT')) die(basename(__FILE__));
 
+/** @var \TorrentPier\Di $di */
+$di = \TorrentPier\Di::getInstance();
+
 require_once(INC_DIR .'functions_admin.php');
 
 $users_per_cycle = 1000;
@@ -12,7 +15,7 @@ while (true)
 
 	$prune_users = $not_activated_users = $not_active_users = array();
 
-	if ($not_activated_days = intval($bb_cfg['user_not_activated_days_keep']))
+	if ($not_activated_days = intval($di->config->get('user_not_activated_days_keep')))
 	{
 		$sql = DB()->fetch_rowset("SELECT user_id FROM ". BB_USERS ."
 			WHERE user_level      = 0
@@ -28,7 +31,7 @@ while (true)
 		}
 	}
 
-	if ($not_active_days = intval($bb_cfg['user_not_active_days_keep']))
+	if ($not_active_days = intval($di->config->get('user_not_active_days_keep')))
 	{
 		$sql = DB()->fetch_rowset("SELECT user_id FROM ". BB_USERS ."
 			WHERE user_level   = 0

@@ -2,8 +2,11 @@
 
 if (!defined('BB_ROOT')) die(basename(__FILE__));
 
+/** @var \TorrentPier\Di $di */
+$di = \TorrentPier\Di::getInstance();
+
 // Is send through board enabled? No, return to index
-if (!$bb_cfg['board_email_form'])
+if (!$di->config->get('board_email_form'))
 {
 	redirect("index.php");
 }
@@ -50,7 +53,7 @@ if ($row = DB()->fetch_row($sql))
 			if (!$errors)
 			{
 				require(CLASS_DIR .'emailer.php');
-				$emailer = new emailer($bb_cfg['smtp_delivery']);
+				$emailer = new emailer($di->config->get('smtp_delivery'));
 
 				$emailer->from($userdata['username'] ." <{$userdata['user_email']}>");
 				$emailer->email_address($username ." <$user_email>");
@@ -59,7 +62,7 @@ if ($row = DB()->fetch_row($sql))
 				$emailer->set_subject($subject);
 
 				$emailer->assign_vars(array(
-					'SITENAME'      => $bb_cfg['sitename'],
+					'SITENAME'      => $di->config->get('sitename'),
 					'FROM_USERNAME' => $userdata['username'],
 					'TO_USERNAME'   => $username,
 					'MESSAGE'       => $message,

@@ -2,14 +2,15 @@
 
 if (!defined('BB_ROOT')) die(basename(__FILE__));
 
+/** @var \TorrentPier\Di $di */
+$di = \TorrentPier\Di::getInstance();
+
 array_deep($_POST, 'trim');
 
 set_die_append_msg();
 
 if (IS_ADMIN)
 {
-	$bb_cfg['reg_email_activation'] = false;
-
 	$new_user = (int) request_var('admin', '');
 	if ($new_user) $gen_simple_header = true;
 
@@ -18,19 +19,21 @@ if (IS_ADMIN)
 	));
 }
 
+$req_email_activation = (IS_ADMIN) ? false : $di->config->get('reg_email_activation');
+
 $can_register = (IS_GUEST || IS_ADMIN);
 
 $submit   = !empty($_POST['submit']);
-$errors   = array();
+$errors   = [];
 $adm_edit = false; // редактирование админом чужого профиля
 
 require(INC_DIR .'bbcode.php');
 require(INC_DIR .'functions_validate.php');
 require(INC_DIR .'functions_selects.php');
 
-$pr_data = array();   // данные редактируемого либо регистрационного профиля
-$db_data = array();   // данные для базы: регистрационные либо измененные данные юзера
-$tp_data = array();   // данные для tpl
+$pr_data = [];   // данные редактируемого либо регистрационного профиля
+$db_data = [];   // данные для базы: регистрационные либо измененные данные юзера
+$tp_data = [];   // данные для tpl
 
 // Данные профиля
 switch ($mode)
@@ -44,20 +47,20 @@ switch ($mode)
 		if (!IS_ADMIN)
 		{
 			// Ограничение по ip
-			if($bb_cfg['unique_ip'])
+			if($di->config->get('unique_ip'))
 			{
 				if($users = DB()->fetch_row("SELECT user_id, username FROM ". BB_USERS ." WHERE user_reg_ip = '". USER_IP ."' LIMIT 1"))
 				{
-					bb_die(sprintf($lang['ALREADY_REG_IP'], '<a href="'. PROFILE_URL . $users['user_id'] .'"><b>'. $users['username'] .'</b></a>', $bb_cfg['tech_admin_email']));
+					bb_die(sprintf($lang['ALREADY_REG_IP'], '<a href="'. PROFILE_URL . $users['user_id'] .'"><b>'. $users['username'] .'</b></a>', $di->config->get('tech_admin_email')));
 				}
 			}
 			// Отключение регистрации
-			if ($bb_cfg['new_user_reg_disabled'] || ($bb_cfg['reg_email_activation'] && $bb_cfg['emailer_disabled']))
+			if ($di->config->get('new_user_reg_disabled') || ($req_email_activation && $di->config->get('emailer_disabled')))
 			{
 				bb_die($lang['NEW_USER_REG_DISABLED']);
 			}
 			// Ограничение по времени
-			else if ($bb_cfg['new_user_reg_restricted'])
+			else if ($di->config->get('new_user_reg_restricted'))
 			{
 				if (in_array(date('G'), array(0,/*1,2,3,4,5,6,7,8,11,12,13,14,15,16,*/17,18,19,20,21,22,23)))
 				{
@@ -81,8 +84,8 @@ switch ($mode)
 			'username'         => '',
 			'user_password'    => '',
 			'user_email'       => '',
-			'user_timezone'    => $bb_cfg['board_timezone'],
-			'user_lang'        => $bb_cfg['default_lang'],
+			'user_timezone'    => $di->config->get('board_timezone'),
+			'user_lang'        => $di->config->get('default_lang'),
 			'user_opt'         => 0,
 			'avatar_ext_id'    => 0,
 		);
@@ -97,7 +100,7 @@ switch ($mode)
 		// field => can_edit
 		$profile_fields = array(
 			'user_active'      => IS_ADMIN,
-			'username'         => (IS_ADMIN || $bb_cfg['allow_namechange']),
+			'username'         => (IS_ADMIN || $di->config->get('allow_namechange')),
 			'user_password'    => true,
 			'user_email'       => true, // должен быть после user_password
 			'user_lang'        => true,
@@ -149,7 +152,7 @@ switch ($mode)
 }
 
 // Captcha
-$need_captcha = ($mode == 'register' && !IS_ADMIN && !$bb_cfg['captcha']['disabled']);
+$need_captcha = ($mode == 'register' && !IS_ADMIN && !$di->config->get('captcha.disabled'));
 
 if ($submit)
 {
@@ -279,7 +282,7 @@ foreach ($profile_fields as $field => $can_edit)
 					{
 						$errors[] = $err;
 					}
-					if ($bb_cfg['reg_email_activation'])
+					if ($req_email_activation)
 					{
 						$pr_data['user_active'] = 0;
 						$db_data['user_active'] = 0;
@@ -346,13 +349,13 @@ foreach ($profile_fields as $field => $can_edit)
 					{
 						$errors[] = $lang['WRONG_BIRTHDAY_FORMAT'];
 					}
-					elseif (bb_date(TIMENOW, 'Y', false) - $birthday_date['year'] > $bb_cfg['birthday_max_age'])
+					elseif (bb_date(TIMENOW, 'Y', false) - $birthday_date['year'] > $di->config->get('birthday_max_age'))
 					{
-						$errors[] = sprintf($lang['BIRTHDAY_TO_HIGH'], $bb_cfg['birthday_max_age']);
+						$errors[] = sprintf($lang['BIRTHDAY_TO_HIGH'], $di->config->get('birthday_max_age'));
 					}
-					elseif (bb_date(TIMENOW, 'Y', false) - $birthday_date['year'] < $bb_cfg['birthday_min_age'])
+					elseif (bb_date(TIMENOW, 'Y', false) - $birthday_date['year'] < $di->config->get('birthday_min_age'))
 					{
-						$errors[] = sprintf($lang['BIRTHDAY_TO_LOW'], $bb_cfg['birthday_min_age']);
+						$errors[] = sprintf($lang['BIRTHDAY_TO_LOW'], $di->config->get('birthday_min_age'));
 					}
 				}
 
@@ -409,12 +412,12 @@ foreach ($profile_fields as $field => $can_edit)
 					$pr_data['avatar_ext_id'] = 0;
 					$db_data['avatar_ext_id'] = 0;
 				}
-				else if (!empty($_FILES['avatar']['name']) && $bb_cfg['avatars']['up_allowed'])
+				elseif (!empty($_FILES['avatar']['name']) && $di->config->get('avatars.up_allowed'))
 				{
 					require(INC_DIR .'functions_upload.php');
 					$upload = new upload_common();
 
-					if ($upload->init($bb_cfg['avatars'], $_FILES['avatar']) && $upload->store('avatar', $pr_data))
+					if ($upload->init($di->config->get('avatars'), $_FILES['avatar']) && $upload->store('avatar', $pr_data))
 					{
 						$pr_data['avatar_ext_id'] = $upload->file_ext_id;
 						$db_data['avatar_ext_id'] = (int) $upload->file_ext_id;
@@ -425,7 +428,7 @@ foreach ($profile_fields as $field => $can_edit)
 					}
 				}
 			}
-			$tp_data['AVATARS_MAX_SIZE'] = humn_size($bb_cfg['avatars']['max_size']);
+			$tp_data['AVATARS_MAX_SIZE'] = humn_size($di->config->get('avatars.max_size'));
 			break;
 
 		/**
@@ -494,7 +497,7 @@ foreach ($profile_fields as $field => $can_edit)
 			{
 				$sig = prepare_message($sig);
 
-				if (mb_strlen($sig, 'UTF-8') > $bb_cfg['max_sig_chars'])
+				if (mb_strlen($sig, 'UTF-8') > $di->config->get('max_sig_chars'))
 				{
 					$errors[] = $lang['SIGNATURE_TOO_LONG'];
 				}
@@ -579,9 +582,9 @@ foreach ($profile_fields as $field => $can_edit)
 			$templates = htmlCHR($templates);
 			if ($submit && $templates != $pr_data['tpl_name'])
 			{
-				$pr_data['tpl_name'] = $bb_cfg['tpl_name'];
-				$db_data['tpl_name'] = (string) $bb_cfg['tpl_name'];
-				foreach ($bb_cfg['templates'] as $folder => $name)
+				$pr_data['tpl_name'] = $di->config->get('tpl_name');
+				$db_data['tpl_name'] = (string) $di->config->get('tpl_name');
+				foreach ($di->config->get('templates') as $folder => $name)
 				{
 					if ($templates == $folder)
 					{
@@ -609,7 +612,7 @@ if ($submit && !$errors)
 	*/
 	if ($mode == 'register')
 	{
-		if ($bb_cfg['reg_email_activation'])
+		if ($req_email_activation)
 		{
 			$user_actkey = make_rand_str(12);
 			$db_data['user_active'] = 0;
@@ -624,7 +627,7 @@ if ($submit && !$errors)
 
 		if (!IS_ADMIN) $db_data['user_reg_ip'] = USER_IP;
 
-		if (!isset($db_data['tpl_name'])) $db_data['tpl_name'] = (string) $bb_cfg['tpl_name'];
+		if (!isset($db_data['tpl_name'])) $db_data['tpl_name'] = (string) $di->config->get('tpl_name');
 
 		$sql_args = DB()->build_array('INSERT', $db_data);
 
@@ -638,7 +641,7 @@ if ($submit && !$errors)
 		}
 		else
 		{
-			if ($bb_cfg['reg_email_activation'])
+			if ($req_email_activation)
 			{
 				$message = $lang['ACCOUNT_INACTIVE'];
 				$email_template = 'user_welcome_inactive';
@@ -650,15 +653,15 @@ if ($submit && !$errors)
 			}
 
 			require(CLASS_DIR .'emailer.php');
-			$emailer = new emailer($bb_cfg['smtp_delivery']);
+			$emailer = new emailer($di->config->get('smtp_delivery'));
 
-			$emailer->from($bb_cfg['sitename'] ." <{$bb_cfg['board_email']}>");
+			$emailer->from($di->config->get('sitename') ." <{$di->config->get('board_email')}>");
 			$emailer->email_address($username ." <{$email}>");
 			$emailer->use_template($email_template, $user_lang);
 
 			$emailer->assign_vars(array(
-				'SITENAME'    => $bb_cfg['sitename'],
-				'WELCOME_MSG' => sprintf($lang['WELCOME_SUBJECT'], $bb_cfg['sitename']),
+				'SITENAME'    => $di->config->get('sitename'),
+				'WELCOME_MSG' => sprintf($lang['WELCOME_SUBJECT'], $di->config->get('sitename')),
 				'USERNAME'    => html_entity_decode($username),
 				'PASSWORD'    => $new_pass,
 				'U_ACTIVATE'  => make_url('profile.php?mode=activate&' . POST_USERS_URL . '=' . $new_user_id . '&act_key=' . $db_data['user_actkey'])
@@ -687,14 +690,14 @@ if ($submit && !$errors)
 				$db_data['user_actkey'] = $user_actkey;
 
 				require(CLASS_DIR .'emailer.php');
-				$emailer = new emailer($bb_cfg['smtp_delivery']);
+				$emailer = new emailer($di->config->get('smtp_delivery'));
 
-				$emailer->from($bb_cfg['sitename'] ." <{$bb_cfg['board_email']}>");
+				$emailer->from($di->config->get('sitename') ." <{$di->config->get('board_email')}>");
 				$emailer->email_address($username ." <{$email}>");
 				$emailer->use_template('user_activate', $pr_data['user_lang']);
 
 				$emailer->assign_vars(array(
-					'SITENAME'   => $bb_cfg['sitename'],
+					'SITENAME'   => $di->config->get('sitename'),
 					'USERNAME'   => html_entity_decode($username),
 					'U_ACTIVATE' => make_url("profile.php?mode=activate&u={$pr_data['user_id']}&act_key=$user_actkey"),
 				));
@@ -761,12 +764,12 @@ $template->assign_vars(array(
 	'TIMEZONE_SELECT'    => tz_select($pr_data['user_timezone'], 'user_timezone'),
 	'USER_TIMEZONE'      => $pr_data['user_timezone'],
 
-	'AVATAR_EXPLAIN'     => sprintf($lang['AVATAR_EXPLAIN'], $bb_cfg['avatars']['max_width'], $bb_cfg['avatars']['max_height'], (round($bb_cfg['avatars']['max_size'] / 1024))),
+	'AVATAR_EXPLAIN'     => sprintf($lang['AVATAR_EXPLAIN'], $di->config->get('avatars.max_width'), $di->config->get('avatars.max_height'), (round($di->config->get('avatars.max_size') / 1024))),
 	'AVATAR_DISALLOWED'  => bf($pr_data['user_opt'], 'user_opt', 'dis_avatar'),
-	'AVATAR_DIS_EXPLAIN' => sprintf($lang['AVATAR_DISABLE'], $bb_cfg['terms_and_conditions_url']),
+	'AVATAR_DIS_EXPLAIN' => sprintf($lang['AVATAR_DISABLE'], $di->config->get('terms_and_conditions_url')),
 	'AVATAR_IMG'         => get_avatar($pr_data['user_id'], $pr_data['avatar_ext_id'], !bf($pr_data['user_opt'], 'user_opt', 'dis_avatar')),
 
-	'SIGNATURE_EXPLAIN'  => sprintf($lang['SIGNATURE_EXPLAIN'], $bb_cfg['max_sig_chars']),
+	'SIGNATURE_EXPLAIN'  => sprintf($lang['SIGNATURE_EXPLAIN'], $di->config->get('max_sig_chars')),
 	'SIG_DISALLOWED'     => bf($pr_data['user_opt'], 'user_opt', 'dis_sig'),
 
 	'PR_USER_ID'         => $pr_data['user_id'],

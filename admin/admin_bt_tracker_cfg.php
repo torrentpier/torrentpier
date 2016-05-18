@@ -7,6 +7,9 @@ if (!empty($setmodules))
 }
 require('./pagestart.php');
 
+/** @var \TorrentPier\Di $di */
+$di = \TorrentPier\Di::getInstance();
+
 if (!IS_SUPER_ADMIN) bb_die($lang['NOT_ADMIN']);
 
 require(INC_DIR .'functions_admin_torrent.php');
@@ -51,9 +54,9 @@ set_tpl_vars      ($default_cfg_num, $tr_cfg);
 set_tpl_vars_lang ($default_cfg_num);
 
 $template->assign_vars(array(
-	'IGNORE_REPORTED_IP' => $bb_cfg['ignore_reported_ip'],
-	'ANNOUNCE_INTERVAL'  => $bb_cfg['announce_interval'],
-	'PASSKEY_KEY'        => $bb_cfg['passkey_key'],
+	'IGNORE_REPORTED_IP' => $di->config->get('ignore_reported_ip'),
+	'ANNOUNCE_INTERVAL'  => $di->config->get('announce_interval'),
+	'PASSKEY_KEY'        => $di->config->get('passkey_key'),
 	'GOLD_SILVER_ENABLED' => $tr_cfg['gold_silver_enabled'],
 	'DISABLE_SUBMIT'     => true,
 

@@ -2,9 +2,10 @@
 
 if (!defined('BB_ROOT')) die(basename(__FILE__));
 
-global $bb_cfg;
+/** @var \TorrentPier\Di $di */
+$di = \TorrentPier\Di::getInstance();
 
-if ($bb_cfg['ocelot']['enabled'])
+if ($di->config->get('ocelot.enabled'))
 {
 	// Update TORRENT "completed" counters
 		DB()->query("

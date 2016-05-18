@@ -2,6 +2,9 @@
 
 if (!defined('BB_ROOT')) die(basename(__FILE__));
 
+/** @var \TorrentPier\Di $di */
+$di = \TorrentPier\Di::getInstance();
+
 $releaser = DL_STATUS_RELEASER;
 
 define('NEW_BB_BT_LAST_TORSTAT',  'new_bt_last_torstat');
@@ -58,7 +61,7 @@ DB()->query("
 // Clean peers table
 if ($tr_cfg['autoclean'])
 {
-	$announce_interval = max(intval($bb_cfg['announce_interval']), 60);
+	$announce_interval = max(intval($di->config->get('announce_interval')), 60);
 	$expire_factor     = max(floatval($tr_cfg['expire_factor']), 1);
 	$peer_expire_time  = TIMENOW - floor($announce_interval * $expire_factor);
 
@@ -94,7 +97,7 @@ if ($tr_cfg['update_dlstat'])
 
 	// Update TOTAL user's dlstat
 	// This is not needed if Ocelot enabled. It's important.
-	if (!$bb_cfg['ocelot']['enabled'])
+	if (!$di->config->get('ocelot.enabled'))
 	{
 		DB()->query("
 			UPDATE

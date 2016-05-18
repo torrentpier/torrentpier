@@ -2,7 +2,10 @@
 
 if (!defined('IN_AJAX')) die(basename(__FILE__));
 
-global $bb_cfg, $lang, $user;
+global $lang, $user;
+
+/** @var \TorrentPier\Di $di */
+$di = \TorrentPier\Di::getInstance();
 
 $mode = (string) $this->request['mode'];
 $user_id = (int) $this->request['user_id'];
@@ -22,7 +25,7 @@ switch ($mode)
 	case 'delete':
 		delete_avatar($user_id, $u_data['avatar_ext_id']);
 		$new_ext_id = 0;
-		$response = '<img src="'. $bb_cfg['avatars']['upload_path'] . $bb_cfg['avatars']['no_avatar'] .'" alt="'. $user_id .'" />';
+		$response = '<img src="'. $di->config->get('avatars.upload_path') . $di->config->get('avatars.no_avatar') .'" alt="'. $user_id .'" />';
 		break;
 	default:
 		$this->ajax_die('Invalid mode');

@@ -4,6 +4,9 @@ define('IN_ADMIN', true);
 define('BB_ROOT', './../../');
 require(BB_ROOT .'common.php');
 
+/** @var \TorrentPier\Di $di */
+$di = \TorrentPier\Di::getInstance();
+
 $user->session_start();
 
 if (!IS_ADMIN) bb_die($lang['NOT_AUTHORISED']);
@@ -11,7 +14,7 @@ if (!IS_ADMIN) bb_die($lang['NOT_AUTHORISED']);
 $peers_in_last_minutes = array(30, 15, 5, 1);
 $peers_in_last_sec_limit = 300;
 
-$announce_interval = intval($bb_cfg['announce_interval']);
+$announce_interval = intval($di->config->get('announce_interval'));
 $stat = array();
 
 define('TMP_TRACKER_TABLE', 'tmp_tracker');

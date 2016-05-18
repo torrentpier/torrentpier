@@ -2,7 +2,10 @@
 
 function run_jobs($jobs)
 {
-	global $bb_cfg, $tr_cfg, $datastore;
+	global $tr_cfg, $datastore;
+
+	/** @var \TorrentPier\Di $di */
+	$di = \TorrentPier\Di::getInstance();
 
 	define('IN_CRON', true);
 

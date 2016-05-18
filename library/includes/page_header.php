@@ -5,7 +5,7 @@ if (defined('PAGE_HEADER_SENT')) return;
 
 // Parse and show the overall page header
 
-global $page_cfg, $userdata, $user, $bb_cfg, $template, $lang, $images;
+global $page_cfg, $userdata, $user, $template, $lang, $images;
 
 /** @var \TorrentPier\Di $di */
 $di = \TorrentPier\Di::getInstance();
@@ -48,7 +48,7 @@ if (defined('SHOW_ONLINE') && SHOW_ONLINE)
 		'TOTAL_USERS_ONLINE'  => ${$online_list}['stat'],
 		'LOGGED_IN_USER_LIST' => ${$online_list}['userlist'],
 		'USERS_ONLINE_COUNTS' => ${$online_list}['cnt'],
-		'RECORD_USERS'        => sprintf($lang['RECORD_ONLINE_USERS'], $bb_cfg['record_online_users'], bb_date($bb_cfg['record_online_date'])),
+		'RECORD_USERS'        => sprintf($lang['RECORD_ONLINE_USERS'], $di->config->get('record_online_users'), bb_date($di->config->get('record_online_date'))),
 	));
 }
 
@@ -113,7 +113,7 @@ $template->assign_vars(array(
 // The following assigns all _common_ variables that may be used at any point in a template
 $template->assign_vars(array(
 	'SIMPLE_HEADER'      => !empty($gen_simple_header),
-	'CONTENT_ENCODING'   => $bb_cfg['lang'][$userdata['user_lang']]['encoding'],
+	'CONTENT_ENCODING'   => $di->config->get('lang.' . $userdata['user_lang'] . '.encoding'),
 
 	'IN_ADMIN'           => defined('IN_ADMIN'),
 	'USER_HIDE_CAT'      => (BB_SCRIPT == 'index'),
@@ -125,9 +125,9 @@ $template->assign_vars(array(
 
 	'USE_TABLESORTER'    => !empty($page_cfg['use_tablesorter']),
 
-	'SITENAME'           => $bb_cfg['sitename'],
+	'SITENAME'           => $di->config->get('sitename'),
 	'U_INDEX'            => BB_ROOT ."index.php",
-	'T_INDEX'            => sprintf($lang['FORUM_INDEX'], $bb_cfg['sitename']),
+	'T_INDEX'            => sprintf($lang['FORUM_INDEX'], $di->config->get('sitename')),
 
 	'IS_GUEST'           => IS_GUEST,
 	'IS_USER'            => IS_USER,
@@ -138,9 +138,9 @@ $template->assign_vars(array(
 	'FORUM_PATH'         => FORUM_PATH,
 	'FULL_URL'           => FULL_URL,
 
-	'CURRENT_TIME'       => sprintf($lang['CURRENT_TIME'], bb_date(TIMENOW, $bb_cfg['last_visit_date_format'], false)),
-	'S_TIMEZONE'         => preg_replace('/\(.*?\)/', '', sprintf($lang['ALL_TIMES'], $lang['TZ'][str_replace(',', '.', floatval($bb_cfg['board_timezone']))])),
-	'BOARD_TIMEZONE'     => $bb_cfg['board_timezone'],
+	'CURRENT_TIME'       => sprintf($lang['CURRENT_TIME'], bb_date(TIMENOW, $di->config->get('last_visit_date_format'), false)),
+	'S_TIMEZONE'         => preg_replace('/\(.*?\)/', '', sprintf($lang['ALL_TIMES'], $lang['TZ'][str_replace(',', '.', floatval($di->config->get('board_timezone')))])),
+	'BOARD_TIMEZONE'     => $di->config->get('board_timezone'),
 
 	'PM_INFO'            => $pm_info,
 	'PRIVMSG_IMG'        => $icon_pm,
@@ -151,7 +151,7 @@ $template->assign_vars(array(
 	'THIS_USER'          => profile_url($userdata),
 	'THIS_AVATAR'        => get_avatar($userdata['user_id'], $userdata['avatar_ext_id'], !bf($userdata['user_opt'], 'user_opt', 'dis_avatar')),
 	'SHOW_LOGIN_LINK'    => !defined('IN_LOGIN'),
-	'AUTOLOGIN_DISABLED' => !$bb_cfg['allow_autologin'],
+	'AUTOLOGIN_DISABLED' => !$di->config->get('allow_autologin'),
 	'S_LOGIN_ACTION'     => LOGIN_URL,
 
 	'U_CUR_DOWNLOADS'    => PROFILE_URL . $userdata['user_id'],
@@ -167,11 +167,11 @@ $template->assign_vars(array(
 	'U_REGISTER'         => "profile.php?mode=register",
 	'U_SEARCH'           => "search.php",
 	'U_SEND_PASSWORD'    => "profile.php?mode=sendpassword",
-	'U_TERMS'            => $bb_cfg['terms_and_conditions_url'],
+	'U_TERMS'            => $di->config->get('terms_and_conditions_url'),
 	'U_TRACKER'          => "tracker.php",
 
-	'SHOW_SIDEBAR1'      => (!empty($page_cfg['show_sidebar1'][BB_SCRIPT]) || $bb_cfg['show_sidebar1_on_every_page']),
-	'SHOW_SIDEBAR2'      => (!empty($page_cfg['show_sidebar2'][BB_SCRIPT]) || $bb_cfg['show_sidebar2_on_every_page']),
+	'SHOW_SIDEBAR1'      => (!empty($page_cfg['show_sidebar1'][BB_SCRIPT]) || $di->config->get('show_sidebar1_on_every_page')),
+	'SHOW_SIDEBAR2'      => (!empty($page_cfg['show_sidebar2'][BB_SCRIPT]) || $di->config->get('show_sidebar2_on_every_page')),
 
 	'HTML_AGREEMENT'     => LANG_DIR . 'html/user_agreement.html',
 	'HTML_COPYRIGHT'     => LANG_DIR . 'html/copyright_holders.html',
@@ -185,11 +185,11 @@ $template->assign_vars(array(
 	'DOWNLOAD_URL'       => BB_ROOT . DOWNLOAD_URL,
 	'FORUM_URL'          => BB_ROOT . FORUM_URL,
 	'GROUP_URL'          => BB_ROOT . GROUP_URL,
-	'LOGIN_URL'          => $bb_cfg['login_url'],
+	'LOGIN_URL'          => $di->config->get('login_url'),
 	'NEWEST_URL'         => '&amp;view=newest#newest',
-	'PM_URL'             => $bb_cfg['pm_url'],
+	'PM_URL'             => $di->config->get('pm_url'),
 	'POST_URL'           => BB_ROOT . POST_URL,
-	'POSTING_URL'        => $bb_cfg['posting_url'],
+	'POSTING_URL'        => $di->config->get('posting_url'),
 	'PROFILE_URL'        => BB_ROOT . PROFILE_URL,
 	'TOPIC_URL'          => BB_ROOT . TOPIC_URL,
 
@@ -259,7 +259,7 @@ $template->pparse('page_header');
 
 define('PAGE_HEADER_SENT', true);
 
-if (!$bb_cfg['gzip_compress'])
+if (!$di->config->get('gzip_compress'))
 {
 	flush();
 }

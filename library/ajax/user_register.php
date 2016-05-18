@@ -2,7 +2,10 @@
 
 if (!defined('IN_AJAX')) die(basename(__FILE__));
 
-global $bb_cfg, $lang, $userdata;
+global $lang, $userdata;
+
+/** @var \TorrentPier\Di $di */
+$di = \TorrentPier\Di::getInstance();
 
 $mode = (string) $this->request['mode'];
 

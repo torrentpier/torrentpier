@@ -28,15 +28,15 @@
 
 		<div class="med bold tCenter">
 			<!-- IF HTML_AGREEMENT -->
-			<a href="{$bb_cfg['user_agreement_url']}" onclick="window.open(this.href, '', IWP); return false;">{L_USER_AGREEMENT}</a>
+			<a href="{$di->config->get('user_agreement_url')}" onclick="window.open(this.href, '', IWP); return false;">{L_USER_AGREEMENT}</a>
 			<!-- ENDIF -->
 			<!-- IF HTML_COPYRIGHT -->
 			<span class="normal">&nbsp;|&nbsp;</span>
-			<a href="{$bb_cfg['copyright_holders_url']}" onclick="window.open(this.href, '', IWP); return false;">{L_COPYRIGHT_HOLDERS}</a>
+			<a href="{$di->config->get('copyright_holders_url')}" onclick="window.open(this.href, '', IWP); return false;">{L_COPYRIGHT_HOLDERS}</a>
 			<!-- ENDIF -->
 			<!-- IF HTML_ADVERT -->
 			<span class="normal">&nbsp;|&nbsp;</span>
-			<a href="{$bb_cfg['advert_url']}" onclick="window.open(this.href, '', IWP); return false;">{L_ADVERT}</a>
+			<a href="{$di->config->get('advert_url')}" onclick="window.open(this.href, '', IWP); return false;">{L_ADVERT}</a>
 			<!-- ENDIF -->
 		</div>
 		<br />

@@ -134,7 +134,7 @@ else if (isset($_REQUEST['f']))
 
 $total_online = $logged_online + $guests_online;
 
-if ($total_online > $bb_cfg['record_online_users'])
+if ($total_online > $di->config->get('record_online_users'))
 {
 	bb_update_config(array(
 		'record_online_users' => $total_online,

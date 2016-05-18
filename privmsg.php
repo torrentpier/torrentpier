@@ -7,6 +7,9 @@ require(BB_ROOT .'common.php');
 require(INC_DIR .'bbcode.php');
 require(INC_DIR .'functions_post.php');
 
+/** @var \TorrentPier\Di $di */
+$di = \TorrentPier\Di::getInstance();
+
 $privmsg_sent_id = $l_box_name = $to_username = $privmsg_subject = $privmsg_message = $error_msg = '';
 
 $page_cfg['use_tablesorter'] = true;
@@ -17,13 +20,12 @@ $page_cfg['load_tpl_vars'] = array(
 //
 // Is PM disabled?
 //
-if ($bb_cfg['privmsg_disable']) bb_die('PM_DISABLED');
+if ($di->config->get('privmsg_disable')) bb_die('PM_DISABLED');
 
 //
 // Parameters
 //
-//$submit = ( isset($_POST['post']) ) ? TRUE : 0;
-$submit = (bool) request_var('post', false); //test it!
+$submit = (bool) request_var('post', false);
 $submit_search = ( isset($_POST['usersubmit']) ) ? TRUE : 0;
 $submit_msgdays = ( isset($_POST['submit_msgdays']) ) ? TRUE : 0;
 $cancel = ( isset($_POST['cancel']) ) ? TRUE : 0;
@@ -53,22 +55,9 @@ else
 // Start session management
 $user->session_start(array('req_login' => true));
 
-if (IS_AM)
-{
-	$bb_cfg['max_inbox_privmsgs']   += 1000;
-	$bb_cfg['max_sentbox_privmsgs'] += 1000;
-	$bb_cfg['max_savebox_privmsgs'] += 1000;
-}
-else if (IS_GROUP_MEMBER)
-{
-	$bb_cfg['max_inbox_privmsgs']   += 200;
-	$bb_cfg['max_sentbox_privmsgs'] += 200;
-	$bb_cfg['max_savebox_privmsgs'] += 200;
-}
-
 $template->assign_vars(array(
 	'IN_PM'              => true,
-	'QUICK_REPLY'        => ($bb_cfg['show_quick_reply'] && $folder == 'inbox' && $mode == 'read'),
+	'QUICK_REPLY'        => ($di->config->get('show_quick_reply') && $folder == 'inbox' && $mode == 'read'),
 ));
 
 //
@@ -227,7 +216,7 @@ if ($mode == 'read')
 
 		if ( $sent_info = DB()->sql_fetchrow($result) )
 		{
-			if ($bb_cfg['max_sentbox_privmsgs'] && $sent_info['sent_items'] >= $bb_cfg['max_sentbox_privmsgs'])
+			if ($di->config->get('max_sentbox_privmsgs') && $sent_info['sent_items'] >= $di->config->get('max_sentbox_privmsgs'))
 			{
 				$sql = "SELECT privmsgs_id FROM " . BB_PRIVMSGS . "
 					WHERE privmsgs_type = " . PRIVMSGS_SENT_MAIL . "
@@ -691,7 +680,7 @@ else if ( $save && $mark_list && $folder != 'savebox' && $folder != 'outbox' )
 
 		if ( $saved_info = DB()->sql_fetchrow($result) )
 		{
-			if ($bb_cfg['max_savebox_privmsgs'] && $saved_info['savebox_items'] >= $bb_cfg['max_savebox_privmsgs'] )
+			if ($di->config->get('max_savebox_privmsgs') && $saved_info['savebox_items'] >= $di->config->get('max_savebox_privmsgs') )
 			{
 				$sql = "SELECT privmsgs_id FROM " . BB_PRIVMSGS . "
 					WHERE ( ( privmsgs_to_userid = " . $userdata['user_id'] . "
@@ -861,7 +850,7 @@ else if ( $submit || $refresh || $mode != '' )
 			$last_post_time = $db_row['last_post_time'];
 			$current_time = TIMENOW;
 
-			if (($current_time - $last_post_time) < $bb_cfg['flood_interval'])
+			if (($current_time - $last_post_time) < $di->config->get('flood_interval'))
 			{
 				bb_die($lang['FLOOD_ERROR']);
 			}
@@ -958,7 +947,7 @@ else if ( $submit || $refresh || $mode != '' )
 
 			if ( $inbox_info = DB()->sql_fetchrow($result) )
 			{
-				if ($bb_cfg['max_inbox_privmsgs'] && $inbox_info['inbox_items'] >= $bb_cfg['max_inbox_privmsgs'])
+				if ($di->config->get('max_inbox_privmsgs') && $inbox_info['inbox_items'] >= $di->config->get('max_inbox_privmsgs'))
 				{
 					$sql = "SELECT privmsgs_id FROM " . BB_PRIVMSGS . "
 						WHERE ( privmsgs_type = " . PRIVMSGS_NEW_MAIL . "
@@ -1039,12 +1028,12 @@ else if ( $submit || $refresh || $mode != '' )
 
 			cache_rm_user_sessions ($to_userdata['user_id']);
 
-			if (bf($to_userdata['user_opt'], 'user_opt', 'user_notify_pm') && $to_userdata['user_active'] && $bb_cfg['pm_notify_enabled'])
+			if (bf($to_userdata['user_opt'], 'user_opt', 'user_notify_pm') && $to_userdata['user_active'] && $di->config->get('pm_notify_enabled'))
 			{
 				require(CLASS_DIR .'emailer.php');
-				$emailer = new emailer($bb_cfg['smtp_delivery']);
+				$emailer = new emailer($di->config->get('smtp_delivery'));
 
-				$emailer->from($bb_cfg['sitename'] ." <{$bb_cfg['board_email']}>");
+				$emailer->from($di->config->get('sitename') ." <{$di->config->get('board_email')}>");
 				$emailer->email_address($to_userdata['username'] ." <{$to_userdata['user_email']}>");
 
 				$emailer->use_template('privmsg_notify', $to_userdata['user_lang']);
@@ -1053,7 +1042,7 @@ else if ( $submit || $refresh || $mode != '' )
 					'USERNAME'    => html_entity_decode($to_username),
 					'NAME_FROM'   => $userdata['username'],
 					'MSG_SUBJECT' => html_entity_decode($privmsg_subject),
-					'SITENAME'    => $bb_cfg['sitename'],
+					'SITENAME'    => $di->config->get('sitename'),
 					'U_INBOX'     => make_url(PM_URL ."?folder=inbox&mode=read&p=$privmsg_sent_id"),
 				));
 
@@ -1454,7 +1443,7 @@ else
 		$msg_days = 0;
 	}
 
-	$sql .= $limit_msg_time . " ORDER BY pm.privmsgs_date DESC LIMIT $start, " . $bb_cfg['topics_per_page'];
+	$sql .= $limit_msg_time . " ORDER BY pm.privmsgs_date DESC LIMIT $start, " . $di->config->get('topics_per_page');
 	$sql_all_tot = $sql_tot;
 	$sql_tot .= $limit_msg_time_total;
 
@@ -1514,12 +1503,12 @@ else
 	// Output data for inbox status
 	//
 	$box_limit_img_length = $box_limit_percent = $l_box_size_status = '';
-	$max_pm = ($folder != 'outbox') ? $bb_cfg["max_{$folder}_privmsgs"] : null;
+	$max_pm = ($folder != 'outbox') ? $di->config->get('max_' . $folder . '_privmsgs') : null;
 
 	if ($max_pm)
 	{
 		$box_limit_percent    = min(round(($pm_all_total / $max_pm) * 100), 100);
-		$box_limit_img_length = min(round(($pm_all_total / $max_pm) * $bb_cfg['privmsg_graphic_length']), $bb_cfg['privmsg_graphic_length']);
+		$box_limit_img_length = min(round(($pm_all_total / $max_pm) * $di->config->get('privmsg_graphic_length')), $di->config->get('privmsg_graphic_length'));
 		$box_limit_remain     = max(($max_pm - $pm_all_total), 0);
 
 		$template->assign_var('PM_BOX_SIZE_INFO');
@@ -1631,7 +1620,7 @@ else
 		}
 		while( $row = DB()->sql_fetchrow($result) );
 
-		generate_pagination(PM_URL . "?folder=$folder", $pm_total, $bb_cfg['topics_per_page'], $start);
+		generate_pagination(PM_URL . "?folder=$folder", $pm_total, $di->config->get('topics_per_page'), $start);
 	}
 	else
 	{

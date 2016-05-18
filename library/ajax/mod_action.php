@@ -2,7 +2,10 @@
 
 if (!defined('IN_AJAX')) die(basename(__FILE__));
 
-global $userdata, $bb_cfg, $lang, $datastore;
+global $userdata, $lang, $datastore;
+
+/** @var \TorrentPier\Di $di */
+$di = \TorrentPier\Di::getInstance();
 
 $mode = (string) $this->request['mode'];
 
@@ -25,7 +28,7 @@ switch ($mode)
 			change_tor_status($topic_id, $status);
 		}
 
-		$this->response['status'] = $bb_cfg['tor_icons'][$status];
+		$this->response['status'] = $di->config->get('tor_icons.' . $status);
 		$this->response['topics'] = $topic_ids;
 	break;
 
@@ -48,15 +51,15 @@ switch ($mode)
 		DB()->query("UPDATE ". BB_TOPICS ." SET topic_title = '$topic_title_sql' WHERE topic_id = $topic_id LIMIT 1");
 
 		// Обновление кеша новостей на главной
-		$news_forums = array_flip(explode(',', $bb_cfg['latest_news_forum_id']));
-		if (isset($news_forums[$t_data['forum_id']]) && $bb_cfg['show_latest_news'])
+		$news_forums = array_flip(explode(',', $di->config->get('latest_news_forum_id')));
+		if (isset($news_forums[$t_data['forum_id']]) && $di->config->get('show_latest_news'))
 		{
 			$datastore->enqueue('latest_news');
 			$datastore->update('latest_news');
 		}
 
-		$net_forums = array_flip(explode(',', $bb_cfg['network_news_forum_id']));
-		if (isset($net_forums[$t_data['forum_id']]) && $bb_cfg['show_network_news'])
+		$net_forums = array_flip(explode(',', $di->config->get('network_news_forum_id')));
+		if (isset($net_forums[$t_data['forum_id']]) && $di->config->get('show_network_news'))
 		{
 			$datastore->enqueue('network_news');
 			$datastore->update('network_news');
@@ -109,8 +112,8 @@ switch ($mode)
 		{
 			$user_reg_ip  = decode_ip($profiledata['user_reg_ip']);
 			$user_last_ip = decode_ip($profiledata['user_last_ip']);
-			$reg_ip  = '<a href="'. $bb_cfg['whois_info'] . $user_reg_ip .'" class="gen" target="_blank">'. $user_reg_ip .'</a>';
-			$last_ip = '<a href="'. $bb_cfg['whois_info'] . $user_last_ip .'" class="gen" target="_blank">'. $user_last_ip .'</a>';
+			$reg_ip  = '<a href="'. $di->config->get('whois_info') . $user_reg_ip .'" class="gen" target="_blank">'. $user_reg_ip .'</a>';
+			$last_ip = '<a href="'. $di->config->get('whois_info') . $user_last_ip .'" class="gen" target="_blank">'. $user_last_ip .'</a>';
 		}
 
 		$this->response['ip_list_html'] = '

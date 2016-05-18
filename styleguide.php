@@ -12,12 +12,12 @@ $cache = $di->cache;
 
 //var_dump($cache);
 //
-$resultHas = $cache->has('key');
-$resultGet = $cache->get('key');
-$resultSet = $cache->set('key', [[1], [2]], 5);
-$resultStats = $cache->stats();
+//$resultHas = $cache->has('key');
+//$resultGet = $cache->get('key');
+//$resultSet = $cache->set('key', [[1], [2]], 5);
+//$resultStats = $cache->stats();
 
-var_dump($resultHas, $resultGet, $resultSet, $resultStats);
+//var_dump($resultHas, $resultGet, $resultSet, $resultStats);
 
 ///** @var \TorrentPier\Db\Adapter $db */
 //$db = $di->db;

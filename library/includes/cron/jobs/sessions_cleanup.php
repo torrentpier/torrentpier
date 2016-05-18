@@ -2,10 +2,13 @@
 
 if (!defined('BB_ROOT')) die(basename(__FILE__));
 
-$user_session_expire_time  = TIMENOW - intval($bb_cfg['user_session_duration']);
-$admin_session_expire_time = TIMENOW - intval($bb_cfg['admin_session_duration']);
+/** @var \TorrentPier\Di $di */
+$di = \TorrentPier\Di::getInstance();
 
-$user_session_gc_time  = $user_session_expire_time - intval($bb_cfg['user_session_gc_ttl']);
+$user_session_expire_time  = TIMENOW - intval($di->config->get('user_session_duration'));
+$admin_session_expire_time = TIMENOW - intval($di->config->get('admin_session_duration'));
+
+$user_session_gc_time  = $user_session_expire_time - intval($di->config->get('user_session_gc_ttl'));
 $admin_session_gc_time = $admin_session_expire_time;
 
 // ############################ Tables LOCKED ################################
