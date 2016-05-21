@@ -49,8 +49,8 @@ class AdapterTest extends \PHPUnit_Framework_TestCase
             ->getMock();
 
         $platformMock = $this->getMock(AbstractPlatform::class, ['getName', 'quoteIdentifier', 'quoteValue']);
-        $platformMock->method('quoteIdentifier')->willReturnCallback(function($v) { return '`' . $v . '`'; });
-        $platformMock->method('quoteValue')->willReturnCallback(function($v) {
+        $platformMock->method('quoteIdentifier')->willReturnCallback(function ($v) { return '`' . $v . '`'; });
+        $platformMock->method('quoteValue')->willReturnCallback(function ($v) {
             if (is_int($v)) {
                 return $v;
             } elseif ($v instanceof \DateTime) {

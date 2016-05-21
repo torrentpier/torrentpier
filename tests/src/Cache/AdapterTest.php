@@ -61,7 +61,7 @@ class AdapterTest extends \PHPUnit_Framework_TestCase
         $this->cacheProvider->expects(self::at(1))->method('doFetch')
             ->with('namespaceTest[keyTest][1]')->willReturn(false);
 
-        $callback = function($cache, $key) {
+        $callback = function ($cache, $key) {
             return [$cache instanceof Adapter, $key];
         };
 
