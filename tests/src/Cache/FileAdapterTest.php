@@ -2,7 +2,7 @@
 
 namespace TorrentPier\Cache;
 
-use Doctrine\Common\Cache\PhpFileCache;
+use Doctrine\Common\Cache\FilesystemCache;
 
 /**
  * Class FileAdapterTest
@@ -31,7 +31,7 @@ class FileAdapterTest extends \PHPUnit_Framework_TestCase
      */
     public function testAdapterCache()
     {
-        self::assertInstanceOf(PhpFileCache::class, $this->adapter->getProvider());
+        self::assertInstanceOf(FilesystemCache::class, $this->adapter->getProvider());
     }
 
     /**
@@ -39,7 +39,7 @@ class FileAdapterTest extends \PHPUnit_Framework_TestCase
      */
     public function testStatsType()
     {
-        self::assertEquals('Cache in php file', $this->adapter->stats()['type']);
+        self::assertEquals('Filesystem Cache', $this->adapter->stats()['type']);
     }
 
     /**

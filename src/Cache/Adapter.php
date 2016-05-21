@@ -18,6 +18,11 @@ abstract class Adapter
     protected $provider;
 
     /**
+     * @var string
+     */
+    protected $prefix = '';
+
+    /**
      * Set options for setting cache provider.
      *
      * @param array $options
@@ -49,6 +54,18 @@ abstract class Adapter
     abstract protected function getType();
 
     /**
+     * Add prefix to the namespace for security of key.
+     *
+     * @param string $prefix
+     * @return $this
+     */
+    protected function setPrefix($prefix)
+    {
+        $this->prefix = $prefix;
+        return $this;
+    }
+
+    /**
      * Prepare key.
      *
      * @param string $key
@@ -68,7 +85,7 @@ abstract class Adapter
             list($namespace, $id) = $result;
         }
 
-        $this->getProvider()->setNamespace($namespace);
+        $this->getProvider()->setNamespace($this->prefix . $namespace);
 
         return $id;
     }
@@ -89,7 +106,7 @@ abstract class Adapter
      * Fetches an entry from the cache.
      *
      * @param string $key
-     * @param mixed|null $defaultValue
+     * @param mixed|\Closure|null $defaultValue
      * @return mixed|null
      */
     public function get($key, $defaultValue = null)
@@ -98,6 +115,10 @@ abstract class Adapter
         $result = $this->getProvider()->fetch($id);
 
         if ($result === false) {
+            if ($defaultValue instanceof \Closure) {
+                return call_user_func($defaultValue, $this, $key);
+            }
+
             return $defaultValue;
         }
 
@@ -108,12 +129,13 @@ abstract class Adapter
      * Returns an associative array of values for keys is found in cache.
      *
      * @param array $keys
+     * @param string $namespace
      * @return array|\string[]
      */
-    public function gets(array $keys)
+    public function gets(array $keys, $namespace = self::DEFAULT_NAMESPACE)
     {
-        $keys = array_map([$this, 'prepareKey'], $keys);
-        return $this->getProvider()->fetchMultiple([$keys]);
+        $this->getProvider()->setNamespace($this->prefix . $namespace);
+        return $this->getProvider()->fetchMultiple($keys);
     }
 
     /**
@@ -134,16 +156,13 @@ abstract class Adapter
      * Returns a boolean value indicating if the operation succeeded.
      *
      * @param array $keysAndValues
+     * @param string $namespace
      * @param int $timeLeft
      * @return bool
      */
-    public function sets(array $keysAndValues, $timeLeft)
+    public function sets(array $keysAndValues, $namespace = self::DEFAULT_NAMESPACE, $timeLeft = 0)
     {
-        foreach ($keysAndValues as $key => $value) {
-            $id = $this->prepareKey($key);
-            $keysAndValues[$id] = $value;
-            unset($keysAndValues[$key]);
-        }
+        $this->getProvider()->setNamespace($this->prefix . $namespace);
         return $this->getProvider()->saveMultiple($keysAndValues, $timeLeft);
     }
 
@@ -167,7 +186,7 @@ abstract class Adapter
      */
     public function deleteAll($namespace = '')
     {
-        $this->getProvider()->setNamespace($namespace);
+        $this->getProvider()->setNamespace($this->prefix . $namespace);
         return $this->getProvider()->deleteAll();
     }
 

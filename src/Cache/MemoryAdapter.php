@@ -98,6 +98,6 @@ class MemoryAdapter extends Adapter
      */
     protected function getType()
     {
-        return $this->isMemcached ? 'Cache in memcached' : 'Cache in memcache';
+        return sprintf('Memory Cache (Driver: %s)', $this->isMemcached ? 'memcached' : 'memcache');
     }
 }

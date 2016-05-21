@@ -2,7 +2,7 @@
 
 namespace TorrentPier\Cache;
 
-use Doctrine\Common\Cache\PhpFileCache;
+use Doctrine\Common\Cache\FilesystemCache;
 
 /**
  * Class FileAdapter
@@ -18,7 +18,7 @@ class FileAdapter extends Adapter
     /**
      * @var string The cache file extension.
      */
-    protected $extension = PhpFileCache::EXTENSION;
+    protected $extension = FilesystemCache::EXTENSION;
 
     /**
      * @var int The cache file umask.
@@ -31,7 +31,7 @@ class FileAdapter extends Adapter
     public function getProvider()
     {
         if (!$this->provider) {
-            $this->provider = new PhpFileCache($this->directory, $this->extension, $this->umask);
+            $this->provider = new FilesystemCache($this->directory, $this->extension, $this->umask);
         }
 
         return $this->provider;
@@ -42,7 +42,7 @@ class FileAdapter extends Adapter
      */
     protected function getType()
     {
-        return 'Cache in php file';
+        return 'Filesystem Cache';
     }
 
     /**

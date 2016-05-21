@@ -24,6 +24,7 @@ $config = [
 			'adapter' => \TorrentPier\Cache\FileAdapter::class,
 			'options' => [
 				'directory' => __DIR__ . '/../internal_data/cache',
+				'prefix' => 'hash string'
 			],
 		],
 		/*'cache' => [
