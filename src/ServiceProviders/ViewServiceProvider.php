@@ -6,6 +6,10 @@ use Pimple\Container;
 use Pimple\ServiceProviderInterface;
 use TorrentPier\View;
 
+/**
+ * Class ViewServiceProvider
+ * @package TorrentPier\ServiceProviders
+ */
 class ViewServiceProvider implements ServiceProviderInterface
 {
     public function register(Container $container)

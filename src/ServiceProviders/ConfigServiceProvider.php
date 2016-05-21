@@ -7,6 +7,10 @@ use Pimple\ServiceProviderInterface;
 use TorrentPier\Config;
 use Zend\Config\Factory;
 
+/**
+ * Class ConfigServiceProvider
+ * @package TorrentPier\ServiceProviders
+ */
 class ConfigServiceProvider implements ServiceProviderInterface
 {
     /**

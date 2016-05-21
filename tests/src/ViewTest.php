@@ -9,13 +9,14 @@ namespace TorrentPier;
 class ViewTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @see \TorrentPier\View::make
+     * @covers \TorrentPier\View::make
      */
     public function testMake()
     {
         $templateFileName = 'template';
         $templateParam = ['key' => 'value'];
 
+        /** @var \Twig_Environment|\PHPUnit_Framework_MockObject_MockObject $mockTwig */
         $mockTwig = $this
             ->getMockBuilder(\Twig_Environment::class)
             ->setMethods(['render'])

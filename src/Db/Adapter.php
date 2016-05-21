@@ -31,8 +31,12 @@ class Adapter extends \Zend\Db\Adapter\Adapter
     /**
      * {@inheritdoc}
      */
-    public function __construct($driver, PlatformInterface $platform = null, ResultSetInterface $queryResultPrototype = null, ProfilerInterface $profiler = null)
-    {
+    public function __construct(
+        $driver,
+        PlatformInterface $platform = null,
+        ResultSetInterface $queryResultPrototype = null,
+        ProfilerInterface $profiler = null
+    ) {
         if ($driver instanceof Config) {
             $driver = $driver->toArray();
         }
@@ -84,7 +88,6 @@ class Adapter extends \Zend\Db\Adapter\Adapter
     {
         $table = $this->prepareTable($table);
         $sql = $this->getSql();
-
 
         /** @var Insert $sqlInsert */
         $sqlInsert = $sql->insert($table);

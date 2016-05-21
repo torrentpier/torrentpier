@@ -7,6 +7,10 @@ use Pimple\ServiceProviderInterface;
 use TorrentPier\Db\Adapter;
 use TorrentPier\Db\Connection;
 
+/**
+ * Class DbServiceProvider
+ * @package TorrentPier\ServiceProviders
+ */
 class DbServiceProvider implements ServiceProviderInterface
 {
     /**

@@ -11,6 +11,10 @@ use Zend\Db\Adapter\Adapter;
 use Zend\Db\Adapter\Driver\Mysqli\Mysqli;
 use Zend\Db\Adapter\Driver\Pdo\Pdo;
 
+/**
+ * Class SphinxServiceProvider
+ * @package TorrentPier\ServiceProviders
+ */
 class SphinxServiceProvider implements ServiceProviderInterface
 {
     /**

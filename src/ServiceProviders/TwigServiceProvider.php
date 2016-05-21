@@ -6,6 +6,10 @@ use Pimple\Container;
 use Pimple\ServiceProviderInterface;
 use Symfony\Bridge\Twig\Extension\TranslationExtension;
 
+/**
+ * Class TwigServiceProvider
+ * @package TorrentPier\ServiceProviders
+ */
 class TwigServiceProvider implements ServiceProviderInterface
 {
     public function register(Container $container)

@@ -7,6 +7,10 @@ use Pimple\ServiceProviderInterface;
 use Symfony\Component\Translation\Loader\PhpFileLoader;
 use Symfony\Component\Translation\Translator;
 
+/**
+ * Class TranslationServiceProvider
+ * @package TorrentPier\ServiceProviders
+ */
 class TranslationServiceProvider implements ServiceProviderInterface
 {
     public function register(Container $container)
