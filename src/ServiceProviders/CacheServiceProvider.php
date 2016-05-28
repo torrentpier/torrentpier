@@ -21,7 +21,7 @@ class CacheServiceProvider implements ServiceProviderInterface
             $setting = $container['config.services.cache'];
             /** @var Adapter $adapter */
             $adapter = new $setting['adapter']();
-            $adapter->setOptions($setting['options']);
+            $adapter->setOptions($setting['options']->toArray());
             return $adapter;
         };
     }

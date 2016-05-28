@@ -24,7 +24,7 @@ class SphinxServiceProvider implements ServiceProviderInterface
     {
         $container['sphinx'] = function ($container) {
             $platform = new SphinxQL();
-            $adapter = new Adapter($container['config.sphinx']);
+            $adapter = new Adapter($container['config.services.sphinx']);
 
             $driver = $adapter->getDriver();
             // Check driver
@@ -38,7 +38,7 @@ class SphinxServiceProvider implements ServiceProviderInterface
             }
 
             $platform->setDriver($adapter->getDriver());
-            unset($container['config.sphinx']);
+            unset($container['config.services.sphinx']);
 
             return $adapter;
         };

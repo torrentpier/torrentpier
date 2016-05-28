@@ -25,7 +25,7 @@ class ViewTest extends \PHPUnit_Framework_TestCase
         $mockTwig
             ->expects(static::once())
             ->method('render')
-            ->with(static::equalTo($templateFileName . '.twig'), static::equalTo($templateParam))
+            ->with(static::equalTo($templateFileName), static::equalTo($templateParam))
             ->willReturnCallback(function () {
                 return 'test render';
             });

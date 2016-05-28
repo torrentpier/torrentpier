@@ -19,7 +19,7 @@ class Config extends ZendConfig
      * @param bool $allowModifications
      * @param Config|null $root
      */
-    public function __construct(array $array, $allowModifications = false, Config $root = null)
+    public function __construct(array $array, $allowModifications = false, Config &$root = null)
     {
         $this->allowModifications = (bool) $allowModifications;
 

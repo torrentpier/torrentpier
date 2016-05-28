@@ -19,6 +19,11 @@ class View
         $this->twig = $twig;
     }
 
+    public function addGlobal($name, $value)
+    {
+        $this->twig->addGlobal($name, $value);
+    }
+
     /**
      * @param $template
      * @param array $params
@@ -26,6 +31,6 @@ class View
      */
     public function make($template, $params = [])
     {
-        return $this->twig->render($template . '.twig', $params);
+        return $this->twig->render($template, $params);
     }
 }

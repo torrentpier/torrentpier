@@ -1,0 +1,26 @@
+{% extends "layouts/main" %}
+
+{% block content %}
+    <h1>{{ data }}</h1>
+
+    <ul>
+    {% for category in categories %}
+        <li>
+            <h3>{{ category.forum_name|e }} - {{ category.cat_title|e }}</h3>
+            <p>{{ category.forum_desc }}</p>
+        </li>
+    {% endfor %}
+    </ul>
+
+
+
+
+
+
+
+
+
+{% endblock %}
+
+
+
