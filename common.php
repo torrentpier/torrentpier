@@ -38,44 +38,19 @@ $di['settings.locale'] = function($di) {
 };
 
 $di->register(new \TorrentPier\ServiceProviders\ConfigServiceProvider, [
-	'config.file.system.main' => __DIR__ . '/library/config.php',
-	'config.file.local.main' => __DIR__ . '/library/config.local.php',
+	'file.system.main' => __DIR__ . '/library/config.php',
+	'file.local.main' => __DIR__ . '/library/config.local.php',
 ]);
 
-$di->register(new \TorrentPier\ServiceProviders\LogServiceProvider(), [
-    'config.log.handlers' => $di->config->log->handlers
-]);
-
-$di->register(new \TorrentPier\ServiceProviders\CacheServiceProvider(), [
-    'config.services.cache' => $di->config->services->cache->toArray()
-]);
-
-$di->register(new \TorrentPier\ServiceProviders\DbServiceProvider, [
-	'config.db' => $di->config->db->toArray()
-]);
-
-$di->register(new \TorrentPier\ServiceProviders\SphinxServiceProvider, [
-	'config.sphinx' => $di->config->sphinx->toArray()
-]);
-
+$di->register(new \TorrentPier\ServiceProviders\LogServiceProvider());
+$di->register(new \TorrentPier\ServiceProviders\CacheServiceProvider());
+$di->register(new \TorrentPier\ServiceProviders\DbServiceProvider());
+$di->register(new \TorrentPier\ServiceProviders\SphinxServiceProvider());
 $di->register(new \TorrentPier\ServiceProviders\RequestServiceProvider());
 $di->register(new \TorrentPier\ServiceProviders\ViewServiceProvider());
-
-$di->register(new \TorrentPier\ServiceProviders\TranslationServiceProvider(), [
-	'config.debug' => $di->config->debug,
-	'config.translator.dir_cache' => $di->config->translator->dir_cache,
-	'config.translator.resources' => $di->config->translator->resources->toArray()
-]);
-
-$di->register(new \TorrentPier\ServiceProviders\TwigServiceProvider, [
-	'config.debug' => $di->config->debug,
-	'config.twig.dir_templates' => $di->config->twig->dir_templates,
-	'config.twig.dir_cache' => $di->config->twig->dir_cache
-]);
-
-$di->register(new \TorrentPier\ServiceProviders\CaptchaServiceProvider, [
-	'config.captcha.secret_key' => $di->config->captcha->secret_key
-]);
+$di->register(new \TorrentPier\ServiceProviders\TranslationServiceProvider());
+$di->register(new \TorrentPier\ServiceProviders\TwigServiceProvider());
+$di->register(new \TorrentPier\ServiceProviders\CaptchaServiceProvider());
 
 $bb_cfg        = $di->config->toArray();
 $page_cfg      = $di->config->page->toArray();
@@ -132,11 +107,11 @@ require(CORE_DIR . 'dbs.php');
 $DBS = new DBS([
 	'db' => [
 		'db' => [
-			$di->config->db->hostname,
-			$di->config->db->database,
-			$di->config->db->username,
-			$di->config->db->password,
-			$di->config->db->charset,
+			$di->config->services->db->hostname,
+			$di->config->services->db->database,
+			$di->config->services->db->username,
+			$di->config->services->db->password,
+			$di->config->services->db->charset,
 			false
 		]
 	],

@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<ruleset name="TorrentPier">
+
+    <description>Codestyle ruleset for TorrentPier</description>
+
+    <rule ref="PSR2"/>
+
+    <file>src</file>
+
+    <arg name="encoding" value="UTF-8"/>
+    <arg name="extensions" value="php"/>
+
+    <exclude-pattern>tests/*</exclude-pattern>
+    <exclude-pattern>vendor/*</exclude-pattern>
+
+</ruleset>

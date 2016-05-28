@@ -29,8 +29,8 @@ class DiTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @depends                  testGetInstanceIsNotInitialized
-     * @expectedException        \RuntimeException
-     * @expectedExceptionMessage Service 'test' is not registered in the container
+     * @expectedException        \InvalidArgumentException
+     * @expectedExceptionMessage Identifier "test" is not defined.
      */
     public function testGetByPropertyIsNotExists()
     {

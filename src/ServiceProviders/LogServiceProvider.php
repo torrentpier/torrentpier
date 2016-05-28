@@ -26,7 +26,7 @@ class LogServiceProvider implements ServiceProviderInterface
         $container['log'] = function ($container) {
             /** @var Logger $logger */
             $logger = $container['logger']('app');
-            foreach ($container['config.log.handlers'] as $logHandler) {
+            foreach ($container['config.services.log.handlers'] as $logHandler) {
                 $logger->pushHandler(call_user_func($logHandler));
             }
 

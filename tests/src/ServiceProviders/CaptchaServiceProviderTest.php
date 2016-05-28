@@ -14,7 +14,7 @@ class CaptchaServiceProviderTest extends \PHPUnit_Framework_TestCase
     {
         $di = new Di();
         $di->register(new CaptchaServiceProvider, [
-            'config.captcha.secret_key' => 'secret key'
+            'config.services.captcha.secret_key' => 'secret key'
         ]);
 
         static::assertInstanceOf(ReCaptcha::class, $di->captcha);

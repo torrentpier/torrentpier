@@ -46,7 +46,9 @@
 		"doctrine/cache": "^1.6"
 	},
 	"require-dev": {
-		"phpunit/phpunit": "^4.8"
+		"phpunit/phpunit": "4.8.*",
+		"squizlabs/php_codesniffer": "2.5.*",
+		"sebastian/phpcpd": "2.0.*"
 	},
 	"autoload": {
 		"psr-4": {
@@ -54,5 +56,24 @@
 		}
 	},
 	"minimum-stability": "stable",
-	"prefer-stable": true
+	"prefer-stable": true,
+	"scripts": {
+		"test": [
+			"composer test:lint",
+			"composer test:unit",
+			"composer test:cpd"
+		],
+		"test:lint": [
+			"vendor/bin/phpcs --colors --report-full --standard=PSR2 src tests"
+		],
+		"test:unit": [
+			"vendor/bin/phpunit --configuration phpunit.xml --coverage-text"
+		],
+		"test:unit:html": [
+			"vendor/bin/phpunit --configuration phpunit.xml --coverage-html=internal_data/report"
+		],
+		"test:cpd": [
+			"vendor/bin/phpcpd --exclude=vendor --exclude=internal_data ."
+		]
+	}
 }

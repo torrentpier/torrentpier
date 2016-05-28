@@ -31,7 +31,7 @@ class ConfigTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * Get value from array by key
+     * Get value from array by key.
      *
      * @see \TorrentPier\Config::get
      */
