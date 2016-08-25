@@ -2,8 +2,8 @@
 
 require_once __DIR__ . '/vendor/autoload.php';
 
-use TorrentPier\Di,
-    TorrentPier\ServiceProviders;
+use TorrentPier\Di;
+use TorrentPier\ServiceProviders;
 
 $di = new Di();
 

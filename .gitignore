@@ -1,5 +1,6 @@
 ### TorrentPier ###
-.idea/
+.idea
+bower_components
 composer.phar
 composer.lock
 configs/local.php
@@ -12,6 +13,7 @@ internal_data/log
 internal_data/sitemap
 internal_data/triggers
 library/config.local.php
+node_modules
 vendor
 
 ### Archives ###

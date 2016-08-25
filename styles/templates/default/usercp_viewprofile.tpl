@@ -177,7 +177,7 @@ ajax.callback.gen_passkey = function(data){
 <style type="text/css">
 #traf-stats-tbl { width: 468px; background: #F9F9F9; border: 1px solid #A5AFB4; border-collapse: separate; }
 #traf-stats-tbl th, #traf-stats-tbl td { padding: 2px 10px 3px; text-align: center; white-space: nowrap; font-size: 11px; }
-#traf-stats-tbl th { padding: 2px <!-- IF $di->config->get('seed_bonus_enabled') -->11<!-- ELSE -->22<!-- ENDIF -->px 3px; }
+#traf-stats-tbl th { padding: 2px 11px 3px; }
 <!-- IF TRAF_STATS -->
 #traf-stats-tbl th { padding: 2px 30px 3px; }
 <!-- ENDIF -->

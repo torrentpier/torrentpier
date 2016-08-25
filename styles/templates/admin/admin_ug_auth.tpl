@@ -17,7 +17,6 @@ table>tbody {
 }
 thead tr {
 	position: relative;
-	top: expression($p("tScrollCont").scrollTop); /* IE5+ only */
 }
 .tPerm {
 	background-color: #B4BBC8; margin-top: -2px;

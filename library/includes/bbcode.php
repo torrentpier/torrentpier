@@ -123,7 +123,6 @@ function generate_smilies($mode)
 
 		if ($num_smilies)
 		{
-			$smilies_count = ($mode == 'inline') ? min(19, $num_smilies) : $num_smilies;
 			$smilies_split_row = ($mode == 'inline') ? $inline_columns - 1 : $window_columns - 1;
 
 			$s_colspan = 0;
@@ -658,8 +657,6 @@ class bbcode
 
 		$found_spam = array();
 
-		$tm_start = utime();
-
 		$msg_decoded = $text;
 		$msg_decoded = html_entity_decode($msg_decoded);
 		$msg_decoded = urldecode($msg_decoded);
@@ -689,7 +686,6 @@ class bbcode
 
 			$text = preg_replace("/($spam_exp)(\S*)/i", $spam_replace, $msg_decoded);
 			$text = htmlCHR($text, false, ENT_NOQUOTES);
-#			bb_log(date("H:i:s") ." | ". sprintf('%.4f', (utime() - $tm_start)) ." | ". sprintf('%-6s', strlen($text)) ." | ". join(' ** ', $found_spam) ."\n", 'spam_filter');
 		}
 
 		return $text;
