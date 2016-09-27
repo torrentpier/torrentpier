@@ -2,7 +2,10 @@
 
 if (!defined('IN_AJAX')) die(basename(__FILE__));
 
-global $bb_cfg, $userdata, $lang;
+global $userdata, $lang;
+
+/** @var \TorrentPier\Di $di */
+$di = \TorrentPier\Di::getInstance();
 
 if (!($group_id = intval($this->request['group_id'])) || !($group_info = get_group_data($group_id)))
 {

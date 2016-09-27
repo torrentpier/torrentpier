@@ -177,7 +177,7 @@
 <div style="display: none;">
 
 	<div id="file-up-input">
-		<input type="hidden" name="MAX_FILE_SIZE" value="{$bb_cfg['attach']['max_size']}" />
+		<input type="hidden" name="MAX_FILE_SIZE" value="{$di->config->get('attach.max_size')}" />
 		<input type="file" name="attach" size="50" id="file-up-btn" />
 		&nbsp;
 		<a href="#" class="med" onclick="show_load_file_link(); return false;">удалить</a>

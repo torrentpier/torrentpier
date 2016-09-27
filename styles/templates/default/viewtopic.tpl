@@ -13,7 +13,7 @@
 <!-- ENDIF -->
 <!-- ENDIF / LOGGED_IN -->
 
-<!-- IF $bb_cfg['use_ajax_posts'] && (AUTH_DELETE || AUTH_REPLY || AUTH_EDIT) -->
+<!-- IF $di->config->get('use_ajax_posts') && (AUTH_DELETE || AUTH_REPLY || AUTH_EDIT) -->
 <script type="text/javascript">
 ajax.open_edit = false;
 function edit_post(post_id, type, text) {
@@ -218,7 +218,7 @@ function build_poll_add_form (src_el)
 		<input id="poll-caption-inp" name="poll_caption" type="text" value="" class="bold" style="width: 550px;" />
 		<div class="med" style="margin-top: 4px;">{L_NEW_POLL_M_VOTES}:</div>
 		<textarea id="poll-votes-inp" rows="8" cols="10" wrap="off" class="gen" style="width: 550px;"></textarea>
-		<div class="med mrg_4"><i>{L_NEW_POLL_M_EXPLAIN}: {$bb_cfg['max_poll_options']})</i></div>
+		<div class="med mrg_4"><i>{L_NEW_POLL_M_EXPLAIN}: {$di->config->get('max_poll_options')})</i></div>
 		<div class="mrg_8 tCenter"><input id="poll-edit-submit-btn" type="button" value="{L_SUBMIT}" class="bold" style="width: 100px;" /></div>
 	</fieldset>
 	</td></tr></table>
@@ -389,9 +389,9 @@ function build_poll_add_form (src_el)
 
 			<p style="float: right;<!-- IF TEXT_BUTTONS --> padding: 3px 2px 4px;<!-- ELSE --> padding: 1px 6px 2px;<!-- ENDIF -->" class="post_btn_1">
 				<!-- IF postrow.IS_FIRST_POST and CAN_ADD_POLL --><a href="#" onclick="return build_poll_add_form(this);" class="txtb">{POLL_IMG}</a><!-- ENDIF -->
-				<!-- IF postrow.QUOTE --><a class="txtb" href="<!-- IF $bb_cfg['use_ajax_posts'] -->" onclick="ajax.exec({ action: 'posts', post_id: {postrow.POST_ID}, type: 'reply'}); return false;<!-- ELSE -->{QUOTE_URL}{postrow.POST_ID}<!-- ENDIF -->">{QUOTE_IMG}</a>{POST_BTN_SPACER}<!-- ENDIF -->
-				<!-- IF postrow.EDIT --><a class="txtb" href="<!-- IF $bb_cfg['use_ajax_posts'] -->" onclick="edit_post({postrow.POST_ID}, 'edit'); return false;<!-- ELSE -->{EDIT_POST_URL}{postrow.POST_ID}<!-- ENDIF -->">{EDIT_POST_IMG}</a>{POST_BTN_SPACER}<!-- ENDIF -->
-				<!-- IF postrow.DELETE --><a class="txtb" href="<!-- IF $bb_cfg['use_ajax_posts'] -->" onclick="ajax.exec({ action: 'posts', post_id: {postrow.POST_ID}, topic_id : {TOPIC_ID}, type: 'delete'}); return false;<!-- ELSE -->{DELETE_POST_URL}{postrow.POST_ID}<!-- ENDIF -->">{DELETE_POST_IMG}</a>{POST_BTN_SPACER}<!-- ENDIF -->
+				<!-- IF postrow.QUOTE --><a class="txtb" href="<!-- IF $di->config->get('use_ajax_posts') -->" onclick="ajax.exec({ action: 'posts', post_id: {postrow.POST_ID}, type: 'reply'}); return false;<!-- ELSE -->{QUOTE_URL}{postrow.POST_ID}<!-- ENDIF -->">{QUOTE_IMG}</a>{POST_BTN_SPACER}<!-- ENDIF -->
+				<!-- IF postrow.EDIT --><a class="txtb" href="<!-- IF $di->config->get('use_ajax_posts') -->" onclick="edit_post({postrow.POST_ID}, 'edit'); return false;<!-- ELSE -->{EDIT_POST_URL}{postrow.POST_ID}<!-- ENDIF -->">{EDIT_POST_IMG}</a>{POST_BTN_SPACER}<!-- ENDIF -->
+				<!-- IF postrow.DELETE --><a class="txtb" href="<!-- IF $di->config->get('use_ajax_posts') -->" onclick="ajax.exec({ action: 'posts', post_id: {postrow.POST_ID}, topic_id : {TOPIC_ID}, type: 'delete'}); return false;<!-- ELSE -->{DELETE_POST_URL}{postrow.POST_ID}<!-- ENDIF -->">{DELETE_POST_IMG}</a>{POST_BTN_SPACER}<!-- ENDIF -->
 				<!-- IF postrow.IP --><a class="txtb" href="{IP_POST_URL}{postrow.POST_ID}&amp;t={TOPIC_ID}">{IP_POST_IMG}</a>{POST_BTN_SPACER}<!-- ENDIF -->
 				<!-- IF AUTH_MOD -->
 					<a class="menu-root menu-alt1 txtb" href="#mc_{postrow.POST_ID}">{MC_IMG}</a>{POST_BTN_SPACER}
@@ -447,7 +447,7 @@ function build_poll_add_form (src_el)
 						<div class="spacer_8"></div>
 						<fieldset class="attach">
 							<legend>{TOPIC_ATTACH_ICON} {L_ATTACHMENT}</legend>
-							<p class="attach_link"><a href="{$bb_cfg['dl_url']}{TOPIC_ID}" class="dl-stub"><b>Скачать прикреплённый файл</b></a> &nbsp;<span class="med">({ATTACH_FILESIZE})</span></p>
+							<p class="attach_link"><a href="{$di->config->get('dl_url')}{TOPIC_ID}" class="dl-stub"><b>Скачать прикреплённый файл</b></a> &nbsp;<span class="med">({ATTACH_FILESIZE})</span></p>
 						</fieldset>
 
 					<!-- ELSEIF IS_GUEST -->

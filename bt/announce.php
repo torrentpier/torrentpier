@@ -23,8 +23,8 @@ if (isset($_GET['event']) && $_GET['event'] === 'completed')
 	dummy_exit(mt_rand(600, 1200));
 }
 
-$announce_interval = $bb_cfg['announce_interval'];
-$passkey_key = $bb_cfg['passkey_key'];
+$announce_interval = $di->config->get('announce_interval');
+$passkey_key = $di->config->get('passkey_key');
 $max_left_val      = 536870912000;   // 500 GB
 $max_up_down_val   = 5497558138880;  // 5 TB
 $max_up_add_val    = 85899345920;    // 80 GB
@@ -112,9 +112,9 @@ if (!verify_id($passkey, BT_AUTH_KEY_LENGTH))
 // IP
 $ip = $_SERVER['REMOTE_ADDR'];
 
-if (!$bb_cfg['ignore_reported_ip'] && isset($_GET['ip']) && $ip !== $_GET['ip'])
+if (!$di->config->get('ignore_reported_ip') && isset($_GET['ip']) && $ip !== $_GET['ip'])
 {
-	if (!$bb_cfg['verify_reported_ip'])
+	if (!$di->config->get('verify_reported_ip'))
 	{
 		$ip = $_GET['ip'];
 	}
@@ -124,7 +124,7 @@ if (!$bb_cfg['ignore_reported_ip'] && isset($_GET['ip']) && $ip !== $_GET['ip'])
 		{
 			if ($x_ip === $_GET['ip'])
 			{
-				if (!$bb_cfg['allow_internal_ip'] && preg_match("#^(10|172\.16|192\.168)\.#", $x_ip))
+				if (!$di->config->get('allow_internal_ip') && preg_match("#^(10|172\.16|192\.168)\.#", $x_ip))
 				{
 					break;
 				}
@@ -278,7 +278,7 @@ else
 		}
 
 		// Limit active torrents
-		if (!isset($bb_cfg['unlimited_users'][$user_id]) && $tr_cfg['limit_active_tor'] && (($tr_cfg['limit_seed_count'] && $seeder) || ($tr_cfg['limit_leech_count'] && !$seeder)))
+		if (!$di->config->get('unlimited_users.' . $user_id) && $tr_cfg['limit_active_tor'] && (($tr_cfg['limit_seed_count'] && $seeder) || ($tr_cfg['limit_leech_count'] && !$seeder)))
 		{
 			$sql = "SELECT COUNT(DISTINCT topic_id) AS active_torrents
 				FROM ". BB_BT_TRACKER ."

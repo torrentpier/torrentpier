@@ -2,7 +2,10 @@
 
 if (!defined('BB_ROOT')) die(basename(__FILE__));
 
-global $bf, $bb_cfg;
+global $bf;
+
+/** @var \TorrentPier\Di $di */
+$di = \TorrentPier\Di::getInstance();
 
 //
 // cat_forums
@@ -128,9 +131,9 @@ $this->store('viewtopic_forum_select', $data);
 //
 // latest_news
 //
-if ($bb_cfg['show_latest_news'] && ($news_forum_ids = $bb_cfg['latest_news_forum_id']))
+if ($di->config->get('show_latest_news') && ($news_forum_ids = $di->config->get('latest_news_forum_id')))
 {
-	$news_count = max($bb_cfg['latest_news_count'], 1);
+	$news_count = max($di->config->get('latest_news_count'), 1);
 
 	$data = DB()->fetch_rowset("
 		SELECT topic_id, topic_time, topic_title, forum_id
@@ -147,9 +150,9 @@ if ($bb_cfg['show_latest_news'] && ($news_forum_ids = $bb_cfg['latest_news_forum
 //
 // Network_news
 //
-if ($bb_cfg['show_network_news'] && ($net_forum_ids = $bb_cfg['network_news_forum_id']))
+if ($di->config->get('show_network_news') && ($net_forum_ids = $di->config->get('network_news_forum_id')))
 {
-	$net_count = max($bb_cfg['network_news_count'], 1);
+	$net_count = max($di->config->get('network_news_count'), 1);
 
 	$data = DB()->fetch_rowset("
 		SELECT topic_id, topic_time, topic_title, forum_id

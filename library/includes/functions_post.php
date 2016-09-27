@@ -7,7 +7,10 @@ if (!defined('BB_ROOT')) die(basename(__FILE__));
 //
 function prepare_post(&$mode, &$post_data, &$error_msg, &$username, &$subject, &$message)
 {
-	global $bb_cfg, $user, $userdata, $lang;
+	global $user, $userdata, $lang;
+
+	/** @var \TorrentPier\Di $di */
+	$di = \TorrentPier\Di::getInstance();
 
 	// Check username
 	if (!empty($username))
@@ -50,12 +53,12 @@ function prepare_post(&$mode, &$post_data, &$error_msg, &$username, &$subject, &
 	}
 
 	// Check smilies limit
-	if ($bb_cfg['max_smilies'])
+	if ($di->config->get('max_smilies'))
 	{
-		$count_smilies = substr_count(bbcode2html($message), '<img class="smile" src="'. $bb_cfg['smilies_path']);
-		if ($count_smilies > $bb_cfg['max_smilies'])
+		$count_smilies = substr_count(bbcode2html($message), '<img class="smile" src="'. $di->config->get('smilies_path'));
+		if ($count_smilies > $di->config->get('max_smilies'))
 		{
-			$to_many_smilies = sprintf($lang['MAX_SMILIES_PER_POST'], $bb_cfg['max_smilies']);
+			$to_many_smilies = sprintf($lang['MAX_SMILIES_PER_POST'], $di->config->get('max_smilies'));
 			$error_msg .= (!empty($error_msg)) ? '<br />'. $to_many_smilies : $to_many_smilies;
 		}
 	}
@@ -71,7 +74,10 @@ function prepare_post(&$mode, &$post_data, &$error_msg, &$username, &$subject, &
 //
 function submit_post($mode, &$post_data, &$message, &$meta, &$forum_id, &$topic_id, &$post_id, &$topic_type, $post_username, $post_subject, $post_message, $update_post_time, $poster_rg_id, $attach_rg_sig)
 {
-	global $userdata, $post_info, $is_auth, $bb_cfg, $lang, $datastore;
+	global $userdata, $post_info, $is_auth, $lang, $datastore;
+
+	/** @var \TorrentPier\Di $di */
+	$di = \TorrentPier\Di::getInstance();
 
 	$current_time = TIMENOW;
 
@@ -87,7 +93,7 @@ function submit_post($mode, &$post_data, &$message, &$meta, &$forum_id, &$topic_
 		{
 			if ($userdata['user_level'] == USER)
 			{
-				if (TIMENOW - $row['last_post_time'] < $bb_cfg['flood_interval'])
+				if (TIMENOW - $row['last_post_time'] < $di->config->get('flood_interval'))
 				{
 					bb_die($lang['FLOOD_ERROR']);
 				}
@@ -193,20 +199,20 @@ function submit_post($mode, &$post_data, &$message, &$meta, &$forum_id, &$topic_
 	));
 
     //Обновление кеша новостей на главной
-	if($bb_cfg['show_latest_news'])
+	if($di->config->get('show_latest_news'))
 	{
-		$news_forums = array_flip(explode(',', $bb_cfg['latest_news_forum_id']));
-		if(isset($news_forums[$forum_id]) && $bb_cfg['show_latest_news'] && $mode == 'newtopic')
+		$news_forums = array_flip(explode(',', $di->config->get('latest_news_forum_id')));
+		if(isset($news_forums[$forum_id]) && $di->config->get('show_latest_news') && $mode == 'newtopic')
 		{
 			$datastore->enqueue('latest_news');
 			$datastore->update('latest_news');
 		}
 	}
 
-	if($bb_cfg['show_network_news'])
+	if($di->config->get('show_network_news'))
 	{
-		$net_forums = array_flip(explode(',', $bb_cfg['network_news_forum_id']));
-		if(isset($net_forums[$forum_id]) && $bb_cfg['show_network_news'] && $mode == 'newtopic')
+		$net_forums = array_flip(explode(',', $di->config->get('network_news_forum_id')));
+		if(isset($net_forums[$forum_id]) && $di->config->get('show_network_news') && $mode == 'newtopic')
 		{
 			$datastore->enqueue('network_news');
 			$datastore->update('network_news');
@@ -334,9 +340,12 @@ function delete_post($mode, $post_data, &$message, &$meta, $forum_id, $topic_id,
 //
 function user_notification($mode, &$post_data, &$topic_title, &$forum_id, &$topic_id, &$notify_user)
 {
-	global $bb_cfg, $lang, $userdata;
+	global $lang, $userdata;
 
-	if (!$bb_cfg['topic_notify_enabled'])
+	/** @var \TorrentPier\Di $di */
+	$di = \TorrentPier\Di::getInstance();
+
+	if (!$di->config->get('topic_notify_enabled'))
 	{
 		return;
 	}
@@ -368,7 +377,7 @@ function user_notification($mode, &$post_data, &$topic_title, &$forum_id, &$topi
 			if ($watch_list)
 			{
 				require(CLASS_DIR .'emailer.php');
-				$emailer = new emailer($bb_cfg['smtp_delivery']);
+				$emailer = new emailer($di->config->get('smtp_delivery'));
 
 				$orig_word = $replacement_word = array();
 				obtain_word_list($orig_word, $replacement_word);
@@ -383,13 +392,13 @@ function user_notification($mode, &$post_data, &$topic_title, &$forum_id, &$topi
 
 				foreach ($watch_list as $row)
 				{
-					$emailer->from($bb_cfg['sitename'] ." <{$bb_cfg['board_email']}>");
+					$emailer->from($di->config->get('sitename') ." <{$di->config->get('board_email')}>");
 					$emailer->email_address($row['username'] ." <{$row['user_email']}>");
 					$emailer->use_template('topic_notify', $row['user_lang']);
 
 					$emailer->assign_vars(array(
 						'TOPIC_TITLE'           => html_entity_decode($topic_title),
-						'SITENAME'              => $bb_cfg['sitename'],
+						'SITENAME'              => $di->config->get('sitename'),
 						'USERNAME'              => $row['username'],
 						'U_TOPIC'               => $u_topic,
 						'U_STOP_WATCHING_TOPIC' => $unwatch_topic,

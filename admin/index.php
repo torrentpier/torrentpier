@@ -65,7 +65,7 @@ elseif (isset($_GET['pane']) && $_GET['pane'] == 'right')
 {
 	$template->assign_vars(array(
 		'TPL_ADMIN_MAIN'  => true,
-		'ADMIN_LOCK'      => ($bb_cfg['board_disable']) ? true : false,
+		'ADMIN_LOCK'      => ($di->config->get('board_disable')) ? true : false,
 		'ADMIN_LOCK_CRON' => (file_exists(BB_DISABLED)) ? true :false,
 	));
 
@@ -73,8 +73,8 @@ elseif (isset($_GET['pane']) && $_GET['pane'] == 'right')
 	$total_posts  = get_db_stat('postcount');
 	$total_users  = get_db_stat('usercount');
 	$total_topics = get_db_stat('topiccount');
-	$start_date   = bb_date($bb_cfg['board_startdate']);
-	$boarddays    = (TIMENOW - $bb_cfg['board_startdate']) / 86400;
+	$start_date   = bb_date($di->config->get('board_startdate'));
+	$boarddays    = (TIMENOW - $di->config->get('board_startdate')) / 86400;
 
 	$posts_per_day  = sprintf('%.2f', $total_posts / $boarddays);
 	$topics_per_day = sprintf('%.2f', $total_topics / $boarddays);
@@ -82,13 +82,13 @@ elseif (isset($_GET['pane']) && $_GET['pane'] == 'right')
 
 	$avatar_dir_size = 0;
 
-	if ($avatar_dir = opendir(BB_ROOT . $bb_cfg['avatar_path']))
+	if ($avatar_dir = opendir(BB_ROOT . $di->config->get('avatar_path')))
 	{
 		while( $file = readdir($avatar_dir) )
 		{
 			if( $file != '.' && $file != '..' )
 			{
-				$avatar_dir_size += filesize(BB_ROOT . $bb_cfg['avatar_path'] . '/' . $file);
+				$avatar_dir_size += filesize(BB_ROOT . $di->config->get('avatar_path') . '/' . $file);
 			}
 		}
 		closedir($avatar_dir);
@@ -125,7 +125,7 @@ elseif (isset($_GET['pane']) && $_GET['pane'] == 'right')
 		if (preg_match('/^(3\.23|4\.|5\.|10\.)/', $version))
 		{
 			$dblist = array();
-			foreach ($bb_cfg['db'] as $name => $row)
+			foreach ($di->config->get('db') as $name => $row)
 			{
 				$sql = "SHOW TABLE STATUS FROM {$row[1]}";
 				if ($result = DB()->sql_query($sql))
@@ -165,9 +165,9 @@ elseif (isset($_GET['pane']) && $_GET['pane'] == 'right')
 		'USERS_PER_DAY'    => $users_per_day,
 		'AVATAR_DIR_SIZE'  => $avatar_dir_size,
 		'DB_SIZE'          => $dbsize,
-		'GZIP_COMPRESSION' => ($bb_cfg['gzip_compress']) ? $lang['ON'] : $lang['OFF'],
-		'TP_VERSION'       => $bb_cfg['tp_version'] . (!empty($bb_cfg['tp_release_state']) ? ' :: ' . $bb_cfg['tp_release_state'] : ''),
-		'TP_RELEASE_DATE'  => $bb_cfg['tp_release_date'],
+		'GZIP_COMPRESSION' => ($di->config->get('gzip_compress')) ? $lang['ON'] : $lang['OFF'],
+		'TP_VERSION'       => $di->config->get('tp_version') . (!empty($di->config->get('tp_release_state')) ? ' :: ' . $di->config->get('tp_release_state') : ''),
+		'TP_RELEASE_DATE'  => $di->config->get('tp_release_date'),
 		'ZF_VERSION'       => Zend\Version\Version::VERSION,
 	));
 
@@ -237,7 +237,7 @@ elseif (isset($_GET['pane']) && $_GET['pane'] == 'right')
 						'STARTED'    => bb_date($onlinerow_reg[$i]['session_start'], 'H:i', false),
 						'LASTUPDATE' => bb_date($onlinerow_reg[$i]['user_session_time'], 'H:i', false),
 						'IP_ADDRESS' => $reg_ip,
-						'U_WHOIS_IP' => $bb_cfg['whois_info'] . $reg_ip,
+						'U_WHOIS_IP' => $di->config->get('whois_info') . $reg_ip,
 					));
 				}
 			}
@@ -262,7 +262,7 @@ elseif (isset($_GET['pane']) && $_GET['pane'] == 'right')
 					'STARTED'    => bb_date($onlinerow_guest[$i]['session_start'], 'H:i', false),
 					'LASTUPDATE' => bb_date($onlinerow_guest[$i]['session_time'], 'H:i' , false),
 					'IP_ADDRESS' => $guest_ip,
-					'U_WHOIS_IP' => $bb_cfg['whois_info'] . $guest_ip,
+					'U_WHOIS_IP' => $di->config->get('whois_info') . $guest_ip,
 				));
 			}
 		}
@@ -278,7 +278,7 @@ else
 {
 	// Generate frameset
 	$template->assign_vars(array(
-		'CONTENT_ENCODING'   => $bb_cfg['lang'][$userdata['user_lang']]['encoding'],
+		'CONTENT_ENCODING'   => $di->config->get('lang.' . $userdata['user_lang'] . '.encoding'),
 		'TPL_ADMIN_FRAMESET' => true,
 	));
 	send_no_cache_headers();

@@ -21,10 +21,10 @@ if (request_var('submit', '')) {
 	bb_die('<a href="admin_sitemap.php">' . $lang['GO_BACK'] . '</a>');
 }
 
-$s_mess = $lang['SITEMAP_CREATED'].': <b>'. bb_date($bb_cfg['sitemap_time'], $bb_cfg['post_date_format']) .'</b> '. $lang['SITEMAP_AVAILABLE'] .': <a href="'. make_url('sitemap.xml') .'" target="_blank">'. make_url('sitemap.xml') .'</a>';
+$s_mess = $lang['SITEMAP_CREATED'].': <b>'. bb_date($di->config->get('sitemap_time'), $di->config->get('post_date_format')) .'</b> '. $lang['SITEMAP_AVAILABLE'] .': <a href="'. make_url('sitemap.xml') .'" target="_blank">'. make_url('sitemap.xml') .'</a>';
 
 $template->assign_vars(array(
-	'STATIC_SITEMAP' => $bb_cfg['static_sitemap'],
+	'STATIC_SITEMAP' => $di->config->get('static_sitemap'),
 	'MESSAGE'        => (file_exists(INT_DATA_DIR ."sitemap/sitemap.xml")) ? $s_mess : $lang['SITEMAP_NOT_CREATED'],
 ));
 

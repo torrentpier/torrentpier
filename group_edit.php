@@ -5,6 +5,9 @@ define('BB_ROOT', './');
 require(BB_ROOT .'common.php');
 require(INC_DIR .'functions_group.php');
 
+/** @var \TorrentPier\Di $di */
+$di = \TorrentPier\Di::getInstance();
+
 $page_cfg['include_bbcode_js'] = true;
 
 // Start session management
@@ -34,12 +37,12 @@ if ($is_moderator)
 	// Avatar
 	if ($submit)
 	{
-		if (!empty($_FILES['avatar']['name']) && $bb_cfg['group_avatars']['up_allowed'])
+		if (!empty($_FILES['avatar']['name']) && $di->config->get('group_avatars.up_allowed'))
 		{
 			require(INC_DIR .'functions_upload.php');
 			$upload = new upload_common();
 
-			if ($upload->init($bb_cfg['group_avatars'], $_FILES['avatar']) && $upload->store('avatar', array("user_id" => GROUP_AVATAR_MASK . $group_id, "avatar_ext_id" => $group_info['avatar_ext_id'])))
+			if ($upload->init($di->config->get('group_avatars'), $_FILES['avatar']) && $upload->store('avatar', array("user_id" => GROUP_AVATAR_MASK . $group_id, "avatar_ext_id" => $group_info['avatar_ext_id'])))
 			{
 				$avatar_ext_id  = (int) $upload->file_ext_id;
 			}
@@ -86,7 +89,7 @@ if ($is_moderator)
 		'S_HIDDEN_FIELDS'        => $s_hidden_fields,
 		'S_GROUP_CONFIG_ACTION'  => "group_edit.php?" . POST_GROUPS_URL . "=$group_id",
 
-		'AVATAR_EXPLAIN'         => sprintf($lang['AVATAR_EXPLAIN'], $bb_cfg['group_avatars']['max_width'], $bb_cfg['group_avatars']['max_height'], (round($bb_cfg['group_avatars']['max_size'] / 1024))),
+		'AVATAR_EXPLAIN'         => sprintf($lang['AVATAR_EXPLAIN'], $di->config->get('group_avatars.max_width'), $di->config->get('group_avatars.max_height'), (round($di->config->get('group_avatars.max_size') / 1024))),
 		'AVATAR_IMG'             => get_avatar(GROUP_AVATAR_MASK . $group_id, $group_info['avatar_ext_id']),
 	));
 

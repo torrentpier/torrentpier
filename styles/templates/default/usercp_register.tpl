@@ -66,8 +66,8 @@ document.write('<input type="hidden" name="user_timezone" value="'+tz+'" />');
 	<span id="check_name"></span></td>
 </tr>
 <tr>
-	<td class="prof-title">{L_EMAIL}: * <!-- IF EDIT_PROFILE --><!-- ELSE IF $bb_cfg['reg_email_activation'] --><br /><h6>{L_EMAIL_EXPLAIN}</h6><!-- ENDIF --></td>
-	<td><input onBlur="ajax.exec({ action: 'user_register', mode: 'check_email', email: $('[name=\'user_email\']').val()}); return false;" type="text" name="user_email" size="35" maxlength="40" value="{USER_EMAIL}" <!-- IF EDIT_PROFILE --><!-- IF $bb_cfg['emailer_disabled'] -->readonly="readonly" style="color: gray;"<!-- ENDIF --><!-- ENDIF --> />
+	<td class="prof-title">{L_EMAIL}: * <!-- IF EDIT_PROFILE --><!-- ELSE IF $di->config->get('reg_email_activation') --><br /><h6>{L_EMAIL_EXPLAIN}</h6><!-- ENDIF --></td>
+	<td><input onBlur="ajax.exec({ action: 'user_register', mode: 'check_email', email: $('[name=\'user_email\']').val()}); return false;" type="text" name="user_email" size="35" maxlength="40" value="{USER_EMAIL}" <!-- IF EDIT_PROFILE --><!-- IF $di->config->get('emailer_disabled') -->readonly="readonly" style="color: gray;"<!-- ENDIF --><!-- ENDIF --> />
 	<span id="check_email"></span></td>
 </tr>
 <!-- IF EDIT_PROFILE and not ADM_EDIT -->
@@ -106,13 +106,13 @@ document.write('<input type="hidden" name="user_timezone" value="'+tz+'" />');
 <tr>
 	<th colspan="2">{L_PROFILE}</th>
 </tr>
-<!-- IF $bb_cfg['gender'] -->
+<!-- IF $di->config->get('gender') -->
 <tr>
 	<td class="prof-title">{L_GENDER}:</td>
 	<td>{USER_GENDER}</td>
 </tr>
 <!-- ENDIF -->
-<!-- IF $bb_cfg['birthday_enabled'] -->
+<!-- IF $di->config->get('birthday_enabled') -->
 <tr>
 	<td class="prof-title">{L_BIRTHDAY}:</td>
 	<td><input type="date" name="user_birthday" value="{USER_BIRTHDAY}" /></td>
@@ -149,7 +149,7 @@ document.write('<input type="hidden" name="user_timezone" value="'+tz+'" />');
 	</td>
 </tr>
 <!-- ENDIF -->
-<!-- IF $bb_cfg['allow_change']['language'] -->
+<!-- IF $di->config->get('allow_change')['language'] -->
 <tr>
 	<td class="prof-title">{L_BOARD_LANG}:</td>
 	<td>{LANGUAGE_SELECT}</td>
@@ -218,7 +218,7 @@ ajax.callback.posts = function(data){
 		<label><input type="radio" name="user_notify" value="0" <!-- IF not USER_NOTIFY -->checked="checked"<!-- ENDIF --> />{L_NO}</label>
 	</td>
 </tr>
-<!-- IF $bb_cfg['pm_notify_enabled'] -->
+<!-- IF $di->config->get('pm_notify_enabled') -->
 <tr>
 	<td class="prof-title">{L_NOTIFY_ON_PRIVMSG}:</td>
 	<td>
@@ -280,10 +280,10 @@ ajax.callback.posts = function(data){
 		<tr>
 			<td>
 				{AVATAR_EXPLAIN}
-				<!-- IF $bb_cfg['avatars']['up_allowed'] -->
+				<!-- IF $di->config->get('avatars')['up_allowed'] -->
 				<div class="spacer_4"></div>
 				{L_UPLOAD_AVATAR_FILE}:
-				<input type="hidden" name="MAX_FILE_SIZE" value="{$bb_cfg['avatars']['max_size']}" />
+				<input type="hidden" name="MAX_FILE_SIZE" value="{$di->config->get('avatars.max_size')}" />
 				<input type="file" name="avatar" />
 				<!-- ENDIF -->
 			</td>

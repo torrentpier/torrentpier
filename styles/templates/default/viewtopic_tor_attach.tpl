@@ -51,8 +51,8 @@
                 <p>{S_UPLOAD_IMAGE}</p>
                 <p>{L_DOWNLOAD}</p>
                 <!-- ELSE -->
-                <p><a href="{$bb_cfg['dl_url']}{TOPIC_ID}" class="dl-stub"><img src="styles/images/icon_dn.gif" /></a></p>
-                <p><a href="{$bb_cfg['dl_url']}{TOPIC_ID}" class="dl-stub dl-link">{L_DOWNLOAD} .torrent</a></p>
+                <p><a href="{$di->config->get('dl_url')}{TOPIC_ID}" class="dl-stub"><img src="styles/images/icon_dn.gif" /></a></p>
+                <p><a href="{$di->config->get('dl_url')}{TOPIC_ID}" class="dl-stub dl-link">{L_DOWNLOAD} .torrent</a></p>
                 <!-- ENDIF -->
                 <p class="small">{FILESIZE}</p>
                 <p style="padding-top: 6px;"><input id="tor-filelist-btn" type="button" class="lite" value="{L_FILELIST}" /></p>
@@ -85,7 +85,7 @@
                     };
                 </script>
                 <span id="tor_comment">
-                    <!-- IF $bb_cfg['tor_comment'] -->
+                    <!-- IF $di->config->get('tor_comment') -->
                         <input type="text" id="comment" placeholder="{L_COMMENT}" />
                     <!-- ENDIF -->
                     <!-- IF AUTH_MOD -->

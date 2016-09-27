@@ -1,0 +1,24 @@
+{
+  "name": "torrentpier",
+  "description": "TorrentPier. Bittorrent-tracker engine",
+  "main": "build/index.js",
+  "authors": [
+    "Exile <admin@torrentpier.me>"
+  ],
+  "license": "GPL-3.0",
+  "homepage": "https://torrentpier.me/",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "bootstrap": "^3.3.7",
+    "jquery": "^3.1.0",
+    "moment": "^2.14.1",
+    "font-awesome": "fontawesome#^4.6.3",
+    "jquery.quicksearch": "quicksearch#^2.3.0"
+  }
+}

@@ -96,7 +96,10 @@ function prepare_message ($message)
 // Either in a window or inline
 function generate_smilies($mode)
 {
-	global $bb_cfg, $template, $lang, $datastore;
+	global $template, $lang, $datastore;
+
+	/** @var \TorrentPier\Di $di */
+	$di = \TorrentPier\Di::getInstance();
 
 	$inline_columns = 4;
 	$inline_rows = 7;
@@ -120,7 +123,6 @@ function generate_smilies($mode)
 
 		if ($num_smilies)
 		{
-			$smilies_count = ($mode == 'inline') ? min(19, $num_smilies) : $num_smilies;
 			$smilies_split_row = ($mode == 'inline') ? $inline_columns - 1 : $window_columns - 1;
 
 			$s_colspan = 0;
@@ -136,7 +138,7 @@ function generate_smilies($mode)
 
 				$template->assign_block_vars('smilies_row.smilies_col', array(
 					'SMILEY_CODE' => $data['code'],
-					'SMILEY_IMG' => $bb_cfg['smilies_path'] . '/' . $smile_url,
+					'SMILEY_IMG' => $di->config->get('smilies_path') . '/' . $smile_url,
 					'SMILEY_DESC' => $data['emoticon'],
 				));
 
@@ -347,11 +349,12 @@ function strip_bbcode ($message, $stripquotes = true, $fast_and_dirty = false, $
 
 function extract_search_words ($text)
 {
-	global $bb_cfg;
+	/** @var \TorrentPier\Di $di */
+	$di = \TorrentPier\Di::getInstance();
 
-	$max_words_count = $bb_cfg['max_search_words_per_post'];
-	$min_word_len    = max(2, $bb_cfg['search_min_word_len'] - 1);
-	$max_word_len    = $bb_cfg['search_max_word_len'];
+	$max_words_count = $di->config->get('max_search_words_per_post');
+	$min_word_len    = max(2, $di->config->get('search_min_word_len') - 1);
+	$max_word_len    = $di->config->get('search_max_word_len');
 
 	$text = ' ' . str_compact(strip_tags(mb_strtolower($text))) . ' ';
 	$text = str_replace(array('&#91;', '&#93;'), array('[', ']'), $text);
@@ -415,12 +418,13 @@ function replace_synonyms ($text)
 
 function add_search_words ($post_id, $post_message, $topic_title = '', $only_return_words = false)
 {
-	global $bb_cfg;
+	/** @var \TorrentPier\Di $di */
+	$di = \TorrentPier\Di::getInstance();
 
 	$text  = $topic_title .' '. $post_message;
 	$words = ($text) ? extract_search_words($text) : array();
 
-	if ($only_return_words || $bb_cfg['sphinx_enabled'])
+	if ($only_return_words || $di->config->get('sphinx_enabled'))
 	{
 		return join("\n", $words);
 	}
@@ -557,7 +561,8 @@ class bbcode
 	 */
 	function bbcode2html ($text)
 	{
-		global $bb_cfg;
+		/** @var \TorrentPier\Di $di */
+		$di = \TorrentPier\Di::getInstance();
 
 		$text = " $text ";
 		$text = $this->clean_up($text);
@@ -594,7 +599,7 @@ class bbcode
 		$text = $this->new_line2html($text);
 		$text = trim($text);
 
-		if ($bb_cfg['tidy_post'])
+		if ($di->config->get('tidy_post'))
 		{
 			$text = $this->tidy($text);
 		}
@@ -627,7 +632,9 @@ class bbcode
 	 */
 	private function spam_filter ($text)
 	{
-		global $bb_cfg;
+		/** @var \TorrentPier\Di $di */
+		$di = \TorrentPier\Di::getInstance();
+
 		static $spam_words = null;
 		static $spam_replace = ' СПАМ';
 
@@ -637,20 +644,18 @@ class bbcode
 		}
 
 		// set $spam_words and $spam_replace
-		if (!$bb_cfg['spam_filter_file_path'])
+		if (!$di->config->get('spam_filter_file_path'))
 		{
 			return $text;
 		}
 		if (is_null($spam_words))
 		{
-			$spam_words = file_get_contents($bb_cfg['spam_filter_file_path']);
+			$spam_words = file_get_contents($di->config->get('spam_filter_file_path'));
 			$spam_words = strtolower($spam_words);
 			$spam_words = explode("\n", $spam_words);
 		}
 
 		$found_spam = array();
-
-		$tm_start = utime();
 
 		$msg_decoded = $text;
 		$msg_decoded = html_entity_decode($msg_decoded);
@@ -681,7 +686,6 @@ class bbcode
 
 			$text = preg_replace("/($spam_exp)(\S*)/i", $spam_replace, $msg_decoded);
 			$text = htmlCHR($text, false, ENT_NOQUOTES);
-#			bb_log(date("H:i:s") ." | ". sprintf('%.4f', (utime() - $tm_start)) ." | ". sprintf('%-6s', strlen($text)) ." | ". join(' ** ', $found_spam) ."\n", 'spam_filter');
 		}
 
 		return $text;
@@ -713,14 +717,15 @@ class bbcode
 	 */
 	function url_callback ($m)
 	{
-		global $bb_cfg;
+		/** @var \TorrentPier\Di $di */
+		$di = \TorrentPier\Di::getInstance();
 
 		$url = trim($m[1]);
 		$url_name = (isset($m[2])) ? trim($m[2]) : $url;
 
 		if (!preg_match("#^https?://#isu", $url) && !preg_match("/^#/", $url)) $url = 'http://' . $url;
 
-		if (in_array(parse_url($url, PHP_URL_HOST), $bb_cfg['nofollow']['allowed_url']) || $bb_cfg['nofollow']['disabled'])
+		if (in_array(parse_url($url, PHP_URL_HOST), $di->config->get('nofollow.allowed_url')) || $di->config->get('nofollow.disabled'))
 		{
 			$link = "<a href=\"$url\" class=\"postLink\">$url_name</a>";
 		}
@@ -791,13 +796,14 @@ class bbcode
 	 */
 	function make_url_clickable_callback ($m)
 	{
-		global $bb_cfg;
+		/** @var \TorrentPier\Di $di */
+		$di = \TorrentPier\Di::getInstance();
 
 		$max_len = 70;
 		$href    = $m[1];
 		$name    = (mb_strlen($href, 'UTF-8') > $max_len) ? mb_substr($href, 0, $max_len - 19) .'...'. mb_substr($href, -16) : $href;
 
-		if (in_array(parse_url($href, PHP_URL_HOST), $bb_cfg['nofollow']['allowed_url']) || $bb_cfg['nofollow']['disabled'])
+		if (in_array(parse_url($href, PHP_URL_HOST), $di->config->get('nofollow.allowed_url')) || $di->config->get('nofollow.disabled'))
 		{
 			$link = "<a href=\"$href\" class=\"postLink\">$name</a>";
 		}
@@ -972,15 +978,18 @@ function get_words_rate ($text)
 
 function hide_passkey ($str)
 {
-	global $bb_cfg;
-	return preg_replace("#\?{$bb_cfg['passkey_key']}=[a-zA-Z0-9]{". BT_AUTH_KEY_LENGTH ."}#", "?{$bb_cfg['passkey_key']}=passkey", $str);
+	/** @var \TorrentPier\Di $di */
+	$di = \TorrentPier\Di::getInstance();
+
+	return preg_replace("#\?{$di->config->get('passkey_key')}=[a-zA-Z0-9]{". BT_AUTH_KEY_LENGTH ."}#", "?{$di->config->get('passkey_key')}=passkey", $str);
 }
 
 function get_parsed_post ($postrow, $mode = 'full', $return_chars = 600)
 {
-	global $bb_cfg;
+	/** @var \TorrentPier\Di $di */
+	$di = \TorrentPier\Di::getInstance();
 
-	if ($bb_cfg['use_posts_cache'] && !empty($postrow['post_html']))
+	if ($di->config->get('use_posts_cache') && !empty($postrow['post_html']))
 	{
 		return $postrow['post_html'];
 	}
@@ -988,7 +997,7 @@ function get_parsed_post ($postrow, $mode = 'full', $return_chars = 600)
 	$message = bbcode2html($postrow['post_text']);
 
 	// Posts cache
-	if ($bb_cfg['use_posts_cache'])
+	if ($di->config->get('use_posts_cache'))
 	{
 		DB()->shutdown['post_html'][] = array(
 			'post_id'   => (int) $postrow['post_id'],

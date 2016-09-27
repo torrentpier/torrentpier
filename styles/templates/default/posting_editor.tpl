@@ -158,7 +158,7 @@ function checkForm(form) {
 <!-- IF QUICK_REPLY -->
 <!-- IF IN_PM -->
 <!-- ELSE -->
-<!-- IF $bb_cfg['use_ajax_posts'] && !IS_GUEST -->
+<!-- IF $di->config->get('use_ajax_posts') && !IS_GUEST -->
 	if(form.message.value.length < 100 && submitted)
 	{
 		setTimeout(function() {

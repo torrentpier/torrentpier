@@ -2,6 +2,9 @@
 
 if (!defined('BB_ROOT')) die(basename(__FILE__));
 
+/** @var \TorrentPier\Di $di */
+$di = \TorrentPier\Di::getInstance();
+
 require(INC_DIR .'bbcode.php');
 
 $datastore->enqueue(array(
@@ -47,7 +50,7 @@ if (IS_ADMIN)
 
 if (bf($profiledata['user_opt'], 'user_opt', 'user_viewemail') || $profiledata['user_id'] == $userdata['user_id'] || IS_AM)
 {
-	$email_uri = ($bb_cfg['board_email_form']) ? 'profile.php?mode=email&amp;'. POST_USERS_URL .'='. $profiledata['user_id'] : 'mailto:'. $profiledata['user_email'];
+	$email_uri = ($di->config->get('board_email_form')) ? 'profile.php?mode=email&amp;'. POST_USERS_URL .'='. $profiledata['user_id'] : 'mailto:'. $profiledata['user_email'];
 	$email = '<a class="editable" href="'. $email_uri .'">'. $profiledata['user_email'] .'</a>';
 }
 else
@@ -61,7 +64,7 @@ else
 
 $profile_user_id = ($profiledata['user_id'] == $userdata['user_id']);
 
-$signature = ($bb_cfg['allow_sig'] && $profiledata['user_sig']) ? $profiledata['user_sig'] : '';
+$signature = ($di->config->get('allow_sig') && $profiledata['user_sig']) ? $profiledata['user_sig'] : '';
 
 if(bf($profiledata['user_opt'], 'user_opt', 'dis_sig'))
 {
@@ -103,9 +106,9 @@ $template->assign_vars(array(
 	'SKYPE'                => $profiledata['user_skype'],
 	'TWITTER'              => $profiledata['user_twitter'],
 	'USER_POINTS'          => $profiledata['user_points'],
-	'GENDER'               => ($bb_cfg['gender']) ? $lang['GENDER_SELECT'][$profiledata['user_gender']] : '',
-	'BIRTHDAY'             => ($bb_cfg['birthday_enabled'] && $profiledata['user_birthday'] != '0000-00-00') ? $profiledata['user_birthday'] : '',
-	'AGE'                  => ($bb_cfg['birthday_enabled'] && $profiledata['user_birthday'] != '0000-00-00') ? birthday_age($profiledata['user_birthday']) : '',
+	'GENDER'               => ($di->config->get('gender')) ? $lang['GENDER_SELECT'][$profiledata['user_gender']] : '',
+	'BIRTHDAY'             => ($di->config->get('birthday_enabled') && $profiledata['user_birthday'] != '0000-00-00') ? $profiledata['user_birthday'] : '',
+	'AGE'                  => ($di->config->get('birthday_enabled') && $profiledata['user_birthday'] != '0000-00-00') ? birthday_age($profiledata['user_birthday']) : '',
 
 	'L_VIEWING_PROFILE'    => sprintf($lang['VIEWING_USER_PROFILE'], $profiledata['username']),
 	'L_MY_PROFILE'         => sprintf($lang['VIEWING_MY_PROFILE'], 'profile.php?mode=editprofile'),

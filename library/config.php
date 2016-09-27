@@ -110,7 +110,6 @@ $config = [
 
 	// Cache
 	'cache' => [
-		'pconnect' => true,
 		'db_dir'   => realpath(BB_ROOT) .'/internal_data/cache/filecache/',
 		'prefix'   => 'tp_', // Префикс кеша ('tp_')
 		'memcache' => [
@@ -123,16 +122,6 @@ $config = [
 			'host'         => '127.0.0.1',
 			'port'         => 6379,
 			'con_required' => true,
-		],
-		'engines' => [
-			// Available cache types: memcache, sqlite, redis, apc, xcache (default of filecache)
-			# name => array( (string) type, (array) cfg )
-			'bb_cache'      => ['filecache', []],
-			'bb_config'     => ['filecache', []],
-			'tr_cache'      => ['filecache', []],
-			'session_cache' => ['filecache', []],
-			'bb_login_err'  => ['filecache', []],
-			'bb_poll_data'  => ['filecache', []],
 		]
 	],
 
@@ -205,7 +194,6 @@ $config = [
 
 	// Language
 	'charset'       => 'utf8', // page charset
-	'auto_language' => true, // select user-preferred language automatically
 	'lang' => [
 		'ru' => [
 			'name'     => 'Русский',
@@ -361,9 +349,9 @@ $config = [
 	// PM
 	'privmsg_disable'      => false, // отключить систему личных сообщений на форуме
 	'max_outgoing_pm_cnt'  => 10,    // ограничение на кол. одновременных исходящих лс (для замедления рассылки спама)
-	'max_inbox_privmsgs'   => 200,   // максимальное число сообщений в папке входящие
-	'max_savebox_privmsgs' => 25,    // максимальное число сообщений в папке сохраненные
-	'max_sentbox_privmsgs' => 50,    // максимальное число сообщений в папке отправленные
+	'max_inbox_privmsgs'   => 500,   // максимальное число сообщений в папке входящие (удалить)
+	'max_savebox_privmsgs' => 500,   // максимальное число сообщений в папке сохраненные (удалить)
+	'max_sentbox_privmsgs' => 500,   // максимальное число сообщений в папке отправленные (удалить)
 	'pm_days_keep'         => 180,   // время хранения ЛС
 
 	// Actions log
@@ -523,33 +511,72 @@ $config = [
 		'0.4' => 1,
 		'0.5' => 2,
 		'0.6' => 3,
-	]
-];
+	],
 
-if (!empty($_SERVER['HTTP_ACCEPT_LANGUAGE']) && $config['auto_language'])
-{
-	$user_lang = substr($_SERVER['HTTP_ACCEPT_LANGUAGE'], 0, 2);
-	if (file_exists(LANG_ROOT_DIR . $user_lang .'/'))
-	{
-		$config['default_lang_dir'] = LANG_ROOT_DIR . $user_lang .'/';
-		$config['default_lang'] = $user_lang;
-	}
-	else
-	{
-		$config['default_lang_dir'] = LANG_ROOT_DIR .'en/';
-		$config['default_lang'] = 'en';
-	}
-}
-else
-{
-	if (isset($config['default_lang']) && file_exists(LANG_ROOT_DIR . $config['default_lang'] .'/'))
-	{
-		$config['default_lang_dir'] = LANG_ROOT_DIR . $config['default_lang'] .'/';
-	}
-	else
-	{
-		$config['default_lang_dir'] = LANG_ROOT_DIR .'en/';
-	}
-}
+	// Иконки статусов раздач
+	'tor_icons' => [
+		TOR_NOT_APPROVED  => '<span class="tor-icon tor-not-approved">*</span>',
+		TOR_CLOSED        => '<span class="tor-icon tor-closed">x</span>',
+		TOR_APPROVED      => '<span class="tor-icon tor-approved">&radic;</span>',
+		TOR_NEED_EDIT     => '<span class="tor-icon tor-need-edit">?</span>',
+		TOR_NO_DESC       => '<span class="tor-icon tor-no-desc">!</span>',
+		TOR_DUP           => '<span class="tor-icon tor-dup">D</span>',
+		TOR_CLOSED_CPHOLD => '<span class="tor-icon tor-closed-cp">&copy;</span>',
+		TOR_CONSUMED      => '<span class="tor-icon tor-consumed">&sum;</span>',
+		TOR_DOUBTFUL      => '<span class="tor-icon tor-approved">#</span>',
+		TOR_CHECKING      => '<span class="tor-icon tor-checking">%</span>',
+		TOR_TMP           => '<span class="tor-icon tor-dup">T</span>',
+		TOR_PREMOD        => '<span class="tor-icon tor-dup">&#8719;</span>',
+	],
+
+	// Запрет на скачивание
+	'tor_frozen' => [
+		TOR_CHECKING      => true,
+		TOR_CLOSED        => true,
+		TOR_CLOSED_CPHOLD => true,
+		TOR_CONSUMED      => true,
+		TOR_DUP           => true,
+		TOR_NO_DESC       => true,
+		TOR_PREMOD        => true,
+	],
+
+	// Разрешение на скачку автором, если закрыто на скачивание.
+	'tor_frozen_author_download' => [
+		TOR_CHECKING      => true,
+		TOR_NO_DESC       => true,
+		TOR_PREMOD        => true,
+	],
+
+	// Запрет на редактирование головного сообщения
+	'tor_cannot_edit' => [
+		TOR_CHECKING      => true,
+		TOR_CLOSED        => true,
+		TOR_CONSUMED      => true,
+		TOR_DUP           => true,
+	],
+
+	// Запрет на создание новых раздач если стоит статус недооформлено/неоформлено/сомнительно
+	'tor_cannot_new' => [TOR_NEED_EDIT, TOR_NO_DESC, TOR_DOUBTFUL],
+
+	// Разрешение на ответ релизера, если раздача исправлена.
+	'tor_reply' => [TOR_NEED_EDIT, TOR_NO_DESC, TOR_DOUBTFUL],
+
+	// Если такой статус у релиза, то статистика раздачи будет скрыта
+	'tor_no_tor_act' => [
+		TOR_CLOSED        => true,
+		TOR_DUP           => true,
+		TOR_CLOSED_CPHOLD => true,
+		TOR_CONSUMED      => true,
+	],
+
+	// Vote graphic length defines the maximum length of a vote result graphic, ie. 100% = this length
+	'vote_graphic_length' => 205,
+	'privmsg_graphic_length' => 175,
+	'topic_left_column_witdh' => 150,
+
+	// Images auto-resize
+	'post_img_width_decr' => 52,
+	'attach_img_width_decr' => 130,
+];
 
 return $config;

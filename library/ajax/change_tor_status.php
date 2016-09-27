@@ -2,14 +2,17 @@
 
 if (!defined('IN_AJAX')) die(basename(__FILE__));
 
-global $userdata, $bb_cfg, $lang;
+global $userdata, $lang;
+
+/** @var \TorrentPier\Di $di */
+$di = \TorrentPier\Di::getInstance();
 
 if (!isset($this->request['topic_id'])) $this->ajax_die('Invalid topic_id');
 
 $topic_id  = (int) $this->request['topic_id'];
 $mode      = (string) $this->request['mode'];
 
-if ($bb_cfg['tor_comment'])
+if ($di->config->get('tor_comment'))
 {
 	$comment = (string) $this->request['comment'];
 }
@@ -73,14 +76,14 @@ switch ($mode)
 
 		change_tor_status($topic_id, $new_status);
 
-		$this->response['status'] = $bb_cfg['tor_icons'][$new_status] .' <b> '. $lang['TOR_STATUS_NAME'][$new_status]. '</b> &middot; '. profile_url($userdata) .' &middot; <i>'. delta_time(TIMENOW) . $lang['TOR_BACK']. '</i>';
+		$this->response['status'] = $di->config->get('tor_icons.' . $new_status) .' <b> '. $lang['TOR_STATUS_NAME'][$new_status]. '</b> &middot; '. profile_url($userdata) .' &middot; <i>'. delta_time(TIMENOW) . $lang['TOR_BACK']. '</i>';
 
-		if ($bb_cfg['tor_comment'] && (($comment && $comment != $lang['COMMENT']) || in_array($new_status, $bb_cfg['tor_reply'])))
+		if ($di->config->get('tor_comment') && (($comment && $comment != $lang['COMMENT']) || in_array($new_status, $di->config->get('tor_reply'))))
 		{
 			if ($tor['poster_id'] > 0)
 			{
 				$subject = sprintf($lang['TOR_MOD_TITLE'], $tor['topic_title']);
-				$message = sprintf($lang['TOR_MOD_MSG'], get_username($tor['poster_id']), make_url(TOPIC_URL . $topic_id), $bb_cfg['tor_icons'][$new_status] .' '.$lang['TOR_STATUS_NAME'][$new_status]);
+				$message = sprintf($lang['TOR_MOD_MSG'], get_username($tor['poster_id']), make_url(TOPIC_URL . $topic_id), $di->config->get('tor_icons.' . $new_status) .' '.$lang['TOR_STATUS_NAME'][$new_status]);
 
 				if ($comment && $comment != $lang['COMMENT']) $message .= "\n\n[b]". $lang['COMMENT'] .'[/b]: '. $comment;
 
@@ -91,7 +94,7 @@ switch ($mode)
 	break;
 
 	case 'status_reply':
-		if (!$bb_cfg['tor_comment']) $this->ajax_die($lang['MODULE_OFF']);
+		if (!$di->config->get('tor_comment')) $this->ajax_die($lang['MODULE_OFF']);
 
 		$subject = sprintf($lang['TOR_AUTH_TITLE'], $tor['topic_title']);
 		$message = sprintf($lang['TOR_AUTH_MSG'], get_username($tor['checked_user_id']), make_url(TOPIC_URL . $topic_id), $tor['topic_title']);

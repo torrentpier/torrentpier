@@ -46,9 +46,9 @@ if ($mode != 'poll_vote')
 // проверка на возможность вносить изменения
 if ($mode == 'poll_delete')
 {
-	if ($t_data['topic_time'] < TIMENOW - $bb_cfg['poll_max_days'] * 86400)
+	if ($t_data['topic_time'] < TIMENOW - $di->config->get('poll_max_days') * 86400)
 	{
-		bb_die(sprintf($lang['NEW_POLL_DAYS'], $bb_cfg['poll_max_days']));
+		bb_die(sprintf($lang['NEW_POLL_DAYS'], $di->config->get('poll_max_days')));
 	}
 	if (!IS_ADMIN && ($t_data['topic_vote'] != POLL_FINISHED))
 	{
@@ -174,8 +174,10 @@ class bb_poll
 
 	function bb_poll ()
 	{
-		global $bb_cfg;
-		$this->max_votes = $bb_cfg['max_poll_options'];
+		/** @var \TorrentPier\Di $di */
+		$di = \TorrentPier\Di::getInstance();
+
+		$this->max_votes = $di->config->get('max_poll_options');
 	}
 
 	function build_poll_data ($posted_data)

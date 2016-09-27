@@ -7,6 +7,9 @@ if (!empty($setmodules))
 }
 require('./pagestart.php');
 
+/** @var \TorrentPier\Di $di */
+$di = \TorrentPier\Di::getInstance();
+
 array_deep($_POST, 'trim');
 
 require(INC_DIR .'functions_selects.php');
@@ -945,10 +948,10 @@ else
 	}
 	else
 	{
-		$offset = ( ($page - 1) * $bb_cfg['topics_per_page']);
+		$offset = ( ($page - 1) * $di->config->get('topics_per_page'));
 	}
 
-	$limit = "LIMIT $offset, ".$bb_cfg['topics_per_page'];
+	$limit = "LIMIT $offset, ".$di->config->get('topics_per_page');
 
 	$select_sql .= " $limit";
 
@@ -966,7 +969,7 @@ else
 			bb_die($lang['SEARCH_NO_RESULTS']);
 		}
 	}
-	$num_pages = ceil( ( $total_pages['total'] / $bb_cfg['topics_per_page'] ) );
+	$num_pages = ceil( ( $total_pages['total'] / $di->config->get('topics_per_page') ) );
 
 	$pagination = '';
 

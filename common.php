@@ -52,7 +52,6 @@ $di->register(new \TorrentPier\ServiceProviders\TranslationServiceProvider());
 $di->register(new \TorrentPier\ServiceProviders\TwigServiceProvider());
 $di->register(new \TorrentPier\ServiceProviders\CaptchaServiceProvider());
 
-$bb_cfg        = $di->config->toArray();
 $page_cfg      = $di->config->page->toArray();
 $tr_cfg        = $di->config->tracker->toArray();
 $rating_limits = $di->config->rating->toArray();
@@ -63,10 +62,10 @@ use Zend\Loader\StandardAutoloader;
 $loader = new StandardAutoloader(array('autoregister_zf' => true));
 $loader->register();
 
-$server_protocol = ($bb_cfg['cookie_secure']) ? 'https://' : 'http://';
-$server_port = (in_array($bb_cfg['server_port'], array(80, 443))) ? '' : ':' . $bb_cfg['server_port'];
-define('FORUM_PATH', $bb_cfg['script_path']);
-define('FULL_URL', $server_protocol . $bb_cfg['server_name'] . $server_port . $bb_cfg['script_path']);
+$server_protocol = ($di->config->get('cookie_secure')) ? 'https://' : 'http://';
+$server_port = (in_array($di->config->get('server_port'), array(80, 443))) ? '' : ':' . $di->config->get('server_port');
+define('FORUM_PATH', $di->config->get('script_path'));
+define('FULL_URL', $server_protocol . $di->config->get('server_name') . $server_port . $di->config->get('script_path'));
 unset($server_protocol, $server_port);
 
 // Debug options
@@ -82,8 +81,8 @@ define('BT_AUTH_KEY_LENGTH', 10);
 
 define('PEER_HASH_PREFIX',   'peer_');
 define('PEERS_LIST_PREFIX',  'peers_list_');
-define('PEER_HASH_EXPIRE',   round($bb_cfg['announce_interval'] * (0.85 * $tr_cfg['expire_factor']))); // sec
-define('PEERS_LIST_EXPIRE',  round($bb_cfg['announce_interval'] * 0.7)); // sec
+define('PEER_HASH_EXPIRE',   round($di->config->get('announce_interval') * (0.85 * $tr_cfg['expire_factor']))); // sec
+define('PEERS_LIST_EXPIRE',  round($di->config->get('announce_interval') * 0.7)); // sec
 
 define('DL_STATUS_RELEASER', -1);
 define('DL_STATUS_DOWN',      0);
@@ -115,7 +114,7 @@ $DBS = new DBS([
 			false
 		]
 	],
-	'db_alias' => $bb_cfg['db_alias']
+	'db_alias' => $di->config->get('db_alias')
 ]);
 
 /**
@@ -140,35 +139,35 @@ require(INC_DIR . 'datastore/xcache.php');
 require(INC_DIR . 'datastore/file.php');
 
 // Initialize datastore
-switch ($bb_cfg['datastore_type'])
+switch ($di->config->get('datastore_type'))
 {
 	case 'memcache':
-		$datastore = new datastore_memcache($bb_cfg['cache']['memcache'], $bb_cfg['cache']['prefix']);
+		$datastore = new datastore_memcache($di->config->get('cache.memcache'), $di->config->get('cache.prefix'));
 		break;
 
 	case 'sqlite':
 		$default_cfg = array(
-			'db_file_path' => $bb_cfg['cache']['db_dir'] .'datastore.sqlite.db',
+			'db_file_path' => $di->config->get('cache.db_dir') .'datastore.sqlite.db',
 			'pconnect'     => true,
 			'con_required' => true,
 		);
-		$datastore = new datastore_sqlite($default_cfg, $bb_cfg['cache']['prefix']);
+		$datastore = new datastore_sqlite($default_cfg, $di->config->get('cache.prefix'));
 		break;
 
 	case 'redis':
-		$datastore = new datastore_redis($bb_cfg['cache']['redis'], $bb_cfg['cache']['prefix']);
+		$datastore = new datastore_redis($di->config->get('cache.redis'), $di->config->get('cache.prefix'));
 		break;
 
 	case 'apc':
-		$datastore = new datastore_apc($bb_cfg['cache']['prefix']);
+		$datastore = new datastore_apc($di->config->get('cache.prefix'));
 		break;
 
 	case 'xcache':
-		$datastore = new datastore_xcache($bb_cfg['cache']['prefix']);
+		$datastore = new datastore_xcache($di->config->get('cache.prefix'));
 		break;
 
 	case 'filecache':
-		default: $datastore = new datastore_file($bb_cfg['cache']['db_dir'] . 'datastore/', $bb_cfg['cache']['prefix']);
+		default: $datastore = new datastore_file($di->config->get('cache.db_dir') . 'datastore/', $di->config->get('cache.prefix'));
 }
 
 function sql_dbg_enabled ()

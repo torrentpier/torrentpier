@@ -177,7 +177,7 @@ ajax.callback.gen_passkey = function(data){
 <style type="text/css">
 #traf-stats-tbl { width: 468px; background: #F9F9F9; border: 1px solid #A5AFB4; border-collapse: separate; }
 #traf-stats-tbl th, #traf-stats-tbl td { padding: 2px 10px 3px; text-align: center; white-space: nowrap; font-size: 11px; }
-#traf-stats-tbl th { padding: 2px <!-- IF $bb_cfg['seed_bonus_enabled'] -->11<!-- ELSE -->22<!-- ENDIF -->px 3px; }
+#traf-stats-tbl th { padding: 2px 11px 3px; }
 <!-- IF TRAF_STATS -->
 #traf-stats-tbl th { padding: 2px 30px 3px; }
 <!-- ENDIF -->
@@ -449,7 +449,7 @@ ajax.callback.gen_passkey = function(data){
 							<th>{L_UPLOADED}</th>
 							<th>{L_RELEASED}</th>
 							<th>{L_BONUS}</th>
-							<!-- IF $bb_cfg['seed_bonus_enabled'] --><th>{L_SEED_BONUS}</th><!-- ENDIF -->
+							<!-- IF $di->config->get('seed_bonus_enabled') --><th>{L_SEED_BONUS}</th><!-- ENDIF -->
 						</tr>
 						<tr class="row1">
 							<td>{L_TD_TRAF}</td>
@@ -457,7 +457,7 @@ ajax.callback.gen_passkey = function(data){
 							<td class="seed">{TD_UL}</td>
 							<td class="seed">{TD_REL}</td>
 							<td class="seed">{TD_BONUS}</td>
-							<!-- IF $bb_cfg['seed_bonus_enabled'] --><td class="points">{TD_POINTS}</td><!-- ENDIF -->
+							<!-- IF $di->config->get('seed_bonus_enabled') --><td class="points">{TD_POINTS}</td><!-- ENDIF -->
 						</tr>
 						<tr class="row5">
 							<td>{L_YS_TRAF}</td>
@@ -465,7 +465,7 @@ ajax.callback.gen_passkey = function(data){
 							<td class="seed">{YS_UL}</td>
 							<td class="seed">{YS_REL}</td>
 							<td class="seed">{YS_BONUS}</td>
-							<!-- IF $bb_cfg['seed_bonus_enabled'] --><td class="points">{YS_POINTS}</td><!-- ENDIF -->
+							<!-- IF $di->config->get('seed_bonus_enabled') --><td class="points">{YS_POINTS}</td><!-- ENDIF -->
 						</tr>
 						<tr class="row1">
 							<td>{L_TOTAL_TRAF}</td>
@@ -473,13 +473,13 @@ ajax.callback.gen_passkey = function(data){
 							<td id="u_up_total"><span class="editable bold seedmed">{UP_TOTAL}</span></td>
 							<td id="u_up_release"><span class="editable bold seedmed">{RELEASED}</span></td>
 							<td id="u_up_bonus"><span class="editable bold seedmed">{UP_BONUS}</span></td>
-							<!-- IF $bb_cfg['seed_bonus_enabled'] --><td id="user_points"><span class="editable bold points">{USER_POINTS}</span></td><!-- ENDIF -->
+							<!-- IF $di->config->get('seed_bonus_enabled') --><td id="user_points"><span class="editable bold points">{USER_POINTS}</span></td><!-- ENDIF -->
 						</tr>
 						<tr class="row5">
 							<td colspan="1">{L_SPEED}</td>
 							<td colspan="2">{L_DL_DL_SPEED}: {SPEED_DOWN}</td>
 							<td colspan="2">{L_DL_UL_SPEED}: {SPEED_UP}</td>
-							<!-- IF $bb_cfg['seed_bonus_enabled'] --><td colspan="1"><!-- IF PROFILE_USER --><a href="profile.php?mode=bonus">{L_EXCHANGE}</a><!-- ENDIF --></td><!-- ENDIF -->
+							<!-- IF $di->config->get('seed_bonus_enabled') --><td colspan="1"><!-- IF PROFILE_USER --><a href="profile.php?mode=bonus">{L_EXCHANGE}</a><!-- ENDIF --></td><!-- ENDIF -->
 						</tr>
 					</table>
 				</td>

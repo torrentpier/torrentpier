@@ -7,6 +7,9 @@ if (!empty($setmodules))
 }
 require('./pagestart.php');
 
+/** @var \TorrentPier\Di $di */
+$di = \TorrentPier\Di::getInstance();
+
 $datastore->enqueue(array(
 	'moderators',
 ));
@@ -155,7 +158,7 @@ if (($var =& $_REQUEST[$daysback_key]) && ($var != $def_days))
 }
 if (($var =& $_REQUEST[$datetime_key]) && ($var != $def_datetime))
 {
-	$tz = TIMENOW + (3600 * $bb_cfg['board_timezone']);
+	$tz = TIMENOW + (3600 * $di->config->get('board_timezone'));
 	if (($tmp_timestamp = strtotime($var, $tz)) > 0)
 	{
 		$datetime_val = $tmp_timestamp;

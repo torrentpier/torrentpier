@@ -70,7 +70,7 @@ $need_captcha = false;
 if (!$mod_admin_login)
 {
 	$need_captcha = $cache->has('l_err_'. USER_IP);
-	if ($need_captcha < $bb_cfg['invalid_logins']) $need_captcha = false;
+	if ($need_captcha < $di->config->get('invalid_logins')) $need_captcha = false;
 }
 
 // login
@@ -89,7 +89,7 @@ if (isset($_POST['login']))
 	}
 
 	// Captcha
-	if ($need_captcha && !bb_captcha('check') && !$bb_cfg['captcha']['disabled'])
+	if ($need_captcha && !bb_captcha('check') && !$di->config->get('captcha.disabled'))
 	{
 		$login_errors[] = $lang['CAPTCHA_WRONG'];
 	}
@@ -98,7 +98,7 @@ if (isset($_POST['login']))
 	{
 		if ($user->login($_POST, $mod_admin_login))
 		{
-			$redirect_url = (defined('FIRST_LOGON')) ? $bb_cfg['first_logon_redirect_url'] : $redirect_url;
+			$redirect_url = (defined('FIRST_LOGON')) ? $di->config->get('first_logon_redirect_url') : $redirect_url;
 			// Удаление при введении правильной комбинации логин/пароль
 			$cache->delete('l_err_'. USER_IP);
 
@@ -110,7 +110,7 @@ if (isset($_POST['login']))
 
 		if (!$mod_admin_login) {
 			$login_err = $cache->get('l_err_' . USER_IP);
-			if ($login_err > $bb_cfg['invalid_logins']) $need_captcha = true;
+			if ($login_err > $di->config->get('invalid_logins')) $need_captcha = true;
 			$cache->set('l_err_' . USER_IP, ($login_err + 1), 3600);
 		} else {
 			$need_captcha = false;
@@ -127,7 +127,7 @@ if (IS_GUEST || $mod_admin_login)
 		'ERROR_MESSAGE'   => join('<br />', $login_errors),
 		'ADMIN_LOGIN'     => $mod_admin_login,
 		'REDIRECT_URL'    => htmlCHR($redirect_url),
-		'CAPTCHA_HTML'    => ($need_captcha && !$bb_cfg['captcha']['disabled']) ? bb_captcha('get') : '',
+		'CAPTCHA_HTML'    => ($need_captcha && !$di->config->get('captcha.disabled')) ? bb_captcha('get') : '',
 		'PAGE_TITLE'      => $lang['LOGIN'],
 		'S_LOGIN_ACTION'  => LOGIN_URL,
 	));

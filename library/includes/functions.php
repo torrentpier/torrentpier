@@ -4,22 +4,31 @@ if (!defined('BB_ROOT')) die(basename(__FILE__));
 
 function get_path_from_id ($id, $ext_id, $base_path, $first_div, $sec_div)
 {
-	global $bb_cfg;
-	$ext = isset($bb_cfg['file_id_ext'][$ext_id]) ? $bb_cfg['file_id_ext'][$ext_id] : '';
+	/** @var \TorrentPier\Di $di */
+	$di = \TorrentPier\Di::getInstance();
+
+	$ext = $di->config->get('file_id_ext.' . $ext_id) ? $di->config->get('file_id_ext.' . $ext_id) : '';
+
 	return ($base_path ? "$base_path/" : '') . floor($id/$first_div) .'/'. ($id % $sec_div) .'/'. $id . ($ext ? ".$ext" : '');
 }
 
 function get_avatar_path ($id, $ext_id, $base_path = null, $first_div = 10000, $sec_div = 100)
 {
-	global $bb_cfg;
-	$base_path = isset($base_path) ? $base_path : $bb_cfg['avatars']['upload_path'];
+	/** @var \TorrentPier\Di $di */
+	$di = \TorrentPier\Di::getInstance();
+
+	$base_path = isset($base_path) ? $base_path : $di->config->get('avatars.upload_path');
+
 	return get_path_from_id($id, $ext_id, $base_path, $first_div, $sec_div);
 }
 
 function get_attach_path ($id, $ext_id = '', $base_path = null, $first_div = 10000, $sec_div = 100)
 {
-	global $bb_cfg;
-	$base_path = isset($base_path) ? $base_path : $bb_cfg['attach']['upload_path'];
+	/** @var \TorrentPier\Di $di */
+	$di = \TorrentPier\Di::getInstance();
+
+	$base_path = isset($base_path) ? $base_path : $di->config->get('attach.upload_path');
+
 	return get_path_from_id($id, $ext_id, $base_path, $first_div, $sec_div);
 }
 
@@ -706,16 +715,6 @@ class html_common
 
 		return '<label><input type="checkbox" '. $id . $name . $value . $checked . $disabled .' />&nbsp;'. $title .'&nbsp;</label>';
 	}
-
-#	function build_option ($opt_name, $opt_val, $selected = null, $max_length = false)
-#	{
-#		return "\t\t<option value=\"". htmlCHR($opt_val) .'"'. (($selected) ? ' selected="selected"' : '') .'>'. htmlCHR(str_short($opt_name, $max_length)) ."</option>\n";
-#	}
-
-#	function build_optgroup ($label, $contents, $max_length = false)
-#	{
-#		return "\t<optgroup label=\"&nbsp;". htmlCHR(str_short($label, $max_length)) ."\">\n". $contents ."\t</optgroup>\n";
-#	}
 }
 
 function build_select ($name, $params, $selected = null, $max_length = HTML_SELECT_MAX_LENGTH, $multiple_size = null, $js = '')
@@ -897,7 +896,8 @@ function humn_size ($size, $rounder = null, $min = null, $space = '&nbsp;')
 
 function bt_show_ip ($ip, $port = '')
 {
-	global $bb_cfg;
+	/** @var \TorrentPier\Di $di */
+	$di = \TorrentPier\Di::getInstance();
 
 	if (IS_AM)
 	{
@@ -907,13 +907,14 @@ function bt_show_ip ($ip, $port = '')
 	}
 	else
 	{
-		return ($bb_cfg['bt_show_ip_only_moder']) ? false : decode_ip_xx($ip);
+		return ($di->config->get('bt_show_ip_only_moder')) ? false : decode_ip_xx($ip);
 	}
 }
 
 function bt_show_port ($port)
 {
-	global $bb_cfg;
+	/** @var \TorrentPier\Di $di */
+	$di = \TorrentPier\Di::getInstance();
 
 	if (IS_AM)
 	{
@@ -921,7 +922,7 @@ function bt_show_port ($port)
 	}
 	else
 	{
-		return ($bb_cfg['bt_show_port_only_moder']) ? false : $port;
+		return ($di->config->get('bt_show_port_only_moder')) ? false : $port;
 	}
 }
 
@@ -1479,15 +1480,18 @@ function get_forum_select ($mode = 'guest', $name = POST_FORUM_URL, $selected = 
 
 function setup_style ()
 {
-	global $bb_cfg, $template, $userdata;
+	global $template, $userdata;
+
+	/** @var \TorrentPier\Di $di */
+	$di = \TorrentPier\Di::getInstance();
 
 	// AdminCP works only with default template
-	$tpl_dir_name = defined('IN_ADMIN') ? 'default'   : basename($bb_cfg['tpl_name']);
-	$stylesheet   = defined('IN_ADMIN') ? 'main.css'  : basename($bb_cfg['stylesheet']);
+	$tpl_dir_name = defined('IN_ADMIN') ? 'default'   : basename($di->config->get('tpl_name'));
+	$stylesheet   = defined('IN_ADMIN') ? 'main.css'  : basename($di->config->get('stylesheet'));
 
 	if (!IS_GUEST && !empty($userdata['tpl_name']))
 	{
-		foreach ($bb_cfg['templates'] as $folder => $name)
+		foreach ($di->config->get('templates') as $folder => $name)
 		{
 			if ($userdata['tpl_name'] == $folder) $tpl_dir_name = basename($userdata['tpl_name']);
 		}
@@ -1500,7 +1504,7 @@ function setup_style ()
 		'BB_ROOT'          => BB_ROOT,
 		'SPACER'           => make_url('styles/images/spacer.gif'),
 		'STYLESHEET'       => make_url($css_dir . $stylesheet),
-		'EXT_LINK_NEW_WIN' => $bb_cfg['ext_link_new_win'],
+		'EXT_LINK_NEW_WIN' => $di->config->get('ext_link_new_win'),
 		'TPL_DIR'          => make_url($css_dir),
 		'SITE_URL'         => make_url('/'),
 	));
@@ -1515,14 +1519,17 @@ function setup_style ()
 // Create date / time with format and friendly date
 function bb_date ($gmepoch, $format = false, $friendly_date = true)
 {
-	global $bb_cfg, $lang, $userdata;
+	global $lang, $userdata;
 
-	if (!$format) $format = $bb_cfg['default_dateformat'];
-	if (empty($lang)) require_once($bb_cfg['default_lang_dir'] .'main.php');
+	/** @var \TorrentPier\Di $di */
+	$di = \TorrentPier\Di::getInstance();
+
+	if (!$format) $format = $di->config->get('default_dateformat');
+	if (empty($lang)) require_once($di->config->get('default_lang_dir') .'main.php');
 
 	if (empty($userdata['session_logged_in']))
 	{
-		$tz = $bb_cfg['board_timezone'];
+		$tz = $di->config->get('board_timezone');
 	}
 	else
 	{
@@ -1565,15 +1572,18 @@ function bb_date ($gmepoch, $format = false, $friendly_date = true)
 		}
 	}
 
-	return ($bb_cfg['translate_dates']) ? strtr(strtoupper($date), $lang['DATETIME']) : $date;
+	return ($di->config->get('translate_dates')) ? strtr(strtoupper($date), $lang['DATETIME']) : $date;
 }
 
 function birthday_age ($date)
 {
-	global $bb_cfg;
+	/** @var \TorrentPier\Di $di */
+	$di = \TorrentPier\Di::getInstance();
+
 	if (!$date) return false;
 
-	$tz = TIMENOW + (3600 * $bb_cfg['board_timezone']);
+	$tz = TIMENOW + (3600 * $di->config->get('board_timezone'));
+
 	return delta_time(strtotime($date, $tz));
 }
 
@@ -1705,15 +1715,13 @@ function generate_pagination ($base_url, $num_items, $per_page, $start_item, $ad
 //
 function obtain_word_list (&$orig_word, &$replacement_word)
 {
-	global $bb_cfg;
-
 	/** @var \TorrentPier\Di $di */
 	$di = \TorrentPier\Di::getInstance();
 
 	/** @var \TorrentPier\Cache\Adapter $cache */
 	$cache = $di->cache;
 
-	if (!$bb_cfg['use_word_censor']) return false;
+	if (!$di->config->get('use_word_censor')) return false;
 
 	if (!$cache->has('censored')) {
 		$sql = DB()->fetch_rowset("SELECT word, replacement FROM " . BB_WORDS);
@@ -1733,7 +1741,10 @@ function obtain_word_list (&$orig_word, &$replacement_word)
 
 function bb_die ($msg_text)
 {
-	global $ajax, $bb_cfg, $lang, $template, $theme, $user;
+	global $ajax, $lang, $template, $theme, $user;
+
+	/** @var \TorrentPier\Di $di */
+	$di = \TorrentPier\Di::getInstance();
 
 	if (defined('IN_AJAX'))
 	{
@@ -1751,7 +1762,7 @@ function bb_die ($msg_text)
 	// If empty lang
 	if (empty($lang))
 	{
-		require($bb_cfg['default_lang_dir'] .'main.php');
+		require($di->config->get('default_lang_dir') .'main.php');
 	}
 
 	// If empty session
@@ -1765,7 +1776,7 @@ function bb_die ($msg_text)
 	{
 		if (empty($template))
 		{
-			$template = new Template(BB_ROOT ."templates/{$bb_cfg['tpl_name']}");
+			$template = new Template(BB_ROOT ."templates/{$di->config->get('tpl_name')}");
 		}
 		if (empty($theme))
 		{
@@ -1795,14 +1806,15 @@ function bb_die ($msg_text)
 
 function bb_simple_die ($txt)
 {
-	global $bb_cfg;
+	/** @var \TorrentPier\Di $di */
+	$di = \TorrentPier\Di::getInstance();
 
 	if (!empty($_COOKIE['explain']))
 	{
 		bb_die("bb_simple_die:<br /><br />$txt");
 	}
 
-	header('Content-Type: text/plain; charset='. $bb_cfg['charset']);
+	header('Content-Type: text/plain; charset='. $di->config->get('charset'));
 	die($txt);
 }
 
@@ -1825,7 +1837,8 @@ function meta_refresh ($url, $time = 5)
 
 function redirect ($url)
 {
-	global $bb_cfg;
+	/** @var \TorrentPier\Di $di */
+	$di = \TorrentPier\Di::getInstance();
 
 	if (headers_sent($filename, $linenum))
 	{
@@ -1838,11 +1851,11 @@ function redirect ($url)
 	}
 
 	$url = trim($url);
-	$server_protocol = ($bb_cfg['cookie_secure']) ? 'https://' : 'http://';
+	$server_protocol = ($di->config->get('cookie_secure')) ? 'https://' : 'http://';
 
-	$server_name = preg_replace('#^\/?(.*?)\/?$#', '\1', trim($bb_cfg['server_name']));
-	$server_port = ($bb_cfg['server_port'] <> 80) ? ':' . trim($bb_cfg['server_port']) : '';
-	$script_name = preg_replace('#^\/?(.*?)\/?$#', '\1', trim($bb_cfg['script_path']));
+	$server_name = preg_replace('#^\/?(.*?)\/?$#', '\1', trim($di->config->get('server_name')));
+	$server_port = ($di->config->get('server_port') <> 80) ? ':' . trim($di->config->get('server_port')) : '';
+	$script_name = preg_replace('#^\/?(.*?)\/?$#', '\1', trim($di->config->get('script_path')));
 
 	if ($script_name)
 	{
@@ -1969,7 +1982,7 @@ class log_action
 
 	function init ()
 	{
-		global $lang, $bb_cfg;
+		global $lang;
 
 		foreach ($lang['LOG_ACTION']['LOG_TYPE'] as $log_type => $log_desc)
 		{
@@ -2029,9 +2042,12 @@ class log_action
 
 function get_topic_icon ($topic, $is_unread = null)
 {
-	global $bb_cfg, $images;
+	global $images;
 
-	$t_hot = ($topic['topic_replies'] >= $bb_cfg['hot_threshold']);
+	/** @var \TorrentPier\Di $di */
+	$di = \TorrentPier\Di::getInstance();
+
+	$t_hot = ($topic['topic_replies'] >= $di->config->get('hot_threshold'));
 	$is_unread = is_null($is_unread) ? is_unread($topic['topic_last_post_time'], $topic['topic_id'], $topic['forum_id']) : $is_unread;
 
 	if ($topic['topic_status'] == TOPIC_MOVED)
@@ -2142,8 +2158,10 @@ function get_poll_data_items_js ($topic_id)
 
 function poll_is_active ($t_data)
 {
-	global $bb_cfg;
-	return ($t_data['topic_vote'] == 1 && $t_data['topic_time'] > TIMENOW - $bb_cfg['poll_max_days'] * 86400);
+	/** @var \TorrentPier\Di $di */
+	$di = \TorrentPier\Di::getInstance();
+
+	return ($t_data['topic_vote'] == 1 && $t_data['topic_time'] > TIMENOW - $di->config->get('poll_max_days') * 86400);
 }
 
 function print_confirmation ($tpl_vars)
@@ -2210,7 +2228,10 @@ function clean_title ($str, $replace_underscore = false)
 
 function clean_text_match ($text, $ltrim_star = true, $remove_stopwords = false, $die_if_empty = false)
 {
-	global $bb_cfg, $lang;
+	global $lang;
+
+	/** @var \TorrentPier\Di $di */
+	$di = \TorrentPier\Di::getInstance();
 
 	$text = str_compact($text);
 	$ltrim_chars = ($ltrim_star) ? ' *-!' : ' ';
@@ -2223,7 +2244,7 @@ function clean_text_match ($text, $ltrim_star = true, $remove_stopwords = false,
 		$text = remove_stopwords($text);
 	}
 
-	if ($bb_cfg['sphinx_enabled'])
+	if ($di->config->get('sphinx_enabled'))
 	{
 		$text = preg_replace('#(?<=\S)\-#u', ' ', $text);                 // "1-2-3" -> "1 2 3"
 		$text = preg_replace('#[^0-9a-zA-Zа-яА-ЯёЁ\-_*|]#u', ' ', $text); // допустимые символы (кроме " которые отдельно)
@@ -2279,19 +2300,22 @@ function log_sphinx_error ($err_type, $err_msg, $query = '')
 
 function get_title_match_topics($search)
 {
-	global $bb_cfg, $sphinx, $userdata, $lang;
+	global $sphinx, $userdata, $lang;
+
+	/** @var \TorrentPier\Di $di */
+	$di = \TorrentPier\Di::getInstance();
 
 	$where_ids       = array();
 	$forum_ids       = (isset($search['ids']) && is_array($search['ids'])) ? array_diff($search['ids'], array(0 => 0)) : '';
 	$title_match_sql = encode_text_match($search['query']);
 
-	if ($bb_cfg['sphinx_enabled'])
+	if ($di->config->get('sphinx_enabled'))
 	{
 		init_sphinx();
 
 		$where = (isset($search['topic_match'])) ? 'topics' : 'posts';
 
-		$sphinx->SetServer($bb_cfg['sphinx_topic_titles_host'], $bb_cfg['sphinx_topic_titles_port']);
+		$sphinx->SetServer($di->config->get('sphinx_topic_titles_host'), $di->config->get('sphinx_topic_titles_port'));
 		if ($forum_ids)
 		{
 			$sphinx->SetFilter('forum_id', $forum_ids, false);
@@ -2323,7 +2347,7 @@ function get_title_match_topics($search)
 	else
 	{
 		$where_forum = ($forum_ids) ? "AND forum_id IN(" . join(',', $forum_ids) . ")" : '';
-		$search_bool_mode = ($bb_cfg['allow_search_in_bool_mode']) ? ' IN BOOLEAN MODE' : '';
+		$search_bool_mode = ($di->config->get('allow_search_in_bool_mode')) ? ' IN BOOLEAN MODE' : '';
 
 		if (isset($search['topic_match']))
 		{
@@ -2381,17 +2405,20 @@ function pad_with_space ($str)
 
 function create_magnet ($infohash, $auth_key, $logged_in)
 {
-	global $bb_cfg, $_GET, $images;
+	global $images;
 
-	$passkey_url = ((!$logged_in || isset($_GET['no_passkey'])) && $bb_cfg['bt_tor_browse_only_reg']) ? '' : "?{$bb_cfg['passkey_key']}=$auth_key";
+	/** @var \TorrentPier\Di $di */
+	$di = \TorrentPier\Di::getInstance();
 
-	if ($bb_cfg['ocelot']['enabled'])
+	$passkey_url = ((!$logged_in || isset($_GET['no_passkey'])) && $di->config->get('bt_tor_browse_only_reg')) ? '' : "?{$di->config->get('passkey_key')}=$auth_key";
+
+	if ($di->config->get('ocelot.enabled'))
 	{
-		return '<a href="magnet:?xt=urn:btih:'. bin2hex($infohash) .'&tr='. urlencode($bb_cfg['ocelot']['url'] .$auth_key. "/announce") .'"><img src="'. $images['icon_magnet'] .'" width="12" height="12" border="0" /></a>';
+		return '<a href="magnet:?xt=urn:btih:'. bin2hex($infohash) .'&tr='. urlencode($di->config->get('ocelot.url') .$auth_key. "/announce") .'"><img src="'. $images['icon_magnet'] .'" width="12" height="12" border="0" /></a>';
 	}
 	else
 	{
-		return '<a href="magnet:?xt=urn:btih:'. bin2hex($infohash) .'&tr='. urlencode($bb_cfg['bt_announce_url'] . $passkey_url) .'"><img src="'. $images['icon_magnet'] .'" width="12" height="12" border="0" /></a>';
+		return '<a href="magnet:?xt=urn:btih:'. bin2hex($infohash) .'&tr='. urlencode($di->config->get('bt_announce_url') . $passkey_url) .'"><img src="'. $images['icon_magnet'] .'" width="12" height="12" border="0" /></a>';
 	}
 }
 
@@ -2450,7 +2477,10 @@ function send_pm ($user_id, $subject, $message, $poster_id = BOT_UID)
 
 function profile_url ($data)
 {
-	global $bb_cfg, $lang, $datastore;
+	global $lang, $datastore;
+
+	/** @var \TorrentPier\Di $di */
+	$di = \TorrentPier\Di::getInstance();
 
 	if (!$ranks = $datastore->get('ranks'))
 	{
@@ -2468,7 +2498,7 @@ function profile_url ($data)
 	if (empty($title)) $title = $lang['USER'];
 	if (empty($style)) $style = 'colorUser';
 
-	if (!$bb_cfg['color_nick']) $style = '';
+	if (!$di->config->get('color_nick')) $style = '';
 
 	$username = !empty($data['username']) ? $data['username'] : $lang['GUEST'];
 	$user_id = (!empty($data['user_id']) && $username != $lang['GUEST']) ? $data['user_id'] : GUEST_UID;
@@ -2485,7 +2515,8 @@ function profile_url ($data)
 
 function get_avatar ($user_id, $ext_id, $allow_avatar = true, $size = true, $height = '', $width = '')
 {
-	global $bb_cfg;
+	/** @var \TorrentPier\Di $di */
+	$di = \TorrentPier\Di::getInstance();
 
 	if ($size)
 	{
@@ -2495,11 +2526,11 @@ function get_avatar ($user_id, $ext_id, $allow_avatar = true, $size = true, $hei
 	$height = ($height != '') ? 'height="'. $height .'"' : '';
 	$width  = ($width != '') ? 'width="'. $width .'"' : '';
 
-	$user_avatar = '<img src="'. make_url($bb_cfg['avatars']['upload_path'] . $bb_cfg['avatars']['no_avatar']) .'" alt="'. $user_id .'" '. $height .' '. $width .' />';
+	$user_avatar = '<img src="'. make_url($di->config->get('avatars.upload_path') . $di->config->get('avatars.no_avatar')) .'" alt="'. $user_id .'" '. $height .' '. $width .' />';
 
-	if ($user_id == BOT_UID && $bb_cfg['avatars']['bot_avatar'])
+	if ($user_id == BOT_UID && $di->config->get('avatars.bot_avatar'))
 	{
-		$user_avatar = '<img src="'. make_url($bb_cfg['avatars']['upload_path'] . $bb_cfg['avatars']['bot_avatar']) .'" alt="'. $user_id .'" '. $height .' '. $width .' />';
+		$user_avatar = '<img src="'. make_url($di->config->get('avatars.upload_path') . $di->config->get('avatars.bot_avatar')) .'" alt="'. $user_id .'" '. $height .' '. $width .' />';
 	}
 	else if ($allow_avatar && $ext_id)
 	{
@@ -2514,9 +2545,12 @@ function get_avatar ($user_id, $ext_id, $allow_avatar = true, $size = true, $hei
 
 function gender_image ($gender)
 {
-	global $bb_cfg, $lang, $images;
+	global $lang, $images;
 
-	if (!$bb_cfg['gender'])
+	/** @var \TorrentPier\Di $di */
+	$di = \TorrentPier\Di::getInstance();
+
+	if (!$di->config->get('gender'))
 	{
 		$user_gender = '';
 		return $user_gender;

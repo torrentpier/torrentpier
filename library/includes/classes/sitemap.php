@@ -120,14 +120,15 @@ class sitemap
 	}
 
 	function get_static () {
-		global $bb_cfg;
+		/** @var \TorrentPier\Di $di */
+		$di = \TorrentPier\Di::getInstance();
 
 		$xml = '';
 		$lm = date('c');
 		$this->priority = $this->stat_priority;
 
-		if (isset($bb_cfg['static_sitemap'])) {
-			$static_url = preg_replace("/\s/", '', $bb_cfg['static_sitemap']); //вырезаем переносы строк
+		if ($di->config->get('static_sitemap')) {
+			$static_url = preg_replace("/\s/", '', $di->config->get('static_sitemap')); //вырезаем переносы строк
 			preg_match_all('#(https?://[\w-]+[\.\w-]+/((?!https?://)[\w- ./?%&=])+)#', $static_url, $out);
 
 			$static_url = count($out['0']);

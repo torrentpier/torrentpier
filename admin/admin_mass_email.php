@@ -7,6 +7,9 @@ if (!empty($setmodules))
 }
 require('./pagestart.php');
 
+/** @var \TorrentPier\Di $di */
+$di = \TorrentPier\Di::getInstance();
+
 set_time_limit(1200);
 
 $subject  = (string) trim(request_var('subject', ''));
@@ -57,9 +60,9 @@ if (isset($_POST['submit']))
 
 		foreach ($user_list as $i => $row)
 		{
-			$emailer = new emailer($bb_cfg['smtp_delivery']);
+			$emailer = new emailer($di->config->get('smtp_delivery'));
 
-			$emailer->from($bb_cfg['sitename'] ." <{$bb_cfg['board_email']}>");
+			$emailer->from($di->config->get('sitename') ." <{$di->config->get('board_email')}>");
 			$emailer->email_address($row['username'] ." <{$row['user_email']}>");
 			$emailer->use_template('admin_send_email');
 

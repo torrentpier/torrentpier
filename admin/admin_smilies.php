@@ -7,6 +7,9 @@ if (!empty($setmodules))
 }
 require('./pagestart.php');
 
+/** @var \TorrentPier\Di $di */
+$di = \TorrentPier\Di::getInstance();
+
 // Check to see what mode we should operate in
 if (isset($_POST['mode']) || isset($_GET['mode']))
 {
@@ -21,13 +24,13 @@ else
 $delimeter  = '=+:';
 
 // Read a listing of uploaded smilies for use in the add or edit smliey code
-$dir = opendir(BB_ROOT . $bb_cfg['smilies_path']);
+$dir = opendir(BB_ROOT . $di->config->get('smilies_path'));
 
 while ($file = readdir($dir))
 {
-	if (!is_dir(bb_realpath(BB_ROOT . $bb_cfg['smilies_path'] . '/' . $file)))
+	if (!is_dir(bb_realpath(BB_ROOT . $di->config->get('smilies_path') . '/' . $file)))
 	{
-		$img_size = getimagesize(BB_ROOT . $bb_cfg['smilies_path'] . '/' . $file);
+		$img_size = getimagesize(BB_ROOT . $di->config->get('smilies_path') . '/' . $file);
 
 		if ($img_size[0] && $img_size[1])
 		{
@@ -78,7 +81,7 @@ if (isset($_GET['import_pack']) || isset($_POST['import_pack']))
 			}
 		}
 
-		$fcontents = file(BB_ROOT . $bb_cfg['smilies_path'] . '/'. $smile_pak);
+		$fcontents = file(BB_ROOT . $di->config->get('smilies_path') . '/'. $smile_pak);
 
 		if (empty($fcontents))
 		{
@@ -197,11 +200,11 @@ else if (isset($_POST['add']) || isset($_GET['add']))
 
 	$template->assign_vars(array(
 		'TPL_SMILE_EDIT'     => true,
-		'SMILEY_IMG'         => BB_ROOT . $bb_cfg['smilies_path'] . '/' . $smiley_images[0],
+		'SMILEY_IMG'         => BB_ROOT . $di->config->get('smilies_path') . '/' . $smiley_images[0],
 		'S_SMILEY_ACTION'    => "admin_smilies.php",
 		'S_HIDDEN_FIELDS'    => $s_hidden_fields,
 		'S_FILENAME_OPTIONS' => $filename_list,
-		'S_SMILEY_BASEDIR'   => BB_ROOT . $bb_cfg['smilies_path']
+		'S_SMILEY_BASEDIR'   => BB_ROOT . $di->config->get('smilies_path')
 	));
 }
 else if ( $mode != '' )
@@ -256,11 +259,11 @@ else if ( $mode != '' )
 				'TPL_SMILE_EDIT'     => true,
 				'SMILEY_CODE'        => $smile_data['code'],
 				'SMILEY_EMOTICON'    => $smile_data['emoticon'],
-				'SMILEY_IMG'         => BB_ROOT . $bb_cfg['smilies_path'] . '/' . $smiley_edit_img,
+				'SMILEY_IMG'         => BB_ROOT . $di->config->get('smilies_path') . '/' . $smiley_edit_img,
 				'S_SMILEY_ACTION'    => "admin_smilies.php",
 				'S_HIDDEN_FIELDS'    => $s_hidden_fields,
 				'S_FILENAME_OPTIONS' => $filename_list,
-				'S_SMILEY_BASEDIR'   => BB_ROOT . $bb_cfg['smilies_path'],
+				'S_SMILEY_BASEDIR'   => BB_ROOT . $di->config->get('smilies_path'),
 			));
 
 			break;
@@ -357,7 +360,7 @@ else
 		$template->assign_block_vars('smiles', array(
 			'ROW_CLASS' => $row_class,
 
-			'SMILEY_IMG' =>  BB_ROOT . $bb_cfg['smilies_path'] .'/'. $smilies[$i]['smile_url'],
+			'SMILEY_IMG' =>  BB_ROOT . $di->config->get('smilies_path') .'/'. $smilies[$i]['smile_url'],
 			'CODE' => $smilies[$i]['code'],
 			'EMOT' => $smilies[$i]['emoticon'],
 

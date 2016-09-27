@@ -79,7 +79,8 @@ class user_common
 	 */
 	function session_start ($cfg = array())
 	{
-		global $bb_cfg;
+		/** @var \TorrentPier\Di $di */
+		$di = \TorrentPier\Di::getInstance();
 
 		$update_sessions_table = false;
 		$this->cfg = array_merge($this->cfg, $cfg);
@@ -100,7 +101,7 @@ class user_common
 			{
 				$SQL['WHERE'][] = "s.session_id = '$session_id'";
 
-				if ($bb_cfg['torhelp_enabled'])
+				if ($di->config->get('torhelp_enabled'))
 				{
 					$SQL['SELECT'][] = "th.topic_id_csv AS torhelp";
 					$SQL['LEFT JOIN'][] = BB_BT_TORHELP ." th ON(u.user_id = th.user_id)";
@@ -120,7 +121,7 @@ class user_common
 			{
 				$this->data = DB()->fetch_row($SQL);
 
-				if ($this->data && (TIMENOW - $this->data['session_time']) > $bb_cfg['session_update_intrv'])
+				if ($this->data && (TIMENOW - $this->data['session_time']) > $di->config->get('session_update_intrv'))
 				{
 					$this->data['session_time'] = TIMENOW;
 					$update_sessions_table = true;
@@ -169,7 +170,7 @@ class user_common
 		if (!$this->data)
 		{
 			$login = false;
-			$user_id = ($bb_cfg['allow_autologin'] && $this->sessiondata['uk'] && $this->sessiondata['uid']) ? $this->sessiondata['uid'] : GUEST_UID;
+			$user_id = ($di->config->get('allow_autologin') && $this->sessiondata['uk'] && $this->sessiondata['uid']) ? $this->sessiondata['uid'] : GUEST_UID;
 
 			if ($userdata = get_userdata(intval($user_id), false, true))
 			{
@@ -195,7 +196,7 @@ class user_common
 		define('IS_CP_HOLDER',    (!IS_GUEST && $this->data['user_level'] == CP_HOLDER));
 		define('IS_GROUP_MEMBER', (!IS_GUEST && $this->data['user_level'] == GROUP_MEMBER));
 		define('IS_USER',         (!IS_GUEST && $this->data['user_level'] == USER));
-		define('IS_SUPER_ADMIN',  (IS_ADMIN && isset($bb_cfg['super_admins'][$this->data['user_id']])));
+		define('IS_SUPER_ADMIN',  (IS_ADMIN && $di->config->get('super_admins.' . $this->data['user_id'])));
 		define('IS_AM',           (IS_ADMIN || IS_MOD));
 
 		$this->set_shortcuts();
@@ -221,7 +222,8 @@ class user_common
 	 */
 	function session_create ($userdata, $auto_created = false)
 	{
-		global $bb_cfg;
+		/** @var \TorrentPier\Di $di */
+		$di = \TorrentPier\Di::getInstance();
 
 		$this->data = $userdata;
 		$session_id = $this->sessiondata['sid'];
@@ -282,9 +284,9 @@ class user_common
 				$last_visit = TIMENOW;
 				define('FIRST_LOGON', true);
 			}
-			else if ($session_time < (TIMENOW - $bb_cfg['last_visit_update_intrv']))
+			else if ($session_time < (TIMENOW - $di->config->get('last_visit_update_intrv')))
 			{
-				$last_visit = max($session_time, (TIMENOW - 86400*$bb_cfg['max_last_visit_days']));
+				$last_visit = max($session_time, (TIMENOW - 86400*$di->config->get('max_last_visit_days')));
 			}
 
 			if ($last_visit != $this->data['user_lastvisit'])
@@ -304,7 +306,7 @@ class user_common
 
 				$this->data['user_lastvisit'] = $last_visit;
 			}
-			if (!empty($_POST['autologin']) && $bb_cfg['allow_autologin'])
+			if (!empty($_POST['autologin']) && $di->config->get('allow_autologin'))
 			{
 				if (!$auto_created)
 				{
@@ -481,7 +483,8 @@ class user_common
 	 */
 	function set_session_cookies ($user_id)
 	{
-		global $bb_cfg;
+		/** @var \TorrentPier\Di $di */
+		$di = \TorrentPier\Di::getInstance();
 
 		if ($user_id == GUEST_UID)
 		{
@@ -511,7 +514,7 @@ class user_common
 			{
 				bb_setcookie(COOKIE_DATA, $c_sdata_curr, COOKIE_PERSIST, true);
 			}
-			if (isset($bb_cfg['dbg_users'][$this->data['user_id']]) && !isset($_COOKIE[COOKIE_DBG]))
+			if ($di->config->get('dbg_users.' . $this->data['user_id']) && !isset($_COOKIE[COOKIE_DBG]))
 			{
 				bb_setcookie(COOKIE_DBG, 1, COOKIE_SESSION);
 			}
@@ -529,7 +532,8 @@ class user_common
 	 */
 	function verify_autologin_id ($userdata, $expire_check = false, $create_new = true)
 	{
-		global $bb_cfg;
+		/** @var \TorrentPier\Di $di */
+		$di = \TorrentPier\Di::getInstance();
 
 		$autologin_id = $userdata['autologin_id'];
 
@@ -539,9 +543,9 @@ class user_common
 			{
 				return $this->create_autologin_id($userdata);
 			}
-			else if ($autologin_id && $userdata['user_session_time'] && $bb_cfg['max_autologin_time'])
+			else if ($autologin_id && $userdata['user_session_time'] && $di->config->get('max_autologin_time'))
 			{
-				if (TIMENOW - $userdata['user_session_time'] > $bb_cfg['max_autologin_time']*86400)
+				if (TIMENOW - $userdata['user_session_time'] > $di->config->get('max_autologin_time')*86400)
 				{
 					return $this->create_autologin_id($userdata, $create_new);
 				}
@@ -594,34 +598,31 @@ class user_common
 	*/
 	function init_userprefs ()
 	{
-		global $bb_cfg, $theme, $lang, $DeltaTime;
+		global $theme, $lang, $DeltaTime;
+
+		/** @var \TorrentPier\Di $di */
+		$di = \TorrentPier\Di::getInstance();
 
 		if (defined('LANG_DIR')) return;  // prevent multiple calling
 
-		define('DEFAULT_LANG_DIR', LANG_ROOT_DIR . $bb_cfg['default_lang'] .'/');
+		define('DEFAULT_LANG_DIR', LANG_ROOT_DIR . $di->config->get('default_lang') .'/');
 		define('ENGLISH_LANG_DIR', LANG_ROOT_DIR .'en/');
 
 		if ($this->data['user_id'] != GUEST_UID)
 		{
-			if ($this->data['user_lang'] && $this->data['user_lang'] != $bb_cfg['default_lang'])
+			if ($this->data['user_lang'] && $this->data['user_lang'] != $di->config->get('default_lang'))
 			{
-				$bb_cfg['default_lang'] = basename($this->data['user_lang']);
-				define('LANG_DIR', LANG_ROOT_DIR . $bb_cfg['default_lang'] .'/');
-			}
-
-			if (isset($this->data['user_timezone']))
-			{
-				$bb_cfg['board_timezone'] = $this->data['user_timezone'];
+				define('LANG_DIR', LANG_ROOT_DIR . basename($this->data['user_lang']) .'/');
 			}
 		}
 
-		$this->data['user_lang']       = $bb_cfg['default_lang'];
-		$this->data['user_timezone']   = $bb_cfg['board_timezone'];
+		$this->data['user_lang']       = $di->config->get('default_lang');
+		$this->data['user_timezone']   = $di->config->get('board_timezone');
 
 		if (!defined('LANG_DIR')) define('LANG_DIR', DEFAULT_LANG_DIR);
 
 		require(LANG_DIR .'main.php');
-		setlocale(LC_ALL, $bb_cfg['lang'][$this->data['user_lang']]['locale']);
+		setlocale(LC_ALL, $di->config->get('lang.' . $this->data['user_lang'] . '.locale'));
 
 		$theme = setup_style();
 		$DeltaTime = new Date_Delta();

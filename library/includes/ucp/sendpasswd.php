@@ -2,11 +2,14 @@
 
 if (!defined('BB_ROOT')) die(basename(__FILE__));
 
+/** @var \TorrentPier\Di $di */
+$di = \TorrentPier\Di::getInstance();
+
 set_die_append_msg();
 
-if ($bb_cfg['emailer_disabled']) bb_die($lang['EMAILER_DISABLED']);
+if ($di->config->get('emailer_disabled')) bb_die($lang['EMAILER_DISABLED']);
 
-$need_captcha = ($_GET['mode'] == 'sendpassword' && !IS_ADMIN && !$bb_cfg['captcha']['disabled']);
+$need_captcha = ($_GET['mode'] == 'sendpassword' && !IS_ADMIN && !$di->config->get('captcha.disabled'));
 
 if (isset($_POST['submit']))
 {
@@ -41,15 +44,15 @@ if (isset($_POST['submit']))
 			}
 
 			require(CLASS_DIR .'emailer.php');
-			$emailer = new emailer($bb_cfg['smtp_delivery']);
+			$emailer = new emailer($di->config->get('smtp_delivery'));
 
-			$emailer->from($bb_cfg['sitename'] ." <{$bb_cfg['board_email']}>");
+			$emailer->from($di->config->get('sitename') ." <{$di->config->get('board_email')}>");
 			$emailer->email_address("$username <{$row['user_email']}>");
 
 			$emailer->use_template('user_activate_passwd', $row['user_lang']);
 
 			$emailer->assign_vars(array(
-				'SITENAME' => $bb_cfg['sitename'],
+				'SITENAME' => $di->config->get('sitename'),
 				'USERNAME' => $username,
 				'PASSWORD' => $user_password,
 				'U_ACTIVATE' => make_url('profile.php?mode=activate&' . POST_USERS_URL . '=' . $user_id . '&act_key=' . $user_actkey)

@@ -2,7 +2,10 @@
 
 if (!defined('IN_AJAX')) die(basename(__FILE__));
 
-global $bb_cfg, $lang;
+global $lang;
+
+/** @var \TorrentPier\Di $di */
+$di = \TorrentPier\Di::getInstance();
 
 if (!($user_id = intval($this->request['user_id'])) || !($profiledata = get_userdata($user_id)))
 {
@@ -47,7 +50,7 @@ switch ($field)
 		break;
 
 	case 'user_gender':
-		if (!$bb_cfg['gender']) $this->ajax_die($lang['MODULE_OFF']);
+		if (!$di->config->get('gender')) $this->ajax_die($lang['MODULE_OFF']);
 		if (!isset($lang['GENDER_SELECT'][$value]))
 		{
 			$this->ajax_die($lang['ERROR']);
@@ -56,7 +59,7 @@ switch ($field)
 		break;
 
 	case 'user_birthday':
-		if (!$bb_cfg['birthday_enabled']) $this->ajax_die($lang['MODULE_OFF']);
+		if (!$di->config->get('birthday_enabled')) $this->ajax_die($lang['MODULE_OFF']);
 		$birthday_date = date_parse($value);
 
 		if (!empty($birthday_date['year']))
@@ -65,13 +68,13 @@ switch ($field)
 			{
 				$this->ajax_die($lang['WRONG_BIRTHDAY_FORMAT']);
 			}
-			elseif (bb_date(TIMENOW, 'Y', 'false') - $birthday_date['year'] > $bb_cfg['birthday_max_age'])
+			elseif (bb_date(TIMENOW, 'Y', 'false') - $birthday_date['year'] > $di->config->get('birthday_max_age'))
 			{
-				$this->ajax_die(sprintf($lang['BIRTHDAY_TO_HIGH'], $bb_cfg['birthday_max_age']));
+				$this->ajax_die(sprintf($lang['BIRTHDAY_TO_HIGH'], $di->config->get('birthday_max_age')));
 			}
-			elseif (bb_date(TIMENOW, 'Y', 'false') - $birthday_date['year'] < $bb_cfg['birthday_min_age'])
+			elseif (bb_date(TIMENOW, 'Y', 'false') - $birthday_date['year'] < $di->config->get('birthday_min_age'))
 			{
-				$this->ajax_die(sprintf($lang['BIRTHDAY_TO_LOW'], $bb_cfg['birthday_min_age']));
+				$this->ajax_die(sprintf($lang['BIRTHDAY_TO_LOW'], $di->config->get('birthday_min_age')));
 			}
 		}
 
@@ -111,8 +114,8 @@ switch ($field)
 
 	case 'user_regdate':
 	case 'user_lastvisit':
-		$tz = TIMENOW + (3600 * $bb_cfg['board_timezone']);
-		if ((($value = strtotime($value, $tz)) < $bb_cfg['board_startdate']) || ($value > TIMENOW))
+		$tz = TIMENOW + (3600 * $di->config->get('board_timezone'));
+		if ((($value = strtotime($value, $tz)) < $di->config->get('board_startdate')) || ($value > TIMENOW))
 		{
 			$this->ajax_die($lang['INVALID_DATE'] . $this->request['value']);
 		}

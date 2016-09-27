@@ -1,6 +1,9 @@
 <?php
 
-if (empty($bb_cfg['topic_notify_enabled']))
+/** @var \TorrentPier\Di $di */
+$di = \TorrentPier\Di::getInstance();
+
+if (empty($di->config->get('topic_notify_enabled')))
 {
 	bb_die($lang['DISABLED']);
 }
@@ -11,7 +14,7 @@ $tracking_topics = get_tracks('topic');
 
 $user_id = $userdata['user_id'];
 $start = isset($_GET['start']) ? abs(intval($_GET['start'])) : 0;
-$per_page = $bb_cfg['topics_per_page'];
+$per_page = $di->config->get('topics_per_page');
 
 if (isset($_POST['topic_id_list']))
 {
@@ -77,7 +80,7 @@ if ($watch_count > 0)
 				'LAST_POST_ID'      => $watch[$i]['topic_last_post_id'],
 				'IS_UNREAD'         => $is_unread,
 				'TOPIC_ICON'        => get_topic_icon($watch[$i], $is_unread),
-				'PAGINATION'        => ($watch[$i]['topic_status'] == TOPIC_MOVED) ? '' : build_topic_pagination(TOPIC_URL . $watch[$i]['topic_id'], $watch[$i]['topic_replies'], $bb_cfg['posts_per_page']),
+				'PAGINATION'        => ($watch[$i]['topic_status'] == TOPIC_MOVED) ? '' : build_topic_pagination(TOPIC_URL . $watch[$i]['topic_id'], $watch[$i]['topic_replies'], $di->config->get('posts_per_page')),
 			));
 		}
 

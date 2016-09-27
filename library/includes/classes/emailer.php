@@ -15,26 +15,24 @@ class emailer
 
 	function emailer ($use_smtp/*$tpl_name, $sbj, $to_address*/)
 	{
-		global $bb_cfg;
+		/** @var \TorrentPier\Di $di */
+		$di = \TorrentPier\Di::getInstance();
 
 		$this->reset();
-		$this->from     = $bb_cfg['board_email'];
-		$this->reply_to = $bb_cfg['board_email'];
-		$this->use_smtp = $use_smtp; /*!empty($bb_cfg['smtp_host']);
-
-		$this->use_template($tpl_name);
-		$this->set_subject($sbj);
-		$this->email_address($to_address);*/
+		$this->from     = $di->config->get('board_email');
+		$this->reply_to = $di->config->get('board_email');
+		$this->use_smtp = $use_smtp;
 	}
 
 	function set_default_vars ()
 	{
-		global $bb_cfg;
+		/** @var \TorrentPier\Di $di */
+		$di = \TorrentPier\Di::getInstance();
 
 		$this->vars = array(
-			'BOARD_EMAIL' => $bb_cfg['board_email'],
-			'SITENAME'    => $bb_cfg['board_email_sitename'],
-			'EMAIL_SIG'   => !empty($bb_cfg['board_email_sig']) ? "-- \n{$bb_cfg['board_email_sig']}" : '',
+			'BOARD_EMAIL' => $di->config->get('board_email'),
+			'SITENAME'    => $di->config->get('board_email_sitename'),
+			'EMAIL_SIG'   => !empty($di->config->get('board_email_sig')) ? "-- \n{$di->config->get('board_email_sig')}" : '',
 		);
 	}
 
@@ -86,7 +84,8 @@ class emailer
 
 	function use_template ($template_file, $template_lang = '')
 	{
-		global $bb_cfg;
+		/** @var \TorrentPier\Di $di */
+		$di = \TorrentPier\Di::getInstance();
 
 		if (trim($template_file) == '')
 		{
@@ -95,7 +94,7 @@ class emailer
 
 		if (trim($template_lang) == '')
 		{
-			$template_lang = $bb_cfg['default_lang'];
+			$template_lang = $di->config->get('default_lang');
 		}
 
 		if (empty($this->tpl_msg[$template_lang . $template_file]))
@@ -104,7 +103,7 @@ class emailer
 
 			if (!file_exists(bb_realpath($tpl_file)))
 			{
-				$tpl_file = LANG_ROOT_DIR ."{$bb_cfg['default_lang']}/email/$template_file.html";
+				$tpl_file = LANG_ROOT_DIR ."{$di->config->get('default_lang')}/email/$template_file.html";
 
 				if (!file_exists(bb_realpath($tpl_file)))
 				{
@@ -135,9 +134,12 @@ class emailer
 	// Send the mail out to the recipients set previously in var $this->address
 	function send ($email_format = 'text')
 	{
-		global $bb_cfg, $userdata;
+		global $userdata;
 
-		if ($bb_cfg['emailer_disabled'])
+		/** @var \TorrentPier\Di $di */
+		$di = \TorrentPier\Di::getInstance();
+
+		if ($di->config->get('emailer_disabled'))
 		{
 			return false;
 		}
@@ -178,12 +180,12 @@ class emailer
 
 		if (preg_match('#^(Charset:(.*?))$#m', $this->msg, $match))
 		{
-			$this->encoding = (trim($match[2]) != '') ? trim($match[2]) : trim($bb_cfg['lang'][$userdata['user_lang']]['encoding']);
+			$this->encoding = (trim($match[2]) != '') ? trim($match[2]) : trim($di->config->get('lang.' . $userdata['user_lang'] . '.encoding'));
 			$drop_header .= '[\r\n]*?' . preg_quote($match[1], '#');
 		}
 		else
 		{
-			$this->encoding = trim($bb_cfg['lang'][$userdata['user_lang']]['encoding']);
+			$this->encoding = trim($di->config->get('lang.' . $userdata['user_lang'] . '.encoding'));
 		}
 		$this->subject = $this->encode($this->subject);
 
@@ -199,7 +201,7 @@ class emailer
 
 		// Build header
 		$type = ($email_format == 'html') ? 'html' : 'plain';
-		$this->extra_headers = (($this->reply_to != '') ? "Reply-to: $this->reply_to\n" : '') . (($this->from != '') ? "From: $this->from\n" : "From: " . $bb_cfg['board_email'] . "\n") . "Return-Path: " . $bb_cfg['board_email'] . "\nMessage-ID: <" . md5(uniqid(TIMENOW)) . "@" . $bb_cfg['server_name'] . ">\nMIME-Version: 1.0\nContent-type: text/$type; charset=" . $this->encoding . "\nContent-transfer-encoding: 8bit\nDate: " . date('r', TIMENOW) . "\nX-Priority: 0\nX-MSMail-Priority: Normal\nX-Mailer: Microsoft Office Outlook, Build 11.0.5510\nX-MimeOLE: Produced By Microsoft MimeOLE V6.00.2800.1441\nX-Sender: " . $bb_cfg['board_email'] . "\n" . $this->extra_headers . (($cc != '') ? "Cc: $cc\n" : '')  . (($bcc != '') ? "Bcc: $bcc\n" : '');
+		$this->extra_headers = (($this->reply_to != '') ? "Reply-to: $this->reply_to\n" : '') . (($this->from != '') ? "From: $this->from\n" : "From: " . $di->config->get('board_email') . "\n") . "Return-Path: " . $di->config->get('board_email') . "\nMessage-ID: <" . md5(uniqid(TIMENOW)) . "@" . $di->config->get('server_name') . ">\nMIME-Version: 1.0\nContent-type: text/$type; charset=" . $this->encoding . "\nContent-transfer-encoding: 8bit\nDate: " . date('r', TIMENOW) . "\nX-Priority: 0\nX-MSMail-Priority: Normal\nX-Mailer: Microsoft Office Outlook, Build 11.0.5510\nX-MimeOLE: Produced By Microsoft MimeOLE V6.00.2800.1441\nX-Sender: " . $di->config->get('board_email') . "\n" . $this->extra_headers . (($cc != '') ? "Cc: $cc\n" : '')  . (($bcc != '') ? "Bcc: $bcc\n" : '');
 
 		// Send message
 		if ($this->use_smtp)

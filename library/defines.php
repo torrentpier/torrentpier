@@ -61,4 +61,20 @@ define('CRON_RUNNING', TRIGGERS_DIR .'cron_running');
 // Misc
 define('MEM_USAGE', function_exists('memory_get_usage'));
 
+// Gzip
 define('GZIP_OUTPUT_ALLOWED', (extension_loaded('zlib') && !ini_get('zlib.output_compression')));
+
+// TODO: temporary, move to another place
+// Torrents (reserved: -1)
+define('TOR_NOT_APPROVED',  0);   // не проверено
+define('TOR_CLOSED',        1);   // закрыто
+define('TOR_APPROVED',      2);   // проверено
+define('TOR_NEED_EDIT',     3);   // недооформлено
+define('TOR_NO_DESC',       4);   // неоформлено
+define('TOR_DUP',           5);   // повтор
+define('TOR_CLOSED_CPHOLD', 6);   // закрыто правообладателем
+define('TOR_CONSUMED',      7);   // поглощено
+define('TOR_DOUBTFUL',      8);   // сомнительно
+define('TOR_CHECKING',      9);   // проверяется
+define('TOR_TMP',           10);  // временная
+define('TOR_PREMOD',        11);  // премодерация

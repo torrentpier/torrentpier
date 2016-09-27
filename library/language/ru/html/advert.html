@@ -1,4 +1,4 @@
 <div id="infobox-body">
-	<h2 class="bold">Размещение рекламы на <a href="http://<?php echo ($bb_cfg['server_port'] != 80) ? "{$bb_cfg['server_name']}:{$bb_cfg['server_port']}" : $bb_cfg['server_name']; ?>"><?php echo $bb_cfg['sitename']?></a></h2>
-	<p>По вопросам размещения рекламы обращайтесь по адресу: <strong><a href="mailto:<?php echo $bb_cfg['adv_email']; ?>" class="gen"><?php echo $bb_cfg['adv_email']; ?></a></strong></p>
+	<h2 class="bold">Размещение рекламы на <a href="http://<?php echo ($di->config->get('server_port') != 80) ? "{$di->config->get('server_name')}:{$di->config->get('server_port')}" : $di->config->get('server_name'); ?>"><?php echo $di->config->get('sitename')?></a></h2>
+	<p>По вопросам размещения рекламы обращайтесь по адресу: <strong><a href="mailto:<?php echo $di->config->get('adv_email'); ?>" class="gen"><?php echo $di->config->get('adv_email'); ?></a></strong></p>
 </div><!--/infobox-body-->

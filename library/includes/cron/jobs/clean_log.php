@@ -2,7 +2,10 @@
 
 if (!defined('BB_ROOT')) die(basename(__FILE__));
 
-$log_days_keep = (int) $bb_cfg['log_days_keep'];
+/** @var \TorrentPier\Di $di */
+$di = \TorrentPier\Di::getInstance();
+
+$log_days_keep = (int) $di->config->get('log_days_keep');
 
 DB()->query("
 	DELETE FROM ". BB_LOG ."

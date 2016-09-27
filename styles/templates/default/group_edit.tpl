@@ -76,11 +76,11 @@ function manage_group(mode, value) {
 		</td>
 		<td valign="top">
 			<div id="avatar_explain" class="med">{AVATAR_EXPLAIN}</div>
-			<!-- IF $bb_cfg['group_avatars']['up_allowed'] -->
+			<!-- IF $di->config->get('group_avatars.up_allowed') -->
 				<br />
 				<form action="{S_GROUP_CONFIG_ACTION}" method="post" enctype="multipart/form-data">
 					{S_HIDDEN_FIELDS}
-					<input type="hidden" name="MAX_FILE_SIZE" value="{$bb_cfg['avatars']['max_size']}" />
+					<input type="hidden" name="MAX_FILE_SIZE" value="{$di->config->get('avatars.max_size')}" />
 					<input type="file" name="avatar" />
 					<input class="mainoption" type="submit" name="submit" value="{L_UPLOAD_AVATAR_FILE}" />
 				</form>

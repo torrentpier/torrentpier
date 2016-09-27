@@ -15,14 +15,12 @@
 	"support": {
 		"email": "support@torrentpier.me",
 		"issues" : "https://github.com/torrentpier/torrentpier/issues",
-		"forum": "https://torrentpier.me/",
-		"get": "http://get.torrentpier.me/",
-		"docs": "http://faq.torrentpier.me/"
+		"forum": "https://torrentpier.me/forum/",
+		"get": "https://get.torrentpier.me/",
+		"docs": "https://faq.torrentpier.me/"
 	},
 	"require": {
 		"php": "^5.5 || ^7.0",
-		"ext-curl": "*",
-		"ext-mbstring": "*",
 		"google/recaptcha": "^1.0",
 		"monolog/monolog": "^1.18",
 		"pimple/pimple": "^3.0",

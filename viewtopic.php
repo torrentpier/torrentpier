@@ -28,18 +28,18 @@ $newest   = 0;
 
 
 // Posts per page
-$posts_per_page = $bb_cfg['posts_per_page'];
+$posts_per_page = $di->config->get('posts_per_page');
 $select_ppp = '';
 
 if ($userdata['session_admin'])
 {
-	if (($req_ppp = $di->request->query->getInt('ppp')) && in_array($req_ppp, $bb_cfg['allowed_posts_per_page']))
+	if (($req_ppp = $di->request->query->getInt('ppp')) && in_array($req_ppp, $di->config->get('allowed_posts_per_page')))
 	{
 		$posts_per_page = $req_ppp;
 	}
 
 	$select_ppp = array();
-	foreach ($bb_cfg['allowed_posts_per_page'] as $ppp)
+	foreach ($di->config->get('allowed_posts_per_page') as $ppp)
 	{
 		$select_ppp[$ppp] = $ppp;
 	}
@@ -223,7 +223,7 @@ if ($post_id && !empty($t_data['prev_posts']))
 // Is user watching this thread?
 $can_watch_topic = $is_watching_topic = false;
 
-if ($bb_cfg['topic_notify_enabled'])
+if ($di->config->get('topic_notify_enabled'))
 {
 	if ($userdata['session_logged_in'])
 	{
@@ -439,7 +439,7 @@ $pg_url .= ($post_days) ? "&amp;postdays=$post_days" : '';
 $pg_url .= ($post_order != 'asc') ? "&amp;postorder=$post_order" : '';
 $pg_url .= isset($_REQUEST['single']) ? "&amp;single=1" : '';
 $pg_url .= ($moderation) ? "&amp;mod=1" : '';
-$pg_url .= ($posts_per_page != $bb_cfg['posts_per_page']) ? "&amp;ppp=$posts_per_page" : '';
+$pg_url .= ($posts_per_page != $di->config->get('posts_per_page')) ? "&amp;ppp=$posts_per_page" : '';
 
 generate_pagination($pg_url, $total_replies, $posts_per_page, $start);
 
@@ -461,7 +461,7 @@ $sel_post_order_ary = array(
 );
 
 $topic_has_poll = ($t_data['topic_vote'] && !IS_GUEST);
-$poll_time_expired = ($t_data['topic_time'] < TIMENOW - $bb_cfg['poll_max_days']*86400);
+$poll_time_expired = ($t_data['topic_time'] < TIMENOW - $di->config->get('poll_max_days')*86400);
 $can_manage_poll = ($t_data['topic_poster'] == $userdata['user_id'] || $is_auth['auth_mod']);
 $can_add_poll = ($can_manage_poll && !$topic_has_poll && !$poll_time_expired && !$start);
 
@@ -481,18 +481,18 @@ $template->assign_vars(array(
 	'TOPIC_TITLE'         => wbr($topic_title),
 	'PORNO_FORUM'         => $t_data['allow_porno_topic'],
 	'REPLY_IMG'           => $reply_img,
-	'SHOW_BOT_NICK'       => $bb_cfg['show_bot_nick'],
+	'SHOW_BOT_NICK'       => $di->config->get('show_bot_nick'),
 	'T_POST_REPLY'        => $reply_alt,
 
 	'HIDE_AVATAR'         => $user->opt_js['h_av'],
-	'HIDE_RANK_IMG'       => ($user->opt_js['h_rnk_i'] && $bb_cfg['show_rank_image']),
+	'HIDE_RANK_IMG'       => ($user->opt_js['h_rnk_i'] && $di->config->get('show_rank_image')),
 	'HIDE_POST_IMG'       => $user->opt_js['h_post_i'],
 	'HIDE_SMILE'          => $user->opt_js['h_smile'],
 	'HIDE_SIGNATURE'      => $user->opt_js['h_sig'],
 	'SPOILER_OPENED'      => $user->opt_js['sp_op'],
 	'SHOW_IMG_AFTER_LOAD' => $user->opt_js['i_aft_l'],
 
-	'HIDE_RANK_IMG_DIS'   => !$bb_cfg['show_rank_image'],
+	'HIDE_RANK_IMG_DIS'   => !$di->config->get('show_rank_image'),
 
 	'PINNED_FIRST_POST'   => $t_data['topic_show_first_post'],
 	'PIN_HREF'            => $t_data['topic_show_first_post'] ? "modcp.php?t=$topic_id&amp;mode=post_unpin" : "modcp.php?t=$topic_id&amp;mode=post_pin",
@@ -571,11 +571,11 @@ for($i = 0; $i < $total_posts; $i++)
 	$poster_id        = $postrow[$i]['user_id'];
 	$poster           = ($poster_id == GUEST_UID) ? $lang['GUEST'] : $postrow[$i]['username'];
 	$poster_birthday  = ($poster_id != GUEST_UID && $postrow[$i]['user_birthday'] != '0000-00-00') ? date('md', strtotime($postrow[$i]['user_birthday'])) : '';
-	$post_date        = bb_date($postrow[$i]['post_time'], $bb_cfg['post_date_format']);
+	$post_date        = bb_date($postrow[$i]['post_time'], $di->config->get('post_date_format'));
 	$max_post_time    = max($max_post_time, $postrow[$i]['post_time']);
 	$poster_posts     = ($poster_id != GUEST_UID) ? $postrow[$i]['user_posts'] : '';
 	$poster_from      = ($postrow[$i]['user_from'] && $poster_id != GUEST_UID ) ? $postrow[$i]['user_from'] : '';
-	$poster_joined    = ($poster_id != GUEST_UID) ? $lang['JOINED'] . ': ' . bb_date($postrow[$i]['user_regdate'], $bb_cfg['date_format']) : '';
+	$poster_joined    = ($poster_id != GUEST_UID) ? $lang['JOINED'] . ': ' . bb_date($postrow[$i]['user_regdate'], $di->config->get('date_format')) : '';
 	$poster_longevity = ($poster_id != GUEST_UID) ? delta_time($postrow[$i]['user_regdate']) : '';
 	$post_id          = $postrow[$i]['post_id'];
 	$mc_type          = $postrow[$i]['mc_type'];
@@ -597,8 +597,8 @@ for($i = 0; $i < $total_posts; $i++)
 	$user_rank = $postrow[$i]['user_rank'];
 	if (!$user->opt_js['h_rnk_i'] && isset($ranks[$user_rank]))
 	{
-		$rank_image = ($bb_cfg['show_rank_image'] && $ranks[$user_rank]['rank_image']) ? '<img src="'. $ranks[$user_rank]['rank_image'] .'" alt="" title="" border="0" />' : '';
-		$poster_rank = ($bb_cfg['show_rank_text']) ? $ranks[$user_rank]['rank_title'] : '';
+		$rank_image = ($di->config->get('show_rank_image') && $ranks[$user_rank]['rank_image']) ? '<img src="'. $ranks[$user_rank]['rank_image'] .'" alt="" title="" border="0" />' : '';
+		$poster_rank = ($di->config->get('show_rank_text')) ? $ranks[$user_rank]['rank_title'] : '';
 	}
 
 	// Handle anon users posting with usernames
@@ -627,7 +627,7 @@ for($i = 0; $i < $total_posts; $i++)
 	// Parse message and sig
 	$message = get_parsed_post($postrow[$i]);
 
-	$user_sig = ($bb_cfg['allow_sig'] && !$user->opt_js['h_sig'] && $postrow[$i]['user_sig']) ? $postrow[$i]['user_sig'] : '';
+	$user_sig = ($di->config->get('allow_sig') && !$user->opt_js['h_sig'] && $postrow[$i]['user_sig']) ? $postrow[$i]['user_sig'] : '';
 
 	if (bf($postrow[$i]['user_opt'], 'user_opt', 'dis_sig'))
 	{
@@ -646,7 +646,7 @@ for($i = 0; $i < $total_posts; $i++)
 	}
 
 	// Replace newlines (we use this rather than nl2br because till recently it wasn't XHTML compliant)
-	if ($user_sig) $user_sig = $bb_cfg['user_signature_start'] . $user_sig . $bb_cfg['user_signature_end'];
+	if ($user_sig) $user_sig = $di->config->get('user_signature_start') . $user_sig . $di->config->get('user_signature_end');
 
 	// Editing information
 	if ($postrow[$i]['post_edit_count'])
@@ -697,15 +697,15 @@ for($i = 0; $i < $total_posts; $i++)
 		'POSTER_NAME_JS'     => addslashes($poster),
 		'POSTER_RANK'        => $poster_rank,
 		'RANK_IMAGE'         => $rank_image,
-		'POSTER_JOINED'      => ($bb_cfg['show_poster_joined']) ? $poster_longevity : '',
+		'POSTER_JOINED'      => ($di->config->get('show_poster_joined')) ? $poster_longevity : '',
 
 		'POSTER_JOINED_DATE' => $poster_joined,
-		'POSTER_POSTS'       => ($bb_cfg['show_poster_posts']) ? $poster_posts : '',
-		'POSTER_FROM'        => ($bb_cfg['show_poster_from']) ? wbr($poster_from) : '',
+		'POSTER_POSTS'       => ($di->config->get('show_poster_posts')) ? $poster_posts : '',
+		'POSTER_FROM'        => ($di->config->get('show_poster_from')) ? wbr($poster_from) : '',
 		'POSTER_BOT'         => ($poster_id == BOT_UID),
 		'POSTER_ID'          => $poster_id,
 		'POSTER_AUTHOR'      => ($poster_id == $t_data['topic_poster']),
-		'POSTER_GENDER'      => ($bb_cfg['gender']) ? gender_image($postrow[$i]['user_gender']) : '',
+		'POSTER_GENDER'      => ($di->config->get('gender')) ? gender_image($postrow[$i]['user_gender']) : '',
 		'POSTED_AFTER'       => ($prev_post_time) ? delta_time($postrow[$i]['post_time'], $prev_post_time) : '',
 		'IS_UNREAD'          => is_unread($postrow[$i]['post_time'], $topic_id, $forum_id),
 		'IS_FIRST_POST'      => (!$start && $is_first_post),
@@ -725,7 +725,7 @@ for($i = 0; $i < $total_posts; $i++)
 		'DELETE'             => $delpost_btn,
 		'IP'                 => $ip_btn,
 
-		'POSTER_BIRTHDAY'    => ($bb_cfg['birthday_enabled'] && $this_date == $poster_birthday) ? '<img src="'. $images['icon_birthday'] .'" alt="" title="'. $lang['HAPPY_BIRTHDAY'] .'" border="0" />' : '',
+		'POSTER_BIRTHDAY'    => ($di->config->get('birthday_enabled') && $this_date == $poster_birthday) ? '<img src="'. $images['icon_birthday'] .'" alt="" title="'. $lang['HAPPY_BIRTHDAY'] .'" border="0" />' : '',
 
 		'MC_COMMENT'         => ($mc_type) ? bbcode2html($mc_comment) : '',
 		'MC_BBCODE'          => ($mc_type) ? $mc_comment : '',
@@ -785,7 +785,7 @@ if (defined('SPLIT_FORM_START'))
 }
 
 // Quick Reply
-if ($bb_cfg['show_quick_reply'])
+if ($di->config->get('show_quick_reply'))
 {
 	if ($is_auth['auth_reply'] && !($t_data['forum_status'] == FORUM_LOCKED || $t_data['topic_status'] == TOPIC_LOCKED))
 	{

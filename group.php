@@ -6,6 +6,9 @@ require(BB_ROOT .'common.php');
 require(INC_DIR .'bbcode.php');
 require(INC_DIR .'functions_group.php');
 
+/** @var \TorrentPier\Di $di */
+$di = \TorrentPier\Di::getInstance();
+
 $page_cfg['use_tablesorter'] = true;
 
 $s_member_groups = $s_pending_groups = $s_member_groups_opt = $s_pending_groups_opt = '';
@@ -13,25 +16,28 @@ $select_sort_mode = $select_sort_order = '';
 
 function generate_user_info(&$row, $date_format, $group_mod, &$from, &$posts, &$joined, &$pm, &$email, &$www, &$user_time, &$avatar)
 {
-	global $lang, $images, $bb_cfg;
+	global $lang, $images;
+
+	/** @var \TorrentPier\Di $di */
+	$di = \TorrentPier\Di::getInstance();
 
 	$from      = (!empty($row['user_from'])) ? $row['user_from'] : '';
 	$joined    = bb_date($row['user_regdate']);
 	$user_time = (!empty($row['user_time'])) ? bb_date($row['user_time']) : $lang['NONE'];
 	$posts     = ($row['user_posts']) ? $row['user_posts'] : 0;
-	$pm        = ($bb_cfg['text_buttons']) ? '<a class="txtb" href="'. (PM_URL . "?mode=post&amp;". POST_USERS_URL ."=".$row['user_id']) .'">'. $lang['SEND_PM_TXTB'] .'</a>' : '<a href="' . (PM_URL . "?mode=post&amp;". POST_USERS_URL ."=".$row['user_id']) .'"><img src="' . $images['icon_pm'] . '" alt="' . $lang['SEND_PRIVATE_MESSAGE'] . '" title="' . $lang['SEND_PRIVATE_MESSAGE'] . '" border="0" /></a>';
+	$pm        = ($di->config->get('text_buttons')) ? '<a class="txtb" href="'. (PM_URL . "?mode=post&amp;". POST_USERS_URL ."=".$row['user_id']) .'">'. $lang['SEND_PM_TXTB'] .'</a>' : '<a href="' . (PM_URL . "?mode=post&amp;". POST_USERS_URL ."=".$row['user_id']) .'"><img src="' . $images['icon_pm'] . '" alt="' . $lang['SEND_PRIVATE_MESSAGE'] . '" title="' . $lang['SEND_PRIVATE_MESSAGE'] . '" border="0" /></a>';
 	$avatar    = get_avatar($row['user_id'], $row['avatar_ext_id'], !bf($row['user_opt'], 'user_opt', 'dis_avatar'), '', 50, 50);
 
 	if (bf($row['user_opt'], 'user_opt', 'user_viewemail') || $group_mod)
 	{
-		$email_uri = ($bb_cfg['board_email_form']) ? ("profile.php?mode=email&amp;". POST_USERS_URL ."=".$row['user_id']) : 'mailto:'. $row['user_email'];
+		$email_uri = ($di->config->get('board_email_form')) ? ("profile.php?mode=email&amp;". POST_USERS_URL ."=".$row['user_id']) : 'mailto:'. $row['user_email'];
 		$email = '<a class="editable" href="'. $email_uri .'">'. $row['user_email'] .'</a>';
 	}
 	else $email = '';
 
 	if ($row['user_website'])
 	{
-		$www = ($bb_cfg['text_buttons']) ? '<a class="txtb" href="'. $row['user_website'] .'"  target="_userwww">'. $lang['VISIT_WEBSITE_TXTB'] .'</a>' : '<a class="txtb" href="'. $row['user_website'] .'" target="_userwww"><img src="' . $images['icon_www'] . '" alt="' . $lang['VISIT_WEBSITE'] . '" title="' . $lang['VISIT_WEBSITE'] . '" border="0" /></a>';
+		$www = ($di->config->get('text_buttons')) ? '<a class="txtb" href="'. $row['user_website'] .'"  target="_userwww">'. $lang['VISIT_WEBSITE_TXTB'] .'</a>' : '<a class="txtb" href="'. $row['user_website'] .'" target="_userwww"><img src="' . $images['icon_www'] . '" alt="' . $lang['VISIT_WEBSITE'] . '" title="' . $lang['VISIT_WEBSITE'] . '" border="0" /></a>';
 	}
 	else $www = '';
 
@@ -44,7 +50,7 @@ set_die_append_msg();
 
 $group_id  = isset($_REQUEST[POST_GROUPS_URL]) ? intval($_REQUEST[POST_GROUPS_URL]) : null;
 $start     = isset($_REQUEST['start']) ? abs(intval($_REQUEST['start'])) : 0;
-$per_page  = $bb_cfg['group_members_per_page'];
+$per_page  = $di->config->get('group_members_per_page');
 $view_mode = isset($_REQUEST['view']) ? (string) $_REQUEST['view'] : null;
 $rel_limit = 50;
 
@@ -217,19 +223,19 @@ else if (isset($_POST['joingroup']) && $_POST['joingroup'])
 
 	add_user_into_group($group_id, $userdata['user_id'], 1, TIMENOW);
 
-	if ($bb_cfg['group_send_email'])
+	if ($di->config->get('group_send_email'))
 	{
 		require(CLASS_DIR .'emailer.php');
-		$emailer = new emailer($bb_cfg['smtp_delivery']);
+		$emailer = new emailer($di->config->get('smtp_delivery'));
 
-		$emailer->from($bb_cfg['sitename'] ." <{$bb_cfg['board_email']}>");
+		$emailer->from($di->config->get('sitename') ." <{$di->config->get('board_email')}>");
 		$emailer->email_address($moderator['username'] ." <{$moderator['user_email']}>");
 
 		$emailer->use_template('group_request', $moderator['user_lang']);
 
 		$emailer->assign_vars(array(
 			'USER'            => $userdata['username'],
-			'SITENAME'        => $bb_cfg['sitename'],
+			'SITENAME'        => $di->config->get('sitename'),
 			'GROUP_MODERATOR' => $moderator['username'],
 			'U_GROUP'         => make_url(GROUP_URL . $group_id),
 		));
@@ -269,18 +275,18 @@ else
 
 			add_user_into_group($group_id, $row['user_id']);
 
-			if ($bb_cfg['group_send_email'])
+			if ($di->config->get('group_send_email'))
 			{
 				require(CLASS_DIR .'emailer.php');
-				$emailer = new emailer($bb_cfg['smtp_delivery']);
+				$emailer = new emailer($di->config->get('smtp_delivery'));
 
-				$emailer->from($bb_cfg['sitename'] ." <{$bb_cfg['board_email']}>");
+				$emailer->from($di->config->get('sitename') ." <{$di->config->get('board_email')}>");
 				$emailer->email_address($row['username'] ." <{$row['user_email']}>");
 
 				$emailer->use_template('group_added', $row['user_lang']);
 
 				$emailer->assign_vars(array(
-					'SITENAME'   => $bb_cfg['sitename'],
+					'SITENAME'   => $di->config->get('sitename'),
 					'GROUP_NAME' => $group_info['group_name'],
 					'U_GROUP'    => make_url(GROUP_URL . $group_id),
 				));
@@ -330,7 +336,7 @@ else
 					}
 				}
 				// Email users when they are approved
-				if (!empty($_POST['approve']) && $bb_cfg['group_send_email'])
+				if (!empty($_POST['approve']) && $di->config->get('group_send_email'))
 				{
 					$sql_select = "SELECT username, user_email, user_lang
 						FROM ". BB_USERS ."
@@ -342,9 +348,9 @@ else
 					}
 
 					require(CLASS_DIR .'emailer.php');
-					$emailer = new emailer($bb_cfg['smtp_delivery']);
+					$emailer = new emailer($di->config->get('smtp_delivery'));
 
-					$emailer->from($bb_cfg['sitename'] ." <{$bb_cfg['board_email']}>");
+					$emailer->from($di->config->get('sitename') ." <{$di->config->get('board_email')}>");
 
 					foreach (DB()->fetch_rowset($sql_select) as $row)
 					{
@@ -353,7 +359,7 @@ else
 					}
 
 					$emailer->assign_vars(array(
-						'SITENAME'   => $bb_cfg['sitename'],
+						'SITENAME'   => $di->config->get('sitename'),
 						'GROUP_NAME' => $group_info['group_name'],
 						'U_GROUP'    => make_url(GROUP_URL . $group_id),
 					));
@@ -438,7 +444,7 @@ else
 	$username = $group_moderator['username'];
 	$user_id = $group_moderator['user_id'];
 
-	generate_user_info($group_moderator, $bb_cfg['default_dateformat'], $is_moderator, $from, $posts, $joined, $pm, $email, $www, $user_time, $avatar);
+	generate_user_info($group_moderator, $di->config->get('default_dateformat'), $is_moderator, $from, $posts, $joined, $pm, $email, $www, $user_time, $avatar);
 
 	$group_type = '';
 	if ($group_info['group_type'] == GROUP_OPEN)
@@ -597,7 +603,7 @@ else
 			{
 				$user_id = $member['user_id'];
 
-				generate_user_info($member, $bb_cfg['default_dateformat'], $is_moderator, $from, $posts, $joined, $pm, $email, $www, $user_time, $avatar);
+				generate_user_info($member, $di->config->get('default_dateformat'), $is_moderator, $from, $posts, $joined, $pm, $email, $www, $user_time, $avatar);
 
 				if ($group_info['group_type'] != GROUP_HIDDEN || $is_group_member || $is_moderator)
 				{
@@ -658,7 +664,7 @@ else
 				{
 					$user_id = $member['user_id'];
 
-					generate_user_info($member, $bb_cfg['default_dateformat'], $is_moderator, $from, $posts, $joined, $pm, $email, $www, $user_time, $avatar);
+					generate_user_info($member, $di->config->get('default_dateformat'), $is_moderator, $from, $posts, $joined, $pm, $email, $www, $user_time, $avatar);
 
 					$row_class = !($i % 2) ? 'row1' : 'row2';
 
