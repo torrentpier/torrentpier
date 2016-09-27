@@ -65,8 +65,8 @@ class MemoryAdapter extends Adapter
         $mem = new \Memcached();
         foreach ($this->servers as $server) {
             $mem->addServer(
-                isset($server['host'])   ? $server['host']   : '127.0.0.1',
-                isset($server['port'])   ? $server['port']   : 11211,
+                isset($server['host']) ? $server['host'] : '127.0.0.1',
+                isset($server['port']) ? $server['port'] : 11211,
                 isset($server['weight']) ? $server['weight'] : 100
             );
         }
@@ -83,11 +83,11 @@ class MemoryAdapter extends Adapter
         $mem = new \Memcache();
         foreach ($this->servers as $server) {
             $mem->addserver(
-                isset($server['host'])       ? $server['host']       : '127.0.0.1',
-                isset($server['port'])       ? $server['port']       : 11211,
+                isset($server['host']) ? $server['host'] : '127.0.0.1',
+                isset($server['port']) ? $server['port'] : 11211,
                 isset($server['persistent']) ? $server['persistent'] : true,
-                isset($server['weight'])     ? $server['weight']     : 100,
-                isset($server['timeout'])    ? $server['timeout']    : 1
+                isset($server['weight']) ? $server['weight'] : 100,
+                isset($server['timeout']) ? $server['timeout'] : 1
             );
         }
         return $mem;

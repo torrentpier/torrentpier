@@ -4,11 +4,10 @@ if (!defined('IN_AJAX')) die(basename(__FILE__));
 
 global $lang;
 
-if (!isset($this->request['t']))
-{
-	$this->ajax_die('empty topic_id'); // TODO: перевести
+if (!isset($this->request['t'])) {
+    $this->ajax_die('empty topic_id'); // TODO: перевести
 }
-$topic_id = (int) $this->request['t'];
+$topic_id = (int)$this->request['t'];
 
 global $bnc_error;
 $bnc_error = 0;
@@ -16,173 +15,149 @@ $bnc_error = 0;
 // Получение торрент-файла
 $file_path = get_attach_path($topic_id, 8);
 
-if (($file_contents = @file_get_contents($file_path)) === false)
-{
-	if (IS_AM)
-	{
-		$this->ajax_die($lang['ERROR_NO_ATTACHMENT'] ."\n\n". htmlCHR($file_path));
-	}
-	else
-	{
-		$this->ajax_die($lang['ERROR_NO_ATTACHMENT']);
-	}
+if (($file_contents = @file_get_contents($file_path)) === false) {
+    if (IS_AM) {
+        $this->ajax_die($lang['ERROR_NO_ATTACHMENT'] . "\n\n" . htmlCHR($file_path));
+    } else {
+        $this->ajax_die($lang['ERROR_NO_ATTACHMENT']);
+    }
 }
 
 // Построение списка
 $tor_filelist = build_tor_filelist($file_contents);
 
-function build_tor_filelist ($file_contents)
+function build_tor_filelist($file_contents)
 {
-	global $lang;
+    global $lang;
 
-	if (!$tor = bdecode($file_contents))
-	{
-		return $lang['TORFILE_INVALID'];
-	}
+    if (!$tor = bdecode($file_contents)) {
+        return $lang['TORFILE_INVALID'];
+    }
 
-	$torrent = new torrent($tor);
+    $torrent = new torrent($tor);
 
-	return $torrent->get_filelist();
+    return $torrent->get_filelist();
 }
 
 class torrent
 {
-	var $tor_decoded = array();
-	var $files_ary   = array('/' => '');
-	var $multiple    = null;
-	var $root_dir    = '';
-	var $files_html  = '';
+    var $tor_decoded = array();
+    var $files_ary = array('/' => '');
+    var $multiple = null;
+    var $root_dir = '';
+    var $files_html = '';
 
-	function torrent ($decoded_file_contents)
-	{
-		$this->tor_decoded = $decoded_file_contents;
-	}
+    function torrent($decoded_file_contents)
+    {
+        $this->tor_decoded = $decoded_file_contents;
+    }
 
-	function get_filelist ()
-	{
-		$this->build_filelist_array();
+    function get_filelist()
+    {
+        $this->build_filelist_array();
 
-		if ($this->multiple)
-		{
-			if ($this->files_ary['/'] !== '')
-			{
-				$this->files_ary = array_merge($this->files_ary, $this->files_ary['/']);
-				unset($this->files_ary['/']);
-			}
-			$filelist = $this->build_filelist_html();
-			return "<div class=\"tor-root-dir\">{$this->root_dir}</div>$filelist";
-		}
-		else
-		{
-			return join('', $this->files_ary['/']);
-		}
-	}
+        if ($this->multiple) {
+            if ($this->files_ary['/'] !== '') {
+                $this->files_ary = array_merge($this->files_ary, $this->files_ary['/']);
+                unset($this->files_ary['/']);
+            }
+            $filelist = $this->build_filelist_html();
+            return "<div class=\"tor-root-dir\">{$this->root_dir}</div>$filelist";
+        } else {
+            return join('', $this->files_ary['/']);
+        }
+    }
 
-	function build_filelist_array ()
-	{
-		$info = $this->tor_decoded['info'];
+    function build_filelist_array()
+    {
+        $info = $this->tor_decoded['info'];
 
-		if (isset($info['name.utf-8']))
-		{
-			$info['name'] =& $info['name.utf-8'];
-		}
+        if (isset($info['name.utf-8'])) {
+            $info['name'] =& $info['name.utf-8'];
+        }
 
-		if (isset($info['files']) && is_array($info['files']))
-		{
-			$this->root_dir = isset($info['name']) ? '../'. clean_tor_dirname($info['name']) : '...';
-			$this->multiple = true;
+        if (isset($info['files']) && is_array($info['files'])) {
+            $this->root_dir = isset($info['name']) ? '../' . clean_tor_dirname($info['name']) : '...';
+            $this->multiple = true;
 
-			foreach ($info['files'] as $f)
-			{
-				if (isset($f['path.utf-8']))
-				{
-					$f['path'] =& $f['path.utf-8'];
-				}
-				if (!isset($f['path']) || !is_array($f['path']))
-				{
-					continue;
-				}
-				array_deep($f['path'], 'clean_tor_dirname');
+            foreach ($info['files'] as $f) {
+                if (isset($f['path.utf-8'])) {
+                    $f['path'] =& $f['path.utf-8'];
+                }
+                if (!isset($f['path']) || !is_array($f['path'])) {
+                    continue;
+                }
+                array_deep($f['path'], 'clean_tor_dirname');
 
-				$length = isset($f['length']) ? (float) $f['length'] : 0;
-				$subdir_count = count($f['path']) - 1;
+                $length = isset($f['length']) ? (float)$f['length'] : 0;
+                $subdir_count = count($f['path']) - 1;
 
-				if ($subdir_count > 0)
-				{
-					$name = array_pop($f['path']);
-					$cur_files_ary =& $this->files_ary;
+                if ($subdir_count > 0) {
+                    $name = array_pop($f['path']);
+                    $cur_files_ary =& $this->files_ary;
 
-					for ($i=0,$j=1; $i < $subdir_count; $i++,$j++)
-					{
-						$subdir = $f['path'][$i];
+                    for ($i = 0, $j = 1; $i < $subdir_count; $i++, $j++) {
+                        $subdir = $f['path'][$i];
 
-						if (!isset($cur_files_ary[$subdir]))
-						{
-							$cur_files_ary[$subdir] = array();
-						}
-						$cur_files_ary =& $cur_files_ary[$subdir];
+                        if (!isset($cur_files_ary[$subdir])) {
+                            $cur_files_ary[$subdir] = array();
+                        }
+                        $cur_files_ary =& $cur_files_ary[$subdir];
 
-						if ($j == $subdir_count)
-						{
-							if (is_string($cur_files_ary))
-							{
-								$GLOBALS['bnc_error'] = 1;
-								break(1);
-							}
-							$cur_files_ary[] = $this->build_file_item($name, $length);
-						}
-					}
-					@natsort($cur_files_ary);
-				}
-				else
-				{
-					$name = $f['path'][0];
-					$this->files_ary['/'][] = $this->build_file_item($name, $length);
-					natsort($this->files_ary['/']);
-				}
-			}
-		}
-		else
-		{
-			$this->multiple = false;
-			$name = isset($info['name']) ? clean_tor_dirname($info['name']) : '';
-			$length = isset($info['length']) ? (float) $info['length'] : 0;
+                        if ($j == $subdir_count) {
+                            if (is_string($cur_files_ary)) {
+                                $GLOBALS['bnc_error'] = 1;
+                                break(1);
+                            }
+                            $cur_files_ary[] = $this->build_file_item($name, $length);
+                        }
+                    }
+                    @natsort($cur_files_ary);
+                } else {
+                    $name = $f['path'][0];
+                    $this->files_ary['/'][] = $this->build_file_item($name, $length);
+                    natsort($this->files_ary['/']);
+                }
+            }
+        } else {
+            $this->multiple = false;
+            $name = isset($info['name']) ? clean_tor_dirname($info['name']) : '';
+            $length = isset($info['length']) ? (float)$info['length'] : 0;
 
-			$this->files_ary['/'][] = $this->build_file_item($name, $length);
-			natsort($this->files_ary['/']);
-		}
-	}
+            $this->files_ary['/'][] = $this->build_file_item($name, $length);
+            natsort($this->files_ary['/']);
+        }
+    }
 
-	function build_file_item ($name, $length)
-	{
-		global $images, $lang;
+    function build_file_item($name, $length)
+    {
+        global $images, $lang;
 
-		/** @var \TorrentPier\Di $di */
-		$di = \TorrentPier\Di::getInstance();
+        /** @var \TorrentPier\Di $di */
+        $di = \TorrentPier\Di::getInstance();
 
-		$magnet_name = $magnet_ext = '';
+        $magnet_name = $magnet_ext = '';
 
-		if ($di->config->get('magnet_links_enabled'))
-		{
-			$magnet_name = '<a title="'.$lang['DC_MAGNET'].'" href="dchub:magnet:?kt='.$name.'&xl='.$length.'"><img src="'. $images['icon_dc_magnet'] .'" width="10" height="10" border="0" /></a>';
-			$magnet_ext  = '<a title="'.$lang['DC_MAGNET_EXT'].'" href="dchub:magnet:?kt=.'.substr(strrchr($name, '.'), 1).'&xl='.$length.'"><img src="'. $images['icon_dc_magnet_ext'] .'" width="10" height="10" border="0" /></a>';
-		}
+        if ($di->config->get('magnet_links_enabled')) {
+            $magnet_name = '<a title="' . $lang['DC_MAGNET'] . '" href="dchub:magnet:?kt=' . $name . '&xl=' . $length . '"><img src="' . $images['icon_dc_magnet'] . '" width="10" height="10" border="0" /></a>';
+            $magnet_ext = '<a title="' . $lang['DC_MAGNET_EXT'] . '" href="dchub:magnet:?kt=.' . substr(strrchr($name, '.'), 1) . '&xl=' . $length . '"><img src="' . $images['icon_dc_magnet_ext'] . '" width="10" height="10" border="0" /></a>';
+        }
 
-		return "$name <i>$length</i> $magnet_name $magnet_ext";
-	}
+        return "$name <i>$length</i> $magnet_name $magnet_ext";
+    }
 
-	function build_filelist_html ()
-	{
-		global $html;
-		return $html->array2html($this->files_ary);
-	}
+    function build_filelist_html()
+    {
+        global $html;
+        return $html->array2html($this->files_ary);
+    }
 }
 
-function clean_tor_dirname ($dirname)
+function clean_tor_dirname($dirname)
 {
-	return str_replace(array('[', ']', '<', '>', "'"), array('&#91;', '&#93;', '&lt;', '&gt;', '&#039;'), $dirname);
+    return str_replace(array('[', ']', '<', '>', "'"), array('&#91;', '&#93;', '&lt;', '&gt;', '&#039;'), $dirname);
 }
 
-if ($bnc_error) $tor_filelist = '<b style="color: #993300;">'.$lang['ERROR_BUILD'].'</b><br /><br />'.$tor_filelist;
+if ($bnc_error) $tor_filelist = '<b style="color: #993300;">' . $lang['ERROR_BUILD'] . '</b><br /><br />' . $tor_filelist;
 
 $this->response['html'] = $tor_filelist;

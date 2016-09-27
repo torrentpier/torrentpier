@@ -77,9 +77,9 @@ class AdapterTest extends \PHPUnit_Framework_TestCase
             ->with('DoctrineNamespaceCacheKey[namespaceTest]')->willReturn(false);
 
         $this->cacheProvider->expects(self::at(1))->method('doSave')
-            ->with('namespaceTest[keyTest][1]', [1,2,3,4], 10)->willReturn(true);
+            ->with('namespaceTest[keyTest][1]', [1, 2, 3, 4], 10)->willReturn(true);
 
-        self::assertEquals(true, $this->adapter->set('namespaceTest::keyTest', [1,2,3,4], 10));
+        self::assertEquals(true, $this->adapter->set('namespaceTest::keyTest', [1, 2, 3, 4], 10));
     }
 
     public function testGets()
@@ -99,9 +99,9 @@ class AdapterTest extends \PHPUnit_Framework_TestCase
             ->with('DoctrineNamespaceCacheKey[namespaceTest]')->willReturn(false);
 
         $this->cacheProvider->expects(self::at(1))->method('doSave')
-            ->with('namespaceTest[keyTest][1]', [1,2,3,4], 10)->willReturn(true);
+            ->with('namespaceTest[keyTest][1]', [1, 2, 3, 4], 10)->willReturn(true);
 
-        self::assertEquals(true, $this->adapter->sets(['keyTest' => [1,2,3,4]], 'namespaceTest', 10));
+        self::assertEquals(true, $this->adapter->sets(['keyTest' => [1, 2, 3, 4]], 'namespaceTest', 10));
     }
 
     /**

@@ -21,7 +21,7 @@ class Config extends ZendConfig
      */
     public function __construct(array $array, $allowModifications = false, Config &$root = null)
     {
-        $this->allowModifications = (bool) $allowModifications;
+        $this->allowModifications = (bool)$allowModifications;
 
         $this->root = $root;
 
@@ -73,7 +73,7 @@ class Config extends ZendConfig
                 $strPos += 6;
                 $key = substr($value, $strPos, (strpos($value, '}') - $strPos));
 
-                $value = str_replace('{self.'.$key.'}', $this->root->get($key, ''), $value);
+                $value = str_replace('{self.' . $key . '}', $this->root->get($key, ''), $value);
             }
         }
 
@@ -86,7 +86,7 @@ class Config extends ZendConfig
     public function toArray()
     {
         $array = [];
-        $data  = $this->data;
+        $data = $this->data;
 
         /** @var self $value */
         foreach ($data as $key => $value) {

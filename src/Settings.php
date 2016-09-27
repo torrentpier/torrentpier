@@ -2,8 +2,8 @@
 
 namespace TorrentPier;
 
-use TorrentPier\Db\Adapter as DbAdapter;
 use TorrentPier\Cache\Adapter as CacheAdapter;
+use TorrentPier\Db\Adapter as DbAdapter;
 
 class Settings
 {

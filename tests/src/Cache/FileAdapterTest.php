@@ -22,7 +22,7 @@ class FileAdapterTest extends \PHPUnit_Framework_TestCase
         $this->adapter->setOptions([
             'directory' => __DIR__ . '/../../../internal_data/cache',
             'extension' => '.torrentpier.php',
-            'umask'     => 0644,
+            'umask' => 0644,
         ]);
     }
 
