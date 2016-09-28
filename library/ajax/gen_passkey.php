@@ -1,6 +1,8 @@
 <?php
 
-if (!defined('IN_AJAX')) die(basename(__FILE__));
+if (!defined('IN_AJAX')) {
+    die(basename(__FILE__));
+}
 
 global $userdata, $lang;
 
@@ -18,4 +20,6 @@ if ($req_uid == $userdata['user_id'] || IS_ADMIN) {
     tracker_rm_user($req_uid);
 
     $this->response['passkey'] = $passkey;
-} else $this->ajax_die($lang['NOT_AUTHORISED']);
+} else {
+    $this->ajax_die($lang['NOT_AUTHORISED']);
+}

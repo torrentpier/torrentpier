@@ -26,7 +26,7 @@ if (!empty($_POST['edit']) || !empty($_POST['new'])) {
         );
         $mode = 'editgroup';
         $template->assign_block_vars('group_edit', array());
-    } else if (!empty($_POST['new'])) {
+    } elseif (!empty($_POST['new'])) {
         $group_info = array(
             'group_name' => '',
             'group_description' => '',
@@ -62,7 +62,7 @@ if (!empty($_POST['edit']) || !empty($_POST['new'])) {
         'S_GROUP_ACTION' => "admin_groups.php",
         'S_HIDDEN_FIELDS' => $s_hidden_fields,
     ));
-} else if (!empty($_POST['group_update'])) {
+} elseif (!empty($_POST['group_update'])) {
     if (!empty($_POST['group_delete'])) {
         if (!$group_info = get_group_data($group_id)) {
             bb_die($lang['GROUP_NOT_EXIST']);
@@ -84,7 +84,7 @@ if (!empty($_POST['edit']) || !empty($_POST['new'])) {
 
         if ($group_name === '') {
             bb_die($lang['NO_GROUP_NAME']);
-        } else if ($group_moderator === '') {
+        } elseif ($group_moderator === '') {
             bb_die($lang['NO_GROUP_MODERATOR']);
         }
         $this_userdata = get_userdata($group_moderator, true);
@@ -128,7 +128,7 @@ if (!empty($_POST['edit']) || !empty($_POST['new'])) {
             $message .= sprintf($lang['CLICK_RETURN_ADMIN_INDEX'], '<a href="index.php?pane=right">', '</a>');
 
             bb_die($message);
-        } else if ($mode == 'newgroup') {
+        } elseif ($mode == 'newgroup') {
             $sql_ary['group_time'] = $sql_ary['mod_time'] = TIMENOW;
             $sql_args = DB()->build_array('INSERT', $sql_ary);
 

@@ -1,6 +1,8 @@
 <?php
 
-if (!defined('BB_ROOT')) die(basename(__FILE__));
+if (!defined('BB_ROOT')) {
+    die(basename(__FILE__));
+}
 
 if (empty($_GET['u']) || empty($_GET['act_key'])) {
     bb_die('Bad request');
@@ -16,7 +18,7 @@ if (!($result = DB()->sql_query($sql))) {
 if ($row = DB()->sql_fetchrow($result)) {
     if ($row['user_active'] && trim($row['user_actkey']) == '') {
         bb_die($lang['ALREADY_ACTIVATED']);
-    } else if ((trim($row['user_actkey']) == trim($_GET['act_key'])) && (trim($row['user_actkey']) != '')) {
+    } elseif ((trim($row['user_actkey']) == trim($_GET['act_key'])) && (trim($row['user_actkey']) != '')) {
         $sql_update_pass = ($row['user_newpasswd'] != '') ? ", user_password = '" . md5(md5($row['user_newpasswd'])) . "', user_newpasswd = ''" : '';
 
         $sql = "UPDATE " . BB_USERS . "

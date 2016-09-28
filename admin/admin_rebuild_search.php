@@ -1,12 +1,16 @@
 <?php
 
 if (!empty($setmodules)) {
-    if (IS_SUPER_ADMIN) $module['GENERAL']['REBUILD_SEARCH_INDEX'] = basename(__FILE__);
+    if (IS_SUPER_ADMIN) {
+        $module['GENERAL']['REBUILD_SEARCH_INDEX'] = basename(__FILE__);
+    }
     return;
 }
 require('./pagestart.php');
 
-if (!IS_SUPER_ADMIN) bb_die($lang['NOT_ADMIN']);
+if (!IS_SUPER_ADMIN) {
+    bb_die($lang['NOT_ADMIN']);
+}
 
 require(INC_DIR . 'bbcode.php');
 
@@ -199,8 +203,9 @@ if ($mode == 'submit' || $mode == 'refresh') {
                 'rebuild_session_status' => REBUILD_SEARCH_PROCESSED,
             ));
             DB()->query("REPLACE INTO " . BB_SEARCH_REBUILD . $args);
-        } else  // refresh
-        {
+        } else {
+            // refresh
+
             // update the last session entry
             DB()->query("
 				UPDATE " . BB_SEARCH_REBUILD . " SET
@@ -247,8 +252,9 @@ if ($mode == 'submit' || $mode == 'refresh') {
         $template->assign_vars(array(
             'CANCEL_BUTTON' => true,
         ));
-    } else  // end of processing
-    {
+    } else {
+        // end of processing
+
         $form_action = "admin_rebuild_search.php";
         $next_button = $lang['FINISHED'];
         $progress_bar_img = $images['progress_bar_full'];
@@ -329,8 +335,8 @@ if ($mode == 'submit' || $mode == 'refresh') {
 
         'S_REBUILD_SEARCH_ACTION' => $form_action,
     ));
-} else  // show the input page
-{
+} else {
+    // show the input page
     // create the page
     // used only with the select input
     $post_limit_hidden = ($def_post_limit > $total_posts) ? $total_posts : $def_post_limit;
@@ -362,8 +368,9 @@ if ($mode == 'submit' || $mode == 'refresh') {
             $clear_search_disabled = 'disabled="disabled"';
 
             $template->assign_block_vars("start_select_input", array());
-        } else  // when finished
-        {
+        } else {
+            // when finished
+
             if ($last_session_data['end_post_id'] < $max_post_id) {
                 $last_saved_processing = sprintf($lang['INFO_PROCESSING_FINISHED_NEW'], $last_saved_post_id, $total_posts_processed, $last_saved_date, ($total_posts - $total_posts_processed));
                 $clear_search_disabled = 'disabled="disabled"';

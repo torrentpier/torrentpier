@@ -21,7 +21,7 @@ $mode = htmlspecialchars($mode);
 
 if (isset($_POST['add'])) {
     $mode = 'add';
-} else if (isset($_POST['save'])) {
+} elseif (isset($_POST['save'])) {
     $mode = 'save';
 }
 
@@ -54,7 +54,7 @@ if ($mode != '') {
             'S_WORDS_ACTION' => 'admin_words.php',
             'S_HIDDEN_FIELDS' => $s_hidden_fields,
         ));
-    } else if ($mode == 'save') {
+    } elseif ($mode == 'save') {
         $word_id = intval(request_var('id', 0));
         $word = trim(request_var('word', ''));
         $replacement = trim(request_var('replacement', ''));
@@ -82,7 +82,7 @@ if ($mode != '') {
         $message .= '<br /><br />' . sprintf($lang['CLICK_RETURN_WORDADMIN'], '<a href="admin_words.php">', '</a>') . '<br /><br />' . sprintf($lang['CLICK_RETURN_ADMIN_INDEX'], '<a href="index.php?pane=right">', '</a>');
 
         bb_die($message);
-    } else if ($mode == 'delete') {
+    } elseif ($mode == 'delete') {
         $word_id = intval(request_var('id', 0));
 
         if ($word_id) {

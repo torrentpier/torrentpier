@@ -189,10 +189,10 @@ if (isset($_GET['pane']) && $_GET['pane'] == 'left') {
 
                     if (bf($onlinerow_reg[$i]['user_opt'], 'user_opt', 'user_viewonline')) {
                         $hidden_users++;
-                        $hidden = TRUE;
+                        $hidden = true;
                     } else {
                         $registered_users++;
-                        $hidden = FALSE;
+                        $hidden = false;
                     }
 
                     $row_class = 'row1';

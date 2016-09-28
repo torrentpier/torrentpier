@@ -1,6 +1,8 @@
 <?php
 
-if (!defined('BB_ROOT')) die(basename(__FILE__));
+if (!defined('BB_ROOT')) {
+    die(basename(__FILE__));
+}
 
 //
 // Functions
@@ -10,7 +12,7 @@ function cron_get_file_lock()
     $lock_obtained = false;
 
     if (file_exists(CRON_ALLOWED)) {
-#		bb_log(date('H:i:s - ') . getmypid() .' -x-- FILE-LOCK try'. LOG_LF, CRON_LOG_DIR .'cron_check');
+        #		bb_log(date('H:i:s - ') . getmypid() .' -x-- FILE-LOCK try'. LOG_LF, CRON_LOG_DIR .'cron_check');
 
         $lock_obtained = rename(CRON_ALLOWED, CRON_RUNNING);
     } elseif (file_exists(CRON_RUNNING)) {

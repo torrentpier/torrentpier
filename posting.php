@@ -92,12 +92,16 @@ $post_data = array();
 switch ($mode) {
     case 'newtopic':
     case 'new_rel':
-        if (!$forum_id) bb_simple_die($lang['FORUM_NOT_EXIST']);
+        if (!$forum_id) {
+            bb_simple_die($lang['FORUM_NOT_EXIST']);
+        }
         $sql = "SELECT * FROM " . BB_FORUMS . " WHERE forum_id = $forum_id LIMIT 1";
         break;
 
     case 'reply':
-        if (!$topic_id) bb_simple_die($lang['NO_TOPIC_ID']);
+        if (!$topic_id) {
+            bb_simple_die($lang['NO_TOPIC_ID']);
+        }
         $sql = "SELECT f.*, t.*
 			FROM " . BB_FORUMS . " f, " . BB_TOPICS . " t
 			WHERE t.topic_id = $topic_id
@@ -108,7 +112,9 @@ switch ($mode) {
     case 'quote':
     case 'editpost':
     case 'delete':
-        if (!$post_id) bb_simple_die($lang['NO_POST_ID']);
+        if (!$post_id) {
+            bb_simple_die($lang['NO_POST_ID']);
+        }
 
         $select_sql = 'SELECT f.*, t.*, p.*';
         $select_sql .= (!$submit) ? ', pt.*, u.username, u.user_id' : '';
@@ -167,7 +173,9 @@ if ($post_info = DB()->fetch_row($sql)) {
             $auth_err = $lang['CANNOT_DELETE_REPLIED'];
         }
 
-        if (isset($auth_err)) bb_die($auth_err);
+        if (isset($auth_err)) {
+            bb_die($auth_err);
+        }
     } else {
         if ($mode == 'quote') {
             $topic_id = $post_info['topic_id'];
@@ -223,7 +231,9 @@ if ($mode == 'new_rel') {
         foreach ($sql as $row) {
             $topics .= $di->config->get('tor_icons.' . $row['tor_status']) . '<a href="' . TOPIC_URL . $row['topic_id'] . '">' . $row['topic_title'] . '</a><div class="spacer_12"></div>';
         }
-        if ($topics) bb_die($topics . $lang['UNEXECUTED_RELEASE']);
+        if ($topics) {
+            bb_die($topics . $lang['UNEXECUTED_RELEASE']);
+        }
     }
     require(INC_DIR . 'posting_tpl.php');
     exit;
@@ -365,11 +375,15 @@ if ($mode == 'delete' && !$confirm) {
                     if ($di->config->get('premod')) {
                         // Получение списка id форумов начиная с parent
                         $forum_parent = $forum_id;
-                        if ($post_info['forum_parent']) $forum_parent = $post_info['forum_parent'];
+                        if ($post_info['forum_parent']) {
+                            $forum_parent = $post_info['forum_parent'];
+                        }
                         $count_rowset = DB()->fetch_rowset("SELECT forum_id FROM " . BB_FORUMS . " WHERE forum_parent = $forum_parent");
                         $sub_forums = array();
                         foreach ($count_rowset as $count_row) {
-                            if ($count_row['forum_id'] != $forum_id) $sub_forums[] = $count_row['forum_id'];
+                            if ($count_row['forum_id'] != $forum_id) {
+                                $sub_forums[] = $count_row['forum_id'];
+                            }
                         }
                         $sub_forums[] = $forum_id;
                         $sub_forums = join(',', $sub_forums);
@@ -380,7 +394,9 @@ if ($mode == 'delete' && !$confirm) {
                         } else {
                             tracker_register($topic_id, 'newtopic', TOR_PREMOD);
                         }
-                    } else tracker_register($topic_id, 'newtopic', TOR_NOT_APPROVED);
+                    } else {
+                        tracker_register($topic_id, 'newtopic', TOR_NOT_APPROVED);
+                    }
                 }
             } else {
                 $return_to_edit_link = '<a href="' . POSTING_URL . '?mode=editpost&amp;p=' . $post_id . '">Вернуться к редактированию сообщения</a>'; //TODO: перевести
@@ -448,10 +464,12 @@ if ($preview || $error_msg || ($submit && $topic_has_new_posts)) {
                 $orig_word = array();
                 $replace_word = array();
                 obtain_word_list($orig_word, $replace_word);
-                define('WORD_LIST_OBTAINED', TRUE);
+                define('WORD_LIST_OBTAINED', true);
             }
 
-            if ($post_info['post_attachment'] && !IS_AM) $message = $post_info['topic_title'];
+            if ($post_info['post_attachment'] && !IS_AM) {
+                $message = $post_info['topic_title'];
+            }
             $quote_username = ($post_info['post_username'] != '') ? $post_info['post_username'] : $post_info['username'];
             $message = '[quote="' . $quote_username . '"][qpost=' . $post_info['post_id'] . ']' . $message . '[/quote]';
 

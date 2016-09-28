@@ -1,6 +1,8 @@
 <?php
 
-if (!defined('BB_ROOT')) die(basename(__FILE__));
+if (!defined('BB_ROOT')) {
+    die(basename(__FILE__));
+}
 
 function update_table_bool($table_name, $key, $field_name, $field_def_val)
 {
@@ -72,7 +74,6 @@ function set_tpl_vars_lang($default_cfg)
             'L_' . strtoupper($config_name) . '_EXPL' => isset($lang[$config_name . '_expl']) ? $lang[$config_name . '_expl'] : '',
             'L_' . strtoupper($config_name) . '_HEAD' => isset($lang[$config_name . '_head']) ? $lang[$config_name . '_head'] : '',
         ));
-
     }
 }
 
@@ -82,9 +83,9 @@ function update_config_table($table_name, $default_cfg, $cfg, $type)
         if (isset($_POST[$config_name]) && $_POST[$config_name] != $cfg[$config_name]) {
             if ($type == 'str') {
                 $config_value = $_POST[$config_name];
-            } else if ($type == 'bool') {
+            } elseif ($type == 'bool') {
                 $config_value = ($_POST[$config_name]) ? 1 : 0;
-            } else if ($type == 'num') {
+            } elseif ($type == 'num') {
                 $config_value = abs(intval($_POST[$config_name]));
             } else {
                 return;

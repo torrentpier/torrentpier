@@ -28,7 +28,7 @@ while ($file = readdir($dir)) {
 
         if ($img_size[0] && $img_size[1]) {
             $smiley_images[] = $file;
-        } else if (preg_match('/.pak$/i', $file)) {
+        } elseif (preg_match('/.pak$/i', $file)) {
             $smiley_paks[] = $file;
         }
     }
@@ -123,7 +123,7 @@ if (isset($_GET['import_pack']) || isset($_POST['import_pack'])) {
             'S_HIDDEN_FIELDS' => $hidden_vars,
         ));
     }
-} else if (isset($_POST['export_pack']) || isset($_GET['export_pack'])) {
+} elseif (isset($_POST['export_pack']) || isset($_GET['export_pack'])) {
     $export_pack = (string)request_var('export_pack', '');
 
     if ($export_pack == 'send') {
@@ -150,7 +150,7 @@ if (isset($_GET['import_pack']) || isset($_POST['import_pack'])) {
     }
 
     bb_die(sprintf($lang['EXPORT_SMILES'], '<a href="admin_smilies.php?export_pack=send">', '</a>') . '<br /><br />' . sprintf($lang['CLICK_RETURN_SMILEADMIN'], '<a href="admin_smilies.php">', '</a>') . '<br /><br />' . sprintf($lang['CLICK_RETURN_ADMIN_INDEX'], '<a href="index.php?pane=right">', '</a>'));
-} else if (isset($_POST['add']) || isset($_GET['add'])) {
+} elseif (isset($_POST['add']) || isset($_GET['add'])) {
     $filename_list = '';
     for ($i = 0; $i < count($smiley_images); $i++) {
         $filename_list .= '<option value="' . $smiley_images[$i] . '">' . $smiley_images[$i] . '</option>';
@@ -166,7 +166,7 @@ if (isset($_GET['import_pack']) || isset($_POST['import_pack'])) {
         'S_FILENAME_OPTIONS' => $filename_list,
         'S_SMILEY_BASEDIR' => BB_ROOT . $di->config->get('smilies_path')
     ));
-} else if ($mode != '') {
+} elseif ($mode != '') {
     switch ($mode) {
         case 'delete':
             $smiley_id = (!empty($_POST['id'])) ? $_POST['id'] : $_GET['id'];

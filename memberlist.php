@@ -111,10 +111,10 @@ if ($by_letter_req) {
     if ($by_letter_req === 'all') {
         $by_letter = 'all';
         $letter_sql = '';
-    } else if ($by_letter_req === 'others') {
+    } elseif ($by_letter_req === 'others') {
         $by_letter = 'others';
         $letter_sql = "username REGEXP '^[!-@\\[-`].*$'";
-    } else if ($letter_req = preg_replace("#[^$letters_range]#ui", '', iconv('windows-1251', 'UTF-8', $by_letter_req[0]))) {
+    } elseif ($letter_req = preg_replace("#[^$letters_range]#ui", '', iconv('windows-1251', 'UTF-8', $by_letter_req[0]))) {
         $by_letter = DB()->escape($letter_req);
         $letter_sql = "LOWER(username) LIKE '$by_letter%'";
     }
@@ -192,7 +192,9 @@ if ($result = DB()->fetch_rowset($sql)) {
 }
 
 $paginationurl = "memberlist.php?mode=$mode&amp;order=$sort_order&amp;letter=$by_letter";
-if ($paginationusername) $paginationurl .= "&amp;username=$paginationusername";
+if ($paginationusername) {
+    $paginationurl .= "&amp;username=$paginationusername";
+}
 if ($mode != 'topten' || $di->config->get('topics_per_page') < 10) {
     $sql = "SELECT COUNT(*) AS total FROM " . BB_USERS;
     $sql .= ($letter_sql) ? " WHERE $letter_sql" : '';

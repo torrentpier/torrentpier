@@ -1,6 +1,8 @@
 <?php
 
-if (!defined('BB_ROOT')) die(basename(__FILE__));
+if (!defined('BB_ROOT')) {
+    die(basename(__FILE__));
+}
 
 function get_sql_log()
 {
@@ -16,7 +18,7 @@ function get_sql_log()
 
     if (!empty($datastore->db->dbg)) {
         $log .= get_sql_log_html($datastore->db, 'cache: datastore [' . $datastore->engine . ']');
-    } else if (!empty($datastore->dbg)) {
+    } elseif (!empty($datastore->dbg)) {
         $log .= get_sql_log_html($datastore, 'cache: datastore [' . $datastore->engine . ']');
     }
 

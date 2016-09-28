@@ -76,7 +76,7 @@ if ($mode != '') {
         $rank_id = (isset($_POST['id'])) ? intval($_POST['id']) : 0;
         $rank_title = (isset($_POST['title'])) ? trim($_POST['title']) : '';
         $rank_style = (isset($_POST['style'])) ? trim($_POST['style']) : '';
-        $special_rank = ($_POST['special_rank'] == 1) ? TRUE : 0;
+        $special_rank = ($_POST['special_rank'] == 1) ? true : 0;
         $min_posts = (isset($_POST['min_posts'])) ? intval($_POST['min_posts']) : -1;
         $rank_image = ((isset($_POST['rank_image']))) ? trim($_POST['rank_image']) : '';
 

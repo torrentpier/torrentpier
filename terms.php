@@ -10,7 +10,9 @@ $di = \TorrentPier\Di::getInstance();
 
 $user->session_start();
 
-if (!$di->config->get('terms') && !IS_ADMIN) redirect('index.php');
+if (!$di->config->get('terms') && !IS_ADMIN) {
+    redirect('index.php');
+}
 
 $content = $di->view->make('terms', [
     'isAdmin' => IS_ADMIN,

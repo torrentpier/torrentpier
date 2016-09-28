@@ -32,7 +32,9 @@ if (!$result = DB()->sql_query($sql)) {
         $new[$config_name] = isset($_POST[$config_name]) ? $_POST[$config_name] : $default_config[$config_name];
 
         if (isset($_POST['submit']) && $row['config_value'] != $new[$config_name]) {
-            if ($config_name == 'seed_bonus_points' || $config_name == 'seed_bonus_release' || $config_name == 'bonus_upload' || $config_name == 'bonus_upload_price') $new[$config_name] = serialize(str_replace(',', '.', $new[$config_name]));
+            if ($config_name == 'seed_bonus_points' || $config_name == 'seed_bonus_release' || $config_name == 'bonus_upload' || $config_name == 'bonus_upload_price') {
+                $new[$config_name] = serialize(str_replace(',', '.', $new[$config_name]));
+            }
             bb_update_config(array($config_name => $new[$config_name]));
         }
     }
@@ -78,7 +80,9 @@ switch ($mode) {
             $seed_release = unserialize($new['seed_bonus_release']);
 
             foreach ($seed_bonus as $i => $row) {
-                if (!$row || !$seed_release[$i]) continue;
+                if (!$row || !$seed_release[$i]) {
+                    continue;
+                }
 
                 $template->assign_block_vars('seed_bonus', array(
                     'RELEASE' => $seed_release[$i],
@@ -92,7 +96,9 @@ switch ($mode) {
             $price_row = unserialize($new['bonus_upload_price']);
 
             foreach ($upload_row as $i => $row) {
-                if (!$row || !$price_row[$i]) continue;
+                if (!$row || !$price_row[$i]) {
+                    continue;
+                }
 
                 $template->assign_block_vars('bonus_upload', array(
                     'UP' => $row,

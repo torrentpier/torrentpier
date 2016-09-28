@@ -1,30 +1,32 @@
 <?php
 
-if (!defined('BB_ROOT')) die(basename(__FILE__));
+if (!defined('BB_ROOT')) {
+    die(basename(__FILE__));
+}
 
 class datastore_common
 {
     /**
      * Директория с builder-скриптами (внутри INC_DIR)
      */
-    var $ds_dir = 'datastore/';
+    public $ds_dir = 'datastore/';
     /**
      * Готовая к употреблению data
      * array('title' => data)
      */
-    var $data = array();
+    public $data = array();
     /**
      * Список элементов, которые будут извлечены из хранилища при первом же запросе get()
      * до этого момента они ставятся в очередь $queued_items для дальнейшего извлечения _fetch()'ем
      * всех элементов одним запросом
      * array('title1', 'title2'...)
      */
-    var $queued_items = array();
+    public $queued_items = array();
 
     /**
      * 'title' => 'builder script name' inside "includes/datastore" dir
      */
-    var $known_items = array(
+    public $known_items = array(
         'cat_forums' => 'build_cat_forums.php',
         'jumpbox' => 'build_cat_forums.php',
         'viewtopic_forum_select' => 'build_cat_forums.php',
@@ -39,14 +41,14 @@ class datastore_common
     /**
      * Constructor
      */
-    function datastore_common()
+    public function datastore_common()
     {
     }
 
     /**
      * @param  array(item1_title, item2_title...) or single item's title
      */
-    function enqueue($items)
+    public function enqueue($items)
     {
         foreach ((array)$items as $item) {
             // игнор уже поставленного в очередь либо уже извлеченного
@@ -56,7 +58,7 @@ class datastore_common
         }
     }
 
-    function &get($title)
+    public function &get($title)
     {
         if (!isset($this->data[$title])) {
             $this->enqueue($title);
@@ -65,18 +67,18 @@ class datastore_common
         return $this->data[$title];
     }
 
-    function store($item_name, $item_data)
+    public function store($item_name, $item_data)
     {
     }
 
-    function rm($items)
+    public function rm($items)
     {
         foreach ((array)$items as $item) {
             unset($this->data[$item]);
         }
     }
 
-    function update($items)
+    public function update($items)
     {
         if ($items == 'all') {
             $items = array_keys(array_unique($this->known_items));
@@ -86,7 +88,7 @@ class datastore_common
         }
     }
 
-    function _fetch()
+    public function _fetch()
     {
         $this->_fetch_from_store();
 
@@ -99,11 +101,11 @@ class datastore_common
         $this->queued_items = array();
     }
 
-    function _fetch_from_store()
+    public function _fetch_from_store()
     {
     }
 
-    function _build_item($title)
+    public function _build_item($title)
     {
         if (!empty($this->known_items[$title])) {
             require(INC_DIR . $this->ds_dir . $this->known_items[$title]);
@@ -112,20 +114,22 @@ class datastore_common
         }
     }
 
-    var $num_queries = 0;
-    var $sql_starttime = 0;
-    var $sql_inittime = 0;
-    var $sql_timetotal = 0;
-    var $cur_query_time = 0;
+    public $num_queries = 0;
+    public $sql_starttime = 0;
+    public $sql_inittime = 0;
+    public $sql_timetotal = 0;
+    public $cur_query_time = 0;
 
-    var $dbg = array();
-    var $dbg_id = 0;
-    var $dbg_enabled = false;
-    var $cur_query = null;
+    public $dbg = array();
+    public $dbg_id = 0;
+    public $dbg_enabled = false;
+    public $cur_query = null;
 
-    function debug($mode, $cur_query = null)
+    public function debug($mode, $cur_query = null)
     {
-        if (!$this->dbg_enabled) return;
+        if (!$this->dbg_enabled) {
+            return;
+        }
 
         $id =& $this->dbg_id;
         $dbg =& $this->dbg[$id];
@@ -138,7 +142,7 @@ class datastore_common
             $dbg['file'] = $this->debug_find_source('file');
             $dbg['line'] = $this->debug_find_source('line');
             $dbg['time'] = '';
-        } else if ($mode == 'stop') {
+        } elseif ($mode == 'stop') {
             $this->cur_query_time = utime() - $this->sql_starttime;
             $this->sql_timetotal += $this->cur_query_time;
             $dbg['time'] = $this->cur_query_time;
@@ -146,7 +150,7 @@ class datastore_common
         }
     }
 
-    function debug_find_source($mode = '')
+    public function debug_find_source($mode = '')
     {
         foreach (debug_backtrace() as $trace) {
             if ($trace['file'] !== __FILE__) {

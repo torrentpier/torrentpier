@@ -1,6 +1,8 @@
 <?php
 
-if (!defined('BB_ROOT')) die(basename(__FILE__));
+if (!defined('BB_ROOT')) {
+    die(basename(__FILE__));
+}
 
 /** @var \TorrentPier\Di $di */
 $di = \TorrentPier\Di::getInstance();
@@ -82,7 +84,7 @@ if ($show_dl_list) {
                     'DL_COUNT' => $dl_count[$i],
                     'DL_USERS_DIV_STYLE' => $dl_users_div_style,
                 ));
-            } else if ($dl_count[$i] && $count_mode) {
+            } elseif ($dl_count[$i] && $count_mode) {
                 if ($i == DL_STATUS_CANCEL && !$show_canceled_in_count_mode) {
                     continue;
                 }

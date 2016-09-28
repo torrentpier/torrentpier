@@ -1,6 +1,8 @@
 <?php
 
-if (!defined('BB_ROOT')) die(basename(__FILE__));
+if (!defined('BB_ROOT')) {
+    die(basename(__FILE__));
+}
 
 /** @var \TorrentPier\Di $di */
 $di = \TorrentPier\Di::getInstance();
@@ -11,7 +13,9 @@ $user_points = $userdata['user_points'];
 if ($di->config->get('seed_bonus_enabled') && $di->config->get('bonus_upload') && $di->config->get('bonus_upload_price')) {
     $upload_row = unserialize($di->config->get('bonus_upload'));
     $price_row = unserialize($di->config->get('bonus_upload_price'));
-} else bb_die($lang['EXCHANGE_NOT']);
+} else {
+    bb_die($lang['EXCHANGE_NOT']);
+}
 
 if (isset($_POST['bonus_id'])) {
     $id = (int)$_POST['bonus_id'];
@@ -60,7 +64,9 @@ if (isset($_POST['bonus_id'])) {
     ));
 
     foreach ($price_row as $i => $price) {
-        if (!$price || !$upload_row[$i]) continue;
+        if (!$price || !$upload_row[$i]) {
+            continue;
+        }
         $class = ($user_points >= $price) ? 'seed' : 'leech';
 
         $template->assign_block_vars('bonus_upload', array(

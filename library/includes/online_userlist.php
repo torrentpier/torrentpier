@@ -1,6 +1,8 @@
 <?php
 
-if (!defined('BB_ROOT')) die(basename(__FILE__));
+if (!defined('BB_ROOT')) {
+    die(basename(__FILE__));
+}
 
 global $lang;
 
@@ -51,10 +53,10 @@ foreach (DB()->fetch_rowset($sql) as $u) {
         if ($level == ADMIN) {
             $name = "<b>$name</b>";
             $users_cnt['admin']++;
-        } else if ($level == MOD) {
+        } elseif ($level == MOD) {
             $name = "<b>$name</b>";
             $users_cnt['mod']++;
-        } else if ($level == GROUP_MEMBER) {
+        } elseif ($level == GROUP_MEMBER) {
             $name = "<b>$name</b>";
             $users_cnt['group_member']++;
         } else {
@@ -86,7 +88,9 @@ if ($ulist) {
     $inline = $block = $short = array();
 
     foreach ($ulist as $level => $users) {
-        if (empty($users)) continue;
+        if (empty($users)) {
+            continue;
+        }
 
         if (count($users) > 200) {
             $style = 'margin: 3px 0; padding: 2px 4px; border: 1px inset; height: 200px; overflow: auto;';
@@ -106,7 +110,7 @@ if ($ulist) {
 
 if (!$online['userlist']) {
     $online['userlist'] = $online_short['userlist'] = $lang['NONE'];
-} else if (isset($_REQUEST['f'])) {
+} elseif (isset($_REQUEST['f'])) {
     $online['userlist'] = $online_short['userlist'] = $lang['BROWSING_FORUM'] . ' ' . $online['userlist'];
 }
 

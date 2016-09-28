@@ -1,6 +1,8 @@
 <?php
 
-if (!defined('BB_ROOT')) die(basename(__FILE__));
+if (!defined('BB_ROOT')) {
+    die(basename(__FILE__));
+}
 
 /** @var \TorrentPier\Di $di */
 $di = \TorrentPier\Di::getInstance();
@@ -62,7 +64,7 @@ if (bf($profiledata['user_opt'], 'user_opt', 'dis_sig')) {
     } else {
         $signature = '';
     }
-} else if ($signature) {
+} elseif ($signature) {
     $signature = bbcode2html($signature);
 }
 
@@ -125,22 +127,28 @@ if (IS_ADMIN) {
         foreach ($rowset as $row) {
             if (!$row['group_single_user'] && !$row['user_pending']) {
                 $member = $row['groups_cnt'];
-            } else if (!$row['group_single_user'] && $row['user_pending']) {
+            } elseif (!$row['group_single_user'] && $row['user_pending']) {
                 $pending = $row['groups_cnt'];
-            } else if ($row['group_single_user']) {
+            } elseif ($row['group_single_user']) {
                 $single = $row['groups_cnt'];
             }
         }
-        if ($member) $group_membership[] = $lang['PARTY'] . " <b>$member</b>";
-        if ($pending) $group_membership[] = $lang['CANDIDATE'] . " <b>$pending</b>";
-        if ($single) $group_membership[] = $lang['INDIVIDUAL'];
+        if ($member) {
+            $group_membership[] = $lang['PARTY'] . " <b>$member</b>";
+        }
+        if ($pending) {
+            $group_membership[] = $lang['CANDIDATE'] . " <b>$pending</b>";
+        }
+        if ($single) {
+            $group_membership[] = $lang['INDIVIDUAL'];
+        }
         $group_membership = join(', ', $group_membership);
     }
     $template->assign_vars(array(
         'GROUP_MEMBERSHIP' => (bool)$group_membership,
         'GROUP_MEMBERSHIP_TXT' => $group_membership,
     ));
-} else if (IS_MOD) {
+} elseif (IS_MOD) {
     $template->assign_vars(array(
         'SHOW_GROUP_MEMBERSHIP' => ($profiledata['user_level'] != USER),
     ));
@@ -182,13 +190,27 @@ if (IS_ADMIN) {
 
 $user_restrictions = array();
 
-if (bf($profiledata['user_opt'], 'user_opt', 'dis_avatar')) $user_restrictions[] = $lang['HIDE_AVATARS'];
-if (bf($profiledata['user_opt'], 'user_opt', 'dis_sig')) $user_restrictions[] = $lang['SHOW_CAPTION'];
-if (bf($profiledata['user_opt'], 'user_opt', 'dis_passkey')) $user_restrictions[] = $lang['DOWNLOAD_TORRENT'];
-if (bf($profiledata['user_opt'], 'user_opt', 'dis_pm')) $user_restrictions[] = $lang['SEND_PM'];
-if (bf($profiledata['user_opt'], 'user_opt', 'dis_post')) $user_restrictions[] = $lang['SEND_MESSAGE'];
-if (bf($profiledata['user_opt'], 'user_opt', 'dis_post_edit')) $user_restrictions[] = $lang['EDIT_POST'];
-if (bf($profiledata['user_opt'], 'user_opt', 'dis_topic')) $user_restrictions[] = $lang['NEW_THREADS'];
+if (bf($profiledata['user_opt'], 'user_opt', 'dis_avatar')) {
+    $user_restrictions[] = $lang['HIDE_AVATARS'];
+}
+if (bf($profiledata['user_opt'], 'user_opt', 'dis_sig')) {
+    $user_restrictions[] = $lang['SHOW_CAPTION'];
+}
+if (bf($profiledata['user_opt'], 'user_opt', 'dis_passkey')) {
+    $user_restrictions[] = $lang['DOWNLOAD_TORRENT'];
+}
+if (bf($profiledata['user_opt'], 'user_opt', 'dis_pm')) {
+    $user_restrictions[] = $lang['SEND_PM'];
+}
+if (bf($profiledata['user_opt'], 'user_opt', 'dis_post')) {
+    $user_restrictions[] = $lang['SEND_MESSAGE'];
+}
+if (bf($profiledata['user_opt'], 'user_opt', 'dis_post_edit')) {
+    $user_restrictions[] = $lang['EDIT_POST'];
+}
+if (bf($profiledata['user_opt'], 'user_opt', 'dis_topic')) {
+    $user_restrictions[] = $lang['NEW_THREADS'];
+}
 
 $template->assign_var('USER_RESTRICTIONS', join('</li><li>', $user_restrictions));
 

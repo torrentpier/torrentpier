@@ -1,18 +1,24 @@
 <?php
 
-if (!defined('BB_ROOT')) die(basename(__FILE__));
+if (!defined('BB_ROOT')) {
+    die(basename(__FILE__));
+}
 
 /** @var \TorrentPier\Di $di */
 $di = \TorrentPier\Di::getInstance();
 
 set_die_append_msg();
 
-if ($di->config->get('emailer_disabled')) bb_die($lang['EMAILER_DISABLED']);
+if ($di->config->get('emailer_disabled')) {
+    bb_die($lang['EMAILER_DISABLED']);
+}
 
 $need_captcha = ($_GET['mode'] == 'sendpassword' && !IS_ADMIN && !$di->config->get('captcha.disabled'));
 
 if (isset($_POST['submit'])) {
-    if ($need_captcha && !bb_captcha('check')) bb_die($lang['CAPTCHA_WRONG']);
+    if ($need_captcha && !bb_captcha('check')) {
+        bb_die($lang['CAPTCHA_WRONG']);
+    }
     $email = (!empty($_POST['email'])) ? trim(strip_tags(htmlspecialchars($_POST['email']))) : '';
     $sql = "SELECT * FROM " . BB_USERS . " WHERE user_email = '" . DB()->escape($email) . "'";
     if ($result = DB()->sql_query($sql)) {

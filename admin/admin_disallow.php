@@ -42,7 +42,6 @@ if (isset($_POST['add_name'])) {
     $message .= $lang['DISALLOWED_DELETED'] . '<br /><br />' . sprintf($lang['CLICK_RETURN_DISALLOWADMIN'], '<a href="admin_disallow.php">', '</a>') . '<br /><br />' . sprintf($lang['CLICK_RETURN_ADMIN_INDEX'], '<a href="index.php?pane=right">', '</a>');
 
     bb_die($message);
-
 }
 
 //

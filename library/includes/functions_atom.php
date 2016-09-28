@@ -1,6 +1,8 @@
 <?php
 
-if (!defined('BB_ROOT')) die(basename(__FILE__));
+if (!defined('BB_ROOT')) {
+    die(basename(__FILE__));
+}
 
 // Максимум записей = 50
 // [Обновлено] - если дата изменения первого поста топика не старее недели (?) или в топике новые сообщения не старее недели (?)
@@ -12,7 +14,9 @@ function update_forum_feed($forum_id, $forum_data)
 
     $file_path = $di->config->get('atom.path') . '/f/' . $forum_id . '.atom';
     $select_tor_sql = $join_tor_sql = '';
-    if ($forum_id == 0) $forum_data['atom_forum_name'] = 'Общая по всем разделам';
+    if ($forum_id == 0) {
+        $forum_data['atom_forum_name'] = 'Общая по всем разделам';
+    }
     if ($forum_id > 0 && $forum_data['atom_tr_allowed']) {
         $select_tor_sql = ', tor.size AS tor_size, tor.tor_status';
         $join_tor_sql = "LEFT JOIN " . BB_BT_TORRENTS . " tor ON(t.topic_id = tor.topic_id)";
@@ -33,7 +37,7 @@ function update_forum_feed($forum_id, $forum_data)
 			ORDER BY t.topic_last_post_time DESC
 			LIMIT 100
 		";
-    } else if ($forum_id > 0) {
+    } elseif ($forum_id > 0) {
         $sql = "
 			SELECT
 				t.topic_id, t.topic_title, t.topic_status,
@@ -55,10 +59,14 @@ function update_forum_feed($forum_id, $forum_data)
     $topics = array();
     foreach ($topics_tmp as $topic) {
         if (isset($topic['topic_status'])) {
-            if ($topic['topic_status'] == TOPIC_MOVED) continue;
+            if ($topic['topic_status'] == TOPIC_MOVED) {
+                continue;
+            }
         }
         if (isset($topic['tor_status'])) {
-            if ($di->config->get('tor_frozen.' . $topic['tor_status'])) continue;
+            if ($di->config->get('tor_frozen.' . $topic['tor_status'])) {
+                continue;
+            }
         }
         $topics[] = $topic;
     }
@@ -66,8 +74,11 @@ function update_forum_feed($forum_id, $forum_data)
         unlink($file_path);
         return false;
     }
-    if (create_atom($file_path, 'f', $forum_id, htmlCHR($forum_data['atom_forum_name']), $topics)) return true;
-    else return false;
+    if (create_atom($file_path, 'f', $forum_id, htmlCHR($forum_data['atom_forum_name']), $topics)) {
+        return true;
+    } else {
+        return false;
+    }
 }
 
 function update_user_feed($user_id, $username)
@@ -96,10 +107,14 @@ function update_user_feed($user_id, $username)
     $topics = array();
     foreach ($topics_tmp as $topic) {
         if (isset($topic['topic_status'])) {
-            if ($topic['topic_status'] == TOPIC_MOVED) continue;
+            if ($topic['topic_status'] == TOPIC_MOVED) {
+                continue;
+            }
         }
         if (isset($topic['tor_status'])) {
-            if ($di->config->get('tor_frozen.' . $topic['tor_status'])) continue;
+            if ($di->config->get('tor_frozen.' . $topic['tor_status'])) {
+                continue;
+            }
         }
         $topics[] = $topic;
     }
@@ -107,8 +122,11 @@ function update_user_feed($user_id, $username)
         unlink($file_path);
         return false;
     }
-    if (create_atom($file_path, 'u', $user_id, wbr($username), $topics)) return true;
-    else return false;
+    if (create_atom($file_path, 'u', $user_id, wbr($username), $topics)) {
+        return true;
+    } else {
+        return false;
+    }
 }
 
 function create_atom($file_path, $mode, $id, $title, $topics)
@@ -118,11 +136,15 @@ function create_atom($file_path, $mode, $id, $title, $topics)
 
     $dir = dirname($file_path);
     if (!file_exists($dir)) {
-        if (!bb_mkdir($dir)) return false;
+        if (!bb_mkdir($dir)) {
+            return false;
+        }
     }
     foreach ($topics as $topic) {
         $last_time = $topic['topic_last_post_time'];
-        if ($topic['topic_last_post_edit_time']) $last_time = $topic['topic_last_post_edit_time'];
+        if ($topic['topic_last_post_edit_time']) {
+            $last_time = $topic['topic_last_post_edit_time'];
+        }
         $date = bb_date($last_time, 'Y-m-d', 0);
         $time = bb_date($last_time, 'H:i:s', 0);
         break;
@@ -150,12 +172,16 @@ function create_atom($file_path, $mode, $id, $title, $topics)
         $topic_title = wbr($topic_title);
         $author_name = ($topic['first_username']) ? wbr($topic['first_username']) : 'Гость';
         $last_time = $topic['topic_last_post_time'];
-        if ($topic['topic_last_post_edit_time']) $last_time = $topic['topic_last_post_edit_time'];
+        if ($topic['topic_last_post_edit_time']) {
+            $last_time = $topic['topic_last_post_edit_time'];
+        }
         $date = bb_date($last_time, 'Y-m-d', 0);
         $time = bb_date($last_time, 'H:i:s', 0);
         $updated = '';
         $checktime = TIMENOW - 604800; // неделя (week)
-        if ($topic['topic_first_post_edit_time'] && $topic['topic_first_post_edit_time'] > $checktime) $updated = '[Обновлено] ';
+        if ($topic['topic_first_post_edit_time'] && $topic['topic_first_post_edit_time'] > $checktime) {
+            $updated = '[Обновлено] ';
+        }
         $atom .= "<entry>\n";
         $atom .= "	<title type=\"html\"><![CDATA[$updated$topic_title$tor_size]]></title>\n";
         $atom .= "	<author>\n";

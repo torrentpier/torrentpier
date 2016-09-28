@@ -1,31 +1,33 @@
 <?php
 
-if (!defined('BB_ROOT')) die(basename(__FILE__));
+if (!defined('BB_ROOT')) {
+    die(basename(__FILE__));
+}
 
 class upload_common
 {
-    var $cfg = array(
+    public $cfg = array(
         'max_size' => 0,
         'max_width' => 0,
         'max_height' => 0,
         'allowed_ext' => array(),
         'upload_path' => '',
     );
-    var $file = array(
+    public $file = array(
         'name' => '',
         'type' => '',
         'size' => 0,
         'tmp_name' => '',
         'error' => UPLOAD_ERR_NO_FILE,
     );
-    var $orig_name = '';
-    var $file_path = '';      // Stored file path
-    var $file_ext = '';
-    var $file_ext_id = '';
-    var $file_size = '';
-    var $ext_ids = array(); // array_flip($di->config->get('file_id_ext'))
-    var $errors = array();
-    var $img_types = array(
+    public $orig_name = '';
+    public $file_path = '';      // Stored file path
+    public $file_ext = '';
+    public $file_ext_id = '';
+    public $file_size = '';
+    public $ext_ids = array(); // array_flip($di->config->get('file_id_ext'))
+    public $errors = array();
+    public $img_types = array(
         1 => 'gif',
         2 => 'jpg',
         3 => 'png',
@@ -34,7 +36,7 @@ class upload_common
         8 => 'tiff',
     );
 
-    function init($cfg = array(), $post_params = array(), $uploaded_only = true)
+    public function init($cfg = array(), $post_params = array(), $uploaded_only = true)
     {
         global $lang;
 
@@ -107,13 +109,13 @@ class upload_common
         return true;
     }
 
-    function store($mode = '', $params = array())
+    public function store($mode = '', $params = array())
     {
         if ($mode == 'avatar') {
             delete_avatar($params['user_id'], $this->file_ext_id);
             $file_path = get_avatar_path($params['user_id'], $this->file_ext_id);
             return $this->_move($file_path);
-        } else if ($mode == 'attach') {
+        } elseif ($mode == 'attach') {
             delete_attach($params['topic_id'], $this->file_ext_id);
             $file_path = get_attach_path($params['topic_id'], $this->file_ext_id);
             return $this->_move($file_path);
@@ -122,7 +124,7 @@ class upload_common
         }
     }
 
-    function _move($file_path)
+    public function _move($file_path)
     {
         $dir = dirname($file_path);
         if (!file_exists($dir)) {

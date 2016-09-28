@@ -1,6 +1,8 @@
 <?php
 
-if (!defined('IN_AJAX')) die(basename(__FILE__));
+if (!defined('IN_AJAX')) {
+    die(basename(__FILE__));
+}
 
 global $userdata, $lang, $datastore;
 
@@ -34,8 +36,12 @@ switch ($mode) {
         $topic_title = (string)$this->request['topic_title'];
         $new_title = clean_title($topic_title);
 
-        if (!$topic_id) $this->ajax_die($lang['INVALID_TOPIC_ID']);
-        if ($new_title == '') $this->ajax_die($lang['DONT_MESSAGE_TITLE']);
+        if (!$topic_id) {
+            $this->ajax_die($lang['INVALID_TOPIC_ID']);
+        }
+        if ($new_title == '') {
+            $this->ajax_die($lang['DONT_MESSAGE_TITLE']);
+        }
 
         if (!$t_data = DB()->fetch_row("SELECT forum_id FROM " . BB_TOPICS . " WHERE topic_id = $topic_id LIMIT 1")) {
             $this->ajax_die($lang['INVALID_TOPIC_ID_DB']);
@@ -67,7 +73,9 @@ switch ($mode) {
         $user_id = (int)$this->request['user_id'];
         $profiledata = get_userdata($user_id);
 
-        if (!$user_id) $this->ajax_die($lang['NO_USER_ID_SPECIFIED']);
+        if (!$user_id) {
+            $this->ajax_die($lang['NO_USER_ID_SPECIFIED']);
+        }
 
         $reg_ip = DB()->fetch_rowset("SELECT username, user_id, user_rank FROM " . BB_USERS . "
 			WHERE user_reg_ip = '{$profiledata['user_reg_ip']}'
@@ -96,9 +104,11 @@ switch ($mode) {
             }
         }
 
-        if ($profiledata['user_level'] == ADMIN && !IS_ADMIN) $reg_ip = $last_ip = $lang['HIDDEN'];
-        elseif ($profiledata['user_level'] == MOD && IS_MOD) $reg_ip = $last_ip = $lang['HIDDEN'];
-        else {
+        if ($profiledata['user_level'] == ADMIN && !IS_ADMIN) {
+            $reg_ip = $last_ip = $lang['HIDDEN'];
+        } elseif ($profiledata['user_level'] == MOD && IS_MOD) {
+            $reg_ip = $last_ip = $lang['HIDDEN'];
+        } else {
             $user_reg_ip = decode_ip($profiledata['user_reg_ip']);
             $user_last_ip = decode_ip($profiledata['user_last_ip']);
             $reg_ip = '<a href="' . $di->config->get('whois_info') . $user_reg_ip . '" class="gen" target="_blank">' . $user_reg_ip . '</a>';

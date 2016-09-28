@@ -1,6 +1,8 @@
 <?php
 
-if (!defined('IN_AJAX')) die(basename(__FILE__));
+if (!defined('IN_AJAX')) {
+    die(basename(__FILE__));
+}
 
 global $lang;
 
@@ -39,18 +41,26 @@ switch ($field) {
     case 'user_website':
         if ($value == '' || preg_match('#^https?://[\w\#!$%&~/.\-;:=,?@а-яА-Я\[\]+]+$#iu', $value)) {
             $this->response['new_value'] = htmlCHR($value);
-        } else $this->ajax_die($lang['WEBSITE_ERROR']);
+        } else {
+            $this->ajax_die($lang['WEBSITE_ERROR']);
+        }
         break;
 
     case 'user_gender':
-        if (!$di->config->get('gender')) $this->ajax_die($lang['MODULE_OFF']);
+        if (!$di->config->get('gender')) {
+            $this->ajax_die($lang['MODULE_OFF']);
+        }
         if (!isset($lang['GENDER_SELECT'][$value])) {
             $this->ajax_die($lang['ERROR']);
-        } else $this->response['new_value'] = $lang['GENDER_SELECT'][$value];
+        } else {
+            $this->response['new_value'] = $lang['GENDER_SELECT'][$value];
+        }
         break;
 
     case 'user_birthday':
-        if (!$di->config->get('birthday_enabled')) $this->ajax_die($lang['MODULE_OFF']);
+        if (!$di->config->get('birthday_enabled')) {
+            $this->ajax_die($lang['MODULE_OFF']);
+        }
         $birthday_date = date_parse($value);
 
         if (!empty($birthday_date['year'])) {
@@ -107,7 +117,9 @@ switch ($field) {
     case 'u_down_total':
     case 'u_up_release':
     case 'u_up_bonus':
-        if (!IS_ADMIN) $this->ajax_die($lang['NOT_ADMIN']);
+        if (!IS_ADMIN) {
+            $this->ajax_die($lang['NOT_ADMIN']);
+        }
 
         $table = BB_BT_USERS;
         $value = (float)str_replace(',', '.', $this->request['value']);

@@ -116,7 +116,6 @@ if (isset($_POST['submit'])) {
 
     $datastore->update('cat_forums');
     bb_die($lang['FORUM_AUTH_UPDATED'] . '<br /><br />' . sprintf($lang['CLICK_RETURN_FORUMAUTH'], '<a href="' . "admin_forumauth.php" . '">', "</a>"));
-
 } // End of submit
 
 //
@@ -133,7 +132,6 @@ if (empty($forum_id)) {
         'S_AUTH_ACTION' => 'admin_forumauth.php',
         'S_AUTH_SELECT' => get_forum_select('admin', 'f', null, 80),
     ));
-
 } else {
     // Output the authorisation details if an id was specified
     $forum_name = $forum_rows[0]['forum_name'];

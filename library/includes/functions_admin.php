@@ -1,6 +1,8 @@
 <?php
 
-if (!defined('BB_ROOT')) die(basename(__FILE__));
+if (!defined('BB_ROOT')) {
+    die(basename(__FILE__));
+}
 
 function sync_all_forums()
 {
@@ -524,9 +526,13 @@ function post_delete($mode_or_post_id, $user_id = null, $exclude_first = true)
 
     // Get required params
     if ($del_user_posts) {
-        if (!$user_csv = get_id_csv($user_id)) return false;
+        if (!$user_csv = get_id_csv($user_id)) {
+            return false;
+        }
     } else {
-        if (!$post_csv = get_id_csv($mode_or_post_id)) return false;
+        if (!$post_csv = get_id_csv($mode_or_post_id)) {
+            return false;
+        }
 
         // фильтр заглавных сообщений в теме
         if ($exclude_first) {
@@ -622,7 +628,7 @@ function post_delete($mode_or_post_id, $user_id = null, $exclude_first = true)
         $log_action->admin('mod_post_delete', array(
             'log_msg' => 'user: ' . get_usernames_for_log($user_id) . "<br />posts: $deleted_posts_count",
         ));
-    } else if (!defined('IN_CRON')) {
+    } elseif (!defined('IN_CRON')) {
         foreach ($log_topics as $row) {
             $log_action->mod('mod_post_delete', array(
                 'forum_id' => $row['forum_id'],

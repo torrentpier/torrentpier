@@ -1,6 +1,8 @@
 <?php
 
-if (!defined('BB_ROOT')) die(basename(__FILE__));
+if (!defined('BB_ROOT')) {
+    die(basename(__FILE__));
+}
 
 function torrent_auth_check($forum_id, $poster_id)
 {
@@ -12,7 +14,9 @@ function torrent_auth_check($forum_id, $poster_id)
 
     if (IS_MOD) {
         $is_auth = auth(AUTH_MOD, $forum_id, $userdata);
-        if ($is_auth['auth_mod']) return true;
+        if ($is_auth['auth_mod']) {
+            return true;
+        }
     }
 
     bb_die($lang['NOT_MODERATOR']);
@@ -73,7 +77,7 @@ function tracker_unregister($topic_id, $redirect_url = '')
 
     if (defined('IN_AJAX')) {
         return;
-    } else if ($redirect_url) {
+    } elseif ($redirect_url) {
         redirect($redirect_url);
     } else {
         set_die_append_msg($tor['forum_id'], $topic_id);
@@ -132,9 +136,15 @@ function tracker_register($topic_id, $mode = '', $tor_status = TOR_NOT_APPROVED,
     $poster_id = $tor['topic_poster'];
 
 
-    if ($tor['attach_ext_id'] != 8) return torrent_error_exit($lang['NOT_TORRENT']);
-    if (!$tor['allow_reg_tracker']) return torrent_error_exit($lang['REG_NOT_ALLOWED_IN_THIS_FORUM']);
-    if ($tor['tracker_status']) return torrent_error_exit($lang['ALREADY_REG']);
+    if ($tor['attach_ext_id'] != 8) {
+        return torrent_error_exit($lang['NOT_TORRENT']);
+    }
+    if (!$tor['allow_reg_tracker']) {
+        return torrent_error_exit($lang['REG_NOT_ALLOWED_IN_THIS_FORUM']);
+    }
+    if ($tor['tracker_status']) {
+        return torrent_error_exit($lang['ALREADY_REG']);
+    }
 
     if ($reg_mode != 'mcp_tor_register') {
         torrent_auth_check($forum_id, $poster_id);
@@ -179,7 +189,7 @@ function tracker_register($topic_id, $mode = '', $tor_status = TOR_NOT_APPROVED,
 
     if (isset($info['length'])) {
         $totallen = (float)$info['length'];
-    } else if (isset($info['files']) && is_array($info['files'])) {
+    } elseif (isset($info['files']) && is_array($info['files'])) {
         foreach ($info['files'] as $fn => $f) {
             $totallen += (float)$f['length'];
         }
@@ -197,8 +207,9 @@ function tracker_register($topic_id, $mode = '', $tor_status = TOR_NOT_APPROVED,
     if (!DB()->sql_query($sql)) {
         $sql_error = DB()->sql_error();
 
-        if ($sql_error['code'] == 1062) // Duplicate entry
-        {
+        if ($sql_error['code'] == 1062) {
+            // Duplicate entry
+
             return torrent_error_exit($lang['BT_REG_FAIL_SAME_HASH']);
         }
         bb_die('Could not register torrent on tracker');
@@ -213,7 +224,7 @@ function tracker_register($topic_id, $mode = '', $tor_status = TOR_NOT_APPROVED,
     if ($reg_mode == 'request' || $reg_mode == 'newtopic') {
         set_die_append_msg($forum_id, $topic_id);
         bb_die(sprintf($lang['BT_REGISTERED'], DOWNLOAD_URL . $topic_id));
-    } else if ($reg_mode == 'mcp_tor_register') {
+    } elseif ($reg_mode == 'mcp_tor_register') {
         return 'OK';
     }
 
@@ -256,7 +267,9 @@ function change_tor_type($topic_id, $tor_status_gold)
     /** @var \TorrentPier\Di $di */
     $di = \TorrentPier\Di::getInstance();
 
-    if (!IS_AM) bb_die($lang['ONLY_FOR_MOD']);
+    if (!IS_AM) {
+        bb_die($lang['ONLY_FOR_MOD']);
+    }
 
     $tor_status_gold = intval($tor_status_gold);
     $info_hash = null;
@@ -289,7 +302,9 @@ function send_torrent_with_passkey($t_data)
     if (!isset($row['tor_status'])) {
         bb_die($lang['PASSKEY_ERR_TOR_NOT_REG']);
     } elseif ($di->config->get('tor_frozen.' . $row['tor_status'])) {
-        if (!IS_AM) bb_die("Раздача имеет статус: <b>{$lang['TOR_STATUS_NAME'][$row['tor_status']]}</b><br /><br />Скачивание запрещено"); //TODO: перевести
+        if (!IS_AM) {
+            bb_die("Раздача имеет статус: <b>{$lang['TOR_STATUS_NAME'][$row['tor_status']]}</b><br /><br />Скачивание запрещено");
+        } //TODO: перевести
     }
 
     $passkey_val = '';
@@ -610,7 +625,7 @@ function bdecode_r($str, &$pos)
 
     if (($pos < 0) || ($pos >= $strlen)) {
         return null;
-    } else if ($str[$pos] == 'i') {
+    } elseif ($str[$pos] == 'i') {
         $pos++;
         $numlen = strspn($str, '-0123456789', $pos);
         $spos = $pos;
@@ -622,7 +637,7 @@ function bdecode_r($str, &$pos)
             $pos++;
             return floatval(substr($str, $spos, $numlen));
         }
-    } else if ($str[$pos] == 'd') {
+    } elseif ($str[$pos] == 'd') {
         $pos++;
         $ret = array();
 
@@ -640,14 +655,14 @@ function bdecode_r($str, &$pos)
 
                     if ($val === null) {
                         return null;
-                    } else if (!is_array($key)) {
+                    } elseif (!is_array($key)) {
                         $ret[$key] = $val;
                     }
                 }
             }
         }
         return null;
-    } else if ($str[$pos] == 'l') {
+    } elseif ($str[$pos] == 'l') {
         $pos++;
         $ret = array();
 

@@ -35,7 +35,9 @@ if (!$t_data = DB()->fetch_row("SELECT * FROM " . BB_TOPICS . " WHERE topic_id =
 // проверка прав
 if ($mode != 'poll_vote') {
     if ($t_data['topic_poster'] != $userdata['user_id']) {
-        if (!IS_AM) bb_die($lang['NOT_AUTHORISED']);
+        if (!IS_AM) {
+            bb_die($lang['NOT_AUTHORISED']);
+        }
     }
 }
 
@@ -147,11 +149,11 @@ switch ($mode) {
 // Functions
 class bb_poll
 {
-    var $err_msg = '';
-    var $poll_votes = array();
-    var $max_votes = 0;
+    public $err_msg = '';
+    public $poll_votes = array();
+    public $max_votes = 0;
 
-    function bb_poll()
+    public function bb_poll()
     {
         /** @var \TorrentPier\Di $di */
         $di = \TorrentPier\Di::getInstance();
@@ -159,7 +161,7 @@ class bb_poll
         $this->max_votes = $di->config->get('max_poll_options');
     }
 
-    function build_poll_data($posted_data)
+    public function build_poll_data($posted_data)
     {
         $poll_caption = (string)$posted_data['poll_caption'];
         $poll_votes = (string)$posted_data['poll_votes'];
@@ -187,7 +189,7 @@ class bb_poll
         return false;
     }
 
-    function insert_votes_into_db($topic_id)
+    public function insert_votes_into_db($topic_id)
     {
         $this->delete_votes_data($topic_id);
 
@@ -207,13 +209,13 @@ class bb_poll
         DB()->query("UPDATE " . BB_TOPICS . " SET topic_vote = 1 WHERE topic_id = $topic_id LIMIT 1");
     }
 
-    function delete_poll($topic_id)
+    public function delete_poll($topic_id)
     {
         DB()->query("UPDATE " . BB_TOPICS . " SET topic_vote = 0 WHERE topic_id = $topic_id LIMIT 1");
         $this->delete_votes_data($topic_id);
     }
 
-    function delete_votes_data($topic_id)
+    public function delete_votes_data($topic_id)
     {
         /** @var \TorrentPier\Di $di */
         $di = \TorrentPier\Di::getInstance();

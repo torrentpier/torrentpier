@@ -48,7 +48,9 @@ if (!$redirect_url || strstr(urldecode($redirect_url), "\n") || strstr(urldecode
 
 $redirect_url = str_replace("&sid={$user->data['session_id']}", '', $redirect_url);
 
-if (isset($_REQUEST['admin']) && !IS_AM) bb_die($lang['NOT_ADMIN']);
+if (isset($_REQUEST['admin']) && !IS_AM) {
+    bb_die($lang['NOT_ADMIN']);
+}
 
 $mod_admin_login = (IS_AM && !$user->data['session_admin']);
 
@@ -60,7 +62,9 @@ $login_password = isset($_POST['login_password']) ? $_POST['login_password'] : '
 $need_captcha = false;
 if (!$mod_admin_login) {
     $need_captcha = $cache->has('l_err_' . USER_IP);
-    if ($need_captcha < $di->config->get('invalid_logins')) $need_captcha = false;
+    if ($need_captcha < $di->config->get('invalid_logins')) {
+        $need_captcha = false;
+    }
 }
 
 // login
@@ -85,7 +89,9 @@ if (isset($_POST['login'])) {
             // Удаление при введении правильной комбинации логин/пароль
             $cache->delete('l_err_' . USER_IP);
 
-            if ($redirect_url == '/' . LOGIN_URL || $redirect_url == LOGIN_URL) $redirect_url = 'index.php';
+            if ($redirect_url == '/' . LOGIN_URL || $redirect_url == LOGIN_URL) {
+                $redirect_url = 'index.php';
+            }
             redirect($redirect_url);
         }
 
@@ -93,7 +99,9 @@ if (isset($_POST['login'])) {
 
         if (!$mod_admin_login) {
             $login_err = $cache->get('l_err_' . USER_IP);
-            if ($login_err > $di->config->get('invalid_logins')) $need_captcha = true;
+            if ($login_err > $di->config->get('invalid_logins')) {
+                $need_captcha = true;
+            }
             $cache->set('l_err_' . USER_IP, ($login_err + 1), 3600);
         } else {
             $need_captcha = false;

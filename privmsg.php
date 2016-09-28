@@ -20,20 +20,22 @@ $page_cfg['load_tpl_vars'] = array(
 //
 // Is PM disabled?
 //
-if ($di->config->get('privmsg_disable')) bb_die('PM_DISABLED');
+if ($di->config->get('privmsg_disable')) {
+    bb_die('PM_DISABLED');
+}
 
 //
 // Parameters
 //
 $submit = (bool)request_var('post', false);
-$submit_search = (isset($_POST['usersubmit'])) ? TRUE : 0;
-$submit_msgdays = (isset($_POST['submit_msgdays'])) ? TRUE : 0;
-$cancel = (isset($_POST['cancel'])) ? TRUE : 0;
-$preview = (isset($_POST['preview'])) ? TRUE : 0;
-$confirmed = (isset($_POST['confirm'])) ? TRUE : 0;
-$delete = (isset($_POST['delete'])) ? TRUE : 0;
-$delete_all = (isset($_POST['deleteall'])) ? TRUE : 0;
-$save = (isset($_POST['save'])) ? TRUE : 0;
+$submit_search = (isset($_POST['usersubmit'])) ? true : 0;
+$submit_msgdays = (isset($_POST['submit_msgdays'])) ? true : 0;
+$cancel = (isset($_POST['cancel'])) ? true : 0;
+$preview = (isset($_POST['preview'])) ? true : 0;
+$confirmed = (isset($_POST['confirm'])) ? true : 0;
+$delete = (isset($_POST['delete'])) ? true : 0;
+$delete_all = (isset($_POST['deleteall'])) ? true : 0;
+$save = (isset($_POST['save'])) ? true : 0;
 $mode = isset($_REQUEST['mode']) ? (string)$_REQUEST['mode'] : '';
 
 $refresh = $preview || $submit_search;
@@ -74,7 +76,7 @@ if (isset($_POST[POST_POST_URL]) || isset($_GET[POST_POST_URL])) {
     $privmsg_id = '';
 }
 
-$error = FALSE;
+$error = false;
 
 //
 // Define the box image links
@@ -267,7 +269,7 @@ if ($mode == 'read') {
         $quote = $post_icons['quote'];
         $edit = '';
         $l_box_name = $lang['INBOX'];
-    } else if ($folder == 'outbox') {
+    } elseif ($folder == 'outbox') {
         $post_img = $post_icons['post_img'];
         $reply_img = '';
         $quote_img = '';
@@ -277,7 +279,7 @@ if ($mode == 'read') {
         $quote = '';
         $edit = $post_icons['edit'];
         $l_box_name = $lang['OUTBOX'];
-    } else if ($folder == 'savebox') {
+    } elseif ($folder == 'savebox') {
         if ($privmsg['privmsgs_type'] == PRIVMSGS_SAVED_IN_MAIL) {
             $post_img = $post_icons['post_img'];
             $reply_img = $post_icons['reply_img'];
@@ -298,7 +300,7 @@ if ($mode == 'read') {
             $edit = '';
         }
         $l_box_name = $lang['SAVED'];
-    } else if ($folder == 'sentbox') {
+    } elseif ($folder == 'sentbox') {
         $post_img = $post_icons['post_img'];
         $reply_img = '';
         $quote_img = '';
@@ -402,7 +404,7 @@ if ($mode == 'read') {
         'SEARCH_IMG' => $search_img,
         'SEARCH' => $search,
     ));
-} else if (($delete && $mark_list) || $delete_all) {
+} elseif (($delete && $mark_list) || $delete_all) {
     if (isset($mark_list) && !is_array($mark_list)) {
         // Set to empty array instead of '0' if nothing is selected.
         $mark_list = array();
@@ -424,7 +426,7 @@ if ($mode == 'read') {
             'FORM_ACTION' => PM_URL . "?folder=$folder",
             'HIDDEN_FIELDS' => build_hidden_fields($hidden_fields),
         ));
-    } else if ($confirmed) {
+    } elseif ($confirmed) {
         $delete_sql_id = '';
 
         if (!$delete_all) {
@@ -589,7 +591,7 @@ if ($mode == 'read') {
             pm_die($lang['NONE_SELECTED']);
         }
     }
-} else if ($save && $mark_list && $folder != 'savebox' && $folder != 'outbox') {
+} elseif ($save && $mark_list && $folder != 'savebox' && $folder != 'outbox') {
     if (sizeof($mark_list)) {
         // See if recipient is at their savebox limit
         $sql = "SELECT COUNT(privmsgs_id) AS savebox_items, MIN(privmsgs_date) AS oldest_post_time
@@ -738,7 +740,7 @@ if ($mode == 'read') {
 
         redirect(PM_URL . "?folder=savebox");
     }
-} else if ($submit || $refresh || $mode != '') {
+} elseif ($submit || $refresh || $mode != '') {
     if (IS_USER && $submit && $mode != 'edit') {
         // Flood control
         $sql = "SELECT MAX(privmsgs_date) AS last_post_time FROM " . BB_PRIVMSGS . " WHERE privmsgs_from_userid = " . $userdata['user_id'];
@@ -779,17 +781,17 @@ if ($mode == 'read') {
             $to_userdata = get_userdata($to_username_sql);
 
             if (!$to_userdata || $to_userdata['user_id'] == GUEST_UID) {
-                $error = TRUE;
+                $error = true;
                 $error_msg = $lang['NO_SUCH_USER'];
             }
         } else {
-            $error = TRUE;
+            $error = true;
             $error_msg .= ((!empty($error_msg)) ? '<br />' : '') . $lang['NO_TO_USER'];
         }
 
         $privmsg_subject = htmlCHR($_POST['subject']);
         if (empty($privmsg_subject)) {
-            $error = TRUE;
+            $error = true;
             $error_msg .= ((!empty($error_msg)) ? '<br />' : '') . $lang['EMPTY_SUBJECT'];
         }
 
@@ -798,7 +800,7 @@ if ($mode == 'read') {
                 $privmsg_message = prepare_message($_POST['message']);
             }
         } else {
-            $error = TRUE;
+            $error = true;
             $error_msg .= ((!empty($error_msg)) ? '<br />' : '') . $lang['EMPTY_MESSAGE'];
         }
     }
@@ -917,7 +919,7 @@ if ($mode == 'read') {
         }
 
         pm_die($lang['MESSAGE_SENT']);
-    } else if ($preview || $refresh || $error) {
+    } elseif ($preview || $refresh || $error) {
         //
         // If we're previewing or refreshing then obtain the data
         // passed to the script, process it a little, do some checks
@@ -933,9 +935,9 @@ if ($mode == 'read') {
         //
         if ($mode == 'post') {
             $page_title = $lang['POST_NEW_PM'];
-        } else if ($mode == 'reply') {
+        } elseif ($mode == 'reply') {
             $page_title = $lang['POST_REPLY_PM'];
-        } else if ($mode == 'edit') {
+        } elseif ($mode == 'edit') {
             $page_title = $lang['EDIT_PM'];
 
             $sql = "SELECT u.user_id
@@ -962,14 +964,14 @@ if ($mode == 'read') {
 
             $sql = "SELECT username FROM " . BB_USERS . " WHERE user_id = $user_id AND user_id <> " . GUEST_UID;
             if (!($result = DB()->sql_query($sql))) {
-                $error = TRUE;
+                $error = true;
                 $error_msg = $lang['NO_SUCH_USER'];
             }
 
             if ($row = DB()->sql_fetchrow($result)) {
                 $to_username = $row['username'];
             }
-        } else if ($mode == 'edit') {
+        } elseif ($mode == 'edit') {
             $sql = "SELECT pm.*, pmt.privmsgs_text, u.username, u.user_id
 				FROM " . BB_PRIVMSGS . " pm, " . BB_PRIVMSGS_TEXT . " pmt, " . BB_USERS . " u
 				WHERE pm.privmsgs_id = $privmsg_id
@@ -991,9 +993,7 @@ if ($mode == 'read') {
 
             $to_username = $privmsg['username'];
             $to_userid = $privmsg['user_id'];
-
-        } else if ($mode == 'reply' || $mode == 'quote') {
-
+        } elseif ($mode == 'reply' || $mode == 'quote') {
             $sql = "SELECT pm.privmsgs_subject, pm.privmsgs_date, pmt.privmsgs_text, u.username, u.user_id
 				FROM " . BB_PRIVMSGS . " pm, " . BB_PRIVMSGS_TEXT . " pmt, " . BB_USERS . " u
 				WHERE pm.privmsgs_id = $privmsg_id
@@ -1097,10 +1097,10 @@ if ($mode == 'read') {
     $post_a = '&nbsp;';
     if ($mode == 'post') {
         $post_a = $lang['SEND_A_NEW_MESSAGE'];
-    } else if ($mode == 'reply') {
+    } elseif ($mode == 'reply') {
         $post_a = $lang['SEND_A_REPLY'];
         $mode = 'post';
-    } else if ($mode == 'edit') {
+    } elseif ($mode == 'edit') {
         $post_a = $lang['EDIT_MESSAGE'];
     }
 

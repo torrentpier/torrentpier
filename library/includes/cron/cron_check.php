@@ -1,6 +1,8 @@
 <?php
 
-if (!defined('BB_ROOT')) die(basename(__FILE__));
+if (!defined('BB_ROOT')) {
+    die(basename(__FILE__));
+}
 
 bb_log(date('H:i:s - ') . getmypid() . ' --x- SELECT jobs' . LOG_LF, CRON_LOG_DIR . 'cron_check');
 

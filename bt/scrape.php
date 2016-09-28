@@ -4,7 +4,9 @@ define('IN_TRACKER', true);
 define('BB_ROOT', './../');
 require(BB_ROOT . 'common.php');
 
-if (!$tr_cfg['scrape']) msg_die('Please disable SCRAPE!');
+if (!$tr_cfg['scrape']) {
+    msg_die('Please disable SCRAPE!');
+}
 
 // Recover info_hash
 if (isset($_GET['?info_hash']) && !isset($_GET['info_hash'])) {
@@ -19,7 +21,9 @@ $info_hash = $_GET['info_hash'];
 
 function msg_die($msg)
 {
-    if (DBG_LOG) dbg_log(' ', '!die-' . clean_filename($msg));
+    if (DBG_LOG) {
+        dbg_log(' ', '!die-' . clean_filename($msg));
+    }
 
     $output = \Rych\Bencode\Bencode::encode([
         'min interval' => (int)1800,

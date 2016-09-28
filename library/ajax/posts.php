@@ -1,6 +1,8 @@
 <?php
 
-if (!defined('IN_AJAX')) die(basename(__FILE__));
+if (!defined('IN_AJAX')) {
+    die(basename(__FILE__));
+}
 
 global $lang, $userdata;
 
@@ -19,7 +21,9 @@ if (isset($this->request['post_id'])) {
 			AND f.forum_id = t.forum_id
 			AND p.post_id  = pt.post_id
 		LIMIT 1");
-    if (!$post) $this->ajax_die('not post');
+    if (!$post) {
+        $this->ajax_die('not post');
+    }
 
     $is_auth = auth(AUTH_ALL, $post['forum_id'], $userdata, $post);
     if ($post['topic_status'] == TOPIC_LOCKED && !$is_auth['auth_mod']) {
@@ -32,7 +36,9 @@ if (isset($this->request['post_id'])) {
 			WHERE t.topic_id = $topic_id
 				AND f.forum_id = t.forum_id
 			LIMIT 1");
-    if (!$post) $this->ajax_die('not post');
+    if (!$post) {
+        $this->ajax_die('not post');
+    }
 
     $is_auth = auth(AUTH_ALL, $post['forum_id'], $userdata, $post);
 }
@@ -94,7 +100,9 @@ switch ($this->request['type']) {
 
     case 'view_message':
         $message = (string)$this->request['message'];
-        if (!trim($message)) $this->ajax_die($lang['EMPTY_MESSAGE']);
+        if (!trim($message)) {
+            $this->ajax_die($lang['EMPTY_MESSAGE']);
+        }
         $message = htmlCHR($message, false, ENT_NOQUOTES);
 
         $this->response['message_html'] = bbcode2html($message);
@@ -135,7 +143,9 @@ switch ($this->request['type']) {
                         'post_text' => $text,
                     ));
                 }
-            } else $this->ajax_die($lang['EMPTY_MESSAGE']);
+            } else {
+                $this->ajax_die($lang['EMPTY_MESSAGE']);
+            }
 
             // Update atom feed
             update_atom('topic', (int)$this->request['topic_id']);

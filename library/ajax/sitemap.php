@@ -1,6 +1,8 @@
 <?php
 
-if (!defined('IN_AJAX')) die(basename(__FILE__));
+if (!defined('IN_AJAX')) {
+    die(basename(__FILE__));
+}
 
 global $lang;
 
@@ -22,7 +24,9 @@ switch ($mode) {
         break;
 
     case 'search_update':
-        if (!file_exists(SITEMAP_DIR . 'sitemap.xml')) $map->create();
+        if (!file_exists(SITEMAP_DIR . 'sitemap.xml')) {
+            $map->create();
+        }
 
         $map_link = make_url(SITEMAP_DIR . 'sitemap.xml');
 

@@ -1,6 +1,8 @@
 <?php
 
-if (!defined('BB_ROOT')) die(basename(__FILE__));
+if (!defined('BB_ROOT')) {
+    die(basename(__FILE__));
+}
 
 /** @var \TorrentPier\Di $di */
 $di = \TorrentPier\Di::getInstance();
@@ -34,14 +36,19 @@ if ($row = DB()->fetch_row($sql)) {
     $user_email = $row['user_email'];
     $user_lang = $row['user_lang'];
 
-    if (true || IS_ADMIN)  //  TRUE instead of missing user_opt "prevent_email"
-    {
+    if (true || IS_ADMIN) {
+        //  TRUE instead of missing user_opt "prevent_email"
+
         if (isset($_POST['submit'])) {
             $subject = trim(html_entity_decode($_POST['subject']));
             $message = trim(html_entity_decode($_POST['message']));
 
-            if (!$subject) $errors[] = $lang['EMPTY_SUBJECT_EMAIL'];
-            if (!$message) $errors[] = $lang['EMPTY_MESSAGE_EMAIL'];
+            if (!$subject) {
+                $errors[] = $lang['EMPTY_SUBJECT_EMAIL'];
+            }
+            if (!$message) {
+                $errors[] = $lang['EMPTY_MESSAGE_EMAIL'];
+            }
 
             if (!$errors) {
                 require(CLASS_DIR . 'emailer.php');

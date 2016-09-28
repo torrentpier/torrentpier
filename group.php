@@ -31,11 +31,15 @@ function generate_user_info(&$row, $date_format, $group_mod, &$from, &$posts, &$
     if (bf($row['user_opt'], 'user_opt', 'user_viewemail') || $group_mod) {
         $email_uri = ($di->config->get('board_email_form')) ? ("profile.php?mode=email&amp;" . POST_USERS_URL . "=" . $row['user_id']) : 'mailto:' . $row['user_email'];
         $email = '<a class="editable" href="' . $email_uri . '">' . $row['user_email'] . '</a>';
-    } else $email = '';
+    } else {
+        $email = '';
+    }
 
     if ($row['user_website']) {
         $www = ($di->config->get('text_buttons')) ? '<a class="txtb" href="' . $row['user_website'] . '"  target="_userwww">' . $lang['VISIT_WEBSITE_TXTB'] . '</a>' : '<a class="txtb" href="' . $row['user_website'] . '" target="_userwww"><img src="' . $images['icon_www'] . '" alt="' . $lang['VISIT_WEBSITE'] . '" title="' . $lang['VISIT_WEBSITE'] . '" border="0" /></a>';
-    } else $www = '';
+    } else {
+        $www = '';
+    }
 
     return;
 }
@@ -100,15 +104,15 @@ if (!$group_id) {
     foreach (DB()->fetch_rowset($sql) as $row) {
         if ($row['is_group_mod']) {
             $type = 'MOD';
-        } else if ($row['membership'] == $member) {
+        } elseif ($row['membership'] == $member) {
             $type = 'MEMBER';
-        } else if ($row['membership'] == $pending) {
+        } elseif ($row['membership'] == $pending) {
             $type = 'PENDING';
-        } else if ($row['group_type'] == GROUP_OPEN) {
+        } elseif ($row['group_type'] == GROUP_OPEN) {
             $type = 'OPEN';
-        } else if ($row['group_type'] == GROUP_CLOSED) {
+        } elseif ($row['group_type'] == GROUP_CLOSED) {
             $type = 'CLOSED';
-        } else if ($row['group_type'] == GROUP_HIDDEN && IS_ADMIN) {
+        } elseif ($row['group_type'] == GROUP_HIDDEN && IS_ADMIN) {
             $type = 'HIDDEN';
         } else {
             continue;
@@ -160,9 +164,11 @@ if (!$group_id) {
     } else {
         if (IS_ADMIN) {
             redirect('admin/admin_groups.php');
-        } else bb_die($lang['NO_GROUPS_EXIST']);
+        } else {
+            bb_die($lang['NO_GROUPS_EXIST']);
+        }
     }
-} else if (isset($_POST['joingroup']) && $_POST['joingroup']) {
+} elseif (isset($_POST['joingroup']) && $_POST['joingroup']) {
     if ($group_info['group_type'] != GROUP_OPEN) {
         bb_die($lang['THIS_CLOSED_GROUP']);
     }
@@ -210,7 +216,7 @@ if (!$group_id) {
 
     set_die_append_msg(false, false, $group_id);
     bb_die($lang['GROUP_JOINED']);
-} else if (!empty($_POST['unsub']) || !empty($_POST['unsubpending'])) {
+} elseif (!empty($_POST['unsub']) || !empty($_POST['unsubpending'])) {
     delete_user_group($group_id, $userdata['user_id']);
 
     set_die_append_msg(false, false, $group_id);
@@ -270,7 +276,7 @@ if (!$group_id) {
 					");
 
                     update_user_level($sql_in);
-                } else if (!empty($_POST['deny']) || !empty($_POST['remove'])) {
+                } elseif (!empty($_POST['deny']) || !empty($_POST['remove'])) {
                     DB()->query("
 						DELETE FROM " . BB_USER_GROUP . "
 						WHERE user_id IN($sql_in)
@@ -342,14 +348,14 @@ if (!$group_id) {
     if ($userdata['user_id'] == $group_moderator['user_id']) {
         $group_details = $lang['ARE_GROUP_MODERATOR'];
         $s_hidden_fields = '<input type="hidden" name="' . POST_GROUPS_URL . '" value="' . $group_id . '" />';
-    } else if ($is_group_member || $is_group_pending_member) {
+    } elseif ($is_group_member || $is_group_pending_member) {
         $template->assign_vars(array(
             'SHOW_UNSUBSCRIBE_CONTROLS' => true,
             'CONTROL_NAME' => ($is_group_member) ? 'unsub' : 'unsubpending',
         ));
         $group_details = ($is_group_pending_member) ? $lang['PENDING_THIS_GROUP'] : $lang['MEMBER_THIS_GROUP'];
         $s_hidden_fields = '<input type="hidden" name="' . POST_GROUPS_URL . '" value="' . $group_id . '" />';
-    } else if (IS_GUEST) {
+    } elseif (IS_GUEST) {
         $group_details = $lang['LOGIN_TO_JOIN'];
         $s_hidden_fields = '';
     } else {
@@ -358,10 +364,10 @@ if (!$group_id) {
 
             $group_details = $lang['THIS_OPEN_GROUP'];
             $s_hidden_fields = '<input type="hidden" name="' . POST_GROUPS_URL . '" value="' . $group_id . '" />';
-        } else if ($group_info['group_type'] == GROUP_CLOSED) {
+        } elseif ($group_info['group_type'] == GROUP_CLOSED) {
             $group_details = $lang['THIS_CLOSED_GROUP'];
             $s_hidden_fields = '';
-        } else if ($group_info['group_type'] == GROUP_HIDDEN) {
+        } elseif ($group_info['group_type'] == GROUP_HIDDEN) {
             $group_details = $lang['THIS_HIDDEN_GROUP'];
             $s_hidden_fields = '';
         }

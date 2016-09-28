@@ -1,6 +1,8 @@
 <?php
 
-if (!defined('BB_ROOT')) die(basename(__FILE__));
+if (!defined('BB_ROOT')) {
+    die(basename(__FILE__));
+}
 
 $can_edit_tpl = IS_SUPER_ADMIN;
 $edit_tpl_mode = ($can_edit_tpl && !empty($_REQUEST['edit_tpl']));

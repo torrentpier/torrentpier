@@ -38,7 +38,7 @@ $mode = ($_REQUEST['mode']) ? (string)$_REQUEST['mode'] : '';
 $cat_forums = get_cat_forums();
 
 if ($orphan_sf_sql = get_orphan_sf()) {
-    fix_orphan_sf($orphan_sf_sql, TRUE);
+    fix_orphan_sf($orphan_sf_sql, true);
 }
 $forum_parent = $cat_id = 0;
 $forumname = '';
@@ -110,11 +110,11 @@ if ($mode) {
                 if ($parent = get_forum_data($forum_parent)) {
                     $cat_id = $parent['cat_id'];
                 }
-            } else if (isset($_REQUEST['c'])) {
+            } elseif (isset($_REQUEST['c'])) {
                 $cat_id = (int)$_REQUEST['c'];
             }
 
-            $catlist = get_list('category', $cat_id, TRUE);
+            $catlist = get_list('category', $cat_id, true);
             $forumlocked = $forumunlocked = '';
 
             $forumstatus == (FORUM_LOCKED) ? $forumlocked = 'selected="selected"' : $forumunlocked = 'selected="selected"';
@@ -264,10 +264,10 @@ if ($mode) {
                 if ($forum_id == $forum_parent) {
                     bb_die('Ambiguous forum ID. Please select other parent forum');
                 }
-            } else if ($cat_id != $old_cat_id) {
+            } elseif ($cat_id != $old_cat_id) {
                 $max_order = get_max_forum_order($cat_id);
                 $forum_order = $max_order + 5;
-            } else if ($forum_data['forum_parent']) {
+            } elseif ($forum_data['forum_parent']) {
                 $old_parent = $forum_data['forum_parent'];
                 $forum_order = $cat_forums[$old_cat_id]['f'][$old_parent]['forum_order'] - 5;
             }
@@ -563,29 +563,29 @@ if ($mode) {
 
             $cat_id = $forum_info['cat_id'];
 
-            $move_down_forum_id = FALSE;
+            $move_down_forum_id = false;
             $forums = $cat_forums[$cat_id]['f_ord'];
             $forum_order = $forum_info['forum_order'];
-            $prev_forum = (isset($forums[$forum_order - 10])) ? $forums[$forum_order - 10] : FALSE;
-            $next_forum = (isset($forums[$forum_order + 10])) ? $forums[$forum_order + 10] : FALSE;
+            $prev_forum = (isset($forums[$forum_order - 10])) ? $forums[$forum_order - 10] : false;
+            $next_forum = (isset($forums[$forum_order + 10])) ? $forums[$forum_order + 10] : false;
 
             // move selected forum ($forum_id) UP
             if ($move < 0 && $prev_forum) {
                 if ($forum_info['forum_parent'] && $prev_forum['forum_parent'] != $forum_info['forum_parent']) {
                     $show_main_page = true;
                     break;
-                } else if ($move_down_forum_id = get_prev_root_forum_id($forums, $forum_order)) {
+                } elseif ($move_down_forum_id = get_prev_root_forum_id($forums, $forum_order)) {
                     $move_up_forum_id = $forum_id;
                     $move_down_ord_val = (get_sf_count($forum_id) + 1) * 10;
                     $move_up_ord_val = ((get_sf_count($move_down_forum_id) + 1) * 10) + $move_down_ord_val;
                     $move_down_forum_order = $cat_forums[$cat_id]['f'][$move_down_forum_id]['forum_order'];
                 }
             } // move selected forum ($forum_id) DOWN
-            else if ($move > 0 && $next_forum) {
+            elseif ($move > 0 && $next_forum) {
                 if ($forum_info['forum_parent'] && $next_forum['forum_parent'] != $forum_info['forum_parent']) {
                     $show_main_page = true;
                     break;
-                } else if ($move_up_forum_id = get_next_root_forum_id($forums, $forum_order)) {
+                } elseif ($move_up_forum_id = get_next_root_forum_id($forums, $forum_order)) {
                     $move_down_forum_id = $forum_id;
                     $move_down_forum_order = $forum_order;
                     $move_down_ord_val = (get_sf_count($move_up_forum_id) + 1) * 10;
@@ -602,7 +602,7 @@ if ($mode) {
 						forum_order = forum_order + $move
 					WHERE forum_id = $forum_id
 				");
-            } else if ($move_down_forum_id) {
+            } elseif ($move_down_forum_id) {
                 DB()->query("
 					UPDATE " . BB_FORUMS . " SET
 						forum_order = forum_order + $move_down_ord_val
@@ -734,7 +734,6 @@ if (!$mode || $show_main_page) {
                 $row_bgr = " class=\"$bgr_class\" onmouseover=\"this.className='$bgr_class_over';\" onmouseout=\"this.className='$bgr_class';\"";
 
                 if ($forum_rows[$j]['cat_id'] == $cat_id) {
-
                     $template->assign_block_vars("c.f", array(
                         'FORUM_NAME' => htmlCHR($forum_rows[$j]['forum_name']),
                         'FORUM_DESC' => htmlCHR($forum_rows[$j]['forum_desc']),
@@ -759,7 +758,6 @@ if (!$mode || $show_main_page) {
                         'U_FORUM_MOVE_DOWN' => "admin_forums.php?mode=forum_order&amp;move=15&amp;f=$forum_id&amp;c=$req_cat_id",
                         'U_FORUM_RESYNC' => "admin_forums.php?mode=forum_sync&amp;f=$forum_id",
                     ));
-
                 }// if ... forumid == catid
             } // for ... forums
         } // for ... categories
@@ -898,10 +896,9 @@ function renumber_order($mode, $cat = 0)
     if (!$result = DB()->sql_query($sql)) {
         bb_die('Could not get list of categories / forums #3');
     }
-
 }
 
-function get_cat_forums($cat_id = FALSE)
+function get_cat_forums($cat_id = false)
 {
     $forums = array();
     $where_sql = '';
@@ -959,7 +956,7 @@ function get_prev_root_forum_id($forums, $curr_forum_order)
         $i = $i - 10;
     }
 
-    return FALSE;
+    return false;
 }
 
 function get_next_root_forum_id($forums, $curr_forum_order)
@@ -974,7 +971,7 @@ function get_next_root_forum_id($forums, $curr_forum_order)
         $i = $i + 10;
     }
 
-    return FALSE;
+    return false;
 }
 
 function get_orphan_sf()
@@ -999,7 +996,7 @@ function get_orphan_sf()
     return implode(',', $bad_sf_ary);
 }
 
-function fix_orphan_sf($orphan_sf_sql = '', $show_mess = FALSE)
+function fix_orphan_sf($orphan_sf_sql = '', $show_mess = false)
 {
     global $lang;
 
@@ -1067,7 +1064,7 @@ function get_forum_data($forum_id)
         }
     }
 
-    return FALSE;
+    return false;
 }
 
 function get_max_forum_order($cat_id)

@@ -1,6 +1,8 @@
 <?php
 
-if (!defined('BB_ROOT')) die(basename(__FILE__));
+if (!defined('BB_ROOT')) {
+    die(basename(__FILE__));
+}
 
 function get_path_from_id($id, $ext_id, $base_path, $first_div, $sec_div)
 {
@@ -69,7 +71,9 @@ function set_tracks($cookie_name, &$tracking_ary, $tracks = null, $val = TIMENOW
 {
     global $tracking_topics, $tracking_forums, $user;
 
-    if (IS_GUEST) return;
+    if (IS_GUEST) {
+        return;
+    }
 
     $prev_tracking_ary = $tracking_ary;
 
@@ -220,32 +224,32 @@ function setbit(&$int, $bit_num, $on)
 }
 
 /*
-	$type's accepted (pre-pend with AUTH_):
-	VIEW, READ, POST, REPLY, EDIT, DELETE, STICKY, ANNOUNCE, VOTE, POLLCREATE
+    $type's accepted (pre-pend with AUTH_):
+    VIEW, READ, POST, REPLY, EDIT, DELETE, STICKY, ANNOUNCE, VOTE, POLLCREATE
 
-	Possible options ($type/forum_id combinations):
+    Possible options ($type/forum_id combinations):
 
-	* If you include a type and forum_id then a specific lookup will be done and
-	the single result returned
+    * If you include a type and forum_id then a specific lookup will be done and
+    the single result returned
 
-	* If you set type to AUTH_ALL and specify a forum_id an array of all auth types
-	will be returned
+    * If you set type to AUTH_ALL and specify a forum_id an array of all auth types
+    will be returned
 
-	* If you provide a forum_id a specific lookup on that forum will be done
+    * If you provide a forum_id a specific lookup on that forum will be done
 
-	* If you set forum_id to AUTH_LIST_ALL and specify a type an array listing the
-	results for all forums will be returned
+    * If you set forum_id to AUTH_LIST_ALL and specify a type an array listing the
+    results for all forums will be returned
 
-	* If you set forum_id to AUTH_LIST_ALL and type to AUTH_ALL a multidimensional
-	array containing the auth permissions for all types and all forums for that
-	user is returned
+    * If you set forum_id to AUTH_LIST_ALL and type to AUTH_ALL a multidimensional
+    array containing the auth permissions for all types and all forums for that
+    user is returned
 
-	All results are returned as associative arrays, even when a single auth type is
-	specified.
+    All results are returned as associative arrays, even when a single auth type is
+    specified.
 
-	If available you can send an array (either one or two dimensional) containing the
-	forum auth levels, this will prevent the auth function having to do its own
-	lookup
+    If available you can send an array (either one or two dimensional) containing the
+    forum auth levels, this will prevent the auth function having to do its own
+    lookup
 */
 function auth($type, $forum_id, $ug_data, $f_access = array(), $group_perm = UG_PERM_BOTH)
 {
@@ -261,7 +265,7 @@ function auth($type, $forum_id, $ug_data, $f_access = array(), $group_perm = UG_
     //
     if ($type == AUTH_ALL) {
         $auth_fields = array_keys($bf['forum_perm']);
-    } else if ($auth_type = array_search($type, $bf['forum_perm'])) {
+    } elseif ($auth_type = array_search($type, $bf['forum_perm'])) {
         $auth_fields = array($auth_type);
     }
 
@@ -282,10 +286,10 @@ function auth($type, $forum_id, $ug_data, $f_access = array(), $group_perm = UG_
 
         if ($forum_id == AUTH_LIST_ALL) {
             $f_access = $forums['f'];
-        } else if (isset($forums['f'][$forum_id])) {
+        } elseif (isset($forums['f'][$forum_id])) {
             $f_access[$forum_id] = $forums['f'][$forum_id];
         }
-    } else if (isset($f_access['forum_id'])) {
+    } elseif (isset($f_access['forum_id'])) {
         // Change passed $f_access format for later using in foreach()
         $f_access = array($f_access['forum_id'] => $f_access);
     }
@@ -313,7 +317,7 @@ function auth($type, $forum_id, $ug_data, $f_access = array(), $group_perm = UG_
             $u_access[$row['forum_id']] = $row['forum_perm'];
         }
     } // USER mode
-    else if (!empty($ug_data['user_id'])) {
+    elseif (!empty($ug_data['user_id'])) {
         $is_guest = empty($ug_data['session_logged_in']);
         $is_admin = (!$is_guest && $ug_data['user_level'] == ADMIN);
 
@@ -406,26 +410,30 @@ function auth($type, $forum_id, $ug_data, $f_access = array(), $group_perm = UG_
 
 function auth_check($bf_ary, $bf_key, $perm_ary, $perm_key, $is_admin = false)
 {
-    if ($is_admin) return true;
-    if (!isset($perm_ary[$perm_key])) return false;
+    if ($is_admin) {
+        return true;
+    }
+    if (!isset($perm_ary[$perm_key])) {
+        return false;
+    }
 
     return bf($perm_ary[$perm_key], $bf_ary, $bf_key);
 }
 
 class Date_Delta
 {
-    var $auto_granularity = array(
+    public $auto_granularity = array(
         60 => 'seconds',   // set granularity to "seconds" if delta less then 1 minute
         10800 => 'minutes',   // 3 hours
         259200 => 'hours',     // 3 days
         31363200 => 'mday',      // 12 months
         311040000 => 'mon',       // 10 years
     );
-    var $intervals = array();
-    var $format = '';
+    public $intervals = array();
+    public $format = '';
 
     // Creates new object.
-    function Date_Delta()
+    public function Date_Delta()
     {
         global $lang;
 
@@ -434,7 +442,7 @@ class Date_Delta
     }
 
     // Makes the spellable phrase.
-    function spellDelta($first, $last, $from = 'auto')
+    public function spellDelta($first, $last, $from = 'auto')
     {
         if ($last < $first) {
             $old_first = $first;
@@ -455,7 +463,9 @@ class Date_Delta
 
         // Solve data delta.
         $delta = $this->getDelta($first, $last);
-        if (!$delta) return false;
+        if (!$delta) {
+            return false;
+        }
 
         // Make spellable phrase.
         $parts = array();
@@ -472,15 +482,19 @@ class Date_Delta
                 continue;
             }
             $parts[] = declension($n, $this->intervals[$k], $this->format);
-            if ($k == $from) break;
+            if ($k == $from) {
+                break;
+            }
         }
         return join(' ', $parts);
     }
 
     // returns the associative array with date deltas.
-    function getDelta($first, $last)
+    public function getDelta($first, $last)
     {
-        if ($last < $first) return false;
+        if ($last < $first) {
+            return false;
+        }
 
         // Solve H:M:S part.
         $hms = ($last - $first) % (3600 * 24);
@@ -520,10 +534,12 @@ class Date_Delta
     }
 
     // Returns the length (in days) of the specified month.
-    function monthLength($year, $mon)
+    public function monthLength($year, $mon)
     {
         $l = 28;
-        while (checkdate($mon, $l + 1, $year)) $l++;
+        while (checkdate($mon, $l + 1, $year)) {
+            $l++;
+        }
         return $l;
     }
 }
@@ -561,15 +577,17 @@ function get_select($select, $selected = null, $return_as = 'html', $first_opt =
 
 class html_common
 {
-    var $options = '';
-    var $attr = array();
-    var $cur_attr = null;
-    var $max_length = HTML_SELECT_MAX_LENGTH;
-    var $selected = array();
+    public $options = '';
+    public $attr = array();
+    public $cur_attr = null;
+    public $max_length = HTML_SELECT_MAX_LENGTH;
+    public $selected = array();
 
-    function build_select($name, $params, $selected = null, $max_length = HTML_SELECT_MAX_LENGTH, $multiple_size = null, $js = '')
+    public function build_select($name, $params, $selected = null, $max_length = HTML_SELECT_MAX_LENGTH, $multiple_size = null, $js = '')
     {
-        if (empty($params)) return '';
+        if (empty($params)) {
+            return '';
+        }
 
         $this->options = '';
         $this->selected = array_flip((array)$selected);
@@ -593,7 +611,7 @@ class html_common
         return "\n<select $select_params>\n" . $this->options . "</select>\n";
     }
 
-    function _build_select_rec($params)
+    public function _build_select_rec($params)
     {
         foreach ($params as $opt_name => $opt_val) {
             $opt_name = rtrim($opt_name);
@@ -623,14 +641,14 @@ class html_common
         }
     }
 
-    function array2html($array, $ul = 'ul', $li = 'li')
+    public function array2html($array, $ul = 'ul', $li = 'li')
     {
         $this->out = '';
         $this->_array2html_rec($array, $ul, $li);
         return "<$ul class=\"tree-root\">{$this->out}</$ul>";
     }
 
-    function _array2html_rec($array, $ul, $li)
+    public function _array2html_rec($array, $ul, $li)
     {
         foreach ($array as $k => $v) {
             if (is_array($v)) {
@@ -644,7 +662,7 @@ class html_common
     }
 
     // all arguments should be already htmlspecialchar()d (if needed)
-    function build_checkbox($name, $title, $checked = false, $disabled = false, $class = null, $id = null, $value = 1)
+    public function build_checkbox($name, $title, $checked = false, $disabled = false, $class = null, $id = null, $value = 1)
     {
         $name = ' name="' . $name . '" ';
         $value = ' value="' . $value . '" ';
@@ -671,8 +689,12 @@ function build_checkbox($name, $title, $checked = false, $disabled = false, $cla
 
 function replace_quote($str, $double = true, $single = true)
 {
-    if ($double) $str = str_replace('"', '&quot;', $str);
-    if ($single) $str = str_replace("'", '&#039;', $str);
+    if ($double) {
+        $str = str_replace('"', '&quot;', $str);
+    }
+    if ($single) {
+        $str = str_replace("'", '&#039;', $str);
+    }
     return $str;
 }
 
@@ -754,7 +776,7 @@ function url_arg($url, $arg, $value, $amp = '&amp;')
         $new = is_null($value) ? '' : $m[1] . urlencode($value);
         $url = str_replace($cur, $new, $url);
     } // добавляем параметр
-    else if (!is_null($value)) {
+    elseif (!is_null($value)) {
         $div = (strpos($url, '?') !== false) ? $amp : '?';
         $url = $url . $div . $arg . '=' . urlencode($value);
     }
@@ -848,9 +870,9 @@ function checkbox_get_val(&$key, &$val, $default = 1, $on = 1, $off = 0)
 
     if (isset($_REQUEST[$key]) && is_string($_REQUEST[$key])) {
         $val = (int)$_REQUEST[$key];
-    } else if (!isset($_REQUEST[$key]) && isset($_REQUEST['prev_' . $key])) {
+    } elseif (!isset($_REQUEST[$key]) && isset($_REQUEST['prev_' . $key])) {
         $val = $off;
-    } else if (isset($previous_settings[$key]) && (!IS_GUEST || !empty($search_id))) {
+    } elseif (isset($previous_settings[$key]) && (!IS_GUEST || !empty($search_id))) {
         $val = ($previous_settings[$key]) ? $on : $off;
     } else {
         $val = $default;
@@ -865,7 +887,7 @@ function select_get_val($key, &$val, $options_ary, $default, $num = true)
         if (isset($options_ary[$_REQUEST[$key]])) {
             $val = ($num) ? intval($_REQUEST[$key]) : $_REQUEST[$key];
         }
-    } else if (isset($previous_settings[$key])) {
+    } elseif (isset($previous_settings[$key])) {
         $val = $previous_settings[$key];
     } else {
         $val = $default;
@@ -995,7 +1017,9 @@ function get_username($user_id)
 
 function get_user_id($username)
 {
-    if (empty($username)) return false;
+    if (empty($username)) {
+        return false;
+    }
     $row = DB()->fetch_row("SELECT user_id FROM " . BB_USERS . " WHERE username = '" . DB()->escape($username) . "' LIMIT 1");
     return $row['user_id'];
 }
@@ -1214,7 +1238,9 @@ function get_userdata($u, $force_name = false, $allow_guest = false)
     /** @var \TorrentPier\Cache\Adapter $cache */
     $cache = $di->cache;
 
-    if (!$u) return false;
+    if (!$u) {
+        return false;
+    }
 
     if (intval($u) == GUEST_UID && $allow_guest) {
         if ($u_data = $cache->get('guest_userdata')) {
@@ -1285,15 +1311,21 @@ function get_forum_select($mode = 'guest', $name = POST_FORUM_URL, $selected = n
     foreach ($forums['f'] as $fid => $f) {
         switch ($mode) {
             case 'guest':
-                if ($f['auth_view'] != AUTH_ALL) continue 2;
+                if ($f['auth_view'] != AUTH_ALL) {
+                    continue 2;
+                }
                 break;
 
             case 'user':
-                if ($f['auth_view'] != AUTH_ALL && $f['auth_view'] != AUTH_REG) continue 2;
+                if ($f['auth_view'] != AUTH_ALL && $f['auth_view'] != AUTH_REG) {
+                    continue 2;
+                }
                 break;
 
             case 'not_auth_forums':
-                if (isset($not_auth_forums_fary[$f['forum_id']])) continue 2;
+                if (isset($not_auth_forums_fary[$f['forum_id']])) {
+                    continue 2;
+                }
                 break;
 
             case 'admin':
@@ -1335,7 +1367,9 @@ function setup_style()
 
     if (!IS_GUEST && !empty($userdata['tpl_name'])) {
         foreach ($di->config->get('templates') as $folder => $name) {
-            if ($userdata['tpl_name'] == $folder) $tpl_dir_name = basename($userdata['tpl_name']);
+            if ($userdata['tpl_name'] == $folder) {
+                $tpl_dir_name = basename($userdata['tpl_name']);
+            }
         }
     }
 
@@ -1366,8 +1400,12 @@ function bb_date($gmepoch, $format = false, $friendly_date = true)
     /** @var \TorrentPier\Di $di */
     $di = \TorrentPier\Di::getInstance();
 
-    if (!$format) $format = $di->config->get('default_dateformat');
-    if (empty($lang)) require_once($di->config->get('default_lang_dir') . 'main.php');
+    if (!$format) {
+        $format = $di->config->get('default_dateformat');
+    }
+    if (empty($lang)) {
+        require_once($di->config->get('default_lang_dir') . 'main.php');
+    }
 
     if (empty($userdata['session_logged_in'])) {
         $tz = $di->config->get('board_timezone');
@@ -1394,12 +1432,14 @@ function bb_date($gmepoch, $format = false, $friendly_date = true)
             $date = 'yesterday' . gmdate($time_format, $gmepoch + (3600 * $tz));
         } elseif ($today == 1 && $month != 1) {
             $yesterday = date('t', mktime(0, 0, 0, ($month - 1), 1, $year));
-            if ($date_today == $yesterday && $date_month == ($month - 1) && $date_year == $year)
+            if ($date_today == $yesterday && $date_month == ($month - 1) && $date_year == $year) {
                 $date = 'yesterday' . gmdate($time_format, $gmepoch + (3600 * $tz));
+            }
         } elseif ($today == 1 && $month == 1) {
             $yesterday = date('t', mktime(0, 0, 0, 12, 1, ($year - 1)));
-            if ($date_today == $yesterday && $date_month == 12 && $date_year == ($year - 1))
+            if ($date_today == $yesterday && $date_month == 12 && $date_year == ($year - 1)) {
                 $date = 'yesterday' . gmdate($time_format, $gmepoch + (3600 * $tz));
+            }
         }
     }
 
@@ -1411,7 +1451,9 @@ function birthday_age($date)
     /** @var \TorrentPier\Di $di */
     $di = \TorrentPier\Di::getInstance();
 
-    if (!$date) return false;
+    if (!$date) {
+        return false;
+    }
 
     $tz = TIMENOW + (3600 * $di->config->get('board_timezone'));
 
@@ -1422,7 +1464,7 @@ function birthday_age($date)
 // Pagination routine, generates
 // page number sequence
 //
-function generate_pagination($base_url, $num_items, $per_page, $start_item, $add_prevnext_text = TRUE)
+function generate_pagination($base_url, $num_items, $per_page, $start_item, $add_prevnext_text = true)
 {
     global $lang, $template;
 
@@ -1504,7 +1546,6 @@ function generate_pagination($base_url, $num_items, $per_page, $start_item, $add
         if ($on_page < $total_pages) {
             $page_string .= '&nbsp;&nbsp;<a href="' . $base_url . "&amp;start=" . ($on_page * $per_page) . '">' . $lang['NEXT_PAGE'] . '</a>';
         }
-
     }
 
     $pagination = ($page_string) ? '<a class="menu-root" href="#pg-jump">' . $lang['GOTO_PAGE'] . '</a> :&nbsp;&nbsp;' . $page_string : '';
@@ -1533,11 +1574,15 @@ function obtain_word_list(&$orig_word, &$replacement_word)
     /** @var \TorrentPier\Cache\Adapter $cache */
     $cache = $di->cache;
 
-    if (!$di->config->get('use_word_censor')) return false;
+    if (!$di->config->get('use_word_censor')) {
+        return false;
+    }
 
     if (!$cache->has('censored')) {
         $sql = DB()->fetch_rowset("SELECT word, replacement FROM " . BB_WORDS);
-        if (!$sql) $sql = [['word' => 1, 'replacement' => 1]];
+        if (!$sql) {
+            $sql = [['word' => 1, 'replacement' => 1]];
+        }
         $cache->set('censored', $sql, 7200);
     }
 
@@ -1753,7 +1798,7 @@ function cat_exists($cat_id)
 //
 class log_action
 {
-    var $log_type = [
+    public $log_type = [
         #    LOG_TYPE_NAME   LOG_TYPE_ID
         'mod_topic_delete' => 1,
         'mod_topic_move' => 2,
@@ -1772,10 +1817,10 @@ class log_action
         'adm_ban_email' => 15,
         'adm_ban_name' => 16,
     ];
-    var $log_type_select = [];
-    var $log_disabled = false;
+    public $log_type_select = [];
+    public $log_disabled = false;
 
-    function init()
+    public function init()
     {
         global $lang;
 
@@ -1784,12 +1829,16 @@ class log_action
         }
     }
 
-    function mod($type_name, $args = array())
+    public function mod($type_name, $args = array())
     {
         global $userdata;
 
-        if (empty($this->log_type)) $this->init();
-        if ($this->log_disabled) return;
+        if (empty($this->log_type)) {
+            $this->init();
+        }
+        if ($this->log_disabled) {
+            return;
+        }
 
         $forum_id =& $args['forum_id'];
         $forum_id_new =& $args['forum_id_new'];
@@ -1825,7 +1874,7 @@ class log_action
         DB()->query("INSERT INTO " . BB_LOG . " $sql_args");
     }
 
-    function admin($type_name, $args = array())
+    public function admin($type_name, $args = array())
     {
         $this->mod($type_name, $args);
     }
@@ -1850,13 +1899,13 @@ function get_topic_icon($topic, $is_unread = null)
         if ($topic['topic_type'] == POST_ANNOUNCE) {
             $folder = $images['folder_announce'];
             $folder_new = $images['folder_announce_new'];
-        } else if ($topic['topic_type'] == POST_STICKY) {
+        } elseif ($topic['topic_type'] == POST_STICKY) {
             $folder = $images['folder_sticky'];
             $folder_new = $images['folder_sticky_new'];
-        } else if ($topic['topic_status'] == TOPIC_LOCKED) {
+        } elseif ($topic['topic_status'] == TOPIC_LOCKED) {
             $folder = $images['folder_locked'];
             $folder_new = $images['folder_locked_new'];
-        } else if (isset($topic['tracker_status'])) {
+        } elseif (isset($topic['tracker_status'])) {
             $folder = ($t_hot) ? $images['folder_dl_hot'] : $images['folder_dl'];
             $folder_new = ($t_hot) ? $images['folder_dl_hot_new'] : $images['folder_dl_new'];
         }
@@ -1882,7 +1931,7 @@ function build_topic_pagination($url, $replies, $per_page)
                 $pg .= ' .. ';
                 $page = $total_pages - 2;
                 $j += ($total_pages - 3) * $per_page;
-            } else if ($page < $total_pages) {
+            } elseif ($page < $total_pages) {
                 $pg .= ', ';
             }
         }
@@ -1979,7 +2028,7 @@ function print_page($args, $type = '', $mode = '')
     $tpl = (is_array($args) && !empty($args['tpl'])) ? $args['tpl'] : $args;
     $tpl = ($type === 'admin') ? ADMIN_TPL_DIR . $tpl : $tpl;
 
-    $gen_simple_header = (is_array($args) && !empty($args['simple']) OR $type === 'simple') ? true : $gen_simple_header;
+    $gen_simple_header = (is_array($args) && !empty($args['simple']) or $type === 'simple') ? true : $gen_simple_header;
 
     if ($mode !== 'no_header') {
         require(PAGE_HEADER);
@@ -2044,7 +2093,9 @@ function init_sphinx()
     global $sphinx;
 
     if (!isset($sphinx)) {
-        if (!class_exists('SphinxClient')) require(INC_DIR . 'api/sphinx.php');
+        if (!class_exists('SphinxClient')) {
+            require(INC_DIR . 'api/sphinx.php');
+        }
         $sphinx = new SphinxClient();
 
         $sphinx->SetConnectTimeout(5);
@@ -2092,7 +2143,7 @@ function get_title_match_topics($search)
             if (!empty($result['matches'])) {
                 $where_ids = array_keys($result['matches']);
             }
-        } else if ($error = $sphinx->GetLastError()) {
+        } elseif ($error = $sphinx->GetLastError()) {
             if (strpos($error, 'errno=110')) {
                 bb_die($lang['SEARCH_ERROR']);
             }
@@ -2236,10 +2287,16 @@ function profile_url($data)
         $title = $ranks[$user_rank]['rank_title'];
         $style = $ranks[$user_rank]['rank_style'];
     }
-    if (empty($title)) $title = $lang['USER'];
-    if (empty($style)) $style = 'colorUser';
+    if (empty($title)) {
+        $title = $lang['USER'];
+    }
+    if (empty($style)) {
+        $style = 'colorUser';
+    }
 
-    if (!$di->config->get('color_nick')) $style = '';
+    if (!$di->config->get('color_nick')) {
+        $style = '';
+    }
 
     $username = !empty($data['username']) ? $data['username'] : $lang['GUEST'];
     $user_id = (!empty($data['user_id']) && $username != $lang['GUEST']) ? $data['user_id'] : GUEST_UID;
@@ -2269,7 +2326,7 @@ function get_avatar($user_id, $ext_id, $allow_avatar = true, $size = true, $heig
 
     if ($user_id == BOT_UID && $di->config->get('avatars.bot_avatar')) {
         $user_avatar = '<img src="' . make_url($di->config->get('avatars.upload_path') . $di->config->get('avatars.bot_avatar')) . '" alt="' . $user_id . '" ' . $height . ' ' . $width . ' />';
-    } else if ($allow_avatar && $ext_id) {
+    } elseif ($allow_avatar && $ext_id) {
         if (file_exists(get_avatar_path($user_id, $ext_id))) {
             $user_avatar = '<img src="' . make_url(get_avatar_path($user_id, $ext_id)) . '" alt="' . $user_id . '" ' . $height . ' ' . $width . ' />';
         }

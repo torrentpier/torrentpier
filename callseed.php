@@ -49,7 +49,9 @@ $message = sprintf($lang['CALLSEED_TEXT'], make_url(TOPIC_URL . $topic_id), $t_d
 
 if ($user_list) {
     foreach ($user_list as $row) {
-        if (!empty($row['active_dl'])) continue;
+        if (!empty($row['active_dl'])) {
+            continue;
+        }
 
         if (bf($row['user_opt'], 'user_opt', 'user_callseed')) {
             send_pm($row['user_id'], $subject, $message, BOT_UID);

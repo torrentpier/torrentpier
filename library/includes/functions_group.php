@@ -1,6 +1,8 @@
 <?php
 
-if (!defined('BB_ROOT')) die(basename(__FILE__));
+if (!defined('BB_ROOT')) {
+    die(basename(__FILE__));
+}
 
 function update_user_level($user_id)
 {
@@ -157,7 +159,9 @@ function delete_permissions($group_id = null, $user_id = null, $cat_id = null)
 
 function store_permissions($group_id, $auth_ary)
 {
-    if (empty($auth_ary) || !is_array($auth_ary)) return;
+    if (empty($auth_ary) || !is_array($auth_ary)) {
+        return;
+    }
 
     $values = array();
 

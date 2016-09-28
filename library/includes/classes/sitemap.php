@@ -1,22 +1,24 @@
 <?php
 
-if (!defined('BB_ROOT')) die(basename(__FILE__));
+if (!defined('BB_ROOT')) {
+    die(basename(__FILE__));
+}
 
 class sitemap
 {
-    var $home = '';
-    var $limit = 0;
-    var $topic_priority = '0.5';
-    var $stat_priority = '0.5';
-    var $priority = '0.6';
-    var $cat_priority = '0.7';
+    public $home = '';
+    public $limit = 0;
+    public $topic_priority = '0.5';
+    public $stat_priority = '0.5';
+    public $priority = '0.6';
+    public $cat_priority = '0.7';
 
-    function sitemap()
+    public function sitemap()
     {
         $this->home = make_url();
     }
 
-    function build_map()
+    public function build_map()
     {
         $map = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<urlset xmlns=\"http://www.sitemaps.org/schemas/sitemap/0.9\">\n";
         $map .= $this->get_static();
@@ -27,7 +29,7 @@ class sitemap
         return $map;
     }
 
-    function build_index($count)
+    public function build_index($count)
     {
         $lm = date('c');
         $map = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<sitemapindex xmlns=\"http://www.sitemaps.org/schemas/sitemap/0.9\">\n";
@@ -41,7 +43,7 @@ class sitemap
         return $map;
     }
 
-    function build_stat()
+    public function build_stat()
     {
         $map = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<urlset xmlns=\"http://www.sitemaps.org/schemas/sitemap/0.9\">\n";
         $map .= $this->get_static();
@@ -51,7 +53,7 @@ class sitemap
         return $map;
     }
 
-    function build_map_topic($n)
+    public function build_map_topic($n)
     {
         $map = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<urlset xmlns=\"http://www.sitemaps.org/schemas/sitemap/0.9\">\n";
         $map .= $this->get_topic($n);
@@ -60,7 +62,7 @@ class sitemap
         return $map;
     }
 
-    function get_forum()
+    public function get_forum()
     {
         global $datastore;
 
@@ -79,15 +81,18 @@ class sitemap
         $sql = DB()->sql_query("SELECT forum_id, forum_topics, forum_parent, forum_name FROM " . BB_FORUMS . " " . $ignore_forum_sql . " ORDER BY forum_id ASC");
 
         while ($row = DB()->sql_fetchrow($sql)) {
-            if (function_exists('seo_url')) $loc = $this->home . seo_url(FORUM_URL . $row['forum_id'], $row['forum_name']);
-            else $loc = $this->home . FORUM_URL . $row['forum_id'];
+            if (function_exists('seo_url')) {
+                $loc = $this->home . seo_url(FORUM_URL . $row['forum_id'], $row['forum_name']);
+            } else {
+                $loc = $this->home . FORUM_URL . $row['forum_id'];
+            }
             $xml .= $this->get_xml($loc, $lm);
         }
 
         return $xml;
     }
 
-    function get_topic($page = false)
+    public function get_topic($page = false)
     {
         global $datastore;
 
@@ -99,7 +104,9 @@ class sitemap
             $page = $page * 40000;
             $this->limit = " LIMIT {$page},40000";
         } else {
-            if ($this->limit < 1) $this->limit = false;
+            if ($this->limit < 1) {
+                $this->limit = false;
+            }
             if ($this->limit) {
                 $this->limit = " LIMIT 0," . $this->limit;
             } else {
@@ -118,15 +125,18 @@ class sitemap
         $sql = DB()->sql_query("SELECT topic_id, topic_title, topic_time FROM " . BB_TOPICS . " " . $ignore_forum_sql . " ORDER BY topic_time ASC" . $this->limit);
 
         while ($row = DB()->sql_fetchrow($sql)) {
-            if (function_exists('seo_url')) $loc = $this->home . seo_url(TOPIC_URL . $row['topic_id'], $row['topic_title']);
-            else $loc = $this->home . TOPIC_URL . $row['topic_id'];
+            if (function_exists('seo_url')) {
+                $loc = $this->home . seo_url(TOPIC_URL . $row['topic_id'], $row['topic_title']);
+            } else {
+                $loc = $this->home . TOPIC_URL . $row['topic_id'];
+            }
             $xml .= $this->get_xml($loc, date('c', $row['topic_time']));
         }
 
         return $xml;
     }
 
-    function get_static()
+    public function get_static()
     {
         /** @var \TorrentPier\Di $di */
         $di = \TorrentPier\Di::getInstance();
@@ -151,7 +161,7 @@ class sitemap
         return $xml;
     }
 
-    function get_xml($loc, $lm)
+    public function get_xml($loc, $lm)
     {
         $xml = "\t<url>\n";
         $xml .= "\t\t<loc>$loc</loc>\n";
@@ -162,7 +172,7 @@ class sitemap
         return $xml;
     }
 
-    function send_url($url, $map)
+    public function send_url($url, $map)
     {
         $data = false;
         $file = $url . urlencode($map);
@@ -185,11 +195,13 @@ class sitemap
         }
     }
 
-    function create()
+    public function create()
     {
         $row = DB()->fetch_row("SELECT COUNT(*) AS count FROM " . BB_TOPICS);
 
-        if (!$this->limit) $this->limit = $row['count'];
+        if (!$this->limit) {
+            $this->limit = $row['count'];
+        }
         if ($this->limit > 40000) {
             $pages_count = ceil($row['count'] / 40000);
 

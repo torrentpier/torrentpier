@@ -1,7 +1,9 @@
 <?php
 
 if (!empty($setmodules)) {
-    if (IS_SUPER_ADMIN) $module['TP']['CRON'] = basename(__FILE__) . '?mode=list';
+    if (IS_SUPER_ADMIN) {
+        $module['TP']['CRON'] = basename(__FILE__) . '?mode=list';
+    }
     return;
 }
 
@@ -16,9 +18,13 @@ if ($mode == 'run' && !$job_id) {
     require(BB_ROOT . 'common.php');
     $user->session_start();
     redirect('admin/' . basename(__FILE__) . '?mode=list');
-} else require('./pagestart.php');
+} else {
+    require('./pagestart.php');
+}
 
-if (!IS_SUPER_ADMIN) bb_die($lang['NOT_ADMIN']);
+if (!IS_SUPER_ADMIN) {
+    bb_die($lang['NOT_ADMIN']);
+}
 
 require(INC_DIR . 'functions_admin_torrent.php');
 require(INC_DIR . 'functions_admin_cron.php');
@@ -176,18 +182,20 @@ if ($submit) {
     if ($_POST['mode'] == 'list') {
         if ($cron_action == 'run' && $jobs) {
             run_jobs($jobs);
-        } else if ($cron_action == 'delete' && $jobs) {
+        } elseif ($cron_action == 'delete' && $jobs) {
             delete_jobs($jobs);
-        } else if (($cron_action == 'disable' || $cron_action == 'enable') && $jobs) {
+        } elseif (($cron_action == 'disable' || $cron_action == 'enable') && $jobs) {
             toggle_active($jobs, $cron_action);
         }
         redirect('admin/' . basename(__FILE__) . '?mode=list');
-    } else if (validate_cron_post($_POST) == 1) {
+    } elseif (validate_cron_post($_POST) == 1) {
         if ($_POST['mode'] == 'edit') {
             update_cron_job($_POST);
-        } else if ($_POST['mode'] == 'add') {
+        } elseif ($_POST['mode'] == 'add') {
             insert_cron_job($_POST);
-        } else bb_die('Mode error');
+        } else {
+            bb_die('Mode error');
+        }
 
         redirect('admin/' . basename(__FILE__) . '?mode=list');
     } else {

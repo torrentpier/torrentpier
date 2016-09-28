@@ -17,7 +17,9 @@ $mode = $di->request->request->get('mode');
 $type = $di->request->request->get('type');
 $id = $di->request->query->getInt('id');
 
-if (!$mode) bb_simple_die($di->translator->trans('Do not specify a mode for the feed'));
+if (!$mode) {
+    bb_simple_die($di->translator->trans('Do not specify a mode for the feed'));
+}
 
 if ($mode == 'get_feed_url' && ($type == 'f' || $type == 'u') && $id >= 0) {
     if ($type == 'f') {

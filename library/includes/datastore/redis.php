@@ -1,16 +1,18 @@
 <?php
 
-if (!defined('BB_ROOT')) die(basename(__FILE__));
+if (!defined('BB_ROOT')) {
+    die(basename(__FILE__));
+}
 
 class datastore_redis extends datastore_common
 {
-    var $cfg = null;
-    var $redis = null;
-    var $prefix = null;
-    var $connected = false;
-    var $engine = 'Redis';
+    public $cfg = null;
+    public $redis = null;
+    public $prefix = null;
+    public $connected = false;
+    public $engine = 'Redis';
 
-    function datastore_redis($cfg, $prefix = null)
+    public function datastore_redis($cfg, $prefix = null)
     {
         if (!$this->is_installed()) {
             die('Error: Redis extension not installed');
@@ -22,7 +24,7 @@ class datastore_redis extends datastore_common
         $this->prefix = $prefix;
     }
 
-    function connect()
+    public function connect()
     {
         $this->cur_query = 'connect ' . $this->cfg['host'] . ':' . $this->cfg['port'];
         $this->debug('start');
@@ -39,9 +41,11 @@ class datastore_redis extends datastore_common
         $this->cur_query = null;
     }
 
-    function store($title, $var)
+    public function store($title, $var)
     {
-        if (!$this->connected) $this->connect();
+        if (!$this->connected) {
+            $this->connect();
+        }
         $this->data[$title] = $var;
 
         $this->cur_query = "cache->set('$title')";
@@ -53,9 +57,11 @@ class datastore_redis extends datastore_common
         return (bool)$this->redis->set($this->prefix . $title, serialize($var));
     }
 
-    function clean()
+    public function clean()
     {
-        if (!$this->connected) $this->connect();
+        if (!$this->connected) {
+            $this->connect();
+        }
         foreach ($this->known_items as $title => $script_name) {
             $this->cur_query = "cache->rm('$title')";
             $this->debug('start');
@@ -67,14 +73,16 @@ class datastore_redis extends datastore_common
         }
     }
 
-    function _fetch_from_store()
+    public function _fetch_from_store()
     {
         if (!$items = $this->queued_items) {
             $src = $this->_debug_find_caller('enqueue');
             trigger_error("Datastore: item '$item' already enqueued [$src]", E_USER_ERROR);
         }
 
-        if (!$this->connected) $this->connect();
+        if (!$this->connected) {
+            $this->connect();
+        }
         foreach ($items as $item) {
             $this->cur_query = "cache->get('$item')";
             $this->debug('start');
@@ -86,7 +94,7 @@ class datastore_redis extends datastore_common
         }
     }
 
-    function is_installed()
+    public function is_installed()
     {
         return class_exists('Redis');
     }

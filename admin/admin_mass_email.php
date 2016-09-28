@@ -18,9 +18,15 @@ $group_id = (int)request_var(POST_GROUPS_URL, 0);
 $errors = $user_id_sql = array();
 
 if (isset($_POST['submit'])) {
-    if (!$subject) $errors[] = $lang['EMPTY_SUBJECT'];
-    if (!$message) $errors[] = $lang['EMPTY_MESSAGE'];
-    if (!$group_id) $errors[] = $lang['GROUP_NOT_EXIST'];
+    if (!$subject) {
+        $errors[] = $lang['EMPTY_SUBJECT'];
+    }
+    if (!$message) {
+        $errors[] = $lang['EMPTY_MESSAGE'];
+    }
+    if (!$group_id) {
+        $errors[] = $lang['GROUP_NOT_EXIST'];
+    }
 
     if (!$errors) {
         $sql = DB()->fetch_rowset("SELECT ban_userid FROM " . BB_BANLIST . " WHERE ban_userid != 0");

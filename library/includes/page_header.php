@@ -1,7 +1,11 @@
 <?php
 
-if (!defined('BB_ROOT')) die(basename(__FILE__));
-if (defined('PAGE_HEADER_SENT')) return;
+if (!defined('BB_ROOT')) {
+    die(basename(__FILE__));
+}
+if (defined('PAGE_HEADER_SENT')) {
+    return;
+}
 
 // Parse and show the overall page header
 

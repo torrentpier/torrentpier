@@ -1,13 +1,17 @@
 <?php
 
-if (!defined('IN_AJAX')) die(basename(__FILE__));
+if (!defined('IN_AJAX')) {
+    die(basename(__FILE__));
+}
 
 global $lang, $userdata;
 
 $post_id = (int)$this->request['post_id'];
 $mc_type = (int)$this->request['mc_type'];
 $mc_text = (string)$this->request['mc_text'];
-if (!$mc_text = prepare_message($mc_text)) $this->ajax_die($lang['EMPTY_MESSAGE']);
+if (!$mc_text = prepare_message($mc_text)) {
+    $this->ajax_die($lang['EMPTY_MESSAGE']);
+}
 
 $post = DB()->fetch_row("
 	SELECT
@@ -15,7 +19,9 @@ $post = DB()->fetch_row("
 	FROM      " . BB_POSTS . " p
 	WHERE p.post_id = $post_id
 ");
-if (!$post) $this->ajax_die('not post');
+if (!$post) {
+    $this->ajax_die('not post');
+}
 
 $data = array(
     'mc_comment' => ($mc_type) ? $mc_text : '',

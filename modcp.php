@@ -402,8 +402,9 @@ switch ($mode) {
             }
         }
 
-        if ($post_id_sql && $split) //mpd end
-        {
+        if ($post_id_sql && $split) {
+            //mpd end
+
             $sql = "SELECT post_id, poster_id, topic_id, post_time
 				FROM " . BB_POSTS . "
 				WHERE post_id IN ($post_id_sql)
@@ -553,14 +554,14 @@ switch ($mode) {
                         'POSTER_NAME' => wbr($poster),
                         'POST_DATE' => $post_date,
                         'MESSAGE' => $message,
-                        'CHECKBOX' => (defined('BEGIN_CHECKBOX')) ? TRUE : FALSE,
+                        'CHECKBOX' => (defined('BEGIN_CHECKBOX')) ? true : false,
                         'POST_ID' => $post_id,
                         'ROW_ID' => $i,
                         'CB_ID' => 'cb_' . $i,
                     ));
 
                     if ($post_id == $topic_first_post_id) {
-                        define('BEGIN_CHECKBOX', TRUE);
+                        define('BEGIN_CHECKBOX', true);
                     }
                 }
             }

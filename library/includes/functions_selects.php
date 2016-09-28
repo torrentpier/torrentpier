@@ -1,6 +1,8 @@
 <?php
 
-if (!defined('BB_ROOT')) die(basename(__FILE__));
+if (!defined('BB_ROOT')) {
+    die(basename(__FILE__));
+}
 
 // Languages
 function language_select($default_lang, $select_name = 'language')
@@ -12,7 +14,9 @@ function language_select($default_lang, $select_name = 'language')
     $x = 0;
     foreach ($di->config->get('lang') as $key => $data) {
         $selected = '';
-        if ($key == $default_lang) $selected = ' selected="selected"';
+        if ($key == $default_lang) {
+            $selected = ' selected="selected"';
+        }
         $lang_select .= '<option value="' . $key . '"' . $selected . '>' . $data['name'] . '</option>';
         $x++;
     }
@@ -49,7 +53,9 @@ function templates_select($default_style, $select_name = 'tpl_name')
     $x = 0;
     foreach ($di->config->get('templates') as $folder => $name) {
         $selected = '';
-        if ($folder == $default_style) $selected = ' selected="selected"';
+        if ($folder == $default_style) {
+            $selected = ' selected="selected"';
+        }
         $templates_select .= '<option value="' . $folder . '"' . $selected . '>' . $name . '</option>';
         $x++;
     }

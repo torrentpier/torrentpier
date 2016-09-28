@@ -136,17 +136,23 @@ if (!isset($_REQUEST['dosearch'])) {
     switch ($mode) {
         case 'search_username':
             $username = $_REQUEST['username'];
-            if (!$username) bb_die($lang['SEARCH_INVALID_USERNAME']);
+            if (!$username) {
+                bb_die($lang['SEARCH_INVALID_USERNAME']);
+            }
             break;
 
         case 'search_email':
             $email = $_REQUEST['email'];
-            if (!$email) bb_die($lang['SEARCH_INVALID_EMAIL']);
+            if (!$email) {
+                bb_die($lang['SEARCH_INVALID_EMAIL']);
+            }
             break;
 
         case 'search_ip':
             $ip_address = $_REQUEST['ip_address'];
-            if (!$ip_address) bb_die($lang['SEARCH_INVALID_IP']);
+            if (!$ip_address) {
+                bb_die($lang['SEARCH_INVALID_IP']);
+            }
             break;
 
         case 'search_joindate':
@@ -154,55 +160,75 @@ if (!isset($_REQUEST['dosearch'])) {
             $date_day = $_REQUEST['date_day'];
             $date_month = $_REQUEST['date_month'];
             $date_year = $_REQUEST['date_year'];
-            if (!($date_type || $date_day || $date_month || $date_year)) bb_die($lang['SEARCH_INVALID_DATE']);
+            if (!($date_type || $date_day || $date_month || $date_year)) {
+                bb_die($lang['SEARCH_INVALID_DATE']);
+            }
             break;
 
         case 'search_group':
             $group_id = $_REQUEST['group_id'];
-            if (!$group_id) bb_die($lang['SEARCH_INVALID_GROUP']);
+            if (!$group_id) {
+                bb_die($lang['SEARCH_INVALID_GROUP']);
+            }
             break;
 
         case 'search_rank':
             $rank_id = $_REQUEST['rank_id'];
-            if (!$rank_id) bb_die($lang['SEARCH_INVALID_RANK']);
+            if (!$rank_id) {
+                bb_die($lang['SEARCH_INVALID_RANK']);
+            }
             break;
 
         case 'search_postcount':
             $postcount_type = $_REQUEST['postcount_type'];
             $postcount_value = $_REQUEST['postcount_value'];
-            if (!$postcount_type || (!$postcount_value && $postcount_value != 0)) bb_die($lang['SEARCH_INVALID_POSTCOUNT']);
+            if (!$postcount_type || (!$postcount_value && $postcount_value != 0)) {
+                bb_die($lang['SEARCH_INVALID_POSTCOUNT']);
+            }
             break;
 
         case 'search_userfield':
             $userfield_type = $_REQUEST['userfield_type'];
             $userfield_value = $_REQUEST['userfield_value'];
-            if (!$userfield_type || !$userfield_value) bb_die($lang['SEARCH_INVALID_USERFIELD']);
+            if (!$userfield_type || !$userfield_value) {
+                bb_die($lang['SEARCH_INVALID_USERFIELD']);
+            }
             break;
 
         case 'search_lastvisited':
             $lastvisited_days = $_REQUEST['lastvisited_days'];
             $lastvisited_type = $_REQUEST['lastvisited_type'];
-            if (!$lastvisited_days || !$lastvisited_type) bb_die($lang['SEARCH_INVALID_LASTVISITED']);
+            if (!$lastvisited_days || !$lastvisited_type) {
+                bb_die($lang['SEARCH_INVALID_LASTVISITED']);
+            }
             break;
 
         case 'search_language':
             $language_type = $_REQUEST['language_type'];
-            if (!$language_type) bb_die($lang['SEARCH_INVALID_LANGUAGE']);
+            if (!$language_type) {
+                bb_die($lang['SEARCH_INVALID_LANGUAGE']);
+            }
             break;
 
         case 'search_timezone':
             $timezone_type = $_REQUEST['timezone_type'];
-            if (!$timezone_type && $timezone_type != 0) bb_die($lang['SEARCH_INVALID_TIMEZONE']);
+            if (!$timezone_type && $timezone_type != 0) {
+                bb_die($lang['SEARCH_INVALID_TIMEZONE']);
+            }
             break;
 
         case 'search_moderators':
             $moderators_forum = $_REQUEST['moderators_forum'];
-            if (!$moderators_forum) bb_die($lang['SEARCH_INVALID_MODERATORS']);
+            if (!$moderators_forum) {
+                bb_die($lang['SEARCH_INVALID_MODERATORS']);
+            }
             break;
 
         case 'search_misc':
             $misc = $_REQUEST['misc'];
-            if (!$misc) bb_die($lang['SEARCH_INVALID']);
+            if (!$misc) {
+                bb_die($lang['SEARCH_INVALID']);
+            }
             break;
 
         default:
@@ -231,7 +257,9 @@ if (!isset($_REQUEST['dosearch'])) {
                 $op = '=';
             }
 
-            if ($username == '') bb_die($lang['SEARCH_INVALID_USERNAME']);
+            if ($username == '') {
+                bb_die($lang['SEARCH_INVALID_USERNAME']);
+            }
 
             $total_sql .= "SELECT COUNT(user_id) AS total FROM " . BB_USERS . " WHERE {$lower_b}username{$lower_e} $op '" . DB()->escape($username) . "' AND user_id <> " . GUEST_UID;
             $select_sql .= "	WHERE {$lower_b}u.username{$lower_e} $op '" . DB()->escape($username) . "' AND u.user_id <> " . GUEST_UID;
@@ -250,7 +278,9 @@ if (!isset($_REQUEST['dosearch'])) {
                 $op = '=';
             }
 
-            if ($email == '') bb_die($lang['SEARCH_INVALID_EMAIL']);
+            if ($email == '') {
+                bb_die($lang['SEARCH_INVALID_EMAIL']);
+            }
 
             $total_sql .= "SELECT COUNT(user_id) AS total FROM " . BB_USERS . " WHERE {$lower_b}user_email{$lower_e} $op '" . DB()->escape($email) . "' AND user_id <> " . GUEST_UID;
             $select_sql .= "	WHERE {$lower_b}u.user_email{$lower_e} $op '" . DB()->escape($email) . "' AND u.user_id <> " . GUEST_UID;
@@ -287,7 +317,9 @@ if (!isset($_REQUEST['dosearch'])) {
                 $range = preg_split('/[-\s]+/', $ip_address);
                 $start_range = explode('.', $range[0]);
                 $end_range = explode('.', $range[1]);
-                if (($start_range[0] . $start_range[1] . $start_range[2] != $end_range[0] . $end_range[1] . $end_range[2]) || ($start_range[3] > $end_range[3])) bb_die($lang['SEARCH_INVALID_IP']);
+                if (($start_range[0] . $start_range[1] . $start_range[2] != $end_range[0] . $end_range[1] . $end_range[2]) || ($start_range[3] > $end_range[3])) {
+                    bb_die($lang['SEARCH_INVALID_IP']);
+                }
                 for ($i = $start_range[3]; $i <= $end_range[3]; $i++) {
                     $users[] = encode_ip($start_range[0] . "." . $start_range[1] . "." . $start_range[2] . "." . $i);
                 }
@@ -318,7 +350,9 @@ if (!isset($_REQUEST['dosearch'])) {
             $where_sql .= ($ip_in_sql != '') ? "poster_ip IN ($ip_in_sql)" : "";
             $where_sql .= ($ip_like_sql != '') ? ($where_sql != "") ? " OR $ip_like_sql" : "$ip_like_sql" : "";
 
-            if (!$where_sql) bb_die('invalid request');
+            if (!$where_sql) {
+                bb_die('invalid request');
+            }
 
             // start search
             $no_result_search = false;
@@ -333,7 +367,7 @@ if (!isset($_REQUEST['dosearch'])) {
                 $no_result_search = true;
             } else {
                 $total_pages['total'] = DB()->num_rows($result);
-                $total_sql = NULL;
+                $total_sql = null;
                 $ip_users_sql = '';
                 while ($row = DB()->sql_fetchrow($result)) {
                     $ip_users_sql .= ($ip_users_sql == '') ? $row['poster_id'] : ', ' . $row['poster_id'];
@@ -347,9 +381,11 @@ if (!isset($_REQUEST['dosearch'])) {
                 bb_die('Could not count users #2');
             }
             if (DB()->num_rows($result) != 0) {
-                if ($no_result_search == true) $no_result_search = false;
+                if ($no_result_search == true) {
+                    $no_result_search = false;
+                }
                 $total_pages['total'] = DB()->num_rows($result);
-                $total_sql = NULL;
+                $total_sql = null;
                 while ($row = DB()->sql_fetchrow($result)) {
                     $ip_users_sql .= ($ip_users_sql == '') ? $row['user_id'] : ', ' . $row['user_id'];
                 }
@@ -362,9 +398,11 @@ if (!isset($_REQUEST['dosearch'])) {
                 bb_die('Could not count users #3');
             }
             if (DB()->num_rows($result) != 0) {
-                if ($no_result_search == true) $no_result_search = false;
+                if ($no_result_search == true) {
+                    $no_result_search = false;
+                }
                 $total_pages['total'] = DB()->num_rows($result);
-                $total_sql = NULL;
+                $total_sql = null;
                 while ($row = DB()->sql_fetchrow($result)) {
                     $ip_users_sql .= ($ip_users_sql == '') ? $row['user_id'] : ', ' . $row['user_id'];
                 }
@@ -572,7 +610,9 @@ if (!isset($_REQUEST['dosearch'])) {
                 $op = '=';
             }
 
-            if ($userfield_value == '') bb_die($lang['SEARCH_INVALID_USERFIELD']);
+            if ($userfield_value == '') {
+                bb_die($lang['SEARCH_INVALID_USERFIELD']);
+            }
 
             $userfield_type = trim(strtolower($userfield_type));
 

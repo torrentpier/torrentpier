@@ -353,7 +353,9 @@ if ($di->config->get('birthday_check_day') && $di->config->get('birthday_enabled
         }
         $week_all = ($week_all) ? '&nbsp;<a class="txtb" href="#" onclick="ajax.exec({action: \'index_data\', mode: \'birthday_week\'}); return false;" title="' . $lang['ALL'] . '">...</a>' : '';
         $week_list = sprintf($lang['BIRTHDAY_WEEK'], $di->config->get('birthday_check_day'), join(', ', $week_list)) . $week_all;
-    } else $week_list = sprintf($lang['NOBIRTHDAY_WEEK'], $di->config->get('birthday_check_day'));
+    } else {
+        $week_list = sprintf($lang['NOBIRTHDAY_WEEK'], $di->config->get('birthday_check_day'));
+    }
 
     if ($stats['birthday_today_list']) {
         shuffle($stats['birthday_today_list']);
@@ -366,7 +368,9 @@ if ($di->config->get('birthday_check_day') && $di->config->get('birthday_enabled
         }
         $today_all = ($today_all) ? '&nbsp;<a class="txtb" href="#" onclick="ajax.exec({action: \'index_data\', mode: \'birthday_today\'}); return false;" title="' . $lang['ALL'] . '">...</a>' : '';
         $today_list = $lang['BIRTHDAY_TODAY'] . join(', ', $today_list) . $today_all;
-    } else $today_list = $lang['NOBIRTHDAY_TODAY'];
+    } else {
+        $today_list = $lang['NOBIRTHDAY_TODAY'];
+    }
 
     $template->assign_vars(array(
         'WHOSBIRTHDAY_WEEK' => $week_list,
@@ -387,6 +391,8 @@ if (IS_AM) {
 // Display page
 define('SHOW_ONLINE', $show_online_users);
 
-if (isset($_GET['map'])) $template->assign_vars(array('PAGE_TITLE' => $lang['FORUM_MAP']));
+if (isset($_GET['map'])) {
+    $template->assign_vars(array('PAGE_TITLE' => $lang['FORUM_MAP']));
+}
 
 print_page('index.tpl');

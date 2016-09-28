@@ -1,6 +1,8 @@
 <?php
 
-if (!defined('BB_ROOT')) die(basename(__FILE__));
+if (!defined('BB_ROOT')) {
+    die(basename(__FILE__));
+}
 
 global $t_data, $poster_id, $is_auth, $dl_link_css, $dl_status_css, $lang, $userdata;
 
@@ -40,7 +42,7 @@ $tor_auth = ($bt_user_id != GUEST_UID && (($bt_user_id == $poster_id && !$locked
 
 if ($tor_auth && $t_data['allow_reg_tracker'] && !$tor_reged && !IS_CP_HOLDER) {
     $tr_reg_link = '<a class="txtb" href="#" onclick="ajax.exec({ action: \'change_torrent\', t : ' . $topic_id . ', type: \'reg\'}); return false;">' . $lang['BT_REG_ON_TRACKER'] . '</a>';
-} else if ($is_auth['auth_mod'] && $tor_reged && !IS_CP_HOLDER) {
+} elseif ($is_auth['auth_mod'] && $tor_reged && !IS_CP_HOLDER) {
     $tr_reg_link = '<a class="txtb" href="#" onclick="ajax.exec({ action: \'change_torrent\', t : ' . $topic_id . ', type: \'unreg\'}); return false;">' . $lang['BT_UNREG_FROM_TRACKER'] . '</a>';
 } else {
     $tr_reg_link = ($tor_reged) ? $lang['BT_REG_YES'] : $lang['BT_REG_NO'];
@@ -167,7 +169,7 @@ if ($tor_reged) {
 
             if (isset($_REQUEST['psortasc'])) {
                 $full_mode_sort_dir = 'ASC';
-            } else if (isset($_REQUEST['psortdesc'])) {
+            } elseif (isset($_REQUEST['psortdesc'])) {
                 $full_mode_sort_dir = 'DESC';
             }
 
@@ -198,7 +200,7 @@ if ($tor_reged) {
 				FROM " . BB_BT_TRACKER_SNAP . "
 				WHERE topic_id = $topic_id
 				LIMIT 1";
-        } else if ($s_mode == 'names') {
+        } elseif ($s_mode == 'names') {
             $sql = "SELECT tr.user_id, tr.ip, tr.port, tr.remain, tr.seeder, u.username, u.user_rank
 				FROM " . BB_BT_TRACKER . " tr, " . BB_USERS . " u
 				WHERE tr.topic_id = $topic_id

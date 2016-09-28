@@ -38,7 +38,7 @@ if (isset($_POST['del_my_post'])) {
     } else {
         bb_die($lang['NO_TOPICS_MY_MESSAGE']);
     }
-} else if (isset($_POST['add_my_post'])) {
+} elseif (isset($_POST['add_my_post'])) {
     $template->assign_var('BB_DIE_APPEND_MSG', '
 		<a href="#" onclick="window.close(); window.opener.focus();">' . $lang['GOTO_MY_MESSAGE'] . '</a>
 		<br /><br />
@@ -336,7 +336,7 @@ if ($search_id) {
 foreach ($GPC as $name => $params) {
     if ($params[GPC_TYPE] == CHBOX) {
         checkbox_get_val($params[KEY_NAME], ${"{$name}_val"}, $params[DEF_VAL]);
-    } else if ($params[GPC_TYPE] == SELECT) {
+    } elseif ($params[GPC_TYPE] == SELECT) {
         select_get_val($params[KEY_NAME], ${"{$name}_val"}, ${"{$name}_opt"}, $params[DEF_VAL]);
     }
 }
@@ -383,7 +383,7 @@ if (!$items_found) {
         if ($poster_id_val != $user_id && !get_username($poster_id_val)) {
             bb_die($lang['USER_NOT_EXIST']);
         }
-    } else if ($var =& $_POST[$poster_name_key]) {
+    } elseif ($var =& $_POST[$poster_name_key]) {
         $poster_name_sql = str_replace("\\'", "''", clean_username($var));
 
         if (!$poster_id_val = get_user_id($poster_name_sql)) {
@@ -401,10 +401,18 @@ if (!$items_found) {
 }
 
 $dl_status = array();
-if ($dl_cancel_val) $dl_status[] = DL_STATUS_CANCEL;
-if ($dl_compl_val) $dl_status[] = DL_STATUS_COMPLETE;
-if ($dl_down_val) $dl_status[] = DL_STATUS_DOWN;
-if ($dl_will_val) $dl_status[] = DL_STATUS_WILL;
+if ($dl_cancel_val) {
+    $dl_status[] = DL_STATUS_CANCEL;
+}
+if ($dl_compl_val) {
+    $dl_status[] = DL_STATUS_COMPLETE;
+}
+if ($dl_down_val) {
+    $dl_status[] = DL_STATUS_DOWN;
+}
+if ($dl_will_val) {
+    $dl_status[] = DL_STATUS_WILL;
+}
 $dl_status_csv = join(',', $dl_status);
 
 // Switches
@@ -442,8 +450,12 @@ if ($post_mode) {
         $SQL['SELECT'][] = ($join_t && !$join_p) ? 't.topic_first_post_id AS item_id' : 'p.post_id AS item_id';
 
         // FROM
-        if ($join_t) $SQL['FROM'][] = $topics_tbl;
-        if ($join_p) $SQL['FROM'][] = $posts_tbl;
+        if ($join_t) {
+            $SQL['FROM'][] = $topics_tbl;
+        }
+        if ($join_p) {
+            $SQL['FROM'][] = $posts_tbl;
+        }
 
         if (!$SQL['FROM']) {
             $join_p = true;
@@ -451,17 +463,35 @@ if ($post_mode) {
         }
 
         // WHERE
-        if ($join_p && $join_t) $SQL['WHERE'][] = "t.topic_id = p.topic_id";
+        if ($join_p && $join_t) {
+            $SQL['WHERE'][] = "t.topic_id = p.topic_id";
+        }
 
-        if ($excluded_forums_csv) $SQL['WHERE'][] = "$tbl.forum_id NOT IN($excluded_forums_csv)";
+        if ($excluded_forums_csv) {
+            $SQL['WHERE'][] = "$tbl.forum_id NOT IN($excluded_forums_csv)";
+        }
 
-        if ($forum_val) $SQL['WHERE'][] = "$tbl.forum_id IN($forum_val)";
-        if ($topic_val) $SQL['WHERE'][] = "$tbl.topic_id IN($topic_val)";
-        if ($new_posts) $SQL['WHERE'][] = "$tbl.$time_field > $lastvisit";
-        if ($new_topics) $SQL['WHERE'][] = "t.topic_time > $lastvisit";
-        if ($prev_days) $SQL['WHERE'][] = "$tbl.$time_field > " . $time_opt[$time_val]['sql'];
-        if ($my_posts) $SQL['WHERE'][] = "p.poster_id = $poster_id_val";
-        if ($my_topics) $SQL['WHERE'][] = "t.topic_poster = $poster_id_val";
+        if ($forum_val) {
+            $SQL['WHERE'][] = "$tbl.forum_id IN($forum_val)";
+        }
+        if ($topic_val) {
+            $SQL['WHERE'][] = "$tbl.topic_id IN($topic_val)";
+        }
+        if ($new_posts) {
+            $SQL['WHERE'][] = "$tbl.$time_field > $lastvisit";
+        }
+        if ($new_topics) {
+            $SQL['WHERE'][] = "t.topic_time > $lastvisit";
+        }
+        if ($prev_days) {
+            $SQL['WHERE'][] = "$tbl.$time_field > " . $time_opt[$time_val]['sql'];
+        }
+        if ($my_posts) {
+            $SQL['WHERE'][] = "p.poster_id = $poster_id_val";
+        }
+        if ($my_topics) {
+            $SQL['WHERE'][] = "t.topic_poster = $poster_id_val";
+        }
 
         if ($text_match_sql) {
             $search_match_topics_csv = '';
@@ -477,14 +507,16 @@ if ($post_mode) {
             prevent_huge_searches($SQL);
         }
 
-        if (!$SQL['WHERE']) redirect(basename(__FILE__));
+        if (!$SQL['WHERE']) {
+            redirect(basename(__FILE__));
+        }
 
         $SQL['GROUP BY'][] = "item_id";
         $SQL['ORDER BY'][] = ($new_posts && $join_p) ? "p.topic_id ASC, p.post_time ASC" : "$order $sort";
         $SQL['LIMIT'][] = "$search_limit";
 
         $items_display = fetch_search_ids($SQL);
-    } else if (!$items_display = array_slice($items_found, $start, $per_page)) {
+    } elseif (!$items_display = array_slice($items_found, $start, $per_page)) {
         bb_die($lang['NO_SEARCH_MATCH']);
     }
 
@@ -605,8 +637,12 @@ else {
         }
 
         // FROM
-        if ($join_t) $SQL['FROM'][] = $topics_tbl;
-        if ($join_p) $SQL['FROM'][] = $posts_tbl;
+        if ($join_t) {
+            $SQL['FROM'][] = $topics_tbl;
+        }
+        if ($join_p) {
+            $SQL['FROM'][] = $posts_tbl;
+        }
 
         if (!$SQL['FROM']) {
             $join_t = true;
@@ -614,17 +650,35 @@ else {
         }
 
         // WHERE
-        if ($join_p && $join_t) $SQL['WHERE'][] = "t.topic_id = p.topic_id";
+        if ($join_p && $join_t) {
+            $SQL['WHERE'][] = "t.topic_id = p.topic_id";
+        }
 
-        if ($excluded_forums_csv) $SQL['WHERE'][] = "$tbl.forum_id NOT IN($excluded_forums_csv)";
+        if ($excluded_forums_csv) {
+            $SQL['WHERE'][] = "$tbl.forum_id NOT IN($excluded_forums_csv)";
+        }
 
-        if ($join_t) $SQL['WHERE'][] = "t.topic_status != " . TOPIC_MOVED;
-        if ($forum_val) $SQL['WHERE'][] = "$tbl.forum_id IN($forum_val)";
-        if ($topic_val) $SQL['WHERE'][] = "$tbl.topic_id IN($topic_val)";
-        if ($new_posts) $SQL['WHERE'][] = "$tbl.$time_field > $lastvisit";
-        if ($new_topics) $SQL['WHERE'][] = "t.topic_time > $lastvisit";
-        if ($prev_days) $SQL['WHERE'][] = "$tbl.$time_field > " . $time_opt[$time_val]['sql'];
-        if ($my_posts) $SQL['WHERE'][] = "p.poster_id = $poster_id_val";
+        if ($join_t) {
+            $SQL['WHERE'][] = "t.topic_status != " . TOPIC_MOVED;
+        }
+        if ($forum_val) {
+            $SQL['WHERE'][] = "$tbl.forum_id IN($forum_val)";
+        }
+        if ($topic_val) {
+            $SQL['WHERE'][] = "$tbl.topic_id IN($topic_val)";
+        }
+        if ($new_posts) {
+            $SQL['WHERE'][] = "$tbl.$time_field > $lastvisit";
+        }
+        if ($new_topics) {
+            $SQL['WHERE'][] = "t.topic_time > $lastvisit";
+        }
+        if ($prev_days) {
+            $SQL['WHERE'][] = "$tbl.$time_field > " . $time_opt[$time_val]['sql'];
+        }
+        if ($my_posts) {
+            $SQL['WHERE'][] = "p.poster_id = $poster_id_val";
+        }
         if ($my_posts && $user->id == $poster_id_val) {
             $SQL['WHERE'][] = "p.user_post = 1";
 
@@ -638,7 +692,9 @@ else {
 				');
             }
         }
-        if ($my_topics) $SQL['WHERE'][] = "t.topic_poster = $poster_id_val";
+        if ($my_topics) {
+            $SQL['WHERE'][] = "t.topic_poster = $poster_id_val";
+        }
 
         if ($text_match_sql) {
             $search_match_topics_csv = '';
@@ -654,10 +710,16 @@ else {
             prevent_huge_searches($SQL);
         }
 
-        if ($join_dl) $SQL['FROM'][] = $dl_stat_tbl;
-        if ($join_dl) $SQL['WHERE'][] = "dl.topic_id = t.topic_id AND dl.user_id = $dl_user_id_val AND dl.user_status IN($dl_status_csv)";
+        if ($join_dl) {
+            $SQL['FROM'][] = $dl_stat_tbl;
+        }
+        if ($join_dl) {
+            $SQL['WHERE'][] = "dl.topic_id = t.topic_id AND dl.user_id = $dl_user_id_val AND dl.user_status IN($dl_status_csv)";
+        }
 
-        if (!$SQL['WHERE']) redirect(basename(__FILE__));
+        if (!$SQL['WHERE']) {
+            redirect(basename(__FILE__));
+        }
 
         $SQL['GROUP BY'][] = "item_id";
         $SQL['LIMIT'][] = "$search_limit";
@@ -669,7 +731,7 @@ else {
         }
 
         $items_display = fetch_search_ids($SQL);
-    } else if (!$items_display = array_slice($items_found, $start, $per_page)) {
+    } elseif (!$items_display = array_slice($items_found, $start, $per_page)) {
         bb_die($lang['NO_SEARCH_MATCH']);
     }
 
@@ -683,7 +745,9 @@ else {
 		p2.poster_id AS last_user_id, u2.user_rank AS last_user_rank,
 		IF(p2.poster_id = $anon_id, p2.post_username, u2.username) AS last_username
 	";
-    if ($join_dl) $SQL['SELECT'][] = "dl.user_status AS dl_status";
+    if ($join_dl) {
+        $SQL['SELECT'][] = "dl.user_status AS dl_status";
+    }
 
     $SQL['FROM'][] = BB_TOPICS . " t";
     $SQL['LEFT JOIN'][] = BB_POSTS . " p1 ON(t.topic_first_post_id = p1.post_id)";
@@ -797,10 +861,18 @@ function fetch_search_ids($sql, $search_type = SEARCH_TYPE_POST)
             'display_as',
             'chars',
         );
-        if ($GLOBALS['dl_cancel_val']) $save_in_db[] = 'dl_cancel';
-        if ($GLOBALS['dl_compl_val']) $save_in_db[] = 'dl_compl';
-        if ($GLOBALS['dl_down_val']) $save_in_db[] = 'dl_down';
-        if ($GLOBALS['dl_will_val']) $save_in_db[] = 'dl_will';
+        if ($GLOBALS['dl_cancel_val']) {
+            $save_in_db[] = 'dl_cancel';
+        }
+        if ($GLOBALS['dl_compl_val']) {
+            $save_in_db[] = 'dl_compl';
+        }
+        if ($GLOBALS['dl_down_val']) {
+            $save_in_db[] = 'dl_down';
+        }
+        if ($GLOBALS['dl_will_val']) {
+            $save_in_db[] = 'dl_will';
+        }
 
         $curr_set = array();
         foreach ($save_in_db as $name) {
@@ -829,7 +901,7 @@ function prevent_huge_searches($SQL)
 
         if (DB()->query($SQL) && ($row = DB()->fetch_row("SELECT FOUND_ROWS() AS rows_count"))) {
             if ($row['rows_count'] > $di->config->get('limit_max_search_results')) {
-#				bb_log(str_compact(DB()->build_sql($SQL)) ." [{$row['rows_count']} rows]". LOG_LF, 'sql_huge_search');
+                #				bb_log(str_compact(DB()->build_sql($SQL)) ." [{$row['rows_count']} rows]". LOG_LF, 'sql_huge_search');
                 bb_die('Too_many_search_results');
             }
         }

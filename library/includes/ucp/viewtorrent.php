@@ -1,6 +1,8 @@
 <?php
 
-if (!defined('IN_PROFILE')) die(basename(__FILE__));
+if (!defined('IN_PROFILE')) {
+    die(basename(__FILE__));
+}
 
 $releasing = $seeding = $leeching = array();
 $releasing_count = $seeding_count = $leeching_count = 0;

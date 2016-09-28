@@ -126,7 +126,9 @@ if (!$forums = $datastore->get('cat_forums')) {
     $forums = $datastore->get('cat_forums');
 }
 
-if ($forums['forum'][$forum_id]['allow_porno_topic'] && bf($userdata['user_opt'], 'user_opt', 'user_porn_forums')) bb_die($lang['ERROR_PORNO_FORUM']);
+if ($forums['forum'][$forum_id]['allow_porno_topic'] && bf($userdata['user_opt'], 'user_opt', 'user_porn_forums')) {
+    bb_die($lang['ERROR_PORNO_FORUM']);
+}
 
 if (!$forum_data['forum_parent'] && isset($forums['f'][$forum_id]['subforums']) && $show_subforums) {
     $not_auth_forums = $user->get_excluded_forums(AUTH_VIEW);
@@ -216,7 +218,6 @@ $topics_per_page = $di->config->get('topics_per_page');
 $select_tpp = '';
 
 if ($is_auth['auth_mod']) {
-
     if (($req_tpp = $di->request->query->getInt('tpp')) && in_array($req_tpp, $di->config->get('allowed_topics_per_page'))) {
         $topics_per_page = $req_tpp;
     }

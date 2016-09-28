@@ -1,6 +1,8 @@
 <?php
 
-if (!defined('BB_ROOT')) die(basename(__FILE__));
+if (!defined('BB_ROOT')) {
+    die(basename(__FILE__));
+}
 
 //
 // Prepare a message for posting
@@ -30,14 +32,13 @@ function prepare_post(&$mode, &$post_data, &$error_msg, &$username, &$subject, &
     // Check subject
     if (!empty($subject)) {
         $subject = str_replace('&amp;', '&', $subject);
-    } else if ($mode == 'newtopic' || ($mode == 'editpost' && $post_data['first_post'])) {
+    } elseif ($mode == 'newtopic' || ($mode == 'editpost' && $post_data['first_post'])) {
         $error_msg .= (!empty($error_msg)) ? '<br />' . $lang['EMPTY_SUBJECT'] : $lang['EMPTY_SUBJECT'];
     }
 
     // Check message
     if (!empty($message)) {
-
-    } else if ($mode != 'delete') {
+    } elseif ($mode != 'delete') {
         $error_msg .= (!empty($error_msg)) ? '<br />' . $lang['EMPTY_MESSAGE'] : $lang['EMPTY_MESSAGE'];
     }
 
@@ -232,7 +233,7 @@ function update_post_stats($mode, $post_data, $forum_id, $topic_id, $post_id, $u
                     $forum_update_sql .= ($row['last_post_id']) ? ', forum_last_post_id = ' . $row['last_post_id'] : ', forum_last_post_id = 0';
                 }
             }
-        } else if ($post_data['first_post']) {
+        } elseif ($post_data['first_post']) {
             $sql = "SELECT MIN(post_id) AS first_post_id FROM " . BB_POSTS . " WHERE topic_id = $topic_id";
             if (!($result = DB()->sql_query($sql))) {
                 bb_die('Error in deleting post #3');
@@ -363,7 +364,7 @@ function user_notification($mode, &$post_data, &$topic_title, &$forum_id, &$topi
 
         if (!$notify_user && !empty($topic_watch)) {
             DB()->query("DELETE FROM " . BB_TOPICS_WATCH . " WHERE topic_id = $topic_id AND user_id = {$userdata['user_id']}");
-        } else if ($notify_user && empty($topic_watch)) {
+        } elseif ($notify_user && empty($topic_watch)) {
             DB()->query("
 				INSERT INTO " . BB_TOPICS_WATCH . " (user_id, topic_id, notify_status)
 				VALUES (" . $userdata['user_id'] . ", $topic_id, " . TOPIC_WATCH_NOTIFIED . ")
@@ -376,14 +377,18 @@ function insert_post($mode, $topic_id, $forum_id = '', $old_forum_id = '', $new_
 {
     global $userdata, $lang;
 
-    if (!$topic_id) return;
+    if (!$topic_id) {
+        return;
+    }
 
     $post_username = $post_subject = $post_text = $poster_ip = '';
 
     $post_time = $current_time = TIMENOW;
 
     if ($mode == 'after_move') {
-        if (!$forum_id || !$old_forum_id) return;
+        if (!$forum_id || !$old_forum_id) {
+            return;
+        }
 
         $sql = "SELECT forum_id, forum_name
 			FROM " . BB_FORUMS . "
@@ -393,18 +398,20 @@ function insert_post($mode, $topic_id, $forum_id = '', $old_forum_id = '', $new_
         foreach (DB()->fetch_rowset($sql) as $row) {
             $forum_names[$row['forum_id']] = htmlCHR($row['forum_name']);
         }
-        if (!$forum_names) return;
+        if (!$forum_names) {
+            return;
+        }
 
         $post_text = sprintf($lang['BOT_TOPIC_MOVED_FROM_TO'], '[url=' . make_url(FORUM_URL . $old_forum_id) . ']' . $forum_names[$old_forum_id] . '[/url]', '[url=' . make_url(FORUM_URL . $forum_id) . ']' . $forum_names[$forum_id] . '[/url]', profile_url($userdata));
 
         $poster_id = BOT_UID;
         $poster_ip = '7f000001';
-    } else if ($mode == 'after_split_to_old') {
+    } elseif ($mode == 'after_split_to_old') {
         $post_text = sprintf($lang['BOT_MESS_SPLITS'], '[url=' . make_url(TOPIC_URL . $new_topic_id) . ']' . htmlCHR($new_topic_title) . '[/url]', profile_url($userdata));
 
         $poster_id = BOT_UID;
         $poster_ip = '7f000001';
-    } else if ($mode == 'after_split_to_new') {
+    } elseif ($mode == 'after_split_to_new') {
         $sql = "SELECT t.topic_title, p.post_time
 			FROM " . BB_TOPICS . " t, " . BB_POSTS . " p
 			WHERE t.topic_id = $old_topic_id

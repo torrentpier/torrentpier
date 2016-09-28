@@ -1,6 +1,8 @@
 <?php
 
-if (!defined('BB_ROOT')) die(basename(__FILE__));
+if (!defined('BB_ROOT')) {
+    die(basename(__FILE__));
+}
 
 // !!! $username должен быть предварительно обработан clean_username() !!!
 function validate_username($username, $check_ban_and_taken = true)
@@ -15,7 +17,7 @@ function validate_username($username, $check_ban_and_taken = true)
     // Length
     if (mb_strlen($username, 'UTF-8') > USERNAME_MAX_LENGTH) {
         return $lang['USERNAME_TOO_LONG'];
-    } else if (mb_strlen($username, 'UTF-8') < USERNAME_MIN_LENGTH) {
+    } elseif (mb_strlen($username, 'UTF-8') < USERNAME_MIN_LENGTH) {
         return $lang['USERNAME_TOO_SMALL'];
     }
     // Allowed symbols
@@ -83,10 +85,11 @@ function validate_email($email, $check_ban_and_taken = true)
         $email_sql = DB()->escape($email);
 
         if ($row = DB()->fetch_row("SELECT `user_email` FROM " . BB_USERS . " WHERE user_email = '$email_sql' LIMIT 1")) {
-            if ($row['user_email'] == $userdata['user_email'])
+            if ($row['user_email'] == $userdata['user_email']) {
                 return false;
-            else
+            } else {
                 return $lang['EMAIL_TAKEN'];
+            }
         }
     }
 

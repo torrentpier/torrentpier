@@ -1,13 +1,15 @@
 <?php
 
-if (!defined('BB_ROOT')) die(basename(__FILE__));
+if (!defined('BB_ROOT')) {
+    die(basename(__FILE__));
+}
 
 class datastore_sqlite extends datastore_common
 {
-    var $engine = 'SQLite';
-    var $db = null;
-    var $prefix = null;
-    var $cfg = array(
+    public $engine = 'SQLite';
+    public $db = null;
+    public $prefix = null;
+    public $cfg = array(
         'db_file_path' => '/path/to/datastore.db.sqlite',
         'table_name' => 'datastore',
         'table_schema' => 'CREATE TABLE datastore (
@@ -20,14 +22,14 @@ class datastore_sqlite extends datastore_common
         'log_name' => 'DATASTORE',
     );
 
-    function datastore_sqlite($cfg, $prefix = null)
+    public function datastore_sqlite($cfg, $prefix = null)
     {
         $this->cfg = array_merge($this->cfg, $cfg);
         $this->db = new sqlite_common($this->cfg);
         $this->prefix = $prefix;
     }
 
-    function store($item_name, $item_data)
+    public function store($item_name, $item_data)
     {
         $this->data[$item_name] = $item_data;
 
@@ -39,14 +41,16 @@ class datastore_sqlite extends datastore_common
         return (bool)$result;
     }
 
-    function clean()
+    public function clean()
     {
         $this->db->query("DELETE FROM " . $this->cfg['table_name']);
     }
 
-    function _fetch_from_store()
+    public function _fetch_from_store()
     {
-        if (!$items = $this->queued_items) return;
+        if (!$items = $this->queued_items) {
+            return;
+        }
 
         $prefix_len = strlen($this->prefix);
         $prefix_sql = SQLite3::escapeString($this->prefix);

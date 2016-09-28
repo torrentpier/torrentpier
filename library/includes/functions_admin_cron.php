@@ -88,7 +88,9 @@ function insert_cron_job($cron_arr)
 
         if ($_POST['cron_script'] == $row['cron_script']) {
             $langmode = $lang['SCRIPT_DUPLICATE'];
-        } else $langmode = $lang['TITLE_DUPLICATE'];
+        } else {
+            $langmode = $lang['TITLE_DUPLICATE'];
+        }
 
         $message = $langmode . "<br /><br />" . sprintf($lang['CLICK_RETURN_JOBS_ADDED'], "<a href=\"javascript:history.back(-1)\">", "</a>") . "<br /><br />" . sprintf($lang['CLICK_RETURN_JOBS'], "<a href=\"admin_cron.php?mode=list\">", "</a>") . "<br /><br />" . sprintf($lang['CLICK_RETURN_ADMIN_INDEX'], "<a href=\"index.php?pane=right\">", "</a>");
 

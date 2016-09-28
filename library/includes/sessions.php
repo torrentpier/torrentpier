@@ -1,6 +1,8 @@
 <?php
 
-if (!defined('BB_ROOT')) die(basename(__FILE__));
+if (!defined('BB_ROOT')) {
+    die(basename(__FILE__));
+}
 
 define('ONLY_NEW_POSTS', 1);
 define('ONLY_NEW_TOPICS', 2);
@@ -10,7 +12,7 @@ class user_common
     /**
      *  Config
      */
-    var $cfg = array(
+    public $cfg = array(
         'req_login' => false,    // requires user to be logged in
         'req_session_admin' => false,    // requires active admin session (for moderation or admin actions)
     );
@@ -18,7 +20,7 @@ class user_common
     /**
      *  PHP-JS exchangeable options (JSON'ized as {USER_OPTIONS_JS} in TPL)
      */
-    var $opt_js = array(
+    public $opt_js = array(
         'only_new' => 0,     // show ony new posts or topics
         'h_av' => 0,     // hide avatar
         'h_rnk_i' => 0,     // hide rank images
@@ -36,7 +38,7 @@ class user_common
     /**
      *  Defaults options for guests
      */
-    var $opt_js_guest = array(
+    public $opt_js_guest = array(
         'h_av' => 1,     // hide avatar
         'h_rnk_i' => 1,     // hide rank images
         'h_smile' => 1,     // hide smilies
@@ -46,7 +48,7 @@ class user_common
     /**
      *  Sessiondata
      */
-    var $sessiondata = array(
+    public $sessiondata = array(
         'uk' => null,
         'uid' => null,
         'sid' => '',
@@ -55,17 +57,17 @@ class user_common
     /**
      *  Old $userdata
      */
-    var $data = array();
+    public $data = array();
 
     /**
      *  Shortcuts
      */
-    var $id = null;
+    public $id = null;
 
     /**
      *  Constructor
      */
-    function user_common()
+    public function user_common()
     {
         $this->get_sessiondata();
     }
@@ -77,7 +79,7 @@ class user_common
      *
      * @return array|bool
      */
-    function session_start($cfg = array())
+    public function session_start($cfg = array())
     {
         /** @var \TorrentPier\Di $di */
         $di = \TorrentPier\Di::getInstance();
@@ -201,7 +203,7 @@ class user_common
      *
      * @return array
      */
-    function session_create($userdata, $auto_created = false)
+    public function session_create($userdata, $auto_created = false)
     {
         /** @var \TorrentPier\Di $di */
         $di = \TorrentPier\Di::getInstance();
@@ -257,7 +259,7 @@ class user_common
             if (!$session_time = $this->data['user_session_time']) {
                 $last_visit = TIMENOW;
                 define('FIRST_LOGON', true);
-            } else if ($session_time < (TIMENOW - $di->config->get('last_visit_update_intrv'))) {
+            } elseif ($session_time < (TIMENOW - $di->config->get('last_visit_update_intrv'))) {
                 $last_visit = max($session_time, (TIMENOW - 86400 * $di->config->get('max_last_visit_days')));
             }
 
@@ -311,7 +313,7 @@ class user_common
      * @param bool $update_lastvisit
      * @param bool $set_cookie
      */
-    function session_end($update_lastvisit = false, $set_cookie = true)
+    public function session_end($update_lastvisit = false, $set_cookie = true)
     {
         DB()->query("
 			DELETE FROM " . BB_SESSIONS . "
@@ -354,7 +356,7 @@ class user_common
      *
      * @return array
      */
-    function login($args, $mod_admin_login = false)
+    public function login($args, $mod_admin_login = false)
     {
         $username = !empty($args['login_username']) ? clean_username($args['login_username']) : '';
         $password = !empty($args['login_password']) ? $args['login_password'] : '';
@@ -390,7 +392,7 @@ class user_common
                     cache_update_userdata($this->data);
 
                     return $this->data;
-                } else if ($new_session_userdata = $this->session_create($userdata, false)) {
+                } elseif ($new_session_userdata = $this->session_create($userdata, false)) {
                     // Removing guest sessions from this IP
                     DB()->query("
 						DELETE FROM " . BB_SESSIONS . "
@@ -411,7 +413,7 @@ class user_common
     /**
      *  Initialize sessiondata stored in cookies
      */
-    function get_sessiondata()
+    public function get_sessiondata()
     {
         $sd_resv = !empty($_COOKIE[COOKIE_DATA]) ? unserialize($_COOKIE[COOKIE_DATA]) : array();
 
@@ -434,7 +436,7 @@ class user_common
      *
      * @param $user_id
      */
-    function set_session_cookies($user_id)
+    public function set_session_cookies($user_id)
     {
         /** @var \TorrentPier\Di $di */
         $di = \TorrentPier\Di::getInstance();
@@ -476,7 +478,7 @@ class user_common
      *
      * @return bool|string
      */
-    function verify_autologin_id($userdata, $expire_check = false, $create_new = true)
+    public function verify_autologin_id($userdata, $expire_check = false, $create_new = true)
     {
         /** @var \TorrentPier\Di $di */
         $di = \TorrentPier\Di::getInstance();
@@ -486,7 +488,7 @@ class user_common
         if ($expire_check) {
             if ($create_new && !$autologin_id) {
                 return $this->create_autologin_id($userdata);
-            } else if ($autologin_id && $userdata['user_session_time'] && $di->config->get('max_autologin_time')) {
+            } elseif ($autologin_id && $userdata['user_session_time'] && $di->config->get('max_autologin_time')) {
                 if (TIMENOW - $userdata['user_session_time'] > $di->config->get('max_autologin_time') * 86400) {
                     return $this->create_autologin_id($userdata, $create_new);
                 }
@@ -504,7 +506,7 @@ class user_common
      *
      * @return string
      */
-    function create_autologin_id($userdata, $create_new = true)
+    public function create_autologin_id($userdata, $create_new = true)
     {
         $autologin_id = ($create_new) ? make_rand_str(LOGIN_KEY_LENGTH) : '';
 
@@ -521,7 +523,7 @@ class user_common
     /**
      *  Set shortcuts
      */
-    function set_shortcuts()
+    public function set_shortcuts()
     {
         $this->id =& $this->data['user_id'];
         $this->active =& $this->data['user_active'];
@@ -537,14 +539,16 @@ class user_common
     /**
      *  Initialise user settings
      */
-    function init_userprefs()
+    public function init_userprefs()
     {
         global $theme, $lang, $DeltaTime;
 
         /** @var \TorrentPier\Di $di */
         $di = \TorrentPier\Di::getInstance();
 
-        if (defined('LANG_DIR')) return;  // prevent multiple calling
+        if (defined('LANG_DIR')) {
+            return;
+        }  // prevent multiple calling
 
         define('DEFAULT_LANG_DIR', LANG_ROOT_DIR . $di->config->get('default_lang') . '/');
         define('ENGLISH_LANG_DIR', LANG_ROOT_DIR . 'en/');
@@ -558,7 +562,9 @@ class user_common
         $this->data['user_lang'] = $di->config->get('default_lang');
         $this->data['user_timezone'] = $di->config->get('board_timezone');
 
-        if (!defined('LANG_DIR')) define('LANG_DIR', DEFAULT_LANG_DIR);
+        if (!defined('LANG_DIR')) {
+            define('LANG_DIR', DEFAULT_LANG_DIR);
+        }
 
         require(LANG_DIR . 'main.php');
         setlocale(LC_ALL, $di->config->get('lang.' . $this->data['user_lang'] . '.locale'));
@@ -579,7 +585,7 @@ class user_common
      *
      * @param $type
      */
-    function mark_read($type)
+    public function mark_read($type)
     {
         if ($type === 'all_forums') {
             // Update session time
@@ -610,11 +616,11 @@ class user_common
     /**
      *  Load misc options
      */
-    function load_opt_js()
+    public function load_opt_js()
     {
         if (IS_GUEST) {
             $this->opt_js = array_merge($this->opt_js, $this->opt_js_guest);
-        } else if (!empty($_COOKIE['opt_js'])) {
+        } elseif (!empty($_COOKIE['opt_js'])) {
             $opt_js = \Zend\Json\Json::decode($_COOKIE['opt_js'], \Zend\Json\Json::TYPE_ARRAY);
 
             if (is_array($opt_js)) {
@@ -630,11 +636,13 @@ class user_common
      *
      * @return string
      */
-    function get_not_auth_forums($auth_type)
+    public function get_not_auth_forums($auth_type)
     {
         global $datastore;
 
-        if (IS_ADMIN) return '';
+        if (IS_ADMIN) {
+            return '';
+        }
 
         if (!$forums = $datastore->get('cat_forums')) {
             $datastore->update('cat_forums');
@@ -688,7 +696,7 @@ class user_common
      *
      * @return array|string
      */
-    function get_excluded_forums($auth_type, $return_as = 'csv')
+    public function get_excluded_forums($auth_type, $return_as = 'csv')
     {
         $excluded = array();
 
@@ -706,7 +714,9 @@ class user_common
 
             if (isset($forums['forum'])) {
                 foreach ($forums['forum'] as $key => $row) {
-                    if ($row['allow_porno_topic']) $excluded[] = $row['forum_id'];
+                    if ($row['allow_porno_topic']) {
+                        $excluded[] = $row['forum_id'];
+                    }
                 }
             }
         }
@@ -738,7 +748,9 @@ function cache_get_userdata($id)
     /** @var \TorrentPier\Cache\Adapter $cache */
     $cache = $di->cache;
 
-    if (ignore_cached_userdata()) return false;
+    if (ignore_cached_userdata()) {
+        return false;
+    }
 
     return $cache->get($id);
 }
@@ -751,7 +763,9 @@ function cache_set_userdata($userdata, $force = false)
     /** @var \TorrentPier\Cache\Adapter $cache */
     $cache = $di->cache;
 
-    if (!$userdata || (ignore_cached_userdata() && !$force)) return false;
+    if (!$userdata || (ignore_cached_userdata() && !$force)) {
+        return false;
+    }
 
     $id = ($userdata['user_id'] == GUEST_UID) ? $userdata['session_ip'] : $userdata['session_id'];
 
@@ -766,7 +780,9 @@ function cache_rm_userdata($userdata)
     /** @var \TorrentPier\Cache\Adapter $cache */
     $cache = $di->cache;
 
-    if (!$userdata) return false;
+    if (!$userdata) {
+        return false;
+    }
 
     $id = ($userdata['user_id'] == GUEST_UID) ? $userdata['session_ip'] : $userdata['session_id'];
 
@@ -800,7 +816,9 @@ function cache_update_userdata($userdata)
 
 function db_update_userdata($userdata, $sql_ary, $data_already_escaped = true)
 {
-    if (!$userdata) return false;
+    if (!$userdata) {
+        return false;
+    }
 
     $sql_args = DB()->build_array('UPDATE', $sql_ary, $data_already_escaped);
     DB()->query("UPDATE " . BB_USERS . " SET $sql_args WHERE user_id = {$userdata['user_id']}");

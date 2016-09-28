@@ -1,6 +1,8 @@
 <?php
 
-if (!defined('IN_AJAX')) die(basename(__FILE__));
+if (!defined('IN_AJAX')) {
+    die(basename(__FILE__));
+}
 
 global $lang, $userdata, $datastore;
 
@@ -22,7 +24,9 @@ switch ($mode) {
                 $html[] = profile_url($week) . ' <span class="small">(' . birthday_age($week['user_birthday']) . ')</span>';
             }
             $html = sprintf($lang['BIRTHDAY_WEEK'], $di->config->get('birthday_check_day'), join(', ', $html));
-        } else $html = sprintf($lang['NOBIRTHDAY_WEEK'], $di->config->get('birthday_check_day'));
+        } else {
+            $html = sprintf($lang['NOBIRTHDAY_WEEK'], $di->config->get('birthday_check_day'));
+        }
         break;
 
     case 'birthday_today':
@@ -36,7 +40,9 @@ switch ($mode) {
                 $html[] = profile_url($today) . ' <span class="small">(' . birthday_age($today['user_birthday']) . ')</span>';
             }
             $html = $lang['BIRTHDAY_TODAY'] . join(', ', $html);
-        } else $html = $lang['NOBIRTHDAY_TODAY'];
+        } else {
+            $html = $lang['NOBIRTHDAY_TODAY'];
+        }
         break;
 
     case 'get_forum_mods':
@@ -69,8 +75,12 @@ switch ($mode) {
 
     case 'change_tz':
         $tz = (int)$this->request['tz'];
-        if ($tz < -12) $tz = -12;
-        if ($tz > 13) $tz = 13;
+        if ($tz < -12) {
+            $tz = -12;
+        }
+        if ($tz > 13) {
+            $tz = 13;
+        }
         DB()->query("UPDATE " . BB_USERS . " SET user_timezone = $tz WHERE user_id = " . $userdata['user_id'] . " LIMIT 1");
         cache_rm_user_sessions($userdata['user_id']);
         break;

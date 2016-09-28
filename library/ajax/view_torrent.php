@@ -1,6 +1,8 @@
 <?php
 
-if (!defined('IN_AJAX')) die(basename(__FILE__));
+if (!defined('IN_AJAX')) {
+    die(basename(__FILE__));
+}
 
 global $lang;
 
@@ -41,18 +43,18 @@ function build_tor_filelist($file_contents)
 
 class torrent
 {
-    var $tor_decoded = array();
-    var $files_ary = array('/' => '');
-    var $multiple = null;
-    var $root_dir = '';
-    var $files_html = '';
+    public $tor_decoded = array();
+    public $files_ary = array('/' => '');
+    public $multiple = null;
+    public $root_dir = '';
+    public $files_html = '';
 
-    function torrent($decoded_file_contents)
+    public function torrent($decoded_file_contents)
     {
         $this->tor_decoded = $decoded_file_contents;
     }
 
-    function get_filelist()
+    public function get_filelist()
     {
         $this->build_filelist_array();
 
@@ -68,7 +70,7 @@ class torrent
         }
     }
 
-    function build_filelist_array()
+    public function build_filelist_array()
     {
         $info = $this->tor_decoded['info'];
 
@@ -129,7 +131,7 @@ class torrent
         }
     }
 
-    function build_file_item($name, $length)
+    public function build_file_item($name, $length)
     {
         global $images, $lang;
 
@@ -146,7 +148,7 @@ class torrent
         return "$name <i>$length</i> $magnet_name $magnet_ext";
     }
 
-    function build_filelist_html()
+    public function build_filelist_html()
     {
         global $html;
         return $html->array2html($this->files_ary);
@@ -158,6 +160,8 @@ function clean_tor_dirname($dirname)
     return str_replace(array('[', ']', '<', '>', "'"), array('&#91;', '&#93;', '&lt;', '&gt;', '&#039;'), $dirname);
 }
 
-if ($bnc_error) $tor_filelist = '<b style="color: #993300;">' . $lang['ERROR_BUILD'] . '</b><br /><br />' . $tor_filelist;
+if ($bnc_error) {
+    $tor_filelist = '<b style="color: #993300;">' . $lang['ERROR_BUILD'] . '</b><br /><br />' . $tor_filelist;
+}
 
 $this->response['html'] = $tor_filelist;

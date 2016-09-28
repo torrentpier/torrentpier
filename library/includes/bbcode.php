@@ -1,6 +1,8 @@
 <?php
 
-if (!defined('BB_ROOT')) die(basename(__FILE__));
+if (!defined('BB_ROOT')) {
+    die(basename(__FILE__));
+}
 
 $datastore->enqueue(array(
     'smile_replacements',
@@ -220,7 +222,7 @@ function strip_quotes($text)
         $stack = array();
         $newtext = '[...] ';
         $substr_pos = 0;
-        foreach ($pos_list AS $pos => $type) {
+        foreach ($pos_list as $pos => $type) {
             $stacksize = sizeof($stack);
             if ($type == 'start') {
                 // empty stack, so add from the last close tag or the beginning of the string
@@ -244,7 +246,7 @@ function strip_quotes($text)
         // as key points, and repeat. Allows emulation of a non-greedy-type
         // recursion.
         if ($stack) {
-            foreach ($stack AS $pos) {
+            foreach ($stack as $pos) {
                 unset($pos_list["$pos"]);
             }
         }
@@ -349,12 +351,14 @@ function extract_search_words($text)
     // short & long words 2
     $text_out = array();
     foreach ($text as $word) {
-        if (mb_strlen($word) > $min_word_len && mb_strlen($word) <= $max_word_len) $text_out[] = $word;
+        if (mb_strlen($word) > $min_word_len && mb_strlen($word) <= $max_word_len) {
+            $text_out[] = $word;
+        }
     }
     $text = $text_out;
 
     if (sizeof($text) > $max_words_count) {
-#		shuffle($text);
+        #		shuffle($text);
         $text = array_splice($text, 0, $max_words_count);
     }
 
@@ -399,11 +403,11 @@ function add_search_words($post_id, $post_message, $topic_title = '', $only_retu
 
 class bbcode
 {
-    var $tpl = array(); // шаблоны для замены тегов
-    var $smilies = null;    // смайлы
-    var $found_spam = null;    // найденные спам "слова"
-    var $del_words = array(); // см. get_words_rate()
-    var $tidy_cfg = array(
+    public $tpl = array(); // шаблоны для замены тегов
+    public $smilies = null;    // смайлы
+    public $found_spam = null;    // найденные спам "слова"
+    public $del_words = array(); // см. get_words_rate()
+    public $tidy_cfg = array(
         'drop-empty-paras' => false,
         'fix-uri' => false,
         'force-output' => true,
@@ -421,7 +425,7 @@ class bbcode
         'show-warnings' => false,
         'wrap' => 0,
     );
-    var $block_tags = array(
+    public $block_tags = array(
         'align',
         'br',
         'clear',
@@ -431,17 +435,17 @@ class bbcode
         'quote',
         'spoiler',
     );
-    var $preg = array();
-    var $str = array();
-    var $preg_search = array();
-    var $preg_repl = array();
-    var $str_search = array();
-    var $str_repl = array();
+    public $preg = array();
+    public $str = array();
+    public $preg_search = array();
+    public $preg_repl = array();
+    public $str_search = array();
+    public $str_repl = array();
 
     /**
      * Constructor
      */
-    function bbcode()
+    public function bbcode()
     {
         $this->tpl = get_bbcode_tpl();
 
@@ -451,7 +455,7 @@ class bbcode
     /**
      * init_replacements
      */
-    function init_replacements()
+    public function init_replacements()
     {
         $tpl = $this->tpl;
         $img_exp = '(https?:)?//[^\s\?&;=\#\"<>]+?\.(jpg|jpeg|gif|png)([a-z0-9/?&%;][^\[\]]*)?';
@@ -517,7 +521,7 @@ class bbcode
      *
      * @return string
      */
-    function bbcode2html($text)
+    public function bbcode2html($text)
     {
         /** @var \TorrentPier\Di $di */
         $di = \TorrentPier\Di::getInstance();
@@ -570,7 +574,7 @@ class bbcode
      *
      * @return mixed|string
      */
-    static function clean_up($text)
+    public static function clean_up($text)
     {
         $text = trim($text);
         $text = str_replace("\r", '', $text);
@@ -646,7 +650,7 @@ class bbcode
      *
      * @return string
      */
-    function code_callback($m)
+    public function code_callback($m)
     {
         $code = trim($m[2]);
         $code = str_replace('  ', '&nbsp; ', $code);
@@ -663,7 +667,7 @@ class bbcode
      *
      * @return string
      */
-    function url_callback($m)
+    public function url_callback($m)
     {
         /** @var \TorrentPier\Di $di */
         $di = \TorrentPier\Di::getInstance();
@@ -671,7 +675,9 @@ class bbcode
         $url = trim($m[1]);
         $url_name = (isset($m[2])) ? trim($m[2]) : $url;
 
-        if (!preg_match("#^https?://#isu", $url) && !preg_match("/^#/", $url)) $url = 'http://' . $url;
+        if (!preg_match("#^https?://#isu", $url) && !preg_match("/^#/", $url)) {
+            $url = 'http://' . $url;
+        }
 
         if (in_array(parse_url($url, PHP_URL_HOST), $di->config->get('nofollow.allowed_url')) || $di->config->get('nofollow.disabled')) {
             $link = "<a href=\"$url\" class=\"postLink\">$url_name</a>";
@@ -689,7 +695,7 @@ class bbcode
      *
      * @return string
      */
-    function escape_tiltes_callback($m)
+    public function escape_tiltes_callback($m)
     {
         $tilte = substr($m[3], 0, 250);
         $tilte = str_replace(array('[', ']', ':', ')', '"'), array('&#91;', '&#93;', '&#58;', '&#41;', '&#34;'), $tilte);
@@ -705,7 +711,7 @@ class bbcode
      *
      * @return string
      */
-    function make_clickable($text)
+    public function make_clickable($text)
     {
         $url_regexp = "#
 			(?<![\"'=])
@@ -739,7 +745,7 @@ class bbcode
      *
      * @return string
      */
-    function make_url_clickable_callback($m)
+    public function make_url_clickable_callback($m)
     {
         /** @var \TorrentPier\Di $di */
         $di = \TorrentPier\Di::getInstance();
@@ -764,7 +770,7 @@ class bbcode
      *
      * @return mixed
      */
-    function smilies_pass($text)
+    public function smilies_pass($text)
     {
         global $datastore;
 
@@ -786,7 +792,7 @@ class bbcode
      *
      * @return mixed
      */
-    function new_line2html($text)
+    public function new_line2html($text)
     {
         $text = preg_replace('#\n{2,}#', '<span class="post-br"><br /></span>', $text);
         $text = str_replace("\n", '<br />', $text);
@@ -800,7 +806,7 @@ class bbcode
      *
      * @return string
      */
-    function tidy($text)
+    public function tidy($text)
     {
         $text = tidy_repair_string($text, $this->tidy_cfg, 'utf8');
         return $text;
@@ -825,14 +831,14 @@ function bbcode2html($text)
 
 class words_rate
 {
-    var $dbg_mode = false;
-    var $words_rate = 0;
-    var $deleted_words = array();
-    var $del_text_hl = '';
-    var $words_del_exp = '';
-    var $words_cnt_exp = '#[a-zA-Zа-яА-ЯёЁ]{4,}#';
+    public $dbg_mode = false;
+    public $words_rate = 0;
+    public $deleted_words = array();
+    public $del_text_hl = '';
+    public $words_del_exp = '';
+    public $words_cnt_exp = '#[a-zA-Zа-яА-ЯёЁ]{4,}#';
 
-    function words_rate()
+    public function words_rate()
     {
         // слова начинающиеся на..
         $del_list = file_get_contents(BB_ROOT . '/library/words_rate_del_list.txt');
@@ -850,7 +856,7 @@ class words_rate
      *
      * @return int
      */
-    function get_words_rate($text)
+    public function get_words_rate($text)
     {
         $this->words_rate = 127;     // максимальное значение по умолчанию
         $this->deleted_words = array();

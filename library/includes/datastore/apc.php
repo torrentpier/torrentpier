@@ -1,13 +1,15 @@
 <?php
 
-if (!defined('BB_ROOT')) die(basename(__FILE__));
+if (!defined('BB_ROOT')) {
+    die(basename(__FILE__));
+}
 
 class datastore_apc extends datastore_common
 {
-    var $engine = 'APC';
-    var $prefix = null;
+    public $engine = 'APC';
+    public $prefix = null;
 
-    function datastore_apc($prefix = null)
+    public function datastore_apc($prefix = null)
     {
         if (!$this->is_installed()) {
             die('Error: APC extension not installed');
@@ -16,7 +18,7 @@ class datastore_apc extends datastore_common
         $this->prefix = $prefix;
     }
 
-    function store($title, $var)
+    public function store($title, $var)
     {
         $this->data[$title] = $var;
 
@@ -29,7 +31,7 @@ class datastore_apc extends datastore_common
         return (bool)apc_store($this->prefix . $title, $var);
     }
 
-    function clean()
+    public function clean()
     {
         foreach ($this->known_items as $title => $script_name) {
             $this->cur_query = "cache->rm('$title')";
@@ -42,7 +44,7 @@ class datastore_apc extends datastore_common
         }
     }
 
-    function _fetch_from_store()
+    public function _fetch_from_store()
     {
         if (!$items = $this->queued_items) {
             $src = $this->_debug_find_caller('enqueue');
@@ -60,7 +62,7 @@ class datastore_apc extends datastore_common
         }
     }
 
-    function is_installed()
+    public function is_installed()
     {
         return function_exists('apc_fetch');
     }

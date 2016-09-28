@@ -18,7 +18,9 @@ switch ($mode) {
 
     case 'register':
     case 'editprofile':
-        if (IS_GUEST && $mode == 'editprofile') login_redirect();
+        if (IS_GUEST && $mode == 'editprofile') {
+            login_redirect();
+        }
         require(UCP_DIR . 'register.php');
         break;
 
@@ -35,12 +37,16 @@ switch ($mode) {
         break;
 
     case 'bonus':
-        if (IS_GUEST) login_redirect();
+        if (IS_GUEST) {
+            login_redirect();
+        }
         require(UCP_DIR . 'bonus.php');
         break;
 
     case 'watch':
-        if (IS_GUEST) login_redirect();
+        if (IS_GUEST) {
+            login_redirect();
+        }
         require(UCP_DIR . 'topic_watch.php');
         break;
 

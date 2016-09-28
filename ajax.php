@@ -18,7 +18,7 @@ $di = \TorrentPier\Di::getInstance();
 if ($ajax->action != 'manage_admin') {
     if ($di->config->get('board_disable')) {
         $ajax->ajax_die($lang['BOARD_DISABLE']);
-    } else if (file_exists(BB_DISABLED)) {
+    } elseif (file_exists(BB_DISABLED)) {
         $ajax->ajax_die($lang['BOARD_DISABLE_CRON']);
     }
 }
@@ -73,10 +73,10 @@ $ajax->exec();
 //
 class ajax_common
 {
-    var $request = [];
-    var $response = [];
+    public $request = [];
+    public $response = [];
 
-    var $valid_actions = [
+    public $valid_actions = [
         // ACTION NAME         AJAX_AUTH
         'edit_user_profile' => ['admin'],
         'change_user_rank' => ['admin'],
@@ -103,12 +103,12 @@ class ajax_common
         'index_data' => ['guest'],
     ];
 
-    var $action = null;
+    public $action = null;
 
     /**
      *  Constructor
      */
-    function ajax_common()
+    public function ajax_common()
     {
         ob_start([&$this, 'ob_handler']);
         header('Content-Type: text/plain');
@@ -117,7 +117,7 @@ class ajax_common
     /**
      *  Perform action
      */
-    function exec()
+    public function exec()
     {
         global $lang;
 
@@ -189,7 +189,7 @@ class ajax_common
      * @param     $error_msg
      * @param int $error_code
      */
-    function ajax_die($error_msg, $error_code = E_AJAX_GENERAL_ERROR)
+    public function ajax_die($error_msg, $error_code = E_AJAX_GENERAL_ERROR)
     {
         $this->response['error_code'] = $error_code;
         $this->response['error_msg'] = $error_msg;
@@ -200,7 +200,7 @@ class ajax_common
     /**
      *  Initialization
      */
-    function init()
+    public function init()
     {
         $this->request = $_POST;
         $this->action =& $this->request['action'];
@@ -209,7 +209,7 @@ class ajax_common
     /**
      *  Send data
      */
-    function send()
+    public function send()
     {
         $this->response['action'] = $this->action;
 
@@ -228,7 +228,7 @@ class ajax_common
      *
      * @return string
      */
-    function ob_handler($contents)
+    public function ob_handler($contents)
     {
         if (DBG_USER) {
             if ($contents) {
@@ -251,7 +251,7 @@ class ajax_common
     /**
      *  Admin session
      */
-    function check_admin_session()
+    public function check_admin_session()
     {
         global $user;
 
@@ -273,7 +273,7 @@ class ajax_common
     /**
      *  Prompt for password
      */
-    function prompt_for_password()
+    public function prompt_for_password()
     {
         $this->response['prompt_password'] = 1;
         $this->send();
@@ -284,9 +284,11 @@ class ajax_common
      *
      * @param $confirm_msg
      */
-    function prompt_for_confirm($confirm_msg)
+    public function prompt_for_confirm($confirm_msg)
     {
-        if (empty($confirm_msg)) $this->ajax_die('false');
+        if (empty($confirm_msg)) {
+            $this->ajax_die('false');
+        }
 
         $this->response['prompt_confirm'] = 1;
         $this->response['confirm_msg'] = $confirm_msg;
@@ -298,7 +300,7 @@ class ajax_common
      *
      * @param $forum_id
      */
-    function verify_mod_rights($forum_id)
+    public function verify_mod_rights($forum_id)
     {
         global $userdata, $lang;
 
@@ -309,102 +311,102 @@ class ajax_common
         }
     }
 
-    function edit_user_profile()
+    public function edit_user_profile()
     {
         require(AJAX_DIR . 'edit_user_profile.php');
     }
 
-    function change_user_rank()
+    public function change_user_rank()
     {
         require(AJAX_DIR . 'change_user_rank.php');
     }
 
-    function change_user_opt()
+    public function change_user_opt()
     {
         require(AJAX_DIR . 'change_user_opt.php');
     }
 
-    function gen_passkey()
+    public function gen_passkey()
     {
         require(AJAX_DIR . 'gen_passkey.php');
     }
 
-    function group_membership()
+    public function group_membership()
     {
         require(AJAX_DIR . 'group_membership.php');
     }
 
-    function manage_group()
+    public function manage_group()
     {
         require(AJAX_DIR . 'edit_group_profile.php');
     }
 
-    function post_mod_comment()
+    public function post_mod_comment()
     {
         require(AJAX_DIR . 'post_mod_comment.php');
     }
 
-    function view_post()
+    public function view_post()
     {
         require(AJAX_DIR . 'view_post.php');
     }
 
-    function change_tor_status()
+    public function change_tor_status()
     {
         require(AJAX_DIR . 'change_tor_status.php');
     }
 
-    function change_torrent()
+    public function change_torrent()
     {
         require(AJAX_DIR . 'change_torrent.php');
     }
 
-    function view_torrent()
+    public function view_torrent()
     {
         require(AJAX_DIR . 'view_torrent.php');
     }
 
-    function user_register()
+    public function user_register()
     {
         require(AJAX_DIR . 'user_register.php');
     }
 
-    function mod_action()
+    public function mod_action()
     {
         require(AJAX_DIR . 'mod_action.php');
     }
 
-    function posts()
+    public function posts()
     {
         require(AJAX_DIR . 'posts.php');
     }
 
-    function manage_user()
+    public function manage_user()
     {
         require(AJAX_DIR . 'manage_user.php');
     }
 
-    function manage_admin()
+    public function manage_admin()
     {
         require(AJAX_DIR . 'manage_admin.php');
     }
 
-    function topic_tpl()
+    public function topic_tpl()
     {
         require(AJAX_DIR . 'topic_tpl.php');
     }
 
-    function index_data()
+    public function index_data()
     {
         require(AJAX_DIR . 'index_data.php');
     }
 
-    function avatar()
+    public function avatar()
     {
         require(AJAX_DIR . 'avatar.php');
     }
 
-    function sitemap()
+    public function sitemap()
     {
         require(AJAX_DIR . 'sitemap.php');
     }

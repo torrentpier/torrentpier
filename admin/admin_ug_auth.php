@@ -80,7 +80,7 @@ if ($submit && $mode == 'user') {
 
         bb_die($message);
     } // Make admin a user (if already admin)
-    else if ($_POST['userlevel'] === 'user') {
+    elseif ($_POST['userlevel'] === 'user') {
         // ignore if you're trying to change yourself from an admin to user!
         if ($userdata['user_id'] == $user_id) {
             bb_die("Could not update admin status<br /><br />Could not change yourself from an admin to user");
@@ -127,7 +127,7 @@ if ($submit && $mode == 'user') {
 //
 // Submit new GROUP permissions
 //
-else if ($submit && $mode == 'group' && is_array($_POST['auth'])) {
+elseif ($submit && $mode == 'group' && is_array($_POST['auth'])) {
     if (!$group_data = get_group_data($group_id)) {
         bb_die($lang['GROUP_NOT_EXIST']);
     }
@@ -282,7 +282,7 @@ if ($mode == 'user' && (!empty($_POST['username']) || $user_id)) {
         'S_COLUMN_SPAN' => $s_column_span,
         'S_HIDDEN_FIELDS' => $s_hidden_fields,
     ));
-} else if ($mode == 'group' && $group_id) {
+} elseif ($mode == 'group' && $group_id) {
     $page_cfg['quirks_mode'] = true;
 
     if (!$group_data = get_group_data($group_id)) {

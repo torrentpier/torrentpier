@@ -1,10 +1,14 @@
 <?php
 
-if (!defined('IN_AJAX')) die(basename(__FILE__));
+if (!defined('IN_AJAX')) {
+    die(basename(__FILE__));
+}
 
 global $userdata;
 
-if (!IS_SUPER_ADMIN) $this->ajax_die('not auth');
+if (!IS_SUPER_ADMIN) {
+    $this->ajax_die('not auth');
+}
 
 array_deep($this->request, 'trim');
 
@@ -140,8 +144,9 @@ switch ($mode) {
 
 // возможный дубль названия шаблона
 if ($sql_error) {
-    if ($sql_error['code'] == 1062) // Duplicate entry
-    {
+    if ($sql_error['code'] == 1062) {
+        // Duplicate entry
+
         $this->ajax_die('Шаблон с таким названием уже существует, выберите другое название');
     }
     $this->ajax_die("db error {$sql_error['code']}: {$sql_error['message']}");

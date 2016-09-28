@@ -1,6 +1,8 @@
 <?php
 
-if (!defined('BB_ROOT')) die(basename(__FILE__));
+if (!defined('BB_ROOT')) {
+    die(basename(__FILE__));
+}
 
 /** @var \TorrentPier\Di $di */
 $di = \TorrentPier\Di::getInstance();
@@ -30,7 +32,9 @@ if ($di->config->get('seed_bonus_enabled') && $di->config->get('seed_bonus_point
     $seed_release = unserialize($di->config->get('seed_bonus_release'));
 
     foreach ($seed_bonus as $i => $points) {
-        if (!$points || !$seed_release[$i]) continue;
+        if (!$points || !$seed_release[$i]) {
+            continue;
+        }
 
         $user_points = ((float)$points / 4);
         $release = (int)$seed_release[$i];

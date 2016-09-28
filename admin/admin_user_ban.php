@@ -73,7 +73,7 @@ if (isset($_POST['submit'])) {
                     }
                     $ip_1_counter++;
                 }
-            } else if (preg_match('/^([\w\-_]\.?){2,}$/is', trim($ip_list_temp[$i]))) {
+            } elseif (preg_match('/^([\w\-_]\.?){2,}$/is', trim($ip_list_temp[$i]))) {
                 $ip = gethostbynamel(trim($ip_list_temp[$i]));
 
                 for ($j = 0; $j < count($ip); $j++) {
@@ -81,7 +81,7 @@ if (isset($_POST['submit'])) {
                         $ip_list[] = encode_ip($ip[$j]);
                     }
                 }
-            } else if (preg_match('/^([0-9]{1,3})\.([0-9\*]{1,3})\.([0-9\*]{1,3})\.([0-9\*]{1,3})$/', trim($ip_list_temp[$i]))) {
+            } elseif (preg_match('/^([0-9]{1,3})\.([0-9\*]{1,3})\.([0-9\*]{1,3})\.([0-9\*]{1,3})$/', trim($ip_list_temp[$i]))) {
                 $ip_list[] = encode_ip(str_replace('*', '255', trim($ip_list_temp[$i])));
             }
         }
@@ -265,7 +265,7 @@ if (isset($_POST['submit'])) {
             $ban_ip = str_replace('255', '*', decode_ip($banlist[$i]['ban_ip']));
             $select_iplist .= '<option value="' . $ban_id . '">' . $ban_ip . '</option>';
             $ipban_count++;
-        } else if (!empty($banlist[$i]['ban_email'])) {
+        } elseif (!empty($banlist[$i]['ban_email'])) {
             $ban_email = $banlist[$i]['ban_email'];
             $select_emaillist .= '<option value="' . $ban_id . '">' . $ban_email . '</option>';
             $emailban_count++;

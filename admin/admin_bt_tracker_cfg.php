@@ -1,7 +1,9 @@
 <?php
 
 if (!empty($setmodules)) {
-    if (IS_SUPER_ADMIN) $module['TP']['TRACKER_CONFIG'] = basename(__FILE__);
+    if (IS_SUPER_ADMIN) {
+        $module['TP']['TRACKER_CONFIG'] = basename(__FILE__);
+    }
     return;
 }
 require('./pagestart.php');
@@ -9,7 +11,9 @@ require('./pagestart.php');
 /** @var \TorrentPier\Di $di */
 $di = \TorrentPier\Di::getInstance();
 
-if (!IS_SUPER_ADMIN) bb_die($lang['NOT_ADMIN']);
+if (!IS_SUPER_ADMIN) {
+    bb_die($lang['NOT_ADMIN']);
+}
 
 require(INC_DIR . 'functions_admin_torrent.php');
 

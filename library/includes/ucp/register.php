@@ -1,6 +1,8 @@
 <?php
 
-if (!defined('BB_ROOT')) die(basename(__FILE__));
+if (!defined('BB_ROOT')) {
+    die(basename(__FILE__));
+}
 
 /** @var \TorrentPier\Di $di */
 $di = \TorrentPier\Di::getInstance();
@@ -11,7 +13,9 @@ set_die_append_msg();
 
 if (IS_ADMIN) {
     $new_user = (int)request_var('admin', '');
-    if ($new_user) $gen_simple_header = true;
+    if ($new_user) {
+        $gen_simple_header = true;
+    }
 
     $template->assign_vars(array(
         'NEW_USER' => $new_user,
@@ -40,7 +44,9 @@ switch ($mode) {
      *  Регистрация
      */
     case 'register':
-        if (!$can_register) redirect('index.php');
+        if (!$can_register) {
+            redirect('index.php');
+        }
 
         if (!IS_ADMIN) {
             // Ограничение по ip
@@ -53,8 +59,8 @@ switch ($mode) {
             if ($di->config->get('new_user_reg_disabled') || ($req_email_activation && $di->config->get('emailer_disabled'))) {
                 bb_die($lang['NEW_USER_REG_DISABLED']);
             } // Ограничение по времени
-            else if ($di->config->get('new_user_reg_restricted')) {
-                if (in_array(date('G'), array(0,/*1,2,3,4,5,6,7,8,11,12,13,14,15,16,*/
+            elseif ($di->config->get('new_user_reg_restricted')) {
+                if (in_array(date('G'), array(0, /*1,2,3,4,5,6,7,8,11,12,13,14,15,16,*/
                     17, 18, 19, 20, 21, 22, 23))) {
                     bb_die($lang['REGISTERED_IN_TIME']);
                 }
@@ -87,7 +93,9 @@ switch ($mode) {
      *  Редактирование профиля
      */
     case 'editprofile':
-        if (IS_GUEST) login_redirect();
+        if (IS_GUEST) {
+            login_redirect();
+        }
 
         // field => can_edit
         $profile_fields = array(
@@ -234,8 +242,9 @@ foreach ($profile_fields as $field => $can_edit) {
                         $errors[] = $err;
                     }
                     $db_data['user_email'] = $email;
-                } else if ($email != $pr_data['user_email']) // если смена мейла юзером
-                {
+                } elseif ($email != $pr_data['user_email']) {
+                    // если смена мейла юзером
+
                     if (!$cur_pass_valid) {
                         $errors[] = $lang['CONFIRM_PASSWORD_EXPLAIN'];
                     }
@@ -427,7 +436,7 @@ foreach ($profile_fields as $field => $can_edit) {
 
                 if (mb_strlen($sig, 'UTF-8') > $di->config->get('max_sig_chars')) {
                     $errors[] = $lang['SIGNATURE_TOO_LONG'];
-                } else if (preg_match('#<(a|b|i|u|table|tr|td|img) #i', $sig) || preg_match('#(href|src|target|title)=#i', $sig)) {
+                } elseif (preg_match('#<(a|b|i|u|table|tr|td|img) #i', $sig) || preg_match('#(href|src|target|title)=#i', $sig)) {
                     $errors[] = $lang['SIGNATURE_ERROR_HTML'];
                 }
 
@@ -536,9 +545,13 @@ if ($submit && !$errors) {
         }
         $db_data['user_regdate'] = TIMENOW;
 
-        if (!IS_ADMIN) $db_data['user_reg_ip'] = USER_IP;
+        if (!IS_ADMIN) {
+            $db_data['user_reg_ip'] = USER_IP;
+        }
 
-        if (!isset($db_data['tpl_name'])) $db_data['tpl_name'] = (string)$di->config->get('tpl_name');
+        if (!isset($db_data['tpl_name'])) {
+            $db_data['tpl_name'] = (string)$di->config->get('tpl_name');
+        }
 
         $sql_args = DB()->build_array('INSERT', $db_data);
 

@@ -1,10 +1,18 @@
 <?php
 
-if (!defined('BB_ROOT')) die(basename(__FILE__));
-if (!defined('BB_SCRIPT')) define('BB_SCRIPT', 'undefined');
-if (!defined('BB_CFG_LOADED')) trigger_error('File config.php not loaded', E_USER_ERROR);
+if (!defined('BB_ROOT')) {
+    die(basename(__FILE__));
+}
+if (!defined('BB_SCRIPT')) {
+    define('BB_SCRIPT', 'undefined');
+}
+if (!defined('BB_CFG_LOADED')) {
+    trigger_error('File config.php not loaded', E_USER_ERROR);
+}
 
-if (PHP_VERSION < '5.5') die('TorrentPier requires PHP version 5.5 and above (ZF requirement). Your PHP version is ' . PHP_VERSION);
+if (PHP_VERSION < '5.5') {
+    die('TorrentPier requires PHP version 5.5 and above (ZF requirement). Your PHP version is ' . PHP_VERSION);
+}
 
 /** @var \TorrentPier\Di $di */
 $di = \TorrentPier\Di::getInstance();
@@ -309,7 +317,9 @@ require(CORE_DIR . 'mysql.php');
 $user = new user_common();
 $userdata =& $user->data;
 
-if (DBG_USER) require(INC_DIR . 'functions_dev.php');
+if (DBG_USER) {
+    require(INC_DIR . 'functions_dev.php');
+}
 
 $html = new html_common();
 $log_action = new log_action();
@@ -357,7 +367,7 @@ if (($di->config->get('board_disable') || file_exists(BB_DISABLED)) && !defined(
         // admin lock
         send_no_cache_headers();
         bb_die('BOARD_DISABLE');
-    } else if (file_exists(BB_DISABLED)) {
+    } elseif (file_exists(BB_DISABLED)) {
         // trigger lock
         cron_release_deadlock();
         send_no_cache_headers();

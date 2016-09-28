@@ -86,7 +86,9 @@ $forum_topic_data =& $t_data;
 $topic_id = $t_data['topic_id'];
 $forum_id = $t_data['forum_id'];
 
-if ($t_data['allow_porno_topic'] && bf($userdata['user_opt'], 'user_opt', 'user_porn_forums')) bb_die($lang['ERROR_PORNO_FORUM']);
+if ($t_data['allow_porno_topic'] && bf($userdata['user_opt'], 'user_opt', 'user_porn_forums')) {
+    bb_die($lang['ERROR_PORNO_FORUM']);
+}
 
 if ($userdata['session_admin'] && !empty($_REQUEST['mod'])) {
     if (IS_ADMIN) {
@@ -195,7 +197,7 @@ $can_watch_topic = $is_watching_topic = false;
 
 if ($di->config->get('topic_notify_enabled')) {
     if ($userdata['session_logged_in']) {
-        $can_watch_topic = TRUE;
+        $can_watch_topic = true;
         if (!empty($t_data['notify_status']) && $t_data['notify_status']) {
             if (isset($_GET['unwatch'])) {
                 if ($_GET['unwatch'] == 'topic') {
@@ -205,7 +207,7 @@ if ($di->config->get('topic_notify_enabled')) {
                 set_die_append_msg($forum_id, $topic_id);
                 bb_die($lang['NO_LONGER_WATCHING']);
             } else {
-                $is_watching_topic = TRUE;
+                $is_watching_topic = true;
                 if (!$t_data['notify_status']) {
                     DB()->query("UPDATE " . BB_TOPICS_WATCH . " SET notify_status = " . TOPIC_WATCH_NOTIFIED . " WHERE topic_id = $topic_id AND user_id = {$userdata['user_id']}");
                 }
@@ -213,7 +215,7 @@ if ($di->config->get('topic_notify_enabled')) {
         } else {
             if (isset($_GET['watch'])) {
                 if ($_GET['watch'] == 'topic') {
-                    $is_watching_topic = TRUE;
+                    $is_watching_topic = true;
                     DB()->query("
 						INSERT INTO " . BB_TOPICS_WATCH . " (user_id, topic_id, notify_status)
 						VALUES (" . $userdata['user_id'] . ", $topic_id, " . TOPIC_WATCH_NOTIFIED . ")
@@ -312,7 +314,9 @@ $sql = "
 ";
 
 if ($postrow = DB()->fetch_rowset($sql)) {
-    if ($first_post) $postrow = array_merge($first_post, $postrow);
+    if ($first_post) {
+        $postrow = array_merge($first_post, $postrow);
+    }
     $total_posts = count($postrow);
 } else {
     bb_die($lang['NO_POSTS_TOPIC']);
@@ -562,12 +566,16 @@ for ($i = 0; $i < $total_posts; $i++) {
 
     // Replace naughty words
     if (count($orig_word)) {
-        if ($user_sig) $user_sig = str_replace('\"', '"', substr(preg_replace('#(\>(((?>([^><]+|(?R)))*)\<))#se', "@preg_replace(\$orig_word, \$replacement_word, '\\0')", '>' . $user_sig . '<'), 1, -1));
+        if ($user_sig) {
+            $user_sig = str_replace('\"', '"', substr(preg_replace('#(\>(((?>([^><]+|(?R)))*)\<))#se', "@preg_replace(\$orig_word, \$replacement_word, '\\0')", '>' . $user_sig . '<'), 1, -1));
+        }
         $message = str_replace('\"', '"', substr(preg_replace('#(\>(((?>([^><]+|(?R)))*)\<))#se', "@preg_replace(\$orig_word, \$replacement_word, '\\0')", '>' . $message . '<'), 1, -1));
     }
 
     // Replace newlines (we use this rather than nl2br because till recently it wasn't XHTML compliant)
-    if ($user_sig) $user_sig = $di->config->get('user_signature_start') . $user_sig . $di->config->get('user_signature_end');
+    if ($user_sig) {
+        $user_sig = $di->config->get('user_signature_start') . $user_sig . $di->config->get('user_signature_end');
+    }
 
     // Editing information
     if ($postrow[$i]['post_edit_count']) {
@@ -660,7 +668,7 @@ for ($i = 0; $i < $total_posts; $i++) {
     if ($is_first_post && $t_data['attach_ext_id']) {
         if (IS_GUEST) {
             $template->assign_var('SHOW_GUEST_DL_STUB', ($t_data['attach_ext_id'] == 8));
-        } else if ($t_data['attach_ext_id'] == 8) {
+        } elseif ($t_data['attach_ext_id'] == 8) {
             require(INC_DIR . 'viewtopic_torrent.php');
         } else {
             $template->assign_vars(array(
@@ -671,7 +679,7 @@ for ($i = 0; $i < $total_posts; $i++) {
     }
 
     if ($moderation && !defined('SPLIT_FORM_START') && ($start || $is_first_post)) {
-        define('SPLIT_FORM_START', TRUE);
+        define('SPLIT_FORM_START', true);
     }
 
     if ($poster_id != BOT_UID) {

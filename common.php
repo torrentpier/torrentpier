@@ -1,17 +1,29 @@
 <?php
 
-if (isset($_REQUEST['GLOBALS'])) die();
+if (isset($_REQUEST['GLOBALS'])) {
+    die();
+}
 
 ignore_user_abort(true);
 define('TIMESTART', utime());
 define('TIMENOW', time());
 
-if (empty($_SERVER['REMOTE_ADDR'])) $_SERVER['REMOTE_ADDR'] = '127.0.0.1';
-if (empty($_SERVER['HTTP_USER_AGENT'])) $_SERVER['HTTP_USER_AGENT'] = '';
-if (empty($_SERVER['HTTP_REFERER'])) $_SERVER['HTTP_REFERER'] = '';
-if (empty($_SERVER['SERVER_NAME'])) $_SERVER['SERVER_NAME'] = '';
+if (empty($_SERVER['REMOTE_ADDR'])) {
+    $_SERVER['REMOTE_ADDR'] = '127.0.0.1';
+}
+if (empty($_SERVER['HTTP_USER_AGENT'])) {
+    $_SERVER['HTTP_USER_AGENT'] = '';
+}
+if (empty($_SERVER['HTTP_REFERER'])) {
+    $_SERVER['HTTP_REFERER'] = '';
+}
+if (empty($_SERVER['SERVER_NAME'])) {
+    $_SERVER['SERVER_NAME'] = '';
+}
 
-if (!defined('BB_ROOT')) define('BB_ROOT', './');
+if (!defined('BB_ROOT')) {
+    define('BB_ROOT', './');
+}
 
 header('X-Frame-Options: SAMEORIGIN');
 
@@ -329,16 +341,16 @@ function array_deep(&$var, $fn, $one_dimensional = false, $array_only = false)
             if (is_array($v)) {
                 if ($one_dimensional) {
                     unset($var[$k]);
-                } else if ($array_only) {
+                } elseif ($array_only) {
                     $var[$k] = $fn($v);
                 } else {
                     array_deep($var[$k], $fn);
                 }
-            } else if (!$array_only) {
+            } elseif (!$array_only) {
                 $var[$k] = $fn($v);
             }
         }
-    } else if (!$array_only) {
+    } elseif (!$array_only) {
         $var = $fn($var);
     }
 }
@@ -393,8 +405,12 @@ function log_request($file = '', $prepend_str = false, $add_post = true)
     $file = ($file) ? $file : 'req/' . date('m-d');
     $str = array();
     $str[] = date('m-d H:i:s');
-    if ($prepend_str !== false) $str[] = $prepend_str;
-    if (!empty($user->data)) $str[] = $user->id . "\t" . html_entity_decode($user->name);
+    if ($prepend_str !== false) {
+        $str[] = $prepend_str;
+    }
+    if (!empty($user->data)) {
+        $str[] = $user->id . "\t" . html_entity_decode($user->name);
+    }
     $str[] = sprintf('%-15s', $_SERVER['REMOTE_ADDR']);
 
     if (isset($_SERVER['REQUEST_URI'])) {
@@ -407,7 +423,9 @@ function log_request($file = '', $prepend_str = false, $add_post = true)
         $str[] = $_SERVER['HTTP_REFERER'];
     }
 
-    if (!empty($_POST) && $add_post) $str[] = "post: " . str_compact(urldecode(http_build_query($_POST)));
+    if (!empty($_POST) && $add_post) {
+        $str[] = "post: " . str_compact(urldecode(http_build_query($_POST)));
+    }
     $str = join("\t", $str) . "\n";
     bb_log($str, $file);
 }
@@ -416,7 +434,7 @@ function log_request($file = '', $prepend_str = false, $add_post = true)
 if (!defined('IN_TRACKER')) {
     require(INC_DIR . 'init_bb.php');
 } // Tracker init
-else if (defined('IN_TRACKER')) {
+elseif (defined('IN_TRACKER')) {
     define('DUMMY_PEER', pack('Nn', ip2long($_SERVER['REMOTE_ADDR']), !empty($_GET['port']) ? intval($_GET['port']) : mt_rand(1000, 65000)));
 
     function dummy_exit($interval = 1800)

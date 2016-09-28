@@ -1,6 +1,8 @@
 <?php
 
-if (!defined('IN_AJAX')) die(basename(__FILE__));
+if (!defined('IN_AJAX')) {
+    die(basename(__FILE__));
+}
 
 global $lang;
 
@@ -46,13 +48,17 @@ switch ($type) {
         break;
 
     case 'del_torrent';
-        if (empty($this->request['confirmed'])) $this->prompt_for_confirm($lang['DEL_TORRENT']);
+        if (empty($this->request['confirmed'])) {
+            $this->prompt_for_confirm($lang['DEL_TORRENT']);
+        }
         delete_torrent($topic_id);
         $url = make_url(TOPIC_URL . $topic_id);
         break;
 
     case 'del_torrent_move_topic';
-        if (empty($this->request['confirmed'])) $this->prompt_for_confirm($lang['DEL_MOVE_TORRENT']);
+        if (empty($this->request['confirmed'])) {
+            $this->prompt_for_confirm($lang['DEL_MOVE_TORRENT']);
+        }
         delete_torrent($topic_id);
         $url = make_url("modcp.php?t=$topic_id&mode=move");
         break;

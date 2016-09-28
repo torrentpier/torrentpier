@@ -280,14 +280,14 @@ if (isset($_GET[$user_releases_key])) {
     // Search releases by user
     $_GET[$poster_id_key] = (int)$_GET[$user_releases_key];
     $_REQUEST[$forum_key] = $search_all;
-} else if (!empty($_REQUEST['max'])) {
+} elseif (!empty($_REQUEST['max'])) {
     $_REQUEST[$forum_key] = $search_all;
 } else {
     // Get "checkbox" and "select" vars
     foreach ($GPC as $name => $params) {
         if ($params[GPC_TYPE] == CHBOX) {
             checkbox_get_val($params[KEY_NAME], ${"{$name}_val"}, $params[DEF_VAL]);
-        } else if ($params[GPC_TYPE] == SELECT) {
+        } elseif ($params[GPC_TYPE] == SELECT) {
             select_get_val($params[KEY_NAME], ${"{$name}_val"}, ${"{$name}_opt"}, $params[DEF_VAL]);
         }
     }
@@ -353,14 +353,14 @@ if (!$set_default) {
             $forum_val = join(',', $valid_forums);
         }
     } // Get requested forum_id(s)
-    else if ($req_forums =& $_REQUEST[$forum_key]) {
+    elseif ($req_forums =& $_REQUEST[$forum_key]) {
         if ($req_forums != $search_all) {
             $req_forums = (array)$req_forums;
             array_deep($req_forums, 'intval');
             $valid_forums = array_intersect($req_forums, $allowed_forums);
             $forum_val = join(',', $valid_forums);
         }
-    } else if (isset($previous_settings[$forum_key])) {
+    } elseif (isset($previous_settings[$forum_key])) {
         $valid_forums = array_intersect(explode(',', $previous_settings[$forum_key]), $allowed_forums);
         $forum_val = join(',', $valid_forums);
     }
@@ -380,7 +380,7 @@ if (!$set_default) {
 
         if (isset($_GET[$poster_id_key]) && !$search_id) {
             $req_poster_id = intval($_GET[$poster_id_key]);
-        } else if (isset($_POST[$poster_name_key]) && !$search_id) {
+        } elseif (isset($_POST[$poster_name_key]) && !$search_id) {
             if ($req_poster_name = clean_username($_POST[$poster_name_key])) {
                 $poster_name_sql = str_replace("\\'", "''", $req_poster_name);
 
@@ -392,7 +392,7 @@ if (!$set_default) {
                     $tr_error = $poster_error = true;
                 }
             }
-        } else if ($search_id && $previous_settings[$poster_id_key]) {
+        } elseif ($search_id && $previous_settings[$poster_id_key]) {
             $poster_id_val = intval($previous_settings[$poster_id_key]);
             $poster_name_val = ($previous_settings[$poster_name_key]) ? $previous_settings[$poster_name_key] : '';
         }
@@ -401,7 +401,7 @@ if (!$set_default) {
             if ($req_poster_id == GUEST_UID) {
                 $poster_id_val = GUEST_UID;
                 $poster_name_val = $lang['GUEST'];
-            } else if ($poster_name_val = get_username($req_poster_id)) {
+            } elseif ($poster_name_val = get_username($req_poster_id)) {
                 $poster_name_val = stripslashes(html_entity_decode($poster_name_val));
                 $poster_id_val = $req_poster_id;
             }
@@ -421,10 +421,18 @@ if (!$set_default) {
 }
 
 $dl_status = array();
-if ($dl_cancel_val) $dl_status[] = DL_STATUS_CANCEL;
-if ($dl_compl_val) $dl_status[] = DL_STATUS_COMPLETE;
-if ($dl_down_val) $dl_status[] = DL_STATUS_DOWN;
-if ($dl_will_val) $dl_status[] = DL_STATUS_WILL;
+if ($dl_cancel_val) {
+    $dl_status[] = DL_STATUS_CANCEL;
+}
+if ($dl_compl_val) {
+    $dl_status[] = DL_STATUS_COMPLETE;
+}
+if ($dl_down_val) {
+    $dl_status[] = DL_STATUS_DOWN;
+}
+if ($dl_will_val) {
+    $dl_status[] = DL_STATUS_WILL;
+}
 $dl_status_csv = join(',', $dl_status);
 
 // Switches
