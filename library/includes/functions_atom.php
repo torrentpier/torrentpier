@@ -7,6 +7,11 @@ if (!defined('BB_ROOT')) {
 // Максимум записей = 50
 // [Обновлено] - если дата изменения первого поста топика не старее недели (?) или в топике новые сообщения не старее недели (?)
 
+/**
+ * @param $forum_id
+ * @param $forum_data
+ * @return bool
+ */
 function update_forum_feed($forum_id, $forum_data)
 {
     /** @var \TorrentPier\Di $di */
@@ -81,6 +86,11 @@ function update_forum_feed($forum_id, $forum_data)
     }
 }
 
+/**
+ * @param $user_id
+ * @param $username
+ * @return bool
+ */
 function update_user_feed($user_id, $username)
 {
     /** @var \TorrentPier\Di $di */
@@ -129,6 +139,14 @@ function update_user_feed($user_id, $username)
     }
 }
 
+/**
+ * @param $file_path
+ * @param $mode
+ * @param $id
+ * @param $title
+ * @param $topics
+ * @return bool
+ */
 function create_atom($file_path, $mode, $id, $title, $topics)
 {
     /** @var \TorrentPier\Di $di */

@@ -4,6 +4,14 @@ if (!defined('BB_ROOT')) {
     die(basename(__FILE__));
 }
 
+/**
+ * @param $id
+ * @param $ext_id
+ * @param $base_path
+ * @param $first_div
+ * @param $sec_div
+ * @return string
+ */
 function get_path_from_id($id, $ext_id, $base_path, $first_div, $sec_div)
 {
     /** @var \TorrentPier\Di $di */
@@ -14,6 +22,14 @@ function get_path_from_id($id, $ext_id, $base_path, $first_div, $sec_div)
     return ($base_path ? "$base_path/" : '') . floor($id / $first_div) . '/' . ($id % $sec_div) . '/' . $id . ($ext ? ".$ext" : '');
 }
 
+/**
+ * @param $id
+ * @param $ext_id
+ * @param null $base_path
+ * @param int $first_div
+ * @param int $sec_div
+ * @return string
+ */
 function get_avatar_path($id, $ext_id, $base_path = null, $first_div = 10000, $sec_div = 100)
 {
     /** @var \TorrentPier\Di $di */
@@ -24,6 +40,14 @@ function get_avatar_path($id, $ext_id, $base_path = null, $first_div = 10000, $s
     return get_path_from_id($id, $ext_id, $base_path, $first_div, $sec_div);
 }
 
+/**
+ * @param $id
+ * @param string $ext_id
+ * @param null $base_path
+ * @param int $first_div
+ * @param int $sec_div
+ * @return string
+ */
 function get_attach_path($id, $ext_id = '', $base_path = null, $first_div = 10000, $sec_div = 100)
 {
     /** @var \TorrentPier\Di $di */
@@ -34,18 +58,32 @@ function get_attach_path($id, $ext_id = '', $base_path = null, $first_div = 1000
     return get_path_from_id($id, $ext_id, $base_path, $first_div, $sec_div);
 }
 
+/**
+ * @param $user_id
+ * @param $avatar_ext_id
+ * @return bool
+ */
 function delete_avatar($user_id, $avatar_ext_id)
 {
     $avatar_file = ($avatar_ext_id) ? get_avatar_path($user_id, $avatar_ext_id) : '';
     return ($avatar_file && file_exists($avatar_file)) ? unlink($avatar_file) : false;
 }
 
+/**
+ * @param $topic_id
+ * @param $attach_ext_id
+ * @return bool
+ */
 function delete_attach($topic_id, $attach_ext_id)
 {
     $attach_file = ($attach_ext_id) ? get_attach_path($topic_id, $attach_ext_id) : '';
     return ($attach_file && file_exists($attach_file)) ? unlink($attach_file) : false;
 }
 
+/**
+ * @param $type
+ * @return array|bool|mixed
+ */
 function get_tracks($type)
 {
     $c_name = '';
@@ -67,6 +105,12 @@ function get_tracks($type)
     return ($tracks) ? $tracks : array();
 }
 
+/**
+ * @param $cookie_name
+ * @param $tracking_ary
+ * @param null $tracks
+ * @param int $val
+ */
 function set_tracks($cookie_name, &$tracking_ary, $tracks = null, $val = TIMENOW)
 {
     global $tracking_topics, $tracking_forums, $user;
@@ -108,6 +152,11 @@ function set_tracks($cookie_name, &$tracking_ary, $tracks = null, $val = TIMENOW
     }
 }
 
+/**
+ * @param int $topic_id
+ * @param int $forum_id
+ * @return mixed
+ */
 function get_last_read($topic_id = 0, $forum_id = 0)
 {
     global $tracking_topics, $tracking_forums, $user;
@@ -117,6 +166,12 @@ function get_last_read($topic_id = 0, $forum_id = 0)
     return max($t, $f, $user->data['user_lastvisit']);
 }
 
+/**
+ * @param $ref
+ * @param int $topic_id
+ * @param int $forum_id
+ * @return bool
+ */
 function is_unread($ref, $topic_id = 0, $forum_id = 0)
 {
     return (!IS_GUEST && $ref > get_last_read($topic_id, $forum_id));
@@ -192,6 +247,10 @@ $bf['user_opt'] = array(
     'user_retracker' => 15, // Добавлять ретрекер к скачиваемым торрентам
 );
 
+/**
+ * @param $bit_num
+ * @return int
+ */
 function bit2dec($bit_num)
 {
     if (is_array($bit_num)) {
@@ -204,6 +263,11 @@ function bit2dec($bit_num)
     return (1 << $bit_num);
 }
 
+/**
+ * @param $bf_array_name
+ * @param $key
+ * @return int
+ */
 function bf_bit2dec($bf_array_name, $key)
 {
     global $bf;
@@ -213,11 +277,23 @@ function bf_bit2dec($bf_array_name, $key)
     return (1 << $bf[$bf_array_name][$key]);
 }
 
+/**
+ * @param $int
+ * @param $bf_array_name
+ * @param $key
+ * @return int
+ */
 function bf($int, $bf_array_name, $key)
 {
     return (bf_bit2dec($bf_array_name, $key) & (int)$int);
 }
 
+/**
+ * @param $int
+ * @param $bit_num
+ * @param $on
+ * @return int
+ */
 function setbit(&$int, $bit_num, $on)
 {
     return ($on) ? $int |= (1 << $bit_num) : $int &= ~(1 << $bit_num);
@@ -251,6 +327,14 @@ function setbit(&$int, $bit_num, $on)
     forum auth levels, this will prevent the auth function having to do its own
     lookup
 */
+/**
+ * @param $type
+ * @param $forum_id
+ * @param $ug_data
+ * @param array $f_access
+ * @param int $group_perm
+ * @return array|mixed
+ */
 function auth($type, $forum_id, $ug_data, $f_access = array(), $group_perm = UG_PERM_BOTH)
 {
     global $lang, $bf, $datastore;
@@ -408,6 +492,14 @@ function auth($type, $forum_id, $ug_data, $f_access = array(), $group_perm = UG_
     return ($forum_id == AUTH_LIST_ALL) ? $auth : $auth[$forum_id];
 }
 
+/**
+ * @param $bf_ary
+ * @param $bf_key
+ * @param $perm_ary
+ * @param $perm_key
+ * @param bool $is_admin
+ * @return bool|int
+ */
 function auth_check($bf_ary, $bf_key, $perm_ary, $perm_key, $is_admin = false)
 {
     if ($is_admin) {
@@ -433,6 +525,9 @@ class Date_Delta
     public $format = '';
 
     // Creates new object.
+    /**
+     * Date_Delta constructor.
+     */
     public function Date_Delta()
     {
         global $lang;
@@ -442,6 +537,12 @@ class Date_Delta
     }
 
     // Makes the spellable phrase.
+    /**
+     * @param $first
+     * @param $last
+     * @param string $from
+     * @return bool|string
+     */
     public function spellDelta($first, $last, $from = 'auto')
     {
         if ($last < $first) {
@@ -490,6 +591,11 @@ class Date_Delta
     }
 
     // returns the associative array with date deltas.
+    /**
+     * @param $first
+     * @param $last
+     * @return bool
+     */
     public function getDelta($first, $last)
     {
         if ($last < $first) {
@@ -534,6 +640,11 @@ class Date_Delta
     }
 
     // Returns the length (in days) of the specified month.
+    /**
+     * @param $year
+     * @param $mon
+     * @return int
+     */
     public function monthLength($year, $mon)
     {
         $l = 28;
@@ -544,11 +655,24 @@ class Date_Delta
     }
 }
 
+/**
+ * @param $timestamp_1
+ * @param int $timestamp_2
+ * @param string $granularity
+ * @return mixed
+ */
 function delta_time($timestamp_1, $timestamp_2 = TIMENOW, $granularity = 'auto')
 {
     return $GLOBALS['DeltaTime']->spellDelta($timestamp_1, $timestamp_2, $granularity);
 }
 
+/**
+ * @param $select
+ * @param null $selected
+ * @param string $return_as
+ * @param string $first_opt
+ * @return array|string
+ */
 function get_select($select, $selected = null, $return_as = 'html', $first_opt = '&raquo;&raquo; Выбрать ')
 {
     $select_ary = array();
@@ -583,6 +707,15 @@ class html_common
     public $max_length = HTML_SELECT_MAX_LENGTH;
     public $selected = array();
 
+    /**
+     * @param $name
+     * @param $params
+     * @param null $selected
+     * @param int $max_length
+     * @param null $multiple_size
+     * @param string $js
+     * @return string
+     */
     public function build_select($name, $params, $selected = null, $max_length = HTML_SELECT_MAX_LENGTH, $multiple_size = null, $js = '')
     {
         if (empty($params)) {
@@ -611,6 +744,9 @@ class html_common
         return "\n<select $select_params>\n" . $this->options . "</select>\n";
     }
 
+    /**
+     * @param $params
+     */
     public function _build_select_rec($params)
     {
         foreach ($params as $opt_name => $opt_val) {
@@ -641,6 +777,12 @@ class html_common
         }
     }
 
+    /**
+     * @param $array
+     * @param string $ul
+     * @param string $li
+     * @return string
+     */
     public function array2html($array, $ul = 'ul', $li = 'li')
     {
         $this->out = '';
@@ -648,6 +790,11 @@ class html_common
         return "<$ul class=\"tree-root\">{$this->out}</$ul>";
     }
 
+    /**
+     * @param $array
+     * @param $ul
+     * @param $li
+     */
     public function _array2html_rec($array, $ul, $li)
     {
         foreach ($array as $k => $v) {
@@ -662,6 +809,16 @@ class html_common
     }
 
     // all arguments should be already htmlspecialchar()d (if needed)
+    /**
+     * @param $name
+     * @param $title
+     * @param bool $checked
+     * @param bool $disabled
+     * @param null $class
+     * @param null $id
+     * @param int $value
+     * @return string
+     */
     public function build_checkbox($name, $title, $checked = false, $disabled = false, $class = null, $id = null, $value = 1)
     {
         $name = ' name="' . $name . '" ';
@@ -675,18 +832,43 @@ class html_common
     }
 }
 
+/**
+ * @param $name
+ * @param $params
+ * @param null $selected
+ * @param int $max_length
+ * @param null $multiple_size
+ * @param string $js
+ * @return string
+ */
 function build_select($name, $params, $selected = null, $max_length = HTML_SELECT_MAX_LENGTH, $multiple_size = null, $js = '')
 {
     global $html;
     return $html->build_select($name, $params, $selected, $max_length, $multiple_size, $js);
 }
 
+/**
+ * @param $name
+ * @param $title
+ * @param bool $checked
+ * @param bool $disabled
+ * @param null $class
+ * @param null $id
+ * @param int $value
+ * @return string
+ */
 function build_checkbox($name, $title, $checked = false, $disabled = false, $class = null, $id = null, $value = 1)
 {
     global $html;
     return $html->build_checkbox($name, $title, $checked, $disabled, $class, $id, $value);
 }
 
+/**
+ * @param $str
+ * @param bool $double
+ * @param bool $single
+ * @return mixed
+ */
 function replace_quote($str, $double = true, $single = true)
 {
     if ($double) {
@@ -760,6 +942,13 @@ function declension($int, $expressions, $format = '%1$s %2$s')
 }
 
 // http://forum.dklab.ru/php/advises/UrlreplaceargChangesValueOfParameterInUrl.html
+/**
+ * @param $url
+ * @param $arg
+ * @param $value
+ * @param string $amp
+ * @return string
+ */
 function url_arg($url, $arg, $value, $amp = '&amp;')
 {
     $arg = preg_quote($arg, '/');
@@ -832,6 +1021,11 @@ function humn_size($size, $rounder = null, $min = null, $space = '&nbsp;')
     return round($size, $rounder) . $space . $ext;
 }
 
+/**
+ * @param $ip
+ * @param string $port
+ * @return bool|string
+ */
 function bt_show_ip($ip, $port = '')
 {
     /** @var \TorrentPier\Di $di */
@@ -846,6 +1040,10 @@ function bt_show_ip($ip, $port = '')
     }
 }
 
+/**
+ * @param $port
+ * @return bool
+ */
 function bt_show_port($port)
 {
     /** @var \TorrentPier\Di $di */
@@ -858,12 +1056,23 @@ function bt_show_port($port)
     }
 }
 
+/**
+ * @param $ip
+ * @return string
+ */
 function decode_ip_xx($ip)
 {
     $h = explode('.', chunk_split($ip, 2, '.'));
     return hexdec($h[0]) . '.' . hexdec($h[1]) . '.' . hexdec($h[2]) . '.xx';
 }
 
+/**
+ * @param $key
+ * @param $val
+ * @param int $default
+ * @param int $on
+ * @param int $off
+ */
 function checkbox_get_val(&$key, &$val, $default = 1, $on = 1, $off = 0)
 {
     global $previous_settings, $search_id;
@@ -879,6 +1088,13 @@ function checkbox_get_val(&$key, &$val, $default = 1, $on = 1, $off = 0)
     }
 }
 
+/**
+ * @param $key
+ * @param $val
+ * @param $options_ary
+ * @param $default
+ * @param bool $num
+ */
 function select_get_val($key, &$val, $options_ary, $default, $num = true)
 {
     global $previous_settings;
@@ -998,6 +1214,10 @@ function request_var($var_name, $default, $multibyte = false, $cookie = false)
     return $var;
 }
 
+/**
+ * @param $user_id
+ * @return array|bool
+ */
 function get_username($user_id)
 {
     if (empty($user_id)) {
@@ -1015,6 +1235,10 @@ function get_username($user_id)
     }
 }
 
+/**
+ * @param $username
+ * @return bool
+ */
 function get_user_id($username)
 {
     if (empty($username)) {
@@ -1024,6 +1248,12 @@ function get_user_id($username)
     return $row['user_id'];
 }
 
+/**
+ * @param $text
+ * @param $max_length
+ * @param string $space
+ * @return mixed|string
+ */
 function str_short($text, $max_length, $space = ' ')
 {
     if ($max_length && mb_strlen($text, 'UTF-8') > $max_length) {
@@ -1042,11 +1272,20 @@ function str_short($text, $max_length, $space = ' ')
     return $text;
 }
 
+/**
+ * @param $text
+ * @param int $max_word_length
+ * @return mixed
+ */
 function wbr($text, $max_word_length = HTML_WBR_LENGTH)
 {
     return preg_replace("/([\w\->;:.,~!?(){}@#$%^*\/\\\\]{" . $max_word_length . "})/ui", '$1<wbr>', $text);
 }
 
+/**
+ * @param $user_id
+ * @return mixed|null
+ */
 function get_bt_userdata($user_id)
 {
     /** @var \TorrentPier\Di $di */
@@ -1072,6 +1311,10 @@ function get_bt_userdata($user_id)
     return $btu;
 }
 
+/**
+ * @param $btu
+ * @return float|null
+ */
 function get_bt_ratio($btu)
 {
     return
@@ -1080,6 +1323,9 @@ function get_bt_ratio($btu)
             : null;
 }
 
+/**
+ * @param $user_id
+ */
 function show_bt_userdata($user_id)
 {
     global $lang, $template;
@@ -1115,6 +1361,12 @@ function show_bt_userdata($user_id)
     ));
 }
 
+/**
+ * @param $table
+ * @param bool $from_db
+ * @param bool $update_cache
+ * @return array|mixed|null
+ */
 function bb_get_config($table, $from_db = false, $update_cache = true)
 {
     /** @var \TorrentPier\Di $di */
@@ -1140,6 +1392,10 @@ function bb_get_config($table, $from_db = false, $update_cache = true)
     return $cfg;
 }
 
+/**
+ * @param $params
+ * @param string $table
+ */
 function bb_update_config($params, $table = BB_CONFIG)
 {
     $updates = array();
@@ -1157,6 +1413,10 @@ function bb_update_config($params, $table = BB_CONFIG)
     bb_get_config($table, true, true);
 }
 
+/**
+ * @param $mode
+ * @return bool
+ */
 function get_db_stat($mode)
 {
     switch ($mode) {
@@ -1198,6 +1458,10 @@ function get_db_stat($mode)
     return false;
 }
 
+/**
+ * @param $username
+ * @return mixed|string
+ */
 function clean_username($username)
 {
     $username = mb_substr(htmlspecialchars(str_replace("\'", "'", trim($username))), 0, 25, 'UTF-8');
@@ -1207,6 +1471,11 @@ function clean_username($username)
     return $username;
 }
 
+/**
+ * @param $str
+ * @param bool $charlist
+ * @return string
+ */
 function bb_ltrim($str, $charlist = false)
 {
     if ($charlist === false) {
@@ -1218,6 +1487,11 @@ function bb_ltrim($str, $charlist = false)
     return $str;
 }
 
+/**
+ * @param $str
+ * @param bool $charlist
+ * @return string
+ */
 function bb_rtrim($str, $charlist = false)
 {
     if ($charlist === false) {
@@ -1230,6 +1504,12 @@ function bb_rtrim($str, $charlist = false)
 }
 
 // Get Userdata, $u can be username or user_id. If $force_name is true, the username will be forced.
+/**
+ * @param $u
+ * @param bool $force_name
+ * @param bool $allow_guest
+ * @return array|bool|mixed|null
+ */
 function get_userdata($u, $force_name = false, $allow_guest = false)
 {
     /** @var \TorrentPier\Di $di */
@@ -1276,6 +1556,9 @@ function get_userdata($u, $force_name = false, $allow_guest = false)
     return $u_data;
 }
 
+/**
+ * @param int $selected
+ */
 function make_jumpbox($selected = 0)
 {
     global $datastore, $template;
@@ -1291,6 +1574,16 @@ function make_jumpbox($selected = 0)
 }
 
 // $mode: array(not_auth_forum1,not_auth_forum2,..) or (string) 'mode'
+/**
+ * @param string $mode
+ * @param string $name
+ * @param null $selected
+ * @param int $max_length
+ * @param null $multiple_size
+ * @param string $js
+ * @param null $all_forums_option
+ * @return string
+ */
 function get_forum_select($mode = 'guest', $name = POST_FORUM_URL, $selected = null, $max_length = HTML_SELECT_MAX_LENGTH, $multiple_size = null, $js = '', $all_forums_option = null)
 {
     global $lang, $datastore;
@@ -1354,6 +1647,9 @@ function get_forum_select($mode = 'guest', $name = POST_FORUM_URL, $selected = n
     return build_select($name, $select, $selected, $max_length, $multiple_size, $js);
 }
 
+/**
+ * @return array
+ */
 function setup_style()
 {
     global $template, $userdata;
@@ -1393,6 +1689,12 @@ function setup_style()
 }
 
 // Create date / time with format and friendly date
+/**
+ * @param $gmepoch
+ * @param bool $format
+ * @param bool $friendly_date
+ * @return false|string
+ */
 function bb_date($gmepoch, $format = false, $friendly_date = true)
 {
     global $lang, $userdata;
@@ -1446,6 +1748,10 @@ function bb_date($gmepoch, $format = false, $friendly_date = true)
     return ($di->config->get('translate_dates')) ? strtr(strtoupper($date), $lang['DATETIME']) : $date;
 }
 
+/**
+ * @param $date
+ * @return bool|mixed
+ */
 function birthday_age($date)
 {
     /** @var \TorrentPier\Di $di */
@@ -1464,6 +1770,14 @@ function birthday_age($date)
 // Pagination routine, generates
 // page number sequence
 //
+/**
+ * @param $base_url
+ * @param $num_items
+ * @param $per_page
+ * @param $start_item
+ * @param bool $add_prevnext_text
+ * @return mixed|string
+ */
 function generate_pagination($base_url, $num_items, $per_page, $start_item, $add_prevnext_text = true)
 {
     global $lang, $template;
@@ -1566,6 +1880,11 @@ function generate_pagination($base_url, $num_items, $per_page, $start_item, $add
 // calling script, note that the vars are passed as references this just makes it easier
 // to return both sets of arrays
 //
+/**
+ * @param $orig_word
+ * @param $replacement_word
+ * @return bool
+ */
 function obtain_word_list(&$orig_word, &$replacement_word)
 {
     /** @var \TorrentPier\Di $di */
@@ -1596,6 +1915,9 @@ function obtain_word_list(&$orig_word, &$replacement_word)
     return true;
 }
 
+/**
+ * @param $msg_text
+ */
 function bb_die($msg_text)
 {
     global $ajax, $lang, $template, $theme, $user;
@@ -1653,6 +1975,9 @@ function bb_die($msg_text)
     exit;
 }
 
+/**
+ * @param $txt
+ */
 function bb_simple_die($txt)
 {
     /** @var \TorrentPier\Di $di */
@@ -1666,16 +1991,27 @@ function bb_simple_die($txt)
     die($txt);
 }
 
+/**
+ * @param $path
+ * @return string
+ */
 function bb_realpath($path)
 {
     return (!function_exists('realpath') || !realpath(INC_DIR . 'functions.php')) ? $path : realpath($path);
 }
 
+/**
+ * @param string $url
+ */
 function login_redirect($url = '')
 {
     redirect(LOGIN_URL . '?redirect=' . (($url) ? $url : (isset($_SERVER['REQUEST_URI']) ? $_SERVER['REQUEST_URI'] : '/')));
 }
 
+/**
+ * @param $url
+ * @param int $time
+ */
 function meta_refresh($url, $time = 5)
 {
     global $template;
@@ -1683,6 +2019,9 @@ function meta_refresh($url, $time = 5)
     $template->assign_var('META', '<meta http-equiv="refresh" content="' . $time . ';url=' . $url . '" />');
 }
 
+/**
+ * @param $url
+ */
 function redirect($url)
 {
     /** @var \TorrentPier\Di $di */
@@ -1716,6 +2055,12 @@ function redirect($url)
 }
 
 // build a list of the sortable fields or return field name
+/**
+ * @param int $selected_row
+ * @param string $action
+ * @param string $list
+ * @return string
+ */
 function get_forum_display_sort_option($selected_row = 0, $action = 'list', $list = 'sort')
 {
     global $lang;
@@ -1753,6 +2098,9 @@ function get_forum_display_sort_option($selected_row = 0, $action = 'list', $lis
     return $res;
 }
 
+/**
+ * @param $topics_csv
+ */
 function clear_dl_list($topics_csv)
 {
     DB()->query("DELETE FROM " . BB_BT_DLSTATUS . " WHERE topic_id IN($topics_csv)");
@@ -1760,6 +2108,10 @@ function clear_dl_list($topics_csv)
 }
 
 // $ids - array(id1,id2,..) or (string) id
+/**
+ * @param $ids
+ * @return string
+ */
 function get_id_csv($ids)
 {
     $ids = array_values((array)$ids);
@@ -1768,6 +2120,10 @@ function get_id_csv($ids)
 }
 
 // $ids - array(id1,id2,..) or (string) id1,id2,..
+/**
+ * @param $ids
+ * @return array
+ */
 function get_id_ary($ids)
 {
     $ids = is_string($ids) ? explode(',', $ids) : array_values((array)$ids);
@@ -1775,6 +2131,10 @@ function get_id_ary($ids)
     return (array)$ids;
 }
 
+/**
+ * @param $topic_id
+ * @return mixed
+ */
 function get_topic_title($topic_id)
 {
     $row = DB()->fetch_row("
@@ -1783,11 +2143,19 @@ function get_topic_title($topic_id)
     return $row['topic_title'];
 }
 
+/**
+ * @param $forum_id
+ * @return mixed
+ */
 function forum_exists($forum_id)
 {
     return DB()->fetch_row("SELECT forum_id FROM " . BB_FORUMS . " WHERE forum_id = $forum_id LIMIT 1");
 }
 
+/**
+ * @param $cat_id
+ * @return mixed
+ */
 function cat_exists($cat_id)
 {
     return DB()->fetch_row("SELECT cat_id FROM " . BB_CATEGORIES . " WHERE cat_id = $cat_id LIMIT 1");
@@ -1820,6 +2188,9 @@ class log_action
     public $log_type_select = [];
     public $log_disabled = false;
 
+    /**
+     *
+     */
     public function init()
     {
         global $lang;
@@ -1829,6 +2200,10 @@ class log_action
         }
     }
 
+    /**
+     * @param $type_name
+     * @param array $args
+     */
     public function mod($type_name, $args = array())
     {
         global $userdata;
@@ -1874,12 +2249,21 @@ class log_action
         DB()->query("INSERT INTO " . BB_LOG . " $sql_args");
     }
 
+    /**
+     * @param $type_name
+     * @param array $args
+     */
     public function admin($type_name, $args = array())
     {
         $this->mod($type_name, $args);
     }
 }
 
+/**
+ * @param $topic
+ * @param null $is_unread
+ * @return mixed
+ */
 function get_topic_icon($topic, $is_unread = null)
 {
     global $images;
@@ -1916,6 +2300,12 @@ function get_topic_icon($topic, $is_unread = null)
     return $folder_image;
 }
 
+/**
+ * @param $url
+ * @param $replies
+ * @param $per_page
+ * @return string
+ */
 function build_topic_pagination($url, $replies, $per_page)
 {
     $pg = '';
@@ -1943,6 +2333,10 @@ function build_topic_pagination($url, $replies, $per_page)
 //
 // Poll
 //
+/**
+ * @param $topic_id
+ * @return array|bool|mixed
+ */
 function get_poll_data_items_js($topic_id)
 {
     /** @var \TorrentPier\Di $di */
@@ -1981,6 +2375,10 @@ function get_poll_data_items_js($topic_id)
     return is_array($topic_id) ? $items : $items[$topic_id];
 }
 
+/**
+ * @param $t_data
+ * @return bool
+ */
 function poll_is_active($t_data)
 {
     /** @var \TorrentPier\Di $di */
@@ -1989,6 +2387,9 @@ function poll_is_active($t_data)
     return ($t_data['topic_vote'] == 1 && $t_data['topic_time'] > TIMENOW - $di->config->get('poll_max_days') * 86400);
 }
 
+/**
+ * @param $tpl_vars
+ */
 function print_confirmation($tpl_vars)
 {
     global $template, $lang;
@@ -2042,6 +2443,11 @@ function print_page($args, $type = '', $mode = '')
     }
 }
 
+/**
+ * @param $str
+ * @param bool $replace_underscore
+ * @return mixed|string
+ */
 function clean_title($str, $replace_underscore = false)
 {
     $str = ($replace_underscore) ? str_replace('_', ' ', $str) : $str;
@@ -2049,6 +2455,13 @@ function clean_title($str, $replace_underscore = false)
     return $str;
 }
 
+/**
+ * @param $text
+ * @param bool $ltrim_star
+ * @param bool $remove_stopwords
+ * @param bool $die_if_empty
+ * @return mixed|string
+ */
 function clean_text_match($text, $ltrim_star = true, $remove_stopwords = false, $die_if_empty = false)
 {
     global $lang;
@@ -2088,6 +2501,9 @@ function clean_text_match($text, $ltrim_star = true, $remove_stopwords = false, 
     return $text_match_sql;
 }
 
+/**
+ *
+ */
 function init_sphinx()
 {
     global $sphinx;
@@ -2104,6 +2520,11 @@ function init_sphinx()
     }
 }
 
+/**
+ * @param $err_type
+ * @param $err_msg
+ * @param string $query
+ */
 function log_sphinx_error($err_type, $err_msg, $query = '')
 {
     $ignore_err_txt = array(
@@ -2116,6 +2537,10 @@ function log_sphinx_error($err_type, $err_msg, $query = '')
     }
 }
 
+/**
+ * @param $search
+ * @return array
+ */
 function get_title_match_topics($search)
 {
     global $sphinx, $userdata, $lang;
@@ -2178,16 +2603,28 @@ function get_title_match_topics($search)
 }
 
 // для более корректного поиска по словам содержащим одиночную кавычку
+/**
+ * @param $txt
+ * @return mixed
+ */
 function encode_text_match($txt)
 {
     return str_replace("'", '&#039;', $txt);
 }
 
+/**
+ * @param $txt
+ * @return mixed
+ */
 function decode_text_match($txt)
 {
     return str_replace('&#039;', "'", $txt);
 }
 
+/**
+ * @param $text
+ * @return mixed
+ */
 function remove_stopwords($text)
 {
     static $stopwords = null;
@@ -2200,11 +2637,21 @@ function remove_stopwords($text)
     return ($stopwords) ? str_replace($stopwords, ' ', $text) : $text;
 }
 
+/**
+ * @param $str
+ * @return string
+ */
 function pad_with_space($str)
 {
     return ($str) ? " $str " : $str;
 }
 
+/**
+ * @param $infohash
+ * @param $auth_key
+ * @param $logged_in
+ * @return string
+ */
 function create_magnet($infohash, $auth_key, $logged_in)
 {
     global $images;
@@ -2221,6 +2668,11 @@ function create_magnet($infohash, $auth_key, $logged_in)
     }
 }
 
+/**
+ * @param null $forum_id
+ * @param null $topic_id
+ * @param null $group_id
+ */
 function set_die_append_msg($forum_id = null, $topic_id = null, $group_id = null)
 {
     global $lang, $template;
@@ -2233,6 +2685,9 @@ function set_die_append_msg($forum_id = null, $topic_id = null, $group_id = null
     $template->assign_var('BB_DIE_APPEND_MSG', $msg);
 }
 
+/**
+ * @param $pr_uid
+ */
 function set_pr_die_append_msg($pr_uid)
 {
     global $lang, $template;
@@ -2246,6 +2701,12 @@ function set_pr_die_append_msg($pr_uid)
 	');
 }
 
+/**
+ * @param $user_id
+ * @param $subject
+ * @param $message
+ * @param int $poster_id
+ */
 function send_pm($user_id, $subject, $message, $poster_id = BOT_UID)
 {
     global $userdata;
@@ -2269,6 +2730,10 @@ function send_pm($user_id, $subject, $message, $poster_id = BOT_UID)
     DB()->query("UPDATE " . BB_USERS . " SET user_new_privmsg = user_new_privmsg + 1, user_last_privmsg = " . TIMENOW . ", user_newest_pm_id = $pm_id WHERE user_id = $user_id");
 }
 
+/**
+ * @param $data
+ * @return string
+ */
 function profile_url($data)
 {
     global $lang, $datastore;
@@ -2310,6 +2775,15 @@ function profile_url($data)
     return $profile;
 }
 
+/**
+ * @param $user_id
+ * @param $ext_id
+ * @param bool $allow_avatar
+ * @param bool $size
+ * @param string $height
+ * @param string $width
+ * @return string
+ */
 function get_avatar($user_id, $ext_id, $allow_avatar = true, $size = true, $height = '', $width = '')
 {
     /** @var \TorrentPier\Di $di */
@@ -2335,6 +2809,10 @@ function get_avatar($user_id, $ext_id, $allow_avatar = true, $size = true, $heig
     return $user_avatar;
 }
 
+/**
+ * @param $gender
+ * @return string
+ */
 function gender_image($gender)
 {
     global $lang, $images;
@@ -2362,6 +2840,10 @@ function gender_image($gender)
     return $user_gender;
 }
 
+/**
+ * @param $type
+ * @return string
+ */
 function is_gold($type)
 {
     global $lang, $tr_cfg;
@@ -2386,6 +2868,10 @@ function is_gold($type)
     return $is_gold;
 }
 
+/**
+ * @param $type
+ * @param $id
+ */
 function update_atom($type, $id)
 {
     require_once(INC_DIR . 'functions_atom.php');
@@ -2402,6 +2888,9 @@ function update_atom($type, $id)
     }
 }
 
+/**
+ * @param $hash
+ */
 function hash_search($hash)
 {
     global $lang;
@@ -2421,6 +2910,11 @@ function hash_search($hash)
     }
 }
 
+/**
+ * @param $mode
+ * @param string $callback
+ * @return bool|string
+ */
 function bb_captcha($mode, $callback = '')
 {
     global $lang;

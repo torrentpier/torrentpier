@@ -4,6 +4,9 @@ if (!defined('BB_ROOT')) {
     die(basename(__FILE__));
 }
 
+/**
+ * @param $user_id
+ */
 function update_user_level($user_id)
 {
     global $datastore;
@@ -61,6 +64,9 @@ function update_user_level($user_id)
     $datastore->update('moderators');
 }
 
+/**
+ * @param $group_id
+ */
 function delete_group($group_id)
 {
     $group_id = (int)$group_id;
@@ -78,6 +84,12 @@ function delete_group($group_id)
     update_user_level('all');
 }
 
+/**
+ * @param $group_id
+ * @param $user_id
+ * @param int $user_pending
+ * @param int $user_time
+ */
 function add_user_into_group($group_id, $user_id, $user_pending = 0, $user_time = TIMENOW)
 {
     $args = DB()->build_array('INSERT', array(
@@ -93,6 +105,10 @@ function add_user_into_group($group_id, $user_id, $user_pending = 0, $user_time 
     }
 }
 
+/**
+ * @param $group_id
+ * @param $user_id
+ */
 function delete_user_group($group_id, $user_id)
 {
     DB()->query("
@@ -104,6 +120,10 @@ function delete_user_group($group_id, $user_id)
     update_user_level($user_id);
 }
 
+/**
+ * @param $user_id
+ * @return int
+ */
 function create_user_group($user_id)
 {
     DB()->query("INSERT INTO " . BB_GROUPS . " (group_single_user) VALUES (1)");
@@ -116,6 +136,10 @@ function create_user_group($user_id)
     return $group_id;
 }
 
+/**
+ * @param $group_id
+ * @return mixed
+ */
 function get_group_data($group_id)
 {
     if ($group_id === 'all') {
@@ -139,6 +163,11 @@ function get_group_data($group_id)
     return DB()->$method($sql);
 }
 
+/**
+ * @param null $group_id
+ * @param null $user_id
+ * @param null $cat_id
+ */
 function delete_permissions($group_id = null, $user_id = null, $cat_id = null)
 {
     $group_id = get_id_csv($group_id);
@@ -157,6 +186,10 @@ function delete_permissions($group_id = null, $user_id = null, $cat_id = null)
     }
 }
 
+/**
+ * @param $group_id
+ * @param $auth_ary
+ */
 function store_permissions($group_id, $auth_ary)
 {
     if (empty($auth_ary) || !is_array($auth_ary)) {
@@ -177,6 +210,9 @@ function store_permissions($group_id, $auth_ary)
     DB()->query("INSERT INTO " . BB_AUTH_ACCESS . $values);
 }
 
+/**
+ * @param string $user_id
+ */
 function update_user_permissions($user_id = 'all')
 {
     if (is_array($user_id)) {
@@ -206,6 +242,9 @@ function update_user_permissions($user_id = 'all')
 	");
 }
 
+/**
+ * Удаление битых групп пользователей
+ */
 function delete_orphan_usergroups()
 {
     // GROUP_SINGLE_USER without AUTH_ACCESS

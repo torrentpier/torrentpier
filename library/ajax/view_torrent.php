@@ -28,6 +28,10 @@ if (($file_contents = @file_get_contents($file_path)) === false) {
 // Построение списка
 $tor_filelist = build_tor_filelist($file_contents);
 
+/**
+ * @param $file_contents
+ * @return string
+ */
 function build_tor_filelist($file_contents)
 {
     global $lang;
@@ -41,6 +45,9 @@ function build_tor_filelist($file_contents)
     return $torrent->get_filelist();
 }
 
+/**
+ * Class torrent
+ */
 class torrent
 {
     public $tor_decoded = array();
@@ -49,11 +56,19 @@ class torrent
     public $root_dir = '';
     public $files_html = '';
 
+    /**
+     * torrent constructor.
+     * @param $decoded_file_contents
+     * @return torrent
+     */
     public function torrent($decoded_file_contents)
     {
         $this->tor_decoded = $decoded_file_contents;
     }
 
+    /**
+     * @return string
+     */
     public function get_filelist()
     {
         $this->build_filelist_array();
@@ -70,6 +85,9 @@ class torrent
         }
     }
 
+    /**
+     * Torrent file list builder
+     */
     public function build_filelist_array()
     {
         $info = $this->tor_decoded['info'];
@@ -131,6 +149,11 @@ class torrent
         }
     }
 
+    /**
+     * @param $name
+     * @param $length
+     * @return string
+     */
     public function build_file_item($name, $length)
     {
         global $images, $lang;
@@ -148,6 +171,9 @@ class torrent
         return "$name <i>$length</i> $magnet_name $magnet_ext";
     }
 
+    /**
+     * @return string
+     */
     public function build_filelist_html()
     {
         global $html;
@@ -155,6 +181,10 @@ class torrent
     }
 }
 
+/**
+ * @param $dirname
+ * @return mixed
+ */
 function clean_tor_dirname($dirname)
 {
     return str_replace(array('[', ']', '<', '>', "'"), array('&#91;', '&#93;', '&lt;', '&gt;', '&#039;'), $dirname);

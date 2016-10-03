@@ -5,7 +5,6 @@ namespace TorrentPier\ServiceProviders;
 use Pimple\Container;
 use Pimple\ServiceProviderInterface;
 use TorrentPier\Db\Adapter;
-use TorrentPier\Db\Connection;
 
 /**
  * Class DbServiceProvider

@@ -4,6 +4,12 @@ if (!defined('BB_ROOT')) {
     die(basename(__FILE__));
 }
 
+/**
+ * @param $table_name
+ * @param $key
+ * @param $field_name
+ * @param $field_def_val
+ */
 function update_table_bool($table_name, $key, $field_name, $field_def_val)
 {
     // Clear current status
@@ -37,6 +43,10 @@ function update_table_bool($table_name, $key, $field_name, $field_def_val)
     return;
 }
 
+/**
+ * @param $default_cfg
+ * @param $cfg
+ */
 function set_tpl_vars($default_cfg, $cfg)
 {
     global $template;
@@ -46,6 +56,10 @@ function set_tpl_vars($default_cfg, $cfg)
     }
 }
 
+/**
+ * @param $default_cfg
+ * @param $cfg
+ */
 function set_tpl_vars_bool($default_cfg, $cfg)
 {
     global $template, $lang;
@@ -64,6 +78,9 @@ function set_tpl_vars_bool($default_cfg, $cfg)
     }
 }
 
+/**
+ * @param $default_cfg
+ */
 function set_tpl_vars_lang($default_cfg)
 {
     global $template, $lang;
@@ -77,6 +94,12 @@ function set_tpl_vars_lang($default_cfg)
     }
 }
 
+/**
+ * @param $table_name
+ * @param $default_cfg
+ * @param $cfg
+ * @param $type
+ */
 function update_config_table($table_name, $default_cfg, $cfg, $type)
 {
     foreach ($default_cfg as $config_name => $config_value) {

@@ -13,6 +13,11 @@ class emailer
     public $tpl_msg = array();
     public $vars = array();
 
+    /**
+     * emailer constructor.
+     * @param $use_smtp
+     * @return emailer
+     */
     public function emailer($use_smtp/*$tpl_name, $sbj, $to_address*/)
     {
         /** @var \TorrentPier\Di $di */
@@ -24,6 +29,9 @@ class emailer
         $this->use_smtp = $use_smtp;
     }
 
+    /**
+     * Установка стандартных замен в письмах
+     */
     public function set_default_vars()
     {
         /** @var \TorrentPier\Di $di */
@@ -37,6 +45,9 @@ class emailer
     }
 
     // Resets all the data (address, template file, etc etc to default
+    /**
+     * Сброс
+     */
     public function reset()
     {
         $this->addresses = array();
@@ -45,43 +56,69 @@ class emailer
     }
 
     // Sets an email address to send to
+    /**
+     * @param $address
+     */
     public function email_address($address)
     {
         $this->addresses['to'] = trim($address);
     }
 
+    /**
+     * @param $address
+     */
     public function cc($address)
     {
         $this->addresses['cc'][] = trim($address);
     }
 
+    /**
+     * @param $address
+     */
     public function bcc($address)
     {
         $this->addresses['bcc'][] = trim($address);
     }
 
+    /**
+     * @param $address
+     */
     public function replyto($address)
     {
         $this->reply_to = trim($address);
     }
 
+    /**
+     * @param $address
+     */
     public function from($address)
     {
         $this->from = trim($address);
     }
 
     // set up subject for mail
+    /**
+     * @param string $subject
+     */
     public function set_subject($subject = '')
     {
         $this->subject = trim(preg_replace('#[\n\r]+#s', '', $subject));
     }
 
     // set up extra mail headers
+    /**
+     * @param $headers
+     */
     public function extra_headers($headers)
     {
         $this->extra_headers .= trim($headers) . "\n";
     }
 
+    /**
+     * @param $template_file
+     * @param string $template_lang
+     * @return bool
+     */
     public function use_template($template_file, $template_lang = '')
     {
         /** @var \TorrentPier\Di $di */
@@ -120,12 +157,19 @@ class emailer
     }
 
     // assign variables
+    /**
+     * @param $vars
+     */
     public function assign_vars($vars)
     {
         $this->vars = array_merge($this->vars, $vars);
     }
 
     // Send the mail out to the recipients set previously in var $this->address
+    /**
+     * @param string $email_format
+     * @return bool
+     */
     public function send($email_format = 'text')
     {
         global $userdata;
@@ -208,6 +252,10 @@ class emailer
         return true;
     }
 
+    /**
+     * @param $str
+     * @return string
+     */
     public function encode($str)
     {
         if ($this->encoding == '') {

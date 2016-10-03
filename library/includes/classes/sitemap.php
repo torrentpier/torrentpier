@@ -13,11 +13,17 @@ class sitemap
     public $priority = '0.6';
     public $cat_priority = '0.7';
 
+    /**
+     * sitemap constructor.
+     */
     public function sitemap()
     {
         $this->home = make_url();
     }
 
+    /**
+     * @return string
+     */
     public function build_map()
     {
         $map = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<urlset xmlns=\"http://www.sitemaps.org/schemas/sitemap/0.9\">\n";
@@ -29,6 +35,10 @@ class sitemap
         return $map;
     }
 
+    /**
+     * @param $count
+     * @return string
+     */
     public function build_index($count)
     {
         $lm = date('c');
@@ -43,6 +53,9 @@ class sitemap
         return $map;
     }
 
+    /**
+     * @return string
+     */
     public function build_stat()
     {
         $map = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<urlset xmlns=\"http://www.sitemaps.org/schemas/sitemap/0.9\">\n";
@@ -53,6 +66,10 @@ class sitemap
         return $map;
     }
 
+    /**
+     * @param $n
+     * @return string
+     */
     public function build_map_topic($n)
     {
         $map = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<urlset xmlns=\"http://www.sitemaps.org/schemas/sitemap/0.9\">\n";
@@ -62,6 +79,9 @@ class sitemap
         return $map;
     }
 
+    /**
+     * @return string
+     */
     public function get_forum()
     {
         global $datastore;
@@ -92,6 +112,10 @@ class sitemap
         return $xml;
     }
 
+    /**
+     * @param bool $page
+     * @return string
+     */
     public function get_topic($page = false)
     {
         global $datastore;
@@ -136,6 +160,9 @@ class sitemap
         return $xml;
     }
 
+    /**
+     * @return string
+     */
     public function get_static()
     {
         /** @var \TorrentPier\Di $di */
@@ -161,6 +188,11 @@ class sitemap
         return $xml;
     }
 
+    /**
+     * @param $loc
+     * @param $lm
+     * @return string
+     */
     public function get_xml($loc, $lm)
     {
         $xml = "\t<url>\n";
@@ -172,6 +204,11 @@ class sitemap
         return $xml;
     }
 
+    /**
+     * @param $url
+     * @param $map
+     * @return bool|mixed|string
+     */
     public function send_url($url, $map)
     {
         $data = false;
@@ -195,6 +232,9 @@ class sitemap
         }
     }
 
+    /**
+     * Создание карты сайта
+     */
     public function create()
     {
         $row = DB()->fetch_row("SELECT COUNT(*) AS count FROM " . BB_TOPICS);

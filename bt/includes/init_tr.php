@@ -83,6 +83,8 @@ class sql_db
 
     /**
      * Constructor
+     * @param $cfg_values
+     * @return sql_db
      */
     public function sql_db($cfg_values)
     {
@@ -173,6 +175,8 @@ class sql_db
 
     /**
      * Base query method
+     * @param $query
+     * @return null|resource
      */
     public function sql_query($query)
     {
@@ -197,6 +201,8 @@ class sql_db
 
     /**
      * Execute query WRAPPER (with error handling)
+     * @param $query
+     * @return null|resource
      */
     public function query($query)
     {
@@ -209,6 +215,8 @@ class sql_db
 
     /**
      * Return number of rows
+     * @param bool $result
+     * @return bool|int
      */
     public function num_rows($result = false)
     {
@@ -231,6 +239,8 @@ class sql_db
 
     /**
      * Fetch current row
+     * @param $result
+     * @return array|bool
      */
     public function sql_fetchrow($result)
     {
@@ -239,6 +249,8 @@ class sql_db
 
     /**
      * Alias of sql_fetchrow()
+     * @param $result
+     * @return array|bool
      */
     public function fetch_next($result)
     {
@@ -247,6 +259,8 @@ class sql_db
 
     /**
      * Fetch row WRAPPER (with error handling)
+     * @param $query
+     * @return array|bool
      */
     public function fetch_row($query)
     {
@@ -259,6 +273,8 @@ class sql_db
 
     /**
      * Fetch all rows
+     * @param $result
+     * @return array
      */
     public function sql_fetchrowset($result)
     {
@@ -273,6 +289,8 @@ class sql_db
 
     /**
      * Fetch all rows WRAPPER (with error handling)
+     * @param $query
+     * @return array
      */
     public function fetch_rowset($query)
     {
@@ -285,6 +303,9 @@ class sql_db
 
     /**
      * Escape string used in sql query
+     * @param $v
+     * @param bool $check_type
+     * @return string
      */
     public function escape($v, $check_type = false)
     {
@@ -371,6 +392,7 @@ class sql_db
 
     /**
      * Store debug info
+     * @param $mode
      */
     public function debug($mode)
     {
@@ -405,6 +427,7 @@ class sql_db
 
     /**
      * Trigger error
+     * @param string $msg
      */
     public function trigger_error($msg = '')
     {

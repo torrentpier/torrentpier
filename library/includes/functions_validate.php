@@ -5,6 +5,11 @@ if (!defined('BB_ROOT')) {
 }
 
 // !!! $username должен быть предварительно обработан clean_username() !!!
+/**
+ * @param $username
+ * @param bool $check_ban_and_taken
+ * @return bool|string
+ */
 function validate_username($username, $check_ban_and_taken = true)
 {
     global $user, $lang;
@@ -59,6 +64,11 @@ function validate_username($username, $check_ban_and_taken = true)
 }
 
 // Check to see if email address is banned or already present in the DB
+/**
+ * @param $email
+ * @param bool $check_ban_and_taken
+ * @return bool|string
+ */
 function validate_email($email, $check_ban_and_taken = true)
 {
     global $lang, $userdata;

@@ -4,6 +4,9 @@ if (!defined('BB_ROOT')) {
     die(basename(__FILE__));
 }
 
+/**
+ * @return string
+ */
 function get_sql_log()
 {
     global $DBS, $sphinx, $datastore;
@@ -25,6 +28,11 @@ function get_sql_log()
     return $log;
 }
 
+/**
+ * @param $db_obj
+ * @param $log_name
+ * @return string
+ */
 function get_sql_log_html($db_obj, $log_name)
 {
     $log = '';

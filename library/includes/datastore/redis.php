@@ -12,6 +12,12 @@ class datastore_redis extends datastore_common
     public $connected = false;
     public $engine = 'Redis';
 
+    /**
+     * datastore_redis constructor.
+     * @param $cfg
+     * @param null $prefix
+     * @return datastore_redis
+     */
     public function datastore_redis($cfg, $prefix = null)
     {
         if (!$this->is_installed()) {
@@ -24,6 +30,9 @@ class datastore_redis extends datastore_common
         $this->prefix = $prefix;
     }
 
+    /**
+     * Подключение
+     */
     public function connect()
     {
         $this->cur_query = 'connect ' . $this->cfg['host'] . ':' . $this->cfg['port'];
@@ -41,6 +50,11 @@ class datastore_redis extends datastore_common
         $this->cur_query = null;
     }
 
+    /**
+     * @param $title
+     * @param $var
+     * @return bool
+     */
     public function store($title, $var)
     {
         if (!$this->connected) {
@@ -57,6 +71,9 @@ class datastore_redis extends datastore_common
         return (bool)$this->redis->set($this->prefix . $title, serialize($var));
     }
 
+    /**
+     * Очистка
+     */
     public function clean()
     {
         if (!$this->connected) {
@@ -73,6 +90,9 @@ class datastore_redis extends datastore_common
         }
     }
 
+    /**
+     * Получение из кеша
+     */
     public function _fetch_from_store()
     {
         if (!$items = $this->queued_items) {
@@ -94,6 +114,9 @@ class datastore_redis extends datastore_common
         }
     }
 
+    /**
+     * @return bool
+     */
     public function is_installed()
     {
         return class_exists('Redis');

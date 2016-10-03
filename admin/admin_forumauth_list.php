@@ -7,24 +7,17 @@ if (!empty($setmodules)) {
 require('./pagestart.php');
 
 //  View  Read  Post  Reply  Edit  Delete  Sticky  Announce  Vote  Poll  PostAttach  Download
-$simple_auth_ary = array(
-    /* Public */
-    0 => array(AUTH_ALL, AUTH_ALL, AUTH_ALL, AUTH_ALL, AUTH_REG, AUTH_REG, AUTH_MOD, AUTH_MOD, AUTH_REG, AUTH_REG, AUTH_REG, AUTH_ALL), // Public
-    /* Reg */
-    1 => array(AUTH_ALL, AUTH_ALL, AUTH_REG, AUTH_REG, AUTH_REG, AUTH_REG, AUTH_MOD, AUTH_MOD, AUTH_REG, AUTH_REG, AUTH_REG, AUTH_REG), // Registered
-    /* Reg [Hid] */
-    2 => array(AUTH_REG, AUTH_REG, AUTH_REG, AUTH_REG, AUTH_REG, AUTH_REG, AUTH_MOD, AUTH_MOD, AUTH_REG, AUTH_REG, AUTH_REG, AUTH_REG), // Registered [Hidden]
-    /* Priv */
-    3 => array(AUTH_REG, AUTH_ACL, AUTH_ACL, AUTH_ACL, AUTH_ACL, AUTH_ACL, AUTH_MOD, AUTH_MOD, AUTH_ACL, AUTH_ACL, AUTH_ACL, AUTH_ACL), // Private
-    /* Priv [Hid] */
-    4 => array(AUTH_ACL, AUTH_ACL, AUTH_ACL, AUTH_ACL, AUTH_ACL, AUTH_ACL, AUTH_MOD, AUTH_MOD, AUTH_ACL, AUTH_ACL, AUTH_ACL, AUTH_ACL), // Private [Hidden]
-    /* MOD */
-    5 => array(AUTH_REG, AUTH_MOD, AUTH_MOD, AUTH_MOD, AUTH_MOD, AUTH_MOD, AUTH_MOD, AUTH_MOD, AUTH_MOD, AUTH_MOD, AUTH_MOD, AUTH_MOD), // Moderators
-    /* MOD [Hid] */
-    6 => array(AUTH_MOD, AUTH_MOD, AUTH_MOD, AUTH_MOD, AUTH_MOD, AUTH_MOD, AUTH_MOD, AUTH_MOD, AUTH_MOD, AUTH_MOD, AUTH_MOD, AUTH_MOD), // Moderators [Hidden]
-);
+$simple_auth_ary = [
+    0 => [AUTH_ALL, AUTH_ALL, AUTH_ALL, AUTH_ALL, AUTH_REG, AUTH_REG, AUTH_MOD, AUTH_MOD, AUTH_REG, AUTH_REG, AUTH_REG, AUTH_ALL], // Public
+    1 => [AUTH_ALL, AUTH_ALL, AUTH_REG, AUTH_REG, AUTH_REG, AUTH_REG, AUTH_MOD, AUTH_MOD, AUTH_REG, AUTH_REG, AUTH_REG, AUTH_REG], // Registered
+    2 => [AUTH_REG, AUTH_REG, AUTH_REG, AUTH_REG, AUTH_REG, AUTH_REG, AUTH_MOD, AUTH_MOD, AUTH_REG, AUTH_REG, AUTH_REG, AUTH_REG], // Registered [Hidden]
+    3 => [AUTH_REG, AUTH_ACL, AUTH_ACL, AUTH_ACL, AUTH_ACL, AUTH_ACL, AUTH_MOD, AUTH_MOD, AUTH_ACL, AUTH_ACL, AUTH_ACL, AUTH_ACL], // Private
+    4 => [AUTH_ACL, AUTH_ACL, AUTH_ACL, AUTH_ACL, AUTH_ACL, AUTH_ACL, AUTH_MOD, AUTH_MOD, AUTH_ACL, AUTH_ACL, AUTH_ACL, AUTH_ACL], // Private [Hidden]
+    5 => [AUTH_REG, AUTH_MOD, AUTH_MOD, AUTH_MOD, AUTH_MOD, AUTH_MOD, AUTH_MOD, AUTH_MOD, AUTH_MOD, AUTH_MOD, AUTH_MOD, AUTH_MOD], // Moderators
+    6 => [AUTH_MOD, AUTH_MOD, AUTH_MOD, AUTH_MOD, AUTH_MOD, AUTH_MOD, AUTH_MOD, AUTH_MOD, AUTH_MOD, AUTH_MOD, AUTH_MOD, AUTH_MOD], // Moderators [Hidden]
+];
 
-$simple_auth_types = array(
+$simple_auth_types = [
     $lang['PUBLIC'],
     $lang['REGISTERED'],
     $lang['REGISTERED'] . ' [' . $lang['HIDDEN'] . ']',
@@ -32,9 +25,9 @@ $simple_auth_types = array(
     $lang['PRIVATE'] . ' [' . $lang['HIDDEN'] . ']',
     $lang['MODERATORS'],
     $lang['MODERATORS'] . ' [' . $lang['HIDDEN'] . ']',
-);
+];
 
-$forum_auth_fields = array(
+$forum_auth_fields = [
     'auth_view',
     'auth_read',
     'auth_reply',
@@ -47,15 +40,15 @@ $forum_auth_fields = array(
     'auth_post',
     'auth_sticky',
     'auth_announce',
-);
+];
 
-$field_names = array();
+$field_names = [];
 foreach ($forum_auth_fields as $auth_type) {
     $field_names[$auth_type] = $lang[strtoupper($auth_type)];
 }
 
-$forum_auth_levels = array('ALL', 'REG', 'PRIVATE', 'MOD', 'ADMIN');
-$forum_auth_const = array(AUTH_ALL, AUTH_REG, AUTH_ACL, AUTH_MOD, AUTH_ADMIN);
+$forum_auth_levels = ['ALL', 'REG', 'PRIVATE', 'MOD', 'ADMIN'];
+$forum_auth_const = [AUTH_ALL, AUTH_REG, AUTH_ACL, AUTH_MOD, AUTH_ADMIN];
 
 if (isset($_GET[POST_FORUM_URL]) || isset($_POST[POST_FORUM_URL])) {
     $forum_id = (isset($_POST[POST_FORUM_URL])) ? intval($_POST[POST_FORUM_URL]) : intval($_GET[POST_FORUM_URL]);

@@ -39,6 +39,8 @@ class sql_db
 
     /**
      * Constructor
+     * @param $cfg_values
+     * @return sql_db
      */
     public function sql_db($cfg_values)
     {
@@ -127,6 +129,8 @@ class sql_db
 
     /**
      * Base query method
+     * @param $query
+     * @return null|resource
      */
     public function sql_query($query)
     {
@@ -159,6 +163,8 @@ class sql_db
 
     /**
      * Execute query WRAPPER (with error handling)
+     * @param $query
+     * @return null|resource
      */
     public function query($query)
     {
@@ -171,6 +177,8 @@ class sql_db
 
     /**
      * Return number of rows
+     * @param bool $result
+     * @return bool|int
      */
     public function num_rows($result = false)
     {
@@ -193,6 +201,10 @@ class sql_db
 
     /**
      * Fetch current field
+     * @param $field
+     * @param int $rownum
+     * @param int $query_id
+     * @return bool|string
      */
     public function sql_fetchfield($field, $rownum = -1, $query_id = 0)
     {
@@ -223,6 +235,9 @@ class sql_db
 
     /**
      * Fetch current row
+     * @param $result
+     * @param string $field_name
+     * @return array|bool
      */
     public function sql_fetchrow($result, $field_name = '')
     {
@@ -237,6 +252,8 @@ class sql_db
 
     /**
      * Alias of sql_fetchrow()
+     * @param $result
+     * @return array|bool
      */
     public function fetch_next($result)
     {
@@ -245,6 +262,9 @@ class sql_db
 
     /**
      * Fetch row WRAPPER (with error handling)
+     * @param $query
+     * @param string $field_name
+     * @return array|bool
      */
     public function fetch_row($query, $field_name = '')
     {
@@ -257,6 +277,9 @@ class sql_db
 
     /**
      * Fetch all rows
+     * @param $result
+     * @param string $field_name
+     * @return array
      */
     public function sql_fetchrowset($result, $field_name = '')
     {
@@ -271,6 +294,9 @@ class sql_db
 
     /**
      * Fetch all rows WRAPPER (with error handling)
+     * @param $query
+     * @param string $field_name
+     * @return array
      */
     public function fetch_rowset($query, $field_name = '')
     {
@@ -283,6 +309,9 @@ class sql_db
 
     /**
      * Fetch all rows WRAPPER (with error handling)
+     * @param $query
+     * @param string $field_name
+     * @return array
      */
     public function fetch_all($query, $field_name = '')
     {
@@ -303,6 +332,7 @@ class sql_db
 
     /**
      * Free sql result
+     * @param bool $result
      */
     public function sql_freeresult($result = false)
     {
@@ -315,6 +345,10 @@ class sql_db
 
     /**
      * Escape data used in sql query
+     * @param $v
+     * @param bool $check_type
+     * @param bool $dont_escape
+     * @return string
      */
     public function escape($v, $check_type = false, $dont_escape = false)
     {
@@ -343,6 +377,8 @@ class sql_db
 
     /**
      * Escape string
+     * @param $str
+     * @return string
      */
     public function escape_string($str)
     {
@@ -357,6 +393,11 @@ class sql_db
      * Build SQL statement from array (based on same method from phpBB3, idea from Ikonboard)
      *
      * Possible $query_type values: INSERT, INSERT_SELECT, MULTI_INSERT, UPDATE, SELECT
+     * @param $query_type
+     * @param $input_ary
+     * @param bool $data_already_escaped
+     * @param bool $check_data_type_in_escape
+     * @return string
      */
     public function build_array($query_type, $input_ary, $data_already_escaped = false, $check_data_type_in_escape = true)
     {
@@ -410,6 +451,9 @@ class sql_db
         return "\n" . $query . "\n";
     }
 
+    /**
+     * @return array
+     */
     public function get_empty_sql_array()
     {
         return array(
@@ -426,6 +470,10 @@ class sql_db
         );
     }
 
+    /**
+     * @param $sql_ary
+     * @return string
+     */
     public function build_sql($sql_ary)
     {
         $sql = '';
@@ -502,6 +550,7 @@ class sql_db
 
     /**
      * Add shutdown query
+     * @param $sql
      */
     public function add_shutdown_query($sql)
     {
@@ -531,6 +580,9 @@ class sql_db
 
     /**
      * Lock tables
+     * @param $tables
+     * @param string $lock_type
+     * @return bool|null|resource
      */
     public function lock($tables, $lock_type = 'WRITE')
     {
@@ -564,6 +616,9 @@ class sql_db
 
     /**
      * Obtain user level lock
+     * @param $name
+     * @param int $timeout
+     * @return mixed
      */
     public function get_lock($name, $timeout = 0)
     {
@@ -580,6 +635,8 @@ class sql_db
 
     /**
      * Obtain user level lock status
+     * @param $name
+     * @return mixed
      */
     public function release_lock($name)
     {
@@ -595,6 +652,8 @@ class sql_db
 
     /**
      * Release user level lock
+     * @param $name
+     * @return mixed
      */
     public function is_free_lock($name)
     {
@@ -605,6 +664,8 @@ class sql_db
 
     /**
      * Make per db unique lock name
+     * @param $name
+     * @return string
      */
     public function get_lock_name($name)
     {
@@ -647,6 +708,8 @@ class sql_db
     /**
      * Set slow query marker for xx seconds
      * This will disable counting other queries as "slow" during this time
+     * @param int $ignoring_time
+     * @param int $new_priority
      */
     public function expect_slow_query($ignoring_time = 60, $new_priority = 10)
     {
@@ -669,6 +732,7 @@ class sql_db
 
     /**
      * Store debug info
+     * @param $mode
      */
     public function debug($mode)
     {
@@ -724,6 +788,7 @@ class sql_db
 
     /**
      * Trigger error
+     * @param string $msg
      */
     public function trigger_error($msg = 'DB Error')
     {
@@ -741,6 +806,8 @@ class sql_db
 
     /**
      * Find caller source
+     * @param string $mode
+     * @return string
      */
     public function debug_find_source($mode = '')
     {
@@ -761,6 +828,8 @@ class sql_db
 
     /**
      * Prepare for logging
+     * @param int $queries_count
+     * @param string $log_file
      */
     public function log_next_query($queries_count = 1, $log_file = 'sql_queries')
     {
@@ -770,6 +839,7 @@ class sql_db
 
     /**
      * Log query
+     * @param string $log_file
      */
     public function log_query($log_file = 'sql_queries')
     {
@@ -791,6 +861,7 @@ class sql_db
 
     /**
      * Log slow query
+     * @param string $log_file
      */
     public function log_slow_query($log_file = 'sql_slow_bb')
     {
@@ -836,6 +907,10 @@ class sql_db
 
     /**
      * Explain queries (based on code from phpBB3)
+     * @param $mode
+     * @param string $html_table
+     * @param string $row
+     * @return bool|string
      */
     public function explain($mode, $html_table = '', $row = '')
     {

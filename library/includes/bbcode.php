@@ -13,6 +13,9 @@ $page_cfg['include_bbcode_js'] = true;
 //
 // BBCode templates
 //
+/**
+ * @return array
+ */
 function get_bbcode_tpl()
 {
     $bbcode_tpl = array();
@@ -79,6 +82,10 @@ HTML;
     return $bbcode_tpl;
 }
 
+/**
+ * @param $text
+ * @return mixed
+ */
 function bbcode_tpl_compact($text)
 {
     $text = str_compact($text);
@@ -87,6 +94,10 @@ function bbcode_tpl_compact($text)
 }
 
 // prepare a posted message for entry into the database
+/**
+ * @param $message
+ * @return mixed|string
+ */
 function prepare_message($message)
 {
     $message = bbcode::clean_up($message);
@@ -96,6 +107,9 @@ function prepare_message($message)
 
 // Fill smiley templates (or just the variables) with smileys
 // Either in a window or inline
+/**
+ * @param $mode
+ */
 function generate_smilies($mode)
 {
     global $template, $lang, $datastore;
@@ -314,6 +328,10 @@ function strip_bbcode($message, $stripquotes = true, $fast_and_dirty = false, $s
     return $message;
 }
 
+/**
+ * @param $text
+ * @return mixed|string
+ */
 function extract_search_words($text)
 {
     /** @var \TorrentPier\Di $di */
@@ -365,6 +383,10 @@ function extract_search_words($text)
     return $text;
 }
 
+/**
+ * @param $text
+ * @return mixed
+ */
 function replace_synonyms($text)
 {
     static $syn_match = null, $syn_replace = null;
@@ -382,6 +404,13 @@ function replace_synonyms($text)
     return ($syn_match && $syn_replace) ? str_replace($syn_match, $syn_replace, $text) : $text;
 }
 
+/**
+ * @param $post_id
+ * @param $post_message
+ * @param string $topic_title
+ * @param bool $only_return_words
+ * @return string
+ */
 function add_search_words($post_id, $post_message, $topic_title = '', $only_return_words = false)
 {
     /** @var \TorrentPier\Di $di */
@@ -401,6 +430,9 @@ function add_search_words($post_id, $post_message, $topic_title = '', $only_retu
     }
 }
 
+/**
+ * Class bbcode
+ */
 class bbcode
 {
     public $tpl = array(); // шаблоны для замены тегов
@@ -813,6 +845,10 @@ class bbcode
     }
 }
 
+/**
+ * @param $text
+ * @return string
+ */
 function bbcode2html($text)
 {
     global $bbcode;
@@ -829,6 +865,9 @@ function bbcode2html($text)
     return $bbcode->bbcode2html($text);
 }
 
+/**
+ * Class words_rate
+ */
 class words_rate
 {
     public $dbg_mode = false;
@@ -903,6 +942,10 @@ class words_rate
     }
 }
 
+/**
+ * @param $text
+ * @return int
+ */
 function get_words_rate($text)
 {
     static $wr = null;
@@ -912,6 +955,10 @@ function get_words_rate($text)
     return $wr->get_words_rate($text);
 }
 
+/**
+ * @param $str
+ * @return mixed
+ */
 function hide_passkey($str)
 {
     /** @var \TorrentPier\Di $di */
@@ -920,6 +967,12 @@ function hide_passkey($str)
     return preg_replace("#\?{$di->config->get('passkey_key')}=[a-zA-Z0-9]{" . BT_AUTH_KEY_LENGTH . "}#", "?{$di->config->get('passkey_key')}=passkey", $str);
 }
 
+/**
+ * @param $postrow
+ * @param string $mode
+ * @param int $return_chars
+ * @return string
+ */
 function get_parsed_post($postrow, $mode = 'full', $return_chars = 600)
 {
     /** @var \TorrentPier\Di $di */
@@ -942,6 +995,9 @@ function get_parsed_post($postrow, $mode = 'full', $return_chars = 600)
     return $message;
 }
 
+/**
+ * @param $postrow
+ */
 function update_post_html($postrow)
 {
     DB()->query("DELETE FROM " . BB_POSTS_HTML . " WHERE post_id = " . (int)$postrow['post_id'] . " LIMIT 1");

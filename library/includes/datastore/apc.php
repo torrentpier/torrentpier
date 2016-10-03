@@ -9,6 +9,11 @@ class datastore_apc extends datastore_common
     public $engine = 'APC';
     public $prefix = null;
 
+    /**
+     * datastore_apc constructor.
+     * @param null $prefix
+     * @return datastore_apc
+     */
     public function datastore_apc($prefix = null)
     {
         if (!$this->is_installed()) {
@@ -18,6 +23,11 @@ class datastore_apc extends datastore_common
         $this->prefix = $prefix;
     }
 
+    /**
+     * @param $title
+     * @param $var
+     * @return bool
+     */
     public function store($title, $var)
     {
         $this->data[$title] = $var;
@@ -31,6 +41,9 @@ class datastore_apc extends datastore_common
         return (bool)apc_store($this->prefix . $title, $var);
     }
 
+    /**
+     * Очистка
+     */
     public function clean()
     {
         foreach ($this->known_items as $title => $script_name) {
@@ -44,6 +57,9 @@ class datastore_apc extends datastore_common
         }
     }
 
+    /**
+     * Получение из кеша
+     */
     public function _fetch_from_store()
     {
         if (!$items = $this->queued_items) {
@@ -62,6 +78,9 @@ class datastore_apc extends datastore_common
         }
     }
 
+    /**
+     * @return bool
+     */
     public function is_installed()
     {
         return function_exists('apc_fetch');

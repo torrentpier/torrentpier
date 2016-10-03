@@ -4,6 +4,9 @@ if (!defined('BB_ROOT')) {
     die(basename(__FILE__));
 }
 
+/**
+ * Синхронизация всех форумов
+ */
 function sync_all_forums()
 {
     foreach (DB()->fetch_rowset("SELECT forum_id FROM " . BB_FORUMS) as $row) {
@@ -11,6 +14,10 @@ function sync_all_forums()
     }
 }
 
+/**
+ * @param $type
+ * @param $id
+ */
 function sync($type, $id)
 {
     switch ($type) {
@@ -182,6 +189,13 @@ function sync($type, $id)
     }
 }
 
+/**
+ * @param $mode_or_topic_id
+ * @param null $forum_id
+ * @param int $prune_time
+ * @param bool $prune_all
+ * @return mixed
+ */
 function topic_delete($mode_or_topic_id, $forum_id = null, $prune_time = 0, $prune_all = false)
 {
     global $lang, $log_action;
@@ -354,6 +368,14 @@ function topic_delete($mode_or_topic_id, $forum_id = null, $prune_time = 0, $pru
     return $deleted_topics_count;
 }
 
+/**
+ * @param $topic_id
+ * @param $to_forum_id
+ * @param null $from_forum_id
+ * @param bool $leave_shadow
+ * @param bool $insert_bot_msg
+ * @return bool
+ */
 function topic_move($topic_id, $to_forum_id, $from_forum_id = null, $leave_shadow = false, $insert_bot_msg = false)
 {
     global $log_action;
@@ -444,6 +466,12 @@ function topic_move($topic_id, $to_forum_id, $from_forum_id = null, $leave_shado
     return true;
 }
 
+/**
+ * @param $topic_id
+ * @param $mode
+ * @param null $forum_id
+ * @return bool
+ */
 function topic_lock_unlock($topic_id, $mode, $forum_id = null)
 {
     global $log_action;
@@ -490,6 +518,12 @@ function topic_lock_unlock($topic_id, $mode, $forum_id = null)
     return true;
 }
 
+/**
+ * @param $topic_id
+ * @param $mode
+ * @param null $forum_id
+ * @return bool
+ */
 function topic_stick_unstick($topic_id, $mode, $forum_id = null)
 {
     if (!$topic_csv = get_id_csv($topic_id)) {
@@ -518,6 +552,12 @@ function topic_stick_unstick($topic_id, $mode, $forum_id = null)
 }
 
 // $exclude_first - в режиме удаления сообщений по списку исключать первое сообщение в теме
+/**
+ * @param $mode_or_post_id
+ * @param null $user_id
+ * @param bool $exclude_first
+ * @return mixed
+ */
 function post_delete($mode_or_post_id, $user_id = null, $exclude_first = true)
 {
     global $log_action;
@@ -656,6 +696,11 @@ function post_delete($mode_or_post_id, $user_id = null, $exclude_first = true)
     return $deleted_posts_count;
 }
 
+/**
+ * @param $user_id
+ * @param bool $delete_posts
+ * @return bool
+ */
 function user_delete($user_id, $delete_posts = false)
 {
     global $log_action;
@@ -746,6 +791,10 @@ function user_delete($user_id, $delete_posts = false)
     }
 }
 
+/**
+ * @param $user_id
+ * @return string
+ */
 function get_usernames_for_log($user_id)
 {
     $users_log_msg = array();

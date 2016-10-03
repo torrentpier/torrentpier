@@ -131,6 +131,8 @@ $DBS = new DBS([
 
 /**
  * TODO: @deprecated
+ * @param string $db_alias
+ * @return mixed
  */
 function DB($db_alias = 'db')
 {

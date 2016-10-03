@@ -25,7 +25,7 @@ if (!empty($_POST['edit']) || !empty($_POST['new'])) {
             'release_group' => $row['release_group'],
         );
         $mode = 'editgroup';
-        $template->assign_block_vars('group_edit', array());
+        $template->assign_block_vars('group_edit', []);
     } elseif (!empty($_POST['new'])) {
         $group_info = array(
             'group_name' => '',

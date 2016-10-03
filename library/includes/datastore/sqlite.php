@@ -22,6 +22,12 @@ class datastore_sqlite extends datastore_common
         'log_name' => 'DATASTORE',
     );
 
+    /**
+     * datastore_sqlite constructor.
+     * @param $cfg
+     * @param null $prefix
+     * @return datastore_sqlite
+     */
     public function datastore_sqlite($cfg, $prefix = null)
     {
         $this->cfg = array_merge($this->cfg, $cfg);
@@ -29,6 +35,11 @@ class datastore_sqlite extends datastore_common
         $this->prefix = $prefix;
     }
 
+    /**
+     * @param $item_name
+     * @param $item_data
+     * @return bool
+     */
     public function store($item_name, $item_data)
     {
         $this->data[$item_name] = $item_data;
@@ -41,11 +52,17 @@ class datastore_sqlite extends datastore_common
         return (bool)$result;
     }
 
+    /**
+     * Очистка
+     */
     public function clean()
     {
         $this->db->query("DELETE FROM " . $this->cfg['table_name']);
     }
 
+    /**
+     * Получение из кеша
+     */
     public function _fetch_from_store()
     {
         if (!$items = $this->queued_items) {

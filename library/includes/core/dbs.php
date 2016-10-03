@@ -16,6 +16,11 @@ class dbs
     public $sql_inittime = 0;
     public $sql_timetotal = 0;
 
+    /**
+     * dbs constructor.
+     * @param $cfg
+     * @return dbs
+     */
     public function DBS($cfg)
     {
         $this->cfg = $cfg['db'];
@@ -27,6 +32,10 @@ class dbs
     }
 
     // получение/инициализация класса для сервера $srv_name
+    /**
+     * @param string $srv_name_or_alias
+     * @return mixed
+     */
     public function get_db_obj($srv_name_or_alias = 'db1')
     {
         $srv_name = $this->get_srv_name($srv_name_or_alias);
@@ -39,6 +48,10 @@ class dbs
     }
 
     // определение имени сервера
+    /**
+     * @param $name
+     * @return mixed|string
+     */
     public function get_srv_name($name)
     {
         if (isset($this->alias[$name])) {

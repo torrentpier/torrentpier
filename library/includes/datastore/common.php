@@ -58,6 +58,10 @@ class datastore_common
         }
     }
 
+    /**
+     * @param $title
+     * @return mixed
+     */
     public function &get($title)
     {
         if (!isset($this->data[$title])) {
@@ -67,10 +71,17 @@ class datastore_common
         return $this->data[$title];
     }
 
+    /**
+     * @param $item_name
+     * @param $item_data
+     */
     public function store($item_name, $item_data)
     {
     }
 
+    /**
+     * @param $items
+     */
     public function rm($items)
     {
         foreach ((array)$items as $item) {
@@ -78,6 +89,9 @@ class datastore_common
         }
     }
 
+    /**
+     * @param $items
+     */
     public function update($items)
     {
         if ($items == 'all') {
@@ -88,6 +102,9 @@ class datastore_common
         }
     }
 
+    /**
+     * Получение
+     */
     public function _fetch()
     {
         $this->_fetch_from_store();
@@ -101,10 +118,16 @@ class datastore_common
         $this->queued_items = array();
     }
 
+    /**
+     * Получение из кеша
+     */
     public function _fetch_from_store()
     {
     }
 
+    /**
+     * @param $title
+     */
     public function _build_item($title)
     {
         if (!empty($this->known_items[$title])) {
@@ -125,6 +148,10 @@ class datastore_common
     public $dbg_enabled = false;
     public $cur_query = null;
 
+    /**
+     * @param $mode
+     * @param null $cur_query
+     */
     public function debug($mode, $cur_query = null)
     {
         if (!$this->dbg_enabled) {
@@ -150,6 +177,10 @@ class datastore_common
         }
     }
 
+    /**
+     * @param string $mode
+     * @return string
+     */
     public function debug_find_source($mode = '')
     {
         foreach (debug_backtrace() as $trace) {

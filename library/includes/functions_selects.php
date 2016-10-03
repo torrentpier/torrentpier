@@ -5,6 +5,11 @@ if (!defined('BB_ROOT')) {
 }
 
 // Languages
+/**
+ * @param $default_lang
+ * @param string $select_name
+ * @return string
+ */
 function language_select($default_lang, $select_name = 'language')
 {
     /** @var \TorrentPier\Di $di */
@@ -25,6 +30,11 @@ function language_select($default_lang, $select_name = 'language')
 }
 
 // Pick a timezone
+/**
+ * @param $default
+ * @param string $select_name
+ * @return string
+ */
 function tz_select($default, $select_name = 'timezone')
 {
     global $sys_timezone, $lang;
@@ -44,6 +54,11 @@ function tz_select($default, $select_name = 'timezone')
 }
 
 // Templates
+/**
+ * @param $default_style
+ * @param string $select_name
+ * @return string
+ */
 function templates_select($default_style, $select_name = 'tpl_name')
 {
     /** @var \TorrentPier\Di $di */

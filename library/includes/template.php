@@ -92,6 +92,7 @@ class template
      * Constructor. Installs XS mod on first run or updates it and sets the root dir.
      *
      * @param string $root
+     * @return template
      */
     public function Template($root = '.')
     {
@@ -531,6 +532,11 @@ class template
         }
     }
 
+    /**
+     * @param $filename
+     * @param $code
+     * @return string
+     */
     public function compile_code($filename, $code)
     {
         // Load code from file
@@ -818,6 +824,10 @@ class template
     /*
     * Compile code between tags
     */
+    /**
+     * @param $code
+     * @return mixed
+     */
     public function _compile_text($code)
     {
         if (strlen($code) < 3) {
@@ -850,6 +860,11 @@ class template
     //
     // Compile IF tags - much of this is from Smarty with some adaptions for our block level methods
     //
+    /**
+     * @param $tag_args
+     * @param $elseif
+     * @return string
+     */
     public function compile_tag_if($tag_args, $elseif)
     {
         /* Tokenize args for 'if' tag */
@@ -961,6 +976,11 @@ class template
     }
 
     // This is from Smarty
+    /**
+     * @param $is_arg
+     * @param $tokens
+     * @return mixed
+     */
     public function _parse_is_expr($is_arg, $tokens)
     {
         $expr_end = 0;
@@ -1069,6 +1089,9 @@ class template
         file_write($code, $filename, false, true, true);
     }
 
+    /**
+     * Запуск шаблонизатора
+     */
     public function xs_startup()
     {
         /** @var \TorrentPier\Di $di */
@@ -1088,6 +1111,10 @@ class template
         }
     }
 
+    /**
+     * @param $var
+     * @return string
+     */
     public function lang_error($var)
     {
         trigger_error(basename($this->cur_tpl) . " : undefined language variable {L_{$var}}", E_USER_WARNING);

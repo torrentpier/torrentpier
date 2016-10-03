@@ -170,9 +170,6 @@ function msg_die($msg)
     die($output);
 }
 
-# $agent = !empty($_SERVER['HTTP_USER_AGENT']) ? $_SERVER['HTTP_USER_AGENT'] : '-';
-# bb_log("$agent  |  ". str_compact($peer_id) ."\n", 'agent');
-
 // Start announcer
 define('TR_ROOT', './');
 require(TR_ROOT . 'includes/init_tr.php');

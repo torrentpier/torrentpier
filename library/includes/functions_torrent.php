@@ -4,6 +4,11 @@ if (!defined('BB_ROOT')) {
     die(basename(__FILE__));
 }
 
+/**
+ * @param $forum_id
+ * @param $poster_id
+ * @return bool
+ */
 function torrent_auth_check($forum_id, $poster_id)
 {
     global $lang, $userdata;
@@ -22,6 +27,10 @@ function torrent_auth_check($forum_id, $poster_id)
     bb_die($lang['NOT_MODERATOR']);
 }
 
+/**
+ * @param $topic_id
+ * @param string $redirect_url
+ */
 function tracker_unregister($topic_id, $redirect_url = '')
 {
     global $lang, $log_action;
@@ -85,6 +94,10 @@ function tracker_unregister($topic_id, $redirect_url = '')
     }
 }
 
+/**
+ * @param $topic_id
+ * @param $forum_id
+ */
 function torrent_cp_close($topic_id, $forum_id)
 {
     global $log_action, $userdata;
@@ -111,6 +124,13 @@ function torrent_cp_close($topic_id, $forum_id)
     topic_lock_unlock($topic_id, 'lock');
 }
 
+/**
+ * @param $topic_id
+ * @param string $mode
+ * @param int $tor_status
+ * @param int $reg_time
+ * @return bool|mixed|string
+ */
 function tracker_register($topic_id, $mode = '', $tor_status = TOR_NOT_APPROVED, $reg_time = TIMENOW)
 {
     global $lang;
@@ -231,6 +251,10 @@ function tracker_register($topic_id, $mode = '', $tor_status = TOR_NOT_APPROVED,
     return true;
 }
 
+/**
+ * @param $topic_id
+ * @return bool
+ */
 function delete_torrent($topic_id)
 {
     tracker_unregister($topic_id);
@@ -239,6 +263,10 @@ function delete_torrent($topic_id)
     return true;
 }
 
+/**
+ * @param $topic_id
+ * @param $tor_status
+ */
 function change_tor_status($topic_id, $tor_status)
 {
     global $userdata;
@@ -260,6 +288,10 @@ function change_tor_status($topic_id, $tor_status)
 }
 
 // Set gold / silver type for torrent
+/**
+ * @param $topic_id
+ * @param $tor_status_gold
+ */
 function change_tor_type($topic_id, $tor_status_gold)
 {
     global $lang;
@@ -285,6 +317,9 @@ function change_tor_type($topic_id, $tor_status_gold)
     }
 }
 
+/**
+ * @param $t_data
+ */
 function send_torrent_with_passkey($t_data)
 {
     global $lang, $tr_cfg, $userdata;
@@ -453,6 +488,11 @@ function send_torrent_with_passkey($t_data)
     bb_exit($output);
 }
 
+/**
+ * @param $user_id
+ * @param bool $force_generate
+ * @return bool|string
+ */
 function generate_passkey($user_id, $force_generate = false)
 {
     global $lang;
@@ -507,6 +547,10 @@ function generate_passkey($user_id, $force_generate = false)
     return false;
 }
 
+/**
+ * @param $message
+ * @return mixed
+ */
 function torrent_error_exit($message)
 {
     global $reg_mode, $return_message, $lang;
@@ -527,16 +571,29 @@ function torrent_error_exit($message)
     bb_die($msg . $message);
 }
 
+/**
+ * @param $topic_id
+ * @return mixed
+ */
 function tracker_rm_torrent($topic_id)
 {
     return DB()->sql_query("DELETE FROM " . BB_BT_TRACKER . " WHERE topic_id = " . (int)$topic_id);
 }
 
+/**
+ * @param $user_id
+ * @return mixed
+ */
 function tracker_rm_user($user_id)
 {
     return DB()->sql_query("DELETE FROM " . BB_BT_TRACKER . " WHERE user_id = " . (int)$user_id);
 }
 
+/**
+ * @param $action
+ * @param $updates
+ * @return bool
+ */
 function ocelot_update_tracker($action, $updates)
 {
     /** @var \TorrentPier\Di $di */
@@ -558,6 +615,12 @@ function ocelot_update_tracker($action, $updates)
     return true;
 }
 
+/**
+ * @param $get
+ * @param int $max_attempts
+ * @param bool $err
+ * @return bool|int
+ */
 function ocelot_send_request($get, $max_attempts = 1, &$err = false)
 {
     /** @var \TorrentPier\Di $di */
@@ -607,18 +670,31 @@ function ocelot_send_request($get, $max_attempts = 1, &$err = false)
 }
 
 // bdecode: based on OpenTracker
+/**
+ * @param $filename
+ * @return null|string
+ */
 function bdecode_file($filename)
 {
     $file_contents = file_get_contents($filename);
     return bdecode($file_contents);
 }
 
+/**
+ * @param $str
+ * @return null|string
+ */
 function bdecode($str)
 {
     $pos = 0;
     return bdecode_r($str, $pos);
 }
 
+/**
+ * @param $str
+ * @param $pos
+ * @return null|string
+ */
 function bdecode_r($str, &$pos)
 {
     $strlen = strlen($str);

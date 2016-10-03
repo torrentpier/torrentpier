@@ -15,7 +15,7 @@ $subject = (string)trim(request_var('subject', ''));
 $message = (string)request_var('message', '');
 $group_id = (int)request_var(POST_GROUPS_URL, 0);
 
-$errors = $user_id_sql = array();
+$errors = $user_id_sql = [];
 
 if (isset($_POST['submit'])) {
     if (!$subject) {

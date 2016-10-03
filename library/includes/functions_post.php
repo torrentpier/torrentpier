@@ -7,6 +7,14 @@ if (!defined('BB_ROOT')) {
 //
 // Prepare a message for posting
 //
+/**
+ * @param $mode
+ * @param $post_data
+ * @param $error_msg
+ * @param $username
+ * @param $subject
+ * @param $message
+ */
 function prepare_post(&$mode, &$post_data, &$error_msg, &$username, &$subject, &$message)
 {
     global $user, $userdata, $lang;
@@ -59,6 +67,23 @@ function prepare_post(&$mode, &$post_data, &$error_msg, &$username, &$subject, &
 //
 // Post a new topic/reply or edit existing post/poll
 //
+/**
+ * @param $mode
+ * @param $post_data
+ * @param $message
+ * @param $meta
+ * @param $forum_id
+ * @param $topic_id
+ * @param $post_id
+ * @param $topic_type
+ * @param $post_username
+ * @param $post_subject
+ * @param $post_message
+ * @param $update_post_time
+ * @param $poster_rg_id
+ * @param $attach_rg_sig
+ * @return mixed
+ */
 function submit_post($mode, &$post_data, &$message, &$meta, &$forum_id, &$topic_id, &$post_id, &$topic_type, $post_username, $post_subject, $post_message, $update_post_time, $poster_rg_id, $attach_rg_sig)
 {
     global $userdata, $post_info, $is_auth, $lang, $datastore;
@@ -196,6 +221,14 @@ function submit_post($mode, &$post_data, &$message, &$meta, &$forum_id, &$topic_
 //
 // Update post stats and details
 //
+/**
+ * @param $mode
+ * @param $post_data
+ * @param $forum_id
+ * @param $topic_id
+ * @param $post_id
+ * @param $user_id
+ */
 function update_post_stats($mode, $post_data, $forum_id, $topic_id, $post_id, $user_id)
 {
     $sign = ($mode == 'delete') ? '- 1' : '+ 1';
@@ -271,6 +304,15 @@ function update_post_stats($mode, $post_data, $forum_id, $topic_id, $post_id, $u
 //
 // Delete a post
 //
+/**
+ * @param $mode
+ * @param $post_data
+ * @param $message
+ * @param $meta
+ * @param $forum_id
+ * @param $topic_id
+ * @param $post_id
+ */
 function delete_post($mode, $post_data, &$message, &$meta, $forum_id, $topic_id, $post_id)
 {
     global $lang;
@@ -284,6 +326,14 @@ function delete_post($mode, $post_data, &$message, &$meta, $forum_id, $topic_id,
 //
 // Handle user notification on new post
 //
+/**
+ * @param $mode
+ * @param $post_data
+ * @param $topic_title
+ * @param $forum_id
+ * @param $topic_id
+ * @param $notify_user
+ */
 function user_notification($mode, &$post_data, &$topic_title, &$forum_id, &$topic_id, &$notify_user)
 {
     global $lang, $userdata;
@@ -373,6 +423,17 @@ function user_notification($mode, &$post_data, &$topic_title, &$forum_id, &$topi
     }
 }
 
+/**
+ * @param $mode
+ * @param $topic_id
+ * @param string $forum_id
+ * @param string $old_forum_id
+ * @param string $new_topic_id
+ * @param string $new_topic_title
+ * @param string $old_topic_id
+ * @param string $message
+ * @param string $poster_id
+ */
 function insert_post($mode, $topic_id, $forum_id = '', $old_forum_id = '', $new_topic_id = '', $new_topic_title = '', $old_topic_id = '', $message = '', $poster_id = '')
 {
     global $userdata, $lang;

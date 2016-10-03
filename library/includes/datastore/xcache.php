@@ -9,6 +9,11 @@ class datastore_xcache extends datastore_common
     public $prefix = null;
     public $engine = 'XCache';
 
+    /**
+     * datastore_xcache constructor.
+     * @param null $prefix
+     * @return datastore_xcache
+     */
     public function datastore_xcache($prefix = null)
     {
         if (!$this->is_installed()) {
@@ -19,6 +24,11 @@ class datastore_xcache extends datastore_common
         $this->prefix = $prefix;
     }
 
+    /**
+     * @param $title
+     * @param $var
+     * @return bool
+     */
     public function store($title, $var)
     {
         $this->data[$title] = $var;
@@ -32,6 +42,9 @@ class datastore_xcache extends datastore_common
         return (bool)xcache_set($this->prefix . $title, $var);
     }
 
+    /**
+     * Очистка
+     */
     public function clean()
     {
         foreach ($this->known_items as $title => $script_name) {
@@ -45,6 +58,9 @@ class datastore_xcache extends datastore_common
         }
     }
 
+    /**
+     * Получение из кеша
+     */
     public function _fetch_from_store()
     {
         if (!$items = $this->queued_items) {
@@ -63,6 +79,9 @@ class datastore_xcache extends datastore_common
         }
     }
 
+    /**
+     * @return bool
+     */
     public function is_installed()
     {
         return function_exists('xcache_get');

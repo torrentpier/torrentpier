@@ -13,7 +13,7 @@ if (!IS_ADMIN) {
     bb_die($lang['NOT_AUTHORISED']);
 }
 
-$peers_in_last_minutes = array(30, 15, 5, 1);
+$peers_in_last_minutes = [30, 15, 5, 1];
 $peers_in_last_sec_limit = 300;
 
 $announce_interval = intval($di->config->get('announce_interval'));

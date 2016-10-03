@@ -10,6 +10,12 @@ class datastore_file extends datastore_common
     public $prefix = null;
     public $engine = 'Filecache';
 
+    /**
+     * datastore_file constructor.
+     * @param $dir
+     * @param null $prefix
+     * @return datastore_file
+     */
     public function datastore_file($dir, $prefix = null)
     {
         $this->prefix = $prefix;
@@ -17,6 +23,11 @@ class datastore_file extends datastore_common
         $this->dbg_enabled = sql_dbg_enabled();
     }
 
+    /**
+     * @param $title
+     * @param $var
+     * @return bool
+     */
     public function store($title, $var)
     {
         $this->cur_query = "cache->set('$title')";
@@ -38,6 +49,9 @@ class datastore_file extends datastore_common
         return (bool)file_write($filecache, $filename, false, true, true);
     }
 
+    /**
+     * Очистка
+     */
     public function clean()
     {
         $dir = $this->dir;
@@ -56,6 +70,9 @@ class datastore_file extends datastore_common
         }
     }
 
+    /**
+     * Получение из кеша
+     */
     public function _fetch_from_store()
     {
         if (!$items = $this->queued_items) {

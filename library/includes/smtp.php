@@ -6,6 +6,11 @@ if (!defined('BB_ROOT')) {
 
 define('SMTP_INCLUDED', 1);
 
+/**
+ * @param $socket
+ * @param $response
+ * @param int $line
+ */
 function server_parse($socket, $response, $line = __LINE__)
 {
     $server_response = '';
@@ -21,6 +26,13 @@ function server_parse($socket, $response, $line = __LINE__)
 }
 
 // Replacement or substitute for PHP's mail command
+/**
+ * @param $mail_to
+ * @param $subject
+ * @param $message
+ * @param string $headers
+ * @return bool
+ */
 function smtpmail($mail_to, $subject, $message, $headers = '')
 {
     /** @var \TorrentPier\Di $di */

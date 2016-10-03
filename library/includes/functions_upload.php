@@ -36,6 +36,12 @@ class upload_common
         8 => 'tiff',
     );
 
+    /**
+     * @param array $cfg
+     * @param array $post_params
+     * @param bool $uploaded_only
+     * @return bool
+     */
     public function init($cfg = array(), $post_params = array(), $uploaded_only = true)
     {
         global $lang;
@@ -109,6 +115,11 @@ class upload_common
         return true;
     }
 
+    /**
+     * @param string $mode
+     * @param array $params
+     * @return bool
+     */
     public function store($mode = '', $params = array())
     {
         if ($mode == 'avatar') {
@@ -124,6 +135,10 @@ class upload_common
         }
     }
 
+    /**
+     * @param $file_path
+     * @return bool
+     */
     public function _move($file_path)
     {
         $dir = dirname($file_path);

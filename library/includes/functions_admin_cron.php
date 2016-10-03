@@ -1,5 +1,8 @@
 <?php
 
+/**
+ * @param $jobs
+ */
 function run_jobs($jobs)
 {
     global $tr_cfg, $datastore;
@@ -46,12 +49,19 @@ function run_jobs($jobs)
     return;
 }
 
+/**
+ * @param $jobs
+ */
 function delete_jobs($jobs)
 {
     DB()->query("DELETE FROM " . BB_CRON . " WHERE cron_id IN ($jobs)");
     return;
 }
 
+/**
+ * @param $jobs
+ * @param $cron_action
+ */
 function toggle_active($jobs, $cron_action)
 {
     $active = ($cron_action == 'disable') ? 0 : 1;
@@ -59,6 +69,10 @@ function toggle_active($jobs, $cron_action)
     return;
 }
 
+/**
+ * @param $cron_arr
+ * @return int|string
+ */
 function validate_cron_post($cron_arr)
 {
     $errors = 'Errors in: ';
@@ -79,6 +93,9 @@ function validate_cron_post($cron_arr)
     return $result;
 }
 
+/**
+ * @param $cron_arr
+ */
 function insert_cron_job($cron_arr)
 {
     $row = DB()->fetch_row("SELECT cron_title, cron_script FROM " . BB_CRON . " WHERE cron_title = '" . $_POST['cron_title'] . "' or cron_script = '" . $_POST['cron_script'] . "' ");
@@ -117,6 +134,9 @@ function insert_cron_job($cron_arr)
 	$cron_active, '$cron_title', '$cron_script', '$schedule', '$run_day', '$run_time', '$run_order', '$last_run', '$next_run', '$run_interval', $log_enabled, '$log_file', $log_sql_queries, $disable_board, '$run_counter')");
 }
 
+/**
+ * @param $cron_arr
+ */
 function update_cron_job($cron_arr)
 {
     $cron_id = $cron_arr['cron_id'];

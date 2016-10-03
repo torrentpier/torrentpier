@@ -29,6 +29,10 @@ $user_ip = encode_ip($client_ip);
 define('CLIENT_IP', $client_ip);
 define('USER_IP', $user_ip);
 
+/**
+ * @param $contents
+ * @return string
+ */
 function send_page($contents)
 {
     return compress_output($contents);
@@ -36,6 +40,10 @@ function send_page($contents)
 
 define('UA_GZIP_SUPPORTED', (isset($_SERVER['HTTP_ACCEPT_ENCODING']) && strpos($_SERVER['HTTP_ACCEPT_ENCODING'], 'gzip') !== false));
 
+/**
+ * @param $contents
+ * @return string
+ */
 function compress_output($contents)
 {
     /** @var \TorrentPier\Di $di */
@@ -71,6 +79,13 @@ define('COOKIE_PERSIST', TIMENOW + 31536000);
 
 define('COOKIE_MAX_TRACKS', 90);
 
+/**
+ * @param $name
+ * @param $val
+ * @param int $lifetime
+ * @param bool $httponly
+ * @return bool
+ */
 function bb_setcookie($name, $val, $lifetime = COOKIE_PERSIST, $httponly = false)
 {
     /** @var \TorrentPier\Di $di */
@@ -276,7 +291,9 @@ $dl_status_css = [
     DL_STATUS_CANCEL => 'dlCancel',
 ];
 
-// Functions
+/**
+ * Отправка заголовков без кеша
+ */
 function send_no_cache_headers()
 {
     header('Expires: Mon, 26 Jul 1997 05:00:00 GMT');
@@ -286,6 +303,9 @@ function send_no_cache_headers()
     header('Pragma: no-cache');
 }
 
+/**
+ * @param string $output
+ */
 function bb_exit($output = '')
 {
     if ($output) {
@@ -294,16 +314,33 @@ function bb_exit($output = '')
     exit;
 }
 
+/**
+ * @param $txt
+ * @param bool $double_encode
+ * @param int $quote_style
+ * @param string $charset
+ * @return string
+ */
 function htmlCHR($txt, $double_encode = false, $quote_style = ENT_QUOTES, $charset = 'UTF-8')
 {
     return (string)htmlspecialchars($txt, $quote_style, $charset, $double_encode);
 }
 
+/**
+ * @param $txt
+ * @param int $quote_style
+ * @param string $charset
+ * @return string
+ */
 function html_ent_decode($txt, $quote_style = ENT_QUOTES, $charset = 'UTF-8')
 {
     return (string)html_entity_decode($txt, $quote_style, $charset);
 }
 
+/**
+ * @param string $path
+ * @return string
+ */
 function make_url($path = '')
 {
     return FULL_URL . preg_replace('#^\/?(.*?)\/?$#', '\1', $path);
@@ -375,7 +412,9 @@ if (($di->config->get('board_disable') || file_exists(BB_DISABLED)) && !defined(
     }
 }
 
-// Cron functions
+/**
+ * Снятие блокировки крона
+ */
 function cron_release_deadlock()
 {
     if (file_exists(CRON_RUNNING)) {
@@ -386,17 +425,26 @@ function cron_release_deadlock()
     }
 }
 
+/**
+ * Блокировка крона
+ */
 function cron_release_file_lock()
 {
     rename(CRON_RUNNING, CRON_ALLOWED);
     cron_touch_lock_file(CRON_ALLOWED);
 }
 
+/**
+ * @param $lock_file
+ */
 function cron_touch_lock_file($lock_file)
 {
     file_write(make_rand_str(20), $lock_file, 0, true, true);
 }
 
+/**
+ * Включение форума (при блокировке крона)
+ */
 function cron_enable_board()
 {
     if (file_exists(BB_DISABLED)) {
@@ -404,6 +452,9 @@ function cron_enable_board()
     }
 }
 
+/**
+ * Отключение форума (при блокировке крона)
+ */
 function cron_disable_board()
 {
     if (file_exists(BB_ENABLED)) {

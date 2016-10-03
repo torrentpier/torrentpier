@@ -12,6 +12,12 @@ class datastore_memcache extends datastore_common
     public $engine = 'Memcache';
     public $prefix = null;
 
+    /**
+     * datastore_memcache constructor.
+     * @param $cfg
+     * @param null $prefix
+     * @return datastore_memcache
+     */
     public function datastore_memcache($cfg, $prefix = null)
     {
         if (!$this->is_installed()) {
@@ -24,6 +30,9 @@ class datastore_memcache extends datastore_common
         $this->dbg_enabled = sql_dbg_enabled();
     }
 
+    /**
+     * Подключение
+     */
     public function connect()
     {
         $connect_type = ($this->cfg['pconnect']) ? 'pconnect' : 'connect';
@@ -47,6 +56,11 @@ class datastore_memcache extends datastore_common
         $this->cur_query = null;
     }
 
+    /**
+     * @param $title
+     * @param $var
+     * @return bool
+     */
     public function store($title, $var)
     {
         if (!$this->connected) {
@@ -63,6 +77,9 @@ class datastore_memcache extends datastore_common
         return (bool)$this->memcache->set($this->prefix . $title, $var);
     }
 
+    /**
+     * Очистка
+     */
     public function clean()
     {
         if (!$this->connected) {
@@ -79,6 +96,9 @@ class datastore_memcache extends datastore_common
         }
     }
 
+    /**
+     * Получение из кеша
+     */
     public function _fetch_from_store()
     {
         if (!$items = $this->queued_items) {
@@ -100,6 +120,9 @@ class datastore_memcache extends datastore_common
         }
     }
 
+    /**
+     * @return bool
+     */
     public function is_installed()
     {
         return class_exists('Memcache');

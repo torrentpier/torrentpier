@@ -735,11 +735,18 @@ class user_common
 //
 // userdata cache
 //
+/**
+ * @return bool
+ */
 function ignore_cached_userdata()
 {
     return (defined('IN_PM')) ? true : false;
 }
 
+/**
+ * @param $id
+ * @return bool|mixed|null
+ */
 function cache_get_userdata($id)
 {
     /** @var \TorrentPier\Di $di */
@@ -755,6 +762,11 @@ function cache_get_userdata($id)
     return $cache->get($id);
 }
 
+/**
+ * @param $userdata
+ * @param bool $force
+ * @return bool
+ */
 function cache_set_userdata($userdata, $force = false)
 {
     /** @var \TorrentPier\Di $di */
@@ -772,6 +784,10 @@ function cache_set_userdata($userdata, $force = false)
     return $cache->set($id, $userdata, $di->config->get('session_update_intrv'));
 }
 
+/**
+ * @param $userdata
+ * @return bool
+ */
 function cache_rm_userdata($userdata)
 {
     /** @var \TorrentPier\Di $di */
@@ -790,6 +806,9 @@ function cache_rm_userdata($userdata)
 }
 
 // $user_id - array(id1,id2,..) or (string) id
+/**
+ * @param $user_id
+ */
 function cache_rm_user_sessions($user_id)
 {
     /** @var \TorrentPier\Di $di */
@@ -809,11 +828,21 @@ function cache_rm_user_sessions($user_id)
     }
 }
 
+/**
+ * @param $userdata
+ * @return bool
+ */
 function cache_update_userdata($userdata)
 {
     return cache_set_userdata($userdata, true);
 }
 
+/**
+ * @param $userdata
+ * @param $sql_ary
+ * @param bool $data_already_escaped
+ * @return bool
+ */
 function db_update_userdata($userdata, $sql_ary, $data_already_escaped = true)
 {
     if (!$userdata) {
@@ -831,6 +860,9 @@ function db_update_userdata($userdata, $sql_ary, $data_already_escaped = true)
 }
 
 // $user_id - array(id1,id2,..) or (string) id
+/**
+ * @param $user_id
+ */
 function delete_user_sessions($user_id)
 {
     cache_rm_user_sessions($user_id);
