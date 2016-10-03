@@ -1,8 +1,15 @@
 <?php
 
-if (!defined('BB_ROOT')) die(basename(__FILE__));
+if (!defined('BB_ROOT')) {
+    die(basename(__FILE__));
+}
 
 // Languages
+/**
+ * @param $default_lang
+ * @param string $select_name
+ * @return string
+ */
 function language_select($default_lang, $select_name = 'language')
 {
     /** @var \TorrentPier\Di $di */
@@ -12,7 +19,9 @@ function language_select($default_lang, $select_name = 'language')
     $x = 0;
     foreach ($di->config->get('lang') as $key => $data) {
         $selected = '';
-        if ($key == $default_lang) $selected = ' selected="selected"';
+        if ($key == $default_lang) {
+            $selected = ' selected="selected"';
+        }
         $lang_select .= '<option value="' . $key . '"' . $selected . '>' . $data['name'] . '</option>';
         $x++;
     }
@@ -21,6 +30,11 @@ function language_select($default_lang, $select_name = 'language')
 }
 
 // Pick a timezone
+/**
+ * @param $default
+ * @param string $select_name
+ * @return string
+ */
 function tz_select($default, $select_name = 'timezone')
 {
     global $sys_timezone, $lang;
@@ -40,6 +54,11 @@ function tz_select($default, $select_name = 'timezone')
 }
 
 // Templates
+/**
+ * @param $default_style
+ * @param string $select_name
+ * @return string
+ */
 function templates_select($default_style, $select_name = 'tpl_name')
 {
     /** @var \TorrentPier\Di $di */
@@ -49,7 +68,9 @@ function templates_select($default_style, $select_name = 'tpl_name')
     $x = 0;
     foreach ($di->config->get('templates') as $folder => $name) {
         $selected = '';
-        if ($folder == $default_style) $selected = ' selected="selected"';
+        if ($folder == $default_style) {
+            $selected = ' selected="selected"';
+        }
         $templates_select .= '<option value="' . $folder . '"' . $selected . '>' . $name . '</option>';
         $x++;
     }

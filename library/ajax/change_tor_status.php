@@ -1,109 +1,118 @@
 <?php
 
-if (!defined('IN_AJAX')) die(basename(__FILE__));
+if (!defined('IN_AJAX')) {
+    die(basename(__FILE__));
+}
 
 global $userdata, $lang;
 
 /** @var \TorrentPier\Di $di */
 $di = \TorrentPier\Di::getInstance();
 
-if (!isset($this->request['topic_id'])) $this->ajax_die('Invalid topic_id');
+if (!isset($this->request['topic_id'])) {
+    $this->ajax_die('Invalid topic_id');
+}
 
-$topic_id  = (int) $this->request['topic_id'];
-$mode      = (string) $this->request['mode'];
+$topic_id = (int)$this->request['topic_id'];
+$mode = (string)$this->request['mode'];
 
-if ($di->config->get('tor_comment'))
-{
-	$comment = (string) $this->request['comment'];
+if ($di->config->get('tor_comment')) {
+    $comment = (string)$this->request['comment'];
 }
 
 $tor = DB()->fetch_row("
 	SELECT
 		tor.poster_id, tor.forum_id, tor.tor_status, tor.checked_time, tor.checked_user_id, f.cat_id, t.topic_title
-	FROM       ". BB_BT_TORRENTS ." tor
-	INNER JOIN ". BB_FORUMS      ." f ON(f.forum_id = tor.forum_id)
-	INNER JOIN ". BB_TOPICS      ." t ON(t.topic_id = tor.topic_id)
+	FROM       " . BB_BT_TORRENTS . " tor
+	INNER JOIN " . BB_FORUMS . " f ON(f.forum_id = tor.forum_id)
+	INNER JOIN " . BB_TOPICS . " t ON(t.topic_id = tor.topic_id)
 	WHERE tor.topic_id = $topic_id
 	LIMIT 1
 ");
 
-if (!$tor) $this->ajax_die($lang['TORRENT_FAILED']);
+if (!$tor) {
+    $this->ajax_die($lang['TORRENT_FAILED']);
+}
 
-switch ($mode)
-{
-	case 'status':
-		$new_status = (int) $this->request['status'];
+switch ($mode) {
+    case 'status':
+        $new_status = (int)$this->request['status'];
 
-		// Валидность статуса
-		if (!isset($lang['TOR_STATUS_NAME'][$new_status])) $this->ajax_die($lang['TOR_STATUS_FAILED']);
-		if (!isset($this->request['status'])) $this->ajax_die($lang['TOR_DONT_CHANGE']);
-		if (!IS_AM) $this->ajax_die($lang['NOT_MODERATOR']);
+        // Валидность статуса
+        if (!isset($lang['TOR_STATUS_NAME'][$new_status])) {
+            $this->ajax_die($lang['TOR_STATUS_FAILED']);
+        }
+        if (!isset($this->request['status'])) {
+            $this->ajax_die($lang['TOR_DONT_CHANGE']);
+        }
+        if (!IS_AM) {
+            $this->ajax_die($lang['NOT_MODERATOR']);
+        }
 
-		// Тот же статус
-		if ($tor['tor_status'] == $new_status)
-		{
-			$this->ajax_die($lang['TOR_STATUS_DUB']);
-		}
+        // Тот же статус
+        if ($tor['tor_status'] == $new_status) {
+            $this->ajax_die($lang['TOR_STATUS_DUB']);
+        }
 
-		// Запрет на изменение/присвоение CH-статуса модератором
-		if ($new_status == TOR_CLOSED_CPHOLD && !IS_ADMIN)
-		{
-			$this->ajax_die($lang['TOR_DONT_CHANGE']);
-		}
+        // Запрет на изменение/присвоение CH-статуса модератором
+        if ($new_status == TOR_CLOSED_CPHOLD && !IS_ADMIN) {
+            $this->ajax_die($lang['TOR_DONT_CHANGE']);
+        }
 
-		// Права на изменение статуса
-		if ($tor['tor_status'] == TOR_CLOSED_CPHOLD)
-		{
-			if (!IS_ADMIN) $this->verify_mod_rights($tor['forum_id']);
-			DB()->query("UPDATE ". BB_TOPICS ." SET topic_status = ". TOPIC_UNLOCKED ." WHERE topic_id = {$topic_id} LIMIT 1");
-		}
-		else
-		{
-			$this->verify_mod_rights($tor['forum_id']);
-		}
+        // Права на изменение статуса
+        if ($tor['tor_status'] == TOR_CLOSED_CPHOLD) {
+            if (!IS_ADMIN) {
+                $this->verify_mod_rights($tor['forum_id']);
+            }
+            DB()->query("UPDATE " . BB_TOPICS . " SET topic_status = " . TOPIC_UNLOCKED . " WHERE topic_id = {$topic_id} LIMIT 1");
+        } else {
+            $this->verify_mod_rights($tor['forum_id']);
+        }
 
-		// Подтверждение изменения статуса, выставленного другим модератором
-		if ($tor['tor_status'] != TOR_NOT_APPROVED && $tor['checked_user_id'] != $userdata['user_id'] && $tor['checked_time'] + 2*3600 > TIMENOW)
-		{
-			if (empty($this->request['confirmed']))
-			{
-				$msg  = $lang['TOR_STATUS_OF'] ." {$lang['TOR_STATUS_NAME'][$tor['tor_status']]}\n\n";
-				$msg .= ($username = get_username($tor['checked_user_id'])) ? $lang['TOR_STATUS_CHANGED'] . html_entity_decode($username) .", ". delta_time($tor['checked_time']) . $lang['TOR_BACK'] ."\n\n" : "";
-				$msg .= $lang['PROCEED'] .'?';
-				$this->prompt_for_confirm($msg);
-			}
-		}
+        // Подтверждение изменения статуса, выставленного другим модератором
+        if ($tor['tor_status'] != TOR_NOT_APPROVED && $tor['checked_user_id'] != $userdata['user_id'] && $tor['checked_time'] + 2 * 3600 > TIMENOW) {
+            if (empty($this->request['confirmed'])) {
+                $msg = $lang['TOR_STATUS_OF'] . " {$lang['TOR_STATUS_NAME'][$tor['tor_status']]}\n\n";
+                $msg .= ($username = get_username($tor['checked_user_id'])) ? $lang['TOR_STATUS_CHANGED'] . html_entity_decode($username) . ", " . delta_time($tor['checked_time']) . $lang['TOR_BACK'] . "\n\n" : "";
+                $msg .= $lang['PROCEED'] . '?';
+                $this->prompt_for_confirm($msg);
+            }
+        }
 
-		change_tor_status($topic_id, $new_status);
+        change_tor_status($topic_id, $new_status);
 
-		$this->response['status'] = $di->config->get('tor_icons.' . $new_status) .' <b> '. $lang['TOR_STATUS_NAME'][$new_status]. '</b> &middot; '. profile_url($userdata) .' &middot; <i>'. delta_time(TIMENOW) . $lang['TOR_BACK']. '</i>';
+        $this->response['status'] = $di->config->get('tor_icons.' . $new_status) . ' <b> ' . $lang['TOR_STATUS_NAME'][$new_status] . '</b> &middot; ' . profile_url($userdata) . ' &middot; <i>' . delta_time(TIMENOW) . $lang['TOR_BACK'] . '</i>';
 
-		if ($di->config->get('tor_comment') && (($comment && $comment != $lang['COMMENT']) || in_array($new_status, $di->config->get('tor_reply'))))
-		{
-			if ($tor['poster_id'] > 0)
-			{
-				$subject = sprintf($lang['TOR_MOD_TITLE'], $tor['topic_title']);
-				$message = sprintf($lang['TOR_MOD_MSG'], get_username($tor['poster_id']), make_url(TOPIC_URL . $topic_id), $di->config->get('tor_icons.' . $new_status) .' '.$lang['TOR_STATUS_NAME'][$new_status]);
+        if ($di->config->get('tor_comment') && (($comment && $comment != $lang['COMMENT']) || in_array($new_status, $di->config->get('tor_reply')))) {
+            if ($tor['poster_id'] > 0) {
+                $subject = sprintf($lang['TOR_MOD_TITLE'], $tor['topic_title']);
+                $message = sprintf($lang['TOR_MOD_MSG'], get_username($tor['poster_id']), make_url(TOPIC_URL . $topic_id), $di->config->get('tor_icons.' . $new_status) . ' ' . $lang['TOR_STATUS_NAME'][$new_status]);
 
-				if ($comment && $comment != $lang['COMMENT']) $message .= "\n\n[b]". $lang['COMMENT'] .'[/b]: '. $comment;
+                if ($comment && $comment != $lang['COMMENT']) {
+                    $message .= "\n\n[b]" . $lang['COMMENT'] . '[/b]: ' . $comment;
+                }
 
-				send_pm($tor['poster_id'], $subject, $message, $userdata['user_id']);
-				cache_rm_user_sessions($tor['poster_id']);
-			}
-		}
-	break;
+                send_pm($tor['poster_id'], $subject, $message, $userdata['user_id']);
+                cache_rm_user_sessions($tor['poster_id']);
+            }
+        }
+        break;
 
-	case 'status_reply':
-		if (!$di->config->get('tor_comment')) $this->ajax_die($lang['MODULE_OFF']);
+    case 'status_reply':
+        if (!$di->config->get('tor_comment')) {
+            $this->ajax_die($lang['MODULE_OFF']);
+        }
 
-		$subject = sprintf($lang['TOR_AUTH_TITLE'], $tor['topic_title']);
-		$message = sprintf($lang['TOR_AUTH_MSG'], get_username($tor['checked_user_id']), make_url(TOPIC_URL . $topic_id), $tor['topic_title']);
+        $subject = sprintf($lang['TOR_AUTH_TITLE'], $tor['topic_title']);
+        $message = sprintf($lang['TOR_AUTH_MSG'], get_username($tor['checked_user_id']), make_url(TOPIC_URL . $topic_id), $tor['topic_title']);
 
-		if ($comment && $comment != $lang['COMMENT']) $message .= "\n\n[b]". $lang['COMMENT'] .'[/b]: '. $comment;
+        if ($comment && $comment != $lang['COMMENT']) {
+            $message .= "\n\n[b]" . $lang['COMMENT'] . '[/b]: ' . $comment;
+        }
 
-		send_pm($tor['checked_user_id'], $subject, $message, $userdata['user_id']);
-		cache_rm_user_sessions($tor['checked_user_id']);
-	break;
+        send_pm($tor['checked_user_id'], $subject, $message, $userdata['user_id']);
+        cache_rm_user_sessions($tor['checked_user_id']);
+        break;
 }
 
 $this->response['topic_id'] = $topic_id;

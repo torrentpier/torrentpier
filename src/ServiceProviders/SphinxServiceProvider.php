@@ -33,7 +33,7 @@ class SphinxServiceProvider implements ServiceProviderInterface
             } elseif (!$driver instanceof Mysqli) {
                 $class = get_class($driver);
                 throw new UnsupportedDriverException(
-                    $class.' not supported. Use Zend\Db\Adapter\Driver\Pdo\Pdo or Zend\Db\Adapter\Driver\Mysqli\Mysqli'
+                    $class . ' not supported. Use Zend\Db\Adapter\Driver\Pdo\Pdo or Zend\Db\Adapter\Driver\Mysqli\Mysqli'
                 );
             }
 

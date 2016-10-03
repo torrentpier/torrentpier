@@ -2,10 +2,10 @@
 
 namespace TorrentPier\Db;
 
-use Zend\Db\Adapter\Driver\Pdo\Result;
-use Zend\Db\Adapter\Driver\Pdo\Statement;
 use Zend\Db\Adapter\Driver\Pdo\Connection;
 use Zend\Db\Adapter\Driver\Pdo\Pdo;
+use Zend\Db\Adapter\Driver\Pdo\Result;
+use Zend\Db\Adapter\Driver\Pdo\Statement;
 use Zend\Db\Adapter\Platform\AbstractPlatform;
 use Zend\Db\Sql\Delete;
 use Zend\Db\Sql\Insert;

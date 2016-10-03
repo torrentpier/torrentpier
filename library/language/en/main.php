@@ -510,9 +510,9 @@ $lang['ALWAYS_NOTIFY_EXPLAIN'] = 'Sends an e-mail when someone replies to a topi
 $lang['BOARD_LANG'] = 'Board language';
 $lang['GENDER'] = 'Gender';
 $lang['GENDER_SELECT'] = array(
-	0 => 'Unknown',
-	1 => 'Male',
-	2 => 'Female'
+    0 => 'Unknown',
+    1 => 'Male',
+    2 => 'Female'
 );
 $lang['MODULE_OFF'] = 'Module is disabled!';
 
@@ -1045,18 +1045,18 @@ $lang['TOR_STATUS_SELECT_ACTION'] = 'Select status';
 $lang['TOR_STATUS_NOT_SELECT'] = 'You have not selected status.';
 $lang['TOR_STATUS_SELECT_ALL'] = 'All statuses';
 $lang['TOR_STATUS_NAME'] = array(
-	TOR_NOT_APPROVED  => 'not checked',
-	TOR_CLOSED        => 'closed',
-	TOR_APPROVED      => 'checked',
-	TOR_NEED_EDIT     => 'not formalized until',
-	TOR_NO_DESC       => 'not formalized',
-	TOR_DUP           => 'repeat',
-	TOR_CLOSED_CPHOLD => 'closed right',
-	TOR_CONSUMED      => 'absorbed',
-	TOR_DOUBTFUL      => 'doubtful',
-	TOR_CHECKING      => 'verified',
-	TOR_TMP           => 'temporary',
-	TOR_PREMOD        => 'pre-moderation',
+    TOR_NOT_APPROVED => 'not checked',
+    TOR_CLOSED => 'closed',
+    TOR_APPROVED => 'checked',
+    TOR_NEED_EDIT => 'not formalized until',
+    TOR_NO_DESC => 'not formalized',
+    TOR_DUP => 'repeat',
+    TOR_CLOSED_CPHOLD => 'closed right',
+    TOR_CONSUMED => 'absorbed',
+    TOR_DOUBTFUL => 'doubtful',
+    TOR_CHECKING => 'verified',
+    TOR_TMP => 'temporary',
+    TOR_PREMOD => 'pre-moderation',
 );
 $lang['TOR_STATUS_FAILED'] = 'Such status does not exist!';
 $lang['TORRENT_FAILED'] = 'Distribution was not found!';
@@ -1301,19 +1301,19 @@ $lang['DECLENSION']['REPLIES'] = array('reply', 'replies');
 $lang['DECLENSION']['TIMES'] = array('time', 'times');
 
 $lang['DELTA_TIME']['INTERVALS'] = array(
-	'seconds' => array('second', 'seconds'),
-	'minutes' => array('minute', 'minutes'),
-	'hours'   => array('hour',   'hours'),
-	'mday'    => array('day',    'days'),
-	'mon'     => array('month',  'months'),
-	'year'    => array('year',   'years'),
+    'seconds' => array('second', 'seconds'),
+    'minutes' => array('minute', 'minutes'),
+    'hours' => array('hour', 'hours'),
+    'mday' => array('day', 'days'),
+    'mon' => array('month', 'months'),
+    'year' => array('year', 'years'),
 );
 $lang['DELTA_TIME']['FORMAT'] = '%1$s %2$s'; // 5(%1) minutes(%2)
 
-$lang['AUTH_TYPES'][AUTH_ALL]   = $lang['AUTH_ANONYMOUS_USERS'];
-$lang['AUTH_TYPES'][AUTH_REG]   = $lang['AUTH_REGISTERED_USERS'];
-$lang['AUTH_TYPES'][AUTH_ACL]   = $lang['AUTH_USERS_GRANTED_ACCESS'];
-$lang['AUTH_TYPES'][AUTH_MOD]   = $lang['AUTH_MODERATORS'];
+$lang['AUTH_TYPES'][AUTH_ALL] = $lang['AUTH_ANONYMOUS_USERS'];
+$lang['AUTH_TYPES'][AUTH_REG] = $lang['AUTH_REGISTERED_USERS'];
+$lang['AUTH_TYPES'][AUTH_ACL] = $lang['AUTH_USERS_GRANTED_ACCESS'];
+$lang['AUTH_TYPES'][AUTH_MOD] = $lang['AUTH_MODERATORS'];
 $lang['AUTH_TYPES'][AUTH_ADMIN] = $lang['AUTH_ADMINISTRATORS'];
 
 $lang['NEW_USER_REG_DISABLED'] = 'Sorry, registration is disabled at this time';
@@ -1414,7 +1414,7 @@ $lang['EMAILER_DISABLED'] = 'Sorry, this feature is temporarily not working';
 $lang['TERMS_ON'] = 'I agree with these terms and conditions';
 $lang['TERMS_OFF'] = 'I do not agree to these terms';
 $lang['JAVASCRIPT_ON_REGISTER'] = 'To register, heads necessary to enable JavaScript';
-$lang['REGISTERED_IN_TIME'] = "At the moment registration is closed<br /><br />You can register from 01:00 to 17:00 MSK (now ". date('H:i') ." MSK)<br /><br />We apologize for this inconvenience";
+$lang['REGISTERED_IN_TIME'] = "At the moment registration is closed<br /><br />You can register from 01:00 to 17:00 MSK (now " . date('H:i') . " MSK)<br /><br />We apologize for this inconvenience";
 $lang['AUTOCOMPLETE'] = 'Password generate';
 $lang['YOUR_NEW_PASSWORD'] = 'Your are new password:';
 $lang['REGENERATE'] = 'Regenerate';
@@ -1548,7 +1548,7 @@ $lang['ACTIONS_LOG'] = 'Report on action';
 
 //Welcome page
 $lang['IDX_BROWSER_NSP_FRAME'] = 'Sorry, your browser doesn\'t seem to support frames';
-$lang['IDX_CLEAR_CACHE'] ='Clear Cache:';
+$lang['IDX_CLEAR_CACHE'] = 'Clear Cache:';
 $lang['IDX_CLEAR_DATASTORE'] = 'Datastore';
 $lang['IDX_CLEAR_TEMPLATES'] = 'Templates';
 $lang['IDX_CLEAR_NEWNEWS'] = 'Net news';
@@ -1580,7 +1580,7 @@ $lang['USERS_PER_DAY'] = 'Users per day';
 $lang['BOARD_STARTED'] = 'Board started';
 $lang['AVATAR_DIR_SIZE'] = 'Avatar directory size';
 $lang['DATABASE_SIZE'] = 'Database size';
-$lang['GZIP_COMPRESSION'] ='Gzip compression';
+$lang['GZIP_COMPRESSION'] = 'Gzip compression';
 $lang['NOT_AVAILABLE'] = 'Not available';
 
 // Clear Cache
@@ -2307,12 +2307,12 @@ $lang['CRON_EDIT_HEAD_EDIT'] = 'Edit job';
 $lang['CRON_EDIT_HEAD_ADD'] = 'Add job';
 $lang['CRON_SCRIPT_EXPL'] = 'name of the script from "includes/cron/jobs/"';;
 $lang['SCHEDULE'] = array(
-	'select'   => '&raquo; Select start',
-	'hourly'   => 'hourly',
-	'daily'    => 'daily',
-	'weekly'   => 'weekly',
-	'monthly'  => 'monthly',
-	'interval' => 'interval'
+    'select' => '&raquo; Select start',
+    'hourly' => 'hourly',
+    'daily' => 'daily',
+    'weekly' => 'weekly',
+    'monthly' => 'monthly',
+    'interval' => 'interval'
 );
 $lang['NOSELECT'] = 'No select';
 $lang['RUN_DAY'] = 'Run day';
@@ -2441,18 +2441,18 @@ $lang['CALLSEED_MSG_SPAM'] = 'Request has already been once successfully sent (P
 $lang['CALLSEED_HAVE_SEED'] = 'Topic does not require help (<b>Seeders:</b> %d)';
 
 $lang['LOG_ACTION']['LOG_TYPE'] = array(
-	'mod_topic_delete' => 'Topic:<br /> <b>deleted</b>',
-	'mod_topic_move'   => 'Topic:<br /> <b>moved</b>',
-	'mod_topic_lock'   => 'Topic:<br /> <b>closed</b>',
-	'mod_topic_unlock' => 'Topic:<br /> <b>opened</b>',
-	'mod_topic_split'  => 'Topic:<br /> <b>split</b>',
-	'mod_post_delete'  => 'Post:<br /> <b>deleted</b>',
-	'adm_user_delete'  => 'User:<br /> <b>deleted</b>',
-	'adm_user_ban'     => 'User:<br /> <b>ban</b>',
-	'adm_user_unban'   => 'User:<br /> <b>unban</b>',
+    'mod_topic_delete' => 'Topic:<br /> <b>deleted</b>',
+    'mod_topic_move' => 'Topic:<br /> <b>moved</b>',
+    'mod_topic_lock' => 'Topic:<br /> <b>closed</b>',
+    'mod_topic_unlock' => 'Topic:<br /> <b>opened</b>',
+    'mod_topic_split' => 'Topic:<br /> <b>split</b>',
+    'mod_post_delete' => 'Post:<br /> <b>deleted</b>',
+    'adm_user_delete' => 'User:<br /> <b>deleted</b>',
+    'adm_user_ban' => 'User:<br /> <b>ban</b>',
+    'adm_user_unban' => 'User:<br /> <b>unban</b>',
 );
 
-$lang['ACTS_LOG_ALL_ACTIONS']  = 'All actions';
+$lang['ACTS_LOG_ALL_ACTIONS'] = 'All actions';
 $lang['ACTS_LOG_SEARCH_OPTIONS'] = 'Actions Log: Search options';
 $lang['ACTS_LOG_FORUM'] = 'Forum';
 $lang['ACTS_LOG_ACTION'] = 'Action';
@@ -2589,26 +2589,26 @@ $lang['MC_FAQ'] = 'Entered text will be displayed under this message';
 $lang['MC_COMMENT_PM_SUBJECT'] = "%s in your message";
 $lang['MC_COMMENT_PM_MSG'] = "Hello, [b]%s[/b]\nModerator left in your message [url=%s][b]%s[/b][/url][quote]\n%s\n[/quote]";
 $lang['MC_COMMENT'] = array(
-	0 => array(
-		'title' => '',
-		'type'  => 'Delete comment',
-	),
-	1 => array(
-		'title' => 'Comment from %s',
-		'type'  => 'Comment',
-	),
-	2 => array(
-		'title' => 'Information from %s',
-		'type'  => 'Information',
-	),
-	3 => array(
-		'title' => 'Warning from %s',
-		'type'  => 'Warning',
-	),
-	4 => array(
-		'title' => 'Violation from %s',
-		'type'  => 'Violation',
-	),
+    0 => array(
+        'title' => '',
+        'type' => 'Delete comment',
+    ),
+    1 => array(
+        'title' => 'Comment from %s',
+        'type' => 'Comment',
+    ),
+    2 => array(
+        'title' => 'Information from %s',
+        'type' => 'Information',
+    ),
+    3 => array(
+        'title' => 'Warning from %s',
+        'type' => 'Warning',
+    ),
+    4 => array(
+        'title' => 'Violation from %s',
+        'type' => 'Violation',
+    ),
 );
 
 $lang['SITEMAP'] = 'Sitemap';
@@ -2649,14 +2649,14 @@ $lang['TERMS_EMPTY_TEXT'] = '[align=center]The text of this page is edited at: [
 $lang['TERMS_EXPLAIN'] = 'On this page, you can specify the text of the basic rules of the resource is displayed to users.';
 
 $lang['TR_STATS'] = array(
-	0 => 'inactive users in 30 days',
-	1 => 'inactive users for 90 days',
-	2 => 'medium size distributions on the tracker (many megabytes)',
-	3 => 'how many total hands on the tracker',
-	4 => 'how many live hands (there is at least 1 led)',
-	5 => 'how many hands where that seeding more than 5 seeds',
-	6 => 'how many of us uploaders (those who filled at least 1 hand)',
-	7 => 'how many uploaders over the last 30 days',
+    0 => 'inactive users in 30 days',
+    1 => 'inactive users for 90 days',
+    2 => 'medium size distributions on the tracker (many megabytes)',
+    3 => 'how many total hands on the tracker',
+    4 => 'how many live hands (there is at least 1 led)',
+    5 => 'how many hands where that seeding more than 5 seeds',
+    6 => 'how many of us uploaders (those who filled at least 1 hand)',
+    7 => 'how many uploaders over the last 30 days',
 );
 
 $lang['NEW_POLL_START'] = 'Poll enabled';
@@ -2688,13 +2688,13 @@ $lang['UPLOAD_ERROR_DIMENSIONS'] = 'Image dimensions exceed the maximum allowabl
 $lang['UPLOAD_ERROR_NOT_IMAGE'] = 'The uploaded file is not an image';
 $lang['UPLOAD_ERROR_NOT_ALLOWED'] = 'Extension %s for downloads is not allowed';
 $lang['UPLOAD_ERRORS'] = array(
-	UPLOAD_ERR_INI_SIZE   => 'you have exceeded the maximum file size for the server',
-	UPLOAD_ERR_FORM_SIZE  => 'you have exceeded the maximum file upload size',
-	UPLOAD_ERR_PARTIAL    => 'the file was partially downloaded',
-	UPLOAD_ERR_NO_FILE    => 'file was not uploaded',
-	UPLOAD_ERR_NO_TMP_DIR => 'temporary directory not found',
-	UPLOAD_ERR_CANT_WRITE => 'write error',
-	UPLOAD_ERR_EXTENSION  => 'upload stopped by extension',
+    UPLOAD_ERR_INI_SIZE => 'you have exceeded the maximum file size for the server',
+    UPLOAD_ERR_FORM_SIZE => 'you have exceeded the maximum file upload size',
+    UPLOAD_ERR_PARTIAL => 'the file was partially downloaded',
+    UPLOAD_ERR_NO_FILE => 'file was not uploaded',
+    UPLOAD_ERR_NO_TMP_DIR => 'temporary directory not found',
+    UPLOAD_ERR_CANT_WRITE => 'write error',
+    UPLOAD_ERR_EXTENSION => 'upload stopped by extension',
 );
 
 // Captcha

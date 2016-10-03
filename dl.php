@@ -36,7 +36,9 @@ if (!$t_data) {
 // Auth check
 $is_auth = auth(AUTH_ALL, $t_data->forum_id, $userdata, $t_data);
 if (!IS_GUEST) {
-    if (!$is_auth['auth_download']) login_redirect($di->config->get('dl_url') . $topic_id);
+    if (!$is_auth['auth_download']) {
+        login_redirect($di->config->get('dl_url') . $topic_id);
+    }
 } elseif (!$di->config->get('tracker.guest_tracker')) {
     login_redirect($di->config->get('dl_url') . $topic_id);
 }
