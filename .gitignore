@@ -1,4 +1,5 @@
 ### TorrentPier ###
+.vagrant
 .idea
 bower_components
 composer.phar

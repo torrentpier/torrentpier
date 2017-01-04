@@ -500,7 +500,7 @@ class bbcode
     /**
      * Constructor
      */
-    public function bbcode()
+    public function __construct()
     {
         $this->tpl = get_bbcode_tpl();
 
@@ -900,7 +900,7 @@ class words_rate
     public $words_del_exp = '';
     public $words_cnt_exp = '#[a-zA-Zа-яА-ЯёЁ]{4,}#';
 
-    public function words_rate()
+    public function __construct()
     {
         // слова начинающиеся на..
         $del_list = file_get_contents(BB_ROOT . '/library/words_rate_del_list.txt');
