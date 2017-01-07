@@ -49,7 +49,6 @@ $sql = DB()->fetch_rowset("
 		AND tor.topic_id = t.topic_id
 		AND t.forum_id = f.forum_id
 			$not_auth_forums_sql
-	GROUP BY tr.topic_id
 	ORDER BY f.forum_name, t.topic_title
 ");
 

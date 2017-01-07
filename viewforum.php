@@ -169,7 +169,6 @@ if (!$forum_data['forum_parent'] && isset($forums['f'][$forum_id]['subforums']) 
 		WHERE f.forum_parent = $forum_id
 			$only_new_sql
 			$ignore_forum_sql
-		GROUP BY f.forum_id
 		ORDER BY f.forum_order
 	";
 

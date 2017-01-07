@@ -551,7 +551,7 @@ class Date_Delta
     /**
      * Date_Delta constructor.
      */
-    public function Date_Delta()
+    public function __construct()
     {
         global $lang;
 
