@@ -54,33 +54,33 @@ function error_exit ($msg = '')
 // Database
 class sql_db
 {
-	var $cfg           = array();
-	var $cfg_keys      = array('dbhost', 'dbname', 'dbuser', 'dbpasswd', 'charset', 'persist');
-	var $link          = null;
-	var $result        = null;
-	var $db_server     = '';
-	var $selected_db   = null;
+	public $cfg           = array();
+	public $cfg_keys      = array('dbhost', 'dbname', 'dbuser', 'dbpasswd', 'charset', 'persist');
+	public $link          = null;
+	public $result        = null;
+	public $db_server     = '';
+	public $selected_db   = null;
 
-	var $locked        = false;
+	public $locked        = false;
 
-	var $num_queries   = 0;
-	var $sql_starttime = 0;
-	var $sql_inittime  = 0;
-	var $sql_timetotal = 0;
-	var $sql_last_time = 0;
-	var $slow_time     = 0;
+	public $num_queries   = 0;
+	public $sql_starttime = 0;
+	public $sql_inittime  = 0;
+	public $sql_timetotal = 0;
+	public $sql_last_time = 0;
+	public $slow_time     = 0;
 
-	var $dbg           = array();
-	var $dbg_id        = 0;
-	var $dbg_enabled   = false;
-	var $cur_query     = null;
+	public $dbg           = array();
+	public $dbg_id        = 0;
+	public $dbg_enabled   = false;
+	public $cur_query     = null;
 
-	var $DBS           = array();
+	public $DBS           = array();
 
 	/**
 	* Constructor
 	*/
-	function sql_db ($cfg_values)
+	function __construct ($cfg_values)
 	{
 		global $DBS;
 

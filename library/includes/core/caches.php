@@ -4,17 +4,17 @@ if (!defined('BB_ROOT')) die(basename(__FILE__));
 
 class CACHES
 {
-	var $cfg = array();   // конфиг
-	var $obj = array();   // кеш-объекты
-	var $ref = array();   // ссылки на $obj (имя_кеша => кеш_объект)
+	public $cfg = array();   // конфиг
+	public $obj = array();   // кеш-объекты
+	public $ref = array();   // ссылки на $obj (имя_кеша => кеш_объект)
 
-	function CACHES ($cfg)
+	public function __construct ($cfg)
 	{
 		$this->cfg = $cfg['cache'];
 		$this->obj['__stub'] = new cache_common();
 	}
 
-	function get_cache_obj ($cache_name)
+	public function get_cache_obj ($cache_name)
 	{
 		if (!isset($this->ref[$cache_name]))
 		{
@@ -99,7 +99,7 @@ class CACHES
 		return $this->ref[$cache_name];
 	}
 
-	function get_db_path ($name, $cfg, $ext)
+	public function get_db_path ($name, $cfg, $ext)
 	{
 		if (!empty($cfg['shard_type']) && $cfg['shard_type'] != 'none')
 		{
@@ -111,7 +111,7 @@ class CACHES
 		}
 	}
 
-	function get_table_schema ($cfg)
+	public function get_table_schema ($cfg)
 	{
 		return "CREATE TABLE {$cfg['table_name']} ( {$cfg['columns']} )";
 	}

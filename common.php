@@ -304,7 +304,7 @@ function make_rand_str ($len = 10)
 	$str = '';
 	while (strlen($str) < $len)
 	{
-		$str .= str_shuffle(preg_replace('#[^0-9a-zA-Z]#', '', crypt(uniqid(mt_rand(), true))));
+		$str .= str_shuffle(preg_replace('#[^0-9a-zA-Z]#', '', crypt(uniqid(mt_rand(), true), 'salt')));
 	}
 	return substr($str, 0, $len);
 }

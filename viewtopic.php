@@ -131,7 +131,7 @@ if ($userdata['session_admin'] && !empty($_REQUEST['mod']))
 		$datastore->enqueue(array('viewtopic_forum_select'));
 	}
 }
-if ($t_data['topic_attachment'])
+if (isset($t_data['topic_attachment']))
 {
 	$datastore->enqueue(array(
 		'attach_extensions',
@@ -604,7 +604,7 @@ $template->assign_vars(array(
 ));
 require(INC_DIR .'torrent_show_dl_list.php');
 
-if ($t_data['topic_attachment'])
+if (isset($t_data['topic_attachment']))
 {
 	require(ATTACH_DIR .'attachment_mod.php');
 	init_display_post_attachments($t_data['topic_attachment']);
@@ -722,10 +722,24 @@ for($i = 0; $i < $total_posts; $i++)
 	{
 		if ($user_sig)
 		{
-			$user_sig = str_replace('\"', '"', substr(@preg_replace('#(\>(((?>([^><]+|(?R)))*)\<))#se', "@preg_replace(\$orig_word, \$replacement_word, '\\0')", '>' . $user_sig . '<'), 1, -1));
+            $user_sig = str_replace(
+                '\"', '"',
+                substr(
+                    preg_replace_callback('#(\>(((?>([^><]+|(?R)))*)\<))#s', function ($matches) use ($orig_word, $replacement_word) {
+                        return preg_replace($orig_word, $replacement_word, $matches[0]);
+                    }, '>' . $user_sig . '<'), 1, -1
+                )
+            );
 		}
 
-		$message = str_replace('\"', '"', substr(@preg_replace('#(\>(((?>([^><]+|(?R)))*)\<))#se', "@preg_replace(\$orig_word, \$replacement_word, '\\0')", '>' . $message . '<'), 1, -1));
+        $message = str_replace(
+            '\"', '"',
+            substr(
+                preg_replace_callback('#(\>(((?>([^><]+|(?R)))*)\<))#s', function ($matches) use ($orig_word, $replacement_word) {
+                    return preg_replace($orig_word, $replacement_word, $matches[0]);
+                }, '>' . $message . '<'), 1, -1
+            )
+        );
 	}
 
 	// Replace newlines (we use this rather than nl2br because till recently it wasn't XHTML compliant)
@@ -825,7 +839,7 @@ for($i = 0; $i < $total_posts; $i++)
 		'RG_SIG_ATTACH'      => $postrow[$i]['attach_rg_sig'],
 	));
 
-	if ($postrow[$i]['post_attachment'] && $is_auth['auth_download'] && function_exists('display_post_attachments'))
+	if (isset($postrow[$i]['post_attachment']) && $is_auth['auth_download'] && function_exists('display_post_attachments'))
 	{
 		display_post_attachments($post_id, $postrow[$i]['post_attachment']);
 	}

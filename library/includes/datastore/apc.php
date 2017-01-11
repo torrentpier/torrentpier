@@ -4,10 +4,10 @@ if (!defined('BB_ROOT')) die(basename(__FILE__));
 
 class datastore_apc extends datastore_common
 {
-	var $engine = 'APC';
-	var $prefix = null;
+	public $engine = 'APC';
+	public $prefix = null;
 
-	function datastore_apc ($prefix = null)
+	public function __construct ($prefix = null)
 	{
 		if (!$this->is_installed())
 		{
@@ -17,7 +17,7 @@ class datastore_apc extends datastore_common
 		$this->prefix = $prefix;
 	}
 
-	function store ($title, $var)
+	public function store ($title, $var)
 	{
 		$this->data[$title] = $var;
 
@@ -30,7 +30,7 @@ class datastore_apc extends datastore_common
 		return (bool) apc_store($this->prefix . $title, $var);
 	}
 
-	function clean ()
+	public function clean ()
 	{
 		foreach ($this->known_items as $title => $script_name)
 		{
@@ -44,7 +44,7 @@ class datastore_apc extends datastore_common
 		}
 	}
 
-	function _fetch_from_store ()
+	public function _fetch_from_store ()
 	{
 		if (!$items = $this->queued_items)
 		{
@@ -64,7 +64,7 @@ class datastore_apc extends datastore_common
 		}
 	}
 
-	function is_installed ()
+	public function is_installed ()
 	{
 		return function_exists('apc_fetch');
 	}

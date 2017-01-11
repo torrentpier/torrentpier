@@ -4,11 +4,11 @@ if (!defined('BB_ROOT')) die(basename(__FILE__));
 
 class cache_apc extends cache_common
 {
-	var $used   = true;
-	var $engine = 'APC';
-	var $prefix = null;
+	public $used   = true;
+	public $engine = 'APC';
+	public $prefix = null;
 
-	function cache_apc ($prefix = null)
+	public function __construct ($prefix = null)
 	{
 		if (!$this->is_installed())
 		{
@@ -18,7 +18,7 @@ class cache_apc extends cache_common
 		$this->prefix = $prefix;
 	}
 
-	function get ($name, $get_miss_key_callback = '', $ttl = 0)
+	public function get ($name, $get_miss_key_callback = '', $ttl = 0)
 	{
 		$this->cur_query = "cache->get('$name')";
 		$this->debug('start');
@@ -29,7 +29,7 @@ class cache_apc extends cache_common
 		return apc_fetch($this->prefix . $name);
 	}
 
-	function set ($name, $value, $ttl = 0)
+	public function set ($name, $value, $ttl = 0)
 	{
 		$this->cur_query = "cache->set('$name')";
 		$this->debug('start');
@@ -40,7 +40,7 @@ class cache_apc extends cache_common
 		return apc_store($this->prefix . $name, $value, $ttl);
 	}
 
-	function rm ($name = '')
+	public function rm ($name = '')
 	{
 		if ($name)
 		{
@@ -58,7 +58,7 @@ class cache_apc extends cache_common
 		}
 	}
 
-	function is_installed ()
+	public function is_installed ()
 	{
 		return function_exists('apc_fetch');
 	}

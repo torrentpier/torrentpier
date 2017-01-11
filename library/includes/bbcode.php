@@ -441,11 +441,11 @@ function add_search_words ($post_id, $post_message, $topic_title = '', $only_ret
 
 class bbcode
 {
-	var $tpl        = array(); // шаблоны для замены тегов
-	var $smilies    = null;    // смайлы
-	var $found_spam = null;    // найденные спам "слова"
-	var $del_words  = array(); // см. get_words_rate()
-	var $tidy_cfg   = array(
+	public $tpl        = array(); // шаблоны для замены тегов
+	public $smilies    = null;    // смайлы
+	public $found_spam = null;    // найденные спам "слова"
+	public $del_words  = array(); // см. get_words_rate()
+	public $tidy_cfg   = array(
 				'drop-empty-paras'  => false,
 				'fix-uri'           => false,
 				'force-output'      => true,
@@ -464,7 +464,7 @@ class bbcode
 				'show-warnings'     => false,
 				'wrap'              => 0,
 	);
-	var $block_tags = array(
+	public $block_tags = array(
 				'align',
 				'br',
 				'clear',
@@ -474,17 +474,17 @@ class bbcode
 				'quote',
 				'spoiler',
 	);
-	var $preg        = array();
-	var $str         = array();
-	var $preg_search = array();
-	var $preg_repl   = array();
-	var $str_search  = array();
-	var $str_repl    = array();
+	public $preg        = array();
+	public $str         = array();
+	public $preg_search = array();
+	public $preg_repl   = array();
+	public $str_search  = array();
+	public $str_repl    = array();
 
 	/**
 	* Constructor
 	*/
-	function bbcode ()
+	public function __construct ()
 	{
 		$this->tpl = get_bbcode_tpl();
 
@@ -494,7 +494,7 @@ class bbcode
 	/**
 	* init_replacements
 	*/
-	function init_replacements ()
+	public function init_replacements ()
 	{
 		$tpl       = $this->tpl;
 		$img_exp   = '(https?:)?//[^\s\?&;=\#\"<>]+?\.(jpg|jpeg|gif|png)([a-z0-9/?&%;][^\[\]]*)?';
@@ -556,7 +556,7 @@ class bbcode
 	* bbcode2html
 	* $text должен быть уже обработан htmlCHR($text, false, ENT_NOQUOTES);
 	*/
-	function bbcode2html ($text)
+	public function bbcode2html ($text)
 	{
 		global $bb_cfg;
 
@@ -606,7 +606,7 @@ class bbcode
 	/**
 	* Clean up
 	*/
-	static function clean_up ($text)
+	static public function clean_up ($text)
 	{
 		$text = trim($text);
 		$text = str_replace("\r", '', $text);
@@ -683,7 +683,7 @@ class bbcode
 	/**
 	* [code] callback
 	*/
-	function code_callback ($m)
+	public function code_callback ($m)
 	{
 		$code = trim($m[2]);
 		$code = str_replace('  ', '&nbsp; ', $code);
@@ -696,7 +696,7 @@ class bbcode
 	/**
 	* [url] callback
 	*/
-	function url_callback ($m)
+	public function url_callback ($m)
 	{
 		global $bb_cfg;
 
@@ -720,7 +720,7 @@ class bbcode
 	/**
 	* Escape tags inside tiltes in [quote="tilte"]
 	*/
-	function escape_tiltes_callback ($m)
+	public function escape_tiltes_callback ($m)
 	{
 		$tilte = substr($m[3], 0, 250);
 		$tilte = str_replace(array('[', ']', ':', ')', '"'), array('&#91;', '&#93;', '&#58;', '&#41;', '&#34;'), $tilte);
@@ -732,7 +732,7 @@ class bbcode
 	/**
 	* make_clickable
 	*/
-	function make_clickable ($text)
+	public function make_clickable ($text)
 	{
 		$url_regexp = "#
 			(?<![\"'=])
@@ -762,7 +762,7 @@ class bbcode
 	/**
 	* make_url_clickable_callback
 	*/
-	function make_url_clickable_callback ($m)
+	public function make_url_clickable_callback ($m)
 	{
 		global $bb_cfg;
 
@@ -785,7 +785,7 @@ class bbcode
 	/**
 	* smilies_pass
 	*/
-	function smilies_pass ($text)
+	public function smilies_pass ($text)
 	{
 		global $datastore;
 
@@ -805,7 +805,7 @@ class bbcode
 	/**
 	* new_line2html
 	*/
-	function new_line2html ($text)
+	public function new_line2html ($text)
 	{
 		$text = preg_replace('#\n{2,}#', '<span class="post-br"><br /></span>', $text);
 		$text = str_replace("\n", '<br />', $text);
@@ -815,7 +815,7 @@ class bbcode
 	/**
 	* tidy
 	*/
-	function tidy ($text)
+	public function tidy ($text)
 	{
 		$text = tidy_repair_string($text, $this->tidy_cfg, 'utf8');
 		return $text;
@@ -842,14 +842,14 @@ function bbcode2html ($text)
 
 class words_rate
 {
-	var $dbg_mode      = false;
-	var $words_rate    = 0;
-	var $deleted_words = array();
-	var $del_text_hl   = '';
-	var $words_del_exp = '';
-	var $words_cnt_exp = '#[a-zA-Zа-яА-ЯёЁ]{4,}#';
+	public $dbg_mode      = false;
+	public $words_rate    = 0;
+	public $deleted_words = array();
+	public $del_text_hl   = '';
+	public $words_del_exp = '';
+	public $words_cnt_exp = '#[a-zA-Zа-яА-ЯёЁ]{4,}#';
 
-	function words_rate ()
+	public function __construct ()
 	{
 		// слова начинающиеся на..
 		$del_list = file_get_contents(BB_ROOT .'/library/words_rate_del_list.txt');
@@ -863,7 +863,7 @@ class words_rate
 	/**
 	* возвращает "показатель полезности" сообщения используемый для автоудаления коротких сообщений типа "спасибо", "круто" и т.д.
 	*/
-	function get_words_rate ($text)
+	public function get_words_rate ($text)
 	{
 		$this->words_rate    = 127;     // максимальное значение по умолчанию
 		$this->deleted_words = array();

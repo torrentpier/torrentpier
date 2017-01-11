@@ -4,11 +4,11 @@ if (!defined('BB_ROOT')) die(basename(__FILE__));
 
 class cache_xcache extends cache_common
 {
-	var $used   = true;
-	var $engine = 'XCache';
-	var $prefix = null;
+	public $used   = true;
+	public $engine = 'XCache';
+	public $prefix = null;
 
-	function cache_xcache ($prefix = null)
+	public function __construct ($prefix = null)
 	{
 		if (!$this->is_installed())
 		{
@@ -18,7 +18,7 @@ class cache_xcache extends cache_common
 		$this->prefix = $prefix;
 	}
 
-	function get ($name, $get_miss_key_callback = '', $ttl = 0)
+	public function get ($name, $get_miss_key_callback = '', $ttl = 0)
 	{
 		$this->cur_query = "cache->get('$name')";
 		$this->debug('start');
@@ -29,7 +29,7 @@ class cache_xcache extends cache_common
 		return xcache_get($this->prefix . $name);
 	}
 
-	function set ($name, $value, $ttl = 0)
+	public function set ($name, $value, $ttl = 0)
 	{
 		$this->cur_query = "cache->set('$name')";
 		$this->debug('start');
@@ -40,7 +40,7 @@ class cache_xcache extends cache_common
 		return xcache_set($this->prefix . $name, $value, $ttl);
 	}
 
-	function rm ($name = '')
+	public function rm ($name = '')
 	{
 		if ($name)
 		{
@@ -60,7 +60,7 @@ class cache_xcache extends cache_common
 		}
 	}
 
-	function is_installed ()
+	public function is_installed ()
 	{
 		return function_exists('xcache_get');
 	}

@@ -588,7 +588,7 @@ function get_var($var_name, $default, $multibyte = false)
 */
 function attach_mod_sql_escape($text)
 {
-	if (function_exists('mysql_real_escape_string'))
+	if (function_exists('mysqli_real_escape_string'))
 	{
 		return DB()->escape_string($text);
 	}

@@ -10,7 +10,7 @@ class user_common
 	/**
 	*  Config
 	*/
-	var $cfg = array(
+	public $cfg = array(
 		'req_login'         => false,    // requires user to be logged in
 		'req_session_admin' => false,    // requires active admin session (for moderation or admin actions)
 	);
@@ -18,7 +18,7 @@ class user_common
 	/**
 	*  PHP-JS exchangeable options (JSON'ized as {USER_OPTIONS_JS} in TPL)
 	*/
-	var $opt_js = array(
+	public $opt_js = array(
 		'only_new' => 0,     // show ony new posts or topics
 		'h_av'     => 0,     // hide avatar
 		'h_rnk_i'  => 0,     // hide rank images
@@ -36,7 +36,7 @@ class user_common
 	/**
 	 *  Defaults options for guests
 	 */
-	var $opt_js_guest = array(
+	public $opt_js_guest = array(
 		'h_av'     => 1,     // hide avatar
 		'h_rnk_i'  => 1,     // hide rank images
 		'h_smile'  => 1,     // hide smilies
@@ -46,7 +46,7 @@ class user_common
 	/**
 	*  Sessiondata
 	*/
-	var $sessiondata = array(
+	public $sessiondata = array(
 		'uk'  => null,
 		'uid' => null,
 		'sid' => '',
@@ -55,22 +55,22 @@ class user_common
 	/**
 	*  Old $userdata
 	*/
-	var $data = array();
+	public $data = array();
 
 	/**
 	*  Shortcuts
 	*/
-	var $id = null;
+	public $id = null;
 
 	/**
 	*  Misc
 	*/
-	var $show_ads = false;
+	public $show_ads = false;
 
 	/**
 	*  Constructor
 	*/
-	function user_common ()
+	public function __construct ()
 	{
 		$this->get_sessiondata();
 	}
@@ -78,7 +78,7 @@ class user_common
 	/**
 	*  Start session (restore existent session or create new)
 	*/
-	function session_start ($cfg = array())
+	public function session_start ($cfg = array())
 	{
 		global $bb_cfg;
 
@@ -214,7 +214,7 @@ class user_common
 	/**
 	*  Create new session for the given user
 	*/
-	function session_create ($userdata, $auto_created = false)
+	public function session_create ($userdata, $auto_created = false)
 	{
 		global $bb_cfg;
 
@@ -333,7 +333,7 @@ class user_common
 	/**
 	*  Initialize sessiondata stored in cookies
 	*/
-	function session_end ($update_lastvisit = false, $set_cookie = true)
+	public function session_end ($update_lastvisit = false, $set_cookie = true)
 	{
 		DB()->query("
 			DELETE FROM ". BB_SESSIONS ."
@@ -375,7 +375,7 @@ class user_common
 	/**
 	*  Login
 	*/
-	function login ($args, $mod_admin_login = false)
+	public function login ($args, $mod_admin_login = false)
 	{
 		$username = !empty($args['login_username']) ? clean_username($args['login_username']) : '';
 		$password = !empty($args['login_password']) ? $args['login_password'] : '';
@@ -440,7 +440,7 @@ class user_common
 	/**
 	*  Initialize sessiondata stored in cookies
 	*/
-	function get_sessiondata ()
+	public function get_sessiondata ()
 	{
 		$sd_resv = !empty($_COOKIE[COOKIE_DATA]) ? @unserialize($_COOKIE[COOKIE_DATA]) : array();
 
@@ -464,7 +464,7 @@ class user_common
 	/**
 	*  Store sessiondata in cookies
 	*/
-	function set_session_cookies ($user_id)
+	public function set_session_cookies ($user_id)
 	{
 		global $bb_cfg;
 
@@ -506,7 +506,7 @@ class user_common
 	/**
 	*  Verify autologin_id
 	*/
-	function verify_autologin_id ($userdata, $expire_check = false, $create_new = true)
+	public function verify_autologin_id ($userdata, $expire_check = false, $create_new = true)
 	{
 		global $bb_cfg;
 
@@ -533,7 +533,7 @@ class user_common
 	/**
 	*  Create autologin_id
 	*/
-	function create_autologin_id ($userdata, $create_new = true)
+	public function create_autologin_id ($userdata, $create_new = true)
 	{
 		$autologin_id = ($create_new) ? make_rand_str(LOGIN_KEY_LENGTH) : '';
 
@@ -550,7 +550,7 @@ class user_common
 	/**
 	 *  Set shortcuts
 	 */
-	function set_shortcuts ()
+	public function set_shortcuts ()
 	{
 		$this->id            =& $this->data['user_id'];
 		$this->active        =& $this->data['user_active'];
@@ -566,7 +566,7 @@ class user_common
 	/**
 	*  Initialise user settings
 	*/
-	function init_userprefs ()
+	public function init_userprefs ()
 	{
 		global $bb_cfg, $theme, $lang, $DeltaTime;
 
@@ -613,7 +613,7 @@ class user_common
 	/**
 	*  Mark read
 	*/
-	function mark_read ($type)
+	public function mark_read ($type)
 	{
 		if ($type === 'all_forums')
 		{
@@ -645,7 +645,7 @@ class user_common
 	/**
 	*  Load misc options
 	*/
-	function load_opt_js ()
+	public function load_opt_js ()
 	{
 		if (IS_GUEST)
 		{
@@ -665,7 +665,7 @@ class user_common
 	/**
 	*  Get not auth forums
 	*/
-	function get_not_auth_forums ($auth_type)
+	public function get_not_auth_forums ($auth_type)
 	{
 		global $datastore;
 
@@ -725,7 +725,7 @@ class user_common
 	/**
 	*  Get excluded forums
 	*/
-	function get_excluded_forums ($auth_type, $return_as = 'csv')
+	public function get_excluded_forums ($auth_type, $return_as = 'csv')
 	{
 		$excluded = array();
 
@@ -764,7 +764,7 @@ class user_common
 	/**
 	*  Enqueue ads
 	*/
-	function enqueue_ads ()
+	public function enqueue_ads ()
 	{
 		global $datastore, $bb_cfg;
 

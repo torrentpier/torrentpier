@@ -379,51 +379,51 @@ function sphFixUint ( $value )
 /// sphinx searchd client class
 class SphinxClient extends cache_common
 {
-	var $_host;			///< searchd host (default is "localhost")
-	var $_port;			///< searchd port (default is 9312)
-	var $_offset;		///< how many records to seek from result-set start (default is 0)
-	var $_limit;		///< how many records to return from result-set starting at offset (default is 20)
-	var $_mode;			///< query matching mode (default is SPH_MATCH_ALL)
-	var $_weights;		///< per-field weights (default is 1 for all fields)
-	var $_sort;			///< match sorting mode (default is SPH_SORT_RELEVANCE)
-	var $_sortby;		///< attribute to sort by (defualt is "")
-	var $_min_id;		///< min ID to match (default is 0, which means no limit)
-	var $_max_id;		///< max ID to match (default is 0, which means no limit)
-	var $_filters;		///< search filters
-	var $_groupby;		///< group-by attribute name
-	var $_groupfunc;	///< group-by function (to pre-process group-by attribute value with)
-	var $_groupsort;	///< group-by sorting clause (to sort groups in result set with)
-	var $_groupdistinct;///< group-by count-distinct attribute
-	var $_maxmatches;	///< max matches to retrieve
-	var $_cutoff;		///< cutoff to stop searching at (default is 0)
-	var $_retrycount;	///< distributed retries count
-	var $_retrydelay;	///< distributed retries delay
-	var $_anchor;		///< geographical anchor point
-	var $_indexweights;	///< per-index weights
-	var $_ranker;		///< ranking mode (default is SPH_RANK_PROXIMITY_BM25)
-	var $_maxquerytime;	///< max query time, milliseconds (default is 0, do not limit)
-	var $_fieldweights;	///< per-field-name weights
-	var $_overrides;	///< per-query attribute values overrides
-	var $_select;		///< select-list (attributes or expressions, with optional aliases)
+	public $_host;			///< searchd host (default is "localhost")
+	public $_port;			///< searchd port (default is 9312)
+	public $_offset;		///< how many records to seek from result-set start (default is 0)
+	public $_limit;		///< how many records to return from result-set starting at offset (default is 20)
+	public $_mode;			///< query matching mode (default is SPH_MATCH_ALL)
+	public $_weights;		///< per-field weights (default is 1 for all fields)
+	public $_sort;			///< match sorting mode (default is SPH_SORT_RELEVANCE)
+	public $_sortby;		///< attribute to sort by (defualt is "")
+	public $_min_id;		///< min ID to match (default is 0, which means no limit)
+	public $_max_id;		///< max ID to match (default is 0, which means no limit)
+	public $_filters;		///< search filters
+	public $_groupby;		///< group-by attribute name
+	public $_groupfunc;	///< group-by function (to pre-process group-by attribute value with)
+	public $_groupsort;	///< group-by sorting clause (to sort groups in result set with)
+	public $_groupdistinct;///< group-by count-distinct attribute
+	public $_maxmatches;	///< max matches to retrieve
+	public $_cutoff;		///< cutoff to stop searching at (default is 0)
+	public $_retrycount;	///< distributed retries count
+	public $_retrydelay;	///< distributed retries delay
+	public $_anchor;		///< geographical anchor point
+	public $_indexweights;	///< per-index weights
+	public $_ranker;		///< ranking mode (default is SPH_RANK_PROXIMITY_BM25)
+	public $_maxquerytime;	///< max query time, milliseconds (default is 0, do not limit)
+	public $_fieldweights;	///< per-field-name weights
+	public $_overrides;	///< per-query attribute values overrides
+	public $_select;		///< select-list (attributes or expressions, with optional aliases)
 
-	var $_error;		///< last error message
-	var $_warning;		///< last warning message
-	var $_connerror;		///< connection error vs remote error flag
+	public $_error;		///< last error message
+	public $_warning;		///< last warning message
+	public $_connerror;		///< connection error vs remote error flag
 
-	var $_reqs;			///< requests array for multi-query
-	var $_mbenc;		///< stored mbstring encoding
-	var $_arrayresult;	///< whether $result["matches"] should be a hash or an array
-	var $_timeout;		///< connect timeout
+	public $_reqs;			///< requests array for multi-query
+	public $_mbenc;		///< stored mbstring encoding
+	public $_arrayresult;	///< whether $result["matches"] should be a hash or an array
+	public $_timeout;		///< connect timeout
 
-	var $bb_queries = array();
-	var $bb_indexes = array();
+	public $bb_queries = array();
+	public $bb_indexes = array();
 
 	/////////////////////////////////////////////////////////////////////////////
 	// common stuff
 	/////////////////////////////////////////////////////////////////////////////
 
 	/// create a new client object and fill defaults
-	function SphinxClient ()
+	public function __construct ()
 	{
 		$this->dbg_enabled = sql_dbg_enabled();
 
@@ -469,32 +469,32 @@ class SphinxClient extends cache_common
 		$this->_timeout		= 0;
 	}
 
-	function __destruct()
+	public function __destruct()
 	{
 		if ( $this->_socket !== false )
 			fclose ( $this->_socket );
 	}
 
 	/// get last error message (string)
-	function GetLastError ()
+	public function GetLastError ()
 	{
 		return $this->_error;
 	}
 
 	/// get last warning message (string)
-	function GetLastWarning ()
+	public function GetLastWarning ()
 	{
 		return $this->_warning;
 	}
 
 	/// get last error flag (to tell network connection errors from searchd errors or broken responses)
-	function IsConnectError()
+	public function IsConnectError()
 	{
 		return $this->_connerror;
 	}
 
 	/// set searchd host name (string) and port (integer)
-	function SetServer ( $host, $port = 0 )
+	public function SetServer ( $host, $port = 0 )
 	{
 		assert ( is_string($host) );
 		if ( $host[0] == '/')
@@ -516,14 +516,14 @@ class SphinxClient extends cache_common
 	}
 
 	/// set server connection timeout (0 to remove)
-	function SetConnectTimeout ( $timeout )
+	public function SetConnectTimeout ( $timeout )
 	{
 		assert ( is_numeric($timeout) );
 		$this->_timeout = $timeout;
 	}
 
 
-	function _Send ( $handle, $data, $length )
+	public function _Send ( $handle, $data, $length )
 	{
 		if ( feof($handle) || fwrite ( $handle, $data, $length ) !== $length )
 		{
@@ -537,7 +537,7 @@ class SphinxClient extends cache_common
 	/////////////////////////////////////////////////////////////////////////////
 
 	/// enter mbstring workaround mode
-	function _MBPush ()
+	public function _MBPush ()
 	{
 		$this->_mbenc = "";
 		if ( ini_get ( "mbstring.func_overload" ) & 2 )
@@ -548,14 +548,14 @@ class SphinxClient extends cache_common
     }
 
 	/// leave mbstring workaround mode
-	function _MBPop ()
+	public function _MBPop ()
 	{
 		if ( $this->_mbenc )
 			mb_internal_encoding ( $this->_mbenc );
 	}
 
 	/// connect to searchd server
-	function _Connect ()
+	public function _Connect ()
 	{
 		$this->cur_query = "connect to: {$this->_host}";
 		$this->debug('start');
@@ -630,7 +630,7 @@ class SphinxClient extends cache_common
 	}
 
 	/// get and check response packet from searchd server
-	function _GetResponse ( $fp, $client_ver )
+	public function _GetResponse ( $fp, $client_ver )
 	{
 		$response = "";
 		$len = 0;
@@ -702,7 +702,7 @@ class SphinxClient extends cache_common
 
 	/// set offset and count into result set,
 	/// and optionally set max-matches and cutoff limits
-	function SetLimits ( $offset, $limit, $max=0, $cutoff=0 )
+	public function SetLimits ( $offset, $limit, $max=0, $cutoff=0 )
 	{
 		assert ( is_int($offset) );
 		assert ( is_int($limit) );
@@ -719,7 +719,7 @@ class SphinxClient extends cache_common
 
 	/// set maximum query time, in milliseconds, per-index
 	/// integer, 0 means "do not limit"
-	function SetMaxQueryTime ( $max )
+	public function SetMaxQueryTime ( $max )
 	{
 		assert ( is_int($max) );
 		assert ( $max>=0 );
@@ -727,7 +727,7 @@ class SphinxClient extends cache_common
 	}
 
 	/// set matching mode
-	function SetMatchMode ( $mode )
+	public function SetMatchMode ( $mode )
 	{
 		assert ( $mode==SPH_MATCH_ALL
 			|| $mode==SPH_MATCH_ANY
@@ -740,7 +740,7 @@ class SphinxClient extends cache_common
 	}
 
 	/// set ranking mode
-	function SetRankingMode ( $ranker )
+	public function SetRankingMode ( $ranker )
 	{
 		assert ( $ranker==SPH_RANK_PROXIMITY_BM25
 			|| $ranker==SPH_RANK_BM25
@@ -751,7 +751,7 @@ class SphinxClient extends cache_common
 	}
 
 	/// set matches sorting mode
-	function SetSortMode ( $mode, $sortby="" )
+	public function SetSortMode ( $mode, $sortby="" )
 	{
 		assert (
 			$mode==SPH_SORT_RELEVANCE ||
@@ -769,7 +769,7 @@ class SphinxClient extends cache_common
 
 	/// bind per-field weights by order
 	/// DEPRECATED; use SetFieldWeights() instead
-	function SetWeights ( $weights )
+	public function SetWeights ( $weights )
 	{
 		assert ( is_array($weights) );
 		foreach ( $weights as $weight )
@@ -779,7 +779,7 @@ class SphinxClient extends cache_common
 	}
 
 	/// bind per-field weights by name
-	function SetFieldWeights ( $weights )
+	public function SetFieldWeights ( $weights )
 	{
 		assert ( is_array($weights) );
 		foreach ( $weights as $name=>$weight )
@@ -791,7 +791,7 @@ class SphinxClient extends cache_common
 	}
 
 	/// bind per-index weights by name
-	function SetIndexWeights ( $weights )
+	public function SetIndexWeights ( $weights )
 	{
 		assert ( is_array($weights) );
 		foreach ( $weights as $index=>$weight )
@@ -804,7 +804,7 @@ class SphinxClient extends cache_common
 
 	/// set IDs range to match
 	/// only match records if document ID is beetwen $min and $max (inclusive)
-	function SetIDRange ( $min, $max )
+	public function SetIDRange ( $min, $max )
 	{
 		assert ( is_numeric($min) );
 		assert ( is_numeric($max) );
@@ -815,7 +815,7 @@ class SphinxClient extends cache_common
 
 	/// set values set filter
 	/// only match records where $attribute value is in given set
-	function SetFilter ( $attribute, $values, $exclude=false )
+	public function SetFilter ( $attribute, $values, $exclude=false )
 	{
 		assert ( is_string($attribute) );
 		assert ( is_array($values) );
@@ -832,7 +832,7 @@ class SphinxClient extends cache_common
 
 	/// set range filter
 	/// only match records if $attribute value is beetwen $min and $max (inclusive)
-	function SetFilterRange ( $attribute, $min, $max, $exclude=false )
+	public function SetFilterRange ( $attribute, $min, $max, $exclude=false )
 	{
 		assert ( is_string($attribute) );
 		assert ( is_numeric($min) );
@@ -844,7 +844,7 @@ class SphinxClient extends cache_common
 
 	/// set float range filter
 	/// only match records if $attribute value is beetwen $min and $max (inclusive)
-	function SetFilterFloatRange ( $attribute, $min, $max, $exclude=false )
+	public function SetFilterFloatRange ( $attribute, $min, $max, $exclude=false )
 	{
 		assert ( is_string($attribute) );
 		assert ( is_float($min) );
@@ -857,7 +857,7 @@ class SphinxClient extends cache_common
 	/// setup anchor point for geosphere distance calculations
 	/// required to use @geodist in filters and sorting
 	/// latitude and longitude must be in radians
-	function SetGeoAnchor ( $attrlat, $attrlong, $lat, $long )
+	public function SetGeoAnchor ( $attrlat, $attrlong, $lat, $long )
 	{
 		assert ( is_string($attrlat) );
 		assert ( is_string($attrlong) );
@@ -868,7 +868,7 @@ class SphinxClient extends cache_common
 	}
 
 	/// set grouping attribute and function
-	function SetGroupBy ( $attribute, $func, $groupsort="@group desc" )
+	public function SetGroupBy ( $attribute, $func, $groupsort="@group desc" )
 	{
 		assert ( is_string($attribute) );
 		assert ( is_string($groupsort) );
@@ -885,14 +885,14 @@ class SphinxClient extends cache_common
 	}
 
 	/// set count-distinct attribute for group-by queries
-	function SetGroupDistinct ( $attribute )
+	public function SetGroupDistinct ( $attribute )
 	{
 		assert ( is_string($attribute) );
 		$this->_groupdistinct = $attribute;
 	}
 
 	/// set distributed retries count and delay
-	function SetRetries ( $count, $delay=0 )
+	public function SetRetries ( $count, $delay=0 )
 	{
 		assert ( is_int($count) && $count>=0 );
 		assert ( is_int($delay) && $delay>=0 );
@@ -902,7 +902,7 @@ class SphinxClient extends cache_common
 
 	/// set result set format (hash or array; hash by default)
 	/// PHP specific; needed for group-by-MVA result sets that may contain duplicate IDs
-	function SetArrayResult ( $arrayresult )
+	public function SetArrayResult ( $arrayresult )
 	{
 		assert ( is_bool($arrayresult) );
 		$this->_arrayresult = $arrayresult;
@@ -911,7 +911,7 @@ class SphinxClient extends cache_common
 	/// set attribute values override
 	/// there can be only one override per attribute
 	/// $values must be a hash that maps document IDs to attribute values
-	function SetOverride ( $attrname, $attrtype, $values )
+	public function SetOverride ( $attrname, $attrtype, $values )
 	{
 		assert ( is_string ( $attrname ) );
 		assert ( in_array ( $attrtype, array ( SPH_ATTR_INTEGER, SPH_ATTR_TIMESTAMP, SPH_ATTR_BOOL, SPH_ATTR_FLOAT, SPH_ATTR_BIGINT ) ) );
@@ -921,7 +921,7 @@ class SphinxClient extends cache_common
 	}
 
 	/// set select-list (attributes or expressions), SQL-like syntax
-	function SetSelect ( $select )
+	public function SetSelect ( $select )
 	{
 		assert ( is_string ( $select ) );
 		$this->_select = $select;
@@ -930,14 +930,14 @@ class SphinxClient extends cache_common
 	//////////////////////////////////////////////////////////////////////////////
 
 	/// clear all filters (for multi-queries)
-	function ResetFilters ()
+	public function ResetFilters ()
 	{
 		$this->_filters = array();
 		$this->_anchor = array();
 	}
 
 	/// clear groupby settings (for multi-queries)
-	function ResetGroupBy ()
+	public function ResetGroupBy ()
 	{
 		$this->_groupby		= "";
 		$this->_groupfunc	= SPH_GROUPBY_DAY;
@@ -946,7 +946,7 @@ class SphinxClient extends cache_common
 	}
 
 	/// clear all attribute value overrides (for multi-queries)
-	function ResetOverrides ()
+	public function ResetOverrides ()
     {
     	$this->_overrides = array ();
     }
@@ -955,7 +955,7 @@ class SphinxClient extends cache_common
 
 	/// connect to searchd server, run given search query through given indexes,
 	/// and return the search results
-	function Query ( $query, $index="*", $comment="" )
+	public function Query ( $query, $index="*", $comment="" )
 	{
 		assert ( empty($this->_reqs) );
 
@@ -977,7 +977,7 @@ class SphinxClient extends cache_common
 	}
 
 	/// helper to pack floats in network byte order
-	function _PackFloat ( $f )
+	public function _PackFloat ( $f )
 	{
 		$t1 = pack ( "f", $f ); // machine order
 		list(,$t2) = unpack ( "L*", $t1 ); // int in machine order
@@ -986,7 +986,7 @@ class SphinxClient extends cache_common
 
 	/// add query to multi-query batch
 	/// returns index into results array from RunQueries() call
-	function AddQuery ( $query, $index="*", $comment="" )
+	public function AddQuery ( $query, $index="*", $comment="" )
 	{
 		// mbstring workaround
 		$this->_MBPush ();
@@ -1101,7 +1101,7 @@ class SphinxClient extends cache_common
 	}
 
 	/// connect to searchd, run queries batch, and return an array of result sets
-	function RunQueries ()
+	public function RunQueries ()
 	{
 		if ( empty($this->_reqs) )
 		{
@@ -1146,7 +1146,7 @@ class SphinxClient extends cache_common
 	}
 
 	/// parse and return search query (or queries) response
-	function _ParseSearchResponse ( $response, $nreqs )
+	public function _ParseSearchResponse ( $response, $nreqs )
 	{
 		$p = 0; // current position
 		$max = strlen($response); // max position for checks, to protect against broken responses
@@ -1309,7 +1309,7 @@ class SphinxClient extends cache_common
 	/// connect to searchd server, and generate exceprts (snippets)
 	/// of given documents for given query. returns false on failure,
 	/// an array of snippets on success
-	function BuildExcerpts ( $docs, $index, $words, $opts=array() )
+	public function BuildExcerpts ( $docs, $index, $words, $opts=array() )
 	{
 		assert ( is_array($docs) );
 		assert ( is_string($index) );
@@ -1414,7 +1414,7 @@ class SphinxClient extends cache_common
 	/// connect to searchd server, and generate keyword list for a given query
 	/// returns false on failure,
 	/// an array of words on success
-	function BuildKeywords ( $query, $index, $hits )
+	public function BuildKeywords ( $query, $index, $hits )
 	{
 		assert ( is_string($query) );
 		assert ( is_string($index) );
@@ -1491,7 +1491,7 @@ class SphinxClient extends cache_common
 		return $res;
 	}
 
-	function EscapeString ( $string )
+	public function EscapeString ( $string )
 	{
 		$from = array ( '\\', '(',')','|','-','!','@','~','"','&', '/', '^', '$', '=' );
 		$to   = array ( '\\\\', '\(','\)','\|','\-','\!','\@','\~','\"', '\&', '\/', '\^', '\$', '\=' );
@@ -1505,7 +1505,7 @@ class SphinxClient extends cache_common
 
 	/// batch update given attributes in given rows in given indexes
 	/// returns amount of updated documents (0 or more) on success, or -1 on failure
-	function UpdateAttributes ( $index, $attrs, $values, $mva=false )
+	public function UpdateAttributes ( $index, $attrs, $values, $mva=false )
 	{
 		// verify everything
 		assert ( is_string($index) );
@@ -1577,7 +1577,7 @@ class SphinxClient extends cache_common
 	// persistent connections
 	/////////////////////////////////////////////////////////////////////////////
 
-	function Open()
+	public function Open()
 	{
 		if ( $this->_socket !== false )
 		{
@@ -1596,7 +1596,7 @@ class SphinxClient extends cache_common
 		return true;
 	}
 
-	function Close()
+	public function Close()
 	{
 		if ( $this->_socket === false )
 		{
@@ -1614,7 +1614,7 @@ class SphinxClient extends cache_common
 	// status
 	//////////////////////////////////////////////////////////////////////////
 
-	function Status ()
+	public function Status ()
 	{
 		$this->_MBPush ();
 		if (!( $fp = $this->_Connect() ))

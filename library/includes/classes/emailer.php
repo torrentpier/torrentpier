@@ -4,14 +4,14 @@ if (!defined('BB_ROOT')) die(basename(__FILE__));
 
 class emailer
 {
-	var $msg, $subject, $extra_headers;
-	var $addresses, $reply_to, $from;
-	var $use_smtp;
+	public $msg, $subject, $extra_headers;
+	public $addresses, $reply_to, $from;
+	public $use_smtp;
 
-	var $tpl_msg = array();
-	var $vars    = array();
+	public $tpl_msg = array();
+	public $vars    = array();
 
-	function emailer ($use_smtp/*$tpl_name, $sbj, $to_address*/)
+	public function __construct ($use_smtp/*$tpl_name, $sbj, $to_address*/)
 	{
 		global $bb_cfg;
 
@@ -25,7 +25,7 @@ class emailer
 		$this->email_address($to_address);*/
 	}
 
-	function set_default_vars ()
+	public function set_default_vars ()
 	{
 		global $bb_cfg;
 
@@ -37,7 +37,7 @@ class emailer
 	}
 
 	// Resets all the data (address, template file, etc etc to default
-	function reset ()
+	public function reset ()
 	{
 		$this->addresses = array();
 		$this->msg = $this->extra_headers = '';
@@ -45,44 +45,44 @@ class emailer
 	}
 
 	// Sets an email address to send to
-	function email_address ($address)
+	public function email_address ($address)
 	{
 		$this->addresses['to'] = trim($address);
 	}
 
-	function cc ($address)
+	public function cc ($address)
 	{
 		$this->addresses['cc'][] = trim($address);
 	}
 
-	function bcc ($address)
+	public function bcc ($address)
 	{
 		$this->addresses['bcc'][] = trim($address);
 	}
 
-	function replyto ($address)
+	public function replyto ($address)
 	{
 		$this->reply_to = trim($address);
 	}
 
-	function from ($address)
+	public function from ($address)
 	{
 		$this->from = trim($address);
 	}
 
 	// set up subject for mail
-	function set_subject ($subject = '')
+	public function set_subject ($subject = '')
 	{
 		$this->subject = trim(preg_replace('#[\n\r]+#s', '', $subject));
 	}
 
 	// set up extra mail headers
-	function extra_headers ($headers)
+	public function extra_headers ($headers)
 	{
 		$this->extra_headers .= trim($headers) . "\n";
 	}
 
-	function use_template ($template_file, $template_lang = '')
+	public function use_template ($template_file, $template_lang = '')
 	{
 		global $bb_cfg;
 
@@ -125,13 +125,13 @@ class emailer
 	}
 
 	// assign variables
-	function assign_vars ($vars)
+	public function assign_vars ($vars)
 	{
 		$this->vars = array_merge($this->vars, $vars);
 	}
 
 	// Send the mail out to the recipients set previously in var $this->address
-	function send ($email_format = 'text')
+	public function send ($email_format = 'text')
 	{
 		global $bb_cfg, $userdata;
 
@@ -225,7 +225,7 @@ class emailer
 		return true;
 	}
 
-	function encode ($str)
+	public function encode ($str)
 	{
 		if ($this->encoding == '')
 		{

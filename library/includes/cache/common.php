@@ -4,11 +4,11 @@ if (!defined('BB_ROOT')) die(basename(__FILE__));
 
 class cache_common
 {
-	var $used = false;
+	public $used = false;
 	/**
 	 * Returns value of variable
 	 */
-	function get ($name, $get_miss_key_callback = '', $ttl = 604800)
+	public function get ($name, $get_miss_key_callback = '', $ttl = 604800)
 	{
 		if ($get_miss_key_callback) return $get_miss_key_callback($name);
 		return is_array($name) ? array() : false;
@@ -16,30 +16,30 @@ class cache_common
 	/**
 	 * Store value of variable
 	 */
-	function set ($name, $value, $ttl = 604800)
+	public function set ($name, $value, $ttl = 604800)
 	{
 		return false;
 	}
 	/**
 	 * Remove variable
 	 */
-	function rm ($name = '')
+	public function rm ($name = '')
 	{
 		return false;
 	}
 
-	var $num_queries    = 0;
-	var $sql_starttime  = 0;
-	var $sql_inittime   = 0;
-	var $sql_timetotal  = 0;
-	var $cur_query_time = 0;
+	public $num_queries    = 0;
+	public $sql_starttime  = 0;
+	public $sql_inittime   = 0;
+	public $sql_timetotal  = 0;
+	public $cur_query_time = 0;
 
-	var $dbg            = array();
-	var $dbg_id         = 0;
-	var $dbg_enabled    = false;
-	var $cur_query      = null;
+	public $dbg            = array();
+	public $dbg_id         = 0;
+	public $dbg_enabled    = false;
+	public $cur_query      = null;
 
-	function debug ($mode, $cur_query = null)
+	public function debug ($mode, $cur_query = null)
 	{
 		if (!$this->dbg_enabled) return;
 
@@ -65,7 +65,7 @@ class cache_common
 		}
 	}
 
-	function debug_find_source ($mode = '')
+	public function debug_find_source ($mode = '')
 	{
 		foreach (debug_backtrace() as $trace)
 		{
