@@ -53,7 +53,7 @@ $last_session_id = (int)$last_session_data['rebuild_session_id'];
 $max_post_id = get_latest_post_id();
 $start_time = TIMENOW;
 
-$mode = (string)$_REQUEST['mode'];
+$mode = isset($_REQUEST['mode']) ? (string)$_REQUEST['mode'] : '';
 
 // check if the user has choosen to stop processing
 if (isset($_REQUEST['cancel_button'])) {
@@ -70,7 +70,7 @@ if (isset($_REQUEST['cancel_button'])) {
 }
 
 // from which post to start processing
-$start = abs(intval($_REQUEST['start']));
+$start = isset($_REQUEST['start']) ? abs(intval($_REQUEST['start'])) : 0;
 
 // get the total number of posts in the db
 $total_posts = get_total_posts();
@@ -86,7 +86,7 @@ $session_posts_processed = ($mode == 'refresh') ? get_processed_posts('session')
 $total_posts_processing = $total_posts - $total_posts_processed;
 
 // how many posts to process in this session
-if ($session_posts_processing = intval($_REQUEST['session_posts_processing'])) {
+if (isset($_REQUEST['session_posts_processing']) && $session_posts_processing = intval($_REQUEST['session_posts_processing'])) {
     if ($mode == 'submit') {
         // check if we passed over total_posts just after submitting
         if ($session_posts_processing + $total_posts_processed > $total_posts) {

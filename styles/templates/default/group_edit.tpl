@@ -7,7 +7,7 @@ function manage_group(mode, value) {
 		value    : value
 	});
 	ajax.callback.manage_group = function(data) {
-		if (data.act == 0) $('div#avatar').hide(100);
+		if (data.act === 0) $('div#avatar').hide(100);
 		console.log(data);
 	}
 }

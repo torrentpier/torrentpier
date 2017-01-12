@@ -41,6 +41,7 @@ if (isset($_POST['mode']) || isset($_GET['mode'])) {
 }
 
 $delimeter = '=+:';
+$s_hidden_fields = '';
 
 // Read a listing of uploaded smilies for use in the add or edit smliey code
 $dir = opendir(BB_ROOT . $di->config->get('smilies_path'));

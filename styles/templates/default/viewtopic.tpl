@@ -17,7 +17,7 @@
 <script type="text/javascript">
 ajax.open_edit = false;
 function edit_post(post_id, type, text) {
-	if(ajax.open_edit && ajax.open_edit != post_id) {
+	if(ajax.open_edit && ajax.open_edit !== post_id) {
 		alert('{L_AJAX_EDIT_OPEN}');
 	} else{
 		if(ajax.open_edit && !text){
@@ -49,7 +49,7 @@ ajax.callback.posts = function(data) {
 	}
 	if(data.redirect) document.location.href = data.redirect;
 	if(data.hide) {
-		if(ajax.open_edit == data.post_id) ajax.open_edit = false;
+		if(ajax.open_edit === data.post_id) ajax.open_edit = false;
 		$('tbody#post_'+ data.post_id).hide();
 	}
 	if(data.quote) $('textarea#message').attr('value', $('textarea#message').val() + data.message +' ').focus();
@@ -71,7 +71,7 @@ function set_hid_chbox (id)
 	$('#del_split_row').show();
 
 	// set checkbox value
-	$('#cb_'+id).val( $('#cb_'+id).val() == id ? 0 : id );
+	$('#cb_'+id).val( $('#cb_'+id).val() === id ? 0 : id );
 	// highlight selected post
 	$('#post_'+id+' td').toggleClass('hl-selected-post');
 
@@ -89,14 +89,14 @@ function set_hid_chbox (id)
 var $tt_td = $('.maintitle');
 function edit_topic_title (mode)
 {
-	if (mode == 'edit') {
+	if (mode === 'edit') {
 		var tt_text = $tt_td.find('.tt-text').text();
 
 		ajax.tte_orig_html = $tt_td.html();
 		$tt_td.html( $('#tt-edit-tpl').html() );
 		$('.tt-edit-input', $tt_td).val(tt_text).focus();
 	}
-	else if (mode == 'save') {
+	else if (mode === 'save') {
 		var topic_title = $('.tt-edit-input', $tt_td).val();
 
 		ajax.edit_topic_title(topic_title);
@@ -126,7 +126,7 @@ ajax.post_mod_comment = function(post_id, mc_text, mc_type) {
 	});
 };
 ajax.callback.post_mod_comment = function(data) {
-	if (data.mc_type == 0) {
+	if (data.mc_type === 0) {
 		$('#mc_text_'+ data.post_id).attr('value', '');
 		$('#pc_'+ data.post_id).hide();
 	}
@@ -190,7 +190,7 @@ ajax.callback.post_mod_comment = function(data) {
 // заполняет #poll-form и отправляет запрос
 function poll_manage (mode, confirm_msg)
 {
-	if (confirm_msg != null && !window.confirm( confirm_msg )) {
+	if (confirm_msg !== null && !window.confirm( confirm_msg )) {
 		return false;
 	}
 	$('#poll-mode').val(mode);

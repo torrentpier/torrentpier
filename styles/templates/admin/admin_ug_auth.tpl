@@ -202,7 +202,7 @@ function flip_perm (f_id, acl_id)
 	var cb = $p('cb_' + id);
 	var td = $p('td_' + id);
 
-	if (cb.value == 1) {
+	if (cb.value === 1) {
 		cb.value = 0;
 		td.className = 'no';
 		td.innerHTML = '{NO_SIGN}';
@@ -221,7 +221,7 @@ function flip_mod (f_id, acl_id)
 	var cb = $p('cb_' + id);
 	var td = $p('td_' + id);
 
-	if (cb.value == 1) {
+	if (cb.value === 1) {
 		cb.value = 0;
 		td.className = 'noMOD';
 		td.innerHTML = '{L_NO}';
@@ -239,7 +239,7 @@ function hl (f_id, acl_id, on)
 	var ac  = $p('type_' + acl_id);
 	var fn = $p('fname_' + f_id);
 
-	if (on == 1) {
+	if (on === 1) {
 		ac.style.color = fn.style.color = '#FF4500';
 	} else {
 		ac.style.color = fn.style.color = '#000000';

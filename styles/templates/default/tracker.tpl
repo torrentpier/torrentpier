@@ -131,17 +131,17 @@ var FSN = {
 
 		$('#fs-sel-cat').bind('change', function(){
 			var i = $(this).val();
-			if (FSN.sel_width == null) {
+			if (FSN.sel_width === null) {
 				FSN.sel_width = $select.width() + 4;
 			}
-			if (i == 'all') {
+			if (i === 'all') {
 				var fs_html = FSN.fs_all;
 			}
 			else {
 				var fs_html = '<optgroup label="'+ FSN.fs_lb[i] +'">'+ FSN.fs_og[i] +'</optgroup>';
 			}
 			$select.html(fs_html).focus();
-			if (i == 'all') {
+			if (i === 'all') {
 				$('#fs-nav-menu').show();
 			}
 			else {
@@ -486,7 +486,7 @@ $(function(){
 
 	$('#fs-main').bind('change', function(){
 		var fs_val = $('#fs-main').val();
-		if (fs_val != null) {
+		if (fs_val !== null) {
 			if (fs_val.length > {MAX_FS}) {
 				alert('{L_MAX_FS}');
 				$('#fs-main').val( fs_last_val );
@@ -513,7 +513,7 @@ function get_fs_link ()
 	var fs_url = '{TRACKER_URL}';
 	var fs_val = $('#fs-main').val();
 
-	if (fs_val == null) {
+	if (fs_val === null) {
 		alert('{L_NOT_SEL_CHAPTERS}');
 	}
 	else {

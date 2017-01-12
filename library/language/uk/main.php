@@ -1589,7 +1589,6 @@ $lang['CREATE_PROFILE'] = 'Створити акаунт';
 
 $lang['TP_VERSION'] = 'Версія TorrentPier';
 $lang['TP_RELEASE_DATE'] = 'Дата випуску';
-$lang['ZF_VERSION'] = 'Версія Zend Framework';
 $lang['PHP_INFO'] = 'Інформація про PHP';
 
 $lang['CLICK_RETURN_ADMIN_INDEX'] = '%sВернуться на головну сторінку адміністраторського розділу%s';
@@ -1602,8 +1601,6 @@ $lang['NUMBER_USERS'] = 'Кількість користувачів';
 $lang['USERS_PER_DAY'] = 'Користувачів';
 $lang['BOARD_STARTED'] = 'Дата запуску';
 $lang['AVATAR_DIR_SIZE'] = 'Розмір директорії з аватарами';
-$lang['DATABASE_SIZE'] = "Об'єм БД";
-$lang['GZIP_COMPRESSION'] = 'стискання Gzip';
 $lang['NOT_AVAILABLE'] = 'Недоступне';
 
 // Clear Cache
