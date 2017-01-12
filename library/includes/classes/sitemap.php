@@ -4,18 +4,18 @@ if (!defined('BB_ROOT')) die(basename(__FILE__));
 
 class sitemap
 {
-	var $home           = '';
-	var $limit          = 0;
-	var $topic_priority = '0.5';
-	var $stat_priority  = '0.5';
-	var $priority       = '0.6';
-	var $cat_priority   = '0.7';
+	public $home           = '';
+	public $limit          = 0;
+	public $topic_priority = '0.5';
+	public $stat_priority  = '0.5';
+	public $priority       = '0.6';
+	public $cat_priority   = '0.7';
 
-	function sitemap () {
+	public function __construct () {
 		$this->home = make_url();
 	}
 
-	function build_map () {
+	public function build_map () {
 		$map = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<urlset xmlns=\"http://www.sitemaps.org/schemas/sitemap/0.9\">\n";
 		$map .= $this->get_static();
 		$map .= $this->get_forum();
@@ -25,7 +25,7 @@ class sitemap
 		return $map;
 	}
 
-	function build_index ($count) {
+	public function build_index ($count) {
 		$lm = date('c');
 		$map = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<sitemapindex xmlns=\"http://www.sitemaps.org/schemas/sitemap/0.9\">\n";
 		$map .= "<sitemap>\n<loc>{$this->home}internal_data/sitemap/sitemap1.xml</loc>\n<lastmod>{$lm}</lastmod>\n</sitemap>\n";
@@ -38,7 +38,7 @@ class sitemap
 		return $map;
 	}
 
-	function build_stat () {
+	public function build_stat () {
 		$map = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<urlset xmlns=\"http://www.sitemaps.org/schemas/sitemap/0.9\">\n";
 		$map .= $this->get_static();
 		$map .= $this->get_forum();
@@ -47,7 +47,7 @@ class sitemap
 		return $map;
 	}
 
-	function build_map_topic ($n) {
+	public function build_map_topic ($n) {
 		$map = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<urlset xmlns=\"http://www.sitemaps.org/schemas/sitemap/0.9\">\n";
 		$map .= $this->get_topic($n);
 		$map .= "</urlset>";
@@ -55,7 +55,7 @@ class sitemap
 		return $map;
 	}
 
-	function get_forum () {
+	public function get_forum () {
 		global $datastore;
 
 		$this->priority = $this->cat_priority;
@@ -81,7 +81,7 @@ class sitemap
 		return $xml;
 	}
 
-	function get_topic ($page = false) {
+	public function get_topic ($page = false) {
 		global $datastore;
 
 		$xml = '';
@@ -119,7 +119,7 @@ class sitemap
 		return $xml;
 	}
 
-	function get_static () {
+	public function get_static () {
 		global $bb_cfg;
 
 		$xml = '';
@@ -142,7 +142,7 @@ class sitemap
 		return $xml;
 	}
 
-	function get_xml ($loc, $lm) {
+	public function get_xml ($loc, $lm) {
 		$xml = "\t<url>\n";
 		$xml .= "\t\t<loc>$loc</loc>\n";
 		$xml .= "\t\t<lastmod>$lm</lastmod>\n";
@@ -152,7 +152,7 @@ class sitemap
 		return $xml;
 	}
 
-	function send_url ($url, $map) {
+	public function send_url ($url, $map) {
 		$data = false;
 		$file = $url.urlencode($map);
 
@@ -174,7 +174,7 @@ class sitemap
 		}
 	}
 
-	function create () {
+	public function create () {
 		$row = DB()->fetch_row("SELECT COUNT(*) AS count FROM " . BB_TOPICS);
 
 		if (!$this->limit) $this->limit = $row['count'];

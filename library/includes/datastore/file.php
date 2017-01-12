@@ -4,18 +4,18 @@ if (!defined('BB_ROOT')) die(basename(__FILE__));
 
 class datastore_file extends datastore_common
 {
-	var $dir    = null;
-	var $prefix = null;
-	var $engine = 'Filecache';
+	public $dir    = null;
+	public $prefix = null;
+	public $engine = 'Filecache';
 
-	function datastore_file ($dir, $prefix = null)
+	public function __construct ($dir, $prefix = null)
 	{
 		$this->prefix = $prefix;
 		$this->dir = $dir;
 		$this->dbg_enabled = sql_dbg_enabled();
 	}
 
-	function store ($title, $var)
+	public function store ($title, $var)
 	{
 		$this->cur_query = "cache->set('$title')";
 		$this->debug('start');
@@ -36,7 +36,7 @@ class datastore_file extends datastore_common
 		return (bool) file_write($filecache, $filename, false, true, true);
 	}
 
-	function clean ()
+	public function clean ()
 	{
 		$dir = $this->dir;
 
@@ -58,7 +58,7 @@ class datastore_file extends datastore_common
 		}
 	}
 
-	function _fetch_from_store ()
+	public function _fetch_from_store ()
 	{
 		if (!$items = $this->queued_items)
 		{

@@ -4,41 +4,41 @@ if (!defined('SQL_DEBUG')) die(basename(__FILE__));
 
 class sql_db
 {
-	var $cfg            = array();
-	var $cfg_keys       = array('dbhost', 'dbname', 'dbuser', 'dbpasswd', 'charset', 'persist');
-	var $link           = null;
-	var $result         = null;
-	var $db_server      = '';
-	var $selected_db    = null;
-	var $inited         = false;
+	public $cfg            = array();
+	public $cfg_keys       = array('dbhost', 'dbname', 'dbuser', 'dbpasswd', 'charset', 'persist');
+	private $link           = null;
+	public $result         = null;
+	public $db_server      = '';
+	public $selected_db    = null;
+	public $inited         = false;
 
-	var $locked         = false;
-	var $locks          = array();
+	public $locked         = false;
+	public $locks          = array();
 
-	var $num_queries    = 0;
-	var $sql_starttime  = 0;
-	var $sql_inittime   = 0;
-	var $sql_timetotal  = 0;
-	var $cur_query_time = 0;
-	var $slow_time      = 0;
+	public $num_queries    = 0;
+	public $sql_starttime  = 0;
+	public $sql_inittime   = 0;
+	public $sql_timetotal  = 0;
+	public $cur_query_time = 0;
+	public $slow_time      = 0;
 
-	var $dbg            = array();
-	var $dbg_id         = 0;
-	var $dbg_enabled    = false;
-	var $cur_query      = null;
+	public $dbg            = array();
+	public $dbg_id         = 0;
+	public $dbg_enabled    = false;
+	public $cur_query      = null;
 
-	var $do_explain     = false;
-	var $explain_hold   = '';
-	var $explain_out    = '';
+	public $do_explain     = false;
+	public $explain_hold   = '';
+	public $explain_out    = '';
 
-	var $shutdown       = array();
+	public $shutdown       = array();
 
-	var $DBS            = array();
+	public $DBS            = array();
 
 	/**
 	* Constructor
 	*/
-	function sql_db ($cfg_values)
+	public function __construct ($cfg_values)
 	{
 		global $DBS;
 
@@ -58,16 +58,13 @@ class sql_db
 	/**
 	* Initialize connection
 	*/
-	function init ()
+	public function init ()
 	{
 		// Connect to server
-		$this->link = $this->connect();
-
-		// Select database
-		$this->selected_db = $this->select_db();
+		$this->connect();
 
 		// Set charset
-		if ($this->cfg['charset'] && !@mysql_set_charset($this->cfg['charset'], $this->link))
+		if ($this->cfg['charset'] && !mysqli_set_charset($this->link, $this->cfg['charset']))
 		{
 			if (!$this->sql_query("SET NAMES {$this->cfg['charset']}"))
 			{
@@ -84,14 +81,15 @@ class sql_db
 	/**
 	* Open connection
 	*/
-	function connect ()
+	public function connect ()
 	{
-		$this->cur_query = ($this->dbg_enabled) ? ($this->cfg['persist'] ? 'p' : '') . "connect to: {$this->cfg['dbhost']}" : 'connect';
+		$this->cur_query = ($this->dbg_enabled) ? "connect to: {$this->cfg['dbhost']}" : 'connect';
 		$this->debug('start');
 
-		$connect_type = ($this->cfg['persist']) ? 'mysql_pconnect' : 'mysql_connect';
+        $p = ((bool)$this->cfg['persist']) ? 'p:' : '';
+        $this->link = mysqli_connect($p . $this->cfg['dbhost'], $this->cfg['dbuser'], $this->cfg['dbpasswd'], $this->cfg['dbname']);
 
-		if (!$link = @$connect_type($this->cfg['dbhost'], $this->cfg['dbuser'], $this->cfg['dbpasswd']))
+		if (mysqli_connect_error())
 		{
 			$server = (DBG_USER) ? $this->cfg['dbhost'] : '';
 			header("HTTP/1.0 503 Service Unavailable");
@@ -103,37 +101,14 @@ class sql_db
 
 		$this->debug('stop');
 		$this->cur_query = null;
-
-		return $link;
-	}
-
-	/**
-	* Select database
-	*/
-	function select_db ()
-	{
-		$this->cur_query = ($this->dbg_enabled) ? "select db: {$this->cfg['dbname']}" : 'select db';
-		$this->debug('start');
-
-		if (!@mysql_select_db($this->cfg['dbname'], $this->link))
-		{
-			$database = (DBG_USER) ? $this->cfg['dbhost'] : '';
-			die("Could not select database $database");
-		}
-
-		$this->debug('stop');
-		$this->cur_query = null;
-
-		return $this->cfg['dbname'];
 	}
 
 	/**
 	* Base query method
 	*/
-	function sql_query ($query)
+	public function sql_query ($query)
 	{
-		if (!is_resource($this->link))
-		{
+		if (!$this->link) {
 			$this->init();
 		}
 		if (is_array($query))
@@ -147,7 +122,7 @@ class sql_db
 		$this->cur_query = $query;
 		$this->debug('start');
 
-		if (!$this->result = mysql_query($query, $this->link))
+		if (!$this->result = mysqli_query($this->link, $query))
 		{
 			$this->log_error();
 		}
@@ -167,7 +142,7 @@ class sql_db
 	/**
 	* Execute query WRAPPER (with error handling)
 	*/
-	function query ($query)
+	public function query ($query)
 	{
 		if (!$result = $this->sql_query($query))
 		{
@@ -180,13 +155,13 @@ class sql_db
 	/**
 	* Return number of rows
 	*/
-	function num_rows ($result = false)
+	public function num_rows ($result = false)
 	{
 		$num_rows = false;
 
 		if ($result OR $result = $this->result)
 		{
-			$num_rows = is_resource($result) ? mysql_num_rows($result) : false;
+			$num_rows = $result instanceof mysqli_result ? mysqli_num_rows($result) : false;
 		}
 
 		return $num_rows;
@@ -195,15 +170,15 @@ class sql_db
 	/**
 	* Return number of affected rows
 	*/
-	function affected_rows ()
+	public function affected_rows ()
 	{
-		return is_resource($this->link) ? mysql_affected_rows($this->link) : -1;
+		return mysqli_affected_rows($this->link);
 	}
 
 	/**
 	* Fetch current field
 	*/
-	function sql_fetchfield($field, $rownum = -1, $query_id = 0)
+	public function sql_fetchfield($field, $rownum = -1, $query_id = 0)
 	{
 		if(!$query_id)
 		{
@@ -213,7 +188,7 @@ class sql_db
 		{
 			if($rownum > -1)
 			{
-				$result = @mysql_result($query_id, $rownum, $field);
+				$result = $this->sql_result($query_id, $rownum, $field);
 			}
 			else
 			{
@@ -244,12 +219,19 @@ class sql_db
 		}
 	}
 
+    private function sql_result(mysqli_result $res, $row, $field = 0)
+    {
+        $res->data_seek($row);
+        $dataRow = $res->fetch_array();
+        return $dataRow[$field];
+    }
+
 	/**
 	* Fetch current row
 	*/
-	function sql_fetchrow ($result, $field_name = '')
+	public function sql_fetchrow ($result, $field_name = '')
 	{
-		$row = mysql_fetch_assoc($result);
+		$row = mysqli_fetch_assoc($result);
 
 		if ($field_name)
 		{
@@ -264,7 +246,7 @@ class sql_db
 	/**
 	* Alias of sql_fetchrow()
 	*/
-	function fetch_next ($result)
+	public function fetch_next ($result)
 	{
 		return $this->sql_fetchrow($result);
 	}
@@ -272,7 +254,7 @@ class sql_db
 	/**
 	* Fetch row WRAPPER (with error handling)
 	*/
-	function fetch_row ($query, $field_name = '')
+	public function fetch_row ($query, $field_name = '')
 	{
 		if (!$result = $this->sql_query($query))
 		{
@@ -285,11 +267,11 @@ class sql_db
 	/**
 	* Fetch all rows
 	*/
-	function sql_fetchrowset ($result, $field_name = '')
+	public function sql_fetchrowset ($result, $field_name = '')
 	{
 		$rowset = array();
 
-		while ($row = mysql_fetch_assoc($result))
+		while ($row = mysqli_fetch_assoc($result))
 		{
 			$rowset[] = ($field_name) ? $row[$field_name] : $row;
 		}
@@ -300,7 +282,7 @@ class sql_db
 	/**
 	* Fetch all rows WRAPPER (with error handling)
 	*/
-	function fetch_rowset ($query, $field_name = '')
+	public function fetch_rowset ($query, $field_name = '')
 	{
 		if (!$result = $this->sql_query($query))
 		{
@@ -313,7 +295,7 @@ class sql_db
 	/**
 	* Fetch all rows WRAPPER (with error handling)
 	*/
-	function fetch_all ($query, $field_name = '')
+	public function fetch_all ($query, $field_name = '')
 	{
 		if (!$result = $this->sql_query($query))
 		{
@@ -326,19 +308,21 @@ class sql_db
 	/**
 	* Get last inserted id after insert statement
 	*/
-	function sql_nextid ()
+	public function sql_nextid ()
 	{
-		return mysql_insert_id($this->link);
+		return mysqli_insert_id($this->link);
 	}
 
 	/**
 	* Free sql result
 	*/
-	function sql_freeresult ($result = false)
+	public function sql_freeresult ($result = false)
 	{
 		if ($result OR $result = $this->result)
 		{
-			$return_value = is_resource($result) ? mysql_free_result($result) : false;
+            if ($result instanceof mysqli_result) {
+                mysqli_free_result($result);
+            }
 		}
 
 		$this->result = null;
@@ -347,7 +331,7 @@ class sql_db
 	/**
 	* Escape data used in sql query
 	*/
-	function escape ($v, $check_type = false, $dont_escape = false)
+	public function escape ($v, $check_type = false, $dont_escape = false)
 	{
 		if ($dont_escape) return $v;
 		if (!$check_type) return $this->escape_string($v);
@@ -367,14 +351,13 @@ class sql_db
 	/**
 	* Escape string
 	*/
-	function escape_string ($str)
+	public function escape_string ($str)
 	{
-		if (!is_resource($this->link))
-		{
+		if (!$this->link) {
 			$this->init();
 		}
 
-		return mysql_real_escape_string($str, $this->link);
+		return mysqli_real_escape_string($this->link, $str);
 	}
 
 	/**
@@ -382,7 +365,7 @@ class sql_db
 	*
 	* Possible $query_type values: INSERT, INSERT_SELECT, MULTI_INSERT, UPDATE, SELECT
 	*/
-	function build_array ($query_type, $input_ary, $data_already_escaped = false, $check_data_type_in_escape = true)
+	public function build_array ($query_type, $input_ary, $data_already_escaped = false, $check_data_type_in_escape = true)
 	{
 		$fields = $values = $ary = $query = array();
 		$dont_escape = $data_already_escaped;
@@ -448,7 +431,7 @@ class sql_db
 		return "\n". $query ."\n";
 	}
 
-	function get_empty_sql_array ()
+	public function get_empty_sql_array ()
 	{
 		return array(
 			'SELECT'         => array(),
@@ -464,7 +447,7 @@ class sql_db
 		);
 	}
 
-	function build_sql ($sql_ary)
+	public function build_sql ($sql_ary)
 	{
 		$sql = '';
 		array_deep($sql_ary, 'array_unique', false, true);
@@ -509,11 +492,10 @@ class sql_db
 	/**
 	* Return sql error array
 	*/
-	function sql_error ()
+	public function sql_error ()
 	{
-		if (is_resource($this->link))
-		{
-			return array('code' => mysql_errno($this->link), 'message' => mysql_error($this->link));
+		if ($this->link) {
+			return array('code' => mysqli_errno($this->link), 'message' => mysqli_error($this->link));
 		}
 		else
 		{
@@ -524,10 +506,9 @@ class sql_db
 	/**
 	* Close sql connection
 	*/
-	function close ()
+	public function close ()
 	{
-		if (is_resource($this->link))
-		{
+		if ($this->link) {
 			$this->unlock();
 
 			if (!empty($this->locks))
@@ -540,7 +521,7 @@ class sql_db
 
 			$this->exec_shutdown_queries();
 
-			mysql_close($this->link);
+			mysqli_close($this->link);
 		}
 
 		$this->link = $this->selected_db = null;
@@ -549,7 +530,7 @@ class sql_db
 	/**
 	* Add shutdown query
 	*/
-	function add_shutdown_query ($sql)
+	public function add_shutdown_query ($sql)
 	{
 		$this->shutdown['__sql'][] = $sql;
 	}
@@ -557,7 +538,7 @@ class sql_db
 	/**
 	* Exec shutdown queries
 	*/
-	function exec_shutdown_queries ()
+	public function exec_shutdown_queries ()
 	{
 		if (empty($this->shutdown)) return;
 
@@ -579,7 +560,7 @@ class sql_db
 	/**
 	* Lock tables
 	*/
-	function lock ($tables, $lock_type = 'WRITE')
+	public function lock ($tables, $lock_type = 'WRITE')
 	{
 		if ($this->cfg['persist'])
 		{
@@ -603,7 +584,7 @@ class sql_db
 	/**
 	* Unlock tables
 	*/
-	function unlock ()
+	public function unlock ()
 	{
 		if ($this->locked && $this->sql_query("UNLOCK TABLES"))
 		{
@@ -616,7 +597,7 @@ class sql_db
 	/**
 	* Obtain user level lock
 	*/
-	function get_lock ($name, $timeout = 0)
+	public function get_lock ($name, $timeout = 0)
 	{
 		$lock_name = $this->get_lock_name($name);
 		$timeout   = (int) $timeout;
@@ -633,7 +614,7 @@ class sql_db
 	/**
 	* Obtain user level lock status
 	*/
-	function release_lock ($name)
+	public function release_lock ($name)
 	{
 		$lock_name = $this->get_lock_name($name);
 		$row = $this->fetch_row("SELECT RELEASE_LOCK('$lock_name') AS lock_result");
@@ -649,7 +630,7 @@ class sql_db
 	/**
 	* Release user level lock
 	*/
-	function is_free_lock ($name)
+	public function is_free_lock ($name)
 	{
 		$lock_name = $this->get_lock_name($name);
 		$row = $this->fetch_row("SELECT IS_FREE_LOCK('$lock_name') AS lock_result");
@@ -659,7 +640,7 @@ class sql_db
 	/**
 	* Make per db unique lock name
 	*/
-	function get_lock_name ($name)
+	public function get_lock_name ($name)
 	{
 		if (!$this->selected_db)
 		{
@@ -672,7 +653,7 @@ class sql_db
 	/**
 	* Get info about last query
 	*/
-	function query_info ()
+	public function query_info ()
 	{
 		$info = array();
 
@@ -681,7 +662,7 @@ class sql_db
 			$info[] = "$num rows";
 		}
 
-		if (is_resource($this->link) AND $ext = mysql_info($this->link))
+		if ($this->link AND $ext = mysqli_info($this->link))
 		{
 			$info[] = "$ext";
 		}
@@ -690,15 +671,15 @@ class sql_db
 			$info[] = "$aff rows";
 		}
 
-		return str_compact(join(', ', $info));
+		return str_compact(implode(', ', $info));
 	}
 
 	/**
 	* Get server version
 	*/
-	function server_version ()
+	public function server_version ()
 	{
-		preg_match('#^(\d+\.\d+\.\d+).*#', mysql_get_server_info(), $m);
+		preg_match('#^(\d+\.\d+\.\d+).*#', mysqli_get_server_info($this->link), $m);
 		return $m[1];
 	}
 
@@ -706,7 +687,7 @@ class sql_db
 	* Set slow query marker for xx seconds
 	* This will disable counting other queries as "slow" during this time
 	*/
-	function expect_slow_query ($ignoring_time = 60, $new_priority = 10)
+	public function expect_slow_query ($ignoring_time = 60, $new_priority = 10)
 	{
 		if ($old_priority = CACHE('bb_cache')->get('dont_log_slow_query'))
 		{
@@ -723,7 +704,7 @@ class sql_db
 	/**
 	* Store debug info
 	*/
-	function debug ($mode)
+	public function debug ($mode)
 	{
 		if (!SQL_DEBUG) return;
 
@@ -787,7 +768,7 @@ class sql_db
 	/**
 	* Trigger error
 	*/
-	function trigger_error ($msg = 'DB Error')
+	public function trigger_error ($msg = 'DB Error')
 	{
 		if (error_reporting())
 		{
@@ -808,7 +789,7 @@ class sql_db
 	/**
 	* Find caller source
 	*/
-	function debug_find_source ($mode = '')
+	public function debug_find_source ($mode = '')
 	{
 		foreach (debug_backtrace() as $trace)
 		{
@@ -828,7 +809,7 @@ class sql_db
 	/**
 	* Prepare for logging
 	*/
-	function log_next_query ($queries_count = 1, $log_file = 'sql_queries')
+	public function log_next_query ($queries_count = 1, $log_file = 'sql_queries')
 	{
 		$this->DBS['log_file'] = $log_file;
 		$this->DBS['log_counter'] = $queries_count;
@@ -837,7 +818,7 @@ class sql_db
 	/**
 	* Log query
 	*/
-	function log_query ($log_file = 'sql_queries')
+	public function log_query ($log_file = 'sql_queries')
 	{
 		$q_time = ($this->cur_query_time >= 10) ? round($this->cur_query_time, 0) : sprintf('%.4f', $this->cur_query_time);
 		$msg = array();
@@ -858,7 +839,7 @@ class sql_db
 	/**
 	* Log slow query
 	*/
-	function log_slow_query ($log_file = 'sql_slow_bb')
+	public function log_slow_query ($log_file = 'sql_slow_bb')
 	{
 		if (!defined('IN_FIRST_SLOW_QUERY') && CACHE('bb_cache')->get('dont_log_slow_query'))
 		{
@@ -870,7 +851,7 @@ class sql_db
 	/**
 	* Log error
 	*/
-	function log_error ()
+	public function log_error ()
 	{
 		if (!SQL_LOG_ERRORS) return;
 
@@ -896,7 +877,7 @@ class sql_db
 	/**
 	* Explain queries (based on code from phpBB3)
 	*/
-	function explain ($mode, $html_table = '', $row = '')
+	public function explain ($mode, $html_table = '', $row = '')
 	{
 		$query = str_compact($this->cur_query);
 		// remove comments
@@ -920,9 +901,9 @@ class sql_db
 			{
 				$html_table = false;
 
-				if ($result = @mysql_query("EXPLAIN $query", $this->link))
+				if ($result = mysqli_query($this->link, "EXPLAIN $query"))
 				{
-					while ($row = @mysql_fetch_assoc($result))
+					while ($row = mysqli_fetch_assoc($result))
 					{
 						$html_table = $this->explain('add_explain_row', $html_table, $row);
 					}

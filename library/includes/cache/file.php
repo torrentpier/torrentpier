@@ -4,19 +4,19 @@ if (!defined('BB_ROOT')) die(basename(__FILE__));
 
 class cache_file extends cache_common
 {
-	var $used   = true;
-	var $engine = 'Filecache';
-	var $dir    = null;
-	var $prefix = null;
+	public $used   = true;
+	public $engine = 'Filecache';
+	public $dir    = null;
+	public $prefix = null;
 
-	function cache_file ($dir, $prefix = null)
+	public function __construct ($dir, $prefix = null)
 	{
 		$this->dir    = $dir;
 		$this->prefix = $prefix;
 		$this->dbg_enabled = sql_dbg_enabled();
 	}
 
-	function get ($name, $get_miss_key_callback = '', $ttl = 0)
+	public function get ($name, $get_miss_key_callback = '', $ttl = 0)
 	{
 		$filename = $this->dir . clean_filename($this->prefix . $name) . '.php';
 
@@ -34,7 +34,7 @@ class cache_file extends cache_common
 		return (!empty($filecache['value'])) ? $filecache['value'] : false;
 	}
 
-	function set ($name, $value, $ttl = 86400)
+	public function set ($name, $value, $ttl = 86400)
 	{
 		if (!function_exists('var_export'))
 		{
@@ -63,7 +63,7 @@ class cache_file extends cache_common
 		return (bool) file_write($filecache, $filename, false, true, true);
 	}
 
-	function rm ($name = '')
+	public function rm ($name = '')
 	{
 		$clear = false;
 		if ($name)
@@ -104,7 +104,7 @@ class cache_file extends cache_common
 		return $clear;
 	}
 
-	function gc ($expire_time = TIMENOW)
+	public function gc ($expire_time = TIMENOW)
 	{
 		$clear = false;
 

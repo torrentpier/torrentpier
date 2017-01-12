@@ -4,10 +4,10 @@ if (!defined('BB_ROOT')) die(basename(__FILE__));
 
 class datastore_xcache extends datastore_common
 {
-	var $prefix = null;
-	var $engine = 'XCache';
+	public $prefix = null;
+	public $engine = 'XCache';
 
-	function datastore_xcache ($prefix = null)
+	public function __construct ($prefix = null)
 	{
 		if (!$this->is_installed())
 		{
@@ -18,7 +18,7 @@ class datastore_xcache extends datastore_common
 		$this->prefix = $prefix;
 	}
 
-	function store ($title, $var)
+	public function store ($title, $var)
 	{
 		$this->data[$title] = $var;
 
@@ -31,7 +31,7 @@ class datastore_xcache extends datastore_common
 		return (bool) xcache_set($this->prefix . $title, $var);
 	}
 
-	function clean ()
+	public function clean ()
 	{
 		foreach ($this->known_items as $title => $script_name)
 		{
@@ -45,7 +45,7 @@ class datastore_xcache extends datastore_common
 		}
 	}
 
-	function _fetch_from_store ()
+	public function _fetch_from_store ()
 	{
 		if (!$items = $this->queued_items)
 		{
@@ -65,7 +65,7 @@ class datastore_xcache extends datastore_common
 		}
 	}
 
-	function is_installed ()
+	public function is_installed ()
 	{
 		return function_exists('xcache_get');
 	}

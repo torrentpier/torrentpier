@@ -118,13 +118,13 @@ function is_unread ($ref, $topic_id = 0, $forum_id = 0)
 //
 class ads_common
 {
-	var $ad_blocks  = array();
-	var $active_ads = array();
+	public $ad_blocks  = array();
+	public $active_ads = array();
 
 	/**
 	*  Constructor
 	*/
-	function ads_common ()
+	function __construct ()
 	{
 		global $bb_cfg;
 
@@ -536,18 +536,18 @@ function auth_check ($bf_ary, $bf_key, $perm_ary, $perm_key, $is_admin = false)
 
 class Date_Delta
 {
-	var $auto_granularity = array(
+	public $auto_granularity = array(
 		60        => 'seconds',   // set granularity to "seconds" if delta less then 1 minute
 		10800     => 'minutes',   // 3 hours
 		259200    => 'hours',     // 3 days
 		31363200  => 'mday',      // 12 months
 		311040000 => 'mon',       // 10 years
 	);
-	var $intervals = array();
-	var $format    = '';
+	public $intervals = array();
+	public $format    = '';
 
 	// Creates new object.
-	function Date_Delta()
+	function __construct()
 	{
 		global $lang;
 
@@ -694,11 +694,11 @@ function get_select ($select, $selected = null, $return_as = 'html', $first_opt 
 
 class html_common
 {
-	var $options    = '';
-	var $attr       = array();
-	var $cur_attr   = null;
-	var $max_length = HTML_SELECT_MAX_LENGTH;
-	var $selected   = array();
+	public $options    = '';
+	public $attr       = array();
+	public $cur_attr   = null;
+	public $max_length = HTML_SELECT_MAX_LENGTH;
+	public $selected   = array();
 
 	function build_select ($name, $params, $selected = null, $max_length = HTML_SELECT_MAX_LENGTH, $multiple_size = null, $js = '')
 	{
@@ -2106,7 +2106,7 @@ function cat_exists ($cat_id)
 //
 class log_action
 {
-	var $log_type = array(
+	public $log_type = array(
 	#    LOG_TYPE_NAME   LOG_TYPE_ID
 		'mod_topic_delete'   => 1,
 		'mod_topic_move'     => 2,
@@ -2118,10 +2118,10 @@ class log_action
 		'adm_user_ban'       => 8,
 		'adm_user_unban'     => 9,
 	);
-	var $log_type_select = array();
-	var $log_disabled = false;
+	public $log_type_select = array();
+	public $log_disabled = false;
 
-	function init ()
+	public function init ()
 	{
 		global $lang, $bb_cfg;
 
@@ -2131,7 +2131,7 @@ class log_action
 		}
 	}
 
-	function mod ($type_name, $args = array())
+	public function mod ($type_name, $args = array())
 	{
 		global $userdata;
 
@@ -2178,7 +2178,7 @@ class log_action
 		DB()->query("INSERT INTO ". BB_LOG ." $sql_args");
 	}
 
-	function admin ($type_name, $args = array())
+	public function admin ($type_name, $args = array())
 	{
 		$this->mod($type_name, $args);
 	}

@@ -10,26 +10,26 @@ define('FILENAME_CRYPTIC_LENGTH', 64);
 
 class attach_parent
 {
-	var $post_attach = false;
-	var $attach_filename = '';
-	var $filename = '';
-	var $type = '';
-	var $extension = '';
-	var $file_comment = '';
-	var $num_attachments = 0; // number of attachments in message
-	var $filesize = 0;
-	var $filetime = 0;
-	var $thumbnail = 0;
-	var $page = 0; // On which page we are on ? This should be filled by child classes.
+	public $post_attach = false;
+	public $attach_filename = '';
+	public $filename = '';
+	public $type = '';
+	public $extension = '';
+	public $file_comment = '';
+	public $num_attachments = 0; // number of attachments in message
+	public $filesize = 0;
+	public $filetime = 0;
+	public $thumbnail = 0;
+	public $page = 0; // On which page we are on ? This should be filled by child classes.
 
 	// Switches
-	var $add_attachment_body = 0;
-	var $posted_attachments_body = 0;
+	public $add_attachment_body = 0;
+	public $posted_attachments_body = 0;
 
 	/**
 	* Constructor
 	*/
-	function attach_parent()
+	public function __construct()
 	{
 		$this->add_attachment_body = get_var('add_attachment_body', 0);
 		$this->posted_attachments_body = get_var('posted_attachments_body', 0);
@@ -52,7 +52,7 @@ class attach_parent
 	/**
 	* Get Quota Limits
 	*/
-	function get_quota_limits($userdata_quota, $user_id = 0)
+	public function get_quota_limits($userdata_quota, $user_id = 0)
 	{
 		global $attach_config;
 
@@ -206,7 +206,7 @@ class attach_parent
 	* Handle all modes... (intern)
 	* @private
 	*/
-	function handle_attachments($mode)
+	public function handle_attachments($mode)
 	{
 		global $is_auth, $attach_config, $refresh, $post_id, $submit, $preview, $error, $error_msg, $lang;
 
@@ -594,7 +594,7 @@ class attach_parent
 	/**
 	* Basic Insert Attachment Handling for all Message Types
 	*/
-	function do_insert_attachment($mode, $message_type, $message_id)
+	public function do_insert_attachment($mode, $message_type, $message_id)
 	{
 		global $upload_dir;
 
@@ -735,7 +735,7 @@ class attach_parent
 	* Attachment Mod entry switch/output (intern)
 	* @private
 	*/
-	function display_attachment_bodies()
+	public function display_attachment_bodies()
 	{
 		global $attach_config, $is_auth, $lang, $template, $upload_dir, $forum_id;
 
@@ -831,7 +831,7 @@ class attach_parent
 	/**
 	* Upload an Attachment to Filespace (intern)
 	*/
-	function upload_attachment()
+	public function upload_attachment()
 	{
 		global $error, $error_msg, $lang, $attach_config, $userdata, $upload_dir, $forum_id;
 
@@ -1186,7 +1186,7 @@ class attach_parent
 	}
 
 	// Copy the temporary attachment to the right location (copy, move_uploaded_file)
-	function move_uploaded_attachment($upload_mode, $file)
+	public function move_uploaded_attachment($upload_mode, $file)
 	{
 		global $error, $error_msg, $lang, $upload_dir;
 
@@ -1262,7 +1262,7 @@ class attach_posting extends attach_parent
 	/**
 	* Constructor
 	*/
-	function attach_posting()
+	public function __construct()
 	{
 		$this->attach_parent();
 		$this->page = 0;
@@ -1271,7 +1271,7 @@ class attach_posting extends attach_parent
 	/**
 	* Insert an Attachment into a Post (this is the second function called from posting.php)
 	*/
-	function insert_attachment($post_id)
+	public function insert_attachment($post_id)
 	{
 		global $is_auth, $mode;
 
@@ -1313,7 +1313,7 @@ class attach_posting extends attach_parent
 	/**
 	* Handle Attachments (Add/Delete/Edit/Show) - This is the first function called from every message handler
 	*/
-	function posting_attachment_mod()
+	public function posting_attachment_mod()
 	{
 		global $mode, $confirm, $is_auth, $post_id, $delete, $refresh;
 

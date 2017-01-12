@@ -4,17 +4,17 @@ if (!defined('BB_ROOT')) die(basename(__FILE__));
 
 class DBS
 {
-	var $cfg   = array();   // $srv_name  => $srv_cfg
-	var $srv   = array();   // $srv_name  => $db_obj
-	var $alias = array();   // $srv_alias => $srv_name
+	public $cfg   = array();   // $srv_name  => $srv_cfg
+	public $srv   = array();   // $srv_name  => $db_obj
+	public $alias = array();   // $srv_alias => $srv_name
 
-	var $log_file      = 'sql_queries';
-	var $log_counter   = 0;
-	var $num_queries   = 0;
-	var $sql_inittime  = 0;
-	var $sql_timetotal = 0;
+	public $log_file      = 'sql_queries';
+	public $log_counter   = 0;
+	public $num_queries   = 0;
+	public $sql_inittime  = 0;
+	public $sql_timetotal = 0;
 
-	function DBS ($cfg)
+	public function __construct ($cfg)
 	{
 		$this->cfg   = $cfg['db'];
 		$this->alias = $cfg['db_alias'];
@@ -26,7 +26,7 @@ class DBS
 	}
 
 	// получение/инициализация класса для сервера $srv_name
-	function get_db_obj ($srv_name_or_alias = 'db1')
+	public function get_db_obj ($srv_name_or_alias = 'db1')
 	{
 		$srv_name = $this->get_srv_name($srv_name_or_alias);
 
@@ -39,7 +39,7 @@ class DBS
 	}
 
 	// определение имени сервера
-	function get_srv_name ($name)
+	public function get_srv_name ($name)
 	{
 		if (isset($this->alias[$name]))
 		{

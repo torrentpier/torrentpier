@@ -4,13 +4,13 @@ if (!defined('BB_ROOT')) die(basename(__FILE__));
 
 class datastore_memcache extends datastore_common
 {
-	var $cfg       = null;
-	var $memcache  = null;
-	var $connected = false;
-	var $engine    = 'Memcache';
-	var $prefix    = null;
+	public $cfg       = null;
+	public $memcache  = null;
+	public $connected = false;
+	public $engine    = 'Memcache';
+	public $prefix    = null;
 
-	function datastore_memcache ($cfg, $prefix = null)
+	public function __construct ($cfg, $prefix = null)
 	{
 		if (!$this->is_installed())
 		{
@@ -23,7 +23,7 @@ class datastore_memcache extends datastore_common
 		$this->dbg_enabled = sql_dbg_enabled();
 	}
 
-	function connect ()
+	public function connect ()
 	{
 		$connect_type = ($this->cfg['pconnect']) ? 'pconnect' : 'connect';
 
@@ -46,7 +46,7 @@ class datastore_memcache extends datastore_common
 		$this->cur_query = null;
 	}
 
-	function store ($title, $var)
+	public function store ($title, $var)
 	{
 		if (!$this->connected) $this->connect();
 		$this->data[$title] = $var;
@@ -60,7 +60,7 @@ class datastore_memcache extends datastore_common
 		return (bool) $this->memcache->set($this->prefix . $title, $var);
 	}
 
-	function clean ()
+	public function clean ()
 	{
 		if (!$this->connected) $this->connect();
 		foreach ($this->known_items as $title => $script_name)
@@ -75,7 +75,7 @@ class datastore_memcache extends datastore_common
 		}
 	}
 
-	function _fetch_from_store ()
+	public function _fetch_from_store ()
 	{
 		if (!$items = $this->queued_items)
 		{
@@ -96,7 +96,7 @@ class datastore_memcache extends datastore_common
 		}
 	}
 
-	function is_installed ()
+	public function is_installed ()
 	{
 		return class_exists('Memcache');
 	}

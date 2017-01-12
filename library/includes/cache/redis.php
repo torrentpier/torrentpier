@@ -4,14 +4,14 @@ if (!defined('BB_ROOT')) die(basename(__FILE__));
 
 class cache_redis extends cache_common
 {
-	var $used      = true;
-	var $engine    = 'Redis';
-	var $cfg       = null;
-	var $redis     = null;
-	var $prefix    = null;
-	var $connected = false;
+	public $used      = true;
+	public $engine    = 'Redis';
+	public $cfg       = null;
+	public $redis     = null;
+	public $prefix    = null;
+	public $connected = false;
 
-	function cache_redis ($cfg, $prefix = null)
+	public function __construct ($cfg, $prefix = null)
 	{
 		if (!$this->is_installed())
 		{
@@ -24,7 +24,7 @@ class cache_redis extends cache_common
 		$this->dbg_enabled = sql_dbg_enabled();
 	}
 
-	function connect ()
+	public function connect ()
 	{
 		$this->cur_query = 'connect '. $this->cfg['host'] .':'. $this->cfg['port'];
 		$this->debug('start');
@@ -43,7 +43,7 @@ class cache_redis extends cache_common
 		$this->cur_query = null;
 	}
 
-	function get ($name, $get_miss_key_callback = '', $ttl = 0)
+	public function get ($name, $get_miss_key_callback = '', $ttl = 0)
 	{
 		if (!$this->connected) $this->connect();
 
@@ -56,7 +56,7 @@ class cache_redis extends cache_common
 		return ($this->connected) ? unserialize($this->redis->get($this->prefix . $name)) : false;
 	}
 
-	function set ($name, $value, $ttl = 0)
+	public function set ($name, $value, $ttl = 0)
 	{
 		if (!$this->connected) $this->connect();
 
@@ -82,7 +82,7 @@ class cache_redis extends cache_common
 		}
 	}
 
-	function rm ($name = '')
+	public function rm ($name = '')
 	{
 		if (!$this->connected) $this->connect();
 
@@ -102,7 +102,7 @@ class cache_redis extends cache_common
 		}
 	}
 
-	function is_installed ()
+	public function is_installed ()
 	{
 		return class_exists('Redis');
 	}

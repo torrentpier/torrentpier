@@ -4,10 +4,10 @@ if (!defined('BB_ROOT')) die(basename(__FILE__));
 
 class cache_sqlite extends cache_common
 {
-	var $used   = true;
-	var $db     = null;
-	var $prefix = null;
-	var $cfg    = array(
+	public $used   = true;
+	public $db     = null;
+	public $prefix = null;
+	public $cfg    = array(
 		'db_file_path' => '/path/to/cache.db.sqlite',
 		'table_name'   => 'cache',
 		'table_schema' => 'CREATE TABLE cache (
@@ -21,7 +21,7 @@ class cache_sqlite extends cache_common
 		'log_name'     => 'CACHE',
 	);
 
-	function cache_sqlite ($cfg, $prefix = null)
+	function __construct ($cfg, $prefix = null)
 	{
 		$this->cfg = array_merge($this->cfg, $cfg);
 		$this->db = new sqlite_common($this->cfg);
@@ -111,7 +111,7 @@ class cache_sqlite extends cache_common
 
 class sqlite_common extends cache_common
 {
-	var $cfg = array(
+	public $cfg = array(
 		'db_file_path' => 'sqlite.db',
 		'table_name'   => 'table_name',
 		'table_schema' => 'CREATE TABLE table_name (...)',
@@ -121,20 +121,20 @@ class sqlite_common extends cache_common
 		'shard_type'   => 'none',     #  none, string, int (тип перевичного ключа для шардинга)
 		'shard_val'    => 0,          #  для string - кол. начальных символов, для int - делитель (будет использован остаток от деления)
 	);
-	var $engine    = 'SQLite';
-	var $dbh       = null;
-	var $connected = false;
-	var $shard_val = false;
+	public $engine    = 'SQLite';
+	public $dbh       = null;
+	public $connected = false;
+	public $shard_val = false;
 
-	var $table_create_attempts = 0;
+	public $table_create_attempts = 0;
 
-	function sqlite_common ($cfg)
+	public function __construct ($cfg)
 	{
 		$this->cfg = array_merge($this->cfg, $cfg);
 		$this->dbg_enabled = sql_dbg_enabled();
 	}
 
-	function connect ()
+	public function connect ()
 	{
 		$this->cur_query = ($this->dbg_enabled) ? 'connect to: '. $this->cfg['db_file_path'] : 'connect';
 		$this->debug('start');
@@ -155,13 +155,13 @@ class sqlite_common extends cache_common
 		$this->cur_query = null;
 	}
 
-	function create_table ()
+	public function create_table ()
 	{
 		$this->table_create_attempts++;
 		return $this->dbh->query($this->cfg['table_schema']);
 	}
 
-	function shard ($name)
+	public function shard ($name)
 	{
 		$type = $this->cfg['shard_type'];
 
@@ -193,7 +193,7 @@ class sqlite_common extends cache_common
 		$this->cfg['db_file_path'] = str_replace('*', $shard_val, $this->cfg['db_file_path']);
 	}
 
-	function query ($query)
+	public function query ($query)
 	{
 		if (!$this->connected) $this->connect();
 
@@ -229,13 +229,13 @@ class sqlite_common extends cache_common
 		return $result;
 	}
 
-	function fetch_row ($query)
+	public function fetch_row ($query)
 	{
 		$result = $this->query($query);
 		return is_resource($result) ? $result->fetchArray(SQLITE3_ASSOC) : false;
 	}
 
-	function fetch_rowset ($query)
+	public function fetch_rowset ($query)
 	{
 		$result = $this->query($query);
 		$rowset = array();
@@ -246,22 +246,22 @@ class sqlite_common extends cache_common
 		return $rowset;
 	}
 
-	function changes ()
+	public function changes ()
 	{
 		return is_resource($this->dbh) ? $this->dbh->changes() : 0;
 	}
 
-	function escape ($str)
+	public function escape ($str)
 	{
 		return SQLite3::escapeString($str);
 	}
 
-	function get_error_msg ()
+	public function get_error_msg ()
 	{
 		return 'SQLite error #'. ($err_code = $this->dbh->lastErrorCode()) .': '. $this->dbh->lastErrorMsg();
 	}
 
-	function rm ($name = '')
+	public function rm ($name = '')
 	{
 		if ($name)
 		{
@@ -275,13 +275,13 @@ class sqlite_common extends cache_common
 		return (bool) $result;
 	}
 
-	function gc ($expire_time = TIMENOW)
+	public function gc ($expire_time = TIMENOW)
 	{
 		$result = $this->db->query("DELETE FROM ". $this->cfg['table_name'] ." WHERE cache_expire_time < $expire_time");
 		return ($result) ? sqlite_changes($this->db->dbh) : 0;
 	}
 
-	function trigger_error ($msg = 'DB Error')
+	public function trigger_error ($msg = 'DB Error')
 	{
 		if (error_reporting()) trigger_error($msg, E_USER_ERROR);
 	}
