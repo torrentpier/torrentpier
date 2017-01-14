@@ -90,7 +90,7 @@ class user_common
     /**
      *  Constructor
      */
-    public function user_common()
+    public function __construct()
     {
         $this->get_sessiondata();
     }
