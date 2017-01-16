@@ -22,6 +22,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+use \TorrentPier\Di;
 
 if (!defined('BB_ROOT')) {
     die(basename(__FILE__));
@@ -50,11 +51,11 @@ if (!$userdata['session_logged_in']) {
 $errors = array();
 
 $sql = "SELECT username, user_id, user_rank, user_email, user_lang
-	FROM " . BB_USERS . "
+	FROM bb_users
 	WHERE user_id = $user_id
 ";
 
-if ($row = DB()->fetch_row($sql)) {
+if ($row = Di::getInstance()->db->fetch_row($sql)) {
     $username = $row['username'];
     $user_email = $row['user_email'];
     $user_lang = $row['user_lang'];

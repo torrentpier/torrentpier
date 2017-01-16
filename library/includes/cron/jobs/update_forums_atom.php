@@ -22,6 +22,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+use \TorrentPier\Di;
 
 if (!defined('BB_ROOT')) {
     die(basename(__FILE__));
@@ -33,7 +34,7 @@ $di = \TorrentPier\Di::getInstance();
 require_once(INC_DIR . 'functions_atom.php');
 
 $timecheck = TIMENOW - 600;
-$forums_data = DB()->fetch_rowset("SELECT forum_id, allow_reg_tracker, forum_name FROM " . BB_FORUMS);
+$forums_data = Di::getInstance()->db->fetch_rowset("SELECT forum_id, allow_reg_tracker, forum_name FROM " . BB_FORUMS);
 
 if (file_exists($di->config->get('atom.path') . '/f/0.atom')) {
     if (filemtime($di->config->get('atom.path') . '/f/0.atom') <= $timecheck) {

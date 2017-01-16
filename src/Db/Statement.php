@@ -2,7 +2,7 @@
 /**
  * MIT License
  *
- * Copyright (c) 2005-2016 TorrentPier
+ * Copyright (c) 2005-2017 TorrentPier
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -25,12 +25,27 @@
 
 namespace TorrentPier\Db;
 
-abstract class Entity
-{
-    protected $table;
+use \PDOStatement;
+use TorrentPier\Db;
 
-    public function table()
+class Statement extends PDOStatement
+{
+    protected $db = null;
+
+    protected function __construct(Db $db)
     {
-        return $this->table;
+        $this->db = $db;
+    }
+
+    public function execute($input_parameters = null)
+    {
+        if (!$this->db->stat) {
+            return parent::execute($input_parameters);
+        }
+        $t = microtime(true);
+        $ret = parent::execute($input_parameters);
+        $this->db->sqlTimeTotal += microtime(true) - $t;
+        $this->db->numQueries++;
+        return $ret;
     }
 }

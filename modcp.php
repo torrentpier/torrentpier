@@ -23,6 +23,8 @@
  * SOFTWARE.
  */
 
+use \TorrentPier\Di;
+
 define('BB_SCRIPT', 'modcp');
 define('BB_ROOT', './');
 require(BB_ROOT . 'common.php');
@@ -65,9 +67,9 @@ function validate_topics($forum_id, &$req_topics, &$topic_titles)
     $valid_topics = $valid_titles = array();
 
     if ($topic_csv = get_id_csv($req_topics)) {
-        $sql = "SELECT topic_id, topic_title FROM " . BB_TOPICS . " WHERE topic_id IN($topic_csv) AND forum_id = $forum_id";
+        $sql = "SELECT topic_id, topic_title FROM bb_topics WHERE topic_id IN($topic_csv) AND forum_id = $forum_id";
 
-        foreach (DB()->fetch_rowset($sql) as $row) {
+        foreach (Di::getInstance()->db->fetch_rowset($sql) as $row) {
             $valid_topics[] = $row['topic_id'];
             $valid_titles[] = $row['topic_title'];
         }
@@ -124,13 +126,13 @@ if ($topic_id) {
 		SELECT
 			f.forum_id, f.forum_name, f.forum_topics, f.self_moderated,
 			t.topic_first_post_id, t.topic_poster
-		FROM " . BB_TOPICS . " t, " . BB_FORUMS . " f
+		FROM bb_topics t, bb_forums f
 		WHERE t.topic_id = $topic_id
 			AND f.forum_id = t.forum_id
 		LIMIT 1
 	";
 
-    if (!$topic_row = DB()->fetch_row($sql)) {
+    if (!$topic_row = Di::getInstance()->db->fetch_row($sql)) {
         bb_die('Topic post not exist');
     }
 
@@ -138,9 +140,9 @@ if ($topic_id) {
     $forum_name = $topic_row['forum_name'];
     $forum_topics = (!$topic_row['forum_topics']) ? 1 : $topic_row['forum_topics'];
 } elseif ($forum_id) {
-    $sql = "SELECT forum_name, forum_topics FROM " . BB_FORUMS . " WHERE forum_id = $forum_id LIMIT 1";
+    $sql = "SELECT forum_name, forum_topics FROM bb_forums WHERE forum_id = $forum_id LIMIT 1";
 
-    if (!$topic_row = DB()->fetch_row($sql)) {
+    if (!$topic_row = Di::getInstance()->db->fetch_row($sql)) {
         bb_die('Forum not exist');
     }
 
@@ -325,7 +327,7 @@ switch ($mode) {
 
         $sql = "
 			SELECT topic_id, topic_title
-			FROM " . BB_TOPICS . "
+			FROM bb_topics
 			WHERE topic_id IN($topic_csv)
 				AND forum_id = $forum_id
 				AND topic_status != " . TOPIC_MOVED . "
@@ -334,7 +336,7 @@ switch ($mode) {
 
         $topic_csv = array();
 
-        foreach (DB()->fetch_rowset($sql) as $row) {
+        foreach (Di::getInstance()->db->fetch_rowset($sql) as $row) {
             $topic_csv[] = $row['topic_id'];
             $log_topics[$row['topic_id']] = $row['topic_title'];
         }
@@ -343,8 +345,8 @@ switch ($mode) {
             bb_die($lang['NONE_SELECTED']);
         }
 
-        DB()->query("
-			UPDATE " . BB_TOPICS . " SET
+        Di::getInstance()->db->query("
+			UPDATE bb_topics SET
 				topic_status = $new_topic_status
 			WHERE topic_id IN($topic_csv)
 		");
@@ -371,8 +373,8 @@ switch ($mode) {
         $set_download = ($mode == 'set_download');
         $new_dl_type = ($set_download) ? 1 : 0;
 
-        DB()->query("
-			UPDATE " . BB_TOPICS . " SET
+        Di::getInstance()->db->query("
+			UPDATE bb_topics SET
 				tracker_status = $new_dl_type
 			WHERE topic_id IN($topic_csv)
 				AND forum_id = $forum_id
@@ -413,10 +415,10 @@ switch ($mode) {
 						AND topic_id = $topic_id
 						AND forum_id = $forum_id";
 
-                if (!$result = DB()->sql_query($sql)) {
+                if (!$result = Di::getInstance()->db->sql_query($sql)) {
                     bb_die('Could not get post id information');
                 }
-                if ($rowset = DB()->sql_fetchrowset($result)) {
+                if ($rowset = Di::getInstance()->db->sql_fetchrowset($result)) {
                     foreach ($rowset as $rid => $row) {
                         $post_id_sql[] = $row['post_id'];
                     }
@@ -432,11 +434,11 @@ switch ($mode) {
 				FROM " . BB_POSTS . "
 				WHERE post_id IN ($post_id_sql)
 				ORDER BY post_time ASC";
-            if (!($result = DB()->sql_query($sql))) {
+            if (!($result = Di::getInstance()->db->sql_query($sql))) {
                 bb_die('Could not get post information');
             }
 
-            if ($row = DB()->sql_fetchrow($result)) {
+            if ($row = Di::getInstance()->db->sql_fetchrow($result)) {
                 $first_poster = $row['poster_id'];
                 $topic_id = $row['topic_id'];
                 $post_time = $row['post_time'];
@@ -446,7 +448,7 @@ switch ($mode) {
                 do {
                     $user_id_sql .= (($user_id_sql != '') ? ', ' : '') . intval($row['poster_id']);
                     $post_id_sql .= (($post_id_sql != '') ? ', ' : '') . intval($row['post_id']);
-                } while ($row = DB()->sql_fetchrow($result));
+                } while ($row = Di::getInstance()->db->sql_fetchrow($result));
 
                 $post_subject = clean_title($_POST['subject']);
                 if (empty($post_subject)) {
@@ -457,25 +459,25 @@ switch ($mode) {
                 $topic_time = TIMENOW;
 
                 $sql = 'SELECT forum_id FROM ' . BB_FORUMS . ' WHERE forum_id = ' . $new_forum_id;
-                if (!($result = DB()->sql_query($sql))) {
+                if (!($result = Di::getInstance()->db->sql_query($sql))) {
                     bb_die('Could not select from forums table');
                 }
 
-                if (!DB()->sql_fetchrow($result)) {
+                if (!Di::getInstance()->db->sql_fetchrow($result)) {
                     bb_die('New forum does not exist');
                 }
 
-                DB()->sql_freeresult($result);
+                Di::getInstance()->db->sql_freeresult($result);
 
                 $first_post_id = min(explode(',', $post_id_sql));
 
-                $sql = "INSERT INTO " . BB_TOPICS . " (topic_title, topic_poster, topic_time, forum_id, topic_status, topic_type, topic_first_post_id)
-					VALUES ('" . DB()->escape($post_subject) . "', $first_poster, " . $topic_time . ", $new_forum_id, " . TOPIC_UNLOCKED . ", " . POST_NORMAL . ", $first_post_id)";
-                if (!(DB()->sql_query($sql))) {
+                $sql = "INSERT INTO bb_topics (topic_title, topic_poster, topic_time, forum_id, topic_status, topic_type, topic_first_post_id)
+					VALUES ('" . Di::getInstance()->db->escape($post_subject) . "', $first_poster, " . $topic_time . ", $new_forum_id, " . TOPIC_UNLOCKED . ", " . POST_NORMAL . ", $first_post_id)";
+                if (!(Di::getInstance()->db->sql_query($sql))) {
                     bb_die('Could not insert new topic');
                 }
 
-                $new_topic_id = DB()->sql_nextid();
+                $new_topic_id = Di::getInstance()->db->sql_nextid();
 
                 // Update topic watch table, switch users whose posts
                 // have moved, over to watching the new topic
@@ -483,14 +485,14 @@ switch ($mode) {
 					SET topic_id = $new_topic_id
 					WHERE topic_id = $topic_id
 						AND user_id IN ($user_id_sql)";
-                if (!DB()->sql_query($sql)) {
+                if (!Di::getInstance()->db->sql_query($sql)) {
                     bb_die('Could not update topics watch table');
                 }
 
                 $sql_where = (!empty($_POST['split_type_beyond'])) ? " post_time >= $post_time AND topic_id = $topic_id" : "post_id IN ($post_id_sql)";
 
                 $sql = "UPDATE " . BB_POSTS . " SET topic_id = $new_topic_id, forum_id = $new_forum_id WHERE $sql_where";
-                if (!DB()->sql_query($sql)) {
+                if (!Di::getInstance()->db->sql_query($sql)) {
                     bb_die('Could not update posts table');
                 }
 
@@ -533,19 +535,19 @@ switch ($mode) {
             bb_die(return_msg_mcp($msg));
         } else {
             $sql = "SELECT u.username, p.*, pt.post_text, p.post_username
-				FROM " . BB_POSTS . " p, " . BB_USERS . " u, " . BB_POSTS_TEXT . " pt
+				FROM " . BB_POSTS . " p, bb_users u, " . BB_POSTS_TEXT . " pt
 				WHERE p.topic_id = $topic_id
 					AND p.poster_id = u.user_id
 					AND p.post_id = pt.post_id
 				ORDER BY p.post_time ASC";
-            if (!($result = DB()->sql_query($sql))) {
+            if (!($result = Di::getInstance()->db->sql_query($sql))) {
                 bb_die('Could not get topic / post information');
             }
 
             $s_hidden_fields = '<input type="hidden" name="sid" value="' . $userdata['session_id'] . '" /><input type="hidden" name="' . POST_FORUM_URL . '" value="' . $forum_id . '" /><input type="hidden" name="' . POST_TOPIC_URL . '" value="' . $topic_id . '" /><input type="hidden" name="mode" value="split" />';
 
-            if (($total_posts = DB()->num_rows($result)) > 0) {
-                $postrow = DB()->sql_fetchrowset($result);
+            if (($total_posts = Di::getInstance()->db->num_rows($result)) > 0) {
+                $postrow = Di::getInstance()->db->sql_fetchrowset($result);
 
                 $template->assign_vars(array(
                     'FORUM_NAME' => htmlCHR($forum_name),
@@ -603,11 +605,11 @@ switch ($mode) {
 
         // Look up relevant data for this post
         $sql = "SELECT * FROM " . BB_POSTS . " WHERE post_id = $post_id AND forum_id = $forum_id";
-        if (!($result = DB()->sql_query($sql))) {
+        if (!($result = Di::getInstance()->db->sql_query($sql))) {
             bb_die('Could not get poster IP information');
         }
 
-        if (!($post_row = DB()->sql_fetchrow($result))) {
+        if (!($post_row = Di::getInstance()->db->sql_fetchrow($result))) {
             bb_die($lang['NO_SUCH_POST']);
         }
 
@@ -628,11 +630,11 @@ switch ($mode) {
         $where_sql = ($poster_id == $anon) ? "post_username = '{$post_row['post_username']}'" : "poster_id = $poster_id";
 
         $sql = "SELECT poster_ip, COUNT(*) AS postings FROM " . BB_POSTS . " WHERE $where_sql GROUP BY poster_ip ORDER BY postings DESC LIMIT 100";
-        if (!($result = DB()->sql_query($sql))) {
+        if (!($result = Di::getInstance()->db->sql_query($sql))) {
             bb_die('Could not get IP information for this user');
         }
 
-        if ($row = DB()->sql_fetchrow($result)) {
+        if ($row = Di::getInstance()->db->sql_fetchrow($result)) {
             $i = 0;
             do {
                 if ($row['poster_ip'] == $post_row['poster_ip']) {
@@ -653,7 +655,7 @@ switch ($mode) {
                 ));
 
                 $i++;
-            } while ($row = DB()->sql_fetchrow($result));
+            } while ($row = Di::getInstance()->db->sql_fetchrow($result));
         }
 
         //
@@ -663,17 +665,17 @@ switch ($mode) {
 				u.user_id,
 				IF(u.user_id = $anon, p.post_username, u.username) AS username,
 				COUNT(*) as postings
-			FROM " . BB_USERS . " u, " . BB_POSTS . " p
+			FROM bb_users u, " . BB_POSTS . " p
 			WHERE p.poster_id = u.user_id
 				AND p.poster_ip = '" . $post_row['poster_ip'] . "'
 			GROUP BY u.user_id, p.post_username
 			ORDER BY postings DESC
 			LIMIT 100";
-        if (!($result = DB()->sql_query($sql))) {
+        if (!($result = Di::getInstance()->db->sql_query($sql))) {
             bb_die('Could not get posters information based on IP');
         }
 
-        if ($row = DB()->sql_fetchrow($result)) {
+        if ($row = Di::getInstance()->db->sql_fetchrow($result)) {
             $i = 0;
             do {
                 $id = $row['user_id'];
@@ -688,7 +690,7 @@ switch ($mode) {
                 ));
 
                 $i++;
-            } while ($row = DB()->sql_fetchrow($result));
+            } while ($row = Di::getInstance()->db->sql_fetchrow($result));
         }
 
         $template->set_filenames(array('body' => 'modcp.tpl'));
@@ -702,7 +704,7 @@ switch ($mode) {
         if (count($topic_csv)) {
             $sql = "
 				SELECT topic_id, topic_title
-				FROM " . BB_TOPICS . "
+				FROM bb_topics
 				WHERE topic_id IN($topic_csv)
 					AND forum_id = $forum_id
 					AND topic_show_first_post != " . TOPIC_MOVED . "
@@ -711,7 +713,7 @@ switch ($mode) {
 
             $topic_csv = array();
 
-            foreach (DB()->fetch_rowset($sql) as $row) {
+            foreach (Di::getInstance()->db->fetch_rowset($sql) as $row) {
                 $topic_csv[] = $row['topic_id'];
                 $log_topics[$row['topic_id']] = $row['topic_title'];
             }
@@ -720,8 +722,8 @@ switch ($mode) {
                 bb_die($lang['NONE_SELECTED']);
             }
 
-            DB()->query("
-				UPDATE " . BB_TOPICS . " SET
+            Di::getInstance()->db->query("
+				UPDATE bb_topics SET
 					topic_show_first_post = $new_topic_status
 				WHERE topic_id IN($topic_csv)
 			");
@@ -731,7 +733,7 @@ switch ($mode) {
         } elseif ($topic_id) {
             $sql = "
 				SELECT topic_id, topic_title
-				FROM " . BB_TOPICS . "
+				FROM bb_topics
 				WHERE topic_id = $topic_id
 					AND forum_id = $forum_id
 					AND topic_show_first_post != " . TOPIC_MOVED . "
@@ -741,7 +743,7 @@ switch ($mode) {
 
             $topic_csv = array();
 
-            foreach (DB()->fetch_rowset($sql) as $row) {
+            foreach (Di::getInstance()->db->fetch_rowset($sql) as $row) {
                 $topic_csv[] = $row['topic_id'];
                 $log_topics[$row['topic_id']] = $row['topic_title'];
             }
@@ -750,8 +752,8 @@ switch ($mode) {
                 bb_die($lang['NONE_SELECTED']);
             }
 
-            DB()->query("
-				UPDATE " . BB_TOPICS . " SET
+            Di::getInstance()->db->query("
+				UPDATE bb_topics SET
 					topic_show_first_post = $new_topic_status
 				WHERE topic_id IN($topic_csv)
 			");

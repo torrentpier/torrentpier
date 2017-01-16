@@ -22,6 +22,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+use \TorrentPier\Di;
 
 if (!defined('BB_ROOT')) {
     die(basename(__FILE__));
@@ -145,7 +146,7 @@ if (IS_ADMIN) {
 		GROUP BY ug.user_id, g.group_single_user, ug.user_pending
 		ORDER BY NULL
 	";
-    if ($rowset = DB()->fetch_rowset($sql)) {
+    if ($rowset = Di::getInstance()->db->fetch_rowset($sql)) {
         $member = $pending = $single = 0;
         foreach ($rowset as $row) {
             if (!$row['group_single_user'] && !$row['user_pending']) {

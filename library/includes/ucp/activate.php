@@ -22,6 +22,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+use \TorrentPier\Di;
 
 if (!defined('BB_ROOT')) {
     die(basename(__FILE__));
@@ -32,22 +33,22 @@ if (empty($_GET['u']) || empty($_GET['act_key'])) {
 }
 
 $sql = "SELECT user_active, user_id, username, user_email, user_newpasswd, user_lang, user_actkey
-	FROM " . BB_USERS . "
+	FROM bb_users
 	WHERE user_id = " . intval($_GET[POST_USERS_URL]);
-if (!($result = DB()->sql_query($sql))) {
+if (!($result = Di::getInstance()->db->sql_query($sql))) {
     bb_die('Could not obtain user information');
 }
 
-if ($row = DB()->sql_fetchrow($result)) {
+if ($row = Di::getInstance()->db->sql_fetchrow($result)) {
     if ($row['user_active'] && trim($row['user_actkey']) == '') {
         bb_die($lang['ALREADY_ACTIVATED']);
     } elseif ((trim($row['user_actkey']) == trim($_GET['act_key'])) && (trim($row['user_actkey']) != '')) {
         $sql_update_pass = ($row['user_newpasswd'] != '') ? ", user_password = '" . md5(md5($row['user_newpasswd'])) . "', user_newpasswd = ''" : '';
 
-        $sql = "UPDATE " . BB_USERS . "
+        $sql = "UPDATE bb_users
 			SET user_active = 1, user_actkey = ''" . $sql_update_pass . "
 			WHERE user_id = " . $row['user_id'];
-        if (!($result = DB()->sql_query($sql))) {
+        if (!($result = Di::getInstance()->db->sql_query($sql))) {
             bb_die('Could not update users table');
         }
 

@@ -23,6 +23,8 @@
  * SOFTWARE.
  */
 
+use \TorrentPier\Di;
+
 define('BB_SCRIPT', 'index');
 define('BB_ROOT', './');
 require_once __DIR__ . '/common.php';
@@ -132,11 +134,11 @@ $sql = "
 		t.topic_id AS last_topic_id, t.topic_title AS last_topic_title,
 		u.user_id AS last_post_user_id, u.user_rank AS last_post_user_rank,
 		IF(p.poster_id = $anon, p.post_username, u.username) AS last_post_username
-	FROM         " . BB_CATEGORIES . " c
-	INNER JOIN   " . BB_FORUMS . " f ON($forums_join_sql)
+	FROM         bb_categories c
+	INNER JOIN   bb_forums f ON($forums_join_sql)
 	$join_p_type " . BB_POSTS . " p ON($posts_join_sql)
-	$join_t_type " . BB_TOPICS . " t ON($topics_join_sql)
-	LEFT JOIN    " . BB_USERS . " u ON(u.user_id = p.poster_id)
+	$join_t_type bb_topics t ON($topics_join_sql)
+	LEFT JOIN    bb_users u ON(u.user_id = p.poster_id)
 	ORDER BY c.cat_order, f.forum_order
 ";
 
@@ -153,7 +155,7 @@ $replace_in_parent = array(
 $cache_name = 'index_sql_' . md5($sql);
 if (!$cache->has($cache_name)) {
     $cat_forums = [];
-    foreach (DB()->fetch_rowset($sql) as $row) {
+    foreach (Di::getInstance()->db->fetch_rowset($sql) as $row) {
         if (!($cat_id = $row['cat_id']) || !($forum_id = $row['forum_id'])) {
             continue;
         }
@@ -290,13 +292,30 @@ $template->assign_vars(array(
     'TOTAL_TOPICS' => sprintf($lang['POSTED_TOPICS_TOTAL'], $stats['topiccount']),
     'TOTAL_POSTS' => sprintf($lang['POSTED_ARTICLES_TOTAL'], $stats['postcount']),
     'TOTAL_USERS' => sprintf($lang['REGISTERED_USERS_TOTAL'], $stats['usercount']),
-    'TOTAL_GENDER' => ($di->config->get('gender')) ? sprintf($lang['USERS_TOTAL_GENDER'], $stats['male'], $stats['female'], $stats['unselect']) : '',
+    'TOTAL_GENDER' => ($di->config->get('gender')) ? sprintf(
+        $lang['USERS_TOTAL_GENDER'],
+        $stats['male'] ?? 0,
+        $stats['female'] ?? 0,
+        $stats['unselect'] ?? 0
+    ) : '',
     'NEWEST_USER' => sprintf($lang['NEWEST_USER'], profile_url($stats['newestuser'])),
 
     // Tracker stats
-    'TORRENTS_STAT' => ($di->config->get('tor_stats')) ? sprintf($lang['TORRENTS_STAT'], $stats['torrentcount'], humn_size($stats['size'])) : '',
-    'PEERS_STAT' => ($di->config->get('tor_stats')) ? sprintf($lang['PEERS_STAT'], $stats['peers'], $stats['seeders'], $stats['leechers']) : '',
-    'SPEED_STAT' => ($di->config->get('tor_stats')) ? sprintf($lang['SPEED_STAT'], humn_size($stats['speed']) . '/s') : '',
+    'TORRENTS_STAT' => ($di->config->get('tor_stats')) ? sprintf(
+        $lang['TORRENTS_STAT'],
+        $stats['torrentcount'] ?? 0,
+        humn_size($stats['size'] ?? 0)
+    ) : '',
+    'PEERS_STAT' => ($di->config->get('tor_stats')) ? sprintf(
+        $lang['PEERS_STAT'],
+        $stats['peers'] ?? 0,
+        $stats['seeders'] ?? 0,
+        $stats['leechers'] ?? 0
+    ) : '',
+    'SPEED_STAT' => ($di->config->get('tor_stats')) ? sprintf(
+        $lang['SPEED_STAT'],
+        humn_size($stats['speed'] ?? 0) . '/s'
+    ) : '',
     'SHOW_MOD_INDEX' => $di->config->get('show_mod_index'),
     'FORUM_IMG' => $images['forum'],
     'FORUM_NEW_IMG' => $images['forum_new'],
@@ -365,7 +384,7 @@ if ($di->config->get('birthday_check_day') && $di->config->get('birthday_enabled
     $week_list = $today_list = array();
     $week_all = $today_all = false;
 
-    if ($stats['birthday_week_list']) {
+    if (isset($stats['birthday_week_list'])) {
         shuffle($stats['birthday_week_list']);
         foreach ($stats['birthday_week_list'] as $i => $week) {
             if ($i >= 5) {
@@ -380,7 +399,7 @@ if ($di->config->get('birthday_check_day') && $di->config->get('birthday_enabled
         $week_list = sprintf($lang['NOBIRTHDAY_WEEK'], $di->config->get('birthday_check_day'));
     }
 
-    if ($stats['birthday_today_list']) {
+    if (isset($stats['birthday_today_list'])) {
         shuffle($stats['birthday_today_list']);
         foreach ($stats['birthday_today_list'] as $i => $today) {
             if ($i >= 5) {

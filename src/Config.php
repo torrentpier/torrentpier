@@ -2,7 +2,7 @@
 /**
  * MIT License
  *
- * Copyright (c) 2005-2016 TorrentPier
+ * Copyright (c) 2005-2017 TorrentPier
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -25,101 +25,149 @@
 
 namespace TorrentPier;
 
-use Zend\Config\Config as ZendConfig;
+use \Exception;
 
-/**
- * Class Config
- * @package TorrentPier
- */
-class Config extends ZendConfig
+class Config implements \ArrayAccess
 {
-    protected $root;
+    public $dbQuery;
 
-    /**
-     * Config constructor.
-     *
-     * @param array $array
-     * @param bool $allowModifications
-     * @param Config|null $root
-     */
-    public function __construct(array $array, $allowModifications = false, Config &$root = null)
+    protected $data;
+    protected $mutableData = [];
+    protected $dbLoaded = false;
+
+    public function __construct(array $data)
     {
-        $this->allowModifications = (bool)$allowModifications;
-
-        $this->root = $root;
-
-        foreach ($array as $key => $value) {
-            if (is_array($value)) {
-                $this->data[$key] = new static($value, $this->allowModifications, $this);
-            } else {
-                $this->data[$key] = $value;
-            }
-        }
+        $this->data = $data;
     }
 
-    /**
-     * @inheritdoc
-     */
-    public function get($name, $default = null)
+    public function __set($name, $value)
     {
-        $result = parent::get($name, null);
+        $this->set($name, $value);
+    }
 
-        if ($result === null) {
-            if (strpos($name, '.')) {
-                $keys = explode('.', $name);
-                $result = $this;
-                foreach ($keys as $key) {
-                    $result = $result->get($key);
-                    if (null === $result) {
-                        break;
+    public function __get($name)
+    {
+        return $this->get($name);
+    }
+
+    public function offsetExists($offset)
+    {
+        return isset($this->data[$offset]) || isset($this->mutableData[$offset]);
+    }
+
+    public function offsetGet($name)
+    {
+        $default = null;
+        if (array_key_exists($name, $this->data)) {
+            return $this->data[$name];
+        } elseif (array_key_exists($name, $this->mutableData)) {
+            return $this->mutableData[$name];
+        } elseif (strpos($name, '.') !== false) {
+            return $this->getByPath(explode('.', $name), $default);
+        } else {
+            $ret = $default;
+            if (!$this->dbLoaded && isset($this->dbQuery)) {
+                $this->dbLoaded = true;
+                // TODO: cache
+                $db = Di::getInstance()->db;
+                foreach ($db->query($this->dbQuery)->fetchAll($db::FETCH_NUM) as $row) {
+                    if (!array_key_exists($row[0], $this->data)) {
+                        if ($row[0] == $name) {
+                            $ret = $row[1];
+                        }
+                        $this->data[$row[0]] = $row[1];
                     }
                 }
             }
-
-            $result = $result ?: $default;
+            return $ret;
         }
+    }
 
-        return $this->prepareValue($result);
+    public function offsetSet($offset, $value)
+    {
+        $this->set($offset, $value);
+    }
+
+    public function offsetUnset($offset)
+    {
+        $this->delete($offset);
+    }
+
+    public function isExists($name)
+    {
+        return isset($this->data[$name]) || isset($this->mutableData[$name]);
     }
 
     /**
-     * Parse value
-     *
-     * @param mixed $value
-     * @return mixed
+     * @param $name
+     * @param $value
+     * @throws Exception
      */
-    protected function prepareValue($value)
+    public function set($name, $value)
     {
-        if (is_string($value)) {
-            $strPos = strpos($value, '{self.');
-            if ($strPos !== false) {
-                $strPos += 6;
-                $key = substr($value, $strPos, (strpos($value, '}') - $strPos));
-
-                $value = str_replace('{self.' . $key . '}', $this->root->get($key, ''), $value);
-            }
+        if (isset($this->data[$name])) {
+            throw new Exception("$name is read only");
         }
-
-        return $value;
+        $this->mutableData[$name] = $value;
     }
 
     /**
-     * @inheritdoc
+     * @param $name
+     * @throws Exception
      */
-    public function toArray()
+    public function delete($name)
     {
-        $array = [];
-        $data = $this->data;
+        if (isset($this->data[$name])) {
+            throw new Exception("$name is read only");
+        }
+        unset($this->mutableData[$name]);
+    }
 
-        /** @var self $value */
-        foreach ($data as $key => $value) {
-            if ($value instanceof self) {
-                $array[$key] = $value->toArray();
-            } else {
-                $array[$key] = $this->prepareValue($value);
+    public function get($name, $default = null)
+    {
+        if (array_key_exists($name, $this->data)) {
+            return $this->data[$name];
+        } elseif (array_key_exists($name, $this->mutableData)) {
+            return $this->mutableData[$name];
+        } elseif (strpos($name, '.') !== false) {
+            return $this->getByPath(explode('.', $name), $default);
+        } else {
+            $ret = $default;
+            if (!$this->dbLoaded && isset($this->dbQuery)) {
+                $this->dbLoaded = true;
+                // TODO: cache
+                foreach (Di::getInstance()->db->query($this->dbQuery)->fetchAll() as $row) {
+                    if (!array_key_exists($row['config_name'], $this->data)) {
+                        if ($row['config_name'] == $name) {
+                            $ret = $row['config_value'];
+                        }
+                        $this->data[$row['config_name']] = $row['config_value'];
+                    }
+                }
+            }
+            return $ret;
+        }
+    }
+
+    public function getByPath(array $path, $default = null)
+    {
+        $ret = $default;
+        $last = count($path) - 1;
+        $tmp = $this->data;
+        foreach ($path as $k => $part) {
+            if (array_key_exists($part, $tmp)) {
+                if ($k == $last) {
+                    $ret = $tmp[$part];
+                } else {
+                    $tmp = $tmp[$part];
+                }
             }
         }
+        return $ret;
+    }
 
-        return $array;
+    public function merge(array $data)
+    {
+        $this->data = array_replace_recursive($this->data, $data);
     }
 }

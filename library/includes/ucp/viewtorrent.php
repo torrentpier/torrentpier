@@ -22,6 +22,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+use \TorrentPier\Di;
 
 if (!defined('IN_PROFILE')) {
     die(basename(__FILE__));
@@ -37,12 +38,12 @@ $not_auth_forums_sql = ($excluded_forums_csv) ? "
 	AND f.forum_parent NOT IN($excluded_forums_csv)
 " : '';
 
-$sql = DB()->fetch_rowset("
+$sql = Di::getInstance()->db->fetch_rowset("
 	SELECT
 		f.forum_id, f.forum_name, t.topic_title,
 		tor.tor_type, tor.size,
 		sn.seeders, sn.leechers, tr.*
-	FROM " . BB_FORUMS . " f, " . BB_TOPICS . " t, " . BB_BT_TRACKER . " tr, " . BB_BT_TORRENTS . " tor, " . BB_BT_TRACKER_SNAP . " sn
+	FROM bb_forums f, bb_topics t, bb_bt_tracker tr, bb_bt_torrents tor, bb_bt_tracker_snap sn
 	WHERE tr.user_id = {$profiledata['user_id']}
 		AND tr.topic_id = tor.topic_id
 		AND sn.topic_id = tor.topic_id

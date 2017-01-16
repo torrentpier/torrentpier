@@ -30,11 +30,11 @@ return [
         // Database
         'db' => [
             'debug' => '{self.debug}',
-            'driver' => 'Pdo_Mysql',
+            'type' => 'mysql',
             'hostname' => '127.0.0.1',
             'database' => 'tp_220',
             'username' => 'user',
-            'password' => 'pass',
+            'password' => function() { return 'pass'; },
             'charset' => 'utf8'
         ],
 

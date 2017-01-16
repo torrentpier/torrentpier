@@ -45,8 +45,6 @@ class ConfigTest extends \PHPUnit_Framework_TestCase
             'key1' => 'value1',
             'key2' => [
                 'key3' => 'value2',
-                'key4' => '{self.key1}',
-                'key5' => '{self.key2.key4}',
             ]
         ];
 
@@ -62,31 +60,10 @@ class ConfigTest extends \PHPUnit_Framework_TestCase
     {
         static::assertEquals($this->config->get('key1'), 'value1');
         static::assertEquals($this->config->get('key2.key3'), 'value2');
-        static::assertEquals($this->config->get('key2.key4'), 'value1');
-        static::assertEquals($this->config->get('key2.key5'), 'value1');
-        static::assertEquals($this->config->get('key2')->get('key3'), 'value2');
 
         static::assertEquals($this->config['key1'], 'value1');
         static::assertEquals($this->config['key2.key3'], 'value2');
-        static::assertEquals($this->config['key2.key4'], 'value1');
-        static::assertEquals($this->config['key2.key5'], 'value1');
         static::assertEquals($this->config['key2']['key3'], 'value2');
-
-        static::assertEquals($this->config['key2.key6'], null);
     }
 
-    /**
-     * @covers \TorrentPier\Config::toArray
-     */
-    public function testToArray()
-    {
-        static::assertEquals($this->config->toArray(), [
-            'key1' => 'value1',
-            'key2' => [
-                'key3' => 'value2',
-                'key4' => 'value1',
-                'key5' => 'value1',
-            ]
-        ]);
-    }
 }

@@ -22,6 +22,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+use \TorrentPier\Di;
 
 if (!defined('BB_ROOT')) {
     die(basename(__FILE__));
@@ -62,7 +63,7 @@ if (isset($_POST['bonus_id'])) {
         bb_die($message);
     }
 
-    DB()->query("UPDATE " . BB_BT_USERS . " bu, " . BB_USERS . " u
+    Di::getInstance()->db->query("UPDATE " . BB_BT_USERS . " bu, bb_users u
 		SET
 			bu.u_up_total   = u_up_total    + $upload,
 			u.user_points   = u.user_points - $points

@@ -22,6 +22,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+use \TorrentPier\Di;
 
 if (!defined('BB_ROOT')) {
     die(basename(__FILE__));
@@ -31,7 +32,7 @@ $ranks = array();
 
 $sql = "SELECT rank_id, rank_title, rank_image, rank_style FROM " . BB_RANKS;
 
-foreach (DB()->fetch_rowset($sql) as $row) {
+foreach (Di::getInstance()->db->fetch_rowset($sql) as $row) {
     $ranks[$row['rank_id']] = $row;
 }
 

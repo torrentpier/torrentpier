@@ -23,6 +23,9 @@
  * SOFTWARE.
  */
 
+use TorrentPier\Di;
+use TorrentPier\ServiceProviders;
+
 if (isset($_REQUEST['GLOBALS'])) {
     die();
 }
@@ -64,16 +67,17 @@ require_once(BB_ROOT . 'vendor/autoload.php');
 // Get initial config
 require_once(BB_ROOT . 'library/config.php');
 
-$di = new \TorrentPier\Di();
+$di = new Di();
 
 // TODO: Need to get locale from settings
 $di['settings.locale'] = function ($di) {
     return 'en';
 };
 
-$di->register(new \TorrentPier\ServiceProviders\ConfigServiceProvider, [
-    'file.system.main' => __DIR__ . '/library/config.php',
-    'file.local.main' => __DIR__ . '/library/config.local.php',
+$di->register(new ServiceProviders\ConfigServiceProvider, [
+    'file.system.main' => __DIR__ . '/configs/main.php',
+    'file.local.main' => __DIR__ . '/configs/local.php',
+    'config.dbQuery' => "SELECT config_name, config_value FROM bb_config"
 ]);
 
 $di->register(new \TorrentPier\ServiceProviders\LogServiceProvider());
@@ -86,9 +90,9 @@ $di->register(new \TorrentPier\ServiceProviders\TranslationServiceProvider());
 $di->register(new \TorrentPier\ServiceProviders\TwigServiceProvider());
 $di->register(new \TorrentPier\ServiceProviders\CaptchaServiceProvider());
 
-$page_cfg = $di->config->page->toArray();
-$tr_cfg = $di->config->tracker->toArray();
-$rating_limits = $di->config->rating->toArray();
+$page_cfg = $di->config->page;
+$tr_cfg = $di->config->tracker;
+$rating_limits = $di->config->rating;
 define('BB_CFG_LOADED', true);
 
 // Load Zend Framework
@@ -141,27 +145,16 @@ require(CORE_DIR . 'dbs.php');
 $DBS = new DBS([
     'db' => [
         'db' => [
-            $di->config->services->db->hostname,
-            $di->config->services->db->database,
-            $di->config->services->db->username,
-            $di->config->services->db->password,
-            $di->config->services->db->charset,
+            $di->config->get("services.db.hostname"),
+            $di->config->get("services.db.database"),
+            $di->config->get("services.db.username"),
+            $di->config->get("services.db.password"),
+            $di->config->get("services.db.charset"),
             false
         ]
     ],
     'db_alias' => $di->config->get('db_alias')
 ]);
-
-/**
- * TODO: @deprecated
- * @param string $db_alias
- * @return mixed
- */
-function DB($db_alias = 'db')
-{
-    global $DBS;
-    return $DBS->get_db_obj($db_alias);
-}
 
 /**
  * Datastore

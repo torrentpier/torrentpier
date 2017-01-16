@@ -22,19 +22,20 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+use \TorrentPier\Di;
 
 if (!defined('BB_ROOT')) {
     die(basename(__FILE__));
 }
 
-DB()->query("
+Di::getInstance()->db->query("
 	UPDATE
 		" . BUF_LAST_SEEDER . " b,
-		" . BB_BT_TORRENTS . " tor
+		bb_bt_torrents tor
 	SET
 		tor.seeder_last_seen = b.seeder_last_seen
 	WHERE
 		tor.topic_id = b.topic_id
 ");
 
-DB()->query("TRUNCATE TABLE " . BUF_LAST_SEEDER);
+Di::getInstance()->db->query("TRUNCATE TABLE " . BUF_LAST_SEEDER);

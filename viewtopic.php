@@ -23,6 +23,8 @@
  * SOFTWARE.
  */
 
+use \TorrentPier\Di;
+
 define('BB_SCRIPT', 'topic');
 define('BB_ROOT', './');
 require(BB_ROOT . 'common.php');
@@ -83,15 +85,15 @@ $tracking_forums = get_tracks('forum');
 // Get forum/topic data
 if ($topic_id) {
     $sql = "SELECT t.*, f.*, tw.notify_status
-		FROM " . BB_TOPICS . " t
-		LEFT JOIN " . BB_FORUMS . " f USING(forum_id)
+		FROM bb_topics t
+		LEFT JOIN bb_forums f USING(forum_id)
 		LEFT JOIN " . BB_TOPICS_WATCH . " tw ON(tw.topic_id = t.topic_id AND tw.user_id = {$userdata['user_id']})
 		WHERE t.topic_id = $topic_id
 	";
 } elseif ($post_id) {
     $sql = "SELECT t.*, f.*, p.post_time, tw.notify_status
-		FROM " . BB_TOPICS . " t
-		LEFT JOIN " . BB_FORUMS . " f  USING(forum_id)
+		FROM bb_topics t
+		LEFT JOIN bb_forums f  USING(forum_id)
 		LEFT JOIN " . BB_POSTS . " p  USING(topic_id)
 		LEFT JOIN " . BB_TOPICS_WATCH . " tw ON(tw.topic_id = t.topic_id AND tw.user_id = {$userdata['user_id']})
 		WHERE p.post_id = $post_id
@@ -100,7 +102,7 @@ if ($topic_id) {
     bb_die($lang['TOPIC_POST_NOT_EXIST']);
 }
 
-if (!$t_data = DB()->fetch_row($sql)) {
+if (!$t_data = Di::getInstance()->db->fetch_row($sql)) {
     meta_refresh('index.php', 10);
     bb_die($lang['TOPIC_POST_NOT_EXIST']);
 }
@@ -132,7 +134,7 @@ if (isset($_GET['view']) && $_GET['view'] === 'newest' && !IS_GUEST && $topic_id
 		ORDER BY post_time ASC
 		LIMIT 1";
 
-    if ($row = DB()->fetch_row($sql)) {
+    if ($row = Di::getInstance()->db->fetch_row($sql)) {
         $post_id = $newest = $row['post_id'];
         $t_data['post_time'] = $row['post_time'];
     }
@@ -144,7 +146,7 @@ if ($post_id && !empty($t_data['post_time']) && ($t_data['topic_replies'] + 1) >
 		WHERE topic_id = $topic_id
 			AND post_time <= {$t_data['post_time']}";
 
-    if ($row = DB()->fetch_row($sql)) {
+    if ($row = Di::getInstance()->db->fetch_row($sql)) {
         $t_data['prev_posts'] = $row['prev_posts'];
     }
 }
@@ -225,21 +227,21 @@ if ($di->config->get('topic_notify_enabled')) {
             if (isset($_GET['unwatch'])) {
                 if ($_GET['unwatch'] == 'topic') {
                     $is_watching_topic = 0;
-                    DB()->query("DELETE FROM " . BB_TOPICS_WATCH . " WHERE topic_id = $topic_id AND user_id = {$userdata['user_id']}");
+                    Di::getInstance()->db->query("DELETE FROM " . BB_TOPICS_WATCH . " WHERE topic_id = $topic_id AND user_id = {$userdata['user_id']}");
                 }
                 set_die_append_msg($forum_id, $topic_id);
                 bb_die($lang['NO_LONGER_WATCHING']);
             } else {
                 $is_watching_topic = true;
                 if (!$t_data['notify_status']) {
-                    DB()->query("UPDATE " . BB_TOPICS_WATCH . " SET notify_status = " . TOPIC_WATCH_NOTIFIED . " WHERE topic_id = $topic_id AND user_id = {$userdata['user_id']}");
+                    Di::getInstance()->db->query("UPDATE " . BB_TOPICS_WATCH . " SET notify_status = " . TOPIC_WATCH_NOTIFIED . " WHERE topic_id = $topic_id AND user_id = {$userdata['user_id']}");
                 }
             }
         } else {
             if (isset($_GET['watch'])) {
                 if ($_GET['watch'] == 'topic') {
                     $is_watching_topic = true;
-                    DB()->query("
+                    Di::getInstance()->db->query("
 						INSERT INTO " . BB_TOPICS_WATCH . " (user_id, topic_id, notify_status)
 						VALUES (" . $userdata['user_id'] . ", $topic_id, " . TOPIC_WATCH_NOTIFIED . ")
 					");
@@ -274,12 +276,12 @@ if (!empty($_REQUEST['postdays'])) {
         $min_post_time = TIMENOW - ($post_days * 86400);
 
         $sql = "SELECT COUNT(p.post_id) AS num_posts
-			FROM " . BB_TOPICS . " t, " . BB_POSTS . " p
+			FROM bb_topics t, " . BB_POSTS . " p
 			WHERE t.topic_id = $topic_id
 				AND p.topic_id = t.topic_id
 				AND p.post_time > $min_post_time";
 
-        $total_replies = ($row = DB()->fetch_row($sql)) ? $row['num_posts'] : 0;
+        $total_replies = ($row = Di::getInstance()->db->fetch_row($sql)) ? $row['num_posts'] : 0;
         $limit_posts_time = "AND p.post_time >= $min_post_time ";
     }
 }
@@ -293,7 +295,7 @@ $post_order = (isset($_POST['postorder']) && $_POST['postorder'] !== 'asc') ? 'd
 // 1. Add first post of topic if it pinned and page of topic not first
 $first_post = false;
 if ($t_data['topic_show_first_post'] && $start) {
-    $first_post = DB()->fetch_rowset("
+    $first_post = Di::getInstance()->db->fetch_rowset("
 		SELECT
 			u.username, u.user_id, u.user_rank, u.user_posts, u.user_from,
 			u.user_regdate, u.user_sig,
@@ -303,10 +305,10 @@ if ($t_data['topic_show_first_post'] && $start) {
 			u2.username as mc_username, u2.user_rank as mc_user_rank,
 			h.post_html, IF(h.post_html IS NULL, pt.post_text, NULL) AS post_text
 		FROM      " . BB_POSTS . " p
-		LEFT JOIN " . BB_USERS . " u  ON(u.user_id = p.poster_id)
+		LEFT JOIN bb_users u  ON(u.user_id = p.poster_id)
 		LEFT JOIN " . BB_POSTS_TEXT . " pt ON(pt.post_id = p.post_id)
 		LEFT JOIN " . BB_POSTS_HTML . " h  ON(h.post_id = p.post_id)
-		LEFT JOIN " . BB_USERS . " u2 ON(u2.user_id = p.mc_user_id)
+		LEFT JOIN bb_users u2 ON(u2.user_id = p.mc_user_id)
 		LEFT JOIN " . BB_GROUPS . " g ON(g.group_id = p.poster_rg_id)
 		WHERE
 			p.post_id = {$t_data['topic_first_post_id']}
@@ -324,10 +326,10 @@ $sql = "
 		u2.username as mc_username, u2.user_rank as mc_user_rank,
 		h.post_html, IF(h.post_html IS NULL, pt.post_text, NULL) AS post_text
 	FROM      " . BB_POSTS . " p
-	LEFT JOIN " . BB_USERS . " u  ON(u.user_id = p.poster_id)
+	LEFT JOIN bb_users u  ON(u.user_id = p.poster_id)
 	LEFT JOIN " . BB_POSTS_TEXT . " pt ON(pt.post_id = p.post_id)
 	LEFT JOIN " . BB_POSTS_HTML . " h  ON(h.post_id = p.post_id)
-	LEFT JOIN " . BB_USERS . " u2 ON(u2.user_id = p.mc_user_id)
+	LEFT JOIN bb_users u2 ON(u2.user_id = p.mc_user_id)
 	LEFT JOIN " . BB_GROUPS . " g ON(g.group_id = p.poster_rg_id)
 	WHERE p.topic_id = $topic_id
 		$limit_posts_time
@@ -336,7 +338,7 @@ $sql = "
 	LIMIT $start, $posts_per_page
 ";
 
-if ($postrow = DB()->fetch_rowset($sql)) {
+if ($postrow = Di::getInstance()->db->fetch_rowset($sql)) {
     if ($first_post) {
         $postrow = array_merge($first_post, $postrow);
     }
@@ -498,7 +500,7 @@ require(INC_DIR . 'torrent_show_dl_list.php');
 // Update the topic view counter
 //
 $sql = "INSERT INTO " . BUF_TOPIC_VIEW . " (topic_id,  topic_views) VALUES ($topic_id, 1) ON DUPLICATE KEY UPDATE topic_views = topic_views + 1";
-if (!DB()->sql_query($sql)) {
+if (!Di::getInstance()->db->sql_query($sql)) {
     bb_die('Could not update topic views');
 }
 

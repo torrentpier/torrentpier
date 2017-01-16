@@ -23,6 +23,8 @@
  * SOFTWARE.
  */
 
+use \TorrentPier\Di;
+
 define('BB_SCRIPT', 'search');
 define('BB_ROOT', './');
 require(BB_ROOT . 'common.php');
@@ -53,9 +55,9 @@ if (isset($_POST['del_my_post'])) {
         bb_die($lang['NONE_SELECTED']);
     }
 
-    DB()->query("UPDATE " . BB_POSTS . " SET user_post = 0 WHERE poster_id = {$user->id} AND topic_id IN($topic_csv)");
+    Di::getInstance()->db->query("UPDATE " . BB_POSTS . " SET user_post = 0 WHERE poster_id = {$user->id} AND topic_id IN($topic_csv)");
 
-    if (DB()->affected_rows()) {
+    if (Di::getInstance()->db->affected_rows()) {
         //bb_die('Выбранные темы ['. count($_POST['topic_id_list']) .' шт.] удалены из списка "Мои сообщения"');
         bb_die($lang['DEL_MY_MESSAGE']);
     } else {
@@ -72,7 +74,7 @@ if (isset($_POST['del_my_post'])) {
         redirect('index.php');
     }
 
-    DB()->query("UPDATE " . BB_POSTS . " SET user_post = 1 WHERE poster_id = {$user->id}");
+    Di::getInstance()->db->query("UPDATE " . BB_POSTS . " SET user_post = 1 WHERE poster_id = {$user->id}");
 
     redirect("search.php?u={$user->id}");
 }
@@ -121,7 +123,7 @@ $forums_tbl = BB_FORUMS . ' f';
 $posts_tbl = BB_POSTS . ' p';
 $posts_text_tbl = BB_POSTS_TEXT . ' pt';
 $posts_html_tbl = BB_POSTS_HTML . ' h';
-$tr_snap_tbl = BB_BT_TRACKER_SNAP . ' sn';
+$tr_snap_tbl = 'bb_bt_tracker_snap sn';
 $topics_tbl = BB_TOPICS . ' t';
 $torrents_tbl = BB_BT_TORRENTS . ' tor';
 $tracker_tbl = BB_BT_TRACKER . ' tr';
@@ -338,7 +340,7 @@ $datastore->rm('cat_forums');
 
 // Restore previously found items list and search settings if we have valid $search_id
 if ($search_id) {
-    $row = DB()->fetch_row("
+    $row = Di::getInstance()->db->fetch_row("
 		SELECT search_array, search_settings
 		FROM " . BB_SEARCH . "
 		WHERE session_id = '$session_id'
@@ -451,7 +453,7 @@ $title_match = ($text_match_sql && ($title_only_val || $di->config->get('disable
 $post_mode = (!$dl_search && ($display_as_val == $as_posts || isset($_GET['search_author'])));
 
 // Start building SQL
-$SQL = DB()->get_empty_sql_array();
+$SQL = Di::getInstance()->db->get_empty_sql_array();
 
 // Displaying "as posts" mode
 if ($post_mode) {
@@ -565,7 +567,7 @@ if ($post_mode) {
 	";
 
     // Fetch posts data
-    if (!$unsorted_rows = DB()->fetch_rowset($sql)) {
+    if (!$unsorted_rows = Di::getInstance()->db->fetch_rowset($sql)) {
         bb_die($lang['NO_SEARCH_MATCH']);
     }
     $tmp = $sorted_rows = array();
@@ -759,7 +761,7 @@ else {
     }
 
     // Build SQL for displaying topics
-    $SQL = DB()->get_empty_sql_array();
+    $SQL = Di::getInstance()->db->get_empty_sql_array();
     $join_dl = ($di->config->get('show_dl_status_in_search') && !IS_GUEST);
 
     $SQL['SELECT'][] = "
@@ -790,7 +792,7 @@ else {
 
     // Fetch topics data
     $topic_rows = array();
-    foreach (DB()->fetch_rowset($SQL) as $row) {
+    foreach (Di::getInstance()->db->fetch_rowset($SQL) as $row) {
         $topic_rows[$row['topic_id']] = $row;
     }
     if (!$topic_rows) {
@@ -865,7 +867,7 @@ function fetch_search_ids($sql, $search_type = SEARCH_TYPE_POST)
     global $lang, $search_id, $session_id, $items_found, $per_page;
 
     $items_found = array();
-    foreach (DB()->fetch_rowset($sql) as $row) {
+    foreach (Di::getInstance()->db->fetch_rowset($sql) as $row) {
         $items_found[] = $row['item_id'];
     }
     if (!$items_count = count($items_found)) {
@@ -901,12 +903,12 @@ function fetch_search_ids($sql, $search_type = SEARCH_TYPE_POST)
         foreach ($save_in_db as $name) {
             $curr_set[$GLOBALS["{$name}_key"]] = $GLOBALS["{$name}_val"];
         }
-        $search_settings = DB()->escape(serialize($curr_set));
+        $search_settings = Di::getInstance()->db->escape(serialize($curr_set));
 
         $columns = 'session_id,   search_type,   search_id,   search_time,    search_settings,    search_array';
         $values = "'$session_id', $search_type, '$search_id', " . TIMENOW . ", '$search_settings', '$search_array'";
 
-        DB()->query("REPLACE INTO " . BB_SEARCH . " ($columns) VALUES ($values)");
+        Di::getInstance()->db->query("REPLACE INTO " . BB_SEARCH . " ($columns) VALUES ($values)");
     }
 
     return array_slice($items_found, 0, $per_page);
@@ -922,9 +924,9 @@ function prevent_huge_searches($SQL)
         $SQL['ORDER BY'] = array();
         $SQL['LIMIT'] = array('0');
 
-        if (DB()->query($SQL) && ($row = DB()->fetch_row("SELECT FOUND_ROWS() AS rows_count"))) {
+        if (Di::getInstance()->db->query($SQL) && ($row = Di::getInstance()->db->fetch_row("SELECT FOUND_ROWS() AS rows_count"))) {
             if ($row['rows_count'] > $di->config->get('limit_max_search_results')) {
-                #				bb_log(str_compact(DB()->build_sql($SQL)) ." [{$row['rows_count']} rows]". LOG_LF, 'sql_huge_search');
+                #				bb_log(str_compact(Di::getInstance()->db->build_sql($SQL)) ." [{$row['rows_count']} rows]". LOG_LF, 'sql_huge_search');
                 bb_die('Too_many_search_results');
             }
         }
@@ -942,14 +944,14 @@ function username_search($search_match)
 
         $sql = "
 			SELECT username
-			FROM " . BB_USERS . "
-			WHERE username LIKE '" . DB()->escape($username_search) . "'
+			FROM bb_users
+			WHERE username LIKE '" . Di::getInstance()->db->escape($username_search) . "'
 				AND user_id <> " . GUEST_UID . "
 			ORDER BY username
 			LIMIT 200
 		";
 
-        foreach (DB()->fetch_rowset($sql) as $row) {
+        foreach (Di::getInstance()->db->fetch_rowset($sql) as $row) {
             $username = htmlCHR(stripslashes(html_entity_decode($row['username'])));
             $username_list .= '<option value="' . $username . '">' . $username . '</option>';
         }
