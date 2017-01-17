@@ -2,7 +2,6 @@
 .idea
 bower_components
 composer.phar
-composer.lock
 configs/local.php
 data/avatars
 data/torrent_files
@@ -21,7 +20,6 @@ vendor
 *.zip
 *.rar
 *.tar
-*.gz
 *.torrent
 
 ### Windows ###

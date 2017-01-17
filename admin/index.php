@@ -125,36 +125,6 @@ if (isset($_GET['pane']) && $_GET['pane'] == 'left') {
         $users_per_day = $total_users;
     }
 
-    // DB size ... MySQL only
-    $sql = "SELECT VERSION() AS mysql_version";
-    if ($result = DB()->sql_query($sql)) {
-        $row = DB()->sql_fetchrow($result);
-        $version = $row['mysql_version'];
-
-        if (preg_match('/^(3\.23|4\.|5\.|10\.)/', $version)) {
-            $dblist = array();
-            foreach ($di->config->get('db') as $name => $row) {
-                $sql = "SHOW TABLE STATUS FROM {$row[1]}";
-                if ($result = DB()->sql_query($sql)) {
-                    $tabledata_ary = DB()->sql_fetchrowset($result);
-
-                    $dbsize = 0;
-                    for ($i = 0; $i < count($tabledata_ary); $i++) {
-                        if ($tabledata_ary[$i]['Type'] != 'MRG_MYISAM') {
-                            $dbsize += $tabledata_ary[$i]['Data_length'] + $tabledata_ary[$i]['Index_length'];
-                        }
-                    }
-                    $dblist[] = '<span title="' . $name . '">' . humn_size($dbsize) . '</span>';
-                }
-            }
-            $dbsize = implode('&nbsp;|&nbsp;', $dblist);
-        } else {
-            $dbsize = $lang['NOT_AVAILABLE'];
-        }
-    } else {
-        $dbsize = $lang['NOT_AVAILABLE'];
-    }
-
     $template->assign_vars(array(
         'NUMBER_OF_POSTS' => $total_posts,
         'NUMBER_OF_TOPICS' => $total_topics,
@@ -164,14 +134,11 @@ if (isset($_GET['pane']) && $_GET['pane'] == 'left') {
         'TOPICS_PER_DAY' => $topics_per_day,
         'USERS_PER_DAY' => $users_per_day,
         'AVATAR_DIR_SIZE' => $avatar_dir_size,
-        'DB_SIZE' => $dbsize,
-        'GZIP_COMPRESSION' => ($di->config->get('gzip_compress')) ? $lang['ON'] : $lang['OFF'],
         'TP_VERSION' => $di->config->get('tp_version') . (!empty($di->config->get('tp_release_state')) ? ' :: ' . $di->config->get('tp_release_state') : ''),
         'TP_RELEASE_DATE' => $di->config->get('tp_release_date'),
-        'ZF_VERSION' => Zend\Version\Version::VERSION,
     ));
 
-    if ($_GET['users_online']) {
+    if (isset($_GET['users_online'])) {
         $template->assign_vars(array(
             'SHOW_USERS_ONLINE' => true,
         ));

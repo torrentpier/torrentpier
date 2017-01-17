@@ -89,7 +89,7 @@ function tte_submit (mode)
 	var $tt_td = $('#tte-'+topic_id);
 	var topic_title = $('.tt-edit-input', $tt_td).val();
 
-	if (mode == 'save') {
+	if (mode === 'save') {
 		ajax.edit_topic_title(topic_id, topic_title);
 	}
 	else {
@@ -119,9 +119,9 @@ function mod_action (mode)
 		alert('{L_NONE_SELECTED}');
 		return false;
 	}
-	if(mode == 'tor_status'){
+	if(mode === 'tor_status'){
 		status = $('#st option:selected').val();
-		if(status == '-1'){
+		if(status === '-1'){
 			alert('{L_TOR_STATUS_NOT_SELECT}');
 			return false;
 		}

@@ -4,7 +4,7 @@
 <script type="text/javascript">
 function toggle_cat_list (val)
 {
-	if (val == -1) {
+	if (val === -1) {
 		$p('cat_list').className = '';
 		$p('show_on_index').className = 'hidden';
 	}
@@ -172,7 +172,7 @@ table.forumline + table.forumline { border-top-width: 0; }
 <script type="text/javascript">
 function hl (id, on)
 {
-	$p(id).style.color = (on == 1) ? '#FF4500' : '';
+	$p(id).style.color = (on === 1) ? '#FF4500' : '';
 }
 </script>
 

@@ -11,7 +11,7 @@ $(function(){
 		var vote_text   = vote_data[0];
 		var vote_result = parseInt(vote_data[1]);
 
-		if (vote_id == 0) {
+		if (vote_id === 0) {
 			bb_poll.title = vote_text;
 		}
 		else {
@@ -64,7 +64,7 @@ function submit_vote ()
 {
 	var $voted_id = $('input.vote-inp:checked');
 
-	if ($voted_id.length == 0) {
+	if ($voted_id.length === 0) {
 		alert('{L_NEW_POLL_U_NOSEL}');
 	}
 	else {

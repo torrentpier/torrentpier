@@ -1589,7 +1589,6 @@ $lang['CREATE_PROFILE'] = 'Create profile';
 
 $lang['TP_VERSION'] = 'TorrentPier version';
 $lang['TP_RELEASE_DATE'] = 'Release date';
-$lang['ZF_VERSION'] = 'Zend Framework version';
 $lang['PHP_INFO'] = 'Information about PHP';
 
 $lang['CLICK_RETURN_ADMIN_INDEX'] = 'Click %sHere%s to return to the Admin Index';
@@ -1602,8 +1601,6 @@ $lang['NUMBER_USERS'] = 'Number of users';
 $lang['USERS_PER_DAY'] = 'Users per day';
 $lang['BOARD_STARTED'] = 'Board started';
 $lang['AVATAR_DIR_SIZE'] = 'Avatar directory size';
-$lang['DATABASE_SIZE'] = 'Database size';
-$lang['GZIP_COMPRESSION'] = 'Gzip compression';
 $lang['NOT_AVAILABLE'] = 'Not available';
 
 // Clear Cache

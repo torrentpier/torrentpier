@@ -125,7 +125,7 @@ function get_tracks($type)
             trigger_error(__FUNCTION__ . ": invalid type '$type'", E_USER_ERROR);
     }
     $tracks = !empty($_COOKIE[$c_name]) ? unserialize($_COOKIE[$c_name]) : false;
-    return ($tracks) ? $tracks : array();
+    return ($tracks) ? $tracks : [];
 }
 
 /**
@@ -358,13 +358,13 @@ function setbit(&$int, $bit_num, $on)
  * @param int $group_perm
  * @return array|mixed
  */
-function auth($type, $forum_id, $ug_data, $f_access = array(), $group_perm = UG_PERM_BOTH)
+function auth($type, $forum_id, $ug_data, $f_access = [], $group_perm = UG_PERM_BOTH)
 {
     global $lang, $bf, $datastore;
 
     $is_guest = true;
     $is_admin = false;
-    $auth = $auth_fields = $u_access = array();
+    $auth = $auth_fields = $u_access = [];
     $add_auth_type_desc = ($forum_id != AUTH_LIST_ALL);
 
     //
@@ -544,10 +544,9 @@ class Date_Delta
         31363200 => 'mday',      // 12 months
         311040000 => 'mon',       // 10 years
     );
-    public $intervals = array();
+    public $intervals = [];
     public $format = '';
 
-    // Creates new object.
     /**
      * Date_Delta constructor.
      */
@@ -559,8 +558,9 @@ class Date_Delta
         $this->format = $lang['DELTA_TIME']['FORMAT'];
     }
 
-    // Makes the spellable phrase.
     /**
+     * Makes the spellable phrase.
+     *
      * @param $first
      * @param $last
      * @param string $from
@@ -587,12 +587,12 @@ class Date_Delta
 
         // Solve data delta.
         $delta = $this->getDelta($first, $last);
-        if (!$delta) {
+        if (empty($delta)) {
             return false;
         }
 
         // Make spellable phrase.
-        $parts = array();
+        $parts = [];
         $intervals = $GLOBALS['lang']['DELTA_TIME']['INTERVALS'];
 
         foreach (array_reverse($delta) as $k => $n) {
@@ -613,16 +613,17 @@ class Date_Delta
         return join(' ', $parts);
     }
 
-    // returns the associative array with date deltas.
     /**
+     * Returns the associative array with date deltas.
+     *
      * @param $first
      * @param $last
-     * @return bool
+     * @return array
      */
     public function getDelta($first, $last)
     {
         if ($last < $first) {
-            return false;
+            return [];
         }
 
         // Solve H:M:S part.
@@ -662,8 +663,9 @@ class Date_Delta
         return $delta;
     }
 
-    // Returns the length (in days) of the specified month.
     /**
+     * Returns the length (in days) of the specified month.
+     *
      * @param $year
      * @param $mon
      * @return int
@@ -698,7 +700,8 @@ function delta_time($timestamp_1, $timestamp_2 = TIMENOW, $granularity = 'auto')
  */
 function get_select($select, $selected = null, $return_as = 'html', $first_opt = '&raquo;&raquo; Выбрать ')
 {
-    $select_ary = array();
+    $select_name = '';
+    $select_ary = [];
 
     switch ($select) {
         case 'groups':
@@ -725,10 +728,10 @@ function get_select($select, $selected = null, $return_as = 'html', $first_opt =
 class html_common
 {
     public $options = '';
-    public $attr = array();
+    public $attr = [];
     public $cur_attr = null;
     public $max_length = HTML_SELECT_MAX_LENGTH;
-    public $selected = array();
+    public $selected = [];
 
     /**
      * @param $name
@@ -749,7 +752,7 @@ class html_common
         $this->selected = array_flip((array)$selected);
         $this->max_length = $max_length;
 
-        $this->attr = array();
+        $this->attr = [];
         $this->cur_attr =& $this->attr;
 
         if (isset($params['__attributes'])) {
@@ -1019,8 +1022,8 @@ function commify($number)
  */
 function humn_size($size, $rounder = null, $min = null, $space = '&nbsp;')
 {
-    static $sizes = array('B', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB');
-    static $rounders = array(0, 0, 0, 2, 3, 3, 3, 3, 3);
+    static $sizes = ['B', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'];
+    static $rounders = [0, 0, 0, 2, 3, 3, 3, 3, 3];
 
     $size = (float)$size;
     $ext = $sizes[0];
@@ -1152,7 +1155,7 @@ function set_var(&$result, $var, $type, $multibyte = false, $strip = true)
     $result = $var;
 
     if ($type == 'string') {
-        $result = trim(htmlspecialchars(str_replace(array("\r\n", "\r"), array("\n", "\n"), $result)));
+        $result = trim(htmlspecialchars(str_replace(["\r\n", "\r"], ["\n", "\n"], $result)));
 
         if (!empty($result)) {
             // Make sure multibyte characters are wellformed
@@ -1181,15 +1184,17 @@ function set_var(&$result, $var, $type, $multibyte = false, $strip = true)
  */
 function request_var($var_name, $default, $multibyte = false, $cookie = false)
 {
+    $key_type = $sub_key_type = $sub_type = '';
+
     if (!$cookie && isset($_COOKIE[$var_name])) {
         if (!isset($_GET[$var_name]) && !isset($_POST[$var_name])) {
-            return (is_array($default)) ? array() : $default;
+            return (is_array($default)) ? [] : $default;
         }
         $_REQUEST[$var_name] = isset($_POST[$var_name]) ? $_POST[$var_name] : $_GET[$var_name];
     }
 
     if (!isset($_REQUEST[$var_name]) || (is_array($_REQUEST[$var_name]) && !is_array($default)) || (is_array($default) && !is_array($_REQUEST[$var_name]))) {
-        return (is_array($default)) ? array() : $default;
+        return (is_array($default)) ? [] : $default;
     }
 
     $var = $_REQUEST[$var_name];
@@ -1211,7 +1216,7 @@ function request_var($var_name, $default, $multibyte = false, $cookie = false)
 
     if (is_array($var)) {
         $_var = $var;
-        $var = array();
+        $var = [];
 
         foreach ($_var as $k => $v) {
             set_var($k, $k, $key_type);
@@ -1244,10 +1249,10 @@ function request_var($var_name, $default, $multibyte = false, $cookie = false)
 function get_username($user_id)
 {
     if (empty($user_id)) {
-        return is_array($user_id) ? array() : false;
+        return is_array($user_id) ? [] : false;
     }
     if (is_array($user_id)) {
-        $usernames = array();
+        $usernames = [];
         foreach (DB()->fetch_rowset("SELECT user_id, username FROM " . BB_USERS . " WHERE user_id IN(" . get_id_csv($user_id) . ")") as $row) {
             $usernames[$row['user_id']] = $row['username'];
         }
@@ -1421,7 +1426,7 @@ function bb_get_config($table, $from_db = false, $update_cache = true)
  */
 function bb_update_config($params, $table = BB_CONFIG)
 {
-    $updates = array();
+    $updates = [];
     foreach ($params as $name => $val) {
         $updates[] = array(
             'config_name' => $name,
@@ -1618,7 +1623,7 @@ function get_forum_select($mode = 'guest', $name = POST_FORUM_URL, $selected = n
     if (is_null($max_length)) {
         $max_length = HTML_SELECT_MAX_LENGTH;
     }
-    $select = is_null($all_forums_option) ? array() : array($lang['ALL_AVAILABLE'] => $all_forums_option);
+    $select = is_null($all_forums_option) ? [] : array($lang['ALL_AVAILABLE'] => $all_forums_option);
     if (!$forums = $datastore->get('cat_forums')) {
         $datastore->update('cat_forums');
         $forums = $datastore->get('cat_forums');
@@ -2571,7 +2576,7 @@ function get_title_match_topics($search)
     /** @var \TorrentPier\Di $di */
     $di = \TorrentPier\Di::getInstance();
 
-    $where_ids = array();
+    $where_ids = [];
     $forum_ids = (isset($search['ids']) && is_array($search['ids'])) ? array_diff($search['ids'], array(0 => 0)) : '';
     $title_match_sql = encode_text_match($search['query']);
 

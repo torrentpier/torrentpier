@@ -209,11 +209,10 @@ function generate_smilies($mode)
 }
 
 /**
- * Strips away [quote] tags and their contents from the specified string
+ * Strips away [quote] tags and their contents from the specified string.
  *
- * @param    string    Text to be stripped of quote tags
- *
- * @return    string
+ * @param string $text Text to be stripped of quote tags
+ * @return string
  */
 function strip_quotes($text)
 {
@@ -293,17 +292,16 @@ function strip_quotes($text)
 }
 
 /**
- * Strips away bbcode from a given string, leaving plain text
+ * Strips away bbcode from a given string, leaving plain text.
  *
- * @param      string    Text to be stripped of bbcode tags
+ * @param string $message Text to be stripped of bbcode tags
  * @param bool $stripquotes
  * @param bool $fast_and_dirty
  * @param bool $showlinks
  *
- * @return string
+ * @return mixed|string
  * @internal param \If $boolean true, strip away quote tags AND their contents
  * @internal param \If $boolean true, use the fast-and-dirty method rather than the shiny and nice method
- *
  */
 function strip_bbcode($message, $stripquotes = true, $fast_and_dirty = false, $showlinks = true)
 {

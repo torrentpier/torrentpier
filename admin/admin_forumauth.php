@@ -73,7 +73,7 @@ foreach ($forum_auth_fields as $auth_type) {
 $forum_auth_levels = ['ALL', 'REG', 'PRIVATE', 'MOD', 'ADMIN'];
 $forum_auth_const = [AUTH_ALL, AUTH_REG, AUTH_ACL, AUTH_MOD, AUTH_ADMIN];
 
-if ($_REQUEST[POST_FORUM_URL]) {
+if (isset($_REQUEST[POST_FORUM_URL])) {
     $forum_id = (int)$_REQUEST[POST_FORUM_URL];
     $forum_sql = "WHERE forum_id = $forum_id";
 } else {

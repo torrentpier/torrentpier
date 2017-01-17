@@ -18,7 +18,7 @@ function update_clear_search(myselect)
 	// enable/disable radio buttons
 	for (i = 0; i < 3; i++)
 	{
-		document.rebuild.clear_search[i].disabled = ( myselect.options[myselect.selectedIndex].value != 0 );
+		document.rebuild.clear_search[i].disabled = ( myselect.options[myselect.selectedIndex].value !== 0 );
 	}
 
 	swap_values();
@@ -126,7 +126,7 @@ function updateButton()
 {
 	if ( ticker >= 0)
 	{
-		if ( ticker == 0 )
+		if ( ticker === 0 )
 		{
 			document.form_rebuild_progress.submit_button.value = label;
 			document.form_rebuild_progress.submit_button.disabled = true;

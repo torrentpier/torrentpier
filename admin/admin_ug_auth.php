@@ -37,10 +37,10 @@ require(INC_DIR . 'functions_group.php');
 $yes_sign = '&radic;';
 $no_sign = 'x';
 
-$group_id = (int)$_REQUEST['g'];
-$user_id = (int)$_REQUEST['u'];
-$cat_id = (int)$_REQUEST['c'];
-$mode = (string)$_REQUEST['mode'];
+$group_id = isset($_REQUEST['g']) ? (int)$_REQUEST['g'] : null;
+$user_id = isset($_REQUEST['u']) ? (int)$_REQUEST['u'] : null;
+$cat_id = isset($_REQUEST['c']) ? (int)$_REQUEST['c'] : null;
+$mode = isset($_REQUEST['mode']) ? (string)$_REQUEST['mode'] : '';
 $submit = isset($_POST['submit']);
 
 $group_data = array();

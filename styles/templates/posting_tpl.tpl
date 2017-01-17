@@ -56,7 +56,7 @@ $(function(){
 		if ( /^<\-.*\->$/.test(v) ) {
 			v = v.substring(2, v.length-2);
 		}
-		if (k == 13 /* Enter */) {
+		if (k === 13 /* Enter */) {
 			TPL.build_tpl_form( '<-'+ v +' ->', 'tpl-row-preview' );
 			$('#tpl-row-src').val(v);
 		}
@@ -66,10 +66,10 @@ $(function(){
 	$('#tpl-src-form').bind('mouseup keyup focus', function(e){
 		if (!$('#rel-preview:visible')[0]) return;
 		if (e.keyCode) {
-			if ( !(e.keyCode == 38 /*up*/ || e.keyCode == 40 /*down*/) ) return;
+			if ( !(e.keyCode === 38 /*up*/ || e.keyCode === 40 /*down*/) ) return;
 		}
 		var ss = this.selectionStart;
-		if (ss == null) return;
+		if (ss === null) return;
 		var v = this.value;
 		var v = v.substring(0, ss).match(/.*$/)[0] + v.substring(ss, v.length).match(/^.*/)[0];  // текущая строка под курсором
 		v = v.substring(2, v.length-2);
@@ -84,7 +84,7 @@ $(function(){
 		var el   = $sel.val();
 		var src  = $.trim( $('#tpl-row-src').val() );
 
-		if (src == '') {
+		if (src === '') {
 			src += str_pad(el, 15);
 		}
 		src += ' '+ TPL.el_attr[el][0] +'['+ el +'] ';
@@ -159,15 +159,15 @@ var TPL = {
 		TPL.el_titles = {};
 
 		$.each(TPL.match_rows(str), function(i,row){
-			if (row == null || row == '') return true; // continue
+			if (row === null || row === '') return true; // continue
 			TPL.rows[i] = $.trim(row);
 		});
 		$.each(TPL.rows, function(i,row){
 			var mr = TPL.match_cols(row);
-			if (mr[2] == null) return true; // continue
+			if (mr[2] === null) return true; // continue
 			var title_id = mr[1];    // id элемента для подстановки его названия или {произвольное название}
 			var input_els = mr[2];
-			var row_title = (TPL.el_attr[title_id] != null) ? TPL.el_attr[title_id][1] : TPL.trim_brackets(title_id);
+			var row_title = (TPL.el_attr[title_id] !== null) ? TPL.el_attr[title_id][1] : TPL.trim_brackets(title_id);
 			var $tr = $('<tr><td class="rel-title">'+ row_title +':</td><td class="rel-inputs"></td></tr>');
 			var $td = $('td.rel-inputs', $tr);
 
@@ -176,7 +176,7 @@ var TPL = {
 				var el_html = '';
 				var me = TPL.match_el_attrs(el);
 				// вставка шаблонного элемента типа TYPE[attr]
-				if (me[2] != null) {
+				if (me[2] !== null) {
 					var at = me[2].split(',');
 					var nm = at[0];
 
@@ -184,7 +184,7 @@ var TPL = {
 					{
 					case 'E':
 						if ( $('#'+ nm +'-hid').length ) {
-							if (res_id == 'tpl-row-preview') {
+							if (res_id === 'tpl-row-preview') {
 								el_html = '<span class="rel-el hid-el">'+ $('#'+ nm +'-hid').html() +'</span>'; // скрытый элемент
 							}
 						}
@@ -197,14 +197,14 @@ var TPL = {
 						break;
 					case 'INP':
 						var id = TPL.build_el_id_title(nm);
-						var def = (TPL.el_attr[id] != null) ? TPL.el_attr[id][2].split(',') : [200,80];
+						var def = (TPL.el_attr[id] !== null) ? TPL.el_attr[id][2].split(',') : [200,80];
 						var mlem = at[1] || def[0];
 						var size = at[2] || def[1];
 						el_html = '<input class="rel-el rel-input" type="text" id="'+ id +'" maxlength="'+ mlem +'" size="'+ size +'" />';
 						break;
 					case 'TXT':
 						var id = TPL.build_el_id_title(nm);
-						var def = (TPL.el_attr[id] != null) ? TPL.el_attr[id][2].split(',') : [3];
+						var def = (TPL.el_attr[id] !== null) ? TPL.el_attr[id][2].split(',') : [3];
 						var rows = at[1] || def[0];
 						var cols = 100;
 						el_html = '<textarea class="rel-el rel-input" id="'+ id +'" rows="'+ rows +'" cols="'+ cols +'" />';
@@ -217,7 +217,7 @@ var TPL = {
 				}
 				// вставка нешаблонного элемента
 				else {
-					if (el == 'BR') {
+					if (el === 'BR') {
 						el_html = '<br />';
 					}
 					else {
@@ -225,7 +225,7 @@ var TPL = {
 					}
 				}
 				// добавление элемента в td.rel-inputs
-				if (el_html != '') {
+				if (el_html !== '') {
 					$td.append(el_html);
 				}
 			});
@@ -248,7 +248,7 @@ var TPL = {
 	},
 
 	build_el_id_title: function(nm) {
-		if (TPL.el_attr[nm] != null) {
+		if (TPL.el_attr[nm] !== null) {
 			var id = nm;
 			TPL.el_titles[id] = TPL.el_attr[id][1];
 		}
@@ -259,16 +259,16 @@ var TPL = {
 		return id;
 	},
 	get_el_id: function(el) {
-		return (TPL.el_attr[el] != null || TPL.el_id[el] != null) ? el : $P.md5(el);
+		return (TPL.el_attr[el] !== null || TPL.el_id[el] !== null) ? el : $P.md5(el);
 	},
 
 	build_select_el: function(name) {
 		var sel_id = TPL.get_el_id(name);
-		if (TPL.selects[sel_id] == null) return '';
+		if (TPL.selects[sel_id] === null) return '';
 		var s = '<select class="rel-el rel-input" id="'+sel_id+'">';
 		var q = /"/g;  //"
 		$.each(TPL.selects[sel_id], function(i,v){
-			s += '<option value="'+(i==0 ? '' : v.replace(q, '&quot;'))+'">'+(v=='' ? '&raquo; Выбрать' : v)+'</option>';
+			s += '<option value="'+(i===0 ? '' : v.replace(q, '&quot;'))+'">'+(v==='' ? '&raquo; Выбрать' : v)+'</option>';
 		});
 		s += '</select>';
 		return s;
@@ -282,7 +282,7 @@ var TPL = {
 		$.each(str.split('\n'), function(i,v){
 			if (!(v = $.trim(v))) return true; // continue
 			var m = v.match(/^(\w+|\{.+\})\[(.*)\]$/);
-			if (m == null) return true; // continue
+			if (m === null) return true; // continue
 			if (parse_attr) {
 				res[ m[1] ] = m[2].split(',');
 			}
@@ -302,16 +302,16 @@ var TPL = {
 		var m;
 		var t = $('#tpl-src-form').val();
 		var r = /(?:INP|TXT|SEL)(?:\[)(\w+|\{.+?\})/g;
-		while((m = r.exec(t)) != null) {
+		while((m = r.exec(t)) !== null) {
 			r_gen.push(m[1]);
 		}
 		// создание нового (старые значения сохраняются без именений, новые добавляются, отсутствующие в форме удаляются)
 		$.each(r_gen, function(i,v){
-			if (r_old[v] != null) {
+			if (r_old[v] !== null) {
 				r_new.push( r_old[v] );
 			}
 			else {
-				var def_attr = (TPL.el_attr[v] != null) ? TPL.el_attr[v][3] : '';
+				var def_attr = (TPL.el_attr[v] !== null) ? TPL.el_attr[v][3] : '';
 				r_new.push( v +'['+ def_attr +']' );
 			}
 		});
@@ -330,7 +330,7 @@ var TPL = {
 	},
 	// подсветка ошибок
 	hl_form_err: function(el, hint_id) {
-		if (TPL.el_attr[el] != null) {
+		if (TPL.el_attr[el] !== null) {
 			var el_id = el;
 			var el_title = TPL.el_attr[el][1];
 		}
@@ -344,7 +344,7 @@ var TPL = {
 			.parent('td').append('<div class="tpl-err-hint">'+hint+'</asd>')
 			.parent('tr').addClass('tpl-err-hl-tr')
 		;
-		if (TPL.f_errors_cnt == 0) $('#'+el_id).focus();
+		if (TPL.f_errors_cnt === 0) $('#'+el_id).focus();
 		TPL.f_errors_cnt++;
 	},
 	// сообщения об ошибках при валидации заполнения формы
@@ -396,24 +396,24 @@ var TPL = {
 			var el_val = $('#'+el_id).val() || '';
 
 			// требуемые поля
-			if (el_val == '') {
-				if ($.inArray('req', at) != -1) {
-					var el_type = (TPL.el_attr[el] != null) ? TPL.el_attr[el][0] : 'INP';
+			if (el_val === '') {
+				if ($.inArray('req', at) !== -1) {
+					var el_type = (TPL.el_attr[el] !== null) ? TPL.el_attr[el][0] : 'INP';
 					TPL.hl_form_err(el, 'empty_'+ el_type);
 				}
 				return true; // continue
 			}
 
 			// валидация значений
-			if ($.inArray('num', at) != -1 && !TPL.reg['num'].test(el_val)) {
+			if ($.inArray('num', at) !== -1 && !TPL.reg['num'].test(el_val)) {
 				TPL.hl_form_err(el, 'not_num');
 				return true; // continue
 			}
-			if ($.inArray('URL', at) != -1 && !TPL.reg['URL'].test(el_val)) {
+			if ($.inArray('URL', at) !== -1 && !TPL.reg['URL'].test(el_val)) {
 				TPL.hl_form_err(el, 'not_url');
 				return true; // continue
 			}
-			if ($.inArray('img', at) != -1 && !TPL.reg['img'].test(el_val)) {
+			if ($.inArray('img', at) !== -1 && !TPL.reg['img'].test(el_val)) {
 				TPL.hl_form_err(el, 'not_img');
 				return true; // continue
 			}
@@ -422,44 +422,44 @@ var TPL = {
 			el_val = TPL.normalize_val(el, el_val);
 
 			// заголовок
-			if ($.inArray('HEAD', at) != -1) {
+			if ($.inArray('HEAD', at) !== -1) {
 				msg_header.push( el_val );
 				return true; // continue
 			}
 			// постер
-			if ($.inArray('POSTER', at) != -1) {
+			if ($.inArray('POSTER', at) !== -1) {
 				msg_poster = el_val;
 				return true; // continue
 			}
 
 			// новая строка после названия
-			if ($.inArray('br2', at) != -1) {
+			if ($.inArray('br2', at) !== -1) {
 				el_val = '\n'+ el_val;
 			}
 			// спойлер
-			if ($.inArray('spoiler', at) != -1) {
+			if ($.inArray('spoiler', at) !== -1) {
 				msg_body.push( TPL.build_spoiler(el_id, el_val) );
 				return true; // continue
 			}
 			// pre
-			if ($.inArray('pre', at) != -1) {
+			if ($.inArray('pre', at) !== -1) {
 				msg_body.push( TPL.build_pre(el_id, el_val) );
 				return true; // continue
 			}
 			// inline
-			if ($.inArray('inline', at) != -1) {
+			if ($.inArray('inline', at) !== -1) {
 				msg_body.push( TPL.build_inline(el_id, el_val) );
 				return true; // continue
 			}
 			// только в заголовке
-			if ($.inArray('headonly', at) != -1) {
+			if ($.inArray('headonly', at) !== -1) {
 				return true; // continue
 			}
 			// обычный элемент
 			msg_body.push( TPL.build_msg_el(el_id, el_val) );
 
 			// новая строка после элемента
-			if ($.inArray('BR', at) != -1) {
+			if ($.inArray('BR', at) !== -1) {
 				msg_body.push('\n');
 			}
 		});
@@ -520,18 +520,18 @@ var TPL = {
 		var g;                                                   // группа элементов <-el1 el2->[,]
 		var t = $('#tpl-src-title').val().replace(/\n/g, ' ');   // формат
 		var r = /<-([^>]+)->(\S*)/g;
-		while((g = r.exec(t)) != null) {
+		while((g = r.exec(t)) !== null) {
 			var g_els = g[1].match(/(\w+|\{.+?\})/g);
-			if (g_els == null) return true; // continue
+			if (g_els === null) return true; // continue
 
 			var g_start_char = ' ';
 			var g_delim_char = ' ';
 			var g_end_char   = ' ';
 
-			if (g[2].length == 1) {
+			if (g[2].length === 1) {
 				g_delim_char = ' '+ g[2];
 			}
-			else if (g[2].length == 3) {
+			else if (g[2].length === 3) {
 				g_start_char = g[2].charAt(0);
 				trim_after_chars[ g_start_char ] = true;
 
@@ -545,11 +545,11 @@ var TPL = {
 			$.each(g_els, function(i,el){
 				var el_id = TPL.get_el_id(el);
 				var v = $('#'+el_id).val();
-				if (v == undefined || $.trim(v) == '') return true; // continue
+				if (v === undefined || $.trim(v) === '') return true; // continue
 				v = TPL.normalize_val(el_id, v);
 				g_vals.push(' '+ v +' ');
 			});
-			if (g_vals.length != 0) {
+			if (g_vals.length !== 0) {
 				title.push(' '+ g_start_char +' ');
 				title.push( g_vals.join(' '+g_delim_char+' ') );
 				title.push(' '+ g_end_char);
@@ -4357,7 +4357,7 @@ TPL.build_el_attr_select = function(){
 	var q = /"/g;  //"
 	$.each(TPL.el_attr, function(name,at){
 		var v = at[1].replace(q, '&quot;');
-		if (v == '') return true; // continue
+		if (v === '') return true; // continue
 		s += '<option value="'+ name +'">'+ v +'</option>';
 	});
 	s += '</select>';
@@ -4371,7 +4371,7 @@ TPL.build_el_id_select = function(){
 	var q = /"/g;
 	$.each(TPL.el_id, function(id,desc){
 		var v = desc.replace(q, '&quot;');
-		if (v == '') return true; // continue
+		if (v === '') return true; // continue
 		s += '<option value="E['+ id +']">'+ desc +'</option>';
 	});
 	s += '</select>';
@@ -4415,7 +4415,7 @@ ajax.topic_tpl = function(mode, params) {
 			break;
 
 		case 'assign':
-			if (params.tpl_id == -1) {
+			if (params.tpl_id === -1) {
 				if (!window.confirm('Отключить шаблоны в этом форуме?')) {
 					return false;
 				}
@@ -4512,9 +4512,9 @@ function tpl_fill_form ()
 	$.each($('.rel-input'), function(i,el){
 		var $el = $(el);
 		var id = $el.attr('id');
-		if ($el.val() != '') return true; // continue
-		if (TPL.el_attr[id] != null) {
-			if (TPL.el_attr[id][0] == 'SEL') {
+		if ($el.val() !== '') return true; // continue
+		if (TPL.el_attr[id] !== null) {
+			if (TPL.el_attr[id][0] === 'SEL') {
 				$el[0].selectedIndex = 1;
 			}
 			else {
@@ -4548,10 +4548,10 @@ function tpl_build_msg (scroll)
 }
 
 function str_pad ( input, pad_length, pad_string, pad_type ) {
-	if (pad_string == null) {
+	if (pad_string === null) {
 		pad_string = ' ';
 	}
-	if (pad_type == null) {
+	if (pad_type === null) {
 		pad_type = 'STR_PAD_RIGHT';
 	}
 	var half = '', pad_to_go;
@@ -4567,11 +4567,11 @@ function str_pad ( input, pad_length, pad_string, pad_type ) {
 
 	input += '';
 
-	if (pad_type != 'STR_PAD_LEFT' && pad_type != 'STR_PAD_RIGHT' && pad_type != 'STR_PAD_BOTH') { pad_type = 'STR_PAD_RIGHT'; }
+	if (pad_type !== 'STR_PAD_LEFT' && pad_type !== 'STR_PAD_RIGHT' && pad_type !== 'STR_PAD_BOTH') { pad_type = 'STR_PAD_RIGHT'; }
 	if ((pad_to_go = pad_length - input.length) > 0) {
-		if (pad_type == 'STR_PAD_LEFT') { input = str_pad_repeater(pad_string, pad_to_go) + input; }
-		else if (pad_type == 'STR_PAD_RIGHT') { input = input + str_pad_repeater(pad_string, pad_to_go); }
-		else if (pad_type == 'STR_PAD_BOTH') {
+		if (pad_type === 'STR_PAD_LEFT') { input = str_pad_repeater(pad_string, pad_to_go) + input; }
+		else if (pad_type === 'STR_PAD_RIGHT') { input = input + str_pad_repeater(pad_string, pad_to_go); }
+		else if (pad_type === 'STR_PAD_BOTH') {
 			half = str_pad_repeater(pad_string, Math.ceil(pad_to_go/2));
 			input = half + input + half;
 			input = input.substr(0, pad_length);
@@ -4942,7 +4942,7 @@ $(function(){
 	$(function(){
 		$.each(TPL.el_id, function(el,desc){
 			var m = el.match(/^(.*)(_abr)$/);
-			if (m == null) {
+			if (m === null) {
 				return true; // continue
 			}
 			var el_abr = m[0];
