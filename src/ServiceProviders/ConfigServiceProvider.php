@@ -41,11 +41,15 @@ class ConfigServiceProvider implements ServiceProviderInterface
      */
     public function register(Container $container)
     {
-        $container['config'] = function ($container) {
+        $container['config'] = function (Container $container) {
             $config = new Config(Factory::fromFile($container['file.system.main']));
 
             if (isset($container['file.local.main']) && file_exists($container['file.local.main'])) {
-                $config->merge(new Config(Factory::fromFile($container['file.local.main'])));
+                $config->merge(Factory::fromFile($container['file.local.main']));
+            }
+
+            if (isset($container['config.dbQuery'])) {
+                $config->dbQuery = $container['config.dbQuery'];
             }
 
             return $config;

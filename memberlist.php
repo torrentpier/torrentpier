@@ -23,6 +23,8 @@
  * SOFTWARE.
  */
 
+use \TorrentPier\Di;
+
 define('BB_SCRIPT', 'memberlist');
 define('BB_ROOT', './');
 require(BB_ROOT . 'common.php');
@@ -138,7 +140,7 @@ if ($by_letter_req) {
         $by_letter = 'others';
         $letter_sql = "username REGEXP '^[!-@\\[-`].*$'";
     } elseif ($letter_req = preg_replace("#[^$letters_range]#ui", '', iconv('windows-1251', 'UTF-8', $by_letter_req[0]))) {
-        $by_letter = DB()->escape($letter_req);
+        $by_letter = Di::getInstance()->db->escape($letter_req);
         $letter_sql = "LOWER(username) LIKE '$by_letter%'";
     }
 }
@@ -164,15 +166,15 @@ $template->assign_vars(array(
 ));
 
 // per-letter selection end
-$sql = "SELECT username, user_id, user_rank, user_opt, user_posts, user_regdate, user_from, user_website, user_email FROM " . BB_USERS . " WHERE user_id NOT IN(" . EXCLUDED_USERS . ")";
+$sql = "SELECT username, user_id, user_rank, user_opt, user_posts, user_regdate, user_from, user_website, user_email FROM bb_users WHERE user_id NOT IN(" . EXCLUDED_USERS . ")";
 if ($username) {
     $username = preg_replace('/\*/', '%', clean_username($username));
-    $letter_sql = "username LIKE '" . DB()->escape($username) . "'";
+    $letter_sql = "username LIKE '" . Di::getInstance()->db->escape($username) . "'";
 }
 $sql .= ($letter_sql) ? " AND $letter_sql" : '';
 $sql .= " ORDER BY $order_by";
 
-if ($result = DB()->fetch_rowset($sql)) {
+if ($result = Di::getInstance()->db->fetch_rowset($sql)) {
     foreach ($result as $i => $row) {
         $user_id = $row['user_id'];
         $from = $row['user_from'];
@@ -221,14 +223,14 @@ if ($paginationusername) {
 if ($mode != 'topten' || $di->config->get('topics_per_page') < 10) {
     $sql = "SELECT COUNT(*) AS total FROM " . BB_USERS;
     $sql .= ($letter_sql) ? " WHERE $letter_sql" : '';
-    if (!$result = DB()->sql_query($sql)) {
+    if (!$result = Di::getInstance()->db->sql_query($sql)) {
         bb_die('Error getting total users');
     }
-    if ($total = DB()->sql_fetchrow($result)) {
+    if ($total = Di::getInstance()->db->sql_fetchrow($result)) {
         $total_members = $total['total'];
         generate_pagination($paginationurl, $total_members, $di->config->get('topics_per_page'), $start) . '&nbsp;';
     }
-    DB()->sql_freeresult($result);
+    Di::getInstance()->db->sql_freeresult($result);
 }
 
 $template->assign_vars(array(

@@ -23,6 +23,8 @@
  * SOFTWARE.
  */
 
+use \TorrentPier\Di;
+
 define('BB_SCRIPT', 'dl_list');
 define('BB_ROOT', './');
 require_once __DIR__ . '/common.php';
@@ -83,9 +85,9 @@ if (isset($_POST['cancel']) && $_POST['cancel']) {
 // Delete DL-list
 if ($mode == 'dl_delete' && $topic_id) {
     if (!IS_ADMIN) {
-        $sql = "SELECT forum_id FROM " . BB_TOPICS . " WHERE topic_id = $topic_id LIMIT 1";
+        $sql = "SELECT forum_id FROM bb_topics WHERE topic_id = $topic_id LIMIT 1";
 
-        if (!$row = DB()->sql_fetchrow(DB()->sql_query($sql))) {
+        if (!$row = Di::getInstance()->db->sql_fetchrow(Di::getInstance()->db->sql_query($sql))) {
             bb_die('Could not obtain forum_id for this topic');
         }
 
@@ -131,9 +133,9 @@ if ($mode == 'set_topics_dl_status') {
 
 // Get existing topics
 if ($req_topics_sql = join(',', $req_topics_ary)) {
-    $sql = "SELECT topic_id FROM " . BB_TOPICS . " WHERE topic_id IN($req_topics_sql)";
+    $sql = "SELECT topic_id FROM bb_topics WHERE topic_id IN($req_topics_sql)";
 
-    foreach (DB()->fetch_rowset($sql) as $row) {
+    foreach (Di::getInstance()->db->fetch_rowset($sql) as $row) {
         $topics_ary[] = $row['topic_id'];
     }
 }
@@ -148,9 +150,9 @@ if ($topics_ary && ($mode == 'set_dl_status' || $mode == 'set_topics_dl_status')
             'user_status' => (int)$new_dl_status,
         );
     }
-    $new_dlstatus_sql = DB()->build_array('MULTI_INSERT', $new_dlstatus_ary);
+    $new_dlstatus_sql = Di::getInstance()->db->build_array('MULTI_INSERT', $new_dlstatus_ary);
 
-    DB()->query("REPLACE INTO " . BB_BT_DLSTATUS . " $new_dlstatus_sql");
+    Di::getInstance()->db->query("REPLACE INTO " . BB_BT_DLSTATUS . " $new_dlstatus_sql");
 
     redirect("$redirect_type?$redirect");
 }

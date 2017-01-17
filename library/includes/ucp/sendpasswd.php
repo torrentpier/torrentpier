@@ -22,6 +22,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+use \TorrentPier\Di;
 
 if (!defined('BB_ROOT')) {
     die(basename(__FILE__));
@@ -43,9 +44,9 @@ if (isset($_POST['submit'])) {
         bb_die($lang['CAPTCHA_WRONG']);
     }
     $email = (!empty($_POST['email'])) ? trim(strip_tags(htmlspecialchars($_POST['email']))) : '';
-    $sql = "SELECT * FROM " . BB_USERS . " WHERE user_email = '" . DB()->escape($email) . "'";
-    if ($result = DB()->sql_query($sql)) {
-        if ($row = DB()->sql_fetchrow($result)) {
+    $sql = "SELECT * FROM bb_users WHERE user_email = '" . Di::getInstance()->db->escape($email) . "'";
+    if ($result = Di::getInstance()->db->sql_query($sql)) {
+        if ($row = Di::getInstance()->db->sql_fetchrow($result)) {
             if (!$row['user_active']) {
                 bb_die($lang['NO_SEND_ACCOUNT_INACTIVE']);
             }
@@ -59,10 +60,10 @@ if (isset($_POST['submit'])) {
             $user_actkey = make_rand_str(12);
             $user_password = make_rand_str(8);
 
-            $sql = "UPDATE " . BB_USERS . "
+            $sql = "UPDATE bb_users
 				SET user_newpasswd = '$user_password', user_actkey = '$user_actkey'
 				WHERE user_id = " . $row['user_id'];
-            if (!DB()->sql_query($sql)) {
+            if (!Di::getInstance()->db->sql_query($sql)) {
                 bb_die('Could not update new password information');
             }
 

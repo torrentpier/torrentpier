@@ -27,7 +27,7 @@ namespace TorrentPier\ServiceProviders;
 
 use Pimple\Container;
 use Pimple\ServiceProviderInterface;
-use TorrentPier\Db\Adapter;
+use TorrentPier\Db;
 
 /**
  * Class DbServiceProvider
@@ -40,10 +40,8 @@ class DbServiceProvider implements ServiceProviderInterface
      */
     public function register(Container $container)
     {
-        $container['db'] = function ($container) {
-            $adapter = new Adapter($container['config.services.db']);
-            unset($container['config.services.db']);
-            return $adapter;
+        $container['db'] = function (Container $container) {
+            return new Db($container['config']->get('services.db'));
         };
     }
 }

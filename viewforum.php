@@ -23,6 +23,8 @@
  * SOFTWARE.
  */
 
+use \TorrentPier\Di;
+
 define('BB_SCRIPT', 'forum');
 define('BB_ROOT', './');
 require(BB_ROOT . 'common.php');
@@ -162,10 +164,10 @@ if (!$forum_data['forum_parent'] && isset($forums['f'][$forum_id]['subforums']) 
 			f.forum_id, f.forum_status, f.forum_last_post_id, f.forum_posts, f.forum_topics,
 			t.topic_last_post_time, t.topic_id AS last_topic_id, t.topic_title AS last_topic_title,
 			p.poster_id AS sf_last_user_id, IF(p.poster_id = $anon, p.post_username, u.username) AS sf_last_username, u.user_rank
-		FROM      " . BB_FORUMS . " f
-		LEFT JOIN " . BB_TOPICS . " t ON(f.forum_last_post_id = t.topic_last_post_id)
+		FROM      bb_forums f
+		LEFT JOIN bb_topics t ON(f.forum_last_post_id = t.topic_last_post_id)
 		LEFT JOIN " . BB_POSTS . " p ON(f.forum_last_post_id = p.post_id)
-		LEFT JOIN " . BB_USERS . " u ON(p.poster_id = u.user_id)
+		LEFT JOIN bb_users u ON(p.poster_id = u.user_id)
 		WHERE f.forum_parent = $forum_id
 			$only_new_sql
 			$ignore_forum_sql
@@ -173,7 +175,7 @@ if (!$forum_data['forum_parent'] && isset($forums['f'][$forum_id]['subforums']) 
 		ORDER BY f.forum_order
 	";
 
-    if ($rowset = DB()->fetch_rowset($sql)) {
+    if ($rowset = Di::getInstance()->db->fetch_rowset($sql)) {
         $template->assign_vars(array(
             'SHOW_SUBFORUMS' => true,
             'FORUM_IMG' => $images['forum'],
@@ -270,12 +272,12 @@ if (!empty($_REQUEST['topicdays'])) {
     if (($req_topic_days = $di->request->query->getInt('topicdays')) && isset($sel_previous_days[$req_topic_days])) {
         $sql = "
 			SELECT COUNT(*) AS forum_topics
-			FROM " . BB_TOPICS . "
+			FROM bb_topics
 			WHERE forum_id = $forum_id
 				AND topic_last_post_time > " . (TIMENOW - 86400 * $req_topic_days) . "
 		";
 
-        if ($row = DB()->fetch_row($sql)) {
+        if ($row = Di::getInstance()->db->fetch_row($sql)) {
             $topic_days = $req_topic_days;
             $forum_topics = $row['forum_topics'];
         }
@@ -317,9 +319,9 @@ if ($forum_data['allow_reg_tracker']) {
     $select_tor_sql .= ($join_dl) ? ', dl.user_status AS dl_status' : '';
 
     $join_tor_sql = "
-		LEFT JOIN " . BB_BT_TORRENTS . " tor ON(t.topic_id = tor.topic_id)
+		LEFT JOIN bb_bt_torrents tor ON(t.topic_id = tor.topic_id)
 		LEFT JOIN " . BB_BT_USERS . " bt  ON(bt.user_id = {$userdata['user_id']})
-		LEFT JOIN " . BB_BT_TRACKER_SNAP . " sn  ON(tor.topic_id = sn.topic_id)
+		LEFT JOIN bb_bt_tracker_snap sn  ON(tor.topic_id = sn.topic_id)
 	";
     $join_tor_sql .= ($join_dl) ? " LEFT JOIN " . BB_BT_DLSTATUS . " dl ON(dl.user_id = {$userdata['user_id']} AND dl.topic_id = t.topic_id)" : '';
 }
@@ -344,7 +346,7 @@ $topic_ids = $topic_rowset = array();
 // IDs
 $sql = "
 	SELECT t.topic_id
-	FROM " . BB_TOPICS . " t
+	FROM bb_topics t
 	WHERE t.forum_id = $forum_id
 		$only_new_sql
 		$title_match_sql
@@ -352,24 +354,24 @@ $sql = "
 	$order_sql
 	LIMIT $start, $topics_per_page
 ";
-foreach (DB()->fetch_rowset($sql) as $row) {
+foreach (Di::getInstance()->db->fetch_rowset($sql) as $row) {
     $topic_ids[] = $row['topic_id'];
 }
 
 // Titles, posters etc.
 if ($topics_csv = join(',', $topic_ids)) {
-    $topic_rowset = DB()->fetch_rowset("
+    $topic_rowset = Di::getInstance()->db->fetch_rowset("
 		SELECT
 			t.*, t.topic_poster AS first_user_id, u1.user_rank as first_user_rank,
 			IF(t.topic_poster = $anon, p1.post_username, u1.username) AS first_username,
 			p2.poster_id AS last_user_id, u2.user_rank as last_user_rank,
 			IF(p2.poster_id = $anon, p2.post_username, u2.username) AS last_username
 				$select_tor_sql
-		FROM      " . BB_TOPICS . " t
+		FROM      bb_topics t
 		LEFT JOIN " . BB_POSTS . " p1 ON(t.topic_first_post_id = p1.post_id)
-		LEFT JOIN " . BB_USERS . " u1 ON(t.topic_poster = u1.user_id)
+		LEFT JOIN bb_users u1 ON(t.topic_poster = u1.user_id)
 		LEFT JOIN " . BB_POSTS . " p2 ON(t.topic_last_post_id = p2.post_id)
-		LEFT JOIN " . BB_USERS . " u2 ON(p2.poster_id = u2.user_id)
+		LEFT JOIN bb_users u2 ON(p2.poster_id = u2.user_id)
 			$join_tor_sql
 		WHERE t.topic_id IN($topics_csv)
 		    $where_tor_sql

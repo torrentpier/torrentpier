@@ -22,6 +22,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+use \TorrentPier\Di;
 
 if (!defined('BB_ROOT')) {
     die(basename(__FILE__));
@@ -30,7 +31,7 @@ if (!defined('BB_ROOT')) {
 /** @var \TorrentPier\Di $di */
 $di = \TorrentPier\Di::getInstance();
 
-DB()->expect_slow_query(600);
+Di::getInstance()->db->expect_slow_query(600);
 
 //
 // Make tracker snapshot

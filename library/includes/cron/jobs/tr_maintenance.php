@@ -22,6 +22,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+use \TorrentPier\Di;
 
 if (!defined('BB_ROOT')) {
     die(basename(__FILE__));
@@ -41,26 +42,26 @@ $limit_sql = 3000;
 $topics_sql = [];
 
 $sql = "SELECT topic_id
-	FROM " . BB_BT_TORRENTS . "
+	FROM bb_bt_torrents
 	WHERE reg_time < $never_seen_time
 		AND seeder_last_seen < $last_seen_time
 	LIMIT $limit_sql";
 
-foreach (DB()->fetch_rowset($sql) as $row) {
+foreach (Di::getInstance()->db->fetch_rowset($sql) as $row) {
     $topics_sql[] = $row['topic_id'];
 }
 $dead_tor_sql = join(',', $topics_sql);
 
 if ($dead_tor_sql) {
     // Delete torstat
-    DB()->query("
+    Di::getInstance()->db->query("
 		DELETE FROM " . BB_BT_TORSTAT . "
 		WHERE topic_id IN($dead_tor_sql)
 	");
 
     // Remove torrents
-    DB()->query("
-		DELETE FROM " . BB_BT_TORRENTS . "
+    Di::getInstance()->db->query("
+		DELETE FROM bb_bt_torrents
 		WHERE topic_id IN($dead_tor_sql)
 	");
 }
