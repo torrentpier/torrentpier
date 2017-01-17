@@ -2,9 +2,9 @@ function $p() {
   var elements = [];
   for (var i = 0; i < arguments.length; i++) {
     var element = arguments[i];
-    if (typeof element == 'string')
+    if (typeof element === 'string')
       element = document.getElementById(element);
-    if (arguments.length == 1)
+    if (arguments.length === 1)
       return element;
     elements.push(element);
   }
@@ -43,7 +43,7 @@ var EventCache = function () {
         if (item[0].removeEventListener) {
           item[0].removeEventListener(item[1], item[2], item[3]);
         }
-        if (item[1].substring(0, 2) != "on") {
+        if (item[1].substring(0, 2) !== "on") {
           item[1] = "on" + item[1];
         }
         if (item[0].detachEvent) {
@@ -60,7 +60,7 @@ if (document.all) {
 
 function imgFit(img, maxW) {
   img.title = 'Размеры изображения: ' + img.width + ' x ' + img.height;
-  if (typeof(img.naturalHeight) == 'undefined') {
+  if (typeof(img.naturalHeight) === 'undefined') {
     img.naturalHeight = img.height;
     img.naturalWidth = img.width;
   }
@@ -71,7 +71,7 @@ function imgFit(img, maxW) {
     img.style.cursor = 'move';
     return false;
   }
-  else if (img.width == maxW && img.width < img.naturalWidth) {
+  else if (img.width === maxW && img.width < img.naturalWidth) {
     img.height = img.naturalHeight;
     img.width = img.naturalWidth;
     img.title = 'Размеры изображения: ' + img.naturalWidth + ' x ' + img.naturalHeight;
@@ -84,7 +84,7 @@ function imgFit(img, maxW) {
 
 function toggle_block(id) {
   var el = document.getElementById(id);
-  el.style.display = (el.style.display == 'none') ? '' : 'none';
+  el.style.display = (el.style.display === 'none') ? '' : 'none';
 }
 
 function toggle_disabled(id, val) {
@@ -107,7 +107,7 @@ function rand(min, max) {
  *            secure transmission
  */
 function setCookie(name, value, days, path, domain, secure) {
-  if (days != 'SESSION') {
+  if (days !== 'SESSION') {
     var date = new Date();
     days = days || 365;
     date.setTime(date.getTime() + days * 24 * 60 * 60 * 1000);
@@ -183,14 +183,14 @@ var Menu = {
     var curTop = parseInt(CSS.top);
     var tCorner = $(document).scrollTop() + $(window).height() - 20;
     var maxVisibleTop = Math.min(curTop, Math.max(0, tCorner - this.$menu.height()));
-    if (curTop != maxVisibleTop) {
+    if (curTop !== maxVisibleTop) {
       CSS.top = maxVisibleTop;
     }
     CSS.left += this.offsetCorrection_X;
     var curLeft = parseInt(CSS.left);
     var rCorner = $(document).scrollLeft() + $(window).width() - 6;
     var maxVisibleLeft = Math.min(curLeft, Math.max(0, rCorner - this.$menu.width()));
-    if (curLeft != maxVisibleLeft) {
+    if (curLeft !== maxVisibleLeft) {
       CSS.left = maxVisibleLeft;
     }
     this.$menu.css(CSS);
@@ -201,13 +201,13 @@ var Menu = {
     var curLeft = parseInt($menu.css('left'));
     var rCorner = $(document).scrollLeft() + $(window).width() - 6;
     var maxVisibleLeft = Math.min(curLeft, Math.max(0, rCorner - $menu.width()));
-    if (curLeft != maxVisibleLeft) {
+    if (curLeft !== maxVisibleLeft) {
       $menu.css('left', maxVisibleLeft);
     }
     var curTop = parseInt($menu.css('top'));
     var tCorner = $(document).scrollTop() + $(window).height() - 20;
     var maxVisibleTop = Math.min(curTop, Math.max(0, tCorner - $menu.height()));
-    if (curTop != maxVisibleTop) {
+    if (curTop !== maxVisibleTop) {
       $menu.css('top', maxVisibleTop);
     }
   },
@@ -387,7 +387,7 @@ Ajax.prototype = {
     event.stopPropagation();
     var params = ajax.params[$(this).attr('id')];
     var action = params.action;
-    if (ajax.state[action] == 'readyToSubmit' || ajax.state[action] == 'error') {
+    if (ajax.state[action] === 'readyToSubmit' || ajax.state[action] === 'error') {
       return false;
     } else {
       ajax.state[action] = 'readyToSubmit';
@@ -408,13 +408,13 @@ Ajax.prototype = {
     var inputsHtml = $('#editable-tpl-' + editableType).html();
     $editable.hide().after(inputsHtml);
     var $inputs = $('.editable-inputs', $root);
-    if (editableType == 'input' || editableType == 'textarea') {
+    if (editableType === 'input' || editableType === 'textarea') {
       $('.editable-value', $inputs).val($.trim($editable.text()));
     }
     $('input.editable-submit', $inputs).click(function () {
       var params = ajax.params[rootElementId];
       var $val = $('.editable-value', '#' + rootElementId);
-      params.value = ($val.size() == 1) ? $val.val() : $val.filter(':checked').val();
+      params.value = ($val.size() === 1) ? $val.val() : $val.filter(':checked').val();
       params.submit = true;
       ajax.init[params.action](params);
     });
@@ -454,7 +454,7 @@ $(document).ready(function () {
   $("#ajax-error").ajaxError(function (req, xml) {
     var status = xml.status;
     var text = xml.statusText;
-    if (status == 200) {
+    if (status === 200) {
       status = '';
       text = 'неверный формат данных';
     }
@@ -470,7 +470,7 @@ $(document).ready(function () {
     params.event = params.event || 'dblclick';
     ajax.params[params.id] = params;
     $("#" + params.id).bind(params.event, ajax.callInitFn);
-    if (params.event == 'click' || params.event == 'dblclick') {
+    if (params.event === 'click' || params.event === 'dblclick') {
       $("#" + params.id).addClass('editable-container');
     }
   });

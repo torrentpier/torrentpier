@@ -6,16 +6,16 @@
 <meta http-equiv="Content-Style-Type" content="text/css" />
 <meta property="og:image" content="{SITE_URL}styles/images/logo/logo.png" />
 {META}
-<link rel="stylesheet" href="{STYLESHEET}?v={$di->config->get('css_ver')}" type="text/css">
+<link rel="stylesheet" href="{STYLESHEET}" type="text/css">
 <link rel="shortcut icon" href="{SITE_URL}favicon.ico" type="image/x-icon">
 <link rel="search" type="application/opensearchdescription+xml" href="{SITE_URL}opensearch_desc.xml" title="{SITENAME} (Forum)" />
 <link rel="search" type="application/opensearchdescription+xml" href="{SITE_URL}opensearch_desc_bt.xml" title="{SITENAME} (Tracker)" />
 
-<script type="text/javascript" src="{SITE_URL}styles/js/jquery.pack.js?v={$di->config->get('js_ver')}"></script>
-<script type="text/javascript" src="{SITE_URL}styles/js/main.js?v={$di->config->get('js_ver')}"></script>
+<script type="text/javascript" src="{SITE_URL}styles/js/jquery.pack.js"></script>
+<script type="text/javascript" src="{SITE_URL}styles/js/main.js"></script>
 
 <!-- IF INCLUDE_BBCODE_JS -->
-<script type="text/javascript" src="{SITE_URL}styles/js/bbcode.js?v={$di->config->get('js_ver')}"></script>
+<script type="text/javascript" src="{SITE_URL}styles/js/bbcode.js"></script>
 <script type="text/javascript">
 	window.BB = {};
 	window.encURL = encodeURIComponent;
@@ -236,7 +236,7 @@ function go_to_page ()
 	<b>{L_OLD_BROWSER}</b>
 </div>
 <script>
-if ( (typeof(window.opera) != "undefined" && window.opera.version() < 12) || (window.attachEvent && !window.addEventListener) /* IE < 9 */ ) {
+if ( (typeof(window.opera) !== "undefined" && window.opera.version() < 12) || (window.attachEvent && !window.addEventListener) /* IE < 9 */ ) {
 	document.getElementById('old-browser-warn').style.display = '';
 }
 </script>
@@ -288,7 +288,7 @@ ajax.callback.index_data = function(data) {};
 $(document).ready(function() {
 	x = new Date();
 	tz = -x.getTimezoneOffset()/60;
-	if (tz != {BOARD_TIMEZONE})
+	if (tz !== {BOARD_TIMEZONE})
 	{
 		ajax.index_data(tz);
 	}
@@ -304,7 +304,7 @@ $(document).ready(function() {
 	</td>
 	<td style="padding: 3px;">
 		<div>
-			<form id="quick-search" action="" method="get" onsubmit="$(this).attr('action', $('#search-action').val()); if($('#search-action option:selected').attr('class') == 'hash') $('#search-text').attr('name', 'hash');">
+			<form id="quick-search" action="" method="get" onsubmit="$(this).attr('action', $('#search-action').val()); if($('#search-action option:selected').attr('class') === 'hash') $('#search-text').attr('name', 'hash');">
 				<input type="hidden" name="max" value="1" />
 				<input type="hidden" name="to" value="1" />
 				<input id="search-text" type="text" name="nm" placeholder="{L_SEARCH_S}" required />

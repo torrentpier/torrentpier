@@ -20,7 +20,7 @@ function qs_highlight_found ()
 	this.style.display = '';
 	var a = $('a:first', this);
 	var q = $('#q-search').val().toLowerCase();
-	if (q != '' && a.text().toLowerCase().indexOf(q) != -1) {
+	if (q !== '' && a.text().toLowerCase().indexOf(q) !== -1) {
 		a.html(a.text().replace(q, '<b style="color:#1515ff">' + q + '</b>'));
 	}
 	else {

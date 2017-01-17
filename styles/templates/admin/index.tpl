@@ -142,10 +142,6 @@ ajax.callback.manage_admin = function(data) {
 		<td class="row1" nowrap="nowrap" width="25%">{L_TP_RELEASE_DATE}:</td>
 		<td class="row2"><b>{TP_RELEASE_DATE}</b></td>
 	</tr>
-	<tr>
-		<td class="row1" nowrap="nowrap" width="25%">{L_ZF_VERSION}:</td>
-		<td class="row2"><b>{ZF_VERSION}</b></td>
-	</tr>
 </table>
 <br />
 
@@ -181,12 +177,6 @@ ajax.callback.manage_admin = function(data) {
 		<td class="row2"><b>{START_DATE}</b></td>
 		<td class="row1" nowrap="nowrap">{L_AVATAR_DIR_SIZE}:</td>
 		<td class="row2"><b>{AVATAR_DIR_SIZE}</b></td>
-	</tr>
-	<tr>
-		<td class="row1" nowrap="nowrap">{L_DATABASE_SIZE}:</td>
-		<td class="row2"><b>{DB_SIZE}</b></td>
-		<td class="row1" nowrap="nowrap">{L_GZIP_COMPRESSION}:</td>
-		<td class="row2"><b>{GZIP_COMPRESSION}</b></td>
 	</tr>
 </table>
 <br />
