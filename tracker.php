@@ -23,6 +23,8 @@
  * SOFTWARE.
  */
 
+use \TorrentPier\Di;
+
 define('BB_SCRIPT', 'tracker');
 define('BB_ROOT', './');
 require(BB_ROOT . 'common.php');
@@ -79,7 +81,7 @@ $posts_tbl = BB_POSTS . ' p';
 $topics_tbl = BB_TOPICS . ' t';
 $users_tbl = BB_USERS . ' u';
 $tracker_tbl = BB_BT_TRACKER . ' tr';
-$tr_snap_tbl = BB_BT_TRACKER_SNAP . ' sn';
+$tr_snap_tbl = 'bb_bt_tracker_snap sn';
 $dl_stat_tbl = BB_BT_DLSTATUS . ' dl';
 
 //
@@ -321,7 +323,7 @@ $tor_list_ary = array();
 $tor_list_sql = '';
 
 if ($search_id) {
-    $row = DB()->fetch_row("
+    $row = Di::getInstance()->db->fetch_row("
 		SELECT search_array, search_settings
 		FROM " . BB_SEARCH . "
 		WHERE session_id = '$session_id'
@@ -516,7 +518,7 @@ if ($allowed_forums) {
     foreach ($save_in_db as $name) {
         $curr_set[${"{$name}_key"}] = ${"{$name}_val"};
     }
-    $curr_set_sql = DB()->escape(serialize($curr_set));
+    $curr_set_sql = Di::getInstance()->db->escape(serialize($curr_set));
 
     // Text search
     $search_match_topics_csv = '';
@@ -547,7 +549,7 @@ if ($allowed_forums) {
         $join_dl = $dl_search;
 
         // Start building SQL
-        $SQL = DB()->get_empty_sql_array();
+        $SQL = Di::getInstance()->db->get_empty_sql_array();
 
         // SELECT
         $SQL['SELECT'][] = "tor.topic_id";
@@ -621,7 +623,7 @@ if ($allowed_forums) {
             $tor_list_sql = '';
             $tor_count = 0;
         } else {
-            foreach (DB()->fetch_rowset($SQL) as $row) {
+            foreach (Di::getInstance()->db->fetch_rowset($SQL) as $row) {
                 $tor_list_ary[] = $row['topic_id'];
             }
             $tor_list_sql = join(',', $tor_list_ary);
@@ -643,7 +645,7 @@ if ($allowed_forums) {
             $columns = 'session_id,   search_type,   search_id,   search_time,   search_settings,  search_array';
             $values = "'$session_id', $search_type, '$search_id', " . TIMENOW . ", '$curr_set_sql', '$tor_list_sql'";
 
-            DB()->query("REPLACE INTO " . BB_SEARCH . " ($columns) VALUES ($values)");
+            Di::getInstance()->db->query("REPLACE INTO " . BB_SEARCH . " ($columns) VALUES ($values)");
         }
         unset($columns, $values, $curr_set_sql, $tor_list_sql);
 
@@ -704,9 +706,9 @@ if ($allowed_forums) {
 			$limit
 		";
 
-        $passkey = DB()->fetch_row("SELECT auth_key FROM " . BB_BT_USERS . " WHERE user_id = " . (int)$user_id . " LIMIT 1");
+        $passkey = Di::getInstance()->db->fetch_row("SELECT auth_key FROM " . BB_BT_USERS . " WHERE user_id = " . (int)$user_id . " LIMIT 1");
         // Build torrents table
-        foreach (DB()->fetch_rowset($sql) as $tor) {
+        foreach (Di::getInstance()->db->fetch_rowset($sql) as $tor) {
             $dl = isset($tor['speed_down']) ? $tor['speed_down'] : 0;
             $ul = isset($tor['speed_up']) ? $tor['speed_up'] : 0;
 

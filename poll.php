@@ -23,6 +23,8 @@
  * SOFTWARE.
  */
 
+use \TorrentPier\Di;
+
 define('BB_SCRIPT', 'vote');
 define('BB_ROOT', './');
 require_once __DIR__ . '/common.php';
@@ -51,7 +53,7 @@ $poll = new bb_poll();
 if (!$topic_id) {
     bb_die('Invalid topic_id');
 }
-if (!$t_data = DB()->fetch_row("SELECT * FROM " . BB_TOPICS . " WHERE topic_id = $topic_id LIMIT 1")) {
+if (!$t_data = Di::getInstance()->db->fetch_row("SELECT * FROM bb_topics WHERE topic_id = $topic_id LIMIT 1")) {
     bb_die('Topic not found');
 }
 
@@ -89,22 +91,22 @@ switch ($mode) {
         if (!$vote_id) {
             bb_die($lang['NO_VOTE_OPTION']);
         }
-        if (DB()->fetch_row("SELECT 1 FROM " . BB_POLL_USERS . " WHERE topic_id = $topic_id AND user_id = {$userdata['user_id']} LIMIT 1")) {
+        if (Di::getInstance()->db->fetch_row("SELECT 1 FROM " . BB_POLL_USERS . " WHERE topic_id = $topic_id AND user_id = {$userdata['user_id']} LIMIT 1")) {
             bb_die($lang['ALREADY_VOTED']);
         }
 
-        DB()->query("
+        Di::getInstance()->db->query("
 			UPDATE " . BB_POLL_VOTES . " SET
 				vote_result = vote_result + 1
 			WHERE topic_id = $topic_id
 				AND vote_id = $vote_id
 			LIMIT 1
 		");
-        if (DB()->affected_rows() != 1) {
+        if (Di::getInstance()->db->affected_rows() != 1) {
             bb_die($lang['NO_VOTE_OPTION']);
         }
 
-        DB()->query("INSERT IGNORE INTO " . BB_POLL_USERS . " (topic_id, user_id, vote_ip, vote_dt) VALUES ($topic_id, {$userdata['user_id']}, '" . USER_IP . "', " . TIMENOW . ")");
+        Di::getInstance()->db->query("INSERT IGNORE INTO " . BB_POLL_USERS . " (topic_id, user_id, vote_ip, vote_dt) VALUES ($topic_id, {$userdata['user_id']}, '" . USER_IP . "', " . TIMENOW . ")");
 
         $cache->delete('poll_' . $topic_id);
 
@@ -116,7 +118,7 @@ switch ($mode) {
         if (!$t_data['topic_vote']) {
             bb_die($lang['POST_HAS_NO_POLL']);
         }
-        DB()->query("UPDATE " . BB_TOPICS . " SET topic_vote = 1 WHERE topic_id = $topic_id LIMIT 1");
+        Di::getInstance()->db->query("UPDATE bb_topics SET topic_vote = 1 WHERE topic_id = $topic_id LIMIT 1");
         bb_die($lang['NEW_POLL_START']);
         break;
 
@@ -125,7 +127,7 @@ switch ($mode) {
         if (!$t_data['topic_vote']) {
             bb_die($lang['POST_HAS_NO_POLL']);
         }
-        DB()->query("UPDATE " . BB_TOPICS . " SET topic_vote = " . POLL_FINISHED . " WHERE topic_id = $topic_id LIMIT 1");
+        Di::getInstance()->db->query("UPDATE bb_topics SET topic_vote = " . POLL_FINISHED . " WHERE topic_id = $topic_id LIMIT 1");
         bb_die($lang['NEW_POLL_END']);
         break;
 
@@ -225,16 +227,16 @@ class bb_poll
                 'vote_result' => (int)0,
             );
         }
-        $sql_args = DB()->build_array('MULTI_INSERT', $sql_ary);
+        $sql_args = Di::getInstance()->db->build_array('MULTI_INSERT', $sql_ary);
 
-        DB()->query("REPLACE INTO " . BB_POLL_VOTES . $sql_args);
+        Di::getInstance()->db->query("REPLACE INTO " . BB_POLL_VOTES . $sql_args);
 
-        DB()->query("UPDATE " . BB_TOPICS . " SET topic_vote = 1 WHERE topic_id = $topic_id LIMIT 1");
+        Di::getInstance()->db->query("UPDATE bb_topics SET topic_vote = 1 WHERE topic_id = $topic_id LIMIT 1");
     }
 
     public function delete_poll($topic_id)
     {
-        DB()->query("UPDATE " . BB_TOPICS . " SET topic_vote = 0 WHERE topic_id = $topic_id LIMIT 1");
+        Di::getInstance()->db->query("UPDATE bb_topics SET topic_vote = 0 WHERE topic_id = $topic_id LIMIT 1");
         $this->delete_votes_data($topic_id);
     }
 
@@ -246,8 +248,8 @@ class bb_poll
         /** @var \TorrentPier\Cache\Adapter $cache */
         $cache = $di->cache;
 
-        DB()->query("DELETE FROM " . BB_POLL_VOTES . " WHERE topic_id = $topic_id");
-        DB()->query("DELETE FROM " . BB_POLL_USERS . " WHERE topic_id = $topic_id");
+        Di::getInstance()->db->query("DELETE FROM " . BB_POLL_VOTES . " WHERE topic_id = $topic_id");
+        Di::getInstance()->db->query("DELETE FROM " . BB_POLL_USERS . " WHERE topic_id = $topic_id");
 
         $cache->delete('poll_' . $topic_id);
     }

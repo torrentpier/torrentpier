@@ -30,6 +30,9 @@ use Pimple\Container;
 /**
  * Class Di
  * Dependency Injection Container.
+ *
+ * @property Config $config
+ * @property Db $db
  */
 class Di extends Container
 {

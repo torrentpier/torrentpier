@@ -23,6 +23,8 @@
  * SOFTWARE.
  */
 
+use \TorrentPier\Di;
+
 define('BB_SCRIPT', 'posting');
 define('BB_ROOT', './');
 require(BB_ROOT . "common.php");
@@ -118,7 +120,7 @@ switch ($mode) {
         if (!$forum_id) {
             bb_simple_die($lang['FORUM_NOT_EXIST']);
         }
-        $sql = "SELECT * FROM " . BB_FORUMS . " WHERE forum_id = $forum_id LIMIT 1";
+        $sql = "SELECT * FROM bb_forums WHERE forum_id = $forum_id LIMIT 1";
         break;
 
     case 'reply':
@@ -126,7 +128,7 @@ switch ($mode) {
             bb_simple_die($lang['NO_TOPIC_ID']);
         }
         $sql = "SELECT f.*, t.*
-			FROM " . BB_FORUMS . " f, " . BB_TOPICS . " t
+			FROM bb_forums f, bb_topics t
 			WHERE t.topic_id = $topic_id
 				AND f.forum_id = t.forum_id
 			LIMIT 1";
@@ -142,8 +144,8 @@ switch ($mode) {
         $select_sql = 'SELECT f.*, t.*, p.*';
         $select_sql .= (!$submit) ? ', pt.*, u.username, u.user_id' : '';
 
-        $from_sql = "FROM " . BB_POSTS . " p, " . BB_TOPICS . " t, " . BB_FORUMS . " f";
-        $from_sql .= (!$submit) ? ", " . BB_POSTS_TEXT . " pt, " . BB_USERS . " u" : '';
+        $from_sql = "FROM " . BB_POSTS . " p, bb_topics t, bb_forums f";
+        $from_sql .= (!$submit) ? ", " . BB_POSTS_TEXT . " pt, bb_users u" : '';
 
         $where_sql = "
 			WHERE p.post_id = $post_id
@@ -162,7 +164,7 @@ switch ($mode) {
         bb_simple_die($lang['NO_VALID_MODE']);
 }
 
-if ($post_info = DB()->fetch_row($sql)) {
+if ($post_info = Di::getInstance()->db->fetch_row($sql)) {
     $forum_id = $post_info['forum_id'];
     $forum_name = $post_info['forum_name'];
 
@@ -242,8 +244,8 @@ if (!$is_auth[$is_auth_type]) {
 
 if ($mode == 'new_rel') {
     if ($tor_status = join(',', $di->config->get('tor_cannot_new'))) {
-        $sql = DB()->fetch_rowset("SELECT t.topic_title, t.topic_id, tor.tor_status
-			FROM " . BB_BT_TORRENTS . " tor, " . BB_TOPICS . " t
+        $sql = Di::getInstance()->db->fetch_rowset("SELECT t.topic_title, t.topic_id, tor.tor_status
+			FROM bb_bt_torrents tor, bb_topics t
 			WHERE poster_id = {$userdata['user_id']}
 				AND tor.topic_id = t.topic_id
 				AND tor.tor_status IN ($tor_status)
@@ -269,7 +271,7 @@ if ($submit || $preview) {
     $notify_user = bf($userdata['user_opt'], 'user_opt', 'user_notify');
 
     if (!IS_GUEST && $mode != 'newtopic' && !$notify_user) {
-        $notify_user = (int)DB()->fetch_row("SELECT topic_id FROM " . BB_TOPICS_WATCH . " WHERE topic_id = $topic_id AND user_id = " . $userdata['user_id']);
+        $notify_user = (int)Di::getInstance()->db->fetch_row("SELECT topic_id FROM " . BB_TOPICS_WATCH . " WHERE topic_id = $topic_id AND user_id = " . $userdata['user_id']);
     }
 }
 
@@ -281,7 +283,7 @@ $topic_has_new_posts = false;
 if (!IS_GUEST && $mode != 'newtopic' && ($submit || $preview || $mode == 'quote' || $mode == 'reply') && isset($_COOKIE[COOKIE_TOPIC])) {
     if ($topic_last_read = max(intval($tracking_topics[$topic_id]), intval($tracking_forums[$forum_id]))) {
         $sql = "SELECT p.*, pt.post_text, u.username, u.user_rank
-			FROM " . BB_POSTS . " p, " . BB_POSTS_TEXT . " pt, " . BB_USERS . " u
+			FROM " . BB_POSTS . " p, " . BB_POSTS_TEXT . " pt, bb_users u
 			WHERE p.topic_id = " . (int)$topic_id . "
 				AND u.user_id = p.poster_id
 				AND pt.post_id = p.post_id
@@ -289,7 +291,7 @@ if (!IS_GUEST && $mode != 'newtopic' && ($submit || $preview || $mode == 'quote'
 			ORDER BY p.post_time
 			LIMIT " . $di->config->get('posts_per_page');
 
-        if ($rowset = DB()->fetch_rowset($sql)) {
+        if ($rowset = Di::getInstance()->db->fetch_rowset($sql)) {
             $topic_has_new_posts = true;
 
             foreach ($rowset as $i => $row) {
@@ -347,7 +349,7 @@ if ($mode == 'delete' && !$confirm) {
             if (!$error_msg) {
                 $topic_type = (isset($post_data['topic_type']) && $topic_type != $post_data['topic_type'] && !$is_auth['auth_sticky'] && !$is_auth['auth_announce']) ? $post_data['topic_type'] : $topic_type;
 
-                submit_post($mode, $post_data, $return_message, $return_meta, $forum_id, $topic_id, $post_id, $topic_type, DB()->escape($username), DB()->escape($subject), DB()->escape($message), $update_post_time, $poster_rg_id, $attach_rg_sig);
+                submit_post($mode, $post_data, $return_message, $return_meta, $forum_id, $topic_id, $post_id, $topic_type, Di::getInstance()->db->escape($username), Di::getInstance()->db->escape($subject), Di::getInstance()->db->escape($message), $update_post_time, $poster_rg_id, $attach_rg_sig);
 
                 $post_url = POST_URL . "$post_id#$post_id";
                 $post_msg = ($mode == 'editpost') ? $lang['EDITED'] : $lang['STORED'];
@@ -386,8 +388,8 @@ if ($mode == 'delete' && !$confirm) {
             $upload = new upload_common();
 
             if ($upload->init($di->config->get('attach'), $_FILES['attach']) && $upload->store('attach', array('topic_id' => $topic_id))) {
-                DB()->query("
-					UPDATE " . BB_TOPICS . " SET
+                Di::getInstance()->db->query("
+					UPDATE bb_topics SET
 						attach_ext_id = " . (int)$upload->file_ext_id . ",
 						filesize = " . (int)$upload->file_size . "
 					WHERE topic_id = $topic_id
@@ -401,7 +403,7 @@ if ($mode == 'delete' && !$confirm) {
                         if ($post_info['forum_parent']) {
                             $forum_parent = $post_info['forum_parent'];
                         }
-                        $count_rowset = DB()->fetch_rowset("SELECT forum_id FROM " . BB_FORUMS . " WHERE forum_parent = $forum_parent");
+                        $count_rowset = Di::getInstance()->db->fetch_rowset("SELECT forum_id FROM bb_forums WHERE forum_parent = $forum_parent");
                         $sub_forums = array();
                         foreach ($count_rowset as $count_row) {
                             if ($count_row['forum_id'] != $forum_id) {
@@ -411,7 +413,7 @@ if ($mode == 'delete' && !$confirm) {
                         $sub_forums[] = $forum_id;
                         $sub_forums = join(',', $sub_forums);
                         // Подсчет проверенных релизов в форумах раздела
-                        $count_checked_releases = DB()->fetch_row("SELECT COUNT(*) AS checked_releases FROM " . BB_BT_TORRENTS . " WHERE poster_id  = " . $userdata['user_id'] . " AND forum_id IN($sub_forums) AND tor_status IN(" . TOR_APPROVED . "," . TOR_DOUBTFUL . "," . TOR_TMP . ") LIMIT 1", 'checked_releases');
+                        $count_checked_releases = Di::getInstance()->db->fetch_row("SELECT COUNT(*) AS checked_releases FROM bb_bt_torrents WHERE poster_id  = " . $userdata['user_id'] . " AND forum_id IN($sub_forums) AND tor_status IN(" . TOR_APPROVED . "," . TOR_DOUBTFUL . "," . TOR_TMP . ") LIMIT 1", 'checked_releases');
                         if ($count_checked_releases || IS_AM) {
                             tracker_register($topic_id, 'newtopic', TOR_NOT_APPROVED);
                         } else {
@@ -571,7 +573,7 @@ if ($userdata['user_level'] == GROUP_MEMBER || IS_AM) {
 			AND g.release_group = 1
 		ORDER BY g.group_name";
 
-    foreach (DB()->fetch_rowset($sql) as $row) {
+    foreach (Di::getInstance()->db->fetch_rowset($sql) as $row) {
         $selected_opt = ($row['group_id'] == $selected_rg) ? 'selected' : '';
         $poster_rgroups .= '<option value="' . $row['group_id'] . '" ' . $selected_opt . '>' . $row['group_name'] . '</option>';
     }

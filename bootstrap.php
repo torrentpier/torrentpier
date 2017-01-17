@@ -33,6 +33,7 @@ $di = new Di();
 $di->register(new ServiceProviders\ConfigServiceProvider, [
     'file.system.main' => __DIR__ . '/configs/main.php',
     'file.local.main' => __DIR__ . '/configs/local.php',
+    'config.dbQuery' => "SELECT config_name, config_value FROM bb_config"
 ]);
 
 //// Application

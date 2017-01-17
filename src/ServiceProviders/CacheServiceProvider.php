@@ -41,10 +41,10 @@ class CacheServiceProvider implements ServiceProviderInterface
     public function register(Container $container)
     {
         $container['cache'] = function (Container $container) {
-            $setting = $container['config.services.cache'];
+            $setting = $container['config']->get('services.cache');
             /** @var Adapter $adapter */
             $adapter = new $setting['adapter']();
-            $adapter->setOptions($setting['options']->toArray());
+            $adapter->setOptions($setting['options']);
             return $adapter;
         };
     }

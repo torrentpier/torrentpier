@@ -23,6 +23,8 @@
  * SOFTWARE.
  */
 
+use \TorrentPier\Di;
+
 define('BB_SCRIPT', 'group_edit');
 define('BB_ROOT', './');
 require(BB_ROOT . 'common.php');
@@ -65,7 +67,7 @@ if ($is_moderator) {
                 bb_die(implode($upload->errors));
             }
 
-            DB()->query("UPDATE " . BB_GROUPS . " SET avatar_ext_id = $avatar_ext_id WHERE group_id = $group_id LIMIT 1");
+            Di::getInstance()->db->query("UPDATE " . BB_GROUPS . " SET avatar_ext_id = $avatar_ext_id WHERE group_id = $group_id LIMIT 1");
         }
     }
 
