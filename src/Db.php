@@ -28,6 +28,8 @@ namespace TorrentPier;
 use \PDO;
 use \PDOException;
 use \PDOStatement;
+use TorrentPier\Db\Exception;
+use TorrentPier\Db\IntegrityViolationException;
 
 class Db extends PDO
 {
@@ -120,39 +122,78 @@ class Db extends PDO
         $this->setAttribute(static::ATTR_STATEMENT_CLASS, ['\\TorrentPier\\Db\\Statement', [$this]]);
     }
 
-    public function prepare($statement, $options = [])
+    public function prepare($statement, /** @noinspection PhpSignatureMismatchDuringInheritanceInspection */
+                            $options = [])
     {
-        if (!$this->stat) {
-            return parent::prepare($statement);
+        try {
+            if ($this->stat) {
+                $t = microtime(true);
+            }
+            return parent::prepare($statement, $options);
+        } catch (PDOException $e) {
+            throw new Exception($e);
+        } finally {
+            if (isset($t)) {
+                $this->sqlTimeTotal += microtime(true) - $t;
+            }
         }
-        $t = microtime(true);
-        $ret = parent::prepare($statement);
-        $this->sqlTimeTotal += microtime(true) - $t;
-        return $ret;
     }
 
+    /** @noinspection PhpSignatureMismatchDuringInheritanceInspection */
+    /**
+     * @param string $statement
+     * @param array ...$args
+     * @return PDOStatement
+     */
     public function query($statement, ...$args)
     {
-        if (!$this->stat) {
+        try {
+            if ($this->stat) {
+                $t = microtime(true);
+            }
+            if (func_num_args() > 1) {
+                $input = func_get_arg(1);
+                if (is_array($input)) {
+                    $stmt = parent::prepare($statement);
+                    if (func_num_args() > 2) {
+                        $stmt->setFetchMode(...array_slice(func_get_args(), 2));
+                    }
+                    $stmt->execute($input);
+                    return $stmt;
+                }
+            }
             return parent::query($statement, ...$args);
+        } catch (PDOException $e) {
+            if ($e->getCode() == '23000') {
+                throw new IntegrityViolationException($e);
+            }
+            throw new Exception($e);
+        } finally {
+            if (isset($t)) {
+                $this->sqlTimeTotal += microtime(true) - $t;
+                $this->numQueries++;
+            }
         }
-        $t = microtime(true);
-        $ret = parent::query($statement, ...$args);
-        $this->sqlTimeTotal += microtime(true) - $t;
-        $this->numQueries++;
-        return $ret;
     }
 
     public function exec($statement)
     {
-        if (!$this->stat) {
+        try {
+            if ($this->stat) {
+                $t = microtime(true);
+            }
             return parent::exec($statement);
+        } catch (PDOException $e) {
+            if ($e->getCode() == '23000') {
+                throw new IntegrityViolationException($e);
+            }
+            throw new Exception($e);
+        } finally {
+            if (isset($t)) {
+                $this->sqlTimeTotal += microtime(true) - $t;
+                $this->numQueries++;
+            }
         }
-        $t = microtime(true);
-        $ret = parent::exec($statement);
-        $this->sqlTimeTotal += microtime(true) - $t;
-        $this->numQueries++;
-        return $ret;
     }
 
     /** @deprecated

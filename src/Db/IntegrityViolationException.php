@@ -25,36 +25,6 @@
 
 namespace TorrentPier\Db;
 
-use \PDOStatement;
-use \PDOException;
-use TorrentPier\Db;
-
-class Statement extends PDOStatement
+class IntegrityViolationException extends Exception
 {
-    protected $db = null;
-
-    protected function __construct(Db $db)
-    {
-        $this->db = $db;
-    }
-
-    public function execute($input_parameters = null)
-    {
-        try {
-            if ($this->db->stat) {
-                $t = microtime(true);
-            }
-            return parent::execute($input_parameters);
-        } catch (PDOException $e) {
-            if ($e->getCode() == '23000') {
-                throw new IntegrityViolationException($e);
-            }
-            throw new Exception($e);
-        } finally {
-            if (isset($t)) {
-                $this->db->sqlTimeTotal += microtime(true) - $t;
-                $this->db->numQueries++;
-            }
-        }
-    }
 }
