@@ -166,7 +166,7 @@
                 i++;
             }
             size = String(size);
-            if (size.indexOf('.') != -1) {
+            if (size.indexOf('.') !== -1) {
                 size = size.substring(0, size.indexOf('.') + 3);
             }
             return size + ' ' + units[i];

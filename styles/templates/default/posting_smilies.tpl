@@ -3,7 +3,7 @@ function emoticon(text) {
 	text = ' ' + text + ' ';
 	if (opener.document.forms['post'].message.createTextRange && opener.document.forms['post'].message.caretPos) {
 		var caretPos = opener.document.forms['post'].message.caretPos;
-		caretPos.text = caretPos.text.charAt(caretPos.text.length - 1) == ' ' ? text + ' ' : text;
+		caretPos.text = caretPos.text.charAt(caretPos.text.length - 1) === ' ' ? text + ' ' : text;
 		opener.document.forms['post'].message.focus();
 	} else {
 	opener.document.forms['post'].message.value  += text;
