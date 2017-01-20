@@ -45,7 +45,7 @@
 	},
 	"require-dev": {
 		"phpunit/phpunit": "^5.0",
-		"squizlabs/php_codesniffer": "2.6.*",
+		"squizlabs/php_codesniffer": "2.7.*",
 		"sebastian/phpcpd": "2.0.*"
 	},
 	"autoload": {
