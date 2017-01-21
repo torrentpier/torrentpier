@@ -25,9 +25,12 @@
 
 namespace TorrentPier\ServiceProviders;
 
+use Monolog\Logger;
+use Monolog\Handler\BrowserConsoleHandler;
 use Pimple\Container;
 use Pimple\ServiceProviderInterface;
 use TorrentPier\Db;
+use TorrentPier\Db\LogProcessor;
 
 /**
  * Class DbServiceProvider
@@ -41,7 +44,16 @@ class DbServiceProvider implements ServiceProviderInterface
     public function register(Container $container)
     {
         $container['db'] = function (Container $container) {
-            return new Db($container['config']->get('services.db'));
+            $db = new Db($container['config']->get('services.db'));
+
+            // TODO: enable only for admins with magic cookie?
+            if ($container['config']->get('debug')) {
+                $db->logProcessor = new LogProcessor();
+                $db->logger = (new Logger('db'))->pushHandler(
+                    (new BrowserConsoleHandler(Logger::DEBUG))->pushProcessor($db->logProcessor)
+                );
+            }
+            return $db;
         };
     }
 }

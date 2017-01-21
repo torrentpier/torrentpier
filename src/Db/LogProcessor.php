@@ -25,40 +25,31 @@
 
 namespace TorrentPier\Db;
 
-use \PDOStatement;
-use \PDOException;
-use TorrentPier\Db;
-
-class Statement extends PDOStatement
+class LogProcessor
 {
-    protected $db = null;
+    public $timeQueries = 0;
+    public $timePrepares = 0;
+    public $numQueries = 0;
+    public $numPrepares = 0;
 
-    protected function __construct(Db $db)
+    public function __invoke(array $record)
     {
-        $this->db = $db;
-    }
-
-    public function execute(/** @noinspection PhpSignatureMismatchDuringInheritanceInspection */
-        $input = null)
-    {
-        try {
-            if (isset($this->db->logger) && strncasecmp($this->queryString, 'EXPLAIN', 7)) {
-                $t = microtime(true);
-            }
-            return parent::execute($input);
-        } catch (PDOException $e) {
-            if ($e->getCode() == '23000') {
-                throw new IntegrityViolationException($e);
-            }
-            throw new Exception($e);
-        } finally {
-            if (isset($t)) {
-                $context = ['time' => microtime(true) - $t, 'input' => $input];
-                if ($this->db->isLogExplain && preg_match('#^\\s*SELECT\\s#i', $this->queryString)) {
-                    $context['explain'] = $this->db->explain($this->queryString, $input);
-                }
-                $this->db->logger->debug($this->queryString, $context);
+        $isPrepare = isset($record['context']['prepare']);
+        if ($isPrepare) {
+            $record['message'] = "Prepare {$record['message']}";
+            $this->numPrepares++;
+        } else {
+            $this->numQueries++;
+        }
+        if (isset($record['context']['time'])) {
+            $t = $record['context']['time'];
+            $record['message'] = '[' . sprintf('%.5f', $t) . '] ' . $record['message'];
+            if ($isPrepare) {
+                $this->timePrepares += $t;
+            } else {
+                $this->timeQueries += $t;
             }
         }
+        return $record;
     }
 }
