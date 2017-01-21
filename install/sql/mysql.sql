@@ -510,7 +510,7 @@ INSERT INTO `bb_config` VALUES ('birthday_min_age', '10');
 INSERT INTO `bb_config` VALUES ('birthday_check_day', '7');
 INSERT INTO `bb_config` VALUES ('bt_add_auth_key', '1');
 INSERT INTO `bb_config` VALUES ('bt_allow_spmode_change', '1');
-INSERT INTO `bb_config` VALUES ('bt_announce_url', 'https://demo.torrentpier.me/bt/announce.php');
+INSERT INTO `bb_config` VALUES ('bt_announce_url', 'http://demo.torrentpier.me/bt/announce.php');
 INSERT INTO `bb_config` VALUES ('bt_disable_dht', '0');
 INSERT INTO `bb_config` VALUES ('bt_check_announce_url', '0');
 INSERT INTO `bb_config` VALUES ('bt_del_addit_ann_urls', '1');
@@ -554,7 +554,7 @@ INSERT INTO `bb_config` VALUES ('seed_bonus_tor_size', '0');
 INSERT INTO `bb_config` VALUES ('seed_bonus_user_regdate', '0');
 INSERT INTO `bb_config` VALUES ('site_desc', 'A little text to describe your forum');
 INSERT INTO `bb_config` VALUES ('sitemap_time', '');
-INSERT INTO `bb_config` VALUES ('sitename', 'TorrentPier II - Torrent Tracker');
+INSERT INTO `bb_config` VALUES ('sitename', 'TorrentPier - Bittorrent-tracker engine');
 INSERT INTO `bb_config` VALUES ('smilies_path', 'styles/images/smiles');
 INSERT INTO `bb_config` VALUES ('static_sitemap', '');
 INSERT INTO `bb_config` VALUES ('topics_per_page', '50');
@@ -994,7 +994,7 @@ CREATE TABLE IF NOT EXISTS `bb_posts_text` (
 -- Records of bb_posts_text
 -- ----------------------------
 INSERT INTO `bb_posts_text` VALUES ('1',
-                                    'Благодарим вас за установку новой версии TorrentPier II!\n\nЧто делать дальше? Сперва настройте ваш сайт в администраторском разделе. Измените базовые опции: заголовок сайта, число сообщений на страницу, часовой пояс, язык по-умолчанию, настройки сидбонусов, дней рождения и т.д. Создайте несколько форумов, а также не забудьте переименовать или удалить этот. Обязательно настройте возможность создания релизов в созданных вами разделах и добавьте [url=https://torrentpier.me/threads/25867/]шаблоны оформления раздач[/url] для них. Если у вас возникнут вопросы или потребность в дополнительных модификациях, [url=https://torrentpier.me/]посетите наш форум[/url].\n\nТакже напоминаем, что у проекта TorrentPier II есть несколько сайтов, которые могут оказаться полезны для вас:\n[list]\n[*]Форум: https://torrentpier.me/\n[*]Демо-версия: https://demo.torrentpier.me/\n[*]Инструкция: https://faq.torrentpier.me/\n[*]Центр загрузки: https://get.torrentpier.me/\n[*]Перевод на другие языки: http://translate.torrentpier.me/\n[/list]\nНе забудьте добавить их себе в закладки и регулярно проверять наличие новых версий движка на нашем форуме, для своевременного обновления.\n\nНе сомневаемся, вам под силу создать самый лучший трекер. Удачи!');
+                                    'Благодарим вас за установку новой версии TorrentPier!\n\nЧто делать дальше? Сперва настройте ваш сайт в администраторском разделе. Измените базовые опции: заголовок сайта, число сообщений на страницу, часовой пояс, язык по-умолчанию, настройки сидбонусов, дней рождения и т.д. Создайте несколько форумов, а также не забудьте переименовать или удалить этот. Обязательно настройте возможность создания релизов в созданных вами разделах и добавьте [url=https://torrentpier.me/threads/25867/]шаблоны оформления раздач[/url] для них. Если у вас возникнут вопросы или потребность в дополнительных модификациях, [url=https://torrentpier.me/]посетите наш форум[/url].\n\nТакже напоминаем, что у проекта TorrentPier есть несколько сайтов, которые могут оказаться полезны для вас:\n[list]\n[*]Форум: https://torrentpier.me/\n[*]Демо-версия: https://demo.torrentpier.me/\n[*]Инструкция: https://faq.torrentpier.me/\n[*]Центр загрузки: https://get.torrentpier.me/\n[*]Перевод на другие языки: http://translate.torrentpier.me/\n[/list]\nНе забудьте добавить их себе в закладки и регулярно проверять наличие новых версий движка на нашем форуме, для своевременного обновления.\n\nНе сомневаемся, вам под силу создать самый лучший трекер. Удачи!');
 
 -- ----------------------------
 -- Table structure for `bb_privmsgs`
@@ -1172,7 +1172,6 @@ CREATE TABLE IF NOT EXISTS `bb_smilies` (
 INSERT INTO `bb_smilies` VALUES ('', ':aa:', 'aa.gif', 'aa');
 INSERT INTO `bb_smilies` VALUES ('', ':ab:', 'ab.gif', 'ab');
 INSERT INTO `bb_smilies` VALUES ('', ':ac:', 'ac.gif', 'ac');
-INSERT INTO `bb_smilies` VALUES ('', ':ad:', 'ad.gif', 'ad');
 INSERT INTO `bb_smilies` VALUES ('', ':ae:', 'ae.gif', 'ae');
 INSERT INTO `bb_smilies` VALUES ('', ':af:', 'af.gif', 'af');
 INSERT INTO `bb_smilies` VALUES ('', ':ag:', 'ag.gif', 'ag');
@@ -1224,6 +1223,7 @@ INSERT INTO `bb_smilies` VALUES ('', ':bz:', 'bz.gif', 'bz');
 INSERT INTO `bb_smilies` VALUES ('', ':ca:', 'ca.gif', 'ca');
 INSERT INTO `bb_smilies` VALUES ('', ':cb:', 'cb.gif', 'cb');
 INSERT INTO `bb_smilies` VALUES ('', ':cc:', 'cc.gif', 'cc');
+INSERT INTO `bb_smilies` VALUES ('', ':сd:', 'сd.gif', 'сd');
 
 -- ----------------------------
 -- Table structure for `bb_topics`
@@ -1260,7 +1260,7 @@ CREATE TABLE IF NOT EXISTS `bb_topics` (
 -- Records of bb_topics
 -- ----------------------------
 INSERT INTO `bb_topics` VALUES
-  ('1', '1', 'Добро пожаловать в TorrentPier II', '2', UNIX_TIMESTAMP(), '2', '0', '0', '0', '0', '1', '1', '0', '0',
+  ('1', '1', 'Добро пожаловать в TorrentPier', '2', UNIX_TIMESTAMP(), '2', '0', '0', '0', '0', '1', '1', '0', '0',
    '0', '1414658247', '0');
 
 -- ----------------------------

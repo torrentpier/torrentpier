@@ -1407,7 +1407,6 @@ $lang['HASH_S'] = 'по info_hash';
 
 // copyright
 $lang['NOTICE'] = '!ВНИМАНИЕ!';
-$lang['POWERED'] = 'UG93ZXJlZCBieSA8YSB0YXJnZXQ9Il9ibGFuayIgaHJlZj0iaHR0cDovL3RvcnJlbnRwaWVyLm1lIj5Ub3JyZW50UGllciBJSTwvYT4gJmNvcHk7IE1laXRoYXIsIFRvcnJlbnRQaWVyIElJIFRlYW0=';
 $lang['COPY'] = 'Сайт не предоставляет электронные версии произведений, а занимается лишь коллекционированием и каталогизацией ссылок, присылаемых и публикуемых на форуме нашими читателями. Если вы являетесь правообладателем какого-либо представленного материала и не желаете, чтобы ссылка на него находилась в нашем каталоге, свяжитесь с нами, и мы незамедлительно удалим ее. Файлы для обмена на трекере предоставлены пользователями сайта, и администрация не несет ответственности за их содержание. Просьба не заливать файлы, защищенные авторскими правами, а также файлы нелегального содержания!';
 
 // FILELIST
@@ -1593,7 +1592,7 @@ $lang['USERS'] = 'Пользователи';
 $lang['GROUPS'] = 'Группы';
 $lang['FORUMS'] = 'Форумы';
 $lang['MODS'] = 'Модификации';
-$lang['TP'] = 'TorrentPier II';
+$lang['TP'] = 'TorrentPier';
 
 $lang['CONFIGURATION'] = 'Конфигурация';
 $lang['MANAGE'] = 'Управление';
@@ -1632,7 +1631,7 @@ $lang['FORUM_STATS'] = 'Статистика форумов';
 $lang['ADMIN_INDEX'] = 'Главная страница';
 $lang['CREATE_PROFILE'] = 'Создать аккаунт';
 
-$lang['TP_VERSION'] = 'Версия TorrentPier II';
+$lang['TP_VERSION'] = 'Версия TorrentPier';
 $lang['TP_RELEASE_DATE'] = 'Дата выпуска';
 $lang['ZF_VERSION'] = 'Версия Zend Framework';
 $lang['PHP_INFO'] = 'Информация о PHP';
@@ -1806,7 +1805,7 @@ $lang['ENABLE_PRUNE'] = 'Включить чистку форумов';
 $lang['ALLOW_BBCODE'] = 'Разрешить BBCode';
 $lang['ALLOW_SMILIES'] = 'Разрешить смайлики';
 $lang['SMILIES_PATH'] = 'Путь к смайликам';
-$lang['SMILIES_PATH_EXPLAIN'] = 'Каталог ниже корня TorrentPier II, например styles/images/smilies';
+$lang['SMILIES_PATH_EXPLAIN'] = 'Каталог ниже корня TorrentPier, например styles/images/smilies';
 $lang['ALLOW_SIG'] = 'Разрешить подписи';
 $lang['MAX_SIG_LENGTH'] = 'Макс. длина подписи';
 $lang['MAX_SIG_LENGTH_EXPLAIN'] = 'Максимальное кол-во символов в подписи пользователя';
@@ -2029,7 +2028,7 @@ $lang['DISALLOWED_ALREADY'] = 'Имя, которое вы пытаетесь з
 $lang['CLICK_RETURN_DISALLOWADMIN'] = '%sВернуться к управлению запрещенными именами%s';
 
 // Version Check
-$lang['VERSION_INFORMATION'] = 'Информация о версии TorrentPier II';
+$lang['VERSION_INFORMATION'] = 'Информация о версии TorrentPier';
 
 // Login attempts configuration
 $lang['MAX_LOGIN_ATTEMPTS'] = 'Разрешено попыток входа';
