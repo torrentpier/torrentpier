@@ -1,4 +1,4 @@
-<!-- IF SIMPLE_FOOTER --><div class="copyright tCenter" id="t2t">{POWERED}</div><!-- ELSEIF IN_ADMIN --><!-- ELSE -->
+<!-- IF SIMPLE_FOOTER --><div class="copyright tCenter">{POWERED}</div><!-- ELSEIF IN_ADMIN --><!-- ELSE -->
 
 	</div><!--/main_content_wrap-->
 	</td><!--/main_content-->
@@ -46,7 +46,7 @@
 		<br />
 		<!-- ENDIF -->
 
-		<div class="copyright tCenter" id="t2t">
+		<div class="copyright tCenter">
 			{POWERED}<br />
 		</div>
 
