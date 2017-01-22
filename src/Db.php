@@ -28,8 +28,10 @@ namespace TorrentPier;
 use \PDO;
 use \PDOException;
 use \PDOStatement;
+use Psr\Log\LoggerInterface;
 use TorrentPier\Db\Exception;
 use TorrentPier\Db\IntegrityViolationException;
+use TorrentPier\Db\LogProcessor;
 
 class Db extends PDO
 {
@@ -39,13 +41,17 @@ class Db extends PDO
     ];
 
     public $type;
-    public $stat;
-    public $sqlTimeTotal = 0;
-    public $numQueries = 0;
+    /** @var LoggerInterface */
+    public $logger;
+    /** @var LogProcessor */
+    public $logProcessor;
+    public $isLogPrepare;
+    public $isLogExplain;
 
     public function __construct(array $config)
     {
-        $this->stat = $config['stat'] ?? true;
+        $this->isLogPrepare = $config['isLogPrepare'] ?? false;
+        $this->isLogExplain = $config['isLogExplain'] ?? true;
         $type = $this->type = $config['type'] ?? 'mysql';
         $options = $config['options'] ?? [];
         $hostname = $config['hostname'] ?? '127.0.0.1';
@@ -126,7 +132,7 @@ class Db extends PDO
                             $options = [])
     {
         try {
-            if ($this->stat) {
+            if (isset($this->logger) && $this->isLogPrepare) {
                 $t = microtime(true);
             }
             return parent::prepare($statement, $options);
@@ -134,7 +140,7 @@ class Db extends PDO
             throw new Exception($e);
         } finally {
             if (isset($t)) {
-                $this->sqlTimeTotal += microtime(true) - $t;
+                $this->logger->debug($statement, ['time' => microtime(true) - $t, 'prepare' => true]);
             }
         }
     }
@@ -148,19 +154,19 @@ class Db extends PDO
     public function query($statement, ...$args)
     {
         try {
-            if ($this->stat) {
-                $t = microtime(true);
-            }
             if (func_num_args() > 1) {
                 $input = func_get_arg(1);
                 if (is_array($input)) {
-                    $stmt = parent::prepare($statement);
+                    $stmt = $this->prepare($statement);
                     if (func_num_args() > 2) {
                         $stmt->setFetchMode(...array_slice(func_get_args(), 2));
                     }
                     $stmt->execute($input);
                     return $stmt;
                 }
+            }
+            if (isset($this->logger) && strncasecmp($statement, 'EXPLAIN', 7)) {
+                $t = microtime(true);
             }
             return parent::query($statement, ...$args);
         } catch (PDOException $e) {
@@ -170,16 +176,30 @@ class Db extends PDO
             throw new Exception($e);
         } finally {
             if (isset($t)) {
-                $this->sqlTimeTotal += microtime(true) - $t;
-                $this->numQueries++;
+                $context = ['time' => microtime(true) - $t];
+                if ($this->isLogExplain && preg_match('#^s*SELECTs#i', $statement)) {
+                    $context['explain'] = $this->explain($statement);
+                }
+                $this->logger->debug($statement, $context);
             }
+        }
+    }
+
+    public function explain($statement, $input = null)
+    {
+        try {
+            $stmt = parent::prepare("EXPLAIN $statement");
+            $stmt->execute($input);
+            return $stmt->fetchAll();
+        } catch (PDOException $e) {
+            throw new Exception($e);
         }
     }
 
     public function exec($statement)
     {
         try {
-            if ($this->stat) {
+            if (isset($this->logger) && strncasecmp($statement, 'EXPLAIN', 7)) {
                 $t = microtime(true);
             }
             return parent::exec($statement);
@@ -190,8 +210,7 @@ class Db extends PDO
             throw new Exception($e);
         } finally {
             if (isset($t)) {
-                $this->sqlTimeTotal += microtime(true) - $t;
-                $this->numQueries++;
+                $this->logger->debug($statement, ['time' => microtime(true) - $t]);
             }
         }
     }
