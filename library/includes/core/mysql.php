@@ -111,6 +111,7 @@ class sql_db
 
         $p = ((bool)$this->cfg['persist']) ? 'p:' : '';
         $this->link = mysqli_connect($p . $this->cfg['dbhost'], $this->cfg['dbuser'], $this->cfg['dbpasswd'], $this->cfg['dbname']);
+        $this->selected_db = $this->cfg['dbname'];
 
         if (mysqli_connect_error()) {
             $server = (DBG_USER) ? $this->cfg['dbhost'] : '';
@@ -869,7 +870,7 @@ class sql_db
                 }
 
                 $id = $this->dbg_id - 1;
-                $htid = 'expl-' . intval($this->link) . '-' . $id;
+                $htid = 'expl-' . spl_object_hash($this->link) . '-' . $id;
                 $dbg = $this->dbg[$id];
 
                 $this->explain_out .= '
