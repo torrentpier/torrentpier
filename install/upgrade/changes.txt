@@ -56,3 +56,5 @@ INSERT INTO `bb_cron` VALUES ('', '1', 'Accrual seedbonus', 'tr_seed_bonus.php',
 
 // 2.1.6
 UPDATE `bb_config` SET `config_value` = 'http://whatismyipaddress.com/ip/' WHERE `config_name` = 'whois_info';
+DELETE FROM `bb_smilies` WHERE `code` = ':ad:';
+INSERT INTO `bb_smilies` VALUES ('', ':сd:', 'сd.gif', 'сd');
