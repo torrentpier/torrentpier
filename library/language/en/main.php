@@ -1633,7 +1633,6 @@ $lang['CREATE_PROFILE'] = 'Create profile';
 
 $lang['TP_VERSION'] = 'TorrentPier version';
 $lang['TP_RELEASE_DATE'] = 'Release date';
-$lang['ZF_VERSION'] = 'Zend Framework version';
 $lang['PHP_INFO'] = 'Information about PHP';
 
 $lang['CLICK_RETURN_ADMIN_INDEX'] = 'Click %sHere%s to return to the Admin Index';

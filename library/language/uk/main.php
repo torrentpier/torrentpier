@@ -1633,7 +1633,6 @@ $lang['CREATE_PROFILE'] = 'Створити акаунт';
 
 $lang['TP_VERSION'] = 'Версія TorrentPier';
 $lang['TP_RELEASE_DATE'] = 'Дата випуску';
-$lang['ZF_VERSION'] = 'Версія Zend Framework';
 $lang['PHP_INFO'] = 'Інформація про PHP';
 
 $lang['CLICK_RETURN_ADMIN_INDEX'] = '%sВернуться на головну сторінку адміністраторського розділу%s';
