@@ -615,7 +615,7 @@ class user_common
         if (IS_GUEST) {
             $this->opt_js = array_merge($this->opt_js, $this->opt_js_guest);
         } elseif (!empty($_COOKIE['opt_js'])) {
-            $opt_js = Zend\Json\Json::decode($_COOKIE['opt_js'], Zend\Json\Json::TYPE_ARRAY);
+            $opt_js = json_decode($_COOKIE['opt_js'], true);
 
             if (is_array($opt_js)) {
                 $this->opt_js = array_merge($this->opt_js, $opt_js);

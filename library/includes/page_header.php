@@ -134,7 +134,7 @@ $template->assign_vars(array(
     'USER_LANG' => $userdata['user_lang'],
 
     'INCLUDE_BBCODE_JS' => !empty($page_cfg['include_bbcode_js']),
-    'USER_OPTIONS_JS' => (IS_GUEST) ? '{}' : Zend\Json\Json::encode($user->opt_js),
+    'USER_OPTIONS_JS' => (IS_GUEST) ? '{}' : json_encode($user->opt_js),
 
     'USE_TABLESORTER' => !empty($page_cfg['use_tablesorter']),
 

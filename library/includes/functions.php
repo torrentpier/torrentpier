@@ -2113,7 +2113,7 @@ function get_poll_data_items_js($topic_id)
         $items[$row['topic_id']][$row['vote_id']] = array($opt_text_for_js, $opt_result_for_js);
     }
     foreach ($items as $k => $v) {
-        $items[$k] = Zend\Json\Json::encode($v);
+        $items[$k] = json_encode($v);
     }
 
     return is_array($topic_id) ? $items : $items[$topic_id];
