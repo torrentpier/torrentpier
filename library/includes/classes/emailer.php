@@ -164,16 +164,8 @@ class emailer
 
         // Set vars
         reset($this->vars);
-        while (list($key, $val) = each($this->vars)) {
-            $$key = $val;
-        }
-
-        eval("\$this->msg = '$this->msg';");
-
-        // Clear vars
-        reset($this->vars);
-        while (list($key, $val) = each($this->vars)) {
-            unset($$key);
+        foreach ($this->vars as $key => $val) {
+            $this->msg = preg_replace(sprintf('/\$\{?%s\}?/', $key), $val, $this->msg);
         }
 
         // We now try and pull a subject from the email body ... if it exists,
