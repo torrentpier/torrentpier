@@ -248,13 +248,6 @@ if ($submit && $mode == 'manage') {
 }
 
 if ($mode == 'manage') {
-    $yes_no_switches = array('disable_mod', 'allow_pm_attach', 'display_order');
-
-    for ($i = 0; $i < sizeof($yes_no_switches); $i++) {
-        eval("\$" . $yes_no_switches[$i] . "_yes = ( \$new_attach['" . $yes_no_switches[$i] . "'] != '0' ) ? 'checked=\"checked\"' : '';");
-        eval("\$" . $yes_no_switches[$i] . "_no = ( \$new_attach['" . $yes_no_switches[$i] . "'] == '0' ) ? 'checked=\"checked\"' : '';");
-    }
-
     $template->assign_vars(array(
         'TPL_ATTACH_MANAGE' => true,
         'S_ATTACH_ACTION' => 'admin_attachments.php?mode=manage',
@@ -272,12 +265,12 @@ if ($mode == 'manage') {
         'MAX_FILESIZE_PM' => $new_attach['max_filesize_pm'],
         'MAX_ATTACHMENTS' => $new_attach['max_attachments'],
         'MAX_ATTACHMENTS_PM' => $new_attach['max_attachments_pm'],
-        'DISABLE_MOD_YES' => $disable_mod_yes,
-        'DISABLE_MOD_NO' => $disable_mod_no,
-        'PM_ATTACH_YES' => $allow_pm_attach_yes,
-        'PM_ATTACH_NO' => $allow_pm_attach_no,
-        'DISPLAY_ORDER_ASC' => $display_order_yes,
-        'DISPLAY_ORDER_DESC' => $display_order_no,
+        'DISABLE_MOD_YES' => $new_attach['disable_mod'] !== '0' ? 'checked="checked"' : '',
+        'DISABLE_MOD_NO' => $new_attach['disable_mod'] === '0' ? 'checked="checked"' : '',
+        'PM_ATTACH_YES' => $new_attach['allow_pm_attach'] !== '0' ? 'checked="checked"' : '',
+        'PM_ATTACH_NO' => $new_attach['allow_pm_attach'] === '0' ? 'checked="checked"' : '',
+        'DISPLAY_ORDER_ASC' => $new_attach['display_order'] !== '0' ? 'checked="checked"' : '',
+        'DISPLAY_ORDER_DESC' => $new_attach['display_order'] === '0' ? 'checked="checked"' : '',
     ));
 }
 
