@@ -53,6 +53,9 @@ if (!defined('IN_FORUM') && !defined('IN_TRACKER')) {
 
 header('X-Frame-Options: SAMEORIGIN');
 
+// Composer
+require_once(BB_ROOT . 'vendor/autoload.php');
+
 // Get initial config
 require(BB_ROOT . 'library/config.php');
 

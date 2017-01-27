@@ -1,0 +1,54 @@
+{
+  "name": "torrentpier/torrentpier",
+  "description": "TorrentPier. Bittorrent-tracker engine",
+  "type": "project",
+  "keywords": [
+    "bittorrent",
+    "forum",
+    "torrent",
+    "tracker"
+  ],
+  "homepage": "https://torrentpier.me/",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Exile",
+      "email": "admin@torrentpier.me",
+      "homepage": "https://torrentpier.me/forum/members/exile.1/",
+      "role": "Developer"
+    },
+    {
+      "name": "Diolektor",
+      "homepage": "https://torrentpier.me/forum/members/diolektor.5765/",
+      "role": "Developer"
+    },
+    {
+      "name": "PheRum",
+      "homepage": "https://torrentpier.me/forum/members/pherum.23/",
+      "role": "Developer"
+    },
+    {
+      "name": "tpuser",
+      "homepage": "https://torrentpier.me/forum/members/tpuser.7560/",
+      "role": "Developer"
+    }
+  ],
+  "support": {
+    "email": "support@torrentpier.me",
+    "issues": "https://github.com/torrentpier/torrentpier/issues",
+    "forum": "https://torrentpier.me/forum/",
+    "get": "https://get.torrentpier.me/",
+    "docs": "https://faq.torrentpier.me/"
+  },
+  "require": {
+    "php": "^5.3 || ^7.0",
+    "google/recaptcha": "^1.0"
+  },
+  "autoload": {
+    "psr-4": {
+      "TorrentPier\\": "src/"
+    }
+  },
+  "minimum-stability": "stable",
+  "prefer-stable": true
+}
