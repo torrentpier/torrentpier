@@ -2551,18 +2551,27 @@ function hash_search($hash)
     }
 }
 
+/**
+ * Функция для получения и проверки правильности ответа от Google ReCaptcha.
+ *
+ * @param $mode
+ * @param string $callback
+ *
+ * @return bool|string
+ */
 function bb_captcha($mode, $callback = '')
 {
-    global $bb_cfg, $userdata;
-
-    require_once(CLASS_DIR . 'recaptcha.php');
+    global $bb_cfg, $lang;
 
     $secret = $bb_cfg['captcha']['secret_key'];
     $public = $bb_cfg['captcha']['public_key'];
-    $theme = $bb_cfg['captcha']['theme'];
-    $lang = $bb_cfg['lang'][$userdata['user_lang']]['captcha'];
+    $cp_theme = $bb_cfg['captcha']['theme'];
 
-    $reCaptcha = new ReCaptcha($secret);
+    if (!$public && !$secret) {
+        bb_die($lang['CAPTCHA_SETTINGS']);
+    }
+
+    $reCaptcha = new \ReCaptcha\ReCaptcha($secret);
 
     switch ($mode) {
         case 'get':
@@ -2571,26 +2580,22 @@ function bb_captcha($mode, $callback = '')
 					var onloadCallback = function() {
 						grecaptcha.render('tp-captcha', {
 							'sitekey'  : '" . $public . "',
-							'theme'    : '" . $theme . "',
+							'theme'    : '" . $cp_theme . "',
 							'callback' : '" . $callback . "'
 						});
 					};
 				</script>
 				<div id=\"tp-captcha\"></div>
-				<script src=\"https://www.google.com/recaptcha/api.js?onload=onloadCallback&hl=" . $lang . "&render=explicit\" async defer></script>";
+				<script src=\"https://www.google.com/recaptcha/api.js?onload=onloadCallback&render=explicit\" async defer></script>";
             break;
 
         case 'check':
-            $resp = null;
-            $error = null;
-            $g_resp = request_var('g-recaptcha-response', '');
-            if ($g_resp) {
-                $resp = $reCaptcha->verifyResponse($_SERVER["REMOTE_ADDR"], $g_resp);
-            }
-            if ($resp != null && $resp->success) {
+            $resp = $reCaptcha->verify(
+                request_var('g-recaptcha-response', ''),
+                $_SERVER["REMOTE_ADDR"]
+            );
+            if ($resp->isSuccess()) {
                 return true;
-            } else {
-                return false;
             }
             break;
 
