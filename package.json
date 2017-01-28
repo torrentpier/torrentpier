@@ -14,7 +14,7 @@
     "url": "git+https://github.com/torrentpier/torrentpier.git"
   },
   "author": "",
-  "license": "GPL-3.0",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/torrentpier/torrentpier/issues"
   },
