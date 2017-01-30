@@ -34,7 +34,9 @@ return [
             'hostname' => '127.0.0.1',
             'database' => 'tp_220',
             'username' => 'user',
-            'password' => function() { return 'pass'; },
+            'password' => function () {
+                return 'pass';
+            },
             'charset' => 'utf8'
         ],
 
