@@ -335,7 +335,6 @@ class attach_parent
 
                 // restore values :)
                 if (isset($_POST['attachment_list'])) {
-
                     for ($i = 0, $iMax = count($actual_list); $i < $iMax; $i++) {
                         $restore = false;
                         $del_thumb = false;

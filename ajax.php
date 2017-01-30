@@ -84,7 +84,7 @@ switch ($ajax->action) {
         require(INC_DIR . 'functions_group.php');
         break;
 
-    case 'sitemap';
+    case 'sitemap':
         require(CLASS_DIR . 'sitemap.php');
         break;
 }
