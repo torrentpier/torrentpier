@@ -2239,13 +2239,14 @@ function init_sphinx()
     global $sphinx;
 
     if (!isset($sphinx)) {
-        require(INC_DIR . 'api/sphinx.php');
-        $sphinx = new SphinxClient();
+        $sphinx = \Sphinx\SphinxClient::create();
 
         $sphinx->SetConnectTimeout(5);
-        $sphinx->SetRankingMode(SPH_RANK_NONE);
-        $sphinx->SetMatchMode(SPH_MATCH_BOOLEAN);
+        $sphinx->SetRankingMode($sphinx::SPH_RANK_NONE);
+        $sphinx->SetMatchMode($sphinx::SPH_MATCH_BOOLEAN);
     }
+
+    return $sphinx;
 }
 
 function log_sphinx_error($err_type, $err_msg, $query = '')
@@ -2271,7 +2272,7 @@ function get_title_match_topics($title_match_sql, $forum_ids = array())
     $title_match_sql = encode_text_match($title_match_sql);
 
     if ($bb_cfg['search_engine_type'] == 'sphinx') {
-        init_sphinx();
+        $sphinx = init_sphinx();
 
         $where = ($title_match) ? 'topics' : 'posts';
 
@@ -2280,7 +2281,7 @@ function get_title_match_topics($title_match_sql, $forum_ids = array())
             $sphinx->SetFilter('forum_id', $forum_ids, false);
         }
         if (preg_match('#^"[^"]+"$#u', $title_match_sql)) {
-            $sphinx->SetMatchMode(SPH_MATCH_PHRASE);
+            $sphinx->SetMatchMode($sphinx::SPH_MATCH_PHRASE);
         }
         if ($result = $sphinx->Query($title_match_sql, $where, $userdata['username'] . ' (' . CLIENT_IP . ')')) {
             if (!empty($result['matches'])) {

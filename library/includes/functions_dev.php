@@ -29,7 +29,7 @@ if (!defined('BB_ROOT')) {
 
 function get_sql_log()
 {
-    global $DBS, $CACHES, $sphinx, $datastore;
+    global $DBS, $CACHES, $datastore;
 
     $log = '';
 
@@ -44,8 +44,6 @@ function get_sql_log()
             $log .= get_sql_log_html($cache_obj, "cache: $cache_name [{$cache_obj->engine}]");
         }
     }
-
-    $log .= !empty($sphinx) ? get_sql_log_html($sphinx, '$sphinx') : '';
 
     if (!empty($datastore->db->dbg)) {
         $log .= get_sql_log_html($datastore->db, 'cache: datastore [' . $datastore->engine . ']');
