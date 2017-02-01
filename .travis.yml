@@ -5,16 +5,33 @@ php:
   - 7.1
   - hhvm
 
+addons:
+  hosts:
+  - tp.dev
+  - xn--o1af.xn--b1add
+
+env:
+  matrix:
+    - COMPOSER_FLAGS="--prefer-lowest"
+    - COMPOSER_FLAGS=""
+
 matrix:
   allow_failures:
     - php: hhvm
 
+notifications:
+  slack: torrentpier:ogxFfuvXqBpthIAq4ubyBDxu
+
 before_script:
   - travis_retry composer self-update
-  - travis_retry composer install --no-interaction
+  - travis_retry composer install --no-interaction --prefer-dist
 
 script:
     - vendor/bin/phpunit --configuration phpunit.xml --coverage-clover=coverage.xml
+
+after_script:
+    - php vendor/bin/codacycoverage clover coverage.xml
+    - php vendor/bin/ocular code-coverage:upload --format=php-clover coverage.xml
 
 after_success:
     - bash <(curl -s https://codecov.io/bash)

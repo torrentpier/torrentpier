@@ -65,9 +65,11 @@
     "doctrine/cache": "^1.6"
   },
   "require-dev": {
+    "codacy/coverage": "dev-master",
     "phpunit/phpunit": "^5.0",
-    "squizlabs/php_codesniffer": "2.7.*",
-    "sebastian/phpcpd": "2.0.*"
+    "sebastian/phpcpd": "2.0.*",
+    "scrutinizer/ocular": "^1.3",
+    "squizlabs/php_codesniffer": "2.7.*"
   },
   "autoload": {
     "psr-4": {
