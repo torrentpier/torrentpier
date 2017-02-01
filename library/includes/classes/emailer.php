@@ -29,8 +29,12 @@ if (!defined('BB_ROOT')) {
 
 class emailer
 {
-    public $msg, $subject, $extra_headers;
-    public $addresses, $reply_to, $from;
+    public $msg;
+    public $subject;
+    public $extra_headers;
+    public $addresses;
+    public $reply_to;
+    public $from;
     public $use_smtp;
 
     public $tpl_msg = array();

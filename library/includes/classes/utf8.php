@@ -3072,21 +3072,21 @@ class utf8
         } #speed improve
 
         switch (strlen($char)) {
-            case 1 :
+            case 1:
                 return $cache[$char] = ord($char);
-            case 2 :
+            case 2:
                 return $cache[$char] = (ord($char{1}) & 63) |
                     ((ord($char{0}) & 31) << 6);
-            case 3 :
+            case 3:
                 return $cache[$char] = (ord($char{2}) & 63) |
                     ((ord($char{1}) & 63) << 6) |
                     ((ord($char{0}) & 15) << 12);
-            case 4 :
+            case 4:
                 return $cache[$char] = (ord($char{3}) & 63) |
                     ((ord($char{2}) & 63) << 6) |
                     ((ord($char{1}) & 63) << 12) |
                     ((ord($char{0}) & 7) << 18);
-            default :
+            default:
                 trigger_error('Character 0x' . bin2hex($char) . ' is not UTF-8!', E_USER_WARNING);
                 return false;
         }

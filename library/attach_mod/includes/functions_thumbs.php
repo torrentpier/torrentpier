@@ -119,7 +119,7 @@ function create_thumbnail($source, $new_file, $mimetype)
         return false;
     }
 
-    list($width, $height, $type,) = getimagesize($source);
+    list($width, $height, $type, ) = getimagesize($source);
 
     if (!$width || !$height) {
         return false;
