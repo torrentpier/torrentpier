@@ -34,16 +34,13 @@ if (!isset($this->request['attach_id'])) {
 }
 $attach_id = (int)$this->request['attach_id'];
 
-global $bnc_error;
-$bnc_error = 0;
-
-$torrent = DB()->fetch_row("SELECT at.attach_id, at.physical_filename FROM " . BB_ATTACHMENTS_DESC . " at WHERE at.attach_id = $attach_id LIMIT 1");
+$torrent = DB()->fetch_row("SELECT attach_id, physical_filename FROM " . BB_ATTACHMENTS_DESC . " WHERE attach_id = $attach_id LIMIT 1");
 if (!$torrent) {
-    $this->ajax_die($lang['EMPTY_ATTACH_ID']);
+    $this->ajax_die($lang['ERROR_BUILD']);
 }
-$filename = get_attachments_dir() . '/' . $torrent['physical_filename'];
 
-if (($file_contents = @file_get_contents($filename)) === false) {
+$filename = get_attachments_dir() . '/' . $torrent['physical_filename'];
+if (!$file_contents = file_get_contents($filename)) {
     if (IS_AM) {
         $this->ajax_die($lang['ERROR_NO_ATTACHMENT'] . "\n\n" . htmlCHR($filename));
     } else {
@@ -51,27 +48,25 @@ if (($file_contents = @file_get_contents($filename)) === false) {
     }
 }
 
-// Построение списка
-$tor_filelist = build_tor_filelist($file_contents);
-
-function build_tor_filelist($file_contents)
-{
-    global $lang;
-
-    if (!$tor = bdecode($file_contents)) {
-        return $lang['TORFILE_INVALID'];
-    }
-
-    $torrent = new torrent($tor);
-
-    return $torrent->get_filelist();
+if (!$tor = bdecode($file_contents)) {
+    return $lang['TORFILE_INVALID'];
 }
 
-class torrent
+$torrent = new TorrentFileList($tor);
+$tor_filelist = $torrent->get_filelist();
+
+$this->response['html'] = $tor_filelist;
+
+/**
+ * Class TorrentFileList
+ */
+class TorrentFileList
 {
-    public $tor_decoded = array();
-    public $files_ary = array('/' => '');
-    public $multiple = null;
+    public $tor_decoded = [];
+    public $files_ary = [
+        '/' => []
+    ];
+    public $multiple = false;
     public $root_dir = '';
     public $files_html = '';
 
@@ -82,6 +77,8 @@ class torrent
 
     public function get_filelist()
     {
+        global $html;
+
         $this->build_filelist_array();
 
         if ($this->multiple) {
@@ -89,14 +86,14 @@ class torrent
                 $this->files_ary = array_merge($this->files_ary, $this->files_ary['/']);
                 unset($this->files_ary['/']);
             }
-            $filelist = $this->build_filelist_html();
+            $filelist = $html->array2html($this->files_ary);
             return "<div class=\"tor-root-dir\">{$this->root_dir}</div>$filelist";
         } else {
             return join('', $this->files_ary['/']);
         }
     }
 
-    public function build_filelist_array()
+    private function build_filelist_array()
     {
         $info = $this->tor_decoded['info'];
 
@@ -140,7 +137,7 @@ class torrent
                             $cur_files_ary[] = $this->build_file_item($name, $length);
                         }
                     }
-                    @natsort($cur_files_ary);
+                    natsort($cur_files_ary);
                 } else {
                     $name = $f['path'][0];
                     $this->files_ary['/'][] = $this->build_file_item($name, $length);
@@ -148,16 +145,14 @@ class torrent
                 }
             }
         } else {
-            $this->multiple = false;
-            $name = isset($info['name']) ? clean_tor_dirname($info['name']) : '';
-            $length = isset($info['length']) ? (float)$info['length'] : 0;
-
+            $name = clean_tor_dirname($info['name']);
+            $length = (float)$info['length'];
             $this->files_ary['/'][] = $this->build_file_item($name, $length);
             natsort($this->files_ary['/']);
         }
     }
 
-    public function build_file_item($name, $length)
+    private function build_file_item($name, $length)
     {
         global $bb_cfg, $images, $lang;
 
@@ -170,21 +165,9 @@ class torrent
 
         return "$name <i>$length</i> $magnet_name $magnet_ext";
     }
-
-    public function build_filelist_html()
-    {
-        global $html;
-        return $html->array2html($this->files_ary);
-    }
 }
 
 function clean_tor_dirname($dirname)
 {
     return str_replace(array('[', ']', '<', '>', "'"), array('&#91;', '&#93;', '&lt;', '&gt;', '&#039;'), $dirname);
 }
-
-if ($bnc_error) {
-    $tor_filelist = '<b style="color: #993300;">' . $lang['ERROR_BUILD'] . '</b><br /><br />' . $tor_filelist;
-}
-
-$this->response['html'] = $tor_filelist;
