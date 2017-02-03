@@ -27,6 +27,8 @@ define('IN_TRACKER', true);
 define('BB_ROOT', './../');
 require(BB_ROOT . 'common.php');
 
+global $bb_cfg, $tr_cfg;
+
 if (empty($_SERVER['HTTP_USER_AGENT'])) {
     header('Location: http://127.0.0.1', true, 301);
     die;
@@ -177,18 +179,13 @@ function msg_die($msg)
     }
 
     $output = bencode(array(
-#		'interval'        => (int) 1800,
         'min interval' => (int)1800,
-#		'peers'           => (string) DUMMY_PEER,
         'failure reason' => (string)$msg,
         'warning message' => (string)$msg,
     ));
 
     die($output);
 }
-
-# $agent = !empty($_SERVER['HTTP_USER_AGENT']) ? $_SERVER['HTTP_USER_AGENT'] : '-';
-# bb_log("$agent  |  ". str_compact($peer_id) ."\n", 'agent');
 
 // Start announcer
 define('TR_ROOT', './');
@@ -316,7 +313,7 @@ if ($lp_info) {
 }
 
 // Up/Down speed
-$speed_up = $speed_down = 0;
+$speed_up = $speed_down = $uploaded = $downloaded = 0;
 
 if ($lp_info && $lp_info['update_time'] < TIMENOW) {
     if ($uploaded > $lp_info['uploaded']) {

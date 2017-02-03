@@ -27,6 +27,8 @@ define('IN_TRACKER', true);
 define('BB_ROOT', './../');
 require(BB_ROOT . 'common.php');
 
+global $tr_cfg;
+
 if (!$tr_cfg['scrape']) {
     msg_die('Please disable SCRAPE!');
 }
