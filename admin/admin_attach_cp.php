@@ -501,7 +501,7 @@ if ($view == 'attachments') {
 
 // Generate Pagination
 if ($do_pagination && $total_rows > $bb_cfg['topics_per_page']) {
-    generate_pagination('admin_attach_cp.php?view=' . $view . '&amp;mode=' . $mode . '&amp;order=' . $sort_order . '&amp;uid=' . $uid, $total_rows, $bb_cfg['topics_per_page'], $start) . '&nbsp;';
+    generate_pagination('admin_attach_cp.php?view=' . $view . '&amp;mode=' . $mode . '&amp;order=' . $sort_order . '&amp;uid=' . $uid, $total_rows, $bb_cfg['topics_per_page'], $start);
 }
 
 print_page('admin_attach_cp.tpl', 'admin');

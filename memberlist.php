@@ -218,13 +218,13 @@ if ($paginationusername) {
 }
 if ($mode != 'topten' || $bb_cfg['topics_per_page'] < 10) {
     $sql = "SELECT COUNT(*) AS total FROM " . BB_USERS;
-    $sql .= ($letter_sql) ? " WHERE $letter_sql" : '';
+    $sql .= ($letter_sql) ? " WHERE $letter_sql" : " WHERE user_id NOT IN(". EXCLUDED_USERS_CSV .")";
     if (!$result = DB()->sql_query($sql)) {
         bb_die('Error getting total users');
     }
     if ($total = DB()->sql_fetchrow($result)) {
         $total_members = $total['total'];
-        generate_pagination($paginationurl, $total_members, $bb_cfg['topics_per_page'], $start) . '&nbsp;';
+        generate_pagination($paginationurl, $total_members, $bb_cfg['topics_per_page'], $start);
     }
     DB()->sql_freeresult($result);
 }
