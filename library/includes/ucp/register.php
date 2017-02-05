@@ -50,9 +50,9 @@ $submit = !empty($_POST['submit']);
 $errors = array();
 $adm_edit = false; // редактирование админом чужого профиля
 
-require(INC_DIR . 'bbcode.php');
-require(INC_DIR . 'functions_validate.php');
-require(INC_DIR . 'functions_selects.php');
+require INC_DIR . '/bbcode.php';
+require INC_DIR . '/functions_validate.php';
+require INC_DIR . '/functions_selects.php';
 
 $pr_data = array();   // данные редактируемого либо регистрационного профиля
 $db_data = array();   // данные для базы: регистрационные либо измененные данные юзера
@@ -384,7 +384,7 @@ foreach ($profile_fields as $field => $can_edit) {
                     $pr_data['avatar_ext_id'] = 0;
                     $db_data['avatar_ext_id'] = 0;
                 } elseif (!empty($_FILES['avatar']['name']) && $bb_cfg['avatars']['up_allowed']) {
-                    require(INC_DIR . 'functions_upload.php');
+                    require INC_DIR . '/functions_upload.php';
                     $upload = new upload_common();
 
                     if ($upload->init($bb_cfg['avatars'], $_FILES['avatar']) and $upload->store('avatar', $pr_data)) {
@@ -590,7 +590,7 @@ if ($submit && !$errors) {
                 $email_template = 'user_welcome';
             }
 
-            require(CLASS_DIR . 'emailer.php');
+            require CLASS_DIR . '/emailer.php';
             $emailer = new emailer($bb_cfg['smtp_delivery']);
 
             $emailer->from($bb_cfg['sitename'] . " <{$bb_cfg['board_email']}>");
@@ -625,7 +625,7 @@ if ($submit && !$errors) {
                 $pr_data['user_actkey'] = $user_actkey;
                 $db_data['user_actkey'] = $user_actkey;
 
-                require(CLASS_DIR . 'emailer.php');
+                require CLASS_DIR . '/emailer.php';
                 $emailer = new emailer($bb_cfg['smtp_delivery']);
 
                 $emailer->from($bb_cfg['sitename'] . " <{$bb_cfg['board_email']}>");

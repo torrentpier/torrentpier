@@ -25,7 +25,7 @@
 
 define('IN_TRACKER', true);
 define('BB_ROOT', './../');
-require(BB_ROOT . 'common.php');
+require dirname(__DIR__) . '/common.php';
 
 global $bb_cfg, $tr_cfg;
 

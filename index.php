@@ -26,7 +26,7 @@
 define('IN_FORUM', true);
 define('BB_SCRIPT', 'index');
 define('BB_ROOT', './');
-require(BB_ROOT . 'common.php');
+require __DIR__ . '/common.php';
 
 $page_cfg['load_tpl_vars'] = array(
     'post_icons',

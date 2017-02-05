@@ -1428,7 +1428,7 @@ function setup_style()
         }
     }
 
-    $template = new Template(TEMPLATES_DIR . $tpl_dir_name);
+    $template = new Template(TEMPLATES_DIR . '/' . $tpl_dir_name);
     $css_dir = 'styles/' . basename(TEMPLATES_DIR) . '/' . $tpl_dir_name . '/css/';
 
     $template->assign_vars(array(
@@ -1440,7 +1440,7 @@ function setup_style()
         'SITE_URL' => make_url('/'),
     ));
 
-    require(TEMPLATES_DIR . $tpl_dir_name . '/tpl_config.php');
+    require TEMPLATES_DIR . '/' . $tpl_dir_name . '/tpl_config.php';
 
     $theme = array('template_name' => $tpl_dir_name);
 
@@ -1720,7 +1720,7 @@ function bb_simple_die($txt)
 
 function bb_realpath($path)
 {
-    return (!@function_exists('realpath') || !@realpath(INC_DIR . 'functions.php')) ? $path : @realpath($path);
+    return realpath($path);
 }
 
 function login_redirect($url = '')
@@ -2453,8 +2453,8 @@ function get_avatar($user_id, $ext_id, $allow_avatar = true, $size = true, $heig
         // TODO размеры: s, m, l + кеширование
     }
 
-    $height = ($height != '') ? 'height="' . $height . '"' : '';
-    $width = ($width != '') ? 'width="' . $width . '"' : '';
+    $height = !$height ? 'height="' . $height . '"' : '';
+    $width = !$width ? 'width="' . $width . '"' : '';
 
     $user_avatar = '<img src="' . make_url($bb_cfg['avatars']['upload_path'] . $bb_cfg['avatars']['no_avatar']) . '" alt="' . $user_id . '" ' . $height . ' ' . $width . ' />';
 
@@ -2519,7 +2519,7 @@ function is_gold($type)
 
 function update_atom($type, $id)
 {
-    require_once(INC_DIR . 'functions_atom.php');
+    require_once INC_DIR . '/functions_atom.php';
 
     switch ($type) {
         case 'user':

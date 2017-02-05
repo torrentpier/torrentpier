@@ -29,13 +29,13 @@ if (!empty($setmodules)) {
     }
     return;
 }
-require('./pagestart.php');
+require __DIR__ . '/pagestart.php';
 
 if (!IS_SUPER_ADMIN) {
     bb_die($lang['NOT_ADMIN']);
 }
 
-require(INC_DIR . 'functions_admin_torrent.php');
+require INC_DIR . '/functions_admin_torrent.php';
 
 $submit = isset($_POST['submit']);
 $confirmed = isset($_POST['confirm']);

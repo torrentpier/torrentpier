@@ -27,9 +27,8 @@ if (!empty($setmodules)) {
     $module['GROUPS']['MANAGE'] = basename(__FILE__);
     return;
 }
-require('./pagestart.php');
-
-require(INC_DIR . 'functions_group.php');
+require __DIR__ . '/pagestart.php';
+require INC_DIR . '/functions_group.php';
 
 $group_id = isset($_REQUEST[POST_GROUPS_URL]) ? intval($_REQUEST[POST_GROUPS_URL]) : 0;
 $mode = isset($_REQUEST['mode']) ? strval($_REQUEST['mode']) : '';

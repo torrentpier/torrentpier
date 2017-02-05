@@ -26,10 +26,10 @@
 define('IN_FORUM', true);
 define('BB_SCRIPT', 'modcp');
 define('BB_ROOT', './');
-require(BB_ROOT . 'common.php');
-require(INC_DIR . 'bbcode.php');
-require(INC_DIR . 'functions_post.php');
-require_once(INC_DIR . 'functions_admin.php');
+require __DIR__ . '/common.php';
+require INC_DIR . '/bbcode.php';
+require INC_DIR . '/functions_post.php';
+require_once INC_DIR . '/functions_admin.php';
 
 //
 // Functions

@@ -26,8 +26,8 @@
 define('IN_FORUM', true);
 define('BB_SCRIPT', 'group_edit');
 define('BB_ROOT', './');
-require(BB_ROOT . 'common.php');
-require(INC_DIR . 'functions_group.php');
+require __DIR__ . '/common.php';
+require INC_DIR . '/functions_group.php';
 
 $page_cfg['include_bbcode_js'] = true;
 
@@ -56,7 +56,7 @@ if ($is_moderator) {
     // Avatar
     if ($submit) {
         if (!empty($_FILES['avatar']['name']) && $bb_cfg['group_avatars']['up_allowed']) {
-            require(INC_DIR . 'functions_upload.php');
+            require INC_DIR . '/functions_upload.php';
             $upload = new upload_common();
 
             if ($upload->init($bb_cfg['group_avatars'], $_FILES['avatar']) and $upload->store('avatar', array("user_id" => GROUP_AVATAR_MASK . $group_id, "avatar_ext_id" => $group_info['avatar_ext_id']))) {

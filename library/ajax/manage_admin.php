@@ -96,7 +96,7 @@ switch ($mode) {
 
     case 'update_user_level':
 
-        require(INC_DIR . 'functions_group.php');
+        require INC_DIR . '/functions_group.php';
 
         update_user_level('all');
 

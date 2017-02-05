@@ -27,9 +27,8 @@ if (!empty($setmodules)) {
     $module['FORUMS']['MANAGE'] = basename(__FILE__);
     return;
 }
-require('./pagestart.php');
-
-require(INC_DIR . 'functions_group.php');
+require __DIR__ . '/pagestart.php';
+require INC_DIR . '/functions_group.php';
 
 array_deep($_POST, 'trim');
 

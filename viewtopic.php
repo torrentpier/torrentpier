@@ -26,8 +26,8 @@
 define('IN_FORUM', true);
 define('BB_SCRIPT', 'topic');
 define('BB_ROOT', './');
-require(BB_ROOT . 'common.php');
-require(INC_DIR . 'bbcode.php');
+require __DIR__ . '/common.php';
+require INC_DIR . '/bbcode.php';
 
 $datastore->enqueue(array(
     'ranks',
@@ -298,7 +298,7 @@ $limit_posts_time = '';
 $total_replies = $t_data['topic_replies'] + 1;
 
 if (!empty($_REQUEST['postdays'])) {
-    if ($post_days = abs(intval($_REQUEST['postdays']))) {
+    if ($post_days = (int) $_REQUEST['postdays']) {
         if (!empty($_POST['postdays'])) {
             $start = 0;
         }
@@ -554,10 +554,10 @@ $template->assign_vars(array(
     'PEERS_FULL_LINK' => false,
     'DL_LIST_HREF' => TOPIC_URL . "$topic_id&amp;dl=names&amp;spmode=full",
 ));
-require(INC_DIR . 'torrent_show_dl_list.php');
+require INC_DIR . '/torrent_show_dl_list.php';
 
 if (isset($t_data['topic_attachment'])) {
-    require(ATTACH_DIR . 'attachment_mod.php');
+    require ATTACH_DIR . '/attachment_mod.php';
     init_display_post_attachments($t_data['topic_attachment']);
 }
 

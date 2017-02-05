@@ -26,7 +26,7 @@
 define('IN_FORUM', true);
 define('BB_SCRIPT', 'dl_list');
 define('BB_ROOT', './');
-require(BB_ROOT . 'common.php');
+require __DIR__ . '/common.php';
 
 $forum_id = isset($_REQUEST[POST_FORUM_URL]) ? (int)$_REQUEST[POST_FORUM_URL] : 0;
 $topic_id = isset($_REQUEST[POST_TOPIC_URL]) ? (int)$_REQUEST[POST_TOPIC_URL] : 0;

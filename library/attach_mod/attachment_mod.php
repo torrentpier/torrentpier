@@ -27,11 +27,11 @@ if (!defined('IN_FORUM')) {
     die("Hacking attempt");
 }
 
-require(ATTACH_DIR . 'includes/functions_includes.php');
-require(ATTACH_DIR . 'includes/functions_attach.php');
-require(ATTACH_DIR . 'includes/functions_delete.php');
-require(ATTACH_DIR . 'includes/functions_thumbs.php');
-require(ATTACH_DIR . 'includes/functions_filetypes.php');
+require ATTACH_DIR . '/includes/functions_includes.php';
+require ATTACH_DIR . '/includes/functions_attach.php';
+require ATTACH_DIR . '/includes/functions_delete.php';
+require ATTACH_DIR . '/includes/functions_thumbs.php';
+require ATTACH_DIR . '/includes/functions_filetypes.php';
 
 if (defined('ATTACH_INSTALL')) {
     return;
@@ -44,18 +44,17 @@ function attach_mod_get_lang($language_file)
 {
     global $attach_config, $bb_cfg;
 
-    $language = $bb_cfg['default_lang'];
-    if (!file_exists(LANG_ROOT_DIR . "$language/$language_file.php")) {
-        $language = $attach_config['board_lang'];
-
-        if (!file_exists(LANG_ROOT_DIR . "$language/$language_file.php")) {
-            bb_die('Attachment mod language file does not exist: language/' . $language . '/' . $language_file . '.php');
-        } else {
-            return $language;
-        }
+    $file = LANG_ROOT_DIR . '/' . $bb_cfg['default_lang'] . '/' . $language_file . '.php';
+    if (file_exists($file)) {
+        return $bb_cfg['default_lang'];
     } else {
-        return $language;
+        $file = LANG_ROOT_DIR . '/' . $attach_config['board_lang'] . '/' . $language_file . '.php';
+        if (file_exists($file)) {
+            return $attach_config['board_lang'];
+        }
     }
+
+    bb_die('Attachment mod language file does not exist: language/' . $attach_config['board_lang'] . '/' . $language_file . '.php');
 }
 
 /**
@@ -91,7 +90,7 @@ if (!$attach_config = CACHE('bb_cache')->get('attach_config')) {
     CACHE('bb_cache')->set('attach_config', $attach_config, 86400);
 }
 
-include(ATTACH_DIR . 'displaying.php');
-include(ATTACH_DIR . 'posting_attachments.php');
+include ATTACH_DIR . '/displaying.php';
+include ATTACH_DIR . '/posting_attachments.php';
 
 $upload_dir = $attach_config['upload_dir'];

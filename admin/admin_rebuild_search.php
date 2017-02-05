@@ -29,13 +29,13 @@ if (!empty($setmodules)) {
     }
     return;
 }
-require('./pagestart.php');
+require __DIR__ . '/pagestart.php';
 
 if (!IS_SUPER_ADMIN) {
     bb_die($lang['NOT_ADMIN']);
 }
 
-require(INC_DIR . 'bbcode.php');
+require INC_DIR . '/bbcode.php';
 
 define('REBUILD_SEARCH_ABORTED', 0);  // when the user aborted the processing
 define('REBUILD_SEARCH_PROCESSED', 1);  // when a batch of posts has been processed

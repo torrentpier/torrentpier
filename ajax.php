@@ -28,7 +28,7 @@ define('IN_AJAX', true);
 
 $ajax = new ajax_common();
 
-require('./common.php');
+require __DIR__ . '/common.php';
 
 $ajax->init();
 
@@ -47,45 +47,45 @@ if ($ajax->action != 'manage_admin') {
 // Load actions required modules
 switch ($ajax->action) {
     case 'view_post':
-        require(INC_DIR . 'bbcode.php');
+        require INC_DIR . '/bbcode.php';
         break;
 
     case 'posts':
     case 'post_mod_comment':
-        require(INC_DIR . 'bbcode.php');
-        require(INC_DIR . 'functions_post.php');
-        require(INC_DIR . 'functions_admin.php');
+        require INC_DIR . '/bbcode.php';
+        require INC_DIR . '/functions_post.php';
+        require INC_DIR . '/functions_admin.php';
         break;
 
     case 'view_torrent':
     case 'mod_action':
     case 'change_tor_status':
     case 'gen_passkey':
-        require(ATTACH_DIR . 'attachment_mod.php');
-        require(INC_DIR . 'functions_torrent.php');
+        require ATTACH_DIR . '/attachment_mod.php';
+        require INC_DIR . '/functions_torrent.php';
         break;
 
     case 'change_torrent':
-        require(ATTACH_DIR . 'attachment_mod.php');
-        require(INC_DIR . 'functions_torrent.php');
+        require ATTACH_DIR . '/attachment_mod.php';
+        require INC_DIR . '/functions_torrent.php';
         break;
 
     case 'user_register':
-        require(INC_DIR . 'functions_validate.php');
+        require INC_DIR . '/functions_validate.php';
         break;
 
     case 'manage_user':
     case 'manage_admin':
-        require(INC_DIR . 'functions_admin.php');
+        require INC_DIR . '/functions_admin.php';
         break;
 
     case 'group_membership':
     case 'manage_group':
-        require(INC_DIR . 'functions_group.php');
+        require INC_DIR . '/functions_group.php';
         break;
 
     case 'sitemap':
-        require(CLASS_DIR . 'sitemap.php');
+        require CLASS_DIR . '/sitemap.php';
         break;
 }
 
@@ -134,7 +134,7 @@ class ajax_common
     /**
      *  Constructor
      */
-    public function ajax_common()
+    public function __construct()
     {
         ob_start(array(&$this, 'ob_handler'));
         header('Content-Type: text/plain');
@@ -328,101 +328,101 @@ class ajax_common
 
     public function edit_user_profile()
     {
-        require(AJAX_DIR . 'edit_user_profile.php');
+        require AJAX_DIR . '/edit_user_profile.php';
     }
 
     public function change_user_rank()
     {
-        require(AJAX_DIR . 'change_user_rank.php');
+        require AJAX_DIR . '/change_user_rank.php';
     }
 
     public function change_user_opt()
     {
-        require(AJAX_DIR . 'change_user_opt.php');
+        require AJAX_DIR . '/change_user_opt.php';
     }
 
     public function gen_passkey()
     {
-        require(AJAX_DIR . 'gen_passkey.php');
+        require AJAX_DIR . '/gen_passkey.php';
     }
 
     public function group_membership()
     {
-        require(AJAX_DIR . 'group_membership.php');
+        require AJAX_DIR . '/group_membership.php';
     }
 
     public function manage_group()
     {
-        require(AJAX_DIR . 'edit_group_profile.php');
+        require AJAX_DIR . '/edit_group_profile.php';
     }
 
     public function post_mod_comment()
     {
-        require(AJAX_DIR . 'post_mod_comment.php');
+        require AJAX_DIR . '/post_mod_comment.php';
     }
 
     public function view_post()
     {
-        require(AJAX_DIR . 'view_post.php');
+        require AJAX_DIR . '/view_post.php';
     }
 
     public function change_tor_status()
     {
-        require(AJAX_DIR . 'change_tor_status.php');
+        require AJAX_DIR . '/change_tor_status.php';
     }
 
     public function change_torrent()
     {
-        require(AJAX_DIR . 'change_torrent.php');
+        require AJAX_DIR . '/change_torrent.php';
     }
 
     public function view_torrent()
     {
-        require(AJAX_DIR . 'view_torrent.php');
+        require AJAX_DIR . '/view_torrent.php';
     }
 
     public function user_register()
     {
-        require(AJAX_DIR . 'user_register.php');
+        require AJAX_DIR . '/user_register.php';
     }
 
     public function mod_action()
     {
-        require(AJAX_DIR . 'mod_action.php');
+        require AJAX_DIR . '/mod_action.php';
     }
 
     public function posts()
     {
-        require(AJAX_DIR . 'posts.php');
+        require AJAX_DIR . '/posts.php';
     }
 
     public function manage_user()
     {
-        require(AJAX_DIR . 'manage_user.php');
+        require AJAX_DIR . '/manage_user.php';
     }
 
     public function manage_admin()
     {
-        require(AJAX_DIR . 'manage_admin.php');
+        require AJAX_DIR . '/manage_admin.php';
     }
 
     public function topic_tpl()
     {
-        require(AJAX_DIR . 'topic_tpl.php');
+        require AJAX_DIR . '/topic_tpl.php';
     }
 
     public function index_data()
     {
-        require(AJAX_DIR . 'index_data.php');
+        require AJAX_DIR . '/index_data.php';
     }
 
     public function avatar()
     {
-        require(AJAX_DIR . 'avatar.php');
+        require AJAX_DIR . '/avatar.php';
     }
 
     public function sitemap()
     {
-        require(AJAX_DIR . 'sitemap.php');
+        require AJAX_DIR . '/sitemap.php';
     }
 }

@@ -42,15 +42,15 @@ if ($mode == 'run' && !$job_id) {
     $user->session_start();
     redirect('admin/' . basename(__FILE__) . '?mode=list');
 } else {
-    require('./pagestart.php');
+    require __DIR__ . '/pagestart.php';
 }
 
 if (!IS_SUPER_ADMIN) {
     bb_die($lang['NOT_ADMIN']);
 }
 
-require(INC_DIR . 'functions_admin_torrent.php');
-require(INC_DIR . 'functions_admin_cron.php');
+require INC_DIR . '/functions_admin_torrent.php';
+require INC_DIR . '/functions_admin_cron.php';
 
 $sql = DB()->fetch_rowset("SELECT * FROM " . BB_CONFIG . " WHERE config_name = 'cron_enabled' OR config_name = 'cron_check_interval'");
 

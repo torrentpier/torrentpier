@@ -26,9 +26,9 @@
 define('IN_FORUM', true);
 define('BB_SCRIPT', 'group');
 define('BB_ROOT', './');
-require(BB_ROOT . 'common.php');
-require(INC_DIR . 'bbcode.php');
-require(INC_DIR . 'functions_group.php');
+require __DIR__ . '/common.php';
+require INC_DIR . '/bbcode.php';
+require INC_DIR . '/functions_group.php';
 
 $page_cfg['use_tablesorter'] = true;
 
@@ -213,7 +213,7 @@ if (!$group_id) {
     add_user_into_group($group_id, $userdata['user_id'], 1, TIMENOW);
 
     if ($bb_cfg['group_send_email']) {
-        require(CLASS_DIR . 'emailer.php');
+        require CLASS_DIR . '/emailer.php';
         $emailer = new emailer($bb_cfg['smtp_delivery']);
 
         $emailer->from($bb_cfg['sitename'] . " <{$bb_cfg['board_email']}>");
@@ -256,7 +256,7 @@ if (!$group_id) {
             add_user_into_group($group_id, $row['user_id']);
 
             if ($bb_cfg['group_send_email']) {
-                require(CLASS_DIR . 'emailer.php');
+                require CLASS_DIR . '/emailer.php';
                 $emailer = new emailer($bb_cfg['smtp_delivery']);
 
                 $emailer->from($bb_cfg['sitename'] . " <{$bb_cfg['board_email']}>");
@@ -315,7 +315,7 @@ if (!$group_id) {
                         bb_die('Could not get user email information');
                     }
 
-                    require(CLASS_DIR . 'emailer.php');
+                    require CLASS_DIR . '/emailer.php';
                     $emailer = new emailer($bb_cfg['smtp_delivery']);
 
                     $emailer->from($bb_cfg['sitename'] . " <{$bb_cfg['board_email']}>");

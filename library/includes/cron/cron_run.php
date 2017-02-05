@@ -63,7 +63,7 @@ foreach ($cron_jobs as $job) {
         $cron_start_time = utime();
         $cron_runtime_log = '';
         $cron_write_log = (CRON_LOG_ENABLED && (CRON_FORCE_LOG || $job['log_enabled'] >= 1));
-        $cron_sql_log_file = CRON_LOG_DIR . 'SQL-' . basename($job['cron_script']);
+        $cron_sql_log_file = CRON_LOG_DIR . '/SQL-' . basename($job['cron_script']);
 
         if ($cron_write_log) {
             $msg = array();
@@ -74,7 +74,7 @@ foreach ($cron_jobs as $job) {
             $msg[] = sprintf('%05d', getmypid());
             $msg[] = $job['cron_title'];
             $msg = join(LOG_SEPR, $msg);
-            bb_log($msg . LOG_LF, CRON_LOG_DIR . CRON_LOG_FILE);
+            bb_log($msg . LOG_LF, CRON_LOG_DIR . '/' . CRON_LOG_FILE);
         }
 
         if ($job['log_sql_queries']) {
@@ -99,11 +99,11 @@ foreach ($cron_jobs as $job) {
             $msg[] = round(utime() - $cron_start_time) . '/' . round(utime() - TIMESTART) . ' sec';
             $msg = join(LOG_SEPR, $msg);
             $msg .= LOG_LF . '------=-------=----------=------=-------=----------';
-            bb_log($msg . LOG_LF, CRON_LOG_DIR . CRON_LOG_FILE);
+            bb_log($msg . LOG_LF, CRON_LOG_DIR . '/' . CRON_LOG_FILE);
 
             if ($cron_runtime_log) {
                 $runtime_log_file = ($job['log_file']) ? $job['log_file'] : $job['cron_script'];
-                bb_log($cron_runtime_log . LOG_LF, CRON_LOG_DIR . basename($runtime_log_file));
+                bb_log($cron_runtime_log . LOG_LF, CRON_LOG_DIR . '/' . basename($runtime_log_file));
             }
         }
 

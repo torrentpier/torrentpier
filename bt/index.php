@@ -23,4 +23,4 @@
  * SOFTWARE.
  */
 
-require('./announce.php');
+require __DIR__ . '/announce.php';

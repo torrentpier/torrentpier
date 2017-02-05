@@ -27,9 +27,8 @@ if (!empty($setmodules)) {
     $module['GENERAL']['TERMS'] = basename(__FILE__);
     return;
 }
-require('./pagestart.php');
-
-require(INC_DIR . 'bbcode.php');
+require __DIR__ . '/pagestart.php';
+require INC_DIR . '/bbcode.php';
 
 if (isset($_POST['post']) && $bb_cfg['terms'] != $_POST['message']) {
     bb_update_config(array('terms' => $_POST['message']));

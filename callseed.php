@@ -26,7 +26,7 @@
 define('IN_FORUM', true);
 define('BB_SCRIPT', 'callseed');
 define('BB_ROOT', './');
-require(BB_ROOT . 'common.php');
+require __DIR__ . '/common.php';
 
 // Init userdata
 $user->session_start(array('req_login' => true));

@@ -27,12 +27,12 @@ if (!empty($setmodules)) {
     $module['TP']['FORUM_CONFIG'] = basename(__FILE__);
     return;
 }
-require('./pagestart.php');
+require __DIR__ . '/pagestart.php';
 
 $max_forum_name_len = 30;
 $max_forum_rows = 25;
 
-require(INC_DIR . 'functions_admin_torrent.php');
+require INC_DIR . '/functions_admin_torrent.php';
 
 $submit = isset($_POST['submit']);
 $confirm = isset($_POST['confirm']);
