@@ -154,7 +154,7 @@ $order_val = 'log_time';
 // Sort
 $sort_val = $def_sort;
 
-if ($var =& $_REQUEST[$sort_key] and $var != $def_sort) {
+if ($var =& $_REQUEST[$sort_key] && $var != $def_sort) {
     $sort_val = ($var == $sort_asc) ? $sort_asc : $sort_desc;
     $url = url_arg($url, $sort_key, $sort_val);
 }
@@ -163,11 +163,11 @@ if ($var =& $_REQUEST[$sort_key] and $var != $def_sort) {
 $datetime_val = $def_datetime;
 $daysback_val = $def_days;
 
-if ($var =& $_REQUEST[$daysback_key] and $var != $def_days) {
+if ($var =& $_REQUEST[$daysback_key] && $var != $def_days) {
     $daysback_val = max(intval($var), 1);
     $url = url_arg($url, $daysback_key, $daysback_val);
 }
-if ($var =& $_REQUEST[$datetime_key] and $var != $def_datetime) {
+if ($var =& $_REQUEST[$datetime_key] && $var != $def_datetime) {
     $tz = TIMENOW + (3600 * $bb_cfg['board_timezone']);
     if (($tmp_timestamp = strtotime($var, $tz)) > 0) {
         $datetime_val = $tmp_timestamp;
