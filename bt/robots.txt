@@ -1,8 +1,0 @@
-User-agent: *
-Disallow: /bt/
-
-User-agent: Yandex
-Disallow: /bt/
-
-User-agent: YandexBot
-Disallow: /bt/
