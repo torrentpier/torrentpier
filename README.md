@@ -1,5 +1,6 @@
 TorrentPier
 ======================
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/8b79a63a6d464b81bf0a39923f42bdf5)](https://www.codacy.com/app/Exile37/torrentpier?utm_source=github.com&utm_medium=referral&utm_content=torrentpier/torrentpier&utm_campaign=badger)
 [![Crowdin](https://d322cqt584bo4o.cloudfront.net/torrentpier/localized.svg)](https://crowdin.com/project/torrentpier) [![Join the chat at https://gitter.im/torrentpier/torrentpier](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/torrentpier/torrentpier?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
 ## Current status
