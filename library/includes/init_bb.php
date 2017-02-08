@@ -455,7 +455,6 @@ function make_url($path = '')
 require INC_DIR . '/functions.php';
 require INC_DIR . '/sessions.php';
 require INC_DIR . '/template.php';
-require CORE_DIR . '/mysql.php';
 
 define('SQL_LAYER', 'mysql');
 
