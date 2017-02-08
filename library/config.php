@@ -271,25 +271,25 @@ $page_cfg['show_torhelp'] = array(
 );
 
 // Path (trailing slash '/' at the end: XX_PATH - without, XX_DIR - with)
-define('BB_PATH', realpath(BB_ROOT));
-define('ADMIN_DIR', BB_PATH . '/admin/');
-define('DATA_DIR', BB_PATH . '/data/');
-define('INT_DATA_DIR', BB_PATH . '/internal_data/');
-define('AJAX_HTML_DIR', BB_ROOT . '/internal_data/ajax_html/');
-define('CACHE_DIR', BB_PATH . '/internal_data/cache/');
-define('LOG_DIR', BB_PATH . '/internal_data/log/');
-define('SITEMAP_DIR', BB_PATH . '/internal_data/sitemap/');
-define('TRIGGERS_DIR', BB_PATH . '/internal_data/triggers/');
-define('AJAX_DIR', BB_ROOT . '/library/ajax/');
-define('ATTACH_DIR', BB_PATH . '/library/attach_mod/');
-define('CFG_DIR', BB_PATH . '/library/config/');
-define('INC_DIR', BB_PATH . '/library/includes/');
-define('CLASS_DIR', BB_PATH . '/library/includes/classes/');
-define('CORE_DIR', BB_PATH . '/library/includes/core/');
-define('UCP_DIR', BB_PATH . '/library/includes/ucp/');
-define('LANG_ROOT_DIR', BB_PATH . '/library/language/');
-define('IMAGES_DIR', BB_PATH . '/styles/images/');
-define('TEMPLATES_DIR', BB_PATH . '/styles/templates/');
+define('BB_PATH', dirname(__DIR__));
+define('ADMIN_DIR', BB_PATH . '/admin');
+define('DATA_DIR', BB_PATH . '/data');
+define('INT_DATA_DIR', BB_PATH . '/internal_data');
+define('AJAX_HTML_DIR', BB_ROOT . '/internal_data/ajax_html');
+define('CACHE_DIR', BB_PATH . '/internal_data/cache');
+define('LOG_DIR', BB_PATH . '/internal_data/log');
+define('SITEMAP_DIR', BB_PATH . '/internal_data/sitemap');
+define('TRIGGERS_DIR', BB_PATH . '/internal_data/triggers');
+define('AJAX_DIR', BB_ROOT . '/library/ajax');
+define('ATTACH_DIR', BB_PATH . '/library/attach_mod');
+define('CFG_DIR', BB_PATH . '/library/config');
+define('INC_DIR', BB_PATH . '/library/includes');
+define('CLASS_DIR', BB_PATH . '/library/includes/classes');
+define('CORE_DIR', BB_PATH . '/library/includes/core');
+define('UCP_DIR', BB_PATH . '/library/includes/ucp');
+define('LANG_ROOT_DIR', BB_PATH . '/library/language');
+define('IMAGES_DIR', BB_PATH . '/styles/images');
+define('TEMPLATES_DIR', BB_PATH . '/styles/templates');
 
 // URL's
 $bb_cfg['ajax_url'] = 'ajax.php';     #  "http://{$_SERVER['SERVER_NAME']}/ajax.php"
@@ -303,18 +303,18 @@ $bb_cfg['auto_language'] = true;   // select user-preferred language automatical
 
 if (!empty($_SERVER['HTTP_ACCEPT_LANGUAGE']) && $bb_cfg['auto_language']) {
     $user_lang = substr($_SERVER['HTTP_ACCEPT_LANGUAGE'], 0, 2);
-    if (file_exists(LANG_ROOT_DIR . $user_lang . '/')) {
-        $bb_cfg['default_lang_dir'] = LANG_ROOT_DIR . $user_lang . '/';
+    if (file_exists(LANG_ROOT_DIR . '/' . $user_lang)) {
+        $bb_cfg['default_lang_dir'] = LANG_ROOT_DIR . '/' . $user_lang . '/';
         $bb_cfg['default_lang'] = $user_lang;
     } else {
-        $bb_cfg['default_lang_dir'] = LANG_ROOT_DIR . 'en/';
+        $bb_cfg['default_lang_dir'] = LANG_ROOT_DIR . '/en/';
         $bb_cfg['default_lang'] = 'en';
     }
 } else {
-    if (isset($bb_cfg['default_lang']) && file_exists(LANG_ROOT_DIR . $bb_cfg['default_lang'] . '/')) {
-        $bb_cfg['default_lang_dir'] = LANG_ROOT_DIR . $bb_cfg['default_lang'] . '/';
+    if (isset($bb_cfg['default_lang']) && file_exists(LANG_ROOT_DIR . '/' . $bb_cfg['default_lang'])) {
+        $bb_cfg['default_lang_dir'] = LANG_ROOT_DIR . '/' . $bb_cfg['default_lang'] . '/';
     } else {
-        $bb_cfg['default_lang_dir'] = LANG_ROOT_DIR . 'en/';
+        $bb_cfg['default_lang_dir'] = LANG_ROOT_DIR . '/en/';
     }
 }
 
@@ -441,7 +441,7 @@ define('LOG_MAX_SIZE', 1048576); // bytes
 ini_set('error_reporting', E_ALL);
 ini_set('display_errors', 0);
 ini_set('log_errors', 1);
-ini_set('error_log', LOG_DIR . 'php_err.log');
+ini_set('error_log', LOG_DIR . '/php_err.log');
 
 // Check some variable
 // Magic quotes
@@ -454,10 +454,10 @@ if (!function_exists('json_encode')) {
 }
 
 // Triggers
-define('BB_ENABLED', TRIGGERS_DIR . '$on');
-define('BB_DISABLED', TRIGGERS_DIR . '$off');
-define('CRON_ALLOWED', TRIGGERS_DIR . 'cron_allowed');
-define('CRON_RUNNING', TRIGGERS_DIR . 'cron_running');
+define('BB_ENABLED', TRIGGERS_DIR . '/$on');
+define('BB_DISABLED', TRIGGERS_DIR . '/$off');
+define('CRON_ALLOWED', TRIGGERS_DIR . '/cron_allowed');
+define('CRON_RUNNING', TRIGGERS_DIR . '/cron_running');
 
 // Date format
 $bb_cfg['date_format'] = 'Y-m-d';
@@ -602,7 +602,7 @@ $bb_cfg['file_id_ext'] = array(
 
 // Attachments
 $bb_cfg['attach'] = array(
-    'upload_path' => DATA_DIR . 'torrent_files',      // путь к директории с torrent файлами
+    'upload_path' => DATA_DIR . '/torrent_files',      // путь к директории с torrent файлами
     'max_size' => 250 * 1024,                        // размер аватары в байтах
 );
 
@@ -643,7 +643,7 @@ $bb_cfg['captcha'] = array(
 
 // Atom feed
 $bb_cfg['atom'] = array(
-    'path' => INT_DATA_DIR . 'atom',                   // without ending slash
+    'path' => INT_DATA_DIR . '/atom',                   // without ending slash
     'url' => './internal_data/atom',                 // without ending slash
 );
 

@@ -28,11 +28,11 @@ if (!empty($setmodules)) {
     $module['GROUPS']['PERMISSIONS'] = basename(__FILE__) . '?mode=group';
     return;
 }
-require('./pagestart.php');
+require __DIR__ . '/pagestart.php';
 
 $max_forum_name_length = 50;
 
-require(INC_DIR . 'functions_group.php');
+require INC_DIR . '/functions_group.php';
 
 $yes_sign = '&radic;';
 $no_sign = 'x';

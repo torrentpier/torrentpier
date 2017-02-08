@@ -27,9 +27,9 @@ define('IN_FORUM', true);
 define('BB_SCRIPT', 'pm');
 define('IN_PM', true);
 define('BB_ROOT', './');
-require(BB_ROOT . 'common.php');
-require(INC_DIR . 'bbcode.php');
-require(INC_DIR . 'functions_post.php');
+require __DIR__ . '/common.php';
+require INC_DIR . '/bbcode.php';
+require INC_DIR . '/functions_post.php';
 
 $privmsg_sent_id = $l_box_name = $to_username = $privmsg_subject = $privmsg_message = $error_msg = '';
 
@@ -929,7 +929,7 @@ if ($mode == 'read') {
             cache_rm_user_sessions($to_userdata['user_id']);
 
             if (bf($to_userdata['user_opt'], 'user_opt', 'user_notify_pm') && $to_userdata['user_active'] && $bb_cfg['pm_notify_enabled']) {
-                require(CLASS_DIR . 'emailer.php');
+                require CLASS_DIR . '/emailer.php';
                 $emailer = new emailer($bb_cfg['smtp_delivery']);
 
                 $emailer->from($bb_cfg['sitename'] . " <{$bb_cfg['board_email']}>");

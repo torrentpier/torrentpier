@@ -96,4 +96,4 @@ if ($edit_tpl_mode) {
     }
 }
 
-print_page(TEMPLATES_DIR . 'posting_tpl.tpl');
+print_page(TEMPLATES_DIR . '/posting_tpl.tpl');

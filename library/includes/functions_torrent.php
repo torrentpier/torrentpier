@@ -292,7 +292,7 @@ function tracker_register($attach_id, $mode = '', $tor_status = TOR_NOT_APPROVED
     }
 
     if ($bb_cfg['bt_check_announce_url']) {
-        include(INC_DIR . 'torrent_announce_urls.php');
+        include INC_DIR . '/torrent_announce_urls.php';
 
         $ann = (@$tor['announce']) ? $tor['announce'] : '';
         $announce_urls['main_url'] = $bb_cfg['bt_announce_url'];

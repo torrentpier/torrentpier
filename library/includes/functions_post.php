@@ -39,7 +39,7 @@ function prepare_post(&$mode, &$post_data, &$error_msg, &$username, &$subject, &
         $username = clean_username($username);
 
         if (!$userdata['session_logged_in'] || ($userdata['session_logged_in'] && $username != $user->name)) {
-            require(INC_DIR . 'functions_validate.php');
+            require INC_DIR . '/functions_validate.php';
 
             if ($err = validate_username($username)) {
                 $error_msg .= $err;
@@ -331,7 +331,7 @@ function user_notification($mode, &$post_data, &$topic_title, &$forum_id, &$topi
 			");
 
             if ($watch_list) {
-                require(CLASS_DIR . 'emailer.php');
+                require CLASS_DIR . '/emailer.php';
                 $emailer = new emailer($bb_cfg['smtp_delivery']);
 
                 $orig_word = $replacement_word = array();

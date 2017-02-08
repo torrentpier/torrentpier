@@ -61,7 +61,7 @@ if (!file_exists(__DIR__ . '/vendor/autoload.php')) {
 require_once __DIR__ . '/vendor/autoload.php';
 
 // Get initial config
-require(BB_ROOT . 'library/config.php');
+require __DIR__ . '/library/config.php';
 
 $server_protocol = ($bb_cfg['cookie_secure']) ? 'https://' : 'http://';
 $server_port = (in_array($bb_cfg['server_port'], array(80, 443))) ? '' : ':' . $bb_cfg['server_port'];
@@ -101,9 +101,14 @@ define('BOT_UID', -746);
  * Database
  */
 // Core DB class
-require(CORE_DIR . 'dbs.php');
+require CORE_DIR . '/dbs.php';
 $DBS = new DBS($bb_cfg);
 
+/**
+ * @param string $db_alias
+ * @return \sql_db
+ * @deprecated
+ */
 function DB($db_alias = 'db1')
 {
     global $DBS;
@@ -114,12 +119,12 @@ function DB($db_alias = 'db1')
  * Cache
  */
 // Main cache class
-require(INC_DIR . 'cache/common.php');
+require INC_DIR . '/cache/common.php';
 // Main datastore class
-require(INC_DIR . 'datastore/common.php');
+require INC_DIR . '/datastore/common.php';
 
 // Core CACHE class
-require(CORE_DIR . 'caches.php');
+require CORE_DIR . '/caches.php';
 $CACHES = new CACHES($bb_cfg);
 
 function CACHE($cache_name)
@@ -129,23 +134,23 @@ function CACHE($cache_name)
 }
 
 // Common cache classes
-require(INC_DIR . 'cache/memcache.php');
-require(INC_DIR . 'cache/sqlite.php');
-require(INC_DIR . 'cache/redis.php');
-require(INC_DIR . 'cache/apc.php');
-require(INC_DIR . 'cache/xcache.php');
-require(INC_DIR . 'cache/file.php');
+require INC_DIR . '/cache/memcache.php';
+require INC_DIR . '/cache/sqlite.php';
+require INC_DIR . '/cache/redis.php';
+require INC_DIR . '/cache/apc.php';
+require INC_DIR . '/cache/xcache.php';
+require INC_DIR . '/cache/file.php';
 
 /**
  * Datastore
  */
 // Common datastore classes
-require(INC_DIR . 'datastore/memcache.php');
-require(INC_DIR . 'datastore/sqlite.php');
-require(INC_DIR . 'datastore/redis.php');
-require(INC_DIR . 'datastore/apc.php');
-require(INC_DIR . 'datastore/xcache.php');
-require(INC_DIR . 'datastore/file.php');
+require INC_DIR . '/datastore/memcache.php';
+require INC_DIR . '/datastore/sqlite.php';
+require INC_DIR . '/datastore/redis.php';
+require INC_DIR . '/datastore/apc.php';
+require INC_DIR . '/datastore/xcache.php';
+require INC_DIR . '/datastore/file.php';
 
 // Initialize datastore
 switch ($bb_cfg['datastore_type']) {
@@ -210,7 +215,7 @@ function bb_log($msg, $file_name)
         $msg = join(LOG_LF, $msg);
     }
     $file_name .= (LOG_EXT) ? '.' . LOG_EXT : '';
-    return file_write($msg, LOG_DIR . $file_name);
+    return file_write($msg, LOG_DIR . '/' . $file_name);
 }
 
 function file_write($str, $file, $max_size = LOG_MAX_SIZE, $lock = true, $replace_content = false)
@@ -425,7 +430,7 @@ function ver_compare($version1, $operator, $version2)
 
 function dbg_log($str, $file)
 {
-    $dir = LOG_DIR . (defined('IN_TRACKER') ? 'dbg_tr/' : 'dbg_bb/') . date('m-d_H') . '/';
+    $dir = LOG_DIR . (defined('IN_TRACKER') ? '/dbg_tr/' : '/dbg_bb/') . date('m-d_H') . '/';
     return file_write($str, $dir . $file, false, false);
 }
 
@@ -473,7 +478,7 @@ function log_request($file = '', $prepend_str = false, $add_post = true)
 
 // Board init
 if (defined('IN_FORUM')) {
-    require(INC_DIR . 'init_bb.php');
+    require INC_DIR . '/init_bb.php';
 } // Tracker init
 elseif (defined('IN_TRACKER')) {
     define('DUMMY_PEER', pack('Nn', ip2long($_SERVER['REMOTE_ADDR']), !empty($_GET['port']) ? intval($_GET['port']) : mt_rand(1000, 65000)));

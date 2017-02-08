@@ -63,7 +63,7 @@ if (isset($_POST['submit'])) {
                 bb_die('Could not update new password information');
             }
 
-            require(CLASS_DIR . 'emailer.php');
+            require CLASS_DIR . '/emailer.php';
             $emailer = new emailer($bb_cfg['smtp_delivery']);
 
             $emailer->from($bb_cfg['sitename'] . " <{$bb_cfg['board_email']}>");

@@ -26,7 +26,7 @@
 define('IN_FORUM', true);
 define('BB_SCRIPT', 'feed');
 define('BB_ROOT', './');
-require(BB_ROOT . 'common.php');
+require __DIR__ . '/common.php';
 
 $user->session_start(array('req_login' => true));
 
@@ -53,7 +53,7 @@ if ($mode == 'get_feed_url' && ($type == 'f' || $type == 'u') && $id >= 0) {
         if (file_exists($bb_cfg['atom']['path'] . '/f/' . $id . '.atom') && filemtime($bb_cfg['atom']['path'] . '/f/' . $id . '.atom') > $timecheck) {
             redirect($bb_cfg['atom']['url'] . '/f/' . $id . '.atom');
         } else {
-            require_once(INC_DIR . 'functions_atom.php');
+            require_once INC_DIR . '/functions_atom.php';
             if (update_forum_feed($id, $forum_data)) {
                 redirect($bb_cfg['atom']['url'] . '/f/' . $id . '.atom');
             } else {
@@ -72,7 +72,7 @@ if ($mode == 'get_feed_url' && ($type == 'f' || $type == 'u') && $id >= 0) {
         if (file_exists($bb_cfg['atom']['path'] . '/u/' . floor($id / 5000) . '/' . ($id % 100) . '/' . $id . '.atom') && filemtime($bb_cfg['atom']['path'] . '/u/' . floor($id / 5000) . '/' . ($id % 100) . '/' . $id . '.atom') > $timecheck) {
             redirect($bb_cfg['atom']['url'] . '/u/' . floor($id / 5000) . '/' . ($id % 100) . '/' . $id . '.atom');
         } else {
-            require_once(INC_DIR . 'functions_atom.php');
+            require_once INC_DIR . '/functions_atom.php';
             if (update_user_feed($id, $username)) {
                 redirect($bb_cfg['atom']['url'] . '/u/' . floor($id / 5000) . '/' . ($id % 100) . '/' . $id . '.atom');
             } else {

@@ -79,7 +79,7 @@ class template
     public $root = '';
 
     // Cache directory
-    public $cachedir = CACHE_DIR;
+    public $cachedir = CACHE_DIR . '/';
 
     // Template root directory
     public $tpldir = '';

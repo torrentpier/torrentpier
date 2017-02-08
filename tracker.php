@@ -25,12 +25,12 @@
 
 define('BB_SCRIPT', 'tracker');
 define('BB_ROOT', './');
-require(BB_ROOT . 'common.php');
+require __DIR__ . '/common.php';
 
-require(CLASS_DIR . 'utf8.php');
-require(CLASS_DIR . 'correct.php');
-require(CLASS_DIR . 'reflection.php');
-require(INC_DIR . 'functions_group.php');
+require CLASS_DIR . '/utf8.php';
+require CLASS_DIR . '/correct.php';
+require CLASS_DIR . '/reflection.php';
+require INC_DIR . '/functions_group.php';
 
 // Page config
 $page_cfg['include_bbcode_js'] = true;

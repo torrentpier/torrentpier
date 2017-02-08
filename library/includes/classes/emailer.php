@@ -115,21 +115,17 @@ class emailer
     {
         global $bb_cfg;
 
-        if (trim($template_file) == '') {
-            bb_die('No template file set');
-        }
-
-        if (trim($template_lang) == '') {
+        if (!$template_lang) {
             $template_lang = $bb_cfg['default_lang'];
         }
 
         if (empty($this->tpl_msg[$template_lang . $template_file])) {
-            $tpl_file = LANG_ROOT_DIR . "$template_lang/email/$template_file.html";
+            $tpl_file = LANG_ROOT_DIR . '/' . $template_lang . '/email/' . $template_file . '.html';
 
-            if (!@file_exists(@bb_realpath($tpl_file))) {
-                $tpl_file = LANG_ROOT_DIR . "{$bb_cfg['default_lang']}/email/$template_file.html";
+            if (!file_exists($tpl_file)) {
+                $tpl_file = LANG_ROOT_DIR . '/' . $bb_cfg['default_lang'] . '/email/' . $template_file . '.html';
 
-                if (!@file_exists(@bb_realpath($tpl_file))) {
+                if (!file_exists($tpl_file)) {
                     bb_die('Could not find email template file :: ' . $template_file);
                 }
             }
@@ -207,7 +203,7 @@ class emailer
         // Send message
         if ($this->use_smtp) {
             if (!defined('SMTP_INCLUDED')) {
-                include(INC_DIR . 'smtp.php');
+                include INC_DIR . '/smtp.php';
             }
 
             $result = smtpmail($to, $this->subject, $this->msg, $this->extra_headers);

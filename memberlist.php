@@ -26,7 +26,7 @@
 define('IN_FORUM', true);
 define('BB_SCRIPT', 'memberlist');
 define('BB_ROOT', './');
-require(BB_ROOT . 'common.php');
+require __DIR__ . '/common.php';
 
 $page_cfg['use_tablesorter'] = true;
 

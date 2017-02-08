@@ -27,11 +27,11 @@ if (!empty($setmodules)) {
     $module['USERS']['SEARCH'] = basename(__FILE__);
     return;
 }
-require('./pagestart.php');
+require __DIR__ . '/pagestart.php';
 
 array_deep($_POST, 'trim');
 
-require(INC_DIR . 'functions_selects.php');
+require INC_DIR . '/functions_selects.php';
 
 $total_sql = '';
 

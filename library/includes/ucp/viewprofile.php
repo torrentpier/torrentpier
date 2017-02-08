@@ -27,7 +27,7 @@ if (!defined('BB_ROOT')) {
     die(basename(__FILE__));
 }
 
-require(INC_DIR . 'bbcode.php');
+require INC_DIR . '/bbcode.php';
 
 $datastore->enqueue(array(
     'ranks',

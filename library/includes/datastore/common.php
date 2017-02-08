@@ -32,7 +32,7 @@ class datastore_common
     /**
      * Директория с builder-скриптами (внутри INC_DIR)
      */
-    public $ds_dir = 'datastore/';
+    public $ds_dir = 'datastore';
     /**
      * Готовая к употреблению data
      * array('title' => data)
@@ -132,8 +132,9 @@ class datastore_common
 
     public function _build_item($title)
     {
-        if (!empty($this->known_items[$title])) {
-            require(INC_DIR . $this->ds_dir . $this->known_items[$title]);
+        $file = INC_DIR . '/' . $this->ds_dir . '/' . $this->known_items[$title];
+        if (isset($this->known_items[$title]) && file_exists($file)) {
+            require $file;
         } else {
             trigger_error("Unknown datastore item: $title", E_USER_ERROR);
         }

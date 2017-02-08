@@ -25,8 +25,8 @@
 
 define('BB_SCRIPT', 'terms');
 define('BB_ROOT', './');
-require(BB_ROOT . 'common.php');
-require(INC_DIR . 'bbcode.php');
+require __DIR__ . '/common.php';
+require INC_DIR . '/bbcode.php';
 
 // Start session management
 $user->session_start();

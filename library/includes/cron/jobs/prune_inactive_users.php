@@ -27,7 +27,7 @@ if (!defined('BB_ROOT')) {
     die(basename(__FILE__));
 }
 
-require_once(INC_DIR . 'functions_admin.php');
+require_once INC_DIR . '/functions_admin.php';
 
 $users_per_cycle = 1000;
 

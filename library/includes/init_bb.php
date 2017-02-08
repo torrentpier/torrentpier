@@ -336,8 +336,8 @@ define('LOGIN_KEY_LENGTH', 12);
 define('USERNAME_MAX_LENGTH', 25);
 define('USEREMAIL_MAX_LENGTH', 40);
 
-define('PAGE_HEADER', INC_DIR . 'page_header.php');
-define('PAGE_FOOTER', INC_DIR . 'page_footer.php');
+define('PAGE_HEADER', INC_DIR . '/page_header.php');
+define('PAGE_FOOTER', INC_DIR . '/page_footer.php');
 
 define('CAT_URL', 'index.php?c=');
 define('DOWNLOAD_URL', 'dl.php?id=');
@@ -452,10 +452,10 @@ function make_url($path = '')
     return FULL_URL . preg_replace('#^\/?(.*?)\/?$#', '\1', $path);
 }
 
-require(INC_DIR . 'functions.php');
-require(INC_DIR . 'sessions.php');
-require(INC_DIR . 'template.php');
-require(CORE_DIR . 'mysql.php');
+require INC_DIR . '/functions.php';
+require INC_DIR . '/sessions.php';
+require INC_DIR . '/template.php';
+require CORE_DIR . '/mysql.php';
 
 define('SQL_LAYER', 'mysql');
 
@@ -465,7 +465,7 @@ $user = new user_common();
 $userdata =& $user->data;
 
 if (DBG_USER) {
-    require(INC_DIR . 'functions_dev.php');
+    require INC_DIR . '/functions_dev.php';
 }
 
 $html = new html_common();
@@ -490,15 +490,15 @@ if ((empty($_POST) && !defined('IN_ADMIN') && !defined('IN_AJAX') && !file_exist
         define('CRON_LOG_ENABLED', true);  // global ON/OFF
         define('CRON_FORCE_LOG', false); // always log regardless of job settings
 
-        define('CRON_DIR', INC_DIR . 'cron/');
+        define('CRON_DIR', INC_DIR . '/cron/');
         define('CRON_JOB_DIR', CRON_DIR . 'jobs/');
-        define('CRON_LOG_DIR', 'cron/'); // inside LOG_DIR
+        define('CRON_LOG_DIR', 'cron'); // inside LOG_DIR
         define('CRON_LOG_FILE', 'cron');  // without ext
 
-        bb_log(date('H:i:s - ') . getmypid() . ' -x-- DB-LOCK try' . LOG_LF, CRON_LOG_DIR . 'cron_check');
+        bb_log(date('H:i:s - ') . getmypid() . ' -x-- DB-LOCK try' . LOG_LF, CRON_LOG_DIR . '/cron_check');
 
         if (DB()->get_lock('cron', 1)) {
-            bb_log(date('H:i:s - ') . getmypid() . ' --x- DB-LOCK OBTAINED !!!!!!!!!!!!!!!!!' . LOG_LF, CRON_LOG_DIR . 'cron_check');
+            bb_log(date('H:i:s - ') . getmypid() . ' --x- DB-LOCK OBTAINED !!!!!!!!!!!!!!!!!' . LOG_LF, CRON_LOG_DIR . '/cron_check');
 
             sleep(2);
             require(CRON_DIR . 'cron_init.php');

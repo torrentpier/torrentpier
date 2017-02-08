@@ -27,12 +27,12 @@ if (!empty($setmodules)) {
     $module['USERS']['DISALLOW'] = basename(__FILE__);
     return;
 }
-require('./pagestart.php');
+require __DIR__ . '/pagestart.php';
 
 $message = '';
 
 if (isset($_POST['add_name'])) {
-    include(INC_DIR . 'functions_validate.php');
+    include INC_DIR . '/functions_validate.php';
 
     $disallowed_user = (isset($_POST['disallowed_user'])) ? trim($_POST['disallowed_user']) : trim($_GET['disallowed_user']);
 

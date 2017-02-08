@@ -27,8 +27,8 @@ define('IN_FORUM', true);
 define('BB_SCRIPT', 'dl');
 define('NO_GZIP', true);
 define('BB_ROOT', './');
-require(BB_ROOT . 'common.php');
-require(ATTACH_DIR . 'attachment_mod.php');
+require __DIR__ . '/common.php';
+require ATTACH_DIR . '/attachment_mod.php';
 
 $datastore->enqueue(array(
     'attach_extensions',
@@ -60,7 +60,7 @@ function send_file_to_browser($attachment, $upload_dir)
 
     //bt
     if (!(isset($_GET['original']) && !IS_USER)) {
-        include(INC_DIR . 'functions_torrent.php');
+        include INC_DIR . '/functions_torrent.php';
         send_torrent_with_passkey($filename);
     }
 

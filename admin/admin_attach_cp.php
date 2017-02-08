@@ -27,7 +27,7 @@ if (!empty($setmodules)) {
     $module['ATTACHMENTS']['CONTROL_PANEL'] = basename(__FILE__);
     return;
 }
-require('./pagestart.php');
+require __DIR__ . '/pagestart.php';
 
 $total_attachments = 0;
 
@@ -37,7 +37,7 @@ if (($attach_config['upload_dir'][0] == '/') || (($attach_config['upload_dir'][0
     $upload_dir = '../' . $attach_config['upload_dir'];
 }
 
-include(ATTACH_DIR . 'includes/functions_selects.php');
+include ATTACH_DIR . '/includes/functions_selects.php';
 
 // Check if the language got included
 if (!isset($lang['TEST_SETTINGS_SUCCESSFUL'])) {

@@ -26,10 +26,10 @@
 define('IN_FORUM', true);
 define('BB_SCRIPT', 'posting');
 define('BB_ROOT', './');
-require(BB_ROOT . "common.php");
-require(INC_DIR . 'bbcode.php');
-require(INC_DIR . 'functions_post.php');
-require(ATTACH_DIR . 'attachment_mod.php');
+require __DIR__ . '/common.php';
+require INC_DIR . '/bbcode.php';
+require INC_DIR . '/functions_post.php';
+require ATTACH_DIR . '/attachment_mod.php';
 
 $page_cfg['load_tpl_vars'] = array('post_icons');
 
@@ -258,7 +258,7 @@ if ($mode == 'new_rel') {
             bb_die($topics . $lang['UNEXECUTED_RELEASE']);
         }
     }
-    require(INC_DIR . 'posting_tpl.php');
+    require INC_DIR . '/posting_tpl.php';
     exit;
 }
 
@@ -367,7 +367,7 @@ if (($delete || $mode == 'delete') && !$confirm) {
             break;
 
         case 'delete':
-            require_once(INC_DIR . 'functions_admin.php');
+            require_once INC_DIR . '/functions_admin.php';
             delete_post($mode, $post_data, $return_message, $return_meta, $forum_id, $topic_id, $post_id);
             break;
     }
@@ -388,7 +388,7 @@ if (($delete || $mode == 'delete') && !$confirm) {
         }
 
         if (defined('TORRENT_ATTACH_ID') && $bb_cfg['bt_newtopic_auto_reg'] && !$error_msg) {
-            include(INC_DIR . 'functions_torrent.php');
+            include INC_DIR . '/functions_torrent.php';
             if (!DB()->fetch_row("SELECT attach_id FROM " . BB_BT_TORRENTS . " WHERE attach_id = " . TORRENT_ATTACH_ID)) {
                 if ($bb_cfg['premod']) {
                     // Получение списка id форумов начиная с parent

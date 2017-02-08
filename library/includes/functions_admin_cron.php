@@ -36,7 +36,7 @@ function run_jobs($jobs)
 
     while ($row = DB()->sql_fetchrow($result)) {
         $job = $row['cron_script'];
-        $job_script = INC_DIR . 'cron/jobs/' . $job;
+        $job_script = INC_DIR . '/cron/jobs/' . $job;
         require($job_script);
     }
     DB()->query("

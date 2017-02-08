@@ -93,7 +93,7 @@ echo '
 ';
 
 if (DBG_USER && SQL_DEBUG && !(isset($_GET['pane']) && $_GET['pane'] == 'left')) {
-    require(INC_DIR . 'page_footer_dev.php');
+    require INC_DIR . '/page_footer_dev.php';
 }
 
 echo '

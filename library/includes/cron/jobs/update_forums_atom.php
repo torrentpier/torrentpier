@@ -29,7 +29,7 @@ if (!defined('BB_ROOT')) {
 
 global $bb_cfg;
 
-require_once(INC_DIR . 'functions_atom.php');
+require_once INC_DIR . '/functions_atom.php';
 
 $timecheck = TIMENOW - 600;
 $forums_data = DB()->fetch_rowset("SELECT forum_id, allow_reg_tracker, forum_name FROM " . BB_FORUMS);

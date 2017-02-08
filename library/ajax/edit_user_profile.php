@@ -41,7 +41,7 @@ $value = $this->request['value'] = (string)(isset($this->request['value'])) ? $t
 
 switch ($field) {
     case 'username':
-        require_once(INC_DIR . 'functions_validate.php');
+        require_once INC_DIR . '/functions_validate.php';
         $value = clean_username($value);
         if ($err = validate_username($value)) {
             $this->ajax_die(strip_tags($err));
@@ -50,7 +50,7 @@ switch ($field) {
         break;
 
     case 'user_email':
-        require_once(INC_DIR . 'functions_validate.php');
+        require_once INC_DIR . '/functions_validate.php';
         $value = htmlCHR($value);
         if ($err = validate_email($value)) {
             $this->ajax_die($err);
@@ -154,7 +154,7 @@ switch ($field) {
         $this->response['new_value'] = humn_size($value, null, null, ' ');
 
         if (!$btu = get_bt_userdata($user_id)) {
-            require(INC_DIR . 'functions_torrent.php');
+            require INC_DIR . '/functions_torrent.php';
             generate_passkey($user_id, true);
             $btu = get_bt_userdata($user_id);
         }

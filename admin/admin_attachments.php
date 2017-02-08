@@ -40,7 +40,7 @@ if (($attach_config['upload_dir'][0] == '/') || (($attach_config['upload_dir'][0
     $upload_dir = '../' . $attach_config['upload_dir'];
 }
 
-include(ATTACH_DIR . 'includes/functions_selects.php');
+include ATTACH_DIR . '/includes/functions_selects.php';
 
 // Check if the language got included
 if (!isset($lang['TEST_SETTINGS_SUCCESSFUL'])) {

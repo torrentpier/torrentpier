@@ -28,9 +28,8 @@ if (!empty($setmodules)) {
     $module['MODS']['CONFIGURATION'] = basename(__FILE__) . '?mode=config_mods';
     return;
 }
-require('./pagestart.php');
-
-require(INC_DIR . 'functions_selects.php');
+require __DIR__ . '/pagestart.php';
+require INC_DIR . '/functions_selects.php';
 
 $mode = isset($_GET['mode']) ? $_GET['mode'] : '';
 

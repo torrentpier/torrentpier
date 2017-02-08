@@ -302,7 +302,7 @@ function display_attachments($post_id)
 
             // bt
             if ($link && ($attachments['_' . $post_id][$i]['extension'] === TORRENT_EXT)) {
-                include(ATTACH_DIR . 'displaying_torrent.php');
+                include ATTACH_DIR . '/displaying_torrent.php';
             } elseif ($link) {
                 $target_blank = ((@intval($display_categories[$attachments['_' . $post_id][$i]['extension']]) == IMAGE_CAT)) ? 'target="_blank"' : '';
 

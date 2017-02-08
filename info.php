@@ -25,7 +25,7 @@
 
 define('BB_SCRIPT', 'info');
 define('BB_ROOT', './');
-require(BB_ROOT . 'common.php');
+require __DIR__ . '/common.php';
 
 // Start session management
 $user->session_start();
