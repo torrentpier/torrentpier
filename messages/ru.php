@@ -23,13 +23,32 @@
  * SOFTWARE.
  */
 
-/**
- * TorrentPier russian localization
- * In progress
- */
-
 return [
-    'Style guide' => 'Гид по стилю',
+    // Common
+    'Captcha' => 'Капча',
+    'Go back' => 'Вернуться',
     'Send' => 'Отправить',
+    'Submit' => 'Отправить',
+
+    // Control panel
+    'Control panel' => 'Панель управления',
+
+    // Errors
+    'File not found: %location%' => 'Файл не найден: %location%',
+    'Invalid request: not specified %data%' => 'Недопустимый запрос: не указан %data%',
+
+    // Feed (feed.php)
+    'Feed' => 'Лента',
+    'Do not specify a mode for the feed' => 'Не указан режим для канала',
+    'This forum does not have a feed' => 'Этот форум не имеет ленту',
+    'This user does not have a feed' => 'Этот пользователь не имеет канал',
+
+    // Style guide (styleguide.php)
     'Hello, %name%' => 'Добро пожаловать, %name%',
+    'Style guide' => 'Гид по стилю',
+
+    // Terms (terms.php)
+    'Only administrators see this line' => 'Только администраторы видят эту строку',
+    'Terms' => 'Правила',
+    'The text on this page can be edited in the' => 'Текст на этой странице может быть отредактирован в',
 ];
