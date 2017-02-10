@@ -1,0 +1,18 @@
+files:
+  - source: /styles/templates/default/images/lang/source/*.*
+    ignore:
+      - source.txt
+    translation: >-
+      /styles/templates/default/images/lang/%two_letters_code%/%original_file_name%
+  - source: /library/language/source/*.*
+    ignore:
+      - source.txt
+    translation: /library/language/%two_letters_code%/%original_file_name%
+  - source: /library/language/source/source.txt
+    translation: /library/language/%two_letters_code%/%language%.txt
+  - source: /library/language/source/email/*.*
+    translation: /library/language/%two_letters_code%/email/%original_file_name%
+  - source: /library/language/source/html/*.*
+    translation: /library/language/%two_letters_code%/html/%original_file_name%
+  - source: /styles/templates/default/images/lang/source/source.txt
+    translation: /styles/templates/default/images/lang/%two_letters_code%/%language%.txt
