@@ -690,7 +690,7 @@ $lang['SORT_EMAIL'] = 'по адресу e-mail';
 $lang['SORT_WEBSITE'] = 'по адресу сайта';
 $lang['ASC'] = 'по возрастанию';
 $lang['DESC'] = 'по убыванию';
-$lang['ORDER'] = 'Order';
+$lang['ORDER'] = 'Порядок';
 
 // Group control panel
 $lang['GROUP_CONTROL_PANEL'] = 'Группы';
