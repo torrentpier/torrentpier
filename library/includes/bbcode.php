@@ -365,9 +365,6 @@ function extract_search_words($text)
     // short & long words
     // $text = preg_replace('#(?<=^|\s)(\S{1,'.$min_word_len.'}|\S{'.$max_word_len.',}|\W*)(?=$|\s)#u', ' ', $text);
 
-    $text = remove_stopwords($text);
-#	$text = replace_synonyms($text);
-
     // Trim 1+ spaces to one space and split this string into unique words
     $text = array_unique(explode(' ', str_compact($text)));
 
@@ -386,23 +383,6 @@ function extract_search_words($text)
     }
 
     return $text;
-}
-
-function replace_synonyms($text)
-{
-    static $syn_match = null, $syn_replace = null;
-
-    if (is_null($syn_match)) {
-        preg_match_all("#(\w+) (\w+)(\r?\n|$)#", @file_get_contents(LANG_DIR . 'search_synonyms.txt'), $m);
-
-        $syn_match = $m[2];
-        $syn_replace = $m[1];
-
-        array_deep($syn_match, 'pad_with_space');
-        array_deep($syn_replace, 'pad_with_space');
-    }
-
-    return ($syn_match && $syn_replace) ? str_replace($syn_match, $syn_replace, $text) : $text;
 }
 
 function add_search_words($post_id, $post_message, $topic_title = '', $only_return_words = false)

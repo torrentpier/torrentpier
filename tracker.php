@@ -444,7 +444,7 @@ if (!$set_default) {
             } else {
                 $title_match_val = $tmp;
             }
-            $title_match_sql = clean_text_match($title_match_val, true, false, false);
+            $title_match_sql = clean_text_match($title_match_val, true, false);
         }
     }
 }
