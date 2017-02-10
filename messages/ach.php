@@ -25,30 +25,30 @@
 
 return [
     // Common
-    'Captcha' => 'crwdns8547:0crwdne8547:0',
-    'Go back' => 'crwdns8548:0crwdne8548:0',
-    'Send' => 'crwdns8549:0crwdne8549:0',
-    'Submit' => 'crwdns8550:0crwdne8550:0',
+    'Captcha' => 'crwdns8563:0crwdne8563:0',
+    'Go back' => 'crwdns8564:0crwdne8564:0',
+    'Send' => 'crwdns8565:0crwdne8565:0',
+    'Submit' => 'crwdns8566:0crwdne8566:0',
 
     // Control panel
-    'Control panel' => 'crwdns8551:0crwdne8551:0',
+    'Control panel' => 'crwdns8567:0crwdne8567:0',
 
     // Errors
-    'File not found: %location%' => 'crwdns8552:0%location%crwdne8552:0',
-    'Invalid request: not specified %data%' => 'crwdns8553:0%data%crwdne8553:0',
+    'File not found: %location%' => 'crwdns8568:0%location%crwdne8568:0',
+    'Invalid request: not specified %data%' => 'crwdns8569:0%data%crwdne8569:0',
 
     // Feed (feed.php)
-    'Feed' => 'crwdns8554:0crwdne8554:0',
-    'Do not specify a mode for the feed' => 'crwdns8555:0crwdne8555:0',
-    'This forum does not have a feed' => 'crwdns8556:0crwdne8556:0',
-    'This user does not have a feed' => 'crwdns8557:0crwdne8557:0',
+    'Feed' => 'crwdns8570:0crwdne8570:0',
+    'Do not specify a mode for the feed' => 'crwdns8571:0crwdne8571:0',
+    'This forum does not have a feed' => 'crwdns8572:0crwdne8572:0',
+    'This user does not have a feed' => 'crwdns8573:0crwdne8573:0',
 
     // Style guide (styleguide.php)
-    'Hello, %name%' => 'crwdns8558:0%name%crwdne8558:0',
-    'Style guide' => 'crwdns8559:0crwdne8559:0',
+    'Hello, %name%' => 'crwdns8574:0%name%crwdne8574:0',
+    'Style guide' => 'crwdns8575:0crwdne8575:0',
 
     // Terms (terms.php)
-    'Only administrators see this line' => 'crwdns8560:0crwdne8560:0',
-    'Terms' => 'crwdns8561:0crwdne8561:0',
-    'The text on this page can be edited in the' => 'crwdns8562:0crwdne8562:0',
+    'Only administrators see this line' => 'crwdns8576:0crwdne8576:0',
+    'Terms' => 'crwdns8577:0crwdne8577:0',
+    'The text on this page can be edited in the' => 'crwdns8578:0crwdne8578:0',
 ];
