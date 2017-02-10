@@ -50,5 +50,5 @@ return [
     // Terms (terms.php)
     'Only administrators see this line' => 'Bu qatorni faqat administratorlar ko`ra oladi',
     'Terms' => 'Qoidalar',
-    'The text on this page can be edited in the' => 'Ushbu sahifadagi matn (link) da tahrirlangan bo\'lishi mumkin',
+    'The text on this page can be edited in the' => 'Ushbu sahifadagi matn tahrirlangan bo\'lishi mumkin',
 ];
