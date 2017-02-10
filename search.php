@@ -424,7 +424,7 @@ if (!$items_found) {
             } else {
                 $title_match_val = $tmp;
             }
-            $text_match_sql = clean_text_match($title_match_val, $all_words_val, false, true);
+            $text_match_sql = clean_text_match($title_match_val, $all_words_val, true);
         }
     }
 }

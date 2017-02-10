@@ -2198,7 +2198,7 @@ function clean_title($str, $replace_underscore = false)
     return $str;
 }
 
-function clean_text_match($text, $ltrim_star = true, $remove_stopwords = false, $die_if_empty = false)
+function clean_text_match($text, $ltrim_star = true, $die_if_empty = false)
 {
     global $bb_cfg, $lang;
 
@@ -2207,10 +2207,6 @@ function clean_text_match($text, $ltrim_star = true, $remove_stopwords = false, 
     $wrap_with_quotes = preg_match('#^"[^"]+"$#', $text);
 
     $text = ' ' . str_compact(ltrim($text, $ltrim_chars)) . ' ';
-
-    if ($remove_stopwords) {
-        $text = remove_stopwords($text);
-    }
 
     if ($bb_cfg['search_engine_type'] == 'sphinx') {
         $text = preg_replace('#(?<=\S)\-#u', ' ', $text);                 // "1-2-3" -> "1 2 3"
@@ -2332,18 +2328,6 @@ function encode_text_match($txt)
 function decode_text_match($txt)
 {
     return str_replace('&#039;', "'", $txt);
-}
-
-function remove_stopwords($text)
-{
-    static $stopwords = null;
-
-    if (is_null($stopwords)) {
-        $stopwords = explode(' ', str_compact(@file_get_contents(LANG_DIR . 'search_stopwords.txt')));
-        array_deep($stopwords, 'pad_with_space');
-    }
-
-    return ($stopwords) ? str_replace($stopwords, ' ', $text) : $text;
 }
 
 function pad_with_space($str)
