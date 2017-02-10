@@ -25,30 +25,30 @@
 
 return [
     // Common
-    'Captcha' => 'Капча',
-    'Go back' => 'Вернуться',
-    'Send' => 'Отправить',
-    'Submit' => 'Отправить',
+    'Captcha' => 'Kod doğrulama',
+    'Go back' => 'Geri dönmek',
+    'Send' => 'Gönder',
+    'Submit' => 'Gönder',
 
     // Control panel
-    'Control panel' => 'Панель управления',
+    'Control panel' => 'Kontrol paneli',
 
     // Errors
-    'File not found: %location%' => 'Файл не найден: %location%',
-    'Invalid request: not specified %data%' => 'Недопустимый запрос: не указан %data%',
+    'File not found: %location%' => 'Dosya bulunamadı: %location%',
+    'Invalid request: not specified %data%' => 'Geçersiz istek: belirtilmemiş %data%',
 
     // Feed (feed.php)
-    'Feed' => 'Лента',
-    'Do not specify a mode for the feed' => 'Не указан режим для канала',
-    'This forum does not have a feed' => 'Этот форум не имеет ленту',
-    'This user does not have a feed' => 'Этот пользователь не имеет канал',
+    'Feed' => 'Yayın',
+    'Do not specify a mode for the feed' => 'Do not specify a mode for the feed',
+    'This forum does not have a feed' => 'This forum does not have a feed',
+    'This user does not have a feed' => 'This user does not have a feed',
 
     // Style guide (styleguide.php)
-    'Hello, %name%' => 'Добро пожаловать, %name%',
-    'Style guide' => 'Гид по стилю',
+    'Hello, %name%' => 'Merhaba, %name%',
+    'Style guide' => 'Stil rehberi',
 
     // Terms (terms.php)
-    'Only administrators see this line' => 'Только администраторы видят эту строку',
-    'Terms' => 'Правила',
-    'The text on this page can be edited in the' => 'Текст на этой странице может быть отредактирован в',
+    'Only administrators see this line' => 'Yalnızca yöneticiler bu satırı görüyorlar',
+    'Terms' => 'Şartlar',
+    'The text on this page can be edited in the' => 'Bu sayfadaki metin düzenlenebilinir',
 ];

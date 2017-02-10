@@ -25,30 +25,30 @@
 
 return [
     // Common
-    'Captcha' => 'Капча',
-    'Go back' => 'Вернуться',
-    'Send' => 'Отправить',
-    'Submit' => 'Отправить',
+    'Captcha' => 'Captcha',
+    'Go back' => 'Qaytish',
+    'Send' => 'Yuborish',
+    'Submit' => 'Jo\'natish',
 
     // Control panel
-    'Control panel' => 'Панель управления',
+    'Control panel' => 'Boshqaruv paneli',
 
     // Errors
-    'File not found: %location%' => 'Файл не найден: %location%',
-    'Invalid request: not specified %data%' => 'Недопустимый запрос: не указан %data%',
+    'File not found: %location%' => 'Fayl topilmadi: %location%',
+    'Invalid request: not specified %data%' => 'Noto`g`ri so`rov: %data% ko`rsatilmagan',
 
     // Feed (feed.php)
-    'Feed' => 'Лента',
-    'Do not specify a mode for the feed' => 'Не указан режим для канала',
-    'This forum does not have a feed' => 'Этот форум не имеет ленту',
-    'This user does not have a feed' => 'Этот пользователь не имеет канал',
+    'Feed' => 'Tasma',
+    'Do not specify a mode for the feed' => 'Tasma holati ko`rsatilmagan',
+    'This forum does not have a feed' => 'Bu forum tasmaga ega emas',
+    'This user does not have a feed' => 'Bu foydalanuvchi tasmaga ega emas',
 
     // Style guide (styleguide.php)
-    'Hello, %name%' => 'Добро пожаловать, %name%',
-    'Style guide' => 'Гид по стилю',
+    'Hello, %name%' => 'Salom, %name%',
+    'Style guide' => 'Uslub ko`makchisi',
 
     // Terms (terms.php)
-    'Only administrators see this line' => 'Только администраторы видят эту строку',
-    'Terms' => 'Правила',
-    'The text on this page can be edited in the' => 'Текст на этой странице может быть отредактирован в',
+    'Only administrators see this line' => 'Bu qatorni faqat administratorlar ko`ra oladi',
+    'Terms' => 'Qoidalar',
+    'The text on this page can be edited in the' => 'Ushbu sahifadagi matn tahrirlangan bo\'lishi mumkin',
 ];

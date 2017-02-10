@@ -26,12 +26,12 @@
 return [
     // Common
     'Captcha' => 'Captcha',
-    'Go back' => 'Go back',
+    'Go back' => 'Go Back',
     'Send' => 'Send',
     'Submit' => 'Submit',
 
     // Control panel
-    'Control panel' => 'Control panel',
+    'Control panel' => 'Control Panel',
 
     // Errors
     'File not found: %location%' => 'File not found: %location%',
@@ -45,7 +45,7 @@ return [
 
     // Style guide (styleguide.php)
     'Hello, %name%' => 'Hello, %name%',
-    'Style guide' => 'Style guide',
+    'Style guide' => 'Style Guide',
 
     // Terms (terms.php)
     'Only administrators see this line' => 'Only administrators see this line',
