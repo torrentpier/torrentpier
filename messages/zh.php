@@ -25,30 +25,30 @@
 
 return [
     // Common
-    'Captcha' => 'Captcha',
-    'Go back' => 'Go back',
-    'Send' => 'Send',
-    'Submit' => 'Submit',
+    'Captcha' => '验证码',
+    'Go back' => '上一页',
+    'Send' => '发送',
+    'Submit' => '提交',
 
     // Control panel
-    'Control panel' => 'Control panel',
+    'Control panel' => '控制面板',
 
     // Errors
-    'File not found: %location%' => 'File not found: %location%',
-    'Invalid request: not specified %data%' => 'Invalid request: not specified %data%',
+    'File not found: %location%' => '找不到文件:%location%',
+    'Invalid request: not specified %data%' => '无效的请求︰ 未指定 %data%',
 
     // Feed (feed.php)
-    'Feed' => 'Feed',
+    'Feed' => '订阅',
     'Do not specify a mode for the feed' => 'Do not specify a mode for the feed',
-    'This forum does not have a feed' => 'This forum does not have a feed',
-    'This user does not have a feed' => 'This user does not have a feed',
+    'This forum does not have a feed' => '这个论坛还没有订阅',
+    'This user does not have a feed' => '这个用户还没有订阅',
 
     // Style guide (styleguide.php)
-    'Hello, %name%' => 'Hello, %name%',
+    'Hello, %name%' => '欢迎，%name%！',
     'Style guide' => 'Style guide',
 
     // Terms (terms.php)
-    'Only administrators see this line' => 'Only administrators see this line',
-    'Terms' => 'Terms',
+    'Only administrators see this line' => '仅管理员可见',
+    'Terms' => '条款',
     'The text on this page can be edited in the' => 'The text on this page can be edited in the',
 ];
