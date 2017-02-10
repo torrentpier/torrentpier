@@ -1,3 +1,3 @@
 files:
-  - source: /messages/en.php
+  - source: /messages/source/source.php
     translation: /messages/%two_letters_code%.php
