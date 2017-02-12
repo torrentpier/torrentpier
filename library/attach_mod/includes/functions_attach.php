@@ -492,22 +492,28 @@ function _set_var(&$result, $var, $type, $multibyte = false)
 }
 
 /**
- * get_var
- *
  * Used to get passed variable
+ *
+ * @param $var_name
+ * @param $default
+ * @param bool $multibyte
+ * @return array
  */
 function get_var($var_name, $default, $multibyte = false)
 {
-    $request_var = (isset($_POST[$var_name])) ? $_POST : $_GET;
-
-    if (!isset($request_var[$var_name]) || (is_array($request_var[$var_name]) && !is_array($default)) || (is_array($default) && !is_array($request_var[$var_name]))) {
-        return (is_array($default)) ? array() : $default;
+    if (
+        !isset($_REQUEST[$var_name]) ||
+        (is_array($_REQUEST[$var_name]) && !is_array($default)) ||
+        (is_array($default) && !is_array($_REQUEST[$var_name]))
+    ) {
+        return (is_array($default)) ? [] : $default;
     }
 
-    $var = $request_var[$var_name];
+    $var = $_REQUEST[$var_name];
 
     if (!is_array($default)) {
         $type = gettype($default);
+        $key_type = null;
     } else {
         list($key_type, $type) = each($default);
         $type = gettype($type);
@@ -516,7 +522,7 @@ function get_var($var_name, $default, $multibyte = false)
 
     if (is_array($var)) {
         $_var = $var;
-        $var = array();
+        $var = [];
 
         foreach ($_var as $k => $v) {
             if (is_array($v)) {
