@@ -183,15 +183,9 @@ function search_attachments($order_by, &$total_rows)
 
     $where_sql = array();
 
-    // Get submitted Vars
-    $search_vars = array('search_keyword_fname', 'search_keyword_comment', 'search_author', 'search_size_smaller', 'search_size_greater', 'search_count_smaller', 'search_count_greater', 'search_days_greater', 'search_forum', 'search_cat');
-
-    for ($i = 0; $i < sizeof($search_vars); $i++) {
-        $$search_vars[$i] = get_var($search_vars[$i], '');
-    }
-
     // Author name search
-    if ($search_author != '') {
+    $search_author = get_var('search_author', '');
+    if ($search_author) {
         // Bring in line with 2.0.x expected username
         $search_author = addslashes(html_entity_decode($search_author));
         $search_author = stripslashes(clean_username($search_author));
@@ -221,40 +215,44 @@ function search_attachments($order_by, &$total_rows)
     }
 
     // Search Keyword
-    if ($search_keyword_fname != '') {
+    $search_keyword_fname = get_var('search_keyword_fname', '');
+    if ($search_keyword_fname) {
         $match_word = str_replace('*', '%', $search_keyword_fname);
         $where_sql[] = " (a.real_filename LIKE '" . attach_mod_sql_escape($match_word) . "') ";
     }
 
-    if ($search_keyword_comment != '') {
+    $search_keyword_comment = get_var('search_keyword_comment', '');
+    if ($search_keyword_comment) {
         $match_word = str_replace('*', '%', $search_keyword_comment);
         $where_sql[] = " (a.comment LIKE '" . attach_mod_sql_escape($match_word) . "') ";
     }
 
     // Search Download Count
-    if ($search_count_smaller != '' || $search_count_greater != '') {
-        if ($search_count_smaller != '') {
-            $where_sql[] = ' (a.download_count < ' . (int)$search_count_smaller . ') ';
-        } elseif ($search_count_greater != '') {
-            $where_sql[] = ' (a.download_count > ' . (int)$search_count_greater . ') ';
-        }
+    $search_count_smaller = get_var('search_count_smaller', '');
+    $search_count_greater = get_var('search_count_greater', '');
+    if ($search_count_smaller != '') {
+        $where_sql[] = ' (a.download_count < ' . (int)$search_count_smaller . ') ';
+    } elseif ($search_count_greater != '') {
+        $where_sql[] = ' (a.download_count > ' . (int)$search_count_greater . ') ';
     }
 
     // Search Filesize
-    if ($search_size_smaller != '' || $search_size_greater != '') {
-        if ($search_size_smaller != '') {
-            $where_sql[] = ' (a.filesize < ' . (int)$search_size_smaller . ') ';
-        } elseif ($search_size_greater != '') {
-            $where_sql[] = ' (a.filesize > ' . (int)$search_size_greater . ') ';
-        }
+    $search_size_smaller = get_var('search_size_smaller', '');
+    $search_size_greater = get_var('search_size_greater', '');
+    if ($search_size_smaller != '') {
+        $where_sql[] = ' (a.filesize < ' . (int)$search_size_smaller . ') ';
+    } elseif ($search_size_greater != '') {
+        $where_sql[] = ' (a.filesize > ' . (int)$search_size_greater . ') ';
     }
 
     // Search Attachment Time
-    if ($search_days_greater != '') {
+    $search_days_greater = get_var('search_days_greater', '');
+    if ($search_days_greater) {
         $where_sql[] = ' (a.filetime < ' . (TIMENOW - ((int)$search_days_greater * 86400)) . ') ';
     }
 
     // Search Forum
+    $search_forum = get_var('search_forum', '');
     if ($search_forum) {
         $where_sql[] = ' (p.forum_id = ' . intval($search_forum) . ') ';
     }
