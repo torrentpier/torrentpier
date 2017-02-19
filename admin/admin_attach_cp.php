@@ -29,8 +29,6 @@ if (!empty($setmodules)) {
 }
 require __DIR__ . '/pagestart.php';
 
-$total_attachments = 0;
-
 if (($attach_config['upload_dir'][0] == '/') || (($attach_config['upload_dir'][0] != '/') && ($attach_config['upload_dir'][1] == ':'))) {
     $upload_dir = $attach_config['upload_dir'];
 } else {
@@ -39,24 +37,18 @@ if (($attach_config['upload_dir'][0] == '/') || (($attach_config['upload_dir'][0
 
 include ATTACH_DIR . '/includes/functions_selects.php';
 
-// Check if the language got included
-if (!isset($lang['TEST_SETTINGS_SUCCESSFUL'])) {
-    // include_once is used within the function
-    include_attach_lang();
-}
-
 // Init Variables
 $start = get_var('start', 0);
 $sort_order = get_var('order', 'ASC');
 $sort_order = ($sort_order == 'ASC') ? 'ASC' : 'DESC';
 $mode = get_var('mode', '');
 $view = get_var('view', '');
-$uid = (isset($_POST['u_id'])) ? get_var('u_id', 0) : get_var('uid', 0);
+$uid = isset($_POST['u_id']) ? get_var('u_id', 0) : get_var('uid', 0);
 
 $view = (isset($_POST['search']) && $_POST['search']) ? 'attachments' : $view;
 
 // process modes based on view
-if ($view == 'username') {
+if ($view === 'username') {
     $mode_types_text = array($lang['SORT_USERNAME'], $lang['SORT_ATTACHMENTS'], $lang['SORT_SIZE']);
     $mode_types = array('username', 'attachments', 'filesize');
 
@@ -64,7 +56,7 @@ if ($view == 'username') {
         $mode = 'attachments';
         $sort_order = 'DESC';
     }
-} elseif ($view == 'attachments') {
+} elseif ($view === 'attachments') {
     $mode_types_text = array($lang['SORT_FILENAME'], $lang['SORT_COMMENT'], $lang['SORT_EXTENSION'], $lang['SORT_SIZE'], $lang['SORT_DOWNLOADS'], $lang['SORT_POSTTIME']);
     $mode_types = array('real_filename', 'comment', 'extension', 'filesize', 'downloads', 'post_time');
 
@@ -72,7 +64,7 @@ if ($view == 'username') {
         $mode = 'real_filename';
         $sort_order = 'ASC';
     }
-} elseif ($view == 'search') {
+} elseif ($view === 'search') {
     $mode_types_text = array($lang['SORT_FILENAME'], $lang['SORT_COMMENT'], $lang['SORT_EXTENSION'], $lang['SORT_SIZE'], $lang['SORT_DOWNLOADS'], $lang['SORT_POSTTIME']);
     $mode_types = array('real_filename', 'comment', 'extension', 'filesize', 'downloads', 'post_time');
 
@@ -84,12 +76,12 @@ if ($view == 'username') {
 }
 
 // Pagination ?
-$do_pagination = ($view != 'stats' && $view != 'search') ? true : false;
+$do_pagination = ($view !== 'stats' && $view !== 'search') ? true : false;
 
 // Set Order
 $order_by = '';
 
-if ($view == 'username') {
+if ($view === 'username') {
     switch ($mode) {
         case 'username':
             $order_by = 'ORDER BY u.username ' . $sort_order . ' LIMIT ' . $start . ', ' . $bb_cfg['topics_per_page'];
@@ -106,7 +98,7 @@ if ($view == 'username') {
             $order_by = 'ORDER BY total_attachments ' . $sort_order . ' LIMIT ' . $start . ', ' . $bb_cfg['topics_per_page'];
             break;
     }
-} elseif ($view == 'attachments') {
+} elseif ($view === 'attachments') {
     switch ($mode) {
         case 'filename':
             $order_by = 'ORDER BY a.real_filename ' . $sort_order . ' LIMIT ' . $start . ', ' . $bb_cfg['topics_per_page'];
@@ -140,8 +132,8 @@ $view_types = array('stats', 'search');
 
 $select_view = '<select name="view">';
 
-for ($i = 0; $i < count($view_types_text); $i++) {
-    $selected = ($view == $view_types[$i]) ? ' selected="selected"' : '';
+for ($i = 0, $iMax = count($view_types_text); $i < $iMax; $i++) {
+    $selected = ($view === $view_types[$i]) ? ' selected="selected"' : '';
     $select_view .= '<option value="' . $view_types[$i] . '"' . $selected . '>' . $view_types_text[$i] . '</option>';
 }
 $select_view .= '</select>';
@@ -149,32 +141,32 @@ $select_view .= '</select>';
 if (count($mode_types_text) > 0) {
     $select_sort_mode = '<select name="mode">';
 
-    for ($i = 0; $i < count($mode_types_text); $i++) {
-        $selected = ($mode == $mode_types[$i]) ? ' selected="selected"' : '';
+    for ($i = 0, $iMax = count($mode_types_text); $i < $iMax; $i++) {
+        $selected = ($mode === $mode_types[$i]) ? ' selected="selected"' : '';
         $select_sort_mode .= '<option value="' . $mode_types[$i] . '"' . $selected . '>' . $mode_types_text[$i] . '</option>';
     }
     $select_sort_mode .= '</select>';
 }
 
 $select_sort_order = '<select name="order">';
-if ($sort_order == 'ASC') {
+if ($sort_order === 'ASC') {
     $select_sort_order .= '<option value="ASC" selected="selected">' . $lang['ASC'] . '</option><option value="DESC">' . $lang['DESC'] . '</option>';
 } else {
     $select_sort_order .= '<option value="ASC">' . $lang['ASC'] . '</option><option value="DESC" selected="selected">' . $lang['DESC'] . '</option>';
 }
 $select_sort_order .= '</select>';
 
-$submit_change = (isset($_POST['submit_change'])) ? true : false;
-$delete = (isset($_POST['delete'])) ? true : false;
+$submit_change = isset($_POST['submit_change']);
+$delete = isset($_POST['delete']);
 $delete_id_list = get_var('delete_id_list', array(0));
 
 $confirm = isset($_POST['confirm']);
 
-if ($confirm && sizeof($delete_id_list) > 0) {
+if ($confirm && count($delete_id_list) > 0) {
     $attachments = array();
 
     delete_attachment(0, $delete_id_list);
-} elseif ($delete && sizeof($delete_id_list) > 0) {
+} elseif ($delete && count($delete_id_list) > 0) {
     // Not confirmed, show confirmation message
     $hidden_fields = '<input type="hidden" name="view" value="' . $view . '" />';
     $hidden_fields .= '<input type="hidden" name="mode" value="' . $mode . '" />';
@@ -182,7 +174,7 @@ if ($confirm && sizeof($delete_id_list) > 0) {
     $hidden_fields .= '<input type="hidden" name="u_id" value="' . $uid . '" />';
     $hidden_fields .= '<input type="hidden" name="start" value="' . $start . '" />';
 
-    for ($i = 0; $i < sizeof($delete_id_list); $i++) {
+    for ($i = 0, $iMax = count($delete_id_list); $i < $iMax; $i++) {
         $hidden_fields .= '<input type="hidden" name="delete_id_list[]" value="' . $delete_id_list[$i] . '" />';
     }
 
@@ -198,7 +190,7 @@ $template->assign_vars(array(
     'S_MODE_ACTION' => 'admin_attach_cp.php',
 ));
 
-if ($submit_change && $view == 'attachments') {
+if ($submit_change && $view === 'attachments') {
     $attach_change_list = get_var('attach_id_list', array(0));
     $attach_comment_list = get_var('attach_comment_list', array(''));
     $attach_download_count_list = get_var('attach_count_list', array(0));
@@ -206,7 +198,7 @@ if ($submit_change && $view == 'attachments') {
     // Generate correct Change List
     $attachments = array();
 
-    for ($i = 0; $i < count($attach_change_list); $i++) {
+    for ($i = 0, $iMax = count($attach_change_list); $i < $iMax; $i++) {
         $attachments['_' . $attach_change_list[$i]]['comment'] = $attach_comment_list[$i];
         $attachments['_' . $attach_change_list[$i]]['download_count'] = $attach_download_count_list[$i];
     }
@@ -242,23 +234,17 @@ if ($view == 'stats') {
     $attachment_quota = humn_size($attach_config['attachment_quota']);
 
     // number_of_attachments
-    $row = DB()->fetch_row("
-		SELECT COUNT(*) AS total FROM " . BB_ATTACHMENTS_DESC . "
-	");
+    $row = DB()->fetch_row("SELECT COUNT(*) AS total FROM " . BB_ATTACHMENTS_DESC);
     $number_of_attachments = $number_of_posts = $row['total'];
 
     $number_of_pms = 0;
 
     // number_of_topics
-    $row = DB()->fetch_row("
-		SELECT COUNT(*) AS topics FROM " . BB_TOPICS . " WHERE topic_attachment = 1
-	");
+    $row = DB()->fetch_row("SELECT COUNT(*) AS topics FROM " . BB_TOPICS . " WHERE topic_attachment = 1");
     $number_of_topics = $row['topics'];
 
     // number_of_users
-    $row = DB()->fetch_row("
-		SELECT COUNT(DISTINCT user_id_1) AS users FROM " . BB_ATTACHMENTS . " WHERE post_id != 0
-	");
+    $row = DB()->fetch_row("SELECT COUNT(DISTINCT user_id_1) AS users FROM " . BB_ATTACHMENTS . " WHERE post_id != 0");
     $number_of_users = $row['users'];
 
     $template->assign_vars(array(
@@ -274,7 +260,7 @@ if ($view == 'stats') {
 }
 
 // Search
-if ($view == 'search') {
+if ($view === 'search') {
     // Get Forums and Categories
     //sf - add [, f.forum_parent]
     $sql = "SELECT c.cat_title, c.cat_id, f.forum_name, f.forum_id, f.forum_parent
@@ -287,6 +273,7 @@ if ($view == 'search') {
     }
 
     $s_forums = '';
+    $list_cat = [];
     while ($row = DB()->sql_fetchrow($result)) { //sf
         $s_forums .= '<option value="' . $row['forum_id'] . '">' . (($row['forum_parent']) ? HTML_SF_SPACER : '') . htmlCHR($row['forum_name']) . '</option>';
 
@@ -295,7 +282,8 @@ if ($view == 'search') {
         }
     }
 
-    if ($s_forums != '') {
+    $s_categories = '';
+    if ($s_forums) {
         $s_forums = '<option value="0">' . $lang['ALL_AVAILABLE'] . '</option>' . $s_forums;
 
         // Category to search
@@ -318,7 +306,7 @@ if ($view == 'search') {
 }
 
 // Username
-if ($view == 'username') {
+if ($view === 'username') {
     $template->assign_vars(array(
         'TPL_ATTACH_USER' => true,
         'S_MODE_SELECT' => $select_sort_mode,
@@ -329,7 +317,7 @@ if ($view == 'username') {
 }
 
 // Attachments
-if ($view == 'attachments') {
+if ($view === 'attachments') {
     $user_based = ($uid) ? true : false;
     $search_based = (isset($_POST['search']) && $_POST['search']) ? true : false;
 
@@ -407,10 +395,10 @@ if ($view == 'attachments') {
     }
 
     if (sizeof($attachments) > 0) {
-        for ($i = 0; $i < sizeof($attachments); $i++) {
+        for ($i = 0, $iMax = count($attachments); $i < $iMax; $i++) {
             $delete_box = '<input type="checkbox" name="delete_id_list[]" value="' . intval($attachments[$i]['attach_id']) . '" />';
 
-            for ($j = 0; $j < count($delete_id_list); $j++) {
+            for ($j = 0, $iMax = count($delete_id_list); $j < $iMax; $j++) {
                 if ($delete_id_list[$j] == $attachments[$i]['attach_id']) {
                     $delete_box = '<input type="checkbox" name="delete_id_list[]" value="' . intval($attachments[$i]['attach_id']) . '" checked="checked" />';
                     break;
@@ -486,7 +474,7 @@ if ($view == 'attachments') {
     }
 
     if (!$search_based && !$user_based) {
-        if ($total_attachments == 0) {
+        if (!$attachments) {
             $sql = "SELECT attach_id FROM " . BB_ATTACHMENTS_DESC;
 
             if (!($result = DB()->sql_query($sql))) {
