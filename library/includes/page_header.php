@@ -125,7 +125,8 @@ $template->assign_vars(array(
 // The following assigns all _common_ variables that may be used at any point in a template
 $template->assign_vars(array(
     'SIMPLE_HEADER' => !empty($gen_simple_header),
-    'CONTENT_ENCODING' => $bb_cfg['lang'][$userdata['user_lang']]['encoding'],
+    'CONTENT_ENCODING' => isset($bb_cfg['lang'][$userdata['user_lang']]['encoding']) ?
+        $bb_cfg['lang'][$userdata['user_lang']]['encoding'] : 'utf-8',
 
     'IN_ADMIN' => defined('IN_ADMIN'),
     'SHOW_ADS' => (!$logged_in || isset($bb_cfg['show_ads_users'][$user->id]) || (!IS_AM && $user->show_ads)),

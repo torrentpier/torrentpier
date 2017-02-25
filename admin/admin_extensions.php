@@ -46,12 +46,6 @@ if (($attach_config['upload_dir'][0] == '/') || (($attach_config['upload_dir'][0
 
 include ATTACH_DIR . '/includes/functions_selects.php';
 
-// Check if the language got included
-if (!isset($lang['TEST_SETTINGS_SUCCESSFUL'])) {
-    // include_once is used within the function
-    include_attach_lang();
-}
-
 // Init Vars
 $types_download = array(INLINE_LINK, PHYSICAL_LINK);
 $modes_download = array('inline', 'physical');

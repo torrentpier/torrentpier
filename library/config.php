@@ -275,12 +275,12 @@ define('BB_PATH', dirname(__DIR__));
 define('ADMIN_DIR', BB_PATH . '/admin');
 define('DATA_DIR', BB_PATH . '/data');
 define('INT_DATA_DIR', BB_PATH . '/internal_data');
-define('AJAX_HTML_DIR', BB_ROOT . '/internal_data/ajax_html');
+define('AJAX_HTML_DIR', BB_PATH . '/internal_data/ajax_html');
 define('CACHE_DIR', BB_PATH . '/internal_data/cache');
 define('LOG_DIR', BB_PATH . '/internal_data/log');
 define('SITEMAP_DIR', BB_PATH . '/internal_data/sitemap');
 define('TRIGGERS_DIR', BB_PATH . '/internal_data/triggers');
-define('AJAX_DIR', BB_ROOT . '/library/ajax');
+define('AJAX_DIR', BB_PATH . '/library/ajax');
 define('ATTACH_DIR', BB_PATH . '/library/attach_mod');
 define('CFG_DIR', BB_PATH . '/library/config');
 define('INC_DIR', BB_PATH . '/library/includes');
@@ -612,12 +612,12 @@ $bb_cfg['gen_forums_allowed_ext'] = array('zip', 'rar');            // для о
 // Avatars
 $bb_cfg['avatars'] = array(
     'allowed_ext' => array('gif', 'jpg', 'jpeg', 'png'), // разрешенные форматы файлов
-    'bot_avatar' => 'gallery/bot.gif',               // аватара бота
+    'bot_avatar' => '/gallery/bot.gif',               // аватара бота
     'max_size' => 100 * 1024,                        // размер аватары в байтах
     'max_height' => 100,                             // высота аватара в px
     'max_width' => 100,                             // ширина аватара в px
-    'no_avatar' => 'gallery/noavatar.png',          // дефолтная аватара
-    'upload_path' => BB_ROOT . 'data/avatars/',       // путь к директории с аватарами
+    'no_avatar' => '/gallery/noavatar.png',          // дефолтная аватара
+    'upload_path' => BB_PATH . '/data/avatars',       // путь к директории с аватарами
     'up_allowed' => true,                            // разрешить загрузку аватар
 );
 
@@ -627,8 +627,8 @@ $bb_cfg['group_avatars'] = array(
     'max_size' => 300 * 1024,                        // размер аватары в байтах
     'max_height' => 300,                             // высота аватара в px
     'max_width' => 300,                             // ширина аватара в px
-    'no_avatar' => 'gallery/noavatar.png',          // дефолтная аватара
-    'upload_path' => BB_ROOT . 'data/avatars/',       // путь к директории с аватарами
+    'no_avatar' => '/gallery/noavatar.png',          // дефолтная аватара
+    'upload_path' => BB_PATH . '/data/avatars',       // путь к директории с аватарами
     'up_allowed' => true,                            // разрешить загрузку аватар
 );
 
@@ -654,8 +654,8 @@ $bb_cfg['nofollow'] = array(
 );
 
 // Local config
-if (file_exists(BB_ROOT . '/library/config.local.php')) {
-    include_once(BB_ROOT . '/library/config.local.php');
+if (file_exists(BB_PATH . '/library/config.local.php')) {
+    include_once(BB_PATH . '/library/config.local.php');
 }
 
 define('BB_CFG_LOADED', true);
