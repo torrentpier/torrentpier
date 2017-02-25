@@ -152,7 +152,7 @@ function generate_smilies($mode)
             $row = 0;
             $col = 0;
 
-            while (list($smile_url, $data) = @each($rowset)) {
+            foreach ($rowset as $smile_url => $data) {
                 if (!$col) {
                     $template->assign_block_vars('smilies_row', array());
                 }

@@ -39,6 +39,7 @@ if (isset($_POST['mode']) || isset($_GET['mode'])) {
 }
 
 $delimeter = '=+:';
+$smiley_paks = [];
 
 // Read a listing of uploaded smilies for use in the add or edit smliey code
 $dir = @opendir(BB_ROOT . $bb_cfg['smilies_path']);
@@ -127,7 +128,7 @@ if (isset($_GET['import_pack']) || isset($_POST['import_pack'])) {
     } else {
         // Display the script to get the smile_pak cfg file
         $smile_paks_select = '<select name="smile_pak"><option value="">' . $lang['SELECT_PAK'] . '</option>';
-        while (list($key, $value) = @each($smiley_paks)) {
+        foreach ($smiley_paks as $key => $value) {
             if (!empty($value)) {
                 $smile_paks_select .= '<option>' . $value . '</option>';
             }

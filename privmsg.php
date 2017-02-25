@@ -545,14 +545,14 @@ if ($mode == 'read') {
                     } while ($row = DB()->sql_fetchrow($result));
 
                     if (count($update_users)) {
-                        while (list($type, $users) = each($update_users)) {
-                            while (list($user_id, $dec) = each($users)) {
+                        foreach ($update_users as $type => $users) {
+                            foreach ($users as $user_id => $dec) {
                                 $update_list[$type][$dec][] = $user_id;
                             }
                         }
                         unset($update_users);
 
-                        while (list($type, $dec_ary) = each($update_list)) {
+                        foreach ($update_list as $type => $dec_ary) {
                             switch ($type) {
                                 case 'new':
                                     $type = "user_new_privmsg";
@@ -563,7 +563,7 @@ if ($mode == 'read') {
                                     break;
                             }
 
-                            while (list($dec, $user_ary) = each($dec_ary)) {
+                            foreach ($dec_ary as $dec => $user_ary) {
                                 $user_ids = implode(', ', $user_ary);
 
                                 $sql = "UPDATE " . BB_USERS . "
@@ -698,24 +698,24 @@ if ($mode == 'read') {
                 do {
                     switch ($row['privmsgs_type']) {
                         case PRIVMSGS_NEW_MAIL:
-                            @$update_users['new'][$row['privmsgs_to_userid']]++;
+                            $update_users['new'][$row['privmsgs_to_userid']]++;
                             break;
 
                         case PRIVMSGS_UNREAD_MAIL:
-                            @$update_users['unread'][$row['privmsgs_to_userid']]++;
+                            $update_users['unread'][$row['privmsgs_to_userid']]++;
                             break;
                     }
                 } while ($row = DB()->sql_fetchrow($result));
 
                 if (count($update_users)) {
-                    while (list($type, $users) = each($update_users)) {
-                        while (list($user_id, $dec) = each($users)) {
+                    foreach ($update_users as $type => $users) {
+                        foreach ($users as $user_id => $dec) {
                             $update_list[$type][$dec][] = $user_id;
                         }
                     }
                     unset($update_users);
 
-                    while (list($type, $dec_ary) = each($update_list)) {
+                    foreach ($update_list as $type => $dec_ary) {
                         switch ($type) {
                             case 'new':
                                 $type = "user_new_privmsg";
@@ -726,7 +726,7 @@ if ($mode == 'read') {
                                 break;
                         }
 
-                        while (list($dec, $user_ary) = each($dec_ary)) {
+                        foreach ($dec_ary as $dec => $user_ary) {
                             $user_ids = implode(', ', $user_ary);
 
                             $sql = "UPDATE " . BB_USERS . " SET $type = $type - $dec WHERE user_id IN ($user_ids)";

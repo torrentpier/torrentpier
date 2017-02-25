@@ -592,7 +592,7 @@ if ($post_mode) {
 
     foreach ($sorted_rows as $topic_id => $topic_posts) {
         // Topic title block
-        $first_post = $topic_posts[0];
+        $first_post = reset($topic_posts);
         $topic_id = (int)$topic_id;
         $forum_id = (int)$first_post['forum_id'];
         $is_unread_t = is_unread($first_post['topic_last_post_time'], $topic_id, $forum_id);

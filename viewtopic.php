@@ -661,7 +661,7 @@ for ($i = 0; $i < $total_posts; $i++) {
                 '\"', '"',
                 substr(
                     preg_replace_callback('#(\>(((?>([^><]+|(?R)))*)\<))#s', function ($matches) use ($orig_word, $replacement_word) {
-                        return preg_replace($orig_word, $replacement_word, $matches[0]);
+                        return preg_replace($orig_word, $replacement_word, reset($matches));
                     }, '>' . $user_sig . '<'), 1, -1
                 )
             );
@@ -671,7 +671,7 @@ for ($i = 0; $i < $total_posts; $i++) {
             '\"', '"',
             substr(
                 preg_replace_callback('#(\>(((?>([^><]+|(?R)))*)\<))#s', function ($matches) use ($orig_word, $replacement_word) {
-                    return preg_replace($orig_word, $replacement_word, $matches[0]);
+                    return preg_replace($orig_word, $replacement_word, reset($matches));
                 }, '>' . $message . '<'), 1, -1
             )
         );

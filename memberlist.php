@@ -135,7 +135,7 @@ if ($by_letter_req) {
     } elseif ($by_letter_req === 'others') {
         $by_letter = 'others';
         $letter_sql = "username REGEXP '^[!-@\\[-`].*$'";
-    } elseif ($letter_req = preg_replace("#[^$letters_range]#ui", '', iconv('windows-1251', 'UTF-8', $by_letter_req[0]))) {
+    } elseif ($letter_req = preg_replace("#[^$letters_range]#ui", '', iconv('windows-1251', 'UTF-8', reset($by_letter_req)))) {
         $by_letter = DB()->escape($letter_req);
         $letter_sql = "LOWER(username) LIKE '$by_letter%'";
     }

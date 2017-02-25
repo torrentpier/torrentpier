@@ -39,7 +39,7 @@ function return_msg_mcp($status_msg)
     global $topic_id, $req_topics, $forum_id, $lang, $mode;
 
     if (count($req_topics) == 1) {
-        $topic_id = $req_topics[0];
+        $topic_id = reset($req_topics);
     }
 
     $message = $status_msg;

@@ -71,7 +71,7 @@ function smtpmail($mail_to, $subject, $message, $headers = '')
         @reset($header_array);
 
         $headers = $cc = $bcc = '';
-        while (list(, $header) = each($header_array)) {
+        foreach ($header_array as $header) {
             if (preg_match('#^cc:#si', $header)) {
                 $cc = preg_replace('#^cc:(.*)#si', '\1', $header);
             } elseif (preg_match('#^bcc:#si', $header)) {
@@ -134,24 +134,27 @@ function smtpmail($mail_to, $subject, $message, $headers = '')
         server_parse($socket, "250", __LINE__);
     }
 
-    // Ok now do the CC and BCC fields...
-    @reset($bcc);
-    while (list(, $bcc_address) = each($bcc)) {
-        // Add an additional bit of error checking to bcc header...
-        $bcc_address = trim($bcc_address);
-        if (preg_match('#[^ ]+\@[^ ]+#', $bcc_address)) {
-            fwrite($socket, "RCPT TO: <$bcc_address>\r\n");
-            server_parse($socket, "250", __LINE__);
+    if (!empty($bcc)) {
+        reset($bcc);
+        foreach ($bcc as $bcc_address) {
+            // Add an additional bit of error checking to bcc header...
+            $bcc_address = trim($bcc_address);
+            if (preg_match('#[^ ]+\@[^ ]+#', $bcc_address)) {
+                fwrite($socket, "RCPT TO: <$bcc_address>\r\n");
+                server_parse($socket, "250", __LINE__);
+            }
         }
     }
 
-    @reset($cc);
-    while (list(, $cc_address) = each($cc)) {
-        // Add an additional bit of error checking to cc header
-        $cc_address = trim($cc_address);
-        if (preg_match('#[^ ]+\@[^ ]+#', $cc_address)) {
-            fwrite($socket, "RCPT TO: <$cc_address>\r\n");
-            server_parse($socket, "250", __LINE__);
+    if (!empty($cc)) {
+        reset($cc);
+        foreach ($cc as $cc_address) {
+            // Add an additional bit of error checking to cc header
+            $cc_address = trim($cc_address);
+            if (preg_match('#[^ ]+\@[^ ]+#', $cc_address)) {
+                fwrite($socket, "RCPT TO: <$cc_address>\r\n");
+                server_parse($socket, "250", __LINE__);
+            }
         }
     }
 
