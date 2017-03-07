@@ -43,7 +43,8 @@
   "require": {
     "php": "^5.3 || ^7.0",
     "gigablah/sphinxphp": "^2.0",
-    "google/recaptcha": "^1.0"
+    "google/recaptcha": "^1.0",
+    "robmorgan/phinx": "^0.6.6"
   },
   "autoload": {
     "psr-4": {

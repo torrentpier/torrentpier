@@ -1,5 +1,6 @@
 ### TorrentPier ###
 .idea
+.php_cs.cache
 bower_components
 composer.phar
 composer.lock
