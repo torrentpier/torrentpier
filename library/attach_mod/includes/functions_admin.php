@@ -24,11 +24,12 @@
  */
 
 /**
- * All Attachment Functions only needed in Admin
- */
-
-/**
- * Set/Change Quotas
+ * Set/change quotas
+ *
+ * @param $mode
+ * @param $id
+ * @param $quota_type
+ * @param int $quota_limit_id
  */
 function process_quota_settings($mode, $id, $quota_type, $quota_limit_id = 0)
 {
@@ -38,28 +39,21 @@ function process_quota_settings($mode, $id, $quota_type, $quota_limit_id = 0)
 
     if ($mode == 'user') {
         if (!$quota_limit_id) {
-            $sql = 'DELETE FROM ' . BB_QUOTA . "
-				WHERE user_id = $id
-					AND quota_type = $quota_type";
+            $sql = 'DELETE FROM ' . BB_QUOTA . " WHERE user_id = $id AND quota_type = $quota_type";
         } else {
             // Check if user is already entered
-            $sql = 'SELECT user_id
-				FROM ' . BB_QUOTA . "
-				WHERE user_id = $id
-					AND quota_type = $quota_type";
-
-            if (!($result = DB()->sql_query($sql))) {
+            $sql = 'SELECT user_id FROM ' . BB_QUOTA . " WHERE user_id = $id AND quota_type = $quota_type";
+            if (!$result = DB()->sql_query($sql)) {
                 bb_die('Could not get entry #1');
             }
 
             if (DB()->num_rows($result) == 0) {
-                $sql_ary = array(
+                $sql_ary = [
                     'user_id' => (int)$id,
                     'group_id' => 0,
                     'quota_type' => (int)$quota_type,
                     'quota_limit_id' => (int)$quota_limit_id
-                );
-
+                ];
                 $sql = 'INSERT INTO ' . BB_QUOTA . ' ' . attach_mod_sql_build_array('INSERT', $sql_ary);
             } else {
                 $sql = 'UPDATE ' . BB_QUOTA . "
@@ -75,21 +69,14 @@ function process_quota_settings($mode, $id, $quota_type, $quota_limit_id = 0)
         }
     } elseif ($mode == 'group') {
         if (!$quota_limit_id) {
-            $sql = 'DELETE FROM ' . BB_QUOTA . "
-				WHERE group_id = $id
-					AND quota_type = $quota_type";
-
-            if (!($result = DB()->sql_query($sql))) {
+            $sql = 'DELETE FROM ' . BB_QUOTA . " WHERE group_id = $id AND quota_type = $quota_type";
+            if (!$result = DB()->sql_query($sql)) {
                 bb_die('Unable to delete quota settings');
             }
         } else {
             // Check if user is already entered
-            $sql = 'SELECT group_id
-				FROM ' . BB_QUOTA . "
-				WHERE group_id = $id
-					AND quota_type = $quota_type";
-
-            if (!($result = DB()->sql_query($sql))) {
+            $sql = 'SELECT group_id FROM ' . BB_QUOTA . " WHERE group_id = $id AND quota_type = $quota_type";
+            if (!$result = DB()->sql_query($sql)) {
                 bb_die('Could not get entry #2');
             }
 
@@ -109,7 +96,13 @@ function process_quota_settings($mode, $id, $quota_type, $quota_limit_id = 0)
 }
 
 /**
- * sort multi-dimensional Array
+ * Sort multi-dimensional array
+ *
+ * @param $sort_array
+ * @param $key
+ * @param $sort_order
+ * @param int $pre_string_sort
+ * @return mixed
  */
 function sort_multi_array($sort_array, $key, $sort_order, $pre_string_sort = 0)
 {
@@ -125,16 +118,20 @@ function sort_multi_array($sort_array, $key, $sort_order, $pre_string_sort = 0)
         $num_iterations = $last_element - $i;
 
         for ($j = 0; $j < $num_iterations; $j++) {
-            $next = 0;
-
             // do checks based on key
             $switch = false;
             if (!$string_sort) {
-                if (($sort_order == 'DESC' && intval(@$sort_array[$j][$key]) < intval(@$sort_array[$j + 1][$key])) || ($sort_order == 'ASC' && intval(@$sort_array[$j][$key]) > intval(@$sort_array[$j + 1][$key]))) {
+                if (
+                    ($sort_order == 'DESC' && intval(@$sort_array[$j][$key]) < intval(@$sort_array[$j + 1][$key])) ||
+                    ($sort_order == 'ASC' && intval(@$sort_array[$j][$key]) > intval(@$sort_array[$j + 1][$key]))
+                ) {
                     $switch = true;
                 }
             } else {
-                if (($sort_order == 'DESC' && strcasecmp(@$sort_array[$j][$key], @$sort_array[$j + 1][$key]) < 0) || ($sort_order == 'ASC' && strcasecmp(@$sort_array[$j][$key], @$sort_array[$j + 1][$key]) > 0)) {
+                if (
+                    ($sort_order == 'DESC' && strcasecmp(@$sort_array[$j][$key], @$sort_array[$j + 1][$key]) < 0) ||
+                    ($sort_order == 'ASC' && strcasecmp(@$sort_array[$j][$key], @$sort_array[$j + 1][$key]) > 0)
+                ) {
                     $switch = true;
                 }
             }
@@ -151,37 +148,47 @@ function sort_multi_array($sort_array, $key, $sort_order, $pre_string_sort = 0)
 }
 
 /**
- * Returns the filesize of the upload directory in human readable format
+ * Returns size of the upload directory in human readable format
+ *
+ * @return string
  */
 function get_formatted_dirsize()
 {
-    global $attach_config, $upload_dir, $lang;
+    global $lang, $upload_dir;
 
     $upload_dir_size = 0;
 
-    if ($dirname = @opendir($upload_dir)) {
-        while ($file = @readdir($dirname)) {
-            if ($file != 'index.php' && $file != '.htaccess' && !is_dir($upload_dir . '/' . $file) && !is_link($upload_dir . '/' . $file)) {
-                $upload_dir_size += @filesize($upload_dir . '/' . $file);
+    if ($dirname = opendir($upload_dir)) {
+        while ($file = readdir($dirname)) {
+            if (
+                $file != 'index.php' &&
+                $file != '.htaccess' &&
+                !is_dir($upload_dir . '/' . $file) &&
+                !is_link($upload_dir . '/' . $file)
+            ) {
+                $upload_dir_size += filesize($upload_dir . '/' . $file);
             }
         }
-        @closedir($dirname);
+        closedir($dirname);
     } else {
-        $upload_dir_size = $lang['NOT_AVAILABLE'];
-        return $upload_dir_size;
+        return $lang['NOT_AVAILABLE'];
     }
 
     return humn_size($upload_dir_size);
 }
 
-/*
-* Build SQL-Statement for the search feature
-*/
+/**
+ * Build SQL statement for the search feature
+ *
+ * @param $order_by
+ * @param $total_rows
+ * @return array
+ */
 function search_attachments($order_by, &$total_rows)
 {
     global $lang;
 
-    $where_sql = array();
+    $where_sql = [];
 
     // Author name search
     $search_author = get_var('search_author', '');
@@ -195,7 +202,6 @@ function search_attachments($order_by, &$total_rows)
 
         // We need the post_id's, because we want to query the Attachment Table
         $sql = 'SELECT user_id FROM ' . BB_USERS . " WHERE username LIKE '$search_author'";
-
         if (!($result = DB()->sql_query($sql))) {
             bb_die('Could not obtain list of matching users (searching for: ' . $search_author . ')');
         }
@@ -257,8 +263,6 @@ function search_attachments($order_by, &$total_rows)
         $where_sql[] = ' (p.forum_id = ' . intval($search_forum) . ') ';
     }
 
-    // Search Cat... nope... sorry :(
-
     $sql = 'SELECT a.*, t.post_id, p.post_time, p.topic_id
 		FROM ' . BB_ATTACHMENTS . ' t, ' . BB_ATTACHMENTS_DESC . ' a, ' . BB_POSTS . ' p WHERE ';
 
@@ -295,14 +299,19 @@ function search_attachments($order_by, &$total_rows)
 }
 
 /**
- * perform LIMIT statement on arrays
+ * Perform limit statement on arrays
+ *
+ * @param $array
+ * @param $start
+ * @param $pagelimit
+ * @return array
  */
 function limit_array($array, $start, $pagelimit)
 {
     // array from start - start+pagelimit
     $limit = (sizeof($array) < ($start + $pagelimit)) ? sizeof($array) : $start + $pagelimit;
 
-    $limit_array = array();
+    $limit_array = [];
 
     for ($i = $start; $i < $limit; $i++) {
         $limit_array[] = $array[$i];
