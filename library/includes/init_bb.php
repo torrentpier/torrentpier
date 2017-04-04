@@ -33,7 +33,7 @@ if (!defined('BB_CFG_LOADED')) {
     trigger_error('File config.php not loaded', E_USER_ERROR);
 }
 
-if (PHP_VERSION < '7.0.8') {
+if (version_compare(PHP_VERSION, '7.0.8', '>')) {
     die('TorrentPier requires PHP version 7.0.8 and above (used code and packages requirement). Your PHP version is ' . PHP_VERSION);
 }
 
