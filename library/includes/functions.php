@@ -348,7 +348,7 @@ function setbit(&$int, $bit_num, $on)
     forum auth levels, this will prevent the auth function having to do its own
     lookup
 */
-function auth($type, $forum_id, $ug_data, $f_access = array(), $group_perm = UG_PERM_BOTH)
+function auth($type, $forum_id, $ug_data, array $f_access = array(), $group_perm = UG_PERM_BOTH)
 {
     global $lang, $bf, $datastore;
 
@@ -1973,7 +1973,7 @@ class log_action
         }
     }
 
-    public function mod($type_name, $args = array())
+    public function mod($type_name, array $args = array())
     {
         global $userdata;
 
@@ -2021,7 +2021,7 @@ class log_action
         DB()->query("INSERT INTO " . BB_LOG . " $sql_args");
     }
 
-    public function admin($type_name, $args = array())
+    public function admin($type_name, array $args = array())
     {
         $this->mod($type_name, $args);
     }
@@ -2255,7 +2255,7 @@ function log_sphinx_error($err_type, $err_msg, $query = '')
     }
 }
 
-function get_title_match_topics($title_match_sql, $forum_ids = array())
+function get_title_match_topics($title_match_sql, array $forum_ids = array())
 {
     global $bb_cfg, $sphinx, $userdata, $title_match, $lang;
 

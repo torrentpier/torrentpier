@@ -103,7 +103,7 @@ class user_common
     /**
      *  Start session (restore existent session or create new)
      */
-    public function session_start($cfg = array())
+    public function session_start(array $cfg = array())
     {
         global $bb_cfg;
 
