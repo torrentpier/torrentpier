@@ -49,9 +49,7 @@ function read_word($fp)
 {
     $data = fread($fp, 2);
 
-    $value = ord($data[1]) * 256 + ord($data[0]);
-
-    return $value;
+    return ord($data[1]) * 256 + ord($data[0]);
 }
 
 /**
@@ -61,9 +59,7 @@ function read_byte($fp)
 {
     $data = fread($fp, 1);
 
-    $value = ord($data);
-
-    return $value;
+    return ord($data);
 }
 
 /**

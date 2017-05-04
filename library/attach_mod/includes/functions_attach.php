@@ -196,9 +196,7 @@ function unlink_attach($filename, $mode = false)
         $filename = $upload_dir . '/' . $filename;
     }
 
-    $deleted = @unlink($filename);
-
-    return $deleted;
+    return @unlink($filename);
 }
 
 /**

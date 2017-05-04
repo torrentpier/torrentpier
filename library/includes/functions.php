@@ -1442,9 +1442,7 @@ function setup_style()
 
     require TEMPLATES_DIR . '/' . $tpl_dir_name . '/tpl_config.php';
 
-    $theme = array('template_name' => $tpl_dir_name);
-
-    return $theme;
+    return array('template_name' => $tpl_dir_name);
 }
 
 // Create date / time with format and friendly date
