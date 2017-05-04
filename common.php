@@ -482,7 +482,7 @@ if (defined('IN_FORUM')) {
     require INC_DIR . '/init_bb.php';
 } // Tracker init
 elseif (defined('IN_TRACKER')) {
-    define('DUMMY_PEER', pack('Nn', ip2long($_SERVER['REMOTE_ADDR']), !empty($_GET['port']) ? intval($_GET['port']) : mt_rand(1000, 65000)));
+    define('DUMMY_PEER', pack('Nn', ip2long($_SERVER['REMOTE_ADDR']), !empty($_GET['port']) ? intval($_GET['port']) : random_int(1000, 65000)));
 
     function dummy_exit($interval = 1800)
     {
@@ -501,7 +501,7 @@ elseif (defined('IN_TRACKER')) {
     if (!defined('IN_ADMIN')) {
         // Exit if tracker is disabled via ON/OFF trigger
         if (file_exists(BB_DISABLED)) {
-            dummy_exit(mt_rand(60, 2400));
+            dummy_exit(random_int(60, 2400));
         }
     }
 }

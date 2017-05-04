@@ -39,7 +39,7 @@ if (isset($_GET['event']) && $_GET['event'] === 'completed') {
     if (DBG_LOG) {
         dbg_log(' ', '!die-event-completed');
     }
-    dummy_exit(mt_rand(600, 1200));
+    dummy_exit(random_int(600, 1200));
 }
 
 $announce_interval = $bb_cfg['announce_interval'];
