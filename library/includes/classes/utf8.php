@@ -2353,7 +2353,7 @@ class utf8
      *
      * @param   array|scalar|null $data
      * @param   string $charset
-     * @return  array|scalar|null  Returns FALSE if error occurred
+     * @return array|bool|null|scalar
      */
     public static function convert_from($data, $charset = 'cp1251')
     {
@@ -2368,7 +2368,7 @@ class utf8
      *
      * @param   array|scalar|null $data
      * @param   string $charset
-     * @return  array|scalar|null  Returns FALSE if error occurred
+     * @return array|bool|null|scalar
      */
     public static function convert_to($data, $charset = 'cp1251')
     {
@@ -2386,7 +2386,7 @@ class utf8
      * @param   array|scalar|null $data
      * @param   string $charset_from
      * @param   string $charset_to
-     * @return  array|scalar|null  Returns FALSE if error occurred
+     * @return array|bool|null|scalar
      */
     private static function _convert($data, $charset_from, $charset_to)
     {
@@ -3013,7 +3013,7 @@ class utf8
      * Converts a UNICODE codepoints to a UTF-8 string
      *
      * @param   array|null $a Unicode codepoints
-     * @return  string|bool|null     UTF-8 string
+     * @return array|bool|null|string
      *                               Returns FALSE if error occurred
      */
     public static function from_unicode($a)
@@ -3262,7 +3262,7 @@ class utf8
      * Convert a data to upper case
      *
      * @param   array|scalar|null $data
-     * @return  scalar|null        Returns FALSE if error occurred
+     * @return bool|null|scalar
      */
     public static function uppercase($data)
     {
@@ -3290,7 +3290,7 @@ class utf8
      * Convert a data to upper case
      *
      * @param   array|scalar|null $data
-     * @return  scalar|null        Returns FALSE if error occurred
+     * @return bool|null|scalar
      */
     public static function strtoupper($data)
     {
@@ -3315,7 +3315,7 @@ class utf8
      *
      * @param   scalar|null $s
      * @param   bool $is_special_chars Дополнительно обрабатывать специальные html сущности? (&lt; &gt; &amp; &quot;)
-     * @return  scalar|null  Returns FALSE if error occurred
+     * @return bool|null|scalar
      */
     public static function html_entity_decode($s, $is_special_chars = false)
     {
@@ -3382,7 +3382,7 @@ class utf8
      *
      * @param   scalar|null $s
      * @param   bool $is_special_chars_only Обрабатывать только специальные html сущности? (&lt; &gt; &amp; &quot;)
-     * @return  scalar|null  Returns FALSE if error occurred
+     * @return bool|null|scalar
      */
     public static function html_entity_encode($s, $is_special_chars_only = false)
     {
@@ -3959,7 +3959,7 @@ class utf8
      *
      * @param   scalar|array|null $data
      * @param   bool $is_rawurlencode
-     * @return  scalar|array|null  Returns FALSE if error occurred
+     * @return array|bool|null|scalar
      */
     public static function unescape($data, $is_rawurlencode = false)
     {
@@ -4161,7 +4161,7 @@ class utf8
     /**
      * @param   scalar|null $s
      * @param   string|null $charlist
-     * @return  scalar|null
+     * @return bool|null|scalar
      */
     public static function trim($s, $charlist = null)
     {
