@@ -907,7 +907,7 @@ class template
                     break;
 
                 case '(':
-                    array_push($is_arg_stack, $i);
+                    $is_arg_stack[] = $i;
                     break;
 
                 case 'is':

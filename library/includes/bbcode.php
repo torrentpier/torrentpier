@@ -256,7 +256,7 @@ function strip_quotes($text)
                 if ($stacksize == 0) {
                     $newtext .= substr($text, $substr_pos, $pos - $substr_pos);
                 }
-                array_push($stack, $pos);
+                $stack[] = $pos;
             } else {
                 // pop off the latest opened tag
                 if ($stacksize) {
