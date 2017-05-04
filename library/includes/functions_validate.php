@@ -71,7 +71,7 @@ function validate_username($username, $check_ban_and_taken = true)
         foreach (DB()->fetch_rowset("SELECT disallow_username FROM " . BB_DISALLOW . " ORDER BY NULL") as $row) {
             $banned_names[] = str_replace('\*', '.*?', preg_quote($row['disallow_username'], '#u'));
         }
-        if ($banned_names_exp = join('|', $banned_names)) {
+        if ($banned_names_exp = implode('|', $banned_names)) {
             if (preg_match("#^($banned_names_exp)$#iu", $username)) {
                 return $lang['USERNAME_DISALLOWED'];
             }
@@ -99,7 +99,7 @@ function validate_email($email, $check_ban_and_taken = true)
         foreach (DB()->fetch_rowset("SELECT ban_email FROM " . BB_BANLIST . " ORDER BY NULL") as $row) {
             $banned_emails[] = str_replace('\*', '.*?', preg_quote($row['ban_email'], '#'));
         }
-        if ($banned_emails_exp = join('|', $banned_emails)) {
+        if ($banned_emails_exp = implode('|', $banned_emails)) {
             if (preg_match("#^($banned_emails_exp)$#i", $email)) {
                 return sprintf($lang['EMAIL_BANNED'], $email);
             }

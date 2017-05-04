@@ -53,7 +53,7 @@ function tracker_exit()
             $str[] = sprintf('%.4f' . LOG_SEPR . '%02d%%', $DBS->sql_timetotal, $sql_total_perc);
             $str[] = $DBS->num_queries;
             $str[] = sprintf('%.1f', sys('la'));
-            $str = join(LOG_SEPR, $str) . LOG_LF;
+            $str = implode(LOG_SEPR, $str) . LOG_LF;
             dbg_log($str, '!!gentime');
         }
     }

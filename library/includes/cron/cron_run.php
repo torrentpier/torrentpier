@@ -73,7 +73,7 @@ foreach ($cron_jobs as $job) {
             $msg[] = sprintf('%-4s', round(sys('la'), 1));
             $msg[] = sprintf('%05d', getmypid());
             $msg[] = $job['cron_title'];
-            $msg = join(LOG_SEPR, $msg);
+            $msg = implode(LOG_SEPR, $msg);
             bb_log($msg . LOG_LF, CRON_LOG_DIR . '/' . CRON_LOG_FILE);
         }
 
@@ -97,7 +97,7 @@ foreach ($cron_jobs as $job) {
             $msg[] = sprintf('%-4s', round(sys('la'), 1));
             $msg[] = sprintf('%05d', getmypid());
             $msg[] = round(utime() - $cron_start_time) . '/' . round(utime() - TIMESTART) . ' sec';
-            $msg = join(LOG_SEPR, $msg);
+            $msg = implode(LOG_SEPR, $msg);
             $msg .= LOG_LF . '------=-------=----------=------=-------=----------';
             bb_log($msg . LOG_LF, CRON_LOG_DIR . '/' . CRON_LOG_FILE);
 

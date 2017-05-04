@@ -263,7 +263,7 @@ print_page('index.tpl', 'admin');
 // Functions
 function inarray($needle, $haystack)
 {
-    for ($i = 0; $i < sizeof($haystack); $i++) {
+    for ($i = 0; $i < count($haystack); $i++) {
         if ($haystack[$i] == $needle) {
             return true;
         }

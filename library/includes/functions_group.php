@@ -32,7 +32,7 @@ function update_user_level($user_id)
     global $datastore;
 
     if (is_array($user_id)) {
-        $user_id = join(',', $user_id);
+        $user_id = implode(',', $user_id);
     }
     $user_groups_in = ($user_id !== 'all') ? "AND ug.user_id IN($user_id)" : '';
     $users_in = ($user_id !== 'all') ? "AND  u.user_id IN($user_id)" : '';
@@ -203,7 +203,7 @@ function store_permissions($group_id, $auth_ary)
 function update_user_permissions($user_id = 'all')
 {
     if (is_array($user_id)) {
-        $user_id = join(',', $user_id);
+        $user_id = implode(',', $user_id);
     }
     $delete_in = ($user_id !== 'all') ? " WHERE user_id IN($user_id)" : '';
     $users_in = ($user_id !== 'all') ? "AND ug.user_id IN($user_id)" : '';

@@ -396,12 +396,12 @@ class template
         if (strstr($blockname, '.')) {
             // Nested block.
             $blocks = explode('.', $blockname);
-            $blockcount = sizeof($blocks) - 1;
+            $blockcount = count($blocks) - 1;
 
             $str = &$this->_tpldata;
             for ($i = 0; $i < $blockcount; $i++) {
                 $str = &$str[$blocks[$i] . '.'];
-                $str = &$str[sizeof($str) - 1];
+                $str = &$str[count($str) - 1];
             }
             // Now we add the block that we're actually assigning to.
             // We're adding a new iteration to this block with the given
@@ -517,7 +517,7 @@ class template
     {
         // Get an array of the blocks involved.
         $blocks = explode('.', $blockname);
-        $blockcount = sizeof($blocks) - 1;
+        $blockcount = count($blocks) - 1;
         if ($include_last_iterator) {
             return '$' . $blocks[$blockcount] . '_item';
         } else {
@@ -686,7 +686,7 @@ class template
                 } else {
                     // This block is nested.
                     // Generate a namespace string for this block.
-                    $namespace = join('.', $block_names);
+                    $namespace = implode('.', $block_names);
                     // strip leading period from root level..
                     $namespace = substr($namespace, 2);
                     // Get a reference to the data array for this block that depends on the
@@ -806,7 +806,7 @@ class template
         $code_header = '';
         $code_footer = '';
 
-        return $code_header . join('', $compiled) . $code_footer;
+        return $code_header . implode('', $compiled) . $code_footer;
     }
 
     /*
@@ -821,7 +821,7 @@ class template
         // This one will handle varrefs WITH namespaces
         $varrefs = array();
         preg_match_all('#\{(([a-z0-9\-_]+?\.)+)([a-z0-9\-_]+?)\}#is', $code, $varrefs);
-        $varcount = sizeof($varrefs[1]);
+        $varcount = count($varrefs[1]);
         $search = array();
         $replace = array();
         for ($i = 0; $i < $varcount; $i++) {
@@ -912,7 +912,7 @@ class template
 
                 case 'is':
                     $is_arg_start = ($tokens[$i - 1] == ')') ? array_pop($is_arg_stack) : $i - 1;
-                    $is_arg = join('	', array_slice($tokens, $is_arg_start, $i - $is_arg_start));
+                    $is_arg = implode('	', array_slice($tokens, $is_arg_start, $i - $is_arg_start));
 
                     $new_tokens = $this->_parse_is_expr($is_arg, array_slice($tokens, $i + 1));
 
@@ -948,9 +948,9 @@ class template
         }
 
         if ($elseif) {
-            $code = '} elseif (' . join(' ', $tokens) . ') {';
+            $code = '} elseif (' . implode(' ', $tokens) . ') {';
         } else {
-            $code = 'if (' . join(' ', $tokens) . ') {';
+            $code = 'if (' . implode(' ', $tokens) . ') {';
         }
 
         return $code;

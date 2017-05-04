@@ -51,7 +51,7 @@ $sql = DB()->fetch_rowset("SELECT ban_userid FROM " . BB_BANLIST . " WHERE ban_u
 foreach ($sql as $row) {
     $ban_user_id[] = ',' . $row['ban_userid'];
 }
-$ban_user_id = join('', $ban_user_id);
+$ban_user_id = implode('', $ban_user_id);
 
 $user_list = DB()->fetch_rowset("
 	SELECT DISTINCT dl.user_id, u.user_opt, tr.user_id as active_dl

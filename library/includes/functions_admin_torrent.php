@@ -47,7 +47,7 @@ function update_table_bool($table_name, $key, $field_name, $field_def_val)
         }
 
         // Update status
-        if ($in_sql = join(',', $in_sql)) {
+        if ($in_sql = implode(',', $in_sql)) {
             $sql = "UPDATE $table_name
 				SET $field_name = 1
 				WHERE $key IN($in_sql)";

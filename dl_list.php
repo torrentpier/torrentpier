@@ -128,7 +128,7 @@ if ($mode == 'set_topics_dl_status') {
 }
 
 // Get existing topics
-if ($req_topics_sql = join(',', $req_topics_ary)) {
+if ($req_topics_sql = implode(',', $req_topics_ary)) {
     $sql = "SELECT topic_id FROM " . BB_TOPICS . " WHERE topic_id IN($req_topics_sql)";
 
     foreach (DB()->fetch_rowset($sql) as $row) {

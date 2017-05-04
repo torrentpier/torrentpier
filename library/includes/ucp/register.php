@@ -147,7 +147,7 @@ switch ($mode) {
         } else {
             $pr_user_id = $userdata['user_id'];
         }
-        $profile_fields_sql = join(', ', array_keys($profile_fields));
+        $profile_fields_sql = implode(', ', array_keys($profile_fields));
         $sql = "
 			SELECT
 				user_id,
@@ -679,7 +679,7 @@ $template->assign_vars($tp_data);
 $template->assign_vars(array(
     'PAGE_TITLE' => ($mode == 'editprofile') ? $lang['EDIT_PROFILE'] . ($adm_edit ? " :: {$pr_data['username']}" : '') : $lang['REGISTER'],
     'SHOW_REG_AGREEMENT' => ($mode == 'register' && !IS_ADMIN),
-    'ERROR_MESSAGE' => ($errors) ? join('<br />', array_unique($errors)) : '',
+    'ERROR_MESSAGE' => ($errors) ? implode('<br />', array_unique($errors)) : '',
     'MODE' => $mode,
     'EDIT_PROFILE' => ($mode == 'editprofile'),
     'ADM_EDIT' => $adm_edit,

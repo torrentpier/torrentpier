@@ -394,12 +394,12 @@ function add_search_words($post_id, $post_message, $topic_title = '', $only_retu
 
     if ($only_return_words || $bb_cfg['search_engine_type'] == 'sphinx') {
         return join("\n", $words);
-    } else {
-        DB()->query("DELETE FROM " . BB_POSTS_SEARCH . " WHERE post_id = $post_id");
+    }
 
-        if ($words_sql = DB()->escape(join("\n", $words))) {
-            DB()->query("REPLACE INTO " . BB_POSTS_SEARCH . " (post_id, search_words) VALUES ($post_id, '$words_sql')");
-        }
+    DB()->query("DELETE FROM " . BB_POSTS_SEARCH . " WHERE post_id = $post_id");
+
+    if ($words_sql = DB()->escape(implode("\n", $words))) {
+        DB()->query("REPLACE INTO " . BB_POSTS_SEARCH . " (post_id, search_words) VALUES ($post_id, '$words_sql')");
     }
 }
 

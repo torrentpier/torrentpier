@@ -676,7 +676,7 @@ class user_common
             }
         }
 
-        return join(',', $not_auth_forums);
+        return implode(',', $not_auth_forums);
     }
 
     /**
@@ -709,7 +709,7 @@ class user_common
 
         switch ($return_as) {
             case   'csv':
-                return join(',', $excluded);
+                return implode(',', $excluded);
             case 'array':
                 return $excluded;
             case  'flip':

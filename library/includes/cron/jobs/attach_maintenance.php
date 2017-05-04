@@ -66,13 +66,13 @@ if ($dir = @opendir($attach_dir)) {
         $f_len += strlen($f) + 5;
 
         if ($f_len > $db_max_packet) {
-            $files = join(',', $files);
+            $files = implode(',', $files);
             DB()->query("INSERT INTO $tmp_attach_tbl VALUES $files");
             $files = array();
             $f_len = 0;
         }
     }
-    if ($files = join(',', $files)) {
+    if ($files = implode(',', $files)) {
         DB()->query("INSERT INTO $tmp_attach_tbl VALUES $files");
     }
     closedir($dir);
@@ -154,7 +154,7 @@ if ($check_attachments) {
         $orphan_db_attach[] = $row['attach_id'];
     }
     // Delete all orphan attachments
-    if ($orphans_sql = join(',', $orphan_db_attach)) {
+    if ($orphans_sql = implode(',', $orphan_db_attach)) {
         if ($fix_errors) {
             DB()->query("DELETE FROM " . BB_ATTACHMENTS_DESC . " WHERE attach_id IN($orphans_sql)");
             DB()->query("DELETE FROM " . BB_ATTACHMENTS . " WHERE attach_id IN($orphans_sql)");
@@ -172,7 +172,7 @@ if ($check_attachments) {
         $orphan_tor[] = $row['topic_id'];
     }
     // Delete all orphan torrents
-    if ($orphans_sql = join(',', $orphan_tor)) {
+    if ($orphans_sql = implode(',', $orphan_tor)) {
         if ($fix_errors) {
             DB()->query("DELETE FROM " . BB_BT_TORRENTS . " WHERE topic_id IN($orphans_sql)");
         }
@@ -188,7 +188,7 @@ if ($check_attachments) {
     foreach (DB()->fetch_rowset($sql) as $row) {
         $posts_without_attach[] = $row['post_id'];
     }
-    if ($posts_sql = join(',', $posts_without_attach)) {
+    if ($posts_sql = implode(',', $posts_without_attach)) {
         if ($fix_errors) {
             DB()->query("UPDATE " . BB_POSTS . " SET post_attachment = 0 WHERE post_id IN($posts_sql)");
         }
@@ -204,7 +204,7 @@ if ($check_attachments) {
     foreach (DB()->fetch_rowset($sql) as $row) {
         $topics_without_attach[] = $row['topic_id'];
     }
-    if ($topics_sql = join(',', $topics_without_attach)) {
+    if ($topics_sql = implode(',', $topics_without_attach)) {
         if ($fix_errors) {
             DB()->query("UPDATE " . BB_TOPICS . " SET topic_attachment = 0 WHERE topic_id IN($topics_sql)");
         }

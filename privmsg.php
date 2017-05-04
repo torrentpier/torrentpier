@@ -504,7 +504,7 @@ if ($mode == 'read') {
 
         if (count($mark_list)) {
             $delete_sql_id = '';
-            for ($i = 0; $i < sizeof($mark_list); $i++) {
+            for ($i = 0; $i < count($mark_list); $i++) {
                 $delete_sql_id .= (($delete_sql_id != '') ? ', ' : '') . intval($mark_list[$i]);
             }
 
@@ -544,7 +544,7 @@ if ($mode == 'read') {
                         }
                     } while ($row = DB()->sql_fetchrow($result));
 
-                    if (sizeof($update_users)) {
+                    if (count($update_users)) {
                         while (list($type, $users) = each($update_users)) {
                             while (list($user_id, $dec) = each($users)) {
                                 $update_list[$type][$dec][] = $user_id;
@@ -564,7 +564,7 @@ if ($mode == 'read') {
                             }
 
                             while (list($dec, $user_ary) = each($dec_ary)) {
-                                $user_ids = join(', ', $user_ary);
+                                $user_ids = implode(', ', $user_ary);
 
                                 $sql = "UPDATE " . BB_USERS . "
 									SET $type = $type - $dec
@@ -624,7 +624,7 @@ if ($mode == 'read') {
         }
     }
 } elseif ($save && $mark_list && $folder != 'savebox' && $folder != 'outbox') {
-    if (sizeof($mark_list)) {
+    if (count($mark_list)) {
         // See if recipient is at their savebox limit
         $sql = "SELECT COUNT(privmsgs_id) AS savebox_items, MIN(privmsgs_date) AS oldest_post_time
 			FROM " . BB_PRIVMSGS . "
@@ -663,7 +663,7 @@ if ($mode == 'read') {
         }
 
         $saved_sql_id = '';
-        for ($i = 0; $i < sizeof($mark_list); $i++) {
+        for ($i = 0; $i < count($mark_list); $i++) {
             $saved_sql_id .= (($saved_sql_id != '') ? ', ' : '') . intval($mark_list[$i]);
         }
 
@@ -707,7 +707,7 @@ if ($mode == 'read') {
                     }
                 } while ($row = DB()->sql_fetchrow($result));
 
-                if (sizeof($update_users)) {
+                if (count($update_users)) {
                     while (list($type, $users) = each($update_users)) {
                         while (list($user_id, $dec) = each($users)) {
                             $update_list[$type][$dec][] = $user_id;
@@ -727,7 +727,7 @@ if ($mode == 'read') {
                         }
 
                         while (list($dec, $user_ary) = each($dec_ary)) {
-                            $user_ids = join(', ', $user_ary);
+                            $user_ids = implode(', ', $user_ary);
 
                             $sql = "UPDATE " . BB_USERS . " SET $type = $type - $dec WHERE user_id IN ($user_ids)";
                             if (!DB()->sql_query($sql)) {

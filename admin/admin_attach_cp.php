@@ -394,7 +394,7 @@ if ($view === 'attachments') {
         $attachments = search_attachments($order_by, $total_rows);
     }
 
-    if (sizeof($attachments) > 0) {
+    if (count($attachments) > 0) {
         for ($i = 0, $iMax = count($attachments); $i < $iMax; $i++) {
             $delete_box = '<input type="checkbox" name="delete_id_list[]" value="' . intval($attachments[$i]['attach_id']) . '" />';
 

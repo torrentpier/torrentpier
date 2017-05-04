@@ -390,13 +390,13 @@ if (!$items_found) {
         $forum_selected = get_id_ary($var);
 
         if (!in_array($search_all, $forum_selected)) {
-            $forum_val = join(',', $forum_selected);
+            $forum_val = implode(',', $forum_selected);
         }
     }
 
     // Topic
     if ($var =& $_REQUEST[$topic_key]) {
-        $topic_val = join(',', get_id_ary($var));
+        $topic_val = implode(',', get_id_ary($var));
     }
 
     // Poster id (from requested name or id)
@@ -442,7 +442,7 @@ if ($dl_down_val) {
 if ($dl_will_val) {
     $dl_status[] = DL_STATUS_WILL;
 }
-$dl_status_csv = join(',', $dl_status);
+$dl_status_csv = implode(',', $dl_status);
 
 // Switches
 $dl_search = ($dl_status && !IS_GUEST);
@@ -526,7 +526,7 @@ if ($post_mode) {
             $search_match_topics_csv = '';
             $title_match_topics = get_title_match_topics($text_match_sql, $forum_selected);
 
-            if (!$search_match_topics_csv = join(',', $title_match_topics)) {
+            if (!$search_match_topics_csv = implode(',', $title_match_topics)) {
                 bb_die($lang['NO_SEARCH_MATCH']);
             }
 
@@ -565,7 +565,7 @@ if ($post_mode) {
 		 LEFT JOIN $posts_html_tbl ON(h.post_id = pt.post_id)
 		INNER JOIN $users_tbl      ON(u.user_id = p.poster_id)
 		WHERE
-		      p.post_id IN(" . join(',', $items_display) . ")
+		      p.post_id IN(" . implode(',', $items_display) . ")
 		    $excluded_forums_sql
 		LIMIT $per_page
 	";
@@ -729,7 +729,7 @@ else {
             $search_match_topics_csv = '';
             $title_match_topics = get_title_match_topics($text_match_sql, $forum_selected);
 
-            if (!$search_match_topics_csv = join(',', $title_match_topics)) {
+            if (!$search_match_topics_csv = implode(',', $title_match_topics)) {
                 bb_die($lang['NO_SEARCH_MATCH']);
             }
 
@@ -787,7 +787,7 @@ else {
         $SQL['LEFT JOIN'][] = BB_BT_DLSTATUS . " dl ON(dl.user_id = $user_id AND dl.topic_id = t.topic_id)";
     }
 
-    $SQL['WHERE'][] = "t.topic_id IN(" . join(',', $items_display) . ")";
+    $SQL['WHERE'][] = "t.topic_id IN(" . implode(',', $items_display) . ")";
     if ($excluded_forums_csv) {
         $SQL['WHERE'][] = "t.forum_id NOT IN($excluded_forums_csv)";
     }
@@ -882,7 +882,7 @@ function fetch_search_ids($sql, $search_type = SEARCH_TYPE_POST)
     $search_id = make_rand_str(SEARCH_ID_LENGTH);
 
     if ($items_count > $per_page) {
-        $search_array = join(',', $items_found);
+        $search_array = implode(',', $items_found);
 
         $save_in_db = array(
             'order',

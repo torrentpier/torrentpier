@@ -318,7 +318,7 @@ function user_notification($mode, &$post_data, &$topic_title, &$forum_id, &$topi
             foreach ($sql as $row) {
                 $user_id_sql[] = ',' . $row['ban_userid'];
             }
-            $user_id_sql = join('', $user_id_sql);
+            $user_id_sql = implode('', $user_id_sql);
 
             $watch_list = DB()->fetch_rowset("SELECT u.username, u.user_id, u.user_email, u.user_lang
 				FROM " . BB_TOPICS_WATCH . " tw, " . BB_USERS . " u
@@ -362,7 +362,7 @@ function user_notification($mode, &$post_data, &$topic_title, &$forum_id, &$topi
 
                     $update_watched_sql[] = $row['user_id'];
                 }
-                $update_watched_sql = join(',', $update_watched_sql);
+                $update_watched_sql = implode(',', $update_watched_sql);
             }
 
             if ($update_watched_sql) {

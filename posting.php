@@ -241,7 +241,7 @@ if (!$is_auth[$is_auth_type]) {
 }
 
 if ($mode == 'new_rel') {
-    if ($tor_status = join(',', $bb_cfg['tor_cannot_new'])) {
+    if ($tor_status = implode(',', $bb_cfg['tor_cannot_new'])) {
         $sql = DB()->fetch_rowset("SELECT t.topic_title, t.topic_id, tor.tor_status
 			FROM " . BB_BT_TORRENTS . " tor, " . BB_TOPICS . " t
 			WHERE poster_id = {$userdata['user_id']}
@@ -404,7 +404,7 @@ if (($delete || $mode == 'delete') && !$confirm) {
                         }
                     }
                     $sub_forums[] = $forum_id;
-                    $sub_forums = join(',', $sub_forums);
+                    $sub_forums = implode(',', $sub_forums);
                     // Подсчет проверенных релизов в форумах раздела
                     $count_checked_releases = DB()->fetch_row("
 						SELECT COUNT(*) AS checked_releases
