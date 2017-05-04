@@ -393,7 +393,7 @@ class template
      */
     public function assign_block_vars($blockname, $vararray)
     {
-        if (strstr($blockname, '.')) {
+        if (false !== strpos($blockname, '.')) {
             // Nested block.
             $blocks = explode('.', $blockname);
             $blockcount = count($blocks) - 1;
