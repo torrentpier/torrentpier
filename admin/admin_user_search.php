@@ -437,7 +437,7 @@ if (!isset($_REQUEST['dosearch'])) {
         case 'search_joindate':
             $base_url .= '&search_joindate=true&date_type=' . rawurlencode($date_type) . '&date_day=' . rawurlencode($date_day) . '&date_month=' . rawurlencode($date_month) . '&date_year=' . rawurlencode(stripslashes($date_year));
 
-            $date_type = trim(strtolower($date_type));
+            $date_type = strtolower(trim($date_type));
 
             if ($date_type != 'before' && $date_type != 'after') {
                 bb_die($lang['SEARCH_INVALID_DATE']);
@@ -543,8 +543,8 @@ if (!isset($_REQUEST['dosearch'])) {
             break;
 
         case 'search_postcount':
-            $postcount_type = trim(strtolower($postcount_type));
-            $postcount_value = trim(strtolower($postcount_value));
+            $postcount_type = strtolower(trim($postcount_type));
+            $postcount_value = strtolower(trim($postcount_value));
 
             $base_url .= '&search_postcount=true&postcount_type=' . rawurlencode($postcount_type) . '&postcount_value=' . rawurlencode(stripslashes($postcount_value));
 
@@ -634,7 +634,7 @@ if (!isset($_REQUEST['dosearch'])) {
                 bb_die($lang['SEARCH_INVALID_USERFIELD']);
             }
 
-            $userfield_type = trim(strtolower($userfield_type));
+            $userfield_type = strtolower(trim($userfield_type));
 
             switch ($userfield_type) {
                 case 'icq':
@@ -679,7 +679,7 @@ if (!isset($_REQUEST['dosearch'])) {
             break;
 
         case 'search_lastvisited':
-            $lastvisited_type = trim(strtolower($lastvisited_type));
+            $lastvisited_type = strtolower(trim($lastvisited_type));
             $lastvisited_days = intval($lastvisited_days);
 
             $base_url .= '&search_lastvisited=true&lastvisited_type=' . rawurlencode(stripslashes($lastvisited_type)) . '&lastvisited_days=' . rawurlencode($lastvisited_days);
@@ -718,7 +718,7 @@ if (!isset($_REQUEST['dosearch'])) {
         case 'search_language':
             $base_url .= '&search_language=true&language_type=' . rawurlencode(stripslashes($language_type));
 
-            $language_type = trim(strtolower(stripslashes($language_type)));
+            $language_type = strtolower(trim(stripslashes($language_type)));
 
             if ($language_type == '') {
                 bb_die($lang['SEARCH_INVALID_LANGUAGE']);
@@ -789,7 +789,7 @@ if (!isset($_REQUEST['dosearch'])) {
 
         case 'search_misc':
         default:
-            $misc = trim(strtolower($misc));
+            $misc = strtolower(trim($misc));
 
             $base_url .= '&search_misc=true&misc=' . rawurlencode(stripslashes($misc));
 
