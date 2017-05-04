@@ -273,7 +273,7 @@ class sql_db
         $row = mysqli_fetch_assoc($result);
 
         if ($field_name) {
-            return isset($row[$field_name]) ? $row[$field_name] : false;
+            return $row[$field_name] ?? false;
         }
 
         return $row;

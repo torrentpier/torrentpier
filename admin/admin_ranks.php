@@ -33,7 +33,7 @@ $_POST['special_rank'] = 1;
 $_POST['min_posts'] = -1;
 
 if (isset($_GET['mode']) || isset($_POST['mode'])) {
-    $mode = isset($_GET['mode']) ? $_GET['mode'] : $_POST['mode'];
+    $mode = $_GET['mode'] ?? $_POST['mode'];
 } else {
     //
     // These could be entered via a form button

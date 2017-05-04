@@ -566,8 +566,7 @@ class user_common
         }
 
         require(LANG_DIR . 'main.php');
-        setlocale(LC_ALL, isset($bb_cfg['lang'][$this->data['user_lang']]['locale']) ?
-            $bb_cfg['lang'][$this->data['user_lang']]['locale'] : 'en_US.UTF-8');
+        setlocale(LC_ALL, $bb_cfg['lang'][$this->data['user_lang']]['locale'] ?? 'en_US.UTF-8');
 
         $theme = setup_style();
         $DeltaTime = new Date_Delta();

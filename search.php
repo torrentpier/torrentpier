@@ -89,7 +89,7 @@ $tracking_forums = get_tracks('forum');
 if ($mode =& $_REQUEST['mode']) {
     // This handles the simple windowed user search functions called from various other scripts
     if ($mode == 'searchuser') {
-        $username = isset($_POST['search_username']) ? $_POST['search_username'] : '';
+        $username = $_POST['search_username'] ?? '';
         username_search($username);
         exit;
     }

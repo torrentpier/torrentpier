@@ -30,21 +30,21 @@ if (!defined('BB_ROOT')) {
 function get_path_from_id($id, $ext_id, $base_path, $first_div, $sec_div)
 {
     global $bb_cfg;
-    $ext = isset($bb_cfg['file_id_ext'][$ext_id]) ? $bb_cfg['file_id_ext'][$ext_id] : '';
+    $ext = $bb_cfg['file_id_ext'][$ext_id] ?? '';
     return ($base_path ? "$base_path/" : '') . floor($id / $first_div) . '/' . ($id % $sec_div) . '/' . $id . ($ext ? ".$ext" : '');
 }
 
 function get_avatar_path($id, $ext_id, $base_path = null, $first_div = 10000, $sec_div = 100)
 {
     global $bb_cfg;
-    $base_path = isset($base_path) ? $base_path : $bb_cfg['avatars']['upload_path'];
+    $base_path = $base_path ?? $bb_cfg['avatars']['upload_path'];
     return get_path_from_id($id, $ext_id, $base_path, $first_div, $sec_div);
 }
 
 function get_attach_path($id, $ext_id = '', $base_path = null, $first_div = 10000, $sec_div = 100)
 {
     global $bb_cfg;
-    $base_path = isset($base_path) ? $base_path : $bb_cfg['attach']['upload_path'];
+    $base_path = $base_path ?? $bb_cfg['attach']['upload_path'];
     return get_path_from_id($id, $ext_id, $base_path, $first_div, $sec_div);
 }
 
@@ -120,8 +120,8 @@ function get_last_read($topic_id = 0, $forum_id = 0)
 {
     global $tracking_topics, $tracking_forums, $user;
 
-    $t = isset($tracking_topics[$topic_id]) ? $tracking_topics[$topic_id] : 0;
-    $f = isset($tracking_forums[$forum_id]) ? $tracking_forums[$forum_id] : 0;
+    $t = $tracking_topics[$topic_id] ?? 0;
+    $f = $tracking_forums[$forum_id] ?? 0;
     return max($t, $f, $user->data['user_lastvisit']);
 }
 
@@ -1017,7 +1017,7 @@ function request_var($var_name, $default, $multibyte = false, $cookie = false)
         if (!isset($_GET[$var_name]) && !isset($_POST[$var_name])) {
             return (is_array($default)) ? array() : $default;
         }
-        $_REQUEST[$var_name] = isset($_POST[$var_name]) ? $_POST[$var_name] : $_GET[$var_name];
+        $_REQUEST[$var_name] = $_POST[$var_name] ?? $_GET[$var_name];
     }
 
     if (!isset($_REQUEST[$var_name]) || (is_array($_REQUEST[$var_name]) && !is_array($default)) || (is_array($default) && !is_array($_REQUEST[$var_name]))) {
@@ -1723,7 +1723,7 @@ function bb_realpath($path)
 
 function login_redirect($url = '')
 {
-    redirect(LOGIN_URL . '?redirect=' . (($url) ?: (isset($_SERVER['REQUEST_URI']) ? $_SERVER['REQUEST_URI'] : '/')));
+    redirect(LOGIN_URL . '?redirect=' . (($url) ?: ($_SERVER['REQUEST_URI'] ?? '/')));
 }
 
 function meta_refresh($url, $time = 5)
@@ -1792,7 +1792,7 @@ function get_forum_display_sort_option($selected_row = 0, $action = 'list', $lis
     if ($action == 'list') {
         for ($i = 0; $i < count($listrow['lang_key']); $i++) {
             $selected = ($i == $selected_row) ? ' selected="selected"' : '';
-            $l_value = (isset($lang[$listrow['lang_key'][$i]])) ? $lang[$listrow['lang_key'][$i]] : $listrow['lang_key'][$i];
+            $l_value = $lang[$listrow['lang_key'][$i]] ?? $listrow['lang_key'][$i];
             $res .= '<option value="' . $i . '"' . $selected . '>' . $l_value . '</option>';
         }
     } else {

@@ -56,7 +56,7 @@ $template->assign_vars(array(
 
 // Define show peers mode (count only || user names with complete % || full details)
 $cfg_sp_mode = $bb_cfg['bt_show_peers_mode'];
-$get_sp_mode = (isset($_GET['spmode'])) ? $_GET['spmode'] : '';
+$get_sp_mode = $_GET['spmode'] ?? '';
 
 $s_mode = 'count';
 
@@ -185,7 +185,7 @@ if ($tor_reged && $tor_info) {
 
     $bt_userdata = DB()->fetch_row($sql);
 
-    $user_status = isset($bt_userdata['user_status']) ? $bt_userdata['user_status'] : null;
+    $user_status = $bt_userdata['user_status'] ?? null;
 
     if (($min_ratio_dl || $min_ratio_warn) && $user_status != DL_STATUS_COMPLETE && $bt_user_id != $poster_id && $tor_type != TOR_TYPE_GOLD) {
         if (($user_ratio = get_bt_ratio($bt_userdata)) !== null) {

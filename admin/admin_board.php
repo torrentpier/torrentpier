@@ -31,7 +31,7 @@ if (!empty($setmodules)) {
 require __DIR__ . '/pagestart.php';
 require INC_DIR . '/functions_selects.php';
 
-$mode = isset($_GET['mode']) ? $_GET['mode'] : '';
+$mode = $_GET['mode'] ?? '';
 
 $return_links = array(
     'index' => '<br /><br />' . sprintf($lang['CLICK_RETURN_ADMIN_INDEX'], '<a href="index.php?pane=right">', '</a>'),
@@ -51,7 +51,7 @@ if (!$result = DB()->sql_query($sql)) {
         $config_value = $row['config_value'];
         $default_config[$config_name] = $config_value;
 
-        $new[$config_name] = isset($_POST[$config_name]) ? $_POST[$config_name] : $default_config[$config_name];
+        $new[$config_name] = $_POST[$config_name] ?? $default_config[$config_name];
 
         if (isset($_POST['submit']) && $row['config_value'] != $new[$config_name]) {
             if ($config_name == 'seed_bonus_points' || $config_name == 'seed_bonus_release' || $config_name == 'bonus_upload' || $config_name == 'bonus_upload_price') {

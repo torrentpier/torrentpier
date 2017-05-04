@@ -165,7 +165,7 @@ class ReflectionTypeHint
             }
 
             // Next frame.
-            $next = isset($trace[$i + 1]) ? $trace[$i + 1] : null;
+            $next = $trace[$i + 1] ?? null;
 
             // Dummy frame before call_user_func*() frames.
             if (!isset($t['file']) && $next) {
@@ -184,7 +184,7 @@ class ReflectionTypeHint
             if ($re_ignore && $next) {
                 // Name of function "inside which" frame was generated.
                 $frame_caller = (isset($next['class']) ? $next['class'] . $next['type'] : '')
-                    . (isset($next['function']) ? $next['function'] : '');
+                    . ($next['function'] ?? '');
                 if (preg_match($re_ignore, $frame_caller)) {
                     continue;
                 }

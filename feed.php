@@ -30,9 +30,9 @@ require __DIR__ . '/common.php';
 
 $user->session_start(array('req_login' => true));
 
-$mode = isset($_REQUEST['mode']) ? $_REQUEST['mode'] : '';
-$type = isset($_POST['type']) ? $_POST['type'] : '';
-$id = isset($_POST['id']) ? $_POST['id'] : 0;
+$mode = $_REQUEST['mode'] ?? '';
+$type = $_POST['type'] ?? '';
+$id = $_POST['id'] ?? 0;
 $timecheck = TIMENOW - 600;
 
 if (!$mode) {

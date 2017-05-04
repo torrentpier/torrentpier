@@ -1060,14 +1060,14 @@ class template
             $this->xs_started = 1;
             // adding language variable (eg: "english" or "german")
             // can be used to make truly multi-lingual templates
-            $this->vars['LANG'] = isset($this->vars['LANG']) ? $this->vars['LANG'] : $bb_cfg['default_lang'];
+            $this->vars['LANG'] = $this->vars['LANG'] ?? $bb_cfg['default_lang'];
             // adding current template
             $tpl = $this->root . '/';
             if (substr($tpl, 0, 2) === './') {
                 $tpl = substr($tpl, 2, strlen($tpl));
             }
-            $this->vars['TEMPLATE'] = isset($this->vars['TEMPLATE']) ? $this->vars['TEMPLATE'] : $tpl;
-            $this->vars['TEMPLATE_NAME'] = isset($this->vars['TEMPLATE_NAME']) ? $this->vars['TEMPLATE_NAME'] : $this->tpl;
+            $this->vars['TEMPLATE'] = $this->vars['TEMPLATE'] ?? $tpl;
+            $this->vars['TEMPLATE_NAME'] = $this->vars['TEMPLATE_NAME'] ?? $this->tpl;
         }
     }
 

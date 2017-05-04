@@ -2846,9 +2846,9 @@ class utf8
         }
         if ($is_converted) {
             $_REQUEST =
-                (isset($_COOKIE) ? $_COOKIE : array()) +
-                (isset($_POST) ? $_POST : array()) +
-                (isset($_GET) ? $_GET : array());
+                ($_COOKIE ?? array()) +
+                ($_POST ?? array()) +
+                ($_GET ?? array());
         }
         return true;
     }
@@ -4049,13 +4049,13 @@ class utf8
     {
         $fixed = false;
         #ATTENTION! HTTP_RAW_POST_DATA is only accessible when Content-Type of POST request is NOT default "application/x-www-form-urlencoded"!
-        $HTTP_RAW_POST_DATA = isset($_SERVER['REQUEST_METHOD']) && $_SERVER['REQUEST_METHOD'] === 'POST' ? (isset($GLOBALS['HTTP_RAW_POST_DATA']) ? $GLOBALS['HTTP_RAW_POST_DATA'] : @file_get_contents('php://input')) : null;
+        $HTTP_RAW_POST_DATA = isset($_SERVER['REQUEST_METHOD']) && $_SERVER['REQUEST_METHOD'] === 'POST' ? ($GLOBALS['HTTP_RAW_POST_DATA'] ?? @file_get_contents('php://input')) : null;
         if (ini_get('always_populate_raw_post_data')) {
             $GLOBALS['HTTP_RAW_POST_DATA'] = $HTTP_RAW_POST_DATA;
         }
-        foreach (array('_GET' => isset($_SERVER['QUERY_STRING']) ? $_SERVER['QUERY_STRING'] : null,
+        foreach (array('_GET' => $_SERVER['QUERY_STRING'] ?? null,
                      '_POST' => $HTTP_RAW_POST_DATA,
-                     '_COOKIE' => isset($_SERVER['HTTP_COOKIE']) ? $_SERVER['HTTP_COOKIE'] : null,
+                     '_COOKIE' => $_SERVER['HTTP_COOKIE'] ?? null,
                  ) as $k => $v) {
             if (!is_string($v)) {
                 continue;
@@ -4077,9 +4077,9 @@ class utf8
         }
         if ($fixed) {
             $_REQUEST =
-                (isset($_COOKIE) ? $_COOKIE : array()) +
-                (isset($_POST) ? $_POST : array()) +
-                (isset($_GET) ? $_GET : array());
+                ($_COOKIE ?? array()) +
+                ($_POST ?? array()) +
+                ($_GET ?? array());
         }
     }
 

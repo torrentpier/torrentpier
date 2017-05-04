@@ -576,8 +576,8 @@ if ($mode) {
             $move_down_forum_id = false;
             $forums = $cat_forums[$cat_id]['f_ord'];
             $forum_order = $forum_info['forum_order'];
-            $prev_forum = (isset($forums[$forum_order - 10])) ? $forums[$forum_order - 10] : false;
-            $next_forum = (isset($forums[$forum_order + 10])) ? $forums[$forum_order + 10] : false;
+            $prev_forum = $forums[$forum_order - 10] ?? false;
+            $next_forum = $forums[$forum_order + 10] ?? false;
 
             // move selected forum ($forum_id) UP
             if ($move < 0 && $prev_forum) {

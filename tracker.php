@@ -713,8 +713,8 @@ if ($allowed_forums) {
         $passkey = DB()->fetch_row("SELECT auth_key FROM " . BB_BT_USERS . " WHERE user_id = " . (int)$user_id . " LIMIT 1");
         // Build torrents table
         foreach (DB()->fetch_rowset($sql) as $tor) {
-            $dl = isset($tor['speed_down']) ? $tor['speed_down'] : 0;
-            $ul = isset($tor['speed_up']) ? $tor['speed_up'] : 0;
+            $dl = $tor['speed_down'] ?? 0;
+            $ul = $tor['speed_up'] ?? 0;
 
             $seeds = $tor['seeders'];
             $leechs = $tor['leechers'];
