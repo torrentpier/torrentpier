@@ -31,9 +31,9 @@ class cache_memcache extends cache_common
 {
     public $used = true;
     public $engine = 'Memcache';
-    public $cfg = null;
-    public $prefix = null;
-    public $memcache = null;
+    public $cfg;
+    public $prefix;
+    public $memcache;
     public $connected = false;
 
     public function __construct($cfg, $prefix = null)
@@ -50,12 +50,12 @@ class cache_memcache extends cache_common
 
     public function connect()
     {
-        $connect_type = ($this->cfg['pconnect']) ? 'pconnect' : 'connect';
+        $connect_type = $this->cfg['pconnect'] ? 'pconnect' : 'connect';
 
         $this->cur_query = $connect_type . ' ' . $this->cfg['host'] . ':' . $this->cfg['port'];
         $this->debug('start');
 
-        if (@$this->memcache->$connect_type($this->cfg['host'], $this->cfg['port'])) {
+        if ($this->memcache->$connect_type($this->cfg['host'], $this->cfg['port'])) {
             $this->connected = true;
         }
 
@@ -83,10 +83,10 @@ class cache_memcache extends cache_common
         $this->cur_query = null;
         $this->num_queries++;
 
-        return ($this->connected) ? $this->memcache->get($this->prefix . $name) : false;
+        return $this->connected ? $this->memcache->get($this->prefix . $name) : false;
     }
 
-    public function set($name, $value, $ttl = 0)
+    public function set($name, $value, $ttl = 0): bool
     {
         if (!$this->connected) {
             $this->connect();
@@ -98,7 +98,7 @@ class cache_memcache extends cache_common
         $this->cur_query = null;
         $this->num_queries++;
 
-        return ($this->connected) ? $this->memcache->set($this->prefix . $name, $value, false, $ttl) : false;
+        return $this->connected ? $this->memcache->set($this->prefix . $name, $value, false, $ttl) : false;
     }
 
     public function rm($name = '')
@@ -114,13 +114,13 @@ class cache_memcache extends cache_common
             $this->cur_query = null;
             $this->num_queries++;
 
-            return ($this->connected) ? $this->memcache->delete($this->prefix . $name, 0) : false;
-        } else {
-            return ($this->connected) ? $this->memcache->flush() : false;
+            return $this->connected ? $this->memcache->delete($this->prefix . $name, 0) : false;
         }
+
+        return ($this->connected) ? $this->memcache->flush() : false;
     }
 
-    public function is_installed()
+    public function is_installed(): bool
     {
         return class_exists('Memcache');
     }

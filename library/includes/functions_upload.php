@@ -59,7 +59,7 @@ class upload_common
         8 => 'tiff',
     );
 
-    public function init($cfg = array(), $post_params = array(), $uploaded_only = true)
+    public function init(array $cfg = array(), array $post_params = array(), $uploaded_only = true): bool
     {
         global $bb_cfg, $lang;
 
@@ -129,13 +129,15 @@ class upload_common
         return true;
     }
 
-    public function store($mode = '', $params = array())
+    public function store($mode = '', array $params = array())
     {
         if ($mode == 'avatar') {
             delete_avatar($params['user_id'], $params['avatar_ext_id']);
             $file_path = get_avatar_path($params['user_id'], $this->file_ext_id);
             return $this->_move($file_path);
-        } elseif ($mode == 'attach') {
+        }
+
+        if ($mode == 'attach') {
             $file_path = get_attach_path($params['topic_id']);
             return $this->_move($file_path);
         } else {
@@ -143,7 +145,7 @@ class upload_common
         }
     }
 
-    public function _move($file_path)
+    public function _move($file_path): bool
     {
         $dir = dirname($file_path);
         if (!file_exists($dir)) {

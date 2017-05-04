@@ -29,7 +29,7 @@ if (!defined('IN_AJAX')) {
 
 global $lang, $user;
 
-if (!$user_id = intval($this->request['user_id']) or !$profiledata = get_userdata($user_id)) {
+if (!$user_id = (int)$this->request['user_id'] or !$profiledata = get_userdata($user_id)) {
     $this->ajax_die("invalid user_id: $user_id");
 }
 
@@ -49,7 +49,7 @@ switch ($mode) {
 				";
         $html = array();
         foreach (DB()->fetch_rowset($sql) as $row) {
-            $class = ($row['user_pending']) ? 'med' : 'med bold';
+            $class = $row['user_pending'] ? 'med' : 'med bold';
             $class .= ($row['group_moderator'] == $user_id) ? ' colorMod' : '';
             $href = "group.php?g={$row['group_id']}";
 
@@ -71,7 +71,7 @@ switch ($mode) {
             }
         }
         if ($html) {
-            $this->response['group_list_html'] = '<ul><li>' . join('</li><li>', $html) . '</li></ul>';
+            $this->response['group_list_html'] = '<ul><li>' . implode('</li><li>', $html) . '</li></ul>';
         } else {
             $this->response['group_list_html'] = $lang['GROUP_LIST_HIDDEN'];
         }

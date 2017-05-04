@@ -46,7 +46,7 @@ if ($logged_in) {
 // Online userlist
 if (defined('SHOW_ONLINE') && SHOW_ONLINE) {
     $online_full = !empty($_REQUEST['online_full']);
-    $online_list = ($online_full) ? 'online_' . $userdata['user_lang'] : 'online_short_' . $userdata['user_lang'];
+    $online_list = $online_full ? 'online_' . $userdata['user_lang'] : 'online_short_' . $userdata['user_lang'];
 
     ${$online_list} = array(
         'stat' => '',
@@ -125,17 +125,16 @@ $template->assign_vars(array(
 // The following assigns all _common_ variables that may be used at any point in a template
 $template->assign_vars(array(
     'SIMPLE_HEADER' => !empty($gen_simple_header),
-    'CONTENT_ENCODING' => isset($bb_cfg['lang'][$userdata['user_lang']]['encoding']) ?
-        $bb_cfg['lang'][$userdata['user_lang']]['encoding'] : 'utf-8',
+    'CONTENT_ENCODING' => $bb_cfg['lang'][$userdata['user_lang']]['encoding'] ?? 'utf-8',
 
     'IN_ADMIN' => defined('IN_ADMIN'),
-    'SHOW_ADS' => (!$logged_in || isset($bb_cfg['show_ads_users'][$user->id]) || (!IS_AM && $user->show_ads)),
-    'USER_HIDE_CAT' => (BB_SCRIPT == 'index'),
+    'SHOW_ADS' => !$logged_in || isset($bb_cfg['show_ads_users'][$user->id]) || (!IS_AM && $user->show_ads),
+    'USER_HIDE_CAT' => BB_SCRIPT == 'index',
 
     'USER_LANG' => $userdata['user_lang'],
 
     'INCLUDE_BBCODE_JS' => !empty($page_cfg['include_bbcode_js']),
-    'USER_OPTIONS_JS' => (IS_GUEST) ? '{}' : json_encode($user->opt_js),
+    'USER_OPTIONS_JS' => IS_GUEST ? '{}' : json_encode($user->opt_js),
 
     'USE_TABLESORTER' => !empty($page_cfg['use_tablesorter']),
 
@@ -153,7 +152,7 @@ $template->assign_vars(array(
     'FULL_URL' => FULL_URL,
 
     'CURRENT_TIME' => sprintf($lang['CURRENT_TIME'], bb_date(TIMENOW, $bb_cfg['last_visit_date_format'], false)),
-    'S_TIMEZONE' => preg_replace('/\(.*?\)/', '', sprintf($lang['ALL_TIMES'], $lang['TZ'][str_replace(',', '.', floatval($bb_cfg['board_timezone']))])),
+    'S_TIMEZONE' => preg_replace('/\(.*?\)/', '', sprintf($lang['ALL_TIMES'], $lang['TZ'][str_replace(',', '.', (float)$bb_cfg['board_timezone'])])),
     'BOARD_TIMEZONE' => $bb_cfg['board_timezone'],
 
     'PM_INFO' => $pm_info,
@@ -184,8 +183,8 @@ $template->assign_vars(array(
     'U_TERMS' => $bb_cfg['terms_and_conditions_url'],
     'U_TRACKER' => "tracker.php",
 
-    'SHOW_SIDEBAR1' => (!empty($page_cfg['show_sidebar1'][BB_SCRIPT]) || $bb_cfg['show_sidebar1_on_every_page']),
-    'SHOW_SIDEBAR2' => (!empty($page_cfg['show_sidebar2'][BB_SCRIPT]) || $bb_cfg['show_sidebar2_on_every_page']),
+    'SHOW_SIDEBAR1' => !empty($page_cfg['show_sidebar1'][BB_SCRIPT]) || $bb_cfg['show_sidebar1_on_every_page'],
+    'SHOW_SIDEBAR2' => !empty($page_cfg['show_sidebar2'][BB_SCRIPT]) || $bb_cfg['show_sidebar2_on_every_page'],
 
     'HTML_AGREEMENT' => LANG_DIR . 'html/user_agreement.html',
     'HTML_COPYRIGHT' => LANG_DIR . 'html/copyright_holders.html',
@@ -248,7 +247,7 @@ if (!empty($page_cfg['show_torhelp'][BB_SCRIPT]) && !empty($userdata['torhelp'])
         }
 
         $template->assign_vars(array(
-            'TORHELP_TOPICS' => join("</li>\n<li>", $torhelp_topics),
+            'TORHELP_TOPICS' => implode("</li>\n<li>", $torhelp_topics),
         ));
     }
 }
@@ -265,7 +264,7 @@ if ($user->show_ads) {
 }
 
 // Login box
-$in_out = ($logged_in) ? 'in' : 'out';
+$in_out = $logged_in ? 'in' : 'out';
 $template->assign_block_vars("switch_user_logged_{$in_out}", array());
 
 if (!IS_GUEST) {

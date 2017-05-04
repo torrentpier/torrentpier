@@ -27,11 +27,11 @@ if (!empty($setmodules)) {
     $module['GENERAL']['SMILIES'] = basename(__FILE__);
     return;
 }
-require('./pagestart.php');
+require './pagestart.php';
 
 // Check to see what mode we should operate in
 if (isset($_POST['mode']) || isset($_GET['mode'])) {
-    $mode = (isset($_POST['mode'])) ? $_POST['mode'] : $_GET['mode'];
+    $mode = $_POST['mode'] ?? $_GET['mode'];
     $mode = htmlspecialchars($mode);
 } else {
     $mode = '';
@@ -126,7 +126,7 @@ if (isset($_GET['import_pack']) || isset($_POST['import_pack'])) {
     } else {
         // Display the script to get the smile_pak cfg file
         $smile_paks_select = '<select name="smile_pak"><option value="">' . $lang['SELECT_PAK'] . '</option>';
-        while (list($key, $value) = @each($smiley_paks)) {
+        while (list($key, $value) = each($smiley_paks)) {
             if (!empty($value)) {
                 $smile_paks_select .= '<option>' . $value . '</option>';
             }
@@ -190,7 +190,7 @@ if (isset($_GET['import_pack']) || isset($_POST['import_pack'])) {
     switch ($mode) {
         case 'delete':
             $smiley_id = (!empty($_POST['id'])) ? $_POST['id'] : $_GET['id'];
-            $smiley_id = intval($smiley_id);
+            $smiley_id = (int)$smiley_id;
 
             $sql = "DELETE FROM " . BB_SMILIES . " WHERE smilies_id = " . $smiley_id;
             $result = DB()->sql_query($sql);
@@ -204,7 +204,7 @@ if (isset($_GET['import_pack']) || isset($_POST['import_pack'])) {
 
         case 'edit':
             $smiley_id = (!empty($_POST['id'])) ? $_POST['id'] : $_GET['id'];
-            $smiley_id = intval($smiley_id);
+            $smiley_id = (int)$smiley_id;
 
             $sql = "SELECT * FROM " . BB_SMILIES . " WHERE smilies_id = " . $smiley_id;
             $result = DB()->sql_query($sql);
@@ -244,7 +244,7 @@ if (isset($_GET['import_pack']) || isset($_POST['import_pack'])) {
             $smile_url = (isset($_POST['smile_url'])) ? trim($_POST['smile_url']) : trim($_GET['smile_url']);
             $smile_url = bb_ltrim(basename($smile_url), "'");
             $smile_emotion = (isset($_POST['smile_emotion'])) ? trim($_POST['smile_emotion']) : trim($_GET['smile_emotion']);
-            $smile_id = (isset($_POST['smile_id'])) ? intval($_POST['smile_id']) : intval($_GET['smile_id']);
+            $smile_id = (isset($_POST['smile_id'])) ? (int)$_POST['smile_id'] : (int)$_GET['smile_id'];
 
             // If no code was entered complain
             if ($smile_code == '' || $smile_url == '') {
@@ -268,10 +268,10 @@ if (isset($_GET['import_pack']) || isset($_POST['import_pack'])) {
             break;
 
         case 'savenew':
-            $smile_code = (isset($_POST['smile_code'])) ? $_POST['smile_code'] : $_GET['smile_code'];
-            $smile_url = (isset($_POST['smile_url'])) ? $_POST['smile_url'] : $_GET['smile_url'];
+            $smile_code = $_POST['smile_code'] ?? $_GET['smile_code'];
+            $smile_url = $_POST['smile_url'] ?? $_GET['smile_url'];
             $smile_url = bb_ltrim(basename($smile_url), "'");
-            $smile_emotion = (isset($_POST['smile_emotion'])) ? $_POST['smile_emotion'] : $_GET['smile_emotion'];
+            $smile_emotion = $_POST['smile_emotion'] ?? $_GET['smile_emotion'];
             $smile_code = trim($smile_code);
             $smile_url = trim($smile_url);
             $smile_emotion = trim($smile_emotion);

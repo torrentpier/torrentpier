@@ -208,8 +208,10 @@ class attach_parent
     /**
      * Handle all modes... (intern)
      * @private
+     * @param $mode
+     * @return bool
      */
-    public function handle_attachments($mode)
+    public function handle_attachments($mode): bool
     {
         global $is_auth, $attach_config, $refresh, $post_id, $submit, $preview, $error, $error_msg, $lang;
 
@@ -390,7 +392,7 @@ class attach_parent
                             } else {
                                 $sql = 'UPDATE ' . BB_ATTACHMENTS_DESC . ' SET thumbnail = 0 WHERE attach_id = ' . (int) $actual_id_list[$i];
 
-                                if (!(DB()->sql_query($sql))) {
+                                if (!DB()->sql_query($sql)) {
                                     bb_die('Unable to update ' . BB_ATTACHMENTS_DESC);
                                 }
                             }
@@ -469,7 +471,7 @@ class attach_parent
                         $sql = 'UPDATE ' . BB_ATTACHMENTS_DESC . ' SET ' . attach_mod_sql_build_array('UPDATE', $sql_ary) . '
 							WHERE attach_id = ' . (int) $attachment_id;
 
-                        if (!(DB()->sql_query($sql))) {
+                        if (!DB()->sql_query($sql)) {
                             bb_die('Unable to update the attachment');
                         }
 
@@ -534,6 +536,10 @@ class attach_parent
 
     /**
      * Basic Insert Attachment Handling for all Message Types
+     * @param $mode
+     * @param $message_type
+     * @param $message_id
+     * @return bool
      */
     public function do_insert_attachment($mode, $message_type, $message_id)
     {
@@ -546,7 +552,7 @@ class attach_parent
         global $post_info, $userdata;
 
         $post_id = (int) $message_id;
-        $user_id_1 = (isset($post_info['poster_id'])) ? (int) $post_info['poster_id'] : 0;
+        $user_id_1 = isset($post_info['poster_id']) ? (int) $post_info['poster_id'] : 0;
 
         if (!$user_id_1) {
             $user_id_1 = (int) $userdata['user_id'];
@@ -563,10 +569,10 @@ class attach_parent
 
                     // update entry in db if attachment already stored in db and filespace
                     $sql = 'UPDATE ' . BB_ATTACHMENTS_DESC . "
-						SET comment = '" . @attach_mod_sql_escape($this->attachment_comment_list[$i]) . "'
+						SET comment = '" . attach_mod_sql_escape($this->attachment_comment_list[$i]) . "'
 						WHERE attach_id = " . $this->attachment_id_list[$i];
 
-                    if (!(DB()->sql_query($sql))) {
+                    if (!DB()->sql_query($sql)) {
                         bb_die('Unable to update the file comment');
                     }
                 } else {
@@ -578,7 +584,7 @@ class attach_parent
                     $sql_ary = array(
                         'physical_filename' => (string) basename($this->attachment_list[$i]),
                         'real_filename' => (string) basename($this->attachment_filename_list[$i]),
-                        'comment' => (string) @$this->attachment_comment_list[$i],
+                        'comment' => (string)$this->attachment_comment_list[$i],
                         'extension' => (string) strtolower($this->attachment_extension_list[$i]),
                         'mimetype' => (string) strtolower($this->attachment_mimetype_list[$i]),
                         'filesize' => (int) $this->attachment_filesize_list[$i],
@@ -588,7 +594,7 @@ class attach_parent
 
                     $sql = 'INSERT INTO ' . BB_ATTACHMENTS_DESC . ' ' . attach_mod_sql_build_array('INSERT', $sql_ary);
 
-                    if (!(DB()->sql_query($sql))) {
+                    if (!DB()->sql_query($sql)) {
                         bb_die('Could not store Attachment.<br />Your ' . $message_type . ' has been stored');
                     }
 
@@ -608,7 +614,7 @@ class attach_parent
 
                     $sql = 'INSERT INTO ' . BB_ATTACHMENTS . ' ' . attach_mod_sql_build_array('INSERT', $sql_ary);
 
-                    if (!(DB()->sql_query($sql))) {
+                    if (!DB()->sql_query($sql)) {
                         bb_die('Could not store Attachment.<br />Your ' . $message_type . ' has been stored');
                     }
                 }
@@ -634,7 +640,7 @@ class attach_parent
                 $sql = 'INSERT INTO ' . BB_ATTACHMENTS_DESC . ' ' . attach_mod_sql_build_array('INSERT', $sql_ary);
 
                 // Inform the user that his post has been created, but nothing is attached
-                if (!(DB()->sql_query($sql))) {
+                if (!DB()->sql_query($sql)) {
                     bb_die('Could not store Attachment.<br />Your ' . $message_type . ' has been stored');
                 }
 
@@ -648,7 +654,7 @@ class attach_parent
 
                 $sql = 'INSERT INTO ' . BB_ATTACHMENTS . ' ' . attach_mod_sql_build_array('INSERT', $sql_ary);
 
-                if (!(DB()->sql_query($sql))) {
+                if (!DB()->sql_query($sql)) {
                     bb_die('Could not store Attachment.<br />Your ' . $message_type . ' has been stored');
                 }
             }
@@ -685,10 +691,10 @@ class attach_parent
                 $hidden .= '<input type="hidden" name="filename_list[]" value="' . $this->attachment_filename_list[$i] . '" />';
                 $hidden .= '<input type="hidden" name="extension_list[]" value="' . $this->attachment_extension_list[$i] . '" />';
                 $hidden .= '<input type="hidden" name="mimetype_list[]" value="' . $this->attachment_mimetype_list[$i] . '" />';
-                $hidden .= '<input type="hidden" name="filesize_list[]" value="' . @$this->attachment_filesize_list[$i] . '" />';
-                $hidden .= '<input type="hidden" name="filetime_list[]" value="' . @$this->attachment_filetime_list[$i] . '" />';
-                $hidden .= '<input type="hidden" name="attach_id_list[]" value="' . @$this->attachment_id_list[$i] . '" />';
-                $hidden .= '<input type="hidden" name="attach_thumbnail_list[]" value="' . @$this->attachment_thumbnail_list[$i] . '" />';
+                $hidden .= '<input type="hidden" name="filesize_list[]" value="' . $this->attachment_filesize_list[$i] . '" />';
+                $hidden .= '<input type="hidden" name="filetime_list[]" value="' . $this->attachment_filetime_list[$i] . '" />';
+                $hidden .= '<input type="hidden" name="attach_id_list[]" value="' . $this->attachment_id_list[$i] . '" />';
+                $hidden .= '<input type="hidden" name="attach_thumbnail_list[]" value="' . $this->attachment_thumbnail_list[$i] . '" />';
 
                 if (!$this->posted_attachments_body || !$this->attachment_list) {
                     $hidden .= '<input type="hidden" name="comment_list[]" value="' . $this->attachment_comment_list[$i] . '" />';
@@ -713,17 +719,17 @@ class attach_parent
             ));
 
             for ($i = 0, $iMax = count($this->attachment_list); $i < $iMax; $i++) {
-                if (@$this->attachment_id_list[$i] == 0) {
+                if ($this->attachment_id_list[$i] == 0) {
                     $download_link = $upload_dir . '/' . basename($this->attachment_list[$i]);
                 } else {
                     $download_link = BB_ROOT . DOWNLOAD_URL . $this->attachment_id_list[$i];
                 }
 
                 $template->assign_block_vars('attach_row', array(
-                    'FILE_NAME' => @htmlspecialchars($this->attachment_filename_list[$i]),
-                    'ATTACH_FILENAME' => @$this->attachment_list[$i],
-                    'FILE_COMMENT' => @htmlspecialchars($this->attachment_comment_list[$i]),
-                    'ATTACH_ID' => @$this->attachment_id_list[$i],
+                    'FILE_NAME' => htmlspecialchars($this->attachment_filename_list[$i]),
+                    'ATTACH_FILENAME' => $this->attachment_list[$i],
+                    'FILE_COMMENT' => htmlspecialchars($this->attachment_comment_list[$i]),
+                    'ATTACH_ID' => $this->attachment_id_list[$i],
                     'U_VIEW_ATTACHMENT' => $download_link,
                 ));
 
@@ -732,7 +738,7 @@ class attach_parent
                     $template->assign_block_vars('attach_row.switch_thumbnail', array());
                 }
 
-                if (@$this->attachment_id_list[$i]) {
+                if ($this->attachment_id_list[$i]) {
                     $template->assign_block_vars('attach_row.switch_update_attachment', array());
                 }
             }
@@ -778,7 +784,7 @@ class attach_parent
             $row = DB()->sql_fetchrow($result);
             DB()->sql_freeresult($result);
 
-            $allowed_filesize = $row['max_filesize'] ? $row['max_filesize'] : $attach_config['max_filesize'];
+            $allowed_filesize = $row['max_filesize'] ?: $attach_config['max_filesize'];
             $cat_id = (int) $row['cat_id'];
             $auth_cache = trim($row['forum_permissions']);
 
@@ -1114,6 +1120,7 @@ class attach_posting extends attach_parent
 
     /**
      * Insert an Attachment into a Post (this is the second function called from posting.php)
+     * @param $post_id
      */
     public function insert_attachment($post_id)
     {
@@ -1127,7 +1134,7 @@ class attach_posting extends attach_parent
             if ((count($this->attachment_list) > 0 || $this->post_attach) && !isset($_POST['update_attachment'])) {
                 $sql = 'UPDATE ' . BB_POSTS . ' SET post_attachment = 1 WHERE post_id = ' . (int) $post_id;
 
-                if (!(DB()->sql_query($sql))) {
+                if (!DB()->sql_query($sql)) {
                     bb_die('Unable to update posts table');
                 }
 
@@ -1142,7 +1149,7 @@ class attach_posting extends attach_parent
 
                 $sql = 'UPDATE ' . BB_TOPICS . ' SET topic_attachment = 1 WHERE topic_id = ' . (int) $row['topic_id'];
 
-                if (!(DB()->sql_query($sql))) {
+                if (!DB()->sql_query($sql)) {
                     bb_die('Unable to update topics table');
                 }
             }

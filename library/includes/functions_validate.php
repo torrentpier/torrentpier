@@ -40,7 +40,9 @@ function validate_username($username, $check_ban_and_taken = true)
     // Length
     if (mb_strlen($username, 'UTF-8') > USERNAME_MAX_LENGTH) {
         return $lang['USERNAME_TOO_LONG'];
-    } elseif (mb_strlen($username, 'UTF-8') < USERNAME_MIN_LENGTH) {
+    }
+
+    if (mb_strlen($username, 'UTF-8') < USERNAME_MIN_LENGTH) {
         return $lang['USERNAME_TOO_SMALL'];
     }
     // Allowed symbols
@@ -71,7 +73,7 @@ function validate_username($username, $check_ban_and_taken = true)
         foreach (DB()->fetch_rowset("SELECT disallow_username FROM " . BB_DISALLOW . " ORDER BY NULL") as $row) {
             $banned_names[] = str_replace('\*', '.*?', preg_quote($row['disallow_username'], '#u'));
         }
-        if ($banned_names_exp = join('|', $banned_names)) {
+        if ($banned_names_exp = implode('|', $banned_names)) {
             if (preg_match("#^($banned_names_exp)$#iu", $username)) {
                 return $lang['USERNAME_DISALLOWED'];
             }
@@ -99,7 +101,7 @@ function validate_email($email, $check_ban_and_taken = true)
         foreach (DB()->fetch_rowset("SELECT ban_email FROM " . BB_BANLIST . " ORDER BY NULL") as $row) {
             $banned_emails[] = str_replace('\*', '.*?', preg_quote($row['ban_email'], '#'));
         }
-        if ($banned_emails_exp = join('|', $banned_emails)) {
+        if ($banned_emails_exp = implode('|', $banned_emails)) {
             if (preg_match("#^($banned_emails_exp)$#i", $email)) {
                 return sprintf($lang['EMAIL_BANNED'], $email);
             }
@@ -110,9 +112,9 @@ function validate_email($email, $check_ban_and_taken = true)
         if ($row = DB()->fetch_row("SELECT `user_email` FROM " . BB_USERS . " WHERE user_email = '$email_sql' LIMIT 1")) {
             if ($row['user_email'] == $userdata['user_email']) {
                 return false;
-            } else {
-                return $lang['EMAIL_TAKEN'];
             }
+
+            return $lang['EMAIL_TAKEN'];
         }
     }
 

@@ -29,14 +29,14 @@ if (!defined('IN_AJAX')) {
 
 global $bb_cfg, $userdata, $lang;
 
-if (!$group_id = intval($this->request['group_id']) or !$group_info = get_group_data($group_id)) {
+if (!$group_id = (int)$this->request['group_id'] or !$group_info = get_group_data($group_id)) {
     $this->ajax_die($lang['NO_GROUP_ID_SPECIFIED']);
 }
 if (!$mode = (string)$this->request['mode']) {
     $this->ajax_die('No mode specified');
 }
 
-$value = $this->request['value'] = (string)(isset($this->request['value'])) ? $this->request['value'] : 0;
+$value = $this->request['value'] = (string)isset($this->request['value']) ? $this->request['value'] : 0;
 
 if (!IS_ADMIN && $userdata['user_id'] != $group_info['group_moderator']) {
     $this->ajax_die($lang['ONLY_FOR_MOD']);

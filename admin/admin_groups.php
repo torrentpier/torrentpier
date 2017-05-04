@@ -30,8 +30,8 @@ if (!empty($setmodules)) {
 require __DIR__ . '/pagestart.php';
 require INC_DIR . '/functions_group.php';
 
-$group_id = isset($_REQUEST[POST_GROUPS_URL]) ? intval($_REQUEST[POST_GROUPS_URL]) : 0;
-$mode = isset($_REQUEST['mode']) ? strval($_REQUEST['mode']) : '';
+$group_id = isset($_REQUEST[POST_GROUPS_URL]) ? (int)$_REQUEST[POST_GROUPS_URL] : 0;
+$mode = isset($_REQUEST['mode']) ? (string)$_REQUEST['mode'] : '';
 
 attachment_quota_settings('group', isset($_POST['group_update']), $mode);
 
@@ -82,7 +82,7 @@ if (!empty($_POST['edit']) || !empty($_POST['new'])) {
         'S_GROUP_OPEN_CHECKED' => ($group_info['group_type'] == GROUP_OPEN) ? HTML_CHECKED : '',
         'S_GROUP_CLOSED_CHECKED' => ($group_info['group_type'] == GROUP_CLOSED) ? HTML_CHECKED : '',
         'S_GROUP_HIDDEN_CHECKED' => ($group_info['group_type'] == GROUP_HIDDEN) ? HTML_CHECKED : '',
-        'RELEASE_GROUP' => ($group_info['release_group']) ? true : false,
+        'RELEASE_GROUP' => $group_info['release_group'] ? true : false,
         'S_GROUP_ACTION' => "admin_groups.php",
         'S_HIDDEN_FIELDS' => $s_hidden_fields,
     ));
@@ -100,11 +100,11 @@ if (!empty($_POST['edit']) || !empty($_POST['new'])) {
 
         bb_die($message);
     } else {
-        $group_type = isset($_POST['group_type']) ? intval($_POST['group_type']) : GROUP_OPEN;
-        $release_group = isset($_POST['release_group']) ? intval($_POST['release_group']) : 0;
+        $group_type = isset($_POST['group_type']) ? (int)$_POST['group_type'] : GROUP_OPEN;
+        $release_group = isset($_POST['release_group']) ? (int)$_POST['release_group'] : 0;
         $group_name = isset($_POST['group_name']) ? trim($_POST['group_name']) : '';
         $group_desc = isset($_POST['group_description']) ? trim($_POST['group_description']) : '';
-        $group_moderator = isset($_POST['username']) ? $_POST['username'] : '';
+        $group_moderator = $_POST['username'] ?? '';
 
         if ($group_name === '') {
             bb_die($lang['NO_GROUP_NAME']);

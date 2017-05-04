@@ -29,7 +29,7 @@ if (!empty($setmodules)) {
     $module['ATTACHMENTS']['EXTENSION_GROUP_MANAGE'] = $filename . '?mode=groups';
     return;
 }
-require('./pagestart.php');
+require './pagestart.php';
 
 function update_attach_extensions()
 {
@@ -57,7 +57,7 @@ $size = get_var('size', '');
 $mode = get_var('mode', '');
 $e_mode = get_var('e_mode', '');
 
-$submit = (isset($_POST['submit'])) ? true : false;
+$submit = isset($_POST['submit']) ? true : false;
 
 // Get Attachment Config
 $attach_config = array();
@@ -83,9 +83,9 @@ if ($submit && $mode == 'extensions') {
     // Generate correct Change List
     $extensions = array();
 
-    for ($i = 0; $i < sizeof($extension_change_list); $i++) {
+    for ($i = 0; $i < count($extension_change_list); $i++) {
         $extensions['_' . $extension_change_list[$i]]['comment'] = $extension_explain_list[$i];
-        $extensions['_' . $extension_change_list[$i]]['group_id'] = intval($group_select_list[$i]);
+        $extensions['_' . $extension_change_list[$i]]['group_id'] = (int)$group_select_list[$i];
     }
 
     $sql = 'SELECT * FROM ' . BB_EXTENSIONS . ' ORDER BY ext_id';
@@ -98,8 +98,8 @@ if ($submit && $mode == 'extensions') {
     DB()->sql_freeresult($result);
 
     if ($num_rows > 0) {
-        for ($i = 0; $i < sizeof($extension_row); $i++) {
-            if ($extension_row[$i]['comment'] != $extensions['_' . $extension_row[$i]['ext_id']]['comment'] || intval($extension_row[$i]['group_id']) != intval($extensions['_' . $extension_row[$i]['ext_id']]['group_id'])) {
+        for ($i = 0; $i < count($extension_row); $i++) {
+            if ($extension_row[$i]['comment'] != $extensions['_' . $extension_row[$i]['ext_id']]['comment'] || (int)$extension_row[$i]['group_id'] != (int)$extensions['_' . $extension_row[$i]['ext_id']]['group_id']) {
                 $sql_ary = array(
                     'comment' => (string)$extensions['_' . $extension_row[$i]['ext_id']]['comment'],
                     'group_id' => (int)$extensions['_' . $extension_row[$i]['ext_id']]['group_id']
@@ -132,7 +132,7 @@ if ($submit && $mode == 'extensions') {
     $extension = get_var('add_extension', '');
     $extension_explain = get_var('add_extension_explain', '');
     $extension_group = get_var('add_group_select', 0);
-    $add = (isset($_POST['add_extension_check'])) ? true : false;
+    $add = isset($_POST['add_extension_check']) ? true : false;
 
     if ($extension != '' && $add) {
         $template->assign_vars(array(
@@ -140,7 +140,7 @@ if ($submit && $mode == 'extensions') {
             'ADD_EXTENSION_EXPLAIN' => $extension_explain,
         ));
 
-        if (!@$error) {
+        if (!$error) {
             // check extension
             $sql = 'SELECT extension FROM ' . BB_EXTENSIONS;
 
@@ -164,7 +164,7 @@ if ($submit && $mode == 'extensions') {
                 }
             }
 
-            if (!@$error) {
+            if (!$error) {
                 $sql_ary = array(
                     'group_id' => (int)$extension_group,
                     'extension' => (string)strtolower($extension),
@@ -180,7 +180,7 @@ if ($submit && $mode == 'extensions') {
         }
     }
 
-    if (!@$error) {
+    if (!$error) {
         bb_die($lang['ATTACH_CONFIG_UPDATED'] . '<br /><br />' . sprintf($lang['CLICK_RETURN_ATTACH_CONFIG'], '<a href="admin_extensions.php?mode=extensions">', '</a>') . '<br /><br />' . sprintf($lang['CLICK_RETURN_ADMIN_INDEX'], '<a href="index.php?pane=right">', '</a>'));
     }
 }
@@ -250,16 +250,16 @@ if ($submit && $mode == 'groups') {
 
     $allowed_list = array();
 
-    for ($i = 0; $i < sizeof($group_allowed_list); $i++) {
-        for ($j = 0; $j < sizeof($group_change_list); $j++) {
+    for ($i = 0; $i < count($group_allowed_list); $i++) {
+        for ($j = 0; $j < count($group_change_list); $j++) {
             if ($group_allowed_list[$i] == $group_change_list[$j]) {
                 $allowed_list[$j] = 1;
             }
         }
     }
 
-    for ($i = 0; $i < sizeof($group_change_list); $i++) {
-        $allowed = (isset($allowed_list[$i])) ? 1 : 0;
+    for ($i = 0; $i < count($group_change_list); $i++) {
+        $allowed = isset($allowed_list[$i]) ? 1 : 0;
 
         $filesize_list[$i] = ($size_select_list[$i] == 'kb') ? round($filesize_list[$i] * 1024) : (($size_select_list[$i] == 'mb') ? round($filesize_list[$i] * 1048576) : $filesize_list[$i]);
 
@@ -275,7 +275,7 @@ if ($submit && $mode == 'groups') {
         $sql = 'UPDATE ' . BB_EXTENSION_GROUPS . ' SET ' . attach_mod_sql_build_array('UPDATE', $sql_ary) . '
 			WHERE group_id = ' . (int)$group_change_list[$i];
 
-        if (!(DB()->sql_query($sql))) {
+        if (!DB()->sql_query($sql)) {
             bb_die('Could not update extension groups informations');
         }
     }
@@ -312,8 +312,8 @@ if ($submit && $mode == 'groups') {
     $filesize = get_var('add_max_filesize', 0);
     $size_select = get_var('add_size_select', '');
 
-    $is_allowed = (isset($_POST['add_allowed'])) ? 1 : 0;
-    $add = (isset($_POST['add_extension_group_check'])) ? true : false;
+    $is_allowed = isset($_POST['add_allowed']) ? 1 : 0;
+    $add = isset($_POST['add_extension_group_check']) ? true : false;
 
     if ($extension_group != '' && $add) {
         // check Extension Group
@@ -339,7 +339,7 @@ if ($submit && $mode == 'groups') {
             }
         }
 
-        if (!@$error) {
+        if (!$error) {
             $filesize = ($size_select == 'kb') ? round($filesize * 1024) : (($size_select == 'mb') ? round($filesize * 1048576) : $filesize);
 
             $sql_ary = array(
@@ -354,13 +354,13 @@ if ($submit && $mode == 'groups') {
 
             $sql = 'INSERT INTO ' . BB_EXTENSION_GROUPS . ' ' . attach_mod_sql_build_array('INSERT', $sql_ary);
 
-            if (!(DB()->sql_query($sql))) {
+            if (!DB()->sql_query($sql)) {
                 bb_die('Could not add extension group');
             }
         }
     }
 
-    if (!@$error) {
+    if (!$error) {
         bb_die($lang['ATTACH_CONFIG_UPDATED'] . '<br /><br />' . sprintf($lang['CLICK_RETURN_ATTACH_CONFIG'], '<a href="admin_extensions.php?mode=groups">', '</a>') . '<br /><br />' . sprintf($lang['CLICK_RETURN_ADMIN_INDEX'], '<a href="index.php?pane=right">', '</a>'));
     }
 }
@@ -383,7 +383,7 @@ if ($mode == 'groups') {
 
     $template->assign_vars(array(
         'TPL_ATTACH_EXTENSION_GROUPS' => true,
-        'ADD_GROUP_NAME' => (isset($submit)) ? @$extension_group : '',
+        'ADD_GROUP_NAME' => isset($submit) ? $extension_group : '',
         'MAX_FILESIZE' => $max_add_filesize,
         'S_FILESIZE' => size_select('add_size_select', $size),
         'S_ADD_DOWNLOAD_MODE' => download_select('add_download_mode'),
@@ -458,8 +458,8 @@ if ($mode == 'groups') {
 if ($e_mode == 'perm') {
     $group = get_var('e_group', 0);
 
-    $add_forum = (isset($_POST['add_forum'])) ? true : false;
-    $delete_forum = (isset($_POST['del_forum'])) ? true : false;
+    $add_forum = isset($_POST['add_forum']) ? true : false;
+    $delete_forum = isset($_POST['del_forum']) ? true : false;
 
     if (isset($_POST['close_perm'])) {
         $e_mode = '';
@@ -467,11 +467,11 @@ if ($e_mode == 'perm') {
 }
 
 // Add Forums
-if (@$add_forum && $e_mode == 'perm' && $group) {
+if ($add_forum && $e_mode == 'perm' && $group) {
     $add_forums_list = get_var('entries', array(0));
     $add_all_forums = false;
 
-    for ($i = 0; $i < sizeof($add_forums_list); $i++) {
+    for ($i = 0; $i < count($add_forums_list); $i++) {
         if ($add_forums_list[$i] == 0) {
             $add_all_forums = true;
         }
@@ -489,7 +489,7 @@ if (@$add_forum && $e_mode == 'perm' && $group) {
     if (!$add_all_forums) {
         $sql = 'SELECT forum_permissions
 			FROM ' . BB_EXTENSION_GROUPS . '
-			WHERE group_id = ' . intval($group) . '
+			WHERE group_id = ' . (int)$group . '
 			LIMIT 1';
 
         if (!($result = DB()->sql_query($sql))) {
@@ -506,8 +506,8 @@ if (@$add_forum && $e_mode == 'perm' && $group) {
         }
 
         // Generate array for Auth_Pack, do not add doubled forums
-        for ($i = 0; $i < sizeof($add_forums_list); $i++) {
-            if (!in_array($add_forums_list[$i], $auth_p)) {
+        for ($i = 0; $i < count($add_forums_list); $i++) {
+            if (!in_array($add_forums_list[$i], $auth_p, true)) {
                 $auth_p[] = $add_forums_list[$i];
             }
         }
@@ -523,13 +523,13 @@ if (@$add_forum && $e_mode == 'perm' && $group) {
 }
 
 // Delete Forums
-if (@$delete_forum && $e_mode == 'perm' && $group) {
+if ($delete_forum && $e_mode == 'perm' && $group) {
     $delete_forums_list = get_var('entries', array(0));
 
     // Get the current Forums
     $sql = 'SELECT forum_permissions
 		FROM ' . BB_EXTENSION_GROUPS . '
-		WHERE group_id = ' . intval($group) . '
+		WHERE group_id = ' . (int)$group . '
 		LIMIT 1';
 
     if (!($result = DB()->sql_query($sql))) {
@@ -543,13 +543,13 @@ if (@$delete_forum && $e_mode == 'perm' && $group) {
     $auth_p = array();
 
     // Generate array for Auth_Pack, delete the chosen ones
-    for ($i = 0; $i < sizeof($auth_p2); $i++) {
-        if (!in_array($auth_p2[$i], $delete_forums_list)) {
+    for ($i = 0; $i < count($auth_p2); $i++) {
+        if (!in_array($auth_p2[$i], $delete_forums_list, true)) {
             $auth_p[] = $auth_p2[$i];
         }
     }
 
-    $auth_bitstream = (sizeof($auth_p) > 0) ? auth_pack($auth_p) : '';
+    $auth_bitstream = (count($auth_p) > 0) ? auth_pack($auth_p) : '';
 
     $sql = 'UPDATE ' . BB_EXTENSION_GROUPS . " SET forum_permissions = '" . attach_mod_sql_escape($auth_bitstream) . "' WHERE group_id = " . (int)$group;
 
@@ -562,7 +562,7 @@ if (@$delete_forum && $e_mode == 'perm' && $group) {
 if ($e_mode == 'perm' && $group) {
     $sql = 'SELECT group_name, forum_permissions
 		FROM ' . BB_EXTENSION_GROUPS . '
-		WHERE group_id = ' . intval($group) . '
+		WHERE group_id = ' . (int)$group . '
 		LIMIT 1';
 
     if (!($result = DB()->sql_query($sql))) {
@@ -596,7 +596,7 @@ if ($e_mode == 'perm' && $group) {
         }
     }
 
-    for ($i = 0; $i < sizeof($forum_perm); $i++) {
+    for ($i = 0; $i < count($forum_perm); $i++) {
         $template->assign_block_vars('allow_option_values', array(
                 'VALUE' => $forum_perm[$i]['forum_id'],
                 'OPTION' => htmlCHR($forum_perm[$i]['forum_name']))
@@ -618,7 +618,7 @@ if ($e_mode == 'perm' && $group) {
     }
 
     while ($row = DB()->sql_fetchrow($result)) {
-        $forum_option_values[intval($row['forum_id'])] = $row['forum_name'];
+        $forum_option_values[(int)$row['forum_id']] = $row['forum_name'];
     }
     DB()->sql_freeresult($result);
 
@@ -657,7 +657,7 @@ if ($e_mode == 'perm' && $group) {
 
         for ($i = 0; $i < $num_rows; $i++) {
             $allowed_forums = auth_unpack(trim($rows[$i]['forum_permissions']));
-            if (in_array($forum_id, $allowed_forums) || trim($rows[$i]['forum_permissions']) == '') {
+            if (in_array($forum_id, $allowed_forums, true) || trim($rows[$i]['forum_permissions']) == '') {
                 $found_forum = true;
                 break;
             }
@@ -675,12 +675,12 @@ if ($e_mode == 'perm' && $group) {
         $message .= ($message == '') ? $forum_name : '<br />' . $forum_name;
     }
 
-    if (sizeof($empty_perm_forums) > 0) {
+    if (count($empty_perm_forums) > 0) {
         $template->assign_vars(array('ERROR_MESSAGE' => $lang['NOTE_ADMIN_EMPTY_GROUP_PERMISSIONS'] . $message));
     }
 }
 
-if (@$error) {
+if ($error) {
     $template->assign_vars(array('ERROR_MESSAGE' => $error_msg));
 }
 

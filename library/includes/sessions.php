@@ -85,7 +85,7 @@ class user_common
     /**
      *  Shortcuts
      */
-    public $id = null;
+    public $id;
 
     /**
      *  Misc
@@ -102,8 +102,10 @@ class user_common
 
     /**
      *  Start session (restore existent session or create new)
+     * @param array $cfg
+     * @return array|bool|null
      */
-    public function session_start($cfg = array())
+    public function session_start(array $cfg = array())
     {
         global $bb_cfg;
 
@@ -183,7 +185,7 @@ class user_common
             $login = false;
             $user_id = ($bb_cfg['allow_autologin'] && $this->sessiondata['uk'] && $this->sessiondata['uid']) ? $this->sessiondata['uid'] : GUEST_UID;
 
-            if ($userdata = get_userdata(intval($user_id), false, true)) {
+            if ($userdata = get_userdata((int)$user_id, false, true)) {
                 if ($userdata['user_id'] != GUEST_UID && $userdata['user_active']) {
                     if (verify_id($this->sessiondata['uk'], LOGIN_KEY_LENGTH) && $this->verify_autologin_id($userdata, true, false)) {
                         $login = ($userdata['autologin_id'] && $this->sessiondata['uk'] === $userdata['autologin_id']);
@@ -197,13 +199,13 @@ class user_common
             $this->session_create($userdata, true);
         }
 
-        define('IS_GUEST', (!$this->data['session_logged_in']));
-        define('IS_ADMIN', (!IS_GUEST && $this->data['user_level'] == ADMIN));
-        define('IS_MOD', (!IS_GUEST && $this->data['user_level'] == MOD));
-        define('IS_GROUP_MEMBER', (!IS_GUEST && $this->data['user_level'] == GROUP_MEMBER));
-        define('IS_USER', (!IS_GUEST && $this->data['user_level'] == USER));
-        define('IS_SUPER_ADMIN', (IS_ADMIN && isset($bb_cfg['super_admins'][$this->data['user_id']])));
-        define('IS_AM', (IS_ADMIN || IS_MOD));
+        define('IS_GUEST', !$this->data['session_logged_in']);
+        define('IS_ADMIN', !IS_GUEST && $this->data['user_level'] == ADMIN);
+        define('IS_MOD', !IS_GUEST && $this->data['user_level'] == MOD);
+        define('IS_GROUP_MEMBER', !IS_GUEST && $this->data['user_level'] == GROUP_MEMBER);
+        define('IS_USER', !IS_GUEST && $this->data['user_level'] == USER);
+        define('IS_SUPER_ADMIN', IS_ADMIN && isset($bb_cfg['super_admins'][$this->data['user_id']]));
+        define('IS_AM', IS_ADMIN || IS_MOD);
 
         $this->set_shortcuts();
 
@@ -219,8 +221,11 @@ class user_common
 
     /**
      *  Create new session for the given user
+     * @param $userdata
+     * @param bool $auto_created
+     * @return array
      */
-    public function session_create($userdata, $auto_created = false)
+    public function session_create($userdata, $auto_created = false): array
     {
         global $bb_cfg;
 
@@ -237,7 +242,7 @@ class user_common
             preg_match('#(..)(..)(..)(..)#', USER_IP, $ip);
 
             $where_sql = "ban_ip IN('" . USER_IP . "', '$ip[1]$ip[2]$ip[3]ff', '$ip[1]$ip[2]ffff', '$ip[1]ffffff')";
-            $where_sql .= ($login) ? " OR ban_userid = $user_id" : '';
+            $where_sql .= $login ? " OR ban_userid = $user_id" : '';
 
             $sql = "SELECT ban_id FROM " . BB_BANLIST . " WHERE $where_sql LIMIT 1";
 
@@ -261,7 +266,7 @@ class user_common
             ));
             $sql = "INSERT INTO " . BB_SESSIONS . $args;
 
-            if (@DB()->query($sql)) {
+            if (DB()->query($sql)) {
                 break;
             }
             if ($i == $max_try) {
@@ -276,7 +281,7 @@ class user_common
                 $last_visit = TIMENOW;
                 define('FIRST_LOGON', true);
             } elseif ($session_time < (TIMENOW - $bb_cfg['last_visit_update_intrv'])) {
-                $last_visit = max($session_time, (TIMENOW - 86400 * $bb_cfg['max_last_visit_days']));
+                $last_visit = max($session_time, TIMENOW - 86400 * $bb_cfg['max_last_visit_days']);
             }
 
             if ($last_visit != $this->data['user_lastvisit']) {
@@ -325,6 +330,8 @@ class user_common
 
     /**
      *  Initialize sessiondata stored in cookies
+     * @param bool $update_lastvisit
+     * @param bool $set_cookie
      */
     public function session_end($update_lastvisit = false, $set_cookie = true)
     {
@@ -363,8 +370,11 @@ class user_common
 
     /**
      *  Login
+     * @param $args
+     * @param bool $mod_admin_login
+     * @return array
      */
-    public function login($args, $mod_admin_login = false)
+    public function login($args, $mod_admin_login = false): array
     {
         $username = !empty($args['login_username']) ? clean_username($args['login_username']) : '';
         $password = !empty($args['login_password']) ? $args['login_password'] : '';
@@ -400,7 +410,9 @@ class user_common
                     cache_update_userdata($this->data);
 
                     return $this->data;
-                } elseif ($new_session_userdata = $this->session_create($userdata, false)) {
+                }
+
+                if ($new_session_userdata = $this->session_create($userdata, false)) {
                     // Removing guest sessions from this IP
                     DB()->query("
 						DELETE FROM " . BB_SESSIONS . "
@@ -431,7 +443,7 @@ class user_common
         }
         // user_id
         if (!empty($sd_resv['uid'])) {
-            $this->sessiondata['uid'] = intval($sd_resv['uid']);
+            $this->sessiondata['uid'] = (int)$sd_resv['uid'];
         }
         // sid
         if (!empty($sd_resv['sid']) && verify_id($sd_resv['sid'], SID_LENGTH)) {
@@ -441,6 +453,7 @@ class user_common
 
     /**
      *  Store sessiondata in cookies
+     * @param $user_id
      */
     public function set_session_cookies($user_id)
     {
@@ -463,7 +476,7 @@ class user_common
             }
         } else {
             $c_sdata_resv = !empty($_COOKIE[COOKIE_DATA]) ? $_COOKIE[COOKIE_DATA] : null;
-            $c_sdata_curr = ($this->sessiondata) ? serialize($this->sessiondata) : '';
+            $c_sdata_curr = $this->sessiondata ? serialize($this->sessiondata) : '';
 
             if ($c_sdata_curr !== $c_sdata_resv) {
                 bb_setcookie(COOKIE_DATA, $c_sdata_curr, COOKIE_PERSIST, true);
@@ -476,6 +489,10 @@ class user_common
 
     /**
      *  Verify autologin_id
+     * @param $userdata
+     * @param bool $expire_check
+     * @param bool $create_new
+     * @return bool|string
      */
     public function verify_autologin_id($userdata, $expire_check = false, $create_new = true)
     {
@@ -486,7 +503,9 @@ class user_common
         if ($expire_check) {
             if ($create_new && !$autologin_id) {
                 return $this->create_autologin_id($userdata);
-            } elseif ($autologin_id && $userdata['user_session_time'] && $bb_cfg['max_autologin_time']) {
+            }
+
+            if ($autologin_id && $userdata['user_session_time'] && $bb_cfg['max_autologin_time']) {
                 if (TIMENOW - $userdata['user_session_time'] > $bb_cfg['max_autologin_time'] * 86400) {
                     return $this->create_autologin_id($userdata, $create_new);
                 }
@@ -498,10 +517,13 @@ class user_common
 
     /**
      *  Create autologin_id
+     * @param $userdata
+     * @param bool $create_new
+     * @return bool|string
      */
     public function create_autologin_id($userdata, $create_new = true)
     {
-        $autologin_id = ($create_new) ? make_rand_str(LOGIN_KEY_LENGTH) : '';
+        $autologin_id = $create_new ? make_rand_str(LOGIN_KEY_LENGTH) : '';
 
         DB()->query("
 			UPDATE " . BB_USERS . " SET
@@ -562,8 +584,7 @@ class user_common
         }
 
         require(LANG_DIR . 'main.php');
-        setlocale(LC_ALL, isset($bb_cfg['lang'][$this->data['user_lang']]['locale']) ?
-            $bb_cfg['lang'][$this->data['user_lang']]['locale'] : 'en_US.UTF-8');
+        setlocale(LC_ALL, $bb_cfg['lang'][$this->data['user_lang']]['locale'] ?? 'en_US.UTF-8');
 
         $theme = setup_style();
         $DeltaTime = new Date_Delta();
@@ -579,6 +600,7 @@ class user_common
 
     /**
      *  Mark read
+     * @param $type
      */
     public function mark_read($type)
     {
@@ -626,8 +648,10 @@ class user_common
 
     /**
      *  Get not auth forums
+     * @param $auth_type
+     * @return string
      */
-    public function get_not_auth_forums($auth_type)
+    public function get_not_auth_forums($auth_type): string
     {
         global $datastore;
 
@@ -676,11 +700,14 @@ class user_common
             }
         }
 
-        return join(',', $not_auth_forums);
+        return implode(',', $not_auth_forums);
     }
 
     /**
      *  Get excluded forums
+     * @param $auth_type
+     * @param string $return_as
+     * @return array|bool|string
      */
     public function get_excluded_forums($auth_type, $return_as = 'csv')
     {
@@ -709,7 +736,7 @@ class user_common
 
         switch ($return_as) {
             case   'csv':
-                return join(',', $excluded);
+                return implode(',', $excluded);
             case 'array':
                 return $excluded;
             case  'flip':

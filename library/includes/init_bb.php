@@ -53,7 +53,7 @@ function send_page($contents)
     return compress_output($contents);
 }
 
-define('UA_GZIP_SUPPORTED', (isset($_SERVER['HTTP_ACCEPT_ENCODING']) && strpos($_SERVER['HTTP_ACCEPT_ENCODING'], 'gzip') !== false));
+define('UA_GZIP_SUPPORTED', isset($_SERVER['HTTP_ACCEPT_ENCODING']) && strpos($_SERVER['HTTP_ACCEPT_ENCODING'], 'gzip') !== false);
 
 function compress_output($contents)
 {
@@ -378,7 +378,7 @@ define('SELECT', 6);
 
 if (!empty($banned_user_agents)) {
     foreach ($banned_user_agents as $agent) {
-        if (strstr(USER_AGENT, $agent)) {
+        if (false !== strpos(USER_AGENT, $agent)) {
             $filename = 'Download files by using browser';
             $output = '@';
             header('Content-Type: text/plain');
@@ -408,7 +408,7 @@ function bb_exit($output = '')
 
 function prn_r($var, $title = '', $print = true)
 {
-    $r = '<pre>' . (($title) ? "<b>$title</b>\n\n" : '') . htmlspecialchars(print_r($var, true)) . '</pre>';
+    $r = '<pre>' . ($title ? "<b>$title</b>\n\n" : '') . htmlspecialchars(print_r($var, true)) . '</pre>';
     if ($print) {
         echo $r;
     }
@@ -432,7 +432,7 @@ function prn()
 
 function vdump($var, $title = '')
 {
-    echo '<pre>' . (($title) ? "<b>$title</b>\n\n" : '');
+    echo '<pre>' . ($title ? "<b>$title</b>\n\n" : '');
     var_dump($var);
     echo '</pre>';
 }
@@ -484,7 +484,7 @@ if (!$bb_cfg['board_startdate']) {
 if ((empty($_POST) && !defined('IN_ADMIN') && !defined('IN_AJAX') && !file_exists(CRON_RUNNING) && ($bb_cfg['cron_enabled'] || defined('START_CRON'))) || defined('FORCE_CRON')) {
     if (TIMENOW - $bb_cfg['cron_last_check'] > $bb_cfg['cron_check_interval']) {
         // Update cron_last_check
-        bb_update_config(array('cron_last_check' => (TIMENOW + 10)));
+        bb_update_config(array('cron_last_check' => TIMENOW + 10));
 
         define('CRON_LOG_ENABLED', true);  // global ON/OFF
         define('CRON_FORCE_LOG', false); // always log regardless of job settings
@@ -500,7 +500,7 @@ if ((empty($_POST) && !defined('IN_ADMIN') && !defined('IN_AJAX') && !file_exist
             bb_log(date('H:i:s - ') . getmypid() . ' --x- DB-LOCK OBTAINED !!!!!!!!!!!!!!!!!' . LOG_LF, CRON_LOG_DIR . '/cron_check');
 
             sleep(2);
-            require(CRON_DIR . 'cron_init.php');
+            require CRON_DIR . 'cron_init.php';
 
             DB()->release_lock('cron');
         }
@@ -562,10 +562,10 @@ function cron_touch_lock_file($lock_file)
 
 function cron_enable_board()
 {
-    @rename(BB_DISABLED, BB_ENABLED);
+    rename(BB_DISABLED, BB_ENABLED);
 }
 
 function cron_disable_board()
 {
-    @rename(BB_ENABLED, BB_DISABLED);
+    rename(BB_ENABLED, BB_DISABLED);
 }

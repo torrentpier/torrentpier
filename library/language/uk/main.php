@@ -2422,7 +2422,7 @@ $lang['REPAIR_CRON'] = 'Відновити';
 
 $lang['CRON_EDIT_HEAD_EDIT'] = 'Редагувати завдання';
 $lang['CRON_EDIT_HEAD_ADD'] = 'Додати завдання';
-$lang['CRON_SCRIPT_EXPL'] = 'назва в папці "includes/cron/jobs/"';;
+$lang['CRON_SCRIPT_EXPL'] = 'назва в папці "includes/cron/jobs/"';
 $lang['SCHEDULE'] = array(
     'select' => '&raquo; Оберить запуск',
     'hourly' => 'щогодини',
@@ -2450,8 +2450,8 @@ $lang['BOARD_DISABLE_EXPL'] = 'відключати форум, коли зав�
 $lang['RUN_COUNTER'] = 'Кількість запусків';
 
 $lang['JOB_REMOVED'] = 'Завдання було успішно видалено';
-$lang['SCRIPT_DUPLICATE'] = 'Скрипт <b>' . @$_POST['cron_script'] . '</b> вже існує!';
-$lang['TITLE_DUPLICATE'] = 'Назва завдання <b>' . @$_POST['cron_title'] . '</b> вже існує!';
+$lang['SCRIPT_DUPLICATE'] = 'Скрипт <b>' . $_POST['cron_script'] . '</b> вже існує!';
+$lang['TITLE_DUPLICATE'] = 'Назва завдання <b>' . $_POST['cron_title'] . '</b> вже існує!';
 $lang['CLICK_RETURN_JOBS_ADDED'] = '%sПовернутися до додавання задачі%s';
 $lang['CLICK_RETURN_JOBS'] = '%sПовернутися до планувальника завдань%s';
 

@@ -25,7 +25,7 @@
 
 define('IN_FORUM', true);
 define('BB_ROOT', './');
-require(BB_ROOT . 'common.php');
+require BB_ROOT . 'common.php';
 
 $user->session_start();
 

@@ -116,12 +116,12 @@ class caches
     {
         if (!empty($cfg['shard_type']) && $cfg['shard_type'] != 'none') {
             return $this->cfg['db_dir'] . $name . '_*' . $ext;
-        } else {
-            return $this->cfg['db_dir'] . $name . $ext;
         }
+
+        return $this->cfg['db_dir'] . $name . $ext;
     }
 
-    public function get_table_schema($cfg)
+    public function get_table_schema($cfg): string
     {
         return "CREATE TABLE {$cfg['table_name']} ( {$cfg['columns']} )";
     }

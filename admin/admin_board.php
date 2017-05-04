@@ -31,7 +31,7 @@ if (!empty($setmodules)) {
 require __DIR__ . '/pagestart.php';
 require INC_DIR . '/functions_selects.php';
 
-$mode = isset($_GET['mode']) ? $_GET['mode'] : '';
+$mode = $_GET['mode'] ?? '';
 
 $return_links = array(
     'index' => '<br /><br />' . sprintf($lang['CLICK_RETURN_ADMIN_INDEX'], '<a href="index.php?pane=right">', '</a>'),
@@ -51,7 +51,7 @@ if (!$result = DB()->sql_query($sql)) {
         $config_value = $row['config_value'];
         $default_config[$config_name] = $config_value;
 
-        $new[$config_name] = isset($_POST[$config_name]) ? $_POST[$config_name] : $default_config[$config_name];
+        $new[$config_name] = $_POST[$config_name] ?? $default_config[$config_name];
 
         if (isset($_POST['submit']) && $row['config_value'] != $new[$config_name]) {
             if ($config_name == 'seed_bonus_points' || $config_name == 'seed_bonus_release' || $config_name == 'bonus_upload' || $config_name == 'bonus_upload_price') {
@@ -138,8 +138,8 @@ switch ($mode) {
 
             'SITENAME' => htmlCHR($new['sitename']),
             'CONFIG_SITE_DESCRIPTION' => htmlCHR($new['site_desc']),
-            'DISABLE_BOARD' => ($new['board_disable']) ? true : false,
-            'ALLOW_AUTOLOGIN' => ($new['allow_autologin']) ? true : false,
+            'DISABLE_BOARD' => $new['board_disable'] ? true : false,
+            'ALLOW_AUTOLOGIN' => $new['allow_autologin'] ? true : false,
             'AUTOLOGIN_TIME' => (int)$new['max_autologin_time'],
             'MAX_POLL_OPTIONS' => $new['max_poll_options'],
             'FLOOD_INTERVAL' => $new['flood_interval'],
@@ -151,12 +151,12 @@ switch ($mode) {
             'TIMEZONE_SELECT' => tz_select($new['board_timezone'], 'board_timezone'),
             'MAX_LOGIN_ATTEMPTS' => $new['max_login_attempts'],
             'LOGIN_RESET_TIME' => $new['login_reset_time'],
-            'PRUNE_ENABLE' => ($new['prune_enable']) ? true : false,
-            'ALLOW_BBCODE' => ($new['allow_bbcode']) ? true : false,
-            'ALLOW_SMILIES' => ($new['allow_smilies']) ? true : false,
-            'ALLOW_SIG' => ($new['allow_sig']) ? true : false,
+            'PRUNE_ENABLE' => $new['prune_enable'] ? true : false,
+            'ALLOW_BBCODE' => $new['allow_bbcode'] ? true : false,
+            'ALLOW_SMILIES' => $new['allow_smilies'] ? true : false,
+            'ALLOW_SIG' => $new['allow_sig'] ? true : false,
             'SIG_SIZE' => $new['max_sig_chars'],
-            'ALLOW_NAMECHANGE' => ($new['allow_namechange']) ? true : false,
+            'ALLOW_NAMECHANGE' => $new['allow_namechange'] ? true : false,
             'SMILIES_PATH' => $new['smilies_path'],
         ));
         break;

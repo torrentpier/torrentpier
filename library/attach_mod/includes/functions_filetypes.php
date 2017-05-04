@@ -29,6 +29,8 @@
 
 /**
  * Read Long Int (4 Bytes) from File
+ * @param $fp
+ * @return int
  */
 function read_longint($fp)
 {
@@ -44,30 +46,32 @@ function read_longint($fp)
 
 /**
  * Read Word (2 Bytes) from File - Note: It's an Intel Word
+ * @param $fp
+ * @return int
  */
 function read_word($fp)
 {
     $data = fread($fp, 2);
 
-    $value = ord($data[1]) * 256 + ord($data[0]);
-
-    return $value;
+    return ord($data[1]) * 256 + ord($data[0]);
 }
 
 /**
  * Read Byte
+ * @param $fp
+ * @return int
  */
 function read_byte($fp)
 {
     $data = fread($fp, 1);
 
-    $value = ord($data);
-
-    return $value;
+    return ord($data);
 }
 
 /**
  * Get Image Dimensions
+ * @param $file
+ * @return array|bool
  */
 function image_getdimension($file)
 {
@@ -179,7 +183,7 @@ function image_getdimension($file)
     $tmp_str = fread($fp, 4);
     $w1 = read_word($fp);
 
-    if (intval($w1) < 16) {
+    if ((int)$w1 < 16) {
         $error = true;
     }
 
@@ -187,7 +191,7 @@ function image_getdimension($file)
         $tmp_str = fread($fp, 4);
         if ($tmp_str == 'JFIF') {
             $o_byte = fread($fp, 1);
-            if (intval($o_byte) != 0) {
+            if ((int)$o_byte != 0) {
                 $error = true;
             }
 

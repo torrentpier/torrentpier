@@ -47,7 +47,7 @@ foreach ($keeping_dlstat as $dl_status => $days_to_keep) {
     }
 }
 
-if ($delete_dlstat_sql = join(') OR (', $delete_dlstat_sql)) {
+if ($delete_dlstat_sql = implode(') OR (', $delete_dlstat_sql)) {
     DB()->query("DELETE QUICK FROM " . BB_BT_DLSTATUS . " WHERE ($delete_dlstat_sql)");
 }
 
@@ -67,7 +67,7 @@ DB()->query("
 ");
 
 // Tor-Stats cleanup
-if ($torstat_days_keep = intval($bb_cfg['torstat_days_keep'])) {
+if ($torstat_days_keep = (int)$bb_cfg['torstat_days_keep']) {
     DB()->query("DELETE QUICK FROM " . BB_BT_TORSTAT . " WHERE last_modified_torstat < DATE_SUB(NOW(), INTERVAL $torstat_days_keep DAY)");
 }
 

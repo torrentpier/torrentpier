@@ -27,7 +27,7 @@ if (!empty($setmodules)) {
     $module['USERS']['BAN_MANAGEMENT'] = basename(__FILE__);
     return;
 }
-require('./pagestart.php');
+require './pagestart.php';
 
 if (isset($_POST['submit'])) {
     $user_bansql = '';
@@ -203,7 +203,7 @@ if (isset($_POST['submit'])) {
 
         for ($i = 0; $i < count($user_list); $i++) {
             if ($user_list[$i] != -1) {
-                $where_sql .= (($where_sql != '') ? ', ' : '') . intval($user_list[$i]);
+                $where_sql .= (($where_sql != '') ? ', ' : '') . (int)$user_list[$i];
             }
         }
     }

@@ -76,7 +76,7 @@ if ($view === 'username') {
 }
 
 // Pagination ?
-$do_pagination = ($view !== 'stats' && $view !== 'search') ? true : false;
+$do_pagination = ($view !== 'stats' && $view !== 'search');
 
 // Set Order
 $order_by = '';
@@ -275,7 +275,7 @@ if ($view === 'search') {
     $s_forums = '';
     $list_cat = [];
     while ($row = DB()->sql_fetchrow($result)) { //sf
-        $s_forums .= '<option value="' . $row['forum_id'] . '">' . (($row['forum_parent']) ? HTML_SF_SPACER : '') . htmlCHR($row['forum_name']) . '</option>';
+        $s_forums .= '<option value="' . $row['forum_id'] . '">' . ($row['forum_parent'] ? HTML_SF_SPACER : '') . htmlCHR($row['forum_name']) . '</option>';
 
         if (empty($list_cat[$row['cat_id']])) {
             $list_cat[$row['cat_id']] = $row['cat_title'];
@@ -318,8 +318,8 @@ if ($view === 'username') {
 
 // Attachments
 if ($view === 'attachments') {
-    $user_based = ($uid) ? true : false;
-    $search_based = (isset($_POST['search']) && $_POST['search']) ? true : false;
+    $user_based = $uid ? true : false;
+    $search_based = (isset($_POST['search']) && $_POST['search']);
 
     $hidden_fields = '';
 
@@ -333,7 +333,7 @@ if ($view === 'attachments') {
 
     // Are we called from Username ?
     if ($user_based) {
-        $sql = "SELECT username FROM " . BB_USERS . " WHERE user_id = " . intval($uid);
+        $sql = "SELECT username FROM " . BB_USERS . " WHERE user_id = " . (int)$uid;
 
         if (!($result = DB()->sql_query($sql))) {
             bb_die('Error getting username');
@@ -343,7 +343,7 @@ if ($view === 'attachments') {
         DB()->sql_freeresult($result);
         $username = $row['username'];
 
-        $s_hidden = '<input type="hidden" name="u_id" value="' . intval($uid) . '" />';
+        $s_hidden = '<input type="hidden" name="u_id" value="' . (int)$uid . '" />';
 
         $template->assign_block_vars('switch_user_based', array());
 
@@ -354,7 +354,7 @@ if ($view === 'attachments') {
 
         $sql = "SELECT attach_id
 		FROM " . BB_ATTACHMENTS . "
-		WHERE user_id_1 = " . intval($uid) . "
+		WHERE user_id_1 = " . (int)$uid . "
 		GROUP BY attach_id";
 
         if (!($result = DB()->sql_query($sql))) {
@@ -374,7 +374,7 @@ if ($view === 'attachments') {
         $attach_id = array();
 
         for ($j = 0; $j < $num_attach_ids; $j++) {
-            $attach_id[] = intval($attach_ids[$j]['attach_id']);
+            $attach_id[] = (int)$attach_ids[$j]['attach_id'];
         }
 
         $sql = "SELECT a.*
@@ -394,13 +394,13 @@ if ($view === 'attachments') {
         $attachments = search_attachments($order_by, $total_rows);
     }
 
-    if (sizeof($attachments) > 0) {
+    if (count($attachments) > 0) {
         for ($i = 0, $iMax = count($attachments); $i < $iMax; $i++) {
-            $delete_box = '<input type="checkbox" name="delete_id_list[]" value="' . intval($attachments[$i]['attach_id']) . '" />';
+            $delete_box = '<input type="checkbox" name="delete_id_list[]" value="' . (int)$attachments[$i]['attach_id'] . '" />';
 
             for ($j = 0, $iMax = count($delete_id_list); $j < $iMax; $j++) {
                 if ($delete_id_list[$j] == $attachments[$i]['attach_id']) {
-                    $delete_box = '<input type="checkbox" name="delete_id_list[]" value="' . intval($attachments[$i]['attach_id']) . '" checked="checked" />';
+                    $delete_box = '<input type="checkbox" name="delete_id_list[]" value="' . (int)$attachments[$i]['attach_id'] . '" checked="checked" />';
                     break;
                 }
             }
@@ -413,7 +413,7 @@ if ($view === 'attachments') {
 
             $sql = "SELECT *
 			FROM " . BB_ATTACHMENTS . "
-			WHERE attach_id = " . intval($attachments[$i]['attach_id']);
+			WHERE attach_id = " . (int)$attachments[$i]['attach_id'];
 
             if (!($result = DB()->sql_query($sql))) {
                 bb_die('Could not query attachments #3');
@@ -427,7 +427,7 @@ if ($view === 'attachments') {
                 if ($ids[$j]['post_id'] != 0) {
                     $sql = "SELECT t.topic_title
 					FROM " . BB_TOPICS . " t, " . BB_POSTS . " p
-					WHERE p.post_id = " . intval($ids[$j]['post_id']) . " AND p.topic_id = t.topic_id
+					WHERE p.post_id = " . (int)$ids[$j]['post_id'] . " AND p.topic_id = t.topic_id
 					GROUP BY t.topic_id, t.topic_title";
 
                     if (!($result = DB()->sql_query($sql))) {
@@ -452,16 +452,16 @@ if ($view === 'attachments') {
 
             $post_titles = implode('<br />', $post_titles);
 
-            $hidden_field = '<input type="hidden" name="attach_id_list[]" value="' . intval($attachments[$i]['attach_id']) . '" />';
+            $hidden_field = '<input type="hidden" name="attach_id_list[]" value="' . (int)$attachments[$i]['attach_id'] . '" />';
 
             $template->assign_block_vars('attachrow', array(
-                'ROW_NUMBER' => $i + (@$_GET['start'] + 1),
+                'ROW_NUMBER' => $i + ($_GET['start'] + 1),
                 'ROW_CLASS' => $row_class,
 
                 'FILENAME' => htmlspecialchars($attachments[$i]['real_filename']),
                 'COMMENT' => htmlspecialchars($attachments[$i]['comment']),
                 'EXTENSION' => $attachments[$i]['extension'],
-                'SIZE' => round(($attachments[$i]['filesize'] / 1024), 2),
+                'SIZE' => round($attachments[$i]['filesize'] / 1024, 2),
                 'DOWNLOAD_COUNT' => $attachments[$i]['download_count'],
                 'POST_TIME' => bb_date($attachments[$i]['filetime']),
                 'POST_TITLE' => $post_titles,

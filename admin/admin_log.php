@@ -27,7 +27,7 @@ if (!empty($setmodules)) {
     $module['USERS']['ACTIONS_LOG'] = basename(__FILE__);
     return;
 }
-require('./pagestart.php');
+require './pagestart.php';
 
 $datastore->enqueue(array(
     'moderators',
@@ -94,7 +94,7 @@ $f_data = $forums['f'];
 unset($forums);
 
 // Start
-$start = isset($_REQUEST['start']) ? abs(intval($_REQUEST['start'])) : 0;
+$start = isset($_REQUEST['start']) ? abs((int)$_REQUEST['start']) : 0;
 
 // Type
 $type_selected = array($def_types);
@@ -103,10 +103,10 @@ $type_csv = '';
 if ($var =& $_REQUEST[$type_key]) {
     $type_selected = get_id_ary($var);
 
-    if (in_array($all_types, $type_selected)) {
+    if (in_array($all_types, $type_selected, true)) {
         $type_selected = array($all_types);
     }
-    $type_csv = join(',', $type_selected);
+    $type_csv = implode(',', $type_selected);
     $url = ($type_csv != $def_types) ? url_arg($url, $type_key, $type_csv) : $url;
 }
 
@@ -117,10 +117,10 @@ $user_csv = '';
 if ($var =& $_REQUEST[$user_key]) {
     $user_selected = get_id_ary($var);
 
-    if (in_array($all_users, $user_selected)) {
+    if (in_array($all_users, $user_selected, true)) {
         $user_selected = array($all_users);
     }
-    $user_csv = join(',', $user_selected);
+    $user_csv = implode(',', $user_selected);
     $url = ($user_csv != $def_users) ? url_arg($url, $user_key, $user_csv) : $url;
 }
 
@@ -131,10 +131,10 @@ $forum_csv = '';
 if ($var =& $_REQUEST[$forum_key]) {
     $forum_selected = get_id_ary($var);
 
-    if (in_array($all_forums, $forum_selected)) {
+    if (in_array($all_forums, $forum_selected, true)) {
         $forum_selected = array($all_forums);
     }
-    $forum_csv = join(',', $forum_selected);
+    $forum_csv = implode(',', $forum_selected);
     $url = ($forum_csv != $def_forums) ? url_arg($url, $forum_key, $forum_csv) : $url;
 }
 
@@ -144,8 +144,8 @@ $topic_csv = '';
 
 if ($var =& $_REQUEST[$topic_key]) {
     $topic_selected = get_id_ary($var);
-    $topic_csv = join(',', $topic_selected);
-    $url = ($topic_csv) ? url_arg($url, $topic_key, $topic_csv) : $url;
+    $topic_csv = implode(',', $topic_selected);
+    $url = $topic_csv ? url_arg($url, $topic_key, $topic_csv) : $url;
 }
 
 // Order
@@ -164,7 +164,7 @@ $datetime_val = $def_datetime;
 $daysback_val = $def_days;
 
 if ($var =& $_REQUEST[$daysback_key] && $var != $def_days) {
-    $daysback_val = max(intval($var), 1);
+    $daysback_val = max((int)$var, 1);
     $url = url_arg($url, $daysback_key, $daysback_val);
 }
 if ($var =& $_REQUEST[$datetime_key] && $var != $def_datetime) {
@@ -202,19 +202,19 @@ $from = "FROM " . BB_LOG;
 $where = "
 	WHERE log_time BETWEEN $time_start_val AND $time_end_val
 ";
-$where .= ($type_csv) ? "
+$where .= $type_csv ? "
 		AND log_type_id IN($type_csv)
 " : '';
-$where .= ($user_csv) ? "
+$where .= $user_csv ? "
 		AND log_user_id IN($user_csv)
 " : '';
-$where .= ($forum_csv) ? "
+$where .= $forum_csv ? "
 		AND log_forum_id IN($forum_csv)
 " : '';
-$where .= ($topic_csv) ? "
+$where .= $topic_csv ? "
 		AND log_topic_id IN($topic_csv)
 " : '';
-$where .= ($title_match_sql) ? "
+$where .= $title_match_sql ? "
 		AND MATCH (log_topic_title) AGAINST ('$title_match_sql' IN BOOLEAN MODE)
 " : '';
 
@@ -355,7 +355,7 @@ if ($log_rowset) {
     }
 
     $template->assign_vars(array(
-        'FILTERS' => ($topic_csv || $forum_csv || $user_csv),
+        'FILTERS' => $topic_csv || $forum_csv || $user_csv,
         'FILTER_TOPICS' => !empty($filter['topics']),
         'FILTER_FORUMS' => !empty($filter['forums']),
         'FILTER_USERS' => !empty($filter['users']),
@@ -379,7 +379,7 @@ $template->assign_vars(array(
     'DATETIME_VAL' => date('Y-m-d', $datetime_val),
     'DAYSBACK_NAME' => $daysback_key,
     'DAYSBACK_VAL' => $daysback_val,
-    'FIRST_LOG_TIME' => ($first_log_time) ? date('Y-m-d', $first_log_time) : $lang['ACC_NONE'],
+    'FIRST_LOG_TIME' => $first_log_time ? date('Y-m-d', $first_log_time) : $lang['ACC_NONE'],
 
     'TITLE_MATCH_MAX' => $title_match_max_len,
     'TITLE_MATCH_NAME' => $title_match_key,

@@ -33,8 +33,12 @@ class cache_common
 
     /**
      * Returns value of variable
+     * @param $name
+     * @param string $get_miss_key_callback
+     * @return array|bool
+     * @internal param int $ttl
      */
-    public function get($name, $get_miss_key_callback = '', $ttl = 604800)
+    public function get($name, $get_miss_key_callback = '')
     {
         if ($get_miss_key_callback) {
             return $get_miss_key_callback($name);
@@ -44,16 +48,22 @@ class cache_common
 
     /**
      * Store value of variable
+     * @return bool
+     * @internal param $name
+     * @internal param $value
+     * @internal param int $ttl
      */
-    public function set($name, $value, $ttl = 604800)
+    public function set(): bool
     {
         return false;
     }
 
     /**
      * Remove variable
+     * @return bool
+     * @internal param string $name
      */
-    public function rm($name = '')
+    public function rm(): bool
     {
         return false;
     }
@@ -67,7 +77,7 @@ class cache_common
     public $dbg = array();
     public $dbg_id = 0;
     public $dbg_enabled = false;
-    public $cur_query = null;
+    public $cur_query;
 
     public function debug($mode, $cur_query = null)
     {
@@ -94,7 +104,7 @@ class cache_common
         }
     }
 
-    public function debug_find_source($mode = '')
+    public function debug_find_source($mode = ''): string
     {
         foreach (debug_backtrace() as $trace) {
             if ($trace['file'] !== __FILE__) {

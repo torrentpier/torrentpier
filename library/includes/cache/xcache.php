@@ -31,7 +31,7 @@ class cache_xcache extends cache_common
 {
     public $used = true;
     public $engine = 'XCache';
-    public $prefix = null;
+    public $prefix;
 
     public function __construct($prefix = null)
     {
@@ -53,7 +53,7 @@ class cache_xcache extends cache_common
         return xcache_get($this->prefix . $name);
     }
 
-    public function set($name, $value, $ttl = 0)
+    public function set($name, $value, $ttl = 0): bool
     {
         $this->cur_query = "cache->set('$name')";
         $this->debug('start');
@@ -74,14 +74,14 @@ class cache_xcache extends cache_common
             $this->num_queries++;
 
             return xcache_unset($this->prefix . $name);
-        } else {
-            xcache_clear_cache(XC_TYPE_PHP, 0);
-            xcache_clear_cache(XC_TYPE_VAR, 0);
-            return;
         }
+
+        xcache_clear_cache(XC_TYPE_PHP, 0);
+        xcache_clear_cache(XC_TYPE_VAR, 0);
+        return;
     }
 
-    public function is_installed()
+    public function is_installed(): bool
     {
         return function_exists('xcache_get');
     }

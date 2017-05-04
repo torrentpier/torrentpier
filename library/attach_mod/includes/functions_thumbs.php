@@ -31,6 +31,9 @@ $imagick = '';
 
 /**
  * Calculate the needed size for Thumbnail
+ * @param $width
+ * @param $height
+ * @return array
  */
 function get_img_size_format($width, $height)
 {
@@ -42,12 +45,12 @@ function get_img_size_format($width, $height)
             round($width * ($max_width / $width)),
             round($height * ($max_width / $width))
         );
-    } else {
-        return array(
-            round($width * ($max_width / $height)),
-            round($height * ($max_width / $height))
-        );
     }
+
+    return array(
+        round($width * ($max_width / $height)),
+        round($height * ($max_width / $height))
+    );
 }
 
 /**
@@ -60,13 +63,15 @@ function is_imagick()
     if ($attach_config['img_imagick'] != '') {
         $imagick = $attach_config['img_imagick'];
         return true;
-    } else {
-        return false;
     }
+
+    return false;
 }
 
 /**
  * Get supported image types
+ * @param $type
+ * @return array
  */
 function get_supported_image_types($type)
 {
@@ -95,9 +100,9 @@ function get_supported_image_types($type)
         }
 
         return array(
-            'gd' => ($new_type) ? true : false,
+            'gd' => $new_type ? true : false,
             'format' => $new_type,
-            'version' => (function_exists('imagecreatetruecolor')) ? 2 : 1
+            'version' => function_exists('imagecreatetruecolor') ? 2 : 1
         );
     }
 
@@ -106,8 +111,12 @@ function get_supported_image_types($type)
 
 /**
  * Create thumbnail
+ * @param $source
+ * @param $new_file
+ * @return bool
+ * @internal param $mimetype
  */
-function create_thumbnail($source, $new_file, $mimetype)
+function create_thumbnail($source, $new_file)
 {
     global $attach_config, $imagick;
 

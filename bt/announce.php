@@ -39,7 +39,7 @@ if (isset($_GET['event']) && $_GET['event'] === 'completed') {
     if (DBG_LOG) {
         dbg_log(' ', '!die-event-completed');
     }
-    dummy_exit(mt_rand(600, 1200));
+    dummy_exit(random_int(600, 1200));
 }
 
 $announce_interval = $bb_cfg['announce_interval'];
@@ -90,7 +90,7 @@ foreach ($input_vars_num as $var_name) {
     $$var_name = isset($_GET[$var_name]) ? (float)$_GET[$var_name] : null;
 }
 // Passkey
-$passkey = isset($$passkey_key) ? $$passkey_key : null;
+$passkey = $$passkey_key ?? null;
 
 // Verify request
 // Required params (info_hash, peer_id, port, uploaded, downloaded, left, passkey)
@@ -189,7 +189,7 @@ function msg_die($msg)
 
 // Start announcer
 define('TR_ROOT', './');
-require(TR_ROOT . 'includes/init_tr.php');
+require TR_ROOT . 'includes/init_tr.php';
 
 $seeder = ($left == 0) ? 1 : 0;
 $stopped = ($event === 'stopped');
@@ -340,7 +340,7 @@ if ($tr_cfg['gold_silver_enabled'] && $down_add) {
 
 // Insert/update peer info
 $peer_info_updated = false;
-$update_time = ($stopped) ? 0 : TIMENOW;
+$update_time = $stopped ? 0 : TIMENOW;
 
 if ($lp_info) {
     $sql = "UPDATE " . BB_BT_TRACKER . " SET update_time = $update_time";
@@ -354,8 +354,8 @@ if ($lp_info) {
     $sql .= ($downloaded != $lp_info['downloaded']) ? ", downloaded = $downloaded" : '';
     $sql .= ", remain = $left";
 
-    $sql .= ($up_add) ? ", up_add = up_add + $up_add" : '';
-    $sql .= ($down_add) ? ", down_add = down_add + $down_add" : '';
+    $sql .= $up_add ? ", up_add = up_add + $up_add" : '';
+    $sql .= $down_add ? ", down_add = down_add + $down_add" : '';
 
     $sql .= ", speed_up = $speed_up";
     $sql .= ", speed_down = $speed_down";
@@ -438,7 +438,7 @@ if (!$output) {
         foreach ($rowset as $peer) {
             $peers[] = array(
                 'ip' => decode_ip($peer['ip']),
-                'port' => intval($peer['port']),
+                'port' => (int)$peer['port'],
             );
         }
     }

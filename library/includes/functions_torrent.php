@@ -31,7 +31,7 @@ function get_torrent_info($attach_id)
 {
     global $lang;
 
-    $attach_id = intval($attach_id);
+    $attach_id = (int)$attach_id;
 
     $sql = "
 		SELECT
@@ -162,7 +162,7 @@ function delete_torrent($attach_id, $mode = '')
 {
     global $lang, $reg_mode, $topic_id;
 
-    $attach_id = intval($attach_id);
+    $attach_id = (int)$attach_id;
     $reg_mode = $mode;
 
     if (!$torrent = get_torrent_info($attach_id)) {
@@ -223,7 +223,7 @@ function change_tor_type($attach_id, $tor_status_gold)
     }
 
     $topic_id = $torrent['topic_id'];
-    $tor_status_gold = intval($tor_status_gold);
+    $tor_status_gold = (int)$tor_status_gold;
     $info_hash = null;
 
     DB()->query("UPDATE " . BB_BT_TORRENTS . " SET tor_type = $tor_status_gold WHERE topic_id = $topic_id LIMIT 1");
@@ -241,7 +241,7 @@ function tracker_register($attach_id, $mode = '', $tor_status = TOR_NOT_APPROVED
 {
     global $bb_cfg, $lang, $reg_mode, $tr_cfg;
 
-    $attach_id = intval($attach_id);
+    $attach_id = (int)$attach_id;
     $reg_mode = $mode;
 
     if (!$torrent = get_torrent_info($attach_id)) {
@@ -286,7 +286,7 @@ function tracker_register($attach_id, $mode = '', $tor_status = TOR_NOT_APPROVED
 
     if ($bb_cfg['bt_disable_dht']) {
         $tor['info']['private'] = (int)1;
-        $fp = fopen($filename, 'w+');
+        $fp = fopen($filename, 'wb+');
         fwrite($fp, bencode($tor));
         fclose($fp);
     }
@@ -294,16 +294,16 @@ function tracker_register($attach_id, $mode = '', $tor_status = TOR_NOT_APPROVED
     if ($bb_cfg['bt_check_announce_url']) {
         include INC_DIR . '/torrent_announce_urls.php';
 
-        $ann = (@$tor['announce']) ? $tor['announce'] : '';
+        $ann = ($tor['announce']) ? $tor['announce'] : '';
         $announce_urls['main_url'] = $bb_cfg['bt_announce_url'];
 
-        if (!$ann || !in_array($ann, $announce_urls)) {
+        if (!$ann || !in_array($ann, $announce_urls, true)) {
             $msg = sprintf($lang['INVALID_ANN_URL'], htmlspecialchars($ann), $announce_urls['main_url']);
             return torrent_error_exit($msg);
         }
     }
 
-    $info = (@$tor['info']) ? $tor['info'] : array();
+    $info = ($tor['info']) ? $tor['info'] : array();
 
     if (!isset($info['name']) || !isset($info['piece length']) || !isset($info['pieces']) || strlen($info['pieces']) % 20 != 0) {
         return torrent_error_exit($lang['TORFILE_INVALID']);
@@ -462,7 +462,7 @@ function send_torrent_with_passkey($filename)
         bb_die('This is not a bencoded file');
     }
 
-    $announce = $bb_cfg['ocelot']['enabled'] ? strval($bb_cfg['ocelot']['url'] . $passkey_val . "/announce") : strval($ann_url . "?$passkey_key=$passkey_val");
+    $announce = $bb_cfg['ocelot']['enabled'] ? (string)($bb_cfg['ocelot']['url'] . $passkey_val . "/announce") : (string)($ann_url . "?$passkey_key=$passkey_val");
 
     // Replace original announce url with tracker default
     if ($bb_cfg['bt_replace_ann_url'] || !isset($tor['announce'])) {
@@ -494,13 +494,13 @@ function send_torrent_with_passkey($filename)
     $publisher_name = $bb_cfg['server_name'];
     $publisher_url = make_url(TOPIC_URL . $topic_id);
 
-    $tor['publisher'] = strval($publisher_name);
+    $tor['publisher'] = (string)$publisher_name;
     unset($tor['publisher.utf-8']);
 
-    $tor['publisher-url'] = strval($publisher_url);
+    $tor['publisher-url'] = (string)$publisher_url;
     unset($tor['publisher-url.utf-8']);
 
-    $tor['comment'] = strval($publisher_url);
+    $tor['comment'] = (string)$publisher_url;
     unset($tor['comment.utf-8']);
 
     // Send torrent
@@ -590,9 +590,9 @@ function get_registered_torrents($id, $mode)
 
     if ($rowset = @DB()->sql_fetchrowset($result)) {
         return $rowset;
-    } else {
-        return false;
     }
+
+    return false;
 }
 
 function torrent_error_exit($message)
@@ -624,11 +624,7 @@ function ocelot_update_tracker($action, $updates)
     $max_attempts = 3;
     $err = false;
 
-    if (ocelot_send_request($get, $max_attempts, $err) === false) {
-        return false;
-    }
-
-    return true;
+    return !(ocelot_send_request($get, $max_attempts, $err) === false);
 }
 
 function ocelot_send_request($get, $max_attempts = 1, &$err = false)
@@ -697,7 +693,9 @@ function bdecode_r($str, &$pos)
 
     if (($pos < 0) || ($pos >= $strlen)) {
         return null;
-    } elseif ($str[$pos] == 'i') {
+    }
+
+    if ($str[$pos] == 'i') {
         $pos++;
         $numlen = strspn($str, '-0123456789', $pos);
         $spos = $pos;
@@ -705,10 +703,10 @@ function bdecode_r($str, &$pos)
 
         if (($pos >= $strlen) || ($str[$pos] != 'e')) {
             return null;
-        } else {
-            $pos++;
-            return floatval(substr($str, $spos, $numlen));
         }
+
+        $pos++;
+        return floatval(substr($str, $spos, $numlen));
     } elseif ($str[$pos] == 'd') {
         $pos++;
         $ret = array();
@@ -717,20 +715,22 @@ function bdecode_r($str, &$pos)
             if ($str[$pos] == 'e') {
                 $pos++;
                 return $ret;
-            } else {
-                $key = bdecode_r($str, $pos);
+            }
 
-                if ($key === null) {
-                    return null;
-                } else {
-                    $val = bdecode_r($str, $pos);
+            $key = bdecode_r($str, $pos);
 
-                    if ($val === null) {
-                        return null;
-                    } elseif (!is_array($key)) {
-                        $ret[$key] = $val;
-                    }
-                }
+            if ($key === null) {
+                return null;
+            }
+
+            $val = bdecode_r($str, $pos);
+
+            if ($val === null) {
+                return null;
+            }
+
+            if (!is_array($key)) {
+                $ret[$key] = $val;
             }
         }
         return null;
@@ -742,15 +742,15 @@ function bdecode_r($str, &$pos)
             if ($str[$pos] == 'e') {
                 $pos++;
                 return $ret;
-            } else {
-                $val = bdecode_r($str, $pos);
-
-                if ($val === null) {
-                    return null;
-                } else {
-                    $ret[] = $val;
-                }
             }
+
+            $val = bdecode_r($str, $pos);
+
+            if ($val === null) {
+                return null;
+            }
+
+            $ret[] = $val;
         }
         return null;
     } else {
@@ -760,17 +760,17 @@ function bdecode_r($str, &$pos)
 
         if (($pos >= $strlen) || ($str[$pos] != ':')) {
             return null;
-        } else {
-            $vallen = intval(substr($str, $spos, $numlen));
-            $pos++;
-            $val = substr($str, $pos, $vallen);
-
-            if (strlen($val) != $vallen) {
-                return null;
-            } else {
-                $pos += $vallen;
-                return $val;
-            }
         }
+
+        $vallen = intval(substr($str, $spos, $numlen));
+        $pos++;
+        $val = substr($str, $pos, $vallen);
+
+        if (strlen($val) != $vallen) {
+            return null;
+        }
+
+        $pos += $vallen;
+        return $val;
     }
 }

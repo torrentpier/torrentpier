@@ -30,7 +30,7 @@ if (!empty($setmodules)) {
     $module['ATTACHMENTS']['QUOTA_LIMITS'] = $filename . '?mode=quota';
     return;
 }
-require('./pagestart.php');
+require './pagestart.php';
 
 $error = false;
 
@@ -49,10 +49,10 @@ $size = request_var('size', '');
 $quota_size = request_var('quota_size', '');
 $pm_size = request_var('pm_size', '');
 
-$submit = (isset($_POST['submit'])) ? true : false;
-$check_upload = (isset($_POST['settings'])) ? true : false;
-$check_image_cat = (isset($_POST['cat_settings'])) ? true : false;
-$search_imagick = (isset($_POST['search_imagick'])) ? true : false;
+$submit = isset($_POST['submit']) ? true : false;
+$check_upload = isset($_POST['settings']) ? true : false;
+$check_image_cat = isset($_POST['cat_settings']) ? true : false;
+$search_imagick = isset($_POST['search_imagick']) ? true : false;
 
 // Re-evaluate the Attachment Configuration
 $sql = 'SELECT * FROM ' . BB_ATTACH_CONFIG;
@@ -151,7 +151,9 @@ if ($search_imagick) {
 
     if (preg_match('/convert/i', $imagick)) {
         return true;
-    } elseif ($imagick != 'none') {
+    }
+
+    if ($imagick != 'none') {
         if (!preg_match('/WIN/i', PHP_OS)) {
             $retval = @exec('whereis convert');
             $paths = explode(' ', $retval);
@@ -174,7 +176,7 @@ if ($search_imagick) {
         }
     }
 
-    if (!@file_exists(@amod_realpath(trim($imagick)))) {
+    if (!@file_exists(amod_realpath(trim($imagick)))) {
         $new_attach['img_imagick'] = trim($imagick);
     } else {
         $new_attach['img_imagick'] = '';
@@ -209,7 +211,7 @@ if ($check_upload) {
     $error = false;
 
     // Does the target directory exist, is it a directory and writeable
-    if (!@file_exists(@amod_realpath($upload_dir))) {
+    if (!@file_exists(amod_realpath($upload_dir))) {
         $error = true;
         $error_msg = sprintf($lang['DIRECTORY_DOES_NOT_EXIST'], $attach_config['upload_dir']) . '<br />';
     }
@@ -220,7 +222,7 @@ if ($check_upload) {
     }
 
     if (!$error) {
-        if (!($fp = @fopen($upload_dir . '/0_000000.000', 'w'))) {
+        if (!($fp = @fopen($upload_dir . '/0_000000.000', 'wb'))) {
             $error = true;
             $error_msg = sprintf($lang['DIRECTORY_NOT_WRITEABLE'], $attach_config['upload_dir']) . '<br />';
         } else {
@@ -248,8 +250,8 @@ if ($mode == 'manage') {
         'S_FILESIZE' => $select_size_mode,
         'S_FILESIZE_QUOTA' => $select_quota_size_mode,
         'S_FILESIZE_PM' => $select_pm_size_mode,
-        'S_DEFAULT_UPLOAD_LIMIT' => default_quota_limit_select('default_upload_quota', intval(trim($new_attach['default_upload_quota']))),
-        'S_DEFAULT_PM_LIMIT' => default_quota_limit_select('default_pm_quota', intval(trim($new_attach['default_pm_quota']))),
+        'S_DEFAULT_UPLOAD_LIMIT' => default_quota_limit_select('default_upload_quota', (int)trim($new_attach['default_upload_quota'])),
+        'S_DEFAULT_PM_LIMIT' => default_quota_limit_select('default_pm_quota', (int)trim($new_attach['default_pm_quota'])),
 
         'UPLOAD_DIR' => $new_attach['upload_dir'],
         'ATTACHMENT_IMG_PATH' => $new_attach['upload_img'],
@@ -288,7 +290,7 @@ if ($mode == 'cats') {
     $row = DB()->sql_fetchrowset($result);
     DB()->sql_freeresult($result);
 
-    for ($i = 0; $i < sizeof($row); $i++) {
+    for ($i = 0; $i < count($row); $i++) {
         if ($row[$i]['cat_id'] == IMAGE_CAT) {
             $s_assigned_group_images[] = $row[$i]['group_name'];
         }
@@ -359,11 +361,11 @@ if ($check_image_cat) {
     $error = false;
 
     // Does the target directory exist, is it a directory and writeable
-    if (!@file_exists(@amod_realpath($upload_dir))) {
-        @mkdir($upload_dir, 0755);
+    if (!@file_exists(amod_realpath($upload_dir))) {
+        mkdir($upload_dir, 0755);
         @chmod($upload_dir, 0777);
 
-        if (!@file_exists(@amod_realpath($upload_dir))) {
+        if (!@file_exists(amod_realpath($upload_dir))) {
             $error = true;
             $error_msg = sprintf($lang['DIRECTORY_DOES_NOT_EXIST'], $upload_dir) . '<br />';
         }
@@ -375,7 +377,7 @@ if ($check_image_cat) {
     }
 
     if (!$error) {
-        if (!($fp = @fopen($upload_dir . '/0_000000.000', 'w'))) {
+        if (!($fp = @fopen($upload_dir . '/0_000000.000', 'wb'))) {
             $error = true;
             $error_msg = sprintf($lang['DIRECTORY_NOT_WRITEABLE'], $upload_dir) . '<br />';
         } else {
@@ -399,14 +401,14 @@ if ($submit && $mode == 'quota') {
 
     $allowed_list = array();
 
-    for ($i = 0; $i < sizeof($quota_change_list); $i++) {
+    for ($i = 0; $i < count($quota_change_list); $i++) {
         $filesize_list[$i] = ($size_select_list[$i] == 'kb') ? round($filesize_list[$i] * 1024) : (($size_select_list[$i] == 'mb') ? round($filesize_list[$i] * 1048576) : $filesize_list[$i]);
 
         $sql = 'UPDATE ' . BB_QUOTA_LIMITS . "
 			SET quota_desc = '" . attach_mod_sql_escape($quota_desc_list[$i]) . "', quota_limit = " . (int)$filesize_list[$i] . "
 			WHERE quota_limit_id = " . (int)$quota_change_list[$i];
 
-        if (!(DB()->sql_query($sql))) {
+        if (!DB()->sql_query($sql)) {
             bb_die('Could not update quota limits');
         }
     }
@@ -435,7 +437,7 @@ if ($submit && $mode == 'quota') {
     $quota_desc = get_var('quota_description', '');
     $filesize = get_var('add_max_filesize', 0);
     $size_select = get_var('add_size_select', '');
-    $add = (isset($_POST['add_quota_check'])) ? true : false;
+    $add = isset($_POST['add_quota_check']) ? true : false;
 
     if ($quota_desc != '' && $add) {
         // check Quota Description
@@ -467,7 +469,7 @@ if ($submit && $mode == 'quota') {
             $sql = "INSERT INTO " . BB_QUOTA_LIMITS . " (quota_desc, quota_limit)
 			VALUES ('" . attach_mod_sql_escape($quota_desc) . "', " . (int)$filesize . ")";
 
-            if (!(DB()->sql_query($sql))) {
+            if (!DB()->sql_query($sql)) {
                 bb_die('Could not add quota limit');
             }
         }
@@ -504,7 +506,7 @@ if ($mode == 'quota') {
     $rows = DB()->sql_fetchrowset($result);
     DB()->sql_freeresult($result);
 
-    for ($i = 0; $i < sizeof($rows); $i++) {
+    for ($i = 0; $i < count($rows); $i++) {
         $size_format = ($rows[$i]['quota_limit'] >= 1048576) ? 'mb' : (($rows[$i]['quota_limit'] >= 1024) ? 'kb' : 'b');
 
         if ($rows[$i]['quota_limit'] >= 1048576) {

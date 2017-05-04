@@ -70,7 +70,7 @@ function get_sql_log_html($db_obj, $log_name)
             . '<span style="letter-spacing: -1px;">' . $time . ' </span>'
             . '<span title="Copy to clipboard" onclick="$.copyToClipboard( $(\'#' . $id . '\').text() );" style="color: gray; letter-spacing: -1px;">' . $perc . '</span>'
             . ' '
-            . '<span style="letter-spacing: 0px;" id="' . $id . '">' . $sql . '</span>'
+            . '<span style="letter-spacing: 0;" id="' . $id . '">' . $sql . '</span>'
             . '<span style="color: gray"> # ' . $info . ' </span>'
             . '</div>'
             . "\n";

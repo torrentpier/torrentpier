@@ -135,6 +135,7 @@ class template
 
     /**
      * Constructor. Installs XS mod on first run or updates it and sets the root dir.
+     * @param string $root
      */
     public function __construct($root = '.')
     {
@@ -165,6 +166,9 @@ class template
      * Generates a full path+filename for the given filename, which can either
      * be an absolute name, or a name relative to the rootdir for this Template
      * object.
+     * @param $filename
+     * @param bool $xs_include
+     * @return mixed|string
      */
     public function make_filename($filename, $xs_include = false)
     {
@@ -173,19 +177,21 @@ class template
             $filename = $this->replace[$filename];
         }
         // Check if it's an absolute or relative path.
-        if ((substr($filename, 0, 1) !== '/') && (substr($filename, 1, 1) !== ':')) {
+        if (($filename[0] !== '/') && ($filename[1] !== ':')) {
             return $this->root . '/' . $filename;
-        } else {
-            return $filename;
         }
+
+        return $filename;
     }
 
     /**
      * Converts template filename to cache filename.
      * Returns empty string if non-cachable (for tpl files outside of root dir).
      * $filename should be absolute filename
+     * @param $filename
+     * @return string
      */
-    public function make_filename_cache($filename)
+    public function make_filename_cache($filename): string
     {
         $filename = clean_filename(str_replace(TEMPLATES_DIR, '', $filename));
 
@@ -195,6 +201,7 @@ class template
     /**
      * Sets the template filenames for handles. $filename_array
      * should be a hash of handle => filename pairs.
+     * @param $filenames
      */
     public function set_filenames($filenames)
     {
@@ -205,8 +212,13 @@ class template
 
     /**
      * Assigns template filename for handle.
+     * @param $handle
+     * @param $filename
+     * @param bool $xs_include
+     * @param bool $quiet
+     * @return bool
      */
-    public function set_filename($handle, $filename, $xs_include = false, $quiet = false)
+    public function set_filename($handle, $filename, $xs_include = false, $quiet = false): bool
     {
         $can_cache = $this->use_cache;
         $this->files[$handle] = $this->make_filename($filename, $xs_include);
@@ -216,9 +228,9 @@ class template
         if (!$this->files[$handle]) {
             if ($xs_include || $quiet) {
                 return false;
-            } else {
-                die("Template->make_filename(): Error - invalid template $filename");
             }
+
+            die("Template->make_filename(): Error - invalid template $filename");
         }
         // creating cache filename
         if ($can_cache) {
@@ -247,8 +259,11 @@ class template
 
     /**
      * includes file or executes code
+     * @param $filename
+     * @param $code
+     * @internal param $handle
      */
-    public function execute($filename, $code, $handle)
+    public function execute($filename, $code)
     {
         $this->cur_tpl = $filename;
 
@@ -258,7 +273,7 @@ class template
         $V =& $this->vars;
 
         if ($filename) {
-            include($filename);
+            include $filename;
         } else {
             eval($code);
         }
@@ -268,8 +283,10 @@ class template
      * Load the file for the handle, compile the file,
      * and run the compiled code. This will print out
      * the results of executing the template.
+     * @param $handle
+     * @return bool
      */
-    public function pparse($handle)
+    public function pparse($handle): bool
     {
         // parsing header if there is one
         if ($this->preparse || $this->postparse) {
@@ -321,8 +338,11 @@ class template
 
     /**
      * Precompile file
+     * @param $template
+     * @param $filename
+     * @return bool
      */
-    public function precompile($template, $filename)
+    public function precompile($template, $filename): bool
     {
         global $precompile_num;
         if (empty($precompile_num)) {
@@ -376,8 +396,11 @@ class template
      * template.
      * Note that all desired assignments to the variables in $handle should be done
      * BEFORE calling this function.
+     * @param $varname
+     * @param $handle
+     * @return bool
      */
-    public function assign_var_from_handle($varname, $handle)
+    public function assign_var_from_handle($varname, $handle): bool
     {
         ob_start();
         $res = $this->pparse($handle);
@@ -390,18 +413,21 @@ class template
      * Block-level variable assignment. Adds a new block iteration with the given
      * variable assignments. Note that this should only be called once per block
      * iteration.
+     * @param $blockname
+     * @param $vararray
+     * @return bool
      */
-    public function assign_block_vars($blockname, $vararray)
+    public function assign_block_vars($blockname, $vararray): bool
     {
-        if (strstr($blockname, '.')) {
+        if (false !== strpos($blockname, '.')) {
             // Nested block.
             $blocks = explode('.', $blockname);
-            $blockcount = sizeof($blocks) - 1;
+            $blockcount = count($blocks) - 1;
 
             $str = &$this->_tpldata;
             for ($i = 0; $i < $blockcount; $i++) {
                 $str = &$str[$blocks[$i] . '.'];
-                $str = &$str[sizeof($str) - 1];
+                $str = &$str[count($str) - 1];
             }
             // Now we add the block that we're actually assigning to.
             // We're adding a new iteration to this block with the given
@@ -420,6 +446,7 @@ class template
     /**
      * Root-level variable assignment. Adds to current assignments, overriding
      * any existing variable assignment with the same name.
+     * @param $vararray
      */
     public function assign_vars($vararray)
     {
@@ -431,6 +458,8 @@ class template
     /**
      * Root-level variable assignment. Adds to current assignments, overriding
      * any existing variable assignment with the same name.
+     * @param $varname
+     * @param bool $varval
      */
     public function assign_var($varname, $varval = true)
     {
@@ -441,6 +470,7 @@ class template
      * TODO: Add type check [??]
      * Root-level. Adds to current assignments, appends
      * to any existing variable assignment with the same name.
+     * @param $vararray
      */
     public function append_vars($vararray)
     {
@@ -452,8 +482,10 @@ class template
     /**
      * If not already done, load the file for the given handle and populate
      * the uncompiled_code[] hash with its code. Do not compile.
+     * @param $handle
+     * @return bool
      */
-    public function loadfile($handle)
+    public function loadfile($handle): bool
     {
         // If cached file exists do nothing - it will be included via include()
         if (!empty($this->files_cache[$handle])) {
@@ -487,11 +519,14 @@ class template
      * ' . $this->_tpldata['parent.'][$_parent_i]['$child1.'][$_child1_i]['$child2.'][$_child2_i]...['varname'] . '
      * It's ready to be inserted into an "echo" line in one of the templates.
      * NOTE: expects a trailing "." on the namespace.
+     * @param $namespace
+     * @param $varname
+     * @return string
      */
-    public function generate_block_varref($namespace, $varname)
+    public function generate_block_varref($namespace, $varname): string
     {
         // Strip the trailing period.
-        $namespace = substr($namespace, 0, strlen($namespace) - 1);
+        $namespace = substr($namespace, 0, -0);
 
         // Get a reference to the data block for this namespace.
         $varref = $this->generate_block_data_ref($namespace, true);
@@ -512,20 +547,23 @@ class template
      *
      * If $include_last_iterator is true, then [$_childN_i] will be appended to the form shown above.
      * NOTE: does not expect a trailing "." on the blockname.
+     * @param $blockname
+     * @param $include_last_iterator
+     * @return string
      */
     public function generate_block_data_ref($blockname, $include_last_iterator)
     {
         // Get an array of the blocks involved.
         $blocks = explode('.', $blockname);
-        $blockcount = sizeof($blocks) - 1;
+        $blockcount = count($blocks) - 1;
         if ($include_last_iterator) {
             return '$' . $blocks[$blockcount] . '_item';
-        } else {
-            return '$' . $blocks[$blockcount - 1] . '_item[\'' . $blocks[$blockcount] . '.\']';
         }
+
+        return '$' . $blocks[$blockcount - 1] . '_item[\'' . $blocks[$blockcount] . '.\']';
     }
 
-    public function compile_code($filename, $code)
+    public function compile_code($filename, $code): string
     {
         //	$filename - file to load code from. used if $code is empty
         //	$code - tpl code
@@ -686,7 +724,7 @@ class template
                 } else {
                     // This block is nested.
                     // Generate a namespace string for this block.
-                    $namespace = join('.', $block_names);
+                    $namespace = implode('.', $block_names);
                     // strip leading period from root level..
                     $namespace = substr($namespace, 2);
                     // Get a reference to the data array for this block that depends on the
@@ -774,7 +812,7 @@ class template
                 if (!$count_if) {
                     $keyword_type = XS_TAG_IF;
                 }
-                $str = $this->compile_tag_if($params_str, $keyword_type == XS_TAG_IF ? false : true);
+                $str = $this->compile_tag_if($params_str, $keyword_type != XS_TAG_IF);
                 if ($str) {
                     $compiled[] = '<?php ' . $str . ' ?>';
                     if ($keyword_type == XS_TAG_IF) {
@@ -806,7 +844,7 @@ class template
         $code_header = '';
         $code_footer = '';
 
-        return $code_header . join('', $compiled) . $code_footer;
+        return $code_header . implode('', $compiled) . $code_footer;
     }
 
     /*
@@ -821,7 +859,7 @@ class template
         // This one will handle varrefs WITH namespaces
         $varrefs = array();
         preg_match_all('#\{(([a-z0-9\-_]+?\.)+)([a-z0-9\-_]+?)\}#is', $code, $varrefs);
-        $varcount = sizeof($varrefs[1]);
+        $varcount = count($varrefs[1]);
         $search = array();
         $replace = array();
         for ($i = 0; $i < $varcount; $i++) {
@@ -846,7 +884,7 @@ class template
     // Compile IF tags - much of this is from Smarty with
     // some adaptions for our block level methods
     //
-    public function compile_tag_if($tag_args, $elseif)
+    public function compile_tag_if($tag_args, $elseif): string
     {
         /* Tokenize args for 'if' tag. */
         preg_match_all('/(?:
@@ -907,12 +945,12 @@ class template
                     break;
 
                 case '(':
-                    array_push($is_arg_stack, $i);
+                    $is_arg_stack[] = $i;
                     break;
 
                 case 'is':
                     $is_arg_start = ($tokens[$i - 1] == ')') ? array_pop($is_arg_stack) : $i - 1;
-                    $is_arg = join('	', array_slice($tokens, $is_arg_start, $i - $is_arg_start));
+                    $is_arg = implode('	', array_slice($tokens, $is_arg_start, $i - $is_arg_start));
 
                     $new_tokens = $this->_parse_is_expr($is_arg, array_slice($tokens, $i + 1));
 
@@ -948,9 +986,9 @@ class template
         }
 
         if ($elseif) {
-            $code = '} elseif (' . join(' ', $tokens) . ') {';
+            $code = '} elseif (' . implode(' ', $tokens) . ') {';
         } else {
-            $code = 'if (' . join(' ', $tokens) . ') {';
+            $code = 'if (' . implode(' ', $tokens) . ') {';
         }
 
         return $code;
@@ -971,7 +1009,7 @@ class template
 
         switch ($expr_type) {
             case 'even':
-                if (@$tokens[$expr_end] == 'by') {
+                if ($tokens[$expr_end] == 'by') {
                     $expr_end++;
                     $expr_arg = $tokens[$expr_end++];
                     $expr = "!(($is_arg	/ $expr_arg) % $expr_arg)";
@@ -981,7 +1019,7 @@ class template
                 break;
 
             case 'odd':
-                if (@$tokens[$expr_end] == 'by') {
+                if ($tokens[$expr_end] == 'by') {
                     $expr_end++;
                     $expr_arg = $tokens[$expr_end++];
                     $expr = "(($is_arg / $expr_arg)	% $expr_arg)";
@@ -991,7 +1029,7 @@ class template
                 break;
 
             case 'div':
-                if (@$tokens[$expr_end] == 'by') {
+                if ($tokens[$expr_end] == 'by') {
                     $expr_end++;
                     $expr_arg = $tokens[$expr_end++];
                     $expr = "!($is_arg % $expr_arg)";
@@ -1013,8 +1051,12 @@ class template
 
     /**
      * Compiles code and writes to cache if needed
+     * @param $code
+     * @param $handle
+     * @param $cache_file
+     * @return string
      */
-    public function compile2($code, $handle, $cache_file)
+    public function compile2($code, $handle, $cache_file): string
     {
         $code = $this->compile_code('', $code, XS_USE_ISSET);
         if ($cache_file && !empty($this->use_cache) && !empty($this->auto_compile)) {
@@ -1034,8 +1076,12 @@ class template
      * executable, but can be used as part of a variable assignment
      * for use in assign_code_from_handle().
      * This function isn't used and kept only for compatibility with original template.php
+     * @param $code
+     * @param bool $do_not_echo
+     * @param string $retvar
+     * @return string
      */
-    public function compile($code, $do_not_echo = false, $retvar = '')
+    public function compile($code, $do_not_echo = false, $retvar = ''): string
     {
         $code = ' ?' . '>' . $this->compile_code('', $code, true) . '<' . "?php \n";
         if ($do_not_echo) {
@@ -1046,6 +1092,8 @@ class template
 
     /**
      * Write cache to disk
+     * @param $filename
+     * @param $code
      */
     public function write_cache($filename, $code)
     {
@@ -1060,18 +1108,18 @@ class template
             $this->xs_started = 1;
             // adding language variable (eg: "english" or "german")
             // can be used to make truly multi-lingual templates
-            $this->vars['LANG'] = isset($this->vars['LANG']) ? $this->vars['LANG'] : $bb_cfg['default_lang'];
+            $this->vars['LANG'] = $this->vars['LANG'] ?? $bb_cfg['default_lang'];
             // adding current template
             $tpl = $this->root . '/';
             if (substr($tpl, 0, 2) === './') {
                 $tpl = substr($tpl, 2, strlen($tpl));
             }
-            $this->vars['TEMPLATE'] = isset($this->vars['TEMPLATE']) ? $this->vars['TEMPLATE'] : $tpl;
-            $this->vars['TEMPLATE_NAME'] = isset($this->vars['TEMPLATE_NAME']) ? $this->vars['TEMPLATE_NAME'] : $this->tpl;
+            $this->vars['TEMPLATE'] = $this->vars['TEMPLATE'] ?? $tpl;
+            $this->vars['TEMPLATE_NAME'] = $this->vars['TEMPLATE_NAME'] ?? $this->tpl;
         }
     }
 
-    public function lang_error($var)
+    public function lang_error($var): string
     {
         trigger_error(basename($this->cur_tpl) . " : undefined language variable {L_{$var}}", E_USER_WARNING);
         return "Undefined: {L_{$var}}";

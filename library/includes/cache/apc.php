@@ -31,7 +31,7 @@ class cache_apc extends cache_common
 {
     public $used = true;
     public $engine = 'APC';
-    public $prefix = null;
+    public $prefix;
 
     public function __construct($prefix = null)
     {
@@ -74,12 +74,12 @@ class cache_apc extends cache_common
             $this->num_queries++;
 
             return apc_delete($this->prefix . $name);
-        } else {
-            return apc_clear_cache();
         }
+
+        return apc_clear_cache();
     }
 
-    public function is_installed()
+    public function is_installed(): bool
     {
         return function_exists('apc_fetch');
     }

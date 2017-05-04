@@ -30,8 +30,8 @@ if (!defined('BB_ROOT')) {
 class cache_sqlite extends cache_common
 {
     public $used = true;
-    public $db = null;
-    public $prefix = null;
+    public $db;
+    public $prefix;
     public $cfg = array(
         'db_file_path' => '/path/to/cache.db.sqlite',
         'table_name' => 'cache',
@@ -70,7 +70,7 @@ class cache_sqlite extends cache_common
         $rowset = $this->db->fetch_rowset("
 			SELECT cache_name, cache_value
 			FROM " . $this->cfg['table_name'] . "
-			WHERE cache_name IN('$this->prefix_sql" . join("','$this->prefix_sql", $name_sql) . "') AND cache_expire_time > " . TIMENOW . "
+			WHERE cache_name IN('$this->prefix_sql" . implode("','$this->prefix_sql", $name_sql) . "') AND cache_expire_time > " . TIMENOW . "
 			LIMIT " . count($name) . "
 		");
 
@@ -90,12 +90,12 @@ class cache_sqlite extends cache_common
         // return
         if (is_array($this->prefix . $name)) {
             return $cached_items;
-        } else {
-            return isset($cached_items[$name]) ? $cached_items[$name] : false;
         }
+
+        return isset($cached_items[$name]) ? $cached_items[$name] : false;
     }
 
-    public function set($name, $value, $ttl = 604800)
+    public function set($name, $value, $ttl = 604800): bool
     {
         $this->db->shard($this->prefix . $name);
         $name_sql = SQLite3::escapeString($this->prefix . $name);
@@ -106,7 +106,7 @@ class cache_sqlite extends cache_common
         return (bool)$result;
     }
 
-    public function rm($name = '')
+    public function rm($name = ''): bool
     {
         if ($name) {
             $this->db->shard($this->prefix . $name);
@@ -117,10 +117,10 @@ class cache_sqlite extends cache_common
         return (bool)$result;
     }
 
-    public function gc($expire_time = TIMENOW)
+    public function gc($expire_time = TIMENOW): int
     {
         $result = $this->db->query("DELETE FROM " . $this->cfg['table_name'] . " WHERE cache_expire_time < $expire_time");
-        return ($result) ? $this->db->changes() : 0;
+        return $result ? $this->db->changes() : 0;
     }
 }
 
@@ -137,7 +137,7 @@ class sqlite_common extends cache_common
         'shard_val' => 0,          #  для string - кол. начальных символов, для int - делитель (будет использован остаток от деления)
     );
     public $engine = 'SQLite';
-    public $dbh = null;
+    public $dbh;
     public $connected = false;
     public $shard_val = false;
 
@@ -151,10 +151,10 @@ class sqlite_common extends cache_common
 
     public function connect()
     {
-        $this->cur_query = ($this->dbg_enabled) ? 'connect to: ' . $this->cfg['db_file_path'] : 'connect';
+        $this->cur_query = $this->dbg_enabled ? 'connect to: ' . $this->cfg['db_file_path'] : 'connect';
         $this->debug('start');
 
-        if (@$this->dbh = new SQLite3($this->cfg['db_file_path'])) {
+        if ($this->dbh = new SQLite3($this->cfg['db_file_path'])) {
             $this->connected = true;
         }
 
@@ -238,13 +238,13 @@ class sqlite_common extends cache_common
         return $result;
     }
 
-    public function fetch_row($query)
+    public function fetch_row($query): bool
     {
         $result = $this->query($query);
         return is_resource($result) ? $result->fetchArray(SQLITE3_ASSOC) : false;
     }
 
-    public function fetch_rowset($query)
+    public function fetch_rowset($query): array
     {
         $result = $this->query($query);
         $rowset = array();
@@ -254,22 +254,22 @@ class sqlite_common extends cache_common
         return $rowset;
     }
 
-    public function changes()
+    public function changes(): int
     {
         return is_resource($this->dbh) ? $this->dbh->changes() : 0;
     }
 
-    public function escape($str)
+    public function escape($str): string
     {
         return SQLite3::escapeString($str);
     }
 
-    public function get_error_msg()
+    public function get_error_msg(): string
     {
         return 'SQLite error #' . ($err_code = $this->dbh->lastErrorCode()) . ': ' . $this->dbh->lastErrorMsg();
     }
 
-    public function rm($name = '')
+    public function rm($name = ''): bool
     {
         if ($name) {
             $this->db->shard($this->prefix . $name);
@@ -280,10 +280,10 @@ class sqlite_common extends cache_common
         return (bool)$result;
     }
 
-    public function gc($expire_time = TIMENOW)
+    public function gc($expire_time = TIMENOW): int
     {
         $result = $this->db->query("DELETE FROM " . $this->cfg['table_name'] . " WHERE cache_expire_time < $expire_time");
-        return ($result) ? sqlite_changes($this->db->dbh) : 0;
+        return $result ? sqlite_changes($this->db->dbh) : 0;
     }
 
     public function trigger_error($msg = 'DB Error')

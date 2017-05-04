@@ -25,22 +25,27 @@
 
 /**
  * Setup s_auth_can in viewforum and viewtopic (viewtopic.php/viewforum.php)
+ * @param $is_auth
+ * @param $s_auth_can
  */
 function attach_build_auth_levels($is_auth, &$s_auth_can)
 {
     global $lang, $attach_config;
 
-    if (intval($attach_config['disable_mod'])) {
+    if ((int)$attach_config['disable_mod']) {
         return;
     }
 
     // If you want to have the rules window link within the forum view too, comment out the two lines, and comment the third line
-    $s_auth_can .= (($is_auth['auth_attachments']) ? $lang['RULES_ATTACH_CAN'] : $lang['RULES_ATTACH_CANNOT']) . '<br />';
-    $s_auth_can .= (($is_auth['auth_download']) ? $lang['RULES_DOWNLOAD_CAN'] : $lang['RULES_DOWNLOAD_CANNOT']) . '<br />';
+    $s_auth_can .= ($is_auth['auth_attachments'] ? $lang['RULES_ATTACH_CAN'] : $lang['RULES_ATTACH_CANNOT']) . '<br />';
+    $s_auth_can .= ($is_auth['auth_download'] ? $lang['RULES_DOWNLOAD_CAN'] : $lang['RULES_DOWNLOAD_CANNOT']) . '<br />';
 }
 
 /**
  * Called from admin_users.php and admin_groups.php in order to process Quota Settings (admin/admin_users.php:admin/admin_groups.php)
+ * @param $admin_mode
+ * @param bool $submit
+ * @param $mode
  */
 function attachment_quota_settings($admin_mode, $submit = false, $mode)
 {
@@ -61,7 +66,7 @@ function attachment_quota_settings($admin_mode, $submit = false, $mode)
 
     if ($admin_mode == 'user') {
         // We overwrite submit here... to be sure
-        $submit = (isset($_POST['submit'])) ? true : false;
+        $submit = isset($_POST['submit']) ? true : false;
 
         if (!$submit && $mode != 'save') {
             $user_id = get_var(POST_USERS_URL, 0);
@@ -119,7 +124,7 @@ function attachment_quota_settings($admin_mode, $submit = false, $mode)
         ));
     }
 
-    if ($admin_mode == 'user' && $submit && @$_POST['delete_user']) {
+    if ($admin_mode == 'user' && $submit && $_POST['delete_user']) {
         process_quota_settings($admin_mode, $user_id, QUOTA_UPLOAD_LIMIT, 0);
         process_quota_settings($admin_mode, $user_id, QUOTA_PM_LIMIT, 0);
     } elseif ($admin_mode == 'user' && $submit && $mode == 'save') {

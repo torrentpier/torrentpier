@@ -2275,7 +2275,7 @@ class utf8
         if (!ReflectionTypeHint::isValid()) {
             return false;
         }
-        if (is_null($s)) {
+        if (null === $s) {
             return $s;
         }
 
@@ -2324,15 +2324,15 @@ class utf8
         if (!ReflectionTypeHint::isValid()) {
             return false;
         }
-        if (is_null($s)) {
+        if (null === $s) {
             return $s;
         }
 
         if (!$restore_table) {
             return $s;
         }
-        if (!is_int(@$restore_table['length']) ||
-            !is_array(@$restore_table['offsets']) ||
+        if (!is_int($restore_table['length']) ||
+            !is_array($restore_table['offsets']) ||
             $restore_table['length'] !== self::strlen($s)
         ) {
             return false;
@@ -2353,7 +2353,7 @@ class utf8
      *
      * @param   array|scalar|null $data
      * @param   string $charset
-     * @return  array|scalar|null  Returns FALSE if error occurred
+     * @return array|bool|null|scalar
      */
     public static function convert_from($data, $charset = 'cp1251')
     {
@@ -2368,7 +2368,7 @@ class utf8
      *
      * @param   array|scalar|null $data
      * @param   string $charset
-     * @return  array|scalar|null  Returns FALSE if error occurred
+     * @return array|bool|null|scalar
      */
     public static function convert_to($data, $charset = 'cp1251')
     {
@@ -2386,7 +2386,7 @@ class utf8
      * @param   array|scalar|null $data
      * @param   string $charset_from
      * @param   string $charset_to
-     * @return  array|scalar|null  Returns FALSE if error occurred
+     * @return array|bool|null|scalar
      */
     private static function _convert($data, $charset_from, $charset_to)
     {
@@ -2568,7 +2568,7 @@ class utf8
         if (!ReflectionTypeHint::isValid()) {
             return false;
         }
-        if (is_null($s)) {
+        if (null === $s) {
             return $s;
         }
         return preg_replace('/[\x00-\x08\x0B\x0C\x0E-\x1F]+/sSX', '', $s);
@@ -2584,7 +2584,7 @@ class utf8
      * @param   array|scalar|null $data
      * @return  bool
      */
-    public static function is_ascii($data)
+    public static function is_ascii($data): bool
     {
         if (!ReflectionTypeHint::isValid()) {
             return false;
@@ -2602,7 +2602,7 @@ class utf8
         if (is_string($data)) {
             return ltrim($data, "\x00..\x7f") === '';
         }
-        if (is_scalar($data) || is_null($data)) {
+        if (is_scalar($data) || null === $data) {
             return true;
         }  #~ null, integer, float, boolean
         return false; #object or resource
@@ -2623,7 +2623,7 @@ class utf8
      * @param   bool $is_strict strict the range of ASCII?
      * @return  bool
      */
-    public static function is_utf8($data, $is_strict = true)
+    public static function is_utf8($data, $is_strict = true): bool
     {
         if (!ReflectionTypeHint::isValid()) {
             return false;
@@ -2650,7 +2650,7 @@ class utf8
             }
             return true;
         }
-        if (is_scalar($data) || is_null($data)) {
+        if (is_scalar($data) || null === $data) {
             return true;
         }  #~ null, integer, float, boolean
         return false; #object or resource
@@ -2665,7 +2665,7 @@ class utf8
      * @param   bool $is_strict строгая проверка диапазона ASCII?
      * @return  bool
      */
-    public static function check($s, $is_strict = true)
+    public static function check($s, $is_strict = true): bool
     {
         if (!ReflectionTypeHint::isValid()) {
             return false;
@@ -2734,7 +2734,7 @@ class utf8
      * @return  bool               Возвращает TRUE, если все символы из текста принадлежат указанным диапазонам
      *                             и FALSE в противном случае или для разбитого UTF-8.
      */
-    public static function blocks_check($data, $blocks)
+    public static function blocks_check($data, $blocks): bool
     {
         if (!ReflectionTypeHint::isValid()) {
             return false;
@@ -2792,7 +2792,7 @@ class utf8
             }#foreach
             return true;
         }
-        if (is_scalar($data) || is_null($data)) {
+        if (is_scalar($data) || null === $data) {
             return true;
         }  #~ null, integer, float, boolean
         return false; #object or resource
@@ -2825,7 +2825,7 @@ class utf8
      * @return  bool                 Возвращает TRUE, если все значения элементов массивов в кодировке UTF-8
      *                               и FALSE + E_USER_WARNING в противном случае.
      */
-    public static function autoconvert_request($is_hex2bin = false, $charset = 'cp1251')
+    public static function autoconvert_request($is_hex2bin = false, $charset = 'cp1251'): bool
     {
         if (!ReflectionTypeHint::isValid()) {
             return false;
@@ -2846,9 +2846,9 @@ class utf8
         }
         if ($is_converted) {
             $_REQUEST =
-                (isset($_COOKIE) ? $_COOKIE : array()) +
-                (isset($_POST) ? $_POST : array()) +
-                (isset($_GET) ? $_GET : array());
+                ($_COOKIE ?? array()) +
+                ($_POST ?? array()) +
+                ($_GET ?? array());
         }
         return true;
     }
@@ -2912,7 +2912,7 @@ class utf8
         if (!ReflectionTypeHint::isValid()) {
             return false;
         }
-        if (is_null($s1) || is_null($s2)) {
+        if (null === $s1 || null === $s2) {
             return null;
         }
         if (!function_exists('collator_create')) {
@@ -2945,7 +2945,7 @@ class utf8
         if (!ReflectionTypeHint::isValid()) {
             return false;
         }
-        if (is_null($s1) || is_null($s2)) {
+        if (null === $s1 || null === $s2) {
             return null;
         }
         return self::strcmp(self::substr($s1, 0, $length), self::substr($s2, 0, $length));
@@ -2966,7 +2966,7 @@ class utf8
         if (!ReflectionTypeHint::isValid()) {
             return false;
         }
-        if (is_null($s1) || is_null($s2)) {
+        if (null === $s1 || null === $s2) {
             return null;
         }
         return self::strcmp(self::lowercase($s1), self::lowercase($s2));
@@ -2984,7 +2984,7 @@ class utf8
         if (!ReflectionTypeHint::isValid()) {
             return false;
         }
-        if (is_null($s)) {
+        if (null === $s) {
             return $s;
         }
 
@@ -3013,7 +3013,7 @@ class utf8
      * Converts a UNICODE codepoints to a UTF-8 string
      *
      * @param   array|null $a Unicode codepoints
-     * @return  string|bool|null     UTF-8 string
+     * @return array|bool|null|string
      *                               Returns FALSE if error occurred
      */
     public static function from_unicode($a)
@@ -3021,7 +3021,7 @@ class utf8
         if (!ReflectionTypeHint::isValid()) {
             return false;
         }
-        if (is_null($a)) {
+        if (null === $a) {
             return $a;
         }
 
@@ -3062,7 +3062,7 @@ class utf8
         if (!ReflectionTypeHint::isValid()) {
             return false;
         }
-        if (is_null($char)) {
+        if (null === $char) {
             return $char;
         }
 
@@ -3104,7 +3104,7 @@ class utf8
         if (!ReflectionTypeHint::isValid()) {
             return false;
         }
-        if (is_null($cp)) {
+        if (null === $cp) {
             return $cp;
         }
 
@@ -3148,12 +3148,12 @@ class utf8
         if (!ReflectionTypeHint::isValid()) {
             return false;
         }
-        if (is_null($s)) {
+        if (null === $s) {
             return $s;
         }
 
-        $length = intval($length);
-        $glue = strval($glue);
+        $length = (int)$length;
+        $glue = (string)$glue;
         if ($length < 1) {
             $length = 76;
         }
@@ -3262,7 +3262,7 @@ class utf8
      * Convert a data to upper case
      *
      * @param   array|scalar|null $data
-     * @return  scalar|null        Returns FALSE if error occurred
+     * @return bool|null|scalar
      */
     public static function uppercase($data)
     {
@@ -3290,7 +3290,7 @@ class utf8
      * Convert a data to upper case
      *
      * @param   array|scalar|null $data
-     * @return  scalar|null        Returns FALSE if error occurred
+     * @return bool|null|scalar
      */
     public static function strtoupper($data)
     {
@@ -3315,7 +3315,7 @@ class utf8
      *
      * @param   scalar|null $s
      * @param   bool $is_special_chars Дополнительно обрабатывать специальные html сущности? (&lt; &gt; &amp; &quot;)
-     * @return  scalar|null  Returns FALSE if error occurred
+     * @return bool|null|scalar
      */
     public static function html_entity_decode($s, $is_special_chars = false)
     {
@@ -3382,7 +3382,7 @@ class utf8
      *
      * @param   scalar|null $s
      * @param   bool $is_special_chars_only Обрабатывать только специальные html сущности? (&lt; &gt; &amp; &quot;)
-     * @return  scalar|null  Returns FALSE if error occurred
+     * @return bool|null|scalar
      */
     public static function html_entity_encode($s, $is_special_chars_only = false)
     {
@@ -3433,7 +3433,7 @@ class utf8
         if (!ReflectionTypeHint::isValid()) {
             return false;
         }
-        if (is_null($s)) {
+        if (null === $s) {
             return $s;
         }
 
@@ -3491,7 +3491,7 @@ class utf8
         if (!ReflectionTypeHint::isValid()) {
             return false;
         }
-        if (is_null($subject)) {
+        if (null === $subject) {
             return null;
         }
 
@@ -3537,7 +3537,7 @@ class utf8
         if (!ReflectionTypeHint::isValid()) {
             return false;
         }
-        if (is_null($s)) {
+        if (null === $s) {
             return $s;
         }
 
@@ -3628,11 +3628,11 @@ class utf8
         if (!ReflectionTypeHint::isValid()) {
             return false;
         }
-        if (is_null($s)) {
+        if (null === $s) {
             return $s;
         }
 
-        $length = ($length === null) ? 1 : intval($length);
+        $length = ($length === null) ? 1 : (int)$length;
         if ($length < 1) {
             return false;
         }
@@ -3665,7 +3665,7 @@ class utf8
         if (!ReflectionTypeHint::isValid()) {
             return false;
         }
-        if (is_null($s)) {
+        if (null === $s) {
             return $s;
         }
 
@@ -3718,7 +3718,7 @@ class utf8
         if (!ReflectionTypeHint::isValid()) {
             return false;
         }
-        if (is_null($s)) {
+        if (null === $s) {
             return $s;
         }
 
@@ -3753,7 +3753,7 @@ class utf8
         if (!ReflectionTypeHint::isValid()) {
             return false;
         }
-        if (is_null($s)) {
+        if (null === $s) {
             return $s;
         }
 
@@ -3766,7 +3766,7 @@ class utf8
 
         #optimization block (speed improve)
         #{{{
-        $ascii_int = intval(self::is_ascii($s)) + intval(self::is_ascii($needle));
+        $ascii_int = (int)self::is_ascii($s) + (int)self::is_ascii($needle);
         if ($ascii_int === 1) {
             return false;
         }
@@ -3797,7 +3797,7 @@ class utf8
         if (!ReflectionTypeHint::isValid()) {
             return false;
         }
-        if (is_null($s)) {
+        if (null === $s) {
             return $s;
         }
 
@@ -3832,7 +3832,7 @@ class utf8
         if (!ReflectionTypeHint::isValid()) {
             return false;
         }
-        if (is_null($s)) {
+        if (null === $s) {
             return $s;
         }
 
@@ -3881,7 +3881,7 @@ class utf8
         if (!ReflectionTypeHint::isValid()) {
             return false;
         }
-        if (is_null($s)) {
+        if (null === $s) {
             return $s;
         }
 
@@ -3905,7 +3905,7 @@ class utf8
         if (!ReflectionTypeHint::isValid()) {
             return false;
         }
-        if (is_null($s)) {
+        if (null === $s) {
             return $s;
         }
 
@@ -3924,16 +3924,16 @@ class utf8
      * остальные символы каждого слова преобразуются в нижний регистр.
      *
      * @param   string|null $s
-     * @param   bool $is_other_to_lowercase остальные символы преобразуются в нижний регистр?
      * @param   string $spaces_re
-     * @return  string|bool|null  Returns FALSE if error occurred
+     * @return bool|null|string Returns FALSE if error occurred
+     * @internal param bool $is_other_to_lowercase остальные символы преобразуются в нижний регистр?
      */
-    public static function ucwords($s, $is_other_to_lowercase = true, $spaces_re = '~([\pZ\s]+)~suSX') #\pXps is POSIX space: property Z or tab, NL, VT, FF, CR
+    public static function ucwords($s, $spaces_re = '~([\pZ\s]+)~suSX') #\pXps is POSIX space: property Z or tab, NL, VT, FF, CR
     {
         if (!ReflectionTypeHint::isValid()) {
             return false;
         }
-        if (is_null($s)) {
+        if (null === $s) {
             return $s;
         }
 
@@ -3959,7 +3959,7 @@ class utf8
      *
      * @param   scalar|array|null $data
      * @param   bool $is_rawurlencode
-     * @return  scalar|array|null  Returns FALSE if error occurred
+     * @return array|bool|null|scalar
      */
     public static function unescape($data, $is_rawurlencode = false)
     {
@@ -3995,7 +3995,7 @@ class utf8
                 },
                 $data);
         }
-        if (is_scalar($data) || is_null($data)) {
+        if (is_scalar($data) || null === $data) {
             return $data;
         }  #~ null, integer, float, boolean
         return false; #object or resource
@@ -4049,13 +4049,13 @@ class utf8
     {
         $fixed = false;
         #ATTENTION! HTTP_RAW_POST_DATA is only accessible when Content-Type of POST request is NOT default "application/x-www-form-urlencoded"!
-        $HTTP_RAW_POST_DATA = isset($_SERVER['REQUEST_METHOD']) && $_SERVER['REQUEST_METHOD'] === 'POST' ? (isset($GLOBALS['HTTP_RAW_POST_DATA']) ? $GLOBALS['HTTP_RAW_POST_DATA'] : @file_get_contents('php://input')) : null;
+        $HTTP_RAW_POST_DATA = isset($_SERVER['REQUEST_METHOD']) && $_SERVER['REQUEST_METHOD'] === 'POST' ? ($GLOBALS['HTTP_RAW_POST_DATA'] ?? file_get_contents('php://input')) : null;
         if (ini_get('always_populate_raw_post_data')) {
             $GLOBALS['HTTP_RAW_POST_DATA'] = $HTTP_RAW_POST_DATA;
         }
-        foreach (array('_GET' => isset($_SERVER['QUERY_STRING']) ? $_SERVER['QUERY_STRING'] : null,
+        foreach (array('_GET' => $_SERVER['QUERY_STRING'] ?? null,
                      '_POST' => $HTTP_RAW_POST_DATA,
-                     '_COOKIE' => isset($_SERVER['HTTP_COOKIE']) ? $_SERVER['HTTP_COOKIE'] : null,
+                     '_COOKIE' => $_SERVER['HTTP_COOKIE'] ?? null,
                  ) as $k => $v) {
             if (!is_string($v)) {
                 continue;
@@ -4077,9 +4077,9 @@ class utf8
         }
         if ($fixed) {
             $_REQUEST =
-                (isset($_COOKIE) ? $_COOKIE : array()) +
-                (isset($_POST) ? $_POST : array()) +
-                (isset($_GET) ? $_GET : array());
+                ($_COOKIE ?? array()) +
+                ($_POST ?? array()) +
+                ($_GET ?? array());
         }
     }
 
@@ -4102,7 +4102,7 @@ class utf8
         if (!ReflectionTypeHint::isValid()) {
             return false;
         }
-        if (is_null($s)) {
+        if (null === $s) {
             return $s;
         }
 
@@ -4130,7 +4130,7 @@ class utf8
         if (!ReflectionTypeHint::isValid()) {
             return false;
         }
-        if (is_null($s)) {
+        if (null === $s) {
             return $s;
         }
         if ($charlist === null || self::is_ascii($charlist)) {
@@ -4149,7 +4149,7 @@ class utf8
         if (!ReflectionTypeHint::isValid()) {
             return false;
         }
-        if (is_null($s)) {
+        if (null === $s) {
             return $s;
         }
         if ($charlist === null || self::is_ascii($charlist)) {
@@ -4161,14 +4161,14 @@ class utf8
     /**
      * @param   scalar|null $s
      * @param   string|null $charlist
-     * @return  scalar|null
+     * @return bool|null|scalar
      */
     public static function trim($s, $charlist = null)
     {
         if (!ReflectionTypeHint::isValid()) {
             return false;
         }
-        if (is_null($s)) {
+        if (null === $s) {
             return $s;
         }
         if ($charlist === null || self::is_ascii($charlist)) {
@@ -4179,7 +4179,7 @@ class utf8
         return preg_replace('~[' . $charlist_re . ']+$~suSX', '', $s);
     }
 
-    private static function _preg_quote_class($charlist, $delimiter = null)
+    private static function _preg_quote_class($charlist, $delimiter = null): string
     {
         #return preg_quote($charlist, $delimiter); #DEPRECATED
         $quote_table = array(
@@ -4205,7 +4205,7 @@ class utf8
         if (!ReflectionTypeHint::isValid()) {
             return false;
         }
-        if (is_null($s)) {
+        if (null === $s) {
             return $s;
         }
 
@@ -4224,13 +4224,13 @@ class utf8
 
         if ($type == STR_PAD_LEFT) {
             $repeat_num = ceil($pad_len / $pad_str_len);
-            return self::substr(str_repeat($pad_str, $repeat_num), 0, intval(floor($pad_len))) . $s;
+            return self::substr(str_repeat($pad_str, $repeat_num), 0, (int)floor($pad_len)) . $s;
         }
 
         if ($type == STR_PAD_BOTH) {
             $pad_len /= 2;
-            $pad_amount_left = intval(floor($pad_len));
-            $pad_amount_right = intval(ceil($pad_len));
+            $pad_amount_left = (int)floor($pad_len);
+            $pad_amount_right = (int)ceil($pad_len);
             $repeat_times_left = ceil($pad_amount_left / $pad_str_len);
             $repeat_times_right = ceil($pad_amount_right / $pad_str_len);
 
@@ -4412,7 +4412,7 @@ class utf8
         if (!ReflectionTypeHint::isValid()) {
             return false;
         }
-        if (is_null($s)) {
+        if (null === $s) {
             return $s;
         }
         if (is_array($from)) {
@@ -4430,7 +4430,7 @@ class utf8
         return strtr($s, $table);
     }
 
-    public static function tests()
+    public static function tests(): bool
     {
         assert_options(ASSERT_ACTIVE, true);
         assert_options(ASSERT_BAIL, true);

@@ -31,8 +31,8 @@ class cache_file extends cache_common
 {
     public $used = true;
     public $engine = 'Filecache';
-    public $dir = null;
-    public $prefix = null;
+    public $dir;
+    public $prefix;
 
     public function __construct($dir, $prefix = null)
     {
@@ -49,7 +49,7 @@ class cache_file extends cache_common
         $this->debug('start');
 
         if (file_exists($filename)) {
-            require($filename);
+            require $filename;
         }
 
         $this->debug('stop');
@@ -58,7 +58,7 @@ class cache_file extends cache_common
         return (!empty($filecache['value'])) ? $filecache['value'] : false;
     }
 
-    public function set($name, $value, $ttl = 86400)
+    public function set($name, $value, $ttl = 86400): bool
     {
         if (!function_exists('var_export')) {
             return false;
@@ -86,7 +86,7 @@ class cache_file extends cache_common
         return (bool)file_write($filecache, $filename, false, true, true);
     }
 
-    public function rm($name = '')
+    public function rm($name = ''): bool
     {
         $clear = false;
         if ($name) {
@@ -119,7 +119,7 @@ class cache_file extends cache_common
         return $clear;
     }
 
-    public function gc($expire_time = TIMENOW)
+    public function gc($expire_time = TIMENOW): bool
     {
         $clear = false;
 
@@ -129,7 +129,7 @@ class cache_file extends cache_common
                     if ($file != "." && $file != "..") {
                         $filename = $this->dir . $file;
 
-                        require($filename);
+                        require $filename;
 
                         if (!empty($filecache['expire']) && ($filecache['expire'] < $expire_time)) {
                             unlink($filename);

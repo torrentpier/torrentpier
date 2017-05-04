@@ -29,7 +29,7 @@ if (!defined('BB_ROOT')) {
 
 class datastore_xcache extends datastore_common
 {
-    public $prefix = null;
+    public $prefix;
     public $engine = 'XCache';
 
     public function __construct($prefix = null)
@@ -86,7 +86,7 @@ class datastore_xcache extends datastore_common
         }
     }
 
-    public function is_installed()
+    public function is_installed(): bool
     {
         return function_exists('xcache_get');
     }

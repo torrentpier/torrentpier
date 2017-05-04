@@ -31,9 +31,9 @@ class cache_redis extends cache_common
 {
     public $used = true;
     public $engine = 'Redis';
-    public $cfg = null;
-    public $redis = null;
-    public $prefix = null;
+    public $cfg;
+    public $redis;
+    public $prefix;
     public $connected = false;
 
     public function __construct($cfg, $prefix = null)
@@ -53,7 +53,7 @@ class cache_redis extends cache_common
         $this->cur_query = 'connect ' . $this->cfg['host'] . ':' . $this->cfg['port'];
         $this->debug('start');
 
-        if (@$this->redis->connect($this->cfg['host'], $this->cfg['port'])) {
+        if ($this->redis->connect($this->cfg['host'], $this->cfg['port'])) {
             $this->connected = true;
         }
 
@@ -77,7 +77,7 @@ class cache_redis extends cache_common
         $this->cur_query = null;
         $this->num_queries++;
 
-        return ($this->connected) ? unserialize($this->redis->get($this->prefix . $name)) : false;
+        return $this->connected ? unserialize($this->redis->get($this->prefix . $name)) : false;
     }
 
     public function set($name, $value, $ttl = 0)
@@ -99,9 +99,9 @@ class cache_redis extends cache_common
             $this->num_queries++;
 
             return true;
-        } else {
-            return false;
         }
+
+        return false;
     }
 
     public function rm($name = '')
@@ -117,13 +117,13 @@ class cache_redis extends cache_common
             $this->cur_query = null;
             $this->num_queries++;
 
-            return ($this->connected) ? $this->redis->del($this->prefix . $name) : false;
-        } else {
-            return ($this->connected) ? $this->redis->flushdb() : false;
+            return $this->connected ? $this->redis->del($this->prefix . $name) : false;
         }
+
+        return ($this->connected) ? $this->redis->flushdb() : false;
     }
 
-    public function is_installed()
+    public function is_installed(): bool
     {
         return class_exists('Redis');
     }

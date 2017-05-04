@@ -30,7 +30,7 @@ if (!defined('BB_ROOT')) {
 class datastore_apc extends datastore_common
 {
     public $engine = 'APC';
-    public $prefix = null;
+    public $prefix;
 
     public function __construct($prefix = null)
     {
@@ -85,7 +85,7 @@ class datastore_apc extends datastore_common
         }
     }
 
-    public function is_installed()
+    public function is_installed(): bool
     {
         return function_exists('apc_fetch');
     }

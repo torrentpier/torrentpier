@@ -111,7 +111,7 @@ class emailer
         $this->extra_headers .= trim($headers) . "\n";
     }
 
-    public function use_template($template_file, $template_lang = '')
+    public function use_template($template_file, $template_lang = ''): bool
     {
         global $bb_cfg;
 
@@ -130,7 +130,7 @@ class emailer
                 }
             }
 
-            if (!($fd = @fopen($tpl_file, 'r'))) {
+            if (!($fd = @fopen($tpl_file, 'rb'))) {
                 bb_die('Failed opening template file :: ' . $tpl_file);
             }
 
@@ -150,7 +150,7 @@ class emailer
     }
 
     // Send the mail out to the recipients set previously in var $this->address
-    public function send($email_format = 'text')
+    public function send($email_format = 'text'): bool
     {
         global $bb_cfg, $userdata;
 
@@ -193,12 +193,12 @@ class emailer
 
         $to = @$this->addresses['to'];
 
-        $cc = (@count($this->addresses['cc'])) ? implode(', ', $this->addresses['cc']) : '';
-        $bcc = (@count($this->addresses['bcc'])) ? implode(', ', $this->addresses['bcc']) : '';
+        $cc = (count($this->addresses['cc'])) ? implode(', ', $this->addresses['cc']) : '';
+        $bcc = (count($this->addresses['bcc'])) ? implode(', ', $this->addresses['bcc']) : '';
 
         // Build header
         $type = ($email_format == 'html') ? 'html' : 'plain';
-        $this->extra_headers = (($this->reply_to != '') ? "Reply-to: $this->reply_to\n" : '') . (($this->from != '') ? "From: $this->from\n" : "From: " . $bb_cfg['board_email'] . "\n") . "Return-Path: " . $bb_cfg['board_email'] . "\nMessage-ID: <" . md5(uniqid(TIMENOW)) . "@" . $bb_cfg['server_name'] . ">\nMIME-Version: 1.0\nContent-type: text/$type; charset=" . $this->encoding . "\nContent-transfer-encoding: 8bit\nDate: " . date('r', TIMENOW) . "\nX-Priority: 0\nX-MSMail-Priority: Normal\nX-Mailer: Microsoft Office Outlook, Build 11.0.5510\nX-MimeOLE: Produced By Microsoft MimeOLE V6.00.2800.1441\nX-Sender: " . $bb_cfg['board_email'] . "\n" . $this->extra_headers . (($cc != '') ? "Cc: $cc\n" : '') . (($bcc != '') ? "Bcc: $bcc\n" : '');
+        $this->extra_headers = (($this->reply_to != '') ? "Reply-to: $this->reply_to\n" : '') . (($this->from != '') ? "From: $this->from\n" : "From: " . $bb_cfg['board_email'] . "\n") . "Return-Path: " . $bb_cfg['board_email'] . "\nMessage-ID: <" . md5(uniqid(TIMENOW, true)) . "@" . $bb_cfg['server_name'] . ">\nMIME-Version: 1.0\nContent-type: text/$type; charset=" . $this->encoding . "\nContent-transfer-encoding: 8bit\nDate: " . date('r', TIMENOW) . "\nX-Priority: 0\nX-MSMail-Priority: Normal\nX-Mailer: Microsoft Office Outlook, Build 11.0.5510\nX-MimeOLE: Produced By Microsoft MimeOLE V6.00.2800.1441\nX-Sender: " . $bb_cfg['board_email'] . "\n" . $this->extra_headers . (($cc != '') ? "Cc: $cc\n" : '') . (($bcc != '') ? "Bcc: $bcc\n" : '');
 
         // Send message
         if ($this->use_smtp) {
@@ -215,13 +215,13 @@ class emailer
 
         // Did it work?
         if (!$result) {
-            bb_die('Failed sending email :: ' . (($this->use_smtp) ? 'SMTP' : 'PHP') . ' :: ' . $result);
+            bb_die('Failed sending email :: ' . ($this->use_smtp ? 'SMTP' : 'PHP') . ' :: ' . $result);
         }
 
         return true;
     }
 
-    public function encode($str)
+    public function encode($str): string
     {
         if ($this->encoding == '') {
             return $str;

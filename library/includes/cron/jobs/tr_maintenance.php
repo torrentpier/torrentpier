@@ -47,8 +47,8 @@ foreach (DB()->fetch_rowset($sql) as $row) {
     $topics_sql[] = $row['topic_id'];
     $attach_sql[] = $row['attach_id'];
 }
-$dead_tor_sql = join(',', $topics_sql);
-$attach_sql = join(',', $attach_sql);
+$dead_tor_sql = implode(',', $topics_sql);
+$attach_sql = implode(',', $attach_sql);
 
 if ($dead_tor_sql && $attach_sql) {
     // Delete torstat

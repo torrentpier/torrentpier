@@ -152,7 +152,7 @@ function generate_smilies($mode)
             $row = 0;
             $col = 0;
 
-            while (list($smile_url, $data) = @each($rowset)) {
+            while (list($smile_url, $data) = each($rowset)) {
                 if (!$col) {
                     $template->assign_block_vars('smilies_row', array());
                 }
@@ -220,7 +220,7 @@ function strip_quotes($text)
         }
     } while ($pos !== false);
 
-    if (sizeof($start_pos) == 0) {
+    if (count($start_pos) == 0) {
         return $text;
     }
 
@@ -235,7 +235,7 @@ function strip_quotes($text)
         }
     } while ($pos !== false);
 
-    if (sizeof($end_pos) == 0) {
+    if (count($end_pos) == 0) {
         return $text;
     }
 
@@ -250,13 +250,13 @@ function strip_quotes($text)
         $newtext = '[...] ';
         $substr_pos = 0;
         foreach ($pos_list as $pos => $type) {
-            $stacksize = sizeof($stack);
+            $stacksize = count($stack);
             if ($type == 'start') {
                 // empty stack, so add from the last close tag or the beginning of the string
                 if ($stacksize == 0) {
                     $newtext .= substr($text, $substr_pos, $pos - $substr_pos);
                 }
-                array_push($stack, $pos);
+                $stack[] = $pos;
             } else {
                 // pop off the latest opened tag
                 if ($stacksize) {
@@ -287,10 +287,13 @@ function strip_quotes($text)
  * Strips away bbcode from a given string, leaving plain text
  *
  * @param    string    Text to be stripped of bbcode tags
- * @param    boolean    If true, strip away quote tags AND their contents
- * @param    boolean    If true, use the fast-and-dirty method rather than the shiny and nice method
+ * @param bool $stripquotes
+ * @param bool $fast_and_dirty
+ * @param bool $showlinks
+ * @return string
+ * @internal param If $boolean true, strip away quote tags AND their contents
+ * @internal param If $boolean true, use the fast-and-dirty method rather than the shiny and nice method
  *
- * @return    string
  */
 function strip_bbcode($message, $stripquotes = true, $fast_and_dirty = false, $showlinks = true)
 {
@@ -377,7 +380,7 @@ function extract_search_words($text)
     }
     $text = $text_out;
 
-    if (sizeof($text) > $max_words_count) {
+    if (count($text) > $max_words_count) {
         #		shuffle($text);
         $text = array_splice($text, 0, $max_words_count);
     }
@@ -390,24 +393,24 @@ function add_search_words($post_id, $post_message, $topic_title = '', $only_retu
     global $bb_cfg;
 
     $text = $topic_title . ' ' . $post_message;
-    $words = ($text) ? extract_search_words($text) : array();
+    $words = $text ? extract_search_words($text) : array();
 
     if ($only_return_words || $bb_cfg['search_engine_type'] == 'sphinx') {
-        return join("\n", $words);
-    } else {
-        DB()->query("DELETE FROM " . BB_POSTS_SEARCH . " WHERE post_id = $post_id");
+        return implode("\n", $words);
+    }
 
-        if ($words_sql = DB()->escape(join("\n", $words))) {
-            DB()->query("REPLACE INTO " . BB_POSTS_SEARCH . " (post_id, search_words) VALUES ($post_id, '$words_sql')");
-        }
+    DB()->query("DELETE FROM " . BB_POSTS_SEARCH . " WHERE post_id = $post_id");
+
+    if ($words_sql = DB()->escape(join("\n", $words))) {
+        DB()->query("REPLACE INTO " . BB_POSTS_SEARCH . " (post_id, search_words) VALUES ($post_id, '$words_sql')");
     }
 }
 
 class bbcode
 {
     public $tpl = array(); // шаблоны для замены тегов
-    public $smilies = null;    // смайлы
-    public $found_spam = null;    // найденные спам "слова"
+    public $smilies;    // смайлы
+    public $found_spam;    // найденные спам "слова"
     public $del_words = array(); // см. get_words_rate()
     public $tidy_cfg = array(
         'drop-empty-paras' => false,
@@ -518,13 +521,15 @@ class bbcode
     /**
      * bbcode2html
      * $text должен быть уже обработан htmlCHR($text, false, ENT_NOQUOTES);
+     * @param $text
+     * @return string
      */
-    public function bbcode2html($text)
+    public function bbcode2html($text): string
     {
         global $bb_cfg;
 
         $text = " $text ";
-        $text = $this->clean_up($text);
+        $text = static::clean_up($text);
         $text = $this->spam_filter($text);
 
         // Tag parse
@@ -543,7 +548,7 @@ class bbcode
             $text = preg_replace_callback("#\[url=(www\.$url_exp)\]([^?\n\t].*?)\[/url\]#isu", array(&$this, 'url_callback'), $text);
 
             // Normalize block level tags wrapped with new lines
-            $block_tags = join('|', $this->block_tags);
+            $block_tags = implode('|', $this->block_tags);
             $text = str_replace("\n\n[hr]\n\n", '[br][hr][br]', $text);
             $text = preg_replace("#(\s*)(\[/?($block_tags)(.*?)\])(\s*)#", '$2', $text);
 
@@ -566,6 +571,8 @@ class bbcode
 
     /**
      * Clean up
+     * @param $text
+     * @return mixed|string
      */
     public static function clean_up($text)
     {
@@ -578,6 +585,8 @@ class bbcode
 
     /**
      * Spam filter
+     * @param $text
+     * @return mixed|string
      */
     private function spam_filter($text)
     {
@@ -593,7 +602,7 @@ class bbcode
         if (!$bb_cfg['spam_filter_file_path']) {
             return $text;
         }
-        if (is_null($spam_words)) {
+        if (null === $spam_words) {
             $spam_words = file_get_contents($bb_cfg['spam_filter_file_path']);
             $spam_words = strtolower($spam_words);
             $spam_words = explode("\n", $spam_words);
@@ -623,7 +632,7 @@ class bbcode
             foreach ($found_spam as $keyword) {
                 $spam_exp[] = preg_quote($keyword, '/');
             }
-            $spam_exp = join('|', $spam_exp);
+            $spam_exp = implode('|', $spam_exp);
 
             $text = preg_replace("/($spam_exp)(\S*)/i", $spam_replace, $msg_decoded);
             $text = htmlCHR($text, false, ENT_NOQUOTES);
@@ -635,8 +644,10 @@ class bbcode
 
     /**
      * [code] callback
+     * @param $m
+     * @return string
      */
-    public function code_callback($m)
+    public function code_callback($m): string
     {
         $code = trim($m[2]);
         $code = str_replace('  ', '&nbsp; ', $code);
@@ -648,19 +659,21 @@ class bbcode
 
     /**
      * [url] callback
+     * @param $m
+     * @return string
      */
-    public function url_callback($m)
+    public function url_callback($m): string
     {
         global $bb_cfg;
 
         $url = trim($m[1]);
-        $url_name = (isset($m[2])) ? trim($m[2]) : $url;
+        $url_name = isset($m[2]) ? trim($m[2]) : $url;
 
         if (!preg_match("#^https?://#isu", $url) && !preg_match("/^#/", $url)) {
             $url = 'http://' . $url;
         }
 
-        if (in_array(parse_url($url, PHP_URL_HOST), $bb_cfg['nofollow']['allowed_url']) || $bb_cfg['nofollow']['disabled']) {
+        if (in_array(parse_url($url, PHP_URL_HOST), $bb_cfg['nofollow']['allowed_url'], true) || $bb_cfg['nofollow']['disabled']) {
             $link = "<a href=\"$url\" class=\"postLink\">$url_name</a>";
         } else {
             $link = "<a href=\"$url\" class=\"postLink\" rel=\"nofollow\">$url_name</a>";
@@ -671,8 +684,10 @@ class bbcode
 
     /**
      * Escape tags inside tiltes in [quote="tilte"]
+     * @param $m
+     * @return string
      */
-    public function escape_tiltes_callback($m)
+    public function escape_tiltes_callback($m): string
     {
         $tilte = substr($m[3], 0, 250);
         $tilte = str_replace(array('[', ']', ':', ')', '"'), array('&#91;', '&#93;', '&#58;', '&#41;', '&#34;'), $tilte);
@@ -683,6 +698,8 @@ class bbcode
 
     /**
      * make_clickable
+     * @param $text
+     * @return bool|string
      */
     public function make_clickable($text)
     {
@@ -708,13 +725,15 @@ class bbcode
         // Remove our padding..
         $ret = substr(substr($ret, 0, -1), 1);
 
-        return ($ret);
+        return $ret;
     }
 
     /**
      * make_url_clickable_callback
+     * @param $m
+     * @return string
      */
-    public function make_url_clickable_callback($m)
+    public function make_url_clickable_callback($m): string
     {
         global $bb_cfg;
 
@@ -722,7 +741,7 @@ class bbcode
         $href = $m[1];
         $name = (mb_strlen($href, 'UTF-8') > $max_len) ? mb_substr($href, 0, $max_len - 19) . '...' . mb_substr($href, -16) : $href;
 
-        if (in_array(parse_url($href, PHP_URL_HOST), $bb_cfg['nofollow']['allowed_url']) || $bb_cfg['nofollow']['disabled']) {
+        if (in_array(parse_url($href, PHP_URL_HOST), $bb_cfg['nofollow']['allowed_url'], true) || $bb_cfg['nofollow']['disabled']) {
             $link = "<a href=\"$href\" class=\"postLink\">$name</a>";
         } else {
             $link = "<a href=\"$href\" class=\"postLink\" rel=\"nofollow\">$name</a>";
@@ -733,12 +752,14 @@ class bbcode
 
     /**
      * smilies_pass
+     * @param $text
+     * @return mixed
      */
     public function smilies_pass($text)
     {
         global $datastore;
 
-        if (is_null($this->smilies)) {
+        if (null === $this->smilies) {
             $this->smilies = $datastore->get('smile_replacements');
         }
         if ($this->smilies) {
@@ -751,6 +772,8 @@ class bbcode
 
     /**
      * new_line2html
+     * @param $text
+     * @return mixed
      */
     public function new_line2html($text)
     {
@@ -761,8 +784,10 @@ class bbcode
 
     /**
      * tidy
+     * @param $text
+     * @return string
      */
-    public function tidy($text)
+    public function tidy($text): string
     {
         $text = tidy_repair_string($text, $this->tidy_cfg, 'utf8');
         return $text;
@@ -807,8 +832,10 @@ class words_rate
 
     /**
      * возвращает "показатель полезности" сообщения используемый для автоудаления коротких сообщений типа "спасибо", "круто" и т.д.
+     * @param $text
+     * @return int
      */
-    public function get_words_rate($text)
+    public function get_words_rate($text): int
     {
         $this->words_rate = 127;     // максимальное значение по умолчанию
         $this->deleted_words = array();
@@ -870,7 +897,7 @@ function hide_passkey($str)
     return preg_replace("#\?{$bb_cfg['passkey_key']}=[a-zA-Z0-9]{" . BT_AUTH_KEY_LENGTH . "}#", "?{$bb_cfg['passkey_key']}=passkey", $str);
 }
 
-function get_parsed_post($postrow, $mode = 'full', $return_chars = 600)
+function get_parsed_post($postrow)
 {
     global $bb_cfg;
 

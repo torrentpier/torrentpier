@@ -79,7 +79,7 @@ function prepare_post(&$mode, &$post_data, &$error_msg, &$username, &$subject, &
 //
 // Post a new topic/reply or edit existing post/poll
 //
-function submit_post($mode, &$post_data, &$message, &$meta, &$forum_id, &$topic_id, &$post_id, &$topic_type, $post_username, $post_subject, $post_message, $update_post_time, $poster_rg_id, $attach_rg_sig)
+function submit_post($mode, &$post_data, &$forum_id, &$topic_id, &$post_id, &$topic_type, $post_username, $post_subject, $post_message, $update_post_time, $poster_rg_id, $attach_rg_sig)
 {
     global $userdata, $post_info, $is_auth, $bb_cfg, $lang, $datastore;
 
@@ -87,7 +87,7 @@ function submit_post($mode, &$post_data, &$message, &$meta, &$forum_id, &$topic_
 
     // Flood control
     $row = null;
-    $where_sql = (IS_GUEST) ? "p.poster_ip = '" . USER_IP . "'" : "p.poster_id = {$userdata['user_id']}";
+    $where_sql = IS_GUEST ? "p.poster_ip = '" . USER_IP . "'" : "p.poster_id = {$userdata['user_id']}";
 
     if ($mode == 'newtopic' || $mode == 'reply') {
         $sql = "SELECT MAX(p.post_time) AS last_post_time FROM " . BB_POSTS . " p WHERE $where_sql";
@@ -247,7 +247,7 @@ function update_post_stats($mode, $post_data, $forum_id, $topic_id, $post_id, $u
                 }
 
                 if ($row = DB()->sql_fetchrow($result)) {
-                    $forum_update_sql .= ($row['last_post_id']) ? ', forum_last_post_id = ' . $row['last_post_id'] : ', forum_last_post_id = 0';
+                    $forum_update_sql .= $row['last_post_id'] ? ', forum_last_post_id = ' . $row['last_post_id'] : ', forum_last_post_id = 0';
                 }
             }
         } elseif ($post_data['first_post']) {
@@ -288,7 +288,7 @@ function update_post_stats($mode, $post_data, $forum_id, $topic_id, $post_id, $u
 //
 // Delete a post
 //
-function delete_post($mode, $post_data, &$message, &$meta, $forum_id, $topic_id, $post_id)
+function delete_post(&$message, $forum_id, $topic_id, $post_id)
 {
     global $lang;
 
@@ -301,7 +301,7 @@ function delete_post($mode, $post_data, &$message, &$meta, $forum_id, $topic_id,
 //
 // Handle user notification on new post
 //
-function user_notification($mode, &$post_data, &$topic_title, &$forum_id, &$topic_id, &$notify_user)
+function user_notification($mode, &$topic_title, &$topic_id, &$notify_user)
 {
     global $bb_cfg, $lang, $userdata;
 
@@ -318,7 +318,7 @@ function user_notification($mode, &$post_data, &$topic_title, &$forum_id, &$topi
             foreach ($sql as $row) {
                 $user_id_sql[] = ',' . $row['ban_userid'];
             }
-            $user_id_sql = join('', $user_id_sql);
+            $user_id_sql = implode('', $user_id_sql);
 
             $watch_list = DB()->fetch_rowset("SELECT u.username, u.user_id, u.user_email, u.user_lang
 				FROM " . BB_TOPICS_WATCH . " tw, " . BB_USERS . " u
@@ -362,7 +362,7 @@ function user_notification($mode, &$post_data, &$topic_title, &$forum_id, &$topi
 
                     $update_watched_sql[] = $row['user_id'];
                 }
-                $update_watched_sql = join(',', $update_watched_sql);
+                $update_watched_sql = implode(',', $update_watched_sql);
             }
 
             if ($update_watched_sql) {
@@ -387,7 +387,7 @@ function user_notification($mode, &$post_data, &$topic_title, &$forum_id, &$topi
     }
 }
 
-function insert_post($mode, $topic_id, $forum_id = '', $old_forum_id = '', $new_topic_id = '', $new_topic_title = '', $old_topic_id = '', $message = '', $poster_id = '')
+function insert_post($mode, $topic_id, $forum_id = '', $old_forum_id = '', $new_topic_id = '', $new_topic_title = '', $old_topic_id = '')
 {
     global $userdata, $lang;
 

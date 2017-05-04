@@ -29,9 +29,9 @@ if (!defined('BB_ROOT')) {
 
 class datastore_redis extends datastore_common
 {
-    public $cfg = null;
-    public $redis = null;
-    public $prefix = null;
+    public $cfg;
+    public $redis;
+    public $prefix;
     public $connected = false;
     public $engine = 'Redis';
 
@@ -52,7 +52,7 @@ class datastore_redis extends datastore_common
         $this->cur_query = 'connect ' . $this->cfg['host'] . ':' . $this->cfg['port'];
         $this->debug('start');
 
-        if (@$this->redis->connect($this->cfg['host'], $this->cfg['port'])) {
+        if ($this->redis->connect($this->cfg['host'], $this->cfg['port'])) {
             $this->connected = true;
         }
 
@@ -117,7 +117,7 @@ class datastore_redis extends datastore_common
         }
     }
 
-    public function is_installed()
+    public function is_installed(): bool
     {
         return class_exists('Redis');
     }

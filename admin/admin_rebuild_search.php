@@ -53,7 +53,7 @@ $last_session_id = (int)$last_session_data['rebuild_session_id'];
 $max_post_id = get_latest_post_id();
 $start_time = TIMENOW;
 
-$mode = (string)@$_REQUEST['mode'];
+$mode = (string)$_REQUEST['mode'];
 
 // check if the user has choosen to stop processing
 if (isset($_REQUEST['cancel_button'])) {
@@ -70,7 +70,7 @@ if (isset($_REQUEST['cancel_button'])) {
 }
 
 // from which post to start processing
-$start = abs(intval(@$_REQUEST['start']));
+$start = abs((int)($_REQUEST['start']));
 
 // get the total number of posts in the db
 $total_posts = get_total_posts();
@@ -86,7 +86,7 @@ $session_posts_processed = ($mode == 'refresh') ? get_processed_posts('session')
 $total_posts_processing = $total_posts - $total_posts_processed;
 
 // how many posts to process in this session
-if ($session_posts_processing = @intval($_REQUEST['session_posts_processing'])) {
+if ($session_posts_processing = @(int)$_REQUEST['session_posts_processing']) {
     if ($mode == 'submit') {
         // check if we passed over total_posts just after submitting
         if ($session_posts_processing + $total_posts_processed > $total_posts) {
@@ -115,21 +115,10 @@ if (isset($_REQUEST['time_limit'])) {
     $time_limit = $def_time_limit;
     $time_limit_explain = $lang['TIME_LIMIT_EXPLAIN'];
 
-    // check for safe mode timeout
-    if (ini_get('safe_mode')) {
-        // get execution time
-        $max_execution_time = ini_get('max_execution_time');
-        $time_limit_explain .= '<br />' . sprintf($lang['TIME_LIMIT_EXPLAIN_SAFE'], $max_execution_time);
-
-        if ($time_limit > $max_execution_time) {
-            $time_limit = $max_execution_time;
-        }
-    }
-
     // check for webserver timeout (IE returns null)
     if (isset($_SERVER["HTTP_KEEP_ALIVE"])) {
         // get webserver timeout
-        $webserver_timeout = intval($_SERVER["HTTP_KEEP_ALIVE"]);
+        $webserver_timeout = (int)$_SERVER["HTTP_KEEP_ALIVE"];
         $time_limit_explain .= '<br />' . sprintf($lang['TIME_LIMIT_EXPLAIN_WEBSERVER'], $webserver_timeout);
 
         if ($time_limit > $webserver_timeout) {
@@ -149,7 +138,7 @@ if ($mode == 'submit') {
 }
 
 // Increase maximum execution time in case of a lot of posts, but don't complain about it if it isn't allowed.
-@set_time_limit($time_limit + 20);
+set_time_limit($time_limit + 20);
 
 // check if we are should start processing
 if ($mode == 'submit' || $mode == 'refresh') {
@@ -185,7 +174,7 @@ if ($mode == 'submit' || $mode == 'refresh') {
     $words_sql = array();
 
     while ($row = DB()->fetch_next($result) and !$timer_expired) {
-        @set_time_limit(600);
+        set_time_limit(600);
         $start_post_id = ($num_rows == 0) ? $row['post_id'] : $start_post_id;
         $end_post_id = $row['post_id'];
 
@@ -207,7 +196,7 @@ if ($mode == 'submit' || $mode == 'refresh') {
     }
 
     // find how much time the last cycle took
-    $last_cycle_time = intval(TIMENOW - $start_time);
+    $last_cycle_time = (int)(TIMENOW - $start_time);
 
     // check if we had any data
     if ($num_rows != 0) {
@@ -248,7 +237,7 @@ if ($mode == 'submit' || $mode == 'refresh') {
     $template->assign_vars(array('TPL_REBUILD_SEARCH_PROGRESS' => true));
 
     $processing_messages = '';
-    $processing_messages .= ($timer_expired) ? sprintf($lang['TIMER_EXPIRED'], TIMENOW - $start_time) : '';
+    $processing_messages .= $timer_expired ? sprintf($lang['TIMER_EXPIRED'], TIMENOW - $start_time) : '';
     $processing_messages .= ($start == 0 && $clear_search) ? $lang['CLEARED_SEARCH_TABLES'] : '';
 
     // check if we have reached the end of our post processing
@@ -394,7 +383,7 @@ if ($mode == 'submit' || $mode == 'refresh') {
             // when finished
 
             if ($last_session_data['end_post_id'] < $max_post_id) {
-                $last_saved_processing = sprintf($lang['INFO_PROCESSING_FINISHED_NEW'], $last_saved_post_id, $total_posts_processed, $last_saved_date, ($total_posts - $total_posts_processed));
+                $last_saved_processing = sprintf($lang['INFO_PROCESSING_FINISHED_NEW'], $last_saved_post_id, $total_posts_processed, $last_saved_date, $total_posts - $total_posts_processed);
                 $clear_search_disabled = 'disabled="disabled"';
 
                 $template->assign_block_vars("start_select_input", array());

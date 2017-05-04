@@ -34,7 +34,7 @@ $message = '';
 if (isset($_POST['add_name'])) {
     include INC_DIR . '/functions_validate.php';
 
-    $disallowed_user = (isset($_POST['disallowed_user'])) ? trim($_POST['disallowed_user']) : trim($_GET['disallowed_user']);
+    $disallowed_user = isset($_POST['disallowed_user']) ? trim($_POST['disallowed_user']) : trim($_GET['disallowed_user']);
 
     if ($disallowed_user == '') {
         bb_die($lang['FIELDS_EMPTY']);
@@ -54,7 +54,7 @@ if (isset($_POST['add_name'])) {
 
     bb_die($message);
 } elseif (isset($_POST['delete_name'])) {
-    $disallowed_id = (isset($_POST['disallowed_id'])) ? intval($_POST['disallowed_id']) : intval($_GET['disallowed_id']);
+    $disallowed_id = isset($_POST['disallowed_id']) ? (int)$_POST['disallowed_id'] : (int)$_GET['disallowed_id'];
 
     $sql = "DELETE FROM " . BB_DISALLOW . " WHERE disallow_id = $disallowed_id";
     $result = DB()->sql_query($sql);

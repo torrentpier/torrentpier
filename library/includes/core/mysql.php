@@ -34,10 +34,10 @@ class sql_db
 {
     public $cfg = [];
     public $cfg_keys = ['dbhost', 'dbname', 'dbuser', 'dbpasswd', 'charset', 'persist'];
-    private $link = null;
-    public $result = null;
+    private $link;
+    public $result;
     public $db_server = '';
-    public $selected_db = null;
+    public $selected_db;
     public $inited = false;
 
     public $locked = false;
@@ -53,7 +53,7 @@ class sql_db
     public $dbg = [];
     public $dbg_id = 0;
     public $dbg_enabled = false;
-    public $cur_query = null;
+    public $cur_query;
 
     public $do_explain = false;
     public $explain_hold = '';
@@ -110,7 +110,7 @@ class sql_db
      */
     public function connect()
     {
-        $this->cur_query = ($this->dbg_enabled) ? "connect to: {$this->cfg['dbhost']}" : 'connect';
+        $this->cur_query = $this->dbg_enabled ? "connect to: {$this->cfg['dbhost']}" : 'connect';
         $this->debug('start');
 
         $p = ((bool)$this->cfg['persist']) ? 'p:' : '';
@@ -118,7 +118,7 @@ class sql_db
         $this->selected_db = $this->cfg['dbname'];
 
         if (mysqli_connect_error()) {
-            $server = (DBG_USER) ? $this->cfg['dbhost'] : '';
+            $server = DBG_USER ? $this->cfg['dbhost'] : '';
             header("HTTP/1.0 503 Service Unavailable");
             bb_log(' ', "db_err/connect_failed_{$this->cfg['dbhost']}");
             die("Could not connect to mysql server $server");
@@ -205,7 +205,7 @@ class sql_db
      *
      * @return int
      */
-    public function affected_rows()
+    public function affected_rows(): int
     {
         return mysqli_affected_rows($this->link);
     }
@@ -241,9 +241,9 @@ class sql_db
                 }
             }
             return $result;
-        } else {
-            return false;
         }
+
+        return false;
     }
 
     /**
@@ -273,10 +273,10 @@ class sql_db
         $row = mysqli_fetch_assoc($result);
 
         if ($field_name) {
-            return isset($row[$field_name]) ? $row[$field_name] : false;
-        } else {
-            return $row;
+            return $row[$field_name] ?? false;
         }
+
+        return $row;
     }
 
     /**
@@ -314,12 +314,12 @@ class sql_db
      *
      * @return array
      */
-    public function sql_fetchrowset($result, $field_name = '')
+    public function sql_fetchrowset($result, $field_name = ''): array
     {
         $rowset = [];
 
         while ($row = mysqli_fetch_assoc($result)) {
-            $rowset[] = ($field_name) ? $row[$field_name] : $row;
+            $rowset[] = $field_name ? $row[$field_name] : $row;
         }
 
         return $rowset;
@@ -333,7 +333,7 @@ class sql_db
      *
      * @return array
      */
-    public function fetch_rowset($query, $field_name = '')
+    public function fetch_rowset($query, $field_name = ''): array
     {
         if (!$result = $this->sql_query($query)) {
             $this->trigger_error();
@@ -350,7 +350,7 @@ class sql_db
      *
      * @return array
      */
-    public function fetch_all($query, $field_name = '')
+    public function fetch_all($query, $field_name = ''): array
     {
         if (!$result = $this->sql_query($query)) {
             $this->trigger_error();
@@ -409,10 +409,10 @@ class sql_db
             case is_int($v):
                 return "$v";
             case is_bool($v):
-                return ($v) ? '1' : '0';
+                return $v ? '1' : '0';
             case is_float($v):
                 return "'$v'";
-            case is_null($v):
+            case null === $v:
                 return 'NULL';
         }
         // if $v has unsuitable type
@@ -426,7 +426,7 @@ class sql_db
      *
      * @return string
      */
-    public function escape_string($str)
+    public function escape_string($str): string
     {
         if (!$this->link) {
             $this->init();
@@ -446,7 +446,7 @@ class sql_db
      *
      * @return string
      */
-    public function build_array($query_type, $input_ary, $data_already_escaped = false, $check_data_type_in_escape = true)
+    public function build_array($query_type, $input_ary, $data_already_escaped = false, $check_data_type_in_escape = true): string
     {
         $fields = $values = $ary = $query = [];
         $dont_escape = $data_already_escaped;
@@ -461,34 +461,34 @@ class sql_db
                 $fields[] = $field;
                 $values[] = $this->escape($val, $check_type, $dont_escape);
             }
-            $fields = join(', ', $fields);
-            $values = join(', ', $values);
+            $fields = implode(', ', $fields);
+            $values = implode(', ', $values);
             $query = "($fields)\nVALUES\n($values)";
         } elseif ($query_type == 'INSERT_SELECT') {
             foreach ($input_ary as $field => $val) {
                 $fields[] = $field;
                 $values[] = $this->escape($val, $check_type, $dont_escape);
             }
-            $fields = join(', ', $fields);
-            $values = join(', ', $values);
+            $fields = implode(', ', $fields);
+            $values = implode(', ', $values);
             $query = "($fields)\nSELECT\n$values";
         } elseif ($query_type == 'MULTI_INSERT') {
             foreach ($input_ary as $id => $sql_ary) {
                 foreach ($sql_ary as $field => $val) {
                     $values[] = $this->escape($val, $check_type, $dont_escape);
                 }
-                $ary[] = '(' . join(', ', $values) . ')';
+                $ary[] = '(' . implode(', ', $values) . ')';
                 $values = [];
             }
-            $fields = join(', ', array_keys($input_ary[0]));
-            $values = join(",\n", $ary);
+            $fields = implode(', ', array_keys($input_ary[0]));
+            $values = implode(",\n", $ary);
             $query = "($fields)\nVALUES\n$values";
         } elseif ($query_type == 'SELECT' || $query_type == 'UPDATE') {
             foreach ($input_ary as $field => $val) {
                 $ary[] = "$field = " . $this->escape($val, $check_type, $dont_escape);
             }
             $glue = ($query_type == 'SELECT') ? "\nAND " : ",\n";
-            $query = join($glue, $ary);
+            $query = implode($glue, $ary);
         }
 
         if (!$query) {
@@ -501,7 +501,7 @@ class sql_db
     /**
      * @return array
      */
-    public function get_empty_sql_array()
+    public function get_empty_sql_array(): array
     {
         return [
             'SELECT' => [],
@@ -521,7 +521,7 @@ class sql_db
      * @param $sql_ary
      * @return string
      */
-    public function build_sql($sql_ary)
+    public function build_sql($sql_ary): string
     {
         $sql = '';
         array_deep($sql_ary, 'array_unique', false, true);
@@ -529,31 +529,31 @@ class sql_db
         foreach ($sql_ary as $clause => $ary) {
             switch ($clause) {
                 case 'SELECT':
-                    $sql .= ($ary) ? ' SELECT ' . join(' ', $sql_ary['select_options']) . ' ' . join(', ', $ary) : '';
+                    $sql .= $ary ? ' SELECT ' . implode(' ', $sql_ary['select_options']) . ' ' . implode(', ', $ary) : '';
                     break;
                 case 'FROM':
-                    $sql .= ($ary) ? ' FROM ' . join(', ', $ary) : '';
+                    $sql .= $ary ? ' FROM ' . implode(', ', $ary) : '';
                     break;
                 case 'INNER JOIN':
-                    $sql .= ($ary) ? ' INNER JOIN ' . join(' INNER JOIN ', $ary) : '';
+                    $sql .= $ary ? ' INNER JOIN ' . implode(' INNER JOIN ', $ary) : '';
                     break;
                 case 'LEFT JOIN':
-                    $sql .= ($ary) ? ' LEFT JOIN ' . join(' LEFT JOIN ', $ary) : '';
+                    $sql .= $ary ? ' LEFT JOIN ' . implode(' LEFT JOIN ', $ary) : '';
                     break;
                 case 'WHERE':
-                    $sql .= ($ary) ? ' WHERE ' . join(' AND ', $ary) : '';
+                    $sql .= $ary ? ' WHERE ' . implode(' AND ', $ary) : '';
                     break;
                 case 'GROUP BY':
-                    $sql .= ($ary) ? ' GROUP BY ' . join(', ', $ary) : '';
+                    $sql .= $ary ? ' GROUP BY ' . implode(', ', $ary) : '';
                     break;
                 case 'HAVING':
-                    $sql .= ($ary) ? ' HAVING ' . join(' AND ', $ary) : '';
+                    $sql .= $ary ? ' HAVING ' . implode(' AND ', $ary) : '';
                     break;
                 case 'ORDER BY':
-                    $sql .= ($ary) ? ' ORDER BY ' . join(', ', $ary) : '';
+                    $sql .= $ary ? ' ORDER BY ' . implode(', ', $ary) : '';
                     break;
                 case 'LIMIT':
-                    $sql .= ($ary) ? ' LIMIT ' . join(', ', $ary) : '';
+                    $sql .= $ary ? ' LIMIT ' . implode(', ', $ary) : '';
                     break;
             }
         }
@@ -570,9 +570,9 @@ class sql_db
     {
         if ($this->link) {
             return ['code' => mysqli_errno($this->link), 'message' => mysqli_error($this->link)];
-        } else {
-            return ['code' => '', 'message' => 'not connected'];
         }
+
+        return ['code' => '', 'message' => 'not connected'];
     }
 
     /**
@@ -643,7 +643,7 @@ class sql_db
         foreach ((array)$tables as $table_name) {
             $tables_sql[] = "$table_name $lock_type";
         }
-        if ($tables_sql = join(', ', $tables_sql)) {
+        if ($tables_sql = implode(', ', $tables_sql)) {
             $this->locked = $this->sql_query("LOCK TABLES $tables_sql");
         }
 
@@ -655,7 +655,7 @@ class sql_db
      *
      * @return bool
      */
-    public function unlock()
+    public function unlock(): bool
     {
         if ($this->locked && $this->sql_query("UNLOCK TABLES")) {
             $this->locked = false;
@@ -725,7 +725,7 @@ class sql_db
      *
      * @return string
      */
-    public function get_lock_name($name)
+    public function get_lock_name($name): string
     {
         if (!$this->selected_db) {
             $this->init();
@@ -782,7 +782,7 @@ class sql_db
             }
         }
 
-        @define('IN_FIRST_SLOW_QUERY', true);
+        define('IN_FIRST_SLOW_QUERY', true);
         CACHE('bb_cache')->set('dont_log_slow_query', $new_priority, $ignoring_time);
     }
 
@@ -869,7 +869,7 @@ class sql_db
      *
      * @return string
      */
-    public function debug_find_source($mode = '')
+    public function debug_find_source($mode = ''): string
     {
         foreach (debug_backtrace() as $trace) {
             if (!empty($trace['file']) && $trace['file'] !== __FILE__) {
@@ -913,7 +913,7 @@ class sql_db
         $msg[] = sprintf('%05d', getmypid());
         $msg[] = $this->db_server;
         $msg[] = short_query($this->cur_query);
-        $msg = join(LOG_SEPR, $msg);
+        $msg = implode(LOG_SEPR, $msg);
         $msg .= ($info = $this->query_info()) ? ' # ' . $info : '';
         $msg .= ' # ' . $this->debug_find_source() . ' ';
         $msg .= defined('IN_CRON') ? 'cron' : basename($_SERVER['REQUEST_URI']);
@@ -949,12 +949,12 @@ class sql_db
         $msg[] = str_compact($this->cur_query);
         $msg[] = '';
         $msg[] = 'Source  : ' . $this->debug_find_source() . " :: $this->db_server.$this->selected_db";
-        $msg[] = 'IP      : ' . @$_SERVER['REMOTE_ADDR'];
+        $msg[] = 'IP      : ' . $_SERVER['REMOTE_ADDR'];
         $msg[] = 'Date    : ' . date('Y-m-d H:i:s');
-        $msg[] = 'Agent   : ' . @$_SERVER['HTTP_USER_AGENT'];
-        $msg[] = 'Req_URI : ' . @$_SERVER['REQUEST_URI'];
-        $msg[] = 'Referer : ' . @$_SERVER['HTTP_REFERER'];
-        $msg[] = 'Method  : ' . @$_SERVER['REQUEST_METHOD'];
+        $msg[] = 'Agent   : ' . $_SERVER['HTTP_USER_AGENT'];
+        $msg[] = 'Req_URI : ' . $_SERVER['REQUEST_URI'];
+        $msg[] = 'Referer : ' . $_SERVER['HTTP_REFERER'];
+        $msg[] = 'Method  : ' . $_SERVER['REQUEST_METHOD'];
         $msg[] = 'PID     : ' . sprintf('%05d', getmypid());
         $msg[] = 'Request : ' . trim(print_r($_REQUEST, true)) . str_repeat('_', 78) . LOG_LF;
         $msg[] = '';
@@ -1010,14 +1010,14 @@ class sql_db
                 $dbg = $this->dbg[$id];
 
                 $this->explain_out .= '
-				<table width="98%" cellpadding="0" cellspacing="0" class="bodyline row2 bCenter" style="border-bottom: 0px;">
+				<table width="98%" cellpadding="0" cellspacing="0" class="bodyline row2 bCenter" style="border-bottom: 0;">
 				<tr>
 					<th style="height: 22px; cursor: pointer;" align="left">&nbsp;' . $dbg['src'] . '&nbsp; [' . sprintf('%.4f', $dbg['time']) . ' s]&nbsp; <i>' . $dbg['info'] . '</i></th>
 					<th style="height: 22px; cursor: pointer;" align="right" title="Copy to clipboard" onclick="$.copyToClipboard( $(\'#' . $htid . '\').text() );">' . "$this->db_server.$this->selected_db" . ' :: Query #' . ($this->num_queries + 1) . '&nbsp;</th>
 				</tr>
 				<tr><td colspan="2">' . $this->explain_hold . '</td></tr>
 				</table>
-				<div class="sqlLog"><div id="' . $htid . '" class="sqlLogRow sqlExplain" style="padding: 0px;">' . short_query($dbg['sql'], true) . '&nbsp;&nbsp;</div></div>
+				<div class="sqlLog"><div id="' . $htid . '" class="sqlLogRow sqlExplain" style="padding: 0;">' . short_query($dbg['sql'], true) . '&nbsp;&nbsp;</div></div>
 				<br />';
                 break;
 

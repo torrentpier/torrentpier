@@ -25,7 +25,7 @@
 
 define('IN_ADMIN', true);
 define('BB_ROOT', './../../');
-require(BB_ROOT . 'common.php');
+require BB_ROOT . 'common.php';
 
 $user->session_start();
 
@@ -36,7 +36,7 @@ if (!IS_ADMIN) {
 $peers_in_last_minutes = array(30, 15, 5, 1);
 $peers_in_last_sec_limit = 300;
 
-$announce_interval = intval($bb_cfg['announce_interval']);
+$announce_interval = (int)$bb_cfg['announce_interval'];
 $stat = array();
 
 define('TMP_TRACKER_TABLE', 'tmp_tracker');
@@ -131,11 +131,11 @@ echo "\n
 	</td></tr>
 \n";
 
-echo "\n<tr><td align=center> peers: in last " . join(' / ', $peers_in_last_minutes) . " min</td>\n";
-echo "\n<td align=center>" . join(' / ', $peers_in_last_min) . "</td></tr>\n";
+echo "\n<tr><td align=center> peers: in last " . implode(' / ', $peers_in_last_minutes) . " min</td>\n";
+echo "\n<td align=center>" . implode(' / ', $peers_in_last_min) . "</td></tr>\n";
 
 echo "\n<tr><td align=center> peers in last $peers_in_last_sec_limit sec <br /> [ per second, DESC order --> ] <br /> last peer: $stat[last_peer_time] seconds ago <br /> " . date("j M H:i:s [T O]") . " </td>\n";
-echo '<td align=center style="font-size: 13px; font-family: \'Courier New\',Courier,monospace;"><pre> ' . join(' ', $peers_in_last_sec) . "</pre></td></tr>\n";
+echo '<td align=center style="font-size: 13px; font-family: \'Courier New\',Courier,monospace;"><pre> ' . implode(' ', $peers_in_last_sec) . "</pre></td></tr>\n";
 
 echo '</table>';
 
@@ -149,7 +149,7 @@ if ($l = sys('la')) {
     echo "\n\n<b>loadavg: </b>$l[0] $l[1] $l[2]\n\n";
 }
 
-echo 'gen time: <b>' . sprintf('%.3f', (array_sum(explode(' ', microtime())) - TIMESTART)) . "</b> sec\n";
+echo 'gen time: <b>' . sprintf('%.3f', array_sum(explode(' ', microtime())) - TIMESTART) . "</b> sec\n";
 
 echo '</pre></div>';
 echo '</body></html>';

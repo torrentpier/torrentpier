@@ -23,7 +23,7 @@
  * SOFTWARE.
  */
 
-require('./pagestart.php');
+require './pagestart.php';
 
 // Generate relevant output
 if (isset($_GET['pane']) && $_GET['pane'] == 'left') {
@@ -32,7 +32,7 @@ if (isset($_GET['pane']) && $_GET['pane'] == 'left') {
         $setmodules = 1;
         while ($file = @readdir($dir)) {
             if (preg_match('/^admin_.*?\.php$/', $file)) {
-                include('./' . $file);
+                include './' . $file;
             }
         }
         unset($setmodules);
@@ -74,8 +74,8 @@ if (isset($_GET['pane']) && $_GET['pane'] == 'left') {
 } elseif (isset($_GET['pane']) && $_GET['pane'] == 'right') {
     $template->assign_vars(array(
         'TPL_ADMIN_MAIN' => true,
-        'ADMIN_LOCK' => ($bb_cfg['board_disable']) ? true : false,
-        'ADMIN_LOCK_CRON' => (file_exists(BB_DISABLED)) ? true : false,
+        'ADMIN_LOCK' => $bb_cfg['board_disable'] ? true : false,
+        'ADMIN_LOCK_CRON' => file_exists(BB_DISABLED) ? true : false,
     ));
 
     // Get forum statistics
@@ -104,11 +104,11 @@ if (isset($_GET['pane']) && $_GET['pane'] == 'left') {
         $avatar_dir_size = $lang['NOT_AVAILABLE'];
     }
 
-    if (intval($posts_per_day) > $total_posts) {
+    if ((int)$posts_per_day > $total_posts) {
         $posts_per_day = $total_posts;
     }
 
-    if (intval($topics_per_day) > $total_topics) {
+    if ((int)$topics_per_day > $total_topics) {
         $topics_per_day = $total_topics;
     }
 
@@ -131,7 +131,7 @@ if (isset($_GET['pane']) && $_GET['pane'] == 'left') {
 
                     $dbsize = 0;
                     for ($i = 0; $i < count($tabledata_ary); $i++) {
-                        if (@$tabledata_ary[$i]['Type'] != 'MRG_MYISAM') {
+                        if ($tabledata_ary[$i]['Type'] != 'MRG_MYISAM') {
                             $dbsize += $tabledata_ary[$i]['Data_length'] + $tabledata_ary[$i]['Index_length'];
                         }
                     }
@@ -156,10 +156,10 @@ if (isset($_GET['pane']) && $_GET['pane'] == 'left') {
         'USERS_PER_DAY' => $users_per_day,
         'AVATAR_DIR_SIZE' => $avatar_dir_size,
         'DB_SIZE' => $dbsize,
-        'GZIP_COMPRESSION' => ($bb_cfg['gzip_compress']) ? $lang['ON'] : $lang['OFF'],
+        'GZIP_COMPRESSION' => $bb_cfg['gzip_compress'] ? $lang['ON'] : $lang['OFF'],
     ));
 
-    if (@$_GET['users_online']) {
+    if ($_GET['users_online']) {
         $template->assign_vars(array(
             'SHOW_USERS_ONLINE' => true,
         ));
@@ -193,7 +193,7 @@ if (isset($_GET['pane']) && $_GET['pane'] == 'left') {
             $registered_users = $hidden_users = 0;
 
             for ($i = 0, $cnt = count($onlinerow_reg); $i < $cnt; $i++) {
-                if (!in_array($onlinerow_reg[$i]['user_id'], $reg_userid_ary)) {
+                if (!in_array($onlinerow_reg[$i]['user_id'], $reg_userid_ary, true)) {
                     $reg_userid_ary[] = $onlinerow_reg[$i]['user_id'];
 
                     $username = $onlinerow_reg[$i]['username'];
@@ -263,7 +263,7 @@ print_page('index.tpl', 'admin');
 // Functions
 function inarray($needle, $haystack)
 {
-    for ($i = 0; $i < sizeof($haystack); $i++) {
+    for ($i = 0; $i < count($haystack); $i++) {
         if ($haystack[$i] == $needle) {
             return true;
         }

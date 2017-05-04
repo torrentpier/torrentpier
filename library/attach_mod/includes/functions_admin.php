@@ -106,10 +106,10 @@ function process_quota_settings($mode, $id, $quota_type, $quota_limit_id = 0)
  */
 function sort_multi_array($sort_array, $key, $sort_order, $pre_string_sort = 0)
 {
-    $last_element = sizeof($sort_array) - 1;
+    $last_element = count($sort_array) - 1;
 
     if (!$pre_string_sort) {
-        $string_sort = (!is_numeric(@$sort_array[$last_element - 1][$key])) ? true : false;
+        $string_sort = (!is_numeric($sort_array[$last_element - 1][$key])) ? true : false;
     } else {
         $string_sort = $pre_string_sort;
     }
@@ -122,15 +122,15 @@ function sort_multi_array($sort_array, $key, $sort_order, $pre_string_sort = 0)
             $switch = false;
             if (!$string_sort) {
                 if (
-                    ($sort_order == 'DESC' && intval(@$sort_array[$j][$key]) < intval(@$sort_array[$j + 1][$key])) ||
-                    ($sort_order == 'ASC' && intval(@$sort_array[$j][$key]) > intval(@$sort_array[$j + 1][$key]))
+                    ($sort_order == 'DESC' && (int)($sort_array[$j][$key]) < (int)($sort_array[$j + 1][$key])) ||
+                    ($sort_order == 'ASC' && (int)($sort_array[$j][$key]) > (int)($sort_array[$j + 1][$key]))
                 ) {
                     $switch = true;
                 }
             } else {
                 if (
-                    ($sort_order == 'DESC' && strcasecmp(@$sort_array[$j][$key], @$sort_array[$j + 1][$key]) < 0) ||
-                    ($sort_order == 'ASC' && strcasecmp(@$sort_array[$j][$key], @$sort_array[$j + 1][$key]) > 0)
+                    ($sort_order == 'DESC' && strcasecmp($sort_array[$j][$key], $sort_array[$j + 1][$key]) < 0) ||
+                    ($sort_order == 'ASC' && strcasecmp($sort_array[$j][$key], $sort_array[$j + 1][$key]) > 0)
                 ) {
                     $switch = true;
                 }
@@ -209,7 +209,7 @@ function search_attachments($order_by, &$total_rows)
         $matching_userids = '';
         if ($row = DB()->sql_fetchrow($result)) {
             do {
-                $matching_userids .= (($matching_userids != '') ? ', ' : '') . intval($row['user_id']);
+                $matching_userids .= (($matching_userids != '') ? ', ' : '') . (int)$row['user_id'];
             } while ($row = DB()->sql_fetchrow($result));
 
             DB()->sql_freeresult($result);
@@ -260,13 +260,13 @@ function search_attachments($order_by, &$total_rows)
     // Search Forum
     $search_forum = get_var('search_forum', '');
     if ($search_forum) {
-        $where_sql[] = ' (p.forum_id = ' . intval($search_forum) . ') ';
+        $where_sql[] = ' (p.forum_id = ' . (int)$search_forum . ') ';
     }
 
     $sql = 'SELECT a.*, t.post_id, p.post_time, p.topic_id
 		FROM ' . BB_ATTACHMENTS . ' t, ' . BB_ATTACHMENTS_DESC . ' a, ' . BB_POSTS . ' p WHERE ';
 
-    if (sizeof($where_sql) > 0) {
+    if (count($where_sql) > 0) {
         $sql .= implode('AND', $where_sql) . ' AND ';
     }
 
@@ -309,7 +309,7 @@ function search_attachments($order_by, &$total_rows)
 function limit_array($array, $start, $pagelimit)
 {
     // array from start - start+pagelimit
-    $limit = (sizeof($array) < ($start + $pagelimit)) ? sizeof($array) : $start + $pagelimit;
+    $limit = (count($array) < ($start + $pagelimit)) ? count($array) : $start + $pagelimit;
 
     $limit_array = [];
 

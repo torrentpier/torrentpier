@@ -27,7 +27,7 @@ if (!empty($setmodules)) {
     $module['FORUMS']['PERMISSIONS'] = basename(__FILE__);
     return;
 }
-require('./pagestart.php');
+require './pagestart.php';
 
 $forum_auth_fields = array(
     'auth_view',
@@ -80,7 +80,7 @@ foreach ($forum_auth_fields as $auth_type) {
 $forum_auth_levels = array('ALL', 'REG', 'PRIVATE', 'MOD', 'ADMIN');
 $forum_auth_const = array(AUTH_ALL, AUTH_REG, AUTH_ACL, AUTH_MOD, AUTH_ADMIN);
 
-if (@$_REQUEST[POST_FORUM_URL]) {
+if ($_REQUEST[POST_FORUM_URL]) {
     $forum_id = (int)$_REQUEST[POST_FORUM_URL];
     $forum_sql = "WHERE forum_id = $forum_id";
 } else {
@@ -89,7 +89,7 @@ if (@$_REQUEST[POST_FORUM_URL]) {
 }
 
 if (isset($_GET['adv'])) {
-    $adv = intval($_GET['adv']);
+    $adv = (int)$_GET['adv'];
 } else {
     unset($adv);
 }
@@ -102,7 +102,7 @@ if (isset($_POST['submit'])) {
 
     if (!empty($forum_id)) {
         if (isset($_POST['simpleauth'])) {
-            $simple_ary = $simple_auth_ary[intval($_POST['simpleauth'])];
+            $simple_ary = $simple_auth_ary[(int)$_POST['simpleauth']];
 
             for ($i = 0; $i < count($simple_ary); $i++) {
                 $sql .= (($sql != '') ? ', ' : '') . $forum_auth_fields[$i] . ' = ' . $simple_ary[$i];
@@ -113,7 +113,7 @@ if (isset($_POST['submit'])) {
             }
         } else {
             for ($i = 0; $i < count($forum_auth_fields); $i++) {
-                $value = intval($_POST[$forum_auth_fields[$i]]);
+                $value = (int)$_POST[$forum_auth_fields[$i]];
 
                 if ($forum_auth_fields[$i] == 'auth_vote') {
                     if ($_POST['auth_vote'] == AUTH_ALL) {
@@ -159,7 +159,7 @@ if (empty($forum_id)) {
     // Output the authorisation details if an id was specified
     $forum_name = $forum_rows[0]['forum_name'];
 
-    @reset($simple_auth_ary);
+    reset($simple_auth_ary);
     while (list($key, $auth_levels) = each($simple_auth_ary)) {
         $matched = 1;
         for ($k = 0; $k < count($auth_levels); $k++) {
@@ -226,9 +226,9 @@ if (empty($forum_id)) {
         }
     }
 
-    $adv_mode = (empty($adv)) ? '1' : '0';
+    $adv_mode = empty($adv) ? '1' : '0';
     $switch_mode = "admin_forumauth.php?f=$forum_id&amp;adv=$adv_mode";
-    $switch_mode_text = (empty($adv)) ? $lang['ADVANCED_MODE'] : $lang['SIMPLE_MODE'];
+    $switch_mode_text = empty($adv) ? $lang['ADVANCED_MODE'] : $lang['SIMPLE_MODE'];
     $u_switch_mode = '<a href="' . $switch_mode . '">' . $switch_mode_text . '</a>';
 
     $s_hidden_fields = '<input type="hidden" name="' . POST_FORUM_URL . '" value="' . $forum_id . '">';

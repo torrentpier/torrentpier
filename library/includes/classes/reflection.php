@@ -84,7 +84,7 @@ class ReflectionTypeHint
     {
     }
 
-    public static function isValid()
+    public static function isValid(): bool
     {
         if (!assert_options(ASSERT_ACTIVE)) {
             return true;
@@ -152,7 +152,7 @@ class ReflectionTypeHint
      * @param   int|null $return_frame
      * @return  array
      */
-    public static function debugBacktrace($re_ignore = null, $return_frame = null)
+    public static function debugBacktrace($re_ignore = null, $return_frame = null): array
     {
         $trace = debug_backtrace();
 
@@ -165,12 +165,12 @@ class ReflectionTypeHint
             }
 
             // Next frame.
-            $next = isset($trace[$i + 1]) ? $trace[$i + 1] : null;
+            $next = $trace[$i + 1] ?? null;
 
             // Dummy frame before call_user_func*() frames.
             if (!isset($t['file']) && $next) {
                 $t['over_function'] = $trace[$i + 1]['function'];
-                $t = $t + $trace[$i + 1];
+                $t += $trace[$i + 1];
                 $trace[$i + 1] = null; // skip call_user_func on next iteration
             }
 
@@ -184,7 +184,7 @@ class ReflectionTypeHint
             if ($re_ignore && $next) {
                 // Name of function "inside which" frame was generated.
                 $frame_caller = (isset($next['class']) ? $next['class'] . $next['type'] : '')
-                    . (isset($next['function']) ? $next['function'] : '');
+                    . ($next['function'] ?? '');
                 if (preg_match($re_ignore, $frame_caller)) {
                     continue;
                 }
@@ -206,7 +206,7 @@ class ReflectionTypeHint
      * @param   mixed $value
      * @return  bool
      */
-    public static function checkValueTypes(array $types, $value)
+    public static function checkValueTypes(array $types, $value): bool
     {
         foreach ($types as $type) {
             $type = strtolower($type);

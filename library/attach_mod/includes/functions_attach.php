@@ -35,12 +35,14 @@ if (!function_exists('html_entity_decode')) {
     {
         $trans_table = array_flip(get_html_translation_table(HTML_SPECIALCHARS, $quote_style));
         $trans_table['&#39;'] = "'";
-        return (strtr($given_html, $trans_table));
+        return strtr($given_html, $trans_table);
     }
 }
 
 /**
  * A simple dectobase64 function
+ * @param $number
+ * @return string|void
  */
 function base64_pack($number)
 {
@@ -49,7 +51,9 @@ function base64_pack($number)
 
     if ($number > 4096) {
         return;
-    } elseif ($number < $base) {
+    }
+
+    if ($number < $base) {
         return $chars[$number];
     }
 
@@ -70,6 +74,8 @@ function base64_pack($number)
 
 /**
  * base64todec function
+ * @param $string
+ * @return bool|int
  */
 function base64_unpack($string)
 {
@@ -81,8 +87,8 @@ function base64_unpack($string)
 
     for ($i = 1; $i <= $length; $i++) {
         $pos = $length - $i;
-        $operand = strpos($chars, substr($string, $pos, 1));
-        $exponent = pow($base, $i - 1);
+        $operand = strpos($chars, $string[$pos]);
+        $exponent = $base ** ($i - 1);
         $decValue = $operand * $exponent;
         $number += $decValue;
     }
@@ -93,6 +99,8 @@ function base64_unpack($string)
 /**
  * Per Forum based Extension Group Permissions (Encode Number) -> Theoretically up to 158 Forums saveable. :)
  * We are using a base of 64, but splitting it to one-char and two-char numbers. :)
+ * @param $auth_array
+ * @return string
  */
 function auth_pack($auth_array)
 {
@@ -101,8 +109,8 @@ function auth_pack($auth_array)
     $one_char = $two_char = false;
     $auth_cache = '';
 
-    for ($i = 0; $i < sizeof($auth_array); $i++) {
-        $val = base64_pack(intval($auth_array[$i]));
+    for ($i = 0; $i < count($auth_array); $i++) {
+        $val = base64_pack((int)$auth_array[$i]);
         if (strlen($val) == 1 && !$one_char) {
             $auth_cache .= $one_char_encoding;
             $one_char = true;
@@ -119,6 +127,8 @@ function auth_pack($auth_array)
 
 /**
  * Reverse the auth_pack process
+ * @param $auth_cache
+ * @return array
  */
 function auth_unpack($auth_cache)
 {
@@ -129,11 +139,13 @@ function auth_unpack($auth_cache)
     $auth_len = 1;
 
     for ($pos = 0; $pos < strlen($auth_cache); $pos += $auth_len) {
-        $forum_auth = substr($auth_cache, $pos, 1);
+        $forum_auth = $auth_cache[$pos];
         if ($forum_auth == $one_char_encoding) {
             $auth_len = 1;
             continue;
-        } elseif ($forum_auth == $two_char_encoding) {
+        }
+
+        if ($forum_auth == $two_char_encoding) {
             $auth_len = 2;
             $pos--;
             continue;
@@ -141,13 +153,16 @@ function auth_unpack($auth_cache)
 
         $forum_auth = substr($auth_cache, $pos, $auth_len);
         $forum_id = base64_unpack($forum_auth);
-        $auth[] = intval($forum_id);
+        $auth[] = (int)$forum_id;
     }
     return $auth;
 }
 
 /**
  * Used for determining if Forum ID is authed, please use this Function on all Posting Screens
+ * @param $auth_cache
+ * @param $check_forum_id
+ * @return bool
  */
 function is_forum_authed($auth_cache, $check_forum_id)
 {
@@ -162,11 +177,13 @@ function is_forum_authed($auth_cache, $check_forum_id)
     $auth_len = 1;
 
     for ($pos = 0; $pos < strlen($auth_cache); $pos += $auth_len) {
-        $forum_auth = substr($auth_cache, $pos, 1);
+        $forum_auth = $auth_cache[$pos];
         if ($forum_auth == $one_char_encoding) {
             $auth_len = 1;
             continue;
-        } elseif ($forum_auth == $two_char_encoding) {
+        }
+
+        if ($forum_auth == $two_char_encoding) {
             $auth_len = 2;
             $pos--;
             continue;
@@ -183,6 +200,9 @@ function is_forum_authed($auth_cache, $check_forum_id)
 
 /**
  * Deletes an Attachment
+ * @param $filename
+ * @param bool $mode
+ * @return bool
  */
 function unlink_attach($filename, $mode = false)
 {
@@ -196,13 +216,13 @@ function unlink_attach($filename, $mode = false)
         $filename = $upload_dir . '/' . $filename;
     }
 
-    $deleted = @unlink($filename);
-
-    return $deleted;
+    return @unlink($filename);
 }
 
 /**
  * Check if Attachment exist
+ * @param $filename
+ * @return bool
  */
 function attachment_exists($filename)
 {
@@ -210,15 +230,17 @@ function attachment_exists($filename)
 
     $filename = basename($filename);
 
-    if (!@file_exists(@amod_realpath($upload_dir . '/' . $filename))) {
+    if (!@file_exists(amod_realpath($upload_dir . '/' . $filename))) {
         return false;
-    } else {
-        return true;
     }
+
+    return true;
 }
 
 /**
  * Check if Thumbnail exist
+ * @param $filename
+ * @return bool
  */
 function thumbnail_exists($filename)
 {
@@ -226,15 +248,17 @@ function thumbnail_exists($filename)
 
     $filename = basename($filename);
 
-    if (!@file_exists(@amod_realpath($upload_dir . '/' . THUMB_DIR . '/t_' . $filename))) {
+    if (!@file_exists(amod_realpath($upload_dir . '/' . THUMB_DIR . '/t_' . $filename))) {
         return false;
-    } else {
-        return true;
     }
+
+    return true;
 }
 
 /**
  * Physical Filename stored already ?
+ * @param $filename
+ * @return bool
  */
 function physical_filename_already_stored($filename)
 {
@@ -255,11 +279,13 @@ function physical_filename_already_stored($filename)
     $num_rows = DB()->num_rows($result);
     DB()->sql_freeresult($result);
 
-    return ($num_rows == 0) ? false : true;
+    return $num_rows != 0;
 }
 
 /**
  * get all attachments from a post (could be an post array too)
+ * @param $post_id_array
+ * @return array
  */
 function get_attachments_from_post($post_id_array)
 {
@@ -272,7 +298,7 @@ function get_attachments_from_post($post_id_array)
             return $attachments;
         }
 
-        $post_id = intval($post_id_array);
+        $post_id = (int)$post_id_array;
 
         $post_id_array = array();
         $post_id_array[] = $post_id;
@@ -284,7 +310,7 @@ function get_attachments_from_post($post_id_array)
         return $attachments;
     }
 
-    $display_order = (intval($attach_config['display_order']) == 0) ? 'DESC' : 'ASC';
+    $display_order = ((int)$attach_config['display_order'] == 0) ? 'DESC' : 'ASC';
 
     $sql = 'SELECT a.post_id, d.*
 		FROM ' . BB_ATTACHMENTS . ' a, ' . BB_ATTACHMENTS_DESC . " d
@@ -309,10 +335,12 @@ function get_attachments_from_post($post_id_array)
 
 /**
  * Count Filesize of Attachments in Database based on the attachment id
+ * @param $attach_ids
+ * @return int
  */
 function get_total_attach_filesize($attach_ids)
 {
-    if (!is_array($attach_ids) || !sizeof($attach_ids)) {
+    if (!is_array($attach_ids) || !count($attach_ids)) {
         return 0;
     }
 
@@ -352,7 +380,7 @@ function get_extension_informations()
 function attachment_sync_topic($topics)
 {
     if (is_array($topics)) {
-        $topics = join(',', $topics);
+        $topics = implode(',', $topics);
     }
     $posts_without_attach = $topics_without_attach = array();
 
@@ -368,7 +396,7 @@ function attachment_sync_topic($topics)
         foreach ($rowset as $row) {
             $posts_without_attach[] = $row['post_id'];
         }
-        if ($posts_sql = join(',', $posts_without_attach)) {
+        if ($posts_sql = implode(',', $posts_without_attach)) {
             DB()->query("UPDATE " . BB_POSTS . " SET post_attachment = 0 WHERE post_id IN($posts_sql)");
         }
     }
@@ -395,7 +423,7 @@ function attachment_sync_topic($topics)
         foreach ($rowset as $row) {
             $topics_without_attach[] = $row['topic_id'];
         }
-        if ($topics_sql = join(',', $topics_without_attach)) {
+        if ($topics_sql = implode(',', $topics_without_attach)) {
             DB()->query("UPDATE " . BB_TOPICS . " SET topic_attachment = 0 WHERE topic_id IN($topics_sql)");
         }
     }
@@ -403,10 +431,12 @@ function attachment_sync_topic($topics)
 
 /**
  * Get Extension
+ * @param $filename
+ * @return string
  */
 function get_extension($filename)
 {
-    if (!stristr($filename, '.')) {
+    if (false === strstr($filename, '.')) {
         return '';
     }
     $extension = strrchr(strtolower($filename), '.');
@@ -414,13 +444,15 @@ function get_extension($filename)
     $extension = strtolower(trim($extension));
     if (is_array($extension)) {
         return '';
-    } else {
-        return $extension;
     }
+
+    return $extension;
 }
 
 /**
  * Delete Extension
+ * @param $filename
+ * @return bool|string
  */
 function delete_extension($filename)
 {
@@ -429,6 +461,9 @@ function delete_extension($filename)
 
 /**
  * Check if a user is within Group
+ * @param $user_id
+ * @param $group_id
+ * @return bool
  */
 function user_in_group($user_id, $group_id)
 {
@@ -454,19 +489,17 @@ function user_in_group($user_id, $group_id)
     $num_rows = DB()->num_rows($result);
     DB()->sql_freeresult($result);
 
-    if ($num_rows == 0) {
-        return false;
-    }
-
-    return true;
+    return !($num_rows == 0);
 }
 
 /**
  * Realpath replacement for attachment mod
+ * @param $path
+ * @return bool|string
  */
 function amod_realpath($path)
 {
-    return (function_exists('realpath')) ? realpath($path) : $path;
+    return function_exists('realpath') ? realpath($path) : $path;
 }
 
 /**
@@ -475,6 +508,10 @@ function amod_realpath($path)
  * Set variable, used by {@link get_var the get_var function}
  *
  * @private
+ * @param $result
+ * @param $var
+ * @param $type
+ * @param bool $multibyte
  */
 function _set_var(&$result, $var, $type, $multibyte = false)
 {
@@ -506,7 +543,7 @@ function get_var($var_name, $default, $multibyte = false)
         (is_array($_REQUEST[$var_name]) && !is_array($default)) ||
         (is_array($default) && !is_array($_REQUEST[$var_name]))
     ) {
-        return (is_array($default)) ? [] : $default;
+        return is_array($default) ? [] : $default;
     }
 
     $var = $_REQUEST[$var_name];
@@ -545,14 +582,16 @@ function get_var($var_name, $default, $multibyte = false)
 
 /**
  * Escaping SQL
+ * @param $text
+ * @return mixed|string
  */
 function attach_mod_sql_escape($text)
 {
     if (function_exists('mysqli_real_escape_string')) {
         return DB()->escape_string($text);
-    } else {
-        return str_replace("'", "''", str_replace('\\', '\\\\', $text));
     }
+
+    return str_replace("'", "''", str_replace('\\', '\\\\', $text));
 }
 
 /**
@@ -560,6 +599,9 @@ function attach_mod_sql_escape($text)
  *
  * Idea for this from Ikonboard
  * Possible query values: INSERT, INSERT_SELECT, MULTI_INSERT, UPDATE, SELECT
+ * @param $query
+ * @param bool $assoc_ary
+ * @return string
  */
 function attach_mod_sql_build_array($query, $assoc_ary = false)
 {
@@ -573,14 +615,14 @@ function attach_mod_sql_build_array($query, $assoc_ary = false)
         foreach ($assoc_ary as $key => $var) {
             $fields[] = $key;
 
-            if (is_null($var)) {
+            if (null === $var) {
                 $values[] = 'NULL';
             } elseif (is_string($var)) {
                 $values[] = "'" . attach_mod_sql_escape($var) . "'";
             } elseif (is_array($var) && is_string($var[0])) {
                 $values[] = $var[0];
             } else {
-                $values[] = (is_bool($var)) ? intval($var) : $var;
+                $values[] = is_bool($var) ? (int)$var : $var;
             }
         }
 
@@ -590,12 +632,12 @@ function attach_mod_sql_build_array($query, $assoc_ary = false)
         foreach ($assoc_ary as $id => $sql_ary) {
             $values = array();
             foreach ($sql_ary as $key => $var) {
-                if (is_null($var)) {
+                if (null === $var) {
                     $values[] = 'NULL';
                 } elseif (is_string($var)) {
                     $values[] = "'" . attach_mod_sql_escape($var) . "'";
                 } else {
-                    $values[] = (is_bool($var)) ? intval($var) : $var;
+                    $values[] = is_bool($var) ? (int)$var : $var;
                 }
             }
             $ary[] = '(' . implode(', ', $values) . ')';
@@ -605,12 +647,12 @@ function attach_mod_sql_build_array($query, $assoc_ary = false)
     } elseif ($query == 'UPDATE' || $query == 'SELECT') {
         $values = array();
         foreach ($assoc_ary as $key => $var) {
-            if (is_null($var)) {
+            if (null === $var) {
                 $values[] = "$key = NULL";
             } elseif (is_string($var)) {
                 $values[] = "$key = '" . attach_mod_sql_escape($var) . "'";
             } else {
-                $values[] = (is_bool($var)) ? "$key = " . intval($var) : "$key = $var";
+                $values[] = is_bool($var) ? "$key = " . (int)$var : "$key = $var";
             }
         }
         $query = implode(($query == 'UPDATE') ? ', ' : ' AND ', $values);

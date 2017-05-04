@@ -30,27 +30,27 @@ if (!defined('BB_ROOT')) {
 function get_path_from_id($id, $ext_id, $base_path, $first_div, $sec_div)
 {
     global $bb_cfg;
-    $ext = isset($bb_cfg['file_id_ext'][$ext_id]) ? $bb_cfg['file_id_ext'][$ext_id] : '';
+    $ext = $bb_cfg['file_id_ext'][$ext_id] ?? '';
     return ($base_path ? "$base_path/" : '') . floor($id / $first_div) . '/' . ($id % $sec_div) . '/' . $id . ($ext ? ".$ext" : '');
 }
 
 function get_avatar_path($id, $ext_id, $base_path = null, $first_div = 10000, $sec_div = 100)
 {
     global $bb_cfg;
-    $base_path = isset($base_path) ? $base_path : $bb_cfg['avatars']['upload_path'];
+    $base_path = $base_path ?? $bb_cfg['avatars']['upload_path'];
     return get_path_from_id($id, $ext_id, $base_path, $first_div, $sec_div);
 }
 
 function get_attach_path($id, $ext_id = '', $base_path = null, $first_div = 10000, $sec_div = 100)
 {
     global $bb_cfg;
-    $base_path = isset($base_path) ? $base_path : $bb_cfg['attach']['upload_path'];
+    $base_path = $base_path ?? $bb_cfg['attach']['upload_path'];
     return get_path_from_id($id, $ext_id, $base_path, $first_div, $sec_div);
 }
 
 function delete_avatar($user_id, $avatar_ext_id)
 {
-    $avatar_file = ($avatar_ext_id) ? get_avatar_path($user_id, $avatar_ext_id) : '';
+    $avatar_file = $avatar_ext_id ? get_avatar_path($user_id, $avatar_ext_id) : '';
     return ($avatar_file && file_exists($avatar_file)) ? @unlink($avatar_file) : false;
 }
 
@@ -72,7 +72,7 @@ function get_tracks($type)
             trigger_error(__FUNCTION__ . ": invalid type '$type'", E_USER_ERROR);
     }
     $tracks = !empty($_COOKIE[$c_name]) ? @unserialize($_COOKIE[$c_name]) : false;
-    return ($tracks) ? $tracks : array();
+    return $tracks ?: array();
 }
 
 function set_tracks($cookie_name, &$tracking_ary, $tracks = null, $val = TIMENOW)
@@ -120,8 +120,8 @@ function get_last_read($topic_id = 0, $forum_id = 0)
 {
     global $tracking_topics, $tracking_forums, $user;
 
-    $t = isset($tracking_topics[$topic_id]) ? $tracking_topics[$topic_id] : 0;
-    $f = isset($tracking_forums[$forum_id]) ? $tracking_forums[$forum_id] : 0;
+    $t = $tracking_topics[$topic_id] ?? 0;
+    $f = $tracking_forums[$forum_id] ?? 0;
     return max($t, $f, $user->data['user_lastvisit']);
 }
 
@@ -151,8 +151,10 @@ class ads_common
 
     /**
      *  Get ads to show for each block
+     * @param $block_types
+     * @return array
      */
-    public function get($block_types)
+    public function get($block_types): array
     {
         $ads = array();
 
@@ -187,8 +189,10 @@ class ads_common
 
     /**
      *  Get block_ids for specified block_types
+     * @param $block_types
+     * @return array
      */
-    public function get_block_ids($block_types)
+    public function get_block_ids($block_types): array
     {
         $block_ids = array();
 
@@ -203,8 +207,10 @@ class ads_common
 
     /**
      *  Get ad_ids for specified blocks
+     * @param $block_ids
+     * @return array
      */
-    public function get_ad_ids($block_ids)
+    public function get_ad_ids($block_ids): array
     {
         $ad_ids = array();
 
@@ -317,7 +323,7 @@ function bf($int, $bf_array_name, $key)
 
 function setbit(&$int, $bit_num, $on)
 {
-    return ($on) ? $int |= (1 << $bit_num) : $int &= ~(1 << $bit_num);
+    return $on ? $int |= (1 << $bit_num) : $int &= ~(1 << $bit_num);
 }
 
 /*
@@ -348,7 +354,7 @@ function setbit(&$int, $bit_num, $on)
     forum auth levels, this will prevent the auth function having to do its own
     lookup
 */
-function auth($type, $forum_id, $ug_data, $f_access = array(), $group_perm = UG_PERM_BOTH)
+function auth($type, $forum_id, $ug_data, array $f_access = array(), $group_perm = UG_PERM_BOTH)
 {
     global $lang, $bf, $datastore;
 
@@ -362,7 +368,7 @@ function auth($type, $forum_id, $ug_data, $f_access = array(), $group_perm = UG_
     //
     if ($type == AUTH_ALL) {
         $auth_fields = array_keys($bf['forum_perm']);
-    } elseif ($auth_type = array_search($type, $bf['forum_perm'])) {
+    } elseif ($auth_type = array_search($type, $bf['forum_perm'], true)) {
         $auth_fields = array($auth_type);
     }
 
@@ -539,7 +545,7 @@ class Date_Delta
     }
 
     // Makes the spellable phrase.
-    public function spellDelta($first, $last, $from = 'auto')
+    public function spellDelta($first, $last, $from = 'auto'): string
     {
         if ($last < $first) {
             $old_first = $first;
@@ -583,7 +589,7 @@ class Date_Delta
                 break;
             }
         }
-        return join(' ', $parts);
+        return implode(' ', $parts);
     }
 
     // returns the associative array with date deltas.
@@ -631,7 +637,7 @@ class Date_Delta
     }
 
     // Returns the length (in days) of the specified month.
-    public function monthLength($year, $mon)
+    public function monthLength($year, $mon): int
     {
         $l = 28;
         while (checkdate($mon, $l + 1, $year)) {
@@ -676,11 +682,11 @@ class html_common
 {
     public $options = '';
     public $attr = array();
-    public $cur_attr = null;
+    public $cur_attr;
     public $max_length = HTML_SELECT_MAX_LENGTH;
     public $selected = array();
 
-    public function build_select($name, $params, $selected = null, $max_length = HTML_SELECT_MAX_LENGTH, $multiple_size = null, $js = '')
+    public function build_select($name, $params, $selected = null, $max_length = HTML_SELECT_MAX_LENGTH, $multiple_size = null, $js = ''): string
     {
         if (empty($params)) {
             return '';
@@ -700,8 +706,8 @@ class html_common
 
         $this->_build_select_rec($params);
 
-        $select_params = ($js) ? " $js" : '';
-        $select_params .= ($multiple_size) ? ' multiple="multiple" size="' . $multiple_size . '"' : '';
+        $select_params = $js ? " $js" : '';
+        $select_params .= $multiple_size ? ' multiple="multiple" size="' . $multiple_size . '"' : '';
         $select_params .= ' name="' . htmlCHR($name) . '"';
         $select_params .= ' id="' . htmlCHR($name) . '"';
 
@@ -738,7 +744,7 @@ class html_common
         }
     }
 
-    public function array2html($array, $ul = 'ul', $li = 'li')
+    public function array2html($array, $ul = 'ul', $li = 'li'): string
     {
         $this->out = '';
         $this->_array2html_rec($array, $ul, $li);
@@ -759,14 +765,14 @@ class html_common
     }
 
     // all arguments should be already htmlspecialchar()d (if needed)
-    public function build_checkbox($name, $title, $checked = false, $disabled = false, $class = null, $id = null, $value = 1)
+    public function build_checkbox($name, $title, $checked = false, $disabled = false, $class = null, $id = null, $value = 1): string
     {
         $name = ' name="' . $name . '" ';
         $value = ' value="' . $value . '" ';
-        $title = ($class) ? '<span class="' . $class . '">' . $title . '</span>' : $title;
-        $id = ($id) ? " id=\"$id\" " : '';
-        $checked = ($checked) ? HTML_CHECKED : '';
-        $disabled = ($disabled) ? HTML_DISABLED : '';
+        $title = $class ? '<span class="' . $class . '">' . $title . '</span>' : $title;
+        $id = $id ? " id=\"$id\" " : '';
+        $checked = $checked ? HTML_CHECKED : '';
+        $disabled = $disabled ? HTML_DISABLED : '';
 
         return '<label><input type="checkbox" ' . $id . $name . $value . $checked . $disabled . ' />&nbsp;' . $title . '&nbsp;</label>';
     }
@@ -807,6 +813,8 @@ function replace_quote($str, $double = true, $single = true)
 
 /**
  * Build simple hidden fields from array
+ * @param $fields_ary
+ * @return string
  */
 function build_hidden_fields($fields_ary)
 {
@@ -828,6 +836,10 @@ function build_hidden_fields($fields_ary)
 /**
  * Choost russian word declension based on numeric [from dklab.ru]
  * Example for $expressions: array("ответ", "ответа", "ответов")
+ * @param $int
+ * @param $expressions
+ * @param string $format
+ * @return mixed|string
  */
 function declension($int, $expressions, $format = '%1$s %2$s')
 {
@@ -838,12 +850,12 @@ function declension($int, $expressions, $format = '%1$s %2$s')
     if (count($expressions) < 3) {
         $expressions[2] = $expressions[1];
     }
-    $count = intval($int) % 100;
+    $count = (int)$int % 100;
 
     if ($count >= 5 && $count <= 20) {
         $result = $expressions['2'];
     } else {
-        $count = $count % 10;
+        $count %= 10;
         if ($count == 1) {
             $result = $expressions['0'];
         } elseif ($count >= 2 && $count <= 4) {
@@ -853,7 +865,7 @@ function declension($int, $expressions, $format = '%1$s %2$s')
         }
     }
 
-    return ($format) ? sprintf($format, $int, $result) : $result;
+    return $format ? sprintf($format, $int, $result) : $result;
 }
 
 // http://forum.dklab.ru/php/advises/UrlreplaceargChangesValueOfParameterInUrl.html
@@ -870,10 +882,10 @@ function url_arg($url, $arg, $value, $amp = '&amp;')
     // заменяем параметр, если он существует
     if (preg_match("/((\?|&|&amp;)$arg=)[^&]*/s", $url, $m)) {
         $cur = $m[0];
-        $new = is_null($value) ? '' : $m[1] . urlencode($value);
+        $new = null === $value ? '' : $m[1] . urlencode($value);
         $url = str_replace($cur, $new, $url);
     } // добавляем параметр
-    elseif (!is_null($value)) {
+    elseif (null !== $value) {
         $div = (strpos($url, '?') !== false) ? $amp : '?';
         $url = $url . $div . $arg . '=' . urlencode($value);
     }
@@ -882,6 +894,8 @@ function url_arg($url, $arg, $value, $amp = '&amp;')
 
 /**
  * Adds commas between every group of thousands
+ * @param $number
+ * @return string
  */
 function commify($number)
 {
@@ -890,6 +904,11 @@ function commify($number)
 
 /**
  * Returns a size formatted in a more human-friendly format, rounded to the nearest GB, MB, KB..
+ * @param $size
+ * @param null $rounder
+ * @param null $min
+ * @param string $space
+ * @return string
  */
 function humn_size($size, $rounder = null, $min = null, $space = '&nbsp;')
 {
@@ -901,12 +920,12 @@ function humn_size($size, $rounder = null, $min = null, $space = '&nbsp;')
     $rnd = $rounders[0];
 
     if ($min == 'KB' && $size < 1024) {
-        $size = $size / 1024;
+        $size /= 1024;
         $ext = 'KB';
         $rounder = 1;
     } else {
-        for ($i = 1, $cnt = count($sizes); ($i < $cnt && $size >= 1024); $i++) {
-            $size = $size / 1024;
+        for ($i = 1, $cnt = count($sizes); $i < $cnt && $size >= 1024; $i++) {
+            $size /= 1024;
             $ext = $sizes[$i];
             $rnd = $rounders[$i];
         }
@@ -924,11 +943,11 @@ function bt_show_ip($ip, $port = '')
 
     if (IS_AM) {
         $ip = decode_ip($ip);
-        $ip .= ($port) ? ":$port" : '';
+        $ip .= $port ? ":$port" : '';
         return $ip;
-    } else {
-        return ($bb_cfg['bt_show_ip_only_moder']) ? false : decode_ip_xx($ip);
     }
+
+    return ($bb_cfg['bt_show_ip_only_moder']) ? false : decode_ip_xx($ip);
 }
 
 function bt_show_port($port)
@@ -937,9 +956,9 @@ function bt_show_port($port)
 
     if (IS_AM) {
         return $port;
-    } else {
-        return ($bb_cfg['bt_show_port_only_moder']) ? false : $port;
     }
+
+    return ($bb_cfg['bt_show_port_only_moder']) ? false : $port;
 }
 
 function decode_ip_xx($ip)
@@ -957,7 +976,7 @@ function checkbox_get_val(&$key, &$val, $default = 1, $on = 1, $off = 0)
     } elseif (!isset($_REQUEST[$key]) && isset($_REQUEST['prev_' . $key])) {
         $val = $off;
     } elseif (isset($previous_settings[$key]) && (!IS_GUEST || !empty($search_id))) {
-        $val = ($previous_settings[$key]) ? $on : $off;
+        $val = $previous_settings[$key] ? $on : $off;
     } else {
         $val = $default;
     }
@@ -969,7 +988,7 @@ function select_get_val($key, &$val, $options_ary, $default, $num = true)
 
     if (isset($_REQUEST[$key]) && is_string($_REQUEST[$key])) {
         if (isset($options_ary[$_REQUEST[$key]])) {
-            $val = ($num) ? intval($_REQUEST[$key]) : $_REQUEST[$key];
+            $val = $num ? (int)$_REQUEST[$key] : $_REQUEST[$key];
         }
     } elseif (isset($previous_settings[$key])) {
         $val = $previous_settings[$key];
@@ -984,6 +1003,11 @@ function select_get_val($key, &$val, $options_ary, $default, $num = true)
  * Set variable, used by {@link request_var the request_var function}
  *
  * @access private
+ * @param $result
+ * @param $var
+ * @param $type
+ * @param bool $multibyte
+ * @param bool $strip
  */
 function set_var(&$result, $var, $type, $multibyte = false, $strip = true)
 {
@@ -1002,7 +1026,7 @@ function set_var(&$result, $var, $type, $multibyte = false, $strip = true)
             }
         }
 
-        $result = ($strip) ? stripslashes($result) : $result;
+        $result = $strip ? stripslashes($result) : $result;
     }
 }
 
@@ -1010,18 +1034,23 @@ function set_var(&$result, $var, $type, $multibyte = false, $strip = true)
  * request_var
  *
  * Used to get passed variable
+ * @param $var_name
+ * @param $default
+ * @param bool $multibyte
+ * @param bool $cookie
+ * @return array
  */
 function request_var($var_name, $default, $multibyte = false, $cookie = false)
 {
     if (!$cookie && isset($_COOKIE[$var_name])) {
         if (!isset($_GET[$var_name]) && !isset($_POST[$var_name])) {
-            return (is_array($default)) ? array() : $default;
+            return is_array($default) ? array() : $default;
         }
-        $_REQUEST[$var_name] = isset($_POST[$var_name]) ? $_POST[$var_name] : $_GET[$var_name];
+        $_REQUEST[$var_name] = $_POST[$var_name] ?? $_GET[$var_name];
     }
 
     if (!isset($_REQUEST[$var_name]) || (is_array($_REQUEST[$var_name]) && !is_array($default)) || (is_array($default) && !is_array($_REQUEST[$var_name]))) {
-        return (is_array($default)) ? array() : $default;
+        return is_array($default) ? array() : $default;
     }
 
     $var = $_REQUEST[$var_name];
@@ -1080,10 +1109,10 @@ function get_username($user_id)
             $usernames[$row['user_id']] = $row['username'];
         }
         return $usernames;
-    } else {
-        $row = DB()->fetch_row("SELECT username FROM " . BB_USERS . " WHERE user_id = $user_id LIMIT 1");
-        return $row['username'];
     }
+
+    $row = DB()->fetch_row("SELECT username FROM " . BB_USERS . " WHERE user_id = $user_id LIMIT 1");
+    return $row['username'];
 }
 
 function get_user_id($username)
@@ -1100,7 +1129,7 @@ function str_short($text, $max_length, $space = ' ')
     if ($max_length && mb_strlen($text, 'UTF-8') > $max_length) {
         $text = mb_substr($text, 0, $max_length, 'UTF-8');
 
-        if ($last_space_pos = $max_length - intval(strpos(strrev($text), $space))) {
+        if ($last_space_pos = $max_length - (int)strpos(strrev($text), $space)) {
             if ($last_space_pos > round($max_length * 3 / 4)) {
                 $last_space_pos--;
                 $text = mb_substr($text, 0, $last_space_pos, 'UTF-8');
@@ -1138,7 +1167,7 @@ function get_bt_ratio($btu)
 {
     return
         (!empty($btu['u_down_total']) && $btu['u_down_total'] > MIN_DL_FOR_RATIO)
-            ? round((($btu['u_up_total'] + $btu['u_up_release'] + $btu['u_up_bonus']) / $btu['u_down_total']), 2)
+            ? round(($btu['u_up_total'] + $btu['u_up_release'] + $btu['u_up_bonus']) / $btu['u_down_total'], 2)
             : null;
 }
 
@@ -1158,19 +1187,19 @@ function show_bt_userdata($user_id)
         'USER_RATIO' => get_bt_ratio($btu),
         'MIN_DL_FOR_RATIO' => humn_size(MIN_DL_FOR_RATIO),
         'MIN_DL_BYTES' => MIN_DL_FOR_RATIO,
-        'AUTH_KEY' => ($btu['auth_key']) ? $btu['auth_key'] : $lang['NONE'],
+        'AUTH_KEY' => $btu['auth_key'] ?: $lang['NONE'],
 
         'TD_DL' => humn_size($btu['down_today']),
         'TD_UL' => humn_size($btu['up_today']),
         'TD_REL' => humn_size($btu['up_release_today']),
         'TD_BONUS' => humn_size($btu['up_bonus_today']),
-        'TD_POINTS' => ($btu['auth_key']) ? $btu['points_today'] : '0.00',
+        'TD_POINTS' => $btu['auth_key'] ? $btu['points_today'] : '0.00',
 
         'YS_DL' => humn_size($btu['down_yesterday']),
         'YS_UL' => humn_size($btu['up_yesterday']),
         'YS_REL' => humn_size($btu['up_release_yesterday']),
         'YS_BONUS' => humn_size($btu['up_bonus_yesterday']),
-        'YS_POINTS' => ($btu['auth_key']) ? $btu['points_yesterday'] : '0.00',
+        'YS_POINTS' => $btu['auth_key'] ? $btu['points_yesterday'] : '0.00',
 
         'SPEED_UP' => humn_size($btu['speed_up'], 0, 'KB') . '/s',
         'SPEED_DOWN' => humn_size($btu['speed_down'], 0, 'KB') . '/s',
@@ -1185,9 +1214,9 @@ function get_attachments_dir($cfg = null)
 
     if ($cfg['upload_dir'][0] == '/' || ($cfg['upload_dir'][0] != '/' && $cfg['upload_dir'][1] == ':')) {
         return $cfg['upload_dir'];
-    } else {
-        return BB_ROOT . $cfg['upload_dir'];
     }
+
+    return BB_ROOT . $cfg['upload_dir'];
 }
 
 function bb_get_config($table, $from_db = false, $update_cache = true)
@@ -1300,7 +1329,7 @@ function get_userdata($u, $force_name = false, $allow_guest = false)
         return false;
     }
 
-    if (intval($u) == GUEST_UID && $allow_guest) {
+    if ((int)$u == GUEST_UID && $allow_guest) {
         if ($u_data = CACHE('bb_cache')->get('guest_userdata')) {
             return $u_data;
         }
@@ -1334,7 +1363,7 @@ function get_userdata($u, $force_name = false, $allow_guest = false)
     return $u_data;
 }
 
-function make_jumpbox($selected = 0)
+function make_jumpbox()
 {
     global $datastore, $template;
 
@@ -1344,7 +1373,7 @@ function make_jumpbox($selected = 0)
     }
 
     $template->assign_vars(array(
-        'JUMPBOX' => (IS_GUEST) ? $jumpbox['guest'] : $jumpbox['user'],
+        'JUMPBOX' => IS_GUEST ? $jumpbox['guest'] : $jumpbox['user'],
     ));
 }
 
@@ -1357,10 +1386,10 @@ function get_forum_select($mode = 'guest', $name = POST_FORUM_URL, $selected = n
         $not_auth_forums_fary = array_flip($mode);
         $mode = 'not_auth_forums';
     }
-    if (is_null($max_length)) {
+    if (null === $max_length) {
         $max_length = HTML_SELECT_MAX_LENGTH;
     }
-    $select = is_null($all_forums_option) ? array() : array($lang['ALL_AVAILABLE'] => $all_forums_option);
+    $select = null === $all_forums_option ? array() : array($lang['ALL_AVAILABLE'] => $all_forums_option);
     if (!$forums = $datastore->get('cat_forums')) {
         $datastore->update('cat_forums');
         $forums = $datastore->get('cat_forums');
@@ -1393,7 +1422,7 @@ function get_forum_select($mode = 'guest', $name = POST_FORUM_URL, $selected = n
                 trigger_error(__FUNCTION__ . ": invalid mode '$mode'", E_USER_ERROR);
         }
         $cat_title = $forums['c'][$f['cat_id']]['cat_title'];
-        $f_name = ($f['forum_parent']) ? ' |- ' : '';
+        $f_name = $f['forum_parent'] ? ' |- ' : '';
         $f_name .= $f['forum_name'];
 
         while (isset($select[$cat_title][$f_name])) {
@@ -1442,9 +1471,7 @@ function setup_style()
 
     require TEMPLATES_DIR . '/' . $tpl_dir_name . '/tpl_config.php';
 
-    $theme = array('template_name' => $tpl_dir_name);
-
-    return $theme;
+    return array('template_name' => $tpl_dir_name);
 }
 
 // Create date / time with format and friendly date
@@ -1456,7 +1483,7 @@ function bb_date($gmepoch, $format = false, $friendly_date = true)
         $format = $bb_cfg['default_dateformat'];
     }
     if (empty($lang)) {
-        require_once($bb_cfg['default_lang_dir'] . 'main.php');
+        require_once $bb_cfg['default_lang_dir'] . 'main.php';
     }
 
     if (empty($userdata['session_logged_in'])) {
@@ -1483,19 +1510,19 @@ function bb_date($gmepoch, $format = false, $friendly_date = true)
         } elseif ($today != 1 && $date_today == ($today - 1) && $date_month == $month && $date_year == $year) {
             $date = 'yesterday' . gmdate($time_format, $gmepoch + (3600 * $tz));
         } elseif ($today == 1 && $month != 1) {
-            $yesterday = date('t', mktime(0, 0, 0, ($month - 1), 1, $year));
+            $yesterday = date('t', mktime(0, 0, 0, $month - 1, 1, $year));
             if ($date_today == $yesterday && $date_month == ($month - 1) && $date_year == $year) {
                 $date = 'yesterday' . gmdate($time_format, $gmepoch + (3600 * $tz));
             }
         } elseif ($today == 1 && $month == 1) {
-            $yesterday = date('t', mktime(0, 0, 0, 12, 1, ($year - 1)));
+            $yesterday = date('t', mktime(0, 0, 0, 12, 1, $year - 1));
             if ($date_today == $yesterday && $date_month == 12 && $date_year == ($year - 1)) {
                 $date = 'yesterday' . gmdate($time_format, $gmepoch + (3600 * $tz));
             }
         }
     }
 
-    return ($bb_cfg['translate_dates']) ? strtr(strtoupper($date), $lang['DATETIME']) : $date;
+    return $bb_cfg['translate_dates'] ? strtr(strtoupper($date), $lang['DATETIME']) : $date;
 }
 
 function birthday_age($date)
@@ -1597,12 +1624,12 @@ function generate_pagination($base_url, $num_items, $per_page, $start_item, $add
         }
     }
 
-    $pagination = ($page_string) ? '<a class="menu-root" href="#pg-jump">' . $lang['GOTO_PAGE'] . '</a> :&nbsp;&nbsp;' . $page_string : '';
+    $pagination = $page_string ? '<a class="menu-root" href="#pg-jump">' . $lang['GOTO_PAGE'] . '</a> :&nbsp;&nbsp;' . $page_string : '';
     $pagination = str_replace('&amp;start=0', '', $pagination);
 
     $template->assign_vars(array(
         'PAGINATION' => $pagination,
-        'PAGE_NUMBER' => sprintf($lang['PAGE_OF'], (floor($start_item / $per_page) + 1), ceil($num_items / $per_page)),
+        'PAGE_NUMBER' => sprintf($lang['PAGE_OF'], floor($start_item / $per_page) + 1, ceil($num_items / $per_page)),
         'PG_BASE_URL' => $base_url,
         'PG_PER_PAGE' => $per_page,
     ));
@@ -1669,7 +1696,7 @@ function bb_die($msg_text)
 
     // If empty lang
     if (empty($lang)) {
-        require($bb_cfg['default_lang_dir'] . 'main.php');
+        require $bb_cfg['default_lang_dir'] . 'main.php';
     }
 
     // If empty session
@@ -1685,7 +1712,7 @@ function bb_die($msg_text)
         if (empty($theme)) {
             $theme = setup_style();
         }
-        require(PAGE_HEADER);
+        require PAGE_HEADER;
     }
 
     // Check for lang variable
@@ -1701,7 +1728,7 @@ function bb_die($msg_text)
     $template->set_filenames(array('bb_die' => 'common.tpl'));
     $template->pparse('bb_die');
 
-    require(PAGE_FOOTER);
+    require PAGE_FOOTER;
 
     exit;
 }
@@ -1725,7 +1752,7 @@ function bb_realpath($path)
 
 function login_redirect($url = '')
 {
-    redirect(LOGIN_URL . '?redirect=' . (($url) ? $url : (isset($_SERVER['REQUEST_URI']) ? $_SERVER['REQUEST_URI'] : '/')));
+    redirect(LOGIN_URL . '?redirect=' . ($url ?: ($_SERVER['REQUEST_URI'] ?? '/')));
 }
 
 function meta_refresh($url, $time = 5)
@@ -1743,12 +1770,12 @@ function redirect($url)
         trigger_error("Headers already sent in $filename($linenum)", E_USER_ERROR);
     }
 
-    if (strstr(urldecode($url), "\n") || strstr(urldecode($url), "\r") || strstr(urldecode($url), ';url')) {
+    if (false !== strpos(urldecode($url), "\n") || false !== strpos(urldecode($url), "\r") || false !== strpos(urldecode($url), ';url')) {
         bb_die('Tried to redirect to potentially insecure url');
     }
 
     $url = trim($url);
-    $server_protocol = ($bb_cfg['cookie_secure']) ? 'https://' : 'http://';
+    $server_protocol = $bb_cfg['cookie_secure'] ? 'https://' : 'http://';
 
     $server_name = preg_replace('#^\/?(.*?)\/?$#', '\1', trim($bb_cfg['server_name']));
     $server_port = ($bb_cfg['server_port'] <> 80) ? ':' . trim($bb_cfg['server_port']) : '';
@@ -1794,7 +1821,7 @@ function get_forum_display_sort_option($selected_row = 0, $action = 'list', $lis
     if ($action == 'list') {
         for ($i = 0; $i < count($listrow['lang_key']); $i++) {
             $selected = ($i == $selected_row) ? ' selected="selected"' : '';
-            $l_value = (isset($lang[$listrow['lang_key'][$i]])) ? $lang[$listrow['lang_key'][$i]] : $listrow['lang_key'][$i];
+            $l_value = $lang[$listrow['lang_key'][$i]] ?? $listrow['lang_key'][$i];
             $res .= '<option value="' . $i . '"' . $selected . '>' . $l_value . '</option>';
         }
     } else {
@@ -1917,7 +1944,7 @@ function get_id_csv($ids)
 {
     $ids = array_values((array)$ids);
     array_deep($ids, 'intval', 'one-dimensional');
-    return (string)join(',', $ids);
+    return (string)implode(',', $ids);
 }
 
 // $ids - array(id1,id2,..) or (string) id1,id2,..
@@ -1975,7 +2002,7 @@ class log_action
         }
     }
 
-    public function mod($type_name, $args = array())
+    public function mod($type_name, array $args = array())
     {
         global $userdata;
 
@@ -2023,7 +2050,7 @@ class log_action
         DB()->query("INSERT INTO " . BB_LOG . " $sql_args");
     }
 
-    public function admin($type_name, $args = array())
+    public function admin($type_name, array $args = array())
     {
         $this->mod($type_name, $args);
     }
@@ -2034,13 +2061,13 @@ function get_topic_icon($topic, $is_unread = null)
     global $bb_cfg, $images;
 
     $t_hot = ($topic['topic_replies'] >= $bb_cfg['hot_threshold']);
-    $is_unread = is_null($is_unread) ? is_unread($topic['topic_last_post_time'], $topic['topic_id'], $topic['forum_id']) : $is_unread;
+    $is_unread = null === $is_unread ? is_unread($topic['topic_last_post_time'], $topic['topic_id'], $topic['forum_id']) : $is_unread;
 
     if ($topic['topic_status'] == TOPIC_MOVED) {
         $folder_image = $images['folder'];
     } else {
-        $folder = ($t_hot) ? $images['folder_hot'] : $images['folder'];
-        $folder_new = ($t_hot) ? $images['folder_hot_new'] : $images['folder_new'];
+        $folder = $t_hot ? $images['folder_hot'] : $images['folder'];
+        $folder_new = $t_hot ? $images['folder_hot_new'] : $images['folder_new'];
 
         if ($topic['topic_type'] == POST_ANNOUNCE) {
             $folder = $images['folder_announce'];
@@ -2052,11 +2079,11 @@ function get_topic_icon($topic, $is_unread = null)
             $folder = $images['folder_locked'];
             $folder_new = $images['folder_locked_new'];
         } elseif ($topic['topic_dl_type'] == TOPIC_DL_TYPE_DL) {
-            $folder = ($t_hot) ? $images['folder_dl_hot'] : $images['folder_dl'];
-            $folder_new = ($t_hot) ? $images['folder_dl_hot_new'] : $images['folder_dl_new'];
+            $folder = $t_hot ? $images['folder_dl_hot'] : $images['folder_dl'];
+            $folder_new = $t_hot ? $images['folder_dl_hot_new'] : $images['folder_dl_new'];
         }
 
-        $folder_image = ($is_unread) ? $folder_new : $folder;
+        $folder_image = $is_unread ? $folder_new : $folder;
     }
 
     return $folder_image;
@@ -2070,7 +2097,7 @@ function build_topic_pagination($url, $replies, $per_page)
         $total_pages = ceil($replies / $per_page);
 
         for ($j = 0, $page = 1; $j < $replies; $j += $per_page, $page++) {
-            $href = ($j) ? "$url&amp;start=$j" : $url;
+            $href = $j ? "$url&amp;start=$j" : $url;
             $pg .= '<a href="' . $href . '" class="topicPG">' . $page . '</a>';
 
             if ($page == 1 && $total_pages > 3) {
@@ -2152,6 +2179,9 @@ function print_confirmation($tpl_vars)
  *
  *  $mode = 'no_header'
  *          'no_footer'
+ * @param $args
+ * @param string $type
+ * @param string $mode
  */
 function print_page($args, $type = '', $mode = '')
 {
@@ -2163,14 +2193,14 @@ function print_page($args, $type = '', $mode = '')
     $gen_simple_header = (is_array($args) && !empty($args['simple']) or $type === 'simple') ? true : $gen_simple_header;
 
     if ($mode !== 'no_header') {
-        require(PAGE_HEADER);
+        require PAGE_HEADER;
     }
 
     $template->set_filenames(array('body' => $tpl));
     $template->pparse('body');
 
     if ($mode !== 'no_footer') {
-        require(PAGE_FOOTER);
+        require PAGE_FOOTER;
     }
 }
 
@@ -2193,7 +2223,7 @@ function caching_output($enabled, $mode, $cache_var_name, $ttl = 300)
 
 function clean_title($str, $replace_underscore = false)
 {
-    $str = ($replace_underscore) ? str_replace('_', ' ', $str) : $str;
+    $str = $replace_underscore ? str_replace('_', ' ', $str) : $str;
     $str = htmlCHR(str_compact($str));
     return $str;
 }
@@ -2203,7 +2233,7 @@ function clean_text_match($text, $ltrim_star = true, $die_if_empty = false)
     global $bb_cfg, $lang;
 
     $text = str_compact($text);
-    $ltrim_chars = ($ltrim_star) ? ' *-!' : ' ';
+    $ltrim_chars = $ltrim_star ? ' *-!' : ' ';
     $wrap_with_quotes = preg_match('#^"[^"]+"$#', $text);
 
     $text = ' ' . str_compact(ltrim($text, $ltrim_chars)) . ' ';
@@ -2237,9 +2267,9 @@ function init_sphinx()
     if (!isset($sphinx)) {
         $sphinx = \Sphinx\SphinxClient::create();
 
-        $sphinx->SetConnectTimeout(5);
-        $sphinx->SetRankingMode($sphinx::SPH_RANK_NONE);
-        $sphinx->SetMatchMode($sphinx::SPH_MATCH_BOOLEAN);
+        $sphinx->setConnectTimeout(5);
+        $sphinx->setRankingMode($sphinx::SPH_RANK_NONE);
+        $sphinx->setMatchMode($sphinx::SPH_MATCH_BOOLEAN);
     }
 
     return $sphinx;
@@ -2251,13 +2281,13 @@ function log_sphinx_error($err_type, $err_msg, $query = '')
         'negation on top level',
         'Query word length is less than min prefix length',
     );
-    if (!count($ignore_err_txt) || !preg_match('#' . join('|', $ignore_err_txt) . '#i', $err_msg)) {
+    if (!count($ignore_err_txt) || !preg_match('#' . implode('|', $ignore_err_txt) . '#i', $err_msg)) {
         $orig_query = strtr($_REQUEST['nm'], array("\n" => '\n'));
         bb_log(date('m-d H:i:s') . " | $err_type | $err_msg | $orig_query | $query" . LOG_LF, 'sphinx_error');
     }
 }
 
-function get_title_match_topics($title_match_sql, $forum_ids = array())
+function get_title_match_topics($title_match_sql, array $forum_ids = array())
 {
     global $bb_cfg, $sphinx, $userdata, $title_match, $lang;
 
@@ -2270,31 +2300,31 @@ function get_title_match_topics($title_match_sql, $forum_ids = array())
     if ($bb_cfg['search_engine_type'] == 'sphinx') {
         $sphinx = init_sphinx();
 
-        $where = ($title_match) ? 'topics' : 'posts';
+        $where = $title_match ? 'topics' : 'posts';
 
-        $sphinx->SetServer($bb_cfg['sphinx_topic_titles_host'], $bb_cfg['sphinx_topic_titles_port']);
+        $sphinx->setServer($bb_cfg['sphinx_topic_titles_host'], $bb_cfg['sphinx_topic_titles_port']);
         if ($forum_ids) {
-            $sphinx->SetFilter('forum_id', $forum_ids, false);
+            $sphinx->setFilter('forum_id', $forum_ids, false);
         }
         if (preg_match('#^"[^"]+"$#u', $title_match_sql)) {
-            $sphinx->SetMatchMode($sphinx::SPH_MATCH_PHRASE);
+            $sphinx->setMatchMode($sphinx::SPH_MATCH_PHRASE);
         }
-        if ($result = $sphinx->Query($title_match_sql, $where, $userdata['username'] . ' (' . CLIENT_IP . ')')) {
+        if ($result = $sphinx->query($title_match_sql, $where, $userdata['username'] . ' (' . CLIENT_IP . ')')) {
             if (!empty($result['matches'])) {
                 $where_ids = array_keys($result['matches']);
             }
-        } elseif ($error = $sphinx->GetLastError()) {
+        } elseif ($error = $sphinx->getLastError()) {
             if (strpos($error, 'errno=110')) {
                 bb_die($lang['SEARCH_ERROR']);
             }
             log_sphinx_error('ERR', $error, $title_match_sql);
         }
-        if ($warning = $sphinx->GetLastWarning()) {
+        if ($warning = $sphinx->getLastWarning()) {
             log_sphinx_error('wrn', $warning, $title_match_sql);
         }
     } elseif ($bb_cfg['search_engine_type'] == 'mysql') {
-        $where_forum = ($forum_ids) ? "AND forum_id IN(" . join(',', $forum_ids) . ")" : '';
-        $search_bool_mode = ($bb_cfg['allow_search_in_bool_mode']) ? ' IN BOOLEAN MODE' : '';
+        $where_forum = ($forum_ids) ? "AND forum_id IN(" . implode(',', $forum_ids) . ")" : '';
+        $search_bool_mode = $bb_cfg['allow_search_in_bool_mode'] ? ' IN BOOLEAN MODE' : '';
 
         if ($title_match) {
             $where_id = 'topic_id';
@@ -2332,7 +2362,7 @@ function decode_text_match($txt)
 
 function pad_with_space($str)
 {
-    return ($str) ? " $str " : $str;
+    return $str ? " $str " : $str;
 }
 
 function create_magnet($infohash, $auth_key, $logged_in)
@@ -2348,9 +2378,9 @@ function set_die_append_msg($forum_id = null, $topic_id = null, $group_id = null
     global $lang, $template;
 
     $msg = '';
-    $msg .= ($topic_id) ? '<p class="mrg_10"><a href="' . TOPIC_URL . $topic_id . '">' . $lang['TOPIC_RETURN'] . '</a></p>' : '';
-    $msg .= ($forum_id) ? '<p class="mrg_10"><a href="' . FORUM_URL . $forum_id . '">' . $lang['FORUM_RETURN'] . '</a></p>' : '';
-    $msg .= ($group_id) ? '<p class="mrg_10"><a href="' . GROUP_URL . $group_id . '">' . $lang['GROUP_RETURN'] . '</a></p>' : '';
+    $msg .= $topic_id ? '<p class="mrg_10"><a href="' . TOPIC_URL . $topic_id . '">' . $lang['TOPIC_RETURN'] . '</a></p>' : '';
+    $msg .= $forum_id ? '<p class="mrg_10"><a href="' . FORUM_URL . $forum_id . '">' . $lang['FORUM_RETURN'] . '</a></p>' : '';
+    $msg .= $group_id ? '<p class="mrg_10"><a href="' . GROUP_URL . $group_id . '">' . $lang['GROUP_RETURN'] . '</a></p>' : '';
     $msg .= '<p class="mrg_10"><a href="index.php">' . $lang['INDEX_RETURN'] . '</a></p>';
     $template->assign_var('BB_DIE_APPEND_MSG', $msg);
 }
@@ -2422,7 +2452,7 @@ function profile_url($data)
 
     $profile = '<span title="' . $title . '" class="' . $style . '">' . $username . '</span>';
 
-    if (!in_array($user_id, array('', GUEST_UID, BOT_UID)) && $username) {
+    if (!in_array($user_id, array('', GUEST_UID, BOT_UID), true) && $username) {
         $profile = '<a href="' . make_url(PROFILE_URL . $user_id) . '">' . $profile . '</a>';
     }
 
@@ -2460,18 +2490,18 @@ function gender_image($gender)
     if (!$bb_cfg['gender']) {
         $user_gender = '';
         return $user_gender;
-    } else {
-        switch ($gender) {
-            case MALE:
-                $user_gender = '<img src="' . $images['icon_male'] . '" alt="' . $lang['GENDER_SELECT'][MALE] . '" title="' . $lang['GENDER_SELECT'][MALE] . '" border="0" />';
-                break;
-            case FEMALE:
-                $user_gender = '<img src="' . $images['icon_female'] . '" alt="' . $lang['GENDER_SELECT'][FEMALE] . '" title="' . $lang['GENDER_SELECT'][FEMALE] . '" border="0" />';
-                break;
-            default:
-                $user_gender = '<img src="' . $images['icon_nogender'] . '" alt="' . $lang['GENDER_SELECT'][NOGENDER] . '" title="' . $lang['GENDER_SELECT'][NOGENDER] . '" border="0" />';
-                break;
-        }
+    }
+
+    switch ($gender) {
+        case MALE:
+            $user_gender = '<img src="' . $images['icon_male'] . '" alt="' . $lang['GENDER_SELECT'][MALE] . '" title="' . $lang['GENDER_SELECT'][MALE] . '" border="0" />';
+            break;
+        case FEMALE:
+            $user_gender = '<img src="' . $images['icon_female'] . '" alt="' . $lang['GENDER_SELECT'][FEMALE] . '" title="' . $lang['GENDER_SELECT'][FEMALE] . '" border="0" />';
+            break;
+        default:
+            $user_gender = '<img src="' . $images['icon_nogender'] . '" alt="' . $lang['GENDER_SELECT'][NOGENDER] . '" title="' . $lang['GENDER_SELECT'][NOGENDER] . '" border="0" />';
+            break;
     }
 
     return $user_gender;
@@ -2484,18 +2514,18 @@ function is_gold($type)
     if (!$tr_cfg['gold_silver_enabled']) {
         $is_gold = '';
         return $is_gold;
-    } else {
-        switch ($type) {
-            case TOR_TYPE_GOLD:
-                $is_gold = '<img src="styles/images/tor_gold.gif" width="16" height="15" title="' . $lang['GOLD'] . '" />&nbsp;';
-                break;
-            case TOR_TYPE_SILVER:
-                $is_gold = '<img src="styles/images/tor_silver.gif" width="16" height="15" title="' . $lang['SILVER'] . '" />&nbsp;';
-                break;
-            default:
-                $is_gold = '';
-                break;
-        }
+    }
+
+    switch ($type) {
+        case TOR_TYPE_GOLD:
+            $is_gold = '<img src="styles/images/tor_gold.gif" width="16" height="15" title="' . $lang['GOLD'] . '" />&nbsp;';
+            break;
+        case TOR_TYPE_SILVER:
+            $is_gold = '<img src="styles/images/tor_silver.gif" width="16" height="15" title="' . $lang['SILVER'] . '" />&nbsp;';
+            break;
+        default:
+            $is_gold = '';
+            break;
     }
 
     return $is_gold;

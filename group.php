@@ -35,26 +35,26 @@ $page_cfg['use_tablesorter'] = true;
 $s_member_groups = $s_pending_groups = $s_member_groups_opt = $s_pending_groups_opt = '';
 $select_sort_mode = $select_sort_order = '';
 
-function generate_user_info(&$row, $date_format, $group_mod, &$from, &$posts, &$joined, &$pm, &$email, &$www, &$user_time, &$avatar)
+function generate_user_info(&$row, $group_mod, &$from, &$posts, &$joined, &$pm, &$email, &$www, &$user_time, &$avatar)
 {
     global $lang, $images, $bb_cfg;
 
     $from = (!empty($row['user_from'])) ? $row['user_from'] : '';
     $joined = bb_date($row['user_regdate']);
     $user_time = (!empty($row['user_time'])) ? bb_date($row['user_time']) : $lang['NONE'];
-    $posts = ($row['user_posts']) ? $row['user_posts'] : 0;
-    $pm = ($bb_cfg['text_buttons']) ? '<a class="txtb" href="' . (PM_URL . "?mode=post&amp;" . POST_USERS_URL . "=" . $row['user_id']) . '">' . $lang['SEND_PM_TXTB'] . '</a>' : '<a href="' . (PM_URL . "?mode=post&amp;" . POST_USERS_URL . "=" . $row['user_id']) . '"><img src="' . $images['icon_pm'] . '" alt="' . $lang['SEND_PRIVATE_MESSAGE'] . '" title="' . $lang['SEND_PRIVATE_MESSAGE'] . '" border="0" /></a>';
+    $posts = $row['user_posts'] ?: 0;
+    $pm = $bb_cfg['text_buttons'] ? '<a class="txtb" href="' . (PM_URL . "?mode=post&amp;" . POST_USERS_URL . "=" . $row['user_id']) . '">' . $lang['SEND_PM_TXTB'] . '</a>' : '<a href="' . (PM_URL . "?mode=post&amp;" . POST_USERS_URL . "=" . $row['user_id']) . '"><img src="' . $images['icon_pm'] . '" alt="' . $lang['SEND_PRIVATE_MESSAGE'] . '" title="' . $lang['SEND_PRIVATE_MESSAGE'] . '" border="0" /></a>';
     $avatar = get_avatar($row['user_id'], $row['avatar_ext_id'], !bf($row['user_opt'], 'user_opt', 'dis_avatar'), '', 50, 50);
 
     if (bf($row['user_opt'], 'user_opt', 'user_viewemail') || $group_mod) {
-        $email_uri = ($bb_cfg['board_email_form']) ? ("profile.php?mode=email&amp;" . POST_USERS_URL . "=" . $row['user_id']) : 'mailto:' . $row['user_email'];
+        $email_uri = $bb_cfg['board_email_form'] ? ("profile.php?mode=email&amp;" . POST_USERS_URL . "=" . $row['user_id']) : 'mailto:' . $row['user_email'];
         $email = '<a class="editable" href="' . $email_uri . '">' . $row['user_email'] . '</a>';
     } else {
         $email = '';
     }
 
     if ($row['user_website']) {
-        $www = ($bb_cfg['text_buttons']) ? '<a class="txtb" href="' . $row['user_website'] . '"  target="_userwww">' . $lang['VISIT_WEBSITE_TXTB'] . '</a>' : '<a class="txtb" href="' . $row['user_website'] . '" target="_userwww"><img src="' . $images['icon_www'] . '" alt="' . $lang['VISIT_WEBSITE'] . '" title="' . $lang['VISIT_WEBSITE'] . '" border="0" /></a>';
+        $www = $bb_cfg['text_buttons'] ? '<a class="txtb" href="' . $row['user_website'] . '"  target="_userwww">' . $lang['VISIT_WEBSITE_TXTB'] . '</a>' : '<a class="txtb" href="' . $row['user_website'] . '" target="_userwww"><img src="' . $images['icon_www'] . '" alt="' . $lang['VISIT_WEBSITE'] . '" title="' . $lang['VISIT_WEBSITE'] . '" border="0" /></a>';
     } else {
         $www = '';
     }
@@ -66,8 +66,8 @@ $user->session_start(array('req_login' => true));
 
 set_die_append_msg();
 
-$group_id = isset($_REQUEST[POST_GROUPS_URL]) ? intval($_REQUEST[POST_GROUPS_URL]) : null;
-$start = isset($_REQUEST['start']) ? abs(intval($_REQUEST['start'])) : 0;
+$group_id = isset($_REQUEST[POST_GROUPS_URL]) ? (int)$_REQUEST[POST_GROUPS_URL] : null;
+$start = isset($_REQUEST['start']) ? abs((int)$_REQUEST['start']) : 0;
 $per_page = $bb_cfg['group_members_per_page'];
 $view_mode = isset($_REQUEST['view']) ? (string)$_REQUEST['view'] : null;
 $rel_limit = 50;
@@ -136,7 +136,7 @@ if (!$group_id) {
             continue;
         }
 
-        $data = array('id' => $row['group_id'], 'm' => ($row['members'] - $row['candidates']), 'c' => $row['candidates'], 'rg' => $row['release_group']);
+        $data = array('id' => $row['group_id'], 'm' => $row['members'] - $row['candidates'], 'c' => $row['candidates'], 'rg' => $row['release_group']);
 
         $groups[$type][$row['group_name']] = $data;
     }
@@ -149,11 +149,11 @@ if (!$group_id) {
         foreach ($params as $name => $data) {
             $text = htmlCHR(str_short(rtrim($name), HTML_SELECT_MAX_LENGTH));
 
-            $members = ($data['m']) ? $lang['MEMBERS_IN_GROUP'] . ': ' . $data['m'] : $lang['NO_GROUP_MEMBERS'];
-            $candidates = ($data['c']) ? $lang['PENDING_MEMBERS'] . ': ' . $data['c'] : $lang['NO_PENDING_GROUP_MEMBERS'];
+            $members = $data['m'] ? $lang['MEMBERS_IN_GROUP'] . ': ' . $data['m'] : $lang['NO_GROUP_MEMBERS'];
+            $candidates = $data['c'] ? $lang['PENDING_MEMBERS'] . ': ' . $data['c'] : $lang['NO_PENDING_GROUP_MEMBERS'];
 
             $options .= '<li class="pad_2"><a href="' . GROUP_URL . $data['id'] . '" class="med bold">' . $text . '</a></li>';
-            $options .= ($data['rg']) ? '<ul><li class="med">' . $lang['RELEASE_GROUP'] . '</li>' : '<ul>';
+            $options .= $data['rg'] ? '<ul><li class="med">' . $lang['RELEASE_GROUP'] . '</li>' : '<ul>';
             $options .= '<li class="seedmed">' . $members . '</li>';
             if (IS_AM) {
                 $options .= '<li class="leechmed">' . $candidates . '</li>';
@@ -281,7 +281,7 @@ if (!$group_id) {
                 foreach ($members as $members_id) {
                     $sql_in[] = (int)$members_id;
                 }
-                if (!$sql_in = join(',', $sql_in)) {
+                if (!$sql_in = implode(',', $sql_in)) {
                     bb_die($lang['NONE_SELECTED']);
                 }
 
@@ -369,9 +369,9 @@ if (!$group_id) {
     } elseif ($is_group_member || $is_group_pending_member) {
         $template->assign_vars(array(
             'SHOW_UNSUBSCRIBE_CONTROLS' => true,
-            'CONTROL_NAME' => ($is_group_member) ? 'unsub' : 'unsubpending',
+            'CONTROL_NAME' => $is_group_member ? 'unsub' : 'unsubpending',
         ));
-        $group_details = ($is_group_pending_member) ? $lang['PENDING_THIS_GROUP'] : $lang['MEMBER_THIS_GROUP'];
+        $group_details = $is_group_pending_member ? $lang['PENDING_THIS_GROUP'] : $lang['MEMBER_THIS_GROUP'];
         $s_hidden_fields = '<input type="hidden" name="' . POST_GROUPS_URL . '" value="' . $group_id . '" />';
     } elseif (IS_GUEST) {
         $group_details = $lang['LOGIN_TO_JOIN'];
@@ -431,7 +431,7 @@ if (!$group_id) {
         'U_GROUP_RELEASES' => "group.php?view=releases&amp;" . POST_GROUPS_URL . "=$group_id",
         'U_GROUP_MEMBERS' => "group.php?view=members&amp;" . POST_GROUPS_URL . "=$group_id",
         'U_GROUP_CONFIG' => "group_edit.php?g=$group_id",
-        'RELEASE_GROUP' => ($group_info['release_group']) ? true : false,
+        'RELEASE_GROUP' => $group_info['release_group'] ? true : false,
         'GROUP_TYPE' => $group_type,
 
         'S_GROUP_OPEN_TYPE' => GROUP_OPEN,

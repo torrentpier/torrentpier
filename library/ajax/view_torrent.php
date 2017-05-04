@@ -88,9 +88,9 @@ class TorrentFileList
             }
             $filelist = $html->array2html($this->files_ary);
             return "<div class=\"tor-root-dir\">{$this->root_dir}</div>$filelist";
-        } else {
-            return join('', $this->files_ary['/']);
         }
+
+        return join('', $this->files_ary['/']);
     }
 
     private function build_filelist_array()
@@ -132,7 +132,7 @@ class TorrentFileList
                         if ($j == $subdir_count) {
                             if (is_string($cur_files_ary)) {
                                 $GLOBALS['bnc_error'] = 1;
-                                break(1);
+                                break1;
                             }
                             $cur_files_ary[] = $this->build_file_item($name, $length);
                         }
@@ -152,7 +152,7 @@ class TorrentFileList
         }
     }
 
-    private function build_file_item($name, $length)
+    private function build_file_item($name, $length): string
     {
         global $bb_cfg, $images, $lang;
 

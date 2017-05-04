@@ -46,7 +46,7 @@ function send_file_to_browser($attachment, $upload_dir)
 
     $gotit = false;
 
-    if (@!file_exists(@amod_realpath($filename))) {
+    if (!file_exists(amod_realpath($filename))) {
         bb_die($lang['ERROR_NO_ATTACHMENT'] . "<br /><br />" . $filename . "<br /><br />" . $lang['TOR_NOT_FOUND']);
     } else {
         $gotit = true;
@@ -54,7 +54,7 @@ function send_file_to_browser($attachment, $upload_dir)
 
     // Correct the mime type - we force application/octet-stream for all files, except images
     // Please do not change this, it is a security precaution
-    if (!strstr($attachment['mimetype'], 'image')) {
+    if (false === strpos($attachment['mimetype'], 'image')) {
         $attachment['mimetype'] = 'application/octet-stream';
     }
 
@@ -131,7 +131,7 @@ $auth_pages = DB()->sql_fetchrowset($result);
 $num_auth_pages = DB()->num_rows($result);
 
 for ($i = 0; $i < $num_auth_pages && $authorised == false; $i++) {
-    $auth_pages[$i]['post_id'] = intval($auth_pages[$i]['post_id']);
+    $auth_pages[$i]['post_id'] = (int)$auth_pages[$i]['post_id'];
 
     if ($auth_pages[$i]['post_id'] != 0) {
         $sql = 'SELECT forum_id, topic_id FROM ' . BB_POSTS . ' WHERE post_id = ' . (int)$auth_pages[$i]['post_id'];
@@ -174,11 +174,11 @@ for ($i = 0; $i < $num_rows; $i++) {
 }
 
 // Disallowed
-if (!in_array($attachment['extension'], $allowed_extensions) && !IS_ADMIN) {
+if (!in_array($attachment['extension'], $allowed_extensions, true) && !IS_ADMIN) {
     bb_die(sprintf($lang['EXTENSION_DISABLED_AFTER_POSTING'], $attachment['extension']));
 }
 
-$download_mode = intval($download_mode[$attachment['extension']]);
+$download_mode = (int)$download_mode[$attachment['extension']];
 
 if ($thumbnail) {
     $attachment['physical_filename'] = THUMB_DIR . '/t_' . $attachment['physical_filename'];
@@ -198,27 +198,27 @@ if ($download_mode == PHYSICAL_LINK) {
     $url = make_url($upload_dir . '/' . $attachment['physical_filename']);
     header('Location: ' . $url);
     exit;
-} else {
-    if (IS_GUEST && !bb_captcha('check')) {
-        global $template;
-
-        $redirect_url = isset($_POST['redirect_url']) ? $_POST['redirect_url'] : (isset($_SERVER['HTTP_REFERER']) ? $_SERVER['HTTP_REFERER'] : '/');
-        $message = '<form action="' . DOWNLOAD_URL . $attachment['attach_id'] . '" method="post">';
-        $message .= $lang['CAPTCHA'] . ':';
-        $message .= '<div  class="mrg_10" align="center">' . bb_captcha('get') . '</div>';
-        $message .= '<input type="hidden" name="redirect_url" value="' . $redirect_url . '" />';
-        $message .= '<input type="submit" class="bold" value="' . $lang['SUBMIT'] . '" /> &nbsp;';
-        $message .= '<input type="button" class="bold" value="' . $lang['GO_BACK'] . '" onclick="document.location.href = \'' . $redirect_url . '\';" />';
-        $message .= '</form>';
-
-        $template->assign_vars(array(
-            'ERROR_MESSAGE' => $message,
-        ));
-
-        require(PAGE_HEADER);
-        require(PAGE_FOOTER);
-    }
-
-    send_file_to_browser($attachment, $upload_dir);
-    exit;
 }
+
+if (IS_GUEST && !bb_captcha('check')) {
+    global $template;
+
+    $redirect_url = isset($_POST['redirect_url']) ? $_POST['redirect_url'] : (isset($_SERVER['HTTP_REFERER']) ? $_SERVER['HTTP_REFERER'] : '/');
+    $message = '<form action="' . DOWNLOAD_URL . $attachment['attach_id'] . '" method="post">';
+    $message .= $lang['CAPTCHA'] . ':';
+    $message .= '<div  class="mrg_10" align="center">' . bb_captcha('get') . '</div>';
+    $message .= '<input type="hidden" name="redirect_url" value="' . $redirect_url . '" />';
+    $message .= '<input type="submit" class="bold" value="' . $lang['SUBMIT'] . '" /> &nbsp;';
+    $message .= '<input type="button" class="bold" value="' . $lang['GO_BACK'] . '" onclick="document.location.href = \'' . $redirect_url . '\';" />';
+    $message .= '</form>';
+
+    $template->assign_vars(array(
+        'ERROR_MESSAGE' => $message,
+    ));
+
+    require(PAGE_HEADER);
+    require(PAGE_FOOTER);
+}
+
+send_file_to_browser($attachment, $upload_dir);
+exit;

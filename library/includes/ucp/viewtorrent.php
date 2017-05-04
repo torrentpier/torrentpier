@@ -32,7 +32,7 @@ $releasing_count = $seeding_count = $leeching_count = 0;
 
 // Auth
 $excluded_forums_csv = $user->get_excluded_forums(AUTH_VIEW);
-$not_auth_forums_sql = ($excluded_forums_csv) ? "
+$not_auth_forums_sql = $excluded_forums_csv ? "
 	AND f.forum_id NOT IN($excluded_forums_csv)
 	AND f.forum_parent NOT IN($excluded_forums_csv)
 " : '';
@@ -70,13 +70,13 @@ if ($releasing) {
         $template->assign_block_vars('released', array(
             'ROW_CLASS' => !($i % 2) ? 'row1' : 'row2',
             'FORUM_NAME' => htmlCHR($row['forum_name']),
-            'TOPIC_TITLE' => ($row['update_time']) ? $topic_title : "<s>$topic_title</s>",
+            'TOPIC_TITLE' => $row['update_time'] ? $topic_title : "<s>$topic_title</s>",
             'U_VIEW_FORUM' => FORUM_URL . $row['forum_id'],
             'U_VIEW_TOPIC' => TOPIC_URL . $row['topic_id'],
             'TOR_TYPE' => is_gold($row['tor_type']),
-            'TOPIC_SEEDERS' => ($row['seeders']) ? $row['seeders'] : 0,
-            'TOPIC_LEECHERS' => ($row['leechers']) ? $row['leechers'] : 0,
-            'SPEED_UP' => ($row['speed_up']) ? humn_size($row['speed_up'], 0, 'KB') . '/s' : '-',
+            'TOPIC_SEEDERS' => $row['seeders'] ?: 0,
+            'TOPIC_LEECHERS' => $row['leechers'] ?: 0,
+            'SPEED_UP' => $row['speed_up'] ? humn_size($row['speed_up'], 0, 'KB') . '/s' : '-',
         ));
 
         $releasing_count++;
@@ -90,13 +90,13 @@ if ($seeding) {
         $template->assign_block_vars('seed', array(
             'ROW_CLASS' => !($i % 2) ? 'row1' : 'row2',
             'FORUM_NAME' => htmlCHR($row['forum_name']),
-            'TOPIC_TITLE' => ($row['update_time']) ? $topic_title : "<s>$topic_title</s>",
+            'TOPIC_TITLE' => $row['update_time'] ? $topic_title : "<s>$topic_title</s>",
             'U_VIEW_FORUM' => FORUM_URL . $row['forum_id'],
             'U_VIEW_TOPIC' => TOPIC_URL . $row['topic_id'],
             'TOR_TYPE' => is_gold($row['tor_type']),
-            'TOPIC_SEEDERS' => ($row['seeders']) ? $row['seeders'] : 0,
-            'TOPIC_LEECHERS' => ($row['leechers']) ? $row['leechers'] : 0,
-            'SPEED_UP' => ($row['speed_up']) ? humn_size($row['speed_up'], 0, 'KB') . '/s' : '-',
+            'TOPIC_SEEDERS' => $row['seeders'] ?: 0,
+            'TOPIC_LEECHERS' => $row['leechers'] ?: 0,
+            'SPEED_UP' => $row['speed_up'] ? humn_size($row['speed_up'], 0, 'KB') . '/s' : '-',
         ));
 
         $seeding_count++;
@@ -106,20 +106,20 @@ if ($seeding) {
 if ($leeching) {
     foreach ($leeching as $i => $row) {
         $compl_size = ($row['remain'] && $row['size'] && $row['size'] > $row['remain']) ? ($row['size'] - $row['remain']) : 0;
-        $compl_perc = ($compl_size) ? floor($compl_size * 100 / $row['size']) : 0;
+        $compl_perc = $compl_size ? floor($compl_size * 100 / $row['size']) : 0;
         $topic_title = wbr($row['topic_title']);
 
         $template->assign_block_vars('leech', array(
             'ROW_CLASS' => !($i % 2) ? 'row1' : 'row2',
             'FORUM_NAME' => htmlCHR($row['forum_name']),
-            'TOPIC_TITLE' => ($row['update_time']) ? $topic_title : "<s>$topic_title</s>",
+            'TOPIC_TITLE' => $row['update_time'] ? $topic_title : "<s>$topic_title</s>",
             'U_VIEW_FORUM' => FORUM_URL . $row['forum_id'],
             'U_VIEW_TOPIC' => TOPIC_URL . $row['topic_id'],
             'COMPL_PERC' => $compl_perc,
             'TOR_TYPE' => is_gold($row['tor_type']),
-            'TOPIC_SEEDERS' => ($row['seeders']) ? $row['seeders'] : 0,
-            'TOPIC_LEECHERS' => ($row['leechers']) ? $row['leechers'] : 0,
-            'SPEED_DOWN' => ($row['speed_down']) ? humn_size($row['speed_down'], 0, 'KB') . '/s' : '-',
+            'TOPIC_SEEDERS' => $row['seeders'] ?: 0,
+            'TOPIC_LEECHERS' => $row['leechers'] ?: 0,
+            'SPEED_DOWN' => $row['speed_down'] ? humn_size($row['speed_down'], 0, 'KB') . '/s' : '-',
         ));
 
         $leeching_count++;
@@ -129,8 +129,8 @@ if ($leeching) {
 $template->assign_vars(array(
     'SHOW_SEARCH_DL' => IS_AM || $profile_user_id,
     'USERNAME' => $profiledata['username'],
-    'L_RELEASINGS' => "{$lang['RELEASING']}: " . (($releasing_count) ? "<b>$releasing_count</b>" : '0'),
-    'L_SEEDINGS' => "{$lang['SEEDING']}: " . (($seeding_count) ? "<b>$seeding_count</b>" : '0'),
-    'L_LEECHINGS' => "{$lang['LEECHING']}: " . (($leeching_count) ? "<b>$leeching_count</b>" : '0'),
+    'L_RELEASINGS' => "{$lang['RELEASING']}: " . ($releasing_count ? "<b>$releasing_count</b>" : '0'),
+    'L_SEEDINGS' => "{$lang['SEEDING']}: " . ($seeding_count ? "<b>$seeding_count</b>" : '0'),
+    'L_LEECHINGS' => "{$lang['LEECHING']}: " . ($leeching_count ? "<b>$leeching_count</b>" : '0'),
     'USER_DLS' => $releasing_count || $seeding_count || $leeching_count,
 ));

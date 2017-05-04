@@ -77,7 +77,7 @@ class datastore_common
     {
         foreach ((array)$items as $item) {
             // игнор уже поставленного в очередь либо уже извлеченного
-            if (!in_array($item, $this->queued_items) && !isset($this->data[$item])) {
+            if (!in_array($item, $this->queued_items, true) && !isset($this->data[$item])) {
                 $this->queued_items[] = $item;
             }
         }
@@ -149,7 +149,7 @@ class datastore_common
     public $dbg = array();
     public $dbg_id = 0;
     public $dbg_enabled = false;
-    public $cur_query = null;
+    public $cur_query;
 
     public function debug($mode, $cur_query = null)
     {
@@ -176,7 +176,7 @@ class datastore_common
         }
     }
 
-    public function debug_find_source($mode = '')
+    public function debug_find_source($mode = ''): string
     {
         foreach (debug_backtrace() as $trace) {
             if ($trace['file'] !== __FILE__) {

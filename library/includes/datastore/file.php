@@ -29,8 +29,8 @@ if (!defined('BB_ROOT')) {
 
 class datastore_file extends datastore_common
 {
-    public $dir = null;
-    public $prefix = null;
+    public $dir;
+    public $prefix;
     public $engine = 'Filecache';
 
     public function __construct($dir, $prefix = null)
@@ -96,7 +96,7 @@ class datastore_file extends datastore_common
             $this->num_queries++;
 
             if (file_exists($filename)) {
-                require($filename);
+                require $filename;
 
                 $this->data[$item] = $filecache;
             }

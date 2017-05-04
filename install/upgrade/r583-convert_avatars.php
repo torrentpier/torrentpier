@@ -25,10 +25,10 @@
 
 define('IN_FORUM', true);
 define('BB_ROOT', './');
-require(BB_ROOT . 'common.php');
-require(INC_DIR . 'functions_upload.php');
+require BB_ROOT . 'common.php';
+require INC_DIR . 'functions_upload.php';
 
-while (@ob_end_flush()) ;
+while (ob_end_flush()) ;
 ob_implicit_flush();
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
@@ -80,7 +80,7 @@ if ($confirm) {
                 DB()->query("UPDATE " . BB_USERS . " SET avatar_ext_id = {$upload->file_ext_id} WHERE user_id = {$row['user_id']} LIMIT 1");
                 $avatars_ok++;
             } else {
-                echo "{$row['user_id']}: ", join("\n{$row['user_id']}: ", $upload->errors), "\n";
+                echo "{$row['user_id']}: ", implode("\n{$row['user_id']}: ", $upload->errors), "\n";
                 $avatars_err++;
             }
         }

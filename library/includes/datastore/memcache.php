@@ -29,11 +29,11 @@ if (!defined('BB_ROOT')) {
 
 class datastore_memcache extends datastore_common
 {
-    public $cfg = null;
-    public $memcache = null;
+    public $cfg;
+    public $memcache;
     public $connected = false;
     public $engine = 'Memcache';
-    public $prefix = null;
+    public $prefix;
 
     public function __construct($cfg, $prefix = null)
     {
@@ -49,12 +49,12 @@ class datastore_memcache extends datastore_common
 
     public function connect()
     {
-        $connect_type = ($this->cfg['pconnect']) ? 'pconnect' : 'connect';
+        $connect_type = $this->cfg['pconnect'] ? 'pconnect' : 'connect';
 
         $this->cur_query = $connect_type . ' ' . $this->cfg['host'] . ':' . $this->cfg['port'];
         $this->debug('start');
 
-        if (@$this->memcache->$connect_type($this->cfg['host'], $this->cfg['port'])) {
+        if ($this->memcache->$connect_type($this->cfg['host'], $this->cfg['port'])) {
             $this->connected = true;
         }
 
@@ -123,7 +123,7 @@ class datastore_memcache extends datastore_common
         }
     }
 
-    public function is_installed()
+    public function is_installed(): bool
     {
         return class_exists('Memcache');
     }

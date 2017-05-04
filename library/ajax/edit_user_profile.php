@@ -29,7 +29,7 @@ if (!defined('IN_AJAX')) {
 
 global $bb_cfg, $lang;
 
-if (!$user_id = intval($this->request['user_id']) or !$profiledata = get_userdata($user_id)) {
+if (!$user_id = (int)$this->request['user_id'] or !$profiledata = get_userdata($user_id)) {
     $this->ajax_die($lang['NO_USER_ID_SPECIFIED']);
 }
 if (!$field = (string)$this->request['field']) {
@@ -37,7 +37,7 @@ if (!$field = (string)$this->request['field']) {
 }
 
 $table = BB_USERS;
-$value = $this->request['value'] = (string)(isset($this->request['value'])) ? $this->request['value'] : 0;
+$value = $this->request['value'] = (string)isset($this->request['value']) ? $this->request['value'] : 0;
 
 switch ($field) {
     case 'username':
@@ -146,7 +146,7 @@ switch ($field) {
 
         foreach (array('KB' => 1, 'MB' => 2, 'GB' => 3, 'TB' => 4) as $s => $m) {
             if (strpos($this->request['value'], $s) !== false) {
-                $value *= pow(1024, $m);
+                $value *= 1024 ** $m;
                 break;
             }
         }

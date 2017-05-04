@@ -35,7 +35,7 @@ switch ($mode) {
     case 'clear_cache':
 
         foreach ($bb_cfg['cache']['engines'] as $cache_name => $cache_val) {
-            if (!in_array('db_sqlite', $cache_val)) {
+            if (!in_array('db_sqlite', $cache_val, true)) {
                 CACHE($cache_name)->rm();
             }
         }

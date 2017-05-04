@@ -41,7 +41,7 @@ if (!$result = DB()->sql_query($sql)) {
         $config_name = $row['config_name'];
         $config_value = $row['config_value'];
         $default_config[$config_name] = $config_value;
-        $new[$config_name] = isset($_POST[$config_name]) ? $_POST[$config_name] : $default_config[$config_name];
+        $new[$config_name] = $_POST[$config_name] ?? $default_config[$config_name];
 
         if (isset($_POST['submit']) && $row['config_value'] != $new[$config_name]) {
             $new_params[$config_name] = $new[$config_name];

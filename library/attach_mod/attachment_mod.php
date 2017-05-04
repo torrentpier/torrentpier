@@ -39,6 +39,8 @@ if (defined('ATTACH_INSTALL')) {
 
 /**
  * wrapper function for determining the correct language directory
+ * @param $language_file
+ * @return
  */
 function attach_mod_get_lang($language_file)
 {
@@ -47,11 +49,11 @@ function attach_mod_get_lang($language_file)
     $file = LANG_ROOT_DIR . '/' . $bb_cfg['default_lang'] . '/' . $language_file . '.php';
     if (file_exists($file)) {
         return $bb_cfg['default_lang'];
-    } else {
-        $file = LANG_ROOT_DIR . '/' . $attach_config['board_lang'] . '/' . $language_file . '.php';
-        if (file_exists($file)) {
-            return $attach_config['board_lang'];
-        }
+    }
+
+    $file = LANG_ROOT_DIR . '/' . $attach_config['board_lang'] . '/' . $language_file . '.php';
+    if (file_exists($file)) {
+        return $attach_config['board_lang'];
     }
 
     bb_die('Attachment mod language file does not exist: language/' . $attach_config['board_lang'] . '/' . $language_file . '.php');

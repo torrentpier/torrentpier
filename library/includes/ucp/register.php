@@ -81,7 +81,7 @@ switch ($mode) {
             } // Ограничение по времени
             elseif ($bb_cfg['new_user_reg_restricted']) {
                 if (in_array(date('G'), array(0, /*1,2,3,4,5,6,7,8,11,12,13,14,15,16,*/
-                    17, 18, 19, 20, 21, 22, 23))) {
+                    17, 18, 19, 20, 21, 22, 23), true)) {
                     bb_die($lang['REGISTERED_IN_TIME']);
                 }
             }
@@ -120,7 +120,7 @@ switch ($mode) {
         // field => can_edit
         $profile_fields = array(
             'user_active' => IS_ADMIN,
-            'username' => (IS_ADMIN || $bb_cfg['allow_namechange']),
+            'username' => IS_ADMIN || $bb_cfg['allow_namechange'],
             'user_password' => true,
             'user_email' => true, // должен быть после user_password
             'user_lang' => true,
@@ -147,7 +147,7 @@ switch ($mode) {
         } else {
             $pr_user_id = $userdata['user_id'];
         }
-        $profile_fields_sql = join(', ', array_keys($profile_fields));
+        $profile_fields_sql = implode(', ', array_keys($profile_fields));
         $sql = "
 			SELECT
 				user_id,
@@ -217,9 +217,9 @@ foreach ($profile_fields as $field => $can_edit) {
          */
         case 'user_password':
             if ($submit) {
-                $cur_pass = (string)@$_POST['cur_pass'];
-                $new_pass = (string)@$_POST['new_pass'];
-                $cfm_pass = (string)@$_POST['cfm_pass'];
+                $cur_pass = (string)$_POST['cur_pass'];
+                $new_pass = (string)$_POST['new_pass'];
+                $cfm_pass = (string)$_POST['cfm_pass'];
 
                 // пароль для гостя и при смене пароля юзером
                 if (!empty($new_pass)) {
@@ -351,19 +351,19 @@ foreach ($profile_fields as $field => $can_edit) {
 
             $update_user_opt = array(
                 #	'user_opt_name'  => ($reg_mode) ? #reg_value : #in_login_change
-                'user_viewemail' => ($reg_mode) ? false : true,
-                'user_viewonline' => ($reg_mode) ? false : true,
-                'user_notify' => ($reg_mode) ? true : true,
-                'user_notify_pm' => ($reg_mode) ? true : true,
-                'user_porn_forums' => ($reg_mode) ? false : true,
-                'user_dls' => ($reg_mode) ? false : true,
-                'user_callseed' => ($reg_mode) ? true : true,
-                'user_retracker' => ($reg_mode) ? true : true,
+                'user_viewemail' => $reg_mode ? false : true,
+                'user_viewonline' => $reg_mode ? false : true,
+                'user_notify' => $reg_mode ? true : true,
+                'user_notify_pm' => $reg_mode ? true : true,
+                'user_porn_forums' => $reg_mode ? false : true,
+                'user_dls' => $reg_mode ? false : true,
+                'user_callseed' => $reg_mode ? true : true,
+                'user_retracker' => $reg_mode ? true : true,
             );
 
             foreach ($update_user_opt as $opt => $can_change_opt) {
                 if ($submit && (isset($_POST[$opt]) && $can_change_opt || $reg_mode)) {
-                    $change_opt = ($reg_mode) ? $can_change_opt : !empty($_POST[$opt]);
+                    $change_opt = $reg_mode ? $can_change_opt : !empty($_POST[$opt]);
                     setbit($user_opt, $bf['user_opt'][$opt], $change_opt);
                 }
                 $tp_data[strtoupper($opt)] = bf($user_opt, 'user_opt', $opt);
@@ -678,19 +678,19 @@ $template->assign_vars($tp_data);
 
 $template->assign_vars(array(
     'PAGE_TITLE' => ($mode == 'editprofile') ? $lang['EDIT_PROFILE'] . ($adm_edit ? " :: {$pr_data['username']}" : '') : $lang['REGISTER'],
-    'SHOW_REG_AGREEMENT' => ($mode == 'register' && !IS_ADMIN),
-    'ERROR_MESSAGE' => ($errors) ? join('<br />', array_unique($errors)) : '',
+    'SHOW_REG_AGREEMENT' => $mode == 'register' && !IS_ADMIN,
+    'ERROR_MESSAGE' => $errors ? implode('<br />', array_unique($errors)) : '',
     'MODE' => $mode,
-    'EDIT_PROFILE' => ($mode == 'editprofile'),
+    'EDIT_PROFILE' => $mode == 'editprofile',
     'ADM_EDIT' => $adm_edit,
-    'SHOW_PASS' => ($adm_edit || ($mode == 'register' && IS_ADMIN)),
-    'CAPTCHA_HTML' => ($need_captcha) ? bb_captcha('get') : '',
+    'SHOW_PASS' => $adm_edit || ($mode == 'register' && IS_ADMIN),
+    'CAPTCHA_HTML' => $need_captcha ? bb_captcha('get') : '',
 
     'LANGUAGE_SELECT' => language_select($pr_data['user_lang'], 'user_lang'),
     'TIMEZONE_SELECT' => tz_select($pr_data['user_timezone'], 'user_timezone'),
     'USER_TIMEZONE' => $pr_data['user_timezone'],
 
-    'AVATAR_EXPLAIN' => sprintf($lang['AVATAR_EXPLAIN'], $bb_cfg['avatars']['max_width'], $bb_cfg['avatars']['max_height'], (round($bb_cfg['avatars']['max_size'] / 1024))),
+    'AVATAR_EXPLAIN' => sprintf($lang['AVATAR_EXPLAIN'], $bb_cfg['avatars']['max_width'], $bb_cfg['avatars']['max_height'], round($bb_cfg['avatars']['max_size'] / 1024)),
     'AVATAR_DISALLOWED' => bf($pr_data['user_opt'], 'user_opt', 'dis_avatar'),
     'AVATAR_DIS_EXPLAIN' => sprintf($lang['AVATAR_DISABLE'], $bb_cfg['terms_and_conditions_url']),
     'AVATAR_IMG' => get_avatar($pr_data['user_id'], $pr_data['avatar_ext_id'], !bf($pr_data['user_opt'], 'user_opt', 'dis_avatar')),

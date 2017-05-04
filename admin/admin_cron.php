@@ -30,15 +30,15 @@ if (!empty($setmodules)) {
     return;
 }
 
-$mode = isset($_GET['mode']) ? $_GET['mode'] : '';
+$mode = $_GET['mode'] ?? '';
 $job_id = isset($_GET['id']) ? (int)$_GET['id'] : '';
 $submit = isset($_POST['submit']);
 $jobs = isset($_POST['select']) ? implode(',', $_POST['select']) : '';
-$cron_action = isset($_POST['cron_action']) ? $_POST['cron_action'] : '';
+$cron_action = $_POST['cron_action'] ?? '';
 
 if ($mode == 'run' && !$job_id) {
     define('BB_ROOT', './../');
-    require(BB_ROOT . 'common.php');
+    require BB_ROOT . 'common.php';
     $user->session_start();
     redirect('admin/' . basename(__FILE__) . '?mode=list');
 } else {
@@ -59,7 +59,7 @@ foreach ($sql as $row) {
     $config_value = $row['config_value'];
     $default_config[$config_name] = $config_value;
 
-    $new[$config_name] = isset($_POST[$config_name]) ? $_POST[$config_name] : $default_config[$config_name];
+    $new[$config_name] = $_POST[$config_name] ?? $default_config[$config_name];
 
     if (isset($_POST['submit']) && $row['config_value'] != $new[$config_name]) {
         bb_update_config(array($config_name => $new[$config_name]));
@@ -67,7 +67,7 @@ foreach ($sql as $row) {
 }
 
 $template->assign_vars(array(
-    'CRON_ENABLED' => ($new['cron_enabled']) ? true : false,
+    'CRON_ENABLED' => $new['cron_enabled'] ? true : false,
     'CRON_CHECK_INTERVAL' => $new['cron_check_interval'],
 ));
 

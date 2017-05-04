@@ -58,7 +58,7 @@ function sync($type, $id)
 
             // начальное обнуление значений
             $forum_ary = explode(',', $forum_csv);
-            DB()->query("REPLACE INTO $tmp_sync_forums (forum_id) VALUES(" . join('),(', $forum_ary) . ")");
+            DB()->query("REPLACE INTO $tmp_sync_forums (forum_id) VALUES(" . implode('),(', $forum_ary) . ")");
 
             DB()->query("
 				REPLACE INTO $tmp_sync_forums
@@ -254,7 +254,7 @@ function topic_delete($mode_or_topic_id, $forum_id = null, $prune_time = 0, $pru
 	");
     DB()->add_shutdown_query("DROP TEMPORARY TABLE IF EXISTS $tmp_delete_topics");
 
-    $where_sql = ($prune) ? "forum_id = $forum_id" : "topic_id IN($topic_csv)";
+    $where_sql = $prune ? "forum_id = $forum_id" : "topic_id IN($topic_csv)";
     $where_sql .= ($prune && $prune_time) ? " AND topic_last_post_time < $prune_time" : '';
     $where_sql .= ($prune && !$prune_all) ? " AND topic_type NOT IN(" . POST_ANNOUNCE . "," . POST_STICKY . ")" : '';
 
@@ -761,5 +761,5 @@ function get_usernames_for_log($user_id)
         }
     }
 
-    return join(', ', $users_log_msg);
+    return implode(', ', $users_log_msg);
 }

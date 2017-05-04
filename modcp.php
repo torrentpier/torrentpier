@@ -89,11 +89,11 @@ function validate_mode_condition($request_index, $mod_action = '')
 }
 
 // Obtain initial vars
-$forum_id = isset($_REQUEST['f']) ? $_REQUEST['f'] : 0;
-$topic_id = isset($_REQUEST['t']) ? $_REQUEST['t'] : 0;
-$post_id = isset($_REQUEST['p']) ? $_REQUEST['p'] : 0;
+$forum_id = $_REQUEST['f'] ?? 0;
+$topic_id = $_REQUEST['t'] ?? 0;
+$post_id = $_REQUEST['p'] ?? 0;
 
-$start = isset($_REQUEST['start']) ? abs(intval($_REQUEST['start'])) : 0;
+$start = isset($_REQUEST['start']) ? abs((int)$_REQUEST['start']) : 0;
 $confirmed = isset($_POST['confirm']);
 
 $mode = $topic_title = '';
@@ -156,14 +156,14 @@ if (isset($_POST['cancel']) || IS_GUEST) {
     $redirect = 'index.php';
 
     if ($topic_id || $forum_id) {
-        $redirect = ($topic_id) ? TOPIC_URL . $topic_id : FORUM_URL . $forum_id;
+        $redirect = $topic_id ? TOPIC_URL . $topic_id : FORUM_URL . $forum_id;
     }
     redirect($redirect);
 }
 
 // Start auth check
 $is_auth = auth(AUTH_ALL, $forum_id, $userdata);
-$is_moderator = (IS_AM);
+$is_moderator = IS_AM;
 
 if ($mode == 'ip') {
     // Moderator can view IP in all forums
@@ -174,8 +174,7 @@ if ($mode == 'ip') {
         $is_auth['auth_mod'] = true;
 
         $_POST['insert_bot_msg'] = 1;
-        unset($_POST['topic_id_list']);
-        unset($_POST['move_leave_shadow']);
+        unset($_POST['topic_id_list'], $_POST['move_leave_shadow']);
     }
 }
 
@@ -186,7 +185,7 @@ if (!$is_auth['auth_mod']) {
 
 // Redirect to login page if not admin session
 if ($is_moderator && !$userdata['session_admin']) {
-    $redirect = isset($_POST['redirect']) ? $_POST['redirect'] : $_SERVER['REQUEST_URI'];
+    $redirect = $_POST['redirect'] ?? $_SERVER['REQUEST_URI'];
     redirect(LOGIN_URL . "?redirect=$redirect&admin=1");
 }
 
@@ -209,7 +208,7 @@ switch ($mode) {
             bb_die($lang['NONE_SELECTED']);
         }
 
-        $req_topics = isset($_POST['topic_id_list']) ? $_POST['topic_id_list'] : $topic_id;
+        $req_topics = $_POST['topic_id_list'] ?? $topic_id;
         validate_topics($forum_id, $req_topics, $topic_titles);
 
         if (!$req_topics or !$topic_csv = get_id_csv($req_topics)) {
@@ -255,12 +254,12 @@ switch ($mode) {
                 $datastore->update('network_news');
             }
 
-            $msg = ($result) ? $lang['TOPICS_REMOVED'] : $lang['NO_TOPICS_REMOVED'];
+            $msg = $result ? $lang['TOPICS_REMOVED'] : $lang['NO_TOPICS_REMOVED'];
             bb_die(return_msg_mcp($msg));
         } else {
             print_confirmation(array(
                 'QUESTION' => $lang['CONFIRM_DELETE_TOPIC'],
-                'ITEMS_LIST' => join("\n</li>\n<li>\n", $topic_titles),
+                'ITEMS_LIST' => implode("\n</li>\n<li>\n", $topic_titles),
                 'FORM_ACTION' => "modcp.php",
                 'HIDDEN_FIELDS' => build_hidden_fields($hidden_fields),
             ));
@@ -286,7 +285,7 @@ switch ($mode) {
                 $datastore->update('network_news');
             }
 
-            $msg = ($result) ? $lang['TOPICS_MOVED'] : $lang['NO_TOPICS_MOVED'];
+            $msg = $result ? $lang['TOPICS_MOVED'] : $lang['NO_TOPICS_MOVED'];
             bb_die(return_msg_mcp($msg));
         } else {
             if (IS_ADMIN) {
@@ -305,7 +304,7 @@ switch ($mode) {
 
                 'MESSAGE_TITLE' => $lang['CONFIRM'],
                 'MESSAGE_TEXT' => $lang['CONFIRM_MOVE_TOPIC'],
-                'TOPIC_TITLES' => join("\n</li>\n<li>\n", $topic_titles),
+                'TOPIC_TITLES' => implode("\n</li>\n<li>\n", $topic_titles),
 
                 'S_FORUM_SELECT' => $forum_select,
                 'S_MODCP_ACTION' => "modcp.php",
@@ -319,7 +318,7 @@ switch ($mode) {
     case 'lock':
     case 'unlock':
         $lock = ($mode == 'lock');
-        $new_topic_status = ($lock) ? TOPIC_LOCKED : TOPIC_UNLOCKED;
+        $new_topic_status = $lock ? TOPIC_LOCKED : TOPIC_UNLOCKED;
 
         $sql = "
 			SELECT topic_id, topic_title
@@ -348,7 +347,7 @@ switch ($mode) {
 		");
 
         // Log action
-        $type = ($lock) ? 'mod_topic_lock' : 'mod_topic_unlock';
+        $type = $lock ? 'mod_topic_lock' : 'mod_topic_unlock';
 
         foreach ($log_topics as $topic_id => $topic_title) {
             $log_action->mod($type, array(
@@ -358,7 +357,7 @@ switch ($mode) {
             ));
         }
 
-        $msg = ($lock) ? $lang['TOPICS_LOCKED'] : $lang['TOPICS_UNLOCKED'];
+        $msg = $lock ? $lang['TOPICS_LOCKED'] : $lang['TOPICS_UNLOCKED'];
         bb_die(return_msg_mcp($msg));
 
         break;
@@ -367,7 +366,7 @@ switch ($mode) {
     case 'set_download':
     case 'unset_download':
         $set_download = ($mode == 'set_download');
-        $new_dl_type = ($set_download) ? TOPIC_DL_TYPE_DL : TOPIC_DL_TYPE_NORMAL;
+        $new_dl_type = $set_download ? TOPIC_DL_TYPE_DL : TOPIC_DL_TYPE_NORMAL;
 
         DB()->query("
 			UPDATE " . BB_TOPICS . " SET
@@ -381,7 +380,7 @@ switch ($mode) {
             clear_dl_list($topic_csv);
         }
 
-        $msg = ($set_download) ? $lang['TOPICS_DOWN_SETS'] : $lang['TOPICS_DOWN_UNSETS'];
+        $msg = $set_download ? $lang['TOPICS_DOWN_SETS'] : $lang['TOPICS_DOWN_UNSETS'];
         bb_die(return_msg_mcp($msg));
 
         break;
@@ -390,20 +389,20 @@ switch ($mode) {
         //mpd
         $delete_posts = isset($_POST['delete_posts']);
         $split = (isset($_POST['split_type_all']) || isset($_POST['split_type_beyond']));
-        $posts = (isset($_POST['post_id_list'])) ? $_POST['post_id_list'] : array();
+        $posts = $_POST['post_id_list'] ?? array();
         $start = /* (isset($_POST['start'])) ? intval($_POST['start']) : */
             0;
-        $topic_first_post_id = (isset($topic_row['topic_first_post_id'])) ? $topic_row['topic_first_post_id'] : '';
+        $topic_first_post_id = $topic_row['topic_first_post_id'] ?? '';
 
         $post_id_sql = $req_post_id_sql = array();
 
         if (($split || $delete_posts) && ($posts && $topic_id && $forum_id && $topic_first_post_id) && $confirmed) {
             foreach ($posts as $post_id) {
-                if ($pid = intval($post_id)) {
+                if ($pid = (int)$post_id) {
                     $req_post_id_sql[] = $pid;
                 }
             }
-            if ($req_post_id_sql = join(',', $req_post_id_sql)) {
+            if ($req_post_id_sql = implode(',', $req_post_id_sql)) {
                 $sql = "SELECT post_id
 					FROM " . BB_POSTS . "
 					WHERE post_id IN($req_post_id_sql)
@@ -418,7 +417,7 @@ switch ($mode) {
                     foreach ($rowset as $rid => $row) {
                         $post_id_sql[] = $row['post_id'];
                     }
-                    $post_id_sql = join(',', $post_id_sql);
+                    $post_id_sql = implode(',', $post_id_sql);
                 }
             }
         }
@@ -442,8 +441,8 @@ switch ($mode) {
                 $user_id_sql = '';
                 $post_id_sql = '';
                 do {
-                    $user_id_sql .= (($user_id_sql != '') ? ', ' : '') . intval($row['poster_id']);
-                    $post_id_sql .= (($post_id_sql != '') ? ', ' : '') . intval($row['post_id']);
+                    $user_id_sql .= (($user_id_sql != '') ? ', ' : '') . (int)$row['poster_id'];
+                    $post_id_sql .= (($post_id_sql != '') ? ', ' : '') . (int)$row['post_id'];
                 } while ($row = DB()->sql_fetchrow($result));
 
                 $post_subject = clean_title($_POST['subject']);
@@ -451,7 +450,7 @@ switch ($mode) {
                     bb_die($lang['EMPTY_SUBJECT']);
                 }
 
-                $new_forum_id = intval($_POST['new_forum_id']);
+                $new_forum_id = (int)$_POST['new_forum_id'];
                 $topic_time = TIMENOW;
 
                 $sql = 'SELECT forum_id FROM ' . BB_FORUMS . ' WHERE forum_id = ' . $new_forum_id;
@@ -469,7 +468,7 @@ switch ($mode) {
 
                 $sql = "INSERT INTO " . BB_TOPICS . " (topic_title, topic_poster, topic_time, forum_id, topic_status, topic_type, topic_first_post_id)
 					VALUES ('" . DB()->escape($post_subject) . "', $first_poster, " . $topic_time . ", $new_forum_id, " . TOPIC_UNLOCKED . ", " . POST_NORMAL . ", $first_post_id)";
-                if (!(DB()->sql_query($sql))) {
+                if (!DB()->sql_query($sql)) {
                     bb_die('Could not insert new topic');
                 }
 
@@ -527,7 +526,7 @@ switch ($mode) {
             // Delete posts
             $result = post_delete(explode(',', $post_id_sql));
 
-            $msg = ($result) ? $lang['DELETE_POSTS_SUCCESFULLY'] : 'No posts were removed';
+            $msg = $result ? $lang['DELETE_POSTS_SUCCESFULLY'] : 'No posts were removed';
             bb_die(return_msg_mcp($msg));
         } else {
             $sql = "SELECT u.username, p.*, pt.post_text, p.post_username
@@ -575,7 +574,7 @@ switch ($mode) {
                         'POSTER_NAME' => wbr($poster),
                         'POST_DATE' => $post_date,
                         'MESSAGE' => $message,
-                        'CHECKBOX' => (defined('BEGIN_CHECKBOX')) ? true : false,
+                        'CHECKBOX' => defined('BEGIN_CHECKBOX') ? true : false,
                         'POST_ID' => $post_id,
                         'ROW_ID' => $i,
                         'CB_ID' => 'cb_' . $i,
@@ -593,7 +592,7 @@ switch ($mode) {
     case 'ip':
         $anon = GUEST_UID;
 
-        $rdns_ip_num = (isset($_GET['rdns'])) ? $_GET['rdns'] : "";
+        $rdns_ip_num = $_GET['rdns'] ?? "";
 
         if (!$post_id) {
             bb_die($lang['NO_SUCH_POST']);
@@ -695,7 +694,7 @@ switch ($mode) {
     case 'post_pin':
     case 'post_unpin':
         $pin = ($mode == 'post_pin');
-        $new_topic_status = ($pin) ? 1 : 0;
+        $new_topic_status = $pin ? 1 : 0;
 
         if (count($topic_csv)) {
             $sql = "
@@ -724,7 +723,7 @@ switch ($mode) {
 				WHERE topic_id IN($topic_csv)
 			");
 
-            $msg = ($pin) ? $lang['POST_PINNED'] : $lang['POST_UNPINNED'];
+            $msg = $pin ? $lang['POST_PINNED'] : $lang['POST_UNPINNED'];
             bb_die(return_msg_mcp($msg));
         } elseif ($topic_id) {
             $sql = "
@@ -754,7 +753,7 @@ switch ($mode) {
 				WHERE topic_id IN($topic_csv)
 			");
 
-            $msg = ($pin) ? $lang['POST_PINNED'] : $lang['POST_UNPINNED'];
+            $msg = $pin ? $lang['POST_PINNED'] : $lang['POST_UNPINNED'];
             bb_die(return_msg_mcp($msg));
         }
         break;
@@ -766,8 +765,8 @@ switch ($mode) {
 
 $template->assign_vars(array('PAGE_TITLE' => $lang['MOD_CP']));
 
-require(PAGE_HEADER);
+require PAGE_HEADER;
 
 $template->pparse('body');
 
-require(PAGE_FOOTER);
+require PAGE_FOOTER;

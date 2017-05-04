@@ -64,6 +64,6 @@ if ($poll_max_days = (int)$bb_cfg['poll_max_days']) {
 DB()->query("UPDATE " . BB_USERS . " SET user_newpasswd = '' WHERE user_lastvisit < " . (TIMENOW - 7 * 86400));
 
 // Чистка кеша постов
-if ($posts_days = intval($bb_cfg['posts_cache_days_keep'])) {
+if ($posts_days = (int)$bb_cfg['posts_cache_days_keep']) {
     DB()->query("DELETE FROM " . BB_POSTS_HTML . " WHERE post_html_time < DATE_SUB(NOW(), INTERVAL $posts_days DAY)");
 }

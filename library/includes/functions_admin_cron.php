@@ -21,6 +21,7 @@
  * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
+ * @param $jobs
  */
 
 function run_jobs($jobs)
@@ -37,7 +38,7 @@ function run_jobs($jobs)
     while ($row = DB()->sql_fetchrow($result)) {
         $job = $row['cron_script'];
         $job_script = INC_DIR . '/cron/jobs/' . $job;
-        require($job_script);
+        require $job_script;
     }
     DB()->query("
 			UPDATE " . BB_CRON . " SET
