@@ -74,7 +74,7 @@ function init_display_template($template_var, $replacement, $filename = 'viewtop
 
         $filename_2 = $template->files[$template_var];
 
-        $str = implode('', @file($filename_2));
+        $str = file_get_contents($filename_2);
         if (empty($str)) {
             die("Template->loadfile(): File $filename_2 for handle $template_var is empty");
         }
@@ -91,7 +91,7 @@ function init_display_template($template_var, $replacement, $filename = 'viewtop
         die("Template->make_filename(): Error - file $complete_filename does not exist");
     }
 
-    $content = implode('', file($complete_filename));
+    $content = file_get_contents($complete_filename);
     if (empty($content)) {
         die('Template->loadfile(): File ' . $complete_filename . ' is empty');
     }
