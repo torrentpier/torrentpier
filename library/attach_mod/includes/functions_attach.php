@@ -454,11 +454,7 @@ function user_in_group($user_id, $group_id)
     $num_rows = DB()->num_rows($result);
     DB()->sql_freeresult($result);
 
-    if ($num_rows == 0) {
-        return false;
-    }
-
-    return true;
+    return !($num_rows == 0);
 }
 
 /**
