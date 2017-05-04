@@ -146,7 +146,7 @@ switch ($field) {
 
         foreach (array('KB' => 1, 'MB' => 2, 'GB' => 3, 'TB' => 4) as $s => $m) {
             if (strpos($this->request['value'], $s) !== false) {
-                $value *= pow(1024, $m);
+                $value *= 1024 ** $m;
                 break;
             }
         }
