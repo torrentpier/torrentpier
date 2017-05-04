@@ -85,7 +85,7 @@ class user_common
     /**
      *  Shortcuts
      */
-    public $id = null;
+    public $id;
 
     /**
      *  Misc

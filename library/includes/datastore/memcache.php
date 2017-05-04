@@ -29,11 +29,11 @@ if (!defined('BB_ROOT')) {
 
 class datastore_memcache extends datastore_common
 {
-    public $cfg = null;
-    public $memcache = null;
+    public $cfg;
+    public $memcache;
     public $connected = false;
     public $engine = 'Memcache';
-    public $prefix = null;
+    public $prefix;
 
     public function __construct($cfg, $prefix = null)
     {
