@@ -32,9 +32,9 @@
  * @param int $post_id_array
  * @param int $attach_id_array
  * @param int $page
- * @param int $user_id
+ * @internal param int $user_id
  */
-function delete_attachment($post_id_array = 0, $attach_id_array = 0, $page = 0, $user_id = 0)
+function delete_attachment($post_id_array = 0, $attach_id_array = 0, $page = 0)
 {
     // Generate Array, if it's not an array
     if ($post_id_array === 0 && $attach_id_array === 0 && $page === 0) {

@@ -3924,11 +3924,11 @@ class utf8
      * остальные символы каждого слова преобразуются в нижний регистр.
      *
      * @param   string|null $s
-     * @param   bool $is_other_to_lowercase остальные символы преобразуются в нижний регистр?
      * @param   string $spaces_re
-     * @return  string|bool|null  Returns FALSE if error occurred
+     * @return bool|null|string Returns FALSE if error occurred
+     * @internal param bool $is_other_to_lowercase остальные символы преобразуются в нижний регистр?
      */
-    public static function ucwords($s, $is_other_to_lowercase = true, $spaces_re = '~([\pZ\s]+)~suSX') #\pXps is POSIX space: property Z or tab, NL, VT, FF, CR
+    public static function ucwords($s, $spaces_re = '~([\pZ\s]+)~suSX') #\pXps is POSIX space: property Z or tab, NL, VT, FF, CR
     {
         if (!ReflectionTypeHint::isValid()) {
             return false;

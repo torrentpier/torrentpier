@@ -897,7 +897,7 @@ function hide_passkey($str)
     return preg_replace("#\?{$bb_cfg['passkey_key']}=[a-zA-Z0-9]{" . BT_AUTH_KEY_LENGTH . "}#", "?{$bb_cfg['passkey_key']}=passkey", $str);
 }
 
-function get_parsed_post($postrow, $mode = 'full', $return_chars = 600)
+function get_parsed_post($postrow)
 {
     global $bb_cfg;
 

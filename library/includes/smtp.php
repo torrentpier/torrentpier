@@ -29,7 +29,7 @@ if (!defined('BB_ROOT')) {
 
 define('SMTP_INCLUDED', 1);
 
-function server_parse($socket, $response, $line = __LINE__)
+function server_parse($socket, $response)
 {
     $server_response = '';
     while ($server_response[3] != ' ') {

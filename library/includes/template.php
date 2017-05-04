@@ -261,9 +261,9 @@ class template
      * includes file or executes code
      * @param $filename
      * @param $code
-     * @param $handle
+     * @internal param $handle
      */
-    public function execute($filename, $code, $handle)
+    public function execute($filename, $code)
     {
         $this->cur_tpl = $filename;
 

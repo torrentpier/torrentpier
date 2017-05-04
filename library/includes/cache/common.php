@@ -35,10 +35,10 @@ class cache_common
      * Returns value of variable
      * @param $name
      * @param string $get_miss_key_callback
-     * @param int $ttl
      * @return array|bool
+     * @internal param int $ttl
      */
-    public function get($name, $get_miss_key_callback = '', $ttl = 604800)
+    public function get($name, $get_miss_key_callback = '')
     {
         if ($get_miss_key_callback) {
             return $get_miss_key_callback($name);
@@ -48,22 +48,22 @@ class cache_common
 
     /**
      * Store value of variable
-     * @param $name
-     * @param $value
-     * @param int $ttl
      * @return bool
+     * @internal param $name
+     * @internal param $value
+     * @internal param int $ttl
      */
-    public function set($name, $value, $ttl = 604800): bool
+    public function set(): bool
     {
         return false;
     }
 
     /**
      * Remove variable
-     * @param string $name
      * @return bool
+     * @internal param string $name
      */
-    public function rm($name = ''): bool
+    public function rm(): bool
     {
         return false;
     }

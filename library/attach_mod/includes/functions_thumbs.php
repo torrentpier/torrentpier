@@ -113,10 +113,10 @@ function get_supported_image_types($type)
  * Create thumbnail
  * @param $source
  * @param $new_file
- * @param $mimetype
  * @return bool
+ * @internal param $mimetype
  */
-function create_thumbnail($source, $new_file, $mimetype)
+function create_thumbnail($source, $new_file)
 {
     global $attach_config, $imagick;
 
