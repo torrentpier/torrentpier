@@ -79,7 +79,7 @@ class cache_apc extends cache_common
         return apc_clear_cache();
     }
 
-    public function is_installed()
+    public function is_installed(): bool
     {
         return function_exists('apc_fetch');
     }

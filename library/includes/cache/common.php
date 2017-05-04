@@ -45,7 +45,7 @@ class cache_common
     /**
      * Store value of variable
      */
-    public function set($name, $value, $ttl = 604800)
+    public function set($name, $value, $ttl = 604800): bool
     {
         return false;
     }
@@ -53,7 +53,7 @@ class cache_common
     /**
      * Remove variable
      */
-    public function rm($name = '')
+    public function rm($name = ''): bool
     {
         return false;
     }
@@ -94,7 +94,7 @@ class cache_common
         }
     }
 
-    public function debug_find_source($mode = '')
+    public function debug_find_source($mode = ''): string
     {
         foreach (debug_backtrace() as $trace) {
             if ($trace['file'] !== __FILE__) {

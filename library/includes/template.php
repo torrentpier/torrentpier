@@ -185,7 +185,7 @@ class template
      * Returns empty string if non-cachable (for tpl files outside of root dir).
      * $filename should be absolute filename
      */
-    public function make_filename_cache($filename)
+    public function make_filename_cache($filename): string
     {
         $filename = clean_filename(str_replace(TEMPLATES_DIR, '', $filename));
 
@@ -206,7 +206,7 @@ class template
     /**
      * Assigns template filename for handle.
      */
-    public function set_filename($handle, $filename, $xs_include = false, $quiet = false)
+    public function set_filename($handle, $filename, $xs_include = false, $quiet = false): bool
     {
         $can_cache = $this->use_cache;
         $this->files[$handle] = $this->make_filename($filename, $xs_include);
@@ -269,7 +269,7 @@ class template
      * and run the compiled code. This will print out
      * the results of executing the template.
      */
-    public function pparse($handle)
+    public function pparse($handle): bool
     {
         // parsing header if there is one
         if ($this->preparse || $this->postparse) {
@@ -322,7 +322,7 @@ class template
     /**
      * Precompile file
      */
-    public function precompile($template, $filename)
+    public function precompile($template, $filename): bool
     {
         global $precompile_num;
         if (empty($precompile_num)) {
@@ -377,7 +377,7 @@ class template
      * Note that all desired assignments to the variables in $handle should be done
      * BEFORE calling this function.
      */
-    public function assign_var_from_handle($varname, $handle)
+    public function assign_var_from_handle($varname, $handle): bool
     {
         ob_start();
         $res = $this->pparse($handle);
@@ -391,7 +391,7 @@ class template
      * variable assignments. Note that this should only be called once per block
      * iteration.
      */
-    public function assign_block_vars($blockname, $vararray)
+    public function assign_block_vars($blockname, $vararray): bool
     {
         if (strstr($blockname, '.')) {
             // Nested block.
@@ -453,7 +453,7 @@ class template
      * If not already done, load the file for the given handle and populate
      * the uncompiled_code[] hash with its code. Do not compile.
      */
-    public function loadfile($handle)
+    public function loadfile($handle): bool
     {
         // If cached file exists do nothing - it will be included via include()
         if (!empty($this->files_cache[$handle])) {
@@ -488,7 +488,7 @@ class template
      * It's ready to be inserted into an "echo" line in one of the templates.
      * NOTE: expects a trailing "." on the namespace.
      */
-    public function generate_block_varref($namespace, $varname)
+    public function generate_block_varref($namespace, $varname): string
     {
         // Strip the trailing period.
         $namespace = substr($namespace, 0, strlen($namespace) - 1);
@@ -525,7 +525,7 @@ class template
         return '$' . $blocks[$blockcount - 1] . '_item[\'' . $blocks[$blockcount] . '.\']';
     }
 
-    public function compile_code($filename, $code)
+    public function compile_code($filename, $code): string
     {
         //	$filename - file to load code from. used if $code is empty
         //	$code - tpl code
@@ -846,7 +846,7 @@ class template
     // Compile IF tags - much of this is from Smarty with
     // some adaptions for our block level methods
     //
-    public function compile_tag_if($tag_args, $elseif)
+    public function compile_tag_if($tag_args, $elseif): string
     {
         /* Tokenize args for 'if' tag. */
         preg_match_all('/(?:
@@ -1014,7 +1014,7 @@ class template
     /**
      * Compiles code and writes to cache if needed
      */
-    public function compile2($code, $handle, $cache_file)
+    public function compile2($code, $handle, $cache_file): string
     {
         $code = $this->compile_code('', $code, XS_USE_ISSET);
         if ($cache_file && !empty($this->use_cache) && !empty($this->auto_compile)) {
@@ -1035,7 +1035,7 @@ class template
      * for use in assign_code_from_handle().
      * This function isn't used and kept only for compatibility with original template.php
      */
-    public function compile($code, $do_not_echo = false, $retvar = '')
+    public function compile($code, $do_not_echo = false, $retvar = ''): string
     {
         $code = ' ?' . '>' . $this->compile_code('', $code, true) . '<' . "?php \n";
         if ($do_not_echo) {
@@ -1071,7 +1071,7 @@ class template
         }
     }
 
-    public function lang_error($var)
+    public function lang_error($var): string
     {
         trigger_error(basename($this->cur_tpl) . " : undefined language variable {L_{$var}}", E_USER_WARNING);
         return "Undefined: {L_{$var}}";

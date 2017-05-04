@@ -176,7 +176,7 @@ class datastore_common
         }
     }
 
-    public function debug_find_source($mode = '')
+    public function debug_find_source($mode = ''): string
     {
         foreach (debug_backtrace() as $trace) {
             if ($trace['file'] !== __FILE__) {

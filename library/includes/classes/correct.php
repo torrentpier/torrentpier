@@ -2926,7 +2926,7 @@ class Text_LangCorrect
                                       ~sxSX', array($this, '_entry'), $s);
     }
 
-    private function _entry(array &$a)
+    private function _entry(array &$a): string
     {
         $entry =& $a[0];
         $s = strtr($entry, $this->table[0]);
@@ -3079,13 +3079,13 @@ class Text_LangCorrect
         return $word;
     }
 
-    private function _strtr(array $a)
+    private function _strtr(array $a): string
     {
         $word =& $a[0];
         return strtr($word, $this->is_flip ? $this->table_flip[$this->method] : $this->table[$this->method]);
     }
 
-    private function _is_mixed($word)
+    private function _is_mixed($word): bool
     {
         return preg_match('/(?:' . $this->en . ')/sxSX', $word) &&
             preg_match('/(?:' . $this->tt_f . ')/sxSX', $word);
@@ -3135,7 +3135,7 @@ class Text_LangCorrect
     }
 
     #анализ на основе N-грамм русского и английского языка
-    private function _bigram_exists($word, $lang)
+    private function _bigram_exists($word, $lang): bool
     {
         $word = ($lang === 'en') ? strtolower($word) : UTF8::lowercase($word);
 

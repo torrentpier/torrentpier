@@ -152,7 +152,7 @@ class TorrentFileList
         }
     }
 
-    private function build_file_item($name, $length)
+    private function build_file_item($name, $length): string
     {
         global $bb_cfg, $images, $lang;
 

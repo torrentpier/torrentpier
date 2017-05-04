@@ -2584,7 +2584,7 @@ class utf8
      * @param   array|scalar|null $data
      * @return  bool
      */
-    public static function is_ascii($data)
+    public static function is_ascii($data): bool
     {
         if (!ReflectionTypeHint::isValid()) {
             return false;
@@ -2623,7 +2623,7 @@ class utf8
      * @param   bool $is_strict strict the range of ASCII?
      * @return  bool
      */
-    public static function is_utf8($data, $is_strict = true)
+    public static function is_utf8($data, $is_strict = true): bool
     {
         if (!ReflectionTypeHint::isValid()) {
             return false;
@@ -2665,7 +2665,7 @@ class utf8
      * @param   bool $is_strict строгая проверка диапазона ASCII?
      * @return  bool
      */
-    public static function check($s, $is_strict = true)
+    public static function check($s, $is_strict = true): bool
     {
         if (!ReflectionTypeHint::isValid()) {
             return false;
@@ -2734,7 +2734,7 @@ class utf8
      * @return  bool               Возвращает TRUE, если все символы из текста принадлежат указанным диапазонам
      *                             и FALSE в противном случае или для разбитого UTF-8.
      */
-    public static function blocks_check($data, $blocks)
+    public static function blocks_check($data, $blocks): bool
     {
         if (!ReflectionTypeHint::isValid()) {
             return false;
@@ -2825,7 +2825,7 @@ class utf8
      * @return  bool                 Возвращает TRUE, если все значения элементов массивов в кодировке UTF-8
      *                               и FALSE + E_USER_WARNING в противном случае.
      */
-    public static function autoconvert_request($is_hex2bin = false, $charset = 'cp1251')
+    public static function autoconvert_request($is_hex2bin = false, $charset = 'cp1251'): bool
     {
         if (!ReflectionTypeHint::isValid()) {
             return false;
@@ -4179,7 +4179,7 @@ class utf8
         return preg_replace('~[' . $charlist_re . ']+$~suSX', '', $s);
     }
 
-    private static function _preg_quote_class($charlist, $delimiter = null)
+    private static function _preg_quote_class($charlist, $delimiter = null): string
     {
         #return preg_quote($charlist, $delimiter); #DEPRECATED
         $quote_table = array(
@@ -4430,7 +4430,7 @@ class utf8
         return strtr($s, $table);
     }
 
-    public static function tests()
+    public static function tests(): bool
     {
         assert_options(ASSERT_ACTIVE, true);
         assert_options(ASSERT_BAIL, true);

@@ -519,7 +519,7 @@ class bbcode
      * bbcode2html
      * $text должен быть уже обработан htmlCHR($text, false, ENT_NOQUOTES);
      */
-    public function bbcode2html($text)
+    public function bbcode2html($text): string
     {
         global $bb_cfg;
 
@@ -636,7 +636,7 @@ class bbcode
     /**
      * [code] callback
      */
-    public function code_callback($m)
+    public function code_callback($m): string
     {
         $code = trim($m[2]);
         $code = str_replace('  ', '&nbsp; ', $code);
@@ -649,7 +649,7 @@ class bbcode
     /**
      * [url] callback
      */
-    public function url_callback($m)
+    public function url_callback($m): string
     {
         global $bb_cfg;
 
@@ -672,7 +672,7 @@ class bbcode
     /**
      * Escape tags inside tiltes in [quote="tilte"]
      */
-    public function escape_tiltes_callback($m)
+    public function escape_tiltes_callback($m): string
     {
         $tilte = substr($m[3], 0, 250);
         $tilte = str_replace(array('[', ']', ':', ')', '"'), array('&#91;', '&#93;', '&#58;', '&#41;', '&#34;'), $tilte);
@@ -714,7 +714,7 @@ class bbcode
     /**
      * make_url_clickable_callback
      */
-    public function make_url_clickable_callback($m)
+    public function make_url_clickable_callback($m): string
     {
         global $bb_cfg;
 
@@ -762,7 +762,7 @@ class bbcode
     /**
      * tidy
      */
-    public function tidy($text)
+    public function tidy($text): string
     {
         $text = tidy_repair_string($text, $this->tidy_cfg, 'utf8');
         return $text;
@@ -808,7 +808,7 @@ class words_rate
     /**
      * возвращает "показатель полезности" сообщения используемый для автоудаления коротких сообщений типа "спасибо", "круто" и т.д.
      */
-    public function get_words_rate($text)
+    public function get_words_rate($text): int
     {
         $this->words_rate = 127;     // максимальное значение по умолчанию
         $this->deleted_words = array();

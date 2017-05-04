@@ -247,7 +247,7 @@ class ajax_common
     /**
      *  OB Handler
      */
-    public function ob_handler($contents)
+    public function ob_handler($contents): string
     {
         if (DBG_USER) {
             if ($contents) {

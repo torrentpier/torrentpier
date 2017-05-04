@@ -41,7 +41,7 @@ class sitemap
         $this->home = make_url();
     }
 
-    public function build_map()
+    public function build_map(): string
     {
         $map = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<urlset xmlns=\"http://www.sitemaps.org/schemas/sitemap/0.9\">\n";
         $map .= $this->get_static();
@@ -52,7 +52,7 @@ class sitemap
         return $map;
     }
 
-    public function build_index($count)
+    public function build_index($count): string
     {
         $lm = date('c');
         $map = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<sitemapindex xmlns=\"http://www.sitemaps.org/schemas/sitemap/0.9\">\n";
@@ -66,7 +66,7 @@ class sitemap
         return $map;
     }
 
-    public function build_stat()
+    public function build_stat(): string
     {
         $map = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<urlset xmlns=\"http://www.sitemaps.org/schemas/sitemap/0.9\">\n";
         $map .= $this->get_static();
@@ -76,7 +76,7 @@ class sitemap
         return $map;
     }
 
-    public function build_map_topic($n)
+    public function build_map_topic($n): string
     {
         $map = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<urlset xmlns=\"http://www.sitemaps.org/schemas/sitemap/0.9\">\n";
         $map .= $this->get_topic($n);
@@ -85,7 +85,7 @@ class sitemap
         return $map;
     }
 
-    public function get_forum()
+    public function get_forum(): string
     {
         global $datastore;
 
@@ -115,7 +115,7 @@ class sitemap
         return $xml;
     }
 
-    public function get_topic($page = false)
+    public function get_topic($page = false): string
     {
         global $datastore;
 
@@ -159,7 +159,7 @@ class sitemap
         return $xml;
     }
 
-    public function get_static()
+    public function get_static(): string
     {
         global $bb_cfg;
 
@@ -183,7 +183,7 @@ class sitemap
         return $xml;
     }
 
-    public function get_xml($loc, $lm)
+    public function get_xml($loc, $lm): string
     {
         $xml = "\t<url>\n";
         $xml .= "\t\t<loc>$loc</loc>\n";

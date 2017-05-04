@@ -117,7 +117,7 @@ class datastore_redis extends datastore_common
         }
     }
 
-    public function is_installed()
+    public function is_installed(): bool
     {
         return class_exists('Redis');
     }

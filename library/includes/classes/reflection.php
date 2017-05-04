@@ -84,7 +84,7 @@ class ReflectionTypeHint
     {
     }
 
-    public static function isValid()
+    public static function isValid(): bool
     {
         if (!assert_options(ASSERT_ACTIVE)) {
             return true;
@@ -152,7 +152,7 @@ class ReflectionTypeHint
      * @param   int|null $return_frame
      * @return  array
      */
-    public static function debugBacktrace($re_ignore = null, $return_frame = null)
+    public static function debugBacktrace($re_ignore = null, $return_frame = null): array
     {
         $trace = debug_backtrace();
 
@@ -206,7 +206,7 @@ class ReflectionTypeHint
      * @param   mixed $value
      * @return  bool
      */
-    public static function checkValueTypes(array $types, $value)
+    public static function checkValueTypes(array $types, $value): bool
     {
         foreach ($types as $type) {
             $type = strtolower($type);

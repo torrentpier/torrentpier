@@ -86,7 +86,7 @@ class cache_memcache extends cache_common
         return ($this->connected) ? $this->memcache->get($this->prefix . $name) : false;
     }
 
-    public function set($name, $value, $ttl = 0)
+    public function set($name, $value, $ttl = 0): bool
     {
         if (!$this->connected) {
             $this->connect();
@@ -120,7 +120,7 @@ class cache_memcache extends cache_common
         return ($this->connected) ? $this->memcache->flush() : false;
     }
 
-    public function is_installed()
+    public function is_installed(): bool
     {
         return class_exists('Memcache');
     }

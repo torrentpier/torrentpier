@@ -209,7 +209,7 @@ class attach_parent
      * Handle all modes... (intern)
      * @private
      */
-    public function handle_attachments($mode)
+    public function handle_attachments($mode): bool
     {
         global $is_auth, $attach_config, $refresh, $post_id, $submit, $preview, $error, $error_msg, $lang;
 

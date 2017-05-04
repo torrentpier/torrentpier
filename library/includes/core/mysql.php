@@ -205,7 +205,7 @@ class sql_db
      *
      * @return int
      */
-    public function affected_rows()
+    public function affected_rows(): int
     {
         return mysqli_affected_rows($this->link);
     }
@@ -314,7 +314,7 @@ class sql_db
      *
      * @return array
      */
-    public function sql_fetchrowset($result, $field_name = '')
+    public function sql_fetchrowset($result, $field_name = ''): array
     {
         $rowset = [];
 
@@ -333,7 +333,7 @@ class sql_db
      *
      * @return array
      */
-    public function fetch_rowset($query, $field_name = '')
+    public function fetch_rowset($query, $field_name = ''): array
     {
         if (!$result = $this->sql_query($query)) {
             $this->trigger_error();
@@ -350,7 +350,7 @@ class sql_db
      *
      * @return array
      */
-    public function fetch_all($query, $field_name = '')
+    public function fetch_all($query, $field_name = ''): array
     {
         if (!$result = $this->sql_query($query)) {
             $this->trigger_error();
@@ -426,7 +426,7 @@ class sql_db
      *
      * @return string
      */
-    public function escape_string($str)
+    public function escape_string($str): string
     {
         if (!$this->link) {
             $this->init();
@@ -446,7 +446,7 @@ class sql_db
      *
      * @return string
      */
-    public function build_array($query_type, $input_ary, $data_already_escaped = false, $check_data_type_in_escape = true)
+    public function build_array($query_type, $input_ary, $data_already_escaped = false, $check_data_type_in_escape = true): string
     {
         $fields = $values = $ary = $query = [];
         $dont_escape = $data_already_escaped;
@@ -501,7 +501,7 @@ class sql_db
     /**
      * @return array
      */
-    public function get_empty_sql_array()
+    public function get_empty_sql_array(): array
     {
         return [
             'SELECT' => [],
@@ -521,7 +521,7 @@ class sql_db
      * @param $sql_ary
      * @return string
      */
-    public function build_sql($sql_ary)
+    public function build_sql($sql_ary): string
     {
         $sql = '';
         array_deep($sql_ary, 'array_unique', false, true);
@@ -655,7 +655,7 @@ class sql_db
      *
      * @return bool
      */
-    public function unlock()
+    public function unlock(): bool
     {
         if ($this->locked && $this->sql_query("UNLOCK TABLES")) {
             $this->locked = false;
@@ -725,7 +725,7 @@ class sql_db
      *
      * @return string
      */
-    public function get_lock_name($name)
+    public function get_lock_name($name): string
     {
         if (!$this->selected_db) {
             $this->init();
@@ -869,7 +869,7 @@ class sql_db
      *
      * @return string
      */
-    public function debug_find_source($mode = '')
+    public function debug_find_source($mode = ''): string
     {
         foreach (debug_backtrace() as $trace) {
             if (!empty($trace['file']) && $trace['file'] !== __FILE__) {

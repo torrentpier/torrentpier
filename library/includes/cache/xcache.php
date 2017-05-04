@@ -53,7 +53,7 @@ class cache_xcache extends cache_common
         return xcache_get($this->prefix . $name);
     }
 
-    public function set($name, $value, $ttl = 0)
+    public function set($name, $value, $ttl = 0): bool
     {
         $this->cur_query = "cache->set('$name')";
         $this->debug('start');
@@ -81,7 +81,7 @@ class cache_xcache extends cache_common
         return;
     }
 
-    public function is_installed()
+    public function is_installed(): bool
     {
         return function_exists('xcache_get');
     }

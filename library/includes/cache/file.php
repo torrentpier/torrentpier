@@ -58,7 +58,7 @@ class cache_file extends cache_common
         return (!empty($filecache['value'])) ? $filecache['value'] : false;
     }
 
-    public function set($name, $value, $ttl = 86400)
+    public function set($name, $value, $ttl = 86400): bool
     {
         if (!function_exists('var_export')) {
             return false;
@@ -86,7 +86,7 @@ class cache_file extends cache_common
         return (bool)file_write($filecache, $filename, false, true, true);
     }
 
-    public function rm($name = '')
+    public function rm($name = ''): bool
     {
         $clear = false;
         if ($name) {
@@ -119,7 +119,7 @@ class cache_file extends cache_common
         return $clear;
     }
 
-    public function gc($expire_time = TIMENOW)
+    public function gc($expire_time = TIMENOW): bool
     {
         $clear = false;
 

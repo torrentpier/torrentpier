@@ -123,7 +123,7 @@ class cache_redis extends cache_common
         return ($this->connected) ? $this->redis->flushdb() : false;
     }
 
-    public function is_installed()
+    public function is_installed(): bool
     {
         return class_exists('Redis');
     }

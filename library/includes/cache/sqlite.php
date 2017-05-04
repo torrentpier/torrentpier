@@ -95,7 +95,7 @@ class cache_sqlite extends cache_common
         return isset($cached_items[$name]) ? $cached_items[$name] : false;
     }
 
-    public function set($name, $value, $ttl = 604800)
+    public function set($name, $value, $ttl = 604800): bool
     {
         $this->db->shard($this->prefix . $name);
         $name_sql = SQLite3::escapeString($this->prefix . $name);
@@ -106,7 +106,7 @@ class cache_sqlite extends cache_common
         return (bool)$result;
     }
 
-    public function rm($name = '')
+    public function rm($name = ''): bool
     {
         if ($name) {
             $this->db->shard($this->prefix . $name);
@@ -117,7 +117,7 @@ class cache_sqlite extends cache_common
         return (bool)$result;
     }
 
-    public function gc($expire_time = TIMENOW)
+    public function gc($expire_time = TIMENOW): int
     {
         $result = $this->db->query("DELETE FROM " . $this->cfg['table_name'] . " WHERE cache_expire_time < $expire_time");
         return ($result) ? $this->db->changes() : 0;
@@ -238,13 +238,13 @@ class sqlite_common extends cache_common
         return $result;
     }
 
-    public function fetch_row($query)
+    public function fetch_row($query): bool
     {
         $result = $this->query($query);
         return is_resource($result) ? $result->fetchArray(SQLITE3_ASSOC) : false;
     }
 
-    public function fetch_rowset($query)
+    public function fetch_rowset($query): array
     {
         $result = $this->query($query);
         $rowset = array();
@@ -254,22 +254,22 @@ class sqlite_common extends cache_common
         return $rowset;
     }
 
-    public function changes()
+    public function changes(): int
     {
         return is_resource($this->dbh) ? $this->dbh->changes() : 0;
     }
 
-    public function escape($str)
+    public function escape($str): string
     {
         return SQLite3::escapeString($str);
     }
 
-    public function get_error_msg()
+    public function get_error_msg(): string
     {
         return 'SQLite error #' . ($err_code = $this->dbh->lastErrorCode()) . ': ' . $this->dbh->lastErrorMsg();
     }
 
-    public function rm($name = '')
+    public function rm($name = ''): bool
     {
         if ($name) {
             $this->db->shard($this->prefix . $name);
@@ -280,7 +280,7 @@ class sqlite_common extends cache_common
         return (bool)$result;
     }
 
-    public function gc($expire_time = TIMENOW)
+    public function gc($expire_time = TIMENOW): int
     {
         $result = $this->db->query("DELETE FROM " . $this->cfg['table_name'] . " WHERE cache_expire_time < $expire_time");
         return ($result) ? sqlite_changes($this->db->dbh) : 0;

@@ -123,7 +123,7 @@ class datastore_memcache extends datastore_common
         }
     }
 
-    public function is_installed()
+    public function is_installed(): bool
     {
         return class_exists('Memcache');
     }

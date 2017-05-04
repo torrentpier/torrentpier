@@ -59,7 +59,7 @@ class upload_common
         8 => 'tiff',
     );
 
-    public function init($cfg = array(), $post_params = array(), $uploaded_only = true)
+    public function init($cfg = array(), $post_params = array(), $uploaded_only = true): bool
     {
         global $bb_cfg, $lang;
 
@@ -145,7 +145,7 @@ class upload_common
         }
     }
 
-    public function _move($file_path)
+    public function _move($file_path): bool
     {
         $dir = dirname($file_path);
         if (!file_exists($dir)) {

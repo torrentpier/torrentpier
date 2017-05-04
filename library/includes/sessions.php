@@ -220,7 +220,7 @@ class user_common
     /**
      *  Create new session for the given user
      */
-    public function session_create($userdata, $auto_created = false)
+    public function session_create($userdata, $auto_created = false): array
     {
         global $bb_cfg;
 
@@ -364,7 +364,7 @@ class user_common
     /**
      *  Login
      */
-    public function login($args, $mod_admin_login = false)
+    public function login($args, $mod_admin_login = false): array
     {
         $username = !empty($args['login_username']) ? clean_username($args['login_username']) : '';
         $password = !empty($args['login_password']) ? $args['login_password'] : '';
@@ -630,7 +630,7 @@ class user_common
     /**
      *  Get not auth forums
      */
-    public function get_not_auth_forums($auth_type)
+    public function get_not_auth_forums($auth_type): string
     {
         global $datastore;
 

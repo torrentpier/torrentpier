@@ -111,7 +111,7 @@ class emailer
         $this->extra_headers .= trim($headers) . "\n";
     }
 
-    public function use_template($template_file, $template_lang = '')
+    public function use_template($template_file, $template_lang = ''): bool
     {
         global $bb_cfg;
 
@@ -150,7 +150,7 @@ class emailer
     }
 
     // Send the mail out to the recipients set previously in var $this->address
-    public function send($email_format = 'text')
+    public function send($email_format = 'text'): bool
     {
         global $bb_cfg, $userdata;
 
@@ -221,7 +221,7 @@ class emailer
         return true;
     }
 
-    public function encode($str)
+    public function encode($str): string
     {
         if ($this->encoding == '') {
             return $str;

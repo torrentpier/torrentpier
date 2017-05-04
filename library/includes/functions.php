@@ -152,7 +152,7 @@ class ads_common
     /**
      *  Get ads to show for each block
      */
-    public function get($block_types)
+    public function get($block_types): array
     {
         $ads = array();
 
@@ -188,7 +188,7 @@ class ads_common
     /**
      *  Get block_ids for specified block_types
      */
-    public function get_block_ids($block_types)
+    public function get_block_ids($block_types): array
     {
         $block_ids = array();
 
@@ -204,7 +204,7 @@ class ads_common
     /**
      *  Get ad_ids for specified blocks
      */
-    public function get_ad_ids($block_ids)
+    public function get_ad_ids($block_ids): array
     {
         $ad_ids = array();
 
@@ -539,7 +539,7 @@ class Date_Delta
     }
 
     // Makes the spellable phrase.
-    public function spellDelta($first, $last, $from = 'auto')
+    public function spellDelta($first, $last, $from = 'auto'): string
     {
         if ($last < $first) {
             $old_first = $first;
@@ -631,7 +631,7 @@ class Date_Delta
     }
 
     // Returns the length (in days) of the specified month.
-    public function monthLength($year, $mon)
+    public function monthLength($year, $mon): int
     {
         $l = 28;
         while (checkdate($mon, $l + 1, $year)) {
@@ -680,7 +680,7 @@ class html_common
     public $max_length = HTML_SELECT_MAX_LENGTH;
     public $selected = array();
 
-    public function build_select($name, $params, $selected = null, $max_length = HTML_SELECT_MAX_LENGTH, $multiple_size = null, $js = '')
+    public function build_select($name, $params, $selected = null, $max_length = HTML_SELECT_MAX_LENGTH, $multiple_size = null, $js = ''): string
     {
         if (empty($params)) {
             return '';
@@ -738,7 +738,7 @@ class html_common
         }
     }
 
-    public function array2html($array, $ul = 'ul', $li = 'li')
+    public function array2html($array, $ul = 'ul', $li = 'li'): string
     {
         $this->out = '';
         $this->_array2html_rec($array, $ul, $li);
@@ -759,7 +759,7 @@ class html_common
     }
 
     // all arguments should be already htmlspecialchar()d (if needed)
-    public function build_checkbox($name, $title, $checked = false, $disabled = false, $class = null, $id = null, $value = 1)
+    public function build_checkbox($name, $title, $checked = false, $disabled = false, $class = null, $id = null, $value = 1): string
     {
         $name = ' name="' . $name . '" ';
         $value = ' value="' . $value . '" ';
