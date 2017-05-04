@@ -220,7 +220,7 @@ if ($check_upload) {
     }
 
     if (!$error) {
-        if (!($fp = @fopen($upload_dir . '/0_000000.000', 'w'))) {
+        if (!($fp = @fopen($upload_dir . '/0_000000.000', 'wb'))) {
             $error = true;
             $error_msg = sprintf($lang['DIRECTORY_NOT_WRITEABLE'], $attach_config['upload_dir']) . '<br />';
         } else {
@@ -375,7 +375,7 @@ if ($check_image_cat) {
     }
 
     if (!$error) {
-        if (!($fp = @fopen($upload_dir . '/0_000000.000', 'w'))) {
+        if (!($fp = @fopen($upload_dir . '/0_000000.000', 'wb'))) {
             $error = true;
             $error_msg = sprintf($lang['DIRECTORY_NOT_WRITEABLE'], $upload_dir) . '<br />';
         } else {
