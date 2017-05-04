@@ -83,7 +83,7 @@ function init_display_template($template_var, $replacement, $filename = 'viewtop
     }
 
     $complete_filename = $filename;
-    if (substr($complete_filename, 0, 1) != '/') {
+    if ($complete_filename[0] != '/') {
         $complete_filename = $template->root . '/' . $complete_filename;
     }
 
