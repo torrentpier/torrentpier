@@ -42,7 +42,7 @@ $page_cfg['load_tpl_vars'] = array(
 
 // Init request vars
 $forum_id = (int)request_var('f', '');
-$start = abs(intval(request_var('start', '')));
+$start = abs((int)request_var('start', ''));
 $mark_read = (request_var('mark', '') === 'topics');
 
 $anon = GUEST_UID;
@@ -233,7 +233,7 @@ $topics_per_page = $bb_cfg['topics_per_page'];
 $select_tpp = '';
 
 if ($is_auth['auth_mod']) {
-    if ($req_tpp = abs(intval(@$_REQUEST['tpp'])) and in_array($req_tpp, $bb_cfg['allowed_topics_per_page'])) {
+    if ($req_tpp = abs((int)(@$_REQUEST['tpp'])) and in_array($req_tpp, $bb_cfg['allowed_topics_per_page'])) {
         $topics_per_page = $req_tpp;
     }
 
@@ -259,7 +259,7 @@ $sel_previous_days = array(
 );
 
 if (!empty($_REQUEST['topicdays'])) {
-    if ($req_topic_days = abs(intval($_REQUEST['topicdays'])) and isset($sel_previous_days[$req_topic_days])) {
+    if ($req_topic_days = abs((int)$_REQUEST['topicdays']) and isset($sel_previous_days[$req_topic_days])) {
         $sql = "
 			SELECT COUNT(*) AS forum_topics
 			FROM " . BB_TOPICS . "

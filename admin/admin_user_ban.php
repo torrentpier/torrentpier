@@ -203,7 +203,7 @@ if (isset($_POST['submit'])) {
 
         for ($i = 0; $i < count($user_list); $i++) {
             if ($user_list[$i] != -1) {
-                $where_sql .= (($where_sql != '') ? ', ' : '') . intval($user_list[$i]);
+                $where_sql .= (($where_sql != '') ? ', ' : '') . (int)$user_list[$i];
             }
         }
     }

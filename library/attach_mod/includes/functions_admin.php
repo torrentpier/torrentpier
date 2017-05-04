@@ -122,8 +122,8 @@ function sort_multi_array($sort_array, $key, $sort_order, $pre_string_sort = 0)
             $switch = false;
             if (!$string_sort) {
                 if (
-                    ($sort_order == 'DESC' && intval(@$sort_array[$j][$key]) < intval(@$sort_array[$j + 1][$key])) ||
-                    ($sort_order == 'ASC' && intval(@$sort_array[$j][$key]) > intval(@$sort_array[$j + 1][$key]))
+                    ($sort_order == 'DESC' && (int)(@$sort_array[$j][$key]) < (int)(@$sort_array[$j + 1][$key])) ||
+                    ($sort_order == 'ASC' && (int)(@$sort_array[$j][$key]) > (int)(@$sort_array[$j + 1][$key]))
                 ) {
                     $switch = true;
                 }
@@ -209,7 +209,7 @@ function search_attachments($order_by, &$total_rows)
         $matching_userids = '';
         if ($row = DB()->sql_fetchrow($result)) {
             do {
-                $matching_userids .= (($matching_userids != '') ? ', ' : '') . intval($row['user_id']);
+                $matching_userids .= (($matching_userids != '') ? ', ' : '') . (int)$row['user_id'];
             } while ($row = DB()->sql_fetchrow($result));
 
             DB()->sql_freeresult($result);
@@ -260,7 +260,7 @@ function search_attachments($order_by, &$total_rows)
     // Search Forum
     $search_forum = get_var('search_forum', '');
     if ($search_forum) {
-        $where_sql[] = ' (p.forum_id = ' . intval($search_forum) . ') ';
+        $where_sql[] = ' (p.forum_id = ' . (int)$search_forum . ') ';
     }
 
     $sql = 'SELECT a.*, t.post_id, p.post_time, p.topic_id

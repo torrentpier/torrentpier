@@ -85,7 +85,7 @@ if ($submit && $mode == 'extensions') {
 
     for ($i = 0; $i < count($extension_change_list); $i++) {
         $extensions['_' . $extension_change_list[$i]]['comment'] = $extension_explain_list[$i];
-        $extensions['_' . $extension_change_list[$i]]['group_id'] = intval($group_select_list[$i]);
+        $extensions['_' . $extension_change_list[$i]]['group_id'] = (int)$group_select_list[$i];
     }
 
     $sql = 'SELECT * FROM ' . BB_EXTENSIONS . ' ORDER BY ext_id';
@@ -99,7 +99,7 @@ if ($submit && $mode == 'extensions') {
 
     if ($num_rows > 0) {
         for ($i = 0; $i < count($extension_row); $i++) {
-            if ($extension_row[$i]['comment'] != $extensions['_' . $extension_row[$i]['ext_id']]['comment'] || intval($extension_row[$i]['group_id']) != intval($extensions['_' . $extension_row[$i]['ext_id']]['group_id'])) {
+            if ($extension_row[$i]['comment'] != $extensions['_' . $extension_row[$i]['ext_id']]['comment'] || (int)$extension_row[$i]['group_id'] != (int)$extensions['_' . $extension_row[$i]['ext_id']]['group_id']) {
                 $sql_ary = array(
                     'comment' => (string)$extensions['_' . $extension_row[$i]['ext_id']]['comment'],
                     'group_id' => (int)$extensions['_' . $extension_row[$i]['ext_id']]['group_id']
@@ -489,7 +489,7 @@ if (@$add_forum && $e_mode == 'perm' && $group) {
     if (!$add_all_forums) {
         $sql = 'SELECT forum_permissions
 			FROM ' . BB_EXTENSION_GROUPS . '
-			WHERE group_id = ' . intval($group) . '
+			WHERE group_id = ' . (int)$group . '
 			LIMIT 1';
 
         if (!($result = DB()->sql_query($sql))) {
@@ -529,7 +529,7 @@ if (@$delete_forum && $e_mode == 'perm' && $group) {
     // Get the current Forums
     $sql = 'SELECT forum_permissions
 		FROM ' . BB_EXTENSION_GROUPS . '
-		WHERE group_id = ' . intval($group) . '
+		WHERE group_id = ' . (int)$group . '
 		LIMIT 1';
 
     if (!($result = DB()->sql_query($sql))) {
@@ -562,7 +562,7 @@ if (@$delete_forum && $e_mode == 'perm' && $group) {
 if ($e_mode == 'perm' && $group) {
     $sql = 'SELECT group_name, forum_permissions
 		FROM ' . BB_EXTENSION_GROUPS . '
-		WHERE group_id = ' . intval($group) . '
+		WHERE group_id = ' . (int)$group . '
 		LIMIT 1';
 
     if (!($result = DB()->sql_query($sql))) {
@@ -618,7 +618,7 @@ if ($e_mode == 'perm' && $group) {
     }
 
     while ($row = DB()->sql_fetchrow($result)) {
-        $forum_option_values[intval($row['forum_id'])] = $row['forum_name'];
+        $forum_option_values[(int)$row['forum_id']] = $row['forum_name'];
     }
     DB()->sql_freeresult($result);
 

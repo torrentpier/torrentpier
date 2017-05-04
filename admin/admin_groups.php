@@ -30,8 +30,8 @@ if (!empty($setmodules)) {
 require __DIR__ . '/pagestart.php';
 require INC_DIR . '/functions_group.php';
 
-$group_id = isset($_REQUEST[POST_GROUPS_URL]) ? intval($_REQUEST[POST_GROUPS_URL]) : 0;
-$mode = isset($_REQUEST['mode']) ? strval($_REQUEST['mode']) : '';
+$group_id = isset($_REQUEST[POST_GROUPS_URL]) ? (int)$_REQUEST[POST_GROUPS_URL] : 0;
+$mode = isset($_REQUEST['mode']) ? (string)$_REQUEST['mode'] : '';
 
 attachment_quota_settings('group', isset($_POST['group_update']), $mode);
 
@@ -100,8 +100,8 @@ if (!empty($_POST['edit']) || !empty($_POST['new'])) {
 
         bb_die($message);
     } else {
-        $group_type = isset($_POST['group_type']) ? intval($_POST['group_type']) : GROUP_OPEN;
-        $release_group = isset($_POST['release_group']) ? intval($_POST['release_group']) : 0;
+        $group_type = isset($_POST['group_type']) ? (int)$_POST['group_type'] : GROUP_OPEN;
+        $release_group = isset($_POST['release_group']) ? (int)$_POST['release_group'] : 0;
         $group_name = isset($_POST['group_name']) ? trim($_POST['group_name']) : '';
         $group_desc = isset($_POST['group_description']) ? trim($_POST['group_description']) : '';
         $group_moderator = $_POST['username'] ?? '';

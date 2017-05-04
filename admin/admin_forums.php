@@ -85,7 +85,7 @@ if ($mode) {
                 $newmode = 'modforum';
                 $buttonvalue = $lang['UPDATE'];
 
-                $forum_id = intval($_GET[POST_FORUM_URL]);
+                $forum_id = (int)$_GET[POST_FORUM_URL];
 
                 $row = get_info('forum', $forum_id);
 
@@ -121,7 +121,7 @@ if ($mode) {
             }
 
             if (isset($_REQUEST['forum_parent'])) {
-                $forum_parent = intval($_REQUEST['forum_parent']);
+                $forum_parent = (int)$_REQUEST['forum_parent'];
 
                 if ($parent = get_forum_data($forum_parent)) {
                     $cat_id = $parent['cat_id'];
@@ -179,18 +179,18 @@ if ($mode) {
             //
             // Create a forum in the DB
             //
-            $cat_id = intval($_POST[POST_CAT_URL]);
+            $cat_id = (int)$_POST[POST_CAT_URL];
             $forum_name = (string)$_POST['forumname'];
             $forum_desc = (string)$_POST['forumdesc'];
-            $forum_status = intval($_POST['forumstatus']);
+            $forum_status = (int)$_POST['forumstatus'];
 
-            $prune_days = intval($_POST['prune_days']);
+            $prune_days = (int)$_POST['prune_days'];
 
-            $forum_parent = ($_POST['forum_parent'] != -1) ? intval($_POST['forum_parent']) : 0;
-            $show_on_index = ($forum_parent) ? intval($_POST['show_on_index']) : 1;
+            $forum_parent = ($_POST['forum_parent'] != -1) ? (int)$_POST['forum_parent'] : 0;
+            $show_on_index = ($forum_parent) ? (int)$_POST['show_on_index'] : 1;
 
-            $forum_display_sort = intval($_POST['forum_display_sort']);
-            $forum_display_order = intval($_POST['forum_display_order']);
+            $forum_display_sort = (int)$_POST['forum_display_sort'];
+            $forum_display_order = (int)$_POST['forum_display_order'];
 
             $forum_tpl_id = (int)$_POST['forum_tpl_select'];
             $allow_reg_tracker = (int)$_POST['allow_reg_tracker'];
@@ -242,18 +242,18 @@ if ($mode) {
             //
             // Modify a forum in the DB
             //
-            $cat_id = intval($_POST[POST_CAT_URL]);
-            $forum_id = intval($_POST[POST_FORUM_URL]);
+            $cat_id = (int)$_POST[POST_CAT_URL];
+            $forum_id = (int)$_POST[POST_FORUM_URL];
             $forum_name = (string)$_POST['forumname'];
             $forum_desc = (string)$_POST['forumdesc'];
-            $forum_status = intval($_POST['forumstatus']);
-            $prune_days = intval($_POST['prune_days']);
+            $forum_status = (int)$_POST['forumstatus'];
+            $prune_days = (int)$_POST['prune_days'];
 
-            $forum_parent = ($_POST['forum_parent'] != -1) ? intval($_POST['forum_parent']) : 0;
-            $show_on_index = ($forum_parent) ? intval($_POST['show_on_index']) : 1;
+            $forum_parent = ($_POST['forum_parent'] != -1) ? (int)$_POST['forum_parent'] : 0;
+            $show_on_index = ($forum_parent) ? (int)$_POST['show_on_index'] : 1;
 
-            $forum_display_order = intval($_POST['forum_display_order']);
-            $forum_display_sort = intval($_POST['forum_display_sort']);
+            $forum_display_order = (int)$_POST['forum_display_order'];
+            $forum_display_sort = (int)$_POST['forum_display_sort'];
             $forum_tpl_id = (int)$_POST['forum_tpl_select'];
             $allow_reg_tracker = (int)$_POST['allow_reg_tracker'];
             $allow_porno_topic = (int)$_POST['allow_porno_topic'];
@@ -565,8 +565,8 @@ if ($mode) {
 
         case 'forum_order':
             // Change order of forums
-            $move = intval($_GET['move']);
-            $forum_id = intval($_GET[POST_FORUM_URL]);
+            $move = (int)$_GET['move'];
+            $forum_id = (int)$_GET[POST_FORUM_URL];
 
             $forum_info = get_info('forum', $forum_id);
             renumber_order('forum', $forum_info['cat_id']);
@@ -656,7 +656,7 @@ if ($mode) {
             break;
 
         case 'forum_sync':
-            sync('forum', intval($_GET['f']));
+            sync('forum', (int)$_GET['f']);
             $datastore->update('cat_forums');
             CACHE('bb_cache')->rm();
 
@@ -914,7 +914,7 @@ function get_cat_forums($cat_id = false)
     $forums = array();
     $where_sql = '';
 
-    if ($cat_id = intval($cat_id)) {
+    if ($cat_id = (int)$cat_id) {
         $where_sql = "AND f.cat_id = $cat_id";
     }
 
@@ -1086,7 +1086,7 @@ function get_max_forum_order($cat_id)
 		WHERE cat_id = $cat_id
 	");
 
-    return intval($row['max_forum_order']);
+    return (int)$row['max_forum_order'];
 }
 
 function check_name_dup($mode, $name, $die_on_error = true)

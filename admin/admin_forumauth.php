@@ -89,7 +89,7 @@ if (@$_REQUEST[POST_FORUM_URL]) {
 }
 
 if (isset($_GET['adv'])) {
-    $adv = intval($_GET['adv']);
+    $adv = (int)$_GET['adv'];
 } else {
     unset($adv);
 }
@@ -102,7 +102,7 @@ if (isset($_POST['submit'])) {
 
     if (!empty($forum_id)) {
         if (isset($_POST['simpleauth'])) {
-            $simple_ary = $simple_auth_ary[intval($_POST['simpleauth'])];
+            $simple_ary = $simple_auth_ary[(int)$_POST['simpleauth']];
 
             for ($i = 0; $i < count($simple_ary); $i++) {
                 $sql .= (($sql != '') ? ', ' : '') . $forum_auth_fields[$i] . ' = ' . $simple_ary[$i];
@@ -113,7 +113,7 @@ if (isset($_POST['submit'])) {
             }
         } else {
             for ($i = 0; $i < count($forum_auth_fields); $i++) {
-                $value = intval($_POST[$forum_auth_fields[$i]]);
+                $value = (int)$_POST[$forum_auth_fields[$i]];
 
                 if ($forum_auth_fields[$i] == 'auth_vote') {
                     if ($_POST['auth_vote'] == AUTH_ALL) {

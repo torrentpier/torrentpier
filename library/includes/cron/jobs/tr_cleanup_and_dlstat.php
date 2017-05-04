@@ -81,8 +81,8 @@ DB()->query("
 
 // Clean peers table
 if ($tr_cfg['autoclean']) {
-    $announce_interval = max(intval($bb_cfg['announce_interval']), 60);
-    $expire_factor = max(floatval($tr_cfg['expire_factor']), 1);
+    $announce_interval = max((int)$bb_cfg['announce_interval'], 60);
+    $expire_factor = max((float)$tr_cfg['expire_factor'], 1);
     $peer_expire_time = TIMENOW - floor($announce_interval * $expire_factor);
 
     DB()->query("DELETE FROM " . BB_BT_TRACKER . " WHERE update_time < $peer_expire_time");

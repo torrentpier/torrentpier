@@ -103,7 +103,7 @@ $max_forum_name_len = 60;   // inside forum select box
 $text_match_max_len = 60;
 $poster_name_max_len = 25;
 
-$start = isset($_REQUEST['start']) ? abs(intval($_REQUEST['start'])) : 0;
+$start = isset($_REQUEST['start']) ? abs((int)$_REQUEST['start']) : 0;
 $url = basename(__FILE__);
 
 $anon_id = GUEST_UID;

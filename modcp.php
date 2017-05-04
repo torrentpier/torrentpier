@@ -93,7 +93,7 @@ $forum_id = $_REQUEST['f'] ?? 0;
 $topic_id = $_REQUEST['t'] ?? 0;
 $post_id = $_REQUEST['p'] ?? 0;
 
-$start = isset($_REQUEST['start']) ? abs(intval($_REQUEST['start'])) : 0;
+$start = isset($_REQUEST['start']) ? abs((int)$_REQUEST['start']) : 0;
 $confirmed = isset($_POST['confirm']);
 
 $mode = $topic_title = '';
@@ -398,7 +398,7 @@ switch ($mode) {
 
         if (($split || $delete_posts) && ($posts && $topic_id && $forum_id && $topic_first_post_id) && $confirmed) {
             foreach ($posts as $post_id) {
-                if ($pid = intval($post_id)) {
+                if ($pid = (int)$post_id) {
                     $req_post_id_sql[] = $pid;
                 }
             }
@@ -441,8 +441,8 @@ switch ($mode) {
                 $user_id_sql = '';
                 $post_id_sql = '';
                 do {
-                    $user_id_sql .= (($user_id_sql != '') ? ', ' : '') . intval($row['poster_id']);
-                    $post_id_sql .= (($post_id_sql != '') ? ', ' : '') . intval($row['post_id']);
+                    $user_id_sql .= (($user_id_sql != '') ? ', ' : '') . (int)$row['poster_id'];
+                    $post_id_sql .= (($post_id_sql != '') ? ', ' : '') . (int)$row['post_id'];
                 } while ($row = DB()->sql_fetchrow($result));
 
                 $post_subject = clean_title($_POST['subject']);
@@ -450,7 +450,7 @@ switch ($mode) {
                     bb_die($lang['EMPTY_SUBJECT']);
                 }
 
-                $new_forum_id = intval($_POST['new_forum_id']);
+                $new_forum_id = (int)$_POST['new_forum_id'];
                 $topic_time = TIMENOW;
 
                 $sql = 'SELECT forum_id FROM ' . BB_FORUMS . ' WHERE forum_id = ' . $new_forum_id;

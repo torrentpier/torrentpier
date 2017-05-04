@@ -32,7 +32,7 @@ $page_cfg['use_tablesorter'] = true;
 
 $user->session_start(array('req_login' => true));
 
-$start = abs(intval(request_var('start', 0)));
+$start = abs((int)request_var('start', 0));
 $mode = (string)request_var('mode', 'joined');
 $sort_order = (request_var('order', 'ASC') == 'ASC') ? 'ASC' : 'DESC';
 $username = request_var('username', '');

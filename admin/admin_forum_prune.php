@@ -37,7 +37,7 @@ if (isset($_REQUEST['submit'])) {
     if (!$var =& $_REQUEST['f'] or !$f_selected = get_id_ary($var)) {
         bb_die('Forum not selected');
     }
-    if (!$var =& $_REQUEST['prunedays'] or !$prunedays = abs(intval($var))) {
+    if (!$var =& $_REQUEST['prunedays'] or !$prunedays = abs((int)$var)) {
         bb_die($lang['NOT_DAYS']);
     }
 
