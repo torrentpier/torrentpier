@@ -412,7 +412,7 @@ class sql_db
                 return ($v) ? '1' : '0';
             case is_float($v):
                 return "'$v'";
-            case is_null($v):
+            case null === $v:
                 return 'NULL';
         }
         // if $v has unsuitable type

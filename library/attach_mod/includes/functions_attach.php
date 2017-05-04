@@ -567,7 +567,7 @@ function attach_mod_sql_build_array($query, $assoc_ary = false)
         foreach ($assoc_ary as $key => $var) {
             $fields[] = $key;
 
-            if (is_null($var)) {
+            if (null === $var) {
                 $values[] = 'NULL';
             } elseif (is_string($var)) {
                 $values[] = "'" . attach_mod_sql_escape($var) . "'";
@@ -584,7 +584,7 @@ function attach_mod_sql_build_array($query, $assoc_ary = false)
         foreach ($assoc_ary as $id => $sql_ary) {
             $values = array();
             foreach ($sql_ary as $key => $var) {
-                if (is_null($var)) {
+                if (null === $var) {
                     $values[] = 'NULL';
                 } elseif (is_string($var)) {
                     $values[] = "'" . attach_mod_sql_escape($var) . "'";
@@ -599,7 +599,7 @@ function attach_mod_sql_build_array($query, $assoc_ary = false)
     } elseif ($query == 'UPDATE' || $query == 'SELECT') {
         $values = array();
         foreach ($assoc_ary as $key => $var) {
-            if (is_null($var)) {
+            if (null === $var) {
                 $values[] = "$key = NULL";
             } elseif (is_string($var)) {
                 $values[] = "$key = '" . attach_mod_sql_escape($var) . "'";

@@ -82,7 +82,7 @@ if ($submit && $mode == 'user') {
         $group_id = create_user_group($user_id);
     }
 
-    if (!$group_id || !$user_id || is_null($this_user_level)) {
+    if (!$group_id || !$user_id || null === $this_user_level) {
         trigger_error('data missing', E_USER_ERROR);
     }
 
