@@ -1010,14 +1010,14 @@ class sql_db
                 $dbg = $this->dbg[$id];
 
                 $this->explain_out .= '
-				<table width="98%" cellpadding="0" cellspacing="0" class="bodyline row2 bCenter" style="border-bottom: 0px;">
+				<table width="98%" cellpadding="0" cellspacing="0" class="bodyline row2 bCenter" style="border-bottom: 0;">
 				<tr>
 					<th style="height: 22px; cursor: pointer;" align="left">&nbsp;' . $dbg['src'] . '&nbsp; [' . sprintf('%.4f', $dbg['time']) . ' s]&nbsp; <i>' . $dbg['info'] . '</i></th>
 					<th style="height: 22px; cursor: pointer;" align="right" title="Copy to clipboard" onclick="$.copyToClipboard( $(\'#' . $htid . '\').text() );">' . "$this->db_server.$this->selected_db" . ' :: Query #' . ($this->num_queries + 1) . '&nbsp;</th>
 				</tr>
 				<tr><td colspan="2">' . $this->explain_hold . '</td></tr>
 				</table>
-				<div class="sqlLog"><div id="' . $htid . '" class="sqlLogRow sqlExplain" style="padding: 0px;">' . short_query($dbg['sql'], true) . '&nbsp;&nbsp;</div></div>
+				<div class="sqlLog"><div id="' . $htid . '" class="sqlLogRow sqlExplain" style="padding: 0;">' . short_query($dbg['sql'], true) . '&nbsp;&nbsp;</div></div>
 				<br />';
                 break;
 
