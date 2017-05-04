@@ -174,8 +174,7 @@ if ($mode == 'ip') {
         $is_auth['auth_mod'] = true;
 
         $_POST['insert_bot_msg'] = 1;
-        unset($_POST['topic_id_list']);
-        unset($_POST['move_leave_shadow']);
+        unset($_POST['topic_id_list'], $_POST['move_leave_shadow']);
     }
 }
 
