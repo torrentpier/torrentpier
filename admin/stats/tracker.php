@@ -131,11 +131,11 @@ echo "\n
 	</td></tr>
 \n";
 
-echo "\n<tr><td align=center> peers: in last " . join(' / ', $peers_in_last_minutes) . " min</td>\n";
-echo "\n<td align=center>" . join(' / ', $peers_in_last_min) . "</td></tr>\n";
+echo "\n<tr><td align=center> peers: in last " . implode(' / ', $peers_in_last_minutes) . " min</td>\n";
+echo "\n<td align=center>" . implode(' / ', $peers_in_last_min) . "</td></tr>\n";
 
 echo "\n<tr><td align=center> peers in last $peers_in_last_sec_limit sec <br /> [ per second, DESC order --> ] <br /> last peer: $stat[last_peer_time] seconds ago <br /> " . date("j M H:i:s [T O]") . " </td>\n";
-echo '<td align=center style="font-size: 13px; font-family: \'Courier New\',Courier,monospace;"><pre> ' . join(' ', $peers_in_last_sec) . "</pre></td></tr>\n";
+echo '<td align=center style="font-size: 13px; font-family: \'Courier New\',Courier,monospace;"><pre> ' . implode(' ', $peers_in_last_sec) . "</pre></td></tr>\n";
 
 echo '</table>';
 

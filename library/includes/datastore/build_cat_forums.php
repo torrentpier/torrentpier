@@ -113,9 +113,9 @@ foreach (DB()->fetch_rowset($sql) as $row) {
     $data['c'][$row['cat_id']]['forums'][] = $fid;
 }
 foreach ($data['not_auth_forums'] as $key => $val) {
-    $data['not_auth_forums'][$key] = join(',', $val);
+    $data['not_auth_forums'][$key] = implode(',', $val);
 }
-$data['tracker_forums'] = join(',', $data['tracker_forums']);
+$data['tracker_forums'] = implode(',', $data['tracker_forums']);
 
 $this->store('cat_forums', $data);
 

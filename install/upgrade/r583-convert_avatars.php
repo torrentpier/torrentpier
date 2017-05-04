@@ -80,7 +80,7 @@ if ($confirm) {
                 DB()->query("UPDATE " . BB_USERS . " SET avatar_ext_id = {$upload->file_ext_id} WHERE user_id = {$row['user_id']} LIMIT 1");
                 $avatars_ok++;
             } else {
-                echo "{$row['user_id']}: ", join("\n{$row['user_id']}: ", $upload->errors), "\n";
+                echo "{$row['user_id']}: ", implode("\n{$row['user_id']}: ", $upload->errors), "\n";
                 $avatars_err++;
             }
         }

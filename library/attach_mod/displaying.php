@@ -46,7 +46,7 @@ function init_complete_extensions_data()
     }
     $allowed_extensions = array();
 
-    for ($i = 0, $size = sizeof($extension_informations); $i < $size; $i++) {
+    for ($i = 0, $size = count($extension_informations); $i < $size; $i++) {
         $extension = strtolower(trim($extension_informations[$i]['extension']));
         $allowed_extensions[] = $extension;
         $display_categories[$extension] = intval($extension_informations[$i]['cat_id']);
@@ -140,12 +140,12 @@ function init_display_post_attachments($switch_attachment)
         }
     }
 
-    if (sizeof($post_id_array) == 0) {
+    if (count($post_id_array) == 0) {
         return;
     }
 
     $rows = get_attachments_from_post($post_id_array);
-    $num_rows = sizeof($rows);
+    $num_rows = count($rows);
 
     if ($num_rows == 0) {
         return;
@@ -183,7 +183,7 @@ function display_attachments($post_id)
 {
     global $template, $upload_dir, $userdata, $allowed_extensions, $display_categories, $download_modes, $lang, $attachments, $upload_icons, $attach_config;
 
-    $num_attachments = @sizeof($attachments['_' . $post_id]);
+    $num_attachments = @count($attachments['_' . $post_id]);
 
     if ($num_attachments == 0) {
         return;

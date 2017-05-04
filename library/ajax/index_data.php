@@ -43,7 +43,7 @@ switch ($mode) {
             foreach ($stats['birthday_week_list'] as $week) {
                 $html[] = profile_url($week) . ' <span class="small">(' . birthday_age($week['user_birthday']) . ')</span>';
             }
-            $html = sprintf($lang['BIRTHDAY_WEEK'], $bb_cfg['birthday_check_day'], join(', ', $html));
+            $html = sprintf($lang['BIRTHDAY_WEEK'], $bb_cfg['birthday_check_day'], implode(', ', $html));
         } else {
             $html = sprintf($lang['NOBIRTHDAY_WEEK'], $bb_cfg['birthday_check_day']);
         }
@@ -59,7 +59,7 @@ switch ($mode) {
             foreach ($stats['birthday_today_list'] as $today) {
                 $html[] = profile_url($today) . ' <span class="small">(' . birthday_age($today['user_birthday']) . ')</span>';
             }
-            $html = $lang['BIRTHDAY_TODAY'] . join(', ', $html);
+            $html = $lang['BIRTHDAY_TODAY'] . implode(', ', $html);
         } else {
             $html = $lang['NOBIRTHDAY_TODAY'];
         }
@@ -88,7 +88,7 @@ switch ($mode) {
         }
 
         $html = ':&nbsp;';
-        $html .= ($moderators) ? join(', ', $moderators) : $lang['NONE'];
+        $html .= ($moderators) ? implode(', ', $moderators) : $lang['NONE'];
         unset($moderators, $mod);
         $datastore->rm('moderators');
         break;

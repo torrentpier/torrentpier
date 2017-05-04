@@ -290,7 +290,7 @@ if ($mode == 'cats') {
     $row = DB()->sql_fetchrowset($result);
     DB()->sql_freeresult($result);
 
-    for ($i = 0; $i < sizeof($row); $i++) {
+    for ($i = 0; $i < count($row); $i++) {
         if ($row[$i]['cat_id'] == IMAGE_CAT) {
             $s_assigned_group_images[] = $row[$i]['group_name'];
         }
@@ -401,7 +401,7 @@ if ($submit && $mode == 'quota') {
 
     $allowed_list = array();
 
-    for ($i = 0; $i < sizeof($quota_change_list); $i++) {
+    for ($i = 0; $i < count($quota_change_list); $i++) {
         $filesize_list[$i] = ($size_select_list[$i] == 'kb') ? round($filesize_list[$i] * 1024) : (($size_select_list[$i] == 'mb') ? round($filesize_list[$i] * 1048576) : $filesize_list[$i]);
 
         $sql = 'UPDATE ' . BB_QUOTA_LIMITS . "
@@ -506,7 +506,7 @@ if ($mode == 'quota') {
     $rows = DB()->sql_fetchrowset($result);
     DB()->sql_freeresult($result);
 
-    for ($i = 0; $i < sizeof($rows); $i++) {
+    for ($i = 0; $i < count($rows); $i++) {
         $size_format = ($rows[$i]['quota_limit'] >= 1048576) ? 'mb' : (($rows[$i]['quota_limit'] >= 1024) ? 'kb' : 'b');
 
         if ($rows[$i]['quota_limit'] >= 1048576) {

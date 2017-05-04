@@ -248,7 +248,7 @@ if (!empty($page_cfg['show_torhelp'][BB_SCRIPT]) && !empty($userdata['torhelp'])
         }
 
         $template->assign_vars(array(
-            'TORHELP_TOPICS' => join("</li>\n<li>", $torhelp_topics),
+            'TORHELP_TOPICS' => implode("</li>\n<li>", $torhelp_topics),
         ));
     }
 }

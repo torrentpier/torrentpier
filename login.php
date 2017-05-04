@@ -135,7 +135,7 @@ if (IS_GUEST || $mod_admin_login) {
     $template->assign_vars(array(
         'LOGIN_USERNAME' => htmlCHR($login_username),
         'LOGIN_PASSWORD' => htmlCHR($login_password),
-        'ERROR_MESSAGE' => join('<br />', $login_errors),
+        'ERROR_MESSAGE' => implode('<br />', $login_errors),
         'ADMIN_LOGIN' => $mod_admin_login,
         'REDIRECT_URL' => htmlCHR($redirect_url),
         'CAPTCHA_HTML' => ($need_captcha && !$bb_cfg['captcha']['disabled']) ? bb_captcha('get') : '',

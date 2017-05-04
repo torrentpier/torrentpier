@@ -70,7 +70,7 @@ class cache_sqlite extends cache_common
         $rowset = $this->db->fetch_rowset("
 			SELECT cache_name, cache_value
 			FROM " . $this->cfg['table_name'] . "
-			WHERE cache_name IN('$this->prefix_sql" . join("','$this->prefix_sql", $name_sql) . "') AND cache_expire_time > " . TIMENOW . "
+			WHERE cache_name IN('$this->prefix_sql" . implode("','$this->prefix_sql", $name_sql) . "') AND cache_expire_time > " . TIMENOW . "
 			LIMIT " . count($name) . "
 		");
 

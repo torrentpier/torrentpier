@@ -73,7 +73,7 @@ while (true) {
     }
 
     foreach (DB()->fetch_rowset($sql) as $row) {
-        $val[] = join(',', $row);
+        $val[] = implode(',', $row);
     }
 
     if ($val) {
@@ -81,13 +81,13 @@ while (true) {
             DB()->query("
 				REPLACE INTO " . NEW_BB_BT_TRACKER_SNAP . "
 				(topic_id, seeders, leechers, speed_up, speed_down)
-				VALUES(" . join('),(', $val) . ")
+				VALUES(" . implode('),(', $val) . ")
 			");
         } else {
             DB()->query("
 				INSERT INTO " . BB_BT_TRACKER_SNAP . "
 				(topic_id, speed_up, speed_down)
-				VALUES(" . join('),(', $val) . ")
+				VALUES(" . implode('),(', $val) . ")
 				ON DUPLICATE KEY UPDATE speed_up = VALUES(speed_up), speed_down = VALUES(speed_down)
 			");
         }
@@ -179,7 +179,7 @@ if ($bb_cfg['torhelp_enabled']) {
         $online_users_ary[] = $row['uid'];
     }
 
-    if ($online_users_csv = join(',', $online_users_ary)) {
+    if ($online_users_csv = implode(',', $online_users_ary)) {
         DB()->query("
 			INSERT INTO " . NEW_BB_BT_TORHELP . " (user_id, topic_id_csv)
 			SELECT

@@ -79,7 +79,7 @@ class datastore_sqlite extends datastore_common
         $prefix_sql = SQLite3::escapeString($this->prefix);
 
         array_deep($items, 'SQLite3::escapeString');
-        $items_list = $prefix_sql . join("','$prefix_sql", $items);
+        $items_list = $prefix_sql . implode("','$prefix_sql", $items);
 
         $rowset = $this->db->fetch_rowset("SELECT ds_title, ds_data FROM " . $this->cfg['table_name'] . " WHERE ds_title IN ('$items_list')");
 

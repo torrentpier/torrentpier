@@ -103,7 +103,7 @@ function auth_pack($auth_array)
     $one_char = $two_char = false;
     $auth_cache = '';
 
-    for ($i = 0; $i < sizeof($auth_array); $i++) {
+    for ($i = 0; $i < count($auth_array); $i++) {
         $val = base64_pack(intval($auth_array[$i]));
         if (strlen($val) == 1 && !$one_char) {
             $auth_cache .= $one_char_encoding;
@@ -316,7 +316,7 @@ function get_attachments_from_post($post_id_array)
  */
 function get_total_attach_filesize($attach_ids)
 {
-    if (!is_array($attach_ids) || !sizeof($attach_ids)) {
+    if (!is_array($attach_ids) || !count($attach_ids)) {
         return 0;
     }
 
@@ -356,7 +356,7 @@ function get_extension_informations()
 function attachment_sync_topic($topics)
 {
     if (is_array($topics)) {
-        $topics = join(',', $topics);
+        $topics = implode(',', $topics);
     }
     $posts_without_attach = $topics_without_attach = array();
 
@@ -372,7 +372,7 @@ function attachment_sync_topic($topics)
         foreach ($rowset as $row) {
             $posts_without_attach[] = $row['post_id'];
         }
-        if ($posts_sql = join(',', $posts_without_attach)) {
+        if ($posts_sql = implode(',', $posts_without_attach)) {
             DB()->query("UPDATE " . BB_POSTS . " SET post_attachment = 0 WHERE post_id IN($posts_sql)");
         }
     }
@@ -399,7 +399,7 @@ function attachment_sync_topic($topics)
         foreach ($rowset as $row) {
             $topics_without_attach[] = $row['topic_id'];
         }
-        if ($topics_sql = join(',', $topics_without_attach)) {
+        if ($topics_sql = implode(',', $topics_without_attach)) {
             DB()->query("UPDATE " . BB_TOPICS . " SET topic_attachment = 0 WHERE topic_id IN($topics_sql)");
         }
     }

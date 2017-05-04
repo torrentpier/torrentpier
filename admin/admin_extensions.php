@@ -83,7 +83,7 @@ if ($submit && $mode == 'extensions') {
     // Generate correct Change List
     $extensions = array();
 
-    for ($i = 0; $i < sizeof($extension_change_list); $i++) {
+    for ($i = 0; $i < count($extension_change_list); $i++) {
         $extensions['_' . $extension_change_list[$i]]['comment'] = $extension_explain_list[$i];
         $extensions['_' . $extension_change_list[$i]]['group_id'] = intval($group_select_list[$i]);
     }
@@ -98,7 +98,7 @@ if ($submit && $mode == 'extensions') {
     DB()->sql_freeresult($result);
 
     if ($num_rows > 0) {
-        for ($i = 0; $i < sizeof($extension_row); $i++) {
+        for ($i = 0; $i < count($extension_row); $i++) {
             if ($extension_row[$i]['comment'] != $extensions['_' . $extension_row[$i]['ext_id']]['comment'] || intval($extension_row[$i]['group_id']) != intval($extensions['_' . $extension_row[$i]['ext_id']]['group_id'])) {
                 $sql_ary = array(
                     'comment' => (string)$extensions['_' . $extension_row[$i]['ext_id']]['comment'],
@@ -250,15 +250,15 @@ if ($submit && $mode == 'groups') {
 
     $allowed_list = array();
 
-    for ($i = 0; $i < sizeof($group_allowed_list); $i++) {
-        for ($j = 0; $j < sizeof($group_change_list); $j++) {
+    for ($i = 0; $i < count($group_allowed_list); $i++) {
+        for ($j = 0; $j < count($group_change_list); $j++) {
             if ($group_allowed_list[$i] == $group_change_list[$j]) {
                 $allowed_list[$j] = 1;
             }
         }
     }
 
-    for ($i = 0; $i < sizeof($group_change_list); $i++) {
+    for ($i = 0; $i < count($group_change_list); $i++) {
         $allowed = (isset($allowed_list[$i])) ? 1 : 0;
 
         $filesize_list[$i] = ($size_select_list[$i] == 'kb') ? round($filesize_list[$i] * 1024) : (($size_select_list[$i] == 'mb') ? round($filesize_list[$i] * 1048576) : $filesize_list[$i]);
@@ -471,7 +471,7 @@ if (@$add_forum && $e_mode == 'perm' && $group) {
     $add_forums_list = get_var('entries', array(0));
     $add_all_forums = false;
 
-    for ($i = 0; $i < sizeof($add_forums_list); $i++) {
+    for ($i = 0; $i < count($add_forums_list); $i++) {
         if ($add_forums_list[$i] == 0) {
             $add_all_forums = true;
         }
@@ -506,7 +506,7 @@ if (@$add_forum && $e_mode == 'perm' && $group) {
         }
 
         // Generate array for Auth_Pack, do not add doubled forums
-        for ($i = 0; $i < sizeof($add_forums_list); $i++) {
+        for ($i = 0; $i < count($add_forums_list); $i++) {
             if (!in_array($add_forums_list[$i], $auth_p)) {
                 $auth_p[] = $add_forums_list[$i];
             }
@@ -543,13 +543,13 @@ if (@$delete_forum && $e_mode == 'perm' && $group) {
     $auth_p = array();
 
     // Generate array for Auth_Pack, delete the chosen ones
-    for ($i = 0; $i < sizeof($auth_p2); $i++) {
+    for ($i = 0; $i < count($auth_p2); $i++) {
         if (!in_array($auth_p2[$i], $delete_forums_list)) {
             $auth_p[] = $auth_p2[$i];
         }
     }
 
-    $auth_bitstream = (sizeof($auth_p) > 0) ? auth_pack($auth_p) : '';
+    $auth_bitstream = (count($auth_p) > 0) ? auth_pack($auth_p) : '';
 
     $sql = 'UPDATE ' . BB_EXTENSION_GROUPS . " SET forum_permissions = '" . attach_mod_sql_escape($auth_bitstream) . "' WHERE group_id = " . (int)$group;
 
@@ -596,7 +596,7 @@ if ($e_mode == 'perm' && $group) {
         }
     }
 
-    for ($i = 0; $i < sizeof($forum_perm); $i++) {
+    for ($i = 0; $i < count($forum_perm); $i++) {
         $template->assign_block_vars('allow_option_values', array(
                 'VALUE' => $forum_perm[$i]['forum_id'],
                 'OPTION' => htmlCHR($forum_perm[$i]['forum_name']))
@@ -675,7 +675,7 @@ if ($e_mode == 'perm' && $group) {
         $message .= ($message == '') ? $forum_name : '<br />' . $forum_name;
     }
 
-    if (sizeof($empty_perm_forums) > 0) {
+    if (count($empty_perm_forums) > 0) {
         $template->assign_vars(array('ERROR_MESSAGE' => $lang['NOTE_ADMIN_EMPTY_GROUP_PERMISSIONS'] . $message));
     }
 }

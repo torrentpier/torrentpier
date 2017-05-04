@@ -259,7 +259,7 @@ switch ($mode) {
         } else {
             print_confirmation(array(
                 'QUESTION' => $lang['CONFIRM_DELETE_TOPIC'],
-                'ITEMS_LIST' => join("\n</li>\n<li>\n", $topic_titles),
+                'ITEMS_LIST' => implode("\n</li>\n<li>\n", $topic_titles),
                 'FORM_ACTION' => "modcp.php",
                 'HIDDEN_FIELDS' => build_hidden_fields($hidden_fields),
             ));
@@ -304,7 +304,7 @@ switch ($mode) {
 
                 'MESSAGE_TITLE' => $lang['CONFIRM'],
                 'MESSAGE_TEXT' => $lang['CONFIRM_MOVE_TOPIC'],
-                'TOPIC_TITLES' => join("\n</li>\n<li>\n", $topic_titles),
+                'TOPIC_TITLES' => implode("\n</li>\n<li>\n", $topic_titles),
 
                 'S_FORUM_SELECT' => $forum_select,
                 'S_MODCP_ACTION' => "modcp.php",
@@ -402,7 +402,7 @@ switch ($mode) {
                     $req_post_id_sql[] = $pid;
                 }
             }
-            if ($req_post_id_sql = join(',', $req_post_id_sql)) {
+            if ($req_post_id_sql = implode(',', $req_post_id_sql)) {
                 $sql = "SELECT post_id
 					FROM " . BB_POSTS . "
 					WHERE post_id IN($req_post_id_sql)
@@ -417,7 +417,7 @@ switch ($mode) {
                     foreach ($rowset as $rid => $row) {
                         $post_id_sql[] = $row['post_id'];
                     }
-                    $post_id_sql = join(',', $post_id_sql);
+                    $post_id_sql = implode(',', $post_id_sql);
                 }
             }
         }

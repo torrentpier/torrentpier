@@ -213,7 +213,7 @@ function utime()
 function bb_log($msg, $file_name)
 {
     if (is_array($msg)) {
-        $msg = join(LOG_LF, $msg);
+        $msg = implode(LOG_LF, $msg);
     }
     $file_name .= (LOG_EXT) ? '.' . LOG_EXT : '';
     return file_write($msg, LOG_DIR . '/' . $file_name);
@@ -413,7 +413,7 @@ function sys($param)
 {
     switch ($param) {
         case 'la':
-            return function_exists('sys_getloadavg') ? join(' ', sys_getloadavg()) : 0;
+            return function_exists('sys_getloadavg') ? implode(' ', sys_getloadavg()) : 0;
             break;
         case 'mem':
             return function_exists('memory_get_usage') ? memory_get_usage() : 0;
@@ -475,7 +475,7 @@ function log_request($file = '', $prepend_str = false, $add_post = true)
     if (!empty($_POST) && $add_post) {
         $str[] = "post: " . str_compact(urldecode(http_build_query($_POST)));
     }
-    $str = join("\t", $str) . "\n";
+    $str = implode("\t", $str) . "\n";
     bb_log($str, $file);
 }
 

@@ -50,7 +50,7 @@ function group_select($select_name, $default_group = 0)
         $group_name[$num_rows]['group_id'] = 0;
         $group_name[$num_rows]['group_name'] = $lang['NOT_ASSIGNED'];
 
-        for ($i = 0; $i < sizeof($group_name); $i++) {
+        for ($i = 0; $i < count($group_name); $i++) {
             if (!$default_group) {
                 $selected = ($i == 0) ? ' selected="selected"' : '';
             } else {
@@ -93,7 +93,7 @@ function download_select($select_name, $group_id = 0)
 
     $group_select = '<select name="' . $select_name . '">';
 
-    for ($i = 0; $i < sizeof($types_download); $i++) {
+    for ($i = 0; $i < count($types_download); $i++) {
         if (!$group_id) {
             $selected = ($types_download[$i] == INLINE_LINK) ? ' selected="selected"' : '';
         } else {
@@ -138,14 +138,14 @@ function category_select($select_name, $group_id = 0)
     $types = array(NONE_CAT);
     $modes = array('none');
 
-    for ($i = 0; $i < sizeof($types_category); $i++) {
+    for ($i = 0; $i < count($types_category); $i++) {
         $types[] = $types_category[$i];
         $modes[] = $modes_category[$i];
     }
 
     $group_select = '<select name="' . $select_name . '" style="width:100px">';
 
-    for ($i = 0; $i < sizeof($types); $i++) {
+    for ($i = 0; $i < count($types); $i++) {
         if (!$group_id) {
             $selected = ($types[$i] == NONE_CAT) ? ' selected="selected"' : '';
         } else {
@@ -172,7 +172,7 @@ function size_select($select_name, $size_compare)
 
     $select_field = '<select name="' . $select_name . '">';
 
-    for ($i = 0; $i < sizeof($size_types_text); $i++) {
+    for ($i = 0; $i < count($size_types_text); $i++) {
         $selected = ($size_compare == $size_types[$i]) ? ' selected="selected"' : '';
         $select_field .= '<option value="' . $size_types[$i] . '"' . $selected . '>' . $size_types_text[$i] . '</option>';
     }
@@ -204,7 +204,7 @@ function quota_limit_select($select_name, $default_quota = 0)
     }
     DB()->sql_freeresult($result);
 
-    for ($i = 0; $i < sizeof($quota_name); $i++) {
+    for ($i = 0; $i < count($quota_name); $i++) {
         $selected = ($quota_name[$i]['quota_limit_id'] == $default_quota) ? ' selected="selected"' : '';
         $quota_select .= '<option value="' . $quota_name[$i]['quota_limit_id'] . '"' . $selected . '>' . $quota_name[$i]['quota_desc'] . '</option>';
     }
@@ -235,7 +235,7 @@ function default_quota_limit_select($select_name, $default_quota = 0)
     }
     DB()->sql_freeresult($result);
 
-    for ($i = 0; $i < sizeof($quota_name); $i++) {
+    for ($i = 0; $i < count($quota_name); $i++) {
         $selected = ($quota_name[$i]['quota_limit_id'] == $default_quota) ? ' selected="selected"' : '';
         $quota_select .= '<option value="' . $quota_name[$i]['quota_limit_id'] . '"' . $selected . '>' . $quota_name[$i]['quota_desc'] . '</option>';
     }

@@ -94,7 +94,7 @@ function delete_attachment($post_id_array = 0, $attach_id_array = 0, $page = 0, 
         }
     }
 
-    if (!sizeof($post_id_array)) {
+    if (!count($post_id_array)) {
         return;
     }
 
@@ -139,13 +139,13 @@ function delete_attachment($post_id_array = 0, $attach_id_array = 0, $page = 0, 
         }
     }
 
-    if (!sizeof($attach_id_array)) {
+    if (!count($attach_id_array)) {
         return;
     }
 
     $sql_id = 'post_id';
 
-    if (sizeof($post_id_array) && sizeof($attach_id_array)) {
+    if (count($post_id_array) && count($attach_id_array)) {
         $sql = 'DELETE FROM ' . BB_ATTACHMENTS . '
 			WHERE attach_id IN (' . implode(', ', $attach_id_array) . ")
 				AND $sql_id IN (" . implode(', ', $post_id_array) . ')';
@@ -187,7 +187,7 @@ function delete_attachment($post_id_array = 0, $attach_id_array = 0, $page = 0, 
         }
         //bt end
 
-        for ($i = 0; $i < sizeof($attach_id_array); $i++) {
+        for ($i = 0; $i < count($attach_id_array); $i++) {
             $sql = 'SELECT attach_id
 				FROM ' . BB_ATTACHMENTS . '
 						WHERE attach_id = ' . (int)$attach_id_array[$i];
@@ -236,7 +236,7 @@ function delete_attachment($post_id_array = 0, $attach_id_array = 0, $page = 0, 
     }
 
     // Now Sync the Topic/PM
-    if (sizeof($post_id_array)) {
+    if (count($post_id_array)) {
         $sql = 'SELECT topic_id
 			FROM ' . BB_POSTS . '
 			WHERE post_id IN (' . implode(', ', $post_id_array) . ')

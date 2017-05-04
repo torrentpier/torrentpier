@@ -281,7 +281,7 @@ if (!$group_id) {
                 foreach ($members as $members_id) {
                     $sql_in[] = (int)$members_id;
                 }
-                if (!$sql_in = join(',', $sql_in)) {
+                if (!$sql_in = implode(',', $sql_in)) {
                     bb_die($lang['NONE_SELECTED']);
                 }
 

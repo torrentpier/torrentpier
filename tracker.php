@@ -373,7 +373,7 @@ if (!$set_default) {
     if ($req_cat_id =& $_REQUEST[$cat_key]) {
         if (isset($cat_forum['c'][$req_cat_id])) {
             $valid_forums = $cat_forum['c'][$req_cat_id];
-            $forum_val = join(',', $valid_forums);
+            $forum_val = implode(',', $valid_forums);
         }
     } // Get requested forum_id(s)
     elseif ($req_forums =& $_REQUEST[$forum_key]) {
@@ -381,17 +381,17 @@ if (!$set_default) {
             $req_forums = (array)$req_forums;
             array_deep($req_forums, 'intval');
             $valid_forums = array_intersect($req_forums, $allowed_forums);
-            $forum_val = join(',', $valid_forums);
+            $forum_val = implode(',', $valid_forums);
         }
     } elseif (isset($previous_settings[$forum_key])) {
         $valid_forums = array_intersect(explode(',', $previous_settings[$forum_key]), $allowed_forums);
-        $forum_val = join(',', $valid_forums);
+        $forum_val = implode(',', $valid_forums);
     }
 
     if ($forum_val && $forum_val != $search_all) {
         $search_in_forums_ary = array_slice(explode(',', $forum_val), 0, $max_forums_selected);
         $search_in_forums_fary = array_flip($search_in_forums_ary);
-        $search_in_forums_csv = join(',', $search_in_forums_ary);
+        $search_in_forums_csv = implode(',', $search_in_forums_ary);
         $forum_val = $search_in_forums_csv;
     } else {
         $forum_val = $search_all;
@@ -462,7 +462,7 @@ if ($dl_down_val) {
 if ($dl_will_val) {
     $dl_status[] = DL_STATUS_WILL;
 }
-$dl_status_csv = join(',', $dl_status);
+$dl_status_csv = implode(',', $dl_status);
 
 // Switches
 $seed_exist = (bool)$seed_exist_val;
@@ -530,7 +530,7 @@ if ($allowed_forums) {
     if ($title_match) {
         $title_match_topics = get_title_match_topics($title_match_sql, $search_in_forums_ary);
 
-        if (!$search_match_topics_csv = join(',', $title_match_topics)) {
+        if (!$search_match_topics_csv = implode(',', $title_match_topics)) {
             $tr_error = true;
         }
     } else {
@@ -630,7 +630,7 @@ if ($allowed_forums) {
             foreach (DB()->fetch_rowset($SQL) as $row) {
                 $tor_list_ary[] = $row['topic_id'];
             }
-            $tor_list_sql = join(',', $tor_list_ary);
+            $tor_list_sql = implode(',', $tor_list_ary);
             $tor_count = count($tor_list_ary);
         }
     }
@@ -655,7 +655,7 @@ if ($allowed_forums) {
 
         $tor_to_show = ($tor_count > $per_page) ? array_slice($tor_list_ary, $start, $per_page) : $tor_list_ary;
 
-        if (!$tor_to_show = join(',', $tor_to_show)) {
+        if (!$tor_to_show = implode(',', $tor_to_show)) {
             bb_die($lang['NO_SEARCH_MATCH']);
         }
 

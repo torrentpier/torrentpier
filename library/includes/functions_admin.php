@@ -58,7 +58,7 @@ function sync($type, $id)
 
             // начальное обнуление значений
             $forum_ary = explode(',', $forum_csv);
-            DB()->query("REPLACE INTO $tmp_sync_forums (forum_id) VALUES(" . join('),(', $forum_ary) . ")");
+            DB()->query("REPLACE INTO $tmp_sync_forums (forum_id) VALUES(" . implode('),(', $forum_ary) . ")");
 
             DB()->query("
 				REPLACE INTO $tmp_sync_forums
@@ -761,5 +761,5 @@ function get_usernames_for_log($user_id)
         }
     }
 
-    return join(', ', $users_log_msg);
+    return implode(', ', $users_log_msg);
 }

@@ -47,7 +47,7 @@ foreach ($keeping_dlstat as $dl_status => $days_to_keep) {
     }
 }
 
-if ($delete_dlstat_sql = join(') OR (', $delete_dlstat_sql)) {
+if ($delete_dlstat_sql = implode(') OR (', $delete_dlstat_sql)) {
     DB()->query("DELETE QUICK FROM " . BB_BT_DLSTATUS . " WHERE ($delete_dlstat_sql)");
 }
 

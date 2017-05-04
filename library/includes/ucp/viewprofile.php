@@ -162,7 +162,7 @@ if (IS_ADMIN) {
         if ($single) {
             $group_membership[] = $lang['INDIVIDUAL'];
         }
-        $group_membership = join(', ', $group_membership);
+        $group_membership = implode(', ', $group_membership);
     }
     $template->assign_vars(array(
         'GROUP_MEMBERSHIP' => (bool)$group_membership,
@@ -232,6 +232,6 @@ if (bf($profiledata['user_opt'], 'user_opt', 'dis_topic')) {
     $user_restrictions[] = $lang['NEW_THREADS'];
 }
 
-$template->assign_var('USER_RESTRICTIONS', join('</li><li>', $user_restrictions));
+$template->assign_var('USER_RESTRICTIONS', implode('</li><li>', $user_restrictions));
 
 print_page('usercp_viewprofile.tpl');

@@ -324,7 +324,7 @@ if ($title_match =& $_REQUEST[$title_match_key]) {
         $title_match_val = clean_text_match($tmp, true, false);
         $title_match_topics = get_title_match_topics($title_match_val, array(0 => $forum_id));
 
-        if ($search_match_topics_csv = join(',', $title_match_topics)) {
+        if ($search_match_topics_csv = implode(',', $title_match_topics)) {
             $title_match_sql = "AND t.topic_id IN($search_match_topics_csv)";
         }
     }
@@ -349,7 +349,7 @@ foreach (DB()->fetch_rowset($sql) as $row) {
 }
 
 // Titles, posters etc.
-if ($topics_csv = join(',', $topic_ids)) {
+if ($topics_csv = implode(',', $topic_ids)) {
     $topic_rowset = DB()->fetch_rowset("
 		SELECT
 			t.*, t.topic_poster AS first_user_id, u1.user_rank as first_user_rank,
@@ -402,7 +402,7 @@ $u_auth[] = ($is_auth['auth_vote']) ? $lang['RULES_VOTE_CAN'] : $lang['RULES_VOT
 $u_auth[] = ($is_auth['auth_attachments']) ? $lang['RULES_ATTACH_CAN'] : $lang['RULES_ATTACH_CANNOT'];
 $u_auth[] = ($is_auth['auth_download']) ? $lang['RULES_DOWNLOAD_CAN'] : $lang['RULES_DOWNLOAD_CANNOT'];
 $u_auth[] = ($is_auth['auth_mod']) ? $lang['RULES_MODERATE'] : '';
-$u_auth = join("<br />\n", $u_auth);
+$u_auth = implode("<br />\n", $u_auth);
 
 $template->assign_vars(array(
     'SHOW_JUMPBOX' => true,

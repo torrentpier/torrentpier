@@ -106,7 +106,7 @@ function process_quota_settings($mode, $id, $quota_type, $quota_limit_id = 0)
  */
 function sort_multi_array($sort_array, $key, $sort_order, $pre_string_sort = 0)
 {
-    $last_element = sizeof($sort_array) - 1;
+    $last_element = count($sort_array) - 1;
 
     if (!$pre_string_sort) {
         $string_sort = (!is_numeric(@$sort_array[$last_element - 1][$key])) ? true : false;
@@ -266,7 +266,7 @@ function search_attachments($order_by, &$total_rows)
     $sql = 'SELECT a.*, t.post_id, p.post_time, p.topic_id
 		FROM ' . BB_ATTACHMENTS . ' t, ' . BB_ATTACHMENTS_DESC . ' a, ' . BB_POSTS . ' p WHERE ';
 
-    if (sizeof($where_sql) > 0) {
+    if (count($where_sql) > 0) {
         $sql .= implode('AND', $where_sql) . ' AND ';
     }
 
@@ -309,7 +309,7 @@ function search_attachments($order_by, &$total_rows)
 function limit_array($array, $start, $pagelimit)
 {
     // array from start - start+pagelimit
-    $limit = (sizeof($array) < ($start + $pagelimit)) ? sizeof($array) : $start + $pagelimit;
+    $limit = (count($array) < ($start + $pagelimit)) ? count($array) : $start + $pagelimit;
 
     $limit_array = [];
 

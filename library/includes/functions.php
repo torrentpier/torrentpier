@@ -583,7 +583,7 @@ class Date_Delta
                 break;
             }
         }
-        return join(' ', $parts);
+        return implode(' ', $parts);
     }
 
     // returns the associative array with date deltas.
@@ -1915,7 +1915,7 @@ function get_id_csv($ids)
 {
     $ids = array_values((array)$ids);
     array_deep($ids, 'intval', 'one-dimensional');
-    return (string)join(',', $ids);
+    return (string)implode(',', $ids);
 }
 
 // $ids - array(id1,id2,..) or (string) id1,id2,..
@@ -2249,7 +2249,7 @@ function log_sphinx_error($err_type, $err_msg, $query = '')
         'negation on top level',
         'Query word length is less than min prefix length',
     );
-    if (!count($ignore_err_txt) || !preg_match('#' . join('|', $ignore_err_txt) . '#i', $err_msg)) {
+    if (!count($ignore_err_txt) || !preg_match('#' . implode('|', $ignore_err_txt) . '#i', $err_msg)) {
         $orig_query = strtr($_REQUEST['nm'], array("\n" => '\n'));
         bb_log(date('m-d H:i:s') . " | $err_type | $err_msg | $orig_query | $query" . LOG_LF, 'sphinx_error');
     }
@@ -2291,7 +2291,7 @@ function get_title_match_topics($title_match_sql, $forum_ids = array())
             log_sphinx_error('wrn', $warning, $title_match_sql);
         }
     } elseif ($bb_cfg['search_engine_type'] == 'mysql') {
-        $where_forum = ($forum_ids) ? "AND forum_id IN(" . join(',', $forum_ids) . ")" : '';
+        $where_forum = ($forum_ids) ? "AND forum_id IN(" . implode(',', $forum_ids) . ")" : '';
         $search_bool_mode = ($bb_cfg['allow_search_in_bool_mode']) ? ' IN BOOLEAN MODE' : '';
 
         if ($title_match) {

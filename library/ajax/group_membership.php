@@ -71,7 +71,7 @@ switch ($mode) {
             }
         }
         if ($html) {
-            $this->response['group_list_html'] = '<ul><li>' . join('</li><li>', $html) . '</li></ul>';
+            $this->response['group_list_html'] = '<ul><li>' . implode('</li><li>', $html) . '</li></ul>';
         } else {
             $this->response['group_list_html'] = $lang['GROUP_LIST_HIDDEN'];
         }
