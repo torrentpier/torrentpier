@@ -778,7 +778,7 @@ class attach_parent
             $row = DB()->sql_fetchrow($result);
             DB()->sql_freeresult($result);
 
-            $allowed_filesize = $row['max_filesize'] ? $row['max_filesize'] : $attach_config['max_filesize'];
+            $allowed_filesize = $row['max_filesize'] ?: $attach_config['max_filesize'];
             $cat_id = (int) $row['cat_id'];
             $auth_cache = trim($row['forum_permissions']);
 

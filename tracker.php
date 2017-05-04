@@ -417,7 +417,7 @@ if (!$set_default) {
             }
         } elseif ($search_id && $previous_settings[$poster_id_key]) {
             $poster_id_val = intval($previous_settings[$poster_id_key]);
-            $poster_name_val = ($previous_settings[$poster_name_key]) ? $previous_settings[$poster_name_key] : '';
+            $poster_name_val = ($previous_settings[$poster_name_key]) ?: '';
         }
 
         if ($req_poster_id) {
@@ -764,10 +764,10 @@ if ($allowed_forums) {
                 'TOR_SIZE' => humn_size($size),
                 'UL_SPEED' => $ul_sp,
                 'DL_SPEED' => $dl_sp,
-                'SEEDS' => ($seeds) ? $seeds : 0,
+                'SEEDS' => ($seeds) ?: 0,
                 'SEEDS_TITLE' => ($seeds) ? $lang['SEEDERS'] : ($lang['SEED_NOT_SEEN'] . ":\n " . (($s_last) ? bb_date($s_last, $date_format) : $lang['NEVER'])),
-                'LEECHS' => ($leechs) ? $leechs : 0,
-                'COMPLETED' => ($compl) ? $compl : 0,
+                'LEECHS' => ($leechs) ?: 0,
+                'COMPLETED' => ($compl) ?: 0,
                 'REPLIES' => $tor['topic_replies'],
                 'VIEWS' => $tor['topic_views'],
                 'ADDED_RAW' => $tor['reg_time'],

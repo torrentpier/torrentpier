@@ -72,7 +72,7 @@ function get_tracks($type)
             trigger_error(__FUNCTION__ . ": invalid type '$type'", E_USER_ERROR);
     }
     $tracks = !empty($_COOKIE[$c_name]) ? @unserialize($_COOKIE[$c_name]) : false;
-    return ($tracks) ? $tracks : array();
+    return ($tracks) ?: array();
 }
 
 function set_tracks($cookie_name, &$tracking_ary, $tracks = null, $val = TIMENOW)
@@ -1158,7 +1158,7 @@ function show_bt_userdata($user_id)
         'USER_RATIO' => get_bt_ratio($btu),
         'MIN_DL_FOR_RATIO' => humn_size(MIN_DL_FOR_RATIO),
         'MIN_DL_BYTES' => MIN_DL_FOR_RATIO,
-        'AUTH_KEY' => ($btu['auth_key']) ? $btu['auth_key'] : $lang['NONE'],
+        'AUTH_KEY' => ($btu['auth_key']) ?: $lang['NONE'],
 
         'TD_DL' => humn_size($btu['down_today']),
         'TD_UL' => humn_size($btu['up_today']),
@@ -1723,7 +1723,7 @@ function bb_realpath($path)
 
 function login_redirect($url = '')
 {
-    redirect(LOGIN_URL . '?redirect=' . (($url) ? $url : (isset($_SERVER['REQUEST_URI']) ? $_SERVER['REQUEST_URI'] : '/')));
+    redirect(LOGIN_URL . '?redirect=' . (($url) ?: (isset($_SERVER['REQUEST_URI']) ? $_SERVER['REQUEST_URI'] : '/')));
 }
 
 function meta_refresh($url, $time = 5)
