@@ -105,7 +105,7 @@ class user_common
      * @param array $cfg
      * @return array|bool|null
      */
-    public function session_start($cfg = array())
+    public function session_start(array $cfg = array())
     {
         global $bb_cfg;
 

@@ -59,7 +59,7 @@ class upload_common
         8 => 'tiff',
     );
 
-    public function init($cfg = array(), $post_params = array(), $uploaded_only = true): bool
+    public function init(array $cfg = array(), array $post_params = array(), $uploaded_only = true): bool
     {
         global $bb_cfg, $lang;
 
@@ -129,7 +129,7 @@ class upload_common
         return true;
     }
 
-    public function store($mode = '', $params = array())
+    public function store($mode = '', array $params = array())
     {
         if ($mode == 'avatar') {
             delete_avatar($params['user_id'], $params['avatar_ext_id']);
