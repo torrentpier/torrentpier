@@ -129,7 +129,7 @@ class ajax_common
         'index_data' => array('guest'),
     );
 
-    public $action = null;
+    public $action;
 
     /**
      *  Constructor

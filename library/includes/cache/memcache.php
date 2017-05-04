@@ -31,9 +31,9 @@ class cache_memcache extends cache_common
 {
     public $used = true;
     public $engine = 'Memcache';
-    public $cfg = null;
-    public $prefix = null;
-    public $memcache = null;
+    public $cfg;
+    public $prefix;
+    public $memcache;
     public $connected = false;
 
     public function __construct($cfg, $prefix = null)

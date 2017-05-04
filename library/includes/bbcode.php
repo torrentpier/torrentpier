@@ -409,8 +409,8 @@ function add_search_words($post_id, $post_message, $topic_title = '', $only_retu
 class bbcode
 {
     public $tpl = array(); // шаблоны для замены тегов
-    public $smilies = null;    // смайлы
-    public $found_spam = null;    // найденные спам "слова"
+    public $smilies;    // смайлы
+    public $found_spam;    // найденные спам "слова"
     public $del_words = array(); // см. get_words_rate()
     public $tidy_cfg = array(
         'drop-empty-paras' => false,

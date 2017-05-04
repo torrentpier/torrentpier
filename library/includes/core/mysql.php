@@ -34,10 +34,10 @@ class sql_db
 {
     public $cfg = [];
     public $cfg_keys = ['dbhost', 'dbname', 'dbuser', 'dbpasswd', 'charset', 'persist'];
-    private $link = null;
-    public $result = null;
+    private $link;
+    public $result;
     public $db_server = '';
-    public $selected_db = null;
+    public $selected_db;
     public $inited = false;
 
     public $locked = false;
@@ -53,7 +53,7 @@ class sql_db
     public $dbg = [];
     public $dbg_id = 0;
     public $dbg_enabled = false;
-    public $cur_query = null;
+    public $cur_query;
 
     public $do_explain = false;
     public $explain_hold = '';

@@ -77,7 +77,7 @@ class cache_common
     public $dbg = array();
     public $dbg_id = 0;
     public $dbg_enabled = false;
-    public $cur_query = null;
+    public $cur_query;
 
     public function debug($mode, $cur_query = null)
     {

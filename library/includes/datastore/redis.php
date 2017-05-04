@@ -29,9 +29,9 @@ if (!defined('BB_ROOT')) {
 
 class datastore_redis extends datastore_common
 {
-    public $cfg = null;
-    public $redis = null;
-    public $prefix = null;
+    public $cfg;
+    public $redis;
+    public $prefix;
     public $connected = false;
     public $engine = 'Redis';
 

@@ -30,8 +30,8 @@ if (!defined('BB_ROOT')) {
 class datastore_sqlite extends datastore_common
 {
     public $engine = 'SQLite';
-    public $db = null;
-    public $prefix = null;
+    public $db;
+    public $prefix;
     public $cfg = array(
         'db_file_path' => '/path/to/datastore.db.sqlite',
         'table_name' => 'datastore',

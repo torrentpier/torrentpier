@@ -682,7 +682,7 @@ class html_common
 {
     public $options = '';
     public $attr = array();
-    public $cur_attr = null;
+    public $cur_attr;
     public $max_length = HTML_SELECT_MAX_LENGTH;
     public $selected = array();
 

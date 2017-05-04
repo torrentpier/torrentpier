@@ -31,7 +31,7 @@ class cache_xcache extends cache_common
 {
     public $used = true;
     public $engine = 'XCache';
-    public $prefix = null;
+    public $prefix;
 
     public function __construct($prefix = null)
     {

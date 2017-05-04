@@ -31,8 +31,8 @@ class cache_file extends cache_common
 {
     public $used = true;
     public $engine = 'Filecache';
-    public $dir = null;
-    public $prefix = null;
+    public $dir;
+    public $prefix;
 
     public function __construct($dir, $prefix = null)
     {
