@@ -253,7 +253,7 @@ function physical_filename_already_stored($filename)
     $num_rows = DB()->num_rows($result);
     DB()->sql_freeresult($result);
 
-    return ($num_rows == 0) ? false : true;
+    return $num_rows != 0;
 }
 
 /**
