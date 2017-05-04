@@ -774,7 +774,7 @@ class template
                 if (!$count_if) {
                     $keyword_type = XS_TAG_IF;
                 }
-                $str = $this->compile_tag_if($params_str, $keyword_type == XS_TAG_IF ? false : true);
+                $str = $this->compile_tag_if($params_str, $keyword_type != XS_TAG_IF);
                 if ($str) {
                     $compiled[] = '<?php ' . $str . ' ?>';
                     if ($keyword_type == XS_TAG_IF) {

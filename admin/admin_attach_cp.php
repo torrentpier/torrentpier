@@ -76,7 +76,7 @@ if ($view === 'username') {
 }
 
 // Pagination ?
-$do_pagination = ($view !== 'stats' && $view !== 'search') ? true : false;
+$do_pagination = ($view !== 'stats' && $view !== 'search');
 
 // Set Order
 $order_by = '';
@@ -319,7 +319,7 @@ if ($view === 'username') {
 // Attachments
 if ($view === 'attachments') {
     $user_based = ($uid) ? true : false;
-    $search_based = (isset($_POST['search']) && $_POST['search']) ? true : false;
+    $search_based = (isset($_POST['search']) && $_POST['search']);
 
     $hidden_fields = '';
 

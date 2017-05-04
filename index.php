@@ -211,7 +211,7 @@ foreach ($cat_forums as $cid => $c) {
     ));
 
     $template->assign_vars(array(
-        'H_C_AL_MESS' => ($hide_cat_opt && !$showhide) ? true : false,
+        'H_C_AL_MESS' => ($hide_cat_opt && !$showhide),
     ));
 
     if (!$showhide && isset($hide_cat_user[$cid]) && !$viewcat) {
