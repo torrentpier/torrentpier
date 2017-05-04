@@ -334,7 +334,7 @@ if ($tor_reged && $tor_info) {
                     $sp_up_tot[$x] += $peer['speed_up'];
                     $sp_down_tot[$x] += $peer['speed_down'];
 
-                    $guest = ($peer['user_id'] == GUEST_UID || is_null($peer['username']));
+                    $guest = ($peer['user_id'] == GUEST_UID || null === $peer['username']);
                     $p_max_up = $peer['uploaded'];
                     $p_max_down = $peer['downloaded'];
 

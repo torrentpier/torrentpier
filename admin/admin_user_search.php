@@ -904,7 +904,7 @@ if (!isset($_REQUEST['dosearch'])) {
 
     $select_sql .= " $limit";
 
-    if (!is_null($total_sql)) {
+    if (null !== $total_sql) {
         if (!$result = DB()->sql_query($total_sql)) {
             bb_die('Could not count users');
         }

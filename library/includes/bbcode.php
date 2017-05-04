@@ -593,7 +593,7 @@ class bbcode
         if (!$bb_cfg['spam_filter_file_path']) {
             return $text;
         }
-        if (is_null($spam_words)) {
+        if (null === $spam_words) {
             $spam_words = file_get_contents($bb_cfg['spam_filter_file_path']);
             $spam_words = strtolower($spam_words);
             $spam_words = explode("\n", $spam_words);
@@ -738,7 +738,7 @@ class bbcode
     {
         global $datastore;
 
-        if (is_null($this->smilies)) {
+        if (null === $this->smilies) {
             $this->smilies = $datastore->get('smile_replacements');
         }
         if ($this->smilies) {

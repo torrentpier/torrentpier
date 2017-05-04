@@ -870,10 +870,10 @@ function url_arg($url, $arg, $value, $amp = '&amp;')
     // заменяем параметр, если он существует
     if (preg_match("/((\?|&|&amp;)$arg=)[^&]*/s", $url, $m)) {
         $cur = $m[0];
-        $new = is_null($value) ? '' : $m[1] . urlencode($value);
+        $new = null === $value ? '' : $m[1] . urlencode($value);
         $url = str_replace($cur, $new, $url);
     } // добавляем параметр
-    elseif (!is_null($value)) {
+    elseif (null !== $value) {
         $div = (strpos($url, '?') !== false) ? $amp : '?';
         $url = $url . $div . $arg . '=' . urlencode($value);
     }
@@ -1357,10 +1357,10 @@ function get_forum_select($mode = 'guest', $name = POST_FORUM_URL, $selected = n
         $not_auth_forums_fary = array_flip($mode);
         $mode = 'not_auth_forums';
     }
-    if (is_null($max_length)) {
+    if (null === $max_length) {
         $max_length = HTML_SELECT_MAX_LENGTH;
     }
-    $select = is_null($all_forums_option) ? array() : array($lang['ALL_AVAILABLE'] => $all_forums_option);
+    $select = null === $all_forums_option ? array() : array($lang['ALL_AVAILABLE'] => $all_forums_option);
     if (!$forums = $datastore->get('cat_forums')) {
         $datastore->update('cat_forums');
         $forums = $datastore->get('cat_forums');
@@ -2032,7 +2032,7 @@ function get_topic_icon($topic, $is_unread = null)
     global $bb_cfg, $images;
 
     $t_hot = ($topic['topic_replies'] >= $bb_cfg['hot_threshold']);
-    $is_unread = is_null($is_unread) ? is_unread($topic['topic_last_post_time'], $topic['topic_id'], $topic['forum_id']) : $is_unread;
+    $is_unread = null === $is_unread ? is_unread($topic['topic_last_post_time'], $topic['topic_id'], $topic['forum_id']) : $is_unread;
 
     if ($topic['topic_status'] == TOPIC_MOVED) {
         $folder_image = $images['folder'];
