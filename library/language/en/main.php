@@ -2422,7 +2422,7 @@ $lang['REPAIR_CRON'] = 'Repair Cron';
 
 $lang['CRON_EDIT_HEAD_EDIT'] = 'Edit job';
 $lang['CRON_EDIT_HEAD_ADD'] = 'Add job';
-$lang['CRON_SCRIPT_EXPL'] = 'name of the script from "includes/cron/jobs/"';;
+$lang['CRON_SCRIPT_EXPL'] = 'name of the script from "includes/cron/jobs/"';
 $lang['SCHEDULE'] = array(
     'select' => '&raquo; Select start',
     'hourly' => 'hourly',
