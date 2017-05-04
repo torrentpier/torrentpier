@@ -198,7 +198,7 @@ class emailer
 
         // Build header
         $type = ($email_format == 'html') ? 'html' : 'plain';
-        $this->extra_headers = (($this->reply_to != '') ? "Reply-to: $this->reply_to\n" : '') . (($this->from != '') ? "From: $this->from\n" : "From: " . $bb_cfg['board_email'] . "\n") . "Return-Path: " . $bb_cfg['board_email'] . "\nMessage-ID: <" . md5(uniqid(TIMENOW)) . "@" . $bb_cfg['server_name'] . ">\nMIME-Version: 1.0\nContent-type: text/$type; charset=" . $this->encoding . "\nContent-transfer-encoding: 8bit\nDate: " . date('r', TIMENOW) . "\nX-Priority: 0\nX-MSMail-Priority: Normal\nX-Mailer: Microsoft Office Outlook, Build 11.0.5510\nX-MimeOLE: Produced By Microsoft MimeOLE V6.00.2800.1441\nX-Sender: " . $bb_cfg['board_email'] . "\n" . $this->extra_headers . (($cc != '') ? "Cc: $cc\n" : '') . (($bcc != '') ? "Bcc: $bcc\n" : '');
+        $this->extra_headers = (($this->reply_to != '') ? "Reply-to: $this->reply_to\n" : '') . (($this->from != '') ? "From: $this->from\n" : "From: " . $bb_cfg['board_email'] . "\n") . "Return-Path: " . $bb_cfg['board_email'] . "\nMessage-ID: <" . md5(uniqid(TIMENOW, true)) . "@" . $bb_cfg['server_name'] . ">\nMIME-Version: 1.0\nContent-type: text/$type; charset=" . $this->encoding . "\nContent-transfer-encoding: 8bit\nDate: " . date('r', TIMENOW) . "\nX-Priority: 0\nX-MSMail-Priority: Normal\nX-Mailer: Microsoft Office Outlook, Build 11.0.5510\nX-MimeOLE: Produced By Microsoft MimeOLE V6.00.2800.1441\nX-Sender: " . $bb_cfg['board_email'] . "\n" . $this->extra_headers . (($cc != '') ? "Cc: $cc\n" : '') . (($bcc != '') ? "Bcc: $bcc\n" : '');
 
         // Send message
         if ($this->use_smtp) {
