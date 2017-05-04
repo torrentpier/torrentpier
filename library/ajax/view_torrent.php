@@ -88,9 +88,9 @@ class TorrentFileList
             }
             $filelist = $html->array2html($this->files_ary);
             return "<div class=\"tor-root-dir\">{$this->root_dir}</div>$filelist";
-        } else {
-            return join('', $this->files_ary['/']);
         }
+
+        return join('', $this->files_ary['/']);
     }
 
     private function build_filelist_array()

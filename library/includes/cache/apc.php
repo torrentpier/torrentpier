@@ -74,9 +74,9 @@ class cache_apc extends cache_common
             $this->num_queries++;
 
             return apc_delete($this->prefix . $name);
-        } else {
-            return apc_clear_cache();
         }
+
+        return apc_clear_cache();
     }
 
     public function is_installed()

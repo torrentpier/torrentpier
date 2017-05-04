@@ -97,9 +97,9 @@ function update_forum_feed($forum_id, $forum_data)
     }
     if (create_atom($file_path, 'f', $forum_id, htmlCHR($forum_data['forum_name']), $topics)) {
         return true;
-    } else {
-        return false;
     }
+
+    return false;
 }
 
 function update_user_feed($user_id, $username)
@@ -143,9 +143,9 @@ function update_user_feed($user_id, $username)
     }
     if (create_atom($file_path, 'u', $user_id, wbr($username), $topics)) {
         return true;
-    } else {
-        return false;
     }
+
+    return false;
 }
 
 function create_atom($file_path, $mode, $id, $title, $topics)

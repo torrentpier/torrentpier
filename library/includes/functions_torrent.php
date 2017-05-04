@@ -590,9 +590,9 @@ function get_registered_torrents($id, $mode)
 
     if ($rowset = @DB()->sql_fetchrowset($result)) {
         return $rowset;
-    } else {
-        return false;
     }
+
+    return false;
 }
 
 function torrent_error_exit($message)
@@ -693,7 +693,9 @@ function bdecode_r($str, &$pos)
 
     if (($pos < 0) || ($pos >= $strlen)) {
         return null;
-    } elseif ($str[$pos] == 'i') {
+    }
+
+    if ($str[$pos] == 'i') {
         $pos++;
         $numlen = strspn($str, '-0123456789', $pos);
         $spos = $pos;
@@ -701,10 +703,10 @@ function bdecode_r($str, &$pos)
 
         if (($pos >= $strlen) || ($str[$pos] != 'e')) {
             return null;
-        } else {
-            $pos++;
-            return floatval(substr($str, $spos, $numlen));
         }
+
+        $pos++;
+        return floatval(substr($str, $spos, $numlen));
     } elseif ($str[$pos] == 'd') {
         $pos++;
         $ret = array();
@@ -713,20 +715,22 @@ function bdecode_r($str, &$pos)
             if ($str[$pos] == 'e') {
                 $pos++;
                 return $ret;
-            } else {
-                $key = bdecode_r($str, $pos);
+            }
 
-                if ($key === null) {
-                    return null;
-                } else {
-                    $val = bdecode_r($str, $pos);
+            $key = bdecode_r($str, $pos);
 
-                    if ($val === null) {
-                        return null;
-                    } elseif (!is_array($key)) {
-                        $ret[$key] = $val;
-                    }
-                }
+            if ($key === null) {
+                return null;
+            }
+
+            $val = bdecode_r($str, $pos);
+
+            if ($val === null) {
+                return null;
+            }
+
+            if (!is_array($key)) {
+                $ret[$key] = $val;
             }
         }
         return null;
@@ -738,15 +742,15 @@ function bdecode_r($str, &$pos)
             if ($str[$pos] == 'e') {
                 $pos++;
                 return $ret;
-            } else {
-                $val = bdecode_r($str, $pos);
-
-                if ($val === null) {
-                    return null;
-                } else {
-                    $ret[] = $val;
-                }
             }
+
+            $val = bdecode_r($str, $pos);
+
+            if ($val === null) {
+                return null;
+            }
+
+            $ret[] = $val;
         }
         return null;
     } else {
@@ -756,17 +760,17 @@ function bdecode_r($str, &$pos)
 
         if (($pos >= $strlen) || ($str[$pos] != ':')) {
             return null;
-        } else {
-            $vallen = intval(substr($str, $spos, $numlen));
-            $pos++;
-            $val = substr($str, $pos, $vallen);
-
-            if (strlen($val) != $vallen) {
-                return null;
-            } else {
-                $pos += $vallen;
-                return $val;
-            }
         }
+
+        $vallen = intval(substr($str, $spos, $numlen));
+        $pos++;
+        $val = substr($str, $pos, $vallen);
+
+        if (strlen($val) != $vallen) {
+            return null;
+        }
+
+        $pos += $vallen;
+        return $val;
     }
 }

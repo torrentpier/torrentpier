@@ -400,7 +400,9 @@ class user_common
                     cache_update_userdata($this->data);
 
                     return $this->data;
-                } elseif ($new_session_userdata = $this->session_create($userdata, false)) {
+                }
+
+                if ($new_session_userdata = $this->session_create($userdata, false)) {
                     // Removing guest sessions from this IP
                     DB()->query("
 						DELETE FROM " . BB_SESSIONS . "
@@ -486,7 +488,9 @@ class user_common
         if ($expire_check) {
             if ($create_new && !$autologin_id) {
                 return $this->create_autologin_id($userdata);
-            } elseif ($autologin_id && $userdata['user_session_time'] && $bb_cfg['max_autologin_time']) {
+            }
+
+            if ($autologin_id && $userdata['user_session_time'] && $bb_cfg['max_autologin_time']) {
                 if (TIMENOW - $userdata['user_session_time'] > $bb_cfg['max_autologin_time'] * 86400) {
                     return $this->create_autologin_id($userdata, $create_new);
                 }

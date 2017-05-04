@@ -926,9 +926,9 @@ function bt_show_ip($ip, $port = '')
         $ip = decode_ip($ip);
         $ip .= ($port) ? ":$port" : '';
         return $ip;
-    } else {
-        return ($bb_cfg['bt_show_ip_only_moder']) ? false : decode_ip_xx($ip);
     }
+
+    return ($bb_cfg['bt_show_ip_only_moder']) ? false : decode_ip_xx($ip);
 }
 
 function bt_show_port($port)
@@ -937,9 +937,9 @@ function bt_show_port($port)
 
     if (IS_AM) {
         return $port;
-    } else {
-        return ($bb_cfg['bt_show_port_only_moder']) ? false : $port;
     }
+
+    return ($bb_cfg['bt_show_port_only_moder']) ? false : $port;
 }
 
 function decode_ip_xx($ip)
@@ -1080,10 +1080,10 @@ function get_username($user_id)
             $usernames[$row['user_id']] = $row['username'];
         }
         return $usernames;
-    } else {
-        $row = DB()->fetch_row("SELECT username FROM " . BB_USERS . " WHERE user_id = $user_id LIMIT 1");
-        return $row['username'];
     }
+
+    $row = DB()->fetch_row("SELECT username FROM " . BB_USERS . " WHERE user_id = $user_id LIMIT 1");
+    return $row['username'];
 }
 
 function get_user_id($username)
@@ -1185,9 +1185,9 @@ function get_attachments_dir($cfg = null)
 
     if ($cfg['upload_dir'][0] == '/' || ($cfg['upload_dir'][0] != '/' && $cfg['upload_dir'][1] == ':')) {
         return $cfg['upload_dir'];
-    } else {
-        return BB_ROOT . $cfg['upload_dir'];
     }
+
+    return BB_ROOT . $cfg['upload_dir'];
 }
 
 function bb_get_config($table, $from_db = false, $update_cache = true)
@@ -2458,18 +2458,18 @@ function gender_image($gender)
     if (!$bb_cfg['gender']) {
         $user_gender = '';
         return $user_gender;
-    } else {
-        switch ($gender) {
-            case MALE:
-                $user_gender = '<img src="' . $images['icon_male'] . '" alt="' . $lang['GENDER_SELECT'][MALE] . '" title="' . $lang['GENDER_SELECT'][MALE] . '" border="0" />';
-                break;
-            case FEMALE:
-                $user_gender = '<img src="' . $images['icon_female'] . '" alt="' . $lang['GENDER_SELECT'][FEMALE] . '" title="' . $lang['GENDER_SELECT'][FEMALE] . '" border="0" />';
-                break;
-            default:
-                $user_gender = '<img src="' . $images['icon_nogender'] . '" alt="' . $lang['GENDER_SELECT'][NOGENDER] . '" title="' . $lang['GENDER_SELECT'][NOGENDER] . '" border="0" />';
-                break;
-        }
+    }
+
+    switch ($gender) {
+        case MALE:
+            $user_gender = '<img src="' . $images['icon_male'] . '" alt="' . $lang['GENDER_SELECT'][MALE] . '" title="' . $lang['GENDER_SELECT'][MALE] . '" border="0" />';
+            break;
+        case FEMALE:
+            $user_gender = '<img src="' . $images['icon_female'] . '" alt="' . $lang['GENDER_SELECT'][FEMALE] . '" title="' . $lang['GENDER_SELECT'][FEMALE] . '" border="0" />';
+            break;
+        default:
+            $user_gender = '<img src="' . $images['icon_nogender'] . '" alt="' . $lang['GENDER_SELECT'][NOGENDER] . '" title="' . $lang['GENDER_SELECT'][NOGENDER] . '" border="0" />';
+            break;
     }
 
     return $user_gender;
@@ -2482,18 +2482,18 @@ function is_gold($type)
     if (!$tr_cfg['gold_silver_enabled']) {
         $is_gold = '';
         return $is_gold;
-    } else {
-        switch ($type) {
-            case TOR_TYPE_GOLD:
-                $is_gold = '<img src="styles/images/tor_gold.gif" width="16" height="15" title="' . $lang['GOLD'] . '" />&nbsp;';
-                break;
-            case TOR_TYPE_SILVER:
-                $is_gold = '<img src="styles/images/tor_silver.gif" width="16" height="15" title="' . $lang['SILVER'] . '" />&nbsp;';
-                break;
-            default:
-                $is_gold = '';
-                break;
-        }
+    }
+
+    switch ($type) {
+        case TOR_TYPE_GOLD:
+            $is_gold = '<img src="styles/images/tor_gold.gif" width="16" height="15" title="' . $lang['GOLD'] . '" />&nbsp;';
+            break;
+        case TOR_TYPE_SILVER:
+            $is_gold = '<img src="styles/images/tor_silver.gif" width="16" height="15" title="' . $lang['SILVER'] . '" />&nbsp;';
+            break;
+        default:
+            $is_gold = '';
+            break;
     }
 
     return $is_gold;

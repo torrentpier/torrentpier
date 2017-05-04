@@ -99,9 +99,9 @@ class cache_redis extends cache_common
             $this->num_queries++;
 
             return true;
-        } else {
-            return false;
         }
+
+        return false;
     }
 
     public function rm($name = '')
@@ -118,9 +118,9 @@ class cache_redis extends cache_common
             $this->num_queries++;
 
             return ($this->connected) ? $this->redis->del($this->prefix . $name) : false;
-        } else {
-            return ($this->connected) ? $this->redis->flushdb() : false;
         }
+
+        return ($this->connected) ? $this->redis->flushdb() : false;
     }
 
     public function is_installed()

@@ -135,7 +135,9 @@ class upload_common
             delete_avatar($params['user_id'], $params['avatar_ext_id']);
             $file_path = get_avatar_path($params['user_id'], $this->file_ext_id);
             return $this->_move($file_path);
-        } elseif ($mode == 'attach') {
+        }
+
+        if ($mode == 'attach') {
             $file_path = get_attach_path($params['topic_id']);
             return $this->_move($file_path);
         } else {

@@ -90,9 +90,9 @@ class cache_sqlite extends cache_common
         // return
         if (is_array($this->prefix . $name)) {
             return $cached_items;
-        } else {
-            return isset($cached_items[$name]) ? $cached_items[$name] : false;
         }
+
+        return isset($cached_items[$name]) ? $cached_items[$name] : false;
     }
 
     public function set($name, $value, $ttl = 604800)

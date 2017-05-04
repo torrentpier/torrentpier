@@ -241,9 +241,9 @@ class sql_db
                 }
             }
             return $result;
-        } else {
-            return false;
         }
+
+        return false;
     }
 
     /**
@@ -274,9 +274,9 @@ class sql_db
 
         if ($field_name) {
             return isset($row[$field_name]) ? $row[$field_name] : false;
-        } else {
-            return $row;
         }
+
+        return $row;
     }
 
     /**
@@ -570,9 +570,9 @@ class sql_db
     {
         if ($this->link) {
             return ['code' => mysqli_errno($this->link), 'message' => mysqli_error($this->link)];
-        } else {
-            return ['code' => '', 'message' => 'not connected'];
         }
+
+        return ['code' => '', 'message' => 'not connected'];
     }
 
     /**

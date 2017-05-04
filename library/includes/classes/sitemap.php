@@ -212,9 +212,9 @@ class sitemap
             curl_close($ch);
 
             return $data;
-        } else {
-            return @file_get_contents($file);
         }
+
+        return @file_get_contents($file);
     }
 
     public function create()

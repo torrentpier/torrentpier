@@ -49,7 +49,9 @@ function base64_pack($number)
 
     if ($number > 4096) {
         return;
-    } elseif ($number < $base) {
+    }
+
+    if ($number < $base) {
         return $chars[$number];
     }
 
@@ -133,7 +135,9 @@ function auth_unpack($auth_cache)
         if ($forum_auth == $one_char_encoding) {
             $auth_len = 1;
             continue;
-        } elseif ($forum_auth == $two_char_encoding) {
+        }
+
+        if ($forum_auth == $two_char_encoding) {
             $auth_len = 2;
             $pos--;
             continue;
@@ -166,7 +170,9 @@ function is_forum_authed($auth_cache, $check_forum_id)
         if ($forum_auth == $one_char_encoding) {
             $auth_len = 1;
             continue;
-        } elseif ($forum_auth == $two_char_encoding) {
+        }
+
+        if ($forum_auth == $two_char_encoding) {
             $auth_len = 2;
             $pos--;
             continue;
@@ -210,9 +216,9 @@ function attachment_exists($filename)
 
     if (!@file_exists(@amod_realpath($upload_dir . '/' . $filename))) {
         return false;
-    } else {
-        return true;
     }
+
+    return true;
 }
 
 /**
@@ -226,9 +232,9 @@ function thumbnail_exists($filename)
 
     if (!@file_exists(@amod_realpath($upload_dir . '/' . THUMB_DIR . '/t_' . $filename))) {
         return false;
-    } else {
-        return true;
     }
+
+    return true;
 }
 
 /**
@@ -412,9 +418,9 @@ function get_extension($filename)
     $extension = strtolower(trim($extension));
     if (is_array($extension)) {
         return '';
-    } else {
-        return $extension;
     }
+
+    return $extension;
 }
 
 /**
@@ -544,9 +550,9 @@ function attach_mod_sql_escape($text)
 {
     if (function_exists('mysqli_real_escape_string')) {
         return DB()->escape_string($text);
-    } else {
-        return str_replace("'", "''", str_replace('\\', '\\\\', $text));
     }
+
+    return str_replace("'", "''", str_replace('\\', '\\\\', $text));
 }
 
 /**

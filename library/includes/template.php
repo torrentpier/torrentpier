@@ -175,9 +175,9 @@ class template
         // Check if it's an absolute or relative path.
         if ((substr($filename, 0, 1) !== '/') && (substr($filename, 1, 1) !== ':')) {
             return $this->root . '/' . $filename;
-        } else {
-            return $filename;
         }
+
+        return $filename;
     }
 
     /**
@@ -216,9 +216,9 @@ class template
         if (!$this->files[$handle]) {
             if ($xs_include || $quiet) {
                 return false;
-            } else {
-                die("Template->make_filename(): Error - invalid template $filename");
             }
+
+            die("Template->make_filename(): Error - invalid template $filename");
         }
         // creating cache filename
         if ($can_cache) {
@@ -520,9 +520,9 @@ class template
         $blockcount = sizeof($blocks) - 1;
         if ($include_last_iterator) {
             return '$' . $blocks[$blockcount] . '_item';
-        } else {
-            return '$' . $blocks[$blockcount - 1] . '_item[\'' . $blocks[$blockcount] . '.\']';
         }
+
+        return '$' . $blocks[$blockcount - 1] . '_item[\'' . $blocks[$blockcount] . '.\']';
     }
 
     public function compile_code($filename, $code)
