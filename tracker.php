@@ -548,7 +548,7 @@ if ($allowed_forums) {
         $order_by_peers = ($order_val == $ord_seeders || $order_val == $ord_leechers);
         $order_by_speed = ($order_val == $ord_sp_up || $order_val == $ord_sp_down);
 
-        $join_t = in_array($order_val, array($ord_name, $ord_repl, $ord_views, $ord_last_p, $title_match));
+        $join_t = in_array($order_val, array($ord_name, $ord_repl, $ord_views, $ord_last_p, $title_match), true);
         $join_sn = ($only_active || $order_by_peers || $order_by_speed);
         $join_dl = $dl_search;
 

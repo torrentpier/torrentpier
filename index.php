@@ -207,7 +207,7 @@ foreach ($cat_forums as $cid => $c) {
     $template->assign_block_vars('h_c', array(
         'H_C_ID' => $cid,
         'H_C_TITLE' => $cat_title_html[$cid],
-        'H_C_CHEKED' => in_array($cid, preg_split("/[-]+/", $hide_cat_opt)) ? 'checked' : '',
+        'H_C_CHEKED' => in_array($cid, preg_split("/[-]+/", $hide_cat_opt), true) ? 'checked' : '',
     ));
 
     $template->assign_vars(array(

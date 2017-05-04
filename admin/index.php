@@ -193,7 +193,7 @@ if (isset($_GET['pane']) && $_GET['pane'] == 'left') {
             $registered_users = $hidden_users = 0;
 
             for ($i = 0, $cnt = count($onlinerow_reg); $i < $cnt; $i++) {
-                if (!in_array($onlinerow_reg[$i]['user_id'], $reg_userid_ary)) {
+                if (!in_array($onlinerow_reg[$i]['user_id'], $reg_userid_ary, true)) {
                     $reg_userid_ary[] = $onlinerow_reg[$i]['user_id'];
 
                     $username = $onlinerow_reg[$i]['username'];

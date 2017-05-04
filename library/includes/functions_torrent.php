@@ -297,7 +297,7 @@ function tracker_register($attach_id, $mode = '', $tor_status = TOR_NOT_APPROVED
         $ann = (@$tor['announce']) ? $tor['announce'] : '';
         $announce_urls['main_url'] = $bb_cfg['bt_announce_url'];
 
-        if (!$ann || !in_array($ann, $announce_urls)) {
+        if (!$ann || !in_array($ann, $announce_urls, true)) {
             $msg = sprintf($lang['INVALID_ANN_URL'], htmlspecialchars($ann), $announce_urls['main_url']);
             return torrent_error_exit($msg);
         }

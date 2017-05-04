@@ -103,7 +103,7 @@ $type_csv = '';
 if ($var =& $_REQUEST[$type_key]) {
     $type_selected = get_id_ary($var);
 
-    if (in_array($all_types, $type_selected)) {
+    if (in_array($all_types, $type_selected, true)) {
         $type_selected = array($all_types);
     }
     $type_csv = implode(',', $type_selected);
@@ -117,7 +117,7 @@ $user_csv = '';
 if ($var =& $_REQUEST[$user_key]) {
     $user_selected = get_id_ary($var);
 
-    if (in_array($all_users, $user_selected)) {
+    if (in_array($all_users, $user_selected, true)) {
         $user_selected = array($all_users);
     }
     $user_csv = implode(',', $user_selected);
@@ -131,7 +131,7 @@ $forum_csv = '';
 if ($var =& $_REQUEST[$forum_key]) {
     $forum_selected = get_id_ary($var);
 
-    if (in_array($all_forums, $forum_selected)) {
+    if (in_array($all_forums, $forum_selected, true)) {
         $forum_selected = array($all_forums);
     }
     $forum_csv = implode(',', $forum_selected);

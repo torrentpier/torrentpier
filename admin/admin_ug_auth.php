@@ -212,7 +212,7 @@ if ($mode == 'user' && (!empty($_POST['username']) || $user_id)) {
             'CAT_HREF' => "$base_url&amp;c=$c_id",
         ));
 
-        if (!$c =& $_REQUEST['c'] or !in_array($c, array('all', $c_id)) or empty($c_data['forums'])) {
+        if (!$c =& $_REQUEST['c'] or !in_array($c, array('all', $c_id), true) or empty($c_data['forums'])) {
             continue;
         }
 
@@ -334,7 +334,7 @@ if ($mode == 'user' && (!empty($_POST['username']) || $user_id)) {
             'CAT_HREF' => "$base_url&amp;c=$c_id",
         ));
 
-        if (!$c =& $_REQUEST['c'] or !in_array($c, array('all', $c_id)) or empty($c_data['forums'])) {
+        if (!$c =& $_REQUEST['c'] or !in_array($c, array('all', $c_id), true) or empty($c_data['forums'])) {
             continue;
         }
 

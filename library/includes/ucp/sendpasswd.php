@@ -46,7 +46,7 @@ if (isset($_POST['submit'])) {
             if (!$row['user_active']) {
                 bb_die($lang['NO_SEND_ACCOUNT_INACTIVE']);
             }
-            if (in_array($row['user_level'], array(MOD, ADMIN))) {
+            if (in_array($row['user_level'], array(MOD, ADMIN), true)) {
                 bb_die($lang['NO_SEND_ACCOUNT']);
             }
 

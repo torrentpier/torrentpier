@@ -389,7 +389,7 @@ if (!$items_found) {
     if ($var =& $_REQUEST[$forum_key]) {
         $forum_selected = get_id_ary($var);
 
-        if (!in_array($search_all, $forum_selected)) {
+        if (!in_array($search_all, $forum_selected, true)) {
             $forum_val = implode(',', $forum_selected);
         }
     }
@@ -468,7 +468,7 @@ if ($post_mode) {
 
     // Run initial search for post_ids
     if (!$items_found) {
-        $join_t = ($title_match || $my_topics || $new_topics || in_array($order_val, array($ord_last_p, $ord_created, $ord_name, $ord_repl)));
+        $join_t = ($title_match || $my_topics || $new_topics || in_array($order_val, array($ord_last_p, $ord_created, $ord_name, $ord_repl), true));
         $join_s = ($text_match_sql && !$title_match);
         $join_p = ($my_posts || $join_s);
 
@@ -650,7 +650,7 @@ else {
 
     // Run initial search for topic_ids
     if (!$items_found) {
-        $join_t = ($title_match || $my_topics || $new_topics || $dl_search || $new_posts || in_array($order_val, array($ord_last_p, $ord_created, $ord_name, $ord_repl)));
+        $join_t = ($title_match || $my_topics || $new_topics || $dl_search || $new_posts || in_array($order_val, array($ord_last_p, $ord_created, $ord_name, $ord_repl), true));
         $join_s = ($text_match_sql && !$title_match);
         $join_p = ($my_posts || $join_s);
         $join_dl = ($dl_search);

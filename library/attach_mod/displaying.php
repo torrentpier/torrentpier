@@ -220,7 +220,7 @@ function display_attachments($post_id)
         $denied = false;
 
         // Admin is allowed to view forbidden Attachments, but the error-message is displayed too to inform the Admin
-        if (!in_array($attachments['_' . $post_id][$i]['extension'], $allowed_extensions)) {
+        if (!in_array($attachments['_' . $post_id][$i]['extension'], $allowed_extensions, true)) {
             $denied = true;
 
             $template->assign_block_vars('postrow.attach.denyrow', array(

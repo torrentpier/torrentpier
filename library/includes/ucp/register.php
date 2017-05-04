@@ -81,7 +81,7 @@ switch ($mode) {
             } // Ограничение по времени
             elseif ($bb_cfg['new_user_reg_restricted']) {
                 if (in_array(date('G'), array(0, /*1,2,3,4,5,6,7,8,11,12,13,14,15,16,*/
-                    17, 18, 19, 20, 21, 22, 23))) {
+                    17, 18, 19, 20, 21, 22, 23), true)) {
                     bb_die($lang['REGISTERED_IN_TIME']);
                 }
             }

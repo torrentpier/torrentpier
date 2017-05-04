@@ -507,7 +507,7 @@ if (@$add_forum && $e_mode == 'perm' && $group) {
 
         // Generate array for Auth_Pack, do not add doubled forums
         for ($i = 0; $i < count($add_forums_list); $i++) {
-            if (!in_array($add_forums_list[$i], $auth_p)) {
+            if (!in_array($add_forums_list[$i], $auth_p, true)) {
                 $auth_p[] = $add_forums_list[$i];
             }
         }
@@ -544,7 +544,7 @@ if (@$delete_forum && $e_mode == 'perm' && $group) {
 
     // Generate array for Auth_Pack, delete the chosen ones
     for ($i = 0; $i < count($auth_p2); $i++) {
-        if (!in_array($auth_p2[$i], $delete_forums_list)) {
+        if (!in_array($auth_p2[$i], $delete_forums_list, true)) {
             $auth_p[] = $auth_p2[$i];
         }
     }
@@ -657,7 +657,7 @@ if ($e_mode == 'perm' && $group) {
 
         for ($i = 0; $i < $num_rows; $i++) {
             $allowed_forums = auth_unpack(trim($rows[$i]['forum_permissions']));
-            if (in_array($forum_id, $allowed_forums) || trim($rows[$i]['forum_permissions']) == '') {
+            if (in_array($forum_id, $allowed_forums, true) || trim($rows[$i]['forum_permissions']) == '') {
                 $found_forum = true;
                 break;
             }

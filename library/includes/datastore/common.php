@@ -77,7 +77,7 @@ class datastore_common
     {
         foreach ((array)$items as $item) {
             // игнор уже поставленного в очередь либо уже извлеченного
-            if (!in_array($item, $this->queued_items) && !isset($this->data[$item])) {
+            if (!in_array($item, $this->queued_items, true) && !isset($this->data[$item])) {
                 $this->queued_items[] = $item;
             }
         }

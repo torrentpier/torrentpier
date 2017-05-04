@@ -50,7 +50,7 @@ $orig_word = $replacement_word = array();
 
 // Set topic type
 $topic_type = (@$_POST['topictype']) ? (int)$_POST['topictype'] : POST_NORMAL;
-$topic_type = in_array($topic_type, array(POST_NORMAL, POST_STICKY, POST_ANNOUNCE)) ? $topic_type : POST_NORMAL;
+$topic_type = in_array($topic_type, array(POST_NORMAL, POST_STICKY, POST_ANNOUNCE), true) ? $topic_type : POST_NORMAL;
 
 $selected_rg = 0;
 $switch_rg_sig = 0;
@@ -373,7 +373,7 @@ if (($delete || $mode == 'delete') && !$confirm) {
     }
 
     if (!$error_msg) {
-        if (!in_array($mode, array('editpost', 'delete'))) {
+        if (!in_array($mode, array('editpost', 'delete'), true)) {
             $user_id = ($mode == 'reply' || $mode == 'newtopic') ? $userdata['user_id'] : $post_data['poster_id'];
             update_post_stats($mode, $post_data, $forum_id, $topic_id, $post_id, $user_id);
         }

@@ -103,7 +103,7 @@ switch ($mode) {
 
         $this->response['status'] = $bb_cfg['tor_icons'][$new_status] . ' <b> ' . $lang['TOR_STATUS_NAME'][$new_status] . '</b> &middot; ' . profile_url($userdata) . ' &middot; <i>' . delta_time(TIMENOW) . $lang['TOR_BACK'] . '</i>';
 
-        if ($bb_cfg['tor_comment'] && (($comment && $comment != $lang['COMMENT']) || in_array($new_status, $bb_cfg['tor_reply']))) {
+        if ($bb_cfg['tor_comment'] && (($comment && $comment != $lang['COMMENT']) || in_array($new_status, $bb_cfg['tor_reply'], true))) {
             if ($tor['poster_id'] > 0) {
                 $subject = sprintf($lang['TOR_MOD_TITLE'], $tor['topic_title']);
                 $message = sprintf($lang['TOR_MOD_MSG'], get_username($tor['poster_id']), make_url(TOPIC_URL . $tor['topic_id']), $bb_cfg['tor_icons'][$new_status] . ' ' . $lang['TOR_STATUS_NAME'][$new_status]);

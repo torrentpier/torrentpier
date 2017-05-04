@@ -368,7 +368,7 @@ function auth($type, $forum_id, $ug_data, $f_access = array(), $group_perm = UG_
     //
     if ($type == AUTH_ALL) {
         $auth_fields = array_keys($bf['forum_perm']);
-    } elseif ($auth_type = array_search($type, $bf['forum_perm'])) {
+    } elseif ($auth_type = array_search($type, $bf['forum_perm'], true)) {
         $auth_fields = array($auth_type);
     }
 
@@ -2452,7 +2452,7 @@ function profile_url($data)
 
     $profile = '<span title="' . $title . '" class="' . $style . '">' . $username . '</span>';
 
-    if (!in_array($user_id, array('', GUEST_UID, BOT_UID)) && $username) {
+    if (!in_array($user_id, array('', GUEST_UID, BOT_UID), true) && $username) {
         $profile = '<a href="' . make_url(PROFILE_URL . $user_id) . '">' . $profile . '</a>';
     }
 

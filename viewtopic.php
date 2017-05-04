@@ -54,7 +54,7 @@ $posts_per_page = $bb_cfg['posts_per_page'];
 $select_ppp = '';
 
 if ($userdata['session_admin']) {
-    if ($req_ppp = abs((int)(@$_REQUEST['ppp'])) and in_array($req_ppp, $bb_cfg['allowed_posts_per_page'])) {
+    if ($req_ppp = abs((int)(@$_REQUEST['ppp'])) and in_array($req_ppp, $bb_cfg['allowed_posts_per_page'], true)) {
         $posts_per_page = $req_ppp;
     }
 
