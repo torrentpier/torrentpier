@@ -169,7 +169,7 @@ class bb_poll
     public $poll_votes = array();
     public $max_votes = 0;
 
-    public function bb_poll()
+    public function __construct()
     {
         global $bb_cfg;
         $this->max_votes = $bb_cfg['max_poll_options'];
