@@ -529,7 +529,7 @@ class bbcode
         global $bb_cfg;
 
         $text = " $text ";
-        $text = $this->clean_up($text);
+        $text = static::clean_up($text);
         $text = $this->spam_filter($text);
 
         // Tag parse
