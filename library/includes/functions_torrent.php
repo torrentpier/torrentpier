@@ -624,11 +624,7 @@ function ocelot_update_tracker($action, $updates)
     $max_attempts = 3;
     $err = false;
 
-    if (ocelot_send_request($get, $max_attempts, $err) === false) {
-        return false;
-    }
-
-    return true;
+    return !(ocelot_send_request($get, $max_attempts, $err) === false);
 }
 
 function ocelot_send_request($get, $max_attempts = 1, &$err = false)
