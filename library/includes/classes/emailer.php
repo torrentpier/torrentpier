@@ -130,7 +130,7 @@ class emailer
                 }
             }
 
-            if (!($fd = @fopen($tpl_file, 'r'))) {
+            if (!($fd = @fopen($tpl_file, 'rb'))) {
                 bb_die('Failed opening template file :: ' . $tpl_file);
             }
 
