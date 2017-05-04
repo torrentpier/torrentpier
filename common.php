@@ -268,9 +268,9 @@ function mkdir_rec($path, $mode)
 {
     if (is_dir($path)) {
         return ($path !== '.' && $path !== '..') ? is_writable($path) : false;
-    } else {
-        return (mkdir_rec(dirname($path), $mode)) ? @mkdir($path, $mode) : false;
     }
+
+    return (mkdir_rec(dirname($path), $mode)) ? @mkdir($path, $mode) : false;
 }
 
 function verify_id($id, $length)
@@ -342,40 +342,42 @@ function bencode($var)
 {
     if (is_string($var)) {
         return strlen($var) . ':' . $var;
-    } elseif (is_int($var)) {
+    }
+
+    if (is_int($var)) {
         return 'i' . $var . 'e';
     } elseif (is_float($var)) {
         return 'i' . sprintf('%.0f', $var) . 'e';
     } elseif (is_array($var)) {
         if (count($var) == 0) {
             return 'de';
-        } else {
-            $assoc = false;
+        }
 
-            foreach ($var as $key => $val) {
-                if (!is_int($key)) {
-                    $assoc = true;
-                    break;
-                }
-            }
+        $assoc = false;
 
-            if ($assoc) {
-                ksort($var, SORT_REGULAR);
-                $ret = 'd';
-
-                foreach ($var as $key => $val) {
-                    $ret .= bencode($key) . bencode($val);
-                }
-                return $ret . 'e';
-            } else {
-                $ret = 'l';
-
-                foreach ($var as $val) {
-                    $ret .= bencode($val);
-                }
-                return $ret . 'e';
+        foreach ($var as $key => $val) {
+            if (!is_int($key)) {
+                $assoc = true;
+                break;
             }
         }
+
+        if ($assoc) {
+            ksort($var, SORT_REGULAR);
+            $ret = 'd';
+
+            foreach ($var as $key => $val) {
+                $ret .= bencode($key) . bencode($val);
+            }
+            return $ret . 'e';
+        }
+
+        $ret = 'l';
+
+        foreach ($var as $val) {
+            $ret .= bencode($val);
+        }
+        return $ret . 'e';
     } else {
         trigger_error('bencode error: wrong data type', E_USER_ERROR);
     }
@@ -482,7 +484,7 @@ if (defined('IN_FORUM')) {
     require INC_DIR . '/init_bb.php';
 } // Tracker init
 elseif (defined('IN_TRACKER')) {
-    define('DUMMY_PEER', pack('Nn', ip2long($_SERVER['REMOTE_ADDR']), !empty($_GET['port']) ? intval($_GET['port']) : mt_rand(1000, 65000)));
+    define('DUMMY_PEER', pack('Nn', ip2long($_SERVER['REMOTE_ADDR']), !empty($_GET['port']) ? (int) $_GET['port'] : mt_rand(1000, 65000)));
 
     function dummy_exit($interval = 1800)
     {

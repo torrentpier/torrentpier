@@ -104,11 +104,11 @@ if (isset($_GET['pane']) && $_GET['pane'] == 'left') {
         $avatar_dir_size = $lang['NOT_AVAILABLE'];
     }
 
-    if (intval($posts_per_day) > $total_posts) {
+    if ((int)$posts_per_day > $total_posts) {
         $posts_per_day = $total_posts;
     }
 
-    if (intval($topics_per_day) > $total_topics) {
+    if ((int)$topics_per_day > $total_topics) {
         $topics_per_day = $total_topics;
     }
 

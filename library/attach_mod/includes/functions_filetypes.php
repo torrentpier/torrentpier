@@ -175,7 +175,7 @@ function image_getdimension($file)
     $tmp_str = fread($fp, 4);
     $w1 = read_word($fp);
 
-    if (intval($w1) < 16) {
+    if ((int)$w1 < 16) {
         $error = true;
     }
 
@@ -183,7 +183,7 @@ function image_getdimension($file)
         $tmp_str = fread($fp, 4);
         if ($tmp_str == 'JFIF') {
             $o_byte = fread($fp, 1);
-            if (intval($o_byte) != 0) {
+            if ((int)$o_byte != 0) {
                 $error = true;
             }
 

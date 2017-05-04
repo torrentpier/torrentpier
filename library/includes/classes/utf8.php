@@ -3152,8 +3152,8 @@ class utf8
             return $s;
         }
 
-        $length = intval($length);
-        $glue = strval($glue);
+        $length = (int)$length;
+        $glue = (string)$glue;
         if ($length < 1) {
             $length = 76;
         }
@@ -3632,7 +3632,7 @@ class utf8
             return $s;
         }
 
-        $length = ($length === null) ? 1 : intval($length);
+        $length = ($length === null) ? 1 : (int)$length;
         if ($length < 1) {
             return false;
         }
@@ -3766,7 +3766,7 @@ class utf8
 
         #optimization block (speed improve)
         #{{{
-        $ascii_int = intval(self::is_ascii($s)) + intval(self::is_ascii($needle));
+        $ascii_int = (int)self::is_ascii($s) + (int)self::is_ascii($needle);
         if ($ascii_int === 1) {
             return false;
         }
@@ -4224,13 +4224,13 @@ class utf8
 
         if ($type == STR_PAD_LEFT) {
             $repeat_num = ceil($pad_len / $pad_str_len);
-            return self::substr(str_repeat($pad_str, $repeat_num), 0, intval(floor($pad_len))) . $s;
+            return self::substr(str_repeat($pad_str, $repeat_num), 0, (int)floor($pad_len)) . $s;
         }
 
         if ($type == STR_PAD_BOTH) {
             $pad_len /= 2;
-            $pad_amount_left = intval(floor($pad_len));
-            $pad_amount_right = intval(ceil($pad_len));
+            $pad_amount_left = (int)floor($pad_len);
+            $pad_amount_right = (int)ceil($pad_len);
             $repeat_times_left = ceil($pad_amount_left / $pad_str_len);
             $repeat_times_right = ceil($pad_amount_right / $pad_str_len);
 

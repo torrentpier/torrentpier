@@ -29,7 +29,7 @@ if (!defined('IN_AJAX')) {
 
 global $bb_cfg, $lang;
 
-if (!$user_id = intval($this->request['user_id']) or !$profiledata = get_userdata($user_id)) {
+if (!$user_id = (int)$this->request['user_id'] or !$profiledata = get_userdata($user_id)) {
     $this->ajax_die($lang['NO_USER_ID_SPECIFIED']);
 }
 if (!$field = (string)$this->request['field']) {

@@ -32,7 +32,7 @@ $page_cfg['include_bbcode_js'] = true;
 $tracking_topics = get_tracks('topic');
 
 $user_id = $userdata['user_id'];
-$start = isset($_GET['start']) ? abs(intval($_GET['start'])) : 0;
+$start = isset($_GET['start']) ? abs((int)$_GET['start']) : 0;
 $per_page = $bb_cfg['topics_per_page'];
 
 if (isset($_POST['topic_id_list'])) {

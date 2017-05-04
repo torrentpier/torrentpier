@@ -443,19 +443,19 @@ if (!isset($_REQUEST['dosearch'])) {
                 bb_die($lang['SEARCH_INVALID_DATE']);
             }
 
-            $date_day = intval($date_day);
+            $date_day = (int)$date_day;
 
             if (!preg_match('/^([1-9]|[0-2][0-9]|3[0-1])$/', $date_day)) {
                 bb_die($lang['SEARCH_INVALID_DAY']);
             }
 
-            $date_month = intval($date_month);
+            $date_month = (int)$date_month;
 
             if (!preg_match('/^(0?[1-9]|1[0-2])$/', $date_month)) {
                 bb_die($lang['SEARCH_INVALID_MONTH']);
             }
 
-            $date_year = intval($date_year);
+            $date_year = (int)$date_year;
 
             if (!preg_match('/^(20[0-9]{2}|19[0-9]{2})$/', $date_year)) {
                 bb_die($lang['SEARCH_INVALID_YEAR']);
@@ -476,7 +476,7 @@ if (!isset($_REQUEST['dosearch'])) {
             break;
 
         case 'search_group':
-            $group_id = intval($group_id);
+            $group_id = (int)$group_id;
 
             $base_url .= '&search_group=true&group_id=' . rawurlencode($group_id);
 
@@ -511,7 +511,7 @@ if (!isset($_REQUEST['dosearch'])) {
             break;
 
         case 'search_rank':
-            $rank_id = intval($rank_id);
+            $rank_id = (int)$rank_id;
 
             $base_url .= '&search_rank=true&rank_id=' . rawurlencode($rank_id);
 
@@ -550,7 +550,7 @@ if (!isset($_REQUEST['dosearch'])) {
 
             switch ($postcount_type) {
                 case 'greater':
-                    $postcount_value = intval($postcount_value);
+                    $postcount_value = (int)$postcount_value;
 
                     $text = sprintf($lang['SEARCH_FOR_POSTCOUNT_GREATER'], $postcount_value);
 
@@ -563,7 +563,7 @@ if (!isset($_REQUEST['dosearch'])) {
 											AND u.user_id <> " . GUEST_UID;
                     break;
                 case 'lesser':
-                    $postcount_value = intval($postcount_value);
+                    $postcount_value = (int)$postcount_value;
 
                     $text = sprintf($lang['SEARCH_FOR_POSTCOUNT_LESSER'], $postcount_value);
 
@@ -580,8 +580,8 @@ if (!isset($_REQUEST['dosearch'])) {
                     if (strstr($postcount_value, '-')) {
                         $range = preg_split('/[-\s]+/', $postcount_value);
 
-                        $range_begin = intval($range[0]);
-                        $range_end = intval($range[1]);
+                        $range_begin = (int)$range[0];
+                        $range_end = (int)$range[1];
 
                         if ($range_begin > $range_end) {
                             bb_die($lang['SEARCH_INVALID_POSTCOUNT']);
@@ -599,7 +599,7 @@ if (!isset($_REQUEST['dosearch'])) {
 												AND u.user_posts <= $range_end
 												AND u.user_id <> " . GUEST_UID;
                     } else {
-                        $postcount_value = intval($postcount_value);
+                        $postcount_value = (int)$postcount_value;
 
                         $text = sprintf($lang['SEARCH_FOR_POSTCOUNT_EQUALS'], $postcount_value);
 
@@ -680,7 +680,7 @@ if (!isset($_REQUEST['dosearch'])) {
 
         case 'search_lastvisited':
             $lastvisited_type = strtolower(trim($lastvisited_type));
-            $lastvisited_days = intval($lastvisited_days);
+            $lastvisited_days = (int)$lastvisited_days;
 
             $base_url .= '&search_lastvisited=true&lastvisited_type=' . rawurlencode(stripslashes($lastvisited_type)) . '&lastvisited_days=' . rawurlencode($lastvisited_days);
 
@@ -739,7 +739,7 @@ if (!isset($_REQUEST['dosearch'])) {
             $base_url .= '&search_timezone=true&timezone_type=' . rawurlencode(stripslashes($timezone_type));
             $text = sprintf($lang['SEARCH_FOR_TIMEZONE'], strip_tags(htmlspecialchars(stripslashes($timezone_type))));
 
-            $timezone_type = intval($timezone_type);
+            $timezone_type = (int)$timezone_type;
 
             $total_sql .= "SELECT COUNT(user_id) AS total
 							FROM " . BB_USERS . "
@@ -752,7 +752,7 @@ if (!isset($_REQUEST['dosearch'])) {
 
         case 'search_moderators':
             $base_url .= '&search_moderators=true&moderators_forum=' . rawurlencode(stripslashes($moderators_forum));
-            $moderators_forum = intval($moderators_forum);
+            $moderators_forum = (int)$moderators_forum;
 
             $sql = "SELECT forum_name FROM " . BB_FORUMS . " WHERE forum_id = " . $moderators_forum;
 
@@ -888,7 +888,7 @@ if (!isset($_REQUEST['dosearch'])) {
 
     $select_sql .= " $order";
 
-    $page = (isset($_GET['page'])) ? intval($_GET['page']) : intval(trim(@$_POST['page']));
+    $page = (isset($_GET['page'])) ? (int)$_GET['page'] : (int)trim(@$_POST['page']);
 
     if ($page < 1) {
         $page = 1;

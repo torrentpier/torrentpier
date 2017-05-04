@@ -59,7 +59,7 @@ $date_format = 'j-M-y';
 $row_class_1 = 'row1';
 $row_class_2 = 'row2';
 
-$start = isset($_REQUEST['start']) ? abs(intval($_REQUEST['start'])) : 0;
+$start = isset($_REQUEST['start']) ? abs((int)$_REQUEST['start']) : 0;
 
 $set_default = isset($_GET['def']);
 $user_id = $userdata['user_id'];
@@ -402,7 +402,7 @@ if (!$set_default) {
         $req_poster_id = '';
 
         if (isset($_GET[$poster_id_key]) && !$search_id) {
-            $req_poster_id = intval($_GET[$poster_id_key]);
+            $req_poster_id = (int)$_GET[$poster_id_key];
         } elseif (isset($_POST[$poster_name_key]) && !$search_id) {
             if ($req_poster_name = clean_username($_POST[$poster_name_key])) {
                 $poster_name_sql = str_replace("\\'", "''", $req_poster_name);
@@ -416,7 +416,7 @@ if (!$set_default) {
                 }
             }
         } elseif ($search_id && $previous_settings[$poster_id_key]) {
-            $poster_id_val = intval($previous_settings[$poster_id_key]);
+            $poster_id_val = (int)$previous_settings[$poster_id_key];
             $poster_name_val = ($previous_settings[$poster_name_key]) ?: '';
         }
 
@@ -470,10 +470,10 @@ $poster_id = (bool)$poster_id_val;
 $title_match = (bool)$title_match_sql;
 $tor_type = (bool)$tor_type_val;
 
-$hide_cat = intval(!$show_cat_val);
-$hide_forum = intval(!$show_forum_val);
-$hide_author = intval(!$show_author_val);
-$hide_speed = intval(!$show_speed_val);
+$hide_cat = (int)(!$show_cat_val);
+$hide_forum = (int)(!$show_forum_val);
+$hide_author = (int)(!$show_author_val);
+$hide_speed = (int)(!$show_speed_val);
 
 $only_new = ($new_val && !IS_GUEST);
 $only_active = ($active_val || $seed_exist);

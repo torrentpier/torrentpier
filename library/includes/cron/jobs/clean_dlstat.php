@@ -67,7 +67,7 @@ DB()->query("
 ");
 
 // Tor-Stats cleanup
-if ($torstat_days_keep = intval($bb_cfg['torstat_days_keep'])) {
+if ($torstat_days_keep = (int)$bb_cfg['torstat_days_keep']) {
     DB()->query("DELETE QUICK FROM " . BB_BT_TORSTAT . " WHERE last_modified_torstat < DATE_SUB(NOW(), INTERVAL $torstat_days_keep DAY)");
 }
 

@@ -35,7 +35,7 @@ if (!$bb_cfg['board_email_form']) {
 set_die_append_msg();
 
 if (!empty($_GET[POST_USERS_URL]) || !empty($_POST[POST_USERS_URL])) {
-    $user_id = (!empty($_GET[POST_USERS_URL])) ? intval($_GET[POST_USERS_URL]) : intval($_POST[POST_USERS_URL]);
+    $user_id = (!empty($_GET[POST_USERS_URL])) ? (int)$_GET[POST_USERS_URL] : (int)$_POST[POST_USERS_URL];
 } else {
     bb_die($lang['NO_USER_SPECIFIED']);
 }

@@ -838,7 +838,7 @@ function declension($int, $expressions, $format = '%1$s %2$s')
     if (count($expressions) < 3) {
         $expressions[2] = $expressions[1];
     }
-    $count = intval($int) % 100;
+    $count = (int)$int % 100;
 
     if ($count >= 5 && $count <= 20) {
         $result = $expressions['2'];
@@ -969,7 +969,7 @@ function select_get_val($key, &$val, $options_ary, $default, $num = true)
 
     if (isset($_REQUEST[$key]) && is_string($_REQUEST[$key])) {
         if (isset($options_ary[$_REQUEST[$key]])) {
-            $val = ($num) ? intval($_REQUEST[$key]) : $_REQUEST[$key];
+            $val = ($num) ? (int)$_REQUEST[$key] : $_REQUEST[$key];
         }
     } elseif (isset($previous_settings[$key])) {
         $val = $previous_settings[$key];
@@ -1100,7 +1100,7 @@ function str_short($text, $max_length, $space = ' ')
     if ($max_length && mb_strlen($text, 'UTF-8') > $max_length) {
         $text = mb_substr($text, 0, $max_length, 'UTF-8');
 
-        if ($last_space_pos = $max_length - intval(strpos(strrev($text), $space))) {
+        if ($last_space_pos = $max_length - (int)strpos(strrev($text), $space)) {
             if ($last_space_pos > round($max_length * 3 / 4)) {
                 $last_space_pos--;
                 $text = mb_substr($text, 0, $last_space_pos, 'UTF-8');
@@ -1300,7 +1300,7 @@ function get_userdata($u, $force_name = false, $allow_guest = false)
         return false;
     }
 
-    if (intval($u) == GUEST_UID && $allow_guest) {
+    if ((int)$u == GUEST_UID && $allow_guest) {
         if ($u_data = CACHE('bb_cache')->get('guest_userdata')) {
             return $u_data;
         }

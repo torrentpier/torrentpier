@@ -34,7 +34,7 @@ $page_cfg['include_bbcode_js'] = true;
 // Start session management
 $user->session_start(array('req_login' => true));
 
-$group_id = isset($_REQUEST[POST_GROUPS_URL]) ? intval($_REQUEST[POST_GROUPS_URL]) : null;
+$group_id = isset($_REQUEST[POST_GROUPS_URL]) ? (int)$_REQUEST[POST_GROUPS_URL] : null;
 $group_info = array();
 $is_moderator = false;
 

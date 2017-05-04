@@ -437,7 +437,7 @@ if (!$output) {
         foreach ($rowset as $peer) {
             $peers[] = array(
                 'ip' => decode_ip($peer['ip']),
-                'port' => intval($peer['port']),
+                'port' => (int)$peer['port'],
             );
         }
     }

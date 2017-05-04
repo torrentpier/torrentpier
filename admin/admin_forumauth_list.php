@@ -82,7 +82,7 @@ $forum_auth_levels = array('ALL', 'REG', 'PRIVATE', 'MOD', 'ADMIN');
 $forum_auth_const = array(AUTH_ALL, AUTH_REG, AUTH_ACL, AUTH_MOD, AUTH_ADMIN);
 
 if (isset($_GET[POST_FORUM_URL]) || isset($_POST[POST_FORUM_URL])) {
-    $forum_id = (isset($_POST[POST_FORUM_URL])) ? intval($_POST[POST_FORUM_URL]) : intval($_GET[POST_FORUM_URL]);
+    $forum_id = (isset($_POST[POST_FORUM_URL])) ? (int)$_POST[POST_FORUM_URL] : (int)$_GET[POST_FORUM_URL];
     $forum_sql = "AND forum_id = $forum_id";
 } else {
     unset($forum_id);
@@ -90,7 +90,7 @@ if (isset($_GET[POST_FORUM_URL]) || isset($_POST[POST_FORUM_URL])) {
 }
 
 if (isset($_GET[POST_CAT_URL]) || isset($_POST[POST_CAT_URL])) {
-    $cat_id = (isset($_POST[POST_CAT_URL])) ? intval($_POST[POST_CAT_URL]) : intval($_GET[POST_CAT_URL]);
+    $cat_id = (isset($_POST[POST_CAT_URL])) ? (int)$_POST[POST_CAT_URL] : (int)$_GET[POST_CAT_URL];
     $cat_sql = "AND c.cat_id = $cat_id";
 } else {
     unset($cat_id);
@@ -98,7 +98,7 @@ if (isset($_GET[POST_CAT_URL]) || isset($_POST[POST_CAT_URL])) {
 }
 
 if (isset($_GET['adv'])) {
-    $adv = intval($_GET['adv']);
+    $adv = (int)$_GET['adv'];
 } else {
     unset($adv);
 }
@@ -111,7 +111,7 @@ if (isset($_POST['submit'])) {
 
     if (!empty($forum_id)) {
         if (isset($_POST['simpleauth'])) {
-            $simple_ary = $simple_auth_ary[intval($_POST['simpleauth'])];
+            $simple_ary = $simple_auth_ary[(int)$_POST['simpleauth']];
 
             for ($i = 0; $i < count($simple_ary); $i++) {
                 $sql .= (($sql != '') ? ', ' : '') . $forum_auth_fields[$i] . ' = ' . $simple_ary[$i];
@@ -122,7 +122,7 @@ if (isset($_POST['submit'])) {
             }
         } else {
             for ($i = 0; $i < count($forum_auth_fields); $i++) {
-                $value = intval($_POST[$forum_auth_fields[$i]]);
+                $value = (int)$_POST[$forum_auth_fields[$i]];
 
                 if ($forum_auth_fields[$i] == 'auth_vote') {
                     if ($_POST['auth_vote'] == AUTH_ALL) {
@@ -146,7 +146,7 @@ if (isset($_POST['submit'])) {
         $adv = 0;
     } elseif (!empty($cat_id)) {
         for ($i = 0; $i < count($forum_auth_fields); $i++) {
-            $value = intval($_POST[$forum_auth_fields[$i]]);
+            $value = (int)$_POST[$forum_auth_fields[$i]];
 
             if ($forum_auth_fields[$i] == 'auth_vote') {
                 if ($_POST['auth_vote'] == AUTH_ALL) {

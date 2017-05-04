@@ -131,7 +131,7 @@ $auth_pages = DB()->sql_fetchrowset($result);
 $num_auth_pages = DB()->num_rows($result);
 
 for ($i = 0; $i < $num_auth_pages && $authorised == false; $i++) {
-    $auth_pages[$i]['post_id'] = intval($auth_pages[$i]['post_id']);
+    $auth_pages[$i]['post_id'] = (int)$auth_pages[$i]['post_id'];
 
     if ($auth_pages[$i]['post_id'] != 0) {
         $sql = 'SELECT forum_id, topic_id FROM ' . BB_POSTS . ' WHERE post_id = ' . (int)$auth_pages[$i]['post_id'];
@@ -178,7 +178,7 @@ if (!in_array($attachment['extension'], $allowed_extensions) && !IS_ADMIN) {
     bb_die(sprintf($lang['EXTENSION_DISABLED_AFTER_POSTING'], $attachment['extension']));
 }
 
-$download_mode = intval($download_mode[$attachment['extension']]);
+$download_mode = (int)$download_mode[$attachment['extension']];
 
 if ($thumbnail) {
     $attachment['physical_filename'] = THUMB_DIR . '/t_' . $attachment['physical_filename'];

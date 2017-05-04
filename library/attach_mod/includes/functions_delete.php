@@ -46,7 +46,7 @@ function delete_attachment($post_id_array = 0, $attach_id_array = 0, $page = 0, 
             } elseif (strstr($attach_id_array, ',')) {
                 $attach_id_array = explode(',', $attach_id_array);
             } else {
-                $attach_id = intval($attach_id_array);
+                $attach_id = (int)$attach_id_array;
                 $attach_id_array = array();
                 $attach_id_array[] = $attach_id;
             }
@@ -72,7 +72,7 @@ function delete_attachment($post_id_array = 0, $attach_id_array = 0, $page = 0, 
         }
 
         while ($row = DB()->sql_fetchrow($result)) {
-            $post_id_array[] = intval($row[$p_id]);
+            $post_id_array[] = (int)$row[$p_id];
         }
         DB()->sql_freeresult($result);
     }
@@ -87,7 +87,7 @@ function delete_attachment($post_id_array = 0, $attach_id_array = 0, $page = 0, 
         } elseif (strstr($post_id_array, ',')) {
             $post_id_array = explode(',', $post_id_array);
         } else {
-            $post_id = intval($post_id_array);
+            $post_id = (int)$post_id_array;
 
             $post_id_array = array();
             $post_id_array[] = $post_id;
@@ -132,7 +132,7 @@ function delete_attachment($post_id_array = 0, $attach_id_array = 0, $page = 0, 
         } elseif (strstr($attach_id_array, ',')) {
             $attach_id_array = explode(',', $attach_id_array);
         } else {
-            $attach_id = intval($attach_id_array);
+            $attach_id = (int)$attach_id_array;
 
             $attach_id_array = array();
             $attach_id_array[] = $attach_id;
@@ -218,7 +218,7 @@ function delete_attachment($post_id_array = 0, $attach_id_array = 0, $page = 0, 
                     for ($j = 0; $j < $num_attach; $j++) {
                         unlink_attach($attachments[$j]['physical_filename']);
 
-                        if (intval($attachments[$j]['thumbnail']) == 1) {
+                        if ((int)$attachments[$j]['thumbnail'] == 1) {
                             unlink_attach($attachments[$j]['physical_filename'], MODE_THUMBNAIL);
                         }
 

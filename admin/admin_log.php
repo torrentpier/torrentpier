@@ -95,7 +95,7 @@ $f_data = $forums['f'];
 unset($forums);
 
 // Start
-$start = isset($_REQUEST['start']) ? abs(intval($_REQUEST['start'])) : 0;
+$start = isset($_REQUEST['start']) ? abs((int)$_REQUEST['start']) : 0;
 
 // Type
 $type_selected = array($def_types);
@@ -165,7 +165,7 @@ $datetime_val = $def_datetime;
 $daysback_val = $def_days;
 
 if ($var =& $_REQUEST[$daysback_key] && $var != $def_days) {
-    $daysback_val = max(intval($var), 1);
+    $daysback_val = max((int)$var, 1);
     $url = url_arg($url, $daysback_key, $daysback_val);
 }
 if ($var =& $_REQUEST[$datetime_key] && $var != $def_datetime) {

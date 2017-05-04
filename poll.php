@@ -34,7 +34,7 @@ $forum_id = (int)@$_POST['forum_id'];
 $vote_id = (int)@$_POST['vote_id'];
 
 $return_topic_url = TOPIC_URL . $topic_id;
-$return_topic_url .= !empty($_POST['start']) ? "&amp;start=" . intval($_POST['start']) : '';
+$return_topic_url .= !empty($_POST['start']) ? "&amp;start=" . (int)$_POST['start'] : '';
 
 set_die_append_msg($forum_id, $topic_id);
 

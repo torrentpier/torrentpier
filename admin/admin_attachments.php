@@ -248,8 +248,8 @@ if ($mode == 'manage') {
         'S_FILESIZE' => $select_size_mode,
         'S_FILESIZE_QUOTA' => $select_quota_size_mode,
         'S_FILESIZE_PM' => $select_pm_size_mode,
-        'S_DEFAULT_UPLOAD_LIMIT' => default_quota_limit_select('default_upload_quota', intval(trim($new_attach['default_upload_quota']))),
-        'S_DEFAULT_PM_LIMIT' => default_quota_limit_select('default_pm_quota', intval(trim($new_attach['default_pm_quota']))),
+        'S_DEFAULT_UPLOAD_LIMIT' => default_quota_limit_select('default_upload_quota', (int)trim($new_attach['default_upload_quota'])),
+        'S_DEFAULT_PM_LIMIT' => default_quota_limit_select('default_pm_quota', (int)trim($new_attach['default_pm_quota'])),
 
         'UPLOAD_DIR' => $new_attach['upload_dir'],
         'ATTACHMENT_IMG_PATH' => $new_attach['upload_img'],

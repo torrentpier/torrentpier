@@ -100,10 +100,10 @@ if ($cancel) {
 //
 // Var definitions
 //
-$start = isset($_REQUEST['start']) ? abs(intval($_REQUEST['start'])) : 0;
+$start = isset($_REQUEST['start']) ? abs((int)$_REQUEST['start']) : 0;
 
 if (isset($_POST[POST_POST_URL]) || isset($_GET[POST_POST_URL])) {
-    $privmsg_id = (isset($_POST[POST_POST_URL])) ? intval($_POST[POST_POST_URL]) : intval($_GET[POST_POST_URL]);
+    $privmsg_id = (isset($_POST[POST_POST_URL])) ? (int)$_POST[POST_POST_URL] : (int)$_GET[POST_POST_URL];
 } else {
     $privmsg_id = '';
 }
@@ -126,7 +126,7 @@ $template->assign_var('POSTING_SUBJECT');
 
 if ($mode == 'read') {
     if (!empty($_GET[POST_POST_URL])) {
-        $privmsgs_id = intval($_GET[POST_POST_URL]);
+        $privmsgs_id = (int)$_GET[POST_POST_URL];
     } else {
         bb_die($lang['NO_PM_ID']);
     }
@@ -463,7 +463,7 @@ if ($mode == 'read') {
 
         if (!$delete_all) {
             for ($i = 0; $i < count($mark_list); $i++) {
-                $delete_sql_id .= (($delete_sql_id != '') ? ', ' : '') . intval($mark_list[$i]);
+                $delete_sql_id .= (($delete_sql_id != '') ? ', ' : '') . (int)$mark_list[$i];
             }
             $delete_sql_id = "AND privmsgs_id IN ($delete_sql_id)";
         }
@@ -505,7 +505,7 @@ if ($mode == 'read') {
         if (count($mark_list)) {
             $delete_sql_id = '';
             for ($i = 0; $i < count($mark_list); $i++) {
-                $delete_sql_id .= (($delete_sql_id != '') ? ', ' : '') . intval($mark_list[$i]);
+                $delete_sql_id .= (($delete_sql_id != '') ? ', ' : '') . (int)$mark_list[$i];
             }
 
             if ($folder == 'inbox' || $folder == 'outbox') {
@@ -664,7 +664,7 @@ if ($mode == 'read') {
 
         $saved_sql_id = '';
         for ($i = 0; $i < count($mark_list); $i++) {
-            $saved_sql_id .= (($saved_sql_id != '') ? ', ' : '') . intval($mark_list[$i]);
+            $saved_sql_id .= (($saved_sql_id != '') ? ', ' : '') . (int)$mark_list[$i];
         }
 
         // Process request
@@ -992,7 +992,7 @@ if ($mode == 'read') {
         }
 
         if (!empty($_GET[POST_USERS_URL])) {
-            $user_id = intval($_GET[POST_USERS_URL]);
+            $user_id = (int)$_GET[POST_USERS_URL];
 
             $sql = "SELECT username FROM " . BB_USERS . " WHERE user_id = $user_id AND user_id <> " . GUEST_UID;
             if (!($result = DB()->sql_query($sql))) {
@@ -1277,7 +1277,7 @@ if ($mode == 'read') {
     // Show messages over previous x days/months
     //
     if ($submit_msgdays && (!empty($_POST['msgdays']) || !empty($_GET['msgdays']))) {
-        $msg_days = (!empty($_POST['msgdays'])) ? intval($_POST['msgdays']) : intval($_GET['msgdays']);
+        $msg_days = (!empty($_POST['msgdays'])) ? (int)$_POST['msgdays'] : (int)$_GET['msgdays'];
         $min_msg_time = TIMENOW - ($msg_days * 86400);
 
         $limit_msg_time_total = " AND privmsgs_date > $min_msg_time";

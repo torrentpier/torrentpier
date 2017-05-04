@@ -102,7 +102,7 @@ function auth_pack($auth_array)
     $auth_cache = '';
 
     for ($i = 0; $i < count($auth_array); $i++) {
-        $val = base64_pack(intval($auth_array[$i]));
+        $val = base64_pack((int)$auth_array[$i]);
         if (strlen($val) == 1 && !$one_char) {
             $auth_cache .= $one_char_encoding;
             $one_char = true;
@@ -141,7 +141,7 @@ function auth_unpack($auth_cache)
 
         $forum_auth = substr($auth_cache, $pos, $auth_len);
         $forum_id = base64_unpack($forum_auth);
-        $auth[] = intval($forum_id);
+        $auth[] = (int)$forum_id;
     }
     return $auth;
 }
@@ -270,7 +270,7 @@ function get_attachments_from_post($post_id_array)
             return $attachments;
         }
 
-        $post_id = intval($post_id_array);
+        $post_id = (int)$post_id_array;
 
         $post_id_array = array();
         $post_id_array[] = $post_id;
@@ -282,7 +282,7 @@ function get_attachments_from_post($post_id_array)
         return $attachments;
     }
 
-    $display_order = (intval($attach_config['display_order']) == 0) ? 'DESC' : 'ASC';
+    $display_order = ((int)$attach_config['display_order'] == 0) ? 'DESC' : 'ASC';
 
     $sql = 'SELECT a.post_id, d.*
 		FROM ' . BB_ATTACHMENTS . ' a, ' . BB_ATTACHMENTS_DESC . " d
@@ -574,7 +574,7 @@ function attach_mod_sql_build_array($query, $assoc_ary = false)
             } elseif (is_array($var) && is_string($var[0])) {
                 $values[] = $var[0];
             } else {
-                $values[] = (is_bool($var)) ? intval($var) : $var;
+                $values[] = (is_bool($var)) ? (int)$var : $var;
             }
         }
 
@@ -589,7 +589,7 @@ function attach_mod_sql_build_array($query, $assoc_ary = false)
                 } elseif (is_string($var)) {
                     $values[] = "'" . attach_mod_sql_escape($var) . "'";
                 } else {
-                    $values[] = (is_bool($var)) ? intval($var) : $var;
+                    $values[] = (is_bool($var)) ? (int)$var : $var;
                 }
             }
             $ary[] = '(' . implode(', ', $values) . ')';
@@ -604,7 +604,7 @@ function attach_mod_sql_build_array($query, $assoc_ary = false)
             } elseif (is_string($var)) {
                 $values[] = "$key = '" . attach_mod_sql_escape($var) . "'";
             } else {
-                $values[] = (is_bool($var)) ? "$key = " . intval($var) : "$key = $var";
+                $values[] = (is_bool($var)) ? "$key = " . (int)$var : "$key = $var";
             }
         }
         $query = implode(($query == 'UPDATE') ? ', ' : ' AND ', $values);

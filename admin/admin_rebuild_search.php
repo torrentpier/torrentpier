@@ -70,7 +70,7 @@ if (isset($_REQUEST['cancel_button'])) {
 }
 
 // from which post to start processing
-$start = abs(intval(@$_REQUEST['start']));
+$start = abs((int)(@$_REQUEST['start']));
 
 // get the total number of posts in the db
 $total_posts = get_total_posts();
@@ -86,7 +86,7 @@ $session_posts_processed = ($mode == 'refresh') ? get_processed_posts('session')
 $total_posts_processing = $total_posts - $total_posts_processed;
 
 // how many posts to process in this session
-if ($session_posts_processing = @intval($_REQUEST['session_posts_processing'])) {
+if ($session_posts_processing = @(int)$_REQUEST['session_posts_processing']) {
     if ($mode == 'submit') {
         // check if we passed over total_posts just after submitting
         if ($session_posts_processing + $total_posts_processed > $total_posts) {
@@ -118,7 +118,7 @@ if (isset($_REQUEST['time_limit'])) {
     // check for webserver timeout (IE returns null)
     if (isset($_SERVER["HTTP_KEEP_ALIVE"])) {
         // get webserver timeout
-        $webserver_timeout = intval($_SERVER["HTTP_KEEP_ALIVE"]);
+        $webserver_timeout = (int)$_SERVER["HTTP_KEEP_ALIVE"];
         $time_limit_explain .= '<br />' . sprintf($lang['TIME_LIMIT_EXPLAIN_WEBSERVER'], $webserver_timeout);
 
         if ($time_limit > $webserver_timeout) {
@@ -196,7 +196,7 @@ if ($mode == 'submit' || $mode == 'refresh') {
     }
 
     // find how much time the last cycle took
-    $last_cycle_time = intval(TIMENOW - $start_time);
+    $last_cycle_time = (int)(TIMENOW - $start_time);
 
     // check if we had any data
     if ($num_rows != 0) {
