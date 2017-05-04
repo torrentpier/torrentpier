@@ -170,7 +170,7 @@ class ReflectionTypeHint
             // Dummy frame before call_user_func*() frames.
             if (!isset($t['file']) && $next) {
                 $t['over_function'] = $trace[$i + 1]['function'];
-                $t = $t + $trace[$i + 1];
+                $t += $trace[$i + 1];
                 $trace[$i + 1] = null; // skip call_user_func on next iteration
             }
 

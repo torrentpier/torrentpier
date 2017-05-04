@@ -855,7 +855,7 @@ function declension($int, $expressions, $format = '%1$s %2$s')
     if ($count >= 5 && $count <= 20) {
         $result = $expressions['2'];
     } else {
-        $count = $count % 10;
+        $count %= 10;
         if ($count == 1) {
             $result = $expressions['0'];
         } elseif ($count >= 2 && $count <= 4) {
@@ -920,12 +920,12 @@ function humn_size($size, $rounder = null, $min = null, $space = '&nbsp;')
     $rnd = $rounders[0];
 
     if ($min == 'KB' && $size < 1024) {
-        $size = $size / 1024;
+        $size /= 1024;
         $ext = 'KB';
         $rounder = 1;
     } else {
         for ($i = 1, $cnt = count($sizes); ($i < $cnt && $size >= 1024); $i++) {
-            $size = $size / 1024;
+            $size /= 1024;
             $ext = $sizes[$i];
             $rnd = $rounders[$i];
         }

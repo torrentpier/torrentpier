@@ -3175,7 +3175,7 @@ class Text_LangCorrect
                 $ss = ' ' . $ss;
             }  #beginning of word
             elseif ($pos === $limit - 1) {
-                $ss = $ss . ' ';
+                $ss .= ' ';
             }  #ending of word
             if (array_key_exists($ss, $this->bigrams)) {
                 return true;

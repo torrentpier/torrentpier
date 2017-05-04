@@ -124,7 +124,7 @@ class sitemap
 
         if ($page) {
             --$page;
-            $page = $page * 40000;
+            $page *= 40000;
             $this->limit = " LIMIT {$page},40000";
         } else {
             if ($this->limit < 1) {

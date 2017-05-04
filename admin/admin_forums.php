@@ -964,7 +964,7 @@ function get_prev_root_forum_id($forums, $curr_forum_order)
         if (isset($forums[$i]) && !$forums[$i]['forum_parent']) {
             return $forums[$i]['forum_id'];
         }
-        $i = $i - 10;
+        $i -= 10;
     }
 
     return false;
@@ -979,7 +979,7 @@ function get_next_root_forum_id($forums, $curr_forum_order)
         if (isset($forums[$i]) && !$forums[$i]['forum_parent']) {
             return $forums[$i]['forum_id'];
         }
-        $i = $i + 10;
+        $i += 10;
     }
 
     return false;
