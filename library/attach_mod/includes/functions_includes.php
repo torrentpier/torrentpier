@@ -25,6 +25,8 @@
 
 /**
  * Setup s_auth_can in viewforum and viewtopic (viewtopic.php/viewforum.php)
+ * @param $is_auth
+ * @param $s_auth_can
  */
 function attach_build_auth_levels($is_auth, &$s_auth_can)
 {
@@ -41,6 +43,9 @@ function attach_build_auth_levels($is_auth, &$s_auth_can)
 
 /**
  * Called from admin_users.php and admin_groups.php in order to process Quota Settings (admin/admin_users.php:admin/admin_groups.php)
+ * @param $admin_mode
+ * @param bool $submit
+ * @param $mode
  */
 function attachment_quota_settings($admin_mode, $submit = false, $mode)
 {

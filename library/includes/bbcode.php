@@ -287,10 +287,13 @@ function strip_quotes($text)
  * Strips away bbcode from a given string, leaving plain text
  *
  * @param    string    Text to be stripped of bbcode tags
- * @param    boolean    If true, strip away quote tags AND their contents
- * @param    boolean    If true, use the fast-and-dirty method rather than the shiny and nice method
+ * @param bool $stripquotes
+ * @param bool $fast_and_dirty
+ * @param bool $showlinks
+ * @return string
+ * @internal param If $boolean true, strip away quote tags AND their contents
+ * @internal param If $boolean true, use the fast-and-dirty method rather than the shiny and nice method
  *
- * @return    string
  */
 function strip_bbcode($message, $stripquotes = true, $fast_and_dirty = false, $showlinks = true)
 {
@@ -518,6 +521,8 @@ class bbcode
     /**
      * bbcode2html
      * $text должен быть уже обработан htmlCHR($text, false, ENT_NOQUOTES);
+     * @param $text
+     * @return string
      */
     public function bbcode2html($text): string
     {
@@ -566,6 +571,8 @@ class bbcode
 
     /**
      * Clean up
+     * @param $text
+     * @return mixed|string
      */
     public static function clean_up($text)
     {
@@ -578,6 +585,8 @@ class bbcode
 
     /**
      * Spam filter
+     * @param $text
+     * @return mixed|string
      */
     private function spam_filter($text)
     {
@@ -635,6 +644,8 @@ class bbcode
 
     /**
      * [code] callback
+     * @param $m
+     * @return string
      */
     public function code_callback($m): string
     {
@@ -648,6 +659,8 @@ class bbcode
 
     /**
      * [url] callback
+     * @param $m
+     * @return string
      */
     public function url_callback($m): string
     {
@@ -671,6 +684,8 @@ class bbcode
 
     /**
      * Escape tags inside tiltes in [quote="tilte"]
+     * @param $m
+     * @return string
      */
     public function escape_tiltes_callback($m): string
     {
@@ -683,6 +698,8 @@ class bbcode
 
     /**
      * make_clickable
+     * @param $text
+     * @return bool|string
      */
     public function make_clickable($text)
     {
@@ -713,6 +730,8 @@ class bbcode
 
     /**
      * make_url_clickable_callback
+     * @param $m
+     * @return string
      */
     public function make_url_clickable_callback($m): string
     {
@@ -733,6 +752,8 @@ class bbcode
 
     /**
      * smilies_pass
+     * @param $text
+     * @return mixed
      */
     public function smilies_pass($text)
     {
@@ -751,6 +772,8 @@ class bbcode
 
     /**
      * new_line2html
+     * @param $text
+     * @return mixed
      */
     public function new_line2html($text)
     {
@@ -761,6 +784,8 @@ class bbcode
 
     /**
      * tidy
+     * @param $text
+     * @return string
      */
     public function tidy($text): string
     {
@@ -807,6 +832,8 @@ class words_rate
 
     /**
      * возвращает "показатель полезности" сообщения используемый для автоудаления коротких сообщений типа "спасибо", "круто" и т.д.
+     * @param $text
+     * @return int
      */
     public function get_words_rate($text): int
     {

@@ -31,6 +31,9 @@ $imagick = '';
 
 /**
  * Calculate the needed size for Thumbnail
+ * @param $width
+ * @param $height
+ * @return array
  */
 function get_img_size_format($width, $height)
 {
@@ -67,6 +70,8 @@ function is_imagick()
 
 /**
  * Get supported image types
+ * @param $type
+ * @return array
  */
 function get_supported_image_types($type)
 {
@@ -106,6 +111,10 @@ function get_supported_image_types($type)
 
 /**
  * Create thumbnail
+ * @param $source
+ * @param $new_file
+ * @param $mimetype
+ * @return bool
  */
 function create_thumbnail($source, $new_file, $mimetype)
 {

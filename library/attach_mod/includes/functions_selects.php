@@ -29,6 +29,9 @@
 
 /**
  * select group
+ * @param $select_name
+ * @param int $default_group
+ * @return string
  */
 function group_select($select_name, $default_group = 0)
 {
@@ -68,6 +71,9 @@ function group_select($select_name, $default_group = 0)
 
 /**
  * select download mode
+ * @param $select_name
+ * @param int $group_id
+ * @return string
  */
 function download_select($select_name, $group_id = 0)
 {
@@ -110,6 +116,9 @@ function download_select($select_name, $group_id = 0)
 
 /**
  * select category types
+ * @param $select_name
+ * @param int $group_id
+ * @return string
  */
 function category_select($select_name, $group_id = 0)
 {
@@ -162,6 +171,9 @@ function category_select($select_name, $group_id = 0)
 
 /**
  * Select size mode
+ * @param $select_name
+ * @param $size_compare
+ * @return string
  */
 function size_select($select_name, $size_compare)
 {
@@ -184,6 +196,9 @@ function size_select($select_name, $size_compare)
 
 /**
  * select quota limit
+ * @param $select_name
+ * @param int $default_quota
+ * @return string
  */
 function quota_limit_select($select_name, $default_quota = 0)
 {
@@ -215,6 +230,9 @@ function quota_limit_select($select_name, $default_quota = 0)
 
 /**
  * select default quota limit
+ * @param $select_name
+ * @param int $default_quota
+ * @return string
  */
 function default_quota_limit_select($select_name, $default_quota = 0)
 {

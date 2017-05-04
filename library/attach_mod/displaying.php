@@ -57,6 +57,9 @@ function init_complete_extensions_data()
 
 /**
  * Writing Data into plain Template Vars
+ * @param $template_var
+ * @param $replacement
+ * @param string $filename
  */
 function init_display_template($template_var, $replacement, $filename = 'viewtopic_attach.tpl')
 {
@@ -102,6 +105,8 @@ function init_display_template($template_var, $replacement, $filename = 'viewtop
 
 /**
  * Display Attachments in Posts
+ * @param $post_id
+ * @param $switch_attachment
  */
 function display_post_attachments($post_id, $switch_attachment)
 {
@@ -118,6 +123,7 @@ function display_post_attachments($post_id, $switch_attachment)
 
 /**
  * Initializes some templating variables for displaying Attachments in Posts
+ * @param $switch_attachment
  */
 function init_display_post_attachments($switch_attachment)
 {
@@ -178,6 +184,7 @@ function init_display_post_attachments($switch_attachment)
  * Assign Variables and Definitions based on the fetched Attachments - internal
  * used by all displaying functions, the Data was collected before, it's only dependend on the template used. :)
  * before this function is usable, init_display_attachments have to be called for specific pages (pm, posting, review etc...)
+ * @param $post_id
  */
 function display_attachments($post_id)
 {

@@ -211,6 +211,8 @@ class ajax_common
 
     /**
      *  Exit on error
+     * @param $error_msg
+     * @param int $error_code
      */
     public function ajax_die($error_msg, $error_code = E_AJAX_GENERAL_ERROR)
     {
@@ -246,6 +248,8 @@ class ajax_common
 
     /**
      *  OB Handler
+     * @param $contents
+     * @return string
      */
     public function ob_handler($contents): string
     {
@@ -300,6 +304,7 @@ class ajax_common
 
     /**
      *  Prompt for confirmation
+     * @param $confirm_msg
      */
     public function prompt_for_confirm($confirm_msg)
     {
@@ -314,6 +319,7 @@ class ajax_common
 
     /**
      *  Verify mod rights
+     * @param $forum_id
      */
     public function verify_mod_rights($forum_id)
     {

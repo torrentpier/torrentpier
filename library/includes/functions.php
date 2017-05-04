@@ -151,6 +151,8 @@ class ads_common
 
     /**
      *  Get ads to show for each block
+     * @param $block_types
+     * @return array
      */
     public function get($block_types): array
     {
@@ -187,6 +189,8 @@ class ads_common
 
     /**
      *  Get block_ids for specified block_types
+     * @param $block_types
+     * @return array
      */
     public function get_block_ids($block_types): array
     {
@@ -203,6 +207,8 @@ class ads_common
 
     /**
      *  Get ad_ids for specified blocks
+     * @param $block_ids
+     * @return array
      */
     public function get_ad_ids($block_ids): array
     {
@@ -807,6 +813,8 @@ function replace_quote($str, $double = true, $single = true)
 
 /**
  * Build simple hidden fields from array
+ * @param $fields_ary
+ * @return string
  */
 function build_hidden_fields($fields_ary)
 {
@@ -828,6 +836,10 @@ function build_hidden_fields($fields_ary)
 /**
  * Choost russian word declension based on numeric [from dklab.ru]
  * Example for $expressions: array("ответ", "ответа", "ответов")
+ * @param $int
+ * @param $expressions
+ * @param string $format
+ * @return mixed|string
  */
 function declension($int, $expressions, $format = '%1$s %2$s')
 {
@@ -882,6 +894,8 @@ function url_arg($url, $arg, $value, $amp = '&amp;')
 
 /**
  * Adds commas between every group of thousands
+ * @param $number
+ * @return string
  */
 function commify($number)
 {
@@ -890,6 +904,11 @@ function commify($number)
 
 /**
  * Returns a size formatted in a more human-friendly format, rounded to the nearest GB, MB, KB..
+ * @param $size
+ * @param null $rounder
+ * @param null $min
+ * @param string $space
+ * @return string
  */
 function humn_size($size, $rounder = null, $min = null, $space = '&nbsp;')
 {
@@ -984,6 +1003,11 @@ function select_get_val($key, &$val, $options_ary, $default, $num = true)
  * Set variable, used by {@link request_var the request_var function}
  *
  * @access private
+ * @param $result
+ * @param $var
+ * @param $type
+ * @param bool $multibyte
+ * @param bool $strip
  */
 function set_var(&$result, $var, $type, $multibyte = false, $strip = true)
 {
@@ -1010,6 +1034,11 @@ function set_var(&$result, $var, $type, $multibyte = false, $strip = true)
  * request_var
  *
  * Used to get passed variable
+ * @param $var_name
+ * @param $default
+ * @param bool $multibyte
+ * @param bool $cookie
+ * @return array
  */
 function request_var($var_name, $default, $multibyte = false, $cookie = false)
 {
@@ -2150,6 +2179,9 @@ function print_confirmation($tpl_vars)
  *
  *  $mode = 'no_header'
  *          'no_footer'
+ * @param $args
+ * @param string $type
+ * @param string $mode
  */
 function print_page($args, $type = '', $mode = '')
 {

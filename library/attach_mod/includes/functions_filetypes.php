@@ -29,6 +29,8 @@
 
 /**
  * Read Long Int (4 Bytes) from File
+ * @param $fp
+ * @return int
  */
 function read_longint($fp)
 {
@@ -44,6 +46,8 @@ function read_longint($fp)
 
 /**
  * Read Word (2 Bytes) from File - Note: It's an Intel Word
+ * @param $fp
+ * @return int
  */
 function read_word($fp)
 {
@@ -54,6 +58,8 @@ function read_word($fp)
 
 /**
  * Read Byte
+ * @param $fp
+ * @return int
  */
 function read_byte($fp)
 {
@@ -64,6 +70,8 @@ function read_byte($fp)
 
 /**
  * Get Image Dimensions
+ * @param $file
+ * @return array|bool
  */
 function image_getdimension($file)
 {

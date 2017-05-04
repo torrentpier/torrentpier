@@ -33,6 +33,10 @@ class cache_common
 
     /**
      * Returns value of variable
+     * @param $name
+     * @param string $get_miss_key_callback
+     * @param int $ttl
+     * @return array|bool
      */
     public function get($name, $get_miss_key_callback = '', $ttl = 604800)
     {
@@ -44,6 +48,10 @@ class cache_common
 
     /**
      * Store value of variable
+     * @param $name
+     * @param $value
+     * @param int $ttl
+     * @return bool
      */
     public function set($name, $value, $ttl = 604800): bool
     {
@@ -52,6 +60,8 @@ class cache_common
 
     /**
      * Remove variable
+     * @param string $name
+     * @return bool
      */
     public function rm($name = ''): bool
     {

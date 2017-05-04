@@ -29,6 +29,10 @@
 
 /**
  * Delete Attachment(s) from post(s) (intern)
+ * @param int $post_id_array
+ * @param int $attach_id_array
+ * @param int $page
+ * @param int $user_id
  */
 function delete_attachment($post_id_array = 0, $attach_id_array = 0, $page = 0, $user_id = 0)
 {

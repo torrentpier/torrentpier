@@ -41,6 +41,8 @@ if (!function_exists('html_entity_decode')) {
 
 /**
  * A simple dectobase64 function
+ * @param $number
+ * @return string|void
  */
 function base64_pack($number)
 {
@@ -72,6 +74,8 @@ function base64_pack($number)
 
 /**
  * base64todec function
+ * @param $string
+ * @return bool|int
  */
 function base64_unpack($string)
 {
@@ -95,6 +99,8 @@ function base64_unpack($string)
 /**
  * Per Forum based Extension Group Permissions (Encode Number) -> Theoretically up to 158 Forums saveable. :)
  * We are using a base of 64, but splitting it to one-char and two-char numbers. :)
+ * @param $auth_array
+ * @return string
  */
 function auth_pack($auth_array)
 {
@@ -121,6 +127,8 @@ function auth_pack($auth_array)
 
 /**
  * Reverse the auth_pack process
+ * @param $auth_cache
+ * @return array
  */
 function auth_unpack($auth_cache)
 {
@@ -152,6 +160,9 @@ function auth_unpack($auth_cache)
 
 /**
  * Used for determining if Forum ID is authed, please use this Function on all Posting Screens
+ * @param $auth_cache
+ * @param $check_forum_id
+ * @return bool
  */
 function is_forum_authed($auth_cache, $check_forum_id)
 {
@@ -189,6 +200,9 @@ function is_forum_authed($auth_cache, $check_forum_id)
 
 /**
  * Deletes an Attachment
+ * @param $filename
+ * @param bool $mode
+ * @return bool
  */
 function unlink_attach($filename, $mode = false)
 {
@@ -207,6 +221,8 @@ function unlink_attach($filename, $mode = false)
 
 /**
  * Check if Attachment exist
+ * @param $filename
+ * @return bool
  */
 function attachment_exists($filename)
 {
@@ -223,6 +239,8 @@ function attachment_exists($filename)
 
 /**
  * Check if Thumbnail exist
+ * @param $filename
+ * @return bool
  */
 function thumbnail_exists($filename)
 {
@@ -239,6 +257,8 @@ function thumbnail_exists($filename)
 
 /**
  * Physical Filename stored already ?
+ * @param $filename
+ * @return bool
  */
 function physical_filename_already_stored($filename)
 {
@@ -264,6 +284,8 @@ function physical_filename_already_stored($filename)
 
 /**
  * get all attachments from a post (could be an post array too)
+ * @param $post_id_array
+ * @return array
  */
 function get_attachments_from_post($post_id_array)
 {
@@ -313,6 +335,8 @@ function get_attachments_from_post($post_id_array)
 
 /**
  * Count Filesize of Attachments in Database based on the attachment id
+ * @param $attach_ids
+ * @return int
  */
 function get_total_attach_filesize($attach_ids)
 {
@@ -407,6 +431,8 @@ function attachment_sync_topic($topics)
 
 /**
  * Get Extension
+ * @param $filename
+ * @return string
  */
 function get_extension($filename)
 {
@@ -425,6 +451,8 @@ function get_extension($filename)
 
 /**
  * Delete Extension
+ * @param $filename
+ * @return bool|string
  */
 function delete_extension($filename)
 {
@@ -433,6 +461,9 @@ function delete_extension($filename)
 
 /**
  * Check if a user is within Group
+ * @param $user_id
+ * @param $group_id
+ * @return bool
  */
 function user_in_group($user_id, $group_id)
 {
@@ -463,6 +494,8 @@ function user_in_group($user_id, $group_id)
 
 /**
  * Realpath replacement for attachment mod
+ * @param $path
+ * @return bool|string
  */
 function amod_realpath($path)
 {
@@ -475,6 +508,10 @@ function amod_realpath($path)
  * Set variable, used by {@link get_var the get_var function}
  *
  * @private
+ * @param $result
+ * @param $var
+ * @param $type
+ * @param bool $multibyte
  */
 function _set_var(&$result, $var, $type, $multibyte = false)
 {
@@ -545,6 +582,8 @@ function get_var($var_name, $default, $multibyte = false)
 
 /**
  * Escaping SQL
+ * @param $text
+ * @return mixed|string
  */
 function attach_mod_sql_escape($text)
 {
@@ -560,6 +599,9 @@ function attach_mod_sql_escape($text)
  *
  * Idea for this from Ikonboard
  * Possible query values: INSERT, INSERT_SELECT, MULTI_INSERT, UPDATE, SELECT
+ * @param $query
+ * @param bool $assoc_ary
+ * @return string
  */
 function attach_mod_sql_build_array($query, $assoc_ary = false)
 {

@@ -102,6 +102,8 @@ class user_common
 
     /**
      *  Start session (restore existent session or create new)
+     * @param array $cfg
+     * @return array|bool|null
      */
     public function session_start($cfg = array())
     {
@@ -219,6 +221,9 @@ class user_common
 
     /**
      *  Create new session for the given user
+     * @param $userdata
+     * @param bool $auto_created
+     * @return array
      */
     public function session_create($userdata, $auto_created = false): array
     {
@@ -325,6 +330,8 @@ class user_common
 
     /**
      *  Initialize sessiondata stored in cookies
+     * @param bool $update_lastvisit
+     * @param bool $set_cookie
      */
     public function session_end($update_lastvisit = false, $set_cookie = true)
     {
@@ -363,6 +370,9 @@ class user_common
 
     /**
      *  Login
+     * @param $args
+     * @param bool $mod_admin_login
+     * @return array
      */
     public function login($args, $mod_admin_login = false): array
     {
@@ -443,6 +453,7 @@ class user_common
 
     /**
      *  Store sessiondata in cookies
+     * @param $user_id
      */
     public function set_session_cookies($user_id)
     {
@@ -478,6 +489,10 @@ class user_common
 
     /**
      *  Verify autologin_id
+     * @param $userdata
+     * @param bool $expire_check
+     * @param bool $create_new
+     * @return bool|string
      */
     public function verify_autologin_id($userdata, $expire_check = false, $create_new = true)
     {
@@ -502,6 +517,9 @@ class user_common
 
     /**
      *  Create autologin_id
+     * @param $userdata
+     * @param bool $create_new
+     * @return bool|string
      */
     public function create_autologin_id($userdata, $create_new = true)
     {
@@ -582,6 +600,7 @@ class user_common
 
     /**
      *  Mark read
+     * @param $type
      */
     public function mark_read($type)
     {
@@ -629,6 +648,8 @@ class user_common
 
     /**
      *  Get not auth forums
+     * @param $auth_type
+     * @return string
      */
     public function get_not_auth_forums($auth_type): string
     {
@@ -684,6 +705,9 @@ class user_common
 
     /**
      *  Get excluded forums
+     * @param $auth_type
+     * @param string $return_as
+     * @return array|bool|string
      */
     public function get_excluded_forums($auth_type, $return_as = 'csv')
     {

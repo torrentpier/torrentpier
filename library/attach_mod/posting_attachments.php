@@ -208,6 +208,8 @@ class attach_parent
     /**
      * Handle all modes... (intern)
      * @private
+     * @param $mode
+     * @return bool
      */
     public function handle_attachments($mode): bool
     {
@@ -534,6 +536,10 @@ class attach_parent
 
     /**
      * Basic Insert Attachment Handling for all Message Types
+     * @param $mode
+     * @param $message_type
+     * @param $message_id
+     * @return bool
      */
     public function do_insert_attachment($mode, $message_type, $message_id)
     {
@@ -1114,6 +1120,7 @@ class attach_posting extends attach_parent
 
     /**
      * Insert an Attachment into a Post (this is the second function called from posting.php)
+     * @param $post_id
      */
     public function insert_attachment($post_id)
     {

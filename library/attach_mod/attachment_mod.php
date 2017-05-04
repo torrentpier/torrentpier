@@ -39,6 +39,8 @@ if (defined('ATTACH_INSTALL')) {
 
 /**
  * wrapper function for determining the correct language directory
+ * @param $language_file
+ * @return
  */
 function attach_mod_get_lang($language_file)
 {

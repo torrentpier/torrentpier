@@ -1112,6 +1112,9 @@ function check_name_dup($mode, $name, $die_on_error = true)
 
 /**
  *  Change subforums cat_id if parent's cat_id was changed
+ * @param $parent_id
+ * @param $new_cat_id
+ * @param $order_shear
  */
 function change_sf_cat($parent_id, $new_cat_id, $order_shear)
 {
