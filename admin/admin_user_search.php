@@ -848,7 +848,7 @@ if (!isset($_REQUEST['dosearch'])) {
 
     $select_sql .= "	ORDER BY ";
 
-    switch (strtolower(@$_GET['sort'])) {
+    switch (strtolower($_GET['sort'])) {
         case 'regdate':
             $sort = 'regdate';
             $select_sql .= 'u.user_regdate';
@@ -875,7 +875,7 @@ if (!isset($_REQUEST['dosearch'])) {
             $select_sql .= 'u.username';
     }
 
-    switch (@$_GET['order']) {
+    switch ($_GET['order']) {
         case 'DESC':
             $order = 'DESC';
             $o_order = 'ASC';

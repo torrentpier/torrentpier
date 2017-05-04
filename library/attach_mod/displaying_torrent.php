@@ -369,10 +369,10 @@ if ($tor_reged && $tor_info) {
                 $tmp = array();
                 $tmp[0]['seeder'] = $tmp[0]['username'] = $tmp[1]['username'] = 0;
                 $tmp[1]['seeder'] = 1;
-                $tmp[0]['username'] = (int)@$peers[0]['leechers'];
-                $tmp[1]['username'] = (int)@$peers[0]['seeders'];
-                $tor_speed_up = (int)@$peers[0]['speed_up'];
-                $tor_speed_down = (int)@$peers[0]['speed_down'];
+                $tmp[0]['username'] = (int)$peers[0]['leechers'];
+                $tmp[1]['username'] = (int)$peers[0]['seeders'];
+                $tor_speed_up = (int)$peers[0]['speed_up'];
+                $tor_speed_down = (int)$peers[0]['speed_down'];
                 $peers = $tmp;
 
                 $template->assign_vars(array(
@@ -483,7 +483,7 @@ if ($tor_reged && $tor_info) {
                         $seeders .= '<nobr><a href="' . $u_prof_href . '" class="seedmed">' . $peer['username'] . '</a>,</nobr> ';
                         $seed_count = $peer['username'];
                     } else {
-                        $compl_size = (@$peer['remain'] && $tor_size && $tor_size > $peer['remain']) ? ($tor_size - $peer['remain']) : 0;
+                        $compl_size = ($peer['remain'] && $tor_size && $tor_size > $peer['remain']) ? ($tor_size - $peer['remain']) : 0;
                         $compl_perc = $compl_size ? floor($compl_size * 100 / $tor_size) : 0;
 
                         $leechers .= '<nobr><a href="' . $u_prof_href . '" class="leechmed">' . $peer['username'] . '</a>';

@@ -33,15 +33,15 @@ require ATTACH_DIR . '/attachment_mod.php';
 
 $page_cfg['load_tpl_vars'] = array('post_icons');
 
-$submit = (bool)@$_REQUEST['post'];
-$preview = (bool)@$_REQUEST['preview'];
-$delete = (bool)@$_REQUEST['delete'];
+$submit = (bool)$_REQUEST['post'];
+$preview = (bool)$_REQUEST['preview'];
+$delete = (bool)$_REQUEST['delete'];
 
-$forum_id = (int)@$_REQUEST[POST_FORUM_URL];
-$topic_id = (int)@$_REQUEST[POST_TOPIC_URL];
-$post_id = (int)@$_REQUEST[POST_POST_URL];
+$forum_id = (int)$_REQUEST[POST_FORUM_URL];
+$topic_id = (int)$_REQUEST[POST_TOPIC_URL];
+$post_id = (int)$_REQUEST[POST_POST_URL];
 
-$mode = (string)@$_REQUEST['mode'];
+$mode = (string)$_REQUEST['mode'];
 
 $confirm = isset($_POST['confirm']);
 
@@ -49,7 +49,7 @@ $refresh = $preview;
 $orig_word = $replacement_word = array();
 
 // Set topic type
-$topic_type = (@$_POST['topictype']) ? (int)$_POST['topictype'] : POST_NORMAL;
+$topic_type = ($_POST['topictype']) ? (int)$_POST['topictype'] : POST_NORMAL;
 $topic_type = in_array($topic_type, array(POST_NORMAL, POST_STICKY, POST_ANNOUNCE), true) ? $topic_type : POST_NORMAL;
 
 $selected_rg = 0;
@@ -281,7 +281,7 @@ execute_posting_attachment_handling();
 $topic_has_new_posts = false;
 
 if (!IS_GUEST && $mode != 'newtopic' && ($submit || $preview || $mode == 'quote' || $mode == 'reply') && isset($_COOKIE[COOKIE_TOPIC])) {
-    if ($topic_last_read = max((int)(@$tracking_topics[$topic_id]), (int)(@$tracking_forums[$forum_id]))) {
+    if ($topic_last_read = max((int)($tracking_topics[$topic_id]), (int)($tracking_forums[$forum_id]))) {
         $sql = "SELECT p.*, pt.post_text, u.username, u.user_rank
 			FROM " . BB_POSTS . " p, " . BB_POSTS_TEXT . " pt, " . BB_USERS . " u
 			WHERE p.topic_id = " . (int)$topic_id . "
@@ -637,7 +637,7 @@ $template->assign_vars(array(
     'POSTING_TOPIC_TITLE' => ($mode != 'newtopic') ? wbr($post_info['topic_title']) : '',
     'U_VIEW_FORUM' => "viewforum.php?" . POST_FORUM_URL . "=$forum_id",
 
-    'USERNAME' => @$username,
+    'USERNAME' => $username,
     'CAPTCHA_HTML' => IS_GUEST ? bb_captcha('get') : '',
     'SUBJECT' => $subject,
     'MESSAGE' => $message,

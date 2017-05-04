@@ -176,7 +176,7 @@ if ($search_imagick) {
         }
     }
 
-    if (!@file_exists(@amod_realpath(trim($imagick)))) {
+    if (!@file_exists(amod_realpath(trim($imagick)))) {
         $new_attach['img_imagick'] = trim($imagick);
     } else {
         $new_attach['img_imagick'] = '';
@@ -211,7 +211,7 @@ if ($check_upload) {
     $error = false;
 
     // Does the target directory exist, is it a directory and writeable
-    if (!@file_exists(@amod_realpath($upload_dir))) {
+    if (!@file_exists(amod_realpath($upload_dir))) {
         $error = true;
         $error_msg = sprintf($lang['DIRECTORY_DOES_NOT_EXIST'], $attach_config['upload_dir']) . '<br />';
     }
@@ -361,11 +361,11 @@ if ($check_image_cat) {
     $error = false;
 
     // Does the target directory exist, is it a directory and writeable
-    if (!@file_exists(@amod_realpath($upload_dir))) {
-        @mkdir($upload_dir, 0755);
+    if (!@file_exists(amod_realpath($upload_dir))) {
+        mkdir($upload_dir, 0755);
         @chmod($upload_dir, 0777);
 
-        if (!@file_exists(@amod_realpath($upload_dir))) {
+        if (!@file_exists(amod_realpath($upload_dir))) {
             $error = true;
             $error_msg = sprintf($lang['DIRECTORY_DOES_NOT_EXIST'], $upload_dir) . '<br />';
         }

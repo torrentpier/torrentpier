@@ -569,7 +569,7 @@ class attach_parent
 
                     // update entry in db if attachment already stored in db and filespace
                     $sql = 'UPDATE ' . BB_ATTACHMENTS_DESC . "
-						SET comment = '" . @attach_mod_sql_escape($this->attachment_comment_list[$i]) . "'
+						SET comment = '" . attach_mod_sql_escape($this->attachment_comment_list[$i]) . "'
 						WHERE attach_id = " . $this->attachment_id_list[$i];
 
                     if (!DB()->sql_query($sql)) {
@@ -584,7 +584,7 @@ class attach_parent
                     $sql_ary = array(
                         'physical_filename' => (string) basename($this->attachment_list[$i]),
                         'real_filename' => (string) basename($this->attachment_filename_list[$i]),
-                        'comment' => (string) @$this->attachment_comment_list[$i],
+                        'comment' => (string)$this->attachment_comment_list[$i],
                         'extension' => (string) strtolower($this->attachment_extension_list[$i]),
                         'mimetype' => (string) strtolower($this->attachment_mimetype_list[$i]),
                         'filesize' => (int) $this->attachment_filesize_list[$i],
@@ -691,10 +691,10 @@ class attach_parent
                 $hidden .= '<input type="hidden" name="filename_list[]" value="' . $this->attachment_filename_list[$i] . '" />';
                 $hidden .= '<input type="hidden" name="extension_list[]" value="' . $this->attachment_extension_list[$i] . '" />';
                 $hidden .= '<input type="hidden" name="mimetype_list[]" value="' . $this->attachment_mimetype_list[$i] . '" />';
-                $hidden .= '<input type="hidden" name="filesize_list[]" value="' . @$this->attachment_filesize_list[$i] . '" />';
-                $hidden .= '<input type="hidden" name="filetime_list[]" value="' . @$this->attachment_filetime_list[$i] . '" />';
-                $hidden .= '<input type="hidden" name="attach_id_list[]" value="' . @$this->attachment_id_list[$i] . '" />';
-                $hidden .= '<input type="hidden" name="attach_thumbnail_list[]" value="' . @$this->attachment_thumbnail_list[$i] . '" />';
+                $hidden .= '<input type="hidden" name="filesize_list[]" value="' . $this->attachment_filesize_list[$i] . '" />';
+                $hidden .= '<input type="hidden" name="filetime_list[]" value="' . $this->attachment_filetime_list[$i] . '" />';
+                $hidden .= '<input type="hidden" name="attach_id_list[]" value="' . $this->attachment_id_list[$i] . '" />';
+                $hidden .= '<input type="hidden" name="attach_thumbnail_list[]" value="' . $this->attachment_thumbnail_list[$i] . '" />';
 
                 if (!$this->posted_attachments_body || !$this->attachment_list) {
                     $hidden .= '<input type="hidden" name="comment_list[]" value="' . $this->attachment_comment_list[$i] . '" />';
@@ -719,17 +719,17 @@ class attach_parent
             ));
 
             for ($i = 0, $iMax = count($this->attachment_list); $i < $iMax; $i++) {
-                if (@$this->attachment_id_list[$i] == 0) {
+                if ($this->attachment_id_list[$i] == 0) {
                     $download_link = $upload_dir . '/' . basename($this->attachment_list[$i]);
                 } else {
                     $download_link = BB_ROOT . DOWNLOAD_URL . $this->attachment_id_list[$i];
                 }
 
                 $template->assign_block_vars('attach_row', array(
-                    'FILE_NAME' => @htmlspecialchars($this->attachment_filename_list[$i]),
-                    'ATTACH_FILENAME' => @$this->attachment_list[$i],
-                    'FILE_COMMENT' => @htmlspecialchars($this->attachment_comment_list[$i]),
-                    'ATTACH_ID' => @$this->attachment_id_list[$i],
+                    'FILE_NAME' => htmlspecialchars($this->attachment_filename_list[$i]),
+                    'ATTACH_FILENAME' => $this->attachment_list[$i],
+                    'FILE_COMMENT' => htmlspecialchars($this->attachment_comment_list[$i]),
+                    'ATTACH_ID' => $this->attachment_id_list[$i],
                     'U_VIEW_ATTACHMENT' => $download_link,
                 ));
 
@@ -738,7 +738,7 @@ class attach_parent
                     $template->assign_block_vars('attach_row.switch_thumbnail', array());
                 }
 
-                if (@$this->attachment_id_list[$i]) {
+                if ($this->attachment_id_list[$i]) {
                     $template->assign_block_vars('attach_row.switch_update_attachment', array());
                 }
             }

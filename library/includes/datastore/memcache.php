@@ -54,7 +54,7 @@ class datastore_memcache extends datastore_common
         $this->cur_query = $connect_type . ' ' . $this->cfg['host'] . ':' . $this->cfg['port'];
         $this->debug('start');
 
-        if (@$this->memcache->$connect_type($this->cfg['host'], $this->cfg['port'])) {
+        if ($this->memcache->$connect_type($this->cfg['host'], $this->cfg['port'])) {
             $this->connected = true;
         }
 

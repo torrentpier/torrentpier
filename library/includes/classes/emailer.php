@@ -193,8 +193,8 @@ class emailer
 
         $to = @$this->addresses['to'];
 
-        $cc = (@count($this->addresses['cc'])) ? implode(', ', $this->addresses['cc']) : '';
-        $bcc = (@count($this->addresses['bcc'])) ? implode(', ', $this->addresses['bcc']) : '';
+        $cc = (count($this->addresses['cc'])) ? implode(', ', $this->addresses['cc']) : '';
+        $bcc = (count($this->addresses['bcc'])) ? implode(', ', $this->addresses['bcc']) : '';
 
         // Build header
         $type = ($email_format == 'html') ? 'html' : 'plain';

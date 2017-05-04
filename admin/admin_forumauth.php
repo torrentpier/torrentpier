@@ -80,7 +80,7 @@ foreach ($forum_auth_fields as $auth_type) {
 $forum_auth_levels = array('ALL', 'REG', 'PRIVATE', 'MOD', 'ADMIN');
 $forum_auth_const = array(AUTH_ALL, AUTH_REG, AUTH_ACL, AUTH_MOD, AUTH_ADMIN);
 
-if (@$_REQUEST[POST_FORUM_URL]) {
+if ($_REQUEST[POST_FORUM_URL]) {
     $forum_id = (int)$_REQUEST[POST_FORUM_URL];
     $forum_sql = "WHERE forum_id = $forum_id";
 } else {
@@ -159,7 +159,7 @@ if (empty($forum_id)) {
     // Output the authorisation details if an id was specified
     $forum_name = $forum_rows[0]['forum_name'];
 
-    @reset($simple_auth_ary);
+    reset($simple_auth_ary);
     while (list($key, $auth_levels) = each($simple_auth_ary)) {
         $matched = 1;
         for ($k = 0; $k < count($auth_levels); $k++) {

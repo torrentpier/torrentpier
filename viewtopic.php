@@ -54,7 +54,7 @@ $posts_per_page = $bb_cfg['posts_per_page'];
 $select_ppp = '';
 
 if ($userdata['session_admin']) {
-    if ($req_ppp = abs((int)(@$_REQUEST['ppp'])) and in_array($req_ppp, $bb_cfg['allowed_posts_per_page'], true)) {
+    if ($req_ppp = abs((int)($_REQUEST['ppp'])) and in_array($req_ppp, $bb_cfg['allowed_posts_per_page'], true)) {
         $posts_per_page = $req_ppp;
     }
 
@@ -144,7 +144,7 @@ if (isset($t_data['topic_attachment'])) {
 }
 
 // Find newest post
-if (($next_topic_id || @$_GET['view'] === 'newest') && !IS_GUEST && $topic_id) {
+if (($next_topic_id || $_GET['view'] === 'newest') && !IS_GUEST && $topic_id) {
     $post_time = 'post_time >= ' . get_last_read($topic_id, $forum_id);
     $post_id_altern = $next_topic_id ? '' : ' OR post_id = ' . $t_data['topic_last_post_id'];
 

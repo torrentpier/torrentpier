@@ -562,10 +562,10 @@ function cron_touch_lock_file($lock_file)
 
 function cron_enable_board()
 {
-    @rename(BB_DISABLED, BB_ENABLED);
+    rename(BB_DISABLED, BB_ENABLED);
 }
 
 function cron_disable_board()
 {
-    @rename(BB_ENABLED, BB_DISABLED);
+    rename(BB_ENABLED, BB_DISABLED);
 }

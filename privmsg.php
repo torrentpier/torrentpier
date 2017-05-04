@@ -423,10 +423,10 @@ if ($mode == 'read') {
         'QR_SUBJECT' => (!preg_match('/^Re:/', $post_subject) ? 'Re: ' : '') . $post_subject,
         'MESSAGE_TO' => $username_to,
         'MESSAGE_FROM' => $username_from,
-        'RANK_IMAGE' => (@$rank_image) ? $rank_image : '',
-        'POSTER_JOINED' => (@$poster_joined) ? $poster_joined : '',
-        'POSTER_POSTS' => (@$poster_posts) ? $poster_posts : '',
-        'POSTER_FROM' => (@$poster_from) ? $poster_from : '',
+        'RANK_IMAGE' => ($rank_image) ? $rank_image : '',
+        'POSTER_JOINED' => ($poster_joined) ? $poster_joined : '',
+        'POSTER_POSTS' => ($poster_posts) ? $poster_posts : '',
+        'POSTER_FROM' => ($poster_from) ? $poster_from : '',
         'POST_SUBJECT' => $post_subject,
         'POST_DATE' => $post_date,
         'PM_MESSAGE' => $private_message,
@@ -535,11 +535,11 @@ if ($mode == 'read') {
                     do {
                         switch ($row['privmsgs_type']) {
                             case PRIVMSGS_NEW_MAIL:
-                                @$update_users['new'][$row['privmsgs_to_userid']]++;
+                                $update_users['new'][$row['privmsgs_to_userid']]++;
                                 break;
 
                             case PRIVMSGS_UNREAD_MAIL:
-                                @$update_users['unread'][$row['privmsgs_to_userid']]++;
+                                $update_users['unread'][$row['privmsgs_to_userid']]++;
                                 break;
                         }
                     } while ($row = DB()->sql_fetchrow($result));
@@ -698,11 +698,11 @@ if ($mode == 'read') {
                 do {
                     switch ($row['privmsgs_type']) {
                         case PRIVMSGS_NEW_MAIL:
-                            @$update_users['new'][$row['privmsgs_to_userid']]++;
+                            $update_users['new'][$row['privmsgs_to_userid']]++;
                             break;
 
                         case PRIVMSGS_UNREAD_MAIL:
-                            @$update_users['unread'][$row['privmsgs_to_userid']]++;
+                            $update_users['unread'][$row['privmsgs_to_userid']]++;
                             break;
                     }
                 } while ($row = DB()->sql_fetchrow($result));
@@ -1462,7 +1462,7 @@ if ($mode == 'read') {
     }
 }
 
-$template->assign_vars(array('PAGE_TITLE' => @$page_title));
+$template->assign_vars(array('PAGE_TITLE' => $page_title));
 
 require PAGE_HEADER;
 

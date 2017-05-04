@@ -233,7 +233,7 @@ function file_write($str, $file, $max_size = LOG_MAX_SIZE, $lock = true, $replac
         $new_name = $old_name . '_[old]_' . date('Y-m-d_H-i-s_') . getmypid() . $ext;
         clearstatcache();
         if (@file_exists($file) && @filesize($file) >= $max_size && !@file_exists($new_name)) {
-            @rename($file, $new_name);
+            rename($file, $new_name);
         }
     }
     if (!$fp = @fopen($file, 'ab')) {
@@ -243,11 +243,11 @@ function file_write($str, $file, $max_size = LOG_MAX_SIZE, $lock = true, $replac
     }
     if ($fp) {
         if ($lock) {
-            @flock($fp, LOCK_EX);
+            flock($fp, LOCK_EX);
         }
         if ($replace_content) {
-            @ftruncate($fp, 0);
-            @fseek($fp, 0, SEEK_SET);
+            ftruncate($fp, 0);
+            fseek($fp, 0, SEEK_SET);
         }
         $bytes_written = @fwrite($fp, $str);
         @fclose($fp);

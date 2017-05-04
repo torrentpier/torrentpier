@@ -28,10 +28,10 @@ require __DIR__ . '/common.php';
 
 $user->session_start(array('req_login' => true));
 
-$mode = (string)@$_POST['mode'];
-$topic_id = (int)@$_POST['topic_id'];
-$forum_id = (int)@$_POST['forum_id'];
-$vote_id = (int)@$_POST['vote_id'];
+$mode = (string)$_POST['mode'];
+$topic_id = (int)$_POST['topic_id'];
+$forum_id = (int)$_POST['forum_id'];
+$vote_id = (int)$_POST['vote_id'];
 
 $return_topic_url = TOPIC_URL . $topic_id;
 $return_topic_url .= !empty($_POST['start']) ? "&amp;start=" . (int)$_POST['start'] : '';
@@ -177,8 +177,8 @@ class bb_poll
 
     public function build_poll_data($posted_data)
     {
-        $poll_caption = (string)@$posted_data['poll_caption'];
-        $poll_votes = (string)@$posted_data['poll_votes'];
+        $poll_caption = (string)$posted_data['poll_caption'];
+        $poll_votes = (string)$posted_data['poll_votes'];
         $this->poll_votes = array();
 
         if (!$poll_caption = str_compact($poll_caption)) {

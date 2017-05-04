@@ -140,7 +140,7 @@ if ($submit && $mode == 'extensions') {
             'ADD_EXTENSION_EXPLAIN' => $extension_explain,
         ));
 
-        if (!@$error) {
+        if (!$error) {
             // check extension
             $sql = 'SELECT extension FROM ' . BB_EXTENSIONS;
 
@@ -164,7 +164,7 @@ if ($submit && $mode == 'extensions') {
                 }
             }
 
-            if (!@$error) {
+            if (!$error) {
                 $sql_ary = array(
                     'group_id' => (int)$extension_group,
                     'extension' => (string)strtolower($extension),
@@ -180,7 +180,7 @@ if ($submit && $mode == 'extensions') {
         }
     }
 
-    if (!@$error) {
+    if (!$error) {
         bb_die($lang['ATTACH_CONFIG_UPDATED'] . '<br /><br />' . sprintf($lang['CLICK_RETURN_ATTACH_CONFIG'], '<a href="admin_extensions.php?mode=extensions">', '</a>') . '<br /><br />' . sprintf($lang['CLICK_RETURN_ADMIN_INDEX'], '<a href="index.php?pane=right">', '</a>'));
     }
 }
@@ -339,7 +339,7 @@ if ($submit && $mode == 'groups') {
             }
         }
 
-        if (!@$error) {
+        if (!$error) {
             $filesize = ($size_select == 'kb') ? round($filesize * 1024) : (($size_select == 'mb') ? round($filesize * 1048576) : $filesize);
 
             $sql_ary = array(
@@ -360,7 +360,7 @@ if ($submit && $mode == 'groups') {
         }
     }
 
-    if (!@$error) {
+    if (!$error) {
         bb_die($lang['ATTACH_CONFIG_UPDATED'] . '<br /><br />' . sprintf($lang['CLICK_RETURN_ATTACH_CONFIG'], '<a href="admin_extensions.php?mode=groups">', '</a>') . '<br /><br />' . sprintf($lang['CLICK_RETURN_ADMIN_INDEX'], '<a href="index.php?pane=right">', '</a>'));
     }
 }
@@ -383,7 +383,7 @@ if ($mode == 'groups') {
 
     $template->assign_vars(array(
         'TPL_ATTACH_EXTENSION_GROUPS' => true,
-        'ADD_GROUP_NAME' => isset($submit) ? @$extension_group : '',
+        'ADD_GROUP_NAME' => isset($submit) ? $extension_group : '',
         'MAX_FILESIZE' => $max_add_filesize,
         'S_FILESIZE' => size_select('add_size_select', $size),
         'S_ADD_DOWNLOAD_MODE' => download_select('add_download_mode'),
@@ -467,7 +467,7 @@ if ($e_mode == 'perm') {
 }
 
 // Add Forums
-if (@$add_forum && $e_mode == 'perm' && $group) {
+if ($add_forum && $e_mode == 'perm' && $group) {
     $add_forums_list = get_var('entries', array(0));
     $add_all_forums = false;
 
@@ -523,7 +523,7 @@ if (@$add_forum && $e_mode == 'perm' && $group) {
 }
 
 // Delete Forums
-if (@$delete_forum && $e_mode == 'perm' && $group) {
+if ($delete_forum && $e_mode == 'perm' && $group) {
     $delete_forums_list = get_var('entries', array(0));
 
     // Get the current Forums
@@ -680,7 +680,7 @@ if ($e_mode == 'perm' && $group) {
     }
 }
 
-if (@$error) {
+if ($error) {
     $template->assign_vars(array('ERROR_MESSAGE' => $error_msg));
 }
 

@@ -46,7 +46,7 @@ function send_file_to_browser($attachment, $upload_dir)
 
     $gotit = false;
 
-    if (@!file_exists(@amod_realpath($filename))) {
+    if (!file_exists(amod_realpath($filename))) {
         bb_die($lang['ERROR_NO_ATTACHMENT'] . "<br /><br />" . $filename . "<br /><br />" . $lang['TOR_NOT_FOUND']);
     } else {
         $gotit = true;

@@ -37,10 +37,10 @@ require INC_DIR . '/functions_group.php';
 $yes_sign = '&radic;';
 $no_sign = 'x';
 
-$group_id = (int)@$_REQUEST['g'];
-$user_id = (int)@$_REQUEST['u'];
-$cat_id = (int)@$_REQUEST['c'];
-$mode = (string)@$_REQUEST['mode'];
+$group_id = (int)$_REQUEST['g'];
+$user_id = (int)$_REQUEST['u'];
+$cat_id = (int)$_REQUEST['c'];
+$mode = (string)$_REQUEST['mode'];
 $submit = isset($_POST['submit']);
 
 $group_data = array();
@@ -87,7 +87,7 @@ if ($submit && $mode == 'user') {
     }
 
     // Make user an admin (if already user)
-    if (@$_POST['userlevel'] === 'admin') {
+    if ($_POST['userlevel'] === 'admin') {
         if ($userdata['user_id'] == $user_id || $user_id == GUEST_UID || $user_id == BOT_UID) {
             bb_die("Could not update admin status");
         }
@@ -103,7 +103,7 @@ if ($submit && $mode == 'user') {
 
         bb_die($message);
     } // Make admin a user (if already admin)
-    elseif (@$_POST['userlevel'] === 'user') {
+    elseif ($_POST['userlevel'] === 'user') {
         // ignore if you're trying to change yourself from an admin to user!
         if ($userdata['user_id'] == $user_id) {
             bb_die("Could not update admin status<br /><br />Could not change yourself from an admin to user");
@@ -125,7 +125,7 @@ if ($submit && $mode == 'user') {
     //
     $auth = array();
 
-    if (is_array(@$_POST['auth'])) {
+    if (is_array($_POST['auth'])) {
         array_deep($_POST['auth'], 'intval');
 
         foreach ($_POST['auth'] as $f_id => $bf_ary) {
@@ -150,7 +150,7 @@ if ($submit && $mode == 'user') {
 //
 // Submit new GROUP permissions
 //
-elseif ($submit && $mode == 'group' && is_array(@$_POST['auth'])) {
+elseif ($submit && $mode == 'group' && is_array($_POST['auth'])) {
     if (!$group_data = get_group_data($group_id)) {
         bb_die($lang['GROUP_NOT_EXIST']);
     }

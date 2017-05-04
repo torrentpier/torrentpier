@@ -2331,8 +2331,8 @@ class utf8
         if (!$restore_table) {
             return $s;
         }
-        if (!is_int(@$restore_table['length']) ||
-            !is_array(@$restore_table['offsets']) ||
+        if (!is_int($restore_table['length']) ||
+            !is_array($restore_table['offsets']) ||
             $restore_table['length'] !== self::strlen($s)
         ) {
             return false;
@@ -4049,7 +4049,7 @@ class utf8
     {
         $fixed = false;
         #ATTENTION! HTTP_RAW_POST_DATA is only accessible when Content-Type of POST request is NOT default "application/x-www-form-urlencoded"!
-        $HTTP_RAW_POST_DATA = isset($_SERVER['REQUEST_METHOD']) && $_SERVER['REQUEST_METHOD'] === 'POST' ? ($GLOBALS['HTTP_RAW_POST_DATA'] ?? @file_get_contents('php://input')) : null;
+        $HTTP_RAW_POST_DATA = isset($_SERVER['REQUEST_METHOD']) && $_SERVER['REQUEST_METHOD'] === 'POST' ? ($GLOBALS['HTTP_RAW_POST_DATA'] ?? file_get_contents('php://input')) : null;
         if (ini_get('always_populate_raw_post_data')) {
             $GLOBALS['HTTP_RAW_POST_DATA'] = $HTTP_RAW_POST_DATA;
         }

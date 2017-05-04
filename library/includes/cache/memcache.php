@@ -55,7 +55,7 @@ class cache_memcache extends cache_common
         $this->cur_query = $connect_type . ' ' . $this->cfg['host'] . ':' . $this->cfg['port'];
         $this->debug('start');
 
-        if (@$this->memcache->$connect_type($this->cfg['host'], $this->cfg['port'])) {
+        if ($this->memcache->$connect_type($this->cfg['host'], $this->cfg['port'])) {
             $this->connected = true;
         }
 

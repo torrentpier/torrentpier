@@ -53,7 +53,7 @@ $last_session_id = (int)$last_session_data['rebuild_session_id'];
 $max_post_id = get_latest_post_id();
 $start_time = TIMENOW;
 
-$mode = (string)@$_REQUEST['mode'];
+$mode = (string)$_REQUEST['mode'];
 
 // check if the user has choosen to stop processing
 if (isset($_REQUEST['cancel_button'])) {
@@ -70,7 +70,7 @@ if (isset($_REQUEST['cancel_button'])) {
 }
 
 // from which post to start processing
-$start = abs((int)(@$_REQUEST['start']));
+$start = abs((int)($_REQUEST['start']));
 
 // get the total number of posts in the db
 $total_posts = get_total_posts();
@@ -138,7 +138,7 @@ if ($mode == 'submit') {
 }
 
 // Increase maximum execution time in case of a lot of posts, but don't complain about it if it isn't allowed.
-@set_time_limit($time_limit + 20);
+set_time_limit($time_limit + 20);
 
 // check if we are should start processing
 if ($mode == 'submit' || $mode == 'refresh') {
@@ -174,7 +174,7 @@ if ($mode == 'submit' || $mode == 'refresh') {
     $words_sql = array();
 
     while ($row = DB()->fetch_next($result) and !$timer_expired) {
-        @set_time_limit(600);
+        set_time_limit(600);
         $start_post_id = ($num_rows == 0) ? $row['post_id'] : $start_post_id;
         $end_post_id = $row['post_id'];
 

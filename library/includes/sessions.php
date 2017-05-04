@@ -266,7 +266,7 @@ class user_common
             ));
             $sql = "INSERT INTO " . BB_SESSIONS . $args;
 
-            if (@DB()->query($sql)) {
+            if (DB()->query($sql)) {
                 break;
             }
             if ($i == $max_try) {

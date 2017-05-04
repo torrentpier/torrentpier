@@ -109,7 +109,7 @@ function sort_multi_array($sort_array, $key, $sort_order, $pre_string_sort = 0)
     $last_element = count($sort_array) - 1;
 
     if (!$pre_string_sort) {
-        $string_sort = (!is_numeric(@$sort_array[$last_element - 1][$key])) ? true : false;
+        $string_sort = (!is_numeric($sort_array[$last_element - 1][$key])) ? true : false;
     } else {
         $string_sort = $pre_string_sort;
     }
@@ -122,15 +122,15 @@ function sort_multi_array($sort_array, $key, $sort_order, $pre_string_sort = 0)
             $switch = false;
             if (!$string_sort) {
                 if (
-                    ($sort_order == 'DESC' && (int)(@$sort_array[$j][$key]) < (int)(@$sort_array[$j + 1][$key])) ||
-                    ($sort_order == 'ASC' && (int)(@$sort_array[$j][$key]) > (int)(@$sort_array[$j + 1][$key]))
+                    ($sort_order == 'DESC' && (int)($sort_array[$j][$key]) < (int)($sort_array[$j + 1][$key])) ||
+                    ($sort_order == 'ASC' && (int)($sort_array[$j][$key]) > (int)($sort_array[$j + 1][$key]))
                 ) {
                     $switch = true;
                 }
             } else {
                 if (
-                    ($sort_order == 'DESC' && strcasecmp(@$sort_array[$j][$key], @$sort_array[$j + 1][$key]) < 0) ||
-                    ($sort_order == 'ASC' && strcasecmp(@$sort_array[$j][$key], @$sort_array[$j + 1][$key]) > 0)
+                    ($sort_order == 'DESC' && strcasecmp($sort_array[$j][$key], $sort_array[$j + 1][$key]) < 0) ||
+                    ($sort_order == 'ASC' && strcasecmp($sort_array[$j][$key], $sort_array[$j + 1][$key]) > 0)
                 ) {
                     $switch = true;
                 }

@@ -68,7 +68,7 @@ function smtpmail($mail_to, $subject, $message, $headers = '')
         // but we have to grab bcc and cc headers and treat them differently
         // Something we really didn't take into consideration originally
         $header_array = explode("\r\n", $headers);
-        @reset($header_array);
+        reset($header_array);
 
         $headers = $cc = $bcc = '';
         while (list(, $header) = each($header_array)) {
@@ -135,7 +135,7 @@ function smtpmail($mail_to, $subject, $message, $headers = '')
     }
 
     // Ok now do the CC and BCC fields...
-    @reset($bcc);
+    reset($bcc);
     while (list(, $bcc_address) = each($bcc)) {
         // Add an additional bit of error checking to bcc header...
         $bcc_address = trim($bcc_address);
@@ -145,7 +145,7 @@ function smtpmail($mail_to, $subject, $message, $headers = '')
         }
     }
 
-    @reset($cc);
+    reset($cc);
     while (list(, $cc_address) = each($cc)) {
         // Add an additional bit of error checking to cc header
         $cc_address = trim($cc_address);

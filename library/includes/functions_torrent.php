@@ -294,7 +294,7 @@ function tracker_register($attach_id, $mode = '', $tor_status = TOR_NOT_APPROVED
     if ($bb_cfg['bt_check_announce_url']) {
         include INC_DIR . '/torrent_announce_urls.php';
 
-        $ann = (@$tor['announce']) ? $tor['announce'] : '';
+        $ann = ($tor['announce']) ? $tor['announce'] : '';
         $announce_urls['main_url'] = $bb_cfg['bt_announce_url'];
 
         if (!$ann || !in_array($ann, $announce_urls, true)) {
@@ -303,7 +303,7 @@ function tracker_register($attach_id, $mode = '', $tor_status = TOR_NOT_APPROVED
         }
     }
 
-    $info = (@$tor['info']) ? $tor['info'] : array();
+    $info = ($tor['info']) ? $tor['info'] : array();
 
     if (!isset($info['name']) || !isset($info['piece length']) || !isset($info['pieces']) || strlen($info['pieces']) % 20 != 0) {
         return torrent_error_exit($lang['TORFILE_INVALID']);

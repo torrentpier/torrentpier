@@ -29,8 +29,8 @@ if (!defined('IN_AJAX')) {
 
 global $user, $lang;
 
-$post_id = (int)@$this->request['post_id'];
-$topic_id = (int)@$this->request['topic_id'];
+$post_id = (int)$this->request['post_id'];
+$topic_id = (int)$this->request['topic_id'];
 
 if (!$post_id) {
     $post_id = DB()->fetch_row("SELECT topic_first_post_id FROM " . BB_TOPICS . " WHERE topic_id = $topic_id", 'topic_first_post_id');

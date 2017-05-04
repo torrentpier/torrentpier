@@ -126,7 +126,7 @@ if (isset($_GET['import_pack']) || isset($_POST['import_pack'])) {
     } else {
         // Display the script to get the smile_pak cfg file
         $smile_paks_select = '<select name="smile_pak"><option value="">' . $lang['SELECT_PAK'] . '</option>';
-        while (list($key, $value) = @each($smiley_paks)) {
+        while (list($key, $value) = each($smiley_paks)) {
             if (!empty($value)) {
                 $smile_paks_select .= '<option>' . $value . '</option>';
             }

@@ -1009,7 +1009,7 @@ class template
 
         switch ($expr_type) {
             case 'even':
-                if (@$tokens[$expr_end] == 'by') {
+                if ($tokens[$expr_end] == 'by') {
                     $expr_end++;
                     $expr_arg = $tokens[$expr_end++];
                     $expr = "!(($is_arg	/ $expr_arg) % $expr_arg)";
@@ -1019,7 +1019,7 @@ class template
                 break;
 
             case 'odd':
-                if (@$tokens[$expr_end] == 'by') {
+                if ($tokens[$expr_end] == 'by') {
                     $expr_end++;
                     $expr_arg = $tokens[$expr_end++];
                     $expr = "(($is_arg / $expr_arg)	% $expr_arg)";
@@ -1029,7 +1029,7 @@ class template
                 break;
 
             case 'div':
-                if (@$tokens[$expr_end] == 'by') {
+                if ($tokens[$expr_end] == 'by') {
                     $expr_end++;
                     $expr_arg = $tokens[$expr_end++];
                     $expr = "!($is_arg % $expr_arg)";

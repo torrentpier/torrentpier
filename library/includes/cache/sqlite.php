@@ -154,7 +154,7 @@ class sqlite_common extends cache_common
         $this->cur_query = $this->dbg_enabled ? 'connect to: ' . $this->cfg['db_file_path'] : 'connect';
         $this->debug('start');
 
-        if (@$this->dbh = new SQLite3($this->cfg['db_file_path'])) {
+        if ($this->dbh = new SQLite3($this->cfg['db_file_path'])) {
             $this->connected = true;
         }
 

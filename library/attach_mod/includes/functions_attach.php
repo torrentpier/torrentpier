@@ -230,7 +230,7 @@ function attachment_exists($filename)
 
     $filename = basename($filename);
 
-    if (!@file_exists(@amod_realpath($upload_dir . '/' . $filename))) {
+    if (!@file_exists(amod_realpath($upload_dir . '/' . $filename))) {
         return false;
     }
 
@@ -248,7 +248,7 @@ function thumbnail_exists($filename)
 
     $filename = basename($filename);
 
-    if (!@file_exists(@amod_realpath($upload_dir . '/' . THUMB_DIR . '/t_' . $filename))) {
+    if (!@file_exists(amod_realpath($upload_dir . '/' . THUMB_DIR . '/t_' . $filename))) {
         return false;
     }
 

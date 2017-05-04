@@ -157,7 +157,7 @@ function init_display_post_attachments($switch_attachment)
         return;
     }
 
-    @reset($attachments);
+    reset($attachments);
 
     for ($i = 0; $i < $num_rows; $i++) {
         $attachments['_' . $rows[$i]['post_id']][] = $rows[$i];
@@ -234,7 +234,7 @@ function display_attachments($post_id)
             $thumbnail = false;
             $link = false;
 
-            if (@(int)$display_categories[$attachments['_' . $post_id][$i]['extension']] == IMAGE_CAT && (int)$attach_config['img_display_inlined']) {
+            if ((int)$display_categories[$attachments['_' . $post_id][$i]['extension']] == IMAGE_CAT && (int)$attach_config['img_display_inlined']) {
                 if ((int)$attach_config['img_link_width'] != 0 || (int)$attach_config['img_link_height'] != 0) {
                     list($width, $height) = image_getdimension($filename);
 
@@ -250,7 +250,7 @@ function display_attachments($post_id)
                 }
             }
 
-            if (@(int)$display_categories[$attachments['_' . $post_id][$i]['extension']] == IMAGE_CAT && $attachments['_' . $post_id][$i]['thumbnail'] == 1) {
+            if ((int)$display_categories[$attachments['_' . $post_id][$i]['extension']] == IMAGE_CAT && $attachments['_' . $post_id][$i]['thumbnail'] == 1) {
                 $thumbnail = true;
                 $image = false;
             }

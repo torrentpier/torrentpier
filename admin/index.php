@@ -131,7 +131,7 @@ if (isset($_GET['pane']) && $_GET['pane'] == 'left') {
 
                     $dbsize = 0;
                     for ($i = 0; $i < count($tabledata_ary); $i++) {
-                        if (@$tabledata_ary[$i]['Type'] != 'MRG_MYISAM') {
+                        if ($tabledata_ary[$i]['Type'] != 'MRG_MYISAM') {
                             $dbsize += $tabledata_ary[$i]['Data_length'] + $tabledata_ary[$i]['Index_length'];
                         }
                     }
@@ -159,7 +159,7 @@ if (isset($_GET['pane']) && $_GET['pane'] == 'left') {
         'GZIP_COMPRESSION' => $bb_cfg['gzip_compress'] ? $lang['ON'] : $lang['OFF'],
     ));
 
-    if (@$_GET['users_online']) {
+    if ($_GET['users_online']) {
         $template->assign_vars(array(
             'SHOW_USERS_ONLINE' => true,
         ));
