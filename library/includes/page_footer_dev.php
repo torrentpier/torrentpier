@@ -124,7 +124,7 @@ function fixSqlLog() {
 echo '</div><!-- / sqlLogHead -->';
 
 if ($sql_log) {
-    echo '<div class="sqlLog" id="sqlLog">' . ($sql_log ? $sql_log : '') . '</div><!-- / sqlLog --><br clear="all" />';
+    echo '<div class="sqlLog" id="sqlLog">' . ($sql_log ?: '') . '</div><!-- / sqlLog --><br clear="all" />';
 }
 ?>
 <script type="text/javascript">

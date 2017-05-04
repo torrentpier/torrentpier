@@ -207,7 +207,7 @@ if ($mode) {
                 }
 
                 $cat_id = $parent['cat_id'];
-                $forum_parent = ($parent['forum_parent']) ? $parent['forum_parent'] : $parent['forum_id'];
+                $forum_parent = ($parent['forum_parent']) ?: $parent['forum_id'];
                 $forum_order = $parent['forum_order'] + 5;
             } else {
                 $max_order = get_max_forum_order($cat_id);
@@ -273,7 +273,7 @@ if ($mode) {
                 }
 
                 $cat_id = $parent['cat_id'];
-                $forum_parent = ($parent['forum_parent']) ? $parent['forum_parent'] : $parent['forum_id'];
+                $forum_parent = ($parent['forum_parent']) ?: $parent['forum_id'];
                 $forum_order = $parent['forum_order'] + 5;
 
                 if ($forum_id == $forum_parent) {
@@ -750,7 +750,7 @@ if (!$mode || $show_main_page) {
                         'FORUM_DESC' => htmlCHR($forum_rows[$j]['forum_desc']),
                         'NUM_TOPICS' => $forum_rows[$j]['forum_topics'],
                         'NUM_POSTS' => $forum_rows[$j]['forum_posts'],
-                        'PRUNE_DAYS' => ($forum_rows[$j]['prune_days']) ? $forum_rows[$j]['prune_days'] : '-',
+                        'PRUNE_DAYS' => ($forum_rows[$j]['prune_days']) ?: '-',
 
                         'ORDER' => $forum_rows[$j]['forum_order'],
                         'FORUM_ID' => $forum_rows[$j]['forum_id'],

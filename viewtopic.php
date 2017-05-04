@@ -606,7 +606,7 @@ for ($i = 0; $i < $total_posts; $i++) {
     $mc_comment = $postrow[$i]['mc_comment'];
     $mc_user_id = profile_url(array('username' => $postrow[$i]['mc_username'], 'user_id' => $postrow[$i]['mc_user_id'], 'user_rank' => $postrow[$i]['mc_user_rank']));
 
-    $rg_id = ($postrow[$i]['poster_rg_id']) ? $postrow[$i]['poster_rg_id'] : 0;
+    $rg_id = ($postrow[$i]['poster_rg_id']) ?: 0;
     $rg_avatar = get_avatar(GROUP_AVATAR_MASK . $rg_id, $postrow[$i]['rg_avatar_id']);
     $rg_name = ($postrow[$i]['group_name']) ? htmlCHR($postrow[$i]['group_name']) : '';
     $rg_signature = ($postrow[$i]['group_signature']) ? bbcode2html(htmlCHR($postrow[$i]['group_signature'])) : '';

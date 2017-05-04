@@ -643,7 +643,7 @@ $template->assign_vars(array(
     'MESSAGE' => $message,
 
     'POSTER_RGROUPS' => isset($poster_rgroups) && !empty($poster_rgroups) ? $poster_rgroups : '',
-    'ATTACH_RG_SIG' => ($switch_rg_sig) ? $switch_rg_sig : false,
+    'ATTACH_RG_SIG' => ($switch_rg_sig) ?: false,
 
     'U_VIEWTOPIC' => ($mode == 'reply') ? "viewtopic.php?" . POST_TOPIC_URL . "=$topic_id&amp;postorder=desc" : '',
 

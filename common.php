@@ -451,7 +451,7 @@ function log_request($file = '', $prepend_str = false, $add_post = true)
 {
     global $user;
 
-    $file = ($file) ? $file : 'req/' . date('m-d');
+    $file = ($file) ?: 'req/' . date('m-d');
     $str = array();
     $str[] = date('m-d H:i:s');
     if ($prepend_str !== false) {

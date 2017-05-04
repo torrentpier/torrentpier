@@ -74,8 +74,8 @@ if ($releasing) {
             'U_VIEW_FORUM' => FORUM_URL . $row['forum_id'],
             'U_VIEW_TOPIC' => TOPIC_URL . $row['topic_id'],
             'TOR_TYPE' => is_gold($row['tor_type']),
-            'TOPIC_SEEDERS' => ($row['seeders']) ? $row['seeders'] : 0,
-            'TOPIC_LEECHERS' => ($row['leechers']) ? $row['leechers'] : 0,
+            'TOPIC_SEEDERS' => ($row['seeders']) ?: 0,
+            'TOPIC_LEECHERS' => ($row['leechers']) ?: 0,
             'SPEED_UP' => ($row['speed_up']) ? humn_size($row['speed_up'], 0, 'KB') . '/s' : '-',
         ));
 
@@ -94,8 +94,8 @@ if ($seeding) {
             'U_VIEW_FORUM' => FORUM_URL . $row['forum_id'],
             'U_VIEW_TOPIC' => TOPIC_URL . $row['topic_id'],
             'TOR_TYPE' => is_gold($row['tor_type']),
-            'TOPIC_SEEDERS' => ($row['seeders']) ? $row['seeders'] : 0,
-            'TOPIC_LEECHERS' => ($row['leechers']) ? $row['leechers'] : 0,
+            'TOPIC_SEEDERS' => ($row['seeders']) ?: 0,
+            'TOPIC_LEECHERS' => ($row['leechers']) ?: 0,
             'SPEED_UP' => ($row['speed_up']) ? humn_size($row['speed_up'], 0, 'KB') . '/s' : '-',
         ));
 
@@ -117,8 +117,8 @@ if ($leeching) {
             'U_VIEW_TOPIC' => TOPIC_URL . $row['topic_id'],
             'COMPL_PERC' => $compl_perc,
             'TOR_TYPE' => is_gold($row['tor_type']),
-            'TOPIC_SEEDERS' => ($row['seeders']) ? $row['seeders'] : 0,
-            'TOPIC_LEECHERS' => ($row['leechers']) ? $row['leechers'] : 0,
+            'TOPIC_SEEDERS' => ($row['seeders']) ?: 0,
+            'TOPIC_LEECHERS' => ($row['leechers']) ?: 0,
             'SPEED_DOWN' => ($row['speed_down']) ? humn_size($row['speed_down'], 0, 'KB') . '/s' : '-',
         ));
 

@@ -1389,7 +1389,7 @@ if ($mode == 'read') {
         'INBOX_LIMIT_IMG_WIDTH' => max(4, $box_limit_img_length),
         'INBOX_LIMIT_PERCENT' => $box_limit_percent,
 
-        'BOX_SIZE_STATUS' => ($l_box_size_status) ? $l_box_size_status : '',
+        'BOX_SIZE_STATUS' => ($l_box_size_status) ?: '',
 
         'L_FROM_OR_TO' => ($folder == 'inbox' || $folder == 'savebox') ? $lang['FROM'] : $lang['TO'],
 

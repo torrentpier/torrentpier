@@ -53,7 +53,7 @@ if (!($result = DB()->sql_query($sql))) {
     bb_die('Could not obtain watch topic information #2');
 }
 $row = DB()->sql_fetchrow($result);
-$watch_count = ($row['watch_count']) ? $row['watch_count'] : 0;
+$watch_count = ($row['watch_count']) ?: 0;
 DB()->sql_freeresult($result);
 
 if ($watch_count > 0) {
