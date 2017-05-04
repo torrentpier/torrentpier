@@ -173,7 +173,7 @@ class template
             $filename = $this->replace[$filename];
         }
         // Check if it's an absolute or relative path.
-        if ((substr($filename, 0, 1) !== '/') && (substr($filename, 1, 1) !== ':')) {
+        if (($filename[0] !== '/') && ($filename[1] !== ':')) {
             return $this->root . '/' . $filename;
         }
 

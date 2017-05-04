@@ -32,7 +32,7 @@ define('SMTP_INCLUDED', 1);
 function server_parse($socket, $response, $line = __LINE__)
 {
     $server_response = '';
-    while (substr($server_response, 3, 1) != ' ') {
+    while ($server_response[3] != ' ') {
         if (!($server_response = fgets($socket, 256))) {
             bb_die('Could not get mail server response codes');
         }

@@ -83,7 +83,7 @@ function base64_unpack($string)
 
     for ($i = 1; $i <= $length; $i++) {
         $pos = $length - $i;
-        $operand = strpos($chars, substr($string, $pos, 1));
+        $operand = strpos($chars, $string[$pos]);
         $exponent = $base ** ($i - 1);
         $decValue = $operand * $exponent;
         $number += $decValue;
@@ -131,7 +131,7 @@ function auth_unpack($auth_cache)
     $auth_len = 1;
 
     for ($pos = 0; $pos < strlen($auth_cache); $pos += $auth_len) {
-        $forum_auth = substr($auth_cache, $pos, 1);
+        $forum_auth = $auth_cache[$pos];
         if ($forum_auth == $one_char_encoding) {
             $auth_len = 1;
             continue;
@@ -166,7 +166,7 @@ function is_forum_authed($auth_cache, $check_forum_id)
     $auth_len = 1;
 
     for ($pos = 0; $pos < strlen($auth_cache); $pos += $auth_len) {
-        $forum_auth = substr($auth_cache, $pos, 1);
+        $forum_auth = $auth_cache[$pos];
         if ($forum_auth == $one_char_encoding) {
             $auth_len = 1;
             continue;
