@@ -378,7 +378,7 @@ define('SELECT', 6);
 
 if (!empty($banned_user_agents)) {
     foreach ($banned_user_agents as $agent) {
-        if (strstr(USER_AGENT, $agent)) {
+        if (false !== strpos(USER_AGENT, $agent)) {
             $filename = 'Download files by using browser';
             $output = '@';
             header('Content-Type: text/plain');

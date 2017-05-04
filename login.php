@@ -48,7 +48,7 @@ $login_errors = array();
 if (preg_match('/^redirect=([a-z0-9\.#\/\?&=\+\-_]+)/si', $_SERVER['QUERY_STRING'], $matches)) {
     $redirect_url = $matches[1];
 
-    if (!strstr($redirect_url, '?') && $first_amp = strpos($redirect_url, '&')) {
+    if (false === strpos($redirect_url, '?') && $first_amp = strpos($redirect_url, '&')) {
         $redirect_url[$first_amp] = '?';
     }
 } elseif (!empty($_POST['redirect'])) {
@@ -60,7 +60,7 @@ if (preg_match('/^redirect=([a-z0-9\.#\/\?&=\+\-_]+)/si', $_SERVER['QUERY_STRING
 $redirect_url = str_replace('&admin=1', '', $redirect_url);
 $redirect_url = str_replace('?admin=1', '', $redirect_url);
 
-if (!$redirect_url || strstr(urldecode($redirect_url), "\n") || strstr(urldecode($redirect_url), "\r") || strstr(urldecode($redirect_url), ';url')) {
+if (!$redirect_url || false !== strpos(urldecode($redirect_url), "\n") || false !== strpos(urldecode($redirect_url), "\r") || false !== strpos(urldecode($redirect_url), ';url')) {
     $redirect_url = "index.php";
 }
 

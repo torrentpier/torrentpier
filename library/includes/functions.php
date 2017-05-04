@@ -1741,7 +1741,7 @@ function redirect($url)
         trigger_error("Headers already sent in $filename($linenum)", E_USER_ERROR);
     }
 
-    if (strstr(urldecode($url), "\n") || strstr(urldecode($url), "\r") || strstr(urldecode($url), ';url')) {
+    if (false !== strpos(urldecode($url), "\n") || false !== strpos(urldecode($url), "\r") || false !== strpos(urldecode($url), ';url')) {
         bb_die('Tried to redirect to potentially insecure url');
     }
 

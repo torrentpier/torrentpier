@@ -41,7 +41,7 @@ function delete_attachment($post_id_array = 0, $attach_id_array = 0, $page = 0, 
         $post_id_array = array();
 
         if (!is_array($attach_id_array)) {
-            if (strstr($attach_id_array, ', ')) {
+            if (false !== strpos($attach_id_array, ', ')) {
                 $attach_id_array = explode(', ', $attach_id_array);
             } elseif (strstr($attach_id_array, ',')) {
                 $attach_id_array = explode(',', $attach_id_array);
@@ -82,7 +82,7 @@ function delete_attachment($post_id_array = 0, $attach_id_array = 0, $page = 0, 
             return;
         }
 
-        if (strstr($post_id_array, ', ')) {
+        if (false !== strpos($post_id_array, ', ')) {
             $post_id_array = explode(', ', $post_id_array);
         } elseif (strstr($post_id_array, ',')) {
             $post_id_array = explode(',', $post_id_array);
@@ -127,7 +127,7 @@ function delete_attachment($post_id_array = 0, $attach_id_array = 0, $page = 0, 
     }
 
     if (!is_array($attach_id_array)) {
-        if (strstr($attach_id_array, ', ')) {
+        if (false !== strpos($attach_id_array, ', ')) {
             $attach_id_array = explode(', ', $attach_id_array);
         } elseif (strstr($attach_id_array, ',')) {
             $attach_id_array = explode(',', $attach_id_array);
