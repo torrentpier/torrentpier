@@ -2235,9 +2235,9 @@ function init_sphinx()
     if (!isset($sphinx)) {
         $sphinx = \Sphinx\SphinxClient::create();
 
-        $sphinx->SetConnectTimeout(5);
-        $sphinx->SetRankingMode($sphinx::SPH_RANK_NONE);
-        $sphinx->SetMatchMode($sphinx::SPH_MATCH_BOOLEAN);
+        $sphinx->setConnectTimeout(5);
+        $sphinx->setRankingMode($sphinx::SPH_RANK_NONE);
+        $sphinx->setMatchMode($sphinx::SPH_MATCH_BOOLEAN);
     }
 
     return $sphinx;
@@ -2270,24 +2270,24 @@ function get_title_match_topics($title_match_sql, array $forum_ids = array())
 
         $where = ($title_match) ? 'topics' : 'posts';
 
-        $sphinx->SetServer($bb_cfg['sphinx_topic_titles_host'], $bb_cfg['sphinx_topic_titles_port']);
+        $sphinx->setServer($bb_cfg['sphinx_topic_titles_host'], $bb_cfg['sphinx_topic_titles_port']);
         if ($forum_ids) {
-            $sphinx->SetFilter('forum_id', $forum_ids, false);
+            $sphinx->setFilter('forum_id', $forum_ids, false);
         }
         if (preg_match('#^"[^"]+"$#u', $title_match_sql)) {
-            $sphinx->SetMatchMode($sphinx::SPH_MATCH_PHRASE);
+            $sphinx->setMatchMode($sphinx::SPH_MATCH_PHRASE);
         }
-        if ($result = $sphinx->Query($title_match_sql, $where, $userdata['username'] . ' (' . CLIENT_IP . ')')) {
+        if ($result = $sphinx->query($title_match_sql, $where, $userdata['username'] . ' (' . CLIENT_IP . ')')) {
             if (!empty($result['matches'])) {
                 $where_ids = array_keys($result['matches']);
             }
-        } elseif ($error = $sphinx->GetLastError()) {
+        } elseif ($error = $sphinx->getLastError()) {
             if (strpos($error, 'errno=110')) {
                 bb_die($lang['SEARCH_ERROR']);
             }
             log_sphinx_error('ERR', $error, $title_match_sql);
         }
-        if ($warning = $sphinx->GetLastWarning()) {
+        if ($warning = $sphinx->getLastWarning()) {
             log_sphinx_error('wrn', $warning, $title_match_sql);
         }
     } elseif ($bb_cfg['search_engine_type'] == 'mysql') {
