@@ -35,7 +35,7 @@ if (!function_exists('html_entity_decode')) {
     {
         $trans_table = array_flip(get_html_translation_table(HTML_SPECIALCHARS, $quote_style));
         $trans_table['&#39;'] = "'";
-        return (strtr($given_html, $trans_table));
+        return strtr($given_html, $trans_table);
     }
 }
 
@@ -499,7 +499,7 @@ function user_in_group($user_id, $group_id)
  */
 function amod_realpath($path)
 {
-    return (function_exists('realpath')) ? realpath($path) : $path;
+    return function_exists('realpath') ? realpath($path) : $path;
 }
 
 /**
@@ -543,7 +543,7 @@ function get_var($var_name, $default, $multibyte = false)
         (is_array($_REQUEST[$var_name]) && !is_array($default)) ||
         (is_array($default) && !is_array($_REQUEST[$var_name]))
     ) {
-        return (is_array($default)) ? [] : $default;
+        return is_array($default) ? [] : $default;
     }
 
     $var = $_REQUEST[$var_name];
@@ -622,7 +622,7 @@ function attach_mod_sql_build_array($query, $assoc_ary = false)
             } elseif (is_array($var) && is_string($var[0])) {
                 $values[] = $var[0];
             } else {
-                $values[] = (is_bool($var)) ? (int)$var : $var;
+                $values[] = is_bool($var) ? (int)$var : $var;
             }
         }
 
@@ -637,7 +637,7 @@ function attach_mod_sql_build_array($query, $assoc_ary = false)
                 } elseif (is_string($var)) {
                     $values[] = "'" . attach_mod_sql_escape($var) . "'";
                 } else {
-                    $values[] = (is_bool($var)) ? (int)$var : $var;
+                    $values[] = is_bool($var) ? (int)$var : $var;
                 }
             }
             $ary[] = '(' . implode(', ', $values) . ')';
@@ -652,7 +652,7 @@ function attach_mod_sql_build_array($query, $assoc_ary = false)
             } elseif (is_string($var)) {
                 $values[] = "$key = '" . attach_mod_sql_escape($var) . "'";
             } else {
-                $values[] = (is_bool($var)) ? "$key = " . (int)$var : "$key = $var";
+                $values[] = is_bool($var) ? "$key = " . (int)$var : "$key = $var";
             }
         }
         $query = implode(($query == 'UPDATE') ? ', ' : ' AND ', $values);

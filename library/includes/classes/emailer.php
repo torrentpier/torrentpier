@@ -215,7 +215,7 @@ class emailer
 
         // Did it work?
         if (!$result) {
-            bb_die('Failed sending email :: ' . (($this->use_smtp) ? 'SMTP' : 'PHP') . ' :: ' . $result);
+            bb_die('Failed sending email :: ' . ($this->use_smtp ? 'SMTP' : 'PHP') . ' :: ' . $result);
         }
 
         return true;

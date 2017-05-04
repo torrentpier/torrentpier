@@ -27,7 +27,7 @@ if (!empty($setmodules)) {
     $module['USERS']['ACTIONS_LOG'] = basename(__FILE__);
     return;
 }
-require('./pagestart.php');
+require './pagestart.php';
 
 $datastore->enqueue(array(
     'moderators',
@@ -145,7 +145,7 @@ $topic_csv = '';
 if ($var =& $_REQUEST[$topic_key]) {
     $topic_selected = get_id_ary($var);
     $topic_csv = implode(',', $topic_selected);
-    $url = ($topic_csv) ? url_arg($url, $topic_key, $topic_csv) : $url;
+    $url = $topic_csv ? url_arg($url, $topic_key, $topic_csv) : $url;
 }
 
 // Order
@@ -202,19 +202,19 @@ $from = "FROM " . BB_LOG;
 $where = "
 	WHERE log_time BETWEEN $time_start_val AND $time_end_val
 ";
-$where .= ($type_csv) ? "
+$where .= $type_csv ? "
 		AND log_type_id IN($type_csv)
 " : '';
-$where .= ($user_csv) ? "
+$where .= $user_csv ? "
 		AND log_user_id IN($user_csv)
 " : '';
-$where .= ($forum_csv) ? "
+$where .= $forum_csv ? "
 		AND log_forum_id IN($forum_csv)
 " : '';
-$where .= ($topic_csv) ? "
+$where .= $topic_csv ? "
 		AND log_topic_id IN($topic_csv)
 " : '';
-$where .= ($title_match_sql) ? "
+$where .= $title_match_sql ? "
 		AND MATCH (log_topic_title) AGAINST ('$title_match_sql' IN BOOLEAN MODE)
 " : '';
 
@@ -355,7 +355,7 @@ if ($log_rowset) {
     }
 
     $template->assign_vars(array(
-        'FILTERS' => ($topic_csv || $forum_csv || $user_csv),
+        'FILTERS' => $topic_csv || $forum_csv || $user_csv,
         'FILTER_TOPICS' => !empty($filter['topics']),
         'FILTER_FORUMS' => !empty($filter['forums']),
         'FILTER_USERS' => !empty($filter['users']),
@@ -379,7 +379,7 @@ $template->assign_vars(array(
     'DATETIME_VAL' => date('Y-m-d', $datetime_val),
     'DAYSBACK_NAME' => $daysback_key,
     'DAYSBACK_VAL' => $daysback_val,
-    'FIRST_LOG_TIME' => ($first_log_time) ? date('Y-m-d', $first_log_time) : $lang['ACC_NONE'],
+    'FIRST_LOG_TIME' => $first_log_time ? date('Y-m-d', $first_log_time) : $lang['ACC_NONE'],
 
     'TITLE_MATCH_MAX' => $title_match_max_len,
     'TITLE_MATCH_NAME' => $title_match_key,

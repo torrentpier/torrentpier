@@ -38,7 +38,7 @@ $cron_action = $_POST['cron_action'] ?? '';
 
 if ($mode == 'run' && !$job_id) {
     define('BB_ROOT', './../');
-    require(BB_ROOT . 'common.php');
+    require BB_ROOT . 'common.php';
     $user->session_start();
     redirect('admin/' . basename(__FILE__) . '?mode=list');
 } else {
@@ -67,7 +67,7 @@ foreach ($sql as $row) {
 }
 
 $template->assign_vars(array(
-    'CRON_ENABLED' => ($new['cron_enabled']) ? true : false,
+    'CRON_ENABLED' => $new['cron_enabled'] ? true : false,
     'CRON_CHECK_INTERVAL' => $new['cron_check_interval'],
 ));
 

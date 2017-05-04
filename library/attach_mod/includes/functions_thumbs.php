@@ -100,9 +100,9 @@ function get_supported_image_types($type)
         }
 
         return array(
-            'gd' => ($new_type) ? true : false,
+            'gd' => $new_type ? true : false,
             'format' => $new_type,
-            'version' => (function_exists('imagecreatetruecolor')) ? 2 : 1
+            'version' => function_exists('imagecreatetruecolor') ? 2 : 1
         );
     }
 

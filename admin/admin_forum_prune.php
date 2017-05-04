@@ -27,7 +27,7 @@ if (!empty($setmodules)) {
     $module['FORUMS']['PRUNE'] = basename(__FILE__);
     return;
 }
-require('./pagestart.php');
+require './pagestart.php';
 
 $all_forums = -1;
 $pruned_total = 0;

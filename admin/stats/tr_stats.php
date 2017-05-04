@@ -25,7 +25,7 @@
 
 define('IN_ADMIN', true);
 define('BB_ROOT', './../../');
-require(BB_ROOT . 'common.php');
+require BB_ROOT . 'common.php';
 
 $user->session_start();
 
@@ -64,7 +64,7 @@ if ($l = sys('la')) {
     echo "\n\n<b>loadavg: </b>$l[0] $l[1] $l[2]\n\n";
 }
 
-echo 'gen time: <b>' . sprintf('%.3f', (array_sum(explode(' ', microtime())) - TIMESTART)) . "</b> sec\n";
+echo 'gen time: <b>' . sprintf('%.3f', array_sum(explode(' ', microtime())) - TIMESTART) . "</b> sec\n";
 
 echo '</pre></div>';
 echo '</body></html>';

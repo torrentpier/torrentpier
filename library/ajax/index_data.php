@@ -88,7 +88,7 @@ switch ($mode) {
         }
 
         $html = ':&nbsp;';
-        $html .= ($moderators) ? implode(', ', $moderators) : $lang['NONE'];
+        $html .= $moderators ? implode(', ', $moderators) : $lang['NONE'];
         unset($moderators, $mod);
         $datastore->rm('moderators');
         break;
@@ -114,8 +114,8 @@ switch ($mode) {
         $btu = get_bt_userdata($user_id);
         $profiledata = get_userdata($user_id);
 
-        $speed_up = ($btu['speed_up']) ? humn_size($btu['speed_up']) . '/s' : '0 KB/s';
-        $speed_down = ($btu['speed_down']) ? humn_size($btu['speed_down']) . '/s' : '0 KB/s';
+        $speed_up = $btu['speed_up'] ? humn_size($btu['speed_up']) . '/s' : '0 KB/s';
+        $speed_down = $btu['speed_down'] ? humn_size($btu['speed_down']) . '/s' : '0 KB/s';
         $user_ratio = ($btu['u_down_total'] > MIN_DL_FOR_RATIO) ? '<b class="gen">' . get_bt_ratio($btu) . '</b>' : $lang['IT_WILL_BE_DOWN'] . ' <b>' . humn_size(MIN_DL_FOR_RATIO) . '</b>';
 
         $html = '
@@ -125,7 +125,7 @@ switch ($mode) {
 				<th>' . $lang['UPLOADED'] . '</th>
 				<th>' . $lang['RELEASED'] . '</th>
 				<th>' . $lang['BONUS'] . '</th>';
-        $html .= ($bb_cfg['seed_bonus_enabled']) ? '<th>' . $lang['SEED_BONUS'] . '</th>' : '';
+        $html .= $bb_cfg['seed_bonus_enabled'] ? '<th>' . $lang['SEED_BONUS'] . '</th>' : '';
         $html .= '</tr>
 			<tr class="row1">
 				<td>' . $lang['TOTAL_TRAF'] . '</td>
@@ -133,13 +133,13 @@ switch ($mode) {
 				<td id="u_up_total"><span class="editable bold seedmed">' . humn_size($btu['u_up_total']) . '</span></td>
 				<td id="u_up_release"><span class="editable bold seedmed">' . humn_size($btu['u_up_release']) . '</span></td>
 				<td id="u_up_bonus"><span class="editable bold seedmed">' . humn_size($btu['u_up_bonus']) . '</span></td>';
-        $html .= ($bb_cfg['seed_bonus_enabled']) ? '<td id="user_points"><span class="editable bold points">' . $profiledata['user_points'] . '</b></td>' : '';
+        $html .= $bb_cfg['seed_bonus_enabled'] ? '<td id="user_points"><span class="editable bold points">' . $profiledata['user_points'] . '</b></td>' : '';
         $html .= '</tr>
 			<tr class="row5">
 				<td colspan="1">' . $lang['MAX_SPEED'] . '</td>
 				<td colspan="2">' . $lang['DL_DL_SPEED'] . ': ' . $speed_down . '</span></td>
 				<td colspan="2">' . $lang['DL_UL_SPEED'] . ': ' . $speed_up . '</span></td>';
-        $html .= ($bb_cfg['seed_bonus_enabled']) ? '<td colspan="1"></td>' : '';
+        $html .= $bb_cfg['seed_bonus_enabled'] ? '<td colspan="1"></td>' : '';
         $html .= '</tr>';
 
         $this->response['user_ratio'] = '

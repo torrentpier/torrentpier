@@ -225,11 +225,11 @@ if ($mode == 'user' && (!empty($_POST['username']) || $user_id)) {
                 'DISABLED' => $disabled,
                 'FORUM_ID' => $f_id,
                 'FORUM_NAME' => str_short($forums['forum_name_html'][$f_id], $max_forum_name_length),
-                'SF_SPACER' => ($f_data['forum_parent']) ? HTML_SF_SPACER : '',
+                'SF_SPACER' => $f_data['forum_parent'] ? HTML_SF_SPACER : '',
                 'IS_MODERATOR' => (bool)$auth_mod,
-                'MOD_STATUS' => ($auth_mod) ? $lang['MODERATOR'] : $lang['NONE'],
-                'MOD_CLASS' => ($auth_mod) ? (($disabled) ? 'yesDisabled' : 'yesMOD') : 'noMOD',
-                'AUTH_MOD_VAL' => ($auth_mod) ? 1 : 0,
+                'MOD_STATUS' => $auth_mod ? $lang['MODERATOR'] : $lang['NONE'],
+                'MOD_CLASS' => $auth_mod ? ($disabled ? 'yesDisabled' : 'yesMOD') : 'noMOD',
+                'AUTH_MOD_VAL' => $auth_mod ? 1 : 0,
             ));
 
             foreach ($forum_auth_fields as $auth_type) {
@@ -243,8 +243,8 @@ if ($mode == 'user' && (!empty($_POST['username']) || $user_id)) {
                     $acl_class = ($auth_via_acl || $auth_mod) ? 'yes' : 'no';
                 } else {
                     $disabled = true;
-                    $perm_sign = ($auth_via_acl) ? $yes_sign : $no_sign;
-                    $acl_class = ($auth_via_acl) ? 'yes' : 'no';
+                    $perm_sign = $auth_via_acl ? $yes_sign : $no_sign;
+                    $acl_class = $auth_via_acl ? 'yes' : 'no';
                 }
 
                 $template->assign_block_vars('c.f.acl', array(
@@ -253,7 +253,7 @@ if ($mode == 'user' && (!empty($_POST['username']) || $user_id)) {
                     'ACL_CLASS' => $acl_class,
                     'FORUM_ID' => $f_id,
                     'ACL_TYPE_BF' => $bf_num,
-                    'ACL_VAL' => ($auth_via_acl) ? 1 : 0,
+                    'ACL_VAL' => $auth_via_acl ? 1 : 0,
                 ));
             }
         }
@@ -346,11 +346,11 @@ if ($mode == 'user' && (!empty($_POST['username']) || $user_id)) {
                 'DISABLED' => false,
                 'FORUM_ID' => $f_id,
                 'FORUM_NAME' => str_short($forums['forum_name_html'][$f_id], $max_forum_name_length),
-                'SF_SPACER' => ($f_data['forum_parent']) ? HTML_SF_SPACER : '',
+                'SF_SPACER' => $f_data['forum_parent'] ? HTML_SF_SPACER : '',
                 'IS_MODERATOR' => (bool)$auth_mod,
-                'MOD_STATUS' => ($auth_mod) ? $lang['MODERATOR'] : $lang['NO'],
-                'MOD_CLASS' => ($auth_mod) ? 'yesMOD' : 'noMOD',
-                'AUTH_MOD_VAL' => ($auth_mod) ? 1 : 0,
+                'MOD_STATUS' => $auth_mod ? $lang['MODERATOR'] : $lang['NO'],
+                'MOD_CLASS' => $auth_mod ? 'yesMOD' : 'noMOD',
+                'AUTH_MOD_VAL' => $auth_mod ? 1 : 0,
             ));
 
             foreach ($forum_auth_fields as $auth_type) {
@@ -364,8 +364,8 @@ if ($mode == 'user' && (!empty($_POST['username']) || $user_id)) {
                     $acl_class = ($auth_via_acl || $auth_mod) ? 'yes' : 'no';
                 } else {
                     $disabled = true;
-                    $perm_sign = ($auth_via_acl) ? $yes_sign : $no_sign;
-                    $acl_class = ($auth_via_acl) ? 'yes' : 'no';
+                    $perm_sign = $auth_via_acl ? $yes_sign : $no_sign;
+                    $acl_class = $auth_via_acl ? 'yes' : 'no';
                 }
 
                 $template->assign_block_vars('c.f.acl', array(
@@ -374,7 +374,7 @@ if ($mode == 'user' && (!empty($_POST['username']) || $user_id)) {
                     'ACL_CLASS' => $acl_class,
                     'FORUM_ID' => $f_id,
                     'ACL_TYPE_BF' => $bf_num,
-                    'ACL_VAL' => ($auth_via_acl) ? 1 : 0,
+                    'ACL_VAL' => $auth_via_acl ? 1 : 0,
                 ));
             }
         }

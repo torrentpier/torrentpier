@@ -25,8 +25,8 @@
 
 define('IN_FORUM', true);
 define('BB_ROOT', './');
-require(BB_ROOT . 'common.php');
-require(INC_DIR . 'functions_upload.php');
+require BB_ROOT . 'common.php';
+require INC_DIR . 'functions_upload.php';
 
 while (@ob_end_flush()) ;
 ob_implicit_flush();

@@ -254,7 +254,7 @@ function topic_delete($mode_or_topic_id, $forum_id = null, $prune_time = 0, $pru
 	");
     DB()->add_shutdown_query("DROP TEMPORARY TABLE IF EXISTS $tmp_delete_topics");
 
-    $where_sql = ($prune) ? "forum_id = $forum_id" : "topic_id IN($topic_csv)";
+    $where_sql = $prune ? "forum_id = $forum_id" : "topic_id IN($topic_csv)";
     $where_sql .= ($prune && $prune_time) ? " AND topic_last_post_time < $prune_time" : '';
     $where_sql .= ($prune && !$prune_all) ? " AND topic_type NOT IN(" . POST_ANNOUNCE . "," . POST_STICKY . ")" : '';
 

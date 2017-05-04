@@ -96,7 +96,7 @@ class datastore_file extends datastore_common
             $this->num_queries++;
 
             if (file_exists($filename)) {
-                require($filename);
+                require $filename;
 
                 $this->data[$item] = $filecache;
             }

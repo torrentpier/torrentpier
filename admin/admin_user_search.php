@@ -94,7 +94,7 @@ if (!isset($_REQUEST['dosearch'])) {
                 $last_cat_id = $row['cat_id'];
             }
 
-            $forums_list .= '<option value="' . $row['forum_id'] . '">' . (($row['forum_parent']) ? HTML_SF_SPACER : '') . htmlCHR($row['forum_name']) . '</option>';
+            $forums_list .= '<option value="' . $row['forum_id'] . '">' . ($row['forum_parent'] ? HTML_SF_SPACER : '') . htmlCHR($row['forum_name']) . '</option>';
         }
     }
 
@@ -888,7 +888,7 @@ if (!isset($_REQUEST['dosearch'])) {
 
     $select_sql .= " $order";
 
-    $page = (isset($_GET['page'])) ? (int)$_GET['page'] : (int)trim(@$_POST['page']);
+    $page = isset($_GET['page']) ? (int)$_GET['page'] : (int)trim(@$_POST['page']);
 
     if ($page < 1) {
         $page = 1;
@@ -915,7 +915,7 @@ if (!isset($_REQUEST['dosearch'])) {
             bb_die($lang['SEARCH_NO_RESULTS']);
         }
     }
-    $num_pages = ceil(($total_pages['total'] / $bb_cfg['topics_per_page']));
+    $num_pages = ceil($total_pages['total'] / $bb_cfg['topics_per_page']);
 
     $pagination = '';
 
@@ -980,8 +980,8 @@ if (!isset($_REQUEST['dosearch'])) {
             'JOINDATE' => bb_date($rowset[$i]['user_regdate']),
             'LASTVISIT' => bb_date($rowset[$i]['user_lastvisit']),
             'POSTS' => $rowset[$i]['user_posts'],
-            'BAN' => ((!isset($banned[$rowset[$i]['user_id']])) ? $lang['NOT_BANNED'] : $lang['BANNED']),
-            'ABLED' => (($rowset[$i]['user_active']) ? $lang['ENABLED'] : $lang['DISABLED']),
+            'BAN' => (!isset($banned[$rowset[$i]['user_id']])) ? $lang['NOT_BANNED'] : $lang['BANNED'],
+            'ABLED' => $rowset[$i]['user_active'] ? $lang['ENABLED'] : $lang['DISABLED'],
 
             'U_VIEWPOSTS' => "../search.php?search_author=1&amp;uid={$rowset[$i]['user_id']}",
             'U_MANAGE' => '../profile.php?mode=editprofile&' . POST_USERS_URL . '=' . $rowset[$i]['user_id'] . '&admin=1',

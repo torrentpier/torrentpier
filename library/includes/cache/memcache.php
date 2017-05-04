@@ -50,7 +50,7 @@ class cache_memcache extends cache_common
 
     public function connect()
     {
-        $connect_type = ($this->cfg['pconnect']) ? 'pconnect' : 'connect';
+        $connect_type = $this->cfg['pconnect'] ? 'pconnect' : 'connect';
 
         $this->cur_query = $connect_type . ' ' . $this->cfg['host'] . ':' . $this->cfg['port'];
         $this->debug('start');
@@ -83,7 +83,7 @@ class cache_memcache extends cache_common
         $this->cur_query = null;
         $this->num_queries++;
 
-        return ($this->connected) ? $this->memcache->get($this->prefix . $name) : false;
+        return $this->connected ? $this->memcache->get($this->prefix . $name) : false;
     }
 
     public function set($name, $value, $ttl = 0): bool
@@ -98,7 +98,7 @@ class cache_memcache extends cache_common
         $this->cur_query = null;
         $this->num_queries++;
 
-        return ($this->connected) ? $this->memcache->set($this->prefix . $name, $value, false, $ttl) : false;
+        return $this->connected ? $this->memcache->set($this->prefix . $name, $value, false, $ttl) : false;
     }
 
     public function rm($name = '')
@@ -114,7 +114,7 @@ class cache_memcache extends cache_common
             $this->cur_query = null;
             $this->num_queries++;
 
-            return ($this->connected) ? $this->memcache->delete($this->prefix . $name, 0) : false;
+            return $this->connected ? $this->memcache->delete($this->prefix . $name, 0) : false;
         }
 
         return ($this->connected) ? $this->memcache->flush() : false;

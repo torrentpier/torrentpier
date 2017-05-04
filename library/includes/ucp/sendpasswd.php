@@ -94,7 +94,7 @@ if (isset($_POST['submit'])) {
 $template->assign_vars(array(
     'USERNAME' => $username,
     'EMAIL' => $email,
-    'CAPTCHA_HTML' => ($need_captcha) ? bb_captcha('get') : '',
+    'CAPTCHA_HTML' => $need_captcha ? bb_captcha('get') : '',
     'S_HIDDEN_FIELDS' => '',
     'S_PROFILE_ACTION' => "profile.php?mode=sendpassword",
 ));

@@ -81,7 +81,7 @@ if ($tpl_data) {
 
 if ($edit_tpl_mode) {
     $template->assign_vars(array(
-        'NO_TPL_ASSIGNED' => !($f_data['forum_tpl_id']),
+        'NO_TPL_ASSIGNED' => !$f_data['forum_tpl_id'],
         'TPL_SELECT' => get_select('forum_tpl', $f_data['forum_tpl_id']),
     ));
 

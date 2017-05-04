@@ -44,7 +44,7 @@ $user->session_start(array('req_login' => $bb_cfg['bt_tor_browse_only_reg']));
 
 set_die_append_msg();
 
-$tor_search_limit = (IS_AM) ? 2000 : 500;
+$tor_search_limit = IS_AM ? 2000 : 500;
 $forum_select_size = 25; // forum select box max rows
 $max_forum_name_len = 60; // inside forum select box
 $max_forums_selected = 50;
@@ -417,7 +417,7 @@ if (!$set_default) {
             }
         } elseif ($search_id && $previous_settings[$poster_id_key]) {
             $poster_id_val = (int)$previous_settings[$poster_id_key];
-            $poster_name_val = ($previous_settings[$poster_name_key]) ?: '';
+            $poster_name_val = $previous_settings[$poster_name_key] ?: '';
         }
 
         if ($req_poster_id) {
@@ -723,8 +723,8 @@ if ($allowed_forums) {
             $size = $tor['size'];
             $tor_magnet = create_magnet($tor['info_hash'], $passkey['auth_key'], $userdata['session_logged_in']);
             $compl = $tor['complete_count'];
-            $dl_sp = ($dl) ? humn_size($dl, 0, 'KB') . '/s' : '0 KB/s';
-            $ul_sp = ($ul) ? humn_size($ul, 0, 'KB') . '/s' : '0 KB/s';
+            $dl_sp = $dl ? humn_size($dl, 0, 'KB') . '/s' : '0 KB/s';
+            $ul_sp = $ul ? humn_size($ul, 0, 'KB') . '/s' : '0 KB/s';
 
             $dl_class = isset($tor['dl_status']) ? $dl_link_css[$tor['dl_status']] : 'genmed';
             $row_class = !($row_num & 1) ? $row_class_1 : $row_class_2;
@@ -736,21 +736,21 @@ if ($allowed_forums) {
 
             $template->assign_block_vars('tor', array(
                 'CAT_ID' => $cat_id,
-                'CAT_TITLE' => ($cat_id) ? $cat_title_html[$cat_id] : '',
+                'CAT_TITLE' => $cat_id ? $cat_title_html[$cat_id] : '',
                 'FORUM_ID' => $forum_id,
-                'FORUM_NAME' => ($forum_id) ? $forum_name_html[$forum_id] : '',
+                'FORUM_NAME' => $forum_id ? $forum_name_html[$forum_id] : '',
                 'TOPIC_ID' => $tor['topic_id'],
                 'TOPIC_TITLE' => wbr($tor['topic_title']),
                 'TOPIC_TIME' => bb_date($tor['topic_time'], 'd-M-y') . ' <b>&middot;</b> ' . delta_time($tor['topic_time']),
                 'POST_ID' => $tor['post_id'],
                 'POSTER_ID' => $poster_id,
-                'USERNAME' => ($hide_author) ? '' : profile_url(array('username' => $tor['username'], 'user_rank' => $tor['user_rank'])),
+                'USERNAME' => $hide_author ? '' : profile_url(array('username' => $tor['username'], 'user_rank' => $tor['user_rank'])),
 
                 'ROW_CLASS' => $row_class,
                 'ROW_NUM' => $row_num,
                 'DL_CLASS' => $dl_class,
-                'IS_NEW' => (!IS_GUEST && $tor['reg_time'] > $lastvisit),
-                'USER_AUTHOR' => (!IS_GUEST && $poster_id == $user_id),
+                'IS_NEW' => !IS_GUEST && $tor['reg_time'] > $lastvisit,
+                'USER_AUTHOR' => !IS_GUEST && $poster_id == $user_id,
 
                 'ATTACH_ID' => $att_id,
                 'MAGNET' => $tor_magnet,
@@ -764,10 +764,10 @@ if ($allowed_forums) {
                 'TOR_SIZE' => humn_size($size),
                 'UL_SPEED' => $ul_sp,
                 'DL_SPEED' => $dl_sp,
-                'SEEDS' => ($seeds) ?: 0,
-                'SEEDS_TITLE' => ($seeds) ? $lang['SEEDERS'] : ($lang['SEED_NOT_SEEN'] . ":\n " . (($s_last) ? bb_date($s_last, $date_format) : $lang['NEVER'])),
-                'LEECHS' => ($leechs) ?: 0,
-                'COMPLETED' => ($compl) ?: 0,
+                'SEEDS' => $seeds ?: 0,
+                'SEEDS_TITLE' => $seeds ? $lang['SEEDERS'] : ($lang['SEED_NOT_SEEN'] . ":\n " . ($s_last ? bb_date($s_last, $date_format) : $lang['NEVER'])),
+                'LEECHS' => $leechs ?: 0,
+                'COMPLETED' => $compl ?: 0,
                 'REPLIES' => $tor['topic_replies'],
                 'VIEWS' => $tor['topic_views'],
                 'ADDED_RAW' => $tor['reg_time'],
@@ -815,7 +815,7 @@ foreach ($cat_forum['c'] as $cat_id => $forums_ary) {
             $class .= isset($cat_forum['forums_with_sf'][$forum_id]) ? ' has_sf' : '';
             $style = " class=\"$class\"";
         }
-        $selected = (isset($search_in_forums_fary[$forum_id])) ? HTML_SELECTED : '';
+        $selected = isset($search_in_forums_fary[$forum_id]) ? HTML_SELECTED : '';
         $opt .= '<option id="fs-' . $forum_id . '" value="' . $forum_id . '"' . $style . $selected . '>' . (isset($cat_forum['subforums'][$forum_id]) ? HTML_SF_SPACER : '') . $forum_name . "&nbsp;</option>\n";
     }
 

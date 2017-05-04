@@ -63,14 +63,14 @@ require_once __DIR__ . '/vendor/autoload.php';
 // Get initial config
 require __DIR__ . '/library/config.php';
 
-$server_protocol = ($bb_cfg['cookie_secure']) ? 'https://' : 'http://';
-$server_port = (in_array($bb_cfg['server_port'], array(80, 443), true)) ? '' : ':' . $bb_cfg['server_port'];
+$server_protocol = $bb_cfg['cookie_secure'] ? 'https://' : 'http://';
+$server_port = in_array($bb_cfg['server_port'], array(80, 443), true) ? '' : ':' . $bb_cfg['server_port'];
 define('FORUM_PATH', $bb_cfg['script_path']);
 define('FULL_URL', $server_protocol . $bb_cfg['server_name'] . $server_port . $bb_cfg['script_path']);
 unset($server_protocol, $server_port);
 
 // Debug options
-define('DBG_USER', (isset($_COOKIE[COOKIE_DBG])));
+define('DBG_USER', isset($_COOKIE[COOKIE_DBG]));
 
 // Board/Tracker shared constants and functions
 define('BB_BT_TORRENTS', 'bb_bt_torrents');
@@ -201,7 +201,7 @@ function short_query($sql, $esc_html = false)
         }
     }
 
-    return ($esc_html) ? htmlCHR($sql, true) : $sql;
+    return $esc_html ? htmlCHR($sql, true) : $sql;
 }
 
 // Functions
@@ -215,7 +215,7 @@ function bb_log($msg, $file_name)
     if (is_array($msg)) {
         $msg = implode(LOG_LF, $msg);
     }
-    $file_name .= (LOG_EXT) ? '.' . LOG_EXT : '';
+    $file_name .= LOG_EXT ? '.' . LOG_EXT : '';
     return file_write($msg, LOG_DIR . '/' . $file_name);
 }
 
@@ -451,7 +451,7 @@ function log_request($file = '', $prepend_str = false, $add_post = true)
 {
     global $user;
 
-    $file = ($file) ?: 'req/' . date('m-d');
+    $file = $file ?: 'req/' . date('m-d');
     $str = array();
     $str[] = date('m-d H:i:s');
     if ($prepend_str !== false) {

@@ -120,7 +120,7 @@ class cache_sqlite extends cache_common
     public function gc($expire_time = TIMENOW): int
     {
         $result = $this->db->query("DELETE FROM " . $this->cfg['table_name'] . " WHERE cache_expire_time < $expire_time");
-        return ($result) ? $this->db->changes() : 0;
+        return $result ? $this->db->changes() : 0;
     }
 }
 
@@ -151,7 +151,7 @@ class sqlite_common extends cache_common
 
     public function connect()
     {
-        $this->cur_query = ($this->dbg_enabled) ? 'connect to: ' . $this->cfg['db_file_path'] : 'connect';
+        $this->cur_query = $this->dbg_enabled ? 'connect to: ' . $this->cfg['db_file_path'] : 'connect';
         $this->debug('start');
 
         if (@$this->dbh = new SQLite3($this->cfg['db_file_path'])) {
@@ -283,7 +283,7 @@ class sqlite_common extends cache_common
     public function gc($expire_time = TIMENOW): int
     {
         $result = $this->db->query("DELETE FROM " . $this->cfg['table_name'] . " WHERE cache_expire_time < $expire_time");
-        return ($result) ? sqlite_changes($this->db->dbh) : 0;
+        return $result ? sqlite_changes($this->db->dbh) : 0;
     }
 
     public function trigger_error($msg = 'DB Error')

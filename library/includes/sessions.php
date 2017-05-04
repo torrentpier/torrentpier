@@ -199,13 +199,13 @@ class user_common
             $this->session_create($userdata, true);
         }
 
-        define('IS_GUEST', (!$this->data['session_logged_in']));
-        define('IS_ADMIN', (!IS_GUEST && $this->data['user_level'] == ADMIN));
-        define('IS_MOD', (!IS_GUEST && $this->data['user_level'] == MOD));
-        define('IS_GROUP_MEMBER', (!IS_GUEST && $this->data['user_level'] == GROUP_MEMBER));
-        define('IS_USER', (!IS_GUEST && $this->data['user_level'] == USER));
-        define('IS_SUPER_ADMIN', (IS_ADMIN && isset($bb_cfg['super_admins'][$this->data['user_id']])));
-        define('IS_AM', (IS_ADMIN || IS_MOD));
+        define('IS_GUEST', !$this->data['session_logged_in']);
+        define('IS_ADMIN', !IS_GUEST && $this->data['user_level'] == ADMIN);
+        define('IS_MOD', !IS_GUEST && $this->data['user_level'] == MOD);
+        define('IS_GROUP_MEMBER', !IS_GUEST && $this->data['user_level'] == GROUP_MEMBER);
+        define('IS_USER', !IS_GUEST && $this->data['user_level'] == USER);
+        define('IS_SUPER_ADMIN', IS_ADMIN && isset($bb_cfg['super_admins'][$this->data['user_id']]));
+        define('IS_AM', IS_ADMIN || IS_MOD);
 
         $this->set_shortcuts();
 
@@ -242,7 +242,7 @@ class user_common
             preg_match('#(..)(..)(..)(..)#', USER_IP, $ip);
 
             $where_sql = "ban_ip IN('" . USER_IP . "', '$ip[1]$ip[2]$ip[3]ff', '$ip[1]$ip[2]ffff', '$ip[1]ffffff')";
-            $where_sql .= ($login) ? " OR ban_userid = $user_id" : '';
+            $where_sql .= $login ? " OR ban_userid = $user_id" : '';
 
             $sql = "SELECT ban_id FROM " . BB_BANLIST . " WHERE $where_sql LIMIT 1";
 
@@ -281,7 +281,7 @@ class user_common
                 $last_visit = TIMENOW;
                 define('FIRST_LOGON', true);
             } elseif ($session_time < (TIMENOW - $bb_cfg['last_visit_update_intrv'])) {
-                $last_visit = max($session_time, (TIMENOW - 86400 * $bb_cfg['max_last_visit_days']));
+                $last_visit = max($session_time, TIMENOW - 86400 * $bb_cfg['max_last_visit_days']);
             }
 
             if ($last_visit != $this->data['user_lastvisit']) {
@@ -476,7 +476,7 @@ class user_common
             }
         } else {
             $c_sdata_resv = !empty($_COOKIE[COOKIE_DATA]) ? $_COOKIE[COOKIE_DATA] : null;
-            $c_sdata_curr = ($this->sessiondata) ? serialize($this->sessiondata) : '';
+            $c_sdata_curr = $this->sessiondata ? serialize($this->sessiondata) : '';
 
             if ($c_sdata_curr !== $c_sdata_resv) {
                 bb_setcookie(COOKIE_DATA, $c_sdata_curr, COOKIE_PERSIST, true);
@@ -523,7 +523,7 @@ class user_common
      */
     public function create_autologin_id($userdata, $create_new = true)
     {
-        $autologin_id = ($create_new) ? make_rand_str(LOGIN_KEY_LENGTH) : '';
+        $autologin_id = $create_new ? make_rand_str(LOGIN_KEY_LENGTH) : '';
 
         DB()->query("
 			UPDATE " . BB_USERS . " SET

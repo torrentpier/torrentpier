@@ -23,7 +23,7 @@
  * SOFTWARE.
  */
 
-require('./pagestart.php');
+require './pagestart.php';
 
 // Generate relevant output
 if (isset($_GET['pane']) && $_GET['pane'] == 'left') {
@@ -32,7 +32,7 @@ if (isset($_GET['pane']) && $_GET['pane'] == 'left') {
         $setmodules = 1;
         while ($file = @readdir($dir)) {
             if (preg_match('/^admin_.*?\.php$/', $file)) {
-                include('./' . $file);
+                include './' . $file;
             }
         }
         unset($setmodules);
@@ -74,8 +74,8 @@ if (isset($_GET['pane']) && $_GET['pane'] == 'left') {
 } elseif (isset($_GET['pane']) && $_GET['pane'] == 'right') {
     $template->assign_vars(array(
         'TPL_ADMIN_MAIN' => true,
-        'ADMIN_LOCK' => ($bb_cfg['board_disable']) ? true : false,
-        'ADMIN_LOCK_CRON' => (file_exists(BB_DISABLED)) ? true : false,
+        'ADMIN_LOCK' => $bb_cfg['board_disable'] ? true : false,
+        'ADMIN_LOCK_CRON' => file_exists(BB_DISABLED) ? true : false,
     ));
 
     // Get forum statistics
@@ -156,7 +156,7 @@ if (isset($_GET['pane']) && $_GET['pane'] == 'left') {
         'USERS_PER_DAY' => $users_per_day,
         'AVATAR_DIR_SIZE' => $avatar_dir_size,
         'DB_SIZE' => $dbsize,
-        'GZIP_COMPRESSION' => ($bb_cfg['gzip_compress']) ? $lang['ON'] : $lang['OFF'],
+        'GZIP_COMPRESSION' => $bb_cfg['gzip_compress'] ? $lang['ON'] : $lang['OFF'],
     ));
 
     if (@$_GET['users_online']) {

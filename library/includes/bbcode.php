@@ -393,7 +393,7 @@ function add_search_words($post_id, $post_message, $topic_title = '', $only_retu
     global $bb_cfg;
 
     $text = $topic_title . ' ' . $post_message;
-    $words = ($text) ? extract_search_words($text) : array();
+    $words = $text ? extract_search_words($text) : array();
 
     if ($only_return_words || $bb_cfg['search_engine_type'] == 'sphinx') {
         return implode("\n", $words);
@@ -667,7 +667,7 @@ class bbcode
         global $bb_cfg;
 
         $url = trim($m[1]);
-        $url_name = (isset($m[2])) ? trim($m[2]) : $url;
+        $url_name = isset($m[2]) ? trim($m[2]) : $url;
 
         if (!preg_match("#^https?://#isu", $url) && !preg_match("/^#/", $url)) {
             $url = 'http://' . $url;
@@ -725,7 +725,7 @@ class bbcode
         // Remove our padding..
         $ret = substr(substr($ret, 0, -1), 1);
 
-        return ($ret);
+        return $ret;
     }
 
     /**

@@ -156,14 +156,14 @@ if (isset($_POST['cancel']) || IS_GUEST) {
     $redirect = 'index.php';
 
     if ($topic_id || $forum_id) {
-        $redirect = ($topic_id) ? TOPIC_URL . $topic_id : FORUM_URL . $forum_id;
+        $redirect = $topic_id ? TOPIC_URL . $topic_id : FORUM_URL . $forum_id;
     }
     redirect($redirect);
 }
 
 // Start auth check
 $is_auth = auth(AUTH_ALL, $forum_id, $userdata);
-$is_moderator = (IS_AM);
+$is_moderator = IS_AM;
 
 if ($mode == 'ip') {
     // Moderator can view IP in all forums
@@ -254,7 +254,7 @@ switch ($mode) {
                 $datastore->update('network_news');
             }
 
-            $msg = ($result) ? $lang['TOPICS_REMOVED'] : $lang['NO_TOPICS_REMOVED'];
+            $msg = $result ? $lang['TOPICS_REMOVED'] : $lang['NO_TOPICS_REMOVED'];
             bb_die(return_msg_mcp($msg));
         } else {
             print_confirmation(array(
@@ -285,7 +285,7 @@ switch ($mode) {
                 $datastore->update('network_news');
             }
 
-            $msg = ($result) ? $lang['TOPICS_MOVED'] : $lang['NO_TOPICS_MOVED'];
+            $msg = $result ? $lang['TOPICS_MOVED'] : $lang['NO_TOPICS_MOVED'];
             bb_die(return_msg_mcp($msg));
         } else {
             if (IS_ADMIN) {
@@ -318,7 +318,7 @@ switch ($mode) {
     case 'lock':
     case 'unlock':
         $lock = ($mode == 'lock');
-        $new_topic_status = ($lock) ? TOPIC_LOCKED : TOPIC_UNLOCKED;
+        $new_topic_status = $lock ? TOPIC_LOCKED : TOPIC_UNLOCKED;
 
         $sql = "
 			SELECT topic_id, topic_title
@@ -347,7 +347,7 @@ switch ($mode) {
 		");
 
         // Log action
-        $type = ($lock) ? 'mod_topic_lock' : 'mod_topic_unlock';
+        $type = $lock ? 'mod_topic_lock' : 'mod_topic_unlock';
 
         foreach ($log_topics as $topic_id => $topic_title) {
             $log_action->mod($type, array(
@@ -357,7 +357,7 @@ switch ($mode) {
             ));
         }
 
-        $msg = ($lock) ? $lang['TOPICS_LOCKED'] : $lang['TOPICS_UNLOCKED'];
+        $msg = $lock ? $lang['TOPICS_LOCKED'] : $lang['TOPICS_UNLOCKED'];
         bb_die(return_msg_mcp($msg));
 
         break;
@@ -366,7 +366,7 @@ switch ($mode) {
     case 'set_download':
     case 'unset_download':
         $set_download = ($mode == 'set_download');
-        $new_dl_type = ($set_download) ? TOPIC_DL_TYPE_DL : TOPIC_DL_TYPE_NORMAL;
+        $new_dl_type = $set_download ? TOPIC_DL_TYPE_DL : TOPIC_DL_TYPE_NORMAL;
 
         DB()->query("
 			UPDATE " . BB_TOPICS . " SET
@@ -380,7 +380,7 @@ switch ($mode) {
             clear_dl_list($topic_csv);
         }
 
-        $msg = ($set_download) ? $lang['TOPICS_DOWN_SETS'] : $lang['TOPICS_DOWN_UNSETS'];
+        $msg = $set_download ? $lang['TOPICS_DOWN_SETS'] : $lang['TOPICS_DOWN_UNSETS'];
         bb_die(return_msg_mcp($msg));
 
         break;
@@ -468,7 +468,7 @@ switch ($mode) {
 
                 $sql = "INSERT INTO " . BB_TOPICS . " (topic_title, topic_poster, topic_time, forum_id, topic_status, topic_type, topic_first_post_id)
 					VALUES ('" . DB()->escape($post_subject) . "', $first_poster, " . $topic_time . ", $new_forum_id, " . TOPIC_UNLOCKED . ", " . POST_NORMAL . ", $first_post_id)";
-                if (!(DB()->sql_query($sql))) {
+                if (!DB()->sql_query($sql)) {
                     bb_die('Could not insert new topic');
                 }
 
@@ -526,7 +526,7 @@ switch ($mode) {
             // Delete posts
             $result = post_delete(explode(',', $post_id_sql));
 
-            $msg = ($result) ? $lang['DELETE_POSTS_SUCCESFULLY'] : 'No posts were removed';
+            $msg = $result ? $lang['DELETE_POSTS_SUCCESFULLY'] : 'No posts were removed';
             bb_die(return_msg_mcp($msg));
         } else {
             $sql = "SELECT u.username, p.*, pt.post_text, p.post_username
@@ -574,7 +574,7 @@ switch ($mode) {
                         'POSTER_NAME' => wbr($poster),
                         'POST_DATE' => $post_date,
                         'MESSAGE' => $message,
-                        'CHECKBOX' => (defined('BEGIN_CHECKBOX')) ? true : false,
+                        'CHECKBOX' => defined('BEGIN_CHECKBOX') ? true : false,
                         'POST_ID' => $post_id,
                         'ROW_ID' => $i,
                         'CB_ID' => 'cb_' . $i,
@@ -694,7 +694,7 @@ switch ($mode) {
     case 'post_pin':
     case 'post_unpin':
         $pin = ($mode == 'post_pin');
-        $new_topic_status = ($pin) ? 1 : 0;
+        $new_topic_status = $pin ? 1 : 0;
 
         if (count($topic_csv)) {
             $sql = "
@@ -723,7 +723,7 @@ switch ($mode) {
 				WHERE topic_id IN($topic_csv)
 			");
 
-            $msg = ($pin) ? $lang['POST_PINNED'] : $lang['POST_UNPINNED'];
+            $msg = $pin ? $lang['POST_PINNED'] : $lang['POST_UNPINNED'];
             bb_die(return_msg_mcp($msg));
         } elseif ($topic_id) {
             $sql = "
@@ -753,7 +753,7 @@ switch ($mode) {
 				WHERE topic_id IN($topic_csv)
 			");
 
-            $msg = ($pin) ? $lang['POST_PINNED'] : $lang['POST_UNPINNED'];
+            $msg = $pin ? $lang['POST_PINNED'] : $lang['POST_UNPINNED'];
             bb_die(return_msg_mcp($msg));
         }
         break;
@@ -765,8 +765,8 @@ switch ($mode) {
 
 $template->assign_vars(array('PAGE_TITLE' => $lang['MOD_CP']));
 
-require(PAGE_HEADER);
+require PAGE_HEADER;
 
 $template->pparse('body');
 
-require(PAGE_FOOTER);
+require PAGE_FOOTER;

@@ -99,7 +99,7 @@ class sitemap
         }
 
         $not_forums_id = $forums['not_auth_forums']['guest_view'];
-        $ignore_forum_sql = ($not_forums_id) ? "WHERE forum_id NOT IN($not_forums_id)" : '';
+        $ignore_forum_sql = $not_forums_id ? "WHERE forum_id NOT IN($not_forums_id)" : '';
 
         $sql = DB()->sql_query("SELECT forum_id, forum_topics, forum_parent, forum_name FROM " . BB_FORUMS . " " . $ignore_forum_sql . " ORDER BY forum_id ASC");
 
@@ -143,7 +143,7 @@ class sitemap
         }
 
         $not_forums_id = $forums['not_auth_forums']['guest_view'];
-        $ignore_forum_sql = ($not_forums_id) ? "WHERE forum_id NOT IN($not_forums_id)" : '';
+        $ignore_forum_sql = $not_forums_id ? "WHERE forum_id NOT IN($not_forums_id)" : '';
 
         $sql = DB()->sql_query("SELECT topic_id, topic_title, topic_time FROM " . BB_TOPICS . " " . $ignore_forum_sql . " ORDER BY topic_time ASC" . $this->limit);
 

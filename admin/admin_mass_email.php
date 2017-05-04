@@ -27,7 +27,7 @@ if (!empty($setmodules)) {
     $module['MODS']['MASS_EMAIL'] = basename(__FILE__);
     return;
 }
-require('./pagestart.php');
+require './pagestart.php';
 
 @set_time_limit(1200);
 
@@ -113,7 +113,7 @@ $template->assign_vars(array(
     'MESSAGE' => $message,
     'SUBJECT' => $subject,
 
-    'ERROR_MESSAGE' => ($errors) ? implode('<br />', array_unique($errors)) : '',
+    'ERROR_MESSAGE' => $errors ? implode('<br />', array_unique($errors)) : '',
 
     'S_USER_ACTION' => 'admin_mass_email.php',
     'S_GROUP_SELECT' => build_select(POST_GROUPS_URL, $groups),

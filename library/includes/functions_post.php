@@ -87,7 +87,7 @@ function submit_post($mode, &$post_data, &$forum_id, &$topic_id, &$post_id, &$to
 
     // Flood control
     $row = null;
-    $where_sql = (IS_GUEST) ? "p.poster_ip = '" . USER_IP . "'" : "p.poster_id = {$userdata['user_id']}";
+    $where_sql = IS_GUEST ? "p.poster_ip = '" . USER_IP . "'" : "p.poster_id = {$userdata['user_id']}";
 
     if ($mode == 'newtopic' || $mode == 'reply') {
         $sql = "SELECT MAX(p.post_time) AS last_post_time FROM " . BB_POSTS . " p WHERE $where_sql";
@@ -247,7 +247,7 @@ function update_post_stats($mode, $post_data, $forum_id, $topic_id, $post_id, $u
                 }
 
                 if ($row = DB()->sql_fetchrow($result)) {
-                    $forum_update_sql .= ($row['last_post_id']) ? ', forum_last_post_id = ' . $row['last_post_id'] : ', forum_last_post_id = 0';
+                    $forum_update_sql .= $row['last_post_id'] ? ', forum_last_post_id = ' . $row['last_post_id'] : ', forum_last_post_id = 0';
                 }
             }
         } elseif ($post_data['first_post']) {

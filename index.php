@@ -53,11 +53,11 @@ $user->session_start();
 
 // Init main vars
 $viewcat = isset($_GET['c']) ? (int)$_GET['c'] : 0;
-$lastvisit = (IS_GUEST) ? TIMENOW : $userdata['user_lastvisit'];
+$lastvisit = IS_GUEST ? TIMENOW : $userdata['user_lastvisit'];
 
 // Caching output
 $req_page = 'index_page';
-$req_page .= ($viewcat) ? "_c{$viewcat}" : '';
+$req_page .= $viewcat ? "_c{$viewcat}" : '';
 
 define('REQUESTED_PAGE', $req_page);
 caching_output(IS_GUEST, 'send', REQUESTED_PAGE . '_guest_' . $bb_cfg['default_lang']);
@@ -95,10 +95,10 @@ if ($viewcat and !$viewcat =& $forums['c'][$viewcat]['cat_id']) {
 
 // Forums
 $forums_join_sql = 'f.cat_id = c.cat_id';
-$forums_join_sql .= ($viewcat) ? "
+$forums_join_sql .= $viewcat ? "
 	AND f.cat_id = $viewcat
 " : '';
-$forums_join_sql .= ($excluded_forums_csv) ? "
+$forums_join_sql .= $excluded_forums_csv ? "
 	AND f.forum_id NOT IN($excluded_forums_csv)
 	AND f.forum_parent NOT IN($excluded_forums_csv)
 " : '';
@@ -232,10 +232,10 @@ foreach ($cat_forums as $cid => $c) {
 
         $forums_count++;
         $new = is_unread($f['last_post_time'], $f['last_topic_id'], $f['forum_id']) ? '_new' : '';
-        $folder_image = ($is_sf) ? $images["icon_minipost{$new}"] : $images["forum{$new}"];
+        $folder_image = $is_sf ? $images["icon_minipost{$new}"] : $images["forum{$new}"];
 
         if ($f['forum_status'] == FORUM_LOCKED) {
-            $folder_image = ($is_sf) ? $images['icon_minipost'] : $images['forum_locked'];
+            $folder_image = $is_sf ? $images['icon_minipost'] : $images['forum_locked'];
         }
 
         if ($is_sf) {
@@ -256,7 +256,7 @@ foreach ($cat_forums as $cid => $c) {
             'TOPICS' => commify($f['forum_topics']),
             'LAST_SF_ID' => $f['last_sf_id'] ?? null,
             'MODERATORS' => isset($moderators[$fid]) ? implode(', ', $moderators[$fid]) : '',
-            'FORUM_FOLDER_ALT' => ($new) ? $lang['NEW'] : $lang['OLD'],
+            'FORUM_FOLDER_ALT' => $new ? $lang['NEW'] : $lang['OLD'],
         ));
 
         if ($f['last_post_id']) {
@@ -273,28 +273,28 @@ foreach ($cat_forums as $cid => $c) {
 
 $template->assign_vars(array(
     'SHOW_FORUMS' => $forums_count,
-    'SHOW_MAP' => (isset($_GET['map']) && !IS_GUEST),
-    'PAGE_TITLE' => ($viewcat) ? $cat_title_html[$viewcat] : $lang['HOME'],
-    'NO_FORUMS_MSG' => ($only_new) ? $lang['NO_NEW_POSTS'] : $lang['NO_FORUMS'],
+    'SHOW_MAP' => isset($_GET['map']) && !IS_GUEST,
+    'PAGE_TITLE' => $viewcat ? $cat_title_html[$viewcat] : $lang['HOME'],
+    'NO_FORUMS_MSG' => $only_new ? $lang['NO_NEW_POSTS'] : $lang['NO_FORUMS'],
 
     'TOTAL_TOPICS' => sprintf($lang['POSTED_TOPICS_TOTAL'], $stats['topiccount']),
     'TOTAL_POSTS' => sprintf($lang['POSTED_ARTICLES_TOTAL'], $stats['postcount']),
     'TOTAL_USERS' => sprintf($lang['REGISTERED_USERS_TOTAL'], $stats['usercount']),
-    'TOTAL_GENDER' => ($bb_cfg['gender']) ? sprintf($lang['USERS_TOTAL_GENDER'], $stats['male'], $stats['female'], $stats['unselect']) : '',
+    'TOTAL_GENDER' => $bb_cfg['gender'] ? sprintf($lang['USERS_TOTAL_GENDER'], $stats['male'], $stats['female'], $stats['unselect']) : '',
     'NEWEST_USER' => sprintf($lang['NEWEST_USER'], profile_url($stats['newestuser'])),
 
     // Tracker stats
-    'TORRENTS_STAT' => ($bb_cfg['tor_stats']) ? sprintf($lang['TORRENTS_STAT'], $stats['torrentcount'], humn_size($stats['size'])) : '',
-    'PEERS_STAT' => ($bb_cfg['tor_stats']) ? sprintf($lang['PEERS_STAT'], $stats['peers'], $stats['seeders'], $stats['leechers']) : '',
-    'SPEED_STAT' => ($bb_cfg['tor_stats']) ? sprintf($lang['SPEED_STAT'], humn_size($stats['speed']) . '/s') : '',
+    'TORRENTS_STAT' => $bb_cfg['tor_stats'] ? sprintf($lang['TORRENTS_STAT'], $stats['torrentcount'], humn_size($stats['size'])) : '',
+    'PEERS_STAT' => $bb_cfg['tor_stats'] ? sprintf($lang['PEERS_STAT'], $stats['peers'], $stats['seeders'], $stats['leechers']) : '',
+    'SPEED_STAT' => $bb_cfg['tor_stats'] ? sprintf($lang['SPEED_STAT'], humn_size($stats['speed']) . '/s') : '',
     'SHOW_MOD_INDEX' => $bb_cfg['show_mod_index'],
     'FORUM_IMG' => $images['forum'],
     'FORUM_NEW_IMG' => $images['forum_new'],
     'FORUM_LOCKED_IMG' => $images['forum_locked'],
 
     'SHOW_ONLY_NEW_MENU' => true,
-    'ONLY_NEW_POSTS_ON' => ($only_new == ONLY_NEW_POSTS),
-    'ONLY_NEW_TOPICS_ON' => ($only_new == ONLY_NEW_TOPICS),
+    'ONLY_NEW_POSTS_ON' => $only_new == ONLY_NEW_POSTS,
+    'ONLY_NEW_TOPICS_ON' => $only_new == ONLY_NEW_TOPICS,
 
     'U_SEARCH_NEW' => "search.php?new=1",
     'U_SEARCH_SELF_BY_MY' => "search.php?uid={$userdata['user_id']}&amp;o=1",
@@ -364,7 +364,7 @@ if ($bb_cfg['birthday_check_day'] && $bb_cfg['birthday_enabled']) {
             }
             $week_list[] = profile_url($week) . ' <span class="small">(' . birthday_age($week['user_birthday'] - 1) . ')</span>';
         }
-        $week_all = ($week_all) ? '&nbsp;<a class="txtb" href="#" onclick="ajax.exec({action: \'index_data\', mode: \'birthday_week\'}); return false;" title="' . $lang['ALL'] . '">...</a>' : '';
+        $week_all = $week_all ? '&nbsp;<a class="txtb" href="#" onclick="ajax.exec({action: \'index_data\', mode: \'birthday_week\'}); return false;" title="' . $lang['ALL'] . '">...</a>' : '';
         $week_list = sprintf($lang['BIRTHDAY_WEEK'], $bb_cfg['birthday_check_day'], implode(', ', $week_list)) . $week_all;
     } else {
         $week_list = sprintf($lang['NOBIRTHDAY_WEEK'], $bb_cfg['birthday_check_day']);
@@ -379,7 +379,7 @@ if ($bb_cfg['birthday_check_day'] && $bb_cfg['birthday_enabled']) {
             }
             $today_list[] = profile_url($today) . ' <span class="small">(' . birthday_age($today['user_birthday']) . ')</span>';
         }
-        $today_all = ($today_all) ? '&nbsp;<a class="txtb" href="#" onclick="ajax.exec({action: \'index_data\', mode: \'birthday_today\'}); return false;" title="' . $lang['ALL'] . '">...</a>' : '';
+        $today_all = $today_all ? '&nbsp;<a class="txtb" href="#" onclick="ajax.exec({action: \'index_data\', mode: \'birthday_today\'}); return false;" title="' . $lang['ALL'] . '">...</a>' : '';
         $today_list = $lang['BIRTHDAY_TODAY'] . implode(', ', $today_list) . $today_all;
     } else {
         $today_list = $lang['NOBIRTHDAY_TODAY'];

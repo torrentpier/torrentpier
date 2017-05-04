@@ -275,7 +275,7 @@ if ($view === 'search') {
     $s_forums = '';
     $list_cat = [];
     while ($row = DB()->sql_fetchrow($result)) { //sf
-        $s_forums .= '<option value="' . $row['forum_id'] . '">' . (($row['forum_parent']) ? HTML_SF_SPACER : '') . htmlCHR($row['forum_name']) . '</option>';
+        $s_forums .= '<option value="' . $row['forum_id'] . '">' . ($row['forum_parent'] ? HTML_SF_SPACER : '') . htmlCHR($row['forum_name']) . '</option>';
 
         if (empty($list_cat[$row['cat_id']])) {
             $list_cat[$row['cat_id']] = $row['cat_title'];
@@ -318,7 +318,7 @@ if ($view === 'username') {
 
 // Attachments
 if ($view === 'attachments') {
-    $user_based = ($uid) ? true : false;
+    $user_based = $uid ? true : false;
     $search_based = (isset($_POST['search']) && $_POST['search']);
 
     $hidden_fields = '';
@@ -461,7 +461,7 @@ if ($view === 'attachments') {
                 'FILENAME' => htmlspecialchars($attachments[$i]['real_filename']),
                 'COMMENT' => htmlspecialchars($attachments[$i]['comment']),
                 'EXTENSION' => $attachments[$i]['extension'],
-                'SIZE' => round(($attachments[$i]['filesize'] / 1024), 2),
+                'SIZE' => round($attachments[$i]['filesize'] / 1024, 2),
                 'DOWNLOAD_COUNT' => $attachments[$i]['download_count'],
                 'POST_TIME' => bb_date($attachments[$i]['filetime']),
                 'POST_TITLE' => $post_titles,

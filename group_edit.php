@@ -87,7 +87,7 @@ if ($is_moderator) {
         'GROUP_DESCRIPTION' => htmlCHR($group_info['group_description']),
         'GROUP_SIGNATURE' => htmlCHR($group_info['group_signature']),
         'U_GROUP_URL' => GROUP_URL . $group_id,
-        'RELEASE_GROUP' => ($group_info['release_group']) ? true : false,
+        'RELEASE_GROUP' => $group_info['release_group'] ? true : false,
         'GROUP_TYPE' => $group_type,
         'S_GROUP_OPEN_TYPE' => GROUP_OPEN,
         'S_GROUP_CLOSED_TYPE' => GROUP_CLOSED,
@@ -98,18 +98,18 @@ if ($is_moderator) {
         'S_HIDDEN_FIELDS' => $s_hidden_fields,
         'S_GROUP_CONFIG_ACTION' => "group_edit.php?" . POST_GROUPS_URL . "=$group_id",
 
-        'AVATAR_EXPLAIN' => sprintf($lang['AVATAR_EXPLAIN'], $bb_cfg['group_avatars']['max_width'], $bb_cfg['group_avatars']['max_height'], (round($bb_cfg['group_avatars']['max_size'] / 1024))),
+        'AVATAR_EXPLAIN' => sprintf($lang['AVATAR_EXPLAIN'], $bb_cfg['group_avatars']['max_width'], $bb_cfg['group_avatars']['max_height'], round($bb_cfg['group_avatars']['max_size'] / 1024)),
         'AVATAR_IMG' => get_avatar(GROUP_AVATAR_MASK . $group_id, $group_info['avatar_ext_id']),
     ));
 
     $template->set_filenames(array('body' => 'group_edit.tpl'));
     $template->assign_vars(array('PAGE_TITLE' => $lang['GROUP_CONFIGURATION']));
 
-    require(PAGE_HEADER);
+    require PAGE_HEADER;
 
     $template->pparse('body');
 
-    require(PAGE_FOOTER);
+    require PAGE_FOOTER;
 } else {
     $redirect = 'index.php';
 

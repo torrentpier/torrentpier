@@ -60,7 +60,7 @@ $forum_parent = $cat_id = 0;
 $forumname = '';
 
 if (isset($_REQUEST['addforum']) || isset($_REQUEST['addcategory'])) {
-    $mode = (isset($_REQUEST['addforum'])) ? "addforum" : "addcat";
+    $mode = isset($_REQUEST['addforum']) ? "addforum" : "addcat";
 
     if ($mode == 'addforum' && isset($_POST['addforum']) && isset($_POST['forumname']) && is_array($_POST['addforum'])) {
         $req_cat_id = array_keys($_POST['addforum']);
@@ -133,7 +133,7 @@ if ($mode) {
             $catlist = get_list('category', $cat_id, true);
             $forumlocked = $forumunlocked = '';
 
-            $forumstatus == (FORUM_LOCKED) ? $forumlocked = 'selected="selected"' : $forumunlocked = 'selected="selected"';
+            $forumstatus == FORUM_LOCKED ? $forumlocked = 'selected="selected"' : $forumunlocked = 'selected="selected"';
 
             $statuslist = '<option value="' . FORUM_UNLOCKED . '" ' . $forumunlocked . '>' . $lang['STATUS_UNLOCKED'] . '</option>\n';
             $statuslist .= '<option value="' . FORUM_LOCKED . '" ' . $forumlocked . '>' . $lang['STATUS_LOCKED'] . '</option>\n';
@@ -160,7 +160,7 @@ if ($mode) {
 
                 'SHOW_ON_INDEX' => $show_on_index,
                 'S_PARENT_FORUM' => $s_parent,
-                'CAT_LIST_CLASS' => ($forum_parent) ? 'hidden' : '',
+                'CAT_LIST_CLASS' => $forum_parent ? 'hidden' : '',
                 'SHOW_ON_INDEX_CLASS' => (!$forum_parent) ? 'hidden' : '',
                 'TPL_SELECT' => get_select('forum_tpl', $forum_tpl_id, 'html', $lang['TEMPLATE_DISABLE']),
                 'ALLOW_REG_TRACKER' => build_select('allow_reg_tracker', array($lang['DISALLOWED'] => 0, $lang['ALLOWED'] => 1), $allow_reg_tracker),
@@ -187,7 +187,7 @@ if ($mode) {
             $prune_days = (int)$_POST['prune_days'];
 
             $forum_parent = ($_POST['forum_parent'] != -1) ? (int)$_POST['forum_parent'] : 0;
-            $show_on_index = ($forum_parent) ? (int)$_POST['show_on_index'] : 1;
+            $show_on_index = $forum_parent ? (int)$_POST['show_on_index'] : 1;
 
             $forum_display_sort = (int)$_POST['forum_display_sort'];
             $forum_display_order = (int)$_POST['forum_display_order'];
@@ -207,7 +207,7 @@ if ($mode) {
                 }
 
                 $cat_id = $parent['cat_id'];
-                $forum_parent = ($parent['forum_parent']) ?: $parent['forum_id'];
+                $forum_parent = $parent['forum_parent'] ?: $parent['forum_id'];
                 $forum_order = $parent['forum_order'] + 5;
             } else {
                 $max_order = get_max_forum_order($cat_id);
@@ -250,7 +250,7 @@ if ($mode) {
             $prune_days = (int)$_POST['prune_days'];
 
             $forum_parent = ($_POST['forum_parent'] != -1) ? (int)$_POST['forum_parent'] : 0;
-            $show_on_index = ($forum_parent) ? (int)$_POST['show_on_index'] : 1;
+            $show_on_index = $forum_parent ? (int)$_POST['show_on_index'] : 1;
 
             $forum_display_order = (int)$_POST['forum_display_order'];
             $forum_display_sort = (int)$_POST['forum_display_sort'];
@@ -273,7 +273,7 @@ if ($mode) {
                 }
 
                 $cat_id = $parent['cat_id'];
-                $forum_parent = ($parent['forum_parent']) ?: $parent['forum_id'];
+                $forum_parent = $parent['forum_parent'] ?: $parent['forum_id'];
                 $forum_order = $parent['forum_order'] + 5;
 
                 if ($forum_id == $forum_parent) {
@@ -322,7 +322,7 @@ if ($mode) {
             CACHE('bb_cache')->rm();
 
             $message = $lang['FORUMS_UPDATED'] . '<br /><br />';
-            $message .= ($fix) ? "$fix<br /><br />" : '';
+            $message .= $fix ? "$fix<br /><br />" : '';
             $message .= sprintf($lang['CLICK_RETURN_FORUMADMIN'], '<a href="admin_forums.php?c=' . $cat_id . '">', '</a>') . '<br /><br />' . sprintf($lang['CLICK_RETURN_ADMIN_INDEX'], '<a href="index.php?pane=right">', '</a>');
             bb_die($message);
 
@@ -557,7 +557,7 @@ if ($mode) {
             CACHE('bb_cache')->rm();
 
             $message = $lang['FORUMS_UPDATED'] . '<br /><br />';
-            $message .= ($fix) ? "$fix<br /><br />" : '';
+            $message .= $fix ? "$fix<br /><br />" : '';
             $message .= sprintf($lang['CLICK_RETURN_FORUMADMIN'], '<a href="admin_forums.php">', '</a>') . '<br /><br />' . sprintf($lang['CLICK_RETURN_ADMIN_INDEX'], '<a href="index.php?pane=right">', '</a>');
             bb_die($message);
 
@@ -750,7 +750,7 @@ if (!$mode || $show_main_page) {
                         'FORUM_DESC' => htmlCHR($forum_rows[$j]['forum_desc']),
                         'NUM_TOPICS' => $forum_rows[$j]['forum_topics'],
                         'NUM_POSTS' => $forum_rows[$j]['forum_posts'],
-                        'PRUNE_DAYS' => ($forum_rows[$j]['prune_days']) ?: '-',
+                        'PRUNE_DAYS' => $forum_rows[$j]['prune_days'] ?: '-',
 
                         'ORDER' => $forum_rows[$j]['forum_order'],
                         'FORUM_ID' => $forum_rows[$j]['forum_id'],
@@ -758,8 +758,8 @@ if (!$mode || $show_main_page) {
 
                         'SHOW_ON_INDEX' => (bool)$forum_rows[$j]['show_on_index'],
                         'FORUM_PARENT' => $forum_rows[$j]['forum_parent'],
-                        'SF_PAD' => ($forum_rows[$j]['forum_parent']) ? ' style="padding-left: 20px;" ' : '',
-                        'FORUM_NAME_CLASS' => ($forum_rows[$j]['forum_parent']) ? 'genmed' : 'gen',
+                        'SF_PAD' => $forum_rows[$j]['forum_parent'] ? ' style="padding-left: 20px;" ' : '',
+                        'FORUM_NAME_CLASS' => $forum_rows[$j]['forum_parent'] ? 'genmed' : 'gen',
                         'ADD_SUB_HREF' => "admin_forums.php?mode=addforum&amp;forum_parent={$forum_rows[$j]['forum_id']}",
                         'U_VIEWFORUM' => BB_ROOT . "viewforum.php?f=$forum_id",
                         'U_FORUM_EDIT' => "admin_forums.php?mode=editforum&amp;f=$forum_id",
@@ -859,7 +859,7 @@ function get_list($mode, $id, $select)
         $catlist .= '<option value="' . $row[$idfield] . '"' . $s . '>&nbsp;' . htmlCHR(str_short($row[$namefield], 60)) . '</option>\n';
     }
 
-    return ($catlist);
+    return $catlist;
 }
 
 function renumber_order($mode, $cat = 0)
@@ -1052,8 +1052,8 @@ function sf_get_list($mode, $exclude = 0, $select = 0)
             foreach ($c['f'] as $fid => $f) {
                 $selected = ($fid == $select) ? HTML_SELECTED : '';
                 $disabled = ($fid == $exclude && !$forum_parent) ? HTML_DISABLED : '';
-                $style = ($disabled) ? ' style="color: gray" ' : (($fid == $exclude) ? ' style="color: darkred" ' : '');
-                $opt .= '<option value="' . $fid . '" ' . $selected . $disabled . $style . '>' . (($f['forum_parent']) ? HTML_SF_SPACER : '') . htmlCHR(str_short($f['forum_name'], 60)) . "&nbsp;</option>\n";
+                $style = $disabled ? ' style="color: gray" ' : (($fid == $exclude) ? ' style="color: darkred" ' : '');
+                $opt .= '<option value="' . $fid . '" ' . $selected . $disabled . $style . '>' . ($f['forum_parent'] ? HTML_SF_SPACER : '') . htmlCHR(str_short($f['forum_name'], 60)) . "&nbsp;</option>\n";
             }
 
             $opt .= '</optgroup>';

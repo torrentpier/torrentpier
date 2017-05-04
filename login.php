@@ -73,7 +73,7 @@ if (isset($_REQUEST['admin']) && !IS_AM) {
 $mod_admin_login = (IS_AM && !$user->data['session_admin']);
 
 // login username & password
-$login_username = ($mod_admin_login) ? $userdata['username'] : ($_POST['login_username'] ?? '');
+$login_username = $mod_admin_login ? $userdata['username'] : ($_POST['login_username'] ?? '');
 $login_password = $_POST['login_password'] ?? '';
 
 // Проверка на неверную комбинацию логин/пароль
@@ -103,7 +103,7 @@ if (isset($_POST['login'])) {
 
     if (!$login_errors) {
         if ($user->login($_POST, $mod_admin_login)) {
-            $redirect_url = (defined('FIRST_LOGON')) ? $bb_cfg['first_logon_redirect_url'] : $redirect_url;
+            $redirect_url = defined('FIRST_LOGON') ? $bb_cfg['first_logon_redirect_url'] : $redirect_url;
             // Обнуление при введении правильно комбинации логин/пароль
             CACHE('bb_login_err')->set('l_err_' . USER_IP, 0, 3600);
 
@@ -123,7 +123,7 @@ if (isset($_POST['login'])) {
             if ($login_err > 50) {
                 // TODO temp ban ip
             }
-            CACHE('bb_login_err')->set('l_err_' . USER_IP, ($login_err + 1), 3600);
+            CACHE('bb_login_err')->set('l_err_' . USER_IP, $login_err + 1, 3600);
         } else {
             $need_captcha = false;
         }

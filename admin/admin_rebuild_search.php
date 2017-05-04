@@ -237,7 +237,7 @@ if ($mode == 'submit' || $mode == 'refresh') {
     $template->assign_vars(array('TPL_REBUILD_SEARCH_PROGRESS' => true));
 
     $processing_messages = '';
-    $processing_messages .= ($timer_expired) ? sprintf($lang['TIMER_EXPIRED'], TIMENOW - $start_time) : '';
+    $processing_messages .= $timer_expired ? sprintf($lang['TIMER_EXPIRED'], TIMENOW - $start_time) : '';
     $processing_messages .= ($start == 0 && $clear_search) ? $lang['CLEARED_SEARCH_TABLES'] : '';
 
     // check if we have reached the end of our post processing
@@ -383,7 +383,7 @@ if ($mode == 'submit' || $mode == 'refresh') {
             // when finished
 
             if ($last_session_data['end_post_id'] < $max_post_id) {
-                $last_saved_processing = sprintf($lang['INFO_PROCESSING_FINISHED_NEW'], $last_saved_post_id, $total_posts_processed, $last_saved_date, ($total_posts - $total_posts_processed));
+                $last_saved_processing = sprintf($lang['INFO_PROCESSING_FINISHED_NEW'], $last_saved_post_id, $total_posts_processed, $last_saved_date, $total_posts - $total_posts_processed);
                 $clear_search_disabled = 'disabled="disabled"';
 
                 $template->assign_block_vars("start_select_input", array());

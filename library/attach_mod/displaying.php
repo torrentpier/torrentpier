@@ -283,7 +283,7 @@ function display_attachments($post_id)
 						SET download_count = download_count + 1
 						WHERE attach_id = ' . (int)$attachments['_' . $post_id][$i]['attach_id'];
 
-                    if (!(DB()->sql_query($sql))) {
+                    if (!DB()->sql_query($sql)) {
                         bb_die('Could not update attachment download count');
                     }
                 }
@@ -311,7 +311,7 @@ function display_attachments($post_id)
             if ($link && ($attachments['_' . $post_id][$i]['extension'] === TORRENT_EXT)) {
                 include ATTACH_DIR . '/displaying_torrent.php';
             } elseif ($link) {
-                $target_blank = ((@(int)$display_categories[$attachments['_' . $post_id][$i]['extension']] == IMAGE_CAT)) ? 'target="_blank"' : '';
+                $target_blank = @(int)$display_categories[$attachments['_' . $post_id][$i]['extension']] == IMAGE_CAT ? 'target="_blank"' : '';
 
                 // display attachment
                 $template->assign_block_vars('postrow.attach.attachrow', array(

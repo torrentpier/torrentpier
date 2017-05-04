@@ -27,7 +27,7 @@ if (!empty($setmodules)) {
     $module['FORUMS']['PERMISSIONS'] = basename(__FILE__);
     return;
 }
-require('./pagestart.php');
+require './pagestart.php';
 
 $forum_auth_fields = array(
     'auth_view',
@@ -226,9 +226,9 @@ if (empty($forum_id)) {
         }
     }
 
-    $adv_mode = (empty($adv)) ? '1' : '0';
+    $adv_mode = empty($adv) ? '1' : '0';
     $switch_mode = "admin_forumauth.php?f=$forum_id&amp;adv=$adv_mode";
-    $switch_mode_text = (empty($adv)) ? $lang['ADVANCED_MODE'] : $lang['SIMPLE_MODE'];
+    $switch_mode_text = empty($adv) ? $lang['ADVANCED_MODE'] : $lang['SIMPLE_MODE'];
     $u_switch_mode = '<a href="' . $switch_mode . '">' . $switch_mode_text . '</a>';
 
     $s_hidden_fields = '<input type="hidden" name="' . POST_FORUM_URL . '" value="' . $forum_id . '">';

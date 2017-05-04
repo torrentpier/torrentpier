@@ -36,7 +36,7 @@ if (!$mode = (string)$this->request['mode']) {
     $this->ajax_die('No mode specified');
 }
 
-$value = $this->request['value'] = (string)(isset($this->request['value'])) ? $this->request['value'] : 0;
+$value = $this->request['value'] = (string)isset($this->request['value']) ? $this->request['value'] : 0;
 
 if (!IS_ADMIN && $userdata['user_id'] != $group_info['group_moderator']) {
     $this->ajax_die($lang['ONLY_FOR_MOD']);

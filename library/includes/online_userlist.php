@@ -94,7 +94,7 @@ foreach (DB()->fetch_rowset($sql) as $u) {
             $stat[] = "t:<span style=\"color: #1E90FF\">$t</span>";
         }
 
-        $ulist[$level][] = ($stat) ? "$name<span class=\"ou_stat\" style=\"color: #707070\" title=\"{$u['session_ip']}\"> [<b>" . implode(', ', $stat) . '</b>]</span>' : $name;
+        $ulist[$level][] = $stat ? "$name<span class=\"ou_stat\" style=\"color: #707070\" title=\"{$u['session_ip']}\"> [<b>" . implode(', ', $stat) . '</b>]</span>' : $name;
     } else {
         $guests_online = $u['ips'];
         $users_cnt['guest'] = $guests_online;

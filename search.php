@@ -108,7 +108,7 @@ $url = basename(__FILE__);
 
 $anon_id = GUEST_UID;
 $user_id = $userdata['user_id'];
-$lastvisit = (IS_GUEST) ? TIMENOW : $userdata['user_lastvisit'];
+$lastvisit = IS_GUEST ? TIMENOW : $userdata['user_lastvisit'];
 $search_id = (isset($_GET['id']) && verify_id($_GET['id'], SEARCH_ID_LENGTH)) ? $_GET['id'] : '';
 $session_id = $userdata['session_id'];
 
@@ -530,7 +530,7 @@ if ($post_mode) {
                 bb_die($lang['NO_SEARCH_MATCH']);
             }
 
-            $where_id = ($title_match) ? 'topic_id' : 'post_id';
+            $where_id = $title_match ? 'topic_id' : 'post_id';
 
             $SQL['WHERE'][] = "$tbl.$where_id IN($search_match_topics_csv)";
             prevent_huge_searches($SQL);
@@ -550,7 +550,7 @@ if ($post_mode) {
     }
 
     // Build SQL for displaying posts
-    $excluded_forums_sql = ($excluded_forums_csv) ? " AND t.forum_id NOT IN($excluded_forums_csv) " : '';
+    $excluded_forums_sql = $excluded_forums_csv ? " AND t.forum_id NOT IN($excluded_forums_csv) " : '';
 
     $sql = "
 		SELECT
@@ -611,7 +611,7 @@ if ($post_mode) {
         ));
 
         $quote_btn = true;
-        $edit_btn = $delpost_btn = $ip_btn = (IS_AM);
+        $edit_btn = $delpost_btn = $ip_btn = IS_AM;
 
         // Topic posts block
         foreach ($topic_posts as $row_num => $post) {
@@ -653,7 +653,7 @@ else {
         $join_t = ($title_match || $my_topics || $new_topics || $dl_search || $new_posts || in_array($order_val, array($ord_last_p, $ord_created, $ord_name, $ord_repl), true));
         $join_s = ($text_match_sql && !$title_match);
         $join_p = ($my_posts || $join_s);
-        $join_dl = ($dl_search);
+        $join_dl = $dl_search;
 
         $tbl = ($join_p && !$join_t) ? 'p' : 't';
         $time_field = ($join_p && !$join_t) ? 'post_time' : 'topic_last_post_time';
@@ -733,7 +733,7 @@ else {
                 bb_die($lang['NO_SEARCH_MATCH']);
             }
 
-            $where_id = ($title_match) ? 't.topic_id' : 'p.post_id';
+            $where_id = $title_match ? 't.topic_id' : 'p.post_id';
 
             $SQL['WHERE'][] = "$where_id IN($search_match_topics_csv)";
             prevent_huge_searches($SQL);
@@ -819,16 +819,16 @@ else {
             'FORUM_ID' => $forum_id,
             'FORUM_NAME' => $forum_name_html[$forum_id],
             'TOPIC_ID' => $topic_id,
-            'HREF_TOPIC_ID' => ($moved) ? $topic['topic_moved_id'] : $topic['topic_id'],
+            'HREF_TOPIC_ID' => $moved ? $topic['topic_moved_id'] : $topic['topic_id'],
             'TOPIC_TITLE' => wbr($topic['topic_title']),
             'IS_UNREAD' => $is_unread,
             'TOPIC_ICON' => get_topic_icon($topic, $is_unread),
-            'PAGINATION' => ($moved) ? '' : build_topic_pagination(TOPIC_URL . $topic_id, $topic['topic_replies'], $bb_cfg['posts_per_page']),
+            'PAGINATION' => $moved ? '' : build_topic_pagination(TOPIC_URL . $topic_id, $topic['topic_replies'], $bb_cfg['posts_per_page']),
             'REPLIES' => $topic['topic_replies'],
             'ATTACH' => $topic['topic_attachment'],
             'STATUS' => $topic['topic_status'],
             'TYPE' => $topic['topic_type'],
-            'DL' => ($topic['topic_dl_type'] == TOPIC_DL_TYPE_DL),
+            'DL' => $topic['topic_dl_type'] == TOPIC_DL_TYPE_DL,
             'POLL' => $topic['topic_vote'],
             'DL_CLASS' => isset($topic['dl_status']) ? $dl_link_css[$topic['dl_status']] : '',
 
@@ -843,19 +843,19 @@ else {
 if ($items_display) {
     $items_count = count($items_found);
     $pages = (!$items_count) ? 1 : ceil($items_count / $per_page);
-    $url = ($search_id) ? url_arg($url, 'id', $search_id) : $url;
+    $url = $search_id ? url_arg($url, 'id', $search_id) : $url;
 
     generate_pagination($url, $items_count, $per_page, $start);
 
     $template->assign_vars(array(
         'PAGE_TITLE' => $lang['SEARCH'],
 
-        'SEARCH_MATCHES' => ($items_count) ? sprintf($lang['FOUND_SEARCH_MATCHES'], $items_count) : '',
+        'SEARCH_MATCHES' => $items_count ? sprintf($lang['FOUND_SEARCH_MATCHES'], $items_count) : '',
         'DISPLAY_AS_POSTS' => $post_mode,
 
-        'DL_CONTROLS' => ($dl_search && $dl_user_id_val == $user_id),
+        'DL_CONTROLS' => $dl_search && $dl_user_id_val == $user_id,
         'DL_ACTION' => 'dl_list.php',
-        'MY_POSTS' => (!$post_mode && $my_posts && $user->id == $poster_id_val),
+        'MY_POSTS' => !$post_mode && $my_posts && $user->id == $poster_id_val,
     ));
 
     print_page('search_results.tpl');

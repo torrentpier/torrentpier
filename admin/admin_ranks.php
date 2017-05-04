@@ -27,7 +27,7 @@ if (!empty($setmodules)) {
     $module['USERS']['RANKS'] = basename(__FILE__);
     return;
 }
-require('./pagestart.php');
+require './pagestart.php';
 
 $_POST['special_rank'] = 1;
 $_POST['min_posts'] = -1;
@@ -52,7 +52,7 @@ if ($mode != '') {
         //
         // They want to add a new rank, show the form.
         //
-        $rank_id = (isset($_GET['id'])) ? (int)$_GET['id'] : 0;
+        $rank_id = isset($_GET['id']) ? (int)$_GET['id'] : 0;
 
         $s_hidden_fields = '';
 
@@ -83,7 +83,7 @@ if ($mode != '') {
             'RANK' => !empty($rank_info['rank_title']) ? $rank_info['rank_title'] : '',
             'SPECIAL_RANK' => $rank_is_special,
             'NOT_SPECIAL_RANK' => $rank_is_not_special,
-            'MINIMUM' => ($rank_is_special) ? '' : @$rank_info['rank_min'],
+            'MINIMUM' => $rank_is_special ? '' : @$rank_info['rank_min'],
             'IMAGE' => !empty($rank_info['rank_image']) ? $rank_info['rank_image'] : 'styles/images/ranks/rank_image.png',
             'STYLE' => !empty($rank_info['rank_style']) ? $rank_info['rank_style'] : '',
             'IMAGE_DISPLAY' => !empty($rank_info['rank_image']) ? '<img src="../' . $rank_info['rank_image'] . '" />' : '',
@@ -96,12 +96,12 @@ if ($mode != '') {
         // Ok, they sent us our info, let's update it.
         //
 
-        $rank_id = (isset($_POST['id'])) ? (int)$_POST['id'] : 0;
-        $rank_title = (isset($_POST['title'])) ? trim($_POST['title']) : '';
-        $rank_style = (isset($_POST['style'])) ? trim($_POST['style']) : '';
+        $rank_id = isset($_POST['id']) ? (int)$_POST['id'] : 0;
+        $rank_title = isset($_POST['title']) ? trim($_POST['title']) : '';
+        $rank_style = isset($_POST['style']) ? trim($_POST['style']) : '';
         $special_rank = ($_POST['special_rank'] == 1) ? true : 0;
-        $min_posts = (isset($_POST['min_posts'])) ? (int)$_POST['min_posts'] : -1;
-        $rank_image = ((isset($_POST['rank_image']))) ? trim($_POST['rank_image']) : '';
+        $min_posts = isset($_POST['min_posts']) ? (int)$_POST['min_posts'] : -1;
+        $rank_image = isset($_POST['rank_image']) ? trim($_POST['rank_image']) : '';
 
         if ($rank_title == '') {
             bb_die($lang['MUST_SELECT_RANK']);
@@ -159,7 +159,7 @@ if ($mode != '') {
         //
 
         if (isset($_POST['id']) || isset($_GET['id'])) {
-            $rank_id = (isset($_POST['id'])) ? (int)$_POST['id'] : (int)$_GET['id'];
+            $rank_id = isset($_POST['id']) ? (int)$_POST['id'] : (int)$_GET['id'];
         } else {
             $rank_id = 0;
         }
@@ -213,13 +213,13 @@ if ($mode != '') {
 
         $row_class = !($i % 2) ? 'row1' : 'row2';
 
-        $rank_is_special = ($special_rank) ? $lang['YES'] : $lang['NO'];
+        $rank_is_special = $special_rank ? $lang['YES'] : $lang['NO'];
 
         $template->assign_block_vars('ranks', array(
             'ROW_CLASS' => $row_class,
             'RANK' => $rank,
             'STYLE' => $rank_rows[$i]['rank_style'],
-            'IMAGE_DISPLAY' => ($rank_rows[$i]['rank_image']) ? '<img src="../' . $rank_rows[$i]['rank_image'] . '" />' : '',
+            'IMAGE_DISPLAY' => $rank_rows[$i]['rank_image'] ? '<img src="../' . $rank_rows[$i]['rank_image'] . '" />' : '',
             'SPECIAL_RANK' => $rank_is_special,
             'RANK_MIN' => $rank_min,
 

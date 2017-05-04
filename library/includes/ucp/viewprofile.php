@@ -51,7 +51,7 @@ if (!$ranks = $datastore->get('ranks')) {
 
 $poster_rank = $rank_image = $rank_style = $rank_select = '';
 if ($user_rank = $profiledata['user_rank'] and isset($ranks[$user_rank])) {
-    $rank_image = ($ranks[$user_rank]['rank_image']) ? '<img src="' . $ranks[$user_rank]['rank_image'] . '" alt="" title="" border="0" />' : '';
+    $rank_image = $ranks[$user_rank]['rank_image'] ? '<img src="' . $ranks[$user_rank]['rank_image'] . '" alt="" title="" border="0" />' : '';
     $poster_rank = $ranks[$user_rank]['rank_title'];
     $rank_style = $ranks[$user_rank]['rank_style'];
 }
@@ -64,7 +64,7 @@ if (IS_ADMIN) {
 }
 
 if (bf($profiledata['user_opt'], 'user_opt', 'user_viewemail') || $profiledata['user_id'] == $userdata['user_id'] || IS_AM) {
-    $email_uri = ($bb_cfg['board_email_form']) ? 'profile.php?mode=email&amp;' . POST_USERS_URL . '=' . $profiledata['user_id'] : 'mailto:' . $profiledata['user_email'];
+    $email_uri = $bb_cfg['board_email_form'] ? 'profile.php?mode=email&amp;' . POST_USERS_URL . '=' . $profiledata['user_id'] : 'mailto:' . $profiledata['user_email'];
     $email = '<a class="editable" href="' . $email_uri . '">' . $profiledata['user_email'] . '</a>';
 } else {
     $email = '';
@@ -94,7 +94,7 @@ $template->assign_vars(array(
     'PROFILE_USER_ID' => $profiledata['user_id'],
     'PROFILE_USER' => $profile_user_id,
     'USER_REGDATE' => bb_date($profiledata['user_regdate'], 'Y-m-d H:i', false),
-    'POSTER_RANK' => ($poster_rank) ? "<span class=\"$rank_style\">" . $poster_rank . "</span>" : $lang['USER'],
+    'POSTER_RANK' => $poster_rank ? "<span class=\"$rank_style\">" . $poster_rank . "</span>" : $lang['USER'],
     'RANK_IMAGE' => $rank_image,
     'RANK_SELECT' => $rank_select,
     'POSTS' => $profiledata['user_posts'],
@@ -102,8 +102,8 @@ $template->assign_vars(array(
     'EMAIL' => $email,
     'WWW' => $profiledata['user_website'],
     'ICQ' => $profiledata['user_icq'],
-    'LAST_VISIT_TIME' => ($profiledata['user_lastvisit']) ? (bf($profiledata['user_opt'], 'user_opt', 'user_viewonline') && !IS_ADMIN) ? $lang['HIDDEN_USER'] : bb_date($profiledata['user_lastvisit'], 'Y-m-d H:i', false) : $lang['NEVER'],
-    'LAST_ACTIVITY_TIME' => ($profiledata['user_session_time']) ? (bf($profiledata['user_opt'], 'user_opt', 'user_viewonline') && !IS_ADMIN) ? $lang['HIDDEN_USER'] : bb_date($profiledata['user_session_time'], 'Y-m-d H:i', false) : $lang['NEVER'],
+    'LAST_VISIT_TIME' => $profiledata['user_lastvisit'] ? (bf($profiledata['user_opt'], 'user_opt', 'user_viewonline') && !IS_ADMIN) ? $lang['HIDDEN_USER'] : bb_date($profiledata['user_lastvisit'], 'Y-m-d H:i', false) : $lang['NEVER'],
+    'LAST_ACTIVITY_TIME' => $profiledata['user_session_time'] ? (bf($profiledata['user_opt'], 'user_opt', 'user_viewonline') && !IS_ADMIN) ? $lang['HIDDEN_USER'] : bb_date($profiledata['user_session_time'], 'Y-m-d H:i', false) : $lang['NEVER'],
 
     'USER_ACTIVE' => $profiledata['user_active'],
     'LOCATION' => $profiledata['user_from'],
@@ -112,7 +112,7 @@ $template->assign_vars(array(
     'SKYPE' => $profiledata['user_skype'],
     'TWITTER' => $profiledata['user_twitter'],
     'USER_POINTS' => $profiledata['user_points'],
-    'GENDER' => ($bb_cfg['gender']) ? $lang['GENDER_SELECT'][$profiledata['user_gender']] : '',
+    'GENDER' => $bb_cfg['gender'] ? $lang['GENDER_SELECT'][$profiledata['user_gender']] : '',
     'BIRTHDAY' => ($bb_cfg['birthday_enabled'] && $profiledata['user_birthday'] != '0000-00-00') ? $profiledata['user_birthday'] : '',
     'AGE' => ($bb_cfg['birthday_enabled'] && $profiledata['user_birthday'] != '0000-00-00') ? birthday_age($profiledata['user_birthday']) : '',
 
@@ -126,8 +126,8 @@ $template->assign_vars(array(
     'AVATAR_IMG' => get_avatar($profiledata['user_id'], $profiledata['avatar_ext_id'], !bf($profiledata['user_opt'], 'user_opt', 'dis_avatar')),
 
     'SIGNATURE' => $signature,
-    'SHOW_PASSKEY' => (IS_ADMIN || $profile_user_id),
-    'SHOW_ROLE' => (IS_AM || $profile_user_id || $profiledata['user_active']),
+    'SHOW_PASSKEY' => IS_ADMIN || $profile_user_id,
+    'SHOW_ROLE' => IS_AM || $profile_user_id || $profiledata['user_active'],
     'GROUP_MEMBERSHIP' => false,
     'TRAF_STATS' => !(IS_AM || $profile_user_id),
 ));
@@ -170,7 +170,7 @@ if (IS_ADMIN) {
     ));
 } elseif (IS_MOD) {
     $template->assign_vars(array(
-        'SHOW_GROUP_MEMBERSHIP' => ($profiledata['user_level'] != USER),
+        'SHOW_GROUP_MEMBERSHIP' => $profiledata['user_level'] != USER,
     ));
 }
 

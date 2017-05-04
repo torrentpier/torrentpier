@@ -273,7 +273,7 @@ class template
         $V =& $this->vars;
 
         if ($filename) {
-            include($filename);
+            include $filename;
         } else {
             eval($code);
         }

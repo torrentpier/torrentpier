@@ -27,7 +27,7 @@ if (!empty($setmodules)) {
     $module['FORUMS']['PERMISSIONS_LIST'] = basename(__FILE__);
     return;
 }
-require('./pagestart.php');
+require './pagestart.php';
 
 //  View  Read  Post  Reply  Edit  Delete  Sticky  Announce  Vote  Poll  PostAttach  Download
 $simple_auth_ary = array(
@@ -81,7 +81,7 @@ $forum_auth_levels = array('ALL', 'REG', 'PRIVATE', 'MOD', 'ADMIN');
 $forum_auth_const = array(AUTH_ALL, AUTH_REG, AUTH_ACL, AUTH_MOD, AUTH_ADMIN);
 
 if (isset($_GET[POST_FORUM_URL]) || isset($_POST[POST_FORUM_URL])) {
-    $forum_id = (isset($_POST[POST_FORUM_URL])) ? (int)$_POST[POST_FORUM_URL] : (int)$_GET[POST_FORUM_URL];
+    $forum_id = isset($_POST[POST_FORUM_URL]) ? (int)$_POST[POST_FORUM_URL] : (int)$_GET[POST_FORUM_URL];
     $forum_sql = "AND forum_id = $forum_id";
 } else {
     unset($forum_id);
@@ -89,7 +89,7 @@ if (isset($_GET[POST_FORUM_URL]) || isset($_POST[POST_FORUM_URL])) {
 }
 
 if (isset($_GET[POST_CAT_URL]) || isset($_POST[POST_CAT_URL])) {
-    $cat_id = (isset($_POST[POST_CAT_URL])) ? (int)$_POST[POST_CAT_URL] : (int)$_GET[POST_CAT_URL];
+    $cat_id = isset($_POST[POST_CAT_URL]) ? (int)$_POST[POST_CAT_URL] : (int)$_GET[POST_CAT_URL];
     $cat_sql = "AND c.cat_id = $cat_id";
 } else {
     unset($cat_id);
@@ -227,7 +227,7 @@ if (empty($forum_id) && empty($cat_id)) {
             if ($cat_id == $forum_rows[$j]['cat_id']) {
                 $template->assign_block_vars('cat_row.forum_row', array(
                     'ROW_CLASS' => !($j % 2) ? 'row4' : 'row5',
-                    'FORUM_NAME' => '<a class="' . (($forum_rows[$j]['forum_parent']) ? 'genmed' : 'gen') . '" href="admin_forumauth.php?' . POST_FORUM_URL . '=' . $forum_rows[$j]['forum_id'] . '">' . htmlCHR($forum_rows[$j]['forum_name']) . '</a>',
+                    'FORUM_NAME' => '<a class="' . ($forum_rows[$j]['forum_parent'] ? 'genmed' : 'gen') . '" href="admin_forumauth.php?' . POST_FORUM_URL . '=' . $forum_rows[$j]['forum_id'] . '">' . htmlCHR($forum_rows[$j]['forum_name']) . '</a>',
                     'IS_SUBFORUM' => $forum_rows[$j]['forum_parent'],
                 ));
 
@@ -286,7 +286,7 @@ if (empty($forum_id) && empty($cat_id)) {
         if ($cat_id == $forum_rows[$j]['cat_id']) {
             $template->assign_block_vars('cat_row.forum_row', array(
                 'ROW_CLASS' => !($j % 2) ? 'row4' : 'row5',
-                'FORUM_NAME' => '<a class="' . (($forum_rows[$j]['forum_parent']) ? 'genmed' : 'gen') . '" href="admin_forumauth.php?' . POST_FORUM_URL . '=' . $forum_rows[$j]['forum_id'] . '">' . htmlCHR($forum_rows[$j]['forum_name']) . '</a>',
+                'FORUM_NAME' => '<a class="' . ($forum_rows[$j]['forum_parent'] ? 'genmed' : 'gen') . '" href="admin_forumauth.php?' . POST_FORUM_URL . '=' . $forum_rows[$j]['forum_id'] . '">' . htmlCHR($forum_rows[$j]['forum_name']) . '</a>',
                 'IS_SUBFORUM' => $forum_rows[$j]['forum_parent'],
             ));
 
