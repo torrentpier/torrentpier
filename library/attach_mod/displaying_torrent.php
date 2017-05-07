@@ -297,7 +297,6 @@ if ($tor_reged && $tor_info) {
 				FROM " . BB_BT_TRACKER . " tr, " . BB_USERS . " u
 				WHERE tr.topic_id = $tor_id
 					AND u.user_id = tr.user_id
-				GROUP BY tr.ip, tr.user_id, tr.port, tr.seeder
 				ORDER BY u.username
 				LIMIT $show_peers_limit";
         } else {
@@ -308,7 +307,6 @@ if ($tor_reged && $tor_info) {
 				FROM " . BB_BT_TRACKER . " tr
 				LEFT JOIN " . BB_USERS . " u ON u.user_id = tr.user_id
 				WHERE tr.topic_id = $tor_id
-				GROUP BY tr.ip, tr.user_id, tr.port, tr.seeder
 				ORDER BY $full_mode_order $full_mode_sort_dir
 				LIMIT $show_peers_limit";
         }
