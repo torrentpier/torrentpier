@@ -103,7 +103,7 @@ function auth_pack($auth_array)
     $one_char = $two_char = false;
     $auth_cache = '';
 
-    for ($i = 0; $i < count($auth_array); $i++) {
+    for ($i = 0, $iMax = count($auth_array); $i < $iMax; $i++) {
         $val = base64_pack((int)$auth_array[$i]);
         if (strlen($val) == 1 && !$one_char) {
             $auth_cache .= $one_char_encoding;

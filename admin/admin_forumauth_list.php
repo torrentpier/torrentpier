@@ -113,7 +113,7 @@ if (isset($_POST['submit'])) {
         if (isset($_POST['simpleauth'])) {
             $simple_ary = $simple_auth_ary[(int)$_POST['simpleauth']];
 
-            for ($i = 0; $i < count($simple_ary); $i++) {
+            for ($i = 0, $iMax = count($simple_ary); $i < $iMax; $i++) {
                 $sql .= (($sql != '') ? ', ' : '') . $forum_auth_fields[$i] . ' = ' . $simple_ary[$i];
             }
 
@@ -121,7 +121,7 @@ if (isset($_POST['submit'])) {
                 $sql = "UPDATE " . BB_FORUMS . " SET $sql WHERE forum_id = $forum_id";
             }
         } else {
-            for ($i = 0; $i < count($forum_auth_fields); $i++) {
+            for ($i = 0, $iMax = count($forum_auth_fields); $i < $iMax; $i++) {
                 $value = (int)$_POST[$forum_auth_fields[$i]];
 
                 if ($forum_auth_fields[$i] == 'auth_vote') {
@@ -145,7 +145,7 @@ if (isset($_POST['submit'])) {
         $forum_sql = '';
         $adv = 0;
     } elseif (!empty($cat_id)) {
-        for ($i = 0; $i < count($forum_auth_fields); $i++) {
+        for ($i = 0, $iMax = count($forum_auth_fields); $i < $iMax; $i++) {
             $value = (int)$_POST[$forum_auth_fields[$i]];
 
             if ($forum_auth_fields[$i] == 'auth_vote') {
@@ -199,7 +199,7 @@ if (empty($forum_id) && empty($cat_id)) {
         'S_COLUMN_SPAN' => count($forum_auth_fields) + 1,
     ));
 
-    for ($i = 0; $i < count($forum_auth_fields); $i++) {
+    for ($i = 0, $iMax = count($forum_auth_fields); $i < $iMax; $i++) {
         $template->assign_block_vars('forum_auth_titles', array(
             'CELL_TITLE' => $field_names[$forum_auth_fields[$i]],
         ));
@@ -224,7 +224,7 @@ if (empty($forum_id) && empty($cat_id)) {
                 'CAT_URL' => 'admin_forumauth_list.php' . '?' . POST_CAT_URL . '=' . $category_rows[$i]['cat_id'])
         );
 
-        for ($j = 0; $j < count($forum_rows); $j++) {
+        for ($j = 0, $jMax = count($forum_rows); $j < $iMax; $j++) {
             if ($cat_id == $forum_rows[$j]['cat_id']) {
                 $template->assign_block_vars('cat_row.forum_row', array(
                     'ROW_CLASS' => !($j % 2) ? 'row4' : 'row5',
@@ -232,9 +232,9 @@ if (empty($forum_id) && empty($cat_id)) {
                     'IS_SUBFORUM' => $forum_rows[$j]['forum_parent'],
                 ));
 
-                for ($k = 0; $k < count($forum_auth_fields); $k++) {
+                for ($k = 0, $kMax = count($forum_auth_fields); $k < $iMax; $k++) {
                     $item_auth_value = $forum_rows[$j][$forum_auth_fields[$k]];
-                    for ($l = 0; $l < count($forum_auth_const); $l++) {
+                    for ($l = 0, $lMax = count($forum_auth_const); $l < $iMax; $l++) {
                         if ($item_auth_value == $forum_auth_const[$l]) {
                             $item_auth_level = $forum_auth_levels[$l];
                             break;
@@ -258,7 +258,7 @@ if (empty($forum_id) && empty($cat_id)) {
     // first display the current details for all forums
     // in the category
     //
-    for ($i = 0; $i < count($forum_auth_fields); $i++) {
+    for ($i = 0, $iMax = count($forum_auth_fields); $i < $iMax; $i++) {
         $template->assign_block_vars('forum_auth_titles', array(
             'CELL_TITLE' => $field_names[$forum_auth_fields[$i]],
         ));
@@ -283,7 +283,7 @@ if (empty($forum_id) && empty($cat_id)) {
             'CAT_URL' => 'admin_forumauth_list.php?' . POST_CAT_URL . '=' . $cat_id)
     );
 
-    for ($j = 0; $j < count($forum_rows); $j++) {
+    for ($j = 0, $jMax = count($forum_rows); $j < $iMax; $j++) {
         if ($cat_id == $forum_rows[$j]['cat_id']) {
             $template->assign_block_vars('cat_row.forum_row', array(
                 'ROW_CLASS' => !($j % 2) ? 'row4' : 'row5',
@@ -291,9 +291,9 @@ if (empty($forum_id) && empty($cat_id)) {
                 'IS_SUBFORUM' => $forum_rows[$j]['forum_parent'],
             ));
 
-            for ($k = 0; $k < count($forum_auth_fields); $k++) {
+            for ($k = 0, $kMax = count($forum_auth_fields); $k < $iMax; $k++) {
                 $item_auth_value = $forum_rows[$j][$forum_auth_fields[$k]];
-                for ($l = 0; $l < count($forum_auth_const); $l++) {
+                for ($l = 0, $lMax = count($forum_auth_const); $l < $iMax; $l++) {
                     if ($item_auth_value == $forum_auth_const[$l]) {
                         $item_auth_level = $forum_auth_levels[$l];
                         break;
@@ -311,10 +311,10 @@ if (empty($forum_id) && empty($cat_id)) {
     // next generate the information to allow the permissions to be changed
     // note: we always read from the first forum in the category
     //
-    for ($j = 0; $j < count($forum_auth_fields); $j++) {
+    for ($j = 0, $jMax = count($forum_auth_fields); $j < $iMax; $j++) {
         $custom_auth[$j] = '<select name="' . $forum_auth_fields[$j] . '">';
 
-        for ($k = 0; $k < count($forum_auth_levels); $k++) {
+        for ($k = 0, $kMax = count($forum_auth_levels); $k < $iMax; $k++) {
             $selected = (!empty($forum_rows) && $forum_rows[0][$forum_auth_fields[$j]] == $forum_auth_const[$k]) ? ' selected="selected"' : '';
             $custom_auth[$j] .= '<option value="' . $forum_auth_const[$k] . '"' . $selected . '>' . $lang['FORUM_' . $forum_auth_levels[$k]] . '</option>';
         }

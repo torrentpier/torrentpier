@@ -64,7 +64,7 @@ $mode_types = array(
 // <select> mode
 $select_sort_mode = '<select name="mode">';
 
-for ($i = 0, $cnt = count($mode_types_text); $i < $cnt; $i++) {
+for ($i = 0, $iMax = count($mode_types_text); $i < $iMax; $i++) {
     $selected = ($mode == $mode_types[$i]) ? ' selected="selected"' : '';
     $select_sort_mode .= '<option value="' . $mode_types[$i] . '"' . $selected . '>' . $mode_types_text[$i] . '</option>';
 }

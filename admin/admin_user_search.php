@@ -970,7 +970,7 @@ if (!isset($_REQUEST['dosearch'])) {
         $banned[$row['user_id']] = true;
     }
 
-    for ($i = 0; $i < count($rowset); $i++) {
+    for ($i = 0, $iMax = count($rowset); $i < $iMax; $i++) {
         $row_class = !($i % 2) ? 'row1' : 'row2';
 
         $template->assign_block_vars('userrow', array(

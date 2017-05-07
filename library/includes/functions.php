@@ -1790,7 +1790,7 @@ function get_forum_display_sort_option($selected_row = 0, $action = 'list', $lis
 
     // build list
     if ($action == 'list') {
-        for ($i = 0; $i < count($listrow['lang_key']); $i++) {
+        for ($i = 0, $iMax = count($listrow['lang_key']); $i < $iMax; $i++) {
             $selected = ($i == $selected_row) ? ' selected="selected"' : '';
             $l_value = (isset($lang[$listrow['lang_key'][$i]])) ? $lang[$listrow['lang_key'][$i]] : $listrow['lang_key'][$i];
             $res .= '<option value="' . $i . '"' . $selected . '>' . $l_value . '</option>';

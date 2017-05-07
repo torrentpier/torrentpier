@@ -462,7 +462,7 @@ if ($mode == 'read') {
         $delete_sql_id = '';
 
         if (!$delete_all) {
-            for ($i = 0; $i < count($mark_list); $i++) {
+            for ($i = 0, $iMax = count($mark_list); $i < $iMax; $i++) {
                 $delete_sql_id .= (($delete_sql_id != '') ? ', ' : '') . (int)$mark_list[$i];
             }
             $delete_sql_id = "AND privmsgs_id IN ($delete_sql_id)";
@@ -504,7 +504,7 @@ if ($mode == 'read') {
 
         if (count($mark_list)) {
             $delete_sql_id = '';
-            for ($i = 0; $i < count($mark_list); $i++) {
+            for ($i = 0, $iMax = count($mark_list); $i < $iMax; $i++) {
                 $delete_sql_id .= (($delete_sql_id != '') ? ', ' : '') . (int)$mark_list[$i];
             }
 
@@ -663,7 +663,7 @@ if ($mode == 'read') {
         }
 
         $saved_sql_id = '';
-        for ($i = 0; $i < count($mark_list); $i++) {
+        for ($i = 0, $iMax = count($mark_list); $i < $iMax; $i++) {
             $saved_sql_id .= (($saved_sql_id != '') ? ', ' : '') . (int)$mark_list[$i];
         }
 

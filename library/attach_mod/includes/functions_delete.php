@@ -187,7 +187,7 @@ function delete_attachment($post_id_array = 0, $attach_id_array = 0, $page = 0, 
         }
         //bt end
 
-        for ($i = 0; $i < count($attach_id_array); $i++) {
+        for ($i = 0, $iMax = count($attach_id_array); $i < $iMax; $i++) {
             $sql = 'SELECT attach_id
 				FROM ' . BB_ATTACHMENTS . '
 						WHERE attach_id = ' . (int)$attach_id_array[$i];

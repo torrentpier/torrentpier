@@ -84,7 +84,7 @@ if ($submit && $mode == 'extensions') {
     // Generate correct Change List
     $extensions = array();
 
-    for ($i = 0; $i < count($extension_change_list); $i++) {
+    for ($i = 0, $iMax = count($extension_change_list); $i < $iMax; $i++) {
         $extensions['_' . $extension_change_list[$i]]['comment'] = $extension_explain_list[$i];
         $extensions['_' . $extension_change_list[$i]]['group_id'] = (int)$group_select_list[$i];
     }
@@ -99,7 +99,7 @@ if ($submit && $mode == 'extensions') {
     DB()->sql_freeresult($result);
 
     if ($num_rows > 0) {
-        for ($i = 0; $i < count($extension_row); $i++) {
+        for ($i = 0, $iMax = count($extension_row); $i < $iMax; $i++) {
             if ($extension_row[$i]['comment'] != $extensions['_' . $extension_row[$i]['ext_id']]['comment'] || (int)$extension_row[$i]['group_id'] != (int)$extensions['_' . $extension_row[$i]['ext_id']]['group_id']) {
                 $sql_ary = array(
                     'comment' => (string)$extensions['_' . $extension_row[$i]['ext_id']]['comment'],
@@ -251,15 +251,15 @@ if ($submit && $mode == 'groups') {
 
     $allowed_list = array();
 
-    for ($i = 0; $i < count($group_allowed_list); $i++) {
-        for ($j = 0; $j < count($group_change_list); $j++) {
+    for ($i = 0, $iMax = count($group_allowed_list); $i < $iMax; $i++) {
+        for ($j = 0, $jMax = count($group_change_list); $j < $iMax; $j++) {
             if ($group_allowed_list[$i] == $group_change_list[$j]) {
                 $allowed_list[$j] = 1;
             }
         }
     }
 
-    for ($i = 0; $i < count($group_change_list); $i++) {
+    for ($i = 0, $iMax = count($group_change_list); $i < $iMax; $i++) {
         $allowed = (isset($allowed_list[$i])) ? 1 : 0;
 
         $filesize_list[$i] = ($size_select_list[$i] == 'kb') ? round($filesize_list[$i] * 1024) : (($size_select_list[$i] == 'mb') ? round($filesize_list[$i] * 1048576) : $filesize_list[$i]);
@@ -472,7 +472,7 @@ if (@$add_forum && $e_mode == 'perm' && $group) {
     $add_forums_list = get_var('entries', array(0));
     $add_all_forums = false;
 
-    for ($i = 0; $i < count($add_forums_list); $i++) {
+    for ($i = 0, $iMax = count($add_forums_list); $i < $iMax; $i++) {
         if ($add_forums_list[$i] == 0) {
             $add_all_forums = true;
         }
@@ -507,7 +507,7 @@ if (@$add_forum && $e_mode == 'perm' && $group) {
         }
 
         // Generate array for Auth_Pack, do not add doubled forums
-        for ($i = 0; $i < count($add_forums_list); $i++) {
+        for ($i = 0, $iMax = count($add_forums_list); $i < $iMax; $i++) {
             if (!in_array($add_forums_list[$i], $auth_p)) {
                 $auth_p[] = $add_forums_list[$i];
             }
@@ -544,7 +544,7 @@ if (@$delete_forum && $e_mode == 'perm' && $group) {
     $auth_p = array();
 
     // Generate array for Auth_Pack, delete the chosen ones
-    for ($i = 0; $i < count($auth_p2); $i++) {
+    for ($i = 0, $iMax = count($auth_p2); $i < $iMax; $i++) {
         if (!in_array($auth_p2[$i], $delete_forums_list)) {
             $auth_p[] = $auth_p2[$i];
         }
@@ -597,7 +597,7 @@ if ($e_mode == 'perm' && $group) {
         }
     }
 
-    for ($i = 0; $i < count($forum_perm); $i++) {
+    for ($i = 0, $iMax = count($forum_perm); $i < $iMax; $i++) {
         $template->assign_block_vars('allow_option_values', array(
                 'VALUE' => $forum_perm[$i]['forum_id'],
                 'OPTION' => htmlCHR($forum_perm[$i]['forum_name']))

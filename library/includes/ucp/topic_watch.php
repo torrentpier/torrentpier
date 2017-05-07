@@ -74,7 +74,7 @@ if ($watch_count > 0) {
     $watch = DB()->sql_fetchrowset($result);
 
     if ($watch) {
-        for ($i = 0; $i < count($watch); $i++) {
+        for ($i = 0, $iMax = count($watch); $i < $iMax; $i++) {
             $is_unread = is_unread($watch[$i]['topic_last_post_time'], $watch[$i]['topic_id'], $watch[$i]['forum_id']);
 
             $template->assign_block_vars('watch', array(

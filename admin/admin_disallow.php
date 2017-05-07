@@ -87,7 +87,7 @@ $disallow_select = '<select name="disallowed_id">';
 if (count($disallowed) <= 0) {
     $disallow_select .= '<option value="">' . $lang['NO_DISALLOWED'] . '</option>';
 } else {
-    for ($i = 0; $i < count($disallowed); $i++) {
+    for ($i = 0, $iMax = count($disallowed); $i < $iMax; $i++) {
         $disallow_select .= '<option value="' . $disallowed[$i]['disallow_id'] . '">' . $disallowed[$i]['disallow_username'] . '</option>';
     }
 }

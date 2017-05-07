@@ -49,7 +49,7 @@ if (isset($_POST['submit'])) {
     if (isset($_POST['ban_ip'])) {
         $ip_list_temp = explode(',', $_POST['ban_ip']);
 
-        for ($i = 0; $i < count($ip_list_temp); $i++) {
+        for ($i = 0, $iMax = count($ip_list_temp); $i < $iMax; $i++) {
             if (preg_match('/^([0-9]{1,3})\.([0-9]{1,3})\.([0-9]{1,3})\.([0-9]{1,3})[ ]*\-[ ]*([0-9]{1,3})\.([0-9]{1,3})\.([0-9]{1,3})\.([0-9]{1,3})$/', trim($ip_list_temp[$i]), $ip_range_explode)) {
                 $ip_1_counter = $ip_range_explode[1];
                 $ip_1_end = $ip_range_explode[5];
@@ -100,7 +100,7 @@ if (isset($_POST['submit'])) {
             } elseif (preg_match('/^([\w\-_]\.?){2,}$/is', trim($ip_list_temp[$i]))) {
                 $ip = gethostbynamel(trim($ip_list_temp[$i]));
 
-                for ($j = 0; $j < count($ip); $j++) {
+                for ($j = 0, $jMax = count($ip); $j < $iMax; $j++) {
                     if (!empty($ip[$j])) {
                         $ip_list[] = encode_ip($ip[$j]);
                     }
@@ -115,7 +115,7 @@ if (isset($_POST['submit'])) {
     if (isset($_POST['ban_email'])) {
         $email_list_temp = explode(',', $_POST['ban_email']);
 
-        for ($i = 0; $i < count($email_list_temp); $i++) {
+        for ($i = 0, $iMax = count($email_list_temp); $i < $iMax; $i++) {
             if (preg_match('/^(([a-z0-9&\'\.\-_\+])|(\*))+@(([a-z0-9\-])|(\*))+\.([a-z0-9\-]+\.)*?[a-z]+$/is', trim($email_list_temp[$i]))) {
                 $email_list[] = trim($email_list_temp[$i]);
             }
@@ -131,9 +131,9 @@ if (isset($_POST['submit'])) {
     DB()->sql_freeresult($result);
 
     $kill_session_sql = '';
-    for ($i = 0; $i < count($user_list); $i++) {
+    for ($i = 0, $iMax = count($user_list); $i < $iMax; $i++) {
         $in_banlist = false;
-        for ($j = 0; $j < count($current_banlist); $j++) {
+        for ($j = 0, $jMax = count($current_banlist); $j < $iMax; $j++) {
             if ($user_list[$i] == $current_banlist[$j]['ban_userid']) {
                 $in_banlist = true;
             }
@@ -149,9 +149,9 @@ if (isset($_POST['submit'])) {
         }
     }
 
-    for ($i = 0; $i < count($ip_list); $i++) {
+    for ($i = 0, $iMax = count($ip_list); $i < $iMax; $i++) {
         $in_banlist = false;
-        for ($j = 0; $j < count($current_banlist); $j++) {
+        for ($j = 0, $jMax = count($current_banlist); $j < $iMax; $j++) {
             if ($ip_list[$i] == $current_banlist[$j]['ban_ip']) {
                 $in_banlist = true;
             }
@@ -181,9 +181,9 @@ if (isset($_POST['submit'])) {
         }
     }
 
-    for ($i = 0; $i < count($email_list); $i++) {
+    for ($i = 0, $iMax = count($email_list); $i < $iMax; $i++) {
         $in_banlist = false;
-        for ($j = 0; $j < count($current_banlist); $j++) {
+        for ($j = 0, $jMax = count($current_banlist); $j < $iMax; $j++) {
             if ($email_list[$i] == $current_banlist[$j]['ban_email']) {
                 $in_banlist = true;
             }
@@ -202,7 +202,7 @@ if (isset($_POST['submit'])) {
     if (isset($_POST['unban_user'])) {
         $user_list = $_POST['unban_user'];
 
-        for ($i = 0; $i < count($user_list); $i++) {
+        for ($i = 0, $iMax = count($user_list); $i < $iMax; $i++) {
             if ($user_list[$i] != -1) {
                 $where_sql .= (($where_sql != '') ? ', ' : '') . (int)$user_list[$i];
             }
@@ -212,7 +212,7 @@ if (isset($_POST['submit'])) {
     if (isset($_POST['unban_ip'])) {
         $ip_list = $_POST['unban_ip'];
 
-        for ($i = 0; $i < count($ip_list); $i++) {
+        for ($i = 0, $iMax = count($ip_list); $i < $iMax; $i++) {
             if ($ip_list[$i] != -1) {
                 $where_sql .= (($where_sql != '') ? ', ' : '') . DB()->escape($ip_list[$i]);
             }
@@ -222,7 +222,7 @@ if (isset($_POST['submit'])) {
     if (isset($_POST['unban_email'])) {
         $email_list = $_POST['unban_email'];
 
-        for ($i = 0; $i < count($email_list); $i++) {
+        for ($i = 0, $iMax = count($email_list); $i < $iMax; $i++) {
             if ($email_list[$i] != -1) {
                 $where_sql .= (($where_sql != '') ? ', ' : '') . DB()->escape($email_list[$i]);
             }
@@ -260,7 +260,7 @@ if (isset($_POST['submit'])) {
     DB()->sql_freeresult($result);
 
     $select_userlist = '';
-    for ($i = 0; $i < count($user_list); $i++) {
+    for ($i = 0, $iMax = count($user_list); $i < $iMax; $i++) {
         $select_userlist .= '<option value="' . $user_list[$i]['ban_id'] . '">' . $user_list[$i]['username'] . '</option>';
         $userban_count++;
     }
@@ -282,7 +282,7 @@ if (isset($_POST['submit'])) {
     $select_iplist = '';
     $select_emaillist = '';
 
-    for ($i = 0; $i < count($banlist); $i++) {
+    for ($i = 0, $iMax = count($banlist); $i < $iMax; $i++) {
         $ban_id = $banlist[$i]['ban_id'];
 
         if (!empty($banlist[$i]['ban_ip'])) {
