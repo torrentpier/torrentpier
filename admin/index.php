@@ -23,7 +23,7 @@
  * SOFTWARE.
  */
 
-require('./pagestart.php');
+require __DIR__ . '/pagestart.php';
 
 // Generate relevant output
 if (isset($_GET['pane']) && $_GET['pane'] == 'left') {

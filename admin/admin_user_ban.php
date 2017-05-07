@@ -27,7 +27,8 @@ if (!empty($setmodules)) {
     $module['USERS']['BAN_MANAGEMENT'] = basename(__FILE__);
     return;
 }
-require('./pagestart.php');
+
+require __DIR__ . '/pagestart.php';
 
 if (isset($_POST['submit'])) {
     $user_bansql = '';

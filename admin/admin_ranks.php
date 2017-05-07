@@ -27,7 +27,8 @@ if (!empty($setmodules)) {
     $module['USERS']['RANKS'] = basename(__FILE__);
     return;
 }
-require('./pagestart.php');
+
+require __DIR__ . '/pagestart.php';
 
 $_POST['special_rank'] = 1;
 $_POST['min_posts'] = -1;

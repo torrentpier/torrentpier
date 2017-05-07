@@ -27,7 +27,8 @@ if (!empty($setmodules)) {
     $module['GENERAL']['WORD_CENSOR'] = basename(__FILE__);
     return;
 }
-require('./pagestart.php');
+
+require __DIR__ . '/pagestart.php';
 
 if (!$bb_cfg['use_word_censor']) {
     bb_die('Word censor disabled <br /><br /> ($bb_cfg[\'use_word_censor\'] in config.php)');

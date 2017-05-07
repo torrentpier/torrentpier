@@ -27,7 +27,8 @@ if (!empty($setmodules)) {
     $module['FORUMS']['PERMISSIONS_LIST'] = basename(__FILE__);
     return;
 }
-require('./pagestart.php');
+
+require __DIR__ . '/pagestart.php';
 
 //  View  Read  Post  Reply  Edit  Delete  Sticky  Announce  Vote  Poll  PostAttach  Download
 $simple_auth_ary = array(

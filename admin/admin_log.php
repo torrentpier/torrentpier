@@ -27,7 +27,8 @@ if (!empty($setmodules)) {
     $module['USERS']['ACTIONS_LOG'] = basename(__FILE__);
     return;
 }
-require('./pagestart.php');
+
+require __DIR__ . '/pagestart.php';
 
 $datastore->enqueue(array(
     'moderators',

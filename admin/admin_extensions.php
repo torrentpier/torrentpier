@@ -29,7 +29,8 @@ if (!empty($setmodules)) {
     $module['ATTACHMENTS']['EXTENSION_GROUP_MANAGE'] = $filename . '?mode=groups';
     return;
 }
-require('./pagestart.php');
+
+require __DIR__ . '/pagestart.php';
 
 function update_attach_extensions()
 {
