@@ -55,7 +55,7 @@ define('TEMPLATES_DIR', BB_PATH . '/styles/templates/');
 define('ADMIN_TPL_DIR', TEMPLATES_DIR . '/admin/');
 
 // Debug
-define('DBG_LOG', false);    // enable forum debug (off on production)
+define('DBG_LOG', true);    // enable forum debug (off on production)
 define('DBG_TRACKER', false);    // enable tracker debug (off on production)
 define('COOKIE_DBG', 'bb_dbg'); // debug cookie name
 define('SQL_DEBUG', true);     // enable forum sql & cache debug
@@ -72,9 +72,9 @@ define('LOG_LF', "\n");
 define('LOG_MAX_SIZE', 1048576); // bytes
 
 // Error reporting
-ini_set('error_reporting', E_ALL);
-ini_set('display_errors', 0);
-ini_set('log_errors', 1);
+//ini_set('error_reporting', E_ALL);
+//ini_set('display_errors', 0);
+//ini_set('log_errors', 1);
 ini_set('error_log', LOG_DIR . 'php_err.log');
 
 // Triggers
