@@ -513,7 +513,7 @@ function get_var($var_name, $default, $multibyte = false)
         $type = gettype($default);
         $key_type = null;
     } else {
-        list($key_type, $type) = each($default);
+        list($key_type, $type) = $default;
         $type = gettype($type);
         $key_type = gettype($key_type);
     }

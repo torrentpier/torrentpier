@@ -64,7 +64,7 @@ if (isset($_REQUEST['addforum']) || isset($_REQUEST['addcategory'])) {
 
     if ($mode == 'addforum' && isset($_POST['addforum']) && isset($_POST['forumname']) && is_array($_POST['addforum'])) {
         $req_cat_id = array_keys($_POST['addforum']);
-        $cat_id = $req_cat_id[0];
+        $cat_id = reset($req_cat_id);
         $forumname = stripslashes($_POST['forumname'][$cat_id]);
     }
 }

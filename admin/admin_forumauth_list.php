@@ -275,8 +275,8 @@ if (empty($forum_id) && empty($cat_id)) {
 
     $category_rows = DB()->sql_fetchrowset($result);
 
-    $cat_id = $category_rows[0]['cat_id'];
-    $cat_name = $category_rows[0]['cat_title'];
+    $cat_id = reset($category_rows)['cat_id'];
+    $cat_name = reset($category_rows)['cat_title'];
 
     $template->assign_block_vars('cat_row', array(
             'CAT_NAME' => htmlCHR($cat_name),
