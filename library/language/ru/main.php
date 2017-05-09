@@ -2422,7 +2422,7 @@ $lang['REPAIR_CRON'] = 'Восстановить';
 
 $lang['CRON_EDIT_HEAD_EDIT'] = 'Редактировать задачу';
 $lang['CRON_EDIT_HEAD_ADD'] = 'Добавить задачу';
-$lang['CRON_SCRIPT_EXPL'] = 'название в папке "includes/cron/jobs/"';;
+$lang['CRON_SCRIPT_EXPL'] = 'название в папке "includes/cron/jobs/"';
 $lang['SCHEDULE'] = array(
     'select' => '&raquo; Выберите запуск',
     'hourly' => 'ежечасно',
