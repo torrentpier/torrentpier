@@ -703,7 +703,7 @@ function bdecode_r($str, &$pos)
             return null;
         } else {
             $pos++;
-            return floatval(substr($str, $spos, $numlen));
+            return (float)substr($str, $spos, $numlen);
         }
     } elseif ($str[$pos] == 'd') {
         $pos++;
@@ -757,7 +757,7 @@ function bdecode_r($str, &$pos)
         if (($pos >= $strlen) || ($str[$pos] != ':')) {
             return null;
         } else {
-            $vallen = intval(substr($str, $spos, $numlen));
+            $vallen = (int)substr($str, $spos, $numlen);
             $pos++;
             $val = substr($str, $pos, $vallen);
 

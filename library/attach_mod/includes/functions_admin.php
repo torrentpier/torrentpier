@@ -121,8 +121,8 @@ function sort_multi_array($sort_array, $key, $sort_order, $pre_string_sort = 0)
             // do checks based on key
             $switch = false;
             if (!$string_sort) {
-                if (($sort_order == 'DESC' && intval(@$sort_array[$j][$key]) < intval(@$sort_array[$j + 1][$key])) ||
-                    ($sort_order == 'ASC' && intval(@$sort_array[$j][$key]) > intval(@$sort_array[$j + 1][$key]))) {
+                if (($sort_order == 'DESC' && (int)(@$sort_array[$j][$key]) < (int)(@$sort_array[$j + 1][$key])) ||
+                    ($sort_order == 'ASC' && (int)(@$sort_array[$j][$key]) > (int)(@$sort_array[$j + 1][$key]))) {
                     $switch = true;
                 }
             } else {
