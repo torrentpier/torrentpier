@@ -59,7 +59,7 @@ class upload_common
         8 => 'tiff',
     );
 
-    public function init($cfg = array(), $post_params = array(), $uploaded_only = true)
+    public function init(array $cfg = [], array $post_params = [], $uploaded_only = true)
     {
         global $bb_cfg, $lang;
 
