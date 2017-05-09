@@ -49,9 +49,7 @@ function read_word($fp)
 {
     $data = fread($fp, 2);
 
-    $value = ord($data[1]) * 256 + ord($data[0]);
-
-    return $value;
+    return ord($data[1]) * 256 + ord($data[0]);
 }
 
 /**
@@ -61,9 +59,7 @@ function read_byte($fp)
 {
     $data = fread($fp, 1);
 
-    $value = ord($data);
-
-    return $value;
+    return ord($data);
 }
 
 /**
@@ -179,7 +175,7 @@ function image_getdimension($file)
     $tmp_str = fread($fp, 4);
     $w1 = read_word($fp);
 
-    if (intval($w1) < 16) {
+    if ((int)$w1 < 16) {
         $error = true;
     }
 
@@ -187,7 +183,7 @@ function image_getdimension($file)
         $tmp_str = fread($fp, 4);
         if ($tmp_str == 'JFIF') {
             $o_byte = fread($fp, 1);
-            if (intval($o_byte) != 0) {
+            if ((int)$o_byte != 0) {
                 $error = true;
             }
 

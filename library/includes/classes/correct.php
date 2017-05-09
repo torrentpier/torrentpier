@@ -2956,7 +2956,7 @@ class Text_LangCorrect
             */
 
             #0a. английский --> русский:
-            if (substr($word, 1, 1) === '.'  #оптимизация
+            if ($word[1] === '.'  #оптимизация
                 && preg_match('/^ (  ' . $this->en_similar_uc . '\.         #первый инициал
                                      (?:' . $this->en_similar_uc . '\.)?    #второй инициал (необязательно)
                                   )                                       #1 инициалы
@@ -2973,7 +2973,7 @@ class Text_LangCorrect
             }
 
             #0b. русский --> английский:
-            if (substr($word, 2, 1) === '.'  #оптимизация
+            if ($word[2] === '.'  #оптимизация
                 && preg_match('/^ (  ' . $this->ru_similar_uc . '\.         #первый инициал
                                      (?:' . $this->ru_similar_uc . '\.)?    #второй инициал (необязательно)
                                   )                                       #1 инициалы
@@ -3175,7 +3175,7 @@ class Text_LangCorrect
                 $ss = ' ' . $ss;
             }  #beginning of word
             elseif ($pos === $limit - 1) {
-                $ss = $ss . ' ';
+                $ss .= ' ';
             }  #ending of word
             if (array_key_exists($ss, $this->bigrams)) {
                 return true;

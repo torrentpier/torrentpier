@@ -26,7 +26,7 @@
 if (!defined('BB_ROOT')) {
     die(basename(__FILE__));
 }
-if (PHP_VERSION < '5.3') {
+if (version_compare(PHP_VERSION, '5.3', '<')) {
     die('TorrentPier requires PHP version 5.3+. Your PHP version ' . PHP_VERSION);
 }
 if (!defined('BB_SCRIPT')) {
@@ -378,7 +378,7 @@ define('SELECT', 6);
 
 if (!empty($banned_user_agents)) {
     foreach ($banned_user_agents as $agent) {
-        if (strstr(USER_AGENT, $agent)) {
+        if (false !== strpos(USER_AGENT, $agent)) {
             $filename = 'Download files by using browser';
             $output = '@';
             header('Content-Type: text/plain');

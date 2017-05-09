@@ -72,7 +72,7 @@ function get_tracks($type)
             trigger_error(__FUNCTION__ . ": invalid type '$type'", E_USER_ERROR);
     }
     $tracks = !empty($_COOKIE[$c_name]) ? @unserialize($_COOKIE[$c_name]) : false;
-    return ($tracks) ? $tracks : array();
+    return ($tracks) ?: array();
 }
 
 function set_tracks($cookie_name, &$tracking_ary, $tracks = null, $val = TIMENOW)
@@ -348,7 +348,7 @@ function setbit(&$int, $bit_num, $on)
     forum auth levels, this will prevent the auth function having to do its own
     lookup
 */
-function auth($type, $forum_id, $ug_data, $f_access = array(), $group_perm = UG_PERM_BOTH)
+function auth($type, $forum_id, $ug_data, array $f_access = array(), $group_perm = UG_PERM_BOTH)
 {
     global $lang, $bf, $datastore;
 
@@ -583,7 +583,7 @@ class Date_Delta
                 break;
             }
         }
-        return join(' ', $parts);
+        return implode(' ', $parts);
     }
 
     // returns the associative array with date deltas.
@@ -676,7 +676,7 @@ class html_common
 {
     public $options = '';
     public $attr = array();
-    public $cur_attr = null;
+    public $cur_attr;
     public $max_length = HTML_SELECT_MAX_LENGTH;
     public $selected = array();
 
@@ -838,12 +838,12 @@ function declension($int, $expressions, $format = '%1$s %2$s')
     if (count($expressions) < 3) {
         $expressions[2] = $expressions[1];
     }
-    $count = intval($int) % 100;
+    $count = (int)$int % 100;
 
     if ($count >= 5 && $count <= 20) {
         $result = $expressions['2'];
     } else {
-        $count = $count % 10;
+        $count %= 10;
         if ($count == 1) {
             $result = $expressions['0'];
         } elseif ($count >= 2 && $count <= 4) {
@@ -870,10 +870,10 @@ function url_arg($url, $arg, $value, $amp = '&amp;')
     // заменяем параметр, если он существует
     if (preg_match("/((\?|&|&amp;)$arg=)[^&]*/s", $url, $m)) {
         $cur = $m[0];
-        $new = is_null($value) ? '' : $m[1] . urlencode($value);
+        $new = null === $value ? '' : $m[1] . urlencode($value);
         $url = str_replace($cur, $new, $url);
     } // добавляем параметр
-    elseif (!is_null($value)) {
+    elseif (null !== $value) {
         $div = (strpos($url, '?') !== false) ? $amp : '?';
         $url = $url . $div . $arg . '=' . urlencode($value);
     }
@@ -901,12 +901,12 @@ function humn_size($size, $rounder = null, $min = null, $space = '&nbsp;')
     $rnd = $rounders[0];
 
     if ($min == 'KB' && $size < 1024) {
-        $size = $size / 1024;
+        $size /= 1024;
         $ext = 'KB';
         $rounder = 1;
     } else {
         for ($i = 1, $cnt = count($sizes); ($i < $cnt && $size >= 1024); $i++) {
-            $size = $size / 1024;
+            $size /= 1024;
             $ext = $sizes[$i];
             $rnd = $rounders[$i];
         }
@@ -969,7 +969,7 @@ function select_get_val($key, &$val, $options_ary, $default, $num = true)
 
     if (isset($_REQUEST[$key]) && is_string($_REQUEST[$key])) {
         if (isset($options_ary[$_REQUEST[$key]])) {
-            $val = ($num) ? intval($_REQUEST[$key]) : $_REQUEST[$key];
+            $val = ($num) ? (int)$_REQUEST[$key] : $_REQUEST[$key];
         }
     } elseif (isset($previous_settings[$key])) {
         $val = $previous_settings[$key];
@@ -1100,7 +1100,7 @@ function str_short($text, $max_length, $space = ' ')
     if ($max_length && mb_strlen($text, 'UTF-8') > $max_length) {
         $text = mb_substr($text, 0, $max_length, 'UTF-8');
 
-        if ($last_space_pos = $max_length - intval(strpos(strrev($text), $space))) {
+        if ($last_space_pos = $max_length - (int)strpos(strrev($text), $space)) {
             if ($last_space_pos > round($max_length * 3 / 4)) {
                 $last_space_pos--;
                 $text = mb_substr($text, 0, $last_space_pos, 'UTF-8');
@@ -1158,7 +1158,7 @@ function show_bt_userdata($user_id)
         'USER_RATIO' => get_bt_ratio($btu),
         'MIN_DL_FOR_RATIO' => humn_size(MIN_DL_FOR_RATIO),
         'MIN_DL_BYTES' => MIN_DL_FOR_RATIO,
-        'AUTH_KEY' => ($btu['auth_key']) ? $btu['auth_key'] : $lang['NONE'],
+        'AUTH_KEY' => ($btu['auth_key']) ?: $lang['NONE'],
 
         'TD_DL' => humn_size($btu['down_today']),
         'TD_UL' => humn_size($btu['up_today']),
@@ -1300,7 +1300,7 @@ function get_userdata($u, $force_name = false, $allow_guest = false)
         return false;
     }
 
-    if (intval($u) == GUEST_UID && $allow_guest) {
+    if ((int)$u == GUEST_UID && $allow_guest) {
         if ($u_data = CACHE('bb_cache')->get('guest_userdata')) {
             return $u_data;
         }
@@ -1357,10 +1357,10 @@ function get_forum_select($mode = 'guest', $name = POST_FORUM_URL, $selected = n
         $not_auth_forums_fary = array_flip($mode);
         $mode = 'not_auth_forums';
     }
-    if (is_null($max_length)) {
+    if (null === $max_length) {
         $max_length = HTML_SELECT_MAX_LENGTH;
     }
-    $select = is_null($all_forums_option) ? array() : array($lang['ALL_AVAILABLE'] => $all_forums_option);
+    $select = null === $all_forums_option ? array() : array($lang['ALL_AVAILABLE'] => $all_forums_option);
     if (!$forums = $datastore->get('cat_forums')) {
         $datastore->update('cat_forums');
         $forums = $datastore->get('cat_forums');
@@ -1442,9 +1442,7 @@ function setup_style()
 
     require TEMPLATES_DIR . '/' . $tpl_dir_name . '/tpl_config.php';
 
-    $theme = array('template_name' => $tpl_dir_name);
-
-    return $theme;
+    return array('template_name' => $tpl_dir_name);
 }
 
 // Create date / time with format and friendly date
@@ -1725,7 +1723,7 @@ function bb_realpath($path)
 
 function login_redirect($url = '')
 {
-    redirect(LOGIN_URL . '?redirect=' . (($url) ? $url : (isset($_SERVER['REQUEST_URI']) ? $_SERVER['REQUEST_URI'] : '/')));
+    redirect(LOGIN_URL . '?redirect=' . (($url) ?: (isset($_SERVER['REQUEST_URI']) ? $_SERVER['REQUEST_URI'] : '/')));
 }
 
 function meta_refresh($url, $time = 5)
@@ -1743,7 +1741,7 @@ function redirect($url)
         trigger_error("Headers already sent in $filename($linenum)", E_USER_ERROR);
     }
 
-    if (strstr(urldecode($url), "\n") || strstr(urldecode($url), "\r") || strstr(urldecode($url), ';url')) {
+    if (false !== strpos(urldecode($url), "\n") || false !== strpos(urldecode($url), "\r") || false !== strpos(urldecode($url), ';url')) {
         bb_die('Tried to redirect to potentially insecure url');
     }
 
@@ -1792,7 +1790,7 @@ function get_forum_display_sort_option($selected_row = 0, $action = 'list', $lis
 
     // build list
     if ($action == 'list') {
-        for ($i = 0; $i < count($listrow['lang_key']); $i++) {
+        for ($i = 0, $iMax = count($listrow['lang_key']); $i < $iMax; $i++) {
             $selected = ($i == $selected_row) ? ' selected="selected"' : '';
             $l_value = (isset($lang[$listrow['lang_key'][$i]])) ? $lang[$listrow['lang_key'][$i]] : $listrow['lang_key'][$i];
             $res .= '<option value="' . $i . '"' . $selected . '>' . $l_value . '</option>';
@@ -1917,7 +1915,7 @@ function get_id_csv($ids)
 {
     $ids = array_values((array)$ids);
     array_deep($ids, 'intval', 'one-dimensional');
-    return (string)join(',', $ids);
+    return (string)implode(',', $ids);
 }
 
 // $ids - array(id1,id2,..) or (string) id1,id2,..
@@ -1975,7 +1973,7 @@ class log_action
         }
     }
 
-    public function mod($type_name, $args = array())
+    public function mod($type_name, array $args = array())
     {
         global $userdata;
 
@@ -2023,7 +2021,7 @@ class log_action
         DB()->query("INSERT INTO " . BB_LOG . " $sql_args");
     }
 
-    public function admin($type_name, $args = array())
+    public function admin($type_name, array $args = array())
     {
         $this->mod($type_name, $args);
     }
@@ -2034,7 +2032,7 @@ function get_topic_icon($topic, $is_unread = null)
     global $bb_cfg, $images;
 
     $t_hot = ($topic['topic_replies'] >= $bb_cfg['hot_threshold']);
-    $is_unread = is_null($is_unread) ? is_unread($topic['topic_last_post_time'], $topic['topic_id'], $topic['forum_id']) : $is_unread;
+    $is_unread = null === $is_unread ? is_unread($topic['topic_last_post_time'], $topic['topic_id'], $topic['forum_id']) : $is_unread;
 
     if ($topic['topic_status'] == TOPIC_MOVED) {
         $folder_image = $images['folder'];
@@ -2237,9 +2235,9 @@ function init_sphinx()
     if (!isset($sphinx)) {
         $sphinx = \Sphinx\SphinxClient::create();
 
-        $sphinx->SetConnectTimeout(5);
-        $sphinx->SetRankingMode($sphinx::SPH_RANK_NONE);
-        $sphinx->SetMatchMode($sphinx::SPH_MATCH_BOOLEAN);
+        $sphinx->setConnectTimeout(5);
+        $sphinx->setRankingMode($sphinx::SPH_RANK_NONE);
+        $sphinx->setMatchMode($sphinx::SPH_MATCH_BOOLEAN);
     }
 
     return $sphinx;
@@ -2251,13 +2249,13 @@ function log_sphinx_error($err_type, $err_msg, $query = '')
         'negation on top level',
         'Query word length is less than min prefix length',
     );
-    if (!count($ignore_err_txt) || !preg_match('#' . join('|', $ignore_err_txt) . '#i', $err_msg)) {
+    if (!count($ignore_err_txt) || !preg_match('#' . implode('|', $ignore_err_txt) . '#i', $err_msg)) {
         $orig_query = strtr($_REQUEST['nm'], array("\n" => '\n'));
         bb_log(date('m-d H:i:s') . " | $err_type | $err_msg | $orig_query | $query" . LOG_LF, 'sphinx_error');
     }
 }
 
-function get_title_match_topics($title_match_sql, $forum_ids = array())
+function get_title_match_topics($title_match_sql, array $forum_ids = array())
 {
     global $bb_cfg, $sphinx, $userdata, $title_match, $lang;
 
@@ -2272,28 +2270,28 @@ function get_title_match_topics($title_match_sql, $forum_ids = array())
 
         $where = ($title_match) ? 'topics' : 'posts';
 
-        $sphinx->SetServer($bb_cfg['sphinx_topic_titles_host'], $bb_cfg['sphinx_topic_titles_port']);
+        $sphinx->setServer($bb_cfg['sphinx_topic_titles_host'], $bb_cfg['sphinx_topic_titles_port']);
         if ($forum_ids) {
-            $sphinx->SetFilter('forum_id', $forum_ids, false);
+            $sphinx->setFilter('forum_id', $forum_ids, false);
         }
         if (preg_match('#^"[^"]+"$#u', $title_match_sql)) {
-            $sphinx->SetMatchMode($sphinx::SPH_MATCH_PHRASE);
+            $sphinx->setMatchMode($sphinx::SPH_MATCH_PHRASE);
         }
-        if ($result = $sphinx->Query($title_match_sql, $where, $userdata['username'] . ' (' . CLIENT_IP . ')')) {
+        if ($result = $sphinx->query($title_match_sql, $where, $userdata['username'] . ' (' . CLIENT_IP . ')')) {
             if (!empty($result['matches'])) {
                 $where_ids = array_keys($result['matches']);
             }
-        } elseif ($error = $sphinx->GetLastError()) {
+        } elseif ($error = $sphinx->getLastError()) {
             if (strpos($error, 'errno=110')) {
                 bb_die($lang['SEARCH_ERROR']);
             }
             log_sphinx_error('ERR', $error, $title_match_sql);
         }
-        if ($warning = $sphinx->GetLastWarning()) {
+        if ($warning = $sphinx->getLastWarning()) {
             log_sphinx_error('wrn', $warning, $title_match_sql);
         }
     } elseif ($bb_cfg['search_engine_type'] == 'mysql') {
-        $where_forum = ($forum_ids) ? "AND forum_id IN(" . join(',', $forum_ids) . ")" : '';
+        $where_forum = ($forum_ids) ? "AND forum_id IN(" . implode(',', $forum_ids) . ")" : '';
         $search_bool_mode = ($bb_cfg['allow_search_in_bool_mode']) ? ' IN BOOLEAN MODE' : '';
 
         if ($title_match) {

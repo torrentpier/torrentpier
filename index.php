@@ -211,7 +211,7 @@ foreach ($cat_forums as $cid => $c) {
     ));
 
     $template->assign_vars(array(
-        'H_C_AL_MESS' => ($hide_cat_opt && !$showhide) ? true : false,
+        'H_C_AL_MESS' => ($hide_cat_opt && !$showhide),
     ));
 
     if (!$showhide && isset($hide_cat_user[$cid]) && !$viewcat) {
@@ -255,7 +255,7 @@ foreach ($cat_forums as $cid => $c) {
             'POSTS' => commify($f['forum_posts']),
             'TOPICS' => commify($f['forum_topics']),
             'LAST_SF_ID' => isset($f['last_sf_id']) ? $f['last_sf_id'] : null,
-            'MODERATORS' => isset($moderators[$fid]) ? join(', ', $moderators[$fid]) : '',
+            'MODERATORS' => isset($moderators[$fid]) ? implode(', ', $moderators[$fid]) : '',
             'FORUM_FOLDER_ALT' => ($new) ? $lang['NEW'] : $lang['OLD'],
         ));
 
@@ -365,7 +365,7 @@ if ($bb_cfg['birthday_check_day'] && $bb_cfg['birthday_enabled']) {
             $week_list[] = profile_url($week) . ' <span class="small">(' . birthday_age($week['user_birthday'] - 1) . ')</span>';
         }
         $week_all = ($week_all) ? '&nbsp;<a class="txtb" href="#" onclick="ajax.exec({action: \'index_data\', mode: \'birthday_week\'}); return false;" title="' . $lang['ALL'] . '">...</a>' : '';
-        $week_list = sprintf($lang['BIRTHDAY_WEEK'], $bb_cfg['birthday_check_day'], join(', ', $week_list)) . $week_all;
+        $week_list = sprintf($lang['BIRTHDAY_WEEK'], $bb_cfg['birthday_check_day'], implode(', ', $week_list)) . $week_all;
     } else {
         $week_list = sprintf($lang['NOBIRTHDAY_WEEK'], $bb_cfg['birthday_check_day']);
     }
@@ -380,7 +380,7 @@ if ($bb_cfg['birthday_check_day'] && $bb_cfg['birthday_enabled']) {
             $today_list[] = profile_url($today) . ' <span class="small">(' . birthday_age($today['user_birthday']) . ')</span>';
         }
         $today_all = ($today_all) ? '&nbsp;<a class="txtb" href="#" onclick="ajax.exec({action: \'index_data\', mode: \'birthday_today\'}); return false;" title="' . $lang['ALL'] . '">...</a>' : '';
-        $today_list = $lang['BIRTHDAY_TODAY'] . join(', ', $today_list) . $today_all;
+        $today_list = $lang['BIRTHDAY_TODAY'] . implode(', ', $today_list) . $today_all;
     } else {
         $today_list = $lang['NOBIRTHDAY_TODAY'];
     }

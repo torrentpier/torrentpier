@@ -33,7 +33,7 @@ if (empty($_GET['u']) || empty($_GET['act_key'])) {
 
 $sql = "SELECT user_active, user_id, username, user_email, user_newpasswd, user_lang, user_actkey
 	FROM " . BB_USERS . "
-	WHERE user_id = " . intval($_GET[POST_USERS_URL]);
+	WHERE user_id = " . (int)$_GET[POST_USERS_URL];
 if (!($result = DB()->sql_query($sql))) {
     bb_die('Could not obtain user information');
 }

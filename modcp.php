@@ -93,7 +93,7 @@ $forum_id = isset($_REQUEST['f']) ? $_REQUEST['f'] : 0;
 $topic_id = isset($_REQUEST['t']) ? $_REQUEST['t'] : 0;
 $post_id = isset($_REQUEST['p']) ? $_REQUEST['p'] : 0;
 
-$start = isset($_REQUEST['start']) ? abs(intval($_REQUEST['start'])) : 0;
+$start = isset($_REQUEST['start']) ? abs((int)$_REQUEST['start']) : 0;
 $confirmed = isset($_POST['confirm']);
 
 $mode = $topic_title = '';
@@ -174,8 +174,7 @@ if ($mode == 'ip') {
         $is_auth['auth_mod'] = true;
 
         $_POST['insert_bot_msg'] = 1;
-        unset($_POST['topic_id_list']);
-        unset($_POST['move_leave_shadow']);
+        unset($_POST['topic_id_list'], $_POST['move_leave_shadow']);
     }
 }
 
@@ -260,7 +259,7 @@ switch ($mode) {
         } else {
             print_confirmation(array(
                 'QUESTION' => $lang['CONFIRM_DELETE_TOPIC'],
-                'ITEMS_LIST' => join("\n</li>\n<li>\n", $topic_titles),
+                'ITEMS_LIST' => implode("\n</li>\n<li>\n", $topic_titles),
                 'FORM_ACTION' => "modcp.php",
                 'HIDDEN_FIELDS' => build_hidden_fields($hidden_fields),
             ));
@@ -305,7 +304,7 @@ switch ($mode) {
 
                 'MESSAGE_TITLE' => $lang['CONFIRM'],
                 'MESSAGE_TEXT' => $lang['CONFIRM_MOVE_TOPIC'],
-                'TOPIC_TITLES' => join("\n</li>\n<li>\n", $topic_titles),
+                'TOPIC_TITLES' => implode("\n</li>\n<li>\n", $topic_titles),
 
                 'S_FORUM_SELECT' => $forum_select,
                 'S_MODCP_ACTION' => "modcp.php",
@@ -399,11 +398,11 @@ switch ($mode) {
 
         if (($split || $delete_posts) && ($posts && $topic_id && $forum_id && $topic_first_post_id) && $confirmed) {
             foreach ($posts as $post_id) {
-                if ($pid = intval($post_id)) {
+                if ($pid = (int)$post_id) {
                     $req_post_id_sql[] = $pid;
                 }
             }
-            if ($req_post_id_sql = join(',', $req_post_id_sql)) {
+            if ($req_post_id_sql = implode(',', $req_post_id_sql)) {
                 $sql = "SELECT post_id
 					FROM " . BB_POSTS . "
 					WHERE post_id IN($req_post_id_sql)
@@ -418,7 +417,7 @@ switch ($mode) {
                     foreach ($rowset as $rid => $row) {
                         $post_id_sql[] = $row['post_id'];
                     }
-                    $post_id_sql = join(',', $post_id_sql);
+                    $post_id_sql = implode(',', $post_id_sql);
                 }
             }
         }
@@ -442,8 +441,8 @@ switch ($mode) {
                 $user_id_sql = '';
                 $post_id_sql = '';
                 do {
-                    $user_id_sql .= (($user_id_sql != '') ? ', ' : '') . intval($row['poster_id']);
-                    $post_id_sql .= (($post_id_sql != '') ? ', ' : '') . intval($row['post_id']);
+                    $user_id_sql .= (($user_id_sql != '') ? ', ' : '') . (int)$row['poster_id'];
+                    $post_id_sql .= (($post_id_sql != '') ? ', ' : '') . (int)$row['post_id'];
                 } while ($row = DB()->sql_fetchrow($result));
 
                 $post_subject = clean_title($_POST['subject']);
@@ -451,7 +450,7 @@ switch ($mode) {
                     bb_die($lang['EMPTY_SUBJECT']);
                 }
 
-                $new_forum_id = intval($_POST['new_forum_id']);
+                $new_forum_id = (int)$_POST['new_forum_id'];
                 $topic_time = TIMENOW;
 
                 $sql = 'SELECT forum_id FROM ' . BB_FORUMS . ' WHERE forum_id = ' . $new_forum_id;

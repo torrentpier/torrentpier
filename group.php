@@ -42,7 +42,7 @@ function generate_user_info(&$row, $date_format, $group_mod, &$from, &$posts, &$
     $from = (!empty($row['user_from'])) ? $row['user_from'] : '';
     $joined = bb_date($row['user_regdate']);
     $user_time = (!empty($row['user_time'])) ? bb_date($row['user_time']) : $lang['NONE'];
-    $posts = ($row['user_posts']) ? $row['user_posts'] : 0;
+    $posts = ($row['user_posts']) ?: 0;
     $pm = ($bb_cfg['text_buttons']) ? '<a class="txtb" href="' . (PM_URL . "?mode=post&amp;" . POST_USERS_URL . "=" . $row['user_id']) . '">' . $lang['SEND_PM_TXTB'] . '</a>' : '<a href="' . (PM_URL . "?mode=post&amp;" . POST_USERS_URL . "=" . $row['user_id']) . '"><img src="' . $images['icon_pm'] . '" alt="' . $lang['SEND_PRIVATE_MESSAGE'] . '" title="' . $lang['SEND_PRIVATE_MESSAGE'] . '" border="0" /></a>';
     $avatar = get_avatar($row['user_id'], $row['avatar_ext_id'], !bf($row['user_opt'], 'user_opt', 'dis_avatar'), '', 50, 50);
 
@@ -66,8 +66,8 @@ $user->session_start(array('req_login' => true));
 
 set_die_append_msg();
 
-$group_id = isset($_REQUEST[POST_GROUPS_URL]) ? intval($_REQUEST[POST_GROUPS_URL]) : null;
-$start = isset($_REQUEST['start']) ? abs(intval($_REQUEST['start'])) : 0;
+$group_id = isset($_REQUEST[POST_GROUPS_URL]) ? (int)$_REQUEST[POST_GROUPS_URL] : null;
+$start = isset($_REQUEST['start']) ? abs((int)$_REQUEST['start']) : 0;
 $per_page = $bb_cfg['group_members_per_page'];
 $view_mode = isset($_REQUEST['view']) ? (string)$_REQUEST['view'] : null;
 $rel_limit = 50;
@@ -281,7 +281,7 @@ if (!$group_id) {
                 foreach ($members as $members_id) {
                     $sql_in[] = (int)$members_id;
                 }
-                if (!$sql_in = join(',', $sql_in)) {
+                if (!$sql_in = implode(',', $sql_in)) {
                     bb_die($lang['NONE_SELECTED']);
                 }
 

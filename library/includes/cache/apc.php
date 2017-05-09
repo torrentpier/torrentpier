@@ -31,7 +31,7 @@ class cache_apc extends cache_common
 {
     public $used = true;
     public $engine = 'APC';
-    public $prefix = null;
+    public $prefix;
 
     public function __construct($prefix = null)
     {

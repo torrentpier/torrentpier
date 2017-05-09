@@ -27,7 +27,8 @@ if (!empty($setmodules)) {
     $module['MODS']['MASS_EMAIL'] = basename(__FILE__);
     return;
 }
-require('./pagestart.php');
+
+require __DIR__ . '/pagestart.php';
 
 @set_time_limit(1200);
 
@@ -54,7 +55,7 @@ if (isset($_POST['submit'])) {
         foreach ($sql as $row) {
             $user_id_sql[] = ',' . $row['ban_userid'];
         }
-        $user_id_sql = join('', $user_id_sql);
+        $user_id_sql = implode('', $user_id_sql);
 
         if ($group_id != -1) {
             $user_list = DB()->fetch_rowset("
@@ -113,7 +114,7 @@ $template->assign_vars(array(
     'MESSAGE' => $message,
     'SUBJECT' => $subject,
 
-    'ERROR_MESSAGE' => ($errors) ? join('<br />', array_unique($errors)) : '',
+    'ERROR_MESSAGE' => ($errors) ? implode('<br />', array_unique($errors)) : '',
 
     'S_USER_ACTION' => 'admin_mass_email.php',
     'S_GROUP_SELECT' => build_select(POST_GROUPS_URL, $groups),

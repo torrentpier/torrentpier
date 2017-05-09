@@ -31,7 +31,7 @@ function get_torrent_info($attach_id)
 {
     global $lang;
 
-    $attach_id = intval($attach_id);
+    $attach_id = (int)$attach_id;
 
     $sql = "
 		SELECT
@@ -162,7 +162,7 @@ function delete_torrent($attach_id, $mode = '')
 {
     global $lang, $reg_mode, $topic_id;
 
-    $attach_id = intval($attach_id);
+    $attach_id = (int)$attach_id;
     $reg_mode = $mode;
 
     if (!$torrent = get_torrent_info($attach_id)) {
@@ -223,7 +223,7 @@ function change_tor_type($attach_id, $tor_status_gold)
     }
 
     $topic_id = $torrent['topic_id'];
-    $tor_status_gold = intval($tor_status_gold);
+    $tor_status_gold = (int)$tor_status_gold;
     $info_hash = null;
 
     DB()->query("UPDATE " . BB_BT_TORRENTS . " SET tor_type = $tor_status_gold WHERE topic_id = $topic_id LIMIT 1");
@@ -241,7 +241,7 @@ function tracker_register($attach_id, $mode = '', $tor_status = TOR_NOT_APPROVED
 {
     global $bb_cfg, $lang, $reg_mode, $tr_cfg;
 
-    $attach_id = intval($attach_id);
+    $attach_id = (int)$attach_id;
     $reg_mode = $mode;
 
     if (!$torrent = get_torrent_info($attach_id)) {
@@ -286,7 +286,7 @@ function tracker_register($attach_id, $mode = '', $tor_status = TOR_NOT_APPROVED
 
     if ($bb_cfg['bt_disable_dht']) {
         $tor['info']['private'] = (int)1;
-        $fp = fopen($filename, 'w+');
+        $fp = fopen($filename, 'wb+');
         fwrite($fp, bencode($tor));
         fclose($fp);
     }
@@ -462,7 +462,7 @@ function send_torrent_with_passkey($filename)
         bb_die('This is not a bencoded file');
     }
 
-    $announce = $bb_cfg['ocelot']['enabled'] ? strval($bb_cfg['ocelot']['url'] . $passkey_val . "/announce") : strval($ann_url . "?$passkey_key=$passkey_val");
+    $announce = $bb_cfg['ocelot']['enabled'] ? (string)($bb_cfg['ocelot']['url'] . $passkey_val . "/announce") : (string)($ann_url . "?$passkey_key=$passkey_val");
 
     // Replace original announce url with tracker default
     if ($bb_cfg['bt_replace_ann_url'] || !isset($tor['announce'])) {
@@ -494,13 +494,13 @@ function send_torrent_with_passkey($filename)
     $publisher_name = $bb_cfg['server_name'];
     $publisher_url = make_url(TOPIC_URL . $topic_id);
 
-    $tor['publisher'] = strval($publisher_name);
+    $tor['publisher'] = (string)$publisher_name;
     unset($tor['publisher.utf-8']);
 
-    $tor['publisher-url'] = strval($publisher_url);
+    $tor['publisher-url'] = (string)$publisher_url;
     unset($tor['publisher-url.utf-8']);
 
-    $tor['comment'] = strval($publisher_url);
+    $tor['comment'] = (string)$publisher_url;
     unset($tor['comment.utf-8']);
 
     // Send torrent
@@ -624,11 +624,7 @@ function ocelot_update_tracker($action, $updates)
     $max_attempts = 3;
     $err = false;
 
-    if (ocelot_send_request($get, $max_attempts, $err) === false) {
-        return false;
-    }
-
-    return true;
+    return !(ocelot_send_request($get, $max_attempts, $err) === false);
 }
 
 function ocelot_send_request($get, $max_attempts = 1, &$err = false)

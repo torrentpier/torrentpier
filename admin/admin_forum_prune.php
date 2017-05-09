@@ -27,7 +27,8 @@ if (!empty($setmodules)) {
     $module['FORUMS']['PRUNE'] = basename(__FILE__);
     return;
 }
-require('./pagestart.php');
+
+require __DIR__ . '/pagestart.php';
 
 $all_forums = -1;
 $pruned_total = 0;
@@ -37,12 +38,12 @@ if (isset($_REQUEST['submit'])) {
     if (!$var =& $_REQUEST['f'] or !$f_selected = get_id_ary($var)) {
         bb_die('Forum not selected');
     }
-    if (!$var =& $_REQUEST['prunedays'] or !$prunedays = abs(intval($var))) {
+    if (!$var =& $_REQUEST['prunedays'] or !$prunedays = abs((int)$var)) {
         bb_die($lang['NOT_DAYS']);
     }
 
     $prunetime = TIMENOW - 86400 * $prunedays;
-    $forum_csv = in_array($all_forums, $f_selected) ? $all_forums : join(',', $f_selected);
+    $forum_csv = in_array($all_forums, $f_selected) ? $all_forums : implode(',', $f_selected);
 
     $where_sql = ($forum_csv != $all_forums) ? "WHERE forum_id IN($forum_csv)" : '';
 

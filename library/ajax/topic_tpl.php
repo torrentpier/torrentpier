@@ -103,7 +103,7 @@ switch ($mode) {
         $this->response['val']['tpl-last-edit-tst'] = $tpl_data['tpl_last_edit_tm'];
         $this->response['html']['tpl-name-old-save'] = $tpl_data['tpl_name'];
         $this->response['html']['tpl-last-edit-time'] = bb_date($tpl_data['tpl_last_edit_tm'], 'd-M-y H:i');
-        $this->response['html']['tpl-last-edit-by'] = get_username(intval($tpl_data['tpl_last_edit_by']));
+        $this->response['html']['tpl-last-edit-by'] = get_username((int)$tpl_data['tpl_last_edit_by']);
 
         $this->response['tpl_rules_href'] = POST_URL . $tpl_data['tpl_rules_post_id'] . '#' . $tpl_data['tpl_rules_post_id'];
         break;
@@ -137,7 +137,7 @@ switch ($mode) {
     // сохранение изменений
     case 'save':
         if ($tpl_data['tpl_last_edit_tm'] > $this->request['tpl_l_ed_tst'] && $tpl_data['tpl_last_edit_by'] != $userdata['user_id']) {
-            $last_edit_by_username = get_username(intval($tpl_data['tpl_last_edit_by']));
+            $last_edit_by_username = get_username((int)$tpl_data['tpl_last_edit_by']);
             $msg = "Изменения не были сохранены!\n\n";
             $msg .= 'Шаблон был отредактирован: ' . html_entity_decode($last_edit_by_username) . ', ' . delta_time($tpl_data['tpl_last_edit_tm']) . " назад\n\n";
             $this->ajax_die($msg);

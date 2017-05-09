@@ -31,9 +31,9 @@ class cache_redis extends cache_common
 {
     public $used = true;
     public $engine = 'Redis';
-    public $cfg = null;
-    public $redis = null;
-    public $prefix = null;
+    public $cfg;
+    public $redis;
+    public $prefix;
     public $connected = false;
 
     public function __construct($cfg, $prefix = null)

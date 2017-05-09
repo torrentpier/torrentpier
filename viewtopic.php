@@ -40,7 +40,7 @@ $page_cfg['load_tpl_vars'] = array(
 );
 
 $newest = $next_topic_id = 0;
-$start = isset($_GET['start']) ? abs(intval($_GET['start'])) : 0;
+$start = isset($_GET['start']) ? abs((int)$_GET['start']) : 0;
 $topic_id = isset($_GET[POST_TOPIC_URL]) ? (int)$_GET[POST_TOPIC_URL] : 0;
 $post_id = (!$topic_id && isset($_GET[POST_POST_URL])) ? (int)$_GET[POST_POST_URL] : 0;
 
@@ -54,7 +54,7 @@ $posts_per_page = $bb_cfg['posts_per_page'];
 $select_ppp = '';
 
 if ($userdata['session_admin']) {
-    if ($req_ppp = abs(intval(@$_REQUEST['ppp'])) and in_array($req_ppp, $bb_cfg['allowed_posts_per_page'])) {
+    if ($req_ppp = abs((int)(@$_REQUEST['ppp'])) and in_array($req_ppp, $bb_cfg['allowed_posts_per_page'])) {
         $posts_per_page = $req_ppp;
     }
 
@@ -606,7 +606,7 @@ for ($i = 0; $i < $total_posts; $i++) {
     $mc_comment = $postrow[$i]['mc_comment'];
     $mc_user_id = profile_url(array('username' => $postrow[$i]['mc_username'], 'user_id' => $postrow[$i]['mc_user_id'], 'user_rank' => $postrow[$i]['mc_user_rank']));
 
-    $rg_id = ($postrow[$i]['poster_rg_id']) ? $postrow[$i]['poster_rg_id'] : 0;
+    $rg_id = ($postrow[$i]['poster_rg_id']) ?: 0;
     $rg_avatar = get_avatar(GROUP_AVATAR_MASK . $rg_id, $postrow[$i]['rg_avatar_id']);
     $rg_name = ($postrow[$i]['group_name']) ? htmlCHR($postrow[$i]['group_name']) : '';
     $rg_signature = ($postrow[$i]['group_signature']) ? bbcode2html(htmlCHR($postrow[$i]['group_signature'])) : '';

@@ -32,7 +32,7 @@ $page_cfg['include_bbcode_js'] = true;
 $tracking_topics = get_tracks('topic');
 
 $user_id = $userdata['user_id'];
-$start = isset($_GET['start']) ? abs(intval($_GET['start'])) : 0;
+$start = isset($_GET['start']) ? abs((int)$_GET['start']) : 0;
 $per_page = $bb_cfg['topics_per_page'];
 
 if (isset($_POST['topic_id_list'])) {
@@ -53,7 +53,7 @@ if (!($result = DB()->sql_query($sql))) {
     bb_die('Could not obtain watch topic information #2');
 }
 $row = DB()->sql_fetchrow($result);
-$watch_count = ($row['watch_count']) ? $row['watch_count'] : 0;
+$watch_count = ($row['watch_count']) ?: 0;
 DB()->sql_freeresult($result);
 
 if ($watch_count > 0) {
@@ -74,7 +74,7 @@ if ($watch_count > 0) {
     $watch = DB()->sql_fetchrowset($result);
 
     if ($watch) {
-        for ($i = 0; $i < count($watch); $i++) {
+        for ($i = 0, $iMax = count($watch); $i < $iMax; $i++) {
             $is_unread = is_unread($watch[$i]['topic_last_post_time'], $watch[$i]['topic_id'], $watch[$i]['forum_id']);
 
             $template->assign_block_vars('watch', array(

@@ -123,8 +123,8 @@ class sitemap
         $this->priority = $this->topic_priority;
 
         if ($page) {
-            $page = $page - 1;
-            $page = $page * 40000;
+            --$page;
+            $page *= 40000;
             $this->limit = " LIMIT {$page},40000";
         } else {
             if ($this->limit < 1) {

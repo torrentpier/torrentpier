@@ -35,7 +35,7 @@ if (!$bb_cfg['board_email_form']) {
 set_die_append_msg();
 
 if (!empty($_GET[POST_USERS_URL]) || !empty($_POST[POST_USERS_URL])) {
-    $user_id = (!empty($_GET[POST_USERS_URL])) ? intval($_GET[POST_USERS_URL]) : intval($_POST[POST_USERS_URL]);
+    $user_id = (!empty($_GET[POST_USERS_URL])) ? (int)$_GET[POST_USERS_URL] : (int)$_POST[POST_USERS_URL];
 } else {
     bb_die($lang['NO_USER_SPECIFIED']);
 }
@@ -97,7 +97,7 @@ if ($row = DB()->fetch_row($sql)) {
             'USERNAME' => profile_url($row),
             'S_HIDDEN_FIELDS' => '',
             'S_POST_ACTION' => "profile.php?mode=email&amp;" . POST_USERS_URL . "=$user_id",
-            'ERROR_MESSAGE' => ($errors) ? join('<br />', array_unique($errors)) : '',
+            'ERROR_MESSAGE' => ($errors) ? implode('<br />', array_unique($errors)) : '',
         ));
 
         print_page('usercp_email.tpl');

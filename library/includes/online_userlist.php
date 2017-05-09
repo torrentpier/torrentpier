@@ -94,7 +94,7 @@ foreach (DB()->fetch_rowset($sql) as $u) {
             $stat[] = "t:<span style=\"color: #1E90FF\">$t</span>";
         }
 
-        $ulist[$level][] = ($stat) ? "$name<span class=\"ou_stat\" style=\"color: #707070\" title=\"{$u['session_ip']}\"> [<b>" . join(', ', $stat) . '</b>]</span>' : $name;
+        $ulist[$level][] = ($stat) ? "$name<span class=\"ou_stat\" style=\"color: #707070\" title=\"{$u['session_ip']}\"> [<b>" . implode(', ', $stat) . '</b>]</span>' : $name;
     } else {
         $guests_online = $u['ips'];
         $users_cnt['guest'] = $guests_online;
@@ -111,18 +111,18 @@ if ($ulist) {
 
         if (count($users) > 200) {
             $style = 'margin: 3px 0; padding: 2px 4px; border: 1px inset; height: 200px; overflow: auto;';
-            $block[] = "<div style=\"$style\">\n" . join(",\n", $users) . "</div>\n";
+            $block[] = "<div style=\"$style\">\n" . implode(",\n", $users) . "</div>\n";
             $short[] = '<a href="index.php?online_full=1#online">' . $lang['USERS'] . ': ' . count($users) . '</a>';
         } else {
-            $inline[] = join(",\n", $users);
-            $short[] = join(",\n", $users);
+            $inline[] = implode(",\n", $users);
+            $short[] = implode(",\n", $users);
         }
 
         $logged_online += count($users);
     }
 
-    $online['userlist'] = join(",\n", $inline) . join("\n", $block);
-    $online_short['userlist'] = join(",\n", $short);
+    $online['userlist'] = implode(",\n", $inline) . implode("\n", $block);
+    $online_short['userlist'] = implode(",\n", $short);
 }
 
 if (!$online['userlist']) {

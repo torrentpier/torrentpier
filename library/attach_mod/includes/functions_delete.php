@@ -41,12 +41,12 @@ function delete_attachment($post_id_array = 0, $attach_id_array = 0, $page = 0, 
         $post_id_array = array();
 
         if (!is_array($attach_id_array)) {
-            if (strstr($attach_id_array, ', ')) {
+            if (false !== strpos($attach_id_array, ', ')) {
                 $attach_id_array = explode(', ', $attach_id_array);
             } elseif (strstr($attach_id_array, ',')) {
                 $attach_id_array = explode(',', $attach_id_array);
             } else {
-                $attach_id = intval($attach_id_array);
+                $attach_id = (int)$attach_id_array;
                 $attach_id_array = array();
                 $attach_id_array[] = $attach_id;
             }
@@ -72,7 +72,7 @@ function delete_attachment($post_id_array = 0, $attach_id_array = 0, $page = 0, 
         }
 
         while ($row = DB()->sql_fetchrow($result)) {
-            $post_id_array[] = intval($row[$p_id]);
+            $post_id_array[] = (int)$row[$p_id];
         }
         DB()->sql_freeresult($result);
     }
@@ -82,19 +82,19 @@ function delete_attachment($post_id_array = 0, $attach_id_array = 0, $page = 0, 
             return;
         }
 
-        if (strstr($post_id_array, ', ')) {
+        if (false !== strpos($post_id_array, ', ')) {
             $post_id_array = explode(', ', $post_id_array);
         } elseif (strstr($post_id_array, ',')) {
             $post_id_array = explode(',', $post_id_array);
         } else {
-            $post_id = intval($post_id_array);
+            $post_id = (int)$post_id_array;
 
             $post_id_array = array();
             $post_id_array[] = $post_id;
         }
     }
 
-    if (!sizeof($post_id_array)) {
+    if (!count($post_id_array)) {
         return;
     }
 
@@ -127,25 +127,25 @@ function delete_attachment($post_id_array = 0, $attach_id_array = 0, $page = 0, 
     }
 
     if (!is_array($attach_id_array)) {
-        if (strstr($attach_id_array, ', ')) {
+        if (false !== strpos($attach_id_array, ', ')) {
             $attach_id_array = explode(', ', $attach_id_array);
         } elseif (strstr($attach_id_array, ',')) {
             $attach_id_array = explode(',', $attach_id_array);
         } else {
-            $attach_id = intval($attach_id_array);
+            $attach_id = (int)$attach_id_array;
 
             $attach_id_array = array();
             $attach_id_array[] = $attach_id;
         }
     }
 
-    if (!sizeof($attach_id_array)) {
+    if (!count($attach_id_array)) {
         return;
     }
 
     $sql_id = 'post_id';
 
-    if (sizeof($post_id_array) && sizeof($attach_id_array)) {
+    if (count($post_id_array) && count($attach_id_array)) {
         $sql = 'DELETE FROM ' . BB_ATTACHMENTS . '
 			WHERE attach_id IN (' . implode(', ', $attach_id_array) . ")
 				AND $sql_id IN (" . implode(', ', $post_id_array) . ')';
@@ -187,7 +187,7 @@ function delete_attachment($post_id_array = 0, $attach_id_array = 0, $page = 0, 
         }
         //bt end
 
-        for ($i = 0; $i < sizeof($attach_id_array); $i++) {
+        for ($i = 0, $iMax = count($attach_id_array); $i < $iMax; $i++) {
             $sql = 'SELECT attach_id
 				FROM ' . BB_ATTACHMENTS . '
 						WHERE attach_id = ' . (int)$attach_id_array[$i];
@@ -218,7 +218,7 @@ function delete_attachment($post_id_array = 0, $attach_id_array = 0, $page = 0, 
                     for ($j = 0; $j < $num_attach; $j++) {
                         unlink_attach($attachments[$j]['physical_filename']);
 
-                        if (intval($attachments[$j]['thumbnail']) == 1) {
+                        if ((int)$attachments[$j]['thumbnail'] == 1) {
                             unlink_attach($attachments[$j]['physical_filename'], MODE_THUMBNAIL);
                         }
 
@@ -236,7 +236,7 @@ function delete_attachment($post_id_array = 0, $attach_id_array = 0, $page = 0, 
     }
 
     // Now Sync the Topic/PM
-    if (sizeof($post_id_array)) {
+    if (count($post_id_array)) {
         $sql = 'SELECT topic_id
 			FROM ' . BB_POSTS . '
 			WHERE post_id IN (' . implode(', ', $post_id_array) . ')

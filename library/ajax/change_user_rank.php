@@ -30,9 +30,9 @@ if (!defined('IN_AJAX')) {
 global $datastore, $lang;
 
 $ranks = $datastore->get('ranks');
-$rank_id = intval($this->request['rank_id']);
+$rank_id = (int)$this->request['rank_id'];
 
-if (!$user_id = intval($this->request['user_id']) or !$profiledata = get_userdata($user_id)) {
+if (!$user_id = (int)$this->request['user_id'] or !$profiledata = get_userdata($user_id)) {
     $this->ajax_die("invalid user_id: $user_id");
 }
 

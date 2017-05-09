@@ -43,11 +43,11 @@ function update_table_bool($table_name, $key, $field_name, $field_def_val)
         $in_sql = array();
 
         foreach ($_POST[$field_name] as $i => $val) {
-            $in_sql[] = intval($val);
+            $in_sql[] = (int)$val;
         }
 
         // Update status
-        if ($in_sql = join(',', $in_sql)) {
+        if ($in_sql = implode(',', $in_sql)) {
             $sql = "UPDATE $table_name
 				SET $field_name = 1
 				WHERE $key IN($in_sql)";
@@ -109,7 +109,7 @@ function update_config_table($table_name, $default_cfg, $cfg, $type)
             } elseif ($type == 'bool') {
                 $config_value = ($_POST[$config_name]) ? 1 : 0;
             } elseif ($type == 'num') {
-                $config_value = abs(intval($_POST[$config_name]));
+                $config_value = abs((int)$_POST[$config_name]);
             } else {
                 return;
             }

@@ -256,7 +256,7 @@ function strip_quotes($text)
                 if ($stacksize == 0) {
                     $newtext .= substr($text, $substr_pos, $pos - $substr_pos);
                 }
-                array_push($stack, $pos);
+                $stack[] = $pos;
             } else {
                 // pop off the latest opened tag
                 if ($stacksize) {
@@ -394,20 +394,20 @@ function add_search_words($post_id, $post_message, $topic_title = '', $only_retu
 
     if ($only_return_words || $bb_cfg['search_engine_type'] == 'sphinx') {
         return join("\n", $words);
-    } else {
-        DB()->query("DELETE FROM " . BB_POSTS_SEARCH . " WHERE post_id = $post_id");
+    }
 
-        if ($words_sql = DB()->escape(join("\n", $words))) {
-            DB()->query("REPLACE INTO " . BB_POSTS_SEARCH . " (post_id, search_words) VALUES ($post_id, '$words_sql')");
-        }
+    DB()->query("DELETE FROM " . BB_POSTS_SEARCH . " WHERE post_id = $post_id");
+
+    if ($words_sql = DB()->escape(implode("\n", $words))) {
+        DB()->query("REPLACE INTO " . BB_POSTS_SEARCH . " (post_id, search_words) VALUES ($post_id, '$words_sql')");
     }
 }
 
 class bbcode
 {
     public $tpl = array(); // шаблоны для замены тегов
-    public $smilies = null;    // смайлы
-    public $found_spam = null;    // найденные спам "слова"
+    public $smilies;    // смайлы
+    public $found_spam;    // найденные спам "слова"
     public $del_words = array(); // см. get_words_rate()
     public $tidy_cfg = array(
         'drop-empty-paras' => false,
@@ -524,7 +524,7 @@ class bbcode
         global $bb_cfg;
 
         $text = " $text ";
-        $text = $this->clean_up($text);
+        $text = static::clean_up($text);
         $text = $this->spam_filter($text);
 
         // Tag parse
@@ -593,7 +593,7 @@ class bbcode
         if (!$bb_cfg['spam_filter_file_path']) {
             return $text;
         }
-        if (is_null($spam_words)) {
+        if (null === $spam_words) {
             $spam_words = file_get_contents($bb_cfg['spam_filter_file_path']);
             $spam_words = strtolower($spam_words);
             $spam_words = explode("\n", $spam_words);
@@ -738,7 +738,7 @@ class bbcode
     {
         global $datastore;
 
-        if (is_null($this->smilies)) {
+        if (null === $this->smilies) {
             $this->smilies = $datastore->get('smile_replacements');
         }
         if ($this->smilies) {

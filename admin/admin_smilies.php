@@ -27,7 +27,8 @@ if (!empty($setmodules)) {
     $module['GENERAL']['SMILIES'] = basename(__FILE__);
     return;
 }
-require('./pagestart.php');
+
+require __DIR__ . '/pagestart.php';
 
 // Check to see what mode we should operate in
 if (isset($_POST['mode']) || isset($_GET['mode'])) {
@@ -78,7 +79,7 @@ if (isset($_GET['import_pack']) || isset($_POST['import_pack'])) {
 
             $cur_smilies = DB()->sql_fetchrowset($result);
 
-            for ($i = 0; $i < count($cur_smilies); $i++) {
+            for ($i = 0, $iMax = count($cur_smilies); $i < $iMax; $i++) {
                 $k = $cur_smilies[$i]['code'];
                 $smiles[$k] = 1;
             }
@@ -90,10 +91,10 @@ if (isset($_GET['import_pack']) || isset($_POST['import_pack'])) {
             bb_die('Could not read smiley pak file');
         }
 
-        for ($i = 0; $i < count($fcontents); $i++) {
+        for ($i = 0, $iMax = count($fcontents); $i < $iMax; $i++) {
             $smile_data = explode($delimeter, trim(addslashes($fcontents[$i])));
 
-            for ($j = 2; $j < count($smile_data); $j++) {
+            for ($j = 2, $jMax = count($smile_data); $j < $iMax; $j++) {
                 // Replace > and < with the proper html_entities for matching
                 $smile_data[$j] = str_replace('<', '&lt;', $smile_data[$j]);
                 $smile_data[$j] = str_replace('>', '&gt;', $smile_data[$j]);
@@ -155,7 +156,7 @@ if (isset($_GET['import_pack']) || isset($_POST['import_pack'])) {
         $resultset = DB()->sql_fetchrowset($result);
 
         $smile_pak = '';
-        for ($i = 0; $i < count($resultset); $i++) {
+        for ($i = 0, $iMax = count($resultset); $i < $iMax; $i++) {
             $smile_pak .= $resultset[$i]['smile_url'] . $delimeter;
             $smile_pak .= $resultset[$i]['emoticon'] . $delimeter;
             $smile_pak .= $resultset[$i]['code'] . "\n";
@@ -172,7 +173,7 @@ if (isset($_GET['import_pack']) || isset($_POST['import_pack'])) {
     bb_die(sprintf($lang['EXPORT_SMILES'], '<a href="admin_smilies.php?export_pack=send">', '</a>') . '<br /><br />' . sprintf($lang['CLICK_RETURN_SMILEADMIN'], '<a href="admin_smilies.php">', '</a>') . '<br /><br />' . sprintf($lang['CLICK_RETURN_ADMIN_INDEX'], '<a href="index.php?pane=right">', '</a>'));
 } elseif (isset($_POST['add']) || isset($_GET['add'])) {
     $filename_list = '';
-    for ($i = 0; $i < count($smiley_images); $i++) {
+    for ($i = 0, $iMax = count($smiley_images); $i < $iMax; $i++) {
         $filename_list .= '<option value="' . $smiley_images[$i] . '">' . $smiley_images[$i] . '</option>';
     }
 
@@ -190,7 +191,7 @@ if (isset($_GET['import_pack']) || isset($_POST['import_pack'])) {
     switch ($mode) {
         case 'delete':
             $smiley_id = (!empty($_POST['id'])) ? $_POST['id'] : $_GET['id'];
-            $smiley_id = intval($smiley_id);
+            $smiley_id = (int)$smiley_id;
 
             $sql = "DELETE FROM " . BB_SMILIES . " WHERE smilies_id = " . $smiley_id;
             $result = DB()->sql_query($sql);
@@ -204,7 +205,7 @@ if (isset($_GET['import_pack']) || isset($_POST['import_pack'])) {
 
         case 'edit':
             $smiley_id = (!empty($_POST['id'])) ? $_POST['id'] : $_GET['id'];
-            $smiley_id = intval($smiley_id);
+            $smiley_id = (int)$smiley_id;
 
             $sql = "SELECT * FROM " . BB_SMILIES . " WHERE smilies_id = " . $smiley_id;
             $result = DB()->sql_query($sql);
@@ -214,7 +215,7 @@ if (isset($_GET['import_pack']) || isset($_POST['import_pack'])) {
             $smile_data = DB()->sql_fetchrow($result);
 
             $filename_list = '';
-            for ($i = 0; $i < count($smiley_images); $i++) {
+            for ($i = 0, $iMax = count($smiley_images); $i < $iMax; $i++) {
                 if ($smiley_images[$i] == $smile_data['smile_url']) {
                     $smiley_selected = 'selected="selected"';
                     $smiley_edit_img = $smiley_images[$i];
@@ -244,7 +245,7 @@ if (isset($_GET['import_pack']) || isset($_POST['import_pack'])) {
             $smile_url = (isset($_POST['smile_url'])) ? trim($_POST['smile_url']) : trim($_GET['smile_url']);
             $smile_url = bb_ltrim(basename($smile_url), "'");
             $smile_emotion = (isset($_POST['smile_emotion'])) ? trim($_POST['smile_emotion']) : trim($_GET['smile_emotion']);
-            $smile_id = (isset($_POST['smile_id'])) ? intval($_POST['smile_id']) : intval($_GET['smile_id']);
+            $smile_id = (isset($_POST['smile_id'])) ? (int)$_POST['smile_id'] : (int)$_GET['smile_id'];
 
             // If no code was entered complain
             if ($smile_code == '' || $smile_url == '') {
@@ -313,7 +314,7 @@ if (isset($_GET['import_pack']) || isset($_POST['import_pack'])) {
     ));
 
     // Loop throuh the rows of smilies setting block vars for the template
-    for ($i = 0; $i < count($smilies); $i++) {
+    for ($i = 0, $iMax = count($smilies); $i < $iMax; $i++) {
         // Replace htmlentites for < and > with actual character
         $smilies[$i]['code'] = str_replace('&lt;', '<', $smilies[$i]['code']);
         $smilies[$i]['code'] = str_replace('&gt;', '>', $smilies[$i]['code']);

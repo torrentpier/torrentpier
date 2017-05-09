@@ -30,8 +30,8 @@ if (!defined('BB_ROOT')) {
 class cache_sqlite extends cache_common
 {
     public $used = true;
-    public $db = null;
-    public $prefix = null;
+    public $db;
+    public $prefix;
     public $cfg = array(
         'db_file_path' => '/path/to/cache.db.sqlite',
         'table_name' => 'cache',
@@ -70,7 +70,7 @@ class cache_sqlite extends cache_common
         $rowset = $this->db->fetch_rowset("
 			SELECT cache_name, cache_value
 			FROM " . $this->cfg['table_name'] . "
-			WHERE cache_name IN('$this->prefix_sql" . join("','$this->prefix_sql", $name_sql) . "') AND cache_expire_time > " . TIMENOW . "
+			WHERE cache_name IN('$this->prefix_sql" . implode("','$this->prefix_sql", $name_sql) . "') AND cache_expire_time > " . TIMENOW . "
 			LIMIT " . count($name) . "
 		");
 
@@ -137,7 +137,7 @@ class sqlite_common extends cache_common
         'shard_val' => 0,          #  для string - кол. начальных символов, для int - делитель (будет использован остаток от деления)
     );
     public $engine = 'SQLite';
-    public $dbh = null;
+    public $dbh;
     public $connected = false;
     public $shard_val = false;
 

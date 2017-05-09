@@ -23,7 +23,7 @@
  * SOFTWARE.
  */
 
-require('./pagestart.php');
+require __DIR__ . '/pagestart.php';
 
 // Generate relevant output
 if (isset($_GET['pane']) && $_GET['pane'] == 'left') {
@@ -104,11 +104,11 @@ if (isset($_GET['pane']) && $_GET['pane'] == 'left') {
         $avatar_dir_size = $lang['NOT_AVAILABLE'];
     }
 
-    if (intval($posts_per_day) > $total_posts) {
+    if ((int)$posts_per_day > $total_posts) {
         $posts_per_day = $total_posts;
     }
 
-    if (intval($topics_per_day) > $total_topics) {
+    if ((int)$topics_per_day > $total_topics) {
         $topics_per_day = $total_topics;
     }
 
@@ -130,7 +130,7 @@ if (isset($_GET['pane']) && $_GET['pane'] == 'left') {
                     $tabledata_ary = DB()->sql_fetchrowset($result);
 
                     $dbsize = 0;
-                    for ($i = 0; $i < count($tabledata_ary); $i++) {
+                    for ($i = 0, $iMax = count($tabledata_ary); $i < $iMax; $i++) {
                         if (@$tabledata_ary[$i]['Type'] != 'MRG_MYISAM') {
                             $dbsize += $tabledata_ary[$i]['Data_length'] + $tabledata_ary[$i]['Index_length'];
                         }
@@ -192,7 +192,7 @@ if (isset($_GET['pane']) && $_GET['pane'] == 'left') {
         if (count($onlinerow_reg)) {
             $registered_users = $hidden_users = 0;
 
-            for ($i = 0, $cnt = count($onlinerow_reg); $i < $cnt; $i++) {
+            for ($i = 0, $iMax = count($onlinerow_reg); $i < $iMax; $i++) {
                 if (!in_array($onlinerow_reg[$i]['user_id'], $reg_userid_ary)) {
                     $reg_userid_ary[] = $onlinerow_reg[$i]['user_id'];
 
@@ -226,7 +226,7 @@ if (isset($_GET['pane']) && $_GET['pane'] == 'left') {
         if (count($onlinerow_guest)) {
             $guest_users = 0;
 
-            for ($i = 0; $i < count($onlinerow_guest); $i++) {
+            for ($i = 0, $iMax = count($onlinerow_guest); $i < $iMax; $i++) {
                 $guest_userip_ary[] = $onlinerow_guest[$i]['session_ip'];
                 $guest_users++;
 
@@ -263,7 +263,7 @@ print_page('index.tpl', 'admin');
 // Functions
 function inarray($needle, $haystack)
 {
-    for ($i = 0; $i < sizeof($haystack); $i++) {
+    for ($i = 0, $iMax = count($haystack); $i < $iMax; $i++) {
         if ($haystack[$i] == $needle) {
             return true;
         }

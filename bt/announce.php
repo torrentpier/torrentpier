@@ -188,8 +188,7 @@ function msg_die($msg)
 }
 
 // Start announcer
-define('TR_ROOT', './');
-require(TR_ROOT . 'includes/init_tr.php');
+require __DIR__ . '/includes/init_tr.php';
 
 $seeder = ($left == 0) ? 1 : 0;
 $stopped = ($event === 'stopped');
@@ -438,7 +437,7 @@ if (!$output) {
         foreach ($rowset as $peer) {
             $peers[] = array(
                 'ip' => decode_ip($peer['ip']),
-                'port' => intval($peer['port']),
+                'port' => (int)$peer['port'],
             );
         }
     }

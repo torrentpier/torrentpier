@@ -36,7 +36,7 @@ while (true) {
 
     $prune_users = $not_activated_users = $not_active_users = array();
 
-    if ($not_activated_days = intval($bb_cfg['user_not_activated_days_keep'])) {
+    if ($not_activated_days = (int)$bb_cfg['user_not_activated_days_keep']) {
         $sql = DB()->fetch_rowset("SELECT user_id FROM " . BB_USERS . "
 			WHERE user_level      = 0
 			AND user_lastvisit    = 0
@@ -50,7 +50,7 @@ while (true) {
         }
     }
 
-    if ($not_active_days = intval($bb_cfg['user_not_active_days_keep'])) {
+    if ($not_active_days = (int)$bb_cfg['user_not_active_days_keep']) {
         $sql = DB()->fetch_rowset("SELECT user_id FROM " . BB_USERS . "
 			WHERE user_level   = 0
 			AND user_posts     = 0

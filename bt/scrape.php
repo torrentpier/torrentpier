@@ -59,8 +59,7 @@ function msg_die($msg)
     die($output);
 }
 
-define('TR_ROOT', './');
-require(TR_ROOT . 'includes/init_tr.php');
+require __DIR__ . '/includes/init_tr.php';
 
 $info_hash_sql = rtrim(DB()->escape($info_hash), ' ');
 

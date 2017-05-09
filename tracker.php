@@ -59,7 +59,7 @@ $date_format = 'j-M-y';
 $row_class_1 = 'row1';
 $row_class_2 = 'row2';
 
-$start = isset($_REQUEST['start']) ? abs(intval($_REQUEST['start'])) : 0;
+$start = isset($_REQUEST['start']) ? abs((int)$_REQUEST['start']) : 0;
 
 $set_default = isset($_GET['def']);
 $user_id = $userdata['user_id'];
@@ -373,7 +373,7 @@ if (!$set_default) {
     if ($req_cat_id =& $_REQUEST[$cat_key]) {
         if (isset($cat_forum['c'][$req_cat_id])) {
             $valid_forums = $cat_forum['c'][$req_cat_id];
-            $forum_val = join(',', $valid_forums);
+            $forum_val = implode(',', $valid_forums);
         }
     } // Get requested forum_id(s)
     elseif ($req_forums =& $_REQUEST[$forum_key]) {
@@ -381,17 +381,17 @@ if (!$set_default) {
             $req_forums = (array)$req_forums;
             array_deep($req_forums, 'intval');
             $valid_forums = array_intersect($req_forums, $allowed_forums);
-            $forum_val = join(',', $valid_forums);
+            $forum_val = implode(',', $valid_forums);
         }
     } elseif (isset($previous_settings[$forum_key])) {
         $valid_forums = array_intersect(explode(',', $previous_settings[$forum_key]), $allowed_forums);
-        $forum_val = join(',', $valid_forums);
+        $forum_val = implode(',', $valid_forums);
     }
 
     if ($forum_val && $forum_val != $search_all) {
         $search_in_forums_ary = array_slice(explode(',', $forum_val), 0, $max_forums_selected);
         $search_in_forums_fary = array_flip($search_in_forums_ary);
-        $search_in_forums_csv = join(',', $search_in_forums_ary);
+        $search_in_forums_csv = implode(',', $search_in_forums_ary);
         $forum_val = $search_in_forums_csv;
     } else {
         $forum_val = $search_all;
@@ -402,7 +402,7 @@ if (!$set_default) {
         $req_poster_id = '';
 
         if (isset($_GET[$poster_id_key]) && !$search_id) {
-            $req_poster_id = intval($_GET[$poster_id_key]);
+            $req_poster_id = (int)$_GET[$poster_id_key];
         } elseif (isset($_POST[$poster_name_key]) && !$search_id) {
             if ($req_poster_name = clean_username($_POST[$poster_name_key])) {
                 $poster_name_sql = str_replace("\\'", "''", $req_poster_name);
@@ -416,8 +416,8 @@ if (!$set_default) {
                 }
             }
         } elseif ($search_id && $previous_settings[$poster_id_key]) {
-            $poster_id_val = intval($previous_settings[$poster_id_key]);
-            $poster_name_val = ($previous_settings[$poster_name_key]) ? $previous_settings[$poster_name_key] : '';
+            $poster_id_val = (int)$previous_settings[$poster_id_key];
+            $poster_name_val = ($previous_settings[$poster_name_key]) ?: '';
         }
 
         if ($req_poster_id) {
@@ -462,7 +462,7 @@ if ($dl_down_val) {
 if ($dl_will_val) {
     $dl_status[] = DL_STATUS_WILL;
 }
-$dl_status_csv = join(',', $dl_status);
+$dl_status_csv = implode(',', $dl_status);
 
 // Switches
 $seed_exist = (bool)$seed_exist_val;
@@ -470,10 +470,10 @@ $poster_id = (bool)$poster_id_val;
 $title_match = (bool)$title_match_sql;
 $tor_type = (bool)$tor_type_val;
 
-$hide_cat = intval(!$show_cat_val);
-$hide_forum = intval(!$show_forum_val);
-$hide_author = intval(!$show_author_val);
-$hide_speed = intval(!$show_speed_val);
+$hide_cat = (int)(!$show_cat_val);
+$hide_forum = (int)(!$show_forum_val);
+$hide_author = (int)(!$show_author_val);
+$hide_speed = (int)(!$show_speed_val);
 
 $only_new = ($new_val && !IS_GUEST);
 $only_active = ($active_val || $seed_exist);
@@ -530,7 +530,7 @@ if ($allowed_forums) {
     if ($title_match) {
         $title_match_topics = get_title_match_topics($title_match_sql, $search_in_forums_ary);
 
-        if (!$search_match_topics_csv = join(',', $title_match_topics)) {
+        if (!$search_match_topics_csv = implode(',', $title_match_topics)) {
             $tr_error = true;
         }
     } else {
@@ -630,7 +630,7 @@ if ($allowed_forums) {
             foreach (DB()->fetch_rowset($SQL) as $row) {
                 $tor_list_ary[] = $row['topic_id'];
             }
-            $tor_list_sql = join(',', $tor_list_ary);
+            $tor_list_sql = implode(',', $tor_list_ary);
             $tor_count = count($tor_list_ary);
         }
     }
@@ -655,7 +655,7 @@ if ($allowed_forums) {
 
         $tor_to_show = ($tor_count > $per_page) ? array_slice($tor_list_ary, $start, $per_page) : $tor_list_ary;
 
-        if (!$tor_to_show = join(',', $tor_to_show)) {
+        if (!$tor_to_show = implode(',', $tor_to_show)) {
             bb_die($lang['NO_SEARCH_MATCH']);
         }
 
@@ -764,10 +764,10 @@ if ($allowed_forums) {
                 'TOR_SIZE' => humn_size($size),
                 'UL_SPEED' => $ul_sp,
                 'DL_SPEED' => $dl_sp,
-                'SEEDS' => ($seeds) ? $seeds : 0,
+                'SEEDS' => ($seeds) ?: 0,
                 'SEEDS_TITLE' => ($seeds) ? $lang['SEEDERS'] : ($lang['SEED_NOT_SEEN'] . ":\n " . (($s_last) ? bb_date($s_last, $date_format) : $lang['NEVER'])),
-                'LEECHS' => ($leechs) ? $leechs : 0,
-                'COMPLETED' => ($compl) ? $compl : 0,
+                'LEECHS' => ($leechs) ?: 0,
+                'COMPLETED' => ($compl) ?: 0,
                 'REPLIES' => $tor['topic_replies'],
                 'VIEWS' => $tor['topic_views'],
                 'ADDED_RAW' => $tor['reg_time'],

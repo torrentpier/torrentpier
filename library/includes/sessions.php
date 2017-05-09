@@ -85,7 +85,7 @@ class user_common
     /**
      *  Shortcuts
      */
-    public $id = null;
+    public $id;
 
     /**
      *  Misc
@@ -103,7 +103,7 @@ class user_common
     /**
      *  Start session (restore existent session or create new)
      */
-    public function session_start($cfg = array())
+    public function session_start(array $cfg = array())
     {
         global $bb_cfg;
 
@@ -183,7 +183,7 @@ class user_common
             $login = false;
             $user_id = ($bb_cfg['allow_autologin'] && $this->sessiondata['uk'] && $this->sessiondata['uid']) ? $this->sessiondata['uid'] : GUEST_UID;
 
-            if ($userdata = get_userdata(intval($user_id), false, true)) {
+            if ($userdata = get_userdata((int)$user_id, false, true)) {
                 if ($userdata['user_id'] != GUEST_UID && $userdata['user_active']) {
                     if (verify_id($this->sessiondata['uk'], LOGIN_KEY_LENGTH) && $this->verify_autologin_id($userdata, true, false)) {
                         $login = ($userdata['autologin_id'] && $this->sessiondata['uk'] === $userdata['autologin_id']);
@@ -431,7 +431,7 @@ class user_common
         }
         // user_id
         if (!empty($sd_resv['uid'])) {
-            $this->sessiondata['uid'] = intval($sd_resv['uid']);
+            $this->sessiondata['uid'] = (int)$sd_resv['uid'];
         }
         // sid
         if (!empty($sd_resv['sid']) && verify_id($sd_resv['sid'], SID_LENGTH)) {
@@ -676,7 +676,7 @@ class user_common
             }
         }
 
-        return join(',', $not_auth_forums);
+        return implode(',', $not_auth_forums);
     }
 
     /**
@@ -709,7 +709,7 @@ class user_common
 
         switch ($return_as) {
             case   'csv':
-                return join(',', $excluded);
+                return implode(',', $excluded);
             case 'array':
                 return $excluded;
             case  'flip':

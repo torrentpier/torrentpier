@@ -94,7 +94,7 @@ $tor_auth_del = ($tor_auth && $tor_reged);
 $tracker_link = ($tor_reged) ? $lang['BT_REG_YES'] : $lang['BT_REG_NO'];
 
 $download_link = DOWNLOAD_URL . $attach_id;
-$description = ($comment) ? $comment : preg_replace("#.torrent$#i", '', $display_name);
+$description = ($comment) ?: preg_replace("#.torrent$#i", '', $display_name);
 
 if ($tor_auth_reg || $tor_auth_del) {
     $reg_tor_url = '<a class="txtb" href="#" onclick="ajax.exec({ action: \'change_torrent\', attach_id : ' . $attach_id . ', type: \'reg\'}); return false;">' . $lang['BT_REG_ON_TRACKER'] . '</a>';
@@ -155,7 +155,7 @@ if ($tor_auth) {
 }
 
 if ($tor_reged && $tor_info) {
-    $tor_size = ($tor_info['size']) ? $tor_info['size'] : 0;
+    $tor_size = ($tor_info['size']) ?: 0;
     $tor_id = $tor_info['topic_id'];
     $tor_type = $tor_info['tor_type'];
 
@@ -297,7 +297,6 @@ if ($tor_reged && $tor_info) {
 				FROM " . BB_BT_TRACKER . " tr, " . BB_USERS . " u
 				WHERE tr.topic_id = $tor_id
 					AND u.user_id = tr.user_id
-				GROUP BY tr.ip, tr.user_id, tr.port, tr.seeder
 				ORDER BY u.username
 				LIMIT $show_peers_limit";
         } else {
@@ -308,7 +307,6 @@ if ($tor_reged && $tor_info) {
 				FROM " . BB_BT_TRACKER . " tr
 				LEFT JOIN " . BB_USERS . " u ON u.user_id = tr.user_id
 				WHERE tr.topic_id = $tor_id
-				GROUP BY tr.ip, tr.user_id, tr.port, tr.seeder
 				ORDER BY $full_mode_order $full_mode_sort_dir
 				LIMIT $show_peers_limit";
         }
@@ -334,7 +332,7 @@ if ($tor_reged && $tor_info) {
                     $sp_up_tot[$x] += $peer['speed_up'];
                     $sp_down_tot[$x] += $peer['speed_down'];
 
-                    $guest = ($peer['user_id'] == GUEST_UID || is_null($peer['username']));
+                    $guest = ($peer['user_id'] == GUEST_UID || null === $peer['username']);
                     $p_max_up = $peer['uploaded'];
                     $p_max_down = $peer['downloaded'];
 
@@ -498,14 +496,14 @@ if ($tor_reged && $tor_info) {
                 $seeders[strlen($seeders) - 9] = ' ';
                 $template->assign_vars(array(
                     'SEED_LIST' => $seeders,
-                    'SEED_COUNT' => ($seed_count) ? $seed_count : 0,
+                    'SEED_COUNT' => ($seed_count) ?: 0,
                 ));
             }
             if ($s_mode != 'full' && $leechers) {
                 $leechers[strlen($leechers) - 9] = ' ';
                 $template->assign_vars(array(
                     'LEECH_LIST' => $leechers,
-                    'LEECH_COUNT' => ($leech_count) ? $leech_count : 0,
+                    'LEECH_COUNT' => ($leech_count) ?: 0,
                 ));
             }
         }

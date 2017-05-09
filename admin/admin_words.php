@@ -27,7 +27,8 @@ if (!empty($setmodules)) {
     $module['GENERAL']['WORD_CENSOR'] = basename(__FILE__);
     return;
 }
-require('./pagestart.php');
+
+require __DIR__ . '/pagestart.php';
 
 if (!$bb_cfg['use_word_censor']) {
     bb_die('Word censor disabled <br /><br /> ($bb_cfg[\'use_word_censor\'] in config.php)');
@@ -44,7 +45,7 @@ if (isset($_POST['add'])) {
 
 if ($mode != '') {
     if ($mode == 'edit' || $mode == 'add') {
-        $word_id = intval(request_var('id', 0));
+        $word_id = (int)request_var('id', 0);
 
         $s_hidden_fields = $word = $replacement = '';
 
@@ -72,7 +73,7 @@ if ($mode != '') {
             'S_HIDDEN_FIELDS' => $s_hidden_fields,
         ));
     } elseif ($mode == 'save') {
-        $word_id = intval(request_var('id', 0));
+        $word_id = (int)request_var('id', 0);
         $word = trim(request_var('word', ''));
         $replacement = trim(request_var('replacement', ''));
 
@@ -100,7 +101,7 @@ if ($mode != '') {
 
         bb_die($message);
     } elseif ($mode == 'delete') {
-        $word_id = intval(request_var('id', 0));
+        $word_id = (int)request_var('id', 0);
 
         if ($word_id) {
             $sql = "DELETE FROM " . BB_WORDS . " WHERE word_id = $word_id";

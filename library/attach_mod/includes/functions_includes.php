@@ -30,7 +30,7 @@ function attach_build_auth_levels($is_auth, &$s_auth_can)
 {
     global $lang, $attach_config;
 
-    if (intval($attach_config['disable_mod'])) {
+    if ((int)$attach_config['disable_mod']) {
         return;
     }
 

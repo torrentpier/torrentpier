@@ -54,7 +54,7 @@ if (isset($_POST['add_name'])) {
 
     bb_die($message);
 } elseif (isset($_POST['delete_name'])) {
-    $disallowed_id = (isset($_POST['disallowed_id'])) ? intval($_POST['disallowed_id']) : intval($_GET['disallowed_id']);
+    $disallowed_id = (isset($_POST['disallowed_id'])) ? (int)$_POST['disallowed_id'] : (int)$_GET['disallowed_id'];
 
     $sql = "DELETE FROM " . BB_DISALLOW . " WHERE disallow_id = $disallowed_id";
     $result = DB()->sql_query($sql);
@@ -87,7 +87,7 @@ $disallow_select = '<select name="disallowed_id">';
 if (count($disallowed) <= 0) {
     $disallow_select .= '<option value="">' . $lang['NO_DISALLOWED'] . '</option>';
 } else {
-    for ($i = 0; $i < count($disallowed); $i++) {
+    for ($i = 0, $iMax = count($disallowed); $i < $iMax; $i++) {
         $disallow_select .= '<option value="' . $disallowed[$i]['disallow_id'] . '">' . $disallowed[$i]['disallow_username'] . '</option>';
     }
 }

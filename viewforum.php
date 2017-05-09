@@ -42,7 +42,7 @@ $page_cfg['load_tpl_vars'] = array(
 
 // Init request vars
 $forum_id = (int)request_var('f', '');
-$start = abs(intval(request_var('start', '')));
+$start = abs((int)request_var('start', ''));
 $mark_read = (request_var('mark', '') === 'topics');
 
 $anon = GUEST_UID;
@@ -233,7 +233,7 @@ $topics_per_page = $bb_cfg['topics_per_page'];
 $select_tpp = '';
 
 if ($is_auth['auth_mod']) {
-    if ($req_tpp = abs(intval(@$_REQUEST['tpp'])) and in_array($req_tpp, $bb_cfg['allowed_topics_per_page'])) {
+    if ($req_tpp = abs((int)(@$_REQUEST['tpp'])) and in_array($req_tpp, $bb_cfg['allowed_topics_per_page'])) {
         $topics_per_page = $req_tpp;
     }
 
@@ -259,7 +259,7 @@ $sel_previous_days = array(
 );
 
 if (!empty($_REQUEST['topicdays'])) {
-    if ($req_topic_days = abs(intval($_REQUEST['topicdays'])) and isset($sel_previous_days[$req_topic_days])) {
+    if ($req_topic_days = abs((int)$_REQUEST['topicdays']) and isset($sel_previous_days[$req_topic_days])) {
         $sql = "
 			SELECT COUNT(*) AS forum_topics
 			FROM " . BB_TOPICS . "
@@ -324,7 +324,7 @@ if ($title_match =& $_REQUEST[$title_match_key]) {
         $title_match_val = clean_text_match($tmp, true, false);
         $title_match_topics = get_title_match_topics($title_match_val, array(0 => $forum_id));
 
-        if ($search_match_topics_csv = join(',', $title_match_topics)) {
+        if ($search_match_topics_csv = implode(',', $title_match_topics)) {
             $title_match_sql = "AND t.topic_id IN($search_match_topics_csv)";
         }
     }
@@ -349,7 +349,7 @@ foreach (DB()->fetch_rowset($sql) as $row) {
 }
 
 // Titles, posters etc.
-if ($topics_csv = join(',', $topic_ids)) {
+if ($topics_csv = implode(',', $topic_ids)) {
     $topic_rowset = DB()->fetch_rowset("
 		SELECT
 			t.*, t.topic_poster AS first_user_id, u1.user_rank as first_user_rank,
@@ -402,7 +402,7 @@ $u_auth[] = ($is_auth['auth_vote']) ? $lang['RULES_VOTE_CAN'] : $lang['RULES_VOT
 $u_auth[] = ($is_auth['auth_attachments']) ? $lang['RULES_ATTACH_CAN'] : $lang['RULES_ATTACH_CANNOT'];
 $u_auth[] = ($is_auth['auth_download']) ? $lang['RULES_DOWNLOAD_CAN'] : $lang['RULES_DOWNLOAD_CANNOT'];
 $u_auth[] = ($is_auth['auth_mod']) ? $lang['RULES_MODERATE'] : '';
-$u_auth = join("<br />\n", $u_auth);
+$u_auth = implode("<br />\n", $u_auth);
 
 $template->assign_vars(array(
     'SHOW_JUMPBOX' => true,

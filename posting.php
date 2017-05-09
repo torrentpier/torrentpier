@@ -241,7 +241,7 @@ if (!$is_auth[$is_auth_type]) {
 }
 
 if ($mode == 'new_rel') {
-    if ($tor_status = join(',', $bb_cfg['tor_cannot_new'])) {
+    if ($tor_status = implode(',', $bb_cfg['tor_cannot_new'])) {
         $sql = DB()->fetch_rowset("SELECT t.topic_title, t.topic_id, tor.tor_status
 			FROM " . BB_BT_TORRENTS . " tor, " . BB_TOPICS . " t
 			WHERE poster_id = {$userdata['user_id']}
@@ -281,7 +281,7 @@ execute_posting_attachment_handling();
 $topic_has_new_posts = false;
 
 if (!IS_GUEST && $mode != 'newtopic' && ($submit || $preview || $mode == 'quote' || $mode == 'reply') && isset($_COOKIE[COOKIE_TOPIC])) {
-    if ($topic_last_read = max(intval(@$tracking_topics[$topic_id]), intval(@$tracking_forums[$forum_id]))) {
+    if ($topic_last_read = max((int)(@$tracking_topics[$topic_id]), (int)(@$tracking_forums[$forum_id]))) {
         $sql = "SELECT p.*, pt.post_text, u.username, u.user_rank
 			FROM " . BB_POSTS . " p, " . BB_POSTS_TEXT . " pt, " . BB_USERS . " u
 			WHERE p.topic_id = " . (int)$topic_id . "
@@ -404,7 +404,7 @@ if (($delete || $mode == 'delete') && !$confirm) {
                         }
                     }
                     $sub_forums[] = $forum_id;
-                    $sub_forums = join(',', $sub_forums);
+                    $sub_forums = implode(',', $sub_forums);
                     // Подсчет проверенных релизов в форумах раздела
                     $count_checked_releases = DB()->fetch_row("
 						SELECT COUNT(*) AS checked_releases
@@ -643,7 +643,7 @@ $template->assign_vars(array(
     'MESSAGE' => $message,
 
     'POSTER_RGROUPS' => isset($poster_rgroups) && !empty($poster_rgroups) ? $poster_rgroups : '',
-    'ATTACH_RG_SIG' => ($switch_rg_sig) ? $switch_rg_sig : false,
+    'ATTACH_RG_SIG' => ($switch_rg_sig) ?: false,
 
     'U_VIEWTOPIC' => ($mode == 'reply') ? "viewtopic.php?" . POST_TOPIC_URL . "=$topic_id&amp;postorder=desc" : '',
 

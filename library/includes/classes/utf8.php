@@ -2275,7 +2275,7 @@ class utf8
         if (!ReflectionTypeHint::isValid()) {
             return false;
         }
-        if (is_null($s)) {
+        if (null === $s) {
             return $s;
         }
 
@@ -2324,7 +2324,7 @@ class utf8
         if (!ReflectionTypeHint::isValid()) {
             return false;
         }
-        if (is_null($s)) {
+        if (null === $s) {
             return $s;
         }
 
@@ -2568,7 +2568,7 @@ class utf8
         if (!ReflectionTypeHint::isValid()) {
             return false;
         }
-        if (is_null($s)) {
+        if (null === $s) {
             return $s;
         }
         return preg_replace('/[\x00-\x08\x0B\x0C\x0E-\x1F]+/sSX', '', $s);
@@ -2602,7 +2602,7 @@ class utf8
         if (is_string($data)) {
             return ltrim($data, "\x00..\x7f") === '';
         }
-        if (is_scalar($data) || is_null($data)) {
+        if (is_scalar($data) || null === $data) {
             return true;
         }  #~ null, integer, float, boolean
         return false; #object or resource
@@ -2650,7 +2650,7 @@ class utf8
             }
             return true;
         }
-        if (is_scalar($data) || is_null($data)) {
+        if (is_scalar($data) || null === $data) {
             return true;
         }  #~ null, integer, float, boolean
         return false; #object or resource
@@ -2792,7 +2792,7 @@ class utf8
             }#foreach
             return true;
         }
-        if (is_scalar($data) || is_null($data)) {
+        if (is_scalar($data) || null === $data) {
             return true;
         }  #~ null, integer, float, boolean
         return false; #object or resource
@@ -2912,7 +2912,7 @@ class utf8
         if (!ReflectionTypeHint::isValid()) {
             return false;
         }
-        if (is_null($s1) || is_null($s2)) {
+        if (null === $s1 || null === $s2) {
             return null;
         }
         if (!function_exists('collator_create')) {
@@ -2945,7 +2945,7 @@ class utf8
         if (!ReflectionTypeHint::isValid()) {
             return false;
         }
-        if (is_null($s1) || is_null($s2)) {
+        if (null === $s1 || null === $s2) {
             return null;
         }
         return self::strcmp(self::substr($s1, 0, $length), self::substr($s2, 0, $length));
@@ -2966,7 +2966,7 @@ class utf8
         if (!ReflectionTypeHint::isValid()) {
             return false;
         }
-        if (is_null($s1) || is_null($s2)) {
+        if (null === $s1 || null === $s2) {
             return null;
         }
         return self::strcmp(self::lowercase($s1), self::lowercase($s2));
@@ -2984,7 +2984,7 @@ class utf8
         if (!ReflectionTypeHint::isValid()) {
             return false;
         }
-        if (is_null($s)) {
+        if (null === $s) {
             return $s;
         }
 
@@ -3021,7 +3021,7 @@ class utf8
         if (!ReflectionTypeHint::isValid()) {
             return false;
         }
-        if (is_null($a)) {
+        if (null === $a) {
             return $a;
         }
 
@@ -3062,7 +3062,7 @@ class utf8
         if (!ReflectionTypeHint::isValid()) {
             return false;
         }
-        if (is_null($char)) {
+        if (null === $char) {
             return $char;
         }
 
@@ -3104,7 +3104,7 @@ class utf8
         if (!ReflectionTypeHint::isValid()) {
             return false;
         }
-        if (is_null($cp)) {
+        if (null === $cp) {
             return $cp;
         }
 
@@ -3148,12 +3148,12 @@ class utf8
         if (!ReflectionTypeHint::isValid()) {
             return false;
         }
-        if (is_null($s)) {
+        if (null === $s) {
             return $s;
         }
 
-        $length = intval($length);
-        $glue = strval($glue);
+        $length = (int)$length;
+        $glue = (string)$glue;
         if ($length < 1) {
             $length = 76;
         }
@@ -3433,7 +3433,7 @@ class utf8
         if (!ReflectionTypeHint::isValid()) {
             return false;
         }
-        if (is_null($s)) {
+        if (null === $s) {
             return $s;
         }
 
@@ -3491,7 +3491,7 @@ class utf8
         if (!ReflectionTypeHint::isValid()) {
             return false;
         }
-        if (is_null($subject)) {
+        if (null === $subject) {
             return null;
         }
 
@@ -3537,7 +3537,7 @@ class utf8
         if (!ReflectionTypeHint::isValid()) {
             return false;
         }
-        if (is_null($s)) {
+        if (null === $s) {
             return $s;
         }
 
@@ -3628,11 +3628,11 @@ class utf8
         if (!ReflectionTypeHint::isValid()) {
             return false;
         }
-        if (is_null($s)) {
+        if (null === $s) {
             return $s;
         }
 
-        $length = ($length === null) ? 1 : intval($length);
+        $length = ($length === null) ? 1 : (int)$length;
         if ($length < 1) {
             return false;
         }
@@ -3665,7 +3665,7 @@ class utf8
         if (!ReflectionTypeHint::isValid()) {
             return false;
         }
-        if (is_null($s)) {
+        if (null === $s) {
             return $s;
         }
 
@@ -3718,7 +3718,7 @@ class utf8
         if (!ReflectionTypeHint::isValid()) {
             return false;
         }
-        if (is_null($s)) {
+        if (null === $s) {
             return $s;
         }
 
@@ -3753,7 +3753,7 @@ class utf8
         if (!ReflectionTypeHint::isValid()) {
             return false;
         }
-        if (is_null($s)) {
+        if (null === $s) {
             return $s;
         }
 
@@ -3766,7 +3766,7 @@ class utf8
 
         #optimization block (speed improve)
         #{{{
-        $ascii_int = intval(self::is_ascii($s)) + intval(self::is_ascii($needle));
+        $ascii_int = (int)self::is_ascii($s) + (int)self::is_ascii($needle);
         if ($ascii_int === 1) {
             return false;
         }
@@ -3797,7 +3797,7 @@ class utf8
         if (!ReflectionTypeHint::isValid()) {
             return false;
         }
-        if (is_null($s)) {
+        if (null === $s) {
             return $s;
         }
 
@@ -3832,7 +3832,7 @@ class utf8
         if (!ReflectionTypeHint::isValid()) {
             return false;
         }
-        if (is_null($s)) {
+        if (null === $s) {
             return $s;
         }
 
@@ -3881,7 +3881,7 @@ class utf8
         if (!ReflectionTypeHint::isValid()) {
             return false;
         }
-        if (is_null($s)) {
+        if (null === $s) {
             return $s;
         }
 
@@ -3905,7 +3905,7 @@ class utf8
         if (!ReflectionTypeHint::isValid()) {
             return false;
         }
-        if (is_null($s)) {
+        if (null === $s) {
             return $s;
         }
 
@@ -3933,7 +3933,7 @@ class utf8
         if (!ReflectionTypeHint::isValid()) {
             return false;
         }
-        if (is_null($s)) {
+        if (null === $s) {
             return $s;
         }
 
@@ -3995,7 +3995,7 @@ class utf8
                 },
                 $data);
         }
-        if (is_scalar($data) || is_null($data)) {
+        if (is_scalar($data) || null === $data) {
             return $data;
         }  #~ null, integer, float, boolean
         return false; #object or resource
@@ -4102,7 +4102,7 @@ class utf8
         if (!ReflectionTypeHint::isValid()) {
             return false;
         }
-        if (is_null($s)) {
+        if (null === $s) {
             return $s;
         }
 
@@ -4130,7 +4130,7 @@ class utf8
         if (!ReflectionTypeHint::isValid()) {
             return false;
         }
-        if (is_null($s)) {
+        if (null === $s) {
             return $s;
         }
         if ($charlist === null || self::is_ascii($charlist)) {
@@ -4149,7 +4149,7 @@ class utf8
         if (!ReflectionTypeHint::isValid()) {
             return false;
         }
-        if (is_null($s)) {
+        if (null === $s) {
             return $s;
         }
         if ($charlist === null || self::is_ascii($charlist)) {
@@ -4168,7 +4168,7 @@ class utf8
         if (!ReflectionTypeHint::isValid()) {
             return false;
         }
-        if (is_null($s)) {
+        if (null === $s) {
             return $s;
         }
         if ($charlist === null || self::is_ascii($charlist)) {
@@ -4205,7 +4205,7 @@ class utf8
         if (!ReflectionTypeHint::isValid()) {
             return false;
         }
-        if (is_null($s)) {
+        if (null === $s) {
             return $s;
         }
 
@@ -4224,13 +4224,13 @@ class utf8
 
         if ($type == STR_PAD_LEFT) {
             $repeat_num = ceil($pad_len / $pad_str_len);
-            return self::substr(str_repeat($pad_str, $repeat_num), 0, intval(floor($pad_len))) . $s;
+            return self::substr(str_repeat($pad_str, $repeat_num), 0, (int)floor($pad_len)) . $s;
         }
 
         if ($type == STR_PAD_BOTH) {
             $pad_len /= 2;
-            $pad_amount_left = intval(floor($pad_len));
-            $pad_amount_right = intval(ceil($pad_len));
+            $pad_amount_left = (int)floor($pad_len);
+            $pad_amount_right = (int)ceil($pad_len);
             $repeat_times_left = ceil($pad_amount_left / $pad_str_len);
             $repeat_times_right = ceil($pad_amount_right / $pad_str_len);
 
@@ -4412,7 +4412,7 @@ class utf8
         if (!ReflectionTypeHint::isValid()) {
             return false;
         }
-        if (is_null($s)) {
+        if (null === $s) {
             return $s;
         }
         if (is_array($from)) {

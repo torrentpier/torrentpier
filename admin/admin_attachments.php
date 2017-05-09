@@ -30,7 +30,7 @@ if (!empty($setmodules)) {
     $module['ATTACHMENTS']['QUOTA_LIMITS'] = $filename . '?mode=quota';
     return;
 }
-require('./pagestart.php');
+require __DIR__ . '/pagestart.php';
 
 $error = false;
 
@@ -220,7 +220,7 @@ if ($check_upload) {
     }
 
     if (!$error) {
-        if (!($fp = @fopen($upload_dir . '/0_000000.000', 'w'))) {
+        if (!($fp = @fopen($upload_dir . '/0_000000.000', 'wb'))) {
             $error = true;
             $error_msg = sprintf($lang['DIRECTORY_NOT_WRITEABLE'], $attach_config['upload_dir']) . '<br />';
         } else {
@@ -248,8 +248,8 @@ if ($mode == 'manage') {
         'S_FILESIZE' => $select_size_mode,
         'S_FILESIZE_QUOTA' => $select_quota_size_mode,
         'S_FILESIZE_PM' => $select_pm_size_mode,
-        'S_DEFAULT_UPLOAD_LIMIT' => default_quota_limit_select('default_upload_quota', intval(trim($new_attach['default_upload_quota']))),
-        'S_DEFAULT_PM_LIMIT' => default_quota_limit_select('default_pm_quota', intval(trim($new_attach['default_pm_quota']))),
+        'S_DEFAULT_UPLOAD_LIMIT' => default_quota_limit_select('default_upload_quota', (int)trim($new_attach['default_upload_quota'])),
+        'S_DEFAULT_PM_LIMIT' => default_quota_limit_select('default_pm_quota', (int)trim($new_attach['default_pm_quota'])),
 
         'UPLOAD_DIR' => $new_attach['upload_dir'],
         'ATTACHMENT_IMG_PATH' => $new_attach['upload_img'],
@@ -288,7 +288,7 @@ if ($mode == 'cats') {
     $row = DB()->sql_fetchrowset($result);
     DB()->sql_freeresult($result);
 
-    for ($i = 0; $i < sizeof($row); $i++) {
+    for ($i = 0, $iMax = count($row); $i < $iMax; $i++) {
         if ($row[$i]['cat_id'] == IMAGE_CAT) {
             $s_assigned_group_images[] = $row[$i]['group_name'];
         }
@@ -375,7 +375,7 @@ if ($check_image_cat) {
     }
 
     if (!$error) {
-        if (!($fp = @fopen($upload_dir . '/0_000000.000', 'w'))) {
+        if (!($fp = @fopen($upload_dir . '/0_000000.000', 'wb'))) {
             $error = true;
             $error_msg = sprintf($lang['DIRECTORY_NOT_WRITEABLE'], $upload_dir) . '<br />';
         } else {
@@ -399,7 +399,7 @@ if ($submit && $mode == 'quota') {
 
     $allowed_list = array();
 
-    for ($i = 0; $i < sizeof($quota_change_list); $i++) {
+    for ($i = 0, $iMax = count($quota_change_list); $i < $iMax; $i++) {
         $filesize_list[$i] = ($size_select_list[$i] == 'kb') ? round($filesize_list[$i] * 1024) : (($size_select_list[$i] == 'mb') ? round($filesize_list[$i] * 1048576) : $filesize_list[$i]);
 
         $sql = 'UPDATE ' . BB_QUOTA_LIMITS . "
@@ -504,7 +504,7 @@ if ($mode == 'quota') {
     $rows = DB()->sql_fetchrowset($result);
     DB()->sql_freeresult($result);
 
-    for ($i = 0; $i < sizeof($rows); $i++) {
+    for ($i = 0, $iMax = count($rows); $i < $iMax; $i++) {
         $size_format = ($rows[$i]['quota_limit'] >= 1048576) ? 'mb' : (($rows[$i]['quota_limit'] >= 1024) ? 'kb' : 'b');
 
         if ($rows[$i]['quota_limit'] >= 1048576) {

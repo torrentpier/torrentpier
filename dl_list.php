@@ -57,10 +57,10 @@ $full_url = isset($_POST['full_url']) ? str_replace('&amp;', '&', htmlspecialcha
 
 if (isset($_POST['redirect_type']) && $_POST['redirect_type'] == 'search') {
     $redirect_type = "search.php";
-    $redirect = ($full_url) ? $full_url : "$dl_key=1";
+    $redirect = ($full_url) ?: "$dl_key=1";
 } else {
     $redirect_type = (!$topic_id) ? "viewforum.php" : "viewtopic.php";
-    $redirect = ($full_url) ? $full_url : ((!$topic_id) ? POST_FORUM_URL . "=$forum_id" : POST_TOPIC_URL . "=$topic_id");
+    $redirect = ($full_url) ?: ((!$topic_id) ? POST_FORUM_URL . "=$forum_id" : POST_TOPIC_URL . "=$topic_id");
 }
 
 // Start session management
@@ -128,7 +128,7 @@ if ($mode == 'set_topics_dl_status') {
 }
 
 // Get existing topics
-if ($req_topics_sql = join(',', $req_topics_ary)) {
+if ($req_topics_sql = implode(',', $req_topics_ary)) {
     $sql = "SELECT topic_id FROM " . BB_TOPICS . " WHERE topic_id IN($req_topics_sql)";
 
     foreach (DB()->fetch_rowset($sql) as $row) {
