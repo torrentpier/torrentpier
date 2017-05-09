@@ -220,7 +220,7 @@ function strip_quotes($text)
         }
     } while ($pos !== false);
 
-    if (sizeof($start_pos) == 0) {
+    if (count($start_pos) == 0) {
         return $text;
     }
 
@@ -235,7 +235,7 @@ function strip_quotes($text)
         }
     } while ($pos !== false);
 
-    if (sizeof($end_pos) == 0) {
+    if (count($end_pos) == 0) {
         return $text;
     }
 
@@ -250,7 +250,7 @@ function strip_quotes($text)
         $newtext = '[...] ';
         $substr_pos = 0;
         foreach ($pos_list as $pos => $type) {
-            $stacksize = sizeof($stack);
+            $stacksize = count($stack);
             if ($type == 'start') {
                 // empty stack, so add from the last close tag or the beginning of the string
                 if ($stacksize == 0) {
@@ -377,7 +377,7 @@ function extract_search_words($text)
     }
     $text = $text_out;
 
-    if (sizeof($text) > $max_words_count) {
+    if (count($text) > $max_words_count) {
         #		shuffle($text);
         $text = array_splice($text, 0, $max_words_count);
     }
@@ -393,7 +393,7 @@ function add_search_words($post_id, $post_message, $topic_title = '', $only_retu
     $words = ($text) ? extract_search_words($text) : array();
 
     if ($only_return_words || $bb_cfg['search_engine_type'] == 'sphinx') {
-        return join("\n", $words);
+        return implode("\n", $words);
     }
 
     DB()->query("DELETE FROM " . BB_POSTS_SEARCH . " WHERE post_id = $post_id");
@@ -543,7 +543,7 @@ class bbcode
             $text = preg_replace_callback("#\[url=(www\.$url_exp)\]([^?\n\t].*?)\[/url\]#isu", array(&$this, 'url_callback'), $text);
 
             // Normalize block level tags wrapped with new lines
-            $block_tags = join('|', $this->block_tags);
+            $block_tags = implode('|', $this->block_tags);
             $text = str_replace("\n\n[hr]\n\n", '[br][hr][br]', $text);
             $text = preg_replace("#(\s*)(\[/?($block_tags)(.*?)\])(\s*)#", '$2', $text);
 
@@ -623,7 +623,7 @@ class bbcode
             foreach ($found_spam as $keyword) {
                 $spam_exp[] = preg_quote($keyword, '/');
             }
-            $spam_exp = join('|', $spam_exp);
+            $spam_exp = implode('|', $spam_exp);
 
             $text = preg_replace("/($spam_exp)(\S*)/i", $spam_replace, $msg_decoded);
             $text = htmlCHR($text, false, ENT_NOQUOTES);
