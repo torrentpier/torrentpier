@@ -157,7 +157,7 @@ if ($search_imagick) {
             $paths = explode(' ', $retval);
 
             if (is_array($paths)) {
-                for ($i = 0; $i < sizeof($paths); $i++) {
+                for ($i = 0, $iMax = count($paths); $i < $iMax; $i++) {
                     $path = basename($paths[$i]);
 
                     if ($path == 'convert') {

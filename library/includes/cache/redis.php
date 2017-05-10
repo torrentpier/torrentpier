@@ -119,7 +119,7 @@ class cache_redis extends cache_common
 
             return ($this->connected) ? $this->redis->del($this->prefix . $name) : false;
         } else {
-            return ($this->connected) ? $this->redis->flushdb() : false;
+            return ($this->connected) ? $this->redis->flushDB() : false;
         }
     }
 
