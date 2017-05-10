@@ -62,7 +62,7 @@ $lang['6_MONTHS'] = '6 Months';
 $lang['1_YEAR'] = '1 Year';
 
 $lang['GO'] = 'Go to';
-$lang['SUBMIT'] = 'Submit';
+$lang['SUBMIT'] = 'Təsdiqlə';
 $lang['RESET'] = 'Reset';
 $lang['CANCEL'] = 'Cancel';
 $lang['PREVIEW'] = 'Preview';
@@ -162,7 +162,7 @@ $lang['USERGROUPS'] = 'Usergroups';
 $lang['LASTPOST'] = 'Last Post';
 $lang['MODERATOR'] = 'Moderator';
 $lang['MODERATORS'] = 'Moderators';
-$lang['TERMS'] = 'Terms';
+$lang['TERMS'] = 'Qaydalar';
 $lang['NOTHING_HAS_CHANGED'] = 'Nothing has been changed';
 
 // Stats block text
@@ -2752,7 +2752,7 @@ $lang['SITEMAP_ADD_EXP_1'] = 'You can specify additional pages on your site (for
 $lang['SITEMAP_ADD_EXP_2'] = 'Each reference must begin with http(s):// and a new line!';
 
 $lang['FORUM_MAP'] = 'Forums\' map';
-$lang['ATOM_FEED'] = 'Feed';
+$lang['ATOM_FEED'] = 'Bəslə';
 $lang['ATOM_ERROR'] = 'Error generating feed';
 $lang['ATOM_SUBSCRIBE'] = 'Subscribe to the feed';
 $lang['ATOM_NO_MODE'] = 'Do not specify a mode for the feed';
@@ -2796,7 +2796,7 @@ $lang['NEW_POLL_M_VOTES'] = 'Options';
 $lang['NEW_POLL_M_EXPLAIN'] = 'Each row corresponds to one answer (max';
 
 $lang['OLD_BROWSER'] = 'You are using an outdated browser. The website will not display correctly.';
-$lang['GO_BACK'] = 'Go back';
+$lang['GO_BACK'] = 'Geriyə qayıtmaq';
 
 $lang['UPLOAD_ERROR_COMMON'] = 'File upload error';
 $lang['UPLOAD_ERROR_SIZE'] = 'The uploaded file exceeds the maximum size of %s';

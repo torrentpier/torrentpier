@@ -94,8 +94,8 @@ $lang['ICQ'] = 'ICQ';
 $lang['SKYPE'] = 'Skype';
 $lang['SKYPE_ERROR'] = 'Ви ввели некоректний логін Skype';
 
-$lang['TWITTER'] = 'Twitter';
-$lang['TWITTER_ERROR'] = 'Ви ввели некоректний логін Twitter';
+$lang['TWITTER'] = 'Твіттер';
+$lang['TWITTER_ERROR'] = 'Ви ввели некоректний логін Твіттер';
 
 $lang['FORUM_INDEX'] = 'Список форумів %s'; // eg. sitename Forum Index, %s can be removed if you prefer
 
@@ -686,11 +686,11 @@ $lang['SORT_JOINED'] = 'по даті реєстрації';
 $lang['SORT_USERNAME'] = 'ім\'я користувача';
 $lang['SORT_LOCATION'] = 'за місцезнаходженням';
 $lang['SORT_POSTS'] = 'за кількістю повідомлень';
-$lang['SORT_EMAIL'] = 'за адресою e-mail';
+$lang['SORT_EMAIL'] = 'за адресою email';
 $lang['SORT_WEBSITE'] = 'за адресою сайту';
 $lang['ASC'] = 'за зростанням';
 $lang['DESC'] = 'за спаданням';
-$lang['ORDER'] = 'Order';
+$lang['ORDER'] = 'Сортувати';
 
 // Group control panel
 $lang['GROUP_CONTROL_PANEL'] = 'Групи';
@@ -1053,9 +1053,9 @@ $lang['PM_QUOTA'] = 'Квота ОП';
 
 // Common Variables
 $lang['BYTES'] = 'Байт';
-$lang['KB'] = 'KB';
-$lang['MB'] = 'MB';
-$lang['GB'] = 'GB';
+$lang['KB'] = 'Кб';
+$lang['MB'] = 'Мб';
+$lang['GB'] = 'Гб';
 $lang['ATTACH_SEARCH_QUERY'] = 'Пошук вкладень';
 $lang['TEST_SETTINGS'] = 'Перевірити налаштування';
 $lang['NOT_ASSIGNED'] = 'Не призначено';
@@ -1455,7 +1455,7 @@ $lang['ROLE'] = 'Роль:';
 $lang['MEMBERSHIP_IN'] = 'Членство в групах';
 $lang['PARTY'] = 'Учасник:';
 $lang['CANDIDATE'] = 'Кандидат:';
-$lang['INDIVIDUAL'] = 'Has the individual rights';
+$lang['INDIVIDUAL'] = 'Має індивідуальні права';
 $lang['GROUP_LIST_HIDDEN'] = 'У вас немає прав на перегляд прихованих груп';
 
 $lang['USER_ACTIVATE'] = 'Активувати';
@@ -1616,7 +1616,7 @@ $lang['ACTIONS_LOG'] = 'Звіт по діям';
 //Welcome page
 $lang['IDX_BROWSER_NSP_FRAME'] = 'Вибачте, але ваш браузер не підтримує фрейми.';
 $lang['IDX_CLEAR_CACHE'] = 'Очистити кеш:';
-$lang['IDX_CLEAR_DATASTORE'] = 'Дані';
+$lang['IDX_CLEAR_DATASTORE'] = 'Datastore';
 $lang['IDX_CLEAR_TEMPLATES'] = 'Шаблони';
 $lang['IDX_CLEAR_NEWNEWS'] = 'Новини';
 $lang['IDX_UPDATE'] = 'Оновити:';
@@ -1717,7 +1717,7 @@ $lang['AUTH_ANNOUNCE'] = $lang['ANNOUNCE'] = 'Створювати оголош�
 $lang['AUTH_VOTE'] = $lang['VOTE'] = 'Голосувати';
 $lang['AUTH_POLLCREATE'] = $lang['POLLCREATE'] = 'Створювати опитування';
 $lang['AUTH_ATTACHMENTS'] = $lang['AUTH_ATTACH'] = 'Прикріплювати файли';
-$lang['AUTH_DOWNLOAD'] = $lang['AUTH_DOWNLOAD'] = 'Download Files';
+$lang['AUTH_DOWNLOAD'] = $lang['AUTH_DOWNLOAD'] = 'Завантажити файли';
 
 $lang['SIMPLE_PERMISSION'] = 'Просте право доступу';
 
@@ -2392,7 +2392,7 @@ $lang['REMOVED'] = 'Видалено';
 $lang['QUESTION'] = 'Ви впевнені, що хочете видалити?';
 
 $lang['CRON_LIST'] = 'Список завдань';
-$lang['CRON_ID'] = 'ID';
+$lang['CRON_ID'] = 'Ідентифікатор';
 $lang['CRON_ACTIVE'] = 'Ввімк.';
 $lang['CRON_ACTIVE_EXPL'] = 'Активність завдання';
 $lang['CRON_TITLE'] = 'Назва завдання';
@@ -2646,7 +2646,7 @@ $lang['SEARCH_FOR_POSTCOUNT_RANGE'] = 'Пошук користувачів з к
 $lang['SEARCH_FOR_POSTCOUNT_EQUALS'] = 'Пошук користувачів з кількістю повідомлень %d';
 $lang['SEARCH_FOR_USERFIELD_ICQ'] = 'Пошук користувачів з адресою ICQ %s';
 $lang['SEARCH_FOR_USERFIELD_SKYPE'] = 'Пошук користувачів з логіном Skype %s';
-$lang['SEARCH_FOR_USERFIELD_TWITTER'] = 'Пошук користувачів з логіном Twitter %s';
+$lang['SEARCH_FOR_USERFIELD_TWITTER'] = 'Пошук користувачів з логіном Твіттер %s';
 $lang['SEARCH_FOR_USERFIELD_WEBSITE'] = 'Пошук користувачів, чий веб-сайт %s';
 $lang['SEARCH_FOR_USERFIELD_LOCATION'] = 'Пошук користувачів з %s';
 $lang['SEARCH_FOR_USERFIELD_INTERESTS'] = 'Пошук користувачів з інтересами %s';

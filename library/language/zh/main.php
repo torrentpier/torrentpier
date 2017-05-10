@@ -24,256 +24,256 @@
  */
 
 // Common, these terms are used extensively on several pages
-$lang['ADMIN'] = 'Administrating';
-$lang['FORUM'] = 'Forum';
-$lang['CATEGORY'] = 'Category';
-$lang['HIDE_CAT'] = 'Hide categories';
-$lang['HIDE_CAT_MESS'] = 'Part of categories are hidden "options Show" &middot; <a href="index.php?sh=1">Show All</a>';
-$lang['TOPIC'] = 'Topic';
-$lang['TOPICS'] = 'Topics';
-$lang['TOPICS_SHORT'] = 'Topics';
-$lang['REPLIES'] = 'Replies';
-$lang['REPLIES_SHORT'] = 'Replies';
-$lang['VIEWS'] = 'Views';
-$lang['POSTS'] = 'Posts';
-$lang['POSTS_SHORT'] = 'Posts';
-$lang['POSTED'] = 'Posted';
-$lang['USERNAME'] = 'Username';
-$lang['PASSWORD'] = 'Password';
-$lang['EMAIL'] = 'Email';
-$lang['PM'] = 'PM';
-$lang['AUTHOR'] = 'Author';
-$lang['TIME'] = 'Time';
-$lang['HOURS'] = 'Hours';
-$lang['MESSAGE'] = 'Message';
-$lang['TORRENT'] = 'Torrent';
-$lang['PERMISSIONS'] = 'Permissions';
-$lang['TYPE'] = 'Type';
-$lang['SEEDER'] = 'Seeder';
-$lang['LEECHER'] = 'Leecher';
-$lang['RELEASER'] = 'Releaser';
+$lang['ADMIN'] = '管理';
+$lang['FORUM'] = '论坛';
+$lang['CATEGORY'] = '分类';
+$lang['HIDE_CAT'] = '隐藏分类';
+$lang['HIDE_CAT_MESS'] = '一部分分类被隐藏 "显示选项" &middot; <a href="index.php?sh=1">全部显示</a>';
+$lang['TOPIC'] = '主题';
+$lang['TOPICS'] = '主题';
+$lang['TOPICS_SHORT'] = '主题';
+$lang['REPLIES'] = '回复';
+$lang['REPLIES_SHORT'] = '回复';
+$lang['VIEWS'] = '观点';
+$lang['POSTS'] = '帖子';
+$lang['POSTS_SHORT'] = '帖子';
+$lang['POSTED'] = '已发布';
+$lang['USERNAME'] = '用户名';
+$lang['PASSWORD'] = '密码';
+$lang['EMAIL'] = '邮箱';
+$lang['PM'] = '私信';
+$lang['AUTHOR'] = '作者';
+$lang['TIME'] = '时间';
+$lang['HOURS'] = '小时';
+$lang['MESSAGE'] = '信息';
+$lang['TORRENT'] = '种子';
+$lang['PERMISSIONS'] = '权限';
+$lang['TYPE'] = '类型';
+$lang['SEEDER'] = '上传者';
+$lang['LEECHER'] = '下载者';
+$lang['RELEASER'] = '发布者';
 
-$lang['1_DAY'] = '1 Day';
-$lang['7_DAYS'] = '7 Days';
-$lang['2_WEEKS'] = '2 Weeks';
-$lang['1_MONTH'] = '1 Month';
-$lang['3_MONTHS'] = '3 Months';
-$lang['6_MONTHS'] = '6 Months';
-$lang['1_YEAR'] = '1 Year';
+$lang['1_DAY'] = '1 天';
+$lang['7_DAYS'] = '7 天';
+$lang['2_WEEKS'] = '2 周';
+$lang['1_MONTH'] = '1 个月';
+$lang['3_MONTHS'] = '3 个月';
+$lang['6_MONTHS'] = '6 个月';
+$lang['1_YEAR'] = '1 年';
 
-$lang['GO'] = 'Go to';
+$lang['GO'] = '前往';
 $lang['SUBMIT'] = '提交';
-$lang['RESET'] = 'Reset';
-$lang['CANCEL'] = 'Cancel';
-$lang['PREVIEW'] = 'Preview';
-$lang['AJAX_PREVIEW'] = 'Quick View';
-$lang['CONFIRM'] = 'Confirm';
-$lang['YES'] = 'Yes';
-$lang['NO'] = 'No';
-$lang['ENABLED'] = 'Enabled';
-$lang['DISABLED'] = 'Disabled';
-$lang['ERROR'] = 'Error';
-$lang['SELECT_ACTION'] = 'Select action';
+$lang['RESET'] = '重置';
+$lang['CANCEL'] = '取消';
+$lang['PREVIEW'] = '预览';
+$lang['AJAX_PREVIEW'] = '快速查看';
+$lang['CONFIRM'] = '确认';
+$lang['YES'] = '是';
+$lang['NO'] = '否';
+$lang['ENABLED'] = '已激活';
+$lang['DISABLED'] = '未启用';
+$lang['ERROR'] = '错误';
+$lang['SELECT_ACTION'] = '选择操作';
 
-$lang['NEXT_PAGE'] = 'Next';
-$lang['PREVIOUS_PAGE'] = 'Previous';
-$lang['GOTO_PAGE'] = 'Go to page';
-$lang['GOTO_SHORT'] = 'Page';
-$lang['JOINED'] = 'Joined';
-$lang['LONGEVITY'] = 'Longevity';
-$lang['IP_ADDRESS'] = 'IP Address';
-$lang['POSTED_AFTER'] = 'after';
+$lang['NEXT_PAGE'] = '继续';
+$lang['PREVIOUS_PAGE'] = '后退';
+$lang['GOTO_PAGE'] = '转到页面';
+$lang['GOTO_SHORT'] = '页面';
+$lang['JOINED'] = '加入时间';
+$lang['LONGEVITY'] = '寿命';
+$lang['IP_ADDRESS'] = 'IP地址';
+$lang['POSTED_AFTER'] = '之后';
 
-$lang['SELECT_FORUM'] = 'Select forum';
-$lang['VIEW_LATEST_POST'] = 'View latest post';
-$lang['VIEW_NEWEST_POST'] = 'View newest post';
-$lang['PAGE_OF'] = 'Page <b>%d</b> of <b>%s</b>';
+$lang['SELECT_FORUM'] = '选择论坛';
+$lang['VIEW_LATEST_POST'] = '查看最新发表的文章';
+$lang['VIEW_NEWEST_POST'] = '查看最新帖子';
+$lang['PAGE_OF'] = '第<b>%d</b>页，共<b>%s</b>页';
 
 $lang['ICQ'] = 'ICQ';
 
 $lang['SKYPE'] = 'Skype';
-$lang['SKYPE_ERROR'] = 'You entered an invalid Skype login';
+$lang['SKYPE_ERROR'] = '您输入了一个无效的 Skype 账号';
 
-$lang['TWITTER'] = 'Twitter';
-$lang['TWITTER_ERROR'] = 'You entered an invalid Twitter login';
+$lang['TWITTER'] = '推特';
+$lang['TWITTER_ERROR'] = '您输入了一个无效的 Twitter 账号';
 
-$lang['FORUM_INDEX'] = '%s Forum Index'; // eg. sitename Forum Index, %s can be removed if you prefer
+$lang['FORUM_INDEX'] = '%s 论坛索引'; // eg. sitename Forum Index, %s can be removed if you prefer
 
-$lang['POST_NEW_TOPIC'] = 'Post new topic';
-$lang['POST_NEW_RELEASE'] = 'Post new release';
-$lang['POST_REGULAR_TOPIC'] = 'Post regular topic';
-$lang['REPLY_TO_TOPIC'] = 'Reply to topic';
-$lang['REPLY_WITH_QUOTE'] = 'Reply with quote';
+$lang['POST_NEW_TOPIC'] = '发布新的主题';
+$lang['POST_NEW_RELEASE'] = '发布新的种子';
+$lang['POST_REGULAR_TOPIC'] = '发布定期话题';
+$lang['REPLY_TO_TOPIC'] = '回复主题';
+$lang['REPLY_WITH_QUOTE'] = '引用回复';
 
-$lang['CLICK_RETURN_TOPIC'] = 'Click %sHere%s to return to the topic'; // %s's here are for uris, do not remove!
-$lang['CLICK_RETURN_LOGIN'] = 'Click %sHere%s to try again';
-$lang['CLICK_RETURN_FORUM'] = 'Click %sHere%s to return to the forum';
-$lang['CLICK_VIEW_MESSAGE'] = 'Click %sHere%s to return to your message';
-$lang['CLICK_RETURN_MODCP'] = 'Click %sHere%s to return to Moderator Control Panel';
-$lang['CLICK_RETURN_GROUP'] = 'Click %sHere%s to return to group information';
+$lang['CLICK_RETURN_TOPIC'] = '点击%sHere%s返回到主题'; // %s's here are for uris, do not remove!
+$lang['CLICK_RETURN_LOGIN'] = '点击%sHere%s再试一次';
+$lang['CLICK_RETURN_FORUM'] = '单击 %sHere%s 返回到论坛';
+$lang['CLICK_VIEW_MESSAGE'] = '单击 %sHere%s 返回到您的邮件';
+$lang['CLICK_RETURN_MODCP'] = '单击 %sHere%s 返回到版主控制面板';
+$lang['CLICK_RETURN_GROUP'] = '单击 %sHere%s 返回小组信息';
 
-$lang['ADMIN_PANEL'] = 'Go to Administration Panel';
-$lang['ALL_CACHE'] = 'All cache';
-$lang['ALL_CACHE_CLEARED'] = 'Cache has been cleared';
-$lang['ALL_TEMPLATE_CLEARED'] = 'Template cache has been cleared';
-$lang['DATASTORE'] = 'Datastore';
-$lang['DATASTORE_CLEARED'] = 'Datastore has been cleared';
-$lang['BOARD_DISABLE'] = 'Sorry, this forum is disabled. Try to come back later';
-$lang['BOARD_DISABLE_CRON'] = 'Forum is down for maintenance. Try to come back later';
-$lang['ADMIN_DISABLE'] = 'the forum is disabled by administrator, you can enable it at any time';
-$lang['ADMIN_DISABLE_CRON'] = 'forum locked by the trigger cron job, you can remove a lock at any time';
-$lang['ADMIN_DISABLE_TITLE'] = 'The forum is disabled';
-$lang['ADMIN_DISABLE_CRON_TITLE'] = 'Forum is down for maintenance';
-$lang['ADMIN_UNLOCK'] = 'Enable forum';
-$lang['ADMIN_UNLOCKED'] = 'Unlocked';
-$lang['ADMIN_UNLOCK_CRON'] = 'Remove lock';
+$lang['ADMIN_PANEL'] = '转到管理面板';
+$lang['ALL_CACHE'] = '所有缓存';
+$lang['ALL_CACHE_CLEARED'] = '缓存已被清除';
+$lang['ALL_TEMPLATE_CLEARED'] = '模板缓存已被清除';
+$lang['DATASTORE'] = '数据存储';
+$lang['DATASTORE_CLEARED'] = '数据存储已被清除';
+$lang['BOARD_DISABLE'] = '对不起，本论坛被禁用。请试着以后再来。';
+$lang['BOARD_DISABLE_CRON'] = '论坛正在维护。请试着以后再来。';
+$lang['ADMIN_DISABLE'] = '论坛已被管理员禁用，您可以在任何时候启用它';
+$lang['ADMIN_DISABLE_CRON'] = '论坛由定时的 cron 作业锁定，您可以随时解锁';
+$lang['ADMIN_DISABLE_TITLE'] = '论坛被禁用';
+$lang['ADMIN_DISABLE_CRON_TITLE'] = '论坛正在维护';
+$lang['ADMIN_UNLOCK'] = '启用论坛';
+$lang['ADMIN_UNLOCKED'] = '已解锁';
+$lang['ADMIN_UNLOCK_CRON'] = '解锁';
 
-$lang['LOADING'] = 'Loading...';
-$lang['JUMPBOX_TITLE'] = 'Select forum';
-$lang['DISPLAYING_OPTIONS'] = 'Displaying options';
+$lang['LOADING'] = '载入中...';
+$lang['JUMPBOX_TITLE'] = '选择论坛';
+$lang['DISPLAYING_OPTIONS'] = '显示选项';
 
 // Global Header strings
-$lang['REGISTERED_USERS'] = 'Registered Users:';
-$lang['BROWSING_FORUM'] = 'Users browsing this forum:';
-$lang['ONLINE_USERS'] = 'In total there are <b>%1$d</b> users online: %2$d registered and %3$d guests';
-$lang['RECORD_ONLINE_USERS'] = 'The most users ever online was <b>%s</b> on %s'; // first %s = number of users, second %s is the date.
+$lang['REGISTERED_USERS'] = '注册的用户︰';
+$lang['BROWSING_FORUM'] = '正在浏览论坛的用户：';
+$lang['ONLINE_USERS'] = '总共有 <b>%1$d</b> 位用户在线︰ %2$d 位注册用户和 %3$d 位访客';
+$lang['RECORD_ONLINE_USERS'] = '最多同时在线用户数：<b>%s</b>，在%s'; // first %s = number of users, second %s is the date.
 
-$lang['ONLINE_ADMIN'] = 'Administrator';
-$lang['ONLINE_MOD'] = 'Moderator';
-$lang['ONLINE_GROUP_MEMBER'] = 'Group member';
+$lang['ONLINE_ADMIN'] = '管理员';
+$lang['ONLINE_MOD'] = '版主';
+$lang['ONLINE_GROUP_MEMBER'] = '组成员';
 
-$lang['CURRENT_TIME'] = 'Current time is: <span class="tz_time">%s</span>';
+$lang['CURRENT_TIME'] = '当前时间是︰ <span class="tz_time">%s</span>';
 
-$lang['SEARCH_NEW'] = 'View newest posts';
-$lang['SEARCH_SELF'] = 'My posts';
-$lang['SEARCH_SELF_BY_LAST'] = 'last post time';
-$lang['SEARCH_SELF_BY_MY'] = 'my post time';
-$lang['SEARCH_UNANSWERED'] = 'View unanswered posts';
-$lang['SEARCH_UNANSWERED_SHORT'] = 'unanswered';
-$lang['SEARCH_LATEST'] = 'Latest topics';
-$lang['LATEST_RELEASES'] = 'Latest releases';
+$lang['SEARCH_NEW'] = '查看最新帖子';
+$lang['SEARCH_SELF'] = '我的帖子';
+$lang['SEARCH_SELF_BY_LAST'] = '最后发布时间';
+$lang['SEARCH_SELF_BY_MY'] = '我的发布时间';
+$lang['SEARCH_UNANSWERED'] = '查看未回复的帖子';
+$lang['SEARCH_UNANSWERED_SHORT'] = '未回答';
+$lang['SEARCH_LATEST'] = '最新主题';
+$lang['LATEST_RELEASES'] = '最新版本';
 
-$lang['REGISTER'] = 'Register';
-$lang['PROFILE'] = 'Profile';
-$lang['EDIT_PROFILE'] = 'Edit profile';
-$lang['SEARCH'] = 'Search';
-$lang['MEMBERLIST'] = 'Memberlist';
-$lang['USERGROUPS'] = 'Usergroups';
-$lang['LASTPOST'] = 'Last Post';
-$lang['MODERATOR'] = 'Moderator';
-$lang['MODERATORS'] = 'Moderators';
+$lang['REGISTER'] = '注册';
+$lang['PROFILE'] = '档案';
+$lang['EDIT_PROFILE'] = '编辑档案';
+$lang['SEARCH'] = '搜索';
+$lang['MEMBERLIST'] = '成员列表';
+$lang['USERGROUPS'] = '用户组';
+$lang['LASTPOST'] = '最后发表';
+$lang['MODERATOR'] = '版主';
+$lang['MODERATORS'] = '版主';
 $lang['TERMS'] = '条款';
-$lang['NOTHING_HAS_CHANGED'] = 'Nothing has been changed';
+$lang['NOTHING_HAS_CHANGED'] = '没有任何改动';
 
 // Stats block text
-$lang['POSTED_TOPICS_TOTAL'] = 'Our users have posted a total of <b>%s</b> topics'; // Number of topics
-$lang['POSTED_ARTICLES_ZERO_TOTAL'] = 'Our users have posted a total of <b>0</b> articles'; // Number of posts
-$lang['POSTED_ARTICLES_TOTAL'] = 'Our users have posted a total of <b>%s</b> articles'; // Number of posts
-$lang['REGISTERED_USERS_ZERO_TOTAL'] = 'We have <b>0</b> registered users'; // # registered users
-$lang['REGISTERED_USERS_TOTAL'] = 'We have <b>%s</b> registered users'; // # registered users
-$lang['USERS_TOTAL_GENDER'] = 'Boys: <b>%d</b>, Girls: <b>%d</b>, Others: <b>%d</b>';
-$lang['NEWEST_USER'] = 'The newest registered user is <b>%s</b>'; // a href, username, /a
+$lang['POSTED_TOPICS_TOTAL'] = '我们的用户已经一共发布了 <b>%s</b> 个主题'; // Number of topics
+$lang['POSTED_ARTICLES_ZERO_TOTAL'] = '我们的用户已经一共发布了 <b>0</b> 篇文章'; // Number of posts
+$lang['POSTED_ARTICLES_TOTAL'] = '我们的用户已经一共发布了 <b>%s</b> 篇文章'; // Number of posts
+$lang['REGISTERED_USERS_ZERO_TOTAL'] = '我们有 <b>0</b> 个注册用户'; // # registered users
+$lang['REGISTERED_USERS_TOTAL'] = '我们有 <b>%s</b> 个注册用户'; // # registered users
+$lang['USERS_TOTAL_GENDER'] = '男性：<b>%d</b>，女性：<b>%d</b>，其他：<b>%d</b>';
+$lang['NEWEST_USER'] = '最新的注册用户是<b>%s</b>'; // a href, username, /a
 
 // Tracker stats
-$lang['TORRENTS_STAT'] = 'Torrents: <b style="color: blue;">%s</b>,&nbsp; Total size: <b>%s</b>'; // first %s = number of torrents, second %s is the total size.
-$lang['PEERS_STAT'] = 'Peers: <b>%s</b>,&nbsp; Seeders: <b class="seedmed">%s</b>,&nbsp; Leechers: <b class="leechmed">%s</b>'; // first %s = number of peers, second %s = number of seeders,  third %s = number of leechers.
-$lang['SPEED_STAT'] = 'Total speed: <b>%s</b>&nbsp;'; // %s = total speed.
+$lang['TORRENTS_STAT'] = '种子数︰ <b style="color: blue;">%s</b>，&nbsp; 总大小︰ <b>%s</b>'; // first %s = number of torrents, second %s is the total size.
+$lang['PEERS_STAT'] = '上传者︰ <b>%s</b>，&nbsp; 做种者︰ <b class="seedmed"> %s</b>，&nbsp; 下载者︰ <b class="leechmed"> %s</b>'; // first %s = number of peers, second %s = number of seeders,  third %s = number of leechers.
+$lang['SPEED_STAT'] = '总速度︰ <b>%s</b>&nbsp;'; // %s = total speed.
 
-$lang['NO_NEW_POSTS_LAST_VISIT'] = 'No new posts since your last visit';
-$lang['NO_NEW_POSTS'] = 'No new posts';
-$lang['NEW_POSTS'] = 'New posts';
-$lang['NEW_POST'] = 'New post';
-$lang['NO_NEW_POSTS_HOT'] = 'No new posts [ Popular ]';
-$lang['NEW_POSTS_HOT'] = 'New posts [ Popular ]';
-$lang['NEW_POSTS_LOCKED'] = 'New posts [ Locked ]';
-$lang['FORUM_LOCKED_MAIN'] = 'Forum is locked';
+$lang['NO_NEW_POSTS_LAST_VISIT'] = '自你上次登陆以来没有新回复';
+$lang['NO_NEW_POSTS'] = '没有新回复';
+$lang['NEW_POSTS'] = '新回复';
+$lang['NEW_POST'] = '新回复';
+$lang['NO_NEW_POSTS_HOT'] = '没有新的热门回复';
+$lang['NEW_POSTS_HOT'] = '热门回复';
+$lang['NEW_POSTS_LOCKED'] = '新回复[上锁的]';
+$lang['FORUM_LOCKED_MAIN'] = '论坛已锁定';
 
 // Login
-$lang['ENTER_PASSWORD'] = 'Please enter username and password to log in.';
-$lang['LOGIN'] = 'Log in';
-$lang['LOGOUT'] = 'Log out';
-$lang['CONFIRM_LOGOUT'] = 'Are you sure you want to log out?';
+$lang['ENTER_PASSWORD'] = '请输入用户名和密码才能登录。';
+$lang['LOGIN'] = '登录';
+$lang['LOGOUT'] = '登出';
+$lang['CONFIRM_LOGOUT'] = '您确定要登出？';
 
-$lang['FORGOTTEN_PASSWORD'] = 'Password forgotten?';
-$lang['AUTO_LOGIN'] = 'Log me on automatically';
-$lang['ERROR_LOGIN'] = 'The username you submitted is incorrect or invalid, or the password is invalid.';
-$lang['REMEMBER'] = 'Remember';
-$lang['USER_WELCOME'] = 'Welcome,';
+$lang['FORGOTTEN_PASSWORD'] = '忘记密码了吗？';
+$lang['AUTO_LOGIN'] = '自动登录';
+$lang['ERROR_LOGIN'] = '您提交的用户名不正确或无效，或密码无效。';
+$lang['REMEMBER'] = '记住';
+$lang['USER_WELCOME'] = '欢迎，';
 
 // Index page
-$lang['HOME'] = 'Home';
-$lang['NO_POSTS'] = 'No posts';
-$lang['NO_FORUMS'] = 'This board has no forums';
+$lang['HOME'] = '首页';
+$lang['NO_POSTS'] = '没有回复';
+$lang['NO_FORUMS'] = '这个版块没有论坛';
 
-$lang['PRIVATE_MESSAGE'] = 'Private Message';
-$lang['PRIVATE_MESSAGES'] = 'Private Messages';
-$lang['WHOSONLINE'] = 'Who is online';
+$lang['PRIVATE_MESSAGE'] = '私人消息';
+$lang['PRIVATE_MESSAGES'] = '私人消息';
+$lang['WHOSONLINE'] = '谁在线';
 
-$lang['MARK_ALL_FORUMS_READ'] = 'Flag all forums as read';
-$lang['FORUMS_MARKED_READ'] = 'All forums flagged as read';
+$lang['MARK_ALL_FORUMS_READ'] = '标记所有论坛为已读';
+$lang['FORUMS_MARKED_READ'] = '所有论坛已标记为已读';
 
-$lang['LATEST_NEWS'] = 'Latest news';
-$lang['NETWORK_NEWS'] = 'Network news';
-$lang['SUBFORUMS'] = 'Subforums';
+$lang['LATEST_NEWS'] = '最新新闻';
+$lang['NETWORK_NEWS'] = '网络新闻';
+$lang['SUBFORUMS'] = '子论坛';
 
 // Viewforum
-$lang['VIEW_FORUM'] = 'View Forum';
+$lang['VIEW_FORUM'] = '查看论坛';
 
-$lang['FORUM_NOT_EXIST'] = 'The forum you selected does not exist.';
-$lang['REACHED_ON_ERROR'] = 'You have reached this page in error.';
-$lang['ERROR_PORNO_FORUM'] = 'This type of forums (18+) was hidden in your profile by you';
+$lang['FORUM_NOT_EXIST'] = '你所选择的论坛不存在。';
+$lang['REACHED_ON_ERROR'] = '您到达了这个页面错误。';
+$lang['ERROR_PORNO_FORUM'] = '根据您的个人资料设定，成人论坛已被隐藏';
 
-$lang['DISPLAY_TOPICS'] = 'Display topics';
-$lang['ALL_TOPICS'] = 'All Topics';
-$lang['MODERATE_FORUM'] = 'Moderate this forum';
-$lang['TITLE_SEARCH_HINT'] = 'search title...';
+$lang['DISPLAY_TOPICS'] = '显示主题';
+$lang['ALL_TOPICS'] = '全部主题';
+$lang['MODERATE_FORUM'] = '修改这个论坛';
+$lang['TITLE_SEARCH_HINT'] = '搜索标题...';
 
-$lang['TOPIC_ANNOUNCEMENT'] = 'Announcement:';
-$lang['TOPIC_STICKY'] = 'Sticky:';
-$lang['TOPIC_MOVED'] = 'Moved:';
-$lang['TOPIC_POLL'] = '[ Poll ]';
+$lang['TOPIC_ANNOUNCEMENT'] = '公告：';
+$lang['TOPIC_STICKY'] = '置顶：';
+$lang['TOPIC_MOVED'] = '被移动的：';
+$lang['TOPIC_POLL'] = '[投票]';
 
-$lang['MARK_TOPICS_READ'] = 'Mark all topics read';
-$lang['TOPICS_MARKED_READ'] = 'The topics for this forum have just been marked read';
+$lang['MARK_TOPICS_READ'] = '标记所有主题为已读';
+$lang['TOPICS_MARKED_READ'] = '论坛中所有主题都已被标记为已读';
 
-$lang['RULES_POST_CAN'] = 'You <b>can</b> post new topics in this forum';
-$lang['RULES_POST_CANNOT'] = 'You <b>cannot</b> post new topics in this forum';
-$lang['RULES_REPLY_CAN'] = 'You <b>can</b> reply to topics in this forum';
-$lang['RULES_REPLY_CANNOT'] = 'You <b>cannot</b> reply to topics in this forum';
-$lang['RULES_EDIT_CAN'] = 'You <b>can</b> edit your posts in this forum';
-$lang['RULES_EDIT_CANNOT'] = 'You <b>cannot</b> edit your posts in this forum';
-$lang['RULES_DELETE_CAN'] = 'You <b>can</b> delete your posts in this forum';
-$lang['RULES_DELETE_CANNOT'] = 'You <b>cannot</b> delete your posts in this forum';
-$lang['RULES_VOTE_CAN'] = 'You <b>can</b> vote in polls in this forum';
-$lang['RULES_VOTE_CANNOT'] = 'You <b>cannot</b> vote in polls in this forum';
-$lang['RULES_MODERATE'] = 'You <b>can</b> moderate this forum';
+$lang['RULES_POST_CAN'] = '你 <b>可以</b> 在这个论坛发布新主题';
+$lang['RULES_POST_CANNOT'] = '你 <b>不能</b> 在这个论坛发布新主题';
+$lang['RULES_REPLY_CAN'] = '你 <b>可以</b> 回复在本论坛的主题';
+$lang['RULES_REPLY_CANNOT'] = '你 <b>不能</b> 回复在本论坛的主题';
+$lang['RULES_EDIT_CAN'] = '您 <b>可以</b> 编辑您在本论坛的帖子';
+$lang['RULES_EDIT_CANNOT'] = '你 <b>不能</b> 编辑您在本论坛的帖子';
+$lang['RULES_DELETE_CAN'] = '你 <b>可以</b> 删除你在这个论坛中的帖子';
+$lang['RULES_DELETE_CANNOT'] = '你 <b>不能</b> 删除你在这个论坛中的帖子';
+$lang['RULES_VOTE_CAN'] = '你 <b>可以</b> 在本论坛参与投票';
+$lang['RULES_VOTE_CANNOT'] = '你 <b>不能</b> 在本论坛参与投票';
+$lang['RULES_MODERATE'] = '你 <b>可以</b> 管理这个论坛';
 
-$lang['NO_TOPICS_POST_ONE'] = 'There are no posts in this forum.<br />Click on the <b>Post New Topic</b> link on this page to post one.';
+$lang['NO_TOPICS_POST_ONE'] = '论坛中没有帖子。<br />单击 <b>发布新的主题</b> 链接来发个新帖。';
 
 // Viewtopic
-$lang['VIEW_TOPIC'] = 'View topic';
+$lang['VIEW_TOPIC'] = '查看主题';
 
-$lang['GUEST'] = 'Guest';
-$lang['POST_SUBJECT'] = 'Post subject';
-$lang['SUBMIT_VOTE'] = 'Submit vote';
-$lang['VIEW_RESULTS'] = 'View results';
+$lang['GUEST'] = '访客';
+$lang['POST_SUBJECT'] = '发表主题';
+$lang['SUBMIT_VOTE'] = '提交投票';
+$lang['VIEW_RESULTS'] = '查看结果';
 
-$lang['NO_NEWER_TOPICS'] = 'There are no newer topics in this forum';
-$lang['NO_OLDER_TOPICS'] = 'There are no older topics in this forum';
-$lang['TOPIC_POST_NOT_EXIST'] = 'The topic or post you requested does not exist';
-$lang['NO_POSTS_TOPIC'] = 'There are no posts in this topic';
+$lang['NO_NEWER_TOPICS'] = '论坛上没有新的帖子。';
+$lang['NO_OLDER_TOPICS'] = '论坛上没有更旧的帖子。';
+$lang['TOPIC_POST_NOT_EXIST'] = '您请求的主题或回复不存在';
+$lang['NO_POSTS_TOPIC'] = '本主题没有回复';
 
-$lang['DISPLAY_POSTS'] = 'Display posts';
-$lang['ALL_POSTS'] = 'All Posts';
-$lang['NEWEST_FIRST'] = 'Newest First';
-$lang['OLDEST_FIRST'] = 'Oldest First';
+$lang['DISPLAY_POSTS'] = '显示回复';
+$lang['ALL_POSTS'] = '所有帖子';
+$lang['NEWEST_FIRST'] = '按照时间先后降序排序';
+$lang['OLDEST_FIRST'] = '按照时间先后升序排序';
 
-$lang['BACK_TO_TOP'] = 'Back to top';
+$lang['BACK_TO_TOP'] = '回到顶部';
 
-$lang['READ_PROFILE'] = 'View user\'s profile';
-$lang['VISIT_WEBSITE'] = 'Visit poster\'s website';
-$lang['VIEW_IP'] = 'View poster IP address';
-$lang['MODERATE_POST'] = 'Moderate posts';
+$lang['READ_PROFILE'] = '查看用户的个人资料';
+$lang['VISIT_WEBSITE'] = '访问发帖者的网站';
+$lang['VIEW_IP'] = '查看发帖者的IP';
+$lang['MODERATE_POST'] = '修改帖子';
 $lang['DELETE_POST'] = 'Delete this post';
 
 $lang['WROTE'] = 'wrote'; // proceeds the username and is followed by the quoted text
@@ -318,7 +318,7 @@ $lang['TOPIC_REVIEW'] = 'Topic review';
 
 $lang['NO_POST_MODE'] = 'No post mode selected'; // If posting.php is called without a mode (newtopic/reply/delete/etc, shouldn't be shown normaly)
 
-$lang['POST_A_NEW_TOPIC'] = 'Post new topic';
+$lang['POST_A_NEW_TOPIC'] = '发布新的主题';
 $lang['POST_A_REPLY'] = 'Post new reply';
 $lang['POST_TOPIC_AS'] = 'Post topic as';
 $lang['EDIT_POST'] = 'Edit post';
@@ -340,44 +340,44 @@ $lang['OPTIONS'] = 'Options';
 
 $lang['POST_ANNOUNCEMENT'] = 'Announcement';
 $lang['POST_STICKY'] = 'Sticky';
-$lang['POST_NORMAL'] = 'Normal';
-$lang['POST_DOWNLOAD'] = 'Download';
+$lang['POST_NORMAL'] = '正常';
+$lang['POST_DOWNLOAD'] = '下载';
 
-$lang['CONFIRM_DELETE'] = 'Are you sure you want to delete this post?';
-$lang['CONFIRM_DELETE_POLL'] = 'Are you sure you want to delete this poll?';
+$lang['CONFIRM_DELETE'] = '您确定要删除此贴吗？';
+$lang['CONFIRM_DELETE_POLL'] = '您确定要删除这项调查吗？';
 
-$lang['FLOOD_ERROR'] = 'You cannot make another post so soon after your last; please try again in a short while';
-$lang['EMPTY_SUBJECT'] = 'You must specify a subject';
-$lang['EMPTY_MESSAGE'] = 'You must enter a message';
-$lang['FORUM_LOCKED'] = 'This forum is locked: you cannot post, reply to, or edit topics';
-$lang['TOPIC_LOCKED'] = 'This topic is locked: you cannot edit posts or make replies';
-$lang['TOPIC_LOCKED_SHORT'] = 'Topic locked';
-$lang['NO_POST_ID'] = 'You must select a post to edit';
-$lang['NO_TOPIC_ID'] = 'You must select a topic to reply to';
-$lang['NO_VALID_MODE'] = 'You can only post, reply, edit, or quote messages. Please return and try again';
-$lang['NO_SUCH_POST'] = 'There is no such post. Please return and try again';
-$lang['EDIT_OWN_POSTS'] = 'Sorry, but you can only edit your own posts';
-$lang['DELETE_OWN_POSTS'] = 'Sorry, but you can only delete your own posts';
-$lang['CANNOT_DELETE_REPLIED'] = 'Sorry, but you may not delete posts that have been replied to';
-$lang['CANNOT_DELETE_POLL'] = 'Sorry, but you cannot delete an active poll';
-$lang['EMPTY_POLL_TITLE'] = 'You must enter a title for your poll';
-$lang['TO_FEW_POLL_OPTIONS'] = 'You must enter at least two poll options';
-$lang['TO_MANY_POLL_OPTIONS'] = 'You have tried to enter too many poll options';
-$lang['POST_HAS_NO_POLL'] = 'This post has no poll';
-$lang['ALREADY_VOTED'] = 'You have already voted in this poll';
-$lang['NO_VOTE_OPTION'] = 'You must specify an option when voting';
-$lang['LOCKED_WARN'] = 'You posted into locked topic!';
+$lang['FLOOD_ERROR'] = '您不能快速地连续发帖；请稍等一会再试。';
+$lang['EMPTY_SUBJECT'] = '您必须指定一个主题';
+$lang['EMPTY_MESSAGE'] = '您必须输入一条消息';
+$lang['FORUM_LOCKED'] = '这个论坛被锁定︰ 您不能发布，回复，或编辑主题';
+$lang['TOPIC_LOCKED'] = '本主题已被锁定︰ 您不能编辑帖子或作出回复';
+$lang['TOPIC_LOCKED_SHORT'] = '锁定的主题';
+$lang['NO_POST_ID'] = '您必须选择一个帖子来编辑';
+$lang['NO_TOPIC_ID'] = '您必须选择一个主题来回复';
+$lang['NO_VALID_MODE'] = '你只可以发布、 回复、 编辑或引用消息。请返回并再试一次';
+$lang['NO_SUCH_POST'] = '没有这个帖子。请返回并再试一次';
+$lang['EDIT_OWN_POSTS'] = '抱歉，您只能编辑您自己的帖子';
+$lang['DELETE_OWN_POSTS'] = '抱歉，您只能删除您自己的帖子';
+$lang['CANNOT_DELETE_REPLIED'] = '抱歉，您不能删除已被回复的帖子';
+$lang['CANNOT_DELETE_POLL'] = '抱歉，您不能删除进行中的调查';
+$lang['EMPTY_POLL_TITLE'] = '你必须为你的投票输入一个标题';
+$lang['TO_FEW_POLL_OPTIONS'] = '您必须输入至少两个投票选项';
+$lang['TO_MANY_POLL_OPTIONS'] = '您试图输入过多投票选项';
+$lang['POST_HAS_NO_POLL'] = '这个帖子没有投票';
+$lang['ALREADY_VOTED'] = '你已经在这里投过票了';
+$lang['NO_VOTE_OPTION'] = '投票时，您必须指定一个选项';
+$lang['LOCKED_WARN'] = '你回复到锁定的主题 ！';
 
-$lang['ADD_POLL'] = 'Add a poll';
-$lang['ADD_POLL_EXPLAIN'] = 'If you do not want to add a poll to your topic, leave the fields blank.';
-$lang['POLL_QUESTION'] = 'Poll question';
-$lang['POLL_OPTION'] = 'Poll option';
-$lang['ADD_OPTION'] = 'Add option';
-$lang['UPDATE'] = 'Update';
-$lang['POLL_FOR'] = 'Run poll for';
-$lang['DAYS'] = 'Days';
-$lang['POLL_FOR_EXPLAIN'] = '[ Enter 0 or leave blank for a never-ending poll ]';
-$lang['DELETE_POLL'] = 'Delete poll';
+$lang['ADD_POLL'] = '添加投票';
+$lang['ADD_POLL_EXPLAIN'] = '如果你不想让你的主题添加一项调查，将字段留空。';
+$lang['POLL_QUESTION'] = '投票问题';
+$lang['POLL_OPTION'] = '投票观点';
+$lang['ADD_OPTION'] = '增加观点';
+$lang['UPDATE'] = '更新';
+$lang['POLL_FOR'] = '投票';
+$lang['DAYS'] = '天';
+$lang['POLL_FOR_EXPLAIN'] = '[输入 0 或留空以进行无限制时间的投票]';
+$lang['DELETE_POLL'] = '删除投票';
 
 $lang['MAX_SMILIES_PER_POST'] = 'Emoticons limit of %s emoticons exceeded.';
 
@@ -414,7 +414,7 @@ $lang['COLOR_BLACK'] = 'Black';
 $lang['FONT_SIZE'] = 'Font size';
 $lang['FONT_TINY'] = 'Tiny';
 $lang['FONT_SMALL'] = 'Small';
-$lang['FONT_NORMAL'] = 'Normal';
+$lang['FONT_NORMAL'] = '正常';
 $lang['FONT_LARGE'] = 'Large';
 $lang['FONT_HUGE'] = 'Huge';
 
@@ -683,10 +683,10 @@ $lang['NOT_FOUND'] = 'File not found';
 $lang['SORT'] = 'Sort';
 $lang['SORT_TOP_TEN'] = 'Top Ten Posters';
 $lang['SORT_JOINED'] = 'Joined Date';
-$lang['SORT_USERNAME'] = 'Username';
+$lang['SORT_USERNAME'] = '用户名';
 $lang['SORT_LOCATION'] = 'Location';
 $lang['SORT_POSTS'] = 'Total posts';
-$lang['SORT_EMAIL'] = 'Email';
+$lang['SORT_EMAIL'] = '邮箱';
 $lang['SORT_WEBSITE'] = 'Website';
 $lang['ASC'] = 'Ascending';
 $lang['DESC'] = 'Descending';
@@ -806,8 +806,8 @@ $lang['SORT_BY'] = 'Sort by';
 $lang['SORT_TIME'] = 'Post Time';
 $lang['SORT_POST_SUBJECT'] = 'Post Subject';
 $lang['SORT_TOPIC_TITLE'] = 'Topic Title';
-$lang['SORT_AUTHOR'] = 'Author';
-$lang['SORT_FORUM'] = 'Forum';
+$lang['SORT_AUTHOR'] = '作者';
+$lang['SORT_FORUM'] = '论坛';
 
 $lang['DISPLAY_RESULTS_AS'] = 'Display results as';
 $lang['ALL_AVAILABLE'] = 'All available';
@@ -987,7 +987,7 @@ $lang['SORRY_AUTH_VIEW_ATTACH'] = 'Sorry but you are not authorized to view or d
 
 // Viewtopic -> Display of Attachments
 $lang['DESCRIPTION'] = 'Description'; // used in Administration Panel too...
-$lang['DOWNLOAD'] = 'Download'; // this Language Variable is defined in admin.php too, but we are unable to access it from the main Language File
+$lang['DOWNLOAD'] = '下载'; // this Language Variable is defined in admin.php too, but we are unable to access it from the main Language File
 $lang['FILESIZE'] = 'Filesize';
 $lang['VIEWED'] = 'Viewed';
 $lang['DOWNLOAD_NUMBER'] = '%d times'; // replace %d with count
@@ -1089,7 +1089,7 @@ $lang['SPEED_UP'] = 'Speed Up';
 $lang['SPEED_DOWN'] = 'Speed Down';
 
 $lang['SEEDERS'] = 'Seeders';
-$lang['LEECHERS'] = 'Leechers';
+$lang['LEECHERS'] = '下载者';
 $lang['RELEASING'] = 'Self';
 $lang['SEEDING'] = 'Seed';
 $lang['LEECHING'] = 'Leech';
@@ -1143,7 +1143,7 @@ $lang['TOR_AUTH_SENT_COMMENT'] = ' &middot; <span class="seed bold">The informat
 
 $lang['BT_TOPIC_TITLE'] = 'Topic title';
 $lang['BT_SEEDER_LAST_SEEN'] = 'Seed last seen';
-$lang['BT_SORT_FORUM'] = 'Forum';
+$lang['BT_SORT_FORUM'] = '论坛';
 $lang['SIZE'] = 'Size';
 $lang['PIECE_LENGTH'] = 'Piece length';
 $lang['COMPLETED'] = 'Completed';
@@ -1153,8 +1153,8 @@ $lang['DELETE_MOVE_TORRENT'] = 'Delete and move topic';
 $lang['DL_TORRENT'] = 'Download .torrent';
 $lang['BT_LAST_POST'] = 'Last post';
 $lang['BT_CREATED'] = 'Topic posted';
-$lang['BT_REPLIES'] = 'Replies';
-$lang['BT_VIEWS'] = 'Views';
+$lang['BT_REPLIES'] = '回复';
+$lang['BT_VIEWS'] = '观点';
 
 // Gold/Silver releases
 $lang['GOLD'] = 'Gold';
@@ -1182,9 +1182,9 @@ $lang['BT_ONLY_ACTIVE'] = 'Active';
 $lang['BT_ONLY_MY'] = 'My releases';
 $lang['BT_SEED_EXIST'] = 'Seeder exist';
 $lang['BT_ONLY_NEW'] = 'New from last visit';
-$lang['BT_SHOW_CAT'] = 'Category';
-$lang['BT_SHOW_FORUM'] = 'Forum';
-$lang['BT_SHOW_AUTHOR'] = 'Author';
+$lang['BT_SHOW_CAT'] = '分类';
+$lang['BT_SHOW_FORUM'] = '论坛';
+$lang['BT_SHOW_AUTHOR'] = '作者';
 $lang['BT_SHOW_SPEED'] = 'Speed';
 $lang['SEED_NOT_SEEN'] = 'Seeder not seen';
 $lang['TITLE_MATCH'] = 'Title match';
@@ -1209,12 +1209,12 @@ $lang['DL_LIST_AND_TORRENT_ACTIVITY'] = 'DL-List and Torrent activity';
 $lang['DLWILL'] = 'Will download';
 $lang['DLDOWN'] = 'Downloading';
 $lang['DLCOMPLETE'] = 'Complete';
-$lang['DLCANCEL'] = 'Cancel';
+$lang['DLCANCEL'] = '取消';
 
 $lang['DL_LIST_DEL'] = 'Clear DL-List';
 $lang['DL_LIST_DEL_CONFIRM'] = 'Delete DL-List for this topic?';
 $lang['SHOW_DL_LIST'] = 'Show DL-List';
-$lang['SET_DL_STATUS'] = 'Download';
+$lang['SET_DL_STATUS'] = '下载';
 $lang['UNSET_DL_STATUS'] = 'Not Download';
 $lang['TOPICS_DOWN_SETS'] = 'Topic status changed to <b>Download</b>';
 $lang['TOPICS_DOWN_UNSETS'] = '<b>Download</b> status removed';
@@ -1322,7 +1322,7 @@ $lang['DELETE_POSTS_SUCCESFULLY'] = 'The selected posts have been successfully r
 //ts
 $lang['TOPICS_ANNOUNCEMENT'] = 'Announcements';
 $lang['TOPICS_STICKY'] = 'Stickies';
-$lang['TOPICS_NORMAL'] = 'Topics';
+$lang['TOPICS_NORMAL'] = '主题';
 
 //dpc
 $lang['DOUBLE_POST_ERROR'] = 'You cannot make another post with the exact same text as your last.';
@@ -1538,7 +1538,7 @@ $lang['POST'] = 'Post';
 $lang['OLD'] = 'Old';
 
 // DL-List
-$lang['DL_USER'] = 'Username';
+$lang['DL_USER'] = '用户名';
 $lang['DL_PERCENT'] = 'Complete percent';
 $lang['DL_UL'] = 'UL';
 $lang['DL_DL'] = 'DL';
@@ -1616,13 +1616,13 @@ $lang['ACTIONS_LOG'] = 'Report on action';
 //Welcome page
 $lang['IDX_BROWSER_NSP_FRAME'] = 'Sorry, your browser doesn\'t seem to support frames';
 $lang['IDX_CLEAR_CACHE'] = 'Clear Cache:';
-$lang['IDX_CLEAR_DATASTORE'] = 'Datastore';
+$lang['IDX_CLEAR_DATASTORE'] = '数据存储';
 $lang['IDX_CLEAR_TEMPLATES'] = 'Templates';
 $lang['IDX_CLEAR_NEWNEWS'] = 'Net news';
 $lang['IDX_UPDATE'] = 'Update:';
 $lang['IDX_UPDATE_USER_LEVELS'] = 'User levels';
 $lang['IDX_SYNCHRONIZE'] = 'Synchronize:';
-$lang['IDX_SYNCHRONIZE_TOPICS'] = 'Topics';
+$lang['IDX_SYNCHRONIZE_TOPICS'] = '主题';
 $lang['IDX_SYNCHRONIZE_POSTCOUNT'] = 'User posts count';
 
 // Index
@@ -1723,7 +1723,7 @@ $lang['SIMPLE_PERMISSION'] = 'Simple Permissions';
 
 $lang['USER_LEVEL'] = 'User Level';
 $lang['AUTH_USER'] = 'User';
-$lang['AUTH_ADMIN'] = 'Administrator';
+$lang['AUTH_ADMIN'] = '管理员';
 $lang['GROUP_MEMBERSHIPS'] = 'Usergroup memberships';
 $lang['USERGROUP_MEMBERS'] = 'This group has the following members';
 
@@ -1843,7 +1843,7 @@ $lang['FORUM_DELETE_EXPLAIN'] = 'The form below will allow you to delete a forum
 $lang['CATEGORY_DELETE'] = 'Delete Category';
 
 $lang['STATUS_LOCKED'] = 'Locked';
-$lang['STATUS_UNLOCKED'] = 'Unlocked';
+$lang['STATUS_UNLOCKED'] = '已解锁';
 $lang['FORUM_SETTINGS'] = 'General Forum Settings';
 $lang['FORUM_NAME'] = 'Forum name';
 $lang['FORUM_DESC'] = 'Description';
@@ -2255,8 +2255,8 @@ $lang['SORT_POSTTIME'] = 'Post Time';
 
 // View Types
 $lang['VIEW_STATISTIC'] = 'Statistics';
-$lang['VIEW_SEARCH'] = 'Search';
-$lang['VIEW_USERNAME'] = 'Username';
+$lang['VIEW_SEARCH'] = '搜索';
+$lang['VIEW_USERNAME'] = '用户名';
 $lang['VIEW_ATTACHMENTS'] = 'Attachments';
 
 // Successfully updated
@@ -2571,7 +2571,7 @@ $lang['LOG_ACTION']['LOG_TYPE'] = array(
 
 $lang['ACTS_LOG_ALL_ACTIONS'] = 'All actions';
 $lang['ACTS_LOG_SEARCH_OPTIONS'] = 'Actions Log: Search options';
-$lang['ACTS_LOG_FORUM'] = 'Forum';
+$lang['ACTS_LOG_FORUM'] = '论坛';
 $lang['ACTS_LOG_ACTION'] = 'Action';
 $lang['ACTS_LOG_USER'] = 'User';
 $lang['ACTS_LOG_LOGS_FROM'] = 'Logs from ';
@@ -2580,8 +2580,8 @@ $lang['ACTS_LOG_DAYS_BACK'] = 'days back';
 $lang['ACTS_LOG_TOPIC_MATCH'] = 'Topic title match';
 $lang['ACTS_LOG_SORT_BY'] = 'Sort by';
 $lang['ACTS_LOG_LOGS_ACTION'] = 'Action';
-$lang['ACTS_LOG_USERNAME'] = 'Username';
-$lang['ACTS_LOG_TIME'] = 'Time';
+$lang['ACTS_LOG_USERNAME'] = '用户名';
+$lang['ACTS_LOG_TIME'] = '时间';
 $lang['ACTS_LOG_INFO'] = 'Info';
 $lang['ACTS_LOG_FILTER'] = 'Filter';
 $lang['ACTS_LOG_TOPICS'] = 'Topics:';
