@@ -1077,7 +1077,7 @@ $lang['BT_REGISTERED'] = 'Торрент зарегистрирован на т�
 $lang['INVALID_ANN_URL'] = 'Неправильный Аnnounce URL [%s]<br /><br />должен быть <b>%s</b>';
 $lang['PASSKEY_ERR_TOR_NOT_REG'] = 'Невозможно добавить passkey<br /><br />Торрент не зарегистрирован на трекере';
 $lang['PASSKEY_ERR_EMPTY'] = 'Невозможно добавить passkey<br /><br />Вам необходимо <a href="%s" target="_blank"><b>зайти в ваш форумный профиль</b></a> и сгенерировать passkey';
-$lang['BT_PASSKEY'] = 'Passkey';
+$lang['BT_PASSKEY'] = 'Пасскей';
 $lang['BT_GEN_PASSKEY'] = 'Создать новый';
 $lang['BT_PASSKEY_VIEW'] = 'Показать';
 $lang['BT_GEN_PASSKEY_NEW'] = "Внимание! После изменения нового passkey, вам необходимо будет заново скачать все активные торренты! \n Вы уверены, что хотите создать новый passkey?";
@@ -2315,7 +2315,7 @@ $lang['LIMIT_LEECH_IPS'] = 'Leeching IP ограничение';
 $lang['LIMIT_LEECH_IPS_EXPL'] = "скачивать можно не более чем с <i>хх</i> IP's<br />(0 - нет ограничений)";
 
 $lang['USE_AUTH_KEY_HEAD'] = 'Авторизация';
-$lang['USE_AUTH_KEY'] = 'Passkey';
+$lang['USE_AUTH_KEY'] = 'Пасскей';
 $lang['USE_AUTH_KEY_EXPL'] = 'включить авторизацию по passkey';
 $lang['AUTH_KEY_NAME'] = 'Имя ключа passkey';
 $lang['AUTH_KEY_NAME_EXPL'] = 'имя ключа, который будет добавляться в GET запросе к announce url для идентификации юзера';
@@ -2369,7 +2369,7 @@ $lang['BT_SHOW_DL_BUT_DOWN'] = $lang['DLDOWN'];
 $lang['BT_SHOW_DL_BUT_COMPL'] = $lang['DLCOMPLETE'];
 $lang['BT_SHOW_DL_BUT_CANCEL'] = $lang['DLCANCEL'];
 
-$lang['BT_ADD_AUTH_KEY_HEAD'] = 'Passkey';
+$lang['BT_ADD_AUTH_KEY_HEAD'] = 'Пасскей';
 $lang['BT_ADD_AUTH_KEY'] = 'Aвтодобавление passkey к торрент-файлам перед их скачиванием';
 
 $lang['BT_TOR_BROWSE_ONLY_REG_HEAD'] = 'Torrent browser (трекер)';

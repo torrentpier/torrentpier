@@ -171,7 +171,7 @@ class emailer
         // We now try and pull a subject from the email body ... if it exists,
         // do this here because the subject may contain a variable
         $drop_header = '';
-        $match = array();
+        $match = [];
         if (preg_match('#^(Subject:(.*?))$#m', $this->msg, $match)) {
             $this->subject = (trim($match[2]) != '') ? trim($match[2]) : (($this->subject != '') ? $this->subject : 'No Subject');
             $drop_header .= '[\r\n]*?' . preg_quote($match[1], '#');
@@ -179,12 +179,7 @@ class emailer
             $this->subject = (($this->subject != '') ? $this->subject : 'No Subject');
         }
 
-        if (preg_match('#^(Charset:(.*?))$#m', $this->msg, $match)) {
-            $this->encoding = (trim($match[2]) != '') ? trim($match[2]) : trim($bb_cfg['lang'][$userdata['user_lang']]['encoding']);
-            $drop_header .= '[\r\n]*?' . preg_quote($match[1], '#');
-        } else {
-            $this->encoding = trim($bb_cfg['lang'][$userdata['user_lang']]['encoding']);
-        }
+        $this->encoding = trim($bb_cfg['lang'][$userdata['user_lang']]['encoding']);
         $this->subject = $this->encode($this->subject);
 
         if ($drop_header != '') {
