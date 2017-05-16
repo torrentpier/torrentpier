@@ -930,7 +930,8 @@ if ($mode == 'read') {
 
             if (bf($to_userdata['user_opt'], 'user_opt', 'user_notify_pm') && $to_userdata['user_active'] && $bb_cfg['pm_notify_enabled']) {
                 require CLASS_DIR . '/emailer.php';
-                $emailer = new emailer($bb_cfg['smtp_delivery']);
+                /** @var Emailer $emailer */
+                $emailer = new Emailer($bb_cfg['smtp_delivery']);
 
                 $emailer->from($bb_cfg['sitename'] . " <{$bb_cfg['board_email']}>");
                 $emailer->email_address($to_userdata['username'] . " <{$to_userdata['user_email']}>");

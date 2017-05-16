@@ -79,7 +79,8 @@ if (isset($_POST['submit'])) {
         require CLASS_DIR . '/emailer.php';
 
         foreach ($user_list as $i => $row) {
-            $emailer = new emailer($bb_cfg['smtp_delivery']);
+            /** @var Emailer $emailer */
+            $emailer = new Emailer($bb_cfg['smtp_delivery']);
 
             $emailer->from($bb_cfg['sitename'] . " <{$bb_cfg['board_email']}>");
             $emailer->email_address($row['username'] . " <{$row['user_email']}>");

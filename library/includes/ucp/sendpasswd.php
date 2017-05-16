@@ -64,7 +64,8 @@ if (isset($_POST['submit'])) {
             }
 
             require CLASS_DIR . '/emailer.php';
-            $emailer = new emailer($bb_cfg['smtp_delivery']);
+            /** @var Emailer $emailer */
+            $emailer = new Emailer($bb_cfg['smtp_delivery']);
 
             $emailer->from($bb_cfg['sitename'] . " <{$bb_cfg['board_email']}>");
             $emailer->email_address("$username <{$row['user_email']}>");

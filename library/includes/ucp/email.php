@@ -72,7 +72,8 @@ if ($row = DB()->fetch_row($sql)) {
 
             if (!$errors) {
                 require CLASS_DIR . '/emailer.php';
-                $emailer = new emailer($bb_cfg['smtp_delivery']);
+                /** @var Emailer $emailer */
+                $emailer = new Emailer($bb_cfg['smtp_delivery']);
 
                 $emailer->from($userdata['username'] . " <{$userdata['user_email']}>");
                 $emailer->email_address($username . " <$user_email>");

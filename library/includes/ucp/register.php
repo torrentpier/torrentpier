@@ -591,7 +591,8 @@ if ($submit && !$errors) {
             }
 
             require CLASS_DIR . '/emailer.php';
-            $emailer = new emailer($bb_cfg['smtp_delivery']);
+            /** @var Emailer $emailer */
+            $emailer = new Emailer($bb_cfg['smtp_delivery']);
 
             $emailer->from($bb_cfg['sitename'] . " <{$bb_cfg['board_email']}>");
             $emailer->email_address($username . " <{$email}>");
@@ -626,7 +627,8 @@ if ($submit && !$errors) {
                 $db_data['user_actkey'] = $user_actkey;
 
                 require CLASS_DIR . '/emailer.php';
-                $emailer = new emailer($bb_cfg['smtp_delivery']);
+                /** @var Emailer $emailer */
+                $emailer = new Emailer($bb_cfg['smtp_delivery']);
 
                 $emailer->from($bb_cfg['sitename'] . " <{$bb_cfg['board_email']}>");
                 $emailer->email_address($username . " <{$email}>");

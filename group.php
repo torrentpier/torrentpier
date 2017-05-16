@@ -214,7 +214,8 @@ if (!$group_id) {
 
     if ($bb_cfg['group_send_email']) {
         require CLASS_DIR . '/emailer.php';
-        $emailer = new emailer($bb_cfg['smtp_delivery']);
+        /** @var Emailer $emailer */
+        $emailer = new Emailer($bb_cfg['smtp_delivery']);
 
         $emailer->from($bb_cfg['sitename'] . " <{$bb_cfg['board_email']}>");
         $emailer->email_address($moderator['username'] . " <{$moderator['user_email']}>");
@@ -257,7 +258,8 @@ if (!$group_id) {
 
             if ($bb_cfg['group_send_email']) {
                 require CLASS_DIR . '/emailer.php';
-                $emailer = new emailer($bb_cfg['smtp_delivery']);
+                /** @var Emailer $emailer */
+                $emailer = new Emailer($bb_cfg['smtp_delivery']);
 
                 $emailer->from($bb_cfg['sitename'] . " <{$bb_cfg['board_email']}>");
                 $emailer->email_address($row['username'] . " <{$row['user_email']}>");
@@ -316,7 +318,8 @@ if (!$group_id) {
                     }
 
                     require CLASS_DIR . '/emailer.php';
-                    $emailer = new emailer($bb_cfg['smtp_delivery']);
+                    /** @var Emailer $emailer */
+                    $emailer = new Emailer($bb_cfg['smtp_delivery']);
 
                     $emailer->from($bb_cfg['sitename'] . " <{$bb_cfg['board_email']}>");
 
