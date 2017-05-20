@@ -44,9 +44,9 @@ $submit = $di->request->request->has('post');
 $preview = $di->request->request->has('preview');
 $delete = $di->request->request->has('delete');
 
-$forum_id = $di->request->request->getInt(POST_FORUM_URL);
-$topic_id = $di->request->request->getInt(POST_TOPIC_URL);
-$post_id = $di->request->request->getInt(POST_POST_URL);
+$forum_id = $di->request->query->getInt(POST_FORUM_URL);
+$topic_id = $di->request->query->getInt(POST_TOPIC_URL);
+$post_id = $di->request->query->getInt(POST_POST_URL);
 
 $mode = (string)$_REQUEST['mode'];
 
@@ -630,7 +630,7 @@ if ($mode == 'newtopic' || $post_data['first_post']) {
         'S_FORM_ENCTYPE' => 'enctype="multipart/form-data"',
         'FILE_ATTACHED' => $file_attached,
         'ATTACH_MAX_SIZE' => humn_size($di->config->get('attach.max_size')),
-        'ALLOWED_EXT' => ($allowed_ext) ? '*.' . join(', *.', $allowed_ext) : 'прикреплять запрещено', // TODO: перевести
+        'ALLOWED_EXT' => ($allowed_ext) ? '*.' . implode(', *.', $allowed_ext) : 'прикреплять запрещено', // TODO: перевести
         'TOR_REQUIRED' => !empty($_POST['tor_required']),
         'POLL_TIP' => ($mode == 'newtopic') ? 'Вы сможете добавить опрос после создания темы' : 'Вы можете добавить опрос со страницы просмотра темы', // TODO: перевести
     ));

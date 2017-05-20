@@ -1,4 +1,5 @@
 ### TorrentPier ###
+.vagrant
 .idea
 .php_cs.cache
 bower_components

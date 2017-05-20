@@ -56,7 +56,7 @@ $default_forum_auth = [
     'auth_download' => AUTH_REG,
 ];
 
-$mode = ($_REQUEST['mode']) ? (string)$_REQUEST['mode'] : '';
+$mode = isset($_REQUEST['mode']) ? (string)$_REQUEST['mode'] : '';
 
 $cat_forums = get_cat_forums();
 

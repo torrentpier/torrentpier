@@ -65,7 +65,7 @@ class sql_db
      * @param $cfg_values
      * @return sql_db
      */
-    public function sql_db($cfg_values)
+    public function __construct($cfg_values)
     {
         global $DBS;
 
@@ -94,7 +94,7 @@ class sql_db
         $this->selected_db = $this->select_db();
 
         // Set charset
-        if ($this->cfg['charset'] && !mysql_set_charset($this->cfg['charset'], $this->link)) {
+        if ($this->cfg['charset'] && !mysqli_set_charset($this->link, $this->cfg['charset'])) {
             if (!$this->sql_query("SET NAMES {$this->cfg['charset']}")) {
                 die("Could not set charset {$this->cfg['charset']}");
             }
@@ -113,10 +113,7 @@ class sql_db
     {
         $this->cur_query = ($this->dbg_enabled) ? ($this->cfg['persist'] ? 'p' : '') . "connect to: {$this->cfg['dbhost']}" : 'connect';
         $this->debug('start');
-
-        $connect_type = ($this->cfg['persist']) ? 'mysql_pconnect' : 'mysql_connect';
-
-        if (!$link = $connect_type($this->cfg['dbhost'], $this->cfg['dbuser'], $this->cfg['dbpasswd'])) {
+        if (!$link = mysqli_connect($this->cfg['dbhost'], $this->cfg['dbuser'], $this->cfg['dbpasswd'], $this->cfg['dbname'])) {
             $server = (DBG_USER) ? $this->cfg['dbhost'] : '';
             header("HTTP/1.0 503 Service Unavailable");
             bb_log(' ', "db_err/connect_failed_{$this->cfg['dbhost']}");
@@ -139,10 +136,10 @@ class sql_db
         $this->cur_query = ($this->dbg_enabled) ? "select db: {$this->cfg['dbname']}" : 'select db';
         $this->debug('start');
 
-        if (!mysql_select_db($this->cfg['dbname'], $this->link)) {
-            $database = (DBG_USER) ? $this->cfg['dbhost'] : '';
-            die("Could not select database $database");
-        }
+//        if (!mysqli_select_db($this->link, $this->cfg['dbname'])) {
+//            $database = (DBG_USER) ? $this->cfg['dbhost'] : '';
+//            die("Could not select database $database");
+//        }
 
         $this->debug('stop');
         $this->cur_query = null;
@@ -157,7 +154,7 @@ class sql_db
      */
     public function sql_query($query)
     {
-        if (!is_resource($this->link)) {
+        if ($this->link) {
             $this->init();
         }
         if (is_array($query)) {
@@ -169,7 +166,7 @@ class sql_db
         $this->cur_query = $query;
         $this->debug('start');
 
-        if (!$this->result = mysql_query($query, $this->link)) {
+        if (!$this->result = mysqli_query($this->link, $query)) {
             $this->log_error();
         }
 
@@ -208,7 +205,7 @@ class sql_db
         $num_rows = false;
 
         if ($result or $result = $this->result) {
-            $num_rows = is_resource($result) ? mysql_num_rows($result) : false;
+            $num_rows = $result instanceof mysqli_result ? mysqli_num_rows($result) : false;
         }
 
         return $num_rows;
@@ -219,7 +216,7 @@ class sql_db
      */
     public function affected_rows()
     {
-        return is_resource($this->link) ? mysql_affected_rows($this->link) : -1;
+        return $this->link ? mysqli_affected_rows($this->link) : -1;
     }
 
     /**
@@ -236,7 +233,7 @@ class sql_db
         }
         if ($query_id) {
             if ($rownum > -1) {
-                $result = mysql_result($query_id, $rownum, $field);
+                $result = mysqli_result($query_id, $rownum, $field);
             } else {
                 if (empty($this->row[$query_id]) && empty($this->rowset[$query_id])) {
                     if ($this->sql_fetchrow()) {
@@ -264,7 +261,7 @@ class sql_db
      */
     public function sql_fetchrow($result, $field_name = '')
     {
-        $row = mysql_fetch_assoc($result);
+        $row = mysqli_fetch_assoc($result);
 
         if ($field_name) {
             return isset($row[$field_name]) ? $row[$field_name] : false;
@@ -308,7 +305,7 @@ class sql_db
     {
         $rowset = array();
 
-        while ($row = mysql_fetch_assoc($result)) {
+        while ($row = mysqli_fetch_assoc($result)) {
             $rowset[] = ($field_name) ? $row[$field_name] : $row;
         }
 
@@ -350,7 +347,7 @@ class sql_db
      */
     public function sql_nextid()
     {
-        return mysql_insert_id($this->link);
+        return mysqli_insert_id($this->link);
     }
 
     /**
@@ -360,7 +357,7 @@ class sql_db
     public function sql_freeresult($result = false)
     {
         if ($result or $result = $this->result) {
-            $return_value = is_resource($result) ? mysql_free_result($result) : false;
+            $return_value = is_resource($result) ? mysqli_free_result($result) : false;
         }
 
         $this->result = null;
@@ -405,11 +402,11 @@ class sql_db
      */
     public function escape_string($str)
     {
-        if (!is_resource($this->link)) {
+        if (!$this->link) {
             $this->init();
         }
 
-        return mysql_real_escape_string($str, $this->link);
+        return mysqli_real_escape_string($this->link, $str);
     }
 
     /**
@@ -542,8 +539,8 @@ class sql_db
      */
     public function sql_error()
     {
-        if (is_resource($this->link)) {
-            return array('code' => mysql_errno($this->link), 'message' => mysql_error($this->link));
+        if ($this->link) {
+            return array('code' => mysqli_errno($this->link), 'message' => mysqli_error($this->link));
         } else {
             return array('code' => '', 'message' => 'not connected');
         }
@@ -554,7 +551,7 @@ class sql_db
      */
     public function close()
     {
-        if (is_resource($this->link)) {
+        if ($this->link) {
             $this->unlock();
 
             if (!empty($this->locks)) {
@@ -565,7 +562,7 @@ class sql_db
 
             $this->exec_shutdown_queries();
 
-            mysql_close($this->link);
+            mysqli_close($this->link);
         }
 
         $this->link = $this->selected_db = null;
@@ -710,7 +707,7 @@ class sql_db
             $info[] = "$num rows";
         }
 
-        if (is_resource($this->link) and $ext = mysql_info($this->link)) {
+        if ($this->link and $ext = mysqli_info($this->link)) {
             $info[] = "$ext";
         } elseif (!$num && ($aff = $this->affected_rows($this->result) and $aff != -1)) {
             $info[] = "$aff rows";
@@ -724,7 +721,7 @@ class sql_db
      */
     public function server_version()
     {
-        preg_match('#^(\d+\.\d+\.\d+).*#', mysql_get_server_info(), $m);
+        preg_match('#^(\d+\.\d+\.\d+).*#', mysqli_get_server_info(), $m);
         return $m[1];
     }
 
@@ -953,8 +950,8 @@ class sql_db
                 if (preg_match('#^SELECT#', $query)) {
                     $html_table = false;
 
-                    if ($result = mysql_query("EXPLAIN $query", $this->link)) {
-                        while ($row = mysql_fetch_assoc($result)) {
+                    if ($result = mysqli_query($this->link, "EXPLAIN $query")) {
+                        while ($row = mysqli_fetch_assoc($result)) {
                             $html_table = $this->explain('add_explain_row', $html_table, $row);
                         }
                     }

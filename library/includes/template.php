@@ -117,7 +117,7 @@ class template
      * @param string $root
      * @return template
      */
-    public function Template($root = '.')
+    public function __construct($root = '.')
     {
         global $lang;
 
@@ -953,8 +953,8 @@ class template
                     break;
 
                 case 'is':
-                    $is_arg_start = ($tokens[$i - 1] == ')') ? array_pop($is_arg_stack) : $i - 1;
-                    $is_arg = join('	', array_slice($tokens, $is_arg_start, $i - $is_arg_start));
+                    $is_arg_start = ($tokens[$i - 1] === ')') ? array_pop($is_arg_stack) : $i - 1;
+                    $is_arg = implode('	', array_slice($tokens, $is_arg_start, $i - $is_arg_start));
 
                     $new_tokens = $this->_parse_is_expr($is_arg, array_slice($tokens, $i + 1));
 
@@ -1009,7 +1009,7 @@ class template
         $expr_end = 0;
         $negate_expr = false;
 
-        if (($first_token = array_shift($tokens)) == 'not') {
+        if (($first_token = array_shift($tokens)) === 'not') {
             $negate_expr = true;
             $expr_type = array_shift($tokens);
         } else {
@@ -1018,7 +1018,7 @@ class template
 
         switch ($expr_type) {
             case 'even':
-                if ($tokens[$expr_end] == 'by') {
+                if ($tokens[$expr_end] === 'by') {
                     $expr_end++;
                     $expr_arg = $tokens[$expr_end++];
                     $expr = "!(($is_arg	/ $expr_arg) % $expr_arg)";
@@ -1028,7 +1028,7 @@ class template
                 break;
 
             case 'odd':
-                if ($tokens[$expr_end] == 'by') {
+                if ($tokens[$expr_end] === 'by') {
                     $expr_end++;
                     $expr_arg = $tokens[$expr_end++];
                     $expr = "(($is_arg / $expr_arg)	% $expr_arg)";
@@ -1038,7 +1038,7 @@ class template
                 break;
 
             case 'div':
-                if ($tokens[$expr_end] == 'by') {
+                if ($tokens[$expr_end] === 'by') {
                     $expr_end++;
                     $expr_arg = $tokens[$expr_end++];
                     $expr = "!($is_arg % $expr_arg)";
