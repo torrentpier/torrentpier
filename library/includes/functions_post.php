@@ -331,9 +331,6 @@ function user_notification($mode, &$post_data, &$topic_title, &$forum_id, &$topi
 			");
 
             if ($watch_list) {
-                require CLASS_DIR . '/emailer.php';
-                $emailer = new emailer($bb_cfg['smtp_delivery']);
-
                 $orig_word = $replacement_word = array();
                 obtain_word_list($orig_word, $replacement_word);
 
@@ -345,10 +342,14 @@ function user_notification($mode, &$post_data, &$topic_title, &$forum_id, &$topi
                 $unwatch_topic = make_url(TOPIC_URL . "$topic_id&unwatch=topic");
 
                 foreach ($watch_list as $row) {
-                    $emailer->from($bb_cfg['sitename'] . " <{$bb_cfg['board_email']}>");
-                    $emailer->email_address($row['username'] . " <{$row['user_email']}>");
-                    $emailer->use_template('topic_notify', $row['user_lang']);
+                    /** @var TorrentPier\Legacy\Emailer() $emailer */
+                    $emailer = new TorrentPier\Legacy\Emailer();
 
+                    $emailer->set_from([$bb_cfg['board_email'] => $bb_cfg['sitename']]);
+                    $emailer->set_to([$row['user_email'] => $row['username']]);
+                    $emailer->set_subject(sprintf($lang['EMAILER_SUBJECT']['TOPIC_NOTIFY'], $topic_title));
+
+                    $emailer->set_template('topic_notify', $row['user_lang']);
                     $emailer->assign_vars(array(
                         'TOPIC_TITLE' => html_entity_decode($topic_title),
                         'SITENAME' => $bb_cfg['sitename'],
@@ -358,7 +359,6 @@ function user_notification($mode, &$post_data, &$topic_title, &$forum_id, &$topi
                     ));
 
                     $emailer->send();
-                    $emailer->reset();
 
                     $update_watched_sql[] = $row['user_id'];
                 }

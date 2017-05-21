@@ -43,7 +43,9 @@
   "require": {
     "php": "^5.3 || ^7.0",
     "gigablah/sphinxphp": "^2.0",
-    "google/recaptcha": "^1.0"
+    "google/recaptcha": "^1.0",
+    "roave/security-advisories": "dev-master",
+    "swiftmailer/swiftmailer": "^6.0"
   },
   "autoload": {
     "psr-4": {
