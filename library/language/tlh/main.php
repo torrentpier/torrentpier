@@ -42,7 +42,7 @@ $lang['USERNAME'] = 'Username';
 $lang['PASSWORD'] = 'Password';
 $lang['EMAIL'] = 'Email';
 $lang['PM'] = 'PM';
-$lang['AUTHOR'] = 'Author';
+$lang['AUTHOR'] = 'HaDwI\'pu\'';
 $lang['TIME'] = 'Time';
 $lang['HOURS'] = 'Hours';
 $lang['MESSAGE'] = 'Message';
@@ -62,7 +62,7 @@ $lang['6_MONTHS'] = '6 Months';
 $lang['1_YEAR'] = '1 Year';
 
 $lang['GO'] = 'Go to';
-$lang['SUBMIT'] = 'Submit';
+$lang['SUBMIT'] = 'ngeH';
 $lang['RESET'] = 'Reset';
 $lang['CANCEL'] = 'Cancel';
 $lang['PREVIEW'] = 'Preview';
@@ -806,7 +806,7 @@ $lang['SORT_BY'] = 'Sort by';
 $lang['SORT_TIME'] = 'Post Time';
 $lang['SORT_POST_SUBJECT'] = 'Post Subject';
 $lang['SORT_TOPIC_TITLE'] = 'Topic Title';
-$lang['SORT_AUTHOR'] = 'Author';
+$lang['SORT_AUTHOR'] = 'HaDwI\'pu\'';
 $lang['SORT_FORUM'] = 'Forum';
 
 $lang['DISPLAY_RESULTS_AS'] = 'Display results as';
@@ -1184,7 +1184,7 @@ $lang['BT_SEED_EXIST'] = 'Seeder exist';
 $lang['BT_ONLY_NEW'] = 'New from last visit';
 $lang['BT_SHOW_CAT'] = 'Category';
 $lang['BT_SHOW_FORUM'] = 'Forum';
-$lang['BT_SHOW_AUTHOR'] = 'Author';
+$lang['BT_SHOW_AUTHOR'] = 'HaDwI\'pu\'';
 $lang['BT_SHOW_SPEED'] = 'Speed';
 $lang['SEED_NOT_SEEN'] = 'Seeder not seen';
 $lang['TITLE_MATCH'] = 'Title match';
@@ -1546,7 +1546,7 @@ $lang['DL_UL_SPEED'] = 'UL speed';
 $lang['DL_DL_SPEED'] = 'DL speed';
 $lang['DL_PORT'] = 'Port';
 $lang['DL_FORMULA'] = 'Formula: Uploaded/TorrentSize';
-$lang['DL_ULR'] = 'ULR';
+$lang['DL_ULR'] = 'URL';
 $lang['DL_STOPPED'] = 'stopped';
 $lang['DL_UPD'] = 'upd: ';
 $lang['DL_INFO'] = 'shows data <i><b>only for the current session</b></i>';
@@ -1581,7 +1581,7 @@ $lang['PROFILE_EDIT_RETURN'] = 'Return to editing';
 $lang['PROFILE_RETURN'] = 'Go to the profile';
 
 $lang['WARNING'] = 'Warning';
-$lang['INDEXER'] = "Reindex search";
+$lang['INDEXER'] = 'Reindex search';
 
 $lang['FORUM_STYLE'] = 'Forum style';
 
@@ -1717,7 +1717,7 @@ $lang['AUTH_ANNOUNCE'] = $lang['ANNOUNCE'] = 'Announce';
 $lang['AUTH_VOTE'] = $lang['VOTE'] = 'Vote';
 $lang['AUTH_POLLCREATE'] = $lang['POLLCREATE'] = 'Poll create';
 $lang['AUTH_ATTACHMENTS'] = $lang['AUTH_ATTACH'] = 'Post Files';
-$lang['AUTH_DOWNLOAD'] = $lang['AUTH_DOWNLOAD'] = 'Download Files';
+$lang['AUTH_DOWNLOAD'] = 'Download Files';
 
 $lang['SIMPLE_PERMISSION'] = 'Simple Permissions';
 
@@ -2818,3 +2818,17 @@ $lang['UPLOAD_ERRORS'] = array(
 $lang['CAPTCHA'] = 'Check that you are not a robot';
 $lang['CAPTCHA_WRONG'] = 'You could not confirm that you are not a robot';
 $lang['CAPTCHA_SETTINGS'] = '<h2>ReCaptcha not being fully configured</h2><p>If you haven\'t already generated the keys, you can do it on <a href="https://www.google.com/recaptcha/admin">https://www.google.com/recaptcha/admin</a>.<br />After you generate the keys, you need to put them at the file library/config.php.</p>';
+
+// Emailer
+$lang['EMAILER_SUBJECT'] = [
+    'EMPTY' => 'No Subject',
+    'GROUP_ADDED' => 'You have been added to this usergroup',
+    'GROUP_APPROVED' => 'Your request has been approved',
+    'GROUP_REQUEST' => 'A request to join your group has been made',
+    'PRIVMSG_NOTIFY' => 'New Private Message has arrived',
+    'TOPIC_NOTIFY' => 'Topic Reply Notification %s',
+    'USER_ACTIVATE' => 'Reactivate your account',
+    'USER_ACTIVATE_PASSWD' => 'New password activation',
+    'USER_WELCOME' => 'Welcome to %s Forums',
+    'USER_WELCOME_INACTIVE' => 'Welcome to %s Forums',
+];

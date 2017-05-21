@@ -38,17 +38,17 @@ $lang['VIEWS'] = 'Views';
 $lang['POSTS'] = 'Posts';
 $lang['POSTS_SHORT'] = 'Posts';
 $lang['POSTED'] = 'Posted';
-$lang['USERNAME'] = 'Username';
+$lang['USERNAME'] = 'Кулланучы исеме';
 $lang['PASSWORD'] = 'Password';
 $lang['EMAIL'] = 'Email';
 $lang['PM'] = 'PM';
 $lang['AUTHOR'] = 'Author';
 $lang['TIME'] = 'Time';
 $lang['HOURS'] = 'Hours';
-$lang['MESSAGE'] = 'Message';
+$lang['MESSAGE'] = 'Хәбәр';
 $lang['TORRENT'] = 'Torrent';
 $lang['PERMISSIONS'] = 'Permissions';
-$lang['TYPE'] = 'Type';
+$lang['TYPE'] = 'Төре';
 $lang['SEEDER'] = 'Seeder';
 $lang['LEECHER'] = 'Leecher';
 $lang['RELEASER'] = 'Releaser';
@@ -62,21 +62,21 @@ $lang['6_MONTHS'] = '6 Months';
 $lang['1_YEAR'] = '1 Year';
 
 $lang['GO'] = 'Go to';
-$lang['SUBMIT'] = 'Submit';
-$lang['RESET'] = 'Reset';
+$lang['SUBMIT'] = 'Өстәү';
+$lang['RESET'] = 'Ташлау';
 $lang['CANCEL'] = 'Cancel';
-$lang['PREVIEW'] = 'Preview';
-$lang['AJAX_PREVIEW'] = 'Quick View';
+$lang['PREVIEW'] = 'Карау';
+$lang['AJAX_PREVIEW'] = 'Тиз карау';
 $lang['CONFIRM'] = 'Confirm';
-$lang['YES'] = 'Yes';
+$lang['YES'] = 'Әйе';
 $lang['NO'] = 'No';
-$lang['ENABLED'] = 'Enabled';
+$lang['ENABLED'] = 'Кабызган';
 $lang['DISABLED'] = 'Disabled';
 $lang['ERROR'] = 'Error';
 $lang['SELECT_ACTION'] = 'Select action';
 
-$lang['NEXT_PAGE'] = 'Next';
-$lang['PREVIOUS_PAGE'] = 'Previous';
+$lang['NEXT_PAGE'] = 'Киләсе';
+$lang['PREVIOUS_PAGE'] = 'Артка';
 $lang['GOTO_PAGE'] = 'Go to page';
 $lang['GOTO_SHORT'] = 'Page';
 $lang['JOINED'] = 'Joined';
@@ -128,7 +128,7 @@ $lang['ADMIN_UNLOCK'] = 'Enable forum';
 $lang['ADMIN_UNLOCKED'] = 'Unlocked';
 $lang['ADMIN_UNLOCK_CRON'] = 'Remove lock';
 
-$lang['LOADING'] = 'Loading...';
+$lang['LOADING'] = 'Йөкләнә...';
 $lang['JUMPBOX_TITLE'] = 'Select forum';
 $lang['DISPLAYING_OPTIONS'] = 'Displaying options';
 
@@ -162,7 +162,7 @@ $lang['USERGROUPS'] = 'Usergroups';
 $lang['LASTPOST'] = 'Last Post';
 $lang['MODERATOR'] = 'Moderator';
 $lang['MODERATORS'] = 'Moderators';
-$lang['TERMS'] = 'Terms';
+$lang['TERMS'] = 'Шартлар';
 $lang['NOTHING_HAS_CHANGED'] = 'Nothing has been changed';
 
 // Stats block text
@@ -683,7 +683,7 @@ $lang['NOT_FOUND'] = 'File not found';
 $lang['SORT'] = 'Sort';
 $lang['SORT_TOP_TEN'] = 'Top Ten Posters';
 $lang['SORT_JOINED'] = 'Joined Date';
-$lang['SORT_USERNAME'] = 'Username';
+$lang['SORT_USERNAME'] = 'Кулланучы исеме';
 $lang['SORT_LOCATION'] = 'Location';
 $lang['SORT_POSTS'] = 'Total posts';
 $lang['SORT_EMAIL'] = 'Email';
@@ -1538,7 +1538,7 @@ $lang['POST'] = 'Post';
 $lang['OLD'] = 'Old';
 
 // DL-List
-$lang['DL_USER'] = 'Username';
+$lang['DL_USER'] = 'Кулланучы исеме';
 $lang['DL_PERCENT'] = 'Complete percent';
 $lang['DL_UL'] = 'UL';
 $lang['DL_DL'] = 'DL';
@@ -1546,7 +1546,7 @@ $lang['DL_UL_SPEED'] = 'UL speed';
 $lang['DL_DL_SPEED'] = 'DL speed';
 $lang['DL_PORT'] = 'Port';
 $lang['DL_FORMULA'] = 'Formula: Uploaded/TorrentSize';
-$lang['DL_ULR'] = 'ULR';
+$lang['DL_ULR'] = 'URL';
 $lang['DL_STOPPED'] = 'stopped';
 $lang['DL_UPD'] = 'upd: ';
 $lang['DL_INFO'] = 'shows data <i><b>only for the current session</b></i>';
@@ -1581,7 +1581,7 @@ $lang['PROFILE_EDIT_RETURN'] = 'Return to editing';
 $lang['PROFILE_RETURN'] = 'Go to the profile';
 
 $lang['WARNING'] = 'Warning';
-$lang['INDEXER'] = "Reindex search";
+$lang['INDEXER'] = 'Reindex search';
 
 $lang['FORUM_STYLE'] = 'Forum style';
 
@@ -1717,7 +1717,7 @@ $lang['AUTH_ANNOUNCE'] = $lang['ANNOUNCE'] = 'Announce';
 $lang['AUTH_VOTE'] = $lang['VOTE'] = 'Vote';
 $lang['AUTH_POLLCREATE'] = $lang['POLLCREATE'] = 'Poll create';
 $lang['AUTH_ATTACHMENTS'] = $lang['AUTH_ATTACH'] = 'Post Files';
-$lang['AUTH_DOWNLOAD'] = $lang['AUTH_DOWNLOAD'] = 'Download Files';
+$lang['AUTH_DOWNLOAD'] = 'Download Files';
 
 $lang['SIMPLE_PERMISSION'] = 'Simple Permissions';
 
@@ -2256,7 +2256,7 @@ $lang['SORT_POSTTIME'] = 'Post Time';
 // View Types
 $lang['VIEW_STATISTIC'] = 'Statistics';
 $lang['VIEW_SEARCH'] = 'Search';
-$lang['VIEW_USERNAME'] = 'Username';
+$lang['VIEW_USERNAME'] = 'Кулланучы исеме';
 $lang['VIEW_ATTACHMENTS'] = 'Attachments';
 
 // Successfully updated
@@ -2580,7 +2580,7 @@ $lang['ACTS_LOG_DAYS_BACK'] = 'days back';
 $lang['ACTS_LOG_TOPIC_MATCH'] = 'Topic title match';
 $lang['ACTS_LOG_SORT_BY'] = 'Sort by';
 $lang['ACTS_LOG_LOGS_ACTION'] = 'Action';
-$lang['ACTS_LOG_USERNAME'] = 'Username';
+$lang['ACTS_LOG_USERNAME'] = 'Кулланучы исеме';
 $lang['ACTS_LOG_TIME'] = 'Time';
 $lang['ACTS_LOG_INFO'] = 'Info';
 $lang['ACTS_LOG_FILTER'] = 'Filter';
@@ -2818,3 +2818,17 @@ $lang['UPLOAD_ERRORS'] = array(
 $lang['CAPTCHA'] = 'Check that you are not a robot';
 $lang['CAPTCHA_WRONG'] = 'You could not confirm that you are not a robot';
 $lang['CAPTCHA_SETTINGS'] = '<h2>ReCaptcha not being fully configured</h2><p>If you haven\'t already generated the keys, you can do it on <a href="https://www.google.com/recaptcha/admin">https://www.google.com/recaptcha/admin</a>.<br />After you generate the keys, you need to put them at the file library/config.php.</p>';
+
+// Emailer
+$lang['EMAILER_SUBJECT'] = [
+    'EMPTY' => 'No Subject',
+    'GROUP_ADDED' => 'You have been added to this usergroup',
+    'GROUP_APPROVED' => 'Your request has been approved',
+    'GROUP_REQUEST' => 'A request to join your group has been made',
+    'PRIVMSG_NOTIFY' => 'New Private Message has arrived',
+    'TOPIC_NOTIFY' => 'Topic Reply Notification %s',
+    'USER_ACTIVATE' => 'Reactivate your account',
+    'USER_ACTIVATE_PASSWD' => 'New password activation',
+    'USER_WELCOME' => 'Welcome to %s Forums',
+    'USER_WELCOME_INACTIVE' => 'Welcome to %s Forums',
+];
