@@ -929,15 +929,14 @@ if ($mode == 'read') {
             cache_rm_user_sessions($to_userdata['user_id']);
 
             if (bf($to_userdata['user_opt'], 'user_opt', 'user_notify_pm') && $to_userdata['user_active'] && $bb_cfg['pm_notify_enabled']) {
-                require CLASS_DIR . '/emailer.php';
-                /** @var Emailer $emailer */
-                $emailer = new Emailer($bb_cfg['smtp_delivery']);
+                /** @var TorrentPier\Legacy\Emailer() $emailer */
+                $emailer = new TorrentPier\Legacy\Emailer();
 
-                $emailer->from($bb_cfg['sitename'] . " <{$bb_cfg['board_email']}>");
-                $emailer->email_address($to_userdata['username'] . " <{$to_userdata['user_email']}>");
+                $emailer->set_from([$bb_cfg['board_email'] => $bb_cfg['sitename']]);
+                $emailer->set_to([$to_userdata['user_email'] => $to_userdata['username']]);
+                $emailer->set_subject($lang['EMAILER_SUBJECT']['PRIVMSG_NOTIFY']);
 
-                $emailer->use_template('privmsg_notify', $to_userdata['user_lang']);
-
+                $emailer->set_template('privmsg_notify', $to_userdata['user_lang']);
                 $emailer->assign_vars(array(
                     'USERNAME' => html_entity_decode($to_username),
                     'NAME_FROM' => $userdata['username'],
@@ -947,7 +946,6 @@ if ($mode == 'read') {
                 ));
 
                 $emailer->send();
-                $emailer->reset();
             }
         }
 

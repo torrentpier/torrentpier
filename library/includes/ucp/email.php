@@ -56,55 +56,49 @@ if ($row = DB()->fetch_row($sql)) {
     $user_email = $row['user_email'];
     $user_lang = $row['user_lang'];
 
-    if (true || IS_ADMIN) {
-        //  TRUE instead of missing user_opt "prevent_email"
 
-        if (isset($_POST['submit'])) {
-            $subject = trim(html_entity_decode($_POST['subject']));
-            $message = trim(html_entity_decode($_POST['message']));
+    if (isset($_POST['submit'])) {
+        $subject = trim(html_entity_decode($_POST['subject']));
+        $message = trim(html_entity_decode($_POST['message']));
 
-            if (!$subject) {
-                $errors[] = $lang['EMPTY_SUBJECT_EMAIL'];
-            }
-            if (!$message) {
-                $errors[] = $lang['EMPTY_MESSAGE_EMAIL'];
-            }
-
-            if (!$errors) {
-                require CLASS_DIR . '/emailer.php';
-                /** @var Emailer $emailer */
-                $emailer = new Emailer($bb_cfg['smtp_delivery']);
-
-                $emailer->from($userdata['username'] . " <{$userdata['user_email']}>");
-                $emailer->email_address($username . " <$user_email>");
-
-                $emailer->use_template('profile_send_email', $user_lang);
-                $emailer->set_subject($subject);
-
-                $emailer->assign_vars(array(
-                    'SITENAME' => $bb_cfg['sitename'],
-                    'FROM_USERNAME' => $userdata['username'],
-                    'TO_USERNAME' => $username,
-                    'MESSAGE' => $message,
-                ));
-                $emailer->send();
-                $emailer->reset();
-
-                bb_die($lang['EMAIL_SENT']);
-            }
+        if (!$subject) {
+            $errors[] = $lang['EMPTY_SUBJECT_EMAIL'];
+        }
+        if (!$message) {
+            $errors[] = $lang['EMPTY_MESSAGE_EMAIL'];
         }
 
-        $template->assign_vars(array(
-            'USERNAME' => profile_url($row),
-            'S_HIDDEN_FIELDS' => '',
-            'S_POST_ACTION' => "profile.php?mode=email&amp;" . POST_USERS_URL . "=$user_id",
-            'ERROR_MESSAGE' => ($errors) ? implode('<br />', array_unique($errors)) : '',
-        ));
+        if (!$errors) {
+            /** @var TorrentPier\Legacy\Emailer() $emailer */
+            $emailer = new TorrentPier\Legacy\Emailer();
 
-        print_page('usercp_email.tpl');
-    } else {
-        bb_die($lang['USER_PREVENT_EMAIL']);
+            $emailer->set_from([$userdata['user_email'] => $userdata['username']]);
+            $emailer->set_to([$user_email => $username]);
+            $emailer->set_subject($subject);
+
+            $emailer->set_template('profile_send_email', $user_lang);
+            $emailer->assign_vars(array(
+                'SITENAME' => $bb_cfg['sitename'],
+                'FROM_USERNAME' => $userdata['username'],
+                'TO_USERNAME' => $username,
+                'MESSAGE' => $message,
+            ));
+
+            $emailer->send();
+
+            bb_die($lang['EMAIL_SENT']);
+        }
     }
+
+    $template->assign_vars(array(
+        'USERNAME' => profile_url($row),
+        'S_HIDDEN_FIELDS' => '',
+        'S_POST_ACTION' => "profile.php?mode=email&amp;" . POST_USERS_URL . "=$user_id",
+        'ERROR_MESSAGE' => ($errors) ? implode('<br />', array_unique($errors)) : '',
+    ));
+
+    print_page('usercp_email.tpl');
+
 } else {
     bb_die($lang['USER_NOT_EXIST']);
 }
