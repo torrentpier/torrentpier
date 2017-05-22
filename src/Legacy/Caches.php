@@ -23,20 +23,22 @@
  * SOFTWARE.
  */
 
-if (!defined('BB_ROOT')) {
-    die(basename(__FILE__));
-}
+namespace TorrentPier\Legacy;
 
-class caches
+/**
+ * Class Caches
+ * @package TorrentPier\Legacy
+ */
+class Caches
 {
-    public $cfg = array();   // конфиг
-    public $obj = array();   // кеш-объекты
-    public $ref = array();   // ссылки на $obj (имя_кеша => кеш_объект)
+    public $cfg = []; // конфиг
+    public $obj = []; // кеш-объекты
+    public $ref = []; // ссылки на $obj (имя_кеша => кеш_объект)
 
     public function __construct($cfg)
     {
         $this->cfg = $cfg['cache'];
-        $this->obj['__stub'] = new cache_common();
+        $this->obj['__stub'] = new Cache\Common();
     }
 
     public function get_cache_obj($cache_name)
@@ -51,7 +53,7 @@ class caches
                 switch ($cache_type) {
                     case 'memcache':
                         if (!isset($this->obj[$cache_name])) {
-                            $this->obj[$cache_name] = new cache_memcache($this->cfg['memcache'], $this->cfg['prefix']);
+                            $this->obj[$cache_name] = new Cache\Memcache($this->cfg['memcache'], $this->cfg['prefix']);
                         }
                         $this->ref[$cache_name] =& $this->obj[$cache_name];
                         break;
@@ -61,7 +63,7 @@ class caches
                             $cache_cfg['pconnect'] = $this->cfg['pconnect'];
                             $cache_cfg['db_file_path'] = $this->get_db_path($cache_name, $cache_cfg, '.sqlite.db');
 
-                            $this->obj[$cache_name] = new cache_sqlite($cache_cfg, $this->cfg['prefix']);
+                            $this->obj[$cache_name] = new Cache\Sqlite($cache_cfg, $this->cfg['prefix']);
                         }
                         $this->ref[$cache_name] =& $this->obj[$cache_name];
                         break;
@@ -73,35 +75,35 @@ class caches
                             $cache_cfg['table_name'] = $cache_name;
                             $cache_cfg['table_schema'] = $this->get_table_schema($cache_cfg);
 
-                            $this->obj[$cache_name] = new sqlite_common($cache_cfg);
+                            $this->obj[$cache_name] = new Cache\SqliteCommon($cache_cfg);
                         }
                         $this->ref[$cache_name] =& $this->obj[$cache_name];
                         break;
 
                     case 'redis':
                         if (!isset($this->obj[$cache_name])) {
-                            $this->obj[$cache_name] = new cache_redis($this->cfg['redis'], $this->cfg['prefix']);
+                            $this->obj[$cache_name] = new Cache\Redis($this->cfg['redis'], $this->cfg['prefix']);
                         }
                         $this->ref[$cache_name] =& $this->obj[$cache_name];
                         break;
 
                     case 'apc':
                         if (!isset($this->obj[$cache_name])) {
-                            $this->obj[$cache_name] = new cache_apc($this->cfg['prefix']);
+                            $this->obj[$cache_name] = new Cache\Apc($this->cfg['prefix']);
                         }
                         $this->ref[$cache_name] =& $this->obj[$cache_name];
                         break;
 
                     case 'xcache':
                         if (!isset($this->obj[$cache_name])) {
-                            $this->obj[$cache_name] = new cache_xcache($this->cfg['prefix']);
+                            $this->obj[$cache_name] = new Cache\Xcache($this->cfg['prefix']);
                         }
                         $this->ref[$cache_name] =& $this->obj[$cache_name];
                         break;
 
                     default: //filecache
                         if (!isset($this->obj[$cache_name])) {
-                            $this->obj[$cache_name] = new cache_file($this->cfg['db_dir'] . $cache_name . '/', $this->cfg['prefix']);
+                            $this->obj[$cache_name] = new Cache\File($this->cfg['db_dir'] . $cache_name . '/', $this->cfg['prefix']);
                         }
                         $this->ref[$cache_name] =& $this->obj[$cache_name];
                         break;

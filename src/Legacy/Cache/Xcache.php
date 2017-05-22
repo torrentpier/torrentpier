@@ -23,66 +23,63 @@
  * SOFTWARE.
  */
 
-if (!defined('BB_ROOT')) {
-    die(basename(__FILE__));
-}
+namespace TorrentPier\Legacy\Cache;
 
-class datastore_xcache extends datastore_common
+/**
+ * Class Xcache
+ * @package TorrentPier\Legacy\Cache
+ */
+class Xcache extends Common
 {
-    public $prefix;
+    public $used = true;
     public $engine = 'XCache';
+    public $prefix;
 
     public function __construct($prefix = null)
     {
         if (!$this->is_installed()) {
             die('Error: XCache extension not installed');
         }
-
         $this->dbg_enabled = sql_dbg_enabled();
         $this->prefix = $prefix;
     }
 
-    public function store($title, $var)
+    public function get($name, $get_miss_key_callback = '', $ttl = 0)
     {
-        $this->data[$title] = $var;
-
-        $this->cur_query = "cache->set('$title')";
+        $this->cur_query = "cache->get('$name')";
         $this->debug('start');
         $this->debug('stop');
         $this->cur_query = null;
         $this->num_queries++;
 
-        return (bool)xcache_set($this->prefix . $title, $var);
+        return xcache_get($this->prefix . $name);
     }
 
-    public function clean()
+    public function set($name, $value, $ttl = 0)
     {
-        foreach ($this->known_items as $title => $script_name) {
-            $this->cur_query = "cache->rm('$title')";
+        $this->cur_query = "cache->set('$name')";
+        $this->debug('start');
+        $this->debug('stop');
+        $this->cur_query = null;
+        $this->num_queries++;
+
+        return xcache_set($this->prefix . $name, $value, $ttl);
+    }
+
+    public function rm($name = '')
+    {
+        if ($name) {
+            $this->cur_query = "cache->rm('$name')";
             $this->debug('start');
             $this->debug('stop');
             $this->cur_query = null;
             $this->num_queries++;
 
-            xcache_unset($this->prefix . $title);
-        }
-    }
-
-    public function _fetch_from_store()
-    {
-        if (!$items = $this->queued_items) {
-            $src = $this->_debug_find_caller('enqueue');
-            trigger_error("Datastore: item '$item' already enqueued [$src]", E_USER_ERROR);
-        }
-
-        foreach ($items as $item) {
-            $this->cur_query = "cache->set('$item')";
-            $this->debug('start');
-            $this->debug('stop');
-            $this->cur_query = null;
-            $this->num_queries++;
-
-            $this->data[$item] = xcache_get($this->prefix . $item);
+            return xcache_unset($this->prefix . $name);
+        } else {
+            xcache_clear_cache(XC_TYPE_PHP, 0);
+            xcache_clear_cache(XC_TYPE_VAR, 0);
+            return;
         }
     }
 

@@ -26,7 +26,6 @@
 define('IN_FORUM', true);
 define('BB_ROOT', './');
 require(BB_ROOT . 'common.php');
-require(INC_DIR . 'functions_upload.php');
 
 while (@ob_end_flush()) ;
 ob_implicit_flush();
@@ -74,7 +73,7 @@ if ($confirm) {
                 'tmp_name' => BB_ROOT . $bb_cfg['avatar_path'] . '/' . basename($row['user_avatar']),
                 'error' => 0,
             );
-            $upload = new upload_common();
+            $upload = new TorrentPier\Legacy\Common\Upload();
 
             if ($upload->init($bb_cfg['avatars'], $FILE, false) and $upload->store('avatar', $row)) {
                 DB()->query("UPDATE " . BB_USERS . " SET avatar_ext_id = {$upload->file_ext_id} WHERE user_id = {$row['user_id']} LIMIT 1");

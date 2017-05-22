@@ -23,26 +23,60 @@
  * SOFTWARE.
  */
 
-if (!defined('BB_ROOT')) {
-    die(basename(__FILE__));
-}
+namespace TorrentPier\Legacy\Datastore;
 
-class datastore_apc extends datastore_common
+/**
+ * Class Memcache
+ * @package TorrentPier\Legacy\Datastore
+ */
+class Memcache extends Common
 {
-    public $engine = 'APC';
+    public $cfg;
+    public $memcache;
+    public $connected = false;
+    public $engine = 'Memcache';
     public $prefix;
 
-    public function __construct($prefix = null)
+    public function __construct($cfg, $prefix = null)
     {
         if (!$this->is_installed()) {
-            die('Error: APC extension not installed');
+            die('Error: Memcached extension not installed');
         }
-        $this->dbg_enabled = sql_dbg_enabled();
+
+        $this->cfg = $cfg;
         $this->prefix = $prefix;
+        $this->memcache = new \Memcache();
+        $this->dbg_enabled = sql_dbg_enabled();
+    }
+
+    public function connect()
+    {
+        $connect_type = ($this->cfg['pconnect']) ? 'pconnect' : 'connect';
+
+        $this->cur_query = $connect_type . ' ' . $this->cfg['host'] . ':' . $this->cfg['port'];
+        $this->debug('start');
+
+        if (@$this->memcache->$connect_type($this->cfg['host'], $this->cfg['port'])) {
+            $this->connected = true;
+        }
+
+        if (DBG_LOG) {
+            dbg_log(' ', 'CACHE-connect' . ($this->connected ? '' : '-FAIL'));
+        }
+
+        if (!$this->connected && $this->cfg['con_required']) {
+            die('Could not connect to memcached server');
+        }
+
+        $this->debug('stop');
+        $this->cur_query = null;
     }
 
     public function store($title, $var)
     {
+        if (!$this->connected) {
+            $this->connect();
+        }
         $this->data[$title] = $var;
 
         $this->cur_query = "cache->set('$title')";
@@ -51,11 +85,14 @@ class datastore_apc extends datastore_common
         $this->cur_query = null;
         $this->num_queries++;
 
-        return (bool)apc_store($this->prefix . $title, $var);
+        return (bool)$this->memcache->set($this->prefix . $title, $var);
     }
 
     public function clean()
     {
+        if (!$this->connected) {
+            $this->connect();
+        }
         foreach ($this->known_items as $title => $script_name) {
             $this->cur_query = "cache->rm('$title')";
             $this->debug('start');
@@ -63,7 +100,7 @@ class datastore_apc extends datastore_common
             $this->cur_query = null;
             $this->num_queries++;
 
-            apc_delete($this->prefix . $title);
+            $this->memcache->delete($this->prefix . $title, 0);
         }
     }
 
@@ -74,6 +111,9 @@ class datastore_apc extends datastore_common
             trigger_error("Datastore: item '$item' already enqueued [$src]", E_USER_ERROR);
         }
 
+        if (!$this->connected) {
+            $this->connect();
+        }
         foreach ($items as $item) {
             $this->cur_query = "cache->get('$item')";
             $this->debug('start');
@@ -81,12 +121,12 @@ class datastore_apc extends datastore_common
             $this->cur_query = null;
             $this->num_queries++;
 
-            $this->data[$item] = apc_fetch($this->prefix . $item);
+            $this->data[$item] = $this->memcache->get($this->prefix . $item);
         }
     }
 
     public function is_installed()
     {
-        return function_exists('apc_fetch');
+        return class_exists('Memcache');
     }
 }

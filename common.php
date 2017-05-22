@@ -100,16 +100,8 @@ define('BOT_UID', -746);
 /**
  * Database
  */
-// Core DB class
-require CORE_DIR . '/dbs.php';
-require CORE_DIR . '/mysql.php';
-$DBS = new DBS($bb_cfg);
+$DBS = new TorrentPier\Legacy\Dbs($bb_cfg);
 
-/**
- * @param string $db_alias
- * @return \sql_db
- * @deprecated
- */
 function DB($db_alias = 'db1')
 {
     global $DBS;
@@ -119,14 +111,7 @@ function DB($db_alias = 'db1')
 /**
  * Cache
  */
-// Main cache class
-require INC_DIR . '/cache/common.php';
-// Main datastore class
-require INC_DIR . '/datastore/common.php';
-
-// Core CACHE class
-require CORE_DIR . '/caches.php';
-$CACHES = new CACHES($bb_cfg);
+$CACHES = new TorrentPier\Legacy\Caches($bb_cfg);
 
 function CACHE($cache_name)
 {
@@ -134,29 +119,12 @@ function CACHE($cache_name)
     return $CACHES->get_cache_obj($cache_name);
 }
 
-// Common cache classes
-require INC_DIR . '/cache/memcache.php';
-require INC_DIR . '/cache/sqlite.php';
-require INC_DIR . '/cache/redis.php';
-require INC_DIR . '/cache/apc.php';
-require INC_DIR . '/cache/xcache.php';
-require INC_DIR . '/cache/file.php';
-
 /**
  * Datastore
  */
-// Common datastore classes
-require INC_DIR . '/datastore/memcache.php';
-require INC_DIR . '/datastore/sqlite.php';
-require INC_DIR . '/datastore/redis.php';
-require INC_DIR . '/datastore/apc.php';
-require INC_DIR . '/datastore/xcache.php';
-require INC_DIR . '/datastore/file.php';
-
-// Initialize datastore
 switch ($bb_cfg['datastore_type']) {
     case 'memcache':
-        $datastore = new datastore_memcache($bb_cfg['cache']['memcache'], $bb_cfg['cache']['prefix']);
+        $datastore = new TorrentPier\Legacy\Datastore\Memcache($bb_cfg['cache']['memcache'], $bb_cfg['cache']['prefix']);
         break;
 
     case 'sqlite':
@@ -165,24 +133,24 @@ switch ($bb_cfg['datastore_type']) {
             'pconnect' => true,
             'con_required' => true,
         );
-        $datastore = new datastore_sqlite($default_cfg, $bb_cfg['cache']['prefix']);
+        $datastore = new TorrentPier\Legacy\Datastore\Sqlite($default_cfg, $bb_cfg['cache']['prefix']);
         break;
 
     case 'redis':
-        $datastore = new datastore_redis($bb_cfg['cache']['redis'], $bb_cfg['cache']['prefix']);
+        $datastore = new TorrentPier\Legacy\Datastore\Redis($bb_cfg['cache']['redis'], $bb_cfg['cache']['prefix']);
         break;
 
     case 'apc':
-        $datastore = new datastore_apc($bb_cfg['cache']['prefix']);
+        $datastore = new TorrentPier\Legacy\Datastore\Apc($bb_cfg['cache']['prefix']);
         break;
 
     case 'xcache':
-        $datastore = new datastore_xcache($bb_cfg['cache']['prefix']);
+        $datastore = new TorrentPier\Legacy\Datastore\Xcache($bb_cfg['cache']['prefix']);
         break;
 
     case 'filecache':
     default:
-        $datastore = new datastore_file($bb_cfg['cache']['db_dir'] . 'datastore/', $bb_cfg['cache']['prefix']);
+        $datastore = new TorrentPier\Legacy\Datastore\File($bb_cfg['cache']['db_dir'] . 'datastore/', $bb_cfg['cache']['prefix']);
 }
 
 function sql_dbg_enabled()
@@ -201,7 +169,7 @@ function short_query($sql, $esc_html = false)
         }
     }
 
-    return ($esc_html) ? htmlCHR($sql, true) : $sql;
+    return $esc_html ? htmlCHR($sql, true) : $sql;
 }
 
 // Functions
@@ -270,7 +238,7 @@ function mkdir_rec($path, $mode)
         return ($path !== '.' && $path !== '..') ? is_writable($path) : false;
     }
 
-    return (mkdir_rec(dirname($path), $mode)) ? @mkdir($path, $mode) : false;
+    return mkdir_rec(dirname($path), $mode) ? @mkdir($path, $mode) : false;
 }
 
 function verify_id($id, $length)

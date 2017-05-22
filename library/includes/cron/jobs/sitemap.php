@@ -27,9 +27,7 @@ if (!defined('BB_ROOT')) {
     die(basename(__FILE__));
 }
 
-require CLASS_DIR . '/sitemap.php';
-
-$map = new sitemap();
+$map = new TorrentPier\Legacy\Sitemap();
 $map->create();
 
 if (@file_exists(BB_ROOT . "/sitemap/sitemap.xml")) {

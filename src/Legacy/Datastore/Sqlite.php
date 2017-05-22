@@ -23,11 +23,15 @@
  * SOFTWARE.
  */
 
-if (!defined('BB_ROOT')) {
-    die(basename(__FILE__));
-}
+namespace TorrentPier\Legacy\Datastore;
 
-class datastore_sqlite extends datastore_common
+use SQLite3;
+
+/**
+ * Class Sqlite
+ * @package TorrentPier\Legacy\Datastore
+ */
+class Sqlite extends Common
 {
     public $engine = 'SQLite';
     public $db;
@@ -48,7 +52,7 @@ class datastore_sqlite extends datastore_common
     public function __construct($cfg, $prefix = null)
     {
         $this->cfg = array_merge($this->cfg, $cfg);
-        $this->db = new sqlite_common($this->cfg);
+        $this->db = new SqliteCommon($this->cfg);
         $this->prefix = $prefix;
     }
 

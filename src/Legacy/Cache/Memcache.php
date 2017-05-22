@@ -23,49 +23,92 @@
  * SOFTWARE.
  */
 
-if (!defined('BB_ROOT')) {
-    die(basename(__FILE__));
-}
+namespace TorrentPier\Legacy\Cache;
 
-class cache_xcache extends cache_common
+/**
+ * Class Memcache
+ * @package TorrentPier\Legacy\Cache
+ */
+class Memcache extends Common
 {
     public $used = true;
-    public $engine = 'XCache';
+    public $engine = 'Memcache';
+    public $cfg;
     public $prefix;
+    public $memcache;
+    public $connected = false;
 
-    public function __construct($prefix = null)
+    public function __construct($cfg, $prefix = null)
     {
         if (!$this->is_installed()) {
-            die('Error: XCache extension not installed');
+            die('Error: Memcached extension not installed');
         }
-        $this->dbg_enabled = sql_dbg_enabled();
+
+        $this->cfg = $cfg;
         $this->prefix = $prefix;
+        $this->memcache = new \Memcache();
+        $this->dbg_enabled = sql_dbg_enabled();
+    }
+
+    public function connect()
+    {
+        $connect_type = ($this->cfg['pconnect']) ? 'pconnect' : 'connect';
+
+        $this->cur_query = $connect_type . ' ' . $this->cfg['host'] . ':' . $this->cfg['port'];
+        $this->debug('start');
+
+        if (@$this->memcache->$connect_type($this->cfg['host'], $this->cfg['port'])) {
+            $this->connected = true;
+        }
+
+        if (DBG_LOG) {
+            dbg_log(' ', 'CACHE-connect' . ($this->connected ? '' : '-FAIL'));
+        }
+
+        if (!$this->connected && $this->cfg['con_required']) {
+            die('Could not connect to memcached server');
+        }
+
+        $this->debug('stop');
+        $this->cur_query = null;
     }
 
     public function get($name, $get_miss_key_callback = '', $ttl = 0)
     {
+        if (!$this->connected) {
+            $this->connect();
+        }
+
         $this->cur_query = "cache->get('$name')";
         $this->debug('start');
         $this->debug('stop');
         $this->cur_query = null;
         $this->num_queries++;
 
-        return xcache_get($this->prefix . $name);
+        return ($this->connected) ? $this->memcache->get($this->prefix . $name) : false;
     }
 
     public function set($name, $value, $ttl = 0)
     {
+        if (!$this->connected) {
+            $this->connect();
+        }
+
         $this->cur_query = "cache->set('$name')";
         $this->debug('start');
         $this->debug('stop');
         $this->cur_query = null;
         $this->num_queries++;
 
-        return xcache_set($this->prefix . $name, $value, $ttl);
+        return ($this->connected) ? $this->memcache->set($this->prefix . $name, $value, false, $ttl) : false;
     }
 
     public function rm($name = '')
     {
+        if (!$this->connected) {
+            $this->connect();
+        }
+
         if ($name) {
             $this->cur_query = "cache->rm('$name')";
             $this->debug('start');
@@ -73,16 +116,14 @@ class cache_xcache extends cache_common
             $this->cur_query = null;
             $this->num_queries++;
 
-            return xcache_unset($this->prefix . $name);
+            return ($this->connected) ? $this->memcache->delete($this->prefix . $name, 0) : false;
         } else {
-            xcache_clear_cache(XC_TYPE_PHP, 0);
-            xcache_clear_cache(XC_TYPE_VAR, 0);
-            return;
+            return ($this->connected) ? $this->memcache->flush() : false;
         }
     }
 
     public function is_installed()
     {
-        return function_exists('xcache_get');
+        return class_exists('Memcache');
     }
 }

@@ -23,108 +23,15 @@
  * SOFTWARE.
  */
 
-if (!defined('BB_ROOT')) {
-    die(basename(__FILE__));
-}
+namespace TorrentPier\Legacy\Datastore;
 
-class cache_sqlite extends cache_common
-{
-    public $used = true;
-    public $db;
-    public $prefix;
-    public $cfg = array(
-        'db_file_path' => '/path/to/cache.db.sqlite',
-        'table_name' => 'cache',
-        'table_schema' => 'CREATE TABLE cache (
-	                cache_name        VARCHAR(255),
-	                cache_expire_time INT,
-	                cache_value       TEXT,
-	                PRIMARY KEY (cache_name)
-	        )',
-        'pconnect' => true,
-        'con_required' => true,
-        'log_name' => 'CACHE',
-    );
+use SQLite3;
 
-    public function __construct($cfg, $prefix = null)
-    {
-        $this->cfg = array_merge($this->cfg, $cfg);
-        $this->db = new sqlite_common($this->cfg);
-        $this->prefix = $prefix;
-    }
-
-    public function get($name, $get_miss_key_callback = '', $ttl = 604800)
-    {
-        if (empty($name)) {
-            return is_array($name) ? array() : false;
-        }
-        $this->db->shard($name);
-        $cached_items = array();
-        $this->prefix_len = strlen($this->prefix);
-        $this->prefix_sql = SQLite3::escapeString($this->prefix);
-
-        $name_ary = $name_sql = (array)$name;
-        array_deep($name_sql, 'SQLite3::escapeString');
-
-        // get available items
-        $rowset = $this->db->fetch_rowset("
-			SELECT cache_name, cache_value
-			FROM " . $this->cfg['table_name'] . "
-			WHERE cache_name IN('$this->prefix_sql" . implode("','$this->prefix_sql", $name_sql) . "') AND cache_expire_time > " . TIMENOW . "
-			LIMIT " . count($name) . "
-		");
-
-        $this->db->debug('start', 'unserialize()');
-        foreach ($rowset as $row) {
-            $cached_items[substr($row['cache_name'], $this->prefix_len)] = unserialize($row['cache_value']);
-        }
-        $this->db->debug('stop');
-
-        // get miss items
-        if ($get_miss_key_callback and $miss_key = array_diff($name_ary, array_keys($cached_items))) {
-            foreach ($get_miss_key_callback($miss_key) as $k => $v) {
-                $this->set($this->prefix . $k, $v, $ttl);
-                $cached_items[$k] = $v;
-            }
-        }
-        // return
-        if (is_array($this->prefix . $name)) {
-            return $cached_items;
-        } else {
-            return isset($cached_items[$name]) ? $cached_items[$name] : false;
-        }
-    }
-
-    public function set($name, $value, $ttl = 604800)
-    {
-        $this->db->shard($this->prefix . $name);
-        $name_sql = SQLite3::escapeString($this->prefix . $name);
-        $expire = TIMENOW + $ttl;
-        $value_sql = SQLite3::escapeString(serialize($value));
-
-        $result = $this->db->query("REPLACE INTO " . $this->cfg['table_name'] . " (cache_name, cache_expire_time, cache_value) VALUES ('$name_sql', $expire, '$value_sql')");
-        return (bool)$result;
-    }
-
-    public function rm($name = '')
-    {
-        if ($name) {
-            $this->db->shard($this->prefix . $name);
-            $result = $this->db->query("DELETE FROM " . $this->cfg['table_name'] . " WHERE cache_name = '" . SQLite3::escapeString($this->prefix . $name) . "'");
-        } else {
-            $result = $this->db->query("DELETE FROM " . $this->cfg['table_name']);
-        }
-        return (bool)$result;
-    }
-
-    public function gc($expire_time = TIMENOW)
-    {
-        $result = $this->db->query("DELETE FROM " . $this->cfg['table_name'] . " WHERE cache_expire_time < $expire_time");
-        return ($result) ? $this->db->changes() : 0;
-    }
-}
-
-class sqlite_common extends cache_common
+/**
+ * Class SqliteCommon
+ * @package TorrentPier\Legacy\Datastore
+ */
+class SqliteCommon extends Common
 {
     public $cfg = array(
         'db_file_path' => 'sqlite.db',
@@ -151,7 +58,7 @@ class sqlite_common extends cache_common
 
     public function connect()
     {
-        $this->cur_query = ($this->dbg_enabled) ? 'connect to: ' . $this->cfg['db_file_path'] : 'connect';
+        $this->cur_query = $this->dbg_enabled ? 'connect to: ' . $this->cfg['db_file_path'] : 'connect';
         $this->debug('start');
 
         if (@$this->dbh = new SQLite3($this->cfg['db_file_path'])) {
@@ -283,7 +190,7 @@ class sqlite_common extends cache_common
     public function gc($expire_time = TIMENOW)
     {
         $result = $this->db->query("DELETE FROM " . $this->cfg['table_name'] . " WHERE cache_expire_time < $expire_time");
-        return ($result) ? sqlite_changes($this->db->dbh) : 0;
+        return $result ? sqlite_changes($this->db->dbh) : 0;
     }
 
     public function trigger_error($msg = 'DB Error')

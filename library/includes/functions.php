@@ -131,95 +131,6 @@ function is_unread($ref, $topic_id = 0, $forum_id = 0)
 }
 
 //
-// Ads
-//
-class ads_common
-{
-    public $ad_blocks = array();
-    public $active_ads = array();
-
-    /**
-     *  Constructor
-     */
-    public function __construct()
-    {
-        global $bb_cfg;
-
-        $this->ad_blocks =& $bb_cfg['ad_blocks'];
-        $this->active_ads = !empty($bb_cfg['active_ads']) ? @unserialize($bb_cfg['active_ads']) : array();
-    }
-
-    /**
-     *  Get ads to show for each block
-     */
-    public function get($block_types)
-    {
-        $ads = array();
-
-        if ($this->active_ads) {
-            $block_ids = $this->get_block_ids($block_types);
-
-            if ($ad_ids = $this->get_ad_ids($block_ids)) {
-                $ad_html = $this->get_ads_html();
-
-                foreach ($ad_ids as $block_id => $ad_id) {
-                    $ads[$block_id] =& $ad_html[$ad_id];
-                }
-            }
-        }
-
-        return $ads;
-    }
-
-    /**
-     *  Get ads html
-     */
-    public function get_ads_html()
-    {
-        global $datastore;
-        if (!$ads_html = $datastore->get('ads')) {
-            $datastore->update('ads');
-            $ads_html = $datastore->get('ads');
-        }
-
-        return $ads_html;
-    }
-
-    /**
-     *  Get block_ids for specified block_types
-     */
-    public function get_block_ids($block_types)
-    {
-        $block_ids = array();
-
-        foreach ($block_types as $block_type) {
-            if ($blocks =& $this->ad_blocks[$block_type]) {
-                $block_ids = array_merge($block_ids, array_keys($blocks));
-            }
-        }
-
-        return $block_ids;
-    }
-
-    /**
-     *  Get ad_ids for specified blocks
-     */
-    public function get_ad_ids($block_ids)
-    {
-        $ad_ids = array();
-
-        foreach ($block_ids as $block_id) {
-            if ($ads =& $this->active_ads[$block_id]) {
-                shuffle($ads);
-                $ad_ids[$block_id] = $ads[0];
-            }
-        }
-
-        return $ad_ids;
-    }
-}
-
-//
 // Auth
 //
 define('AUTH_LIST_ALL', 0);
@@ -517,130 +428,6 @@ function auth_check($bf_ary, $bf_key, $perm_ary, $perm_key, $is_admin = false)
     return bf($perm_ary[$perm_key], $bf_ary, $bf_key);
 }
 
-class Date_Delta
-{
-    public $auto_granularity = array(
-        60 => 'seconds',   // set granularity to "seconds" if delta less then 1 minute
-        10800 => 'minutes',   // 3 hours
-        259200 => 'hours',     // 3 days
-        31363200 => 'mday',      // 12 months
-        311040000 => 'mon',       // 10 years
-    );
-    public $intervals = array();
-    public $format = '';
-
-    // Creates new object.
-    public function __construct()
-    {
-        global $lang;
-
-        $this->intervals = $lang['DELTA_TIME']['INTERVALS'];
-        $this->format = $lang['DELTA_TIME']['FORMAT'];
-    }
-
-    // Makes the spellable phrase.
-    public function spellDelta($first, $last, $from = 'auto')
-    {
-        if ($last < $first) {
-            $old_first = $first;
-            $first = $last;
-            $last = $old_first;
-        }
-
-        if ($from == 'auto') {
-            $from = 'year';
-            $diff = $last - $first;
-            foreach ($this->auto_granularity as $seconds_count => $granule) {
-                if ($diff < $seconds_count) {
-                    $from = $granule;
-                    break;
-                }
-            }
-        }
-
-        // Solve data delta.
-        $delta = $this->getDelta($first, $last);
-        if (!$delta) {
-            return false;
-        }
-
-        // Make spellable phrase.
-        $parts = array();
-        $intervals = $GLOBALS['lang']['DELTA_TIME']['INTERVALS'];
-
-        foreach (array_reverse($delta) as $k => $n) {
-            if (!$n) {
-                if ($k == $from) {
-                    if (!$parts) {
-                        $parts[] = declension($n, $this->intervals[$k], $this->format);
-                    }
-                    break;
-                }
-                continue;
-            }
-            $parts[] = declension($n, $this->intervals[$k], $this->format);
-            if ($k == $from) {
-                break;
-            }
-        }
-        return implode(' ', $parts);
-    }
-
-    // returns the associative array with date deltas.
-    public function getDelta($first, $last)
-    {
-        if ($last < $first) {
-            return false;
-        }
-
-        // Solve H:M:S part.
-        $hms = ($last - $first) % (3600 * 24);
-        $delta['seconds'] = $hms % 60;
-        $delta['minutes'] = floor($hms / 60) % 60;
-        $delta['hours'] = floor($hms / 3600) % 60;
-
-        // Now work only with date, delta time = 0.
-        $last -= $hms;
-        $f = getdate($first);
-        $l = getdate($last); // the same daytime as $first!
-
-        $dYear = $dMon = $dDay = 0;
-
-        // Delta day. Is negative, month overlapping.
-        $dDay += $l['mday'] - $f['mday'];
-        if ($dDay < 0) {
-            $monlen = $this->monthLength(date('Y', $first), date('m', $first));
-            $dDay += $monlen;
-            $dMon--;
-        }
-        $delta['mday'] = $dDay;
-
-        // Delta month. If negative, year overlapping.
-        $dMon += $l['mon'] - $f['mon'];
-        if ($dMon < 0) {
-            $dMon += 12;
-            $dYear--;
-        }
-        $delta['mon'] = $dMon;
-
-        // Delta year.
-        $dYear += $l['year'] - $f['year'];
-        $delta['year'] = $dYear;
-
-        return $delta;
-    }
-
-    // Returns the length (in days) of the specified month.
-    public function monthLength($year, $mon)
-    {
-        $l = 28;
-        while (checkdate($mon, $l + 1, $year)) {
-            $l++;
-        }
-        return $l;
-    }
-}
-
 function delta_time($timestamp_1, $timestamp_2 = TIMENOW, $granularity = 'auto')
 {
     return $GLOBALS['DeltaTime']->spellDelta($timestamp_1, $timestamp_2, $granularity);
@@ -670,116 +457,6 @@ function get_select($select, $selected = null, $return_as = 'html', $first_opt =
     }
 
     return ($return_as == 'html') ? build_select($select_name, $select_ary, $selected) : $select_ary;
-}
-
-class html_common
-{
-    public $options = '';
-    public $attr = array();
-    public $cur_attr;
-    public $max_length = HTML_SELECT_MAX_LENGTH;
-    public $selected = array();
-
-    public function build_select($name, $params, $selected = null, $max_length = HTML_SELECT_MAX_LENGTH, $multiple_size = null, $js = '')
-    {
-        if (empty($params)) {
-            return '';
-        }
-
-        $this->options = '';
-        $this->selected = array_flip((array)$selected);
-        $this->max_length = $max_length;
-
-        $this->attr = array();
-        $this->cur_attr =& $this->attr;
-
-        if (isset($params['__attributes'])) {
-            $this->attr = $params['__attributes'];
-            unset($params['__attributes']);
-        }
-
-        $this->_build_select_rec($params);
-
-        $select_params = ($js) ? " $js" : '';
-        $select_params .= ($multiple_size) ? ' multiple="multiple" size="' . $multiple_size . '"' : '';
-        $select_params .= ' name="' . htmlCHR($name) . '"';
-        $select_params .= ' id="' . htmlCHR($name) . '"';
-
-        return "\n<select $select_params>\n" . $this->options . "</select>\n";
-    }
-
-    public function _build_select_rec($params)
-    {
-        foreach ($params as $opt_name => $opt_val) {
-            $opt_name = rtrim($opt_name);
-
-            if (is_array($opt_val)) {
-                $this->cur_attr =& $this->cur_attr[$opt_name];
-
-                $label = htmlCHR(str_short($opt_name, $this->max_length));
-
-                $this->options .= "\t<optgroup label=\"&nbsp;" . $label . "\">\n";
-                $this->_build_select_rec($opt_val);
-                $this->options .= "\t</optgroup>\n";
-
-                $this->cur_attr =& $this->attr;
-            } else {
-                $text = htmlCHR(str_short($opt_name, $this->max_length));
-                $value = ' value="' . htmlCHR($opt_val) . '"';
-
-                $class = isset($this->cur_attr[$opt_name]['class']) ? ' class="' . $this->cur_attr[$opt_name]['class'] . '"' : '';
-                $style = isset($this->cur_attr[$opt_name]['style']) ? ' style="' . $this->cur_attr[$opt_name]['style'] . '"' : '';
-
-                $selected = isset($this->selected[$opt_val]) ? HTML_SELECTED : '';
-                $disabled = isset($this->cur_attr[$opt_name]['disabled']) ? HTML_DISABLED : '';
-
-                $this->options .= "\t\t<option" . $class . $style . $selected . $disabled . $value . '>&nbsp;' . $text . "&nbsp;</option>\n";
-            }
-        }
-    }
-
-    public function array2html($array, $ul = 'ul', $li = 'li')
-    {
-        $this->out = '';
-        $this->_array2html_rec($array, $ul, $li);
-        return "<$ul class=\"tree-root\">{$this->out}</$ul>";
-    }
-
-    public function _array2html_rec($array, $ul, $li)
-    {
-        foreach ($array as $k => $v) {
-            if (is_array($v)) {
-                $this->out .= "<$li><span class=\"b\">$k</span><$ul>";
-                $this->_array2html_rec($v, $ul, $li);
-                $this->out .= "</$ul></$li>";
-            } else {
-                $this->out .= "<$li><span>$v</span></$li>";
-            }
-        }
-    }
-
-    // all arguments should be already htmlspecialchar()d (if needed)
-    public function build_checkbox($name, $title, $checked = false, $disabled = false, $class = null, $id = null, $value = 1)
-    {
-        $name = ' name="' . $name . '" ';
-        $value = ' value="' . $value . '" ';
-        $title = ($class) ? '<span class="' . $class . '">' . $title . '</span>' : $title;
-        $id = ($id) ? " id=\"$id\" " : '';
-        $checked = ($checked) ? HTML_CHECKED : '';
-        $disabled = ($disabled) ? HTML_DISABLED : '';
-
-        return '<label><input type="checkbox" ' . $id . $name . $value . $checked . $disabled . ' />&nbsp;' . $title . '&nbsp;</label>';
-    }
-
-#	function build_option ($opt_name, $opt_val, $selected = null, $max_length = false)
-#	{
-#		return "\t\t<option value=\"". htmlCHR($opt_val) .'"'. (($selected) ? ' selected="selected"' : '') .'>'. htmlCHR(str_short($opt_name, $max_length)) ."</option>\n";
-#	}
-
-#	function build_optgroup ($label, $contents, $max_length = false)
-#	{
-#		return "\t<optgroup label=\"&nbsp;". htmlCHR(str_short($label, $max_length)) ."\">\n". $contents ."\t</optgroup>\n";
-#	}
 }
 
 function build_select($name, $params, $selected = null, $max_length = HTML_SELECT_MAX_LENGTH, $multiple_size = null, $js = '')
@@ -1428,7 +1105,7 @@ function setup_style()
         }
     }
 
-    $template = new Template(TEMPLATES_DIR . '/' . $tpl_dir_name);
+    $template = new TorrentPier\Legacy\Template(TEMPLATES_DIR . '/' . $tpl_dir_name);
     $css_dir = 'styles/' . basename(TEMPLATES_DIR) . '/' . $tpl_dir_name . '/css/';
 
     $template->assign_vars(array(
@@ -1678,7 +1355,7 @@ function bb_die($msg_text)
     // If the header hasn't been output then do it
     if (!defined('PAGE_HEADER_SENT')) {
         if (empty($template)) {
-            $template = new Template(BB_ROOT . "templates/{$bb_cfg['tpl_name']}");
+            $template = new TorrentPier\Legacy\Template(BB_ROOT . "templates/{$bb_cfg['tpl_name']}");
         }
         if (empty($theme)) {
             $theme = setup_style();
@@ -1942,89 +1619,6 @@ function forum_exists($forum_id)
 function cat_exists($cat_id)
 {
     return DB()->fetch_row("SELECT cat_id FROM " . BB_CATEGORIES . " WHERE cat_id = $cat_id LIMIT 1");
-}
-
-//
-// Action Log
-//
-class log_action
-{
-    public $log_type = array(
-        #    LOG_TYPE_NAME   LOG_TYPE_ID
-        'mod_topic_delete' => 1,
-        'mod_topic_move' => 2,
-        'mod_topic_lock' => 3,
-        'mod_topic_unlock' => 4,
-        'mod_post_delete' => 5,
-        'mod_topic_split' => 6,
-        'adm_user_delete' => 7,
-        'adm_user_ban' => 8,
-        'adm_user_unban' => 9,
-    );
-    public $log_type_select = array();
-    public $log_disabled = false;
-
-    public function init()
-    {
-        global $lang, $bb_cfg;
-
-        foreach ($lang['LOG_ACTION']['LOG_TYPE'] as $log_type => $log_desc) {
-            $this->log_type_select[strip_tags($log_desc)] = $this->log_type[$log_type];
-        }
-    }
-
-    public function mod($type_name, array $args = array())
-    {
-        global $userdata;
-
-        if (empty($this->log_type)) {
-            $this->init();
-        }
-        if ($this->log_disabled) {
-            return;
-        }
-
-        $forum_id =& $args['forum_id'];
-        $forum_id_new =& $args['forum_id_new'];
-        $topic_id =& $args['topic_id'];
-        $topic_id_new =& $args['topic_id_new'];
-        $topic_title =& $args['topic_title'];
-        $topic_title_new =& $args['topic_title_new'];
-        $log_msg =& $args['log_msg'];
-
-        if (!empty($userdata)) {
-            $user_id = $userdata['user_id'];
-            $username = $userdata['username'];
-            $session_ip = $userdata['session_ip'];
-        } else {
-            $user_id = '';
-            $username = defined('IN_CRON') ? 'cron' : CLIENT_IP;
-            $session_ip = '';
-        }
-
-        $sql_ary = array(
-            'log_type_id' => (int)$this->log_type["$type_name"],
-            'log_user_id' => (int)$user_id,
-            'log_username' => (string)$username,
-            'log_user_ip' => (string)$session_ip,
-            'log_forum_id' => (int)$forum_id,
-            'log_forum_id_new' => (int)$forum_id_new,
-            'log_topic_id' => (int)$topic_id,
-            'log_topic_id_new' => (int)$topic_id_new,
-            'log_topic_title' => (string)$topic_title,
-            'log_topic_title_new' => (string)$topic_title_new,
-            'log_time' => (int)TIMENOW,
-            'log_msg' => (string)$log_msg,
-        );
-        $sql_args = DB()->build_array('INSERT', $sql_ary);
-
-        DB()->query("INSERT INTO " . BB_LOG . " $sql_args");
-    }
-
-    public function admin($type_name, array $args = array())
-    {
-        $this->mod($type_name, $args);
-    }
 }
 
 function get_topic_icon($topic, $is_unread = null)
@@ -2586,4 +2180,9 @@ function bb_captcha($mode, $callback = '')
             bb_simple_die(__FUNCTION__ . ": invalid mode '$mode'");
     }
     return false;
+}
+
+function clean_tor_dirname($dirname)
+{
+    return str_replace(array('[', ']', '<', '>', "'"), array('&#91;', '&#93;', '&lt;', '&gt;', '&#039;'), $dirname);
 }
