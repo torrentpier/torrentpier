@@ -213,14 +213,14 @@ if (!$group_id) {
     add_user_into_group($group_id, $userdata['user_id'], 1, TIMENOW);
 
     if ($bb_cfg['group_send_email']) {
-        require CLASS_DIR . '/emailer.php';
-        $emailer = new emailer($bb_cfg['smtp_delivery']);
+        /** @var TorrentPier\Legacy\Emailer() $emailer */
+        $emailer = new TorrentPier\Legacy\Emailer();
 
-        $emailer->from($bb_cfg['sitename'] . " <{$bb_cfg['board_email']}>");
-        $emailer->email_address($moderator['username'] . " <{$moderator['user_email']}>");
+        $emailer->set_from([$bb_cfg['board_email'] => $bb_cfg['sitename']]);
+        $emailer->set_to([$moderator['user_email'] => $moderator['username']]);
+        $emailer->set_subject($lang['EMAILER_SUBJECT']['GROUP_REQUEST']);
 
-        $emailer->use_template('group_request', $moderator['user_lang']);
-
+        $emailer->set_template('group_request', $moderator['user_lang']);
         $emailer->assign_vars(array(
             'USER' => $userdata['username'],
             'SITENAME' => $bb_cfg['sitename'],
@@ -229,7 +229,6 @@ if (!$group_id) {
         ));
 
         $emailer->send();
-        $emailer->reset();
     }
 
     set_die_append_msg(false, false, $group_id);
@@ -256,14 +255,14 @@ if (!$group_id) {
             add_user_into_group($group_id, $row['user_id']);
 
             if ($bb_cfg['group_send_email']) {
-                require CLASS_DIR . '/emailer.php';
-                $emailer = new emailer($bb_cfg['smtp_delivery']);
+                /** @var TorrentPier\Legacy\Emailer() $emailer */
+                $emailer = new TorrentPier\Legacy\Emailer();
 
-                $emailer->from($bb_cfg['sitename'] . " <{$bb_cfg['board_email']}>");
-                $emailer->email_address($row['username'] . " <{$row['user_email']}>");
+                $emailer->set_from([$bb_cfg['board_email'] => $bb_cfg['sitename']]);
+                $emailer->set_to([$row['user_email'] => $row['username']]);
+                $emailer->set_subject($lang['EMAILER_SUBJECT']['GROUP_ADDED']);
 
-                $emailer->use_template('group_added', $row['user_lang']);
-
+                $emailer->set_template('group_added', $row['user_lang']);
                 $emailer->assign_vars(array(
                     'SITENAME' => $bb_cfg['sitename'],
                     'GROUP_NAME' => $group_info['group_name'],
@@ -271,7 +270,6 @@ if (!$group_id) {
                 ));
 
                 $emailer->send();
-                $emailer->reset();
             }
         } else {
             if (((!empty($_POST['approve']) || !empty($_POST['deny'])) && !empty($_POST['pending_members'])) || (!empty($_POST['remove']) && !empty($_POST['members']))) {
@@ -315,24 +313,23 @@ if (!$group_id) {
                         bb_die('Could not get user email information');
                     }
 
-                    require CLASS_DIR . '/emailer.php';
-                    $emailer = new emailer($bb_cfg['smtp_delivery']);
-
-                    $emailer->from($bb_cfg['sitename'] . " <{$bb_cfg['board_email']}>");
-
                     foreach (DB()->fetch_rowset($sql_select) as $row) {
-                        $emailer->use_template('group_approved', $row['user_lang']);
-                        $emailer->email_address($row['username'] . " <{$row['user_email']}>");
+                        /** @var TorrentPier\Legacy\Emailer() $emailer */
+                        $emailer = new TorrentPier\Legacy\Emailer();
+
+                        $emailer->set_from([$bb_cfg['board_email'] => $bb_cfg['sitename']]);
+                        $emailer->set_to([$row['user_email'] => $row['username']]);
+                        $emailer->set_subject($lang['EMAILER_SUBJECT']['GROUP_APPROVED']);
+
+                        $emailer->set_template('group_approved', $row['user_lang']);
+                        $emailer->assign_vars(array(
+                            'SITENAME' => $bb_cfg['sitename'],
+                            'GROUP_NAME' => $group_info['group_name'],
+                            'U_GROUP' => make_url(GROUP_URL . $group_id),
+                        ));
+
+                        $emailer->send();
                     }
-
-                    $emailer->assign_vars(array(
-                        'SITENAME' => $bb_cfg['sitename'],
-                        'GROUP_NAME' => $group_info['group_name'],
-                        'U_GROUP' => make_url(GROUP_URL . $group_id),
-                    ));
-
-                    $emailer->send();
-                    $emailer->reset();
                 }
             }
         }

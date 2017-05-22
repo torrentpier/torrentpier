@@ -584,31 +584,31 @@ if ($submit && !$errors) {
         } else {
             if ($bb_cfg['reg_email_activation']) {
                 $message = $lang['ACCOUNT_INACTIVE'];
+                $email_subject = sprintf($lang['EMAILER_SUBJECT']['USER_WELCOME_INACTIVE'], $bb_cfg['sitename']);
                 $email_template = 'user_welcome_inactive';
             } else {
                 $message = $lang['ACCOUNT_ADDED'];
+                $email_subject = sprintf($lang['EMAILER_SUBJECT']['USER_WELCOME'], $bb_cfg['sitename']);
                 $email_template = 'user_welcome';
             }
 
-            require CLASS_DIR . '/emailer.php';
-            $emailer = new emailer($bb_cfg['smtp_delivery']);
+            /** @var TorrentPier\Legacy\Emailer() $emailer */
+            $emailer = new TorrentPier\Legacy\Emailer();
 
-            $emailer->from($bb_cfg['sitename'] . " <{$bb_cfg['board_email']}>");
-            $emailer->email_address($username . " <{$email}>");
+            $emailer->set_from([$bb_cfg['board_email'] => $bb_cfg['sitename']]);
+            $emailer->set_to([$email => $username]);
+            $emailer->set_subject($email_subject);
 
-            $emailer->use_template($email_template, $user_lang);
-
+            $emailer->set_template($email_template, $user_lang);
             $emailer->assign_vars(array(
                 'SITENAME' => $bb_cfg['sitename'],
                 'WELCOME_MSG' => sprintf($lang['WELCOME_SUBJECT'], $bb_cfg['sitename']),
                 'USERNAME' => html_entity_decode($username),
                 'PASSWORD' => $new_pass,
-
                 'U_ACTIVATE' => make_url('profile.php?mode=activate&' . POST_USERS_URL . '=' . $new_user_id . '&act_key=' . $db_data['user_actkey'])
             ));
 
             $emailer->send();
-            $emailer->reset();
         }
 
         bb_die($message);
@@ -625,21 +625,22 @@ if ($submit && !$errors) {
                 $pr_data['user_actkey'] = $user_actkey;
                 $db_data['user_actkey'] = $user_actkey;
 
-                require CLASS_DIR . '/emailer.php';
-                $emailer = new emailer($bb_cfg['smtp_delivery']);
+                /** @var TorrentPier\Legacy\Emailer() $emailer */
+                $emailer = new TorrentPier\Legacy\Emailer();
 
-                $emailer->from($bb_cfg['sitename'] . " <{$bb_cfg['board_email']}>");
-                $emailer->email_address($username . " <{$email}>");
+                $emailer->set_from([$bb_cfg['board_email'] => $bb_cfg['sitename']]);
+                $emailer->set_to([$email => $username]);
+                $emailer->set_subject($subject);
+                $emailer->set_subject($lang['EMAILER_SUBJECT']['USER_ACTIVATE']);
 
-                $emailer->use_template('user_activate', $pr_data['user_lang']);
-
+                $emailer->set_template('user_activate', $pr_data['user_lang']);
                 $emailer->assign_vars(array(
                     'SITENAME' => $bb_cfg['sitename'],
                     'USERNAME' => html_entity_decode($username),
                     'U_ACTIVATE' => make_url("profile.php?mode=activate&u={$pr_data['user_id']}&act_key=$user_actkey"),
                 ));
+
                 $emailer->send();
-                $emailer->reset();
 
                 $message = $lang['PROFILE_UPDATED_INACTIVE'];
                 $user->session_end();
