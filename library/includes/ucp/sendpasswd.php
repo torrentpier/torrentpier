@@ -29,7 +29,7 @@ if (!defined('IN_FORUM')) {
 
 set_die_append_msg();
 
-if ($bb_cfg['emailer_disabled']) {
+if (!$bb_cfg['emailer']['enabled']) {
     bb_die($lang['EMAILER_DISABLED']);
 }
 
