@@ -23,11 +23,13 @@
  * SOFTWARE.
  */
 
-if (!defined('BB_ROOT')) {
-    die(basename(__FILE__));
-}
+namespace TorrentPier\Legacy\Cache;
 
-class cache_common
+/**
+ * Class Common
+ * @package TorrentPier\Legacy\Cache
+ */
+class Common
 {
     public $used = false;
 

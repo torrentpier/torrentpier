@@ -23,42 +23,50 @@
  * SOFTWARE.
  */
 
-if (!defined('BB_ROOT')) {
-    die(basename(__FILE__));
-}
+namespace TorrentPier\Legacy\Common;
 
-class upload_common
+/**
+ * Class Upload
+ * @package TorrentPier\Legacy\Common
+ */
+class Upload
 {
-    public $cfg = array(
+    public $cfg = [
         'max_size' => 0,
         'max_width' => 0,
         'max_height' => 0,
-        'allowed_ext' => array(),
+        'allowed_ext' => [],
         'upload_path' => '',
-    );
-    public $file = array(
+    ];
+    public $file = [
         'name' => '',
         'type' => '',
         'size' => 0,
         'tmp_name' => '',
         'error' => UPLOAD_ERR_NO_FILE,
-    );
+    ];
     public $orig_name = '';
     public $file_path = '';      // Stored file path
     public $file_ext = '';
     public $file_ext_id = '';
     public $file_size = '';
-    public $ext_ids = array(); // array_flip($bb_cfg['file_id_ext'])
-    public $errors = array();
-    public $img_types = array(
+    public $ext_ids = []; // array_flip($bb_cfg['file_id_ext'])
+    public $errors = [];
+    public $img_types = [
         1 => 'gif',
         2 => 'jpg',
         3 => 'png',
         6 => 'bmp',
         7 => 'tiff',
         8 => 'tiff',
-    );
+    ];
 
+    /**
+     * @param array $cfg
+     * @param array $post_params
+     * @param bool $uploaded_only
+     * @return bool
+     */
     public function init(array $cfg = [], array $post_params = [], $uploaded_only = true)
     {
         global $bb_cfg, $lang;
@@ -129,7 +137,12 @@ class upload_common
         return true;
     }
 
-    public function store($mode = '', array $params = array())
+    /**
+     * @param string $mode
+     * @param array $params
+     * @return bool
+     */
+    public function store($mode = '', array $params = [])
     {
         if ($mode == 'avatar') {
             delete_avatar($params['user_id'], $params['avatar_ext_id']);
@@ -145,6 +158,10 @@ class upload_common
         }
     }
 
+    /**
+     * @param $file_path
+     * @return bool
+     */
     public function _move($file_path)
     {
         $dir = dirname($file_path);

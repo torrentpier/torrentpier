@@ -23,11 +23,13 @@
  * SOFTWARE.
  */
 
-if (!defined('BB_ROOT')) {
-    die(basename(__FILE__));
-}
+namespace TorrentPier\Legacy;
 
-class sitemap
+/**
+ * Class Sitemap
+ * @package TorrentPier\Legacy
+ */
+class Sitemap
 {
     public $home = '';
     public $limit = 0;

@@ -23,105 +23,104 @@
  * SOFTWARE.
  */
 
-if (!defined('BB_ROOT')) {
-    die(basename(__FILE__));
-}
+namespace TorrentPier\Legacy\Datastore;
 
-class cache_memcache extends cache_common
+/**
+ * Class Redis
+ * @package TorrentPier\Legacy\Datastore
+ */
+class Redis extends Common
 {
-    public $used = true;
-    public $engine = 'Memcache';
     public $cfg;
+    public $redis;
     public $prefix;
-    public $memcache;
     public $connected = false;
+    public $engine = 'Redis';
 
     public function __construct($cfg, $prefix = null)
     {
         if (!$this->is_installed()) {
-            die('Error: Memcached extension not installed');
+            die('Error: Redis extension not installed');
         }
 
         $this->cfg = $cfg;
-        $this->prefix = $prefix;
-        $this->memcache = new Memcache;
+        $this->redis = new \Redis();
         $this->dbg_enabled = sql_dbg_enabled();
+        $this->prefix = $prefix;
     }
 
     public function connect()
     {
-        $connect_type = ($this->cfg['pconnect']) ? 'pconnect' : 'connect';
-
-        $this->cur_query = $connect_type . ' ' . $this->cfg['host'] . ':' . $this->cfg['port'];
+        $this->cur_query = 'connect ' . $this->cfg['host'] . ':' . $this->cfg['port'];
         $this->debug('start');
 
-        if (@$this->memcache->$connect_type($this->cfg['host'], $this->cfg['port'])) {
+        if (@$this->redis->connect($this->cfg['host'], $this->cfg['port'])) {
             $this->connected = true;
         }
 
-        if (DBG_LOG) {
-            dbg_log(' ', 'CACHE-connect' . ($this->connected ? '' : '-FAIL'));
-        }
-
         if (!$this->connected && $this->cfg['con_required']) {
-            die('Could not connect to memcached server');
+            die('Could not connect to redis server');
         }
 
         $this->debug('stop');
         $this->cur_query = null;
     }
 
-    public function get($name, $get_miss_key_callback = '', $ttl = 0)
+    public function store($title, $var)
     {
         if (!$this->connected) {
             $this->connect();
         }
+        $this->data[$title] = $var;
 
-        $this->cur_query = "cache->get('$name')";
+        $this->cur_query = "cache->set('$title')";
         $this->debug('start');
         $this->debug('stop');
         $this->cur_query = null;
         $this->num_queries++;
 
-        return ($this->connected) ? $this->memcache->get($this->prefix . $name) : false;
+        return (bool)$this->redis->set($this->prefix . $title, serialize($var));
     }
 
-    public function set($name, $value, $ttl = 0)
+    public function clean()
     {
         if (!$this->connected) {
             $this->connect();
         }
-
-        $this->cur_query = "cache->set('$name')";
-        $this->debug('start');
-        $this->debug('stop');
-        $this->cur_query = null;
-        $this->num_queries++;
-
-        return ($this->connected) ? $this->memcache->set($this->prefix . $name, $value, false, $ttl) : false;
-    }
-
-    public function rm($name = '')
-    {
-        if (!$this->connected) {
-            $this->connect();
-        }
-
-        if ($name) {
-            $this->cur_query = "cache->rm('$name')";
+        foreach ($this->known_items as $title => $script_name) {
+            $this->cur_query = "cache->rm('$title')";
             $this->debug('start');
             $this->debug('stop');
             $this->cur_query = null;
             $this->num_queries++;
 
-            return ($this->connected) ? $this->memcache->delete($this->prefix . $name, 0) : false;
-        } else {
-            return ($this->connected) ? $this->memcache->flush() : false;
+            $this->redis->del($this->prefix . $title);
+        }
+    }
+
+    public function _fetch_from_store()
+    {
+        if (!$items = $this->queued_items) {
+            $src = $this->_debug_find_caller('enqueue');
+            trigger_error("Datastore: item '$item' already enqueued [$src]", E_USER_ERROR);
+        }
+
+        if (!$this->connected) {
+            $this->connect();
+        }
+        foreach ($items as $item) {
+            $this->cur_query = "cache->get('$item')";
+            $this->debug('start');
+            $this->debug('stop');
+            $this->cur_query = null;
+            $this->num_queries++;
+
+            $this->data[$item] = unserialize($this->redis->get($this->prefix . $item));
         }
     }
 
     public function is_installed()
     {
-        return class_exists('Memcache');
+        return class_exists('Redis');
     }
 }

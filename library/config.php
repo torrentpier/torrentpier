@@ -284,8 +284,6 @@ define('AJAX_DIR', BB_PATH . '/library/ajax');
 define('ATTACH_DIR', BB_PATH . '/library/attach_mod');
 define('CFG_DIR', BB_PATH . '/library/config');
 define('INC_DIR', BB_PATH . '/library/includes');
-define('CLASS_DIR', BB_PATH . '/library/includes/classes');
-define('CORE_DIR', BB_PATH . '/library/includes/core');
 define('UCP_DIR', BB_PATH . '/library/includes/ucp');
 define('LANG_ROOT_DIR', BB_PATH . '/library/language');
 define('IMAGES_DIR', BB_PATH . '/styles/images');

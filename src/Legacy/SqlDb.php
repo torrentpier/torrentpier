@@ -23,14 +23,15 @@
  * SOFTWARE.
  */
 
-if (!defined('SQL_DEBUG')) {
-    die(basename(__FILE__));
-}
+namespace TorrentPier\Legacy;
+
+use mysqli_result;
 
 /**
- * Class sql_db
+ * Class SqlDb
+ * @package TorrentPier\Legacy
  */
-class sql_db
+class SqlDb
 {
     public $cfg = [];
     public $cfg_keys = ['dbhost', 'dbname', 'dbuser', 'dbpasswd', 'charset', 'persist'];
@@ -119,7 +120,7 @@ class sql_db
 
         if (mysqli_connect_error()) {
             $server = (DBG_USER) ? $this->cfg['dbhost'] : '';
-            header("HTTP/1.0 503 Service Unavailable");
+            header('HTTP/1.0 503 Service Unavailable');
             bb_log(' ', "db_err/connect_failed_{$this->cfg['dbhost']}");
             die("Could not connect to mysql server $server");
         }
@@ -319,7 +320,7 @@ class sql_db
         $rowset = [];
 
         while ($row = mysqli_fetch_assoc($result)) {
-            $rowset[] = ($field_name) ? $row[$field_name] : $row;
+            $rowset[] = $field_name ? $row[$field_name] : $row;
         }
 
         return $rowset;

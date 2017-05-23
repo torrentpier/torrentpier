@@ -23,11 +23,13 @@
  * SOFTWARE.
  */
 
-if (!defined('BB_ROOT')) {
-    die(basename(__FILE__));
-}
+namespace TorrentPier\Legacy\Datastore;
 
-class datastore_common
+/**
+ * Class Common
+ * @package TorrentPier\Legacy\Datastore
+ */
+class Common
 {
     /**
      * Директория с builder-скриптами (внутри INC_DIR)
@@ -37,19 +39,19 @@ class datastore_common
      * Готовая к употреблению data
      * array('title' => data)
      */
-    public $data = array();
+    public $data = [];
     /**
      * Список элементов, которые будут извлечены из хранилища при первом же запросе get()
      * до этого момента они ставятся в очередь $queued_items для дальнейшего извлечения _fetch()'ем
      * всех элементов одним запросом
      * array('title1', 'title2'...)
      */
-    public $queued_items = array();
+    public $queued_items = [];
 
     /**
      * 'title' => 'builder script name' inside "includes/datastore" dir
      */
-    public $known_items = array(
+    public $known_items = [
         'cat_forums' => 'build_cat_forums.php',
         'jumpbox' => 'build_cat_forums.php',
         'viewtopic_forum_select' => 'build_cat_forums.php',
@@ -61,17 +63,10 @@ class datastore_common
         'ranks' => 'build_ranks.php',
         'attach_extensions' => 'build_attach_extensions.php',
         'smile_replacements' => 'build_smilies.php',
-    );
+    ];
 
     /**
-     * Constructor
-     */
-    public function __construct()
-    {
-    }
-
-    /**
-     * @param  array(item1_title, item2_title...) or single item's title
+     * @param  array (item1_title, item2_title...) or single item's title
      */
     public function enqueue($items)
     {
@@ -123,7 +118,7 @@ class datastore_common
             }
         }
 
-        $this->queued_items = array();
+        $this->queued_items = [];
     }
 
     public function _fetch_from_store()
@@ -146,7 +141,7 @@ class datastore_common
     public $sql_timetotal = 0;
     public $cur_query_time = 0;
 
-    public $dbg = array();
+    public $dbg = [];
     public $dbg_id = 0;
     public $dbg_enabled = false;
     public $cur_query;

@@ -30,7 +30,7 @@ if (!defined('IN_AJAX')) {
 global $bb_cfg, $lang;
 
 $mode = (string)$this->request['mode'];
-$map = new sitemap();
+$map = new TorrentPier\Legacy\Sitemap();
 $html = '';
 
 switch ($mode) {

@@ -23,17 +23,20 @@
  * SOFTWARE.
  */
 
-if (!defined('BB_ROOT')) {
-    die(basename(__FILE__));
-}
+namespace TorrentPier\Legacy\Cache;
 
-class datastore_redis extends datastore_common
+/**
+ * Class Redis
+ * @package TorrentPier\Legacy\Cache
+ */
+class Redis extends Common
 {
+    public $used = true;
+    public $engine = 'Redis';
     public $cfg;
     public $redis;
     public $prefix;
     public $connected = false;
-    public $engine = 'Redis';
 
     public function __construct($cfg, $prefix = null)
     {
@@ -42,9 +45,9 @@ class datastore_redis extends datastore_common
         }
 
         $this->cfg = $cfg;
-        $this->redis = new Redis();
-        $this->dbg_enabled = sql_dbg_enabled();
         $this->prefix = $prefix;
+        $this->redis = new \Redis();
+        $this->dbg_enabled = sql_dbg_enabled();
     }
 
     public function connect()
@@ -64,56 +67,61 @@ class datastore_redis extends datastore_common
         $this->cur_query = null;
     }
 
-    public function store($title, $var)
+    public function get($name, $get_miss_key_callback = '', $ttl = 0)
     {
         if (!$this->connected) {
             $this->connect();
         }
-        $this->data[$title] = $var;
 
-        $this->cur_query = "cache->set('$title')";
+        $this->cur_query = "cache->get('$name')";
         $this->debug('start');
         $this->debug('stop');
         $this->cur_query = null;
         $this->num_queries++;
 
-        return (bool)$this->redis->set($this->prefix . $title, serialize($var));
+        return ($this->connected) ? unserialize($this->redis->get($this->prefix . $name)) : false;
     }
 
-    public function clean()
+    public function set($name, $value, $ttl = 0)
     {
         if (!$this->connected) {
             $this->connect();
         }
-        foreach ($this->known_items as $title => $script_name) {
-            $this->cur_query = "cache->rm('$title')";
+
+        $this->cur_query = "cache->set('$name')";
+        $this->debug('start');
+
+        if ($this->redis->set($this->prefix . $name, serialize($value))) {
+            if ($ttl > 0) {
+                $this->redis->expire($this->prefix . $name, $ttl);
+            }
+
+            $this->debug('stop');
+            $this->cur_query = null;
+            $this->num_queries++;
+
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public function rm($name = '')
+    {
+        if (!$this->connected) {
+            $this->connect();
+        }
+
+        if ($name) {
+            $this->cur_query = "cache->rm('$name')";
             $this->debug('start');
             $this->debug('stop');
             $this->cur_query = null;
             $this->num_queries++;
 
-            $this->redis->del($this->prefix . $title);
-        }
-    }
-
-    public function _fetch_from_store()
-    {
-        if (!$items = $this->queued_items) {
-            $src = $this->_debug_find_caller('enqueue');
-            trigger_error("Datastore: item '$item' already enqueued [$src]", E_USER_ERROR);
-        }
-
-        if (!$this->connected) {
-            $this->connect();
-        }
-        foreach ($items as $item) {
-            $this->cur_query = "cache->get('$item')";
-            $this->debug('start');
-            $this->debug('stop');
-            $this->cur_query = null;
-            $this->num_queries++;
-
-            $this->data[$item] = unserialize($this->redis->get($this->prefix . $item));
+            return ($this->connected) ? $this->redis->del($this->prefix . $name) : false;
+        } else {
+            return ($this->connected) ? $this->redis->flushDB() : false;
         }
     }
 

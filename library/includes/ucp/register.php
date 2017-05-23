@@ -384,8 +384,7 @@ foreach ($profile_fields as $field => $can_edit) {
                     $pr_data['avatar_ext_id'] = 0;
                     $db_data['avatar_ext_id'] = 0;
                 } elseif (!empty($_FILES['avatar']['name']) && $bb_cfg['avatars']['up_allowed']) {
-                    require INC_DIR . '/functions_upload.php';
-                    $upload = new upload_common();
+                    $upload = new TorrentPier\Legacy\Common\Upload();
 
                     if ($upload->init($bb_cfg['avatars'], $_FILES['avatar']) and $upload->store('avatar', $pr_data)) {
                         $pr_data['avatar_ext_id'] = $upload->file_ext_id;

@@ -460,16 +460,16 @@ define('SQL_LAYER', 'mysql');
 
 $bb_cfg = array_merge(bb_get_config(BB_CONFIG), $bb_cfg);
 
-$user = new user_common();
+$user = new TorrentPier\Legacy\Common\User();
 $userdata =& $user->data;
 
 if (DBG_USER) {
     require INC_DIR . '/functions_dev.php';
 }
 
-$html = new html_common();
-$log_action = new log_action();
-$ads = new ads_common();
+$ads = new TorrentPier\Legacy\Common\Ads();
+$html = new TorrentPier\Legacy\Common\Html();
+$log_action = new TorrentPier\Legacy\LogAction();
 
 // TODO temporarily 'cat_forums' always enqueued
 $datastore->enqueue(array('cat_forums'));
