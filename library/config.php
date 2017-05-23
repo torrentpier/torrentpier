@@ -98,7 +98,7 @@ $domain_name = (!empty($_SERVER['SERVER_NAME'])) ? $_SERVER['SERVER_NAME'] : $do
 
 // Version info
 $bb_cfg['tp_version'] = '2.1.6';
-$bb_cfg['tp_release_date'] = '**-02-2017';
+$bb_cfg['tp_release_date'] = '01-07-2017';
 $bb_cfg['tp_release_state'] = 'STABLE';
 
 // Database
@@ -360,7 +360,7 @@ $page_cfg['show_sidebar2'] = array(
 );
 
 // Cookie
-$bb_cfg['cookie_domain'] = in_array($domain_name, array(getenv('SERVER_ADDR'), 'localhost')) ? '' : ".$domain_name";
+$bb_cfg['cookie_domain'] = in_array($domain_name, array(getenv('SERVER_ADDR'), 'localhost'), true) ? '' : ".$domain_name";
 $bb_cfg['cookie_secure'] = (!empty($_SERVER['HTTPS']) ? 1 : 0);
 $bb_cfg['cookie_prefix'] = 'bb_'; // 'bb_'
 
@@ -381,14 +381,17 @@ $bb_cfg['new_user_reg_restricted'] = false;        // Ограничить ре�
 $bb_cfg['reg_email_activation'] = true;         // Требовать активацию учетной записи по email
 
 // Email
-$bb_cfg['emailer_disabled'] = false;
-
-$bb_cfg['smtp_delivery'] = false; // send email via a named server instead of the local mail function
-$bb_cfg['smtp_ssl'] = false; // use ssl connect
-$bb_cfg['smtp_host'] = '';    // SMTP server host
-$bb_cfg['smtp_port'] = 25;    // SMTP server port
-$bb_cfg['smtp_username'] = '';    // enter a username if your SMTP server requires it
-$bb_cfg['smtp_password'] = '';    // enter a password if your SMTP server requires it
+$bb_cfg['emailer'] = [
+    'enabled' => true,
+    'smtp' => [
+        'enabled' => true, // send email via external SMTP server
+        'host' => '', // SMTP server host
+        'port' => 25, // SMTP server port
+        'username' => '', // SMTP username (if server requires it)
+        'password' => '', // SMTP password (if server requires it)
+    ],
+    'ssl_type' => '', // SMTP ssl type (ssl or tls)
+];
 
 $bb_cfg['board_email'] = "noreply@$domain_name"; // admin email address
 $bb_cfg['board_email_form'] = false;        // can users send email to each other via board
@@ -531,7 +534,7 @@ $bb_cfg['user_not_active_days_keep'] = 180;     // inactive users but only with 
 $bb_cfg['group_members_per_page'] = 50;
 
 // Tidy
-$bb_cfg['tidy_post'] = (!in_array('tidy', get_loaded_extensions())) ? false : true;
+$bb_cfg['tidy_post'] = (!in_array('tidy', get_loaded_extensions(), true)) ? false : true;
 
 // Ads
 $bb_cfg['show_ads'] = false;
@@ -553,7 +556,7 @@ $bb_cfg['ad_blocks'] = array(
 // Misc
 define('MEM_USAGE', function_exists('memory_get_usage'));
 
-$bb_cfg['mem_on_start'] = (MEM_USAGE) ? memory_get_usage() : 0;
+$bb_cfg['mem_on_start'] = MEM_USAGE ? memory_get_usage() : 0;
 
 $bb_cfg['translate_dates'] = true; // in displaying time
 $bb_cfg['use_word_censor'] = true;
@@ -567,7 +570,7 @@ $bb_cfg['allow_change'] = array(
     'dateformat' => true,
 );
 
-define('GZIP_OUTPUT_ALLOWED', (extension_loaded('zlib') && !ini_get('zlib.output_compression')));
+define('GZIP_OUTPUT_ALLOWED', extension_loaded('zlib') && !ini_get('zlib.output_compression'));
 
 $banned_user_agents = array(
 // Download Master

@@ -76,22 +76,21 @@ if (isset($_POST['submit'])) {
 			");
         }
 
-        require CLASS_DIR . '/emailer.php';
-
         foreach ($user_list as $i => $row) {
-            $emailer = new emailer($bb_cfg['smtp_delivery']);
+            /** @var TorrentPier\Legacy\Emailer() $emailer */
+            $emailer = new TorrentPier\Legacy\Emailer();
 
-            $emailer->from($bb_cfg['sitename'] . " <{$bb_cfg['board_email']}>");
-            $emailer->email_address($row['username'] . " <{$row['user_email']}>");
-            $emailer->use_template('admin_send_email');
+            $emailer->set_from([$bb_cfg['board_email'] => $bb_cfg['sitename']]);
+            $emailer->set_to([$row['user_email'] => $row['username']]);
+            $emailer->set_subject($subject);
 
+            $emailer->set_template('admin_send_email');
             $emailer->assign_vars(array(
                 'SUBJECT' => html_entity_decode($subject),
                 'MESSAGE' => html_entity_decode($message),
             ));
 
             $emailer->send();
-            $emailer->reset();
         }
     }
 }
