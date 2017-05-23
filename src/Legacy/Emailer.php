@@ -184,14 +184,12 @@ class Emailer
             return false;
         }
 
-        /**
-         * Escape message and set vars
-         */
-        $this->message = str_replace("'", "\'", $this->message);
-        $this->message = preg_replace('#\{([a-z0-9\-_]*?)\}#is', "' . $\\1 . '", $this->message);
+        /** Replace vars and prepare message */
+        $this->message = preg_replace('#\{([a-z0-9\-_]*?)\}#is', "$\\1", $this->message);
         foreach ($this->vars as $key => $val) {
             $this->message = preg_replace(sprintf('/\$\{?%s\}?/', $key), $val, $this->message);
         }
+        $this->message = trim($this->message);
 
         /** Set some variables */
         $this->subject = !empty($this->subject) ? $this->subject : $lang['EMAILER_SUBJECT']['EMPTY'];
@@ -233,7 +231,7 @@ class Emailer
         /** @var Swift_Message $message */
         $message = (new Swift_Message())
             ->setSubject($this->subject)
-            ->setReturnPath($bb_cfg['board_email'])
+            ->setReturnPath($bb_cfg['bounce_email'])
             ->setFrom($this->from)
             ->setTo($this->to)
             ->setReplyTo($this->reply)

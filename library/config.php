@@ -403,6 +403,7 @@ $bb_cfg['pm_notify_enabled'] = true;
 $bb_cfg['group_send_email'] = true;
 $bb_cfg['email_change_disabled'] = false;        // disable changing email by user
 
+$bb_cfg['bounce_email'] = "bounce@$domain_name"; // bounce email address
 $bb_cfg['tech_admin_email'] = "admin@$domain_name"; // email for sending error reports
 $bb_cfg['abuse_email'] = "abuse@$domain_name";
 $bb_cfg['adv_email'] = "adv@$domain_name";
