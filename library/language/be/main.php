@@ -1219,7 +1219,7 @@ $lang['UNSET_DL_STATUS'] = 'Не Спампаваць';
 $lang['TOPICS_DOWN_SETS'] = 'Статус тэмы зменены на <b>Download</b>';
 $lang['TOPICS_DOWN_UNSETS'] = 'Статус <b>Download</b> выдаленыя';
 
-$lang['TOPIC_DL'] = 'Дл';
+$lang['TOPIC_DL'] = 'DL';
 
 $lang['MY_DOWNLOADS'] = 'Мае Загрузкі';
 $lang['SEARCH_DL_WILL'] = 'Плануецца';
@@ -1546,7 +1546,7 @@ $lang['DL_UL_SPEED'] = 'Хуткасць вул';
 $lang['DL_DL_SPEED'] = 'Хуткасць дл';
 $lang['DL_PORT'] = 'Порт';
 $lang['DL_FORMULA'] = 'Формула: Загружаны/TorrentSize';
-$lang['DL_ULR'] = 'УЛР';
+$lang['DL_ULR'] = 'URL-адрас';
 $lang['DL_STOPPED'] = 'спыніўся';
 $lang['DL_UPD'] = 'упд: ';
 $lang['DL_INFO'] = 'паказвае дадзеныя <i><b>only для бягучага session</b></i>';
@@ -1581,7 +1581,7 @@ $lang['PROFILE_EDIT_RETURN'] = 'Вярнуцца да рэдагавання';
 $lang['PROFILE_RETURN'] = 'Перайсці ў профіль';
 
 $lang['WARNING'] = 'Папярэджанне';
-$lang['INDEXER'] = "Пошук пераіндэксацыя";
+$lang['INDEXER'] = 'Пошук пераіндэксацыя';
 
 $lang['FORUM_STYLE'] = 'Стыль форуму';
 
@@ -1717,7 +1717,7 @@ $lang['AUTH_ANNOUNCE'] = $lang['ANNOUNCE'] = 'Абвясціць';
 $lang['AUTH_VOTE'] = $lang['VOTE'] = 'Галасаванне';
 $lang['AUTH_POLLCREATE'] = $lang['POLLCREATE'] = 'Стварыць апытанне';
 $lang['AUTH_ATTACHMENTS'] = $lang['AUTH_ATTACH'] = 'Пост Файлы';
-$lang['AUTH_DOWNLOAD'] = $lang['AUTH_DOWNLOAD'] = 'Спампаваць Файлы';
+$lang['AUTH_DOWNLOAD'] = 'Спампаваць файлы';
 
 $lang['SIMPLE_PERMISSION'] = 'Простая Дазволу';
 
@@ -2818,3 +2818,17 @@ $lang['UPLOAD_ERRORS'] = array(
 $lang['CAPTCHA'] = 'Пераканайцеся, што Вы не робат';
 $lang['CAPTCHA_WRONG'] = 'Вы не маглі б пацвердзіць, што Вы не робат';
 $lang['CAPTCHA_SETTINGS'] = '<h2>ReCaptcha не будучы цалкам configured</h2><p>if вы яшчэ не згенераваў ключы, вы можаце зрабіць гэта на <a href="https://www.google.com/recaptcha/admin">https://ВСП.гугл.ком/рекапчу/admin</a>.<br />After вы генерируете ключы, вам трэба пакласці іх у файл Library/конфіг.у PHP.</p>';
+
+// Emailer
+$lang['EMAILER_SUBJECT'] = [
+    'EMPTY' => 'Без Тэмы',
+    'GROUP_ADDED' => 'Вы былі дададзеныя ў гэтую групу',
+    'GROUP_APPROVED' => 'Ваш запыт быў ухвалены',
+    'GROUP_REQUEST' => 'Просьба далучыцца да вашай групе стала',
+    'PRIVMSG_NOTIFY' => 'Прыйшло новае асабістае паведамленне і',
+    'TOPIC_NOTIFY' => 'Тэма Апавяшчэнне Адказ %s',
+    'USER_ACTIVATE' => 'Актываваць свой рахунак',
+    'USER_ACTIVATE_PASSWD' => 'Новы пароль для актывацыі',
+    'USER_WELCOME' => 'Сардэчна запрашаем у %s форумаў',
+    'USER_WELCOME_INACTIVE' => 'Сардэчна запрашаем у %s форумаў',
+];
