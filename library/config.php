@@ -55,6 +55,7 @@
  * Registration
  * Email
  * Debug
+ * Bugsnag error reporting
  * Special users (dbg_users, unlimited_users, super_admins)
  * Log options
  * Error reporting
@@ -416,6 +417,12 @@ define('SQL_CALC_QUERY_TIME', true);     // for stats
 define('SQL_LOG_SLOW_QUERIES', true);     // log sql slow queries
 define('SQL_SLOW_QUERY_TIME', 10);       // slow query in seconds
 define('SQL_PREPEND_SRC_COMM', false);    // prepend source file comment to sql query
+
+// Bugsnag error reporting
+$bb_cfg['bugsnag'] = [
+    'enabled' => false,
+    'api_key' => '',
+];
 
 // Special users
 $bb_cfg['dbg_users'] = array(

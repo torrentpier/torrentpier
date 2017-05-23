@@ -398,7 +398,7 @@ if ($view === 'attachments') {
         for ($i = 0, $iMax = count($attachments); $i < $iMax; $i++) {
             $delete_box = '<input type="checkbox" name="delete_id_list[]" value="' . (int)$attachments[$i]['attach_id'] . '" />';
 
-            for ($j = 0, $iMax = count($delete_id_list); $j < $iMax; $j++) {
+            for ($j = 0, $jMax = count($delete_id_list); $j < $jMax; $j++) {
                 if ($delete_id_list[$j] == $attachments[$i]['attach_id']) {
                     $delete_box = '<input type="checkbox" name="delete_id_list[]" value="' . (int)$attachments[$i]['attach_id'] . '" checked="checked" />';
                     break;
@@ -409,7 +409,7 @@ if ($view === 'attachments') {
 
             // Is the Attachment assigned to more than one post ?
             // If it's not assigned to any post, it's an private message thingy. ;)
-            $post_titles = array();
+            $post_titles = [];
 
             $sql = "SELECT *
 			FROM " . BB_ATTACHMENTS . "

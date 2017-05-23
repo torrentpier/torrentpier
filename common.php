@@ -57,14 +57,20 @@ header('X-Frame-Options: SAMEORIGIN');
 if (!file_exists(__DIR__ . '/vendor/autoload.php')) {
     die('Please <a href="https://getcomposer.org/download/" target="_blank" rel="noreferrer" style="color:#0a25bb;">install composer</a> and run <code style="background:#222;color:#00e01f;padding:2px 6px;border-radius:3px;">composer install</code>');
 }
-
 require_once __DIR__ . '/vendor/autoload.php';
 
 // Get initial config
 require __DIR__ . '/library/config.php';
 
-$server_protocol = ($bb_cfg['cookie_secure']) ? 'https://' : 'http://';
-$server_port = (in_array($bb_cfg['server_port'], array(80, 443))) ? '' : ':' . $bb_cfg['server_port'];
+// Bugsnag error reporting
+if ($bb_cfg['bugsnag']['enabled'] && !empty($bb_cfg['bugsnag']['api_key'])) {
+    /** @var Bugsnag\Handler $bugsnag */
+    $bugsnag = Bugsnag\Client::make($bb_cfg['bugsnag']['api_key']);
+    Bugsnag\Handler::register($bugsnag);
+}
+
+$server_protocol = $bb_cfg['cookie_secure'] ? 'https://' : 'http://';
+$server_port = in_array($bb_cfg['server_port'], array(80, 443), true) ? '' : ':' . $bb_cfg['server_port'];
 define('FORUM_PATH', $bb_cfg['script_path']);
 define('FULL_URL', $server_protocol . $bb_cfg['server_name'] . $server_port . $bb_cfg['script_path']);
 unset($server_protocol, $server_port);

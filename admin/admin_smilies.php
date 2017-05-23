@@ -95,7 +95,7 @@ if (isset($_GET['import_pack']) || isset($_POST['import_pack'])) {
         for ($i = 0, $iMax = count($fcontents); $i < $iMax; $i++) {
             $smile_data = explode($delimeter, trim(addslashes($fcontents[$i])));
 
-            for ($j = 2, $jMax = count($smile_data); $j < $iMax; $j++) {
+            for ($j = 2, $jMax = count($smile_data); $j < $jMax; $j++) {
                 // Replace > and < with the proper html_entities for matching
                 $smile_data[$j] = str_replace('<', '&lt;', $smile_data[$j]);
                 $smile_data[$j] = str_replace('>', '&gt;', $smile_data[$j]);
