@@ -1,7 +1,12 @@
+<p align="center"><img src="https://torrentpier.me/forum/styles/default/xenforo/bull-logo.svg" width="400px" /></p>
+<p align="center">
+    <a href="https://gitter.im/torrentpier/torrentpier?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge"><img src="https://badges.gitter.im/Join%20Chat.svg" />
+</p>
+
 TorrentPier
 ======================
 
-[![Join the chat at https://gitter.im/torrentpier/torrentpier](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/torrentpier/torrentpier?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+
 
 TorrentPier - движок торрент-трекера, написанный на php. Высокая скорость работы, простота модификации, устойчивость к высоким нагрузкам, в том числе и поддержка альтернативных анонсеров (например, Ocelot). Помимо этого, крайне развитый официальный форум поддержки, где помимо прочего можно испытать движок в работе на демо-версии, не устанавливая его, а также получить любую другую интересующую вас информацию и скачать моды.
 
