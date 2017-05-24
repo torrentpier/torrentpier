@@ -26,9 +26,9 @@
 define('BB_SCRIPT', 'ajax');
 define('IN_AJAX', true);
 
-$ajax = new TorrentPier\Legacy\Ajax();
-
 require __DIR__ . '/common.php';
+
+$ajax = new TorrentPier\Legacy\Ajax();
 
 $ajax->init();
 

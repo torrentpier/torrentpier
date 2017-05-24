@@ -163,7 +163,7 @@ if (empty($forum_id)) {
     reset($simple_auth_ary);
     foreach ($simple_auth_ary as $key => $auth_levels) {
         $matched = 1;
-        for ($k = 0, $kMax = count($auth_levels); $k < $iMax; $k++) {
+        for ($k = 0, $kMax = count($auth_levels); $k < $kMax; $k++) {
             $matched_type = $key;
 
             if ($forum_rows[0][$forum_auth_fields[$k]] != $auth_levels[$k]) {
@@ -189,7 +189,7 @@ if (empty($forum_id)) {
     if (empty($adv)) {
         $simple_auth = '<select name="simpleauth">';
 
-        for ($j = 0, $jMax = count($simple_auth_types); $j < $iMax; $j++) {
+        for ($j = 0, $jMax = count($simple_auth_types); $j < $jMax; $j++) {
             $selected = ($matched_type == $j) ? ' selected="selected"' : '';
             $simple_auth .= '<option value="' . $j . '"' . $selected . '>' . $simple_auth_types[$j] . '</option>';
         }
@@ -207,10 +207,10 @@ if (empty($forum_id)) {
         // Output values of individual
         // fields
         //
-        for ($j = 0, $jMax = count($forum_auth_fields); $j < $iMax; $j++) {
+        for ($j = 0, $jMax = count($forum_auth_fields); $j < $jMax; $j++) {
             $custom_auth[$j] = '&nbsp;<select name="' . $forum_auth_fields[$j] . '">';
 
-            for ($k = 0, $kMax = count($forum_auth_levels); $k < $iMax; $k++) {
+            for ($k = 0, $kMax = count($forum_auth_levels); $k < $kMax; $k++) {
                 $selected = ($forum_rows[0][$forum_auth_fields[$j]] == $forum_auth_const[$k]) ? ' selected="selected"' : '';
                 $custom_auth[$j] .= '<option value="' . $forum_auth_const[$k] . '"' . $selected . '>' . $lang['FORUM_' . strtoupper($forum_auth_levels[$k])] . '</OPTION>';
             }

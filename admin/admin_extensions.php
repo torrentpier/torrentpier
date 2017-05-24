@@ -252,7 +252,7 @@ if ($submit && $mode == 'groups') {
     $allowed_list = array();
 
     for ($i = 0, $iMax = count($group_allowed_list); $i < $iMax; $i++) {
-        for ($j = 0, $jMax = count($group_change_list); $j < $iMax; $j++) {
+        for ($j = 0, $jMax = count($group_change_list); $j < $jMax; $j++) {
             if ($group_allowed_list[$i] == $group_change_list[$j]) {
                 $allowed_list[$j] = 1;
             }

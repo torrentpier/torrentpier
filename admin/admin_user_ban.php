@@ -100,7 +100,7 @@ if (isset($_POST['submit'])) {
             } elseif (preg_match('/^([\w\-_]\.?){2,}$/is', trim($ip_list_temp[$i]))) {
                 $ip = gethostbynamel(trim($ip_list_temp[$i]));
 
-                for ($j = 0, $jMax = count($ip); $j < $iMax; $j++) {
+                for ($j = 0, $jMax = count($ip); $j < $jMax; $j++) {
                     if (!empty($ip[$j])) {
                         $ip_list[] = encode_ip($ip[$j]);
                     }
@@ -133,7 +133,7 @@ if (isset($_POST['submit'])) {
     $kill_session_sql = '';
     for ($i = 0, $iMax = count($user_list); $i < $iMax; $i++) {
         $in_banlist = false;
-        for ($j = 0, $jMax = count($current_banlist); $j < $iMax; $j++) {
+        for ($j = 0, $jMax = count($current_banlist); $j < $jMax; $j++) {
             if ($user_list[$i] == $current_banlist[$j]['ban_userid']) {
                 $in_banlist = true;
             }
@@ -151,7 +151,7 @@ if (isset($_POST['submit'])) {
 
     for ($i = 0, $iMax = count($ip_list); $i < $iMax; $i++) {
         $in_banlist = false;
-        for ($j = 0, $jMax = count($current_banlist); $j < $iMax; $j++) {
+        for ($j = 0, $jMax = count($current_banlist); $j < $jMax; $j++) {
             if ($ip_list[$i] == $current_banlist[$j]['ban_ip']) {
                 $in_banlist = true;
             }
@@ -183,7 +183,7 @@ if (isset($_POST['submit'])) {
 
     for ($i = 0, $iMax = count($email_list); $i < $iMax; $i++) {
         $in_banlist = false;
-        for ($j = 0, $jMax = count($current_banlist); $j < $iMax; $j++) {
+        for ($j = 0, $jMax = count($current_banlist); $j < $jMax; $j++) {
             if ($email_list[$i] == $current_banlist[$j]['ban_email']) {
                 $in_banlist = true;
             }
