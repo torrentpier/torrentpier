@@ -178,11 +178,11 @@ function msg_die($msg)
         dbg_log(' ', '!die-' . clean_filename($msg));
     }
 
-    $output = bencode(array(
+    $output = \Rych\Bencode\Bencode::encode([
         'min interval' => (int)1800,
         'failure reason' => (string)$msg,
         'warning message' => (string)$msg,
-    ));
+    ]);
 
     die($output);
 }
@@ -473,7 +473,7 @@ if (!$output) {
 }
 
 // Return data to client
-echo bencode($output);
+echo \Rych\Bencode\Bencode::encode($output);
 
 tracker_exit();
 exit;

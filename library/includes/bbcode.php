@@ -112,7 +112,7 @@ function bbcode_tpl_compact($text)
 // prepare a posted message for entry into the database
 function prepare_message($message)
 {
-    $message = bbcode::clean_up($message);
+    $message = \TorrentPier\Legacy\BBCode::clean_up($message);
     $message = htmlCHR($message, false, ENT_NOQUOTES);
     return $message;
 }
