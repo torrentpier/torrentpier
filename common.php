@@ -70,7 +70,7 @@ if ($bb_cfg['bugsnag']['enabled'] && !empty($bb_cfg['bugsnag']['api_key'])) {
 }
 
 $server_protocol = $bb_cfg['cookie_secure'] ? 'https://' : 'http://';
-$server_port = in_array($bb_cfg['server_port'], array(80, 443), true) ? '' : ':' . $bb_cfg['server_port'];
+$server_port = in_array((int)$bb_cfg['server_port'], array(80, 443), true) ? '' : ':' . $bb_cfg['server_port'];
 define('FORUM_PATH', $bb_cfg['script_path']);
 define('FULL_URL', $server_protocol . $bb_cfg['server_name'] . $server_port . $bb_cfg['script_path']);
 unset($server_protocol, $server_port);
@@ -311,52 +311,6 @@ function make_rand_str($len = 10)
     return substr($str, 0, $len);
 }
 
-// bencode: based on OpenTracker
-function bencode($var)
-{
-    if (is_string($var)) {
-        return strlen($var) . ':' . $var;
-    }
-
-    if (is_int($var)) {
-        return 'i' . $var . 'e';
-    } elseif (is_float($var)) {
-        return 'i' . sprintf('%.0f', $var) . 'e';
-    } elseif (is_array($var)) {
-        if (count($var) == 0) {
-            return 'de';
-        }
-
-        $assoc = false;
-
-        foreach ($var as $key => $val) {
-            if (!is_int($key)) {
-                $assoc = true;
-                break;
-            }
-        }
-
-        if ($assoc) {
-            ksort($var, SORT_REGULAR);
-            $ret = 'd';
-
-            foreach ($var as $key => $val) {
-                $ret .= bencode($key) . bencode($val);
-            }
-            return $ret . 'e';
-        }
-
-        $ret = 'l';
-
-        foreach ($var as $val) {
-            $ret .= bencode($val);
-        }
-        return $ret . 'e';
-    } else {
-        trigger_error('bencode error: wrong data type', E_USER_ERROR);
-    }
-}
-
 function array_deep(&$var, $fn, $one_dimensional = false, $array_only = false)
 {
     if (is_array($var)) {
@@ -462,11 +416,11 @@ elseif (defined('IN_TRACKER')) {
 
     function dummy_exit($interval = 1800)
     {
-        $output = bencode(array(
+        $output = \Rych\Bencode\Bencode::encode([
             'interval' => (int)$interval,
             'min interval' => (int)$interval,
             'peers' => (string)DUMMY_PEER,
-        ));
+        ]);
 
         die($output);
     }

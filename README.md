@@ -1,16 +1,21 @@
 <p align="center"><img src="https://torrentpier.me/forum/styles/default/xenforo/bull-logo.svg" width="400px" /></p>
 <p align="center">
-    <a href="https://gitter.im/torrentpier/torrentpier?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge"><img src="https://badges.gitter.im/Join%20Chat.svg" />
+    <a href="http://torrentpier.herokuapp.com/"><img src="http://torrentpier.herokuapp.com/badge.svg" alt="Slack"></a>
+    <a href="https://crowdin.com/project/torrentpier"><img src="https://d322cqt584bo4o.cloudfront.net/torrentpier/localized.svg" alt="Crowdin"></a>
+    <a href="https://scrutinizer-ci.com/g/torrentpier/torrentpier/"><img src="https://img.shields.io/scrutinizer/g/torrentpier/torrentpier.svg" alt="Scrutinizer"></a>
+    <a href="https://www.codacy.com/app/Exile37/torrentpier"><img src="https://img.shields.io/codacy/grade/8b79a63a6d464b81bf0a39923f42bdf5/master.svg" alt="Codacy"></a>
+    <br />
+    <a href="https://insight.sensiolabs.com/projects/1a5d5098-e0b0-45c2-816a-020dfd50acaf"><img src="https://img.shields.io/sensiolabs/i/1a5d5098-e0b0-45c2-816a-020dfd50acaf.svg" alt="SensioLabs Insight"></a>
+    <a href="https://travis-ci.org/torrentpier/torrentpier"><img src="https://img.shields.io/travis/torrentpier/torrentpier/master.svg" alt="Travis"></a>
+    <a href="https://circleci.com/gh/torrentpier/torrentpier"><img src="https://img.shields.io/circleci/project/github/torrentpier/torrentpier/master.svg" alt="CircleCI"></a>
+    <a href="https://codecov.io/gh/torrentpier/torrentpier"><img src="https://img.shields.io/codecov/c/github/torrentpier/torrentpier/master.svg" alt="Codecov"></a>
 </p>
 
-TorrentPier
-======================
-
-
+# TorrentPier
 
 TorrentPier - движок торрент-трекера, написанный на php. Высокая скорость работы, простота модификации, устойчивость к высоким нагрузкам, в том числе и поддержка альтернативных анонсеров (например, Ocelot). Помимо этого, крайне развитый официальный форум поддержки, где помимо прочего можно испытать движок в работе на демо-версии, не устанавливая его, а также получить любую другую интересующую вас информацию и скачать моды.
 
-## Установка
+## Installation
 
 Для установки вам необходимо выполнить несколько простых шагов:
 
@@ -44,7 +49,7 @@ TorrentPier - движок торрент-трекера, написанный �
 
 ## Необходимая версия php
 
-Минимально поддерживаемой версией в настоящий момент является 5.3. Существует поддержка вплоть до версии 7.1.
+Минимально поддерживаемой версией в настоящий момент является 5.5. Существует поддержка вплоть до версии 7.1.
 
 ## Необходимые настройки php
 
@@ -73,13 +78,18 @@ TorrentPier - движок торрент-трекера, написанный �
 Инструкция по сборке приведена на нашем форуме: https://torrentpier.me/threads/sborka-ocelot-pod-debian-7-1.26078/
 Для работы анонсера требуется замена двух таблиц в базе данных - дамп в файле: **install/sql/ocelot.sql**
 
-## Папка install
+## Official Documentation
 
-В корне движка присутствует папка **install**, в которой находятся служебные файлы, необходимые для его установки (дамп базы, примеры конфигов) и обновления (дамперы, скрипты конвертации). Доступ к данной папке по-умолчанию закрыт, но если ее присутствие вам мешает - вы можете ее удалить. На файл **README.md** это также распространяется.
+Documentation for TorrentPier can be found on the [TorrentPier docs website](https://docs.torrentpier.me).
 
-## Полезные ссылки
+## Contributing
 
-+ Наш форум https://torrentpier.me/
-+ Центр загрузки https://get.torrentpier.me/
-+ Часто задаваемые вопросы https://faq.torrentpier.me/
-+ Где задать вопрос https://torrentpier.me/forums/10/
+Please read [CONTRIBUTING.md](CONTRIBUTING.md) for details on our code of conduct, and the process for submitting pull requests to us.
+
+## Versioning
+
+We use [SemVer](http://semver.org/) for versioning. For the versions available, see the [tags on this repository](https://github.com/torrentpier/torrentpier/tags). 
+
+## License
+
+This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details

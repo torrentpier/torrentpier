@@ -26,11 +26,6 @@
       "name": "PheRum",
       "homepage": "https://torrentpier.me/forum/members/pherum.23/",
       "role": "Developer"
-    },
-    {
-      "name": "tpuser",
-      "homepage": "https://torrentpier.me/forum/members/tpuser.7560/",
-      "role": "Developer"
     }
   ],
   "support": {
@@ -38,15 +33,16 @@
     "issues": "https://github.com/torrentpier/torrentpier/issues",
     "forum": "https://torrentpier.me/forum/",
     "get": "https://get.torrentpier.me/",
-    "docs": "https://faq.torrentpier.me/"
+    "docs": "https://docs.torrentpier.me/"
   },
   "require": {
-    "php": "^5.3 || ^7.0",
+    "php": "^5.5 || ^7.0",
     "bugsnag/bugsnag": "^3.0",
     "gigablah/sphinxphp": "^2.0",
     "google/recaptcha": "^1.0",
     "roave/security-advisories": "dev-master",
-    "swiftmailer/swiftmailer": "^6.0"
+    "rych/bencode": "^1.0",
+    "swiftmailer/swiftmailer": "^5.4"
   },
   "autoload": {
     "psr-4": {
