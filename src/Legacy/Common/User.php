@@ -89,11 +89,6 @@ class User
     public $id;
 
     /**
-     *  Misc
-     */
-    public $show_ads = false;
-
-    /**
      *  Constructor
      */
     public function __construct()
@@ -487,7 +482,9 @@ class User
         if ($expire_check) {
             if ($create_new && !$autologin_id) {
                 return $this->create_autologin_id($userdata);
-            } elseif ($autologin_id && $userdata['user_session_time'] && $bb_cfg['max_autologin_time']) {
+            }
+
+            if ($autologin_id && $userdata['user_session_time'] && $bb_cfg['max_autologin_time']) {
                 if (TIMENOW - $userdata['user_session_time'] > $bb_cfg['max_autologin_time'] * 86400) {
                     return $this->create_autologin_id($userdata, $create_new);
                 }
@@ -575,7 +572,6 @@ class User
         }
 
         $this->load_opt_js();
-        $this->enqueue_ads();
     }
 
     /**
@@ -715,19 +711,6 @@ class User
                 return $excluded;
             case  'flip':
                 return array_flip(explode(',', $excluded));
-        }
-    }
-
-    /**
-     *  Enqueue ads
-     */
-    public function enqueue_ads()
-    {
-        global $datastore, $bb_cfg;
-
-        if ($bb_cfg['show_ads'] && !bf($this->opt, 'user_opt', 'user_hide_ads') && !defined('IN_ADMIN') && !defined('IN_AJAX')) {
-            $datastore->enqueue('ads');
-            $this->show_ads = true;
         }
     }
 }

@@ -129,7 +129,6 @@ $template->assign_vars(array(
         $bb_cfg['lang'][$userdata['user_lang']]['encoding'] : 'utf-8',
 
     'IN_ADMIN' => defined('IN_ADMIN'),
-    'SHOW_ADS' => (!$logged_in || isset($bb_cfg['show_ads_users'][$user->id]) || (!IS_AM && $user->show_ads)),
     'USER_HIDE_CAT' => (BB_SCRIPT == 'index'),
 
     'USER_LANG' => $userdata['user_lang'],
@@ -250,17 +249,6 @@ if (!empty($page_cfg['show_torhelp'][BB_SCRIPT]) && !empty($userdata['torhelp'])
         $template->assign_vars(array(
             'TORHELP_TOPICS' => implode("</li>\n<li>", $torhelp_topics),
         ));
-    }
-}
-
-// Ads
-if ($user->show_ads) {
-    $load_ads = array('trans');
-    if (defined('BB_SCRIPT')) {
-        $load_ads[] = BB_SCRIPT;
-    }
-    foreach ($ads->get($load_ads) as $block_id => $ad_html) {
-        $template->assign_var("AD_BLOCK_{$block_id}", $ad_html);
     }
 }
 

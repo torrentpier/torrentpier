@@ -176,30 +176,3 @@ if ($bb_cfg['show_network_news'] and $net_forum_ids = $bb_cfg['network_news_foru
 
     $this->store('network_news', $data);
 }
-
-//
-// Ads
-//
-if ($bb_cfg['show_ads']) {
-    $ad_html = $ad_block_assignment = array();
-
-    $active_ads = DB()->fetch_rowset("
-		SELECT *
-		FROM " . BB_ADS . "
-		WHERE ad_status = 1
-			AND ad_start_time < NOW()
-			AND DATE_ADD(ad_start_time, INTERVAL ad_active_days DAY) > NOW()
-	");
-
-    foreach ($active_ads as $ad) {
-        if ($ad['ad_block_ids']) {
-            foreach (explode(',', $ad['ad_block_ids']) as $block_id) {
-                $ad_block_assignment[$block_id][] = $ad['ad_id'];
-            }
-        }
-        $ad_html[$ad['ad_id']] = $ad['ad_html'];
-    }
-
-    $this->store('ads', $ad_html);
-    bb_update_config(array('active_ads' => serialize($ad_block_assignment)));
-}

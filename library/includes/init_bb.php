@@ -277,7 +277,6 @@ $bb_cfg['tor_no_tor_act'] = array(
 // Table names
 define('BUF_TOPIC_VIEW', 'buf_topic_view');
 define('BUF_LAST_SEEDER', 'buf_last_seeder');
-define('BB_ADS', 'bb_ads');
 define('BB_ATTACH_CONFIG', 'bb_attachments_config');
 define('BB_ATTACHMENTS_DESC', 'bb_attachments_desc');
 define('BB_ATTACHMENTS', 'bb_attachments');
@@ -467,7 +466,6 @@ if (DBG_USER) {
     require INC_DIR . '/functions_dev.php';
 }
 
-$ads = new TorrentPier\Legacy\Common\Ads();
 $html = new TorrentPier\Legacy\Common\Html();
 $log_action = new TorrentPier\Legacy\LogAction();
 
