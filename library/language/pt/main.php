@@ -1738,7 +1738,7 @@ $lang['CLICK_RETURN_FORUMAUTH'] = 'Clique %sHere%s para retornar ao Fórum Permi
 
 // Banning
 $lang['BAN_CONTROL'] = 'Proibição De Controle';
-$lang['BAN_EXPLAIN'] = 'Aqui você pode controlar o banimento de usuários. Pode-se conseguir isso por meio da proibição de um ou ambos de um usuário específico ou de um indivíduo ou de um intervalo de endereços IP ou nomes de host. Estes métodos impedem que um usuário alcançando até mesmo a página de índice do seu conselho. Para impedir que um usuário de registrar, sob um nome de usuário diferente você também pode especificar um banido endereço de e-mail. Por favor, note que a proibição de um endereço de e-mail por si só não vai impedir que o usuário seja capaz de fazer logon ou postar em seu conselho. Você deve usar um dos dois primeiros métodos para conseguir isso.';
+$lang['BAN_EXPLAIN'] = 'Aqui você pode controlar o banimento de usuários. Pode-se conseguir isso por meio da proibição de um ou ambos de um usuário específico ou de um indivíduo ou de um intervalo de endereços IP. Estes métodos impedem que um usuário alcançando até mesmo a página de índice do seu conselho. Para impedir que um usuário de registrar, sob um nome de usuário diferente você também pode especificar um banido endereço de e-mail. Por favor, note que a proibição de um endereço de e-mail por si só não vai impedir que o usuário seja capaz de fazer logon ou postar em seu conselho. Você deve usar um dos dois primeiros métodos para conseguir isso.';
 $lang['BAN_EXPLAIN_WARN'] = 'Por favor, note que a entrada de um intervalo de endereços IP resultados em todos os endereços entre o início e o fim a ser adicionado para a banlist. Serão feitas tentativas para minimizar o número de endereços adicionados ao banco de dados através da introdução de caracteres universais automaticamente quando apropriado. Se você realmente tem de introduzir um intervalo, tente mantê-lo pequeno, ou melhor ainda do estado de endereços específicos.';
 
 $lang['SELECT_IP'] = 'Seleccione um endereço IP';
@@ -1747,9 +1747,9 @@ $lang['SELECT_EMAIL'] = 'Selecione um endereço de e-Mail';
 $lang['BAN_USERNAME'] = 'Para banir um ou mais usuários específicos';
 $lang['BAN_USERNAME_EXPLAIN'] = 'Você pode proibir que vários usuários de uma só vez usando a combinação de mouse e teclado para o seu computador e navegador';
 
-$lang['BAN_IP'] = 'Para banir um ou mais endereços IP ou nomes de host';
-$lang['IP_HOSTNAME'] = 'Os endereços IP ou nomes de host';
-$lang['BAN_IP_EXPLAIN'] = 'Para especificar vários endereços IP ou nomes de host separe-os com vírgulas. Para especificar um intervalo de endereços IP, separe a começar e terminar com um hífen (-); para especificar um caractere curinga, utilize um asterisco (*).';
+$lang['BAN_IP'] = 'Para banir um ou mais endereços IP';
+$lang['IP_HOSTNAME'] = 'Endereços IP';
+$lang['BAN_IP_EXPLAIN'] = 'Para especificar vários endereços IP diferentes separe-os com vírgulas.';
 
 $lang['BAN_EMAIL'] = 'Para banir um ou mais endereços de e-mail';
 $lang['BAN_EMAIL_EXPLAIN'] = 'Para especificar mais de um endereço de e-mail, separe-os com vírgulas. Para especificar um caractere curinga nome de usuário, use * como *@hotmail.com';
@@ -2661,7 +2661,7 @@ $lang['SEARCH_USERS_ADVANCED'] = 'Usuário Avançado De Pesquisa';
 $lang['SEARCH_USERS_EXPLAIN'] = 'Este Módulo permite executar pesquisas avançadas para os usuários em uma ampla gama de critérios. Por favor, leia as descrições de cada campo para compreender cada opção de busca completamente.';
 $lang['SEARCH_USERNAME_EXPLAIN'] = 'Aqui você pode realizar uma pesquisa não diferencia maiúsculas de minúsculas para nomes de usuário. Se você gostaria de corresponder parte do utilizador, utilize * (asterisco) como um caractere curinga.';
 $lang['SEARCH_EMAIL_EXPLAIN'] = 'Introduzir uma expressão para corresponder a um endereço de email do usuário. Este é sensível a maiúsculas e minúsculas. Se você quer fazer uma correspondência parcial, utilize * (asterisco) como um caractere curinga.';
-$lang['SEARCH_IP_EXPLAIN'] = 'Procurar utilizadores por um endereço IP específico (xxx.xxx.xxx.xxx), curinga (xxx.xxx.xxx.*) ou intervalo de (xxx.xxx.xxx.xxx-yyy.yyy.yyy.yyy). Nota: a última quad .255 é considerado o intervalo de todos os IPs no quad. Se você inserir 10.0.0.255, é como se entrasse 10.0.0.* (Nenhum IP é atribuído .255 para que o assunto, é reservada). Onde você pode encontrar isso em intervalos de, 10.0.0.5-10.0.0.255 é o mesmo que "10.0.0.*" . Você deve realmente entrar 10.0.0.5-10.0.0.254 .';
+$lang['SEARCH_IP_EXPLAIN'] = 'Procurar utilizadores por um endereço IP específico (xxx.xxx.xxx.xxx).';
 $lang['SEARCH_USERS_JOINED'] = 'Os usuários que aderiram';
 $lang['SEARCH_USERS_LASTVISITED'] = 'Usuários que visitaram';
 $lang['IN_THE_LAST'] = 'no último';

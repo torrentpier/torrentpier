@@ -1738,7 +1738,7 @@ $lang['CLICK_RETURN_FORUMAUTH'] = 'Klik %sHere%s da se vrati u Forum Dozvole';
 
 // Banning
 $lang['BAN_CONTROL'] = 'Zabrana Kontrolu';
-$lang['BAN_EXPLAIN'] = 'Ovdje možeš kontrolisati zabrani korisnika. Možeš postići ovo zabrani ili obojica specifičan korisnik ili pojedinca ili domet IP adrese ili hostnames. Ove metode spriječiti korisnik iz čak i do indeks stranica iz tvog odbora. Da spriječimo korisnik od registraciju pod drugim korisničko ime takođe možeš navesti zabranjen e-mail adresu. Imajte na umu da zabrani e-mail adresu sama neće spriječiti da korisnik od biti u mogucnosti da se prijavi na ili post da tvoj odbor. Trebala bi koristiti jednu od prve dvije metode da ostvarimo ovo.';
+$lang['BAN_EXPLAIN'] = 'Ovdje možeš kontrolisati zabrani korisnika. Možeš postići ovo zabrani ili obojica specifičan korisnik ili pojedinca ili domet IP adrese. Ove metode spriječiti korisnik iz čak i do indeks stranica iz tvog odbora. Da spriječimo korisnik od registraciju pod drugim korisničko ime takođe možeš navesti zabranjen e-mail adresu. Imajte na umu da zabrani e-mail adresu sama neće spriječiti da korisnik od biti u mogucnosti da se prijavi na ili post da tvoj odbor. Trebala bi koristiti jednu od prve dvije metode da ostvarimo ovo.';
 $lang['BAN_EXPLAIN_WARN'] = 'Imajte na umu da ulazi u domet IP adrese rezultate u sve adrese između početka i kraja biti dodao na banlist. Pokušava će biti napravio za smanjivanje broja adrese dodao na bazi podataka uvodeći džoker učesnika automatski gdje je prikladno. Ako stvarno mora da uđu u domet, pokušaj da držiš to male ili još bolje, stanje specifične adrese.';
 
 $lang['SELECT_IP'] = 'Odaberite IP adrese';
@@ -1747,9 +1747,9 @@ $lang['SELECT_EMAIL'] = 'Izaberi jednu e-Mail adresu';
 $lang['BAN_USERNAME'] = 'Zabrana jedan ili određeniji korisnici';
 $lang['BAN_USERNAME_EXPLAIN'] = 'Možeš da zabrani više korisnici u jednom koristeći prikladno kombinacija miša i tastaturu za tvoj kompjuter i pretraživač';
 
-$lang['BAN_IP'] = 'Zabrana da je jedan ili više IP adrese ili hostnames';
-$lang['IP_HOSTNAME'] = 'IP adrese ili hostnames';
-$lang['BAN_IP_EXPLAIN'] = 'Da odredite nekoliko različitih IP adrese ili hostnames razdvojiti ih sa zareze. Da navedete domet IP adrese, razdvojiti početak i kraj sa crtica (-); da navedete ludo, koristi zvjezdicu (*).';
+$lang['BAN_IP'] = 'Zabrana da je jedan ili više IP adrese';
+$lang['IP_HOSTNAME'] = 'IP adrese';
+$lang['BAN_IP_EXPLAIN'] = 'Da odredite nekoliko različitih IP adrese razdvojiti ih sa zareze.';
 
 $lang['BAN_EMAIL'] = 'Zabrana da je jedan ili više e-mail adresa';
 $lang['BAN_EMAIL_EXPLAIN'] = 'Da navedite više od jednu e-mail adresu, razdvojiti ih sa zareze. Da navedete ludo korisničko ime, koristi * kao *@hotmail.com';
@@ -2661,7 +2661,7 @@ $lang['SEARCH_USERS_ADVANCED'] = 'Napredna Korisnik Potragu';
 $lang['SEARCH_USERS_EXPLAIN'] = 'Ovaj Modul ti omogućava da izvede napredna pretraga za korisnike na širok spektar kriterije. Molim vas da pročitate opisa ispod svakog polja da razumijemo jedna potraga opcija u potpunosti.';
 $lang['SEARCH_USERNAME_EXPLAIN'] = 'Ovdje možete obavljati slučaj bezosećajan potraga za usernames. Ako želite da meč dio korisničko ime, koristi * (asteriks) kao ludo.';
 $lang['SEARCH_EMAIL_EXPLAIN'] = 'Unesite izraz da meč korisnik je e-mail adresu. Ovo je slučaj bezosećajan. Ako želiš da uradiš djelomičan meč, koristi * (asteriks) kao ludo.';
-$lang['SEARCH_IP_EXPLAIN'] = 'Potraga za korisnike do određenog IP adresu (moze.moze.moze.moze), ludo (moze.moze.moze.*) ili domet (moze.moze.moze.desio-yyy.yyy.yyy.yyy). Napomena: zadnji quad .255 smatra domet od svih IPs u njega. Ako uđeš 10.0.0.255, to je upravo kao da ulazi 10.0.0.* (Ne IP je dodijeljen .255 za tu stvar, to je rezervisano). Gdje bi se mogli sresti, ovo je u kreće, 10.0.0.5-10.0.0.255 je isto kao "10.0.0.*" . Stvarno bi trebala ući 10.0.0.5-10.0.0.254 .';
+$lang['SEARCH_IP_EXPLAIN'] = 'Potraga za korisnike do određenog IP adresu (moze.moze.moze.moze).';
 $lang['SEARCH_USERS_JOINED'] = 'Korisnici da se pridružio';
 $lang['SEARCH_USERS_LASTVISITED'] = 'Korisnici koje su posjetili';
 $lang['IN_THE_LAST'] = 'u zadnje';

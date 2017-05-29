@@ -1738,7 +1738,7 @@ $lang['CLICK_RETURN_FORUMAUTH'] = 'Klik %sHere%s untuk kembali ke Forum Permissi
 
 // Banning
 $lang['BAN_CONTROL'] = 'Ban Kontrol';
-$lang['BAN_EXPLAIN'] = 'Di sini anda dapat mengontrol melarang pengguna. Anda dapat mencapai hal ini dengan melarang salah satu atau kedua dari pengguna tertentu atau individu atau kisaran alamat IP atau nama host. Metode ini mencegah pengguna bahkan mencapai halaman indeks papan anda. Untuk mencegah pengguna yang mendaftar di bawah nama pengguna yang berbeda anda juga dapat menentukan dilarang alamat email. Harap dicatat bahwa pelarangan alamat email saja tidak akan mencegah agar pengguna dapat log on atau posting ke forum anda. Anda harus menggunakan salah satu dari dua metode untuk mencapai hal ini.';
+$lang['BAN_EXPLAIN'] = 'Di sini anda dapat mengontrol melarang pengguna. Anda dapat mencapai hal ini dengan melarang salah satu atau kedua dari pengguna tertentu atau individu atau kisaran alamat IP. Metode ini mencegah pengguna bahkan mencapai halaman indeks papan anda. Untuk mencegah pengguna yang mendaftar di bawah nama pengguna yang berbeda anda juga dapat menentukan dilarang alamat email. Harap dicatat bahwa pelarangan alamat email saja tidak akan mencegah agar pengguna dapat log on atau posting ke forum anda. Anda harus menggunakan salah satu dari dua metode untuk mencapai hal ini.';
 $lang['BAN_EXPLAIN_WARN'] = 'Harap dicatat bahwa memasuki kisaran alamat IP hasil di semua alamat antara awal dan akhir yang ditambahkan ke banlist. Upaya yang akan dilakukan untuk meminimalkan jumlah alamat yang ditambahkan ke database dengan memperkenalkan wildcard secara otomatis mana yang sesuai. Jika anda benar-benar harus memasukkan jangkauan, cobalah untuk tetap kecil atau lebih baik lagi negara alamat tertentu.';
 
 $lang['SELECT_IP'] = 'Pilih alamat IP';
@@ -1747,9 +1747,9 @@ $lang['SELECT_EMAIL'] = 'Pilih alamat Email';
 $lang['BAN_USERNAME'] = 'Larangan satu atau lebih pengguna tertentu';
 $lang['BAN_USERNAME_EXPLAIN'] = 'Anda dapat melarang beberapa pengguna dalam satu pergi menggunakan kombinasi yang tepat dari mouse dan keyboard untuk komputer anda dan browser';
 
-$lang['BAN_IP'] = 'Larangan satu atau lebih alamat IP atau hostname';
-$lang['IP_HOSTNAME'] = 'Alamat IP atau hostname';
-$lang['BAN_IP_EXPLAIN'] = 'Untuk menentukan beberapa alamat IP atau hostname pisahkan dengan koma. Untuk menentukan rentang alamat IP, memisahkan dimulai dan diakhiri dengan tanda hubung (-); untuk menentukan wildcard, gunakan tanda bintang (*).';
+$lang['BAN_IP'] = 'Larangan satu atau lebih alamat IP';
+$lang['IP_HOSTNAME'] = 'Alamat IP';
+$lang['BAN_IP_EXPLAIN'] = 'Untuk menentukan beberapa alamat IP yang berbeda pisahkan dengan koma.';
 
 $lang['BAN_EMAIL'] = 'Larangan satu atau lebih alamat email';
 $lang['BAN_EMAIL_EXPLAIN'] = 'Untuk menentukan lebih dari satu alamat email, pisahkan dengan koma. Untuk menentukan wildcard username, gunakan * suka *@hotmail.com';
@@ -2661,7 +2661,7 @@ $lang['SEARCH_USERS_ADVANCED'] = 'Advanced Pengguna Pencarian';
 $lang['SEARCH_USERS_EXPLAIN'] = 'Modul ini memungkinkan anda untuk melakukan pencarian lanjutan untuk pengguna pada berbagai kriteria. Silahkan baca deskripsi di bawah masing-masing bidang untuk memahami setiap pilihan pencarian yang benar-benar.';
 $lang['SEARCH_USERNAME_EXPLAIN'] = 'Di sini anda dapat melakukan hal sensitif pencarian untuk username. Jika anda ingin mencocokkan bagian username, gunakan * (bintang) sebagai wildcard.';
 $lang['SEARCH_EMAIL_EXPLAIN'] = 'Masukkan ekspresi untuk mencocokkan alamat email pengguna. Ini adalah kasus sensitif. Jika anda ingin melakukan pertandingan parsial, digunakan * (bintang) sebagai wildcard.';
-$lang['SEARCH_IP_EXPLAIN'] = 'Mencari pengguna dengan alamat IP tertentu (xxx.xxx.xxx.xxx), wildcard (xxx.xxx.xxx.*) atau range (xxx.xxx.xxx.xxx-yyy.yyy.yyy.yyy). Catatan: the last quad .255 dianggap kisaran semua Ip dalam quad. Jika anda memasukkan 10.0.0.255, itu adalah seperti memasuki 10.0.0.* (Tidak ada IP yang ditugaskan .255 untuk hal itu, itu dicadangkan). Di mana anda dapat menemukan ini di rentang, 10.0.0.5-10.0.0.255 adalah sama seperti "10.0.0.*" . Anda harus benar-benar masuk 10.0.0.5-10.0.0.254 .';
+$lang['SEARCH_IP_EXPLAIN'] = 'Mencari pengguna dengan alamat IP tertentu (xxx.xxx.xxx.xxx).';
 $lang['SEARCH_USERS_JOINED'] = 'Pengguna yang bergabung';
 $lang['SEARCH_USERS_LASTVISITED'] = 'Pengguna yang telah mengunjungi';
 $lang['IN_THE_LAST'] = 'lalu';

@@ -1738,7 +1738,7 @@ $lang['CLICK_RETURN_FORUMAUTH'] = 'Spustelėkite %sHere%s grįžti į Forumo Tei
 
 // Banning
 $lang['BAN_CONTROL'] = 'Draudimo Kontrolė';
-$lang['BAN_EXPLAIN'] = 'Čia jūs galite kontroliuoti uždrausti vartotojams. Jūs galite tai pasiekti uždrausti arba (ir konkrečiam vartotojui ar individualus asmuo arba IP adresų diapazoną arba hostnames. Šie metodai naudotojams neleidžiama net pasiekti puslapis iš jūsų laive. Siekiant išvengti vartotojo registravimas pagal kitą vartotojo vardą taip pat galite nurodyti uždrausta el. pašto adresą. Prašome atkreipti dėmesį, kad draudimas el. pašto adresą, vien tik netrukdo, kad vartotojas galėtų prisijungti arba rašyti į savo laivą. Jums reikia naudoti vieną iš dviejų būdų šiam tikslui pasiekti.';
+$lang['BAN_EXPLAIN'] = 'Čia jūs galite kontroliuoti uždrausti vartotojams. Jūs galite tai pasiekti uždrausti arba (ir konkrečiam vartotojui ar individualus asmuo arba IP adresų diapazoną. Šie metodai naudotojams neleidžiama net pasiekti puslapis iš jūsų laive. Siekiant išvengti vartotojo registravimas pagal kitą vartotojo vardą taip pat galite nurodyti uždrausta el. pašto adresą. Prašome atkreipti dėmesį, kad draudimas el. pašto adresą, vien tik netrukdo, kad vartotojas galėtų prisijungti arba rašyti į savo laivą. Jums reikia naudoti vieną iš dviejų būdų šiam tikslui pasiekti.';
 $lang['BAN_EXPLAIN_WARN'] = 'Prašome atkreipti dėmesį, kad patekti IP adresų diapazoną rezultatus visose adresus tarp pradžios ir pabaigos yra įtraukta į banlist. Bandymai bus atliekami iki minimumo sumažinti skaičių adresai įtraukta į duomenų bazę įvesti wildcards automatiškai, kai tinkama. Jei jūs tikrai turi įvesti asortimentą, stenkitės, kad jis mažas, ar dar geriau valstybės konkrečius adresus.';
 
 $lang['SELECT_IP'] = 'Pasirinkite IP adresas';
@@ -1747,9 +1747,9 @@ $lang['SELECT_EMAIL'] = 'Pasirinkite el. Pašto adresas';
 $lang['BAN_USERNAME'] = 'Ban) vienas ar daugiau specifinių vartotojai';
 $lang['BAN_USERNAME_EXPLAIN'] = 'Galite uždrausti keli vartotojai vienu metu, naudodami tinkamą derinį, pelę ir klaviatūrą jūsų kompiuteryje ir naršyklėje';
 
-$lang['BAN_IP'] = 'Uždrausti vieno ar daugiau IP adresų ar hostnames';
-$lang['IP_HOSTNAME'] = 'IP adresus, arba hostnames';
-$lang['BAN_IP_EXPLAIN'] = 'Nurodyti kelis skirtingus IP adresus, arba hostnames atskirkite juos kableliais. Nurodyti IP adresų diapazoną, atskiras pradžios ir pabaigos su brūkšnelis (-); nurodyti pakaitos, naudoti žvaigždutę (*).';
+$lang['BAN_IP'] = 'Uždrausti vieno ar daugiau IP adresų';
+$lang['IP_HOSTNAME'] = 'IP adresai';
+$lang['BAN_IP_EXPLAIN'] = 'Nurodyti kelis skirtingus IP adresus atskirkite juos kableliais.';
 
 $lang['BAN_EMAIL'] = 'Uždrausti vieno ar daugiau el. pašto adresų';
 $lang['BAN_EMAIL_EXPLAIN'] = 'Nurodyti daugiau nei vieną el. pašto adresą, atskirkite juos kableliais. Nurodyti pakaitos vartotojo vardą, pasinaudokite * patinka *@hotmail.com';
@@ -2661,7 +2661,7 @@ $lang['SEARCH_USERS_ADVANCED'] = 'Patyrusiems Vartotojams Paieška';
 $lang['SEARCH_USERS_EXPLAIN'] = 'Šis Modulis leidžia jums atlikti išplėstinę paiešką vartotojų įvairius kriterijus. Perskaitykite aprašymus po kiekviena srityje suprasti kiekvieną paieškos funkcija visiškai.';
 $lang['SEARCH_USERNAME_EXPLAIN'] = 'Čia galite atlikti byla nejautrus ieškoti vartotojo vardo. Jei norite rungtynių dalis vardą, naudoti * (asterix) kaip pakaitos.';
 $lang['SEARCH_EMAIL_EXPLAIN'] = 'Įveskite išraiška, kad atitiktų vartotojo elektroninio pašto adreso. Tai yra atveju, nejautrus. Jei jūs norite padaryti, dalinis sutapimas, naudoti * (asterix) kaip pakaitos.';
-$lang['SEARCH_IP_EXPLAIN'] = 'Ieškoti vartotojų pagal konkretų IP adresą (xxx.xxx.xxx.xxx), pakaitos (xxx.xxx.xxx.*) arba intervalas (xxx.xxx.xxx.xxx-yyy.yyy.yyy.mmmm). Pastaba: paskutinė quad .255 yra laikomas asortimentą visų IPs, kad quad. Jei įvesite 10.0.0.255, tai kaip patekti 10.0.0.* (Ne IP yra priskirtas .255 šiuo klausimu, tai yra rezervuota). Kur galite susidurti, tai svyruoja, 10.0.0.5-10.0.0.255 yra tas pats, kaip "10.0.0.*" . Jūs tikrai turėtų patekti 10.0.0.5-10.0.0.254 .';
+$lang['SEARCH_IP_EXPLAIN'] = 'Ieškoti vartotojų pagal konkretų IP adresą (xxx.xxx.xxx.xxx).';
 $lang['SEARCH_USERS_JOINED'] = 'Vartotojai, kurie prisijungė';
 $lang['SEARCH_USERS_LASTVISITED'] = 'Vartotojams, kuriems lankėsi';
 $lang['IN_THE_LAST'] = 'paskutinis';

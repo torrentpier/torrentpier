@@ -1738,7 +1738,7 @@ $lang['CLICK_RETURN_FORUMAUTH'] = 'Forum ruxsati qaytish uchun %sHere%s bosing';
 
 // Banning
 $lang['BAN_CONTROL'] = 'Ban Control';
-$lang['BAN_EXPLAIN'] = 'Bu yerda siz foydalanuvchilar man nazorat qilishingiz mumkin. Siz man bilan bu erishish mumkin yoki ma\'lum bir foydalanuvchi yoki IP manzillar yoki xost nomi bir shaxs yoki qator ikkala. Bu usullar hatto kengashi indeksi sahifa yetib kelgan bir foydalanuvchi oldini olish. Siz ham taqiqlangan elektron pochta manzilini ko\'rsatish mumkin Boshqa foydalanuvchi nomi ostida ro\'yxatdan bir foydalanuvchi oldini olish uchun. yolg\'iz elektron pochta manzilini man tizimga yoki Kengashiga post ega bo\'lishdan deb foydalanuvchini oldini olmaydi, deb iltimos unutmang. Siz bu erishish uchun birinchi ikki yo\'llar birini kerak.';
+$lang['BAN_EXPLAIN'] = 'Bu yerda siz foydalanuvchilar man nazorat qilishingiz mumkin. Siz man bilan bu erishish mumkin yoki ma\'lum bir foydalanuvchi yoki IP-manzillar bir shaxs yoki qator ikkala. Bu usullar hatto kengashi indeksi sahifa yetib kelgan bir foydalanuvchi oldini olish. Siz ham taqiqlangan elektron pochta manzilini ko\'rsatish mumkin Boshqa foydalanuvchi nomi ostida ro\'yxatdan bir foydalanuvchi oldini olish uchun. yolg\'iz elektron pochta manzilini man tizimga yoki Kengashiga post ega bo\'lishdan deb foydalanuvchini oldini olmaydi, deb iltimos unutmang. Siz bu erishish uchun birinchi ikki yo\'llar birini kerak.';
 $lang['BAN_EXPLAIN_WARN'] = 'boshida va oxirida o\'rtasidagi barcha manzillar IP manzillar natijalari bir qator kirib banlist qo\'shilmoqda ekanini unutmang. Urinishlar qaerga tegishli avtomatik joker joriy tomonidan bazasiga kiritiladi manzillar sonini kamaytirish uchun amalga oshiriladi. Agar chindan ham bir qator kirishingiz zarur bo\'lsa, kichik uni saqlashga harakat yoki yaxshiroq hali aniq manzillari davlat.';
 
 $lang['SELECT_IP'] = 'bir IP-manzil tanlang';
@@ -1747,9 +1747,9 @@ $lang['SELECT_EMAIL'] = 'E-pochta manzilini tanlang';
 $lang['BAN_USERNAME'] = 'Ban bir yoki bir necha muayyan foydalanuvchilar';
 $lang['BAN_USERNAME_EXPLAIN'] = 'Siz kompyuter va brauzer uchun sichqoncha va klaviatura tegishli birlashmasidan foydalanib, bir-yo\'lakay bir necha foydalanuvchilarni taqiqlash mumkin';
 
-$lang['BAN_IP'] = 'Bir yoki bir necha IP manzillar yoki xost taqiqlash';
-$lang['IP_HOSTNAME'] = 'IP-manzillar yoki xost nomlari';
-$lang['BAN_IP_EXPLAIN'] = 'bir necha xil IP-manzillar yoki xost nomlari vergul bilan ajratib belgilash. (-) start ajratish va chiziqcha bilan yakun, IP-manzillar bir qator aniqlash; bir joker belgilash uchun, bir yulduz (*) foydalaning.';
+$lang['BAN_IP'] = 'Bir yoki bir necha IP manzillar ta\'qiqlanishi';
+$lang['IP_HOSTNAME'] = 'IР-адрес';
+$lang['BAN_IP_EXPLAIN'] = 'Bir necha xil IP-manzillar vergul bilan ajratib belgilash.';
 
 $lang['BAN_EMAIL'] = 'bir yoki bir necha elektron pochta manzillari ta\'qiqlanishi';
 $lang['BAN_EMAIL_EXPLAIN'] = 'bir necha elektron pochta manzilini belgilash uchun, vergul bilan ajratib. Joker Foydalanuvchi nomi belgilash uchun, *@hotmail.com kabi * foydalanish';
@@ -2661,7 +2661,7 @@ $lang['SEARCH_USERS_ADVANCED'] = 'Advanced User Qidiruv';
 $lang['SEARCH_USERS_EXPLAIN'] = 'Ushbu modul mezonlar keng foydalanuvchilar uchun rivojlangan qo\'ng\'iroqlarini amalga oshirish imkonini beradi. butunlay bir-qidiruv variantni tushunish uchun, har bir sohada ostida ta\'rifini o\'qib chiqing.';
 $lang['SEARCH_USERNAME_EXPLAIN'] = 'Bu yerda siz nomlari uchun beparvo qo\'ng\'iroq bajarish mumkin. Agar joker belgi sifatida nomi qismini, foydalanish * (yulduzcha) mos olmoqchi bo\'lsangiz.';
 $lang['SEARCH_EMAIL_EXPLAIN'] = 'foydalanuvchining elektron pochta manzilini mos bir ifoda kiriting. Bu hodisa beparvo bo\'ladi. Agar qisman uchrashuvini qilish bo\'lsangiz, bir joker sifatida * (yulduzcha) foydalaning.';
-$lang['SEARCH_IP_EXPLAIN'] = 'ma\'lum bir IP-manzil (xxx.xxx.xxx.xxx), joker (xxx.xxx.xxx. *) yoki doira (xxx.xxx.xxx.xxx-yyy.yyy.yyy.yyy) tomonidan foydalanuvchilar uchun qidirish. Eslatma: so\'nggi to\'rt .255 deb to\'rt barcha IP\'lerin qator hisoblanadi. Agar 10.0.0.255 kiritsangiz, u faqat 10.0.0 kirib o\'xshaydi. * (No IP bu borada .255 beriladi, u himoyalangan qilinadi). Agar bu tizmalariga bo\'lib duch mumkin qaerda, 10.0.0.5-10.0.0.255 bir xil emas "10.0.0. *". Siz, albatta 10.0.0.5-10.0.0.254 kiritish kerak.';
+$lang['SEARCH_IP_EXPLAIN'] = 'Ma\'lum bir IP-manzil (xxx.xxx.xxx.xxx) tomonidan foydalanuvchilar uchun qidirish.';
 $lang['SEARCH_USERS_JOINED'] = 'qo\'shildi foydalanuvchilar';
 $lang['SEARCH_USERS_LASTVISITED'] = 'tashrif buyurgan foydalanuvchilar';
 $lang['IN_THE_LAST'] = 'oxirgi';

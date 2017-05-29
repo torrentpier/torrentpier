@@ -1738,7 +1738,7 @@ $lang['CLICK_RETURN_FORUMAUTH'] = 'Klõpsake %sHere%s naasta Foorumi Õigused';
 
 // Banning
 $lang['BAN_CONTROL'] = 'Ban Kontrolli';
-$lang['BAN_EXPLAIN'] = 'Siin te saate kontrollida, keelatakse kasutajad. Teil on võimalik saavutada seda, millega keelatakse kas või nii konkreetse kasutaja või isik või erinevaid IP aadresse või hostnames. Need meetodid vältida kasutaja alates isegi jõuda esilehele teie juhatuse. Et vältida kasutaja alates registreerimise alusel eri kasutajanimi võite määrata ka keelatud e-posti aadress. Palun pange tähele, et keelata e-posti aadress üksi ei takista, et kasutaja olema võimeline logi sisse või postiga oma pardal. Sa peaksid kasutama ühte kahe esimese meetodeid selle saavutamiseks.';
+$lang['BAN_EXPLAIN'] = 'Siin te saate kontrollida, keelatakse kasutajad. Teil on võimalik saavutada seda, millega keelatakse kas või nii konkreetse kasutaja või isik või erinevaid IP aadresse. Need meetodid vältida kasutaja alates isegi jõuda esilehele teie juhatuse. Et vältida kasutaja alates registreerimise alusel eri kasutajanimi võite määrata ka keelatud e-posti aadress. Palun pange tähele, et keelata e-posti aadress üksi ei takista, et kasutaja olema võimeline logi sisse või postiga oma pardal. Sa peaksid kasutama ühte kahe esimese meetodeid selle saavutamiseks.';
 $lang['BAN_EXPLAIN_WARN'] = 'Palun pange tähele, et vahemiku IP-aadressidest, mille tulemuseks kõik aadressid vahel alguse ja lõpu lisanduvad banlist. Katsed on tehtud võimalikult väike arv aadressid lisatakse andmebaasi, lisades metamärgid automaatselt, kui see on asjakohane. Kui sa tõesti tuleb sisestada vahemik, proovige hoida seda väikest või veel parem riigi aadresse.';
 
 $lang['SELECT_IP'] = 'Valige IP aadress';
@@ -1747,9 +1747,9 @@ $lang['SELECT_EMAIL'] = 'Valige e-Posti aadress';
 $lang['BAN_USERNAME'] = 'Ban ühe või mitme konkreetse kasutajad';
 $lang['BAN_USERNAME_EXPLAIN'] = 'Saate ban mitu kasutajat korraga, kasutades sobivat kombinatsiooni hiirt ja klaviatuuri, et teie arvuti ja brauser';
 
-$lang['BAN_IP'] = 'Ban üks või mitu IP-aadressi või hostnames';
-$lang['IP_HOSTNAME'] = 'IP aadressid või hostnames';
-$lang['BAN_IP_EXPLAIN'] = 'Määrata mitu erinevat IP-aadressi või hostnames eraldi neid with commas. Et täpsustada erinevaid IP aadresse, eraldi algus-ja lõpp-sidekriips (-); määrata lühend, kasutage tärni (*).';
+$lang['BAN_IP'] = 'Ban üks või mitu IP-aadressid';
+$lang['IP_HOSTNAME'] = 'IP-aadressid';
+$lang['BAN_IP_EXPLAIN'] = 'Määrata mitu erinevat IP-aadressid eraldi neid with commas.';
 
 $lang['BAN_EMAIL'] = 'Ban üks või mitu e-posti aadressid';
 $lang['BAN_EMAIL_EXPLAIN'] = 'Määrata rohkem kui üks e-posti aadressi, eraldage need with commas. Määrata lühend kasutajanimi, kasuta * nagu *@hotmail.com';
@@ -2661,7 +2661,7 @@ $lang['SEARCH_USERS_ADVANCED'] = 'Advanced Kasutaja Otsing';
 $lang['SEARCH_USERS_EXPLAIN'] = 'See Moodul võimaldab sul teha täpsemaid otsinguid kasutajad laia kriteeriumid. Palun lugeda kirjeldusi alusel iga välja mõista iga otsing täielikult.';
 $lang['SEARCH_USERNAME_EXPLAIN'] = 'Siin saab teha tõstutundetu otsingu kasutajanimed. Kui soovite mängu osa kasutajanimi, kasuta * (asterix) metamärgina.';
 $lang['SEARCH_EMAIL_EXPLAIN'] = 'Sisestage väljendus sobitada kasutaja e-posti aadress. See on tõstutundetu. Kui sa tahad teha osalise vaste kasutamine * (asterix) metamärgina.';
-$lang['SEARCH_IP_EXPLAIN'] = 'Kasutajaid otsida, kui konkreetse IP-aadressi (xxx).xxx.xxx.xxx), lühend (xxx).xxx.xxx.*) või vahemik, (xxx).xxx.xxx.xxx-yyy.yyy.yyy.yyy). Märkus: viimase quad .255 peetakse vahemikus kõik IPs selles, et quad. Kui sisestate 10.0.0.255, see on nagu sisenemist 10.0.0.* (No IP on määratud .255, et asi on reserveeritud). Kus võite kokku puutuda, et see on vahemikud, 10.0.0.5-10.0.0.255 on sama, mis "10.0.0.*" . Sa peaksid tõesti sisestage 10.0.0.5-10.0.0.254 .';
+$lang['SEARCH_IP_EXPLAIN'] = 'Kasutajaid otsida, kui konkreetse IP-aadressi (xxx).xxx.xxx.xxx).';
 $lang['SEARCH_USERS_JOINED'] = 'Kasutajad, kes ühinesid';
 $lang['SEARCH_USERS_LASTVISITED'] = 'Kasutajad, kellele on külastas';
 $lang['IN_THE_LAST'] = 'viimane';

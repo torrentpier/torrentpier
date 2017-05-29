@@ -1738,7 +1738,7 @@ $lang['CLICK_RETURN_FORUMAUTH'] = 'Feu clic %sHere%s per tornar a Fòrum de Perm
 
 // Banning
 $lang['BAN_CONTROL'] = 'Prohibició De Control';
-$lang['BAN_EXPLAIN'] = 'Aquí es pot controlar la prohibició dels usuaris. Podeu aconseguir-ho prohibició o bé totes dues d\'un usuari concret o un individu o un interval d\'adreces IP o els noms de host. Aquests mètodes impedir a un usuari d\'arribar fins i tot a la pàgina d\'índex de la seva junta directiva. Per evitar que un usuari ha de registrar-se sota un nom d\'usuari diferent també podeu especificar una prohibit adreça de correu electrònic. Si us plau, tingueu en compte que la prohibició d\'una adreça de correu electrònic per si sol no impedeix que l\'usuari pugui connectar-o post al consell. Vostè ha d\'utilitzar un dels dos primers mètodes per a aconseguir-ho.';
+$lang['BAN_EXPLAIN'] = 'Aquí es pot controlar la prohibició dels usuaris. Podeu aconseguir-ho prohibició o bé totes dues d\'un usuari concret o un individu o un interval d\'adreces IP. Aquests mètodes impedir a un usuari d\'arribar fins i tot a la pàgina d\'índex de la seva junta directiva. Per evitar que un usuari ha de registrar-se sota un nom d\'usuari diferent també podeu especificar una prohibit adreça de correu electrònic. Si us plau, tingueu en compte que la prohibició d\'una adreça de correu electrònic per si sol no impedeix que l\'usuari pugui connectar-o post al consell. Vostè ha d\'utilitzar un dels dos primers mètodes per a aconseguir-ho.';
 $lang['BAN_EXPLAIN_WARN'] = 'Si us plau, tingueu en compte que entrar en un interval d\'adreces IP de resultats en totes les direccions entre l\'inici i el final que s\'afegeix a la banlist. Els intents es fan per tal de minimitzar el nombre d\'adreces afegit a la base de dades per introduir caràcters especials automàticament si s\'escau. Si realment han d\'introduir una sèrie, intentar mantenir-lo petit o millor encara, d\'estat específica de les adreces.';
 
 $lang['SELECT_IP'] = 'Seleccioneu una adreça IP';
@@ -1747,9 +1747,9 @@ $lang['SELECT_EMAIL'] = 'Seleccioneu una adreça de Correu electrònic';
 $lang['BAN_USERNAME'] = 'La prohibició d\'un o més usuaris específics';
 $lang['BAN_USERNAME_EXPLAIN'] = 'Vostè pot prohibir a múltiples usuaris en un anar amb la combinació adequada de ratolí i teclat de l\'ordinador i el navegador';
 
-$lang['BAN_IP'] = 'Prohibició una o més adreces IP o els noms de host';
-$lang['IP_HOSTNAME'] = 'Les adreces IP o els noms de host';
-$lang['BAN_IP_EXPLAIN'] = 'Per especificar diferents adreces IP o noms de separar-les per comes. Per especificar un interval d\'adreces IP, de separar l\'inici i el final amb un guió (-); per a especificar un comodí, utilitzar un asterisc (*).';
+$lang['BAN_IP'] = 'Prohibició una o més adreces IP';
+$lang['IP_HOSTNAME'] = 'Les adreces IP';
+$lang['BAN_IP_EXPLAIN'] = 'Per especificar diferents adreces IP separar-les per comes.';
 
 $lang['BAN_EMAIL'] = 'Prohibició una o més adreces de correu electrònic';
 $lang['BAN_EMAIL_EXPLAIN'] = 'Per especificar més d\'una adreça de correu electrònic, separar-les per comes. Per especificar un comodí nom d\'usuari, useu * com *@hotmail.com';
@@ -2661,7 +2661,7 @@ $lang['SEARCH_USERS_ADVANCED'] = 'Usuari Avançat De Cerca';
 $lang['SEARCH_USERS_EXPLAIN'] = 'Aquest Mòdul us permet realitzar cerques avançades per als usuaris una àmplia gamma de criteris. Si us plau, llegiu les descripcions per a cada camp per a comprendre cada opció de cerca completament.';
 $lang['SEARCH_USERNAME_EXPLAIN'] = 'Aquí es pot realitzar una minúscules per a l\'usuari. Si voleu partit a part del nom d\'usuari, useu * (astèrix) com a comodí.';
 $lang['SEARCH_EMAIL_EXPLAIN'] = 'Introduïu una expressió per a que coincideixi amb un usuari, adreça de correu electrònic. Aquest és sensible a majúscules. Si vols fer una coincidència parcial, ús * (astèrix) com a comodí.';
-$lang['SEARCH_IP_EXPLAIN'] = 'Cerca d\'usuaris per una adreça IP específica (xxx.xxx.xxx.xxx), comodí (xxx.xxx.xxx.*) o gamma (xxx.xxx.xxx.xxx-yyy.yyy.yyy.yyy). Nota: l\'últim quad .255 es considera l\'abast de totes les IPs que quad. Si introduïu 10.0.0.255, és com entrar 10.0.0.* (No IP s\'assigna .255 per a aquesta matèria, que està reservat). On podeu trobar aquesta és en intervals, 10.0.0.5-10.0.0.255 és el mateix que "10.0.0.*" . Vostè ha de realment entrar 10.0.0.5-10.0.0.254 .';
+$lang['SEARCH_IP_EXPLAIN'] = 'Cerca d\'usuaris per una adreça IP específica (xxx.xxx.xxx.xxx).';
 $lang['SEARCH_USERS_JOINED'] = 'Els usuaris que s\'han incorporat a';
 $lang['SEARCH_USERS_LASTVISITED'] = 'Els usuaris a qui han visitat';
 $lang['IN_THE_LAST'] = 'en l\'últim';

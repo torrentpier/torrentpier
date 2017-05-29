@@ -1546,7 +1546,7 @@ $lang['DL_UL_SPEED'] = 'Prędkość ul';
 $lang['DL_DL_SPEED'] = 'Prędkość dl';
 $lang['DL_PORT'] = 'Port';
 $lang['DL_FORMULA'] = 'Formuła: Załadowany/TorrentSize';
-$lang['DL_ULR'] = 'URL';
+$lang['DL_ULR'] = 'Adres URL';
 $lang['DL_STOPPED'] = 'zatrzymał się';
 $lang['DL_UPD'] = 'упд: ';
 $lang['DL_INFO'] = 'pokazuje dane <i><b>only dla bieżącego session</b></i>';
@@ -1738,7 +1738,7 @@ $lang['CLICK_RETURN_FORUMAUTH'] = 'Kliknij %sHere%s, aby powrócić na forum roz
 
 // Banning
 $lang['BAN_CONTROL'] = 'Kontrola Zakazu';
-$lang['BAN_EXPLAIN'] = 'Tutaj można kontrolować zakaz użytkowników. Można to osiągnąć przez wyłączenie jednej lub obu konkretnego użytkownika lub indywidualne lub zakres adresów IP lub nazw Hostów. Metody te pozwalają użytkownikowi, nawet osiągając strona główna twojej rady. Aby uniemożliwić użytkownikowi zarejestrować się pod inną nazwą użytkownika można również określić niedozwolony adres e-mail. Należy zwrócić uwagę, że zakaz na jeden adres e-mail nie będzie zapobiec użytkowników od tego, aby zalogować się lub umieścić na tablicy. Należy użyć jednego z dwóch pierwszych metod, aby to osiągnąć.';
+$lang['BAN_EXPLAIN'] = 'Tutaj można kontrolować zakaz użytkowników. Można to osiągnąć przez wyłączenie jednej lub obu konkretnego użytkownika lub indywidualne lub zakresu adresów IP. Metody te pozwalają użytkownikowi, nawet osiągając strona główna twojej rady. Aby uniemożliwić użytkownikowi zarejestrować się pod inną nazwą użytkownika można również określić niedozwolony adres e-mail. Należy zwrócić uwagę, że zakaz na jeden adres e-mail nie będzie zapobiec użytkowników od tego, aby zalogować się lub umieścić na tablicy. Należy użyć jednego z dwóch pierwszych metod, aby to osiągnąć.';
 $lang['BAN_EXPLAIN_WARN'] = 'Należy pamiętać, że wchodząc w zakres adresów IP na adresy między początkowym i końcowym zostaną dodane w банлист. Zostaną podjęte próby zminimalizować liczbę adresów dodano do bazy danych poprzez wprowadzenie maski automatycznie w razie potrzeby. Jeśli naprawdę musisz wpisać zakres, starać się utrzymać mały lub jeszcze lepiej konkretne adresy.';
 
 $lang['SELECT_IP'] = 'Wybierz adres IP';
@@ -1747,9 +1747,9 @@ $lang['SELECT_EMAIL'] = 'Wybierz adres e-mail';
 $lang['BAN_USERNAME'] = 'Zakaz jednego lub kilku konkretnych użytkowników';
 $lang['BAN_USERNAME_EXPLAIN'] = 'Możesz zapobiec wielu użytkowników na raz, korzystając z odpowiedniej kombinacji myszy i klawiatury komputera i przeglądarki';
 
-$lang['BAN_IP'] = 'Zakaz jednego lub więcej adresów IP lub nazw Hostów';
-$lang['IP_HOSTNAME'] = 'Adresów IP lub nazw Hostów';
-$lang['BAN_IP_EXPLAIN'] = 'Aby określić kilka różnych adresów IP lub Hosta, należy je oddzielić przecinkami. Aby ustawić zakres adresów, rozdzielając je zaczynać i kończyć myślnikiem (-); jako symbolu wieloznacznego, użyj gwiazdki (*).';
+$lang['BAN_IP'] = 'Zakaz jednego lub więcej adresów IP';
+$lang['IP_HOSTNAME'] = 'Adresy IP';
+$lang['BAN_IP_EXPLAIN'] = 'Aby określić kilka różnych adresów IP, należy je oddzielić przecinkami.';
 
 $lang['BAN_EMAIL'] = 'Zakaz jeden lub więcej adresów e-mail';
 $lang['BAN_EMAIL_EXPLAIN'] = 'Aby określić więcej niż jeden adres e-mail, rozdzielając je przecinkami. Aby określić wzorzec nazwy użytkownika, użyj * jako *@hotmail.com';
@@ -2661,7 +2661,7 @@ $lang['SEARCH_USERS_ADVANCED'] = 'Zaawansowane Wyszukiwanie Użytkowników';
 $lang['SEARCH_USERS_EXPLAIN'] = 'Moduł ten umożliwia Zaawansowane wyszukiwanie dla użytkowników w szerokim zakresie kryteriów. Proszę, przeczytaj opis pod każde pole, aby w pełni zrozumieć każdej z opcji wyszukiwania.';
 $lang['SEARCH_USERNAME_EXPLAIN'] = 'Tutaj można wyszukać bez uwzględniania wielkości liter dla nazw użytkowników. Jeśli chcesz, aby dopasować część nazwy użytkownika, użyj * (gwiazdką) jako symbolu wieloznacznego.';
 $lang['SEARCH_EMAIL_EXPLAIN'] = 'Wpisz wyrażenie dla adresu e-mail użytkownika. To bez uwzględniania wielkości liter. Jeśli chcesz zrobić częściowych wyników, użyj * (gwiazdką) jako symbolu wieloznacznego.';
-$lang['SEARCH_IP_EXPLAIN'] = 'Wyszukiwanie użytkowników z danego adresu IP (XXX.XXX.XXX.XXX), symbol wieloznaczny (XXX.XXX.XXX.*) lub zakres (XXX.XXX.XXX.XXX-bu.ill.ill.bu). Uwaga: ostatni quad .255 jest zakres adresów IP w tym, że quad. Jeśli wpiszesz 10.0.0.255, to proste, jak wprowadzenie 10.0.0.* (Nie IP przypisany .255 o to chodzi, jest on zarezerwowany). Gdzie można spotkać to w zakresy, 10.0.0.5-10.0.0.255 taki sam, jak i "10.0.0.*" . Naprawdę należy się zalogować 10.0.0.5-10.0.0.254 .';
+$lang['SEARCH_IP_EXPLAIN'] = 'Wyszukiwanie użytkowników z danego adresu IP (XXX.XXX.XXX.XXX).';
 $lang['SEARCH_USERS_JOINED'] = 'Użytkownicy, którzy przyłączyli się do';
 $lang['SEARCH_USERS_LASTVISITED'] = 'Użytkownicy, których odwiedzili';
 $lang['IN_THE_LAST'] = 'w ostatnich';

@@ -1738,7 +1738,7 @@ $lang['CLICK_RETURN_FORUMAUTH'] = 'Klicken Sie auf %sHere%s zurück zu Forum-Ber
 
 // Banning
 $lang['BAN_CONTROL'] = 'Ban Kontrolle';
-$lang['BAN_EXPLAIN'] = 'Hier können Sie Steuern, den user zu bannen. Dies können Sie erreichen, durch das Verbot der beiden oder beide einen bestimmten Benutzer oder eine einzelne oder einen Bereich von IP-Adressen oder Hostnamen. Diese Methoden verhindern, dass ein Benutzer auch erreichen die index-Seite von deinem board. Um zu verhindern, dass ein Benutzer von der Anmeldung unter einem anderen Benutzernamen ein, den Sie können auch angeben, eine verbotene E-Mail-Adresse. Bitte beachten Sie, dass das sperren einer E-Mail-Adresse allein wird nicht verhindern, dass Benutzer in der Lage, anmelden oder post auf dem board. Sollten Sie mit einer der ersten beiden Methoden, dies zu erreichen.';
+$lang['BAN_EXPLAIN'] = 'Hier können Sie Steuern, den user zu bannen. Dies können Sie erreichen, durch das Verbot der beiden oder beide einen bestimmten Benutzer oder eine einzelne oder einen Bereich von IP-Adressen. Diese Methoden verhindern, dass ein Benutzer auch erreichen die index-Seite von deinem board. Um zu verhindern, dass ein Benutzer von der Anmeldung unter einem anderen Benutzernamen ein, den Sie können auch angeben, eine verbotene E-Mail-Adresse. Bitte beachten Sie, dass das sperren einer E-Mail-Adresse allein wird nicht verhindern, dass Benutzer in der Lage, anmelden oder post auf dem board. Sollten Sie mit einer der ersten beiden Methoden, dies zu erreichen.';
 $lang['BAN_EXPLAIN_WARN'] = 'Bitte beachten Sie, dass die Eingabe einer Reihe von IP-Adressen führt in alle Adressen zwischen der start-und end-Eintrag in die Bannliste. Es wird versucht, minimieren die Anzahl der Adressen in die Datenbank aufgenommen durch die Einführung von Platzhaltern automatisch wo es sinnvoll ist. Wenn Sie wirklich müssen, geben Sie ein range sind, versuchen Sie klein zu halten oder besser noch Staat bestimmte Adressen.';
 
 $lang['SELECT_IP'] = 'Wählen Sie eine IP-Adresse';
@@ -1747,9 +1747,9 @@ $lang['SELECT_EMAIL'] = 'Wählen Sie eine E-Mail-Adresse';
 $lang['BAN_USERNAME'] = 'Ban einen oder mehrere bestimmte Benutzer';
 $lang['BAN_USERNAME_EXPLAIN'] = 'Sie verbieten können mehrere Benutzer in einem Rutsch mit der entsprechenden Kombination von Maus und Tastatur für Ihren computer und browser';
 
-$lang['BAN_IP'] = 'Ban eine oder mehrere IP-Adressen oder Hostnamen';
-$lang['IP_HOSTNAME'] = 'IP-Adressen oder Hostnamen';
-$lang['BAN_IP_EXPLAIN'] = 'Um anzugeben, mehrere verschiedene IP-Adressen oder Hostnamen trennen Sie Sie mit Kommas. Zu geben Sie einen Bereich von IP-Adressen, trennen Sie die start-und Ende mit einem Bindestrich (-); geben Sie einen Platzhalter ein Sternchen (*).';
+$lang['BAN_IP'] = 'Ban eine oder mehrere IP-Adressen';
+$lang['IP_HOSTNAME'] = 'IP-Adressen';
+$lang['BAN_IP_EXPLAIN'] = 'Um anzugeben, mehrere verschiedene IP-Adressen trennen Sie diese mit Kommas.';
 
 $lang['BAN_EMAIL'] = 'Ban eine oder mehrere E-Mail Adressen';
 $lang['BAN_EMAIL_EXPLAIN'] = 'Festlegen mehr als einer email Adresse, trennen Sie Sie mit Kommas. , Legen Sie einen Platzhalter username * *@hotmail.com';
@@ -2661,7 +2661,7 @@ $lang['SEARCH_USERS_ADVANCED'] = 'Erweiterte Suche Benutzer';
 $lang['SEARCH_USERS_EXPLAIN'] = 'Dieses Modul ermöglicht das ausführen erweiterter Suchvorgänge für Benutzer, die auf eine Breite Palette von Kriterien. Bitte Lesen Sie die Beschreibungen unter jedem Feld, um sich zu verstehen suchen-option vollständig.';
 $lang['SEARCH_USERNAME_EXPLAIN'] = 'Hier können Sie eine case insensitive Suche nach Benutzernamen. Wenn Sie möchten, um eine übereinstimmung für einen Teil des Benutzernamens verwenden Sie * (Sternchen) als Platzhalter.';
 $lang['SEARCH_EMAIL_EXPLAIN'] = 'Geben Sie einen Ausdruck ein Benutzer E-Mail-Adresse. Dies ist der groß-und Kleinschreibung. Wenn Sie wollen, um eine teilweise übereinstimmung, verwenden Sie * (Sternchen) als Platzhalter.';
-$lang['SEARCH_IP_EXPLAIN'] = 'Suche für Benutzer von einer bestimmten IP-Adresse (xxx.xxx.xxx.xxx), Platzhalter (xxx.xxx.xxx.*) oder range (xxx.xxx.xxx.xxx-yyy.yyy.yyy.yyy). Hinweis: das Letzte quad .255 ist als der Bereich, der alle IPs, quad. Wenn Sie geben Sie 10.0.0.255, es ist einfach wie die Eingabe von 10.0.0.* (Keine IP wird zugewiesen .255, für diese Angelegenheit, es ist reserviert). Wo Sie auftreten, ist dies in Bereichen, 10.0.0.5-10.0.0.255 ist das gleiche wie "10.0.0.*" . Sie sollten wirklich geben 10.0.0.5-10.0.0.254 .';
+$lang['SEARCH_IP_EXPLAIN'] = 'Suche für Benutzer von einer bestimmten IP-Adresse (xxx.xxx.xxx.xxx).';
 $lang['SEARCH_USERS_JOINED'] = 'Benutzer beigetreten';
 $lang['SEARCH_USERS_LASTVISITED'] = 'Benutzer, die besucht haben';
 $lang['IN_THE_LAST'] = 'in den letzten';

@@ -1738,7 +1738,7 @@ $lang['CLICK_RETURN_FORUMAUTH'] = 'Klik på %sHere%s for at vende tilbage til Fo
 
 // Banning
 $lang['BAN_CONTROL'] = 'Forbud, Kontrol';
-$lang['BAN_EXPLAIN'] = 'Her kan du kontrollere forbuddet af brugere. Du kan opnå dette ved at forbyde den ene eller begge af en bestemt bruger eller en person eller et interval af IP-adresser eller værtsnavne. Disse metoder forhindrer en bruger i at nå frem til index-siden af dit board. For at forhindre en bruger i at registrere under et andet brugernavn, så kan du også angive en forbudt e-mail-adresse. Bemærk venligst, at et forbud mod en e-mail-adresse vil ikke alene forhindre, at brugeren bliver i stand til at logge på, eller post den på dit bord. Du skal bruge en af de to første metoder til at opnå dette.';
+$lang['BAN_EXPLAIN'] = 'Her kan du kontrollere forbuddet af brugere. Du kan opnå dette ved at forbyde den ene eller begge af en bestemt bruger eller en person eller et interval af IP-adresser. Disse metoder forhindrer en bruger i at nå frem til index-siden af dit board. For at forhindre en bruger i at registrere under et andet brugernavn, så kan du også angive en forbudt e-mail-adresse. Bemærk venligst, at et forbud mod en e-mail-adresse vil ikke alene forhindre, at brugeren bliver i stand til at logge på, eller post den på dit bord. Du skal bruge en af de to første metoder til at opnå dette.';
 $lang['BAN_EXPLAIN_WARN'] = 'Bemærk venligst at indtaste et interval af IP-adresser resultater i alle de adresser, der er mellem starten og slutningen bliver tilføjet til banlist. Forsøg vil blive gjort for at minimere det antal adresser, der er tilføjet til databasen ved at indføre automatisk jokertegn hvor det er relevant. Hvis du virkelig skal ind i et område, skal du forsøge at holde det lille eller endnu bedre tilstand specifikke adresser.';
 
 $lang['SELECT_IP'] = 'Vælg en IP-adresse';
@@ -1747,9 +1747,9 @@ $lang['SELECT_EMAIL'] = 'Vælg en e-Mail-adresse';
 $lang['BAN_USERNAME'] = 'Udeluk en eller flere bestemte brugere';
 $lang['BAN_USERNAME_EXPLAIN'] = 'Du kan forbyde flere brugere på én gang ved hjælp af den rette kombination af mus og tastatur til din computer og browser';
 
-$lang['BAN_IP'] = 'Udeluk en eller flere IP-adresser eller værtsnavne';
-$lang['IP_HOSTNAME'] = 'IP-adresser eller værtsnavne';
-$lang['BAN_IP_EXPLAIN'] = 'For at angive flere forskellige IP-adresser eller værtsnavne skal du adskille dem med kommaer. For at angive et interval af IP-adresser, skal du adskille starte og slutte med en bindestreg ( - ), at angive et jokertegn, skal du bruge en stjerne (*).';
+$lang['BAN_IP'] = 'Udeluk en eller flere IP-adresser';
+$lang['IP_HOSTNAME'] = 'IP-adresser';
+$lang['BAN_IP_EXPLAIN'] = 'For at angive flere forskellige IP-adresser, skal du adskille dem med kommaer.';
 
 $lang['BAN_EMAIL'] = 'Udeluk en eller flere e-mail adresser';
 $lang['BAN_EMAIL_EXPLAIN'] = 'For at angive mere end én e-mail-adresse, skal du adskille dem med kommaer. For at angive et wildcard brugernavn, skal du bruge * som *@hotmail.com';
@@ -2661,7 +2661,7 @@ $lang['SEARCH_USERS_ADVANCED'] = 'Avancerede Bruger, Søg';
 $lang['SEARCH_USERS_EXPLAIN'] = 'Dette Modul giver dig mulighed for at udføre avancerede søgninger for brugerne på en bred vifte af kriterier. Læs beskrivelserne under hvert felt for at forstå hver søgefunktion helt.';
 $lang['SEARCH_USERNAME_EXPLAIN'] = 'Her kan du udføre en sag ufølsom søg efter brugernavne. Hvis du gerne vil have til at matche en del af brugernavnet, skal du bruge * (en stjerne) som et wildcard.';
 $lang['SEARCH_EMAIL_EXPLAIN'] = 'Indtast et udtryk til at matche en brugers e-mail-adresse. Dette er store og små bogstaver. Hvis du ønsker at gøre en delvis match, skal du bruge * (en stjerne) som et wildcard.';
-$lang['SEARCH_IP_EXPLAIN'] = 'Søg brugere af en bestemt IP-adresse (xxx.xxx.xxx.xxx), wildcard (xxx.xxx.xxx.*) eller et interval (xxx.xxx.xxx.xxx-yyy.yyy.yyy.yyy). Bemærk: den sidste quad .255 anses for rækkevidde af alle ip \' er i denne quad. Hvis du indtaster 10.0.0.255, det er lige som at træde ind 10.0.0.* (Ikke IP er tildelt .255 for den sags skyld, det er reserveret). Hvor kan du støde på denne er i intervaller, 10.0.0.5-10.0.0.255 er det samme som "10.0.0.*" . Du bør virkelig gå ind 10.0.0.5-10.0.0.254 .';
+$lang['SEARCH_IP_EXPLAIN'] = 'Søg brugere af en bestemt IP-adresse (xxx.xxx.xxx.xxx).';
 $lang['SEARCH_USERS_JOINED'] = 'Brugere, der tiltrådte';
 $lang['SEARCH_USERS_LASTVISITED'] = 'Brugere, som har besøgt';
 $lang['IN_THE_LAST'] = 'i den sidste';

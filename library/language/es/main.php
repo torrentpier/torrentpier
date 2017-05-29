@@ -1738,7 +1738,7 @@ $lang['CLICK_RETURN_FORUMAUTH'] = 'Haga clic en %sHere%s para volver a Foro de P
 
 // Banning
 $lang['BAN_CONTROL'] = 'Prohibición De Control De';
-$lang['BAN_EXPLAIN'] = 'Aquí usted puede controlar la prohibición de los usuarios. Usted puede lograr esto mediante la prohibición de que uno o ambos de un usuario específico o de un individuo o de un rango de direcciones IP o nombres de host. Estos métodos evitan que un usuario, incluso llegar a la página de índice de su junta directiva. Para evitar que un usuario registrarse con otro nombre de usuario también puede especificar un prohibió la dirección de correo electrónico. Por favor, tenga en cuenta que la prohibición de una dirección de correo electrónico por sí sola no impide que el usuario pueda iniciar sesión en o posterior a su junta directiva. Debe utilizar uno de los dos primeros métodos para lograr esto.';
+$lang['BAN_EXPLAIN'] = 'Aquí usted puede controlar la prohibición de los usuarios. Usted puede lograr esto mediante la prohibición de que uno o ambos de un usuario específico o de un individuo o de un rango de direcciones IP. Estos métodos evitan que un usuario, incluso llegar a la página de índice de su junta directiva. Para evitar que un usuario registrarse con otro nombre de usuario también puede especificar un prohibió la dirección de correo electrónico. Por favor, tenga en cuenta que la prohibición de una dirección de correo electrónico por sí sola no impide que el usuario pueda iniciar sesión en o posterior a su junta directiva. Debe utilizar uno de los dos primeros métodos para lograr esto.';
 $lang['BAN_EXPLAIN_WARN'] = 'Por favor, tenga en cuenta que entrar en un rango de direcciones IP de los resultados en todas las direcciones entre el inicio y el final que se añade a la banlist. Se intentará reducir al mínimo el número de las direcciones añadidas a la base de datos mediante la introducción de caracteres comodín automáticamente cuando proceda. Si usted realmente tiene que entrar en una serie, tratamos de mantenerlo pequeño, o mejor aún, el estado de las direcciones específicas.';
 
 $lang['SELECT_IP'] = 'Seleccione una dirección IP';
@@ -1747,9 +1747,9 @@ $lang['SELECT_EMAIL'] = 'Seleccione una dirección de Correo electrónico';
 $lang['BAN_USERNAME'] = 'La prohibición de uno o más usuarios específicos';
 $lang['BAN_USERNAME_EXPLAIN'] = 'Se le puede prohibir a varios usuarios en un solo paso mediante la adecuada combinación de ratón y teclado de su ordenador y el navegador';
 
-$lang['BAN_IP'] = 'La prohibición de una o más direcciones IP o nombres de host';
-$lang['IP_HOSTNAME'] = 'Las direcciones IP o nombres de host';
-$lang['BAN_IP_EXPLAIN'] = 'Para especificar varias direcciones IP o nombres de host de separarlos con comas. Para especificar un rango de direcciones IP, por separado, el inicio y final con un guión (-); para especificar un comodín, utilice un asterisco (*).';
+$lang['BAN_IP'] = 'La prohibición de una o más direcciones IP';
+$lang['IP_HOSTNAME'] = 'Las direcciones IP';
+$lang['BAN_IP_EXPLAIN'] = 'Para especificar varias direcciones IP diferentes sepárelos con comas.';
 
 $lang['BAN_EMAIL'] = 'La prohibición de una o más direcciones de correo electrónico';
 $lang['BAN_EMAIL_EXPLAIN'] = 'Para especificar más de una dirección de correo electrónico, sepárelos con comas. Para especificar un comodín nombre de usuario, use * como *@hotmail.com';
@@ -2661,7 +2661,7 @@ $lang['SEARCH_USERS_ADVANCED'] = 'Usuario Avanzado De Búsqueda';
 $lang['SEARCH_USERS_EXPLAIN'] = 'Este Módulo le permite realizar búsquedas avanzadas para los usuarios en una amplia gama de criterios. Por favor, leer las descripciones de cada campo para entender cada opción de búsqueda completo.';
 $lang['SEARCH_USERNAME_EXPLAIN'] = 'Aquí puede realizar un insensible a mayúsculas-minúsculas búsqueda de nombres de usuario. Si a usted le gusta para que coincida con la parte del nombre de usuario, el uso de * (asterisco) como comodín.';
 $lang['SEARCH_EMAIL_EXPLAIN'] = 'Escriba una expresión para que coincida con una dirección de correo del usuario. Este es insensible a mayúsculas-minúsculas. Si usted desea hacer una coincidencia parcial, el uso de * (asterisco) como comodín.';
-$lang['SEARCH_IP_EXPLAIN'] = 'Búsqueda para los usuarios de una determinada dirección IP (xxx.xxx.xxx.xxx), de comodín (xxx.xxx.xxx.*) o rango (xxx.xxx.xxx.xxx-yyy.yyy.yyy.yyy). Nota: la última quad .255 se considera el rango de todas las direcciones ip en ese quad. Si introduce 10.0.0.255, es como entrar en 10.0.0.* (No IP es asignada .255 para que la materia, es reservado). Donde usted puede encontrar que esto es en rangos, 10.0.0.5-10.0.0.255 es el mismo como "10.0.0.*" . Usted realmente debe entrar 10.0.0.5-10.0.0.254 .';
+$lang['SEARCH_IP_EXPLAIN'] = 'Búsqueda para los usuarios de una determinada dirección IP (xxx.xxx.xxx.xxx).';
 $lang['SEARCH_USERS_JOINED'] = 'Los usuarios que se unieron a';
 $lang['SEARCH_USERS_LASTVISITED'] = 'Usuarios que han visitado';
 $lang['IN_THE_LAST'] = 'en la última';

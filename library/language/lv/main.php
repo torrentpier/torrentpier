@@ -1738,7 +1738,7 @@ $lang['CLICK_RETURN_FORUMAUTH'] = 'Noklikšķiniet uz %sHere%s atgriezties uz Fo
 
 // Banning
 $lang['BAN_CONTROL'] = 'Aizliegumu Kontrole';
-$lang['BAN_EXPLAIN'] = 'Šeit jūs varat kontrolēt aizliedzot lietotājiem. Jūs varat sasniegt šo aizliedzot vienu vai abus no konkrēta lietotāja, vai individuāli vai vairākas IP adreses vai hostnames. Šīs metodes liegt lietotājam pat sasniedzot indeksa lapā jūsu kuģa. Liegt lietotājam reģistrējoties ar citu lietotājvārdu, varat arī norādīt aizliegts e-pasta adresi. Lūdzu, ņemiet vērā, ka, aizliedzot e-pasta adresi, vien nepieļautu, ka lietotājam ir iespēja pieteikties vai pa pastu uz jūsu kuģa. Jums vajadzētu izmantot vienu no pirmās divas metodes, lai sasniegtu šo.';
+$lang['BAN_EXPLAIN'] = 'Šeit jūs varat kontrolēt aizliedzot lietotājiem. Jūs varat sasniegt šo aizliedzot vienu vai abus no konkrēta lietotāja, vai individuāli vai vairākas IP adreses. Šīs metodes liegt lietotājam pat sasniedzot indeksa lapā jūsu kuģa. Liegt lietotājam reģistrējoties ar citu lietotājvārdu, varat arī norādīt aizliegts e-pasta adresi. Lūdzu, ņemiet vērā, ka, aizliedzot e-pasta adresi, vien nepieļautu, ka lietotājam ir iespēja pieteikties vai pa pastu uz jūsu kuģa. Jums vajadzētu izmantot vienu no pirmās divas metodes, lai sasniegtu šo.';
 $lang['BAN_EXPLAIN_WARN'] = 'Lūdzu, ņemiet vērā, ka ievadot IP adrešu diapazona rezultātus visās adreses, starp sākuma un beigu tiek pievienoti banlist. Mēģinājumi tiks veikti, lai samazinātu skaitu, adreses pievienots datubāzei ieviešot aizstājējzīmju automātiski, ja nepieciešams. Ja jums tiešām ir jāievada diapazonā, mēģiniet, lai saglabātu to mazo vai vēl labāk valsts konkrētām adresēm.';
 
 $lang['SELECT_IP'] = 'Izvēlieties IP adresi';
@@ -1747,9 +1747,9 @@ $lang['SELECT_EMAIL'] = 'Izvēlieties e-Pasta adresi';
 $lang['BAN_USERNAME'] = 'Bloķēt vienu vai vairākus īpašus lietotāji';
 $lang['BAN_USERNAME_EXPLAIN'] = 'Jūs varat aizliegumu vairākiem lietotājiem vienā piegājienā, izmantojot atbilstošu kombināciju peli un tastatūru, lai jūsu datoru un pārlūka';
 
-$lang['BAN_IP'] = 'Bloķēt vienu vai vairākas IP adreses, vai hostnames';
-$lang['IP_HOSTNAME'] = 'IP adreses vai hostnames';
-$lang['BAN_IP_EXPLAIN'] = 'Lai norādītu vairākus dažādas IP adreses vai hostnames atdaliet tos ar komatu. Lai norādītu vairākas IP adreses, atdaliet tos sākumā un beigās ar defisi (-); precizēt aizstājējzīmes, izmantojiet zvaigznīti (*).';
+$lang['BAN_IP'] = 'Bloķēt vienu vai vairākas IP adreses';
+$lang['IP_HOSTNAME'] = 'IP adreses';
+$lang['BAN_IP_EXPLAIN'] = 'Lai norādītu vairākus dažādas IP adreses, atdaliet tās ar komatiem.';
 
 $lang['BAN_EMAIL'] = 'Bloķēt vienu vai vairākas e-pasta adreses';
 $lang['BAN_EMAIL_EXPLAIN'] = 'Lai norādītu vairāk nekā vienu e-pasta adreses, atdaliet tās ar komatiem. Lai norādītu aizstājējzīmi lietotājvārdu, izmantojiet * kā *@hotmail.com';
@@ -2661,7 +2661,7 @@ $lang['SEARCH_USERS_ADVANCED'] = 'Pieredzējis Lietotājs Meklēšana';
 $lang['SEARCH_USERS_EXPLAIN'] = 'Šis Modulis ļauj jums veikt izvērsto meklēšanu lietotājiem uz visdažādākajiem kritērijiem. Lūdzu, izlasiet aprakstus katrā jomā, lai saprastu katra meklēšanas iespēja pilnībā.';
 $lang['SEARCH_USERNAME_EXPLAIN'] = 'Šeit jūs varat veikt lietas nejūtīga meklēt lietotājvārdiem. Ja jūs vēlētos, lai atbilstu daļa lietotājvārdu, izmantojiet * (zvaigznīti), kā aizstājējzīmi.';
 $lang['SEARCH_EMAIL_EXPLAIN'] = 'Ievadiet izteiksmes, lai atbilstu lietotāja e-pasta adresi. Šī ir lieta nejutīgs. Ja jūs vēlaties darīt daļēja atbilstība, to lietošana * (zvaigznīti), kā aizstājējzīmi.';
-$lang['SEARCH_IP_EXPLAIN'] = 'Meklēt lietotājus ar konkrētu IP adresi (xxx.xxx.xxx.xxx), aizstājējzīmes (xxx.xxx.xxx.*) vai diapazons (xxx.xxx.xxx.xxx-yyy.yyy.yyy.yyy). Piezīme: pēdējā quad .255 tiek uzskatīts diapazonā no visiem IPs, ka quad. Ja jūs ievadiet 10.0.0.255, tas ir tāpat kā ieiet 10.0.0.* (Nav IP tiek piešķirta .255 par šo jautājumu, tas ir rezervēts). Kur var rasties šī ir diapazonos, 10.0.0.5-10.0.0.255 ir tas pats, kas "10.0.0.*" . Jūs būtu patiešām ievadiet 10.0.0.5-10.0.0.254 .';
+$lang['SEARCH_IP_EXPLAIN'] = 'Meklēt lietotājus ar konkrētu IP adresi (xxx.xxx.xxx.xxx).';
 $lang['SEARCH_USERS_JOINED'] = 'Lietotāji, kas iestājās';
 $lang['SEARCH_USERS_LASTVISITED'] = 'Lietotājiem, kuriem ir apmeklējuši';
 $lang['IN_THE_LAST'] = 'pēdējās';

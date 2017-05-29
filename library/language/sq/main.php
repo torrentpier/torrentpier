@@ -1738,7 +1738,7 @@ $lang['CLICK_RETURN_FORUMAUTH'] = 'Kliko %sHere%s të kthehen në Forum Lejet';
 
 // Banning
 $lang['BAN_CONTROL'] = 'Ban Kontrollit';
-$lang['BAN_EXPLAIN'] = 'Këtu ju mund të kontrollojë ndalimin e përdoruesit. Ju mund të arrijnë këtë duke ndaluar ose të dy, e një përdorues të veçantë ose të një individi ose një varg të adresave IP ose hostnames. Këto metoda të parandaluar përdoruesit nga edhe arrijnë indeksi faqe të bordin tuaj. Për të parandaluar një përdorues të regjistruar nën një username të ndryshme ju gjithashtu mund të specifikoni një ndalua adresë e-mail. Ju lutem vini re se ndalimi i një email adresë të vetëm nuk do të parandaluar përdoruesit nga të qenit në gjendje për të hyni në, ose pas tuaj bordit. Ju duhet të përdorni një prej dy metoda për të arritur këtë.';
+$lang['BAN_EXPLAIN'] = 'Këtu ju mund të kontrollojë ndalimin e përdoruesit. Ju mund të arrijnë këtë duke ndaluar ose të dy, e një përdorues të veçantë ose të një individi ose një varg të adresave IP. Këto metoda të parandaluar përdoruesit nga edhe arrijnë indeksi faqe të bordin tuaj. Për të parandaluar një përdorues të regjistruar nën një username të ndryshme ju gjithashtu mund të specifikoni një ndalua adresë e-mail. Ju lutem vini re se ndalimi i një email adresë të vetëm nuk do të parandaluar përdoruesit nga të qenit në gjendje për të hyni në, ose pas tuaj bordit. Ju duhet të përdorni një prej dy metoda për të arritur këtë.';
 $lang['BAN_EXPLAIN_WARN'] = 'Ju lutem vini re se të hyjnë në një varg të adresave IP rezultatet në të gjitha adresat në mes fillimit dhe mbarimit duke u shtuar në banlist. Përpjekje do të bëhen për të minimizuar numrin e adresave të shtuar në bazën e të dhënave duke futur wildcards automatikisht aty ku është e përshtatshme. Nëse ju me të vërtetë duhet të hyjë në një varg, të përpiqemi për ta mbajtur atë të vogla ose më mirë akoma, të veçantë shtetëror adresave.';
 
 $lang['SELECT_IP'] = 'Përzgjidhni një adresë IP';
@@ -1747,9 +1747,9 @@ $lang['SELECT_EMAIL'] = 'Përzgjidhni një adresë e-Mail';
 $lang['BAN_USERNAME'] = 'Ban një ose më shumë përdoruesit të veçanta';
 $lang['BAN_USERNAME_EXPLAIN'] = 'Ju mund të ndalimit të përdoruesit të shumta në një të shkojnë duke përdorur të përshtatshme kombinim të miut dhe tastierës për kompjuterin tuaj dhe shfletuesit';
 
-$lang['BAN_IP'] = 'Ban një ose më shumë adresa IP ose hostnames';
-$lang['IP_HOSTNAME'] = 'Adresat IP ose hostnames';
-$lang['BAN_IP_EXPLAIN'] = 'Për të specifikojë të ndryshme adresat IP ose hostnames të ndajë ato me presje. Për të përcaktuar një varg të adresave IP, të ndarë e të fillojë dhe të përfundojë me një vizë ndarëse (-); për të përcaktuar një wildcard, përdorni një asterisk (*).';
+$lang['BAN_IP'] = 'Ban një ose më shumë adresat IP';
+$lang['IP_HOSTNAME'] = 'Adresat IP';
+$lang['BAN_IP_EXPLAIN'] = 'Për të specifikojë të ndryshme adresat IP të veçantë ato me presje.';
 
 $lang['BAN_EMAIL'] = 'Ban një ose më shumë adresat e-mail';
 $lang['BAN_EMAIL_EXPLAIN'] = 'Për të specifikuar më shumë se një adresë e-mail, të ndarë ato me presje. Për të përcaktuar një wildcard emrin, përdor * si *@hotmail.com';
@@ -2661,7 +2661,7 @@ $lang['SEARCH_USERS_ADVANCED'] = 'Avancuar Përdoruesit E Kërkimit';
 $lang['SEARCH_USERS_EXPLAIN'] = 'Ky Modul ju lejon për të kryer kërkime të avancuara për përdoruesit në një gamë të gjerë të kritereve. Ju lutem lexoni përshkrimet nën çdo fushë për të kuptuar çdo kërkim opsion plotësisht.';
 $lang['SEARCH_USERNAME_EXPLAIN'] = 'Këtu ju mund të kryejnë një rast pandjeshëm kërkimi për përdoruesve. Nëse ju do të donte për ndeshjen pjesë e emrin e përdoruesit të përdorin * (yll) si një wildcard.';
 $lang['SEARCH_EMAIL_EXPLAIN'] = 'Futni një shprehje për ndeshjen e përdoruesit adresë e-mail. Ky është rasti i pandjeshëm. Nëse ju doni të bëni një të pjesshme ndeshje, përdorimi * (yll) si një wildcard.';
-$lang['SEARCH_IP_EXPLAIN'] = 'Kërkimi për përdoruesit me një adresë IP të veçantë (xxx.xxx.xxx.xxx), wildcard (xxx.xxx.xxx.*) ose varg (xxx.xxx.xxx.xxx-yyy.yyy.yyy.yyy). Shënim: në fundit quad .255 është konsideruar gamë të gjitha Spi-në që quad. Nëse ju shkruani 10.0.0.255, ajo është vetëm si hyrë 10.0.0.* (Nuk ka IP është caktuar .255 për këtë çështje, ajo është e rezervuar). Ku ju mund të hasni kjo është në vargjet, 10.0.0.5-10.0.0.255 është e njëjtë si "10.0.0.*" . Ju duhet me të vërtetë të hyrë 10.0.0.5-10.0.0.254 .';
+$lang['SEARCH_IP_EXPLAIN'] = 'Kërkimi për përdoruesit me një adresë IP të veçantë (xxx.xxx.xxx.xxx).';
 $lang['SEARCH_USERS_JOINED'] = 'Përdoruesit që u bashkuan';
 $lang['SEARCH_USERS_LASTVISITED'] = 'Përdoruesit të cilët kanë vizituar';
 $lang['IN_THE_LAST'] = 'të fundit';
