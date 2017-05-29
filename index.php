@@ -23,7 +23,6 @@
  * SOFTWARE.
  */
 
-define('IN_FORUM', true);
 define('BB_SCRIPT', 'index');
 define('BB_ROOT', './');
 require __DIR__ . '/common.php';

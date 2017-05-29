@@ -314,35 +314,11 @@ if (!isset($_REQUEST['dosearch'])) {
             $text = sprintf($lang['SEARCH_FOR_IP'], strip_tags(htmlspecialchars(stripslashes($ip_address))));
 
             unset($users);
-            $users = array();
+            $users = [];
 
-            // Let's see if they entered a full valid IPv4 address
-            if (preg_match('/^([0-9]{1,2}|[0-2][0-9]{0,2})(\.([0-9]{1,2}|[0-2][0-9]{0,2})){3}$/', $ip_address)) {
+            if (Longman\IPTools\Ip::isValid($ip_address)) {
                 $ip = encode_ip($ip_address);
                 $users[] = $ip;
-            } elseif (preg_match('/^([0-9]{1,2}|[0-2][0-9]{0,2})(\.([0-9]{1,2}|[0-2][0-9]{0,2})){0,2}\.\*/', $ip_address)) {
-                $ip_split = explode('.', $ip_address);
-                switch (count($ip_split)) {
-                    case 4:
-                        $users[] = encode_ip($ip_split[0] . "." . $ip_split[1] . "." . $ip_split[2] . ".255");
-                        break;
-                    case 3:
-                        $users[] = encode_ip($ip_split[0] . "." . $ip_split[1] . ".255.255");
-                        break;
-                    case 2:
-                        $users[] = encode_ip($ip_split[0] . ".255.255.255");
-                        break;
-                }
-            } elseif (preg_match('/^([0-9]{1,2}|[0-2][0-9]{0,2})(\.([0-9]{1,2}|[0-2][0-9]{0,2})){3}(\s)*-(\s)*([0-9]{1,2}|[0-2][0-9]{0,2})(\.([0-9]{1,2}|[0-2][0-9]{0,2})){3}$/', $ip_address)) {
-                $range = preg_split('/[-\s]+/', $ip_address);
-                $start_range = explode('.', $range[0]);
-                $end_range = explode('.', $range[1]);
-                if (($start_range[0] . $start_range[1] . $start_range[2] != $end_range[0] . $end_range[1] . $end_range[2]) || ($start_range[3] > $end_range[3])) {
-                    bb_die($lang['SEARCH_INVALID_IP']);
-                }
-                for ($i = $start_range[3]; $i <= $end_range[3]; $i++) {
-                    $users[] = encode_ip($start_range[0] . "." . $start_range[1] . "." . $start_range[2] . "." . $i);
-                }
             } else {
                 bb_die($lang['SEARCH_INVALID_IP']);
             }
@@ -350,25 +326,12 @@ if (!isset($_REQUEST['dosearch'])) {
             $ip_in_sql = $ip_like_sql = $ip_like_sql_flylast = $ip_like_sql_flyreg = '';
 
             foreach ($users as $address) {
-                if (preg_match('/(ff){1,3}$/i', $address)) {
-                    if (preg_match('/[0-9a-f]{2}ffffff/i', $address)) {
-                        $ip_start = substr($address, 0, 2);
-                    } elseif (preg_match('/[0-9a-f]{4}ffff/i', $address)) {
-                        $ip_start = substr($address, 0, 4);
-                    } elseif (preg_match('/[0-9a-f]{6}ff/i', $address)) {
-                        $ip_start = substr($address, 0, 6);
-                    }
-                    $ip_like_sql_flylast = $ip_like_sql . ($ip_like_sql != '') ? " OR user_last_ip LIKE '" . $ip_start . "%'" : "user_last_ip LIKE '" . $ip_start . "%'";
-                    $ip_like_sql_flyreg = $ip_like_sql . ($ip_like_sql != '') ? " OR user_reg_ip LIKE '" . $ip_start . "%'" : "user_reg_ip LIKE '" . $ip_start . "%'";
-                    $ip_like_sql .= ($ip_like_sql != '') ? " OR poster_ip LIKE '" . $ip_start . "%'" : "poster_ip LIKE '" . $ip_start . "%'";
-                } else {
-                    $ip_in_sql .= ($ip_in_sql == '') ? "'$address'" : ", '$address'";
-                }
+                $ip_in_sql .= ($ip_in_sql == '') ? "'$address'" : ", '$address'";
             }
 
             $where_sql = '';
-            $where_sql .= ($ip_in_sql != '') ? "poster_ip IN ($ip_in_sql)" : "";
-            $where_sql .= ($ip_like_sql != '') ? ($where_sql != "") ? " OR $ip_like_sql" : "$ip_like_sql" : "";
+            $where_sql .= ($ip_in_sql != '') ? "poster_ip IN ($ip_in_sql)" : '';
+            $where_sql .= ($ip_like_sql != '') ? ($where_sql != "") ? " OR $ip_like_sql" : "$ip_like_sql" : '';
 
             if (!$where_sql) {
                 bb_die('invalid request');

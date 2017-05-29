@@ -132,16 +132,16 @@ foreach ($db_fields_bool as $field_name => $field_def_val) {
 foreach ($rowset as $rid => $forum) {
     foreach ($db_fields_bool as $field_name => $field_def_val) {
         $forum_name = $forum['forum_name'];
-        $selected = ($forum[$field_name]) ? ' selected="selected"' : '';
+        $selected = $forum[$field_name] ? ' selected="selected"' : '';
 
         $forum_name = str_short($forum_name, $max_forum_name_len);
 
-        $$field_name .= '<option value="' . $forum['forum_id'] . '" ' . $selected . '>&nbsp;' . (($forum['forum_parent']) ? HTML_SF_SPACER : '') . htmlCHR($forum_name) . "</option>\n";
+        $$field_name .= '<option value="' . $forum['forum_id'] . '" ' . $selected . '>&nbsp;' . ($forum['forum_parent'] ? HTML_SF_SPACER : '') . htmlCHR($forum_name) . "</option>\n";
     }
 }
 
 foreach ($db_fields_bool as $field_name => $field_def_val) {
-    $$field_name = '<select name="' . $field_name . "[]\" multiple=\"multiple\" size=\"$forum_rows\">" . $$field_name . '</select>';
+    $$field_name = '<select name="' . $field_name . "[]\" multiple size=\"$forum_rows\">" . $$field_name . '</select>';
     $template->assign_vars(array('S_' . strtoupper($field_name) => $$field_name));
 }
 

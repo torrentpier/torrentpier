@@ -23,8 +23,8 @@
  * SOFTWARE.
  */
 
-if (!defined('IN_FORUM')) {
-    die('Hacking attempt');
+if (!defined('BB_ROOT')) {
+    die(basename(__FILE__));
 }
 
 define('FILENAME_PREFIX', false);

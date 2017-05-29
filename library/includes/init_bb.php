@@ -38,23 +38,29 @@ if (!defined('BB_CFG_LOADED')) {
 
 // Define some basic configuration arrays
 unset($stopwords, $synonyms_match, $synonyms_replace);
-$userdata = $theme = $images = $lang = $nav_links = $bf = $attach_config = array();
+$userdata = $theme = $images = $lang = $nav_links = $bf = $attach_config = [];
 $gen_simple_header = false;
 $user = null;
 
 // Obtain and encode user IP
-$client_ip = !empty($_SERVER['REMOTE_ADDR']) ? $_SERVER['REMOTE_ADDR'] : '127.0.0.1';
+$client_ip = filter_var($_SERVER['REMOTE_ADDR'], FILTER_VALIDATE_IP) ? $_SERVER['REMOTE_ADDR'] : '127.0.0.1';
 $user_ip = encode_ip($client_ip);
 define('CLIENT_IP', $client_ip);
 define('USER_IP', $user_ip);
 
+/**
+ * @param $contents
+ * @return string
+ */
 function send_page($contents)
 {
     return compress_output($contents);
 }
 
-define('UA_GZIP_SUPPORTED', (isset($_SERVER['HTTP_ACCEPT_ENCODING']) && strpos($_SERVER['HTTP_ACCEPT_ENCODING'], 'gzip') !== false));
-
+/**
+ * @param $contents
+ * @return string
+ */
 function compress_output($contents)
 {
     global $bb_cfg;
@@ -89,6 +95,13 @@ define('COOKIE_PERSIST', TIMENOW + 31536000);
 
 define('COOKIE_MAX_TRACKS', 90);
 
+/**
+ * @param $name
+ * @param $val
+ * @param int $lifetime
+ * @param bool $httponly
+ * @return bool
+ */
 function bb_setcookie($name, $val, $lifetime = COOKIE_PERSIST, $httponly = false)
 {
     global $bb_cfg;
@@ -111,12 +124,7 @@ define('ADMIN', 1);
 define('MOD', 2);
 define('GROUP_MEMBER', 20);
 define('CP_HOLDER', 25);
-
-$excluded_users = array(
-    GUEST_UID,
-    BOT_UID,
-);
-define('EXCLUDED_USERS_CSV', implode(',', $excluded_users));
+define('EXCLUDED_USERS', implode(',', [GUEST_UID, BOT_UID]));
 
 // User related
 define('USER_ACTIVATION_NONE', 0);
@@ -205,21 +213,8 @@ define('POLL_FINISHED', 2);
 // Group avatars
 define('GROUP_AVATAR_MASK', 999000);
 
-// Torrents     (reserved: -1)
-define('TOR_NOT_APPROVED', 0);   // не проверено
-define('TOR_CLOSED', 1);   // закрыто
-define('TOR_APPROVED', 2);   // проверено
-define('TOR_NEED_EDIT', 3);   // недооформлено
-define('TOR_NO_DESC', 4);   // неоформлено
-define('TOR_DUP', 5);   // повтор
-define('TOR_CLOSED_CPHOLD', 6);   // закрыто правообладателем
-define('TOR_CONSUMED', 7);   // поглощено
-define('TOR_DOUBTFUL', 8);   // сомнительно
-define('TOR_CHECKING', 9);   // проверяется
-define('TOR_TMP', 10);  // временная
-define('TOR_PREMOD', 11);  // премодерация
-
-$bb_cfg['tor_icons'] = array(
+// Иконки статусов
+$bb_cfg['tor_icons'] = [
     TOR_NOT_APPROVED => '<span class="tor-icon tor-not-approved">*</span>',
     TOR_CLOSED => '<span class="tor-icon tor-closed">x</span>',
     TOR_APPROVED => '<span class="tor-icon tor-approved">&radic;</span>',
@@ -232,10 +227,10 @@ $bb_cfg['tor_icons'] = array(
     TOR_CHECKING => '<span class="tor-icon tor-checking">%</span>',
     TOR_TMP => '<span class="tor-icon tor-dup">T</span>',
     TOR_PREMOD => '<span class="tor-icon tor-dup">&#8719;</span>',
-);
+];
 
 // Запрет на скачивание
-$bb_cfg['tor_frozen'] = array(
+$bb_cfg['tor_frozen'] = [
     TOR_CHECKING => true,
     TOR_CLOSED => true,
     TOR_CLOSED_CPHOLD => true,
@@ -243,36 +238,52 @@ $bb_cfg['tor_frozen'] = array(
     TOR_DUP => true,
     TOR_NO_DESC => true,
     TOR_PREMOD => true,
-);
+];
 
 // Разрешение на скачку автором, если закрыто на скачивание.
-$bb_cfg['tor_frozen_author_download'] = array(
+$bb_cfg['tor_frozen_author_download'] = [
     TOR_CHECKING => true,
     TOR_NO_DESC => true,
     TOR_PREMOD => true,
-);
+];
 
 // Запрет на редактирование головного сообщения
-$bb_cfg['tor_cannot_edit'] = array(
+$bb_cfg['tor_cannot_edit'] = [
     TOR_CHECKING => true,
     TOR_CLOSED => true,
     TOR_CONSUMED => true,
     TOR_DUP => true,
-);
+];
 
 // Запрет на создание новых раздач если стоит статус недооформлено/неоформлено/сомнительно
-$bb_cfg['tor_cannot_new'] = array(TOR_NEED_EDIT, TOR_NO_DESC, TOR_DOUBTFUL);
+$bb_cfg['tor_cannot_new'] = [TOR_NEED_EDIT, TOR_NO_DESC, TOR_DOUBTFUL];
 
 // Разрешение на ответ релизера, если раздача исправлена.
-$bb_cfg['tor_reply'] = array(TOR_NEED_EDIT, TOR_NO_DESC, TOR_DOUBTFUL);
+$bb_cfg['tor_reply'] = [TOR_NEED_EDIT, TOR_NO_DESC, TOR_DOUBTFUL];
 
 // Если такой статус у релиза, то статистика раздачи будет скрыта
-$bb_cfg['tor_no_tor_act'] = array(
+$bb_cfg['tor_no_tor_act'] = [
     TOR_CLOSED => true,
     TOR_DUP => true,
     TOR_CLOSED_CPHOLD => true,
     TOR_CONSUMED => true,
-);
+];
+
+$dl_link_css = [
+    DL_STATUS_RELEASER => 'genmed',
+    DL_STATUS_WILL => 'dlWill',
+    DL_STATUS_DOWN => 'leechmed',
+    DL_STATUS_COMPLETE => 'seedmed',
+    DL_STATUS_CANCEL => 'dlCancel',
+];
+
+$dl_status_css = [
+    DL_STATUS_RELEASER => 'genmed',
+    DL_STATUS_WILL => 'dlWill',
+    DL_STATUS_DOWN => 'dlDown',
+    DL_STATUS_COMPLETE => 'dlComplete',
+    DL_STATUS_CANCEL => 'dlCancel',
+];
 
 // Table names
 define('BUF_TOPIC_VIEW', 'buf_topic_view');
@@ -397,6 +408,9 @@ function send_no_cache_headers()
     header('Pragma: no-cache');
 }
 
+/**
+ * @param string $output
+ */
 function bb_exit($output = '')
 {
     if ($output) {
@@ -405,47 +419,48 @@ function bb_exit($output = '')
     exit;
 }
 
+/**
+ * @param $var
+ * @param string $title
+ * @param bool $print
+ * @return string
+ */
 function prn_r($var, $title = '', $print = true)
 {
-    $r = '<pre>' . (($title) ? "<b>$title</b>\n\n" : '') . htmlspecialchars(print_r($var, true)) . '</pre>';
+    $r = '<pre>' . ($title ? "<b>$title</b>\n\n" : '') . htmlspecialchars(print_r($var, true)) . '</pre>';
     if ($print) {
         echo $r;
     }
     return $r;
 }
 
-function pre($var, $title = '', $print = true)
-{
-    prn_r($var, $title, $print);
-}
-
-function prn()
-{
-    if (!DBG_USER) {
-        return;
-    }
-    foreach (func_get_args() as $var) {
-        prn_r($var);
-    }
-}
-
-function vdump($var, $title = '')
-{
-    echo '<pre>' . (($title) ? "<b>$title</b>\n\n" : '');
-    var_dump($var);
-    echo '</pre>';
-}
-
+/**
+ * @param $txt
+ * @param bool $double_encode
+ * @param int $quote_style
+ * @param string $charset
+ * @return string
+ */
 function htmlCHR($txt, $double_encode = false, $quote_style = ENT_QUOTES, $charset = 'UTF-8')
 {
     return (string)htmlspecialchars($txt, $quote_style, $charset, $double_encode);
 }
 
+/**
+ * @param $txt
+ * @param int $quote_style
+ * @param string $charset
+ * @return string
+ */
 function html_ent_decode($txt, $quote_style = ENT_QUOTES, $charset = 'UTF-8')
 {
     return (string)html_entity_decode($txt, $quote_style, $charset);
 }
 
+/**
+ * @param string $path
+ * @return string
+ */
 function make_url($path = '')
 {
     return FULL_URL . preg_replace('#^\/?(.*?)\/?$#', '\1', $path);
@@ -453,9 +468,6 @@ function make_url($path = '')
 
 require INC_DIR . '/functions.php';
 require INC_DIR . '/sessions.php';
-require INC_DIR . '/template.php';
-
-define('SQL_LAYER', 'mysql');
 
 $bb_cfg = array_merge(bb_get_config(BB_CONFIG), $bb_cfg);
 
@@ -505,22 +517,6 @@ if ((empty($_POST) && !defined('IN_ADMIN') && !defined('IN_AJAX') && !file_exist
     }
 }
 
-$dl_link_css = array(
-    DL_STATUS_RELEASER => 'genmed',
-    DL_STATUS_WILL => 'dlWill',
-    DL_STATUS_DOWN => 'leechmed',
-    DL_STATUS_COMPLETE => 'seedmed',
-    DL_STATUS_CANCEL => 'dlCancel',
-);
-
-$dl_status_css = array(
-    DL_STATUS_RELEASER => 'genmed',
-    DL_STATUS_WILL => 'dlWill',
-    DL_STATUS_DOWN => 'dlDown',
-    DL_STATUS_COMPLETE => 'dlComplete',
-    DL_STATUS_CANCEL => 'dlCancel',
-);
-
 // Exit if board is disabled via ON/OFF trigger or by admin
 if (($bb_cfg['board_disable'] || file_exists(BB_DISABLED)) && !defined('IN_ADMIN') && !defined('IN_AJAX') && !defined('IN_LOGIN')) {
     header('HTTP/1.0 503 Service Unavailable');
@@ -536,7 +532,9 @@ if (($bb_cfg['board_disable'] || file_exists(BB_DISABLED)) && !defined('IN_ADMIN
     }
 }
 
-// Cron functions
+/**
+ * Снятие блокировки крона
+ */
 function cron_release_deadlock()
 {
     if (file_exists(CRON_RUNNING)) {
@@ -547,23 +545,39 @@ function cron_release_deadlock()
     }
 }
 
+/**
+ * Блокировка крона
+ */
 function cron_release_file_lock()
 {
-    $lock_released = @rename(CRON_RUNNING, CRON_ALLOWED);
+    rename(CRON_RUNNING, CRON_ALLOWED);
     cron_touch_lock_file(CRON_ALLOWED);
 }
 
+/**
+ * @param $lock_file
+ */
 function cron_touch_lock_file($lock_file)
 {
     file_write(make_rand_str(20), $lock_file, 0, true, true);
 }
 
+/**
+ * Включение форума (при блокировке крона)
+ */
 function cron_enable_board()
 {
-    @rename(BB_DISABLED, BB_ENABLED);
+    if (file_exists(BB_DISABLED)) {
+        rename(BB_DISABLED, BB_ENABLED);
+    }
 }
 
+/**
+ * Отключение форума (при блокировке крона)
+ */
 function cron_disable_board()
 {
-    @rename(BB_ENABLED, BB_DISABLED);
+    if (file_exists(BB_ENABLED)) {
+        rename(BB_ENABLED, BB_DISABLED);
+    }
 }

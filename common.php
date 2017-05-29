@@ -47,11 +47,16 @@ if (empty($_SERVER['SERVER_NAME'])) {
 if (!defined('BB_ROOT')) {
     define('BB_ROOT', './');
 }
-if (!defined('IN_FORUM') && !defined('IN_TRACKER')) {
-    define('IN_FORUM', true);
-}
 
 header('X-Frame-Options: SAMEORIGIN');
+
+// Cloudflare
+if (isset($_SERVER['HTTP_CF_CONNECTING_IP'])) {
+    $_SERVER['REMOTE_ADDR'] = $_SERVER['HTTP_CF_CONNECTING_IP'];
+}
+
+// Get all constants
+require_once __DIR__ . '/library/defines.php';
 
 // Composer
 if (!file_exists(__DIR__ . '/vendor/autoload.php')) {
@@ -60,7 +65,7 @@ if (!file_exists(__DIR__ . '/vendor/autoload.php')) {
 require_once __DIR__ . '/vendor/autoload.php';
 
 // Get initial config
-require __DIR__ . '/library/config.php';
+require_once __DIR__ . '/library/config.php';
 
 // Bugsnag error reporting
 if ($bb_cfg['bugsnag']['enabled'] && !empty($bb_cfg['bugsnag']['api_key'])) {
@@ -78,7 +83,7 @@ unset($server_protocol, $server_port);
 // Debug options
 define('DBG_USER', (isset($_COOKIE[COOKIE_DBG])));
 
-// Board/Tracker shared constants and functions
+// Board / tracker shared constants and functions
 define('BB_BT_TORRENTS', 'bb_bt_torrents');
 define('BB_BT_TRACKER', 'bb_bt_tracker');
 define('BB_BT_TRACKER_SNAP', 'bb_bt_tracker_snap');
@@ -108,7 +113,7 @@ define('BOT_UID', -746);
  */
 $DBS = new TorrentPier\Legacy\Dbs($bb_cfg);
 
-function DB($db_alias = 'db1')
+function DB($db_alias = 'db')
 {
     global $DBS;
     return $DBS->get_db_obj($db_alias);
@@ -197,7 +202,7 @@ function file_write($str, $file, $max_size = LOG_MAX_SIZE, $lock = true, $replac
 {
     $bytes_written = false;
 
-    if ($max_size && @filesize($file) >= $max_size) {
+    if ($max_size && file_exists($file) && filesize($file) >= $max_size) {
         $old_name = $file;
         $ext = '';
         if (preg_match('#^(.+)(\.[^\\/]+)$#', $file, $matches)) {
@@ -206,25 +211,25 @@ function file_write($str, $file, $max_size = LOG_MAX_SIZE, $lock = true, $replac
         }
         $new_name = $old_name . '_[old]_' . date('Y-m-d_H-i-s_') . getmypid() . $ext;
         clearstatcache();
-        if (@file_exists($file) && @filesize($file) >= $max_size && !@file_exists($new_name)) {
-            @rename($file, $new_name);
+        if (!file_exists($new_name)) {
+            rename($file, $new_name);
         }
     }
-    if (!$fp = @fopen($file, 'ab')) {
+    if (!$fp = fopen($file, 'ab')) {
         if ($dir_created = bb_mkdir(dirname($file))) {
-            $fp = @fopen($file, 'ab');
+            $fp = fopen($file, 'ab');
         }
     }
     if ($fp) {
         if ($lock) {
-            @flock($fp, LOCK_EX);
+            flock($fp, LOCK_EX);
         }
         if ($replace_content) {
-            @ftruncate($fp, 0);
-            @fseek($fp, 0, SEEK_SET);
+            ftruncate($fp, 0);
+            fseek($fp, 0, SEEK_SET);
         }
-        $bytes_written = @fwrite($fp, $str);
-        @fclose($fp);
+        $bytes_written = fwrite($fp, $str);
+        fclose($fp);
     }
 
     return $bytes_written;
@@ -258,28 +263,35 @@ function clean_filename($fname)
     return str_replace($s, '_', str_compact($fname));
 }
 
+/**
+ * Декодирование оригинального IP
+ * @param $ip
+ * @return string
+ */
 function encode_ip($ip)
 {
-    $d = explode('.', $ip);
-    return sprintf('%02x%02x%02x%02x', $d[0], $d[1], $d[2], $d[3]);
+    return Longman\IPTools\Ip::ip2long($ip);
 }
 
+/**
+ * Восстановление декодированного IP
+ * @param $ip
+ * @return string
+ */
 function decode_ip($ip)
 {
-    return long2ip("0x{$ip}");
+    return Longman\IPTools\Ip::long2ip($ip);
 }
 
-function ip2int($ip)
+/**
+ * Проверка IP на валидность
+ *
+ * @param $ip
+ * @return bool
+ */
+function verify_ip($ip)
 {
-    return (float)sprintf('%u', ip2long($ip));  // для совместимости с 32 битными системами
-}
-
-// long2ip( mask_ip_int(ip2int('1.2.3.4'), 24) ) = '1.2.3.255'
-function mask_ip_int($ip, $mask)
-{
-    $ip_int = is_numeric($ip) ? $ip : ip2int($ip);
-    $ip_masked = $ip_int | ((1 << (32 - $mask)) - 1);
-    return (float)sprintf('%u', $ip_masked);
+    return Longman\IPTools\Ip::isValid($ip);
 }
 
 function bb_crc32($str)
@@ -290,11 +302,6 @@ function bb_crc32($str)
 function hexhex($value)
 {
     return dechex(hexdec($value));
-}
-
-function verify_ip($ip)
-{
-    return preg_match('#^(\d{1,3}\.){3}\d{1,3}$#', $ip);
 }
 
 function str_compact($str)
@@ -407,12 +414,11 @@ function log_request($file = '', $prepend_str = false, $add_post = true)
     bb_log($str, $file);
 }
 
-// Board init
-if (defined('IN_FORUM')) {
+// Board or tracker init
+if (!defined('IN_TRACKER')) {
     require INC_DIR . '/init_bb.php';
-} // Tracker init
-elseif (defined('IN_TRACKER')) {
-    define('DUMMY_PEER', pack('Nn', ip2long($_SERVER['REMOTE_ADDR']), !empty($_GET['port']) ? (int) $_GET['port'] : mt_rand(1000, 65000)));
+} else {
+    define('DUMMY_PEER', pack('Nn', ip2long($_SERVER['REMOTE_ADDR']), !empty($_GET['port']) ? (int)$_GET['port'] : mt_rand(1000, 65000)));
 
     function dummy_exit($interval = 1800)
     {

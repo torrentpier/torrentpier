@@ -173,7 +173,7 @@
 				</tr>
 				<tr>
 					<td class="row1" align="center">
-						<select style="width:560px" name="entries[]" multiple="multiple" size="5">
+						<select style="width:560px" name="entries[]" multiple size="5">
 						<!-- BEGIN allow_option_values -->
 						<option value="{allow_option_values.VALUE}">{allow_option_values.OPTION}</option>
 						<!-- END allow_option_values -->
@@ -196,7 +196,7 @@
 				</tr>
 				<tr>
 					<td class="row1" align="center">
-					<select style="width:560px" name="entries[]" multiple="multiple" size="5">
+					<select style="width:560px" name="entries[]" multiple size="5">
 					<!-- BEGIN forum_option_values -->
 					<option value="{forum_option_values.VALUE}">{forum_option_values.OPTION}</option>
 					<!-- END forum_option_values -->
