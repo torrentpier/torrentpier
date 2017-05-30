@@ -1546,7 +1546,7 @@ $lang['DL_UL_SPEED'] = 'UL rýchlosť';
 $lang['DL_DL_SPEED'] = 'DL rýchlosť';
 $lang['DL_PORT'] = 'Port';
 $lang['DL_FORMULA'] = 'Vzorec: Nahrané/TorrentSize';
-$lang['DL_ULR'] = 'URL';
+$lang['DL_ULR'] = 'Adresa URL';
 $lang['DL_STOPPED'] = 'zastavil';
 $lang['DL_UPD'] = 'upd: ';
 $lang['DL_INFO'] = 'zobrazuje údaje <i><b>only pre aktuálnu session</b></i>';
@@ -1738,7 +1738,7 @@ $lang['CLICK_RETURN_FORUMAUTH'] = 'Kliknite na tlačidlo %sHere%s ak sa chcete v
 
 // Banning
 $lang['BAN_CONTROL'] = 'Zákaz Ovládanie';
-$lang['BAN_EXPLAIN'] = 'Tu môžete kontrolovať zákaz používateľov. Môžete to dosiahnuť tým, že zákaz sa jeden alebo obaja z konkrétneho používateľa alebo jednotlivca alebo rozsah adries IP alebo názvy hostiteľov. Tieto metódy bránia používateľovi aj dosiahnutie index stránke vaše rady. Ak chcete zabrániť používateľom z registrácie podľa rôznych užívateľské meno môžete tiež zadať zakázané e-mailovú adresu. Vezmite prosím na vedomie, že zákaz e-mailovú adresu, sám o sebe nemôže zabrániť tomu, aby používateľ bol schopný sa prihlásiť, alebo poštou na palube. Mali by ste použiť jeden z prvých dvoch metód na dosiahnutie tohto cieľa.';
+$lang['BAN_EXPLAIN'] = 'Tu môžete kontrolovať zákaz používateľov. Môžete to dosiahnuť tým, že zákaz sa jeden alebo obaja z konkrétneho používateľa alebo jednotlivca alebo rozsah adries IP. Tieto metódy bránia používateľovi aj dosiahnutie index stránke vaše rady. Ak chcete zabrániť používateľom z registrácie podľa rôznych užívateľské meno môžete tiež zadať zakázané e-mailovú adresu. Vezmite prosím na vedomie, že zákaz e-mailovú adresu, sám o sebe nemôže zabrániť tomu, aby používateľ bol schopný sa prihlásiť, alebo poštou na palube. Mali by ste použiť jeden z prvých dvoch metód na dosiahnutie tohto cieľa.';
 $lang['BAN_EXPLAIN_WARN'] = 'Vezmite prosím na vedomie, že vstup rozsah adries IP výsledky vo všetkých adries medzi začiatok a koniec sú pridané do banlist. Pokúša sa byť vykonané, aby sa minimalizoval počet adries pridaný do databázy zavedením zástupné znaky sa automaticky v prípade potreby. Ak ste naozaj potrebné zadať rozsah, snažte sa to malé alebo ešte lepšie štátu, konkrétne adresy.';
 
 $lang['SELECT_IP'] = 'Vyberte IP adresa';
@@ -1747,9 +1747,9 @@ $lang['SELECT_EMAIL'] = 'Vyberte e-Mailovú adresu';
 $lang['BAN_USERNAME'] = 'Zákaz jeden alebo viac konkrétnych používateľov';
 $lang['BAN_USERNAME_EXPLAIN'] = 'Môžete zakázať viacerých používateľov v jednej ísť pomocou vhodnej kombinácie myš a klávesnica vášho počítača a prehliadača';
 
-$lang['BAN_IP'] = 'Zákaz jednu alebo viac IP adries, alebo názvy hostiteľov';
-$lang['IP_HOSTNAME'] = 'IP adresy a názvy hostiteľov';
-$lang['BAN_IP_EXPLAIN'] = 'Ak chcete zadať niekoľko rôznych IP adries, alebo názvy hostiteľov oddeľte ich čiarkami. Ak chcete určiť rozsah IP adries, oddeľte ich začiatok a koniec s pomlčkou (-); ak chcete zadať zástupný znak, použite hviezdičku (*).';
+$lang['BAN_IP'] = 'Zákaz jednu alebo viac IP adries';
+$lang['IP_HOSTNAME'] = 'IP adresy';
+$lang['BAN_IP_EXPLAIN'] = 'Ak chcete zadať niekoľko rôznych IP adries, oddeľte ich čiarkami.';
 
 $lang['BAN_EMAIL'] = 'Zákaz jednu alebo viac e-mailových adries';
 $lang['BAN_EMAIL_EXPLAIN'] = 'Ak chcete určiť viac ako jednu e-mailovú adresu, oddeľte ich čiarkami. Ak chcete zadať zástupný znak užívateľské meno, použitie * ako *@hotmail.com';
@@ -2661,7 +2661,7 @@ $lang['SEARCH_USERS_ADVANCED'] = 'Pre Pokročilého Používateľa Vyhľadávani
 $lang['SEARCH_USERS_EXPLAIN'] = 'Tento Modul vám umožní vykonávať rozšírené vyhľadávania pre užívateľov na širokú škálu kritérií. Prosím, prečítajte si popis pod každého poľa, aby pochopili každú možnosť vyhľadávania úplne.';
 $lang['SEARCH_USERNAME_EXPLAIN'] = 'Tu môžete vykonať case insensitive vyhľadať mená. Ak by ste chceli zápas časti používateľské meno, použitie * (hviezdičkou) ako zástupný znak.';
 $lang['SEARCH_EMAIL_EXPLAIN'] = 'Zadajte výraz na zápas a e-mailovú adresu používateľa. Je to nerozlišuje veľké a malé písmená. Ak chcete urobiť čiastočnú zhodu, použitie * (hviezdičkou) ako zástupný znak.';
-$lang['SEARCH_IP_EXPLAIN'] = 'Vyhľadávanie užívateľov podľa konkrétnej IP adresy (xxx.xxx.xxx.xxx), žolík (xxx.xxx.xxx.*) alebo rozsah (xxx.xxx.xxx.xxx-yyy.yyy.yyy.yyy). Poznámka: posledný quad .255 je považovaný za radom všetky IPs v tomto quad. Ak zadáte 10.0.0.255, to je len ako vstup 10.0.0.* (Č. IP je priradená .255 na to príde, je vyhradený). Kde sa môžete stretnúť je to v rozsahoch, 10.0.0.5-10.0.0.255 je rovnaký ako "10.0.0.*" . Mali by ste naozaj zadajte 10.0.0.5-10.0.0.254 .';
+$lang['SEARCH_IP_EXPLAIN'] = 'Vyhľadávanie užívateľov podľa konkrétnej IP adresy (xxx.xxx.xxx.xxx).';
 $lang['SEARCH_USERS_JOINED'] = 'Používatelia, ktoré vstúpili';
 $lang['SEARCH_USERS_LASTVISITED'] = 'Užívatelia, ktorým navštívili';
 $lang['IN_THE_LAST'] = 'v poslednom';

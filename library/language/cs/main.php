@@ -1738,7 +1738,7 @@ $lang['CLICK_RETURN_FORUMAUTH'] = 'Klikněte %sHere%s k návratu k Oprávnění 
 
 // Banning
 $lang['BAN_CONTROL'] = 'Zákaz Řízení';
-$lang['BAN_EXPLAIN'] = 'Zde můžete ovládat zákazu uživatele. Můžete dosáhnout tím, že zákaz jedné nebo obou konkrétního uživatele nebo jednotlivec nebo rozsah IP adres nebo názvů hostitelů. Tyto metody zabránit uživateli i od dosažení index stránky vaší desce. Aby se zabránilo uživateli registraci pod jiným uživatelským jménem, můžete také zadat zakázal e-mailovou adresu. Vezměte prosím na vědomí, že zákaz e-mailovou adresu sám se nebrání, že uživatel je schopen se přihlásit na nebo poštou na své palubě. Měli byste použít jednu z prvních dvou metod k dosažení tohoto cíle.';
+$lang['BAN_EXPLAIN'] = 'Zde můžete ovládat zákazu uživatele. Můžete dosáhnout tím, že zákaz jedné nebo obou konkrétního uživatele nebo jednotlivec nebo rozsah IP adres. Tyto metody zabránit uživateli i od dosažení index stránky vaší desce. Aby se zabránilo uživateli registraci pod jiným uživatelským jménem, můžete také zadat zakázal e-mailovou adresu. Vezměte prosím na vědomí, že zákaz e-mailovou adresu sám se nebrání, že uživatel je schopen se přihlásit na nebo poštou na své palubě. Měli byste použít jednu z prvních dvou metod k dosažení tohoto cíle.';
 $lang['BAN_EXPLAIN_WARN'] = 'Vezměte prosím na vědomí, že zadáním rozsahu IP adres výsledky ve všech adres mezi start a end je přidána do banlist. Pokusy budou provedeny, aby se minimalizoval počet adres přidán do databáze zavedením zástupné znaky automaticky tam, kde je to vhodné. Pokud opravdu musíte zadat rozsah, snažte se, aby to bylo malé, nebo ještě lépe uvádět konkrétní adresy.';
 
 $lang['SELECT_IP'] = 'Vyberte IP adresu';
@@ -1747,9 +1747,9 @@ $lang['SELECT_EMAIL'] = 'Vyberte E-mailovou adresu';
 $lang['BAN_USERNAME'] = 'Zakázat jednu nebo více konkrétních uživatelů';
 $lang['BAN_USERNAME_EXPLAIN'] = 'Můžete zakázat více uživatelů najednou pomocí vhodné kombinace myši a klávesnice pro váš počítač a prohlížeč';
 
-$lang['BAN_IP'] = 'Zakázat jednu nebo více adres IP nebo názvy hostitelů';
-$lang['IP_HOSTNAME'] = 'IP adresy nebo názvy hostitelů';
-$lang['BAN_IP_EXPLAIN'] = 'Zadat několik různých IP adres nebo názvů hostitelů oddělte je čárkami. Určete rozsah IP adres, oddělte zahájení a ukončení s pomlčkou (-); určit pomocí zástupných znaků, použijte hvězdičku (*).';
+$lang['BAN_IP'] = 'Zakázat jednu nebo více IP adres';
+$lang['IP_HOSTNAME'] = 'IP adresy';
+$lang['BAN_IP_EXPLAIN'] = 'Zadat několik různých IP adres, oddělte je čárkami.';
 
 $lang['BAN_EMAIL'] = 'Zakázat jednu nebo více e-mailových adres';
 $lang['BAN_EMAIL_EXPLAIN'] = 'Chcete-li zadat více než jednu e-mailovou adresu, oddělte je čárkami. Zadat zástupný znak, uživatelské jméno, použijte * jako *@hotmail.com';
@@ -2661,7 +2661,7 @@ $lang['SEARCH_USERS_ADVANCED'] = 'Pokročilé Hledání Uživatele';
 $lang['SEARCH_USERS_EXPLAIN'] = 'Tento Modul umožňuje provádět pokročilé vyhledávání pro uživatele na širokou škálu kritérií. Prosím, přečtěte si popis pod každé pole pochopit každý možnost vyhledávání úplně.';
 $lang['SEARCH_USERNAME_EXPLAIN'] = 'Zde můžete provádět malá a velká písmena vyhledávání pro uživatelská jména. Pokud byste chtěli, aby odpovídaly část uživatelské jméno, použijte * (hvězdička) jako zástupný znak.';
 $lang['SEARCH_EMAIL_EXPLAIN'] = 'Zadejte výraz, aby odpovídala e-mailovou adresu uživatele. To je malá a velká písmena. Pokud si chcete udělat částečná shoda, použijte * (hvězdička) jako zástupný znak.';
-$lang['SEARCH_IP_EXPLAIN'] = 'Hledat pro uživatele konkrétní IP adresu (xxx.xxx.xxx.xxx), zástupné znaky (xxx.xxx.xxx.*) nebo rozsah (xxx.xxx.xxx.xxx-yyy.yyy.yyy.yyy). Poznámka: poslední quad .255 je považována za nabídku na IPs v tom, že quad. Pokud zadáte 10.0.0.255, to je stejně jako zadání 10.0.0.* (Č. IP je přiřazena .255 na to přijde, je vyhrazena). Kde se můžete setkat je to v rozmezí, 10.0.0.5-10.0.0.255 je stejný jako "10.0.0.*" . Opravdu by jsi měl zadat 10.0.0.5-10.0.0.254 .';
+$lang['SEARCH_IP_EXPLAIN'] = 'Hledat pro uživatele konkrétní IP adresu (xxx.xxx.xxx.xxx).';
 $lang['SEARCH_USERS_JOINED'] = 'Uživatele, který se připojil';
 $lang['SEARCH_USERS_LASTVISITED'] = 'Uživatelé, kterým navštívili';
 $lang['IN_THE_LAST'] = 'v poslední';

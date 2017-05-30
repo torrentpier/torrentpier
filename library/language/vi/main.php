@@ -1738,7 +1738,7 @@ $lang['CLICK_RETURN_FORUMAUTH'] = 'Nhấn vào %sHere%s để trở về Đàn Q
 
 // Banning
 $lang['BAN_CONTROL'] = 'Ban Điều Khiển';
-$lang['BAN_EXPLAIN'] = 'Ở đây anh có thể kiểm soát cấm sử dụng. Bạn có thể đạt được điều này bằng cách cấm hoặc cả hai của một người sử dụng cụ thể, hay một cá nhân hoặc phạm vi địa chỉ IP hoặc tên máy. Những phương pháp ngăn chặn một người dùng từ thậm chí đạt các chỉ số trang của bạn đồng quản trị. Để ngăn chặn một người dùng từ đăng ký dưới một người bạn có thể cũng chỉ định một cấm địa chỉ email. Xin lưu ý rằng cấm địa chỉ email mình sẽ không ngăn chặn điều đó dùng từ có thể nhập vào hoặc gửi tới tàu của bạn. Bạn phải sử dụng một trong những lần đầu tiên, hai phương pháp để đạt được điều này.';
+$lang['BAN_EXPLAIN'] = 'Ở đây anh có thể kiểm soát cấm sử dụng. Bạn có thể đạt được điều này bằng cách cấm hoặc cả hai của một người sử dụng cụ thể, hay một cá nhân hoặc phạm vi địa chỉ IP. Những phương pháp ngăn chặn một người dùng từ thậm chí đạt các chỉ số trang của bạn đồng quản trị. Để ngăn chặn một người dùng từ đăng ký dưới một người bạn có thể cũng chỉ định một cấm địa chỉ email. Xin lưu ý rằng cấm địa chỉ email mình sẽ không ngăn chặn điều đó dùng từ có thể nhập vào hoặc gửi tới tàu của bạn. Bạn phải sử dụng một trong những lần đầu tiên, hai phương pháp để đạt được điều này.';
 $lang['BAN_EXPLAIN_WARN'] = 'Xin lưu ý rằng bước vào một loạt các địa chỉ IP kết quả trong tất cả các địa chỉ giữa bắt đầu và kết thúc được thêm vào danh sách hạn chế. Chúng tôi sẽ cố gắng để giảm thiểu số các địa chỉ thêm vào cơ sở dữ liệu bằng cách giới thiệu các kí tự động nơi thích hợp. Nếu bạn thực sự phải nhập một loạt, cố gắng để giữ cho nó nhỏ hoặc tốt hơn nước địa chỉ cụ thể.';
 
 $lang['SELECT_IP'] = 'Chọn một địa chỉ IP';
@@ -1747,9 +1747,9 @@ $lang['SELECT_EMAIL'] = 'Chọn một địa chỉ Email';
 $lang['BAN_USERNAME'] = 'Ban một hoặc nhiều người sử dụng cụ thể';
 $lang['BAN_USERNAME_EXPLAIN'] = 'Bạn có thể ban nhiều người dùng trong một đi sử dụng sự kết hợp của chuột và bàn phím máy tính và duyệt';
 
-$lang['BAN_IP'] = 'Cấm một hay hơn, các địa chỉ IP hoặc tên máy';
-$lang['IP_HOSTNAME'] = 'Các địa chỉ IP hoặc tên máy';
-$lang['BAN_IP_EXPLAIN'] = 'Để xác định một số khác địa chỉ IP hoặc tên máy tách chúng ra với dấu phẩy. Để xác định một loạt các địa chỉ IP riêng bắt đầu và kết thúc với một dấu gạch nối ( - ), để xác định một đại sử dụng một dấu (*).';
+$lang['BAN_IP'] = 'Cấm một hay hơn, các địa chỉ IP';
+$lang['IP_HOSTNAME'] = 'Các địa chỉ IP';
+$lang['BAN_IP_EXPLAIN'] = 'Để xác định một số khác địa chỉ IP tách chúng ra với dấu phẩy.';
 
 $lang['BAN_EMAIL'] = 'Cấm một địa chỉ email';
 $lang['BAN_EMAIL_EXPLAIN'] = 'Để xác định nhiều hơn một địa chỉ email, tách chúng ra với dấu phẩy. Để xác định một ký tên, sử dụng * *@hotmail.com';
@@ -2661,7 +2661,7 @@ $lang['SEARCH_USERS_ADVANCED'] = 'Tiến Dùng Tìm Kiếm';
 $lang['SEARCH_USERS_EXPLAIN'] = 'Điều này cho phép anh để thực hiện tìm kiếm nâng cao cho người trên một loạt các tiêu chuẩn. Xin vui lòng đọc các mô tả trong mỗi trường để hiểu nhau tìm kiếm lựa chọn hoàn toàn.';
 $lang['SEARCH_USERNAME_EXPLAIN'] = 'Ở đây, bạn có thể thực hiện một trường hợp vô tâm tìm kiếm người. Nếu bạn muốn đấu một phần của các người sử dụng * (một câu) như một đại diện.';
 $lang['SEARCH_EMAIL_EXPLAIN'] = 'Nhập một biểu hiện để phù hợp với một người sử dụng là địa chỉ email. Đây là trường hợp nhạy cảm. Nếu bạn muốn làm một phần trận, sử dụng * (một câu) như một đại diện.';
-$lang['SEARCH_IP_EXPLAIN'] = 'Tìm kiếm người sử dụng bởi một địa chỉ IP cụ thể (xxx.xxx.xxx.xxx) đại (xxx.xxx.xxx.*) hoặc phạm vi (xxx.xxx.xxx.xxx-monster.monster.monster.monster). Chú ý: cuối cùng quad .255 được coi là phạm vi của tất cả các khu rằng bốn. Nếu bạn nhập 10.0.0.255, nó được chỉ như bước vào 10.0.0.* (Không IP được giao .255 cho rằng vấn đề, nó được dành riêng). Nơi bạn có thể gặp phải đây là trong phạm vi 10.0.0.5-10.0.0.255 là giống như "10.0.0.*" . Bạn thực sự cần nhập 10.0.0.5-10.0.0.254 .';
+$lang['SEARCH_IP_EXPLAIN'] = 'Tìm kiếm người sử dụng bởi một địa chỉ IP cụ thể (xxx.xxx.xxx.xxx).';
 $lang['SEARCH_USERS_JOINED'] = 'Người đó tham gia';
 $lang['SEARCH_USERS_LASTVISITED'] = 'Người mà có đến thăm';
 $lang['IN_THE_LAST'] = 'trong các tác';

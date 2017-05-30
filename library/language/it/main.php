@@ -1738,7 +1738,7 @@ $lang['CLICK_RETURN_FORUMAUTH'] = 'Fare clic su %sHere%s per tornare al Forum di
 
 // Banning
 $lang['BAN_CONTROL'] = 'Divieto Di Controllo';
-$lang['BAN_EXPLAIN'] = 'Qui è possibile controllare la messa al bando di utenti. È possibile ottenere questo divieto sia un utente specifico o un individuo o un intervallo di indirizzi IP o i nomi degli host. Questi metodi di impedire a un utente anche di raggiungere la pagina index del tuo consiglio. Per impedire a un utente di registrarsi con un nome utente diverso è anche possibile specificare un bandito indirizzo e-mail. Siete pregati di notare che l\'esclusione di un indirizzo e-mail da solo non impedisce all\'utente di essere in grado di accedere o post per il tuo consiglio. Si dovrebbe utilizzare uno dei due metodi per raggiungere questo obiettivo.';
+$lang['BAN_EXPLAIN'] = 'Qui è possibile controllare la messa al bando di utenti. È possibile ottenere questo divieto sia un utente specifico o un individuo o un intervallo di indirizzi IP. Questi metodi di impedire a un utente anche di raggiungere la pagina index del tuo consiglio. Per impedire a un utente di registrarsi con un nome utente diverso è anche possibile specificare un bandito indirizzo e-mail. Siete pregati di notare che l\'esclusione di un indirizzo e-mail da solo non impedisce all\'utente di essere in grado di accedere o post per il tuo consiglio. Si dovrebbe utilizzare uno dei due metodi per raggiungere questo obiettivo.';
 $lang['BAN_EXPLAIN_WARN'] = 'Siete pregati di notare che l\'inserimento di un intervallo di indirizzi IP da come risultati tutti gli indirizzi tra l\'inizio e la fine di essere aggiunto alla lista dei bannati. Si cercherà di ridurre al minimo il numero di indirizzi aggiunti al database introducendo caratteri jolly automaticamente, ove appropriato. Se si deve immettere un intervallo, cercare di mantenere il piccolo o meglio ancora stato indirizzi specifici.';
 
 $lang['SELECT_IP'] = 'Selezionare un indirizzo IP';
@@ -1747,9 +1747,9 @@ $lang['SELECT_EMAIL'] = 'Selezionare un indirizzo e-Mail';
 $lang['BAN_USERNAME'] = 'Di escludere uno o più utenti specifici';
 $lang['BAN_USERNAME_EXPLAIN'] = 'Si può bannare più utenti in un colpo solo usando l\'appropriata combinazione di mouse e tastiera per il vostro computer e il browser';
 
-$lang['BAN_IP'] = 'Di escludere uno o più indirizzi IP o hostname';
-$lang['IP_HOSTNAME'] = 'Gli indirizzi IP o i nomi degli host';
-$lang['BAN_IP_EXPLAIN'] = 'Per specificare diversi indirizzi IP o hostname separarli con una virgola. Per specificare un intervallo di indirizzi IP, iniziare e finire con un trattino (-); per specificare un jolly, è possibile utilizzare un asterisco (*).';
+$lang['BAN_IP'] = 'Di escludere uno o più indirizzi IP';
+$lang['IP_HOSTNAME'] = 'Gli indirizzi IP';
+$lang['BAN_IP_EXPLAIN'] = 'Per specificare più indirizzi IP diversi separarli con una virgola.';
 
 $lang['BAN_EMAIL'] = 'Di escludere uno o più indirizzi e-mail';
 $lang['BAN_EMAIL_EXPLAIN'] = 'Per specificare più indirizzi e-mail, separarli con una virgola. Per specificare un jolly nome utente, utilizzare * come *@hotmail.com';
@@ -2661,7 +2661,7 @@ $lang['SEARCH_USERS_ADVANCED'] = 'Utente Avanzato Di Ricerca';
 $lang['SEARCH_USERS_EXPLAIN'] = 'Questo Modulo permette di eseguire ricerche avanzate per gli utenti su una vasta gamma di criteri. Si prega di leggere la descrizione di ogni campo per capire ogni opzione di ricerca completamente.';
 $lang['SEARCH_USERNAME_EXPLAIN'] = 'Qui si può fare una distinzione tra maiuscole e minuscole ricerca per nome utente. Se vuoi match parte del nome utente, l\'uso * (asterisco) come carattere jolly.';
 $lang['SEARCH_EMAIL_EXPLAIN'] = 'Immettere un\'espressione di abbinare un indirizzo email dell\'utente. Questa distinzione tra maiuscole e minuscole. Se si desidera eseguire una corrispondenza parziale, l\'uso * (asterisco) come carattere jolly.';
-$lang['SEARCH_IP_EXPLAIN'] = 'Ricerca di utenti con un determinato indirizzo IP (xxx.xxx.xxx.xxx), jolly (xxx.xxx.xxx.*) o gamma (xxx.xxx.xxx.xxx-yyy.yyy.yyy.yyy). Nota: l\'ultimo quad .255 è considerata la gamma di tutti gli ip che quad. Se si immette 10.0.0.255, è proprio come entrare 10.0.0.* (No IP viene assegnato .255 per quella materia, è riservato). Dove è possibile incontrare questo è in intervalli, 10.0.0.5-10.0.0.255 è lo stesso "10.0.0.*" . Si dovrebbe davvero entrare 10.0.0.5-10.0.0.254 .';
+$lang['SEARCH_IP_EXPLAIN'] = 'Ricerca di utenti con un determinato indirizzo IP (xxx.xxx.xxx.xxx).';
 $lang['SEARCH_USERS_JOINED'] = 'Gli utenti che hanno aderito';
 $lang['SEARCH_USERS_LASTVISITED'] = 'Utenti che hanno visitato';
 $lang['IN_THE_LAST'] = 'negli ultimi';

@@ -1546,7 +1546,7 @@ $lang['DL_UL_SPEED'] = 'Sürət küç';
 $lang['DL_DL_SPEED'] = 'Sürət dl';
 $lang['DL_PORT'] = 'Port';
 $lang['DL_FORMULA'] = 'Tərkibi: Dolu/TorrentSize';
-$lang['DL_ULR'] = 'URL';
+$lang['DL_ULR'] = 'URL-ünvanı';
 $lang['DL_STOPPED'] = 'dayandırdı';
 $lang['DL_UPD'] = 'упд: ';
 $lang['DL_INFO'] = 'məlumatları göstərir <i><b>only üçün cari session</b></i>';
@@ -1738,7 +1738,7 @@ $lang['CLICK_RETURN_FORUMAUTH'] = 'Basın %sHere%s geri almaq üçün forum icaz
 
 // Banning
 $lang['BAN_CONTROL'] = 'Nəzarət Qadağa';
-$lang['BAN_EXPLAIN'] = 'Burada siz nəzarət edə bilərsiniz qadağa istifadəçilər. Siz nail olmaq, bu yolla qadağan bir və ya hər iki konkret bir istifadəçi və ya fərdi və ya üçündür IP-ünvanı və ya adları Host. Bu metod imkan verir ki, istifadəçi hətta çatan ana səhifə sizin şuranın. Verməmək, istifadəçi qeydiyyatdan altında başqa istifadəçi adı olar da qeyd qadağan e-mail ünvanı. Qeyd edək ki, qadağa bir e-mail ünvanı olacaq qarşısını almaq istifadəçilər təcrübəsi etmək üçün daxil ol və ya yerləşdirə board. İstifadə etməlidir biri ilk iki üsulları, buna nail olmaq üçün.';
+$lang['BAN_EXPLAIN'] = 'Burada siz nəzarət edə bilərsiniz qadağa istifadəçilər. Siz nail olmaq, bu yolla qadağan bir və ya hər iki konkret bir istifadəçi və ya fərdi və ya sıra IP-ünvanları. Bu metod imkan verir ki, istifadəçi hətta çatan ana səhifə sizin şuranın. Verməmək, istifadəçi qeydiyyatdan altında başqa istifadəçi adı olar da qeyd qadağan e-mail ünvanı. Qeyd edək ki, qadağa bir e-mail ünvanı olacaq qarşısını almaq istifadəçilər təcrübəsi etmək üçün daxil ol və ya yerləşdirə board. İstifadə etməlidir biri ilk iki üsulları, buna nail olmaq üçün.';
 $lang['BAN_EXPLAIN_WARN'] = 'Qeyd edək ki, gələn bir sıra IP-ünvanı ünvan arasında başlanğıc və son əlavə olunacaq банлист. Atılacaqdır cəhdləri sayı minimuma endirmək ünvanlar əlavə məlumat bazası yolu ilə tətbiq maskalar avtomatik olaraq ehtiyac olduğu halda. Əgər siz, həqiqətən, daxil olmalıdır sıra saxlamaq üçün cəhd, kiçik və ya daha yaxşı hələ konkret ünvanlar.';
 
 $lang['SELECT_IP'] = 'Seçin IP-ünvanı';
@@ -1747,9 +1747,9 @@ $lang['SELECT_EMAIL'] = 'Seçin və e-poçt ünvanı';
 $lang['BAN_USERNAME'] = 'Qadağan bir və ya bir neçə konkret istifadəçilər';
 $lang['BAN_USERNAME_EXPLAIN'] = 'Siz qadağan bir neçə istifadəçi üçün bir dəfə istifadə edərək, müvafiq birləşməsi siçan və klaviatura üçün kompüter və browser';
 
-$lang['BAN_IP'] = 'Qadağan bir və ya birdən çox IP ünvanı və ya adları Host';
-$lang['IP_HOSTNAME'] = 'IP-ünvanı və ya adları Host';
-$lang['BAN_IP_EXPLAIN'] = 'Müəyyən etmək üçün bir neçə müxtəlif IP-ünvanı və ya Host, разделяйте onların vergül işarəsi ilə. Təyin etmək üçün bir sıra İP ünvanları, bölüşdürülməsi və onların başlanğıc və son qoyulmalıdır дефисом (-); kimi подстановочного nişanının istifadə ulduz (*).';
+$lang['BAN_IP'] = 'Qadağan bir və ya birdən çox IP-ünvanlar';
+$lang['IP_HOSTNAME'] = 'IP-ünvanlar';
+$lang['BAN_IP_EXPLAIN'] = 'Müəyyən etmək üçün bir neçə müxtəlif IP-ünvanları, разделяйте onların vergül işarəsi ilə.';
 
 $lang['BAN_EMAIL'] = 'Qadağan bir və ya bir neçə e-poçt';
 $lang['BAN_EMAIL_EXPLAIN'] = 'Qeyd etmək daha bir e-poçt ünvanları, bölüşdürülməsi və onların vergül işarəsi ilə. Qeyd etmək şablon istifadəçi adı istifadə * * * *@hotmail.com';
@@ -2661,7 +2661,7 @@ $lang['SEARCH_USERS_ADVANCED'] = 'Ətraflı Axtarış İstifadəçilər';
 $lang['SEARCH_USERS_EXPLAIN'] = 'Bu modul verir yerinə Ətraflı axtarış üçün istifadəçilər tərəfindən geniş dairəsi meyarlar. Oxuyun təsviri altında hər bir sahəsində, tam anlamaq üçün hər bir seçim axtar.';
 $lang['SEARCH_USERNAME_EXPLAIN'] = 'Burada siz icra axtarış nəzərə alınmadan reyestrinin adları üçün istifadəçi. Əgər istəyirsinizsə, uyğun bir hissəsini istifadəçi adı edin * (ulduz) kimi подстановочного nişanının.';
 $lang['SEARCH_EMAIL_EXPLAIN'] = 'Yazın ifadəsi üçün e-poçt ünvanları istifadəçi. Bunu nəzərə alınmadan reyestrinin. Etmək istəyirsinizsə, qismən üst-üstə düşməsi, istifadə edin * (ulduz) kimi подстановочного nişanının.';
-$lang['SEARCH_IP_EXPLAIN'] = 'Axtarış istifadəçi tərəfindən müəyyən IP-ünvan (XXX.XXX.XXX.XXX), подстановочные (XXX.XXX.XXX.*) ya üçündür (XXX.XXX.XXX.XXX-ууу.ыыы.ыыы.ууу). Qeyd: son квад .255 bir sıra bütün IP ünvanlarını ki, квад. Əgər Siz yazın 10.0.0.255, bu, yalnız kimi daxil 10.0.0.* (Heç bir IP verilir .255 o getdi, o qorunur). Harada qarşılaşa bilər, bu silsilələri, 10.0.0.5-10.0.0.255 belə isə, necə və "10.0.0.*" . Siz, həqiqətən, daxil ola 10.0.0.5-10.0.0.254 .';
+$lang['SEARCH_IP_EXPLAIN'] = 'Axtarış istifadəçi tərəfindən müəyyən IP-ünvan (XXX.XXX.XXX.XXX).';
 $lang['SEARCH_USERS_JOINED'] = 'İstifadəçilər qoşulub';
 $lang['SEARCH_USERS_LASTVISITED'] = 'İstifadəçilər onlardan ziyarət';
 $lang['IN_THE_LAST'] = 'son';

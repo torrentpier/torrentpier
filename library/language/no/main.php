@@ -1738,7 +1738,7 @@ $lang['CLICK_RETURN_FORUMAUTH'] = 'Klikk %sHere%s for å gå tilbake til Forumet
 
 // Banning
 $lang['BAN_CONTROL'] = 'Forbudet Kontroll';
-$lang['BAN_EXPLAIN'] = 'Her kan du styre ved å stenge ute brukere. Du kan oppnå dette ved å forby en eller begge av en bestemt bruker eller en person eller flere IP-adresse eller vertsnavn. Disse metodene forhindrer at en bruker fra selv å nå indeks side av brettet. For å hindre en bruker fra å registrere under et annet brukernavn, kan du også angi en utestengt e-postadressen. Vær oppmerksom på at banning en e-postadresse alene vil ikke hindre at brukeren blir i stand til å logge på eller legge til styret. Du bør bruke en av de to første metodene for å oppnå dette.';
+$lang['BAN_EXPLAIN'] = 'Her kan du styre ved å stenge ute brukere. Du kan oppnå dette ved å forby en eller begge av en bestemt bruker eller en person eller flere IP-adresser. Disse metodene forhindrer at en bruker fra selv å nå indeks side av brettet. For å hindre en bruker fra å registrere under et annet brukernavn, kan du også angi en utestengt e-postadressen. Vær oppmerksom på at banning en e-postadresse alene vil ikke hindre at brukeren blir i stand til å logge på eller legge til styret. Du bør bruke en av de to første metodene for å oppnå dette.';
 $lang['BAN_EXPLAIN_WARN'] = 'Vær oppmerksom på at når du legger inn et område med IP-adresser resultater i alle adressene mellom start og slutt å bli lagt til banlist. Forsøk vil bli gjort for å minimere antall adresser er lagt til i databasen ved å innføre jokertegn automatisk når det er hensiktsmessig. Hvis du virkelig må skrive inn et utvalg, kan du prøve å holde det liten eller enda bedre staten bestemte adresser.';
 
 $lang['SELECT_IP'] = 'Velg en IP-adresse';
@@ -1747,9 +1747,9 @@ $lang['SELECT_EMAIL'] = 'Velg en E-postadresse';
 $lang['BAN_USERNAME'] = 'Forbudet én eller flere bestemte brukere';
 $lang['BAN_USERNAME_EXPLAIN'] = 'Du kan stenge ute flere brukere på en gang ved å bruke den riktige kombinasjon av mus og tastatur til din datamaskin og nettleser';
 
-$lang['BAN_IP'] = 'Forbudet én eller flere IP-adresse eller vertsnavn';
-$lang['IP_HOSTNAME'] = 'IP-adresse eller vertsnavn';
-$lang['BAN_IP_EXPLAIN'] = 'For å angi flere forskjellige IP-adresse eller vertsnavn skiller du dem med komma. For å angi et område med IP-adresser, skiller du start-og slutt med en bindestrek ( - ), for å angi et jokertegn, bruk en asterisk (*).';
+$lang['BAN_IP'] = 'Forbudet én eller flere IP-adresser';
+$lang['IP_HOSTNAME'] = 'IP-adresser';
+$lang['BAN_IP_EXPLAIN'] = 'For å angi flere forskjellige IP-adresser, skiller du dem med komma.';
 
 $lang['BAN_EMAIL'] = 'Forbudet én eller flere e-post adresser';
 $lang['BAN_EMAIL_EXPLAIN'] = 'For å angi mer enn én e-postadresse, skiller du dem med komma. For å angi et jokertegn brukernavn, bruker du * liker *@hotmail.com';
@@ -2661,7 +2661,7 @@ $lang['SEARCH_USERS_ADVANCED'] = 'Avansert Bruker Søk';
 $lang['SEARCH_USERS_EXPLAIN'] = 'Denne Modulen gir deg mulighet til å utføre avanserte søk for brukere på et bredt spekter av kriterier. Vennligst les beskrivelsen under hvert felt for å forstå hver enkelt søk-alternativet fullstendig.';
 $lang['SEARCH_USERNAME_EXPLAIN'] = 'Her kan du utfører en mellom store og små bokstaver søk etter brukernavn. Hvis du ønsker å matche en del av brukernavn, kan du bruke * (stjerne) som jokertegn.';
 $lang['SEARCH_EMAIL_EXPLAIN'] = 'Skriv inn et uttrykk for å matche brukerens e-postadresse. Dette er mellom store og små bokstaver. Hvis du ønsker å gjøre deler av kampen, kan du bruke * (stjerne) som jokertegn.';
-$lang['SEARCH_IP_EXPLAIN'] = 'Søk etter brukere av en bestemt IP-adresse (xxx.xxx.xxx.xxx), jokertegn (xxx.xxx.xxx.*) eller utvalg (xxx.xxx.xxx.xxx-yyy.yyy.yyy.yyy). Merk: den siste quad .255 regnes som den spekter av alle IPs i quad. Hvis du skriver inn 10.0.0.255, det er bare som å gå 10.0.0.* (No-IP-adressen er tildelt .255 for den saks skyld, det er reservert). Hvor du kan møte dette er i områder, 10.0.0.5-10.0.0.255 er det samme som "10.0.0.*" . Du burde virkelig gå inn 10.0.0.5-10.0.0.254 .';
+$lang['SEARCH_IP_EXPLAIN'] = 'Søk etter brukere av en bestemt IP-adresse (xxx.xxx.xxx.xxx).';
 $lang['SEARCH_USERS_JOINED'] = 'Brukere som sluttet seg til';
 $lang['SEARCH_USERS_LASTVISITED'] = 'Brukere som har besøkt';
 $lang['IN_THE_LAST'] = 'i den siste';

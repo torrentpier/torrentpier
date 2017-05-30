@@ -1738,7 +1738,7 @@ $lang['CLICK_RETURN_FORUMAUTH'] = 'Kliknite %sHere%s, da se vrnete Dovoljenja Fo
 
 // Banning
 $lang['BAN_CONTROL'] = 'Prepoved Nadzor';
-$lang['BAN_EXPLAIN'] = 'Tukaj lahko nadzor prepoved uporabnikov. To lahko dosežete z prepoved eno ali oboje od določenega uporabnika ali posameznika ali obseg naslovov IP ali gostiteljskih imenih. Te metode, ki preprečujejo, da bi uporabniki tudi doseže kazalo stran vašega odbora. Preprečiti, da bi se uporabnik registrira z drugim uporabniškim imenom, lahko pa določite tudi prepovedane e-poštni naslov. Prosimo, upoštevajte, da prepoved e-poštni naslov sam po sebi ne bo preprečila, da uporabnik ne bi mogli prijaviti v ali objavite na vašem vozilu. Morate uporabiti eno od prvih dveh metod za dosego tega.';
+$lang['BAN_EXPLAIN'] = 'Tukaj lahko nadzor prepoved uporabnikov. To lahko dosežete z prepoved eno ali oboje od določenega uporabnika ali posameznika ali obseg naslovov IP. Te metode, ki preprečujejo, da bi uporabniki tudi doseže kazalo stran vašega odbora. Preprečiti, da bi se uporabnik registrira z drugim uporabniškim imenom, lahko pa določite tudi prepovedane e-poštni naslov. Prosimo, upoštevajte, da prepoved e-poštni naslov sam po sebi ne bo preprečila, da uporabnik ne bi mogli prijaviti v ali objavite na vašem vozilu. Morate uporabiti eno od prvih dveh metod za dosego tega.';
 $lang['BAN_EXPLAIN_WARN'] = 'Prosimo, upoštevajte, da vnesete obseg naslovov IP rezultate v vseh naslovov, med začetkom in koncem, ki se doda na banlist. Poskusi bo treba zmanjšati število naslovov, ki so dodane v bazo podatkov z uvedbo nadomestni znaki samodejno kjer je to primerno. Če si res mora vnesite obseg, poskusite, da ostane majhna, ali še bolje članica posamezne naslove.';
 
 $lang['SELECT_IP'] = 'Izberite IP naslov';
@@ -1747,9 +1747,9 @@ $lang['SELECT_EMAIL'] = 'Izberite E-poštni naslov';
 $lang['BAN_USERNAME'] = 'Zavrnite enega ali več določenih uporabnikov';
 $lang['BAN_USERNAME_EXPLAIN'] = 'Lahko ban več uporabnikov v enem pojdi z ustrezno kombinacijo miško in tipkovnico za vaš računalnik in brskalnik';
 
-$lang['BAN_IP'] = 'Zavrnite enega ali več IP naslovov ali gostiteljskih imenih';
-$lang['IP_HOSTNAME'] = 'Naslovi IP gostiteljskih imenih';
-$lang['BAN_IP_EXPLAIN'] = 'Določite več različnih IP naslovov ali gostiteljskih imenih jih ločite z vejicami. Da določite obseg IP naslovov, jih ločite začetka in konca z vezajem (-); določite nadomestni znak uporabite zvezdico (*).';
+$lang['BAN_IP'] = 'Zavrnite enega ali več IP naslovov,';
+$lang['IP_HOSTNAME'] = 'IP naslovi';
+$lang['BAN_IP_EXPLAIN'] = 'Določite več različnih IP naslovov, jih ločite z vejicami.';
 
 $lang['BAN_EMAIL'] = 'Zavrnite enega ali več e-poštnih naslovov';
 $lang['BAN_EMAIL_EXPLAIN'] = 'Če želite navesti več kot en e-poštnih naslovov, jih ločite z vejicami. Določite nadomestni uporabniško ime, uporabite * kot *@hotmail.com';
@@ -2661,7 +2661,7 @@ $lang['SEARCH_USERS_ADVANCED'] = 'Napredna Iskanja Uporabnika';
 $lang['SEARCH_USERS_EXPLAIN'] = 'Ta Modul omogoča napredno iskanje za uporabnike na širok spekter meril. Prosimo, preberite opise pod vsako polje razumeti vsako možnost iskanja v celoti.';
 $lang['SEARCH_USERNAME_EXPLAIN'] = 'Tukaj lahko izvedete primeru neobčutljiv iskanje za uporabniška imena. Če bi radi, da se ujemajo del uporabniškega imena, uporabite * (zvezdico) kot nadomestni znak.';
 $lang['SEARCH_EMAIL_EXPLAIN'] = 'Vnesite izraz, da se ujemajo e-poštni naslov uporabnika. V tem primeru je neobčutljiv. Če želite, da to delno ujemanje, uporabite * (zvezdico) kot nadomestni znak.';
-$lang['SEARCH_IP_EXPLAIN'] = 'Uporabnike poiščete tako, določen IP naslov (xxx.xxx.xxx.xxx), nadomestni (xxx.xxx.xxx.*) ali obseg (xxx.xxx.xxx.xxx-yyy.yyy.yyy.yyy). Opomba: zadnji quad .255 se šteje območju vseh IPs v quad. Če vnesete 10.0.0.255, to je tako kot, ki vstopajo 10.0.0.* (Št IP, ki je dodeljen .255 za to zadevo, je rezerviran). Kjer lahko naletite to je v giblje, 10.0.0.5-10.0.0.255 je enako kot "10.0.0.*" . Res bi se morali vnesti 10.0.0.5-10.0.0.254 .';
+$lang['SEARCH_IP_EXPLAIN'] = 'Uporabnike poiščete tako, določen IP naslov (xxx.xxx.xxx.xxx).';
 $lang['SEARCH_USERS_JOINED'] = 'Uporabniki, ki so se pridružile';
 $lang['SEARCH_USERS_LASTVISITED'] = 'Uporabnikov, ki jim jih obiskali';
 $lang['IN_THE_LAST'] = 'v zadnjih';

@@ -1546,7 +1546,7 @@ $lang['DL_UL_SPEED'] = 'Brzina str';
 $lang['DL_DL_SPEED'] = 'Brzina dl';
 $lang['DL_PORT'] = 'Luka';
 $lang['DL_FORMULA'] = 'Formula Je: Skinuti/TorrentSize';
-$lang['DL_ULR'] = 'URL';
+$lang['DL_ULR'] = 'URL adresa';
 $lang['DL_STOPPED'] = 'zaustavljen';
 $lang['DL_UPD'] = 'упд: ';
 $lang['DL_INFO'] = 'prikazuje podatke <i><b>only za tekuće session</b></i>';
@@ -1738,7 +1738,7 @@ $lang['CLICK_RETURN_FORUMAUTH'] = 'Kliknite %sHere%s, da se vratim na forum dozv
 
 // Banning
 $lang['BAN_CONTROL'] = 'Kontrola Zabrane';
-$lang['BAN_EXPLAIN'] = 'Ovdje možete pratiti zabrana korisnicima. Možete se to postigne kroz zabranu jedne ili obje određenog korisnika ili individualni ili raspon IP-adrese ili imena Hostova. Ove metode omogućuju korisniku, čak i dostizanje indeksnu stranicu vašeg vijeća. Želite zabraniti korisniku registrirati pod drugim imenom korisnik se može odrediti zabranjena adresu e-pošte. Imajte na umu da je zabrana na jednu adresu e-pošte neće spriječiti korisnike od potrebe da se prijavite ili staviti na ploču. Morate koristiti jedan od prva dva načina da se to postigne.';
+$lang['BAN_EXPLAIN'] = 'Ovdje možete pratiti zabrana korisnicima. Možete se to postigne kroz zabranu jedne ili obje određenog korisnika ili solo ili raspon IP adresa. Ove metode omogućuju korisniku, čak i dostizanje indeksnu stranicu vašeg vijeća. Želite zabraniti korisniku registrirati pod drugim imenom korisnik se može odrediti zabranjena adresu e-pošte. Imajte na umu da je zabrana na jednu adresu e-pošte neće spriječiti korisnike od potrebe da se prijavite ili staviti na ploču. Morate koristiti jedan od prva dva načina da se to postigne.';
 $lang['BAN_EXPLAIN_WARN'] = 'Imajte na umu da ulaze u raspon IP adresa u adrese između početnog i krajnjeg će biti dodan u банлист. Će pokušaji kako bi se smanjila broj adresa dodan u bazu podataka uvođenjem maske automatski u slučaju potrebe. Ako ste stvarno morati unijeti raspon, pokušati zadržati mali ili još bolje određenu adresu.';
 
 $lang['SELECT_IP'] = 'Odaberite IP adresu';
@@ -1747,9 +1747,9 @@ $lang['SELECT_EMAIL'] = 'Odaberite adresu e-pošte';
 $lang['BAN_USERNAME'] = 'Zabrana jedne ili više specifičnih korisnika';
 $lang['BAN_USERNAME_EXPLAIN'] = 'Možete zabraniti više korisnika u jednom trenutku, koristeći odgovarajuću kombinaciju miša i tipkovnice vašeg računala i internetskog preglednika';
 
-$lang['BAN_IP'] = 'Zabrana jednog ili više IP adrese ili imena Hostova';
-$lang['IP_HOSTNAME'] = 'IP-adrese ili imena Hostova';
-$lang['BAN_IP_EXPLAIN'] = 'Za unos više različitih IP adresa ili Domaćini, odvojite ih zarezom. Da biste odredili IP raspon, odvajajući ih početi i završiti s crticom (-); kao zamjenski znak, koristite zvjezdicu (*).';
+$lang['BAN_IP'] = 'Zabrana jednog ili više IP adresa';
+$lang['IP_HOSTNAME'] = 'IP-adrese';
+$lang['BAN_IP_EXPLAIN'] = 'Za unos više različitih IP adresa, odvojite ih zarezom.';
 
 $lang['BAN_EMAIL'] = 'Zabrana jednu ili više adresa e-pošte';
 $lang['BAN_EMAIL_EXPLAIN'] = 'Navesti više od jedne adrese e-pošte, odvajajući ih zarezima. Da biste odredili uzorak korisničko ime, koristiti * kao *@hotmail.com';
@@ -2661,7 +2661,7 @@ $lang['SEARCH_USERS_ADVANCED'] = 'Napredno Pretraživanje Korisnika';
 $lang['SEARCH_USERS_EXPLAIN'] = 'Ovaj modul omogućuje Napredno pretraživanje za korisnike na širok raspon kriterija. Molimo vas da pročitate opis pod svako polje, da u potpunosti razumiju svaku opciju pretraživanja.';
 $lang['SEARCH_USERNAME_EXPLAIN'] = 'Ovdje možete izvršiti pretragu bez obzira na velika i mala slova za imena korisnika. Ako želite da stane dio imena, koristite * (zvjezdicom) kao zamjenski znak.';
 $lang['SEARCH_EMAIL_EXPLAIN'] = 'Upišite izraz za adrese e-pošte korisnika. To bez obzira na velika i mala slova. Ako želite napraviti djelomična podudaranja, koristite * (zvjezdicom) kao zamjenski znak.';
-$lang['SEARCH_IP_EXPLAIN'] = 'Pretraživanje korisnika po određenoj IP adresi (XXX.XXX.XXX.XXX), zamjenske (XXX.XXX.XXX.*) ili raspon (XXX.XXX.XXX.XXX-ууу.ыыы.ыыы.ууу). Napomena: najnoviji quad .255 je raspon svih IP adresa je u tome što quad. Ako unesete 10.0.0.255, to je jednostavno, kao i unos 10.0.0.* (Ne dodjeljuje IP .255 što se toga tiče, on je rezerviran). Gdje možete naići to u rasponima, 10.0.0.5-10.0.0.255 isto kao i "10.0.0.*" . Stvarno bi trebali ući 10.0.0.5-10.0.0.254 .';
+$lang['SEARCH_IP_EXPLAIN'] = 'Pretraživanje korisnika po određenoj IP adresi (XXX.XXX.XXX.XXX).';
 $lang['SEARCH_USERS_JOINED'] = 'Korisnici, koji su se pridružili';
 $lang['SEARCH_USERS_LASTVISITED'] = 'Korisnici koji su posjetili';
 $lang['IN_THE_LAST'] = 'u posljednjih';

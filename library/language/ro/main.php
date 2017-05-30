@@ -1738,7 +1738,7 @@ $lang['CLICK_RETURN_FORUMAUTH'] = 'Faceți clic pe %sHere%s pentru a reveni la F
 
 // Banning
 $lang['BAN_CONTROL'] = 'Ban Control';
-$lang['BAN_EXPLAIN'] = 'Aici aveți posibilitatea de a controla interzicerea de utilizatori. Puteți realiza acest lucru prin interzicerea una sau ambele de un anumit utilizator sau un individ sau un interval de adrese IP sau nume de gazdă. Aceste metode pentru a preveni un utilizator de ajungand chiar la pagina de index de bord. Pentru a împiedica un utilizator de la inregistrarea sub alt nume de utilizator, puteți specifica, de asemenea, un interzise adresa de e-mail. Vă rugăm să rețineți că interzicerea o adresa de e-mail nu va preveni că utilizatorul de la a fi capabil să vă conectați sau posta la bord. Ar trebui să utilizați una din primele două metode pentru a realiza acest lucru.';
+$lang['BAN_EXPLAIN'] = 'Aici aveți posibilitatea de a controla interzicerea de utilizatori. Puteți realiza acest lucru prin interzicerea una sau ambele de un anumit utilizator sau un individ sau un interval de adrese IP. Aceste metode pentru a preveni un utilizator de ajungand chiar la pagina de index de bord. Pentru a împiedica un utilizator de la inregistrarea sub alt nume de utilizator, puteți specifica, de asemenea, un interzise adresa de e-mail. Vă rugăm să rețineți că interzicerea o adresa de e-mail nu va preveni că utilizatorul de la a fi capabil să vă conectați sau posta la bord. Ar trebui să utilizați una din primele două metode pentru a realiza acest lucru.';
 $lang['BAN_EXPLAIN_WARN'] = 'Vă rugăm să rețineți că intrarea într-un interval de adrese IP rezultate în toate adresele între începutul și sfârșitul a fi adăugat la lista de banuri. Încercări vor fi făcute pentru a reduce la minimum numărul de adrese adăugate la baza de date prin introducerea metacaractere în mod automat, dacă este cazul. Dacă într-adevăr trebuie să introduceți un interval, să încercați să păstrați-l mic sau mai bine încă de stat adrese specifice.';
 
 $lang['SELECT_IP'] = 'Selectați o adresă IP';
@@ -1747,9 +1747,9 @@ $lang['SELECT_EMAIL'] = 'Selectați o adresă de e-Mail';
 $lang['BAN_USERNAME'] = 'Interzicerea unuia sau a mai multor utilizatori';
 $lang['BAN_USERNAME_EXPLAIN'] = 'Puteți ban mai mulți utilizatori într-un du-te folosind combinația corespunzătoare de mouse-ul și tastatura pentru computer și browser-ul';
 
-$lang['BAN_IP'] = 'Ban una sau mai multe adrese IP sau nume de gazdă';
-$lang['IP_HOSTNAME'] = 'Adrese IP sau nume de gazdă';
-$lang['BAN_IP_EXPLAIN'] = 'Pentru a specifica mai multe adrese IP sau nume de gazdă separați-le prin virgulă. Pentru a specifica un interval de adrese IP, separat de început și de sfârșit cu o cratimă (-); pentru a specifica un wildcard, utilizați un asterisc (*).';
+$lang['BAN_IP'] = 'Ban una sau mai multe adrese IP';
+$lang['IP_HOSTNAME'] = 'Adrese IP';
+$lang['BAN_IP_EXPLAIN'] = 'Pentru a specifica mai multe adrese IP diferite separați-le prin virgulă.';
 
 $lang['BAN_EMAIL'] = 'Ban una sau mai multe adrese de e-mail';
 $lang['BAN_EMAIL_EXPLAIN'] = 'Pentru a specifica mai mult de o adresă de e-mail, separate prin virgule. Pentru a specifica un wildcard de utilizator, utilizați * ca *@hotmail.com';
@@ -2661,7 +2661,7 @@ $lang['SEARCH_USERS_ADVANCED'] = 'Utilizator Avansat De Căutare';
 $lang['SEARCH_USERS_EXPLAIN'] = 'Acest Modul vă permite să efectuați căutări avansate pentru utilizatorii de pe o gamă largă de criterii. Vă rugăm să citiți descrierile de sub fiecare domeniu pentru a înțelege fiecare opțiune de căutare complet.';
 $lang['SEARCH_USERNAME_EXPLAIN'] = 'Aici puteți efectua un caz insensibil de căutare pentru numele de utilizator. Dacă doriți pentru a se potrivi o parte din numele de utilizator, utilizați * (un asterisc) ca un wildcard.';
 $lang['SEARCH_EMAIL_EXPLAIN'] = 'Introduceți o expresie pentru a se potrivi un utilizator este adresa de e-mail. Acest lucru nu este sensibil la majuscule. Dacă vrei să faci o potrivire parțială, utilizarea * (un asterisc) ca un wildcard.';
-$lang['SEARCH_IP_EXPLAIN'] = 'Căutării pentru utilizatorii către o anumită adresă IP (xxx.xxx.xxx.xxx), wildcard (xxx.xxx.xxx.*) sau gama (xxx.xxx.xxx.xxx-yyy.yyy.yyy.yyy). Notă: ultima quad .255 este considerat intervalul de toate ip-urile in care quad. Dacă introduceți 10.0.0.255, este la fel ca intrarea 10.0.0.* (Nu IP-ul este alocat .255 pentru care contează, este rezervat). În cazul în care s-ar putea întâlni acest lucru este în intervale, 10.0.0.5-10.0.0.255 este la fel ca "10.0.0.*" . Ar trebui să introduceți 10.0.0.5-10.0.0.254 .';
+$lang['SEARCH_IP_EXPLAIN'] = 'Căutării pentru utilizatorii către o anumită adresă IP (xxx.xxx.xxx.xxx).';
 $lang['SEARCH_USERS_JOINED'] = 'Utilizatorii care au aderat';
 $lang['SEARCH_USERS_LASTVISITED'] = 'Utilizatorii care au vizitat';
 $lang['IN_THE_LAST'] = 'în ultima';

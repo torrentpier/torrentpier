@@ -1738,7 +1738,7 @@ $lang['CLICK_RETURN_FORUMAUTH'] = 'Klik op %sHere%s om terug te keren naar de Fo
 
 // Banning
 $lang['BAN_CONTROL'] = 'Verbod Controle';
-$lang['BAN_EXPLAIN'] = 'Hier kunt u het verbieden van gebruikers. Dit kunt u bereiken door het verbieden van een of beide van een specifieke gebruiker of een individu of een bereik van IP-adressen of hostnamen. Deze methoden voorkomen dat een gebruiker zelfs het bereiken van de index pagina van uw raad. Om te voorkomen dat een gebruiker registreren onder een andere gebruikersnaam kunt u ook een verboden e-mail adres. Houd er rekening mee dat het verbieden van een e-mailadres alleen zal niet voorkomen dat gebruikers kunnen inloggen op of post naar uw bord. Moet u gebruik maken van één van de eerste twee methoden om dit te bereiken.';
+$lang['BAN_EXPLAIN'] = 'Hier kunt u het verbieden van gebruikers. Dit kunt u bereiken door het verbieden van een of beide van een specifieke gebruiker of een individu of een bereik van IP-adressen. Deze methoden voorkomen dat een gebruiker zelfs het bereiken van de index pagina van uw raad. Om te voorkomen dat een gebruiker registreren onder een andere gebruikersnaam kunt u ook een verboden e-mail adres. Houd er rekening mee dat het verbieden van een e-mailadres alleen zal niet voorkomen dat gebruikers kunnen inloggen op of post naar uw bord. Moet u gebruik maken van één van de eerste twee methoden om dit te bereiken.';
 $lang['BAN_EXPLAIN_WARN'] = 'Houd er rekening mee dat het invoeren van een bereik van IP-adressen resultaten in alle adressen tussen het begin en het einde wordt toegevoegd aan de banlijst. Pogingen zullen worden gedaan om het minimaliseren van het aantal adressen toegevoegd aan de database door de invoering van wildcards automatisch in voorkomend geval. Als je echt moet invoeren in een bereik, probeer om het kleine of beter nog specifieke adressen.';
 
 $lang['SELECT_IP'] = 'Selecteer een IP-adres';
@@ -1747,9 +1747,9 @@ $lang['SELECT_EMAIL'] = 'Selecteer een e-Mail adres';
 $lang['BAN_USERNAME'] = 'Een verbod een of meer specifieke gebruikers';
 $lang['BAN_USERNAME_EXPLAIN'] = 'U kunt ban meerdere gebruikers in één keer met behulp van de juiste combinatie van muis en toetsenbord voor de computer en browser';
 
-$lang['BAN_IP'] = 'Een verbod een of meer IP-adressen of hostnamen';
-$lang['IP_HOSTNAME'] = 'IP adressen of hostnamen';
-$lang['BAN_IP_EXPLAIN'] = 'Opgeven verschillende IP adressen of hostnamen scheidt je ze met komma \' s. Opgeven van een bereik van IP-adressen, het scheiden van het beginnen en eindigen met een koppelteken (-); opgeven van een wildcard, gebruikt u een sterretje (*).';
+$lang['BAN_IP'] = 'Een verbod een of meer IP-adressen';
+$lang['IP_HOSTNAME'] = 'IP-adressen';
+$lang['BAN_IP_EXPLAIN'] = 'Opgeven verschillende IP-adressen scheiden met komma \' s.';
 
 $lang['BAN_EMAIL'] = 'Een verbod een of meer e-mail adressen';
 $lang['BAN_EMAIL_EXPLAIN'] = 'Opgeven meer dan één e-mailadres, scheidt je ze met komma \' s. Voor het opgeven van een wildcard gebruikersnaam, gebruiken * *@hotmail.com';
@@ -2661,7 +2661,7 @@ $lang['SEARCH_USERS_ADVANCED'] = 'Geavanceerde Gebruiker Zoeken';
 $lang['SEARCH_USERS_EXPLAIN'] = 'Deze Module stelt u in staat om geavanceerde zoekopdrachten uitvoeren voor gebruikers op een breed scala van criteria. Lees de beschrijvingen onder elk veld te begrijpen elke zoekopdracht optie volledig.';
 $lang['SEARCH_USERNAME_EXPLAIN'] = 'Hier kunt u het uitvoeren van een hoofdlettergevoelig zoeken voor gebruikersnamen. Als u willen zou overeenkomen met een deel van de gebruikersnaam, het gebruik * (asterix) als jokerteken.';
 $lang['SEARCH_EMAIL_EXPLAIN'] = 'Een expressie invoeren om een gebruiker het e-mailadres. Dit is niet hoofdlettergevoelig. Als u wilt doen een gedeeltelijke match, gebruik een * (asterix) als jokerteken.';
-$lang['SEARCH_IP_EXPLAIN'] = 'Gebruikers zoeken door een specifiek IP-adres (xxx.xxx.xxx.xxx), wildcard (xxx.xxx.xxx.*) of het bereik (xxx.xxx.xxx.xxx-yyy.yyy.yyy.yyy). Opmerking: de laatste quad .255 wordt beschouwd als het bereik van alle ip \' s in die quad. Als u 10.0.0.255, het is gewoon zoals het invoeren van 10.0.0.* (Geen IP toegewezen .255 voor die kwestie, het is voorbehouden). Waar u deze kunnen optreden in de reeksen, 10.0.0.5-10.0.0.255 is hetzelfde als "10.0.0.*" . Je moet echt voer 10.0.0.5-10.0.0.254 .';
+$lang['SEARCH_IP_EXPLAIN'] = 'Gebruikers zoeken door een specifiek IP-adres (xxx.xxx.xxx.xxx).';
 $lang['SEARCH_USERS_JOINED'] = 'Gebruikers die zich bij';
 $lang['SEARCH_USERS_LASTVISITED'] = 'Gebruikers die bezocht';
 $lang['IN_THE_LAST'] = 'in de laatste';

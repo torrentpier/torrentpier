@@ -1738,7 +1738,7 @@ $lang['CLICK_RETURN_FORUMAUTH'] = 'Cliquez sur %sHere%s de retour au Forum des A
 
 // Banning
 $lang['BAN_CONTROL'] = 'Interdiction De Contrôle';
-$lang['BAN_EXPLAIN'] = 'Ici, vous pouvez contrôler l\'interdiction des utilisateurs. Vous pouvez y parvenir en interdisant l\'un ou l\'autre ou les deux d\'un utilisateur spécifique ou une personne ou une plage d\'adresses IP ou les noms d\'hôtes. Ces méthodes d\'empêcher un utilisateur de même d\'atteindre la page d\'index de votre conseil d\'administration. Pour empêcher un utilisateur de s\'enregistrer sous un autre nom d\'utilisateur, vous pouvez également spécifier un interdit adresse e-mail. Veuillez noter que le fait d\'interdire une adresse e-mail seront les seuls à ne pas empêcher l\'utilisateur d\'être en mesure de se connecter ou par la poste à votre conseil d\'administration. Vous devez utiliser l\'une des deux premières méthodes pour y parvenir.';
+$lang['BAN_EXPLAIN'] = 'Ici, vous pouvez contrôler l\'interdiction des utilisateurs. Vous pouvez y parvenir en interdisant l\'un ou l\'autre ou les deux d\'un utilisateur spécifique ou une personne ou une plage d\'adresses IP. Ces méthodes d\'empêcher un utilisateur de même d\'atteindre la page d\'index de votre conseil d\'administration. Pour empêcher un utilisateur de s\'enregistrer sous un autre nom d\'utilisateur, vous pouvez également spécifier un interdit adresse e-mail. Veuillez noter que le fait d\'interdire une adresse e-mail seront les seuls à ne pas empêcher l\'utilisateur d\'être en mesure de se connecter ou par la poste à votre conseil d\'administration. Vous devez utiliser l\'une des deux premières méthodes pour y parvenir.';
 $lang['BAN_EXPLAIN_WARN'] = 'Veuillez noter que l\'entrée dans une plage d\'adresses IP résultats dans toutes les adresses entre le début et la fin d\'être ajoutée à la liste des bannissements. Des tentatives seront faites pour minimiser le nombre d\'adresses ajoutées à la base de données en introduisant des jokers automatiquement le cas échéant. Si vraiment vous devez entrer une plage, essayez de garder les petits ou mieux encore de l\'état des adresses spécifiques.';
 
 $lang['SELECT_IP'] = 'Sélectionnez une adresse IP';
@@ -1747,9 +1747,9 @@ $lang['SELECT_EMAIL'] = 'Sélectionnez une adresse e-Mail';
 $lang['BAN_USERNAME'] = 'L\'interdiction d\'un ou de plusieurs utilisateurs spécifiques';
 $lang['BAN_USERNAME_EXPLAIN'] = 'Vous pouvez interdiction de plusieurs utilisateurs en une seule fois à l\'aide de la combinaison appropriée de la souris et du clavier de votre ordinateur et de navigateur';
 
-$lang['BAN_IP'] = 'L\'interdiction d\'un ou de plusieurs adresses IP ou les noms d\'hôtes';
-$lang['IP_HOSTNAME'] = 'Les adresses IP ou les noms d\'hôtes';
-$lang['BAN_IP_EXPLAIN'] = 'Pour spécifier plusieurs adresses IP ou les noms d\'hôtes les séparer par des virgules. Pour spécifier une plage d\'adresses IP, à part le début et la fin avec un trait d\'union (-); pour spécifier un caractère générique, utilisez un astérisque (*).';
+$lang['BAN_IP'] = 'L\'interdiction d\'un ou de plusieurs adresses IP';
+$lang['IP_HOSTNAME'] = 'Les adresses IP';
+$lang['BAN_IP_EXPLAIN'] = 'Pour spécifier plusieurs adresses IP séparées par des virgules.';
 
 $lang['BAN_EMAIL'] = 'L\'interdiction d\'un ou de plusieurs adresses e-mail';
 $lang['BAN_EMAIL_EXPLAIN'] = 'Pour spécifier plusieurs adresses, séparez-les par des virgules. Pour spécifier un nom d\'utilisateur générique, utilisez * comme *@hotmail.com';
@@ -2661,7 +2661,7 @@ $lang['SEARCH_USERS_ADVANCED'] = 'L\'Utilisateur Avancé De Recherche';
 $lang['SEARCH_USERS_EXPLAIN'] = 'Ce Module vous permet d\'effectuer des recherches avancées pour les utilisateurs sur un large éventail de critères. Veuillez lire les descriptions sous chaque champ de comprendre chaque option de recherche complètement.';
 $lang['SEARCH_USERNAME_EXPLAIN'] = 'Ici vous pouvez effectuer une recherche insensible à la casse pour les noms d\'utilisateur. Si vous souhaitez correspondre à une partie du nom d\'utilisateur, utilisez * (un astérisque ( * ) comme caractère générique.';
 $lang['SEARCH_EMAIL_EXPLAIN'] = 'Entrez une expression pour correspondre à une adresse électronique de l\'utilisateur. Ce n\'est pas sensible à la casse. Si vous voulez faire une correspondance partielle, utilisez * (un astérisque ( * ) comme caractère générique.';
-$lang['SEARCH_IP_EXPLAIN'] = 'Rechercher des utilisateurs par une adresse IP spécifique (xxx.xxx.xxx.xxx), générique (xxx.xxx.xxx.*) ou de la plage (xxx.xxx.xxx.xxx-yyy.yyy.yyy.yyy). Remarque: le dernier quad .255 est considéré comme la portée de toutes les adresses ip de la quad. Si vous entrez 10.0.0.255, c\'est comme entrer dans 10.0.0.* (Aucune adresse IP n\'est attribuée .255 pour cette question, il est réservé). Où vous pouvez rencontrer c\'est dans des gammes, 10.0.0.5-10.0.0.255 est le même que "10.0.0.*" . Vous devriez vraiment entrer 10.0.0.5-10.0.0.254 .';
+$lang['SEARCH_IP_EXPLAIN'] = 'Rechercher des utilisateurs par une adresse IP spécifique (xxx.xxx.xxx.xxx).';
 $lang['SEARCH_USERS_JOINED'] = 'Les utilisateurs qui ont rejoint';
 $lang['SEARCH_USERS_LASTVISITED'] = 'Les utilisateurs qui ont visité';
 $lang['IN_THE_LAST'] = 'dans la dernière';
