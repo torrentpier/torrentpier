@@ -35,7 +35,7 @@ if (isset($_POST['submit'])) {
     $email_bansql = '';
     $ip_bansql = '';
 
-    $user_list = array();
+    $user_list = [];
     if (!empty($_POST['username'])) {
         $this_userdata = get_userdata($_POST['username'], true);
         if (!$this_userdata) {
@@ -45,73 +45,18 @@ if (isset($_POST['submit'])) {
         $user_list[] = $this_userdata['user_id'];
     }
 
-    $ip_list = array();
+    $ip_list = [];
     if (isset($_POST['ban_ip'])) {
         $ip_list_temp = explode(',', $_POST['ban_ip']);
 
-        for ($i = 0, $iMax = count($ip_list_temp); $i < $iMax; $i++) {
-            if (preg_match('/^([0-9]{1,3})\.([0-9]{1,3})\.([0-9]{1,3})\.([0-9]{1,3})[ ]*\-[ ]*([0-9]{1,3})\.([0-9]{1,3})\.([0-9]{1,3})\.([0-9]{1,3})$/', trim($ip_list_temp[$i]), $ip_range_explode)) {
-                $ip_1_counter = $ip_range_explode[1];
-                $ip_1_end = $ip_range_explode[5];
-
-                while ($ip_1_counter <= $ip_1_end) {
-                    $ip_2_counter = ($ip_1_counter == $ip_range_explode[1]) ? $ip_range_explode[2] : 0;
-                    $ip_2_end = ($ip_1_counter < $ip_1_end) ? 254 : $ip_range_explode[6];
-
-                    if ($ip_2_counter == 0 && $ip_2_end == 254) {
-                        $ip_2_counter = 255;
-                        $ip_2_fragment = 255;
-
-                        $ip_list[] = encode_ip("$ip_1_counter.255.255.255");
-                    }
-
-                    while ($ip_2_counter <= $ip_2_end) {
-                        $ip_3_counter = ($ip_2_counter == $ip_range_explode[2] && $ip_1_counter == $ip_range_explode[1]) ? $ip_range_explode[3] : 0;
-                        $ip_3_end = ($ip_2_counter < $ip_2_end || $ip_1_counter < $ip_1_end) ? 254 : $ip_range_explode[7];
-
-                        if ($ip_3_counter == 0 && $ip_3_end == 254) {
-                            $ip_3_counter = 255;
-                            $ip_3_fragment = 255;
-
-                            $ip_list[] = encode_ip("$ip_1_counter.$ip_2_counter.255.255");
-                        }
-
-                        while ($ip_3_counter <= $ip_3_end) {
-                            $ip_4_counter = ($ip_3_counter == $ip_range_explode[3] && $ip_2_counter == $ip_range_explode[2] && $ip_1_counter == $ip_range_explode[1]) ? $ip_range_explode[4] : 0;
-                            $ip_4_end = ($ip_3_counter < $ip_3_end || $ip_2_counter < $ip_2_end) ? 254 : $ip_range_explode[8];
-
-                            if ($ip_4_counter == 0 && $ip_4_end == 254) {
-                                $ip_4_counter = 255;
-                                $ip_4_fragment = 255;
-
-                                $ip_list[] = encode_ip("$ip_1_counter.$ip_2_counter.$ip_3_counter.255");
-                            }
-
-                            while ($ip_4_counter <= $ip_4_end) {
-                                $ip_list[] = encode_ip("$ip_1_counter.$ip_2_counter.$ip_3_counter.$ip_4_counter");
-                                $ip_4_counter++;
-                            }
-                            $ip_3_counter++;
-                        }
-                        $ip_2_counter++;
-                    }
-                    $ip_1_counter++;
-                }
-            } elseif (preg_match('/^([\w\-_]\.?){2,}$/is', trim($ip_list_temp[$i]))) {
-                $ip = gethostbynamel(trim($ip_list_temp[$i]));
-
-                for ($j = 0, $jMax = count($ip); $j < $jMax; $j++) {
-                    if (!empty($ip[$j])) {
-                        $ip_list[] = encode_ip($ip[$j]);
-                    }
-                }
-            } elseif (preg_match('/^([0-9]{1,3})\.([0-9\*]{1,3})\.([0-9\*]{1,3})\.([0-9\*]{1,3})$/', trim($ip_list_temp[$i]))) {
-                $ip_list[] = encode_ip(str_replace('*', '255', trim($ip_list_temp[$i])));
+        foreach ($ip_list_temp as $ip) {
+            if (Longman\IPTools\Ip::isValid($ip)) {
+                $ip_list[] = encode_ip($ip);
             }
         }
     }
 
-    $email_list = array();
+    $email_list = [];
     if (isset($_POST['ban_email'])) {
         $email_list_temp = explode(',', $_POST['ban_email']);
 
@@ -269,7 +214,7 @@ if (isset($_POST['submit'])) {
         $select_userlist = '<option value="-1">' . $lang['NO_BANNED_USERS'] . '</option>';
     }
 
-    $select_userlist = '<select name="unban_user[]" multiple="multiple" size="5">' . $select_userlist . '</select>';
+    $select_userlist = '<select name="unban_user[]" multiple size="5">' . $select_userlist . '</select>';
 
     $sql = "SELECT ban_id, ban_ip, ban_email FROM " . BB_BANLIST . " ORDER BY ban_ip";
     if (!($result = DB()->sql_query($sql))) {
@@ -304,8 +249,8 @@ if (isset($_POST['submit'])) {
         $select_emaillist = '<option value="-1">' . $lang['NO_BANNED_EMAIL'] . '</option>';
     }
 
-    $select_iplist = '<select name="unban_ip[]" multiple="multiple" size="15">' . $select_iplist . '</select>';
-    $select_emaillist = '<select name="unban_email[]" multiple="multiple" size="10">' . $select_emaillist . '</select>';
+    $select_iplist = '<select name="unban_ip[]" multiple size="15">' . $select_iplist . '</select>';
+    $select_emaillist = '<select name="unban_email[]" multiple size="10">' . $select_emaillist . '</select>';
 
     $template->assign_vars(array(
         'U_SEARCH_USER' => './../search.php?mode=searchuser',

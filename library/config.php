@@ -23,71 +23,11 @@
  * SOFTWARE.
  */
 
-/**
- * Script versions
- * Domain name
- * Version info
- * Database
- * - Charset
- * - Config
- * - Aliases
- * Cache
- * - Config
- * - Datastore
- * Server
- * - Cloudflare
- * - GZip
- * Tracker
- * Ocelot
- * FAQ url
- * Torrents
- * - Ratio limits
- * - Seeding torrents limit
- * - DL-Status (days to keep)
- * - Tor-Stats (days to keep)
- * - Tor-Help
- * Path
- * URL's
- * Language
- * Templates
- * Cookie
- * Sessions
- * Registration
- * Email
- * Debug
- * Bugsnag error reporting
- * Special users (dbg_users, unlimited_users, super_admins)
- * Log options
- * Error reporting
- * Triggers
- * Date format
- * Subforums
- * Forums
- * Topics
- * Posts
- * Search
- * Posting
- * PM
- * Actions log
- * Users
- * Groups
- * Tidy
- * Misc
- * Extensions
- * Attachments
- * Avatars
- * Group avatars
- * Captcha
- * Atom feed
- * Nofollow
- * Local config
- **/
-
 if (!defined('BB_ROOT')) {
     die(basename(__FILE__));
 }
 
-$bb_cfg = $tr_cfg = $page_cfg = array();
+$bb_cfg = $tr_cfg = $page_cfg = [];
 
 // Increase number after changing js or css
 $bb_cfg['js_ver'] = $bb_cfg['css_ver'] = 1;
@@ -98,8 +38,8 @@ $domain_name = (!empty($_SERVER['SERVER_NAME'])) ? $_SERVER['SERVER_NAME'] : $do
 
 // Version info
 $bb_cfg['tp_version'] = '2.1.6';
-$bb_cfg['tp_release_date'] = '01-07-2017';
-$bb_cfg['tp_release_state'] = 'STABLE';
+$bb_cfg['tp_release_date'] = '07-07-2017';
+$bb_cfg['tp_release_codename'] = 'Aurochs';
 
 // Database
 $charset = 'utf8';
@@ -108,25 +48,20 @@ $pconnect = false;
 // Настройка баз данных ['db']['srv_name'] => (array) srv_cfg;
 // порядок параметров srv_cfg (хост, название базы, пользователь, пароль, charset, pconnect);
 $bb_cfg['db'] = array(
-    'db1' => array('localhost', 'tp_216', 'user', 'pass', $charset, $pconnect),
-    //'db2' => array('localhost2', 'dbase2', 'user2', 'pass2', $charset, $pconnect),
-    //'db3' => array('localhost3', 'dbase3', 'user2', 'pass3', $charset, $pconnect),
+    'db' => array('localhost', 'tp_216', 'user', 'pass', $charset, $pconnect),
 );
 
 $bb_cfg['db_alias'] = array(
 //	'alias'  => 'srv_name'
-#	db1
-    'log' => 'db1', // BB_LOG
-    'search' => 'db1', // BB_TOPIC_SEARCH
-    'sres' => 'db1', // BB_BT_USER_SETTINGS, BB_SEARCH_RESULTS
-    'u_ses' => 'db1', // BB_USER_SES, BB_USER_LASTVISIT
-#	db2
-    'dls' => 'db1', // BB_BT_DLS_*
-    'ip' => 'db1', // BB_POSTS_IP
-    'ut' => 'db1', // BB_TOPICS_USER_POSTED
-#	db3
-    'pm' => 'db1', // BB_PRIVMSGS, BB_PRIVMSGS_TEXT
-    'pt' => 'db1', // BB_POSTS_TEXT
+    'log' => 'db', // BB_LOG
+    'search' => 'db', // BB_TOPIC_SEARCH
+    'sres' => 'db', // BB_BT_USER_SETTINGS, BB_SEARCH_RESULTS
+    'u_ses' => 'db', // BB_USER_SES, BB_USER_LASTVISIT
+    'dls' => 'db', // BB_BT_DLS_*
+    'ip' => 'db', // BB_POSTS_IP
+    'ut' => 'db', // BB_TOPICS_USER_POSTED
+    'pm' => 'db', // BB_PRIVMSGS, BB_PRIVMSGS_TEXT
+    'pt' => 'db', // BB_POSTS_TEXT
 );
 
 // Cache
@@ -164,11 +99,6 @@ $bb_cfg['datastore_type'] = 'filecache';
 $bb_cfg['server_name'] = $domain_name;                                                     // The domain name from which this board runs
 $bb_cfg['server_port'] = (!empty($_SERVER['SERVER_PORT'])) ? $_SERVER['SERVER_PORT'] : 80; // The port your server is running on
 $bb_cfg['script_path'] = '/';                                                              // The path where FORUM is located relative to the domain name
-
-// Cloudflare
-if (isset($_SERVER['HTTP_CF_CONNECTING_IP'])) {
-    $_SERVER['REMOTE_ADDR'] = $_SERVER['HTTP_CF_CONNECTING_IP'];
-}
 
 // GZip
 $bb_cfg['gzip_compress'] = true;              // compress output
@@ -237,15 +167,15 @@ $bb_cfg['tor_help_links'] = 'terms.php';
 $bb_cfg['seeder_last_seen_days_keep'] = 0; // сколько дней назад был сид последний раз
 $bb_cfg['seeder_never_seen_days_keep'] = 0; // сколько дней имеется статус "Сида не было никогда"
 
-// Ratio limits
-define('TR_RATING_LIMITS', true);        // ON/OFF
-define('MIN_DL_FOR_RATIO', 10737418240); // 10 GB in bytes, 0 - disable
-
-// Don't change the order of ratios (from 0 to 1)
-// rating < 0.4 -- allow only 1 torrent for leeching
-// rating < 0.5 -- only 2
-// rating < 0.6 -- only 3
-// rating > 0.6 -- depend on your tracker config limits (in "ACP - Tracker Config - Limits")
+/**
+ * Ratio limits
+ *
+ * Don't change the order of ratios (from 0 to 1):
+ * rating < 0.4 -- allow only 1 torrent for leeching
+ * rating < 0.5 -- only 2
+ * rating < 0.6 -- only 3
+ * rating > 0.6 -- depend on your tracker config limits (in "ACP - Tracker Config - Limits")
+ */
 $rating_limits = array(
     '0.4' => 1,
     '0.5' => 2,
@@ -269,25 +199,6 @@ $page_cfg['show_torhelp'] = array(
     'index' => true,
     'tracker' => true,
 );
-
-// Path (trailing slash '/' at the end: XX_PATH - without, XX_DIR - with)
-define('BB_PATH', dirname(__DIR__));
-define('ADMIN_DIR', BB_PATH . '/admin');
-define('DATA_DIR', BB_PATH . '/data');
-define('INT_DATA_DIR', BB_PATH . '/internal_data');
-define('AJAX_HTML_DIR', BB_PATH . '/internal_data/ajax_html');
-define('CACHE_DIR', BB_PATH . '/internal_data/cache');
-define('LOG_DIR', BB_PATH . '/internal_data/log');
-define('SITEMAP_DIR', BB_PATH . '/internal_data/sitemap');
-define('TRIGGERS_DIR', BB_PATH . '/internal_data/triggers');
-define('AJAX_DIR', BB_PATH . '/library/ajax');
-define('ATTACH_DIR', BB_PATH . '/library/attach_mod');
-define('CFG_DIR', BB_PATH . '/library/config');
-define('INC_DIR', BB_PATH . '/library/includes');
-define('UCP_DIR', BB_PATH . '/library/includes/ucp');
-define('LANG_ROOT_DIR', BB_PATH . '/library/language');
-define('IMAGES_DIR', BB_PATH . '/styles/images');
-define('TEMPLATES_DIR', BB_PATH . '/styles/templates');
 
 // URL's
 $bb_cfg['ajax_url'] = 'ajax.php';     #  "http://{$_SERVER['SERVER_NAME']}/ajax.php"
@@ -335,8 +246,6 @@ $bb_cfg['lang'] = array(
 );
 
 // Templates
-define('ADMIN_TPL_DIR', TEMPLATES_DIR . '/admin/');
-
 $bb_cfg['templates'] = array(
 //	'folder'  => 'Name',
     'default' => 'Стандартный',
@@ -406,17 +315,6 @@ $bb_cfg['tech_admin_email'] = "admin@$domain_name"; // email for sending error r
 $bb_cfg['abuse_email'] = "abuse@$domain_name";
 $bb_cfg['adv_email'] = "adv@$domain_name";
 
-// Debug
-define('DBG_LOG', false);    // enable forum debug (off on production)
-define('DBG_TRACKER', false);    // enable tracker debug (off on production)
-define('COOKIE_DBG', 'bb_dbg'); // debug cookie name
-define('SQL_DEBUG', true);     // enable forum sql & cache debug
-define('SQL_LOG_ERRORS', true);     // all SQL_xxx options enabled only if SQL_DEBUG == TRUE
-define('SQL_CALC_QUERY_TIME', true);     // for stats
-define('SQL_LOG_SLOW_QUERIES', true);     // log sql slow queries
-define('SQL_SLOW_QUERY_TIME', 10);       // slow query in seconds
-define('SQL_PREPEND_SRC_COMM', false);    // prepend source file comment to sql query
-
 // Bugsnag error reporting
 $bb_cfg['bugsnag'] = [
     'enabled' => false,
@@ -439,18 +337,6 @@ $bb_cfg['super_admins'] = array(
     2 => 'admin',
 );
 
-// Log options
-define('LOG_EXT', 'log');
-define('LOG_SEPR', ' | ');
-define('LOG_LF', "\n");
-define('LOG_MAX_SIZE', 1048576); // bytes
-
-// Error reporting
-ini_set('error_reporting', E_ALL);
-ini_set('display_errors', 0);
-ini_set('log_errors', 1);
-ini_set('error_log', LOG_DIR . '/php_err.log');
-
 // Check some variable
 // Magic quotes
 if (get_magic_quotes_gpc()) {
@@ -460,12 +346,6 @@ if (get_magic_quotes_gpc()) {
 if (!function_exists('json_encode')) {
     die('Json_encode not installed');
 }
-
-// Triggers
-define('BB_ENABLED', TRIGGERS_DIR . '/$on');
-define('BB_DISABLED', TRIGGERS_DIR . '/$off');
-define('CRON_ALLOWED', TRIGGERS_DIR . '/cron_allowed');
-define('CRON_RUNNING', TRIGGERS_DIR . '/cron_running');
 
 // Date format
 $bb_cfg['date_format'] = 'Y-m-d';
@@ -542,8 +422,6 @@ $bb_cfg['group_members_per_page'] = 50;
 $bb_cfg['tidy_post'] = (!in_array('tidy', get_loaded_extensions(), true)) ? false : true;
 
 // Misc
-define('MEM_USAGE', function_exists('memory_get_usage'));
-
 $bb_cfg['mem_on_start'] = MEM_USAGE ? memory_get_usage() : 0;
 
 $bb_cfg['translate_dates'] = true; // in displaying time
@@ -557,8 +435,6 @@ $bb_cfg['allow_change'] = array(
     'language' => true,
     'dateformat' => true,
 );
-
-define('GZIP_OUTPUT_ALLOWED', extension_loaded('zlib') && !ini_get('zlib.output_compression'));
 
 $banned_user_agents = array(
 // Download Master

@@ -31,9 +31,9 @@ namespace TorrentPier\Legacy;
  */
 class Dbs
 {
-    public $cfg = []; // $srv_name => $srv_cfg
-    public $srv = []; // $srv_name => $db_obj
-    public $alias = []; // $srv_alias => $srv_name
+    public $cfg = [];
+    public $srv = [];
+    public $alias = [];
 
     public $log_file = 'sql_queries';
     public $log_counter = 0;
@@ -41,6 +41,11 @@ class Dbs
     public $sql_inittime = 0;
     public $sql_timetotal = 0;
 
+    /**
+     * Dbs constructor
+     *
+     * @param $cfg
+     */
     public function __construct($cfg)
     {
         $this->cfg = $cfg['db'];
@@ -51,8 +56,14 @@ class Dbs
         }
     }
 
-    // получение/инициализация класса для сервера $srv_name
-    public function get_db_obj($srv_name_or_alias = 'db1')
+    /**
+     * Получение / инициализация класса сервера $srv_name
+     *
+     * @param string $srv_name_or_alias
+     *
+     * @return mixed
+     */
+    public function get_db_obj($srv_name_or_alias = 'db')
     {
         $srv_name = $this->get_srv_name($srv_name_or_alias);
 
@@ -63,16 +74,23 @@ class Dbs
         return $this->srv[$srv_name];
     }
 
-    // определение имени сервера
+    /**
+     * Определение имени сервера
+     *
+     * @param $name
+     *
+     * @return mixed|string
+     */
     public function get_srv_name($name)
     {
+        $srv_name = 'db';
+
         if (isset($this->alias[$name])) {
             $srv_name = $this->alias[$name];
         } elseif (isset($this->cfg[$name])) {
             $srv_name = $name;
-        } else {
-            $srv_name = 'db1';
         }
+
         return $srv_name;
     }
 }

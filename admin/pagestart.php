@@ -24,7 +24,6 @@
  */
 
 define('BB_ROOT', './../');
-define('IN_FORUM', true);
 define('IN_ADMIN', true);
 
 require dirname(__DIR__) . '/common.php';

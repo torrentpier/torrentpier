@@ -302,7 +302,7 @@ if ($log_rowset) {
             'USER_ID' => $row['log_user_id'],
             'USERNAME' => $row['log_username'],
             'USER_HREF_S' => url_arg($url, $user_key, $row['log_user_id']),
-            'USER_IP' => decode_ip($row['log_user_ip']),
+            'USER_IP' => Longman\IPTools\Ip::isValid($row['log_user_ip']) ? decode_ip($row['log_user_ip']) : '127.0.0.1',
 
             'FORUM_ID' => $row['log_forum_id'],
             'FORUM_HREF' => BB_ROOT . FORUM_URL . $row['log_forum_id'],

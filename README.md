@@ -13,9 +13,9 @@
 
 ## About TorrentPier
 
-TorrentPier - bull-powered BitTorrent tracker engine, written in php. High speed, simple modification, high load 
+TorrentPier — bull-powered BitTorrent tracker engine, written in php. High speed, simple modification, high load 
 architecture, built-in support for alternative compiled announcers (Ocelot, XBT). In addition we have very helpful 
-[official support forum](https://torrentpier.me/forum) , where among other things it is possible to test the live 
+[official support forum](https://torrentpier.me/forum), where among other things it is possible to test the live 
 demo, get any support and download modifications for engine.
 
 ## Current status
@@ -29,6 +29,7 @@ and go from there. The documentation will be translated into english in the near
 * Apache / nginx
 * MySQL / MariaDB / Percona
 * PHP: 5.5 / 5.6 / 7.0 / 7.1
+* PHP Extensions: bcmath, intl, tidy (optional)
 
 ## Installation
 
@@ -37,7 +38,7 @@ For installation you need to follow a few simple steps:
 1. Распаковываем на сервер содержимое скачанной вами папки
 1. Создаем базу данных, в которую при помощи phpmyadmin (или любого другого удобного инструмента) импортируем дамп, расположенный в папке **install/sql/mysql.sql**
 1. Правим файл конфигурации **library/config.php**, загруженный на сервер:
-> ***'db1' => array('localhost', 'tp_216', 'user', 'pass', $charset, $pconnect)***
+> ***'db' => array('localhost', 'tp_216', 'user', 'pass', $charset, $pconnect)***
 В данной строке изменяем данные входа в базу данных
 ***$domain_name = 'torrentpier.me';***
 В данной строке указываем ваше доменное имя. Остальные правки в файле вносятся по усмотрению, исходя из необходимости из внесения (ориентируйтесь на описания, указанные у полей).

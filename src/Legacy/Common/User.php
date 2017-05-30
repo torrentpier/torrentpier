@@ -34,17 +34,21 @@ use TorrentPier\Legacy\DateDelta;
 class User
 {
     /**
-     *  Config
+     * Config
+     *
+     * @var array
      */
-    public $cfg = array(
+    public $cfg = [
         'req_login' => false,    // requires user to be logged in
         'req_session_admin' => false,    // requires active admin session (for moderation or admin actions)
-    );
+    ];
 
     /**
-     *  PHP-JS exchangeable options (JSON'ized as {USER_OPTIONS_JS} in TPL)
+     * PHP-JS exchangeable options (JSON'ized as {USER_OPTIONS_JS} in TPL)
+     *
+     * @var array
      */
-    public $opt_js = array(
+    public $opt_js = [
         'only_new' => 0,     // show ony new posts or topics
         'h_av' => 0,     // hide avatar
         'h_rnk_i' => 0,     // hide rank images
@@ -57,39 +61,47 @@ class User
         'hl_tr' => 1,     // show cursor in tracker.php
         'i_aft_l' => 0,     // show images only after full loading
         'h_tsp' => 0,     // show released title {...}
-    );
+    ];
 
     /**
-     *  Defaults options for guests
+     * Defaults options for guests
+     *
+     * @var array
      */
-    public $opt_js_guest = array(
+    public $opt_js_guest = [
         'h_av' => 1,     // hide avatar
         'h_rnk_i' => 1,     // hide rank images
         'h_smile' => 1,     // hide smilies
         'h_sig' => 1,     // hide signatures
-    );
+    ];
 
     /**
-     *  Sessiondata
+     * Sessiondata
+     *
+     * @var array
      */
-    public $sessiondata = array(
+    public $sessiondata = [
         'uk' => null,
         'uid' => null,
         'sid' => '',
-    );
+    ];
 
     /**
-     *  Old $userdata
+     * Old $userdata
+     *
+     * @var array
      */
-    public $data = array();
+    public $data = [];
 
     /**
-     *  Shortcuts
+     * Shortcuts
+     *
+     * @var
      */
     public $id;
 
     /**
-     *  Constructor
+     * User constructor
      */
     public function __construct()
     {
@@ -97,9 +109,13 @@ class User
     }
 
     /**
-     *  Start session (restore existent session or create new)
+     * Start session (restore existent session or create new)
+     *
+     * @param array $cfg
+     *
+     * @return array|bool
      */
-    public function session_start(array $cfg = array())
+    public function session_start(array $cfg = [])
     {
         global $bb_cfg;
 
@@ -170,7 +186,7 @@ class User
                 }
                 $this->set_session_cookies($this->data['user_id']);
             } else {
-                $this->data = array();
+                $this->data = [];
             }
         }
         // If we reach here then no (valid) session exists. So we'll create a new one,
@@ -186,20 +202,20 @@ class User
                     }
                 }
             }
-            if (!$userdata || ($userdata['user_id'] != GUEST_UID && !$login)) {
+            if (!$userdata || ((int)$userdata['user_id'] !== GUEST_UID && !$login)) {
                 $userdata = get_userdata(GUEST_UID, false, true);
             }
 
             $this->session_create($userdata, true);
         }
 
-        define('IS_GUEST', (!$this->data['session_logged_in']));
-        define('IS_ADMIN', (!IS_GUEST && $this->data['user_level'] == ADMIN));
-        define('IS_MOD', (!IS_GUEST && $this->data['user_level'] == MOD));
-        define('IS_GROUP_MEMBER', (!IS_GUEST && $this->data['user_level'] == GROUP_MEMBER));
-        define('IS_USER', (!IS_GUEST && $this->data['user_level'] == USER));
-        define('IS_SUPER_ADMIN', (IS_ADMIN && isset($bb_cfg['super_admins'][$this->data['user_id']])));
-        define('IS_AM', (IS_ADMIN || IS_MOD));
+        define('IS_GUEST', !$this->data['session_logged_in']);
+        define('IS_ADMIN', !IS_GUEST && (int)$this->data['user_level'] === ADMIN);
+        define('IS_MOD', !IS_GUEST && (int)$this->data['user_level'] === MOD);
+        define('IS_GROUP_MEMBER', !IS_GUEST && (int)$this->data['user_level'] === GROUP_MEMBER);
+        define('IS_USER', !IS_GUEST && (int)$this->data['user_level'] === USER);
+        define('IS_SUPER_ADMIN', IS_ADMIN && isset($bb_cfg['super_admins'][$this->data['user_id']]));
+        define('IS_AM', IS_ADMIN || IS_MOD);
 
         $this->set_shortcuts();
 
@@ -214,7 +230,12 @@ class User
     }
 
     /**
-     *  Create new session for the given user
+     * Create new session for the given user
+     *
+     * @param $userdata
+     * @param bool $auto_created
+     *
+     * @return array
      */
     public function session_create($userdata, $auto_created = false)
     {
@@ -223,17 +244,15 @@ class User
         $this->data = $userdata;
         $session_id = $this->sessiondata['sid'];
 
-        $login = (int)($this->data['user_id'] != GUEST_UID);
-        $is_user = ($this->data['user_level'] != ADMIN);
+        $login = ((int)$this->data['user_id'] !== GUEST_UID);
+        $is_user = ((int)$this->data['user_level'] !== ADMIN);
         $user_id = (int)$this->data['user_id'];
-        $mod_admin_session = ($this->data['user_level'] == ADMIN || $this->data['user_level'] == MOD);
+        $mod_admin_session = ((int)$this->data['user_level'] === ADMIN || (int)$this->data['user_level'] === MOD);
 
         // Initial ban check against user_id or IP address
         if ($is_user) {
-            preg_match('#(..)(..)(..)(..)#', USER_IP, $ip);
-
-            $where_sql = "ban_ip IN('" . USER_IP . "', '$ip[1]$ip[2]$ip[3]ff', '$ip[1]$ip[2]ffff', '$ip[1]ffffff')";
-            $where_sql .= ($login) ? " OR ban_userid = $user_id" : '';
+            $where_sql = 'ban_ip = ' . USER_IP;
+            $where_sql .= $login ? " OR ban_userid = $user_id" : '';
 
             $sql = "SELECT ban_id FROM " . BB_BANLIST . " WHERE $where_sql LIMIT 1";
 
@@ -246,7 +265,7 @@ class User
         for ($i = 0, $max_try = 5; $i <= $max_try; $i++) {
             $session_id = make_rand_str(SID_LENGTH);
 
-            $args = DB()->build_array('INSERT', array(
+            $args = DB()->build_array('INSERT', [
                 'session_id' => (string)$session_id,
                 'session_user_id' => (int)$user_id,
                 'session_start' => (int)TIMENOW,
@@ -254,10 +273,10 @@ class User
                 'session_ip' => (string)USER_IP,
                 'session_logged_in' => (int)$login,
                 'session_admin' => (int)$mod_admin_session,
-            ));
+            ]);
             $sql = "INSERT INTO " . BB_SESSIONS . $args;
 
-            if (@DB()->query($sql)) {
+            if (DB()->query($sql)) {
                 break;
             }
             if ($i == $max_try) {
@@ -320,7 +339,10 @@ class User
     }
 
     /**
-     *  Initialize sessiondata stored in cookies
+     * Initialize sessiondata stored in cookies
+     *
+     * @param bool $update_lastvisit
+     * @param bool $set_cookie
      */
     public function session_end($update_lastvisit = false, $set_cookie = true)
     {
@@ -358,7 +380,12 @@ class User
     }
 
     /**
-     *  Login
+     * Login
+     *
+     * @param $args
+     * @param bool $mod_admin_login
+     *
+     * @return array
      */
     public function login($args, $mod_admin_login = false)
     {
@@ -411,15 +438,15 @@ class User
             }
         }
 
-        return array();
+        return [];
     }
 
     /**
-     *  Initialize sessiondata stored in cookies
+     * Initialize sessiondata stored in cookies
      */
     public function get_sessiondata()
     {
-        $sd_resv = !empty($_COOKIE[COOKIE_DATA]) ? @unserialize($_COOKIE[COOKIE_DATA]) : array();
+        $sd_resv = !empty($_COOKIE[COOKIE_DATA]) ? @unserialize($_COOKIE[COOKIE_DATA]) : [];
 
         // autologin_id
         if (!empty($sd_resv['uk']) && verify_id($sd_resv['uk'], LOGIN_KEY_LENGTH)) {
@@ -436,21 +463,23 @@ class User
     }
 
     /**
-     *  Store sessiondata in cookies
+     * Store sessiondata in cookies
+     *
+     * @param $user_id
      */
     public function set_session_cookies($user_id)
     {
         global $bb_cfg;
 
         if ($user_id == GUEST_UID) {
-            $delete_cookies = array(
+            $delete_cookies = [
                 COOKIE_DATA,
                 COOKIE_DBG,
                 'torhelp',
                 'explain',
                 'sql_log',
                 'sql_log_full',
-            );
+            ];
 
             foreach ($delete_cookies as $cookie) {
                 if (isset($_COOKIE[$cookie])) {
@@ -471,7 +500,13 @@ class User
     }
 
     /**
-     *  Verify autologin_id
+     * Verify autologin_id
+     *
+     * @param $userdata
+     * @param bool $expire_check
+     * @param bool $create_new
+     *
+     * @return bool|string
      */
     public function verify_autologin_id($userdata, $expire_check = false, $create_new = true)
     {
@@ -495,7 +530,12 @@ class User
     }
 
     /**
-     *  Create autologin_id
+     * Create autologin_id
+     *
+     * @param $userdata
+     * @param bool $create_new
+     *
+     * @return bool|string
      */
     public function create_autologin_id($userdata, $create_new = true)
     {
@@ -512,7 +552,7 @@ class User
     }
 
     /**
-     *  Set shortcuts
+     * Set shortcuts
      */
     public function set_shortcuts()
     {
@@ -523,12 +563,11 @@ class User
         $this->regdate =& $this->data['user_regdate'];
         $this->level =& $this->data['user_level'];
         $this->opt =& $this->data['user_opt'];
-
         $this->ip = CLIENT_IP;
     }
 
     /**
-     *  Initialise user settings
+     * Initialise user settings
      */
     public function init_userprefs()
     {
@@ -575,7 +614,9 @@ class User
     }
 
     /**
-     *  Mark read
+     * Mark read
+     *
+     * @param $type
      */
     public function mark_read($type)
     {
@@ -593,10 +634,10 @@ class User
             $this->data['user_lastvisit'] = TIMENOW;
 
             // Update lastvisit
-            db_update_userdata($this->data, array(
+            db_update_userdata($this->data, [
                 'user_session_time' => $this->data['session_time'],
                 'user_lastvisit' => $this->data['user_lastvisit'],
-            ));
+            ]);
 
             // Delete cookies
             bb_setcookie(COOKIE_TOPIC, '');
@@ -606,7 +647,7 @@ class User
     }
 
     /**
-     *  Load misc options
+     * Load misc options
      */
     public function load_opt_js()
     {
@@ -622,7 +663,11 @@ class User
     }
 
     /**
-     *  Get not auth forums
+     * Get not auth forums
+     *
+     * @param $auth_type
+     *
+     * @return string
      */
     public function get_not_auth_forums($auth_type)
     {
@@ -648,7 +693,7 @@ class User
             }
         }
 
-        $auth_field_match = array(
+        $auth_field_match = [
             AUTH_VIEW => 'auth_view',
             AUTH_READ => 'auth_read',
             AUTH_POST => 'auth_post',
@@ -661,9 +706,9 @@ class User
             AUTH_POLLCREATE => 'auth_pollcreate',
             AUTH_ATTACH => 'auth_attachments',
             AUTH_DOWNLOAD => 'auth_download',
-        );
+        ];
 
-        $not_auth_forums = array();
+        $not_auth_forums = [];
         $auth_field = $auth_field_match[$auth_type];
         $is_auth_ary = auth($auth_type, AUTH_LIST_ALL, $this->data);
 
@@ -677,11 +722,16 @@ class User
     }
 
     /**
-     *  Get excluded forums
+     * Get excluded forums
+     *
+     * @param $auth_type
+     * @param string $return_as
+     *
+     * @return array|bool|string
      */
     public function get_excluded_forums($auth_type, $return_as = 'csv')
     {
-        $excluded = array();
+        $excluded = [];
 
         if ($not_auth = $this->get_not_auth_forums($auth_type)) {
             $excluded[] = $not_auth;

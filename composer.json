@@ -1,6 +1,6 @@
 {
   "name": "torrentpier/torrentpier",
-  "description": "TorrentPier. Bittorrent-tracker engine",
+  "description": "TorrentPier. Bull-powered BitTorrent tracker engine",
   "type": "project",
   "keywords": [
     "bittorrent",
@@ -32,7 +32,6 @@
     "email": "support@torrentpier.me",
     "issues": "https://github.com/torrentpier/torrentpier/issues",
     "forum": "https://torrentpier.me/forum/",
-    "get": "https://get.torrentpier.me/",
     "docs": "https://docs.torrentpier.me/"
   },
   "require": {
@@ -40,6 +39,7 @@
     "bugsnag/bugsnag": "^3.0",
     "gigablah/sphinxphp": "^2.0",
     "google/recaptcha": "^1.0",
+    "longman/ip-tools": "^1.2",
     "roave/security-advisories": "dev-master",
     "rych/bencode": "^1.0",
     "swiftmailer/swiftmailer": "^5.4"

@@ -23,8 +23,8 @@
  * SOFTWARE.
  */
 
-if (!defined('IN_FORUM')) {
-    die("Hacking attempt");
+if (!defined('BB_ROOT')) {
+    die(basename(__FILE__));
 }
 
 require ATTACH_DIR . '/includes/functions_includes.php';
