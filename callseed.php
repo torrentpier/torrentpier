@@ -59,7 +59,7 @@ $user_list = DB()->fetch_rowset("
 	LEFT JOIN " . BB_BT_TRACKER . " tr ON(tr.user_id = dl.user_id)
 	WHERE dl.topic_id = $topic_id
 		AND dl.user_status IN (" . DL_STATUS_COMPLETE . ", " . DL_STATUS_DOWN . ")
-		AND dl.user_id NOT IN ({$userdata['user_id']}, " . EXCLUDED_USERS_CSV . $ban_user_id . ")
+		AND dl.user_id NOT IN ({$userdata['user_id']}, " . EXCLUDED_USERS . $ban_user_id . ")
 		AND u.user_active = 1
 	GROUP BY dl.user_id
 ");

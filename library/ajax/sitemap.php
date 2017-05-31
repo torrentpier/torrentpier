@@ -35,9 +35,9 @@ $html = '';
 
 switch ($mode) {
     case 'create':
-        $map->create();
+        $map->createSitemap();
         if (file_exists(SITEMAP_DIR . '/sitemap.xml')) {
-            $html .= $lang['SITEMAP_CREATED'] . ': <b>' . bb_date(TIMENOW, $bb_cfg['post_date_format']) . '</b> ' . $lang['SITEMAP_AVAILABLE'] . ': <a href="' . make_url('sitemap.xml') . '" target="_blank">' . make_url('sitemap.xml') . '</a>';
+            $html .= $lang['SITEMAP_CREATED'] . ': <b>' . bb_date(TIMENOW, $bb_cfg['post_date_format']) . '</b> ' . $lang['SITEMAP_AVAILABLE'] . ': <a href="' . make_url('sitemap/sitemap.xml') . '" target="_blank">' . make_url('sitemap/sitemap.xml') . '</a>';
         } else {
             $html .= $lang['SITEMAP_NOT_CREATED'];
         }
@@ -45,35 +45,28 @@ switch ($mode) {
 
     case 'search_update':
         if (!file_exists(SITEMAP_DIR . '/sitemap.xml')) {
-            $map->create();
+            $map->createSitemap();
         }
 
-        $map_link = make_url(SITEMAP_DIR . '/sitemap.xml');
+        $map_link = make_url('sitemap/sitemap.xml');
 
-        if (strpos($map->send_url("http://google.com/webmasters/sitemaps/ping?sitemap=", $map_link), "successfully added") !== false) {
+        if ($map->sendSitemap('http://google.com/webmasters/sitemaps/ping?sitemap=', $map_link)) {
             $html .= '<br />' . $lang['SITEMAP_NOTIFY_SEARCH'] . ' Google: <span style="color: green;">' . $lang['SITEMAP_SENT'] . '</span>';
         } else {
             $html .= '<br />' . $lang['SITEMAP_NOTIFY_SEARCH'] . ' Google: <span style="color: red;">' . $lang['SITEMAP_ERROR'] . '</span> URL: <a href="http://google.com/webmasters/sitemaps/ping?sitemap=' . urlencode($map_link) . '" target="_blank">http://google.com/webmasters/sitemaps/ping?sitemap=' . $map_link . '</a>';
         }
 
-        if (strpos($map->send_url("http://ping.blogs.yandex.ru/ping?sitemap=", $map_link), "OK") !== false) {
+        if ($map->sendSitemap('http://ping.blogs.yandex.ru/ping?sitemap=', $map_link)) {
             $html .= '<br />' . $lang['SITEMAP_NOTIFY_SEARCH'] . ' Yandex: <span style="color: green;">' . $lang['SITEMAP_SENT'] . '</span>';
         } else {
             $html .= '<br />' . $lang['SITEMAP_NOTIFY_SEARCH'] . ' Yandex: <span style="color: red;">' . $lang['SITEMAP_ERROR'] . '</span> URL: <a href="http://ping.blogs.yandex.ru/ping?sitemap=' . urlencode($map_link) . '" target="_blank">http://ping.blogs.yandex.ru/ping?sitemap=' . $map_link . '</a>';
         }
 
-        if ($map->send_url("http://www.bing.com/ping?sitemap=", $map_link)) {
+        if ($map->sendSitemap('http://www.bing.com/ping?sitemap=', $map_link)) {
             $html .= '<br />' . $lang['SITEMAP_NOTIFY_SEARCH'] . ' Bing: <span style="color: green;">' . $lang['SITEMAP_SENT'] . '</span>';
         } else {
             $html .= '<br />' . $lang['SITEMAP_NOTIFY_SEARCH'] . ' Bing: <span style="color: red;">' . $lang['SITEMAP_ERROR'] . '</span> URL: <a href="http://www.bing.com/ping?sitemap=' . urlencode($map_link) . '" target="_blank">http://www.bing.com/ping?sitemap=' . $map_link . '</a>';
         }
-
-        if (strpos($map->send_url("http://rpc.weblogs.com/pingSiteForm?name=InfraBlog&url=", $map_link), "Thanks for the ping") !== false) {
-            $html .= '<br />' . $lang['SITEMAP_NOTIFY_SEARCH'] . ' Weblogs: <span style="color: green;">' . $lang['SITEMAP_SENT'] . '</span>';
-        } else {
-            $html .= '<br />' . $lang['SITEMAP_NOTIFY_SEARCH'] . ' Weblogs: <span style="color: red;">' . $lang['SITEMAP_ERROR'] . '</span> URL: <a href="http://rpc.weblogs.com/pingSiteForm?name=InfraBlog&url=' . urlencode($map_link) . '" target="_blank">http://rpc.weblogs.com/pingSiteForm?name=InfraBlog&url=' . $map_link . '</a>';
-        }
-        break;
 }
 
 $this->response['html'] = $html;

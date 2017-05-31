@@ -65,14 +65,14 @@ if (isset($_POST['submit'])) {
 					AND ug.user_pending = 0
 					AND u.user_id = ug.user_id
 					AND u.user_active = 1
-					AND u.user_id NOT IN(" . EXCLUDED_USERS_CSV . $user_id_sql . ")
+					AND u.user_id NOT IN(" . EXCLUDED_USERS . $user_id_sql . ")
 			");
         } else {
             $user_list = DB()->fetch_rowset("
 				SELECT username, user_email, user_lang
 				FROM " . BB_USERS . "
 				WHERE user_active = 1
-					AND user_id NOT IN(" . EXCLUDED_USERS_CSV . $user_id_sql . ")
+					AND user_id NOT IN(" . EXCLUDED_USERS . $user_id_sql . ")
 			");
         }
 
