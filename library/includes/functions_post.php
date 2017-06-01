@@ -323,7 +323,7 @@ function user_notification($mode, &$post_data, &$topic_title, &$forum_id, &$topi
             $watch_list = DB()->fetch_rowset("SELECT u.username, u.user_id, u.user_email, u.user_lang
 				FROM " . BB_TOPICS_WATCH . " tw, " . BB_USERS . " u
 				WHERE tw.topic_id = $topic_id
-					AND tw.user_id NOT IN (" . $userdata['user_id'] . ", " . EXCLUDED_USERS_CSV . $user_id_sql . ")
+					AND tw.user_id NOT IN (" . $userdata['user_id'] . ", " . EXCLUDED_USERS . $user_id_sql . ")
 					AND tw.notify_status = " . TOPIC_WATCH_NOTIFIED . "
 					AND u.user_id = tw.user_id
 					AND u.user_active = 1

@@ -58,8 +58,8 @@ You must provide write permissions to the specified folders:
 * `internal_data/atom`
 * `internal_data/cache`
 * `internal_data/log`
-* `internal_data/sitemap`
 * `internal_data/triggers`
+* `sitemap`
 
 The specific settings depend on the server you are using, but in general case we recommend chmod 0755 for folders, 
 and chmod 0644 for files in them. If you are not sure, leave it as is.
