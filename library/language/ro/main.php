@@ -2278,7 +2278,7 @@ $lang['TRACKER_CFG_TITLE'] = 'Tracker';
 $lang['FORUM_CFG_TITLE'] = 'Setări Forum';
 $lang['TRACKER_SETTINGS'] = 'Tracker setări';
 
-$lang['CHANGES_DISABLED'] = 'Modificări cu handicap (a se vedea <b>$tr_cfg</b> în config.php)';
+$lang['CHANGES_DISABLED'] = 'Modificări cu handicap (a se vedea <b>$bb_cfg[\'tracker\']</b> în config.php)';
 
 $lang['OFF_TRACKER'] = 'Dezactivați tracker';
 $lang['OFF_REASON'] = 'Dezactivare motiv';

@@ -2278,7 +2278,7 @@ $lang['TRACKER_CFG_TITLE'] = 'แทร็กเกอร์';
 $lang['FORUM_CFG_TITLE'] = 'อภิปราการตั้งค่า';
 $lang['TRACKER_SETTINGS'] = 'ตัวติดตามการตั้งค่า';
 
-$lang['CHANGES_DISABLED'] = 'เปลี่ยนแปลงปิดการใช้งาน(ดู <b>$tr_cfg</b> ใน config.php)';
+$lang['CHANGES_DISABLED'] = 'เปลี่ยนแปลงปิดการใช้งาน(ดู <b>$bb_cfg[\'tracker\']</b> ใน config.php)';
 
 $lang['OFF_TRACKER'] = 'ปิดการใช้งานแทร็กเกอร์';
 $lang['OFF_REASON'] = 'ปิดการใช้เหตุผล';

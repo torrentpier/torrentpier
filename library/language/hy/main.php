@@ -2278,7 +2278,7 @@ $lang['TRACKER_CFG_TITLE'] = 'Ճանապարհները';
 $lang['FORUM_CFG_TITLE'] = 'Ֆորումի կառավարում';
 $lang['TRACKER_SETTINGS'] = 'Կառավարում ճանապարհները';
 
-$lang['CHANGES_DISABLED'] = 'Փոփոխություններ անջատված է (տես <b>$tr_cfg</b> է config.php)';
+$lang['CHANGES_DISABLED'] = 'Փոփոխություններ անջատված է (տես <b>$bb_cfg[\'tracker\']</b> է config.php)';
 
 $lang['OFF_TRACKER'] = 'Անջատել tracker';
 $lang['OFF_REASON'] = 'Պատճառը պարապուրդ';

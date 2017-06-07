@@ -27,7 +27,6 @@ if (isset($_REQUEST['GLOBALS'])) {
     die();
 }
 
-ignore_user_abort(true);
 define('TIMESTART', utime());
 define('TIMENOW', time());
 
@@ -46,6 +45,9 @@ if (empty($_SERVER['SERVER_NAME'])) {
 
 if (!defined('BB_ROOT')) {
     define('BB_ROOT', './');
+}
+if (!defined('BB_SCRIPT')) {
+    define('BB_SCRIPT', 'undefined');
 }
 
 header('X-Frame-Options: SAMEORIGIN');
@@ -67,6 +69,15 @@ require_once __DIR__ . '/vendor/autoload.php';
 // Get initial config
 require_once __DIR__ . '/library/config.php';
 
+if (!getenv('APP_DEBUG') && file_exists(__DIR__ . '/.env')) {
+    (new Symfony\Component\Dotenv\Dotenv())->load(__DIR__ . '/.env');
+}
+
+// Local config
+if (file_exists(__DIR__ . '/library/config.local.php')) {
+    require_once __DIR__ . '/library/config.local.php';
+}
+
 // Bugsnag error reporting
 if ($bb_cfg['bugsnag']['enabled'] && !empty($bb_cfg['bugsnag']['api_key'])) {
     /** @var Bugsnag\Handler $bugsnag */
@@ -79,34 +90,6 @@ $server_port = in_array((int)$bb_cfg['server_port'], array(80, 443), true) ? '' 
 define('FORUM_PATH', $bb_cfg['script_path']);
 define('FULL_URL', $server_protocol . $bb_cfg['server_name'] . $server_port . $bb_cfg['script_path']);
 unset($server_protocol, $server_port);
-
-// Debug options
-define('DBG_USER', (isset($_COOKIE[COOKIE_DBG])));
-
-// Board / tracker shared constants and functions
-define('BB_BT_TORRENTS', 'bb_bt_torrents');
-define('BB_BT_TRACKER', 'bb_bt_tracker');
-define('BB_BT_TRACKER_SNAP', 'bb_bt_tracker_snap');
-define('BB_BT_USERS', 'bb_bt_users');
-
-define('BT_AUTH_KEY_LENGTH', 10);
-
-define('PEER_HASH_PREFIX', 'peer_');
-define('PEERS_LIST_PREFIX', 'peers_list_');
-define('PEER_HASH_EXPIRE', round($bb_cfg['announce_interval'] * (0.85 * $tr_cfg['expire_factor']))); // sec
-define('PEERS_LIST_EXPIRE', round($bb_cfg['announce_interval'] * 0.7)); // sec
-
-define('DL_STATUS_RELEASER', -1);
-define('DL_STATUS_DOWN', 0);
-define('DL_STATUS_COMPLETE', 1);
-define('DL_STATUS_CANCEL', 3);
-define('DL_STATUS_WILL', 4);
-
-define('TOR_TYPE_GOLD', 1);
-define('TOR_TYPE_SILVER', 2);
-
-define('GUEST_UID', -1);
-define('BOT_UID', -746);
 
 /**
  * Database
@@ -162,256 +145,6 @@ switch ($bb_cfg['datastore_type']) {
     case 'filecache':
     default:
         $datastore = new TorrentPier\Legacy\Datastore\File($bb_cfg['cache']['db_dir'] . 'datastore/', $bb_cfg['cache']['prefix']);
-}
-
-function sql_dbg_enabled()
-{
-    return (SQL_DEBUG && DBG_USER && !empty($_COOKIE['sql_log']));
-}
-
-function short_query($sql, $esc_html = false)
-{
-    $max_len = 100;
-    $sql = str_compact($sql);
-
-    if (!empty($_COOKIE['sql_log_full'])) {
-        if (mb_strlen($sql, 'UTF-8') > $max_len) {
-            $sql = mb_substr($sql, 0, 50) . ' [...cut...] ' . mb_substr($sql, -50);
-        }
-    }
-
-    return $esc_html ? htmlCHR($sql, true) : $sql;
-}
-
-// Functions
-function utime()
-{
-    return array_sum(explode(' ', microtime()));
-}
-
-function bb_log($msg, $file_name)
-{
-    if (is_array($msg)) {
-        $msg = implode(LOG_LF, $msg);
-    }
-    $file_name .= (LOG_EXT) ? '.' . LOG_EXT : '';
-    return file_write($msg, LOG_DIR . '/' . $file_name);
-}
-
-function file_write($str, $file, $max_size = LOG_MAX_SIZE, $lock = true, $replace_content = false)
-{
-    $bytes_written = false;
-
-    if ($max_size && file_exists($file) && filesize($file) >= $max_size) {
-        $old_name = $file;
-        $ext = '';
-        if (preg_match('#^(.+)(\.[^\\/]+)$#', $file, $matches)) {
-            $old_name = $matches[1];
-            $ext = $matches[2];
-        }
-        $new_name = $old_name . '_[old]_' . date('Y-m-d_H-i-s_') . getmypid() . $ext;
-        clearstatcache();
-        if (!file_exists($new_name)) {
-            rename($file, $new_name);
-        }
-    }
-    if (!$fp = fopen($file, 'ab')) {
-        if ($dir_created = bb_mkdir(dirname($file))) {
-            $fp = fopen($file, 'ab');
-        }
-    }
-    if ($fp) {
-        if ($lock) {
-            flock($fp, LOCK_EX);
-        }
-        if ($replace_content) {
-            ftruncate($fp, 0);
-            fseek($fp, 0, SEEK_SET);
-        }
-        $bytes_written = fwrite($fp, $str);
-        fclose($fp);
-    }
-
-    return $bytes_written;
-}
-
-function bb_mkdir($path, $mode = 0777)
-{
-    $old_um = umask(0);
-    $dir = mkdir_rec($path, $mode);
-    umask($old_um);
-    return $dir;
-}
-
-function mkdir_rec($path, $mode)
-{
-    if (is_dir($path)) {
-        return ($path !== '.' && $path !== '..') ? is_writable($path) : false;
-    }
-
-    return mkdir_rec(dirname($path), $mode) ? @mkdir($path, $mode) : false;
-}
-
-function verify_id($id, $length)
-{
-    return (is_string($id) && preg_match('#^[a-zA-Z0-9]{' . $length . '}$#', $id));
-}
-
-function clean_filename($fname)
-{
-    static $s = array('\\', '/', ':', '*', '?', '"', '<', '>', '|', ' ');
-    return str_replace($s, '_', str_compact($fname));
-}
-
-/**
- * Декодирование оригинального IP
- * @param $ip
- * @return string
- */
-function encode_ip($ip)
-{
-    return Longman\IPTools\Ip::ip2long($ip);
-}
-
-/**
- * Восстановление декодированного IP
- * @param $ip
- * @return string
- */
-function decode_ip($ip)
-{
-    return Longman\IPTools\Ip::long2ip($ip);
-}
-
-/**
- * Проверка IP на валидность
- *
- * @param $ip
- * @return bool
- */
-function verify_ip($ip)
-{
-    return Longman\IPTools\Ip::isValid($ip);
-}
-
-function bb_crc32($str)
-{
-    return (float)sprintf('%u', crc32($str));
-}
-
-function hexhex($value)
-{
-    return dechex(hexdec($value));
-}
-
-function str_compact($str)
-{
-    return preg_replace('#\s+#u', ' ', trim($str));
-}
-
-function make_rand_str($len = 10)
-{
-    $str = '';
-    while (strlen($str) < $len) {
-        $str .= str_shuffle(preg_replace('#[^0-9a-zA-Z]#', '', password_hash(uniqid(mt_rand(), true), PASSWORD_BCRYPT)));
-    }
-    return substr($str, 0, $len);
-}
-
-function array_deep(&$var, $fn, $one_dimensional = false, $array_only = false)
-{
-    if (is_array($var)) {
-        foreach ($var as $k => $v) {
-            if (is_array($v)) {
-                if ($one_dimensional) {
-                    unset($var[$k]);
-                } elseif ($array_only) {
-                    $var[$k] = $fn($v);
-                } else {
-                    array_deep($var[$k], $fn);
-                }
-            } elseif (!$array_only) {
-                $var[$k] = $fn($v);
-            }
-        }
-    } elseif (!$array_only) {
-        $var = $fn($var);
-    }
-}
-
-function hide_bb_path($path)
-{
-    return ltrim(str_replace(BB_PATH, '', $path), '/\\');
-}
-
-function sys($param)
-{
-    switch ($param) {
-        case 'la':
-            return function_exists('sys_getloadavg') ? implode(' ', sys_getloadavg()) : 0;
-            break;
-        case 'mem':
-            return function_exists('memory_get_usage') ? memory_get_usage() : 0;
-            break;
-        case 'mem_peak':
-            return function_exists('memory_get_peak_usage') ? memory_get_peak_usage() : 0;
-            break;
-        default:
-            trigger_error("invalid param: $param", E_USER_ERROR);
-    }
-}
-
-function ver_compare($version1, $operator, $version2)
-{
-    return version_compare($version1, $version2, $operator);
-}
-
-function dbg_log($str, $file)
-{
-    $dir = LOG_DIR . (defined('IN_TRACKER') ? '/dbg_tr/' : '/dbg_bb/') . date('m-d_H') . '/';
-    return file_write($str, $dir . $file, false, false);
-}
-
-function log_get($file = '', $prepend_str = false)
-{
-    log_request($file, $prepend_str, false);
-}
-
-function log_post($file = '', $prepend_str = false)
-{
-    log_request($file, $prepend_str, true);
-}
-
-function log_request($file = '', $prepend_str = false, $add_post = true)
-{
-    global $user;
-
-    $file = ($file) ?: 'req/' . date('m-d');
-    $str = array();
-    $str[] = date('m-d H:i:s');
-    if ($prepend_str !== false) {
-        $str[] = $prepend_str;
-    }
-    if (!empty($user->data)) {
-        $str[] = $user->id . "\t" . html_entity_decode($user->name);
-    }
-    $str[] = sprintf('%-15s', $_SERVER['REMOTE_ADDR']);
-
-    if (isset($_SERVER['REQUEST_URI'])) {
-        $str[] = $_SERVER['REQUEST_URI'];
-    }
-    if (isset($_SERVER['HTTP_USER_AGENT'])) {
-        $str[] = $_SERVER['HTTP_USER_AGENT'];
-    }
-    if (isset($_SERVER['HTTP_REFERER'])) {
-        $str[] = $_SERVER['HTTP_REFERER'];
-    }
-
-    if (!empty($_POST) && $add_post) {
-        $str[] = "post: " . str_compact(urldecode(http_build_query($_POST)));
-    }
-    $str = implode("\t", $str) . "\n";
-    bb_log($str, $file);
 }
 
 // Board or tracker init

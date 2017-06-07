@@ -2278,7 +2278,7 @@ $lang['TRACKER_CFG_TITLE'] = 'ट्रैकर';
 $lang['FORUM_CFG_TITLE'] = 'फ़ोरम सेटिंग';
 $lang['TRACKER_SETTINGS'] = 'ट्रैकर सेटिंग्स';
 
-$lang['CHANGES_DISABLED'] = 'परिवर्तन अक्षम (config.php में <b>$tr_cfg</b> देखें)';
+$lang['CHANGES_DISABLED'] = 'परिवर्तन अक्षम (config.php में <b>$bb_cfg[\'tracker\']</b> देखें)';
 
 $lang['OFF_TRACKER'] = 'ट्रैकर अक्षम करें';
 $lang['OFF_REASON'] = 'कारण अक्षम करें';

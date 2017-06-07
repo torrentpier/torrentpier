@@ -2278,7 +2278,7 @@ $lang['TRACKER_CFG_TITLE'] = 'Назоратчии';
 $lang['FORUM_CFG_TITLE'] = 'танзимоти Озодӣ';
 $lang['TRACKER_SETTINGS'] = 'танзимоти Назоратчии';
 
-$lang['CHANGES_DISABLED'] = 'Тағйирҳои маъюбон (<b>$tr_cfg</b> дар config.php нигаред)';
+$lang['CHANGES_DISABLED'] = 'Тағйирҳои маъюбон (<b>$bb_cfg[\'tracker\']</b> дар config.php нигаред)';
 
 $lang['OFF_TRACKER'] = 'Назоратчии хомӯш';
 $lang['OFF_REASON'] = 'сабаби хомӯш';

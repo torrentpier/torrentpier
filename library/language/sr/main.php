@@ -2278,7 +2278,7 @@ $lang['TRACKER_CFG_TITLE'] = 'Трацкер';
 $lang['FORUM_CFG_TITLE'] = 'Подешавања форума';
 $lang['TRACKER_SETTINGS'] = 'Подешавања трацкер';
 
-$lang['CHANGES_DISABLED'] = 'Промене искључена (видети <b>$tr_cfg</b> у config.php)';
+$lang['CHANGES_DISABLED'] = 'Промене искључена (видети <b>$bb_cfg[\'tracker\']</b> у config.php)';
 
 $lang['OFF_TRACKER'] = 'Искључите трацкер';
 $lang['OFF_REASON'] = 'Разлог искључења';

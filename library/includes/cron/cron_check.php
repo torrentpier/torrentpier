@@ -43,8 +43,7 @@ if ($cron_jobs) {
 
     foreach ($cron_jobs as $job) {
         if ($job['disable_board']) {
-            cron_disable_board();
-            sleep(10);
+            TorrentPier\Helpers\CronHelper::disableBoard();
             break;
         }
     }
@@ -52,7 +51,7 @@ if ($cron_jobs) {
     require(CRON_DIR . 'cron_run.php');
 
     // Update cron_last_check
-    bb_update_config(array('cron_last_check' => (TIMENOW + 10)));
+    bb_update_config(array('cron_last_check' => TIMENOW + 10));
 } else {
     bb_log(date('H:i:s - ') . getmypid() . ' --x- no active jobs found ----------------------------------------------' . LOG_LF, CRON_LOG_DIR . '/cron_check');
 }

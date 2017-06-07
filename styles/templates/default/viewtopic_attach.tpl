@@ -146,11 +146,11 @@
 	<tr class="row3">
 		<th colspan="3" class="{postrow.attach.tor_reged.DL_LINK_CLASS}">{postrow.attach.tor_reged.DOWNLOAD_NAME}<!-- IF postrow.attach.tor_reged.TOR_FROZEN == 0 --><!-- IF MAGNET_LINKS -->&nbsp;{postrow.attach.tor_reged.MAGNET}<!-- ENDIF --><!-- ENDIF --></th>
 	</tr>
-	<!-- IF postrow.attach.tor_reged.TOR_SILVER_GOLD == 2 && $tr_cfg['gold_silver_enabled'] -->
+	<!-- IF postrow.attach.tor_reged.TOR_SILVER_GOLD == 2 && $bb_cfg['tracker']['gold_silver_enabled'] -->
 	<tr class="row4">
 		<th colspan="3" class="row7"><img src="styles/images/tor_silver.gif" width="16" height="15" title="{L_SILVER}" />&nbsp;{L_SILVER_STATUS}&nbsp;<img src="styles/images/tor_silver.gif" width="16" height="15" title="{L_SILVER}" /></th>
 	</tr>
-	<!-- ELSEIF postrow.attach.tor_reged.TOR_SILVER_GOLD == 1 && $tr_cfg['gold_silver_enabled'] -->
+	<!-- ELSEIF postrow.attach.tor_reged.TOR_SILVER_GOLD == 1 && $bb_cfg['tracker']['gold_silver_enabled'] -->
 	<tr class="row4">
 		<th colspan="3" class="row7"><img src="styles/images/tor_gold.gif" width="16" height="15" title="{L_GOLD}" />&nbsp;{L_GOLD_STATUS}&nbsp;<img src="styles/images/tor_gold.gif" width="16" height="15" title="{L_GOLD}" /></th>
 	</tr>
@@ -252,7 +252,7 @@
 				<option value="del_torrent">{L_DELETE_TORRENT}</option>
 				<option value="del_torrent_move_topic">{L_DELETE_MOVE_TORRENT}</option>
 				<!-- IF AUTH_MOD -->
-				<!-- IF $tr_cfg['gold_silver_enabled'] -->
+				<!-- IF $bb_cfg['tracker']['gold_silver_enabled'] -->
 				<!-- IF postrow.attach.tor_reged.TOR_SILVER_GOLD == 1 -->
 				<option value="unset_silver_gold">{L_UNSET_GOLD_TORRENT} / {L_UNSET_SILVER_TORRENT}</option>
 				<option value="set_silver">{L_SET_SILVER_TORRENT}</option>

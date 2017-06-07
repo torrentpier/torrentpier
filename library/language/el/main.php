@@ -2278,7 +2278,7 @@ $lang['TRACKER_CFG_TITLE'] = 'Tracker';
 $lang['FORUM_CFG_TITLE'] = 'Φόρουμ ρυθμίσεις';
 $lang['TRACKER_SETTINGS'] = 'Tracker ρυθμίσεις';
 
-$lang['CHANGES_DISABLED'] = 'Αλλαγές με αναπηρία (βλ. <b>$tr_cfg</b> σε config.php)';
+$lang['CHANGES_DISABLED'] = 'Αλλαγές με αναπηρία (βλ. <b>$bb_cfg[\'tracker\']</b> σε config.php)';
 
 $lang['OFF_TRACKER'] = 'Απενεργοποίηση tracker';
 $lang['OFF_REASON'] = 'Απενεργοποίηση λόγο';

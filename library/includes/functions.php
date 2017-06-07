@@ -1853,16 +1853,16 @@ function get_title_match_topics($title_match_sql, array $forum_ids = array())
 {
     global $bb_cfg, $sphinx, $userdata, $title_match, $lang;
 
-    $where_ids = array();
+    $where_ids = [];
     if ($forum_ids) {
-        $forum_ids = array_diff($forum_ids, array(0 => 0));
+        $forum_ids = array_diff($forum_ids, [0 => 0]);
     }
     $title_match_sql = encode_text_match($title_match_sql);
 
     if ($bb_cfg['search_engine_type'] == 'sphinx') {
         $sphinx = init_sphinx();
 
-        $where = ($title_match) ? 'topics' : 'posts';
+        $where = $title_match ? 'topics' : 'posts';
 
         $sphinx->setServer($bb_cfg['sphinx_topic_titles_host'], $bb_cfg['sphinx_topic_titles_port']);
         if ($forum_ids) {
@@ -1924,12 +1924,12 @@ function decode_text_match($txt)
 
 function pad_with_space($str)
 {
-    return ($str) ? " $str " : $str;
+    return $str ? " $str " : $str;
 }
 
 function create_magnet($infohash, $auth_key, $logged_in)
 {
-    global $bb_cfg, $_GET, $userdata, $images;
+    global $bb_cfg, $_GET, $images;
 
     $passkey_url = ((!$logged_in || isset($_GET['no_passkey'])) && $bb_cfg['bt_tor_browse_only_reg']) ? '' : "?{$bb_cfg['passkey_key']}=$auth_key";
     return '<a href="magnet:?xt=urn:btih:' . bin2hex($infohash) . '&tr=' . urlencode($bb_cfg['bt_announce_url'] . $passkey_url) . '"><img src="' . $images['icon_magnet'] . '" width="12" height="12" border="0" /></a>';
@@ -1940,9 +1940,9 @@ function set_die_append_msg($forum_id = null, $topic_id = null, $group_id = null
     global $lang, $template;
 
     $msg = '';
-    $msg .= ($topic_id) ? '<p class="mrg_10"><a href="' . TOPIC_URL . $topic_id . '">' . $lang['TOPIC_RETURN'] . '</a></p>' : '';
-    $msg .= ($forum_id) ? '<p class="mrg_10"><a href="' . FORUM_URL . $forum_id . '">' . $lang['FORUM_RETURN'] . '</a></p>' : '';
-    $msg .= ($group_id) ? '<p class="mrg_10"><a href="' . GROUP_URL . $group_id . '">' . $lang['GROUP_RETURN'] . '</a></p>' : '';
+    $msg .= $topic_id ? '<p class="mrg_10"><a href="' . TOPIC_URL . $topic_id . '">' . $lang['TOPIC_RETURN'] . '</a></p>' : '';
+    $msg .= $forum_id ? '<p class="mrg_10"><a href="' . FORUM_URL . $forum_id . '">' . $lang['FORUM_RETURN'] . '</a></p>' : '';
+    $msg .= $group_id ? '<p class="mrg_10"><a href="' . GROUP_URL . $group_id . '">' . $lang['GROUP_RETURN'] . '</a></p>' : '';
     $msg .= '<p class="mrg_10"><a href="index.php">' . $lang['INDEX_RETURN'] . '</a></p>';
     $template->assign_var('BB_DIE_APPEND_MSG', $msg);
 }
@@ -2052,18 +2052,18 @@ function gender_image($gender)
     if (!$bb_cfg['gender']) {
         $user_gender = '';
         return $user_gender;
-    } else {
-        switch ($gender) {
-            case MALE:
-                $user_gender = '<img src="' . $images['icon_male'] . '" alt="' . $lang['GENDER_SELECT'][MALE] . '" title="' . $lang['GENDER_SELECT'][MALE] . '" border="0" />';
-                break;
-            case FEMALE:
-                $user_gender = '<img src="' . $images['icon_female'] . '" alt="' . $lang['GENDER_SELECT'][FEMALE] . '" title="' . $lang['GENDER_SELECT'][FEMALE] . '" border="0" />';
-                break;
-            default:
-                $user_gender = '<img src="' . $images['icon_nogender'] . '" alt="' . $lang['GENDER_SELECT'][NOGENDER] . '" title="' . $lang['GENDER_SELECT'][NOGENDER] . '" border="0" />';
-                break;
-        }
+    }
+
+    switch ($gender) {
+        case MALE:
+            $user_gender = '<img src="' . $images['icon_male'] . '" alt="' . $lang['GENDER_SELECT'][MALE] . '" title="' . $lang['GENDER_SELECT'][MALE] . '" border="0" />';
+            break;
+        case FEMALE:
+            $user_gender = '<img src="' . $images['icon_female'] . '" alt="' . $lang['GENDER_SELECT'][FEMALE] . '" title="' . $lang['GENDER_SELECT'][FEMALE] . '" border="0" />';
+            break;
+        default:
+            $user_gender = '<img src="' . $images['icon_nogender'] . '" alt="' . $lang['GENDER_SELECT'][NOGENDER] . '" title="' . $lang['GENDER_SELECT'][NOGENDER] . '" border="0" />';
+            break;
     }
 
     return $user_gender;
@@ -2071,23 +2071,23 @@ function gender_image($gender)
 
 function is_gold($type)
 {
-    global $lang, $tr_cfg;
+    global $lang, $bb_cfg;
 
-    if (!$tr_cfg['gold_silver_enabled']) {
+    if (!$bb_cfg['tracker']['gold_silver_enabled']) {
         $is_gold = '';
         return $is_gold;
-    } else {
-        switch ($type) {
-            case TOR_TYPE_GOLD:
-                $is_gold = '<img src="styles/images/tor_gold.gif" width="16" height="15" title="' . $lang['GOLD'] . '" />&nbsp;';
-                break;
-            case TOR_TYPE_SILVER:
-                $is_gold = '<img src="styles/images/tor_silver.gif" width="16" height="15" title="' . $lang['SILVER'] . '" />&nbsp;';
-                break;
-            default:
-                $is_gold = '';
-                break;
-        }
+    }
+
+    switch ($type) {
+        case TOR_TYPE_GOLD:
+            $is_gold = '<img src="styles/images/tor_gold.gif" width="16" height="15" title="' . $lang['GOLD'] . '" />&nbsp;';
+            break;
+        case TOR_TYPE_SILVER:
+            $is_gold = '<img src="styles/images/tor_silver.gif" width="16" height="15" title="' . $lang['SILVER'] . '" />&nbsp;';
+            break;
+        default:
+            $is_gold = '';
+            break;
     }
 
     return $is_gold;
@@ -2185,4 +2185,410 @@ function bb_captcha($mode, $callback = '')
 function clean_tor_dirname($dirname)
 {
     return str_replace(array('[', ']', '<', '>', "'"), array('&#91;', '&#93;', '&lt;', '&gt;', '&#039;'), $dirname);
+}
+
+/**
+ * @param string $output
+ */
+function bb_exit($output = '')
+{
+    if ($output) {
+        echo $output;
+    }
+    exit;
+}
+
+/**
+ * @param $var
+ * @param string $title
+ * @param bool $print
+ * @return string
+ */
+function prn_r($var, $title = '', $print = true)
+{
+    $r = '<pre>' . ($title ? "<b>$title</b>\n\n" : '') . htmlspecialchars(print_r($var, true)) . '</pre>';
+    if ($print) {
+        echo $r;
+    }
+    return $r;
+}
+
+/**
+ * @param $txt
+ * @param bool $double_encode
+ * @param int $quote_style
+ * @param string $charset
+ * @return string
+ */
+function htmlCHR($txt, $double_encode = false, $quote_style = ENT_QUOTES, $charset = 'UTF-8')
+{
+    return (string)htmlspecialchars($txt, $quote_style, $charset, $double_encode);
+}
+
+/**
+ * @param $txt
+ * @param int $quote_style
+ * @param string $charset
+ * @return string
+ */
+function html_ent_decode($txt, $quote_style = ENT_QUOTES, $charset = 'UTF-8')
+{
+    return (string)html_entity_decode($txt, $quote_style, $charset);
+}
+
+/**
+ * @param string $path
+ * @return string
+ */
+function make_url($path = '')
+{
+    return FULL_URL . preg_replace('#^\/?(.*?)\/?$#', '\1', $path);
+}
+
+function send_no_cache_headers()
+{
+    header('Expires: Mon, 26 Jul 1997 05:00:00 GMT');
+    header('Last-Modified: ' . gmdate('D, d M Y H:i:s') . ' GMT');
+    header('Cache-Control: no-store, no-cache, must-revalidate');
+    header('Cache-Control: post-check=0, pre-check=0', false);
+    header('Pragma: no-cache');
+}
+
+/**
+ * @param $name
+ * @param $val
+ * @param int $lifetime
+ * @param bool $httponly
+ * @return bool
+ */
+function bb_setcookie($name, $val, $lifetime = COOKIE_PERSIST, $httponly = false)
+{
+    global $bb_cfg;
+    return setcookie($name, $val, $lifetime, $bb_cfg['script_path'], $bb_cfg['cookie_domain'], $bb_cfg['cookie_secure'], $httponly);
+}
+
+/**
+ * @param $contents
+ * @return string
+ */
+function send_page($contents)
+{
+    return compress_output($contents);
+}
+
+/**
+ * @param $contents
+ * @return string
+ */
+function compress_output($contents)
+{
+    global $bb_cfg;
+
+    if ($bb_cfg['gzip_compress'] && GZIP_OUTPUT_ALLOWED && !defined('NO_GZIP')) {
+        if (UA_GZIP_SUPPORTED && strlen($contents) > 2000) {
+            header('Content-Encoding: gzip');
+            $contents = gzencode($contents, 1);
+        }
+    }
+
+    return $contents;
+}
+
+/**
+ * @return bool
+ */
+function sql_dbg_enabled()
+{
+    return (SQL_DEBUG && DBG_USER && !empty($_COOKIE['sql_log']));
+}
+
+/**
+ * @param $sql
+ * @param bool $esc_html
+ * @return mixed|string
+ */
+function short_query($sql, $esc_html = false)
+{
+    $max_len = 100;
+    $sql = str_compact($sql);
+
+    if (!empty($_COOKIE['sql_log_full'])) {
+        if (mb_strlen($sql, 'UTF-8') > $max_len) {
+            $sql = mb_substr($sql, 0, 50) . ' [...cut...] ' . mb_substr($sql, -50);
+        }
+    }
+
+    return $esc_html ? htmlCHR($sql, true) : $sql;
+}
+
+/**
+ * @return float|int
+ */
+function utime()
+{
+    return array_sum(explode(' ', microtime()));
+}
+
+/**
+ * @param $msg
+ * @param $file_name
+ * @return bool|int
+ */
+function bb_log($msg, $file_name)
+{
+    if (is_array($msg)) {
+        $msg = implode(LOG_LF, $msg);
+    }
+    $file_name .= LOG_EXT ? '.' . LOG_EXT : '';
+    return file_write($msg, LOG_DIR . '/' . $file_name);
+}
+
+/**
+ * @param $str
+ * @param $file
+ * @param int $max_size
+ * @param bool $lock
+ * @param bool $replace_content
+ * @return bool|int
+ */
+function file_write($str, $file, $max_size = LOG_MAX_SIZE, $lock = true, $replace_content = false)
+{
+    $bytes_written = false;
+
+    if ($max_size && file_exists($file) && filesize($file) >= $max_size) {
+        $old_name = $file;
+        $ext = '';
+        if (preg_match('#^(.+)(\.[^\\/]+)$#', $file, $matches)) {
+            $old_name = $matches[1];
+            $ext = $matches[2];
+        }
+        $new_name = $old_name . '_[old]_' . date('Y-m-d_H-i-s_') . getmypid() . $ext;
+        clearstatcache();
+        if (!file_exists($new_name)) {
+            rename($file, $new_name);
+        }
+    }
+    if (!$fp = fopen($file, 'ab')) {
+        if ($dir_created = bb_mkdir(dirname($file))) {
+            $fp = fopen($file, 'ab');
+        }
+    }
+    if ($fp) {
+        if ($lock) {
+            flock($fp, LOCK_EX);
+        }
+        if ($replace_content) {
+            ftruncate($fp, 0);
+            fseek($fp, 0, SEEK_SET);
+        }
+        $bytes_written = fwrite($fp, $str);
+        fclose($fp);
+    }
+
+    return $bytes_written;
+}
+
+/**
+ * @param $path
+ * @param int $mode
+ * @return bool
+ */
+function bb_mkdir($path, $mode = 0777)
+{
+    $old_um = umask(0);
+    $dir = mkdir_rec($path, $mode);
+    umask($old_um);
+    return $dir;
+}
+
+/**
+ * @param $path
+ * @param $mode
+ * @return bool
+ */
+function mkdir_rec($path, $mode)
+{
+    if (is_dir($path)) {
+        return ($path !== '.' && $path !== '..') ? is_writable($path) : false;
+    }
+
+    return mkdir_rec(dirname($path), $mode) ? @mkdir($path, $mode) : false;
+}
+
+/**
+ * @param $id
+ * @param $length
+ * @return bool
+ */
+function verify_id($id, $length)
+{
+    return (is_string($id) && preg_match('#^[a-zA-Z0-9]{' . $length . '}$#', $id));
+}
+
+/**
+ * @param $fname
+ * @return mixed
+ */
+function clean_filename($fname)
+{
+    static $s = array('\\', '/', ':', '*', '?', '"', '<', '>', '|', ' ');
+    return str_replace($s, '_', str_compact($fname));
+}
+
+/**
+ * Декодирование оригинального IP
+ * @param $ip
+ * @return string
+ */
+function encode_ip($ip)
+{
+    return Longman\IPTools\Ip::ip2long($ip);
+}
+
+/**
+ * Восстановление декодированного IP
+ * @param $ip
+ * @return string
+ */
+function decode_ip($ip)
+{
+    return Longman\IPTools\Ip::long2ip($ip);
+}
+
+/**
+ * Проверка IP на валидность
+ *
+ * @param $ip
+ * @return bool
+ */
+function verify_ip($ip)
+{
+    return Longman\IPTools\Ip::isValid($ip);
+}
+
+/**
+ * @param $str
+ * @return mixed
+ */
+function str_compact($str)
+{
+    return preg_replace('#\s+#u', ' ', trim($str));
+}
+
+/**
+ * @param int $len
+ * @return bool|string
+ */
+function make_rand_str($len = 10)
+{
+    $str = '';
+    while (strlen($str) < $len) {
+        $str .= str_shuffle(preg_replace('#[^0-9a-zA-Z]#', '', password_hash(uniqid(mt_rand(), true), PASSWORD_BCRYPT)));
+    }
+    return substr($str, 0, $len);
+}
+
+/**
+ * @param $var
+ * @param $fn
+ * @param bool $one_dimensional
+ * @param bool $array_only
+ */
+function array_deep(&$var, $fn, $one_dimensional = false, $array_only = false)
+{
+    if (is_array($var)) {
+        foreach ($var as $k => $v) {
+            if (is_array($v)) {
+                if ($one_dimensional) {
+                    unset($var[$k]);
+                } elseif ($array_only) {
+                    $var[$k] = $fn($v);
+                } else {
+                    array_deep($var[$k], $fn);
+                }
+            } elseif (!$array_only) {
+                $var[$k] = $fn($v);
+            }
+        }
+    } elseif (!$array_only) {
+        $var = $fn($var);
+    }
+}
+
+/**
+ * @param $path
+ * @return string
+ */
+function hide_bb_path($path)
+{
+    return ltrim(str_replace(BB_PATH, '', $path), '/\\');
+}
+
+/**
+ * @param $param
+ * @return int|string
+ */
+function sys($param)
+{
+    switch ($param) {
+        case 'la':
+            return function_exists('sys_getloadavg') ? implode(' ', sys_getloadavg()) : 0;
+            break;
+        case 'mem':
+            return function_exists('memory_get_usage') ? memory_get_usage() : 0;
+            break;
+        case 'mem_peak':
+            return function_exists('memory_get_peak_usage') ? memory_get_peak_usage() : 0;
+            break;
+        default:
+            trigger_error("invalid param: $param", E_USER_ERROR);
+    }
+}
+
+/**
+ * @param $str
+ * @param $file
+ * @return bool|int
+ */
+function dbg_log($str, $file)
+{
+    $dir = LOG_DIR . (defined('IN_TRACKER') ? '/dbg_tr/' : '/dbg_bb/') . date('m-d_H') . '/';
+    return file_write($str, $dir . $file, false, false);
+}
+
+/**
+ * Gets the value of an environment variable. Supports boolean, empty and null.
+ *
+ * @param  string $key
+ * @param  mixed $default
+ * @return mixed
+ */
+function env($key, $default = null)
+{
+    $value = getenv($key);
+    if (!$value) return value($default);
+    switch (strtolower($value)) {
+        case 'true':
+        case '(true)':
+            return true;
+        case 'false':
+        case '(false)':
+            return false;
+        case '(null)':
+            return null;
+        case '(empty)':
+            return '';
+    }
+    return $value;
+}
+
+/**
+ * Return the default value of the given value.
+ *
+ * @param  mixed $value
+ * @return mixed
+ */
+function value($value)
+{
+    return $value instanceof Closure ? $value() : $value;
 }
