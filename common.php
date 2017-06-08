@@ -109,6 +109,15 @@ define('GUEST_UID', -1);
 define('BOT_UID', -746);
 
 /**
+ * Whoops error handler
+ */
+if (DBG_USER) {
+    $whoops = new \Whoops\Run;
+    $whoops->pushHandler(new \Whoops\Handler\PrettyPageHandler);
+    $whoops->register();
+}
+
+/**
  * Database
  */
 $DBS = new TorrentPier\Legacy\Dbs($bb_cfg);

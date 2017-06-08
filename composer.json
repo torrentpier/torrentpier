@@ -37,6 +37,7 @@
   "require": {
     "php": "^5.5 || ^7.0",
     "bugsnag/bugsnag": "^3.0",
+    "filp/whoops": "^2.1",
     "gigablah/sphinxphp": "^2.0",
     "google/recaptcha": "^1.0",
     "longman/ip-tools": "^1.2",
