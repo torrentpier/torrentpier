@@ -1,0 +1,892 @@
+/*
+ * MIT License
+ *
+ * Copyright (c) 2005-2017 TorrentPier
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in all
+ * copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ * SOFTWARE.
+ */
+
+#infobox-wrap {
+  width: 740px;
+}
+
+#infobox-body {
+  background: #FFFFFF;
+  color: #000000;
+  padding: 1em;
+  height: 300px;
+  overflow: auto;
+  border: 1px inset #000000;
+}
+
+#infobox-body p {
+  margin-top: 1em;
+  margin-bottom: 1em;
+}
+
+#gr-mem-list ul {
+  margin: 2px 4px;
+}
+
+#gr-mem-list li {
+  margin-bottom: 2px;
+}
+
+a.selfMod, a.selfMod:visited {
+  color: #0000FF;
+}
+
+.view-message {
+  border: 1px #A5AFB4 solid;
+  padding: 4px;
+  margin: 6px;
+  overflow: auto;
+}
+
+.birthday {
+  margin: 3px 0;
+  padding: 2px 4px;
+  max-height: 200px;
+  overflow: auto;
+}
+
+td.topic_id {
+  cursor: pointer;
+}
+
+table.mod_ip {
+  background: #F9F9F9;
+  border: 1px solid #A5AFB4;
+  border-collapse: separate;
+}
+
+table.mod_ip td {
+  padding: 2px 5px;
+  white-space: normal;
+  font-size: 11px;
+}
+
+table.mod_ip div {
+  max-height: 150px;
+  overflow: auto;
+}
+
+/* ---------------------------------- *
+     Forums on home page
+ * ---------------------------------- */
+#forums_list_wrap {
+  margin-top: 4px;
+  padding-right: 2px;
+}
+
+#forums_top_links {
+  clear: both;
+}
+
+#forums_wrap {
+  clear: both;
+  padding-top: 1px;
+}
+
+.cat_title {
+  padding: 3px 8px 5px;
+  letter-spacing: 1px;
+  text-indent: 0.6em;
+  background: #DEE3E7;
+}
+
+.cat_title a {
+  text-decoration: none;
+  color: #333333 !important;
+}
+
+table.forums {
+  width: 100%;
+}
+
+.forums th {
+  padding: 0 !important;
+  font-size: 10px;
+  font-weight: normal;
+  color: #3C3C3C;
+}
+
+.forums td {
+  padding: 2px 4px 3px;
+  font-size: 11px;
+}
+
+.forums em {
+  color: #5E5E5E;
+  font-style: italic;
+}
+
+.forumlink {
+  font-size: 13px;
+  font-weight: bold;
+}
+
+.forumlink a {
+  text-decoration: none;
+}
+
+.forums .forumlink {
+  margin-top: 1px;
+}
+
+.forum_desc {
+  margin-top: 2px;
+  color: #333333;
+  font-size: 11px;
+  line-height: 110%;
+}
+
+.subforums {
+  margin-top: 2px;
+  padding-left: 0.5em;
+}
+
+.subforums em {
+  display: none;
+}
+
+.subforums+.moderators {
+  margin-top: 0;
+}
+
+.dot-sf {
+  color: #417998 !important;
+  font-size: 11px;
+  margin-right: 4px;
+}
+
+.new .dot-sf {
+  color: #CA4200 !important;
+}
+
+.sf_title {
+  white-space: normal;
+}
+
+.sf_icon {
+  margin-right: 1px;
+}
+
+.sf_separator {}
+
+.sf_title a {
+  text-decoration: none;
+}
+
+.moderators {
+  margin-top: 2px;
+  font-size: 11px;
+  line-height: 110%;
+}
+
+.moderators a, .moderators a:visited {
+  color: #333333;
+  font-size: 10px;
+  text-decoration: none;
+}
+
+.f_last_post {
+  text-align: center;
+}
+
+.last_topic {
+  margin-top: 1px;
+  white-space: nowrap;
+}
+
+.last_topic a {
+  text-decoration: none;
+}
+
+.last_post_time {
+  margin-top: 2px;
+  font-size: 10px;
+  white-space: nowrap;
+}
+
+.last_author {
+  padding-left: 3px;
+}
+
+.f_stat_inline {
+  margin-top: 1px;
+  white-space: nowrap;
+}
+
+.f_stat_topics {}
+
+.f_stat_posts {
+  padding-left: 3px;
+}
+
+.f_icon {
+  width: 46px;
+  padding: 6px 0 !important;
+}
+
+.f_titles {
+  width: auto;
+}
+
+.f_topics {
+  width: 40px;
+  text-align: center;
+}
+
+.f_posts {
+  width: 50px;
+  text-align: center;
+}
+
+.f_last_post {
+  width: 230px;
+}
+
+.f_stat_inline {
+  display: block;
+}
+
+table.forums {
+  border-collapse: collapse;
+}
+
+.cat_title {
+  border: 1px solid #C3CBD1;
+}
+
+.f_tbl_wrap, #board_stats_wrap {
+  border: solid #C3CBD1;
+  border-width: 0 1px;
+}
+
+table.forums th {
+  border-bottom: 1px solid #C3CBD1;
+}
+
+.forums td.row1 {
+  border: solid #C3CBD1;
+  border-width: 0 1px 1px 0;
+}
+
+.forums td.row2 {
+  border: solid #C3CBD1;
+  border-width: 0 1px 1px 0;
+}
+
+td.f_titles {
+  border-right-color: #C3CBD1 !important;
+}
+
+td.last_td {
+  border-right-width: 0 !important;
+}
+
+.cat_footer {
+  height: 0;
+  margin-top: -1px;
+  border-top: 1px solid #C3CBD1;
+  font-size: 0;
+  line-height: 0;
+}
+
+.cat_separator {
+  height: 10px;
+  font-size: 0;
+  line-height: 0;
+}
+
+#mark_all_forums_read {
+  margin: -10px 0 3px 0;
+}
+
+#online_time {
+  float: left;
+  font-style: italic;
+  color: #444444;
+}
+
+#online_explain {
+  float: right;
+}
+
+#online_userlist a {
+  white-space: nowrap;
+}
+
+#forums_top_nav {
+  display: none;
+}
+
+.f-map-wrap {
+  margin-top: -1px;
+  border: 1px solid #DEDEDE;
+}
+
+/* ---------------------------------- *
+     Forums on viewforum page
+ * ---------------------------------- */
+table.forum th {
+  white-space: nowrap;
+}
+
+td.topic_id {
+  padding: 4px 6px;
+}
+
+.spaceRow {
+  padding: 0 !important;
+  background: #D1D7DC;
+}
+
+td.topicSep {
+  padding: 2px 12px 3px;
+  font-weight: bold;
+  letter-spacing: 1px;
+  color: #333333;
+}
+
+.topicMoved {
+  font-weight: normal;
+  font-style: italic;
+}
+
+.topicAnnounce {
+  color: #DD6900;
+}
+
+.topicSticky {
+  color: #009900;
+}
+
+.topicPoll {
+  /* Topic Poll prefix */
+  font-weight: normal;
+  color: #006699;
+}
+
+.topicPG {
+  font-weight: normal;
+  white-space: nowrap;
+  font-size: 10px;
+}
+
+.iconDL {
+  border: 1px outset;
+  background: #EFEFEF;
+  padding: 0 3px 0 2px;
+  margin: 2px 1px 2px 0;
+}
+
+.topicAuthor, a.topicAuthor, a.topicAuthor:visited {
+  font-size: 11px;
+  color: #333333;
+  text-decoration: none;
+}
+
+.torSize {
+  font-size: 11px;
+  color: #333333;
+  text-decoration: none;
+}
+
+.hl-selected-topic {
+  background-color: #FAF0E6 !important;
+}
+
+.hl-selected-row, .hl-selected-row td {
+  background-color: #FAF0E6 !important;
+}
+
+/* ---------------------------------- *
+     Topics on viewtopic page
+ * ---------------------------------- */
+table.topic {
+  width: 100%;
+}
+
+.post_head {
+  padding: 0 6px;
+  font-size: 10px;
+}
+
+.post_wrap {
+  line-height: 18px;
+}
+
+.post_body {
+  margin: 5px 5px 8px;
+}
+
+/* The content of the posts */
+a.postLink {
+  text-decoration: none;
+}
+
+a.postLink:visited {
+  text-decoration: none;
+  color: #5493B4;
+}
+
+.posted_since {
+  color: #666666;
+  padding-left: 4px;
+}
+
+.signature {
+  clear: both;
+}
+
+.signature {
+  max-height: 100px;
+  overflow: hidden;
+}
+
+.signature, .signature * {
+  font-size: 10px !important;
+  color: #5E5E5E !important;
+  text-decoration: none !important;
+  background: transparent !important;
+  border: 0 none !important;
+  padding: 0 !important;
+  margin: 1px 0 !important;
+}
+
+.signature .c-head, .signature .q-head {
+  display: none !important;
+}
+
+.signature .c-wrap, .signature .c-body, .signature .q-wrap, .signature .q {
+  display: inline !important;
+}
+
+.signature a {
+  text-decoration: underline !important;
+}
+
+.signature img {
+  max-width: 600px;
+}
+
+.last_edited {
+  font-size: 10px;
+  color: #5E5E5E;
+}
+
+.poster_info p {
+  margin: 2px 0;
+  color: #444444;
+}
+
+.poster_info .nick {
+  margin: 0 0 4px;
+  color: #333333;
+  line-height: 110%;
+}
+
+.poster_info .avatar {
+  margin: 5px 0 4px;
+  max-width: 100px;
+  max-height: 100px;
+  overflow: hidden;
+}
+
+.poster_info .birthday {
+  margin: 5px 0;
+  text-align: center !important;
+}
+
+.avatar img {
+  display: block;
+}
+
+.poster_info em {
+  font-style: normal;
+  color: #000000;
+}
+
+table.topic, .topic .td1, .topic .td2, .topic .td3, .post_head, .post_btn_2 {
+  border: solid #C3CBD1;
+}
+
+.topic .td1 {
+  border-width: 1px 1px 0 0;
+  border-right-color: #B7C0C5;
+}
+
+.topic .td2 {
+  border-width: 1px 0 0 0;
+  width: 100%;
+}
+
+.topic .td3 {
+  border-width: 0 1px 0 0;
+  border-right-color: #B7C0C5;
+  height: 100%;
+}
+
+.post_head {
+  border-width: 0 0 1px 0;
+}
+
+.post_btn_2 {
+  border-width: 1px 0 0 0;
+}
+
+table.topic {
+  border-width: 0 1px 1px 1px;
+  border-color: #B7C0C5;
+}
+
+.poster_info {
+  padding: 4px;
+  vertical-align: top;
+  font-size: 10px;
+  line-height: 100%;
+}
+
+.poster_btn {
+  padding: 0;
+  vertical-align: bottom;
+  text-align: center;
+  white-space: nowrap;
+}
+
+.message {
+  padding: 0;
+  vertical-align: top;
+  width: 100%;
+}
+
+input.select_post {
+  margin-top: 0;
+  float: right;
+}
+
+input[type="checkbox"].select_post {
+  margin-top: 4px;
+}
+
+table.peers {
+  border-collapse: collapse;
+}
+
+table.peers th {
+  border: 1px #A5AFB4 solid;
+  background: #D1D7DC;
+  color: #333333;
+}
+
+table.peers td {
+  border: 1px #A5AFB4 solid;
+  padding: 4px;
+}
+
+#last_seed_info {
+  border: 1px #A5AFB4 solid;
+}
+
+.dl_list {}
+
+.dl_list td {
+  text-align: center;
+}
+
+.dl_list img {
+  display: block;
+}
+
+#dl_counts td {
+  font-size: 12px;
+}
+
+#poll {
+  border: 1px solid #B7C0C5;
+  margin-bottom: -1px;
+}
+
+.quick_reply_box {
+  width: 800px;
+}
+
+.hl-selected-post {
+  background-color: #FFEFD5 !important;
+}
+
+/* ---------------------------------- *
+     Torrent status
+ * ---------------------------------- */
+.tor-status-td:hover {
+  background: #F8F8FF;
+}
+
+.tor-icon {
+  margin: 0 3px;
+}
+
+.tor-approved {
+  margin-left: 1px;
+  color: #008000;
+  font-weight: bold;
+}
+
+.tor-closed {
+  padding-left: 1px;
+  color: #FF4500;
+  font-weight: bold;
+}
+
+.tor-closed-cp {
+  color: #CE3800;
+  font-weight: bold;
+}
+
+.tor-consumed {
+  color: #D26900;
+  font-weight: bold;
+}
+
+.tor-dup {
+  padding-left: 1px;
+  color: #0000FF;
+  font-weight: bold;
+}
+
+.tor-need-edit {
+  color: #FF0000;
+  font-weight: bold;
+}
+
+.tor-no-desc {
+  padding-left: 1px;
+  color: #FF4500;
+  font-weight: bold;
+}
+
+.tor-not-approved {
+  color: #C71585;
+  font-weight: bold;
+}
+
+.tor-checking {
+  color: #2424FF;
+  font-weight: bold;
+}
+
+/* ---------------------------------- *
+     Attachments
+ * ---------------------------------- */
+table.attach {
+  width: 95%;
+  margin: 0 auto;
+  clear: both;
+  border-color: #A5AFB4;
+}
+
+.attach th, .attach td {
+  border-color: #A5AFB4;
+}
+
+.attach th {
+  padding: 3px;
+  text-align: center;
+  font-weight: bold;
+  background: #D1D7DC;
+}
+
+.attach td {
+  padding: 2px 4px;
+}
+
+.dl-link {
+  font-size: 13px;
+}
+
+fieldset.attach {
+  width: 95%;
+  margin: 14px auto;
+  padding: 2px;
+  clear: both;
+}
+
+.attach_link {
+  margin: 2px 12px 6px;
+}
+
+.attach_stats {
+  padding-left: 3px;
+}
+
+.attach_comment {
+  margin: 6px 12px;
+  padding: 1px 8px;
+  line-height: 110%;
+  color: #444444;
+  border-left: 2px solid #CC9933;
+}
+
+.attach .denied {
+  color: #800000;
+}
+
+#tor_blocked {
+  width: 95%;
+}
+
+#tor_blocked td {
+  background: #FAEBD7;
+  padding: 8px 12px;
+  color: #6E380F;
+}
+
+/* ---------------------------------- *
+     Search Results page
+ * ---------------------------------- */
+.opened {
+  color: #71869F;
+}
+
+/* ---------------------------------- *
+     Tracker
+ * ---------------------------------- */
+a.tr-dl, a.dl-link:link {
+  font-weight: bold;
+}
+
+a.dl-link {
+  font-size: 13px;
+  text-decoration: none;
+}
+
+a.tr-dl:visited, a.f-dl:visited, a.dl-link:visited {
+  color: #5493B4;
+  font-weight: normal;
+}
+
+.a-hash {
+  color: #000066 !important;
+  cursor: pointer;
+}
+
+.a-hash:hover {
+  color: #DD6900 !important;
+  text-decoration: underline !important;
+}
+
+.a-hash:active, .a-hash:focus {
+  color: #DD6900 !important;
+  text-decoration: underline !important;
+}
+
+.seed-leech {
+  padding-left: 1px;
+  padding-right: 0;
+}
+
+.tr_tm {
+  margin-top: 2px;
+  font-size: 10px;
+  color: #676767;
+}
+
+.ch {
+  font-style: italic;
+  color: #0080FF;
+}
+
+#fs-sel-cat option.cat-title {
+  font-weight: bold;
+  color: #005A88;
+  background: #F5F5F5;
+}
+
+tr.hl-tr:hover td {
+  background-color: #F8F8F8 !important;
+}
+
+#fs-nav-ul .b {
+  font-weight: bold;
+}
+
+#fs-nav-ul li, #fs-nav-close {
+  cursor: pointer;
+}
+
+#fs-nav-ul span.f:hover, #fs-nav-close:hover {
+  color: blue;
+  background: #DEE2E4;
+}
+
+#fs-nav-list {
+  border: 3px double #9AA7AD;
+  background: #EFEFEF;
+  padding: 8px;
+  max-height: 500px;
+  overflow: auto;
+}
+
+#fs-sel-cat {
+  width: 260px;
+}
+
+#fs-sel-cat option.cat-title {
+  font-weight: bold;
+  color: #005A88;
+  background: #F5F5F5;
+}
+
+.dlWill {
+  color: #0066CC;
+}
+
+.dlDown, .leech, .leechmed, .leechsmall {
+  color: #800000 !important;
+}
+
+.dlComplete, .seed, .seedmed, .seedsmall {
+  color: #006600 !important;
+}
+
+.dlCancel {
+  color: #666666 !important;
+}
+
+a.dlWill, a.dlWill:visited {
+  color: #0066CC !important;
+  text-decoration: none;
+}
+
+a.dlDown, a.dlDown:visited {
+  color: #800000 !important;
+  text-decoration: none;
+}
+
+a.dlComplete, a.dlComplete:visited {
+  color: #006600 !important;
+  text-decoration: none;
+}
+
+a.dlCancel, a.dlCancel:visited {
+  color: #666666 !important;
+  text-decoration: none;
+}

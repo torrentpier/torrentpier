@@ -1,0 +1,229 @@
+/*
+ * MIT License
+ *
+ * Copyright (c) 2005-2017 TorrentPier
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in all
+ * copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ * SOFTWARE.
+ */
+
+.Panels {
+  z-index: 200;
+  top: 50%;
+  left: 50%;
+  background-attachment: fixed, scroll;
+  background: url(../images/aerobg.png), -moz-linear-gradient(top, rgba(200, 200, 200, 0.4) 0%, rgba(255, 255, 255, 1) 100%);
+  background: url(../images/aerobg.png), -webkit-gradient(linear, left top, left bottom, color-stop(0%, rgba(200, 200, 200, 0.4)), color-stop(100%, rgba(255, 255, 255, 1)));
+  background: url(../images/aerobg.png), -webkit-linear-gradient(top, rgba(200, 200, 200, 0.4) 0%, rgba(255, 255, 255, 1) 100%);
+  background: url(../images/aerobg.png), -o-linear-gradient(top, rgba(200, 200, 200, 0.4) 0%, rgba(255, 255, 255, 1) 100%);
+  background: url(../images/aerobg.png), -ms-linear-gradient(top, rgba(200, 200, 200, 0.4) 0%, rgba(255, 255, 255, 1) 100%);
+  filter: progid: DXImageTransform.Microsoft.gradient(startColorstr='#66c8c8c8', endColorstr='#ffffff', GradientType=0);
+  background: url(../images/aerobg.png), linear-gradient(top, rgba(200, 200, 200, 0.4) 0%, rgba(255, 255, 255, 1) 100%);
+  background-size: cover;
+  -moz-background-size: cover;
+  -webkit-background-size: cover;
+  border: 1px solid gray;
+  border-radius: 3px;
+  -moz-border-radius: 3px;
+  -webkit-border-radius: 3px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3), 0 0 1px #FFF inset;
+  -moz-box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3), 0 0 1px #FFF inset;
+  -webkit-box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3), 0 0 1px #FFF inset;
+  position: fixed;
+  max-width: 99%;
+  min-width: 100px;
+  min-height: 24px;
+  overflow: hidden;
+  margin: 1px;
+}
+
+.Panels.Minimized {
+  position: relative;
+  top: auto !important;
+  left: auto !important;
+  float: left;
+  max-width: 200px;
+  height: 24px !important;
+  margin: 0 !important;
+}
+
+.PanelsButton {
+  float: right;
+  overflow: hidden;
+  margin: 5px 5px 0 10px;
+}
+
+.PanelsClose {
+  color: #006699;
+  cursor: pointer;
+}
+
+.PanelsClose:hover {
+  color: #DD6900;
+  text-decoration: underline !important;
+}
+
+.PanelsTitle {
+  overflow: hidden;
+  white-space: nowrap;
+  max-height: 20px;
+  font-weight: 700;
+}
+
+.Panels.Minimized .PanelsTitle.Hidden {
+  display: block;
+}
+
+.PanelsTitle, .PanelsMenu {
+  padding: 5px 5px 0;
+}
+
+.Panels.Minimized .PanelsTitle, .Panels.Minimized .PanelsMenu {
+  cursor: inherit;
+}
+
+.PanelsContent, .PanelsFooter {
+  border-top: 1px dashed #A9A9A9;
+  clear: both;
+  margin: 5px 0 0;
+  padding: 5px;
+}
+
+#PanelsDock {
+  bottom: 0;
+  left: 0;
+  position: fixed;
+  padding: 0 0 0 5px;
+}
+
+#PanelsDockToggle {
+  border: 1px solid gray;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3), 0 0 1px #FFF inset;
+  -moz-box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3), 0 0 1px #FFF inset;
+  -webkit-box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3), 0 0 1px #FFF inset;
+  float: left;
+  border-radius: 0 3px 3px 0;
+  -moz-border-radius: 0 3px 3px 0;
+  -webkit-border-radius: 0 3px 3px 0;
+  margin: 1px 1px 1px 0;
+  padding: 4px 10px;
+}
+
+.Panels.Minimized .PanelsMenu, .Panels.Minimized .PanelsContent, .Panels.Minimized .PanelsFooter, .PanelsTitle.Hidden, .PanelsMenu.Hidden {
+  display: none;
+}
+
+span.button {
+  background-image: url(../images/def_button.png);
+}
+
+span.button:hover {
+  background-image: url(../images/def_button_light.png);
+}
+
+span.YTLink {
+  background-color: gray;
+  border: 1px solid #333333;
+  display: inline-block;
+  font-weight: bold;
+  padding: 2px 2px 2px 5px;
+  margin: 1px 2px -6px;
+  border-radius: 3px;
+  -moz-border-radius: 3px;
+  -webkit-border-radius: 3px;
+}
+
+span.YTLinkButton {
+  background-color: #008500;
+  border: 1px solid #333333;
+  color: white;
+  display: inline-block;
+  float: right;
+  margin: -3px -3px -3px 4px;
+  padding: 2px 4px;
+  -webkit-border-top-right-radius: 3px;
+  -webkit-border-bottom-right-radius: 3px;
+  -moz-border-radius-topright: 3px;
+  -moz-border-radius-bottomright: 3px;
+  border-top-right-radius: 3px;
+  border-bottom-right-radius: 3px;
+  cursor: url(../images/link_help.cur), pointer;
+}
+
+span.YTLink a.postLink {
+  color: white;
+  float: left;
+}
+
+span#autocomplete {
+  cursor: pointer;
+  color: #006699;
+  font: 12px Arial, sans-serif;
+}
+
+div#autocomplete_popup {
+  position: fixed;
+  z-index: 999;
+  width: 300px;
+  height: 100px;
+  background: #FFFFFF;
+  text-align: center;
+  display: none;
+  border: 1px solid #B7C0C5;
+}
+
+div#autocomplete_popup div.relative {
+  position: relative;
+  width: 300px;
+  height: 100px;
+}
+
+div#autocomplete_popup div.title {
+  background: #1C508C;
+  color: #D5E4EC;
+  font-size: 11px;
+  font-weight: bold;
+  padding: 6px 8px 7px;
+}
+
+div#autocomplete_popup div.close {
+  position: absolute;
+  right: 7px;
+  cursor: pointer;
+  top: 7px;
+  color: red;
+  font-weight: bold;
+  width: 12px;
+  height: 12px;
+  background: url("../../../images/bad.gif") transparent no-repeat;
+}
+
+div#autocomplete_popup input {
+  font-size: 16px;
+  margin: 20px 0 0;
+  width: 83px;
+}
+
+div#autocomplete_popup span.regenerate {
+  width: 16px;
+  height: 16px;
+  margin: 24px 0 0 8px;
+  background: url("../../../images/pic_loading.gif") transparent no-repeat;
+  cursor: pointer;
+  display: inline-block;
+}

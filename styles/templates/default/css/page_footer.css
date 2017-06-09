@@ -22,18 +22,34 @@
  * SOFTWARE.
  */
 
-@import "ajax.css";
-@import "alert.css";
-@import "globals.css";
-@import "images.css";
-@import "initial.css";
-@import "main_content.css";
-@import "menus.css";
-@import "misc.css";
-@import "page_content.css";
-@import "page_footer.css";
-@import "page_header.css";
-@import "shortcuts.css";
-@import "tablesorter.css";
-@import "top.css";
-@import "youtube.css";
+.bottom_info {
+  font-size: 11px;
+}
+
+.copyright {
+  font-size: 10px;
+  color: #444444;
+  letter-spacing: -1px;
+}
+
+.copyright a {
+  text-decoration: none;
+}
+
+#timezone {
+  float: right;
+  text-align: right;
+  white-space: nowrap;
+  font-size: 10px;
+  line-height: 110%;
+  color: #333333;
+}
+
+.tz_time {
+  font-family: "Courier New", Courier, monospace;
+  font-size: 11px;
+}
+
+#f_icons_legend {
+  margin: 4px auto;
+}

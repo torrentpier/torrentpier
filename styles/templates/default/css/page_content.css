@@ -1,0 +1,133 @@
+/*
+ * MIT License
+ *
+ * Copyright (c) 2005-2017 TorrentPier
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in all
+ * copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ * SOFTWARE.
+ */
+
+/* ---------------------------------- *
+     Sidebar 1
+ * ---------------------------------- */
+#sidebar1 {
+  margin-top: -8px;
+  width: 210px;
+  padding: 0 6px 0 3px;
+  vertical-align: top;
+}
+
+#sidebar1 h3 {
+  padding: 0 0 4px 0;
+  margin: 8px 0 2px 0;
+  color: #333333;
+  text-indent: 0.5em;
+  background: transparent url(../images/hr200_ltr_gradient.jpg) no-repeat left bottom;
+}
+
+#sidebar1 h3 a {
+  color: #333333;
+}
+
+#sidebar1 h5 {
+  padding: 2px 4px 5px;
+}
+
+#sidebar1 ul {
+  margin: 6px 0 0 10px;
+}
+
+#sidebar1 li {
+  margin-bottom: 2px;
+  margin-left: 14px;
+}
+
+#sidebar1 a {
+  text-decoration: none;
+  color: #005A88;
+}
+
+/* ---------------------------------- *
+     Sidebar 2
+ * ---------------------------------- */
+#sidebar2 {
+  margin-top: -8px;
+  width: 210px;
+  padding: 0 6px 0 3px;
+  vertical-align: top;
+}
+
+#sidebar2 h3 {
+  padding: 0 0 4px 0;
+  margin: 0 0 2px 0;
+  color: #333333;
+  text-indent: 0.5em;
+  background: transparent url(../images/hr200_ltr_gradient.jpg) no-repeat left bottom;
+}
+
+#sidebar2 h3 a {
+  color: #333333;
+}
+
+#sidebar2 h5 {
+  padding: 2px 4px 5px;
+}
+
+#sidebar2 ul {
+  margin: 6px 0 0 10px;
+}
+
+#sidebar2 li {
+  margin-bottom: 2px;
+  margin-left: 14px;
+}
+
+#sidebar2 a {
+  text-decoration: none;
+  color: #005A88;
+}
+
+/* User ratio */
+#user_ratio {
+  padding: 1px 6px 0 0;
+  font-size: 11px;
+}
+
+#user_ratio td {
+  padding: 1px 6px 1px 6px;
+  font-size: 11px;
+}
+
+#tr_main_cats {}
+
+/* Main tracker categories list */
+#tr_main_cats ul {
+  list-style-image: url(../images/arrow1.gif);
+}
+
+#tr_main_cats li {
+  margin-bottom: 3px;
+  margin-left: 11px;
+  font-size: 11px;
+  font-weight: bold;
+  line-height: 110%;
+}
+
+#author-rel a {
+  color: #800000;
+}

@@ -22,18 +22,13 @@
  * SOFTWARE.
  */
 
-@import "ajax.css";
-@import "alert.css";
-@import "globals.css";
-@import "images.css";
-@import "initial.css";
-@import "main_content.css";
-@import "menus.css";
-@import "misc.css";
-@import "page_content.css";
-@import "page_footer.css";
-@import "page_header.css";
-@import "shortcuts.css";
-@import "tablesorter.css";
-@import "top.css";
-@import "youtube.css";
+/* Clean out MARGIN and PADDING */
+html, body, form, fieldset, h3, h4, h5, h6, p, pre, blockquote, ul, ol, dl, li, dd {
+  margin: 0;
+  padding: 0;
+}
+
+/* Add LEFT MARGIN */
+blockquote, ul, ol, li, dd {
+  margin-left: 1em;
+}
