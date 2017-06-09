@@ -1,0 +1,182 @@
+/*
+ * MIT License
+ *
+ * Copyright (c) 2005-2017 TorrentPier
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in all
+ * copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ * SOFTWARE.
+ */
+
+/* ---------------------------------- *
+     TopMenu, Quick Login, PM Info, Logout
+ * ---------------------------------- */
+.topmenu {
+  background: #eff0f3;
+  border: 1px solid #CFD4D8;
+  margin: 3px 4px 0;
+  padding: 0 3px;
+  overflow: hidden;
+}
+
+.topmenu a:link, .topmenu a:visited {
+  text-decoration: none;
+}
+
+.topmenu td {
+  padding: 4px;
+  font-size: 11px;
+  white-space: nowrap;
+}
+
+.new-pm {
+  background: #FFD9B2 !important;
+  border-top-color: #FFD9B2 !important;
+  border-bottom-color: #FFAA51 !important;
+}
+
+.new-pm-link {
+  color: #993300 !important;
+  font-weight: bold;
+}
+
+.new-pm-link:hover {
+  color: #591D00 !important;
+}
+
+/* ---------------------------------- *
+     Logo
+ * ---------------------------------- */
+#logo {
+  padding: 2px 4px;
+  min-height: 75px;
+}
+
+#logo h1 {
+  margin: 0 300px 0 0;
+  padding-top: 6px;
+  font-size: 42px;
+  font-variant: small-caps;
+}
+
+#logo h6 {
+  margin: 0 300px 0 0;
+  padding-top: 1px;
+  padding-bottom: 3px;
+  font-size: 14px;
+  font-variant: small-caps;
+}
+
+#logo img {
+  padding: 7px 7px 6px 5px;
+  width: 460px;
+}
+
+/* ---------------------------------- *
+     Main navigation
+ * ---------------------------------- */
+#main-nav {
+  padding: 4px 10px;
+  margin: 0;
+  border: solid #C3CBD1;
+  border-width: 0 0 1px 0;
+  background: #eff0f3;
+}
+
+#main-nav b {
+  padding: 0 4px 0 1px;
+}
+
+#main-nav a {
+  color: #444;
+  text-decoration: none;
+}
+
+#main-nav a:hover, #main-nav a:active {
+  text-decoration: none !important;
+  color: #000000;
+}
+
+/* ---------------------------------- *
+     Latest News
+ * ---------------------------------- */
+#latest_news {
+  margin-bottom: 8px;
+}
+
+#latest_news table {
+  border-collapse: collapse;
+}
+
+#latest_news h3 {
+  padding: 0 0 3px 0;
+  color: #333333;
+}
+
+#latest_news td {
+  vertical-align: top;
+}
+
+.news_date {
+  float: right;
+  padding: 1px 8px 1px;
+  white-space: nowrap;
+  font-family: "Courier New", Courier, monospace;
+  color: #333333;
+  background: #F2F2F2;
+  border: 1px solid #B4B4B4;
+}
+
+.news_title {
+  padding: 3px 8px 2px;
+  margin-bottom: 2px;
+  background: transparent url(../images/hr400_ltr_gradient.jpg) no-repeat left top;
+}
+
+#latest_news a {
+  text-decoration: none;
+  color: #000000;
+}
+
+#latest_news .new a {
+  color: #A52A2A;
+  font-weight: bold;
+}
+
+/* ---------------------------------- *
+    Search input
+ * ---------------------------------- */
+#search-text {
+  background: white;
+  border: 1px solid silver;
+  padding: 1px;
+  width: 300px;
+}
+
+@media screen and (max-width: 1200px) {
+  #search-text {
+    width: 180px;
+  }
+}
+
+#search-text:hover {
+  border: 1px solid #aaaaaa;
+}
+
+#search-text:focus {
+  border: 1px solid #aaaaaa;
+}

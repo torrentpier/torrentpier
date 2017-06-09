@@ -1,0 +1,329 @@
+/*
+ * MIT License
+ *
+ * Copyright (c) 2005-2017 TorrentPier
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in all
+ * copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ * SOFTWARE.
+ */
+
+.spacer_0, .spacer_2, .spacer_4, .spacer_6, .spacer_8, .spacer_10, .spacer_12 {
+  font-size: 0;
+  line-height: 0;
+}
+
+.spacer_0 {
+  height: 0;
+}
+
+.spacer_2 {
+  height: 2px;
+}
+
+.spacer_4 {
+  height: 4px;
+}
+
+.spacer_6 {
+  height: 6px;
+}
+
+.spacer_8 {
+  height: 8px;
+}
+
+.spacer_10 {
+  height: 10px;
+}
+
+.spacer_12 {
+  height: 12px;
+}
+
+.pad_0, .pad_0 td, td.pad_0 {
+  padding: 0;
+}
+
+.pad_2, .pad_2 td, td.pad_2 {
+  padding: 2px;
+}
+
+.pad_4, .pad_4 td, td.pad_4 {
+  padding: 4px;
+}
+
+.pad_6, .pad_6 td, td.pad_6 {
+  padding: 6px;
+}
+
+.pad_8, .pad_8 td, td.pad_8 {
+  padding: 8px;
+}
+
+.pad_10, .pad_10 td, td.pad_10 {
+  padding: 10px;
+}
+
+.pad_12, .pad_12 td, td.pad_12 {
+  padding: 12px;
+}
+
+.pad_14, .pad_14 td, td.pad_14 {
+  padding: 14px;
+}
+
+.pad_16, .pad_16 td, td.pad_16 {
+  padding: 16px;
+}
+
+.mrg_0 {
+  margin: 0 !important;
+}
+
+.mrg_2 {
+  margin: 2px !important;
+}
+
+.mrg_4 {
+  margin: 4px !important;
+}
+
+.mrg_6 {
+  margin: 6px !important;
+}
+
+.mrg_8 {
+  margin: 8px !important;
+}
+
+.mrg_10 {
+  margin: 10px !important;
+}
+
+.mrg_12 {
+  margin: 12px !important;
+}
+
+.mrg_14 {
+  margin: 14px !important;
+}
+
+.mrg_16 {
+  margin: 16px !important;
+}
+
+.lh_100 {
+  line-height: 100%;
+}
+
+.lh_110 {
+  line-height: 110%;
+}
+
+.lh_120 {
+  line-height: 120%;
+}
+
+.lh_150 {
+  line-height: 150%;
+}
+
+.wAuto {
+  width: auto !important;
+}
+
+.w50 {
+  width: 50% !important;
+}
+
+.w60 {
+  width: 60% !important;
+}
+
+.w70 {
+  width: 70% !important;
+}
+
+.w80 {
+  width: 80% !important;
+}
+
+.w85 {
+  width: 85% !important;
+}
+
+.w90 {
+  width: 90% !important;
+}
+
+.w95 {
+  width: 95% !important;
+}
+
+.w100 {
+  width: 100% !important;
+}
+
+.border {
+  border: solid #B7C0C5;
+}
+
+.bw_T {
+  border-width: 1px 0 0 0 !important;
+}
+
+.bw_TR {
+  border-width: 1px 1px 0 0 !important;
+}
+
+.bw_TRB {
+  border-width: 1px 1px 1px 0 !important;
+}
+
+.bw_TRBL {
+  border-width: 1px 1px 1px 1px !important;
+}
+
+.bw_TB {
+  border-width: 1px 0 1px 0 !important;
+}
+
+.bw_TBL {
+  border-width: 1px 0 1px 1px !important;
+}
+
+.bw_TL {
+  border-width: 1px 0 0 1px !important;
+}
+
+.bw_TRL {
+  border-width: 1px 1px 0 1px !important;
+}
+
+.bw_R {
+  border-width: 0 1px 0 0 !important;
+}
+
+.bw_RB {
+  border-width: 0 1px 1px 0 !important;
+}
+
+.bw_RBL {
+  border-width: 0 1px 1px 1px !important;
+}
+
+.bw_RL {
+  border-width: 0 1px 0 1px !important;
+}
+
+.bw_B {
+  border-width: 0 0 1px 0 !important;
+}
+
+.bw_BL {
+  border-width: 0 0 1px 1px !important;
+}
+
+.bw_L {
+  border-width: 0 0 0 1px !important;
+}
+
+.bCenter {
+  margin-left: auto !important;
+  margin-right: auto !important;
+}
+
+.bLeft {
+  margin-right: auto !important;
+}
+
+.block {
+  display: block;
+}
+
+.bold {
+  font-weight: bold;
+}
+
+.bRight {
+  margin-left: auto !important;
+}
+
+.clear {
+  clear: both;
+  height: 0;
+  font-size: 0;
+  line-height: 0;
+  overflow: hidden;
+}
+
+.clearB {
+  clear: both;
+}
+
+.floatL {
+  float: left;
+}
+
+.floatR {
+  float: right;
+}
+
+.hidden {
+  display: none;
+}
+
+.inline {
+  display: inline;
+}
+
+.normal {
+  font-weight: normal;
+}
+
+.nowrap {
+  white-space: nowrap !important;
+}
+
+.wrap {
+  white-space: normal !important;
+}
+
+.strike {
+  text-decoration: line-through;
+}
+
+.tCenter {
+  text-align: center !important;
+}
+
+.tLeft {
+  text-align: left !important;
+}
+
+.tRight {
+  text-align: right !important;
+}
+
+.vBottom {
+  vertical-align: bottom !important;
+}
+
+.vTop {
+  vertical-align: top !important;
+}

@@ -22,18 +22,52 @@
  * SOFTWARE.
  */
 
-@import "ajax.css";
-@import "alert.css";
-@import "globals.css";
-@import "images.css";
-@import "initial.css";
-@import "main_content.css";
-@import "menus.css";
-@import "misc.css";
-@import "page_content.css";
-@import "page_footer.css";
-@import "page_header.css";
-@import "shortcuts.css";
-@import "tablesorter.css";
-@import "top.css";
-@import "youtube.css";
+var.ajax-params {
+  display: none;
+}
+
+#ajax-loading, #ajax-error {
+  position: fixed;
+  top: 0 !important;
+  z-index: 2000;
+  padding: 4px;
+  font-size: 11px;
+  max-width: 400px;
+  max-height: 200px;
+  white-space: nowrap;
+  display: none;
+}
+
+#ajax-loading {
+  display: none;
+  background: rgba(0, 0, 0, 0.5) url(../images/loading_1.gif) no-repeat center center;
+  float: right;
+  width: 85px;
+  height: 30px;
+  border-bottom-left-radius: 10px;
+  -webkit-border-bottom-left-radius: 10px;
+  -khtml-border-bottom-left-radius: 10px;
+}
+
+#ajax-error {
+  background: #d32031 url(../images/loading_1.gif) no-repeat center center;
+  float: right;
+  min-width: 200px;
+  height: 30px;
+  border-bottom-left-radius: 10px;
+  -webkit-border-bottom-left-radius: 10px;
+  -khtml-border-bottom-left-radius: 10px;
+}
+
+.editable-container {
+  cursor: pointer;
+}
+
+.editable-container:hover {
+  background: #E8E9F8;
+}
+
+.loading-1 {
+  background: transparent url(../images/loading_1.gif) no-repeat left center;
+  padding-left: 22px;
+}

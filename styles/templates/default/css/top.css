@@ -22,18 +22,65 @@
  * SOFTWARE.
  */
 
-@import "ajax.css";
-@import "alert.css";
-@import "globals.css";
-@import "images.css";
-@import "initial.css";
-@import "main_content.css";
-@import "menus.css";
-@import "misc.css";
-@import "page_content.css";
-@import "page_footer.css";
-@import "page_header.css";
-@import "shortcuts.css";
-@import "tablesorter.css";
-@import "top.css";
-@import "youtube.css";
+html {
+  min-height: 100.1%;
+}
+
+body {
+  min-width: 760px;
+  color: #000000;
+  background: #E3E3E3;
+}
+
+body, th, td, font {
+  font: 12px Verdana, Arial, sans-serif;
+}
+
+#body_container {
+  background: #E3E3E3;
+  padding: 0 0 4px;
+}
+
+#page_container {
+  margin: 0 auto;
+  background: #FFFFFF;
+  border: 1px solid #CFD4D8;
+}
+
+#page_header {
+  position: relative;
+  width: 100%;
+}
+
+#page_content {
+  padding: 12px 10px 0;
+  margin: 0 auto;
+  clear: both;
+  position: relative;
+}
+
+#sidebar1 {}
+
+#sidebar2 {
+  padding: 0 3px 0 6px;
+  vertical-align: top;
+  width: 240px;
+}
+
+#sidebar1-wrap {
+  margin-top: -8px;
+  width: 210px;
+}
+
+#sidebar2-wrap {}
+
+#main_content {
+  vertical-align: top;
+}
+
+#main_content_wrap {}
+
+#page_footer {
+  clear: both;
+  margin: 12px 0 3px;
+}

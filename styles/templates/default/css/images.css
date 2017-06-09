@@ -22,18 +22,37 @@
  * SOFTWARE.
  */
 
-@import "ajax.css";
-@import "alert.css";
-@import "globals.css";
-@import "images.css";
-@import "initial.css";
-@import "main_content.css";
-@import "menus.css";
-@import "misc.css";
-@import "page_content.css";
-@import "page_footer.css";
-@import "page_header.css";
-@import "shortcuts.css";
-@import "tablesorter.css";
-@import "top.css";
-@import "youtube.css";
+img.forum_icon {
+  width: auto;
+  height: auto;
+}
+
+img.topic_icon {
+  width: 19px;
+  height: 18px;
+}
+
+img.pm_box_icon {
+  width: 28px;
+  height: 25px;
+}
+
+img.icon1 {
+  width: 12px;
+  height: 9px;
+}
+
+img.icon2 {
+  width: 18px;
+  height: 9px;
+}
+
+img.feed-small {
+  width: 12px;
+  height: 12px;
+}
+
+img.spacer {
+  display: block;
+  height: 1px;
+}

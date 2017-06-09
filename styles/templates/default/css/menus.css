@@ -22,40 +22,84 @@
  * SOFTWARE.
  */
 
-body {
-  background: #E5E5E5;
-  min-width: 10px;
+.menu-root {
+  padding-right: 13px;
+  white-space: nowrap;
+  background: transparent url(../images/menu_open.gif) no-repeat right;
 }
 
-#body_container {
-  background: #E5E5E5;
-  padding: 0 6px 4px;
+.menu-alt1 {
+  padding-right: 0;
+  background: transparent;
 }
 
-h1, h2, h3 {
-  margin: 0.8em 0;
-  font-size: 16px;
+img.menu-alt1 {
+  width: 9px;
+  height: 9px;
 }
 
-h4 {
-  margin: 0.1em 0.2em;
-  color: #273F61;
+a.menu-root, a.menu-root:visited, a.menu-root:hover {
+  text-decoration: none !important;
+}
+
+.menu-sub {
+  position: absolute;
+  display: none;
+  z-index: 1000;
+}
+
+.menu-sub table {
+  background: #FFFFFF;
+  border: 1px solid #92A3A4;
+}
+
+.menu-sub table th {
+  background: #71869F;
+  color: #F0F8FF;
+  font-weight: bold;
   font-size: 11px;
+}
+
+.menu-sub table td {
+  background: #E7E7E7;
+  font-size: 11px;
+}
+
+.menu-sub table td.cat {
+  background: #B5BEC3;
+}
+
+.menu-sub legend {
   font-weight: bold;
 }
 
-h5 {
-  margin: 0.1em 0.6em;
-  color: #333399;
-  font-family: "Courier New", serif;
+.menu-sub label {
+  display: block;
+  padding-right: 2px;
+  margin-right: 1px;
 }
 
-h6 {
-  margin: 0.3em 0.6em;
-  color: #444444;
-  line-height: 100%;
+.menu-sub label:hover {
+  background: #D1D7DC;
+  color: #993300;
 }
 
-* html table.forumline {
-  width: 97%;
+.menu-a {
+  background: #FFFFFF;
+  border: 1px solid #92A3A4;
+}
+
+.menu-a a {
+  color: #0000A0;
+  background: #E7E7E7;
+  padding: 4px 10px 5px;
+  margin: 1px;
+  display: block;
+  text-decoration: none !important;
+}
+
+.menu-a a:hover {
+  color: #0000FF;
+  background: #D1D7DC;
+  text-decoration: none !important;
 }
