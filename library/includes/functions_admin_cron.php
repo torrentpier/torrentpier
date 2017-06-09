@@ -25,7 +25,7 @@
 
 function run_jobs($jobs)
 {
-    global $bb_cfg, $tr_cfg, $datastore;
+    global $bb_cfg, $datastore;
 
     define('IN_CRON', true);
 
@@ -62,7 +62,7 @@ function run_jobs($jobs)
 			END
 			WHERE cron_id IN ($jobs)
 		");
-    sleep(3);
+
     return;
 }
 

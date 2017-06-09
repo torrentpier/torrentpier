@@ -2278,7 +2278,7 @@ $lang['TRACKER_CFG_TITLE'] = 'Tragač';
 $lang['FORUM_CFG_TITLE'] = 'Forum postavke';
 $lang['TRACKER_SETTINGS'] = 'Tragač postavke';
 
-$lang['CHANGES_DISABLED'] = 'Promjene invalid (vidim u <b>$tr_cfg</b> config.php)';
+$lang['CHANGES_DISABLED'] = 'Promjene invalid (vidim u <b>$bb_cfg[\'tracker\']</b> config.php)';
 
 $lang['OFF_TRACKER'] = 'Onesposobiti tragaca';
 $lang['OFF_REASON'] = 'Onesposobite razloga';

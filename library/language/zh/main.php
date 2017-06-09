@@ -2278,7 +2278,7 @@ $lang['TRACKER_CFG_TITLE'] = '跟踪器';
 $lang['FORUM_CFG_TITLE'] = '论坛设置';
 $lang['TRACKER_SETTINGS'] = '跟踪设置';
 
-$lang['CHANGES_DISABLED'] = '变化无障碍(见<b>$tr_cfg</b>在config.php)';
+$lang['CHANGES_DISABLED'] = '变化无障碍(见<b>$bb_cfg[\'tracker\']</b>在config.php)';
 
 $lang['OFF_TRACKER'] = '禁止跟踪器';
 $lang['OFF_REASON'] = '禁止的原因';

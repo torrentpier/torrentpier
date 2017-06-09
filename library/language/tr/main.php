@@ -2278,7 +2278,7 @@ $lang['TRACKER_CFG_TITLE'] = 'İzci';
 $lang['FORUM_CFG_TITLE'] = 'Forum Ayarları';
 $lang['TRACKER_SETTINGS'] = 'İzleyici ayarları';
 
-$lang['CHANGES_DISABLED'] = 'Config.php engelli değişiklikler (bkz <b>$tr_cfg</b>)';
+$lang['CHANGES_DISABLED'] = 'Config.php engelli değişiklikler (bkz <b>$bb_cfg[\'tracker\']</b>)';
 
 $lang['OFF_TRACKER'] = 'Devre dışı bırakmak tracker';
 $lang['OFF_REASON'] = 'Devre dışı bırakma nedeni';

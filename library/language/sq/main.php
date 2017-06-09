@@ -2278,7 +2278,7 @@ $lang['TRACKER_CFG_TITLE'] = 'Tracker';
 $lang['FORUM_CFG_TITLE'] = 'Forumi cilësimet';
 $lang['TRACKER_SETTINGS'] = 'Tracker cilësimet';
 
-$lang['CHANGES_DISABLED'] = 'Ndryshimet me aftësi të kufizuara (shih <b>$tr_cfg</b> në config.php)';
+$lang['CHANGES_DISABLED'] = 'Ndryshimet me aftësi të kufizuara (shih <b>$bb_cfg[\'tracker\']</b> në config.php)';
 
 $lang['OFF_TRACKER'] = 'Çaktivizoni tracker';
 $lang['OFF_REASON'] = 'Çaktivizoni arsye';

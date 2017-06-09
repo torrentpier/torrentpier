@@ -2278,7 +2278,7 @@ $lang['TRACKER_CFG_TITLE'] = 'Трекер';
 $lang['FORUM_CFG_TITLE'] = 'Налаштування форумів';
 $lang['TRACKER_SETTINGS'] = 'Налаштування трекера';
 
-$lang['CHANGES_DISABLED'] = 'Зміни недоступні (редагуйте <b>$tr_cfg</b> у файлі config.php)';
+$lang['CHANGES_DISABLED'] = 'Зміни відключена (див. в <b>$bb_cfg[\'tracker\']</b> config.php)';
 
 $lang['OFF_TRACKER'] = 'Відключити трекер';
 $lang['OFF_REASON'] = 'Причина відключення';

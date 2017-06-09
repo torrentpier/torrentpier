@@ -239,7 +239,7 @@ function change_tor_type($attach_id, $tor_status_gold)
 
 function tracker_register($attach_id, $mode = '', $tor_status = TOR_NOT_APPROVED, $reg_time = TIMENOW)
 {
-    global $bb_cfg, $lang, $reg_mode, $tr_cfg;
+    global $bb_cfg, $lang, $reg_mode;
 
     $attach_id = (int)$attach_id;
     $reg_mode = $mode;
@@ -370,7 +370,7 @@ function tracker_register($attach_id, $mode = '', $tor_status = TOR_NOT_APPROVED
         }
     }
 
-    if ($tr_cfg['tor_topic_up']) {
+    if ($bb_cfg['tracker']['tor_topic_up']) {
         DB()->query("UPDATE " . BB_TOPICS . " SET topic_last_post_time = GREATEST(topic_last_post_time, " . (TIMENOW - 3 * 86400) . ") WHERE topic_id = $topic_id LIMIT 1");
     }
 
@@ -385,7 +385,7 @@ function tracker_register($attach_id, $mode = '', $tor_status = TOR_NOT_APPROVED
 
 function send_torrent_with_passkey($filename)
 {
-    global $attachment, $auth_pages, $userdata, $bb_cfg, $tr_cfg, $lang;
+    global $attachment, $auth_pages, $userdata, $bb_cfg, $lang;
 
     if (!$bb_cfg['bt_add_auth_key'] || $attachment['extension'] !== TORRENT_EXT || !$size = @filesize($filename)) {
         return;
@@ -477,15 +477,15 @@ function send_torrent_with_passkey($filename)
     }
 
     // Add retracker
-    if (isset($tr_cfg['retracker']) && $tr_cfg['retracker']) {
+    if (isset($bb_cfg['tracker']['retracker']) && $bb_cfg['tracker']['retracker']) {
         if (bf($userdata['user_opt'], 'user_opt', 'user_retracker') || IS_GUEST) {
             if (!isset($tor['announce-list'])) {
                 $tor['announce-list'] = array(
                     array($announce),
-                    array($tr_cfg['retracker_host'])
+                    array($bb_cfg['tracker']['retracker_host'])
                 );
             } else {
-                $tor['announce-list'] = array_merge($tor['announce-list'], array(array($tr_cfg['retracker_host'])));
+                $tor['announce-list'] = array_merge($tor['announce-list'], array(array($bb_cfg['tracker']['retracker_host'])));
             }
         }
     }
@@ -505,7 +505,7 @@ function send_torrent_with_passkey($filename)
 
     // Send torrent
     $output = \Rych\Bencode\Bencode::encode($tor);
-    $dl_fname = ($bb_cfg['torrent_name_style'] ? '[' . $bb_cfg['server_name'] . '].t' . $topic_id . '.torrent' : clean_filename(basename($attachment['real_filename'])));
+    $dl_fname = '[' . $bb_cfg['server_name'] . '].t' . $topic_id . '.torrent';
 
     if (!empty($_COOKIE['explain'])) {
         $out = "attach path: $filename<br /><br />";
@@ -632,25 +632,20 @@ function ocelot_send_request($get, $max_attempts = 1, &$err = false)
     global $bb_cfg;
 
     $header = "GET /$get HTTP/1.1\r\nConnection: Close\r\n\r\n";
-    $attempts = $sleep = $success = $response = 0;
+    $attempts = $success = $response = 0;
     $start_time = microtime(true);
 
     while (!$success && $attempts++ < $max_attempts) {
-        if ($sleep) {
-            sleep($sleep);
-        }
 
         // Send request
         $file = fsockopen($bb_cfg['ocelot']['host'], $bb_cfg['ocelot']['port'], $error_num, $error_string);
         if ($file) {
             if (fwrite($file, $header) === false) {
                 $err = "Failed to fwrite()";
-                $sleep = 3;
                 continue;
             }
         } else {
             $err = "Failed to fsockopen() - $error_num - $error_string";
-            $sleep = 6;
             continue;
         }
 

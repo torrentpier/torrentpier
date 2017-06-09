@@ -2278,7 +2278,7 @@ $lang['TRACKER_CFG_TITLE'] = 'تعقب';
 $lang['FORUM_CFG_TITLE'] = 'المنتدى إعدادات';
 $lang['TRACKER_SETTINGS'] = 'تعقب الإعدادات';
 
-$lang['CHANGES_DISABLED'] = 'التغييرات المعوقين (انظر <b>$tr_cfg</b> في config.php)';
+$lang['CHANGES_DISABLED'] = 'التغييرات المعوقين (انظر <b>$bb_cfg[\'tracker\']</b> في config.php)';
 
 $lang['OFF_TRACKER'] = 'تعطيل تعقب';
 $lang['OFF_REASON'] = 'تعطيل السبب';

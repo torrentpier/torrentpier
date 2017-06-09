@@ -2278,7 +2278,7 @@ $lang['TRACKER_CFG_TITLE'] = 'Theo dõi';
 $lang['FORUM_CFG_TITLE'] = 'Diễn đàn cài đặt';
 $lang['TRACKER_SETTINGS'] = 'Thiết lập theo dõi';
 
-$lang['CHANGES_DISABLED'] = 'Thay đổi vô hiệu hóa (thấy trong <b>$tr_cfg</b> config.php)';
+$lang['CHANGES_DISABLED'] = 'Thay đổi vô hiệu hóa (thấy trong <b>$bb_cfg[\'tracker\']</b> config.php)';
 
 $lang['OFF_TRACKER'] = 'Vô hiệu hóa theo dõi';
 $lang['OFF_REASON'] = 'Vô hiệu hóa lý do';

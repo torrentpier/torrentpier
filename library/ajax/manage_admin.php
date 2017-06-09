@@ -123,7 +123,7 @@ switch ($mode) {
 
     case 'unlock_cron':
 
-        cron_enable_board();
+        TorrentPier\Helpers\CronHelper::enableBoard();
 
         $this->response['unlock_cron_html'] = '<span class="seed bold">' . $lang['ADMIN_UNLOCKED'] . '</span>';
 

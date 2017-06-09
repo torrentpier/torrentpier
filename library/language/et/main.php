@@ -2278,7 +2278,7 @@ $lang['TRACKER_CFG_TITLE'] = 'Tracker';
 $lang['FORUM_CFG_TITLE'] = 'Foorumi seaded';
 $lang['TRACKER_SETTINGS'] = 'Tracker seaded';
 
-$lang['CHANGES_DISABLED'] = 'Muudatused puudega (vt <b>$tr_cfg</b> aastal config.php)';
+$lang['CHANGES_DISABLED'] = 'Muudatused puudega (vt <b>$bb_cfg[\'tracker\']</b> aastal config.php)';
 
 $lang['OFF_TRACKER'] = 'Keelata tracker';
 $lang['OFF_REASON'] = 'Keelata põhjus';

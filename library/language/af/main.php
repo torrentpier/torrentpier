@@ -2278,7 +2278,7 @@ $lang['TRACKER_CFG_TITLE'] = 'Tracker';
 $lang['FORUM_CFG_TITLE'] = 'Forum instellings';
 $lang['TRACKER_SETTINGS'] = 'Tracker instellings';
 
-$lang['CHANGES_DISABLED'] = 'Veranderinge gedeaktiveer (sien <b>$tr_cfg</b> in config.php)';
+$lang['CHANGES_DISABLED'] = 'Veranderinge gedeaktiveer (sien <b>$bb_cfg[\'tracker\']</b> in config.php)';
 
 $lang['OFF_TRACKER'] = 'Deaktiveer spoorsnyer';
 $lang['OFF_REASON'] = 'Deaktiveer rede';

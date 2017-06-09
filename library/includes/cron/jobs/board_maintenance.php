@@ -50,12 +50,11 @@ if ($poll_max_days = (int)$bb_cfg['poll_max_days']) {
 			WHERE topic_id BETWEEN $start_id AND $end_id
 				AND vote_dt < DATE_SUB(NOW(), INTERVAL $poll_max_days DAY)
 		");
+
         if ($end_id > $finish_id) {
             break;
         }
-        if (!($start_id % ($per_cycle * 10))) {
-            sleep(1);
-        }
+
         $start_id += $per_cycle;
     }
 }

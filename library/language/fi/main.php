@@ -2278,7 +2278,7 @@ $lang['TRACKER_CFG_TITLE'] = 'Tracker';
 $lang['FORUM_CFG_TITLE'] = 'Foorumin asetuksia';
 $lang['TRACKER_SETTINGS'] = 'Tracker asetukset';
 
-$lang['CHANGES_DISABLED'] = 'Muutokset käytöstä (ks. <b>$tr_cfg</b> vuonna config.php)';
+$lang['CHANGES_DISABLED'] = 'Muutokset käytöstä (ks. <b>$bb_cfg[\'tracker\']</b> vuonna config.php)';
 
 $lang['OFF_TRACKER'] = 'Poistaa tracker';
 $lang['OFF_REASON'] = 'Poistaa syy';

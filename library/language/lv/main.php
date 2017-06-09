@@ -2278,7 +2278,7 @@ $lang['TRACKER_CFG_TITLE'] = 'Tracker';
 $lang['FORUM_CFG_TITLE'] = 'Foruma uzstādījumi';
 $lang['TRACKER_SETTINGS'] = 'Tracker uzstādījumi';
 
-$lang['CHANGES_DISABLED'] = 'Izmaiņas invalīdiem (skatīt <b>$tr_cfg</b>, config.php)';
+$lang['CHANGES_DISABLED'] = 'Izmaiņas invalīdiem (skatīt <b>$bb_cfg[\'tracker\']</b>, config.php)';
 
 $lang['OFF_TRACKER'] = 'Atspējot tracker';
 $lang['OFF_REASON'] = 'Atspējot iemesls';
