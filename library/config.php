@@ -388,6 +388,7 @@ $bb_cfg['avatars'] = [
     'max_height' => 100, // высота аватара в px
     'max_width' => 100, // ширина аватара в px
     'no_avatar' => '/gallery/noavatar.png', // дефолтная аватара
+    'display_path' => '/data/avatars', // путь к директории с аватарами
     'upload_path' => BB_PATH . '/data/avatars/', // путь к директории с аватарами
     'up_allowed' => true, // разрешить загрузку аватар
 ];
@@ -399,6 +400,7 @@ $bb_cfg['group_avatars'] = [
     'max_height' => 300, // высота аватара в px
     'max_width' => 300, // ширина аватара в px
     'no_avatar' => '/gallery/noavatar.png', // дефолтная аватара
+    'display_path' => '/data/avatars', // путь к директории с аватарами
     'upload_path' => BB_PATH . '/data/avatars/', // путь к директории с аватарами
     'up_allowed' => true, // разрешить загрузку аватар
 ];
