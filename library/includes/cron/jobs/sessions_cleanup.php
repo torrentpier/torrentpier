@@ -59,8 +59,6 @@ DB()->query("
 DB()->unlock();
 // ############################ Tables UNLOCKED ##############################
 
-sleep(5);
-
 // Delete staled sessions
 DB()->query("
 	DELETE s

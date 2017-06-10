@@ -1853,16 +1853,16 @@ function get_title_match_topics($title_match_sql, array $forum_ids = array())
 {
     global $bb_cfg, $sphinx, $userdata, $title_match, $lang;
 
-    $where_ids = array();
+    $where_ids = [];
     if ($forum_ids) {
-        $forum_ids = array_diff($forum_ids, array(0 => 0));
+        $forum_ids = array_diff($forum_ids, [0 => 0]);
     }
     $title_match_sql = encode_text_match($title_match_sql);
 
     if ($bb_cfg['search_engine_type'] == 'sphinx') {
         $sphinx = init_sphinx();
 
-        $where = ($title_match) ? 'topics' : 'posts';
+        $where = $title_match ? 'topics' : 'posts';
 
         $sphinx->setServer($bb_cfg['sphinx_topic_titles_host'], $bb_cfg['sphinx_topic_titles_port']);
         if ($forum_ids) {
@@ -1924,12 +1924,12 @@ function decode_text_match($txt)
 
 function pad_with_space($str)
 {
-    return ($str) ? " $str " : $str;
+    return $str ? " $str " : $str;
 }
 
 function create_magnet($infohash, $auth_key, $logged_in)
 {
-    global $bb_cfg, $_GET, $userdata, $images;
+    global $bb_cfg, $_GET, $images;
 
     $passkey_url = ((!$logged_in || isset($_GET['no_passkey'])) && $bb_cfg['bt_tor_browse_only_reg']) ? '' : "?{$bb_cfg['passkey_key']}=$auth_key";
     return '<a href="magnet:?xt=urn:btih:' . bin2hex($infohash) . '&tr=' . urlencode($bb_cfg['bt_announce_url'] . $passkey_url) . '"><img src="' . $images['icon_magnet'] . '" width="12" height="12" border="0" /></a>';
@@ -1940,9 +1940,9 @@ function set_die_append_msg($forum_id = null, $topic_id = null, $group_id = null
     global $lang, $template;
 
     $msg = '';
-    $msg .= ($topic_id) ? '<p class="mrg_10"><a href="' . TOPIC_URL . $topic_id . '">' . $lang['TOPIC_RETURN'] . '</a></p>' : '';
-    $msg .= ($forum_id) ? '<p class="mrg_10"><a href="' . FORUM_URL . $forum_id . '">' . $lang['FORUM_RETURN'] . '</a></p>' : '';
-    $msg .= ($group_id) ? '<p class="mrg_10"><a href="' . GROUP_URL . $group_id . '">' . $lang['GROUP_RETURN'] . '</a></p>' : '';
+    $msg .= $topic_id ? '<p class="mrg_10"><a href="' . TOPIC_URL . $topic_id . '">' . $lang['TOPIC_RETURN'] . '</a></p>' : '';
+    $msg .= $forum_id ? '<p class="mrg_10"><a href="' . FORUM_URL . $forum_id . '">' . $lang['FORUM_RETURN'] . '</a></p>' : '';
+    $msg .= $group_id ? '<p class="mrg_10"><a href="' . GROUP_URL . $group_id . '">' . $lang['GROUP_RETURN'] . '</a></p>' : '';
     $msg .= '<p class="mrg_10"><a href="index.php">' . $lang['INDEX_RETURN'] . '</a></p>';
     $template->assign_var('BB_DIE_APPEND_MSG', $msg);
 }
@@ -2052,18 +2052,18 @@ function gender_image($gender)
     if (!$bb_cfg['gender']) {
         $user_gender = '';
         return $user_gender;
-    } else {
-        switch ($gender) {
-            case MALE:
-                $user_gender = '<img src="' . $images['icon_male'] . '" alt="' . $lang['GENDER_SELECT'][MALE] . '" title="' . $lang['GENDER_SELECT'][MALE] . '" border="0" />';
-                break;
-            case FEMALE:
-                $user_gender = '<img src="' . $images['icon_female'] . '" alt="' . $lang['GENDER_SELECT'][FEMALE] . '" title="' . $lang['GENDER_SELECT'][FEMALE] . '" border="0" />';
-                break;
-            default:
-                $user_gender = '<img src="' . $images['icon_nogender'] . '" alt="' . $lang['GENDER_SELECT'][NOGENDER] . '" title="' . $lang['GENDER_SELECT'][NOGENDER] . '" border="0" />';
-                break;
-        }
+    }
+
+    switch ($gender) {
+        case MALE:
+            $user_gender = '<img src="' . $images['icon_male'] . '" alt="' . $lang['GENDER_SELECT'][MALE] . '" title="' . $lang['GENDER_SELECT'][MALE] . '" border="0" />';
+            break;
+        case FEMALE:
+            $user_gender = '<img src="' . $images['icon_female'] . '" alt="' . $lang['GENDER_SELECT'][FEMALE] . '" title="' . $lang['GENDER_SELECT'][FEMALE] . '" border="0" />';
+            break;
+        default:
+            $user_gender = '<img src="' . $images['icon_nogender'] . '" alt="' . $lang['GENDER_SELECT'][NOGENDER] . '" title="' . $lang['GENDER_SELECT'][NOGENDER] . '" border="0" />';
+            break;
     }
 
     return $user_gender;
@@ -2071,23 +2071,23 @@ function gender_image($gender)
 
 function is_gold($type)
 {
-    global $lang, $tr_cfg;
+    global $lang, $bb_cfg;
 
-    if (!$tr_cfg['gold_silver_enabled']) {
+    if (!$bb_cfg['tracker']['gold_silver_enabled']) {
         $is_gold = '';
         return $is_gold;
-    } else {
-        switch ($type) {
-            case TOR_TYPE_GOLD:
-                $is_gold = '<img src="styles/images/tor_gold.gif" width="16" height="15" title="' . $lang['GOLD'] . '" />&nbsp;';
-                break;
-            case TOR_TYPE_SILVER:
-                $is_gold = '<img src="styles/images/tor_silver.gif" width="16" height="15" title="' . $lang['SILVER'] . '" />&nbsp;';
-                break;
-            default:
-                $is_gold = '';
-                break;
-        }
+    }
+
+    switch ($type) {
+        case TOR_TYPE_GOLD:
+            $is_gold = '<img src="styles/images/tor_gold.gif" width="16" height="15" title="' . $lang['GOLD'] . '" />&nbsp;';
+            break;
+        case TOR_TYPE_SILVER:
+            $is_gold = '<img src="styles/images/tor_silver.gif" width="16" height="15" title="' . $lang['SILVER'] . '" />&nbsp;';
+            break;
+        default:
+            $is_gold = '';
+            break;
     }
 
     return $is_gold;

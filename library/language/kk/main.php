@@ -2278,7 +2278,7 @@ $lang['TRACKER_CFG_TITLE'] = 'Tracker';
 $lang['FORUM_CFG_TITLE'] = 'Форум параметрлері';
 $lang['TRACKER_SETTINGS'] = 'Tracker параметрлері';
 
-$lang['CHANGES_DISABLED'] = 'өшірілген өзгерістер (config.php жылы <b>$tr_cfg</b> қараңыз)';
+$lang['CHANGES_DISABLED'] = 'Өшірілген өзгерістер (config.php жылы <b>$bb_cfg[\'tracker\']</b> қараңыз)';
 
 $lang['OFF_TRACKER'] = 'трекер өшіру';
 $lang['OFF_REASON'] = 'өшіру себебі';

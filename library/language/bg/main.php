@@ -2278,7 +2278,7 @@ $lang['TRACKER_CFG_TITLE'] = 'Следа';
 $lang['FORUM_CFG_TITLE'] = 'Настройки на форума';
 $lang['TRACKER_SETTINGS'] = 'Настройки на тракера';
 
-$lang['CHANGES_DISABLED'] = 'Промяната е изключена (виж <b>$tr_cfg</b> в config.php)';
+$lang['CHANGES_DISABLED'] = 'Промяната е изключена (виж <b>$bb_cfg[\'tracker\']</b> в config.php)';
 
 $lang['OFF_TRACKER'] = 'Да забраните на тракера';
 $lang['OFF_REASON'] = 'Причината за прекъсване на';

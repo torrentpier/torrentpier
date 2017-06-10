@@ -70,6 +70,4 @@ while (true) {
     if (count($prune_users) < $users_per_cycle) {
         break;
     }
-
-    sleep(3);
 }

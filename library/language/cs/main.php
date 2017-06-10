@@ -2278,7 +2278,7 @@ $lang['TRACKER_CFG_TITLE'] = 'Tracker';
 $lang['FORUM_CFG_TITLE'] = 'Nastavení fóra';
 $lang['TRACKER_SETTINGS'] = 'Tracker nastavení';
 
-$lang['CHANGES_DISABLED'] = 'Změny zakázány (viz <b>$tr_cfg</b> v config.php)';
+$lang['CHANGES_DISABLED'] = 'Změny zakázány (viz <b>$bb_cfg[\'tracker\']</b> v config.php)';
 
 $lang['OFF_TRACKER'] = 'Zakázat tracker';
 $lang['OFF_REASON'] = 'Zakázat důvod';

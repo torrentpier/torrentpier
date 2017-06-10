@@ -2278,7 +2278,7 @@ $lang['TRACKER_CFG_TITLE'] = 'Kuzatishdan';
 $lang['FORUM_CFG_TITLE'] = 'Forum ri';
 $lang['TRACKER_SETTINGS'] = 'Kuzatishdan sozlamalari';
 
-$lang['CHANGES_DISABLED'] = 'O\'zgarishlar o\'chirib (config.php yilda <b>$tr_cfg</b> qarang)';
+$lang['CHANGES_DISABLED'] = 'O\'zgarishlar o\'chirib (config.php yilda <b>$bb_cfg[\'tracker\']</b> qarang)';
 
 $lang['OFF_TRACKER'] = 'O\'chirish Kuzatishdan';
 $lang['OFF_REASON'] = 'O\'chirish sababi';

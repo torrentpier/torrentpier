@@ -2278,7 +2278,7 @@ $lang['TRACKER_CFG_TITLE'] = 'Perseguidor';
 $lang['FORUM_CFG_TITLE'] = 'Fórum de configurações';
 $lang['TRACKER_SETTINGS'] = 'Tracker definições';
 
-$lang['CHANGES_DISABLED'] = 'Alterações desativada (consulte <b>$tr_cfg</b> em config.php)';
+$lang['CHANGES_DISABLED'] = 'Alterações desativada (consulte <b>$bb_cfg[\'tracker\']</b> em config.php)';
 
 $lang['OFF_TRACKER'] = 'Desativar o rastreador';
 $lang['OFF_REASON'] = 'Desactivar a razão';

@@ -2278,7 +2278,7 @@ $lang['TRACKER_CFG_TITLE'] = 'トラッカー';
 $lang['FORUM_CFG_TITLE'] = 'フォーラムの設定';
 $lang['TRACKER_SETTINGS'] = 'トラッカーの設定';
 
-$lang['CHANGES_DISABLED'] = 'の変更無効（<b>$tr_cfg</b>にconfig.php)';
+$lang['CHANGES_DISABLED'] = 'の変更無効（<b>$bb_cfg[\'tracker\']</b>にconfig.php)';
 
 $lang['OFF_TRACKER'] = 'トラッカーを無効に';
 $lang['OFF_REASON'] = '無効理由';

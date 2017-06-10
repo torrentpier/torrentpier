@@ -39,6 +39,7 @@ $show_subforums = true;
 $datastore->enqueue(array(
     'stats',
     'moderators',
+    'cat_forums',
 ));
 if ($bb_cfg['show_latest_news']) {
     $datastore->enqueue('latest_news');

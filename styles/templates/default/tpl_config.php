@@ -128,15 +128,6 @@ $images['voting_graphic'][4] = $_main . 'voting_bar.gif';
 $images['progress_bar'] = $_main . 'progress_bar.gif';
 $images['progress_bar_full'] = $_main . 'progress_bar_full.gif';
 
-// Vote graphic length defines the maximum length of a vote result graphic, ie. 100% = this length
-$bb_cfg['vote_graphic_length'] = 205;
-$bb_cfg['privmsg_graphic_length'] = 175;
-
-$bb_cfg['topic_left_column_witdh'] = 150;
-// Images auto-resize
-$bb_cfg['post_img_width_decr'] = 52;    // decrement for posted images width (px)
-$bb_cfg['attach_img_width_decr'] = 130;   // decrement for attach images width (px)
-
 $template->assign_vars(array(
     'IMG' => $_main,
     'TEXT_BUTTONS' => $bb_cfg['text_buttons'],

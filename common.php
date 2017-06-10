@@ -27,7 +27,6 @@ if (isset($_REQUEST['GLOBALS'])) {
     die();
 }
 
-ignore_user_abort(true);
 define('TIMESTART', utime());
 define('TIMENOW', time());
 
@@ -47,6 +46,9 @@ if (empty($_SERVER['SERVER_NAME'])) {
 if (!defined('BB_ROOT')) {
     define('BB_ROOT', './');
 }
+if (!defined('BB_SCRIPT')) {
+    define('BB_SCRIPT', 'undefined');
+}
 
 header('X-Frame-Options: SAMEORIGIN');
 
@@ -64,8 +66,53 @@ if (!file_exists(__DIR__ . '/vendor/autoload.php')) {
 }
 require_once __DIR__ . '/vendor/autoload.php';
 
+/**
+ * Gets the value of an environment variable. Supports boolean, empty and null.
+ *
+ * @param  string $key
+ * @param  mixed $default
+ * @return mixed
+ */
+function env($key, $default = null)
+{
+    $value = getenv($key);
+    if (!$value) return value($default);
+    switch (strtolower($value)) {
+        case 'true':
+        case '(true)':
+            return true;
+        case 'false':
+        case '(false)':
+            return false;
+        case '(null)':
+            return null;
+        case '(empty)':
+            return '';
+    }
+    return $value;
+}
+
+/**
+ * Return the default value of the given value.
+ *
+ * @param  mixed $value
+ * @return mixed
+ */
+function value($value)
+{
+    return $value instanceof Closure ? $value() : $value;
+}
+
 // Get initial config
+if (!getenv('APP_DEBUG') && file_exists(__DIR__ . '/.env')) {
+    (new Symfony\Component\Dotenv\Dotenv())->load(__DIR__ . '/.env');
+}
 require_once __DIR__ . '/library/config.php';
+
+// Local config
+if (file_exists(__DIR__ . '/library/config.local.php')) {
+    require_once __DIR__ . '/library/config.local.php';
+}
 
 // Bugsnag error reporting
 if ($bb_cfg['bugsnag']['enabled'] && !empty($bb_cfg['bugsnag']['api_key'])) {
@@ -93,7 +140,7 @@ define('BT_AUTH_KEY_LENGTH', 10);
 
 define('PEER_HASH_PREFIX', 'peer_');
 define('PEERS_LIST_PREFIX', 'peers_list_');
-define('PEER_HASH_EXPIRE', round($bb_cfg['announce_interval'] * (0.85 * $tr_cfg['expire_factor']))); // sec
+define('PEER_HASH_EXPIRE', round($bb_cfg['announce_interval'] * (0.85 * $bb_cfg['tracker']['expire_factor']))); // sec
 define('PEERS_LIST_EXPIRE', round($bb_cfg['announce_interval'] * 0.7)); // sec
 
 define('DL_STATUS_RELEASER', -1);
