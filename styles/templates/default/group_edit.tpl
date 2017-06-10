@@ -80,7 +80,7 @@ function manage_group(mode, value) {
 				<br />
 				<form action="{S_GROUP_CONFIG_ACTION}" method="post" enctype="multipart/form-data">
 					{S_HIDDEN_FIELDS}
-					<input type="hidden" name="MAX_FILE_SIZE" value="{$bb_cfg['avatars']['max_size']}" />
+					<input type="hidden" name="MAX_FILE_SIZE" value="{$bb_cfg['group_avatars']['max_size']}" />
 					<input type="file" name="avatar" />
 					<input class="mainoption" type="submit" name="submit" value="{L_UPLOAD_AVATAR_FILE}" />
 				</form>

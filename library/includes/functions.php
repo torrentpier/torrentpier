@@ -50,7 +50,7 @@ function get_attach_path($id, $ext_id = '', $base_path = null, $first_div = 1000
 
 function delete_avatar($user_id, $avatar_ext_id)
 {
-    $avatar_file = ($avatar_ext_id) ? get_avatar_path($user_id, $avatar_ext_id) : '';
+    $avatar_file = $avatar_ext_id ? get_avatar_path($user_id, $avatar_ext_id) : '';
     return ($avatar_file && file_exists($avatar_file)) ? @unlink($avatar_file) : false;
 }
 
@@ -72,7 +72,7 @@ function get_tracks($type)
             trigger_error(__FUNCTION__ . ": invalid type '$type'", E_USER_ERROR);
     }
     $tracks = !empty($_COOKIE[$c_name]) ? @unserialize($_COOKIE[$c_name]) : false;
-    return ($tracks) ?: array();
+    return $tracks ?: [];
 }
 
 function set_tracks($cookie_name, &$tracking_ary, $tracks = null, $val = TIMENOW)
@@ -2032,13 +2032,13 @@ function get_avatar($user_id, $ext_id, $allow_avatar = true, $size = true, $heig
     $height = !$height ? 'height="' . $height . '"' : '';
     $width = !$width ? 'width="' . $width . '"' : '';
 
-    $user_avatar = '<img src="' . make_url($bb_cfg['avatars']['upload_path'] . $bb_cfg['avatars']['no_avatar']) . '" alt="' . $user_id . '" ' . $height . ' ' . $width . ' />';
+    $user_avatar = '<img src="' . make_url($bb_cfg['avatars']['display_path'] . $bb_cfg['avatars']['no_avatar']) . '" alt="' . $user_id . '" ' . $height . ' ' . $width . ' />';
 
     if ($user_id == BOT_UID && $bb_cfg['avatars']['bot_avatar']) {
-        $user_avatar = '<img src="' . make_url($bb_cfg['avatars']['upload_path'] . $bb_cfg['avatars']['bot_avatar']) . '" alt="' . $user_id . '" ' . $height . ' ' . $width . ' />';
+        $user_avatar = '<img src="' . make_url($bb_cfg['avatars']['display_path'] . $bb_cfg['avatars']['bot_avatar']) . '" alt="' . $user_id . '" ' . $height . ' ' . $width . ' />';
     } elseif ($allow_avatar && $ext_id) {
         if (file_exists(get_avatar_path($user_id, $ext_id))) {
-            $user_avatar = '<img src="' . make_url(get_avatar_path($user_id, $ext_id)) . '" alt="' . $user_id . '" ' . $height . ' ' . $width . ' />';
+            $user_avatar = '<img src="' . make_url(get_avatar_path($user_id, $ext_id, $bb_cfg['avatars']['display_path'])) . '" alt="' . $user_id . '" ' . $height . ' ' . $width . ' />';
         }
     }
 
