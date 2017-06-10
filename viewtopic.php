@@ -30,6 +30,7 @@ require INC_DIR . '/bbcode.php';
 
 $datastore->enqueue(array(
     'ranks',
+    'cat_forums',
 ));
 
 $page_cfg['load_tpl_vars'] = array(

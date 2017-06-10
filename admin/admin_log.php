@@ -32,6 +32,7 @@ require __DIR__ . '/pagestart.php';
 
 $datastore->enqueue(array(
     'moderators',
+    'cat_forums',
 ));
 
 $log_action->init();

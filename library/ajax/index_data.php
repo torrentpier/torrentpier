@@ -70,6 +70,7 @@ switch ($mode) {
 
         $datastore->enqueue(array(
             'moderators',
+            'cat_forums',
         ));
 
         $moderators = array();

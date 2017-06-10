@@ -27,7 +27,7 @@ define('IN_TRACKER', true);
 define('BB_ROOT', './../');
 require dirname(__DIR__) . '/common.php';
 
-global $bb_cfg, $tr_cfg;
+global $bb_cfg;
 
 if (empty($_SERVER['HTTP_USER_AGENT'])) {
     header('Location: http://127.0.0.1', true, 301);
@@ -249,15 +249,15 @@ if ($lp_info) {
     $tor_type = $row['tor_type'];
 
     // Ratio limits
-    if ((TR_RATING_LIMITS || $tr_cfg['limit_concurrent_ips']) && !$stopped) {
+    if ((TR_RATING_LIMITS || $bb_cfg['tracker']['limit_concurrent_ips']) && !$stopped) {
         $user_ratio = ($row['u_down_total'] && $row['u_down_total'] > MIN_DL_FOR_RATIO) ? ($row['u_up_total'] + $row['u_up_release'] + $row['u_up_bonus']) / $row['u_down_total'] : 1;
         $rating_msg = '';
 
         if (!$seeder) {
-            foreach ($rating_limits as $ratio => $limit) {
+            foreach ($bb_cfg['rating'] as $ratio => $limit) {
                 if ($user_ratio < $ratio) {
-                    $tr_cfg['limit_active_tor'] = 1;
-                    $tr_cfg['limit_leech_count'] = $limit;
+                    $bb_cfg['tracker']['limit_active_tor'] = 1;
+                    $bb_cfg['tracker']['limit_leech_count'] = $limit;
                     $rating_msg = " (ratio < $ratio)";
                     break;
                 }
@@ -265,29 +265,29 @@ if ($lp_info) {
         }
 
         // Limit active torrents
-        if (!isset($bb_cfg['unlimited_users'][$user_id]) && $tr_cfg['limit_active_tor'] && (($tr_cfg['limit_seed_count'] && $seeder) || ($tr_cfg['limit_leech_count'] && !$seeder))) {
+        if (!isset($bb_cfg['unlimited_users'][$user_id]) && $bb_cfg['tracker']['limit_active_tor'] && (($bb_cfg['tracker']['limit_seed_count'] && $seeder) || ($bb_cfg['tracker']['limit_leech_count'] && !$seeder))) {
             $sql = "SELECT COUNT(DISTINCT topic_id) AS active_torrents
 				FROM " . BB_BT_TRACKER . "
 				WHERE user_id = $user_id
 					AND seeder = $seeder
 					AND topic_id != $topic_id";
 
-            if (!$seeder && $tr_cfg['leech_expire_factor'] && $user_ratio < 0.5) {
-                $sql .= " AND update_time > " . (TIMENOW - 60 * $tr_cfg['leech_expire_factor']);
+            if (!$seeder && $bb_cfg['tracker']['leech_expire_factor'] && $user_ratio < 0.5) {
+                $sql .= " AND update_time > " . (TIMENOW - 60 * $bb_cfg['tracker']['leech_expire_factor']);
             }
             $sql .= "	GROUP BY user_id";
 
             if ($row = DB()->fetch_row($sql)) {
-                if ($seeder && $tr_cfg['limit_seed_count'] && $row['active_torrents'] >= $tr_cfg['limit_seed_count']) {
-                    msg_die('Only ' . $tr_cfg['limit_seed_count'] . ' torrent(s) allowed for seeding');
-                } elseif (!$seeder && $tr_cfg['limit_leech_count'] && $row['active_torrents'] >= $tr_cfg['limit_leech_count']) {
-                    msg_die('Only ' . $tr_cfg['limit_leech_count'] . ' torrent(s) allowed for leeching' . $rating_msg);
+                if ($seeder && $bb_cfg['tracker']['limit_seed_count'] && $row['active_torrents'] >= $bb_cfg['tracker']['limit_seed_count']) {
+                    msg_die('Only ' . $bb_cfg['tracker']['limit_seed_count'] . ' torrent(s) allowed for seeding');
+                } elseif (!$seeder && $bb_cfg['tracker']['limit_leech_count'] && $row['active_torrents'] >= $bb_cfg['tracker']['limit_leech_count']) {
+                    msg_die('Only ' . $bb_cfg['tracker']['limit_leech_count'] . ' torrent(s) allowed for leeching' . $rating_msg);
                 }
             }
         }
 
         // Limit concurrent IPs
-        if ($tr_cfg['limit_concurrent_ips'] && (($tr_cfg['limit_seed_ips'] && $seeder) || ($tr_cfg['limit_leech_ips'] && !$seeder))) {
+        if ($bb_cfg['tracker']['limit_concurrent_ips'] && (($bb_cfg['tracker']['limit_seed_ips'] && $seeder) || ($bb_cfg['tracker']['limit_leech_ips'] && !$seeder))) {
             $sql = "SELECT COUNT(DISTINCT ip) AS ips
 				FROM " . BB_BT_TRACKER . "
 				WHERE topic_id = $topic_id
@@ -295,16 +295,16 @@ if ($lp_info) {
 					AND seeder = $seeder
 					AND ip != '$ip_sql'";
 
-            if (!$seeder && $tr_cfg['leech_expire_factor']) {
-                $sql .= " AND update_time > " . (TIMENOW - 60 * $tr_cfg['leech_expire_factor']);
+            if (!$seeder && $bb_cfg['tracker']['leech_expire_factor']) {
+                $sql .= " AND update_time > " . (TIMENOW - 60 * $bb_cfg['tracker']['leech_expire_factor']);
             }
             $sql .= "	GROUP BY topic_id";
 
             if ($row = DB()->fetch_row($sql)) {
-                if ($seeder && $tr_cfg['limit_seed_ips'] && $row['ips'] >= $tr_cfg['limit_seed_ips']) {
-                    msg_die('You can seed only from ' . $tr_cfg['limit_seed_ips'] . " IP's");
-                } elseif (!$seeder && $tr_cfg['limit_leech_ips'] && $row['ips'] >= $tr_cfg['limit_leech_ips']) {
-                    msg_die('You can leech only from ' . $tr_cfg['limit_leech_ips'] . " IP's");
+                if ($seeder && $bb_cfg['tracker']['limit_seed_ips'] && $row['ips'] >= $bb_cfg['tracker']['limit_seed_ips']) {
+                    msg_die('You can seed only from ' . $bb_cfg['tracker']['limit_seed_ips'] . " IP's");
+                } elseif (!$seeder && $bb_cfg['tracker']['limit_leech_ips'] && $row['ips'] >= $bb_cfg['tracker']['limit_leech_ips']) {
+                    msg_die('You can leech only from ' . $bb_cfg['tracker']['limit_leech_ips'] . " IP's");
                 }
             }
         }
@@ -328,7 +328,7 @@ $up_add = ($lp_info && $uploaded > $lp_info['uploaded']) ? $uploaded - $lp_info[
 $down_add = ($lp_info && $downloaded > $lp_info['downloaded']) ? $downloaded - $lp_info['downloaded'] : 0;
 
 // Gold/Silver releases
-if ($tr_cfg['gold_silver_enabled'] && $down_add) {
+if ($bb_cfg['tracker']['gold_silver_enabled'] && $down_add) {
     if ($tor_type == TOR_TYPE_GOLD) {
         $down_add = 0;
     } // Silver releases
@@ -337,7 +337,12 @@ if ($tr_cfg['gold_silver_enabled'] && $down_add) {
     }
 }
 
-// Insert/update peer info
+// Freeleech
+if ($bb_cfg['tracker']['freeleech'] && $down_add) {
+    $down_add = 0;
+}
+
+// Insert / update peer info
 $peer_info_updated = false;
 $update_time = ($stopped) ? 0 : TIMENOW;
 
@@ -414,8 +419,8 @@ if (DBG_LOG) {
 
 if (!$output) {
     // Retrieve peers
-    $numwant = (int)$tr_cfg['numwant'];
-    $compact_mode = ($tr_cfg['compact_mode'] || !empty($compact));
+    $numwant = (int)$bb_cfg['tracker']['numwant'];
+    $compact_mode = ($bb_cfg['tracker']['compact_mode'] || !empty($compact));
 
     $rowset = DB()->fetch_rowset("
 		SELECT ip, port
@@ -445,7 +450,7 @@ if (!$output) {
     $seeders = 0;
     $leechers = 0;
 
-    if ($tr_cfg['scrape']) {
+    if ($bb_cfg['tracker']['scrape']) {
         $row = DB()->fetch_row("
 			SELECT seeders, leechers
 			FROM " . BB_BT_TRACKER_SNAP . "

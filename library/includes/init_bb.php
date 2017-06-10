@@ -26,17 +26,17 @@
 if (!defined('BB_ROOT')) {
     die(basename(__FILE__));
 }
+
+/**
+ * Check PHP version
+ */
 if (version_compare(PHP_VERSION, '5.5', '<')) {
     die('TorrentPier requires PHP version 5.5+. Your PHP version ' . PHP_VERSION);
 }
-if (!defined('BB_SCRIPT')) {
-    define('BB_SCRIPT', 'undefined');
-}
-if (!defined('BB_CFG_LOADED')) {
-    trigger_error('File config.php not loaded', E_USER_ERROR);
-}
 
-// Define some basic configuration arrays
+/**
+ * Define some basic configuration arrays
+ */
 unset($stopwords, $synonyms_match, $synonyms_replace);
 $userdata = $theme = $images = $lang = $nav_links = $bf = $attach_config = [];
 $gen_simple_header = false;
@@ -75,7 +75,9 @@ function compress_output($contents)
     return $contents;
 }
 
-// Start output buffering
+/**
+ * Start output buffering
+ */
 if (!defined('IN_AJAX')) {
     ob_start('send_page');
 }
@@ -108,7 +110,9 @@ function bb_setcookie($name, $val, $lifetime = COOKIE_PERSIST, $httponly = false
     return setcookie($name, $val, $lifetime, $bb_cfg['script_path'], $bb_cfg['cookie_domain'], $bb_cfg['cookie_secure'], $httponly);
 }
 
-// Debug options
+/**
+ * Debug options
+ */
 if (DBG_USER) {
     ini_set('error_reporting', E_ALL);
     ini_set('display_errors', 1);
@@ -212,62 +216,6 @@ define('POLL_FINISHED', 2);
 
 // Group avatars
 define('GROUP_AVATAR_MASK', 999000);
-
-// Иконки статусов
-$bb_cfg['tor_icons'] = [
-    TOR_NOT_APPROVED => '<span class="tor-icon tor-not-approved">*</span>',
-    TOR_CLOSED => '<span class="tor-icon tor-closed">x</span>',
-    TOR_APPROVED => '<span class="tor-icon tor-approved">&radic;</span>',
-    TOR_NEED_EDIT => '<span class="tor-icon tor-need-edit">?</span>',
-    TOR_NO_DESC => '<span class="tor-icon tor-no-desc">!</span>',
-    TOR_DUP => '<span class="tor-icon tor-dup">D</span>',
-    TOR_CLOSED_CPHOLD => '<span class="tor-icon tor-closed-cp">&copy;</span>',
-    TOR_CONSUMED => '<span class="tor-icon tor-consumed">&sum;</span>',
-    TOR_DOUBTFUL => '<span class="tor-icon tor-approved">#</span>',
-    TOR_CHECKING => '<span class="tor-icon tor-checking">%</span>',
-    TOR_TMP => '<span class="tor-icon tor-dup">T</span>',
-    TOR_PREMOD => '<span class="tor-icon tor-dup">&#8719;</span>',
-];
-
-// Запрет на скачивание
-$bb_cfg['tor_frozen'] = [
-    TOR_CHECKING => true,
-    TOR_CLOSED => true,
-    TOR_CLOSED_CPHOLD => true,
-    TOR_CONSUMED => true,
-    TOR_DUP => true,
-    TOR_NO_DESC => true,
-    TOR_PREMOD => true,
-];
-
-// Разрешение на скачку автором, если закрыто на скачивание.
-$bb_cfg['tor_frozen_author_download'] = [
-    TOR_CHECKING => true,
-    TOR_NO_DESC => true,
-    TOR_PREMOD => true,
-];
-
-// Запрет на редактирование головного сообщения
-$bb_cfg['tor_cannot_edit'] = [
-    TOR_CHECKING => true,
-    TOR_CLOSED => true,
-    TOR_CONSUMED => true,
-    TOR_DUP => true,
-];
-
-// Запрет на создание новых раздач если стоит статус недооформлено/неоформлено/сомнительно
-$bb_cfg['tor_cannot_new'] = [TOR_NEED_EDIT, TOR_NO_DESC, TOR_DOUBTFUL];
-
-// Разрешение на ответ релизера, если раздача исправлена.
-$bb_cfg['tor_reply'] = [TOR_NEED_EDIT, TOR_NO_DESC, TOR_DOUBTFUL];
-
-// Если такой статус у релиза, то статистика раздачи будет скрыта
-$bb_cfg['tor_no_tor_act'] = [
-    TOR_CLOSED => true,
-    TOR_DUP => true,
-    TOR_CLOSED_CPHOLD => true,
-    TOR_CONSUMED => true,
-];
 
 $dl_link_css = [
     DL_STATUS_RELEASER => 'genmed',
@@ -386,18 +334,6 @@ define('REQUEST', 4);
 define('CHBOX', 5);
 define('SELECT', 6);
 
-if (!empty($banned_user_agents)) {
-    foreach ($banned_user_agents as $agent) {
-        if (false !== strpos(USER_AGENT, $agent)) {
-            $filename = 'Download files by using browser';
-            $output = '@';
-            header('Content-Type: text/plain');
-            header('Content-Disposition: attachment; filename="' . $filename . '"');
-            die($output);
-        }
-    }
-}
-
 // Functions
 function send_no_cache_headers()
 {
@@ -466,58 +402,68 @@ function make_url($path = '')
     return FULL_URL . preg_replace('#^\/?(.*?)\/?$#', '\1', $path);
 }
 
+/**
+ * Functions
+ */
 require INC_DIR . '/functions.php';
 require INC_DIR . '/sessions.php';
-
-$bb_cfg = array_merge(bb_get_config(BB_CONFIG), $bb_cfg);
-
-$user = new TorrentPier\Legacy\Common\User();
-$userdata =& $user->data;
 
 if (DBG_USER) {
     require INC_DIR . '/functions_dev.php';
 }
 
-$html = new TorrentPier\Legacy\Common\Html();
+$bb_cfg = array_merge(bb_get_config(BB_CONFIG), $bb_cfg);
+
 $log_action = new TorrentPier\Legacy\LogAction();
+$html = new TorrentPier\Legacy\Common\Html();
+$user = new TorrentPier\Legacy\Common\User();
 
-// TODO temporarily 'cat_forums' always enqueued
-$datastore->enqueue(array('cat_forums'));
+$userdata =& $user->data;
 
-// Дата старта вашего проекта
-if (!$bb_cfg['board_startdate']) {
-    bb_update_config(array('board_startdate' => TIMENOW));
-    DB()->query("UPDATE " . BB_USERS . " SET user_regdate = " . TIMENOW . " WHERE user_id IN(2, " . EXCLUDED_USERS . ")");
-}
-
-// Cron
+/**
+ * Cron
+ */
 if ((empty($_POST) && !defined('IN_ADMIN') && !defined('IN_AJAX') && !file_exists(CRON_RUNNING) && ($bb_cfg['cron_enabled'] || defined('START_CRON'))) || defined('FORCE_CRON')) {
     if (TIMENOW - $bb_cfg['cron_last_check'] > $bb_cfg['cron_check_interval']) {
-        // Update cron_last_check
-        bb_update_config(array('cron_last_check' => (TIMENOW + 10)));
 
-        define('CRON_LOG_ENABLED', true);  // global ON/OFF
-        define('CRON_FORCE_LOG', false); // always log regardless of job settings
-
-        define('CRON_DIR', INC_DIR . '/cron/');
-        define('CRON_JOB_DIR', CRON_DIR . 'jobs/');
-        define('CRON_LOG_DIR', 'cron'); // inside LOG_DIR
-        define('CRON_LOG_FILE', 'cron');  // without ext
-
+        /** Update cron_last_check */
+        bb_update_config(['cron_last_check' => TIMENOW + 10]);
         bb_log(date('H:i:s - ') . getmypid() . ' -x-- DB-LOCK try' . LOG_LF, CRON_LOG_DIR . '/cron_check');
 
         if (DB()->get_lock('cron', 1)) {
             bb_log(date('H:i:s - ') . getmypid() . ' --x- DB-LOCK OBTAINED !!!!!!!!!!!!!!!!!' . LOG_LF, CRON_LOG_DIR . '/cron_check');
 
-            sleep(2);
-            require(CRON_DIR . 'cron_init.php');
+            /** Run cron */
+            if (TorrentPier\Helpers\CronHelper::hasFileLock()) {
+                /** снятие файловой блокировки */
+                register_shutdown_function(function () {
+                    TorrentPier\Helpers\CronHelper::releaseLockFile();
+                });
+
+                /** разблокировка форума */
+                register_shutdown_function(function () {
+                    TorrentPier\Helpers\CronHelper::enableBoard();
+                });
+
+                TorrentPier\Helpers\CronHelper::trackRunning('start');
+
+                require(CRON_DIR . 'cron_check.php');
+
+                TorrentPier\Helpers\CronHelper::trackRunning('end');
+            }
+
+            if (defined('IN_CRON')) {
+                bb_log(date('H:i:s - ') . getmypid() . ' --x- ALL jobs FINISHED *************************************************' . LOG_LF, CRON_LOG_DIR . '/cron_check');
+            }
 
             DB()->release_lock('cron');
         }
     }
 }
 
-// Exit if board is disabled via ON/OFF trigger or by admin
+/**
+ * Exit if board is disabled via trigger
+ */
 if (($bb_cfg['board_disable'] || file_exists(BB_DISABLED)) && !defined('IN_ADMIN') && !defined('IN_AJAX') && !defined('IN_LOGIN')) {
     header('HTTP/1.0 503 Service Unavailable');
     if ($bb_cfg['board_disable']) {
@@ -526,58 +472,8 @@ if (($bb_cfg['board_disable'] || file_exists(BB_DISABLED)) && !defined('IN_ADMIN
         bb_die('BOARD_DISABLE');
     } elseif (file_exists(BB_DISABLED)) {
         // trigger lock
-        cron_release_deadlock();
+        TorrentPier\Helpers\CronHelper::releaseDeadlock();
         send_no_cache_headers();
         bb_die('BOARD_DISABLE_CRON');
-    }
-}
-
-/**
- * Снятие блокировки крона
- */
-function cron_release_deadlock()
-{
-    if (file_exists(CRON_RUNNING)) {
-        if (TIMENOW - filemtime(CRON_RUNNING) > 2400) {
-            cron_enable_board();
-            cron_release_file_lock();
-        }
-    }
-}
-
-/**
- * Блокировка крона
- */
-function cron_release_file_lock()
-{
-    rename(CRON_RUNNING, CRON_ALLOWED);
-    cron_touch_lock_file(CRON_ALLOWED);
-}
-
-/**
- * @param $lock_file
- */
-function cron_touch_lock_file($lock_file)
-{
-    file_write(make_rand_str(20), $lock_file, 0, true, true);
-}
-
-/**
- * Включение форума (при блокировке крона)
- */
-function cron_enable_board()
-{
-    if (file_exists(BB_DISABLED)) {
-        rename(BB_DISABLED, BB_ENABLED);
-    }
-}
-
-/**
- * Отключение форума (при блокировке крона)
- */
-function cron_disable_board()
-{
-    if (file_exists(BB_ENABLED)) {
-        rename(BB_ENABLED, BB_DISABLED);
     }
 }

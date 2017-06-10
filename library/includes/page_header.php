@@ -183,8 +183,8 @@ $template->assign_vars(array(
     'U_TERMS' => $bb_cfg['terms_and_conditions_url'],
     'U_TRACKER' => "tracker.php",
 
-    'SHOW_SIDEBAR1' => (!empty($page_cfg['show_sidebar1'][BB_SCRIPT]) || $bb_cfg['show_sidebar1_on_every_page']),
-    'SHOW_SIDEBAR2' => (!empty($page_cfg['show_sidebar2'][BB_SCRIPT]) || $bb_cfg['show_sidebar2_on_every_page']),
+    'SHOW_SIDEBAR1' => !empty($bb_cfg['page']['show_sidebar1'][BB_SCRIPT]) || $bb_cfg['show_sidebar1_on_every_page'],
+    'SHOW_SIDEBAR2' => !empty($bb_cfg['page']['show_sidebar2'][BB_SCRIPT]) || $bb_cfg['show_sidebar2_on_every_page'],
 
     'HTML_AGREEMENT' => LANG_DIR . 'html/user_agreement.html',
     'HTML_COPYRIGHT' => LANG_DIR . 'html/copyright_holders.html',
@@ -226,7 +226,7 @@ $template->assign_vars(array(
     'U_WATCHED_TOPICS' => "profile.php?mode=watch",
 ));
 
-if (!empty($page_cfg['show_torhelp'][BB_SCRIPT]) && !empty($userdata['torhelp'])) {
+if (!empty($bb_cfg['page']['show_torhelp'][BB_SCRIPT]) && !empty($userdata['torhelp'])) {
     $ignore_time = !empty($_COOKIE['torhelp']) ? (int)$_COOKIE['torhelp'] : 0;
 
     if (TIMENOW > $ignore_time) {

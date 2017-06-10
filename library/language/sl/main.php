@@ -2278,7 +2278,7 @@ $lang['TRACKER_CFG_TITLE'] = 'Tracker';
 $lang['FORUM_CFG_TITLE'] = 'Forum nastavitve';
 $lang['TRACKER_SETTINGS'] = 'Tracker nastavitve';
 
-$lang['CHANGES_DISABLED'] = 'Spremembe invalide (glej <b>$tr_cfg</b> v config.php)';
+$lang['CHANGES_DISABLED'] = 'Spremembe invalide (glej <b>$bb_cfg[\'tracker\']</b> v config.php)';
 
 $lang['OFF_TRACKER'] = 'Onemogočite tracker';
 $lang['OFF_REASON'] = 'Onemogočite razlog';

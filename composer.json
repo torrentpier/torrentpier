@@ -44,7 +44,8 @@
     "roave/security-advisories": "dev-master",
     "rych/bencode": "^1.0",
     "samdark/sitemap": "^2.0",
-    "swiftmailer/swiftmailer": "^5.4"
+    "swiftmailer/swiftmailer": "^5.4",
+    "symfony/dotenv": "^3.3"
   },
   "autoload": {
     "psr-4": {

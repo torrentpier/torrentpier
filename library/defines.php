@@ -113,3 +113,10 @@ define('TOR_DOUBTFUL', 8);   // сомнительно
 define('TOR_CHECKING', 9);   // проверяется
 define('TOR_TMP', 10);  // временная
 define('TOR_PREMOD', 11);  // премодерация
+
+define('CRON_LOG_ENABLED', true);  // global ON/OFF
+define('CRON_FORCE_LOG', false); // always log regardless of job settings
+define('CRON_DIR', INC_DIR . '/cron/');
+define('CRON_JOB_DIR', CRON_DIR . 'jobs/');
+define('CRON_LOG_DIR', 'cron'); // inside LOG_DIR
+define('CRON_LOG_FILE', 'cron');  // without ext

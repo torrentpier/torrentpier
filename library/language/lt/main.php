@@ -2278,7 +2278,7 @@ $lang['TRACKER_CFG_TITLE'] = 'Tracker';
 $lang['FORUM_CFG_TITLE'] = 'Forumo nustatymai';
 $lang['TRACKER_SETTINGS'] = 'Tracker parametrai';
 
-$lang['CHANGES_DISABLED'] = 'Pokyčiai išjungtas (žr. <b>$tr_cfg</b>, config.php)';
+$lang['CHANGES_DISABLED'] = 'Pokyčiai išjungtas (žr. <b>$bb_cfg[\'tracker\']</b>, config.php)';
 
 $lang['OFF_TRACKER'] = 'Išjungti tracker';
 $lang['OFF_REASON'] = 'Išjungti priežastis';

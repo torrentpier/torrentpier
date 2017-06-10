@@ -31,6 +31,7 @@ require ATTACH_DIR . '/attachment_mod.php';
 
 $datastore->enqueue(array(
     'attach_extensions',
+    'cat_forums',
 ));
 
 $download_id = request_var('id', 0);

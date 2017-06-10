@@ -31,6 +31,7 @@ require INC_DIR . '/bbcode.php';
 
 $datastore->enqueue(array(
     'ranks',
+    'cat_forums',
 ));
 
 if (empty($_GET[POST_USERS_URL]) || $_GET[POST_USERS_URL] == GUEST_UID) {

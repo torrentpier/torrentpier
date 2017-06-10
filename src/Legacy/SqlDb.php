@@ -111,7 +111,7 @@ class SqlDb
      */
     public function connect()
     {
-        $this->cur_query = ($this->dbg_enabled) ? "connect to: {$this->cfg['dbhost']}" : 'connect';
+        $this->cur_query = $this->dbg_enabled ? "connect to: {$this->cfg['dbhost']}" : 'connect';
         $this->debug('start');
 
         $p = ((bool)$this->cfg['persist']) ? 'p:' : '';
@@ -119,7 +119,7 @@ class SqlDb
         $this->selected_db = $this->cfg['dbname'];
 
         if (mysqli_connect_error()) {
-            $server = (DBG_USER) ? $this->cfg['dbhost'] : '';
+            $server = DBG_USER ? $this->cfg['dbhost'] : '';
             header('HTTP/1.0 503 Service Unavailable');
             bb_log(' ', "db_err/connect_failed_{$this->cfg['dbhost']}");
             die("Could not connect to mysql server $server");
@@ -242,9 +242,9 @@ class SqlDb
                 }
             }
             return $result;
-        } else {
-            return false;
         }
+
+        return false;
     }
 
     /**
@@ -275,9 +275,9 @@ class SqlDb
 
         if ($field_name) {
             return isset($row[$field_name]) ? $row[$field_name] : false;
-        } else {
-            return $row;
         }
+
+        return $row;
     }
 
     /**
@@ -571,9 +571,9 @@ class SqlDb
     {
         if ($this->link) {
             return ['code' => mysqli_errno($this->link), 'message' => mysqli_error($this->link)];
-        } else {
-            return ['code' => '', 'message' => 'not connected'];
         }
+
+        return ['code' => '', 'message' => 'not connected'];
     }
 
     /**
@@ -783,7 +783,10 @@ class SqlDb
             }
         }
 
-        @define('IN_FIRST_SLOW_QUERY', true);
+        if (!defined('IN_FIRST_SLOW_QUERY')) {
+            define('IN_FIRST_SLOW_QUERY', true);
+        }
+
         CACHE('bb_cache')->set('dont_log_slow_query', $new_priority, $ignoring_time);
     }
 
@@ -856,7 +859,7 @@ class SqlDb
                 $err = $this->sql_error();
                 $msg .= "\n" . trim(sprintf('#%06d %s', $err['code'], $err['message']));
             } else {
-                $msg .= " [" . $this->debug_find_source() . "]";
+                $msg .= ' [' . $this->debug_find_source() . ']';
             }
 
             trigger_error($msg, E_USER_ERROR);

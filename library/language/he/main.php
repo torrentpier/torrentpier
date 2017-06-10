@@ -2278,7 +2278,7 @@ $lang['TRACKER_CFG_TITLE'] = 'Tracker';
 $lang['FORUM_CFG_TITLE'] = 'פורום הגדרות';
 $lang['TRACKER_SETTINGS'] = 'גשש הגדרות';
 
-$lang['CHANGES_DISABLED'] = 'שינויים נכים (לראות <b>$tr_cfg</b> ב config.php)';
+$lang['CHANGES_DISABLED'] = 'שינויים נכים (לראות <b>$bb_cfg[\'tracker\']</b> ב config.php)';
 
 $lang['OFF_TRACKER'] = 'השבת tracker';
 $lang['OFF_REASON'] = 'השבת סיבה';

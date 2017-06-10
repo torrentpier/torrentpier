@@ -132,8 +132,6 @@ foreach ($cron_jobs as $job) {
 			LIMIT 1
 		");
 
-        sleep(1);
-
         if (utime() - TIMESTART > 600) {
             return;  // чтобы daily скрипты не блокировали надолго interval'ные
         }

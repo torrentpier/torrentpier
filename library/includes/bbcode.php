@@ -29,6 +29,7 @@ if (!defined('BB_ROOT')) {
 
 $datastore->enqueue(array(
     'smile_replacements',
+    'cat_forums',
 ));
 
 $page_cfg['include_bbcode_js'] = true;

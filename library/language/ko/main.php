@@ -2278,7 +2278,7 @@ $lang['TRACKER_CFG_TITLE'] = '추적';
 $lang['FORUM_CFG_TITLE'] = '포럼 설정';
 $lang['TRACKER_SETTINGS'] = '추적 설정';
 
-$lang['CHANGES_DISABLED'] = '변화(<b>$tr_cfg</b> 에 config.php 다)';
+$lang['CHANGES_DISABLED'] = '변화(<b>$bb_cfg[\'tracker\']</b> 에 config.php 다)';
 
 $lang['OFF_TRACKER'] = '비활성화 추적자';
 $lang['OFF_REASON'] = '사는 이유';

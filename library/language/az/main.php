@@ -2278,7 +2278,7 @@ $lang['TRACKER_CFG_TITLE'] = 'Tracker';
 $lang['FORUM_CFG_TITLE'] = 'Parametrlər forum';
 $lang['TRACKER_SETTINGS'] = 'Parametrlər tracker';
 
-$lang['CHANGES_DISABLED'] = 'Dəyişikliklər əlil (bax <b>$tr_cfg</b> bu config.php)';
+$lang['CHANGES_DISABLED'] = 'Dəyişikliklər əlil (bax <b>$bb_cfg[\'tracker\']</b> bu config.php)';
 
 $lang['OFF_TRACKER'] = 'Aradan tracker';
 $lang['OFF_REASON'] = 'Səbəbi kəsilməsi';

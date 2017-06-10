@@ -2278,7 +2278,7 @@ $lang['TRACKER_CFG_TITLE'] = 'Rastreador';
 $lang['FORUM_CFG_TITLE'] = 'En el foro de configuración';
 $lang['TRACKER_SETTINGS'] = 'Rastreador de configuración';
 
-$lang['CHANGES_DISABLED'] = 'Cambios en la movilidad (ver <b>$tr_cfg</b> en config.php)';
+$lang['CHANGES_DISABLED'] = 'Cambios en la movilidad (ver <b>$bb_cfg[\'tracker\']</b> en config.php)';
 
 $lang['OFF_TRACKER'] = 'Deshabilitar tracker';
 $lang['OFF_REASON'] = 'Deshabilitar la razón';
