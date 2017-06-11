@@ -34,7 +34,7 @@ array_deep($_POST, 'trim');
 
 $s = '';
 
-$default_forum_auth = array(
+$default_forum_auth = [
     'auth_view' => AUTH_ALL,
     'auth_read' => AUTH_ALL,
     'auth_post' => AUTH_REG,
@@ -47,9 +47,9 @@ $default_forum_auth = array(
     'auth_pollcreate' => AUTH_REG,
     'auth_attachments' => AUTH_REG,
     'auth_download' => AUTH_REG,
-);
+];
 
-$mode = (@$_REQUEST['mode']) ? (string)$_REQUEST['mode'] : '';
+$mode = $_REQUEST['mode'] ? (string)$_REQUEST['mode'] : '';
 
 $cat_forums = get_cat_forums();
 
@@ -250,7 +250,7 @@ if ($mode) {
             $prune_days = (int)$_POST['prune_days'];
 
             $forum_parent = ($_POST['forum_parent'] != -1) ? (int)$_POST['forum_parent'] : 0;
-            $show_on_index = ($forum_parent) ? (int)$_POST['show_on_index'] : 1;
+            $show_on_index = $forum_parent ? (int)$_POST['show_on_index'] : 1;
 
             $forum_display_order = (int)$_POST['forum_display_order'];
             $forum_display_sort = (int)$_POST['forum_display_sort'];
@@ -773,7 +773,11 @@ if (!$mode || $show_main_page) {
 
 print_page('admin_forums.tpl', 'admin');
 
-// Functions
+/**
+ * @param $mode
+ * @param $id
+ * @return mixed
+ */
 function get_info($mode, $id)
 {
     switch ($mode) {
@@ -813,6 +817,12 @@ function get_info($mode, $id)
     return $return;
 }
 
+/**
+ * @param $mode
+ * @param $id
+ * @param $select
+ * @return string
+ */
 function get_list($mode, $id, $select)
 {
     switch ($mode) {
@@ -858,6 +868,10 @@ function get_list($mode, $id, $select)
     return ($catlist);
 }
 
+/**
+ * @param $mode
+ * @param int $cat
+ */
 function renumber_order($mode, $cat = 0)
 {
     switch ($mode) {
@@ -905,6 +919,10 @@ function renumber_order($mode, $cat = 0)
     }
 }
 
+/**
+ * @param bool $cat_id
+ * @return array
+ */
 function get_cat_forums($cat_id = false)
 {
     $forums = array();
@@ -935,6 +953,10 @@ function get_cat_forums($cat_id = false)
     return $forums;
 }
 
+/**
+ * @param $forum_id
+ * @return int
+ */
 function get_sf_count($forum_id)
 {
     global $cat_forums;
@@ -952,6 +974,11 @@ function get_sf_count($forum_id)
     return $sf_count;
 }
 
+/**
+ * @param $forums
+ * @param $curr_forum_order
+ * @return bool
+ */
 function get_prev_root_forum_id($forums, $curr_forum_order)
 {
     $i = $curr_forum_order - 10;
@@ -966,6 +993,11 @@ function get_prev_root_forum_id($forums, $curr_forum_order)
     return false;
 }
 
+/**
+ * @param $forums
+ * @param $curr_forum_order
+ * @return bool
+ */
 function get_next_root_forum_id($forums, $curr_forum_order)
 {
     $i = $curr_forum_order + 10;
@@ -981,6 +1013,9 @@ function get_next_root_forum_id($forums, $curr_forum_order)
     return false;
 }
 
+/**
+ * @return string
+ */
 function get_orphan_sf()
 {
     global $cat_forums;
@@ -1003,6 +1038,11 @@ function get_orphan_sf()
     return implode(',', $bad_sf_ary);
 }
 
+/**
+ * @param string $orphan_sf_sql
+ * @param bool $show_mess
+ * @return string
+ */
 function fix_orphan_sf($orphan_sf_sql = '', $show_mess = false)
 {
     global $lang;
@@ -1035,6 +1075,12 @@ function fix_orphan_sf($orphan_sf_sql = '', $show_mess = false)
     return $done_mess;
 }
 
+/**
+ * @param $mode
+ * @param int $exclude
+ * @param int $select
+ * @return string
+ */
 function sf_get_list($mode, $exclude = 0, $select = 0)
 {
     global $cat_forums, $forum_parent;
@@ -1059,6 +1105,10 @@ function sf_get_list($mode, $exclude = 0, $select = 0)
     return $opt;
 }
 
+/**
+ * @param $forum_id
+ * @return bool
+ */
 function get_forum_data($forum_id)
 {
     global $cat_forums;
@@ -1074,6 +1124,10 @@ function get_forum_data($forum_id)
     return false;
 }
 
+/**
+ * @param $cat_id
+ * @return int
+ */
 function get_max_forum_order($cat_id)
 {
     $row = DB()->fetch_row("
@@ -1085,6 +1139,12 @@ function get_max_forum_order($cat_id)
     return (int)$row['max_forum_order'];
 }
 
+/**
+ * @param $mode
+ * @param $name
+ * @param bool $die_on_error
+ * @return mixed
+ */
 function check_name_dup($mode, $name, $die_on_error = true)
 {
     $name_sql = DB()->escape($name);
@@ -1108,6 +1168,10 @@ function check_name_dup($mode, $name, $die_on_error = true)
 
 /**
  *  Change subforums cat_id if parent's cat_id was changed
+ *
+ * @param $parent_id
+ * @param $new_cat_id
+ * @param $order_shear
  */
 function change_sf_cat($parent_id, $new_cat_id, $order_shear)
 {

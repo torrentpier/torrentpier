@@ -33,7 +33,7 @@ if (!IS_ADMIN) {
     bb_die($lang['NOT_AUTHORISED']);
 }
 
-$peers_in_last_minutes = array(30, 15, 5, 1);
+$peers_in_last_minutes = [30, 15, 5, 1];
 $peers_in_last_sec_limit = 300;
 
 $announce_interval = (int)$bb_cfg['announce_interval'];
@@ -60,14 +60,12 @@ DB()->query("
 $stat += DB()->fetch_row("SELECT COUNT(*) AS p_within_ann FROM " . TMP_TRACKER_TABLE . " WHERE update_time >= " . (TIMENOW - $announce_interval));
 // All peers, "max_peer_time"
 $stat += DB()->fetch_row("SELECT COUNT(*) AS p_all, SUM(speed_up) as speed_up, SUM(speed_down) as speed_down, UNIX_TIMESTAMP() - MIN(update_time) AS max_peer_time, UNIX_TIMESTAMP() - MAX(update_time) AS last_peer_time FROM " . TMP_TRACKER_TABLE);
-
 // Active users
 $stat += DB()->fetch_row("SELECT COUNT(DISTINCT user_id) AS u_bt_active FROM " . TMP_TRACKER_TABLE);
 // All bt-users
 $stat += DB()->fetch_row("SELECT COUNT(*) AS u_bt_all FROM " . BB_BT_USERS);
 // All bb-users
 $stat += DB()->fetch_row("SELECT COUNT(*) AS u_bb_all FROM " . BB_USERS);
-
 // Active torrents
 $stat += DB()->fetch_row("SELECT COUNT(DISTINCT topic_id) AS tor_active FROM " . TMP_TRACKER_TABLE);
 // With seeder
@@ -103,13 +101,7 @@ function commify_ob($contents)
 ob_start('commify_ob');
 
 echo '<html><body><head></head>';
-echo '
-<br /><br />
-<table border="1" cellspacing="0" cellpadding="6" align="center">
-<col width="40%">
-<col width="60%">
-';
-
+echo '<br /><br /><table border="1" cellspacing="0" cellpadding="6" align="center"><col width="40%"><col width="60%">';
 echo "\n<tr><td align=center> users: bb-all / bt-all / bt-active </td><td align=center> $stat[u_bb_all] / $stat[u_bt_all] / <b>$stat[u_bt_active]</b> </td></tr>\n";
 
 echo "\n
@@ -133,12 +125,9 @@ echo "\n
 
 echo "\n<tr><td align=center> peers: in last " . implode(' / ', $peers_in_last_minutes) . " min</td>\n";
 echo "\n<td align=center>" . implode(' / ', $peers_in_last_min) . "</td></tr>\n";
-
 echo "\n<tr><td align=center> peers in last $peers_in_last_sec_limit sec <br /> [ per second, DESC order --> ] <br /> last peer: $stat[last_peer_time] seconds ago <br /> " . date("j M H:i:s [T O]") . " </td>\n";
 echo '<td align=center style="font-size: 13px; font-family: \'Courier New\',Courier,monospace;"><pre> ' . implode(' ', $peers_in_last_sec) . "</pre></td></tr>\n";
-
 echo '</table>';
-
 echo '<div align="center"><pre>';
 
 if ($l = sys('la')) {
@@ -150,7 +139,6 @@ if ($l = sys('la')) {
 }
 
 echo 'gen time: <b>' . sprintf('%.3f', (array_sum(explode(' ', microtime())) - TIMESTART)) . "</b> sec\n";
-
 echo '</pre></div>';
 echo '</body></html>';
 

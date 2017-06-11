@@ -37,9 +37,11 @@ require INC_DIR . '/functions_admin_torrent.php';
 $submit = isset($_POST['submit']);
 $confirm = isset($_POST['confirm']);
 
-$cfg = array();
+$cfg = [];
 
-// All config names with default values
+/**
+ * All config names with default values
+ */
 $default_cfg_str = array(
     'bt_announce_url' => 'http://demo.torrentpier.me/bt/',
 );
@@ -82,10 +84,14 @@ $db_fields_bool = array(
     'self_moderated' => 0,  // Users can move theirs topic to another forum
 );
 
-// Get config
+/**
+ * Get config
+ */
 $cfg = bb_get_config(BB_CONFIG, true, false);
 
-// Submit new config
+/**
+ * Submit new config
+ */
 if ($submit && $confirm) {
     foreach ($db_fields_bool as $field_name => $field_def_val) {
         update_table_bool(BB_FORUMS, 'forum_id', $field_name, $field_def_val);

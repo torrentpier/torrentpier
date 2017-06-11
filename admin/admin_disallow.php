@@ -67,9 +67,9 @@ if (isset($_POST['add_name'])) {
     bb_die($message);
 }
 
-//
-// Grab the current list of disallowed usernames...
-//
+/**
+ * Grab the current list of disallowed usernames
+ */
 $sql = "SELECT * FROM " . BB_DISALLOW;
 $result = DB()->sql_query($sql);
 if (!$result) {
@@ -78,10 +78,9 @@ if (!$result) {
 
 $disallowed = DB()->sql_fetchrowset($result);
 
-//
-// Ok now generate the info for the template, which will be put out no matter
-// what mode we are in.
-//
+/**
+ * Now generate the info for the template, which will be put out no matter what mode we are in
+ */
 $disallow_select = '<select name="disallowed_id">';
 
 if (count($disallowed) <= 0) {

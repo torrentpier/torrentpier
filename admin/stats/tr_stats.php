@@ -43,9 +43,7 @@ $sql[] = 'SELECT count(distinct(poster_id)) FROM `' . BB_BT_TORRENTS . '`';
 $sql[] = 'SELECT count(distinct(poster_id)) FROM `' . BB_BT_TORRENTS . '` WHERE reg_time >= UNIX_TIMESTAMP()-2592000';
 
 echo '<html><body><head></head>';
-echo '
-<br /><br />
-<table border="1" cellspacing="0" cellpadding="6" align="center">';
+echo '<br /><br /><table border="1" cellspacing="0" cellpadding="6" align="center">';
 
 foreach ($sql as $i => $query) {
     $row = mysqli_fetch_row(DB()->query($query));
@@ -53,7 +51,6 @@ foreach ($sql as $i => $query) {
 }
 
 echo '</table>';
-
 echo '<div align="center"><pre>';
 
 if ($l = sys('la')) {
