@@ -49,7 +49,7 @@ if (!empty($_POST['edit']) || !empty($_POST['new'])) {
             'release_group' => $row['release_group'],
         );
         $mode = 'editgroup';
-        $template->assign_block_vars('group_edit', array());
+        $template->assign_block_vars('group_edit', []);
     } elseif (!empty($_POST['new'])) {
         $group_info = array(
             'group_name' => '',
@@ -75,15 +75,15 @@ if (!empty($_POST['edit']) || !empty($_POST['new'])) {
         'GROUP_DESCRIPTION' => stripslashes(htmlspecialchars($group_info['group_description'])),
         'GROUP_MODERATOR' => replace_quote($group_info['group_mod_name']),
         'T_GROUP_EDIT_DELETE' => ($mode == 'newgroup') ? $lang['CREATE_NEW_GROUP'] : $lang['EDIT_GROUP'],
-        'U_SEARCH_USER' => BB_ROOT . "search.php?mode=searchuser",
+        'U_SEARCH_USER' => BB_ROOT . 'search.php?mode=searchuser',
         'S_GROUP_OPEN_TYPE' => GROUP_OPEN,
         'S_GROUP_CLOSED_TYPE' => GROUP_CLOSED,
         'S_GROUP_HIDDEN_TYPE' => GROUP_HIDDEN,
         'S_GROUP_OPEN_CHECKED' => ($group_info['group_type'] == GROUP_OPEN) ? HTML_CHECKED : '',
         'S_GROUP_CLOSED_CHECKED' => ($group_info['group_type'] == GROUP_CLOSED) ? HTML_CHECKED : '',
         'S_GROUP_HIDDEN_CHECKED' => ($group_info['group_type'] == GROUP_HIDDEN) ? HTML_CHECKED : '',
-        'RELEASE_GROUP' => ($group_info['release_group']) ? true : false,
-        'S_GROUP_ACTION' => "admin_groups.php",
+        'RELEASE_GROUP' => $group_info['release_group'] ? true : false,
+        'S_GROUP_ACTION' => 'admin_groups.php',
         'S_HIDDEN_FIELDS' => $s_hidden_fields,
     ));
 } elseif (!empty($_POST['group_update'])) {
@@ -126,7 +126,7 @@ if (!empty($_POST['edit']) || !empty($_POST['new'])) {
             'group_single_user' => 0,
         );
 
-        if ($mode == "editgroup") {
+        if ($mode == 'editgroup') {
             if (!$group_info = get_group_data($group_id)) {
                 bb_die($lang['GROUP_NOT_EXIST']);
             }
@@ -145,7 +145,7 @@ if (!empty($_POST['edit']) || !empty($_POST['new'])) {
             $sql_args = DB()->build_array('UPDATE', $sql_ary);
 
             // Update group's data
-            DB()->query("UPDATE " . BB_GROUPS . " SET $sql_args WHERE group_id = $group_id");
+            DB()->query('UPDATE ' . BB_GROUPS . " SET $sql_args WHERE group_id = $group_id");
 
             $message = $lang['UPDATED_GROUP'] . '<br /><br />';
             $message .= sprintf($lang['CLICK_RETURN_GROUPSADMIN'], '<a href="admin_groups.php">', '</a>') . '<br /><br />';
@@ -157,7 +157,7 @@ if (!empty($_POST['edit']) || !empty($_POST['new'])) {
             $sql_args = DB()->build_array('INSERT', $sql_ary);
 
             // Create new group
-            DB()->query("INSERT INTO " . BB_GROUPS . " $sql_args");
+            DB()->query('INSERT INTO ' . BB_GROUPS . " $sql_args");
             $new_group_id = DB()->sql_nextid();
 
             // Create user_group for group's moderator
@@ -176,7 +176,7 @@ if (!empty($_POST['edit']) || !empty($_POST['new'])) {
     $template->assign_vars(array(
         'TPL_GROUP_SELECT' => true,
 
-        'S_GROUP_ACTION' => "admin_groups.php",
+        'S_GROUP_ACTION' => 'admin_groups.php',
         'S_GROUP_SELECT' => stripslashes(get_select('groups')),
     ));
 }

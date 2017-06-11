@@ -49,10 +49,10 @@ $size = request_var('size', '');
 $quota_size = request_var('quota_size', '');
 $pm_size = request_var('pm_size', '');
 
-$submit = (isset($_POST['submit'])) ? true : false;
-$check_upload = (isset($_POST['settings'])) ? true : false;
-$check_image_cat = (isset($_POST['cat_settings'])) ? true : false;
-$search_imagick = (isset($_POST['search_imagick'])) ? true : false;
+$submit = isset($_POST['submit']) ? true : false;
+$check_upload = isset($_POST['settings']) ? true : false;
+$check_image_cat = isset($_POST['cat_settings']) ? true : false;
+$search_imagick = isset($_POST['search_imagick']) ? true : false;
 
 // Re-evaluate the Attachment Configuration
 $sql = 'SELECT * FROM ' . BB_ATTACH_CONFIG;
@@ -118,11 +118,11 @@ while ($row = DB()->sql_fetchrow($result)) {
                 }
             }
 
-            $sql = "UPDATE " . BB_ATTACH_CONFIG . "
+            $sql = 'UPDATE ' . BB_ATTACH_CONFIG . "
 				SET	config_value = '" . attach_mod_sql_escape($new_attach[$config_name]) . "'
 				WHERE config_name = '" . attach_mod_sql_escape($config_name) . "'";
         } else {
-            $sql = "UPDATE " . BB_ATTACH_CONFIG . "
+            $sql = 'UPDATE ' . BB_ATTACH_CONFIG . "
 				SET	config_value = '" . attach_mod_sql_escape($new_attach[$config_name]) . "'
 				WHERE config_name = '" . attach_mod_sql_escape($config_name) . "'";
         }
@@ -168,13 +168,13 @@ if ($search_imagick) {
         } elseif (preg_match('/WIN/i', PHP_OS)) {
             $path = 'c:/imagemagick/convert.exe';
 
-            if (!@file_exists(@amod_realpath($path))) {
+            if (!@file_exists(amod_realpath($path))) {
                 $imagick = $path;
             }
         }
     }
 
-    if (!@file_exists(@amod_realpath(trim($imagick)))) {
+    if (!@file_exists(amod_realpath(trim($imagick)))) {
         $new_attach['img_imagick'] = trim($imagick);
     } else {
         $new_attach['img_imagick'] = '';
@@ -209,7 +209,7 @@ if ($check_upload) {
     $error = false;
 
     // Does the target directory exist, is it a directory and writeable
-    if (!@file_exists(@amod_realpath($upload_dir))) {
+    if (!@file_exists(amod_realpath($upload_dir))) {
         $error = true;
         $error_msg = sprintf($lang['DIRECTORY_DOES_NOT_EXIST'], $attach_config['upload_dir']) . '<br />';
     }
@@ -359,11 +359,11 @@ if ($check_image_cat) {
     $error = false;
 
     // Does the target directory exist, is it a directory and writeable
-    if (!@file_exists(@amod_realpath($upload_dir))) {
-        @mkdir($upload_dir, 0755);
+    if (!@file_exists(amod_realpath($upload_dir))) {
+        mkdir($upload_dir, 0755);
         @chmod($upload_dir, 0777);
 
-        if (!@file_exists(@amod_realpath($upload_dir))) {
+        if (!@file_exists(amod_realpath($upload_dir))) {
             $error = true;
             $error_msg = sprintf($lang['DIRECTORY_DOES_NOT_EXIST'], $upload_dir) . '<br />';
         }
@@ -403,10 +403,10 @@ if ($submit && $mode == 'quota') {
         $filesize_list[$i] = ($size_select_list[$i] == 'kb') ? round($filesize_list[$i] * 1024) : (($size_select_list[$i] == 'mb') ? round($filesize_list[$i] * 1048576) : $filesize_list[$i]);
 
         $sql = 'UPDATE ' . BB_QUOTA_LIMITS . "
-			SET quota_desc = '" . attach_mod_sql_escape($quota_desc_list[$i]) . "', quota_limit = " . (int)$filesize_list[$i] . "
-			WHERE quota_limit_id = " . (int)$quota_change_list[$i];
+			SET quota_desc = '" . attach_mod_sql_escape($quota_desc_list[$i]) . "', quota_limit = " . (int)$filesize_list[$i] . '
+			WHERE quota_limit_id = ' . (int)$quota_change_list[$i];
 
-        if (!(DB()->sql_query($sql))) {
+        if (!DB()->sql_query($sql)) {
             bb_die('Could not update quota limits');
         }
     }
@@ -435,7 +435,7 @@ if ($submit && $mode == 'quota') {
     $quota_desc = get_var('quota_description', '');
     $filesize = get_var('add_max_filesize', 0);
     $size_select = get_var('add_size_select', '');
-    $add = (isset($_POST['add_quota_check'])) ? true : false;
+    $add = isset($_POST['add_quota_check']) ? true : false;
 
     if ($quota_desc != '' && $add) {
         // check Quota Description
@@ -464,10 +464,10 @@ if ($submit && $mode == 'quota') {
         if (!$error) {
             $filesize = ($size_select == 'kb') ? round($filesize * 1024) : (($size_select == 'mb') ? round($filesize * 1048576) : $filesize);
 
-            $sql = "INSERT INTO " . BB_QUOTA_LIMITS . " (quota_desc, quota_limit)
-			VALUES ('" . attach_mod_sql_escape($quota_desc) . "', " . (int)$filesize . ")";
+            $sql = 'INSERT INTO ' . BB_QUOTA_LIMITS . " (quota_desc, quota_limit)
+			VALUES ('" . attach_mod_sql_escape($quota_desc) . "', " . (int)$filesize . ')';
 
-            if (!(DB()->sql_query($sql))) {
+            if (!DB()->sql_query($sql)) {
                 bb_die('Could not add quota limit');
             }
         }
@@ -495,7 +495,7 @@ if ($mode == 'quota') {
         'S_ATTACH_ACTION' => 'admin_attachments.php?mode=quota',
     ));
 
-    $sql = "SELECT * FROM " . BB_QUOTA_LIMITS . " ORDER BY quota_limit DESC";
+    $sql = 'SELECT * FROM ' . BB_QUOTA_LIMITS . ' ORDER BY quota_limit DESC';
 
     if (!($result = DB()->sql_query($sql))) {
         bb_die('Could not get quota limits #1');
@@ -532,7 +532,7 @@ if ($mode == 'quota' && $e_mode == 'view_quota') {
 
     $template->assign_block_vars('switch_quota_limit_desc', array());
 
-    $sql = "SELECT * FROM " . BB_QUOTA_LIMITS . " WHERE quota_limit_id = " . (int)$quota_id . " LIMIT 1";
+    $sql = 'SELECT * FROM ' . BB_QUOTA_LIMITS . ' WHERE quota_limit_id = ' . (int)$quota_id . ' LIMIT 1';
 
     if (!($result = DB()->sql_query($sql))) {
         bb_die('Could not get quota limits #2');

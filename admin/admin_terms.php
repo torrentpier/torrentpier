@@ -38,8 +38,8 @@ if (isset($_POST['post']) && $bb_cfg['terms'] != $_POST['message']) {
 $template->assign_vars(array(
     'S_ACTION' => 'admin_terms.php',
     'EXT_LINK_NW' => $bb_cfg['ext_link_new_win'],
-    'MESSAGE' => ($bb_cfg['terms']) ?: '',
-    'PREVIEW_HTML' => (isset($_REQUEST['preview'])) ? bbcode2html($_POST['message']) : '',
+    'MESSAGE' => $bb_cfg['terms'] ?: '',
+    'PREVIEW_HTML' => isset($_REQUEST['preview']) ? bbcode2html($_POST['message']) : '',
 ));
 
 print_page('admin_terms.tpl', 'admin');

@@ -27,18 +27,21 @@ require __DIR__ . '/pagestart.php';
 
 // Generate relevant output
 if (isset($_GET['pane']) && $_GET['pane'] == 'left') {
-    if (!$module = CACHE('bb_cache')->get('admin_module')) {
-        $dir = @opendir('.');
+    $module = [];
+    if (!$module = CACHE('bb_cache')->get('admin_module_' . $user->id)) {
+        $dir = opendir('.');
         $setmodules = 1;
-        while ($file = @readdir($dir)) {
+        while ($file = readdir($dir)) {
             if (preg_match('/^admin_.*?\.php$/', $file)) {
-                include('./' . $file);
+                include './' . $file;
             }
         }
         unset($setmodules);
-        @closedir($dir);
-        CACHE('bb_cache')->set('admin_module', $module, 600);
+        closedir($dir);
+        CACHE('bb_cache')->set('admin_module_' . $user->id, $module, 600);
     }
+
+    $module = CACHE('bb_cache')->get('admin_module_' . $user->id);
 
     $template->assign_vars(array(
         'TPL_ADMIN_NAVIGATE' => true,
@@ -74,8 +77,8 @@ if (isset($_GET['pane']) && $_GET['pane'] == 'left') {
 } elseif (isset($_GET['pane']) && $_GET['pane'] == 'right') {
     $template->assign_vars(array(
         'TPL_ADMIN_MAIN' => true,
-        'ADMIN_LOCK' => ($bb_cfg['board_disable']) ? true : false,
-        'ADMIN_LOCK_CRON' => (file_exists(BB_DISABLED)) ? true : false,
+        'ADMIN_LOCK' => $bb_cfg['board_disable'] ? true : false,
+        'ADMIN_LOCK_CRON' => file_exists(BB_DISABLED) ? true : false,
     ));
 
     // Get forum statistics
@@ -91,13 +94,13 @@ if (isset($_GET['pane']) && $_GET['pane'] == 'left') {
 
     $avatar_dir_size = 0;
 
-    if ($avatar_dir = @opendir(BB_ROOT . $bb_cfg['avatar_path'])) {
-        while ($file = @readdir($avatar_dir)) {
+    if ($avatar_dir = opendir($bb_cfg['avatars']['upload_path'])) {
+        while ($file = readdir($avatar_dir)) {
             if ($file != '.' && $file != '..') {
                 $avatar_dir_size += @filesize(BB_ROOT . $bb_cfg['avatar_path'] . '/' . $file);
             }
         }
-        @closedir($avatar_dir);
+        closedir($avatar_dir);
 
         $avatar_dir_size = humn_size($avatar_dir_size);
     } else {
@@ -116,36 +119,6 @@ if (isset($_GET['pane']) && $_GET['pane'] == 'left') {
         $users_per_day = $total_users;
     }
 
-    // DB size ... MySQL only
-    $sql = "SELECT VERSION() AS mysql_version";
-    if ($result = DB()->sql_query($sql)) {
-        $row = DB()->sql_fetchrow($result);
-        $version = $row['mysql_version'];
-
-        if (preg_match('/^(3\.23|4\.|5\.|10\.)/', $version)) {
-            $dblist = array();
-            foreach ($bb_cfg['db'] as $name => $row) {
-                $sql = "SHOW TABLE STATUS FROM {$row[1]}";
-                if ($result = DB()->sql_query($sql)) {
-                    $tabledata_ary = DB()->sql_fetchrowset($result);
-
-                    $dbsize = 0;
-                    for ($i = 0, $iMax = count($tabledata_ary); $i < $iMax; $i++) {
-                        if (@$tabledata_ary[$i]['Type'] != 'MRG_MYISAM') {
-                            $dbsize += $tabledata_ary[$i]['Data_length'] + $tabledata_ary[$i]['Index_length'];
-                        }
-                    }
-                    $dblist[] = '<span title="' . $name . '">' . humn_size($dbsize) . '</span>';
-                }
-            }
-            $dbsize = implode('&nbsp;|&nbsp;', $dblist);
-        } else {
-            $dbsize = $lang['NOT_AVAILABLE'];
-        }
-    } else {
-        $dbsize = $lang['NOT_AVAILABLE'];
-    }
-
     $template->assign_vars(array(
         'NUMBER_OF_POSTS' => $total_posts,
         'NUMBER_OF_TOPICS' => $total_topics,
@@ -155,33 +128,31 @@ if (isset($_GET['pane']) && $_GET['pane'] == 'left') {
         'TOPICS_PER_DAY' => $topics_per_day,
         'USERS_PER_DAY' => $users_per_day,
         'AVATAR_DIR_SIZE' => $avatar_dir_size,
-        'DB_SIZE' => $dbsize,
-        'GZIP_COMPRESSION' => ($bb_cfg['gzip_compress']) ? $lang['ON'] : $lang['OFF'],
     ));
 
-    if (@$_GET['users_online']) {
+    if (isset($_GET['users_online'])) {
         $template->assign_vars(array(
             'SHOW_USERS_ONLINE' => true,
         ));
 
         // Get users online information.
-        $sql = "SELECT u.user_id, u.username, u.user_rank, s.session_time AS user_session_time, u.user_opt, s.session_logged_in, s.session_ip, s.session_start
-			FROM " . BB_USERS . " u, " . BB_SESSIONS . " s
+        $sql = 'SELECT u.user_id, u.username, u.user_rank, s.session_time AS user_session_time, u.user_opt, s.session_logged_in, s.session_ip, s.session_start
+			FROM ' . BB_USERS . ' u, ' . BB_SESSIONS . ' s
 			WHERE s.session_logged_in = 1
 				AND u.user_id = s.session_user_id
-				AND u.user_id <> " . GUEST_UID . "
-				AND s.session_time >= " . (TIMENOW - 300) . "
-			ORDER BY s.session_ip ASC, s.session_time DESC";
+				AND u.user_id <> ' . GUEST_UID . '
+				AND s.session_time >= ' . (TIMENOW - 300) . '
+			ORDER BY s.session_ip ASC, s.session_time DESC';
         if (!$result = DB()->sql_query($sql)) {
             bb_die('Could not obtain reged user / online information');
         }
         $onlinerow_reg = DB()->sql_fetchrowset($result);
 
-        $sql = "SELECT session_logged_in, session_time, session_ip, session_start
-			FROM " . BB_SESSIONS . "
+        $sql = 'SELECT session_logged_in, session_time, session_ip, session_start
+			FROM ' . BB_SESSIONS . '
 			WHERE session_logged_in = 0
-				AND session_time >= " . (TIMENOW - 300) . "
-			ORDER BY session_ip ASC, session_time DESC";
+				AND session_time >= ' . (TIMENOW - 300) . '
+			ORDER BY session_ip ASC, session_time DESC';
         if (!$result = DB()->sql_query($sql)) {
             bb_die('Could not obtain guest user / online information');
         }
@@ -259,14 +230,3 @@ if (isset($_GET['pane']) && $_GET['pane'] == 'left') {
 }
 
 print_page('index.tpl', 'admin');
-
-// Functions
-function inarray($needle, $haystack)
-{
-    for ($i = 0, $iMax = count($haystack); $i < $iMax; $i++) {
-        if ($haystack[$i] == $needle) {
-            return true;
-        }
-    }
-    return false;
-}

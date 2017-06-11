@@ -79,18 +79,15 @@ class LogAction
 
         if (!empty($userdata)) {
             $user_id = $userdata['user_id'];
-            $username = $userdata['username'];
             $session_ip = $userdata['session_ip'];
         } else {
             $user_id = '';
-            $username = defined('IN_CRON') ? 'cron' : CLIENT_IP;
             $session_ip = '';
         }
 
         $sql_ary = [
             'log_type_id' => (int)$this->log_type["$type_name"],
             'log_user_id' => (int)$user_id,
-            'log_username' => (string)$username,
             'log_user_ip' => (string)$session_ip,
             'log_forum_id' => (int)$forum_id,
             'log_forum_id_new' => (int)$forum_id_new,

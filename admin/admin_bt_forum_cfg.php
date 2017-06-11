@@ -119,10 +119,10 @@ set_tpl_vars_lang($default_cfg_num);
 set_tpl_vars_lang($db_fields_bool);
 
 // Get Forums list
-$sql = "SELECT f.*
-	FROM " . BB_CATEGORIES . " c, " . BB_FORUMS . " f
+$sql = 'SELECT f.*
+	FROM ' . BB_CATEGORIES . ' c, ' . BB_FORUMS . ' f
 	WHERE f.cat_id = c.cat_id
-	ORDER BY c.cat_order, f.forum_order";
+	ORDER BY c.cat_order, f.forum_order';
 
 if (!$result = DB()->sql_query($sql)) {
     bb_die('Could not obtain forum names');

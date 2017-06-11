@@ -37,11 +37,11 @@ require INC_DIR . '/functions_group.php';
 $yes_sign = '&radic;';
 $no_sign = 'x';
 
-$group_id = (int)@$_REQUEST['g'];
-$user_id = (int)@$_REQUEST['u'];
-$cat_id = (int)@$_REQUEST['c'];
-$mode = (string)@$_REQUEST['mode'];
-$submit = isset($_POST['submit']);
+$group_id = isset($_REQUEST['g']) ? (int)$_REQUEST['g'] : 0;
+$user_id = isset($_REQUEST['u']) ? (int)$_REQUEST['u'] : 0;
+$cat_id = isset($_REQUEST['c']) ? (int)$_REQUEST['c'] : 0;
+$mode = isset($_REQUEST['mode']) ? (string)$_REQUEST['mode'] : '';
+$submit = isset($_REQUEST['submit']);
 
 $group_data = array();
 
@@ -70,8 +70,8 @@ if ($submit && $mode == 'user') {
     $this_user_level = $row['user_level'];
 
     // Get "single_user" group_id for this user
-    $sql = "SELECT g.group_id
-		FROM " . BB_USER_GROUP . " ug, " . BB_GROUPS . " g
+    $sql = 'SELECT g.group_id
+		FROM ' . BB_USER_GROUP . ' ug, ' . BB_GROUPS . " g
 		WHERE ug.user_id = $user_id
 			AND g.group_id = ug.group_id
 			AND g.group_single_user = 1";
@@ -87,12 +87,12 @@ if ($submit && $mode == 'user') {
     }
 
     // Make user an admin (if already user)
-    if (@$_POST['userlevel'] === 'admin') {
+    if ($_POST['userlevel'] === 'admin') {
         if ($userdata['user_id'] == $user_id || $user_id == GUEST_UID || $user_id == BOT_UID) {
-            bb_die("Could not update admin status");
+            bb_die('Could not update admin status');
         }
 
-        DB()->query("UPDATE " . BB_USERS . " SET user_level = " . ADMIN . " WHERE user_id = $user_id LIMIT 1");
+        DB()->query('UPDATE ' . BB_USERS . ' SET user_level = ' . ADMIN . " WHERE user_id = $user_id LIMIT 1");
 
         // Delete any entries in auth_access, they are not required if user is becoming an admin
         delete_permissions($group_id, $user_id);
@@ -103,13 +103,13 @@ if ($submit && $mode == 'user') {
 
         bb_die($message);
     } // Make admin a user (if already admin)
-    elseif (@$_POST['userlevel'] === 'user') {
+    elseif ($_POST['userlevel'] === 'user') {
         // ignore if you're trying to change yourself from an admin to user!
         if ($userdata['user_id'] == $user_id) {
-            bb_die("Could not update admin status<br /><br />Could not change yourself from an admin to user");
+            bb_die('Could not update admin status<br /><br />Could not change yourself from an admin to user');
         }
         // Update users level, reset to USER
-        DB()->query("UPDATE " . BB_USERS . " SET user_level = " . USER . " WHERE user_id = $user_id LIMIT 1");
+        DB()->query('UPDATE ' . BB_USERS . ' SET user_level = ' . USER . " WHERE user_id = $user_id LIMIT 1");
 
         delete_permissions($group_id, $user_id);
 
@@ -125,7 +125,7 @@ if ($submit && $mode == 'user') {
     //
     $auth = array();
 
-    if (is_array(@$_POST['auth'])) {
+    if (is_array($_POST['auth'])) {
         array_deep($_POST['auth'], 'intval');
 
         foreach ($_POST['auth'] as $f_id => $bf_ary) {
@@ -150,7 +150,7 @@ if ($submit && $mode == 'user') {
 //
 // Submit new GROUP permissions
 //
-elseif ($submit && $mode == 'group' && is_array(@$_POST['auth'])) {
+elseif ($submit && $mode == 'group' && is_array($_POST['auth'])) {
     if (!$group_data = get_group_data($group_id)) {
         bb_die($lang['GROUP_NOT_EXIST']);
     }
@@ -225,11 +225,11 @@ if ($mode == 'user' && (!empty($_POST['username']) || $user_id)) {
                 'DISABLED' => $disabled,
                 'FORUM_ID' => $f_id,
                 'FORUM_NAME' => str_short($forums['forum_name_html'][$f_id], $max_forum_name_length),
-                'SF_SPACER' => ($f_data['forum_parent']) ? HTML_SF_SPACER : '',
+                'SF_SPACER' => $f_data['forum_parent'] ? HTML_SF_SPACER : '',
                 'IS_MODERATOR' => (bool)$auth_mod,
-                'MOD_STATUS' => ($auth_mod) ? $lang['MODERATOR'] : $lang['NONE'],
-                'MOD_CLASS' => ($auth_mod) ? (($disabled) ? 'yesDisabled' : 'yesMOD') : 'noMOD',
-                'AUTH_MOD_VAL' => ($auth_mod) ? 1 : 0,
+                'MOD_STATUS' => $auth_mod ? $lang['MODERATOR'] : $lang['NONE'],
+                'MOD_CLASS' => $auth_mod ? ($disabled ? 'yesDisabled' : 'yesMOD') : 'noMOD',
+                'AUTH_MOD_VAL' => $auth_mod ? 1 : 0,
             ));
 
             foreach ($forum_auth_fields as $auth_type) {
@@ -243,8 +243,8 @@ if ($mode == 'user' && (!empty($_POST['username']) || $user_id)) {
                     $acl_class = ($auth_via_acl || $auth_mod) ? 'yes' : 'no';
                 } else {
                     $disabled = true;
-                    $perm_sign = ($auth_via_acl) ? $yes_sign : $no_sign;
-                    $acl_class = ($auth_via_acl) ? 'yes' : 'no';
+                    $perm_sign = $auth_via_acl ? $yes_sign : $no_sign;
+                    $acl_class = $auth_via_acl ? 'yes' : 'no';
                 }
 
                 $template->assign_block_vars('c.f.acl', array(
@@ -253,7 +253,7 @@ if ($mode == 'user' && (!empty($_POST['username']) || $user_id)) {
                     'ACL_CLASS' => $acl_class,
                     'FORUM_ID' => $f_id,
                     'ACL_TYPE_BF' => $bf_num,
-                    'ACL_VAL' => ($auth_via_acl) ? 1 : 0,
+                    'ACL_VAL' => $auth_via_acl ? 1 : 0,
                 ));
             }
         }
@@ -267,7 +267,7 @@ if ($mode == 'user' && (!empty($_POST['username']) || $user_id)) {
 
     foreach ($forum_auth_fields as $auth_type) {
         $template->assign_block_vars('acltype', array(
-            'ACL_TYPE_NAME' => preg_replace("#(.{5})#u", "\\1<br />", $lang[strtoupper($auth_type)]),
+            'ACL_TYPE_NAME' => preg_replace('#(.{5})#u', "\\1<br />", $lang[strtoupper($auth_type)]),
             'ACL_TYPE_BF' => $bf['forum_perm'][$auth_type],
         ));
         $s_column_span++;
@@ -297,17 +297,11 @@ if ($mode == 'user' && (!empty($_POST['username']) || $user_id)) {
 
     $template->assign_vars(array(
         'TPL_AUTH_UG_MAIN' => true,
-
         'USER_OR_GROUPNAME' => $this_userdata['username'],
         'USER_LEVEL' => $lang['USER_LEVEL'] . ' : ' . $s_user_type,
-        'USER_GROUP_MEMBERSHIPS' => $lang['GROUP_MEMBERSHIPS'],
-    ));
-
-    $template->assign_vars(array(
         'T_USER_OR_GROUPNAME' => $lang['USERNAME'],
         'T_AUTH_TITLE' => $lang['AUTH_CONTROL_USER'],
         'T_AUTH_EXPLAIN' => $lang['USER_AUTH_EXPLAIN'],
-
         'S_COLUMN_SPAN' => $s_column_span,
         'S_HIDDEN_FIELDS' => $s_hidden_fields,
     ));
@@ -334,7 +328,7 @@ if ($mode == 'user' && (!empty($_POST['username']) || $user_id)) {
             'CAT_HREF' => "$base_url&amp;c=$c_id",
         ));
 
-        if (!$c =& $_REQUEST['c'] or !in_array($c, array('all', $c_id)) or empty($c_data['forums'])) {
+        if (!($c =& $_REQUEST['c']) || !in_array($c, array('all', $c_id)) || empty($c_data['forums'])) {
             continue;
         }
 
@@ -346,11 +340,11 @@ if ($mode == 'user' && (!empty($_POST['username']) || $user_id)) {
                 'DISABLED' => false,
                 'FORUM_ID' => $f_id,
                 'FORUM_NAME' => str_short($forums['forum_name_html'][$f_id], $max_forum_name_length),
-                'SF_SPACER' => ($f_data['forum_parent']) ? HTML_SF_SPACER : '',
+                'SF_SPACER' => $f_data['forum_parent'] ? HTML_SF_SPACER : '',
                 'IS_MODERATOR' => (bool)$auth_mod,
-                'MOD_STATUS' => ($auth_mod) ? $lang['MODERATOR'] : $lang['NO'],
-                'MOD_CLASS' => ($auth_mod) ? 'yesMOD' : 'noMOD',
-                'AUTH_MOD_VAL' => ($auth_mod) ? 1 : 0,
+                'MOD_STATUS' => $auth_mod ? $lang['MODERATOR'] : $lang['NO'],
+                'MOD_CLASS' => $auth_mod ? 'yesMOD' : 'noMOD',
+                'AUTH_MOD_VAL' => $auth_mod ? 1 : 0,
             ));
 
             foreach ($forum_auth_fields as $auth_type) {
@@ -364,8 +358,8 @@ if ($mode == 'user' && (!empty($_POST['username']) || $user_id)) {
                     $acl_class = ($auth_via_acl || $auth_mod) ? 'yes' : 'no';
                 } else {
                     $disabled = true;
-                    $perm_sign = ($auth_via_acl) ? $yes_sign : $no_sign;
-                    $acl_class = ($auth_via_acl) ? 'yes' : 'no';
+                    $perm_sign = $auth_via_acl ? $yes_sign : $no_sign;
+                    $acl_class = $auth_via_acl ? 'yes' : 'no';
                 }
 
                 $template->assign_block_vars('c.f.acl', array(
@@ -374,7 +368,7 @@ if ($mode == 'user' && (!empty($_POST['username']) || $user_id)) {
                     'ACL_CLASS' => $acl_class,
                     'FORUM_ID' => $f_id,
                     'ACL_TYPE_BF' => $bf_num,
-                    'ACL_VAL' => ($auth_via_acl) ? 1 : 0,
+                    'ACL_VAL' => $auth_via_acl ? 1 : 0,
                 ));
             }
         }
@@ -388,7 +382,7 @@ if ($mode == 'user' && (!empty($_POST['username']) || $user_id)) {
 
     foreach ($forum_auth_fields as $auth_type) {
         $template->assign_block_vars('acltype', array(
-            'ACL_TYPE_NAME' => preg_replace("#(.{5})#u", "\\1<br />", $lang[strtoupper($auth_type)]),
+            'ACL_TYPE_NAME' => preg_replace('#(.{5})#u', "\\1<br />", $lang[strtoupper($auth_type)]),
             'ACL_TYPE_BF' => $bf['forum_perm'][$auth_type],
         ));
         $s_column_span++;
@@ -404,7 +398,6 @@ if ($mode == 'user' && (!empty($_POST['username']) || $user_id)) {
 
     $template->assign_vars(array(
         'TPL_AUTH_UG_MAIN' => true,
-
         'T_USER_OR_GROUPNAME' => $lang['GROUP_NAME'],
         'USER_LEVEL' => false,
         'T_AUTH_TITLE' => $lang['AUTH_CONTROL_GROUP'],
@@ -418,7 +411,7 @@ if ($mode == 'user' && (!empty($_POST['username']) || $user_id)) {
     if ($mode == 'user') {
         $template->assign_vars(array(
             'TPL_SELECT_USER' => true,
-            'U_SEARCH_USER' => BB_ROOT . "search.php?mode=searchuser",
+            'U_SEARCH_USER' => BB_ROOT . 'search.php?mode=searchuser',
         ));
     } else {
         $template->assign_vars(array(
@@ -437,9 +430,7 @@ if ($mode == 'user' && (!empty($_POST['username']) || $user_id)) {
 $template->assign_vars(array(
     'YES_SIGN' => $yes_sign,
     'NO_SIGN' => $no_sign,
-    'T_MOD_YES' => $lang['MODERATOR'],
-    'T_MOD_NO' => $lang['NO'],
-    'S_AUTH_ACTION' => "admin_ug_auth.php",
+    'S_AUTH_ACTION' => 'admin_ug_auth.php',
     'SELECTED_CAT' => !empty($_REQUEST['c']) ? $_REQUEST['c'] : '',
     'U_ALL_FORUMS' => !empty($base_url) ? "$base_url&amp;c=all" : '',
 ));

@@ -49,7 +49,7 @@ $default_forum_auth = [
     'auth_download' => AUTH_REG,
 ];
 
-$mode = $_REQUEST['mode'] ? (string)$_REQUEST['mode'] : '';
+$mode = isset($_REQUEST['mode']) ? (string)$_REQUEST['mode'] : '';
 
 $cat_forums = get_cat_forums();
 
@@ -60,7 +60,7 @@ $forum_parent = $cat_id = 0;
 $forumname = '';
 
 if (isset($_REQUEST['addforum']) || isset($_REQUEST['addcategory'])) {
-    $mode = (isset($_REQUEST['addforum'])) ? "addforum" : "addcat";
+    $mode = isset($_REQUEST['addforum']) ? 'addforum' : 'addcat';
 
     if ($mode == 'addforum' && isset($_POST['addforum']) && isset($_POST['forumname']) && is_array($_POST['addforum'])) {
         $req_cat_id = array_keys($_POST['addforum']);
@@ -133,7 +133,7 @@ if ($mode) {
             $catlist = get_list('category', $cat_id, true);
             $forumlocked = $forumunlocked = '';
 
-            $forumstatus == (FORUM_LOCKED) ? $forumlocked = 'selected="selected"' : $forumunlocked = 'selected="selected"';
+            $forumstatus == FORUM_LOCKED ? $forumlocked = 'selected="selected"' : $forumunlocked = 'selected="selected"';
 
             $statuslist = '<option value="' . FORUM_UNLOCKED . '" ' . $forumunlocked . '>' . $lang['STATUS_UNLOCKED'] . '</option>\n';
             $statuslist .= '<option value="' . FORUM_LOCKED . '" ' . $forumlocked . '>' . $lang['STATUS_LOCKED'] . '</option>\n';
@@ -160,7 +160,7 @@ if ($mode) {
 
                 'SHOW_ON_INDEX' => $show_on_index,
                 'S_PARENT_FORUM' => $s_parent,
-                'CAT_LIST_CLASS' => ($forum_parent) ? 'hidden' : '',
+                'CAT_LIST_CLASS' => $forum_parent ? 'hidden' : '',
                 'SHOW_ON_INDEX_CLASS' => (!$forum_parent) ? 'hidden' : '',
                 'TPL_SELECT' => get_select('forum_tpl', $forum_tpl_id, 'html', $lang['TEMPLATE_DISABLE']),
                 'ALLOW_REG_TRACKER' => build_select('allow_reg_tracker', array($lang['DISALLOWED'] => 0, $lang['ALLOWED'] => 1), $allow_reg_tracker),
@@ -187,7 +187,7 @@ if ($mode) {
             $prune_days = (int)$_POST['prune_days'];
 
             $forum_parent = ($_POST['forum_parent'] != -1) ? (int)$_POST['forum_parent'] : 0;
-            $show_on_index = ($forum_parent) ? (int)$_POST['show_on_index'] : 1;
+            $show_on_index = $forum_parent ? (int)$_POST['show_on_index'] : 1;
 
             $forum_display_sort = (int)$_POST['forum_display_sort'];
             $forum_display_order = (int)$_POST['forum_display_order'];
@@ -207,7 +207,7 @@ if ($mode) {
                 }
 
                 $cat_id = $parent['cat_id'];
-                $forum_parent = ($parent['forum_parent']) ?: $parent['forum_id'];
+                $forum_parent = $parent['forum_parent'] ?: $parent['forum_id'];
                 $forum_order = $parent['forum_order'] + 5;
             } else {
                 $max_order = get_max_forum_order($cat_id);
@@ -228,7 +228,7 @@ if ($mode) {
             $columns = ' forum_name,   cat_id,   forum_desc,   forum_order,  forum_status,  prune_days,  forum_parent,  show_on_index,  forum_display_sort,  forum_display_order,  forum_tpl_id,  allow_reg_tracker,  allow_porno_topic,  self_moderated' . $field_sql;
             $values = "'$forum_name_sql', $cat_id, '$forum_desc_sql', $forum_order, $forum_status, $prune_days, $forum_parent, $show_on_index, $forum_display_sort, $forum_display_order, $forum_tpl_id, $allow_reg_tracker, $allow_porno_topic, $self_moderated" . $value_sql;
 
-            DB()->query("INSERT INTO " . BB_FORUMS . " ($columns) VALUES ($values)");
+            DB()->query('INSERT INTO ' . BB_FORUMS . " ($columns) VALUES ($values)");
 
             renumber_order('forum', $cat_id);
             $datastore->update('cat_forums');
@@ -273,7 +273,7 @@ if ($mode) {
                 }
 
                 $cat_id = $parent['cat_id'];
-                $forum_parent = ($parent['forum_parent']) ?: $parent['forum_id'];
+                $forum_parent = $parent['forum_parent'] ?: $parent['forum_id'];
                 $forum_order = $parent['forum_order'] + 5;
 
                 if ($forum_id == $forum_parent) {
@@ -290,8 +290,8 @@ if ($mode) {
             $forum_name_sql = DB()->escape($forum_name);
             $forum_desc_sql = DB()->escape($forum_desc);
 
-            DB()->query("
-				UPDATE " . BB_FORUMS . " SET
+            DB()->query('
+				UPDATE ' . BB_FORUMS . " SET
 					forum_name          = '$forum_name_sql',
 					cat_id              = $cat_id,
 					forum_desc          = '$forum_desc_sql',
@@ -322,7 +322,7 @@ if ($mode) {
             CACHE('bb_cache')->rm();
 
             $message = $lang['FORUMS_UPDATED'] . '<br /><br />';
-            $message .= ($fix) ? "$fix<br /><br />" : '';
+            $message .= $fix ? "$fix<br /><br />" : '';
             $message .= sprintf($lang['CLICK_RETURN_FORUMADMIN'], '<a href="admin_forums.php?c=' . $cat_id . '">', '</a>') . '<br /><br />' . sprintf($lang['CLICK_RETURN_ADMIN_INDEX'], '<a href="index.php?pane=right">', '</a>');
             bb_die($message);
 
@@ -338,14 +338,14 @@ if ($mode) {
 
             check_name_dup('cat', $new_cat_title);
 
-            $order = DB()->fetch_row("SELECT MAX(cat_order) AS max_order FROM " . BB_CATEGORIES);
+            $order = DB()->fetch_row('SELECT MAX(cat_order) AS max_order FROM ' . BB_CATEGORIES);
 
             $args = DB()->build_array('INSERT', array(
                 'cat_title' => (string)$new_cat_title,
                 'cat_order' => (int)$order['max_order'] + 10,
             ));
 
-            DB()->query("INSERT INTO " . BB_CATEGORIES . $args);
+            DB()->query('INSERT INTO ' . BB_CATEGORIES . $args);
 
             $datastore->update('cat_forums');
             CACHE('bb_cache')->rm();
@@ -371,7 +371,7 @@ if ($mode) {
                 'CAT_TITLE' => htmlCHR($cat_info['cat_title']),
                 'S_HIDDEN_FIELDS' => build_hidden_fields($hidden_fields),
                 'S_SUBMIT_VALUE' => $lang['UPDATE'],
-                'S_FORUM_ACTION' => "admin_forums.php",
+                'S_FORUM_ACTION' => 'admin_forums.php',
             ));
 
             break;
@@ -394,8 +394,8 @@ if ($mode) {
 
                 $new_cat_title_sql = DB()->escape($new_cat_title);
 
-                DB()->query("
-					UPDATE " . BB_CATEGORIES . " SET
+                DB()->query('
+					UPDATE ' . BB_CATEGORIES . " SET
 						cat_title = '$new_cat_title_sql'
 					WHERE cat_id = $cat_id
 				");
@@ -432,7 +432,7 @@ if ($mode) {
                 'CAT_FORUM_NAME' => $lang['FORUM_NAME'],
 
                 'S_HIDDEN_FIELDS' => build_hidden_fields($hidden_fields),
-                'S_FORUM_ACTION' => "admin_forums.php",
+                'S_FORUM_ACTION' => 'admin_forums.php',
                 'MOVE_TO_OPTIONS' => $move_to_options,
                 'S_SUBMIT_VALUE' => $lang['MOVE_AND_DELETE'],
             ));
@@ -451,25 +451,25 @@ if ($mode) {
                 topic_delete('prune', $from_id, 0, true);
             } else {
                 // Move all posts
-                $sql = "SELECT * FROM " . BB_FORUMS . " WHERE forum_id IN($from_id, $to_id)";
+                $sql = 'SELECT * FROM ' . BB_FORUMS . " WHERE forum_id IN($from_id, $to_id)";
                 $result = DB()->query($sql);
 
                 if (DB()->num_rows($result) != 2) {
                     bb_die('Ambiguous forum ID');
                 }
 
-                DB()->query("UPDATE " . BB_TOPICS . " SET forum_id = $to_id WHERE forum_id = $from_id");
-                DB()->query("UPDATE " . BB_BT_TORRENTS . " SET forum_id = $to_id WHERE forum_id = $from_id");
+                DB()->query('UPDATE ' . BB_TOPICS . " SET forum_id = $to_id WHERE forum_id = $from_id");
+                DB()->query('UPDATE ' . BB_BT_TORRENTS . " SET forum_id = $to_id WHERE forum_id = $from_id");
 
-                $row = DB()->fetch_row("SELECT MIN(post_id) AS start_id, MAX(post_id) AS finish_id FROM " . BB_POSTS);
+                $row = DB()->fetch_row('SELECT MIN(post_id) AS start_id, MAX(post_id) AS finish_id FROM ' . BB_POSTS);
                 $start_id = (int)$row['start_id'];
                 $finish_id = (int)$row['finish_id'];
                 $per_cycle = 10000;
                 while (true) {
                     set_time_limit(600);
                     $end_id = $start_id + $per_cycle - 1;
-                    DB()->query("
-						UPDATE " . BB_POSTS . " SET forum_id = $to_id WHERE post_id BETWEEN $start_id AND $end_id AND forum_id = $from_id
+                    DB()->query('
+						UPDATE ' . BB_POSTS . " SET forum_id = $to_id WHERE post_id BETWEEN $start_id AND $end_id AND forum_id = $from_id
 					");
                     if ($end_id > $finish_id) {
                         break;
@@ -480,9 +480,9 @@ if ($mode) {
                 sync('forum', $to_id);
             }
 
-            DB()->query("DELETE FROM " . BB_FORUMS . " WHERE forum_id = $from_id");
-            DB()->query("DELETE FROM " . BB_AUTH_ACCESS . " WHERE forum_id = $from_id");
-            DB()->query("DELETE FROM " . BB_AUTH_ACCESS_SNAP . " WHERE forum_id = $from_id");
+            DB()->query('DELETE FROM ' . BB_FORUMS . " WHERE forum_id = $from_id");
+            DB()->query('DELETE FROM ' . BB_AUTH_ACCESS . " WHERE forum_id = $from_id");
+            DB()->query('DELETE FROM ' . BB_AUTH_ACCESS_SNAP . " WHERE forum_id = $from_id");
 
             $cat_forums = get_cat_forums();
             fix_orphan_sf();
@@ -501,7 +501,7 @@ if ($mode) {
             $categories_count = $catinfo['number'];
 
             if ($categories_count == 1) {
-                $row = DB()->fetch_row("SELECT COUNT(*) AS forums_count FROM " . BB_FORUMS);
+                $row = DB()->fetch_row('SELECT COUNT(*) AS forums_count FROM ' . BB_FORUMS);
 
                 if ($row['forums_count'] > 0) {
                     bb_die($lang['MUST_DELETE_FORUMS']);
@@ -523,7 +523,7 @@ if ($mode) {
                 'CAT_FORUM_NAME' => $lang['CATEGORY'],
 
                 'S_HIDDEN_FIELDS' => build_hidden_fields($hidden_fields),
-                'S_FORUM_ACTION' => "admin_forums.php",
+                'S_FORUM_ACTION' => 'admin_forums.php',
                 'MOVE_TO_OPTIONS' => get_list('category', $cat_id, 0),
                 'S_SUBMIT_VALUE' => $lang['MOVE_AND_DELETE'],
             ));
@@ -541,14 +541,14 @@ if ($mode) {
 
             $order_shear = get_max_forum_order($to_id) + 10;
 
-            DB()->query("
-				UPDATE " . BB_FORUMS . " SET
+            DB()->query('
+				UPDATE ' . BB_FORUMS . " SET
 					cat_id = $to_id,
 					forum_order = forum_order + $order_shear
 				WHERE cat_id = $from_id
 			");
 
-            DB()->query("DELETE FROM " . BB_CATEGORIES . " WHERE cat_id = $from_id");
+            DB()->query('DELETE FROM ' . BB_CATEGORIES . " WHERE cat_id = $from_id");
 
             renumber_order('forum', $to_id);
             $cat_forums = get_cat_forums();
@@ -557,7 +557,7 @@ if ($mode) {
             CACHE('bb_cache')->rm();
 
             $message = $lang['FORUMS_UPDATED'] . '<br /><br />';
-            $message .= ($fix) ? "$fix<br /><br />" : '';
+            $message .= $fix ? "$fix<br /><br />" : '';
             $message .= sprintf($lang['CLICK_RETURN_FORUMADMIN'], '<a href="admin_forums.php">', '</a>') . '<br /><br />' . sprintf($lang['CLICK_RETURN_ADMIN_INDEX'], '<a href="index.php?pane=right">', '</a>');
             bb_die($message);
 
@@ -576,8 +576,8 @@ if ($mode) {
             $move_down_forum_id = false;
             $forums = $cat_forums[$cat_id]['f_ord'];
             $forum_order = $forum_info['forum_order'];
-            $prev_forum = (isset($forums[$forum_order - 10])) ? $forums[$forum_order - 10] : false;
-            $next_forum = (isset($forums[$forum_order + 10])) ? $forums[$forum_order + 10] : false;
+            $prev_forum = isset($forums[$forum_order - 10]) ? $forums[$forum_order - 10] : false;
+            $next_forum = isset($forums[$forum_order + 10]) ? $forums[$forum_order + 10] : false;
 
             // move selected forum ($forum_id) UP
             if ($move < 0 && $prev_forum) {
@@ -607,20 +607,20 @@ if ($mode) {
             }
 
             if ($forum_info['forum_parent']) {
-                DB()->query("
-					UPDATE " . BB_FORUMS . " SET
+                DB()->query('
+					UPDATE ' . BB_FORUMS . " SET
 						forum_order = forum_order + $move
 					WHERE forum_id = $forum_id
 				");
             } elseif ($move_down_forum_id) {
-                DB()->query("
-					UPDATE " . BB_FORUMS . " SET
+                DB()->query('
+					UPDATE ' . BB_FORUMS . " SET
 						forum_order = forum_order + $move_down_ord_val
 					WHERE cat_id = $cat_id
 						AND forum_order >= $move_down_forum_order
 				");
-                DB()->query("
-					UPDATE " . BB_FORUMS . " SET
+                DB()->query('
+					UPDATE ' . BB_FORUMS . " SET
 						forum_order = forum_order - $move_up_ord_val
 					WHERE forum_id = $move_up_forum_id
 						 OR forum_parent = $move_up_forum_id
@@ -638,8 +638,8 @@ if ($mode) {
             $move = (int)$_GET['move'];
             $cat_id = (int)$_GET['c'];
 
-            DB()->query("
-				UPDATE " . BB_CATEGORIES . " SET
+            DB()->query('
+				UPDATE ' . BB_CATEGORIES . " SET
 					cat_order = cat_order + $move
 				WHERE cat_id = $cat_id
 			");
@@ -674,7 +674,7 @@ if (!$mode || $show_main_page) {
         'L_FORUM_TITLE' => $lang['FORUM_ADMIN_MAIN'],
     ));
 
-    $sql = "SELECT cat_id, cat_title, cat_order FROM " . BB_CATEGORIES . " ORDER BY cat_order";
+    $sql = 'SELECT cat_id, cat_title, cat_order FROM ' . BB_CATEGORIES . ' ORDER BY cat_order';
     if (!$q_categories = DB()->sql_query($sql)) {
         bb_die('Could not query categories list');
     }
@@ -695,7 +695,7 @@ if (!$mode || $show_main_page) {
             $where_cat_sql = "WHERE cat_id = '-1'";
         }
 
-        $sql = "SELECT * FROM " . BB_FORUMS . " $where_cat_sql ORDER BY cat_id, forum_order";
+        $sql = 'SELECT * FROM ' . BB_FORUMS . " $where_cat_sql ORDER BY cat_id, forum_order";
         if (!$q_forums = DB()->sql_query($sql)) {
             bb_die('Could not query forums information');
         }
@@ -719,7 +719,7 @@ if (!$mode || $show_main_page) {
         for ($i = 0; $i < $total_categories; $i++) {
             $cat_id = $category_rows[$i]['cat_id'];
 
-            $template->assign_block_vars("c", array(
+            $template->assign_block_vars('c', array(
                 'S_ADD_FORUM_SUBMIT' => "addforum[$cat_id]",
                 'S_ADD_FORUM_NAME' => "forumname[$cat_id]",
 
@@ -741,12 +741,12 @@ if (!$mode || $show_main_page) {
                 $row_bgr = " class=\"$bgr_class\" onmouseover=\"this.className='$bgr_class_over';\" onmouseout=\"this.className='$bgr_class';\"";
 
                 if ($forum_rows[$j]['cat_id'] == $cat_id) {
-                    $template->assign_block_vars("c.f", array(
+                    $template->assign_block_vars('c.f', array(
                         'FORUM_NAME' => htmlCHR($forum_rows[$j]['forum_name']),
                         'FORUM_DESC' => htmlCHR($forum_rows[$j]['forum_desc']),
                         'NUM_TOPICS' => $forum_rows[$j]['forum_topics'],
                         'NUM_POSTS' => $forum_rows[$j]['forum_posts'],
-                        'PRUNE_DAYS' => ($forum_rows[$j]['prune_days']) ?: '-',
+                        'PRUNE_DAYS' => $forum_rows[$j]['prune_days'] ?: '-',
 
                         'ORDER' => $forum_rows[$j]['forum_order'],
                         'FORUM_ID' => $forum_rows[$j]['forum_id'],
@@ -754,8 +754,8 @@ if (!$mode || $show_main_page) {
 
                         'SHOW_ON_INDEX' => (bool)$forum_rows[$j]['show_on_index'],
                         'FORUM_PARENT' => $forum_rows[$j]['forum_parent'],
-                        'SF_PAD' => ($forum_rows[$j]['forum_parent']) ? ' style="padding-left: 20px;" ' : '',
-                        'FORUM_NAME_CLASS' => ($forum_rows[$j]['forum_parent']) ? 'genmed' : 'gen',
+                        'SF_PAD' => $forum_rows[$j]['forum_parent'] ? ' style="padding-left: 20px;" ' : '',
+                        'FORUM_NAME_CLASS' => $forum_rows[$j]['forum_parent'] ? 'genmed' : 'gen',
                         'ADD_SUB_HREF' => "admin_forums.php?mode=addforum&amp;forum_parent={$forum_rows[$j]['forum_id']}",
                         'U_VIEWFORUM' => BB_ROOT . "viewforum.php?f=$forum_id",
                         'U_FORUM_EDIT' => "admin_forums.php?mode=editforum&amp;f=$forum_id",
@@ -865,7 +865,7 @@ function get_list($mode, $id, $select)
         $catlist .= '<option value="' . $row[$idfield] . '"' . $s . '>&nbsp;' . htmlCHR(str_short($row[$namefield], 60)) . '</option>\n';
     }
 
-    return ($catlist);
+    return $catlist;
 }
 
 /**
@@ -1054,7 +1054,7 @@ function fix_orphan_sf($orphan_sf_sql = '', $show_mess = false)
     }
 
     if ($orphan_sf_sql) {
-        $sql = "UPDATE " . BB_FORUMS . " SET forum_parent = 0, show_on_index = 1 WHERE forum_id IN($orphan_sf_sql)";
+        $sql = 'UPDATE ' . BB_FORUMS . " SET forum_parent = 0, show_on_index = 1 WHERE forum_id IN($orphan_sf_sql)";
 
         if (!DB()->sql_query($sql)) {
             bb_die('Could not change subforums data');
@@ -1094,8 +1094,8 @@ function sf_get_list($mode, $exclude = 0, $select = 0)
             foreach ($c['f'] as $fid => $f) {
                 $selected = ($fid == $select) ? HTML_SELECTED : '';
                 $disabled = ($fid == $exclude && !$forum_parent) ? HTML_DISABLED : '';
-                $style = ($disabled) ? ' style="color: gray" ' : (($fid == $exclude) ? ' style="color: darkred" ' : '');
-                $opt .= '<option value="' . $fid . '" ' . $selected . $disabled . $style . '>' . (($f['forum_parent']) ? HTML_SF_SPACER : '') . htmlCHR(str_short($f['forum_name'], 60)) . "&nbsp;</option>\n";
+                $style = $disabled ? ' style="color: gray" ' : (($fid == $exclude) ? ' style="color: darkred" ' : '');
+                $opt .= '<option value="' . $fid . '" ' . $selected . $disabled . $style . '>' . ($f['forum_parent'] ? HTML_SF_SPACER : '') . htmlCHR(str_short($f['forum_name'], 60)) . "&nbsp;</option>\n";
             }
 
             $opt .= '</optgroup>';
@@ -1130,9 +1130,9 @@ function get_forum_data($forum_id)
  */
 function get_max_forum_order($cat_id)
 {
-    $row = DB()->fetch_row("
+    $row = DB()->fetch_row('
 		SELECT MAX(forum_order) AS max_forum_order
-		FROM " . BB_FORUMS . "
+		FROM ' . BB_FORUMS . "
 		WHERE cat_id = $cat_id
 	");
 
@@ -1151,10 +1151,10 @@ function check_name_dup($mode, $name, $die_on_error = true)
 
     if ($mode == 'cat') {
         $what_checked = 'category';
-        $sql = "SELECT cat_id FROM " . BB_CATEGORIES . " WHERE cat_title = '$name_sql'";
+        $sql = 'SELECT cat_id FROM ' . BB_CATEGORIES . " WHERE cat_title = '$name_sql'";
     } else {
         $what_checked = 'forum';
-        $sql = "SELECT forum_id FROM " . BB_FORUMS . " WHERE forum_name = '$name_sql'";
+        $sql = 'SELECT forum_id FROM ' . BB_FORUMS . " WHERE forum_name = '$name_sql'";
     }
 
     $name_is_dup = DB()->fetch_row($sql);
@@ -1175,8 +1175,8 @@ function check_name_dup($mode, $name, $die_on_error = true)
  */
 function change_sf_cat($parent_id, $new_cat_id, $order_shear)
 {
-    DB()->query("
-		UPDATE " . BB_FORUMS . " SET
+    DB()->query('
+		UPDATE ' . BB_FORUMS . " SET
 			cat_id      = $new_cat_id,
 			forum_order = forum_order + $order_shear
 		WHERE forum_parent = $parent_id

@@ -38,7 +38,7 @@ $cron_action = isset($_POST['cron_action']) ? $_POST['cron_action'] : '';
 
 if ($mode == 'run' && !$job_id) {
     define('BB_ROOT', './../');
-    require(BB_ROOT . 'common.php');
+    require BB_ROOT . 'common.php';
     $user->session_start();
     redirect('admin/' . basename(__FILE__) . '?mode=list');
 } else {
@@ -52,7 +52,7 @@ if (!IS_SUPER_ADMIN) {
 require INC_DIR . '/functions_admin_torrent.php';
 require INC_DIR . '/functions_admin_cron.php';
 
-$sql = DB()->fetch_rowset("SELECT * FROM " . BB_CONFIG . " WHERE config_name = 'cron_enabled' OR config_name = 'cron_check_interval'");
+$sql = DB()->fetch_rowset('SELECT * FROM ' . BB_CONFIG . " WHERE config_name = 'cron_enabled' OR config_name = 'cron_check_interval'");
 
 foreach ($sql as $row) {
     $config_name = $row['config_name'];
@@ -67,13 +67,13 @@ foreach ($sql as $row) {
 }
 
 $template->assign_vars(array(
-    'CRON_ENABLED' => ($new['cron_enabled']) ? true : false,
+    'CRON_ENABLED' => $new['cron_enabled'] ? true : false,
     'CRON_CHECK_INTERVAL' => $new['cron_check_interval'],
 ));
 
 switch ($mode) {
     case 'list':
-        $sql = DB()->fetch_rowset("SELECT * FROM " . BB_CRON . " ORDER BY cron_id");
+        $sql = DB()->fetch_rowset('SELECT * FROM ' . BB_CRON . ' ORDER BY cron_id');
 
         foreach ($sql as $i => $row) {
             $template->assign_block_vars('list', array(
@@ -107,7 +107,7 @@ switch ($mode) {
 
     case 'repair':
         if (file_exists('../triggers/cron_running')) {
-            rename("../triggers/cron_running", "../triggers/cron_allowed");
+            rename('../triggers/cron_running', '../triggers/cron_allowed');
         }
         redirect('admin/' . basename(__FILE__) . '?mode=list');
         break;
@@ -118,7 +118,7 @@ switch ($mode) {
         break;
 
     case 'edit':
-        $sql = DB()->fetch_rowset("SELECT * FROM " . BB_CRON . " WHERE cron_id = $job_id");
+        $sql = DB()->fetch_rowset('SELECT * FROM ' . BB_CRON . " WHERE cron_id = $job_id");
 
         foreach ($sql as $row) {
             $template->assign_vars(array(
