@@ -147,11 +147,8 @@ $topic_csv = '';
 if ($var =& $_REQUEST[$topic_key]) {
     $topic_selected = get_id_ary($var);
     $topic_csv = implode(',', $topic_selected);
-    $url = ($topic_csv) ? url_arg($url, $topic_key, $topic_csv) : $url;
+    $url = $topic_csv ? url_arg($url, $topic_key, $topic_csv) : $url;
 }
-
-// Order
-$order_val = 'log_time';
 
 // Sort
 $sort_val = $def_sort;
@@ -181,7 +178,7 @@ $time_end_val = 86400 + mktime(0, 0, 0, date('m', $datetime_val), date('d', $dat
 $time_start_val = $time_end_val - 86400 * $daysback_val;
 
 // First log time
-$row = DB()->fetch_row("SELECT MIN(log_time) AS first_log_time FROM " . BB_LOG);
+$row = DB()->fetch_row('SELECT MIN(log_time) AS first_log_time FROM ' . BB_LOG);
 $first_log_time = (int)$row['first_log_time'];
 
 // Title match
@@ -194,46 +191,21 @@ if ($var =& $_REQUEST[$title_match_key]) {
     }
 }
 
-//
 // SQL
-//
-$select = "SELECT *";
+$where = " WHERE l.log_time BETWEEN '$time_start_val' AND '$time_end_val'";
+$where .= $type_csv ? " AND l.log_type_id IN($type_csv)" : '';
+$where .= $user_csv ? " AND l.log_user_id IN($user_csv)" : '';
+$where .= $forum_csv ? " AND l.log_forum_id IN($forum_csv)" : '';
+$where .= $topic_csv ? " AND l.log_topic_id IN($topic_csv)" : '';
+$where .= $title_match_sql ? " AND MATCH (l.log_topic_title) AGAINST ('$title_match_sql' IN BOOLEAN MODE)" : '';
 
-$from = "FROM " . BB_LOG;
-
-$where = "
-	WHERE log_time BETWEEN $time_start_val AND $time_end_val
-";
-$where .= ($type_csv) ? "
-		AND log_type_id IN($type_csv)
-" : '';
-$where .= ($user_csv) ? "
-		AND log_user_id IN($user_csv)
-" : '';
-$where .= ($forum_csv) ? "
-		AND log_forum_id IN($forum_csv)
-" : '';
-$where .= ($topic_csv) ? "
-		AND log_topic_id IN($topic_csv)
-" : '';
-$where .= ($title_match_sql) ? "
-		AND MATCH (log_topic_title) AGAINST ('$title_match_sql' IN BOOLEAN MODE)
-" : '';
-
-$order = "ORDER BY $order_val";
-
-$sort = $sort_val;
-
-$limit = "LIMIT $start, " . ($per_page + 1);
-
-$sql = "
-	$select
-	$from
+$sql = 'SELECT l.*, u.*
+	FROM ' . BB_LOG . ' l
+	LEFT JOIN ' . BB_USERS . " u ON(u.user_id = l.log_user_id)
 	$where
-	$order
-		$sort
-	$limit
-";
+	ORDER BY l.log_time
+	$sort_val
+	LIMIT $start, " . ($per_page + 1);
 
 $log_rowset = DB()->fetch_rowset($sql);
 $log_count = count($log_rowset);
@@ -289,7 +261,7 @@ if ($log_rowset) {
                 break;
         }
 
-        $msg .= " $row[log_msg]";
+        $msg .= " {$row['log_msg']}";
 
         $row_class = !($row_num & 1) ? $row_class_1 : $row_class_2;
 
@@ -301,7 +273,7 @@ if ($log_rowset) {
             'ACTION_HREF_S' => url_arg($url, $type_key, $row['log_type_id']),
 
             'USER_ID' => $row['log_user_id'],
-            'USERNAME' => $row['log_username'],
+            'USERNAME' => profile_url($row),
             'USER_HREF_S' => url_arg($url, $user_key, $row['log_user_id']),
             'USER_IP' => Longman\IPTools\Ip::isValid($row['log_user_ip']) ? decode_ip($row['log_user_ip']) : '127.0.0.1',
 
@@ -348,16 +320,16 @@ if ($log_rowset) {
             $filter['forums'][$forum_name] = true;
         }
         // Users
-        if ($user_csv && empty($filter['users'][$row['log_username']])) {
+        if ($user_csv && empty($filter['users'])) {
             $template->assign_block_vars('users', array(
-                'USERNAME' => $row['log_username'],
+                'USERNAME' => profile_url($row),
             ));
-            $filter['users'][$row['log_username']] = true;
+            $filter['users'] = true;
         }
     }
 
     $template->assign_vars(array(
-        'FILTERS' => ($topic_csv || $forum_csv || $user_csv),
+        'FILTERS' => $topic_csv || $forum_csv || $user_csv,
         'FILTER_TOPICS' => !empty($filter['topics']),
         'FILTER_FORUMS' => !empty($filter['forums']),
         'FILTER_USERS' => !empty($filter['users']),
@@ -366,13 +338,8 @@ if ($log_rowset) {
     $template->assign_block_vars('log_not_found', array());
 }
 
-//
-// Selects
-//
+// Select
 $log_type_select = array($lang['ACTS_LOG_ALL_ACTIONS'] => $all_types) + $log_action->log_type_select;
-
-// Order select
-$order_options = '<option value="">&nbsp;' . $lang['ACTS_LOG_TIME'] . '&nbsp;</option>';
 
 $template->assign_vars(array(
     'LOG_COLSPAN' => 4,
@@ -381,14 +348,11 @@ $template->assign_vars(array(
     'DATETIME_VAL' => date('Y-m-d', $datetime_val),
     'DAYSBACK_NAME' => $daysback_key,
     'DAYSBACK_VAL' => $daysback_val,
-    'FIRST_LOG_TIME' => ($first_log_time) ? date('Y-m-d', $first_log_time) : $lang['ACC_NONE'],
+    'FIRST_LOG_TIME' => $first_log_time ? date('Y-m-d', $first_log_time) : $lang['ACC_NONE'],
 
     'TITLE_MATCH_MAX' => $title_match_max_len,
     'TITLE_MATCH_NAME' => $title_match_key,
     'TITLE_MATCH_VAL' => $title_match_val,
-
-    'ORDER_NAME' => '',
-    'ORDER_OPTIONS' => $order_options,
 
     'SORT_NAME' => $sort_key,
     'SORT_ASC' => $sort_asc,
@@ -400,7 +364,7 @@ $template->assign_vars(array(
     'SEL_LOG_TYPE' => build_select("{$type_key}[]", $log_type_select, $type_selected, 60, $select_max_height),
     'SEL_USERS' => build_select("{$user_key}[]", $users, $user_selected, 16, $select_max_height),
 
-    'S_LOG_ACTION' => "admin_log.php",
+    'S_LOG_ACTION' => 'admin_log.php',
     'TOPIC_CSV' => $topic_csv,
 ));
 

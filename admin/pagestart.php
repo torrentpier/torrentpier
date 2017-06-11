@@ -34,7 +34,7 @@ require_once INC_DIR . '/functions_admin.php';
 $user->session_start();
 
 if (IS_GUEST) {
-    redirect(LOGIN_URL . "?redirect=admin/index.php");
+    redirect(LOGIN_URL . '?redirect=admin/index.php');
 }
 
 if (!IS_ADMIN) {

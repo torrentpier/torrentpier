@@ -15,7 +15,7 @@
 </tr>
 <tr>
 	<td class="row1" align="right"><b>{L_SUBJECT}</b></td>
-	<td class="row2"><input class="post" type="text" name="subject" size="45" maxlength="100" style="width:98%" tabindex="2" class="post" value="{SUBJECT}" /></td>
+	<td class="row2"><input type="text" name="subject" size="45" maxlength="100" style="width:98%" tabindex="2" class="post" value="{SUBJECT}" /></td>
 </tr>
 <tr>
 	<td class="row1" align="right" valign="top"> <span class="gen"><b>{L_MESSAGE}</b></span></td>
@@ -31,7 +31,7 @@
 <script type="text/javascript">
 function checkForm(formObj)
 {
-	formErrors = false;
+  var formErrors = false;
 
 	if (formObj.message.value.length < 2) {
 		formErrors = "{L_EMPTY_MESSAGE_EMAIL}";

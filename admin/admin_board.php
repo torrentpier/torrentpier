@@ -39,10 +39,10 @@ $return_links = array(
     'config_mods' => '<br /><br />' . sprintf($lang['CLICK_RETURN_CONFIG_MODS'], '<a href="admin_board.php?mode=config_mods">', '</a>')
 );
 
-//
-// Pull all config data
-//
-$sql = "SELECT * FROM " . BB_CONFIG;
+/**
+ * Pull all config data
+ */
+$sql = 'SELECT * FROM ' . BB_CONFIG;
 if (!$result = DB()->sql_query($sql)) {
     bb_die('Could not query config information in admin_board');
 } else {
@@ -54,7 +54,11 @@ if (!$result = DB()->sql_query($sql)) {
         $new[$config_name] = isset($_POST[$config_name]) ? $_POST[$config_name] : $default_config[$config_name];
 
         if (isset($_POST['submit']) && $row['config_value'] != $new[$config_name]) {
-            if ($config_name == 'seed_bonus_points' || $config_name == 'seed_bonus_release' || $config_name == 'bonus_upload' || $config_name == 'bonus_upload_price') {
+            if ($config_name == 'seed_bonus_points' ||
+                $config_name == 'seed_bonus_release' ||
+                $config_name == 'bonus_upload' ||
+                $config_name == 'bonus_upload_price'
+            ) {
                 $new[$config_name] = serialize(str_replace(',', '.', $new[$config_name]));
             }
             bb_update_config(array($config_name => $new[$config_name]));
@@ -92,7 +96,6 @@ switch ($mode) {
             'BIRTHDAY_CHECK_DAY' => $new['birthday_check_day'],
             'PREMOD' => $new['premod'],
             'TOR_COMMENT' => $new['tor_comment'],
-            'NEW_TPLS' => $new['new_tpls'],
             'SEED_BONUS_ENABLED' => $new['seed_bonus_enabled'],
             'SEED_BONUS_TOR_SIZE' => $new['seed_bonus_tor_size'],
             'SEED_BONUS_USER_REGDATE' => $new['seed_bonus_user_regdate'],
@@ -138,8 +141,8 @@ switch ($mode) {
 
             'SITENAME' => htmlCHR($new['sitename']),
             'CONFIG_SITE_DESCRIPTION' => htmlCHR($new['site_desc']),
-            'DISABLE_BOARD' => ($new['board_disable']) ? true : false,
-            'ALLOW_AUTOLOGIN' => ($new['allow_autologin']) ? true : false,
+            'DISABLE_BOARD' => $new['board_disable'] ? true : false,
+            'ALLOW_AUTOLOGIN' => $new['allow_autologin'] ? true : false,
             'AUTOLOGIN_TIME' => (int)$new['max_autologin_time'],
             'MAX_POLL_OPTIONS' => $new['max_poll_options'],
             'FLOOD_INTERVAL' => $new['flood_interval'],
@@ -151,12 +154,12 @@ switch ($mode) {
             'TIMEZONE_SELECT' => tz_select($new['board_timezone'], 'board_timezone'),
             'MAX_LOGIN_ATTEMPTS' => $new['max_login_attempts'],
             'LOGIN_RESET_TIME' => $new['login_reset_time'],
-            'PRUNE_ENABLE' => ($new['prune_enable']) ? true : false,
-            'ALLOW_BBCODE' => ($new['allow_bbcode']) ? true : false,
-            'ALLOW_SMILIES' => ($new['allow_smilies']) ? true : false,
-            'ALLOW_SIG' => ($new['allow_sig']) ? true : false,
+            'PRUNE_ENABLE' => $new['prune_enable'] ? true : false,
+            'ALLOW_BBCODE' => $new['allow_bbcode'] ? true : false,
+            'ALLOW_SMILIES' => $new['allow_smilies'] ? true : false,
+            'ALLOW_SIG' => $new['allow_sig'] ? true : false,
             'SIG_SIZE' => $new['max_sig_chars'],
-            'ALLOW_NAMECHANGE' => ($new['allow_namechange']) ? true : false,
+            'ALLOW_NAMECHANGE' => $new['allow_namechange'] ? true : false,
             'SMILIES_PATH' => $new['smilies_path'],
         ));
         break;

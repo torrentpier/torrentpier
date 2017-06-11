@@ -493,12 +493,6 @@ $(document).ready(function() {
 			</table>
 		</div>
 
-<!-- IF AD_BLOCK_200 -->
-	<div id="ad-200">{AD_BLOCK_200}</div><!--/ad-200-->
-<!-- ELSEIF AD_BLOCK_100 -->
-	<div id="ad-100">{AD_BLOCK_100}</div><!--/ad-100-->
-<!-- ENDIF / AD_BLOCK_100 -->
-
 <!--=======================-->
 <!-- ENDIF / COMMON_HEADER -->
 <!--***********************-->

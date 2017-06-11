@@ -25,7 +25,7 @@
 
 define('IN_ADMIN', true);
 define('BB_ROOT', './../../');
-require(BB_ROOT . 'common.php');
+require BB_ROOT . 'common.php';
 
 $user->session_start();
 
@@ -43,9 +43,7 @@ $sql[] = 'SELECT count(distinct(poster_id)) FROM `' . BB_BT_TORRENTS . '`';
 $sql[] = 'SELECT count(distinct(poster_id)) FROM `' . BB_BT_TORRENTS . '` WHERE reg_time >= UNIX_TIMESTAMP()-2592000';
 
 echo '<html><body><head></head>';
-echo '
-<br /><br />
-<table border="1" cellspacing="0" cellpadding="6" align="center">';
+echo '<br /><br /><table border="1" cellspacing="0" cellpadding="6" align="center">';
 
 foreach ($sql as $i => $query) {
     $row = mysqli_fetch_row(DB()->query($query));
@@ -53,7 +51,6 @@ foreach ($sql as $i => $query) {
 }
 
 echo '</table>';
-
 echo '<div align="center"><pre>';
 
 if ($l = sys('la')) {
@@ -64,7 +61,7 @@ if ($l = sys('la')) {
     echo "\n\n<b>loadavg: </b>$l[0] $l[1] $l[2]\n\n";
 }
 
-echo 'gen time: <b>' . sprintf('%.3f', (array_sum(explode(' ', microtime())) - TIMESTART)) . "</b> sec\n";
+echo 'gen time: <b>' . sprintf('%.3f', array_sum(explode(' ', microtime())) - TIMESTART) . "</b> sec\n";
 
 echo '</pre></div>';
 echo '</body></html>';

@@ -555,7 +555,6 @@ INSERT INTO `bb_config` VALUES ('network_news_forum_id', '2');
 INSERT INTO `bb_config` VALUES ('whois_info', 'http://whatismyipaddress.com/ip/');
 INSERT INTO `bb_config` VALUES ('show_mod_index', '0');
 INSERT INTO `bb_config` VALUES ('premod', '0');
-INSERT INTO `bb_config` VALUES ('new_tpls', '1');
 INSERT INTO `bb_config` VALUES ('tor_comment', '1');
 INSERT INTO `bb_config` VALUES ('terms', '');
 
@@ -826,7 +825,6 @@ DROP TABLE IF EXISTS `bb_log`;
 CREATE TABLE IF NOT EXISTS `bb_log` (
   `log_type_id`         MEDIUMINT(8) UNSIGNED NOT NULL DEFAULT '0',
   `log_user_id`         MEDIUMINT(9)          NOT NULL DEFAULT '0',
-  `log_username`        VARCHAR(25)           NOT NULL DEFAULT '',
   `log_user_ip`         VARCHAR(32)
                         CHARACTER SET utf8
                         COLLATE utf8_bin      NOT NULL DEFAULT '',

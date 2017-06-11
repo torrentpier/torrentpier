@@ -40,7 +40,9 @@ require INC_DIR . '/functions_admin_torrent.php';
 $submit = isset($_POST['submit']);
 $confirmed = isset($_POST['confirm']);
 
-// All config names with default values
+/**
+ * All config names with default values
+ */
 $default_cfg_str = array(
     'off_reason' => 'Tracker is disabled',
     'browser_redirect_url' => 'http://demo.torrentpier.me/',
@@ -66,7 +68,9 @@ $default_cfg_num = array(
     'limit_leech_ips' => 0,
 );
 
-// Set template vars
+/**
+ * Set template vars
+ */
 set_tpl_vars($default_cfg_str, $bb_cfg['tracker']);
 set_tpl_vars_lang($default_cfg_str);
 

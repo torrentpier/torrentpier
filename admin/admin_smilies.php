@@ -32,21 +32,22 @@ require __DIR__ . '/pagestart.php';
 
 // Check to see what mode we should operate in
 if (isset($_POST['mode']) || isset($_GET['mode'])) {
-    $mode = (isset($_POST['mode'])) ? $_POST['mode'] : $_GET['mode'];
+    $mode = isset($_POST['mode']) ? $_POST['mode'] : $_GET['mode'];
     $mode = htmlspecialchars($mode);
 } else {
     $mode = '';
 }
 
 $delimeter = '=+:';
+$s_hidden_fields = '';
 $smiley_paks = [];
 
 // Read a listing of uploaded smilies for use in the add or edit smliey code
-$dir = @opendir(BB_ROOT . $bb_cfg['smilies_path']);
+$dir = opendir(BB_ROOT . $bb_cfg['smilies_path']);
 
 while ($file = @readdir($dir)) {
-    if (!@is_dir(bb_realpath(BB_ROOT . $bb_cfg['smilies_path'] . '/' . $file))) {
-        $img_size = @getimagesize(BB_ROOT . $bb_cfg['smilies_path'] . '/' . $file);
+    if (!is_dir(bb_realpath(BB_ROOT . $bb_cfg['smilies_path'] . '/' . $file))) {
+        $img_size = getimagesize(BB_ROOT . $bb_cfg['smilies_path'] . '/' . $file);
 
         if ($img_size[0] && $img_size[1]) {
             $smiley_images[] = $file;
@@ -56,7 +57,7 @@ while ($file = @readdir($dir)) {
     }
 }
 
-@closedir($dir);
+closedir($dir);
 
 // Select main mode
 if (isset($_GET['import_pack']) || isset($_POST['import_pack'])) {
@@ -67,13 +68,13 @@ if (isset($_GET['import_pack']) || isset($_POST['import_pack'])) {
     if (!empty($smile_pak)) {
         // The user has already selected a smile_pak file.. Import it
         if (!empty($clear_current)) {
-            $sql = "DELETE FROM " . BB_SMILIES;
+            $sql = 'DELETE FROM ' . BB_SMILIES;
             if (!$result = DB()->sql_query($sql)) {
                 bb_die('Could not delete current smilies');
             }
             $datastore->update('smile_replacements');
         } else {
-            $sql = "SELECT code FROM " . BB_SMILIES;
+            $sql = 'SELECT code FROM ' . BB_SMILIES;
             if (!$result = DB()->sql_query($sql)) {
                 bb_die('Could not get current smilies');
             }
@@ -86,7 +87,7 @@ if (isset($_GET['import_pack']) || isset($_POST['import_pack'])) {
             }
         }
 
-        $fcontents = @file(BB_ROOT . $bb_cfg['smilies_path'] . '/' . $smile_pak);
+        $fcontents = file(BB_ROOT . $bb_cfg['smilies_path'] . '/' . $smile_pak);
 
         if (empty($fcontents)) {
             bb_die('Could not read smiley pak file');
@@ -103,14 +104,14 @@ if (isset($_GET['import_pack']) || isset($_POST['import_pack'])) {
 
                 if (isset($smiles[$k])) {
                     if (!empty($replace_existing)) {
-                        $sql = "UPDATE " . BB_SMILIES . "
+                        $sql = 'UPDATE ' . BB_SMILIES . "
 							SET smile_url = '" . DB()->escape($smile_data[0]) . "', emoticon = '" . DB()->escape($smile_data[1]) . "'
 							WHERE code = '" . DB()->escape($smile_data[$j]) . "'";
                     } else {
                         $sql = '';
                     }
                 } else {
-                    $sql = "INSERT INTO " . BB_SMILIES . " (code, smile_url, emoticon)
+                    $sql = 'INSERT INTO ' . BB_SMILIES . " (code, smile_url, emoticon)
 						VALUES('" . DB()->escape($smile_data[$j]) . "', '" . DB()->escape($smile_data[0]) . "', '" . DB()->escape($smile_data[1]) . "')";
                 }
 
@@ -149,7 +150,7 @@ if (isset($_GET['import_pack']) || isset($_POST['import_pack'])) {
     $export_pack = (string)request_var('export_pack', '');
 
     if ($export_pack == 'send') {
-        $sql = "SELECT * FROM " . BB_SMILIES;
+        $sql = 'SELECT * FROM ' . BB_SMILIES;
         if (!$result = DB()->sql_query($sql)) {
             bb_die('Could not get smiley list');
         }
@@ -163,8 +164,8 @@ if (isset($_GET['import_pack']) || isset($_POST['import_pack'])) {
             $smile_pak .= $resultset[$i]['code'] . "\n";
         }
 
-        header("Content-Type: text/x-delimtext; name=\"smiles.pak\"");
-        header("Content-disposition: attachment; filename=smiles.pak");
+        header('Content-Type: text/x-delimtext; name="smiles.pak"');
+        header('Content-disposition: attachment; filename=smiles.pak');
 
         echo $smile_pak;
 
@@ -183,7 +184,7 @@ if (isset($_GET['import_pack']) || isset($_POST['import_pack'])) {
     $template->assign_vars(array(
         'TPL_SMILE_EDIT' => true,
         'SMILEY_IMG' => BB_ROOT . $bb_cfg['smilies_path'] . '/' . $smiley_images[0],
-        'S_SMILEY_ACTION' => "admin_smilies.php",
+        'S_SMILEY_ACTION' => 'admin_smilies.php',
         'S_HIDDEN_FIELDS' => $s_hidden_fields,
         'S_FILENAME_OPTIONS' => $filename_list,
         'S_SMILEY_BASEDIR' => BB_ROOT . $bb_cfg['smilies_path']
@@ -194,7 +195,7 @@ if (isset($_GET['import_pack']) || isset($_POST['import_pack'])) {
             $smiley_id = (!empty($_POST['id'])) ? $_POST['id'] : $_GET['id'];
             $smiley_id = (int)$smiley_id;
 
-            $sql = "DELETE FROM " . BB_SMILIES . " WHERE smilies_id = " . $smiley_id;
+            $sql = 'DELETE FROM ' . BB_SMILIES . ' WHERE smilies_id = ' . $smiley_id;
             $result = DB()->sql_query($sql);
             if (!$result) {
                 bb_die('Could not delete smiley');
@@ -208,14 +209,14 @@ if (isset($_GET['import_pack']) || isset($_POST['import_pack'])) {
             $smiley_id = (!empty($_POST['id'])) ? $_POST['id'] : $_GET['id'];
             $smiley_id = (int)$smiley_id;
 
-            $sql = "SELECT * FROM " . BB_SMILIES . " WHERE smilies_id = " . $smiley_id;
+            $sql = 'SELECT * FROM ' . BB_SMILIES . ' WHERE smilies_id = ' . $smiley_id;
             $result = DB()->sql_query($sql);
             if (!$result) {
                 bb_die('Could not obtain emoticon information');
             }
             $smile_data = DB()->sql_fetchrow($result);
 
-            $filename_list = '';
+            $filename_list = $smiley_edit_img = '';
             for ($i = 0, $iMax = count($smiley_images); $i < $iMax; $i++) {
                 if ($smiley_images[$i] == $smile_data['smile_url']) {
                     $smiley_selected = 'selected="selected"';
@@ -233,7 +234,7 @@ if (isset($_GET['import_pack']) || isset($_POST['import_pack'])) {
                 'SMILEY_CODE' => $smile_data['code'],
                 'SMILEY_EMOTICON' => $smile_data['emoticon'],
                 'SMILEY_IMG' => BB_ROOT . $bb_cfg['smilies_path'] . '/' . $smiley_edit_img,
-                'S_SMILEY_ACTION' => "admin_smilies.php",
+                'S_SMILEY_ACTION' => 'admin_smilies.php',
                 'S_HIDDEN_FIELDS' => $s_hidden_fields,
                 'S_FILENAME_OPTIONS' => $filename_list,
                 'S_SMILEY_BASEDIR' => BB_ROOT . $bb_cfg['smilies_path'],
@@ -242,11 +243,11 @@ if (isset($_GET['import_pack']) || isset($_POST['import_pack'])) {
             break;
 
         case 'save':
-            $smile_code = (isset($_POST['smile_code'])) ? trim($_POST['smile_code']) : trim($_GET['smile_code']);
-            $smile_url = (isset($_POST['smile_url'])) ? trim($_POST['smile_url']) : trim($_GET['smile_url']);
+            $smile_code = isset($_POST['smile_code']) ? trim($_POST['smile_code']) : trim($_GET['smile_code']);
+            $smile_url = isset($_POST['smile_url']) ? trim($_POST['smile_url']) : trim($_GET['smile_url']);
             $smile_url = bb_ltrim(basename($smile_url), "'");
-            $smile_emotion = (isset($_POST['smile_emotion'])) ? trim($_POST['smile_emotion']) : trim($_GET['smile_emotion']);
-            $smile_id = (isset($_POST['smile_id'])) ? (int)$_POST['smile_id'] : (int)$_GET['smile_id'];
+            $smile_emotion = isset($_POST['smile_emotion']) ? trim($_POST['smile_emotion']) : trim($_GET['smile_emotion']);
+            $smile_id = isset($_POST['smile_id']) ? (int)$_POST['smile_id'] : (int)$_GET['smile_id'];
 
             // If no code was entered complain
             if ($smile_code == '' || $smile_url == '') {
@@ -258,7 +259,7 @@ if (isset($_GET['import_pack']) || isset($_POST['import_pack'])) {
             $smile_code = str_replace('>', '&gt;', $smile_code);
 
             // Proceed with updating the smiley table
-            $sql = "UPDATE " . BB_SMILIES . "
+            $sql = 'UPDATE ' . BB_SMILIES . "
 				SET code = '" . DB()->escape($smile_code) . "', smile_url = '" . DB()->escape($smile_url) . "', emoticon = '" . DB()->escape($smile_emotion) . "'
 				WHERE smilies_id = $smile_id";
             if (!($result = DB()->sql_query($sql))) {
@@ -270,10 +271,10 @@ if (isset($_GET['import_pack']) || isset($_POST['import_pack'])) {
             break;
 
         case 'savenew':
-            $smile_code = (isset($_POST['smile_code'])) ? $_POST['smile_code'] : $_GET['smile_code'];
-            $smile_url = (isset($_POST['smile_url'])) ? $_POST['smile_url'] : $_GET['smile_url'];
+            $smile_code = isset($_POST['smile_code']) ? $_POST['smile_code'] : $_GET['smile_code'];
+            $smile_url = isset($_POST['smile_url']) ? $_POST['smile_url'] : $_GET['smile_url'];
             $smile_url = bb_ltrim(basename($smile_url), "'");
-            $smile_emotion = (isset($_POST['smile_emotion'])) ? $_POST['smile_emotion'] : $_GET['smile_emotion'];
+            $smile_emotion = isset($_POST['smile_emotion']) ? $_POST['smile_emotion'] : $_GET['smile_emotion'];
             $smile_code = trim($smile_code);
             $smile_url = trim($smile_url);
             $smile_emotion = trim($smile_emotion);
@@ -288,7 +289,7 @@ if (isset($_GET['import_pack']) || isset($_POST['import_pack'])) {
             $smile_code = str_replace('>', '&gt;', $smile_code);
 
             // Save the data to the smiley table
-            $sql = "INSERT INTO " . BB_SMILIES . " (code, smile_url, emoticon)
+            $sql = 'INSERT INTO ' . BB_SMILIES . " (code, smile_url, emoticon)
 				VALUES ('" . DB()->escape($smile_code) . "', '" . DB()->escape($smile_url) . "', '" . DB()->escape($smile_emotion) . "')";
             $result = DB()->sql_query($sql);
             if (!$result) {
@@ -300,7 +301,7 @@ if (isset($_GET['import_pack']) || isset($_POST['import_pack'])) {
             break;
     }
 } else {
-    $sql = "SELECT * FROM " . BB_SMILIES;
+    $sql = 'SELECT * FROM ' . BB_SMILIES;
     $result = DB()->sql_query($sql);
     if (!$result) {
         bb_die('Could not obtain smileys from database');
@@ -310,7 +311,7 @@ if (isset($_GET['import_pack']) || isset($_POST['import_pack'])) {
 
     $template->assign_vars(array(
         'TPL_SMILE_MAIN' => true,
-        'S_HIDDEN_FIELDS' => @$s_hidden_fields,
+        'S_HIDDEN_FIELDS' => $s_hidden_fields,
         'S_SMILEY_ACTION' => 'admin_smilies.php',
     ));
 
@@ -329,8 +330,8 @@ if (isset($_GET['import_pack']) || isset($_POST['import_pack'])) {
             'CODE' => $smilies[$i]['code'],
             'EMOT' => $smilies[$i]['emoticon'],
 
-            'U_SMILEY_EDIT' => "admin_smilies.php?mode=edit&amp;id=" . $smilies[$i]['smilies_id'],
-            'U_SMILEY_DELETE' => "admin_smilies.php?mode=delete&amp;id=" . $smilies[$i]['smilies_id'],
+            'U_SMILEY_EDIT' => 'admin_smilies.php?mode=edit&amp;id=' . $smilies[$i]['smilies_id'],
+            'U_SMILEY_DELETE' => 'admin_smilies.php?mode=delete&amp;id=' . $smilies[$i]['smilies_id'],
         ));
     }
 }

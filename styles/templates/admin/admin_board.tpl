@@ -217,13 +217,6 @@
 		<label><input type="radio" name="tor_comment" value="0" <!-- IF not TOR_COMMENT -->checked="checked"<!-- ENDIF --> />{L_DISABLED}</label>
 	</td>
 </tr>
-<tr>
-	<td><h4>{L_DESIGNER}</h4></td>
-	<td>
-		<label><input type="radio" name="new_tpls" value="1" <!-- IF NEW_TPLS -->checked="checked"<!-- ENDIF --> />{L_ENABLED}</label>&nbsp;&nbsp;
-		<label><input type="radio" name="new_tpls" value="0" <!-- IF not NEW_TPLS -->checked="checked"<!-- ENDIF --> />{L_DISABLED}</label>
-	</td>
-</tr>
 
 <tr class="row3 med">
 	<td class="bold tCenter" colspan="2">{L_LATEST_NEWS}</td>

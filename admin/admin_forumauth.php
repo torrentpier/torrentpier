@@ -30,7 +30,7 @@ if (!empty($setmodules)) {
 
 require __DIR__ . '/pagestart.php';
 
-$forum_auth_fields = array(
+$forum_auth_fields = [
     'auth_view',
     'auth_read',
     'auth_reply',
@@ -43,27 +43,20 @@ $forum_auth_fields = array(
     'auth_post',
     'auth_sticky',
     'auth_announce',
-);
+];
 
 // View  Read  Reply  Edit  Delete  Vote  Poll  PostAttach  DownAttach  PostTopic  Sticky  Announce
-$simple_auth_ary = array(
-    /* Public */
-    0 => array(AUTH_ALL, AUTH_ALL, AUTH_ALL, AUTH_REG, AUTH_REG, AUTH_REG, AUTH_REG, AUTH_REG, AUTH_ALL, AUTH_ALL, AUTH_MOD, AUTH_MOD), // Public
-    /* Reg */
-    1 => array(AUTH_ALL, AUTH_ALL, AUTH_REG, AUTH_REG, AUTH_REG, AUTH_REG, AUTH_REG, AUTH_REG, AUTH_REG, AUTH_REG, AUTH_MOD, AUTH_MOD), // Registered
-    /* Reg [Hid] */
-    2 => array(AUTH_REG, AUTH_REG, AUTH_REG, AUTH_REG, AUTH_REG, AUTH_REG, AUTH_REG, AUTH_REG, AUTH_REG, AUTH_REG, AUTH_MOD, AUTH_MOD), // Registered [Hidden]
-    /* Priv */
-    3 => array(AUTH_REG, AUTH_ACL, AUTH_ACL, AUTH_ACL, AUTH_ACL, AUTH_ACL, AUTH_ACL, AUTH_ACL, AUTH_ACL, AUTH_ACL, AUTH_MOD, AUTH_MOD), // Private
-    /* Priv [Hid] */
-    4 => array(AUTH_ACL, AUTH_ACL, AUTH_ACL, AUTH_ACL, AUTH_ACL, AUTH_ACL, AUTH_ACL, AUTH_ACL, AUTH_ACL, AUTH_ACL, AUTH_MOD, AUTH_MOD), // Private [Hidden]
-    /* MOD */
-    5 => array(AUTH_REG, AUTH_MOD, AUTH_MOD, AUTH_MOD, AUTH_MOD, AUTH_MOD, AUTH_MOD, AUTH_MOD, AUTH_MOD, AUTH_MOD, AUTH_MOD, AUTH_MOD), // Moderators
-    /* MOD [Hid] */
-    6 => array(AUTH_MOD, AUTH_MOD, AUTH_MOD, AUTH_MOD, AUTH_MOD, AUTH_MOD, AUTH_MOD, AUTH_MOD, AUTH_MOD, AUTH_MOD, AUTH_MOD, AUTH_MOD), // Moderators [Hidden]
-);
+$simple_auth_ary = [
+    0 => [AUTH_ALL, AUTH_ALL, AUTH_ALL, AUTH_REG, AUTH_REG, AUTH_REG, AUTH_REG, AUTH_REG, AUTH_ALL, AUTH_ALL, AUTH_MOD, AUTH_MOD], // Public
+    1 => [AUTH_ALL, AUTH_ALL, AUTH_REG, AUTH_REG, AUTH_REG, AUTH_REG, AUTH_REG, AUTH_REG, AUTH_REG, AUTH_REG, AUTH_MOD, AUTH_MOD], // Registered
+    2 => [AUTH_REG, AUTH_REG, AUTH_REG, AUTH_REG, AUTH_REG, AUTH_REG, AUTH_REG, AUTH_REG, AUTH_REG, AUTH_REG, AUTH_MOD, AUTH_MOD], // Registered [Hidden]
+    3 => [AUTH_REG, AUTH_ACL, AUTH_ACL, AUTH_ACL, AUTH_ACL, AUTH_ACL, AUTH_ACL, AUTH_ACL, AUTH_ACL, AUTH_ACL, AUTH_MOD, AUTH_MOD], // Private
+    4 => [AUTH_ACL, AUTH_ACL, AUTH_ACL, AUTH_ACL, AUTH_ACL, AUTH_ACL, AUTH_ACL, AUTH_ACL, AUTH_ACL, AUTH_ACL, AUTH_MOD, AUTH_MOD], // Private [Hidden]
+    5 => [AUTH_REG, AUTH_MOD, AUTH_MOD, AUTH_MOD, AUTH_MOD, AUTH_MOD, AUTH_MOD, AUTH_MOD, AUTH_MOD, AUTH_MOD, AUTH_MOD, AUTH_MOD], // Moderators
+    6 => [AUTH_MOD, AUTH_MOD, AUTH_MOD, AUTH_MOD, AUTH_MOD, AUTH_MOD, AUTH_MOD, AUTH_MOD, AUTH_MOD, AUTH_MOD, AUTH_MOD, AUTH_MOD], // Moderators [Hidden]
+];
 
-$simple_auth_types = array(
+$simple_auth_types = [
     $lang['PUBLIC'],
     $lang['REGISTERED'],
     $lang['REGISTERED'] . ' [' . $lang['HIDDEN'] . ']',
@@ -71,17 +64,17 @@ $simple_auth_types = array(
     $lang['PRIVATE'] . ' [' . $lang['HIDDEN'] . ']',
     $lang['MODERATORS'],
     $lang['MODERATORS'] . ' [' . $lang['HIDDEN'] . ']',
-);
+];
 
-$field_names = array();
+$field_names = [];
 foreach ($forum_auth_fields as $auth_type) {
     $field_names[$auth_type] = $lang[strtoupper($auth_type)];
 }
 
-$forum_auth_levels = array('ALL', 'REG', 'PRIVATE', 'MOD', 'ADMIN');
-$forum_auth_const = array(AUTH_ALL, AUTH_REG, AUTH_ACL, AUTH_MOD, AUTH_ADMIN);
+$forum_auth_levels = ['ALL', 'REG', 'PRIVATE', 'MOD', 'ADMIN'];
+$forum_auth_const = [AUTH_ALL, AUTH_REG, AUTH_ACL, AUTH_MOD, AUTH_ADMIN];
 
-if (@$_REQUEST[POST_FORUM_URL]) {
+if (isset($_REQUEST[POST_FORUM_URL])) {
     $forum_id = (int)$_REQUEST[POST_FORUM_URL];
     $forum_sql = "WHERE forum_id = $forum_id";
 } else {
@@ -95,9 +88,9 @@ if (isset($_GET['adv'])) {
     unset($adv);
 }
 
-//
-// Start program proper
-//
+/**
+ * Start program proper
+ */
 if (isset($_POST['submit'])) {
     $sql = '';
 
@@ -110,7 +103,7 @@ if (isset($_POST['submit'])) {
             }
 
             if (is_array($simple_ary)) {
-                $sql = "UPDATE " . BB_FORUMS . " SET $sql WHERE forum_id = $forum_id";
+                $sql = 'UPDATE ' . BB_FORUMS . " SET $sql WHERE forum_id = $forum_id";
             }
         } else {
             for ($i = 0, $iMax = count($forum_auth_fields); $i < $iMax; $i++) {
@@ -125,7 +118,7 @@ if (isset($_POST['submit'])) {
                 $sql .= (($sql != '') ? ', ' : '') . $forum_auth_fields[$i] . ' = ' . $value;
             }
 
-            $sql = "UPDATE " . BB_FORUMS . " SET $sql WHERE forum_id = $forum_id";
+            $sql = 'UPDATE ' . BB_FORUMS . " SET $sql WHERE forum_id = $forum_id";
         }
 
         if ($sql != '') {
@@ -139,15 +132,13 @@ if (isset($_POST['submit'])) {
     }
 
     $datastore->update('cat_forums');
-    bb_die($lang['FORUM_AUTH_UPDATED'] . '<br /><br />' . sprintf($lang['CLICK_RETURN_FORUMAUTH'], '<a href="' . "admin_forumauth.php" . '">', "</a>"));
-} // End of submit
+    bb_die($lang['FORUM_AUTH_UPDATED'] . '<br /><br />' . sprintf($lang['CLICK_RETURN_FORUMAUTH'], '<a href="' . 'admin_forumauth.php' . '">', '</a>'));
+}
 
-//
-// Get required information, either all forums if
-// no id was specified or just the requsted if it
-// was
-//
-$forum_rows = DB()->fetch_rowset("SELECT * FROM " . BB_FORUMS . " $forum_sql");
+/**
+ * Get required information
+ */
+$forum_rows = DB()->fetch_rowset('SELECT * FROM ' . BB_FORUMS . " $forum_sql");
 
 if (empty($forum_id)) {
     // Output the selection table if no forum id was specified
@@ -203,10 +194,7 @@ if (empty($forum_id)) {
 
         $s_column_span++;
     } else {
-        //
-        // Output values of individual
-        // fields
-        //
+        // Output values of individual fields
         for ($j = 0, $jMax = count($forum_auth_fields); $j < $jMax; $j++) {
             $custom_auth[$j] = '&nbsp;<select name="' . $forum_auth_fields[$j] . '">';
 
@@ -227,9 +215,9 @@ if (empty($forum_id)) {
         }
     }
 
-    $adv_mode = (empty($adv)) ? '1' : '0';
+    $adv_mode = empty($adv) ? '1' : '0';
     $switch_mode = "admin_forumauth.php?f=$forum_id&amp;adv=$adv_mode";
-    $switch_mode_text = (empty($adv)) ? $lang['ADVANCED_MODE'] : $lang['SIMPLE_MODE'];
+    $switch_mode_text = empty($adv) ? $lang['ADVANCED_MODE'] : $lang['SIMPLE_MODE'];
     $u_switch_mode = '<a href="' . $switch_mode . '">' . $switch_mode_text . '</a>';
 
     $s_hidden_fields = '<input type="hidden" name="' . POST_FORUM_URL . '" value="' . $forum_id . '">';

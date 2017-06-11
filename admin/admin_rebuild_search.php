@@ -46,22 +46,22 @@ define('REBUILD_SEARCH_COMPLETED', 2);  // when all the db posts have been proce
 //
 $def_post_limit = 50;
 $def_refresh_rate = 3;
-$def_time_limit = ($sys_time_limit = @ini_get('max_execution_time')) ? $sys_time_limit : 30;
+$def_time_limit = ($sys_time_limit = ini_get('max_execution_time')) ? $sys_time_limit : 30;
 
 $last_session_data = get_rebuild_session_details('last', 'all');
 $last_session_id = (int)$last_session_data['rebuild_session_id'];
 $max_post_id = get_latest_post_id();
 $start_time = TIMENOW;
 
-$mode = (string)@$_REQUEST['mode'];
+$mode = isset($_REQUEST['mode']) ? (string)$_REQUEST['mode'] : '';
 
 // check if the user has choosen to stop processing
 if (isset($_REQUEST['cancel_button'])) {
     // update the rebuild_status
     if ($last_session_id) {
-        DB()->query("
-			UPDATE " . BB_SEARCH_REBUILD . " SET
-				rebuild_session_status = " . REBUILD_SEARCH_ABORTED . "
+        DB()->query('
+			UPDATE ' . BB_SEARCH_REBUILD . ' SET
+				rebuild_session_status = ' . REBUILD_SEARCH_ABORTED . "
 			WHERE rebuild_session_id = $last_session_id
 		");
     }
@@ -70,7 +70,7 @@ if (isset($_REQUEST['cancel_button'])) {
 }
 
 // from which post to start processing
-$start = abs((int)(@$_REQUEST['start']));
+$start = isset($_REQUEST['start']) ? abs((int)$_REQUEST['start']) : 0;
 
 // get the total number of posts in the db
 $total_posts = get_total_posts();
@@ -86,7 +86,8 @@ $session_posts_processed = ($mode == 'refresh') ? get_processed_posts('session')
 $total_posts_processing = $total_posts - $total_posts_processed;
 
 // how many posts to process in this session
-if ($session_posts_processing = @(int)$_REQUEST['session_posts_processing']) {
+$session_posts_processing = isset($_REQUEST['session_posts_processing']) ? (int)$_REQUEST['session_posts_processing'] : null;
+if (null !== $session_posts_processing) {
     if ($mode == 'submit') {
         // check if we passed over total_posts just after submitting
         if ($session_posts_processing + $total_posts_processed > $total_posts) {
@@ -116,9 +117,9 @@ if (isset($_REQUEST['time_limit'])) {
     $time_limit_explain = $lang['TIME_LIMIT_EXPLAIN'];
 
     // check for webserver timeout (IE returns null)
-    if (isset($_SERVER["HTTP_KEEP_ALIVE"])) {
+    if (isset($_SERVER['HTTP_KEEP_ALIVE'])) {
         // get webserver timeout
-        $webserver_timeout = (int)$_SERVER["HTTP_KEEP_ALIVE"];
+        $webserver_timeout = (int)$_SERVER['HTTP_KEEP_ALIVE'];
         $time_limit_explain .= '<br />' . sprintf($lang['TIME_LIMIT_EXPLAIN_WEBSERVER'], $webserver_timeout);
 
         if ($time_limit > $webserver_timeout) {
@@ -138,7 +139,7 @@ if ($mode == 'submit') {
 }
 
 // Increase maximum execution time in case of a lot of posts, but don't complain about it if it isn't allowed.
-@set_time_limit($time_limit + 20);
+set_time_limit($time_limit + 20);
 
 // check if we are should start processing
 if ($mode == 'submit' || $mode == 'refresh') {
@@ -157,12 +158,12 @@ if ($mode == 'submit' || $mode == 'refresh') {
 			pt.post_id, pt.post_text,
 			IF(p.post_id = t.topic_first_post_id, t.topic_title, '') AS post_subject
 		FROM
-			" . BB_POSTS_TEXT . " pt,
-			" . BB_POSTS . " p,
-			" . BB_TOPICS . " t
+			" . BB_POSTS_TEXT . ' pt,
+			' . BB_POSTS . ' p,
+			' . BB_TOPICS . ' t
 		WHERE p.post_id = pt.post_id
 			AND t.topic_id = p.topic_id
-			AND p.poster_id NOT IN(" . BOT_UID . ")
+			AND p.poster_id NOT IN(' . BOT_UID . ")
 			AND pt.post_id >= $start
 		ORDER BY pt.post_id ASC
 		LIMIT $post_limit
@@ -174,7 +175,7 @@ if ($mode == 'submit' || $mode == 'refresh') {
     $words_sql = array();
 
     while ($row = DB()->fetch_next($result) and !$timer_expired) {
-        @set_time_limit(600);
+        set_time_limit(600);
         $start_post_id = ($num_rows == 0) ? $row['post_id'] : $start_post_id;
         $end_post_id = $row['post_id'];
 
@@ -192,7 +193,7 @@ if ($mode == 'submit' || $mode == 'refresh') {
 
     // Store search words
     if ($words_sql) {
-        DB()->query("REPLACE INTO " . BB_POSTS_SEARCH . DB()->build_array('MULTI_INSERT', $words_sql));
+        DB()->query('REPLACE INTO ' . BB_POSTS_SEARCH . DB()->build_array('MULTI_INSERT', $words_sql));
     }
 
     // find how much time the last cycle took
@@ -214,13 +215,13 @@ if ($mode == 'submit' || $mode == 'refresh') {
                 'search_size' => (int)$search_tables_size,
                 'rebuild_session_status' => REBUILD_SEARCH_PROCESSED,
             ));
-            DB()->query("REPLACE INTO " . BB_SEARCH_REBUILD . $args);
+            DB()->query('REPLACE INTO ' . BB_SEARCH_REBUILD . $args);
         } else {
             // refresh
 
             // update the last session entry
-            DB()->query("
-				UPDATE " . BB_SEARCH_REBUILD . " SET
+            DB()->query('
+				UPDATE ' . BB_SEARCH_REBUILD . " SET
 					end_post_id     = $end_post_id,
 					end_time        = " . TIMENOW . ",
 					last_cycle_time = $last_cycle_time,
@@ -237,7 +238,7 @@ if ($mode == 'submit' || $mode == 'refresh') {
     $template->assign_vars(array('TPL_REBUILD_SEARCH_PROGRESS' => true));
 
     $processing_messages = '';
-    $processing_messages .= ($timer_expired) ? sprintf($lang['TIMER_EXPIRED'], TIMENOW - $start_time) : '';
+    $processing_messages .= $timer_expired ? sprintf($lang['TIMER_EXPIRED'], TIMENOW - $start_time) : '';
     $processing_messages .= ($start == 0 && $clear_search) ? $lang['CLEARED_SEARCH_TABLES'] : '';
 
     // check if we have reached the end of our post processing
@@ -267,7 +268,7 @@ if ($mode == 'submit' || $mode == 'refresh') {
     } else {
         // end of processing
 
-        $form_action = "admin_rebuild_search.php";
+        $form_action = 'admin_rebuild_search.php';
         $next_button = $lang['FINISHED'];
         $progress_bar_img = $images['progress_bar_full'];
 
@@ -275,8 +276,8 @@ if ($mode == 'submit' || $mode == 'refresh') {
         $processing_messages .= ($total_posts_processed == $total_posts) ? $lang['ALL_POSTS_PROCESSED'] : $lang['ALL_SESSION_POSTS_PROCESSED'];
 
         // if we have processed all the db posts we need to update the rebuild_status
-        DB()->query("UPDATE " . BB_SEARCH_REBUILD . " SET
-				rebuild_session_status = " . REBUILD_SEARCH_COMPLETED . "
+        DB()->query('UPDATE ' . BB_SEARCH_REBUILD . ' SET
+				rebuild_session_status = ' . REBUILD_SEARCH_COMPLETED . "
 			WHERE rebuild_session_id = $last_session_id
 				AND end_post_id = $max_post_id
 		");
@@ -369,7 +370,7 @@ if ($mode == 'submit' || $mode == 'refresh') {
             $last_saved_processing = sprintf($lang['INFO_PROCESSING_STOPPED'], $last_saved_post_id, $total_posts_processed, $last_saved_date);
             $clear_search_disabled = 'disabled="disabled"';
 
-            $template->assign_block_vars("start_select_input", array());
+            $template->assign_block_vars('start_select_input', array());
         } elseif ($last_session_data['rebuild_session_status'] == REBUILD_SEARCH_ABORTED) {
             $last_saved_processing = sprintf($lang['INFO_PROCESSING_ABORTED'], $last_saved_post_id, $total_posts_processed, $last_saved_date);
             // check if the interrupted cycle has finished
@@ -378,25 +379,25 @@ if ($mode == 'submit' || $mode == 'refresh') {
             }
             $clear_search_disabled = 'disabled="disabled"';
 
-            $template->assign_block_vars("start_select_input", array());
+            $template->assign_block_vars('start_select_input', array());
         } else {
             // when finished
 
             if ($last_session_data['end_post_id'] < $max_post_id) {
-                $last_saved_processing = sprintf($lang['INFO_PROCESSING_FINISHED_NEW'], $last_saved_post_id, $total_posts_processed, $last_saved_date, ($total_posts - $total_posts_processed));
+                $last_saved_processing = sprintf($lang['INFO_PROCESSING_FINISHED_NEW'], $last_saved_post_id, $total_posts_processed, $last_saved_date, $total_posts - $total_posts_processed);
                 $clear_search_disabled = 'disabled="disabled"';
 
-                $template->assign_block_vars("start_select_input", array());
+                $template->assign_block_vars('start_select_input', array());
             } else {
                 $last_saved_processing = sprintf($lang['INFO_PROCESSING_FINISHED'], $total_posts, $last_saved_date);
 
-                $template->assign_block_vars("start_text_input", array());
+                $template->assign_block_vars('start_text_input', array());
             }
         }
 
-        $template->assign_block_vars("last_saved_info", array());
+        $template->assign_block_vars('last_saved_info', array());
     } else {
-        $template->assign_block_vars("start_text_input", array());
+        $template->assign_block_vars('start_text_input', array());
     }
 
     // create the output of page
@@ -417,7 +418,7 @@ if ($mode == 'submit' || $mode == 'refresh') {
         'SESSION_ID' => $userdata['session_id'],
 
         'S_HIDDEN_FIELDS' => $s_hidden_fields,
-        'S_REBUILD_SEARCH_ACTION' => "admin_rebuild_search.php?mode=submit",
+        'S_REBUILD_SEARCH_ACTION' => 'admin_rebuild_search.php?mode=submit',
     ));
 }
 
@@ -431,7 +432,7 @@ function get_db_sizes()
     $search_data_size = $search_index_size = 0;
     $search_table_like = DB()->escape(BB_POSTS_SEARCH);
 
-    $sql = "SHOW TABLE STATUS FROM `" . DB()->selected_db . "` LIKE '$search_table_like'";
+    $sql = 'SHOW TABLE STATUS FROM `' . DB()->selected_db . "` LIKE '$search_table_like'";
 
     foreach (DB()->fetch_rowset($sql) as $row) {
         $search_data_size += $row['Data_length'];
@@ -444,7 +445,7 @@ function get_db_sizes()
 // get the latest post_id in the forum
 function get_latest_post_id()
 {
-    $row = DB()->fetch_row("SELECT MAX(post_id) as post_id FROM " . BB_POSTS_TEXT);
+    $row = DB()->fetch_row('SELECT MAX(post_id) as post_id FROM ' . BB_POSTS_TEXT);
 
     return (int)$row['post_id'];
 }
@@ -474,9 +475,9 @@ function get_rebuild_session_details($id, $details = 'all')
     $session_details = get_empty_last_session_data();
 
     if ($id != 'last') {
-        $sql = "SELECT * FROM " . BB_SEARCH_REBUILD . " WHERE rebuild_session_id = $id";
+        $sql = 'SELECT * FROM ' . BB_SEARCH_REBUILD . " WHERE rebuild_session_id = $id";
     } else {
-        $sql = "SELECT * FROM " . BB_SEARCH_REBUILD . " ORDER BY rebuild_session_id DESC LIMIT 1";
+        $sql = 'SELECT * FROM ' . BB_SEARCH_REBUILD . ' ORDER BY rebuild_session_id DESC LIMIT 1';
     }
 
     if ($row = DB()->fetch_row($sql)) {
@@ -494,7 +495,7 @@ function get_processed_posts($mode = 'session')
     global $last_session_data;
 
     if ($mode == 'total') {
-        $sql = "SELECT SUM(session_posts) as posts FROM " . BB_SEARCH_REBUILD;
+        $sql = 'SELECT SUM(session_posts) as posts FROM ' . BB_SEARCH_REBUILD;
         $row = DB()->fetch_row($sql);
     } else {
         $row['posts'] = $last_session_data['session_posts'];
@@ -508,10 +509,10 @@ function get_processed_posts($mode = 'session')
 function get_total_posts($mode = 'after', $post_id = 0)
 {
     if ($post_id) {
-        $sql = "SELECT COUNT(post_id) as total_posts FROM " . BB_POSTS_TEXT . "
-			WHERE post_id " . (($mode == 'after') ? '>= ' : '<= ') . (int)$post_id;
+        $sql = 'SELECT COUNT(post_id) as total_posts FROM ' . BB_POSTS_TEXT . '
+			WHERE post_id ' . (($mode == 'after') ? '>= ' : '<= ') . (int)$post_id;
     } else {
-        $sql = "SELECT COUNT(*) as total_posts FROM " . BB_POSTS_TEXT;
+        $sql = 'SELECT COUNT(*) as total_posts FROM ' . BB_POSTS_TEXT;
     }
 
     $row = DB()->fetch_row($sql);
@@ -521,13 +522,13 @@ function get_total_posts($mode = 'after', $post_id = 0)
 
 function clear_search_tables($mode = '')
 {
-    DB()->query("DELETE FROM " . BB_SEARCH_REBUILD);
+    DB()->query('DELETE FROM ' . BB_SEARCH_REBUILD);
 
     if ($mode) {
         $table_ary = array(BB_POSTS_SEARCH);
 
         foreach ($table_ary as $table) {
-            $sql = (($mode == 1) ? "DELETE FROM " : "TRUNCATE TABLE ") . $table;
+            $sql = (($mode == 1) ? 'DELETE FROM ' : 'TRUNCATE TABLE ') . $table;
             DB()->query($sql);
         }
     }
@@ -559,7 +560,7 @@ function create_percent_color($percent)
 // create the hex representation of color
 function create_color($mode, $code)
 {
-    return (($mode == 'r') ? 'FF' : sprintf("%02X", $code)) . (($mode == 'g') ? 'FF' : sprintf("%02X", $code)) . (($mode == 'b') ? 'FF' : sprintf("%02X", $code));
+    return (($mode == 'r') ? 'FF' : sprintf('%02X', $code)) . (($mode == 'g') ? 'FF' : sprintf('%02X', $code)) . (($mode == 'b') ? 'FF' : sprintf('%02X', $code));
 }
 
 // create the percent bar & box

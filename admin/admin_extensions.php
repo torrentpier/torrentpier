@@ -58,7 +58,7 @@ $size = get_var('size', '');
 $mode = get_var('mode', '');
 $e_mode = get_var('e_mode', '');
 
-$submit = (isset($_POST['submit'])) ? true : false;
+$submit = isset($_POST['submit']) ? true : false;
 
 // Get Attachment Config
 $attach_config = array();
@@ -133,7 +133,7 @@ if ($submit && $mode == 'extensions') {
     $extension = get_var('add_extension', '');
     $extension_explain = get_var('add_extension_explain', '');
     $extension_group = get_var('add_group_select', 0);
-    $add = (isset($_POST['add_extension_check'])) ? true : false;
+    $add = isset($_POST['add_extension_check']) ? true : false;
 
     if ($extension != '' && $add) {
         $template->assign_vars(array(
@@ -141,7 +141,7 @@ if ($submit && $mode == 'extensions') {
             'ADD_EXTENSION_EXPLAIN' => $extension_explain,
         ));
 
-        if (!@$error) {
+        if (!$error) {
             // check extension
             $sql = 'SELECT extension FROM ' . BB_EXTENSIONS;
 
@@ -165,7 +165,7 @@ if ($submit && $mode == 'extensions') {
                 }
             }
 
-            if (!@$error) {
+            if (!$error) {
                 $sql_ary = array(
                     'group_id' => (int)$extension_group,
                     'extension' => (string)strtolower($extension),
@@ -181,7 +181,7 @@ if ($submit && $mode == 'extensions') {
         }
     }
 
-    if (!@$error) {
+    if (!$error) {
         bb_die($lang['ATTACH_CONFIG_UPDATED'] . '<br /><br />' . sprintf($lang['CLICK_RETURN_ATTACH_CONFIG'], '<a href="admin_extensions.php?mode=extensions">', '</a>') . '<br /><br />' . sprintf($lang['CLICK_RETURN_ADMIN_INDEX'], '<a href="index.php?pane=right">', '</a>'));
     }
 }
@@ -260,7 +260,7 @@ if ($submit && $mode == 'groups') {
     }
 
     for ($i = 0, $iMax = count($group_change_list); $i < $iMax; $i++) {
-        $allowed = (isset($allowed_list[$i])) ? 1 : 0;
+        $allowed = isset($allowed_list[$i]) ? 1 : 0;
 
         $filesize_list[$i] = ($size_select_list[$i] == 'kb') ? round($filesize_list[$i] * 1024) : (($size_select_list[$i] == 'mb') ? round($filesize_list[$i] * 1048576) : $filesize_list[$i]);
 
@@ -276,7 +276,7 @@ if ($submit && $mode == 'groups') {
         $sql = 'UPDATE ' . BB_EXTENSION_GROUPS . ' SET ' . attach_mod_sql_build_array('UPDATE', $sql_ary) . '
 			WHERE group_id = ' . (int)$group_change_list[$i];
 
-        if (!(DB()->sql_query($sql))) {
+        if (!DB()->sql_query($sql)) {
             bb_die('Could not update extension groups informations');
         }
     }
@@ -313,8 +313,8 @@ if ($submit && $mode == 'groups') {
     $filesize = get_var('add_max_filesize', 0);
     $size_select = get_var('add_size_select', '');
 
-    $is_allowed = (isset($_POST['add_allowed'])) ? 1 : 0;
-    $add = (isset($_POST['add_extension_group_check'])) ? true : false;
+    $is_allowed = isset($_POST['add_allowed']) ? 1 : 0;
+    $add = isset($_POST['add_extension_group_check']) ? true : false;
 
     if ($extension_group != '' && $add) {
         // check Extension Group
@@ -340,7 +340,7 @@ if ($submit && $mode == 'groups') {
             }
         }
 
-        if (!@$error) {
+        if (!$error) {
             $filesize = ($size_select == 'kb') ? round($filesize * 1024) : (($size_select == 'mb') ? round($filesize * 1048576) : $filesize);
 
             $sql_ary = array(
@@ -355,13 +355,13 @@ if ($submit && $mode == 'groups') {
 
             $sql = 'INSERT INTO ' . BB_EXTENSION_GROUPS . ' ' . attach_mod_sql_build_array('INSERT', $sql_ary);
 
-            if (!(DB()->sql_query($sql))) {
+            if (!DB()->sql_query($sql)) {
                 bb_die('Could not add extension group');
             }
         }
     }
 
-    if (!@$error) {
+    if (!$error) {
         bb_die($lang['ATTACH_CONFIG_UPDATED'] . '<br /><br />' . sprintf($lang['CLICK_RETURN_ATTACH_CONFIG'], '<a href="admin_extensions.php?mode=groups">', '</a>') . '<br /><br />' . sprintf($lang['CLICK_RETURN_ADMIN_INDEX'], '<a href="index.php?pane=right">', '</a>'));
     }
 }
@@ -384,7 +384,7 @@ if ($mode == 'groups') {
 
     $template->assign_vars(array(
         'TPL_ATTACH_EXTENSION_GROUPS' => true,
-        'ADD_GROUP_NAME' => (isset($submit)) ? @$extension_group : '',
+        'ADD_GROUP_NAME' => isset($extension_group) ? $extension_group : '',
         'MAX_FILESIZE' => $max_add_filesize,
         'S_FILESIZE' => size_select('add_size_select', $size),
         'S_ADD_DOWNLOAD_MODE' => download_select('add_download_mode'),
@@ -430,8 +430,8 @@ if ($mode == 'groups') {
             'S_FILESIZE' => size_select('size_select_list[]', $size_format),
 
             'MAX_FILESIZE' => $extension_group[$i]['max_filesize'],
-            'CAT_BOX' => ($viewgroup == $extension_group[$i]['group_id']) ? '+' : '-',
-            'U_VIEWGROUP' => ($viewgroup == $extension_group[$i]['group_id']) ? "admin_extensions.php?mode=groups" : "admin_extensions.php?mode=groups&" . POST_GROUPS_URL . "=" . $extension_group[$i]['group_id'],
+            'CAT_BOX' => ($viewgroup == $extension_group[$i]['group_id']) ? '-' : '+',
+            'U_VIEWGROUP' => ($viewgroup == $extension_group[$i]['group_id']) ? 'admin_extensions.php?mode=groups' : 'admin_extensions.php?mode=groups&' . POST_GROUPS_URL . '=' . $extension_group[$i]['group_id'],
             'U_FORUM_PERMISSIONS' => "admin_extensions.php?mode=$mode&amp;e_mode=perm&amp;e_group=" . $extension_group[$i]['group_id'],
         ));
 
@@ -459,8 +459,8 @@ if ($mode == 'groups') {
 if ($e_mode == 'perm') {
     $group = get_var('e_group', 0);
 
-    $add_forum = (isset($_POST['add_forum'])) ? true : false;
-    $delete_forum = (isset($_POST['del_forum'])) ? true : false;
+    $add_forum = isset($_POST['add_forum']) ? true : false;
+    $delete_forum = isset($_POST['del_forum']) ? true : false;
 
     if (isset($_POST['close_perm'])) {
         $e_mode = '';
@@ -468,7 +468,7 @@ if ($e_mode == 'perm') {
 }
 
 // Add Forums
-if (@$add_forum && $e_mode == 'perm' && $group) {
+if ($add_forum && $e_mode == 'perm' && $group) {
     $add_forums_list = get_var('entries', array(0));
     $add_all_forums = false;
 
@@ -524,7 +524,7 @@ if (@$add_forum && $e_mode == 'perm' && $group) {
 }
 
 // Delete Forums
-if (@$delete_forum && $e_mode == 'perm' && $group) {
+if ($delete_forum && $e_mode == 'perm' && $group) {
     $delete_forums_list = get_var('entries', array(0));
 
     // Get the current Forums
@@ -585,7 +585,7 @@ if ($e_mode == 'perm' && $group) {
         $forum_p = array();
         $act_id = 0;
         $forum_p = auth_unpack($allowed_forums);
-        $sql = "SELECT forum_id, forum_name FROM " . BB_FORUMS . " WHERE forum_id IN (" . implode(', ', $forum_p) . ")";
+        $sql = 'SELECT forum_id, forum_name FROM ' . BB_FORUMS . ' WHERE forum_id IN (' . implode(', ', $forum_p) . ')';
         if (!($result = DB()->sql_query($sql))) {
             bb_die('Could not get forum names');
         }
@@ -612,7 +612,7 @@ if ($e_mode == 'perm' && $group) {
 
     $forum_option_values = array(0 => $lang['PERM_ALL_FORUMS']);
 
-    $sql = "SELECT forum_id, forum_name FROM " . BB_FORUMS;
+    $sql = 'SELECT forum_id, forum_name FROM ' . BB_FORUMS;
 
     if (!($result = DB()->sql_query($sql))) {
         bb_die('Could not get forums #1');
@@ -632,7 +632,7 @@ if ($e_mode == 'perm' && $group) {
 
     $empty_perm_forums = array();
 
-    $sql = "SELECT forum_id, forum_name FROM " . BB_FORUMS . " WHERE auth_attachments < " . AUTH_ADMIN;
+    $sql = 'SELECT forum_id, forum_name FROM ' . BB_FORUMS . ' WHERE auth_attachments < ' . AUTH_ADMIN;
 
     if (!($f_result = DB()->sql_query($sql))) {
         bb_die('Could not get forums #2');
@@ -641,10 +641,10 @@ if ($e_mode == 'perm' && $group) {
     while ($row = DB()->sql_fetchrow($f_result)) {
         $forum_id = $row['forum_id'];
 
-        $sql = "SELECT forum_permissions
-		FROM " . BB_EXTENSION_GROUPS . "
+        $sql = 'SELECT forum_permissions
+		FROM ' . BB_EXTENSION_GROUPS . '
 		WHERE allow_group = 1
-		ORDER BY group_name ASC";
+		ORDER BY group_name ASC';
 
         if (!($result = DB()->sql_query($sql))) {
             bb_die('Could not query extension groups');
@@ -681,7 +681,7 @@ if ($e_mode == 'perm' && $group) {
     }
 }
 
-if (@$error) {
+if ($error) {
     $template->assign_vars(array('ERROR_MESSAGE' => $error_msg));
 }
 

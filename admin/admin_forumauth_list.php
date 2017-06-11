@@ -31,24 +31,17 @@ if (!empty($setmodules)) {
 require __DIR__ . '/pagestart.php';
 
 //  View  Read  Post  Reply  Edit  Delete  Sticky  Announce  Vote  Poll  PostAttach  Download
-$simple_auth_ary = array(
-    /* Public */
-    0 => array(AUTH_ALL, AUTH_ALL, AUTH_ALL, AUTH_ALL, AUTH_REG, AUTH_REG, AUTH_MOD, AUTH_MOD, AUTH_REG, AUTH_REG, AUTH_REG, AUTH_ALL), // Public
-    /* Reg */
-    1 => array(AUTH_ALL, AUTH_ALL, AUTH_REG, AUTH_REG, AUTH_REG, AUTH_REG, AUTH_MOD, AUTH_MOD, AUTH_REG, AUTH_REG, AUTH_REG, AUTH_REG), // Registered
-    /* Reg [Hid] */
-    2 => array(AUTH_REG, AUTH_REG, AUTH_REG, AUTH_REG, AUTH_REG, AUTH_REG, AUTH_MOD, AUTH_MOD, AUTH_REG, AUTH_REG, AUTH_REG, AUTH_REG), // Registered [Hidden]
-    /* Priv */
-    3 => array(AUTH_REG, AUTH_ACL, AUTH_ACL, AUTH_ACL, AUTH_ACL, AUTH_ACL, AUTH_MOD, AUTH_MOD, AUTH_ACL, AUTH_ACL, AUTH_ACL, AUTH_ACL), // Private
-    /* Priv [Hid] */
-    4 => array(AUTH_ACL, AUTH_ACL, AUTH_ACL, AUTH_ACL, AUTH_ACL, AUTH_ACL, AUTH_MOD, AUTH_MOD, AUTH_ACL, AUTH_ACL, AUTH_ACL, AUTH_ACL), // Private [Hidden]
-    /* MOD */
-    5 => array(AUTH_REG, AUTH_MOD, AUTH_MOD, AUTH_MOD, AUTH_MOD, AUTH_MOD, AUTH_MOD, AUTH_MOD, AUTH_MOD, AUTH_MOD, AUTH_MOD, AUTH_MOD), // Moderators
-    /* MOD [Hid] */
-    6 => array(AUTH_MOD, AUTH_MOD, AUTH_MOD, AUTH_MOD, AUTH_MOD, AUTH_MOD, AUTH_MOD, AUTH_MOD, AUTH_MOD, AUTH_MOD, AUTH_MOD, AUTH_MOD), // Moderators [Hidden]
-);
+$simple_auth_ary = [
+    0 => [AUTH_ALL, AUTH_ALL, AUTH_ALL, AUTH_ALL, AUTH_REG, AUTH_REG, AUTH_MOD, AUTH_MOD, AUTH_REG, AUTH_REG, AUTH_REG, AUTH_ALL], // Public
+    1 => [AUTH_ALL, AUTH_ALL, AUTH_REG, AUTH_REG, AUTH_REG, AUTH_REG, AUTH_MOD, AUTH_MOD, AUTH_REG, AUTH_REG, AUTH_REG, AUTH_REG], // Registered
+    2 => [AUTH_REG, AUTH_REG, AUTH_REG, AUTH_REG, AUTH_REG, AUTH_REG, AUTH_MOD, AUTH_MOD, AUTH_REG, AUTH_REG, AUTH_REG, AUTH_REG], // Registered [Hidden]
+    3 => [AUTH_REG, AUTH_ACL, AUTH_ACL, AUTH_ACL, AUTH_ACL, AUTH_ACL, AUTH_MOD, AUTH_MOD, AUTH_ACL, AUTH_ACL, AUTH_ACL, AUTH_ACL], // Private
+    4 => [AUTH_ACL, AUTH_ACL, AUTH_ACL, AUTH_ACL, AUTH_ACL, AUTH_ACL, AUTH_MOD, AUTH_MOD, AUTH_ACL, AUTH_ACL, AUTH_ACL, AUTH_ACL], // Private [Hidden]
+    5 => [AUTH_REG, AUTH_MOD, AUTH_MOD, AUTH_MOD, AUTH_MOD, AUTH_MOD, AUTH_MOD, AUTH_MOD, AUTH_MOD, AUTH_MOD, AUTH_MOD, AUTH_MOD], // Moderators
+    6 => [AUTH_MOD, AUTH_MOD, AUTH_MOD, AUTH_MOD, AUTH_MOD, AUTH_MOD, AUTH_MOD, AUTH_MOD, AUTH_MOD, AUTH_MOD, AUTH_MOD, AUTH_MOD], // Moderators [Hidden]
+];
 
-$simple_auth_types = array(
+$simple_auth_types = [
     $lang['PUBLIC'],
     $lang['REGISTERED'],
     $lang['REGISTERED'] . ' [' . $lang['HIDDEN'] . ']',
@@ -56,9 +49,9 @@ $simple_auth_types = array(
     $lang['PRIVATE'] . ' [' . $lang['HIDDEN'] . ']',
     $lang['MODERATORS'],
     $lang['MODERATORS'] . ' [' . $lang['HIDDEN'] . ']',
-);
+];
 
-$forum_auth_fields = array(
+$forum_auth_fields = [
     'auth_view',
     'auth_read',
     'auth_reply',
@@ -71,18 +64,18 @@ $forum_auth_fields = array(
     'auth_post',
     'auth_sticky',
     'auth_announce',
-);
+];
 
-$field_names = array();
+$field_names = [];
 foreach ($forum_auth_fields as $auth_type) {
     $field_names[$auth_type] = $lang[strtoupper($auth_type)];
 }
 
-$forum_auth_levels = array('ALL', 'REG', 'PRIVATE', 'MOD', 'ADMIN');
-$forum_auth_const = array(AUTH_ALL, AUTH_REG, AUTH_ACL, AUTH_MOD, AUTH_ADMIN);
+$forum_auth_levels = ['ALL', 'REG', 'PRIVATE', 'MOD', 'ADMIN'];
+$forum_auth_const = [AUTH_ALL, AUTH_REG, AUTH_ACL, AUTH_MOD, AUTH_ADMIN];
 
 if (isset($_GET[POST_FORUM_URL]) || isset($_POST[POST_FORUM_URL])) {
-    $forum_id = (isset($_POST[POST_FORUM_URL])) ? (int)$_POST[POST_FORUM_URL] : (int)$_GET[POST_FORUM_URL];
+    $forum_id = isset($_POST[POST_FORUM_URL]) ? (int)$_POST[POST_FORUM_URL] : (int)$_GET[POST_FORUM_URL];
     $forum_sql = "AND forum_id = $forum_id";
 } else {
     unset($forum_id);
@@ -90,7 +83,7 @@ if (isset($_GET[POST_FORUM_URL]) || isset($_POST[POST_FORUM_URL])) {
 }
 
 if (isset($_GET[POST_CAT_URL]) || isset($_POST[POST_CAT_URL])) {
-    $cat_id = (isset($_POST[POST_CAT_URL])) ? (int)$_POST[POST_CAT_URL] : (int)$_GET[POST_CAT_URL];
+    $cat_id = isset($_POST[POST_CAT_URL]) ? (int)$_POST[POST_CAT_URL] : (int)$_GET[POST_CAT_URL];
     $cat_sql = "AND c.cat_id = $cat_id";
 } else {
     unset($cat_id);
@@ -118,7 +111,7 @@ if (isset($_POST['submit'])) {
             }
 
             if (is_array($simple_ary)) {
-                $sql = "UPDATE " . BB_FORUMS . " SET $sql WHERE forum_id = $forum_id";
+                $sql = 'UPDATE ' . BB_FORUMS . " SET $sql WHERE forum_id = $forum_id";
             }
         } else {
             for ($i = 0, $iMax = count($forum_auth_fields); $i < $iMax; $i++) {
@@ -133,7 +126,7 @@ if (isset($_POST['submit'])) {
                 $sql .= (($sql != '') ? ', ' : '') . $forum_auth_fields[$i] . ' = ' . $value;
             }
 
-            $sql = "UPDATE " . BB_FORUMS . " SET $sql WHERE forum_id = $forum_id";
+            $sql = 'UPDATE ' . BB_FORUMS . " SET $sql WHERE forum_id = $forum_id";
         }
 
         if ($sql != '') {
@@ -157,7 +150,7 @@ if (isset($_POST['submit'])) {
             $sql .= (($sql != '') ? ', ' : '') . $forum_auth_fields[$i] . ' = ' . $value;
         }
 
-        $sql = "UPDATE " . BB_FORUMS . " SET $sql WHERE cat_id = $cat_id";
+        $sql = 'UPDATE ' . BB_FORUMS . " SET $sql WHERE cat_id = $cat_id";
 
         if ($sql != '') {
             if (!DB()->sql_query($sql)) {
@@ -169,7 +162,7 @@ if (isset($_POST['submit'])) {
     }
 
     $datastore->update('cat_forums');
-    bb_die($lang['FORUM_AUTH_UPDATED'] . '<br /><br />' . sprintf($lang['CLICK_RETURN_FORUMAUTH'], '<a href="admin_forumauth_list.php">', "</a>"));
+    bb_die($lang['FORUM_AUTH_UPDATED'] . '<br /><br />' . sprintf($lang['CLICK_RETURN_FORUMAUTH'], '<a href="admin_forumauth_list.php">', '</a>'));
 } // End of submit
 
 //
@@ -177,8 +170,8 @@ if (isset($_POST['submit'])) {
 // no id was specified or just the requsted forum
 // or category if it was
 //
-$sql = "SELECT f.*
-	FROM " . BB_FORUMS . " f, " . BB_CATEGORIES . " c
+$sql = 'SELECT f.*
+	FROM ' . BB_FORUMS . ' f, ' . BB_CATEGORIES . " c
 	WHERE c.cat_id = f.cat_id
 	$forum_sql $cat_sql
 	ORDER BY c.cat_order ASC, f.forum_order ASC";
@@ -206,9 +199,9 @@ if (empty($forum_id) && empty($cat_id)) {
     }
 
     // Obtain the category list
-    $sql = "SELECT c.cat_id, c.cat_title, c.cat_order
-		FROM " . BB_CATEGORIES . " c
-		ORDER BY c.cat_order";
+    $sql = 'SELECT c.cat_id, c.cat_title, c.cat_order
+		FROM ' . BB_CATEGORIES . ' c
+		ORDER BY c.cat_order';
     if (!($result = DB()->sql_query($sql))) {
         bb_die('Could not query categories list #1');
     }
@@ -228,7 +221,7 @@ if (empty($forum_id) && empty($cat_id)) {
             if ($cat_id == $forum_rows[$j]['cat_id']) {
                 $template->assign_block_vars('cat_row.forum_row', array(
                     'ROW_CLASS' => !($j % 2) ? 'row4' : 'row5',
-                    'FORUM_NAME' => '<a class="' . (($forum_rows[$j]['forum_parent']) ? 'genmed' : 'gen') . '" href="admin_forumauth.php?' . POST_FORUM_URL . '=' . $forum_rows[$j]['forum_id'] . '">' . htmlCHR($forum_rows[$j]['forum_name']) . '</a>',
+                    'FORUM_NAME' => '<a class="' . ($forum_rows[$j]['forum_parent'] ? 'genmed' : 'gen') . '" href="admin_forumauth.php?' . POST_FORUM_URL . '=' . $forum_rows[$j]['forum_id'] . '">' . htmlCHR($forum_rows[$j]['forum_name']) . '</a>',
                     'IS_SUBFORUM' => $forum_rows[$j]['forum_parent'],
                 ));
 
@@ -265,8 +258,8 @@ if (empty($forum_id) && empty($cat_id)) {
     }
 
     // obtain the category list
-    $sql = "SELECT c.cat_id, c.cat_title, c.cat_order
-		FROM " . BB_CATEGORIES . " c
+    $sql = 'SELECT c.cat_id, c.cat_title, c.cat_order
+		FROM ' . BB_CATEGORIES . " c
 		WHERE c.cat_id = $cat_id
 		ORDER BY c.cat_order";
     if (!($result = DB()->sql_query($sql))) {
@@ -287,7 +280,7 @@ if (empty($forum_id) && empty($cat_id)) {
         if ($cat_id == $forum_rows[$j]['cat_id']) {
             $template->assign_block_vars('cat_row.forum_row', array(
                 'ROW_CLASS' => !($j % 2) ? 'row4' : 'row5',
-                'FORUM_NAME' => '<a class="' . (($forum_rows[$j]['forum_parent']) ? 'genmed' : 'gen') . '" href="admin_forumauth.php?' . POST_FORUM_URL . '=' . $forum_rows[$j]['forum_id'] . '">' . htmlCHR($forum_rows[$j]['forum_name']) . '</a>',
+                'FORUM_NAME' => '<a class="' . ($forum_rows[$j]['forum_parent'] ? 'genmed' : 'gen') . '" href="admin_forumauth.php?' . POST_FORUM_URL . '=' . $forum_rows[$j]['forum_id'] . '">' . htmlCHR($forum_rows[$j]['forum_name']) . '</a>',
                 'IS_SUBFORUM' => $forum_rows[$j]['forum_parent'],
             ));
 

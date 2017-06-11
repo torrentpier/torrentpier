@@ -51,7 +51,7 @@ if ($mode != '') {
 
         if ($mode == 'edit') {
             if ($word_id) {
-                $sql = "SELECT * FROM " . BB_WORDS . " WHERE word_id = $word_id";
+                $sql = 'SELECT * FROM ' . BB_WORDS . " WHERE word_id = $word_id";
                 if (!$result = DB()->sql_query($sql)) {
                     bb_die('Could not query words table #1');
                 }
@@ -82,12 +82,12 @@ if ($mode != '') {
         }
 
         if ($word_id) {
-            $sql = "UPDATE " . BB_WORDS . "
+            $sql = 'UPDATE ' . BB_WORDS . "
 				SET word = '" . DB()->escape($word) . "', replacement = '" . DB()->escape($replacement) . "'
 				WHERE word_id = $word_id";
             $message = $lang['WORD_UPDATED'];
         } else {
-            $sql = "INSERT INTO " . BB_WORDS . " (word, replacement)
+            $sql = 'INSERT INTO ' . BB_WORDS . " (word, replacement)
 				VALUES ('" . DB()->escape($word) . "', '" . DB()->escape($replacement) . "')";
             $message = $lang['WORD_ADDED'];
         }
@@ -104,7 +104,7 @@ if ($mode != '') {
         $word_id = (int)request_var('id', 0);
 
         if ($word_id) {
-            $sql = "DELETE FROM " . BB_WORDS . " WHERE word_id = $word_id";
+            $sql = 'DELETE FROM ' . BB_WORDS . " WHERE word_id = $word_id";
 
             if (!$result = DB()->sql_query($sql)) {
                 bb_die('Could not remove data from words table');
@@ -118,7 +118,7 @@ if ($mode != '') {
         }
     }
 } else {
-    $sql = "SELECT * FROM " . BB_WORDS . " ORDER BY word";
+    $sql = 'SELECT * FROM ' . BB_WORDS . ' ORDER BY word';
     if (!$result = DB()->sql_query($sql)) {
         bb_die('Could not query words table #2');
     }

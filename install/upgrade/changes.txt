@@ -60,3 +60,5 @@ DELETE FROM `bb_smilies` WHERE `code` = ':ad:';
 INSERT INTO `bb_smilies` VALUES ('', ':сd:', 'сd.gif', 'сd');
 DROP TABLE IF EXISTS `bb_ads`;
 DELETE FROM `bb_config` WHERE `config_name` = 'active_ads';
+ALTER TABLE `bb_log` DROP COLUMN `log_username`;
+DELETE FROM `bb_config` WHERE `config_name` = 'new_tpls';

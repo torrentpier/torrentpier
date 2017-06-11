@@ -30,7 +30,7 @@ if (!empty($setmodules)) {
 require __DIR__ . '/pagestart.php';
 require INC_DIR . '/functions_selects.php';
 
-$sql = "SELECT * FROM " . BB_CONFIG;
+$sql = 'SELECT * FROM ' . BB_CONFIG;
 
 if (!$result = DB()->sql_query($sql)) {
     bb_die('Could not query config information in admin_sitemap');
