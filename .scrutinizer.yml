@@ -1,0 +1,35 @@
+build:
+    environment:
+        php:
+            version: 7.0.8
+
+filter:
+    excluded_paths:
+        - 'tests/*'
+
+checks:
+    php:
+        one_class_per_file: false
+        side_effects_or_types: false
+        no_mixed_inline_html: false
+        require_braces_around_control_structures: false
+        php5_style_constructor: false
+        no_global_keyword: false
+        avoid_usage_of_logical_operators: false
+        no_underscore_prefix_in_properties: false
+        no_underscore_prefix_in_methods: false
+        single_namespace_per_use: false
+        avoid_superglobals: false
+        no_exit: false
+
+coding_style:
+    php:
+        indentation:
+            general:
+                use_tabs: true
+        spaces:
+            around_operators:
+                concatenation: true
+
+tools:
+    external_code_coverage: true
