@@ -2575,7 +2575,7 @@ $lang['ACTS_LOG_FORUM'] = 'ფორუმი';
 $lang['ACTS_LOG_ACTION'] = 'მოქმედება';
 $lang['ACTS_LOG_USER'] = 'მომხმარებელი';
 $lang['ACTS_LOG_LOGS_FROM'] = 'ჟურნალი ';
-$lang['ACTS_LOG_FIRST'] = 'beginning with';
+$lang['ACTS_LOG_FIRST'] = 'დაწყებული';
 $lang['ACTS_LOG_DAYS_BACK'] = 'დღის უკან';
 $lang['ACTS_LOG_TOPIC_MATCH'] = 'თემის სათაური მატჩი';
 $lang['ACTS_LOG_SORT_BY'] = 'Sort by';
@@ -2585,7 +2585,7 @@ $lang['ACTS_LOG_TIME'] = 'დრო';
 $lang['ACTS_LOG_INFO'] = 'ინფორმაცია';
 $lang['ACTS_LOG_FILTER'] = 'ფილტრი';
 $lang['ACTS_LOG_TOPICS'] = 'თემები:';
-$lang['ACTS_LOG_OR'] = 'or';
+$lang['ACTS_LOG_OR'] = 'ან';
 
 $lang['RELEASE'] = 'გამოშვების თარგები';
 $lang['RELEASES'] = 'რელიზები';

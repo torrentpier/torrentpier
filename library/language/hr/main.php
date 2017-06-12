@@ -2575,7 +2575,7 @@ $lang['ACTS_LOG_FORUM'] = 'Forum';
 $lang['ACTS_LOG_ACTION'] = 'Akcija';
 $lang['ACTS_LOG_USER'] = 'Korisnik';
 $lang['ACTS_LOG_LOGS_FROM'] = 'Časopisi ';
-$lang['ACTS_LOG_FIRST'] = 'beginning with';
+$lang['ACTS_LOG_FIRST'] = 'počevši od';
 $lang['ACTS_LOG_DAYS_BACK'] = 'dana prije';
 $lang['ACTS_LOG_TOPIC_MATCH'] = 'Naslov teme odgovara';
 $lang['ACTS_LOG_SORT_BY'] = 'Sortiraj po';
@@ -2585,7 +2585,7 @@ $lang['ACTS_LOG_TIME'] = 'Vrijeme';
 $lang['ACTS_LOG_INFO'] = 'Informacije';
 $lang['ACTS_LOG_FILTER'] = 'Filter';
 $lang['ACTS_LOG_TOPICS'] = 'Teme:';
-$lang['ACTS_LOG_OR'] = 'or';
+$lang['ACTS_LOG_OR'] = 'ili';
 
 $lang['RELEASE'] = 'Predlošci Izdavanja';
 $lang['RELEASES'] = 'Javnost';

@@ -2575,7 +2575,7 @@ $lang['ACTS_LOG_FORUM'] = 'Forum';
 $lang['ACTS_LOG_ACTION'] = 'Akcija';
 $lang['ACTS_LOG_USER'] = 'Uporabnik';
 $lang['ACTS_LOG_LOGS_FROM'] = 'Dnevniki iz ';
-$lang['ACTS_LOG_FIRST'] = 'beginning with';
+$lang['ACTS_LOG_FIRST'] = 'začetek z';
 $lang['ACTS_LOG_DAYS_BACK'] = 'dni nazaj';
 $lang['ACTS_LOG_TOPIC_MATCH'] = 'Tema naslov tekmo';
 $lang['ACTS_LOG_SORT_BY'] = 'Razvrsti po';
@@ -2585,7 +2585,7 @@ $lang['ACTS_LOG_TIME'] = 'Čas';
 $lang['ACTS_LOG_INFO'] = 'Info';
 $lang['ACTS_LOG_FILTER'] = 'Filter';
 $lang['ACTS_LOG_TOPICS'] = 'Teme:';
-$lang['ACTS_LOG_OR'] = 'or';
+$lang['ACTS_LOG_OR'] = 'ali';
 
 $lang['RELEASE'] = 'Sprostitev Predloge';
 $lang['RELEASES'] = 'Za javnost';

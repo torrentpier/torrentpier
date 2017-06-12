@@ -2575,7 +2575,7 @@ $lang['ACTS_LOG_FORUM'] = 'Forum';
 $lang['ACTS_LOG_ACTION'] = 'Åtgärd';
 $lang['ACTS_LOG_USER'] = 'Användare';
 $lang['ACTS_LOG_LOGS_FROM'] = 'Loggar från ';
-$lang['ACTS_LOG_FIRST'] = 'beginning with';
+$lang['ACTS_LOG_FIRST'] = 'börjar med';
 $lang['ACTS_LOG_DAYS_BACK'] = 'dagar tillbaka';
 $lang['ACTS_LOG_TOPIC_MATCH'] = 'Ämne titel match';
 $lang['ACTS_LOG_SORT_BY'] = 'Sortera efter';
@@ -2585,7 +2585,7 @@ $lang['ACTS_LOG_TIME'] = 'Tid';
 $lang['ACTS_LOG_INFO'] = 'Info';
 $lang['ACTS_LOG_FILTER'] = 'Filter';
 $lang['ACTS_LOG_TOPICS'] = 'Ämnen:';
-$lang['ACTS_LOG_OR'] = 'or';
+$lang['ACTS_LOG_OR'] = 'eller';
 
 $lang['RELEASE'] = 'Släpp Mallar';
 $lang['RELEASES'] = 'Släpper';

@@ -2575,7 +2575,7 @@ $lang['ACTS_LOG_FORUM'] = 'Forum';
 $lang['ACTS_LOG_ACTION'] = 'Actie';
 $lang['ACTS_LOG_USER'] = 'Gebruiker';
 $lang['ACTS_LOG_LOGS_FROM'] = 'Logs van ';
-$lang['ACTS_LOG_FIRST'] = 'beginning with';
+$lang['ACTS_LOG_FIRST'] = 'begint met';
 $lang['ACTS_LOG_DAYS_BACK'] = 'dagen terug';
 $lang['ACTS_LOG_TOPIC_MATCH'] = 'Onderwerp titel';
 $lang['ACTS_LOG_SORT_BY'] = 'Sorteren op';
@@ -2585,7 +2585,7 @@ $lang['ACTS_LOG_TIME'] = 'Tijd';
 $lang['ACTS_LOG_INFO'] = 'Info';
 $lang['ACTS_LOG_FILTER'] = 'Filter';
 $lang['ACTS_LOG_TOPICS'] = 'Onderwerpen:';
-$lang['ACTS_LOG_OR'] = 'or';
+$lang['ACTS_LOG_OR'] = 'of';
 
 $lang['RELEASE'] = 'Release Sjablonen';
 $lang['RELEASES'] = 'Persberichten';

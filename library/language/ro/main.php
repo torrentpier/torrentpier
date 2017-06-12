@@ -2575,7 +2575,7 @@ $lang['ACTS_LOG_FORUM'] = 'Forum';
 $lang['ACTS_LOG_ACTION'] = 'Acțiune';
 $lang['ACTS_LOG_USER'] = 'Utilizator';
 $lang['ACTS_LOG_LOGS_FROM'] = 'Jurnalele de ';
-$lang['ACTS_LOG_FIRST'] = 'beginning with';
+$lang['ACTS_LOG_FIRST'] = 'începând cu';
 $lang['ACTS_LOG_DAYS_BACK'] = 'zile';
 $lang['ACTS_LOG_TOPIC_MATCH'] = 'Subiect meci de titlu';
 $lang['ACTS_LOG_SORT_BY'] = 'Un fel de';
@@ -2585,7 +2585,7 @@ $lang['ACTS_LOG_TIME'] = 'Timp';
 $lang['ACTS_LOG_INFO'] = 'Info';
 $lang['ACTS_LOG_FILTER'] = 'Filtru';
 $lang['ACTS_LOG_TOPICS'] = 'Subiecte:';
-$lang['ACTS_LOG_OR'] = 'or';
+$lang['ACTS_LOG_OR'] = 'sau';
 
 $lang['RELEASE'] = 'Eliberarea Template-Uri';
 $lang['RELEASES'] = 'Comunicate de';

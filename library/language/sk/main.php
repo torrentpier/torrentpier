@@ -2575,7 +2575,7 @@ $lang['ACTS_LOG_FORUM'] = 'Fórum';
 $lang['ACTS_LOG_ACTION'] = 'Akcia';
 $lang['ACTS_LOG_USER'] = 'Používateľ';
 $lang['ACTS_LOG_LOGS_FROM'] = 'Záznamy z ';
-$lang['ACTS_LOG_FIRST'] = 'beginning with';
+$lang['ACTS_LOG_FIRST'] = 'začiatok s';
 $lang['ACTS_LOG_DAYS_BACK'] = 'dní staré';
 $lang['ACTS_LOG_TOPIC_MATCH'] = 'Téma hlava zápas';
 $lang['ACTS_LOG_SORT_BY'] = 'Zoradiť podľa';
@@ -2585,7 +2585,7 @@ $lang['ACTS_LOG_TIME'] = 'Čas';
 $lang['ACTS_LOG_INFO'] = 'Info';
 $lang['ACTS_LOG_FILTER'] = 'Filter';
 $lang['ACTS_LOG_TOPICS'] = 'Témy:';
-$lang['ACTS_LOG_OR'] = 'or';
+$lang['ACTS_LOG_OR'] = 'alebo';
 
 $lang['RELEASE'] = 'Uvoľnenie Šablóny';
 $lang['RELEASES'] = 'Uvoľňovanie';

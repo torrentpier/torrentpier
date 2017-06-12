@@ -2575,7 +2575,7 @@ $lang['ACTS_LOG_FORUM'] = '论坛';
 $lang['ACTS_LOG_ACTION'] = '动作';
 $lang['ACTS_LOG_USER'] = '用户';
 $lang['ACTS_LOG_LOGS_FROM'] = '日志 ';
-$lang['ACTS_LOG_FIRST'] = 'beginning with';
+$lang['ACTS_LOG_FIRST'] = '开始于';
 $lang['ACTS_LOG_DAYS_BACK'] = '天回来';
 $lang['ACTS_LOG_TOPIC_MATCH'] = '主题标题匹配';
 $lang['ACTS_LOG_SORT_BY'] = '排序';
@@ -2585,7 +2585,7 @@ $lang['ACTS_LOG_TIME'] = '时间';
 $lang['ACTS_LOG_INFO'] = '的信息';
 $lang['ACTS_LOG_FILTER'] = '过滤器';
 $lang['ACTS_LOG_TOPICS'] = '主题：';
-$lang['ACTS_LOG_OR'] = 'or';
+$lang['ACTS_LOG_OR'] = '或';
 
 $lang['RELEASE'] = '释放模板';
 $lang['RELEASES'] = '释放';

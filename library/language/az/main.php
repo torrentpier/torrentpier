@@ -2575,7 +2575,7 @@ $lang['ACTS_LOG_FORUM'] = 'Forum';
 $lang['ACTS_LOG_ACTION'] = 'Fəaliyyət';
 $lang['ACTS_LOG_USER'] = 'İstifadəçi';
 $lang['ACTS_LOG_LOGS_FROM'] = 'Jurnallar ';
-$lang['ACTS_LOG_FIRST'] = 'beginning with';
+$lang['ACTS_LOG_FIRST'] = 'ilə başlayan';
 $lang['ACTS_LOG_DAYS_BACK'] = 'gün əvvəl';
 $lang['ACTS_LOG_TOPIC_MATCH'] = 'Adı mövzular uyğundur';
 $lang['ACTS_LOG_SORT_BY'] = 'Sort';
@@ -2585,7 +2585,7 @@ $lang['ACTS_LOG_TIME'] = 'Vaxt';
 $lang['ACTS_LOG_INFO'] = 'Məlumat';
 $lang['ACTS_LOG_FILTER'] = 'Filter';
 $lang['ACTS_LOG_TOPICS'] = 'Mövzu:';
-$lang['ACTS_LOG_OR'] = 'or';
+$lang['ACTS_LOG_OR'] = 'və ya';
 
 $lang['RELEASE'] = 'Şablonlar Buraxılması';
 $lang['RELEASES'] = 'Relizlər';

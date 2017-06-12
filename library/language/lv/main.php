@@ -2575,7 +2575,7 @@ $lang['ACTS_LOG_FORUM'] = 'Forums';
 $lang['ACTS_LOG_ACTION'] = 'Darbība';
 $lang['ACTS_LOG_USER'] = 'Lietotājs';
 $lang['ACTS_LOG_LOGS_FROM'] = 'Baļķi no ';
-$lang['ACTS_LOG_FIRST'] = 'beginning with';
+$lang['ACTS_LOG_FIRST'] = 'sākot ar';
 $lang['ACTS_LOG_DAYS_BACK'] = 'dienas atpakaļ';
 $lang['ACTS_LOG_TOPIC_MATCH'] = 'Tēmas nosaukums atbilst';
 $lang['ACTS_LOG_SORT_BY'] = 'Kārtot pēc';
@@ -2585,7 +2585,7 @@ $lang['ACTS_LOG_TIME'] = 'Laiks';
 $lang['ACTS_LOG_INFO'] = 'Info';
 $lang['ACTS_LOG_FILTER'] = 'Filtrs';
 $lang['ACTS_LOG_TOPICS'] = 'Tēmas:';
-$lang['ACTS_LOG_OR'] = 'or';
+$lang['ACTS_LOG_OR'] = 'vai';
 
 $lang['RELEASE'] = 'Atbrīvošanas Veidnes';
 $lang['RELEASES'] = 'Relīzes';

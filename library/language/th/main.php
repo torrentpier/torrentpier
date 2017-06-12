@@ -2575,7 +2575,7 @@ $lang['ACTS_LOG_FORUM'] = 'ชุ';
 $lang['ACTS_LOG_ACTION'] = 'การกระทำ';
 $lang['ACTS_LOG_USER'] = 'ของผู้ใช้';
 $lang['ACTS_LOG_LOGS_FROM'] = 'ปูมบันทึกจาก ';
-$lang['ACTS_LOG_FIRST'] = 'beginning with';
+$lang['ACTS_LOG_FIRST'] = 'เริ่มต้นกับ';
 $lang['ACTS_LOG_DAYS_BACK'] = 'วันกลับมา';
 $lang['ACTS_LOG_TOPIC_MATCH'] = 'เรื่องหัวเรื่องตรงกัน';
 $lang['ACTS_LOG_SORT_BY'] = 'เรียงลำดับตาม@title:menu';
@@ -2585,7 +2585,7 @@ $lang['ACTS_LOG_TIME'] = 'เวลา';
 $lang['ACTS_LOG_INFO'] = 'ข้อมูล';
 $lang['ACTS_LOG_FILTER'] = 'ตัวกรอง';
 $lang['ACTS_LOG_TOPICS'] = 'หัวข้อคุ:';
-$lang['ACTS_LOG_OR'] = 'or';
+$lang['ACTS_LOG_OR'] = 'หรือ';
 
 $lang['RELEASE'] = 'ปล่อยตัวต้นแบบ';
 $lang['RELEASES'] = 'พึ่งถูกปล่อยตัว';
