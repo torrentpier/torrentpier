@@ -2575,7 +2575,7 @@ $lang['ACTS_LOG_FORUM'] = 'Форум';
 $lang['ACTS_LOG_ACTION'] = 'Акција';
 $lang['ACTS_LOG_USER'] = 'Корисник';
 $lang['ACTS_LOG_LOGS_FROM'] = 'Часописи ';
-$lang['ACTS_LOG_FIRST'] = 'beginning with';
+$lang['ACTS_LOG_FIRST'] = 'почевши са';
 $lang['ACTS_LOG_DAYS_BACK'] = 'дана';
 $lang['ACTS_LOG_TOPIC_MATCH'] = 'Тема име одговара';
 $lang['ACTS_LOG_SORT_BY'] = 'Сортирај по';
@@ -2585,7 +2585,7 @@ $lang['ACTS_LOG_TIME'] = 'Време';
 $lang['ACTS_LOG_INFO'] = 'Информације';
 $lang['ACTS_LOG_FILTER'] = 'Филтер';
 $lang['ACTS_LOG_TOPICS'] = 'Теме:';
-$lang['ACTS_LOG_OR'] = 'or';
+$lang['ACTS_LOG_OR'] = 'ili';
 
 $lang['RELEASE'] = 'Шаблони Пуштања';
 $lang['RELEASES'] = 'Јавност';

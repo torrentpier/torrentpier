@@ -2575,7 +2575,7 @@ $lang['ACTS_LOG_FORUM'] = 'Φόρουμ';
 $lang['ACTS_LOG_ACTION'] = 'Δράση';
 $lang['ACTS_LOG_USER'] = 'Χρήστη';
 $lang['ACTS_LOG_LOGS_FROM'] = 'Τα αρχεία καταγραφής από ';
-$lang['ACTS_LOG_FIRST'] = 'beginning with';
+$lang['ACTS_LOG_FIRST'] = 'αρχή με';
 $lang['ACTS_LOG_DAYS_BACK'] = 'ημέρες πίσω';
 $lang['ACTS_LOG_TOPIC_MATCH'] = 'Θέμα αντιστοιχία τίτλου';
 $lang['ACTS_LOG_SORT_BY'] = 'Ταξινόμηση κατά';
@@ -2585,7 +2585,7 @@ $lang['ACTS_LOG_TIME'] = 'Ώρα';
 $lang['ACTS_LOG_INFO'] = 'Πληροφορίες';
 $lang['ACTS_LOG_FILTER'] = 'Φίλτρο';
 $lang['ACTS_LOG_TOPICS'] = 'Θέματα:';
-$lang['ACTS_LOG_OR'] = 'or';
+$lang['ACTS_LOG_OR'] = 'ή';
 
 $lang['RELEASE'] = 'Απελευθέρωση Πρότυπα';
 $lang['RELEASES'] = 'Κυκλοφορίες';

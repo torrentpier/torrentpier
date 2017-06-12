@@ -2575,7 +2575,7 @@ $lang['ACTS_LOG_FORUM'] = 'Fòrum';
 $lang['ACTS_LOG_ACTION'] = 'Acció';
 $lang['ACTS_LOG_USER'] = 'Usuari';
 $lang['ACTS_LOG_LOGS_FROM'] = 'Registres de ';
-$lang['ACTS_LOG_FIRST'] = 'beginning with';
+$lang['ACTS_LOG_FIRST'] = 'a partir de';
 $lang['ACTS_LOG_DAYS_BACK'] = 'dies enrere';
 $lang['ACTS_LOG_TOPIC_MATCH'] = 'Títol del tema partit';
 $lang['ACTS_LOG_SORT_BY'] = 'Ordenar per';
@@ -2585,7 +2585,7 @@ $lang['ACTS_LOG_TIME'] = 'Temps';
 $lang['ACTS_LOG_INFO'] = 'Info';
 $lang['ACTS_LOG_FILTER'] = 'Filtre';
 $lang['ACTS_LOG_TOPICS'] = 'Temes:';
-$lang['ACTS_LOG_OR'] = 'or';
+$lang['ACTS_LOG_OR'] = 'o';
 
 $lang['RELEASE'] = 'Llançament De Plantilles';
 $lang['RELEASES'] = 'Comunicats';

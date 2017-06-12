@@ -193,7 +193,7 @@ class Emailer
 
         /** Set some variables */
         $this->subject = !empty($this->subject) ? $this->subject : $lang['EMAILER_SUBJECT']['EMPTY'];
-        $this->encoding = $bb_cfg['lang'][$userdata['user_lang']]['encoding'];
+        $this->encoding = $bb_cfg['charset'];
 
         /** Prepare message */
         if ($bb_cfg['emailer']['smtp']['enabled']) {

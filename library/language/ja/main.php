@@ -2575,7 +2575,7 @@ $lang['ACTS_LOG_FORUM'] = 'フォーラム';
 $lang['ACTS_LOG_ACTION'] = '行動';
 $lang['ACTS_LOG_USER'] = 'ユーザー';
 $lang['ACTS_LOG_LOGS_FROM'] = 'ログから ';
-$lang['ACTS_LOG_FIRST'] = 'beginning with';
+$lang['ACTS_LOG_FIRST'] = 'はじめ';
 $lang['ACTS_LOG_DAYS_BACK'] = '日帰';
 $lang['ACTS_LOG_TOPIC_MATCH'] = '話題のタイトルマッチ';
 $lang['ACTS_LOG_SORT_BY'] = '並べ替え';
@@ -2585,7 +2585,7 @@ $lang['ACTS_LOG_TIME'] = '時間';
 $lang['ACTS_LOG_INFO'] = '詳細情報';
 $lang['ACTS_LOG_FILTER'] = 'フィルター';
 $lang['ACTS_LOG_TOPICS'] = 'テーマ：';
-$lang['ACTS_LOG_OR'] = 'or';
+$lang['ACTS_LOG_OR'] = 'または';
 
 $lang['RELEASE'] = 'リリーステンプレート';
 $lang['RELEASES'] = 'リリース';

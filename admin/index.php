@@ -222,7 +222,7 @@ if (isset($_GET['pane']) && $_GET['pane'] == 'left') {
 } else {
     // Generate frameset
     $template->assign_vars(array(
-        'CONTENT_ENCODING' => $bb_cfg['lang'][$userdata['user_lang']]['encoding'],
+        'CONTENT_ENCODING' => $bb_cfg['charset'],
         'TPL_ADMIN_FRAMESET' => true,
     ));
     send_no_cache_headers();

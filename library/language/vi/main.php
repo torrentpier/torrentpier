@@ -2575,7 +2575,7 @@ $lang['ACTS_LOG_FORUM'] = 'Forum';
 $lang['ACTS_LOG_ACTION'] = 'Hành động';
 $lang['ACTS_LOG_USER'] = 'Dùng';
 $lang['ACTS_LOG_LOGS_FROM'] = 'Bản ghi từ ';
-$lang['ACTS_LOG_FIRST'] = 'beginning with';
+$lang['ACTS_LOG_FIRST'] = 'bắt đầu với';
 $lang['ACTS_LOG_DAYS_BACK'] = 'ngày trở lại';
 $lang['ACTS_LOG_TOPIC_MATCH'] = 'Chủ đề danh hiệu phù hợp với';
 $lang['ACTS_LOG_SORT_BY'] = 'Sắp xếp bởi';
@@ -2585,7 +2585,7 @@ $lang['ACTS_LOG_TIME'] = 'Thời gian';
 $lang['ACTS_LOG_INFO'] = 'Thông tin';
 $lang['ACTS_LOG_FILTER'] = 'Bộ lọc';
 $lang['ACTS_LOG_TOPICS'] = 'Chủ đề:';
-$lang['ACTS_LOG_OR'] = 'or';
+$lang['ACTS_LOG_OR'] = 'hoặc';
 
 $lang['RELEASE'] = 'Bản Mẫu';
 $lang['RELEASES'] = 'Phát hành';

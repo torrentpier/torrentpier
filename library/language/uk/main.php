@@ -1270,7 +1270,7 @@ $lang['PRICE'] = 'Ціна';
 $lang['EXCHANGE_NOT'] = 'Обмін не доступний';
 $lang['BONUS_SUCCES'] = 'Обмін проведений успішно! Вам додано %s';
 $lang['BONUS_NOT_SUCCES'] = '<span class="витоків">У Вас недостатньо бонусів. Необхідно більше роздавати!</span>';
-$lang['BONUS_RETURN'] = 'Повернутися до обміну сідбонусів ';
+$lang['BONUS_RETURN'] = 'Повернутися до обміну сидбонусів';
 
 $lang['TRACKER'] = 'Трекер';
 $lang['OPEN_TOPICS'] = 'Відкривати теми';
@@ -2576,7 +2576,7 @@ $lang['ACTS_LOG_FORUM'] = 'Форум';
 $lang['ACTS_LOG_ACTION'] = 'Дія';
 $lang['ACTS_LOG_USER'] = 'Користувач';
 $lang['ACTS_LOG_LOGS_FROM'] = 'Логи ';
-$lang['ACTS_LOG_FIRST'] = 'beginning with';
+$lang['ACTS_LOG_FIRST'] = 'починається з';
 $lang['ACTS_LOG_DAYS_BACK'] = 'днів назад';
 $lang['ACTS_LOG_TOPIC_MATCH'] = 'Збіг з назвою теми';
 $lang['ACTS_LOG_SORT_BY'] = 'Сортувати по';
@@ -2586,7 +2586,7 @@ $lang['ACTS_LOG_TIME'] = 'Час';
 $lang['ACTS_LOG_INFO'] = 'Інфо';
 $lang['ACTS_LOG_FILTER'] = 'Фільтр';
 $lang['ACTS_LOG_TOPICS'] = 'Топік:';
-$lang['ACTS_LOG_OR'] = 'or';
+$lang['ACTS_LOG_OR'] = 'або';
 
 $lang['RELEASE'] = 'Шаблони для релізів';
 $lang['RELEASES'] = 'Релізи';

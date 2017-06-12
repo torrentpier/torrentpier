@@ -2575,7 +2575,7 @@ $lang['ACTS_LOG_FORUM'] = 'Форум';
 $lang['ACTS_LOG_ACTION'] = 'Дзеянне';
 $lang['ACTS_LOG_USER'] = 'Карыстальнік';
 $lang['ACTS_LOG_LOGS_FROM'] = 'Часопісы ';
-$lang['ACTS_LOG_FIRST'] = 'beginning with';
+$lang['ACTS_LOG_FIRST'] = 'пачынаючы з';
 $lang['ACTS_LOG_DAYS_BACK'] = 'дзён таму';
 $lang['ACTS_LOG_TOPIC_MATCH'] = 'Назва тэмы адпавядае';
 $lang['ACTS_LOG_SORT_BY'] = 'Сартаваць па';
@@ -2585,7 +2585,7 @@ $lang['ACTS_LOG_TIME'] = 'Час';
 $lang['ACTS_LOG_INFO'] = 'Інфармацыя';
 $lang['ACTS_LOG_FILTER'] = 'Фільтр';
 $lang['ACTS_LOG_TOPICS'] = 'Тэмы:';
-$lang['ACTS_LOG_OR'] = 'or';
+$lang['ACTS_LOG_OR'] = 'або';
 
 $lang['RELEASE'] = 'Шаблоны Выпуску';
 $lang['RELEASES'] = 'Рэлізы';

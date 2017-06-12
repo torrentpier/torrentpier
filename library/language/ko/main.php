@@ -2575,7 +2575,7 @@ $lang['ACTS_LOG_FORUM'] = '포럼';
 $lang['ACTS_LOG_ACTION'] = '작';
 $lang['ACTS_LOG_USER'] = '사용자';
 $lang['ACTS_LOG_LOGS_FROM'] = '로그에서 ';
-$lang['ACTS_LOG_FIRST'] = 'beginning with';
+$lang['ACTS_LOG_FIRST'] = '로 시작';
 $lang['ACTS_LOG_DAYS_BACK'] = '일시';
 $lang['ACTS_LOG_TOPIC_MATCH'] = '주제 제목 경기';
 $lang['ACTS_LOG_SORT_BY'] = '으로 정렬';
@@ -2585,7 +2585,7 @@ $lang['ACTS_LOG_TIME'] = '시간';
 $lang['ACTS_LOG_INFO'] = '정보';
 $lang['ACTS_LOG_FILTER'] = '필터';
 $lang['ACTS_LOG_TOPICS'] = '주제:';
-$lang['ACTS_LOG_OR'] = 'or';
+$lang['ACTS_LOG_OR'] = '또는';
 
 $lang['RELEASE'] = '템플릿 릴리스';
 $lang['RELEASES'] = '릴리스';

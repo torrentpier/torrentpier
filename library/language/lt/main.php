@@ -2575,7 +2575,7 @@ $lang['ACTS_LOG_FORUM'] = 'Forumas';
 $lang['ACTS_LOG_ACTION'] = 'Veiksmas';
 $lang['ACTS_LOG_USER'] = 'Vartotojas';
 $lang['ACTS_LOG_LOGS_FROM'] = 'Rąstai iš ';
-$lang['ACTS_LOG_FIRST'] = 'beginning with';
+$lang['ACTS_LOG_FIRST'] = 'prasideda';
 $lang['ACTS_LOG_DAYS_BACK'] = 'dienų atgal';
 $lang['ACTS_LOG_TOPIC_MATCH'] = 'Temos pavadinimas nesutampa';
 $lang['ACTS_LOG_SORT_BY'] = 'Rūšiuoti pagal';
@@ -2585,7 +2585,7 @@ $lang['ACTS_LOG_TIME'] = 'Laikas';
 $lang['ACTS_LOG_INFO'] = 'Info';
 $lang['ACTS_LOG_FILTER'] = 'Filtras';
 $lang['ACTS_LOG_TOPICS'] = 'Temos:';
-$lang['ACTS_LOG_OR'] = 'or';
+$lang['ACTS_LOG_OR'] = 'arba';
 
 $lang['RELEASE'] = 'Atleiskite, Šablonus';
 $lang['RELEASES'] = 'Spaudai';

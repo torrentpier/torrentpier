@@ -2575,7 +2575,7 @@ $lang['ACTS_LOG_FORUM'] = 'Forum';
 $lang['ACTS_LOG_ACTION'] = 'harakat';
 $lang['ACTS_LOG_USER'] = 'foydalanuvchi';
 $lang['ACTS_LOG_LOGS_FROM'] = 'dan Qaydlar';
-$lang['ACTS_LOG_FIRST'] = 'beginning with';
+$lang['ACTS_LOG_FIRST'] = 'bilan boshlanadigan';
 $lang['ACTS_LOG_DAYS_BACK'] = 'orqaga kun';
 $lang['ACTS_LOG_TOPIC_MATCH'] = 'Mavzu nomi o\'yin';
 $lang['ACTS_LOG_SORT_BY'] = 'Saralash turi';
@@ -2585,7 +2585,7 @@ $lang['ACTS_LOG_TIME'] = 'vaqt';
 $lang['ACTS_LOG_INFO'] = 'ma\'lumot';
 $lang['ACTS_LOG_FILTER'] = 'filter';
 $lang['ACTS_LOG_TOPICS'] = 'Mavzular:';
-$lang['ACTS_LOG_OR'] = 'or';
+$lang['ACTS_LOG_OR'] = 'yoki';
 
 $lang['RELEASE'] = 'relizlar Templates';
 $lang['RELEASES'] = 'relizlar';
