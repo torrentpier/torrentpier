@@ -1,4 +1,4 @@
-<p align="center"><img src="https://torrentpier.me/forum/styles/default/xenforo/bull-logo.svg" width="400px" /></p>
+<p align="center"><a href="https://torrentpier.me/"><img src="https://torrentpier.me/forum/styles/default/xenforo/bull-logo.svg" width="400px" /></a></p>
 <p align="center">
     <a href="http://torrentpier.herokuapp.com/"><img src="http://torrentpier.herokuapp.com/badge.svg" alt="Slack"></a>
     <a href="https://crowdin.com/project/torrentpier"><img src="https://d322cqt584bo4o.cloudfront.net/torrentpier/localized.svg" alt="Crowdin"></a>
@@ -41,10 +41,10 @@ For installation you need to follow a few simple steps:
 1. Edit database configuration settings in the configuration file or a local copy (see below)
 1. Edit domain name in the configuration file or a local copy (see below)
 1. Edit this files:
- + **favicon.png** (change on your own)
- + **robots.txt** (change the addresses in lines **Host** and **Sitemap** on your own)
- + **opensearch_desc.xml** (change the description and address on your own)
- + **opensearch_desc_bt.xml** (change the description and address on your own)
+   1. **favicon.png** (change on your own)
+   1. **robots.txt** (change the addresses in lines **Host** and **Sitemap** on your own)
+   1. **opensearch_desc.xml** (change the description and address on your own)
+   1. **opensearch_desc_bt.xml** (change the description and address on your own)
 1. Log in to the forum with admin/admin login/password and finish setting up via admin panel
 
 ## Access rights on folders and files
@@ -70,8 +70,8 @@ information about that you can read [this thread](https://torrentpier.me/forum/t
 ## Local configuration copy
 
 You can override the settings using one of these methods: configuration file **library/config.local.php** and the environment
-file **.env**. Both files are created by copying the appropriate .example templates without this extension. The local 
-configuration files should be available for reading to anyone by setting up access rights for your web server.
+file **.env**. Both files are created by copying the appropriate .example templates without extension. Local configuration files 
+should not be available for reading to anyone by setting up access rights for your web server.
 
 ## Ocelot installation
 

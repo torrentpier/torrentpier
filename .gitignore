@@ -16,6 +16,7 @@ internal_data/triggers
 library/config.local.php
 node_modules
 vendor
+yarn.lock
 
 ### Archives ###
 *.log
