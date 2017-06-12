@@ -32,22 +32,21 @@ global $lang;
 // Obtain user/online information
 $logged_online = $guests_online = 0;
 $time_online = TIMENOW - 300;
-#	$time_online = 0;
 
-$ulist = array(
-    ADMIN => array(),
-    MOD => array(),
-    GROUP_MEMBER => array(),
-    USER => array(),
-);
-$users_cnt = array(
+$ulist = [
+    ADMIN => [],
+    MOD => [],
+    GROUP_MEMBER => [],
+    USER => [],
+];
+$users_cnt = [
     'admin' => 0,
     'mod' => 0,
     'group_member' => 0,
     'ignore_load' => 0,
     'user' => 0,
     'guest' => 0,
-);
+];
 $online = $online_short = array('userlist' => '');
 
 $sql = "

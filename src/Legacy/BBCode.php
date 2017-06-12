@@ -235,8 +235,6 @@ class BBCode
 
         $found_spam = [];
 
-        $tm_start = utime();
-
         $msg_decoded = $text;
         $msg_decoded = html_entity_decode($msg_decoded);
         $msg_decoded = urldecode($msg_decoded);
@@ -293,9 +291,9 @@ class BBCode
         global $bb_cfg;
 
         $url = trim($m[1]);
-        $url_name = (isset($m[2])) ? trim($m[2]) : $url;
+        $url_name = isset($m[2]) ? trim($m[2]) : $url;
 
-        if (!preg_match("#^https?://#isu", $url) && !preg_match("/^#/", $url)) {
+        if (!preg_match('#^https?://#iu', $url) && !preg_match('/^#/', $url)) {
             $url = 'http://' . $url;
         }
 
