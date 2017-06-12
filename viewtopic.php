@@ -144,6 +144,8 @@ if ($topic_attachment) {
     ));
 }
 
+set_die_append_msg($forum_id);
+
 // Find newest post
 if (($next_topic_id || @$_GET['view'] === 'newest') && !IS_GUEST && $topic_id) {
     $post_time = 'post_time >= ' . get_last_read($topic_id, $forum_id);
@@ -239,9 +241,7 @@ if ($post_id && !empty($t_data['prev_posts'])) {
     $start = floor(($t_data['prev_posts'] - 1) / $posts_per_page) * $posts_per_page;
 }
 
-//
 // Is user watching this thread?
-//
 $can_watch_topic = $is_watching_topic = false;
 
 if ($bb_cfg['topic_notify_enabled']) {
@@ -382,23 +382,16 @@ if (!$ranks = $datastore->get('ranks')) {
     $ranks = $datastore->get('ranks');
 }
 
-//
 // Define censored word matches
-//
 $orig_word = $replacement_word = array();
 obtain_word_list($orig_word, $replacement_word);
 
-//
 // Censor topic title
-//
 if (count($orig_word)) {
     $topic_title = preg_replace($orig_word, $replacement_word, $topic_title);
 }
 
-//
-// Post, reply and other URL generation for
-// templating vars
-//
+// Post, reply and other URL generation for templating vars
 $new_topic_url = POSTING_URL . "?mode=newtopic&amp;f=" . $forum_id;
 $reply_topic_url = POSTING_URL . "?mode=reply&amp;t=" . $topic_id;
 $view_forum_url = FORUM_URL . $forum_id;
@@ -422,8 +415,8 @@ $s_auth_can .= (($is_auth['auth_vote']) ? $lang['RULES_VOTE_CAN'] : $lang['RULES
 $s_auth_can .= (($is_auth['auth_attachments']) ? $lang['RULES_ATTACH_CAN'] : $lang['RULES_ATTACH_CANNOT']) . '<br />';
 $s_auth_can .= (($is_auth['auth_download']) ? $lang['RULES_DOWNLOAD_CAN'] : $lang['RULES_DOWNLOAD_CANNOT']) . '<br />';
 
+// Moderator output
 $topic_mod = '';
-
 if ($is_auth['auth_mod']) {
     $s_auth_can .= $lang['RULES_MODERATE'];
     $topic_mod .= "<a href=\"modcp.php?" . POST_TOPIC_URL . "=$topic_id&amp;mode=delete&amp;sid=" . $userdata['session_id'] . '"><img src="' . $images['topic_mod_delete'] . '" alt="' . $lang['DELETE_TOPIC'] . '" title="' . $lang['DELETE_TOPIC'] . '" border="0" /></a>&nbsp;';
@@ -442,9 +435,7 @@ if ($is_auth['auth_mod']) {
     $topic_mod .= "<a href=\"modcp.php?" . POST_TOPIC_URL . "=$topic_id&amp;mode=move&amp;sid=" . $userdata['session_id'] . '"><img src="' . $images['topic_mod_move'] . '" alt="' . $lang['MOVE_TOPIC'] . '" title="' . $lang['MOVE_TOPIC'] . '" border="0" /></a>&nbsp;';
 }
 
-//
 // Topic watch information
-//
 $s_watching_topic = $s_watching_topic_img = '';
 if ($can_watch_topic) {
     if ($is_watching_topic) {
@@ -466,9 +457,7 @@ $pg_url .= ($posts_per_page != $bb_cfg['posts_per_page']) ? "&amp;ppp=$posts_per
 
 generate_pagination($pg_url, $total_replies, $posts_per_page, $start);
 
-//
 // Selects
-//
 $sel_previous_days = array(
     0 => $lang['ALL_POSTS'],
     1 => $lang['1_DAY'],
@@ -717,6 +706,8 @@ for ($i = 0; $i < $total_posts; $i++) {
         $mc_select_type[$key] = $value['type'];
     }
 
+    $is_first_post = ($post_id == $t_data['topic_first_post_id']);
+
     $template->assign_block_vars('postrow', array(
         'ROW_CLASS' => !($i % 2) ? 'row1' : 'row2',
         'POST_ID' => $post_id,
@@ -736,7 +727,7 @@ for ($i = 0; $i < $total_posts; $i++) {
         'POSTER_GENDER' => ($bb_cfg['gender']) ? gender_image($postrow[$i]['user_gender']) : '',
         'POSTED_AFTER' => ($prev_post_time) ? delta_time($postrow[$i]['post_time'], $prev_post_time) : '',
         'IS_UNREAD' => is_unread($postrow[$i]['post_time'], $topic_id, $forum_id),
-        'IS_FIRST_POST' => (!$start && ($post_id == $t_data['topic_first_post_id'])),
+        'IS_FIRST_POST' => (!$start && $is_first_post),
         'MOD_CHECKBOX' => ($moderation && ($start || defined('SPLIT_FORM_START'))),
         'POSTER_AVATAR' => $poster_avatar,
         'POST_NUMBER' => ($i + $start + 1),
@@ -824,7 +815,7 @@ $template->assign_vars(array(
 
 if (IS_ADMIN) {
     $template->assign_vars(array(
-        'U_LOGS' => "admin/admin_log.php?sid={$userdata['session_id']}&amp;t=$topic_id&amp;db=900",
+        'U_LOGS' => "admin/admin_log.php?t=$topic_id&amp;db=365",
     ));
 }
 

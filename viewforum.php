@@ -98,7 +98,7 @@ $mod_redirect_url = '';
 $tor_status = -1;  //  all by default
 
 if ($is_auth['auth_mod']) {
-    $redirect = isset($_POST['redirect']) ? $_POST['redirect'] : @$_SERVER['REQUEST_URI'];
+    $redirect = isset($_POST['redirect']) ? $_POST['redirect'] : $_SERVER['REQUEST_URI'];
     $redirect = url_arg($redirect, 'mod', 1, '&');
     $mod_redirect_url = LOGIN_URL . "?redirect=$redirect&admin=1";
 
@@ -129,12 +129,11 @@ if ($mark_read && !IS_GUEST) {
     set_tracks(COOKIE_FORUM, $tracking_forums, $forum_id);
 
     set_die_append_msg($forum_id);
-    $message = $lang['TOPICS_MARKED_READ'];
-    bb_die($message);
+    bb_die($lang['TOPICS_MARKED_READ']);
 }
 
 // Subforums
-$show_subforums = ($bb_cfg['sf_on_first_page_only']) ? !$start : true;
+$show_subforums = $bb_cfg['sf_on_first_page_only'] ? !$start : true;
 
 if (!$forums = $datastore->get('cat_forums')) {
     $datastore->update('cat_forums');

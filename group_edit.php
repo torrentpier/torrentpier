@@ -50,8 +50,6 @@ if ($group_id) {
 }
 
 if ($is_moderator) {
-    // TODO Admin panel, some tasty features
-
     // Avatar
     if ($submit) {
         if (!empty($_FILES['avatar']['name']) && $bb_cfg['group_avatars']['up_allowed']) {

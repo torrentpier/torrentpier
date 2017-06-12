@@ -37,7 +37,7 @@ $bb_cfg['js_ver'] = $bb_cfg['css_ver'] = 1;
 
 // Version info
 $bb_cfg['tp_version'] = '2.1.6';
-$bb_cfg['tp_release_date'] = '12-07-2017';
+$bb_cfg['tp_release_date'] = '12-06-2017';
 $bb_cfg['tp_release_codename'] = 'Aurochs';
 
 // Database
