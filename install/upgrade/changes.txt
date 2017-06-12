@@ -1,58 +1,6 @@
-Схема изменений начиная с версии 2.1 (R600):
+Схема изменений начиная с версии 2.1.5:
 
 Изменения в базе:
-
-// 2.1.1
-DROP TABLE IF EXISTS `bb_reports`;
-DROP TABLE IF EXISTS `bb_reports_changes`;
-DROP TABLE IF EXISTS `bb_reports_modules`;
-DROP TABLE IF EXISTS `bb_reports_reasons`;
-DELETE FROM `bb_config` WHERE `config_name` = 'report_subject_auth';
-DELETE FROM `bb_config` WHERE `config_name` = 'report_modules_cache';
-DELETE FROM `bb_config` WHERE `config_name` = 'report_hack_count';
-DELETE FROM `bb_config` WHERE `config_name` = 'report_notify';
-DELETE FROM `bb_config` WHERE `config_name` = 'report_list_admin';
-DELETE FROM `bb_config` WHERE `config_name` = 'report_new_window';
-DELETE FROM `bb_config` WHERE `config_name` = 'reports_enabled';
-ALTER TABLE `bb_posts` DROP COLUMN `post_reported`;
-ALTER TABLE `bb_privmsgs` DROP COLUMN `privmsgs_reported`;
-ALTER TABLE `bb_topics` DROP COLUMN `topic_reported`;
-DELETE FROM `bb_cron` WHERE `cron_script` = 'site_backup.php';
-DELETE FROM `bb_cron` WHERE `cron_script` = 'db_backup.php';
-UPDATE `bb_cron` SET `cron_script` = 'board_maintenance.php' WHERE `cron_script` = 'bb_maintenance.php';
-UPDATE `bb_attachments_config` SET `config_value` = 'data/old_files' WHERE `config_name` = 'upload_dir';
-UPDATE `bb_attachments_config` SET `config_value` = 'styles/images/icon_clip.gif' WHERE `config_name` = 'upload_img';
-UPDATE `bb_attachments_config` SET `config_value` = 'styles/images/icon_clip.gif' WHERE `config_name` = 'topic_icon';
-UPDATE `bb_config` SET `config_value` = 'styles/images/smiles' WHERE `config_name` = 'smilies_path';
-
-// 2.1.4
-ALTER TABLE `bb_bt_tracker` DROP COLUMN `ul_gdc`;
-ALTER TABLE `bb_bt_tracker` DROP COLUMN `ul_gdc_c`;
-ALTER TABLE `bb_bt_tracker` DROP COLUMN `ul_16k_c`;
-ALTER TABLE `bb_bt_tracker` DROP COLUMN `ul_eq_dl`;
-ALTER TABLE `bb_bt_torrents` CHANGE `info_hash` `info_hash` VARBINARY(20) NOT NULL DEFAULT '';
-ALTER TABLE `bb_bt_torrents` CHANGE `speed_up` `speed_up` INT(11) NOT NULL DEFAULT '0';
-ALTER TABLE `bb_bt_torrents` CHANGE `speed_down` `speed_down` INT(11) NOT NULL DEFAULT '0';
-ALTER TABLE `bb_bt_tracker` CHANGE `peer_id` `peer_id` VARCHAR(20) NOT NULL DEFAULT '0';
-UPDATE `bb_config` SET `config_value` = '180' WHERE `config_name` = 'cron_check_interval';
-ALTER TABLE `bb_cron` CHANGE `run_order` `run_order` TINYINT(4) unsigned NOT NULL DEFAULT '0';
-ALTER TABLE `bb_cron` CHANGE `run_interval` `run_interval` TIME DEFAULT NULL DEFAULT '0';
-ALTER TABLE `bb_groups` CHANGE `group_description` `group_description` TEXT NOT NULL;
-ALTER TABLE `bb_groups` CHANGE `group_signature` `group_signature` TEXT NOT NULL;
-ALTER TABLE `bb_posts` CHANGE `mc_comment` `mc_comment` TEXT NOT NULL;
-ALTER TABLE `bb_posts` CHANGE `mc_user_id` `mc_user_id` MEDIUMINT(8) NOT NULL DEFAULT '0';
-ALTER TABLE `bb_posts_html` CHANGE `post_html` `post_html` MEDIUMTEXT NOT NULL DEFAULT '';
-ALTER TABLE `bb_users` CHANGE `user_regdate` `user_regdate` INT(11) NOT NULL DEFAULT '0';
-ALTER TABLE `bb_users` CHANGE `user_lang` `user_lang` VARCHAR(255) NOT NULL DEFAULT 'ru';
-ALTER TABLE `bb_users` CHANGE `avatar_ext_id` `avatar_ext_id` TINYINT(4) NOT NULL DEFAULT '0';
-ALTER TABLE `bb_user_group` CHANGE `user_time` `user_time` INT(11) NOT NULL DEFAULT '0';
-ALTER TABLE `bb_bt_tracker` ADD `client` VARCHAR(51) NOT NULL DEFAULT 'Unknown' AFTER `port`;
-ALTER TABLE `bb_bt_tracker` ADD `complete` INT(11) NOT NULL DEFAULT '0' AFTER `complete_percent`;
-
-// 2.1.5
-DROP TABLE IF EXISTS `bb_captcha`;
-DELETE FROM `bb_cron` WHERE `cron_script` = 'captcha_gen_gc.php';
-INSERT INTO `bb_cron` VALUES ('', '1', 'Accrual seedbonus', 'tr_seed_bonus.php', 'interval', '', '', '25', '', '', '00:15:00', '0', '', '0', '0', '0');
 
 // 2.1.6
 UPDATE `bb_config` SET `config_value` = 'http://whatismyipaddress.com/ip/' WHERE `config_name` = 'whois_info';
@@ -62,3 +10,21 @@ DROP TABLE IF EXISTS `bb_ads`;
 DELETE FROM `bb_config` WHERE `config_name` = 'active_ads';
 ALTER TABLE `bb_log` DROP COLUMN `log_username`;
 DELETE FROM `bb_config` WHERE `config_name` = 'new_tpls';
+UPDATE `bb_posts` SET `poster_ip` = '0';
+ALTER TABLE `bb_posts` CHANGE `poster_ip` `poster_ip` varchar(42) NOT NULL DEFAULT '0';
+UPDATE `bb_bt_tracker` SET `ip` = '0';
+ALTER TABLE `bb_bt_tracker` CHANGE `ip` `ip` varchar(42) NOT NULL DEFAULT '0';
+UPDATE `bb_users` SET `user_last_ip` = '0';
+ALTER TABLE `bb_users` CHANGE `user_last_ip` `user_last_ip` varchar(42) NOT NULL DEFAULT '0';
+UPDATE `bb_users` SET `user_reg_ip` = '0';
+ALTER TABLE `bb_users` CHANGE `user_reg_ip` `user_reg_ip` varchar(42) NOT NULL DEFAULT '0';
+UPDATE `bb_log` SET `log_user_ip` = '0';
+ALTER TABLE `bb_log` CHANGE `log_user_ip` `log_user_ip` varchar(42) NOT NULL DEFAULT '0';
+UPDATE `bb_poll_users` SET `vote_ip` = '0';
+ALTER TABLE `bb_poll_users` CHANGE `vote_ip` `vote_ip` varchar(42) NOT NULL DEFAULT '0';
+UPDATE `bb_privmsgs` SET `privmsgs_ip` = '0';
+ALTER TABLE `bb_privmsgs` CHANGE `privmsgs_ip` `privmsgs_ip` varchar(42) NOT NULL DEFAULT '0';
+UPDATE `bb_sessions` SET `session_ip` = '0';
+ALTER TABLE `bb_sessions` CHANGE `session_ip` `session_ip` varchar(42) NOT NULL DEFAULT '0';
+UPDATE `bb_banlist` SET `ban_ip` = '0';
+ALTER TABLE `bb_banlist` CHANGE `ban_ip` `ban_ip` varchar(42) NOT NULL DEFAULT '0';

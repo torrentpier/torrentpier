@@ -146,7 +146,7 @@ DROP TABLE IF EXISTS `bb_banlist`;
 CREATE TABLE IF NOT EXISTS `bb_banlist` (
   `ban_id`     MEDIUMINT(8) UNSIGNED NOT NULL AUTO_INCREMENT,
   `ban_userid` MEDIUMINT(8)          NOT NULL DEFAULT '0',
-  `ban_ip`     VARCHAR(32)           NOT NULL DEFAULT '',
+  `ban_ip`     VARCHAR(42)           NOT NULL DEFAULT '0',
   `ban_email`  VARCHAR(255)          NOT NULL DEFAULT '',
   PRIMARY KEY (`ban_id`),
   KEY `ban_ip_user_id` (`ban_ip`, `ban_userid`)
@@ -340,9 +340,7 @@ CREATE TABLE IF NOT EXISTS `bb_bt_tracker` (
   `topic_id`         MEDIUMINT(8) UNSIGNED NOT NULL DEFAULT '0',
   `peer_id`          VARCHAR(20)           NOT NULL DEFAULT '0',
   `user_id`          MEDIUMINT(9)          NOT NULL DEFAULT '0',
-  `ip`               CHAR(8)
-                     CHARACTER SET utf8
-                     COLLATE utf8_bin      NOT NULL DEFAULT '0',
+  `ip`               VARCHAR(42)           NOT NULL DEFAULT '0',
   `ipv6`             VARCHAR(32)                    DEFAULT NULL,
   `port`             SMALLINT(5) UNSIGNED  NOT NULL DEFAULT '0',
   `client`           VARCHAR(51)           NOT NULL DEFAULT 'Unknown',
@@ -825,9 +823,7 @@ DROP TABLE IF EXISTS `bb_log`;
 CREATE TABLE IF NOT EXISTS `bb_log` (
   `log_type_id`         MEDIUMINT(8) UNSIGNED NOT NULL DEFAULT '0',
   `log_user_id`         MEDIUMINT(9)          NOT NULL DEFAULT '0',
-  `log_user_ip`         VARCHAR(32)
-                        CHARACTER SET utf8
-                        COLLATE utf8_bin      NOT NULL DEFAULT '',
+  `log_user_ip`         VARCHAR(42)           NOT NULL DEFAULT '0',
   `log_forum_id`        SMALLINT(5) UNSIGNED  NOT NULL DEFAULT '0',
   `log_forum_id_new`    SMALLINT(5) UNSIGNED  NOT NULL DEFAULT '0',
   `log_topic_id`        MEDIUMINT(8) UNSIGNED NOT NULL DEFAULT '0',
@@ -853,7 +849,7 @@ DROP TABLE IF EXISTS `bb_poll_users`;
 CREATE TABLE IF NOT EXISTS `bb_poll_users` (
   `topic_id` INT(10) UNSIGNED NOT NULL,
   `user_id`  INT(11)          NOT NULL,
-  `vote_ip`  VARCHAR(32)      NOT NULL,
+  `vote_ip`  VARCHAR(42)      NOT NULL DEFAULT '0',
   `vote_dt`  INT(11)          NOT NULL DEFAULT '0',
   PRIMARY KEY (`topic_id`, `user_id`)
 )
@@ -892,9 +888,7 @@ CREATE TABLE IF NOT EXISTS `bb_posts` (
   `forum_id`        SMALLINT(5) UNSIGNED  NOT NULL DEFAULT '0',
   `poster_id`       MEDIUMINT(8)          NOT NULL DEFAULT '0',
   `post_time`       INT(11)               NOT NULL DEFAULT '0',
-  `poster_ip`       CHAR(32)
-                    CHARACTER SET utf8
-                    COLLATE utf8_bin      NOT NULL DEFAULT '',
+  `poster_ip`       VARCHAR(42)           NOT NULL DEFAULT '0',
   `poster_rg_id`    MEDIUMINT(8)          NOT NULL DEFAULT '0',
   `attach_rg_sig`   TINYINT(4)            NOT NULL DEFAULT '0',
   `post_username`   VARCHAR(25)           NOT NULL DEFAULT '',
@@ -983,9 +977,7 @@ CREATE TABLE IF NOT EXISTS `bb_privmsgs` (
   `privmsgs_from_userid` MEDIUMINT(8)          NOT NULL DEFAULT '0',
   `privmsgs_to_userid`   MEDIUMINT(8)          NOT NULL DEFAULT '0',
   `privmsgs_date`        INT(11)               NOT NULL DEFAULT '0',
-  `privmsgs_ip`          VARCHAR(32)
-                         CHARACTER SET utf8
-                         COLLATE utf8_bin      NOT NULL DEFAULT '',
+  `privmsgs_ip`          VARCHAR(42)           NOT NULL DEFAULT '0',
   PRIMARY KEY (`privmsgs_id`),
   KEY `privmsgs_from_userid` (`privmsgs_from_userid`),
   KEY `privmsgs_to_userid` (`privmsgs_to_userid`)
@@ -1114,9 +1106,7 @@ CREATE TABLE IF NOT EXISTS `bb_sessions` (
   `session_user_id`   MEDIUMINT(8)     NOT NULL DEFAULT '0',
   `session_start`     INT(11)          NOT NULL DEFAULT '0',
   `session_time`      INT(11)          NOT NULL DEFAULT '0',
-  `session_ip`        CHAR(32)
-                      CHARACTER SET utf8
-                      COLLATE utf8_bin NOT NULL DEFAULT '',
+  `session_ip`        VARCHAR(42)      NOT NULL DEFAULT '0',
   `session_logged_in` TINYINT(1)       NOT NULL DEFAULT '0',
   `session_admin`     TINYINT(2)       NOT NULL DEFAULT '0',
   PRIMARY KEY (`session_id`)
@@ -1295,9 +1285,9 @@ CREATE TABLE IF NOT EXISTS `bb_users` (
                         COLLATE utf8_bin      NOT NULL DEFAULT '',
   `user_session_time`   INT(11)               NOT NULL DEFAULT '0',
   `user_lastvisit`      INT(11)               NOT NULL DEFAULT '0',
-  `user_last_ip`        CHAR(32)              NOT NULL DEFAULT '',
+  `user_last_ip`        VARCHAR(42)           NOT NULL DEFAULT '0',
   `user_regdate`        INT(11)               NOT NULL DEFAULT '0',
-  `user_reg_ip`         CHAR(32)              NOT NULL DEFAULT '',
+  `user_reg_ip`         VARCHAR(42)           NOT NULL DEFAULT '0',
   `user_level`          TINYINT(4)            NOT NULL DEFAULT '0',
   `user_posts`          MEDIUMINT(8) UNSIGNED NOT NULL DEFAULT '0',
   `user_timezone`       DECIMAL(5, 2)         NOT NULL DEFAULT '0.00',

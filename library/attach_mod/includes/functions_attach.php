@@ -127,7 +127,7 @@ function auth_unpack($auth_cache)
     $one_char_encoding = '#';
     $two_char_encoding = '.';
 
-    $auth = array();
+    $auth = [];
     $auth_len = 1;
 
     for ($pos = 0; $pos < strlen($auth_cache); $pos += $auth_len) {
@@ -162,7 +162,7 @@ function is_forum_authed($auth_cache, $check_forum_id)
         return true;
     }
 
-    $auth = array();
+    $auth = [];
     $auth_len = 1;
 
     for ($pos = 0; $pos < strlen($auth_cache); $pos += $auth_len) {
@@ -269,7 +269,7 @@ function get_attachments_from_post($post_id_array)
 {
     global $attach_config;
 
-    $attachments = array();
+    $attachments = [];
 
     if (!is_array($post_id_array)) {
         if (empty($post_id_array)) {
@@ -278,7 +278,7 @@ function get_attachments_from_post($post_id_array)
 
         $post_id = (int)$post_id_array;
 
-        $post_id_array = array();
+        $post_id_array = [];
         $post_id_array[] = $post_id;
     }
 
@@ -305,7 +305,7 @@ function get_attachments_from_post($post_id_array)
     DB()->sql_freeresult($result);
 
     if ($num_rows == 0) {
-        return array();
+        return [];
     }
 
     return $attachments;
@@ -358,7 +358,7 @@ function attachment_sync_topic($topics)
     if (is_array($topics)) {
         $topics = implode(',', $topics);
     }
-    $posts_without_attach = $topics_without_attach = array();
+    $posts_without_attach = $topics_without_attach = [];
 
     // Check orphan post_attachment markers
     $sql = "SELECT p.post_id
@@ -513,9 +513,10 @@ function get_var($var_name, $default, $multibyte = false)
         $type = gettype($default);
         $key_type = null;
     } else {
-        list($key_type, $type) = $default;
-        $type = gettype($type);
-        $key_type = gettype($key_type);
+        foreach ($default as $key_type => $type) {
+            $key_type = gettype($key_type);
+            $type = gettype($type);
+        }
     }
 
     if (is_array($var)) {
@@ -565,8 +566,8 @@ function attach_mod_sql_build_array($query, $assoc_ary = false)
         return false;
     }
 
-    $fields = array();
-    $values = array();
+    $fields = [];
+    $values = [];
     if ($query == 'INSERT' || $query == 'INSERT_SELECT') {
         foreach ($assoc_ary as $key => $var) {
             $fields[] = $key;
@@ -584,9 +585,9 @@ function attach_mod_sql_build_array($query, $assoc_ary = false)
 
         $query = ($query == 'INSERT') ? ' (' . implode(', ', $fields) . ') VALUES (' . implode(', ', $values) . ')' : ' (' . implode(', ', $fields) . ') SELECT ' . implode(', ', $values) . ' ';
     } elseif ($query == 'MULTI_INSERT') {
-        $ary = array();
+        $ary = [];
         foreach ($assoc_ary as $id => $sql_ary) {
-            $values = array();
+            $values = [];
             foreach ($sql_ary as $key => $var) {
                 if (null === $var) {
                     $values[] = 'NULL';
@@ -601,7 +602,7 @@ function attach_mod_sql_build_array($query, $assoc_ary = false)
 
         $query = ' (' . implode(', ', array_keys($assoc_ary[0])) . ') VALUES ' . implode(', ', $ary);
     } elseif ($query == 'UPDATE' || $query == 'SELECT') {
-        $values = array();
+        $values = [];
         foreach ($assoc_ary as $key => $var) {
             if (null === $var) {
                 $values[] = "$key = NULL";
