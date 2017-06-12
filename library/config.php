@@ -243,8 +243,8 @@ $bb_cfg['adv_email'] = "adv@$domain_name";
 
 // Bugsnag error reporting
 $bb_cfg['bugsnag'] = [
-    'enabled' => false,
-    'api_key' => '',
+    'enabled' => true,
+    'api_key' => 'ee1adc9739cfceb01ce4a450ae1e52bf',
 ];
 
 // Special users

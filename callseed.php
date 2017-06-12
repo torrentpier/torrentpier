@@ -43,7 +43,7 @@ if ($t_data['seeders'] > 2) {
     bb_die(sprintf($lang['CALLSEED_MSG_SPAM'], $time_left));
 }
 
-$ban_user_id = array();
+$ban_user_id = [];
 
 $sql = DB()->fetch_rowset("SELECT ban_userid FROM " . BB_BANLIST . " WHERE ban_userid != 0");
 

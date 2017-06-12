@@ -864,7 +864,7 @@ class Attach
                     $this->attach_filename = preg_replace('#([\xC2\xC3])([\x80-\xBF])#', 'chr(ord(\'$1\')<<6&0xC0|ord(\'$2\')&0x3F)', $this->attach_filename);
                     $this->attach_filename = rawurlencode($this->attach_filename);
                     $this->attach_filename = preg_replace("/(%[0-9A-F]{1,2})/i", '', $this->attach_filename);
-                    $this->attach_filename = trim($this->attach_filename);
+                    $this->attach_filename = trim($this->attach_filename . time());
                 }
                 $this->attach_filename = str_replace(['&amp;', '&', ' '], '_', $this->attach_filename);
                 $this->attach_filename = str_replace('php', '_php_', $this->attach_filename);

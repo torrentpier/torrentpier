@@ -591,8 +591,6 @@ switch ($mode) {
     case 'ip':
         $anon = GUEST_UID;
 
-        $rdns_ip_num = (isset($_GET['rdns'])) ? $_GET['rdns'] : "";
-
         if (!$post_id) {
             bb_die($lang['NO_SUCH_POST']);
         }
@@ -607,8 +605,9 @@ switch ($mode) {
             bb_die($lang['NO_SUCH_POST']);
         }
 
-        $ip_this_post = decode_ip($post_row['poster_ip']);
-        $ip_this_post = ($rdns_ip_num == $ip_this_post) ? gethostbyaddr($ip_this_post) : $ip_this_post;
+        if (!$ip_this_post = decode_ip($post_row['poster_ip'])) {
+            $ip_this_post = $lang['NOT_AVAILABLE'];
+        }
 
         $poster_id = $post_row['poster_id'];
 
@@ -638,8 +637,9 @@ switch ($mode) {
                     continue;
                 }
 
-                $ip = decode_ip($row['poster_ip']);
-                $ip = ($rdns_ip_num == $row['poster_ip'] || $rdns_ip_num == 'all') ? gethostbyaddr($ip) : $ip;
+                if (!$ip = decode_ip($row['poster_ip'])) {
+                    $ip = $lang['NOT_AVAILABLE'];
+                }
 
                 $template->assign_block_vars('iprow', array(
                     'ROW_CLASS' => !($i % 2) ? 'row4' : 'row5',

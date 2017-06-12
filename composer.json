@@ -35,11 +35,11 @@
     "docs": "https://docs.torrentpier.me/"
   },
   "require": {
-    "php": "^5.5 || ^7.0",
-    "bugsnag/bugsnag": "^3.0",
+    "php": "^5.6 || ^7.0",
+    "bugsnag/bugsnag": "^3.5",
     "filp/whoops": "^2.1",
     "gigablah/sphinxphp": "^2.0",
-    "google/recaptcha": "^1.0",
+    "google/recaptcha": "^1.1",
     "longman/ip-tools": "^1.2",
     "roave/security-advisories": "dev-master",
     "rych/bencode": "^1.0",

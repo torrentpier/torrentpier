@@ -127,6 +127,7 @@ if (!$t_data = DB()->fetch_row($sql)) {
 $forum_topic_data =& $t_data;
 $topic_id = $t_data['topic_id'];
 $forum_id = $t_data['forum_id'];
+$topic_attachment = isset($t_data['topic_attachment']) ? (int)$t_data['topic_attachment'] : null;
 
 if ($t_data['allow_porno_topic'] && bf($userdata['user_opt'], 'user_opt', 'user_porn_forums')) {
     bb_die($lang['ERROR_PORNO_FORUM']);
@@ -137,7 +138,7 @@ if ($userdata['session_admin'] && !empty($_REQUEST['mod'])) {
         $datastore->enqueue(array('viewtopic_forum_select'));
     }
 }
-if (isset($t_data['topic_attachment'])) {
+if ($topic_attachment) {
     $datastore->enqueue(array(
         'attach_extensions',
     ));
@@ -556,7 +557,7 @@ $template->assign_vars(array(
 ));
 require INC_DIR . '/torrent_show_dl_list.php';
 
-if (isset($t_data['topic_attachment'])) {
+if ($topic_attachment) {
     require ATTACH_DIR . '/attachment_mod.php';
     init_display_post_attachments($t_data['topic_attachment']);
 }

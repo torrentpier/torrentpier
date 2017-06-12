@@ -114,13 +114,6 @@ if (file_exists(__DIR__ . '/library/config.local.php')) {
     require_once __DIR__ . '/library/config.local.php';
 }
 
-// Bugsnag error reporting
-if ($bb_cfg['bugsnag']['enabled'] && !empty($bb_cfg['bugsnag']['api_key'])) {
-    /** @var Bugsnag\Handler $bugsnag */
-    $bugsnag = Bugsnag\Client::make($bb_cfg['bugsnag']['api_key']);
-    Bugsnag\Handler::register($bugsnag);
-}
-
 $server_protocol = $bb_cfg['cookie_secure'] ? 'https://' : 'http://';
 $server_port = in_array((int)$bb_cfg['server_port'], array(80, 443), true) ? '' : ':' . $bb_cfg['server_port'];
 define('FORUM_PATH', $bb_cfg['script_path']);
@@ -156,12 +149,19 @@ define('GUEST_UID', -1);
 define('BOT_UID', -746);
 
 /**
- * Whoops error handler
+ * Progressive error reporting
  */
 if (DBG_USER) {
-    $whoops = new \Whoops\Run;
-    $whoops->pushHandler(new \Whoops\Handler\PrettyPageHandler);
-    $whoops->register();
+    if ($bb_cfg['bugsnag']['enabled'] && !empty($bb_cfg['bugsnag']['api_key'])) {
+        /** @var Bugsnag\Handler $bugsnag */
+        $bugsnag = Bugsnag\Client::make($bb_cfg['bugsnag']['api_key']);
+        Bugsnag\Handler::register($bugsnag);
+    } else {
+        /** @var Whoops\Run $whoops */
+        $whoops = new \Whoops\Run;
+        $whoops->pushHandler(new \Whoops\Handler\PrettyPageHandler);
+        $whoops->register();
+    }
 }
 
 /**
