@@ -1127,6 +1127,8 @@ function bb_date($gmepoch, $format = false, $friendly_date = true)
 {
     global $bb_cfg, $lang, $userdata;
 
+    $gmepoch = (int)$gmepoch;
+
     if (!$format) {
         $format = $bb_cfg['default_dateformat'];
     }
