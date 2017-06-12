@@ -88,6 +88,6 @@ $ajax->exec();
 
 /**
  * @deprecated ajax_common
- * Dirty class removed from here since 2.1.6
+ * Dirty class removed from here since 2.2.0
  * To add new actions see at src/Legacy/Ajax.php
  */

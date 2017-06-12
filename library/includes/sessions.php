@@ -32,7 +32,7 @@ define('ONLY_NEW_TOPICS', 2);
 
 /**
  * @deprecated user_common
- * Dirty class removed from here since 2.1.6
+ * Dirty class removed from here since 2.2.0
  * To add new opt see at src/Legacy/Common/User.php
  */
 
