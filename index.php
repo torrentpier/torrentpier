@@ -89,7 +89,7 @@ $excluded_forums_csv = $user->get_excluded_forums(AUTH_VIEW);
 $only_new = $user->opt_js['only_new'];
 
 // Validate requested category id
-if ($viewcat and !$viewcat =& $forums['c'][$viewcat]['cat_id']) {
+if ($viewcat && !($viewcat =& $forums['c'][$viewcat]['cat_id'])) {
     redirect("index.php");
 }
 
@@ -144,9 +144,9 @@ $replace_in_parent = array(
 
 $cache_name = 'index_sql_' . md5($sql);
 if (!$cat_forums = CACHE('bb_cache')->get($cache_name)) {
-    $cat_forums = array();
+    $cat_forums = [];
     foreach (DB()->fetch_rowset($sql) as $row) {
-        if (!$cat_id = $row['cat_id'] or !$forum_id = $row['forum_id']) {
+        if (!($cat_id = $row['cat_id']) || !($forum_id = $row['forum_id'])) {
             continue;
         }
 
@@ -280,13 +280,30 @@ $template->assign_vars(array(
     'TOTAL_TOPICS' => sprintf($lang['POSTED_TOPICS_TOTAL'], $stats['topiccount']),
     'TOTAL_POSTS' => sprintf($lang['POSTED_ARTICLES_TOTAL'], $stats['postcount']),
     'TOTAL_USERS' => sprintf($lang['REGISTERED_USERS_TOTAL'], $stats['usercount']),
-    'TOTAL_GENDER' => ($bb_cfg['gender']) ? sprintf($lang['USERS_TOTAL_GENDER'], $stats['male'], $stats['female'], $stats['unselect']) : '',
+    'TOTAL_GENDER' => $bb_cfg['gender'] ? sprintf(
+        $lang['USERS_TOTAL_GENDER'],
+        $stats['male'],
+        $stats['female'],
+        $stats['unselect']
+    ) : '',
     'NEWEST_USER' => sprintf($lang['NEWEST_USER'], profile_url($stats['newestuser'])),
 
     // Tracker stats
-    'TORRENTS_STAT' => ($bb_cfg['tor_stats']) ? sprintf($lang['TORRENTS_STAT'], $stats['torrentcount'], humn_size($stats['size'])) : '',
-    'PEERS_STAT' => ($bb_cfg['tor_stats']) ? sprintf($lang['PEERS_STAT'], $stats['peers'], $stats['seeders'], $stats['leechers']) : '',
-    'SPEED_STAT' => ($bb_cfg['tor_stats']) ? sprintf($lang['SPEED_STAT'], humn_size($stats['speed']) . '/s') : '',
+    'TORRENTS_STAT' => $bb_cfg['tor_stats'] ? sprintf(
+        $lang['TORRENTS_STAT'],
+        $stats['torrentcount'],
+        humn_size($stats['size'])
+    ) : '',
+    'PEERS_STAT' => $bb_cfg['tor_stats'] ? sprintf(
+        $lang['PEERS_STAT'],
+        $stats['peers'],
+        $stats['seeders'],
+        $stats['leechers']
+    ) : '',
+    'SPEED_STAT' => $bb_cfg['tor_stats'] ? sprintf(
+        $lang['SPEED_STAT'],
+        humn_size($stats['speed']) . '/s'
+    ) : '',
     'SHOW_MOD_INDEX' => $bb_cfg['show_mod_index'],
     'FORUM_IMG' => $images['forum'],
     'FORUM_NEW_IMG' => $images['forum_new'],
@@ -355,7 +372,7 @@ if ($bb_cfg['birthday_check_day'] && $bb_cfg['birthday_enabled']) {
     $week_list = $today_list = array();
     $week_all = $today_all = false;
 
-    if ($stats['birthday_week_list']) {
+    if (isset($stats['birthday_week_list'])) {
         shuffle($stats['birthday_week_list']);
         foreach ($stats['birthday_week_list'] as $i => $week) {
             if ($i >= 5) {
@@ -370,7 +387,7 @@ if ($bb_cfg['birthday_check_day'] && $bb_cfg['birthday_enabled']) {
         $week_list = sprintf($lang['NOBIRTHDAY_WEEK'], $bb_cfg['birthday_check_day']);
     }
 
-    if ($stats['birthday_today_list']) {
+    if (isset($stats['birthday_today_list'])) {
         shuffle($stats['birthday_today_list']);
         foreach ($stats['birthday_today_list'] as $i => $today) {
             if ($i >= 5) {

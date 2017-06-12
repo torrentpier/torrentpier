@@ -119,9 +119,6 @@ if (isset($_POST['login'])) {
             if ($login_err > $bb_cfg['invalid_logins']) {
                 $need_captcha = true;
             }
-            if ($login_err > 50) {
-                // TODO temp ban ip
-            }
             CACHE('bb_login_err')->set('l_err_' . USER_IP, ($login_err + 1), 3600);
         } else {
             $need_captcha = false;

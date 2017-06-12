@@ -273,6 +273,7 @@ function tracker_register($attach_id, $mode = '', $tor_status = TOR_NOT_APPROVED
     torrent_auth_check($forum_id, $torrent['poster_id']);
 
     $filename = get_attachments_dir() . '/' . $torrent['physical_filename'];
+    $file_contents = file_get_contents($filename);
 
     if (!is_file($filename)) {
         return torrent_error_exit('File name error');
@@ -280,7 +281,7 @@ function tracker_register($attach_id, $mode = '', $tor_status = TOR_NOT_APPROVED
     if (!file_exists($filename)) {
         return torrent_error_exit('File not exists');
     }
-    if (!$tor = bdecode_file($filename)) {
+    if (!$tor = \Rych\Bencode\Bencode::decode($file_contents)) {
         return torrent_error_exit('This is not a bencoded file');
     }
 
@@ -458,7 +459,8 @@ function send_torrent_with_passkey($filename)
     // Announce URL
     $ann_url = $bb_cfg['bt_announce_url'];
 
-    if (!$tor = bdecode_file($filename)) {
+    $file_contents = file_get_contents($filename);
+    if (!$tor = \Rych\Bencode\Bencode::decode($file_contents)) {
         bb_die('This is not a bencoded file');
     }
 
@@ -667,101 +669,4 @@ function ocelot_send_request($get, $max_attempts = 1, &$err = false)
     }
 
     return $success;
-}
-
-// bdecode: based on OpenTracker
-function bdecode_file($filename)
-{
-    $file_contents = file_get_contents($filename);
-    return bdecode($file_contents);
-}
-
-function bdecode($str)
-{
-    $pos = 0;
-    return bdecode_r($str, $pos);
-}
-
-function bdecode_r($str, &$pos)
-{
-    $strlen = strlen($str);
-
-    if (($pos < 0) || ($pos >= $strlen)) {
-        return null;
-    } elseif ($str[$pos] == 'i') {
-        $pos++;
-        $numlen = strspn($str, '-0123456789', $pos);
-        $spos = $pos;
-        $pos += $numlen;
-
-        if (($pos >= $strlen) || ($str[$pos] != 'e')) {
-            return null;
-        } else {
-            $pos++;
-            return (float)substr($str, $spos, $numlen);
-        }
-    } elseif ($str[$pos] == 'd') {
-        $pos++;
-        $ret = array();
-
-        while ($pos < $strlen) {
-            if ($str[$pos] == 'e') {
-                $pos++;
-                return $ret;
-            } else {
-                $key = bdecode_r($str, $pos);
-
-                if ($key === null) {
-                    return null;
-                } else {
-                    $val = bdecode_r($str, $pos);
-
-                    if ($val === null) {
-                        return null;
-                    } elseif (!is_array($key)) {
-                        $ret[$key] = $val;
-                    }
-                }
-            }
-        }
-        return null;
-    } elseif ($str[$pos] == 'l') {
-        $pos++;
-        $ret = array();
-
-        while ($pos < $strlen) {
-            if ($str[$pos] == 'e') {
-                $pos++;
-                return $ret;
-            } else {
-                $val = bdecode_r($str, $pos);
-
-                if ($val === null) {
-                    return null;
-                } else {
-                    $ret[] = $val;
-                }
-            }
-        }
-        return null;
-    } else {
-        $numlen = strspn($str, '0123456789', $pos);
-        $spos = $pos;
-        $pos += $numlen;
-
-        if (($pos >= $strlen) || ($str[$pos] != ':')) {
-            return null;
-        } else {
-            $vallen = (int)substr($str, $spos, $numlen);
-            $pos++;
-            $val = substr($str, $pos, $vallen);
-
-            if (strlen($val) != $vallen) {
-                return null;
-            } else {
-                $pos += $vallen;
-                return $val;
-            }
-        }
-    }
 }

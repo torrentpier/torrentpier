@@ -210,7 +210,7 @@ switch ($mode) {
         $req_topics = isset($_POST['topic_id_list']) ? $_POST['topic_id_list'] : $topic_id;
         validate_topics($forum_id, $req_topics, $topic_titles);
 
-        if (!$req_topics or !$topic_csv = get_id_csv($req_topics)) {
+        if (!$req_topics || !($topic_csv = get_id_csv($req_topics))) {
             bb_die($lang['NONE_SELECTED']);
         }
 

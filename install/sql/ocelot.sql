@@ -9,7 +9,7 @@ CREATE TABLE IF NOT EXISTS `bb_bt_tracker` (
   `topic_id` mediumint(8) unsigned NOT NULL DEFAULT '0',
   `peer_id` varchar(20) NOT NULL,
   `user_id` mediumint(9) NOT NULL DEFAULT '0',
-  `ip` varchar(15) NOT NULL DEFAULT '0',
+  `ip` varchar(42) NOT NULL DEFAULT '0',
   `ipv6` varchar(32) DEFAULT NULL,
   `port` smallint(5) unsigned NOT NULL DEFAULT '0',
   `client` varchar(51) NOT NULL DEFAULT 'Unknown',

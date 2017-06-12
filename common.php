@@ -305,7 +305,7 @@ function mkdir_rec($path, $mode)
         return ($path !== '.' && $path !== '..') ? is_writable($path) : false;
     }
 
-    return mkdir_rec(dirname($path), $mode) ? @mkdir($path, $mode) : false;
+    return mkdir_rec(dirname($path), $mode) ? mkdir($path, $mode) : false;
 }
 
 function verify_id($id, $length)
@@ -442,7 +442,7 @@ function log_request($file = '', $prepend_str = false, $add_post = true)
 {
     global $user;
 
-    $file = ($file) ?: 'req/' . date('m-d');
+    $file = $file ?: 'req/' . date('m-d');
     $str = array();
     $str[] = date('m-d H:i:s');
     if ($prepend_str !== false) {

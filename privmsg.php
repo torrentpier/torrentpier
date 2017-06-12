@@ -47,8 +47,7 @@ if ($bb_cfg['privmsg_disable']) {
 //
 // Parameters
 //
-//$submit = ( isset($_POST['post']) ) ? TRUE : 0;
-$submit = (bool)request_var('post', false); //test it!
+$submit = (bool)request_var('post', false);
 $submit_search = (isset($_POST['usersubmit'])) ? true : 0;
 $submit_msgdays = (isset($_POST['submit_msgdays'])) ? true : 0;
 $cancel = (isset($_POST['cancel'])) ? true : 0;
@@ -74,19 +73,9 @@ if ($folder =& $_REQUEST['folder']) {
 // Start session management
 $user->session_start(array('req_login' => true));
 
-if (IS_AM) {
-    $bb_cfg['max_inbox_privmsgs'] += 1000;
-    $bb_cfg['max_sentbox_privmsgs'] += 1000;
-    $bb_cfg['max_savebox_privmsgs'] += 1000;
-} elseif (IS_GROUP_MEMBER) {
-    $bb_cfg['max_inbox_privmsgs'] += 200;
-    $bb_cfg['max_sentbox_privmsgs'] += 200;
-    $bb_cfg['max_savebox_privmsgs'] += 200;
-}
-
 $template->assign_vars(array(
     'IN_PM' => true,
-    'QUICK_REPLY' => ($bb_cfg['show_quick_reply'] && $folder == 'inbox' && $mode == 'read'),
+    'QUICK_REPLY' => $bb_cfg['show_quick_reply'] && $folder == 'inbox' && $mode == 'read',
 ));
 
 //
@@ -102,7 +91,7 @@ if ($cancel) {
 $start = isset($_REQUEST['start']) ? abs((int)$_REQUEST['start']) : 0;
 
 if (isset($_POST[POST_POST_URL]) || isset($_GET[POST_POST_URL])) {
-    $privmsg_id = (isset($_POST[POST_POST_URL])) ? (int)$_POST[POST_POST_URL] : (int)$_GET[POST_POST_URL];
+    $privmsg_id = isset($_POST[POST_POST_URL]) ? (int)$_POST[POST_POST_URL] : (int)$_GET[POST_POST_URL];
 } else {
     $privmsg_id = '';
 }

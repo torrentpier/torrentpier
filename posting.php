@@ -105,19 +105,18 @@ switch ($mode) {
         break;
 
     default:
-        bb_die($lang['NO_POST_MODE']);
+        bb_simple_die($lang['NO_POST_MODE']);
         break;
 }
 
-// Here we do various lookups to find topic_id, forum_id, post_id etc.
-// Doing it here prevents spoofing (eg. faking forum_id, topic_id or post_id
+// Various lookups to find topic_id, forum_id, post_id etc
 $error_msg = '';
 $post_data = array();
 switch ($mode) {
     case 'newtopic':
     case 'new_rel':
         if (!$forum_id) {
-            bb_die($lang['FORUM_NOT_EXIST']);
+            bb_simple_die($lang['FORUM_NOT_EXIST']);
         }
         $sql = "SELECT * FROM " . BB_FORUMS . " WHERE forum_id = $forum_id LIMIT 1";
         break;
@@ -137,7 +136,7 @@ switch ($mode) {
     case 'editpost':
     case 'delete':
         if (!$post_id) {
-            bb_die($lang['NO_POST_ID']);
+            bb_simple_die($lang['NO_POST_ID']);
         }
 
         $select_sql = 'SELECT f.*, t.*, p.*';
@@ -160,12 +159,14 @@ switch ($mode) {
         break;
 
     default:
-        bb_die($lang['NO_VALID_MODE']);
+        bb_simple_die($lang['NO_VALID_MODE']);
 }
 
 if ($post_info = DB()->fetch_row($sql)) {
     $forum_id = $post_info['forum_id'];
     $forum_name = $post_info['forum_name'];
+
+    set_die_append_msg($forum_id);
 
     $is_auth = auth(AUTH_ALL, $forum_id, $userdata, $post_info);
 
@@ -312,21 +313,15 @@ if (!IS_GUEST && $mode != 'newtopic' && ($submit || $preview || $mode == 'quote'
     }
 }
 
-// --------------------
-//  What shall we do?
-//
+// Confirm deletion
 if (($delete || $mode == 'delete') && !$confirm) {
     if (isset($_POST['cancel'])) {
         redirect(POST_URL . "$post_id#$post_id");
     }
-    //
-    // Confirm deletion
-    //
     $hidden_fields = array(
         'p' => $post_id,
         'mode' => 'delete',
     );
-
     print_confirmation(array(
         'QUESTION' => $lang['CONFIRM_DELETE'],
         'FORM_ACTION' => POSTING_URL,
