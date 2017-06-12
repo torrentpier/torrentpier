@@ -2575,7 +2575,7 @@ $lang['ACTS_LOG_FORUM'] = 'Foorum';
 $lang['ACTS_LOG_ACTION'] = 'Tegevus';
 $lang['ACTS_LOG_USER'] = 'Kasutaja';
 $lang['ACTS_LOG_LOGS_FROM'] = 'Palgid ';
-$lang['ACTS_LOG_FIRST'] = 'esimene ';
+$lang['ACTS_LOG_FIRST'] = 'beginning with';
 $lang['ACTS_LOG_DAYS_BACK'] = 'päeva tagasi';
 $lang['ACTS_LOG_TOPIC_MATCH'] = 'Teema pealkiri vaste';
 $lang['ACTS_LOG_SORT_BY'] = 'Sorteeri';
@@ -2585,6 +2585,7 @@ $lang['ACTS_LOG_TIME'] = 'Aeg';
 $lang['ACTS_LOG_INFO'] = 'Info';
 $lang['ACTS_LOG_FILTER'] = 'Filter';
 $lang['ACTS_LOG_TOPICS'] = 'Teemad:';
+$lang['ACTS_LOG_OR'] = 'or';
 
 $lang['RELEASE'] = 'Pressiteade Malle';
 $lang['RELEASES'] = 'Pressiteated';

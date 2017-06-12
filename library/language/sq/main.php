@@ -2575,7 +2575,7 @@ $lang['ACTS_LOG_FORUM'] = 'Forumi';
 $lang['ACTS_LOG_ACTION'] = 'Veprim';
 $lang['ACTS_LOG_USER'] = 'Përdorues';
 $lang['ACTS_LOG_LOGS_FROM'] = 'Shkrimet nga ';
-$lang['ACTS_LOG_FIRST'] = 'parë ';
+$lang['ACTS_LOG_FIRST'] = 'beginning with';
 $lang['ACTS_LOG_DAYS_BACK'] = 'ditë mbrapa';
 $lang['ACTS_LOG_TOPIC_MATCH'] = 'Temë titullin ndeshje';
 $lang['ACTS_LOG_SORT_BY'] = 'Lloji nga';
@@ -2585,6 +2585,7 @@ $lang['ACTS_LOG_TIME'] = 'Kohë';
 $lang['ACTS_LOG_INFO'] = 'Info';
 $lang['ACTS_LOG_FILTER'] = 'Filtri';
 $lang['ACTS_LOG_TOPICS'] = 'Tema:';
+$lang['ACTS_LOG_OR'] = 'or';
 
 $lang['RELEASE'] = 'Lirimin Templates';
 $lang['RELEASES'] = 'Njoftime';

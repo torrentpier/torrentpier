@@ -2575,7 +2575,7 @@ $lang['ACTS_LOG_FORUM'] = 'मंच';
 $lang['ACTS_LOG_ACTION'] = 'कार्य';
 $lang['ACTS_LOG_USER'] = 'उपयोगकर्ता';
 $lang['ACTS_LOG_LOGS_FROM'] = 'लॉग इन से';
-$lang['ACTS_LOG_FIRST'] = 'प्रथम';
+$lang['ACTS_LOG_FIRST'] = 'beginning with';
 $lang['ACTS_LOG_DAYS_BACK'] = 'दिन पहले';
 $lang['ACTS_LOG_TOPIC_MATCH'] = 'विषय शीर्षक मैच';
 $lang['ACTS_LOG_SORT_BY'] = 'इसके अनुसार क्रमबद्ध करें';
@@ -2585,6 +2585,7 @@ $lang['ACTS_LOG_TIME'] = 'पहर';
 $lang['ACTS_LOG_INFO'] = 'जानकारी';
 $lang['ACTS_LOG_FILTER'] = 'फ़िल्टर';
 $lang['ACTS_LOG_TOPICS'] = 'विषय:';
+$lang['ACTS_LOG_OR'] = 'or';
 
 $lang['RELEASE'] = 'रिलीज़ टेम्पलेट्स';
 $lang['RELEASES'] = 'विज्ञप्ति';

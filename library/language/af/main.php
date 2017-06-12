@@ -2575,7 +2575,7 @@ $lang['ACTS_LOG_FORUM'] = 'Forum';
 $lang['ACTS_LOG_ACTION'] = 'aksie';
 $lang['ACTS_LOG_USER'] = 'gebruiker';
 $lang['ACTS_LOG_LOGS_FROM'] = 'Logs from';
-$lang['ACTS_LOG_FIRST'] = 'eerste';
+$lang['ACTS_LOG_FIRST'] = 'beginning with';
 $lang['ACTS_LOG_DAYS_BACK'] = 'Dae terug';
 $lang['ACTS_LOG_TOPIC_MATCH'] = 'Onderwerp titel wedstryd';
 $lang['ACTS_LOG_SORT_BY'] = 'Sorteer Volgens';
@@ -2585,6 +2585,7 @@ $lang['ACTS_LOG_TIME'] = 'tyd';
 $lang['ACTS_LOG_INFO'] = 'info';
 $lang['ACTS_LOG_FILTER'] = 'filter';
 $lang['ACTS_LOG_TOPICS'] = 'onderwerpe:';
+$lang['ACTS_LOG_OR'] = 'or';
 
 $lang['RELEASE'] = 'Stel sjablone vry';
 $lang['RELEASES'] = 'vrystellings';

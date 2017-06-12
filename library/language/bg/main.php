@@ -2575,7 +2575,7 @@ $lang['ACTS_LOG_FORUM'] = 'Форум';
 $lang['ACTS_LOG_ACTION'] = 'Действие';
 $lang['ACTS_LOG_USER'] = 'Потребител';
 $lang['ACTS_LOG_LOGS_FROM'] = 'Списания ';
-$lang['ACTS_LOG_FIRST'] = 'първи ';
+$lang['ACTS_LOG_FIRST'] = 'beginning with';
 $lang['ACTS_LOG_DAYS_BACK'] = 'дни преди';
 $lang['ACTS_LOG_TOPIC_MATCH'] = 'Име на тема, която отговаря на';
 $lang['ACTS_LOG_SORT_BY'] = 'Подреди по';
@@ -2585,6 +2585,7 @@ $lang['ACTS_LOG_TIME'] = 'Време';
 $lang['ACTS_LOG_INFO'] = 'Информация';
 $lang['ACTS_LOG_FILTER'] = 'Филтър';
 $lang['ACTS_LOG_TOPICS'] = 'Тема:';
+$lang['ACTS_LOG_OR'] = 'or';
 
 $lang['RELEASE'] = 'Шаблони На Издаване';
 $lang['RELEASES'] = 'Пресата';

@@ -2575,7 +2575,7 @@ $lang['ACTS_LOG_FORUM'] = 'פורום';
 $lang['ACTS_LOG_ACTION'] = 'פעולה';
 $lang['ACTS_LOG_USER'] = 'המשתמש';
 $lang['ACTS_LOG_LOGS_FROM'] = 'יומני מ ';
-$lang['ACTS_LOG_FIRST'] = 'הראשון ';
+$lang['ACTS_LOG_FIRST'] = 'beginning with';
 $lang['ACTS_LOG_DAYS_BACK'] = 'ימים';
 $lang['ACTS_LOG_TOPIC_MATCH'] = 'נושא התואר';
 $lang['ACTS_LOG_SORT_BY'] = 'מיין לפי';
@@ -2585,6 +2585,7 @@ $lang['ACTS_LOG_TIME'] = 'זמן';
 $lang['ACTS_LOG_INFO'] = 'מידע';
 $lang['ACTS_LOG_FILTER'] = 'מסנן';
 $lang['ACTS_LOG_TOPICS'] = 'נושאים:';
+$lang['ACTS_LOG_OR'] = 'or';
 
 $lang['RELEASE'] = 'שחרור תבניות';
 $lang['RELEASES'] = 'משחרר';

@@ -2575,7 +2575,7 @@ $lang['ACTS_LOG_FORUM'] = 'Համաժողովը';
 $lang['ACTS_LOG_ACTION'] = 'Գործողություն';
 $lang['ACTS_LOG_USER'] = 'Օգտագործողը';
 $lang['ACTS_LOG_LOGS_FROM'] = 'Ամսագրեր ';
-$lang['ACTS_LOG_FIRST'] = 'առաջին ';
+$lang['ACTS_LOG_FIRST'] = 'beginning with';
 $lang['ACTS_LOG_DAYS_BACK'] = 'օր առաջ';
 $lang['ACTS_LOG_TOPIC_MATCH'] = 'Թեմայի անվանումը համապատասխանում է';
 $lang['ACTS_LOG_SORT_BY'] = 'Դասավորել ըստ';
@@ -2585,6 +2585,7 @@ $lang['ACTS_LOG_TIME'] = 'Ժամանակ';
 $lang['ACTS_LOG_INFO'] = 'Տեղեկատվություն';
 $lang['ACTS_LOG_FILTER'] = 'Ֆիլտր';
 $lang['ACTS_LOG_TOPICS'] = 'Թեմաներ:';
+$lang['ACTS_LOG_OR'] = 'or';
 
 $lang['RELEASE'] = 'Կաղապարներ Թողարկման';
 $lang['RELEASES'] = 'Հաղորդագրություններ';

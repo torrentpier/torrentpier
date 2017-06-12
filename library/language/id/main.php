@@ -2575,7 +2575,7 @@ $lang['ACTS_LOG_FORUM'] = 'Forum';
 $lang['ACTS_LOG_ACTION'] = 'Aksi';
 $lang['ACTS_LOG_USER'] = 'Pengguna';
 $lang['ACTS_LOG_LOGS_FROM'] = 'Log dari ';
-$lang['ACTS_LOG_FIRST'] = 'pertama ';
+$lang['ACTS_LOG_FIRST'] = 'beginning with';
 $lang['ACTS_LOG_DAYS_BACK'] = 'hari-hari kembali';
 $lang['ACTS_LOG_TOPIC_MATCH'] = 'Judul topik pertandingan';
 $lang['ACTS_LOG_SORT_BY'] = 'Urutkan berdasarkan';
@@ -2585,6 +2585,7 @@ $lang['ACTS_LOG_TIME'] = 'Waktu';
 $lang['ACTS_LOG_INFO'] = 'Info';
 $lang['ACTS_LOG_FILTER'] = 'Filter';
 $lang['ACTS_LOG_TOPICS'] = 'Topik:';
+$lang['ACTS_LOG_OR'] = 'or';
 
 $lang['RELEASE'] = 'Rilis Template';
 $lang['RELEASES'] = 'Rilis';

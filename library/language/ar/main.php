@@ -2575,7 +2575,7 @@ $lang['ACTS_LOG_FORUM'] = 'المنتدى';
 $lang['ACTS_LOG_ACTION'] = 'العمل';
 $lang['ACTS_LOG_USER'] = 'المستخدم';
 $lang['ACTS_LOG_LOGS_FROM'] = 'سجلات من ';
-$lang['ACTS_LOG_FIRST'] = 'أولا ';
+$lang['ACTS_LOG_FIRST'] = 'beginning with';
 $lang['ACTS_LOG_DAYS_BACK'] = 'أيام';
 $lang['ACTS_LOG_TOPIC_MATCH'] = 'عنوان الموضوع مباراة';
 $lang['ACTS_LOG_SORT_BY'] = 'فرز حسب';
@@ -2585,6 +2585,7 @@ $lang['ACTS_LOG_TIME'] = 'الوقت';
 $lang['ACTS_LOG_INFO'] = 'معلومات عن الفندق';
 $lang['ACTS_LOG_FILTER'] = 'فلتر';
 $lang['ACTS_LOG_TOPICS'] = 'المواضيع:';
+$lang['ACTS_LOG_OR'] = 'or';
 
 $lang['RELEASE'] = 'الإفراج عن القوالب';
 $lang['RELEASES'] = 'النشرات';
