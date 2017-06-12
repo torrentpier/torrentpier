@@ -2575,7 +2575,7 @@ $lang['ACTS_LOG_FORUM'] = 'Forum';
 $lang['ACTS_LOG_ACTION'] = 'Eylem';
 $lang['ACTS_LOG_USER'] = 'Kullanıcı';
 $lang['ACTS_LOG_LOGS_FROM'] = 'Günlükleri ';
-$lang['ACTS_LOG_FIRST'] = 'ilk ';
+$lang['ACTS_LOG_FIRST'] = 'beginning with';
 $lang['ACTS_LOG_DAYS_BACK'] = 'gün önce';
 $lang['ACTS_LOG_TOPIC_MATCH'] = 'Konu başlığı maç';
 $lang['ACTS_LOG_SORT_BY'] = 'Sırala';
@@ -2585,6 +2585,7 @@ $lang['ACTS_LOG_TIME'] = 'Zaman';
 $lang['ACTS_LOG_INFO'] = 'Bilgi';
 $lang['ACTS_LOG_FILTER'] = 'Filtre';
 $lang['ACTS_LOG_TOPICS'] = 'Konular:';
+$lang['ACTS_LOG_OR'] = 'or';
 
 $lang['RELEASE'] = 'Sürüm Şablonları';
 $lang['RELEASES'] = 'Bültenleri';

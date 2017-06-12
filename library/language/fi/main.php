@@ -2575,7 +2575,7 @@ $lang['ACTS_LOG_FORUM'] = 'Forum';
 $lang['ACTS_LOG_ACTION'] = 'Toiminta';
 $lang['ACTS_LOG_USER'] = 'Käyttäjä';
 $lang['ACTS_LOG_LOGS_FROM'] = 'Lokit ';
-$lang['ACTS_LOG_FIRST'] = 'ensimmäinen ';
+$lang['ACTS_LOG_FIRST'] = 'beginning with';
 $lang['ACTS_LOG_DAYS_BACK'] = 'päivää takaisin';
 $lang['ACTS_LOG_TOPIC_MATCH'] = 'Aiheen otsikko ottelu';
 $lang['ACTS_LOG_SORT_BY'] = 'Lajittele';
@@ -2585,6 +2585,7 @@ $lang['ACTS_LOG_TIME'] = 'Aika';
 $lang['ACTS_LOG_INFO'] = 'Info';
 $lang['ACTS_LOG_FILTER'] = 'Suodatin';
 $lang['ACTS_LOG_TOPICS'] = 'Aiheet:';
+$lang['ACTS_LOG_OR'] = 'or';
 
 $lang['RELEASE'] = 'Julkaisu Malleja';
 $lang['RELEASES'] = 'Tiedotteet';

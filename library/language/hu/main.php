@@ -2575,7 +2575,7 @@ $lang['ACTS_LOG_FORUM'] = 'Fórum';
 $lang['ACTS_LOG_ACTION'] = 'Akció';
 $lang['ACTS_LOG_USER'] = 'Felhasználó';
 $lang['ACTS_LOG_LOGS_FROM'] = 'Naplók ';
-$lang['ACTS_LOG_FIRST'] = 'első ';
+$lang['ACTS_LOG_FIRST'] = 'beginning with';
 $lang['ACTS_LOG_DAYS_BACK'] = 'nap vissza';
 $lang['ACTS_LOG_TOPIC_MATCH'] = 'Téma címe mérkőzés';
 $lang['ACTS_LOG_SORT_BY'] = 'Rendezés';
@@ -2585,6 +2585,7 @@ $lang['ACTS_LOG_TIME'] = 'Idő';
 $lang['ACTS_LOG_INFO'] = 'Információ';
 $lang['ACTS_LOG_FILTER'] = 'Szűrő';
 $lang['ACTS_LOG_TOPICS'] = 'Témák:';
+$lang['ACTS_LOG_OR'] = 'or';
 
 $lang['RELEASE'] = 'Kiadás Sablonok';
 $lang['RELEASES'] = 'Kiadások';

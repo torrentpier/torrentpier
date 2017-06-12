@@ -2575,7 +2575,7 @@ $lang['ACTS_LOG_FORUM'] = 'Forum';
 $lang['ACTS_LOG_ACTION'] = 'Ação';
 $lang['ACTS_LOG_USER'] = 'Utilizador';
 $lang['ACTS_LOG_LOGS_FROM'] = 'Logs de ';
-$lang['ACTS_LOG_FIRST'] = 'primeira ';
+$lang['ACTS_LOG_FIRST'] = 'beginning with';
 $lang['ACTS_LOG_DAYS_BACK'] = 'dias atrás';
 $lang['ACTS_LOG_TOPIC_MATCH'] = 'Título do tópico correspondência';
 $lang['ACTS_LOG_SORT_BY'] = 'Ordenar por';
@@ -2585,6 +2585,7 @@ $lang['ACTS_LOG_TIME'] = 'Tempo';
 $lang['ACTS_LOG_INFO'] = 'Informações';
 $lang['ACTS_LOG_FILTER'] = 'Filtro';
 $lang['ACTS_LOG_TOPICS'] = 'Temas:';
+$lang['ACTS_LOG_OR'] = 'or';
 
 $lang['RELEASE'] = 'Lançamento Modelos';
 $lang['RELEASES'] = 'Releases';

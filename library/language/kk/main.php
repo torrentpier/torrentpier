@@ -2575,7 +2575,7 @@ $lang['ACTS_LOG_FORUM'] = 'Форум';
 $lang['ACTS_LOG_ACTION'] = 'Іс-шаралар';
 $lang['ACTS_LOG_USER'] = 'пайдаланушы';
 $lang['ACTS_LOG_LOGS_FROM'] = 'журналдарды';
-$lang['ACTS_LOG_FIRST'] = 'бірінші';
+$lang['ACTS_LOG_FIRST'] = 'beginning with';
 $lang['ACTS_LOG_DAYS_BACK'] = 'артқа күн';
 $lang['ACTS_LOG_TOPIC_MATCH'] = 'Тақырып атауы матч';
 $lang['ACTS_LOG_SORT_BY'] = 'Бойынша сұрыптау';
@@ -2585,6 +2585,7 @@ $lang['ACTS_LOG_TIME'] = 'уақыт';
 $lang['ACTS_LOG_INFO'] = 'Info';
 $lang['ACTS_LOG_FILTER'] = 'фильтр';
 $lang['ACTS_LOG_TOPICS'] = 'Тақырыптар:';
+$lang['ACTS_LOG_OR'] = 'or';
 
 $lang['RELEASE'] = 'Release үлгілер';
 $lang['RELEASES'] = 'релиздер';

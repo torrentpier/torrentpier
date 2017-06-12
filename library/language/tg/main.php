@@ -2575,7 +2575,7 @@ $lang['ACTS_LOG_FORUM'] = 'Форуми';
 $lang['ACTS_LOG_ACTION'] = 'Чорабиниҳои';
 $lang['ACTS_LOG_USER'] = 'истифода';
 $lang['ACTS_LOG_LOGS_FROM'] = 'Гузоришҳо аз';
-$lang['ACTS_LOG_FIRST'] = 'аввал';
+$lang['ACTS_LOG_FIRST'] = 'beginning with';
 $lang['ACTS_LOG_DAYS_BACK'] = 'рӯз бозгашт';
 $lang['ACTS_LOG_TOPIC_MATCH'] = 'Мавзӯъ бозии унвони';
 $lang['ACTS_LOG_SORT_BY'] = 'Ҷудо кардан ба';
@@ -2585,6 +2585,7 @@ $lang['ACTS_LOG_TIME'] = 'Time';
 $lang['ACTS_LOG_INFO'] = 'INFO';
 $lang['ACTS_LOG_FILTER'] = 'Филтр';
 $lang['ACTS_LOG_TOPICS'] = 'Мавзӯҳо:';
+$lang['ACTS_LOG_OR'] = 'or';
 
 $lang['RELEASE'] = 'Шаблон озод';
 $lang['RELEASES'] = 'Варақаи';

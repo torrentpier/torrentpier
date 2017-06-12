@@ -2575,7 +2575,7 @@ $lang['ACTS_LOG_FORUM'] = 'Forum';
 $lang['ACTS_LOG_ACTION'] = 'Akciju';
 $lang['ACTS_LOG_USER'] = 'Korisnik';
 $lang['ACTS_LOG_LOGS_FROM'] = 'Logove sa ';
-$lang['ACTS_LOG_FIRST'] = 'prvi ';
+$lang['ACTS_LOG_FIRST'] = 'beginning with';
 $lang['ACTS_LOG_DAYS_BACK'] = 'dana';
 $lang['ACTS_LOG_TOPIC_MATCH'] = 'Tema titulu meč';
 $lang['ACTS_LOG_SORT_BY'] = 'Neki od strane';
@@ -2585,6 +2585,7 @@ $lang['ACTS_LOG_TIME'] = 'Vrijeme';
 $lang['ACTS_LOG_INFO'] = 'Info';
 $lang['ACTS_LOG_FILTER'] = 'Filter';
 $lang['ACTS_LOG_TOPICS'] = 'Teme:';
+$lang['ACTS_LOG_OR'] = 'or';
 
 $lang['RELEASE'] = 'Oslobodi Turskoj';
 $lang['RELEASES'] = 'Oslobađa';
