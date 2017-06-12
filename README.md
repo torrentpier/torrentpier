@@ -35,19 +35,17 @@ and go from there. The documentation will be translated into english in the near
 
 For installation you need to follow a few simple steps:
 
-1. Распаковываем на сервер содержимое скачанной вами папки
-1. Создаем базу данных, в которую при помощи phpmyadmin (или любого другого удобного инструмента) импортируем дамп, расположенный в папке **install/sql/mysql.sql**
-1. Правим файл конфигурации **library/config.php**, загруженный на сервер:
-> ***'db' => array('localhost', 'tp_216', 'user', 'pass', $charset, $pconnect)***
-В данной строке изменяем данные входа в базу данных
-***$domain_name = 'torrentpier.me';***
-В данной строке указываем ваше доменное имя. Остальные правки в файле вносятся по усмотрению, исходя из необходимости из внесения (ориентируйтесь на описания, указанные у полей).
-
-1. Редактируем указанные файлы:
- + **favicon.png** (меняем на свою иконку, если есть)  
- + **robots.txt** (меняем адреса в строках **Host** и **Sitemap** на свои)
- + **opensearch_desc.xml** (меняем описание и адрес на свои)
- + **opensearch_desc_bt.xml** (меняем описание и адрес на свои)
+1. Unpack to the server the contents of the downloaded folder
+1. Install [Composer](https://getcomposer.org/) and run `composer install` on the downloaded directory
+1. Create database and import dump located at **install/sql/mysql.sql**
+1. Edit database configuration settings in the configuration file or a local copy (see below)
+1. Edit domain name in the configuration file or a local copy (see below)
+1. Edit this files:
+ + **favicon.png** (change on your own)
+ + **robots.txt** (change the addresses in lines **Host** and **Sitemap** on your own)
+ + **opensearch_desc.xml** (change the description and address on your own)
+ + **opensearch_desc_bt.xml** (change the description and address on your own)
+1. Log in to the forum with admin/admin login/password and finish setting up via admin panel
 
 ## Access rights on folders and files
 
@@ -64,20 +62,22 @@ You must provide write permissions to the specified folders:
 The specific settings depend on the server you are using, but in general case we recommend chmod 0755 for folders, 
 and chmod 0644 for files in them. If you are not sure, leave it as is.
 
-## Рекомендуемый способ запуска cron.php
+## The recommended way to run cron.php
 
-Для значительного ускорения работы трекера может потребоваться отвязка встроенного форумного крона. С более подробной информацией об отвязке крона, вы можете ознакомиться в данной теме https://torrentpier.me/threads/52/ на нашем форуме поддержки.
+For significant tracker speed increase may be required to replace built-in cron.php by operating system daemon. For more 
+information about that you can read [this thread](https://torrentpier.me/forum/threads/52/) on our support forum.
 
-## Local configuration
+## Local configuration copy
 
-Начиная с ревизии 599 была добавлена поддерка автоматического подключения файла config.local.php, при создании его вами. В данном файле вы можете переопределять настройки файла config.php для конкретного сервера, на котором запущен трекер или в целом менять стандартные значения файла config.php, для более простого обновления файлов движка в дальнейшем.
+You can override the settings using one of these methods: configuration file **library/config.local.php** and the environment
+file **.env**. Both files are created by copying the appropriate .example templates without this extension. The local 
+configuration files should be available for reading to anyone by setting up access rights for your web server.
 
-## Установка Ocelot
+## Ocelot installation
 
-В движок встроена по-умолчанию поддержка альтернативного компилируемого анонсера - Ocelot. Настройка производится в файле **library/config.php**, сам анонсер находится в репозитории https://github.com/torrentpier/ocelot
-
-Инструкция по сборке приведена на нашем форуме: https://torrentpier.me/threads/sborka-ocelot-pod-debian-7-1.26078/
-Для работы анонсера требуется замена двух таблиц в базе данных - дамп в файле: **install/sql/ocelot.sql**
+We have built-in support for alternate compiled announcer — Ocelot. The configuration is in the file **library/config.php**,
+the announcer is in the repository [torrentpier/ocelot](https://github.com/torrentpier/ocelot). You can read assembly instructions
+on his repository or in [this thread](https://torrentpier.me/forum/threads/26078/) on our support forum.
 
 ## Official documentation
 

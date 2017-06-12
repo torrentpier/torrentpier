@@ -58,6 +58,9 @@ $size = get_var('size', '');
 $mode = get_var('mode', '');
 $e_mode = get_var('e_mode', '');
 
+$error = false;
+$add_forum = isset($_POST['add_forum']) ? true : false;
+$delete_forum = isset($_POST['del_forum']) ? true : false;
 $submit = isset($_POST['submit']) ? true : false;
 
 // Get Attachment Config
@@ -458,9 +461,6 @@ if ($mode == 'groups') {
 
 if ($e_mode == 'perm') {
     $group = get_var('e_group', 0);
-
-    $add_forum = isset($_POST['add_forum']) ? true : false;
-    $delete_forum = isset($_POST['del_forum']) ? true : false;
 
     if (isset($_POST['close_perm'])) {
         $e_mode = '';

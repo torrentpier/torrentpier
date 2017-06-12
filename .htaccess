@@ -13,6 +13,6 @@ RewriteRule ^/internal_data/atom/(.*) /atom$1 [L]
 RedirectMatch 404 /\\.git(/|$)
 
 ## deny access to system files
-<FilesMatch "\.(.*sql|tpl|db|inc|log|md)|(config|common).php$">
+<FilesMatch "\.(.*sql|tpl|db|inc|log|md|env)|(config|common).php$">
 deny from all
 </FilesMatch>
