@@ -464,5 +464,5 @@ function get_parsed_post($postrow, $mode = 'full', $return_chars = 600)
 
 function update_post_html($postrow)
 {
-    DB()->query("DELETE FROM " . BB_POSTS_HTML . " WHERE post_id = " . (int)$postrow['post_id'] . " LIMIT 1");
+    DB()->query("DELETE FROM " . BB_POSTS_HTML . " WHERE post_id = " . (int)$postrow['post_id']);
 }

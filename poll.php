@@ -109,7 +109,7 @@ switch ($mode) {
         if (!$t_data['topic_vote']) {
             bb_die($lang['POST_HAS_NO_POLL']);
         }
-        DB()->query("UPDATE " . BB_TOPICS . " SET topic_vote = 1 WHERE topic_id = $topic_id LIMIT 1");
+        DB()->query("UPDATE " . BB_TOPICS . " SET topic_vote = 1 WHERE topic_id = $topic_id");
         bb_die($lang['NEW_POLL_START']);
         break;
 
@@ -118,7 +118,7 @@ switch ($mode) {
         if (!$t_data['topic_vote']) {
             bb_die($lang['POST_HAS_NO_POLL']);
         }
-        DB()->query("UPDATE " . BB_TOPICS . " SET topic_vote = " . POLL_FINISHED . " WHERE topic_id = $topic_id LIMIT 1");
+        DB()->query("UPDATE " . BB_TOPICS . " SET topic_vote = " . POLL_FINISHED . " WHERE topic_id = $topic_id");
         bb_die($lang['NEW_POLL_END']);
         break;
 

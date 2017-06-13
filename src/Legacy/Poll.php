@@ -95,7 +95,7 @@ class Poll
 
         DB()->query("REPLACE INTO " . BB_POLL_VOTES . $sql_args);
 
-        DB()->query("UPDATE " . BB_TOPICS . " SET topic_vote = 1 WHERE topic_id = $topic_id LIMIT 1");
+        DB()->query("UPDATE " . BB_TOPICS . " SET topic_vote = 1 WHERE topic_id = $topic_id");
     }
 
     /**
@@ -105,7 +105,7 @@ class Poll
      */
     public function delete_poll($topic_id)
     {
-        DB()->query("UPDATE " . BB_TOPICS . " SET topic_vote = 0 WHERE topic_id = $topic_id LIMIT 1");
+        DB()->query("UPDATE " . BB_TOPICS . " SET topic_vote = 0 WHERE topic_id = $topic_id");
         $this->delete_votes_data($topic_id);
     }
 
