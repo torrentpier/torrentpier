@@ -40,7 +40,7 @@ if ($rank_id != 0 && !isset($ranks[$rank_id])) {
     $this->ajax_die("invalid rank_id: $rank_id");
 }
 
-DB()->query("UPDATE " . BB_USERS . " SET user_rank = $rank_id WHERE user_id = $user_id LIMIT 1");
+DB()->query("UPDATE " . BB_USERS . " SET user_rank = $rank_id WHERE user_id = $user_id");
 
 cache_rm_user_sessions($user_id);
 

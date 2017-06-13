@@ -174,7 +174,7 @@ switch ($field) {
 }
 
 $value_sql = DB()->escape($value, true);
-DB()->query("UPDATE $table SET $field = $value_sql WHERE user_id = $user_id LIMIT 1");
+DB()->query("UPDATE $table SET $field = $value_sql WHERE user_id = $user_id");
 
 cache_rm_user_sessions($user_id);
 

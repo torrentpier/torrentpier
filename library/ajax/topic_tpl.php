@@ -131,7 +131,7 @@ switch ($mode) {
             $new_tpl_id = $tpl_id;
             $this->response['msg'] = "Включен шаблон $tpl_name";
         }
-        DB()->query("UPDATE " . BB_FORUMS . " SET forum_tpl_id = $new_tpl_id WHERE forum_id = $forum_id LIMIT 1");
+        DB()->query("UPDATE " . BB_FORUMS . " SET forum_tpl_id = $new_tpl_id WHERE forum_id = $forum_id");
         break;
 
     // сохранение изменений
@@ -142,7 +142,7 @@ switch ($mode) {
             $msg .= 'Шаблон был отредактирован: ' . html_entity_decode($last_edit_by_username) . ', ' . delta_time($tpl_data['tpl_last_edit_tm']) . " назад\n\n";
             $this->ajax_die($msg);
         }
-        $sql = "UPDATE " . BB_TOPIC_TPL . " SET " . DB()->build_array('UPDATE', $sql_args) . " WHERE tpl_id = $tpl_id LIMIT 1";
+        $sql = "UPDATE " . BB_TOPIC_TPL . " SET " . DB()->build_array('UPDATE', $sql_args) . " WHERE tpl_id = $tpl_id";
         if (!@DB()->query($sql)) {
             $sql_error = DB()->sql_error();
         }

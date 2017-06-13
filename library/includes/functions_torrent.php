@@ -116,7 +116,7 @@ function tracker_unregister($attach_id, $mode = '')
 
     // Unset DL-Type for topic
     if ($bb_cfg['bt_unset_dltype_on_tor_unreg'] && $topic_id) {
-        $sql = "UPDATE " . BB_TOPICS . " SET topic_dl_type = " . TOPIC_DL_TYPE_NORMAL . " WHERE topic_id = $topic_id LIMIT 1";
+        $sql = "UPDATE " . BB_TOPICS . " SET topic_dl_type = " . TOPIC_DL_TYPE_NORMAL . " WHERE topic_id = $topic_id";
 
         if (!$result = DB()->sql_query($sql)) {
             bb_die('Could not update topics table #1');
@@ -146,7 +146,7 @@ function tracker_unregister($attach_id, $mode = '')
     }
 
     // Update tracker_status
-    $sql = "UPDATE " . BB_ATTACHMENTS_DESC . " SET tracker_status = 0 WHERE attach_id = $attach_id LIMIT 1";
+    $sql = "UPDATE " . BB_ATTACHMENTS_DESC . " SET tracker_status = 0 WHERE attach_id = $attach_id";
 
     if (!DB()->sql_query($sql)) {
         bb_die('Could not update torrent status #1');
@@ -226,7 +226,7 @@ function change_tor_type($attach_id, $tor_status_gold)
     $tor_status_gold = (int)$tor_status_gold;
     $info_hash = null;
 
-    DB()->query("UPDATE " . BB_BT_TORRENTS . " SET tor_type = $tor_status_gold WHERE topic_id = $topic_id LIMIT 1");
+    DB()->query("UPDATE " . BB_BT_TORRENTS . " SET tor_type = $tor_status_gold WHERE topic_id = $topic_id");
 
     // Ocelot
     if ($bb_cfg['ocelot']['enabled']) {
@@ -356,7 +356,7 @@ function tracker_register($attach_id, $mode = '', $tor_status = TOR_NOT_APPROVED
     }
 
     // update tracker status for this attachment
-    $sql = 'UPDATE ' . BB_ATTACHMENTS_DESC . " SET tracker_status = 1 WHERE attach_id = $attach_id LIMIT 1";
+    $sql = 'UPDATE ' . BB_ATTACHMENTS_DESC . " SET tracker_status = 1 WHERE attach_id = $attach_id";
 
     if (!DB()->sql_query($sql)) {
         bb_die('Could not update torrent status #2');
@@ -364,7 +364,7 @@ function tracker_register($attach_id, $mode = '', $tor_status = TOR_NOT_APPROVED
 
     // set DL-Type for topic
     if ($bb_cfg['bt_set_dltype_on_tor_reg']) {
-        $sql = 'UPDATE ' . BB_TOPICS . ' SET topic_dl_type = ' . TOPIC_DL_TYPE_DL . " WHERE topic_id = $topic_id LIMIT 1";
+        $sql = 'UPDATE ' . BB_TOPICS . ' SET topic_dl_type = ' . TOPIC_DL_TYPE_DL . " WHERE topic_id = $topic_id";
 
         if (!$result = DB()->sql_query($sql)) {
             bb_die('Could not update topics table #2');
@@ -372,7 +372,7 @@ function tracker_register($attach_id, $mode = '', $tor_status = TOR_NOT_APPROVED
     }
 
     if ($bb_cfg['tracker']['tor_topic_up']) {
-        DB()->query("UPDATE " . BB_TOPICS . " SET topic_last_post_time = GREATEST(topic_last_post_time, " . (TIMENOW - 3 * 86400) . ") WHERE topic_id = $topic_id LIMIT 1");
+        DB()->query("UPDATE " . BB_TOPICS . " SET topic_last_post_time = GREATEST(topic_last_post_time, " . (TIMENOW - 3 * 86400) . ") WHERE topic_id = $topic_id");
     }
 
     if ($reg_mode == 'request' || $reg_mode == 'newtopic') {
@@ -557,7 +557,7 @@ function generate_passkey($user_id, $force_generate = false)
             return $passkey_val;
         }
         // Update
-        DB()->query("UPDATE IGNORE " . BB_BT_USERS . " SET auth_key = '$passkey_val' WHERE user_id = $user_id LIMIT 1");
+        DB()->query("UPDATE IGNORE " . BB_BT_USERS . " SET auth_key = '$passkey_val' WHERE user_id = $user_id");
 
         if (DB()->affected_rows() == 1) {
             // Ocelot
