@@ -375,10 +375,11 @@ if (!$set_default) {
     } // Get requested forum_id(s)
     elseif ($req_forums =& $_REQUEST[$forum_key]) {
         if ($req_forums != $search_all) {
-            $req_forums = (array)$req_forums;
-            array_deep($req_forums, 'intval');
-            $valid_forums = array_intersect($req_forums, $allowed_forums);
-            $forum_val = implode(',', $valid_forums);
+            $clean_forums = [];
+            foreach (explode(',', $req_forums) as $req_forum) {
+                $clean_forums[] = (int) $req_forum;
+            }
+            $forum_val = implode(',', array_intersect($clean_forums, $allowed_forums));
         }
     } elseif (isset($previous_settings[$forum_key])) {
         $valid_forums = array_intersect(explode(',', $previous_settings[$forum_key]), $allowed_forums);
