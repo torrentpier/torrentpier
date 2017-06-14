@@ -151,17 +151,17 @@ define('BOT_UID', -746);
 /**
  * Progressive error reporting
  */
-if (DBG_USER) {
-    if ($bb_cfg['bugsnag']['enabled'] && !empty($bb_cfg['bugsnag']['api_key'])) {
-        /** @var Bugsnag\Handler $bugsnag */
-        $bugsnag = Bugsnag\Client::make($bb_cfg['bugsnag']['api_key']);
-        Bugsnag\Handler::register($bugsnag);
-    } else {
-        /** @var Whoops\Run $whoops */
-        $whoops = new \Whoops\Run;
-        $whoops->pushHandler(new \Whoops\Handler\PrettyPageHandler);
-        $whoops->register();
-    }
+if ($bb_cfg['bugsnag']['enabled'] && env('APP_ENV', 'production') !== 'local') {
+    /** @var Bugsnag\Handler $bugsnag */
+    $bugsnag = Bugsnag\Client::make($bb_cfg['bugsnag']['api_key']);
+    Bugsnag\Handler::register($bugsnag);
+}
+
+if (DBG_USER && env('APP_ENV', 'production') === 'local') {
+    /** @var Whoops\Run $whoops */
+    $whoops = new \Whoops\Run;
+    $whoops->pushHandler(new \Whoops\Handler\PrettyPageHandler);
+    $whoops->register();
 }
 
 /**
