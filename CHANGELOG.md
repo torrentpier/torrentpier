@@ -1,10 +1,23 @@
 # Change Log
 
+## [v2.2.1](https://github.com/torrentpier/torrentpier/tree/v2.2.1) (2017-06-16)
+[Full Changelog](https://github.com/torrentpier/torrentpier/compare/v2.2.0...v2.2.1)
+
+**Merged pull requests:**
+
+- Partial renewal of the Ukrainian language from our toloka.to friends [\#391](https://github.com/torrentpier/torrentpier/pull/391) ([Exile37](https://github.com/Exile37))
+- Create CODE\_OF\_CONDUCT.md [\#390](https://github.com/torrentpier/torrentpier/pull/390) ([Exile37](https://github.com/Exile37))
+- Fix default users language in dump [\#389](https://github.com/torrentpier/torrentpier/pull/389) ([Exile37](https://github.com/Exile37))
+- Tracker search forum list simplification [\#388](https://github.com/torrentpier/torrentpier/pull/388) ([Exile37](https://github.com/Exile37))
+- Fix some notices in admin panel reported by BugSnag [\#387](https://github.com/torrentpier/torrentpier/pull/387) ([Exile37](https://github.com/Exile37))
+- Fixed SQL. Remove limit from update [\#368](https://github.com/torrentpier/torrentpier/pull/368) ([VasyOk](https://github.com/VasyOk))
+
 ## [v2.2.0](https://github.com/torrentpier/torrentpier/tree/v2.2.0) (2017-06-12)
 [Full Changelog](https://github.com/torrentpier/torrentpier/compare/v2.1.5...v2.2.0)
 
 **Merged pull requests:**
 
+- Release 2.2.0 ☘️ [\#328](https://github.com/torrentpier/torrentpier/pull/328) ([Exile37](https://github.com/Exile37))
 - Release preparation. Crowdin language pack update [\#322](https://github.com/torrentpier/torrentpier/pull/322) ([Exile37](https://github.com/Exile37))
 - TorrentPier Aurochs release preparation [\#321](https://github.com/torrentpier/torrentpier/pull/321) ([Exile37](https://github.com/Exile37))
 - Release preparation. Small bugfixes and readme translation [\#318](https://github.com/torrentpier/torrentpier/pull/318) ([Exile37](https://github.com/Exile37))
