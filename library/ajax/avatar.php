@@ -50,7 +50,7 @@ switch ($mode) {
         $this->ajax_die('Invalid mode');
 }
 
-DB()->query("UPDATE " . BB_USERS . " SET avatar_ext_id = $new_ext_id WHERE user_id = $user_id LIMIT 1");
+DB()->query("UPDATE " . BB_USERS . " SET avatar_ext_id = $new_ext_id WHERE user_id = $user_id");
 
 cache_rm_user_sessions($user_id);
 

@@ -84,7 +84,7 @@ switch ($mode) {
             if (!IS_ADMIN) {
                 $this->verify_mod_rights($tor['forum_id']);
             }
-            DB()->query("UPDATE " . BB_TOPICS . " SET topic_status = " . TOPIC_UNLOCKED . " WHERE topic_id = {$tor['topic_id']} LIMIT 1");
+            DB()->query("UPDATE " . BB_TOPICS . " SET topic_status = " . TOPIC_UNLOCKED . " WHERE topic_id = {$tor['topic_id']}");
         } else {
             $this->verify_mod_rights($tor['forum_id']);
         }

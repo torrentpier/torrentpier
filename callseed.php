@@ -81,7 +81,7 @@ if ($user_list) {
     send_pm($t_data['poster_id'], $subject, $message, BOT_UID);
 }
 
-DB()->query("UPDATE " . BB_BT_TORRENTS . " SET call_seed_time = " . TIMENOW . " WHERE topic_id = $topic_id LIMIT 1");
+DB()->query("UPDATE " . BB_BT_TORRENTS . " SET call_seed_time = " . TIMENOW . " WHERE topic_id = $topic_id");
 
 meta_refresh(TOPIC_URL . $topic_id);
 bb_die($lang['CALLSEED_MSG_OK']);

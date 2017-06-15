@@ -69,7 +69,7 @@ switch ($mode) {
 
         $topic_title_sql = DB()->escape($new_title);
 
-        DB()->query("UPDATE " . BB_TOPICS . " SET topic_title = '$topic_title_sql' WHERE topic_id = $topic_id LIMIT 1");
+        DB()->query("UPDATE " . BB_TOPICS . " SET topic_title = '$topic_title_sql' WHERE topic_id = $topic_id");
 
         // Обновление кеша новостей на главной
         $news_forums = array_flip(explode(',', $bb_cfg['latest_news_forum_id']));

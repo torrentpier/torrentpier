@@ -650,7 +650,7 @@ if ($submit && !$errors) {
 
             $sql_args = DB()->build_array('UPDATE', $db_data);
 
-            DB()->query("UPDATE " . BB_USERS . " SET $sql_args WHERE user_id = {$pr_data['user_id']} LIMIT 1");
+            DB()->query("UPDATE " . BB_USERS . " SET $sql_args WHERE user_id = {$pr_data['user_id']}");
 
             if ($pr_data['user_id'] != $userdata['user_id']) {
                 if ($pr_data['user_level'] == MOD && !empty($db_data['username'])) {

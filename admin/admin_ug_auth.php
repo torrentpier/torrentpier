@@ -92,7 +92,7 @@ if ($submit && $mode == 'user') {
             bb_die('Could not update admin status');
         }
 
-        DB()->query('UPDATE ' . BB_USERS . ' SET user_level = ' . ADMIN . " WHERE user_id = $user_id LIMIT 1");
+        DB()->query('UPDATE ' . BB_USERS . ' SET user_level = ' . ADMIN . " WHERE user_id = $user_id");
 
         // Delete any entries in auth_access, they are not required if user is becoming an admin
         delete_permissions($group_id, $user_id);
@@ -109,7 +109,7 @@ if ($submit && $mode == 'user') {
             bb_die('Could not update admin status<br /><br />Could not change yourself from an admin to user');
         }
         // Update users level, reset to USER
-        DB()->query('UPDATE ' . BB_USERS . ' SET user_level = ' . USER . " WHERE user_id = $user_id LIMIT 1");
+        DB()->query('UPDATE ' . BB_USERS . ' SET user_level = ' . USER . " WHERE user_id = $user_id");
 
         delete_permissions($group_id, $user_id);
 

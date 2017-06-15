@@ -104,7 +104,7 @@ switch ($mode) {
         }
         if ($tz != $bb_cfg['board_timezone']) {
             // Set current user timezone
-            DB()->query("UPDATE " . BB_USERS . " SET user_timezone = $tz WHERE user_id = " . $userdata['user_id'] . " LIMIT 1");
+            DB()->query("UPDATE " . BB_USERS . " SET user_timezone = $tz WHERE user_id = " . $userdata['user_id']);
             $bb_cfg['board_timezone'] = $tz;
             cache_rm_user_sessions($userdata['user_id']);
         }
