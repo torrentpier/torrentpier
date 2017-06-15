@@ -294,8 +294,16 @@ if ($mode == 'submit' || $mode == 'refresh') {
     }
 
     // calculate the percent
-    $session_percent = ($session_posts_processed / $session_posts_processing) * 100;
-    $total_percent = ($total_posts_processed / $total_posts) * 100;
+    if ($session_posts_processing > 0) {
+        $session_percent = ($session_posts_processed / $session_posts_processing) * 100;
+    } else {
+        $session_percent = 100;
+    }
+    if ($total_posts > 0) {
+        $total_percent = ($total_posts_processed / $total_posts) * 100;
+    } else {
+        $total_percent = 100;
+    }
 
     // get the db sizes
     list($search_data_size, $search_index_size, $search_tables_size) = get_db_sizes();
@@ -310,7 +318,11 @@ if ($mode == 'submit' || $mode == 'refresh') {
 
     // calculate various times
     $session_time = $last_session_data['session_time'];
-    $session_average_cycle_time = round($session_time / $last_session_data['session_cycles']);
+    if ($last_session_data['session_cycles'] > 0) {
+        $session_average_cycle_time = round($session_time / $last_session_data['session_cycles']);
+    } else {
+        $session_average_cycle_time = 0;
+    }
     $session_estimated_time = round($session_time * (100 / $session_percent)) - $session_time;
 
     // create the percent boxes
@@ -333,8 +345,8 @@ if ($mode == 'submit' || $mode == 'refresh') {
 
         'LAST_CYCLE_TIME' => delta_time(TIMENOW),
         'SESSION_TIME' => delta_time($last_session_data['start_time']),
-        'SESSION_AVERAGE_CYCLE_TIME' => delta_time($session_average_cycle_time, 0),
-        'SESSION_ESTIMATED_TIME' => delta_time($session_estimated_time, 0),
+        'SESSION_AVERAGE_CYCLE_TIME' => delta_time((int)$session_average_cycle_time, 0),
+        'SESSION_ESTIMATED_TIME' => delta_time((int)$session_estimated_time, 0),
 
         'SEARCH_TABLES_SIZE' => humn_size($search_tables_size),
         'FINAL_SEARCH_TABLES_SIZE' => humn_size($final_search_tables_size),
@@ -516,8 +528,13 @@ function get_total_posts($mode = 'after', $post_id = 0)
     }
 
     $row = DB()->fetch_row($sql);
+    $totalPosts = (int)$row['total_posts'];
 
-    return (int)$row['total_posts'];
+    if ($totalPosts < 0) {
+        return 0;
+    }
+
+    return $totalPosts;
 }
 
 function clear_search_tables($mode = '')

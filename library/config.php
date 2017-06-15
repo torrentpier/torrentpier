@@ -36,8 +36,8 @@ $bb_cfg = [];
 $bb_cfg['js_ver'] = $bb_cfg['css_ver'] = 1;
 
 // Version info
-$bb_cfg['tp_version'] = '2.2.0';
-$bb_cfg['tp_release_date'] = '12-06-2017';
+$bb_cfg['tp_version'] = '2.2.1';
+$bb_cfg['tp_release_date'] = '16-06-2017';
 $bb_cfg['tp_release_codename'] = 'Aurochs';
 
 // Database
@@ -390,7 +390,7 @@ $bb_cfg['reg_email_activation'] = true; // Требовать активацию
 $bb_cfg['emailer'] = [
     'enabled' => true,
     'smtp' => [
-        'enabled' => true, // send email via external SMTP server
+        'enabled' => false, // send email via external SMTP server
         'host' => '', // SMTP server host
         'port' => 25, // SMTP server port
         'username' => '', // SMTP username (if server requires it)
