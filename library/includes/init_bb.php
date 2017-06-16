@@ -30,8 +30,8 @@ if (!defined('BB_ROOT')) {
 /**
  * Check PHP version
  */
-if (version_compare(PHP_VERSION, '5.6', '<')) {
-    die('TorrentPier requires PHP version 5.6+. Your PHP version ' . PHP_VERSION);
+if (version_compare(PHP_VERSION, '7.0', '<')) {
+    die('TorrentPier requires PHP version 7.0+. Your PHP version ' . PHP_VERSION);
 }
 
 /**
