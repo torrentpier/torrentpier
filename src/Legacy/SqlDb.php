@@ -761,7 +761,7 @@ class SqlDb
      */
     public function expect_slow_query($ignoring_time = 60, $new_priority = 10)
     {
-        if ($old_priority = CACHE('bb_cache')->get('dont_log_slow_query')) {
+        if ($old_priority = OLD_CACHE('bb_cache')->get('dont_log_slow_query')) {
             if ($old_priority > $new_priority) {
                 return;
             }
@@ -771,7 +771,7 @@ class SqlDb
             define('IN_FIRST_SLOW_QUERY', true);
         }
 
-        CACHE('bb_cache')->set('dont_log_slow_query', $new_priority, $ignoring_time);
+        OLD_CACHE('bb_cache')->set('dont_log_slow_query', $new_priority, $ignoring_time);
     }
 
     /**
@@ -915,7 +915,7 @@ class SqlDb
      */
     public function log_slow_query($log_file = 'sql_slow_bb')
     {
-        if (!defined('IN_FIRST_SLOW_QUERY') && CACHE('bb_cache')->get('dont_log_slow_query')) {
+        if (!defined('IN_FIRST_SLOW_QUERY') && OLD_CACHE('bb_cache')->get('dont_log_slow_query')) {
             return;
         }
         $this->log_query($log_file);

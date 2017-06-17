@@ -83,7 +83,7 @@ switch ($mode) {
 
         DB()->query("INSERT IGNORE INTO " . BB_POLL_USERS . " (topic_id, user_id, vote_ip, vote_dt) VALUES ($topic_id, {$userdata['user_id']}, '" . USER_IP . "', " . TIMENOW . ")");
 
-        CACHE('bb_poll_data')->rm("poll_$topic_id");
+        OLD_CACHE('bb_poll_data')->rm("poll_$topic_id");
 
         bb_die($lang['VOTE_CAST']);
         break;
@@ -138,7 +138,7 @@ switch ($mode) {
             bb_die($poll->err_msg);
         }
         $poll->insert_votes_into_db($topic_id);
-        CACHE('bb_poll_data')->rm("poll_$topic_id");
+        OLD_CACHE('bb_poll_data')->rm("poll_$topic_id");
         bb_die($lang['NEW_POLL_RESULTS']);
         break;
 

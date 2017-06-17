@@ -69,9 +69,9 @@ function get_config()
 // Get Attachment Config
 $attach_config = array();
 
-if (!$attach_config = CACHE('bb_cache')->get('attach_config')) {
+if (!$attach_config = OLD_CACHE('bb_cache')->get('attach_config')) {
     $attach_config = get_config();
-    CACHE('bb_cache')->set('attach_config', $attach_config, 86400);
+    OLD_CACHE('bb_cache')->set('attach_config', $attach_config, 86400);
 }
 
 include ATTACH_DIR . '/displaying.php';

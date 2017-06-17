@@ -34,7 +34,7 @@ function cache_get_userdata($id)
         return false;
     }
 
-    return CACHE('session_cache')->get($id);
+    return OLD_CACHE('session_cache')->get($id);
 }
 
 function cache_set_userdata($userdata, $force = false)
@@ -46,7 +46,7 @@ function cache_set_userdata($userdata, $force = false)
     }
 
     $id = ($userdata['user_id'] == GUEST_UID) ? $userdata['session_ip'] : $userdata['session_id'];
-    return CACHE('session_cache')->set($id, $userdata, $bb_cfg['session_update_intrv']);
+    return OLD_CACHE('session_cache')->set($id, $userdata, $bb_cfg['session_update_intrv']);
 }
 
 function cache_rm_userdata($userdata)
@@ -56,7 +56,7 @@ function cache_rm_userdata($userdata)
     }
 
     $id = ($userdata['user_id'] == GUEST_UID) ? $userdata['session_ip'] : $userdata['session_id'];
-    return CACHE('session_cache')->rm($id);
+    return OLD_CACHE('session_cache')->rm($id);
 }
 
 // $user_id - array(id1,id2,..) or (string) id
@@ -69,7 +69,7 @@ function cache_rm_user_sessions($user_id)
 	");
 
     foreach ($rowset as $row) {
-        CACHE('session_cache')->rm($row['session_id']);
+        OLD_CACHE('session_cache')->rm($row['session_id']);
     }
 }
 

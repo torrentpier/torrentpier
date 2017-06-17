@@ -20,7 +20,7 @@ switch ($mode) {
 
         foreach ($bb_cfg['cache']['engines'] as $cache_name => $cache_val) {
             if (!in_array('db_sqlite', $cache_val)) {
-                CACHE($cache_name)->rm();
+                OLD_CACHE($cache_name)->rm();
             }
         }
 

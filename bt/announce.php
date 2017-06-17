@@ -131,7 +131,7 @@ $peer_hash = md5(
 );
 
 // Get cached peer info from previous announce (last peer info)
-$lp_info = CACHE('tr_cache')->get(PEER_HASH_PREFIX . $peer_hash);
+$lp_info = OLD_CACHE('tr_cache')->get(PEER_HASH_PREFIX . $peer_hash);
 
 if (DBG_LOG) {
     dbg_log(' ', '$lp_info-get_from-CACHE-' . ($lp_info ? 'hit' : 'miss'));
@@ -179,14 +179,14 @@ $stopped = ($event === 'stopped');
 
 // Stopped event
 if ($stopped) {
-    CACHE('tr_cache')->rm(PEER_HASH_PREFIX . $peer_hash);
+    OLD_CACHE('tr_cache')->rm(PEER_HASH_PREFIX . $peer_hash);
     if (DBG_LOG) {
         dbg_log(' ', 'stopped');
     }
 }
 
 // Get last peer info from DB
-if (!CACHE('tr_cache')->used && !$lp_info) {
+if (!OLD_CACHE('tr_cache')->used && !$lp_info) {
     $lp_info = DB()->fetch_row("
 		SELECT * FROM " . BB_BT_TRACKER . " WHERE peer_hash = '$peer_hash' LIMIT 1
 	");
@@ -388,14 +388,14 @@ $lp_info = array(
     'tor_type' => (int)$tor_type,
 );
 
-$lp_info_cached = CACHE('tr_cache')->set(PEER_HASH_PREFIX . $peer_hash, $lp_info, PEER_HASH_EXPIRE);
+$lp_info_cached = OLD_CACHE('tr_cache')->set(PEER_HASH_PREFIX . $peer_hash, $lp_info, PEER_HASH_EXPIRE);
 
 if (DBG_LOG && !$lp_info_cached) {
     dbg_log(' ', '$lp_info-caching-FAIL');
 }
 
 // Get cached output
-$output = CACHE('tr_cache')->get(PEERS_LIST_PREFIX . $topic_id);
+$output = OLD_CACHE('tr_cache')->get(PEERS_LIST_PREFIX . $topic_id);
 
 if (DBG_LOG) {
     dbg_log(' ', '$output-get_from-CACHE-' . ($output !== false ? 'hit' : 'miss'));
@@ -454,7 +454,7 @@ if (!$output) {
         'incomplete' => (int)$leechers,
     );
 
-    $peers_list_cached = CACHE('tr_cache')->set(PEERS_LIST_PREFIX . $topic_id, $output, PEERS_LIST_EXPIRE);
+    $peers_list_cached = OLD_CACHE('tr_cache')->set(PEERS_LIST_PREFIX . $topic_id, $output, PEERS_LIST_EXPIRE);
 
     if (DBG_LOG && !$peers_list_cached) {
         dbg_log(' ', '$output-caching-FAIL');

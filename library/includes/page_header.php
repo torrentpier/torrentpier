@@ -41,7 +41,7 @@ if (defined('SHOW_ONLINE') && SHOW_ONLINE) {
     if (defined('IS_GUEST') && !(IS_GUEST || IS_USER)) {
         $template->assign_var('SHOW_ONLINE_LIST');
 
-        if (!${$online_list} = CACHE('bb_cache')->get($online_list)) {
+        if (!${$online_list} = OLD_CACHE('bb_cache')->get($online_list)) {
             require INC_DIR . '/online_userlist.php';
         }
     }

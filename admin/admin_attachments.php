@@ -123,7 +123,7 @@ while ($row = DB()->sql_fetchrow($result)) {
 DB()->sql_freeresult($result);
 
 // Clear cached config
-CACHE('bb_cache')->rm('attach_config');
+OLD_CACHE('bb_cache')->rm('attach_config');
 
 $select_size_mode = size_select('size', $size);
 $select_quota_size_mode = size_select('quota_size', $quota_size);
