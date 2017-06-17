@@ -205,7 +205,7 @@ class User
 
         // Redirect guests to login page
         if (IS_GUEST && $this->cfg['req_login']) {
-            login_redirect();
+            redirectToLogin();
         }
 
         $this->init_userprefs();
@@ -694,7 +694,7 @@ class User
 
         $not_auth_forums = [];
         $auth_field = $auth_field_match[$auth_type];
-        $is_auth_ary = auth($auth_type, AUTH_LIST_ALL, $this->data);
+        $is_auth_ary = auth_user($auth_type, AUTH_LIST_ALL, $this->data);
 
         foreach ($is_auth_ary as $forum_id => $is_auth) {
             if (!$is_auth[$auth_field]) {

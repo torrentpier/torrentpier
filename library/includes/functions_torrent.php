@@ -53,7 +53,7 @@ function torrent_auth_check($forum_id, $poster_id)
         return true;
     }
 
-    $is_auth = auth(AUTH_ALL, $forum_id, $userdata);
+    $is_auth = auth_user(AUTH_ALL, $forum_id, $userdata);
 
     if ($poster_id != $userdata['user_id'] && !$is_auth['auth_mod']) {
         bb_die($lang['NOT_MODERATOR']);

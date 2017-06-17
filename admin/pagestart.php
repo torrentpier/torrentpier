@@ -18,7 +18,7 @@ require_once INC_DIR . '/functions_admin.php';
 $user->session_start();
 
 if (IS_GUEST) {
-    redirect(LOGIN_URL . '?redirect=admin/index.php');
+    redirectToUrl(LOGIN_URL . '?redirect=admin/index.php');
 }
 
 if (!IS_ADMIN) {
@@ -27,5 +27,5 @@ if (!IS_ADMIN) {
 
 if (!$userdata['session_admin']) {
     $redirect = url_arg($_SERVER['REQUEST_URI'], 'admin', 1);
-    redirect("login.php?redirect=$redirect");
+    redirectToUrl("login.php?redirect=$redirect");
 }

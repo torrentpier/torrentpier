@@ -124,7 +124,7 @@ define('AUTH_REG', 1);
 define('AUTH_ACL', 2);
 define('AUTH_ADMIN', 5);
 
-// forum_perm bitfields - backward compatible with auth($type)
+// forum_perm bitfields - backward compatible with auth_user($type)
 define('AUTH_ALL', 0);
 define('AUTH_VIEW', 1);
 define('AUTH_READ', 2);
@@ -243,7 +243,7 @@ function setbit(&$int, $bit_num, $on)
     forum auth levels, this will prevent the auth function having to do its own
     lookup
 */
-function auth($type, $forum_id, $ug_data, array $f_access = array(), $group_perm = UG_PERM_BOTH)
+function auth_user($type, $forum_id, $ug_data, array $f_access = array(), $group_perm = UG_PERM_BOTH)
 {
     global $lang, $bf, $datastore;
 
@@ -1384,9 +1384,9 @@ function bb_realpath($path)
     return realpath($path);
 }
 
-function login_redirect($url = '')
+function redirectToLogin($url = '')
 {
-    redirect(LOGIN_URL . '?redirect=' . (($url) ?: (isset($_SERVER['REQUEST_URI']) ? $_SERVER['REQUEST_URI'] : '/')));
+    redirectToUrl(LOGIN_URL . '?redirect=' . (($url) ?: (isset($_SERVER['REQUEST_URI']) ? $_SERVER['REQUEST_URI'] : '/')));
 }
 
 function meta_refresh($url, $time = 5)
@@ -1396,7 +1396,7 @@ function meta_refresh($url, $time = 5)
     $template->assign_var('META', '<meta http-equiv="refresh" content="' . $time . ';url=' . $url . '" />');
 }
 
-function redirect($url)
+function redirectToUrl($url)
 {
     global $bb_cfg;
 
@@ -2108,7 +2108,7 @@ function hash_search($hash)
     $info_hash = DB()->escape(pack("H*", $hash));
 
     if ($row = DB()->fetch_row("SELECT topic_id FROM " . BB_BT_TORRENTS . " WHERE info_hash = '$info_hash'")) {
-        redirect(TOPIC_URL . $row['topic_id']);
+        redirectToUrl(TOPIC_URL . $row['topic_id']);
     } else {
         bb_die(sprintf($lang['HASH_NOT_FOUND'], $hash));
     }

@@ -44,7 +44,7 @@ if ($post_data['auth_read'] == AUTH_REG) {
         $this->ajax_die($lang['NEED_TO_LOGIN_FIRST']);
     }
 } elseif ($post_data['auth_read'] != AUTH_ALL) {
-    $is_auth = auth(AUTH_READ, $post_data['forum_id'], $user->data, $post_data);
+    $is_auth = auth_user(AUTH_READ, $post_data['forum_id'], $user->data, $post_data);
     if (!$is_auth['auth_read']) {
         $this->ajax_die($lang['TOPIC_POST_NOT_EXIST']);
     }

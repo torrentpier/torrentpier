@@ -96,5 +96,5 @@ if ($is_moderator) {
     if ($group_id) {
         $redirect = GROUP_URL . $group_id;
     }
-    redirect($redirect);
+    redirectToUrl($redirect);
 }

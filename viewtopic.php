@@ -160,13 +160,13 @@ if ($post_id && !empty($t_data['post_time']) && ($t_data['topic_replies'] + 1) >
 }
 
 // Auth check
-$is_auth = auth(AUTH_ALL, $forum_id, $userdata, $t_data);
+$is_auth = auth_user(AUTH_ALL, $forum_id, $userdata, $t_data);
 
 if (!$is_auth['auth_read']) {
     if (IS_GUEST) {
         $redirect = ($post_id) ? POST_URL . "$post_id#$post_id" : TOPIC_URL . $topic_id;
         $redirect .= ($start && !$post_id) ? "&start=$start" : '';
-        redirect(LOGIN_URL . "?redirect=$redirect");
+        redirectToUrl(LOGIN_URL . "?redirect=$redirect");
     }
     bb_die($lang['TOPIC_POST_NOT_EXIST']);
 }
@@ -187,7 +187,7 @@ if ($is_auth['auth_mod']) {
     $mod_redirect_url = LOGIN_URL . "?redirect=$redirect&admin=1";
 
     if ($moderation && !$userdata['session_admin']) {
-        redirect($mod_redirect_url);
+        redirectToUrl($mod_redirect_url);
     }
 }
 
@@ -269,7 +269,7 @@ if ($bb_cfg['topic_notify_enabled']) {
     } else {
         if (isset($_GET['unwatch'])) {
             if ($_GET['unwatch'] == 'topic') {
-                redirect(LOGIN_URL . "?redirect=" . TOPIC_URL . "$topic_id&unwatch=topic");
+                redirectToUrl(LOGIN_URL . "?redirect=" . TOPIC_URL . "$topic_id&unwatch=topic");
             }
         }
     }

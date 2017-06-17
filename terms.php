@@ -16,7 +16,7 @@ require INC_DIR . '/bbcode.php';
 $user->session_start();
 
 if (!$bb_cfg['terms'] && !IS_ADMIN) {
-    redirect('index.php');
+    redirectToUrl('index.php');
 }
 
 $template->assign_vars(array(

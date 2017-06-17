@@ -141,11 +141,11 @@ if (isset($_POST['cancel']) || IS_GUEST) {
     if ($topic_id || $forum_id) {
         $redirect = ($topic_id) ? TOPIC_URL . $topic_id : FORUM_URL . $forum_id;
     }
-    redirect($redirect);
+    redirectToUrl($redirect);
 }
 
 // Start auth check
-$is_auth = auth(AUTH_ALL, $forum_id, $userdata);
+$is_auth = auth_user(AUTH_ALL, $forum_id, $userdata);
 $is_moderator = (IS_AM);
 
 if ($mode == 'ip') {
@@ -169,7 +169,7 @@ if (!$is_auth['auth_mod']) {
 // Redirect to login page if not admin session
 if ($is_moderator && !$userdata['session_admin']) {
     $redirect = isset($_POST['redirect']) ? $_POST['redirect'] : $_SERVER['REQUEST_URI'];
-    redirect(LOGIN_URL . "?redirect=$redirect&admin=1");
+    redirectToUrl(LOGIN_URL . "?redirect=$redirect&admin=1");
 }
 
 //
