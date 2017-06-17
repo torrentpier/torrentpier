@@ -29,14 +29,14 @@ if ($t_data['seeders'] > 2) {
 
 $ban_user_id = [];
 
-$sql = DB()->fetch_rowset("SELECT ban_userid FROM " . BB_BANLIST . " WHERE ban_userid != 0");
+$sql = OLD_DB()->fetch_rowset("SELECT ban_userid FROM " . BB_BANLIST . " WHERE ban_userid != 0");
 
 foreach ($sql as $row) {
     $ban_user_id[] = ',' . $row['ban_userid'];
 }
 $ban_user_id = implode('', $ban_user_id);
 
-$user_list = DB()->fetch_rowset("
+$user_list = OLD_DB()->fetch_rowset("
 	SELECT DISTINCT dl.user_id, u.user_opt, tr.user_id as active_dl
 	FROM " . BB_BT_DLSTATUS . " dl
 	LEFT JOIN " . BB_USERS . " u  ON(u.user_id = dl.user_id)
@@ -65,7 +65,7 @@ if ($user_list) {
     send_pm($t_data['poster_id'], $subject, $message, BOT_UID);
 }
 
-DB()->query("UPDATE " . BB_BT_TORRENTS . " SET call_seed_time = " . TIMENOW . " WHERE topic_id = $topic_id");
+OLD_DB()->query("UPDATE " . BB_BT_TORRENTS . " SET call_seed_time = " . TIMENOW . " WHERE topic_id = $topic_id");
 
 meta_refresh(TOPIC_URL . $topic_id);
 bb_die($lang['CALLSEED_MSG_OK']);
@@ -84,7 +84,7 @@ function topic_info($topic_id)
 		WHERE tor.topic_id = $topic_id
 	";
 
-    if (!$torrent = DB()->fetch_row($sql)) {
+    if (!$torrent = OLD_DB()->fetch_row($sql)) {
         bb_die($lang['TOPIC_POST_NOT_EXIST']);
     }
 

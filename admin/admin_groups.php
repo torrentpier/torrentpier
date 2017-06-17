@@ -126,10 +126,10 @@ if (!empty($_POST['edit']) || !empty($_POST['new'])) {
                 }
             }
 
-            $sql_args = DB()->build_array('UPDATE', $sql_ary);
+            $sql_args = OLD_DB()->build_array('UPDATE', $sql_ary);
 
             // Update group's data
-            DB()->query('UPDATE ' . BB_GROUPS . " SET $sql_args WHERE group_id = $group_id");
+            OLD_DB()->query('UPDATE ' . BB_GROUPS . " SET $sql_args WHERE group_id = $group_id");
 
             $message = $lang['UPDATED_GROUP'] . '<br /><br />';
             $message .= sprintf($lang['CLICK_RETURN_GROUPSADMIN'], '<a href="admin_groups.php">', '</a>') . '<br /><br />';
@@ -138,11 +138,11 @@ if (!empty($_POST['edit']) || !empty($_POST['new'])) {
             bb_die($message);
         } elseif ($mode == 'newgroup') {
             $sql_ary['group_time'] = $sql_ary['mod_time'] = TIMENOW;
-            $sql_args = DB()->build_array('INSERT', $sql_ary);
+            $sql_args = OLD_DB()->build_array('INSERT', $sql_ary);
 
             // Create new group
-            DB()->query('INSERT INTO ' . BB_GROUPS . " $sql_args");
-            $new_group_id = DB()->sql_nextid();
+            OLD_DB()->query('INSERT INTO ' . BB_GROUPS . " $sql_args");
+            $new_group_id = OLD_DB()->sql_nextid();
 
             // Create user_group for group's moderator
             add_user_into_group($new_group_id, $group_moderator);

@@ -25,7 +25,7 @@ $stat = array();
 
 define('TMP_TRACKER_TABLE', 'tmp_tracker');
 
-DB()->query('
+OLD_DB()->query('
 	CREATE TEMPORARY TABLE ' . TMP_TRACKER_TABLE . " (
 		`topic_id` mediumint(8) unsigned NOT NULL default '0',
 		`user_id` mediumint(9) NOT NULL default '0',
@@ -41,33 +41,33 @@ DB()->query('
 ');
 
 // Peers within announce interval
-$stat += DB()->fetch_row('SELECT COUNT(*) AS p_within_ann FROM ' . TMP_TRACKER_TABLE . ' WHERE update_time >= ' . (TIMENOW - $announce_interval));
+$stat += OLD_DB()->fetch_row('SELECT COUNT(*) AS p_within_ann FROM ' . TMP_TRACKER_TABLE . ' WHERE update_time >= ' . (TIMENOW - $announce_interval));
 // All peers, "max_peer_time"
-$stat += DB()->fetch_row('SELECT COUNT(*) AS p_all, SUM(speed_up) as speed_up, SUM(speed_down) as speed_down, UNIX_TIMESTAMP() - MIN(update_time) AS max_peer_time, UNIX_TIMESTAMP() - MAX(update_time) AS last_peer_time FROM ' . TMP_TRACKER_TABLE);
+$stat += OLD_DB()->fetch_row('SELECT COUNT(*) AS p_all, SUM(speed_up) as speed_up, SUM(speed_down) as speed_down, UNIX_TIMESTAMP() - MIN(update_time) AS max_peer_time, UNIX_TIMESTAMP() - MAX(update_time) AS last_peer_time FROM ' . TMP_TRACKER_TABLE);
 // Active users
-$stat += DB()->fetch_row('SELECT COUNT(DISTINCT user_id) AS u_bt_active FROM ' . TMP_TRACKER_TABLE);
+$stat += OLD_DB()->fetch_row('SELECT COUNT(DISTINCT user_id) AS u_bt_active FROM ' . TMP_TRACKER_TABLE);
 // All bt-users
-$stat += DB()->fetch_row('SELECT COUNT(*) AS u_bt_all FROM ' . BB_BT_USERS);
+$stat += OLD_DB()->fetch_row('SELECT COUNT(*) AS u_bt_all FROM ' . BB_BT_USERS);
 // All bb-users
-$stat += DB()->fetch_row('SELECT COUNT(*) AS u_bb_all FROM ' . BB_USERS);
+$stat += OLD_DB()->fetch_row('SELECT COUNT(*) AS u_bb_all FROM ' . BB_USERS);
 // Active torrents
-$stat += DB()->fetch_row('SELECT COUNT(DISTINCT topic_id) AS tor_active FROM ' . TMP_TRACKER_TABLE);
+$stat += OLD_DB()->fetch_row('SELECT COUNT(DISTINCT topic_id) AS tor_active FROM ' . TMP_TRACKER_TABLE);
 // With seeder
-$stat += DB()->fetch_row('SELECT COUNT(DISTINCT topic_id) AS tor_with_seeder FROM ' . TMP_TRACKER_TABLE . ' WHERE seeder = 1');
+$stat += OLD_DB()->fetch_row('SELECT COUNT(DISTINCT topic_id) AS tor_with_seeder FROM ' . TMP_TRACKER_TABLE . ' WHERE seeder = 1');
 // All torrents
-$stat += DB()->fetch_row('SELECT COUNT(*) AS tor_all, SUM(size) AS torrents_size FROM ' . BB_BT_TORRENTS);
+$stat += OLD_DB()->fetch_row('SELECT COUNT(*) AS tor_all, SUM(size) AS torrents_size FROM ' . BB_BT_TORRENTS);
 
 // Last xx minutes
 $peers_in_last_min = array();
 foreach ($peers_in_last_minutes as $t) {
-    $row = DB()->fetch_row('
+    $row = OLD_DB()->fetch_row('
 		SELECT COUNT(*) AS peers FROM ' . TMP_TRACKER_TABLE . ' WHERE update_time >= ' . (TIMENOW - 60 * $t) . '
 	');
     $peers_in_last_min[$t] = (int)$row['peers'];
 }
 // Last xx seconds
 $peers_in_last_sec = array();
-$rowset = DB()->fetch_rowset('SELECT COUNT(*) AS peers FROM ' . TMP_TRACKER_TABLE . " GROUP BY update_time DESC LIMIT $peers_in_last_sec_limit");
+$rowset = OLD_DB()->fetch_rowset('SELECT COUNT(*) AS peers FROM ' . TMP_TRACKER_TABLE . " GROUP BY update_time DESC LIMIT $peers_in_last_sec_limit");
 foreach ($rowset as $cnt => $row) {
     $peers_in_last_sec[] = sprintf('%3s', $row['peers']) . (($cnt && !(++$cnt % 15)) ? "  \n" : '');
 }
@@ -126,6 +126,6 @@ echo 'gen time: <b>' . sprintf('%.3f', array_sum(explode(' ', microtime())) - TI
 echo '</pre></div>';
 echo '</body></html>';
 
-DB()->query('DROP TEMPORARY TABLE ' . TMP_TRACKER_TABLE);
+OLD_DB()->query('DROP TEMPORARY TABLE ' . TMP_TRACKER_TABLE);
 
 bb_exit();

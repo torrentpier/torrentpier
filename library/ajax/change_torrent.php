@@ -22,7 +22,7 @@ if (!isset($this->request['type'])) {
 $attach_id = (int)$this->request['attach_id'];
 $type = (string)$this->request['type'];
 
-$torrent = DB()->fetch_row("
+$torrent = OLD_DB()->fetch_row("
 		SELECT
 			a.post_id, d.physical_filename, d.extension, d.tracker_status,
 			t.topic_first_post_id,

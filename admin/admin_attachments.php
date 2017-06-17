@@ -41,11 +41,11 @@ $search_imagick = isset($_POST['search_imagick']) ? true : false;
 // Re-evaluate the Attachment Configuration
 $sql = 'SELECT * FROM ' . BB_ATTACH_CONFIG;
 
-if (!$result = DB()->sql_query($sql)) {
+if (!$result = OLD_DB()->sql_query($sql)) {
     bb_die('Could not find attachment config table #1');
 }
 
-while ($row = DB()->sql_fetchrow($result)) {
+while ($row = OLD_DB()->sql_fetchrow($result)) {
     $config_name = $row['config_name'];
     $config_value = $row['config_value'];
 
@@ -97,7 +97,7 @@ while ($row = DB()->sql_fetchrow($result)) {
 					SET max_filesize = ' . (int)$new_size . '
 					WHERE max_filesize = ' . (int)$old_size;
 
-                if (!($result_2 = DB()->sql_query($sql))) {
+                if (!($result_2 = OLD_DB()->sql_query($sql))) {
                     bb_die('Could not update extension group information');
                 }
             }
@@ -111,7 +111,7 @@ while ($row = DB()->sql_fetchrow($result)) {
 				WHERE config_name = '" . attach_mod_sql_escape($config_name) . "'";
         }
 
-        if (!DB()->sql_query($sql)) {
+        if (!OLD_DB()->sql_query($sql)) {
             bb_die('Failed to update attachment configuration for ' . $config_name);
         }
 
@@ -120,7 +120,7 @@ while ($row = DB()->sql_fetchrow($result)) {
         }
     }
 }
-DB()->sql_freeresult($result);
+OLD_DB()->sql_freeresult($result);
 
 // Clear cached config
 OLD_CACHE('bb_cache')->rm('attach_config');
@@ -172,13 +172,13 @@ if ($check_upload) {
 
     $sql = 'SELECT * FROM ' . BB_ATTACH_CONFIG;
 
-    if (!($result = DB()->sql_query($sql))) {
+    if (!($result = OLD_DB()->sql_query($sql))) {
         bb_die('Could not find attachment config table #2');
     }
 
-    $row = DB()->sql_fetchrowset($result);
-    $num_rows = DB()->num_rows($result);
-    DB()->sql_freeresult($result);
+    $row = OLD_DB()->sql_fetchrowset($result);
+    $num_rows = OLD_DB()->num_rows($result);
+    OLD_DB()->sql_freeresult($result);
 
     for ($i = 0; $i < $num_rows; $i++) {
         $attach_config[$row[$i]['config_name']] = trim($row[$i]['config_value']);
@@ -265,12 +265,12 @@ if ($mode == 'cats') {
 
     $s_assigned_group_images = array();
 
-    if (!($result = DB()->sql_query($sql))) {
+    if (!($result = OLD_DB()->sql_query($sql))) {
         bb_die('Could not get group names from ' . BB_EXTENSION_GROUPS);
     }
 
-    $row = DB()->sql_fetchrowset($result);
-    DB()->sql_freeresult($result);
+    $row = OLD_DB()->sql_fetchrowset($result);
+    OLD_DB()->sql_freeresult($result);
 
     for ($i = 0, $iMax = count($row); $i < $iMax; $i++) {
         if ($row[$i]['cat_id'] == IMAGE_CAT) {
@@ -320,13 +320,13 @@ if ($check_image_cat) {
 
     $sql = 'SELECT * FROM ' . BB_ATTACH_CONFIG;
 
-    if (!($result = DB()->sql_query($sql))) {
+    if (!($result = OLD_DB()->sql_query($sql))) {
         bb_die('Could not find attachment config table #3');
     }
 
-    $row = DB()->sql_fetchrowset($result);
-    $num_rows = DB()->num_rows($result);
-    DB()->sql_freeresult($result);
+    $row = OLD_DB()->sql_fetchrowset($result);
+    $num_rows = OLD_DB()->num_rows($result);
+    OLD_DB()->sql_freeresult($result);
 
     for ($i = 0; $i < $num_rows; $i++) {
         $attach_config[$row[$i]['config_name']] = trim($row[$i]['config_value']);
@@ -390,7 +390,7 @@ if ($submit && $mode == 'quota') {
 			SET quota_desc = '" . attach_mod_sql_escape($quota_desc_list[$i]) . "', quota_limit = " . (int)$filesize_list[$i] . '
 			WHERE quota_limit_id = ' . (int)$quota_change_list[$i];
 
-        if (!DB()->sql_query($sql)) {
+        if (!OLD_DB()->sql_query($sql)) {
             bb_die('Could not update quota limits');
         }
     }
@@ -403,14 +403,14 @@ if ($submit && $mode == 'quota') {
     if ($quota_id_sql != '') {
         $sql = 'DELETE FROM ' . BB_QUOTA_LIMITS . ' WHERE quota_limit_id IN (' . $quota_id_sql . ')';
 
-        if (!($result = DB()->sql_query($sql))) {
+        if (!($result = OLD_DB()->sql_query($sql))) {
             bb_die('Could not delete quota limits');
         }
 
         // Delete Quotas linked to this setting
         $sql = 'DELETE FROM ' . BB_QUOTA . ' WHERE quota_limit_id IN (' . $quota_id_sql . ')';
 
-        if (!($result = DB()->sql_query($sql))) {
+        if (!($result = OLD_DB()->sql_query($sql))) {
             bb_die('Could not delete quotas');
         }
     }
@@ -425,13 +425,13 @@ if ($submit && $mode == 'quota') {
         // check Quota Description
         $sql = 'SELECT quota_desc FROM ' . BB_QUOTA_LIMITS;
 
-        if (!($result = DB()->sql_query($sql))) {
+        if (!($result = OLD_DB()->sql_query($sql))) {
             bb_die('Could not query quota limits table');
         }
 
-        $row = DB()->sql_fetchrowset($result);
-        $num_rows = DB()->num_rows($result);
-        DB()->sql_freeresult($result);
+        $row = OLD_DB()->sql_fetchrowset($result);
+        $num_rows = OLD_DB()->num_rows($result);
+        OLD_DB()->sql_freeresult($result);
 
         if ($num_rows > 0) {
             for ($i = 0; $i < $num_rows; $i++) {
@@ -451,7 +451,7 @@ if ($submit && $mode == 'quota') {
             $sql = 'INSERT INTO ' . BB_QUOTA_LIMITS . " (quota_desc, quota_limit)
 			VALUES ('" . attach_mod_sql_escape($quota_desc) . "', " . (int)$filesize . ')';
 
-            if (!DB()->sql_query($sql)) {
+            if (!OLD_DB()->sql_query($sql)) {
                 bb_die('Could not add quota limit');
             }
         }
@@ -481,12 +481,12 @@ if ($mode == 'quota') {
 
     $sql = 'SELECT * FROM ' . BB_QUOTA_LIMITS . ' ORDER BY quota_limit DESC';
 
-    if (!($result = DB()->sql_query($sql))) {
+    if (!($result = OLD_DB()->sql_query($sql))) {
         bb_die('Could not get quota limits #1');
     }
 
-    $rows = DB()->sql_fetchrowset($result);
-    DB()->sql_freeresult($result);
+    $rows = OLD_DB()->sql_fetchrowset($result);
+    OLD_DB()->sql_freeresult($result);
 
     for ($i = 0, $iMax = count($rows); $i < $iMax; $i++) {
         $size_format = ($rows[$i]['quota_limit'] >= 1048576) ? 'mb' : (($rows[$i]['quota_limit'] >= 1024) ? 'kb' : 'b');
@@ -518,12 +518,12 @@ if ($mode == 'quota' && $e_mode == 'view_quota') {
 
     $sql = 'SELECT * FROM ' . BB_QUOTA_LIMITS . ' WHERE quota_limit_id = ' . (int)$quota_id . ' LIMIT 1';
 
-    if (!($result = DB()->sql_query($sql))) {
+    if (!($result = OLD_DB()->sql_query($sql))) {
         bb_die('Could not get quota limits #2');
     }
 
-    $row = DB()->sql_fetchrow($result);
-    DB()->sql_freeresult($result);
+    $row = OLD_DB()->sql_fetchrow($result);
+    OLD_DB()->sql_freeresult($result);
 
     $template->assign_vars(array(
         'L_QUOTA_LIMIT_DESC' => $row['quota_desc'],
@@ -535,13 +535,13 @@ if ($mode == 'quota' && $e_mode == 'view_quota') {
 			AND q.user_id <> 0
 			AND q.user_id = u.user_id';
 
-    if (!($result = DB()->sql_query($sql))) {
+    if (!($result = OLD_DB()->sql_query($sql))) {
         bb_die('Could not get quota limits #3');
     }
 
-    $rows = DB()->sql_fetchrowset($result);
-    $num_rows = DB()->num_rows($result);
-    DB()->sql_freeresult($result);
+    $rows = OLD_DB()->sql_fetchrowset($result);
+    $num_rows = OLD_DB()->num_rows($result);
+    OLD_DB()->sql_freeresult($result);
 
     for ($i = 0; $i < $num_rows; $i++) {
         if ($rows[$i]['quota_type'] == QUOTA_UPLOAD_LIMIT) {
@@ -563,13 +563,13 @@ if ($mode == 'quota' && $e_mode == 'view_quota') {
 			AND q.group_id <> 0
 			AND q.group_id = g.group_id';
 
-    if (!($result = DB()->sql_query($sql))) {
+    if (!($result = OLD_DB()->sql_query($sql))) {
         bb_die('Could not get quota limits #4');
     }
 
-    $rows = DB()->sql_fetchrowset($result);
-    $num_rows = DB()->num_rows($result);
-    DB()->sql_freeresult($result);
+    $rows = OLD_DB()->sql_fetchrowset($result);
+    $num_rows = OLD_DB()->num_rows($result);
+    OLD_DB()->sql_freeresult($result);
 
     for ($i = 0; $i < $num_rows; $i++) {
         if ($rows[$i]['quota_type'] == QUOTA_UPLOAD_LIMIT) {

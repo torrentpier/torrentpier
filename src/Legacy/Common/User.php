@@ -110,7 +110,7 @@ class User
 
         // Does a session exist?
         if ($session_id || !$this->sessiondata['uk']) {
-            $SQL = DB()->get_empty_sql_array();
+            $SQL = OLD_DB()->get_empty_sql_array();
 
             $SQL['SELECT'][] = "u.*, s.*";
 
@@ -134,7 +134,7 @@ class User
             }
 
             if (!$this->data = cache_get_userdata($userdata_cache_id)) {
-                $this->data = DB()->fetch_row($SQL);
+                $this->data = OLD_DB()->fetch_row($SQL);
 
                 if ($this->data && (TIMENOW - $this->data['session_time']) > $bb_cfg['session_update_intrv']) {
                     $this->data['session_time'] = TIMENOW;
@@ -161,7 +161,7 @@ class User
 
                 // Only update session a minute or so after last update
                 if ($update_sessions_table) {
-                    DB()->query("
+                    OLD_DB()->query("
 						UPDATE " . BB_SESSIONS . " SET
 							session_time = " . TIMENOW . "
 						WHERE session_id = '$session_id'
@@ -240,7 +240,7 @@ class User
 
             $sql = "SELECT ban_id FROM " . BB_BANLIST . " WHERE $where_sql LIMIT 1";
 
-            if (DB()->fetch_row($sql)) {
+            if (OLD_DB()->fetch_row($sql)) {
                 header('Location: https://torrentpier.me/banned/');
             }
         }
@@ -249,7 +249,7 @@ class User
         for ($i = 0, $max_try = 5; $i <= $max_try; $i++) {
             $session_id = make_rand_str(SID_LENGTH);
 
-            $args = DB()->build_array('INSERT', [
+            $args = OLD_DB()->build_array('INSERT', [
                 'session_id' => (string)$session_id,
                 'session_user_id' => (int)$user_id,
                 'session_start' => (int)TIMENOW,
@@ -260,7 +260,7 @@ class User
             ]);
             $sql = "INSERT INTO " . BB_SESSIONS . $args;
 
-            if (DB()->query($sql)) {
+            if (OLD_DB()->query($sql)) {
                 break;
             }
             if ($i == $max_try) {
@@ -279,7 +279,7 @@ class User
             }
 
             if ($last_visit != $this->data['user_lastvisit']) {
-                DB()->query("
+                OLD_DB()->query("
 					UPDATE " . BB_USERS . " SET
 						user_session_time = " . TIMENOW . ",
 						user_lastvisit = $last_visit,
@@ -330,14 +330,14 @@ class User
      */
     public function session_end($update_lastvisit = false, $set_cookie = true)
     {
-        DB()->query("
+        OLD_DB()->query("
 			DELETE FROM " . BB_SESSIONS . "
 			WHERE session_id = '{$this->data['session_id']}'
 		");
 
         if (!IS_GUEST) {
             if ($update_lastvisit) {
-                DB()->query("
+                OLD_DB()->query("
 					UPDATE " . BB_USERS . " SET
 						user_session_time = " . TIMENOW . ",
 						user_lastvisit = " . TIMENOW . ",
@@ -351,7 +351,7 @@ class User
             if (isset($_REQUEST['reset_autologin'])) {
                 $this->create_autologin_id($this->data, false);
 
-                DB()->query("
+                OLD_DB()->query("
 					DELETE FROM " . BB_SESSIONS . "
 					WHERE session_user_id = '{$this->data['user_id']}'
 				");
@@ -390,14 +390,14 @@ class User
 				LIMIT 1
 			";
 
-            if ($userdata = DB()->fetch_row($sql)) {
+            if ($userdata = OLD_DB()->fetch_row($sql)) {
                 if (!$userdata['username'] || !$userdata['user_password'] || $userdata['user_id'] == GUEST_UID || md5(md5($password)) !== $userdata['user_password'] || !$userdata['user_active']) {
                     trigger_error('invalid userdata', E_USER_ERROR);
                 }
 
                 // Start mod/admin session
                 if ($mod_admin_login) {
-                    DB()->query("
+                    OLD_DB()->query("
 						UPDATE " . BB_SESSIONS . " SET
 							session_admin = " . $this->data['user_level'] . "
 						WHERE session_user_id = " . $this->data['user_id'] . "
@@ -409,7 +409,7 @@ class User
                     return $this->data;
                 } elseif ($new_session_userdata = $this->session_create($userdata, false)) {
                     // Removing guest sessions from this IP
-                    DB()->query("
+                    OLD_DB()->query("
 						DELETE FROM " . BB_SESSIONS . "
 						WHERE session_ip = '" . USER_IP . "'
 							AND session_user_id = " . GUEST_UID . "
@@ -525,7 +525,7 @@ class User
     {
         $autologin_id = ($create_new) ? make_rand_str(LOGIN_KEY_LENGTH) : '';
 
-        DB()->query("
+        OLD_DB()->query("
 			UPDATE " . BB_USERS . " SET
 				autologin_id = '$autologin_id'
 			WHERE user_id = " . (int)$userdata['user_id'] . "
@@ -606,7 +606,7 @@ class User
     {
         if ($type === 'all_forums') {
             // Update session time
-            DB()->query("
+            OLD_DB()->query("
 				UPDATE " . BB_SESSIONS . " SET
 					session_time = " . TIMENOW . "
 				WHERE session_id = '{$this->data['session_id']}'

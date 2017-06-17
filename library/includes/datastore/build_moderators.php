@@ -43,7 +43,7 @@ $sql = "
 		u.username
 ";
 
-foreach (DB()->fetch_rowset($sql) as $row) {
+foreach (OLD_DB()->fetch_rowset($sql) as $row) {
     $data['name_users'][$row['user_id']] = $row['username'];
     $data['mod_users'][$row['forum_id']][] = $row['user_id'];
 }
@@ -67,7 +67,7 @@ $sql = "
 		g.group_name
 ";
 
-foreach (DB()->fetch_rowset($sql) as $row) {
+foreach (OLD_DB()->fetch_rowset($sql) as $row) {
     $data['name_groups'][$row['group_id']] = $row['group_name'];
     $data['mod_groups'][$row['forum_id']][] = $row['group_id'];
 }
@@ -93,7 +93,7 @@ $sql = "
 		u.username
 ";
 
-foreach (DB()->fetch_rowset($sql) as $row) {
+foreach (OLD_DB()->fetch_rowset($sql) as $row) {
     $data['moderators'][$row['user_id']] = $row['username'];
 }
 
@@ -105,7 +105,7 @@ $sql = "
 	ORDER BY username
 ";
 
-foreach (DB()->fetch_rowset($sql) as $row) {
+foreach (OLD_DB()->fetch_rowset($sql) as $row) {
     $data['admins'][$row['user_id']] = $row['username'];
 }
 

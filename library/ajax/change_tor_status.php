@@ -24,7 +24,7 @@ if ($bb_cfg['tor_comment']) {
     $comment = (string)$this->request['comment'];
 }
 
-$tor = DB()->fetch_row("
+$tor = OLD_DB()->fetch_row("
 	SELECT
 		tor.poster_id, tor.forum_id, tor.topic_id, tor.tor_status, tor.checked_time, tor.checked_user_id, f.cat_id, t.topic_title
 	FROM       " . BB_BT_TORRENTS . " tor
@@ -68,7 +68,7 @@ switch ($mode) {
             if (!IS_ADMIN) {
                 $this->verify_mod_rights($tor['forum_id']);
             }
-            DB()->query("UPDATE " . BB_TOPICS . " SET topic_status = " . TOPIC_UNLOCKED . " WHERE topic_id = {$tor['topic_id']}");
+            OLD_DB()->query("UPDATE " . BB_TOPICS . " SET topic_status = " . TOPIC_UNLOCKED . " WHERE topic_id = {$tor['topic_id']}");
         } else {
             $this->verify_mod_rights($tor['forum_id']);
         }

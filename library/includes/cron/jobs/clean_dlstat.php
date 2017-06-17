@@ -32,18 +32,18 @@ foreach ($keeping_dlstat as $dl_status => $days_to_keep) {
 }
 
 if ($delete_dlstat_sql = implode(') OR (', $delete_dlstat_sql)) {
-    DB()->query("DELETE QUICK FROM " . BB_BT_DLSTATUS . " WHERE ($delete_dlstat_sql)");
+    OLD_DB()->query("DELETE QUICK FROM " . BB_BT_DLSTATUS . " WHERE ($delete_dlstat_sql)");
 }
 
 // Delete orphans
-DB()->query("
+OLD_DB()->query("
 	DELETE QUICK dl
 	FROM " . BB_BT_DLSTATUS . " dl
 	LEFT JOIN " . BB_USERS . " u USING(user_id)
 	WHERE u.user_id IS NULL
 ");
 
-DB()->query("
+OLD_DB()->query("
 	DELETE QUICK dl
 	FROM " . BB_BT_DLSTATUS . " dl
 	LEFT JOIN " . BB_TOPICS . " t USING(topic_id)
@@ -52,17 +52,17 @@ DB()->query("
 
 // Tor-Stats cleanup
 if ($torstat_days_keep = (int)$bb_cfg['torstat_days_keep']) {
-    DB()->query("DELETE QUICK FROM " . BB_BT_TORSTAT . " WHERE last_modified_torstat < DATE_SUB(NOW(), INTERVAL $torstat_days_keep DAY)");
+    OLD_DB()->query("DELETE QUICK FROM " . BB_BT_TORSTAT . " WHERE last_modified_torstat < DATE_SUB(NOW(), INTERVAL $torstat_days_keep DAY)");
 }
 
-DB()->query("
+OLD_DB()->query("
 	DELETE QUICK tst
 	FROM " . BB_BT_TORSTAT . " tst
 	LEFT JOIN " . BB_BT_TORRENTS . " tor USING(topic_id)
 	WHERE tor.topic_id IS NULL
 ");
 
-DB()->query("
+OLD_DB()->query("
 	UPDATE
 		" . BB_BT_USERS . "
 	SET
@@ -73,7 +73,7 @@ DB()->query("
 		points_yesterday     = points_today
 ");
 
-DB()->query("
+OLD_DB()->query("
 	UPDATE
 		" . BB_BT_USERS . "
 	SET

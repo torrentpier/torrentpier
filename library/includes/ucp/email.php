@@ -35,7 +35,7 @@ $sql = "SELECT username, user_id, user_rank, user_email, user_lang
 	WHERE user_id = $user_id
 ";
 
-if ($row = DB()->fetch_row($sql)) {
+if ($row = OLD_DB()->fetch_row($sql)) {
     $username = $row['username'];
     $user_email = $row['user_email'];
     $user_lang = $row['user_lang'];

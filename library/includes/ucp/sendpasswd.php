@@ -24,9 +24,9 @@ if (isset($_POST['submit'])) {
         bb_die($lang['CAPTCHA_WRONG']);
     }
     $email = (!empty($_POST['email'])) ? trim(strip_tags(htmlspecialchars($_POST['email']))) : '';
-    $sql = "SELECT * FROM " . BB_USERS . " WHERE user_email = '" . DB()->escape($email) . "'";
-    if ($result = DB()->sql_query($sql)) {
-        if ($row = DB()->sql_fetchrow($result)) {
+    $sql = "SELECT * FROM " . BB_USERS . " WHERE user_email = '" . OLD_DB()->escape($email) . "'";
+    if ($result = OLD_DB()->sql_query($sql)) {
+        if ($row = OLD_DB()->sql_fetchrow($result)) {
             if (!$row['user_active']) {
                 bb_die($lang['NO_SEND_ACCOUNT_INACTIVE']);
             }
@@ -43,7 +43,7 @@ if (isset($_POST['submit'])) {
             $sql = "UPDATE " . BB_USERS . "
 				SET user_newpasswd = '$user_password', user_actkey = '$user_actkey'
 				WHERE user_id = " . $row['user_id'];
-            if (!DB()->sql_query($sql)) {
+            if (!OLD_DB()->sql_query($sql)) {
                 bb_die('Could not update new password information');
             }
 

@@ -82,9 +82,9 @@ class LogAction
             'log_time' => (int)TIMENOW,
             'log_msg' => (string)$log_msg,
         ];
-        $sql_args = DB()->build_array('INSERT', $sql_ary);
+        $sql_args = OLD_DB()->build_array('INSERT', $sql_ary);
 
-        DB()->query("INSERT INTO " . BB_LOG . " $sql_args");
+        OLD_DB()->query("INSERT INTO " . BB_LOG . " $sql_args");
     }
 
     /**

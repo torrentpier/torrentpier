@@ -34,7 +34,7 @@ if (isset($_POST['submit'])) {
     }
 
     if (!$errors) {
-        $sql = DB()->fetch_rowset('SELECT ban_userid FROM ' . BB_BANLIST . ' WHERE ban_userid != 0');
+        $sql = OLD_DB()->fetch_rowset('SELECT ban_userid FROM ' . BB_BANLIST . ' WHERE ban_userid != 0');
 
         foreach ($sql as $row) {
             $user_id_sql[] = ',' . $row['ban_userid'];
@@ -42,7 +42,7 @@ if (isset($_POST['submit'])) {
         $user_id_sql = implode('', $user_id_sql);
 
         if ($group_id != -1) {
-            $user_list = DB()->fetch_rowset('
+            $user_list = OLD_DB()->fetch_rowset('
 				SELECT u.username, u.user_email, u.user_lang
 				FROM ' . BB_USERS . ' u, ' . BB_USER_GROUP . " ug
 				WHERE ug.group_id = $group_id
@@ -52,7 +52,7 @@ if (isset($_POST['submit'])) {
 					AND u.user_id NOT IN(" . EXCLUDED_USERS . $user_id_sql . ')
 			');
         } else {
-            $user_list = DB()->fetch_rowset('
+            $user_list = OLD_DB()->fetch_rowset('
 				SELECT username, user_email, user_lang
 				FROM ' . BB_USERS . '
 				WHERE user_active = 1
@@ -89,7 +89,7 @@ $sql = 'SELECT group_id, group_name
 ';
 
 $groups = array('-- ' . $lang['ALL_USERS'] . ' --' => -1);
-foreach (DB()->fetch_rowset($sql) as $row) {
+foreach (OLD_DB()->fetch_rowset($sql) as $row) {
     $groups[$row['group_name']] = $row['group_id'];
 }
 

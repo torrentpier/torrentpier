@@ -106,7 +106,7 @@ if (isset($_POST['submit'])) {
         }
 
         if ($sql != '') {
-            if (!DB()->sql_query($sql)) {
+            if (!OLD_DB()->sql_query($sql)) {
                 bb_die('Could not update auth table');
             }
         }
@@ -122,7 +122,7 @@ if (isset($_POST['submit'])) {
 /**
  * Get required information
  */
-$forum_rows = DB()->fetch_rowset('SELECT * FROM ' . BB_FORUMS . " $forum_sql");
+$forum_rows = OLD_DB()->fetch_rowset('SELECT * FROM ' . BB_FORUMS . " $forum_sql");
 
 if (empty($forum_id)) {
     // Output the selection table if no forum id was specified

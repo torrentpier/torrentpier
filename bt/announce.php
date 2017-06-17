@@ -187,7 +187,7 @@ if ($stopped) {
 
 // Get last peer info from DB
 if (!OLD_CACHE('tr_cache')->used && !$lp_info) {
-    $lp_info = DB()->fetch_row("
+    $lp_info = OLD_DB()->fetch_row("
 		SELECT * FROM " . BB_BT_TRACKER . " WHERE peer_hash = '$peer_hash' LIMIT 1
 	");
 
@@ -207,8 +207,8 @@ if ($lp_info) {
     $tor_type = $lp_info['tor_type'];
 } else {
     // Verify if torrent registered on tracker and user authorized
-    $info_hash_sql = rtrim(DB()->escape($info_hash), ' ');
-    $passkey_sql = DB()->escape($passkey);
+    $info_hash_sql = rtrim(OLD_DB()->escape($info_hash), ' ');
+    $passkey_sql = OLD_DB()->escape($passkey);
 
     $sql = "
 		SELECT tor.topic_id, tor.poster_id, tor.tor_type, u.*
@@ -218,7 +218,7 @@ if ($lp_info) {
 		LIMIT 1
 	";
 
-    $row = DB()->fetch_row($sql);
+    $row = OLD_DB()->fetch_row($sql);
 
     if (empty($row['topic_id'])) {
         msg_die('Torrent not registered, info_hash = ' . bin2hex($info_hash_sql));
@@ -261,7 +261,7 @@ if ($lp_info) {
             }
             $sql .= "	GROUP BY user_id";
 
-            if ($row = DB()->fetch_row($sql)) {
+            if ($row = OLD_DB()->fetch_row($sql)) {
                 if ($seeder && $bb_cfg['tracker']['limit_seed_count'] && $row['active_torrents'] >= $bb_cfg['tracker']['limit_seed_count']) {
                     msg_die('Only ' . $bb_cfg['tracker']['limit_seed_count'] . ' torrent(s) allowed for seeding');
                 } elseif (!$seeder && $bb_cfg['tracker']['limit_leech_count'] && $row['active_torrents'] >= $bb_cfg['tracker']['limit_leech_count']) {
@@ -284,7 +284,7 @@ if ($lp_info) {
             }
             $sql .= "	GROUP BY topic_id";
 
-            if ($row = DB()->fetch_row($sql)) {
+            if ($row = OLD_DB()->fetch_row($sql)) {
                 if ($seeder && $bb_cfg['tracker']['limit_seed_ips'] && $row['ips'] >= $bb_cfg['tracker']['limit_seed_ips']) {
                     msg_die('You can seed only from ' . $bb_cfg['tracker']['limit_seed_ips'] . " IP's");
                 } elseif (!$seeder && $bb_cfg['tracker']['limit_leech_ips'] && $row['ips'] >= $bb_cfg['tracker']['limit_leech_ips']) {
@@ -351,9 +351,9 @@ if ($lp_info) {
     $sql .= " WHERE peer_hash = '$peer_hash'";
     $sql .= " LIMIT 1";
 
-    DB()->query($sql);
+    OLD_DB()->query($sql);
 
-    $peer_info_updated = DB()->affected_rows();
+    $peer_info_updated = OLD_DB()->affected_rows();
 
     if (DBG_LOG) {
         dbg_log(' ', 'this_peer-update' . ($peer_info_updated ? '' : '-FAIL'));
@@ -364,7 +364,7 @@ if (!$lp_info || !$peer_info_updated) {
     $columns = 'peer_hash,    topic_id,  user_id,   ip,       port,  seeder,  releaser, tor_type,  uploaded,  downloaded, remain, speed_up,  speed_down,  up_add,  down_add,  update_time';
     $values = "'$peer_hash', $topic_id, $user_id, '$ip_sql', $port, $seeder, $releaser, $tor_type, $uploaded, $downloaded, $left, $speed_up, $speed_down, $up_add, $down_add, $update_time";
 
-    DB()->query("REPLACE INTO " . BB_BT_TRACKER . " ($columns) VALUES ($values)");
+    OLD_DB()->query("REPLACE INTO " . BB_BT_TRACKER . " ($columns) VALUES ($values)");
 
     if (DBG_LOG) {
         dbg_log(' ', 'this_peer-insert');
@@ -406,7 +406,7 @@ if (!$output) {
     $numwant = (int)$bb_cfg['tracker']['numwant'];
     $compact_mode = ($bb_cfg['tracker']['compact_mode'] || !empty($compact));
 
-    $rowset = DB()->fetch_rowset("
+    $rowset = OLD_DB()->fetch_rowset("
 		SELECT ip, port
 		FROM " . BB_BT_TRACKER . "
 		WHERE topic_id = $topic_id
@@ -435,7 +435,7 @@ if (!$output) {
     $leechers = 0;
 
     if ($bb_cfg['tracker']['scrape']) {
-        $row = DB()->fetch_row("
+        $row = OLD_DB()->fetch_row("
 			SELECT seeders, leechers
 			FROM " . BB_BT_TRACKER_SNAP . "
 			WHERE topic_id = $topic_id

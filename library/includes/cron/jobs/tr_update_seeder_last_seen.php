@@ -11,7 +11,7 @@ if (!defined('BB_ROOT')) {
     die(basename(__FILE__));
 }
 
-DB()->query("
+OLD_DB()->query("
 	UPDATE
 		" . BUF_LAST_SEEDER . " b,
 		" . BB_BT_TORRENTS . " tor
@@ -21,4 +21,4 @@ DB()->query("
 		tor.topic_id = b.topic_id
 ");
 
-DB()->query("TRUNCATE TABLE " . BUF_LAST_SEEDER);
+OLD_DB()->query("TRUNCATE TABLE " . BUF_LAST_SEEDER);

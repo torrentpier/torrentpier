@@ -75,11 +75,11 @@ class Poll
                 'vote_result' => (int)0,
             ];
         }
-        $sql_args = DB()->build_array('MULTI_INSERT', $sql_ary);
+        $sql_args = OLD_DB()->build_array('MULTI_INSERT', $sql_ary);
 
-        DB()->query("REPLACE INTO " . BB_POLL_VOTES . $sql_args);
+        OLD_DB()->query("REPLACE INTO " . BB_POLL_VOTES . $sql_args);
 
-        DB()->query("UPDATE " . BB_TOPICS . " SET topic_vote = 1 WHERE topic_id = $topic_id");
+        OLD_DB()->query("UPDATE " . BB_TOPICS . " SET topic_vote = 1 WHERE topic_id = $topic_id");
     }
 
     /**
@@ -89,7 +89,7 @@ class Poll
      */
     public function delete_poll($topic_id)
     {
-        DB()->query("UPDATE " . BB_TOPICS . " SET topic_vote = 0 WHERE topic_id = $topic_id");
+        OLD_DB()->query("UPDATE " . BB_TOPICS . " SET topic_vote = 0 WHERE topic_id = $topic_id");
         $this->delete_votes_data($topic_id);
     }
 
@@ -100,8 +100,8 @@ class Poll
      */
     public function delete_votes_data($topic_id)
     {
-        DB()->query("DELETE FROM " . BB_POLL_VOTES . " WHERE topic_id = $topic_id");
-        DB()->query("DELETE FROM " . BB_POLL_USERS . " WHERE topic_id = $topic_id");
+        OLD_DB()->query("DELETE FROM " . BB_POLL_VOTES . " WHERE topic_id = $topic_id");
+        OLD_DB()->query("DELETE FROM " . BB_POLL_USERS . " WHERE topic_id = $topic_id");
         OLD_CACHE('bb_poll_data')->rm("poll_$topic_id");
     }
 }

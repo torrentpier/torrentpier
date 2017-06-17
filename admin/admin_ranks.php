@@ -47,11 +47,11 @@ if ($mode != '') {
             }
 
             $sql = 'SELECT * FROM ' . BB_RANKS . " WHERE rank_id = $rank_id";
-            if (!$result = DB()->sql_query($sql)) {
+            if (!$result = OLD_DB()->sql_query($sql)) {
                 bb_die('Could not obtain ranks data #1');
             }
 
-            $rank_info = DB()->sql_fetchrow($result);
+            $rank_info = OLD_DB()->sql_fetchrow($result);
             $s_hidden_fields .= '<input type="hidden" name="id" value="' . $rank_id . '" />';
         } else {
             $rank_info['rank_special'] = 0;
@@ -109,27 +109,27 @@ if ($mode != '') {
         if ($rank_id) {
             if (!$special_rank) {
                 $sql = 'UPDATE ' . BB_USERS . " SET user_rank = 0 WHERE user_rank = $rank_id";
-                if (!$result = DB()->sql_query($sql)) {
+                if (!$result = OLD_DB()->sql_query($sql)) {
                     bb_die($lang['NO_UPDATE_RANKS']);
                 }
             }
             $sql = 'UPDATE ' . BB_RANKS . "
-				SET rank_title = '" . DB()->escape($rank_title) . "',
+				SET rank_title = '" . OLD_DB()->escape($rank_title) . "',
 					rank_special = $special_rank,
 					rank_min = $min_posts,
-					rank_image = '" . DB()->escape($rank_image) . "',
-					rank_style = '" . DB()->escape($rank_style) . "'
+					rank_image = '" . OLD_DB()->escape($rank_image) . "',
+					rank_style = '" . OLD_DB()->escape($rank_style) . "'
 				WHERE rank_id = $rank_id";
 
             $message = $lang['RANK_UPDATED'];
         } else {
             $sql = 'INSERT INTO ' . BB_RANKS . " (rank_title, rank_special, rank_min, rank_image, rank_style)
-				VALUES ('" . DB()->escape($rank_title) . "', $special_rank, $min_posts, '" . DB()->escape($rank_image) . "', '" . DB()->escape($rank_style) . "')";
+				VALUES ('" . OLD_DB()->escape($rank_title) . "', $special_rank, $min_posts, '" . OLD_DB()->escape($rank_image) . "', '" . OLD_DB()->escape($rank_style) . "')";
 
             $message = $lang['RANK_ADDED'];
         }
 
-        if (!$result = DB()->sql_query($sql)) {
+        if (!$result = OLD_DB()->sql_query($sql)) {
             bb_die('Could not update / insert into ranks table');
         }
 
@@ -152,12 +152,12 @@ if ($mode != '') {
         if ($rank_id) {
             $sql = 'DELETE FROM ' . BB_RANKS . " WHERE rank_id = $rank_id";
 
-            if (!$result = DB()->sql_query($sql)) {
+            if (!$result = OLD_DB()->sql_query($sql)) {
                 bb_die('Could not delete rank data');
             }
 
             $sql = 'UPDATE ' . BB_USERS . " SET user_rank = 0 WHERE user_rank = $rank_id";
-            if (!$result = DB()->sql_query($sql)) {
+            if (!$result = OLD_DB()->sql_query($sql)) {
                 bb_die($lang['NO_UPDATE_RANKS']);
             }
 
@@ -175,11 +175,11 @@ if ($mode != '') {
     // Show the default page
     //
     $sql = 'SELECT * FROM ' . BB_RANKS . ' ORDER BY rank_min, rank_title';
-    if (!$result = DB()->sql_query($sql)) {
+    if (!$result = OLD_DB()->sql_query($sql)) {
         bb_die('Could not obtain ranks data #2');
     }
-    $rank_count = DB()->num_rows($result);
-    $rank_rows = DB()->sql_fetchrowset($result);
+    $rank_count = OLD_DB()->num_rows($result);
+    $rank_rows = OLD_DB()->sql_fetchrowset($result);
 
     $template->assign_vars(array(
         'TPL_RANKS_LIST' => true,

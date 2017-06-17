@@ -38,7 +38,7 @@ function get_torrent_info($attach_id)
 		LIMIT 1
 	";
 
-    if (!$torrent = DB()->fetch_row($sql)) {
+    if (!$torrent = OLD_DB()->fetch_row($sql)) {
         bb_die($lang['INVALID_ATTACH_ID']);
     }
 
@@ -90,10 +90,10 @@ function tracker_unregister($attach_id, $mode = '')
     if (!$topic_id) {
         $sql = "SELECT topic_id FROM " . BB_BT_TORRENTS . " WHERE attach_id = $attach_id";
 
-        if (!$result = DB()->sql_query($sql)) {
+        if (!$result = OLD_DB()->sql_query($sql)) {
             bb_die('Could not query torrent information');
         }
-        if ($row = DB()->sql_fetchrow($result)) {
+        if ($row = OLD_DB()->sql_fetchrow($result)) {
             $topic_id = $row['topic_id'];
         }
     }
@@ -102,7 +102,7 @@ function tracker_unregister($attach_id, $mode = '')
     if ($bb_cfg['bt_unset_dltype_on_tor_unreg'] && $topic_id) {
         $sql = "UPDATE " . BB_TOPICS . " SET topic_dl_type = " . TOPIC_DL_TYPE_NORMAL . " WHERE topic_id = $topic_id";
 
-        if (!$result = DB()->sql_query($sql)) {
+        if (!$result = OLD_DB()->sql_query($sql)) {
             bb_die('Could not update topics table #1');
         }
     }
@@ -110,13 +110,13 @@ function tracker_unregister($attach_id, $mode = '')
     // Remove peers from tracker
     $sql = "DELETE FROM " . BB_BT_TRACKER . " WHERE topic_id = $topic_id";
 
-    if (!DB()->sql_query($sql)) {
+    if (!OLD_DB()->sql_query($sql)) {
         bb_die('Could not delete peers');
     }
 
     // Ocelot
     if ($bb_cfg['ocelot']['enabled']) {
-        if ($row = DB()->fetch_row("SELECT info_hash FROM " . BB_BT_TORRENTS . " WHERE attach_id = $attach_id LIMIT 1")) {
+        if ($row = OLD_DB()->fetch_row("SELECT info_hash FROM " . BB_BT_TORRENTS . " WHERE attach_id = $attach_id LIMIT 1")) {
             $info_hash = $row['info_hash'];
         }
         ocelot_update_tracker('delete_torrent', array('info_hash' => rawurlencode($info_hash), 'id' => $topic_id));
@@ -125,14 +125,14 @@ function tracker_unregister($attach_id, $mode = '')
     // Delete torrent
     $sql = "DELETE FROM " . BB_BT_TORRENTS . " WHERE attach_id = $attach_id";
 
-    if (!DB()->sql_query($sql)) {
+    if (!OLD_DB()->sql_query($sql)) {
         bb_die('Could not delete torrent from torrents table');
     }
 
     // Update tracker_status
     $sql = "UPDATE " . BB_ATTACHMENTS_DESC . " SET tracker_status = 0 WHERE attach_id = $attach_id";
 
-    if (!DB()->sql_query($sql)) {
+    if (!OLD_DB()->sql_query($sql)) {
         bb_die('Could not update torrent status #1');
     }
 
@@ -183,7 +183,7 @@ function change_tor_status($attach_id, $new_tor_status)
 
     torrent_auth_check($torrent['forum_id'], $torrent['poster_id']);
 
-    DB()->query("
+    OLD_DB()->query("
 		UPDATE " . BB_BT_TORRENTS . " SET
 			tor_status = $new_tor_status,
 			checked_user_id = {$userdata['user_id']},
@@ -210,11 +210,11 @@ function change_tor_type($attach_id, $tor_status_gold)
     $tor_status_gold = (int)$tor_status_gold;
     $info_hash = null;
 
-    DB()->query("UPDATE " . BB_BT_TORRENTS . " SET tor_type = $tor_status_gold WHERE topic_id = $topic_id");
+    OLD_DB()->query("UPDATE " . BB_BT_TORRENTS . " SET tor_type = $tor_status_gold WHERE topic_id = $topic_id");
 
     // Ocelot
     if ($bb_cfg['ocelot']['enabled']) {
-        if ($row = DB()->fetch_row("SELECT info_hash FROM " . BB_BT_TORRENTS . " WHERE topic_id = $topic_id LIMIT 1")) {
+        if ($row = OLD_DB()->fetch_row("SELECT info_hash FROM " . BB_BT_TORRENTS . " WHERE topic_id = $topic_id LIMIT 1")) {
             $info_hash = $row['info_hash'];
         }
         ocelot_update_tracker('update_torrent', array('info_hash' => rawurlencode($info_hash), 'freetorrent' => $tor_status_gold));
@@ -295,7 +295,7 @@ function tracker_register($attach_id, $mode = '', $tor_status = TOR_NOT_APPROVED
     }
 
     $info_hash = pack('H*', sha1(\Rych\Bencode\Bencode::encode($info)));
-    $info_hash_sql = rtrim(DB()->escape($info_hash), ' ');
+    $info_hash_sql = rtrim(OLD_DB()->escape($info_hash), ' ');
     $info_hash_md5 = md5($info_hash);
 
     // Ocelot
@@ -303,7 +303,7 @@ function tracker_register($attach_id, $mode = '', $tor_status = TOR_NOT_APPROVED
         ocelot_update_tracker('add_torrent', array('info_hash' => rawurlencode($info_hash), 'id' => $topic_id, 'freetorrent' => 0));
     }
 
-    if ($row = DB()->fetch_row("SELECT topic_id FROM " . BB_BT_TORRENTS . " WHERE info_hash = '$info_hash_sql' LIMIT 1")) {
+    if ($row = OLD_DB()->fetch_row("SELECT topic_id FROM " . BB_BT_TORRENTS . " WHERE info_hash = '$info_hash_sql' LIMIT 1")) {
         $msg = sprintf($lang['BT_REG_FAIL_SAME_HASH'], TOPIC_URL . $row['topic_id']);
         bb_die($msg);
         set_die_append_msg($forum_id, $topic_id);
@@ -328,8 +328,8 @@ function tracker_register($attach_id, $mode = '', $tor_status = TOR_NOT_APPROVED
 
     $sql = "INSERT INTO " . BB_BT_TORRENTS . " ($columns) VALUES ($values)";
 
-    if (!DB()->sql_query($sql)) {
-        $sql_error = DB()->sql_error();
+    if (!OLD_DB()->sql_query($sql)) {
+        $sql_error = OLD_DB()->sql_error();
 
         if ($sql_error['code'] == 1062) {
             // Duplicate entry
@@ -342,7 +342,7 @@ function tracker_register($attach_id, $mode = '', $tor_status = TOR_NOT_APPROVED
     // update tracker status for this attachment
     $sql = 'UPDATE ' . BB_ATTACHMENTS_DESC . " SET tracker_status = 1 WHERE attach_id = $attach_id";
 
-    if (!DB()->sql_query($sql)) {
+    if (!OLD_DB()->sql_query($sql)) {
         bb_die('Could not update torrent status #2');
     }
 
@@ -350,13 +350,13 @@ function tracker_register($attach_id, $mode = '', $tor_status = TOR_NOT_APPROVED
     if ($bb_cfg['bt_set_dltype_on_tor_reg']) {
         $sql = 'UPDATE ' . BB_TOPICS . ' SET topic_dl_type = ' . TOPIC_DL_TYPE_DL . " WHERE topic_id = $topic_id";
 
-        if (!$result = DB()->sql_query($sql)) {
+        if (!$result = OLD_DB()->sql_query($sql)) {
             bb_die('Could not update topics table #2');
         }
     }
 
     if ($bb_cfg['tracker']['tor_topic_up']) {
-        DB()->query("UPDATE " . BB_TOPICS . " SET topic_last_post_time = GREATEST(topic_last_post_time, " . (TIMENOW - 3 * 86400) . ") WHERE topic_id = $topic_id");
+        OLD_DB()->query("UPDATE " . BB_TOPICS . " SET topic_last_post_time = GREATEST(topic_last_post_time, " . (TIMENOW - 3 * 86400) . ") WHERE topic_id = $topic_id");
     }
 
     if ($reg_mode == 'request' || $reg_mode == 'newtopic') {
@@ -395,10 +395,10 @@ function send_torrent_with_passkey($filename)
 
     // Get $topic_id
     $topic_id_sql = 'SELECT topic_id FROM ' . BB_POSTS . ' WHERE post_id = ' . (int)$post_id;
-    if (!($topic_id_result = DB()->sql_query($topic_id_sql))) {
+    if (!($topic_id_result = OLD_DB()->sql_query($topic_id_sql))) {
         bb_die('Could not query post information');
     }
-    $topic_id_row = DB()->sql_fetchrow($topic_id_result);
+    $topic_id_row = OLD_DB()->sql_fetchrow($topic_id_result);
     $topic_id = $topic_id_row['topic_id'];
 
     if (!$attachment['tracker_status']) {
@@ -426,7 +426,7 @@ function send_torrent_with_passkey($filename)
 
     if ($min_ratio && $user_id != $poster_id && ($user_ratio = get_bt_ratio($bt_userdata)) !== null) {
         if ($user_ratio < $min_ratio && $post_id) {
-            $dl = DB()->fetch_row("
+            $dl = OLD_DB()->fetch_row("
 				SELECT dl.user_status
 				FROM " . BB_POSTS . " p
 				LEFT JOIN " . BB_BT_DLSTATUS . " dl ON dl.topic_id = p.topic_id AND dl.user_id = $user_id
@@ -516,10 +516,10 @@ function generate_passkey($user_id, $force_generate = false)
     if (!$force_generate) {
         $sql = "SELECT user_opt FROM " . BB_USERS . " WHERE user_id = $user_id LIMIT 1";
 
-        if (!$result = DB()->sql_query($sql)) {
+        if (!$result = OLD_DB()->sql_query($sql)) {
             bb_die('Could not query userdata for passkey');
         }
-        if ($row = DB()->sql_fetchrow($result)) {
+        if ($row = OLD_DB()->sql_fetchrow($result)) {
             if (bf($row['user_opt'], 'user_opt', 'dis_passkey')) {
                 bb_die($lang['NOT_AUTHORISED']);
             }
@@ -530,20 +530,20 @@ function generate_passkey($user_id, $force_generate = false)
         $passkey_val = make_rand_str(BT_AUTH_KEY_LENGTH);
         $old_passkey = null;
 
-        if ($row = DB()->fetch_row("SELECT auth_key FROM " . BB_BT_USERS . " WHERE user_id = $user_id LIMIT 1")) {
+        if ($row = OLD_DB()->fetch_row("SELECT auth_key FROM " . BB_BT_USERS . " WHERE user_id = $user_id LIMIT 1")) {
             $old_passkey = $row['auth_key'];
         }
 
         // Insert new row
-        DB()->query("INSERT IGNORE INTO " . BB_BT_USERS . " (user_id, auth_key) VALUES ($user_id, '$passkey_val')");
+        OLD_DB()->query("INSERT IGNORE INTO " . BB_BT_USERS . " (user_id, auth_key) VALUES ($user_id, '$passkey_val')");
 
-        if (DB()->affected_rows() == 1) {
+        if (OLD_DB()->affected_rows() == 1) {
             return $passkey_val;
         }
         // Update
-        DB()->query("UPDATE IGNORE " . BB_BT_USERS . " SET auth_key = '$passkey_val' WHERE user_id = $user_id");
+        OLD_DB()->query("UPDATE IGNORE " . BB_BT_USERS . " SET auth_key = '$passkey_val' WHERE user_id = $user_id");
 
-        if (DB()->affected_rows() == 1) {
+        if (OLD_DB()->affected_rows() == 1) {
             // Ocelot
             if ($bb_cfg['ocelot']['enabled']) {
                 ocelot_update_tracker('change_passkey', array('oldpasskey' => $old_passkey, 'newpasskey' => $passkey_val));
@@ -556,12 +556,12 @@ function generate_passkey($user_id, $force_generate = false)
 
 function tracker_rm_torrent($topic_id)
 {
-    return DB()->sql_query("DELETE FROM " . BB_BT_TRACKER . " WHERE topic_id = " . (int)$topic_id);
+    return OLD_DB()->sql_query("DELETE FROM " . BB_BT_TRACKER . " WHERE topic_id = " . (int)$topic_id);
 }
 
 function tracker_rm_user($user_id)
 {
-    return DB()->sql_query("DELETE FROM " . BB_BT_TRACKER . " WHERE user_id = " . (int)$user_id);
+    return OLD_DB()->sql_query("DELETE FROM " . BB_BT_TRACKER . " WHERE user_id = " . (int)$user_id);
 }
 
 function get_registered_torrents($id, $mode)
@@ -570,11 +570,11 @@ function get_registered_torrents($id, $mode)
 
     $sql = "SELECT topic_id FROM " . BB_BT_TORRENTS . " WHERE $field = $id LIMIT 1";
 
-    if (!$result = DB()->sql_query($sql)) {
+    if (!$result = OLD_DB()->sql_query($sql)) {
         bb_die('Could not query torrent id');
     }
 
-    if ($rowset = @DB()->sql_fetchrowset($result)) {
+    if ($rowset = @OLD_DB()->sql_fetchrowset($result)) {
         return $rowset;
     } else {
         return false;

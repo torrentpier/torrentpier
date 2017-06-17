@@ -92,12 +92,12 @@ class Attach
 						AND u.group_id = g.group_id
 						AND u.user_id = ' . (int)$user_id;
 
-                if (!($result = DB()->sql_query($sql))) {
+                if (!($result = OLD_DB()->sql_query($sql))) {
                     bb_die('Could not get user group');
                 }
 
-                $rows = DB()->sql_fetchrowset($result);
-                DB()->sql_freeresult($result);
+                $rows = OLD_DB()->sql_fetchrowset($result);
+                OLD_DB()->sql_freeresult($result);
 
                 if ($rows) {
                     $group_id = [];
@@ -115,16 +115,16 @@ class Attach
 						ORDER BY l.quota_limit DESC
 						LIMIT 1';
 
-                    if (!($result = DB()->sql_query($sql))) {
+                    if (!($result = OLD_DB()->sql_query($sql))) {
                         bb_die('Could not get group quota');
                     }
 
-                    if (DB()->num_rows($result)) {
-                        $row = DB()->sql_fetchrow($result);
+                    if (OLD_DB()->num_rows($result)) {
+                        $row = OLD_DB()->sql_fetchrow($result);
                         $attach_config[$limit_type] = $row['quota_limit'];
                         $found = true;
                     }
-                    DB()->sql_freeresult($result);
+                    OLD_DB()->sql_freeresult($result);
                 }
             }
 
@@ -138,16 +138,16 @@ class Attach
 						AND q.quota_limit_id = l.quota_limit_id
 					LIMIT 1';
 
-                if (!($result = DB()->sql_query($sql))) {
+                if (!($result = OLD_DB()->sql_query($sql))) {
                     bb_die('Could not get user quota');
                 }
 
-                if (DB()->num_rows($result)) {
-                    $row = DB()->sql_fetchrow($result);
+                if (OLD_DB()->num_rows($result)) {
+                    $row = OLD_DB()->sql_fetchrow($result);
                     $attach_config[$limit_type] = $row['quota_limit'];
                     $found = true;
                 }
-                DB()->sql_freeresult($result);
+                OLD_DB()->sql_freeresult($result);
             }
         }
 
@@ -163,17 +163,17 @@ class Attach
 					WHERE quota_limit_id = ' . (int)$quota_id . '
 					LIMIT 1';
 
-                if (!($result = DB()->sql_query($sql))) {
+                if (!($result = OLD_DB()->sql_query($sql))) {
                     bb_die('Could not get default quota limit');
                 }
 
-                if (DB()->num_rows($result) > 0) {
-                    $row = DB()->sql_fetchrow($result);
+                if (OLD_DB()->num_rows($result) > 0) {
+                    $row = OLD_DB()->sql_fetchrow($result);
                     $attach_config[$limit_type] = $row['quota_limit'];
                 } else {
                     $attach_config[$limit_type] = $attach_config[$default];
                 }
-                DB()->sql_freeresult($result);
+                OLD_DB()->sql_freeresult($result);
             }
         }
 
@@ -370,7 +370,7 @@ class Attach
                             } else {
                                 $sql = 'UPDATE ' . BB_ATTACHMENTS_DESC . ' SET thumbnail = 0 WHERE attach_id = ' . (int)$actual_id_list[$i];
 
-                                if (!(DB()->sql_query($sql))) {
+                                if (!(OLD_DB()->sql_query($sql))) {
                                     bb_die('Unable to update ' . BB_ATTACHMENTS_DESC);
                                 }
                             }
@@ -417,11 +417,11 @@ class Attach
 							FROM ' . BB_ATTACHMENTS_DESC . '
 							WHERE attach_id = ' . (int)$attachment_id;
 
-                        if (!($result = DB()->sql_query($sql))) {
+                        if (!($result = OLD_DB()->sql_query($sql))) {
                             bb_die('Unable to select old attachment entry');
                         }
 
-                        if (DB()->num_rows($result) != 1) {
+                        if (OLD_DB()->num_rows($result) != 1) {
                             $error = true;
                             if (!empty($error_msg)) {
                                 $error_msg .= '<br />';
@@ -429,8 +429,8 @@ class Attach
                             $error_msg .= $lang['ERROR_MISSING_OLD_ENTRY'];
                         }
 
-                        $row = DB()->sql_fetchrow($result);
-                        DB()->sql_freeresult($result);
+                        $row = OLD_DB()->sql_fetchrow($result);
+                        OLD_DB()->sql_freeresult($result);
 
                         $comment = !trim($this->file_comment) ? trim($row['comment']) : trim($this->file_comment);
 
@@ -449,7 +449,7 @@ class Attach
                         $sql = 'UPDATE ' . BB_ATTACHMENTS_DESC . ' SET ' . attach_mod_sql_build_array('UPDATE', $sql_ary) . '
 							WHERE attach_id = ' . (int)$attachment_id;
 
-                        if (!(DB()->sql_query($sql))) {
+                        if (!(OLD_DB()->sql_query($sql))) {
                             bb_die('Unable to update the attachment');
                         }
 
@@ -546,7 +546,7 @@ class Attach
 						SET comment = '" . @attach_mod_sql_escape($this->attachment_comment_list[$i]) . "'
 						WHERE attach_id = " . $this->attachment_id_list[$i];
 
-                    if (!(DB()->sql_query($sql))) {
+                    if (!(OLD_DB()->sql_query($sql))) {
                         bb_die('Unable to update the file comment');
                     }
                 } else {
@@ -568,11 +568,11 @@ class Attach
 
                     $sql = 'INSERT INTO ' . BB_ATTACHMENTS_DESC . ' ' . attach_mod_sql_build_array('INSERT', $sql_ary);
 
-                    if (!(DB()->sql_query($sql))) {
+                    if (!(OLD_DB()->sql_query($sql))) {
                         bb_die('Could not store Attachment.<br />Your ' . $message_type . ' has been stored');
                     }
 
-                    $attach_id = DB()->sql_nextid();
+                    $attach_id = OLD_DB()->sql_nextid();
 
                     //bt
                     if ($this->attachment_extension_list[$i] === TORRENT_EXT && !defined('TORRENT_ATTACH_ID')) {
@@ -588,7 +588,7 @@ class Attach
 
                     $sql = 'INSERT INTO ' . BB_ATTACHMENTS . ' ' . attach_mod_sql_build_array('INSERT', $sql_ary);
 
-                    if (!(DB()->sql_query($sql))) {
+                    if (!(OLD_DB()->sql_query($sql))) {
                         bb_die('Could not store Attachment.<br />Your ' . $message_type . ' has been stored');
                     }
                 }
@@ -614,11 +614,11 @@ class Attach
                 $sql = 'INSERT INTO ' . BB_ATTACHMENTS_DESC . ' ' . attach_mod_sql_build_array('INSERT', $sql_ary);
 
                 // Inform the user that his post has been created, but nothing is attached
-                if (!(DB()->sql_query($sql))) {
+                if (!(OLD_DB()->sql_query($sql))) {
                     bb_die('Could not store Attachment.<br />Your ' . $message_type . ' has been stored');
                 }
 
-                $attach_id = DB()->sql_nextid();
+                $attach_id = OLD_DB()->sql_nextid();
 
                 $sql_ary = [
                     'attach_id' => (int)$attach_id,
@@ -628,7 +628,7 @@ class Attach
 
                 $sql = 'INSERT INTO ' . BB_ATTACHMENTS . ' ' . attach_mod_sql_build_array('INSERT', $sql_ary);
 
-                if (!(DB()->sql_query($sql))) {
+                if (!(OLD_DB()->sql_query($sql))) {
                     bb_die('Could not store Attachment.<br />Your ' . $message_type . ' has been stored');
                 }
             }
@@ -751,12 +751,12 @@ class Attach
 					AND e.extension = '" . attach_mod_sql_escape($this->extension) . "'
 				LIMIT 1";
 
-            if (!($result = DB()->sql_query($sql))) {
+            if (!($result = OLD_DB()->sql_query($sql))) {
                 bb_die('Could not query extensions');
             }
 
-            $row = DB()->sql_fetchrow($result);
-            DB()->sql_freeresult($result);
+            $row = OLD_DB()->sql_fetchrow($result);
+            OLD_DB()->sql_freeresult($result);
 
             $allowed_filesize = $row['max_filesize'] ?: $attach_config['max_filesize'];
             $cat_id = (int)$row['cat_id'];
@@ -936,12 +936,12 @@ class Attach
             if ($attach_config['attachment_quota']) {
                 $sql = 'SELECT sum(filesize) as total FROM ' . BB_ATTACHMENTS_DESC;
 
-                if (!($result = DB()->sql_query($sql))) {
+                if (!($result = OLD_DB()->sql_query($sql))) {
                     bb_die('Could not query total filesize #1');
                 }
 
-                $row = DB()->sql_fetchrow($result);
-                DB()->sql_freeresult($result);
+                $row = OLD_DB()->sql_fetchrow($result);
+                OLD_DB()->sql_freeresult($result);
 
                 $total_filesize = $row['total'];
 
@@ -963,13 +963,13 @@ class Attach
 					WHERE user_id_1 = ' . (int)$userdata['user_id'] . '
 					GROUP BY attach_id';
 
-                if (!($result = DB()->sql_query($sql))) {
+                if (!($result = OLD_DB()->sql_query($sql))) {
                     bb_die('Could not query attachments');
                 }
 
-                $attach_ids = DB()->sql_fetchrowset($result);
-                $num_attach_ids = DB()->num_rows($result);
-                DB()->sql_freeresult($result);
+                $attach_ids = OLD_DB()->sql_fetchrowset($result);
+                $num_attach_ids = OLD_DB()->num_rows($result);
+                OLD_DB()->sql_freeresult($result);
 
                 $attach_id = [];
 
@@ -983,12 +983,12 @@ class Attach
 						FROM ' . BB_ATTACHMENTS_DESC . '
 						WHERE attach_id IN (' . implode(', ', $attach_id) . ')';
 
-                    if (!($result = DB()->sql_query($sql))) {
+                    if (!($result = OLD_DB()->sql_query($sql))) {
                         bb_die('Could not query total filesize #2');
                     }
 
-                    $row = DB()->sql_fetchrow($result);
-                    DB()->sql_freeresult($result);
+                    $row = OLD_DB()->sql_fetchrow($result);
+                    OLD_DB()->sql_freeresult($result);
                     $total_filesize = $row['total'];
                 } else {
                     $total_filesize = 0;

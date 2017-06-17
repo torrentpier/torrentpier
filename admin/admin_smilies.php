@@ -53,17 +53,17 @@ if (isset($_GET['import_pack']) || isset($_POST['import_pack'])) {
         // The user has already selected a smile_pak file.. Import it
         if (!empty($clear_current)) {
             $sql = 'DELETE FROM ' . BB_SMILIES;
-            if (!$result = DB()->sql_query($sql)) {
+            if (!$result = OLD_DB()->sql_query($sql)) {
                 bb_die('Could not delete current smilies');
             }
             $datastore->update('smile_replacements');
         } else {
             $sql = 'SELECT code FROM ' . BB_SMILIES;
-            if (!$result = DB()->sql_query($sql)) {
+            if (!$result = OLD_DB()->sql_query($sql)) {
                 bb_die('Could not get current smilies');
             }
 
-            $cur_smilies = DB()->sql_fetchrowset($result);
+            $cur_smilies = OLD_DB()->sql_fetchrowset($result);
 
             for ($i = 0, $iMax = count($cur_smilies); $i < $iMax; $i++) {
                 $k = $cur_smilies[$i]['code'];
@@ -89,18 +89,18 @@ if (isset($_GET['import_pack']) || isset($_POST['import_pack'])) {
                 if (isset($smiles[$k])) {
                     if (!empty($replace_existing)) {
                         $sql = 'UPDATE ' . BB_SMILIES . "
-							SET smile_url = '" . DB()->escape($smile_data[0]) . "', emoticon = '" . DB()->escape($smile_data[1]) . "'
-							WHERE code = '" . DB()->escape($smile_data[$j]) . "'";
+							SET smile_url = '" . OLD_DB()->escape($smile_data[0]) . "', emoticon = '" . OLD_DB()->escape($smile_data[1]) . "'
+							WHERE code = '" . OLD_DB()->escape($smile_data[$j]) . "'";
                     } else {
                         $sql = '';
                     }
                 } else {
                     $sql = 'INSERT INTO ' . BB_SMILIES . " (code, smile_url, emoticon)
-						VALUES('" . DB()->escape($smile_data[$j]) . "', '" . DB()->escape($smile_data[0]) . "', '" . DB()->escape($smile_data[1]) . "')";
+						VALUES('" . OLD_DB()->escape($smile_data[$j]) . "', '" . OLD_DB()->escape($smile_data[0]) . "', '" . OLD_DB()->escape($smile_data[1]) . "')";
                 }
 
                 if ($sql != '') {
-                    $result = DB()->sql_query($sql);
+                    $result = OLD_DB()->sql_query($sql);
                     if (!$result) {
                         bb_die('Could not update smilies #1');
                     }
@@ -135,11 +135,11 @@ if (isset($_GET['import_pack']) || isset($_POST['import_pack'])) {
 
     if ($export_pack == 'send') {
         $sql = 'SELECT * FROM ' . BB_SMILIES;
-        if (!$result = DB()->sql_query($sql)) {
+        if (!$result = OLD_DB()->sql_query($sql)) {
             bb_die('Could not get smiley list');
         }
 
-        $resultset = DB()->sql_fetchrowset($result);
+        $resultset = OLD_DB()->sql_fetchrowset($result);
 
         $smile_pak = '';
         for ($i = 0, $iMax = count($resultset); $i < $iMax; $i++) {
@@ -180,7 +180,7 @@ if (isset($_GET['import_pack']) || isset($_POST['import_pack'])) {
             $smiley_id = (int)$smiley_id;
 
             $sql = 'DELETE FROM ' . BB_SMILIES . ' WHERE smilies_id = ' . $smiley_id;
-            $result = DB()->sql_query($sql);
+            $result = OLD_DB()->sql_query($sql);
             if (!$result) {
                 bb_die('Could not delete smiley');
             }
@@ -194,11 +194,11 @@ if (isset($_GET['import_pack']) || isset($_POST['import_pack'])) {
             $smiley_id = (int)$smiley_id;
 
             $sql = 'SELECT * FROM ' . BB_SMILIES . ' WHERE smilies_id = ' . $smiley_id;
-            $result = DB()->sql_query($sql);
+            $result = OLD_DB()->sql_query($sql);
             if (!$result) {
                 bb_die('Could not obtain emoticon information');
             }
-            $smile_data = DB()->sql_fetchrow($result);
+            $smile_data = OLD_DB()->sql_fetchrow($result);
 
             $filename_list = $smiley_edit_img = '';
             for ($i = 0, $iMax = count($smiley_images); $i < $iMax; $i++) {
@@ -244,9 +244,9 @@ if (isset($_GET['import_pack']) || isset($_POST['import_pack'])) {
 
             // Proceed with updating the smiley table
             $sql = 'UPDATE ' . BB_SMILIES . "
-				SET code = '" . DB()->escape($smile_code) . "', smile_url = '" . DB()->escape($smile_url) . "', emoticon = '" . DB()->escape($smile_emotion) . "'
+				SET code = '" . OLD_DB()->escape($smile_code) . "', smile_url = '" . OLD_DB()->escape($smile_url) . "', emoticon = '" . OLD_DB()->escape($smile_emotion) . "'
 				WHERE smilies_id = $smile_id";
-            if (!($result = DB()->sql_query($sql))) {
+            if (!($result = OLD_DB()->sql_query($sql))) {
                 bb_die('Could not update smilies #2');
             }
             $datastore->update('smile_replacements');
@@ -274,8 +274,8 @@ if (isset($_GET['import_pack']) || isset($_POST['import_pack'])) {
 
             // Save the data to the smiley table
             $sql = 'INSERT INTO ' . BB_SMILIES . " (code, smile_url, emoticon)
-				VALUES ('" . DB()->escape($smile_code) . "', '" . DB()->escape($smile_url) . "', '" . DB()->escape($smile_emotion) . "')";
-            $result = DB()->sql_query($sql);
+				VALUES ('" . OLD_DB()->escape($smile_code) . "', '" . OLD_DB()->escape($smile_url) . "', '" . OLD_DB()->escape($smile_emotion) . "')";
+            $result = OLD_DB()->sql_query($sql);
             if (!$result) {
                 bb_die('Could not insert new smiley');
             }
@@ -286,12 +286,12 @@ if (isset($_GET['import_pack']) || isset($_POST['import_pack'])) {
     }
 } else {
     $sql = 'SELECT * FROM ' . BB_SMILIES;
-    $result = DB()->sql_query($sql);
+    $result = OLD_DB()->sql_query($sql);
     if (!$result) {
         bb_die('Could not obtain smileys from database');
     }
 
-    $smilies = DB()->sql_fetchrowset($result);
+    $smilies = OLD_DB()->sql_fetchrowset($result);
 
     $template->assign_vars(array(
         'TPL_SMILE_MAIN' => true,

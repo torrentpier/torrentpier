@@ -127,20 +127,20 @@ if (isset($_GET['pane']) && $_GET['pane'] == 'left') {
 				AND u.user_id <> ' . GUEST_UID . '
 				AND s.session_time >= ' . (TIMENOW - 300) . '
 			ORDER BY s.session_ip ASC, s.session_time DESC';
-        if (!$result = DB()->sql_query($sql)) {
+        if (!$result = OLD_DB()->sql_query($sql)) {
             bb_die('Could not obtain reged user / online information');
         }
-        $onlinerow_reg = DB()->sql_fetchrowset($result);
+        $onlinerow_reg = OLD_DB()->sql_fetchrowset($result);
 
         $sql = 'SELECT session_logged_in, session_time, session_ip, session_start
 			FROM ' . BB_SESSIONS . '
 			WHERE session_logged_in = 0
 				AND session_time >= ' . (TIMENOW - 300) . '
 			ORDER BY session_ip ASC, session_time DESC';
-        if (!$result = DB()->sql_query($sql)) {
+        if (!$result = OLD_DB()->sql_query($sql)) {
             bb_die('Could not obtain guest user / online information');
         }
-        $onlinerow_guest = DB()->sql_fetchrowset($result);
+        $onlinerow_guest = OLD_DB()->sql_fetchrowset($result);
 
         $reg_userid_ary = array();
 

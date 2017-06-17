@@ -237,11 +237,11 @@ function physical_filename_already_stored($filename)
 		WHERE physical_filename = '" . attach_mod_sql_escape($filename) . "'
 		LIMIT 1";
 
-    if (!($result = DB()->sql_query($sql))) {
+    if (!($result = OLD_DB()->sql_query($sql))) {
         bb_die('Could not get attachment information for filename: ' . htmlspecialchars($filename));
     }
-    $num_rows = DB()->num_rows($result);
-    DB()->sql_freeresult($result);
+    $num_rows = OLD_DB()->num_rows($result);
+    OLD_DB()->sql_freeresult($result);
 
     return $num_rows != 0;
 }
@@ -280,13 +280,13 @@ function get_attachments_from_post($post_id_array)
 			AND a.attach_id = d.attach_id
 		ORDER BY d.filetime $display_order";
 
-    if (!($result = DB()->sql_query($sql))) {
+    if (!($result = OLD_DB()->sql_query($sql))) {
         bb_die('Could not get attachment informations for post number ' . $post_id_array);
     }
 
-    $num_rows = DB()->num_rows($result);
-    $attachments = DB()->sql_fetchrowset($result);
-    DB()->sql_freeresult($result);
+    $num_rows = OLD_DB()->num_rows($result);
+    $attachments = OLD_DB()->sql_fetchrowset($result);
+    OLD_DB()->sql_freeresult($result);
 
     if ($num_rows == 0) {
         return [];
@@ -312,16 +312,16 @@ function get_total_attach_filesize($attach_ids)
 
     $sql = 'SELECT filesize FROM ' . BB_ATTACHMENTS_DESC . " WHERE attach_id IN ($attach_ids)";
 
-    if (!($result = DB()->sql_query($sql))) {
+    if (!($result = OLD_DB()->sql_query($sql))) {
         bb_die('Could not query total filesize');
     }
 
     $total_filesize = 0;
 
-    while ($row = DB()->sql_fetchrow($result)) {
+    while ($row = OLD_DB()->sql_fetchrow($result)) {
         $total_filesize += (int)$row['filesize'];
     }
-    DB()->sql_freeresult($result);
+    OLD_DB()->sql_freeresult($result);
 
     return $total_filesize;
 }
@@ -352,17 +352,17 @@ function attachment_sync_topic($topics)
 			AND p.post_attachment = 1
 			AND a.post_id IS NULL";
 
-    if ($rowset = DB()->fetch_rowset($sql)) {
+    if ($rowset = OLD_DB()->fetch_rowset($sql)) {
         foreach ($rowset as $row) {
             $posts_without_attach[] = $row['post_id'];
         }
         if ($posts_sql = implode(',', $posts_without_attach)) {
-            DB()->query("UPDATE " . BB_POSTS . " SET post_attachment = 0 WHERE post_id IN($posts_sql)");
+            OLD_DB()->query("UPDATE " . BB_POSTS . " SET post_attachment = 0 WHERE post_id IN($posts_sql)");
         }
     }
 
     // Update missing topic_attachment markers
-    DB()->query("
+    OLD_DB()->query("
 		UPDATE " . BB_TOPICS . " t, " . BB_POSTS . " p SET
 			t.topic_attachment = 1
 		WHERE p.topic_id IN($topics)
@@ -379,12 +379,12 @@ function attachment_sync_topic($topics)
 		GROUP BY p.topic_id
 		HAVING SUM(p.post_attachment) = 0";
 
-    if ($rowset = DB()->fetch_rowset($sql)) {
+    if ($rowset = OLD_DB()->fetch_rowset($sql)) {
         foreach ($rowset as $row) {
             $topics_without_attach[] = $row['topic_id'];
         }
         if ($topics_sql = implode(',', $topics_without_attach)) {
-            DB()->query("UPDATE " . BB_TOPICS . " SET topic_attachment = 0 WHERE topic_id IN($topics_sql)");
+            OLD_DB()->query("UPDATE " . BB_TOPICS . " SET topic_attachment = 0 WHERE topic_id IN($topics_sql)");
         }
     }
 }
@@ -435,12 +435,12 @@ function user_in_group($user_id, $group_id)
 			AND g.group_id = $group_id
 		LIMIT 1";
 
-    if (!($result = DB()->sql_query($sql))) {
+    if (!($result = OLD_DB()->sql_query($sql))) {
         bb_die('Could not get user group');
     }
 
-    $num_rows = DB()->num_rows($result);
-    DB()->sql_freeresult($result);
+    $num_rows = OLD_DB()->num_rows($result);
+    OLD_DB()->sql_freeresult($result);
 
     return !($num_rows == 0);
 }
@@ -532,7 +532,7 @@ function get_var($var_name, $default, $multibyte = false)
 function attach_mod_sql_escape($text)
 {
     if (function_exists('mysqli_real_escape_string')) {
-        return DB()->escape_string($text);
+        return OLD_DB()->escape_string($text);
     }
 
     return str_replace("'", "''", str_replace('\\', '\\\\', $text));

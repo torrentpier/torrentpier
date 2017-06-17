@@ -23,7 +23,7 @@ function update_user_level($user_id)
 
     $tmp_table = 'tmp_levels';
 
-    DB()->query("
+    OLD_DB()->query("
 		CREATE TEMPORARY TABLE $tmp_table (
 			user_id MEDIUMINT NOT NULL DEFAULT '0',
 			user_level TINYINT NOT NULL DEFAULT '0',
@@ -31,7 +31,7 @@ function update_user_level($user_id)
 		) ENGINE = MEMORY
 	");
 
-    DB()->query("
+    OLD_DB()->query("
 		REPLACE INTO $tmp_table (user_id, user_level)
 			SELECT u.user_id, " . USER . "
 			FROM " . BB_USERS . " u
@@ -53,7 +53,7 @@ function update_user_level($user_id)
 					$user_groups_in
 	");
 
-    DB()->query("
+    OLD_DB()->query("
 		UPDATE " . BB_USERS . " u, $tmp_table lev SET
 			u.user_level = lev.user_level
 		WHERE lev.user_id = u.user_id
@@ -61,7 +61,7 @@ function update_user_level($user_id)
 				$users_in
 	");
 
-    DB()->query("DROP TEMPORARY TABLE $tmp_table");
+    OLD_DB()->query("DROP TEMPORARY TABLE $tmp_table");
 
     update_user_permissions($user_id);
     delete_orphan_usergroups();
@@ -72,7 +72,7 @@ function delete_group($group_id)
 {
     $group_id = (int)$group_id;
 
-    DB()->query("
+    OLD_DB()->query("
 		DELETE ug, g, aa
 		FROM " . BB_USER_GROUP . " ug
 		LEFT JOIN " . BB_GROUPS . " g ON(g.group_id = $group_id)
@@ -80,20 +80,20 @@ function delete_group($group_id)
 		WHERE ug.group_id = $group_id
 	");
 
-    DB()->query("UPDATE " . BB_POSTS . " SET attach_rg_sig = 0, poster_rg_id = 0 WHERE poster_rg_id = " . $group_id);
+    OLD_DB()->query("UPDATE " . BB_POSTS . " SET attach_rg_sig = 0, poster_rg_id = 0 WHERE poster_rg_id = " . $group_id);
 
     update_user_level('all');
 }
 
 function add_user_into_group($group_id, $user_id, $user_pending = 0, $user_time = TIMENOW)
 {
-    $args = DB()->build_array('INSERT', array(
+    $args = OLD_DB()->build_array('INSERT', array(
         'group_id' => (int)$group_id,
         'user_id' => (int)$user_id,
         'user_pending' => (int)$user_pending,
         'user_time' => (int)$user_time,
     ));
-    DB()->query("REPLACE INTO " . BB_USER_GROUP . $args);
+    OLD_DB()->query("REPLACE INTO " . BB_USER_GROUP . $args);
 
     if (!$user_pending) {
         update_user_level($user_id);
@@ -102,7 +102,7 @@ function add_user_into_group($group_id, $user_id, $user_pending = 0, $user_time 
 
 function delete_user_group($group_id, $user_id)
 {
-    DB()->query("
+    OLD_DB()->query("
 		DELETE FROM " . BB_USER_GROUP . "
 		WHERE user_id = " . (int)$user_id . "
 			AND group_id = " . (int)$group_id . "
@@ -113,12 +113,12 @@ function delete_user_group($group_id, $user_id)
 
 function create_user_group($user_id)
 {
-    DB()->query("INSERT INTO " . BB_GROUPS . " (group_single_user) VALUES (1)");
+    OLD_DB()->query("INSERT INTO " . BB_GROUPS . " (group_single_user) VALUES (1)");
 
-    $group_id = (int)DB()->sql_nextid();
+    $group_id = (int)OLD_DB()->sql_nextid();
     $user_id = (int)$user_id;
 
-    DB()->query("INSERT INTO " . BB_USER_GROUP . " (user_id, group_id, user_time) VALUES ($user_id, $group_id, " . TIMENOW . ")");
+    OLD_DB()->query("INSERT INTO " . BB_USER_GROUP . " (user_id, group_id, user_time) VALUES ($user_id, $group_id, " . TIMENOW . ")");
 
     return $group_id;
 }
@@ -143,7 +143,7 @@ function get_group_data($group_id)
 			LIMIT 1";
     }
     $method = ($group_id === 'all') ? 'fetch_rowset' : 'fetch_row';
-    return DB()->$method($sql);
+    return OLD_DB()->$method($sql);
 }
 
 function delete_permissions($group_id = null, $user_id = null, $cat_id = null)
@@ -157,10 +157,10 @@ function delete_permissions($group_id = null, $user_id = null, $cat_id = null)
 	" : '';
 
     if ($group_id) {
-        DB()->query("DELETE a FROM " . BB_AUTH_ACCESS . " a $forums_join_sql WHERE a.group_id IN($group_id)");
+        OLD_DB()->query("DELETE a FROM " . BB_AUTH_ACCESS . " a $forums_join_sql WHERE a.group_id IN($group_id)");
     }
     if ($user_id) {
-        DB()->query("DELETE a FROM " . BB_AUTH_ACCESS_SNAP . " a $forums_join_sql WHERE a.user_id IN($user_id)");
+        OLD_DB()->query("DELETE a FROM " . BB_AUTH_ACCESS_SNAP . " a $forums_join_sql WHERE a.user_id IN($user_id)");
     }
 }
 
@@ -179,9 +179,9 @@ function store_permissions($group_id, $auth_ary)
             'forum_perm' => (int)$permission,
         );
     }
-    $values = DB()->build_array('MULTI_INSERT', $values);
+    $values = OLD_DB()->build_array('MULTI_INSERT', $values);
 
-    DB()->query("INSERT INTO " . BB_AUTH_ACCESS . $values);
+    OLD_DB()->query("INSERT INTO " . BB_AUTH_ACCESS . $values);
 }
 
 function update_user_permissions($user_id = 'all')
@@ -192,9 +192,9 @@ function update_user_permissions($user_id = 'all')
     $delete_in = ($user_id !== 'all') ? " WHERE user_id IN($user_id)" : '';
     $users_in = ($user_id !== 'all') ? "AND ug.user_id IN($user_id)" : '';
 
-    DB()->query("DELETE FROM " . BB_AUTH_ACCESS_SNAP . $delete_in);
+    OLD_DB()->query("DELETE FROM " . BB_AUTH_ACCESS_SNAP . $delete_in);
 
-    DB()->query("
+    OLD_DB()->query("
 		INSERT INTO " . BB_AUTH_ACCESS_SNAP . "
 			(user_id, forum_id, forum_perm)
 		SELECT
@@ -216,7 +216,7 @@ function update_user_permissions($user_id = 'all')
 function delete_orphan_usergroups()
 {
     // GROUP_SINGLE_USER without AUTH_ACCESS
-    DB()->query("
+    OLD_DB()->query("
 		DELETE g
 		FROM " . BB_GROUPS . " g
 		LEFT JOIN " . BB_AUTH_ACCESS . " aa USING(group_id)
@@ -225,7 +225,7 @@ function delete_orphan_usergroups()
 	");
 
     // orphan USER_GROUP (against GROUP table)
-    DB()->query("
+    OLD_DB()->query("
 		DELETE ug
 		FROM " . BB_USER_GROUP . " ug
 		LEFT JOIN " . BB_GROUPS . " g USING(group_id)

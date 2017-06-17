@@ -108,11 +108,11 @@ $sql = 'SELECT f.*
 	WHERE f.cat_id = c.cat_id
 	ORDER BY c.cat_order, f.forum_order';
 
-if (!$result = DB()->sql_query($sql)) {
+if (!$result = OLD_DB()->sql_query($sql)) {
     bb_die('Could not obtain forum names');
 }
 
-$rowset = DB()->sql_fetchrowset($result);
+$rowset = OLD_DB()->sql_fetchrowset($result);
 $forum_rows = min($max_forum_rows, count($rowset));
 
 foreach ($db_fields_bool as $field_name => $field_def_val) {

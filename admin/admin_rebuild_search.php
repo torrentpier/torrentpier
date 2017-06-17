@@ -43,7 +43,7 @@ $mode = isset($_REQUEST['mode']) ? (string)$_REQUEST['mode'] : '';
 if (isset($_REQUEST['cancel_button'])) {
     // update the rebuild_status
     if ($last_session_id) {
-        DB()->query('
+        OLD_DB()->query('
 			UPDATE ' . BB_SEARCH_REBUILD . ' SET
 				rebuild_session_status = ' . REBUILD_SEARCH_ABORTED . "
 			WHERE rebuild_session_id = $last_session_id
@@ -137,7 +137,7 @@ if ($mode == 'submit' || $mode == 'refresh') {
     list($search_data_size, $search_index_size, $search_tables_size) = get_db_sizes();
 
     // get the post subject/text of each post
-    $result = DB()->query("
+    $result = OLD_DB()->query("
 		SELECT
 			pt.post_id, pt.post_text,
 			IF(p.post_id = t.topic_first_post_id, t.topic_title, '') AS post_subject
@@ -158,7 +158,7 @@ if ($mode == 'submit' || $mode == 'refresh') {
     $timer_expired = false;
     $words_sql = array();
 
-    while ($row = DB()->fetch_next($result) and !$timer_expired) {
+    while ($row = OLD_DB()->fetch_next($result) and !$timer_expired) {
         set_time_limit(600);
         $start_post_id = ($num_rows == 0) ? $row['post_id'] : $start_post_id;
         $end_post_id = $row['post_id'];
@@ -177,7 +177,7 @@ if ($mode == 'submit' || $mode == 'refresh') {
 
     // Store search words
     if ($words_sql) {
-        DB()->query('REPLACE INTO ' . BB_POSTS_SEARCH . DB()->build_array('MULTI_INSERT', $words_sql));
+        OLD_DB()->query('REPLACE INTO ' . BB_POSTS_SEARCH . OLD_DB()->build_array('MULTI_INSERT', $words_sql));
     }
 
     // find how much time the last cycle took
@@ -187,7 +187,7 @@ if ($mode == 'submit' || $mode == 'refresh') {
     if ($num_rows != 0) {
         if ($mode == 'submit') {
             // insert a new session entry
-            $args = DB()->build_array('INSERT', array(
+            $args = OLD_DB()->build_array('INSERT', array(
                 'end_post_id' => (int)$end_post_id,
                 'end_time' => (int)TIMENOW,
                 'last_cycle_time' => (int)$last_cycle_time,
@@ -199,12 +199,12 @@ if ($mode == 'submit' || $mode == 'refresh') {
                 'search_size' => (int)$search_tables_size,
                 'rebuild_session_status' => REBUILD_SEARCH_PROCESSED,
             ));
-            DB()->query('REPLACE INTO ' . BB_SEARCH_REBUILD . $args);
+            OLD_DB()->query('REPLACE INTO ' . BB_SEARCH_REBUILD . $args);
         } else {
             // refresh
 
             // update the last session entry
-            DB()->query('
+            OLD_DB()->query('
 				UPDATE ' . BB_SEARCH_REBUILD . " SET
 					end_post_id     = $end_post_id,
 					end_time        = " . TIMENOW . ",
@@ -260,7 +260,7 @@ if ($mode == 'submit' || $mode == 'refresh') {
         $processing_messages .= ($total_posts_processed == $total_posts) ? $lang['ALL_POSTS_PROCESSED'] : $lang['ALL_SESSION_POSTS_PROCESSED'];
 
         // if we have processed all the db posts we need to update the rebuild_status
-        DB()->query('UPDATE ' . BB_SEARCH_REBUILD . ' SET
+        OLD_DB()->query('UPDATE ' . BB_SEARCH_REBUILD . ' SET
 				rebuild_session_status = ' . REBUILD_SEARCH_COMPLETED . "
 			WHERE rebuild_session_id = $last_session_id
 				AND end_post_id = $max_post_id
@@ -270,8 +270,8 @@ if ($mode == 'submit' || $mode == 'refresh') {
         $table_ary = array(BB_POSTS_SEARCH);
 
         foreach ($table_ary as $table) {
-            DB()->query("ANALYZE  TABLE $table");
-            DB()->query("OPTIMIZE TABLE $table");
+            OLD_DB()->query("ANALYZE  TABLE $table");
+            OLD_DB()->query("OPTIMIZE TABLE $table");
         }
 
         $processing_messages .= '<br />' . $lang['ALL_TABLES_OPTIMIZED'];
@@ -426,11 +426,11 @@ print_page('admin_rebuild_search.tpl', 'admin');
 function get_db_sizes()
 {
     $search_data_size = $search_index_size = 0;
-    $search_table_like = DB()->escape(BB_POSTS_SEARCH);
+    $search_table_like = OLD_DB()->escape(BB_POSTS_SEARCH);
 
-    $sql = 'SHOW TABLE STATUS FROM `' . DB()->selected_db . "` LIKE '$search_table_like'";
+    $sql = 'SHOW TABLE STATUS FROM `' . OLD_DB()->selected_db . "` LIKE '$search_table_like'";
 
-    foreach (DB()->fetch_rowset($sql) as $row) {
+    foreach (OLD_DB()->fetch_rowset($sql) as $row) {
         $search_data_size += $row['Data_length'];
         $search_index_size += $row['Index_length'];
     }
@@ -441,7 +441,7 @@ function get_db_sizes()
 // get the latest post_id in the forum
 function get_latest_post_id()
 {
-    $row = DB()->fetch_row('SELECT MAX(post_id) as post_id FROM ' . BB_POSTS_TEXT);
+    $row = OLD_DB()->fetch_row('SELECT MAX(post_id) as post_id FROM ' . BB_POSTS_TEXT);
 
     return (int)$row['post_id'];
 }
@@ -476,7 +476,7 @@ function get_rebuild_session_details($id, $details = 'all')
         $sql = 'SELECT * FROM ' . BB_SEARCH_REBUILD . ' ORDER BY rebuild_session_id DESC LIMIT 1';
     }
 
-    if ($row = DB()->fetch_row($sql)) {
+    if ($row = OLD_DB()->fetch_row($sql)) {
         $session_details = ($details == 'all') ? $row : $row[$details];
     }
 
@@ -492,7 +492,7 @@ function get_processed_posts($mode = 'session')
 
     if ($mode == 'total') {
         $sql = 'SELECT SUM(session_posts) as posts FROM ' . BB_SEARCH_REBUILD;
-        $row = DB()->fetch_row($sql);
+        $row = OLD_DB()->fetch_row($sql);
     } else {
         $row['posts'] = $last_session_data['session_posts'];
     }
@@ -511,7 +511,7 @@ function get_total_posts($mode = 'after', $post_id = 0)
         $sql = 'SELECT COUNT(*) as total_posts FROM ' . BB_POSTS_TEXT;
     }
 
-    $row = DB()->fetch_row($sql);
+    $row = OLD_DB()->fetch_row($sql);
     $totalPosts = (int)$row['total_posts'];
 
     if ($totalPosts < 0) {
@@ -523,14 +523,14 @@ function get_total_posts($mode = 'after', $post_id = 0)
 
 function clear_search_tables($mode = '')
 {
-    DB()->query('DELETE FROM ' . BB_SEARCH_REBUILD);
+    OLD_DB()->query('DELETE FROM ' . BB_SEARCH_REBUILD);
 
     if ($mode) {
         $table_ary = array(BB_POSTS_SEARCH);
 
         foreach ($table_ary as $table) {
             $sql = (($mode == 1) ? 'DELETE FROM ' : 'TRUNCATE TABLE ') . $table;
-            DB()->query($sql);
+            OLD_DB()->query($sql);
         }
     }
 }

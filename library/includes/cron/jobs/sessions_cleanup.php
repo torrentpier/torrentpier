@@ -18,13 +18,13 @@ $user_session_gc_time = $user_session_expire_time - (int)$bb_cfg['user_session_g
 $admin_session_gc_time = $admin_session_expire_time;
 
 // ############################ Tables LOCKED ################################
-DB()->lock(array(
+OLD_DB()->lock(array(
     BB_USERS . ' u',
     BB_SESSIONS . ' s',
 ));
 
 // Update user's session time
-DB()->query("
+OLD_DB()->query("
 	UPDATE
 		" . BB_USERS . " u,
 		" . BB_SESSIONS . " s
@@ -40,11 +40,11 @@ DB()->query("
 		)
 ");
 
-DB()->unlock();
+OLD_DB()->unlock();
 // ############################ Tables UNLOCKED ##############################
 
 // Delete staled sessions
-DB()->query("
+OLD_DB()->query("
 	DELETE s
 	FROM " . BB_SESSIONS . " s
 	WHERE

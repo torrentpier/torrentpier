@@ -34,9 +34,9 @@ if (isset($_POST['del_my_post'])) {
         bb_die($lang['NONE_SELECTED']);
     }
 
-    DB()->query("UPDATE " . BB_POSTS . " SET user_post = 0 WHERE poster_id = {$user->id} AND topic_id IN($topic_csv)");
+    OLD_DB()->query("UPDATE " . BB_POSTS . " SET user_post = 0 WHERE poster_id = {$user->id} AND topic_id IN($topic_csv)");
 
-    if (DB()->affected_rows()) {
+    if (OLD_DB()->affected_rows()) {
         //bb_die('Выбранные темы ['. count($_POST['topic_id_list']) .' шт.] удалены из списка "Мои сообщения"');
         bb_die($lang['DEL_MY_MESSAGE']);
     } else {
@@ -53,7 +53,7 @@ if (isset($_POST['del_my_post'])) {
         redirectToUrl('index.php');
     }
 
-    DB()->query("UPDATE " . BB_POSTS . " SET user_post = 1 WHERE poster_id = {$user->id}");
+    OLD_DB()->query("UPDATE " . BB_POSTS . " SET user_post = 1 WHERE poster_id = {$user->id}");
 
     redirectToUrl("search.php?u={$user->id}");
 }
@@ -319,7 +319,7 @@ $datastore->rm('cat_forums');
 
 // Restore previously found items list and search settings if we have valid $search_id
 if ($search_id) {
-    $row = DB()->fetch_row("
+    $row = OLD_DB()->fetch_row("
 		SELECT search_array, search_settings
 		FROM " . BB_SEARCH . "
 		WHERE session_id = '$session_id'
@@ -432,7 +432,7 @@ $title_match = ($text_match_sql && ($title_only_val || $bb_cfg['disable_ft_searc
 $post_mode = (!$dl_search && ($display_as_val == $as_posts || isset($_GET['search_author'])));
 
 // Start building SQL
-$SQL = DB()->get_empty_sql_array();
+$SQL = OLD_DB()->get_empty_sql_array();
 
 // Displaying "as posts" mode
 if ($post_mode) {
@@ -546,7 +546,7 @@ if ($post_mode) {
 	";
 
     // Fetch posts data
-    if (!$unsorted_rows = DB()->fetch_rowset($sql)) {
+    if (!$unsorted_rows = OLD_DB()->fetch_rowset($sql)) {
         bb_die($lang['NO_SEARCH_MATCH']);
     }
     $tmp = $sorted_rows = array();
@@ -740,7 +740,7 @@ else {
     }
 
     // Build SQL for displaying topics
-    $SQL = DB()->get_empty_sql_array();
+    $SQL = OLD_DB()->get_empty_sql_array();
     $join_dl = ($bb_cfg['show_dl_status_in_search'] && !IS_GUEST);
 
     $SQL['SELECT'][] = "
@@ -771,7 +771,7 @@ else {
 
     // Fetch topics data
     $topic_rows = array();
-    foreach (DB()->fetch_rowset($SQL) as $row) {
+    foreach (OLD_DB()->fetch_rowset($SQL) as $row) {
         $topic_rows[$row['topic_id']] = $row;
     }
     if (!$topic_rows) {
@@ -846,7 +846,7 @@ function fetch_search_ids($sql, $search_type = SEARCH_TYPE_POST)
     global $lang, $search_id, $session_id, $items_found, $per_page;
 
     $items_found = array();
-    foreach (DB()->fetch_rowset($sql) as $row) {
+    foreach (OLD_DB()->fetch_rowset($sql) as $row) {
         $items_found[] = $row['item_id'];
     }
     if (!$items_count = count($items_found)) {
@@ -882,12 +882,12 @@ function fetch_search_ids($sql, $search_type = SEARCH_TYPE_POST)
         foreach ($save_in_db as $name) {
             $curr_set[$GLOBALS["{$name}_key"]] = $GLOBALS["{$name}_val"];
         }
-        $search_settings = DB()->escape(serialize($curr_set));
+        $search_settings = OLD_DB()->escape(serialize($curr_set));
 
         $columns = 'session_id,   search_type,   search_id,   search_time,    search_settings,    search_array';
         $values = "'$session_id', $search_type, '$search_id', " . TIMENOW . ", '$search_settings', '$search_array'";
 
-        DB()->query("REPLACE INTO " . BB_SEARCH . " ($columns) VALUES ($values)");
+        OLD_DB()->query("REPLACE INTO " . BB_SEARCH . " ($columns) VALUES ($values)");
     }
 
     return array_slice($items_found, 0, $per_page);
@@ -902,9 +902,9 @@ function prevent_huge_searches($SQL)
         $SQL['ORDER BY'] = array();
         $SQL['LIMIT'] = array('0');
 
-        if (DB()->query($SQL) and $row = DB()->fetch_row("SELECT FOUND_ROWS() AS rows_count")) {
+        if (OLD_DB()->query($SQL) and $row = OLD_DB()->fetch_row("SELECT FOUND_ROWS() AS rows_count")) {
             if ($row['rows_count'] > $bb_cfg['limit_max_search_results']) {
-                #				bb_log(str_compact(DB()->build_sql($SQL)) ." [{$row['rows_count']} rows]". LOG_LF, 'sql_huge_search');
+                #				bb_log(str_compact(OLD_DB()->build_sql($SQL)) ." [{$row['rows_count']} rows]". LOG_LF, 'sql_huge_search');
                 bb_die('Too_many_search_results');
             }
         }
@@ -923,13 +923,13 @@ function username_search($search_match)
         $sql = "
 			SELECT username
 			FROM " . BB_USERS . "
-			WHERE username LIKE '" . DB()->escape($username_search) . "'
+			WHERE username LIKE '" . OLD_DB()->escape($username_search) . "'
 				AND user_id <> " . GUEST_UID . "
 			ORDER BY username
 			LIMIT 200
 		";
 
-        foreach (DB()->fetch_rowset($sql) as $row) {
+        foreach (OLD_DB()->fetch_rowset($sql) as $row) {
             $username = htmlCHR(stripslashes(html_entity_decode($row['username'])));
             $username_list .= '<option value="' . $username . '">' . $username . '</option>';
         }

@@ -162,7 +162,7 @@ $time_end_val = 86400 + mktime(0, 0, 0, date('m', $datetime_val), date('d', $dat
 $time_start_val = $time_end_val - 86400 * $daysback_val;
 
 // First log time
-$row = DB()->fetch_row('SELECT MIN(log_time) AS first_log_time FROM ' . BB_LOG);
+$row = OLD_DB()->fetch_row('SELECT MIN(log_time) AS first_log_time FROM ' . BB_LOG);
 $first_log_time = (int)$row['first_log_time'];
 
 // Title match
@@ -170,7 +170,7 @@ $title_match_val = $title_match_sql = '';
 
 if ($var =& $_REQUEST[$title_match_key]) {
     if ($tmp_title_match = substr(urldecode(trim($var)), 0, $title_match_max_len)) {
-        $title_match_sql = DB()->escape($tmp_title_match);
+        $title_match_sql = OLD_DB()->escape($tmp_title_match);
         $url = url_arg($url, $title_match_key, urlencode($tmp_title_match));
     }
 }
@@ -191,7 +191,7 @@ $sql = 'SELECT l.*, u.*
 	$sort_val
 	LIMIT $start, " . ($per_page + 1);
 
-$log_rowset = DB()->fetch_rowset($sql);
+$log_rowset = OLD_DB()->fetch_rowset($sql);
 $log_count = count($log_rowset);
 
 if ($log_count == $per_page + 1) {

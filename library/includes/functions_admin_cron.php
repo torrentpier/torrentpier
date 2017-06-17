@@ -14,16 +14,16 @@ function run_jobs($jobs)
     define('IN_CRON', true);
 
     $sql = "SELECT cron_script FROM " . BB_CRON . " WHERE cron_id IN ($jobs)";
-    if (!$result = DB()->sql_query($sql)) {
+    if (!$result = OLD_DB()->sql_query($sql)) {
         bb_die('Could not obtain cron script');
     }
 
-    while ($row = DB()->sql_fetchrow($result)) {
+    while ($row = OLD_DB()->sql_fetchrow($result)) {
         $job = $row['cron_script'];
         $job_script = INC_DIR . '/cron/jobs/' . $job;
         require($job_script);
     }
-    DB()->query("
+    OLD_DB()->query("
 			UPDATE " . BB_CRON . " SET
 				last_run = NOW(),
 				run_counter = run_counter + 1,
@@ -52,14 +52,14 @@ function run_jobs($jobs)
 
 function delete_jobs($jobs)
 {
-    DB()->query("DELETE FROM " . BB_CRON . " WHERE cron_id IN ($jobs)");
+    OLD_DB()->query("DELETE FROM " . BB_CRON . " WHERE cron_id IN ($jobs)");
     return;
 }
 
 function toggle_active($jobs, $cron_action)
 {
     $active = ($cron_action == 'disable') ? 0 : 1;
-    DB()->query("UPDATE " . BB_CRON . " SET cron_active = $active WHERE cron_id IN ($jobs)");
+    OLD_DB()->query("UPDATE " . BB_CRON . " SET cron_active = $active WHERE cron_id IN ($jobs)");
     return;
 }
 
@@ -85,7 +85,7 @@ function validate_cron_post($cron_arr)
 
 function insert_cron_job($cron_arr)
 {
-    $row = DB()->fetch_row("SELECT cron_title, cron_script FROM " . BB_CRON . " WHERE cron_title = '" . $_POST['cron_title'] . "' or cron_script = '" . $_POST['cron_script'] . "' ");
+    $row = OLD_DB()->fetch_row("SELECT cron_title, cron_script FROM " . BB_CRON . " WHERE cron_title = '" . $_POST['cron_title'] . "' or cron_script = '" . $_POST['cron_script'] . "' ");
 
     if ($row) {
         global $lang;
@@ -117,7 +117,7 @@ function insert_cron_job($cron_arr)
     $disable_board = $cron_arr['disable_board'];
     $run_counter = $cron_arr['run_counter'];
 
-    DB()->query("INSERT INTO " . BB_CRON . " (cron_active, cron_title, cron_script, schedule, run_day, run_time, run_order, last_run, next_run, run_interval, log_enabled, log_file, log_sql_queries, disable_board, run_counter) VALUES (
+    OLD_DB()->query("INSERT INTO " . BB_CRON . " (cron_active, cron_title, cron_script, schedule, run_day, run_time, run_order, last_run, next_run, run_interval, log_enabled, log_file, log_sql_queries, disable_board, run_counter) VALUES (
 	$cron_active, '$cron_title', '$cron_script', '$schedule', '$run_day', '$run_time', '$run_order', '$last_run', '$next_run', '$run_interval', $log_enabled, '$log_file', $log_sql_queries, $disable_board, '$run_counter')");
 }
 
@@ -125,8 +125,8 @@ function update_cron_job($cron_arr)
 {
     $cron_id = $cron_arr['cron_id'];
     $cron_active = $cron_arr['cron_active'];
-    $cron_title = DB()->escape($cron_arr['cron_title']);
-    $cron_script = DB()->escape($cron_arr['cron_script']);
+    $cron_title = OLD_DB()->escape($cron_arr['cron_title']);
+    $cron_script = OLD_DB()->escape($cron_arr['cron_script']);
     $schedule = $cron_arr['schedule'];
     $run_day = $cron_arr['run_day'];
     $run_time = $cron_arr['run_time'];
@@ -135,12 +135,12 @@ function update_cron_job($cron_arr)
     $next_run = $cron_arr['next_run'];
     $run_interval = $cron_arr['run_interval'];
     $log_enabled = $cron_arr['log_enabled'];
-    $log_file = DB()->escape($cron_arr['log_file']);
+    $log_file = OLD_DB()->escape($cron_arr['log_file']);
     $log_sql_queries = $cron_arr['log_sql_queries'];
     $disable_board = $cron_arr['disable_board'];
     $run_counter = $cron_arr['run_counter'];
 
-    DB()->query("UPDATE " . BB_CRON . " SET
+    OLD_DB()->query("UPDATE " . BB_CRON . " SET
 		cron_active = '$cron_active',
 		cron_title = '$cron_title',
 		cron_script = '$cron_script',

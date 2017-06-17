@@ -41,22 +41,22 @@ class AttachPosting extends Attach
             if ((count($this->attachment_list) > 0 || $this->post_attach) && !isset($_POST['update_attachment'])) {
                 $sql = 'UPDATE ' . BB_POSTS . ' SET post_attachment = 1 WHERE post_id = ' . (int)$post_id;
 
-                if (!DB()->sql_query($sql)) {
+                if (!OLD_DB()->sql_query($sql)) {
                     bb_die('Unable to update posts table');
                 }
 
                 $sql = 'SELECT topic_id FROM ' . BB_POSTS . ' WHERE post_id = ' . (int)$post_id;
 
-                if (!($result = DB()->sql_query($sql))) {
+                if (!($result = OLD_DB()->sql_query($sql))) {
                     bb_die('Unable to select posts table');
                 }
 
-                $row = DB()->sql_fetchrow($result);
-                DB()->sql_freeresult($result);
+                $row = OLD_DB()->sql_fetchrow($result);
+                OLD_DB()->sql_freeresult($result);
 
                 $sql = 'UPDATE ' . BB_TOPICS . ' SET topic_attachment = 1 WHERE topic_id = ' . (int)$row['topic_id'];
 
-                if (!DB()->sql_query($sql)) {
+                if (!OLD_DB()->sql_query($sql)) {
                     bb_die('Unable to update topics table');
                 }
             }

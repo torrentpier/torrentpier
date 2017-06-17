@@ -25,28 +25,28 @@ if (!isset($_REQUEST['dosearch'])) {
 					WHERE group_single_user = 0
 						ORDER BY group_name ASC';
 
-    if (!$result = DB()->sql_query($sql)) {
+    if (!$result = OLD_DB()->sql_query($sql)) {
         bb_die('Could not select group data #1');
     }
 
     $group_list = '';
 
-    if (DB()->num_rows($result) != 0) {
+    if (OLD_DB()->num_rows($result) != 0) {
         $template->assign_block_vars('groups_exist', array());
 
-        while ($row = DB()->sql_fetchrow($result)) {
+        while ($row = OLD_DB()->sql_fetchrow($result)) {
             $group_list .= '<option value="' . $row['group_id'] . '">' . strip_tags(htmlspecialchars($row['group_name'])) . '</option>';
         }
     }
 
     $sql = 'SELECT * FROM ' . BB_RANKS . ' WHERE rank_special = 1 ORDER BY rank_title';
-    if (!($result = DB()->sql_query($sql))) {
+    if (!($result = OLD_DB()->sql_query($sql))) {
         bb_die('Could not obtain ranks data');
     }
     $rank_select_box = '';
-    if (DB()->num_rows($result) != 0) {
+    if (OLD_DB()->num_rows($result) != 0) {
         $template->assign_block_vars('ranks_exist', array());
-        while ($row = DB()->sql_fetchrow($result)) {
+        while ($row = OLD_DB()->sql_fetchrow($result)) {
             $rank = $row['rank_title'];
             $rank_id = $row['rank_id'];
             $rank_select_box .= '<option value="' . $rank_id . '">' . $rank . '</option>';
@@ -60,19 +60,19 @@ if (!isset($_REQUEST['dosearch'])) {
 				FROM ( ' . BB_FORUMS . ' AS f INNER JOIN ' . BB_CATEGORIES . ' AS c ON c.cat_id = f.cat_id )
 				ORDER BY c.cat_order, f.forum_order ASC';
 
-    if (!$result = DB()->sql_query($sql)) {
+    if (!$result = OLD_DB()->sql_query($sql)) {
         bb_die('Could not select forum data');
     }
 
     $forums = array();
 
-    if (DB()->num_rows($result) != 0) {
+    if (OLD_DB()->num_rows($result) != 0) {
         $template->assign_block_vars('forums_exist', array());
 
         $last_cat_id = -1;
         $forums_list = '';
 
-        while ($row = DB()->sql_fetchrow($result)) {
+        while ($row = OLD_DB()->sql_fetchrow($result)) {
             if ($row['cat_id'] != $last_cat_id) {
                 $forums_list .= '<optgroup label="' . htmlCHR($row['cat_title']) . '">';
                 $last_cat_id = $row['cat_id'];
@@ -265,8 +265,8 @@ if (!isset($_REQUEST['dosearch'])) {
                 bb_die($lang['SEARCH_INVALID_USERNAME']);
             }
 
-            $total_sql .= 'SELECT COUNT(user_id) AS total FROM ' . BB_USERS . " WHERE {$lower_b}username{$lower_e} $op '" . DB()->escape($username) . "' AND user_id <> " . GUEST_UID;
-            $select_sql .= "	WHERE {$lower_b}u.username{$lower_e} $op '" . DB()->escape($username) . "' AND u.user_id <> " . GUEST_UID;
+            $total_sql .= 'SELECT COUNT(user_id) AS total FROM ' . BB_USERS . " WHERE {$lower_b}username{$lower_e} $op '" . OLD_DB()->escape($username) . "' AND user_id <> " . GUEST_UID;
+            $select_sql .= "	WHERE {$lower_b}u.username{$lower_e} $op '" . OLD_DB()->escape($username) . "' AND u.user_id <> " . GUEST_UID;
             break;
 
         case 'search_email':
@@ -286,8 +286,8 @@ if (!isset($_REQUEST['dosearch'])) {
                 bb_die($lang['SEARCH_INVALID_EMAIL']);
             }
 
-            $total_sql .= 'SELECT COUNT(user_id) AS total FROM ' . BB_USERS . " WHERE {$lower_b}user_email{$lower_e} $op '" . DB()->escape($email) . "' AND user_id <> " . GUEST_UID;
-            $select_sql .= "	WHERE {$lower_b}u.user_email{$lower_e} $op '" . DB()->escape($email) . "' AND u.user_id <> " . GUEST_UID;
+            $total_sql .= 'SELECT COUNT(user_id) AS total FROM ' . BB_USERS . " WHERE {$lower_b}user_email{$lower_e} $op '" . OLD_DB()->escape($email) . "' AND user_id <> " . GUEST_UID;
+            $select_sql .= "	WHERE {$lower_b}u.user_email{$lower_e} $op '" . OLD_DB()->escape($email) . "' AND u.user_id <> " . GUEST_UID;
             break;
 
         case 'search_ip':
@@ -326,17 +326,17 @@ if (!isset($_REQUEST['dosearch'])) {
             $ip_users_sql = '';
             $sql = 'SELECT poster_id FROM ' . BB_POSTS . ' WHERE poster_id <> ' . GUEST_UID . " AND ($where_sql) GROUP BY poster_id";
 
-            if (!$result = DB()->sql_query($sql)) {
+            if (!$result = OLD_DB()->sql_query($sql)) {
                 bb_die('Could not count users #1');
             }
 
-            if (DB()->num_rows($result) == 0) {
+            if (OLD_DB()->num_rows($result) == 0) {
                 $no_result_search = true;
             } else {
-                $total_pages['total'] = DB()->num_rows($result);
+                $total_pages['total'] = OLD_DB()->num_rows($result);
                 $total_sql = null;
                 $ip_users_sql = '';
-                while ($row = DB()->sql_fetchrow($result)) {
+                while ($row = OLD_DB()->sql_fetchrow($result)) {
                     $ip_users_sql .= ($ip_users_sql == '') ? $row['poster_id'] : ', ' . $row['poster_id'];
                 }
             }
@@ -344,16 +344,16 @@ if (!isset($_REQUEST['dosearch'])) {
             $where_sql .= ($ip_in_sql != '') ? "user_last_ip IN ($ip_in_sql)" : '';
             $where_sql .= ($ip_like_sql_flylast != '') ? ($where_sql != '') ? " OR $ip_like_sql_flylast" : "$ip_like_sql_flylast" : '';
             $sql = 'SELECT user_id FROM ' . BB_USERS . ' WHERE user_id <> ' . GUEST_UID . " AND ($where_sql) GROUP BY user_id";
-            if (!$result = DB()->sql_query($sql)) {
+            if (!$result = OLD_DB()->sql_query($sql)) {
                 bb_die('Could not count users #2');
             }
-            if (DB()->num_rows($result) != 0) {
+            if (OLD_DB()->num_rows($result) != 0) {
                 if ($no_result_search == true) {
                     $no_result_search = false;
                 }
-                $total_pages['total'] = DB()->num_rows($result);
+                $total_pages['total'] = OLD_DB()->num_rows($result);
                 $total_sql = null;
-                while ($row = DB()->sql_fetchrow($result)) {
+                while ($row = OLD_DB()->sql_fetchrow($result)) {
                     $ip_users_sql .= ($ip_users_sql == '') ? $row['user_id'] : ', ' . $row['user_id'];
                 }
             }
@@ -361,16 +361,16 @@ if (!isset($_REQUEST['dosearch'])) {
             $where_sql .= ($ip_in_sql != '') ? "user_reg_ip IN ($ip_in_sql)" : '';
             $where_sql .= ($ip_like_sql_flyreg != '') ? ($where_sql != '') ? " OR $ip_like_sql_flyreg" : "$ip_like_sql_flyreg" : '';
             $sql = 'SELECT user_id FROM ' . BB_USERS . ' WHERE user_id <> ' . GUEST_UID . " AND ($where_sql) GROUP BY user_id";
-            if (!$result = DB()->sql_query($sql)) {
+            if (!$result = OLD_DB()->sql_query($sql)) {
                 bb_die('Could not count users #3');
             }
-            if (DB()->num_rows($result) != 0) {
+            if (OLD_DB()->num_rows($result) != 0) {
                 if ($no_result_search == true) {
                     $no_result_search = false;
                 }
-                $total_pages['total'] = DB()->num_rows($result);
+                $total_pages['total'] = OLD_DB()->num_rows($result);
                 $total_sql = null;
-                while ($row = DB()->sql_fetchrow($result)) {
+                while ($row = OLD_DB()->sql_fetchrow($result)) {
                     $ip_users_sql .= ($ip_users_sql == '') ? $row['user_id'] : ', ' . $row['user_id'];
                 }
             }
@@ -433,15 +433,15 @@ if (!isset($_REQUEST['dosearch'])) {
 
             $sql = 'SELECT group_name FROM ' . BB_GROUPS . " WHERE group_id = $group_id AND group_single_user = 0";
 
-            if (!$result = DB()->sql_query($sql)) {
+            if (!$result = OLD_DB()->sql_query($sql)) {
                 bb_die('Could not select group data #2');
             }
 
-            if (DB()->num_rows($result) == 0) {
+            if (OLD_DB()->num_rows($result) == 0) {
                 bb_die($lang['SEARCH_INVALID_GROUP']);
             }
 
-            $group_name = DB()->sql_fetchrow($result);
+            $group_name = OLD_DB()->sql_fetchrow($result);
 
             $text = sprintf($lang['SEARCH_FOR_GROUP'], strip_tags(htmlspecialchars($group_name['group_name'])));
 
@@ -468,15 +468,15 @@ if (!isset($_REQUEST['dosearch'])) {
 
             $sql = 'SELECT rank_title FROM ' . BB_RANKS . " WHERE rank_id = $rank_id AND rank_special = 1";
 
-            if (!$result = DB()->sql_query($sql)) {
+            if (!$result = OLD_DB()->sql_query($sql)) {
                 bb_die('Could not select rank data');
             }
 
-            if (DB()->num_rows($result) == 0) {
+            if (OLD_DB()->num_rows($result) == 0) {
                 bb_die($lang['SEARCH_INVALID_RANK']);
             }
 
-            $rank_title = DB()->sql_fetchrow($result);
+            $rank_title = OLD_DB()->sql_fetchrow($result);
 
             $text = sprintf($lang['SEARCH_FOR_RANK'], strip_tags(htmlspecialchars($rank_title['rank_title'])));
 
@@ -618,10 +618,10 @@ if (!isset($_REQUEST['dosearch'])) {
 
             $total_sql .= 'SELECT COUNT(user_id) AS total
 							FROM ' . BB_USERS . "
-								WHERE {$lower_b}$field{$lower_e} $op '" . DB()->escape($userfield_value) . "'
+								WHERE {$lower_b}$field{$lower_e} $op '" . OLD_DB()->escape($userfield_value) . "'
 									AND user_id <> " . GUEST_UID;
 
-            $select_sql .= "	WHERE {$lower_b}u.$field{$lower_e} $op '" . DB()->escape($userfield_value) . "'
+            $select_sql .= "	WHERE {$lower_b}u.$field{$lower_e} $op '" . OLD_DB()->escape($userfield_value) . "'
 									AND u.user_id <> " . GUEST_UID;
             break;
 
@@ -675,10 +675,10 @@ if (!isset($_REQUEST['dosearch'])) {
 
             $total_sql .= 'SELECT COUNT(user_id) AS total
 							FROM ' . BB_USERS . "
-								WHERE user_lang = '" . DB()->escape($language_type) . "'
+								WHERE user_lang = '" . OLD_DB()->escape($language_type) . "'
 									AND user_id <> " . GUEST_UID;
 
-            $select_sql .= "	WHERE u.user_lang = '" . DB()->escape($language_type) . "'
+            $select_sql .= "	WHERE u.user_lang = '" . OLD_DB()->escape($language_type) . "'
 									AND u.user_id <> " . GUEST_UID;
             break;
 
@@ -703,15 +703,15 @@ if (!isset($_REQUEST['dosearch'])) {
 
             $sql = 'SELECT forum_name FROM ' . BB_FORUMS . ' WHERE forum_id = ' . $moderators_forum;
 
-            if (!$result = DB()->sql_query($sql)) {
+            if (!$result = OLD_DB()->sql_query($sql)) {
                 bb_die('Could not select forum data');
             }
 
-            if (DB()->num_rows($result) == 0) {
+            if (OLD_DB()->num_rows($result) == 0) {
                 bb_die($lang['SEARCH_INVALID_MODERATORS']);
             }
 
-            $forum_name = DB()->sql_fetchrow($result);
+            $forum_name = OLD_DB()->sql_fetchrow($result);
 
             $text = sprintf($lang['SEARCH_FOR_MODERATORS'], htmlCHR($forum_name['forum_name']));
 
@@ -853,11 +853,11 @@ if (!isset($_REQUEST['dosearch'])) {
     $select_sql .= " $limit";
 
     if (null !== $total_sql) {
-        if (!$result = DB()->sql_query($total_sql)) {
+        if (!$result = OLD_DB()->sql_query($total_sql)) {
             bb_die('Could not count users');
         }
 
-        $total_pages = DB()->sql_fetchrow($result);
+        $total_pages = OLD_DB()->sql_fetchrow($result);
 
         if ($total_pages['total'] == 0) {
             bb_die($lang['SEARCH_NO_RESULTS']);
@@ -892,11 +892,11 @@ if (!isset($_REQUEST['dosearch'])) {
         'S_POST_ACTION' => "$base_url&sort=$sort&order=$order"
     ));
 
-    if (!$result = DB()->sql_query($select_sql)) {
+    if (!$result = OLD_DB()->sql_query($select_sql)) {
         bb_die('Could not select user data');
     }
 
-    $rowset = DB()->sql_fetchrowset($result);
+    $rowset = OLD_DB()->sql_fetchrowset($result);
 
     $users_sql = '';
 
@@ -906,7 +906,7 @@ if (!isset($_REQUEST['dosearch'])) {
 
     $sql = 'SELECT ban_userid AS user_id FROM ' . BB_BANLIST . " WHERE ban_userid IN ($users_sql)";
 
-    if (!$result = DB()->sql_query($sql)) {
+    if (!$result = OLD_DB()->sql_query($sql)) {
         bb_die('Could not select banned data');
     }
 
@@ -914,7 +914,7 @@ if (!isset($_REQUEST['dosearch'])) {
 
     $banned = array();
 
-    while ($row = DB()->sql_fetchrow($result)) {
+    while ($row = OLD_DB()->sql_fetchrow($result)) {
         $banned[$row['user_id']] = true;
     }
 

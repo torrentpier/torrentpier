@@ -157,8 +157,8 @@ switch ($field) {
         $this->ajax_die("invalid profile field: $field");
 }
 
-$value_sql = DB()->escape($value, true);
-DB()->query("UPDATE $table SET $field = $value_sql WHERE user_id = $user_id");
+$value_sql = OLD_DB()->escape($value, true);
+OLD_DB()->query("UPDATE $table SET $field = $value_sql WHERE user_id = $user_id");
 
 cache_rm_user_sessions($user_id);
 

@@ -30,7 +30,7 @@ echo '<html><body><head></head>';
 echo '<br /><br /><table border="1" cellspacing="0" cellpadding="6" align="center">';
 
 foreach ($sql as $i => $query) {
-    $row = mysqli_fetch_row(DB()->query($query));
+    $row = mysqli_fetch_row(OLD_DB()->query($query));
     echo "<tr><td>{$lang['TR_STATS'][$i]}</td><td><b>{$row[0]}</b></td>";
 }
 

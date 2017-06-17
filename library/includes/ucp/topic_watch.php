@@ -22,7 +22,7 @@ $per_page = $bb_cfg['topics_per_page'];
 if (isset($_POST['topic_id_list'])) {
     $topic_ids = implode(",", $_POST['topic_id_list']);
     $sql = "DELETE FROM " . BB_TOPICS_WATCH . "  WHERE topic_id IN(" . $topic_ids . ") AND user_id = $user_id";
-    if (!($result = DB()->sql_query($sql))) {
+    if (!($result = OLD_DB()->sql_query($sql))) {
         bb_die('Could not delete topic watch information #1');
     }
 }
@@ -33,12 +33,12 @@ $template->assign_vars(array(
 ));
 
 $sql = "SELECT COUNT(topic_id) as watch_count FROM " . BB_TOPICS_WATCH . " WHERE user_id = $user_id";
-if (!($result = DB()->sql_query($sql))) {
+if (!($result = OLD_DB()->sql_query($sql))) {
     bb_die('Could not obtain watch topic information #2');
 }
-$row = DB()->sql_fetchrow($result);
+$row = OLD_DB()->sql_fetchrow($result);
 $watch_count = ($row['watch_count']) ?: 0;
-DB()->sql_freeresult($result);
+OLD_DB()->sql_freeresult($result);
 
 if ($watch_count > 0) {
     $sql = "SELECT w.*, t.*, f.*, u.*, u2.username as last_username, u2.user_id as last_user_id,
@@ -52,10 +52,10 @@ if ($watch_count > 0) {
 		AND w.user_id = $user_id
 	GROUP BY t.topic_last_post_time DESC
 	LIMIT $start, $per_page";
-    if (!($result = DB()->sql_query($sql))) {
+    if (!($result = OLD_DB()->sql_query($sql))) {
         bb_die('Could not obtain watch topic information #3');
     }
-    $watch = DB()->sql_fetchrowset($result);
+    $watch = OLD_DB()->sql_fetchrowset($result);
 
     if ($watch) {
         for ($i = 0, $iMax = count($watch); $i < $iMax; $i++) {
@@ -88,7 +88,7 @@ if ($watch_count > 0) {
             'PER_PAGE' => $per_page,
         ));
     }
-    DB()->sql_freeresult($result);
+    OLD_DB()->sql_freeresult($result);
 } else {
     meta_refresh('index.php', 3);
     bb_die($lang['NO_WATCHED_TOPICS']);

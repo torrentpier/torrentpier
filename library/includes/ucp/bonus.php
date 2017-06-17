@@ -43,7 +43,7 @@ if (isset($_POST['bonus_id'])) {
         bb_die($message);
     }
 
-    DB()->query("UPDATE " . BB_BT_USERS . " bu, " . BB_USERS . " u
+    OLD_DB()->query("UPDATE " . BB_BT_USERS . " bu, " . BB_USERS . " u
 		SET
 			bu.u_up_total   = u_up_total    + $upload,
 			u.user_points   = u.user_points - $points

@@ -46,7 +46,7 @@ $forum_store_fields += array_flip(array(
 // Categories
 $sql = "SELECT * FROM " . BB_CATEGORIES . " ORDER BY cat_order";
 
-foreach (DB()->fetch_rowset($sql) as $row) {
+foreach (OLD_DB()->fetch_rowset($sql) as $row) {
     $data['c'][$row['cat_id']] = $row;
     $data['cat_title_html'][$row['cat_id']] = htmlCHR($row['cat_title']);
 }
@@ -58,7 +58,7 @@ $sql = "
 	ORDER BY c.cat_order, f.forum_order
 ";
 
-foreach (DB()->fetch_rowset($sql) as $row) {
+foreach (OLD_DB()->fetch_rowset($sql) as $row) {
     $fid = $row['forum_id'];
     $not_auth =& $data['not_auth_forums'];
 
@@ -131,7 +131,7 @@ $this->store('viewtopic_forum_select', $data);
 if ($bb_cfg['show_latest_news'] and $news_forum_ids = $bb_cfg['latest_news_forum_id']) {
     $news_count = max($bb_cfg['latest_news_count'], 1);
 
-    $data = DB()->fetch_rowset("
+    $data = OLD_DB()->fetch_rowset("
 		SELECT topic_id, topic_time, topic_title, forum_id
 		FROM " . BB_TOPICS . "
 		WHERE forum_id IN ($news_forum_ids)
@@ -149,7 +149,7 @@ if ($bb_cfg['show_latest_news'] and $news_forum_ids = $bb_cfg['latest_news_forum
 if ($bb_cfg['show_network_news'] and $net_forum_ids = $bb_cfg['network_news_forum_id']) {
     $net_count = max($bb_cfg['network_news_count'], 1);
 
-    $data = DB()->fetch_rowset("
+    $data = OLD_DB()->fetch_rowset("
 		SELECT topic_id, topic_time, topic_title, forum_id
 		FROM " . BB_TOPICS . "
 		WHERE forum_id IN ($net_forum_ids)

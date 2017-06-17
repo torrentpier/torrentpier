@@ -11,10 +11,10 @@ if (!defined('BB_ROOT')) {
     die(basename(__FILE__));
 }
 
-DB()->expect_slow_query(600);
+OLD_DB()->expect_slow_query(600);
 
 if ($bb_cfg['seed_bonus_enabled'] && $bb_cfg['seed_bonus_points'] && $bb_cfg['seed_bonus_release']) {
-    DB()->query("
+    OLD_DB()->query("
 		CREATE TEMPORARY TABLE tmp_bonus (
 			user_id       INT UNSIGNED NOT NULL DEFAULT '0',
 			release_count INT UNSIGNED NOT NULL DEFAULT '0'
@@ -23,7 +23,7 @@ if ($bb_cfg['seed_bonus_enabled'] && $bb_cfg['seed_bonus_points'] && $bb_cfg['se
 
     $tor_size = ($bb_cfg['seed_bonus_tor_size'] * 1073741824);
 
-    DB()->query("INSERT INTO tmp_bonus
+    OLD_DB()->query("INSERT INTO tmp_bonus
 		SELECT bt.user_id, count(bt.seeder) AS release_count
 			FROM " . BB_BT_TRACKER . " bt, " . BB_BT_TORRENTS . " tor
 			WHERE tor.topic_id = bt.topic_id
@@ -44,7 +44,7 @@ if ($bb_cfg['seed_bonus_enabled'] && $bb_cfg['seed_bonus_points'] && $bb_cfg['se
         $release = (int)$seed_release[$i];
         $user_regdate = (TIMENOW - $bb_cfg['seed_bonus_user_regdate'] * 86400);
 
-        DB()->query("
+        OLD_DB()->query("
 			UPDATE " . BB_USERS . " u, " . BB_BT_USERS . " bu, tmp_bonus b
 			SET
 				u.user_points       = u.user_points + '$user_points',
@@ -60,5 +60,5 @@ if ($bb_cfg['seed_bonus_enabled'] && $bb_cfg['seed_bonus_points'] && $bb_cfg['se
 		");
     }
 
-    DB()->query("DROP TEMPORARY TABLE IF EXISTS tmp_bonus");
+    OLD_DB()->query("DROP TEMPORARY TABLE IF EXISTS tmp_bonus");
 }

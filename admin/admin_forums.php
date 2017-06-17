@@ -206,13 +206,13 @@ if ($mode) {
                 $value_sql .= ", $value";
             }
 
-            $forum_name_sql = DB()->escape($forum_name);
-            $forum_desc_sql = DB()->escape($forum_desc);
+            $forum_name_sql = OLD_DB()->escape($forum_name);
+            $forum_desc_sql = OLD_DB()->escape($forum_desc);
 
             $columns = ' forum_name,   cat_id,   forum_desc,   forum_order,  forum_status,  prune_days,  forum_parent,  show_on_index,  forum_display_sort,  forum_display_order,  forum_tpl_id,  allow_reg_tracker,  allow_porno_topic,  self_moderated' . $field_sql;
             $values = "'$forum_name_sql', $cat_id, '$forum_desc_sql', $forum_order, $forum_status, $prune_days, $forum_parent, $show_on_index, $forum_display_sort, $forum_display_order, $forum_tpl_id, $allow_reg_tracker, $allow_porno_topic, $self_moderated" . $value_sql;
 
-            DB()->query('INSERT INTO ' . BB_FORUMS . " ($columns) VALUES ($values)");
+            OLD_DB()->query('INSERT INTO ' . BB_FORUMS . " ($columns) VALUES ($values)");
 
             renumber_order('forum', $cat_id);
             $datastore->update('cat_forums');
@@ -271,10 +271,10 @@ if ($mode) {
                 $forum_order = $cat_forums[$old_cat_id]['f'][$old_parent]['forum_order'] - 5;
             }
 
-            $forum_name_sql = DB()->escape($forum_name);
-            $forum_desc_sql = DB()->escape($forum_desc);
+            $forum_name_sql = OLD_DB()->escape($forum_name);
+            $forum_desc_sql = OLD_DB()->escape($forum_desc);
 
-            DB()->query('
+            OLD_DB()->query('
 				UPDATE ' . BB_FORUMS . " SET
 					forum_name          = '$forum_name_sql',
 					cat_id              = $cat_id,
@@ -322,14 +322,14 @@ if ($mode) {
 
             check_name_dup('cat', $new_cat_title);
 
-            $order = DB()->fetch_row('SELECT MAX(cat_order) AS max_order FROM ' . BB_CATEGORIES);
+            $order = OLD_DB()->fetch_row('SELECT MAX(cat_order) AS max_order FROM ' . BB_CATEGORIES);
 
-            $args = DB()->build_array('INSERT', array(
+            $args = OLD_DB()->build_array('INSERT', array(
                 'cat_title' => (string)$new_cat_title,
                 'cat_order' => (int)$order['max_order'] + 10,
             ));
 
-            DB()->query('INSERT INTO ' . BB_CATEGORIES . $args);
+            OLD_DB()->query('INSERT INTO ' . BB_CATEGORIES . $args);
 
             $datastore->update('cat_forums');
             OLD_CACHE('bb_cache')->rm();
@@ -376,9 +376,9 @@ if ($mode) {
             if ($cur_cat_title && $cur_cat_title !== $new_cat_title) {
                 check_name_dup('cat', $new_cat_title);
 
-                $new_cat_title_sql = DB()->escape($new_cat_title);
+                $new_cat_title_sql = OLD_DB()->escape($new_cat_title);
 
-                DB()->query('
+                OLD_DB()->query('
 					UPDATE ' . BB_CATEGORIES . " SET
 						cat_title = '$new_cat_title_sql'
 					WHERE cat_id = $cat_id
@@ -436,23 +436,23 @@ if ($mode) {
             } else {
                 // Move all posts
                 $sql = 'SELECT * FROM ' . BB_FORUMS . " WHERE forum_id IN($from_id, $to_id)";
-                $result = DB()->query($sql);
+                $result = OLD_DB()->query($sql);
 
-                if (DB()->num_rows($result) != 2) {
+                if (OLD_DB()->num_rows($result) != 2) {
                     bb_die('Ambiguous forum ID');
                 }
 
-                DB()->query('UPDATE ' . BB_TOPICS . " SET forum_id = $to_id WHERE forum_id = $from_id");
-                DB()->query('UPDATE ' . BB_BT_TORRENTS . " SET forum_id = $to_id WHERE forum_id = $from_id");
+                OLD_DB()->query('UPDATE ' . BB_TOPICS . " SET forum_id = $to_id WHERE forum_id = $from_id");
+                OLD_DB()->query('UPDATE ' . BB_BT_TORRENTS . " SET forum_id = $to_id WHERE forum_id = $from_id");
 
-                $row = DB()->fetch_row('SELECT MIN(post_id) AS start_id, MAX(post_id) AS finish_id FROM ' . BB_POSTS);
+                $row = OLD_DB()->fetch_row('SELECT MIN(post_id) AS start_id, MAX(post_id) AS finish_id FROM ' . BB_POSTS);
                 $start_id = (int)$row['start_id'];
                 $finish_id = (int)$row['finish_id'];
                 $per_cycle = 10000;
                 while (true) {
                     set_time_limit(600);
                     $end_id = $start_id + $per_cycle - 1;
-                    DB()->query('
+                    OLD_DB()->query('
 						UPDATE ' . BB_POSTS . " SET forum_id = $to_id WHERE post_id BETWEEN $start_id AND $end_id AND forum_id = $from_id
 					");
                     if ($end_id > $finish_id) {
@@ -464,9 +464,9 @@ if ($mode) {
                 sync('forum', $to_id);
             }
 
-            DB()->query('DELETE FROM ' . BB_FORUMS . " WHERE forum_id = $from_id");
-            DB()->query('DELETE FROM ' . BB_AUTH_ACCESS . " WHERE forum_id = $from_id");
-            DB()->query('DELETE FROM ' . BB_AUTH_ACCESS_SNAP . " WHERE forum_id = $from_id");
+            OLD_DB()->query('DELETE FROM ' . BB_FORUMS . " WHERE forum_id = $from_id");
+            OLD_DB()->query('DELETE FROM ' . BB_AUTH_ACCESS . " WHERE forum_id = $from_id");
+            OLD_DB()->query('DELETE FROM ' . BB_AUTH_ACCESS_SNAP . " WHERE forum_id = $from_id");
 
             $cat_forums = get_cat_forums();
             fix_orphan_sf();
@@ -485,7 +485,7 @@ if ($mode) {
             $categories_count = $catinfo['number'];
 
             if ($categories_count == 1) {
-                $row = DB()->fetch_row('SELECT COUNT(*) AS forums_count FROM ' . BB_FORUMS);
+                $row = OLD_DB()->fetch_row('SELECT COUNT(*) AS forums_count FROM ' . BB_FORUMS);
 
                 if ($row['forums_count'] > 0) {
                     bb_die($lang['MUST_DELETE_FORUMS']);
@@ -525,14 +525,14 @@ if ($mode) {
 
             $order_shear = get_max_forum_order($to_id) + 10;
 
-            DB()->query('
+            OLD_DB()->query('
 				UPDATE ' . BB_FORUMS . " SET
 					cat_id = $to_id,
 					forum_order = forum_order + $order_shear
 				WHERE cat_id = $from_id
 			");
 
-            DB()->query('DELETE FROM ' . BB_CATEGORIES . " WHERE cat_id = $from_id");
+            OLD_DB()->query('DELETE FROM ' . BB_CATEGORIES . " WHERE cat_id = $from_id");
 
             renumber_order('forum', $to_id);
             $cat_forums = get_cat_forums();
@@ -591,19 +591,19 @@ if ($mode) {
             }
 
             if ($forum_info['forum_parent']) {
-                DB()->query('
+                OLD_DB()->query('
 					UPDATE ' . BB_FORUMS . " SET
 						forum_order = forum_order + $move
 					WHERE forum_id = $forum_id
 				");
             } elseif ($move_down_forum_id) {
-                DB()->query('
+                OLD_DB()->query('
 					UPDATE ' . BB_FORUMS . " SET
 						forum_order = forum_order + $move_down_ord_val
 					WHERE cat_id = $cat_id
 						AND forum_order >= $move_down_forum_order
 				");
-                DB()->query('
+                OLD_DB()->query('
 					UPDATE ' . BB_FORUMS . " SET
 						forum_order = forum_order - $move_up_ord_val
 					WHERE forum_id = $move_up_forum_id
@@ -622,7 +622,7 @@ if ($mode) {
             $move = (int)$_GET['move'];
             $cat_id = (int)$_GET['c'];
 
-            DB()->query('
+            OLD_DB()->query('
 				UPDATE ' . BB_CATEGORIES . " SET
 					cat_order = cat_order + $move
 				WHERE cat_id = $cat_id
@@ -659,12 +659,12 @@ if (!$mode || $show_main_page) {
     ));
 
     $sql = 'SELECT cat_id, cat_title, cat_order FROM ' . BB_CATEGORIES . ' ORDER BY cat_order';
-    if (!$q_categories = DB()->sql_query($sql)) {
+    if (!$q_categories = OLD_DB()->sql_query($sql)) {
         bb_die('Could not query categories list');
     }
 
-    if ($total_categories = DB()->num_rows($q_categories)) {
-        $category_rows = DB()->sql_fetchrowset($q_categories);
+    if ($total_categories = OLD_DB()->num_rows($q_categories)) {
+        $category_rows = OLD_DB()->sql_fetchrowset($q_categories);
 
         $where_cat_sql = $req_cat_id = '';
 
@@ -680,12 +680,12 @@ if (!$mode || $show_main_page) {
         }
 
         $sql = 'SELECT * FROM ' . BB_FORUMS . " $where_cat_sql ORDER BY cat_id, forum_order";
-        if (!$q_forums = DB()->sql_query($sql)) {
+        if (!$q_forums = OLD_DB()->sql_query($sql)) {
             bb_die('Could not query forums information');
         }
 
-        if ($total_forums = DB()->num_rows($q_forums)) {
-            $forum_rows = DB()->sql_fetchrowset($q_forums);
+        if ($total_forums = OLD_DB()->num_rows($q_forums)) {
+            $forum_rows = OLD_DB()->sql_fetchrowset($q_forums);
         }
 
         // Okay, let's build the index
@@ -780,23 +780,23 @@ function get_info($mode, $id)
             break;
     }
     $sql = "SELECT count(*) as total FROM $table";
-    if (!$result = DB()->sql_query($sql)) {
+    if (!$result = OLD_DB()->sql_query($sql)) {
         bb_die('Could not get forum / category information #1');
     }
-    $count = DB()->sql_fetchrow($result);
+    $count = OLD_DB()->sql_fetchrow($result);
     $count = $count['total'];
 
     $sql = "SELECT * FROM $table WHERE $idfield = $id";
 
-    if (!$result = DB()->sql_query($sql)) {
+    if (!$result = OLD_DB()->sql_query($sql)) {
         bb_die('Could not get forum / category information #2');
     }
 
-    if (DB()->num_rows($result) != 1) {
+    if (OLD_DB()->num_rows($result) != 1) {
         bb_die('Forum / category does not exist or multiple forums / categories with ID ' . $id);
     }
 
-    $return = DB()->sql_fetchrow($result);
+    $return = OLD_DB()->sql_fetchrow($result);
     $return['number'] = $count;
     return $return;
 }
@@ -835,13 +835,13 @@ function get_list($mode, $id, $select)
     }
     $sql .= " ORDER BY $order";
 
-    if (!$result = DB()->sql_query($sql)) {
+    if (!$result = OLD_DB()->sql_query($sql)) {
         bb_die('Could not get list of categories / forums #1');
     }
 
     $catlist = '';
 
-    while ($row = DB()->sql_fetchrow($result)) {
+    while ($row = OLD_DB()->sql_fetchrow($result)) {
         $s = '';
         if ($row[$idfield] == $id) {
             $s = ' selected="selected"';
@@ -884,21 +884,21 @@ function renumber_order($mode, $cat = 0)
     }
     $sql .= " ORDER BY $orderfield ASC";
 
-    if (!$result = DB()->sql_query($sql)) {
+    if (!$result = OLD_DB()->sql_query($sql)) {
         bb_die('Could not get list of categories / forums #2');
     }
 
     $i = 10;
 
-    while ($row = DB()->sql_fetchrow($result)) {
+    while ($row = OLD_DB()->sql_fetchrow($result)) {
         $sql = "UPDATE $table SET $orderfield = $i WHERE $idfield = " . $row[$idfield];
-        if (!DB()->sql_query($sql)) {
+        if (!OLD_DB()->sql_query($sql)) {
             bb_die('Could not update order fields');
         }
         $i += 10;
     }
 
-    if (!$result = DB()->sql_query($sql)) {
+    if (!$result = OLD_DB()->sql_query($sql)) {
         bb_die('Could not get list of categories / forums #3');
     }
 }
@@ -922,11 +922,11 @@ function get_cat_forums($cat_id = false)
 			$where_sql
 		ORDER BY c.cat_order, f.cat_id, f.forum_order";
 
-    if (!$result = DB()->sql_query($sql)) {
+    if (!$result = OLD_DB()->sql_query($sql)) {
         bb_die('Could not get list of categories / forums #4');
     }
 
-    if ($rowset = DB()->sql_fetchrowset($result)) {
+    if ($rowset = OLD_DB()->sql_fetchrowset($result)) {
         foreach ($rowset as $rid => $row) {
             $forums[$row['cat_id']]['cat_title'] = $row['cat_title'];
             $forums[$row['cat_id']]['f'][$row['forum_id']] = $row;
@@ -1040,11 +1040,11 @@ function fix_orphan_sf($orphan_sf_sql = '', $show_mess = false)
     if ($orphan_sf_sql) {
         $sql = 'UPDATE ' . BB_FORUMS . " SET forum_parent = 0, show_on_index = 1 WHERE forum_id IN($orphan_sf_sql)";
 
-        if (!DB()->sql_query($sql)) {
+        if (!OLD_DB()->sql_query($sql)) {
             bb_die('Could not change subforums data');
         }
 
-        if ($affectedrows = DB()->affected_rows()) {
+        if ($affectedrows = OLD_DB()->affected_rows()) {
             $done_mess = 'Subforums data corrected. <b>' . $affectedrows . '</b> orphan subforum(s) moved to root level.';
         }
 
@@ -1114,7 +1114,7 @@ function get_forum_data($forum_id)
  */
 function get_max_forum_order($cat_id)
 {
-    $row = DB()->fetch_row('
+    $row = OLD_DB()->fetch_row('
 		SELECT MAX(forum_order) AS max_forum_order
 		FROM ' . BB_FORUMS . "
 		WHERE cat_id = $cat_id
@@ -1131,7 +1131,7 @@ function get_max_forum_order($cat_id)
  */
 function check_name_dup($mode, $name, $die_on_error = true)
 {
-    $name_sql = DB()->escape($name);
+    $name_sql = OLD_DB()->escape($name);
 
     if ($mode == 'cat') {
         $what_checked = 'category';
@@ -1141,7 +1141,7 @@ function check_name_dup($mode, $name, $die_on_error = true)
         $sql = 'SELECT forum_id FROM ' . BB_FORUMS . " WHERE forum_name = '$name_sql'";
     }
 
-    $name_is_dup = DB()->fetch_row($sql);
+    $name_is_dup = OLD_DB()->fetch_row($sql);
 
     if ($name_is_dup && $die_on_error) {
         bb_die('This ' . $what_checked . ' name taken, please choose something else');
@@ -1159,7 +1159,7 @@ function check_name_dup($mode, $name, $die_on_error = true)
  */
 function change_sf_cat($parent_id, $new_cat_id, $order_shear)
 {
-    DB()->query('
+    OLD_DB()->query('
 		UPDATE ' . BB_FORUMS . " SET
 			cat_id      = $new_cat_id,
 			forum_order = forum_order + $order_shear
