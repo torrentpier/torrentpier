@@ -26,7 +26,7 @@ if (!$profiledata = get_userdata($_GET[POST_USERS_URL])) {
 }
 
 if (!$userdata['session_logged_in']) {
-    redirect(LOGIN_URL . "?redirect={$_SERVER['REQUEST_URI']}");
+    redirectToUrl(LOGIN_URL . "?redirect={$_SERVER['REQUEST_URI']}");
 }
 
 if (!$ranks = $datastore->get('ranks')) {

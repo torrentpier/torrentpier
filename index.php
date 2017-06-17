@@ -74,7 +74,7 @@ $only_new = $user->opt_js['only_new'];
 
 // Validate requested category id
 if ($viewcat && !($viewcat =& $forums['c'][$viewcat]['cat_id'])) {
-    redirect("index.php");
+    redirectToUrl("index.php");
 }
 
 // Forums

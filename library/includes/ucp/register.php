@@ -49,7 +49,7 @@ switch ($mode) {
      */
     case 'register':
         if (!$can_register) {
-            redirect('index.php');
+            redirectToUrl('index.php');
         }
 
         if (!IS_ADMIN) {
@@ -98,7 +98,7 @@ switch ($mode) {
      */
     case 'editprofile':
         if (IS_GUEST) {
-            login_redirect();
+            redirectToLogin();
         }
 
         // field => can_edit

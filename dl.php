@@ -130,7 +130,7 @@ for ($i = 0; $i < $num_auth_pages && $authorised == false; $i++) {
         $forum_id = $row['forum_id'];
 
         $is_auth = array();
-        $is_auth = auth(AUTH_ALL, $forum_id, $userdata);
+        $is_auth = auth_user(AUTH_ALL, $forum_id, $userdata);
         set_die_append_msg($forum_id, $topic_id);
 
         if ($is_auth['auth_download']) {

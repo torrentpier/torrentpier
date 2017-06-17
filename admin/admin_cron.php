@@ -24,7 +24,7 @@ if ($mode == 'run' && !$job_id) {
     define('BB_ROOT', './../');
     require BB_ROOT . 'common.php';
     $user->session_start();
-    redirect('admin/' . basename(__FILE__) . '?mode=list');
+    redirectToUrl('admin/' . basename(__FILE__) . '?mode=list');
 } else {
     require __DIR__ . '/pagestart.php';
 }
@@ -93,12 +93,12 @@ switch ($mode) {
         if (file_exists('../triggers/cron_running')) {
             rename('../triggers/cron_running', '../triggers/cron_allowed');
         }
-        redirect('admin/' . basename(__FILE__) . '?mode=list');
+        redirectToUrl('admin/' . basename(__FILE__) . '?mode=list');
         break;
 
     case 'run':
         run_jobs($job_id);
-        redirect('admin/' . basename(__FILE__) . '?mode=list');
+        redirectToUrl('admin/' . basename(__FILE__) . '?mode=list');
         break;
 
     case 'edit':
@@ -194,7 +194,7 @@ if ($submit) {
         } elseif (($cron_action == 'disable' || $cron_action == 'enable') && $jobs) {
             toggle_active($jobs, $cron_action);
         }
-        redirect('admin/' . basename(__FILE__) . '?mode=list');
+        redirectToUrl('admin/' . basename(__FILE__) . '?mode=list');
     } elseif (validate_cron_post($_POST) == 1) {
         if ($_POST['mode'] == 'edit') {
             update_cron_job($_POST);
@@ -204,7 +204,7 @@ if ($submit) {
             bb_die('Mode error');
         }
 
-        redirect('admin/' . basename(__FILE__) . '?mode=list');
+        redirectToUrl('admin/' . basename(__FILE__) . '?mode=list');
     } else {
         bb_die(validate_cron_post($_POST));
     }

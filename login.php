@@ -21,7 +21,7 @@ if (!empty($_GET['logout'])) {
     if (!IS_GUEST) {
         $user->session_end();
     }
-    redirect("index.php");
+    redirectToUrl("index.php");
 }
 
 $redirect_url = "index.php";
@@ -72,7 +72,7 @@ if (!$mod_admin_login) {
 if (isset($_POST['login'])) {
     if (!$mod_admin_login) {
         if (!IS_GUEST) {
-            redirect('index.php');
+            redirectToUrl('index.php');
         }
         if ($login_username == '' || $login_password == '') {
             $login_errors[] = $lang['ENTER_PASSWORD'];
@@ -93,7 +93,7 @@ if (isset($_POST['login'])) {
             if ($redirect_url == '/' . LOGIN_URL || $redirect_url == LOGIN_URL) {
                 $redirect_url = 'index.php';
             }
-            redirect($redirect_url);
+            redirectToUrl($redirect_url);
         }
 
         $login_errors[] = $lang['ERROR_LOGIN'];
@@ -126,4 +126,4 @@ if (IS_GUEST || $mod_admin_login) {
     print_page('login.tpl');
 }
 
-redirect($redirect_url);
+redirectToUrl($redirect_url);

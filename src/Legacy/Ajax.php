@@ -245,7 +245,7 @@ class Ajax
     {
         global $userdata, $lang;
 
-        $is_auth = auth(AUTH_MOD, $forum_id, $userdata);
+        $is_auth = auth_user(AUTH_MOD, $forum_id, $userdata);
 
         if (!$is_auth['auth_mod']) {
             $this->ajax_die($lang['ONLY_FOR_MOD']);

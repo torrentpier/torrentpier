@@ -152,7 +152,7 @@ if ($post_info = DB()->fetch_row($sql)) {
 
     set_die_append_msg($forum_id);
 
-    $is_auth = auth(AUTH_ALL, $forum_id, $userdata, $post_info);
+    $is_auth = auth_user(AUTH_ALL, $forum_id, $userdata, $post_info);
 
     if ($post_info['forum_status'] == FORUM_LOCKED && !$is_auth['auth_mod']) {
         bb_die($lang['FORUM_LOCKED']);
@@ -221,7 +221,7 @@ if (!$is_auth[$is_auth_type]) {
         default:
             $redirect = '';
     }
-    redirect(LOGIN_URL . "?redirect=/" . POSTING_URL . "?$redirect");
+    redirectToUrl(LOGIN_URL . "?redirect=/" . POSTING_URL . "?$redirect");
 }
 
 if ($mode == 'new_rel') {
@@ -300,7 +300,7 @@ if (!IS_GUEST && $mode != 'newtopic' && ($submit || $preview || $mode == 'quote'
 // Confirm deletion
 if (($delete || $mode == 'delete') && !$confirm) {
     if (isset($_POST['cancel'])) {
-        redirect(POST_URL . "$post_id#$post_id");
+        redirectToUrl(POST_URL . "$post_id#$post_id");
     }
     $hidden_fields = array(
         'p' => $post_id,

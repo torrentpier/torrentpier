@@ -66,7 +66,7 @@ $template->assign_vars(array(
 // Cancel
 //
 if ($cancel) {
-    redirect(PM_URL . "?folder=$folder");
+    redirectToUrl(PM_URL . "?folder=$folder");
 }
 
 //
@@ -155,7 +155,7 @@ if ($mode == 'read') {
     // Did the query return any data?
     //
     if (!($privmsg = DB()->sql_fetchrow($result))) {
-        redirect(PM_URL . "?folder=$folder");
+        redirectToUrl(PM_URL . "?folder=$folder");
     }
 
     $privmsg_id = $privmsg['privmsgs_id'];
@@ -742,7 +742,7 @@ if ($mode == 'read') {
             bb_die('Could not save private messages');
         }
 
-        redirect(PM_URL . "?folder=savebox");
+        redirectToUrl(PM_URL . "?folder=savebox");
     }
 } elseif ($submit || $refresh || $mode != '') {
     if (IS_USER && $submit && $mode != 'edit') {
@@ -988,7 +988,7 @@ if ($mode == 'read') {
             }
 
             if (!($privmsg = DB()->sql_fetchrow($result))) {
-                redirect(PM_URL . "?folder=$folder");
+                redirectToUrl(PM_URL . "?folder=$folder");
             }
 
             $privmsg_subject = $privmsg['privmsgs_subject'];
@@ -1008,7 +1008,7 @@ if ($mode == 'read') {
             }
 
             if (!($privmsg = DB()->sql_fetchrow($result))) {
-                redirect(PM_URL . "?folder=$folder");
+                redirectToUrl(PM_URL . "?folder=$folder");
             }
 
             $privmsg_subject = ((!preg_match('/^Re:/', $privmsg['privmsgs_subject'])) ? 'Re: ' : '') . $privmsg['privmsgs_subject'];

@@ -50,12 +50,12 @@ if (isset($_POST['del_my_post'])) {
 	');
 
     if (IS_GUEST) {
-        redirect('index.php');
+        redirectToUrl('index.php');
     }
 
     DB()->query("UPDATE " . BB_POSTS . " SET user_post = 1 WHERE poster_id = {$user->id}");
 
-    redirect("search.php?u={$user->id}");
+    redirectToUrl("search.php?u={$user->id}");
 }
 
 //
@@ -512,7 +512,7 @@ if ($post_mode) {
         }
 
         if (!$SQL['WHERE']) {
-            redirect(basename(__FILE__));
+            redirectToUrl(basename(__FILE__));
         }
 
         $SQL['GROUP BY'][] = "item_id";
@@ -722,7 +722,7 @@ else {
         }
 
         if (!$SQL['WHERE']) {
-            redirect(basename(__FILE__));
+            redirectToUrl(basename(__FILE__));
         }
 
         $SQL['GROUP BY'][] = "item_id";
@@ -836,7 +836,7 @@ if ($items_display) {
     print_page('search_results.tpl');
 }
 
-redirect(basename(__FILE__));
+redirectToUrl(basename(__FILE__));
 
 // ----------------------------------------------------------- //
 // Functions

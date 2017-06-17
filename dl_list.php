@@ -53,12 +53,12 @@ set_die_append_msg();
 
 // Check if user logged in
 if (!$userdata['session_logged_in']) {
-    redirect(LOGIN_URL . "?redirect=$redirect_type&$redirect");
+    redirectToUrl(LOGIN_URL . "?redirect=$redirect_type&$redirect");
 }
 
 // Check if user did not confirm
 if (isset($_POST['cancel']) && $_POST['cancel']) {
-    redirect("$redirect_type?$redirect");
+    redirectToUrl("$redirect_type?$redirect");
 }
 
 // Delete DL-list
@@ -70,7 +70,7 @@ if ($mode == 'dl_delete' && $topic_id) {
             bb_die('Could not obtain forum_id for this topic');
         }
 
-        $is_auth = auth(AUTH_ALL, $row['forum_id'], $userdata);
+        $is_auth = auth_user(AUTH_ALL, $row['forum_id'], $userdata);
 
         if (!$is_auth['auth_mod']) {
             bb_die($lang['NOT_MODERATOR']);
@@ -91,7 +91,7 @@ if ($mode == 'dl_delete' && $topic_id) {
     }
 
     clear_dl_list($topic_id);
-    redirect("$redirect_type?$redirect");
+    redirectToUrl("$redirect_type?$redirect");
 }
 
 // Update DL status
@@ -133,7 +133,7 @@ if ($topics_ary && ($mode == 'set_dl_status' || $mode == 'set_topics_dl_status')
 
     DB()->query("REPLACE INTO " . BB_BT_DLSTATUS . " $new_dlstatus_sql");
 
-    redirect("$redirect_type?$redirect");
+    redirectToUrl("$redirect_type?$redirect");
 }
 
-redirect("index.php");
+redirectToUrl("index.php");

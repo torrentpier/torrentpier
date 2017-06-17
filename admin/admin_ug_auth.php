@@ -186,8 +186,8 @@ if ($mode == 'user' && (!empty($_POST['username']) || $user_id)) {
     $ug_data = $this_userdata;
     $ug_data['session_logged_in'] = 1;
 
-    $u_access = auth(AUTH_ALL, AUTH_LIST_ALL, $ug_data, array(), UG_PERM_USER_ONLY);
-    $g_access = auth(AUTH_ALL, AUTH_LIST_ALL, $ug_data, array(), UG_PERM_GROUP_ONLY);
+    $u_access = auth_user(AUTH_ALL, AUTH_LIST_ALL, $ug_data, array(), UG_PERM_USER_ONLY);
+    $g_access = auth_user(AUTH_ALL, AUTH_LIST_ALL, $ug_data, array(), UG_PERM_GROUP_ONLY);
 
     foreach ($forums['c'] as $c_id => $c_data) {
         $template->assign_block_vars('c', array(
@@ -303,7 +303,7 @@ if ($mode == 'user' && (!empty($_POST['username']) || $user_id)) {
     $base_url = basename(__FILE__) . "?mode=group&amp;g=$group_id";
 
     $ug_data = array('group_id' => $group_id);
-    $u_access = auth(AUTH_ALL, AUTH_LIST_ALL, $ug_data);
+    $u_access = auth_user(AUTH_ALL, AUTH_LIST_ALL, $ug_data);
 
     foreach ($forums['c'] as $c_id => $c_data) {
         $template->assign_block_vars('c', array(

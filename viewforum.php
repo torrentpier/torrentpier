@@ -61,14 +61,14 @@ if ($only_new == ONLY_NEW_POSTS) {
 }
 
 // Auth
-$is_auth = auth(AUTH_ALL, $forum_id, $userdata, $forum_data);
+$is_auth = auth_user(AUTH_ALL, $forum_id, $userdata, $forum_data);
 
 $moderation = (!empty($_REQUEST['mod']) && $is_auth['auth_mod']);
 
 if (!$is_auth['auth_view']) {
     if (IS_GUEST) {
         $redirect = ($start) ? "&start=$start" : '';
-        redirect(LOGIN_URL . "?redirect=" . FORUM_URL . $forum_id . $redirect);
+        redirectToUrl(LOGIN_URL . "?redirect=" . FORUM_URL . $forum_id . $redirect);
     }
     // The user is not authed to read this forum ...
     $message = sprintf($lang['SORRY_AUTH_VIEW'], $is_auth['auth_view_type']);
@@ -87,7 +87,7 @@ if ($is_auth['auth_mod']) {
     $mod_redirect_url = LOGIN_URL . "?redirect=$redirect&admin=1";
 
     if ($moderation && !$userdata['session_admin']) {
-        redirect($mod_redirect_url);
+        redirectToUrl($mod_redirect_url);
     }
     if (isset($_REQUEST['tst']) && $_REQUEST['tst'] != -1) {
         $tor_status = (int)$_REQUEST['tst'];
@@ -257,7 +257,7 @@ if (!empty($_REQUEST['topicdays'])) {
 }
 // Correct $start value
 if ($start > $forum_topics) {
-    redirect(FORUM_URL . $forum_id);
+    redirectToUrl(FORUM_URL . $forum_id);
 }
 
 // Generate SORT and ORDER selects
