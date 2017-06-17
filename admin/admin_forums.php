@@ -216,7 +216,7 @@ if ($mode) {
 
             renumber_order('forum', $cat_id);
             $datastore->update('cat_forums');
-            CACHE('bb_cache')->rm();
+            OLD_CACHE('bb_cache')->rm();
 
             bb_die($lang['FORUMS_UPDATED'] . '<br /><br />' . sprintf($lang['CLICK_RETURN_FORUMADMIN'], '<a href="admin_forums.php?c=' . $cat_id . '">', '</a>') . '<br /><br />' . sprintf($lang['CLICK_RETURN_ADMIN_INDEX'], '<a href="index.php?pane=right">', '</a>'));
 
@@ -303,7 +303,7 @@ if ($mode) {
             $cat_forums = get_cat_forums();
             $fix = fix_orphan_sf();
             $datastore->update('cat_forums');
-            CACHE('bb_cache')->rm();
+            OLD_CACHE('bb_cache')->rm();
 
             $message = $lang['FORUMS_UPDATED'] . '<br /><br />';
             $message .= $fix ? "$fix<br /><br />" : '';
@@ -332,7 +332,7 @@ if ($mode) {
             DB()->query('INSERT INTO ' . BB_CATEGORIES . $args);
 
             $datastore->update('cat_forums');
-            CACHE('bb_cache')->rm();
+            OLD_CACHE('bb_cache')->rm();
 
             bb_die($lang['FORUMS_UPDATED'] . '<br /><br />' . sprintf($lang['CLICK_RETURN_FORUMADMIN'], '<a href="admin_forums.php">', '</a>') . '<br /><br />' . sprintf($lang['CLICK_RETURN_ADMIN_INDEX'], '<a href="index.php?pane=right">', '</a>'));
 
@@ -386,7 +386,7 @@ if ($mode) {
             }
 
             $datastore->update('cat_forums');
-            CACHE('bb_cache')->rm();
+            OLD_CACHE('bb_cache')->rm();
 
             bb_die($lang['FORUMS_UPDATED'] . '<br /><br />' . sprintf($lang['CLICK_RETURN_FORUMADMIN'], '<a href="admin_forums.php">', '</a>') . '<br /><br />' . sprintf($lang['CLICK_RETURN_ADMIN_INDEX'], '<a href="index.php?pane=right">', '</a>'));
 
@@ -472,7 +472,7 @@ if ($mode) {
             fix_orphan_sf();
             update_user_level('all');
             $datastore->update('cat_forums');
-            CACHE('bb_cache')->rm();
+            OLD_CACHE('bb_cache')->rm();
 
             bb_die($lang['FORUMS_UPDATED'] . '<br /><br />' . sprintf($lang['CLICK_RETURN_FORUMADMIN'], '<a href="admin_forums.php">', '</a>') . '<br /><br />' . sprintf($lang['CLICK_RETURN_ADMIN_INDEX'], '<a href="index.php?pane=right">', '</a>'));
 
@@ -538,7 +538,7 @@ if ($mode) {
             $cat_forums = get_cat_forums();
             $fix = fix_orphan_sf();
             $datastore->update('cat_forums');
-            CACHE('bb_cache')->rm();
+            OLD_CACHE('bb_cache')->rm();
 
             $message = $lang['FORUMS_UPDATED'] . '<br /><br />';
             $message .= $fix ? "$fix<br /><br />" : '';
@@ -613,7 +613,7 @@ if ($mode) {
 
             renumber_order('forum', $forum_info['cat_id']);
             $datastore->update('cat_forums');
-            CACHE('bb_cache')->rm();
+            OLD_CACHE('bb_cache')->rm();
 
             $show_main_page = true;
             break;
@@ -630,7 +630,7 @@ if ($mode) {
 
             renumber_order('category');
             $datastore->update('cat_forums');
-            CACHE('bb_cache')->rm();
+            OLD_CACHE('bb_cache')->rm();
 
             $show_main_page = true;
             break;
@@ -638,7 +638,7 @@ if ($mode) {
         case 'forum_sync':
             sync('forum', (int)$_GET['f']);
             $datastore->update('cat_forums');
-            CACHE('bb_cache')->rm();
+            OLD_CACHE('bb_cache')->rm();
 
             $show_main_page = true;
             break;

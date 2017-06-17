@@ -62,7 +62,7 @@ $login_password = isset($_POST['login_password']) ? $_POST['login_password'] : '
 // Проверка на неверную комбинацию логин/пароль
 $need_captcha = false;
 if (!$mod_admin_login) {
-    $need_captcha = CACHE('bb_login_err')->get('l_err_' . USER_IP);
+    $need_captcha = OLD_CACHE('bb_login_err')->get('l_err_' . USER_IP);
     if ($need_captcha < $bb_cfg['invalid_logins']) {
         $need_captcha = false;
     }
@@ -88,7 +88,7 @@ if (isset($_POST['login'])) {
         if ($user->login($_POST, $mod_admin_login)) {
             $redirect_url = (defined('FIRST_LOGON')) ? $bb_cfg['first_logon_redirect_url'] : $redirect_url;
             // Обнуление при введении правильно комбинации логин/пароль
-            CACHE('bb_login_err')->set('l_err_' . USER_IP, 0, 3600);
+            OLD_CACHE('bb_login_err')->set('l_err_' . USER_IP, 0, 3600);
 
             if ($redirect_url == '/' . LOGIN_URL || $redirect_url == LOGIN_URL) {
                 $redirect_url = 'index.php';
@@ -99,11 +99,11 @@ if (isset($_POST['login'])) {
         $login_errors[] = $lang['ERROR_LOGIN'];
 
         if (!$mod_admin_login) {
-            $login_err = CACHE('bb_login_err')->get('l_err_' . USER_IP);
+            $login_err = OLD_CACHE('bb_login_err')->get('l_err_' . USER_IP);
             if ($login_err > $bb_cfg['invalid_logins']) {
                 $need_captcha = true;
             }
-            CACHE('bb_login_err')->set('l_err_' . USER_IP, ($login_err + 1), 3600);
+            OLD_CACHE('bb_login_err')->set('l_err_' . USER_IP, ($login_err + 1), 3600);
         } else {
             $need_captcha = false;
         }

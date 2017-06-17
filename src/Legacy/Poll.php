@@ -102,6 +102,6 @@ class Poll
     {
         DB()->query("DELETE FROM " . BB_POLL_VOTES . " WHERE topic_id = $topic_id");
         DB()->query("DELETE FROM " . BB_POLL_USERS . " WHERE topic_id = $topic_id");
-        CACHE('bb_poll_data')->rm("poll_$topic_id");
+        OLD_CACHE('bb_poll_data')->rm("poll_$topic_id");
     }
 }

@@ -12,7 +12,7 @@ require __DIR__ . '/pagestart.php';
 // Generate relevant output
 if (isset($_GET['pane']) && $_GET['pane'] == 'left') {
     $module = [];
-    if (!$module = CACHE('bb_cache')->get('admin_module_' . $user->id)) {
+    if (!$module = OLD_CACHE('bb_cache')->get('admin_module_' . $user->id)) {
         $dir = opendir('.');
         $setmodules = 1;
         while ($file = readdir($dir)) {
@@ -22,10 +22,10 @@ if (isset($_GET['pane']) && $_GET['pane'] == 'left') {
         }
         unset($setmodules);
         closedir($dir);
-        CACHE('bb_cache')->set('admin_module_' . $user->id, $module, 600);
+        OLD_CACHE('bb_cache')->set('admin_module_' . $user->id, $module, 600);
     }
 
-    $module = CACHE('bb_cache')->get('admin_module_' . $user->id);
+    $module = OLD_CACHE('bb_cache')->get('admin_module_' . $user->id);
 
     $template->assign_vars(array(
         'TPL_ADMIN_NAVIGATE' => true,

@@ -164,7 +164,7 @@ function DB($db_alias = 'db')
  */
 $CACHES = new TorrentPier\Legacy\Caches($bb_cfg);
 
-function CACHE($cache_name)
+function OLD_CACHE($cache_name)
 {
     global $CACHES;
     return $CACHES->get_cache_obj($cache_name);
