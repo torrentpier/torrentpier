@@ -17,7 +17,7 @@ $post_id = (int)@$this->request['post_id'];
 $topic_id = (int)@$this->request['topic_id'];
 
 if (!$post_id) {
-    $post_id = DB()->fetch_row("SELECT topic_first_post_id FROM " . BB_TOPICS . " WHERE topic_id = $topic_id", 'topic_first_post_id');
+    $post_id = OLD_DB()->fetch_row("SELECT topic_first_post_id FROM " . BB_TOPICS . " WHERE topic_id = $topic_id", 'topic_first_post_id');
 }
 
 $sql = "
@@ -34,7 +34,7 @@ $sql = "
 	LIMIT 1
 ";
 
-if (!$post_data = DB()->fetch_row($sql)) {
+if (!$post_data = OLD_DB()->fetch_row($sql)) {
     $this->ajax_die($lang['TOPIC_POST_NOT_EXIST']);
 }
 

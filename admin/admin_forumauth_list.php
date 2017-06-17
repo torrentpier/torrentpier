@@ -114,7 +114,7 @@ if (isset($_POST['submit'])) {
         }
 
         if ($sql != '') {
-            if (!DB()->sql_query($sql)) {
+            if (!OLD_DB()->sql_query($sql)) {
                 bb_die('Could not update auth table #1');
             }
         }
@@ -137,7 +137,7 @@ if (isset($_POST['submit'])) {
         $sql = 'UPDATE ' . BB_FORUMS . " SET $sql WHERE cat_id = $cat_id";
 
         if ($sql != '') {
-            if (!DB()->sql_query($sql)) {
+            if (!OLD_DB()->sql_query($sql)) {
                 bb_die('Could not update auth table #2');
             }
         }
@@ -159,12 +159,12 @@ $sql = 'SELECT f.*
 	WHERE c.cat_id = f.cat_id
 	$forum_sql $cat_sql
 	ORDER BY c.cat_order ASC, f.forum_order ASC";
-if (!($result = DB()->sql_query($sql))) {
+if (!($result = OLD_DB()->sql_query($sql))) {
     bb_die('Could not obtain forum list');
 }
 
-$forum_rows = DB()->sql_fetchrowset($result);
-DB()->sql_freeresult($result);
+$forum_rows = OLD_DB()->sql_fetchrowset($result);
+OLD_DB()->sql_freeresult($result);
 
 if (empty($forum_id) && empty($cat_id)) {
     //
@@ -186,11 +186,11 @@ if (empty($forum_id) && empty($cat_id)) {
     $sql = 'SELECT c.cat_id, c.cat_title, c.cat_order
 		FROM ' . BB_CATEGORIES . ' c
 		ORDER BY c.cat_order';
-    if (!($result = DB()->sql_query($sql))) {
+    if (!($result = OLD_DB()->sql_query($sql))) {
         bb_die('Could not query categories list #1');
     }
 
-    $category_rows = DB()->sql_fetchrowset($result);
+    $category_rows = OLD_DB()->sql_fetchrowset($result);
     $cat_count = count($category_rows);
 
     for ($i = 0; $i < $cat_count; $i++) {
@@ -246,11 +246,11 @@ if (empty($forum_id) && empty($cat_id)) {
 		FROM ' . BB_CATEGORIES . " c
 		WHERE c.cat_id = $cat_id
 		ORDER BY c.cat_order";
-    if (!($result = DB()->sql_query($sql))) {
+    if (!($result = OLD_DB()->sql_query($sql))) {
         bb_die('Could not query categories list #2');
     }
 
-    $category_rows = DB()->sql_fetchrowset($result);
+    $category_rows = OLD_DB()->sql_fetchrowset($result);
 
     $cat_id = reset($category_rows)['cat_id'];
     $cat_name = reset($category_rows)['cat_title'];

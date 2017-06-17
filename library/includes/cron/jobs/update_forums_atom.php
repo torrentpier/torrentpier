@@ -16,7 +16,7 @@ global $bb_cfg;
 require_once INC_DIR . '/functions_atom.php';
 
 $timecheck = TIMENOW - 600;
-$forums_data = DB()->fetch_rowset("SELECT forum_id, allow_reg_tracker, forum_name FROM " . BB_FORUMS);
+$forums_data = OLD_DB()->fetch_rowset("SELECT forum_id, allow_reg_tracker, forum_name FROM " . BB_FORUMS);
 
 if (file_exists($bb_cfg['atom']['path'] . '/f/0.atom')) {
     if (filemtime($bb_cfg['atom']['path'] . '/f/0.atom') <= $timecheck) {

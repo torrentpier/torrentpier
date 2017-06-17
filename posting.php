@@ -146,7 +146,7 @@ switch ($mode) {
         bb_simple_die($lang['NO_VALID_MODE']);
 }
 
-if ($post_info = DB()->fetch_row($sql)) {
+if ($post_info = OLD_DB()->fetch_row($sql)) {
     $forum_id = $post_info['forum_id'];
     $forum_name = $post_info['forum_name'];
 
@@ -226,7 +226,7 @@ if (!$is_auth[$is_auth_type]) {
 
 if ($mode == 'new_rel') {
     if ($tor_status = implode(',', $bb_cfg['tor_cannot_new'])) {
-        $sql = DB()->fetch_rowset("SELECT t.topic_title, t.topic_id, tor.tor_status
+        $sql = OLD_DB()->fetch_rowset("SELECT t.topic_title, t.topic_id, tor.tor_status
 			FROM " . BB_BT_TORRENTS . " tor, " . BB_TOPICS . " t
 			WHERE poster_id = {$userdata['user_id']}
 				AND tor.topic_id = t.topic_id
@@ -253,7 +253,7 @@ if ($submit || $refresh) {
     $notify_user = bf($userdata['user_opt'], 'user_opt', 'user_notify');
 
     if (!IS_GUEST && $mode != 'newtopic' && !$notify_user) {
-        $notify_user = (int)DB()->fetch_row("SELECT topic_id FROM " . BB_TOPICS_WATCH . " WHERE topic_id = $topic_id AND user_id = " . $userdata['user_id']);
+        $notify_user = (int)OLD_DB()->fetch_row("SELECT topic_id FROM " . BB_TOPICS_WATCH . " WHERE topic_id = $topic_id AND user_id = " . $userdata['user_id']);
     }
 }
 
@@ -275,7 +275,7 @@ if (!IS_GUEST && $mode != 'newtopic' && ($submit || $preview || $mode == 'quote'
 			ORDER BY p.post_time
 			LIMIT " . $bb_cfg['posts_per_page'];
 
-        if ($rowset = DB()->fetch_rowset($sql)) {
+        if ($rowset = OLD_DB()->fetch_rowset($sql)) {
             $topic_has_new_posts = true;
 
             foreach ($rowset as $i => $row) {
@@ -333,7 +333,7 @@ if (($delete || $mode == 'delete') && !$confirm) {
             if (!$error_msg) {
                 $topic_type = (isset($post_data['topic_type']) && $topic_type != $post_data['topic_type'] && !$is_auth['auth_sticky'] && !$is_auth['auth_announce']) ? $post_data['topic_type'] : $topic_type;
 
-                submit_post($mode, $post_data, $return_message, $return_meta, $forum_id, $topic_id, $post_id, $topic_type, DB()->escape($username), DB()->escape($subject), DB()->escape($message), $update_post_time, $poster_rg_id, $attach_rg_sig);
+                submit_post($mode, $post_data, $return_message, $return_meta, $forum_id, $topic_id, $post_id, $topic_type, OLD_DB()->escape($username), OLD_DB()->escape($subject), OLD_DB()->escape($message), $update_post_time, $poster_rg_id, $attach_rg_sig);
 
                 $post_url = POST_URL . "$post_id#$post_id";
                 $post_msg = ($mode == 'editpost') ? $lang['EDITED'] : $lang['STORED'];
@@ -367,14 +367,14 @@ if (($delete || $mode == 'delete') && !$confirm) {
 
         if (defined('TORRENT_ATTACH_ID') && $bb_cfg['bt_newtopic_auto_reg'] && !$error_msg) {
             include INC_DIR . '/functions_torrent.php';
-            if (!DB()->fetch_row("SELECT attach_id FROM " . BB_BT_TORRENTS . " WHERE attach_id = " . TORRENT_ATTACH_ID)) {
+            if (!OLD_DB()->fetch_row("SELECT attach_id FROM " . BB_BT_TORRENTS . " WHERE attach_id = " . TORRENT_ATTACH_ID)) {
                 if ($bb_cfg['premod']) {
                     // Получение списка id форумов начиная с parent
                     $forum_parent = $forum_id;
                     if ($post_info['forum_parent']) {
                         $forum_parent = $post_info['forum_parent'];
                     }
-                    $count_rowset = DB()->fetch_rowset("SELECT forum_id FROM " . BB_FORUMS . " WHERE forum_parent = $forum_parent");
+                    $count_rowset = OLD_DB()->fetch_rowset("SELECT forum_id FROM " . BB_FORUMS . " WHERE forum_parent = $forum_parent");
                     $sub_forums = array();
                     foreach ($count_rowset as $count_row) {
                         if ($count_row['forum_id'] != $forum_id) {
@@ -384,7 +384,7 @@ if (($delete || $mode == 'delete') && !$confirm) {
                     $sub_forums[] = $forum_id;
                     $sub_forums = implode(',', $sub_forums);
                     // Подсчет проверенных релизов в форумах раздела
-                    $count_checked_releases = DB()->fetch_row("
+                    $count_checked_releases = OLD_DB()->fetch_row("
 						SELECT COUNT(*) AS checked_releases
 						FROM " . BB_BT_TORRENTS . "
 						WHERE poster_id  = " . $userdata['user_id'] . "
@@ -539,7 +539,7 @@ if ($post_info['allow_reg_tracker'] && $post_data['first_post'] && ($topic_dl_ty
 		LEFT JOIN " . BB_BT_TORRENTS . " tor ON (p.post_id = tor.post_id)
 		WHERE p.post_id = $post_id
 	";
-    $result = DB()->fetch_row($sql);
+    $result = OLD_DB()->fetch_row($sql);
     if (!empty($result['attach_id'])) {
         if (!$topic_type_toggle) {
             $topic_type_toggle = $lang['POST_TOPIC_AS'] . ': ';
@@ -574,7 +574,7 @@ if ($userdata['user_level'] == GROUP_MEMBER || IS_AM) {
 			AND g.release_group = 1
 		ORDER BY g.group_name";
 
-    foreach (DB()->fetch_rowset($sql) as $row) {
+    foreach (OLD_DB()->fetch_rowset($sql) as $row) {
         $selected_opt = ($row['group_id'] == $selected_rg) ? 'selected' : '';
         $poster_rgroups .= '<option value="' . $row['group_id'] . '" ' . $selected_opt . '>' . $row['group_name'] . '</option>';
     }

@@ -32,7 +32,7 @@ switch ($mode) {
 					ORDER BY g.group_name
 				";
         $html = array();
-        foreach (DB()->fetch_rowset($sql) as $row) {
+        foreach (OLD_DB()->fetch_rowset($sql) as $row) {
             $class = ($row['user_pending']) ? 'med' : 'med bold';
             $class .= ($row['group_moderator'] == $user_id) ? ' colorMod' : '';
             $href = "group.php?g={$row['group_id']}";

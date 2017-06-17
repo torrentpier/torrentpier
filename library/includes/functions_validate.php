@@ -42,9 +42,9 @@ function validate_username($username, $check_ban_and_taken = true)
     }
     if ($check_ban_and_taken) {
         // Занято
-        $username_sql = DB()->escape($username);
+        $username_sql = OLD_DB()->escape($username);
 
-        if ($row = DB()->fetch_row("SELECT username FROM " . BB_USERS . " WHERE username = '$username_sql' LIMIT 1")) {
+        if ($row = OLD_DB()->fetch_row("SELECT username FROM " . BB_USERS . " WHERE username = '$username_sql' LIMIT 1")) {
             if ((!IS_GUEST && $row['username'] != $user->name) || IS_GUEST) {
                 return $lang['USERNAME_TAKEN'];
             }
@@ -52,7 +52,7 @@ function validate_username($username, $check_ban_and_taken = true)
         // Запрещено
         $banned_names = array();
 
-        foreach (DB()->fetch_rowset("SELECT disallow_username FROM " . BB_DISALLOW . " ORDER BY NULL") as $row) {
+        foreach (OLD_DB()->fetch_rowset("SELECT disallow_username FROM " . BB_DISALLOW . " ORDER BY NULL") as $row) {
             $banned_names[] = str_replace('\*', '.*?', preg_quote($row['disallow_username'], '#u'));
         }
         if ($banned_names_exp = implode('|', $banned_names)) {
@@ -80,7 +80,7 @@ function validate_email($email, $check_ban_and_taken = true)
     if ($check_ban_and_taken) {
         $banned_emails = array();
 
-        foreach (DB()->fetch_rowset("SELECT ban_email FROM " . BB_BANLIST . " ORDER BY NULL") as $row) {
+        foreach (OLD_DB()->fetch_rowset("SELECT ban_email FROM " . BB_BANLIST . " ORDER BY NULL") as $row) {
             $banned_emails[] = str_replace('\*', '.*?', preg_quote($row['ban_email'], '#'));
         }
         if ($banned_emails_exp = implode('|', $banned_emails)) {
@@ -89,9 +89,9 @@ function validate_email($email, $check_ban_and_taken = true)
             }
         }
 
-        $email_sql = DB()->escape($email);
+        $email_sql = OLD_DB()->escape($email);
 
-        if ($row = DB()->fetch_row("SELECT `user_email` FROM " . BB_USERS . " WHERE user_email = '$email_sql' LIMIT 1")) {
+        if ($row = OLD_DB()->fetch_row("SELECT `user_email` FROM " . BB_USERS . " WHERE user_email = '$email_sql' LIMIT 1")) {
             if ($row['user_email'] == $userdata['user_email']) {
                 return false;
             } else {

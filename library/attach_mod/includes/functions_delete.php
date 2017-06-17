@@ -44,21 +44,21 @@ function delete_attachment($post_id_array = 0, $attach_id_array = 0, $page = 0, 
 				WHERE attach_id IN (' . implode(', ', $attach_id_array) . ")
 			GROUP BY $p_id";
 
-        if (!($result = DB()->sql_query($sql))) {
+        if (!($result = OLD_DB()->sql_query($sql))) {
             bb_die('Could not select ids');
         }
 
-        $num_post_list = DB()->num_rows($result);
+        $num_post_list = OLD_DB()->num_rows($result);
 
         if ($num_post_list == 0) {
-            DB()->sql_freeresult($result);
+            OLD_DB()->sql_freeresult($result);
             return;
         }
 
-        while ($row = DB()->sql_fetchrow($result)) {
+        while ($row = OLD_DB()->sql_fetchrow($result)) {
             $post_id_array[] = (int)$row[$p_id];
         }
-        DB()->sql_freeresult($result);
+        OLD_DB()->sql_freeresult($result);
     }
 
     if (!is_array($post_id_array)) {
@@ -93,21 +93,21 @@ function delete_attachment($post_id_array = 0, $attach_id_array = 0, $page = 0, 
 			FROM ' . BB_ATTACHMENTS . " $whereclause
 			GROUP BY attach_id";
 
-        if (!($result = DB()->sql_query($sql))) {
+        if (!($result = OLD_DB()->sql_query($sql))) {
             bb_die('Could not select attachment id #1');
         }
 
-        $num_attach_list = DB()->num_rows($result);
+        $num_attach_list = OLD_DB()->num_rows($result);
 
         if ($num_attach_list == 0) {
-            DB()->sql_freeresult($result);
+            OLD_DB()->sql_freeresult($result);
             return;
         }
 
-        while ($row = DB()->sql_fetchrow($result)) {
+        while ($row = OLD_DB()->sql_fetchrow($result)) {
             $attach_id_array[] = (int)$row['attach_id'];
         }
-        DB()->sql_freeresult($result);
+        OLD_DB()->sql_freeresult($result);
     }
 
     if (!is_array($attach_id_array)) {
@@ -134,7 +134,7 @@ function delete_attachment($post_id_array = 0, $attach_id_array = 0, $page = 0, 
 			WHERE attach_id IN (' . implode(', ', $attach_id_array) . ")
 				AND $sql_id IN (" . implode(', ', $post_id_array) . ')';
 
-        if (!(DB()->sql_query($sql))) {
+        if (!(OLD_DB()->sql_query($sql))) {
             bb_die($lang['ERROR_DELETED_ATTACHMENTS']);
         }
 
@@ -142,13 +142,13 @@ function delete_attachment($post_id_array = 0, $attach_id_array = 0, $page = 0, 
         if ($sql_id == 'post_id') {
             $sql = "SELECT topic_id FROM " . BB_BT_TORRENTS . " WHERE attach_id IN(" . implode(',', $attach_id_array) . ")";
 
-            if (!$result = DB()->sql_query($sql)) {
+            if (!$result = OLD_DB()->sql_query($sql)) {
                 bb_die($lang['ERROR_DELETED_ATTACHMENTS']);
             }
 
             $torrents_sql = array();
 
-            while ($row = DB()->sql_fetchrow($result)) {
+            while ($row = OLD_DB()->sql_fetchrow($result)) {
                 $torrents_sql[] = $row['topic_id'];
             }
 
@@ -157,7 +157,7 @@ function delete_attachment($post_id_array = 0, $attach_id_array = 0, $page = 0, 
                 $sql = "DELETE FROM " . BB_BT_TRACKER . "
 					WHERE topic_id IN($torrents_sql)";
 
-                if (!DB()->sql_query($sql)) {
+                if (!OLD_DB()->sql_query($sql)) {
                     bb_die('Could not delete peers');
                 }
             }
@@ -165,7 +165,7 @@ function delete_attachment($post_id_array = 0, $attach_id_array = 0, $page = 0, 
             $sql = "DELETE FROM " . BB_BT_TORRENTS . "
 				WHERE attach_id IN(" . implode(',', $attach_id_array) . ")";
 
-            if (!DB()->sql_query($sql)) {
+            if (!OLD_DB()->sql_query($sql)) {
                 bb_die($lang['ERROR_DELETED_ATTACHMENTS']);
             }
         }
@@ -176,27 +176,27 @@ function delete_attachment($post_id_array = 0, $attach_id_array = 0, $page = 0, 
 				FROM ' . BB_ATTACHMENTS . '
 						WHERE attach_id = ' . (int)$attach_id_array[$i];
 
-            if (!($result = DB()->sql_query($sql))) {
+            if (!($result = OLD_DB()->sql_query($sql))) {
                 bb_die('Could not select Attachment id #2');
             }
 
-            $num_rows = DB()->num_rows($result);
-            DB()->sql_freeresult($result);
+            $num_rows = OLD_DB()->num_rows($result);
+            OLD_DB()->sql_freeresult($result);
 
             if ($num_rows == 0) {
                 $sql = 'SELECT attach_id, physical_filename, thumbnail
 						FROM ' . BB_ATTACHMENTS_DESC . '
 							WHERE attach_id = ' . (int)$attach_id_array[$i];
 
-                if (!($result = DB()->sql_query($sql))) {
+                if (!($result = OLD_DB()->sql_query($sql))) {
                     bb_die('Could not query attach description table');
                 }
-                $num_rows = DB()->num_rows($result);
+                $num_rows = OLD_DB()->num_rows($result);
 
                 if ($num_rows != 0) {
                     $num_attach = $num_rows;
-                    $attachments = DB()->sql_fetchrowset($result);
-                    DB()->sql_freeresult($result);
+                    $attachments = OLD_DB()->sql_fetchrowset($result);
+                    OLD_DB()->sql_freeresult($result);
 
                     // delete attachments
                     for ($j = 0; $j < $num_attach; $j++) {
@@ -208,12 +208,12 @@ function delete_attachment($post_id_array = 0, $attach_id_array = 0, $page = 0, 
 
                         $sql = 'DELETE FROM ' . BB_ATTACHMENTS_DESC . ' WHERE attach_id = ' . (int)$attachments[$j]['attach_id'];
 
-                        if (!(DB()->sql_query($sql))) {
+                        if (!(OLD_DB()->sql_query($sql))) {
                             bb_die($lang['ERROR_DELETED_ATTACHMENTS']);
                         }
                     }
                 } else {
-                    DB()->sql_freeresult($result);
+                    OLD_DB()->sql_freeresult($result);
                 }
             }
         }
@@ -226,13 +226,13 @@ function delete_attachment($post_id_array = 0, $attach_id_array = 0, $page = 0, 
 			WHERE post_id IN (' . implode(', ', $post_id_array) . ')
 			GROUP BY topic_id';
 
-        if (!($result = DB()->sql_query($sql))) {
+        if (!($result = OLD_DB()->sql_query($sql))) {
             bb_die('Could not select topic id');
         }
 
-        while ($row = DB()->sql_fetchrow($result)) {
+        while ($row = OLD_DB()->sql_fetchrow($result)) {
             attachment_sync_topic($row['topic_id']);
         }
-        DB()->sql_freeresult($result);
+        OLD_DB()->sql_freeresult($result);
     }
 }

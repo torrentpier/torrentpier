@@ -45,9 +45,9 @@ function msg_die($msg)
 
 require __DIR__ . '/includes/init_tr.php';
 
-$info_hash_sql = rtrim(DB()->escape($info_hash), ' ');
+$info_hash_sql = rtrim(OLD_DB()->escape($info_hash), ' ');
 
-$row = DB()->fetch_row("
+$row = OLD_DB()->fetch_row("
 		SELECT tor.complete_count, snap.seeders, snap.leechers
 		FROM " . BB_BT_TORRENTS . " tor
 		LEFT JOIN " . BB_BT_TRACKER_SNAP . " snap ON (snap.topic_id = tor.topic_id)

@@ -56,7 +56,7 @@ if ($show_dl_list) {
 			LIMIT $dl_list_sql_limit";
     }
 
-    if ($dl_info = DB()->fetch_rowset($sql)) {
+    if ($dl_info = OLD_DB()->fetch_rowset($sql)) {
         if ($count_mode) {
             $template->assign_block_vars('dl_counts', array());
         } else {

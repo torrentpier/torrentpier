@@ -36,7 +36,7 @@ if (!IS_SUPER_ADMIN) {
 require INC_DIR . '/functions_admin_torrent.php';
 require INC_DIR . '/functions_admin_cron.php';
 
-$sql = DB()->fetch_rowset('SELECT * FROM ' . BB_CONFIG . " WHERE config_name = 'cron_enabled' OR config_name = 'cron_check_interval'");
+$sql = OLD_DB()->fetch_rowset('SELECT * FROM ' . BB_CONFIG . " WHERE config_name = 'cron_enabled' OR config_name = 'cron_check_interval'");
 
 foreach ($sql as $row) {
     $config_name = $row['config_name'];
@@ -57,7 +57,7 @@ $template->assign_vars(array(
 
 switch ($mode) {
     case 'list':
-        $sql = DB()->fetch_rowset('SELECT * FROM ' . BB_CRON . ' ORDER BY cron_id');
+        $sql = OLD_DB()->fetch_rowset('SELECT * FROM ' . BB_CRON . ' ORDER BY cron_id');
 
         foreach ($sql as $i => $row) {
             $template->assign_block_vars('list', array(
@@ -102,7 +102,7 @@ switch ($mode) {
         break;
 
     case 'edit':
-        $sql = DB()->fetch_rowset('SELECT * FROM ' . BB_CRON . " WHERE cron_id = $job_id");
+        $sql = OLD_DB()->fetch_rowset('SELECT * FROM ' . BB_CRON . " WHERE cron_id = $job_id");
 
         foreach ($sql as $row) {
             $template->assign_vars(array(

@@ -90,29 +90,29 @@ if ($attach_config['disable_mod'] && !IS_ADMIN) {
 
 $sql = 'SELECT * FROM ' . BB_ATTACHMENTS_DESC . ' WHERE attach_id = ' . (int)$download_id;
 
-if (!($result = DB()->sql_query($sql))) {
+if (!($result = OLD_DB()->sql_query($sql))) {
     bb_die('Could not query attachment information #1');
 }
 
-if (!($attachment = DB()->sql_fetchrow($result))) {
+if (!($attachment = OLD_DB()->sql_fetchrow($result))) {
     bb_die($lang['ERROR_NO_ATTACHMENT']);
 }
 
 $attachment['physical_filename'] = basename($attachment['physical_filename']);
 
-DB()->sql_freeresult($result);
+OLD_DB()->sql_freeresult($result);
 
 // get forum_id for attachment authorization or private message authorization
 $authorised = false;
 
 $sql = 'SELECT * FROM ' . BB_ATTACHMENTS . ' WHERE attach_id = ' . (int)$attachment['attach_id'];
 
-if (!($result = DB()->sql_query($sql))) {
+if (!($result = OLD_DB()->sql_query($sql))) {
     bb_die('Could not query attachment information #2');
 }
 
-$auth_pages = DB()->sql_fetchrowset($result);
-$num_auth_pages = DB()->num_rows($result);
+$auth_pages = OLD_DB()->sql_fetchrowset($result);
+$num_auth_pages = OLD_DB()->num_rows($result);
 
 for ($i = 0; $i < $num_auth_pages && $authorised == false; $i++) {
     $auth_pages[$i]['post_id'] = (int)$auth_pages[$i]['post_id'];
@@ -120,11 +120,11 @@ for ($i = 0; $i < $num_auth_pages && $authorised == false; $i++) {
     if ($auth_pages[$i]['post_id'] != 0) {
         $sql = 'SELECT forum_id, topic_id FROM ' . BB_POSTS . ' WHERE post_id = ' . (int)$auth_pages[$i]['post_id'];
 
-        if (!($result = DB()->sql_query($sql))) {
+        if (!($result = OLD_DB()->sql_query($sql))) {
             bb_die('Could not query post information');
         }
 
-        $row = DB()->sql_fetchrow($result);
+        $row = OLD_DB()->sql_fetchrow($result);
 
         $topic_id = $row['topic_id'];
         $forum_id = $row['forum_id'];
@@ -172,7 +172,7 @@ if ($thumbnail) {
 if (!$thumbnail) {
     $sql = 'UPDATE ' . BB_ATTACHMENTS_DESC . ' SET download_count = download_count + 1 WHERE attach_id = ' . (int)$attachment['attach_id'];
 
-    if (!DB()->sql_query($sql)) {
+    if (!OLD_DB()->sql_query($sql)) {
         bb_die('Could not update attachment download count');
     }
 }

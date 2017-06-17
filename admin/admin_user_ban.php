@@ -52,12 +52,12 @@ if (isset($_POST['submit'])) {
     }
 
     $sql = 'SELECT * FROM ' . BB_BANLIST;
-    if (!($result = DB()->sql_query($sql))) {
+    if (!($result = OLD_DB()->sql_query($sql))) {
         bb_die('Could not obtain banlist information');
     }
 
-    $current_banlist = DB()->sql_fetchrowset($result);
-    DB()->sql_freeresult($result);
+    $current_banlist = OLD_DB()->sql_fetchrowset($result);
+    OLD_DB()->sql_freeresult($result);
 
     $kill_session_sql = '';
     for ($i = 0, $iMax = count($user_list); $i < $iMax; $i++) {
@@ -72,7 +72,7 @@ if (isset($_POST['submit'])) {
             $kill_session_sql .= (($kill_session_sql != '') ? ' OR ' : '') . 'session_user_id = ' . $user_list[$i];
 
             $sql = 'INSERT INTO ' . BB_BANLIST . ' (ban_userid) VALUES (' . $user_list[$i] . ')';
-            if (!DB()->sql_query($sql)) {
+            if (!OLD_DB()->sql_query($sql)) {
                 bb_die('Could not insert ban_userid info into database');
             }
         }
@@ -96,7 +96,7 @@ if (isset($_POST['submit'])) {
             $kill_session_sql .= (($kill_session_sql != '') ? ' OR ' : '') . $kill_ip_sql;
 
             $sql = 'INSERT INTO ' . BB_BANLIST . " (ban_ip) VALUES ('" . $ip_list[$i] . "')";
-            if (!DB()->sql_query($sql)) {
+            if (!OLD_DB()->sql_query($sql)) {
                 bb_die('Could not insert ban_ip info into database');
             }
         }
@@ -105,7 +105,7 @@ if (isset($_POST['submit'])) {
     // Now we'll delete all entries from the session table
     if ($kill_session_sql != '') {
         $sql = 'DELETE FROM ' . BB_SESSIONS . " WHERE $kill_session_sql";
-        if (!DB()->sql_query($sql)) {
+        if (!OLD_DB()->sql_query($sql)) {
             bb_die('Could not delete banned sessions from database');
         }
     }
@@ -119,8 +119,8 @@ if (isset($_POST['submit'])) {
         }
 
         if (!$in_banlist) {
-            $sql = 'INSERT INTO ' . BB_BANLIST . " (ban_email) VALUES ('" . DB()->escape($email_list[$i]) . "')";
-            if (!DB()->sql_query($sql)) {
+            $sql = 'INSERT INTO ' . BB_BANLIST . " (ban_email) VALUES ('" . OLD_DB()->escape($email_list[$i]) . "')";
+            if (!OLD_DB()->sql_query($sql)) {
                 bb_die('Could not insert ban_email info into database');
             }
         }
@@ -143,7 +143,7 @@ if (isset($_POST['submit'])) {
 
         for ($i = 0, $iMax = count($ip_list); $i < $iMax; $i++) {
             if ($ip_list[$i] != -1) {
-                $where_sql .= (($where_sql != '') ? ', ' : '') . DB()->escape($ip_list[$i]);
+                $where_sql .= (($where_sql != '') ? ', ' : '') . OLD_DB()->escape($ip_list[$i]);
             }
         }
     }
@@ -153,14 +153,14 @@ if (isset($_POST['submit'])) {
 
         for ($i = 0, $iMax = count($email_list); $i < $iMax; $i++) {
             if ($email_list[$i] != -1) {
-                $where_sql .= (($where_sql != '') ? ', ' : '') . DB()->escape($email_list[$i]);
+                $where_sql .= (($where_sql != '') ? ', ' : '') . OLD_DB()->escape($email_list[$i]);
             }
         }
     }
 
     if ($where_sql != '') {
         $sql = 'DELETE FROM ' . BB_BANLIST . " WHERE ban_id IN ($where_sql)";
-        if (!DB()->sql_query($sql)) {
+        if (!OLD_DB()->sql_query($sql)) {
             bb_die('Could not delete ban info from database');
         }
     }
@@ -181,12 +181,12 @@ if (isset($_POST['submit'])) {
 			AND b.ban_userid <> 0
 			AND u.user_id <> ' . GUEST_UID . '
 		ORDER BY u.username ASC';
-    if (!($result = DB()->sql_query($sql))) {
+    if (!($result = OLD_DB()->sql_query($sql))) {
         bb_die('Could not select current user_id ban list');
     }
 
-    $user_list = DB()->sql_fetchrowset($result);
-    DB()->sql_freeresult($result);
+    $user_list = OLD_DB()->sql_fetchrowset($result);
+    OLD_DB()->sql_freeresult($result);
 
     $select_userlist = '';
     for ($i = 0, $iMax = count($user_list); $i < $iMax; $i++) {
@@ -201,12 +201,12 @@ if (isset($_POST['submit'])) {
     $select_userlist = '<select name="unban_user[]" multiple size="5">' . $select_userlist . '</select>';
 
     $sql = 'SELECT ban_id, ban_ip, ban_email FROM ' . BB_BANLIST . ' ORDER BY ban_ip';
-    if (!($result = DB()->sql_query($sql))) {
+    if (!($result = OLD_DB()->sql_query($sql))) {
         bb_die('Could not select current ip ban list');
     }
 
-    $banlist = DB()->sql_fetchrowset($result);
-    DB()->sql_freeresult($result);
+    $banlist = OLD_DB()->sql_fetchrowset($result);
+    OLD_DB()->sql_freeresult($result);
 
     $select_iplist = '';
     $select_emaillist = '';

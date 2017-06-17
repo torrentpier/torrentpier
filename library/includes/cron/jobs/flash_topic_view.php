@@ -12,13 +12,13 @@ if (!defined('BB_ROOT')) {
 }
 
 // Lock tables
-DB()->lock(array(
+OLD_DB()->lock(array(
     BB_TOPICS . ' t',
     BUF_TOPIC_VIEW . ' buf',
 ));
 
 // Flash buffered records
-DB()->query("
+OLD_DB()->query("
 	UPDATE
 		" . BB_TOPICS . " t,
 		" . BUF_TOPIC_VIEW . " buf
@@ -29,7 +29,7 @@ DB()->query("
 ");
 
 // Delete buffered records
-DB()->query("DELETE buf FROM " . BUF_TOPIC_VIEW . " buf");
+OLD_DB()->query("DELETE buf FROM " . BUF_TOPIC_VIEW . " buf");
 
 // Unlock tables
-DB()->unlock();
+OLD_DB()->unlock();

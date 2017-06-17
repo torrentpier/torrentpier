@@ -102,7 +102,7 @@ if (!$group_id) {
 			g.group_name ASC
 	";
 
-    foreach (DB()->fetch_rowset($sql) as $row) {
+    foreach (OLD_DB()->fetch_rowset($sql) as $row) {
         if ($row['is_group_mod']) {
             $type = 'MOD';
         } elseif ($row['membership'] == $member) {
@@ -183,7 +183,7 @@ if (!$group_id) {
 			AND g.group_type = " . GROUP_OPEN . "
 		LIMIT 1";
 
-    $row = $moderator = DB()->fetch_row($sql);
+    $row = $moderator = OLD_DB()->fetch_row($sql);
 
     if (!$row['group_id']) {
         bb_die($lang['NO_GROUPS_EXIST']);
@@ -267,7 +267,7 @@ if (!$group_id) {
                 }
 
                 if (!empty($_POST['approve'])) {
-                    DB()->query("
+                    OLD_DB()->query("
 						UPDATE " . BB_USER_GROUP . " SET
 							user_pending = 0
 						WHERE user_id IN($sql_in)
@@ -276,7 +276,7 @@ if (!$group_id) {
 
                     update_user_level($sql_in);
                 } elseif (!empty($_POST['deny']) || !empty($_POST['remove'])) {
-                    DB()->query("
+                    OLD_DB()->query("
 						DELETE FROM " . BB_USER_GROUP . "
 						WHERE user_id IN($sql_in)
 							AND group_id = $group_id
@@ -292,11 +292,11 @@ if (!$group_id) {
 						FROM " . BB_USERS . "
 						WHERE user_id IN($sql_in)";
 
-                    if (!$result = DB()->sql_query($sql_select)) {
+                    if (!$result = OLD_DB()->sql_query($sql_select)) {
                         bb_die('Could not get user email information');
                     }
 
-                    foreach (DB()->fetch_rowset($sql_select) as $row) {
+                    foreach (OLD_DB()->fetch_rowset($sql_select) as $row) {
                         /** @var TorrentPier\Legacy\Emailer() $emailer */
                         $emailer = new TorrentPier\Legacy\Emailer();
 
@@ -320,7 +320,7 @@ if (!$group_id) {
     // END approve or deny
 
     // Get moderator details for this group
-    $group_moderator = DB()->fetch_row("
+    $group_moderator = OLD_DB()->fetch_row("
 		SELECT *
 		FROM " . BB_USERS . "
 		WHERE user_id = " . $group_info['group_moderator'] . "
@@ -335,7 +335,7 @@ if (!$group_id) {
 			AND user_id = " . $userdata['user_id'] . "
 		LIMIT 1";
 
-    if ($row = DB()->fetch_row($sql)) {
+    if ($row = OLD_DB()->fetch_row($sql)) {
         if ($row['user_pending'] == 0) {
             $is_group_member = true;
         } else {
@@ -437,7 +437,7 @@ if (!$group_id) {
             }
 
             // Count releases for pagination
-            $all_releases = DB()->fetch_rowset("
+            $all_releases = OLD_DB()->fetch_rowset("
 				SELECT p.topic_id, p.forum_id, p.poster_id, t.topic_title, t.topic_time, f.forum_name, u.username, u.avatar_ext_id, u.user_opt, u.user_rank
 				FROM " . BB_POSTS . " p
 				LEFT JOIN " . BB_TOPICS . " t ON(p.topic_id = t.topic_id)
@@ -462,7 +462,7 @@ if (!$group_id) {
 				LIMIT $start, $per_page
 			";
 
-            if (!$releases = DB()->fetch_rowset($sql)) {
+            if (!$releases = OLD_DB()->fetch_rowset($sql)) {
                 set_die_append_msg(false, false, $group_id);
                 bb_die($lang['NO_SEARCH_MATCH']);
             }
@@ -491,7 +491,7 @@ if (!$group_id) {
         default:
 
             // Members
-            $count_members = DB()->fetch_rowset("
+            $count_members = OLD_DB()->fetch_rowset("
 				SELECT u.username, u.user_rank, u.user_id, u.user_opt, u.user_posts, u.user_regdate, u.user_from, u.user_website, u.user_email, ug.user_pending, ug.user_time
 				FROM " . BB_USER_GROUP . " ug, " . BB_USERS . " u
 				WHERE ug.group_id = $group_id
@@ -506,7 +506,7 @@ if (!$group_id) {
             $modgroup_pending_count = 0;
 
             // Members
-            $group_members = DB()->fetch_rowset("
+            $group_members = OLD_DB()->fetch_rowset("
 				SELECT u.username, u.avatar_ext_id, u.user_rank, u.user_id, u.user_opt, u.user_posts, u.user_regdate, u.user_from, u.user_website, u.user_email, ug.user_pending, ug.user_time
 				FROM " . BB_USER_GROUP . " ug, " . BB_USERS . " u
 				WHERE ug.group_id = $group_id
@@ -562,7 +562,7 @@ if (!$group_id) {
 
             // Pending
             if ($is_moderator) {
-                $modgroup_pending_list = DB()->fetch_rowset("
+                $modgroup_pending_list = OLD_DB()->fetch_rowset("
 					SELECT u.username, u.avatar_ext_id, u.user_rank, u.user_id, u.user_opt, u.user_posts, u.user_regdate, u.user_from, u.user_website, u.user_email
 					FROM " . BB_USER_GROUP . " ug, " . BB_USERS . " u
 					WHERE ug.group_id = $group_id

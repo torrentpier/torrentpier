@@ -119,7 +119,7 @@ if ($by_letter_req) {
         $by_letter = 'others';
         $letter_sql = "username REGEXP '^[!-@\\[-`].*$'";
     } elseif ($letter_req = preg_replace("#[^$letters_range]#ui", '', iconv('windows-1251', 'UTF-8', $by_letter_req))) {
-        $by_letter = DB()->escape($letter_req);
+        $by_letter = OLD_DB()->escape($letter_req);
         $letter_sql = "LOWER(username) LIKE '$by_letter%'";
     }
 }
@@ -148,12 +148,12 @@ $template->assign_vars(array(
 $sql = "SELECT username, user_id, user_rank, user_opt, user_posts, user_regdate, user_from, user_website, user_email FROM " . BB_USERS . " WHERE user_id NOT IN(" . EXCLUDED_USERS . ")";
 if ($username) {
     $username = preg_replace('/\*/', '%', clean_username($username));
-    $letter_sql = "username LIKE '" . DB()->escape($username) . "'";
+    $letter_sql = "username LIKE '" . OLD_DB()->escape($username) . "'";
 }
 $sql .= ($letter_sql) ? " AND $letter_sql" : '';
 $sql .= " ORDER BY $order_by";
 
-if ($result = DB()->fetch_rowset($sql)) {
+if ($result = OLD_DB()->fetch_rowset($sql)) {
     foreach ($result as $i => $row) {
         $user_id = $row['user_id'];
         $from = $row['user_from'];
@@ -202,14 +202,14 @@ if ($paginationusername) {
 if ($mode != 'topten' || $bb_cfg['topics_per_page'] < 10) {
     $sql = "SELECT COUNT(*) AS total FROM " . BB_USERS;
     $sql .= ($letter_sql) ? " WHERE $letter_sql" : " WHERE user_id NOT IN(". EXCLUDED_USERS .")";
-    if (!$result = DB()->sql_query($sql)) {
+    if (!$result = OLD_DB()->sql_query($sql)) {
         bb_die('Error getting total users');
     }
-    if ($total = DB()->sql_fetchrow($result)) {
+    if ($total = OLD_DB()->sql_fetchrow($result)) {
         $total_members = $total['total'];
         generate_pagination($paginationurl, $total_members, $bb_cfg['topics_per_page'], $start);
     }
-    DB()->sql_freeresult($result);
+    OLD_DB()->sql_freeresult($result);
 }
 
 $template->assign_vars(array(

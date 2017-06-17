@@ -78,7 +78,7 @@ if ($logged_in && empty($gen_simple_header) && !defined('IN_ADMIN')) {
     if (!$have_new_pm && $userdata['user_unread_privmsg']) {
         // synch unread pm count
         if (defined('IN_PM')) {
-            $row = DB()->fetch_row("
+            $row = OLD_DB()->fetch_row("
 				SELECT COUNT(*) AS pm_count
 				FROM " . BB_PRIVMSGS . "
 				WHERE privmsgs_to_userid = " . $userdata['user_id'] . "
@@ -225,7 +225,7 @@ if (!empty($bb_cfg['page']['show_torhelp'][BB_SCRIPT]) && !empty($userdata['torh
 		";
         $torhelp_topics = array();
 
-        foreach (DB()->fetch_rowset($sql) as $row) {
+        foreach (OLD_DB()->fetch_rowset($sql) as $row) {
             $torhelp_topics[] = '<a href="viewtopic.php?t=' . $row['topic_id'] . '">' . $row['topic_title'] . '</a>';
         }
 

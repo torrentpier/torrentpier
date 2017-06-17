@@ -36,11 +36,11 @@ if ($mode != '') {
         if ($mode == 'edit') {
             if ($word_id) {
                 $sql = 'SELECT * FROM ' . BB_WORDS . " WHERE word_id = $word_id";
-                if (!$result = DB()->sql_query($sql)) {
+                if (!$result = OLD_DB()->sql_query($sql)) {
                     bb_die('Could not query words table #1');
                 }
 
-                $word_info = DB()->sql_fetchrow($result);
+                $word_info = OLD_DB()->sql_fetchrow($result);
                 $s_hidden_fields .= '<input type="hidden" name="id" value="' . $word_id . '" />';
                 $word = $word_info['word'];
                 $replacement = $word_info['replacement'];
@@ -67,16 +67,16 @@ if ($mode != '') {
 
         if ($word_id) {
             $sql = 'UPDATE ' . BB_WORDS . "
-				SET word = '" . DB()->escape($word) . "', replacement = '" . DB()->escape($replacement) . "'
+				SET word = '" . OLD_DB()->escape($word) . "', replacement = '" . OLD_DB()->escape($replacement) . "'
 				WHERE word_id = $word_id";
             $message = $lang['WORD_UPDATED'];
         } else {
             $sql = 'INSERT INTO ' . BB_WORDS . " (word, replacement)
-				VALUES ('" . DB()->escape($word) . "', '" . DB()->escape($replacement) . "')";
+				VALUES ('" . OLD_DB()->escape($word) . "', '" . OLD_DB()->escape($replacement) . "')";
             $message = $lang['WORD_ADDED'];
         }
 
-        if (!$result = DB()->sql_query($sql)) {
+        if (!$result = OLD_DB()->sql_query($sql)) {
             bb_die('Could not insert data into words table');
         }
 
@@ -90,7 +90,7 @@ if ($mode != '') {
         if ($word_id) {
             $sql = 'DELETE FROM ' . BB_WORDS . " WHERE word_id = $word_id";
 
-            if (!$result = DB()->sql_query($sql)) {
+            if (!$result = OLD_DB()->sql_query($sql)) {
                 bb_die('Could not remove data from words table');
             }
 
@@ -103,11 +103,11 @@ if ($mode != '') {
     }
 } else {
     $sql = 'SELECT * FROM ' . BB_WORDS . ' ORDER BY word';
-    if (!$result = DB()->sql_query($sql)) {
+    if (!$result = OLD_DB()->sql_query($sql)) {
         bb_die('Could not query words table #2');
     }
 
-    $word_rows = DB()->sql_fetchrowset($result);
+    $word_rows = OLD_DB()->sql_fetchrowset($result);
     $word_count = count($word_rows);
 
     $template->assign_vars(array(

@@ -18,7 +18,7 @@ function update_table_bool($table_name, $key, $field_name, $field_def_val)
 		SET $field_name = $field_def_val
 		WHERE 1";
 
-    if (!$result = DB()->sql_query($sql)) {
+    if (!$result = OLD_DB()->sql_query($sql)) {
         bb_die('Could not update ' . $table_name);
     }
 
@@ -36,7 +36,7 @@ function update_table_bool($table_name, $key, $field_name, $field_def_val)
 				SET $field_name = 1
 				WHERE $key IN($in_sql)";
 
-            if (!$result = DB()->sql_query($sql)) {
+            if (!$result = OLD_DB()->sql_query($sql)) {
                 bb_die('Could not update ' . $table_name);
             }
         }

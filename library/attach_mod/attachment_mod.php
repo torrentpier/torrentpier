@@ -52,11 +52,11 @@ function get_config()
 
     $sql = 'SELECT * FROM ' . BB_ATTACH_CONFIG;
 
-    if (!($result = DB()->sql_query($sql))) {
+    if (!($result = OLD_DB()->sql_query($sql))) {
         bb_die('Could not query attachment information');
     }
 
-    while ($row = DB()->sql_fetchrow($result)) {
+    while ($row = OLD_DB()->sql_fetchrow($result)) {
         $attach_config[$row['config_name']] = trim($row['config_value']);
     }
 

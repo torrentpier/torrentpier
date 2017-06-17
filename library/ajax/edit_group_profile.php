@@ -53,5 +53,5 @@ switch ($mode) {
         $this->ajax_die('Unknown mode');
 }
 
-$value_sql = DB()->escape($value, true);
-DB()->query("UPDATE " . BB_GROUPS . " SET $mode = $value_sql WHERE group_id = $group_id");
+$value_sql = OLD_DB()->escape($value, true);
+OLD_DB()->query("UPDATE " . BB_GROUPS . " SET $mode = $value_sql WHERE group_id = $group_id");

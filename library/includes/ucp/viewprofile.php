@@ -127,7 +127,7 @@ if (IS_ADMIN) {
 		GROUP BY ug.user_id, g.group_single_user, ug.user_pending
 		ORDER BY NULL
 	";
-    if ($rowset = DB()->fetch_rowset($sql)) {
+    if ($rowset = OLD_DB()->fetch_rowset($sql)) {
         $member = $pending = $single = 0;
         foreach ($rowset as $row) {
             if (!$row['group_single_user'] && !$row['user_pending']) {

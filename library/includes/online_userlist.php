@@ -44,7 +44,7 @@ $sql = "
 	ORDER BY u.username
 ";
 
-foreach (DB()->fetch_rowset($sql) as $u) {
+foreach (OLD_DB()->fetch_rowset($sql) as $u) {
     if ($u['session_logged_in']) {
         $stat = array();
         $name = profile_url($u);

@@ -14,7 +14,7 @@ if (!defined('BB_ROOT')) {
 define('IN_CRON', true);
 
 // Set SESSION vars
-DB()->query("
+OLD_DB()->query("
 	SET SESSION
 	  myisam_sort_buffer_size = 16*1024*1024
 	, bulk_insert_buffer_size =  8*1024*1024
@@ -27,7 +27,7 @@ DB()->query("
 ");
 
 // Restore vars at shutdown
-DB()->add_shutdown_query("
+OLD_DB()->add_shutdown_query("
 	SET SESSION
 	  myisam_sort_buffer_size = DEFAULT
 	, bulk_insert_buffer_size = DEFAULT
@@ -62,14 +62,14 @@ foreach ($cron_jobs as $job) {
         }
 
         if ($job['log_sql_queries']) {
-            DB()->log_next_query(100000, $cron_sql_log_file);
+            OLD_DB()->log_next_query(100000, $cron_sql_log_file);
         }
 
         set_time_limit(600);
         require($job_script);
 
         if ($job['log_sql_queries']) {
-            DB()->log_next_query(0);
+            OLD_DB()->log_next_query(0);
             bb_log(LOG_LF, $cron_sql_log_file);
         }
 
@@ -91,7 +91,7 @@ foreach ($cron_jobs as $job) {
             }
         }
 
-        DB()->query("
+        OLD_DB()->query("
 			UPDATE " . BB_CRON . " SET
 				last_run = NOW(),
 				run_counter = run_counter + 1,

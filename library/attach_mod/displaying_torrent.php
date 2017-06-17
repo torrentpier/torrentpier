@@ -112,15 +112,15 @@ if (!$tor_reged) {
 		LEFT JOIN " . BB_USERS . " u ON(bt.checked_user_id = u.user_id)
 		WHERE bt.attach_id = $attach_id";
 
-    if (!$result = DB()->sql_query($sql)) {
+    if (!$result = OLD_DB()->sql_query($sql)) {
         bb_die('Could not obtain torrent information');
     }
-    $tor_info = DB()->sql_fetchrow($result);
-    DB()->sql_freeresult($result);
+    $tor_info = OLD_DB()->sql_fetchrow($result);
+    OLD_DB()->sql_freeresult($result);
 }
 
 if ($tor_reged && !$tor_info) {
-    DB()->query("UPDATE " . BB_ATTACHMENTS_DESC . " SET tracker_status = 0 WHERE attach_id = $attach_id");
+    OLD_DB()->query("UPDATE " . BB_ATTACHMENTS_DESC . " SET tracker_status = 0 WHERE attach_id = $attach_id");
 
     bb_die('Torrent status fixed');
 }
@@ -142,7 +142,7 @@ if ($tor_reged && $tor_info) {
     $tor_type = $tor_info['tor_type'];
 
     // Magnet link
-    $passkey = DB()->fetch_row("SELECT auth_key FROM " . BB_BT_USERS . " WHERE user_id = " . (int)$bt_user_id . " LIMIT 1");
+    $passkey = OLD_DB()->fetch_row("SELECT auth_key FROM " . BB_BT_USERS . " WHERE user_id = " . (int)$bt_user_id . " LIMIT 1");
     $tor_magnet = create_magnet($tor_info['info_hash'], $passkey['auth_key'], $userdata['session_logged_in']);
 
     // ratio limits
@@ -165,7 +165,7 @@ if ($tor_reged && $tor_info) {
 			LIMIT 1";
     }
 
-    $bt_userdata = DB()->fetch_row($sql);
+    $bt_userdata = OLD_DB()->fetch_row($sql);
 
     $user_status = isset($bt_userdata['user_status']) ? $bt_userdata['user_status'] : null;
 
@@ -294,7 +294,7 @@ if ($tor_reged && $tor_info) {
         }
 
         // Build peers table
-        if ($peers = DB()->fetch_rowset($sql)) {
+        if ($peers = OLD_DB()->fetch_rowset($sql)) {
             $peers_cnt = count($peers);
 
             $cnt = $tr = $sp_up = $sp_down = $sp_up_tot = $sp_down_tot = array();

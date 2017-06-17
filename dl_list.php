@@ -66,7 +66,7 @@ if ($mode == 'dl_delete' && $topic_id) {
     if (!IS_ADMIN) {
         $sql = "SELECT forum_id FROM " . BB_TOPICS . " WHERE topic_id = $topic_id LIMIT 1";
 
-        if (!$row = DB()->sql_fetchrow(DB()->sql_query($sql))) {
+        if (!$row = OLD_DB()->sql_fetchrow(OLD_DB()->sql_query($sql))) {
             bb_die('Could not obtain forum_id for this topic');
         }
 
@@ -114,7 +114,7 @@ if ($mode == 'set_topics_dl_status') {
 if ($req_topics_sql = implode(',', $req_topics_ary)) {
     $sql = "SELECT topic_id FROM " . BB_TOPICS . " WHERE topic_id IN($req_topics_sql)";
 
-    foreach (DB()->fetch_rowset($sql) as $row) {
+    foreach (OLD_DB()->fetch_rowset($sql) as $row) {
         $topics_ary[] = $row['topic_id'];
     }
 }
@@ -129,9 +129,9 @@ if ($topics_ary && ($mode == 'set_dl_status' || $mode == 'set_topics_dl_status')
             'user_status' => (int)$new_dl_status,
         );
     }
-    $new_dlstatus_sql = DB()->build_array('MULTI_INSERT', $new_dlstatus_ary);
+    $new_dlstatus_sql = OLD_DB()->build_array('MULTI_INSERT', $new_dlstatus_ary);
 
-    DB()->query("REPLACE INTO " . BB_BT_DLSTATUS . " $new_dlstatus_sql");
+    OLD_DB()->query("REPLACE INTO " . BB_BT_DLSTATUS . " $new_dlstatus_sql");
 
     redirectToUrl("$redirect_type?$redirect");
 }

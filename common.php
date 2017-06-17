@@ -153,7 +153,7 @@ if (DBG_USER && env('APP_ENV', 'production') === 'local') {
  */
 $DBS = new TorrentPier\Legacy\Dbs($bb_cfg);
 
-function DB($db_alias = 'db')
+function OLD_DB($db_alias = 'db')
 {
     global $DBS;
     return $DBS->get_db_obj($db_alias);

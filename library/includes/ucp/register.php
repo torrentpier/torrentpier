@@ -55,7 +55,7 @@ switch ($mode) {
         if (!IS_ADMIN) {
             // Ограничение по ip
             if ($bb_cfg['unique_ip']) {
-                if ($users = DB()->fetch_row("SELECT user_id, username FROM " . BB_USERS . " WHERE user_reg_ip = '" . USER_IP . "' LIMIT 1")) {
+                if ($users = OLD_DB()->fetch_row("SELECT user_id, username FROM " . BB_USERS . " WHERE user_reg_ip = '" . USER_IP . "' LIMIT 1")) {
                     bb_die(sprintf($lang['ALREADY_REG_IP'], '<a href="' . PROFILE_URL . $users['user_id'] . '"><b>' . $users['username'] . '</b></a>', $bb_cfg['tech_admin_email']));
                 }
             }
@@ -142,7 +142,7 @@ switch ($mode) {
 			WHERE user_id = $pr_user_id
 			LIMIT 1
 		";
-        if (!$pr_data = DB()->fetch_row($sql)) {
+        if (!$pr_data = OLD_DB()->fetch_row($sql)) {
             bb_die($lang['PROFILE_NOT_FOUND']);
         }
         break;
@@ -556,10 +556,10 @@ if ($submit && !$errors) {
             $db_data['tpl_name'] = (string)$bb_cfg['tpl_name'];
         }
 
-        $sql_args = DB()->build_array('INSERT', $db_data);
+        $sql_args = OLD_DB()->build_array('INSERT', $db_data);
 
-        DB()->query("INSERT INTO " . BB_USERS . $sql_args);
-        $new_user_id = DB()->sql_nextid();
+        OLD_DB()->query("INSERT INTO " . BB_USERS . $sql_args);
+        $new_user_id = OLD_DB()->sql_nextid();
 
         if (IS_ADMIN) {
             set_pr_die_append_msg($new_user_id);
@@ -632,9 +632,9 @@ if ($submit && !$errors) {
                 $message = $lang['PROFILE_UPDATED'];
             }
 
-            $sql_args = DB()->build_array('UPDATE', $db_data);
+            $sql_args = OLD_DB()->build_array('UPDATE', $db_data);
 
-            DB()->query("UPDATE " . BB_USERS . " SET $sql_args WHERE user_id = {$pr_data['user_id']}");
+            OLD_DB()->query("UPDATE " . BB_USERS . " SET $sql_args WHERE user_id = {$pr_data['user_id']}");
 
             if ($pr_data['user_id'] != $userdata['user_id']) {
                 if ($pr_data['user_level'] == MOD && !empty($db_data['username'])) {

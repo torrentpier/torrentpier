@@ -129,7 +129,7 @@ $replace_in_parent = array(
 $cache_name = 'index_sql_' . md5($sql);
 if (!$cat_forums = OLD_CACHE('bb_cache')->get($cache_name)) {
     $cat_forums = [];
-    foreach (DB()->fetch_rowset($sql) as $row) {
+    foreach (OLD_DB()->fetch_rowset($sql) as $row) {
         if (!($cat_id = $row['cat_id']) || !($forum_id = $row['forum_id'])) {
             continue;
         }

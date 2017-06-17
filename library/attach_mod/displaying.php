@@ -260,7 +260,7 @@ function display_attachments($post_id)
 						SET download_count = download_count + 1
 						WHERE attach_id = ' . (int)$attachments['_' . $post_id][$i]['attach_id'];
 
-                    if (!(DB()->sql_query($sql))) {
+                    if (!(OLD_DB()->sql_query($sql))) {
                         bb_die('Could not update attachment download count');
                     }
                 }

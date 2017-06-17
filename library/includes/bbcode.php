@@ -381,10 +381,10 @@ function add_search_words($post_id, $post_message, $topic_title = '', $only_retu
         return implode("\n", $words);
     }
 
-    DB()->query("DELETE FROM " . BB_POSTS_SEARCH . " WHERE post_id = $post_id");
+    OLD_DB()->query("DELETE FROM " . BB_POSTS_SEARCH . " WHERE post_id = $post_id");
 
-    if ($words_sql = DB()->escape(implode("\n", $words))) {
-        DB()->query("REPLACE INTO " . BB_POSTS_SEARCH . " (post_id, search_words) VALUES ($post_id, '$words_sql')");
+    if ($words_sql = OLD_DB()->escape(implode("\n", $words))) {
+        OLD_DB()->query("REPLACE INTO " . BB_POSTS_SEARCH . " (post_id, search_words) VALUES ($post_id, '$words_sql')");
     }
 }
 
@@ -437,7 +437,7 @@ function get_parsed_post($postrow, $mode = 'full', $return_chars = 600)
 
     // Posts cache
     if ($bb_cfg['use_posts_cache']) {
-        DB()->shutdown['post_html'][] = array(
+        OLD_DB()->shutdown['post_html'][] = array(
             'post_id' => (int)$postrow['post_id'],
             'post_html' => (string)$message,
         );
@@ -448,5 +448,5 @@ function get_parsed_post($postrow, $mode = 'full', $return_chars = 600)
 
 function update_post_html($postrow)
 {
-    DB()->query("DELETE FROM " . BB_POSTS_HTML . " WHERE post_id = " . (int)$postrow['post_id']);
+    OLD_DB()->query("DELETE FROM " . BB_POSTS_HTML . " WHERE post_id = " . (int)$postrow['post_id']);
 }

@@ -191,24 +191,24 @@ if ($submit_change && $view === 'attachments') {
 		FROM ' . BB_ATTACHMENTS_DESC . '
 		ORDER BY attach_id';
 
-    if (!($result = DB()->sql_query($sql))) {
+    if (!($result = OLD_DB()->sql_query($sql))) {
         bb_die('Could not get attachment informations');
     }
 
-    while ($attachrow = DB()->sql_fetchrow($result)) {
+    while ($attachrow = OLD_DB()->sql_fetchrow($result)) {
         if (isset($attachments['_' . $attachrow['attach_id']])) {
             if ($attachrow['comment'] != $attachments['_' . $attachrow['attach_id']]['comment'] || $attachrow['download_count'] != $attachments['_' . $attachrow['attach_id']]['download_count']) {
                 $sql = 'UPDATE ' . BB_ATTACHMENTS_DESC . "
 					SET comment = '" . attach_mod_sql_escape($attachments['_' . $attachrow['attach_id']]['comment']) . "', download_count = " . (int)$attachments['_' . $attachrow['attach_id']]['download_count'] . '
 					WHERE attach_id = ' . (int)$attachrow['attach_id'];
 
-                if (!DB()->sql_query($sql)) {
+                if (!OLD_DB()->sql_query($sql)) {
                     bb_die('Could not update attachments informations');
                 }
             }
         }
     }
-    DB()->sql_freeresult($result);
+    OLD_DB()->sql_freeresult($result);
 }
 
 // Statistics
@@ -218,17 +218,17 @@ if ($view == 'stats') {
     $attachment_quota = humn_size($attach_config['attachment_quota']);
 
     // number_of_attachments
-    $row = DB()->fetch_row('SELECT COUNT(*) AS total FROM ' . BB_ATTACHMENTS_DESC);
+    $row = OLD_DB()->fetch_row('SELECT COUNT(*) AS total FROM ' . BB_ATTACHMENTS_DESC);
     $number_of_attachments = $number_of_posts = $row['total'];
 
     $number_of_pms = 0;
 
     // number_of_topics
-    $row = DB()->fetch_row('SELECT COUNT(*) AS topics FROM ' . BB_TOPICS . ' WHERE topic_attachment = 1');
+    $row = OLD_DB()->fetch_row('SELECT COUNT(*) AS topics FROM ' . BB_TOPICS . ' WHERE topic_attachment = 1');
     $number_of_topics = $row['topics'];
 
     // number_of_users
-    $row = DB()->fetch_row('SELECT COUNT(DISTINCT user_id_1) AS users FROM ' . BB_ATTACHMENTS . ' WHERE post_id != 0');
+    $row = OLD_DB()->fetch_row('SELECT COUNT(DISTINCT user_id_1) AS users FROM ' . BB_ATTACHMENTS . ' WHERE post_id != 0');
     $number_of_users = $row['users'];
 
     $template->assign_vars(array(
@@ -252,13 +252,13 @@ if ($view === 'search') {
 	WHERE f.cat_id = c.cat_id
 	ORDER BY c.cat_id, f.forum_order';
 
-    if (!($result = DB()->sql_query($sql))) {
+    if (!($result = OLD_DB()->sql_query($sql))) {
         bb_die('Could not obtain forum_name / forum_id');
     }
 
     $s_forums = '';
     $list_cat = [];
-    while ($row = DB()->sql_fetchrow($result)) { //sf
+    while ($row = OLD_DB()->sql_fetchrow($result)) { //sf
         $s_forums .= '<option value="' . $row['forum_id'] . '">' . ($row['forum_parent'] ? HTML_SF_SPACER : '') . htmlCHR($row['forum_name']) . '</option>';
 
         if (empty($list_cat[$row['cat_id']])) {
@@ -319,12 +319,12 @@ if ($view === 'attachments') {
     if ($user_based) {
         $sql = 'SELECT username FROM ' . BB_USERS . ' WHERE user_id = ' . (int)$uid;
 
-        if (!($result = DB()->sql_query($sql))) {
+        if (!($result = OLD_DB()->sql_query($sql))) {
             bb_die('Error getting username');
         }
 
-        $row = DB()->sql_fetchrow($result);
-        DB()->sql_freeresult($result);
+        $row = OLD_DB()->sql_fetchrow($result);
+        OLD_DB()->sql_freeresult($result);
         $username = $row['username'];
 
         $s_hidden = '<input type="hidden" name="u_id" value="' . (int)$uid . '" />';
@@ -341,13 +341,13 @@ if ($view === 'attachments') {
 		WHERE user_id_1 = ' . (int)$uid . '
 		GROUP BY attach_id';
 
-        if (!($result = DB()->sql_query($sql))) {
+        if (!($result = OLD_DB()->sql_query($sql))) {
             bb_die('Could not query attachments #1');
         }
 
-        $attach_ids = DB()->sql_fetchrowset($result);
-        $num_attach_ids = DB()->num_rows($result);
-        DB()->sql_freeresult($result);
+        $attach_ids = OLD_DB()->sql_fetchrowset($result);
+        $num_attach_ids = OLD_DB()->num_rows($result);
+        OLD_DB()->sql_freeresult($result);
 
         if ($num_attach_ids == 0) {
             bb_die('For some reason no attachments are assigned to the user ' . $username);
@@ -366,13 +366,13 @@ if ($view === 'attachments') {
 		WHERE a.attach_id IN (' . implode(', ', $attach_id) . ') ' .
             $order_by;
 
-        if (!($result = DB()->sql_query($sql))) {
+        if (!($result = OLD_DB()->sql_query($sql))) {
             bb_die('Could not query attachments #2');
         }
 
-        $attachments = DB()->sql_fetchrowset($result);
-        $num_attach = DB()->num_rows($result);
-        DB()->sql_freeresult($result);
+        $attachments = OLD_DB()->sql_fetchrowset($result);
+        $num_attach = OLD_DB()->num_rows($result);
+        OLD_DB()->sql_freeresult($result);
     } else {
         // we are called from search
         $attachments = search_attachments($order_by, $total_rows);
@@ -399,13 +399,13 @@ if ($view === 'attachments') {
 			FROM ' . BB_ATTACHMENTS . '
 			WHERE attach_id = ' . (int)$attachments[$i]['attach_id'];
 
-            if (!($result = DB()->sql_query($sql))) {
+            if (!($result = OLD_DB()->sql_query($sql))) {
                 bb_die('Could not query attachments #3');
             }
 
-            $ids = DB()->sql_fetchrowset($result);
-            $num_ids = DB()->num_rows($result);
-            DB()->sql_freeresult($result);
+            $ids = OLD_DB()->sql_fetchrowset($result);
+            $num_ids = OLD_DB()->num_rows($result);
+            OLD_DB()->sql_freeresult($result);
 
             for ($j = 0; $j < $num_ids; $j++) {
                 if ($ids[$j]['post_id'] != 0) {
@@ -414,12 +414,12 @@ if ($view === 'attachments') {
 					WHERE p.post_id = ' . (int)$ids[$j]['post_id'] . ' AND p.topic_id = t.topic_id
 					GROUP BY t.topic_id, t.topic_title';
 
-                    if (!($result = DB()->sql_query($sql))) {
+                    if (!($result = OLD_DB()->sql_query($sql))) {
                         bb_die('Could not query topic');
                     }
 
-                    $row = DB()->sql_fetchrow($result);
-                    DB()->sql_freeresult($result);
+                    $row = OLD_DB()->sql_fetchrow($result);
+                    OLD_DB()->sql_freeresult($result);
                     $post_title = $row['topic_title'];
 
                     if (strlen($post_title) > 32) {
@@ -461,12 +461,12 @@ if ($view === 'attachments') {
         if (!$attachments) {
             $sql = 'SELECT attach_id FROM ' . BB_ATTACHMENTS_DESC;
 
-            if (!($result = DB()->sql_query($sql))) {
+            if (!($result = OLD_DB()->sql_query($sql))) {
                 bb_die('Could not query attachment description table');
             }
 
-            $total_rows = DB()->num_rows($result);
-            DB()->sql_freeresult($result);
+            $total_rows = OLD_DB()->num_rows($result);
+            OLD_DB()->sql_freeresult($result);
         }
     }
 }

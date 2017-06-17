@@ -52,14 +52,14 @@ $attach_config = array();
 
 $sql = 'SELECT * FROM ' . BB_ATTACH_CONFIG;
 
-if (!($result = DB()->sql_query($sql))) {
+if (!($result = OLD_DB()->sql_query($sql))) {
     bb_die('Could not query attachment information');
 }
 
-while ($row = DB()->sql_fetchrow($result)) {
+while ($row = OLD_DB()->sql_fetchrow($result)) {
     $attach_config[$row['config_name']] = trim($row['config_value']);
 }
-DB()->sql_freeresult($result);
+OLD_DB()->sql_freeresult($result);
 
 // Extension Management
 if ($submit && $mode == 'extensions') {
@@ -77,13 +77,13 @@ if ($submit && $mode == 'extensions') {
     }
 
     $sql = 'SELECT * FROM ' . BB_EXTENSIONS . ' ORDER BY ext_id';
-    if (!($result = DB()->sql_query($sql))) {
+    if (!($result = OLD_DB()->sql_query($sql))) {
         bb_die('Could not get extension informations #1');
     }
 
-    $num_rows = DB()->num_rows($result);
-    $extension_row = DB()->sql_fetchrowset($result);
-    DB()->sql_freeresult($result);
+    $num_rows = OLD_DB()->num_rows($result);
+    $extension_row = OLD_DB()->sql_fetchrowset($result);
+    OLD_DB()->sql_freeresult($result);
 
     if ($num_rows > 0) {
         for ($i = 0, $iMax = count($extension_row); $i < $iMax; $i++) {
@@ -96,7 +96,7 @@ if ($submit && $mode == 'extensions') {
                 $sql = 'UPDATE ' . BB_EXTENSIONS . ' SET ' . attach_mod_sql_build_array('UPDATE', $sql_ary) . '
 					WHERE ext_id = ' . (int)$extension_row[$i]['ext_id'];
 
-                if (!DB()->sql_query($sql)) {
+                if (!OLD_DB()->sql_query($sql)) {
                     bb_die('Could not update extension informations');
                 }
             }
@@ -111,7 +111,7 @@ if ($submit && $mode == 'extensions') {
     if ($extension_id_sql != '') {
         $sql = 'DELETE FROM ' . BB_EXTENSIONS . ' WHERE ext_id IN (' . $extension_id_sql . ')';
 
-        if (!$result = DB()->sql_query($sql)) {
+        if (!$result = OLD_DB()->sql_query($sql)) {
             bb_die('Could not delete extensions');
         }
     }
@@ -132,13 +132,13 @@ if ($submit && $mode == 'extensions') {
             // check extension
             $sql = 'SELECT extension FROM ' . BB_EXTENSIONS;
 
-            if (!($result = DB()->sql_query($sql))) {
+            if (!($result = OLD_DB()->sql_query($sql))) {
                 bb_die('Could not query extensions');
             }
 
-            $row = DB()->sql_fetchrowset($result);
-            $num_rows = DB()->num_rows($result);
-            DB()->sql_freeresult($result);
+            $row = OLD_DB()->sql_fetchrowset($result);
+            $num_rows = OLD_DB()->num_rows($result);
+            OLD_DB()->sql_freeresult($result);
 
             if ($num_rows > 0) {
                 for ($i = 0; $i < $num_rows; $i++) {
@@ -161,7 +161,7 @@ if ($submit && $mode == 'extensions') {
 
                 $sql = 'INSERT INTO ' . BB_EXTENSIONS . ' ' . attach_mod_sql_build_array('INSERT', $sql_ary);
 
-                if (!DB()->sql_query($sql)) {
+                if (!OLD_DB()->sql_query($sql)) {
                     bb_die('Could not add extension');
                 }
             }
@@ -193,13 +193,13 @@ if ($mode == 'extensions') {
 
     $sql = 'SELECT * FROM ' . BB_EXTENSIONS . ' ORDER BY group_id';
 
-    if (!($result = DB()->sql_query($sql))) {
+    if (!($result = OLD_DB()->sql_query($sql))) {
         bb_die('Could not get extension informations #2');
     }
 
-    $extension_row = DB()->sql_fetchrowset($result);
-    $num_extension_row = DB()->num_rows($result);
-    DB()->sql_freeresult($result);
+    $extension_row = OLD_DB()->sql_fetchrowset($result);
+    $num_extension_row = OLD_DB()->num_rows($result);
+    OLD_DB()->sql_freeresult($result);
 
     if ($num_extension_row > 0) {
         $extension_row = sort_multi_array($extension_row, 'group_name', 'ASC');
@@ -263,7 +263,7 @@ if ($submit && $mode == 'groups') {
         $sql = 'UPDATE ' . BB_EXTENSION_GROUPS . ' SET ' . attach_mod_sql_build_array('UPDATE', $sql_ary) . '
 			WHERE group_id = ' . (int)$group_change_list[$i];
 
-        if (!DB()->sql_query($sql)) {
+        if (!OLD_DB()->sql_query($sql)) {
             bb_die('Could not update extension groups informations');
         }
     }
@@ -278,7 +278,7 @@ if ($submit && $mode == 'groups') {
 		FROM ' . BB_EXTENSION_GROUPS . '
 		WHERE group_id IN (' . $group_id_sql . ')';
 
-        if (!($result = DB()->sql_query($sql))) {
+        if (!($result = OLD_DB()->sql_query($sql))) {
             bb_die('Could not delete extension groups');
         }
 
@@ -287,7 +287,7 @@ if ($submit && $mode == 'groups') {
 			SET group_id = 0
 			WHERE group_id IN (' . $group_id_sql . ')';
 
-        if (!$result = DB()->sql_query($sql)) {
+        if (!$result = OLD_DB()->sql_query($sql)) {
             bb_die('Could not assign extensions to pending group');
         }
     }
@@ -307,13 +307,13 @@ if ($submit && $mode == 'groups') {
         // check Extension Group
         $sql = 'SELECT group_name FROM ' . BB_EXTENSION_GROUPS;
 
-        if (!($result = DB()->sql_query($sql))) {
+        if (!($result = OLD_DB()->sql_query($sql))) {
             bb_die('Could not query extension groups table');
         }
 
-        $row = DB()->sql_fetchrowset($result);
-        $num_rows = DB()->num_rows($result);
-        DB()->sql_freeresult($result);
+        $row = OLD_DB()->sql_fetchrowset($result);
+        $num_rows = OLD_DB()->num_rows($result);
+        OLD_DB()->sql_freeresult($result);
 
         if ($num_rows > 0) {
             for ($i = 0; $i < $num_rows; $i++) {
@@ -342,7 +342,7 @@ if ($submit && $mode == 'groups') {
 
             $sql = 'INSERT INTO ' . BB_EXTENSION_GROUPS . ' ' . attach_mod_sql_build_array('INSERT', $sql_ary);
 
-            if (!DB()->sql_query($sql)) {
+            if (!OLD_DB()->sql_query($sql)) {
                 bb_die('Could not add extension group');
             }
         }
@@ -382,13 +382,13 @@ if ($mode == 'groups') {
 
     $sql = 'SELECT * FROM ' . BB_EXTENSION_GROUPS;
 
-    if (!($result = DB()->sql_query($sql))) {
+    if (!($result = OLD_DB()->sql_query($sql))) {
         bb_die('Could not get extension group informations');
     }
 
-    $extension_group = DB()->sql_fetchrowset($result);
-    $num_extension_group = DB()->num_rows($result);
-    DB()->sql_freeresult($result);
+    $extension_group = OLD_DB()->sql_fetchrowset($result);
+    $num_extension_group = OLD_DB()->num_rows($result);
+    OLD_DB()->sql_freeresult($result);
 
     for ($i = 0; $i < $num_extension_group; $i++) {
         // Format the filesize
@@ -425,13 +425,13 @@ if ($mode == 'groups') {
         if ($viewgroup && $viewgroup == $extension_group[$i]['group_id']) {
             $sql = 'SELECT comment, extension FROM ' . BB_EXTENSIONS . ' WHERE group_id = ' . (int)$viewgroup;
 
-            if (!$result = DB()->sql_query($sql)) {
+            if (!$result = OLD_DB()->sql_query($sql)) {
                 bb_die('Could not get extension informations #3');
             }
 
-            $extension = DB()->sql_fetchrowset($result);
-            $num_extension = DB()->num_rows($result);
-            DB()->sql_freeresult($result);
+            $extension = OLD_DB()->sql_fetchrowset($result);
+            $num_extension = OLD_DB()->num_rows($result);
+            OLD_DB()->sql_freeresult($result);
 
             for ($j = 0; $j < $num_extension; $j++) {
                 $template->assign_block_vars('grouprow.extensionrow', array(
@@ -465,7 +465,7 @@ if ($add_forum && $e_mode == 'perm' && $group) {
     // If we add ALL FORUMS, we are able to overwrite the Permissions
     if ($add_all_forums) {
         $sql = 'UPDATE ' . BB_EXTENSION_GROUPS . " SET forum_permissions = '' WHERE group_id = " . (int)$group;
-        if (!($result = DB()->sql_query($sql))) {
+        if (!($result = OLD_DB()->sql_query($sql))) {
             bb_die('Could not update permissions #1');
         }
     }
@@ -477,12 +477,12 @@ if ($add_forum && $e_mode == 'perm' && $group) {
 			WHERE group_id = ' . (int)$group . '
 			LIMIT 1';
 
-        if (!($result = DB()->sql_query($sql))) {
+        if (!($result = OLD_DB()->sql_query($sql))) {
             bb_die('Could not get group permissions from ' . BB_EXTENSION_GROUPS);
         }
 
-        $row = DB()->sql_fetchrow($result);
-        DB()->sql_freeresult($result);
+        $row = OLD_DB()->sql_fetchrow($result);
+        OLD_DB()->sql_freeresult($result);
 
         if (trim($row['forum_permissions']) == '') {
             $auth_p = array();
@@ -501,7 +501,7 @@ if ($add_forum && $e_mode == 'perm' && $group) {
 
         $sql = 'UPDATE ' . BB_EXTENSION_GROUPS . " SET forum_permissions = '" . attach_mod_sql_escape($auth_bitstream) . "' WHERE group_id = " . (int)$group;
 
-        if (!($result = DB()->sql_query($sql))) {
+        if (!($result = OLD_DB()->sql_query($sql))) {
             bb_die('Could not update permissions #2');
         }
     }
@@ -517,12 +517,12 @@ if ($delete_forum && $e_mode == 'perm' && $group) {
 		WHERE group_id = ' . (int)$group . '
 		LIMIT 1';
 
-    if (!($result = DB()->sql_query($sql))) {
+    if (!($result = OLD_DB()->sql_query($sql))) {
         bb_die('Could not get group permissions from ' . BB_EXTENSION_GROUPS);
     }
 
-    $row = DB()->sql_fetchrow($result);
-    DB()->sql_freeresult($result);
+    $row = OLD_DB()->sql_fetchrow($result);
+    OLD_DB()->sql_freeresult($result);
 
     $auth_p2 = auth_unpack(trim($row['forum_permissions']));
     $auth_p = array();
@@ -538,7 +538,7 @@ if ($delete_forum && $e_mode == 'perm' && $group) {
 
     $sql = 'UPDATE ' . BB_EXTENSION_GROUPS . " SET forum_permissions = '" . attach_mod_sql_escape($auth_bitstream) . "' WHERE group_id = " . (int)$group;
 
-    if (!($result = DB()->sql_query($sql))) {
+    if (!($result = OLD_DB()->sql_query($sql))) {
         bb_die('Could not update permissions #3');
     }
 }
@@ -550,12 +550,12 @@ if ($e_mode == 'perm' && $group) {
 		WHERE group_id = ' . (int)$group . '
 		LIMIT 1';
 
-    if (!($result = DB()->sql_query($sql))) {
+    if (!($result = OLD_DB()->sql_query($sql))) {
         bb_die('Could not get group name from ' . BB_EXTENSION_GROUPS);
     }
 
-    $row = DB()->sql_fetchrow($result);
-    DB()->sql_freeresult($result);
+    $row = OLD_DB()->sql_fetchrow($result);
+    OLD_DB()->sql_freeresult($result);
 
     $group_name = $row['group_name'];
     $allowed_forums = trim($row['forum_permissions']);
@@ -570,11 +570,11 @@ if ($e_mode == 'perm' && $group) {
         $act_id = 0;
         $forum_p = auth_unpack($allowed_forums);
         $sql = 'SELECT forum_id, forum_name FROM ' . BB_FORUMS . ' WHERE forum_id IN (' . implode(', ', $forum_p) . ')';
-        if (!($result = DB()->sql_query($sql))) {
+        if (!($result = OLD_DB()->sql_query($sql))) {
             bb_die('Could not get forum names');
         }
 
-        while ($row = DB()->sql_fetchrow($result)) {
+        while ($row = OLD_DB()->sql_fetchrow($result)) {
             $forum_perm[$act_id]['forum_id'] = $row['forum_id'];
             $forum_perm[$act_id]['forum_name'] = $row['forum_name'];
             $act_id++;
@@ -598,14 +598,14 @@ if ($e_mode == 'perm' && $group) {
 
     $sql = 'SELECT forum_id, forum_name FROM ' . BB_FORUMS;
 
-    if (!($result = DB()->sql_query($sql))) {
+    if (!($result = OLD_DB()->sql_query($sql))) {
         bb_die('Could not get forums #1');
     }
 
-    while ($row = DB()->sql_fetchrow($result)) {
+    while ($row = OLD_DB()->sql_fetchrow($result)) {
         $forum_option_values[(int)$row['forum_id']] = $row['forum_name'];
     }
-    DB()->sql_freeresult($result);
+    OLD_DB()->sql_freeresult($result);
 
     foreach ($forum_option_values as $value => $option) {
         $template->assign_block_vars('forum_option_values', array(
@@ -618,11 +618,11 @@ if ($e_mode == 'perm' && $group) {
 
     $sql = 'SELECT forum_id, forum_name FROM ' . BB_FORUMS . ' WHERE auth_attachments < ' . AUTH_ADMIN;
 
-    if (!($f_result = DB()->sql_query($sql))) {
+    if (!($f_result = OLD_DB()->sql_query($sql))) {
         bb_die('Could not get forums #2');
     }
 
-    while ($row = DB()->sql_fetchrow($f_result)) {
+    while ($row = OLD_DB()->sql_fetchrow($f_result)) {
         $forum_id = $row['forum_id'];
 
         $sql = 'SELECT forum_permissions
@@ -630,13 +630,13 @@ if ($e_mode == 'perm' && $group) {
 		WHERE allow_group = 1
 		ORDER BY group_name ASC';
 
-        if (!($result = DB()->sql_query($sql))) {
+        if (!($result = OLD_DB()->sql_query($sql))) {
             bb_die('Could not query extension groups');
         }
 
-        $rows = DB()->sql_fetchrowset($result);
-        $num_rows = DB()->num_rows($result);
-        DB()->sql_freeresult($result);
+        $rows = OLD_DB()->sql_fetchrowset($result);
+        $num_rows = OLD_DB()->num_rows($result);
+        OLD_DB()->sql_freeresult($result);
 
         $found_forum = false;
 
@@ -652,7 +652,7 @@ if ($e_mode == 'perm' && $group) {
             $empty_perm_forums[$forum_id] = $row['forum_name'];
         }
     }
-    DB()->sql_freeresult($f_result);
+    OLD_DB()->sql_freeresult($f_result);
 
     $message = '';
 

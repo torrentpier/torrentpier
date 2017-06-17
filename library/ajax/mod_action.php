@@ -25,7 +25,7 @@ switch ($mode) {
             $this->ajax_die($lang['STATUS_DOES_EXIST'] . $new_status);
         }
 
-        $topic_ids = DB()->fetch_rowset("SELECT attach_id FROM " . BB_BT_TORRENTS . " WHERE topic_id IN($topics)", 'attach_id');
+        $topic_ids = OLD_DB()->fetch_rowset("SELECT attach_id FROM " . BB_BT_TORRENTS . " WHERE topic_id IN($topics)", 'attach_id');
 
         foreach ($topic_ids as $attach_id) {
             change_tor_status($attach_id, $status);
@@ -46,14 +46,14 @@ switch ($mode) {
             $this->ajax_die($lang['DONT_MESSAGE_TITLE']);
         }
 
-        if (!$t_data = DB()->fetch_row("SELECT forum_id FROM " . BB_TOPICS . " WHERE topic_id = $topic_id LIMIT 1")) {
+        if (!$t_data = OLD_DB()->fetch_row("SELECT forum_id FROM " . BB_TOPICS . " WHERE topic_id = $topic_id LIMIT 1")) {
             $this->ajax_die($lang['INVALID_TOPIC_ID_DB']);
         }
         $this->verify_mod_rights($t_data['forum_id']);
 
-        $topic_title_sql = DB()->escape($new_title);
+        $topic_title_sql = OLD_DB()->escape($new_title);
 
-        DB()->query("UPDATE " . BB_TOPICS . " SET topic_title = '$topic_title_sql' WHERE topic_id = $topic_id");
+        OLD_DB()->query("UPDATE " . BB_TOPICS . " SET topic_title = '$topic_title_sql' WHERE topic_id = $topic_id");
 
         // Обновление кеша новостей на главной
         $news_forums = array_flip(explode(',', $bb_cfg['latest_news_forum_id']));
@@ -80,13 +80,13 @@ switch ($mode) {
             $this->ajax_die($lang['NO_USER_ID_SPECIFIED']);
         }
 
-        $reg_ip = DB()->fetch_rowset("SELECT username, user_id, user_rank FROM " . BB_USERS . "
+        $reg_ip = OLD_DB()->fetch_rowset("SELECT username, user_id, user_rank FROM " . BB_USERS . "
 			WHERE user_reg_ip = '{$profiledata['user_reg_ip']}'
 				AND user_reg_ip != ''
 				AND user_id != {$profiledata['user_id']}
 			ORDER BY username ASC");
 
-        $last_ip = DB()->fetch_rowset("SELECT username, user_id, user_rank FROM " . BB_USERS . "
+        $last_ip = OLD_DB()->fetch_rowset("SELECT username, user_id, user_rank FROM " . BB_USERS . "
 			WHERE user_last_ip = '{$profiledata['user_last_ip']}'
 				AND user_last_ip != ''
 				AND user_id != {$profiledata['user_id']}");

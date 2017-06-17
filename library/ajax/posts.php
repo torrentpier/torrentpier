@@ -18,7 +18,7 @@ if (!isset($this->request['type'])) {
 }
 if (isset($this->request['post_id'])) {
     $post_id = (int)$this->request['post_id'];
-    $post = DB()->fetch_row("SELECT t.*, f.*, p.*, pt.post_text
+    $post = OLD_DB()->fetch_row("SELECT t.*, f.*, p.*, pt.post_text
 		FROM " . BB_TOPICS . " t, " . BB_FORUMS . " f, " . BB_POSTS . " p, " . BB_POSTS_TEXT . " pt
 		WHERE p.post_id = $post_id
 			AND t.topic_id = p.topic_id
@@ -35,7 +35,7 @@ if (isset($this->request['post_id'])) {
     }
 } elseif (isset($this->request['topic_id'])) {
     $topic_id = (int)$this->request['topic_id'];
-    $post = DB()->fetch_row("SELECT t.*, f.*
+    $post = OLD_DB()->fetch_row("SELECT t.*, f.*
 			FROM " . BB_TOPICS . " t, " . BB_FORUMS . " f
 			WHERE t.topic_id = $topic_id
 				AND f.forum_id = t.forum_id
@@ -135,9 +135,9 @@ switch ($this->request['type']) {
                             $this->ajax_die(sprintf($lang['MAX_SMILIES_PER_POST'], $bb_cfg['max_smilies']));
                         }
                     }
-                    DB()->query("UPDATE " . BB_POSTS_TEXT . " SET post_text = '" . DB()->escape($text) . "' WHERE post_id = $post_id");
+                    OLD_DB()->query("UPDATE " . BB_POSTS_TEXT . " SET post_text = '" . OLD_DB()->escape($text) . "' WHERE post_id = $post_id");
                     if ($post['topic_last_post_id'] != $post['post_id'] && $userdata['user_id'] == $post['poster_id']) {
-                        DB()->query("UPDATE " . BB_POSTS . " SET post_edit_time = '" . TIMENOW . "', post_edit_count = post_edit_count + 1 WHERE post_id = $post_id");
+                        OLD_DB()->query("UPDATE " . BB_POSTS . " SET post_edit_time = '" . TIMENOW . "', post_edit_count = post_edit_count + 1 WHERE post_id = $post_id");
                     }
                     $s_text = str_replace('\n', "\n", $text);
                     $s_topic_title = str_replace('\n', "\n", $post['topic_title']);
@@ -232,7 +232,7 @@ switch ($this->request['type']) {
         $where_sql = (IS_GUEST) ? "p.poster_ip = '" . USER_IP . "'" : "p.poster_id = {$userdata['user_id']}";
 
         $sql = "SELECT MAX(p.post_time) AS last_post_time FROM " . BB_POSTS . " p WHERE $where_sql";
-        if ($row = DB()->fetch_row($sql) and $row['last_post_time']) {
+        if ($row = OLD_DB()->fetch_row($sql) and $row['last_post_time']) {
             if ($userdata['user_level'] == USER) {
                 if (TIMENOW - $row['last_post_time'] < $bb_cfg['flood_interval']) {
                     $this->ajax_die($lang['FLOOD_ERROR']);
@@ -251,8 +251,8 @@ switch ($this->request['type']) {
 				LIMIT 1
 			";
 
-            if ($row = DB()->fetch_row($sql)) {
-                $last_msg = DB()->escape($row['post_text']);
+            if ($row = OLD_DB()->fetch_row($sql)) {
+                $last_msg = OLD_DB()->escape($row['post_text']);
 
                 if ($last_msg == $message) {
                     $this->ajax_die($lang['DOUBLE_POST_ERROR']);
@@ -267,9 +267,9 @@ switch ($this->request['type']) {
             }
         }
 
-        DB()->sql_query("INSERT INTO " . BB_POSTS . " (topic_id, forum_id, poster_id, post_time, poster_ip) VALUES ($topic_id, " . $post['forum_id'] . ", " . $userdata['user_id'] . ", '" . TIMENOW . "', '" . USER_IP . "')");
-        $post_id = DB()->sql_nextid();
-        DB()->sql_query("INSERT INTO " . BB_POSTS_TEXT . " (post_id, post_text) VALUES ($post_id, '" . DB()->escape($message) . "')");
+        OLD_DB()->sql_query("INSERT INTO " . BB_POSTS . " (topic_id, forum_id, poster_id, post_time, poster_ip) VALUES ($topic_id, " . $post['forum_id'] . ", " . $userdata['user_id'] . ", '" . TIMENOW . "', '" . USER_IP . "')");
+        $post_id = OLD_DB()->sql_nextid();
+        OLD_DB()->sql_query("INSERT INTO " . BB_POSTS_TEXT . " (post_id, post_text) VALUES ($post_id, '" . OLD_DB()->escape($message) . "')");
 
         update_post_stats('reply', $post, $post['forum_id'], $topic_id, $post_id, $userdata['user_id']);
 

@@ -21,7 +21,7 @@ $not_auth_forums_sql = ($excluded_forums_csv) ? "
 	AND f.forum_parent NOT IN($excluded_forums_csv)
 " : '';
 
-$sql = DB()->fetch_rowset("
+$sql = OLD_DB()->fetch_rowset("
 	SELECT
 		f.forum_id, f.forum_name, t.topic_title,
 		tor.tor_type, tor.size,

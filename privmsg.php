@@ -147,14 +147,14 @@ if ($mode == 'read') {
 			$pm_sql_user
 			AND u.user_id = pm.privmsgs_from_userid
 			AND u2.user_id = pm.privmsgs_to_userid";
-    if (!($result = DB()->sql_query($sql))) {
+    if (!($result = OLD_DB()->sql_query($sql))) {
         bb_die('Could not query private message post information');
     }
 
     //
     // Did the query return any data?
     //
-    if (!($privmsg = DB()->sql_fetchrow($result))) {
+    if (!($privmsg = OLD_DB()->sql_fetchrow($result))) {
         redirectToUrl(PM_URL . "?folder=$folder");
     }
 
@@ -176,17 +176,17 @@ if ($mode == 'read') {
         }
 
         $sql = "UPDATE " . BB_USERS . " SET $sql WHERE user_id = " . $userdata['user_id'];
-        if (!DB()->sql_query($sql)) {
+        if (!OLD_DB()->sql_query($sql)) {
             bb_die('Could not update private message read status for user');
         }
-        if (DB()->affected_rows()) {
+        if (OLD_DB()->affected_rows()) {
             cache_rm_userdata($userdata);
         }
 
         $sql = "UPDATE " . BB_PRIVMSGS . "
 			SET privmsgs_type = " . PRIVMSGS_READ_MAIL . "
 			WHERE privmsgs_id = " . $privmsg['privmsgs_id'];
-        if (!DB()->sql_query($sql)) {
+        if (!OLD_DB()->sql_query($sql)) {
             bb_die('Could not update private message read status');
         }
 
@@ -195,29 +195,29 @@ if ($mode == 'read') {
 			FROM " . BB_PRIVMSGS . "
 			WHERE privmsgs_type = " . PRIVMSGS_SENT_MAIL . "
 				AND privmsgs_from_userid = " . $privmsg['privmsgs_from_userid'];
-        if (!($result = DB()->sql_query($sql))) {
+        if (!($result = OLD_DB()->sql_query($sql))) {
             bb_die('Could not obtain sent message info for sender');
         }
 
-        if ($sent_info = DB()->sql_fetchrow($result)) {
+        if ($sent_info = OLD_DB()->sql_fetchrow($result)) {
             if ($bb_cfg['max_sentbox_privmsgs'] && $sent_info['sent_items'] >= $bb_cfg['max_sentbox_privmsgs']) {
                 $sql = "SELECT privmsgs_id FROM " . BB_PRIVMSGS . "
 					WHERE privmsgs_type = " . PRIVMSGS_SENT_MAIL . "
 						AND privmsgs_date = " . $sent_info['oldest_post_time'] . "
 						AND privmsgs_from_userid = " . $privmsg['privmsgs_from_userid'];
-                if (!$result = DB()->sql_query($sql)) {
+                if (!$result = OLD_DB()->sql_query($sql)) {
                     bb_die('Could not find oldest privmsgs');
                 }
-                $old_privmsgs_id = DB()->sql_fetchrow($result);
+                $old_privmsgs_id = OLD_DB()->sql_fetchrow($result);
                 $old_privmsgs_id = (int)$old_privmsgs_id['privmsgs_id'];
 
                 $sql = "DELETE FROM " . BB_PRIVMSGS . " WHERE privmsgs_id = $old_privmsgs_id";
-                if (!DB()->sql_query($sql)) {
+                if (!OLD_DB()->sql_query($sql)) {
                     bb_die('Could not delete oldest privmsgs (sent)');
                 }
 
                 $sql = "DELETE FROM " . BB_PRIVMSGS_TEXT . " WHERE privmsgs_text_id = $old_privmsgs_id";
-                if (!DB()->sql_query($sql)) {
+                if (!OLD_DB()->sql_query($sql)) {
                     bb_die('Could not delete oldest privmsgs text (sent)');
                 }
             }
@@ -229,16 +229,16 @@ if ($mode == 'read') {
         // set limits on numbers of storable posts for users ... hopefully!
         //
         $sql = "INSERT INTO " . BB_PRIVMSGS . " (privmsgs_type, privmsgs_subject, privmsgs_from_userid, privmsgs_to_userid, privmsgs_date, privmsgs_ip)
-			VALUES (" . PRIVMSGS_SENT_MAIL . ", '" . DB()->escape($privmsg['privmsgs_subject']) . "', " . $privmsg['privmsgs_from_userid'] . ", " . $privmsg['privmsgs_to_userid'] . ", " . $privmsg['privmsgs_date'] . ", '" . $privmsg['privmsgs_ip'] . "')";
-        if (!DB()->sql_query($sql)) {
+			VALUES (" . PRIVMSGS_SENT_MAIL . ", '" . OLD_DB()->escape($privmsg['privmsgs_subject']) . "', " . $privmsg['privmsgs_from_userid'] . ", " . $privmsg['privmsgs_to_userid'] . ", " . $privmsg['privmsgs_date'] . ", '" . $privmsg['privmsgs_ip'] . "')";
+        if (!OLD_DB()->sql_query($sql)) {
             bb_die('Could not insert private message sent info');
         }
 
-        $privmsg_sent_id = DB()->sql_nextid();
+        $privmsg_sent_id = OLD_DB()->sql_nextid();
 
         $sql = "INSERT INTO " . BB_PRIVMSGS_TEXT . " (privmsgs_text_id, privmsgs_text)
-			VALUES ($privmsg_sent_id, '" . DB()->escape($privmsg['privmsgs_text']) . "')";
-        if (!DB()->sql_query($sql)) {
+			VALUES ($privmsg_sent_id, '" . OLD_DB()->escape($privmsg['privmsgs_text']) . "')";
+        if (!OLD_DB()->sql_query($sql)) {
             bb_die('Could not insert private message sent text');
         }
     }
@@ -463,12 +463,12 @@ if ($mode == 'read') {
         }
 
         $sql = "SELECT privmsgs_id FROM " . BB_PRIVMSGS . " WHERE $delete_type $delete_sql_id";
-        if (!($result = DB()->sql_query($sql))) {
+        if (!($result = OLD_DB()->sql_query($sql))) {
             bb_die('Could not obtain id list to delete messages');
         }
 
         $mark_list = array();
-        while ($row = DB()->sql_fetchrow($result)) {
+        while ($row = OLD_DB()->sql_fetchrow($result)) {
             $mark_list[] = $row['privmsgs_id'];
         }
 
@@ -497,11 +497,11 @@ if ($mode == 'read') {
 					WHERE privmsgs_id IN ($delete_sql_id)
 						AND $sql
 						AND privmsgs_type IN (" . PRIVMSGS_NEW_MAIL . ", " . PRIVMSGS_UNREAD_MAIL . ")";
-                if (!($result = DB()->sql_query($sql))) {
+                if (!($result = OLD_DB()->sql_query($sql))) {
                     bb_die('Could not obtain user id list for outbox messages');
                 }
 
-                if ($row = DB()->sql_fetchrow($result)) {
+                if ($row = OLD_DB()->sql_fetchrow($result)) {
                     $update_users = $update_list = array();
 
                     do {
@@ -514,7 +514,7 @@ if ($mode == 'read') {
                                 @$update_users['unread'][$row['privmsgs_to_userid']]++;
                                 break;
                         }
-                    } while ($row = DB()->sql_fetchrow($result));
+                    } while ($row = OLD_DB()->sql_fetchrow($result));
 
                     if (count($update_users)) {
                         foreach ($update_users as $type => $users) {
@@ -541,7 +541,7 @@ if ($mode == 'read') {
                                 $sql = "UPDATE " . BB_USERS . "
 									SET $type = $type - $dec
 									WHERE user_id IN ($user_ids)";
-                                if (!DB()->sql_query($sql)) {
+                                if (!OLD_DB()->sql_query($sql)) {
                                     bb_die('Could not update user pm counters');
                                 }
                             }
@@ -549,7 +549,7 @@ if ($mode == 'read') {
                         unset($update_list);
                     }
                 }
-                DB()->sql_freeresult($result);
+                OLD_DB()->sql_freeresult($result);
             }
 
             // Delete the messages
@@ -582,11 +582,11 @@ if ($mode == 'read') {
                     break;
             }
 
-            if (!DB()->sql_query($delete_sql)) {
+            if (!OLD_DB()->sql_query($delete_sql)) {
                 bb_die('Could not delete private message info');
             }
 
-            if (!DB()->sql_query($delete_text_sql)) {
+            if (!OLD_DB()->sql_query($delete_text_sql)) {
                 bb_die('Could not delete private message text');
             }
 
@@ -604,11 +604,11 @@ if ($mode == 'read') {
 					AND privmsgs_type = " . PRIVMSGS_SAVED_IN_MAIL . " )
 				OR ( privmsgs_from_userid = " . $userdata['user_id'] . "
 					AND privmsgs_type = " . PRIVMSGS_SAVED_OUT_MAIL . ") )";
-        if (!($result = DB()->sql_query($sql))) {
+        if (!($result = OLD_DB()->sql_query($sql))) {
             bb_die('Could not obtain sent message info for sender');
         }
 
-        if ($saved_info = DB()->sql_fetchrow($result)) {
+        if ($saved_info = OLD_DB()->sql_fetchrow($result)) {
             if ($bb_cfg['max_savebox_privmsgs'] && $saved_info['savebox_items'] >= $bb_cfg['max_savebox_privmsgs']) {
                 $sql = "SELECT privmsgs_id FROM " . BB_PRIVMSGS . "
 					WHERE ( ( privmsgs_to_userid = " . $userdata['user_id'] . "
@@ -616,19 +616,19 @@ if ($mode == 'read') {
 							OR ( privmsgs_from_userid = " . $userdata['user_id'] . "
 								AND privmsgs_type = " . PRIVMSGS_SAVED_OUT_MAIL . ") )
 						AND privmsgs_date = " . $saved_info['oldest_post_time'];
-                if (!$result = DB()->sql_query($sql)) {
+                if (!$result = OLD_DB()->sql_query($sql)) {
                     bb_die('Could not find oldest privmsgs (save)');
                 }
-                $old_privmsgs_id = DB()->sql_fetchrow($result);
+                $old_privmsgs_id = OLD_DB()->sql_fetchrow($result);
                 $old_privmsgs_id = (int)$old_privmsgs_id['privmsgs_id'];
 
                 $sql = "DELETE FROM " . BB_PRIVMSGS . " WHERE privmsgs_id = $old_privmsgs_id";
-                if (!DB()->sql_query($sql)) {
+                if (!OLD_DB()->sql_query($sql)) {
                     bb_die('Could not delete oldest privmsgs (save)');
                 }
 
                 $sql = "DELETE FROM " . BB_PRIVMSGS_TEXT . " WHERE privmsgs_text_id = $old_privmsgs_id";
-                if (!DB()->sql_query($sql)) {
+                if (!OLD_DB()->sql_query($sql)) {
                     bb_die('Could not delete oldest privmsgs text (save)');
                 }
             }
@@ -660,11 +660,11 @@ if ($mode == 'read') {
 				WHERE privmsgs_id IN ($saved_sql_id)
 					AND $sql
 					AND privmsgs_type IN (" . PRIVMSGS_NEW_MAIL . ", " . PRIVMSGS_UNREAD_MAIL . ")";
-            if (!($result = DB()->sql_query($sql))) {
+            if (!($result = OLD_DB()->sql_query($sql))) {
                 bb_die('Could not obtain user id list for outbox messages');
             }
 
-            if ($row = DB()->sql_fetchrow($result)) {
+            if ($row = OLD_DB()->sql_fetchrow($result)) {
                 $update_users = $update_list = array();
 
                 do {
@@ -677,7 +677,7 @@ if ($mode == 'read') {
                             $update_users['unread'][$row['privmsgs_to_userid']]++;
                             break;
                     }
-                } while ($row = DB()->sql_fetchrow($result));
+                } while ($row = OLD_DB()->sql_fetchrow($result));
 
                 if (count($update_users)) {
                     foreach ($update_users as $type => $users) {
@@ -702,7 +702,7 @@ if ($mode == 'read') {
                             $user_ids = implode(', ', $user_ary);
 
                             $sql = "UPDATE " . BB_USERS . " SET $type = $type - $dec WHERE user_id IN ($user_ids)";
-                            if (!DB()->sql_query($sql)) {
+                            if (!OLD_DB()->sql_query($sql)) {
                                 bb_die('Could not update user pm counters');
                             }
                         }
@@ -710,7 +710,7 @@ if ($mode == 'read') {
                     unset($update_list);
                 }
             }
-            DB()->sql_freeresult($result);
+            OLD_DB()->sql_freeresult($result);
         }
 
         switch ($folder) {
@@ -738,7 +738,7 @@ if ($mode == 'read') {
 
         $saved_sql .= " AND privmsgs_id IN ($saved_sql_id)";
 
-        if (!DB()->sql_query($saved_sql)) {
+        if (!OLD_DB()->sql_query($saved_sql)) {
             bb_die('Could not save private messages');
         }
 
@@ -748,8 +748,8 @@ if ($mode == 'read') {
     if (IS_USER && $submit && $mode != 'edit') {
         // Flood control
         $sql = "SELECT MAX(privmsgs_date) AS last_post_time FROM " . BB_PRIVMSGS . " WHERE privmsgs_from_userid = " . $userdata['user_id'];
-        if ($result = DB()->sql_query($sql)) {
-            $db_row = DB()->sql_fetchrow($result);
+        if ($result = OLD_DB()->sql_query($sql)) {
+            $db_row = OLD_DB()->sql_fetchrow($result);
 
             $last_post_time = $db_row['last_post_time'];
             $current_time = TIMENOW;
@@ -766,14 +766,14 @@ if ($mode == 'read') {
 			WHERE privmsgs_id = ' . (int)$privmsg_id . '
 				AND privmsgs_from_userid = ' . $userdata['user_id'];
 
-        if (!($result = DB()->sql_query($sql))) {
+        if (!($result = OLD_DB()->sql_query($sql))) {
             bb_die('Could not obtain message details');
         }
 
-        if (!($row = DB()->sql_fetchrow($result))) {
+        if (!($row = OLD_DB()->sql_fetchrow($result))) {
             bb_die($lang['NO_SUCH_POST']);
         }
-        DB()->sql_freeresult($result);
+        OLD_DB()->sql_freeresult($result);
 
         unset($row);
     }
@@ -781,7 +781,7 @@ if ($mode == 'read') {
     if ($submit) {
         if (!empty($_POST['username'])) {
             $to_username = clean_username($_POST['username']);
-            $to_username_sql = DB()->escape($to_username);
+            $to_username_sql = OLD_DB()->escape($to_username);
             $to_userdata = get_userdata($to_username_sql);
 
             if (!$to_userdata || $to_userdata['user_id'] == GUEST_UID) {
@@ -827,11 +827,11 @@ if ($mode == 'read') {
 						OR privmsgs_type = " . PRIVMSGS_READ_MAIL . "
 						OR privmsgs_type = " . PRIVMSGS_UNREAD_MAIL . " )
 					AND privmsgs_to_userid = " . $to_userdata['user_id'];
-            if (!($result = DB()->sql_query($sql))) {
+            if (!($result = OLD_DB()->sql_query($sql))) {
                 bb_die($lang['NO_SUCH_USER']);
             }
 
-            if ($inbox_info = DB()->sql_fetchrow($result)) {
+            if ($inbox_info = OLD_DB()->sql_fetchrow($result)) {
                 if ($bb_cfg['max_inbox_privmsgs'] && $inbox_info['inbox_items'] >= $bb_cfg['max_inbox_privmsgs']) {
                     $sql = "SELECT privmsgs_id FROM " . BB_PRIVMSGS . "
 						WHERE ( privmsgs_type = " . PRIVMSGS_NEW_MAIL . "
@@ -839,48 +839,48 @@ if ($mode == 'read') {
 								OR privmsgs_type = " . PRIVMSGS_UNREAD_MAIL . "  )
 							AND privmsgs_date = " . $inbox_info['oldest_post_time'] . "
 							AND privmsgs_to_userid = " . $to_userdata['user_id'];
-                    if (!$result = DB()->sql_query($sql)) {
+                    if (!$result = OLD_DB()->sql_query($sql)) {
                         bb_die('Could not find oldest privmsgs (inbox)');
                     }
-                    $old_privmsgs_id = DB()->sql_fetchrow($result);
+                    $old_privmsgs_id = OLD_DB()->sql_fetchrow($result);
                     $old_privmsgs_id = (int)$old_privmsgs_id['privmsgs_id'];
 
                     $sql = "DELETE FROM " . BB_PRIVMSGS . " WHERE privmsgs_id = $old_privmsgs_id";
-                    if (!DB()->sql_query($sql)) {
+                    if (!OLD_DB()->sql_query($sql)) {
                         bb_die('Could not delete oldest privmsgs (inbox)');
                     }
 
                     $sql = "DELETE FROM " . BB_PRIVMSGS_TEXT . " WHERE privmsgs_text_id = $old_privmsgs_id";
-                    if (!DB()->sql_query($sql)) {
+                    if (!OLD_DB()->sql_query($sql)) {
                         bb_die('Could not delete oldest privmsgs text (inbox)');
                     }
                 }
             }
 
             $sql_info = "INSERT INTO " . BB_PRIVMSGS . " (privmsgs_type, privmsgs_subject, privmsgs_from_userid, privmsgs_to_userid, privmsgs_date, privmsgs_ip)
-				VALUES (" . PRIVMSGS_NEW_MAIL . ", '" . DB()->escape($privmsg_subject) . "', " . $userdata['user_id'] . ", " . $to_userdata['user_id'] . ", $msg_time, '" . USER_IP . "')";
+				VALUES (" . PRIVMSGS_NEW_MAIL . ", '" . OLD_DB()->escape($privmsg_subject) . "', " . $userdata['user_id'] . ", " . $to_userdata['user_id'] . ", $msg_time, '" . USER_IP . "')";
         } else {
             $sql_info = "UPDATE " . BB_PRIVMSGS . "
-				SET privmsgs_type = " . PRIVMSGS_NEW_MAIL . ", privmsgs_subject = '" . DB()->escape($privmsg_subject) . "', privmsgs_from_userid = " . $userdata['user_id'] . ", privmsgs_to_userid = " . $to_userdata['user_id'] . ", privmsgs_date = $msg_time, privmsgs_ip = '" . USER_IP . "'
+				SET privmsgs_type = " . PRIVMSGS_NEW_MAIL . ", privmsgs_subject = '" . OLD_DB()->escape($privmsg_subject) . "', privmsgs_from_userid = " . $userdata['user_id'] . ", privmsgs_to_userid = " . $to_userdata['user_id'] . ", privmsgs_date = $msg_time, privmsgs_ip = '" . USER_IP . "'
 				WHERE privmsgs_id = $privmsg_id";
         }
 
-        if (!($result = DB()->sql_query($sql_info))) {
+        if (!($result = OLD_DB()->sql_query($sql_info))) {
             bb_die('Could not insert / update private message sent info');
         }
 
         if ($mode != 'edit') {
-            $privmsg_sent_id = DB()->sql_nextid();
+            $privmsg_sent_id = OLD_DB()->sql_nextid();
 
             $sql = "INSERT INTO " . BB_PRIVMSGS_TEXT . " (privmsgs_text_id, privmsgs_text)
-				VALUES ($privmsg_sent_id, '" . DB()->escape($privmsg_message) . "')";
+				VALUES ($privmsg_sent_id, '" . OLD_DB()->escape($privmsg_message) . "')";
         } else {
             $sql = "UPDATE " . BB_PRIVMSGS_TEXT . "
-				SET privmsgs_text = '" . DB()->escape($privmsg_message) . "'
+				SET privmsgs_text = '" . OLD_DB()->escape($privmsg_message) . "'
 				WHERE privmsgs_text_id = $privmsg_id";
         }
 
-        if (!DB()->sql_query($sql)) {
+        if (!OLD_DB()->sql_query($sql)) {
             bb_die('Could not insert / update private message sent text');
         }
 
@@ -894,7 +894,7 @@ if ($mode == 'read') {
 				WHERE user_id = {$to_userdata['user_id']}
 				LIMIT 1";
 
-            if (!$status = DB()->sql_query($sql)) {
+            if (!$status = OLD_DB()->sql_query($sql)) {
                 bb_die('Could not update private message new / read status for user');
             }
 
@@ -947,11 +947,11 @@ if ($mode == 'read') {
 				FROM " . BB_PRIVMSGS . " pm, " . BB_USERS . " u
 				WHERE pm.privmsgs_id = $privmsg_id
 					AND u.user_id = pm.privmsgs_from_userid";
-            if (!($result = DB()->sql_query($sql))) {
+            if (!($result = OLD_DB()->sql_query($sql))) {
                 bb_die('Could not obtain post and post text');
             }
 
-            if ($postrow = DB()->sql_fetchrow($result)) {
+            if ($postrow = OLD_DB()->sql_fetchrow($result)) {
                 if ($userdata['user_id'] != $postrow['user_id']) {
                     bb_die($lang['EDIT_OWN_POSTS']);
                 }
@@ -966,12 +966,12 @@ if ($mode == 'read') {
             $user_id = (int)$_GET[POST_USERS_URL];
 
             $sql = "SELECT username FROM " . BB_USERS . " WHERE user_id = $user_id AND user_id <> " . GUEST_UID;
-            if (!($result = DB()->sql_query($sql))) {
+            if (!($result = OLD_DB()->sql_query($sql))) {
                 $error = true;
                 $error_msg = $lang['NO_SUCH_USER'];
             }
 
-            if ($row = DB()->sql_fetchrow($result)) {
+            if ($row = OLD_DB()->sql_fetchrow($result)) {
                 $to_username = $row['username'];
             }
         } elseif ($mode == 'edit') {
@@ -983,11 +983,11 @@ if ($mode == 'read') {
 					AND ( pm.privmsgs_type = " . PRIVMSGS_NEW_MAIL . "
 						OR pm.privmsgs_type = " . PRIVMSGS_UNREAD_MAIL . " )
 					AND u.user_id = pm.privmsgs_to_userid";
-            if (!($result = DB()->sql_query($sql))) {
+            if (!($result = OLD_DB()->sql_query($sql))) {
                 bb_die('Could not obtain private message for editing #1');
             }
 
-            if (!($privmsg = DB()->sql_fetchrow($result))) {
+            if (!($privmsg = OLD_DB()->sql_fetchrow($result))) {
                 redirectToUrl(PM_URL . "?folder=$folder");
             }
 
@@ -1003,11 +1003,11 @@ if ($mode == 'read') {
 					AND pmt.privmsgs_text_id = pm.privmsgs_id
 					AND pm.privmsgs_to_userid = " . $userdata['user_id'] . "
 					AND u.user_id = pm.privmsgs_from_userid";
-            if (!($result = DB()->sql_query($sql))) {
+            if (!($result = OLD_DB()->sql_query($sql))) {
                 bb_die('Could not obtain private message for editing #2');
             }
 
-            if (!($privmsg = DB()->sql_fetchrow($result))) {
+            if (!($privmsg = OLD_DB()->sql_fetchrow($result))) {
                 redirectToUrl(PM_URL . "?folder=$folder");
             }
 
@@ -1161,7 +1161,7 @@ if ($mode == 'read') {
 		SET privmsgs_type = " . PRIVMSGS_UNREAD_MAIL . "
 		WHERE privmsgs_type = " . PRIVMSGS_NEW_MAIL . "
 			AND privmsgs_to_userid = " . $userdata['user_id'];
-    if (!DB()->sql_query($sql)) {
+    if (!OLD_DB()->sql_query($sql)) {
         bb_die('Could not update private message new / read status (2) for user');
     }
 
@@ -1269,17 +1269,17 @@ if ($mode == 'read') {
     //
     // Get messages
     //
-    if (!($result = DB()->sql_query($sql_tot))) {
+    if (!($result = OLD_DB()->sql_query($sql_tot))) {
         bb_die('Could not query private message information #1');
     }
 
-    $pm_total = ($row = DB()->sql_fetchrow($result)) ? $row['total'] : 0;
+    $pm_total = ($row = OLD_DB()->sql_fetchrow($result)) ? $row['total'] : 0;
 
-    if (!($result = DB()->sql_query($sql_all_tot))) {
+    if (!($result = OLD_DB()->sql_query($sql_all_tot))) {
         bb_die('Could not query private message information #2');
     }
 
-    $pm_all_total = ($row = DB()->sql_fetchrow($result)) ? $row['total'] : 0;
+    $pm_all_total = ($row = OLD_DB()->sql_fetchrow($result)) ? $row['total'] : 0;
 
     //
     // Build select box
@@ -1375,11 +1375,11 @@ if ($mode == 'read') {
     //
     // Okay, let's build the correct folder
     //
-    if (!($result = DB()->sql_query($sql))) {
+    if (!($result = OLD_DB()->sql_query($sql))) {
         bb_die('Could not query private messages');
     }
 
-    if ($row = DB()->sql_fetchrow($result)) {
+    if ($row = OLD_DB()->sql_fetchrow($result)) {
         $i = 0;
         do {
             $privmsg_id = $row['privmsgs_id'];
@@ -1425,7 +1425,7 @@ if ($mode == 'read') {
 
                 'U_READ' => $u_subject,
             ));
-        } while ($row = DB()->sql_fetchrow($result));
+        } while ($row = OLD_DB()->sql_fetchrow($result));
 
         generate_pagination(PM_URL . "?folder=$folder", $pm_total, $bb_cfg['topics_per_page'], $start);
     } else {

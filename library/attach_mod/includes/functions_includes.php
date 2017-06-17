@@ -76,26 +76,26 @@ function attachment_quota_settings($admin_mode, $submit = false, $mode)
         // Show the contents
         $sql = 'SELECT quota_limit_id, quota_type FROM ' . BB_QUOTA . ' WHERE user_id = ' . (int)$user_id;
 
-        if (!($result = DB()->sql_query($sql))) {
+        if (!($result = OLD_DB()->sql_query($sql))) {
             bb_die('Unable to get quota settings #1');
         }
 
         $pm_quota = $upload_quota = 0;
 
-        if ($row = DB()->sql_fetchrow($result)) {
+        if ($row = OLD_DB()->sql_fetchrow($result)) {
             do {
                 if ($row['quota_type'] == QUOTA_UPLOAD_LIMIT) {
                     $upload_quota = $row['quota_limit_id'];
                 } elseif ($row['quota_type'] == QUOTA_PM_LIMIT) {
                     $pm_quota = $row['quota_limit_id'];
                 }
-            } while ($row = DB()->sql_fetchrow($result));
+            } while ($row = OLD_DB()->sql_fetchrow($result));
         } else {
             // Set Default Quota Limit
             $upload_quota = $attach_config['default_upload_quota'];
             $pm_quota = $attach_config['default_pm_quota'];
         }
-        DB()->sql_freeresult($result);
+        OLD_DB()->sql_freeresult($result);
 
         $template->assign_vars(array(
             'S_SELECT_UPLOAD_QUOTA' => quota_limit_select('user_upload_quota', $upload_quota),
@@ -126,26 +126,26 @@ function attachment_quota_settings($admin_mode, $submit = false, $mode)
         // Show the contents
         $sql = 'SELECT quota_limit_id, quota_type FROM ' . BB_QUOTA . ' WHERE group_id = ' . (int)$group_id;
 
-        if (!($result = DB()->sql_query($sql))) {
+        if (!($result = OLD_DB()->sql_query($sql))) {
             bb_die('Unable to get quota settings #2');
         }
 
         $pm_quota = $upload_quota = 0;
 
-        if ($row = DB()->sql_fetchrow($result)) {
+        if ($row = OLD_DB()->sql_fetchrow($result)) {
             do {
                 if ($row['quota_type'] == QUOTA_UPLOAD_LIMIT) {
                     $upload_quota = $row['quota_limit_id'];
                 } elseif ($row['quota_type'] == QUOTA_PM_LIMIT) {
                     $pm_quota = $row['quota_limit_id'];
                 }
-            } while ($row = DB()->sql_fetchrow($result));
+            } while ($row = OLD_DB()->sql_fetchrow($result));
         } else {
             // Set Default Quota Limit
             $upload_quota = $attach_config['default_upload_quota'];
             $pm_quota = $attach_config['default_pm_quota'];
         }
-        DB()->sql_freeresult($result);
+        OLD_DB()->sql_freeresult($result);
 
         $template->assign_vars(array(
             'S_SELECT_UPLOAD_QUOTA' => quota_limit_select('group_upload_quota', $upload_quota),

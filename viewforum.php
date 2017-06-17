@@ -147,7 +147,7 @@ if (!$forum_data['forum_parent'] && isset($forums['f'][$forum_id]['subforums']) 
 		ORDER BY f.forum_order
 	";
 
-    if ($rowset = DB()->fetch_rowset($sql)) {
+    if ($rowset = OLD_DB()->fetch_rowset($sql)) {
         $template->assign_vars(array(
             'SHOW_SUBFORUMS' => true,
             'FORUM_IMG' => $images['forum'],
@@ -249,7 +249,7 @@ if (!empty($_REQUEST['topicdays'])) {
 				AND topic_last_post_time > " . (TIMENOW - 86400 * $req_topic_days) . "
 		";
 
-        if ($row = DB()->fetch_row($sql)) {
+        if ($row = OLD_DB()->fetch_row($sql)) {
             $topic_days = $req_topic_days;
             $forum_topics = $row['forum_topics'];
         }
@@ -326,13 +326,13 @@ $sql = "
 	$order_sql
 	LIMIT $start, $topics_per_page
 ";
-foreach (DB()->fetch_rowset($sql) as $row) {
+foreach (OLD_DB()->fetch_rowset($sql) as $row) {
     $topic_ids[] = $row['topic_id'];
 }
 
 // Titles, posters etc.
 if ($topics_csv = implode(',', $topic_ids)) {
-    $topic_rowset = DB()->fetch_rowset("
+    $topic_rowset = OLD_DB()->fetch_rowset("
 		SELECT
 			t.*, t.topic_poster AS first_user_id, u1.user_rank as first_user_rank,
 			IF(t.topic_poster = $anon, p1.post_username, u1.username) AS first_username,

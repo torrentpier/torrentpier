@@ -305,7 +305,7 @@ function auth_user($type, $forum_id, $ug_data, array $f_access = array(), $group
 			WHERE aa.group_id = " . (int)$ug_data['group_id'] . "
 				$forum_match_sql";
 
-        foreach (DB()->fetch_rowset($sql) as $row) {
+        foreach (OLD_DB()->fetch_rowset($sql) as $row) {
             $u_access[$row['forum_id']] = $row['forum_perm'];
         }
     } // USER mode
@@ -333,7 +333,7 @@ function auth_user($type, $forum_id, $ug_data, array $f_access = array(), $group
 					GROUP BY aa.forum_id
 			";
 
-            foreach (DB()->fetch_rowset($sql) as $row) {
+            foreach (OLD_DB()->fetch_rowset($sql) as $row) {
                 $u_access[$row['forum_id']] = $row['forum_perm'];
             }
         } else {
@@ -343,7 +343,7 @@ function auth_user($type, $forum_id, $ug_data, array $f_access = array(), $group
 					WHERE aa.user_id = " . (int)$ug_data['user_id'] . "
 						$forum_match_sql";
 
-                foreach (DB()->fetch_rowset($sql) as $row) {
+                foreach (OLD_DB()->fetch_rowset($sql) as $row) {
                     $u_access[$row['forum_id']] = $row['forum_perm'];
                 }
             }
@@ -424,7 +424,7 @@ function get_select($select, $selected = null, $return_as = 'html', $first_opt =
     switch ($select) {
         case 'groups':
             $sql = "SELECT group_id, group_name FROM " . BB_GROUPS . " WHERE group_single_user = 0 ORDER BY group_name";
-            foreach (DB()->fetch_rowset($sql) as $row) {
+            foreach (OLD_DB()->fetch_rowset($sql) as $row) {
                 $select_ary[$row['group_name']] = $row['group_id'];
             }
             $select_name = 'g';
@@ -433,7 +433,7 @@ function get_select($select, $selected = null, $return_as = 'html', $first_opt =
         case 'forum_tpl':
             $sql = "SELECT tpl_id, tpl_name FROM " . BB_TOPIC_TPL . " ORDER BY tpl_name";
             $select_ary[$first_opt] = 0;
-            foreach (DB()->fetch_rowset($sql) as $row) {
+            foreach (OLD_DB()->fetch_rowset($sql) as $row) {
                 $select_ary[$row['tpl_name']] = $row['tpl_id'];
             }
             $select_name = 'forum_tpl_select';
@@ -737,12 +737,12 @@ function get_username($user_id)
     }
     if (is_array($user_id)) {
         $usernames = array();
-        foreach (DB()->fetch_rowset("SELECT user_id, username FROM " . BB_USERS . " WHERE user_id IN(" . get_id_csv($user_id) . ")") as $row) {
+        foreach (OLD_DB()->fetch_rowset("SELECT user_id, username FROM " . BB_USERS . " WHERE user_id IN(" . get_id_csv($user_id) . ")") as $row) {
             $usernames[$row['user_id']] = $row['username'];
         }
         return $usernames;
     } else {
-        $row = DB()->fetch_row("SELECT username FROM " . BB_USERS . " WHERE user_id = $user_id LIMIT 1");
+        $row = OLD_DB()->fetch_row("SELECT username FROM " . BB_USERS . " WHERE user_id = $user_id LIMIT 1");
         return $row['username'];
     }
 }
@@ -752,7 +752,7 @@ function get_user_id($username)
     if (empty($username)) {
         return false;
     }
-    $row = DB()->fetch_row("SELECT user_id FROM " . BB_USERS . " WHERE username = '" . DB()->escape($username) . "' LIMIT 1");
+    $row = OLD_DB()->fetch_row("SELECT user_id FROM " . BB_USERS . " WHERE username = '" . OLD_DB()->escape($username) . "' LIMIT 1");
     return $row['user_id'];
 }
 
@@ -782,7 +782,7 @@ function wbr($text, $max_word_length = HTML_WBR_LENGTH)
 function get_bt_userdata($user_id)
 {
     if (!$btu = OLD_CACHE('bb_cache')->get('btu_' . $user_id)) {
-        $btu = DB()->fetch_row("
+        $btu = OLD_DB()->fetch_row("
 			SELECT bt.*, SUM(tr.speed_up) AS speed_up, SUM(tr.speed_down) AS speed_down
 			FROM      " . BB_BT_USERS . " bt
 			LEFT JOIN " . BB_BT_TRACKER . " tr ON (bt.user_id = tr.user_id)
@@ -855,7 +855,7 @@ function bb_get_config($table, $from_db = false, $update_cache = true)
 {
     if ($from_db or !$cfg = OLD_CACHE('bb_config')->get("config_{$table}")) {
         $cfg = array();
-        foreach (DB()->fetch_rowset("SELECT * FROM $table") as $row) {
+        foreach (OLD_DB()->fetch_rowset("SELECT * FROM $table") as $row) {
             $cfg[$row['config_name']] = $row['config_value'];
         }
         if ($update_cache) {
@@ -874,9 +874,9 @@ function bb_update_config($params, $table = BB_CONFIG)
             'config_value' => $val,
         );
     }
-    $updates = DB()->build_array('MULTI_INSERT', $updates);
+    $updates = OLD_DB()->build_array('MULTI_INSERT', $updates);
 
-    DB()->query("REPLACE INTO $table $updates");
+    OLD_DB()->query("REPLACE INTO $table $updates");
 
     // Update cache
     bb_get_config($table, true, true);
@@ -899,11 +899,11 @@ function get_db_stat($mode)
             break;
     }
 
-    if (!($result = DB()->sql_query($sql))) {
+    if (!($result = OLD_DB()->sql_query($sql))) {
         return false;
     }
 
-    $row = DB()->sql_fetchrow($result);
+    $row = OLD_DB()->sql_fetchrow($result);
 
     switch ($mode) {
         case 'usercount':
@@ -973,18 +973,18 @@ function get_userdata($u, $force_name = false, $allow_guest = false)
 
     if ($force_name || !is_numeric($u)) {
         $name_search = true;
-        $where_sql = "WHERE username = '" . DB()->escape(clean_username($u)) . "'";
+        $where_sql = "WHERE username = '" . OLD_DB()->escape(clean_username($u)) . "'";
     } else {
         $where_sql = "WHERE user_id = " . (int)$u;
     }
 
     $sql = "SELECT * FROM " . BB_USERS . " $where_sql $exclude_anon_sql LIMIT 1";
 
-    if (!$u_data = DB()->fetch_row($sql)) {
+    if (!$u_data = OLD_DB()->fetch_row($sql)) {
         if (!is_int($u) && !$name_search) {
-            $where_sql = "WHERE username = '" . DB()->escape(clean_username($u)) . "'";
+            $where_sql = "WHERE username = '" . OLD_DB()->escape(clean_username($u)) . "'";
             $sql = "SELECT * FROM " . BB_USERS . " $where_sql $exclude_anon_sql LIMIT 1";
-            $u_data = DB()->fetch_row($sql);
+            $u_data = OLD_DB()->fetch_row($sql);
         }
     }
 
@@ -1297,7 +1297,7 @@ function obtain_word_list(&$orig_word, &$replacement_word)
     }
 
     if (!$sql = OLD_CACHE('bb_cache')->get('censored')) {
-        $sql = DB()->fetch_rowset("SELECT word, replacement FROM " . BB_WORDS);
+        $sql = OLD_DB()->fetch_rowset("SELECT word, replacement FROM " . BB_WORDS);
         if (!$sql) {
             $sql = array(array('word' => 1, 'replacement' => 1));
         }
@@ -1569,8 +1569,8 @@ if (!function_exists('array_intersect_key')) {
 
 function clear_dl_list($topics_csv)
 {
-    DB()->query("DELETE FROM " . BB_BT_DLSTATUS . " WHERE topic_id IN($topics_csv)");
-    DB()->query("DELETE FROM " . BB_BT_DLSTATUS_SNAP . " WHERE topic_id IN($topics_csv)");
+    OLD_DB()->query("DELETE FROM " . BB_BT_DLSTATUS . " WHERE topic_id IN($topics_csv)");
+    OLD_DB()->query("DELETE FROM " . BB_BT_DLSTATUS_SNAP . " WHERE topic_id IN($topics_csv)");
 }
 
 // $ids - array(id1,id2,..) or (string) id
@@ -1591,7 +1591,7 @@ function get_id_ary($ids)
 
 function get_topic_title($topic_id)
 {
-    $row = DB()->fetch_row("
+    $row = OLD_DB()->fetch_row("
 		SELECT topic_title FROM " . BB_TOPICS . " WHERE topic_id = " . (int)$topic_id . "
 	");
     return $row['topic_title'];
@@ -1599,12 +1599,12 @@ function get_topic_title($topic_id)
 
 function forum_exists($forum_id)
 {
-    return DB()->fetch_row("SELECT forum_id FROM " . BB_FORUMS . " WHERE forum_id = $forum_id LIMIT 1");
+    return OLD_DB()->fetch_row("SELECT forum_id FROM " . BB_FORUMS . " WHERE forum_id = $forum_id LIMIT 1");
 }
 
 function cat_exists($cat_id)
 {
-    return DB()->fetch_row("SELECT cat_id FROM " . BB_CATEGORIES . " WHERE cat_id = $cat_id LIMIT 1");
+    return OLD_DB()->fetch_row("SELECT cat_id FROM " . BB_CATEGORIES . " WHERE cat_id = $cat_id LIMIT 1");
 }
 
 function get_topic_icon($topic, $is_unread = null)
@@ -1675,7 +1675,7 @@ function get_poll_data_items_js($topic_id)
     $items = array();
 
     if (!$poll_data = OLD_CACHE('bb_poll_data')->get("poll_$topic_id")) {
-        $poll_data = DB()->fetch_rowset("
+        $poll_data = OLD_DB()->fetch_rowset("
 			SELECT topic_id, vote_id, vote_text, vote_result
 			FROM " . BB_POLL_VOTES . "
 			WHERE topic_id IN($topic_id_csv)
@@ -1798,7 +1798,7 @@ function clean_text_match($text, $ltrim_star = true, $die_if_empty = false)
         $text = str_compact($text);
         $text_match_sql = ($wrap_with_quotes && $text != '') ? '"' . $text . '"' : $text;
     } else {
-        $text_match_sql = DB()->escape(trim($text));
+        $text_match_sql = OLD_DB()->escape(trim($text));
     }
 
     if (!$text_match_sql && $die_if_empty) {
@@ -1887,7 +1887,7 @@ function get_title_match_topics($title_match_sql, array $forum_ids = array())
 					$where_forum";
         }
 
-        foreach (DB()->fetch_rowset($sql) as $row) {
+        foreach (OLD_DB()->fetch_rowset($sql) as $row) {
             $where_ids[] = $row[$where_id];
         }
     } else {
@@ -1950,23 +1950,23 @@ function send_pm($user_id, $subject, $message, $poster_id = BOT_UID)
 {
     global $userdata;
 
-    $subject = DB()->escape($subject);
-    $message = DB()->escape($message);
+    $subject = OLD_DB()->escape($subject);
+    $message = OLD_DB()->escape($message);
 
     if ($poster_id == BOT_UID) {
         $poster_ip = '7f000001';
-    } elseif ($row = DB()->fetch_row("SELECT user_reg_ip FROM " . BB_USERS . " WHERE user_id = $poster_id")) {
+    } elseif ($row = OLD_DB()->fetch_row("SELECT user_reg_ip FROM " . BB_USERS . " WHERE user_id = $poster_id")) {
         $poster_ip = $row['user_reg_ip'];
     } else {
         $poster_id = $userdata['user_id'];
         $poster_ip = USER_IP;
     }
 
-    DB()->query("INSERT INTO " . BB_PRIVMSGS . " (privmsgs_type, privmsgs_subject, privmsgs_from_userid, privmsgs_to_userid, privmsgs_date, privmsgs_ip) VALUES (" . PRIVMSGS_NEW_MAIL . ", '$subject', {$poster_id}, $user_id, " . TIMENOW . ", '$poster_ip')");
-    $pm_id = DB()->sql_nextid();
+    OLD_DB()->query("INSERT INTO " . BB_PRIVMSGS . " (privmsgs_type, privmsgs_subject, privmsgs_from_userid, privmsgs_to_userid, privmsgs_date, privmsgs_ip) VALUES (" . PRIVMSGS_NEW_MAIL . ", '$subject', {$poster_id}, $user_id, " . TIMENOW . ", '$poster_ip')");
+    $pm_id = OLD_DB()->sql_nextid();
 
-    DB()->query("INSERT INTO " . BB_PRIVMSGS_TEXT . " (privmsgs_text_id, privmsgs_text) VALUES ($pm_id, '$message')");
-    DB()->query("UPDATE " . BB_USERS . " SET user_new_privmsg = user_new_privmsg + 1, user_last_privmsg = " . TIMENOW . ", user_newest_pm_id = $pm_id WHERE user_id = $user_id");
+    OLD_DB()->query("INSERT INTO " . BB_PRIVMSGS_TEXT . " (privmsgs_text_id, privmsgs_text) VALUES ($pm_id, '$message')");
+    OLD_DB()->query("UPDATE " . BB_USERS . " SET user_new_privmsg = user_new_privmsg + 1, user_last_privmsg = " . TIMENOW . ", user_newest_pm_id = $pm_id WHERE user_id = $user_id");
 }
 
 function profile_url($data)
@@ -2089,7 +2089,7 @@ function update_atom($type, $id)
             break;
 
         case 'topic':
-            $topic_poster = (int)DB()->fetch_row("SELECT topic_poster FROM " . BB_TOPICS . " WHERE topic_id = $id LIMIT 1", 'topic_poster');
+            $topic_poster = (int)OLD_DB()->fetch_row("SELECT topic_poster FROM " . BB_TOPICS . " WHERE topic_id = $id LIMIT 1", 'topic_poster');
             update_user_feed($topic_poster, get_username($topic_poster));
             break;
     }
@@ -2105,9 +2105,9 @@ function hash_search($hash)
         bb_die(sprintf($lang['HASH_INVALID'], $hash));
     }
 
-    $info_hash = DB()->escape(pack("H*", $hash));
+    $info_hash = OLD_DB()->escape(pack("H*", $hash));
 
-    if ($row = DB()->fetch_row("SELECT topic_id FROM " . BB_BT_TORRENTS . " WHERE info_hash = '$info_hash'")) {
+    if ($row = OLD_DB()->fetch_row("SELECT topic_id FROM " . BB_BT_TORRENTS . " WHERE info_hash = '$info_hash'")) {
         redirectToUrl(TOPIC_URL . $row['topic_id']);
     } else {
         bb_die(sprintf($lang['HASH_NOT_FOUND'], $hash));

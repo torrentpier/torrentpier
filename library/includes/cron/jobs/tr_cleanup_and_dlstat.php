@@ -18,24 +18,24 @@ define('OLD_BB_BT_LAST_TORSTAT', 'old_bt_last_torstat');
 define('NEW_BB_BT_LAST_USERSTAT', 'new_bt_last_userstat');
 define('OLD_BB_BT_LAST_USERSTAT', 'old_bt_last_userstat');
 
-DB()->query("DROP TABLE IF EXISTS " . NEW_BB_BT_LAST_TORSTAT . ", " . NEW_BB_BT_LAST_USERSTAT);
-DB()->query("DROP TABLE IF EXISTS " . OLD_BB_BT_LAST_TORSTAT . ", " . OLD_BB_BT_LAST_USERSTAT);
+OLD_DB()->query("DROP TABLE IF EXISTS " . NEW_BB_BT_LAST_TORSTAT . ", " . NEW_BB_BT_LAST_USERSTAT);
+OLD_DB()->query("DROP TABLE IF EXISTS " . OLD_BB_BT_LAST_TORSTAT . ", " . OLD_BB_BT_LAST_USERSTAT);
 
-DB()->query("CREATE TABLE " . NEW_BB_BT_LAST_TORSTAT . " LIKE " . BB_BT_LAST_TORSTAT);
-DB()->query("CREATE TABLE " . NEW_BB_BT_LAST_USERSTAT . " LIKE " . BB_BT_LAST_USERSTAT);
+OLD_DB()->query("CREATE TABLE " . NEW_BB_BT_LAST_TORSTAT . " LIKE " . BB_BT_LAST_TORSTAT);
+OLD_DB()->query("CREATE TABLE " . NEW_BB_BT_LAST_USERSTAT . " LIKE " . BB_BT_LAST_USERSTAT);
 
-DB()->expect_slow_query(600);
+OLD_DB()->expect_slow_query(600);
 
 // Update dlstat (part 1)
 if ($bb_cfg['tracker']['update_dlstat']) {
     // ############################ Tables LOCKED ################################
-    DB()->lock(array(
+    OLD_DB()->lock(array(
         BB_BT_TRACKER,
         NEW_BB_BT_LAST_TORSTAT,
     ));
 
     // Get PER TORRENT user's dlstat from tracker
-    DB()->query("
+    OLD_DB()->query("
 		INSERT INTO " . NEW_BB_BT_LAST_TORSTAT . "
 			(topic_id, user_id, dl_status, up_add, down_add, release_add, speed_up, speed_down)
 		SELECT
@@ -46,14 +46,14 @@ if ($bb_cfg['tracker']['update_dlstat']) {
 	");
 
     // Reset up/down additions in tracker
-    DB()->query("UPDATE " . BB_BT_TRACKER . " SET up_add = 0, down_add = 0");
+    OLD_DB()->query("UPDATE " . BB_BT_TRACKER . " SET up_add = 0, down_add = 0");
 
-    DB()->unlock();
+    OLD_DB()->unlock();
     // ############################ Tables UNLOCKED ##############################
 }
 
 // Update last seeder info in BUF
-DB()->query("
+OLD_DB()->query("
 	REPLACE INTO " . BUF_LAST_SEEDER . "
 		(topic_id, seeder_last_seen)
 	SELECT
@@ -69,13 +69,13 @@ if ($bb_cfg['tracker']['autoclean']) {
     $expire_factor = max((float)$bb_cfg['tracker']['expire_factor'], 1);
     $peer_expire_time = TIMENOW - floor($announce_interval * $expire_factor);
 
-    DB()->query("DELETE FROM " . BB_BT_TRACKER . " WHERE update_time < $peer_expire_time");
+    OLD_DB()->query("DELETE FROM " . BB_BT_TRACKER . " WHERE update_time < $peer_expire_time");
 }
 
 // Update dlstat (part 2)
 if ($bb_cfg['tracker']['update_dlstat']) {
     // Set "only 1 seeder" bonus
-    DB()->query("
+    OLD_DB()->query("
 		UPDATE
 			" . NEW_BB_BT_LAST_TORSTAT . " tb,
 			" . BB_BT_TRACKER_SNAP . " sn
@@ -89,7 +89,7 @@ if ($bb_cfg['tracker']['update_dlstat']) {
 	");
 
     // Get SUMMARIZED user's dlstat
-    DB()->query("
+    OLD_DB()->query("
 		INSERT INTO " . NEW_BB_BT_LAST_USERSTAT . "
 			(user_id, up_add, down_add, release_add, bonus_add, speed_up, speed_down)
 		SELECT
@@ -99,7 +99,7 @@ if ($bb_cfg['tracker']['update_dlstat']) {
 	");
 
     // Update TOTAL user's dlstat
-    DB()->query("
+    OLD_DB()->query("
 		UPDATE
 			" . BB_BT_USERS . " u,
 			" . NEW_BB_BT_LAST_USERSTAT . " ub
@@ -116,7 +116,7 @@ if ($bb_cfg['tracker']['update_dlstat']) {
 	");
 
     // Delete from dl_list what exists in BUF but not exsits in NEW
-    DB()->query("
+    OLD_DB()->query("
 		DELETE dl
 		FROM " . BB_BT_DLSTATUS . " dl
 		INNER JOIN " . NEW_BB_BT_LAST_TORSTAT . " buf USING(user_id, topic_id)
@@ -125,7 +125,7 @@ if ($bb_cfg['tracker']['update_dlstat']) {
 	");
 
     // Update DL-Status
-    DB()->query("
+    OLD_DB()->query("
 		REPLACE INTO " . BB_BT_DLSTATUS . "
 			(user_id, topic_id, user_status)
 		SELECT
@@ -134,7 +134,7 @@ if ($bb_cfg['tracker']['update_dlstat']) {
 	");
 
     // Update PER TORRENT DL-Status (for "completed" counter)
-    DB()->query("
+    OLD_DB()->query("
 		INSERT IGNORE INTO " . BB_BT_TORSTAT . "
 			(topic_id, user_id)
 		SELECT
@@ -144,16 +144,16 @@ if ($bb_cfg['tracker']['update_dlstat']) {
 	");
 }
 
-DB()->query("
+OLD_DB()->query("
 	RENAME TABLE
 	" . BB_BT_LAST_TORSTAT . " TO " . OLD_BB_BT_LAST_TORSTAT . ",
 	" . NEW_BB_BT_LAST_TORSTAT . " TO " . BB_BT_LAST_TORSTAT . "
 ");
-DB()->query("DROP TABLE IF EXISTS " . NEW_BB_BT_LAST_TORSTAT . ", " . OLD_BB_BT_LAST_TORSTAT);
+OLD_DB()->query("DROP TABLE IF EXISTS " . NEW_BB_BT_LAST_TORSTAT . ", " . OLD_BB_BT_LAST_TORSTAT);
 
-DB()->query("
+OLD_DB()->query("
 	RENAME TABLE
 	" . BB_BT_LAST_USERSTAT . " TO " . OLD_BB_BT_LAST_USERSTAT . ",
 	" . NEW_BB_BT_LAST_USERSTAT . " TO " . BB_BT_LAST_USERSTAT . "
 ");
-DB()->query("DROP TABLE IF EXISTS " . NEW_BB_BT_LAST_USERSTAT . ", " . OLD_BB_BT_LAST_USERSTAT);
+OLD_DB()->query("DROP TABLE IF EXISTS " . NEW_BB_BT_LAST_USERSTAT . ", " . OLD_BB_BT_LAST_USERSTAT);

@@ -47,7 +47,7 @@ switch ($mode) {
         }
 
         if (IS_ADMIN) {
-            $user_topics = DB()->fetch_rowset("SELECT topic_id FROM " . BB_TOPICS . " WHERE topic_poster = $user_id", 'topic_id');
+            $user_topics = OLD_DB()->fetch_rowset("SELECT topic_id FROM " . BB_TOPICS . " WHERE topic_poster = $user_id", 'topic_id');
             $deleted_topics = topic_delete($user_topics);
             $deleted_posts = post_delete('user', $user_id);
 
@@ -83,7 +83,7 @@ switch ($mode) {
             $this->prompt_for_confirm($lang['DEACTIVATE_CONFIRM']);
         }
 
-        DB()->query("UPDATE " . BB_USERS . " SET user_active = '1' WHERE user_id = " . $user_id);
+        OLD_DB()->query("UPDATE " . BB_USERS . " SET user_active = '1' WHERE user_id = " . $user_id);
 
         $this->response['info'] = $lang['USER_ACTIVATE_ON'];
 
@@ -98,7 +98,7 @@ switch ($mode) {
             $this->prompt_for_confirm($lang['ACTIVATE_CONFIRM']);
         }
 
-        DB()->query("UPDATE " . BB_USERS . " SET user_active = '0' WHERE user_id = " . $user_id);
+        OLD_DB()->query("UPDATE " . BB_USERS . " SET user_active = '0' WHERE user_id = " . $user_id);
         delete_user_sessions($user_id);
 
         $this->response['info'] = $lang['USER_ACTIVATE_OFF'];

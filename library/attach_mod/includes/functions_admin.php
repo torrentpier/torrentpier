@@ -27,11 +27,11 @@ function process_quota_settings($mode, $id, $quota_type, $quota_limit_id = 0)
         } else {
             // Check if user is already entered
             $sql = 'SELECT user_id FROM ' . BB_QUOTA . " WHERE user_id = $id AND quota_type = $quota_type";
-            if (!$result = DB()->sql_query($sql)) {
+            if (!$result = OLD_DB()->sql_query($sql)) {
                 bb_die('Could not get entry #1');
             }
 
-            if (DB()->num_rows($result) == 0) {
+            if (OLD_DB()->num_rows($result) == 0) {
                 $sql_ary = [
                     'user_id' => (int)$id,
                     'group_id' => 0,
@@ -45,26 +45,26 @@ function process_quota_settings($mode, $id, $quota_type, $quota_limit_id = 0)
 					WHERE user_id = $id
 						AND quota_type = $quota_type";
             }
-            DB()->sql_freeresult($result);
+            OLD_DB()->sql_freeresult($result);
         }
 
-        if (!($result = DB()->sql_query($sql))) {
+        if (!($result = OLD_DB()->sql_query($sql))) {
             bb_die('Unable to update quota settings');
         }
     } elseif ($mode == 'group') {
         if (!$quota_limit_id) {
             $sql = 'DELETE FROM ' . BB_QUOTA . " WHERE group_id = $id AND quota_type = $quota_type";
-            if (!$result = DB()->sql_query($sql)) {
+            if (!$result = OLD_DB()->sql_query($sql)) {
                 bb_die('Unable to delete quota settings');
             }
         } else {
             // Check if user is already entered
             $sql = 'SELECT group_id FROM ' . BB_QUOTA . " WHERE group_id = $id AND quota_type = $quota_type";
-            if (!$result = DB()->sql_query($sql)) {
+            if (!$result = OLD_DB()->sql_query($sql)) {
                 bb_die('Could not get entry #2');
             }
 
-            if (DB()->num_rows($result) == 0) {
+            if (OLD_DB()->num_rows($result) == 0) {
                 $sql = 'INSERT INTO ' . BB_QUOTA . " (user_id, group_id, quota_type, quota_limit_id)
 					VALUES (0, $id, $quota_type, $quota_limit_id)";
             } else {
@@ -72,7 +72,7 @@ function process_quota_settings($mode, $id, $quota_type, $quota_limit_id = 0)
 					WHERE group_id = $id AND quota_type = $quota_type";
             }
 
-            if (!DB()->sql_query($sql)) {
+            if (!OLD_DB()->sql_query($sql)) {
                 bb_die('Unable to update quota settings');
             }
         }
@@ -182,17 +182,17 @@ function search_attachments($order_by, &$total_rows)
 
         // We need the post_id's, because we want to query the Attachment Table
         $sql = 'SELECT user_id FROM ' . BB_USERS . " WHERE username LIKE '$search_author'";
-        if (!($result = DB()->sql_query($sql))) {
+        if (!($result = OLD_DB()->sql_query($sql))) {
             bb_die('Could not obtain list of matching users (searching for: ' . $search_author . ')');
         }
 
         $matching_userids = '';
-        if ($row = DB()->sql_fetchrow($result)) {
+        if ($row = OLD_DB()->sql_fetchrow($result)) {
             do {
                 $matching_userids .= (($matching_userids != '') ? ', ' : '') . $row['user_id'];
-            } while ($row = DB()->sql_fetchrow($result));
+            } while ($row = OLD_DB()->sql_fetchrow($result));
 
-            DB()->sql_freeresult($result);
+            OLD_DB()->sql_freeresult($result);
         } else {
             bb_die($lang['NO_ATTACH_SEARCH_MATCH']);
         }
@@ -256,24 +256,24 @@ function search_attachments($order_by, &$total_rows)
 
     $sql .= $order_by;
 
-    if (!($result = DB()->sql_query($sql))) {
+    if (!($result = OLD_DB()->sql_query($sql))) {
         bb_die('Could not query attachments #1');
     }
 
-    $attachments = DB()->sql_fetchrowset($result);
-    $num_attach = DB()->num_rows($result);
-    DB()->sql_freeresult($result);
+    $attachments = OLD_DB()->sql_fetchrowset($result);
+    $num_attach = OLD_DB()->num_rows($result);
+    OLD_DB()->sql_freeresult($result);
 
     if ($num_attach == 0) {
         bb_die($lang['NO_ATTACH_SEARCH_MATCH']);
     }
 
-    if (!($result = DB()->sql_query($total_rows_sql))) {
+    if (!($result = OLD_DB()->sql_query($total_rows_sql))) {
         bb_die('Could not query attachments #2');
     }
 
-    $total_rows = DB()->num_rows($result);
-    DB()->sql_freeresult($result);
+    $total_rows = OLD_DB()->num_rows($result);
+    OLD_DB()->sql_freeresult($result);
 
     return $attachments;
 }

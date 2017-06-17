@@ -28,7 +28,7 @@ $poll = new TorrentPier\Legacy\Poll();
 if (!$topic_id) {
     bb_die('Invalid topic_id');
 }
-if (!$t_data = DB()->fetch_row("SELECT * FROM " . BB_TOPICS . " WHERE topic_id = $topic_id LIMIT 1")) {
+if (!$t_data = OLD_DB()->fetch_row("SELECT * FROM " . BB_TOPICS . " WHERE topic_id = $topic_id LIMIT 1")) {
     bb_die('Topic not found');
 }
 
@@ -66,22 +66,22 @@ switch ($mode) {
         if (!$vote_id) {
             bb_die($lang['NO_VOTE_OPTION']);
         }
-        if (DB()->fetch_row("SELECT 1 FROM " . BB_POLL_USERS . " WHERE topic_id = $topic_id AND user_id = {$userdata['user_id']} LIMIT 1")) {
+        if (OLD_DB()->fetch_row("SELECT 1 FROM " . BB_POLL_USERS . " WHERE topic_id = $topic_id AND user_id = {$userdata['user_id']} LIMIT 1")) {
             bb_die($lang['ALREADY_VOTED']);
         }
 
-        DB()->query("
+        OLD_DB()->query("
 			UPDATE " . BB_POLL_VOTES . " SET
 				vote_result = vote_result + 1
 			WHERE topic_id = $topic_id
 				AND vote_id = $vote_id
 			LIMIT 1
 		");
-        if (DB()->affected_rows() != 1) {
+        if (OLD_DB()->affected_rows() != 1) {
             bb_die($lang['NO_VOTE_OPTION']);
         }
 
-        DB()->query("INSERT IGNORE INTO " . BB_POLL_USERS . " (topic_id, user_id, vote_ip, vote_dt) VALUES ($topic_id, {$userdata['user_id']}, '" . USER_IP . "', " . TIMENOW . ")");
+        OLD_DB()->query("INSERT IGNORE INTO " . BB_POLL_USERS . " (topic_id, user_id, vote_ip, vote_dt) VALUES ($topic_id, {$userdata['user_id']}, '" . USER_IP . "', " . TIMENOW . ")");
 
         OLD_CACHE('bb_poll_data')->rm("poll_$topic_id");
 
@@ -93,7 +93,7 @@ switch ($mode) {
         if (!$t_data['topic_vote']) {
             bb_die($lang['POST_HAS_NO_POLL']);
         }
-        DB()->query("UPDATE " . BB_TOPICS . " SET topic_vote = 1 WHERE topic_id = $topic_id");
+        OLD_DB()->query("UPDATE " . BB_TOPICS . " SET topic_vote = 1 WHERE topic_id = $topic_id");
         bb_die($lang['NEW_POLL_START']);
         break;
 
@@ -102,7 +102,7 @@ switch ($mode) {
         if (!$t_data['topic_vote']) {
             bb_die($lang['POST_HAS_NO_POLL']);
         }
-        DB()->query("UPDATE " . BB_TOPICS . " SET topic_vote = " . POLL_FINISHED . " WHERE topic_id = $topic_id");
+        OLD_DB()->query("UPDATE " . BB_TOPICS . " SET topic_vote = " . POLL_FINISHED . " WHERE topic_id = $topic_id");
         bb_die($lang['NEW_POLL_END']);
         break;
 

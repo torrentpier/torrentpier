@@ -27,10 +27,10 @@ $return_links = array(
  * Pull all config data
  */
 $sql = 'SELECT * FROM ' . BB_CONFIG;
-if (!$result = DB()->sql_query($sql)) {
+if (!$result = OLD_DB()->sql_query($sql)) {
     bb_die('Could not query config information in admin_board');
 } else {
-    while ($row = DB()->sql_fetchrow($result)) {
+    while ($row = OLD_DB()->sql_fetchrow($result)) {
         $config_name = $row['config_name'];
         $config_value = $row['config_value'];
         $default_config[$config_name] = $config_value;

@@ -60,7 +60,7 @@ function update_forum_feed($forum_id, $forum_data)
 			LIMIT 50
 		";
     }
-    $topics_tmp = DB()->fetch_rowset($sql);
+    $topics_tmp = OLD_DB()->fetch_rowset($sql);
     $topics = array();
     foreach ($topics_tmp as $topic) {
         if (isset($topic['topic_status'])) {
@@ -106,7 +106,7 @@ function update_user_feed($user_id, $username)
 		ORDER BY t.topic_last_post_time DESC
 		LIMIT 50
 	";
-    $topics_tmp = DB()->fetch_rowset($sql);
+    $topics_tmp = OLD_DB()->fetch_rowset($sql);
     $topics = array();
     foreach ($topics_tmp as $topic) {
         if (isset($topic['topic_status'])) {

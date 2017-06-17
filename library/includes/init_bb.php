@@ -414,7 +414,7 @@ if ((empty($_POST) && !defined('IN_ADMIN') && !defined('IN_AJAX') && !file_exist
         bb_update_config(['cron_last_check' => TIMENOW + 10]);
         bb_log(date('H:i:s - ') . getmypid() . ' -x-- DB-LOCK try' . LOG_LF, CRON_LOG_DIR . '/cron_check');
 
-        if (DB()->get_lock('cron', 1)) {
+        if (OLD_DB()->get_lock('cron', 1)) {
             bb_log(date('H:i:s - ') . getmypid() . ' --x- DB-LOCK OBTAINED !!!!!!!!!!!!!!!!!' . LOG_LF, CRON_LOG_DIR . '/cron_check');
 
             /** Run cron */
@@ -440,7 +440,7 @@ if ((empty($_POST) && !defined('IN_ADMIN') && !defined('IN_AJAX') && !file_exist
                 bb_log(date('H:i:s - ') . getmypid() . ' --x- ALL jobs FINISHED *************************************************' . LOG_LF, CRON_LOG_DIR . '/cron_check');
             }
 
-            DB()->release_lock('cron');
+            OLD_DB()->release_lock('cron');
         }
     }
 }

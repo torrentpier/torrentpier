@@ -75,7 +75,7 @@ if ($topic_id && isset($_GET['view']) && ($_GET['view'] == 'next' || $_GET['view
 		ORDER BY t.topic_last_post_id $sql_ordering
 		LIMIT 1";
 
-    if ($row = DB()->fetch_row($sql)) {
+    if ($row = OLD_DB()->fetch_row($sql)) {
         $next_topic_id = $topic_id = $row['topic_id'];
     } else {
         $message = ($_GET['view'] == 'next') ? $lang['NO_NEWER_TOPICS'] : $lang['NO_OLDER_TOPICS'];
@@ -103,7 +103,7 @@ if ($topic_id) {
     bb_die($lang['TOPIC_POST_NOT_EXIST']);
 }
 
-if (!$t_data = DB()->fetch_row($sql)) {
+if (!$t_data = OLD_DB()->fetch_row($sql)) {
     meta_refresh('index.php', 10);
     bb_die($lang['TOPIC_POST_NOT_EXIST']);
 }
@@ -142,7 +142,7 @@ if (($next_topic_id || @$_GET['view'] === 'newest') && !IS_GUEST && $topic_id) {
 		ORDER BY post_time ASC
 		LIMIT 1";
 
-    if ($row = DB()->fetch_row($sql)) {
+    if ($row = OLD_DB()->fetch_row($sql)) {
         $post_id = $newest = $row['post_id'];
         $t_data['post_time'] = $row['post_time'];
     }
@@ -154,7 +154,7 @@ if ($post_id && !empty($t_data['post_time']) && ($t_data['topic_replies'] + 1) >
 		WHERE topic_id = $topic_id
 			AND post_time <= {$t_data['post_time']}";
 
-    if ($row = DB()->fetch_row($sql)) {
+    if ($row = OLD_DB()->fetch_row($sql)) {
         $t_data['prev_posts'] = $row['prev_posts'];
     }
 }
@@ -237,7 +237,7 @@ if ($bb_cfg['topic_notify_enabled']) {
                 if ($_GET['unwatch'] == 'topic') {
                     $is_watching_topic = 0;
 
-                    DB()->query("DELETE FROM " . BB_TOPICS_WATCH . " WHERE topic_id = $topic_id AND user_id = {$userdata['user_id']}");
+                    OLD_DB()->query("DELETE FROM " . BB_TOPICS_WATCH . " WHERE topic_id = $topic_id AND user_id = {$userdata['user_id']}");
                 }
 
                 set_die_append_msg($forum_id, $topic_id);
@@ -246,7 +246,7 @@ if ($bb_cfg['topic_notify_enabled']) {
                 $is_watching_topic = true;
 
                 if (!$t_data['notify_status']) {
-                    DB()->query("UPDATE " . BB_TOPICS_WATCH . " SET notify_status = " . TOPIC_WATCH_NOTIFIED . " WHERE topic_id = $topic_id AND user_id = {$userdata['user_id']}");
+                    OLD_DB()->query("UPDATE " . BB_TOPICS_WATCH . " SET notify_status = " . TOPIC_WATCH_NOTIFIED . " WHERE topic_id = $topic_id AND user_id = {$userdata['user_id']}");
                 }
             }
         } else {
@@ -254,7 +254,7 @@ if ($bb_cfg['topic_notify_enabled']) {
                 if ($_GET['watch'] == 'topic') {
                     $is_watching_topic = true;
 
-                    DB()->query("
+                    OLD_DB()->query("
 						INSERT INTO " . BB_TOPICS_WATCH . " (user_id, topic_id, notify_status)
 						VALUES (" . $userdata['user_id'] . ", $topic_id, " . TOPIC_WATCH_NOTIFIED . ")
 					");
@@ -295,7 +295,7 @@ if (!empty($_REQUEST['postdays'])) {
 				AND p.topic_id = t.topic_id
 				AND p.post_time > $min_post_time";
 
-        $total_replies = ($row = DB()->fetch_row($sql)) ? $row['num_posts'] : 0;
+        $total_replies = ($row = OLD_DB()->fetch_row($sql)) ? $row['num_posts'] : 0;
         $limit_posts_time = "AND p.post_time >= $min_post_time ";
     }
 }
@@ -309,7 +309,7 @@ $post_order = (isset($_POST['postorder']) && $_POST['postorder'] !== 'asc') ? 'd
 // 1. Add first post of topic if it pinned and page of topic not first
 $first_post = false;
 if ($t_data['topic_show_first_post'] && $start) {
-    $first_post = DB()->fetch_rowset("
+    $first_post = OLD_DB()->fetch_rowset("
 		SELECT
 			u.username, u.user_id, u.user_rank, u.user_posts, u.user_from,
 			u.user_regdate, u.user_sig,
@@ -352,7 +352,7 @@ $sql = "
 	LIMIT $start, $posts_per_page
 ";
 
-if ($postrow = DB()->fetch_rowset($sql)) {
+if ($postrow = OLD_DB()->fetch_rowset($sql)) {
     if ($first_post) {
         $postrow = array_merge($first_post, $postrow);
     }
@@ -539,7 +539,7 @@ if ($topic_attachment) {
 // Update the topic view counter
 //
 $sql = "INSERT INTO " . BUF_TOPIC_VIEW . " (topic_id,  topic_views) VALUES ($topic_id, 1) ON DUPLICATE KEY UPDATE topic_views = topic_views + 1";
-if (!DB()->sql_query($sql)) {
+if (!OLD_DB()->sql_query($sql)) {
     bb_die('Could not update topic views');
 }
 

@@ -27,7 +27,7 @@ $sql = "SELECT topic_id, attach_id
 		AND seeder_last_seen < $last_seen_time
 	LIMIT $limit_sql";
 
-foreach (DB()->fetch_rowset($sql) as $row) {
+foreach (OLD_DB()->fetch_rowset($sql) as $row) {
     $topics_sql[] = $row['topic_id'];
     $attach_sql[] = $row['attach_id'];
 }
@@ -36,13 +36,13 @@ $attach_sql = implode(',', $attach_sql);
 
 if ($dead_tor_sql && $attach_sql) {
     // Delete torstat
-    DB()->query("
+    OLD_DB()->query("
 		DELETE FROM " . BB_BT_TORSTAT . "
 		WHERE topic_id IN($dead_tor_sql)
 	");
 
     // Update attach
-    DB()->query("
+    OLD_DB()->query("
 		UPDATE
 			" . BB_ATTACHMENTS_DESC . " a,
 			" . BB_BT_TORRENTS . " tor
@@ -55,7 +55,7 @@ if ($dead_tor_sql && $attach_sql) {
 	");
 
     // Remove torrents
-    DB()->query("
+    OLD_DB()->query("
 		DELETE FROM " . BB_BT_TORRENTS . "
 		WHERE topic_id IN($dead_tor_sql)
 	");
