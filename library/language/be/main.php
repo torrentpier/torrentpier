@@ -1116,6 +1116,7 @@ $lang['TOR_STATUS_NAME'] = array(
     TOR_CHECKING => 'праверана',
     TOR_TMP => 'часовае',
     TOR_PREMOD => 'прэмадэрацыі',
+    TOR_REPLENISH => 'папаўняць',
 );
 $lang['TOR_STATUS_FAILED'] = 'Такога статусу не існуе!';
 $lang['TORRENT_FAILED'] = 'Размеркаванне не знойдзены!';

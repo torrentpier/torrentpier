@@ -1116,6 +1116,7 @@ $lang['TOR_STATUS_NAME'] = array(
     TOR_CHECKING => 'i verifikuar',
     TOR_TMP => 'të përkohshme',
     TOR_PREMOD => 'para-moderim',
+    TOR_REPLENISH => 'plotësoj',
 );
 $lang['TOR_STATUS_FAILED'] = 'Një status të tillë nuk ekziston!';
 $lang['TORRENT_FAILED'] = 'Shpërndarja nuk u gjet!';

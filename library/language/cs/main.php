@@ -1116,6 +1116,7 @@ $lang['TOR_STATUS_NAME'] = array(
     TOR_CHECKING => 'ověřeno',
     TOR_TMP => 'dočasné',
     TOR_PREMOD => 'pre-moderování',
+    TOR_REPLENISH => 'doplnit',
 );
 $lang['TOR_STATUS_FAILED'] = 'Takový stav neexistuje!';
 $lang['TORRENT_FAILED'] = 'Distribuce nebyla nalezena!';

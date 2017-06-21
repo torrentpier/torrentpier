@@ -1116,6 +1116,7 @@ $lang['TOR_STATUS_NAME'] = array(
     TOR_CHECKING => 'pārbaudīts',
     TOR_TMP => 'pagaidu',
     TOR_PREMOD => 'pre-mērenība',
+    TOR_REPLENISH => 'papildināt',
 );
 $lang['TOR_STATUS_FAILED'] = 'Šādu statusu neeksistē!';
 $lang['TORRENT_FAILED'] = 'Sadales netika atrasts!';

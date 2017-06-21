@@ -1116,6 +1116,7 @@ $lang['TOR_STATUS_NAME'] = array(
     TOR_CHECKING => 'सत्यापित',
     TOR_TMP => 'अस्थायी',
     TOR_PREMOD => 'पूर्व मॉडरेशन',
+    TOR_REPLENISH => 'फिर से भरना',
 );
 $lang['TOR_STATUS_FAILED'] = 'ऐसी स्थिति मौजूद नहीं है!';
 $lang['TORRENT_FAILED'] = 'वितरण नहीं मिला!';

@@ -1116,6 +1116,7 @@ $lang['TOR_STATUS_NAME'] = array(
     TOR_CHECKING => '验证',
     TOR_TMP => '临时',
     TOR_PREMOD => '预先审核',
+    TOR_REPLENISH => '补充',
 );
 $lang['TOR_STATUS_FAILED'] = '这种状况不存在！';
 $lang['TORRENT_FAILED'] = '分布没有被发现的！';

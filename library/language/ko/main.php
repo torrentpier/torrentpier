@@ -1116,6 +1116,7 @@ $lang['TOR_STATUS_NAME'] = array(
     TOR_CHECKING => '검증',
     TOR_TMP => '임시',
     TOR_PREMOD => 'pre-검토',
+    TOR_REPLENISH => '을 보충',
 );
 $lang['TOR_STATUS_FAILED'] = '이러한 상태가 존재하지 않습니다!';
 $lang['TORRENT_FAILED'] = '메일 발견되지 않았다!';

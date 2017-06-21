@@ -1116,6 +1116,7 @@ $lang['TOR_STATUS_NAME'] = array(
     TOR_CHECKING => 'tekshirilayotgan',
     TOR_TMP => 'vaqtincha',
     TOR_PREMOD => 'pre-o\'zini tutish',
+    TOR_REPLENISH => 'to\'ldirish',
 );
 $lang['TOR_STATUS_FAILED'] = 'Bunday vaziyat mavjud emas!';
 $lang['TORRENT_FAILED'] = 'Tarqatish topilmadi!';

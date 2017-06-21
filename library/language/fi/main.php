@@ -1116,6 +1116,7 @@ $lang['TOR_STATUS_NAME'] = array(
     TOR_CHECKING => 'verified',
     TOR_TMP => 'väliaikainen',
     TOR_PREMOD => 'pre-maltillisesti',
+    TOR_REPLENISH => 'täydentää',
 );
 $lang['TOR_STATUS_FAILED'] = 'Tällainen asema ei ole olemassa!';
 $lang['TORRENT_FAILED'] = 'Jakelu ei löytynyt!';

@@ -1116,6 +1116,7 @@ $lang['TOR_STATUS_NAME'] = array(
     TOR_CHECKING => 'sprawdzone',
     TOR_TMP => 'tymczasowe',
     TOR_PREMOD => 'zatwierdzenie',
+    TOR_REPLENISH => 'uzupełnić',
 );
 $lang['TOR_STATUS_FAILED'] = 'Takiego statusu nie istnieje!';
 $lang['TORRENT_FAILED'] = 'Rozkład nie znaleziono!';

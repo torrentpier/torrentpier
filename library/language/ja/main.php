@@ -1116,6 +1116,7 @@ $lang['TOR_STATUS_NAME'] = array(
     TOR_CHECKING => '確認',
     TOR_TMP => '仮設',
     TOR_PREMOD => '前節度',
+    TOR_REPLENISH => '補給',
 );
 $lang['TOR_STATUS_FAILED'] = 'そのような状況が存在しない!';
 $lang['TORRENT_FAILED'] = '分布は見つかりませんでしたよ！';

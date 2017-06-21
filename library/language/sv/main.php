@@ -1116,6 +1116,7 @@ $lang['TOR_STATUS_NAME'] = array(
     TOR_CHECKING => 'kontrollerat',
     TOR_TMP => 'tillfällig',
     TOR_PREMOD => 'pre-måtta',
+    TOR_REPLENISH => 'fylla på',
 );
 $lang['TOR_STATUS_FAILED'] = 'Denna status finns inte!';
 $lang['TORRENT_FAILED'] = 'Fördelningen var inte hittas!';

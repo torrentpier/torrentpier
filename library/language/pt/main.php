@@ -1116,6 +1116,7 @@ $lang['TOR_STATUS_NAME'] = array(
     TOR_CHECKING => 'verificado',
     TOR_TMP => 'temporário',
     TOR_PREMOD => 'a pré-moderação',
+    TOR_REPLENISH => 'enchei',
 );
 $lang['TOR_STATUS_FAILED'] = 'Tal status não existe!';
 $lang['TORRENT_FAILED'] = 'A distribuição não foi encontrado!';

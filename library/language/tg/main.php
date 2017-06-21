@@ -1116,6 +1116,7 @@ $lang['TOR_STATUS_NAME'] = array(
     TOR_CHECKING => 'санљида',
     TOR_TMP => 'муваққатӣ',
     TOR_PREMOD => 'пеш аз бамеъёр',
+    TOR_REPLENISH => 'пурра',
 );
 $lang['TOR_STATUS_FAILED'] = 'Чунин ҳолати вуҷуд надорад!';
 $lang['TORRENT_FAILED'] = 'Тақсими пайдо нашуда буд!';

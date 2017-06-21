@@ -1116,6 +1116,7 @@ $lang['TOR_STATUS_NAME'] = array(
     TOR_CHECKING => 'xác nhận',
     TOR_TMP => 'tạm',
     TOR_PREMOD => 'trước chừng mực',
+    TOR_REPLENISH => 'bổ sung',
 );
 $lang['TOR_STATUS_FAILED'] = 'Tình trạng như vậy, không tồn tại!';
 $lang['TORRENT_FAILED'] = 'Giấy phép được không tìm thấy!';

@@ -1116,6 +1116,7 @@ $lang['TOR_STATUS_NAME'] = array(
     TOR_CHECKING => 'тексерілді',
     TOR_TMP => 'уақытша',
     TOR_PREMOD => 'алдын-ала модерация',
+    TOR_REPLENISH => 'толықтыру',
 );
 $lang['TOR_STATUS_FAILED'] = 'Мұндай мәртебесі жоқ!';
 $lang['TORRENT_FAILED'] = 'Тарату табылған жоқ!';

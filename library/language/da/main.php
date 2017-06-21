@@ -1116,6 +1116,7 @@ $lang['TOR_STATUS_NAME'] = array(
     TOR_CHECKING => 'kontrolleret',
     TOR_TMP => 'midlertidig',
     TOR_PREMOD => 'præ-moderation',
+    TOR_REPLENISH => 'genopbygge',
 );
 $lang['TOR_STATUS_FAILED'] = 'En sådan tilstand eksisterer ikke!';
 $lang['TORRENT_FAILED'] = 'Distribution blev ikke fundet!';

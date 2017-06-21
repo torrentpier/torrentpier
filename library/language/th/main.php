@@ -1116,6 +1116,7 @@ $lang['TOR_STATUS_NAME'] = array(
     TOR_CHECKING => 'พิสูจน์',
     TOR_TMP => 'ชั่วคราว',
     TOR_PREMOD => 'ก่อนเนื่อง',
+    TOR_REPLENISH => 'เติม',
 );
 $lang['TOR_STATUS_FAILED'] = 'ช่างสถานะไม่มีตัวตน!';
 $lang['TORRENT_FAILED'] = 'ตรฐานไม่เจอ!';

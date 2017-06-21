@@ -1116,6 +1116,7 @@ $lang['TOR_STATUS_NAME'] = array(
     TOR_CHECKING => 'ellenőrzött',
     TOR_TMP => 'ideiglenes',
     TOR_PREMOD => 'előzetes moderálás',
+    TOR_REPLENISH => 'teletölt',
 );
 $lang['TOR_STATUS_FAILED'] = 'Ilyen állapot nem létezik!';
 $lang['TORRENT_FAILED'] = 'Elosztó nem található!';

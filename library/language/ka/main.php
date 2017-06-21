@@ -1116,6 +1116,7 @@ $lang['TOR_STATUS_NAME'] = array(
     TOR_CHECKING => 'დავადგინე',
     TOR_TMP => 'დროებითი',
     TOR_PREMOD => 'პრე-მოდერაცია',
+    TOR_REPLENISH => 'შეავსონ',
 );
 $lang['TOR_STATUS_FAILED'] = 'ასეთი მდგომარეობა არ არსებობს!';
 $lang['TORRENT_FAILED'] = 'სადისტრიბუციო არ იქნა ნაპოვნი!';
