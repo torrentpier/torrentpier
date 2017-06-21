@@ -1,6 +1,6 @@
 {
   "name": "torrentpier",
-  "version": "2.2.0",
+  "version": "2.2.2",
   "description": "Bull-powered BitTorrent tracker engine",
   "main": "index.js",
   "repository": "git@github.com:torrentpier/torrentpier.git",

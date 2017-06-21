@@ -36,8 +36,8 @@ $bb_cfg = [];
 $bb_cfg['js_ver'] = $bb_cfg['css_ver'] = 1;
 
 // Version info
-$bb_cfg['tp_version'] = '2.2.1';
-$bb_cfg['tp_release_date'] = '16-06-2017';
+$bb_cfg['tp_version'] = '2.2.2';
+$bb_cfg['tp_release_date'] = '22-06-2017';
 $bb_cfg['tp_release_codename'] = 'Aurochs';
 
 // Database
@@ -162,7 +162,6 @@ $bb_cfg['pm_url'] = 'privmsg.php'; # "http://{$domain_name}/privmsg.php"
 
 // Language
 $bb_cfg['charset'] = 'UTF-8'; // page charset
-$bb_cfg['auto_language'] = true; // select user-preferred language automatically
 $bb_cfg['lang'] = [
     'af' => [
         'name' => 'Afrikaans',
@@ -669,6 +668,7 @@ $bb_cfg['tor_icons'] = [
     TOR_CHECKING => '<span class="tor-icon tor-checking">%</span>',
     TOR_TMP => '<span class="tor-icon tor-dup">T</span>',
     TOR_PREMOD => '<span class="tor-icon tor-dup">&#8719;</span>',
+    TOR_REPLENISH => '<span class="tor-icon tor-dup">R</span>',
 ];
 
 // Запрет на скачивание
@@ -720,19 +720,8 @@ $bb_cfg['topic_left_column_witdh'] = 150;
 $bb_cfg['post_img_width_decr'] = 52;
 $bb_cfg['attach_img_width_decr'] = 130;
 
-if (!empty($_SERVER['HTTP_ACCEPT_LANGUAGE']) && $bb_cfg['auto_language']) {
-    $user_lang = substr($_SERVER['HTTP_ACCEPT_LANGUAGE'], 0, 2);
-    if (file_exists(LANG_ROOT_DIR . '/' . $user_lang)) {
-        $bb_cfg['default_lang_dir'] = LANG_ROOT_DIR . '/' . $user_lang . '/';
-        $bb_cfg['default_lang'] = $user_lang;
-    } else {
-        $bb_cfg['default_lang_dir'] = LANG_ROOT_DIR . '/en/';
-        $bb_cfg['default_lang'] = 'en';
-    }
+if (isset($bb_cfg['default_lang']) && file_exists(LANG_ROOT_DIR . '/' . $bb_cfg['default_lang'])) {
+    $bb_cfg['default_lang_dir'] = LANG_ROOT_DIR . '/' . $bb_cfg['default_lang'] . '/';
 } else {
-    if (isset($bb_cfg['default_lang']) && file_exists(LANG_ROOT_DIR . '/' . $bb_cfg['default_lang'])) {
-        $bb_cfg['default_lang_dir'] = LANG_ROOT_DIR . '/' . $bb_cfg['default_lang'] . '/';
-    } else {
-        $bb_cfg['default_lang_dir'] = LANG_ROOT_DIR . '/en/';
-    }
+    $bb_cfg['default_lang_dir'] = LANG_ROOT_DIR . '/en/';
 }

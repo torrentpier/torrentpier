@@ -129,7 +129,9 @@ class CronHelper
             self::touchLockFile(CRON_RUNNING);
             file_write('', START_MARK);
         } elseif ($mode === 'end') {
-            unlink(START_MARK);
+            if (file_exists(START_MARK)) {
+                unlink(START_MARK);
+            }
         }
     }
 }

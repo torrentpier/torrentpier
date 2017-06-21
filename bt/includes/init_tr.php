@@ -62,7 +62,7 @@ function tracker_exit()
 
 function silent_exit()
 {
-    while (ob_end_clean()) ;
+    ob_end_clean();
 
     tracker_exit();
 }
