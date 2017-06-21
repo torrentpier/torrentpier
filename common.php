@@ -271,12 +271,10 @@ function file_write($str, $file, $max_size = LOG_MAX_SIZE, $lock = true, $replac
             rename($file, $new_name);
         }
     }
-    if (!$fp = fopen($file, 'ab')) {
-        if ($dir_created = bb_mkdir(dirname($file))) {
-            $fp = fopen($file, 'ab');
-        }
+    if (file_exists($file) && $dir_created = bb_mkdir(dirname($file))) {
+        $fp = fopen($file, 'ab+');
     }
-    if ($fp) {
+    if (isset($fp)) {
         if ($lock) {
             flock($fp, LOCK_EX);
         }

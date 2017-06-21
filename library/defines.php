@@ -97,26 +97,27 @@ define('CRON_RUNNING', TRIGGERS_DIR . '/cron_running');
 define('MEM_USAGE', function_exists('memory_get_usage'));
 
 // Gzip
-define('GZIP_OUTPUT_ALLOWED', (extension_loaded('zlib') && !ini_get('zlib.output_compression')));
+define('GZIP_OUTPUT_ALLOWED', extension_loaded('zlib') && !ini_get('zlib.output_compression'));
 define('UA_GZIP_SUPPORTED', isset($_SERVER['HTTP_ACCEPT_ENCODING']) && strpos($_SERVER['HTTP_ACCEPT_ENCODING'], 'gzip') !== false);
 
 // Torrents (reserved: -1)
-define('TOR_NOT_APPROVED', 0);   // не проверено
-define('TOR_CLOSED', 1);   // закрыто
-define('TOR_APPROVED', 2);   // проверено
-define('TOR_NEED_EDIT', 3);   // недооформлено
-define('TOR_NO_DESC', 4);   // неоформлено
-define('TOR_DUP', 5);   // повтор
-define('TOR_CLOSED_CPHOLD', 6);   // закрыто правообладателем
-define('TOR_CONSUMED', 7);   // поглощено
-define('TOR_DOUBTFUL', 8);   // сомнительно
-define('TOR_CHECKING', 9);   // проверяется
-define('TOR_TMP', 10);  // временная
-define('TOR_PREMOD', 11);  // премодерация
+define('TOR_NOT_APPROVED', 0); // не проверено
+define('TOR_CLOSED', 1); // закрыто
+define('TOR_APPROVED', 2); // проверено
+define('TOR_NEED_EDIT', 3); // недооформлено
+define('TOR_NO_DESC', 4); // неоформлено
+define('TOR_DUP', 5); // повтор
+define('TOR_CLOSED_CPHOLD', 6); // закрыто правообладателем
+define('TOR_CONSUMED', 7); // поглощено
+define('TOR_DOUBTFUL', 8); // сомнительно
+define('TOR_CHECKING', 9); // проверяется
+define('TOR_TMP', 10); // временная
+define('TOR_PREMOD', 11); // премодерация
+define('TOR_REPLENISH', 12); // пополняемая
 
-define('CRON_LOG_ENABLED', true);  // global ON/OFF
+define('CRON_LOG_ENABLED', true); // global ON/OFF
 define('CRON_FORCE_LOG', false); // always log regardless of job settings
 define('CRON_DIR', INC_DIR . '/cron/');
 define('CRON_JOB_DIR', CRON_DIR . 'jobs/');
 define('CRON_LOG_DIR', 'cron'); // inside LOG_DIR
-define('CRON_LOG_FILE', 'cron');  // without ext
+define('CRON_LOG_FILE', 'cron'); // without ext

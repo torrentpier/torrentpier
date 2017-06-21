@@ -376,8 +376,11 @@ if (!$set_default) {
     elseif ($req_forums =& $_REQUEST[$forum_key]) {
         if ($req_forums != $search_all) {
             $clean_forums = [];
+            if (is_array($req_forums)) {
+                $req_forums = implode(',', $req_forums);
+            }
             foreach (explode(',', $req_forums) as $req_forum) {
-                $clean_forums[] = (int) $req_forum;
+                $clean_forums[] = (int)$req_forum;
             }
             $forum_val = implode(',', array_intersect($clean_forums, $allowed_forums));
         }
