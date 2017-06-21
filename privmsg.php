@@ -901,8 +901,8 @@ if ($mode == 'read') {
             cache_rm_user_sessions($to_userdata['user_id']);
 
             if (bf($to_userdata['user_opt'], 'user_opt', 'user_notify_pm') && $to_userdata['user_active'] && $bb_cfg['pm_notify_enabled']) {
-                /** @var TorrentPier\Legacy\Emailer() $emailer */
-                $emailer = new TorrentPier\Legacy\Emailer();
+                /** @var TP\Legacy\Emailer() $emailer */
+                $emailer = new TP\Legacy\Emailer();
 
                 $emailer->set_from([$bb_cfg['board_email'] => $bb_cfg['sitename']]);
                 $emailer->set_to([$to_userdata['user_email'] => $to_userdata['username']]);

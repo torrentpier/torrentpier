@@ -40,17 +40,22 @@
     "filp/whoops": "^2.1",
     "gigablah/sphinxphp": "^2.0",
     "google/recaptcha": "^1.1",
+    "laravel/framework": "^5.4",
     "longman/ip-tools": "^1.2",
     "roave/security-advisories": "dev-master",
     "rych/bencode": "^1.0",
-    "samdark/sitemap": "^2.0",
-    "swiftmailer/swiftmailer": "^5.4",
-    "symfony/dotenv": "^3.3",
-    "symfony/var-dumper": "^3.3"
+    "samdark/sitemap": "^2.0"
   },
   "autoload": {
+    "classmap": [
+      "library/TorrentPier"
+    ],
+    "files": [
+      "library/TorrentPier/helpers.php"
+    ],
     "psr-4": {
-      "TorrentPier\\": "src/"
+      "App\\": "app/",
+      "Tests\\": "tests/"
     }
   },
   "minimum-stability": "stable",

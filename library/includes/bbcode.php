@@ -97,7 +97,7 @@ function bbcode_tpl_compact($text)
 // prepare a posted message for entry into the database
 function prepare_message($message)
 {
-    $message = \TorrentPier\Legacy\BBCode::clean_up($message);
+    $message = \TP\Legacy\BBCode::clean_up($message);
     $message = htmlCHR($message, false, ENT_NOQUOTES);
     return $message;
 }
@@ -399,7 +399,7 @@ function bbcode2html($text)
     global $bbcode;
 
     if (!isset($bbcode)) {
-        $bbcode = new TorrentPier\Legacy\BBCode();
+        $bbcode = new TP\Legacy\BBCode();
     }
     $orig_word = array();
     $replacement_word = array();
@@ -414,7 +414,7 @@ function get_words_rate($text)
 {
     static $wr = null;
     if (!isset($wr)) {
-        $wr = new TorrentPier\Legacy\WordsRate();
+        $wr = new TP\Legacy\WordsRate();
     }
     return $wr->get_words_rate($text);
 }

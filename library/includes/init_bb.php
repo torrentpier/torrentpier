@@ -398,9 +398,9 @@ if (DBG_USER) {
 
 $bb_cfg = array_merge(bb_get_config(BB_CONFIG), $bb_cfg);
 
-$log_action = new TorrentPier\Legacy\LogAction();
-$html = new TorrentPier\Legacy\Common\Html();
-$user = new TorrentPier\Legacy\Common\User();
+$log_action = new TP\Legacy\LogAction();
+$html = new TP\Legacy\Common\Html();
+$user = new TP\Legacy\Common\User();
 
 $userdata =& $user->data;
 

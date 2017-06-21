@@ -50,53 +50,16 @@ if (!file_exists(__DIR__ . '/vendor/autoload.php')) {
 }
 require_once __DIR__ . '/vendor/autoload.php';
 
-/**
- * Gets the value of an environment variable. Supports boolean, empty and null.
- *
- * @param  string $key
- * @param  mixed $default
- * @return mixed
- */
-function env($key, $default = null)
-{
-    $value = getenv($key);
-    if (!$value) return value($default);
-    switch (strtolower($value)) {
-        case 'true':
-        case '(true)':
-            return true;
-        case 'false':
-        case '(false)':
-            return false;
-        case '(null)':
-            return null;
-        case '(empty)':
-            return '';
-    }
-    return $value;
-}
+// Legacy config
+use Dotenv\Dotenv;
+use Dotenv\Exception\InvalidPathException;
 
-/**
- * Return the default value of the given value.
- *
- * @param  mixed $value
- * @return mixed
- */
-function value($value)
-{
-    return $value instanceof Closure ? $value() : $value;
-}
-
-// Get initial config
-if (!getenv('APP_DEBUG') && file_exists(__DIR__ . '/.env')) {
-    (new Symfony\Component\Dotenv\Dotenv())->load(__DIR__ . '/.env');
+try {
+    (new Dotenv(__DIR__))->load();
+} catch (InvalidPathException $e) {
+    dd($e);
 }
 require_once __DIR__ . '/library/config.php';
-
-// Local config
-if (file_exists(__DIR__ . '/library/config.local.php')) {
-    require_once __DIR__ . '/library/config.local.php';
-}
 
 $server_protocol = $bb_cfg['cookie_secure'] ? 'https://' : 'http://';
 $server_port = in_array((int)$bb_cfg['server_port'], array(80, 443), true) ? '' : ':' . $bb_cfg['server_port'];
@@ -153,7 +116,7 @@ if ($bb_cfg['bugsnag']['enabled']) {
 /**
  * Database
  */
-$DBS = new TorrentPier\Legacy\Dbs($bb_cfg);
+$DBS = new TP\Legacy\Dbs($bb_cfg);
 
 function OLD_DB($db_alias = 'db')
 {
@@ -164,7 +127,7 @@ function OLD_DB($db_alias = 'db')
 /**
  * Cache
  */
-$CACHES = new TorrentPier\Legacy\Caches($bb_cfg);
+$CACHES = new TP\Legacy\Caches($bb_cfg);
 
 function OLD_CACHE($cache_name)
 {
@@ -177,7 +140,7 @@ function OLD_CACHE($cache_name)
  */
 switch ($bb_cfg['datastore_type']) {
     case 'memcache':
-        $datastore = new TorrentPier\Legacy\Datastore\Memcache($bb_cfg['cache']['memcache'], $bb_cfg['cache']['prefix']);
+        $datastore = new TP\Legacy\Datastore\Memcache($bb_cfg['cache']['memcache'], $bb_cfg['cache']['prefix']);
         break;
 
     case 'sqlite':
@@ -186,25 +149,27 @@ switch ($bb_cfg['datastore_type']) {
             'pconnect' => true,
             'con_required' => true,
         );
-        $datastore = new TorrentPier\Legacy\Datastore\Sqlite($default_cfg, $bb_cfg['cache']['prefix']);
+        $datastore = new TP\Legacy\Datastore\Sqlite($default_cfg, $bb_cfg['cache']['prefix']);
         break;
 
     case 'redis':
-        $datastore = new TorrentPier\Legacy\Datastore\Redis($bb_cfg['cache']['redis'], $bb_cfg['cache']['prefix']);
+        $datastore = new TP\Legacy\Datastore\Redis($bb_cfg['cache']['redis'], $bb_cfg['cache']['prefix']);
         break;
 
     case 'apc':
-        $datastore = new TorrentPier\Legacy\Datastore\Apc($bb_cfg['cache']['prefix']);
+        $datastore = new TP\Legacy\Datastore\Apc($bb_cfg['cache']['prefix']);
         break;
 
     case 'xcache':
-        $datastore = new TorrentPier\Legacy\Datastore\Xcache($bb_cfg['cache']['prefix']);
+        $datastore = new TP\Legacy\Datastore\Xcache($bb_cfg['cache']['prefix']);
         break;
 
     case 'filecache':
     default:
-        $datastore = new TorrentPier\Legacy\Datastore\File($bb_cfg['cache']['db_dir'] . 'datastore/', $bb_cfg['cache']['prefix']);
+        $datastore = new TP\Legacy\Datastore\File($bb_cfg['cache']['db_dir'] . 'datastore/', $bb_cfg['cache']['prefix']);
 }
+
+require_once __DIR__ . '/bootstrap.php';
 
 function sql_dbg_enabled()
 {

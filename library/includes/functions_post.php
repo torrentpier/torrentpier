@@ -326,8 +326,8 @@ function user_notification($mode, &$post_data, &$topic_title, &$forum_id, &$topi
                 $unwatch_topic = make_url(TOPIC_URL . "$topic_id&unwatch=topic");
 
                 foreach ($watch_list as $row) {
-                    /** @var TorrentPier\Legacy\Emailer() $emailer */
-                    $emailer = new TorrentPier\Legacy\Emailer();
+                    /** @var TP\Legacy\Emailer() $emailer */
+                    $emailer = new TP\Legacy\Emailer();
 
                     $emailer->set_from([$bb_cfg['board_email'] => $bb_cfg['sitename']]);
                     $emailer->set_to([$row['user_email'] => $row['username']]);
