@@ -1116,6 +1116,7 @@ $lang['TOR_STATUS_NAME'] = array(
     TOR_CHECKING => 'potvrđeno',
     TOR_TMP => 'privremeni',
     TOR_PREMOD => 'prije umjerenost',
+    TOR_REPLENISH => 'napuniti',
 );
 $lang['TOR_STATUS_FAILED'] = 'Tako status ne postoji!';
 $lang['TORRENT_FAILED'] = 'Distribuciju nije našao!';

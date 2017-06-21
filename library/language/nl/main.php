@@ -1116,6 +1116,7 @@ $lang['TOR_STATUS_NAME'] = array(
     TOR_CHECKING => 'geverifieerde',
     TOR_TMP => 'tijdelijk',
     TOR_PREMOD => 'vooraf modereren',
+    TOR_REPLENISH => 'vullen',
 );
 $lang['TOR_STATUS_FAILED'] = 'Een dergelijke status niet bestaat!';
 $lang['TORRENT_FAILED'] = 'Distributie is niet gevonden!';

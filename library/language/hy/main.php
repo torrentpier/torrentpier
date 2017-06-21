@@ -1116,6 +1116,7 @@ $lang['TOR_STATUS_NAME'] = array(
     TOR_CHECKING => 'վերցված է',
     TOR_TMP => 'ժամանակավոր',
     TOR_PREMOD => 'премодерации',
+    TOR_REPLENISH => 'համալրել',
 );
 $lang['TOR_STATUS_FAILED'] = 'Նման կարգավիճակի գոյություն չունի!';
 $lang['TORRENT_FAILED'] = 'Բաշխումը չի գտնվել.';

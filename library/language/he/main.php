@@ -1116,6 +1116,7 @@ $lang['TOR_STATUS_NAME'] = array(
     TOR_CHECKING => 'מאומת',
     TOR_TMP => 'זמני',
     TOR_PREMOD => 'מראש מתינות',
+    TOR_REPLENISH => 'לחדש',
 );
 $lang['TOR_STATUS_FAILED'] = 'מעמד כזה לא קיים!';
 $lang['TORRENT_FAILED'] = 'הפצה לא נמצא!';

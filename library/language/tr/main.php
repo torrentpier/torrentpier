@@ -1116,6 +1116,7 @@ $lang['TOR_STATUS_NAME'] = array(
     TOR_CHECKING => 'doğrulanmış',
     TOR_TMP => 'geçici',
     TOR_PREMOD => 'pre-ılımlılık',
+    TOR_REPLENISH => 'doldurmak',
 );
 $lang['TOR_STATUS_FAILED'] = 'Böyle bir durum yok!';
 $lang['TORRENT_FAILED'] = 'Dağıtım bulunamadı!';

@@ -1116,6 +1116,7 @@ $lang['TOR_STATUS_NAME'] = array(
     TOR_CHECKING => 'επαληθεύεται',
     TOR_TMP => 'προσωρινή',
     TOR_PREMOD => 'προ-μέτρο',
+    TOR_REPLENISH => 'αναπληρώ',
 );
 $lang['TOR_STATUS_FAILED'] = 'Μια τέτοια κατάσταση δεν υπάρχει!';
 $lang['TORRENT_FAILED'] = 'Διανομή δεν βρέθηκε!';

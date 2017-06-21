@@ -1116,6 +1116,7 @@ $lang['TOR_STATUS_NAME'] = array(
     TOR_CHECKING => 'patikrinta',
     TOR_TMP => 'laikinas',
     TOR_PREMOD => 'pre-saikingai',
+    TOR_REPLENISH => 'papildyti',
 );
 $lang['TOR_STATUS_FAILED'] = 'Tokio statuso nėra!';
 $lang['TORRENT_FAILED'] = 'Platinti, nerastas!';

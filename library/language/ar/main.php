@@ -1116,6 +1116,7 @@ $lang['TOR_STATUS_NAME'] = array(
     TOR_CHECKING => 'التحقق',
     TOR_TMP => 'مؤقت',
     TOR_PREMOD => 'قبل الاعتدال',
+    TOR_REPLENISH => 'تجديد',
 );
 $lang['TOR_STATUS_FAILED'] = 'هذا الوضع غير موجود!';
 $lang['TORRENT_FAILED'] = 'التوزيع غير موجود!';

@@ -1116,6 +1116,7 @@ $lang['TOR_STATUS_NAME'] = array(
     TOR_CHECKING => 'test',
     TOR_TMP => 'müvəqqəti',
     TOR_PREMOD => 'премодерации',
+    TOR_REPLENISH => 'artırmaq',
 );
 $lang['TOR_STATUS_FAILED'] = 'Belə statusu yoxdur!';
 $lang['TORRENT_FAILED'] = 'Paylanması tapılmadı!';

@@ -1116,6 +1116,7 @@ $lang['TOR_STATUS_NAME'] = array(
     TOR_CHECKING => 'bekreftet',
     TOR_TMP => 'midlertidige',
     TOR_PREMOD => 'pre-moderering',
+    TOR_REPLENISH => 'fyll',
 );
 $lang['TOR_STATUS_FAILED'] = 'En slik status ikke eksisterer!';
 $lang['TORRENT_FAILED'] = 'Fordelingen ble ikke funnet!';

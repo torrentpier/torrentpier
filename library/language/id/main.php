@@ -1116,6 +1116,7 @@ $lang['TOR_STATUS_NAME'] = array(
     TOR_CHECKING => 'verified',
     TOR_TMP => 'sementara',
     TOR_PREMOD => 'pra-moderasi',
+    TOR_REPLENISH => 'mengisi',
 );
 $lang['TOR_STATUS_FAILED'] = 'Status tersebut tidak ada!';
 $lang['TORRENT_FAILED'] = 'Distribusi tidak ditemukan!';

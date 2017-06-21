@@ -1116,6 +1116,7 @@ $lang['TOR_STATUS_NAME'] = array(
     TOR_CHECKING => 'проверени',
     TOR_TMP => 'временно',
     TOR_PREMOD => 'премодерации',
+    TOR_REPLENISH => 'попълване',
 );
 $lang['TOR_STATUS_FAILED'] = 'Такъв статус не съществува!';
 $lang['TORRENT_FAILED'] = 'Жилището не е намерен!';

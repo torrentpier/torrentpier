@@ -1116,6 +1116,7 @@ $lang['TOR_STATUS_NAME'] = array(
     TOR_CHECKING => 'kontrollitud',
     TOR_TMP => 'ajutine',
     TOR_PREMOD => 'pre-mõõdukalt',
+    TOR_REPLENISH => 'täiendama',
 );
 $lang['TOR_STATUS_FAILED'] = 'Selline seisund ei ole olemas!';
 $lang['TORRENT_FAILED'] = 'Jaotus ei leitud!';
