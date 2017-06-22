@@ -53,7 +53,9 @@ class CronHelper
      */
     public static function releaseLockFile()
     {
-        rename(CRON_RUNNING, CRON_ALLOWED);
+        if (file_exists(CRON_RUNNING)) {
+            rename(CRON_RUNNING, CRON_ALLOWED);
+        }
         self::touchLockFile(CRON_ALLOWED);
     }
 
