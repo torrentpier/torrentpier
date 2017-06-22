@@ -55,7 +55,7 @@ if (!isset($_REQUEST['dosearch'])) {
         }
     }
 
-    $sql = 'SELECT * FROM ' . BB_RANKS . ' WHERE rank_special = 1 ORDER BY rank_title';
+    $sql = 'SELECT * FROM ' . BB_RANKS . ' ORDER BY rank_title';
     if (!($result = DB()->sql_query($sql))) {
         bb_die('Could not obtain ranks data');
     }
@@ -482,7 +482,7 @@ if (!isset($_REQUEST['dosearch'])) {
                 bb_die($lang['SEARCH_INVALID_RANK']);
             }
 
-            $sql = 'SELECT rank_title FROM ' . BB_RANKS . " WHERE rank_id = $rank_id AND rank_special = 1";
+            $sql = 'SELECT rank_title FROM ' . BB_RANKS . " WHERE rank_id = $rank_id";
 
             if (!$result = DB()->sql_query($sql)) {
                 bb_die('Could not select rank data');
