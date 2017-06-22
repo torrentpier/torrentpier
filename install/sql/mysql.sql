@@ -1032,8 +1032,6 @@ DROP TABLE IF EXISTS `bb_ranks`;
 CREATE TABLE IF NOT EXISTS `bb_ranks` (
   `rank_id`      SMALLINT(5) UNSIGNED NOT NULL AUTO_INCREMENT,
   `rank_title`   VARCHAR(50)          NOT NULL DEFAULT '',
-  `rank_min`     MEDIUMINT(8)         NOT NULL DEFAULT '0',
-  `rank_special` TINYINT(1)           NOT NULL DEFAULT '1',
   `rank_image`   VARCHAR(255)         NOT NULL DEFAULT '',
   `rank_style`   VARCHAR(255)         NOT NULL DEFAULT '',
   PRIMARY KEY (`rank_id`)
@@ -1044,7 +1042,7 @@ CREATE TABLE IF NOT EXISTS `bb_ranks` (
 -- ----------------------------
 -- Records of bb_ranks
 -- ----------------------------
-INSERT INTO `bb_ranks` VALUES ('', 'Администратор', '-1', '1', 'styles/images/ranks/admin.png', 'colorAdmin');
+INSERT INTO `bb_ranks` VALUES ('', 'Администратор', 'styles/images/ranks/admin.png', 'colorAdmin');
 
 -- ----------------------------
 -- Table structure for `bb_search_rebuild`

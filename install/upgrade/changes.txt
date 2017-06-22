@@ -28,3 +28,7 @@ UPDATE `bb_sessions` SET `session_ip` = '0';
 ALTER TABLE `bb_sessions` CHANGE `session_ip` `session_ip` varchar(42) NOT NULL DEFAULT '0';
 UPDATE `bb_banlist` SET `ban_ip` = '0';
 ALTER TABLE `bb_banlist` CHANGE `ban_ip` `ban_ip` varchar(42) NOT NULL DEFAULT '0';
+
+// 2.2.2
+ALTER TABLE `bb_ranks` DROP `rank_min`;
+ALTER TABLE `bb_ranks` DROP `rank_special`;
