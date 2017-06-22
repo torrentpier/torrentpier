@@ -1,10 +1,24 @@
 # Change Log
 
+## [v2.2.2](https://github.com/torrentpier/torrentpier/tree/v2.2.2) (2017-06-23)
+[Full Changelog](https://github.com/torrentpier/torrentpier/compare/v2.2.1...v2.2.2)
+
+**Merged pull requests:**
+
+- Release preparation Crowdin language pack update [\#409](https://github.com/torrentpier/torrentpier/pull/409) ([Exile37](https://github.com/Exile37))
+- Display source language if no user language variable [\#408](https://github.com/torrentpier/torrentpier/pull/408) ([Exile37](https://github.com/Exile37))
+- Disable Bugsnag by default [\#407](https://github.com/torrentpier/torrentpier/pull/407) ([Exile37](https://github.com/Exile37))
+- Fix empty birthday list [\#406](https://github.com/torrentpier/torrentpier/pull/406) ([Exile37](https://github.com/Exile37))
+- Remove unused ranks functionality [\#405](https://github.com/torrentpier/torrentpier/pull/405) ([Exile37](https://github.com/Exile37))
+- Complete renewal of the Ukrainian language from our toloka.to friends [\#404](https://github.com/torrentpier/torrentpier/pull/404) ([Exile37](https://github.com/Exile37))
+- Some fixes, auto language removal \(so buggy\) and replenishable status [\#403](https://github.com/torrentpier/torrentpier/pull/403) ([Exile37](https://github.com/Exile37))
+
 ## [v2.2.1](https://github.com/torrentpier/torrentpier/tree/v2.2.1) (2017-06-16)
 [Full Changelog](https://github.com/torrentpier/torrentpier/compare/v2.2.0...v2.2.1)
 
 **Merged pull requests:**
 
+- Release 2.2.1 🐛  [\#392](https://github.com/torrentpier/torrentpier/pull/392) ([Exile37](https://github.com/Exile37))
 - Partial renewal of the Ukrainian language from our toloka.to friends [\#391](https://github.com/torrentpier/torrentpier/pull/391) ([Exile37](https://github.com/Exile37))
 - Create CODE\_OF\_CONDUCT.md [\#390](https://github.com/torrentpier/torrentpier/pull/390) ([Exile37](https://github.com/Exile37))
 - Fix default users language in dump [\#389](https://github.com/torrentpier/torrentpier/pull/389) ([Exile37](https://github.com/Exile37))
