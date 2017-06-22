@@ -1116,6 +1116,7 @@ $lang['TOR_STATUS_NAME'] = array(
     TOR_CHECKING => 'verified',
     TOR_TMP => 'temporary',
     TOR_PREMOD => 'pre-moderation',
+    TOR_REPLENISH => 'replenish',
 );
 $lang['TOR_STATUS_FAILED'] = 'Such status does not exist!';
 $lang['TORRENT_FAILED'] = 'Distribution was not found!';
@@ -1990,9 +1991,6 @@ $lang['ADD_NEW_RANK'] = 'Add new rank';
 $lang['RANK_TITLE'] = 'Rank Title';
 $lang['STYLE_COLOR'] = 'Style rank';
 $lang['STYLE_COLOR_FAQ'] = 'Specify class for painting at the title of the desired color. For example <i class="bold">colorAdmin<i>';
-$lang['RANK_SPECIAL'] = 'Set as Special Rank';
-$lang['RANK_MINIMUM'] = 'Minimum Posts';
-$lang['RANK_MAXIMUM'] = 'Maximum Posts';
 $lang['RANK_IMAGE'] = 'Rank Image';
 $lang['RANK_IMAGE_EXPLAIN'] = 'Use this to define a small image associated with the rank';
 

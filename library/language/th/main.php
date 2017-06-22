@@ -1116,6 +1116,7 @@ $lang['TOR_STATUS_NAME'] = array(
     TOR_CHECKING => 'พิสูจน์',
     TOR_TMP => 'ชั่วคราว',
     TOR_PREMOD => 'ก่อนเนื่อง',
+    TOR_REPLENISH => 'เติม',
 );
 $lang['TOR_STATUS_FAILED'] = 'ช่างสถานะไม่มีตัวตน!';
 $lang['TORRENT_FAILED'] = 'ตรฐานไม่เจอ!';
@@ -1990,9 +1991,6 @@ $lang['ADD_NEW_RANK'] = 'เพิ่มตำแหน่งใหม่';
 $lang['RANK_TITLE'] = 'ตำแหน่งหัวเรื่อง';
 $lang['STYLE_COLOR'] = 'รูปแบบตำแหน่ง';
 $lang['STYLE_COLOR_FAQ'] = 'สำหรับกำหนดสำหรับชั้นเรียนวาดรูปที่ชื่อเรื่องของที่ต้องการรายจ่ายของเราแยกกัน ตัวอย่างเช่น <i class="bold">colorAdmin<i>';
-$lang['RANK_SPECIAL'] = 'ตั้งเป็นพิเศษเท่าไหร่';
-$lang['RANK_MINIMUM'] = 'กัปตัน..เสาทางนี้น้อยที่สุด';
-$lang['RANK_MAXIMUM'] = 'สูงสุดของกัปตัน..เสาทางนี้';
 $lang['RANK_IMAGE'] = 'ตำแหน่งของภาพ';
 $lang['RANK_IMAGE_EXPLAIN'] = 'ใช้นี่เพื่อกำหนดเล็กๆภาพที่เกี่ยวข้องกับกาศ';
 

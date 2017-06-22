@@ -46,7 +46,7 @@ if ($logged_in) {
 // Online userlist
 if (defined('SHOW_ONLINE') && SHOW_ONLINE) {
     $online_full = !empty($_REQUEST['online_full']);
-    $online_list = ($online_full) ? 'online_' . $userdata['user_lang'] : 'online_short_' . $userdata['user_lang'];
+    $online_list = $online_full ? 'online_' . $userdata['user_lang'] : 'online_short_' . $userdata['user_lang'];
 
     ${$online_list} = array(
         'stat' => '',

@@ -1116,6 +1116,7 @@ $lang['TOR_STATUS_NAME'] = array(
     TOR_CHECKING => 'verificado',
     TOR_TMP => 'temporal',
     TOR_PREMOD => 'la pre-moderación',
+    TOR_REPLENISH => 'reponer',
 );
 $lang['TOR_STATUS_FAILED'] = 'Tal estado no existe!';
 $lang['TORRENT_FAILED'] = 'La distribución no se encontró!';
@@ -1990,9 +1991,6 @@ $lang['ADD_NEW_RANK'] = 'Añadir nuevo rango';
 $lang['RANK_TITLE'] = 'Rango De Título';
 $lang['STYLE_COLOR'] = 'Estilo de rango';
 $lang['STYLE_COLOR_FAQ'] = 'Especificar la clase de pintura en el título del color deseado. Por ejemplo <i class="bold">colorAdmin<i>';
-$lang['RANK_SPECIAL'] = 'Establece como Rango Especial';
-$lang['RANK_MINIMUM'] = 'Mínimo De Posts';
-$lang['RANK_MAXIMUM'] = 'El Máximo De Puestos De';
 $lang['RANK_IMAGE'] = 'El Rango De La Imagen';
 $lang['RANK_IMAGE_EXPLAIN'] = 'Utilice esta opción para definir una pequeña imagen asociada con rango';
 

@@ -1116,6 +1116,7 @@ $lang['TOR_STATUS_NAME'] = array(
     TOR_CHECKING => 'pārbaudīts',
     TOR_TMP => 'pagaidu',
     TOR_PREMOD => 'pre-mērenība',
+    TOR_REPLENISH => 'papildināt',
 );
 $lang['TOR_STATUS_FAILED'] = 'Šādu statusu neeksistē!';
 $lang['TORRENT_FAILED'] = 'Sadales netika atrasts!';
@@ -1990,9 +1991,6 @@ $lang['ADD_NEW_RANK'] = 'Pievienot jaunu rangs';
 $lang['RANK_TITLE'] = 'Rangs Nosaukums';
 $lang['STYLE_COLOR'] = 'Stils rangs';
 $lang['STYLE_COLOR_FAQ'] = 'Norādiet klases gleznu titulu vajadzīgo krāsu. Piemēram <i class="bold">colorAdmin<i>';
-$lang['RANK_SPECIAL'] = 'Uzstādīt kā Īpašu Rangs';
-$lang['RANK_MINIMUM'] = 'Minimālais Amata';
-$lang['RANK_MAXIMUM'] = 'Maksimālā Amata';
 $lang['RANK_IMAGE'] = 'Rangs Attēlu';
 $lang['RANK_IMAGE_EXPLAIN'] = 'Izmantojiet šo, lai norādītu, mazs attēls, kas saistīts ar rank';
 

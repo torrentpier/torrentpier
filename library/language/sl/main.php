@@ -1116,6 +1116,7 @@ $lang['TOR_STATUS_NAME'] = array(
     TOR_CHECKING => 'preverjeno',
     TOR_TMP => 'začasne',
     TOR_PREMOD => 'pre-zmernost',
+    TOR_REPLENISH => 'dopolnitev',
 );
 $lang['TOR_STATUS_FAILED'] = 'Takšno stanje ne obstaja!';
 $lang['TORRENT_FAILED'] = 'Distribucija ni bilo mogoče najti!';
@@ -1990,9 +1991,6 @@ $lang['ADD_NEW_RANK'] = 'Dodaj novo mesto';
 $lang['RANK_TITLE'] = 'Uvrstitev Naslov';
 $lang['STYLE_COLOR'] = 'Slog uvrstitev';
 $lang['STYLE_COLOR_FAQ'] = 'Določite razred za slikarstvo na naslov želene barve. Za primer <i class="bold">colorAdmin<i>';
-$lang['RANK_SPECIAL'] = 'Nastavi kot Posebno Mesto';
-$lang['RANK_MINIMUM'] = 'Najmanj Delovnih Mest';
-$lang['RANK_MAXIMUM'] = 'Največ Objav';
 $lang['RANK_IMAGE'] = 'Uvrstitev Sliko';
 $lang['RANK_IMAGE_EXPLAIN'] = 'Uporabite to možnost, če želite določiti, majhna slika, povezane z uvrstitvijo';
 

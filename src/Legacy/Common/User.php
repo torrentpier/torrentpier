@@ -571,14 +571,14 @@ class User
      */
     public function init_userprefs()
     {
-        global $bb_cfg, $theme, $lang, $DeltaTime;
+        global $bb_cfg, $theme, $source_lang, $DeltaTime;
 
         if (defined('LANG_DIR')) {
             return;
         }  // prevent multiple calling
 
         define('DEFAULT_LANG_DIR', LANG_ROOT_DIR . '/' . $bb_cfg['default_lang'] . '/');
-        define('ENGLISH_LANG_DIR', LANG_ROOT_DIR . '/en/');
+        define('SOURCE_LANG_DIR', LANG_ROOT_DIR . '/source/');
 
         if ($this->data['user_id'] != GUEST_UID) {
             if ($this->data['user_lang'] && $this->data['user_lang'] != $bb_cfg['default_lang']) {
@@ -598,6 +598,14 @@ class User
             define('LANG_DIR', DEFAULT_LANG_DIR);
         }
 
+        /** Temporary place source language to the global */
+        $lang = [];
+        require(SOURCE_LANG_DIR . 'main.php');
+        $source_lang = $lang;
+        unset($lang);
+
+        /** Place user language to the global */
+        global $lang;
         require(LANG_DIR . 'main.php');
         setlocale(LC_ALL, isset($bb_cfg['lang'][$this->data['user_lang']]['locale']) ?
             $bb_cfg['lang'][$this->data['user_lang']]['locale'] : 'en_US.UTF-8');

@@ -151,17 +151,19 @@ define('BOT_UID', -746);
 /**
  * Progressive error reporting
  */
-if ($bb_cfg['bugsnag']['enabled'] && env('APP_ENV', 'production') !== 'local') {
-    /** @var Bugsnag\Handler $bugsnag */
-    $bugsnag = Bugsnag\Client::make($bb_cfg['bugsnag']['api_key']);
-    Bugsnag\Handler::register($bugsnag);
-}
-
-if (DBG_USER && env('APP_ENV', 'production') === 'local') {
-    /** @var Whoops\Run $whoops */
-    $whoops = new \Whoops\Run;
-    $whoops->pushHandler(new \Whoops\Handler\PrettyPageHandler);
-    $whoops->register();
+if ($bb_cfg['bugsnag']['enabled']) {
+    if (env('APP_ENV', 'production') !== 'local') {
+        /** @var Bugsnag\Handler $bugsnag */
+        $bugsnag = Bugsnag\Client::make($bb_cfg['bugsnag']['api_key']);
+        Bugsnag\Handler::register($bugsnag);
+    }
+} else {
+    if (DBG_USER) {
+        /** @var Whoops\Run $whoops */
+        $whoops = new \Whoops\Run;
+        $whoops->pushHandler(new \Whoops\Handler\PrettyPageHandler);
+        $whoops->register();
+    }
 }
 
 /**
@@ -271,12 +273,10 @@ function file_write($str, $file, $max_size = LOG_MAX_SIZE, $lock = true, $replac
             rename($file, $new_name);
         }
     }
-    if (!$fp = fopen($file, 'ab')) {
-        if ($dir_created = bb_mkdir(dirname($file))) {
-            $fp = fopen($file, 'ab');
-        }
+    if (file_exists($file) && $dir_created = bb_mkdir(dirname($file))) {
+        $fp = fopen($file, 'ab+');
     }
-    if ($fp) {
+    if (isset($fp)) {
         if ($lock) {
             flock($fp, LOCK_EX);
         }

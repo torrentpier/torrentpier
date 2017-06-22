@@ -1116,6 +1116,7 @@ $lang['TOR_STATUS_NAME'] = array(
     TOR_CHECKING => 'geverifieer',
     TOR_TMP => 'tydelike',
     TOR_PREMOD => 'pre-moderering',
+    TOR_REPLENISH => 'vul',
 );
 $lang['TOR_STATUS_FAILED'] = 'Sodanige status bestaan ​​nie!';
 $lang['TORRENT_FAILED'] = 'Verspreiding is nie gevind nie!';
@@ -1990,9 +1991,6 @@ $lang['ADD_NEW_RANK'] = 'Voeg nuwe rang by';
 $lang['RANK_TITLE'] = 'Rang Titel';
 $lang['STYLE_COLOR'] = 'Styl rang';
 $lang['STYLE_COLOR_FAQ'] = 'Spesifiseer klas vir skildery by die titel van die verlangde kleur. Byvoorbeeld <i class="bold">colorAdmin<i>';
-$lang['RANK_SPECIAL'] = 'Stel as spesiale posisie';
-$lang['RANK_MINIMUM'] = 'Minimum boodskappe';
-$lang['RANK_MAXIMUM'] = 'Maksimum boodskappe';
 $lang['RANK_IMAGE'] = 'Rang Beeld';
 $lang['RANK_IMAGE_EXPLAIN'] = 'Gebruik hierdie om \'n klein prentjie wat met die rang geassosieer word, te definieer';
 

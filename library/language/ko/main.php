@@ -1116,6 +1116,7 @@ $lang['TOR_STATUS_NAME'] = array(
     TOR_CHECKING => '검증',
     TOR_TMP => '임시',
     TOR_PREMOD => 'pre-검토',
+    TOR_REPLENISH => '을 보충',
 );
 $lang['TOR_STATUS_FAILED'] = '이러한 상태가 존재하지 않습니다!';
 $lang['TORRENT_FAILED'] = '메일 발견되지 않았다!';
@@ -1990,9 +1991,6 @@ $lang['ADD_NEW_RANK'] = '추가로 새로운 순위';
 $lang['RANK_TITLE'] = '순위 제목';
 $lang['STYLE_COLOR'] = '스타일 순위';
 $lang['STYLE_COLOR_FAQ'] = '지정 등에 대한 그림의 제목은 원하는 색입니다. 예를 들어 <i class="bold">colorAdmin<i>';
-$lang['RANK_SPECIAL'] = '설정으로 특별한 순위';
-$lang['RANK_MINIMUM'] = '최소는 게시물';
-$lang['RANK_MAXIMUM'] = '최대 게시물';
 $lang['RANK_IMAGE'] = '순위를 이미지';
 $lang['RANK_IMAGE_EXPLAIN'] = '이를 사용하여 정의 작은 이미지와 관련 순위';
 

@@ -1116,6 +1116,7 @@ $lang['TOR_STATUS_NAME'] = array(
     TOR_CHECKING => 'kontrollitud',
     TOR_TMP => 'ajutine',
     TOR_PREMOD => 'pre-mõõdukalt',
+    TOR_REPLENISH => 'täiendama',
 );
 $lang['TOR_STATUS_FAILED'] = 'Selline seisund ei ole olemas!';
 $lang['TORRENT_FAILED'] = 'Jaotus ei leitud!';
@@ -1990,9 +1991,6 @@ $lang['ADD_NEW_RANK'] = 'Lisa uus auaste';
 $lang['RANK_TITLE'] = 'Auaste Pealkiri';
 $lang['STYLE_COLOR'] = 'Stiil auaste';
 $lang['STYLE_COLOR_FAQ'] = 'Täpsustada klassi maali kell pealkiri soovitud värv. Näiteks <i class="bold">colorAdmin<i>';
-$lang['RANK_SPECIAL'] = 'Komplekt nagu Erilist Auaste';
-$lang['RANK_MINIMUM'] = 'Minimaalne Postitusi';
-$lang['RANK_MAXIMUM'] = 'Maksimaalne Postitusi';
 $lang['RANK_IMAGE'] = 'Auaste Pilt';
 $lang['RANK_IMAGE_EXPLAIN'] = 'Kasuta seda selleks, et määratleda väikese pildi seotud auaste';
 

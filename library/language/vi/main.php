@@ -1116,6 +1116,7 @@ $lang['TOR_STATUS_NAME'] = array(
     TOR_CHECKING => 'xác nhận',
     TOR_TMP => 'tạm',
     TOR_PREMOD => 'trước chừng mực',
+    TOR_REPLENISH => 'bổ sung',
 );
 $lang['TOR_STATUS_FAILED'] = 'Tình trạng như vậy, không tồn tại!';
 $lang['TORRENT_FAILED'] = 'Giấy phép được không tìm thấy!';
@@ -1990,9 +1991,6 @@ $lang['ADD_NEW_RANK'] = 'Thêm bậc mới';
 $lang['RANK_TITLE'] = 'Cấp Bậc, Danh Hiệu';
 $lang['STYLE_COLOR'] = 'Phong cách bậc';
 $lang['STYLE_COLOR_FAQ'] = 'Chỉ định cho lớp sơn tại các tiêu đề của màu mong muốn. Ví dụ <i class="bold">colorAdmin<i>';
-$lang['RANK_SPECIAL'] = 'Đặt làm Đặc biệt cấp Bậc';
-$lang['RANK_MINIMUM'] = 'Tối Thiểu Bài';
-$lang['RANK_MAXIMUM'] = 'Tối Đa Bài';
 $lang['RANK_IMAGE'] = 'Xếp Hình Ảnh';
 $lang['RANK_IMAGE_EXPLAIN'] = 'Sử dụng cái này để xác định một hình ảnh nhỏ liên kết với các bậc';
 

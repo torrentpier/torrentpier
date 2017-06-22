@@ -1116,6 +1116,7 @@ $lang['TOR_STATUS_NAME'] = array(
     TOR_CHECKING => 'verificado',
     TOR_TMP => 'temporário',
     TOR_PREMOD => 'a pré-moderação',
+    TOR_REPLENISH => 'enchei',
 );
 $lang['TOR_STATUS_FAILED'] = 'Tal status não existe!';
 $lang['TORRENT_FAILED'] = 'A distribuição não foi encontrado!';
@@ -1990,9 +1991,6 @@ $lang['ADD_NEW_RANK'] = 'Adicione nova classificação';
 $lang['RANK_TITLE'] = 'Título Da Classificação';
 $lang['STYLE_COLOR'] = 'Estilo classificação';
 $lang['STYLE_COLOR_FAQ'] = 'Especificar a classe de pintura com o título de a cor desejada. Por exemplo <i class="bold">colorAdmin<i>';
-$lang['RANK_SPECIAL'] = 'Definir como Especial de Classificação';
-$lang['RANK_MINIMUM'] = 'Mínimo Posts';
-$lang['RANK_MAXIMUM'] = 'O Máximo De Posts';
 $lang['RANK_IMAGE'] = 'Classificação De Imagem';
 $lang['RANK_IMAGE_EXPLAIN'] = 'Use esta ferramenta para definir uma pequena imagem associada com a classificação';
 

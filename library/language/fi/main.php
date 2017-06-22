@@ -1116,6 +1116,7 @@ $lang['TOR_STATUS_NAME'] = array(
     TOR_CHECKING => 'verified',
     TOR_TMP => 'väliaikainen',
     TOR_PREMOD => 'pre-maltillisesti',
+    TOR_REPLENISH => 'täydentää',
 );
 $lang['TOR_STATUS_FAILED'] = 'Tällainen asema ei ole olemassa!';
 $lang['TORRENT_FAILED'] = 'Jakelu ei löytynyt!';
@@ -1990,9 +1991,6 @@ $lang['ADD_NEW_RANK'] = 'Lisää uusi listalla';
 $lang['RANK_TITLE'] = 'Sijoitus Nimi';
 $lang['STYLE_COLOR'] = 'Tyyli listalla';
 $lang['STYLE_COLOR_FAQ'] = 'Määritä class for maalaus otsikko haluamasi väri. Esimerkiksi <i class="bold">colorAdmin<i>';
-$lang['RANK_SPECIAL'] = 'Asettaa Erityisiä Listalla';
-$lang['RANK_MINIMUM'] = 'Vähintään Virkaa';
-$lang['RANK_MAXIMUM'] = 'Suurin Viestit';
 $lang['RANK_IMAGE'] = 'Sijoitus Kuva';
 $lang['RANK_IMAGE_EXPLAIN'] = 'Käytä tätä määritellä pieni kuva, joka liittyy listalla';
 

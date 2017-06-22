@@ -53,7 +53,9 @@ class CronHelper
      */
     public static function releaseLockFile()
     {
-        rename(CRON_RUNNING, CRON_ALLOWED);
+        if (file_exists(CRON_RUNNING)) {
+            rename(CRON_RUNNING, CRON_ALLOWED);
+        }
         self::touchLockFile(CRON_ALLOWED);
     }
 
@@ -129,7 +131,9 @@ class CronHelper
             self::touchLockFile(CRON_RUNNING);
             file_write('', START_MARK);
         } elseif ($mode === 'end') {
-            unlink(START_MARK);
+            if (file_exists(START_MARK)) {
+                unlink(START_MARK);
+            }
         }
     }
 }

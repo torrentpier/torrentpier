@@ -1116,6 +1116,7 @@ $lang['TOR_STATUS_NAME'] = array(
     TOR_CHECKING => 'vérifié',
     TOR_TMP => 'temporaire',
     TOR_PREMOD => 'pré-modération',
+    TOR_REPLENISH => 'remplir',
 );
 $lang['TOR_STATUS_FAILED'] = 'Ce statut n\'existe pas!';
 $lang['TORRENT_FAILED'] = 'La Distribution n\'a pas été trouvé!';
@@ -1990,9 +1991,6 @@ $lang['ADD_NEW_RANK'] = 'Ajouter un nouveau rang';
 $lang['RANK_TITLE'] = 'Rang Titre';
 $lang['STYLE_COLOR'] = 'Style de rang';
 $lang['STYLE_COLOR_FAQ'] = 'Spécifier la classe de peinture à l\'intitulé de la couleur désirée. Par exemple <i class="bold">colorAdmin<i>';
-$lang['RANK_SPECIAL'] = 'Définir comme Rang Spécial';
-$lang['RANK_MINIMUM'] = 'Minimum De Postes';
-$lang['RANK_MAXIMUM'] = 'Maximum De Postes';
 $lang['RANK_IMAGE'] = 'Rang De L\'Image';
 $lang['RANK_IMAGE_EXPLAIN'] = 'L\'utiliser pour définir une petite image associée avec le grade';
 
