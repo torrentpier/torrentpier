@@ -1991,9 +1991,6 @@ $lang['ADD_NEW_RANK'] = 'жаңа атақ қосу';
 $lang['RANK_TITLE'] = 'атағы атауы';
 $lang['STYLE_COLOR'] = 'Стиль атағы';
 $lang['STYLE_COLOR_FAQ'] = 'Қалаған түсті тақырып аты кескіндеме үшін сыныбын көрсетіңіз. Мысалы <i class="bold">colorAdmin<i> үшін';
-$lang['RANK_SPECIAL'] = 'Арнайы Rank ретінде орнату';
-$lang['RANK_MINIMUM'] = 'Ең төменгі Хабарламалар';
-$lang['RANK_MAXIMUM'] = 'Ең Хабарламалар';
 $lang['RANK_IMAGE'] = 'атағы Image';
 $lang['RANK_IMAGE_EXPLAIN'] = 'атағы байланысты шағын кескінді анықтау үшін пайдаланыңыз';
 

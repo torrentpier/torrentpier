@@ -1991,9 +1991,6 @@ $lang['ADD_NEW_RANK'] = 'Přidat nové hodnosti';
 $lang['RANK_TITLE'] = 'Hodnost Titul';
 $lang['STYLE_COLOR'] = 'Styl hodnost';
 $lang['STYLE_COLOR_FAQ'] = 'Určit třídy pro malování na název požadované barvy. Například <i class="bold">colorAdmin<i>';
-$lang['RANK_SPECIAL'] = 'Nastavit jako Speciální Hodnosti';
-$lang['RANK_MINIMUM'] = 'Minimální Příspěvky';
-$lang['RANK_MAXIMUM'] = 'Maximální Příspěvky';
 $lang['RANK_IMAGE'] = 'Pozice Obrazu';
 $lang['RANK_IMAGE_EXPLAIN'] = 'Použití této definice malého obrázek spojený s hodnosti';
 

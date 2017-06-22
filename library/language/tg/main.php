@@ -1991,9 +1991,6 @@ $lang['ADD_NEW_RANK'] = 'Иловаи рутбаи нав';
 $lang['RANK_TITLE'] = 'Rank Title';
 $lang['STYLE_COLOR'] = 'Style рутбаи';
 $lang['STYLE_COLOR_FAQ'] = 'Муайян синф барои ранг дар унвони ранги дилхоҳро интихоб кунед. Барои мисол <i class="bold">colorAdmin<i>';
-$lang['RANK_SPECIAL'] = 'Танзими рутбаи махсус';
-$lang['RANK_MINIMUM'] = 'Хадди Posts';
-$lang['RANK_MAXIMUM'] = 'Максимум Posts';
 $lang['RANK_IMAGE'] = 'рутбаи Фишка';
 $lang['RANK_IMAGE_EXPLAIN'] = 'Истифода аз ин ба муайян намудани симои хурд бо рутбаи';
 

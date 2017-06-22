@@ -1991,9 +1991,6 @@ $lang['ADD_NEW_RANK'] = 'Të shtoni të reja renditja';
 $lang['RANK_TITLE'] = 'Renditja Titullin';
 $lang['STYLE_COLOR'] = 'Stili i rangut të';
 $lang['STYLE_COLOR_FAQ'] = 'Përcaktoni klasën për pikturë në titullin e dëshiruar ngjyra. Për shembull <i class="bold">colorAdmin<i>';
-$lang['RANK_SPECIAL'] = 'Të cilësuar si të Veçantë në Rangun e';
-$lang['RANK_MINIMUM'] = 'Minimale Postimet';
-$lang['RANK_MAXIMUM'] = 'Maksimale Postimet';
 $lang['RANK_IMAGE'] = 'Renditja E Imazhit';
 $lang['RANK_IMAGE_EXPLAIN'] = 'Përdorni këtë për të përcaktuar një imazh të vogël lidhur me gradën';
 
