@@ -415,7 +415,7 @@ $bb_cfg['adv_email'] = "adv@$domain_name";
 
 // Bugsnag error reporting
 $bb_cfg['bugsnag'] = [
-    'enabled' => true,
+    'enabled' => false,
     'api_key' => 'ee1adc9739cfceb01ce4a450ae1e52bf',
 ];
 
