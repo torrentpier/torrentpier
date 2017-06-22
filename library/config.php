@@ -104,7 +104,7 @@ $bb_cfg['server_port'] = (!empty($_SERVER['SERVER_PORT'])) ? $_SERVER['SERVER_PO
 $bb_cfg['script_path'] = '/'; // The path where FORUM is located relative to the domain name
 
 // GZip
-$bb_cfg['gzip_compress'] = true; // compress output
+$bb_cfg['gzip_compress'] = false; // compress output
 
 // Tracker
 $bb_cfg['announce_interval'] = 2400; // Announce interval (default: 1800)
