@@ -1991,9 +1991,6 @@ $lang['ADD_NEW_RANK'] = 'Dodaj novi poredak';
 $lang['RANK_TITLE'] = 'Naziv Rang';
 $lang['STYLE_COLOR'] = 'Rang stil';
 $lang['STYLE_COLOR_FAQ'] = 'Navedite klasa za crtanje na naziv željene boje. Na primjer <i class="bold">colorAdmin<i>';
-$lang['RANK_SPECIAL'] = 'Postavi kao poseban čin';
-$lang['RANK_MINIMUM'] = 'Minimalna Postove';
-$lang['RANK_MAXIMUM'] = 'Najviše Postova';
 $lang['RANK_IMAGE'] = 'Slike Rang';
 $lang['RANK_IMAGE_EXPLAIN'] = 'Koristite ovo da biste utvrdili male slike, povezane sa rang';
 

@@ -1991,9 +1991,6 @@ $lang['ADD_NEW_RANK'] = 'Yangi unvonga qo\'shish';
 $lang['RANK_TITLE'] = 'Rank nomi';
 $lang['STYLE_COLOR'] = 'Style qator';
 $lang['STYLE_COLOR_FAQ'] = 'Kerakli rangi unvoni da binoni uchun sinfini ko\'rsating. Masalan <i class="bold">colorAdmin<i> uchun';
-$lang['RANK_SPECIAL'] = 'Maxsus unvonga sifatida sozlash';
-$lang['RANK_MINIMUM'] = 'Minimal Xabarlar';
-$lang['RANK_MAXIMUM'] = 'maksimal Xabarlar';
 $lang['RANK_IMAGE'] = 'Rank Image';
 $lang['RANK_IMAGE_EXPLAIN'] = 'unvoni bilan bog\'liq kichik tasvirni aniqlash uchun foydalanishi';
 

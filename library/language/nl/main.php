@@ -1991,9 +1991,6 @@ $lang['ADD_NEW_RANK'] = 'Het toevoegen van nieuwe rank';
 $lang['RANK_TITLE'] = 'Rank Titel';
 $lang['STYLE_COLOR'] = 'Stijl rang';
 $lang['STYLE_COLOR_FAQ'] = 'Geef klasse voor het schilderen op de titel van de gewenste kleur. Bijvoorbeeld <i class="bold">colorAdmin<i>';
-$lang['RANK_SPECIAL'] = 'Instellen als Speciale Rang';
-$lang['RANK_MINIMUM'] = 'Minimum Berichten';
-$lang['RANK_MAXIMUM'] = 'Maximale Berichten';
 $lang['RANK_IMAGE'] = 'Rank Afbeelding';
 $lang['RANK_IMAGE_EXPLAIN'] = 'Gebruik deze voor het definiëren van een kleine afbeelding zijn die geassocieerd is met de rank';
 

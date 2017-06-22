@@ -1991,9 +1991,6 @@ $lang['ADD_NEW_RANK'] = 'नई रैंक जोड़ें';
 $lang['RANK_TITLE'] = 'रैंक शीर्षक';
 $lang['STYLE_COLOR'] = 'शैली रैंक';
 $lang['STYLE_COLOR_FAQ'] = 'वांछित रंग के शीर्षक पर पेंटिंग के लिए कक्षा निर्दिष्ट करें। उदाहरण के लिए <i class="bold">colorAdmin<i>';
-$lang['RANK_SPECIAL'] = 'विशेष रैंक के रूप में सेट करें';
-$lang['RANK_MINIMUM'] = 'न्यूनतम पोस्ट';
-$lang['RANK_MAXIMUM'] = 'अधिकतम पोस्ट';
 $lang['RANK_IMAGE'] = 'रैंक इमेज';
 $lang['RANK_IMAGE_EXPLAIN'] = 'रैंक से जुड़ी एक छोटी सी छवि को परिभाषित करने के लिए इसका प्रयोग करें';
 

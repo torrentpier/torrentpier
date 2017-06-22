@@ -1991,9 +1991,6 @@ $lang['ADD_NEW_RANK'] = 'Dodaj novi čin';
 $lang['RANK_TITLE'] = 'Čin Titulu';
 $lang['STYLE_COLOR'] = 'Stil čin';
 $lang['STYLE_COLOR_FAQ'] = 'Navedi klasa za sliku na naslov željeni boja. Na primjer <i class="bold">colorAdmin<i>';
-$lang['RANK_SPECIAL'] = 'Postavi kao Specijalni Čin';
-$lang['RANK_MINIMUM'] = 'Minimum Funkcije';
-$lang['RANK_MAXIMUM'] = 'Maksimalna Funkcije';
 $lang['RANK_IMAGE'] = 'Čin Imidž';
 $lang['RANK_IMAGE_EXPLAIN'] = 'Iskoristi ovo da definišemo malo sliku povezan sa čin';
 

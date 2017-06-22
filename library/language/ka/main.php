@@ -1991,9 +1991,6 @@ $lang['ADD_NEW_RANK'] = 'ახალი წოდება';
 $lang['RANK_TITLE'] = 'წოდება სათაური';
 $lang['STYLE_COLOR'] = 'სტილი წოდება';
 $lang['STYLE_COLOR_FAQ'] = 'მიუთითეთ კლასში ფერწერა სათაური სასურველი ფერი. მაგალითად <i class="bold">colorAdmin<i>';
-$lang['RANK_SPECIAL'] = 'უცნობია, როგორც სპეციალური წოდება';
-$lang['RANK_MINIMUM'] = 'მინიმალური პოსტები';
-$lang['RANK_MAXIMUM'] = 'მაქსიმალური პოსტები';
 $lang['RANK_IMAGE'] = 'წოდება სურათი';
 $lang['RANK_IMAGE_EXPLAIN'] = 'გამოიყენეთ ეს განსაზღვროს პატარა გამოსახულება ასოცირდება წოდება';
 

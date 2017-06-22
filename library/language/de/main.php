@@ -1991,9 +1991,6 @@ $lang['ADD_NEW_RANK'] = 'Hinzufügen neuer Rang';
 $lang['RANK_TITLE'] = 'Rang Titel';
 $lang['STYLE_COLOR'] = 'Stil Rang';
 $lang['STYLE_COLOR_FAQ'] = 'Geben Sie die Klasse für Malerei an der Titel der gewünschten Farbe. Zum Beispiel <i class="bold">colorAdmin<i>';
-$lang['RANK_SPECIAL'] = 'Set als Special Rang';
-$lang['RANK_MINIMUM'] = 'Minimum-Beiträge';
-$lang['RANK_MAXIMUM'] = 'Maximale Beiträge';
 $lang['RANK_IMAGE'] = 'Rang-Bild';
 $lang['RANK_IMAGE_EXPLAIN'] = 'Hiermit definieren Sie ein kleines Bild im Zusammenhang mit dem Rang';
 

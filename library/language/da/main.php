@@ -1991,9 +1991,6 @@ $lang['ADD_NEW_RANK'] = 'Tilføj ny rang';
 $lang['RANK_TITLE'] = 'Rang, Titel';
 $lang['STYLE_COLOR'] = 'Stil rang';
 $lang['STYLE_COLOR_FAQ'] = 'Angiv klasse for maleri på titlen for den ønskede farve. For eksempel <i class="bold">colorAdmin<i>';
-$lang['RANK_SPECIAL'] = 'Set som en Særlig Rang';
-$lang['RANK_MINIMUM'] = 'Minimum Indlæg';
-$lang['RANK_MAXIMUM'] = 'Maksimal Indlæg';
 $lang['RANK_IMAGE'] = 'Rang Billede';
 $lang['RANK_IMAGE_EXPLAIN'] = 'Brug dette til at definere et lille billede, der er tilknyttet den rang';
 

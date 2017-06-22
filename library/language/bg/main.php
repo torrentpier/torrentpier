@@ -1991,9 +1991,6 @@ $lang['ADD_NEW_RANK'] = 'Добавяне на нов ранг';
 $lang['RANK_TITLE'] = 'Име Ранг';
 $lang['STYLE_COLOR'] = 'Ранг стил';
 $lang['STYLE_COLOR_FAQ'] = 'Посочете клас за изготвяне на името на правилния цвят. Например <i class="bold">colorAdmin<i>';
-$lang['RANK_SPECIAL'] = 'Задай като специален ранг';
-$lang['RANK_MINIMUM'] = 'Минималната Мнения';
-$lang['RANK_MAXIMUM'] = 'Максимум Постове';
 $lang['RANK_IMAGE'] = 'На Изображението Се Класира';
 $lang['RANK_IMAGE_EXPLAIN'] = 'Използвайте това, за да се определи малки изображения, свързани с ранг на';
 

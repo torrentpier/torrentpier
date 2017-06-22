@@ -1991,9 +1991,6 @@ $lang['ADD_NEW_RANK'] = 'Aggiungere un nuovo livello';
 $lang['RANK_TITLE'] = 'Rank Titolo';
 $lang['STYLE_COLOR'] = 'Stile di rango';
 $lang['STYLE_COLOR_FAQ'] = 'Specifica la classe per la pittura il titolo del colore desiderato. Per esempio <i class="bold">colorAdmin<i>';
-$lang['RANK_SPECIAL'] = 'Set Speciale Classifica';
-$lang['RANK_MINIMUM'] = 'Minimo Di Post';
-$lang['RANK_MAXIMUM'] = 'Massimo Alberini';
 $lang['RANK_IMAGE'] = 'Rank Immagine';
 $lang['RANK_IMAGE_EXPLAIN'] = 'Usare questo per definire una piccola immagine associata con il grado';
 

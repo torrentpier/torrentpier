@@ -1991,9 +1991,6 @@ $lang['ADD_NEW_RANK'] = 'Új rangja';
 $lang['RANK_TITLE'] = 'Rang, Cím';
 $lang['STYLE_COLOR'] = 'Stílus rangja';
 $lang['STYLE_COLOR_FAQ'] = 'Adja meg az osztály a festmény a címet a kívánt színt. Például <i class="bold">colorAdmin<i>';
-$lang['RANK_SPECIAL'] = 'Beállítás Különleges Rangja';
-$lang['RANK_MINIMUM'] = 'Minimális Hozzászólás';
-$lang['RANK_MAXIMUM'] = 'Maximális Hozzászólás';
 $lang['RANK_IMAGE'] = 'Rang Kép';
 $lang['RANK_IMAGE_EXPLAIN'] = 'Ezzel adjuk meg egy kis kép kapcsolódó rangja';
 

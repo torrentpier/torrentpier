@@ -1991,9 +1991,6 @@ $lang['ADD_NEW_RANK'] = 'Lägg till en ny nivå';
 $lang['RANK_TITLE'] = 'Rank Titel';
 $lang['STYLE_COLOR'] = 'Stil rang';
 $lang['STYLE_COLOR_FAQ'] = 'Ange klass för målning på titeln på önskad färg. Till exempel <i class="bold">colorAdmin<i>';
-$lang['RANK_SPECIAL'] = 'Ange som Speciell Rank';
-$lang['RANK_MINIMUM'] = 'Lägsta Inlägg';
-$lang['RANK_MAXIMUM'] = 'Maximal Inlägg';
 $lang['RANK_IMAGE'] = 'Rank Bild';
 $lang['RANK_IMAGE_EXPLAIN'] = 'Använda denna för att definiera en liten bild som är associerat med rang';
 

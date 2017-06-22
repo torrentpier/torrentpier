@@ -1991,9 +1991,6 @@ $lang['ADD_NEW_RANK'] = 'Προσθέστε νέα τάξη';
 $lang['RANK_TITLE'] = 'Κατάταξη Τίτλο';
 $lang['STYLE_COLOR'] = 'Στυλ κατάταξη';
 $lang['STYLE_COLOR_FAQ'] = 'Καθορίστε την κατηγορία για τη ζωγραφική τον τίτλο του επιθυμητού χρώματος. Για παράδειγμα <i class="bold">colorAdmin<i>';
-$lang['RANK_SPECIAL'] = 'Ορισμός ως Ειδική Τάξη';
-$lang['RANK_MINIMUM'] = 'Ελάχιστες Θέσεις';
-$lang['RANK_MAXIMUM'] = 'Μέγιστη Θέσεις';
 $lang['RANK_IMAGE'] = 'Κατάταξη Εικόνας';
 $lang['RANK_IMAGE_EXPLAIN'] = 'Χρησιμοποιήστε το για να ορίσετε μια μικρή εικόνα που συνδέεται με το βαθμό';
 

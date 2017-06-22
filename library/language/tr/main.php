@@ -1991,9 +1991,6 @@ $lang['ADD_NEW_RANK'] = 'Yeni rütbe Ekle';
 $lang['RANK_TITLE'] = 'Rütbe Başlığı';
 $lang['STYLE_COLOR'] = 'Stil rütbe';
 $lang['STYLE_COLOR_FAQ'] = 'Resim için istenilen renk unvan sınıf belirtin. Örneğin <i class="bold">colorAdmin<i>';
-$lang['RANK_SPECIAL'] = 'Özel Rütbe olarak ayarla';
-$lang['RANK_MINIMUM'] = 'Minimum Mesaj';
-$lang['RANK_MAXIMUM'] = 'Maksimum Mesaj';
 $lang['RANK_IMAGE'] = 'Rütbe Resim';
 $lang['RANK_IMAGE_EXPLAIN'] = 'Rütbe ile ilgili küçük bir resim tanımlamak için kullanın';
 
