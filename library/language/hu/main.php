@@ -1116,6 +1116,7 @@ $lang['TOR_STATUS_NAME'] = array(
     TOR_CHECKING => 'ellenőrzött',
     TOR_TMP => 'ideiglenes',
     TOR_PREMOD => 'előzetes moderálás',
+    TOR_REPLENISH => 'teletölt',
 );
 $lang['TOR_STATUS_FAILED'] = 'Ilyen állapot nem létezik!';
 $lang['TORRENT_FAILED'] = 'Elosztó nem található!';
@@ -1990,9 +1991,6 @@ $lang['ADD_NEW_RANK'] = 'Új rangja';
 $lang['RANK_TITLE'] = 'Rang, Cím';
 $lang['STYLE_COLOR'] = 'Stílus rangja';
 $lang['STYLE_COLOR_FAQ'] = 'Adja meg az osztály a festmény a címet a kívánt színt. Például <i class="bold">colorAdmin<i>';
-$lang['RANK_SPECIAL'] = 'Beállítás Különleges Rangja';
-$lang['RANK_MINIMUM'] = 'Minimális Hozzászólás';
-$lang['RANK_MAXIMUM'] = 'Maximális Hozzászólás';
 $lang['RANK_IMAGE'] = 'Rang Kép';
 $lang['RANK_IMAGE_EXPLAIN'] = 'Ezzel adjuk meg egy kis kép kapcsolódó rangja';
 

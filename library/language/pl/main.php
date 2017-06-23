@@ -1116,6 +1116,7 @@ $lang['TOR_STATUS_NAME'] = array(
     TOR_CHECKING => 'sprawdzone',
     TOR_TMP => 'tymczasowe',
     TOR_PREMOD => 'zatwierdzenie',
+    TOR_REPLENISH => 'uzupełnić',
 );
 $lang['TOR_STATUS_FAILED'] = 'Takiego statusu nie istnieje!';
 $lang['TORRENT_FAILED'] = 'Rozkład nie znaleziono!';
@@ -1990,9 +1991,6 @@ $lang['ADD_NEW_RANK'] = 'Dodać nową rangę';
 $lang['RANK_TITLE'] = 'Nazwa Rangi';
 $lang['STYLE_COLOR'] = 'Ranga stylu';
 $lang['STYLE_COLOR_FAQ'] = 'Wprowadź klasy do rysowania na nazwę żądanego koloru. Na przykład <i class="bold">colorAdmin<i>';
-$lang['RANK_SPECIAL'] = 'Ustawić jako specjalnego tytułu';
-$lang['RANK_MINIMUM'] = 'Minimalna Posty';
-$lang['RANK_MAXIMUM'] = 'Maksymalnie Postów';
 $lang['RANK_IMAGE'] = 'Zdjęcia Rangi';
 $lang['RANK_IMAGE_EXPLAIN'] = 'Użyj tego, aby określić małe obrazki związane z rangi';
 

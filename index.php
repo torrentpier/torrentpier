@@ -356,7 +356,7 @@ if ($bb_cfg['birthday_check_day'] && $bb_cfg['birthday_enabled']) {
     $week_list = $today_list = array();
     $week_all = $today_all = false;
 
-    if (isset($stats['birthday_week_list'])) {
+    if (!empty($stats['birthday_week_list'])) {
         shuffle($stats['birthday_week_list']);
         foreach ($stats['birthday_week_list'] as $i => $week) {
             if ($i >= 5) {
@@ -371,7 +371,7 @@ if ($bb_cfg['birthday_check_day'] && $bb_cfg['birthday_enabled']) {
         $week_list = sprintf($lang['NOBIRTHDAY_WEEK'], $bb_cfg['birthday_check_day']);
     }
 
-    if (isset($stats['birthday_today_list'])) {
+    if (!empty($stats['birthday_today_list'])) {
         shuffle($stats['birthday_today_list']);
         foreach ($stats['birthday_today_list'] as $i => $today) {
             if ($i >= 5) {

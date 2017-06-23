@@ -1116,6 +1116,7 @@ $lang['TOR_STATUS_NAME'] = array(
     TOR_CHECKING => 'overené',
     TOR_TMP => 'dočasné',
     TOR_PREMOD => 'pre-moderovanie',
+    TOR_REPLENISH => 'doplniť',
 );
 $lang['TOR_STATUS_FAILED'] = 'Takýto stav neexistuje!';
 $lang['TORRENT_FAILED'] = 'Distribúcia nebol nájdený!';
@@ -1990,9 +1991,6 @@ $lang['ADD_NEW_RANK'] = 'Pridať novú hodnosť';
 $lang['RANK_TITLE'] = 'Poradie Názov';
 $lang['STYLE_COLOR'] = 'Štýl hodnosť';
 $lang['STYLE_COLOR_FAQ'] = 'Uveďte triedy pre maľovanie na názov požadovanej farby. Napríklad <i class="bold">colorAdmin<i>';
-$lang['RANK_SPECIAL'] = 'Nastaviť ako Špeciálne Hodnosť';
-$lang['RANK_MINIMUM'] = 'Minimálne Príspevky';
-$lang['RANK_MAXIMUM'] = 'Maximálny Príspevky';
 $lang['RANK_IMAGE'] = 'Rank Obrázok';
 $lang['RANK_IMAGE_EXPLAIN'] = 'Použite tento, ak chcete definovať malý obrázok spojené s hodnosti';
 

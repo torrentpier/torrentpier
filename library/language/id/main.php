@@ -1116,6 +1116,7 @@ $lang['TOR_STATUS_NAME'] = array(
     TOR_CHECKING => 'verified',
     TOR_TMP => 'sementara',
     TOR_PREMOD => 'pra-moderasi',
+    TOR_REPLENISH => 'mengisi',
 );
 $lang['TOR_STATUS_FAILED'] = 'Status tersebut tidak ada!';
 $lang['TORRENT_FAILED'] = 'Distribusi tidak ditemukan!';
@@ -1990,9 +1991,6 @@ $lang['ADD_NEW_RANK'] = 'Tambahkan pangkat baru';
 $lang['RANK_TITLE'] = 'Peringkat Judul';
 $lang['STYLE_COLOR'] = 'Gaya peringkat';
 $lang['STYLE_COLOR_FAQ'] = 'Menentukan kelas untuk lukisan pada judul warna yang diinginkan. Misalnya <i class="bold">colorAdmin<i>';
-$lang['RANK_SPECIAL'] = 'Ditetapkan sebagai Peringkat Khusus';
-$lang['RANK_MINIMUM'] = 'Minimal Posting';
-$lang['RANK_MAXIMUM'] = 'Maksimal Posting';
 $lang['RANK_IMAGE'] = 'Peringkat Gambar';
 $lang['RANK_IMAGE_EXPLAIN'] = 'Gunakan ini untuk menentukan sebuah gambar kecil yang berhubungan dengan pangkat';
 

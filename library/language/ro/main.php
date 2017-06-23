@@ -1116,6 +1116,7 @@ $lang['TOR_STATUS_NAME'] = array(
     TOR_CHECKING => 'verificate',
     TOR_TMP => 'temporar',
     TOR_PREMOD => 'pre-moderare',
+    TOR_REPLENISH => 'reface',
 );
 $lang['TOR_STATUS_FAILED'] = 'O astfel de stare nu exista!';
 $lang['TORRENT_FAILED'] = 'Distributia nu a fost găsit!';
@@ -1990,9 +1991,6 @@ $lang['ADD_NEW_RANK'] = 'Adaugă rang nou';
 $lang['RANK_TITLE'] = 'Rang Titlu';
 $lang['STYLE_COLOR'] = 'Stil de rang';
 $lang['STYLE_COLOR_FAQ'] = 'Specifica clasa de pictura la titlul de culoarea dorită. De exemplu <i class="bold">colorAdmin<i>';
-$lang['RANK_SPECIAL'] = 'Setați ca Rang Special';
-$lang['RANK_MINIMUM'] = 'Minim De Posturi';
-$lang['RANK_MAXIMUM'] = 'Maxim De Posturi';
 $lang['RANK_IMAGE'] = 'Gradul De Imagine';
 $lang['RANK_IMAGE_EXPLAIN'] = 'Utilizați această pentru a defini o mică imagine asociată cu rangul';
 

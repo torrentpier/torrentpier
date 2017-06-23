@@ -1116,6 +1116,7 @@ $lang['TOR_STATUS_NAME'] = array(
     TOR_CHECKING => 'test',
     TOR_TMP => 'müvəqqəti',
     TOR_PREMOD => 'премодерации',
+    TOR_REPLENISH => 'artırmaq',
 );
 $lang['TOR_STATUS_FAILED'] = 'Belə statusu yoxdur!';
 $lang['TORRENT_FAILED'] = 'Paylanması tapılmadı!';
@@ -1990,9 +1991,6 @@ $lang['ADD_NEW_RANK'] = 'Əlavə, yeni dərəcə';
 $lang['RANK_TITLE'] = 'Adı Dərəcə';
 $lang['STYLE_COLOR'] = 'Dərəcə stil';
 $lang['STYLE_COLOR_FAQ'] = 'Qeyd sinif üçün rəsm adı lazımi rəng. Məsələn <i class="bold">colorAdmin<i>';
-$lang['RANK_SPECIAL'] = 'Yüklemek kimi xüsusi rütbənin';
-$lang['RANK_MINIMUM'] = 'Minimum Vəzifə';
-$lang['RANK_MAXIMUM'] = 'Maksimum İsmarıc';
 $lang['RANK_IMAGE'] = 'Şəkillər Dərəcə';
 $lang['RANK_IMAGE_EXPLAIN'] = 'İstifadə edin və bunu müəyyən etmək üçün kiçik şəkillər ilə bağlı dərəcə';
 

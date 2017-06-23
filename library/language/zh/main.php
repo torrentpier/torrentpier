@@ -1116,6 +1116,7 @@ $lang['TOR_STATUS_NAME'] = array(
     TOR_CHECKING => '验证',
     TOR_TMP => '临时',
     TOR_PREMOD => '预先审核',
+    TOR_REPLENISH => '补充',
 );
 $lang['TOR_STATUS_FAILED'] = '这种状况不存在！';
 $lang['TORRENT_FAILED'] = '分布没有被发现的！';
@@ -1990,9 +1991,6 @@ $lang['ADD_NEW_RANK'] = '添加新的等级';
 $lang['RANK_TITLE'] = '排名的标题';
 $lang['STYLE_COLOR'] = '样式的排名';
 $lang['STYLE_COLOR_FAQ'] = '指定类绘画的标题所需的颜色。 例如<i class="bold">colorAdmin<i>';
-$lang['RANK_SPECIAL'] = '设定为特殊的排名';
-$lang['RANK_MINIMUM'] = '最低职位';
-$lang['RANK_MAXIMUM'] = '最大的职位';
 $lang['RANK_IMAGE'] = '等级图像';
 $lang['RANK_IMAGE_EXPLAIN'] = '使用这个定义的一个小的图像相关的排名';
 

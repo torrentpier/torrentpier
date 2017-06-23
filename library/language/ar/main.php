@@ -1116,6 +1116,7 @@ $lang['TOR_STATUS_NAME'] = array(
     TOR_CHECKING => 'التحقق',
     TOR_TMP => 'مؤقت',
     TOR_PREMOD => 'قبل الاعتدال',
+    TOR_REPLENISH => 'تجديد',
 );
 $lang['TOR_STATUS_FAILED'] = 'هذا الوضع غير موجود!';
 $lang['TORRENT_FAILED'] = 'التوزيع غير موجود!';
@@ -1990,9 +1991,6 @@ $lang['ADD_NEW_RANK'] = 'إضافة رتبة جديدة';
 $lang['RANK_TITLE'] = 'رتبة العنوان';
 $lang['STYLE_COLOR'] = 'على غرار رتبة';
 $lang['STYLE_COLOR_FAQ'] = 'تحديد فئة الرسم في العنوان من اللون المطلوب. على سبيل المثال <i class="bold">colorAdmin<i>';
-$lang['RANK_SPECIAL'] = 'مجموعة خاصة رتبة';
-$lang['RANK_MINIMUM'] = 'الحد الأدنى من الوظائف';
-$lang['RANK_MAXIMUM'] = 'أقصى قدر من المشاركات';
 $lang['RANK_IMAGE'] = 'رتبة صورة';
 $lang['RANK_IMAGE_EXPLAIN'] = 'استخدام هذا لتحديد صورة صغيرة المرتبطة رتبة';
 

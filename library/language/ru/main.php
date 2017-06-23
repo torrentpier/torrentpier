@@ -1116,6 +1116,7 @@ $lang['TOR_STATUS_NAME'] = array(
     TOR_CHECKING => 'проверяется',
     TOR_TMP => 'временная',
     TOR_PREMOD => 'премодерация',
+    TOR_REPLENISH => 'пополняемая',
 );
 $lang['TOR_STATUS_FAILED'] = 'Такого статуса не существует!';
 $lang['TORRENT_FAILED'] = 'Раздача не найдена!';
@@ -1990,9 +1991,6 @@ $lang['ADD_NEW_RANK'] = 'Новое звание';
 $lang['RANK_TITLE'] = 'Звание';
 $lang['STYLE_COLOR'] = 'Стиль звания';
 $lang['STYLE_COLOR_FAQ'] = 'Укажите class для окраски звания в нужный цвет. Например <i class="bold">colorAdmin<i>';
-$lang['RANK_SPECIAL'] = 'Специальное звание';
-$lang['RANK_MINIMUM'] = 'Минимум сообщений';
-$lang['RANK_MAXIMUM'] = 'Максимум сообщений';
 $lang['RANK_IMAGE'] = 'Картинка к званию';
 $lang['RANK_IMAGE_EXPLAIN'] = 'Здесь вы можете присвоить всем имеющим такое звание специальное изображение. Вы можете указать либо относительный, либо абсолютный путь к изображению';
 

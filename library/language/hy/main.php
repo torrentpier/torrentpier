@@ -1116,6 +1116,7 @@ $lang['TOR_STATUS_NAME'] = array(
     TOR_CHECKING => 'վերցված է',
     TOR_TMP => 'ժամանակավոր',
     TOR_PREMOD => 'премодерации',
+    TOR_REPLENISH => 'համալրել',
 );
 $lang['TOR_STATUS_FAILED'] = 'Նման կարգավիճակի գոյություն չունի!';
 $lang['TORRENT_FAILED'] = 'Բաշխումը չի գտնվել.';
@@ -1990,9 +1991,6 @@ $lang['ADD_NEW_RANK'] = 'Ավելացնել նոր աստիճան';
 $lang['RANK_TITLE'] = 'Անվանումը Կոչում';
 $lang['STYLE_COLOR'] = 'Աստիճան ոճը';
 $lang['STYLE_COLOR_FAQ'] = 'Նշեք դասի նկարել է անվանումը, ցանկալի գույն. Օրինակ <i class="bold">colorAdmin<i>';
-$lang['RANK_SPECIAL'] = 'Սահմանել որպես հատուկ կոչումները';
-$lang['RANK_MINIMUM'] = 'Նվազագույն Պաշտոնները';
-$lang['RANK_MAXIMUM'] = 'Առավելագույնը Պաշտոններից';
 $lang['RANK_IMAGE'] = 'Նկարներ Աստիճան';
 $lang['RANK_IMAGE_EXPLAIN'] = 'Օգտագործեք այս որոշելու փոքր նկարներ, որոնք կապված են կոչում';
 

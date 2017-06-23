@@ -1116,6 +1116,7 @@ $lang['TOR_STATUS_NAME'] = array(
     TOR_CHECKING => '確認',
     TOR_TMP => '仮設',
     TOR_PREMOD => '前節度',
+    TOR_REPLENISH => '補給',
 );
 $lang['TOR_STATUS_FAILED'] = 'そのような状況が存在しない!';
 $lang['TORRENT_FAILED'] = '分布は見つかりませんでしたよ！';
@@ -1990,9 +1991,6 @@ $lang['ADD_NEW_RANK'] = '新規追加ランク';
 $lang['RANK_TITLE'] = 'タイトルランク';
 $lang['STYLE_COLOR'] = 'スタイルランク';
 $lang['STYLE_COLOR_FAQ'] = '指定クラス絵画のタイトルの、ご希望の色です。 例えば<i class="bold">colorAdmin<i>';
-$lang['RANK_SPECIAL'] = 'セットとして特殊ランク';
-$lang['RANK_MINIMUM'] = '最小限の投稿';
-$lang['RANK_MAXIMUM'] = '最大投稿';
 $lang['RANK_IMAGE'] = 'ランク画像';
 $lang['RANK_IMAGE_EXPLAIN'] = 'この定義の小さな画像のランク';
 

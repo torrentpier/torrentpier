@@ -1116,6 +1116,7 @@ $lang['TOR_STATUS_NAME'] = array(
     TOR_CHECKING => 'праверана',
     TOR_TMP => 'часовае',
     TOR_PREMOD => 'прэмадэрацыі',
+    TOR_REPLENISH => 'папаўняць',
 );
 $lang['TOR_STATUS_FAILED'] = 'Такога статусу не існуе!';
 $lang['TORRENT_FAILED'] = 'Размеркаванне не знойдзены!';
@@ -1990,9 +1991,6 @@ $lang['ADD_NEW_RANK'] = 'Дадаць новы ранг';
 $lang['RANK_TITLE'] = 'Назва Рангу';
 $lang['STYLE_COLOR'] = 'Ранг стылю';
 $lang['STYLE_COLOR_FAQ'] = 'Пакажыце клас для малявання на назву патрэбнага колеру. Напрыклад <i class="bold">colorAdmin<i>';
-$lang['RANK_SPECIAL'] = 'Ўсталяваць у якасці спецыяльнага звання';
-$lang['RANK_MINIMUM'] = 'Мінімальная Пасты';
-$lang['RANK_MAXIMUM'] = 'Максімум Пастоў';
 $lang['RANK_IMAGE'] = 'Выявы Ранг';
 $lang['RANK_IMAGE_EXPLAIN'] = 'Выкарыстоўвайце гэта, каб вызначыць невялікія малюнкі, звязаныя з ранг';
 

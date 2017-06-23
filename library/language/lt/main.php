@@ -1116,6 +1116,7 @@ $lang['TOR_STATUS_NAME'] = array(
     TOR_CHECKING => 'patikrinta',
     TOR_TMP => 'laikinas',
     TOR_PREMOD => 'pre-saikingai',
+    TOR_REPLENISH => 'papildyti',
 );
 $lang['TOR_STATUS_FAILED'] = 'Tokio statuso nėra!';
 $lang['TORRENT_FAILED'] = 'Platinti, nerastas!';
@@ -1990,9 +1991,6 @@ $lang['ADD_NEW_RANK'] = 'Pridėti naują reitingą';
 $lang['RANK_TITLE'] = 'Rango Pavadinimas';
 $lang['STYLE_COLOR'] = 'Stilius reitingas';
 $lang['STYLE_COLOR_FAQ'] = 'Nurodykite kategoriją tapybą pavadinimas norimą spalvą. Pavyzdžiui <i class="bold">colorAdmin<i>';
-$lang['RANK_SPECIAL'] = 'Nustatyti Specialias Reitingas';
-$lang['RANK_MINIMUM'] = 'Mažiausias Pranešimų';
-$lang['RANK_MAXIMUM'] = 'Didžiausias Pranešimų';
 $lang['RANK_IMAGE'] = 'Vaizdo Reitingas';
 $lang['RANK_IMAGE_EXPLAIN'] = 'Naudoti, siekiant nustatyti mažą atvaizdą, susijusios su rangas';
 

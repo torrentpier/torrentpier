@@ -1116,6 +1116,7 @@ $lang['TOR_STATUS_NAME'] = array(
     TOR_CHECKING => 'מאומת',
     TOR_TMP => 'זמני',
     TOR_PREMOD => 'מראש מתינות',
+    TOR_REPLENISH => 'לחדש',
 );
 $lang['TOR_STATUS_FAILED'] = 'מעמד כזה לא קיים!';
 $lang['TORRENT_FAILED'] = 'הפצה לא נמצא!';
@@ -1990,9 +1991,6 @@ $lang['ADD_NEW_RANK'] = 'הוספת דרגה';
 $lang['RANK_TITLE'] = 'דרגה כותרת';
 $lang['STYLE_COLOR'] = 'סגנון דרגה';
 $lang['STYLE_COLOR_FAQ'] = 'לציין לשיעור ציור על הכותרת של הצבע הרצוי. לדוגמה <i class="bold">colorAdmin<i>';
-$lang['RANK_SPECIAL'] = 'סט מיוחד דרגה';
-$lang['RANK_MINIMUM'] = 'מינימום הודעות';
-$lang['RANK_MAXIMUM'] = 'מרבית הפוסטים';
 $lang['RANK_IMAGE'] = 'דרגה תמונה';
 $lang['RANK_IMAGE_EXPLAIN'] = 'להשתמש בזה כדי להגדיר תמונה קטנה הקשורים דרגה';
 
