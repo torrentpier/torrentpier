@@ -57,7 +57,7 @@ use Dotenv\Exception\InvalidPathException;
 try {
     (new Dotenv(__DIR__))->load();
 } catch (InvalidPathException $e) {
-    dd($e);
+    throw $e;
 }
 require_once __DIR__ . '/library/config.php';
 
@@ -169,6 +169,9 @@ switch ($bb_cfg['datastore_type']) {
         $datastore = new TorrentPier\Legacy\Datastore\File($bb_cfg['cache']['db_dir'] . 'datastore/', $bb_cfg['cache']['prefix']);
 }
 
+/**
+ * Container
+ */
 require_once __DIR__ . '/bootstrap.php';
 
 function sql_dbg_enabled()

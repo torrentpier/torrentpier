@@ -42,8 +42,8 @@ $container->singleton('db', function ($container) use ($bb_cfg) {
         'database' => $bb_cfg['database']['database'],
         'username' => $bb_cfg['database']['username'],
         'password' => $bb_cfg['database']['password'],
-        'charset' => 'utf8',
-        'collation' => 'utf8_unicode_ci',
+        'charset' => 'utf8mb4',
+        'collation' => 'utf8mb4_unicode_ci',
         'prefix' => '',
         'strict' => true,
     ]);
@@ -70,9 +70,9 @@ $dispatcher->listen(StatementPrepared::class, function ($event) {
  */
 $container->instance('request', Illuminate\Http\Request::capture());
 
-/*
+/**
  * Filesystem
- * */
+ */
 $container->instance('files', new Filesystem);
 
 /**

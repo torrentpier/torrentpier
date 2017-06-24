@@ -11,8 +11,7 @@ if (!defined('BB_ROOT')) {
     die(basename(__FILE__));
 }
 
-$domain_name = 'torrentpier.com'; // enter here your primary domain name of your site
-$domain_name = (!empty($_SERVER['SERVER_NAME'])) ? $_SERVER['SERVER_NAME'] : $domain_name;
+$domain_name = env('APP_DOMAIN', 'torrentpier.com');
 
 $bb_cfg = [];
 
