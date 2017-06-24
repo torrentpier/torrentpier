@@ -52,7 +52,7 @@ function send_file_to_browser($attachment, $upload_dir)
     header('Pragma: public');
     $real_filename = clean_filename(basename($attachment['real_filename']));
     $mimetype = $attachment['mimetype'] . ';';
-    $charset = "charset={$bb_cfg['charset']};";
+    $charset = 'charset=' . config('language.charset') . ';';
 
     // Send out the Headers
     header("Content-Type: $mimetype $charset name=\"$real_filename\"");

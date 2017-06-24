@@ -1375,7 +1375,7 @@ function bb_simple_die($txt)
         bb_die("bb_simple_die:<br /><br />$txt");
     }
 
-    header('Content-Type: text/plain; charset=' . $bb_cfg['charset']);
+    header('Content-Type: text/plain; charset=' . config('language.charset'));
     die($txt);
 }
 

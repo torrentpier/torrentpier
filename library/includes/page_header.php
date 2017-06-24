@@ -109,7 +109,7 @@ $template->assign_vars(array(
 // The following assigns all _common_ variables that may be used at any point in a template
 $template->assign_vars(array(
     'SIMPLE_HEADER' => !empty($gen_simple_header),
-    'CONTENT_ENCODING' => $bb_cfg['charset'],
+    'CONTENT_ENCODING' => config('language.charset'),
 
     'IN_ADMIN' => defined('IN_ADMIN'),
     'USER_HIDE_CAT' => (BB_SCRIPT == 'index'),
