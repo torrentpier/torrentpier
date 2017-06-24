@@ -26,29 +26,29 @@
 return [
     // Common
     'Captcha' => 'Captcha',
-    'Go back' => 'Go back',
+    'Go back' => 'Tornar',
     'Send' => 'Enviar',
-    'Submit' => 'Submit',
+    'Submit' => 'Enviar',
 
     // Control panel
-    'Control panel' => 'Control panel',
+    'Control panel' => 'Panell de Control',
 
     // Errors
-    'File not found: %location%' => 'File not found: %location%',
-    'Invalid request: not specified %data%' => 'Invalid request: not specified %data%',
+    'File not found: %location%' => 'Fitxer no trobat: %location%',
+    'Invalid request: not specified %data%' => 'Invalid request: no especificat %data%',
 
     // Feed (feed.php)
-    'Feed' => 'Feed',
-    'Do not specify a mode for the feed' => 'Do not specify a mode for the feed',
-    'This forum does not have a feed' => 'This forum does not have a feed',
-    'This user does not have a feed' => 'This user does not have a feed',
+    'Feed' => 'Alimentació',
+    'Do not specify a mode for the feed' => 'No especifica un mode per a l\'alimentació',
+    'This forum does not have a feed' => 'Aquest fòrum no tenir un feed',
+    'This user does not have a feed' => 'Aquest usuari no té un feed',
 
     // Style guide (styleguide.php)
     'Hello, %name%' => 'Hola, %name%',
     'Style guide' => 'Guia d\'estil',
 
     // Terms (terms.php)
-    'Only administrators see this line' => 'Only administrators see this line',
-    'Terms' => 'Terms',
-    'The text on this page can be edited in the' => 'The text on this page can be edited in the',
+    'Only administrators see this line' => 'Només els administradors veure aquesta línia',
+    'Terms' => 'Termes',
+    'The text on this page can be edited in the' => 'El text d\'aquesta pàgina pot ser editada en la',
 ];
