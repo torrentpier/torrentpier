@@ -3,6 +3,6 @@
     <ShortName>TorrentPier (Forum)</ShortName>
     <Description>TorrentPier (Forum)</Description>
     <InputEncoding>UTF-8</InputEncoding>
-    <Image height="16" width="16" type="image/x-icon">http://torrentpier.me/favicon.png</Image>
-    <Url type="text/html" template="http://torrentpier.me/search.php?mode=results&amp;show_results=topics&amp;search_keywords={searchTerms}"/>
+    <Image height="16" width="16" type="image/x-icon">http://torrentpier.com/favicon.png</Image>
+    <Url type="text/html" template="http://torrentpier.com/search.php?mode=results&amp;show_results=topics&amp;search_keywords={searchTerms}"/>
 </OpenSearchDescription>

@@ -3,6 +3,6 @@
     <ShortName>TorrentPier (Tracker)</ShortName>
     <Description>TorrentPier (Tracker)</Description>
     <InputEncoding>UTF-8</InputEncoding>
-    <Image height="16" width="16" type="image/x-icon">http://torrentpier.me/favicon.png</Image>
-    <Url type="text/html" template="http://torrentpier.me/tracker.php?submit=1&amp;o=13&amp;nm={searchTerms}"/>
+    <Image height="16" width="16" type="image/x-icon">http://torrentpier.com/favicon.png</Image>
+    <Url type="text/html" template="http://torrentpier.com/tracker.php?submit=1&amp;o=13&amp;nm={searchTerms}"/>
 </OpenSearchDescription>
