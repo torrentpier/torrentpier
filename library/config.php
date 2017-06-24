@@ -2,7 +2,7 @@
 /**
  * TorrentPier – Bull-powered BitTorrent tracker engine
  *
- * @copyright Copyright (c) 2005-2017 TorrentPier (https://torrentpier.me)
+ * @copyright Copyright (c) 2005-2017 TorrentPier (https://torrentpier.com)
  * @link      https://github.com/torrentpier/torrentpier for the canonical source repository
  * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
  */
@@ -11,8 +11,7 @@ if (!defined('BB_ROOT')) {
     die(basename(__FILE__));
 }
 
-$domain_name = 'torrentpier.com'; // enter here your primary domain name of your site
-$domain_name = (!empty($_SERVER['SERVER_NAME'])) ? $_SERVER['SERVER_NAME'] : $domain_name;
+$domain_name = env('APP_DOMAIN', 'torrentpier.com');
 
 $bb_cfg = [];
 
@@ -20,9 +19,9 @@ $bb_cfg = [];
 $bb_cfg['js_ver'] = $bb_cfg['css_ver'] = 1;
 
 // Version info
-$bb_cfg['tp_version'] = '2.2.2';
-$bb_cfg['tp_release_date'] = '23-06-2017';
-$bb_cfg['tp_release_codename'] = 'Aurochs';
+$bb_cfg['tp_version'] = '2.3.0';
+$bb_cfg['tp_release_date'] = '01-12-2017';
+$bb_cfg['tp_release_codename'] = 'Bison';
 
 // Database
 // Настройка баз данных ['db']['srv_name'] => (array) srv_cfg;
@@ -36,6 +35,13 @@ $bb_cfg['db'] = [
         'utf8',
         false
     ],
+];
+
+$bb_cfg['database'] = [
+    'host' => env('DB_HOST', 'localhost'),
+    'database' => env('DB_DATABASE', 'torrentpier'),
+    'username' => env('DB_USERNAME', 'root'),
+    'password' => env('DB_PASSWORD', 'pass'),
 ];
 
 $bb_cfg['db_alias'] = [
@@ -709,3 +715,5 @@ if (isset($bb_cfg['default_lang']) && file_exists(LANG_ROOT_DIR . '/' . $bb_cfg[
 } else {
     $bb_cfg['default_lang_dir'] = LANG_ROOT_DIR . '/en/';
 }
+
+return $bb_cfg;

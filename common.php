@@ -2,7 +2,7 @@
 /**
  * TorrentPier – Bull-powered BitTorrent tracker engine
  *
- * @copyright Copyright (c) 2005-2017 TorrentPier (https://torrentpier.me)
+ * @copyright Copyright (c) 2005-2017 TorrentPier (https://torrentpier.com)
  * @link      https://github.com/torrentpier/torrentpier for the canonical source repository
  * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
  */
@@ -50,53 +50,16 @@ if (!file_exists(__DIR__ . '/vendor/autoload.php')) {
 }
 require_once __DIR__ . '/vendor/autoload.php';
 
-/**
- * Gets the value of an environment variable. Supports boolean, empty and null.
- *
- * @param  string $key
- * @param  mixed $default
- * @return mixed
- */
-function env($key, $default = null)
-{
-    $value = getenv($key);
-    if (!$value) return value($default);
-    switch (strtolower($value)) {
-        case 'true':
-        case '(true)':
-            return true;
-        case 'false':
-        case '(false)':
-            return false;
-        case '(null)':
-            return null;
-        case '(empty)':
-            return '';
-    }
-    return $value;
-}
+// Legacy config
+use Dotenv\Dotenv;
+use Dotenv\Exception\InvalidPathException;
 
-/**
- * Return the default value of the given value.
- *
- * @param  mixed $value
- * @return mixed
- */
-function value($value)
-{
-    return $value instanceof Closure ? $value() : $value;
-}
-
-// Get initial config
-if (!getenv('APP_DEBUG') && file_exists(__DIR__ . '/.env')) {
-    (new Symfony\Component\Dotenv\Dotenv())->load(__DIR__ . '/.env');
+try {
+    (new Dotenv(__DIR__))->load();
+} catch (InvalidPathException $e) {
+    throw $e;
 }
 require_once __DIR__ . '/library/config.php';
-
-// Local config
-if (file_exists(__DIR__ . '/library/config.local.php')) {
-    require_once __DIR__ . '/library/config.local.php';
-}
 
 $server_protocol = $bb_cfg['cookie_secure'] ? 'https://' : 'http://';
 $server_port = in_array((int)$bb_cfg['server_port'], array(80, 443), true) ? '' : ':' . $bb_cfg['server_port'];
@@ -205,6 +168,11 @@ switch ($bb_cfg['datastore_type']) {
     default:
         $datastore = new TorrentPier\Legacy\Datastore\File($bb_cfg['cache']['db_dir'] . 'datastore/', $bb_cfg['cache']['prefix']);
 }
+
+/**
+ * Container
+ */
+require_once __DIR__ . '/bootstrap.php';
 
 function sql_dbg_enabled()
 {
