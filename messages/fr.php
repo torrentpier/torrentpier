@@ -26,29 +26,29 @@
 return [
     // Common
     'Captcha' => 'Captcha',
-    'Go back' => 'Go back',
+    'Go back' => 'Revenir en arrière',
     'Send' => 'Envoyer',
-    'Submit' => 'Submit',
+    'Submit' => 'Soumettre',
 
     // Control panel
-    'Control panel' => 'Control panel',
+    'Control panel' => 'Panneau de contrôle',
 
     // Errors
-    'File not found: %location%' => 'File not found: %location%',
-    'Invalid request: not specified %data%' => 'Invalid request: not specified %data%',
+    'File not found: %location%' => 'Fichier non trouvé: %location%',
+    'Invalid request: not specified %data%' => 'Requête invalide: non spécifié %data%',
 
     // Feed (feed.php)
-    'Feed' => 'Feed',
-    'Do not specify a mode for the feed' => 'Do not specify a mode for the feed',
-    'This forum does not have a feed' => 'This forum does not have a feed',
-    'This user does not have a feed' => 'This user does not have a feed',
+    'Feed' => 'Alimentation',
+    'Do not specify a mode for the feed' => 'Ne spécifiez pas un mode pour le nourrir',
+    'This forum does not have a feed' => 'Ce forum n\'a pas une alimentation',
+    'This user does not have a feed' => 'Cet utilisateur n\'a pas une alimentation',
 
     // Style guide (styleguide.php)
     'Hello, %name%' => 'Bonjour, %name%',
     'Style guide' => 'Guide de Style',
 
     // Terms (terms.php)
-    'Only administrators see this line' => 'Only administrators see this line',
-    'Terms' => 'Terms',
-    'The text on this page can be edited in the' => 'The text on this page can be edited in the',
+    'Only administrators see this line' => 'Seuls les administrateurs peuvent voir cette ligne',
+    'Terms' => 'Conditions',
+    'The text on this page can be edited in the' => 'Le texte sur cette page peuvent être modifiés dans le',
 ];
