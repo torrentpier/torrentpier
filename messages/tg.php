@@ -26,29 +26,29 @@
 return [
     // Common
     'Captcha' => 'Captcha',
-    'Go back' => 'Go back',
+    'Go back' => 'Баргаштан',
     'Send' => 'Фиристодан',
-    'Submit' => 'Submit',
+    'Submit' => 'Садо',
 
     // Control panel
-    'Control panel' => 'Control panel',
+    'Control panel' => 'Сафҳаи идоракунӣ',
 
     // Errors
-    'File not found: %location%' => 'File not found: %location%',
-    'Invalid request: not specified %data%' => 'Invalid request: not specified %data%',
+    'File not found: %location%' => 'Файли ёфт нашуд: %location%',
+    'Invalid request: not specified %data%' => 'дархости нодурусти: бурда нашавад %data%',
 
     // Feed (feed.php)
     'Feed' => 'Feed',
-    'Do not specify a mode for the feed' => 'Do not specify a mode for the feed',
-    'This forum does not have a feed' => 'This forum does not have a feed',
-    'This user does not have a feed' => 'This user does not have a feed',
+    'Do not specify a mode for the feed' => 'Оё як ҳолати барои хўроки чорво муайян карда наметавонед',
+    'This forum does not have a feed' => 'Ин баҳс надорад, хўроки нест,',
+    'This user does not have a feed' => 'Корбари мазкур ба як хўроки нест,',
 
     // Style guide (styleguide.php)
     'Hello, %name%' => 'Салом, %name%',
     'Style guide' => 'Дастур сабки',
 
     // Terms (terms.php)
-    'Only administrators see this line' => 'Only administrators see this line',
-    'Terms' => 'Terms',
-    'The text on this page can be edited in the' => 'The text on this page can be edited in the',
+    'Only administrators see this line' => 'Танҳо маъмурони дидани ин хати',
+    'Terms' => 'Шартҳои',
+    'The text on this page can be edited in the' => 'Матни ин саҳифа метавонад дар таҳрир',
 ];
