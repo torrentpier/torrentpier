@@ -38,14 +38,14 @@ return [
     'Invalid request: not specified %data%' => 'Недопустимый запрос: не указан %data%',
 
     // Feed (feed.php)
-    'Feed' => 'Лента',
-    'Do not specify a mode for the feed' => 'Не указан режим для канала',
-    'This forum does not have a feed' => 'Этот форум не имеет ленту',
-    'This user does not have a feed' => 'Этот пользователь не имеет канал',
+    'Feed' => 'Новостная лента',
+    'Do not specify a mode for the feed' => 'Не указан режим для новостной ленты',
+    'This forum does not have a feed' => 'У этого форума нет новостной ленты',
+    'This user does not have a feed' => 'У этого пользователя нет новостной ленты',
 
     // Style guide (styleguide.php)
     'Hello, %name%' => 'Добро пожаловать, %name%',
-    'Style guide' => 'Гид по стилю',
+    'Style guide' => 'Руководство по стилю',
 
     // Terms (terms.php)
     'Only administrators see this line' => 'Только администраторы видят эту строку',
