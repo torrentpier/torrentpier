@@ -35,20 +35,20 @@ return [
 
     // Errors
     'File not found: %location%' => '找不到文件:%location%',
-    'Invalid request: not specified %data%' => '无效的请求︰ 未指定 %data%',
+    'Invalid request: not specified %data%' => '无效的请求：不指定 %data%',
 
     // Feed (feed.php)
     'Feed' => '订阅',
-    'Do not specify a mode for the feed' => 'Do not specify a mode for the feed',
+    'Do not specify a mode for the feed' => '不要指定一个模式用于饲料',
     'This forum does not have a feed' => '这个论坛还没有订阅',
     'This user does not have a feed' => '这个用户还没有订阅',
 
     // Style guide (styleguide.php)
     'Hello, %name%' => '欢迎，%name%！',
-    'Style guide' => 'Style guide',
+    'Style guide' => '风格指导',
 
     // Terms (terms.php)
     'Only administrators see this line' => '仅管理员可见',
     'Terms' => '条款',
-    'The text on this page can be edited in the' => 'The text on this page can be edited in the',
+    'The text on this page can be edited in the' => '该文本在这个网页，可以编辑',
 ];
