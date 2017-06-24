@@ -2747,7 +2747,7 @@ $lang['SITEMAP_BING_1'] = 'Registrirajte svoje mesto na <a href="https://www.bin
 $lang['SITEMAP_BING_2'] = 'Dodati kazalo spletnega mesta ste se registrirali, v svoje nastavitve.';
 $lang['SITEMAP_ADD_TITLE'] = 'Dodatne strani za sitemap';
 $lang['SITEMAP_ADD_PAGE'] = 'Dodatne strani';
-$lang['SITEMAP_ADD_EXP_1'] = 'Lahko določite dodatne strani na vašem spletnem mestu, na primer, <b>http://torrentpier.me/memberlist.php</b>), ki morajo biti vključeni v vaš sitemap datoteke, ki jo ustvarjajo.';
+$lang['SITEMAP_ADD_EXP_1'] = 'Lahko določite dodatne strani na vašem spletnem mestu, ki bi morali biti vključeni v vaš sitemap datoteke, ki jo ustvarjajo.';
 $lang['SITEMAP_ADD_EXP_2'] = 'Pri vsakem sklicevanju se mora začeti s http(s):// in novo linijo!';
 
 $lang['FORUM_MAP'] = 'Forumi\' zemljevid';

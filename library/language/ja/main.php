@@ -2747,7 +2747,7 @@ $lang['SITEMAP_BING_1'] = '登録サイトで<a href="https://www.bing.com/webma
 $lang['SITEMAP_BING_2'] = 'サイトマップの追加のサイトにご登録いただいたに設定します。';
 $lang['SITEMAP_ADD_TITLE'] = '追加ページサイトマップ';
 $lang['SITEMAP_ADD_PAGE'] = '追加ページ';
-$lang['SITEMAP_ADD_EXP_1'] = 'を指定できる追加のページのサイト（例えば、<b>http://torrentpierます。me/memberlistます。php</b>）に含まれるべきものでごサイトマップファイルをまた作成します。';
+$lang['SITEMAP_ADD_EXP_1'] = 'を指定できる追加のページをごサイトに含まれるべきもので自サイトマップファイルをまた作成します。';
 $lang['SITEMAP_ADD_EXP_2'] = '各参照始めなければならなhttp(s)://新しい行ます！';
 
 $lang['FORUM_MAP'] = 'フォーラム"地図';

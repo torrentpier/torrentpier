@@ -2747,7 +2747,7 @@ $lang['SITEMAP_BING_1'] = 'Regjistrohuni në faqen tuaj në <a href="https://www
 $lang['SITEMAP_BING_2'] = 'Të shtoni sitemap të faqes që ju të regjistruar në parametrat e saj.';
 $lang['SITEMAP_ADD_TITLE'] = 'Shtesë faqet për sitemap';
 $lang['SITEMAP_ADD_PAGE'] = 'Shtesë faqet';
-$lang['SITEMAP_ADD_EXP_1'] = 'Ju mund të specifikoni faqet shtesë në faqen tuaj (për shembull, <b>http://torrentpier.mua/memberlist.php</b>) të cilat duhet të jenë të përfshira në sitemap file që keni krijuar.';
+$lang['SITEMAP_ADD_EXP_1'] = 'Ju mund të specifikoni faqet shtesë në faqen tuaj të cilat duhet të jenë të përfshira në sitemap file që keni krijuar.';
 $lang['SITEMAP_ADD_EXP_2'] = 'Çdo referencë duhet të filloni me http(s):// dhe një linjë të re!';
 
 $lang['FORUM_MAP'] = 'Forumet\' harta';

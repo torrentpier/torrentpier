@@ -2747,7 +2747,7 @@ $lang['SITEMAP_BING_1'] = 'Registrer nettstedet ditt på <a href="https://www.bi
 $lang['SITEMAP_BING_2'] = 'Legg til sitemap av nettstedet du registrerte i sine innstillinger.';
 $lang['SITEMAP_ADD_TITLE'] = 'Flere sider for sidekart';
 $lang['SITEMAP_ADD_PAGE'] = 'Flere sider';
-$lang['SITEMAP_ADD_EXP_1'] = 'Du kan angi flere sider på nettstedet ditt (for eksempel <b>http://torrentpier.me/medlemslisten.php</b>) som bør inkluderes i sitemap-fil som du oppretter.';
+$lang['SITEMAP_ADD_EXP_1'] = 'Du kan angi flere sider på nettstedet ditt som bør være inkludert i din sitemap-fil som du oppretter.';
 $lang['SITEMAP_ADD_EXP_2'] = 'Hver referanse må begynne med http(s):// og en ny linje!';
 
 $lang['FORUM_MAP'] = 'Fora kart';

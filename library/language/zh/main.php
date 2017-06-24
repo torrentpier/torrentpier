@@ -2747,7 +2747,7 @@ $lang['SITEMAP_BING_1'] = '注册网站在<a href="https://www.bing.com/webmaste
 $lang['SITEMAP_BING_2'] = '添加的网站地图的网站的注册在其设置。';
 $lang['SITEMAP_ADD_TITLE'] = '其他网页的网站地图';
 $lang['SITEMAP_ADD_PAGE'] = '其他网页';
-$lang['SITEMAP_ADD_EXP_1'] = '你可以指定其他网站上的网页(例如，<b>http://torrentpier的。我memberlist。php</b>)应包括在你的网站地图文件。';
+$lang['SITEMAP_ADD_EXP_1'] = '你可以指定其他网站上的网页应该包括在你的网站地图文件。';
 $lang['SITEMAP_ADD_EXP_2'] = '每个基准必须开始与http(s)://和一个新的线!';
 
 $lang['FORUM_MAP'] = '论坛\'地图';

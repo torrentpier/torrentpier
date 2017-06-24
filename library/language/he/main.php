@@ -2747,7 +2747,7 @@ $lang['SITEMAP_BING_1'] = 'לרשום את האתר שלך ב <a href="https://w
 $lang['SITEMAP_BING_2'] = 'להוסיף את ה-sitemap של האתר רשום את ההגדרות שלו.';
 $lang['SITEMAP_ADD_TITLE'] = 'דפים נוספים על ה-sitemap';
 $lang['SITEMAP_ADD_PAGE'] = 'עמודים נוספים';
-$lang['SITEMAP_ADD_EXP_1'] = 'אתה יכול לציין עמודים נוספים באתר שלך (לדוגמה, <b>http://torrentpier.לי/memberlist.php</b>) אשר צריכים להיות כלולים בקובץ ה-sitemap שלך שאתה יוצר.';
+$lang['SITEMAP_ADD_EXP_1'] = 'אתה יכול לציין עמודים נוספים באתר שלך אשר צריכים להיות כלולים בקובץ ה-sitemap שלך שאתה יוצר.';
 $lang['SITEMAP_ADD_EXP_2'] = 'כל הפניה חייבת להתחיל ב-http(s):// קו חדש!';
 
 $lang['FORUM_MAP'] = 'פורומים של המפה';

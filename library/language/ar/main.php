@@ -2747,7 +2747,7 @@ $lang['SITEMAP_BING_1'] = 'تسجيل موقعك في <a href="https://www.bing.
 $lang['SITEMAP_BING_2'] = 'إضافة خريطة الموقع قمت بالتسجيل في الإعدادات.';
 $lang['SITEMAP_ADD_TITLE'] = 'صفحات إضافية على خريطة الموقع';
 $lang['SITEMAP_ADD_PAGE'] = 'صفحات إضافية';
-$lang['SITEMAP_ADD_EXP_1'] = 'يمكنك تحديد صفحات إضافية على موقع الويب الخاص بك (على سبيل المثال ، <b>http://torrentpier.لي/memberlist.php</b>) التي ينبغي أن تدرج في ملف sitemap أن خلق لكم.';
+$lang['SITEMAP_ADD_EXP_1'] = 'يمكنك تحديد صفحات إضافية على موقع الويب الخاص بك التي ينبغي أن تدرج في ملف sitemap أن خلق لكم.';
 $lang['SITEMAP_ADD_EXP_2'] = 'كل إشارة يجب أن تبدأ مع(s) http:// خط جديد!';
 
 $lang['FORUM_MAP'] = 'منتديات\' خريطة';

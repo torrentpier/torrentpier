@@ -2747,7 +2747,7 @@ $lang['SITEMAP_BING_1'] = 'Iti inscrii site-ul la <a href="https://www.bing.com/
 $lang['SITEMAP_BING_2'] = 'Adauga sitemap al site-ului v-ați înregistrat în setările sale.';
 $lang['SITEMAP_ADD_TITLE'] = 'Pagini suplimentare pentru sitemap';
 $lang['SITEMAP_ADD_PAGE'] = 'Pagini suplimentare';
-$lang['SITEMAP_ADD_EXP_1'] = 'Puteți specifica pagini suplimentare pe site-ul dvs. (de exemplu, <b>http://torrentpier.mi/membri.php</b>) care ar trebui să fie incluse în fișier sitemap crearea.';
+$lang['SITEMAP_ADD_EXP_1'] = 'Puteți specifica pagini suplimentare pe site-ul dvs., care ar trebui să fie incluse în fișier sitemap crearea.';
 $lang['SITEMAP_ADD_EXP_2'] = 'Fiecare trimitere trebuie să înceapă cu http(s):// și o nouă linie!';
 
 $lang['FORUM_MAP'] = 'Forumuri hartă';

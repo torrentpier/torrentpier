@@ -2747,7 +2747,7 @@ $lang['SITEMAP_BING_1'] = 'Regisztrálni a helyszínen <a href="https://www.bing
 $lang['SITEMAP_BING_2'] = 'Add oldaltérkép a honlap regisztrált a beállításokat.';
 $lang['SITEMAP_ADD_TITLE'] = 'További oldalak oldaltérkép';
 $lang['SITEMAP_ADD_PAGE'] = 'További oldalak';
-$lang['SITEMAP_ADD_EXP_1'] = 'Megadhat további oldalak a webhelyen (például <b>http://torrentpier.nekem/memberlist.php</b>), amely tartalmazza a sitemap-fájl létrehozása.';
+$lang['SITEMAP_ADD_EXP_1'] = 'Megadhat további oldalak a webhelyen, amely tartalmazza a sitemap-fájl létrehozása.';
 $lang['SITEMAP_ADD_EXP_2'] = 'Minden hivatkozást kell kezdeni a http(s)://, valamint egy új sort!';
 
 $lang['FORUM_MAP'] = 'Fórumok\' térkép';
