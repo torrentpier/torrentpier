@@ -26,29 +26,29 @@
 return [
     // Common
     'Captcha' => 'Captcha',
-    'Go back' => 'Go back',
-    'Send' => 'Send',
-    'Submit' => 'Submit',
+    'Go back' => 'Menj vissza',
+    'Send' => 'Küldeni',
+    'Submit' => 'Benyújtaniuk',
 
     // Control panel
-    'Control panel' => 'Control panel',
+    'Control panel' => 'Vezérlőpult',
 
     // Errors
-    'File not found: %location%' => 'File not found: %location%',
-    'Invalid request: not specified %data%' => 'Invalid request: not specified %data%',
+    'File not found: %location%' => 'A fájl nem található: %location%',
+    'Invalid request: not specified %data%' => 'Érvénytelen kérés: nem meghatározott %data%',
 
     // Feed (feed.php)
-    'Feed' => 'Feed',
-    'Do not specify a mode for the feed' => 'Do not specify a mode for the feed',
-    'This forum does not have a feed' => 'This forum does not have a feed',
-    'This user does not have a feed' => 'This user does not have a feed',
+    'Feed' => 'Takarmány',
+    'Do not specify a mode for the feed' => 'Nem határozza meg a módot, hogy a takarmány',
+    'This forum does not have a feed' => 'Ez a fórum nem egy feed',
+    'This user does not have a feed' => 'Ez a felhasználó nem rendelkezik takarmány',
 
     // Style guide (styleguide.php)
     'Hello, %name%' => 'Hello, %name%',
-    'Style guide' => 'Style guide',
+    'Style guide' => 'Stílus útmutató',
 
     // Terms (terms.php)
-    'Only administrators see this line' => 'Only administrators see this line',
-    'Terms' => 'Terms',
-    'The text on this page can be edited in the' => 'The text on this page can be edited in the',
+    'Only administrators see this line' => 'Csak rendszergazdák lásd ezt a sort',
+    'Terms' => 'Feltételek',
+    'The text on this page can be edited in the' => 'A szöveg ezen az oldalon szerkesztheti a',
 ];
