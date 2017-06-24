@@ -26,29 +26,29 @@
 return [
     // Common
     'Captcha' => 'Captcha',
-    'Go back' => 'Go back',
-    'Send' => 'Send',
-    'Submit' => 'Submit',
+    'Go back' => 'Vratiti',
+    'Send' => 'Pošalji',
+    'Submit' => 'Dostaviti',
 
     // Control panel
-    'Control panel' => 'Control panel',
+    'Control panel' => 'Kontrolna tabla',
 
     // Errors
-    'File not found: %location%' => 'File not found: %location%',
-    'Invalid request: not specified %data%' => 'Invalid request: not specified %data%',
+    'File not found: %location%' => 'Datoteka nije našao: %location%',
+    'Invalid request: not specified %data%' => 'Nevažeći zahtev: nije navedeno %data%',
 
     // Feed (feed.php)
-    'Feed' => 'Feed',
-    'Do not specify a mode for the feed' => 'Do not specify a mode for the feed',
-    'This forum does not have a feed' => 'This forum does not have a feed',
-    'This user does not have a feed' => 'This user does not have a feed',
+    'Feed' => 'Nahrani',
+    'Do not specify a mode for the feed' => 'Ne odredi način za hraniti',
+    'This forum does not have a feed' => 'Ovo forum nema nahrani',
+    'This user does not have a feed' => 'Ovo korisnik nema nahrani',
 
     // Style guide (styleguide.php)
-    'Hello, %name%' => 'Hello, %name%',
-    'Style guide' => 'Style guide',
+    'Hello, %name%' => 'Zdravo, %name%',
+    'Style guide' => 'Stil vodič',
 
     // Terms (terms.php)
-    'Only administrators see this line' => 'Only administrators see this line',
-    'Terms' => 'Terms',
-    'The text on this page can be edited in the' => 'The text on this page can be edited in the',
+    'Only administrators see this line' => 'Samo administratori vidiš li ovu liniju',
+    'Terms' => 'Uslovima',
+    'The text on this page can be edited in the' => 'Tekst je na ovoj strani može mijenjati u',
 ];
