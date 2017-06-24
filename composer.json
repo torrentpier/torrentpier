@@ -32,7 +32,6 @@
     "email": "support@torrentpier.com",
     "issues": "https://github.com/torrentpier/torrentpier/issues",
     "forum": "https://torrentpier.com/forum/",
-    "irc": "http://torrentpier.herokuapp.com/",
     "docs": "https://docs.torrentpier.com/"
   },
   "require": {
