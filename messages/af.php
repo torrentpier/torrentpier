@@ -26,29 +26,29 @@
 return [
     // Common
     'Captcha' => 'Captcha',
-    'Go back' => 'Go back',
-    'Send' => 'Send',
-    'Submit' => 'Submit',
+    'Go back' => 'Gaan terug',
+    'Send' => 'stuur',
+    'Submit' => 'Indien',
 
     // Control panel
-    'Control panel' => 'Control panel',
+    'Control panel' => 'Beheer paneel',
 
     // Errors
-    'File not found: %location%' => 'File not found: %location%',
-    'Invalid request: not specified %data%' => 'Invalid request: not specified %data%',
+    'File not found: %location%' => 'Lêer nie gevind nie: %location%',
+    'Invalid request: not specified %data%' => 'Ongeldige versoek: nie gespesifiseer nie %data%',
 
     // Feed (feed.php)
-    'Feed' => 'Feed',
-    'Do not specify a mode for the feed' => 'Do not specify a mode for the feed',
-    'This forum does not have a feed' => 'This forum does not have a feed',
-    'This user does not have a feed' => 'This user does not have a feed',
+    'Feed' => 'Voer',
+    'Do not specify a mode for the feed' => 'Moenie \'n modus vir die voer spesifiseer nie',
+    'This forum does not have a feed' => 'Hierdie forum het nie \'n voer nie',
+    'This user does not have a feed' => 'Hierdie gebruiker het geen voer nie',
 
     // Style guide (styleguide.php)
-    'Hello, %name%' => 'Hello, %name%',
-    'Style guide' => 'Style guide',
+    'Hello, %name%' => 'Hallo, %name%',
+    'Style guide' => 'Stylgids',
 
     // Terms (terms.php)
-    'Only administrators see this line' => 'Only administrators see this line',
-    'Terms' => 'Terms',
-    'The text on this page can be edited in the' => 'The text on this page can be edited in the',
+    'Only administrators see this line' => 'Slegs administrateurs sien hierdie reël',
+    'Terms' => 'terme',
+    'The text on this page can be edited in the' => 'Die teks op hierdie bladsy kan in die',
 ];
