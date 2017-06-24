@@ -26,29 +26,29 @@
 return [
     // Common
     'Captcha' => 'Captcha',
-    'Go back' => 'Go back',
-    'Send' => 'Send',
+    'Go back' => 'Kthehem',
+    'Send' => 'Dërgoni',
     'Submit' => 'Submit',
 
     // Control panel
-    'Control panel' => 'Control panel',
+    'Control panel' => 'Paneli i kontrollit',
 
     // Errors
-    'File not found: %location%' => 'File not found: %location%',
-    'Invalid request: not specified %data%' => 'Invalid request: not specified %data%',
+    'File not found: %location%' => 'File nuk u gjet: %location%',
+    'Invalid request: not specified %data%' => 'Të pavlefshme kërkesën: nuk është e specifikuar %data%',
 
     // Feed (feed.php)
     'Feed' => 'Feed',
-    'Do not specify a mode for the feed' => 'Do not specify a mode for the feed',
-    'This forum does not have a feed' => 'This forum does not have a feed',
-    'This user does not have a feed' => 'This user does not have a feed',
+    'Do not specify a mode for the feed' => 'Nuk e specifikon një mënyrë për të ushqyer',
+    'This forum does not have a feed' => 'Në këtë forum nuk ka një ushqim',
+    'This user does not have a feed' => 'Ky përdorues nuk ka një ushqim',
 
     // Style guide (styleguide.php)
-    'Hello, %name%' => 'Hello, %name%',
-    'Style guide' => 'Style guide',
+    'Hello, %name%' => 'Përshëndetje, %name%',
+    'Style guide' => 'Udhëzues stil',
 
     // Terms (terms.php)
-    'Only administrators see this line' => 'Only administrators see this line',
-    'Terms' => 'Terms',
-    'The text on this page can be edited in the' => 'The text on this page can be edited in the',
+    'Only administrators see this line' => 'Vetëm për administratorët e shihni këtë linjë',
+    'Terms' => 'Kushtet',
+    'The text on this page can be edited in the' => 'E tekst në këtë faqe mund të jenë të përpunuara në',
 ];
