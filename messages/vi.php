@@ -25,30 +25,30 @@
 
 return [
     // Common
-    'Captcha' => 'Captcha',
-    'Go back' => 'Go back',
+    'Captcha' => 'Mã xác nhận',
+    'Go back' => 'Quay trở lại',
     'Send' => 'Gửi',
-    'Submit' => 'Submit',
+    'Submit' => 'Gửi',
 
     // Control panel
-    'Control panel' => 'Control panel',
+    'Control panel' => 'Bảng điều khiển',
 
     // Errors
-    'File not found: %location%' => 'File not found: %location%',
-    'Invalid request: not specified %data%' => 'Invalid request: not specified %data%',
+    'File not found: %location%' => 'Thấy không tìm thấy: %location%',
+    'Invalid request: not specified %data%' => 'Không yêu cầu: không quy định %data%',
 
     // Feed (feed.php)
-    'Feed' => 'Feed',
-    'Do not specify a mode for the feed' => 'Do not specify a mode for the feed',
-    'This forum does not have a feed' => 'This forum does not have a feed',
-    'This user does not have a feed' => 'This user does not have a feed',
+    'Feed' => 'Thức ăn',
+    'Do not specify a mode for the feed' => 'Không chỉ định một chế độ ăn',
+    'This forum does not have a feed' => 'Diễn đàn này không có thức ăn',
+    'This user does not have a feed' => 'Người này không có thức ăn',
 
     // Style guide (styleguide.php)
     'Hello, %name%' => 'Xin chào, %name%',
     'Style guide' => 'Phong cách hướng dẫn',
 
     // Terms (terms.php)
-    'Only administrators see this line' => 'Only administrators see this line',
-    'Terms' => 'Terms',
-    'The text on this page can be edited in the' => 'The text on this page can be edited in the',
+    'Only administrators see this line' => 'Chỉ quản trị thấy dòng này',
+    'Terms' => 'Điều khoản',
+    'The text on this page can be edited in the' => 'Các văn bản trên trang này có thể được chỉnh sửa trong những',
 ];
