@@ -26,29 +26,29 @@
 return [
     // Common
     'Captcha' => 'Captcha',
-    'Go back' => 'Go back',
-    'Send' => 'Send',
-    'Submit' => 'Submit',
+    'Go back' => 'กลับไป',
+    'Send' => 'ส่ง',
+    'Submit' => 'ส่ง',
 
     // Control panel
-    'Control panel' => 'Control panel',
+    'Control panel' => 'แผงควบคุม',
 
     // Errors
-    'File not found: %location%' => 'File not found: %location%',
-    'Invalid request: not specified %data%' => 'Invalid request: not specified %data%',
+    'File not found: %location%' => 'ไม่พบแฟ้ม:%location%',
+    'Invalid request: not specified %data%' => 'ไม่ถูกต้องการร้องขอ:ยังไม่ได้ระบุ %data%',
 
     // Feed (feed.php)
-    'Feed' => 'Feed',
-    'Do not specify a mode for the feed' => 'Do not specify a mode for the feed',
-    'This forum does not have a feed' => 'This forum does not have a feed',
-    'This user does not have a feed' => 'This user does not have a feed',
+    'Feed' => 'แหล่งป้อน',
+    'Do not specify a mode for the feed' => 'ยังไม่ได้กำหนดเป็นโหมดสำหรับแหล่งป้อน',
+    'This forum does not have a feed' => 'นี่ชุไม่มีแหล่งป้อน',
+    'This user does not have a feed' => 'ผู้ใช้นี้ไม่มีแหล่งป้อน',
 
     // Style guide (styleguide.php)
-    'Hello, %name%' => 'Hello, %name%',
-    'Style guide' => 'Style guide',
+    'Hello, %name%' => 'สวัสดี %name%',
+    'Style guide' => 'รูปแบบนำทาง',
 
     // Terms (terms.php)
-    'Only administrators see this line' => 'Only administrators see this line',
-    'Terms' => 'Terms',
-    'The text on this page can be edited in the' => 'The text on this page can be edited in the',
+    'Only administrators see this line' => 'เพียง administrators เห็นบรรทัดนี้',
+    'Terms' => 'เงื่อนไข',
+    'The text on this page can be edited in the' => 'ข้อความบนหน้านี้สามารถจะถูกแก้ไขใน',
 ];
