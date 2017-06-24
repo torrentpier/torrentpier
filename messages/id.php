@@ -26,29 +26,29 @@
 return [
     // Common
     'Captcha' => 'Captcha',
-    'Go back' => 'Go back',
-    'Send' => 'Send',
-    'Submit' => 'Submit',
+    'Go back' => 'Kembali',
+    'Send' => 'Kirim',
+    'Submit' => 'Kirim',
 
     // Control panel
     'Control panel' => 'Control panel',
 
     // Errors
-    'File not found: %location%' => 'File not found: %location%',
-    'Invalid request: not specified %data%' => 'Invalid request: not specified %data%',
+    'File not found: %location%' => 'File tidak ditemukan: %location%',
+    'Invalid request: not specified %data%' => 'Permintaan tidak valid: tidak ditentukan %data%',
 
     // Feed (feed.php)
-    'Feed' => 'Feed',
-    'Do not specify a mode for the feed' => 'Do not specify a mode for the feed',
-    'This forum does not have a feed' => 'This forum does not have a feed',
-    'This user does not have a feed' => 'This user does not have a feed',
+    'Feed' => 'Pakan',
+    'Do not specify a mode for the feed' => 'Tidak menentukan mode untuk pakan',
+    'This forum does not have a feed' => 'Forum ini tidak memiliki feed',
+    'This user does not have a feed' => 'Pengguna ini tidak memiliki feed',
 
     // Style guide (styleguide.php)
-    'Hello, %name%' => 'Hello, %name%',
-    'Style guide' => 'Style guide',
+    'Hello, %name%' => 'Halo, %name%',
+    'Style guide' => 'Panduan gaya',
 
     // Terms (terms.php)
-    'Only administrators see this line' => 'Only administrators see this line',
-    'Terms' => 'Terms',
-    'The text on this page can be edited in the' => 'The text on this page can be edited in the',
+    'Only administrators see this line' => 'Hanya administrator lihat baris ini',
+    'Terms' => 'Hal',
+    'The text on this page can be edited in the' => 'Teks di halaman ini bisa diedit di',
 ];

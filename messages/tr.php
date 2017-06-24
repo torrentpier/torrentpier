@@ -39,9 +39,9 @@ return [
 
     // Feed (feed.php)
     'Feed' => 'Yayın',
-    'Do not specify a mode for the feed' => 'Do not specify a mode for the feed',
-    'This forum does not have a feed' => 'This forum does not have a feed',
-    'This user does not have a feed' => 'This user does not have a feed',
+    'Do not specify a mode for the feed' => 'Yem için bir mod belirtin',
+    'This forum does not have a feed' => 'Bu forumda bir yem yok',
+    'This user does not have a feed' => 'Bu kullanıcı bir yem yok',
 
     // Style guide (styleguide.php)
     'Hello, %name%' => 'Merhaba, %name%',

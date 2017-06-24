@@ -26,29 +26,29 @@
 return [
     // Common
     'Captcha' => 'Captcha',
-    'Go back' => 'Go back',
+    'Go back' => 'Ísť späť',
     'Send' => 'Odoslať',
-    'Submit' => 'Submit',
+    'Submit' => 'Odoslať',
 
     // Control panel
-    'Control panel' => 'Control panel',
+    'Control panel' => 'Ovládací panel',
 
     // Errors
-    'File not found: %location%' => 'File not found: %location%',
-    'Invalid request: not specified %data%' => 'Invalid request: not specified %data%',
+    'File not found: %location%' => 'Súbor nenájdený: %location%',
+    'Invalid request: not specified %data%' => 'Neplatná žiadosť: nie je zadaný %data%',
 
     // Feed (feed.php)
-    'Feed' => 'Feed',
-    'Do not specify a mode for the feed' => 'Do not specify a mode for the feed',
-    'This forum does not have a feed' => 'This forum does not have a feed',
-    'This user does not have a feed' => 'This user does not have a feed',
+    'Feed' => 'Zdroj',
+    'Do not specify a mode for the feed' => 'Nie je uvedená v režime feed',
+    'This forum does not have a feed' => 'Toto fórum nemá zdroj',
+    'This user does not have a feed' => 'Tento používateľ nemá zdroj',
 
     // Style guide (styleguide.php)
     'Hello, %name%' => 'Dobrý deň, %name%',
     'Style guide' => 'Príručka štýlu',
 
     // Terms (terms.php)
-    'Only administrators see this line' => 'Only administrators see this line',
-    'Terms' => 'Terms',
-    'The text on this page can be edited in the' => 'The text on this page can be edited in the',
+    'Only administrators see this line' => 'Iba administrátori nájdete v tomto linku',
+    'Terms' => 'Podmienky',
+    'The text on this page can be edited in the' => 'Text na tejto stránke môžu byť upravené v',
 ];

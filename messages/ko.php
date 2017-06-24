@@ -26,29 +26,29 @@
 return [
     // Common
     'Captcha' => 'Captcha',
-    'Go back' => 'Go back',
-    'Send' => 'Send',
-    'Submit' => 'Submit',
+    'Go back' => '로 돌아',
+    'Send' => '보내기',
+    'Submit' => '제출',
 
     // Control panel
     'Control panel' => 'Control panel',
 
     // Errors
-    'File not found: %location%' => 'File not found: %location%',
-    'Invalid request: not specified %data%' => 'Invalid request: not specified %data%',
+    'File not found: %location%' => '파일을 찾을 수 없습니다:%location%',
+    'Invalid request: not specified %data%' => '잘못된 요청은:지정하지 않 %data%',
 
     // Feed (feed.php)
-    'Feed' => 'Feed',
-    'Do not specify a mode for the feed' => 'Do not specify a mode for the feed',
-    'This forum does not have a feed' => 'This forum does not have a feed',
-    'This user does not have a feed' => 'This user does not have a feed',
+    'Feed' => '피드',
+    'Do not specify a mode for the feed' => '를 지정하지 않은 모드에 대한 피드',
+    'This forum does not have a feed' => '이 포럼을 가지지 않 피드',
+    'This user does not have a feed' => '이 사용자가 없 피드',
 
     // Style guide (styleguide.php)
-    'Hello, %name%' => 'Hello, %name%',
-    'Style guide' => 'Style guide',
+    'Hello, %name%' => '안녕하세요,%name%',
+    'Style guide' => '스타일 가이드',
 
     // Terms (terms.php)
-    'Only administrators see this line' => 'Only administrators see this line',
-    'Terms' => 'Terms',
-    'The text on this page can be edited in the' => 'The text on this page can be edited in the',
+    'Only administrators see this line' => '관리자만 볼 이라인',
+    'Terms' => '약관',
+    'The text on this page can be edited in the' => '이 페이지에서 텍스트를 편집할 수 있습니다',
 ];

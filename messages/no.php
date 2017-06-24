@@ -26,29 +26,29 @@
 return [
     // Common
     'Captcha' => 'Captcha',
-    'Go back' => 'Go back',
+    'Go back' => 'Gå tilbake',
     'Send' => 'Send',
-    'Submit' => 'Submit',
+    'Submit' => 'Send inn',
 
     // Control panel
-    'Control panel' => 'Control panel',
+    'Control panel' => 'Kontroll panel',
 
     // Errors
-    'File not found: %location%' => 'File not found: %location%',
-    'Invalid request: not specified %data%' => 'Invalid request: not specified %data%',
+    'File not found: %location%' => 'Finner ikke filen: %location%',
+    'Invalid request: not specified %data%' => 'Ugyldig forespørsel: ikke spesifisert %data%',
 
     // Feed (feed.php)
-    'Feed' => 'Feed',
-    'Do not specify a mode for the feed' => 'Do not specify a mode for the feed',
-    'This forum does not have a feed' => 'This forum does not have a feed',
-    'This user does not have a feed' => 'This user does not have a feed',
+    'Feed' => '- Feed',
+    'Do not specify a mode for the feed' => 'Ikke angir en modus for mating',
+    'This forum does not have a feed' => 'Dette forumet har ikke en mate',
+    'This user does not have a feed' => 'Denne brukeren har ikke en mate',
 
     // Style guide (styleguide.php)
-    'Hello, %name%' => 'Hello, %name%',
+    'Hello, %name%' => 'Hei, %name%',
     'Style guide' => 'Style guide',
 
     // Terms (terms.php)
-    'Only administrators see this line' => 'Only administrators see this line',
-    'Terms' => 'Terms',
-    'The text on this page can be edited in the' => 'The text on this page can be edited in the',
+    'Only administrators see this line' => 'Bare administratorer se denne linjen',
+    'Terms' => 'Vilkår',
+    'The text on this page can be edited in the' => 'Teksten på denne siden kan redigeres i',
 ];

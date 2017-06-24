@@ -26,22 +26,22 @@
 return [
     // Common
     'Captcha' => 'Captcha',
-    'Go back' => 'Go back',
+    'Go back' => 'Gehen Sie zurück',
     'Send' => 'Senden',
-    'Submit' => 'Submit',
+    'Submit' => 'Einreichen',
 
     // Control panel
-    'Control panel' => 'Control panel',
+    'Control panel' => 'Systemsteuerung',
 
     // Errors
     'File not found: %location%' => 'Datei nicht gefunden: %location%',
-    'Invalid request: not specified %data%' => 'Invalid request: not specified %data%',
+    'Invalid request: not specified %data%' => 'Ungültige Anforderung: nicht angegeben %data%',
 
     // Feed (feed.php)
     'Feed' => 'Feed',
-    'Do not specify a mode for the feed' => 'Do not specify a mode for the feed',
-    'This forum does not have a feed' => 'This forum does not have a feed',
-    'This user does not have a feed' => 'This user does not have a feed',
+    'Do not specify a mode for the feed' => 'Tun nicht geben Sie einen Modus für den Vorschub',
+    'This forum does not have a feed' => 'Dieses forum ist nicht ein Futter',
+    'This user does not have a feed' => 'Diese Benutzer verfügen nicht über einen feed',
 
     // Style guide (styleguide.php)
     'Hello, %name%' => 'Hallo, %name%',
@@ -49,6 +49,6 @@ return [
 
     // Terms (terms.php)
     'Only administrators see this line' => 'Nur Administratoren sehen diese Zeile',
-    'Terms' => 'Terms',
-    'The text on this page can be edited in the' => 'The text on this page can be edited in the',
+    'Terms' => 'Bedingungen',
+    'The text on this page can be edited in the' => 'Der text auf dieser Seite kann bearbeitet werden, in der',
 ];

@@ -25,30 +25,30 @@
 
 return [
     // Common
-    'Captcha' => 'Captcha',
-    'Go back' => 'Go back',
-    'Send' => 'Send',
-    'Submit' => 'Submit',
+    'Captcha' => '画像認証',
+    'Go back' => '帰',
+    'Send' => '送信',
+    'Submit' => '提出',
 
     // Control panel
-    'Control panel' => 'Control panel',
+    'Control panel' => '制御パネル',
 
     // Errors
-    'File not found: %location%' => 'File not found: %location%',
-    'Invalid request: not specified %data%' => 'Invalid request: not specified %data%',
+    'File not found: %location%' => 'ファイルが見つかりません:%location%',
+    'Invalid request: not specified %data%' => '不正なリクエスト:指定されていない%data%',
 
     // Feed (feed.php)
-    'Feed' => 'Feed',
-    'Do not specify a mode for the feed' => 'Do not specify a mode for the feed',
-    'This forum does not have a feed' => 'This forum does not have a feed',
-    'This user does not have a feed' => 'This user does not have a feed',
+    'Feed' => '飼料',
+    'Do not specify a mode for the feed' => '指定がないモードの飼料',
+    'This forum does not have a feed' => 'このフォーラムのないフィード',
+    'This user does not have a feed' => 'このユーザーがない飼料',
 
     // Style guide (styleguide.php)
-    'Hello, %name%' => 'Hello, %name%',
-    'Style guide' => 'Style guide',
+    'Hello, %name%' => 'こんにちは、%name%',
+    'Style guide' => 'スタイルガイド',
 
     // Terms (terms.php)
-    'Only administrators see this line' => 'Only administrators see this line',
-    'Terms' => 'Terms',
-    'The text on this page can be edited in the' => 'The text on this page can be edited in the',
+    'Only administrators see this line' => '管理者だけがこの線',
+    'Terms' => '条件',
+    'The text on this page can be edited in the' => 'テキストはこのページを編集することができる',
 ];

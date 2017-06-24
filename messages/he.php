@@ -26,29 +26,29 @@
 return [
     // Common
     'Captcha' => 'Captcha',
-    'Go back' => 'Go back',
-    'Send' => 'Send',
-    'Submit' => 'Submit',
+    'Go back' => 'לחזור',
+    'Send' => 'שלח',
+    'Submit' => 'להגיש',
 
     // Control panel
-    'Control panel' => 'Control panel',
+    'Control panel' => 'לוח הבקרה',
 
     // Errors
-    'File not found: %location%' => 'File not found: %location%',
-    'Invalid request: not specified %data%' => 'Invalid request: not specified %data%',
+    'File not found: %location%' => 'הקובץ לא נמצא: %location%',
+    'Invalid request: not specified %data%' => 'בקשה לא חוקית: לא צוין %data%',
 
     // Feed (feed.php)
-    'Feed' => 'Feed',
-    'Do not specify a mode for the feed' => 'Do not specify a mode for the feed',
-    'This forum does not have a feed' => 'This forum does not have a feed',
-    'This user does not have a feed' => 'This user does not have a feed',
+    'Feed' => 'להאכיל',
+    'Do not specify a mode for the feed' => 'לא לציין את מצב ההזנה',
+    'This forum does not have a feed' => 'הפורום הזה לא צריך להאכיל.',
+    'This user does not have a feed' => 'משתמש זה אינו מאכיל',
 
     // Style guide (styleguide.php)
-    'Hello, %name%' => 'Hello, %name%',
-    'Style guide' => 'Style guide',
+    'Hello, %name%' => 'שלום, %name%',
+    'Style guide' => 'מדריך סגנון',
 
     // Terms (terms.php)
-    'Only administrators see this line' => 'Only administrators see this line',
-    'Terms' => 'Terms',
-    'The text on this page can be edited in the' => 'The text on this page can be edited in the',
+    'Only administrators see this line' => 'רק מנהלי רואה את הקו הזה',
+    'Terms' => 'תנאי',
+    'The text on this page can be edited in the' => 'את הטקסט בעמוד זה ניתן לערוך את',
 ];
