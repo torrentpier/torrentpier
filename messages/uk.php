@@ -27,7 +27,7 @@ return [
     // Common
     'Captcha' => 'Захисний код',
     'Go back' => 'Повернутися',
-    'Send' => 'Відправити',
+    'Send' => 'Надіслати',
     'Submit' => 'Підтвердити',
 
     // Control panel
@@ -35,7 +35,7 @@ return [
 
     // Errors
     'File not found: %location%' => 'Файл не знайдено: %location%',
-    'Invalid request: not specified %data%' => 'Невірний запит: не вказано %data%',
+    'Invalid request: not specified %data%' => 'Неправильний запит: не вказано %data%',
 
     // Feed (feed.php)
     'Feed' => 'Стрічка',
