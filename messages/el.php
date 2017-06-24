@@ -26,29 +26,29 @@
 return [
     // Common
     'Captcha' => 'Captcha',
-    'Go back' => 'Go back',
-    'Send' => 'Send',
-    'Submit' => 'Submit',
+    'Go back' => 'Πάμε πίσω',
+    'Send' => 'Στείλτε',
+    'Submit' => 'Υποβολή',
 
     // Control panel
-    'Control panel' => 'Control panel',
+    'Control panel' => 'Πίνακα ελέγχου',
 
     // Errors
-    'File not found: %location%' => 'File not found: %location%',
-    'Invalid request: not specified %data%' => 'Invalid request: not specified %data%',
+    'File not found: %location%' => 'Δεν βρέθηκε το αρχείο: %location%',
+    'Invalid request: not specified %data%' => 'Μη έγκυρη αίτηση: δεν έχει οριστεί %data%',
 
     // Feed (feed.php)
     'Feed' => 'Feed',
-    'Do not specify a mode for the feed' => 'Do not specify a mode for the feed',
-    'This forum does not have a feed' => 'This forum does not have a feed',
-    'This user does not have a feed' => 'This user does not have a feed',
+    'Do not specify a mode for the feed' => 'Δεν καθορίσετε μια λειτουργία για την τροφοδοσία',
+    'This forum does not have a feed' => 'Αυτό το φόρουμ δεν έχει τροφών',
+    'This user does not have a feed' => 'Αυτός ο χρήστης δεν έχει τροφών',
 
     // Style guide (styleguide.php)
-    'Hello, %name%' => 'Hello, %name%',
-    'Style guide' => 'Style guide',
+    'Hello, %name%' => 'Γεια σας, %name%',
+    'Style guide' => 'Οδηγός στυλ',
 
     // Terms (terms.php)
-    'Only administrators see this line' => 'Only administrators see this line',
-    'Terms' => 'Terms',
-    'The text on this page can be edited in the' => 'The text on this page can be edited in the',
+    'Only administrators see this line' => 'Μόνο οι διαχειριστές δείτε αυτή τη γραμμή',
+    'Terms' => 'Όρους',
+    'The text on this page can be edited in the' => 'Το κείμενο σε αυτή τη σελίδα μπορεί να επεξεργαστεί το',
 ];
