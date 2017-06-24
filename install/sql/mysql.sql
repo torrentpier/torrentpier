@@ -487,7 +487,7 @@ INSERT INTO `bb_config` VALUES ('birthday_min_age', '10');
 INSERT INTO `bb_config` VALUES ('birthday_check_day', '7');
 INSERT INTO `bb_config` VALUES ('bt_add_auth_key', '1');
 INSERT INTO `bb_config` VALUES ('bt_allow_spmode_change', '1');
-INSERT INTO `bb_config` VALUES ('bt_announce_url', 'https://demo.torrentpier.me/bt/announce.php');
+INSERT INTO `bb_config` VALUES ('bt_announce_url', 'https://demo.torrentpier.com/bt/announce.php');
 INSERT INTO `bb_config` VALUES ('bt_disable_dht', '0');
 INSERT INTO `bb_config` VALUES ('bt_check_announce_url', '0');
 INSERT INTO `bb_config` VALUES ('bt_del_addit_ann_urls', '1');
@@ -964,7 +964,7 @@ CREATE TABLE IF NOT EXISTS `bb_posts_text` (
 -- Records of bb_posts_text
 -- ----------------------------
 INSERT INTO `bb_posts_text` VALUES ('1',
-                                    'Благодарим вас за установку новой версии TorrentPier Aurochs!\n\nЧто делать дальше? Сперва настройте ваш сайт в администраторском разделе. Измените базовые опции: заголовок сайта, число сообщений на страницу, часовой пояс, язык по-умолчанию, настройки сидбонусов, дней рождения и т.д. Создайте несколько форумов, а также не забудьте переименовать или удалить этот. Обязательно настройте возможность создания релизов в созданных вами разделах и добавьте [url=https://torrentpier.me/threads/25867/]шаблоны оформления раздач[/url] для них. Если у вас возникнут вопросы или потребность в дополнительных модификациях, [url=https://torrentpier.me/forum/]посетите наш форум[/url].\n\nТакже напоминаем, что у проекта TorrentPier есть несколько сайтов, которые могут оказаться полезны для вас:\n[list]\n[*]Форум: https://torrentpier.me/forum/\n[*]Демо-версия: https://demo.torrentpier.me/\n[*]Инструкция: https://docs.torrentpier.me/\n[*]Центр загрузки: https://get.torrentpier.me/\n[*]Перевод на другие языки: https://crowdin.com/project/torrentpier\n[/list]\nНе забудьте добавить их себе в закладки и регулярно проверять наличие новых версий движка на нашем форуме, для своевременного обновления.\n\nНе сомневаемся, вам под силу создать самый лучший трекер. Удачи!');
+                                    'Благодарим вас за установку новой версии TorrentPier Aurochs!\n\nЧто делать дальше? Сперва настройте ваш сайт в администраторском разделе. Измените базовые опции: заголовок сайта, число сообщений на страницу, часовой пояс, язык по-умолчанию, настройки сидбонусов, дней рождения и т.д. Создайте несколько форумов, а также не забудьте переименовать или удалить этот. Обязательно настройте возможность создания релизов в созданных вами разделах и добавьте [url=https://torrentpier.com/threads/25867/]шаблоны оформления раздач[/url] для них. Если у вас возникнут вопросы или потребность в дополнительных модификациях, [url=https://torrentpier.com/forum/]посетите наш форум[/url].\n\nТакже напоминаем, что у проекта TorrentPier есть несколько сайтов, которые могут оказаться полезны для вас:\n[list]\n[*]Форум: https://torrentpier.com/forum/\n[*]Демо-версия: https://demo.torrentpier.com/\n[*]Инструкция: https://docs.torrentpier.com/\n[*]Центр загрузки: https://get.torrentpier.com/\n[*]Перевод на другие языки: https://crowdin.com/project/torrentpier\n[/list]\nНе забудьте добавить их себе в закладки и регулярно проверять наличие новых версий движка на нашем форуме, для своевременного обновления.\n\nНе сомневаемся, вам под силу создать самый лучший трекер. Удачи!');
 
 -- ----------------------------
 -- Table structure for `bb_privmsgs`
@@ -1339,14 +1339,14 @@ INSERT INTO `bb_users` VALUES
                                                                                                            '144', '0',
                                                                                                            '0', '0',
                                                                                                            '0000-00-00',
-    'bot@torrentpier.me', '', '', '', '', '', '', '', '', '', '', '', '0', '0.00', 'default');
+    'bot@torrentpier.com', '', '', '', '', '', '', '', '', '', '', '', '0', '0.00', 'default');
 INSERT INTO `bb_users` VALUES
   ('2', '1', 'admin', 'c3284d0f94606de1fd2af172aba15bf3', '0', '0', '0', UNIX_TIMESTAMP(), '0', '1', '1', '', 'ru', '0',
                                                                                                           '0', '0',
                                                                                                           '304', '1',
                                                                                                           '0', '0',
                                                                                                           '0000-00-00',
-    'admin@torrentpier.me', '', '', '', '', '', '', '', '', '', '', '', '0', '0.00', 'default');
+    'admin@torrentpier.com', '', '', '', '', '', '', '', '', '', '', '', '0', '0.00', 'default');
 
 -- ----------------------------
 -- Table structure for `bb_user_group`

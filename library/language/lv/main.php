@@ -2747,7 +2747,7 @@ $lang['SITEMAP_BING_1'] = 'Reģistrējiet savu vietnē <a href="https://www.bing
 $lang['SITEMAP_BING_2'] = 'Pievienot sitemap par vietnē jūs, kas reģistrēts tās uzstādījumi.';
 $lang['SITEMAP_ADD_TITLE'] = 'Papildu lapas sitemap';
 $lang['SITEMAP_ADD_PAGE'] = 'Papildu lapas';
-$lang['SITEMAP_ADD_EXP_1'] = 'Jūs varat norādīt papildu lapu uz jūsu vietni (piemēram, <b>http://torrentpier.mani/memberlist.php</b>), kas būtu jāiekļauj jūsu sitemap failu, kuru jūs radāt.';
+$lang['SITEMAP_ADD_EXP_1'] = 'Jūs varat norādīt papildu lapu jūsu vietnē, kas būtu jāiekļauj jūsu sitemap failu, kuru jūs radāt.';
 $lang['SITEMAP_ADD_EXP_2'] = 'Katra atsauce jāsāk ar http(s):// un jaunu līniju!';
 
 $lang['FORUM_MAP'] = 'Forums " kartes';

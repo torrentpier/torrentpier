@@ -2747,7 +2747,7 @@ $lang['SITEMAP_BING_1'] = 'Registrera din webbplats på <a href="https://www.bin
 $lang['SITEMAP_BING_2'] = 'Lägg till sajtkarta av webbplats du har registrerat i sina inställningar.';
 $lang['SITEMAP_ADD_TITLE'] = 'Ytterligare sidor för sitemap';
 $lang['SITEMAP_ADD_PAGE'] = 'Ytterligare sidor';
-$lang['SITEMAP_ADD_EXP_1'] = 'Du kan ange ytterligare sidor på din webbplats (till exempel, <b>http://torrentpier.mig/medlemslistan.php</b>) som bör ingå i din sitemap-fil som du skapar.';
+$lang['SITEMAP_ADD_EXP_1'] = 'Du kan ange ytterligare sidor på din webbplats som ska ingå i din sitemap-fil som du skapar.';
 $lang['SITEMAP_ADD_EXP_2'] = 'Varje referens måste börja med http(s):// och en ny linje!';
 
 $lang['FORUM_MAP'] = 'Forum\' karta';

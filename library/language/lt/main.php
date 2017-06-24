@@ -2747,7 +2747,7 @@ $lang['SITEMAP_BING_1'] = 'Užregistruokite savo svetainę <a href="https://www.
 $lang['SITEMAP_BING_2'] = 'Pridėti sitemap svetainėje, galite registruoti savo nustatymus.';
 $lang['SITEMAP_ADD_TITLE'] = 'Papildomi puslapiai sitemap';
 $lang['SITEMAP_ADD_PAGE'] = 'Papildomi puslapiai';
-$lang['SITEMAP_ADD_EXP_1'] = 'Jūs galite nurodyti papildomus puslapius į savo svetainę (pavyzdžiui, <b>http://torrentpier.mane/memberlist.php</b>), kuri turėtų būti įtraukta į jūsų svetainės failą, kad jums sukurti.';
+$lang['SITEMAP_ADD_EXP_1'] = 'Jūs galite nurodyti papildomus svetainės puslapius, kurie turėtų būti įtraukti į jūsų svetainės failą, kad jums sukurti.';
 $lang['SITEMAP_ADD_EXP_2'] = 'Kiekviena nuoroda turi prasidėti http(s):// ir naujos linijos!';
 
 $lang['FORUM_MAP'] = 'Forumuose " žemėlapį';

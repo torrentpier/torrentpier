@@ -2747,7 +2747,7 @@ $lang['SITEMAP_BING_1'] = '귀하의 사이트에 등록에서 <a href="https://
 $lang['SITEMAP_BING_2'] = '추가 사이트 맵의 사이트에 등록 설정합니다.';
 $lang['SITEMAP_ADD_TITLE'] = '추가 페이지가 사이트맵';
 $lang['SITEMAP_ADD_PAGE'] = '추가 페이지';
-$lang['SITEMAP_ADD_EXP_1'] = '지정할 수 있습니다 추가 페이지에서 당신의 사이트(예를 들어,<b>http://torrentpier 니다.me/memberlist 니다.php</b>)포함되어야하는 사이트에서 파일을 생성합니다.';
+$lang['SITEMAP_ADD_EXP_1'] = '지정할 수 있습니다 추가 페이지에서 당신의 사이트에 포함되어야하는 사이트맵 파일을 생성합니다.';
 $lang['SITEMAP_ADD_EXP_2'] = '각 참조로 시작해야 합 http(s)://고 새로운 라인!';
 
 $lang['FORUM_MAP'] = '포럼\'맵';

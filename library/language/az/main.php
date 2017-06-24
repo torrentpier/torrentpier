@@ -2747,7 +2747,7 @@ $lang['SITEMAP_BING_1'] = 'Qeydiyyatdan sizin sayta <a href="https://www.bing.co
 $lang['SITEMAP_BING_2'] = 'Əlavə fayl sitemap site, siz qeydiyyatdan ayarları.';
 $lang['SITEMAP_ADD_TITLE'] = 'Əlavə səhifə üçün site';
 $lang['SITEMAP_ADD_PAGE'] = 'Əlavə səhifə';
-$lang['SITEMAP_ADD_EXP_1'] = 'Siz qeyd edə əlavə səhifənin saytda (məsələn, <b>http://site torrentpier.məni/memberlist.php</b>) daxil olmaq sizin fayl sitemap ki, siz yaradırsınız.';
+$lang['SITEMAP_ADD_EXP_1'] = 'Siz qeyd edə əlavə səhifənin saytda olan daxil edilməlidir sizin fayl sitemap ki, siz yaradırsınız.';
 $lang['SITEMAP_ADD_EXP_2'] = 'Hər bir link ilə başlamalıdır http(s):// və yeni xətt!';
 
 $lang['FORUM_MAP'] = 'Kart forumların';

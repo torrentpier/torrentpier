@@ -2747,7 +2747,7 @@ $lang['SITEMAP_BING_1'] = 'Zaregistrujte svoje stránky na <a href="https://www.
 $lang['SITEMAP_BING_2'] = 'Pridať sitemap stránky máte registrované vo svojich nastaveniach.';
 $lang['SITEMAP_ADD_TITLE'] = 'Ďalšie stránky sitemap';
 $lang['SITEMAP_ADD_PAGE'] = 'Ďalšie stránky';
-$lang['SITEMAP_ADD_EXP_1'] = 'Môžete zadať ďalších stránok na vašej lokalite (napríklad <b>http://torrentpier.mi/memberlist.php</b>), ktoré by mali byť zahrnuté do vášho súboru sitemap súbor, ktorý chcete vytvoriť.';
+$lang['SITEMAP_ADD_EXP_1'] = 'Môžete zadať ďalších stránok na vašej lokalite, ktoré by mali byť zahrnuté do vášho súboru sitemap súbor, ktorý chcete vytvoriť.';
 $lang['SITEMAP_ADD_EXP_2'] = 'Každý odkaz musí začať s http(s):// nový riadok!';
 
 $lang['FORUM_MAP'] = 'Fórum\' mapa';

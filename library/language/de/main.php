@@ -2747,7 +2747,7 @@ $lang['SITEMAP_BING_1'] = 'Registrieren Sie Ihre Website bei <a href="https://ww
 $lang['SITEMAP_BING_2'] = 'Hinzufügen sitemap der Website, die Sie registriert, die in Ihren Einstellungen.';
 $lang['SITEMAP_ADD_TITLE'] = 'Weitere Seiten für die sitemap';
 $lang['SITEMAP_ADD_PAGE'] = 'Weitere Seiten';
-$lang['SITEMAP_ADD_EXP_1'] = 'Können Sie zusätzliche Seiten auf Ihrer Website (zum Beispiel, <b>http://torrentpier.mir/Memberliste.php</b>), die aufgenommen werden sollten in Ihrer XML-sitemap-Datei, die Sie erstellen.';
+$lang['SITEMAP_ADD_EXP_1'] = 'Sie können angeben, zusätzliche Seiten auf Ihrer Website enthalten sein sollten in Ihrer Xml-sitemap-Datei, die Sie erstellen.';
 $lang['SITEMAP_ADD_EXP_2'] = 'Jede Referenz muss beginnen mit http(s):// und eine neue Zeile!';
 
 $lang['FORUM_MAP'] = 'Foren " Karte';

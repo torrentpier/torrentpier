@@ -2747,7 +2747,7 @@ $lang['SITEMAP_BING_1'] = 'Zaregistrujte svůj web na <a href="https://www.bing.
 $lang['SITEMAP_BING_2'] = 'Přidat mapa stránek registrovaných v jeho nastavení.';
 $lang['SITEMAP_ADD_TITLE'] = 'Další stránky pro sitemap';
 $lang['SITEMAP_ADD_PAGE'] = 'Další stránky';
-$lang['SITEMAP_ADD_EXP_1'] = 'Můžete zadat další stránky na vašem webu (například, <b>http://torrentpier.mě se/seznam.php</b>), které by měly být zahrnuty v souboru sitemap soubor, který vytváříte.';
+$lang['SITEMAP_ADD_EXP_1'] = 'Můžete zadat další stránky na vašem webu, které by měly být zahrnuty v souboru sitemap soubor, který vytváříte.';
 $lang['SITEMAP_ADD_EXP_2'] = 'Každý odkaz musí začínat http(s):// a nový řádek!';
 
 $lang['FORUM_MAP'] = 'Fóra mapu';

@@ -2747,7 +2747,7 @@ $lang['SITEMAP_BING_1'] = 'Registra tvog sajta na <a href="https://www.bing.com/
 $lang['SITEMAP_BING_2'] = 'Dodaj mapa sajta na sajt ti registrovana u svom okruženju.';
 $lang['SITEMAP_ADD_TITLE'] = 'Dodatne stranice za mapa sajta';
 $lang['SITEMAP_ADD_PAGE'] = 'Dodatne stranice';
-$lang['SITEMAP_ADD_EXP_1'] = 'Možeš navesti dodatne stranica o tvom sajtu (na primjer, <b>http://torrentpier.mi/memberlist.php</b>) koje bi trebalo da bude uključen u tvoje mapa sajta fajl koji si stvorio.';
+$lang['SITEMAP_ADD_EXP_1'] = 'Možeš navesti dodatne stranica o tvom sajtu kojim treba uključiti u vaš mapa sajta fajl koji si stvorio.';
 $lang['SITEMAP_ADD_EXP_2'] = 'Svaki reference mora početi sa http(s):// i novu liniju!';
 
 $lang['FORUM_MAP'] = 'Forumima\' karta';

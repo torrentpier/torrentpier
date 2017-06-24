@@ -29,7 +29,7 @@ $confirmed = isset($_POST['confirm']);
  */
 $default_cfg_str = array(
     'off_reason' => 'Tracker is disabled',
-    'browser_redirect_url' => 'http://demo.torrentpier.me/',
+    'browser_redirect_url' => 'http://demo.torrentpier.com/',
 );
 
 $default_cfg_bool = array(

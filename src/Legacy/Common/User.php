@@ -241,7 +241,7 @@ class User
             $sql = "SELECT ban_id FROM " . BB_BANLIST . " WHERE $where_sql LIMIT 1";
 
             if (OLD_DB()->fetch_row($sql)) {
-                header('Location: https://torrentpier.me/banned/');
+                header('Location: https://torrentpier.com/banned/');
             }
         }
 
