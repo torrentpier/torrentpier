@@ -25,30 +25,30 @@
 
 return [
     // Common
-    'Captcha' => 'Captcha',
-    'Go back' => 'Go back',
-    'Send' => 'Send',
-    'Submit' => 'Submit',
+    'Captcha' => 'कैप्चा',
+    'Go back' => 'वापस जाओ',
+    'Send' => 'भेजना',
+    'Submit' => 'जमा करें',
 
     // Control panel
-    'Control panel' => 'Control panel',
+    'Control panel' => 'कंट्रोल पैनल',
 
     // Errors
-    'File not found: %location%' => 'File not found: %location%',
-    'Invalid request: not specified %data%' => 'Invalid request: not specified %data%',
+    'File not found: %location%' => 'फ़ाइल नहीं मिली: %location%',
+    'Invalid request: not specified %data%' => 'अमान्य अनुरोध: निर्दिष्ट नहीं %data%',
 
     // Feed (feed.php)
-    'Feed' => 'Feed',
-    'Do not specify a mode for the feed' => 'Do not specify a mode for the feed',
-    'This forum does not have a feed' => 'This forum does not have a feed',
-    'This user does not have a feed' => 'This user does not have a feed',
+    'Feed' => 'चारा',
+    'Do not specify a mode for the feed' => 'फ़ीड के लिए एक मोड निर्दिष्ट न करें',
+    'This forum does not have a feed' => 'इस मंच में एक फ़ीड नहीं है',
+    'This user does not have a feed' => 'इस उपयोगकर्ता में कोई फ़ीड नहीं है',
 
     // Style guide (styleguide.php)
-    'Hello, %name%' => 'Hello, %name%',
-    'Style guide' => 'Style guide',
+    'Hello, %name%' => 'हैलो, %name%',
+    'Style guide' => 'शैली गाइड',
 
     // Terms (terms.php)
-    'Only administrators see this line' => 'Only administrators see this line',
-    'Terms' => 'Terms',
-    'The text on this page can be edited in the' => 'The text on this page can be edited in the',
+    'Only administrators see this line' => 'केवल व्यवस्थापक ही रेखा देख सकते हैं',
+    'Terms' => 'शर्तें',
+    'The text on this page can be edited in the' => 'इस पृष्ठ पर पाठ को संपादित किया जा सकता है',
 ];
