@@ -60,7 +60,7 @@ switch ($mode) {
                 }
             }
             // Отключение регистрации
-            if ($bb_cfg['new_user_reg_disabled'] || ($bb_cfg['reg_email_activation'] && !$bb_cfg['emailer']['enabled'])) {
+            if ($bb_cfg['new_user_reg_disabled'] || ($bb_cfg['reg_email_activation'] && !config('email.enabled'))) {
                 bb_die($lang['NEW_USER_REG_DISABLED']);
             } // Ограничение по времени
             elseif ($bb_cfg['new_user_reg_restricted']) {
