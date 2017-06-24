@@ -2747,7 +2747,7 @@ $lang['SITEMAP_BING_1'] = 'Registra il tuo sito in <a href="https://www.bing.com
 $lang['SITEMAP_BING_2'] = 'Aggiungi sitemap del sito è registrato nelle sue impostazioni.';
 $lang['SITEMAP_ADD_TITLE'] = 'Pagine aggiuntive per la sitemap';
 $lang['SITEMAP_ADD_PAGE'] = 'Pagine aggiuntive';
-$lang['SITEMAP_ADD_EXP_1'] = 'È possibile specificare altre pagine del tuo sito (ad esempio, <b>http://torrentpier.mi/memberlist.php</b>) che devono essere inclusi nel file di sitemap che è la creazione.';
+$lang['SITEMAP_ADD_EXP_1'] = 'È possibile specificare altre pagine del tuo sito che dovrebbe essere incluso nel vostro file di sitemap che è la creazione.';
 $lang['SITEMAP_ADD_EXP_2'] = 'Ogni riferimento deve iniziare con http(s):// e una nuova linea!';
 
 $lang['FORUM_MAP'] = 'Forum " mappa';

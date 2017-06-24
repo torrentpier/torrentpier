@@ -2747,7 +2747,7 @@ $lang['SITEMAP_BING_1'] = 'Registrer dit websted på <a href="https://www.bing.c
 $lang['SITEMAP_BING_2'] = 'Tilføj sitemap websted, du er registreret på dens indstillinger.';
 $lang['SITEMAP_ADD_TITLE'] = 'Ekstra sider til sitemap';
 $lang['SITEMAP_ADD_PAGE'] = 'Ekstra sider';
-$lang['SITEMAP_ADD_EXP_1'] = 'Du kan angive yderligere sider på dit site (for eksempel, <b>http://torrentpier.mig/memberlist.php</b>), som bør indgå i din sitemap-fil, du opretter.';
+$lang['SITEMAP_ADD_EXP_1'] = 'Du kan angive ekstra sider på dit websted, som bør indgå i din sitemap-fil, du opretter.';
 $lang['SITEMAP_ADD_EXP_2'] = 'Hver reference skal starte med http(s):// og en ny linje!';
 
 $lang['FORUM_MAP'] = 'Fora\' kort';

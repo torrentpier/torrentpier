@@ -2747,7 +2747,7 @@ $lang['SITEMAP_BING_1'] = 'Registrirati svoje web stranice u <a href="https://ww
 $lang['SITEMAP_BING_2'] = 'Dodaj svoj sitemap stranice, ste registrirani u postavkama.';
 $lang['SITEMAP_ADD_TITLE'] = 'Dodatne stranice za web stranice';
 $lang['SITEMAP_ADD_PAGE'] = 'Dodatne stranice';
-$lang['SITEMAP_ADD_EXP_1'] = 'Možete navesti i dodatne stranice na vašoj web stranici (na primjer, <b>http://stranice torrentpier.me/memberlist.php</b>), koji bi trebali biti uključeni u vaš sitemap, koji ste stvorili.';
+$lang['SITEMAP_ADD_EXP_1'] = 'Možete navesti i dodatne stranice na vašoj web stranici, koji bi trebali biti uključeni u vaš sitemap, koji ste stvorili.';
 $lang['SITEMAP_ADD_EXP_2'] = 'Svaki link mora početi sa http(s):// i novu liniju!';
 
 $lang['FORUM_MAP'] = 'Karta foruma';

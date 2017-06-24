@@ -2747,7 +2747,7 @@ $lang['SITEMAP_BING_1'] = 'Registrar el seu lloc a <a href="https://www.bing.com
 $lang['SITEMAP_BING_2'] = 'Afegir el mapa de lloc que heu registrat en la seva configuració.';
 $lang['SITEMAP_ADD_TITLE'] = 'Pàgines addicionals per sitemap';
 $lang['SITEMAP_ADD_PAGE'] = 'Pàgines addicionals';
-$lang['SITEMAP_ADD_EXP_1'] = 'Podeu especificar altres pàgines al vostre lloc web (per exemple, <b>http://torrentpier.m\'/memberlist.php</b>) que han de ser inclosos en el vostre fitxer de sitemap que vostè de crear.';
+$lang['SITEMAP_ADD_EXP_1'] = 'Podeu especificar altres pàgines del vostre lloc que han de ser inclosos en el vostre fitxer de sitemap que vostè de crear.';
 $lang['SITEMAP_ADD_EXP_2'] = 'Cada referència s\'ha de començar amb http(s):// i una nova línia!';
 
 $lang['FORUM_MAP'] = 'Fòrums mapa';

@@ -2747,7 +2747,7 @@ $lang['SITEMAP_BING_1'] = 'Zarejestrować swoją stronę w <a href="https://www.
 $lang['SITEMAP_BING_2'] = 'Dodaj plik mapy witryny, zarejestrowany w ustawieniach.';
 $lang['SITEMAP_ADD_TITLE'] = 'Dodatkowe strony do strony';
 $lang['SITEMAP_ADD_PAGE'] = 'Dodatkowe strony';
-$lang['SITEMAP_ADD_EXP_1'] = 'Można określić dodatkowe strony na swojej stronie (na przykład, <b>http://www torrentpier.mnie/memberlist.php</b>), które muszą być zawarte w twój plik sitemap, który tworzysz.';
+$lang['SITEMAP_ADD_EXP_1'] = 'Można określić dodatkowe strony na swojej stronie internetowej, które powinny być zawarte w twój plik sitemap, który tworzysz.';
 $lang['SITEMAP_ADD_EXP_2'] = 'Każdy link musi zaczynać się od http(s):// i nowej linii!';
 
 $lang['FORUM_MAP'] = 'Mapa forum';

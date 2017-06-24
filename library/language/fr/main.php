@@ -2747,7 +2747,7 @@ $lang['SITEMAP_BING_1'] = 'L\'inscription de votre site à <a href="https://www.
 $lang['SITEMAP_BING_2'] = 'Ajouter un sitemap du site que vous avez enregistré dans ses paramètres.';
 $lang['SITEMAP_ADD_TITLE'] = 'Des pages supplémentaires pour sitemap';
 $lang['SITEMAP_ADD_PAGE'] = 'Des pages supplémentaires';
-$lang['SITEMAP_ADD_EXP_1'] = 'Vous pouvez spécifier d\'autres pages de votre site (par exemple, <b>http://torrentpier.me/liste des membres.php</b>) qui devraient être inclus dans votre fichier sitemap que vous créez.';
+$lang['SITEMAP_ADD_EXP_1'] = 'Vous pouvez spécifier d\'autres pages de votre site, qui doit être inclus dans votre fichier sitemap que vous créez.';
 $lang['SITEMAP_ADD_EXP_2'] = 'Chaque référence doit commencer par http(s):// et une nouvelle ligne!';
 
 $lang['FORUM_MAP'] = 'Forums de la carte';

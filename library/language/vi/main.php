@@ -2747,7 +2747,7 @@ $lang['SITEMAP_BING_1'] = 'Đăng ký trang web của bạn ở <a href="https:/
 $lang['SITEMAP_BING_2'] = 'Thêm đồ trang web của bạn đăng ký tại các thiết lập của nó.';
 $lang['SITEMAP_ADD_TITLE'] = 'Trang bổ sung cho sơ đồ';
 $lang['SITEMAP_ADD_PAGE'] = 'Các trang khác';
-$lang['SITEMAP_ADD_EXP_1'] = 'Bạn có thể xác định trang khác trên trang web của bạn (ví dụ, <b>http://torrentpier.tôi giữ.php</b>) đó nên bao gồm trong sơ đồ trang web của tập tin rằng anh tạo ra.';
+$lang['SITEMAP_ADD_EXP_1'] = 'Bạn có thể xác định trang khác trên trang web của bạn mà nên bao gồm trong sơ đồ trang web của tập tin rằng anh tạo ra.';
 $lang['SITEMAP_ADD_EXP_2'] = 'Mỗi tài liệu tham khảo phải bắt đầu với http(s):// và một dòng mới!';
 
 $lang['FORUM_MAP'] = 'Các diễn đàn\' bản đồ';

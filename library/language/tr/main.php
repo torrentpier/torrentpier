@@ -2747,7 +2747,7 @@ $lang['SITEMAP_BING_1'] = '<a href="https://www.bing.com/webmaster/" target="_bl
 $lang['SITEMAP_BING_2'] = 'Kendi ayarları kayıtlı site haritası ekleyebilirsiniz.';
 $lang['SITEMAP_ADD_TITLE'] = 'Site için ek sayfalar';
 $lang['SITEMAP_ADD_PAGE'] = 'Ek sayfalar';
-$lang['SITEMAP_ADD_EXP_1'] = '(Örneğin, <b>http://torrentpier sitenizde ek sayfaları belirtebilirsiniz./üye listesi.oluşturma bu site haritası dosyanızın dahil edilmesi gereken php</b>).';
+$lang['SITEMAP_ADD_EXP_1'] = 'Oluşturma bu site haritası dosyanızın dahil edilmesi gereken sitenizde ek sayfaları belirtebilirsiniz.';
 $lang['SITEMAP_ADD_EXP_2'] = 'Her referans(ler) http:// ve yeni bir çizgi ile başlamalıdır.';
 
 $lang['FORUM_MAP'] = 'Forum göster';

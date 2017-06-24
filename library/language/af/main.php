@@ -2747,7 +2747,7 @@ $lang['SITEMAP_BING_1'] = 'Registreer jou webwerf by <a href="https://www.bing.c
 $lang['SITEMAP_BING_2'] = 'Voeg sitemap van die webwerf wat jy in sy instellings geregistreer het, by.';
 $lang['SITEMAP_ADD_TITLE'] = 'Bykomende bladsye vir sitemap';
 $lang['SITEMAP_ADD_PAGE'] = 'Bykomende bladsye';
-$lang['SITEMAP_ADD_EXP_1'] = 'U kan addisionele bladsye op u webwerf spesifiseer (byvoorbeeld <b>http: //torrentpier.me/memberlist.php</b>) wat ingesluit moet word in u sitemaplêer wat u skep.';
+$lang['SITEMAP_ADD_EXP_1'] = 'U kan addisionele bladsye op u werf spesifiseer wat ingesluit moet word in u sitemap-lêer wat u skep.';
 $lang['SITEMAP_ADD_EXP_2'] = 'Elke verwysing moet begin met http (s): // en \'n nuwe reël!';
 
 $lang['FORUM_MAP'] = 'Forums \'kaart';

@@ -2747,7 +2747,7 @@ $lang['SITEMAP_BING_1'] = 'Het registreren van uw site bij <a href="https://www.
 $lang['SITEMAP_BING_2'] = 'Toevoegen sitemap van de site die u geregistreerd heeft in haar instellingen.';
 $lang['SITEMAP_ADD_TITLE'] = 'Extra pagina \' s voor-sitemap';
 $lang['SITEMAP_ADD_PAGE'] = 'Extra pagina \' s';
-$lang['SITEMAP_ADD_EXP_1'] = 'U kunt extra pagina \' s op uw site (bijvoorbeeld, <b>http://torrentpier.me/ledenlijst.php</b>) die moet worden opgenomen in uw sitemap-bestand dat u maakt.';
+$lang['SITEMAP_ADD_EXP_1'] = 'U kunt extra pagina \' s op uw website die moeten worden opgenomen in uw sitemap-bestand dat u maakt.';
 $lang['SITEMAP_ADD_EXP_2'] = 'Elke referentie moet beginnen met http(s):// en een nieuwe lijn!';
 
 $lang['FORUM_MAP'] = 'Forums\' kaart';

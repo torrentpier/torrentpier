@@ -2747,7 +2747,7 @@ $lang['SITEMAP_BING_1'] = 'Daftarkan situs anda di <a href="https://www.bing.com
 $lang['SITEMAP_BING_2'] = 'Menambahkan sitemap situs anda terdaftar dalam pengaturannya.';
 $lang['SITEMAP_ADD_TITLE'] = 'Halaman tambahan untuk sitemap';
 $lang['SITEMAP_ADD_PAGE'] = 'Halaman tambahan';
-$lang['SITEMAP_ADD_EXP_1'] = 'Anda dapat menentukan tambahan halaman di situs anda (misalnya, <b>http://torrentpier.me/anggota.php</b>) yang harus disertakan dalam file sitemap yang anda buat.';
+$lang['SITEMAP_ADD_EXP_1'] = 'Anda dapat menentukan tambahan halaman di situs anda yang harus disertakan dalam file sitemap yang anda buat.';
 $lang['SITEMAP_ADD_EXP_2'] = 'Setiap referensi harus dimulai dengan http(s):// dan baris baru!';
 
 $lang['FORUM_MAP'] = 'Forum peta';

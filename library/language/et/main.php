@@ -2747,7 +2747,7 @@ $lang['SITEMAP_BING_1'] = 'Registreeri oma sait kell <a href="https://www.bing.c
 $lang['SITEMAP_BING_2'] = 'Lisada sitemap saidi registreerisite oma seaded.';
 $lang['SITEMAP_ADD_TITLE'] = 'Täiendavaid lehekülgi sitemap';
 $lang['SITEMAP_ADD_PAGE'] = 'Täiendavad leheküljed';
-$lang['SITEMAP_ADD_EXP_1'] = 'Saate määrata täiendavaid lehekülge oma ala (näiteks, <b>http://torrentpier.me/memberlist.php</b>), mis tuleks lisada oma sitemap faili luua.';
+$lang['SITEMAP_ADD_EXP_1'] = 'Saate määrata täiendavaid lehekülgi saidile, mis tuleks lisada oma sitemap faili luua.';
 $lang['SITEMAP_ADD_EXP_2'] = 'Iga viide peab algama http(s):// ja uut rida!';
 
 $lang['FORUM_MAP'] = 'Foorumid\' kaart';

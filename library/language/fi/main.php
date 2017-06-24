@@ -2747,7 +2747,7 @@ $lang['SITEMAP_BING_1'] = 'Rekisteröidy sivuston milloin <a href="https://www.b
 $lang['SITEMAP_BING_2'] = 'Lisää sivukartta sivuston olet rekisteröitynyt sen asetukset.';
 $lang['SITEMAP_ADD_TITLE'] = 'Lisää sivuja sivukartta';
 $lang['SITEMAP_ADD_PAGE'] = 'Lisää sivuja';
-$lang['SITEMAP_ADD_EXP_1'] = 'Voit määrittää muita sivuja sivustosi (esimerkiksi <b>http://torrentpier.minua/käyttäjälistaa.php</b>), joka olisi sisällytettävä teidän sivustokarttatiedoston, että olet luomassa.';
+$lang['SITEMAP_ADD_EXP_1'] = 'Voit määrittää muita sivuja sivustosi, joka olisi sisällytettävä teidän sivustokarttatiedoston, että olet luomassa.';
 $lang['SITEMAP_ADD_EXP_2'] = 'Jokainen viittaus täytyy alkaa http(s):// ja uusi linja!';
 
 $lang['FORUM_MAP'] = 'Foorumeita kartta';

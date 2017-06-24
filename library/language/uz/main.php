@@ -2747,7 +2747,7 @@ $lang['SITEMAP_BING_1'] = 'Microsoft hisob qaydnomasidan foydalanib <a href="htt
 $lang['SITEMAP_BING_2'] = 'Agar uning sozlash ro\'yxatdan sayt Sayt xaritasi qo\'shing.';
 $lang['SITEMAP_ADD_TITLE'] = 'Sitemap uchun qo\'shimcha sahifalar';
 $lang['SITEMAP_ADD_PAGE'] = 'Qo\'shimcha sahifalar';
-$lang['SITEMAP_ADD_EXP_1'] = 'Agar yaratish sizning Sayt xaritasi fayli kiritilgan bo\'lishi kerak: (//torrentpier.me/memberlist.php</b> masalan, <b>http) Siz saytida qo\'shimcha sahifalarni ko\'rsatish mumkin.';
+$lang['SITEMAP_ADD_EXP_1'] = 'Siz yaratish sizning Sayt xaritasi fayli kiritilishi kerak saytida bo\'yicha qo\'shimcha sahifalarni ko\'rsatish mumkin.';
 $lang['SITEMAP_ADD_EXP_2'] = '// va yangi liniyasi: Har yozuvlar http (lar) bilan boshlash kerak!';
 
 $lang['FORUM_MAP'] = 'Forumlar xaritasi';
