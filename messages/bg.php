@@ -35,13 +35,13 @@ return [
 
     // Errors
     'File not found: %location%' => 'Файлът не е намерен: %location%',
-    'Invalid request: not specified %data%' => 'Invalid request: not specified %data%',
+    'Invalid request: not specified %data%' => 'Невалидна заявка: не е посочено %data%',
 
     // Feed (feed.php)
-    'Feed' => 'Feed',
-    'Do not specify a mode for the feed' => 'Do not specify a mode for the feed',
-    'This forum does not have a feed' => 'This forum does not have a feed',
-    'This user does not have a feed' => 'This user does not have a feed',
+    'Feed' => 'Да се хранят',
+    'Do not specify a mode for the feed' => 'Не е указан режим за храна',
+    'This forum does not have a feed' => 'Този форум не е да се хранят',
+    'This user does not have a feed' => 'Този потребител не е храна',
 
     // Style guide (styleguide.php)
     'Hello, %name%' => 'Здравей, %name%',
