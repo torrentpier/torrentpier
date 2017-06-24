@@ -25,30 +25,30 @@
 
 return [
     // Common
-    'Captcha' => 'Captcha',
-    'Go back' => 'Go back',
-    'Send' => 'Send',
-    'Submit' => 'Submit',
+    'Captcha' => 'Капча',
+    'Go back' => 'Վերադառնալ',
+    'Send' => 'Ուղարկել',
+    'Submit' => 'Ներկայացնել',
 
     // Control panel
-    'Control panel' => 'Control panel',
+    'Control panel' => 'Կառավարման վահանակ',
 
     // Errors
-    'File not found: %location%' => 'File not found: %location%',
-    'Invalid request: not specified %data%' => 'Invalid request: not specified %data%',
+    'File not found: %location%' => 'Ֆայլը չի գտնվել: %location%',
+    'Invalid request: not specified %data%' => 'Սխալ հարցմանը: չի նշված %data%',
 
     // Feed (feed.php)
-    'Feed' => 'Feed',
-    'Do not specify a mode for the feed' => 'Do not specify a mode for the feed',
-    'This forum does not have a feed' => 'This forum does not have a feed',
-    'This user does not have a feed' => 'This user does not have a feed',
+    'Feed' => 'Կերակրել',
+    'Do not specify a mode for the feed' => 'Նշված ռեժիմը համար կեր',
+    'This forum does not have a feed' => 'Այս համաժողովը չի կերակրել',
+    'This user does not have a feed' => 'Այս օգտվողը չունի սննդի',
 
     // Style guide (styleguide.php)
-    'Hello, %name%' => 'Hello, %name%',
-    'Style guide' => 'Style guide',
+    'Hello, %name%' => 'Բարև ձեզ, %name%',
+    'Style guide' => 'Գիդ-ի ոճին',
 
     // Terms (terms.php)
-    'Only administrators see this line' => 'Only administrators see this line',
-    'Terms' => 'Terms',
-    'The text on this page can be edited in the' => 'The text on this page can be edited in the',
+    'Only administrators see this line' => 'Միայն ադմինիստրատորները տեսնում այդ գիծը',
+    'Terms' => 'Պայմաններ',
+    'The text on this page can be edited in the' => 'Այս էջի տեքստը կարող է խմբագրվել է',
 ];
