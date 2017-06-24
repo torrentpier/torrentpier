@@ -24,6 +24,6 @@ function execute_posting_attachment_handling()
 {
     global $attachment_mod;
 
-    $attachment_mod['posting'] = new TP\Legacy\AttachPosting();
+    $attachment_mod['posting'] = new TorrentPier\Legacy\AttachPosting();
     $attachment_mod['posting']->posting_attachment_mod();
 }

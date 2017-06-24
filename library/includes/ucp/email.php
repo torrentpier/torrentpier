@@ -53,8 +53,8 @@ if ($row = OLD_DB()->fetch_row($sql)) {
         }
 
         if (!$errors) {
-            /** @var TP\Legacy\Emailer() $emailer */
-            $emailer = new TP\Legacy\Emailer();
+            /** @var TorrentPier\Legacy\Emailer() $emailer */
+            $emailer = new TorrentPier\Legacy\Emailer();
 
             $emailer->set_from([$userdata['user_email'] => $userdata['username']]);
             $emailer->set_to([$user_email => $username]);

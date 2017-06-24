@@ -116,7 +116,7 @@ if ($bb_cfg['bugsnag']['enabled']) {
 /**
  * Database
  */
-$DBS = new TP\Legacy\Dbs($bb_cfg);
+$DBS = new TorrentPier\Legacy\Dbs($bb_cfg);
 
 function OLD_DB($db_alias = 'db')
 {
@@ -127,7 +127,7 @@ function OLD_DB($db_alias = 'db')
 /**
  * Cache
  */
-$CACHES = new TP\Legacy\Caches($bb_cfg);
+$CACHES = new TorrentPier\Legacy\Caches($bb_cfg);
 
 function OLD_CACHE($cache_name)
 {
@@ -140,7 +140,7 @@ function OLD_CACHE($cache_name)
  */
 switch ($bb_cfg['datastore_type']) {
     case 'memcache':
-        $datastore = new TP\Legacy\Datastore\Memcache($bb_cfg['cache']['memcache'], $bb_cfg['cache']['prefix']);
+        $datastore = new TorrentPier\Legacy\Datastore\Memcache($bb_cfg['cache']['memcache'], $bb_cfg['cache']['prefix']);
         break;
 
     case 'sqlite':
@@ -149,24 +149,24 @@ switch ($bb_cfg['datastore_type']) {
             'pconnect' => true,
             'con_required' => true,
         );
-        $datastore = new TP\Legacy\Datastore\Sqlite($default_cfg, $bb_cfg['cache']['prefix']);
+        $datastore = new TorrentPier\Legacy\Datastore\Sqlite($default_cfg, $bb_cfg['cache']['prefix']);
         break;
 
     case 'redis':
-        $datastore = new TP\Legacy\Datastore\Redis($bb_cfg['cache']['redis'], $bb_cfg['cache']['prefix']);
+        $datastore = new TorrentPier\Legacy\Datastore\Redis($bb_cfg['cache']['redis'], $bb_cfg['cache']['prefix']);
         break;
 
     case 'apc':
-        $datastore = new TP\Legacy\Datastore\Apc($bb_cfg['cache']['prefix']);
+        $datastore = new TorrentPier\Legacy\Datastore\Apc($bb_cfg['cache']['prefix']);
         break;
 
     case 'xcache':
-        $datastore = new TP\Legacy\Datastore\Xcache($bb_cfg['cache']['prefix']);
+        $datastore = new TorrentPier\Legacy\Datastore\Xcache($bb_cfg['cache']['prefix']);
         break;
 
     case 'filecache':
     default:
-        $datastore = new TP\Legacy\Datastore\File($bb_cfg['cache']['db_dir'] . 'datastore/', $bb_cfg['cache']['prefix']);
+        $datastore = new TorrentPier\Legacy\Datastore\File($bb_cfg['cache']['db_dir'] . 'datastore/', $bb_cfg['cache']['prefix']);
 }
 
 require_once __DIR__ . '/bootstrap.php';

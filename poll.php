@@ -22,7 +22,7 @@ $return_topic_url .= !empty($_POST['start']) ? "&amp;start=" . (int)$_POST['star
 
 set_die_append_msg($forum_id, $topic_id);
 
-$poll = new TP\Legacy\Poll();
+$poll = new TorrentPier\Legacy\Poll();
 
 // проверка валидности $topic_id
 if (!$topic_id) {

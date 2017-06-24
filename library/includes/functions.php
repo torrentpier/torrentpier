@@ -1089,7 +1089,7 @@ function setup_style()
         }
     }
 
-    $template = new TP\Legacy\Template(TEMPLATES_DIR . '/' . $tpl_dir_name);
+    $template = new TorrentPier\Legacy\Template(TEMPLATES_DIR . '/' . $tpl_dir_name);
     $css_dir = 'styles/' . basename(TEMPLATES_DIR) . '/' . $tpl_dir_name . '/css/';
 
     $template->assign_vars(array(
@@ -1341,7 +1341,7 @@ function bb_die($msg_text)
     // If the header hasn't been output then do it
     if (!defined('PAGE_HEADER_SENT')) {
         if (empty($template)) {
-            $template = new TP\Legacy\Template(BB_ROOT . "templates/{$bb_cfg['tpl_name']}");
+            $template = new TorrentPier\Legacy\Template(BB_ROOT . "templates/{$bb_cfg['tpl_name']}");
         }
         if (empty($theme)) {
             $theme = setup_style();

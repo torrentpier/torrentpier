@@ -36,7 +36,7 @@ if (!$tor = \Rych\Bencode\Bencode::decode($file_contents)) {
     return $lang['TORFILE_INVALID'];
 }
 
-$torrent = new TP\Legacy\TorrentFileList($tor);
+$torrent = new TorrentPier\Legacy\TorrentFileList($tor);
 $tor_filelist = $torrent->get_filelist();
 
 $this->response['html'] = $tor_filelist;

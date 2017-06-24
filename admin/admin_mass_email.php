@@ -61,8 +61,8 @@ if (isset($_POST['submit'])) {
         }
 
         foreach ($user_list as $i => $row) {
-            /** @var TP\Legacy\Emailer() $emailer */
-            $emailer = new TP\Legacy\Emailer();
+            /** @var TorrentPier\Legacy\Emailer() $emailer */
+            $emailer = new TorrentPier\Legacy\Emailer();
 
             $emailer->set_from([$bb_cfg['board_email'] => $bb_cfg['sitename']]);
             $emailer->set_to([$row['user_email'] => $row['username']]);

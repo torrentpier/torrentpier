@@ -47,8 +47,8 @@ if (isset($_POST['submit'])) {
                 bb_die('Could not update new password information');
             }
 
-            /** @var TP\Legacy\Emailer() $emailer */
-            $emailer = new TP\Legacy\Emailer();
+            /** @var TorrentPier\Legacy\Emailer() $emailer */
+            $emailer = new TorrentPier\Legacy\Emailer();
 
             $emailer->set_from([$bb_cfg['board_email'] => $bb_cfg['sitename']]);
             $emailer->set_to([$row['user_email'] => $username]);
