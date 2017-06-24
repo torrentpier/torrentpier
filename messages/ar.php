@@ -26,29 +26,29 @@
 return [
     // Common
     'Captcha' => 'Captcha',
-    'Go back' => 'Go back',
+    'Go back' => 'العودة',
     'Send' => 'إرسال',
-    'Submit' => 'Submit',
+    'Submit' => 'تقدم',
 
     // Control panel
-    'Control panel' => 'Control panel',
+    'Control panel' => 'لوحة التحكم',
 
     // Errors
-    'File not found: %location%' => 'File not found: %location%',
-    'Invalid request: not specified %data%' => 'Invalid request: not specified %data%',
+    'File not found: %location%' => 'لم يتم العثور على الملف: %location%',
+    'Invalid request: not specified %data%' => 'طلب غير صالح: غير محدد %data%',
 
     // Feed (feed.php)
-    'Feed' => 'Feed',
-    'Do not specify a mode for the feed' => 'Do not specify a mode for the feed',
-    'This forum does not have a feed' => 'This forum does not have a feed',
-    'This user does not have a feed' => 'This user does not have a feed',
+    'Feed' => 'تغذية',
+    'Do not specify a mode for the feed' => 'لم تحدد وضع العلف',
+    'This forum does not have a feed' => 'هذا المنتدى لا يوجد تغذية',
+    'This user does not have a feed' => 'هذا المستخدم ليس لديه تغذية',
 
     // Style guide (styleguide.php)
     'Hello, %name%' => 'مرحبا، %name%',
     'Style guide' => 'دليل أسلوب',
 
     // Terms (terms.php)
-    'Only administrators see this line' => 'Only administrators see this line',
-    'Terms' => 'Terms',
-    'The text on this page can be edited in the' => 'The text on this page can be edited in the',
+    'Only administrators see this line' => 'للمسؤولين فقط ترى هذا الخط',
+    'Terms' => 'حيث',
+    'The text on this page can be edited in the' => 'النص في هذه الصفحة يمكن تحريرها في',
 ];
