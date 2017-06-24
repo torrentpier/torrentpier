@@ -26,29 +26,29 @@
 return [
     // Common
     'Captcha' => 'Captcha',
-    'Go back' => 'Go back',
-    'Send' => 'Send',
-    'Submit' => 'Submit',
+    'Go back' => 'Grįžti atgal',
+    'Send' => 'Siųsti',
+    'Submit' => 'Pateikti',
 
     // Control panel
-    'Control panel' => 'Control panel',
+    'Control panel' => 'Valdymo skydelis',
 
     // Errors
-    'File not found: %location%' => 'File not found: %location%',
-    'Invalid request: not specified %data%' => 'Invalid request: not specified %data%',
+    'File not found: %location%' => 'Failas nerastas: %location%',
+    'Invalid request: not specified %data%' => 'Netinkama užklausa: nenurodytas %data%',
 
     // Feed (feed.php)
-    'Feed' => 'Feed',
-    'Do not specify a mode for the feed' => 'Do not specify a mode for the feed',
-    'This forum does not have a feed' => 'This forum does not have a feed',
-    'This user does not have a feed' => 'This user does not have a feed',
+    'Feed' => 'Pašarų',
+    'Do not specify a mode for the feed' => 'Nėra nurodyta režimas pašarų',
+    'This forum does not have a feed' => 'Šis forumas neturi pašarų',
+    'This user does not have a feed' => 'Šis vartotojas neturi pašarų',
 
     // Style guide (styleguide.php)
-    'Hello, %name%' => 'Hello, %name%',
-    'Style guide' => 'Style guide',
+    'Hello, %name%' => 'Sveiki, %name%',
+    'Style guide' => 'Stiliaus vadovas',
 
     // Terms (terms.php)
-    'Only administrators see this line' => 'Only administrators see this line',
-    'Terms' => 'Terms',
-    'The text on this page can be edited in the' => 'The text on this page can be edited in the',
+    'Only administrators see this line' => 'Tik administratoriai žr. šios linijos',
+    'Terms' => 'Sąlygos',
+    'The text on this page can be edited in the' => 'Tekstas šiame puslapyje galima redaguoti',
 ];
