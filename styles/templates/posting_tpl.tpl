@@ -119,7 +119,7 @@ var TPL = {
 		// значения для автозаполнителя формы. если не определено, то заполняется названием
 
 		year        : 2011,
-		poster      : 'https://demo.torrentpier.me/styles/images/logo/logo.pngs',
+		poster      : 'https://demo.torrentpier.com/styles/images/logo/logo.png',
 		screenshots : 'http://img462.imageshack.us/img462/8360/snapshot20070911141251ee8.png\n[img]http://img513.imageshack.us/img513/7226/snapshot20070911141324ey9.png[/img]\nhttp://img513.imageshack.us/img513/2809/snapshot20070911141335tt2.png\n[img]http://img211.imageshack.us/img211/2936/snapshot20070911141603ew2.png[/img]',
 
 		// dummy

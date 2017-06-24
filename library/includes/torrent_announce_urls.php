@@ -30,7 +30,7 @@ if (!defined('BB_ROOT')) {
 $announce_urls = array();
 
 // Here you can define additional allowed announce urls
-// For example, if you want to add http://demo.torrentpier.me
-// add this line: $announce_urls[] = 'http://demo.torrentpier.me/bt/announce.php';
+// For example, if you want to add http://demo.torrentpier.com
+// add this line: $announce_urls[] = 'http://demo.torrentpier.com/bt/announce.php';
 
-// $announce_urls[] = 'http://demo.torrentpier.me/bt/announce.php';
+// $announce_urls[] = 'http://demo.torrentpier.com/bt/announce.php';

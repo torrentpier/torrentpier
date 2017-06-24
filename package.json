@@ -4,7 +4,7 @@
   "description": "Bull-powered BitTorrent tracker engine",
   "main": "index.js",
   "repository": "git@github.com:torrentpier/torrentpier.git",
-  "author": "Exile <admin@torrentpier.me>",
+  "author": "Exile <admin@torrentpier.com>",
   "license": "MIT",
   "dependencies": {
     "jquery": "^3.2.1"
