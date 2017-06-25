@@ -591,8 +591,8 @@ class User
         /** Place user language to the global */
         global $lang;
         require(LANG_DIR . 'main.php');
-        setlocale(LC_ALL, isset($bb_cfg['lang'][$this->data['user_lang']]['locale']) ?
-            $bb_cfg['lang'][$this->data['user_lang']]['locale'] : 'en_US.UTF-8');
+
+        setlocale(LC_ALL, config('language.lang.' . $this->data['user_lang'] . '.locale') ?? 'en_US.UTF-8');
 
         $theme = setup_style();
         $DeltaTime = new DateDelta();

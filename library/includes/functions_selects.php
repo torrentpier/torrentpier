@@ -16,12 +16,10 @@ if (!defined('BB_ROOT')) {
 //
 function language_select($default_lang, $select_name = 'language')
 {
-    global $bb_cfg;
-
-    $lang_default = reset($bb_cfg['lang']);
+    $lang_default = config('language.lang');
     $lang_select = '<select name="' . $select_name . '">';
     $x = 0;
-    foreach ($bb_cfg['lang'] as $key => $data) {
+    foreach (config('language.lang') as $key => $data) {
         $selected = '';
         if ($key == $default_lang) {
             $selected = ' selected="selected"';
@@ -30,7 +28,7 @@ function language_select($default_lang, $select_name = 'language')
         $x++;
     }
     $lang_select .= '</select>';
-    return ($x > 1) ? $lang_select : $lang_default['name'];
+    return ($x > 1) ? $lang_select : reset($lang_default)['name'];
 }
 
 //
