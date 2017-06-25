@@ -164,7 +164,7 @@ class Emailer
     {
         global $bb_cfg, $lang, $userdata;
 
-        if (!$bb_cfg['emailer']['enabled']) {
+        if (!config('email.enabled')) {
             return false;
         }
 
@@ -180,25 +180,25 @@ class Emailer
         $this->encoding = config('language.charset');
 
         /** Prepare message */
-        if ($bb_cfg['emailer']['smtp']['enabled']) {
-            if (!empty($bb_cfg['emailer']['smtp']['host'])) {
-                if (empty($bb_cfg['emailer']['ssl_type'])) {
+        if (config('email.smtp.enabled')) {
+            if (!empty(config('email.smtp.host'))) {
+                if (empty(config('email.ssl_type'))) {
                     /** @var Swift_SmtpTransport $transport external SMTP without ssl */
                     $transport = (new Swift_SmtpTransport(
-                        $bb_cfg['emailer']['smtp']['host'],
-                        $bb_cfg['emailer']['smtp']['port']
+                        config('email.smtp.host'),
+                        config('email.smtp.port')
                     ))
-                        ->setUsername($bb_cfg['emailer']['smtp']['username'])
-                        ->setPassword($bb_cfg['emailer']['smtp']['password']);
+                        ->setUsername(config('email.smtp.username'))
+                        ->setPassword(config('email.smtp.password'));
                 } else {
                     /** @var Swift_SmtpTransport $transport external SMTP with ssl */
                     $transport = (new Swift_SmtpTransport(
-                        $bb_cfg['emailer']['smtp']['host'],
-                        $bb_cfg['emailer']['smtp']['port'],
-                        $bb_cfg['emailer']['ssl_type']
+                        config('email.smtp.host'),
+                        config('email.smtp.port'),
+                        config('email.ssl_type')
                     ))
-                        ->setUsername($bb_cfg['emailer']['smtp']['username'])
-                        ->setPassword($bb_cfg['emailer']['smtp']['password']);
+                        ->setUsername(config('email.smtp.username'))
+                        ->setPassword(config('email.smtp.password'));
                 }
             } else {
                 /** @var Swift_SmtpTransport $transport local SMTP */

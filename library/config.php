@@ -183,18 +183,6 @@ $bb_cfg['new_user_reg_restricted'] = false; // Ограничить регист
 $bb_cfg['reg_email_activation'] = true; // Требовать активацию учетной записи по email
 
 // Email
-$bb_cfg['emailer'] = [
-    'enabled' => true,
-    'smtp' => [
-        'enabled' => false, // send email via external SMTP server
-        'host' => '', // SMTP server host
-        'port' => 25, // SMTP server port
-        'username' => '', // SMTP username (if server requires it)
-        'password' => '', // SMTP password (if server requires it)
-    ],
-    'ssl_type' => '', // SMTP ssl type (ssl or tls)
-];
-
 $bb_cfg['board_email'] = "noreply@$domain_name"; // admin email address
 $bb_cfg['board_email_form'] = false; // can users send email to each other via board
 $bb_cfg['board_email_sig'] = ''; // this text will be attached to all emails the board sends
@@ -393,23 +381,6 @@ $bb_cfg['atom'] = [
 $bb_cfg['nofollow'] = [
     'disabled' => false,
     'allowed_url' => [$domain_name], // 'allowed.site', 'www.allowed.site'
-];
-
-// Page settings
-$bb_cfg['page'] = [
-    'show_torhelp' => [
-        #BB_SCRIPT => true
-        'index' => true,
-        'tracker' => true,
-    ],
-    'show_sidebar1' => [
-        #BB_SCRIPT => true
-        'index' => true,
-    ],
-    'show_sidebar2' => [
-        #BB_SCRIPT => true
-        'index' => true,
-    ]
 ];
 
 // Tracker settings

@@ -13,7 +13,7 @@ if (!defined('BB_ROOT')) {
 
 set_die_append_msg();
 
-if (!$bb_cfg['emailer']['enabled']) {
+if (!config('email.enabled')) {
     bb_die($lang['EMAILER_DISABLED']);
 }
 
