@@ -205,6 +205,8 @@ $template->assign_vars(array(
     'READONLY' => HTML_READONLY,
     'SELECTED' => HTML_SELECTED,
 
+    'GS_ENABLED' => config('tracker.gold_silver_enabled'),
+
     'U_SEARCH_SELF_BY_LAST' => "search.php?uid={$userdata['user_id']}&amp;o=5",
     'U_WATCHED_TOPICS' => "profile.php?mode=watch",
 ));

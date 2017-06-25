@@ -355,7 +355,7 @@ function tracker_register($attach_id, $mode = '', $tor_status = TOR_NOT_APPROVED
         }
     }
 
-    if ($bb_cfg['tracker']['tor_topic_up']) {
+    if (config('tracker.tor_topic_up')) {
         OLD_DB()->query("UPDATE " . BB_TOPICS . " SET topic_last_post_time = GREATEST(topic_last_post_time, " . (TIMENOW - 3 * 86400) . ") WHERE topic_id = $topic_id");
     }
 
@@ -463,15 +463,18 @@ function send_torrent_with_passkey($filename)
     }
 
     // Add retracker
-    if (isset($bb_cfg['tracker']['retracker']) && $bb_cfg['tracker']['retracker']) {
+    if (config('tracker.retracker')) {
         if (bf($userdata['user_opt'], 'user_opt', 'user_retracker') || IS_GUEST) {
             if (!isset($tor['announce-list'])) {
-                $tor['announce-list'] = array(
-                    array($announce),
-                    array($bb_cfg['tracker']['retracker_host'])
-                );
+                $tor['announce-list'] = [
+                    [$announce],
+                    [config('tracker.retracker_host')]
+                ];
             } else {
-                $tor['announce-list'] = array_merge($tor['announce-list'], array(array($bb_cfg['tracker']['retracker_host'])));
+                $tor['announce-list'] = array_merge(
+                    $tor['announce-list'],
+                    [[config('tracker.retracker_host')]]
+                );
             }
         }
     }

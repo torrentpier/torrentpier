@@ -238,7 +238,7 @@ $(function(){
 							/>&nbsp;{L_HIDE_CONTENTS}
 						</label>
 					</p>
-					<!-- IF $bb_cfg['tracker']['gold_silver_enabled'] --><p class="chbox">{TOR_TYPE_CHBOX}</p><!-- ENDIF -->
+					<!-- IF GS_ENABLED --><p class="chbox">{TOR_TYPE_CHBOX}</p><!-- ENDIF -->
 				</div>
 				</fieldset>
 				<fieldset>

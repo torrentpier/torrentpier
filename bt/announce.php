@@ -131,7 +131,7 @@ $peer_hash = md5(
 );
 
 // Get cached peer info from previous announce (last peer info)
-$lp_info = OLD_CACHE('tr_cache')->get(PEER_HASH_PREFIX . $peer_hash);
+$lp_info = OLD_CACHE('tr_cache')->get('peer_' . $peer_hash);
 
 if (DBG_LOG) {
     dbg_log(' ', '$lp_info-get_from-CACHE-' . ($lp_info ? 'hit' : 'miss'));
@@ -179,7 +179,7 @@ $stopped = ($event === 'stopped');
 
 // Stopped event
 if ($stopped) {
-    OLD_CACHE('tr_cache')->rm(PEER_HASH_PREFIX . $peer_hash);
+    OLD_CACHE('tr_cache')->rm('peer_' . $peer_hash);
     if (DBG_LOG) {
         dbg_log(' ', 'stopped');
     }
@@ -233,15 +233,15 @@ if ($lp_info) {
     $tor_type = $row['tor_type'];
 
     // Ratio limits
-    if ((TR_RATING_LIMITS || $bb_cfg['tracker']['limit_concurrent_ips']) && !$stopped) {
+    if ((TR_RATING_LIMITS || config('tracker.limit_concurrent_ips')) && !$stopped) {
         $user_ratio = ($row['u_down_total'] && $row['u_down_total'] > MIN_DL_FOR_RATIO) ? ($row['u_up_total'] + $row['u_up_release'] + $row['u_up_bonus']) / $row['u_down_total'] : 1;
         $rating_msg = '';
 
         if (!$seeder) {
             foreach ($bb_cfg['rating'] as $ratio => $limit) {
                 if ($user_ratio < $ratio) {
-                    $bb_cfg['tracker']['limit_active_tor'] = 1;
-                    $bb_cfg['tracker']['limit_leech_count'] = $limit;
+                    config(['tracker.limit_active_tor' => 1]);
+                    config(['tracker.limit_leech_count' => $limit]);
                     $rating_msg = " (ratio < $ratio)";
                     break;
                 }
@@ -249,29 +249,29 @@ if ($lp_info) {
         }
 
         // Limit active torrents
-        if (!isset($bb_cfg['unlimited_users'][$user_id]) && $bb_cfg['tracker']['limit_active_tor'] && (($bb_cfg['tracker']['limit_seed_count'] && $seeder) || ($bb_cfg['tracker']['limit_leech_count'] && !$seeder))) {
+        if (!isset($bb_cfg['unlimited_users'][$user_id]) && config('tracker.limit_active_tor') && ((config('tracker.limit_seed_count') && $seeder) || (config('tracker.limit_leech_count') && !$seeder))) {
             $sql = "SELECT COUNT(DISTINCT topic_id) AS active_torrents
 				FROM " . BB_BT_TRACKER . "
 				WHERE user_id = $user_id
 					AND seeder = $seeder
 					AND topic_id != $topic_id";
 
-            if (!$seeder && $bb_cfg['tracker']['leech_expire_factor'] && $user_ratio < 0.5) {
-                $sql .= " AND update_time > " . (TIMENOW - 60 * $bb_cfg['tracker']['leech_expire_factor']);
+            if (!$seeder && config('tracker.leech_expire_factor') && $user_ratio < 0.5) {
+                $sql .= " AND update_time > " . (TIMENOW - 60 * config('tracker.leech_expire_factor'));
             }
             $sql .= "	GROUP BY user_id";
 
             if ($row = OLD_DB()->fetch_row($sql)) {
-                if ($seeder && $bb_cfg['tracker']['limit_seed_count'] && $row['active_torrents'] >= $bb_cfg['tracker']['limit_seed_count']) {
-                    msg_die('Only ' . $bb_cfg['tracker']['limit_seed_count'] . ' torrent(s) allowed for seeding');
-                } elseif (!$seeder && $bb_cfg['tracker']['limit_leech_count'] && $row['active_torrents'] >= $bb_cfg['tracker']['limit_leech_count']) {
-                    msg_die('Only ' . $bb_cfg['tracker']['limit_leech_count'] . ' torrent(s) allowed for leeching' . $rating_msg);
+                if ($seeder && config('tracker.limit_seed_count') && $row['active_torrents'] >= config('tracker.limit_seed_count')) {
+                    msg_die('Only ' . config('tracker.limit_seed_count') . ' torrent(s) allowed for seeding');
+                } elseif (!$seeder && config('tracker.limit_leech_count') && $row['active_torrents'] >= config('tracker.limit_leech_count')) {
+                    msg_die('Only ' . config('tracker.limit_leech_count') . ' torrent(s) allowed for leeching' . $rating_msg);
                 }
             }
         }
 
         // Limit concurrent IPs
-        if ($bb_cfg['tracker']['limit_concurrent_ips'] && (($bb_cfg['tracker']['limit_seed_ips'] && $seeder) || ($bb_cfg['tracker']['limit_leech_ips'] && !$seeder))) {
+        if (config('tracker.limit_concurrent_ips') && ((config('tracker.limit_seed_ips') && $seeder) || (config('tracker.limit_leech_ips') && !$seeder))) {
             $sql = "SELECT COUNT(DISTINCT ip) AS ips
 				FROM " . BB_BT_TRACKER . "
 				WHERE topic_id = $topic_id
@@ -279,16 +279,16 @@ if ($lp_info) {
 					AND seeder = $seeder
 					AND ip != '$ip_sql'";
 
-            if (!$seeder && $bb_cfg['tracker']['leech_expire_factor']) {
-                $sql .= " AND update_time > " . (TIMENOW - 60 * $bb_cfg['tracker']['leech_expire_factor']);
+            if (!$seeder && config('tracker.leech_expire_factor')) {
+                $sql .= " AND update_time > " . (TIMENOW - 60 * config('tracker.leech_expire_factor'));
             }
             $sql .= "	GROUP BY topic_id";
 
             if ($row = OLD_DB()->fetch_row($sql)) {
-                if ($seeder && $bb_cfg['tracker']['limit_seed_ips'] && $row['ips'] >= $bb_cfg['tracker']['limit_seed_ips']) {
-                    msg_die('You can seed only from ' . $bb_cfg['tracker']['limit_seed_ips'] . " IP's");
-                } elseif (!$seeder && $bb_cfg['tracker']['limit_leech_ips'] && $row['ips'] >= $bb_cfg['tracker']['limit_leech_ips']) {
-                    msg_die('You can leech only from ' . $bb_cfg['tracker']['limit_leech_ips'] . " IP's");
+                if ($seeder && config('tracker.limit_seed_ips') && $row['ips'] >= config('tracker.limit_seed_ips')) {
+                    msg_die('You can seed only from ' . config('tracker.limit_seed_ips') . " IP's");
+                } elseif (!$seeder && config('tracker.limit_leech_ips') && $row['ips'] >= config('tracker.limit_leech_ips')) {
+                    msg_die('You can leech only from ' . config('tracker.limit_leech_ips') . " IP's");
                 }
             }
         }
@@ -312,7 +312,7 @@ $up_add = ($lp_info && $uploaded > $lp_info['uploaded']) ? $uploaded - $lp_info[
 $down_add = ($lp_info && $downloaded > $lp_info['downloaded']) ? $downloaded - $lp_info['downloaded'] : 0;
 
 // Gold/Silver releases
-if ($bb_cfg['tracker']['gold_silver_enabled'] && $down_add) {
+if (config('tracker.gold_silver_enabled') && $down_add) {
     if ($tor_type == TOR_TYPE_GOLD) {
         $down_add = 0;
     } // Silver releases
@@ -322,7 +322,7 @@ if ($bb_cfg['tracker']['gold_silver_enabled'] && $down_add) {
 }
 
 // Freeleech
-if ($bb_cfg['tracker']['freeleech'] && $down_add) {
+if (config('tracker.freeleech') && $down_add) {
     $down_add = 0;
 }
 
@@ -388,14 +388,14 @@ $lp_info = array(
     'tor_type' => (int)$tor_type,
 );
 
-$lp_info_cached = OLD_CACHE('tr_cache')->set(PEER_HASH_PREFIX . $peer_hash, $lp_info, PEER_HASH_EXPIRE);
+$lp_info_cached = OLD_CACHE('tr_cache')->set('peer_' . $peer_hash, $lp_info, round($bb_cfg['announce_interval'] * (0.85 * config('tracker.expire_factor'))));
 
 if (DBG_LOG && !$lp_info_cached) {
     dbg_log(' ', '$lp_info-caching-FAIL');
 }
 
 // Get cached output
-$output = OLD_CACHE('tr_cache')->get(PEERS_LIST_PREFIX . $topic_id);
+$output = OLD_CACHE('tr_cache')->get('peers_list_' . $topic_id);
 
 if (DBG_LOG) {
     dbg_log(' ', '$output-get_from-CACHE-' . ($output !== false ? 'hit' : 'miss'));
@@ -403,8 +403,8 @@ if (DBG_LOG) {
 
 if (!$output) {
     // Retrieve peers
-    $numwant = (int)$bb_cfg['tracker']['numwant'];
-    $compact_mode = ($bb_cfg['tracker']['compact_mode'] || !empty($compact));
+    $numwant = (int)config('tracker.numwant');
+    $compact_mode = (config('tracker.compact_mode') || !empty($compact));
 
     $rowset = OLD_DB()->fetch_rowset("
 		SELECT ip, port
@@ -434,7 +434,7 @@ if (!$output) {
     $seeders = 0;
     $leechers = 0;
 
-    if ($bb_cfg['tracker']['scrape']) {
+    if (config('tracker.scrape')) {
         $row = OLD_DB()->fetch_row("
 			SELECT seeders, leechers
 			FROM " . BB_BT_TRACKER_SNAP . "
@@ -454,7 +454,7 @@ if (!$output) {
         'incomplete' => (int)$leechers,
     );
 
-    $peers_list_cached = OLD_CACHE('tr_cache')->set(PEERS_LIST_PREFIX . $topic_id, $output, PEERS_LIST_EXPIRE);
+    $peers_list_cached = OLD_CACHE('tr_cache')->set('peers_list_' . $topic_id, $output, round($bb_cfg['announce_interval'] * 0.7));
 
     if (DBG_LOG && !$peers_list_cached) {
         dbg_log(' ', '$output-caching-FAIL');

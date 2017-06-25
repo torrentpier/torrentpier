@@ -2059,7 +2059,7 @@ function is_gold($type)
 {
     global $lang, $bb_cfg;
 
-    if (!$bb_cfg['tracker']['gold_silver_enabled']) {
+    if (!config('tracker.gold_silver_enabled')) {
         $is_gold = '';
         return $is_gold;
     }

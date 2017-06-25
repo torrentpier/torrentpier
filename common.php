@@ -61,6 +61,11 @@ try {
 }
 require_once __DIR__ . '/library/config.php';
 
+/**
+ * Container
+ */
+require_once __DIR__ . '/bootstrap.php';
+
 $server_protocol = $bb_cfg['cookie_secure'] ? 'https://' : 'http://';
 $server_port = in_array((int)$bb_cfg['server_port'], array(80, 443), true) ? '' : ':' . $bb_cfg['server_port'];
 define('FORUM_PATH', $bb_cfg['script_path']);
@@ -77,11 +82,6 @@ define('BB_BT_TRACKER_SNAP', 'bb_bt_tracker_snap');
 define('BB_BT_USERS', 'bb_bt_users');
 
 define('BT_AUTH_KEY_LENGTH', 10);
-
-define('PEER_HASH_PREFIX', 'peer_');
-define('PEERS_LIST_PREFIX', 'peers_list_');
-define('PEER_HASH_EXPIRE', round($bb_cfg['announce_interval'] * (0.85 * $bb_cfg['tracker']['expire_factor']))); // sec
-define('PEERS_LIST_EXPIRE', round($bb_cfg['announce_interval'] * 0.7)); // sec
 
 define('DL_STATUS_RELEASER', -1);
 define('DL_STATUS_DOWN', 0);
@@ -168,11 +168,6 @@ switch ($bb_cfg['datastore_type']) {
     default:
         $datastore = new TorrentPier\Legacy\Datastore\File($bb_cfg['cache']['db_dir'] . 'datastore/', $bb_cfg['cache']['prefix']);
 }
-
-/**
- * Container
- */
-require_once __DIR__ . '/bootstrap.php';
 
 function sql_dbg_enabled()
 {

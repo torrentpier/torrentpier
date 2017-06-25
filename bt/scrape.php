@@ -13,7 +13,7 @@ require dirname(__DIR__) . '/common.php';
 
 global $bb_cfg;
 
-if (!$bb_cfg['tracker']['scrape']) {
+if (!config('tracker.scrape')) {
     msg_die('Please disable SCRAPE!');
 }
 
