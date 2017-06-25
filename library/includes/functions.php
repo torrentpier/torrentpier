@@ -587,9 +587,9 @@ function bt_show_ip($ip, $port = '')
         $ip = decode_ip($ip);
         $ip .= ($port) ? ":$port" : '';
         return $ip;
-    } else {
-        return ($bb_cfg['bt_show_ip_only_moder']) ? false : decode_ip_xx($ip);
     }
+
+    return ($bb_cfg['bt_show_ip_only_moder']) ? false : decode_ip_xx($ip);
 }
 
 function bt_show_port($port)
@@ -598,9 +598,9 @@ function bt_show_port($port)
 
     if (IS_AM) {
         return $port;
-    } else {
-        return ($bb_cfg['bt_show_port_only_moder']) ? false : $port;
     }
+
+    return ($bb_cfg['bt_show_port_only_moder']) ? false : $port;
 }
 
 function decode_ip_xx($ip)
@@ -741,10 +741,10 @@ function get_username($user_id)
             $usernames[$row['user_id']] = $row['username'];
         }
         return $usernames;
-    } else {
-        $row = OLD_DB()->fetch_row("SELECT username FROM " . BB_USERS . " WHERE user_id = $user_id LIMIT 1");
-        return $row['username'];
     }
+
+    $row = OLD_DB()->fetch_row("SELECT username FROM " . BB_USERS . " WHERE user_id = $user_id LIMIT 1");
+    return $row['username'];
 }
 
 function get_user_id($username)
@@ -846,9 +846,9 @@ function get_attachments_dir($cfg = null)
 
     if ($cfg['upload_dir'][0] == '/' || ($cfg['upload_dir'][0] != '/' && $cfg['upload_dir'][1] == ':')) {
         return $cfg['upload_dir'];
-    } else {
-        return BB_ROOT . $cfg['upload_dir'];
     }
+
+    return BB_ROOT . $cfg['upload_dir'];
 }
 
 function bb_get_config($table, $from_db = false, $update_cache = true)

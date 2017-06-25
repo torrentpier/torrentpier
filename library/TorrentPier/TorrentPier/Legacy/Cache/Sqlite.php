@@ -78,9 +78,9 @@ class Sqlite extends Common
         // return
         if (is_array($this->prefix . $name)) {
             return $cached_items;
-        } else {
-            return $cached_items[$name] ?? false;
         }
+
+        return $cached_items[$name] ?? false;
     }
 
     public function set($name, $value, $ttl = 604800)

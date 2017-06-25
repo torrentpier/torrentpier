@@ -135,7 +135,9 @@ if ($search_imagick) {
 
     if (preg_match('/convert/i', $imagick)) {
         return true;
-    } elseif ($imagick != 'none') {
+    }
+
+    if ($imagick != 'none') {
         if (!preg_match('/WIN/i', PHP_OS)) {
             $retval = @exec('whereis convert');
             $paths = explode(' ', $retval);

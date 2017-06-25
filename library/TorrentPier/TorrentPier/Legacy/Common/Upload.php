@@ -137,9 +137,9 @@ class Upload
         if ($mode == 'attach') {
             $file_path = get_attach_path($params['topic_id']);
             return $this->_move($file_path);
-        } else {
-            trigger_error("Invalid upload mode: $mode", E_USER_ERROR);
         }
+
+        trigger_error("Invalid upload mode: $mode", E_USER_ERROR);
     }
 
     /**

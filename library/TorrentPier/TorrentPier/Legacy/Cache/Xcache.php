@@ -60,11 +60,11 @@ class Xcache extends Common
             $this->num_queries++;
 
             return xcache_unset($this->prefix . $name);
-        } else {
-            xcache_clear_cache(XC_TYPE_PHP, 0);
-            xcache_clear_cache(XC_TYPE_VAR, 0);
-            return;
         }
+
+        xcache_clear_cache(XC_TYPE_PHP, 0);
+        xcache_clear_cache(XC_TYPE_VAR, 0);
+        return;
     }
 
     public function is_installed()

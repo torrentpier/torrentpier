@@ -407,7 +407,9 @@ class User
                     cache_update_userdata($this->data);
 
                     return $this->data;
-                } elseif ($new_session_userdata = $this->session_create($userdata, false)) {
+                }
+
+                if ($new_session_userdata = $this->session_create($userdata, false)) {
                     // Removing guest sessions from this IP
                     OLD_DB()->query("
 						DELETE FROM " . BB_SESSIONS . "
