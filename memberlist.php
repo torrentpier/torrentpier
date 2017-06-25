@@ -159,7 +159,7 @@ if ($result = OLD_DB()->fetch_rowset($sql)) {
         $from = $row['user_from'];
         $joined = bb_date($row['user_regdate'], $bb_cfg['date_format']);
         $posts = $row['user_posts'];
-        $pm = $bb_cfg['text_buttons'] ? '<a class="txtb" href="' . (PM_URL . "?mode=post&amp;" . POST_USERS_URL . "=$user_id") . '">' . $lang['SEND_PM_TXTB'] . '</a>' : '<a href="' . (PM_URL . "?mode=post&amp;" . POST_USERS_URL . "=$user_id") . '"><img src="' . $images['icon_pm'] . '" alt="' . $lang['SEND_PRIVATE_MESSAGE'] . '" title="' . $lang['SEND_PRIVATE_MESSAGE'] . '" border="0" /></a>';
+        $pm = '<a class="txtb" href="' . (PM_URL . "?mode=post&amp;" . POST_USERS_URL . "=$user_id") . '">' . $lang['SEND_PM_TXTB'] . '</a>';
 
         if (bf($row['user_opt'], 'user_opt', 'user_viewemail') || IS_ADMIN) {
             $email_uri = $bb_cfg['board_email_form'] ? ("profile.php?mode=email&amp;" . POST_USERS_URL . "=$user_id") : 'mailto:' . $row['user_email'];
@@ -169,7 +169,7 @@ if ($result = OLD_DB()->fetch_rowset($sql)) {
         }
 
         if ($row['user_website']) {
-            $www = $bb_cfg['text_buttons'] ? '<a class="txtb" href="' . $row['user_website'] . '"  target="_userwww">' . $lang['VISIT_WEBSITE_TXTB'] . '</a>' : '<a class="txtb" href="' . $row['user_website'] . '" target="_userwww"><img src="' . $images['icon_www'] . '" alt="' . $lang['VISIT_WEBSITE'] . '" title="' . $lang['VISIT_WEBSITE'] . '" border="0" /></a>';
+            $www = '<a class="txtb" href="' . $row['user_website'] . '"  target="_userwww">' . $lang['VISIT_WEBSITE_TXTB'] . '</a>';
         } else {
             $www = '';
         }

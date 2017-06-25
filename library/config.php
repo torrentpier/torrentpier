@@ -235,7 +235,6 @@ $bb_cfg['show_poster_joined'] = true;
 $bb_cfg['show_poster_posts'] = true;
 $bb_cfg['show_poster_from'] = true;
 $bb_cfg['show_bot_nick'] = false;
-$bb_cfg['text_buttons'] = false; // replace EDIT, QUOTE... images with text links
 $bb_cfg['parse_ed2k_links'] = true; // make ed2k links clickable
 $bb_cfg['post_date_format'] = 'd-M-Y H:i';
 $bb_cfg['ext_link_new_win'] = true; // open external links in new window

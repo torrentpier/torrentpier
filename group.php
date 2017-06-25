@@ -26,7 +26,7 @@ function generate_user_info(&$row, $date_format, $group_mod, &$from, &$posts, &$
     $joined = bb_date($row['user_regdate']);
     $user_time = (!empty($row['user_time'])) ? bb_date($row['user_time']) : $lang['NONE'];
     $posts = $row['user_posts'] ?: 0;
-    $pm = $bb_cfg['text_buttons'] ? '<a class="txtb" href="' . (PM_URL . "?mode=post&amp;" . POST_USERS_URL . "=" . $row['user_id']) . '">' . $lang['SEND_PM_TXTB'] . '</a>' : '<a href="' . (PM_URL . "?mode=post&amp;" . POST_USERS_URL . "=" . $row['user_id']) . '"><img src="' . $images['icon_pm'] . '" alt="' . $lang['SEND_PRIVATE_MESSAGE'] . '" title="' . $lang['SEND_PRIVATE_MESSAGE'] . '" border="0" /></a>';
+    $pm = '<a class="txtb" href="' . (PM_URL . "?mode=post&amp;" . POST_USERS_URL . "=" . $row['user_id']) . '">' . $lang['SEND_PM_TXTB'] . '</a>';
     $avatar = get_avatar($row['user_id'], $row['avatar_ext_id'], !bf($row['user_opt'], 'user_opt', 'dis_avatar'), '', 50, 50);
 
     if (bf($row['user_opt'], 'user_opt', 'user_viewemail') || $group_mod) {
@@ -37,7 +37,7 @@ function generate_user_info(&$row, $date_format, $group_mod, &$from, &$posts, &$
     }
 
     if ($row['user_website']) {
-        $www = $bb_cfg['text_buttons'] ? '<a class="txtb" href="' . $row['user_website'] . '"  target="_userwww">' . $lang['VISIT_WEBSITE_TXTB'] . '</a>' : '<a class="txtb" href="' . $row['user_website'] . '" target="_userwww"><img src="' . $images['icon_www'] . '" alt="' . $lang['VISIT_WEBSITE'] . '" title="' . $lang['VISIT_WEBSITE'] . '" border="0" /></a>';
+        $www = '<a class="txtb" href="' . $row['user_website'] . '"  target="_userwww">' . $lang['VISIT_WEBSITE_TXTB'] . '</a>';
     } else {
         $www = '';
     }
