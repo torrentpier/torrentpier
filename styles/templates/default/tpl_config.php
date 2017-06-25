@@ -26,7 +26,7 @@
 global $bb_cfg, $page_cfg, $template, $images, $lang;
 
 $width = $height = array();
-$template_name = basename(dirname(__FILE__));
+$template_name = basename(__DIR__);
 
 $_img = BB_ROOT . 'styles/images/';
 $_main = BB_ROOT . 'styles/' . basename(TEMPLATES_DIR) . '/' . $template_name . '/images/';
