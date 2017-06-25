@@ -576,9 +576,9 @@ function get_registered_torrents($id, $mode)
 
     if ($rowset = @OLD_DB()->sql_fetchrowset($result)) {
         return $rowset;
-    } else {
-        return false;
     }
+
+    return false;
 }
 
 function torrent_error_exit($message)

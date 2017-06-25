@@ -134,7 +134,7 @@ if ($mode == 'submit' || $mode == 'refresh') {
     }
 
     // get the db sizes
-    list($search_data_size, $search_index_size, $search_tables_size) = get_db_sizes();
+    [$search_data_size, $search_index_size, $search_tables_size] = get_db_sizes();
 
     // get the post subject/text of each post
     $result = OLD_DB()->query("
@@ -290,7 +290,7 @@ if ($mode == 'submit' || $mode == 'refresh') {
     }
 
     // get the db sizes
-    list($search_data_size, $search_index_size, $search_tables_size) = get_db_sizes();
+    [$search_data_size, $search_index_size, $search_tables_size] = get_db_sizes();
 
     // calculate the final (estimated) values
     $final_search_tables_size = '';

@@ -92,7 +92,7 @@ class Upload
         // img
         if ($this->cfg['max_width'] || $this->cfg['max_height']) {
             if ($img_info = getimagesize($this->file['tmp_name'])) {
-                list($width, $height, $type, $attr) = $img_info;
+                [$width, $height, $type, $attr] = $img_info;
 
                 // redefine ext
                 if (!$width || !$height || !$type || !isset($this->img_types[$type])) {
@@ -137,9 +137,9 @@ class Upload
         if ($mode == 'attach') {
             $file_path = get_attach_path($params['topic_id']);
             return $this->_move($file_path);
-        } else {
-            trigger_error("Invalid upload mode: $mode", E_USER_ERROR);
         }
+
+        trigger_error("Invalid upload mode: $mode", E_USER_ERROR);
     }
 
     /**

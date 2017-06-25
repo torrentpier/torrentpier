@@ -88,7 +88,7 @@ if (!empty($_POST['edit']) || !empty($_POST['new'])) {
         $release_group = isset($_POST['release_group']) ? (int)$_POST['release_group'] : 0;
         $group_name = isset($_POST['group_name']) ? trim($_POST['group_name']) : '';
         $group_desc = isset($_POST['group_description']) ? trim($_POST['group_description']) : '';
-        $group_moderator = isset($_POST['username']) ? $_POST['username'] : '';
+        $group_moderator = $_POST['username'] ?? '';
 
         if ($group_name === '') {
             bb_die($lang['NO_GROUP_NAME']);

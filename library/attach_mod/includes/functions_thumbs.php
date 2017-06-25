@@ -26,12 +26,12 @@ function get_img_size_format($width, $height)
             round($width * ($max_width / $width)),
             round($height * ($max_width / $width))
         );
-    } else {
-        return array(
-            round($width * ($max_width / $height)),
-            round($height * ($max_width / $height))
-        );
     }
+
+    return array(
+        round($width * ($max_width / $height)),
+        round($height * ($max_width / $height))
+    );
 }
 
 /**
@@ -44,9 +44,9 @@ function is_imagick()
     if ($attach_config['img_imagick'] != '') {
         $imagick = $attach_config['img_imagick'];
         return true;
-    } else {
-        return false;
     }
+
+    return false;
 }
 
 /**
@@ -103,13 +103,13 @@ function create_thumbnail($source, $new_file, $mimetype)
         return false;
     }
 
-    list($width, $height, $type, ) = getimagesize($source);
+    [$width, $height, $type,] = getimagesize($source);
 
     if (!$width || !$height) {
         return false;
     }
 
-    list($new_width, $new_height) = get_img_size_format($width, $height);
+    [$new_width, $new_height] = get_img_size_format($width, $height);
 
     $tmp_path = $old_file = '';
 

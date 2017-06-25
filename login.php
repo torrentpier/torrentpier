@@ -37,7 +37,7 @@ if (preg_match('/^redirect=([a-z0-9\.#\/\?&=\+\-_]+)/si', $_SERVER['QUERY_STRING
 } elseif (!empty($_POST['redirect'])) {
     $redirect_url = str_replace('&amp;', '&', htmlspecialchars($_POST['redirect']));
 } elseif (!empty($_SERVER['HTTP_REFERER']) && ($parts = @parse_url($_SERVER['HTTP_REFERER']))) {
-    $redirect_url = (isset($parts['path']) ? $parts['path'] : "index.php") . (isset($parts['query']) ? '?' . $parts['query'] : '');
+    $redirect_url = ($parts['path'] ?? "index.php") . (isset($parts['query']) ? '?' . $parts['query'] : '');
 }
 
 $redirect_url = str_replace('&admin=1', '', $redirect_url);
@@ -56,8 +56,8 @@ if (isset($_REQUEST['admin']) && !IS_AM) {
 $mod_admin_login = (IS_AM && !$user->data['session_admin']);
 
 // login username & password
-$login_username = ($mod_admin_login) ? $userdata['username'] : (isset($_POST['login_username']) ? $_POST['login_username'] : '');
-$login_password = isset($_POST['login_password']) ? $_POST['login_password'] : '';
+$login_username = ($mod_admin_login) ? $userdata['username'] : ($_POST['login_username'] ?? '');
+$login_password = $_POST['login_password'] ?? '';
 
 // Проверка на неверную комбинацию логин/пароль
 $need_captcha = false;
