@@ -1288,7 +1288,7 @@ if ($mode == 'read') {
     $previous_days_text = array($lang['ALL_POSTS'], $lang['1_DAY'], $lang['7_DAYS'], $lang['2_WEEKS'], $lang['1_MONTH'], $lang['3_MONTHS'], $lang['6_MONTHS'], $lang['1_YEAR']);
 
     $select_msg_days = '';
-    for ($i = 0; $i < count($previous_days); $i++) {
+    for ($i = 0, $iMax = count($previous_days); $i < $iMax; $i++) {
         $selected = ($msg_days == $previous_days[$i]) ? ' selected="selected"' : '';
         $select_msg_days .= '<option value="' . $previous_days[$i] . '"' . $selected . '>' . $previous_days_text[$i] . '</option>';
     }

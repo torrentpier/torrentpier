@@ -114,7 +114,7 @@ function auth_unpack($auth_cache)
     $auth = [];
     $auth_len = 1;
 
-    for ($pos = 0; $pos < strlen($auth_cache); $pos += $auth_len) {
+    for ($pos = 0, $posMax = strlen($auth_cache); $pos < $posMax; $pos += $auth_len) {
         $forum_auth = $auth_cache[$pos];
         if ($forum_auth == $one_char_encoding) {
             $auth_len = 1;
@@ -149,7 +149,7 @@ function is_forum_authed($auth_cache, $check_forum_id)
     $auth = [];
     $auth_len = 1;
 
-    for ($pos = 0; $pos < strlen($auth_cache); $pos += $auth_len) {
+    for ($pos = 0, $posMax = strlen($auth_cache); $pos < $posMax; $pos += $auth_len) {
         $forum_auth = $auth_cache[$pos];
         if ($forum_auth == $one_char_encoding) {
             $auth_len = 1;
