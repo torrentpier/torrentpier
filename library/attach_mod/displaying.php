@@ -213,7 +213,7 @@ function display_attachments($post_id)
 
             if (@(int)$display_categories[$attachments['_' . $post_id][$i]['extension']] == IMAGE_CAT && (int)$attach_config['img_display_inlined']) {
                 if ((int)$attach_config['img_link_width'] != 0 || (int)$attach_config['img_link_height'] != 0) {
-                    list($width, $height) = image_getdimension($filename);
+                    [$width, $height] = image_getdimension($filename);
 
                     if ($width == 0 && $height == 0) {
                         $image = true;
