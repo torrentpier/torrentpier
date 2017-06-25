@@ -182,7 +182,7 @@ $moderation = (!empty($_REQUEST['mod']) && $is_auth['auth_mod']);
 $mod_redirect_url = '';
 
 if ($is_auth['auth_mod']) {
-    $redirect = isset($_POST['redirect']) ? $_POST['redirect'] : @$_SERVER['REQUEST_URI'];
+    $redirect = $_POST['redirect'] ?? @$_SERVER['REQUEST_URI'];
     $redirect = url_arg($redirect, 'mod', 1, '&');
     $mod_redirect_url = LOGIN_URL . "?redirect=$redirect&admin=1";
 
@@ -794,7 +794,7 @@ foreach ($is_auth as $name => $is) {
 }
 
 $template->assign_vars(array(
-    'PG_ROW_CLASS' => isset($pg_row_class) ? $pg_row_class : 'row1',
+    'PG_ROW_CLASS' => $pg_row_class ?? 'row1',
 ));
 
 if (IS_ADMIN) {

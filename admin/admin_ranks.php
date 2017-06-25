@@ -15,7 +15,7 @@ if (!empty($setmodules)) {
 require __DIR__ . '/pagestart.php';
 
 if (isset($_GET['mode']) || isset($_POST['mode'])) {
-    $mode = isset($_GET['mode']) ? $_GET['mode'] : $_POST['mode'];
+    $mode = $_GET['mode'] ?? $_POST['mode'];
 } else {
     //
     // These could be entered via a form button

@@ -79,7 +79,7 @@ class Sqlite extends Common
         if (is_array($this->prefix . $name)) {
             return $cached_items;
         } else {
-            return isset($cached_items[$name]) ? $cached_items[$name] : false;
+            return $cached_items[$name] ?? false;
         }
     }
 

@@ -186,7 +186,7 @@ if ($download_mode == PHYSICAL_LINK) {
     if (IS_GUEST && !bb_captcha('check')) {
         global $template;
 
-        $redirect_url = isset($_POST['redirect_url']) ? $_POST['redirect_url'] : (isset($_SERVER['HTTP_REFERER']) ? $_SERVER['HTTP_REFERER'] : '/');
+        $redirect_url = $_POST['redirect_url'] ?? $_SERVER['HTTP_REFERER'] ?? '/';
         $message = '<form action="' . DOWNLOAD_URL . $attachment['attach_id'] . '" method="post">';
         $message .= $lang['CAPTCHA'] . ':';
         $message .= '<div  class="mrg_10" align="center">' . bb_captcha('get') . '</div>';
