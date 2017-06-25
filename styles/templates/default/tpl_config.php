@@ -130,8 +130,7 @@ $images['progress_bar_full'] = $_main . 'progress_bar_full.gif';
 
 $template->assign_vars(array(
     'IMG' => $_main,
-    'TEXT_BUTTONS' => $bb_cfg['text_buttons'],
-    'POST_BTN_SPACER' => $bb_cfg['text_buttons'] ? '&nbsp;' : '',
+    'POST_BTN_SPACER' => '&nbsp;',
     'TOPIC_ATTACH_ICON' => '<img src="styles/images/icon_clip.gif" alt="" />',
     'OPEN_MENU_IMG_ALT' => '<img src="' . $_main . 'menu_open_1.gif" class="menu-alt1" alt="" />',
     'TOPIC_LEFT_COL_SPACER_WITDH' => $bb_cfg['topic_left_column_witdh'] - 8, // 8px padding
@@ -145,24 +144,24 @@ $template->assign_vars(array(
 if (!empty($page_cfg['load_tpl_vars']) and $vars = array_flip($page_cfg['load_tpl_vars'])) {
     if (isset($vars['post_buttons'])) {
         $template->assign_vars(array(
-            'QUOTE_IMG' => $bb_cfg['text_buttons'] ? $lang['REPLY_WITH_QUOTE_TXTB'] : '<img src="' . $images['icon_quote'] . '" alt="' . $lang['REPLY_WITH_QUOTE_TXTB'] . '" title="' . $lang['REPLY_WITH_QUOTE'] . '" />',
-            'EDIT_POST_IMG' => $bb_cfg['text_buttons'] ? $lang['EDIT_DELETE_POST_TXTB'] : '<img src="' . $images['icon_edit'] . '" alt="' . $lang['EDIT_DELETE_POST_TXTB'] . '" title="' . $lang['EDIT_POST'] . '" />',
-            'DELETE_POST_IMG' => $bb_cfg['text_buttons'] ? $lang['DELETE_POST_TXTB'] : '<img src="' . $images['icon_delpost'] . '" alt="' . $lang['DELETE_POST_TXTB'] . '" title="' . $lang['DELETE_POST'] . '" />',
-            'IP_POST_IMG' => $bb_cfg['text_buttons'] ? $lang['VIEW_IP_TXTB'] : '<img src="' . $images['icon_ip'] . '" alt="' . $lang['VIEW_IP_TXTB'] . '" title="' . $lang['VIEW_IP'] . '" />',
-            'MOD_POST_IMG' => $bb_cfg['text_buttons'] ? $lang['MODERATE_POST_TXTB'] : '<img src="' . $images['icon_mod'] . '" alt="' . $lang['MODERATE_POST_TXTB'] . '" title="' . $lang['MODERATE_POST'] . '" />',
-            'MC_IMG' => $bb_cfg['text_buttons'] ? '[' . $lang['COMMENT'] . ']' : '<img src="' . $images['icon_mc'] . '" alt="[' . $lang['COMMENT'] . ']" title="' . $lang['COMMENT'] . '" />',
-            'POLL_IMG' => $bb_cfg['text_buttons'] ? $lang['TOPIC_POLL'] : '<img src="' . $images['icon_poll'] . '" alt="' . $lang['TOPIC_POLL'] . '" title="' . $lang['ADD_POLL'] . '" />',
+            'QUOTE_IMG' => $lang['REPLY_WITH_QUOTE_TXTB'],
+            'EDIT_POST_IMG' => $lang['EDIT_DELETE_POST_TXTB'],
+            'DELETE_POST_IMG' => $lang['DELETE_POST_TXTB'],
+            'IP_POST_IMG' => $lang['VIEW_IP_TXTB'],
+            'MOD_POST_IMG' => $lang['MODERATE_POST_TXTB'],
+            'MC_IMG' => '[' . $lang['COMMENT'] . ']',
+            'POLL_IMG' => $lang['TOPIC_POLL'],
 
             'QUOTE_URL' => BB_ROOT . POSTING_URL . '?mode=quote&amp;p=',
             'EDIT_POST_URL' => BB_ROOT . POSTING_URL . '?mode=editpost&amp;p=',
             'DELETE_POST_URL' => BB_ROOT . POSTING_URL . '?mode=delete&amp;p=',
             'IP_POST_URL' => BB_ROOT . 'modcp.php?mode=ip&amp;p=',
 
-            'PROFILE_IMG' => $bb_cfg['text_buttons'] ? $lang['READ_PROFILE_TXTB'] : '<img src="' . $images['icon_profile'] . '" alt="' . $lang['READ_PROFILE_TXTB'] . '" title="' . $lang['READ_PROFILE'] . '" />',
-            'PM_IMG' => $bb_cfg['text_buttons'] ? $lang['SEND_PM_TXTB'] : '<img src="' . $images['icon_pm'] . '" alt="' . $lang['SEND_PM_TXTB'] . '" title="' . $lang['SEND_PRIVATE_MESSAGE'] . '" />',
-            'EMAIL_IMG' => $bb_cfg['text_buttons'] ? $lang['SEND_EMAIL_TXTB'] : '<img src="' . $images['icon_email'] . '" alt="' . $lang['SEND_EMAIL_TXTB'] . '" title="' . $lang['SEND_EMAIL'] . '" />',
-            'WWW_IMG' => $bb_cfg['text_buttons'] ? $lang['VISIT_WEBSITE_TXTB'] : '<img src="' . $images['icon_www'] . '" alt="' . $lang['VISIT_WEBSITE_TXTB'] . '" title="' . $lang['VISIT_WEBSITE'] . '" />',
-            'ICQ_IMG' => $bb_cfg['text_buttons'] ? $lang['ICQ_TXTB'] : '<img src="' . $images['icon_icq'] . '" alt="' . $lang['ICQ_TXTB'] . '" title="' . $lang['ICQ'] . '" />',
+            'PROFILE_IMG' => $lang['READ_PROFILE_TXTB'],
+            'PM_IMG' => $lang['SEND_PM_TXTB'],
+            'EMAIL_IMG' => $lang['SEND_EMAIL_TXTB'],
+            'WWW_IMG' => $lang['VISIT_WEBSITE_TXTB'],
+            'ICQ_IMG' => $lang['ICQ_TXTB'],
 
             'EMAIL_URL' => BB_ROOT . "profile.php?mode=email&amp;u=",
             'FORUM_URL' => BB_ROOT . FORUM_URL,
