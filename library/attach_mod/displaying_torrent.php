@@ -11,7 +11,7 @@ if (!defined('BB_ROOT')) {
     die(basename(__FILE__));
 }
 
-global $bb_cfg, $t_data, $poster_id, $is_auth, $dl_link_css, $dl_status_css, $lang, $images;
+global $t_data, $poster_id, $is_auth, $dl_link_css, $dl_status_css, $lang, $images;
 
 $change_peers_bgr_over = true;
 $bgr_class_1 = 'row1';
@@ -39,7 +39,7 @@ $template->assign_vars(array(
 ));
 
 // Define show peers mode (count only || user names with complete % || full details)
-$cfg_sp_mode = $bb_cfg['bt_show_peers_mode'];
+$cfg_sp_mode = config('tp.bt_show_peers_mode');
 $get_sp_mode = $_GET['spmode'] ?? '';
 
 $s_mode = 'count';
@@ -50,7 +50,7 @@ if ($cfg_sp_mode == SHOW_PEERS_NAMES) {
     $s_mode = 'full';
 }
 
-if ($bb_cfg['bt_allow_spmode_change']) {
+if (config('tp.bt_allow_spmode_change')) {
     if ($get_sp_mode == 'names') {
         $s_mode = 'names';
     } elseif ($get_sp_mode == 'full') {
@@ -67,7 +67,7 @@ $tor_file_size = humn_size($attachments['_' . $post_id][$i]['filesize']);
 $tor_file_time = bb_date($attachments['_' . $post_id][$i]['filetime']);
 
 $tor_reged = (bool)$tracker_status;
-$show_peers = (bool)$bb_cfg['bt_show_peers'];
+$show_peers = (bool)config('tp.bt_show_peers');
 
 $locked = ($t_data['forum_status'] == FORUM_LOCKED || $t_data['topic_status'] == TOPIC_LOCKED);
 $tor_auth = ($bt_user_id != GUEST_UID && (($bt_user_id == $poster_id && !$locked) || $is_auth['auth_mod']));
@@ -87,7 +87,7 @@ if ($tor_auth_reg || $tor_auth_del) {
     $tracker_link = ($tor_reged) ? $unreg_tor_url : $reg_tor_url;
 }
 
-$display_name = '[' . $bb_cfg['server_name'] . '].t' . $bt_topic_id . '.torrent';
+$display_name = '[' . config('tp.server_name') . '].t' . $bt_topic_id . '.torrent';
 
 if (!$tor_reged) {
     $template->assign_block_vars('postrow.attach.tor_not_reged', array(
@@ -146,8 +146,8 @@ if ($tor_reged && $tor_info) {
     $tor_magnet = create_magnet($tor_info['info_hash'], $passkey['auth_key'], $userdata['session_logged_in']);
 
     // ratio limits
-    $min_ratio_dl = $bb_cfg['bt_min_ratio_allow_dl_tor'];
-    $min_ratio_warn = $bb_cfg['bt_min_ratio_warning'];
+    $min_ratio_dl = config('tp.bt_min_ratio_allow_dl_tor');
+    $min_ratio_warn = config('tp.bt_min_ratio_warning');
     $dl_allowed = true;
     $user_ratio = 0;
 
@@ -177,7 +177,7 @@ if ($tor_reged && $tor_info) {
         if ((isset($user_ratio) && isset($min_ratio_warn) && $user_ratio < $min_ratio_warn && TR_RATING_LIMITS) || ($bt_userdata['u_down_total'] < MIN_DL_FOR_RATIO)) {
             $template->assign_vars(array(
                 'SHOW_RATIO_WARN' => true,
-                'RATIO_WARN_MSG' => sprintf($lang['BT_RATIO_WARNING_MSG'], $min_ratio_dl, $bb_cfg['ratio_url_help']),
+                'RATIO_WARN_MSG' => sprintf($lang['BT_RATIO_WARNING_MSG'], $min_ratio_dl, config('tp.ratio_url_help')),
             ));
         }
     }
@@ -196,12 +196,12 @@ if ($tor_reged && $tor_info) {
             'TOR_SILVER_GOLD' => $tor_type,
 
             // torrent status mod
-            'TOR_FROZEN' => (!IS_AM) ? (isset($bb_cfg['tor_frozen'][$tor_info['tor_status']]) && !(isset($bb_cfg['tor_frozen_author_download'][$tor_info['tor_status']]) && $userdata['user_id'] == $tor_info['poster_id'])) ? true : '' : '',
+            'TOR_FROZEN' => (!IS_AM) ? (null !== config('tp.tor_frozen.' . $tor_info['tor_status'])) && !(null !== config('tp.tor_frozen_author_download.' . $tor_info['tor_status']) && $userdata['user_id'] == $tor_info['poster_id']) ? true : '' : '',
             'TOR_STATUS_TEXT' => $lang['TOR_STATUS_NAME'][$tor_info['tor_status']],
-            'TOR_STATUS_ICON' => $bb_cfg['tor_icons'][$tor_info['tor_status']],
+            'TOR_STATUS_ICON' => config('tp.tor_icons.' . $tor_info['tor_status']),
             'TOR_STATUS_BY' => ($tor_info['checked_user_id'] && $is_auth['auth_mod']) ? ('<span title="' . bb_date($tor_info['checked_time']) . '"> &middot; ' . profile_url($tor_info) . ' &middot; <i>' . delta_time($tor_info['checked_time']) . $lang['TOR_BACK'] . '</i></span>') : '',
             'TOR_STATUS_SELECT' => build_select('sel_status', array_flip($lang['TOR_STATUS_NAME']), TOR_APPROVED),
-            'TOR_STATUS_REPLY' => $bb_cfg['tor_comment'] && !IS_GUEST && in_array($tor_info['tor_status'], $bb_cfg['tor_reply']) && $userdata['user_id'] == $tor_info['poster_id'] && $t_data['topic_status'] != TOPIC_LOCKED,
+            'TOR_STATUS_REPLY' => config('tp.tor_comment') && !IS_GUEST && in_array($tor_info['tor_status'], config('tp.tor_reply')) && $userdata['user_id'] == $tor_info['poster_id'] && $t_data['topic_status'] != TOPIC_LOCKED,
             //end torrent status mod
 
             'S_UPLOAD_IMAGE' => $upload_image,
@@ -223,7 +223,7 @@ if ($tor_reged && $tor_info) {
         }
     }
 
-    if ($bb_cfg['show_tor_info_in_dl_list']) {
+    if (config('tp.show_tor_info_in_dl_list')) {
         $template->assign_vars(array(
             'SHOW_DL_LIST' => true,
             'SHOW_DL_LIST_TOR_INFO' => true,
@@ -511,7 +511,7 @@ if ($tor_reged && $tor_info) {
     }
 }
 
-if ($bb_cfg['bt_allow_spmode_change'] && $s_mode != 'full') {
+if (config('tp.bt_allow_spmode_change') && $s_mode != 'full') {
     $template->assign_vars(array(
         'PEERS_FULL_LINK' => true,
         'SPMODE_FULL_HREF' => "viewtopic.php?" . POST_TOPIC_URL . "=$bt_topic_id&amp;spmode=full#seeders",
@@ -519,14 +519,14 @@ if ($bb_cfg['bt_allow_spmode_change'] && $s_mode != 'full') {
 }
 
 $template->assign_vars(array(
-    'SHOW_DL_LIST_LINK' => (($bb_cfg['bt_show_dl_list'] || $bb_cfg['allow_dl_list_names_mode']) && $t_data['topic_dl_type'] == TOPIC_DL_TYPE_DL),
-    'SHOW_TOR_ACT' => ($tor_reged && $show_peers && (!isset($bb_cfg['tor_no_tor_act'][$tor_info['tor_status']]) || IS_AM)),
-    'S_MODE_COUNT' => ($s_mode == 'count'),
-    'S_MODE_NAMES' => ($s_mode == 'names'),
-    'S_MODE_FULL' => ($s_mode == 'full'),
-    'PEER_EXIST' => ($seeders || $leechers || defined('SEEDER_EXIST') || defined('LEECHER_EXIST')),
-    'SEED_EXIST' => ($seeders || defined('SEEDER_EXIST')),
-    'LEECH_EXIST' => ($leechers || defined('LEECHER_EXIST')),
-    'TOR_HELP_LINKS' => $bb_cfg['tor_help_links'],
-    'CALL_SEED' => ($bb_cfg['callseed'] && $tor_reged && !isset($bb_cfg['tor_no_tor_act'][$tor_info['tor_status']]) && $seed_count < 3 && $tor_info['call_seed_time'] < (TIMENOW - 86400)),
+    'SHOW_DL_LIST_LINK' => (config('tp.bt_show_dl_list') || config('tp.allow_dl_list_names_mode')) && $t_data['topic_dl_type'] == TOPIC_DL_TYPE_DL,
+    'SHOW_TOR_ACT' => $tor_reged && $show_peers && (null === config('tp.tor_no_tor_act.' . $tor_info['tor_status']) || IS_AM),
+    'S_MODE_COUNT' => $s_mode == 'count',
+    'S_MODE_NAMES' => $s_mode == 'names',
+    'S_MODE_FULL' => $s_mode == 'full',
+    'PEER_EXIST' => $seeders || $leechers || defined('SEEDER_EXIST') || defined('LEECHER_EXIST'),
+    'SEED_EXIST' => $seeders || defined('SEEDER_EXIST'),
+    'LEECH_EXIST' => $leechers || defined('LEECHER_EXIST'),
+    'TOR_HELP_LINKS' => config('tp.tor_help_links'),
+    'CALL_SEED' => config('tp.callseed') && $tor_reged && null === config('tp.tor_no_tor_act.' . $tor_info['tor_status']) && $seed_count < 3 && $tor_info['call_seed_time'] < (TIMENOW - 86400),
 ));

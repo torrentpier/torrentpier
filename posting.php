@@ -225,7 +225,7 @@ if (!$is_auth[$is_auth_type]) {
 }
 
 if ($mode == 'new_rel') {
-    if ($tor_status = implode(',', $bb_cfg['tor_cannot_new'])) {
+    if ($tor_status = implode(',', config('tp.tor_cannot_new'))) {
         $sql = OLD_DB()->fetch_rowset("SELECT t.topic_title, t.topic_id, tor.tor_status
 			FROM " . BB_BT_TORRENTS . " tor, " . BB_TOPICS . " t
 			WHERE poster_id = {$userdata['user_id']}
@@ -236,7 +236,7 @@ if ($mode == 'new_rel') {
 
         $topics = '';
         foreach ($sql as $row) {
-            $topics .= $bb_cfg['tor_icons'][$row['tor_status']] . '<a href="' . TOPIC_URL . $row['topic_id'] . '">' . $row['topic_title'] . '</a><div class="spacer_12"></div>';
+            $topics .= config('tp.tor_icons.' . $row['tor_status']) . '<a href="' . TOPIC_URL . $row['topic_id'] . '">' . $row['topic_title'] . '</a><div class="spacer_12"></div>';
         }
         if ($topics) {
             bb_die($topics . $lang['UNEXECUTED_RELEASE']);
@@ -273,7 +273,7 @@ if (!IS_GUEST && $mode != 'newtopic' && ($submit || $preview || $mode == 'quote'
 				AND pt.post_id = p.post_id
 				AND p.post_time > $topic_last_read
 			ORDER BY p.post_time
-			LIMIT " . $bb_cfg['posts_per_page'];
+			LIMIT " . config('tp.posts_per_page');
 
         if ($rowset = OLD_DB()->fetch_rowset($sql)) {
             $topic_has_new_posts = true;
@@ -283,7 +283,7 @@ if (!IS_GUEST && $mode != 'newtopic' && ($submit || $preview || $mode == 'quote'
                     'ROW_CLASS' => !($i % 2) ? 'row1' : 'row2',
                     'POSTER' => profile_url($row),
                     'POSTER_NAME_JS' => addslashes($row['username']),
-                    'POST_DATE' => bb_date($row['post_time'], $bb_cfg['post_date_format']),
+                    'POST_DATE' => bb_date($row['post_time'], config('tp.post_date_format')),
                     'MESSAGE' => get_parsed_post($row),
                 ));
             }
@@ -365,10 +365,10 @@ if (($delete || $mode == 'delete') && !$confirm) {
             set_tracks(COOKIE_TOPIC, $tracking_topics, $topic_id);
         }
 
-        if (defined('TORRENT_ATTACH_ID') && $bb_cfg['bt_newtopic_auto_reg'] && !$error_msg) {
+        if (defined('TORRENT_ATTACH_ID') && config('tp.bt_newtopic_auto_reg') && !$error_msg) {
             include INC_DIR . '/functions_torrent.php';
             if (!OLD_DB()->fetch_row("SELECT attach_id FROM " . BB_BT_TORRENTS . " WHERE attach_id = " . TORRENT_ATTACH_ID)) {
-                if ($bb_cfg['premod']) {
+                if (config('tp.premod')) {
                     // Получение списка id форумов начиная с parent
                     $forum_parent = $forum_id;
                     if ($post_info['forum_parent']) {

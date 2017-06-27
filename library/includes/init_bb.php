@@ -47,9 +47,7 @@ function send_page($contents)
  */
 function compress_output($contents)
 {
-    global $bb_cfg;
-
-    if ($bb_cfg['gzip_compress'] && GZIP_OUTPUT_ALLOWED && !defined('NO_GZIP')) {
+    if (config('tp.gzip_compress') && GZIP_OUTPUT_ALLOWED && !defined('NO_GZIP')) {
         if (UA_GZIP_SUPPORTED && strlen($contents) > 2000) {
             header('Content-Encoding: gzip');
             $contents = gzencode($contents, 1);
@@ -67,7 +65,7 @@ if (!defined('IN_AJAX')) {
 }
 
 // Cookie params
-$c = $bb_cfg['cookie_prefix'];
+$c = config('tp.cookie_prefix');
 define('COOKIE_DATA', $c . 'data');
 define('COOKIE_FORUM', $c . 'f');
 define('COOKIE_MARK', $c . 'mark_read');
@@ -90,8 +88,7 @@ define('COOKIE_MAX_TRACKS', 90);
  */
 function bb_setcookie($name, $val, $lifetime = COOKIE_PERSIST, $httponly = false)
 {
-    global $bb_cfg;
-    return setcookie($name, $val, $lifetime, $bb_cfg['script_path'], $bb_cfg['cookie_domain'], $bb_cfg['cookie_secure'], $httponly);
+    return setcookie($name, $val, $lifetime, config('tp.script_path'), config('tp.cookie_domain'), config('tp.cookie_secure'), $httponly);
 }
 
 /**
@@ -285,11 +282,11 @@ define('CAT_URL', 'index.php?c=');
 define('DOWNLOAD_URL', 'dl.php?id=');
 define('FORUM_URL', 'viewforum.php?f=');
 define('GROUP_URL', 'group.php?g=');
-define('LOGIN_URL', $bb_cfg['login_url']);
+define('LOGIN_URL', config('tp.login_url'));
 define('MODCP_URL', 'modcp.php?f=');
-define('PM_URL', $bb_cfg['pm_url']);
+define('PM_URL', config('tp.pm_url'));
 define('POST_URL', 'viewtopic.php?p=');
-define('POSTING_URL', $bb_cfg['posting_url']);
+define('POSTING_URL', config('tp.posting_url'));
 define('PROFILE_URL', 'profile.php?mode=viewprofile&amp;u=');
 define('BONUS_URL', 'profile.php?mode=bonus');
 define('TOPIC_URL', 'viewtopic.php?t=');
@@ -396,8 +393,6 @@ if (DBG_USER) {
     require INC_DIR . '/functions_dev.php';
 }
 
-$bb_cfg = array_merge(bb_get_config(BB_CONFIG), $bb_cfg);
-
 $log_action = new TorrentPier\Legacy\LogAction();
 $html = new TorrentPier\Legacy\Common\Html();
 $user = new TorrentPier\Legacy\Common\User();
@@ -407,8 +402,8 @@ $userdata =& $user->data;
 /**
  * Cron
  */
-if ((empty($_POST) && !defined('IN_ADMIN') && !defined('IN_AJAX') && !file_exists(CRON_RUNNING) && ($bb_cfg['cron_enabled'] || defined('START_CRON'))) || defined('FORCE_CRON')) {
-    if (TIMENOW - $bb_cfg['cron_last_check'] > $bb_cfg['cron_check_interval']) {
+if ((empty($_POST) && !defined('IN_ADMIN') && !defined('IN_AJAX') && !file_exists(CRON_RUNNING) && (config('tp.cron_enabled') || defined('START_CRON'))) || defined('FORCE_CRON')) {
+    if (TIMENOW - config('tp.cron_last_check') > config('tp.cron_check_interval')) {
 
         /** Update cron_last_check */
         bb_update_config(['cron_last_check' => TIMENOW + 10]);
@@ -448,9 +443,9 @@ if ((empty($_POST) && !defined('IN_ADMIN') && !defined('IN_AJAX') && !file_exist
 /**
  * Exit if board is disabled via trigger
  */
-if (($bb_cfg['board_disable'] || file_exists(BB_DISABLED)) && !defined('IN_ADMIN') && !defined('IN_AJAX') && !defined('IN_LOGIN')) {
+if ((config('tp.board_disable') || file_exists(BB_DISABLED)) && !defined('IN_ADMIN') && !defined('IN_AJAX') && !defined('IN_LOGIN')) {
     header('HTTP/1.0 503 Service Unavailable');
-    if ($bb_cfg['board_disable']) {
+    if (config('tp.board_disable')) {
         // admin lock
         send_no_cache_headers();
         bb_die('BOARD_DISABLE');

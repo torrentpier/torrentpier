@@ -16,8 +16,7 @@ if (!defined('BB_ROOT')) {
 
 function update_forum_feed($forum_id, $forum_data)
 {
-    global $bb_cfg;
-    $file_path = $bb_cfg['atom']['path'] . '/f/' . $forum_id . '.atom';
+    $file_path = config('tp.atom.path') . '/f/' . $forum_id . '.atom';
     $select_tor_sql = $join_tor_sql = '';
     if ($forum_id == 0) {
         $forum_data['forum_name'] = 'Общая по всем разделам';
@@ -69,7 +68,7 @@ function update_forum_feed($forum_id, $forum_data)
             }
         }
         if (isset($topic['tor_status'])) {
-            if (isset($bb_cfg['tor_frozen'][$topic['tor_status']])) {
+            if (null !== config('tp.tor_frozen.' . $topic['tor_status'])) {
                 continue;
             }
         }
@@ -88,8 +87,7 @@ function update_forum_feed($forum_id, $forum_data)
 
 function update_user_feed($user_id, $username)
 {
-    global $bb_cfg;
-    $file_path = $bb_cfg['atom']['path'] . '/u/' . floor($user_id / 5000) . '/' . ($user_id % 100) . '/' . $user_id . '.atom';
+    $file_path = config('tp.atom.path') . '/u/' . floor($user_id / 5000) . '/' . ($user_id % 100) . '/' . $user_id . '.atom';
     $sql = "
 		SELECT
 			t.topic_id, t.topic_title, t.topic_status,
@@ -115,7 +113,7 @@ function update_user_feed($user_id, $username)
             }
         }
         if (isset($topic['tor_status'])) {
-            if (isset($bb_cfg['tor_frozen'][$topic['tor_status']])) {
+            if (null !== config('tp.tor_frozen.' . $topic['tor_status'])) {
                 continue;
             }
         }
@@ -134,7 +132,6 @@ function update_user_feed($user_id, $username)
 
 function create_atom($file_path, $mode, $id, $title, $topics)
 {
-    global $bb_cfg;
     $dir = dirname($file_path);
     if (!file_exists($dir)) {
         if (!bb_mkdir($dir)) {
@@ -152,11 +149,11 @@ function create_atom($file_path, $mode, $id, $title, $topics)
     }
     $atom = "";
     $atom .= "<?xml version=\"1.0\" encoding=\"utf-8\" ?>\n";
-    $atom .= "<feed xmlns=\"http://www.w3.org/2005/Atom\" xml:base=\"http://" . $bb_cfg['server_name'] . $bb_cfg['script_path'] . "\">\n";
+    $atom .= "<feed xmlns=\"http://www.w3.org/2005/Atom\" xml:base=\"http://" . config('tp.server_name') . config('tp.script_path') . "\">\n";
     $atom .= "<title>$title</title>\n";
     $atom .= "<updated>" . $date . "T$time+00:00</updated>\n";
     $atom .= "<id>tag:rto.feed,2000:/$mode/$id</id>\n";
-    $atom .= "<link href=\"http://" . $bb_cfg['server_name'] . $bb_cfg['script_path'] . "\" />\n";
+    $atom .= "<link href=\"http://" . config('tp.server_name') . config('tp.script_path') . "\" />\n";
     foreach ($topics as $topic) {
         $topic_id = $topic['topic_id'];
         $tor_size = '';

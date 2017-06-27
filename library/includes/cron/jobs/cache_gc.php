@@ -13,7 +13,7 @@ if (!defined('BB_ROOT')) {
 
 global $cron_runtime_log;
 
-foreach ($bb_cfg['cache']['engines'] as $cache_name => $cache_val) {
+foreach (config('tp.cache.engines') as $cache_name => $cache_val) {
     if (method_exists(OLD_CACHE($cache_name), 'gc')) {
         $changes = OLD_CACHE($cache_name)->gc();
         $cron_runtime_log = date('Y-m-d H:i:s') . " -- " . str_pad("$cache_name ", 25, '-', STR_PAD_RIGHT) . " del: $changes\n";

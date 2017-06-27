@@ -7,6 +7,8 @@
  * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
  */
 
+use Dotenv\Dotenv;
+use Dotenv\Exception\InvalidPathException;
 use Illuminate\Cache\CacheManager;
 use Illuminate\Config\Repository;
 use Illuminate\Container\Container;
@@ -15,6 +17,12 @@ use Illuminate\Database\Events\StatementPrepared;
 use Illuminate\Events\Dispatcher;
 use Illuminate\Filesystem\Filesystem;
 use Symfony\Component\Finder\Finder;
+
+try {
+    (new Dotenv(__DIR__))->load();
+} catch (InvalidPathException $e) {
+    throw $e;
+}
 
 /**
  * Service Container
@@ -30,18 +38,17 @@ $container->instance('events', new Dispatcher);
 
 /**
  * Database
- * @var array $bb_cfg
  */
-$container->singleton('db', function ($container) use ($bb_cfg) {
+$container->singleton('db', function ($container) {
     /** @var Manager $capsule */
     $capsule = new Manager;
 
     $capsule->addConnection([
         'driver' => 'mysql',
-        'host' => $bb_cfg['database']['host'],
-        'database' => $bb_cfg['database']['database'],
-        'username' => $bb_cfg['database']['username'],
-        'password' => $bb_cfg['database']['password'],
+        'host' => env('DB_HOST', 'localhost'),
+        'database' => env('DB_DATABASE', 'torrentpier'),
+        'username' => env('DB_USERNAME', 'root'),
+        'password' => env('DB_PASSWORD', 'pass'),
         'charset' => 'utf8mb4',
         'collation' => 'utf8mb4_unicode_ci',
         'prefix' => '',
@@ -82,9 +89,7 @@ $container->singleton('config', function () {
     /** @var Repository $config */
     $config = new Repository;
 
-    $files = [
-        'tp' => __DIR__ . '/library/config.php',
-    ];
+    $files = [];
 
     $configPath = __DIR__ . '/config';
 
@@ -97,12 +102,12 @@ $container->singleton('config', function () {
 
     foreach ($files as $key => $path) {
         if ($key === 'tp') {
-            if (!$cfg = OLD_CACHE('bb_config')->get('config_bb_config')) {
-                $cfg = [];
-                foreach (DB::table('bb_config')->get()->toArray() as $row) {
-                    $cfg[$row['config_name']] = $row['config_value'];
-                }
+            // if (!$cfg = OLD_CACHE('bb_config')->get('config_bb_config')) {
+            $cfg = [];
+            foreach (DB::table('bb_config')->get()->toArray() as $row) {
+                $cfg[$row['config_name']] = $row['config_value'];
             }
+            // }
             /** @noinspection PhpIncludeInspection */
             $config->set($key, array_merge(require $path, $cfg));
         } else {

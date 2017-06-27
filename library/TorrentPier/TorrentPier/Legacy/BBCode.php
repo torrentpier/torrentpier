@@ -133,8 +133,6 @@ class BBCode
      */
     public function bbcode2html($text)
     {
-        global $bb_cfg;
-
         $text = " $text ";
         $text = static::clean_up($text);
         $text = $this->spam_filter($text);
@@ -169,7 +167,7 @@ class BBCode
         $text = $this->new_line2html($text);
         $text = trim($text);
 
-        if ($bb_cfg['tidy_post']) {
+        if (config('tp.tidy_post')) {
             $text = $this->tidy($text);
         }
 
@@ -199,7 +197,6 @@ class BBCode
      */
     private function spam_filter($text)
     {
-        global $bb_cfg;
         static $spam_words = null;
         static $spam_replace = ' СПАМ';
 
@@ -208,11 +205,11 @@ class BBCode
         }
 
         // set $spam_words and $spam_replace
-        if (!$bb_cfg['spam_filter_file_path']) {
+        if (!config('tp.spam_filter_file_path')) {
             return $text;
         }
         if (null === $spam_words) {
-            $spam_words = file_get_contents($bb_cfg['spam_filter_file_path']);
+            $spam_words = file_get_contents(config('tp.spam_filter_file_path'));
             $spam_words = strtolower($spam_words);
             $spam_words = explode("\n", $spam_words);
         }
@@ -272,8 +269,6 @@ class BBCode
      */
     public function url_callback($m)
     {
-        global $bb_cfg;
-
         $url = trim($m[1]);
         $url_name = isset($m[2]) ? trim($m[2]) : $url;
 
@@ -281,7 +276,7 @@ class BBCode
             $url = 'http://' . $url;
         }
 
-        if (in_array(parse_url($url, PHP_URL_HOST), $bb_cfg['nofollow']['allowed_url']) || $bb_cfg['nofollow']['disabled']) {
+        if (in_array(parse_url($url, PHP_URL_HOST), config('tp.nofollow.allowed_url')) || config('tp.nofollow.disabled')) {
             $link = "<a href=\"$url\" class=\"postLink\">$url_name</a>";
         } else {
             $link = "<a href=\"$url\" class=\"postLink\" rel=\"nofollow\">$url_name</a>";
@@ -346,13 +341,11 @@ class BBCode
      */
     public function make_url_clickable_callback($m)
     {
-        global $bb_cfg;
-
         $max_len = 70;
         $href = $m[1];
         $name = (mb_strlen($href, 'UTF-8') > $max_len) ? mb_substr($href, 0, $max_len - 19) . '...' . mb_substr($href, -16) : $href;
 
-        if (in_array(parse_url($href, PHP_URL_HOST), $bb_cfg['nofollow']['allowed_url']) || $bb_cfg['nofollow']['disabled']) {
+        if (in_array(parse_url($href, PHP_URL_HOST), config('tp.nofollow.allowed_url')) || config('tp.nofollow.disabled')) {
             $link = "<a href=\"$href\" class=\"postLink\">$name</a>";
         } else {
             $link = "<a href=\"$href\" class=\"postLink\" rel=\"nofollow\">$name</a>";

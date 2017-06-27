@@ -57,11 +57,9 @@ function tz_select($default, $select_name = 'timezone')
 //
 function templates_select($default_style, $select_name = 'tpl_name')
 {
-    global $bb_cfg;
-
     $templates_select = '<select name="' . $select_name . '">';
     $x = 0;
-    foreach ($bb_cfg['templates'] as $folder => $name) {
+    foreach (config('tp.templates') as $folder => $name) {
         $selected = '';
         if ($folder == $default_style) {
             $selected = ' selected="selected"';
@@ -70,5 +68,6 @@ function templates_select($default_style, $select_name = 'tpl_name')
         $x++;
     }
     $templates_select .= '</select>';
-    return ($x > 1) ? $templates_select : reset($bb_cfg['templates']);
+    $templates = config('tp.templates');
+    return ($x > 1) ? $templates_select : reset($templates);
 }

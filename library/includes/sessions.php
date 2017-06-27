@@ -39,14 +39,12 @@ function cache_get_userdata($id)
 
 function cache_set_userdata($userdata, $force = false)
 {
-    global $bb_cfg;
-
     if (!$userdata || (ignore_cached_userdata() && !$force)) {
         return false;
     }
 
     $id = ($userdata['user_id'] == GUEST_UID) ? $userdata['session_ip'] : $userdata['session_id'];
-    return OLD_CACHE('session_cache')->set($id, $userdata, $bb_cfg['session_update_intrv']);
+    return OLD_CACHE('session_cache')->set($id, $userdata, config('tp.session_update_intrv'));
 }
 
 function cache_rm_userdata($userdata)

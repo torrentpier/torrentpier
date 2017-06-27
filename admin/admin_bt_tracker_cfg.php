@@ -65,9 +65,9 @@ set_tpl_vars($default_cfg_num, config('tracker'));
 set_tpl_vars_lang($default_cfg_num);
 
 $template->assign_vars(array(
-    'IGNORE_REPORTED_IP' => $bb_cfg['ignore_reported_ip'],
-    'ANNOUNCE_INTERVAL' => $bb_cfg['announce_interval'],
-    'PASSKEY_KEY' => $bb_cfg['passkey_key'],
+    'IGNORE_REPORTED_IP' => config('tp.ignore_reported_ip'),
+    'ANNOUNCE_INTERVAL' => config('tp.announce_interval'),
+    'PASSKEY_KEY' => config('tp.passkey_key'),
     'GOLD_SILVER_ENABLED' => config('tracker.gold_silver_enabled'),
     'DISABLE_SUBMIT' => true,
 

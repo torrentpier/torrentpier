@@ -11,9 +11,7 @@ if (!defined('BB_ROOT')) {
     die(basename(__FILE__));
 }
 
-global $bb_cfg;
-
-if ($bb_cfg['ocelot']['enabled']) {
+if (config('tp.ocelot.enabled')) {
     // Update TORRENT "completed" counters
     OLD_DB()->query("
 		UPDATE

@@ -9,7 +9,7 @@
 
 function run_jobs($jobs)
 {
-    global $bb_cfg, $datastore;
+    global $datastore;
 
     define('IN_CRON', true);
 

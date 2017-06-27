@@ -11,7 +11,7 @@ if (!defined('IN_AJAX')) {
     die(basename(__FILE__));
 }
 
-global $bb_cfg, $lang;
+global $lang;
 
 if (!$user_id = (int)$this->request['user_id'] or !$profiledata = get_userdata($user_id)) {
     $this->ajax_die($lang['NO_USER_ID_SPECIFIED']);
@@ -51,7 +51,7 @@ switch ($field) {
         break;
 
     case 'user_gender':
-        if (!$bb_cfg['gender']) {
+        if (!config('tp.gender')) {
             $this->ajax_die($lang['MODULE_OFF']);
         }
         if (!isset($lang['GENDER_SELECT'][$value])) {
@@ -62,7 +62,7 @@ switch ($field) {
         break;
 
     case 'user_birthday':
-        if (!$bb_cfg['birthday_enabled']) {
+        if (!config('tp.birthday_enabled')) {
             $this->ajax_die($lang['MODULE_OFF']);
         }
         $birthday_date = date_parse($value);
@@ -70,10 +70,10 @@ switch ($field) {
         if (!empty($birthday_date['year'])) {
             if (strtotime($value) >= TIMENOW) {
                 $this->ajax_die($lang['WRONG_BIRTHDAY_FORMAT']);
-            } elseif (bb_date(TIMENOW, 'Y', 'false') - $birthday_date['year'] > $bb_cfg['birthday_max_age']) {
-                $this->ajax_die(sprintf($lang['BIRTHDAY_TO_HIGH'], $bb_cfg['birthday_max_age']));
-            } elseif (bb_date(TIMENOW, 'Y', 'false') - $birthday_date['year'] < $bb_cfg['birthday_min_age']) {
-                $this->ajax_die(sprintf($lang['BIRTHDAY_TO_LOW'], $bb_cfg['birthday_min_age']));
+            } elseif (bb_date(TIMENOW, 'Y', 'false') - $birthday_date['year'] > config('tp.birthday_max_age')) {
+                $this->ajax_die(sprintf($lang['BIRTHDAY_TO_HIGH'], config('tp.birthday_max_age')));
+            } elseif (bb_date(TIMENOW, 'Y', 'false') - $birthday_date['year'] < config('tp.birthday_min_age')) {
+                $this->ajax_die(sprintf($lang['BIRTHDAY_TO_LOW'], config('tp.birthday_min_age')));
             }
         }
 
@@ -110,8 +110,8 @@ switch ($field) {
 
     case 'user_regdate':
     case 'user_lastvisit':
-        $tz = TIMENOW + (3600 * $bb_cfg['board_timezone']);
-        if (($value = strtotime($value, $tz)) < $bb_cfg['board_startdate'] or $value > TIMENOW) {
+        $tz = TIMENOW + (3600 * config('tp.board_timezone'));
+        if (($value = strtotime($value, $tz)) < config('tp.board_startdate') || $value > TIMENOW) {
             $this->ajax_die($lang['INVALID_DATE'] . $this->request['value']);
         }
         $this->response['new_value'] = bb_date($value, 'Y-m-d H:i', false);

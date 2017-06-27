@@ -43,8 +43,8 @@ if ($mode != 'poll_vote') {
 
 // проверка на возможность вносить изменения
 if ($mode == 'poll_delete') {
-    if ($t_data['topic_time'] < TIMENOW - $bb_cfg['poll_max_days'] * 86400) {
-        bb_die(sprintf($lang['NEW_POLL_DAYS'], $bb_cfg['poll_max_days']));
+    if ($t_data['topic_time'] < TIMENOW - config('tp.poll_max_days') * 86400) {
+        bb_die(sprintf($lang['NEW_POLL_DAYS'], config('tp.poll_max_days')));
     }
     if (!IS_ADMIN && ($t_data['topic_vote'] != POLL_FINISHED)) {
         bb_die($lang['CANNOT_DELETE_POLL']);

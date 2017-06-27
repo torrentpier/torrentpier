@@ -59,7 +59,7 @@ if (isset($_GET['pane']) && $_GET['pane'] == 'left') {
 } elseif (isset($_GET['pane']) && $_GET['pane'] == 'right') {
     $template->assign_vars(array(
         'TPL_ADMIN_MAIN' => true,
-        'ADMIN_LOCK' => $bb_cfg['board_disable'] ? true : false,
+        'ADMIN_LOCK' => config('tp.board_disable') ? true : false,
         'ADMIN_LOCK_CRON' => file_exists(BB_DISABLED) ? true : false,
     ));
 
@@ -67,8 +67,8 @@ if (isset($_GET['pane']) && $_GET['pane'] == 'left') {
     $total_posts = get_db_stat('postcount');
     $total_users = get_db_stat('usercount');
     $total_topics = get_db_stat('topiccount');
-    $start_date = bb_date($bb_cfg['board_startdate']);
-    $boarddays = (TIMENOW - $bb_cfg['board_startdate']) / 86400;
+    $start_date = bb_date(config('tp.board_startdate'));
+    $boarddays = (TIMENOW - config('tp.board_startdate')) / 86400;
 
     $posts_per_day = sprintf('%.2f', $total_posts / $boarddays);
     $topics_per_day = sprintf('%.2f', $total_topics / $boarddays);
@@ -76,10 +76,10 @@ if (isset($_GET['pane']) && $_GET['pane'] == 'left') {
 
     $avatar_dir_size = 0;
 
-    if ($avatar_dir = opendir($bb_cfg['avatars']['upload_path'])) {
+    if ($avatar_dir = opendir(config('tp.avatars.upload_path'))) {
         while ($file = readdir($avatar_dir)) {
             if ($file != '.' && $file != '..') {
-                $avatar_dir_size += @filesize(BB_ROOT . $bb_cfg['avatar_path'] . '/' . $file);
+                $avatar_dir_size += @filesize(BB_ROOT . config('tp.avatar_path') . '/' . $file);
             }
         }
         closedir($avatar_dir);
@@ -169,7 +169,7 @@ if (isset($_GET['pane']) && $_GET['pane'] == 'left') {
                         'STARTED' => bb_date($onlinerow_reg[$i]['session_start'], 'H:i', false),
                         'LASTUPDATE' => bb_date($onlinerow_reg[$i]['user_session_time'], 'H:i', false),
                         'IP_ADDRESS' => $reg_ip,
-                        'U_WHOIS_IP' => $bb_cfg['whois_info'] . $reg_ip,
+                        'U_WHOIS_IP' => config('tp.whois_info') . $reg_ip,
                     ));
                 }
             }
@@ -192,7 +192,7 @@ if (isset($_GET['pane']) && $_GET['pane'] == 'left') {
                     'STARTED' => bb_date($onlinerow_guest[$i]['session_start'], 'H:i', false),
                     'LASTUPDATE' => bb_date($onlinerow_guest[$i]['session_time'], 'H:i', false),
                     'IP_ADDRESS' => $guest_ip,
-                    'U_WHOIS_IP' => $bb_cfg['whois_info'] . $guest_ip,
+                    'U_WHOIS_IP' => config('tp.whois_info') . $guest_ip,
                 ));
             }
         }

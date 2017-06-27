@@ -11,7 +11,7 @@ if (!defined('IN_AJAX')) {
     die(basename(__FILE__));
 }
 
-global $bb_cfg, $lang;
+global $lang;
 
 $mode = (string)$this->request['mode'];
 $map = new TorrentPier\Legacy\Sitemap();
@@ -21,7 +21,7 @@ switch ($mode) {
     case 'create':
         $map->createSitemap();
         if (file_exists(SITEMAP_DIR . '/sitemap.xml')) {
-            $html .= $lang['SITEMAP_CREATED'] . ': <b>' . bb_date(TIMENOW, $bb_cfg['post_date_format']) . '</b> ' . $lang['SITEMAP_AVAILABLE'] . ': <a href="' . make_url('sitemap/sitemap.xml') . '" target="_blank">' . make_url('sitemap/sitemap.xml') . '</a>';
+            $html .= $lang['SITEMAP_CREATED'] . ': <b>' . bb_date(TIMENOW, config('tp.post_date_format')) . '</b> ' . $lang['SITEMAP_AVAILABLE'] . ': <a href="' . make_url('sitemap/sitemap.xml') . '" target="_blank">' . make_url('sitemap/sitemap.xml') . '</a>';
         } else {
             $html .= $lang['SITEMAP_NOT_CREATED'];
         }

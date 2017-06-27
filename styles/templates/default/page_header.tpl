@@ -6,16 +6,16 @@
 <meta http-equiv="Content-Style-Type" content="text/css" />
 <meta property="og:image" content="{SITE_URL}styles/images/logo/logo.png" />
 {META}
-<link rel="stylesheet" href="{STYLESHEET}?v={$bb_cfg['css_ver']}" type="text/css">
+<link rel="stylesheet" href="{STYLESHEET}?v={CFG_CSS_VER}" type="text/css">
 <link rel="shortcut icon" href="{SITE_URL}favicon.png" type="image/x-icon">
 <link rel="search" type="application/opensearchdescription+xml" href="{SITE_URL}opensearch_desc.xml" title="{SITENAME} (Forum)" />
 <link rel="search" type="application/opensearchdescription+xml" href="{SITE_URL}opensearch_desc_bt.xml" title="{SITENAME} (Tracker)" />
 
-<script type="text/javascript" src="{SITE_URL}styles/js/jquery.pack.js?v={$bb_cfg['js_ver']}"></script>
-<script type="text/javascript" src="{SITE_URL}styles/js/main.js?v={$bb_cfg['js_ver']}"></script>
+<script type="text/javascript" src="{SITE_URL}styles/js/jquery.pack.js?v={CFG_JS_VER}"></script>
+<script type="text/javascript" src="{SITE_URL}styles/js/main.js?v={CFG_JS_VER}"></script>
 
 <!-- IF INCLUDE_BBCODE_JS -->
-<script type="text/javascript" src="{SITE_URL}styles/js/bbcode.js?v={$bb_cfg['js_ver']}"></script>
+<script type="text/javascript" src="{SITE_URL}styles/js/bbcode.js?v={CFG_JS_VER}"></script>
 <script type="text/javascript">
 	window.BB = {};
 	window.encURL = encodeURIComponent;
@@ -34,10 +34,10 @@ var hidePostImg = false;
 
 <script type="text/javascript">
 var BB_ROOT      = "{#BB_ROOT}";
-var cookieDomain = "{$bb_cfg['cookie_domain']}";
-var cookiePath   = "{$bb_cfg['script_path']}";
-var cookiePrefix = "{$bb_cfg['cookie_prefix']}";
-var cookieSecure = {$bb_cfg['cookie_secure']};
+var cookieDomain = "{CFG_COOKIE_DOMAIN}";
+var cookiePath   = "{CFG_SCRIPT_PATH}";
+var cookiePrefix = "{CFG_COOKIE_PREFIX}";
+var cookieSecure = {CFG_COOKIE_SECURE};
 var LOGGED_IN    = {LOGGED_IN};
 var IWP          = 'HEIGHT=510,WIDTH=780,resizable=yes';
 var IWP_US       = 'HEIGHT=250,WIDTH=400,resizable=yes';
@@ -74,7 +74,7 @@ $(document).ready(function(){
 });
 <!-- ENDIF -->
 
-var ajax = new Ajax('{SITE_URL}{$bb_cfg['ajax_url']}', 'POST', 'json');
+var ajax = new Ajax('{SITE_URL}{CFG_AJAX_URL}', 'POST', 'json');
 
 function getElText (e)
 {
@@ -441,7 +441,7 @@ $(document).ready(function() {
 					<tr><td>{L_UPLOADED}</td><td class="seedmed"><b>{UP_TOTAL}</b></td></tr>
 					<tr><td>{L_RELEASED}</td><td class="seedmed">{RELEASED}</td></tr>
 					<tr><td>{L_BONUS}</td><td class="seedmed">{UP_BONUS}</td></tr>
-					<!-- IF $bb_cfg['seed_bonus_enabled'] --><tr><td>{L_SEED_BONUS}</td><td><a href="profile.php?mode=bonus"><span class="points bold">{POINTS}</span></a></td></tr><!-- ENDIF -->
+					<!-- IF CFG_SB_E --><tr><td>{L_SEED_BONUS}</td><td><a href="profile.php?mode=bonus"><span class="points bold">{POINTS}</span></a></td></tr><!-- ENDIF -->
 				</table>
 			</div><!-- ENDIF -->
 			<!-- IF HTML_SIDEBAR_1 -->

@@ -16,7 +16,7 @@ if (defined('PAGE_HEADER_SENT')) {
 
 // Parse and show the overall page header
 
-global $page_cfg, $userdata, $user, $ads, $bb_cfg, $template, $lang, $images;
+global $page_cfg, $userdata, $user, $ads, $template, $lang, $images;
 
 $logged_in = (int)!empty($userdata['session_logged_in']);
 
@@ -50,7 +50,7 @@ if (defined('SHOW_ONLINE') && SHOW_ONLINE) {
         'TOTAL_USERS_ONLINE' => ${$online_list}['stat'],
         'LOGGED_IN_USER_LIST' => ${$online_list}['userlist'],
         'USERS_ONLINE_COUNTS' => ${$online_list}['cnt'],
-        'RECORD_USERS' => sprintf($lang['RECORD_ONLINE_USERS'], $bb_cfg['record_online_users'], bb_date($bb_cfg['record_online_date'])),
+        'RECORD_USERS' => sprintf($lang['RECORD_ONLINE_USERS'], config('tp.record_online_users'), bb_date(config('tp.record_online_date'))),
     ));
 }
 
@@ -121,9 +121,9 @@ $template->assign_vars(array(
 
     'USE_TABLESORTER' => !empty($page_cfg['use_tablesorter']),
 
-    'SITENAME' => $bb_cfg['sitename'],
+    'SITENAME' => config('tp.sitename'),
     'U_INDEX' => BB_ROOT . "index.php",
-    'T_INDEX' => sprintf($lang['FORUM_INDEX'], $bb_cfg['sitename']),
+    'T_INDEX' => sprintf($lang['FORUM_INDEX'], config('tp.sitename')),
 
     'IS_GUEST' => IS_GUEST,
     'IS_USER' => IS_USER,
@@ -134,9 +134,9 @@ $template->assign_vars(array(
     'FORUM_PATH' => FORUM_PATH,
     'FULL_URL' => FULL_URL,
 
-    'CURRENT_TIME' => sprintf($lang['CURRENT_TIME'], bb_date(TIMENOW, $bb_cfg['last_visit_date_format'], false)),
-    'S_TIMEZONE' => preg_replace('/\(.*?\)/', '', sprintf($lang['ALL_TIMES'], $lang['TZ'][str_replace(',', '.', (float)$bb_cfg['board_timezone'])])),
-    'BOARD_TIMEZONE' => $bb_cfg['board_timezone'],
+    'CURRENT_TIME' => sprintf($lang['CURRENT_TIME'], bb_date(TIMENOW, config('tp.last_visit_date_format'), false)),
+    'S_TIMEZONE' => preg_replace('/\(.*?\)/', '', sprintf($lang['ALL_TIMES'], $lang['TZ'][str_replace(',', '.', (float)config('tp.board_timezone'))])),
+    'BOARD_TIMEZONE' => config('tp.board_timezone'),
 
     'PM_INFO' => $pm_info,
     'PRIVMSG_IMG' => $icon_pm,
@@ -147,7 +147,7 @@ $template->assign_vars(array(
     'THIS_USER' => profile_url($userdata),
     'THIS_AVATAR' => get_avatar($userdata['user_id'], $userdata['avatar_ext_id'], !bf($userdata['user_opt'], 'user_opt', 'dis_avatar')),
     'SHOW_LOGIN_LINK' => !defined('IN_LOGIN'),
-    'AUTOLOGIN_DISABLED' => !$bb_cfg['allow_autologin'],
+    'AUTOLOGIN_DISABLED' => !config('tp.allow_autologin'),
     'S_LOGIN_ACTION' => LOGIN_URL,
 
     'U_CUR_DOWNLOADS' => PROFILE_URL . $userdata['user_id'],
@@ -163,11 +163,11 @@ $template->assign_vars(array(
     'U_REGISTER' => "profile.php?mode=register",
     'U_SEARCH' => "search.php",
     'U_SEND_PASSWORD' => "profile.php?mode=sendpassword",
-    'U_TERMS' => $bb_cfg['terms_and_conditions_url'],
+    'U_TERMS' => config('tp.terms_and_conditions_url'),
     'U_TRACKER' => "tracker.php",
 
-    'SHOW_SIDEBAR1' => !empty(config('page.show_sidebar1.' . BB_SCRIPT)) || $bb_cfg['show_sidebar1_on_every_page'],
-    'SHOW_SIDEBAR2' => !empty(config('page.show_sidebar2.' . BB_SCRIPT)) || $bb_cfg['show_sidebar2_on_every_page'],
+    'SHOW_SIDEBAR1' => !empty(config('page.show_sidebar1.' . BB_SCRIPT)) || config('tp.show_sidebar1_on_every_page'),
+    'SHOW_SIDEBAR2' => !empty(config('page.show_sidebar2.' . BB_SCRIPT)) || config('tp.show_sidebar2_on_every_page'),
 
     'HTML_AGREEMENT' => LANG_DIR . 'html/user_agreement.html',
     'HTML_COPYRIGHT' => LANG_DIR . 'html/copyright_holders.html',
@@ -181,11 +181,11 @@ $template->assign_vars(array(
     'DOWNLOAD_URL' => BB_ROOT . DOWNLOAD_URL,
     'FORUM_URL' => BB_ROOT . FORUM_URL,
     'GROUP_URL' => BB_ROOT . GROUP_URL,
-    'LOGIN_URL' => $bb_cfg['login_url'],
+    'LOGIN_URL' => config('tp.login_url'),
     'NEWEST_URL' => '&amp;view=newest#newest',
-    'PM_URL' => $bb_cfg['pm_url'],
+    'PM_URL' => config('tp.pm_url'),
     'POST_URL' => BB_ROOT . POST_URL,
-    'POSTING_URL' => $bb_cfg['posting_url'],
+    'POSTING_URL' => config('tp.posting_url'),
     'PROFILE_URL' => BB_ROOT . PROFILE_URL,
     'TOPIC_URL' => BB_ROOT . TOPIC_URL,
 
@@ -205,10 +205,46 @@ $template->assign_vars(array(
     'READONLY' => HTML_READONLY,
     'SELECTED' => HTML_SELECTED,
 
-    'GS_ENABLED' => config('tracker.gold_silver_enabled'),
-
     'U_SEARCH_SELF_BY_LAST' => "search.php?uid={$userdata['user_id']}&amp;o=5",
-    'U_WATCHED_TOPICS' => "profile.php?mode=watch",
+    'U_WATCHED_TOPICS' => 'profile.php?mode=watch',
+
+    /** TODO: конфигурация используемая в шаблонах, избавиться */
+    'CFG_GS_ENABLED' => config('tracker.gold_silver_enabled'),
+    'CFG_UAU' => config('tp.user_agreement_url'),
+    'CFG_CHU' => config('tp.copyright_holders_url'),
+    'CFG_SHU' => config('tp.search_help_url'),
+    'CFG_AU' => config('tp.advert_url'),
+    'CFG_SB_E' => config('tp.seed_bonus_enabled'),
+    'CFG_USE_AP' => config('tp.use_ajax_posts'),
+    'CFG_JS_VER' => config('tp.js_ver'),
+    'CFG_CSS_VER' => config('tp.css_ver'),
+    'CFG_SCRIPT_PATH' => config('tp.script_path'),
+    'CFG_COOKIE_DOMAIN' => config('tp.cookie_domain'),
+    'CFG_COOKIE_PREFIX' => config('tp.cookie_prefix'),
+    'CFG_COOKIE_SECURE' => config('tp.cookie_secure'),
+    'CFG_TOR_COMMENT' => config('tp.tor_comment'),
+    'CFG_AV_MS' => config('tp.avatars.max_size'),
+    'CFG_AV_UA' => config('tp.avatars.up_allowed'),
+    'CFG_GA_MS' => config('tp.group_avatars.max_size'),
+    'CFG_GA_UA' => config('tp.group_avatars.up_allowed'),
+    'CFG_PM_NE' => config('tp.pm_notify_enabled'),
+    'CFG_AC_LANG' => config('tp.allow_change.language'),
+    'CFG_BIRTH_E' => config('tp.birthday_enabled'),
+    'CFG_GENDER' => config('tp.gender'),
+    'CFG_EMAIL_E' => config('tp.email.enabled'),
+    'CFG_REQ_EA' => config('tp.reg_email_activation'),
+    'CFG_TOR_STATS' => config('tp.tor_stats'),
+    'CFG_SEARCH_ET' => config('tp.search_engine_type'),
+    'CFG_TB_ONLY_REG' => config('tp.bt_tor_browse_only_reg'),
+    'CFG_RTU_HELP' => config('tp.ratio_url_help'),
+    'CFG_WIT_HELP' => config('tp.what_is_torrent_url_help'),
+    'CFG_HTD_HELP' => config('tp.how_to_download_url_help'),
+    'CFG_MAX_PO' => config('tp.max_poll_options'),
+    'CFG_LOG_DK' => config('tp.log_days_keep'),
+    'CFG_AJAX_URL' => config('tp.ajax_url'),
+    'CFG_TP_RD' => config('tp.tp_release_date'),
+    'CFG_TP_CN' => config('tp.tp_release_codename'),
+    'CFG_TP_VER' => config('tp.tp_version'),
 ));
 
 if (!empty(config('page.show_torhelp.' . BB_SCRIPT)) && !empty($userdata['torhelp'])) {
@@ -252,6 +288,6 @@ $template->pparse('page_header');
 
 define('PAGE_HEADER_SENT', true);
 
-if (!$bb_cfg['gzip_compress']) {
+if (!config('tp.gzip_compress')) {
     flush();
 }

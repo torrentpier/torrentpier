@@ -21,11 +21,11 @@ $dl_users_div_style_overflow = "padding: 6px; height: $dl_users_overflow_div_hei
 
 $template->assign_vars(array('DL_BUTTONS' => false));
 
-$count_mode = ($bb_cfg['bt_dl_list_only_count'] && !(@$_GET['dl'] === 'names'));
+$count_mode = (config('tp.bt_dl_list_only_count') && !(@$_GET['dl'] === 'names'));
 
-$dl_topic = ($t_data['topic_dl_type'] == TOPIC_DL_TYPE_DL && !($bb_cfg['bt_dl_list_only_1st_page'] && $start));
-$show_dl_list = ($dl_topic && ($bb_cfg['bt_show_dl_list'] || ($bb_cfg['allow_dl_list_names_mode'] && @$_GET['dl'] === 'names')));
-$show_dl_buttons = ($dl_topic && $bb_cfg['bt_show_dl_list_buttons']);
+$dl_topic = ($t_data['topic_dl_type'] == TOPIC_DL_TYPE_DL && !(config('tp.bt_dl_list_only_1st_page') && $start));
+$show_dl_list = ($dl_topic && (config('tp.bt_show_dl_list') || (config('tp.allow_dl_list_names_mode') && @$_GET['dl'] === 'names')));
+$show_dl_buttons = ($dl_topic && config('tp.bt_show_dl_list_buttons'));
 
 // link to clear DL-List
 $template->assign_vars(array('S_DL_DELETE' => false));
@@ -106,10 +106,10 @@ if ($show_dl_list) {
 if ($show_dl_buttons) {
     $template->assign_vars(array(
         'DL_BUTTONS' => true,
-        'DL_BUT_WILL' => $bb_cfg['bt_show_dl_but_will'],
-        'DL_BUT_DOWN' => $bb_cfg['bt_show_dl_but_down'],
-        'DL_BUT_COMPL' => $bb_cfg['bt_show_dl_but_compl'],
-        'DL_BUT_CANCEL' => $bb_cfg['bt_show_dl_but_cancel'],
+        'DL_BUT_WILL' => config('tp.bt_show_dl_but_will'),
+        'DL_BUT_DOWN' => config('tp.bt_show_dl_but_down'),
+        'DL_BUT_COMPL' => config('tp.bt_show_dl_but_compl'),
+        'DL_BUT_CANCEL' => config('tp.bt_show_dl_but_cancel'),
     ));
 
     $dl_hidden_fields = '

@@ -62,9 +62,7 @@ class Emailer
 
     public function __construct()
     {
-        global $bb_cfg;
-
-        $this->reply = $bb_cfg['board_email'];
+        $this->reply = config('tp.board_email');
     }
 
     /**
@@ -125,17 +123,15 @@ class Emailer
      */
     public function set_template($template_file, $template_lang = '')
     {
-        global $bb_cfg;
-
         if (!$template_lang) {
-            $template_lang = $bb_cfg['default_lang'];
+            $template_lang = config('tp.default_lang');
         }
 
         if (empty($this->tpl_msg[$template_lang . $template_file])) {
             $tpl_file = LANG_ROOT_DIR . '/' . $template_lang . '/email/' . $template_file . '.html';
 
             if (!file_exists($tpl_file)) {
-                $tpl_file = LANG_ROOT_DIR . '/' . $bb_cfg['default_lang'] . '/email/' . $template_file . '.html';
+                $tpl_file = LANG_ROOT_DIR . '/' . config('tp.default_lang') . '/email/' . $template_file . '.html';
 
                 /** @noinspection NotOptimalIfConditionsInspection */
                 if (!file_exists($tpl_file)) {
@@ -162,7 +158,7 @@ class Emailer
      */
     public function send($email_format = self::FORMAT_TEXT)
     {
-        global $bb_cfg, $lang, $userdata;
+        global $lang;
 
         if (!config('email.enabled')) {
             return false;
@@ -215,7 +211,7 @@ class Emailer
         /** @var Swift_Message $message */
         $message = (new Swift_Message())
             ->setSubject($this->subject)
-            ->setReturnPath($bb_cfg['bounce_email'])
+            ->setReturnPath(config('tp.bounce_email'))
             ->setFrom($this->from)
             ->setTo($this->to)
             ->setReplyTo($this->reply)
@@ -250,12 +246,10 @@ class Emailer
      */
     public function set_default_vars()
     {
-        global $bb_cfg;
-
         $this->vars = [
-            'BOARD_EMAIL' => $bb_cfg['board_email'],
-            'SITENAME' => $bb_cfg['board_email_sitename'],
-            'EMAIL_SIG' => !empty($bb_cfg['board_email_sig']) ? "-- \n{$bb_cfg['board_email_sig']}" : '',
+            'BOARD_EMAIL' => config('tp.board_email'),
+            'SITENAME' => config('tp.board_email_sitename'),
+            'EMAIL_SIG' => !empty(config('tp.board_email_sig')) ? "-- \n" . config('tp.board_email_sig') : '',
         ];
     }
 }

@@ -238,7 +238,7 @@ $(function(){
 							/>&nbsp;{L_HIDE_CONTENTS}
 						</label>
 					</p>
-					<!-- IF GS_ENABLED --><p class="chbox">{TOR_TYPE_CHBOX}</p><!-- ENDIF -->
+					<!-- IF CFG_GS_ENABLED --><p class="chbox">{TOR_TYPE_CHBOX}</p><!-- ENDIF -->
 				</div>
 				</fieldset>
 				<fieldset>
@@ -285,7 +285,7 @@ $(function(){
 					<p class="chbox med">
 						{ALL_WORDS_CHBOX}
 						&middot; <a class="med" href="#" onclick="return get_fs_link();">{L_SEL_CHAPTERS}</a>
-						<!-- IF $bb_cfg['search_help_url'] --> &middot; <a class="med" href="{$bb_cfg['search_help_url']}">{L_SEARCH_HELP_URL}</a><!-- ENDIF -->
+						<!-- IF CFG_SHU --> &middot; <a class="med" href="{CFG_SHU}">{L_SEARCH_HELP_URL}</a><!-- ENDIF -->
 					</p>
 				</div>
 				</fieldset>

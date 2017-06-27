@@ -117,7 +117,7 @@
     <td><b>{L_UPDATE}:</b></td>
     <td>
       <a href="#" id="update_user_level" onclick="ajax.manage_admin('update_user_level'); return false;">{L_USER_LEVELS}</a>
-      <!-- IF $bb_cfg['search_engine_type'] == "sphinx" -->,&nbsp;
+      <!-- IF CFG_SEARCH_ET == "sphinx" -->,&nbsp;
       <a href="#" id="indexer" onclick="ajax.manage_admin('indexer'); return false;">{L_INDEXER}</a>
       <!-- ENDIF -->
     </td>
@@ -151,11 +151,11 @@
   </tr>
   <tr>
     <td class="row1" nowrap="nowrap" width="25%">{L_TP_VERSION}:</td>
-    <td class="row2"><b>{$bb_cfg['tp_release_codename']} ({$bb_cfg['tp_version']})</b></td>
+    <td class="row2"><b>{CFG_TP_CN} ({CFG_TP_VER})</b></td>
   </tr>
   <tr>
     <td class="row1" nowrap="nowrap" width="25%">{L_TP_RELEASE_DATE}:</td>
-    <td class="row2"><b>{$bb_cfg['tp_release_date']}</b></td>
+    <td class="row2"><b>{CFG_TP_RD}</b></td>
   </tr>
 </table>
 <br/>

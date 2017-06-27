@@ -30,11 +30,11 @@ class Upload
         'error' => UPLOAD_ERR_NO_FILE,
     ];
     public $orig_name = '';
-    public $file_path = '';      // Stored file path
+    public $file_path = '';
     public $file_ext = '';
     public $file_ext_id = '';
     public $file_size = '';
-    public $ext_ids = []; // array_flip($bb_cfg['file_id_ext'])
+    public $ext_ids = [];
     public $errors = [];
     public $img_types = [
         1 => 'gif',
@@ -53,7 +53,7 @@ class Upload
      */
     public function init(array $cfg = [], array $post_params = [], $uploaded_only = true)
     {
-        global $bb_cfg, $lang;
+        global $lang;
 
         $this->cfg = array_merge($this->cfg, $cfg);
         $this->file = $post_params;
@@ -85,7 +85,7 @@ class Upload
             return false;
         }
         // get ext
-        $this->ext_ids = array_flip($bb_cfg['file_id_ext']);
+        $this->ext_ids = array_flip(config('tp.file_id_ext'));
         $file_name_ary = explode('.', $this->file['name']);
         $this->file_ext = strtolower(end($file_name_ary));
 

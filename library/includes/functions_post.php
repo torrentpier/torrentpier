@@ -16,7 +16,7 @@ if (!defined('BB_ROOT')) {
 //
 function prepare_post(&$mode, &$post_data, &$error_msg, &$username, &$subject, &$message)
 {
-    global $bb_cfg, $user, $userdata, $lang;
+    global $user, $userdata, $lang;
 
     // Check username
     if (!empty($username)) {
@@ -47,10 +47,10 @@ function prepare_post(&$mode, &$post_data, &$error_msg, &$username, &$subject, &
     }
 
     // Check smilies limit
-    if ($bb_cfg['max_smilies']) {
-        $count_smilies = substr_count(bbcode2html($message), '<img class="smile" src="' . $bb_cfg['smilies_path']);
-        if ($count_smilies > $bb_cfg['max_smilies']) {
-            $to_many_smilies = sprintf($lang['MAX_SMILIES_PER_POST'], $bb_cfg['max_smilies']);
+    if (config('tp.max_smilies')) {
+        $count_smilies = substr_count(bbcode2html($message), '<img class="smile" src="' . config('tp.smilies_path'));
+        if ($count_smilies > config('tp.max_smilies')) {
+            $to_many_smilies = sprintf($lang['MAX_SMILIES_PER_POST'], config('tp.max_smilies'));
             $error_msg .= (!empty($error_msg)) ? '<br />' . $to_many_smilies : $to_many_smilies;
         }
     }
@@ -65,7 +65,7 @@ function prepare_post(&$mode, &$post_data, &$error_msg, &$username, &$subject, &
 //
 function submit_post($mode, &$post_data, &$message, &$meta, &$forum_id, &$topic_id, &$post_id, &$topic_type, $post_username, $post_subject, $post_message, $update_post_time, $poster_rg_id, $attach_rg_sig)
 {
-    global $userdata, $post_info, $is_auth, $bb_cfg, $lang, $datastore;
+    global $userdata, $post_info, $is_auth, $lang, $datastore;
 
     $current_time = TIMENOW;
 
@@ -78,7 +78,7 @@ function submit_post($mode, &$post_data, &$message, &$meta, &$forum_id, &$topic_
 
         if ($row = OLD_DB()->fetch_row($sql) && $row['last_post_time']) {
             if ($userdata['user_level'] == USER) {
-                if (TIMENOW - $row['last_post_time'] < $bb_cfg['flood_interval']) {
+                if (TIMENOW - $row['last_post_time'] < config('tp.flood_interval')) {
                     bb_die($lang['FLOOD_ERROR']);
                 }
             }
@@ -172,17 +172,17 @@ function submit_post($mode, &$post_data, &$message, &$meta, &$forum_id, &$topic_
     ));
 
     //Обновление кеша новостей на главной
-    if ($bb_cfg['show_latest_news']) {
-        $news_forums = array_flip(explode(',', $bb_cfg['latest_news_forum_id']));
-        if (isset($news_forums[$forum_id]) && $bb_cfg['show_latest_news'] && $mode == 'newtopic') {
+    if (config('tp.show_latest_news')) {
+        $news_forums = array_flip(explode(',', config('tp.latest_news_forum_id')));
+        if (isset($news_forums[$forum_id]) && config('tp.show_latest_news') && $mode == 'newtopic') {
             $datastore->enqueue('latest_news');
             $datastore->update('latest_news');
         }
     }
 
-    if ($bb_cfg['show_network_news']) {
-        $net_forums = array_flip(explode(',', $bb_cfg['network_news_forum_id']));
-        if (isset($net_forums[$forum_id]) && $bb_cfg['show_network_news'] && $mode == 'newtopic') {
+    if (config('tp.show_network_news')) {
+        $net_forums = array_flip(explode(',', config('tp.network_news_forum_id')));
+        if (isset($net_forums[$forum_id]) && config('tp.show_network_news') && $mode == 'newtopic') {
             $datastore->enqueue('network_news');
             $datastore->update('network_news');
         }
@@ -287,9 +287,9 @@ function delete_post($mode, $post_data, &$message, &$meta, $forum_id, $topic_id,
 //
 function user_notification($mode, &$post_data, &$topic_title, &$forum_id, &$topic_id, &$notify_user)
 {
-    global $bb_cfg, $lang, $userdata;
+    global $lang, $userdata;
 
-    if (!$bb_cfg['topic_notify_enabled']) {
+    if (!config('tp.topic_notify_enabled')) {
         return;
     }
 
@@ -329,14 +329,14 @@ function user_notification($mode, &$post_data, &$topic_title, &$forum_id, &$topi
                     /** @var TorrentPier\Legacy\Emailer() $emailer */
                     $emailer = new TorrentPier\Legacy\Emailer();
 
-                    $emailer->set_from([$bb_cfg['board_email'] => $bb_cfg['sitename']]);
+                    $emailer->set_from([config('tp.board_email') => config('tp.sitename')]);
                     $emailer->set_to([$row['user_email'] => $row['username']]);
                     $emailer->set_subject(sprintf($lang['EMAILER_SUBJECT']['TOPIC_NOTIFY'], $topic_title));
 
                     $emailer->set_template('topic_notify', $row['user_lang']);
                     $emailer->assign_vars(array(
                         'TOPIC_TITLE' => html_entity_decode($topic_title),
-                        'SITENAME' => $bb_cfg['sitename'],
+                        'SITENAME' => config('tp.sitename'),
                         'USERNAME' => $row['username'],
                         'U_TOPIC' => $u_topic,
                         'U_STOP_WATCHING_TOPIC' => $unwatch_topic,
@@ -445,7 +445,7 @@ function insert_post($mode, $topic_id, $forum_id = '', $old_forum_id = '', $new_
 
 function topic_review($topic_id)
 {
-    global $bb_cfg, $template;
+    global $template;
 
     // Fetch posts data
     $review_posts = OLD_DB()->fetch_rowset("
@@ -458,7 +458,7 @@ function topic_review($topic_id)
 		LEFT JOIN " . BB_POSTS_HTML . " h  ON(h.post_id = p.post_id)
 		WHERE p.topic_id = " . (int)$topic_id . "
 		ORDER BY p.post_time DESC
-		LIMIT " . $bb_cfg['posts_per_page'] . "
+		LIMIT " . config('tp.posts_per_page') . "
 	");
 
     // Topic posts block
@@ -467,7 +467,7 @@ function topic_review($topic_id)
             'ROW_CLASS' => !($i % 2) ? 'row1' : 'row2',
             'POSTER' => profile_url($post),
             'POSTER_NAME_JS' => addslashes($post['username']),
-            'POST_DATE' => bb_date($post['post_time'], $bb_cfg['post_date_format']),
+            'POST_DATE' => bb_date($post['post_time'], config('tp.post_date_format')),
             'MESSAGE' => get_parsed_post($post),
         ));
     }

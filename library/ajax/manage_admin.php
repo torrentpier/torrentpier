@@ -11,14 +11,14 @@ if (!defined('IN_AJAX')) {
     die(basename(__FILE__));
 }
 
-global $userdata, $lang, $bb_cfg;
+global $userdata, $lang;
 
 $mode = (string)$this->request['mode'];
 
 switch ($mode) {
     case 'clear_cache':
 
-        foreach ($bb_cfg['cache']['engines'] as $cache_name => $cache_val) {
+        foreach (config('tp.cache.engines') as $cache_name => $cache_val) {
             if (!in_array('db_sqlite', $cache_val)) {
                 OLD_CACHE($cache_name)->rm();
             }
@@ -59,20 +59,20 @@ switch ($mode) {
 
     case 'indexer':
 
-        exec("indexer --config {$bb_cfg['sphinx_config_path']} --all --rotate", $result);
+        exec('indexer --config ' . config('tp.sphinx_config_path') . ' --all --rotate', $result);
 
-        if (!is_file($bb_cfg['sphinx_config_path'] . ".log")) {
-            file_put_contents($bb_cfg['sphinx_config_path'] . ".log", "####Logger from dimka3210.####" . date("H:i:s", TIMENOW) . "##############################\r\n\r\n\r\n\r\n", FILE_APPEND);
+        if (!is_file(config('tp.sphinx_config_path') . '.log')) {
+            file_put_contents(config('tp.sphinx_config_path') . '.log', date('H:i:s', TIMENOW) . "##############################\r\n\r\n\r\n\r\n", FILE_APPEND);
         }
 
-        file_put_contents($bb_cfg['sphinx_config_path'] . ".log", "##############################" . date("H:i:s", TIMENOW) . "##############################\r\n", FILE_APPEND);
+        file_put_contents(config('tp.sphinx_config_path') . '.log', '##############################' . date('H:i:s', TIMENOW) . "##############################\r\n", FILE_APPEND);
 
         foreach ($result as $row) {
-            file_put_contents($bb_cfg['sphinx_config_path'] . ".log", $row . "\r\n", FILE_APPEND);
+            file_put_contents(config('tp.sphinx_config_path') . '.log', $row . "\r\n", FILE_APPEND);
         }
 
-        file_put_contents($bb_cfg['sphinx_config_path'] . ".log", "\r\n", FILE_APPEND);
-        file_put_contents($bb_cfg['sphinx_config_path'] . ".log", "\r\n", FILE_APPEND);
+        file_put_contents(config('tp.sphinx_config_path') . '.log', "\r\n", FILE_APPEND);
+        file_put_contents(config('tp.sphinx_config_path') . '.log', "\r\n", FILE_APPEND);
 
         $this->response['indexer_html'] = '<span class="seed bold">' . $lang['INDEXER'] . '</span>';
 

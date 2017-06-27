@@ -36,10 +36,10 @@ if ($group_id) {
 if ($is_moderator) {
     // Avatar
     if ($submit) {
-        if (!empty($_FILES['avatar']['name']) && $bb_cfg['group_avatars']['up_allowed']) {
+        if (!empty($_FILES['avatar']['name']) && config('tp.group_avatars.up_allowed')) {
             $upload = new TorrentPier\Legacy\Common\Upload();
 
-            if ($upload->init($bb_cfg['group_avatars'], $_FILES['avatar']) and $upload->store('avatar', array("user_id" => GROUP_AVATAR_MASK . $group_id, "avatar_ext_id" => $group_info['avatar_ext_id']))) {
+            if ($upload->init(config('tp.group_avatars'), $_FILES['avatar']) and $upload->store('avatar', array("user_id" => GROUP_AVATAR_MASK . $group_id, "avatar_ext_id" => $group_info['avatar_ext_id']))) {
                 $avatar_ext_id = (int)$upload->file_ext_id;
             } else {
                 bb_die(implode($upload->errors));
@@ -78,7 +78,7 @@ if ($is_moderator) {
         'S_HIDDEN_FIELDS' => $s_hidden_fields,
         'S_GROUP_CONFIG_ACTION' => "group_edit.php?" . POST_GROUPS_URL . "=$group_id",
 
-        'AVATAR_EXPLAIN' => sprintf($lang['AVATAR_EXPLAIN'], $bb_cfg['group_avatars']['max_width'], $bb_cfg['group_avatars']['max_height'], (round($bb_cfg['group_avatars']['max_size'] / 1024))),
+        'AVATAR_EXPLAIN' => sprintf($lang['AVATAR_EXPLAIN'], config('tp.group_avatars.max_width'), config('tp.group_avatars.max_height'), round(config('tp.group_avatars.max_size') / 1024)),
         'AVATAR_IMG' => get_avatar(GROUP_AVATAR_MASK . $group_id, $group_info['avatar_ext_id']),
     ));
 

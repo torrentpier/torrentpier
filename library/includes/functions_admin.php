@@ -646,7 +646,7 @@ function post_delete($mode_or_post_id, $user_id = null, $exclude_first = true)
 
 function user_delete($user_id, $delete_posts = false)
 {
-    global $bb_cfg, $log_action;
+    global $log_action;
 
     if (!$user_csv = get_id_csv($user_id)) {
         return false;
@@ -728,7 +728,7 @@ function user_delete($user_id, $delete_posts = false)
 
     // Delete user feed
     foreach (explode(',', $user_csv) as $user_id) {
-        $file_path = $bb_cfg['atom']['path'] . '/u/' . floor($user_id / 5000) . '/' . ($user_id % 100) . '/' . $user_id . '.atom';
+        $file_path = config('tp.atom.path') . '/u/' . floor($user_id / 5000) . '/' . ($user_id % 100) . '/' . $user_id . '.atom';
         @unlink($file_path);
     }
 }

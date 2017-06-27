@@ -65,7 +65,7 @@ OLD_DB()->query("
 
 // Clean peers table
 if (config('tracker.autoclean')) {
-    $announce_interval = max((int)$bb_cfg['announce_interval'], 60);
+    $announce_interval = max((int)config('tp.announce_interval'), 60);
     $expire_factor = max((float)config('tracker.expire_factor'), 1);
     $peer_expire_time = TIMENOW - floor($announce_interval * $expire_factor);
 

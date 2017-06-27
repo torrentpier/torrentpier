@@ -13,22 +13,19 @@ if (!defined('BB_ROOT')) {
 
 function get_path_from_id($id, $ext_id, $base_path, $first_div, $sec_div)
 {
-    global $bb_cfg;
-    $ext = $bb_cfg['file_id_ext'][$ext_id] ?? '';
+    $ext = config('tp.file_id_ext.' . $ext_id) ?? '';
     return ($base_path ? "$base_path/" : '') . floor($id / $first_div) . '/' . ($id % $sec_div) . '/' . $id . ($ext ? ".$ext" : '');
 }
 
 function get_avatar_path($id, $ext_id, $base_path = null, $first_div = 10000, $sec_div = 100)
 {
-    global $bb_cfg;
-    $base_path = $base_path ?? $bb_cfg['avatars']['upload_path'];
+    $base_path = $base_path ?? config('tp.avatars.upload_path');
     return get_path_from_id($id, $ext_id, $base_path, $first_div, $sec_div);
 }
 
 function get_attach_path($id, $ext_id = '', $base_path = null, $first_div = 10000, $sec_div = 100)
 {
-    global $bb_cfg;
-    $base_path = $base_path ?? $bb_cfg['attach']['upload_path'];
+    $base_path = $base_path ?? config('tp.attach.upload_path');
     return get_path_from_id($id, $ext_id, $base_path, $first_div, $sec_div);
 }
 
@@ -581,26 +578,22 @@ function humn_size($size, $rounder = null, $min = null, $space = '&nbsp;')
 
 function bt_show_ip($ip, $port = '')
 {
-    global $bb_cfg;
-
     if (IS_AM) {
         $ip = decode_ip($ip);
         $ip .= ($port) ? ":$port" : '';
         return $ip;
     }
 
-    return ($bb_cfg['bt_show_ip_only_moder']) ? false : decode_ip_xx($ip);
+    return config('tp.bt_show_ip_only_moder') ? false : decode_ip_xx($ip);
 }
 
 function bt_show_port($port)
 {
-    global $bb_cfg;
-
     if (IS_AM) {
         return $port;
     }
 
-    return ($bb_cfg['bt_show_port_only_moder']) ? false : $port;
+    return config('tp.bt_show_port_only_moder') ? false : $port;
 }
 
 function decode_ip_xx($ip)
@@ -855,7 +848,7 @@ function bb_get_config($table, $from_db = false, $update_cache = true)
 {
     if ($from_db or !$cfg = OLD_CACHE('bb_config')->get("config_{$table}")) {
         $cfg = array();
-        foreach (OLD_DB()->fetch_rowset("SELECT * FROM $table") as $row) {
+        foreach (DB::table($table)->get()->toArray() as $row) {
             $cfg[$row['config_name']] = $row['config_value'];
         }
         if ($update_cache) {
@@ -1075,14 +1068,14 @@ function get_forum_select($mode = 'guest', $name = POST_FORUM_URL, $selected = n
 
 function setup_style()
 {
-    global $bb_cfg, $template, $userdata;
+    global $template, $userdata;
 
     // AdminCP works only with default template
-    $tpl_dir_name = defined('IN_ADMIN') ? 'default' : basename($bb_cfg['tpl_name']);
-    $stylesheet = defined('IN_ADMIN') ? 'main.css' : basename($bb_cfg['stylesheet']);
+    $tpl_dir_name = defined('IN_ADMIN') ? 'default' : basename(config('tp.tpl_name'));
+    $stylesheet = defined('IN_ADMIN') ? 'main.css' : basename(config('tp.stylesheet'));
 
     if (!IS_GUEST && !empty($userdata['tpl_name'])) {
-        foreach ($bb_cfg['templates'] as $folder => $name) {
+        foreach (config('tp.templates') as $folder => $name) {
             if ($userdata['tpl_name'] == $folder) {
                 $tpl_dir_name = basename($userdata['tpl_name']);
             }
@@ -1096,7 +1089,7 @@ function setup_style()
         'BB_ROOT' => BB_ROOT,
         'SPACER' => make_url('styles/images/spacer.gif'),
         'STYLESHEET' => make_url($css_dir . $stylesheet),
-        'EXT_LINK_NEW_WIN' => $bb_cfg['ext_link_new_win'],
+        'EXT_LINK_NEW_WIN' => config('tp.ext_link_new_win'),
         'TPL_DIR' => make_url($css_dir),
         'SITE_URL' => make_url('/'),
     ));
@@ -1109,19 +1102,19 @@ function setup_style()
 // Create date / time with format and friendly date
 function bb_date($gmepoch, $format = false, $friendly_date = true)
 {
-    global $bb_cfg, $lang, $userdata;
+    global $lang, $userdata;
 
     $gmepoch = (int)$gmepoch;
 
     if (!$format) {
-        $format = $bb_cfg['default_dateformat'];
+        $format = config('tp.default_dateformat');
     }
     if (empty($lang)) {
-        require_once($bb_cfg['default_lang_dir'] . 'main.php');
+        require_once(config('tp.default_lang_dir') . 'main.php');
     }
 
     if (empty($userdata['session_logged_in'])) {
-        $tz = $bb_cfg['board_timezone'];
+        $tz = config('tp.board_timezone');
     } else {
         $tz = $userdata['user_timezone'];
     }
@@ -1156,17 +1149,16 @@ function bb_date($gmepoch, $format = false, $friendly_date = true)
         }
     }
 
-    return ($bb_cfg['translate_dates']) ? strtr(strtoupper($date), $lang['DATETIME']) : $date;
+    return config('tp.translate_dates') ? strtr(strtoupper($date), $lang['DATETIME']) : $date;
 }
 
 function birthday_age($date)
 {
-    global $bb_cfg;
     if (!$date) {
         return;
     }
 
-    $tz = TIMENOW + (3600 * $bb_cfg['board_timezone']);
+    $tz = TIMENOW + (3600 * config('tp.board_timezone'));
     return delta_time(strtotime($date, $tz));
 }
 
@@ -1290,9 +1282,7 @@ function bb_preg_quote($str, $delimiter)
 //
 function obtain_word_list(&$orig_word, &$replacement_word)
 {
-    global $bb_cfg;
-
-    if (!$bb_cfg['use_word_censor']) {
+    if (!config('tp.use_word_censor')) {
         return;
     }
 
@@ -1315,7 +1305,7 @@ function obtain_word_list(&$orig_word, &$replacement_word)
 
 function bb_die($msg_text)
 {
-    global $ajax, $bb_cfg, $lang, $template, $theme, $userdata;
+    global $ajax, $lang, $template, $theme, $userdata;
 
     if (defined('IN_AJAX')) {
         $ajax->ajax_die($msg_text);
@@ -1330,7 +1320,7 @@ function bb_die($msg_text)
 
     // If empty lang
     if (empty($lang)) {
-        require($bb_cfg['default_lang_dir'] . 'main.php');
+        require(config('tp.default_lang_dir') . 'main.php');
     }
 
     // If empty session
@@ -1341,7 +1331,7 @@ function bb_die($msg_text)
     // If the header hasn't been output then do it
     if (!defined('PAGE_HEADER_SENT')) {
         if (empty($template)) {
-            $template = new TorrentPier\Legacy\Template(BB_ROOT . "templates/{$bb_cfg['tpl_name']}");
+            $template = new TorrentPier\Legacy\Template(BB_ROOT . 'templates/' . config('tp.tpl_name'));
         }
         if (empty($theme)) {
             $theme = setup_style();
@@ -1369,8 +1359,6 @@ function bb_die($msg_text)
 
 function bb_simple_die($txt)
 {
-    global $bb_cfg;
-
     if (!empty($_COOKIE['explain'])) {
         bb_die("bb_simple_die:<br /><br />$txt");
     }
@@ -1386,7 +1374,7 @@ function bb_realpath($path)
 
 function redirectToLogin($url = '')
 {
-    redirectToUrl(LOGIN_URL . '?redirect=' . (($url) ?: ($_SERVER['REQUEST_URI'] ?? '/')));
+    redirectToUrl(LOGIN_URL . '?redirect=' . ($url ?: ($_SERVER['REQUEST_URI'] ?? '/')));
 }
 
 function meta_refresh($url, $time = 5)
@@ -1398,8 +1386,6 @@ function meta_refresh($url, $time = 5)
 
 function redirectToUrl($url)
 {
-    global $bb_cfg;
-
     if (headers_sent($filename, $linenum)) {
         trigger_error("Headers already sent in $filename($linenum)", E_USER_ERROR);
     }
@@ -1409,11 +1395,11 @@ function redirectToUrl($url)
     }
 
     $url = trim($url);
-    $server_protocol = ($bb_cfg['cookie_secure']) ? 'https://' : 'http://';
+    $server_protocol = config('tp.cookie_secure') ? 'https://' : 'http://';
 
-    $server_name = preg_replace('#^\/?(.*?)\/?$#', '\1', trim($bb_cfg['server_name']));
-    $server_port = ($bb_cfg['server_port'] <> 80) ? ':' . trim($bb_cfg['server_port']) : '';
-    $script_name = preg_replace('#^\/?(.*?)\/?$#', '\1', trim($bb_cfg['script_path']));
+    $server_name = preg_replace('#^\/?(.*?)\/?$#', '\1', trim(config('tp.server_name')));
+    $server_port = (config('tp.server_port') <> 80) ? ':' . trim(config('tp.server_port')) : '';
+    $script_name = preg_replace('#^\/?(.*?)\/?$#', '\1', trim(config('tp.script_path')));
 
     if ($script_name) {
         $script_name = "/$script_name";
@@ -1609,9 +1595,9 @@ function cat_exists($cat_id)
 
 function get_topic_icon($topic, $is_unread = null)
 {
-    global $bb_cfg, $images;
+    global $images;
 
-    $t_hot = ($topic['topic_replies'] >= $bb_cfg['hot_threshold']);
+    $t_hot = ($topic['topic_replies'] >= config('tp.hot_threshold'));
     $is_unread = $is_unread ?? is_unread($topic['topic_last_post_time'], $topic['topic_id'], $topic['forum_id']);
 
     if ($topic['topic_status'] == TOPIC_MOVED) {
@@ -1699,8 +1685,7 @@ function get_poll_data_items_js($topic_id)
 
 function poll_is_active($t_data)
 {
-    global $bb_cfg;
-    return ($t_data['topic_vote'] == 1 && $t_data['topic_time'] > TIMENOW - $bb_cfg['poll_max_days'] * 86400);
+    return ($t_data['topic_vote'] == 1 && $t_data['topic_time'] > TIMENOW - config('tp.poll_max_days') * 86400);
 }
 
 function print_confirmation($tpl_vars)
@@ -1778,7 +1763,7 @@ function clean_title($str, $replace_underscore = false)
 
 function clean_text_match($text, $ltrim_star = true, $die_if_empty = false)
 {
-    global $bb_cfg, $lang;
+    global $lang;
 
     $text = str_compact($text);
     $ltrim_chars = ($ltrim_star) ? ' *-!' : ' ';
@@ -1786,7 +1771,7 @@ function clean_text_match($text, $ltrim_star = true, $die_if_empty = false)
 
     $text = ' ' . str_compact(ltrim($text, $ltrim_chars)) . ' ';
 
-    if ($bb_cfg['search_engine_type'] == 'sphinx') {
+    if (config('tp.search_engine_type') == 'sphinx') {
         $text = preg_replace('#(?<=\S)\-#u', ' ', $text);                 // "1-2-3" -> "1 2 3"
         $text = preg_replace('#[^0-9a-zA-Zа-яА-ЯёЁ\-_*|]#u', ' ', $text); // допустимые символы (кроме " которые отдельно)
         $text = str_replace('-', ' -', $text);                            // - только в начале слова
@@ -1837,7 +1822,7 @@ function log_sphinx_error($err_type, $err_msg, $query = '')
 
 function get_title_match_topics($title_match_sql, array $forum_ids = array())
 {
-    global $bb_cfg, $sphinx, $userdata, $title_match, $lang;
+    global $sphinx, $userdata, $title_match, $lang;
 
     $where_ids = [];
     if ($forum_ids) {
@@ -1845,12 +1830,12 @@ function get_title_match_topics($title_match_sql, array $forum_ids = array())
     }
     $title_match_sql = encode_text_match($title_match_sql);
 
-    if ($bb_cfg['search_engine_type'] == 'sphinx') {
+    if (config('tp.search_engine_type') == 'sphinx') {
         $sphinx = init_sphinx();
 
         $where = $title_match ? 'topics' : 'posts';
 
-        $sphinx->setServer($bb_cfg['sphinx_topic_titles_host'], $bb_cfg['sphinx_topic_titles_port']);
+        $sphinx->setServer(config('tp.sphinx_topic_titles_host'), config('tp.sphinx_topic_titles_port'));
         if ($forum_ids) {
             $sphinx->setFilter('forum_id', $forum_ids, false);
         }
@@ -1870,9 +1855,9 @@ function get_title_match_topics($title_match_sql, array $forum_ids = array())
         if ($warning = $sphinx->getLastWarning()) {
             log_sphinx_error('wrn', $warning, $title_match_sql);
         }
-    } elseif ($bb_cfg['search_engine_type'] == 'mysql') {
+    } elseif (config('tp.search_engine_type') == 'mysql') {
         $where_forum = ($forum_ids) ? "AND forum_id IN(" . implode(',', $forum_ids) . ")" : '';
-        $search_bool_mode = ($bb_cfg['allow_search_in_bool_mode']) ? ' IN BOOLEAN MODE' : '';
+        $search_bool_mode = config('tp.allow_search_in_bool_mode') ? ' IN BOOLEAN MODE' : '';
 
         if ($title_match) {
             $where_id = 'topic_id';
@@ -1915,10 +1900,10 @@ function pad_with_space($str)
 
 function create_magnet($infohash, $auth_key, $logged_in)
 {
-    global $bb_cfg, $_GET, $images;
+    global $_GET, $images;
 
-    $passkey_url = ((!$logged_in || isset($_GET['no_passkey'])) && $bb_cfg['bt_tor_browse_only_reg']) ? '' : "?{$bb_cfg['passkey_key']}=$auth_key";
-    return '<a href="magnet:?xt=urn:btih:' . bin2hex($infohash) . '&tr=' . urlencode($bb_cfg['bt_announce_url'] . $passkey_url) . '"><img src="' . $images['icon_magnet'] . '" width="12" height="12" border="0" /></a>';
+    $passkey_url = ((!$logged_in || isset($_GET['no_passkey'])) && config('tp.bt_tor_browse_only_reg')) ? '' : '?' . config('tp.passkey_key') . "=$auth_key";
+    return '<a href="magnet:?xt=urn:btih:' . bin2hex($infohash) . '&tr=' . urlencode(config('tp.bt_announce_url') . $passkey_url) . '"><img src="' . $images['icon_magnet'] . '" width="12" height="12" border="0" /></a>';
 }
 
 function set_die_append_msg($forum_id = null, $topic_id = null, $group_id = null)
@@ -1971,7 +1956,7 @@ function send_pm($user_id, $subject, $message, $poster_id = BOT_UID)
 
 function profile_url($data)
 {
-    global $bb_cfg, $lang, $datastore;
+    global $lang, $datastore;
 
     if (!$ranks = $datastore->get('ranks')) {
         $datastore->update('ranks');
@@ -1991,7 +1976,7 @@ function profile_url($data)
         $style = 'colorUser';
     }
 
-    if (!$bb_cfg['color_nick']) {
+    if (!config('tp.color_nick')) {
         $style = '';
     }
 
@@ -2009,22 +1994,16 @@ function profile_url($data)
 
 function get_avatar($user_id, $ext_id, $allow_avatar = true, $size = true, $height = '', $width = '')
 {
-    global $bb_cfg;
-
-    if ($size) {
-        // TODO размеры: s, m, l + кеширование
-    }
-
     $height = !$height ? 'height="' . $height . '"' : '';
     $width = !$width ? 'width="' . $width . '"' : '';
 
-    $user_avatar = '<img src="' . make_url($bb_cfg['avatars']['display_path'] . $bb_cfg['avatars']['no_avatar']) . '" alt="' . $user_id . '" ' . $height . ' ' . $width . ' />';
+    $user_avatar = '<img src="' . make_url(config('tp.avatars.display_path') . config('tp.avatars.no_avatar')) . '" alt="' . $user_id . '" ' . $height . ' ' . $width . ' />';
 
-    if ($user_id == BOT_UID && $bb_cfg['avatars']['bot_avatar']) {
-        $user_avatar = '<img src="' . make_url($bb_cfg['avatars']['display_path'] . $bb_cfg['avatars']['bot_avatar']) . '" alt="' . $user_id . '" ' . $height . ' ' . $width . ' />';
+    if ($user_id == BOT_UID && config('tp.avatars.bot_avatar')) {
+        $user_avatar = '<img src="' . make_url(config('tp.avatars.display_path') . config('tp.avatars.bot_avatar')) . '" alt="' . $user_id . '" ' . $height . ' ' . $width . ' />';
     } elseif ($allow_avatar && $ext_id) {
         if (file_exists(get_avatar_path($user_id, $ext_id))) {
-            $user_avatar = '<img src="' . make_url(get_avatar_path($user_id, $ext_id, $bb_cfg['avatars']['display_path'])) . '" alt="' . $user_id . '" ' . $height . ' ' . $width . ' />';
+            $user_avatar = '<img src="' . make_url(get_avatar_path($user_id, $ext_id, config('tp.avatars.display_path'))) . '" alt="' . $user_id . '" ' . $height . ' ' . $width . ' />';
         }
     }
 
@@ -2033,9 +2012,9 @@ function get_avatar($user_id, $ext_id, $allow_avatar = true, $size = true, $heig
 
 function gender_image($gender)
 {
-    global $bb_cfg, $lang, $images;
+    global $lang, $images;
 
-    if (!$bb_cfg['gender']) {
+    if (!config('tp.gender')) {
         $user_gender = '';
         return $user_gender;
     }
@@ -2057,7 +2036,7 @@ function gender_image($gender)
 
 function is_gold($type)
 {
-    global $lang, $bb_cfg;
+    global $lang;
 
     if (!config('tracker.gold_silver_enabled')) {
         $is_gold = '';
@@ -2124,11 +2103,11 @@ function hash_search($hash)
  */
 function bb_captcha($mode, $callback = '')
 {
-    global $bb_cfg, $lang;
+    global $lang;
 
-    $secret = $bb_cfg['captcha']['secret_key'];
-    $public = $bb_cfg['captcha']['public_key'];
-    $cp_theme = $bb_cfg['captcha']['theme'];
+    $secret = config('tp.captcha.secret_key');
+    $public = config('tp.captcha.public_key');
+    $cp_theme = config('tp.captcha.theme');
 
     if (!$public && !$secret) {
         bb_die($lang['CAPTCHA_SETTINGS']);

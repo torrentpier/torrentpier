@@ -225,14 +225,14 @@ switch ($mode) {
             $result = topic_delete($req_topics, $forum_id);
 
             //Обновление кеша новостей на главной
-            $news_forums = array_flip(explode(',', $bb_cfg['latest_news_forum_id']));
-            if (isset($news_forums[$forum_id]) && $bb_cfg['show_latest_news'] && $result) {
+            $news_forums = array_flip(explode(',', config('tp.latest_news_forum_id')));
+            if (isset($news_forums[$forum_id]) && config('tp.show_latest_news') && $result) {
                 $datastore->enqueue('latest_news');
                 $datastore->update('latest_news');
             }
 
-            $net_forums = array_flip(explode(',', $bb_cfg['network_news_forum_id']));
-            if (isset($net_forums[$forum_id]) && $bb_cfg['show_network_news'] && $result) {
+            $net_forums = array_flip(explode(',', config('tp.network_news_forum_id')));
+            if (isset($net_forums[$forum_id]) && config('tp.show_network_news') && $result) {
                 $datastore->enqueue('network_news');
                 $datastore->update('network_news');
             }
@@ -256,14 +256,14 @@ switch ($mode) {
             $result = topic_move($req_topics, $new_forum_id, $forum_id, isset($_POST['move_leave_shadow']), isset($_POST['insert_bot_msg']));
 
             //Обновление кеша новостей на главной
-            $news_forums = array_flip(explode(',', $bb_cfg['latest_news_forum_id']));
-            if ((isset($news_forums[$forum_id]) || isset($news_forums[$new_forum_id])) && $bb_cfg['show_latest_news'] && $result) {
+            $news_forums = array_flip(explode(',', config('tp.latest_news_forum_id')));
+            if ((isset($news_forums[$forum_id]) || isset($news_forums[$new_forum_id])) && config('tp.show_latest_news') && $result) {
                 $datastore->enqueue('latest_news');
                 $datastore->update('latest_news');
             }
 
-            $net_forums = array_flip(explode(',', $bb_cfg['network_news_forum_id']));
-            if ((isset($net_forums[$forum_id]) || isset($net_forums[$new_forum_id])) && $bb_cfg['show_network_news'] && $result) {
+            $net_forums = array_flip(explode(',', config('tp.network_news_forum_id')));
+            if ((isset($net_forums[$forum_id]) || isset($net_forums[$new_forum_id])) && config('tp.show_network_news') && $result) {
                 $datastore->enqueue('network_news');
                 $datastore->update('network_news');
             }

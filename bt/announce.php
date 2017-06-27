@@ -11,8 +11,6 @@ define('IN_TRACKER', true);
 define('BB_ROOT', './../');
 require dirname(__DIR__) . '/common.php';
 
-global $bb_cfg;
-
 if (empty($_SERVER['HTTP_USER_AGENT'])) {
     header('Location: http://127.0.0.1', true, 301);
     die;
@@ -26,8 +24,8 @@ if (isset($_GET['event']) && $_GET['event'] === 'completed') {
     dummy_exit(random_int(600, 1200));
 }
 
-$announce_interval = $bb_cfg['announce_interval'];
-$passkey_key = $bb_cfg['passkey_key'];
+$announce_interval = config('tp.announce_interval');
+$passkey_key = config('tp.passkey_key');
 $max_left_val = 536870912000;   // 500 GB
 $max_up_down_val = 5497558138880;  // 5 TB
 $max_up_add_val = 85899345920;    // 80 GB
@@ -103,13 +101,13 @@ if (!verify_id($passkey, BT_AUTH_KEY_LENGTH)) {
 // IP
 $ip = $_SERVER['REMOTE_ADDR'];
 
-if (!$bb_cfg['ignore_reported_ip'] && isset($_GET['ip']) && $ip !== $_GET['ip']) {
-    if (!$bb_cfg['verify_reported_ip']) {
+if (!config('tp.ignore_reported_ip') && isset($_GET['ip']) && $ip !== $_GET['ip']) {
+    if (!config('tp.verify_reported_ip')) {
         $ip = $_GET['ip'];
     } elseif (isset($_SERVER['HTTP_X_FORWARDED_FOR']) && preg_match_all('#\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}#', $_SERVER['HTTP_X_FORWARDED_FOR'], $matches)) {
         foreach ($matches[0] as $x_ip) {
             if ($x_ip === $_GET['ip']) {
-                if (!$bb_cfg['allow_internal_ip'] && preg_match("#^(10|172\.16|192\.168)\.#", $x_ip)) {
+                if (!config('tp.allow_internal_ip') && preg_match("#^(10|172\.16|192\.168)\.#", $x_ip)) {
                     break;
                 }
                 $ip = $x_ip;
@@ -238,7 +236,7 @@ if ($lp_info) {
         $rating_msg = '';
 
         if (!$seeder) {
-            foreach ($bb_cfg['rating'] as $ratio => $limit) {
+            foreach (config('tp.rating') as $ratio => $limit) {
                 if ($user_ratio < $ratio) {
                     config(['tracker.limit_active_tor' => 1]);
                     config(['tracker.limit_leech_count' => $limit]);
@@ -249,7 +247,7 @@ if ($lp_info) {
         }
 
         // Limit active torrents
-        if (!isset($bb_cfg['unlimited_users'][$user_id]) && config('tracker.limit_active_tor') && ((config('tracker.limit_seed_count') && $seeder) || (config('tracker.limit_leech_count') && !$seeder))) {
+        if (null === config('tp.unlimited_users.' . $user_id) && config('tracker.limit_active_tor') && ((config('tracker.limit_seed_count') && $seeder) || (config('tracker.limit_leech_count') && !$seeder))) {
             $sql = "SELECT COUNT(DISTINCT topic_id) AS active_torrents
 				FROM " . BB_BT_TRACKER . "
 				WHERE user_id = $user_id
@@ -388,7 +386,7 @@ $lp_info = array(
     'tor_type' => (int)$tor_type,
 );
 
-$lp_info_cached = OLD_CACHE('tr_cache')->set('peer_' . $peer_hash, $lp_info, round($bb_cfg['announce_interval'] * (0.85 * config('tracker.expire_factor'))));
+$lp_info_cached = OLD_CACHE('tr_cache')->set('peer_' . $peer_hash, $lp_info, round(config('tp.announce_interval') * (0.85 * config('tracker.expire_factor'))));
 
 if (DBG_LOG && !$lp_info_cached) {
     dbg_log(' ', '$lp_info-caching-FAIL');
@@ -454,7 +452,7 @@ if (!$output) {
         'incomplete' => (int)$leechers,
     );
 
-    $peers_list_cached = OLD_CACHE('tr_cache')->set('peers_list_' . $topic_id, $output, round($bb_cfg['announce_interval'] * 0.7));
+    $peers_list_cached = OLD_CACHE('tr_cache')->set('peers_list_' . $topic_id, $output, round(config('tp.announce_interval') * 0.7));
 
     if (DBG_LOG && !$peers_list_cached) {
         dbg_log(' ', '$output-caching-FAIL');
