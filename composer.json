@@ -36,11 +36,11 @@
   },
   "require": {
     "php": "^7.0",
-    "bugsnag/bugsnag": "^3.5",
+    "laravel/framework": "^5.4",
+    "bugsnag/bugsnag-laravel": "^2.5",
     "filp/whoops": "^2.1",
     "gigablah/sphinxphp": "^2.0",
     "google/recaptcha": "^1.1",
-    "laravel/framework": "^5.4",
     "longman/ip-tools": "^1.2",
     "roave/security-advisories": "dev-master",
     "rych/bencode": "^1.0",
@@ -57,6 +57,11 @@
       "App\\": "app/",
       "Tests\\": "tests/"
     }
+  },
+  "scripts": {
+    "post-install-cmd": [
+      "php -r \"file_exists('.env') || copy('.env.example', '.env');\""
+    ]
   },
   "minimum-stability": "stable",
   "prefer-stable": true
