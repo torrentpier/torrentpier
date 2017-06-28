@@ -16,6 +16,8 @@ use Illuminate\Database\Capsule\Manager;
 use Illuminate\Database\Events\StatementPrepared;
 use Illuminate\Events\Dispatcher;
 use Illuminate\Filesystem\Filesystem;
+use Illuminate\Translation\FileLoader;
+use Illuminate\Translation\Translator;
 use Symfony\Component\Finder\Finder;
 
 try {
@@ -126,6 +128,9 @@ $container->singleton('config', function () {
         ],
     ]);
 
+    $config->set('app.locale', 'ru');
+    $config->set('app.fallback_locale', 'source');
+
     return $config;
 });
 
@@ -137,4 +142,22 @@ $container->singleton('cache', function ($container) {
     $cache = new CacheManager($container);
 
     return $cache->driver();
+});
+
+/**
+ * Localization
+ */
+$container->singleton('translator', function ($app) {
+    $loader = $app['translation.loader'];
+    $locale = $app['config']['app.locale'];
+
+    $trans = new Translator($loader, $locale);
+
+    $trans->setFallback($app['config']['app.fallback_locale']);
+
+    return $trans;
+});
+
+$container->singleton('translation.loader', function ($app) {
+    return new FileLoader($app['files'], __DIR__ . '/../resources/lang');
 });
