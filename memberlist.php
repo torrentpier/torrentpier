@@ -75,28 +75,28 @@ $template->assign_vars(array(
 
 switch ($mode) {
     case 'joined':
-        $order_by = "user_id $sort_order LIMIT $start, " . $bb_cfg['topics_per_page'];
+        $order_by = "user_id $sort_order LIMIT $start, " . config('tp.topics_per_page');
         break;
     case 'username':
-        $order_by = "username $sort_order LIMIT $start, " . $bb_cfg['topics_per_page'];
+        $order_by = "username $sort_order LIMIT $start, " . config('tp.topics_per_page');
         break;
     case 'location':
-        $order_by = "user_from $sort_order LIMIT $start, " . $bb_cfg['topics_per_page'];
+        $order_by = "user_from $sort_order LIMIT $start, " . config('tp.topics_per_page');
         break;
     case 'posts':
-        $order_by = "user_posts $sort_order LIMIT $start, " . $bb_cfg['topics_per_page'];
+        $order_by = "user_posts $sort_order LIMIT $start, " . config('tp.topics_per_page');
         break;
     case 'email':
-        $order_by = "user_email $sort_order LIMIT $start, " . $bb_cfg['topics_per_page'];
+        $order_by = "user_email $sort_order LIMIT $start, " . config('tp.topics_per_page');
         break;
     case 'website':
-        $order_by = "user_website $sort_order LIMIT $start, " . $bb_cfg['topics_per_page'];
+        $order_by = "user_website $sort_order LIMIT $start, " . config('tp.topics_per_page');
         break;
     case 'topten':
         $order_by = "user_posts $sort_order LIMIT 10";
         break;
     default:
-        $order_by = "user_regdate $sort_order LIMIT $start, " . $bb_cfg['topics_per_page'];
+        $order_by = "user_regdate $sort_order LIMIT $start, " . config('tp.topics_per_page');
         $mode = 'joined';
         break;
 }
@@ -157,12 +157,12 @@ if ($result = OLD_DB()->fetch_rowset($sql)) {
     foreach ($result as $i => $row) {
         $user_id = $row['user_id'];
         $from = $row['user_from'];
-        $joined = bb_date($row['user_regdate'], $bb_cfg['date_format']);
+        $joined = bb_date($row['user_regdate'], config('tp.date_format'));
         $posts = $row['user_posts'];
         $pm = '<a class="txtb" href="' . (PM_URL . "?mode=post&amp;" . POST_USERS_URL . "=$user_id") . '">' . $lang['SEND_PM_TXTB'] . '</a>';
 
         if (bf($row['user_opt'], 'user_opt', 'user_viewemail') || IS_ADMIN) {
-            $email_uri = $bb_cfg['board_email_form'] ? ("profile.php?mode=email&amp;" . POST_USERS_URL . "=$user_id") : 'mailto:' . $row['user_email'];
+            $email_uri = config('tp.board_email_form') ? ('profile.php?mode=email&amp;' . POST_USERS_URL . "=$user_id") : 'mailto:' . $row['user_email'];
             $email = '<a class="editable" href="' . $email_uri . '">' . $row['user_email'] . '</a>';
         } else {
             $email = '';
@@ -199,7 +199,7 @@ $paginationurl = "memberlist.php?mode=$mode&amp;order=$sort_order&amp;letter=$by
 if ($paginationusername) {
     $paginationurl .= "&amp;username=$paginationusername";
 }
-if ($mode != 'topten' || $bb_cfg['topics_per_page'] < 10) {
+if ($mode != 'topten' || config('tp.topics_per_page') < 10) {
     $sql = "SELECT COUNT(*) AS total FROM " . BB_USERS;
     $sql .= ($letter_sql) ? " WHERE $letter_sql" : " WHERE user_id NOT IN(". EXCLUDED_USERS .")";
     if (!$result = OLD_DB()->sql_query($sql)) {
@@ -207,7 +207,7 @@ if ($mode != 'topten' || $bb_cfg['topics_per_page'] < 10) {
     }
     if ($total = OLD_DB()->sql_fetchrow($result)) {
         $total_members = $total['total'];
-        generate_pagination($paginationurl, $total_members, $bb_cfg['topics_per_page'], $start);
+        generate_pagination($paginationurl, $total_members, config('tp.topics_per_page'), $start);
     }
     OLD_DB()->sql_freeresult($result);
 }

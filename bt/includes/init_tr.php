@@ -11,11 +11,9 @@ if (!defined('IN_TRACKER')) {
     die(basename(__FILE__));
 }
 
-global $bb_cfg;
-
 // Exit if tracker is disabled
-if ($bb_cfg['tracker']['off']) {
-    msg_die($bb_cfg['tracker']['off_reason']);
+if (config('tracker.off')) {
+    msg_die(config('tracker.off_reason'));
 }
 
 //

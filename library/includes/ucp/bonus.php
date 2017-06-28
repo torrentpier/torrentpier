@@ -14,9 +14,9 @@ if (!defined('BB_ROOT')) {
 $user_id = $userdata['user_id'];
 $user_points = $userdata['user_points'];
 
-if ($bb_cfg['seed_bonus_enabled'] && $bb_cfg['bonus_upload'] && $bb_cfg['bonus_upload_price']) {
-    $upload_row = unserialize($bb_cfg['bonus_upload']);
-    $price_row = unserialize($bb_cfg['bonus_upload_price']);
+if (config('tp.seed_bonus_enabled') && config('tp.bonus_upload') && config('tp.bonus_upload_price')) {
+    $upload_row = unserialize(config('tp.bonus_upload'));
+    $price_row = unserialize(config('tp.bonus_upload_price'));
 } else {
     bb_die($lang['EXCHANGE_NOT']);
 }

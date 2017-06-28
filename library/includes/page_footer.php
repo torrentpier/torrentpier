@@ -11,7 +11,7 @@ if (!defined('BB_ROOT')) {
     die(basename(__FILE__));
 }
 
-global $bb_cfg, $userdata, $template, $DBS, $lang;
+global $userdata, $template, $DBS, $lang;
 
 if (!empty($template)) {
     $template->assign_vars(array(
@@ -27,15 +27,15 @@ if (!empty($template)) {
 
 $show_dbg_info = (DBG_USER && IS_ADMIN && !(isset($_GET['pane']) && $_GET['pane'] == 'left'));
 
-if (!$bb_cfg['gzip_compress']) {
+if (!config('tp.gzip_compress')) {
     flush();
 }
 
 if ($show_dbg_info) {
     $gen_time = utime() - TIMESTART;
     $gen_time_txt = sprintf('%.3f', $gen_time);
-    $gzip_text = (UA_GZIP_SUPPORTED) ? 'GZIP ' : '<s>GZIP</s> ';
-    $gzip_text .= ($bb_cfg['gzip_compress']) ? $lang['ON'] : $lang['OFF'];
+    $gzip_text = UA_GZIP_SUPPORTED ? 'GZIP ' : '<s>GZIP</s> ';
+    $gzip_text .= config('tp.gzip_compress') ? $lang['ON'] : $lang['OFF'];
 
     $stat = '[&nbsp; ' . $lang['EXECUTION_TIME'] . " $gen_time_txt " . $lang['SEC'];
 
@@ -49,7 +49,7 @@ if ($show_dbg_info) {
     $stat .= " &nbsp;|&nbsp; $gzip_text";
 
     $stat .= ' &nbsp;|&nbsp; ' . $lang['MEMORY'];
-    $stat .= humn_size($bb_cfg['mem_on_start'], 2) . ' / ';
+    $stat .= humn_size(config('tp.mem_on_start'), 2) . ' / ';
     $stat .= humn_size(sys('mem_peak'), 2) . ' / ';
     $stat .= humn_size(sys('mem'), 2);
 
@@ -87,7 +87,7 @@ echo '
 
 if (defined('REQUESTED_PAGE') && !defined('DISABLE_CACHING_OUTPUT')) {
     if (IS_GUEST === true) {
-        caching_output(true, 'store', REQUESTED_PAGE . '_guest_' . $bb_cfg['default_lang']);
+        caching_output(true, 'store', REQUESTED_PAGE . '_guest_' . config('tp.default_lang'));
     }
 }
 

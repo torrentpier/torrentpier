@@ -122,11 +122,11 @@ class TorrentFileList
      */
     private function build_file_item($name, $length)
     {
-        global $bb_cfg, $images, $lang;
+        global $images, $lang;
 
         $magnet_name = $magnet_ext = '';
 
-        if ($bb_cfg['magnet_links_enabled']) {
+        if (config('tp.magnet_links_enabled')) {
             $magnet_name = '<a title="' . $lang['DC_MAGNET'] . '" href="dchub:magnet:?kt=' . $name . '&xl=' . $length . '"><img src="' . $images['icon_dc_magnet'] . '" width="10" height="10" border="0" /></a>';
             $magnet_ext = '<a title="' . $lang['DC_MAGNET_EXT'] . '" href="dchub:magnet:?kt=.' . substr(strrchr($name, '.'), 1) . '&xl=' . $length . '"><img src="' . $images['icon_dc_magnet_ext'] . '" width="10" height="10" border="0" /></a>';
         }

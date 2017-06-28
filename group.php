@@ -20,7 +20,7 @@ $select_sort_mode = $select_sort_order = '';
 
 function generate_user_info(&$row, $date_format, $group_mod, &$from, &$posts, &$joined, &$pm, &$email, &$www, &$user_time, &$avatar)
 {
-    global $lang, $images, $bb_cfg;
+    global $lang, $images;
 
     $from = (!empty($row['user_from'])) ? $row['user_from'] : '';
     $joined = bb_date($row['user_regdate']);
@@ -30,7 +30,7 @@ function generate_user_info(&$row, $date_format, $group_mod, &$from, &$posts, &$
     $avatar = get_avatar($row['user_id'], $row['avatar_ext_id'], !bf($row['user_opt'], 'user_opt', 'dis_avatar'), '', 50, 50);
 
     if (bf($row['user_opt'], 'user_opt', 'user_viewemail') || $group_mod) {
-        $email_uri = ($bb_cfg['board_email_form']) ? ("profile.php?mode=email&amp;" . POST_USERS_URL . "=" . $row['user_id']) : 'mailto:' . $row['user_email'];
+        $email_uri = config('tp.board_email_form') ? ("profile.php?mode=email&amp;" . POST_USERS_URL . "=" . $row['user_id']) : 'mailto:' . $row['user_email'];
         $email = '<a class="editable" href="' . $email_uri . '">' . $row['user_email'] . '</a>';
     } else {
         $email = '';
@@ -51,7 +51,7 @@ set_die_append_msg();
 
 $group_id = isset($_REQUEST[POST_GROUPS_URL]) ? (int)$_REQUEST[POST_GROUPS_URL] : null;
 $start = isset($_REQUEST['start']) ? abs((int)$_REQUEST['start']) : 0;
-$per_page = $bb_cfg['group_members_per_page'];
+$per_page = config('tp.group_members_per_page');
 $view_mode = isset($_REQUEST['view']) ? (string)$_REQUEST['view'] : null;
 $rel_limit = 50;
 
@@ -195,18 +195,18 @@ if (!$group_id) {
 
     add_user_into_group($group_id, $userdata['user_id'], 1, TIMENOW);
 
-    if ($bb_cfg['group_send_email']) {
+    if (config('tp.group_send_email')) {
         /** @var TorrentPier\Legacy\Emailer() $emailer */
         $emailer = new TorrentPier\Legacy\Emailer();
 
-        $emailer->set_from([$bb_cfg['board_email'] => $bb_cfg['sitename']]);
+        $emailer->set_from([config('tp.board_email') => config('tp.sitename')]);
         $emailer->set_to([$moderator['user_email'] => $moderator['username']]);
         $emailer->set_subject($lang['EMAILER_SUBJECT']['GROUP_REQUEST']);
 
         $emailer->set_template('group_request', $moderator['user_lang']);
         $emailer->assign_vars(array(
             'USER' => $userdata['username'],
-            'SITENAME' => $bb_cfg['sitename'],
+            'SITENAME' => config('tp.sitename'),
             'GROUP_MODERATOR' => $moderator['username'],
             'U_GROUP' => make_url(GROUP_URL . $group_id),
         ));
@@ -237,17 +237,17 @@ if (!$group_id) {
 
             add_user_into_group($group_id, $row['user_id']);
 
-            if ($bb_cfg['group_send_email']) {
+            if (config('tp.group_send_email')) {
                 /** @var TorrentPier\Legacy\Emailer() $emailer */
                 $emailer = new TorrentPier\Legacy\Emailer();
 
-                $emailer->set_from([$bb_cfg['board_email'] => $bb_cfg['sitename']]);
+                $emailer->set_from([config('tp.board_email') => config('tp.sitename')]);
                 $emailer->set_to([$row['user_email'] => $row['username']]);
                 $emailer->set_subject($lang['EMAILER_SUBJECT']['GROUP_ADDED']);
 
                 $emailer->set_template('group_added', $row['user_lang']);
                 $emailer->assign_vars(array(
-                    'SITENAME' => $bb_cfg['sitename'],
+                    'SITENAME' => config('tp.sitename'),
                     'GROUP_NAME' => $group_info['group_name'],
                     'U_GROUP' => make_url(GROUP_URL . $group_id),
                 ));
@@ -287,7 +287,7 @@ if (!$group_id) {
                     }
                 }
                 // Email users when they are approved
-                if (!empty($_POST['approve']) && $bb_cfg['group_send_email']) {
+                if (!empty($_POST['approve']) && config('tp.group_send_email')) {
                     $sql_select = "SELECT username, user_email, user_lang
 						FROM " . BB_USERS . "
 						WHERE user_id IN($sql_in)";
@@ -300,13 +300,13 @@ if (!$group_id) {
                         /** @var TorrentPier\Legacy\Emailer() $emailer */
                         $emailer = new TorrentPier\Legacy\Emailer();
 
-                        $emailer->set_from([$bb_cfg['board_email'] => $bb_cfg['sitename']]);
+                        $emailer->set_from([config('tp.board_email') => config('tp.sitename')]);
                         $emailer->set_to([$row['user_email'] => $row['username']]);
                         $emailer->set_subject($lang['EMAILER_SUBJECT']['GROUP_APPROVED']);
 
                         $emailer->set_template('group_approved', $row['user_lang']);
                         $emailer->assign_vars(array(
-                            'SITENAME' => $bb_cfg['sitename'],
+                            'SITENAME' => config('tp.sitename'),
                             'GROUP_NAME' => $group_info['group_name'],
                             'U_GROUP' => make_url(GROUP_URL . $group_id),
                         ));
@@ -375,7 +375,7 @@ if (!$group_id) {
     $username = $group_moderator['username'];
     $user_id = $group_moderator['user_id'];
 
-    generate_user_info($group_moderator, $bb_cfg['default_dateformat'], $is_moderator, $from, $posts, $joined, $pm, $email, $www, $user_time, $avatar);
+    generate_user_info($group_moderator, config('tp.default_dateformat'), $is_moderator, $from, $posts, $joined, $pm, $email, $www, $user_time, $avatar);
 
     $group_type = '';
     if ($group_info['group_type'] == GROUP_OPEN) {
@@ -524,7 +524,7 @@ if (!$group_id) {
             foreach ($group_members as $i => $member) {
                 $user_id = $member['user_id'];
 
-                generate_user_info($member, $bb_cfg['default_dateformat'], $is_moderator, $from, $posts, $joined, $pm, $email, $www, $user_time, $avatar);
+                generate_user_info($member, config('tp.default_dateformat'), $is_moderator, $from, $posts, $joined, $pm, $email, $www, $user_time, $avatar);
 
                 if ($group_info['group_type'] != GROUP_HIDDEN || $is_group_member || $is_moderator) {
                     $row_class = !($i % 2) ? 'row1' : 'row2';
@@ -578,7 +578,7 @@ if (!$group_id) {
                 foreach ($modgroup_pending_list as $i => $member) {
                     $user_id = $member['user_id'];
 
-                    generate_user_info($member, $bb_cfg['default_dateformat'], $is_moderator, $from, $posts, $joined, $pm, $email, $www, $user_time, $avatar);
+                    generate_user_info($member, config('tp.default_dateformat'), $is_moderator, $from, $posts, $joined, $pm, $email, $www, $user_time, $avatar);
 
                     $row_class = !($i % 2) ? 'row1' : 'row2';
 

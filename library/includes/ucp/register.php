@@ -16,7 +16,7 @@ array_deep($_POST, 'trim');
 set_die_append_msg();
 
 if (IS_ADMIN) {
-    $bb_cfg['reg_email_activation'] = false;
+    config(['tp.reg_email_activation' => false]);
 
     $new_user = (int)request_var('admin', '');
     if ($new_user) {
@@ -54,16 +54,16 @@ switch ($mode) {
 
         if (!IS_ADMIN) {
             // Ограничение по ip
-            if ($bb_cfg['unique_ip']) {
+            if (config('tp.unique_ip')) {
                 if ($users = OLD_DB()->fetch_row("SELECT user_id, username FROM " . BB_USERS . " WHERE user_reg_ip = '" . USER_IP . "' LIMIT 1")) {
-                    bb_die(sprintf($lang['ALREADY_REG_IP'], '<a href="' . PROFILE_URL . $users['user_id'] . '"><b>' . $users['username'] . '</b></a>', $bb_cfg['tech_admin_email']));
+                    bb_die(sprintf($lang['ALREADY_REG_IP'], '<a href="' . PROFILE_URL . $users['user_id'] . '"><b>' . $users['username'] . '</b></a>', config('tp.tech_admin_email')));
                 }
             }
             // Отключение регистрации
-            if ($bb_cfg['new_user_reg_disabled'] || ($bb_cfg['reg_email_activation'] && !config('email.enabled'))) {
+            if (config('tp.new_user_reg_disabled') || (config('tp.reg_email_activation') && !config('email.enabled'))) {
                 bb_die($lang['NEW_USER_REG_DISABLED']);
             } // Ограничение по времени
-            elseif ($bb_cfg['new_user_reg_restricted']) {
+            elseif (config('tp.new_user_reg_restricted')) {
                 if (in_array(date('G'), array(0, /*1,2,3,4,5,6,7,8,11,12,13,14,15,16,*/
                     17, 18, 19, 20, 21, 22, 23))) {
                     bb_die($lang['REGISTERED_IN_TIME']);
@@ -86,8 +86,8 @@ switch ($mode) {
             'username' => '',
             'user_password' => '',
             'user_email' => '',
-            'user_timezone' => $bb_cfg['board_timezone'],
-            'user_lang' => $bb_cfg['default_lang'],
+            'user_timezone' => config('tp.board_timezone'),
+            'user_lang' => config('tp.default_lang'),
             'user_opt' => 0,
             'avatar_ext_id' => 0,
         );
@@ -104,7 +104,7 @@ switch ($mode) {
         // field => can_edit
         $profile_fields = array(
             'user_active' => IS_ADMIN,
-            'username' => (IS_ADMIN || $bb_cfg['allow_namechange']),
+            'username' => (IS_ADMIN || config('tp.allow_namechange')),
             'user_password' => true,
             'user_email' => true, // должен быть после user_password
             'user_lang' => true,
@@ -152,7 +152,7 @@ switch ($mode) {
 }
 
 // Captcha
-$need_captcha = ($mode == 'register' && !IS_ADMIN && !$bb_cfg['captcha']['disabled']);
+$need_captcha = ($mode == 'register' && !IS_ADMIN && !config('tp.captcha.disabled'));
 
 if ($submit) {
     if ($need_captcha && !bb_captcha('check')) {
@@ -255,7 +255,7 @@ foreach ($profile_fields as $field => $can_edit) {
                     if (!$errors and $err = validate_email($email)) {
                         $errors[] = $err;
                     }
-                    if ($bb_cfg['reg_email_activation']) {
+                    if (config('tp.reg_email_activation')) {
                         $pr_data['user_active'] = 0;
                         $db_data['user_active'] = 0;
                     }
@@ -313,10 +313,10 @@ foreach ($profile_fields as $field => $can_edit) {
                 if (!empty($birthday_date['year'])) {
                     if (strtotime($user_birthday) >= TIMENOW) {
                         $errors[] = $lang['WRONG_BIRTHDAY_FORMAT'];
-                    } elseif (bb_date(TIMENOW, 'Y', false) - $birthday_date['year'] > $bb_cfg['birthday_max_age']) {
-                        $errors[] = sprintf($lang['BIRTHDAY_TO_HIGH'], $bb_cfg['birthday_max_age']);
-                    } elseif (bb_date(TIMENOW, 'Y', false) - $birthday_date['year'] < $bb_cfg['birthday_min_age']) {
-                        $errors[] = sprintf($lang['BIRTHDAY_TO_LOW'], $bb_cfg['birthday_min_age']);
+                    } elseif (bb_date(TIMENOW, 'Y', false) - $birthday_date['year'] > config('tp.birthday_max_age')) {
+                        $errors[] = sprintf($lang['BIRTHDAY_TO_HIGH'], config('tp.birthday_max_age'));
+                    } elseif (bb_date(TIMENOW, 'Y', false) - $birthday_date['year'] < config('tp.birthday_min_age')) {
+                        $errors[] = sprintf($lang['BIRTHDAY_TO_LOW'], config('tp.birthday_min_age'));
                     }
                 }
 
@@ -367,10 +367,10 @@ foreach ($profile_fields as $field => $can_edit) {
                     delete_avatar($pr_data['user_id'], $pr_data['avatar_ext_id']);
                     $pr_data['avatar_ext_id'] = 0;
                     $db_data['avatar_ext_id'] = 0;
-                } elseif (!empty($_FILES['avatar']['name']) && $bb_cfg['avatars']['up_allowed']) {
+                } elseif (!empty($_FILES['avatar']['name']) && config('tp.avatars.up_allowed')) {
                     $upload = new TorrentPier\Legacy\Common\Upload();
 
-                    if ($upload->init($bb_cfg['avatars'], $_FILES['avatar']) and $upload->store('avatar', $pr_data)) {
+                    if ($upload->init(config('tp.avatars'), $_FILES['avatar']) and $upload->store('avatar', $pr_data)) {
                         $pr_data['avatar_ext_id'] = $upload->file_ext_id;
                         $db_data['avatar_ext_id'] = (int)$upload->file_ext_id;
                     } else {
@@ -378,7 +378,7 @@ foreach ($profile_fields as $field => $can_edit) {
                     }
                 }
             }
-            $tp_data['AVATARS_MAX_SIZE'] = humn_size($bb_cfg['avatars']['max_size']);
+            $tp_data['AVATARS_MAX_SIZE'] = humn_size(config('tp.avatars.max_size'));
             break;
 
         /**
@@ -437,7 +437,7 @@ foreach ($profile_fields as $field => $can_edit) {
             if ($submit && $sig != $pr_data['user_sig']) {
                 $sig = prepare_message($sig);
 
-                if (mb_strlen($sig, 'UTF-8') > $bb_cfg['max_sig_chars']) {
+                if (mb_strlen($sig, 'UTF-8') > config('tp.max_sig_chars')) {
                     $errors[] = $lang['SIGNATURE_TOO_LONG'];
                 } elseif (preg_match('#<(a|b|i|u|table|tr|td|img) #i', $sig) || preg_match('#(href|src|target|title)=#i', $sig)) {
                     $errors[] = $lang['SIGNATURE_ERROR_HTML'];
@@ -512,9 +512,9 @@ foreach ($profile_fields as $field => $can_edit) {
             $templates = isset($_POST['tpl_name']) ? (string)$_POST['tpl_name'] : $pr_data['tpl_name'];
             $templates = htmlCHR($templates);
             if ($submit && $templates != $pr_data['tpl_name']) {
-                $pr_data['tpl_name'] = $bb_cfg['tpl_name'];
-                $db_data['tpl_name'] = (string)$bb_cfg['tpl_name'];
-                foreach ($bb_cfg['templates'] as $folder => $name) {
+                $pr_data['tpl_name'] = config('tp.tpl_name');
+                $db_data['tpl_name'] = (string)config('tp.tpl_name');
+                foreach (config('tp.templates') as $folder => $name) {
                     if ($templates == $folder) {
                         $pr_data['tpl_name'] = $templates;
                         $db_data['tpl_name'] = (string)$templates;
@@ -538,7 +538,7 @@ if ($submit && !$errors) {
      *  Создание нового профиля
      */
     if ($mode == 'register') {
-        if ($bb_cfg['reg_email_activation']) {
+        if (config('tp.reg_email_activation')) {
             $user_actkey = make_rand_str(12);
             $db_data['user_active'] = 0;
             $db_data['user_actkey'] = $user_actkey;
@@ -553,7 +553,7 @@ if ($submit && !$errors) {
         }
 
         if (!isset($db_data['tpl_name'])) {
-            $db_data['tpl_name'] = (string)$bb_cfg['tpl_name'];
+            $db_data['tpl_name'] = (string)config('tp.tpl_name');
         }
 
         $sql_args = OLD_DB()->build_array('INSERT', $db_data);
@@ -565,27 +565,27 @@ if ($submit && !$errors) {
             set_pr_die_append_msg($new_user_id);
             $message = $lang['ACCOUNT_ADDED'];
         } else {
-            if ($bb_cfg['reg_email_activation']) {
+            if (config('tp.reg_email_activation')) {
                 $message = $lang['ACCOUNT_INACTIVE'];
-                $email_subject = sprintf($lang['EMAILER_SUBJECT']['USER_WELCOME_INACTIVE'], $bb_cfg['sitename']);
+                $email_subject = sprintf($lang['EMAILER_SUBJECT']['USER_WELCOME_INACTIVE'], config('tp.sitename'));
                 $email_template = 'user_welcome_inactive';
             } else {
                 $message = $lang['ACCOUNT_ADDED'];
-                $email_subject = sprintf($lang['EMAILER_SUBJECT']['USER_WELCOME'], $bb_cfg['sitename']);
+                $email_subject = sprintf($lang['EMAILER_SUBJECT']['USER_WELCOME'], config('tp.sitename'));
                 $email_template = 'user_welcome';
             }
 
             /** @var TorrentPier\Legacy\Emailer() $emailer */
             $emailer = new TorrentPier\Legacy\Emailer();
 
-            $emailer->set_from([$bb_cfg['board_email'] => $bb_cfg['sitename']]);
+            $emailer->set_from([config('tp.board_email') => config('tp.sitename')]);
             $emailer->set_to([$email => $username]);
             $emailer->set_subject($email_subject);
 
             $emailer->set_template($email_template, $user_lang);
             $emailer->assign_vars(array(
-                'SITENAME' => $bb_cfg['sitename'],
-                'WELCOME_MSG' => sprintf($lang['WELCOME_SUBJECT'], $bb_cfg['sitename']),
+                'SITENAME' => config('tp.sitename'),
+                'WELCOME_MSG' => sprintf($lang['WELCOME_SUBJECT'], config('tp.sitename')),
                 'USERNAME' => html_entity_decode($username),
                 'PASSWORD' => $new_pass,
                 'U_ACTIVATE' => make_url('profile.php?mode=activate&' . POST_USERS_URL . '=' . $new_user_id . '&act_key=' . $db_data['user_actkey'])
@@ -611,14 +611,14 @@ if ($submit && !$errors) {
                 /** @var TorrentPier\Legacy\Emailer() $emailer */
                 $emailer = new TorrentPier\Legacy\Emailer();
 
-                $emailer->set_from([$bb_cfg['board_email'] => $bb_cfg['sitename']]);
+                $emailer->set_from([config('tp.board_email') => config('tp.sitename')]);
                 $emailer->set_to([$email => $username]);
                 $emailer->set_subject($subject);
                 $emailer->set_subject($lang['EMAILER_SUBJECT']['USER_ACTIVATE']);
 
                 $emailer->set_template('user_activate', $pr_data['user_lang']);
                 $emailer->assign_vars(array(
-                    'SITENAME' => $bb_cfg['sitename'],
+                    'SITENAME' => config('tp.sitename'),
                     'USERNAME' => html_entity_decode($username),
                     'U_ACTIVATE' => make_url("profile.php?mode=activate&u={$pr_data['user_id']}&act_key=$user_actkey"),
                 ));
@@ -674,12 +674,12 @@ $template->assign_vars(array(
     'TIMEZONE_SELECT' => tz_select($pr_data['user_timezone'], 'user_timezone'),
     'USER_TIMEZONE' => $pr_data['user_timezone'],
 
-    'AVATAR_EXPLAIN' => sprintf($lang['AVATAR_EXPLAIN'], $bb_cfg['avatars']['max_width'], $bb_cfg['avatars']['max_height'], (round($bb_cfg['avatars']['max_size'] / 1024))),
+    'AVATAR_EXPLAIN' => sprintf($lang['AVATAR_EXPLAIN'], config('tp.avatars.max_width'), config('tp.avatars.max_height'), (round(config('tp.avatars.max_size') / 1024))),
     'AVATAR_DISALLOWED' => bf($pr_data['user_opt'], 'user_opt', 'dis_avatar'),
-    'AVATAR_DIS_EXPLAIN' => sprintf($lang['AVATAR_DISABLE'], $bb_cfg['terms_and_conditions_url']),
+    'AVATAR_DIS_EXPLAIN' => sprintf($lang['AVATAR_DISABLE'], config('tp.terms_and_conditions_url')),
     'AVATAR_IMG' => get_avatar($pr_data['user_id'], $pr_data['avatar_ext_id'], !bf($pr_data['user_opt'], 'user_opt', 'dis_avatar')),
 
-    'SIGNATURE_EXPLAIN' => sprintf($lang['SIGNATURE_EXPLAIN'], $bb_cfg['max_sig_chars']),
+    'SIGNATURE_EXPLAIN' => sprintf($lang['SIGNATURE_EXPLAIN'], config('tp.max_sig_chars')),
     'SIG_DISALLOWED' => bf($pr_data['user_opt'], 'user_opt', 'dis_sig'),
 
     'PR_USER_ID' => $pr_data['user_id'],

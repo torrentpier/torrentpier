@@ -11,14 +11,12 @@ if (!defined('BB_ROOT')) {
     die(basename(__FILE__));
 }
 
-global $bb_cfg;
-
 OLD_DB()->expect_slow_query(600);
 
 //
 // Make tracker snapshot
 //
-if (!$bb_cfg['ocelot']['enabled']) {
+if (!config('tp.ocelot.enabled')) {
     define('NEW_BB_BT_TRACKER_SNAP', 'new_tracker_snap');
     define('OLD_BB_BT_TRACKER_SNAP', 'old_tracker_snap');
 
@@ -37,7 +35,7 @@ while (true) {
 
     $val = array();
 
-    if (!$bb_cfg['ocelot']['enabled']) {
+    if (!config('tp.ocelot.enabled')) {
         $sql = "
 			SELECT
 				topic_id, SUM(seeder) AS seeders, (COUNT(*) - SUM(seeder)) AS leechers,
@@ -61,7 +59,7 @@ while (true) {
     }
 
     if ($val) {
-        if (!$bb_cfg['ocelot']['enabled']) {
+        if (!config('tp.ocelot.enabled')) {
             OLD_DB()->query("
 				REPLACE INTO " . NEW_BB_BT_TRACKER_SNAP . "
 				(topic_id, seeders, leechers, speed_up, speed_down)
@@ -84,7 +82,7 @@ while (true) {
     $start_id += $per_cycle;
 }
 
-if (!$bb_cfg['ocelot']['enabled']) {
+if (!config('tp.ocelot.enabled')) {
     OLD_DB()->query("
 		RENAME TABLE
 		" . BB_BT_TRACKER_SNAP . " TO " . OLD_BB_BT_TRACKER_SNAP . ",
@@ -104,7 +102,7 @@ OLD_DB()->query("DROP TABLE IF EXISTS " . NEW_BB_BT_DLSTATUS_SNAP . ", " . OLD_B
 
 OLD_DB()->query("CREATE TABLE " . NEW_BB_BT_DLSTATUS_SNAP . " LIKE " . BB_BT_DLSTATUS_SNAP);
 
-if ($bb_cfg['bt_show_dl_list'] && $bb_cfg['bt_dl_list_only_count']) {
+if (config('tp.bt_show_dl_list') && config('tp.bt_dl_list_only_count')) {
     OLD_DB()->query("
 		INSERT INTO " . NEW_BB_BT_DLSTATUS_SNAP . "
 			(topic_id, dl_status, users_count)
@@ -127,7 +125,7 @@ OLD_DB()->query("DROP TABLE IF EXISTS " . NEW_BB_BT_DLSTATUS_SNAP . ", " . OLD_B
 //
 // TORHELP
 //
-if ($bb_cfg['torhelp_enabled']) {
+if (config('tp.torhelp_enabled')) {
     $tor_min_seeders = 0;   // "<="
     $tor_min_leechers = 2;   // ">="
     $tor_min_completed = 10;  // ">="
@@ -170,7 +168,7 @@ if ($bb_cfg['torhelp_enabled']) {
 			WHERE
 			      trsn.seeders          <=  $tor_min_seeders
 			  AND trsn.leechers         >=  $tor_min_leechers
-			  AND tor.forum_id          !=  " . (int)$bb_cfg['trash_forum_id'] . "
+			  AND tor.forum_id          !=  " . (int)config('tp.trash_forum_id') . "
 			  AND tor.complete_count    >=  $tor_min_completed
 			  AND tor.seeder_last_seen  <=  (UNIX_TIMESTAMP() - $tor_seed_last_seen_days*86400)
 			  AND dl.user_id            IN($online_users_csv)

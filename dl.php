@@ -24,7 +24,7 @@ $thumbnail = request_var('thumb', 0);
 // Send file to browser
 function send_file_to_browser($attachment, $upload_dir)
 {
-    global $bb_cfg, $lang, $userdata;
+    global $lang, $userdata;
 
     $filename = ($upload_dir == '') ? $attachment['physical_filename'] : $upload_dir . '/' . $attachment['physical_filename'];
 

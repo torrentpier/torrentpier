@@ -86,13 +86,11 @@ class Sitemap
      */
     private function getStaticUrls()
     {
-        global $bb_cfg;
-
         $staticUrls = [];
 
-        if (isset($bb_cfg['static_sitemap'])) {
+        if (!empty(config('tp.static_sitemap'))) {
             /** @var array $urls разбиваем строку по переносам */
-            $urls = explode("\n", $bb_cfg['static_sitemap']);
+            $urls = explode("\n", config('tp.static_sitemap'));
             foreach ($urls as $url) {
                 /** @var string $url проверяем что адрес валиден и с указанными протоколом */
                 if (filter_var(trim($url), FILTER_VALIDATE_URL, FILTER_FLAG_SCHEME_REQUIRED)) {

@@ -644,7 +644,7 @@ td.topic_id { cursor: pointer; }
 <!-- IF IS_ADMIN -->
 <div class="med tCenter">{L_ADMIN}:
   <a href="{POSTING_URL}?mode=new_rel&amp;f={FORUM_ID}&amp;edit_tpl=1" class="bold" target="_blank">{L_DESIGNER}</a>&nbsp;&middot;
-  <a href="admin/admin_log.php?f={FORUM_ID}&amp;db={$bb_cfg['log_days_keep']}" target="_blank">{L_FORUM_LOGS}</a>&nbsp;&middot;
+  <a href="admin/admin_log.php?f={FORUM_ID}&amp;db={CFG_LOG_DK}" target="_blank">{L_FORUM_LOGS}</a>&nbsp;&middot;
   <a href="admin/admin_forums.php?mode=editforum&amp;f={FORUM_ID}" target="_blank">{L_EDIT}</a>&nbsp;&middot;
   <a href="admin/admin_forumauth.php?f={FORUM_ID}" target="_blank">{L_PERMISSIONS}</a>&nbsp;&middot;
   <a href="admin/admin_forums.php?mode=deleteforum&amp;f={FORUM_ID}" target="_blank">{L_DELETE}</a>

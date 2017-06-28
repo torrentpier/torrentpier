@@ -11,7 +11,7 @@ if (!defined('BB_ROOT')) {
     die(basename(__FILE__));
 }
 
-global $bf, $bb_cfg;
+global $bf;
 
 //
 // cat_forums
@@ -128,8 +128,8 @@ $this->store('viewtopic_forum_select', $data);
 //
 // latest_news
 //
-if ($bb_cfg['show_latest_news'] and $news_forum_ids = $bb_cfg['latest_news_forum_id']) {
-    $news_count = max($bb_cfg['latest_news_count'], 1);
+if (config('tp.show_latest_news') && $news_forum_ids = config('tp.latest_news_forum_id')) {
+    $news_count = max(config('tp.latest_news_count'), 1);
 
     $data = OLD_DB()->fetch_rowset("
 		SELECT topic_id, topic_time, topic_title, forum_id
@@ -146,8 +146,8 @@ if ($bb_cfg['show_latest_news'] and $news_forum_ids = $bb_cfg['latest_news_forum
 //
 // Network_news
 //
-if ($bb_cfg['show_network_news'] and $net_forum_ids = $bb_cfg['network_news_forum_id']) {
-    $net_count = max($bb_cfg['network_news_count'], 1);
+if (config('tp.show_network_news') && $net_forum_ids = config('tp.network_news_forum_id')) {
+    $net_count = max(config('tp.network_news_count'), 1);
 
     $data = OLD_DB()->fetch_rowset("
 		SELECT topic_id, topic_time, topic_title, forum_id

@@ -17,7 +17,7 @@ if (!config('email.enabled')) {
     bb_die($lang['EMAILER_DISABLED']);
 }
 
-$need_captcha = ($_GET['mode'] == 'sendpassword' && !IS_ADMIN && !$bb_cfg['captcha']['disabled']);
+$need_captcha = ($_GET['mode'] == 'sendpassword' && !IS_ADMIN && !config('tp.captcha.disabled'));
 
 if (isset($_POST['submit'])) {
     if ($need_captcha && !bb_captcha('check')) {
@@ -50,13 +50,13 @@ if (isset($_POST['submit'])) {
             /** @var TorrentPier\Legacy\Emailer() $emailer */
             $emailer = new TorrentPier\Legacy\Emailer();
 
-            $emailer->set_from([$bb_cfg['board_email'] => $bb_cfg['sitename']]);
+            $emailer->set_from([config('tp.board_email') => config('tp.sitename')]);
             $emailer->set_to([$row['user_email'] => $username]);
             $emailer->set_subject($lang['EMAILER_SUBJECT']['USER_ACTIVATE_PASSWD']);
 
             $emailer->set_template('user_activate_passwd', $row['user_lang']);
             $emailer->assign_vars(array(
-                'SITENAME' => $bb_cfg['sitename'],
+                'SITENAME' => config('tp.sitename'),
                 'USERNAME' => $username,
                 'PASSWORD' => $user_password,
                 'U_ACTIVATE' => make_url('profile.php?mode=activate&' . POST_USERS_URL . '=' . $user_id . '&act_key=' . $user_actkey)

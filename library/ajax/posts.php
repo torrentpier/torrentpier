@@ -11,7 +11,7 @@ if (!defined('IN_AJAX')) {
     die(basename(__FILE__));
 }
 
-global $lang, $bb_cfg, $userdata;
+global $lang, $userdata;
 
 if (!isset($this->request['type'])) {
     $this->ajax_die('empty type');
@@ -129,10 +129,10 @@ switch ($this->request['type']) {
 
             if (mb_strlen($text) > 2) {
                 if ($text != $post['post_text']) {
-                    if ($bb_cfg['max_smilies']) {
-                        $count_smilies = substr_count(bbcode2html($text), '<img class="smile" src="' . $bb_cfg['smilies_path']);
-                        if ($count_smilies > $bb_cfg['max_smilies']) {
-                            $this->ajax_die(sprintf($lang['MAX_SMILIES_PER_POST'], $bb_cfg['max_smilies']));
+                    if (config('tp.max_smilies')) {
+                        $count_smilies = substr_count(bbcode2html($text), '<img class="smile" src="' . config('tp.smilies_path'));
+                        if ($count_smilies > config('tp.max_smilies')) {
+                            $this->ajax_die(sprintf($lang['MAX_SMILIES_PER_POST'], config('tp.max_smilies')));
                         }
                     }
                     OLD_DB()->query("UPDATE " . BB_POSTS_TEXT . " SET post_text = '" . OLD_DB()->escape($text) . "' WHERE post_id = $post_id");
@@ -234,7 +234,7 @@ switch ($this->request['type']) {
         $sql = "SELECT MAX(p.post_time) AS last_post_time FROM " . BB_POSTS . " p WHERE $where_sql";
         if ($row = OLD_DB()->fetch_row($sql) and $row['last_post_time']) {
             if ($userdata['user_level'] == USER) {
-                if (TIMENOW - $row['last_post_time'] < $bb_cfg['flood_interval']) {
+                if (TIMENOW - $row['last_post_time'] < config('tp.flood_interval')) {
                     $this->ajax_die($lang['FLOOD_ERROR']);
                 }
             }
@@ -260,10 +260,10 @@ switch ($this->request['type']) {
             }
         }
 
-        if ($bb_cfg['max_smilies']) {
-            $count_smilies = substr_count(bbcode2html($message), '<img class="smile" src="' . $bb_cfg['smilies_path']);
-            if ($count_smilies > $bb_cfg['max_smilies']) {
-                $this->ajax_die(sprintf($lang['MAX_SMILIES_PER_POST'], $bb_cfg['max_smilies']));
+        if (config('tp.max_smilies')) {
+            $count_smilies = substr_count(bbcode2html($message), '<img class="smile" src="' . config('tp.smilies_path'));
+            if ($count_smilies > config('tp.max_smilies')) {
+                $this->ajax_die(sprintf($lang['MAX_SMILIES_PER_POST'], config('tp.max_smilies')));
             }
         }
 
@@ -281,7 +281,7 @@ switch ($this->request['type']) {
             'post_text' => $message,
         ));
 
-        if ($bb_cfg['topic_notify_enabled']) {
+        if (config('tp.topic_notify_enabled')) {
             $notify = !empty($this->request['notify']);
             user_notification('reply', $post, $post['topic_title'], $post['forum_id'], $topic_id, $notify);
         }

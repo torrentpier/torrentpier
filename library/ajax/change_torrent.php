@@ -11,7 +11,7 @@ if (!defined('IN_AJAX')) {
     die(basename(__FILE__));
 }
 
-global $userdata, $bb_cfg, $lang;
+global $userdata, $lang;
 
 if (!isset($this->request['attach_id'])) {
     $this->ajax_die($lang['EMPTY_ATTACH_ID']);

@@ -11,9 +11,7 @@ if (!defined('BB_ROOT')) {
     die(basename(__FILE__));
 }
 
-global $bb_cfg;
-
-$data = array();
+$data = [];
 
 // usercount
 $row = OLD_DB()->fetch_row("SELECT COUNT(*) AS usercount FROM " . BB_USERS . " WHERE user_id NOT IN(" . EXCLUDED_USERS . ")");
@@ -29,7 +27,7 @@ $data['postcount'] = number_format($row['postcount']);
 $data['topiccount'] = number_format($row['topiccount']);
 
 // Tracker stats
-if ($bb_cfg['tor_stats']) {
+if (config('tp.tor_stats')) {
     // torrents stat
     $row = OLD_DB()->fetch_row("SELECT COUNT(topic_id) AS torrentcount, SUM(size) AS size FROM " . BB_BT_TORRENTS);
     $data['torrentcount'] = number_format($row['torrentcount']);
@@ -44,7 +42,7 @@ if ($bb_cfg['tor_stats']) {
 }
 
 // gender stat
-if ($bb_cfg['gender']) {
+if (config('tp.gender')) {
     $male = OLD_DB()->fetch_row("SELECT COUNT(user_id) AS male FROM " . BB_USERS . " WHERE user_gender = " . MALE . " AND user_id NOT IN(" . EXCLUDED_USERS . ")");
     $female = OLD_DB()->fetch_row("SELECT COUNT(user_id) AS female FROM " . BB_USERS . " WHERE user_gender = " . FEMALE . " AND user_id NOT IN(" . EXCLUDED_USERS . ")");
     $unselect = OLD_DB()->fetch_row("SELECT COUNT(user_id) AS unselect FROM " . BB_USERS . " WHERE user_gender = 0 AND user_id NOT IN(" . EXCLUDED_USERS . ")");
@@ -55,7 +53,7 @@ if ($bb_cfg['gender']) {
 }
 
 // birthday stat
-if ($bb_cfg['birthday_check_day'] && $bb_cfg['birthday_enabled']) {
+if (config('tp.birthday_check_day') && config('tp.birthday_enabled')) {
     $sql = OLD_DB()->fetch_rowset("SELECT user_id, username, user_rank , user_birthday
 		FROM " . BB_USERS . "
 		WHERE user_id NOT IN(" . EXCLUDED_USERS . ")
@@ -65,7 +63,7 @@ if ($bb_cfg['birthday_check_day'] && $bb_cfg['birthday_enabled']) {
 	");
 
     $date_today = bb_date(TIMENOW, 'md', false);
-    $date_forward = bb_date(TIMENOW + ($bb_cfg['birthday_check_day'] * 86400), 'md', false);
+    $date_forward = bb_date(TIMENOW + (config('tp.birthday_check_day') * 86400), 'md', false);
 
     $birthday_today_list = $birthday_week_list = array();
 

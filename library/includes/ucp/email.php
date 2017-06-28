@@ -12,8 +12,8 @@ if (!defined('BB_ROOT')) {
 }
 
 // Is send through board enabled? No, return to index
-if (!$bb_cfg['board_email_form']) {
-    redirectToUrl("index.php");
+if (!config('tp.board_email_form')) {
+    redirectToUrl('index.php');
 }
 
 set_die_append_msg();
@@ -62,7 +62,7 @@ if ($row = OLD_DB()->fetch_row($sql)) {
 
             $emailer->set_template('profile_send_email', $user_lang);
             $emailer->assign_vars(array(
-                'SITENAME' => $bb_cfg['sitename'],
+                'SITENAME' => config('tp.sitename'),
                 'FROM_USERNAME' => $userdata['username'],
                 'TO_USERNAME' => $username,
                 'MESSAGE' => $message,

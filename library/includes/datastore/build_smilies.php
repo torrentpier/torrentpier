@@ -11,16 +11,14 @@ if (!defined('BB_ROOT')) {
     die(basename(__FILE__));
 }
 
-global $bb_cfg;
-
-$smilies = array();
+$smilies = [];
 
 $rowset = OLD_DB()->fetch_rowset("SELECT * FROM " . BB_SMILIES);
 sort($rowset);
 
 foreach ($rowset as $smile) {
     $smilies['orig'][] = '#(?<=^|\W)' . preg_quote($smile['code'], '#') . '(?=$|\W)#';
-    $smilies['repl'][] = ' <img class="smile" src="' . $bb_cfg['smilies_path'] . '/' . $smile['smile_url'] . '" alt="' . $smile['emoticon'] . '" align="absmiddle" border="0" />';
+    $smilies['repl'][] = ' <img class="smile" src="' . config('tp.smilies_path') . '/' . $smile['smile_url'] . '" alt="' . $smile['emoticon'] . '" align="absmiddle" border="0" />';
     $smilies['smile'][] = $smile;
 }
 

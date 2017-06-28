@@ -49,7 +49,7 @@ if (IS_ADMIN) {
 }
 
 if (bf($profiledata['user_opt'], 'user_opt', 'user_viewemail') || $profiledata['user_id'] == $userdata['user_id'] || IS_AM) {
-    $email_uri = ($bb_cfg['board_email_form']) ? 'profile.php?mode=email&amp;' . POST_USERS_URL . '=' . $profiledata['user_id'] : 'mailto:' . $profiledata['user_email'];
+    $email_uri = config('tp.board_email_form') ? 'profile.php?mode=email&amp;' . POST_USERS_URL . '=' . $profiledata['user_id'] : 'mailto:' . $profiledata['user_email'];
     $email = '<a class="editable" href="' . $email_uri . '">' . $profiledata['user_email'] . '</a>';
 } else {
     $email = '';
@@ -61,7 +61,7 @@ if (bf($profiledata['user_opt'], 'user_opt', 'user_viewemail') || $profiledata['
 
 $profile_user_id = ($profiledata['user_id'] == $userdata['user_id']);
 
-$signature = ($bb_cfg['allow_sig'] && $profiledata['user_sig']) ? $profiledata['user_sig'] : '';
+$signature = (config('tp.allow_sig') && $profiledata['user_sig']) ? $profiledata['user_sig'] : '';
 
 if (bf($profiledata['user_opt'], 'user_opt', 'dis_sig')) {
     if ($profile_user_id) {
@@ -97,9 +97,9 @@ $template->assign_vars(array(
     'SKYPE' => $profiledata['user_skype'],
     'TWITTER' => $profiledata['user_twitter'],
     'USER_POINTS' => $profiledata['user_points'],
-    'GENDER' => ($bb_cfg['gender']) ? $lang['GENDER_SELECT'][$profiledata['user_gender']] : '',
-    'BIRTHDAY' => ($bb_cfg['birthday_enabled'] && $profiledata['user_birthday'] != '0000-00-00') ? $profiledata['user_birthday'] : '',
-    'AGE' => ($bb_cfg['birthday_enabled'] && $profiledata['user_birthday'] != '0000-00-00') ? birthday_age($profiledata['user_birthday']) : '',
+    'GENDER' => config('tp.gender') ? $lang['GENDER_SELECT'][$profiledata['user_gender']] : '',
+    'BIRTHDAY' => (config('tp.birthday_enabled') && $profiledata['user_birthday'] != '0000-00-00') ? $profiledata['user_birthday'] : '',
+    'AGE' => (config('tp.birthday_enabled') && $profiledata['user_birthday'] != '0000-00-00') ? birthday_age($profiledata['user_birthday']) : '',
 
     'L_VIEWING_PROFILE' => sprintf($lang['VIEWING_USER_PROFILE'], $profiledata['username']),
     'L_MY_PROFILE' => sprintf($lang['VIEWING_MY_PROFILE'], 'profile.php?mode=editprofile'),

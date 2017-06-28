@@ -21,7 +21,7 @@ $page_cfg['load_tpl_vars'] = array(
 );
 
 // Session start
-$user->session_start(array('req_login' => $bb_cfg['bt_tor_browse_only_reg']));
+$user->session_start(array('req_login' => config('tp.bt_tor_browse_only_reg')));
 
 set_die_append_msg();
 
@@ -32,7 +32,7 @@ $max_forums_selected = 50;
 $title_match_max_len = 60;
 $poster_name_max_len = 25;
 $tor_colspan = 13; // torrents table colspan with all columns
-$per_page = $bb_cfg['topics_per_page'];
+$per_page = config('tp.topics_per_page');
 $tracker_url = basename(__FILE__);
 
 $time_format = 'H:i';
@@ -735,8 +735,8 @@ if ($allowed_forums) {
                 'MAGNET' => $tor_magnet,
                 'TOR_TYPE' => is_gold($tor['tor_type']),
 
-                'TOR_FROZEN' => (!IS_AM) ? isset($bb_cfg['tor_frozen'][$tor['tor_status']]) : '',
-                'TOR_STATUS_ICON' => $bb_cfg['tor_icons'][$tor['tor_status']],
+                'TOR_FROZEN' => (!IS_AM) ? null !== config('tp.tor_frozen.' . $tor['tor_status']) : '',
+                'TOR_STATUS_ICON' => config('tp.tor_icons.' . $tor['tor_status']),
                 'TOR_STATUS_TEXT' => $lang['TOR_STATUS_NAME'][$tor['tor_status']],
 
                 'TOR_SIZE_RAW' => $size,

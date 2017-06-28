@@ -21,8 +21,7 @@ class Poll
 
     public function __construct()
     {
-        global $bb_cfg;
-        $this->max_votes = $bb_cfg['max_poll_options'];
+        $this->max_votes = config('tp.max_poll_options');
     }
 
     /**

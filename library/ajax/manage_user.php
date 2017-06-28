@@ -11,7 +11,7 @@ if (!defined('IN_AJAX')) {
     die(basename(__FILE__));
 }
 
-global $userdata, $lang, $bb_cfg;
+global $userdata, $lang;
 
 $mode = (string)$this->request['mode'];
 $user_id = $this->request['user_id'];

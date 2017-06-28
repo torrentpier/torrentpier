@@ -11,7 +11,7 @@ if (!defined('IN_AJAX')) {
     die(basename(__FILE__));
 }
 
-global $userdata, $bb_cfg, $lang;
+global $userdata, $lang;
 
 if (!isset($this->request['attach_id'])) {
     $this->ajax_die($lang['EMPTY_ATTACH_ID']);
@@ -20,7 +20,7 @@ if (!isset($this->request['attach_id'])) {
 $attach_id = (int)$this->request['attach_id'];
 $mode = (string)$this->request['mode'];
 
-if ($bb_cfg['tor_comment']) {
+if (config('tp.tor_comment')) {
     $comment = (string)$this->request['comment'];
 }
 
@@ -85,12 +85,12 @@ switch ($mode) {
 
         change_tor_status($attach_id, $new_status);
 
-        $this->response['status'] = $bb_cfg['tor_icons'][$new_status] . ' <b> ' . $lang['TOR_STATUS_NAME'][$new_status] . '</b> &middot; ' . profile_url($userdata) . ' &middot; <i>' . delta_time(TIMENOW) . $lang['TOR_BACK'] . '</i>';
+        $this->response['status'] = config('tp.tor_icons.' . $new_status) . ' <b> ' . $lang['TOR_STATUS_NAME'][$new_status] . '</b> &middot; ' . profile_url($userdata) . ' &middot; <i>' . delta_time(TIMENOW) . $lang['TOR_BACK'] . '</i>';
 
-        if ($bb_cfg['tor_comment'] && (($comment && $comment != $lang['COMMENT']) || in_array($new_status, $bb_cfg['tor_reply']))) {
+        if (config('tp.tor_comment') && (($comment && $comment != $lang['COMMENT']) || in_array($new_status, config('tp.tor_reply')))) {
             if ($tor['poster_id'] > 0) {
                 $subject = sprintf($lang['TOR_MOD_TITLE'], $tor['topic_title']);
-                $message = sprintf($lang['TOR_MOD_MSG'], get_username($tor['poster_id']), make_url(TOPIC_URL . $tor['topic_id']), $bb_cfg['tor_icons'][$new_status] . ' ' . $lang['TOR_STATUS_NAME'][$new_status]);
+                $message = sprintf($lang['TOR_MOD_MSG'], get_username($tor['poster_id']), make_url(TOPIC_URL . $tor['topic_id']), config('tp.tor_icons.' . $new_status) . ' ' . $lang['TOR_STATUS_NAME'][$new_status]);
 
                 if ($comment && $comment != $lang['COMMENT']) {
                     $message .= "\n\n[b]" . $lang['COMMENT'] . '[/b]: ' . $comment;
@@ -103,7 +103,7 @@ switch ($mode) {
         break;
 
     case 'status_reply':
-        if (!$bb_cfg['tor_comment']) {
+        if (!config('tp.tor_comment')) {
             $this->ajax_die($lang['MODULE_OFF']);
         }
 

@@ -24,7 +24,7 @@ $page_cfg['load_tpl_vars'] = array(
 //
 // Is PM disabled?
 //
-if ($bb_cfg['privmsg_disable']) {
+if (config('tp.privmsg_disable')) {
     bb_die('PM_DISABLED');
 }
 
@@ -32,14 +32,14 @@ if ($bb_cfg['privmsg_disable']) {
 // Parameters
 //
 $submit = (bool)request_var('post', false);
-$submit_search = (isset($_POST['usersubmit'])) ? true : 0;
-$submit_msgdays = (isset($_POST['submit_msgdays'])) ? true : 0;
-$cancel = (isset($_POST['cancel'])) ? true : 0;
-$preview = (isset($_POST['preview'])) ? true : 0;
-$confirmed = (isset($_POST['confirm'])) ? true : 0;
-$delete = (isset($_POST['delete'])) ? true : 0;
-$delete_all = (isset($_POST['deleteall'])) ? true : 0;
-$save = (isset($_POST['save'])) ? true : 0;
+$submit_search = isset($_POST['usersubmit']) ? true : 0;
+$submit_msgdays = isset($_POST['submit_msgdays']) ? true : 0;
+$cancel = isset($_POST['cancel']) ? true : 0;
+$preview = isset($_POST['preview']) ? true : 0;
+$confirmed = isset($_POST['confirm']) ? true : 0;
+$delete = isset($_POST['delete']) ? true : 0;
+$delete_all = isset($_POST['deleteall']) ? true : 0;
+$save = isset($_POST['save']) ? true : 0;
 $mode = isset($_REQUEST['mode']) ? (string)$_REQUEST['mode'] : '';
 
 $refresh = $preview || $submit_search;
@@ -59,7 +59,7 @@ $user->session_start(array('req_login' => true));
 
 $template->assign_vars(array(
     'IN_PM' => true,
-    'QUICK_REPLY' => $bb_cfg['show_quick_reply'] && $folder == 'inbox' && $mode == 'read',
+    'QUICK_REPLY' => config('tp.show_quick_reply') && $folder == 'inbox' && $mode == 'read',
 ));
 
 //
@@ -200,7 +200,7 @@ if ($mode == 'read') {
         }
 
         if ($sent_info = OLD_DB()->sql_fetchrow($result)) {
-            if ($bb_cfg['max_sentbox_privmsgs'] && $sent_info['sent_items'] >= $bb_cfg['max_sentbox_privmsgs']) {
+            if (config('tp.max_sentbox_privmsgs') && $sent_info['sent_items'] >= config('tp.max_sentbox_privmsgs')) {
                 $sql = "SELECT privmsgs_id FROM " . BB_PRIVMSGS . "
 					WHERE privmsgs_type = " . PRIVMSGS_SENT_MAIL . "
 						AND privmsgs_date = " . $sent_info['oldest_post_time'] . "
@@ -609,7 +609,7 @@ if ($mode == 'read') {
         }
 
         if ($saved_info = OLD_DB()->sql_fetchrow($result)) {
-            if ($bb_cfg['max_savebox_privmsgs'] && $saved_info['savebox_items'] >= $bb_cfg['max_savebox_privmsgs']) {
+            if (config('tp.max_savebox_privmsgs') && $saved_info['savebox_items'] >= config('tp.max_savebox_privmsgs')) {
                 $sql = "SELECT privmsgs_id FROM " . BB_PRIVMSGS . "
 					WHERE ( ( privmsgs_to_userid = " . $userdata['user_id'] . "
 								AND privmsgs_type = " . PRIVMSGS_SAVED_IN_MAIL . " )
@@ -754,7 +754,7 @@ if ($mode == 'read') {
             $last_post_time = $db_row['last_post_time'];
             $current_time = TIMENOW;
 
-            if (($current_time - $last_post_time) < $bb_cfg['flood_interval']) {
+            if (($current_time - $last_post_time) < config('tp.flood_interval')) {
                 bb_die($lang['FLOOD_ERROR']);
             }
         }
@@ -832,7 +832,7 @@ if ($mode == 'read') {
             }
 
             if ($inbox_info = OLD_DB()->sql_fetchrow($result)) {
-                if ($bb_cfg['max_inbox_privmsgs'] && $inbox_info['inbox_items'] >= $bb_cfg['max_inbox_privmsgs']) {
+                if (config('tp.max_inbox_privmsgs') && $inbox_info['inbox_items'] >= config('tp.max_inbox_privmsgs')) {
                     $sql = "SELECT privmsgs_id FROM " . BB_PRIVMSGS . "
 						WHERE ( privmsgs_type = " . PRIVMSGS_NEW_MAIL . "
 								OR privmsgs_type = " . PRIVMSGS_READ_MAIL . "
@@ -900,11 +900,11 @@ if ($mode == 'read') {
 
             cache_rm_user_sessions($to_userdata['user_id']);
 
-            if (bf($to_userdata['user_opt'], 'user_opt', 'user_notify_pm') && $to_userdata['user_active'] && $bb_cfg['pm_notify_enabled']) {
+            if (bf($to_userdata['user_opt'], 'user_opt', 'user_notify_pm') && $to_userdata['user_active'] && config('tp.pm_notify_enabled')) {
                 /** @var TorrentPier\Legacy\Emailer() $emailer */
                 $emailer = new TorrentPier\Legacy\Emailer();
 
-                $emailer->set_from([$bb_cfg['board_email'] => $bb_cfg['sitename']]);
+                $emailer->set_from([config('tp.board_email') => config('tp.sitename')]);
                 $emailer->set_to([$to_userdata['user_email'] => $to_userdata['username']]);
                 $emailer->set_subject($lang['EMAILER_SUBJECT']['PRIVMSG_NOTIFY']);
 
@@ -913,7 +913,7 @@ if ($mode == 'read') {
                     'USERNAME' => html_entity_decode($to_username),
                     'NAME_FROM' => $userdata['username'],
                     'MSG_SUBJECT' => html_entity_decode($privmsg_subject),
-                    'SITENAME' => $bb_cfg['sitename'],
+                    'SITENAME' => config('tp.sitename'),
                     'U_INBOX' => make_url(PM_URL . "?folder=inbox&mode=read&p=$privmsg_sent_id"),
                 ));
 
@@ -1262,7 +1262,7 @@ if ($mode == 'read') {
         $msg_days = 0;
     }
 
-    $sql .= $limit_msg_time . " ORDER BY pm.privmsgs_date DESC LIMIT $start, " . $bb_cfg['topics_per_page'];
+    $sql .= $limit_msg_time . " ORDER BY pm.privmsgs_date DESC LIMIT $start, " . config('tp.topics_per_page');
     $sql_all_tot = $sql_tot;
     $sql_tot .= $limit_msg_time_total;
 
@@ -1318,11 +1318,11 @@ if ($mode == 'read') {
     // Output data for inbox status
     //
     $box_limit_img_length = $box_limit_percent = $l_box_size_status = '';
-    $max_pm = ($folder != 'outbox') ? $bb_cfg["max_{$folder}_privmsgs"] : null;
+    $max_pm = ($folder != 'outbox') ? config('tp.max_' . $folder . '_privmsgs') : null;
 
     if ($max_pm) {
         $box_limit_percent = min(round(($pm_all_total / $max_pm) * 100), 100);
-        $box_limit_img_length = min(round(($pm_all_total / $max_pm) * $bb_cfg['privmsg_graphic_length']), $bb_cfg['privmsg_graphic_length']);
+        $box_limit_img_length = min(round(($pm_all_total / $max_pm) * config('tp.privmsg_graphic_length')), config('tp.privmsg_graphic_length'));
         $box_limit_remain = max(($max_pm - $pm_all_total), 0);
 
         $template->assign_var('PM_BOX_SIZE_INFO');
@@ -1427,7 +1427,7 @@ if ($mode == 'read') {
             ));
         } while ($row = OLD_DB()->sql_fetchrow($result));
 
-        generate_pagination(PM_URL . "?folder=$folder", $pm_total, $bb_cfg['topics_per_page'], $start);
+        generate_pagination(PM_URL . "?folder=$folder", $pm_total, config('tp.topics_per_page'), $start);
     } else {
         $template->assign_block_vars("switch_no_messages", array());
     }

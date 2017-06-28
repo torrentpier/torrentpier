@@ -64,7 +64,7 @@ if (isset($_POST['submit'])) {
             /** @var TorrentPier\Legacy\Emailer() $emailer */
             $emailer = new TorrentPier\Legacy\Emailer();
 
-            $emailer->set_from([$bb_cfg['board_email'] => $bb_cfg['sitename']]);
+            $emailer->set_from([config('tp.board_email') => config('tp.sitename')]);
             $emailer->set_to([$row['user_email'] => $row['username']]);
             $emailer->set_subject($subject);
 

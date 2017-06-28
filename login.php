@@ -63,7 +63,7 @@ $login_password = $_POST['login_password'] ?? '';
 $need_captcha = false;
 if (!$mod_admin_login) {
     $need_captcha = OLD_CACHE('bb_login_err')->get('l_err_' . USER_IP);
-    if ($need_captcha < $bb_cfg['invalid_logins']) {
+    if ($need_captcha < config('tp.invalid_logins')) {
         $need_captcha = false;
     }
 }
@@ -80,13 +80,13 @@ if (isset($_POST['login'])) {
     }
 
     // Captcha
-    if ($need_captcha && !bb_captcha('check') && !$bb_cfg['captcha']['disabled']) {
+    if ($need_captcha && !bb_captcha('check') && !config('tp.captcha.disabled')) {
         $login_errors[] = $lang['CAPTCHA_WRONG'];
     }
 
     if (!$login_errors) {
         if ($user->login($_POST, $mod_admin_login)) {
-            $redirect_url = (defined('FIRST_LOGON')) ? $bb_cfg['first_logon_redirect_url'] : $redirect_url;
+            $redirect_url = defined('FIRST_LOGON') ? config('tp.first_logon_redirect_url') : $redirect_url;
             // Обнуление при введении правильно комбинации логин/пароль
             OLD_CACHE('bb_login_err')->set('l_err_' . USER_IP, 0, 3600);
 
@@ -100,7 +100,7 @@ if (isset($_POST['login'])) {
 
         if (!$mod_admin_login) {
             $login_err = OLD_CACHE('bb_login_err')->get('l_err_' . USER_IP);
-            if ($login_err > $bb_cfg['invalid_logins']) {
+            if ($login_err > config('tp.invalid_logins')) {
                 $need_captcha = true;
             }
             OLD_CACHE('bb_login_err')->set('l_err_' . USER_IP, ($login_err + 1), 3600);
@@ -118,7 +118,7 @@ if (IS_GUEST || $mod_admin_login) {
         'ERROR_MESSAGE' => implode('<br />', $login_errors),
         'ADMIN_LOGIN' => $mod_admin_login,
         'REDIRECT_URL' => htmlCHR($redirect_url),
-        'CAPTCHA_HTML' => ($need_captcha && !$bb_cfg['captcha']['disabled']) ? bb_captcha('get') : '',
+        'CAPTCHA_HTML' => ($need_captcha && !config('tp.captcha.disabled')) ? bb_captcha('get') : '',
         'PAGE_TITLE' => $lang['LOGIN'],
         'S_LOGIN_ACTION' => LOGIN_URL,
     ));

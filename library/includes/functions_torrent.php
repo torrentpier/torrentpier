@@ -65,7 +65,7 @@ function torrent_auth_check($forum_id, $poster_id)
 
 function tracker_unregister($attach_id, $mode = '')
 {
-    global $lang, $bb_cfg;
+    global $lang;
 
     $attach_id = (int)$attach_id;
     $post_id = $topic_id = $forum_id = $info_hash = null;
@@ -99,7 +99,7 @@ function tracker_unregister($attach_id, $mode = '')
     }
 
     // Unset DL-Type for topic
-    if ($bb_cfg['bt_unset_dltype_on_tor_unreg'] && $topic_id) {
+    if (config('tp.bt_unset_dltype_on_tor_unreg') && $topic_id) {
         $sql = "UPDATE " . BB_TOPICS . " SET topic_dl_type = " . TOPIC_DL_TYPE_NORMAL . " WHERE topic_id = $topic_id";
 
         if (!$result = OLD_DB()->sql_query($sql)) {
@@ -115,7 +115,7 @@ function tracker_unregister($attach_id, $mode = '')
     }
 
     // Ocelot
-    if ($bb_cfg['ocelot']['enabled']) {
+    if (config('tp.ocelot.enabled')) {
         if ($row = OLD_DB()->fetch_row("SELECT info_hash FROM " . BB_BT_TORRENTS . " WHERE attach_id = $attach_id LIMIT 1")) {
             $info_hash = $row['info_hash'];
         }
@@ -196,7 +196,7 @@ function change_tor_status($attach_id, $new_tor_status)
 // Set gold/silver type for torrent
 function change_tor_type($attach_id, $tor_status_gold)
 {
-    global $topic_id, $lang, $bb_cfg;
+    global $topic_id, $lang;
 
     if (!$torrent = get_torrent_info($attach_id)) {
         bb_die($lang['TOR_NOT_FOUND']);
@@ -213,7 +213,7 @@ function change_tor_type($attach_id, $tor_status_gold)
     OLD_DB()->query("UPDATE " . BB_BT_TORRENTS . " SET tor_type = $tor_status_gold WHERE topic_id = $topic_id");
 
     // Ocelot
-    if ($bb_cfg['ocelot']['enabled']) {
+    if (config('tp.ocelot.enabled')) {
         if ($row = OLD_DB()->fetch_row("SELECT info_hash FROM " . BB_BT_TORRENTS . " WHERE topic_id = $topic_id LIMIT 1")) {
             $info_hash = $row['info_hash'];
         }
@@ -223,7 +223,7 @@ function change_tor_type($attach_id, $tor_status_gold)
 
 function tracker_register($attach_id, $mode = '', $tor_status = TOR_NOT_APPROVED, $reg_time = TIMENOW)
 {
-    global $bb_cfg, $lang, $reg_mode;
+    global $lang, $reg_mode;
 
     $attach_id = (int)$attach_id;
     $reg_mode = $mode;
@@ -269,18 +269,18 @@ function tracker_register($attach_id, $mode = '', $tor_status = TOR_NOT_APPROVED
         return torrent_error_exit('This is not a bencoded file');
     }
 
-    if ($bb_cfg['bt_disable_dht']) {
+    if (config('tp.bt_disable_dht')) {
         $tor['info']['private'] = (int)1;
         $fp = fopen($filename, 'wb+');
         fwrite($fp, \Rych\Bencode\Bencode::encode($tor));
         fclose($fp);
     }
 
-    if ($bb_cfg['bt_check_announce_url']) {
+    if (config('tp.bt_check_announce_url')) {
         include INC_DIR . '/torrent_announce_urls.php';
 
         $ann = (@$tor['announce']) ? $tor['announce'] : '';
-        $announce_urls['main_url'] = $bb_cfg['bt_announce_url'];
+        $announce_urls['main_url'] = config('tp.bt_announce_url');
 
         if (!$ann || !in_array($ann, $announce_urls)) {
             $msg = sprintf($lang['INVALID_ANN_URL'], htmlspecialchars($ann), $announce_urls['main_url']);
@@ -299,7 +299,7 @@ function tracker_register($attach_id, $mode = '', $tor_status = TOR_NOT_APPROVED
     $info_hash_md5 = md5($info_hash);
 
     // Ocelot
-    if ($bb_cfg['ocelot']['enabled']) {
+    if (config('tp.ocelot.enabled')) {
         ocelot_update_tracker('add_torrent', array('info_hash' => rawurlencode($info_hash), 'id' => $topic_id, 'freetorrent' => 0));
     }
 
@@ -347,7 +347,7 @@ function tracker_register($attach_id, $mode = '', $tor_status = TOR_NOT_APPROVED
     }
 
     // set DL-Type for topic
-    if ($bb_cfg['bt_set_dltype_on_tor_reg']) {
+    if (config('tp.bt_set_dltype_on_tor_reg')) {
         $sql = 'UPDATE ' . BB_TOPICS . ' SET topic_dl_type = ' . TOPIC_DL_TYPE_DL . " WHERE topic_id = $topic_id";
 
         if (!$result = OLD_DB()->sql_query($sql)) {
@@ -355,7 +355,7 @@ function tracker_register($attach_id, $mode = '', $tor_status = TOR_NOT_APPROVED
         }
     }
 
-    if ($bb_cfg['tracker']['tor_topic_up']) {
+    if (config('tracker.tor_topic_up')) {
         OLD_DB()->query("UPDATE " . BB_TOPICS . " SET topic_last_post_time = GREATEST(topic_last_post_time, " . (TIMENOW - 3 * 86400) . ") WHERE topic_id = $topic_id");
     }
 
@@ -370,9 +370,9 @@ function tracker_register($attach_id, $mode = '', $tor_status = TOR_NOT_APPROVED
 
 function send_torrent_with_passkey($filename)
 {
-    global $attachment, $auth_pages, $userdata, $bb_cfg, $lang;
+    global $attachment, $auth_pages, $userdata, $lang;
 
-    if (!$bb_cfg['bt_add_auth_key'] || $attachment['extension'] !== TORRENT_EXT || !$size = @filesize($filename)) {
+    if (!config('tp.bt_add_auth_key') || $attachment['extension'] !== TORRENT_EXT || !$size = @filesize($filename)) {
         return;
     }
 
@@ -380,8 +380,8 @@ function send_torrent_with_passkey($filename)
     $user_id = $userdata['user_id'];
     $attach_id = $attachment['attach_id'];
 
-    if (!$passkey_key = $bb_cfg['passkey_key']) {
-        bb_die('Could not add passkey (wrong config $bb_cfg[\'passkey_key\'])');
+    if (!$passkey_key = config('tp.passkey_key')) {
+        bb_die('Could not add passkey (wrong config $cfg[\'passkey_key\'])');
     }
 
     // Get $post_id & $poster_id
@@ -416,13 +416,13 @@ function send_torrent_with_passkey($filename)
     if (!$passkey_val) {
         if (!$passkey_val = generate_passkey($user_id)) {
             bb_simple_die('Could not generate passkey');
-        } elseif ($bb_cfg['ocelot']['enabled']) {
+        } elseif (config('tp.ocelot.enabled')) {
             ocelot_update_tracker('add_user', array('id' => $user_id, 'passkey' => $passkey_val));
         }
     }
 
     // Ratio limits
-    $min_ratio = $bb_cfg['bt_min_ratio_allow_dl_tor'];
+    $min_ratio = config('tp.bt_min_ratio_allow_dl_tor');
 
     if ($min_ratio && $user_id != $poster_id && ($user_ratio = get_bt_ratio($bt_userdata)) !== null) {
         if ($user_ratio < $min_ratio && $post_id) {
@@ -441,43 +441,46 @@ function send_torrent_with_passkey($filename)
     }
 
     // Announce URL
-    $ann_url = $bb_cfg['bt_announce_url'];
+    $ann_url = config('tp.bt_announce_url');
 
     $file_contents = file_get_contents($filename);
     if (!$tor = \Rych\Bencode\Bencode::decode($file_contents)) {
         bb_die('This is not a bencoded file');
     }
 
-    $announce = $bb_cfg['ocelot']['enabled'] ? (string)($bb_cfg['ocelot']['url'] . $passkey_val . "/announce") : (string)($ann_url . "?$passkey_key=$passkey_val");
+    $announce = config('tp.ocelot.enabled') ? (string)(config('tp.ocelot.url') . $passkey_val . "/announce") : (string)($ann_url . "?$passkey_key=$passkey_val");
 
     // Replace original announce url with tracker default
-    if ($bb_cfg['bt_replace_ann_url'] || !isset($tor['announce'])) {
+    if (config('tp.bt_replace_ann_url') || !isset($tor['announce'])) {
         $tor['announce'] = $announce;
     }
 
     // Delete all additional urls
-    if ($bb_cfg['bt_del_addit_ann_urls'] || $bb_cfg['bt_disable_dht']) {
+    if (config('tp.bt_del_addit_ann_urls') || config('tp.bt_disable_dht')) {
         unset($tor['announce-list']);
     } elseif (isset($tor['announce-list'])) {
         $tor['announce-list'] = array_merge($tor['announce-list'], array(array($announce)));
     }
 
     // Add retracker
-    if (isset($bb_cfg['tracker']['retracker']) && $bb_cfg['tracker']['retracker']) {
+    if (config('tracker.retracker')) {
         if (bf($userdata['user_opt'], 'user_opt', 'user_retracker') || IS_GUEST) {
             if (!isset($tor['announce-list'])) {
-                $tor['announce-list'] = array(
-                    array($announce),
-                    array($bb_cfg['tracker']['retracker_host'])
-                );
+                $tor['announce-list'] = [
+                    [$announce],
+                    [config('tracker.retracker_host')]
+                ];
             } else {
-                $tor['announce-list'] = array_merge($tor['announce-list'], array(array($bb_cfg['tracker']['retracker_host'])));
+                $tor['announce-list'] = array_merge(
+                    $tor['announce-list'],
+                    [[config('tracker.retracker_host')]]
+                );
             }
         }
     }
 
     // Add publisher & topic url
-    $publisher_name = $bb_cfg['server_name'];
+    $publisher_name = config('tp.server_name');
     $publisher_url = make_url(TOPIC_URL . $topic_id);
 
     $tor['publisher'] = (string)$publisher_name;
@@ -491,7 +494,7 @@ function send_torrent_with_passkey($filename)
 
     // Send torrent
     $output = \Rych\Bencode\Bencode::encode($tor);
-    $dl_fname = '[' . $bb_cfg['server_name'] . '].t' . $topic_id . '.torrent';
+    $dl_fname = '[' . config('tp.server_name') . '].t' . $topic_id . '.torrent';
 
     if (!empty($_COOKIE['explain'])) {
         $out = "attach path: $filename<br /><br />";
@@ -508,7 +511,7 @@ function send_torrent_with_passkey($filename)
 
 function generate_passkey($user_id, $force_generate = false)
 {
-    global $bb_cfg, $lang, $sql;
+    global $lang, $sql;
 
     $user_id = (int)$user_id;
 
@@ -545,7 +548,7 @@ function generate_passkey($user_id, $force_generate = false)
 
         if (OLD_DB()->affected_rows() == 1) {
             // Ocelot
-            if ($bb_cfg['ocelot']['enabled']) {
+            if (config('tp.ocelot.enabled')) {
                 ocelot_update_tracker('change_passkey', array('oldpasskey' => $old_passkey, 'newpasskey' => $passkey_val));
             }
             return $passkey_val;
@@ -599,9 +602,7 @@ function torrent_error_exit($message)
 
 function ocelot_update_tracker($action, $updates)
 {
-    global $bb_cfg;
-
-    $get = $bb_cfg['ocelot']['secret'] . "/update?action=$action";
+    $get = config('tp.ocelot.secret') . "/update?action=$action";
 
     foreach ($updates as $key => $value) {
         $get .= "&$key=$value";
@@ -615,8 +616,6 @@ function ocelot_update_tracker($action, $updates)
 
 function ocelot_send_request($get, $max_attempts = 1, &$err = false)
 {
-    global $bb_cfg;
-
     $header = "GET /$get HTTP/1.1\r\nConnection: Close\r\n\r\n";
     $attempts = $success = $response = 0;
     $start_time = microtime(true);
@@ -624,7 +623,7 @@ function ocelot_send_request($get, $max_attempts = 1, &$err = false)
     while (!$success && $attempts++ < $max_attempts) {
 
         // Send request
-        $file = fsockopen($bb_cfg['ocelot']['host'], $bb_cfg['ocelot']['port'], $error_num, $error_string);
+        $file = fsockopen(config('tp.ocelot.host'), config('tp.ocelot.port'), $error_num, $error_string);
         if ($file) {
             if (fwrite($file, $header) === false) {
                 $err = "Failed to fwrite()";

@@ -11,7 +11,7 @@ if (!defined('BB_ROOT')) {
     die(basename(__FILE__));
 }
 
-$log_days_keep = (int)$bb_cfg['log_days_keep'];
+$log_days_keep = (int)config('tp.log_days_keep');
 
 OLD_DB()->query("
 	DELETE FROM " . BB_LOG . "

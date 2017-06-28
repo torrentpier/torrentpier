@@ -66,8 +66,8 @@ document.write('<input type="hidden" name="user_timezone" value="'+tz+'" />');
 	<span id="check_name"></span></td>
 </tr>
 <tr>
-	<td class="prof-title">{L_EMAIL}: * <!-- IF EDIT_PROFILE --><!-- ELSE IF $bb_cfg['reg_email_activation'] --><br /><h6>{L_EMAIL_EXPLAIN}</h6><!-- ENDIF --></td>
-	<td><input id="email" onBlur="ajax.exec({ action: 'user_register', mode: 'check_email', email: $('#email').val()}); return false;" type="text" name="user_email" size="35" maxlength="40" value="{USER_EMAIL}" <!-- IF EDIT_PROFILE --><!-- IF $bb_cfg['emailer_disabled'] -->readonly="readonly" style="color: gray;"<!-- ENDIF --><!-- ENDIF --> />
+	<td class="prof-title">{L_EMAIL}: * <!-- IF EDIT_PROFILE --><!-- ELSE IF CFG_REQ_EA --><br /><h6>{L_EMAIL_EXPLAIN}</h6><!-- ENDIF --></td>
+	<td><input id="email" onBlur="ajax.exec({ action: 'user_register', mode: 'check_email', email: $('#email').val()}); return false;" type="text" name="user_email" size="35" maxlength="40" value="{USER_EMAIL}" <!-- IF EDIT_PROFILE --><!-- IF CFG_EMAIL_E -->readonly="readonly" style="color: gray;"<!-- ENDIF --><!-- ENDIF --> />
 	<span id="check_email"></span></td>
 </tr>
 <!-- IF EDIT_PROFILE and not ADM_EDIT -->
@@ -106,13 +106,13 @@ document.write('<input type="hidden" name="user_timezone" value="'+tz+'" />');
 <tr>
 	<th colspan="2">{L_PROFILE_INFO}</th>
 </tr>
-<!-- IF $bb_cfg['gender'] -->
+<!-- IF CFG_GENDER -->
 <tr>
 	<td class="prof-title">{L_GENDER}:</td>
 	<td>{USER_GENDER}</td>
 </tr>
 <!-- ENDIF -->
-<!-- IF $bb_cfg['birthday_enabled'] -->
+<!-- IF CFG_BIRTH_E -->
 <tr>
 	<td class="prof-title">{L_BIRTHDAY}:</td>
 	<td><input type="date" name="user_birthday" value="{USER_BIRTHDAY}" /></td>
@@ -149,7 +149,7 @@ document.write('<input type="hidden" name="user_timezone" value="'+tz+'" />');
 	</td>
 </tr>
 <!-- ENDIF -->
-<!-- IF $bb_cfg['allow_change']['language'] -->
+<!-- IF CFG_AC_LANG -->
 <tr>
 	<td class="prof-title">{L_BOARD_LANG}:</td>
 	<td>{LANGUAGE_SELECT}</td>
@@ -218,7 +218,7 @@ ajax.callback.posts = function(data){
 		<label><input type="radio" name="user_notify" value="0" <!-- IF not USER_NOTIFY -->checked="checked"<!-- ENDIF --> />{L_NO}</label>
 	</td>
 </tr>
-<!-- IF $bb_cfg['pm_notify_enabled'] -->
+<!-- IF CFG_PM_NE -->
 <tr>
 	<td class="prof-title">{L_NOTIFY_ON_PRIVMSG}:</td>
 	<td>
@@ -280,10 +280,10 @@ ajax.callback.posts = function(data){
 		<tr>
 			<td>
 				{AVATAR_EXPLAIN}
-				<!-- IF $bb_cfg['avatars']['up_allowed'] -->
+				<!-- IF CFG_AV_UA -->
 				<div class="spacer_4"></div>
 				{L_UPLOAD_AVATAR_FILE}:
-				<input type="hidden" name="MAX_FILE_SIZE" value="{$bb_cfg['avatars']['max_size']}" />
+				<input type="hidden" name="MAX_FILE_SIZE" value="{CFG_AV_MS}" />
 				<input type="file" name="avatar" />
 				<!-- ENDIF -->
 			</td>

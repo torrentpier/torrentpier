@@ -2260,7 +2260,7 @@ $lang['TRACKER_CFG_TITLE'] = 'Tracker';
 $lang['FORUM_CFG_TITLE'] = 'Forum settings';
 $lang['TRACKER_SETTINGS'] = 'Tracker settings';
 
-$lang['CHANGES_DISABLED'] = 'Changes disabled (see <b>$bb_cfg[\'tracker\']</b> in config.php)';
+$lang['CHANGES_DISABLED'] = 'Changes disabled (see <b>config/tracker.php</b>)';
 
 $lang['OFF_TRACKER'] = 'Disable tracker';
 $lang['OFF_REASON'] = 'Disable reason';

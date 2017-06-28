@@ -11,7 +11,7 @@ if (!defined('IN_AJAX')) {
     die(basename(__FILE__));
 }
 
-global $bb_cfg, $lang, $userdata, $datastore;
+global $lang, $userdata, $datastore;
 
 $mode = (string)$this->request['mode'];
 $html = '';
@@ -27,9 +27,9 @@ switch ($mode) {
             foreach ($stats['birthday_week_list'] as $week) {
                 $html[] = profile_url($week) . ' <span class="small">(' . birthday_age($week['user_birthday']) . ')</span>';
             }
-            $html = sprintf($lang['BIRTHDAY_WEEK'], $bb_cfg['birthday_check_day'], implode(', ', $html));
+            $html = sprintf($lang['BIRTHDAY_WEEK'], config('tp.birthday_check_day'), implode(', ', $html));
         } else {
-            $html = sprintf($lang['NOBIRTHDAY_WEEK'], $bb_cfg['birthday_check_day']);
+            $html = sprintf($lang['NOBIRTHDAY_WEEK'], config('tp.birthday_check_day'));
         }
         break;
 
@@ -86,10 +86,10 @@ switch ($mode) {
         if ($tz > 13) {
             $tz = 13;
         }
-        if ($tz != $bb_cfg['board_timezone']) {
+        if ($tz != config('tp.board_timezone')) {
             // Set current user timezone
             OLD_DB()->query("UPDATE " . BB_USERS . " SET user_timezone = $tz WHERE user_id = " . $userdata['user_id']);
-            $bb_cfg['board_timezone'] = $tz;
+            config(['tp.board_timezone' => $tz]);
             cache_rm_user_sessions($userdata['user_id']);
         }
         break;
@@ -110,7 +110,7 @@ switch ($mode) {
 				<th>' . $lang['UPLOADED'] . '</th>
 				<th>' . $lang['RELEASED'] . '</th>
 				<th>' . $lang['BONUS'] . '</th>';
-        $html .= ($bb_cfg['seed_bonus_enabled']) ? '<th>' . $lang['SEED_BONUS'] . '</th>' : '';
+        $html .= config('tp.seed_bonus_enabled') ? '<th>' . $lang['SEED_BONUS'] . '</th>' : '';
         $html .= '</tr>
 			<tr class="row1">
 				<td>' . $lang['TOTAL_TRAF'] . '</td>
@@ -118,17 +118,17 @@ switch ($mode) {
 				<td id="u_up_total"><span class="editable bold seedmed">' . humn_size($btu['u_up_total']) . '</span></td>
 				<td id="u_up_release"><span class="editable bold seedmed">' . humn_size($btu['u_up_release']) . '</span></td>
 				<td id="u_up_bonus"><span class="editable bold seedmed">' . humn_size($btu['u_up_bonus']) . '</span></td>';
-        $html .= ($bb_cfg['seed_bonus_enabled']) ? '<td id="user_points"><span class="editable bold points">' . $profiledata['user_points'] . '</b></td>' : '';
+        $html .= config('tp.seed_bonus_enabled') ? '<td id="user_points"><span class="editable bold points">' . $profiledata['user_points'] . '</b></td>' : '';
         $html .= '</tr>
 			<tr class="row5">
 				<td colspan="1">' . $lang['MAX_SPEED'] . '</td>
 				<td colspan="2">' . $lang['DL_DL_SPEED'] . ': ' . $speed_down . '</span></td>
 				<td colspan="2">' . $lang['DL_UL_SPEED'] . ': ' . $speed_up . '</span></td>';
-        $html .= ($bb_cfg['seed_bonus_enabled']) ? '<td colspan="1"></td>' : '';
+        $html .= config('tp.seed_bonus_enabled') ? '<td colspan="1"></td>' : '';
         $html .= '</tr>';
 
         $this->response['user_ratio'] = '
-			<th><a href="' . $bb_cfg['ratio_url_help'] . '" class="bold">' . $lang['USER_RATIO'] . '</a>:</th>
+			<th><a href="' . config('tp.ratio_url_help') . '" class="bold">' . $lang['USER_RATIO'] . '</a>:</th>
 			<td>' . $user_ratio . '</td>
 		';
         break;
