@@ -414,9 +414,9 @@ class User
 					');
 
                     return $new_session_userdata;
-                } else {
-                    trigger_error('Could not start session : login', E_USER_ERROR);
                 }
+
+                trigger_error('Could not start session : login', E_USER_ERROR);
             }
         }
 
