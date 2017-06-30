@@ -122,13 +122,13 @@ class TorrentFileList
      */
     private function build_file_item($name, $length)
     {
-        global $images, $lang;
+        global $images;
 
         $magnet_name = $magnet_ext = '';
 
         if (config('tp.magnet_links_enabled')) {
-            $magnet_name = '<a title="' . $lang['DC_MAGNET'] . '" href="dchub:magnet:?kt=' . $name . '&xl=' . $length . '"><img src="' . $images['icon_dc_magnet'] . '" width="10" height="10" border="0" /></a>';
-            $magnet_ext = '<a title="' . $lang['DC_MAGNET_EXT'] . '" href="dchub:magnet:?kt=.' . substr(strrchr($name, '.'), 1) . '&xl=' . $length . '"><img src="' . $images['icon_dc_magnet_ext'] . '" width="10" height="10" border="0" /></a>';
+            $magnet_name = '<a title="' . trans('messages.DC_MAGNET') . '" href="dchub:magnet:?kt=' . $name . '&xl=' . $length . '"><img src="' . $images['icon_dc_magnet'] . '" width="10" height="10" border="0" /></a>';
+            $magnet_ext = '<a title="' . trans('messages.DC_MAGNET_EXT') . '" href="dchub:magnet:?kt=.' . substr(strrchr($name, '.'), 1) . '&xl=' . $length . '"><img src="' . $images['icon_dc_magnet_ext'] . '" width="10" height="10" border="0" /></a>';
         }
 
         return "$name <i>$length</i> $magnet_name $magnet_ext";

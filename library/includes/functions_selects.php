@@ -36,14 +36,14 @@ function language_select($default_lang, $select_name = 'language')
 //
 function tz_select($default, $select_name = 'timezone')
 {
-    global $sys_timezone, $lang;
+    global $sys_timezone;
 
     if (!isset($default)) {
-        $default == $sys_timezone;
+        $default = $sys_timezone;
     }
     $tz_select = '<select name="' . $select_name . '">';
 
-    foreach ($lang['TZ'] as $offset => $zone) {
+    foreach (trans('messages.TZ') as $offset => $zone) {
         $selected = ($offset == $default) ? ' selected="selected"' : '';
         $tz_select .= '<option value="' . $offset . '"' . $selected . '>' . $zone . '</option>';
     }

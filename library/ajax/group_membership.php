@@ -11,7 +11,7 @@ if (!defined('IN_AJAX')) {
     die(basename(__FILE__));
 }
 
-global $lang, $user;
+global $user;
 
 if (!$user_id = (int)$this->request['user_id'] or !$profiledata = get_userdata($user_id)) {
     $this->ajax_die("invalid user_id: $user_id");
@@ -57,7 +57,7 @@ switch ($mode) {
         if ($html) {
             $this->response['group_list_html'] = '<ul><li>' . implode('</li><li>', $html) . '</li></ul>';
         } else {
-            $this->response['group_list_html'] = $lang['GROUP_LIST_HIDDEN'];
+            $this->response['group_list_html'] = trans('messages.GROUP_LIST_HIDDEN');
         }
         break;
 

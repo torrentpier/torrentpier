@@ -16,7 +16,7 @@ if (!defined('BB_ROOT')) {
 //
 function prepare_post(&$mode, &$post_data, &$error_msg, &$username, &$subject, &$message)
 {
-    global $user, $userdata, $lang;
+    global $user, $userdata;
 
     // Check username
     if (!empty($username)) {
@@ -37,26 +37,26 @@ function prepare_post(&$mode, &$post_data, &$error_msg, &$username, &$subject, &
     if (!empty($subject)) {
         $subject = str_replace('&amp;', '&', $subject);
     } elseif ($mode == 'newtopic' || ($mode == 'editpost' && $post_data['first_post'])) {
-        $error_msg .= (!empty($error_msg)) ? '<br />' . $lang['EMPTY_SUBJECT'] : $lang['EMPTY_SUBJECT'];
+        $error_msg .= (!empty($error_msg)) ? '<br />' . trans('messages.EMPTY_SUBJECT') : trans('messages.EMPTY_SUBJECT');
     }
 
     // Check message
     if (!empty($message)) {
     } elseif ($mode != 'delete') {
-        $error_msg .= (!empty($error_msg)) ? '<br />' . $lang['EMPTY_MESSAGE'] : $lang['EMPTY_MESSAGE'];
+        $error_msg .= (!empty($error_msg)) ? '<br />' . trans('messages.EMPTY_MESSAGE') : trans('messages.EMPTY_MESSAGE');
     }
 
     // Check smilies limit
     if (config('tp.max_smilies')) {
         $count_smilies = substr_count(bbcode2html($message), '<img class="smile" src="' . config('tp.smilies_path'));
         if ($count_smilies > config('tp.max_smilies')) {
-            $to_many_smilies = sprintf($lang['MAX_SMILIES_PER_POST'], config('tp.max_smilies'));
+            $to_many_smilies = sprintf(trans('messages.MAX_SMILIES_PER_POST'), config('tp.max_smilies'));
             $error_msg .= (!empty($error_msg)) ? '<br />' . $to_many_smilies : $to_many_smilies;
         }
     }
 
     if (IS_GUEST && !bb_captcha('check')) {
-        $error_msg .= (!empty($error_msg)) ? '<br />' . $lang['CAPTCHA_WRONG'] : $lang['CAPTCHA_WRONG'];
+        $error_msg .= (!empty($error_msg)) ? '<br />' . trans('messages.CAPTCHA_WRONG') : trans('messages.CAPTCHA_WRONG');
     }
 }
 
@@ -65,7 +65,7 @@ function prepare_post(&$mode, &$post_data, &$error_msg, &$username, &$subject, &
 //
 function submit_post($mode, &$post_data, &$message, &$meta, &$forum_id, &$topic_id, &$post_id, &$topic_type, $post_username, $post_subject, $post_message, $update_post_time, $poster_rg_id, $attach_rg_sig)
 {
-    global $userdata, $post_info, $is_auth, $lang, $datastore;
+    global $userdata, $post_info, $is_auth, $datastore;
 
     $current_time = TIMENOW;
 
@@ -79,7 +79,7 @@ function submit_post($mode, &$post_data, &$message, &$meta, &$forum_id, &$topic_
         if ($row = OLD_DB()->fetch_row($sql) && $row['last_post_time']) {
             if ($userdata['user_level'] == USER) {
                 if (TIMENOW - $row['last_post_time'] < config('tp.flood_interval')) {
-                    bb_die($lang['FLOOD_ERROR']);
+                    bb_die(trans('messages.FLOOD_ERROR'));
                 }
             }
         }
@@ -101,7 +101,7 @@ function submit_post($mode, &$post_data, &$message, &$meta, &$forum_id, &$topic_
             $last_msg = OLD_DB()->escape($row['post_text']);
 
             if ($last_msg == $post_message) {
-                bb_die($lang['DOUBLE_POST_ERROR']);
+                bb_die(trans('messages.DOUBLE_POST_ERROR'));
             }
         }
     }
@@ -274,9 +274,7 @@ function update_post_stats($mode, $post_data, $forum_id, $topic_id, $post_id, $u
 //
 function delete_post($mode, $post_data, &$message, &$meta, $forum_id, $topic_id, $post_id)
 {
-    global $lang;
-
-    $message = $lang['DELETED'];
+    $message = trans('messages.DELETED');
     post_delete($post_id);
 
     set_die_append_msg($forum_id, $topic_id);
@@ -287,7 +285,7 @@ function delete_post($mode, $post_data, &$message, &$meta, $forum_id, $topic_id,
 //
 function user_notification($mode, &$post_data, &$topic_title, &$forum_id, &$topic_id, &$notify_user)
 {
-    global $lang, $userdata;
+    global $userdata;
 
     if (!config('tp.topic_notify_enabled')) {
         return;
@@ -331,7 +329,7 @@ function user_notification($mode, &$post_data, &$topic_title, &$forum_id, &$topi
 
                     $emailer->set_from([config('tp.board_email') => config('tp.sitename')]);
                     $emailer->set_to([$row['user_email'] => $row['username']]);
-                    $emailer->set_subject(sprintf($lang['EMAILER_SUBJECT']['TOPIC_NOTIFY'], $topic_title));
+                    $emailer->set_subject(sprintf(trans('messages.EMAILER_SUBJECT.TOPIC_NOTIFY'), $topic_title));
 
                     $emailer->set_template('topic_notify', $row['user_lang']);
                     $emailer->assign_vars(array(
@@ -373,7 +371,7 @@ function user_notification($mode, &$post_data, &$topic_title, &$forum_id, &$topi
 
 function insert_post($mode, $topic_id, $forum_id = '', $old_forum_id = '', $new_topic_id = '', $new_topic_title = '', $old_topic_id = '', $message = '', $poster_id = '')
 {
-    global $userdata, $lang;
+    global $userdata;
 
     if (!$topic_id) {
         return;
@@ -400,12 +398,12 @@ function insert_post($mode, $topic_id, $forum_id = '', $old_forum_id = '', $new_
             return;
         }
 
-        $post_text = sprintf($lang['BOT_TOPIC_MOVED_FROM_TO'], '[url=' . make_url(FORUM_URL . $old_forum_id) . ']' . $forum_names[$old_forum_id] . '[/url]', '[url=' . make_url(FORUM_URL . $forum_id) . ']' . $forum_names[$forum_id] . '[/url]', profile_url($userdata));
+        $post_text = sprintf(trans('messages.BOT_TOPIC_MOVED_FROM_TO'), '[url=' . make_url(FORUM_URL . $old_forum_id) . ']' . $forum_names[$old_forum_id] . '[/url]', '[url=' . make_url(FORUM_URL . $forum_id) . ']' . $forum_names[$forum_id] . '[/url]', profile_url($userdata));
 
         $poster_id = BOT_UID;
         $poster_ip = '7f000001';
     } elseif ($mode == 'after_split_to_old') {
-        $post_text = sprintf($lang['BOT_MESS_SPLITS'], '[url=' . make_url(TOPIC_URL . $new_topic_id) . ']' . htmlCHR($new_topic_title) . '[/url]', profile_url($userdata));
+        $post_text = sprintf(trans('messages.BOT_MESS_SPLITS'), '[url=' . make_url(TOPIC_URL . $new_topic_id) . ']' . htmlCHR($new_topic_title) . '[/url]', profile_url($userdata));
 
         $poster_id = BOT_UID;
         $poster_ip = '7f000001';
@@ -418,7 +416,7 @@ function insert_post($mode, $topic_id, $forum_id = '', $old_forum_id = '', $new_
         if ($row = OLD_DB()->fetch_row($sql)) {
             $post_time = $row['post_time'] - 1;
 
-            $post_text = sprintf($lang['BOT_TOPIC_SPLITS'], '[url=' . make_url(TOPIC_URL . $old_topic_id) . ']' . $row['topic_title'] . '[/url]', profile_url($userdata));
+            $post_text = sprintf(trans('messages.BOT_TOPIC_SPLITS'), '[url=' . make_url(TOPIC_URL . $old_topic_id) . ']' . $row['topic_title'] . '[/url]', profile_url($userdata));
 
             $poster_id = BOT_UID;
             $poster_ip = '7f000001';

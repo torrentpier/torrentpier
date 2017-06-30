@@ -159,5 +159,5 @@ $container->singleton('translator', function ($app) {
 });
 
 $container->singleton('translation.loader', function ($app) {
-    return new FileLoader($app['files'], __DIR__ . '/../resources/lang');
+    return new FileLoader($app['files'], __DIR__ . '/resources/lang');
 });

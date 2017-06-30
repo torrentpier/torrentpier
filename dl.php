@@ -24,14 +24,14 @@ $thumbnail = request_var('thumb', 0);
 // Send file to browser
 function send_file_to_browser($attachment, $upload_dir)
 {
-    global $lang, $userdata;
+    global $userdata;
 
     $filename = ($upload_dir == '') ? $attachment['physical_filename'] : $upload_dir . '/' . $attachment['physical_filename'];
 
     $gotit = false;
 
     if (@!file_exists(@amod_realpath($filename))) {
-        bb_die($lang['ERROR_NO_ATTACHMENT'] . "<br /><br />" . $filename . "<br /><br />" . $lang['TOR_NOT_FOUND']);
+        bb_die(trans('messages.ERROR_NO_ATTACHMENT') . "<br /><br />" . $filename . "<br /><br />" . trans('messages.TOR_NOT_FOUND'));
     } else {
         $gotit = true;
     }
@@ -67,7 +67,7 @@ function send_file_to_browser($attachment, $upload_dir)
         }
         readfile($filename);
     } else {
-        bb_die($lang['ERROR_NO_ATTACHMENT'] . "<br /><br />" . $filename . "<br /><br />" . $lang['TOR_NOT_FOUND']);
+        bb_die(trans('messages.ERROR_NO_ATTACHMENT') . "<br /><br />" . $filename . "<br /><br />" . trans('messages.TOR_NOT_FOUND'));
     }
 
     exit;
@@ -81,11 +81,11 @@ $user->session_start();
 set_die_append_msg();
 
 if (!$download_id) {
-    bb_die($lang['NO_ATTACHMENT_SELECTED']);
+    bb_die(trans('messages.NO_ATTACHMENT_SELECTED'));
 }
 
 if ($attach_config['disable_mod'] && !IS_ADMIN) {
-    bb_die($lang['ATTACHMENT_FEATURE_DISABLED']);
+    bb_die(trans('messages.ATTACHMENT_FEATURE_DISABLED'));
 }
 
 $sql = 'SELECT * FROM ' . BB_ATTACHMENTS_DESC . ' WHERE attach_id = ' . (int)$download_id;
@@ -95,7 +95,7 @@ if (!($result = OLD_DB()->sql_query($sql))) {
 }
 
 if (!($attachment = OLD_DB()->sql_fetchrow($result))) {
-    bb_die($lang['ERROR_NO_ATTACHMENT']);
+    bb_die(trans('messages.ERROR_NO_ATTACHMENT'));
 }
 
 $attachment['physical_filename'] = basename($attachment['physical_filename']);
@@ -140,7 +140,7 @@ for ($i = 0; $i < $num_auth_pages && $authorised == false; $i++) {
 }
 
 if (!$authorised) {
-    bb_die($lang['SORRY_AUTH_VIEW_ATTACH']);
+    bb_die(trans('messages.SORRY_AUTH_VIEW_ATTACH'));
 }
 
 $datastore->rm('cat_forums');
@@ -159,7 +159,7 @@ for ($i = 0; $i < $num_rows; $i++) {
 
 // Disallowed
 if (!in_array($attachment['extension'], $allowed_extensions) && !IS_ADMIN) {
-    bb_die(sprintf($lang['EXTENSION_DISABLED_AFTER_POSTING'], $attachment['extension']));
+    bb_die(sprintf(trans('messages.EXTENSION_DISABLED_AFTER_POSTING'), $attachment['extension']));
 }
 
 $download_mode = (int)$download_mode[$attachment['extension']];
@@ -189,11 +189,11 @@ if (IS_GUEST && !bb_captcha('check')) {
 
     $redirect_url = $_POST['redirect_url'] ?? $_SERVER['HTTP_REFERER'] ?? '/';
     $message = '<form action="' . DOWNLOAD_URL . $attachment['attach_id'] . '" method="post">';
-    $message .= $lang['CAPTCHA'] . ':';
+    $message .= trans('messages.CAPTCHA') . ':';
     $message .= '<div  class="mrg_10" align="center">' . bb_captcha('get') . '</div>';
     $message .= '<input type="hidden" name="redirect_url" value="' . $redirect_url . '" />';
-    $message .= '<input type="submit" class="bold" value="' . $lang['SUBMIT'] . '" /> &nbsp;';
-    $message .= '<input type="button" class="bold" value="' . $lang['GO_BACK'] . '" onclick="document.location.href = \'' . $redirect_url . '\';" />';
+    $message .= '<input type="submit" class="bold" value="' . trans('messages.SUBMIT') . '" /> &nbsp;';
+    $message .= '<input type="button" class="bold" value="' . trans('messages.GO_BACK') . '" onclick="document.location.href = \'' . $redirect_url . '\';" />';
     $message .= '</form>';
 
     $template->assign_vars(array(

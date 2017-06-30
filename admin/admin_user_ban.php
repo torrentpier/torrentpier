@@ -23,7 +23,7 @@ if (isset($_POST['submit'])) {
     if (!empty($_POST['username'])) {
         $this_userdata = get_userdata($_POST['username'], true);
         if (!$this_userdata) {
-            bb_die($lang['NO_USER_ID_SPECIFIED']);
+            bb_die(trans('messages.NO_USER_ID_SPECIFIED'));
         }
 
         $user_list[] = $this_userdata['user_id'];
@@ -165,7 +165,7 @@ if (isset($_POST['submit'])) {
         }
     }
 
-    bb_die($lang['BAN_UPDATE_SUCESSFUL'] . '<br /><br />' . sprintf($lang['CLICK_RETURN_BANADMIN'], '<a href="admin_user_ban.php">', '</a>') . '<br /><br />' . sprintf($lang['CLICK_RETURN_ADMIN_INDEX'], '<a href="index.php?pane=right">', '</a>'));
+    bb_die(trans('messages.BAN_UPDATE_SUCESSFUL') . '<br /><br />' . sprintf(trans('messages.CLICK_RETURN_BANADMIN'), '<a href="admin_user_ban.php">', '</a>') . '<br /><br />' . sprintf(trans('messages.CLICK_RETURN_ADMIN_INDEX'), '<a href="index.php?pane=right">', '</a>'));
 } else {
     $template->assign_vars(array(
         'S_BANLIST_ACTION' => 'admin_user_ban.php',
@@ -195,7 +195,7 @@ if (isset($_POST['submit'])) {
     }
 
     if ($select_userlist == '') {
-        $select_userlist = '<option value="-1">' . $lang['NO_BANNED_USERS'] . '</option>';
+        $select_userlist = '<option value="-1">' . trans('messages.NO_BANNED_USERS') . '</option>';
     }
 
     $select_userlist = '<select name="unban_user[]" multiple size="5">' . $select_userlist . '</select>';
@@ -226,11 +226,11 @@ if (isset($_POST['submit'])) {
     }
 
     if ($select_iplist == '') {
-        $select_iplist = '<option value="-1">' . $lang['NO_BANNED_IP'] . '</option>';
+        $select_iplist = '<option value="-1">' . trans('messages.NO_BANNED_IP') . '</option>';
     }
 
     if ($select_emaillist == '') {
-        $select_emaillist = '<option value="-1">' . $lang['NO_BANNED_EMAIL'] . '</option>';
+        $select_emaillist = '<option value="-1">' . trans('messages.NO_BANNED_EMAIL') . '</option>';
     }
 
     $select_iplist = '<select name="unban_ip[]" multiple size="15">' . $select_iplist . '</select>';

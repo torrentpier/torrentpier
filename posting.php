@@ -58,7 +58,7 @@ switch ($mode) {
     case 'newtopic':
     case 'new_rel':
         if (bf($userdata['user_opt'], 'user_opt', 'dis_topic')) {
-            bb_die($lang['RULES_POST_CANNOT']);
+            bb_die(trans('messages.RULES_POST_CANNOT'));
         }
         if ($topic_type == POST_ANNOUNCE) {
             $is_auth_type = 'auth_announce';
@@ -72,14 +72,14 @@ switch ($mode) {
     case 'reply':
     case 'quote':
         if (bf($userdata['user_opt'], 'user_opt', 'dis_post')) {
-            bb_die($lang['RULES_REPLY_CANNOT']);
+            bb_die(trans('messages.RULES_REPLY_CANNOT'));
         }
         $is_auth_type = 'auth_reply';
         break;
 
     case 'editpost':
         if (bf($userdata['user_opt'], 'user_opt', 'dis_post_edit')) {
-            bb_die($lang['RULES_EDIT_CANNOT']);
+            bb_die(trans('messages.RULES_EDIT_CANNOT'));
         }
         $is_auth_type = 'auth_edit';
         break;
@@ -89,7 +89,7 @@ switch ($mode) {
         break;
 
     default:
-        bb_simple_die($lang['NO_POST_MODE']);
+        bb_simple_die(trans('messages.NO_POST_MODE'));
         break;
 }
 
@@ -100,14 +100,14 @@ switch ($mode) {
     case 'newtopic':
     case 'new_rel':
         if (!$forum_id) {
-            bb_simple_die($lang['FORUM_NOT_EXIST']);
+            bb_simple_die(trans('messages.FORUM_NOT_EXIST'));
         }
         $sql = "SELECT * FROM " . BB_FORUMS . " WHERE forum_id = $forum_id LIMIT 1";
         break;
 
     case 'reply':
         if (!$topic_id) {
-            bb_die($lang['NO_TOPIC_ID']);
+            bb_die(trans('messages.NO_TOPIC_ID'));
         }
         $sql = "SELECT f.*, t.*
 			FROM " . BB_FORUMS . " f, " . BB_TOPICS . " t
@@ -120,7 +120,7 @@ switch ($mode) {
     case 'editpost':
     case 'delete':
         if (!$post_id) {
-            bb_simple_die($lang['NO_POST_ID']);
+            bb_simple_die(trans('messages.NO_POST_ID'));
         }
 
         $select_sql = 'SELECT f.*, t.*, p.*';
@@ -143,7 +143,7 @@ switch ($mode) {
         break;
 
     default:
-        bb_simple_die($lang['NO_VALID_MODE']);
+        bb_simple_die(trans('messages.NO_VALID_MODE'));
 }
 
 if ($post_info = OLD_DB()->fetch_row($sql)) {
@@ -155,9 +155,9 @@ if ($post_info = OLD_DB()->fetch_row($sql)) {
     $is_auth = auth_user(AUTH_ALL, $forum_id, $userdata, $post_info);
 
     if ($post_info['forum_status'] == FORUM_LOCKED && !$is_auth['auth_mod']) {
-        bb_die($lang['FORUM_LOCKED']);
+        bb_die(trans('messages.FORUM_LOCKED'));
     } elseif ($mode != 'newtopic' && $mode != 'new_rel' && $post_info['topic_status'] == TOPIC_LOCKED && !$is_auth['auth_mod']) {
-        bb_die($lang['TOPIC_LOCKED']);
+        bb_die(trans('messages.TOPIC_LOCKED'));
     }
 
     if ($mode == 'editpost' || $mode == 'delete') {
@@ -175,9 +175,9 @@ if ($post_info = OLD_DB()->fetch_row($sql)) {
 
         // Can this user edit/delete the post?
         if ($post_info['poster_id'] != $userdata['user_id'] && !$is_auth['auth_mod']) {
-            $auth_err = ($delete || $mode == 'delete') ? $lang['DELETE_OWN_POSTS'] : $lang['EDIT_OWN_POSTS'];
+            $auth_err = ($delete || $mode == 'delete') ? trans('messages.DELETE_OWN_POSTS') : trans('messages.EDIT_OWN_POSTS');
         } elseif (!$post_data['last_post'] && !$is_auth['auth_mod'] && ($mode == 'delete' || $delete)) {
-            $auth_err = $lang['CANNOT_DELETE_REPLIED'];
+            $auth_err = trans('messages.CANNOT_DELETE_REPLIED');
         }
 
         if (isset($auth_err)) {
@@ -194,14 +194,14 @@ if ($post_info = OLD_DB()->fetch_row($sql)) {
         $post_data['last_post'] = false;
     }
 } else {
-    bb_die($lang['NO_SUCH_POST']);
+    bb_die(trans('messages.NO_SUCH_POST'));
 }
 
 // The user is not authed, if they're not logged in then redirect
 // them, else show them an error message
 if (!$is_auth[$is_auth_type]) {
     if (!IS_GUEST) {
-        bb_die(sprintf($lang['SORRY_' . strtoupper($is_auth_type)], $is_auth[$is_auth_type . '_type']));
+        bb_die(sprintf(trans('messages.SORRY_' . strtoupper($is_auth_type)), $is_auth[$is_auth_type . '_type']));
     }
 
     switch ($mode) {
@@ -239,7 +239,7 @@ if ($mode == 'new_rel') {
             $topics .= config('tp.tor_icons.' . $row['tor_status']) . '<a href="' . TOPIC_URL . $row['topic_id'] . '">' . $row['topic_title'] . '</a><div class="spacer_12"></div>';
         }
         if ($topics) {
-            bb_die($topics . $lang['UNEXECUTED_RELEASE']);
+            bb_die($topics . trans('messages.UNEXECUTED_RELEASE'));
         }
     }
     require INC_DIR . '/posting_tpl.php';
@@ -307,7 +307,7 @@ if (($delete || $mode == 'delete') && !$confirm) {
         'mode' => 'delete',
     );
     print_confirmation(array(
-        'QUESTION' => $lang['CONFIRM_DELETE'],
+        'QUESTION' => trans('messages.CONFIRM_DELETE'),
         'FORM_ACTION' => POSTING_URL,
         'HIDDEN_FIELDS' => build_hidden_fields($hidden_fields),
     ));
@@ -336,10 +336,10 @@ if (($delete || $mode == 'delete') && !$confirm) {
                 submit_post($mode, $post_data, $return_message, $return_meta, $forum_id, $topic_id, $post_id, $topic_type, OLD_DB()->escape($username), OLD_DB()->escape($subject), OLD_DB()->escape($message), $update_post_time, $poster_rg_id, $attach_rg_sig);
 
                 $post_url = POST_URL . "$post_id#$post_id";
-                $post_msg = ($mode == 'editpost') ? $lang['EDITED'] : $lang['STORED'];
+                $post_msg = ($mode == 'editpost') ? trans('messages.EDITED') : trans('messages.STORED');
                 $onclick = ($mode == 'editpost') ? 'onclick="return post2url(this.href);"' : '';
                 $return_message .= $post_msg . '<br /><br />
-					<a ' . $onclick . ' href="' . $post_url . '" >' . $lang['POST_RETURN'] . '</a>
+					<a ' . $onclick . ' href="' . $post_url . '" >' . trans('messages.POST_RETURN') . '</a>
 				';
             }
             break;
@@ -409,7 +409,7 @@ if (($delete || $mode == 'delete') && !$confirm) {
         if ($mode == 'reply' && $post_info['topic_status'] == TOPIC_LOCKED) {
             $locked_warn = '
 				<div class="warnColor1">
-					<b>' . $lang['LOCKED_WARN'] . '</b>
+					<b>' . trans('messages.LOCKED_WARN') . '</b>
 				</div>
 				<br /><hr /><br />
 			';
@@ -514,7 +514,7 @@ if ($mode == 'newtopic' || ($mode == 'editpost' && $post_data['first_post'])) {
         if (isset($post_data['topic_type']) && ($post_data['topic_type'] == POST_STICKY || $topic_type == POST_STICKY)) {
             $topic_type_toggle .= ' checked="checked"';
         }
-        $topic_type_toggle .= ' /> ' . $lang['POST_STICKY'] . '</label>&nbsp;&nbsp;';
+        $topic_type_toggle .= ' /> ' . trans('messages.POST_STICKY') . '</label>&nbsp;&nbsp;';
     }
 
     if ($is_auth['auth_announce']) {
@@ -522,11 +522,11 @@ if ($mode == 'newtopic' || ($mode == 'editpost' && $post_data['first_post'])) {
         if (isset($post_data['topic_type']) && ($post_data['topic_type'] == POST_ANNOUNCE || $topic_type == POST_ANNOUNCE)) {
             $topic_type_toggle .= ' checked="checked"';
         }
-        $topic_type_toggle .= ' /> ' . $lang['POST_ANNOUNCEMENT'] . '</label>&nbsp;&nbsp;';
+        $topic_type_toggle .= ' /> ' . trans('messages.POST_ANNOUNCEMENT') . '</label>&nbsp;&nbsp;';
     }
 
     if ($topic_type_toggle != '') {
-        $topic_type_toggle = $lang['POST_TOPIC_AS'] . ': <label><input type="radio" name="topictype" value="' . POST_NORMAL . '"' . ((!isset($post_data['topic_type']) || $post_data['topic_type'] == POST_NORMAL || $topic_type == POST_NORMAL) ? ' checked="checked"' : '') . ' /> ' . $lang['POST_NORMAL'] . '</label>&nbsp;&nbsp;' . $topic_type_toggle;
+        $topic_type_toggle = trans('messages.POST_TOPIC_AS') . ': <label><input type="radio" name="topictype" value="' . POST_NORMAL . '"' . ((!isset($post_data['topic_type']) || $post_data['topic_type'] == POST_NORMAL || $topic_type == POST_NORMAL) ? ' checked="checked"' : '') . ' /> ' . trans('messages.POST_NORMAL') . '</label>&nbsp;&nbsp;' . $topic_type_toggle;
     }
 }
 //bt
@@ -542,7 +542,7 @@ if ($post_info['allow_reg_tracker'] && $post_data['first_post'] && ($topic_dl_ty
     $result = OLD_DB()->fetch_row($sql);
     if (!empty($result['attach_id'])) {
         if (!$topic_type_toggle) {
-            $topic_type_toggle = $lang['POST_TOPIC_AS'] . ': ';
+            $topic_type_toggle = trans('messages.POST_TOPIC_AS') . ': ';
         }
 
         $dl_ds = $dl_ch = $dl_hid = '';
@@ -557,7 +557,7 @@ if ($post_info['allow_reg_tracker'] && $post_data['first_post'] && ($topic_dl_ty
 
         $dl_ch = ($mode == 'editpost' && $post_data['first_post'] && $topic_dl_type) ? ' checked="checked" ' : '';
 
-        $topic_type_toggle .= '<nobr><input type="checkbox" name="' . $dl_type_name . '" id="topic_dl_type_id" ' . $dl_ds . $dl_ch . ' /><label for="topic_dl_type_id"> ' . $lang['POST_DOWNLOAD'] . '</label></nobr>';
+        $topic_type_toggle .= '<nobr><input type="checkbox" name="' . $dl_type_name . '" id="topic_dl_type_id" ' . $dl_ds . $dl_ch . ' /><label for="topic_dl_type_id"> ' . trans('messages.POST_DOWNLOAD') . '</label></nobr>';
         $topic_type_toggle .= $dl_hid;
     }
 }
@@ -584,17 +584,17 @@ $hidden_form_fields = '<input type="hidden" name="mode" value="' . $mode . '" />
 
 switch ($mode) {
     case 'newtopic':
-        $page_title = $lang['POST_A_NEW_TOPIC'];
+        $page_title = trans('messages.POST_A_NEW_TOPIC');
         $hidden_form_fields .= '<input type="hidden" name="' . POST_FORUM_URL . '" value="' . $forum_id . '" />';
         break;
 
     case 'reply':
-        $page_title = $lang['POST_A_REPLY'];
+        $page_title = trans('messages.POST_A_REPLY');
         $hidden_form_fields .= '<input type="hidden" name="' . POST_TOPIC_URL . '" value="' . $topic_id . '" />';
         break;
 
     case 'editpost':
-        $page_title = $lang['EDIT_POST'];
+        $page_title = trans('messages.EDIT_POST');
         $hidden_form_fields .= '<input type="hidden" name="' . POST_POST_URL . '" value="' . $post_id . '" />';
         break;
 }

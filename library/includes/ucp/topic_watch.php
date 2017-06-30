@@ -8,7 +8,7 @@
  */
 
 if (empty(config('tp.topic_notify_enabled'))) {
-    bb_die($lang['DISABLED']);
+    bb_die(trans('messages.DISABLED'));
 }
 
 $page_cfg['use_tablesorter'] = true;
@@ -28,7 +28,7 @@ if (isset($_POST['topic_id_list'])) {
 }
 
 $template->assign_vars(array(
-    'PAGE_TITLE' => $lang['WATCHED_TOPICS'],
+    'PAGE_TITLE' => trans('messages.WATCHED_TOPICS'),
     'S_FORM_ACTION' => BB_ROOT . 'profile.php?mode=watch',
 ));
 
@@ -81,9 +81,9 @@ if ($watch_count > 0) {
         }
 
         $template->assign_vars(array(
-            'MATCHES' => (count($watch) == 1) ? sprintf($lang['FOUND_SEARCH_MATCH'], count($watch)) : sprintf($lang['FOUND_SEARCH_MATCHES'], count($watch)),
+            'MATCHES' => (count($watch) == 1) ? sprintf(trans('messages.FOUND_SEARCH_MATCH'), count($watch)) : sprintf(trans('messages.FOUND_SEARCH_MATCHES'), count($watch)),
             'PAGINATION' => generate_pagination(BB_ROOT . 'profile.php?mode=watch', $watch_count, $per_page, $start),
-            'PAGE_NUMBER' => sprintf($lang['PAGE_OF'], (floor($start / $per_page) + 1), ceil($watch_count / $per_page)),
+            'PAGE_NUMBER' => sprintf(trans('messages.PAGE_OF'), (floor($start / $per_page) + 1), ceil($watch_count / $per_page)),
             'U_PER_PAGE' => BB_ROOT . 'profile.php?mode=watch',
             'PER_PAGE' => $per_page,
         ));
@@ -91,7 +91,7 @@ if ($watch_count > 0) {
     OLD_DB()->sql_freeresult($result);
 } else {
     meta_refresh('index.php', 3);
-    bb_die($lang['NO_WATCHED_TOPICS']);
+    bb_die(trans('messages.NO_WATCHED_TOPICS'));
 }
 
 print_page('usercp_topic_watch.tpl');

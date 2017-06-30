@@ -50,7 +50,7 @@ if (!$redirect_url || false !== strpos(urldecode($redirect_url), "\n") || false 
 $redirect_url = str_replace("&sid={$user->data['session_id']}", '', $redirect_url);
 
 if (isset($_REQUEST['admin']) && !IS_AM) {
-    bb_die($lang['NOT_ADMIN']);
+    bb_die(trans('messages.NOT_ADMIN'));
 }
 
 $mod_admin_login = (IS_AM && !$user->data['session_admin']);
@@ -75,13 +75,13 @@ if (isset($_POST['login'])) {
             redirectToUrl('index.php');
         }
         if ($login_username == '' || $login_password == '') {
-            $login_errors[] = $lang['ENTER_PASSWORD'];
+            $login_errors[] = trans('messages.ENTER_PASSWORD');
         }
     }
 
     // Captcha
     if ($need_captcha && !bb_captcha('check') && !config('tp.captcha.disabled')) {
-        $login_errors[] = $lang['CAPTCHA_WRONG'];
+        $login_errors[] = trans('messages.CAPTCHA_WRONG');
     }
 
     if (!$login_errors) {
@@ -96,7 +96,7 @@ if (isset($_POST['login'])) {
             redirectToUrl($redirect_url);
         }
 
-        $login_errors[] = $lang['ERROR_LOGIN'];
+        $login_errors[] = trans('messages.ERROR_LOGIN');
 
         if (!$mod_admin_login) {
             $login_err = OLD_CACHE('bb_login_err')->get('l_err_' . USER_IP);
@@ -119,7 +119,7 @@ if (IS_GUEST || $mod_admin_login) {
         'ADMIN_LOGIN' => $mod_admin_login,
         'REDIRECT_URL' => htmlCHR($redirect_url),
         'CAPTCHA_HTML' => ($need_captcha && !config('tp.captcha.disabled')) ? bb_captcha('get') : '',
-        'PAGE_TITLE' => $lang['LOGIN'],
+        'PAGE_TITLE' => trans('messages.LOGIN'),
         'S_LOGIN_ACTION' => LOGIN_URL,
     ));
 

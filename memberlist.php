@@ -25,13 +25,13 @@ $paginationusername = $username;
 // Memberlist sorting
 //
 $mode_types_text = array(
-    $lang['SORT_JOINED'],
-    $lang['SORT_USERNAME'],
-    $lang['SORT_LOCATION'],
-    $lang['SORT_POSTS'],
-    $lang['SORT_EMAIL'],
-    $lang['SORT_WEBSITE'],
-    $lang['SORT_TOP_TEN']
+    trans('messages.SORT_JOINED'),
+    trans('messages.SORT_USERNAME'),
+    trans('messages.SORT_LOCATION'),
+    trans('messages.SORT_POSTS'),
+    trans('messages.SORT_EMAIL'),
+    trans('messages.SORT_WEBSITE'),
+    trans('messages.SORT_TOP_TEN')
 );
 
 $mode_types = array(
@@ -57,9 +57,9 @@ $select_sort_mode .= '</select>';
 $select_sort_order = '<select name="order">';
 
 if ($sort_order == 'ASC') {
-    $select_sort_order .= '<option value="ASC" selected="selected">' . $lang['ASC'] . '</option><option value="DESC">' . $lang['DESC'] . '</option>';
+    $select_sort_order .= '<option value="ASC" selected="selected">' . trans('messages.ASC') . '</option><option value="DESC">' . trans('messages.DESC') . '</option>';
 } else {
-    $select_sort_order .= '<option value="ASC">' . $lang['ASC'] . '</option><option value="DESC" selected="selected">' . $lang['DESC'] . '</option>';
+    $select_sort_order .= '<option value="ASC">' . trans('messages.ASC') . '</option><option value="DESC" selected="selected">' . trans('messages.DESC') . '</option>';
 }
 $select_sort_order .= '</select>';
 
@@ -135,9 +135,9 @@ for ($i = 224, $cnt = 255; $i <= $cnt; $i++) {
 }
 
 $select_letter .= ':&nbsp;';
-$select_letter .= ($by_letter == 'others') ? '<b>' . $lang['OTHERS'] . '</b>&nbsp;' : '<a class="genmed" href="' . ("memberlist.php?letter=others&amp;mode=$mode&amp;order=$sort_order") . '">' . $lang['OTHERS'] . '</a>&nbsp;';
+$select_letter .= ($by_letter == 'others') ? '<b>' . trans('messages.OTHERS') . '</b>&nbsp;' : '<a class="genmed" href="' . ("memberlist.php?letter=others&amp;mode=$mode&amp;order=$sort_order") . '">' . trans('messages.OTHERS') . '</a>&nbsp;';
 $select_letter .= ':&nbsp;';
-$select_letter .= ($by_letter == 'all') ? '<b>' . $lang['ALL'] . '</b>' : '<a class="genmed" href="' . ("memberlist.php?letter=all&amp;mode=$mode&amp;order=$sort_order") . '">' . $lang['ALL'] . '</a>';
+$select_letter .= ($by_letter == 'all') ? '<b>' . trans('messages.ALL') . '</b>' : '<a class="genmed" href="' . ("memberlist.php?letter=all&amp;mode=$mode&amp;order=$sort_order") . '">' . trans('messages.ALL') . '</a>';
 
 $template->assign_vars(array(
     'S_LETTER_SELECT' => $select_letter,
@@ -159,7 +159,7 @@ if ($result = OLD_DB()->fetch_rowset($sql)) {
         $from = $row['user_from'];
         $joined = bb_date($row['user_regdate'], config('tp.date_format'));
         $posts = $row['user_posts'];
-        $pm = '<a class="txtb" href="' . (PM_URL . "?mode=post&amp;" . POST_USERS_URL . "=$user_id") . '">' . $lang['SEND_PM_TXTB'] . '</a>';
+        $pm = '<a class="txtb" href="' . (PM_URL . "?mode=post&amp;" . POST_USERS_URL . "=$user_id") . '">' . trans('messages.SEND_PM_TXTB') . '</a>';
 
         if (bf($row['user_opt'], 'user_opt', 'user_viewemail') || IS_ADMIN) {
             $email_uri = config('tp.board_email_form') ? ('profile.php?mode=email&amp;' . POST_USERS_URL . "=$user_id") : 'mailto:' . $row['user_email'];
@@ -169,7 +169,7 @@ if ($result = OLD_DB()->fetch_rowset($sql)) {
         }
 
         if ($row['user_website']) {
-            $www = '<a class="txtb" href="' . $row['user_website'] . '"  target="_userwww">' . $lang['VISIT_WEBSITE_TXTB'] . '</a>';
+            $www = '<a class="txtb" href="' . $row['user_website'] . '"  target="_userwww">' . trans('messages.VISIT_WEBSITE_TXTB') . '</a>';
         } else {
             $www = '';
         }
@@ -191,7 +191,7 @@ if ($result = OLD_DB()->fetch_rowset($sql)) {
     }
 } else {
     $template->assign_block_vars('no_username', array(
-        'NO_USER_ID_SPECIFIED' => $lang['NO_USER_ID_SPECIFIED'],
+        'NO_USER_ID_SPECIFIED' => trans('messages.NO_USER_ID_SPECIFIED'),
     ));
 }
 
@@ -213,7 +213,7 @@ if ($mode != 'topten' || config('tp.topics_per_page') < 10) {
 }
 
 $template->assign_vars(array(
-    'PAGE_TITLE' => $lang['MEMBERLIST'],
+    'PAGE_TITLE' => trans('messages.MEMBERLIST'),
 ));
 
 print_page('memberlist.tpl');

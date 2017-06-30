@@ -11,7 +11,7 @@ if (!defined('IN_AJAX')) {
     die(basename(__FILE__));
 }
 
-global $datastore, $lang;
+global $datastore;
 
 $ranks = $datastore->get('ranks');
 $rank_id = (int)$this->request['rank_id'];
@@ -30,5 +30,5 @@ cache_rm_user_sessions($user_id);
 
 $user_rank = ($rank_id) ? '<span class="' . $ranks[$rank_id]['rank_style'] . '">' . $ranks[$rank_id]['rank_title'] . '</span>' : '';
 
-$this->response['html'] = ($rank_id) ? $lang['AWARDED_RANK'] . "<b> $user_rank </b>" : $lang['SHOT_RANK'];
-$this->response['rank_name'] = ($rank_id) ? $user_rank : $lang['USER'];
+$this->response['html'] = ($rank_id) ? trans('messages.AWARDED_RANK') . "<b> $user_rank </b>" : trans('messages.SHOT_RANK');
+$this->response['rank_name'] = ($rank_id) ? $user_rank : trans('messages.USER');

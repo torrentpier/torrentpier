@@ -14,30 +14,28 @@ require __DIR__ . '/common.php';
 // Start session management
 $user->session_start();
 
-global $lang;
-
 $info = array();
 $html_dir = LANG_DIR . 'html/';
 $req_mode = !empty($_REQUEST['show']) ? (string)$_REQUEST['show'] : 'not_found';
 
 switch ($req_mode) {
     case 'advert':
-        $info['title'] = $lang['ADVERT'];
+        $info['title'] = trans('messages.ADVERT');
         $info['src'] = 'advert.html';
         break;
 
     case 'copyright_holders':
-        $info['title'] = $lang['COPYRIGHT_HOLDERS'];
+        $info['title'] = trans('messages.COPYRIGHT_HOLDERS');
         $info['src'] = 'copyright_holders.html';
         break;
 
     case 'not_found':
-        $info['title'] = $lang['NOT_FOUND'];
+        $info['title'] = trans('messages.NOT_FOUND');
         $info['src'] = 'not_found.html';
         break;
 
     case 'user_agreement':
-        $info['title'] = $lang['USER_AGREEMENT'];
+        $info['title'] = trans('messages.USER_AGREEMENT');
         $info['src'] = 'user_agreement.html';
         break;
 
@@ -82,7 +80,7 @@ $require = file_exists($html_dir . $info['src']) ? $html_dir . $info['src'] : $h
             <?php require($require); ?>
         </div>
     </fieldset>
-    <p class="gen tRight pad_6"><a href="javascript:window.close();" class="gen">[ <?php echo $lang['LOCK']; ?> ]</a>
+    <p class="gen tRight pad_6"><a href="javascript:window.close();" class="gen">[ <?php echo trans('messages.LOCK'); ?> ]</a>
     </p>
 </div><!--/infobox-wrap-->
 </body>

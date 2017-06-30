@@ -158,8 +158,6 @@ class Emailer
      */
     public function send($email_format = self::FORMAT_TEXT)
     {
-        global $lang;
-
         if (!config('email.enabled')) {
             return false;
         }
@@ -172,7 +170,7 @@ class Emailer
         $this->message = trim($this->message);
 
         /** Set some variables */
-        $this->subject = !empty($this->subject) ? $this->subject : $lang['EMAILER_SUBJECT']['EMPTY'];
+        $this->subject = !empty($this->subject) ? $this->subject : trans('messages.EMAILER_SUBJECT.EMPTY');
         $this->encoding = config('language.charset');
 
         /** Prepare message */

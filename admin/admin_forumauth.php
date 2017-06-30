@@ -41,18 +41,18 @@ $simple_auth_ary = [
 ];
 
 $simple_auth_types = [
-    $lang['PUBLIC'],
-    $lang['REGISTERED'],
-    $lang['REGISTERED'] . ' [' . $lang['HIDDEN'] . ']',
-    $lang['PRIVATE'],
-    $lang['PRIVATE'] . ' [' . $lang['HIDDEN'] . ']',
-    $lang['MODERATORS'],
-    $lang['MODERATORS'] . ' [' . $lang['HIDDEN'] . ']',
+    trans('messages.PUBLIC'),
+    trans('messages.REGISTERED'),
+    trans('messages.REGISTERED') . ' [' . trans('messages.HIDDEN') . ']',
+    trans('messages.PRIVATE'),
+    trans('messages.PRIVATE') . ' [' . trans('messages.HIDDEN') . ']',
+    trans('messages.MODERATORS'),
+    trans('messages.MODERATORS') . ' [' . trans('messages.HIDDEN') . ']',
 ];
 
 $field_names = [];
 foreach ($forum_auth_fields as $auth_type) {
-    $field_names[$auth_type] = $lang[strtoupper($auth_type)];
+    $field_names[$auth_type] = trans('messages.' . strtoupper($auth_type));
 }
 
 $forum_auth_levels = ['ALL', 'REG', 'PRIVATE', 'MOD', 'ADMIN'];
@@ -116,7 +116,7 @@ if (isset($_POST['submit'])) {
     }
 
     $datastore->update('cat_forums');
-    bb_die($lang['FORUM_AUTH_UPDATED'] . '<br /><br />' . sprintf($lang['CLICK_RETURN_FORUMAUTH'], '<a href="' . 'admin_forumauth.php' . '">', '</a>'));
+    bb_die(trans('messages.FORUM_AUTH_UPDATED') . '<br /><br />' . sprintf(trans('messages.CLICK_RETURN_FORUMAUTH'), '<a href="' . 'admin_forumauth.php' . '">', '</a>'));
 }
 
 /**
@@ -172,7 +172,7 @@ if (empty($forum_id)) {
         $simple_auth .= '</select>';
 
         $template->assign_block_vars('forum_auth', array(
-            'CELL_TITLE' => $lang['SIMPLE_MODE'],
+            'CELL_TITLE' => trans('messages.SIMPLE_MODE'),
             'S_AUTH_LEVELS_SELECT' => $simple_auth,
         ));
 
@@ -184,7 +184,7 @@ if (empty($forum_id)) {
 
             for ($k = 0, $kMax = count($forum_auth_levels); $k < $kMax; $k++) {
                 $selected = ($forum_rows[0][$forum_auth_fields[$j]] == $forum_auth_const[$k]) ? ' selected="selected"' : '';
-                $custom_auth[$j] .= '<option value="' . $forum_auth_const[$k] . '"' . $selected . '>' . $lang['FORUM_' . strtoupper($forum_auth_levels[$k])] . '</OPTION>';
+                $custom_auth[$j] .= '<option value="' . $forum_auth_const[$k] . '"' . $selected . '>' . trans('messages.FORUM_' . strtoupper($forum_auth_levels[$k])) . '</option>';
             }
             $custom_auth[$j] .= '</select>&nbsp;';
 
@@ -201,7 +201,7 @@ if (empty($forum_id)) {
 
     $adv_mode = empty($adv) ? '1' : '0';
     $switch_mode = "admin_forumauth.php?f=$forum_id&amp;adv=$adv_mode";
-    $switch_mode_text = empty($adv) ? $lang['ADVANCED_MODE'] : $lang['SIMPLE_MODE'];
+    $switch_mode_text = empty($adv) ? trans('messages.ADVANCED_MODE') : trans('messages.SIMPLE_MODE');
     $u_switch_mode = '<a href="' . $switch_mode . '">' . $switch_mode_text . '</a>';
 
     $s_hidden_fields = '<input type="hidden" name="' . POST_FORUM_URL . '" value="' . $forum_id . '">';

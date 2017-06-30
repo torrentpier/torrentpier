@@ -11,7 +11,7 @@ if (!defined('IN_AJAX')) {
     die(basename(__FILE__));
 }
 
-global $bf, $lang;
+global $bf;
 
 $user_id = (int)$this->request['user_id'];
 $new_opt = json_decode($this->request['user_opt'], true);
@@ -35,4 +35,4 @@ OLD_DB()->query("UPDATE " . BB_USERS . " SET user_opt = {$u_data['user_opt']} WH
 // Удаляем данные из кеша
 cache_rm_user_sessions($user_id);
 
-$this->response['resp_html'] = $lang['SAVED'];
+$this->response['resp_html'] = trans('messages.SAVED');

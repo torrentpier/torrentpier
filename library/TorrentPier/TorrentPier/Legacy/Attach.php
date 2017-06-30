@@ -191,7 +191,7 @@ class Attach
      */
     public function handle_attachments($mode)
     {
-        global $is_auth, $attach_config, $refresh, $post_id, $submit, $preview, $error, $error_msg, $lang;
+        global $is_auth, $attach_config, $refresh, $post_id, $submit, $preview, $error, $error_msg;
 
         //
         // ok, what shall we do ;)
@@ -274,7 +274,7 @@ class Attach
                         if (!empty($error_msg)) {
                             $error_msg .= '<br />';
                         }
-                        $error_msg .= sprintf($lang['TOO_MANY_ATTACHMENTS'], (int)$max_attachments);
+                        $error_msg .= sprintf(trans('messages.TOO_MANY_ATTACHMENTS'), (int)$max_attachments);
                     }
                 }
             }
@@ -394,7 +394,7 @@ class Attach
                         if (!empty($error_msg)) {
                             $error_msg .= '<br />';
                         }
-                        $error_msg .= $lang['ERROR_EMPTY_ADD_ATTACHBOX'];
+                        $error_msg .= trans('messages.ERROR_EMPTY_ADD_ATTACHBOX');
                     }
 
                     $this->upload_attachment();
@@ -426,7 +426,7 @@ class Attach
                             if (!empty($error_msg)) {
                                 $error_msg .= '<br />';
                             }
-                            $error_msg .= $lang['ERROR_MISSING_OLD_ENTRY'];
+                            $error_msg .= trans('messages.ERROR_MISSING_OLD_ENTRY');
                         }
 
                         $row = OLD_DB()->sql_fetchrow($result);
@@ -503,7 +503,7 @@ class Attach
                         if (!empty($error_msg)) {
                             $error_msg .= '<br />';
                         }
-                        $error_msg .= sprintf($lang['TOO_MANY_ATTACHMENTS'], (int)$max_attachments);
+                        $error_msg .= sprintf(trans('messages.TOO_MANY_ATTACHMENTS'), (int)$max_attachments);
                     }
                 }
             }
@@ -641,7 +641,7 @@ class Attach
      */
     public function display_attachment_bodies()
     {
-        global $attach_config, $is_auth, $lang, $template, $upload_dir, $forum_id;
+        global $attach_config, $is_auth, $template, $upload_dir, $forum_id;
 
         // Choose what to display
         $value_add = $value_posted = 0;
@@ -726,7 +726,7 @@ class Attach
      */
     public function upload_attachment()
     {
-        global $error, $error_msg, $lang, $attach_config, $userdata, $upload_dir, $forum_id;
+        global $error, $error_msg, $attach_config, $userdata, $upload_dir, $forum_id;
 
         $this->post_attach = (bool)$this->filename;
 
@@ -768,7 +768,7 @@ class Attach
                 if (!empty($error_msg)) {
                     $error_msg .= '<br />';
                 }
-                $error_msg .= sprintf($lang['INVALID_FILENAME'], htmlspecialchars($this->filename));
+                $error_msg .= sprintf(trans('messages.INVALID_FILENAME'), htmlspecialchars($this->filename));
             }
 
             // check php upload-size
@@ -782,9 +782,9 @@ class Attach
                 $max_size = @$ini_val('upload_max_filesize');
 
                 if (empty($max_size)) {
-                    $error_msg .= $lang['ATTACHMENT_PHP_SIZE_NA'];
+                    $error_msg .= trans('messages.ATTACHMENT_PHP_SIZE_NA');
                 } else {
-                    $error_msg .= sprintf($lang['ATTACHMENT_PHP_SIZE_OVERRUN'], $max_size);
+                    $error_msg .= sprintf(trans('messages.ATTACHMENT_PHP_SIZE_OVERRUN'), $max_size);
                 }
             }
 
@@ -794,7 +794,7 @@ class Attach
                 if (!empty($error_msg)) {
                     $error_msg .= '<br />';
                 }
-                $error_msg .= sprintf($lang['DISALLOWED_EXTENSION'], htmlspecialchars($this->extension));
+                $error_msg .= sprintf(trans('messages.DISALLOWED_EXTENSION'), htmlspecialchars($this->extension));
             }
 
             // Check Forum Permissions
@@ -803,7 +803,7 @@ class Attach
                 if (!empty($error_msg)) {
                     $error_msg .= '<br />';
                 }
-                $error_msg .= sprintf($lang['DISALLOWED_EXTENSION_WITHIN_FORUM'], htmlspecialchars($this->extension));
+                $error_msg .= sprintf(trans('messages.DISALLOWED_EXTENSION_WITHIN_FORUM'), htmlspecialchars($this->extension));
             }
 
             //bt
@@ -815,7 +815,7 @@ class Attach
                 if (!empty($error_msg)) {
                     $error_msg .= '<br />';
                 }
-                $error_msg .= $lang['ALLOWED_ONLY_1ST_POST_ATTACH'];
+                $error_msg .= trans('messages.ALLOWED_ONLY_1ST_POST_ATTACH');
             }
             //bt end
 
@@ -916,7 +916,7 @@ class Attach
                         if (!empty($error_msg)) {
                             $error_msg .= '<br />';
                         }
-                        $error_msg .= sprintf($lang['ERROR_IMAGESIZE'], (int)$attach_config['img_max_width'], (int)$attach_config['img_max_height']);
+                        $error_msg .= sprintf(trans('messages.ERROR_IMAGESIZE'), (int)$attach_config['img_max_width'], (int)$attach_config['img_max_height']);
                     }
                 }
             }
@@ -929,7 +929,7 @@ class Attach
                 if (!empty($error_msg)) {
                     $error_msg .= '<br />';
                 }
-                $error_msg .= sprintf($lang['ATTACHMENT_TOO_BIG'], $allowed_filesize);
+                $error_msg .= sprintf(trans('messages.ATTACHMENT_TOO_BIG'), $allowed_filesize);
             }
 
             // Check our complete quota
@@ -950,7 +950,7 @@ class Attach
                     if (!empty($error_msg)) {
                         $error_msg .= '<br />';
                     }
-                    $error_msg .= $lang['ATTACH_QUOTA_REACHED'];
+                    $error_msg .= trans('messages.ATTACH_QUOTA_REACHED');
                 }
             }
 
@@ -996,7 +996,7 @@ class Attach
 
                 if (($total_filesize + $this->filesize) > $attach_config['upload_filesize_limit']) {
                     $upload_filesize_limit = $attach_config['upload_filesize_limit'];
-                    $size_lang = ($upload_filesize_limit >= 1048576) ? $lang['MB'] : (($upload_filesize_limit >= 1024) ? $lang['KB'] : $lang['BYTES']);
+                    $size_lang = ($upload_filesize_limit >= 1048576) ? trans('messages.MB') : (($upload_filesize_limit >= 1024) ? trans('messages.KB') : trans('messages.BYTES'));
 
                     if ($upload_filesize_limit >= 1048576) {
                         $upload_filesize_limit = round($upload_filesize_limit / 1048576 * 100) / 100;
@@ -1008,7 +1008,7 @@ class Attach
                     if (!empty($error_msg)) {
                         $error_msg .= '<br />';
                     }
-                    $error_msg .= sprintf($lang['USER_UPLOAD_QUOTA_REACHED'], $upload_filesize_limit, $size_lang);
+                    $error_msg .= sprintf(trans('messages.USER_UPLOAD_QUOTA_REACHED'), $upload_filesize_limit, $size_lang);
                 }
             }
 
@@ -1023,7 +1023,7 @@ class Attach
     // Copy the temporary attachment to the right location (copy, move_uploaded_file)
     public function move_uploaded_attachment($upload_mode, $file)
     {
-        global $error, $error_msg, $lang, $upload_dir;
+        global $error, $error_msg, $upload_dir;
 
         if (!is_uploaded_file($file)) {
             bb_die('Unable to upload file. The given source has not been uploaded');
@@ -1038,7 +1038,7 @@ class Attach
                         if (!empty($error_msg)) {
                             $error_msg .= '<br />';
                         }
-                        $error_msg .= sprintf($lang['GENERAL_UPLOAD_ERROR'], './' . $upload_dir . '/' . $this->attach_filename);
+                        $error_msg .= sprintf(trans('messages.GENERAL_UPLOAD_ERROR'), './' . $upload_dir . '/' . $this->attach_filename);
                         return;
                     }
                 }
@@ -1054,7 +1054,7 @@ class Attach
                         if (!empty($error_msg)) {
                             $error_msg .= '<br />';
                         }
-                        $error_msg .= sprintf($lang['GENERAL_UPLOAD_ERROR'], './' . $upload_dir . '/' . $this->attach_filename);
+                        $error_msg .= sprintf(trans('messages.GENERAL_UPLOAD_ERROR'), './' . $upload_dir . '/' . $this->attach_filename);
                         return;
                     }
                 }

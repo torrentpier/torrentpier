@@ -105,3 +105,32 @@ define('CRON_DIR', INC_DIR . '/cron/');
 define('CRON_JOB_DIR', CRON_DIR . 'jobs/');
 define('CRON_LOG_DIR', 'cron'); // inside LOG_DIR
 define('CRON_LOG_FILE', 'cron'); // without ext
+
+// Auth
+define('AUTH_LIST_ALL', 0);
+
+// forum's ACL types (bb_forums: auth_view, auth_read... values)
+define('AUTH_REG', 1);
+define('AUTH_ACL', 2);
+define('AUTH_ADMIN', 5);
+
+// forum_perm bitfields - backward compatible with auth_user($type)
+define('AUTH_ALL', 0);
+define('AUTH_VIEW', 1);
+define('AUTH_READ', 2);
+define('AUTH_MOD', 3);
+define('AUTH_POST', 4);
+define('AUTH_REPLY', 5);
+define('AUTH_EDIT', 6);
+define('AUTH_DELETE', 7);
+define('AUTH_STICKY', 8);
+define('AUTH_ANNOUNCE', 9);
+define('AUTH_VOTE', 10);
+define('AUTH_POLLCREATE', 11);
+define('AUTH_ATTACH', 12);
+define('AUTH_DOWNLOAD', 13);
+
+// When defining user permissions, take into account:
+define('UG_PERM_BOTH', 1);  // both user and group
+define('UG_PERM_USER_ONLY', 2);  // only personal user permissions
+define('UG_PERM_GROUP_ONLY', 3);  // only group permissions

@@ -61,8 +61,6 @@ class Ajax
      */
     public function exec()
     {
-        global $lang;
-
         // Exit if we already have errors
         if (!empty($this->response['error_code'])) {
             $this->send();
@@ -86,14 +84,14 @@ class Ajax
             // USER
             case 'user':
                 if (IS_GUEST) {
-                    $this->ajax_die($lang['NEED_TO_LOGIN_FIRST']);
+                    $this->ajax_die(trans('messages.NEED_TO_LOGIN_FIRST'));
                 }
                 break;
 
             // MOD
             case 'mod':
                 if (!IS_AM) {
-                    $this->ajax_die($lang['ONLY_FOR_MOD']);
+                    $this->ajax_die(trans('messages.ONLY_FOR_MOD'));
                 }
                 $this->check_admin_session();
                 break;
@@ -101,7 +99,7 @@ class Ajax
             // ADMIN
             case 'admin':
                 if (!IS_ADMIN) {
-                    $this->ajax_die($lang['ONLY_FOR_ADMIN']);
+                    $this->ajax_die(trans('messages.ONLY_FOR_ADMIN'));
                 }
                 $this->check_admin_session();
                 break;
@@ -109,7 +107,7 @@ class Ajax
             // SUPER_ADMIN
             case 'super_admin':
                 if (!IS_SUPER_ADMIN) {
-                    $this->ajax_die($lang['ONLY_FOR_SUPER_ADMIN']);
+                    $this->ajax_die(trans('messages.ONLY_FOR_SUPER_ADMIN'));
                 }
                 $this->check_admin_session();
                 break;
@@ -243,12 +241,12 @@ class Ajax
      */
     public function verify_mod_rights($forum_id)
     {
-        global $userdata, $lang;
+        global $userdata;
 
         $is_auth = auth_user(AUTH_MOD, $forum_id, $userdata);
 
         if (!$is_auth['auth_mod']) {
-            $this->ajax_die($lang['ONLY_FOR_MOD']);
+            $this->ajax_die(trans('messages.ONLY_FOR_MOD'));
         }
     }
 

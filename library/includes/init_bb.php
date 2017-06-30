@@ -22,7 +22,7 @@ if (version_compare(PHP_VERSION, '7.0', '<')) {
  * Define some basic configuration arrays
  */
 unset($stopwords, $synonyms_match, $synonyms_replace);
-$userdata = $theme = $images = $lang = $nav_links = $bf = $attach_config = [];
+$userdata = $theme = $images = $nav_links = $bf = $attach_config = [];
 $gen_simple_header = false;
 $user = null;
 

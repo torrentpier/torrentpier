@@ -11,29 +11,27 @@ if (!defined('IN_AJAX')) {
     die(basename(__FILE__));
 }
 
-global $lang;
-
 if (!isset($this->request['attach_id'])) {
-    $this->ajax_die($lang['EMPTY_ATTACH_ID']);
+    $this->ajax_die(trans('messages.EMPTY_ATTACH_ID'));
 }
 $attach_id = (int)$this->request['attach_id'];
 
 $torrent = OLD_DB()->fetch_row("SELECT attach_id, physical_filename FROM " . BB_ATTACHMENTS_DESC . " WHERE attach_id = $attach_id LIMIT 1");
 if (!$torrent) {
-    $this->ajax_die($lang['ERROR_BUILD']);
+    $this->ajax_die(trans('messages.ERROR_BUILD'));
 }
 
 $filename = get_attachments_dir() . '/' . $torrent['physical_filename'];
 if (file_exists($filename) && !$file_contents = file_get_contents($filename)) {
     if (IS_AM) {
-        $this->ajax_die($lang['ERROR_NO_ATTACHMENT'] . "\n\n" . htmlCHR($filename));
+        $this->ajax_die(trans('messages.ERROR_NO_ATTACHMENT') . "\n\n" . htmlCHR($filename));
     } else {
-        $this->ajax_die($lang['ERROR_NO_ATTACHMENT']);
+        $this->ajax_die(trans('messages.ERROR_NO_ATTACHMENT'));
     }
 }
 
 if (!$tor = \Rych\Bencode\Bencode::decode($file_contents)) {
-    return $lang['TORFILE_INVALID'];
+    return trans('messages.TORFILE_INVALID');
 }
 
 $torrent = new TorrentPier\Legacy\TorrentFileList($tor);

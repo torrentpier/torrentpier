@@ -55,7 +55,7 @@ function set_tpl_vars($default_cfg, $cfg)
 
 function set_tpl_vars_bool($default_cfg, $cfg)
 {
-    global $template, $lang;
+    global $template;
 
     foreach ($default_cfg as $config_name => $config_value) {
         // YES/NO 'checked="checked"'
@@ -65,21 +65,21 @@ function set_tpl_vars_bool($default_cfg, $cfg)
         ));
         // YES/NO lang vars
         $template->assign_vars(array(
-            'L_' . strtoupper($config_name) . '_YES' => ($cfg[$config_name]) ? "<u>$lang[YES]</u>" : $lang['YES'],
-            'L_' . strtoupper($config_name) . '_NO' => (!$cfg[$config_name]) ? "<u>$lang[NO]</u>" : $lang['NO'],
+            'L_' . strtoupper($config_name) . '_YES' => ($cfg[$config_name]) ? '<u>' . trans('messages.YES') . '</u>' : trans('messages.YES'),
+            'L_' . strtoupper($config_name) . '_NO' => (!$cfg[$config_name]) ? '<u>' . trans('messages.NO') . '</u>' : trans('messages.NO'),
         ));
     }
 }
 
 function set_tpl_vars_lang($default_cfg)
 {
-    global $template, $lang;
+    global $template;
 
     foreach ($default_cfg as $config_name => $config_value) {
         $template->assign_vars(array(
-            'L_' . strtoupper($config_name) => $lang[$config_name] ?? '',
-            'L_' . strtoupper($config_name) . '_EXPL' => $lang[$config_name . '_expl'] ?? '',
-            'L_' . strtoupper($config_name) . '_HEAD' => $lang[$config_name . '_head'] ?? '',
+            'L_' . strtoupper($config_name) => trans('messages.' . $config_name) ?? '',
+            'L_' . strtoupper($config_name) . '_EXPL' => trans('messages.' . $config_name . '_expl') ?? '',
+            'L_' . strtoupper($config_name) . '_HEAD' => trans('messages.' . $config_name . '_head') ?? '',
         ));
     }
 }

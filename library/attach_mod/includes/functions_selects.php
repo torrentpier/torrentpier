@@ -16,8 +16,6 @@
  */
 function group_select($select_name, $default_group = 0)
 {
-    global $lang;
-
     $sql = 'SELECT group_id, group_name FROM ' . BB_EXTENSION_GROUPS . ' ORDER BY group_name';
 
     if (!($result = OLD_DB()->sql_query($sql))) {
@@ -32,7 +30,7 @@ function group_select($select_name, $default_group = 0)
 
     if ($num_rows > 0) {
         $group_name[$num_rows]['group_id'] = 0;
-        $group_name[$num_rows]['group_name'] = $lang['NOT_ASSIGNED'];
+        $group_name[$num_rows]['group_name'] = trans('messages.NOT_ASSIGNED');
 
         for ($i = 0, $iMax = count($group_name); $i < $iMax; $i++) {
             if (!$default_group) {
@@ -149,9 +147,7 @@ function category_select($select_name, $group_id = 0)
  */
 function size_select($select_name, $size_compare)
 {
-    global $lang;
-
-    $size_types_text = array($lang['BYTES'], $lang['KB'], $lang['MB']);
+    $size_types_text = array(trans('messages.BYTES'), trans('messages.KB'), trans('messages.MB'));
     $size_types = array('b', 'kb', 'mb');
 
     $select_field = '<select name="' . $select_name . '">';
@@ -171,8 +167,6 @@ function size_select($select_name, $size_compare)
  */
 function quota_limit_select($select_name, $default_quota = 0)
 {
-    global $lang;
-
     $sql = 'SELECT quota_limit_id, quota_desc FROM ' . BB_QUOTA_LIMITS . ' ORDER BY quota_limit ASC';
 
     if (!($result = OLD_DB()->sql_query($sql))) {
@@ -181,7 +175,7 @@ function quota_limit_select($select_name, $default_quota = 0)
 
     $quota_select = '<select name="' . $select_name . '">';
     $quota_name[0]['quota_limit_id'] = 0;
-    $quota_name[0]['quota_desc'] = $lang['NOT_ASSIGNED'];
+    $quota_name[0]['quota_desc'] = trans('messages.NOT_ASSIGNED');
 
     while ($row = OLD_DB()->sql_fetchrow($result)) {
         $quota_name[] = $row;
@@ -202,8 +196,6 @@ function quota_limit_select($select_name, $default_quota = 0)
  */
 function default_quota_limit_select($select_name, $default_quota = 0)
 {
-    global $lang;
-
     $sql = 'SELECT quota_limit_id, quota_desc FROM ' . BB_QUOTA_LIMITS . ' ORDER BY quota_limit ASC';
 
     if (!($result = OLD_DB()->sql_query($sql))) {
@@ -212,7 +204,7 @@ function default_quota_limit_select($select_name, $default_quota = 0)
 
     $quota_select = '<select name="' . $select_name . '">';
     $quota_name[0]['quota_limit_id'] = 0;
-    $quota_name[0]['quota_desc'] = $lang['NO_QUOTA_LIMIT'];
+    $quota_name[0]['quota_desc'] = trans('messages.NO_QUOTA_LIMIT');
 
     while ($row = OLD_DB()->sql_fetchrow($result)) {
         $quota_name[] = $row;

@@ -24,7 +24,7 @@ if (!($result = OLD_DB()->sql_query($sql))) {
 
 if ($row = OLD_DB()->sql_fetchrow($result)) {
     if ($row['user_active'] && trim($row['user_actkey']) == '') {
-        bb_die($lang['ALREADY_ACTIVATED']);
+        bb_die(trans('messages.ALREADY_ACTIVATED'));
     } elseif ((trim($row['user_actkey']) == trim($_GET['act_key'])) && (trim($row['user_actkey']) != '')) {
         $sql_update_pass = ($row['user_newpasswd'] != '') ? ", user_password = '" . md5(md5($row['user_newpasswd'])) . "', user_newpasswd = ''" : '';
 
@@ -35,11 +35,11 @@ if ($row = OLD_DB()->sql_fetchrow($result)) {
             bb_die('Could not update users table');
         }
 
-        $message = ($sql_update_pass == '') ? $lang['ACCOUNT_ACTIVE'] : $lang['PASSWORD_ACTIVATED'];
+        $message = ($sql_update_pass == '') ? trans('messages.ACCOUNT_ACTIVE') : trans('messages.PASSWORD_ACTIVATED');
         bb_die($message);
     } else {
-        bb_die($lang['WRONG_ACTIVATION']);
+        bb_die(trans('messages.WRONG_ACTIVATION'));
     }
 } else {
-    bb_die($lang['NO_SUCH_USER']);
+    bb_die(trans('messages.NO_SUCH_USER'));
 }

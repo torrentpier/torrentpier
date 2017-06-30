@@ -23,7 +23,7 @@
  * SOFTWARE.
  */
 
-global $page_cfg, $template, $images, $lang;
+global $page_cfg, $template, $images;
 
 $width = $height = array();
 $template_name = basename(__DIR__);
@@ -137,31 +137,31 @@ $template->assign_vars(array(
     'POST_IMG_WIDTH_DECR_JS' => config('tp.topic_left_column_witdh') + config('tp.post_img_width_decr'),
     'ATTACH_IMG_WIDTH_DECR_JS' => config('tp.topic_left_column_witdh') + config('tp.attach_img_width_decr'),
     'MAGNET_LINKS' => config('tp.magnet_links_enabled'),
-    'FEED_IMG' => '<img src="' . $_main . 'feed.png" class="feed-small" alt="' . $lang['ATOM_FEED'] . '" />',
+    'FEED_IMG' => '<img src="' . $_main . 'feed.png" class="feed-small" alt="' . trans('messages.ATOM_FEED') . '" />',
 ));
 
 // post_buttons
 if (!empty($page_cfg['load_tpl_vars']) and $vars = array_flip($page_cfg['load_tpl_vars'])) {
     if (isset($vars['post_buttons'])) {
         $template->assign_vars(array(
-            'QUOTE_IMG' => $lang['REPLY_WITH_QUOTE_TXTB'],
-            'EDIT_POST_IMG' => $lang['EDIT_DELETE_POST_TXTB'],
-            'DELETE_POST_IMG' => $lang['DELETE_POST_TXTB'],
-            'IP_POST_IMG' => $lang['VIEW_IP_TXTB'],
-            'MOD_POST_IMG' => $lang['MODERATE_POST_TXTB'],
-            'MC_IMG' => '[' . $lang['COMMENT'] . ']',
-            'POLL_IMG' => $lang['TOPIC_POLL'],
+            'QUOTE_IMG' => trans('messages.REPLY_WITH_QUOTE_TXTB'),
+            'EDIT_POST_IMG' => trans('messages.EDIT_DELETE_POST_TXTB'),
+            'DELETE_POST_IMG' => trans('messages.DELETE_POST_TXTB'),
+            'IP_POST_IMG' => trans('messages.VIEW_IP_TXTB'),
+            'MOD_POST_IMG' => trans('messages.MODERATE_POST_TXTB'),
+            'MC_IMG' => '[' . trans('messages.COMMENT') . ']',
+            'POLL_IMG' => trans('messages.TOPIC_POLL'),
 
             'QUOTE_URL' => BB_ROOT . POSTING_URL . '?mode=quote&amp;p=',
             'EDIT_POST_URL' => BB_ROOT . POSTING_URL . '?mode=editpost&amp;p=',
             'DELETE_POST_URL' => BB_ROOT . POSTING_URL . '?mode=delete&amp;p=',
             'IP_POST_URL' => BB_ROOT . 'modcp.php?mode=ip&amp;p=',
 
-            'PROFILE_IMG' => $lang['READ_PROFILE_TXTB'],
-            'PM_IMG' => $lang['SEND_PM_TXTB'],
-            'EMAIL_IMG' => $lang['SEND_EMAIL_TXTB'],
-            'WWW_IMG' => $lang['VISIT_WEBSITE_TXTB'],
-            'ICQ_IMG' => $lang['ICQ_TXTB'],
+            'PROFILE_IMG' => trans('messages.READ_PROFILE_TXTB'),
+            'PM_IMG' => trans('messages.SEND_PM_TXTB'),
+            'EMAIL_IMG' => trans('messages.SEND_EMAIL_TXTB'),
+            'WWW_IMG' => trans('messages.VISIT_WEBSITE_TXTB'),
+            'ICQ_IMG' => trans('messages.ICQ_TXTB'),
 
             'EMAIL_URL' => BB_ROOT . "profile.php?mode=email&amp;u=",
             'FORUM_URL' => BB_ROOT . FORUM_URL,
@@ -172,11 +172,11 @@ if (!empty($page_cfg['load_tpl_vars']) and $vars = array_flip($page_cfg['load_tp
     }
     if (isset($vars['post_icons'])) {
         $template->assign_vars(array(
-            'MINIPOST_IMG' => '<img src="' . $images['icon_minipost'] . '" class="icon1" alt="' . $lang['POST'] . '" />',
-            'ICON_GOTOPOST' => '<img src="' . $images['icon_gotopost'] . '" class="icon1" alt="' . $lang['GO'] . '" title="' . $lang['GOTO_PAGE'] . '" />',
-            'MINIPOST_IMG_NEW' => '<img src="' . $images['icon_minipost_new'] . '" class="icon1" alt="' . $lang['NEW'] . '" />',
-            'ICON_LATEST_REPLY' => '<img src="' . $images['icon_latest_reply'] . '" class="icon2" alt="' . $lang['LATEST'] . '" title="' . $lang['VIEW_LATEST_POST'] . '" />',
-            'ICON_NEWEST_REPLY' => '<img src="' . $images['icon_newest_reply'] . '" class="icon2" alt="' . $lang['NEWEST'] . '" title="' . $lang['VIEW_NEWEST_POST'] . '" />',
+            'MINIPOST_IMG' => '<img src="' . $images['icon_minipost'] . '" class="icon1" alt="' . trans('messages.POST') . '" />',
+            'ICON_GOTOPOST' => '<img src="' . $images['icon_gotopost'] . '" class="icon1" alt="' . trans('messages.GO') . '" title="' . trans('messages.GOTO_PAGE') . '" />',
+            'MINIPOST_IMG_NEW' => '<img src="' . $images['icon_minipost_new'] . '" class="icon1" alt="' . trans('messages.NEW') . '" />',
+            'ICON_LATEST_REPLY' => '<img src="' . $images['icon_latest_reply'] . '" class="icon2" alt="' . trans('messages.LATEST') . '" title="' . trans('messages.VIEW_LATEST_POST') . '" />',
+            'ICON_NEWEST_REPLY' => '<img src="' . $images['icon_newest_reply'] . '" class="icon2" alt="' . trans('messages.NEWEST') . '" title="' . trans('messages.VIEW_NEWEST_POST') . '" />',
         ));
     }
     if (isset($vars['topic_icons'])) {

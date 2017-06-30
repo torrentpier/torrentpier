@@ -27,10 +27,8 @@ class DateDelta
 
     public function __construct()
     {
-        global $lang;
-
-        $this->intervals = $lang['DELTA_TIME']['INTERVALS'];
-        $this->format = $lang['DELTA_TIME']['FORMAT'];
+        $this->intervals = trans('messages.DELTA_TIME.INTERVALS');
+        $this->format = trans('messages.DELTA_TIME.FORMAT');
     }
 
     /**
@@ -68,7 +66,7 @@ class DateDelta
 
         // Make spellable phrase.
         $parts = [];
-        $intervals = $GLOBALS['lang']['DELTA_TIME']['INTERVALS'];
+        $intervals = trans('messages.DELTA_TIME.INTERVALS');
 
         foreach (array_reverse($delta) as $k => $n) {
             if (!$n) {

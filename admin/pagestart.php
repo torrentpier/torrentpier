@@ -22,7 +22,7 @@ if (IS_GUEST) {
 }
 
 if (!IS_ADMIN) {
-    bb_die($lang['NOT_ADMIN']);
+    bb_die(trans('messages.NOT_ADMIN'));
 }
 
 if (!$userdata['session_admin']) {

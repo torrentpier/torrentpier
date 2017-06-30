@@ -11,7 +11,7 @@ if (!defined('IN_AJAX')) {
     die(basename(__FILE__));
 }
 
-global $lang, $userdata, $datastore;
+global $userdata, $datastore;
 
 $mode = (string)$this->request['mode'];
 $html = '';
@@ -27,9 +27,9 @@ switch ($mode) {
             foreach ($stats['birthday_week_list'] as $week) {
                 $html[] = profile_url($week) . ' <span class="small">(' . birthday_age($week['user_birthday']) . ')</span>';
             }
-            $html = sprintf($lang['BIRTHDAY_WEEK'], config('tp.birthday_check_day'), implode(', ', $html));
+            $html = sprintf(trans('messages.BIRTHDAY_WEEK'), config('tp.birthday_check_day'), implode(', ', $html));
         } else {
-            $html = sprintf($lang['NOBIRTHDAY_WEEK'], config('tp.birthday_check_day'));
+            $html = sprintf(trans('messages.NOBIRTHDAY_WEEK'), config('tp.birthday_check_day'));
         }
         break;
 
@@ -43,9 +43,9 @@ switch ($mode) {
             foreach ($stats['birthday_today_list'] as $today) {
                 $html[] = profile_url($today) . ' <span class="small">(' . birthday_age($today['user_birthday']) . ')</span>';
             }
-            $html = $lang['BIRTHDAY_TODAY'] . implode(', ', $html);
+            $html = trans('messages.BIRTHDAY_TODAY') . implode(', ', $html);
         } else {
-            $html = $lang['NOBIRTHDAY_TODAY'];
+            $html = trans('messages.NOBIRTHDAY_TODAY');
         }
         break;
 
@@ -73,7 +73,7 @@ switch ($mode) {
         }
 
         $html = ':&nbsp;';
-        $html .= ($moderators) ? implode(', ', $moderators) : $lang['NONE'];
+        $html .= ($moderators) ? implode(', ', $moderators) : trans('messages.NONE');
         unset($moderators, $mod);
         $datastore->rm('moderators');
         break;
@@ -101,19 +101,19 @@ switch ($mode) {
 
         $speed_up = ($btu['speed_up']) ? humn_size($btu['speed_up']) . '/s' : '0 KB/s';
         $speed_down = ($btu['speed_down']) ? humn_size($btu['speed_down']) . '/s' : '0 KB/s';
-        $user_ratio = ($btu['u_down_total'] > MIN_DL_FOR_RATIO) ? '<b class="gen">' . get_bt_ratio($btu) . '</b>' : $lang['IT_WILL_BE_DOWN'] . ' <b>' . humn_size(MIN_DL_FOR_RATIO) . '</b>';
+        $user_ratio = ($btu['u_down_total'] > MIN_DL_FOR_RATIO) ? '<b class="gen">' . get_bt_ratio($btu) . '</b>' : trans('messages.IT_WILL_BE_DOWN') . ' <b>' . humn_size(MIN_DL_FOR_RATIO) . '</b>';
 
         $html = '
 			<tr class="row3">
 				<th style="padding: 0;"></th>
-				<th>' . $lang['DOWNLOADED'] . '</th>
-				<th>' . $lang['UPLOADED'] . '</th>
-				<th>' . $lang['RELEASED'] . '</th>
-				<th>' . $lang['BONUS'] . '</th>';
-        $html .= config('tp.seed_bonus_enabled') ? '<th>' . $lang['SEED_BONUS'] . '</th>' : '';
+				<th>' . trans('messages.DOWNLOADED') . '</th>
+				<th>' . trans('messages.UPLOADED') . '</th>
+				<th>' . trans('messages.RELEASED') . '</th>
+				<th>' . trans('messages.BONUS') . '</th>';
+        $html .= config('tp.seed_bonus_enabled') ? '<th>' . trans('messages.SEED_BONUS') . '</th>' : '';
         $html .= '</tr>
 			<tr class="row1">
-				<td>' . $lang['TOTAL_TRAF'] . '</td>
+				<td>' . trans('messages.TOTAL_TRAF') . '</td>
 				<td id="u_down_total"><span class="editable bold leechmed">' . humn_size($btu['u_down_total']) . '</span></td>
 				<td id="u_up_total"><span class="editable bold seedmed">' . humn_size($btu['u_up_total']) . '</span></td>
 				<td id="u_up_release"><span class="editable bold seedmed">' . humn_size($btu['u_up_release']) . '</span></td>
@@ -121,14 +121,14 @@ switch ($mode) {
         $html .= config('tp.seed_bonus_enabled') ? '<td id="user_points"><span class="editable bold points">' . $profiledata['user_points'] . '</b></td>' : '';
         $html .= '</tr>
 			<tr class="row5">
-				<td colspan="1">' . $lang['MAX_SPEED'] . '</td>
-				<td colspan="2">' . $lang['DL_DL_SPEED'] . ': ' . $speed_down . '</span></td>
-				<td colspan="2">' . $lang['DL_UL_SPEED'] . ': ' . $speed_up . '</span></td>';
+				<td colspan="1">' . trans('messages.MAX_SPEED') . '</td>
+				<td colspan="2">' . trans('messages.DL_DL_SPEED') . ': ' . $speed_down . '</span></td>
+				<td colspan="2">' . trans('messages.DL_UL_SPEED') . ': ' . $speed_up . '</span></td>';
         $html .= config('tp.seed_bonus_enabled') ? '<td colspan="1"></td>' : '';
         $html .= '</tr>';
 
         $this->response['user_ratio'] = '
-			<th><a href="' . config('tp.ratio_url_help') . '" class="bold">' . $lang['USER_RATIO'] . '</a>:</th>
+			<th><a href="' . config('tp.ratio_url_help') . '" class="bold">' . trans('messages.USER_RATIO') . '</a>:</th>
 			<td>' . $user_ratio . '</td>
 		';
         break;

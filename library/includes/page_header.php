@@ -16,7 +16,7 @@ if (defined('PAGE_HEADER_SENT')) {
 
 // Parse and show the overall page header
 
-global $page_cfg, $userdata, $user, $ads, $template, $lang, $images;
+global $page_cfg, $userdata, $user, $ads, $template, $images;
 
 $logged_in = (int)!empty($userdata['session_logged_in']);
 
@@ -50,20 +50,20 @@ if (defined('SHOW_ONLINE') && SHOW_ONLINE) {
         'TOTAL_USERS_ONLINE' => ${$online_list}['stat'],
         'LOGGED_IN_USER_LIST' => ${$online_list}['userlist'],
         'USERS_ONLINE_COUNTS' => ${$online_list}['cnt'],
-        'RECORD_USERS' => sprintf($lang['RECORD_ONLINE_USERS'], config('tp.record_online_users'), bb_date(config('tp.record_online_date'))),
+        'RECORD_USERS' => sprintf(trans('messages.RECORD_ONLINE_USERS'), config('tp.record_online_users'), bb_date(config('tp.record_online_date'))),
     ));
 }
 
 // Info about new private messages
 $icon_pm = $images['pm_no_new_msg'];
-$pm_info = $lang['NO_NEW_PM'];
+$pm_info = trans('messages.NO_NEW_PM');
 $have_new_pm = $have_unread_pm = 0;
 
 if ($logged_in && empty($gen_simple_header) && !defined('IN_ADMIN')) {
     if ($userdata['user_new_privmsg']) {
         $have_new_pm = $userdata['user_new_privmsg'];
         $icon_pm = $images['pm_new_msg'];
-        $pm_info = declension($userdata['user_new_privmsg'], $lang['NEW_PMS_DECLENSION'], $lang['NEW_PMS_FORMAT']);
+        $pm_info = declension($userdata['user_new_privmsg'], trans('messages.NEW_PMS_DECLENSION'), trans('messages.NEW_PMS_FORMAT'));
 
         if ($userdata['user_last_privmsg'] > $userdata['user_lastvisit'] && defined('IN_PM')) {
             $userdata['user_last_privmsg'] = $userdata['user_lastvisit'];
@@ -97,7 +97,7 @@ if ($logged_in && empty($gen_simple_header) && !defined('IN_ADMIN')) {
             }
         }
 
-        $pm_info = declension($userdata['user_unread_privmsg'], $lang['UNREAD_PMS_DECLENSION'], $lang['UNREAD_PMS_FORMAT']);
+        $pm_info = declension($userdata['user_unread_privmsg'], trans('messages.UNREAD_PMS_DECLENSION'), trans('messages.UNREAD_PMS_FORMAT'));
         $have_unread_pm = true;
     }
 }
@@ -123,7 +123,7 @@ $template->assign_vars(array(
 
     'SITENAME' => config('tp.sitename'),
     'U_INDEX' => BB_ROOT . "index.php",
-    'T_INDEX' => sprintf($lang['FORUM_INDEX'], config('tp.sitename')),
+    'T_INDEX' => sprintf(trans('messages.FORUM_INDEX'), config('tp.sitename')),
 
     'IS_GUEST' => IS_GUEST,
     'IS_USER' => IS_USER,
@@ -134,8 +134,8 @@ $template->assign_vars(array(
     'FORUM_PATH' => FORUM_PATH,
     'FULL_URL' => FULL_URL,
 
-    'CURRENT_TIME' => sprintf($lang['CURRENT_TIME'], bb_date(TIMENOW, config('tp.last_visit_date_format'), false)),
-    'S_TIMEZONE' => preg_replace('/\(.*?\)/', '', sprintf($lang['ALL_TIMES'], $lang['TZ'][str_replace(',', '.', (float)config('tp.board_timezone'))])),
+    'CURRENT_TIME' => sprintf(trans('messages.CURRENT_TIME'), bb_date(TIMENOW, config('tp.last_visit_date_format'), false)),
+    'S_TIMEZONE' => preg_replace('/\(.*?\)/', '', sprintf(trans('messages.ALL_TIMES'), trans('messages.TZ.' . str_replace(',', '.', (float)config('tp.board_timezone'))))),
     'BOARD_TIMEZONE' => config('tp.board_timezone'),
 
     'PM_INFO' => $pm_info,
@@ -208,7 +208,7 @@ $template->assign_vars(array(
     'U_SEARCH_SELF_BY_LAST' => "search.php?uid={$userdata['user_id']}&amp;o=5",
     'U_WATCHED_TOPICS' => 'profile.php?mode=watch',
 
-    /** TODO: конфигурация используемая в шаблонах, избавиться */
+    /** TODO: конфигурация, используемая в шаблонах, избавиться */
     'CFG_GS_ENABLED' => config('tracker.gold_silver_enabled'),
     'CFG_UAU' => config('tp.user_agreement_url'),
     'CFG_CHU' => config('tp.copyright_holders_url'),
@@ -245,6 +245,11 @@ $template->assign_vars(array(
     'CFG_TP_RD' => config('tp.tp_release_date'),
     'CFG_TP_CN' => config('tp.tp_release_codename'),
     'CFG_TP_VER' => config('tp.tp_version'),
+
+    /** TODO: подмененные языковые, используемые в шаблонах, избавиться */
+    'LNG_GENDER_O' => trans('messages.GENDER_SELECT.0'),
+    'LNG_GENDER_1' => trans('messages.GENDER_SELECT.1'),
+    'LNG_GENDER_2' => trans('messages.GENDER_SELECT.2'),
 ));
 
 if (!empty(config('page.show_torhelp.' . BB_SCRIPT)) && !empty($userdata['torhelp'])) {

@@ -11,7 +11,7 @@ if (!defined('BB_ROOT')) {
     die(basename(__FILE__));
 }
 
-global $userdata, $template, $DBS, $lang;
+global $userdata, $template, $DBS;
 
 if (!empty($template)) {
     $template->assign_vars(array(
@@ -35,20 +35,20 @@ if ($show_dbg_info) {
     $gen_time = utime() - TIMESTART;
     $gen_time_txt = sprintf('%.3f', $gen_time);
     $gzip_text = UA_GZIP_SUPPORTED ? 'GZIP ' : '<s>GZIP</s> ';
-    $gzip_text .= config('tp.gzip_compress') ? $lang['ON'] : $lang['OFF'];
+    $gzip_text .= config('tp.gzip_compress') ? trans('messages.ON') : trans('messages.OFF');
 
-    $stat = '[&nbsp; ' . $lang['EXECUTION_TIME'] . " $gen_time_txt " . $lang['SEC'];
+    $stat = '[&nbsp; ' . trans('messages.EXECUTION_TIME') . " $gen_time_txt " . trans('messages.SEC');
 
     if (!empty($DBS)) {
         $sql_t = $DBS->sql_timetotal;
-        $sql_time_txt = ($sql_t) ? sprintf('%.3f ' . $lang['SEC'] . ' (%d%%) &middot; ', $sql_t, round($sql_t * 100 / $gen_time)) : '';
+        $sql_time_txt = ($sql_t) ? sprintf('%.3f ' . trans('messages.SEC') . ' (%d%%) &middot; ', $sql_t, round($sql_t * 100 / $gen_time)) : '';
         $num_q = $DBS->num_queries;
-        $stat .= " &nbsp;|&nbsp; MySQL: {$sql_time_txt}{$num_q} " . $lang['QUERIES'];
+        $stat .= " &nbsp;|&nbsp; MySQL: {$sql_time_txt}{$num_q} " . trans('messages.QUERIES');
     }
 
     $stat .= " &nbsp;|&nbsp; $gzip_text";
 
-    $stat .= ' &nbsp;|&nbsp; ' . $lang['MEMORY'];
+    $stat .= ' &nbsp;|&nbsp; ' . trans('messages.MEMORY');
     $stat .= humn_size(config('tp.mem_on_start'), 2) . ' / ';
     $stat .= humn_size(sys('mem_peak'), 2) . ' / ';
     $stat .= humn_size(sys('mem'), 2);
@@ -58,7 +58,7 @@ if ($show_dbg_info) {
         for ($i = 0; $i < 3; $i++) {
             $l[$i] = round($l[$i], 1);
         }
-        $stat .= " &nbsp;|&nbsp; " . $lang['LIMIT'] . " $l[0] $l[1] $l[2]";
+        $stat .= " &nbsp;|&nbsp; " . trans('messages.LIMIT') . " $l[0] $l[1] $l[2]";
     }
 
     $stat .= ' &nbsp;]';

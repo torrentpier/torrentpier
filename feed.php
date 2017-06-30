@@ -19,7 +19,7 @@ $id = $_POST['id'] ?? 0;
 $timecheck = TIMENOW - 600;
 
 if (!$mode) {
-    bb_simple_die($lang['ATOM_NO_MODE']);
+    bb_simple_die(trans('messages.ATOM_NO_MODE'));
 }
 
 if ($mode == 'get_feed_url' && ($type == 'f' || $type == 'u') && $id >= 0) {
@@ -30,7 +30,7 @@ if ($mode == 'get_feed_url' && ($type == 'f' || $type == 'u') && $id >= 0) {
             if ($id == 0) {
                 $forum_data = array();
             } else {
-                bb_simple_die($lang['ATOM_ERROR'] . ' #1');
+                bb_simple_die(trans('messages.ATOM_ERROR') . ' #1');
             }
         }
         if (file_exists(config('tp.atom.path') . '/f/' . $id . '.atom') && filemtime(config('tp.atom.path') . '/f/' . $id . '.atom') > $timecheck) {
@@ -40,17 +40,17 @@ if ($mode == 'get_feed_url' && ($type == 'f' || $type == 'u') && $id >= 0) {
             if (update_forum_feed($id, $forum_data)) {
                 redirectToUrl(config('tp.atom.url') . '/f/' . $id . '.atom');
             } else {
-                bb_simple_die($lang['ATOM_NO_FORUM']);
+                bb_simple_die(trans('messages.ATOM_NO_FORUM'));
             }
         }
     }
     if ($type == 'u') {
         // Check if the user has actually sent a user ID
         if ($id < 1) {
-            bb_simple_die($lang['ATOM_ERROR'] . ' #2');
+            bb_simple_die(trans('messages.ATOM_ERROR') . ' #2');
         }
         if (!$username = get_username($id)) {
-            bb_simple_die($lang['ATOM_ERROR'] . ' #3');
+            bb_simple_die(trans('messages.ATOM_ERROR') . ' #3');
         }
         if (file_exists(config('tp.atom.path') . '/u/' . floor($id / 5000) . '/' . ($id % 100) . '/' . $id . '.atom') && filemtime(config('tp.atom.path') . '/u/' . floor($id / 5000) . '/' . ($id % 100) . '/' . $id . '.atom') > $timecheck) {
             redirectToUrl(config('tp.atom.url') . '/u/' . floor($id / 5000) . '/' . ($id % 100) . '/' . $id . '.atom');
@@ -59,10 +59,10 @@ if ($mode == 'get_feed_url' && ($type == 'f' || $type == 'u') && $id >= 0) {
             if (update_user_feed($id, $username)) {
                 redirectToUrl(config('tp.atom.url') . '/u/' . floor($id / 5000) . '/' . ($id % 100) . '/' . $id . '.atom');
             } else {
-                bb_simple_die($lang['ATOM_NO_USER']);
+                bb_simple_die(trans('messages.ATOM_NO_USER'));
             }
         }
     }
 } else {
-    bb_simple_die($lang['ATOM_ERROR'] . ' #4');
+    bb_simple_die(trans('messages.ATOM_ERROR') . ' #4');
 }

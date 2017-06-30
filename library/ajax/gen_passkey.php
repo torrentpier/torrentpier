@@ -11,13 +11,13 @@ if (!defined('IN_AJAX')) {
     die(basename(__FILE__));
 }
 
-global $userdata, $lang;
+global $userdata;
 
 $req_uid = (int)$this->request['user_id'];
 
 if ($req_uid == $userdata['user_id'] || IS_ADMIN) {
     if (empty($this->request['confirmed'])) {
-        $this->prompt_for_confirm($lang['BT_GEN_PASSKEY_NEW']);
+        $this->prompt_for_confirm(trans('messages.BT_GEN_PASSKEY_NEW'));
     }
 
     if (!$passkey = generate_passkey($req_uid, IS_ADMIN)) {
@@ -28,5 +28,5 @@ if ($req_uid == $userdata['user_id'] || IS_ADMIN) {
 
     $this->response['passkey'] = $passkey;
 } else {
-    $this->ajax_die($lang['NOT_AUTHORISED']);
+    $this->ajax_die(trans('messages.NOT_AUTHORISED'));
 }

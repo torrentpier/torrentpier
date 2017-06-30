@@ -21,10 +21,10 @@ $forum_id = $t_data['forum_id'];
 set_die_append_msg($forum_id, $topic_id);
 
 if ($t_data['seeders'] > 2) {
-    bb_die(sprintf($lang['CALLSEED_HAVE_SEED'], $t_data['seeders']));
+    bb_die(sprintf(trans('messages.CALLSEED_HAVE_SEED'), $t_data['seeders']));
 } elseif ($t_data['call_seed_time'] > (TIMENOW - 86400)) {
     $time_left = delta_time($t_data['call_seed_time'] + 86400, TIMENOW, 'days');
-    bb_die(sprintf($lang['CALLSEED_MSG_SPAM'], $time_left));
+    bb_die(sprintf(trans('messages.CALLSEED_MSG_SPAM'), $time_left));
 }
 
 $ban_user_id = [];
@@ -48,8 +48,8 @@ $user_list = OLD_DB()->fetch_rowset("
 	GROUP BY dl.user_id
 ");
 
-$subject = sprintf($lang['CALLSEED_SUBJECT'], $t_data['topic_title']);
-$message = sprintf($lang['CALLSEED_TEXT'], make_url(TOPIC_URL . $topic_id), $t_data['topic_title'], make_url(DOWNLOAD_URL . $t_data['attach_id']));
+$subject = sprintf(trans('messages.CALLSEED_SUBJECT'), $t_data['topic_title']);
+$message = sprintf(trans('messages.CALLSEED_TEXT'), make_url(TOPIC_URL . $topic_id), $t_data['topic_title'], make_url(DOWNLOAD_URL . $t_data['attach_id']));
 
 if ($user_list) {
     foreach ($user_list as $row) {
@@ -68,12 +68,10 @@ if ($user_list) {
 OLD_DB()->query("UPDATE " . BB_BT_TORRENTS . " SET call_seed_time = " . TIMENOW . " WHERE topic_id = $topic_id");
 
 meta_refresh(TOPIC_URL . $topic_id);
-bb_die($lang['CALLSEED_MSG_OK']);
+bb_die(trans('messages.CALLSEED_MSG_OK'));
 
 function topic_info($topic_id)
 {
-    global $lang;
-
     $sql = "
 		SELECT
 			tor.poster_id, tor.forum_id, tor.attach_id, tor.call_seed_time,
@@ -85,7 +83,7 @@ function topic_info($topic_id)
 	";
 
     if (!$torrent = OLD_DB()->fetch_row($sql)) {
-        bb_die($lang['TOPIC_POST_NOT_EXIST']);
+        bb_die(trans('messages.TOPIC_POST_NOT_EXIST'));
     }
 
     return $torrent;

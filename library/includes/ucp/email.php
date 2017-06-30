@@ -21,7 +21,7 @@ set_die_append_msg();
 if (!empty($_GET[POST_USERS_URL]) || !empty($_POST[POST_USERS_URL])) {
     $user_id = (!empty($_GET[POST_USERS_URL])) ? (int)$_GET[POST_USERS_URL] : (int)$_POST[POST_USERS_URL];
 } else {
-    bb_die($lang['NO_USER_SPECIFIED']);
+    bb_die(trans('messages.NO_USER_SPECIFIED'));
 }
 
 if (!$userdata['session_logged_in']) {
@@ -46,10 +46,10 @@ if ($row = OLD_DB()->fetch_row($sql)) {
         $message = trim(html_entity_decode($_POST['message']));
 
         if (!$subject) {
-            $errors[] = $lang['EMPTY_SUBJECT_EMAIL'];
+            $errors[] = trans('messages.EMPTY_SUBJECT_EMAIL');
         }
         if (!$message) {
-            $errors[] = $lang['EMPTY_MESSAGE_EMAIL'];
+            $errors[] = trans('messages.EMPTY_MESSAGE_EMAIL');
         }
 
         if (!$errors) {
@@ -70,7 +70,7 @@ if ($row = OLD_DB()->fetch_row($sql)) {
 
             $emailer->send();
 
-            bb_die($lang['EMAIL_SENT']);
+            bb_die(trans('messages.EMAIL_SENT'));
         }
     }
 
@@ -84,5 +84,5 @@ if ($row = OLD_DB()->fetch_row($sql)) {
     print_page('usercp_email.tpl');
 
 } else {
-    bb_die($lang['USER_NOT_EXIST']);
+    bb_die(trans('messages.USER_NOT_EXIST'));
 }

@@ -30,7 +30,7 @@ if ($mode == 'run' && !$job_id) {
 }
 
 if (!IS_SUPER_ADMIN) {
-    bb_die($lang['NOT_ADMIN']);
+    bb_die(trans('messages.NOT_ADMIN'));
 }
 
 require INC_DIR . '/functions_admin_torrent.php';
@@ -64,10 +64,10 @@ switch ($mode) {
                 'ROW_CLASS' => !($i % 2) ? 'row2' : 'row1',
                 'JOB_ID' => $i + 1,
                 'CRON_ID' => $row['cron_id'],
-                'CRON_ACTIVE' => $row['cron_active'] ? '<img src="../styles/images/icon_run.gif" alt="' . $lang['YES'] . '" />' : '<img src="../styles/images/icon_delete.gif" alt="' . $lang['NO'] . '" />',
+                'CRON_ACTIVE' => $row['cron_active'] ? '<img src="../styles/images/icon_run.gif" alt="' . trans('messages.YES') . '" />' : '<img src="../styles/images/icon_delete.gif" alt="' . trans('messages.NO') . '" />',
                 'CRON_TITLE' => $row['cron_title'],
                 'CRON_SCRIPT' => $row['cron_script'],
-                'SCHEDULE' => $row['schedule'] ? $lang['SCHEDULE'][$row['schedule']] : '<b class="leech">' . $lang['NOSELECT'] . '</b>',
+                'SCHEDULE' => $row['schedule'] ? trans('messages.SCHEDULE.' . $row['schedule']) : '<b class="leech">' . trans('messages.NOSELECT') . '</b>',
                 'RUN_DAY' => $row['run_day'],
                 'LAST_RUN' => $row['last_run'],
                 'NEXT_RUN' => $row['next_run'],
@@ -110,7 +110,7 @@ switch ($mode) {
                 'CRON_ACTIVE' => $row['cron_active'],
                 'CRON_TITLE' => $row['cron_title'],
                 'CRON_SCRIPT' => $row['cron_script'],
-                'SCHEDULE' => $row['schedule'] ? $lang['SCHEDULE'][$row['schedule']] : '',
+                'SCHEDULE' => $row['schedule'] ? trans('messages.SCHEDULE.' . $row['schedule']) : '',
                 'RUN_DAY' => $row['run_day'],
                 'RUN_TIME' => $row['run_time'],
                 'RUN_ORDER' => $row['run_order'],
@@ -125,13 +125,13 @@ switch ($mode) {
             ));
         }
 
-        $run_day = array($lang['DELTA_TIME']['INTERVALS']['mday'][0] => 0);
+        $run_day = [trans('messages.DELTA_TIME.INTERVALS.mday.0') => 0];
         for ($i = 1; $i <= 28; $i++) {
             $run_day[$i] = $i;
         }
 
-        $schedule = array($lang['SCHEDULE']['select'] => 0);
-        foreach ($lang['SCHEDULE'] as $type => $key) {
+        $schedule = [trans('messages.SCHEDULE.select') => 0];
+        foreach (trans('messages.SCHEDULE') as $type => $key) {
             $schedule[$key] = $type;
         }
 
@@ -141,18 +141,18 @@ switch ($mode) {
             'S_MODE' => 'edit',
             'SCHEDULE' => build_select('schedule', $schedule, $row['schedule']),
             'RUN_DAY' => build_select('run_day', $run_day, $row['run_day']),
-            'L_CRON_EDIT_HEAD' => $lang['CRON_EDIT_HEAD_EDIT'],
+            'L_CRON_EDIT_HEAD' => trans('messages.CRON_EDIT_HEAD_EDIT'),
         ));
         break;
 
     case 'add':
-        $run_day = array($lang['DELTA_TIME']['INTERVALS']['mday'][0] => 0);
+        $run_day = [trans('messages.DELTA_TIME.INTERVALS.mday.0') => 0];
         for ($i = 1; $i <= 28; $i++) {
             $run_day[$i] = $i;
         }
 
         $schedule = array();
-        foreach ($lang['SCHEDULE'] as $type => $key) {
+        foreach (trans('messages.SCHEDULE') as $type => $key) {
             $schedule[$key] = $type;
         }
 
@@ -181,7 +181,7 @@ switch ($mode) {
 
     case 'delete':
         delete_jobs($job_id);
-        bb_die($lang['JOB_REMOVED'] . '<br /><br />' . sprintf($lang['CLICK_RETURN_JOBS'], '<a href="admin_cron.php?mode=list">', '</a>') . '<br /><br />' . sprintf($lang['CLICK_RETURN_ADMIN_INDEX'], '<a href="index.php?pane=right">', '</a>'));
+        bb_die(trans('messages.JOB_REMOVED') . '<br /><br />' . sprintf(trans('messages.CLICK_RETURN_JOBS'), '<a href="admin_cron.php?mode=list">', '</a>') . '<br /><br />' . sprintf(trans('messages.CLICK_RETURN_ADMIN_INDEX'), '<a href="index.php?pane=right">', '</a>'));
         break;
 }
 

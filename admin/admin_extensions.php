@@ -36,7 +36,7 @@ $types_download = array(INLINE_LINK, PHYSICAL_LINK);
 $modes_download = array('inline', 'physical');
 
 $types_category = array(IMAGE_CAT);
-$modes_category = array($lang['CATEGORY_IMAGES']);
+$modes_category = array(trans('messages.CATEGORY_IMAGES'));
 
 $size = get_var('size', '');
 $mode = get_var('mode', '');
@@ -147,7 +147,7 @@ if ($submit && $mode == 'extensions') {
                         if (isset($error_msg)) {
                             $error_msg .= '<br />';
                         }
-                        $error_msg .= sprintf($lang['EXTENSION_EXIST'], strtolower(trim($extension)));
+                        $error_msg .= sprintf(trans('messages.EXTENSION_EXIST'), strtolower(trim($extension)));
                     }
                 }
             }
@@ -169,7 +169,7 @@ if ($submit && $mode == 'extensions') {
     }
 
     if (!$error) {
-        bb_die($lang['ATTACH_CONFIG_UPDATED'] . '<br /><br />' . sprintf($lang['CLICK_RETURN_ATTACH_CONFIG'], '<a href="admin_extensions.php?mode=extensions">', '</a>') . '<br /><br />' . sprintf($lang['CLICK_RETURN_ADMIN_INDEX'], '<a href="index.php?pane=right">', '</a>'));
+        bb_die(trans('messages.ATTACH_CONFIG_UPDATED') . '<br /><br />' . sprintf(trans('messages.CLICK_RETURN_ATTACH_CONFIG'), '<a href="admin_extensions.php?mode=extensions">', '</a>') . '<br /><br />' . sprintf(trans('messages.CLICK_RETURN_ADMIN_INDEX'), '<a href="index.php?pane=right">', '</a>'));
     }
 }
 
@@ -322,7 +322,7 @@ if ($submit && $mode == 'groups') {
                     if (isset($error_msg)) {
                         $error_msg .= '<br />';
                     }
-                    $error_msg .= sprintf($lang['EXTENSION_GROUP_EXIST'], $extension_group);
+                    $error_msg .= sprintf(trans('messages.EXTENSION_GROUP_EXIST'), $extension_group);
                 }
             }
         }
@@ -349,7 +349,7 @@ if ($submit && $mode == 'groups') {
     }
 
     if (!$error) {
-        bb_die($lang['ATTACH_CONFIG_UPDATED'] . '<br /><br />' . sprintf($lang['CLICK_RETURN_ATTACH_CONFIG'], '<a href="admin_extensions.php?mode=groups">', '</a>') . '<br /><br />' . sprintf($lang['CLICK_RETURN_ADMIN_INDEX'], '<a href="index.php?pane=right">', '</a>'));
+        bb_die(trans('messages.ATTACH_CONFIG_UPDATED') . '<br /><br />' . sprintf(trans('messages.CLICK_RETURN_ATTACH_CONFIG'), '<a href="admin_extensions.php?mode=groups">', '</a>') . '<br /><br />' . sprintf(trans('messages.CLICK_RETURN_ADMIN_INDEX'), '<a href="index.php?pane=right">', '</a>'));
     }
 }
 
@@ -564,7 +564,7 @@ if ($e_mode == 'perm' && $group) {
 
     if ($allowed_forums == '') {
         $forum_perm[0]['forum_id'] = 0;
-        $forum_perm[0]['forum_name'] = $lang['PERM_ALL_FORUMS'];
+        $forum_perm[0]['forum_name'] = trans('messages.PERM_ALL_FORUMS');
     } else {
         $forum_p = array();
         $act_id = 0;
@@ -590,11 +590,11 @@ if ($e_mode == 'perm' && $group) {
 
     $template->assign_vars(array(
         'TPL_ATTACH_EXTENSION_GROUPS_PERMISSIONS' => true,
-        'L_GROUP_PERMISSIONS_TITLE' => sprintf($lang['GROUP_PERMISSIONS_TITLE_ADMIN'], trim($group_name)),
+        'L_GROUP_PERMISSIONS_TITLE' => sprintf(trans('messages.GROUP_PERMISSIONS_TITLE_ADMIN'), trim($group_name)),
         'A_PERM_ACTION' => "admin_extensions.php?mode=groups&amp;e_mode=perm&amp;e_group=$group",
     ));
 
-    $forum_option_values = array(0 => $lang['PERM_ALL_FORUMS']);
+    $forum_option_values = array(0 => trans('messages.PERM_ALL_FORUMS'));
 
     $sql = 'SELECT forum_id, forum_name FROM ' . BB_FORUMS;
 
@@ -661,7 +661,7 @@ if ($e_mode == 'perm' && $group) {
     }
 
     if (count($empty_perm_forums) > 0) {
-        $template->assign_vars(array('ERROR_MESSAGE' => $lang['NOTE_ADMIN_EMPTY_GROUP_PERMISSIONS'] . $message));
+        $template->assign_vars(array('ERROR_MESSAGE' => trans('messages.NOTE_ADMIN_EMPTY_GROUP_PERMISSIONS') . $message));
     }
 }
 

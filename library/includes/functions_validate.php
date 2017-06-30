@@ -14,7 +14,7 @@ if (!defined('BB_ROOT')) {
 // !!! $username должен быть предварительно обработан clean_username() !!!
 function validate_username($username, $check_ban_and_taken = true)
 {
-    global $user, $lang;
+    global $user;
 
     static $name_chars = 'a-z0-9а-яё_@$%^&;(){}\#\-\'.:+ ';
 
@@ -23,22 +23,22 @@ function validate_username($username, $check_ban_and_taken = true)
 
     // Length
     if (mb_strlen($username, 'UTF-8') > USERNAME_MAX_LENGTH) {
-        return $lang['USERNAME_TOO_LONG'];
+        return trans('messages.USERNAME_TOO_LONG');
     }
 
     if (mb_strlen($username, 'UTF-8') < USERNAME_MIN_LENGTH) {
-        return $lang['USERNAME_TOO_SMALL'];
+        return trans('messages.USERNAME_TOO_SMALL');
     }
     // Allowed symbols
     if (!preg_match('#^[' . $name_chars . ']+$#iu', $username, $m)) {
         $invalid_chars = preg_replace('#[' . $name_chars . ']#iu', '', $username);
-        return "{$lang['USERNAME_INVALID']}: <b>" . htmlCHR($invalid_chars) . "</b>";
+        return "{trans('messages.USERNAME_INVALID')}: <b>" . htmlCHR($invalid_chars) . "</b>";
     }
     // HTML Entities
     if (preg_match_all('/&(#[0-9]+|[a-z]+);/iu', $username, $m)) {
         foreach ($m[0] as $ent) {
             if (!preg_match('/^(&amp;|&lt;|&gt;)$/iu', $ent)) {
-                return $lang['USERNAME_INVALID'];
+                return trans('messages.USERNAME_INVALID');
             }
         }
     }
@@ -48,7 +48,7 @@ function validate_username($username, $check_ban_and_taken = true)
 
         if ($row = OLD_DB()->fetch_row("SELECT username FROM " . BB_USERS . " WHERE username = '$username_sql' LIMIT 1")) {
             if ((!IS_GUEST && $row['username'] != $user->name) || IS_GUEST) {
-                return $lang['USERNAME_TAKEN'];
+                return trans('messages.USERNAME_TAKEN');
             }
         }
         // Запрещено
@@ -59,7 +59,7 @@ function validate_username($username, $check_ban_and_taken = true)
         }
         if ($banned_names_exp = implode('|', $banned_names)) {
             if (preg_match("#^($banned_names_exp)$#iu", $username)) {
-                return $lang['USERNAME_DISALLOWED'];
+                return trans('messages.USERNAME_DISALLOWED');
             }
         }
     }
@@ -70,13 +70,13 @@ function validate_username($username, $check_ban_and_taken = true)
 // Check to see if email address is banned or already present in the DB
 function validate_email($email, $check_ban_and_taken = true)
 {
-    global $lang, $userdata;
+    global $userdata;
 
     if (!$email || !filter_var($email, FILTER_VALIDATE_EMAIL)) {
-        return $lang['EMAIL_INVALID'];
+        return trans('messages.EMAIL_INVALID');
     }
     if (strlen($email) > USEREMAIL_MAX_LENGTH) {
-        return $lang['EMAIL_TOO_LONG'];
+        return trans('messages.EMAIL_TOO_LONG');
     }
 
     if ($check_ban_and_taken) {
@@ -87,7 +87,7 @@ function validate_email($email, $check_ban_and_taken = true)
         }
         if ($banned_emails_exp = implode('|', $banned_emails)) {
             if (preg_match("#^($banned_emails_exp)$#i", $email)) {
-                return sprintf($lang['EMAIL_BANNED'], $email);
+                return sprintf(trans('messages.EMAIL_BANNED'), $email);
             }
         }
 
@@ -98,7 +98,7 @@ function validate_email($email, $check_ban_and_taken = true)
                 return false;
             }
 
-            return $lang['EMAIL_TAKEN'];
+            return trans('messages.EMAIL_TAKEN');
         }
     }
 

@@ -11,7 +11,7 @@ if (!defined('IN_AJAX')) {
     die(basename(__FILE__));
 }
 
-global $userdata, $lang, $datastore;
+global $userdata, $datastore;
 
 $mode = (string)$this->request['mode'];
 
@@ -21,8 +21,8 @@ switch ($mode) {
         $status = (int)$this->request['status'];
 
         // Валидность статуса
-        if (!isset($lang['TOR_STATUS_NAME'][$status])) {
-            $this->ajax_die($lang['STATUS_DOES_EXIST'] . $new_status);
+        if (empty(trans('messages.TOR_STATUS_NAME.' . $status))) {
+            $this->ajax_die(trans('messages.STATUS_DOES_EXIST') . $new_status);
         }
 
         $topic_ids = OLD_DB()->fetch_rowset("SELECT attach_id FROM " . BB_BT_TORRENTS . " WHERE topic_id IN($topics)", 'attach_id');
@@ -40,14 +40,14 @@ switch ($mode) {
         $new_title = clean_title($topic_title);
 
         if (!$topic_id) {
-            $this->ajax_die($lang['INVALID_TOPIC_ID']);
+            $this->ajax_die(trans('messages.INVALID_TOPIC_ID'));
         }
         if ($new_title == '') {
-            $this->ajax_die($lang['DONT_MESSAGE_TITLE']);
+            $this->ajax_die(trans('messages.DONT_MESSAGE_TITLE'));
         }
 
         if (!$t_data = OLD_DB()->fetch_row("SELECT forum_id FROM " . BB_TOPICS . " WHERE topic_id = $topic_id LIMIT 1")) {
-            $this->ajax_die($lang['INVALID_TOPIC_ID_DB']);
+            $this->ajax_die(trans('messages.INVALID_TOPIC_ID_DB'));
         }
         $this->verify_mod_rights($t_data['forum_id']);
 
@@ -77,7 +77,7 @@ switch ($mode) {
         $profiledata = get_userdata($user_id);
 
         if (!$user_id) {
-            $this->ajax_die($lang['NO_USER_ID_SPECIFIED']);
+            $this->ajax_die(trans('messages.NO_USER_ID_SPECIFIED'));
         }
 
         $reg_ip = OLD_DB()->fetch_rowset("SELECT username, user_id, user_rank FROM " . BB_USERS . "
@@ -94,23 +94,23 @@ switch ($mode) {
         $link_reg_ip = $link_last_ip = '';
 
         if (!empty($reg_ip)) {
-            $link_reg_ip .= $lang['OTHER_IP'] . ' ';
+            $link_reg_ip .= trans('messages.OTHER_IP') . ' ';
             foreach ($reg_ip as $row) {
                 $link_reg_ip .= profile_url($row) . ' ';
             }
         }
 
         if (!empty($last_ip)) {
-            $link_last_ip .= $lang['OTHER_IP'] . ' ';
+            $link_last_ip .= trans('messages.OTHER_IP') . ' ';
             foreach ($last_ip as $row) {
                 $link_last_ip .= profile_url($row) . ' ';
             }
         }
 
         if ($profiledata['user_level'] == ADMIN && !IS_ADMIN) {
-            $reg_ip = $last_ip = $lang['HIDDEN'];
+            $reg_ip = $last_ip = trans('messages.HIDDEN');
         } elseif ($profiledata['user_level'] == MOD && IS_MOD) {
-            $reg_ip = $last_ip = $lang['HIDDEN'];
+            $reg_ip = $last_ip = trans('messages.HIDDEN');
         } else {
             $user_reg_ip = decode_ip($profiledata['user_reg_ip']);
             $user_last_ip = decode_ip($profiledata['user_last_ip']);
@@ -121,12 +121,12 @@ switch ($mode) {
         $this->response['ip_list_html'] = '
 			<br /><table class="mod_ip bCenter borderless" cellspacing="1">
 				<tr class="row5" >
-					<td>' . $lang['REG_IP'] . '</td>
+					<td>' . trans('messages.REG_IP') . '</td>
 					<td class="tCenter">' . $reg_ip . '</td>
 					<td><div>' . $link_reg_ip . '</div></td>
 				</tr>
 				<tr class="row4">
-					<td>' . $lang['LAST_IP'] . '</td>
+					<td>' . trans('messages.LAST_IP') . '</td>
 					<td class="tCenter">' . $last_ip . '</td>
 					<td><div>' . $link_last_ip . '</div></td>
 				</tr>

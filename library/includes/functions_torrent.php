@@ -13,8 +13,6 @@ if (!defined('BB_ROOT')) {
 
 function get_torrent_info($attach_id)
 {
-    global $lang;
-
     $attach_id = (int)$attach_id;
 
     $sql = "
@@ -39,7 +37,7 @@ function get_torrent_info($attach_id)
 	";
 
     if (!$torrent = OLD_DB()->fetch_row($sql)) {
-        bb_die($lang['INVALID_ATTACH_ID']);
+        bb_die(trans('messages.INVALID_ATTACH_ID'));
     }
 
     return $torrent;
@@ -47,7 +45,7 @@ function get_torrent_info($attach_id)
 
 function torrent_auth_check($forum_id, $poster_id)
 {
-    global $userdata, $lang, $attach_config;
+    global $userdata, $attach_config;
 
     if (IS_ADMIN) {
         return true;
@@ -56,17 +54,15 @@ function torrent_auth_check($forum_id, $poster_id)
     $is_auth = auth_user(AUTH_ALL, $forum_id, $userdata);
 
     if ($poster_id != $userdata['user_id'] && !$is_auth['auth_mod']) {
-        bb_die($lang['NOT_MODERATOR']);
+        bb_die(trans('messages.NOT_MODERATOR'));
     } elseif (!$is_auth['auth_view'] || !$is_auth['auth_attachments'] || $attach_config['disable_mod']) {
-        bb_die(sprintf($lang['SORRY_AUTH_READ'], $is_auth['auth_read_type']));
+        bb_die(sprintf(trans('messages.SORRY_AUTH_READ'), $is_auth['auth_read_type']));
     }
     return $is_auth;
 }
 
 function tracker_unregister($attach_id, $mode = '')
 {
-    global $lang;
-
     $attach_id = (int)$attach_id;
     $post_id = $topic_id = $forum_id = $info_hash = null;
 
@@ -79,7 +75,7 @@ function tracker_unregister($attach_id, $mode = '')
 
     if ($mode == 'request') {
         if (!$torrent) {
-            bb_die($lang['TOR_NOT_FOUND']);
+            bb_die(trans('messages.TOR_NOT_FOUND'));
         }
         if (!$torrent['tracker_status']) {
             bb_die('Torrent already unregistered');
@@ -138,19 +134,19 @@ function tracker_unregister($attach_id, $mode = '')
 
     if ($mode == 'request') {
         set_die_append_msg($forum_id, $topic_id);
-        bb_die($lang['BT_UNREGISTERED']);
+        bb_die(trans('messages.BT_UNREGISTERED'));
     }
 }
 
 function delete_torrent($attach_id, $mode = '')
 {
-    global $lang, $reg_mode, $topic_id;
+    global $reg_mode, $topic_id;
 
     $attach_id = (int)$attach_id;
     $reg_mode = $mode;
 
     if (!$torrent = get_torrent_info($attach_id)) {
-        bb_die($lang['TOR_NOT_FOUND']);
+        bb_die(trans('messages.TOR_NOT_FOUND'));
     }
 
     $topic_id = $torrent['topic_id'];
@@ -158,7 +154,7 @@ function delete_torrent($attach_id, $mode = '')
     $poster_id = $torrent['poster_id'];
 
     if ($torrent['extension'] !== TORRENT_EXT) {
-        bb_die($lang['NOT_TORRENT']);
+        bb_die(trans('messages.NOT_TORRENT'));
     }
 
     torrent_auth_check($forum_id, $poster_id);
@@ -176,7 +172,7 @@ function change_tor_status($attach_id, $new_tor_status)
     $new_tor_status = (int)$new_tor_status;
 
     if (!$torrent = get_torrent_info($attach_id)) {
-        bb_die($lang['TOR_NOT_FOUND']);
+        bb_die(trans('messages.TOR_NOT_FOUND'));
     }
 
     $topic_id = $torrent['topic_id'];
@@ -196,14 +192,14 @@ function change_tor_status($attach_id, $new_tor_status)
 // Set gold/silver type for torrent
 function change_tor_type($attach_id, $tor_status_gold)
 {
-    global $topic_id, $lang;
+    global $topic_id;
 
     if (!$torrent = get_torrent_info($attach_id)) {
-        bb_die($lang['TOR_NOT_FOUND']);
+        bb_die(trans('messages.TOR_NOT_FOUND'));
     }
 
     if (!IS_AM) {
-        bb_die($lang['ONLY_FOR_MOD']);
+        bb_die(trans('messages.ONLY_FOR_MOD'));
     }
 
     $topic_id = $torrent['topic_id'];
@@ -223,13 +219,13 @@ function change_tor_type($attach_id, $tor_status_gold)
 
 function tracker_register($attach_id, $mode = '', $tor_status = TOR_NOT_APPROVED, $reg_time = TIMENOW)
 {
-    global $lang, $reg_mode;
+    global $reg_mode;
 
     $attach_id = (int)$attach_id;
     $reg_mode = $mode;
 
     if (!$torrent = get_torrent_info($attach_id)) {
-        bb_die($lang['TOR_NOT_FOUND']);
+        bb_die(trans('messages.TOR_NOT_FOUND'));
     }
 
     $post_id = $torrent['post_id'];
@@ -239,19 +235,19 @@ function tracker_register($attach_id, $mode = '', $tor_status = TOR_NOT_APPROVED
     $info_hash = null;
 
     if ($torrent['extension'] !== TORRENT_EXT) {
-        return torrent_error_exit($lang['NOT_TORRENT']);
+        return torrent_error_exit(trans('messages.NOT_TORRENT'));
     }
     if (!$torrent['allow_reg_tracker']) {
-        return torrent_error_exit($lang['REG_NOT_ALLOWED_IN_THIS_FORUM']);
+        return torrent_error_exit(trans('messages.REG_NOT_ALLOWED_IN_THIS_FORUM'));
     }
     if ($post_id != $torrent['topic_first_post_id']) {
-        return torrent_error_exit($lang['ALLOWED_ONLY_1ST_POST_REG']);
+        return torrent_error_exit(trans('messages.ALLOWED_ONLY_1ST_POST_REG'));
     }
     if ($torrent['tracker_status']) {
-        return torrent_error_exit($lang['ALREADY_REG']);
+        return torrent_error_exit(trans('messages.ALREADY_REG'));
     }
     if ($this_topic_torrents = get_registered_torrents($topic_id, 'topic')) {
-        return torrent_error_exit($lang['ONLY_1_TOR_PER_TOPIC']);
+        return torrent_error_exit(trans('messages.ONLY_1_TOR_PER_TOPIC'));
     }
 
     torrent_auth_check($forum_id, $torrent['poster_id']);
@@ -283,7 +279,7 @@ function tracker_register($attach_id, $mode = '', $tor_status = TOR_NOT_APPROVED
         $announce_urls['main_url'] = config('tp.bt_announce_url');
 
         if (!$ann || !in_array($ann, $announce_urls)) {
-            $msg = sprintf($lang['INVALID_ANN_URL'], htmlspecialchars($ann), $announce_urls['main_url']);
+            $msg = sprintf(trans('messages.INVALID_ANN_URL'), htmlspecialchars($ann), $announce_urls['main_url']);
             return torrent_error_exit($msg);
         }
     }
@@ -291,7 +287,7 @@ function tracker_register($attach_id, $mode = '', $tor_status = TOR_NOT_APPROVED
     $info = (@$tor['info']) ? $tor['info'] : array();
 
     if (!isset($info['name']) || !isset($info['piece length']) || !isset($info['pieces']) || strlen($info['pieces']) % 20 != 0) {
-        return torrent_error_exit($lang['TORFILE_INVALID']);
+        return torrent_error_exit(trans('messages.TORFILE_INVALID'));
     }
 
     $info_hash = pack('H*', sha1(\Rych\Bencode\Bencode::encode($info)));
@@ -304,7 +300,7 @@ function tracker_register($attach_id, $mode = '', $tor_status = TOR_NOT_APPROVED
     }
 
     if ($row = OLD_DB()->fetch_row("SELECT topic_id FROM " . BB_BT_TORRENTS . " WHERE info_hash = '$info_hash_sql' LIMIT 1")) {
-        $msg = sprintf($lang['BT_REG_FAIL_SAME_HASH'], TOPIC_URL . $row['topic_id']);
+        $msg = sprintf(trans('messages.BT_REG_FAIL_SAME_HASH'), TOPIC_URL . $row['topic_id']);
         bb_die($msg);
         set_die_append_msg($forum_id, $topic_id);
     }
@@ -318,7 +314,7 @@ function tracker_register($attach_id, $mode = '', $tor_status = TOR_NOT_APPROVED
             $totallen += (float)$f['length'];
         }
     } else {
-        return torrent_error_exit($lang['TORFILE_INVALID']);
+        return torrent_error_exit(trans('messages.TORFILE_INVALID'));
     }
 
     $size = sprintf('%.0f', (float)$totallen);
@@ -334,7 +330,7 @@ function tracker_register($attach_id, $mode = '', $tor_status = TOR_NOT_APPROVED
         if ($sql_error['code'] == 1062) {
             // Duplicate entry
 
-            return torrent_error_exit($lang['BT_REG_FAIL_SAME_HASH']);
+            return torrent_error_exit(trans('messages.BT_REG_FAIL_SAME_HASH'));
         }
         bb_die('Could not register torrent on tracker');
     }
@@ -361,7 +357,7 @@ function tracker_register($attach_id, $mode = '', $tor_status = TOR_NOT_APPROVED
 
     if ($reg_mode == 'request' || $reg_mode == 'newtopic') {
         set_die_append_msg($forum_id, $topic_id);
-        $mess = sprintf($lang['BT_REGISTERED'], DOWNLOAD_URL . $attach_id);
+        $mess = sprintf(trans('messages.BT_REGISTERED'), DOWNLOAD_URL . $attach_id);
         bb_die($mess);
     }
 
@@ -370,7 +366,7 @@ function tracker_register($attach_id, $mode = '', $tor_status = TOR_NOT_APPROVED
 
 function send_torrent_with_passkey($filename)
 {
-    global $attachment, $auth_pages, $userdata, $lang;
+    global $attachment, $auth_pages, $userdata;
 
     if (!config('tp.bt_add_auth_key') || $attachment['extension'] !== TORRENT_EXT || !$size = @filesize($filename)) {
         return;
@@ -402,11 +398,11 @@ function send_torrent_with_passkey($filename)
     $topic_id = $topic_id_row['topic_id'];
 
     if (!$attachment['tracker_status']) {
-        bb_die($lang['PASSKEY_ERR_TOR_NOT_REG']);
+        bb_die(trans('messages.PASSKEY_ERR_TOR_NOT_REG'));
     }
 
     if (bf($userdata['user_opt'], 'user_opt', 'dis_passkey') && !IS_GUEST) {
-        bb_die($lang['DISALLOWED']);
+        bb_die(trans('messages.DISALLOWED'));
     }
 
     if ($bt_userdata = get_bt_userdata($user_id)) {
@@ -435,7 +431,7 @@ function send_torrent_with_passkey($filename)
 			");
 
             if (!isset($dl['user_status']) || $dl['user_status'] != DL_STATUS_COMPLETE) {
-                bb_die(sprintf($lang['BT_LOW_RATIO_FOR_DL'], round($user_ratio, 2), "search.php?dlu=$user_id&amp;dlc=1"));
+                bb_die(sprintf(trans('messages.BT_LOW_RATIO_FOR_DL'), round($user_ratio, 2), "search.php?dlu=$user_id&amp;dlc=1"));
             }
         }
     }
@@ -511,7 +507,7 @@ function send_torrent_with_passkey($filename)
 
 function generate_passkey($user_id, $force_generate = false)
 {
-    global $lang, $sql;
+    global $sql;
 
     $user_id = (int)$user_id;
 
@@ -524,7 +520,7 @@ function generate_passkey($user_id, $force_generate = false)
         }
         if ($row = OLD_DB()->sql_fetchrow($result)) {
             if (bf($row['user_opt'], 'user_opt', 'dis_passkey')) {
-                bb_die($lang['NOT_AUTHORISED']);
+                bb_die(trans('messages.NOT_AUTHORISED'));
             }
         }
     }
@@ -586,7 +582,7 @@ function get_registered_torrents($id, $mode)
 
 function torrent_error_exit($message)
 {
-    global $reg_mode, $return_message, $lang;
+    global $reg_mode, $return_message;
 
     $msg = '';
 
@@ -594,7 +590,7 @@ function torrent_error_exit($message)
         if (isset($return_message)) {
             $msg .= $return_message . '<br /><br /><hr /><br />';
         }
-        $msg .= '<b>' . $lang['BT_REG_FAIL'] . '</b><br /><br />';
+        $msg .= '<b>' . trans('messages.BT_REG_FAIL') . '</b><br /><br />';
     }
 
     bb_die($msg . $message);

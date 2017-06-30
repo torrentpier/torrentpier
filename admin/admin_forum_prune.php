@@ -23,7 +23,7 @@ if (isset($_REQUEST['submit'])) {
         bb_die('Forum not selected');
     }
     if (!$var =& $_REQUEST['prunedays'] or !$prunedays = abs((int)$var)) {
-        bb_die($lang['NOT_DAYS']);
+        bb_die(trans('messages.NOT_DAYS'));
     }
 
     $prunetime = TIMENOW - 86400 * $prunedays;
@@ -45,10 +45,10 @@ if (isset($_REQUEST['submit'])) {
         ));
     }
     if (!$prune_performed) {
-        bb_die($lang['NONE_SELECTED']);
+        bb_die(trans('messages.NONE_SELECTED'));
     }
     if (!$pruned_total) {
-        bb_die($lang['NO_SEARCH_MATCH']);
+        bb_die(trans('messages.NO_SEARCH_MATCH'));
     }
 }
 
