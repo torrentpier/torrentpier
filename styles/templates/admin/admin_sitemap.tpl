@@ -66,7 +66,7 @@ ajax.sitemap = function(mode) {
 		action : 'sitemap',
 		mode : mode
 	});
-}
+};
 ajax.callback.sitemap = function(data) {
 	if(data.mode == 'create') $('#mess_time').html(data.html);
 	else $('#sitemap').html(data.html);
