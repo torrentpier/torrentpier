@@ -40,7 +40,7 @@ if ($mode != '') {
 
         if ($mode == 'edit') {
             if (empty($rank_id)) {
-                bb_die($lang['MUST_SELECT_RANK']);
+                bb_die(trans('messages.MUST_SELECT_RANK'));
             }
 
             $sql = 'SELECT * FROM ' . BB_RANKS . " WHERE rank_id = $rank_id";
@@ -76,7 +76,7 @@ if ($mode != '') {
         $rank_image = isset($_POST['rank_image']) ? trim($_POST['rank_image']) : '';
 
         if ($rank_title == '') {
-            bb_die($lang['MUST_SELECT_RANK']);
+            bb_die(trans('messages.MUST_SELECT_RANK'));
         }
 
         //
@@ -91,7 +91,7 @@ if ($mode != '') {
         if ($rank_id) {
             $sql = 'UPDATE ' . BB_USERS . " SET user_rank = 0 WHERE user_rank = $rank_id";
             if (!$result = OLD_DB()->sql_query($sql)) {
-                bb_die($lang['NO_UPDATE_RANKS']);
+                bb_die(trans('messages.NO_UPDATE_RANKS'));
             }
 
             $sql = 'UPDATE ' . BB_RANKS . "
@@ -100,19 +100,19 @@ if ($mode != '') {
 					rank_style = '" . OLD_DB()->escape($rank_style) . "'
 				WHERE rank_id = $rank_id";
 
-            $message = $lang['RANK_UPDATED'];
+            $message = trans('messages.RANK_UPDATED');
         } else {
             $sql = 'INSERT INTO ' . BB_RANKS . " (rank_title, rank_image, rank_style)
 				VALUES ('" . OLD_DB()->escape($rank_title) . "', '" . OLD_DB()->escape($rank_image) . "', '" . OLD_DB()->escape($rank_style) . "')";
 
-            $message = $lang['RANK_ADDED'];
+            $message = trans('messages.RANK_ADDED');
         }
 
         if (!$result = OLD_DB()->sql_query($sql)) {
             bb_die('Could not update / insert into ranks table');
         }
 
-        $message .= '<br /><br />' . sprintf($lang['CLICK_RETURN_RANKADMIN'], '<a href="admin_ranks.php">', '</a>') . '<br /><br />' . sprintf($lang['CLICK_RETURN_ADMIN_INDEX'], '<a href="index.php?pane=right">', '</a>');
+        $message .= '<br /><br />' . sprintf(trans('messages.CLICK_RETURN_RANKADMIN'), '<a href="admin_ranks.php">', '</a>') . '<br /><br />' . sprintf(trans('messages.CLICK_RETURN_ADMIN_INDEX'), '<a href="index.php?pane=right">', '</a>');
 
         $datastore->update('ranks');
 
@@ -137,14 +137,14 @@ if ($mode != '') {
 
             $sql = 'UPDATE ' . BB_USERS . " SET user_rank = 0 WHERE user_rank = $rank_id";
             if (!$result = OLD_DB()->sql_query($sql)) {
-                bb_die($lang['NO_UPDATE_RANKS']);
+                bb_die(trans('messages.NO_UPDATE_RANKS'));
             }
 
             $datastore->update('ranks');
 
-            bb_die($lang['RANK_REMOVED'] . '<br /><br />' . sprintf($lang['CLICK_RETURN_RANKADMIN'], '<a href="admin_ranks.php">', '</a>') . '<br /><br />' . sprintf($lang['CLICK_RETURN_ADMIN_INDEX'], '<a href="index.php?pane=right">', '</a>'));
+            bb_die(trans('messages.RANK_REMOVED') . '<br /><br />' . sprintf(trans('messages.CLICK_RETURN_RANKADMIN'), '<a href="admin_ranks.php">', '</a>') . '<br /><br />' . sprintf(trans('messages.CLICK_RETURN_ADMIN_INDEX'), '<a href="index.php?pane=right">', '</a>'));
         } else {
-            bb_die($lang['MUST_SELECT_RANK']);
+            bb_die(trans('messages.MUST_SELECT_RANK'));
         }
     } else {
         bb_die('Invalid mode');

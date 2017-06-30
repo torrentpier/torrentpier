@@ -11,10 +11,8 @@ if (!defined('IN_AJAX')) {
     die(basename(__FILE__));
 }
 
-global $lang;
-
 if (!$user_id = (int)$this->request['user_id'] or !$profiledata = get_userdata($user_id)) {
-    $this->ajax_die($lang['NO_USER_ID_SPECIFIED']);
+    $this->ajax_die(trans('messages.NO_USER_ID_SPECIFIED'));
 }
 if (!$field = (string)$this->request['field']) {
     $this->ajax_die('invalid profile field');
@@ -46,34 +44,34 @@ switch ($field) {
         if ($value == '' || preg_match('#^https?://[\w\#!$%&~/.\-;:=,?@а-яА-Я\[\]+]+$#iu', $value)) {
             $this->response['new_value'] = htmlCHR($value);
         } else {
-            $this->ajax_die($lang['WEBSITE_ERROR']);
+            $this->ajax_die(trans('messages.WEBSITE_ERROR'));
         }
         break;
 
     case 'user_gender':
         if (!config('tp.gender')) {
-            $this->ajax_die($lang['MODULE_OFF']);
+            $this->ajax_die(trans('messages.MODULE_OFF'));
         }
-        if (!isset($lang['GENDER_SELECT'][$value])) {
-            $this->ajax_die($lang['ERROR']);
+        if (trans('messages.GENDER_SELECT.' . $value) === 'messages.GENDER_SELECT.' . $value) {
+            $this->ajax_die(trans('messages.ERROR'));
         } else {
-            $this->response['new_value'] = $lang['GENDER_SELECT'][$value];
+            $this->response['new_value'] = trans('messages.GENDER_SELECT.' . $value);
         }
         break;
 
     case 'user_birthday':
         if (!config('tp.birthday_enabled')) {
-            $this->ajax_die($lang['MODULE_OFF']);
+            $this->ajax_die(trans('messages.MODULE_OFF'));
         }
         $birthday_date = date_parse($value);
 
         if (!empty($birthday_date['year'])) {
             if (strtotime($value) >= TIMENOW) {
-                $this->ajax_die($lang['WRONG_BIRTHDAY_FORMAT']);
+                $this->ajax_die(trans('messages.WRONG_BIRTHDAY_FORMAT'));
             } elseif (bb_date(TIMENOW, 'Y', 'false') - $birthday_date['year'] > config('tp.birthday_max_age')) {
-                $this->ajax_die(sprintf($lang['BIRTHDAY_TO_HIGH'], config('tp.birthday_max_age')));
+                $this->ajax_die(sprintf(trans('messages.BIRTHDAY_TO_HIGH'), config('tp.birthday_max_age')));
             } elseif (bb_date(TIMENOW, 'Y', 'false') - $birthday_date['year'] < config('tp.birthday_min_age')) {
-                $this->ajax_die(sprintf($lang['BIRTHDAY_TO_LOW'], config('tp.birthday_min_age')));
+                $this->ajax_die(sprintf(trans('messages.BIRTHDAY_TO_LOW'), config('tp.birthday_min_age')));
             }
         }
 
@@ -82,21 +80,21 @@ switch ($field) {
 
     case 'user_icq':
         if ($value && !preg_match('#^\d{6,15}$#', $value)) {
-            $this->ajax_die($lang['ICQ_ERROR']);
+            $this->ajax_die(trans('messages.ICQ_ERROR'));
         }
         $this->response['new_value'] = $this->request['value'];
         break;
 
     case 'user_skype':
         if ($value && !preg_match("#^[a-zA-Z0-9_.\-@,]{6,32}$#", $value)) {
-            $this->ajax_die($lang['SKYPE_ERROR']);
+            $this->ajax_die(trans('messages.SKYPE_ERROR'));
         }
         $this->response['new_value'] = $this->request['value'];
         break;
 
     case 'user_twitter':
         if ($value && !preg_match("#^[a-zA-Z0-9_]{1,15}$#", $value)) {
-            $this->ajax_die($lang['TWITTER_ERROR']);
+            $this->ajax_die(trans('messages.TWITTER_ERROR'));
         }
         $this->response['new_value'] = $this->request['value'];
         break;
@@ -112,7 +110,7 @@ switch ($field) {
     case 'user_lastvisit':
         $tz = TIMENOW + (3600 * config('tp.board_timezone'));
         if (($value = strtotime($value, $tz)) < config('tp.board_startdate') || $value > TIMENOW) {
-            $this->ajax_die($lang['INVALID_DATE'] . $this->request['value']);
+            $this->ajax_die(trans('messages.INVALID_DATE') . $this->request['value']);
         }
         $this->response['new_value'] = bb_date($value, 'Y-m-d H:i', false);
         break;
@@ -122,7 +120,7 @@ switch ($field) {
     case 'u_up_release':
     case 'u_up_bonus':
         if (!IS_ADMIN) {
-            $this->ajax_die($lang['NOT_ADMIN']);
+            $this->ajax_die(trans('messages.NOT_ADMIN'));
         }
 
         $table = BB_BT_USERS;

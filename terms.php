@@ -20,7 +20,7 @@ if (!config('tp.terms') && !IS_ADMIN) {
 }
 
 $template->assign_vars(array(
-    'TERMS_EDIT' => bbcode2html(sprintf($lang['TERMS_EMPTY_TEXT'], config('tp.server_name'))),
+    'TERMS_EDIT' => bbcode2html(sprintf(trans('messages.TERMS_EMPTY_TEXT'), config('tp.server_name'))),
     'TERMS_HTML' => bbcode2html(config('tp.terms')),
 ));
 

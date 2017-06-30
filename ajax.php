@@ -22,9 +22,9 @@ $user->session_start();
 // Exit if board is disabled via ON/OFF trigger or by admin
 if ($ajax->action != 'manage_admin') {
     if (config('tp.board_disable')) {
-        $ajax->ajax_die($lang['BOARD_DISABLE']);
+        $ajax->ajax_die(trans('messages.BOARD_DISABLE'));
     } elseif (file_exists(BB_DISABLED)) {
-        $ajax->ajax_die($lang['BOARD_DISABLE_CRON']);
+        $ajax->ajax_die(trans('messages.BOARD_DISABLE_CRON'));
     }
 }
 

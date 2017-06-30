@@ -134,7 +134,7 @@ function sort_multi_array($sort_array, $key, $sort_order, $pre_string_sort = 0)
  */
 function get_formatted_dirsize()
 {
-    global $lang, $upload_dir;
+    global $upload_dir;
 
     $upload_dir_size = 0;
 
@@ -151,7 +151,7 @@ function get_formatted_dirsize()
         }
         closedir($dirname);
     } else {
-        return $lang['NOT_AVAILABLE'];
+        return trans('messages.NOT_AVAILABLE');
     }
 
     return humn_size($upload_dir_size);
@@ -166,8 +166,6 @@ function get_formatted_dirsize()
  */
 function search_attachments($order_by, &$total_rows)
 {
-    global $lang;
-
     $where_sql = [];
 
     // Author name search
@@ -194,7 +192,7 @@ function search_attachments($order_by, &$total_rows)
 
             OLD_DB()->sql_freeresult($result);
         } else {
-            bb_die($lang['NO_ATTACH_SEARCH_MATCH']);
+            bb_die(trans('messages.NO_ATTACH_SEARCH_MATCH'));
         }
 
         $where_sql[] = ' (t.user_id_1 IN (' . $matching_userids . ')) ';
@@ -265,7 +263,7 @@ function search_attachments($order_by, &$total_rows)
     OLD_DB()->sql_freeresult($result);
 
     if ($num_attach == 0) {
-        bb_die($lang['NO_ATTACH_SEARCH_MATCH']);
+        bb_die(trans('messages.NO_ATTACH_SEARCH_MATCH'));
     }
 
     if (!($result = OLD_DB()->sql_query($total_rows_sql))) {

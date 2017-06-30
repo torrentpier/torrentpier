@@ -107,6 +107,11 @@ if (config('tp.bugsnag.enabled')) {
  */
 $DBS = new TorrentPier\Legacy\Dbs(config('tp'));
 
+/**
+ * @param string $db_alias
+ * @return mixed
+ * @deprecated
+ */
 function OLD_DB($db_alias = 'db')
 {
     global $DBS;
@@ -118,6 +123,11 @@ function OLD_DB($db_alias = 'db')
  */
 $CACHES = new TorrentPier\Legacy\Caches(config('tp'));
 
+/**
+ * @param $cache_name
+ * @return mixed
+ * @deprecated
+ */
 function OLD_CACHE($cache_name)
 {
     global $CACHES;

@@ -16,7 +16,7 @@ if (!empty($setmodules)) {
 require __DIR__ . '/pagestart.php';
 
 if (!IS_SUPER_ADMIN) {
-    bb_die($lang['NOT_ADMIN']);
+    bb_die(trans('messages.NOT_ADMIN'));
 }
 
 require INC_DIR . '/functions_admin_torrent.php';

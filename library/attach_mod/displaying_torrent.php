@@ -11,7 +11,7 @@ if (!defined('BB_ROOT')) {
     die(basename(__FILE__));
 }
 
-global $t_data, $poster_id, $is_auth, $dl_link_css, $dl_status_css, $lang, $images;
+global $t_data, $poster_id, $is_auth, $dl_link_css, $dl_status_css, $images;
 
 $change_peers_bgr_over = true;
 $bgr_class_1 = 'row1';
@@ -24,7 +24,7 @@ $peers_overflow_div_height = '400px';
 $peers_div_style_normal = 'padding: 3px;';
 $peers_div_style_overflow = "padding: 6px; height: $peers_overflow_div_height; overflow: auto; border: 1px inset;";
 $s_last_seed_date_format = 'Y-m-d';
-$upload_image = '<img src="' . $images['icon_dn'] . '" alt="' . $lang['DL_TORRENT'] . '" border="0" />';
+$upload_image = '<img src="' . $images['icon_dn'] . '" alt="' . trans('messages.DL_TORRENT') . '" border="0" />';
 
 $peers_cnt = $seed_count = 0;
 $seeders = $leechers = '';
@@ -75,14 +75,14 @@ $tor_auth = ($bt_user_id != GUEST_UID && (($bt_user_id == $poster_id && !$locked
 $tor_auth_reg = ($tor_auth && $t_data['allow_reg_tracker'] && $post_id == $t_data['topic_first_post_id']);
 $tor_auth_del = ($tor_auth && $tor_reged);
 
-$tracker_link = ($tor_reged) ? $lang['BT_REG_YES'] : $lang['BT_REG_NO'];
+$tracker_link = ($tor_reged) ? trans('messages.BT_REG_YES') : trans('messages.BT_REG_NO');
 
 $download_link = DOWNLOAD_URL . $attach_id;
 $description = ($comment) ?: preg_replace("#.torrent$#i", '', $display_name);
 
 if ($tor_auth_reg || $tor_auth_del) {
-    $reg_tor_url = '<a class="txtb" href="#" onclick="ajax.exec({ action: \'change_torrent\', attach_id : ' . $attach_id . ', type: \'reg\'}); return false;">' . $lang['BT_REG_ON_TRACKER'] . '</a>';
-    $unreg_tor_url = '<a class="txtb" href="#" onclick="ajax.exec({ action: \'change_torrent\', attach_id : ' . $attach_id . ', type: \'unreg\'}); return false;">' . $lang['BT_UNREG_FROM_TRACKER'] . '</a>';
+    $reg_tor_url = '<a class="txtb" href="#" onclick="ajax.exec({ action: \'change_torrent\', attach_id : ' . $attach_id . ', type: \'reg\'}); return false;">' . trans('messages.BT_REG_ON_TRACKER') . '</a>';
+    $unreg_tor_url = '<a class="txtb" href="#" onclick="ajax.exec({ action: \'change_torrent\', attach_id : ' . $attach_id . ', type: \'unreg\'}); return false;">' . trans('messages.BT_UNREG_FROM_TRACKER') . '</a>';
 
     $tracker_link = ($tor_reged) ? $unreg_tor_url : $reg_tor_url;
 }
@@ -99,7 +99,7 @@ if (!$tor_reged) {
         'U_DOWNLOAD_LINK' => $download_link,
         'FILESIZE' => $tor_file_size,
 
-        'DOWNLOAD_COUNT' => sprintf($lang['DOWNLOAD_NUMBER'], $download_count),
+        'DOWNLOAD_COUNT' => sprintf(trans('messages.DOWNLOAD_NUMBER'), $download_count),
         'POSTED_TIME' => $tor_file_time,
     ));
 
@@ -177,7 +177,7 @@ if ($tor_reged && $tor_info) {
         if ((isset($user_ratio) && isset($min_ratio_warn) && $user_ratio < $min_ratio_warn && TR_RATING_LIMITS) || ($bt_userdata['u_down_total'] < MIN_DL_FOR_RATIO)) {
             $template->assign_vars(array(
                 'SHOW_RATIO_WARN' => true,
-                'RATIO_WARN_MSG' => sprintf($lang['BT_RATIO_WARNING_MSG'], $min_ratio_dl, config('tp.ratio_url_help')),
+                'RATIO_WARN_MSG' => sprintf(trans('messages.BT_RATIO_WARNING_MSG'), $min_ratio_dl, config('tp.ratio_url_help')),
             ));
         }
     }
@@ -186,7 +186,7 @@ if ($tor_reged && $tor_info) {
         $template->assign_block_vars('postrow.attach.tor_reged', array());
         $template->assign_vars(array(
             'TOR_BLOCKED' => true,
-            'TOR_BLOCKED_MSG' => sprintf($lang['BT_LOW_RATIO_FOR_DL'], round($user_ratio, 2), "search.php?dlu=$bt_user_id&amp;dlc=1"),
+            'TOR_BLOCKED_MSG' => sprintf(trans('messages.BT_LOW_RATIO_FOR_DL'), round($user_ratio, 2), "search.php?dlu=$bt_user_id&amp;dlc=1"),
         ));
     } else {
         $template->assign_block_vars('postrow.attach.tor_reged', array(
@@ -197,10 +197,10 @@ if ($tor_reged && $tor_info) {
 
             // torrent status mod
             'TOR_FROZEN' => (!IS_AM) ? (null !== config('tp.tor_frozen.' . $tor_info['tor_status'])) && !(null !== config('tp.tor_frozen_author_download.' . $tor_info['tor_status']) && $userdata['user_id'] == $tor_info['poster_id']) ? true : '' : '',
-            'TOR_STATUS_TEXT' => $lang['TOR_STATUS_NAME'][$tor_info['tor_status']],
+            'TOR_STATUS_TEXT' => trans('messages.TOR_STATUS_NAME.' . $tor_info['tor_status']),
             'TOR_STATUS_ICON' => config('tp.tor_icons.' . $tor_info['tor_status']),
-            'TOR_STATUS_BY' => ($tor_info['checked_user_id'] && $is_auth['auth_mod']) ? ('<span title="' . bb_date($tor_info['checked_time']) . '"> &middot; ' . profile_url($tor_info) . ' &middot; <i>' . delta_time($tor_info['checked_time']) . $lang['TOR_BACK'] . '</i></span>') : '',
-            'TOR_STATUS_SELECT' => build_select('sel_status', array_flip($lang['TOR_STATUS_NAME']), TOR_APPROVED),
+            'TOR_STATUS_BY' => ($tor_info['checked_user_id'] && $is_auth['auth_mod']) ? ('<span title="' . bb_date($tor_info['checked_time']) . '"> &middot; ' . profile_url($tor_info) . ' &middot; <i>' . delta_time($tor_info['checked_time']) . trans('messages.TOR_BACK') . '</i></span>') : '',
+            'TOR_STATUS_SELECT' => build_select('sel_status', array_flip(trans('messages.TOR_STATUS_NAME')), TOR_APPROVED),
             'TOR_STATUS_REPLY' => config('tp.tor_comment') && !IS_GUEST && in_array($tor_info['tor_status'], config('tp.tor_reply')) && $userdata['user_id'] == $tor_info['poster_id'] && $t_data['topic_status'] != TOPIC_LOCKED,
             //end torrent status mod
 
@@ -211,11 +211,11 @@ if ($tor_reged && $tor_info) {
             'FILESIZE' => $tor_file_size,
             'MAGNET' => $tor_magnet,
             'HASH' => strtoupper(bin2hex($tor_info['info_hash'])),
-            'DOWNLOAD_COUNT' => sprintf($lang['DOWNLOAD_NUMBER'], $download_count),
+            'DOWNLOAD_COUNT' => sprintf(trans('messages.DOWNLOAD_NUMBER'), $download_count),
             'REGED_TIME' => bb_date($tor_info['reg_time']),
             'REGED_DELTA' => delta_time($tor_info['reg_time']),
             'TORRENT_SIZE' => humn_size($tor_size),
-            'COMPLETED' => sprintf($lang['DOWNLOAD_NUMBER'], $tor_info['complete_count']),
+            'COMPLETED' => sprintf(trans('messages.DOWNLOAD_NUMBER'), $tor_info['complete_count']),
         ));
 
         if ($comment) {
@@ -447,8 +447,8 @@ if ($tor_reged && $tor_info) {
                         'DOWN_TOTAL_RAW' => $peer['downloaded'],
                         'SPEED_UP_RAW' => $peer['speed_up'],
                         'SPEED_DOWN_RAW' => $peer['speed_down'],
-                        'UPD_EXP_TIME' => ($peer['update_time']) ? $lang['DL_UPD'] . bb_date($peer['update_time'], 'd-M-y H:i') . ' &middot; ' . delta_time($peer['update_time']) . $lang['TOR_BACK'] : $lang['DL_STOPPED'],
-                        'TOR_RATIO' => ($up_ratio) ? $lang['USER_RATIO'] . "UL/DL: $up_ratio" : '',
+                        'UPD_EXP_TIME' => ($peer['update_time']) ? trans('messages.DL_UPD') . bb_date($peer['update_time'], 'd-M-y H:i') . ' &middot; ' . delta_time($peer['update_time']) . trans('messages.TOR_BACK') : trans('messages.DL_STOPPED'),
+                        'TOR_RATIO' => ($up_ratio) ? trans('messages.USER_RATIO') . "UL/DL: $up_ratio" : '',
                     ));
 
                     if ($ip) {
@@ -493,10 +493,10 @@ if ($tor_reged && $tor_info) {
 
         // Show "seeder last seen info"
         if (($s_mode == 'count' && !$seed_count) || (!$seeders && !defined('SEEDER_EXIST'))) {
-            $last_seen_time = ($tor_info['seeder_last_seen']) ? delta_time($tor_info['seeder_last_seen']) : $lang['NEVER'];
+            $last_seen_time = ($tor_info['seeder_last_seen']) ? delta_time($tor_info['seeder_last_seen']) : trans('messages.NEVER');
 
             $template->assign_vars(array(
-                'SEEDER_LAST_SEEN' => sprintf($lang['SEEDER_LAST_SEEN'], $last_seen_time),
+                'SEEDER_LAST_SEEN' => sprintf(trans('messages.SEEDER_LAST_SEEN'), $last_seen_time),
             ));
         }
     }

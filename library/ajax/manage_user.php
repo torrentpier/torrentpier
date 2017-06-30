@@ -11,7 +11,7 @@ if (!defined('IN_AJAX')) {
     die(basename(__FILE__));
 }
 
-global $userdata, $lang;
+global $userdata;
 
 $mode = (string)$this->request['mode'];
 $user_id = $this->request['user_id'];
@@ -20,19 +20,19 @@ switch ($mode) {
     case 'delete_profile':
 
         if ($userdata['user_id'] == $user_id) {
-            $this->ajax_die($lang['USER_DELETE_ME']);
+            $this->ajax_die(trans('messages.USER_DELETE_ME'));
         }
         if (empty($this->request['confirmed'])) {
-            $this->prompt_for_confirm($lang['USER_DELETE_CONFIRM']);
+            $this->prompt_for_confirm(trans('messages.USER_DELETE_CONFIRM'));
         }
 
         if ($user_id != BOT_UID) {
             delete_user_sessions($user_id);
             user_delete($user_id);
 
-            $this->response['info'] = $lang['USER_DELETED'];
+            $this->response['info'] = trans('messages.USER_DELETED');
         } else {
-            $this->ajax_die($lang['USER_DELETE_CSV']);
+            $this->ajax_die(trans('messages.USER_DELETE_CSV'));
         }
 
         break;
@@ -40,10 +40,10 @@ switch ($mode) {
     case 'delete_topics':
 
         if (empty($this->request['confirmed']) && $userdata['user_id'] == $user_id) {
-            $this->prompt_for_confirm($lang['DELETE_USER_POSTS_ME']);
+            $this->prompt_for_confirm(trans('messages.DELETE_USER_POSTS_ME'));
         }
         if (empty($this->request['confirmed'])) {
-            $this->prompt_for_confirm($lang['DELETE_USER_ALL_POSTS_CONFIRM']);
+            $this->prompt_for_confirm(trans('messages.DELETE_USER_ALL_POSTS_CONFIRM'));
         }
 
         if (IS_ADMIN) {
@@ -51,9 +51,9 @@ switch ($mode) {
             $deleted_topics = topic_delete($user_topics);
             $deleted_posts = post_delete('user', $user_id);
 
-            $this->response['info'] = $lang['USER_DELETED_POSTS'];
+            $this->response['info'] = trans('messages.USER_DELETED_POSTS');
         } else {
-            $this->ajax_die($lang['NOT_ADMIN']);
+            $this->ajax_die(trans('messages.NOT_ADMIN'));
         }
 
         break;
@@ -61,18 +61,18 @@ switch ($mode) {
     case 'delete_message':
 
         if (empty($this->request['confirmed']) && $userdata['user_id'] == $user_id) {
-            $this->prompt_for_confirm($lang['DELETE_USER_POSTS_ME']);
+            $this->prompt_for_confirm(trans('messages.DELETE_USER_POSTS_ME'));
         }
         if (empty($this->request['confirmed'])) {
-            $this->prompt_for_confirm($lang['DELETE_USER_POSTS_CONFIRM']);
+            $this->prompt_for_confirm(trans('messages.DELETE_USER_POSTS_CONFIRM'));
         }
 
         if (IS_ADMIN) {
             post_delete('user', $user_id);
 
-            $this->response['info'] = $lang['USER_DELETED_POSTS'];
+            $this->response['info'] = trans('messages.USER_DELETED_POSTS');
         } else {
-            $this->ajax_die($lang['NOT_ADMIN']);
+            $this->ajax_die(trans('messages.NOT_ADMIN'));
         }
 
         break;
@@ -80,28 +80,28 @@ switch ($mode) {
     case 'user_activate':
 
         if (empty($this->request['confirmed'])) {
-            $this->prompt_for_confirm($lang['DEACTIVATE_CONFIRM']);
+            $this->prompt_for_confirm(trans('messages.DEACTIVATE_CONFIRM'));
         }
 
         OLD_DB()->query("UPDATE " . BB_USERS . " SET user_active = '1' WHERE user_id = " . $user_id);
 
-        $this->response['info'] = $lang['USER_ACTIVATE_ON'];
+        $this->response['info'] = trans('messages.USER_ACTIVATE_ON');
 
         break;
 
     case 'user_deactivate':
 
         if ($userdata['user_id'] == $user_id) {
-            $this->ajax_die($lang['USER_DEACTIVATE_ME']);
+            $this->ajax_die(trans('messages.USER_DEACTIVATE_ME'));
         }
         if (empty($this->request['confirmed'])) {
-            $this->prompt_for_confirm($lang['ACTIVATE_CONFIRM']);
+            $this->prompt_for_confirm(trans('messages.ACTIVATE_CONFIRM'));
         }
 
         OLD_DB()->query("UPDATE " . BB_USERS . " SET user_active = '0' WHERE user_id = " . $user_id);
         delete_user_sessions($user_id);
 
-        $this->response['info'] = $lang['USER_ACTIVATE_OFF'];
+        $this->response['info'] = trans('messages.USER_ACTIVATE_OFF');
 
         break;
 }

@@ -14,24 +14,24 @@ if (!defined('BB_ROOT')) {
 set_die_append_msg();
 
 if (!config('email.enabled')) {
-    bb_die($lang['EMAILER_DISABLED']);
+    bb_die(trans('messages.EMAILER_DISABLED'));
 }
 
 $need_captcha = ($_GET['mode'] == 'sendpassword' && !IS_ADMIN && !config('tp.captcha.disabled'));
 
 if (isset($_POST['submit'])) {
     if ($need_captcha && !bb_captcha('check')) {
-        bb_die($lang['CAPTCHA_WRONG']);
+        bb_die(trans('messages.CAPTCHA_WRONG'));
     }
     $email = (!empty($_POST['email'])) ? trim(strip_tags(htmlspecialchars($_POST['email']))) : '';
     $sql = "SELECT * FROM " . BB_USERS . " WHERE user_email = '" . OLD_DB()->escape($email) . "'";
     if ($result = OLD_DB()->sql_query($sql)) {
         if ($row = OLD_DB()->sql_fetchrow($result)) {
             if (!$row['user_active']) {
-                bb_die($lang['NO_SEND_ACCOUNT_INACTIVE']);
+                bb_die(trans('messages.NO_SEND_ACCOUNT_INACTIVE'));
             }
             if (in_array($row['user_level'], array(MOD, ADMIN))) {
-                bb_die($lang['NO_SEND_ACCOUNT']);
+                bb_die(trans('messages.NO_SEND_ACCOUNT'));
             }
 
             $username = $row['username'];
@@ -52,7 +52,7 @@ if (isset($_POST['submit'])) {
 
             $emailer->set_from([config('tp.board_email') => config('tp.sitename')]);
             $emailer->set_to([$row['user_email'] => $username]);
-            $emailer->set_subject($lang['EMAILER_SUBJECT']['USER_ACTIVATE_PASSWD']);
+            $emailer->set_subject(trans('messages.EMAILER_SUBJECT.USER_ACTIVATE_PASSWD'));
 
             $emailer->set_template('user_activate_passwd', $row['user_lang']);
             $emailer->assign_vars(array(
@@ -64,9 +64,9 @@ if (isset($_POST['submit'])) {
 
             $emailer->send();
 
-            bb_die($lang['PASSWORD_UPDATED']);
+            bb_die(trans('messages.PASSWORD_UPDATED'));
         } else {
-            bb_die($lang['NO_EMAIL_MATCH']);
+            bb_die(trans('messages.NO_EMAIL_MATCH'));
         }
     } else {
         bb_die('Could not obtain user information for sendpassword');

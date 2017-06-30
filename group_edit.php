@@ -25,7 +25,7 @@ $submit = !empty($_POST['submit']);
 
 if ($group_id) {
     if (!$group_info = get_group_data($group_id)) {
-        bb_die($lang['GROUP_NOT_EXIST']);
+        bb_die(trans('messages.GROUP_NOT_EXIST'));
     }
     if (!$group_info['group_id'] || !$group_info['group_moderator'] || !$group_info['moderator_name']) {
         bb_die("Invalid group data [group_id: $group_id]");
@@ -51,17 +51,17 @@ if ($is_moderator) {
 
     $group_type = '';
     if ($group_info['group_type'] == GROUP_OPEN) {
-        $group_type = $lang['GROUP_OPEN'];
+        $group_type = trans('messages.GROUP_OPEN');
     } elseif ($group_info['group_type'] == GROUP_CLOSED) {
-        $group_type = $lang['GROUP_CLOSED'];
+        $group_type = trans('messages.GROUP_CLOSED');
     } elseif ($group_info['group_type'] == GROUP_HIDDEN) {
-        $group_type = $lang['GROUP_HIDDEN'];
+        $group_type = trans('messages.GROUP_HIDDEN');
     }
 
     $s_hidden_fields = '<input type="hidden" name="' . POST_GROUPS_URL . '" value="' . $group_id . '" />';
 
     $template->assign_vars(array(
-        'PAGE_TITLE' => $lang['GROUP_CONTROL_PANEL'],
+        'PAGE_TITLE' => trans('messages.GROUP_CONTROL_PANEL'),
         'GROUP_NAME' => htmlCHR($group_info['group_name']),
         'GROUP_ID' => $group_id,
         'GROUP_DESCRIPTION' => htmlCHR($group_info['group_description']),
@@ -78,12 +78,12 @@ if ($is_moderator) {
         'S_HIDDEN_FIELDS' => $s_hidden_fields,
         'S_GROUP_CONFIG_ACTION' => "group_edit.php?" . POST_GROUPS_URL . "=$group_id",
 
-        'AVATAR_EXPLAIN' => sprintf($lang['AVATAR_EXPLAIN'], config('tp.group_avatars.max_width'), config('tp.group_avatars.max_height'), round(config('tp.group_avatars.max_size') / 1024)),
+        'AVATAR_EXPLAIN' => sprintf(trans('messages.AVATAR_EXPLAIN'), config('tp.group_avatars.max_width'), config('tp.group_avatars.max_height'), round(config('tp.group_avatars.max_size') / 1024)),
         'AVATAR_IMG' => get_avatar(GROUP_AVATAR_MASK . $group_id, $group_info['avatar_ext_id']),
     ));
 
     $template->set_filenames(array('body' => 'group_edit.tpl'));
-    $template->assign_vars(array('PAGE_TITLE' => $lang['GROUP_CONFIGURATION']));
+    $template->assign_vars(array('PAGE_TITLE' => trans('messages.GROUP_CONFIGURATION')));
 
     require(PAGE_HEADER);
 

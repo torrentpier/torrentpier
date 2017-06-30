@@ -11,13 +11,13 @@ if (!defined('IN_AJAX')) {
     die(basename(__FILE__));
 }
 
-global $lang, $userdata;
+global $userdata;
 
 $post_id = (int)$this->request['post_id'];
 $mc_type = (int)$this->request['mc_type'];
 $mc_text = (string)$this->request['mc_text'];
 if (!$mc_text = prepare_message($mc_text)) {
-    $this->ajax_die($lang['EMPTY_MESSAGE']);
+    $this->ajax_die(trans('messages.EMPTY_MESSAGE'));
 }
 
 $post = OLD_DB()->fetch_row("
@@ -39,8 +39,8 @@ $sql_args = OLD_DB()->build_array('UPDATE', $data);
 OLD_DB()->query("UPDATE " . BB_POSTS . " SET $sql_args WHERE post_id = $post_id");
 
 if ($mc_type && $post['poster_id'] != $userdata['user_id']) {
-    $subject = sprintf($lang['MC_COMMENT_PM_SUBJECT'], $lang['MC_COMMENT'][$mc_type]['type']);
-    $message = sprintf($lang['MC_COMMENT_PM_MSG'], get_username($post['poster_id']), make_url(POST_URL . "$post_id#$post_id"), $lang['MC_COMMENT'][$mc_type]['type'], $mc_text);
+    $subject = sprintf(trans('messages.MC_COMMENT_PM_SUBJECT'), trans('messages.MC_COMMENT.' . $mc_type . '.type'));
+    $message = sprintf(trans('messages.MC_COMMENT_PM_MSG'), get_username($post['poster_id']), make_url(POST_URL . "$post_id#$post_id"), trans('messages.MC_COMMENT.' . $mc_type . '.type'), $mc_text);
 
     send_pm($post['poster_id'], $subject, $message);
     cache_rm_user_sessions($post['poster_id']);
@@ -66,6 +66,6 @@ switch ($mc_type) {
 
 $this->response['mc_type'] = $mc_type;
 $this->response['post_id'] = $post_id;
-$this->response['mc_title'] = sprintf($lang['MC_COMMENT'][$mc_type]['title'], profile_url($userdata));
+$this->response['mc_title'] = sprintf(trans('messages.MC_COMMENT.' . $mc_type . '.title'), profile_url($userdata));
 $this->response['mc_text'] = bbcode2html($mc_text);
 $this->response['mc_class'] = $mc_class;

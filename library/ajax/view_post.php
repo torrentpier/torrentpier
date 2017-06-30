@@ -11,7 +11,7 @@ if (!defined('IN_AJAX')) {
     die(basename(__FILE__));
 }
 
-global $user, $lang;
+global $user;
 
 $post_id = (int)@$this->request['post_id'];
 $topic_id = (int)@$this->request['topic_id'];
@@ -35,18 +35,18 @@ $sql = "
 ";
 
 if (!$post_data = OLD_DB()->fetch_row($sql)) {
-    $this->ajax_die($lang['TOPIC_POST_NOT_EXIST']);
+    $this->ajax_die(trans('messages.TOPIC_POST_NOT_EXIST'));
 }
 
 // Auth check
 if ($post_data['auth_read'] == AUTH_REG) {
     if (IS_GUEST) {
-        $this->ajax_die($lang['NEED_TO_LOGIN_FIRST']);
+        $this->ajax_die(trans('messages.NEED_TO_LOGIN_FIRST'));
     }
 } elseif ($post_data['auth_read'] != AUTH_ALL) {
     $is_auth = auth_user(AUTH_READ, $post_data['forum_id'], $user->data, $post_data);
     if (!$is_auth['auth_read']) {
-        $this->ajax_die($lang['TOPIC_POST_NOT_EXIST']);
+        $this->ajax_die(trans('messages.TOPIC_POST_NOT_EXIST'));
     }
 }
 

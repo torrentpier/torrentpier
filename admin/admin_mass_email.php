@@ -24,13 +24,13 @@ $errors = $user_id_sql = [];
 
 if (isset($_POST['submit'])) {
     if (!$subject) {
-        $errors[] = $lang['EMPTY_SUBJECT'];
+        $errors[] = trans('messages.EMPTY_SUBJECT');
     }
     if (!$message) {
-        $errors[] = $lang['EMPTY_MESSAGE'];
+        $errors[] = trans('messages.EMPTY_MESSAGE');
     }
     if (!$group_id) {
-        $errors[] = $lang['GROUP_NOT_EXIST'];
+        $errors[] = trans('messages.GROUP_NOT_EXIST');
     }
 
     if (!$errors) {
@@ -88,7 +88,7 @@ $sql = 'SELECT group_id, group_name
 	ORDER BY group_name
 ';
 
-$groups = array('-- ' . $lang['ALL_USERS'] . ' --' => -1);
+$groups = array('-- ' . trans('messages.ALL_USERS') . ' --' => -1);
 foreach (OLD_DB()->fetch_rowset($sql) as $row) {
     $groups[$row['group_name']] = $row['group_id'];
 }

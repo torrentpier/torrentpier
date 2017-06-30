@@ -11,7 +11,7 @@ if (!defined('IN_AJAX')) {
     die(basename(__FILE__));
 }
 
-global $userdata, $lang;
+global $userdata;
 
 $mode = (string)$this->request['mode'];
 
@@ -24,7 +24,7 @@ switch ($mode) {
             }
         }
 
-        $this->response['cache_html'] = '<span class="seed bold">' . $lang['ALL_CACHE_CLEARED'] . '</span>';
+        $this->response['cache_html'] = '<span class="seed bold">' . trans('messages.ALL_CACHE_CLEARED') . '</span>';
 
         break;
 
@@ -34,7 +34,7 @@ switch ($mode) {
 
         $datastore->clean();
 
-        $this->response['datastore_html'] = '<span class="seed bold">' . $lang['DATASTORE_CLEARED'] . '</span>';
+        $this->response['datastore_html'] = '<span class="seed bold">' . trans('messages.DATASTORE_CLEARED') . '</span>';
 
         break;
 
@@ -53,7 +53,7 @@ switch ($mode) {
         }
         closedir($res);
 
-        $this->response['template_cache_html'] = '<span class="seed bold">' . $lang['ALL_TEMPLATE_CLEARED'] . '</span>';
+        $this->response['template_cache_html'] = '<span class="seed bold">' . trans('messages.ALL_TEMPLATE_CLEARED') . '</span>';
 
         break;
 
@@ -74,7 +74,7 @@ switch ($mode) {
         file_put_contents(config('tp.sphinx_config_path') . '.log', "\r\n", FILE_APPEND);
         file_put_contents(config('tp.sphinx_config_path') . '.log', "\r\n", FILE_APPEND);
 
-        $this->response['indexer_html'] = '<span class="seed bold">' . $lang['INDEXER'] . '</span>';
+        $this->response['indexer_html'] = '<span class="seed bold">' . trans('messages.INDEXER') . '</span>';
 
         break;
 
@@ -84,7 +84,7 @@ switch ($mode) {
 
         update_user_level('all');
 
-        $this->response['update_user_level_html'] = '<span class="seed bold">' . $lang['USER_LEVELS_UPDATED'] . '</span>';
+        $this->response['update_user_level_html'] = '<span class="seed bold">' . trans('messages.USER_LEVELS_UPDATED') . '</span>';
 
         break;
 
@@ -93,7 +93,7 @@ switch ($mode) {
         sync('topic', 'all');
         sync_all_forums();
 
-        $this->response['sync_topics_html'] = '<span class="seed bold">' . $lang['TOPICS_DATA_SYNCHRONIZED'] . '</span>';
+        $this->response['sync_topics_html'] = '<span class="seed bold">' . trans('messages.TOPICS_DATA_SYNCHRONIZED') . '</span>';
 
         break;
 
@@ -101,7 +101,7 @@ switch ($mode) {
 
         sync('user_posts', 'all');
 
-        $this->response['sync_user_posts_html'] = '<span class="seed bold">' . $lang['USER_POSTS_COUNT_SYNCHRONIZED'] . '</span>';
+        $this->response['sync_user_posts_html'] = '<span class="seed bold">' . trans('messages.USER_POSTS_COUNT_SYNCHRONIZED') . '</span>';
 
         break;
 
@@ -109,7 +109,7 @@ switch ($mode) {
 
         TorrentPier\Helpers\CronHelper::enableBoard();
 
-        $this->response['unlock_cron_html'] = '<span class="seed bold">' . $lang['ADMIN_UNLOCKED'] . '</span>';
+        $this->response['unlock_cron_html'] = '<span class="seed bold">' . trans('messages.ADMIN_UNLOCKED') . '</span>';
 
         break;
 }

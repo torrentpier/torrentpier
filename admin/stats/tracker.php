@@ -14,7 +14,7 @@ require BB_ROOT . 'common.php';
 $user->session_start();
 
 if (!IS_ADMIN) {
-    bb_die($lang['NOT_AUTHORISED']);
+    bb_die(trans('messages.NOT_AUTHORISED'));
 }
 
 $peers_in_last_minutes = [30, 15, 5, 1];

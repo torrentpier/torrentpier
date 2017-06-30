@@ -89,51 +89,51 @@ $ord_sp_down = 13;
 // Order options
 $order_opt = array(
     $ord_posted => array(
-        'lang' => $lang['IS_REGISTERED'],
+        'lang' => trans('messages.IS_REGISTERED'),
         'sql' => 'tor.reg_time',
     ),
     $ord_name => array(
-        'lang' => $lang['BT_TOPIC_TITLE'],
+        'lang' => trans('messages.BT_TOPIC_TITLE'),
         'sql' => 't.topic_title',
     ),
     $ord_compl => array(
-        'lang' => $lang['COMPLETED'],
+        'lang' => trans('messages.COMPLETED'),
         'sql' => 'tor.complete_count',
     ),
     $ord_seeders => array(
-        'lang' => $lang['SEEDS'],
+        'lang' => trans('messages.SEEDS'),
         'sql' => 'sn.seeders',
     ),
     $ord_leechers => array(
-        'lang' => $lang['LEECHS'],
+        'lang' => trans('messages.LEECHS'),
         'sql' => 'sn.leechers',
     ),
     $ord_sp_up => array(
-        'lang' => $lang['SPEED_UP'],
+        'lang' => trans('messages.SPEED_UP'),
         'sql' => 'sn.speed_up',
     ),
     $ord_sp_down => array(
-        'lang' => $lang['SPEED_DOWN'],
+        'lang' => trans('messages.SPEED_DOWN'),
         'sql' => 'sn.speed_down',
     ),
     $ord_repl => array(
-        'lang' => $lang['BT_REPLIES'],
+        'lang' => trans('messages.BT_REPLIES'),
         'sql' => 't.topic_replies',
     ),
     $ord_views => array(
-        'lang' => $lang['BT_VIEWS'],
+        'lang' => trans('messages.BT_VIEWS'),
         'sql' => 't.topic_views',
     ),
     $ord_size => array(
-        'lang' => $lang['SIZE'],
+        'lang' => trans('messages.SIZE'),
         'sql' => 'tor.size',
     ),
     $ord_last_p => array(
-        'lang' => $lang['BT_LAST_POST'],
+        'lang' => trans('messages.BT_LAST_POST'),
         'sql' => 't.topic_last_post_id',
     ),
     $ord_last_s => array(
-        'lang' => $lang['BT_SEEDER_LAST_SEEN'],
+        'lang' => trans('messages.BT_SEEDER_LAST_SEEN'),
         'sql' => 'tor.seeder_last_seen',
     ),
 );
@@ -145,11 +145,11 @@ foreach ($order_opt as $val => $opt) {
 // Sort direction
 $sort_opt = array(
     $sort_asc => array(
-        'lang' => $lang['ASC'],
+        'lang' => trans('messages.ASC'),
         'sql' => 'ASC',
     ),
     $sort_desc => array(
-        'lang' => $lang['DESC'],
+        'lang' => trans('messages.DESC'),
         'sql' => 'DESC',
     ),
 );
@@ -157,27 +157,27 @@ $sort_opt = array(
 // Previous days
 $time_opt = array(
     $search_all => array(
-        'lang' => $lang['BT_ALL_DAYS_FOR'],
+        'lang' => trans('messages.BT_ALL_DAYS_FOR'),
         'sql' => 0,
     ),
     1 => array(
-        'lang' => $lang['BT_1_DAY_FOR'],
+        'lang' => trans('messages.BT_1_DAY_FOR'),
         'sql' => TIMENOW - 86400,
     ),
     3 => array(
-        'lang' => $lang['BT_3_DAY_FOR'],
+        'lang' => trans('messages.BT_3_DAY_FOR'),
         'sql' => TIMENOW - 86400 * 3,
     ),
     7 => array(
-        'lang' => $lang['BT_7_DAYS_FOR'],
+        'lang' => trans('messages.BT_7_DAYS_FOR'),
         'sql' => TIMENOW - 86400 * 7,
     ),
     14 => array(
-        'lang' => $lang['BT_2_WEEKS_FOR'],
+        'lang' => trans('messages.BT_2_WEEKS_FOR'),
         'sql' => TIMENOW - 86400 * 14,
     ),
     30 => array(
-        'lang' => $lang['BT_1_MONTH_FOR'],
+        'lang' => trans('messages.BT_1_MONTH_FOR'),
         'sql' => TIMENOW - 86400 * 30,
     ),
 );
@@ -189,31 +189,31 @@ foreach ($time_opt as $val => $opt) {
 // Seeder not seen
 $s_not_seen_opt = array(
     $search_all => array(
-        'lang' => $lang['BT_DISREGARD'],
+        'lang' => trans('messages.BT_DISREGARD'),
         'sql' => 0,
     ),
     1 => array(
-        'lang' => $lang['BT_1_DAY'],
+        'lang' => trans('messages.BT_1_DAY'),
         'sql' => TIMENOW - 86400,
     ),
     3 => array(
-        'lang' => $lang['BT_3_DAYS'],
+        'lang' => trans('messages.BT_3_DAYS'),
         'sql' => TIMENOW - 86400 * 3,
     ),
     7 => array(
-        'lang' => $lang['BT_7_DAYS'],
+        'lang' => trans('messages.BT_7_DAYS'),
         'sql' => TIMENOW - 86400 * 7,
     ),
     14 => array(
-        'lang' => $lang['BT_2_WEEKS'],
+        'lang' => trans('messages.BT_2_WEEKS'),
         'sql' => TIMENOW - 86400 * 14,
     ),
     30 => array(
-        'lang' => $lang['BT_1_MONTH'],
+        'lang' => trans('messages.BT_1_MONTH'),
         'sql' => TIMENOW - 86400 * 30,
     ),
     $never => array(
-        'lang' => $lang['BT_NEVER'],
+        'lang' => trans('messages.BT_NEVER'),
         'sql' => 0,
     ),
 );
@@ -225,7 +225,7 @@ foreach ($s_not_seen_opt as $val => $opt) {
 if ($release_groups = get_group_data('all')) {
     $s_rg_opt = array(
         $search_all => array(
-            'lang' => $lang['CHOOSE_RELEASE_GROUP'],
+            'lang' => trans('messages.CHOOSE_RELEASE_GROUP'),
             'sql' => 0,
         ));
     foreach ($release_groups as $rg) {
@@ -241,7 +241,7 @@ if ($release_groups = get_group_data('all')) {
     }
 } else {
     $s_rg_opt = '';
-    $s_release_group_select = array($lang['CHOOSE_RELEASE_GROUP'] => 0);
+    $s_release_group_select = [trans('messages.CHOOSE_RELEASE_GROUP') => 0];
 }
 
 $GPC = array(
@@ -312,7 +312,7 @@ if ($search_id) {
 	");
 
     if (empty($row['search_settings'])) {
-        bb_die($lang['SESSION_EXPIRED']);
+        bb_die(trans('messages.SESSION_EXPIRED'));
     }
 
     $previous_settings = unserialize($row['search_settings']);
@@ -396,7 +396,7 @@ if (!$set_default) {
                     $poster_id_val = $poster_id;
                     $poster_name_val = stripslashes(html_entity_decode($req_poster_name));
                 } else {
-                    $poster_name_val = $lang['BT_USER_NOT_FOUND'];
+                    $poster_name_val = trans('messages.BT_USER_NOT_FOUND');
                     $tr_error = $poster_error = true;
                 }
             }
@@ -408,7 +408,7 @@ if (!$set_default) {
         if ($req_poster_id) {
             if ($req_poster_id == GUEST_UID) {
                 $poster_id_val = GUEST_UID;
-                $poster_name_val = $lang['GUEST'];
+                $poster_name_val = trans('messages.GUEST');
             } elseif ($poster_name_val = get_username($req_poster_id)) {
                 $poster_name_val = stripslashes(html_entity_decode($poster_name_val));
                 $poster_id_val = $req_poster_id;
@@ -617,7 +617,7 @@ if ($allowed_forums) {
     if (!$tor_list_sql || $start > $tor_count) {
         $template->assign_vars(array(
             'TOR_NOT_FOUND' => true,
-            'NO_MATCH_MSG' => $lang['NO_MATCH'],
+            'NO_MATCH_MSG' => trans('messages.NO_MATCH'),
         ));
     } else {
         // Save result in DB
@@ -635,7 +635,7 @@ if ($allowed_forums) {
         $tor_to_show = ($tor_count > $per_page) ? array_slice($tor_list_ary, $start, $per_page) : $tor_list_ary;
 
         if (!$tor_to_show = implode(',', $tor_to_show)) {
-            bb_die($lang['NO_SEARCH_MATCH']);
+            bb_die(trans('messages.NO_SEARCH_MATCH'));
         }
 
         // SELECT
@@ -737,14 +737,14 @@ if ($allowed_forums) {
 
                 'TOR_FROZEN' => (!IS_AM) ? null !== config('tp.tor_frozen.' . $tor['tor_status']) : '',
                 'TOR_STATUS_ICON' => config('tp.tor_icons.' . $tor['tor_status']),
-                'TOR_STATUS_TEXT' => $lang['TOR_STATUS_NAME'][$tor['tor_status']],
+                'TOR_STATUS_TEXT' => trans('messages.TOR_STATUS_NAME.' . $tor['tor_status']),
 
                 'TOR_SIZE_RAW' => $size,
                 'TOR_SIZE' => humn_size($size),
                 'UL_SPEED' => $ul_sp,
                 'DL_SPEED' => $dl_sp,
                 'SEEDS' => $seeds ?: 0,
-                'SEEDS_TITLE' => ($seeds) ? $lang['SEEDERS'] : ($lang['SEED_NOT_SEEN'] . ":\n " . (($s_last) ? bb_date($s_last, $date_format) : $lang['NEVER'])),
+                'SEEDS_TITLE' => ($seeds) ? trans('messages.SEEDERS') : (trans('messages.SEED_NOT_SEEN') . ":\n " . (($s_last) ? bb_date($s_last, $date_format) : trans('messages.NEVER'))),
                 'LEECHS' => $leechs ?: 0,
                 'COMPLETED' => $compl ?: 0,
                 'REPLIES' => $tor['topic_replies'],
@@ -758,14 +758,14 @@ if ($allowed_forums) {
 } else {
     $template->assign_vars(array(
         'TOR_NOT_FOUND' => true,
-        'NO_MATCH_MSG' => $lang['BT_NO_SEARCHABLE_FORUMS'],
+        'NO_MATCH_MSG' => trans('messages.BT_NO_SEARCHABLE_FORUMS'),
     ));
 }
 
 // Pagination
 if ($tor_count) {
     $base_url = "$tracker_url?search_id=$search_id";
-    $search_matches = ($tor_count == 1) ? sprintf($lang['FOUND_SEARCH_MATCH'], $tor_count) : sprintf($lang['FOUND_SEARCH_MATCHES'], $tor_count);
+    $search_matches = ($tor_count == 1) ? sprintf(trans('messages.FOUND_SEARCH_MATCH'), $tor_count) : sprintf(trans('messages.FOUND_SEARCH_MATCHES'), $tor_count);
     $search_max = "(max: $tor_search_limit)";
 
     generate_pagination($base_url, $tor_count, $per_page, $start);
@@ -777,7 +777,7 @@ if ($tor_count) {
 }
 
 if (empty($cat_forum)) {
-    bb_die($lang['BT_NO_SEARCHABLE_FORUMS']);
+    bb_die(trans('messages.BT_NO_SEARCHABLE_FORUMS'));
 }
 
 // Forum select
@@ -800,7 +800,7 @@ foreach ($cat_forum['c'] as $cat_id => $forums_ary) {
 
     $opt .= "</optgroup>\n";
 }
-$search_all_opt = '<option value="' . $search_all . '" value="fs-' . $search_all . '"' . (($forum_val == $search_all) ? HTML_SELECTED : '') . '>&nbsp;' . htmlCHR($lang['ALL_AVAILABLE']) . "</option>\n";
+$search_all_opt = '<option value="' . $search_all . '" value="fs-' . $search_all . '"' . (($forum_val == $search_all) ? HTML_SELECTED : '') . '>&nbsp;' . htmlCHR(trans('messages.ALL_AVAILABLE')) . "</option>\n";
 $cat_forum_select = "\n" . '<select id="fs-main" style="width: 100%;" name="' . $forum_key . '[]" multiple size="' . $forum_select_size . "\">\n" . $search_all_opt . $opt . "</select>\n";
 
 // Sort dir
@@ -813,25 +813,25 @@ $template->assign_vars(array(
 ));
 
 // Displaying options
-$tor_type_lang = $lang['GOLD'] . ' / ' . $lang['SILVER'];
+$tor_type_lang = trans('messages.GOLD') . ' / ' . trans('messages.SILVER');
 
 $template->assign_vars(array(
-    'SHOW_CAT_CHBOX' => build_checkbox($show_cat_key, $lang['BT_SHOW_CAT'], $show_cat_val),
-    'SHOW_FORUM_CHBOX' => build_checkbox($show_forum_key, $lang['BT_SHOW_FORUM'], $show_forum_val),
-    'SHOW_AUTHOR_CHBOX' => build_checkbox($show_author_key, $lang['BT_SHOW_AUTHOR'], $show_author_val),
-    'SHOW_SPEED_CHBOX' => build_checkbox($show_speed_key, $lang['BT_SHOW_SPEED'], $show_speed_val),
-    'ALL_WORDS_CHBOX' => build_checkbox($all_words_key, $lang['SEARCH_ALL_WORDS'], $all_words_val),
+    'SHOW_CAT_CHBOX' => build_checkbox($show_cat_key, trans('messages.BT_SHOW_CAT'), $show_cat_val),
+    'SHOW_FORUM_CHBOX' => build_checkbox($show_forum_key, trans('messages.BT_SHOW_FORUM'), $show_forum_val),
+    'SHOW_AUTHOR_CHBOX' => build_checkbox($show_author_key, trans('messages.BT_SHOW_AUTHOR'), $show_author_val),
+    'SHOW_SPEED_CHBOX' => build_checkbox($show_speed_key, trans('messages.BT_SHOW_SPEED'), $show_speed_val),
+    'ALL_WORDS_CHBOX' => build_checkbox($all_words_key, trans('messages.SEARCH_ALL_WORDS'), $all_words_val),
     'TOR_TYPE_CHBOX' => build_checkbox($tor_type_key, $tor_type_lang, $tor_type_val),
 
-    'ONLY_MY_CHBOX' => build_checkbox($my_key, $lang['BT_ONLY_MY'], $only_my, IS_GUEST),
-    'ONLY_ACTIVE_CHBOX' => build_checkbox($active_key, $lang['BT_ONLY_ACTIVE'], $active_val),
-    'SEED_EXIST_CHBOX' => build_checkbox($seed_exist_key, $lang['BT_SEED_EXIST'], $seed_exist),
-    'ONLY_NEW_CHBOX' => build_checkbox($new_key, $lang['BT_ONLY_NEW'], $only_new, IS_GUEST),
+    'ONLY_MY_CHBOX' => build_checkbox($my_key, trans('messages.BT_ONLY_MY'), $only_my, IS_GUEST),
+    'ONLY_ACTIVE_CHBOX' => build_checkbox($active_key, trans('messages.BT_ONLY_ACTIVE'), $active_val),
+    'SEED_EXIST_CHBOX' => build_checkbox($seed_exist_key, trans('messages.BT_SEED_EXIST'), $seed_exist),
+    'ONLY_NEW_CHBOX' => build_checkbox($new_key, trans('messages.BT_ONLY_NEW'), $only_new, IS_GUEST),
 
-    'DL_CANCEL_CHBOX' => build_checkbox($dl_cancel_key, $lang['SEARCH_DL_CANCEL'], $dl_cancel_val, IS_GUEST, 'dlCancel'),
-    'DL_COMPL_CHBOX' => build_checkbox($dl_compl_key, $lang['SEARCH_DL_COMPLETE'], $dl_compl_val, IS_GUEST, 'dlComplete'),
-    'DL_DOWN_CHBOX' => build_checkbox($dl_down_key, $lang['SEARCH_DL_DOWN'], $dl_down_val, IS_GUEST, 'dlDown'),
-    'DL_WILL_CHBOX' => build_checkbox($dl_will_key, $lang['SEARCH_DL_WILL'], $dl_will_val, IS_GUEST, 'dlWill'),
+    'DL_CANCEL_CHBOX' => build_checkbox($dl_cancel_key, trans('messages.SEARCH_DL_CANCEL'), $dl_cancel_val, IS_GUEST, 'dlCancel'),
+    'DL_COMPL_CHBOX' => build_checkbox($dl_compl_key, trans('messages.SEARCH_DL_COMPLETE'), $dl_compl_val, IS_GUEST, 'dlComplete'),
+    'DL_DOWN_CHBOX' => build_checkbox($dl_down_key, trans('messages.SEARCH_DL_DOWN'), $dl_down_val, IS_GUEST, 'dlDown'),
+    'DL_WILL_CHBOX' => build_checkbox($dl_will_key, trans('messages.SEARCH_DL_WILL'), $dl_will_val, IS_GUEST, 'dlWill'),
 
     'POSTER_NAME_NAME' => $poster_name_key,
     'POSTER_NAME_VAL' => htmlCHR($poster_name_val),
@@ -872,7 +872,7 @@ foreach ($save_through_pages as $name) {
 $tor_colspan = $tor_colspan - $hide_cat - $hide_forum - $hide_author - $hide_speed;
 
 $template->assign_vars(array(
-    'PAGE_TITLE' => $lang['TRACKER'],
+    'PAGE_TITLE' => trans('messages.TRACKER'),
     'S_HIDDEN_FIELDS' => build_hidden_fields($hidden_fields),
     'CAT_FORUM_SELECT' => $cat_forum_select,
     'ORDER_SELECT' => build_select($order_key, $order_select, $order_val),
@@ -890,7 +890,7 @@ $template->assign_vars(array(
     'SHOW_AUTHOR' => $show_author_val,
     'SHOW_SPEED' => $show_speed_val,
     'MAX_FS' => $max_forums_selected,
-    'L_MAX_FS' => sprintf($lang['SEL_CHAPTERS_HELP'], $max_forums_selected),
+    'L_MAX_FS' => sprintf(trans('messages.SEL_CHAPTERS_HELP'), $max_forums_selected),
     'TRACKER_URL' => make_url('tracker.php?'),
 
     'TR_CAT_URL' => "$tracker_url?$cat_key=",

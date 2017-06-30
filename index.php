@@ -44,7 +44,7 @@ $req_page = 'index_page';
 $req_page .= ($viewcat) ? "_c{$viewcat}" : '';
 
 define('REQUESTED_PAGE', $req_page);
-caching_output(IS_GUEST, 'send', REQUESTED_PAGE . '_guest_' . config('tp.default_lang'));
+caching_output(IS_GUEST, 'send', REQUESTED_PAGE . '_guest_' . config('app.locale'));
 
 $hide_cat_opt = isset($user->opt_js['h_cat']) ? (string)$user->opt_js['h_cat'] : 0;
 $hide_cat_user = array_flip(explode('-', $hide_cat_opt));
@@ -240,7 +240,7 @@ foreach ($cat_forums as $cid => $c) {
             'TOPICS' => commify($f['forum_topics']),
             'LAST_SF_ID' => $f['last_sf_id'] ?? null,
             'MODERATORS' => isset($moderators[$fid]) ? implode(', ', $moderators[$fid]) : '',
-            'FORUM_FOLDER_ALT' => ($new) ? $lang['NEW'] : $lang['OLD'],
+            'FORUM_FOLDER_ALT' => $new ? trans('messages.NEW') : trans('messages.OLD'),
         ));
 
         if ($f['last_post_id']) {
@@ -258,34 +258,34 @@ foreach ($cat_forums as $cid => $c) {
 $template->assign_vars(array(
     'SHOW_FORUMS' => $forums_count,
     'SHOW_MAP' => (isset($_GET['map']) && !IS_GUEST),
-    'PAGE_TITLE' => ($viewcat) ? $cat_title_html[$viewcat] : $lang['HOME'],
-    'NO_FORUMS_MSG' => ($only_new) ? $lang['NO_NEW_POSTS'] : $lang['NO_FORUMS'],
+    'PAGE_TITLE' => ($viewcat) ? $cat_title_html[$viewcat] : trans('messages.HOME'),
+    'NO_FORUMS_MSG' => ($only_new) ? trans('messages.NO_NEW_POSTS') : trans('messages.NO_FORUMS'),
 
-    'TOTAL_TOPICS' => sprintf($lang['POSTED_TOPICS_TOTAL'], $stats['topiccount']),
-    'TOTAL_POSTS' => sprintf($lang['POSTED_ARTICLES_TOTAL'], $stats['postcount']),
-    'TOTAL_USERS' => sprintf($lang['REGISTERED_USERS_TOTAL'], $stats['usercount']),
+    'TOTAL_TOPICS' => sprintf(trans('messages.POSTED_TOPICS_TOTAL'), $stats['topiccount']),
+    'TOTAL_POSTS' => sprintf(trans('messages.POSTED_ARTICLES_TOTAL'), $stats['postcount']),
+    'TOTAL_USERS' => sprintf(trans('messages.REGISTERED_USERS_TOTAL'), $stats['usercount']),
     'TOTAL_GENDER' => config('tp.gender') ? sprintf(
-        $lang['USERS_TOTAL_GENDER'],
+        trans('messages.USERS_TOTAL_GENDER'),
         $stats['male'],
         $stats['female'],
         $stats['unselect']
     ) : '',
-    'NEWEST_USER' => sprintf($lang['NEWEST_USER'], profile_url($stats['newestuser'])),
+    'NEWEST_USER' => sprintf(trans('messages.NEWEST_USER'), profile_url($stats['newestuser'])),
 
     // Tracker stats
     'TORRENTS_STAT' => config('tp.tor_stats') ? sprintf(
-        $lang['TORRENTS_STAT'],
+        trans('messages.TORRENTS_STAT'),
         $stats['torrentcount'],
         humn_size($stats['size'])
     ) : '',
     'PEERS_STAT' => config('tp.tor_stats') ? sprintf(
-        $lang['PEERS_STAT'],
+        trans('messages.PEERS_STAT'),
         $stats['peers'],
         $stats['seeders'],
         $stats['leechers']
     ) : '',
     'SPEED_STAT' => config('tp.tor_stats') ? sprintf(
-        $lang['SPEED_STAT'],
+        trans('messages.SPEED_STAT'),
         humn_size($stats['speed']) . '/s'
     ) : '',
     'SHOW_MOD_INDEX' => config('tp.show_mod_index'),
@@ -365,10 +365,10 @@ if (config('tp.birthday_check_day') && config('tp.birthday_enabled')) {
             }
             $week_list[] = profile_url($week) . ' <span class="small">(' . birthday_age($week['user_birthday'] - 1) . ')</span>';
         }
-        $week_all = ($week_all) ? '&nbsp;<a class="txtb" href="#" onclick="ajax.exec({action: \'index_data\', mode: \'birthday_week\'}); return false;" title="' . $lang['ALL'] . '">...</a>' : '';
-        $week_list = sprintf($lang['BIRTHDAY_WEEK'], config('tp.birthday_check_day'), implode(', ', $week_list)) . $week_all;
+        $week_all = ($week_all) ? '&nbsp;<a class="txtb" href="#" onclick="ajax.exec({action: \'index_data\', mode: \'birthday_week\'}); return false;" title="' . trans('messages.ALL') . '">...</a>' : '';
+        $week_list = sprintf(trans('messages.BIRTHDAY_WEEK'), config('tp.birthday_check_day'), implode(', ', $week_list)) . $week_all;
     } else {
-        $week_list = sprintf($lang['NOBIRTHDAY_WEEK'], config('tp.birthday_check_day'));
+        $week_list = sprintf(trans('messages.NOBIRTHDAY_WEEK'), config('tp.birthday_check_day'));
     }
 
     if (!empty($stats['birthday_today_list'])) {
@@ -380,10 +380,10 @@ if (config('tp.birthday_check_day') && config('tp.birthday_enabled')) {
             }
             $today_list[] = profile_url($today) . ' <span class="small">(' . birthday_age($today['user_birthday']) . ')</span>';
         }
-        $today_all = ($today_all) ? '&nbsp;<a class="txtb" href="#" onclick="ajax.exec({action: \'index_data\', mode: \'birthday_today\'}); return false;" title="' . $lang['ALL'] . '">...</a>' : '';
-        $today_list = $lang['BIRTHDAY_TODAY'] . implode(', ', $today_list) . $today_all;
+        $today_all = ($today_all) ? '&nbsp;<a class="txtb" href="#" onclick="ajax.exec({action: \'index_data\', mode: \'birthday_today\'}); return false;" title="' . trans('messages.ALL') . '">...</a>' : '';
+        $today_list = trans('messages.BIRTHDAY_TODAY') . implode(', ', $today_list) . $today_all;
     } else {
-        $today_list = $lang['NOBIRTHDAY_TODAY'];
+        $today_list = trans('messages.NOBIRTHDAY_TODAY');
     }
 
     $template->assign_vars(array(
@@ -406,7 +406,7 @@ if (IS_AM) {
 define('SHOW_ONLINE', $show_online_users);
 
 if (isset($_GET['map'])) {
-    $template->assign_vars(array('PAGE_TITLE' => $lang['FORUM_MAP']));
+    $template->assign_vars(array('PAGE_TITLE' => trans('messages.FORUM_MAP')));
 }
 
 print_page('index.tpl');

@@ -11,7 +11,7 @@ if (!defined('IN_AJAX')) {
     die(basename(__FILE__));
 }
 
-global $lang, $userdata;
+global $userdata;
 
 if (!isset($this->request['type'])) {
     $this->ajax_die('empty type');
@@ -31,7 +31,7 @@ if (isset($this->request['post_id'])) {
 
     $is_auth = auth_user(AUTH_ALL, $post['forum_id'], $userdata, $post);
     if ($post['topic_status'] == TOPIC_LOCKED && !$is_auth['auth_mod']) {
-        $this->ajax_die($lang['TOPIC_LOCKED']);
+        $this->ajax_die(trans('messages.TOPIC_LOCKED'));
     }
 } elseif (isset($this->request['topic_id'])) {
     $topic_id = (int)$this->request['topic_id'];
@@ -58,7 +58,7 @@ switch ($this->request['type']) {
     case 'delete':
         if ($post['post_id'] != $post['topic_first_post_id'] && $is_auth['auth_delete'] && ($is_auth['auth_mod'] || ($userdata['user_id'] == $post['poster_id'] && $post['topic_last_post_id'] == $post['post_id'] && $post['post_time'] + 3600 * 3 > TIMENOW))) {
             if (empty($this->request['confirmed'])) {
-                $this->prompt_for_confirm($lang['CONFIRM_DELETE']);
+                $this->prompt_for_confirm(trans('messages.CONFIRM_DELETE'));
             }
             post_delete($post_id);
 
@@ -68,15 +68,15 @@ switch ($this->request['type']) {
             $this->response['hide'] = true;
             $this->response['post_id'] = $post_id;
         } else {
-            $this->ajax_die(sprintf($lang['SORRY_AUTH_DELETE'], strip_tags($is_auth['auth_delete_type'])));
+            $this->ajax_die(sprintf(trans('messages.SORRY_AUTH_DELETE'), strip_tags($is_auth['auth_delete_type'])));
         }
         break;
 
     case 'reply':
         if (bf($userdata['user_opt'], 'user_opt', 'dis_post')) {
-            $this->ajax_die(strip_tags($lang['RULES_REPLY_CANNOT']));
+            $this->ajax_die(strip_tags(trans('messages.RULES_REPLY_CANNOT')));
         } elseif (!$is_auth['auth_reply']) {
-            $this->ajax_die(sprintf($lang['SORRY_AUTH_REPLY'], strip_tags($is_auth['auth_reply_type'])));
+            $this->ajax_die(sprintf(trans('messages.SORRY_AUTH_REPLY'), strip_tags($is_auth['auth_reply_type'])));
         }
 
         $quote_username = ($post['post_username'] != '') ? $post['post_username'] : get_username($post['poster_id']);
@@ -105,7 +105,7 @@ switch ($this->request['type']) {
     case 'view_message':
         $message = (string)$this->request['message'];
         if (!trim($message)) {
-            $this->ajax_die($lang['EMPTY_MESSAGE']);
+            $this->ajax_die(trans('messages.EMPTY_MESSAGE'));
         }
         $message = htmlCHR($message, false, ENT_NOQUOTES);
 
@@ -116,10 +116,10 @@ switch ($this->request['type']) {
     case 'edit':
     case 'editor':
         if (bf($userdata['user_opt'], 'user_opt', 'dis_post_edit')) {
-            $this->ajax_die($lang['POST_EDIT_CANNOT']);
+            $this->ajax_die(trans('messages.POST_EDIT_CANNOT'));
         }
         if ($post['poster_id'] != $userdata['user_id'] && !$is_auth['auth_mod']) {
-            $this->ajax_die($lang['EDIT_OWN_POSTS']);
+            $this->ajax_die(trans('messages.EDIT_OWN_POSTS'));
         }
         if ((mb_strlen($post['post_text'], 'UTF-8') > 1000) || $post['post_attachment'] || ($post['topic_first_post_id'] == $post_id)) {
             $this->response['redirect'] = make_url(POSTING_URL . '?mode=editpost&p=' . $post_id);
@@ -132,7 +132,7 @@ switch ($this->request['type']) {
                     if (config('tp.max_smilies')) {
                         $count_smilies = substr_count(bbcode2html($text), '<img class="smile" src="' . config('tp.smilies_path'));
                         if ($count_smilies > config('tp.max_smilies')) {
-                            $this->ajax_die(sprintf($lang['MAX_SMILIES_PER_POST'], config('tp.max_smilies')));
+                            $this->ajax_die(sprintf(trans('messages.MAX_SMILIES_PER_POST'), config('tp.max_smilies')));
                         }
                     }
                     OLD_DB()->query("UPDATE " . BB_POSTS_TEXT . " SET post_text = '" . OLD_DB()->escape($text) . "' WHERE post_id = $post_id");
@@ -148,7 +148,7 @@ switch ($this->request['type']) {
                     ));
                 }
             } else {
-                $this->ajax_die($lang['EMPTY_MESSAGE']);
+                $this->ajax_die(trans('messages.EMPTY_MESSAGE'));
             }
 
             // Update atom feed
@@ -158,9 +158,9 @@ switch ($this->request['type']) {
         } else {
             $is_auth = auth_user(AUTH_ALL, $post['forum_id'], $userdata, $post);
             if ($post['topic_status'] == TOPIC_LOCKED && !$is_auth['auth_mod']) {
-                $this->ajax_die($lang['TOPIC_LOCKED']);
+                $this->ajax_die(trans('messages.TOPIC_LOCKED'));
             } elseif (!$is_auth['auth_edit']) {
-                $this->ajax_die(sprintf($lang['SORRY_AUTH_EDIT'], strip_tags($is_auth['auth_edit_type'])));
+                $this->ajax_die(sprintf(trans('messages.SORRY_AUTH_EDIT'), strip_tags($is_auth['auth_edit_type'])));
             }
 
             $hidden_form = '<input type="hidden" name="mode" value="editpost" />';
@@ -171,23 +171,23 @@ switch ($this->request['type']) {
 				<form action="' . POSTING_URL . '" method="post" name="post">
 					' . $hidden_form . '
 					<div class="buttons mrg_4">
-						<input type="button" value="B" name="codeB" title="' . $lang['BOLD'] . '" style="font-weight: bold; width: 25px;" />
-						<input type="button" value="i" name="codeI" title="' . $lang['ITALIC'] . '" style="width: 25px; font-style: italic;" />
-						<input type="button" value="u" name="codeU" title="' . $lang['UNDERLINE'] . '" style="width: 25px; text-decoration: underline;" />
-						<input type="button" value="s" name="codeS" title="' . $lang['STRIKEOUT'] . '" style="width: 25px; text-decoration: line-through;" />&nbsp;&nbsp;
-						<input type="button" value="' . $lang['QUOTE'] . '" name="codeQuote" title="' . $lang['QUOTE_TITLE'] . '" style="width: 57px;" />
-						<input type="button" value="Img" name="codeImg" title="' . $lang['IMG_TITLE'] . '" style="width: 40px;" />
-						<input type="button" value="' . $lang['URL'] . '" name="codeUrl" title="' . $lang['URL_TITLE'] . '" style="width: 63px; text-decoration: underline;" />&nbsp;
-						<input type="button" value="' . $lang['CODE'] . '" name="codeCode" title="' . $lang['CODE_TITLE'] . '" style="width: 43px;" />
-						<input type="button" value="' . $lang['LIST'] . '" name="codeList" title="' . $lang['LIST_TITLE'] . '" style="width: 60px;" />
-						<input type="button" value="1." name="codeOpt" title="' . $lang['LIST_ITEM'] . '" style="width: 30px;" />&nbsp;
-						<input type="button" value="' . $lang['QUOTE_SEL'] . '" name="quoteselected" title="' . $lang['QUOTE_SELECTED'] . '" onclick="bbcode.onclickQuoteSel();" />&nbsp;
+						<input type="button" value="B" name="codeB" title="' . trans('messages.BOLD') . '" style="font-weight: bold; width: 25px;" />
+						<input type="button" value="i" name="codeI" title="' . trans('messages.ITALIC') . '" style="width: 25px; font-style: italic;" />
+						<input type="button" value="u" name="codeU" title="' . trans('messages.UNDERLINE') . '" style="width: 25px; text-decoration: underline;" />
+						<input type="button" value="s" name="codeS" title="' . trans('messages.STRIKEOUT') . '" style="width: 25px; text-decoration: line-through;" />&nbsp;&nbsp;
+						<input type="button" value="' . trans('messages.QUOTE') . '" name="codeQuote" title="' . trans('messages.QUOTE_TITLE') . '" style="width: 57px;" />
+						<input type="button" value="Img" name="codeImg" title="' . trans('messages.IMG_TITLE') . '" style="width: 40px;" />
+						<input type="button" value="' . trans('messages.URL') . '" name="codeUrl" title="' . trans('messages.URL_TITLE') . '" style="width: 63px; text-decoration: underline;" />&nbsp;
+						<input type="button" value="' . trans('messages.CODE') . '" name="codeCode" title="' . trans('messages.CODE_TITLE') . '" style="width: 43px;" />
+						<input type="button" value="' . trans('messages.LIST') . '" name="codeList" title="' . trans('messages.LIST_TITLE') . '" style="width: 60px;" />
+						<input type="button" value="1." name="codeOpt" title="' . trans('messages.LIST_ITEM') . '" style="width: 30px;" />&nbsp;
+						<input type="button" value="' . trans('messages.QUOTE_SEL') . '" name="quoteselected" title="' . trans('messages.QUOTE_SELECTED') . '" onclick="bbcode.onclickQuoteSel();" />&nbsp;
 					</div>
 					<textarea id="message-' . $post_id . '" class="editor mrg_4" name="message" rows="18" cols="92">' . $post['post_text'] . '</textarea>
 					<div class="mrg_4 tCenter">
-						<input title="Alt+Enter" name="preview" type="submit" value="' . $lang['PREVIEW'] . '">
-						<input type="button" onclick="edit_post(' . $post_id . ');" value="' . $lang['CANCEL'] . '">
-						<input type="button" onclick="edit_post(' . $post_id . ', \'editor\', $(\'#message-' . $post_id . '\').val()); return false;" class="bold" value="' . $lang['SUBMIT'] . '">
+						<input title="Alt+Enter" name="preview" type="submit" value="' . trans('messages.PREVIEW') . '">
+						<input type="button" onclick="edit_post(' . $post_id . ');" value="' . trans('messages.CANCEL') . '">
+						<input type="button" onclick="edit_post(' . $post_id . ', \'editor\', $(\'#message-' . $post_id . '\').val()); return false;" class="bold" value="' . trans('messages.SUBMIT') . '">
 					</div><hr>
 					<script type="text/javascript">
 					var bbcode = new BBCode("message-' . $post_id . '");
@@ -217,12 +217,12 @@ switch ($this->request['type']) {
         }
 
         if (bf($userdata['user_opt'], 'user_opt', 'dis_post')) {
-            $this->ajax_die(strip_tags($lang['RULES_REPLY_CANNOT']));
+            $this->ajax_die(strip_tags(trans('messages.RULES_REPLY_CANNOT')));
         } elseif (!$is_auth['auth_reply']) {
-            $this->ajax_die(sprintf($lang['SORRY_AUTH_REPLY'], strip_tags($is_auth['auth_reply_type'])));
+            $this->ajax_die(sprintf(trans('messages.SORRY_AUTH_REPLY'), strip_tags($is_auth['auth_reply_type'])));
         }
         if ($post['topic_status'] == TOPIC_LOCKED && !$is_auth['auth_mod']) {
-            $this->ajax_die($lang['TOPIC_LOCKED']);
+            $this->ajax_die(trans('messages.TOPIC_LOCKED'));
         }
 
         $message = (string)$this->request['message'];
@@ -235,7 +235,7 @@ switch ($this->request['type']) {
         if ($row = OLD_DB()->fetch_row($sql) and $row['last_post_time']) {
             if ($userdata['user_level'] == USER) {
                 if (TIMENOW - $row['last_post_time'] < config('tp.flood_interval')) {
-                    $this->ajax_die($lang['FLOOD_ERROR']);
+                    $this->ajax_die(trans('messages.FLOOD_ERROR'));
                 }
             }
         }
@@ -255,7 +255,7 @@ switch ($this->request['type']) {
                 $last_msg = OLD_DB()->escape($row['post_text']);
 
                 if ($last_msg == $message) {
-                    $this->ajax_die($lang['DOUBLE_POST_ERROR']);
+                    $this->ajax_die(trans('messages.DOUBLE_POST_ERROR'));
                 }
             }
         }
@@ -263,7 +263,7 @@ switch ($this->request['type']) {
         if (config('tp.max_smilies')) {
             $count_smilies = substr_count(bbcode2html($message), '<img class="smile" src="' . config('tp.smilies_path'));
             if ($count_smilies > config('tp.max_smilies')) {
-                $this->ajax_die(sprintf($lang['MAX_SMILIES_PER_POST'], config('tp.max_smilies')));
+                $this->ajax_die(sprintf(trans('messages.MAX_SMILIES_PER_POST'), config('tp.max_smilies')));
             }
         }
 

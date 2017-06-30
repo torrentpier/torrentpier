@@ -113,8 +113,8 @@ if ($leeching) {
 $template->assign_vars(array(
     'SHOW_SEARCH_DL' => IS_AM || $profile_user_id,
     'USERNAME' => $profiledata['username'],
-    'L_RELEASINGS' => "{$lang['RELEASING']}: " . (($releasing_count) ? "<b>$releasing_count</b>" : '0'),
-    'L_SEEDINGS' => "{$lang['SEEDING']}: " . (($seeding_count) ? "<b>$seeding_count</b>" : '0'),
-    'L_LEECHINGS' => "{$lang['LEECHING']}: " . (($leeching_count) ? "<b>$leeching_count</b>" : '0'),
+    'L_RELEASINGS' => trans('messages.RELEASING') . ': ' . ($releasing_count ? "<b>$releasing_count</b>" : '0'),
+    'L_SEEDINGS' => trans('messages.SEEDING') . ': ' . ($seeding_count ? "<b>$seeding_count</b>" : '0'),
+    'L_LEECHINGS' => trans('messages.LEECHING') . ': ' . ($leeching_count ? "<b>$leeching_count</b>" : '0'),
     'USER_DLS' => $releasing_count || $seeding_count || $leeching_count,
 ));

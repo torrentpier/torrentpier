@@ -18,9 +18,9 @@ require INC_DIR . '/functions_selects.php';
 $mode = $_GET['mode'] ?? '';
 
 $return_links = array(
-    'index' => '<br /><br />' . sprintf($lang['CLICK_RETURN_ADMIN_INDEX'], '<a href="index.php?pane=right">', '</a>'),
-    'config' => '<br /><br />' . sprintf($lang['CLICK_RETURN_CONFIG'], '<a href="admin_board.php?mode=config">', '</a>'),
-    'config_mods' => '<br /><br />' . sprintf($lang['CLICK_RETURN_CONFIG_MODS'], '<a href="admin_board.php?mode=config_mods">', '</a>')
+    'index' => '<br /><br />' . sprintf(trans('messages.CLICK_RETURN_ADMIN_INDEX'), '<a href="index.php?pane=right">', '</a>'),
+    'config' => '<br /><br />' . sprintf(trans('messages.CLICK_RETURN_CONFIG'), '<a href="admin_board.php?mode=config">', '</a>'),
+    'config_mods' => '<br /><br />' . sprintf(trans('messages.CLICK_RETURN_CONFIG_MODS'), '<a href="admin_board.php?mode=config_mods">', '</a>')
 );
 
 /**
@@ -50,7 +50,7 @@ if (!$result = OLD_DB()->sql_query($sql)) {
     }
 
     if (isset($_POST['submit'])) {
-        bb_die($lang['CONFIG_UPDATED'] . $return_links[$mode] . $return_links['index']);
+        bb_die(trans('messages.CONFIG_UPDATED') . $return_links[$mode] . $return_links['index']);
     }
 }
 
@@ -134,7 +134,6 @@ switch ($mode) {
             'POSTS_PER_PAGE' => $new['posts_per_page'],
             'HOT_TOPIC' => $new['hot_threshold'],
             'DEFAULT_DATEFORMAT' => $new['default_dateformat'],
-            'LANG_SELECT' => language_select($new['default_lang'], 'default_lang'),
             'TIMEZONE_SELECT' => tz_select($new['board_timezone'], 'board_timezone'),
             'MAX_LOGIN_ATTEMPTS' => $new['max_login_attempts'],
             'LOGIN_RESET_TIME' => $new['login_reset_time'],

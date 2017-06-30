@@ -105,7 +105,7 @@ function display_post_attachments($post_id, $switch_attachment)
  */
 function init_display_post_attachments($switch_attachment)
 {
-    global $attach_config, $is_auth, $template, $lang, $postrow, $total_posts, $attachments, $forum_row, $t_data;
+    global $attach_config, $is_auth, $template, $postrow, $total_posts, $attachments, $forum_row, $t_data;
 
     if (empty($t_data) && !empty($forum_row)) {
         $switch_attachment = $forum_row['topic_attachment'];
@@ -165,7 +165,7 @@ function init_display_post_attachments($switch_attachment)
  */
 function display_attachments($post_id)
 {
-    global $template, $upload_dir, $userdata, $allowed_extensions, $display_categories, $download_modes, $lang, $attachments, $upload_icons, $attach_config;
+    global $template, $upload_dir, $userdata, $allowed_extensions, $display_categories, $download_modes, $attachments, $upload_icons, $attach_config;
 
     $num_attachments = @count($attachments['_' . $post_id]);
 
@@ -201,7 +201,7 @@ function display_attachments($post_id)
             $denied = true;
 
             $template->assign_block_vars('postrow.attach.denyrow', array(
-                    'L_DENIED' => sprintf($lang['EXTENSION_DISABLED_AFTER_POSTING'], $attachments['_' . $post_id][$i]['extension']))
+                    'L_DENIED' => sprintf(trans('messages.EXTENSION_DISABLED_AFTER_POSTING'), $attachments['_' . $post_id][$i]['extension']))
             );
         }
 
@@ -298,7 +298,7 @@ function display_attachments($post_id)
                     'FILESIZE' => $filesize,
                     'COMMENT' => $comment,
                     'TARGET_BLANK' => $target_blank,
-                    'DOWNLOAD_COUNT' => sprintf($lang['DOWNLOAD_NUMBER'], $attachments['_' . $post_id][$i]['download_count']),
+                    'DOWNLOAD_COUNT' => sprintf(trans('messages.DOWNLOAD_NUMBER'), $attachments['_' . $post_id][$i]['download_count']),
                 ));
             }
         }

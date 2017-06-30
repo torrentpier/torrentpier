@@ -19,7 +19,7 @@ require_once INC_DIR . '/functions_admin.php';
 //
 function return_msg_mcp($status_msg)
 {
-    global $topic_id, $req_topics, $forum_id, $lang, $mode;
+    global $topic_id, $req_topics, $forum_id, $mode;
 
     if (count($req_topics) == 1) {
         $topic_id = reset($req_topics);
@@ -29,14 +29,14 @@ function return_msg_mcp($status_msg)
     $message .= '<br /><br />';
 
     if ($topic_id && $mode != 'delete') {
-        $message .= sprintf($lang['CLICK_RETURN_TOPIC'], '<a href="' . TOPIC_URL . $topic_id . '">', '</a>');
+        $message .= sprintf(trans('messages.CLICK_RETURN_TOPIC'), '<a href="' . TOPIC_URL . $topic_id . '">', '</a>');
         $message .= '<br /><br />';
     } elseif (count($req_topics) != 1) {
-        $message .= sprintf($lang['CLICK_RETURN_MODCP'], '<a href="' . FORUM_URL . "$forum_id&amp;mod=1" . '">', '</a>');
+        $message .= sprintf(trans('messages.CLICK_RETURN_MODCP'), '<a href="' . FORUM_URL . "$forum_id&amp;mod=1" . '">', '</a>');
         $message .= '<br /><br />';
     }
 
-    $message .= sprintf($lang['CLICK_RETURN_FORUM'], '<a href="' . FORUM_URL . $forum_id . '">', '</a>');
+    $message .= sprintf(trans('messages.CLICK_RETURN_FORUM'), '<a href="' . FORUM_URL . $forum_id . '">', '</a>');
 
     return $message;
 }
@@ -163,7 +163,7 @@ if ($mode == 'ip') {
 
 // Exit if user not authorized
 if (!$is_auth['auth_mod']) {
-    bb_die($lang['NOT_MODERATOR']);
+    bb_die(trans('messages.NOT_MODERATOR'));
 }
 
 // Redirect to login page if not admin session
@@ -188,14 +188,14 @@ switch ($mode) {
     case 'post_unpin':
 
         if (empty($_POST['topic_id_list']) && empty($topic_id)) {
-            bb_die($lang['NONE_SELECTED']);
+            bb_die(trans('messages.NONE_SELECTED'));
         }
 
         $req_topics = $_POST['topic_id_list'] ?? $topic_id;
         validate_topics($forum_id, $req_topics, $topic_titles);
 
         if (!$req_topics || !($topic_csv = get_id_csv($req_topics))) {
-            bb_die($lang['NONE_SELECTED']);
+            bb_die(trans('messages.NONE_SELECTED'));
         }
 
         $hidden_fields = array(
@@ -218,7 +218,7 @@ switch ($mode) {
     case 'delete':
 
         if (!$is_auth['auth_delete']) {
-            bb_die(sprintf($lang['SORRY_AUTH_DELETE'], $is_auth['auth_delete_type']));
+            bb_die(sprintf(trans('messages.SORRY_AUTH_DELETE'), $is_auth['auth_delete_type']));
         }
 
         if ($confirmed) {
@@ -237,11 +237,11 @@ switch ($mode) {
                 $datastore->update('network_news');
             }
 
-            $msg = ($result) ? $lang['TOPICS_REMOVED'] : $lang['NO_TOPICS_REMOVED'];
+            $msg = ($result) ? trans('messages.TOPICS_REMOVED') : trans('messages.NO_TOPICS_REMOVED');
             bb_die(return_msg_mcp($msg));
         } else {
             print_confirmation(array(
-                'QUESTION' => $lang['CONFIRM_DELETE_TOPIC'],
+                'QUESTION' => trans('messages.CONFIRM_DELETE_TOPIC'),
                 'ITEMS_LIST' => implode("\n</li>\n<li>\n", $topic_titles),
                 'FORM_ACTION' => "modcp.php",
                 'HIDDEN_FIELDS' => build_hidden_fields($hidden_fields),
@@ -268,7 +268,7 @@ switch ($mode) {
                 $datastore->update('network_news');
             }
 
-            $msg = ($result) ? $lang['TOPICS_MOVED'] : $lang['NO_TOPICS_MOVED'];
+            $msg = ($result) ? trans('messages.TOPICS_MOVED') : trans('messages.NO_TOPICS_MOVED');
             bb_die(return_msg_mcp($msg));
         } else {
             if (IS_ADMIN) {
@@ -285,8 +285,8 @@ switch ($mode) {
                 'SHOW_LEAVESHADOW' => $is_moderator,
                 'SHOW_BOT_OPTIONS' => $is_moderator,
 
-                'MESSAGE_TITLE' => $lang['CONFIRM'],
-                'MESSAGE_TEXT' => $lang['CONFIRM_MOVE_TOPIC'],
+                'MESSAGE_TITLE' => trans('messages.CONFIRM'),
+                'MESSAGE_TEXT' => trans('messages.CONFIRM_MOVE_TOPIC'),
                 'TOPIC_TITLES' => implode("\n</li>\n<li>\n", $topic_titles),
 
                 'S_FORUM_SELECT' => $forum_select,
@@ -320,7 +320,7 @@ switch ($mode) {
         }
 
         if (!$topic_csv = get_id_csv($topic_csv)) {
-            bb_die($lang['NONE_SELECTED']);
+            bb_die(trans('messages.NONE_SELECTED'));
         }
 
         OLD_DB()->query("
@@ -340,7 +340,7 @@ switch ($mode) {
             ));
         }
 
-        $msg = ($lock) ? $lang['TOPICS_LOCKED'] : $lang['TOPICS_UNLOCKED'];
+        $msg = ($lock) ? trans('messages.TOPICS_LOCKED') : trans('messages.TOPICS_UNLOCKED');
         bb_die(return_msg_mcp($msg));
 
         break;
@@ -363,7 +363,7 @@ switch ($mode) {
             clear_dl_list($topic_csv);
         }
 
-        $msg = ($set_download) ? $lang['TOPICS_DOWN_SETS'] : $lang['TOPICS_DOWN_UNSETS'];
+        $msg = ($set_download) ? trans('messages.TOPICS_DOWN_SETS') : trans('messages.TOPICS_DOWN_UNSETS');
         bb_die(return_msg_mcp($msg));
 
         break;
@@ -430,7 +430,7 @@ switch ($mode) {
 
                 $post_subject = clean_title($_POST['subject']);
                 if (empty($post_subject)) {
-                    bb_die($lang['EMPTY_SUBJECT']);
+                    bb_die(trans('messages.EMPTY_SUBJECT'));
                 }
 
                 $new_forum_id = (int)$_POST['new_forum_id'];
@@ -486,8 +486,8 @@ switch ($mode) {
                 sync('forum', array($forum_id, $new_forum_id));
 
                 //bot
-                $message = $lang['TOPIC_SPLIT'] . '<br /><br /><a href="' . "viewtopic.php?" . POST_TOPIC_URL . "=$topic_id&amp;sid=" . $userdata['session_id'] . '">' . $lang['TOPIC_SPLIT_OLD'] . '</a>';
-                $message .= ' &nbsp;::&nbsp; <a href="' . "viewtopic.php?" . POST_TOPIC_URL . "=$new_topic_id&amp;sid=" . $userdata['session_id'] . '">' . $lang['TOPIC_SPLIT_NEW'] . '</a>';
+                $message = trans('messages.TOPIC_SPLIT') . '<br /><br /><a href="' . "viewtopic.php?" . POST_TOPIC_URL . "=$topic_id&amp;sid=" . $userdata['session_id'] . '">' . trans('messages.TOPIC_SPLIT_OLD') . '</a>';
+                $message .= ' &nbsp;::&nbsp; <a href="' . "viewtopic.php?" . POST_TOPIC_URL . "=$new_topic_id&amp;sid=" . $userdata['session_id'] . '">' . trans('messages.TOPIC_SPLIT_NEW') . '</a>';
 
                 // Log action
                 $log_action->mod('mod_topic_split', array(
@@ -503,13 +503,13 @@ switch ($mode) {
             }
         } elseif ($post_id_sql && $delete_posts) {
             if (!$is_auth['auth_delete']) {
-                bb_die(sprintf($lang['SORRY_AUTH_DELETE'], $is_auth['auth_delete_type']));
+                bb_die(sprintf(trans('messages.SORRY_AUTH_DELETE'), $is_auth['auth_delete_type']));
             }
 
             // Delete posts
             $result = post_delete(explode(',', $post_id_sql));
 
-            $msg = ($result) ? $lang['DELETE_POSTS_SUCCESFULLY'] : 'No posts were removed';
+            $msg = ($result) ? trans('messages.DELETE_POSTS_SUCCESFULLY') : 'No posts were removed';
             bb_die(return_msg_mcp($msg));
         } else {
             $sql = "SELECT u.username, p.*, pt.post_text, p.post_username
@@ -576,7 +576,7 @@ switch ($mode) {
         $anon = GUEST_UID;
 
         if (!$post_id) {
-            bb_die($lang['NO_SUCH_POST']);
+            bb_die(trans('messages.NO_SUCH_POST'));
         }
 
         // Look up relevant data for this post
@@ -586,11 +586,11 @@ switch ($mode) {
         }
 
         if (!($post_row = OLD_DB()->sql_fetchrow($result))) {
-            bb_die($lang['NO_SUCH_POST']);
+            bb_die(trans('messages.NO_SUCH_POST'));
         }
 
         if (!$ip_this_post = decode_ip($post_row['poster_ip'])) {
-            $ip_this_post = $lang['NOT_AVAILABLE'];
+            $ip_this_post = trans('messages.NOT_AVAILABLE');
         }
 
         $poster_id = $post_row['poster_id'];
@@ -622,7 +622,7 @@ switch ($mode) {
                 }
 
                 if (!$ip = decode_ip($row['poster_ip'])) {
-                    $ip = $lang['NOT_AVAILABLE'];
+                    $ip = trans('messages.NOT_AVAILABLE');
                 }
 
                 $template->assign_block_vars('iprow', array(
@@ -657,7 +657,7 @@ switch ($mode) {
             $i = 0;
             do {
                 $id = $row['user_id'];
-                $username = (!$row['username']) ? $lang['GUEST'] : $row['username'];
+                $username = (!$row['username']) ? trans('messages.GUEST') : $row['username'];
 
                 $template->assign_block_vars('userrow', array(
                     'ROW_CLASS' => !($i % 2) ? 'row4' : 'row5',
@@ -697,7 +697,7 @@ switch ($mode) {
             }
 
             if (!$topic_csv = get_id_csv($topic_csv)) {
-                bb_die($lang['NONE_SELECTED']);
+                bb_die(trans('messages.NONE_SELECTED'));
             }
 
             OLD_DB()->query("
@@ -706,7 +706,7 @@ switch ($mode) {
 				WHERE topic_id IN($topic_csv)
 			");
 
-            $msg = ($pin) ? $lang['POST_PINNED'] : $lang['POST_UNPINNED'];
+            $msg = ($pin) ? trans('messages.POST_PINNED') : trans('messages.POST_UNPINNED');
             bb_die(return_msg_mcp($msg));
         } elseif ($topic_id) {
             $sql = "
@@ -727,7 +727,7 @@ switch ($mode) {
             }
 
             if (!$topic_csv = get_id_csv($topic_csv)) {
-                bb_die($lang['NONE_SELECTED']);
+                bb_die(trans('messages.NONE_SELECTED'));
             }
 
             OLD_DB()->query("
@@ -736,7 +736,7 @@ switch ($mode) {
 				WHERE topic_id IN($topic_csv)
 			");
 
-            $msg = ($pin) ? $lang['POST_PINNED'] : $lang['POST_UNPINNED'];
+            $msg = ($pin) ? trans('messages.POST_PINNED') : trans('messages.POST_UNPINNED');
             bb_die(return_msg_mcp($msg));
         }
         break;
@@ -746,7 +746,7 @@ switch ($mode) {
         break;
 }
 
-$template->assign_vars(array('PAGE_TITLE' => $lang['MOD_CP']));
+$template->assign_vars(array('PAGE_TITLE' => trans('messages.MOD_CP')));
 
 require(PAGE_HEADER);
 

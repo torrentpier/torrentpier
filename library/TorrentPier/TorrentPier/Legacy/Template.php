@@ -90,8 +90,6 @@ class Template
     /** @var array style configuration */
     public $style_config = [];
 
-    public $lang = [];
-
     /**
      * Constructor. Installs XS mod on first run or updates it and sets the root dir.
      *
@@ -99,15 +97,12 @@ class Template
      */
     public function __construct($root = '.')
     {
-        global $lang;
-
         // setting pointer "vars"
         $this->vars = &$this->_tpldata['.'][0];
         // load configuration
         $this->tpldir = TEMPLATES_DIR;
         $this->root = $root;
         $this->tpl = basename($root);
-        $this->lang =& $lang;
         $this->use_cache = config('tp.xs_use_cache');
     }
 
@@ -223,11 +218,9 @@ class Template
     {
         $this->cur_tpl = $filename;
 
-        global $lang, $source_lang, $user;
+        global $user;
 
-        $L =& $lang;
         $V =& $this->vars;
-        $SL =& $source_lang;
 
         if ($filename) {
             include $filename;
@@ -758,7 +751,7 @@ class Template
             $code = str_replace($search, $replace, $code);
         }
         // This will handle the remaining root-level varrefs
-        $code = preg_replace('#\{(L_([a-z0-9\-_]+?))\}#i', '<?php echo isset($L[\'$2\']) ? $L[\'$2\'] : (isset($SL[\'$2\']) ? $SL[\'$2\'] : \'$2\'); ?>', $code);
+        $code = preg_replace('#\{(L_([a-z0-9\-_]+?))\}#i', '<?php echo (trans(\'messages.$2\') !== \'messages.$2\') ? trans(\'messages.$2\') : $V[\'$1\']; ?>', $code);
         $code = preg_replace('#\{(\$[a-z_][a-z0-9_$\->\'\"\.\[\]]*?)\}#i', '<?php echo isset($1) ? $1 : \'\'; ?>', $code);
         $code = preg_replace('#\{(\#([a-z_][a-z0-9_]*?))\}#i', '<?php echo defined(\'$2\') ? $2 : \'\'; ?>', $code);
         $code = preg_replace('#\{([a-z0-9\-_]+?)\}#i', '<?php echo isset($V[\'$1\']) ? $V[\'$1\'] : \'\'; ?>', $code);
@@ -979,10 +972,6 @@ class Template
 
     public function xs_startup()
     {
-        // adding language variable (eg: "english" or "german")
-        // can be used to make truly multi-lingual templates
-        $this->vars['LANG'] = $this->vars['LANG'] ?? config('tp.default_lang');
-        // adding current template
         $tpl = $this->root . '/';
         if (substr($tpl, 0, 2) === './') {
             $tpl = substr($tpl, 2, strlen($tpl));

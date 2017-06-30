@@ -56,17 +56,17 @@ switch ($mode) {
             // Ограничение по ip
             if (config('tp.unique_ip')) {
                 if ($users = OLD_DB()->fetch_row("SELECT user_id, username FROM " . BB_USERS . " WHERE user_reg_ip = '" . USER_IP . "' LIMIT 1")) {
-                    bb_die(sprintf($lang['ALREADY_REG_IP'], '<a href="' . PROFILE_URL . $users['user_id'] . '"><b>' . $users['username'] . '</b></a>', config('tp.tech_admin_email')));
+                    bb_die(sprintf(trans('messages.ALREADY_REG_IP'), '<a href="' . PROFILE_URL . $users['user_id'] . '"><b>' . $users['username'] . '</b></a>', config('tp.tech_admin_email')));
                 }
             }
             // Отключение регистрации
             if (config('tp.new_user_reg_disabled') || (config('tp.reg_email_activation') && !config('email.enabled'))) {
-                bb_die($lang['NEW_USER_REG_DISABLED']);
+                bb_die(trans('messages.NEW_USER_REG_DISABLED'));
             } // Ограничение по времени
             elseif (config('tp.new_user_reg_restricted')) {
                 if (in_array(date('G'), array(0, /*1,2,3,4,5,6,7,8,11,12,13,14,15,16,*/
                     17, 18, 19, 20, 21, 22, 23))) {
-                    bb_die($lang['REGISTERED_IN_TIME']);
+                    bb_die(trans('messages.REGISTERED_IN_TIME'));
                 }
             }
         }
@@ -87,7 +87,7 @@ switch ($mode) {
             'user_password' => '',
             'user_email' => '',
             'user_timezone' => config('tp.board_timezone'),
-            'user_lang' => config('tp.default_lang'),
+            'user_lang' => config('app.locale'),
             'user_opt' => 0,
             'avatar_ext_id' => 0,
         );
@@ -143,7 +143,7 @@ switch ($mode) {
 			LIMIT 1
 		";
         if (!$pr_data = OLD_DB()->fetch_row($sql)) {
-            bb_die($lang['PROFILE_NOT_FOUND']);
+            bb_die(trans('messages.PROFILE_NOT_FOUND'));
         }
         break;
 
@@ -156,7 +156,7 @@ $need_captcha = ($mode == 'register' && !IS_ADMIN && !config('tp.captcha.disable
 
 if ($submit) {
     if ($need_captcha && !bb_captcha('check')) {
-        $errors[] = $lang['CAPTCHA_WRONG'];
+        $errors[] = trans('messages.CAPTCHA_WRONG');
     }
 }
 
@@ -208,25 +208,25 @@ foreach ($profile_fields as $field => $can_edit) {
                 // пароль для гостя и при смене пароля юзером
                 if (!empty($new_pass)) {
                     if (mb_strlen($new_pass, 'UTF-8') > 20) {
-                        $errors[] = sprintf($lang['CHOOSE_PASS_ERR_MAX'], 20);
+                        $errors[] = sprintf(trans('messages.CHOOSE_PASS_ERR_MAX'), 20);
                     } elseif (mb_strlen($new_pass, 'UTF-8') < 4) {
-                        $errors[] = sprintf($lang['CHOOSE_PASS_ERR_MIN'], 4);
+                        $errors[] = sprintf(trans('messages.CHOOSE_PASS_ERR_MIN'), 4);
                     } elseif ($new_pass != $cfm_pass) {
-                        $errors[] = $lang['CHOOSE_PASS_ERR'];
+                        $errors[] = trans('messages.CHOOSE_PASS_ERR');
                     }
                     $db_data['user_password'] = md5(md5($new_pass));
                 }
 
                 if ($mode == 'register') {
                     if (empty($new_pass)) {
-                        $errors[] = $lang['CHOOSE_PASS'];
+                        $errors[] = trans('messages.CHOOSE_PASS');
                     }
                 } else {
                     if (!empty($cur_pass)) {
                         $cur_pass_valid = ($pr_data['user_password'] === md5(md5($cur_pass)));
                     }
                     if (!empty($new_pass) && !$cur_pass_valid) {
-                        $errors[] = $lang['CHOOSE_PASS_FAILED'];
+                        $errors[] = trans('messages.CHOOSE_PASS_FAILED');
                     }
                 }
             }
@@ -240,7 +240,7 @@ foreach ($profile_fields as $field => $can_edit) {
             if ($submit) {
                 if ($mode == 'register') {
                     if (empty($email)) {
-                        $errors[] = $lang['CHOOSE_E_MAIL'];
+                        $errors[] = trans('messages.CHOOSE_E_MAIL');
                     }
                     if (!$errors and $err = validate_email($email)) {
                         $errors[] = $err;
@@ -250,7 +250,7 @@ foreach ($profile_fields as $field => $can_edit) {
                     // если смена мейла юзером
 
                     if (!$cur_pass_valid) {
-                        $errors[] = $lang['CONFIRM_PASSWORD_EXPLAIN'];
+                        $errors[] = trans('messages.CONFIRM_PASSWORD_EXPLAIN');
                     }
                     if (!$errors and $err = validate_email($email)) {
                         $errors[] = $err;
@@ -282,7 +282,7 @@ foreach ($profile_fields as $field => $can_edit) {
         case 'user_timezone':
             $user_timezone = isset($_POST['user_timezone']) ? (int)$_POST['user_timezone'] : $pr_data['user_timezone'];
             if ($submit && ($user_timezone != $pr_data['user_timezone'] || $mode == 'register')) {
-                if (isset($lang['TZ'][$user_timezone])) {
+                if (trans('messages.TZ.' . $user_timezone) !== 'messages.TZ.' . $user_timezone) {
                     $pr_data['user_timezone'] = $user_timezone;
                     $db_data['user_timezone'] = $user_timezone;
                 }
@@ -298,7 +298,7 @@ foreach ($profile_fields as $field => $can_edit) {
                 $pr_data['user_gender'] = $user_gender;
                 $db_data['user_gender'] = $user_gender;
             }
-            $tp_data['USER_GENDER'] = build_select('user_gender', array_flip($lang['GENDER_SELECT']), $pr_data['user_gender']);
+            $tp_data['USER_GENDER'] = build_select('user_gender', array_flip(trans('messages.GENDER_SELECT')), $pr_data['user_gender']);
             break;
 
         /**
@@ -312,11 +312,11 @@ foreach ($profile_fields as $field => $can_edit) {
 
                 if (!empty($birthday_date['year'])) {
                     if (strtotime($user_birthday) >= TIMENOW) {
-                        $errors[] = $lang['WRONG_BIRTHDAY_FORMAT'];
+                        $errors[] = trans('messages.WRONG_BIRTHDAY_FORMAT');
                     } elseif (bb_date(TIMENOW, 'Y', false) - $birthday_date['year'] > config('tp.birthday_max_age')) {
-                        $errors[] = sprintf($lang['BIRTHDAY_TO_HIGH'], config('tp.birthday_max_age'));
+                        $errors[] = sprintf(trans('messages.BIRTHDAY_TO_HIGH'), config('tp.birthday_max_age'));
                     } elseif (bb_date(TIMENOW, 'Y', false) - $birthday_date['year'] < config('tp.birthday_min_age')) {
-                        $errors[] = sprintf($lang['BIRTHDAY_TO_LOW'], config('tp.birthday_min_age'));
+                        $errors[] = sprintf(trans('messages.BIRTHDAY_TO_LOW'), config('tp.birthday_min_age'));
                     }
                 }
 
@@ -392,7 +392,7 @@ foreach ($profile_fields as $field => $can_edit) {
                     $db_data['user_icq'] = (string)$icq;
                 } else {
                     $pr_data['user_icq'] = '';
-                    $errors[] = htmlCHR($lang['ICQ_ERROR']);
+                    $errors[] = htmlCHR(trans('messages.ICQ_ERROR'));
                 }
             }
             $tp_data['USER_ICQ'] = $pr_data['user_icq'];
@@ -410,7 +410,7 @@ foreach ($profile_fields as $field => $can_edit) {
                     $db_data['user_website'] = (string)$website;
                 } else {
                     $pr_data['user_website'] = '';
-                    $errors[] = htmlCHR($lang['WEBSITE_ERROR']);
+                    $errors[] = htmlCHR(trans('messages.WEBSITE_ERROR'));
                 }
             }
             $tp_data['USER_WEBSITE'] = $pr_data['user_website'];
@@ -438,9 +438,9 @@ foreach ($profile_fields as $field => $can_edit) {
                 $sig = prepare_message($sig);
 
                 if (mb_strlen($sig, 'UTF-8') > config('tp.max_sig_chars')) {
-                    $errors[] = $lang['SIGNATURE_TOO_LONG'];
+                    $errors[] = trans('messages.SIGNATURE_TOO_LONG');
                 } elseif (preg_match('#<(a|b|i|u|table|tr|td|img) #i', $sig) || preg_match('#(href|src|target|title)=#i', $sig)) {
-                    $errors[] = $lang['SIGNATURE_ERROR_HTML'];
+                    $errors[] = trans('messages.SIGNATURE_ERROR_HTML');
                 }
 
                 $pr_data['user_sig'] = $sig;
@@ -482,7 +482,7 @@ foreach ($profile_fields as $field => $can_edit) {
             $skype = isset($_POST['user_skype']) ? (string)$_POST['user_skype'] : $pr_data['user_skype'];
             if ($submit && $skype != $pr_data['user_skype']) {
                 if ($skype != '' && !preg_match("#^[a-zA-Z0-9_.\-@,]{6,32}$#", $skype)) {
-                    $errors[] = $lang['SKYPE_ERROR'];
+                    $errors[] = trans('messages.SKYPE_ERROR');
                 }
                 $pr_data['user_skype'] = $skype;
                 $db_data['user_skype'] = (string)$skype;
@@ -497,7 +497,7 @@ foreach ($profile_fields as $field => $can_edit) {
             $twitter = isset($_POST['user_twitter']) ? (string)$_POST['user_twitter'] : $pr_data['user_twitter'];
             if ($submit && $twitter != $pr_data['user_twitter']) {
                 if ($twitter != '' && !preg_match("#^[a-zA-Z0-9_]{1,15}$#", $twitter)) {
-                    $errors[] = $lang['TWITTER_ERROR'];
+                    $errors[] = trans('messages.TWITTER_ERROR');
                 }
                 $pr_data['user_twitter'] = $twitter;
                 $db_data['user_twitter'] = (string)$twitter;
@@ -563,15 +563,15 @@ if ($submit && !$errors) {
 
         if (IS_ADMIN) {
             set_pr_die_append_msg($new_user_id);
-            $message = $lang['ACCOUNT_ADDED'];
+            $message = trans('messages.ACCOUNT_ADDED');
         } else {
             if (config('tp.reg_email_activation')) {
-                $message = $lang['ACCOUNT_INACTIVE'];
-                $email_subject = sprintf($lang['EMAILER_SUBJECT']['USER_WELCOME_INACTIVE'], config('tp.sitename'));
+                $message = trans('messages.ACCOUNT_INACTIVE');
+                $email_subject = sprintf(trans('messages.EMAILER_SUBJECT.USER_WELCOME_INACTIVE'), config('tp.sitename'));
                 $email_template = 'user_welcome_inactive';
             } else {
-                $message = $lang['ACCOUNT_ADDED'];
-                $email_subject = sprintf($lang['EMAILER_SUBJECT']['USER_WELCOME'], config('tp.sitename'));
+                $message = trans('messages.ACCOUNT_ADDED');
+                $email_subject = sprintf(trans('messages.EMAILER_SUBJECT.USER_WELCOME'), config('tp.sitename'));
                 $email_template = 'user_welcome';
             }
 
@@ -585,7 +585,7 @@ if ($submit && !$errors) {
             $emailer->set_template($email_template, $user_lang);
             $emailer->assign_vars(array(
                 'SITENAME' => config('tp.sitename'),
-                'WELCOME_MSG' => sprintf($lang['WELCOME_SUBJECT'], config('tp.sitename')),
+                'WELCOME_MSG' => sprintf(trans('messages.WELCOME_SUBJECT'), config('tp.sitename')),
                 'USERNAME' => html_entity_decode($username),
                 'PASSWORD' => $new_pass,
                 'U_ACTIVATE' => make_url('profile.php?mode=activate&' . POST_USERS_URL . '=' . $new_user_id . '&act_key=' . $db_data['user_actkey'])
@@ -614,7 +614,7 @@ if ($submit && !$errors) {
                 $emailer->set_from([config('tp.board_email') => config('tp.sitename')]);
                 $emailer->set_to([$email => $username]);
                 $emailer->set_subject($subject);
-                $emailer->set_subject($lang['EMAILER_SUBJECT']['USER_ACTIVATE']);
+                $emailer->set_subject(trans('messages.EMAILER_SUBJECT.USER_ACTIVATE'));
 
                 $emailer->set_template('user_activate', $pr_data['user_lang']);
                 $emailer->assign_vars(array(
@@ -625,11 +625,11 @@ if ($submit && !$errors) {
 
                 $emailer->send();
 
-                $message = $lang['PROFILE_UPDATED_INACTIVE'];
+                $message = trans('messages.PROFILE_UPDATED_INACTIVE');
                 $user->session_end();
             } else {
                 meta_refresh('index.php', 10);
-                $message = $lang['PROFILE_UPDATED'];
+                $message = trans('messages.PROFILE_UPDATED');
             }
 
             $sql_args = OLD_DB()->build_array('UPDATE', $db_data);
@@ -645,15 +645,15 @@ if ($submit && !$errors) {
             cache_rm_user_sessions($pr_data['user_id']);
 
             if ($adm_edit) {
-                bb_die($lang['PROFILE_USER'] . ' <b>' . profile_url($pr_data) . '</b> ' . $lang['GOOD_UPDATE']);
+                bb_die(trans('messages.PROFILE_USER') . ' <b>' . profile_url($pr_data) . '</b> ' . trans('messages.GOOD_UPDATE'));
             } elseif (!$pr_data['user_active']) {
-                bb_die($lang['PROFILE_UPDATED_INACTIVE']);
+                bb_die(trans('messages.PROFILE_UPDATED_INACTIVE'));
             } else {
                 meta_refresh('index.php', 10);
-                bb_die($lang['PROFILE_UPDATED']);
+                bb_die(trans('messages.PROFILE_UPDATED'));
             }
         } else {
-            bb_die($lang['NOTHING_HAS_CHANGED']);
+            bb_die(trans('messages.NOTHING_HAS_CHANGED'));
         }
     }
 }
@@ -661,7 +661,7 @@ if ($submit && !$errors) {
 $template->assign_vars($tp_data);
 
 $template->assign_vars(array(
-    'PAGE_TITLE' => ($mode == 'editprofile') ? $lang['EDIT_PROFILE'] . ($adm_edit ? " :: {$pr_data['username']}" : '') : $lang['REGISTER'],
+    'PAGE_TITLE' => ($mode == 'editprofile') ? trans('messages.EDIT_PROFILE') . ($adm_edit ? " :: {$pr_data['username']}" : '') : trans('messages.REGISTER'),
     'SHOW_REG_AGREEMENT' => ($mode == 'register' && !IS_ADMIN),
     'ERROR_MESSAGE' => ($errors) ? implode('<br />', array_unique($errors)) : '',
     'MODE' => $mode,
@@ -674,12 +674,12 @@ $template->assign_vars(array(
     'TIMEZONE_SELECT' => tz_select($pr_data['user_timezone'], 'user_timezone'),
     'USER_TIMEZONE' => $pr_data['user_timezone'],
 
-    'AVATAR_EXPLAIN' => sprintf($lang['AVATAR_EXPLAIN'], config('tp.avatars.max_width'), config('tp.avatars.max_height'), (round(config('tp.avatars.max_size') / 1024))),
+    'AVATAR_EXPLAIN' => sprintf(trans('messages.AVATAR_EXPLAIN'), config('tp.avatars.max_width'), config('tp.avatars.max_height'), (round(config('tp.avatars.max_size') / 1024))),
     'AVATAR_DISALLOWED' => bf($pr_data['user_opt'], 'user_opt', 'dis_avatar'),
-    'AVATAR_DIS_EXPLAIN' => sprintf($lang['AVATAR_DISABLE'], config('tp.terms_and_conditions_url')),
+    'AVATAR_DIS_EXPLAIN' => sprintf(trans('messages.AVATAR_DISABLE'), config('tp.terms_and_conditions_url')),
     'AVATAR_IMG' => get_avatar($pr_data['user_id'], $pr_data['avatar_ext_id'], !bf($pr_data['user_opt'], 'user_opt', 'dis_avatar')),
 
-    'SIGNATURE_EXPLAIN' => sprintf($lang['SIGNATURE_EXPLAIN'], config('tp.max_sig_chars')),
+    'SIGNATURE_EXPLAIN' => sprintf(trans('messages.SIGNATURE_EXPLAIN'), config('tp.max_sig_chars')),
     'SIG_DISALLOWED' => bf($pr_data['user_opt'], 'user_opt', 'dis_sig'),
 
     'PR_USER_ID' => $pr_data['user_id'],

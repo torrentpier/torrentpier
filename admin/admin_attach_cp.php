@@ -33,7 +33,7 @@ $view = (isset($_POST['search']) && $_POST['search']) ? 'attachments' : $view;
 
 // process modes based on view
 if ($view === 'username') {
-    $mode_types_text = array($lang['SORT_USERNAME'], $lang['SORT_ATTACHMENTS'], $lang['SORT_SIZE']);
+    $mode_types_text = array(trans('messages.SORT_USERNAME'), trans('messages.SORT_ATTACHMENTS'), trans('messages.SORT_SIZE'));
     $mode_types = array('username', 'attachments', 'filesize');
 
     if (!$mode) {
@@ -41,7 +41,7 @@ if ($view === 'username') {
         $sort_order = 'DESC';
     }
 } elseif ($view === 'attachments') {
-    $mode_types_text = array($lang['SORT_FILENAME'], $lang['SORT_COMMENT'], $lang['SORT_EXTENSION'], $lang['SORT_SIZE'], $lang['SORT_DOWNLOADS'], $lang['SORT_POSTTIME']);
+    $mode_types_text = array(trans('messages.SORT_FILENAME'), trans('messages.SORT_COMMENT'), trans('messages.SORT_EXTENSION'), trans('messages.SORT_SIZE'), trans('messages.SORT_DOWNLOADS'), trans('messages.SORT_POSTTIME'));
     $mode_types = array('real_filename', 'comment', 'extension', 'filesize', 'downloads', 'post_time');
 
     if (!$mode) {
@@ -49,7 +49,7 @@ if ($view === 'username') {
         $sort_order = 'ASC';
     }
 } elseif ($view === 'search') {
-    $mode_types_text = array($lang['SORT_FILENAME'], $lang['SORT_COMMENT'], $lang['SORT_EXTENSION'], $lang['SORT_SIZE'], $lang['SORT_DOWNLOADS'], $lang['SORT_POSTTIME']);
+    $mode_types_text = array(trans('messages.SORT_FILENAME'), trans('messages.SORT_COMMENT'), trans('messages.SORT_EXTENSION'), trans('messages.SORT_SIZE'), trans('messages.SORT_DOWNLOADS'), trans('messages.SORT_POSTTIME'));
     $mode_types = array('real_filename', 'comment', 'extension', 'filesize', 'downloads', 'post_time');
 
     $sort_order = 'DESC';
@@ -111,7 +111,7 @@ if ($view === 'username') {
 }
 
 // Set select fields
-$view_types_text = array($lang['VIEW_STATISTIC'], $lang['VIEW_SEARCH']);
+$view_types_text = array(trans('messages.VIEW_STATISTIC'), trans('messages.VIEW_SEARCH'));
 $view_types = array('stats', 'search');
 
 $select_view = '<select name="view">';
@@ -134,9 +134,9 @@ if (count($mode_types_text) > 0) {
 
 $select_sort_order = '<select name="order">';
 if ($sort_order === 'ASC') {
-    $select_sort_order .= '<option value="ASC" selected="selected">' . $lang['ASC'] . '</option><option value="DESC">' . $lang['DESC'] . '</option>';
+    $select_sort_order .= '<option value="ASC" selected="selected">' . trans('messages.ASC') . '</option><option value="DESC">' . trans('messages.DESC') . '</option>';
 } else {
-    $select_sort_order .= '<option value="ASC">' . $lang['ASC'] . '</option><option value="DESC" selected="selected">' . $lang['DESC'] . '</option>';
+    $select_sort_order .= '<option value="ASC">' . trans('messages.ASC') . '</option><option value="DESC" selected="selected">' . trans('messages.DESC') . '</option>';
 }
 $select_sort_order .= '</select>';
 
@@ -268,16 +268,16 @@ if ($view === 'search') {
 
     $s_categories = '';
     if ($s_forums) {
-        $s_forums = '<option value="0">' . $lang['ALL_AVAILABLE'] . '</option>' . $s_forums;
+        $s_forums = '<option value="0">' . trans('messages.ALL_AVAILABLE') . '</option>' . $s_forums;
 
         // Category to search
-        $s_categories = '<option value="0">' . $lang['ALL_AVAILABLE'] . '</option>';
+        $s_categories = '<option value="0">' . trans('messages.ALL_AVAILABLE') . '</option>';
 
         foreach ($list_cat as $cat_id => $cat_title) {
             $s_categories .= '<option value="' . $cat_id . '">' . htmlCHR($cat_title) . '</option>';
         }
     } else {
-        bb_die($lang['NO_SEARCHABLE_FORUMS']);
+        bb_die(trans('messages.NO_SEARCHABLE_FORUMS'));
     }
 
     $template->assign_vars(array(
@@ -333,7 +333,7 @@ if ($view === 'attachments') {
 
         $template->assign_vars(array(
             'S_USER_HIDDEN' => $s_hidden,
-            'L_STATISTICS_FOR_USER' => sprintf($lang['STATISTICS_FOR_USER'], $username),
+            'L_STATISTICS_FOR_USER' => sprintf(trans('messages.STATISTICS_FOR_USER'), $username),
         ));
 
         $sql = 'SELECT attach_id
@@ -430,7 +430,7 @@ if ($view === 'attachments') {
 
                     $post_titles[] = '<a href="' . $view_topic . '" class="gen" target="_blank">' . $post_title . '</a>';
                 } else {
-                    $post_titles[] = $lang['PRIVATE_MESSAGE'];
+                    $post_titles[] = trans('messages.PRIVATE_MESSAGE');
                 }
             }
 

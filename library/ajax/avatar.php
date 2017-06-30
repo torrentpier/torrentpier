@@ -11,7 +11,7 @@ if (!defined('IN_AJAX')) {
     die(basename(__FILE__));
 }
 
-global $lang, $user;
+global $user;
 
 $mode = (string)$this->request['mode'];
 $user_id = (int)$this->request['user_id'];
@@ -21,7 +21,7 @@ if (!$user_id or !$u_data = get_userdata($user_id)) {
 }
 
 if (!IS_ADMIN && $user_id != $user->id) {
-    $this->ajax_die($lang['NOT_ADMIN']);
+    $this->ajax_die(trans('messages.NOT_ADMIN'));
 }
 
 switch ($mode) {

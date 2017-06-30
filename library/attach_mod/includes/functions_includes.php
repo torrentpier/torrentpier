@@ -12,15 +12,15 @@
  */
 function attach_build_auth_levels($is_auth, &$s_auth_can)
 {
-    global $lang, $attach_config;
+    global $attach_config;
 
     if ((int)$attach_config['disable_mod']) {
         return;
     }
 
     // If you want to have the rules window link within the forum view too, comment out the two lines, and comment the third line
-    $s_auth_can .= (($is_auth['auth_attachments']) ? $lang['RULES_ATTACH_CAN'] : $lang['RULES_ATTACH_CANNOT']) . '<br />';
-    $s_auth_can .= (($is_auth['auth_download']) ? $lang['RULES_DOWNLOAD_CAN'] : $lang['RULES_DOWNLOAD_CANNOT']) . '<br />';
+    $s_auth_can .= (($is_auth['auth_attachments']) ? trans('messages.RULES_ATTACH_CAN') : trans('messages.RULES_ATTACH_CANNOT')) . '<br />';
+    $s_auth_can .= (($is_auth['auth_download']) ? trans('messages.RULES_DOWNLOAD_CAN') : trans('messages.RULES_DOWNLOAD_CANNOT')) . '<br />';
 }
 
 /**
@@ -28,7 +28,7 @@ function attach_build_auth_levels($is_auth, &$s_auth_can)
  */
 function attachment_quota_settings($admin_mode, $submit = false, $mode)
 {
-    global $template, $lang, $attach_config;
+    global $template, $attach_config;
 
     if ($attach_config['upload_dir'][0] == '/' || ($attach_config['upload_dir'][0] != '/' && $attach_config['upload_dir'][1] == ':')) {
         $upload_dir = $attach_config['upload_dir'];
@@ -52,7 +52,7 @@ function attachment_quota_settings($admin_mode, $submit = false, $mode)
             $u_name = get_var('username', '');
 
             if (!$user_id && !$u_name) {
-                bb_die($lang['NO_USER_ID_SPECIFIED']);
+                bb_die(trans('messages.NO_USER_ID_SPECIFIED'));
             }
 
             if ($user_id) {
@@ -67,7 +67,7 @@ function attachment_quota_settings($admin_mode, $submit = false, $mode)
             $user_id = get_var('id', 0);
 
             if (!$user_id) {
-                bb_die($lang['NO_USER_ID_SPECIFIED']);
+                bb_die(trans('messages.NO_USER_ID_SPECIFIED'));
             }
         }
     }

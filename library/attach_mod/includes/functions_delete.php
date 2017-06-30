@@ -135,7 +135,7 @@ function delete_attachment($post_id_array = 0, $attach_id_array = 0, $page = 0, 
 				AND $sql_id IN (" . implode(', ', $post_id_array) . ')';
 
         if (!(OLD_DB()->sql_query($sql))) {
-            bb_die($lang['ERROR_DELETED_ATTACHMENTS']);
+            bb_die(trans('messages.ERROR_DELETED_ATTACHMENTS'));
         }
 
         //bt
@@ -143,7 +143,7 @@ function delete_attachment($post_id_array = 0, $attach_id_array = 0, $page = 0, 
             $sql = "SELECT topic_id FROM " . BB_BT_TORRENTS . " WHERE attach_id IN(" . implode(',', $attach_id_array) . ")";
 
             if (!$result = OLD_DB()->sql_query($sql)) {
-                bb_die($lang['ERROR_DELETED_ATTACHMENTS']);
+                bb_die(trans('messages.ERROR_DELETED_ATTACHMENTS'));
             }
 
             $torrents_sql = array();
@@ -166,7 +166,7 @@ function delete_attachment($post_id_array = 0, $attach_id_array = 0, $page = 0, 
 				WHERE attach_id IN(" . implode(',', $attach_id_array) . ")";
 
             if (!OLD_DB()->sql_query($sql)) {
-                bb_die($lang['ERROR_DELETED_ATTACHMENTS']);
+                bb_die(trans('messages.ERROR_DELETED_ATTACHMENTS'));
             }
         }
         //bt end
@@ -209,7 +209,7 @@ function delete_attachment($post_id_array = 0, $attach_id_array = 0, $page = 0, 
                         $sql = 'DELETE FROM ' . BB_ATTACHMENTS_DESC . ' WHERE attach_id = ' . (int)$attachments[$j]['attach_id'];
 
                         if (!(OLD_DB()->sql_query($sql))) {
-                            bb_die($lang['ERROR_DELETED_ATTACHMENTS']);
+                            bb_die(trans('messages.ERROR_DELETED_ATTACHMENTS'));
                         }
                     }
                 } else {

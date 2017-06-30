@@ -549,42 +549,19 @@ class User
      */
     public function init_userprefs()
     {
-        global $theme, $source_lang, $DeltaTime;
+        global $theme, $DeltaTime;
 
-        if (defined('LANG_DIR')) {
-            return;
-        }  // prevent multiple calling
-
-        define('DEFAULT_LANG_DIR', LANG_ROOT_DIR . '/' . config('tp.default_lang') . '/');
-        define('SOURCE_LANG_DIR', LANG_ROOT_DIR . '/source/');
+        define('DEFAULT_LANG_DIR', LANG_ROOT_DIR . '/' . config('app.locale') . '/');
+        define('LANG_DIR', DEFAULT_LANG_DIR);
 
         if ($this->data['user_id'] != GUEST_UID) {
-            if ($this->data['user_lang'] && $this->data['user_lang'] != config('tp.default_lang')) {
-                config(['tp.default_lang' => basename($this->data['user_lang'])]);
-                define('LANG_DIR', LANG_ROOT_DIR . '/' . config('tp.default_lang') . '/');
-            }
-
             if (isset($this->data['user_timezone'])) {
                 config(['tp.board_timezone' => $this->data['user_timezone']]);
             }
         }
 
-        $this->data['user_lang'] = config('tp.default_lang');
+        $this->data['user_lang'] = config('app.locale');
         $this->data['user_timezone'] = config('tp.board_timezone');
-
-        if (!defined('LANG_DIR')) {
-            define('LANG_DIR', DEFAULT_LANG_DIR);
-        }
-
-        /** Temporary place source language to the global */
-        $lang = [];
-        require(SOURCE_LANG_DIR . 'main.php');
-        $source_lang = $lang;
-        unset($lang);
-
-        /** Place user language to the global */
-        global $lang;
-        require(LANG_DIR . 'main.php');
 
         setlocale(LC_ALL, config('language.lang.' . $this->data['user_lang'] . '.locale') ?? 'en_US.UTF-8');
 

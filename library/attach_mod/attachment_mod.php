@@ -22,26 +22,6 @@ if (defined('ATTACH_INSTALL')) {
 }
 
 /**
- * wrapper function for determining the correct language directory
- */
-function attach_mod_get_lang($language_file)
-{
-    global $attach_config;
-
-    $file = LANG_ROOT_DIR . '/' . config('tp.default_lang') . '/' . $language_file . '.php';
-    if (file_exists($file)) {
-        return config('tp.default_lang');
-    }
-
-    $file = LANG_ROOT_DIR . '/' . $attach_config['board_lang'] . '/' . $language_file . '.php';
-    if (file_exists($file)) {
-        return $attach_config['board_lang'];
-    }
-
-    bb_die('Attachment mod language file does not exist: language/' . $attach_config['board_lang'] . '/' . $language_file . '.php');
-}
-
-/**
  * Get attachment mod configuration
  */
 function get_config()
@@ -57,9 +37,6 @@ function get_config()
     while ($row = OLD_DB()->sql_fetchrow($result)) {
         $attach_config[$row['config_name']] = trim($row['config_value']);
     }
-
-    // We assign the original default board language here, because it gets overwritten later with the users default language
-    $attach_config['board_lang'] = trim(config('tp.default_lang'));
 
     return $attach_config;
 }

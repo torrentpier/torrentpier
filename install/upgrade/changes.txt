@@ -32,3 +32,6 @@ ALTER TABLE `bb_banlist` CHANGE `ban_ip` `ban_ip` varchar(42) NOT NULL DEFAULT '
 // 2.2.2
 ALTER TABLE `bb_ranks` DROP `rank_min`;
 ALTER TABLE `bb_ranks` DROP `rank_special`;
+
+// 3.0.0
+DELETE FROM `bb_config` WHERE `config_name` = 'default_lang';

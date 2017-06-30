@@ -66,7 +66,7 @@ if (!$mod = $datastore->get('moderators')) {
 array_deep($mod['moderators'], 'html_entity_decode');
 array_deep($mod['admins'], 'html_entity_decode');
 
-$users = array($lang['ACTS_LOG_ALL_ACTIONS'] => $all_users) + array_flip($mod['moderators']) + array_flip($mod['admins']);
+$users = array(trans('messages.ACTS_LOG_ALL_ACTIONS') => $all_users) + array_flip($mod['moderators']) + array_flip($mod['admins']);
 
 unset($mod);
 
@@ -253,7 +253,7 @@ if ($log_rowset) {
         $datetime_href_s = url_arg($datetime_href_s, $daysback_key, 1);
 
         $template->assign_block_vars('log', array(
-            'ACTION_DESC' => $lang['LOG_ACTION']['LOG_TYPE'][$log_type_flip[$row['log_type_id']]],
+            'ACTION_DESC' => trans('messages.LOG_ACTION.LOG_TYPE.' . $log_type_flip[$row['log_type_id']]),
             'ACTION_HREF_S' => url_arg($url, $type_key, $row['log_type_id']),
 
             'USER_ID' => $row['log_user_id'],
@@ -323,7 +323,7 @@ if ($log_rowset) {
 }
 
 // Select
-$log_type_select = array($lang['ACTS_LOG_ALL_ACTIONS'] => $all_types) + $log_action->log_type_select;
+$log_type_select = array(trans('messages.ACTS_LOG_ALL_ACTIONS') => $all_types) + $log_action->log_type_select;
 
 $template->assign_vars(array(
     'LOG_COLSPAN' => 4,
@@ -332,7 +332,7 @@ $template->assign_vars(array(
     'DATETIME_VAL' => date('Y-m-d', $datetime_val),
     'DAYSBACK_NAME' => $daysback_key,
     'DAYSBACK_VAL' => $daysback_val,
-    'FIRST_LOG_TIME' => $first_log_time ? date('Y-m-d', $first_log_time) : $lang['ACC_NONE'],
+    'FIRST_LOG_TIME' => $first_log_time ? date('Y-m-d', $first_log_time) : trans('messages.ACC_NONE'),
 
     'TITLE_MATCH_MAX' => $title_match_max_len,
     'TITLE_MATCH_NAME' => $title_match_key,

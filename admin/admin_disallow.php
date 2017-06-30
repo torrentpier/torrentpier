@@ -21,20 +21,20 @@ if (isset($_POST['add_name'])) {
     $disallowed_user = isset($_POST['disallowed_user']) ? trim($_POST['disallowed_user']) : trim($_GET['disallowed_user']);
 
     if ($disallowed_user == '') {
-        bb_die($lang['FIELDS_EMPTY']);
+        bb_die(trans('messages.FIELDS_EMPTY'));
     }
     if (!validate_username($disallowed_user)) {
-        $message = $lang['DISALLOWED_ALREADY'];
+        $message = trans('messages.DISALLOWED_ALREADY');
     } else {
         $sql = 'INSERT INTO ' . BB_DISALLOW . " (disallow_username) VALUES('" . OLD_DB()->escape($disallowed_user) . "')";
         $result = OLD_DB()->sql_query($sql);
         if (!$result) {
             bb_die('Could not add disallowed user');
         }
-        $message = $lang['DISALLOW_SUCCESSFUL'];
+        $message = trans('messages.DISALLOW_SUCCESSFUL');
     }
 
-    $message .= '<br /><br />' . sprintf($lang['CLICK_RETURN_DISALLOWADMIN'], '<a href="admin_disallow.php">', '</a>') . '<br /><br />' . sprintf($lang['CLICK_RETURN_ADMIN_INDEX'], '<a href="index.php?pane=right">', '</a>');
+    $message .= '<br /><br />' . sprintf(trans('messages.CLICK_RETURN_DISALLOWADMIN'), '<a href="admin_disallow.php">', '</a>') . '<br /><br />' . sprintf(trans('messages.CLICK_RETURN_ADMIN_INDEX'), '<a href="index.php?pane=right">', '</a>');
 
     bb_die($message);
 } elseif (isset($_POST['delete_name'])) {
@@ -46,7 +46,7 @@ if (isset($_POST['add_name'])) {
         bb_die('Could not removed disallowed user');
     }
 
-    $message .= $lang['DISALLOWED_DELETED'] . '<br /><br />' . sprintf($lang['CLICK_RETURN_DISALLOWADMIN'], '<a href="admin_disallow.php">', '</a>') . '<br /><br />' . sprintf($lang['CLICK_RETURN_ADMIN_INDEX'], '<a href="index.php?pane=right">', '</a>');
+    $message .= trans('messages.DISALLOWED_DELETED') . '<br /><br />' . sprintf(trans('messages.CLICK_RETURN_DISALLOWADMIN'), '<a href="admin_disallow.php">', '</a>') . '<br /><br />' . sprintf(trans('messages.CLICK_RETURN_ADMIN_INDEX'), '<a href="index.php?pane=right">', '</a>');
 
     bb_die($message);
 }
@@ -68,7 +68,7 @@ $disallowed = OLD_DB()->sql_fetchrowset($result);
 $disallow_select = '<select name="disallowed_id">';
 
 if (count($disallowed) <= 0) {
-    $disallow_select .= '<option value="">' . $lang['NO_DISALLOWED'] . '</option>';
+    $disallow_select .= '<option value="">' . trans('messages.NO_DISALLOWED') . '</option>';
 } else {
     for ($i = 0, $iMax = count($disallowed); $i < $iMax; $i++) {
         $disallow_select .= '<option value="' . $disallowed[$i]['disallow_id'] . '">' . $disallowed[$i]['disallow_username'] . '</option>';

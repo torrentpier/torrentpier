@@ -106,7 +106,7 @@ function prepare_message($message)
 // Either in a window or inline
 function generate_smilies($mode)
 {
-    global $template, $lang, $user, $datastore;
+    global $template, $user, $datastore;
 
     $inline_columns = 4;
     $inline_rows = 7;
@@ -170,7 +170,7 @@ function generate_smilies($mode)
             }
 
             $template->assign_vars(array(
-                'PAGE_TITLE' => $lang['EMOTICONS'],
+                'PAGE_TITLE' => trans('messages.EMOTICONS'),
                 'S_SMILIES_COLSPAN' => $s_colspan,
             ));
         }

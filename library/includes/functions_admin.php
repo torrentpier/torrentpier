@@ -192,7 +192,7 @@ function sync($type, $id)
 
 function topic_delete($mode_or_topic_id, $forum_id = null, $prune_time = 0, $prune_all = false)
 {
-    global $lang, $log_action;
+    global $log_action;
 
     $prune = ($mode_or_topic_id === 'prune');
 
@@ -365,7 +365,7 @@ function topic_delete($mode_or_topic_id, $forum_id = null, $prune_time = 0, $pru
     } else {
         foreach ($log_topics as $row) {
             if ($row['topic_status'] == TOPIC_MOVED) {
-                $row['topic_title'] = '<i>' . $lang['TOPIC_MOVED'] . '</i> ' . $row['topic_title'];
+                $row['topic_title'] = '<i>' . trans('messages.TOPIC_MOVED') . '</i> ' . $row['topic_title'];
             }
 
             $log_action->mod('mod_topic_delete', array(

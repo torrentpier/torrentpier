@@ -16,7 +16,7 @@ require INC_DIR . '/bbcode.php';
 
 if (isset($_POST['post']) && config('tp.terms') != $_POST['message']) {
     bb_update_config(array('terms' => $_POST['message']));
-    bb_die($lang['CONFIG_UPDATED']);
+    bb_die(trans('messages.CONFIG_UPDATED'));
 }
 
 $template->assign_vars(array(

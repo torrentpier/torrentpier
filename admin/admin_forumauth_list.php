@@ -26,13 +26,13 @@ $simple_auth_ary = [
 ];
 
 $simple_auth_types = [
-    $lang['PUBLIC'],
-    $lang['REGISTERED'],
-    $lang['REGISTERED'] . ' [' . $lang['HIDDEN'] . ']',
-    $lang['PRIVATE'],
-    $lang['PRIVATE'] . ' [' . $lang['HIDDEN'] . ']',
-    $lang['MODERATORS'],
-    $lang['MODERATORS'] . ' [' . $lang['HIDDEN'] . ']',
+    trans('messages.PUBLIC'),
+    trans('messages.REGISTERED'),
+    trans('messages.REGISTERED') . ' [' . trans('messages.HIDDEN') . ']',
+    trans('messages.PRIVATE'),
+    trans('messages.PRIVATE') . ' [' . trans('messages.HIDDEN') . ']',
+    trans('messages.MODERATORS'),
+    trans('messages.MODERATORS') . ' [' . trans('messages.HIDDEN') . ']',
 ];
 
 $forum_auth_fields = [
@@ -52,7 +52,7 @@ $forum_auth_fields = [
 
 $field_names = [];
 foreach ($forum_auth_fields as $auth_type) {
-    $field_names[$auth_type] = $lang[strtoupper($auth_type)];
+    $field_names[$auth_type] = trans('messages.' . strtoupper($auth_type));
 }
 
 $forum_auth_levels = ['ALL', 'REG', 'PRIVATE', 'MOD', 'ADMIN'];
@@ -146,7 +146,7 @@ if (isset($_POST['submit'])) {
     }
 
     $datastore->update('cat_forums');
-    bb_die($lang['FORUM_AUTH_UPDATED'] . '<br /><br />' . sprintf($lang['CLICK_RETURN_FORUMAUTH'], '<a href="admin_forumauth_list.php">', '</a>'));
+    bb_die(trans('messages.FORUM_AUTH_UPDATED') . '<br /><br />' . sprintf(trans('messages.CLICK_RETURN_FORUMAUTH'), '<a href="admin_forumauth_list.php">', '</a>'));
 } // End of submit
 
 //
@@ -218,8 +218,8 @@ if (empty($forum_id) && empty($cat_id)) {
                         }
                     }
                     $template->assign_block_vars('cat_row.forum_row.forum_auth_data', array(
-                            'CELL_VALUE' => $lang['FORUM_' . $item_auth_level],
-                            'AUTH_EXPLAIN' => sprintf($lang[strtoupper('FORUM_AUTH_LIST_EXPLAIN_' . $forum_auth_fields[$k])], $lang[strtoupper('FORUM_AUTH_LIST_EXPLAIN_' . $item_auth_level)]))
+                            'CELL_VALUE' => trans('messages.FORUM_' . $item_auth_level),
+                            'AUTH_EXPLAIN' => sprintf(trans('messages.' . strtoupper('FORUM_AUTH_LIST_EXPLAIN_' . $forum_auth_fields[$k])), trans('messages.' . strtoupper('FORUM_AUTH_LIST_EXPLAIN_' . $item_auth_level))))
                     );
                 }
             }
@@ -277,8 +277,8 @@ if (empty($forum_id) && empty($cat_id)) {
                     }
                 }
                 $template->assign_block_vars('cat_row.forum_row.forum_auth_data', array(
-                        'CELL_VALUE' => $lang['FORUM_' . $item_auth_level],
-                        'AUTH_EXPLAIN' => sprintf($lang[strtoupper('FORUM_AUTH_LIST_EXPLAIN_' . $forum_auth_fields[$k])], $lang[strtoupper('FORUM_AUTH_LIST_EXPLAIN_' . $item_auth_level)]))
+                        'CELL_VALUE' => trans('messages.FORUM_' . $item_auth_level),
+                        'AUTH_EXPLAIN' => sprintf(trans('messages.' . strtoupper('FORUM_AUTH_LIST_EXPLAIN_' . $forum_auth_fields[$k])), trans('messages.' . strtoupper('FORUM_AUTH_LIST_EXPLAIN_' . $item_auth_level))))
                 );
             }
         }
@@ -293,7 +293,7 @@ if (empty($forum_id) && empty($cat_id)) {
 
         for ($k = 0, $kMax = count($forum_auth_levels); $k < $kMax; $k++) {
             $selected = (!empty($forum_rows) && $forum_rows[0][$forum_auth_fields[$j]] == $forum_auth_const[$k]) ? ' selected="selected"' : '';
-            $custom_auth[$j] .= '<option value="' . $forum_auth_const[$k] . '"' . $selected . '>' . $lang['FORUM_' . $forum_auth_levels[$k]] . '</option>';
+            $custom_auth[$j] .= '<option value="' . $forum_auth_const[$k] . '"' . $selected . '>' . trans('messages.FORUM_' . $forum_auth_levels[$k]) . '</option>';
         }
         $custom_auth[$j] .= '</select>';
 
