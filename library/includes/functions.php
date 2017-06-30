@@ -181,7 +181,7 @@ function bf($int, $bf_array_name, $key)
 
 function setbit(&$int, $bit_num, $on)
 {
-    return ($on) ? $int |= (1 << $bit_num) : $int &= ~(1 << $bit_num);
+    return $on ? $int |= (1 << $bit_num) : $int &= ~(1 << $bit_num);
 }
 
 /*
@@ -484,7 +484,7 @@ function declension($int, $expressions, $format = '%1$s %2$s')
         }
     }
 
-    return ($format) ? sprintf($format, $int, $result) : $result;
+    return $format ? sprintf($format, $int, $result) : $result;
 }
 
 // http://forum.dklab.ru/php/advises/UrlreplaceargChangesValueOfParameterInUrl.html
@@ -536,7 +536,7 @@ function humn_size($size, $rounder = null, $min = null, $space = '&nbsp;')
         $ext = 'KB';
         $rounder = 1;
     } else {
-        for ($i = 1, $cnt = count($sizes); ($i < $cnt && $size >= 1024); $i++) {
+        for ($i = 1, $cnt = count($sizes); $i < $cnt && $size >= 1024; $i++) {
             $size /= 1024;
             $ext = $sizes[$i];
             $rnd = $rounders[$i];
@@ -553,7 +553,7 @@ function bt_show_ip($ip, $port = '')
 {
     if (IS_AM) {
         $ip = decode_ip($ip);
-        $ip .= ($port) ? ":$port" : '';
+        $ip .= $port ? ":$port" : '';
         return $ip;
     }
 
@@ -584,7 +584,7 @@ function checkbox_get_val(&$key, &$val, $default = 1, $on = 1, $off = 0)
     } elseif (!isset($_REQUEST[$key]) && isset($_REQUEST['prev_' . $key])) {
         $val = $off;
     } elseif (isset($previous_settings[$key]) && (!IS_GUEST || !empty($search_id))) {
-        $val = ($previous_settings[$key]) ? $on : $off;
+        $val = $previous_settings[$key] ? $on : $off;
     } else {
         $val = $default;
     }
@@ -596,7 +596,7 @@ function select_get_val($key, &$val, $options_ary, $default, $num = true)
 
     if (isset($_REQUEST[$key]) && is_string($_REQUEST[$key])) {
         if (isset($options_ary[$_REQUEST[$key]])) {
-            $val = ($num) ? (int)$_REQUEST[$key] : $_REQUEST[$key];
+            $val = $num ? (int)$_REQUEST[$key] : $_REQUEST[$key];
         }
     } elseif (isset($previous_settings[$key])) {
         $val = $previous_settings[$key];
@@ -629,7 +629,7 @@ function set_var(&$result, $var, $type, $multibyte = false, $strip = true)
             }
         }
 
-        $result = ($strip) ? stripslashes($result) : $result;
+        $result = $strip ? stripslashes($result) : $result;
     }
 }
 
@@ -642,13 +642,13 @@ function request_var($var_name, $default, $multibyte = false, $cookie = false)
 {
     if (!$cookie && isset($_COOKIE[$var_name])) {
         if (!isset($_GET[$var_name]) && !isset($_POST[$var_name])) {
-            return (is_array($default)) ? array() : $default;
+            return is_array($default) ? array() : $default;
         }
         $_REQUEST[$var_name] = $_POST[$var_name] ?? $_GET[$var_name];
     }
 
     if (!isset($_REQUEST[$var_name]) || (is_array($_REQUEST[$var_name]) && !is_array($default)) || (is_array($default) && !is_array($_REQUEST[$var_name]))) {
-        return (is_array($default)) ? array() : $default;
+        return is_array($default) ? array() : $default;
     }
 
     $var = $_REQUEST[$var_name];
@@ -765,7 +765,7 @@ function get_bt_ratio($btu)
 {
     return
         (!empty($btu['u_down_total']) && $btu['u_down_total'] > MIN_DL_FOR_RATIO)
-            ? round((($btu['u_up_total'] + $btu['u_up_release'] + $btu['u_up_bonus']) / $btu['u_down_total']), 2)
+            ? round(($btu['u_up_total'] + $btu['u_up_release'] + $btu['u_up_bonus']) / $btu['u_down_total'], 2)
             : null;
 }
 
@@ -785,19 +785,19 @@ function show_bt_userdata($user_id)
         'USER_RATIO' => get_bt_ratio($btu),
         'MIN_DL_FOR_RATIO' => humn_size(MIN_DL_FOR_RATIO),
         'MIN_DL_BYTES' => MIN_DL_FOR_RATIO,
-        'AUTH_KEY' => ($btu['auth_key']) ?: trans('messages.NONE'),
+        'AUTH_KEY' => $btu['auth_key'] ?: trans('messages.NONE'),
 
         'TD_DL' => humn_size($btu['down_today']),
         'TD_UL' => humn_size($btu['up_today']),
         'TD_REL' => humn_size($btu['up_release_today']),
         'TD_BONUS' => humn_size($btu['up_bonus_today']),
-        'TD_POINTS' => ($btu['auth_key']) ? $btu['points_today'] : '0.00',
+        'TD_POINTS' => $btu['auth_key'] ? $btu['points_today'] : '0.00',
 
         'YS_DL' => humn_size($btu['down_yesterday']),
         'YS_UL' => humn_size($btu['up_yesterday']),
         'YS_REL' => humn_size($btu['up_release_yesterday']),
         'YS_BONUS' => humn_size($btu['up_bonus_yesterday']),
-        'YS_POINTS' => ($btu['auth_key']) ? $btu['points_yesterday'] : '0.00',
+        'YS_POINTS' => $btu['auth_key'] ? $btu['points_yesterday'] : '0.00',
 
         'SPEED_UP' => humn_size($btu['speed_up'], 0, 'KB') . '/s',
         'SPEED_DOWN' => humn_size($btu['speed_down'], 0, 'KB') . '/s',
@@ -971,7 +971,7 @@ function make_jumpbox($selected = 0)
     }
 
     $template->assign_vars(array(
-        'JUMPBOX' => (IS_GUEST) ? $jumpbox['guest'] : $jumpbox['user'],
+        'JUMPBOX' => IS_GUEST ? $jumpbox['guest'] : $jumpbox['user'],
     ));
 }
 
@@ -1020,7 +1020,7 @@ function get_forum_select($mode = 'guest', $name = POST_FORUM_URL, $selected = n
                 trigger_error(__FUNCTION__ . ": invalid mode '$mode'", E_USER_ERROR);
         }
         $cat_title = $forums['c'][$f['cat_id']]['cat_title'];
-        $f_name = ($f['forum_parent']) ? ' |- ' : '';
+        $f_name = $f['forum_parent'] ? ' |- ' : '';
         $f_name .= $f['forum_name'];
 
         while (isset($select[$cat_title][$f_name])) {
@@ -1107,12 +1107,12 @@ function bb_date($gmepoch, $format = false, $friendly_date = true)
         } elseif ($today != 1 && $date_today == ($today - 1) && $date_month == $month && $date_year == $year) {
             $date = 'yesterday' . gmdate($time_format, $gmepoch + (3600 * $tz));
         } elseif ($today == 1 && $month != 1) {
-            $yesterday = date('t', mktime(0, 0, 0, ($month - 1), 1, $year));
+            $yesterday = date('t', mktime(0, 0, 0, $month - 1, 1, $year));
             if ($date_today == $yesterday && $date_month == ($month - 1) && $date_year == $year) {
                 $date = 'yesterday' . gmdate($time_format, $gmepoch + (3600 * $tz));
             }
         } elseif ($today == 1 && $month == 1) {
-            $yesterday = date('t', mktime(0, 0, 0, 12, 1, ($year - 1)));
+            $yesterday = date('t', mktime(0, 0, 0, 12, 1, $year - 1));
             if ($date_today == $yesterday && $date_month == 12 && $date_year == ($year - 1)) {
                 $date = 'yesterday' . gmdate($time_format, $gmepoch + (3600 * $tz));
             }
@@ -1220,12 +1220,12 @@ function generate_pagination($base_url, $num_items, $per_page, $start_item, $add
         }
     }
 
-    $pagination = ($page_string) ? '<a class="menu-root" href="#pg-jump">' . trans('messages.GOTO_PAGE') . '</a> :&nbsp;&nbsp;' . $page_string : '';
+    $pagination = $page_string ? '<a class="menu-root" href="#pg-jump">' . trans('messages.GOTO_PAGE') . '</a> :&nbsp;&nbsp;' . $page_string : '';
     $pagination = str_replace('&amp;start=0', '', $pagination);
 
     $template->assign_vars(array(
         'PAGINATION' => $pagination,
-        'PAGE_NUMBER' => sprintf(trans('messages.PAGE_OF'), (floor($start_item / $per_page) + 1), ceil($num_items / $per_page)),
+        'PAGE_NUMBER' => sprintf(trans('messages.PAGE_OF'), floor($start_item / $per_page) + 1, ceil($num_items / $per_page)),
         'PG_BASE_URL' => $base_url,
         'PG_PER_PAGE' => $per_page,
     ));
@@ -1301,7 +1301,7 @@ function bb_die($msg_text)
         if (empty($theme)) {
             $theme = setup_style();
         }
-        require(PAGE_HEADER);
+        require PAGE_HEADER;
     }
 
     // Check for lang variable
@@ -1317,7 +1317,7 @@ function bb_die($msg_text)
     $template->set_filenames(array('bb_die' => 'common.tpl'));
     $template->pparse('bb_die');
 
-    require(PAGE_FOOTER);
+    require PAGE_FOOTER;
 
     exit;
 }
@@ -1566,8 +1566,8 @@ function get_topic_icon($topic, $is_unread = null)
     if ($topic['topic_status'] == TOPIC_MOVED) {
         $folder_image = $images['folder'];
     } else {
-        $folder = ($t_hot) ? $images['folder_hot'] : $images['folder'];
-        $folder_new = ($t_hot) ? $images['folder_hot_new'] : $images['folder_new'];
+        $folder = $t_hot ? $images['folder_hot'] : $images['folder'];
+        $folder_new = $t_hot ? $images['folder_hot_new'] : $images['folder_new'];
 
         if ($topic['topic_type'] == POST_ANNOUNCE) {
             $folder = $images['folder_announce'];
@@ -1579,11 +1579,11 @@ function get_topic_icon($topic, $is_unread = null)
             $folder = $images['folder_locked'];
             $folder_new = $images['folder_locked_new'];
         } elseif ($topic['topic_dl_type'] == TOPIC_DL_TYPE_DL) {
-            $folder = ($t_hot) ? $images['folder_dl_hot'] : $images['folder_dl'];
-            $folder_new = ($t_hot) ? $images['folder_dl_hot_new'] : $images['folder_dl_new'];
+            $folder = $t_hot ? $images['folder_dl_hot'] : $images['folder_dl'];
+            $folder_new = $t_hot ? $images['folder_dl_hot_new'] : $images['folder_dl_new'];
         }
 
-        $folder_image = ($is_unread) ? $folder_new : $folder;
+        $folder_image = $is_unread ? $folder_new : $folder;
     }
 
     return $folder_image;
@@ -1597,7 +1597,7 @@ function build_topic_pagination($url, $replies, $per_page)
         $total_pages = ceil($replies / $per_page);
 
         for ($j = 0, $page = 1; $j < $replies; $j += $per_page, $page++) {
-            $href = ($j) ? "$url&amp;start=$j" : $url;
+            $href = $j ? "$url&amp;start=$j" : $url;
             $pg .= '<a href="' . $href . '" class="topicPG">' . $page . '</a>';
 
             if ($page == 1 && $total_pages > 3) {
@@ -1689,14 +1689,14 @@ function print_page($args, $type = '', $mode = '')
     $gen_simple_header = (is_array($args) && !empty($args['simple']) or $type === 'simple') ? true : $gen_simple_header;
 
     if ($mode !== 'no_header') {
-        require(PAGE_HEADER);
+        require PAGE_HEADER;
     }
 
     $template->set_filenames(array('body' => $tpl));
     $template->pparse('body');
 
     if ($mode !== 'no_footer') {
-        require(PAGE_FOOTER);
+        require PAGE_FOOTER;
     }
 }
 
@@ -1719,7 +1719,7 @@ function caching_output($enabled, $mode, $cache_var_name, $ttl = 300)
 
 function clean_title($str, $replace_underscore = false)
 {
-    $str = ($replace_underscore) ? str_replace('_', ' ', $str) : $str;
+    $str = $replace_underscore ? str_replace('_', ' ', $str) : $str;
     $str = htmlCHR(str_compact($str));
     return $str;
 }
@@ -1727,7 +1727,7 @@ function clean_title($str, $replace_underscore = false)
 function clean_text_match($text, $ltrim_star = true, $die_if_empty = false)
 {
     $text = str_compact($text);
-    $ltrim_chars = ($ltrim_star) ? ' *-!' : ' ';
+    $ltrim_chars = $ltrim_star ? ' *-!' : ' ';
     $wrap_with_quotes = preg_match('#^"[^"]+"$#', $text);
 
     $text = ' ' . str_compact(ltrim($text, $ltrim_chars)) . ' ';
@@ -1817,7 +1817,7 @@ function get_title_match_topics($title_match_sql, array $forum_ids = array())
             log_sphinx_error('wrn', $warning, $title_match_sql);
         }
     } elseif (config('tp.search_engine_type') == 'mysql') {
-        $where_forum = ($forum_ids) ? "AND forum_id IN(" . implode(',', $forum_ids) . ")" : '';
+        $where_forum = $forum_ids ? "AND forum_id IN(" . implode(',', $forum_ids) . ")" : '';
         $search_bool_mode = config('tp.allow_search_in_bool_mode') ? ' IN BOOLEAN MODE' : '';
 
         if ($title_match) {

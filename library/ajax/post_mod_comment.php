@@ -31,9 +31,9 @@ if (!$post) {
 }
 
 $data = array(
-    'mc_comment' => ($mc_type) ? $mc_text : '',
+    'mc_comment' => $mc_type ? $mc_text : '',
     'mc_type' => $mc_type,
-    'mc_user_id' => ($mc_type) ? $userdata['user_id'] : 0,
+    'mc_user_id' => $mc_type ? $userdata['user_id'] : 0,
 );
 $sql_args = OLD_DB()->build_array('UPDATE', $data);
 OLD_DB()->query("UPDATE " . BB_POSTS . " SET $sql_args WHERE post_id = $post_id");

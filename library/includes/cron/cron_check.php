@@ -32,7 +32,7 @@ if ($cron_jobs) {
         }
     }
 
-    require(CRON_DIR . 'cron_run.php');
+    require CRON_DIR . 'cron_run.php';
 
     // Update cron_last_check
     bb_update_config(array('cron_last_check' => TIMENOW + 10));

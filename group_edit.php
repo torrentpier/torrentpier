@@ -85,11 +85,11 @@ if ($is_moderator) {
     $template->set_filenames(array('body' => 'group_edit.tpl'));
     $template->assign_vars(array('PAGE_TITLE' => trans('messages.GROUP_CONFIGURATION')));
 
-    require(PAGE_HEADER);
+    require PAGE_HEADER;
 
     $template->pparse('body');
 
-    require(PAGE_FOOTER);
+    require PAGE_FOOTER;
 } else {
     $redirect = 'index.php';
 

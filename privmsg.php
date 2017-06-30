@@ -928,10 +928,10 @@ if ($mode == 'read') {
         // passed to the script, process it a little, do some checks
         // where neccessary, etc.
         //
-        $to_username = (isset($_POST['username'])) ? clean_username($_POST['username']) : '';
+        $to_username = isset($_POST['username']) ? clean_username($_POST['username']) : '';
 
-        $privmsg_subject = (isset($_POST['subject'])) ? clean_title($_POST['subject']) : '';
-        $privmsg_message = (isset($_POST['message'])) ? prepare_message($_POST['message']) : '';
+        $privmsg_subject = isset($_POST['subject']) ? clean_title($_POST['subject']) : '';
+        $privmsg_message = isset($_POST['message']) ? prepare_message($_POST['message']) : '';
 
         //
         // Do mode specific things
@@ -1034,7 +1034,7 @@ if ($mode == 'read') {
     // Has admin prevented user from sending PM's?
     //
     if (bf($userdata['user_opt'], 'user_opt', 'dis_pm') && $mode != 'edit') {
-        $message = (trans('messages.CANNOT_SEND_PRIVMSG'));
+        $message = trans('messages.CANNOT_SEND_PRIVMSG');
     }
 
     //
@@ -1323,7 +1323,7 @@ if ($mode == 'read') {
     if ($max_pm) {
         $box_limit_percent = min(round(($pm_all_total / $max_pm) * 100), 100);
         $box_limit_img_length = min(round(($pm_all_total / $max_pm) * config('tp.privmsg_graphic_length')), config('tp.privmsg_graphic_length'));
-        $box_limit_remain = max(($max_pm - $pm_all_total), 0);
+        $box_limit_remain = max($max_pm - $pm_all_total, 0);
 
         $template->assign_var('PM_BOX_SIZE_INFO');
 
@@ -1360,7 +1360,7 @@ if ($mode == 'read') {
         'INBOX_LIMIT_IMG_WIDTH' => max(4, $box_limit_img_length),
         'INBOX_LIMIT_PERCENT' => $box_limit_percent,
 
-        'BOX_SIZE_STATUS' => ($l_box_size_status) ?: '',
+        'BOX_SIZE_STATUS' => $l_box_size_status ?: '',
 
         'L_FROM_OR_TO' => ($folder == 'inbox' || $folder == 'savebox') ? trans('messages.FROM') : trans('messages.TO'),
 
@@ -1435,11 +1435,11 @@ if ($mode == 'read') {
 
 $template->assign_vars(array('PAGE_TITLE' => @$page_title));
 
-require(PAGE_HEADER);
+require PAGE_HEADER;
 
 $template->pparse('body');
 
-require(PAGE_FOOTER);
+require PAGE_FOOTER;
 
 //
 // Functions

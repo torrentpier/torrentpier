@@ -171,7 +171,7 @@ if ($post_info = OLD_DB()->fetch_row($sql)) {
         $post_data['poster_id'] = $post_info['poster_id'];
 
         $selected_rg = $post_info['poster_rg_id'];
-        $switch_rg_sig = ($post_info['attach_rg_sig']) ? true : false;
+        $switch_rg_sig = $post_info['attach_rg_sig'] ? true : false;
 
         // Can this user edit/delete the post?
         if ($post_info['poster_id'] != $userdata['user_id'] && !$is_auth['auth_mod']) {
@@ -443,13 +443,13 @@ if ($refresh || $error_msg || ($submit && $topic_has_new_posts)) {
 } else {
     // User default entry point
     if ($mode == 'newtopic') {
-        $username = ($userdata['session_logged_in']) ? $userdata['username'] : '';
+        $username = $userdata['session_logged_in'] ? $userdata['username'] : '';
         $subject = $message = '';
     } elseif ($mode == 'reply') {
-        $username = ($userdata['session_logged_in']) ? $userdata['username'] : '';
+        $username = $userdata['session_logged_in'] ? $userdata['username'] : '';
         $subject = $message = '';
     } elseif ($mode == 'quote' || $mode == 'editpost') {
-        $subject = ($post_data['first_post']) ? $post_info['topic_title'] : '';
+        $subject = $post_data['first_post'] ? $post_info['topic_title'] : '';
         $message = $post_info['post_text'];
 
         if ($mode == 'quote') {
@@ -547,7 +547,7 @@ if ($post_info['allow_reg_tracker'] && $post_data['first_post'] && ($topic_dl_ty
 
         $dl_ds = $dl_ch = $dl_hid = '';
         $dl_type_name = 'topic_dl_type';
-        $dl_type_val = ($topic_dl_type) ? 1 : 0;
+        $dl_type_val = $topic_dl_type ? 1 : 0;
 
         if (!$post_info['allow_reg_tracker'] && !$is_auth['auth_mod']) {
             $dl_ds = ' disabled="disabled" ';
@@ -616,16 +616,16 @@ $template->assign_vars(array(
     'U_VIEW_FORUM' => "viewforum.php?" . POST_FORUM_URL . "=$forum_id",
 
     'USERNAME' => @$username,
-    'CAPTCHA_HTML' => (IS_GUEST) ? bb_captcha('get') : '',
+    'CAPTCHA_HTML' => IS_GUEST ? bb_captcha('get') : '',
     'SUBJECT' => $subject,
     'MESSAGE' => $message,
 
     'POSTER_RGROUPS' => isset($poster_rgroups) && !empty($poster_rgroups) ? $poster_rgroups : '',
-    'ATTACH_RG_SIG' => ($switch_rg_sig) ?: false,
+    'ATTACH_RG_SIG' => $switch_rg_sig ?: false,
 
     'U_VIEWTOPIC' => ($mode == 'reply') ? "viewtopic.php?" . POST_TOPIC_URL . "=$topic_id&amp;postorder=desc" : '',
 
-    'S_NOTIFY_CHECKED' => ($notify_user) ? 'checked="checked"' : '',
+    'S_NOTIFY_CHECKED' => $notify_user ? 'checked="checked"' : '',
     'S_TYPE_TOGGLE' => $topic_type_toggle,
     'S_TOPIC_ID' => $topic_id,
     'S_POST_ACTION' => POSTING_URL,
@@ -639,8 +639,8 @@ if ($mode == 'newtopic' || $post_data['first_post']) {
 // Update post time
 if ($mode == 'editpost' && $post_data['last_post'] && !$post_data['first_post']) {
     $template->assign_vars(array(
-        'SHOW_UPDATE_POST_TIME' => ($is_auth['auth_mod'] || ($post_data['poster_post'] && $post_info['post_time'] + 3600 * 3 > TIMENOW)),
-        'UPDATE_POST_TIME_CHECKED' => ($post_data['poster_post'] && ($post_info['post_time'] + 3600 * 2 > TIMENOW)),
+        'SHOW_UPDATE_POST_TIME' => $is_auth['auth_mod'] || ($post_data['poster_post'] && $post_info['post_time'] + 3600 * 3 > TIMENOW),
+        'UPDATE_POST_TIME_CHECKED' => $post_data['poster_post'] && ($post_info['post_time'] + 3600 * 2 > TIMENOW),
     ));
 }
 
@@ -649,8 +649,8 @@ if ($mode == 'reply' && $is_auth['auth_read']) {
     topic_review($topic_id);
 }
 
-require(PAGE_HEADER);
+require PAGE_HEADER;
 
 $template->pparse('body');
 
-require(PAGE_FOOTER);
+require PAGE_FOOTER;

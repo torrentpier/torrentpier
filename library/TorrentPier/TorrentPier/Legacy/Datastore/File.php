@@ -82,7 +82,7 @@ class File extends Common
             $this->num_queries++;
 
             if (file_exists($filename)) {
-                require($filename);
+                require $filename;
 
                 $this->data[$item] = $filecache;
             }

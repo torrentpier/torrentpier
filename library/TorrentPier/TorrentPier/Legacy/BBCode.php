@@ -330,7 +330,7 @@ class BBCode
         // Remove our padding..
         $ret = substr(substr($ret, 0, -1), 1);
 
-        return ($ret);
+        return $ret;
     }
 
     /**

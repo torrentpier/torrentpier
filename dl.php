@@ -200,8 +200,8 @@ if (IS_GUEST && !bb_captcha('check')) {
         'ERROR_MESSAGE' => $message,
     ));
 
-    require(PAGE_HEADER);
-    require(PAGE_FOOTER);
+    require PAGE_HEADER;
+    require PAGE_FOOTER;
 }
 
 send_file_to_browser($attachment, $upload_dir);

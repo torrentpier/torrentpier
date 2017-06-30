@@ -37,11 +37,11 @@ $user->session_start();
 
 // Init main vars
 $viewcat = isset($_GET['c']) ? (int)$_GET['c'] : 0;
-$lastvisit = (IS_GUEST) ? TIMENOW : $userdata['user_lastvisit'];
+$lastvisit = IS_GUEST ? TIMENOW : $userdata['user_lastvisit'];
 
 // Caching output
 $req_page = 'index_page';
-$req_page .= ($viewcat) ? "_c{$viewcat}" : '';
+$req_page .= $viewcat ? "_c{$viewcat}" : '';
 
 define('REQUESTED_PAGE', $req_page);
 caching_output(IS_GUEST, 'send', REQUESTED_PAGE . '_guest_' . config('app.locale'));
@@ -79,10 +79,10 @@ if ($viewcat && !($viewcat =& $forums['c'][$viewcat]['cat_id'])) {
 
 // Forums
 $forums_join_sql = 'f.cat_id = c.cat_id';
-$forums_join_sql .= ($viewcat) ? "
+$forums_join_sql .= $viewcat ? "
 	AND f.cat_id = $viewcat
 " : '';
-$forums_join_sql .= ($excluded_forums_csv) ? "
+$forums_join_sql .= $excluded_forums_csv ? "
 	AND f.forum_id NOT IN($excluded_forums_csv)
 	AND f.forum_parent NOT IN($excluded_forums_csv)
 " : '';
@@ -195,7 +195,7 @@ foreach ($cat_forums as $cid => $c) {
     ));
 
     $template->assign_vars(array(
-        'H_C_AL_MESS' => ($hide_cat_opt && !$showhide),
+        'H_C_AL_MESS' => $hide_cat_opt && !$showhide,
     ));
 
     if (!$showhide && isset($hide_cat_user[$cid]) && !$viewcat) {
@@ -216,10 +216,10 @@ foreach ($cat_forums as $cid => $c) {
 
         $forums_count++;
         $new = is_unread($f['last_post_time'], $f['last_topic_id'], $f['forum_id']) ? '_new' : '';
-        $folder_image = ($is_sf) ? $images["icon_minipost{$new}"] : $images["forum{$new}"];
+        $folder_image = $is_sf ? $images["icon_minipost{$new}"] : $images["forum{$new}"];
 
         if ($f['forum_status'] == FORUM_LOCKED) {
-            $folder_image = ($is_sf) ? $images['icon_minipost'] : $images['forum_locked'];
+            $folder_image = $is_sf ? $images['icon_minipost'] : $images['forum_locked'];
         }
 
         if ($is_sf) {
@@ -257,9 +257,9 @@ foreach ($cat_forums as $cid => $c) {
 
 $template->assign_vars(array(
     'SHOW_FORUMS' => $forums_count,
-    'SHOW_MAP' => (isset($_GET['map']) && !IS_GUEST),
-    'PAGE_TITLE' => ($viewcat) ? $cat_title_html[$viewcat] : trans('messages.HOME'),
-    'NO_FORUMS_MSG' => ($only_new) ? trans('messages.NO_NEW_POSTS') : trans('messages.NO_FORUMS'),
+    'SHOW_MAP' => isset($_GET['map']) && !IS_GUEST,
+    'PAGE_TITLE' => $viewcat ? $cat_title_html[$viewcat] : trans('messages.HOME'),
+    'NO_FORUMS_MSG' => $only_new ? trans('messages.NO_NEW_POSTS') : trans('messages.NO_FORUMS'),
 
     'TOTAL_TOPICS' => sprintf(trans('messages.POSTED_TOPICS_TOTAL'), $stats['topiccount']),
     'TOTAL_POSTS' => sprintf(trans('messages.POSTED_ARTICLES_TOTAL'), $stats['postcount']),
@@ -294,8 +294,8 @@ $template->assign_vars(array(
     'FORUM_LOCKED_IMG' => $images['forum_locked'],
 
     'SHOW_ONLY_NEW_MENU' => true,
-    'ONLY_NEW_POSTS_ON' => ($only_new == ONLY_NEW_POSTS),
-    'ONLY_NEW_TOPICS_ON' => ($only_new == ONLY_NEW_TOPICS),
+    'ONLY_NEW_POSTS_ON' => $only_new == ONLY_NEW_POSTS,
+    'ONLY_NEW_TOPICS_ON' => $only_new == ONLY_NEW_TOPICS,
 
     'U_SEARCH_NEW' => "search.php?new=1",
     'U_SEARCH_SELF_BY_MY' => "search.php?uid={$userdata['user_id']}&amp;o=1",
@@ -365,7 +365,7 @@ if (config('tp.birthday_check_day') && config('tp.birthday_enabled')) {
             }
             $week_list[] = profile_url($week) . ' <span class="small">(' . birthday_age($week['user_birthday'] - 1) . ')</span>';
         }
-        $week_all = ($week_all) ? '&nbsp;<a class="txtb" href="#" onclick="ajax.exec({action: \'index_data\', mode: \'birthday_week\'}); return false;" title="' . trans('messages.ALL') . '">...</a>' : '';
+        $week_all = $week_all ? '&nbsp;<a class="txtb" href="#" onclick="ajax.exec({action: \'index_data\', mode: \'birthday_week\'}); return false;" title="' . trans('messages.ALL') . '">...</a>' : '';
         $week_list = sprintf(trans('messages.BIRTHDAY_WEEK'), config('tp.birthday_check_day'), implode(', ', $week_list)) . $week_all;
     } else {
         $week_list = sprintf(trans('messages.NOBIRTHDAY_WEEK'), config('tp.birthday_check_day'));
@@ -380,7 +380,7 @@ if (config('tp.birthday_check_day') && config('tp.birthday_enabled')) {
             }
             $today_list[] = profile_url($today) . ' <span class="small">(' . birthday_age($today['user_birthday']) . ')</span>';
         }
-        $today_all = ($today_all) ? '&nbsp;<a class="txtb" href="#" onclick="ajax.exec({action: \'index_data\', mode: \'birthday_today\'}); return false;" title="' . trans('messages.ALL') . '">...</a>' : '';
+        $today_all = $today_all ? '&nbsp;<a class="txtb" href="#" onclick="ajax.exec({action: \'index_data\', mode: \'birthday_today\'}); return false;" title="' . trans('messages.ALL') . '">...</a>' : '';
         $today_list = trans('messages.BIRTHDAY_TODAY') . implode(', ', $today_list) . $today_all;
     } else {
         $today_list = trans('messages.NOBIRTHDAY_TODAY');

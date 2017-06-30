@@ -168,7 +168,7 @@ function create_atom($file_path, $mode, $id, $title, $topics)
             $topic_title = preg_replace($orig_word, $replacement_word, $topic_title);
         }
         $topic_title = wbr($topic_title);
-        $author_name = ($topic['first_username']) ? wbr($topic['first_username']) : 'Гость';
+        $author_name = $topic['first_username'] ? wbr($topic['first_username']) : 'Гость';
         $last_time = $topic['topic_last_post_time'];
         if ($topic['topic_last_post_edit_time']) {
             $last_time = $topic['topic_last_post_edit_time'];

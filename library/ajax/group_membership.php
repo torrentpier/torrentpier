@@ -33,7 +33,7 @@ switch ($mode) {
 				";
         $html = array();
         foreach (OLD_DB()->fetch_rowset($sql) as $row) {
-            $class = ($row['user_pending']) ? 'med' : 'med bold';
+            $class = $row['user_pending'] ? 'med' : 'med bold';
             $class .= ($row['group_moderator'] == $user_id) ? ' colorMod' : '';
             $href = "group.php?g={$row['group_id']}";
 

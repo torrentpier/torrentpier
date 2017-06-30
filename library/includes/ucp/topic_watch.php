@@ -37,7 +37,7 @@ if (!($result = OLD_DB()->sql_query($sql))) {
     bb_die('Could not obtain watch topic information #2');
 }
 $row = OLD_DB()->sql_fetchrow($result);
-$watch_count = ($row['watch_count']) ?: 0;
+$watch_count = $row['watch_count'] ?: 0;
 OLD_DB()->sql_freeresult($result);
 
 if ($watch_count > 0) {
@@ -83,7 +83,7 @@ if ($watch_count > 0) {
         $template->assign_vars(array(
             'MATCHES' => (count($watch) == 1) ? sprintf(trans('messages.FOUND_SEARCH_MATCH'), count($watch)) : sprintf(trans('messages.FOUND_SEARCH_MATCHES'), count($watch)),
             'PAGINATION' => generate_pagination(BB_ROOT . 'profile.php?mode=watch', $watch_count, $per_page, $start),
-            'PAGE_NUMBER' => sprintf(trans('messages.PAGE_OF'), (floor($start / $per_page) + 1), ceil($watch_count / $per_page)),
+            'PAGE_NUMBER' => sprintf(trans('messages.PAGE_OF'), floor($start / $per_page) + 1, ceil($watch_count / $per_page)),
             'U_PER_PAGE' => BB_ROOT . 'profile.php?mode=watch',
             'PER_PAGE' => $per_page,
         ));

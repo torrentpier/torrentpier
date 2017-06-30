@@ -468,7 +468,7 @@ class User
             }
         } else {
             $c_sdata_resv = !empty($_COOKIE[COOKIE_DATA]) ? $_COOKIE[COOKIE_DATA] : null;
-            $c_sdata_curr = ($this->sessiondata) ? serialize($this->sessiondata) : '';
+            $c_sdata_curr = $this->sessiondata ? serialize($this->sessiondata) : '';
 
             if ($c_sdata_curr !== $c_sdata_resv) {
                 bb_setcookie(COOKIE_DATA, $c_sdata_curr, COOKIE_PERSIST, true);
@@ -517,7 +517,7 @@ class User
      */
     public function create_autologin_id($userdata, $create_new = true)
     {
-        $autologin_id = ($create_new) ? make_rand_str(LOGIN_KEY_LENGTH) : '';
+        $autologin_id = $create_new ? make_rand_str(LOGIN_KEY_LENGTH) : '';
 
         OLD_DB()->query("
 			UPDATE " . BB_USERS . " SET

@@ -133,7 +133,7 @@ set_die_append_msg($forum_id);
 // Find newest post
 if (($next_topic_id || @$_GET['view'] === 'newest') && !IS_GUEST && $topic_id) {
     $post_time = 'post_time >= ' . get_last_read($topic_id, $forum_id);
-    $post_id_altern = ($next_topic_id) ? '' : ' OR post_id = ' . $t_data['topic_last_post_id'];
+    $post_id_altern = $next_topic_id ? '' : ' OR post_id = ' . $t_data['topic_last_post_id'];
 
     $sql = "SELECT post_id, post_time
 		FROM " . BB_POSTS . "
@@ -164,7 +164,7 @@ $is_auth = auth_user(AUTH_ALL, $forum_id, $userdata, $t_data);
 
 if (!$is_auth['auth_read']) {
     if (IS_GUEST) {
-        $redirect = ($post_id) ? POST_URL . "$post_id#$post_id" : TOPIC_URL . $topic_id;
+        $redirect = $post_id ? POST_URL . "$post_id#$post_id" : TOPIC_URL . $topic_id;
         $redirect .= ($start && !$post_id) ? "&start=$start" : '';
         redirectToUrl(LOGIN_URL . "?redirect=$redirect");
     }
@@ -391,13 +391,13 @@ $template->set_filenames(array('body' => 'viewtopic.tpl'));
 //
 // User authorisation levels output
 //
-$s_auth_can = (($is_auth['auth_post']) ? trans('messages.RULES_POST_CAN') : trans('messages.RULES_POST_CANNOT')) . '<br />';
-$s_auth_can .= (($is_auth['auth_reply']) ? trans('messages.RULES_REPLY_CAN') : trans('messages.RULES_REPLY_CANNOT')) . '<br />';
-$s_auth_can .= (($is_auth['auth_edit']) ? trans('messages.RULES_EDIT_CAN') : trans('messages.RULES_EDIT_CANNOT')) . '<br />';
-$s_auth_can .= (($is_auth['auth_delete']) ? trans('messages.RULES_DELETE_CAN') : trans('messages.RULES_DELETE_CANNOT')) . '<br />';
-$s_auth_can .= (($is_auth['auth_vote']) ? trans('messages.RULES_VOTE_CAN') : trans('messages.RULES_VOTE_CANNOT')) . '<br />';
-$s_auth_can .= (($is_auth['auth_attachments']) ? trans('messages.RULES_ATTACH_CAN') : trans('messages.RULES_ATTACH_CANNOT')) . '<br />';
-$s_auth_can .= (($is_auth['auth_download']) ? trans('messages.RULES_DOWNLOAD_CAN') : trans('messages.RULES_DOWNLOAD_CANNOT')) . '<br />';
+$s_auth_can = ($is_auth['auth_post'] ? trans('messages.RULES_POST_CAN') : trans('messages.RULES_POST_CANNOT')) . '<br />';
+$s_auth_can .= ($is_auth['auth_reply'] ? trans('messages.RULES_REPLY_CAN') : trans('messages.RULES_REPLY_CANNOT')) . '<br />';
+$s_auth_can .= ($is_auth['auth_edit'] ? trans('messages.RULES_EDIT_CAN') : trans('messages.RULES_EDIT_CANNOT')) . '<br />';
+$s_auth_can .= ($is_auth['auth_delete'] ? trans('messages.RULES_DELETE_CAN') : trans('messages.RULES_DELETE_CANNOT')) . '<br />';
+$s_auth_can .= ($is_auth['auth_vote'] ? trans('messages.RULES_VOTE_CAN') : trans('messages.RULES_VOTE_CANNOT')) . '<br />';
+$s_auth_can .= ($is_auth['auth_attachments'] ? trans('messages.RULES_ATTACH_CAN') : trans('messages.RULES_ATTACH_CANNOT')) . '<br />';
+$s_auth_can .= ($is_auth['auth_download'] ? trans('messages.RULES_DOWNLOAD_CAN') : trans('messages.RULES_DOWNLOAD_CANNOT')) . '<br />';
 
 // Moderator output
 $topic_mod = '';
@@ -424,10 +424,10 @@ $s_watching_topic = $s_watching_topic_img = '';
 if ($can_watch_topic) {
     if ($is_watching_topic) {
         $s_watching_topic = "<a href=\"" . TOPIC_URL . $topic_id . "&amp;unwatch=topic&amp;start=$start&amp;sid=" . $userdata['session_id'] . '">' . trans('messages.STOP_WATCHING_TOPIC') . '</a>';
-        $s_watching_topic_img = (isset($images['topic_un_watch'])) ? "<a href=\"" . TOPIC_URL . "$topic_id&amp;unwatch=topic&amp;start=$start&amp;sid=" . $userdata['session_id'] . '"><img src="' . $images['topic_un_watch'] . '" alt="' . trans('messages.STOP_WATCHING_TOPIC') . '" title="' . trans('messages.STOP_WATCHING_TOPIC') . '" border="0"></a>' : '';
+        $s_watching_topic_img = isset($images['topic_un_watch']) ? "<a href=\"" . TOPIC_URL . "$topic_id&amp;unwatch=topic&amp;start=$start&amp;sid=" . $userdata['session_id'] . '"><img src="' . $images['topic_un_watch'] . '" alt="' . trans('messages.STOP_WATCHING_TOPIC') . '" title="' . trans('messages.STOP_WATCHING_TOPIC') . '" border="0"></a>' : '';
     } else {
         $s_watching_topic = "<a href=\"" . TOPIC_URL . $topic_id . "&amp;watch=topic&amp;start=$start&amp;sid=" . $userdata['session_id'] . '">' . trans('messages.START_WATCHING_TOPIC') . '</a>';
-        $s_watching_topic_img = (isset($images['Topic_watch'])) ? "<a href=\"" . TOPIC_URL . "$topic_id&amp;watch=topic&amp;start=$start&amp;sid=" . $userdata['session_id'] . '"><img src="' . $images['Topic_watch'] . '" alt="' . trans('messages.START_WATCHING_TOPIC') . '" title="' . trans('messages.START_WATCHING_TOPIC') . '" border="0"></a>' : '';
+        $s_watching_topic_img = isset($images['Topic_watch']) ? "<a href=\"" . TOPIC_URL . "$topic_id&amp;watch=topic&amp;start=$start&amp;sid=" . $userdata['session_id'] . '"><img src="' . $images['Topic_watch'] . '" alt="' . trans('messages.START_WATCHING_TOPIC') . '" title="' . trans('messages.START_WATCHING_TOPIC') . '" border="0"></a>' : '';
     }
 }
 
@@ -483,7 +483,7 @@ $template->assign_vars(array(
     'T_POST_REPLY' => $reply_alt,
 
     'HIDE_AVATAR' => $user->opt_js['h_av'],
-    'HIDE_RANK_IMG' => ($user->opt_js['h_rnk_i'] && config('tp.show_rank_image')),
+    'HIDE_RANK_IMG' => $user->opt_js['h_rnk_i'] && config('tp.show_rank_image'),
     'HIDE_POST_IMG' => $user->opt_js['h_post_i'],
     'HIDE_SMILE' => $user->opt_js['h_smile'],
     'HIDE_SIGNATURE' => $user->opt_js['h_sig'],
@@ -516,8 +516,8 @@ $template->assign_vars(array(
     'U_SEARCH_SELF' => "search.php?uid={$userdata['user_id']}&t=$topic_id&dm=1",
 
     'TOPIC_HAS_POLL' => $topic_has_poll,
-    'POLL_IS_EDITABLE' => (!$poll_time_expired),
-    'POLL_IS_FINISHED' => ($t_data['topic_vote'] == POLL_FINISHED),
+    'POLL_IS_EDITABLE' => !$poll_time_expired,
+    'POLL_IS_FINISHED' => $t_data['topic_vote'] == POLL_FINISHED,
     'CAN_MANAGE_POLL' => $can_manage_poll,
     'CAN_ADD_POLL' => $can_add_poll,
 ));
@@ -580,10 +580,10 @@ for ($i = 0; $i < $total_posts; $i++) {
     $mc_comment = $postrow[$i]['mc_comment'];
     $mc_user_id = profile_url(array('username' => $postrow[$i]['mc_username'], 'user_id' => $postrow[$i]['mc_user_id'], 'user_rank' => $postrow[$i]['mc_user_rank']));
 
-    $rg_id = ($postrow[$i]['poster_rg_id']) ?: 0;
+    $rg_id = $postrow[$i]['poster_rg_id'] ?: 0;
     $rg_avatar = get_avatar(GROUP_AVATAR_MASK . $rg_id, $postrow[$i]['rg_avatar_id']);
-    $rg_name = ($postrow[$i]['group_name']) ? htmlCHR($postrow[$i]['group_name']) : '';
-    $rg_signature = ($postrow[$i]['group_signature']) ? bbcode2html(htmlCHR($postrow[$i]['group_signature'])) : '';
+    $rg_name = $postrow[$i]['group_name'] ? htmlCHR($postrow[$i]['group_name']) : '';
+    $rg_signature = $postrow[$i]['group_signature'] ? bbcode2html(htmlCHR($postrow[$i]['group_signature'])) : '';
 
     $poster_avatar = '';
     if (!$user->opt_js['h_av'] && $poster_id != GUEST_UID) {
@@ -594,7 +594,7 @@ for ($i = 0; $i < $total_posts; $i++) {
     $user_rank = $postrow[$i]['user_rank'];
     if (!$user->opt_js['h_rnk_i'] and isset($ranks[$user_rank])) {
         $rank_image = (config('tp.show_rank_image') && $ranks[$user_rank]['rank_image']) ? '<img src="' . $ranks[$user_rank]['rank_image'] . '" alt="" title="" border="0" />' : '';
-        $poster_rank = (config('tp.show_rank_text')) ? $ranks[$user_rank]['rank_title'] : '';
+        $poster_rank = config('tp.show_rank_text') ? $ranks[$user_rank]['rank_title'] : '';
     }
 
     // Handle anon users posting with usernames
@@ -695,7 +695,7 @@ for ($i = 0; $i < $total_posts; $i++) {
     $template->assign_block_vars('postrow', array(
         'ROW_CLASS' => !($i % 2) ? 'row1' : 'row2',
         'POST_ID' => $post_id,
-        'IS_NEWEST' => ($post_id == $newest),
+        'IS_NEWEST' => $post_id == $newest,
         'POSTER_NAME' => profile_url(array('username' => $poster, 'user_rank' => $user_rank)),
         'POSTER_NAME_JS' => addslashes($poster),
         'POSTER_RANK' => $poster_rank,
@@ -776,14 +776,14 @@ if (config('tp.show_quick_reply')) {
             'QUICK_REPLY' => true,
             'QR_POST_ACTION' => POSTING_URL,
             'QR_TOPIC_ID' => $topic_id,
-            'CAPTCHA_HTML' => (IS_GUEST) ? bb_captcha('get') : '',
+            'CAPTCHA_HTML' => IS_GUEST ? bb_captcha('get') : '',
         ));
 
         if (!IS_GUEST) {
             $notify_user = bf($userdata['user_opt'], 'user_opt', 'user_notify');
 
             $template->assign_vars(array(
-                'QR_NOTIFY_CHECKED' => ($notify_user) ? $notify_user && $is_watching_topic : $is_watching_topic,
+                'QR_NOTIFY_CHECKED' => $notify_user ? $notify_user && $is_watching_topic : $is_watching_topic,
             ));
         }
     }

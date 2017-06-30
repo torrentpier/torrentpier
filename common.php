@@ -198,7 +198,7 @@ function bb_log($msg, $file_name)
     if (is_array($msg)) {
         $msg = implode(LOG_LF, $msg);
     }
-    $file_name .= (LOG_EXT) ? '.' . LOG_EXT : '';
+    $file_name .= LOG_EXT ? '.' . LOG_EXT : '';
     return file_write($msg, LOG_DIR . '/' . $file_name);
 }
 

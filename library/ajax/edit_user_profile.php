@@ -19,7 +19,7 @@ if (!$field = (string)$this->request['field']) {
 }
 
 $table = BB_USERS;
-$value = $this->request['value'] = (string)(isset($this->request['value'])) ? $this->request['value'] : 0;
+$value = $this->request['value'] = (string)isset($this->request['value']) ? $this->request['value'] : 0;
 
 switch ($field) {
     case 'username':

@@ -51,7 +51,7 @@ switch ($mode) {
                 } elseif (mb_strlen($pass, 'UTF-8') < 5) {
                     $html = '<img src="./styles/images/bad.gif"> <span class="leechmed bold">' . sprintf(trans('messages.CHOOSE_PASS_ERR_MIN'), 5) . '</span>';
                 } else {
-                    $text = (IS_GUEST) ? trans('messages.CHOOSE_PASS_REG_OK') : trans('messages.CHOOSE_PASS_OK');
+                    $text = IS_GUEST ? trans('messages.CHOOSE_PASS_REG_OK') : trans('messages.CHOOSE_PASS_OK');
                     $html = '<img src="./styles/images/good.gif"> <span class="seedmed bold">' . $text . '</span>';
                 }
             }

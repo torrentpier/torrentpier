@@ -112,12 +112,12 @@ $template->assign_vars(array(
     'CONTENT_ENCODING' => config('language.charset'),
 
     'IN_ADMIN' => defined('IN_ADMIN'),
-    'USER_HIDE_CAT' => (BB_SCRIPT == 'index'),
+    'USER_HIDE_CAT' => BB_SCRIPT == 'index',
 
     'USER_LANG' => $userdata['user_lang'],
 
     'INCLUDE_BBCODE_JS' => !empty($page_cfg['include_bbcode_js']),
-    'USER_OPTIONS_JS' => (IS_GUEST) ? '{}' : json_encode($user->opt_js),
+    'USER_OPTIONS_JS' => IS_GUEST ? '{}' : json_encode($user->opt_js),
 
     'USE_TABLESORTER' => !empty($page_cfg['use_tablesorter']),
 
@@ -279,7 +279,7 @@ if (!empty(config('page.show_torhelp.' . BB_SCRIPT)) && !empty($userdata['torhel
 }
 
 // Login box
-$in_out = ($logged_in) ? 'in' : 'out';
+$in_out = $logged_in ? 'in' : 'out';
 $template->assign_block_vars("switch_user_logged_{$in_out}", array());
 
 if (!IS_GUEST) {

@@ -119,7 +119,7 @@ if (!$group_id) {
             continue;
         }
 
-        $data = array('id' => $row['group_id'], 'm' => ($row['members'] - $row['candidates']), 'c' => $row['candidates'], 'rg' => $row['release_group']);
+        $data = array('id' => $row['group_id'], 'm' => $row['members'] - $row['candidates'], 'c' => $row['candidates'], 'rg' => $row['release_group']);
 
         $groups[$type][$row['group_name']] = $data;
     }
@@ -131,11 +131,11 @@ if (!$group_id) {
         foreach ($params as $name => $data) {
             $text = htmlCHR(str_short(rtrim($name), HTML_SELECT_MAX_LENGTH));
 
-            $members = ($data['m']) ? trans('messages.MEMBERS_IN_GROUP') . ': ' . $data['m'] : trans('messages.NO_GROUP_MEMBERS');
-            $candidates = ($data['c']) ? trans('messages.PENDING_MEMBERS') . ': ' . $data['c'] : trans('messages.NO_PENDING_GROUP_MEMBERS');
+            $members = $data['m'] ? trans('messages.MEMBERS_IN_GROUP') . ': ' . $data['m'] : trans('messages.NO_GROUP_MEMBERS');
+            $candidates = $data['c'] ? trans('messages.PENDING_MEMBERS') . ': ' . $data['c'] : trans('messages.NO_PENDING_GROUP_MEMBERS');
 
             $options .= '<li class="pad_2"><a href="' . GROUP_URL . $data['id'] . '" class="med bold">' . $text . '</a></li>';
-            $options .= ($data['rg']) ? '<ul><li class="med">' . trans('messages.RELEASE_GROUP') . '</li>' : '<ul>';
+            $options .= $data['rg'] ? '<ul><li class="med">' . trans('messages.RELEASE_GROUP') . '</li>' : '<ul>';
             $options .= '<li class="seedmed">' . $members . '</li>';
             if (IS_AM) {
                 $options .= '<li class="leechmed">' . $candidates . '</li>';
@@ -348,9 +348,9 @@ if (!$group_id) {
     } elseif ($is_group_member || $is_group_pending_member) {
         $template->assign_vars(array(
             'SHOW_UNSUBSCRIBE_CONTROLS' => true,
-            'CONTROL_NAME' => ($is_group_member) ? 'unsub' : 'unsubpending',
+            'CONTROL_NAME' => $is_group_member ? 'unsub' : 'unsubpending',
         ));
-        $group_details = ($is_group_pending_member) ? trans('messages.PENDING_THIS_GROUP') : trans('messages.MEMBER_THIS_GROUP');
+        $group_details = $is_group_pending_member ? trans('messages.PENDING_THIS_GROUP') : trans('messages.MEMBER_THIS_GROUP');
         $s_hidden_fields = '<input type="hidden" name="' . POST_GROUPS_URL . '" value="' . $group_id . '" />';
     } elseif (IS_GUEST) {
         $group_details = trans('messages.LOGIN_TO_JOIN');
@@ -410,7 +410,7 @@ if (!$group_id) {
         'U_GROUP_RELEASES' => "group.php?view=releases&amp;" . POST_GROUPS_URL . "=$group_id",
         'U_GROUP_MEMBERS' => "group.php?view=members&amp;" . POST_GROUPS_URL . "=$group_id",
         'U_GROUP_CONFIG' => "group_edit.php?g=$group_id",
-        'RELEASE_GROUP' => ($group_info['release_group']) ? true : false,
+        'RELEASE_GROUP' => $group_info['release_group'] ? true : false,
         'GROUP_TYPE' => $group_type,
 
         'S_GROUP_OPEN_TYPE' => GROUP_OPEN,

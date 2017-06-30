@@ -36,7 +36,7 @@ class Memcache extends Common
 
     public function connect()
     {
-        $connect_type = ($this->cfg['pconnect']) ? 'pconnect' : 'connect';
+        $connect_type = $this->cfg['pconnect'] ? 'pconnect' : 'connect';
 
         $this->cur_query = $connect_type . ' ' . $this->cfg['host'] . ':' . $this->cfg['port'];
         $this->debug('start');
@@ -69,7 +69,7 @@ class Memcache extends Common
         $this->cur_query = null;
         $this->num_queries++;
 
-        return ($this->connected) ? $this->memcache->get($this->prefix . $name) : false;
+        return $this->connected ? $this->memcache->get($this->prefix . $name) : false;
     }
 
     public function set($name, $value, $ttl = 0)
@@ -84,7 +84,7 @@ class Memcache extends Common
         $this->cur_query = null;
         $this->num_queries++;
 
-        return ($this->connected) ? $this->memcache->set($this->prefix . $name, $value, false, $ttl) : false;
+        return $this->connected ? $this->memcache->set($this->prefix . $name, $value, false, $ttl) : false;
     }
 
     public function rm($name = '')
@@ -100,10 +100,10 @@ class Memcache extends Common
             $this->cur_query = null;
             $this->num_queries++;
 
-            return ($this->connected) ? $this->memcache->delete($this->prefix . $name, 0) : false;
+            return $this->connected ? $this->memcache->delete($this->prefix . $name, 0) : false;
         }
 
-        return ($this->connected) ? $this->memcache->flush() : false;
+        return $this->connected ? $this->memcache->flush() : false;
     }
 
     public function is_installed()

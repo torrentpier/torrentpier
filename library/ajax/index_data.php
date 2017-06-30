@@ -73,7 +73,7 @@ switch ($mode) {
         }
 
         $html = ':&nbsp;';
-        $html .= ($moderators) ? implode(', ', $moderators) : trans('messages.NONE');
+        $html .= $moderators ? implode(', ', $moderators) : trans('messages.NONE');
         unset($moderators, $mod);
         $datastore->rm('moderators');
         break;
@@ -99,8 +99,8 @@ switch ($mode) {
         $btu = get_bt_userdata($user_id);
         $profiledata = get_userdata($user_id);
 
-        $speed_up = ($btu['speed_up']) ? humn_size($btu['speed_up']) . '/s' : '0 KB/s';
-        $speed_down = ($btu['speed_down']) ? humn_size($btu['speed_down']) . '/s' : '0 KB/s';
+        $speed_up = $btu['speed_up'] ? humn_size($btu['speed_up']) . '/s' : '0 KB/s';
+        $speed_down = $btu['speed_down'] ? humn_size($btu['speed_down']) . '/s' : '0 KB/s';
         $user_ratio = ($btu['u_down_total'] > MIN_DL_FOR_RATIO) ? '<b class="gen">' . get_bt_ratio($btu) . '</b>' : trans('messages.IT_WILL_BE_DOWN') . ' <b>' . humn_size(MIN_DL_FOR_RATIO) . '</b>';
 
         $html = '

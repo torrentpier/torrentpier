@@ -371,7 +371,7 @@ function extract_search_words($text)
 function add_search_words($post_id, $post_message, $topic_title = '', $only_return_words = false)
 {
     $text = $topic_title . ' ' . $post_message;
-    $words = ($text) ? extract_search_words($text) : array();
+    $words = $text ? extract_search_words($text) : array();
 
     if ($only_return_words || config('tp.search_engine_type') == 'sphinx') {
         return implode("\n", $words);

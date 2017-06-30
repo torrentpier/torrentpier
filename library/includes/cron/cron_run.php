@@ -66,7 +66,7 @@ foreach ($cron_jobs as $job) {
         }
 
         set_time_limit(600);
-        require($job_script);
+        require $job_script;
 
         if ($job['log_sql_queries']) {
             OLD_DB()->log_next_query(0);
@@ -86,7 +86,7 @@ foreach ($cron_jobs as $job) {
             bb_log($msg . LOG_LF, CRON_LOG_DIR . '/' . CRON_LOG_FILE);
 
             if ($cron_runtime_log) {
-                $runtime_log_file = ($job['log_file']) ?: $job['cron_script'];
+                $runtime_log_file = $job['log_file'] ?: $job['cron_script'];
                 bb_log($cron_runtime_log . LOG_LF, CRON_LOG_DIR . '/' . basename($runtime_log_file));
             }
         }

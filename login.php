@@ -56,7 +56,7 @@ if (isset($_REQUEST['admin']) && !IS_AM) {
 $mod_admin_login = (IS_AM && !$user->data['session_admin']);
 
 // login username & password
-$login_username = ($mod_admin_login) ? $userdata['username'] : ($_POST['login_username'] ?? '');
+$login_username = $mod_admin_login ? $userdata['username'] : ($_POST['login_username'] ?? '');
 $login_password = $_POST['login_password'] ?? '';
 
 // Проверка на неверную комбинацию логин/пароль
@@ -103,7 +103,7 @@ if (isset($_POST['login'])) {
             if ($login_err > config('tp.invalid_logins')) {
                 $need_captcha = true;
             }
-            OLD_CACHE('bb_login_err')->set('l_err_' . USER_IP, ($login_err + 1), 3600);
+            OLD_CACHE('bb_login_err')->set('l_err_' . USER_IP, $login_err + 1, 3600);
         } else {
             $need_captcha = false;
         }

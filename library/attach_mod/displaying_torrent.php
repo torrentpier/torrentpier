@@ -75,16 +75,16 @@ $tor_auth = ($bt_user_id != GUEST_UID && (($bt_user_id == $poster_id && !$locked
 $tor_auth_reg = ($tor_auth && $t_data['allow_reg_tracker'] && $post_id == $t_data['topic_first_post_id']);
 $tor_auth_del = ($tor_auth && $tor_reged);
 
-$tracker_link = ($tor_reged) ? trans('messages.BT_REG_YES') : trans('messages.BT_REG_NO');
+$tracker_link = $tor_reged ? trans('messages.BT_REG_YES') : trans('messages.BT_REG_NO');
 
 $download_link = DOWNLOAD_URL . $attach_id;
-$description = ($comment) ?: preg_replace("#.torrent$#i", '', $display_name);
+$description = $comment ?: preg_replace("#.torrent$#i", '', $display_name);
 
 if ($tor_auth_reg || $tor_auth_del) {
     $reg_tor_url = '<a class="txtb" href="#" onclick="ajax.exec({ action: \'change_torrent\', attach_id : ' . $attach_id . ', type: \'reg\'}); return false;">' . trans('messages.BT_REG_ON_TRACKER') . '</a>';
     $unreg_tor_url = '<a class="txtb" href="#" onclick="ajax.exec({ action: \'change_torrent\', attach_id : ' . $attach_id . ', type: \'unreg\'}); return false;">' . trans('messages.BT_UNREG_FROM_TRACKER') . '</a>';
 
-    $tracker_link = ($tor_reged) ? $unreg_tor_url : $reg_tor_url;
+    $tracker_link = $tor_reged ? $unreg_tor_url : $reg_tor_url;
 }
 
 $display_name = '[' . config('tp.server_name') . '].t' . $bt_topic_id . '.torrent';
@@ -137,7 +137,7 @@ if ($tor_auth) {
 }
 
 if ($tor_reged && $tor_info) {
-    $tor_size = ($tor_info['size']) ?: 0;
+    $tor_size = $tor_info['size'] ?: 0;
     $tor_id = $tor_info['topic_id'];
     $tor_type = $tor_info['tor_type'];
 
@@ -206,8 +206,8 @@ if ($tor_reged && $tor_info) {
 
             'S_UPLOAD_IMAGE' => $upload_image,
             'U_DOWNLOAD_LINK' => $download_link,
-            'DL_LINK_CLASS' => (isset($bt_userdata['user_status'])) ? $dl_link_css[$bt_userdata['user_status']] : 'genmed',
-            'DL_TITLE_CLASS' => (isset($bt_userdata['user_status'])) ? $dl_status_css[$bt_userdata['user_status']] : 'gen',
+            'DL_LINK_CLASS' => isset($bt_userdata['user_status']) ? $dl_link_css[$bt_userdata['user_status']] : 'genmed',
+            'DL_TITLE_CLASS' => isset($bt_userdata['user_status']) ? $dl_status_css[$bt_userdata['user_status']] : 'gen',
             'FILESIZE' => $tor_file_size,
             'MAGNET' => $tor_magnet,
             'HASH' => strtoupper(bin2hex($tor_info['info_hash'])),
@@ -309,7 +309,7 @@ if ($tor_reged && $tor_info) {
 
             if ($s_mode == 'full') {
                 foreach ($peers as $pid => $peer) {
-                    $x = ($peer['seeder']) ? 's' : 'l';
+                    $x = $peer['seeder'] ? 's' : 'l';
                     $cnt[$x]++;
                     $sp_up_tot[$x] += $peer['speed_up'];
                     $sp_down_tot[$x] += $peer['speed_down'];
@@ -356,8 +356,8 @@ if ($tor_reged && $tor_info) {
                 $peers = $tmp;
 
                 $template->assign_vars(array(
-                    'TOR_SPEED_UP' => ($tor_speed_up) ? humn_size($tor_speed_up, 0, 'KB') . '/s' : '0 KB/s',
-                    'TOR_SPEED_DOWN' => ($tor_speed_down) ? humn_size($tor_speed_down, 0, 'KB') . '/s' : '0 KB/s',
+                    'TOR_SPEED_UP' => $tor_speed_up ? humn_size($tor_speed_up, 0, 'KB') . '/s' : '0 KB/s',
+                    'TOR_SPEED_DOWN' => $tor_speed_down ? humn_size($tor_speed_down, 0, 'KB') . '/s' : '0 KB/s',
                 ));
             }
 
@@ -396,7 +396,7 @@ if ($tor_reged && $tor_info) {
                                 $template->assign_block_vars("$x_full.porthead", array());
                             }
                         }
-                        $compl_perc = ($tor_size) ? round(($p_max_up / $tor_size), 1) : 0;
+                        $compl_perc = $tor_size ? round($p_max_up / $tor_size, 1) : 0;
                     } else {
                         $x = 'l';
                         $x_row = 'lrow';
@@ -420,24 +420,24 @@ if ($tor_reged && $tor_info) {
                             }
                         }
                         $compl_size = ($peer['remain'] && $tor_size && $tor_size > $peer['remain']) ? ($tor_size - $peer['remain']) : 0;
-                        $compl_perc = ($compl_size) ? floor($compl_size * 100 / $tor_size) : 0;
+                        $compl_perc = $compl_size ? floor($compl_size * 100 / $tor_size) : 0;
                     }
 
                     $rel_sign = (!$guest && $peer['releaser']) ? '&nbsp;<b><sup>&reg;</sup></b>' : '';
                     $name = profile_url($peer) . $rel_sign;
-                    $up_tot = ($p_max_up) ? humn_size($p_max_up) : '-';
-                    $down_tot = ($p_max_down) ? humn_size($p_max_down) : '-';
-                    $up_ratio = ($p_max_down) ? round(($p_max_up / $p_max_down), 2) : '';
-                    $sp_up = ($peer['speed_up']) ? humn_size($peer['speed_up'], 0, 'KB') . '/s' : '-';
-                    $sp_down = ($peer['speed_down']) ? humn_size($peer['speed_down'], 0, 'KB') . '/s' : '-';
+                    $up_tot = $p_max_up ? humn_size($p_max_up) : '-';
+                    $down_tot = $p_max_down ? humn_size($p_max_down) : '-';
+                    $up_ratio = $p_max_down ? round($p_max_up / $p_max_down, 2) : '';
+                    $sp_up = $peer['speed_up'] ? humn_size($peer['speed_up'], 0, 'KB') . '/s' : '-';
+                    $sp_down = $peer['speed_down'] ? humn_size($peer['speed_down'], 0, 'KB') . '/s' : '-';
 
                     $bgr_class = (!($tr[$x] % 2)) ? $bgr_class_1 : $bgr_class_2;
-                    $row_bgr = ($change_peers_bgr_over) ? " class=\"$bgr_class\" onmouseover=\"this.className='$bgr_class_over';\" onmouseout=\"this.className='$bgr_class';\"" : '';
+                    $row_bgr = $change_peers_bgr_over ? " class=\"$bgr_class\" onmouseover=\"this.className='$bgr_class_over';\" onmouseout=\"this.className='$bgr_class';\"" : '';
                     $tr[$x]++;
 
                     $template->assign_block_vars("$x_full.$x_row", array(
                         'ROW_BGR' => $row_bgr,
-                        'NAME' => ($peer['update_time']) ? $name : "<s>$name</s>",
+                        'NAME' => $peer['update_time'] ? $name : "<s>$name</s>",
                         'COMPL_PRC' => $compl_perc,
                         'UP_TOTAL' => ($max_up_id[$x] == $pid) ? "<b>$up_tot</b>" : $up_tot,
                         'DOWN_TOTAL' => ($max_down_id[$x] == $pid) ? "<b>$down_tot</b>" : $down_tot,
@@ -447,8 +447,8 @@ if ($tor_reged && $tor_info) {
                         'DOWN_TOTAL_RAW' => $peer['downloaded'],
                         'SPEED_UP_RAW' => $peer['speed_up'],
                         'SPEED_DOWN_RAW' => $peer['speed_down'],
-                        'UPD_EXP_TIME' => ($peer['update_time']) ? trans('messages.DL_UPD') . bb_date($peer['update_time'], 'd-M-y H:i') . ' &middot; ' . delta_time($peer['update_time']) . trans('messages.TOR_BACK') : trans('messages.DL_STOPPED'),
-                        'TOR_RATIO' => ($up_ratio) ? trans('messages.USER_RATIO') . "UL/DL: $up_ratio" : '',
+                        'UPD_EXP_TIME' => $peer['update_time'] ? trans('messages.DL_UPD') . bb_date($peer['update_time'], 'd-M-y H:i') . ' &middot; ' . delta_time($peer['update_time']) . trans('messages.TOR_BACK') : trans('messages.DL_STOPPED'),
+                        'TOR_RATIO' => $up_ratio ? trans('messages.USER_RATIO') . "UL/DL: $up_ratio" : '',
                     ));
 
                     if ($ip) {
@@ -464,7 +464,7 @@ if ($tor_reged && $tor_info) {
                         $seed_count = $peer['username'];
                     } else {
                         $compl_size = (@$peer['remain'] && $tor_size && $tor_size > $peer['remain']) ? ($tor_size - $peer['remain']) : 0;
-                        $compl_perc = ($compl_size) ? floor($compl_size * 100 / $tor_size) : 0;
+                        $compl_perc = $compl_size ? floor($compl_size * 100 / $tor_size) : 0;
 
                         $leechers .= '<nobr><a href="' . $u_prof_href . '" class="leechmed">' . $peer['username'] . '</a>';
                         $leechers .= ($s_mode == 'names') ? ' [' . $compl_perc . '%]' : '';
@@ -478,14 +478,14 @@ if ($tor_reged && $tor_info) {
                 $seeders[strlen($seeders) - 9] = ' ';
                 $template->assign_vars(array(
                     'SEED_LIST' => $seeders,
-                    'SEED_COUNT' => ($seed_count) ?: 0,
+                    'SEED_COUNT' => $seed_count ?: 0,
                 ));
             }
             if ($s_mode != 'full' && $leechers) {
                 $leechers[strlen($leechers) - 9] = ' ';
                 $template->assign_vars(array(
                     'LEECH_LIST' => $leechers,
-                    'LEECH_COUNT' => ($leech_count) ?: 0,
+                    'LEECH_COUNT' => $leech_count ?: 0,
                 ));
             }
         }
@@ -493,7 +493,7 @@ if ($tor_reged && $tor_info) {
 
         // Show "seeder last seen info"
         if (($s_mode == 'count' && !$seed_count) || (!$seeders && !defined('SEEDER_EXIST'))) {
-            $last_seen_time = ($tor_info['seeder_last_seen']) ? delta_time($tor_info['seeder_last_seen']) : trans('messages.NEVER');
+            $last_seen_time = $tor_info['seeder_last_seen'] ? delta_time($tor_info['seeder_last_seen']) : trans('messages.NEVER');
 
             $template->assign_vars(array(
                 'SEEDER_LAST_SEEN' => sprintf(trans('messages.SEEDER_LAST_SEEN'), $last_seen_time),

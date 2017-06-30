@@ -21,7 +21,7 @@ function run_jobs($jobs)
     while ($row = OLD_DB()->sql_fetchrow($result)) {
         $job = $row['cron_script'];
         $job_script = INC_DIR . '/cron/jobs/' . $job;
-        require($job_script);
+        require $job_script;
     }
     OLD_DB()->query("
 			UPDATE " . BB_CRON . " SET

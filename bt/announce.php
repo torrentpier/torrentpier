@@ -326,7 +326,7 @@ if (config('tracker.freeleech') && $down_add) {
 
 // Insert / update peer info
 $peer_info_updated = false;
-$update_time = ($stopped) ? 0 : TIMENOW;
+$update_time = $stopped ? 0 : TIMENOW;
 
 if ($lp_info) {
     $sql = "UPDATE " . BB_BT_TRACKER . " SET update_time = $update_time";
@@ -340,8 +340,8 @@ if ($lp_info) {
     $sql .= ($downloaded != $lp_info['downloaded']) ? ", downloaded = $downloaded" : '';
     $sql .= ", remain = $left";
 
-    $sql .= ($up_add) ? ", up_add = up_add + $up_add" : '';
-    $sql .= ($down_add) ? ", down_add = down_add + $down_add" : '';
+    $sql .= $up_add ? ", up_add = up_add + $up_add" : '';
+    $sql .= $down_add ? ", down_add = down_add + $down_add" : '';
 
     $sql .= ", speed_up = $speed_up";
     $sql .= ", speed_down = $speed_down";

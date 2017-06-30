@@ -135,9 +135,9 @@ for ($i = 224, $cnt = 255; $i <= $cnt; $i++) {
 }
 
 $select_letter .= ':&nbsp;';
-$select_letter .= ($by_letter == 'others') ? '<b>' . trans('messages.OTHERS') . '</b>&nbsp;' : '<a class="genmed" href="' . ("memberlist.php?letter=others&amp;mode=$mode&amp;order=$sort_order") . '">' . trans('messages.OTHERS') . '</a>&nbsp;';
+$select_letter .= ($by_letter == 'others') ? '<b>' . trans('messages.OTHERS') . '</b>&nbsp;' : '<a class="genmed" href="' . "memberlist.php?letter=others&amp;mode=$mode&amp;order=$sort_order" . '">' . trans('messages.OTHERS') . '</a>&nbsp;';
 $select_letter .= ':&nbsp;';
-$select_letter .= ($by_letter == 'all') ? '<b>' . trans('messages.ALL') . '</b>' : '<a class="genmed" href="' . ("memberlist.php?letter=all&amp;mode=$mode&amp;order=$sort_order") . '">' . trans('messages.ALL') . '</a>';
+$select_letter .= ($by_letter == 'all') ? '<b>' . trans('messages.ALL') . '</b>' : '<a class="genmed" href="' . "memberlist.php?letter=all&amp;mode=$mode&amp;order=$sort_order" . '">' . trans('messages.ALL') . '</a>';
 
 $template->assign_vars(array(
     'S_LETTER_SELECT' => $select_letter,
@@ -150,7 +150,7 @@ if ($username) {
     $username = preg_replace('/\*/', '%', clean_username($username));
     $letter_sql = "username LIKE '" . OLD_DB()->escape($username) . "'";
 }
-$sql .= ($letter_sql) ? " AND $letter_sql" : '';
+$sql .= $letter_sql ? " AND $letter_sql" : '';
 $sql .= " ORDER BY $order_by";
 
 if ($result = OLD_DB()->fetch_rowset($sql)) {
@@ -201,7 +201,7 @@ if ($paginationusername) {
 }
 if ($mode != 'topten' || config('tp.topics_per_page') < 10) {
     $sql = "SELECT COUNT(*) AS total FROM " . BB_USERS;
-    $sql .= ($letter_sql) ? " WHERE $letter_sql" : " WHERE user_id NOT IN(". EXCLUDED_USERS .")";
+    $sql .= $letter_sql ? " WHERE $letter_sql" : " WHERE user_id NOT IN(". EXCLUDED_USERS .")";
     if (!$result = OLD_DB()->sql_query($sql)) {
         bb_die('Error getting total users');
     }
