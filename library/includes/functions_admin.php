@@ -360,9 +360,7 @@ function topic_delete($mode_or_topic_id, $forum_id = null, $prune_time = 0, $pru
 	');
 
     // Log action
-    if ($prune) {
-        // TODO
-    } else {
+    if (!$prune) {
         foreach ($log_topics as $row) {
             if ($row['topic_status'] == TOPIC_MOVED) {
                 $row['topic_title'] = '<i>' . trans('messages.TOPIC_MOVED') . '</i> ' . $row['topic_title'];

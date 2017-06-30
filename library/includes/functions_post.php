@@ -41,8 +41,7 @@ function prepare_post(&$mode, &$post_data, &$error_msg, &$username, &$subject, &
     }
 
     // Check message
-    if (!empty($message)) {
-    } elseif ($mode != 'delete') {
+    if (empty($message) && $mode != 'delete') {
         $error_msg .= (!empty($error_msg)) ? '<br />' . trans('messages.EMPTY_MESSAGE') : trans('messages.EMPTY_MESSAGE');
     }
 
