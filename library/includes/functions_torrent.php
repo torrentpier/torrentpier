@@ -160,8 +160,6 @@ function delete_torrent($attach_id, $mode = '')
     torrent_auth_check($forum_id, $poster_id);
     tracker_unregister($attach_id);
     delete_attachment(0, $attach_id);
-
-    return;
 }
 
 function change_tor_status($attach_id, $new_tor_status)
@@ -360,8 +358,6 @@ function tracker_register($attach_id, $mode = '', $tor_status = TOR_NOT_APPROVED
         $mess = sprintf(trans('messages.BT_REGISTERED'), DOWNLOAD_URL . $attach_id);
         bb_die($mess);
     }
-
-    return;
 }
 
 function send_torrent_with_passkey($filename)

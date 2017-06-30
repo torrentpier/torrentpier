@@ -46,21 +46,17 @@ function run_jobs($jobs)
 			END
 			WHERE cron_id IN ($jobs)
 		");
-
-    return;
 }
 
 function delete_jobs($jobs)
 {
     OLD_DB()->query('DELETE FROM ' . BB_CRON . " WHERE cron_id IN ($jobs)");
-    return;
 }
 
 function toggle_active($jobs, $cron_action)
 {
     $active = ($cron_action == 'disable') ? 0 : 1;
     OLD_DB()->query('UPDATE ' . BB_CRON . " SET cron_active = $active WHERE cron_id IN ($jobs)");
-    return;
 }
 
 function validate_cron_post($cron_arr)

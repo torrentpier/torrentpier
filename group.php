@@ -41,8 +41,6 @@ function generate_user_info(&$row, $date_format, $group_mod, &$from, &$posts, &$
     } else {
         $www = '';
     }
-
-    return;
 }
 
 $user->session_start(array('req_login' => true));

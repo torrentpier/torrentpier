@@ -41,7 +41,6 @@ function update_table_bool($table_name, $key, $field_name, $field_def_val)
             }
         }
     }
-    return;
 }
 
 function set_tpl_vars($default_cfg, $cfg)
