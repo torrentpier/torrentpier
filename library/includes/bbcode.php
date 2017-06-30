@@ -165,7 +165,7 @@ function generate_smilies($mode)
                 $template->assign_block_vars('switch_smilies_extra', array());
 
                 $template->assign_vars(array(
-                    'U_MORE_SMILIES' => POSTING_URL . "?mode=smilies",
+                    'U_MORE_SMILIES' => POSTING_URL . '?mode=smilies',
                 ));
             }
 
@@ -371,16 +371,16 @@ function extract_search_words($text)
 function add_search_words($post_id, $post_message, $topic_title = '', $only_return_words = false)
 {
     $text = $topic_title . ' ' . $post_message;
-    $words = ($text) ? extract_search_words($text) : array();
+    $words = $text ? extract_search_words($text) : array();
 
     if ($only_return_words || config('tp.search_engine_type') == 'sphinx') {
         return implode("\n", $words);
     }
 
-    OLD_DB()->query("DELETE FROM " . BB_POSTS_SEARCH . " WHERE post_id = $post_id");
+    OLD_DB()->query('DELETE FROM ' . BB_POSTS_SEARCH . " WHERE post_id = $post_id");
 
     if ($words_sql = OLD_DB()->escape(implode("\n", $words))) {
-        OLD_DB()->query("REPLACE INTO " . BB_POSTS_SEARCH . " (post_id, search_words) VALUES ($post_id, '$words_sql')");
+        OLD_DB()->query('REPLACE INTO ' . BB_POSTS_SEARCH . " (post_id, search_words) VALUES ($post_id, '$words_sql')");
     }
 }
 
@@ -417,7 +417,7 @@ function get_words_rate($text)
 
 function hide_passkey($str)
 {
-    return preg_replace("#\?" . config('tp.passkey_key') . "=[a-zA-Z0-9]{" . BT_AUTH_KEY_LENGTH . "}#", "?" . config('tp.passkey_key') . "=passkey", $str);
+    return preg_replace("#\?" . config('tp.passkey_key') . '=[a-zA-Z0-9]{' . BT_AUTH_KEY_LENGTH . '}#', '?' . config('tp.passkey_key') . '=passkey', $str);
 }
 
 function get_parsed_post($postrow, $mode = 'full', $return_chars = 600)
@@ -441,5 +441,5 @@ function get_parsed_post($postrow, $mode = 'full', $return_chars = 600)
 
 function update_post_html($postrow)
 {
-    OLD_DB()->query("DELETE FROM " . BB_POSTS_HTML . " WHERE post_id = " . (int)$postrow['post_id']);
+    OLD_DB()->query('DELETE FROM ' . BB_POSTS_HTML . ' WHERE post_id = ' . (int)$postrow['post_id']);
 }

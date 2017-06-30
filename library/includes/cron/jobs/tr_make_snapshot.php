@@ -20,12 +20,12 @@ if (!config('tp.ocelot.enabled')) {
     define('NEW_BB_BT_TRACKER_SNAP', 'new_tracker_snap');
     define('OLD_BB_BT_TRACKER_SNAP', 'old_tracker_snap');
 
-    OLD_DB()->query("DROP TABLE IF EXISTS " . NEW_BB_BT_TRACKER_SNAP . ", " . OLD_BB_BT_TRACKER_SNAP);
-    OLD_DB()->query("CREATE TABLE " . NEW_BB_BT_TRACKER_SNAP . " LIKE " . BB_BT_TRACKER_SNAP);
+    OLD_DB()->query('DROP TABLE IF EXISTS ' . NEW_BB_BT_TRACKER_SNAP . ', ' . OLD_BB_BT_TRACKER_SNAP);
+    OLD_DB()->query('CREATE TABLE ' . NEW_BB_BT_TRACKER_SNAP . ' LIKE ' . BB_BT_TRACKER_SNAP);
 }
 
 $per_cycle = 50000;
-$row = OLD_DB()->fetch_row("SELECT MIN(topic_id) AS start_id, MAX(topic_id) AS finish_id FROM " . BB_BT_TRACKER);
+$row = OLD_DB()->fetch_row('SELECT MIN(topic_id) AS start_id, MAX(topic_id) AS finish_id FROM ' . BB_BT_TRACKER);
 $start_id = (int)$row['start_id'];
 $finish_id = (int)$row['finish_id'];
 
@@ -36,19 +36,19 @@ while (true) {
     $val = array();
 
     if (!config('tp.ocelot.enabled')) {
-        $sql = "
+        $sql = '
 			SELECT
 				topic_id, SUM(seeder) AS seeders, (COUNT(*) - SUM(seeder)) AS leechers,
 				SUM(speed_up) AS speed_up, SUM(speed_down) AS speed_down
-			FROM " . BB_BT_TRACKER . "
+			FROM ' . BB_BT_TRACKER . "
 			WHERE topic_id BETWEEN $start_id AND $end_id
 			GROUP BY topic_id
 		";
     } else {
-        $sql = "
+        $sql = '
 			SELECT
 				topic_id, SUM(speed_up) AS speed_up, SUM(speed_down) AS speed_down
-			FROM " . BB_BT_TRACKER . "
+			FROM ' . BB_BT_TRACKER . "
 			WHERE topic_id BETWEEN $start_id AND $end_id
 			GROUP BY topic_id
 		";
@@ -60,18 +60,18 @@ while (true) {
 
     if ($val) {
         if (!config('tp.ocelot.enabled')) {
-            OLD_DB()->query("
-				REPLACE INTO " . NEW_BB_BT_TRACKER_SNAP . "
+            OLD_DB()->query('
+				REPLACE INTO ' . NEW_BB_BT_TRACKER_SNAP . '
 				(topic_id, seeders, leechers, speed_up, speed_down)
-				VALUES(" . implode('),(', $val) . ")
-			");
+				VALUES(' . implode('),(', $val) . ')
+			');
         } else {
-            OLD_DB()->query("
-				INSERT INTO " . BB_BT_TRACKER_SNAP . "
+            OLD_DB()->query('
+				INSERT INTO ' . BB_BT_TRACKER_SNAP . '
 				(topic_id, speed_up, speed_down)
-				VALUES(" . implode('),(', $val) . ")
+				VALUES(' . implode('),(', $val) . ')
 				ON DUPLICATE KEY UPDATE speed_up = VALUES(speed_up), speed_down = VALUES(speed_down)
-			");
+			');
         }
     }
 
@@ -83,13 +83,13 @@ while (true) {
 }
 
 if (!config('tp.ocelot.enabled')) {
-    OLD_DB()->query("
+    OLD_DB()->query('
 		RENAME TABLE
-		" . BB_BT_TRACKER_SNAP . " TO " . OLD_BB_BT_TRACKER_SNAP . ",
-		" . NEW_BB_BT_TRACKER_SNAP . " TO " . BB_BT_TRACKER_SNAP . "
-	");
+		' . BB_BT_TRACKER_SNAP . ' TO ' . OLD_BB_BT_TRACKER_SNAP . ',
+		' . NEW_BB_BT_TRACKER_SNAP . ' TO ' . BB_BT_TRACKER_SNAP . '
+	');
 
-    OLD_DB()->query("DROP TABLE IF EXISTS " . NEW_BB_BT_TRACKER_SNAP . ", " . OLD_BB_BT_TRACKER_SNAP);
+    OLD_DB()->query('DROP TABLE IF EXISTS ' . NEW_BB_BT_TRACKER_SNAP . ', ' . OLD_BB_BT_TRACKER_SNAP);
 }
 
 //
@@ -98,29 +98,29 @@ if (!config('tp.ocelot.enabled')) {
 define('NEW_BB_BT_DLSTATUS_SNAP', 'new_dlstatus_snap');
 define('OLD_BB_BT_DLSTATUS_SNAP', 'old_dlstatus_snap');
 
-OLD_DB()->query("DROP TABLE IF EXISTS " . NEW_BB_BT_DLSTATUS_SNAP . ", " . OLD_BB_BT_DLSTATUS_SNAP);
+OLD_DB()->query('DROP TABLE IF EXISTS ' . NEW_BB_BT_DLSTATUS_SNAP . ', ' . OLD_BB_BT_DLSTATUS_SNAP);
 
-OLD_DB()->query("CREATE TABLE " . NEW_BB_BT_DLSTATUS_SNAP . " LIKE " . BB_BT_DLSTATUS_SNAP);
+OLD_DB()->query('CREATE TABLE ' . NEW_BB_BT_DLSTATUS_SNAP . ' LIKE ' . BB_BT_DLSTATUS_SNAP);
 
 if (config('tp.bt_show_dl_list') && config('tp.bt_dl_list_only_count')) {
-    OLD_DB()->query("
-		INSERT INTO " . NEW_BB_BT_DLSTATUS_SNAP . "
+    OLD_DB()->query('
+		INSERT INTO ' . NEW_BB_BT_DLSTATUS_SNAP . '
 			(topic_id, dl_status, users_count)
 		SELECT
 			topic_id, user_status, COUNT(*)
-		FROM " . BB_BT_DLSTATUS . "
-		WHERE user_status != " . DL_STATUS_RELEASER . "
+		FROM ' . BB_BT_DLSTATUS . '
+		WHERE user_status != ' . DL_STATUS_RELEASER . '
 		GROUP BY topic_id, user_status
-	");
+	');
 }
 
-OLD_DB()->query("
+OLD_DB()->query('
 	RENAME TABLE
-	" . BB_BT_DLSTATUS_SNAP . " TO " . OLD_BB_BT_DLSTATUS_SNAP . ",
-	" . NEW_BB_BT_DLSTATUS_SNAP . " TO " . BB_BT_DLSTATUS_SNAP . "
-");
+	' . BB_BT_DLSTATUS_SNAP . ' TO ' . OLD_BB_BT_DLSTATUS_SNAP . ',
+	' . NEW_BB_BT_DLSTATUS_SNAP . ' TO ' . BB_BT_DLSTATUS_SNAP . '
+');
 
-OLD_DB()->query("DROP TABLE IF EXISTS " . NEW_BB_BT_DLSTATUS_SNAP . ", " . OLD_BB_BT_DLSTATUS_SNAP);
+OLD_DB()->query('DROP TABLE IF EXISTS ' . NEW_BB_BT_DLSTATUS_SNAP . ', ' . OLD_BB_BT_DLSTATUS_SNAP);
 
 //
 // TORHELP
@@ -138,14 +138,14 @@ if (config('tp.torhelp_enabled')) {
     define('NEW_BB_BT_TORHELP', 'new_torhelp');
     define('OLD_BB_BT_TORHELP', 'old_torhelp');
 
-    OLD_DB()->query("DROP TABLE IF EXISTS " . NEW_BB_BT_TORHELP . ", " . OLD_BB_BT_TORHELP);
+    OLD_DB()->query('DROP TABLE IF EXISTS ' . NEW_BB_BT_TORHELP . ', ' . OLD_BB_BT_TORHELP);
 
-    OLD_DB()->query("CREATE TABLE " . NEW_BB_BT_TORHELP . " LIKE " . BB_BT_TORHELP);
+    OLD_DB()->query('CREATE TABLE ' . NEW_BB_BT_TORHELP . ' LIKE ' . BB_BT_TORHELP);
 
     // Select users
-    $sql = "
+    $sql = '
 		SELECT DISTINCT session_user_id AS uid
-		FROM " . BB_SESSIONS . "
+		FROM ' . BB_SESSIONS . "
 		WHERE session_time > (UNIX_TIMESTAMP() - $user_last_seen_online*60)
 		  AND session_user_id != " . GUEST_UID . "
 		ORDER BY session_time DESC
@@ -158,13 +158,13 @@ if (config('tp.torhelp_enabled')) {
     }
 
     if ($online_users_csv = implode(',', $online_users_ary)) {
-        OLD_DB()->query("
-			INSERT INTO " . NEW_BB_BT_TORHELP . " (user_id, topic_id_csv)
+        OLD_DB()->query('
+			INSERT INTO ' . NEW_BB_BT_TORHELP . ' (user_id, topic_id_csv)
 			SELECT
 			  dl.user_id, GROUP_CONCAT(dl.topic_id)
-			FROM       " . BB_BT_TRACKER_SNAP . " trsn
-			INNER JOIN " . BB_BT_TORRENTS . " tor ON (tor.topic_id = trsn.topic_id)
-			INNER JOIN " . BB_BT_DLSTATUS . " dl  ON (dl.topic_id = tor.topic_id)
+			FROM       ' . BB_BT_TRACKER_SNAP . ' trsn
+			INNER JOIN ' . BB_BT_TORRENTS . ' tor ON (tor.topic_id = trsn.topic_id)
+			INNER JOIN ' . BB_BT_DLSTATUS . " dl  ON (dl.topic_id = tor.topic_id)
 			WHERE
 			      trsn.seeders          <=  $tor_min_seeders
 			  AND trsn.leechers         >=  $tor_min_leechers
@@ -179,13 +179,13 @@ if (config('tp.torhelp_enabled')) {
 		");
     }
 
-    OLD_DB()->query("
+    OLD_DB()->query('
 		RENAME TABLE
-		" . BB_BT_TORHELP . " TO " . OLD_BB_BT_TORHELP . ",
-		" . NEW_BB_BT_TORHELP . " TO " . BB_BT_TORHELP . "
-	");
+		' . BB_BT_TORHELP . ' TO ' . OLD_BB_BT_TORHELP . ',
+		' . NEW_BB_BT_TORHELP . ' TO ' . BB_BT_TORHELP . '
+	');
 
-    OLD_DB()->query("DROP TABLE IF EXISTS " . NEW_BB_BT_TORHELP . ", " . OLD_BB_BT_TORHELP);
+    OLD_DB()->query('DROP TABLE IF EXISTS ' . NEW_BB_BT_TORHELP . ', ' . OLD_BB_BT_TORHELP);
 }
 
 OLD_DB()->expect_slow_query(10);

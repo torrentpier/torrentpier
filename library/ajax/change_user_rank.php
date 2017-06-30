@@ -24,11 +24,11 @@ if ($rank_id != 0 && !isset($ranks[$rank_id])) {
     $this->ajax_die("invalid rank_id: $rank_id");
 }
 
-OLD_DB()->query("UPDATE " . BB_USERS . " SET user_rank = $rank_id WHERE user_id = $user_id");
+OLD_DB()->query('UPDATE ' . BB_USERS . " SET user_rank = $rank_id WHERE user_id = $user_id");
 
 cache_rm_user_sessions($user_id);
 
-$user_rank = ($rank_id) ? '<span class="' . $ranks[$rank_id]['rank_style'] . '">' . $ranks[$rank_id]['rank_title'] . '</span>' : '';
+$user_rank = $rank_id ? '<span class="' . $ranks[$rank_id]['rank_style'] . '">' . $ranks[$rank_id]['rank_title'] . '</span>' : '';
 
-$this->response['html'] = ($rank_id) ? trans('messages.AWARDED_RANK') . "<b> $user_rank </b>" : trans('messages.SHOT_RANK');
-$this->response['rank_name'] = ($rank_id) ? $user_rank : trans('messages.USER');
+$this->response['html'] = $rank_id ? trans('messages.AWARDED_RANK') . "<b> $user_rank </b>" : trans('messages.SHOT_RANK');
+$this->response['rank_name'] = $rank_id ? $user_rank : trans('messages.USER');

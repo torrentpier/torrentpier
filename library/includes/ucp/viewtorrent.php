@@ -16,17 +16,17 @@ $releasing_count = $seeding_count = $leeching_count = 0;
 
 // Auth
 $excluded_forums_csv = $user->get_excluded_forums(AUTH_VIEW);
-$not_auth_forums_sql = ($excluded_forums_csv) ? "
+$not_auth_forums_sql = $excluded_forums_csv ? "
 	AND f.forum_id NOT IN($excluded_forums_csv)
 	AND f.forum_parent NOT IN($excluded_forums_csv)
 " : '';
 
-$sql = OLD_DB()->fetch_rowset("
+$sql = OLD_DB()->fetch_rowset('
 	SELECT
 		f.forum_id, f.forum_name, t.topic_title,
 		tor.tor_type, tor.size,
 		sn.seeders, sn.leechers, tr.*
-	FROM " . BB_FORUMS . " f, " . BB_TOPICS . " t, " . BB_BT_TRACKER . " tr, " . BB_BT_TORRENTS . " tor, " . BB_BT_TRACKER_SNAP . " sn
+	FROM ' . BB_FORUMS . ' f, ' . BB_TOPICS . ' t, ' . BB_BT_TRACKER . ' tr, ' . BB_BT_TORRENTS . ' tor, ' . BB_BT_TRACKER_SNAP . " sn
 	WHERE tr.user_id = {$profiledata['user_id']}
 		AND tr.topic_id = tor.topic_id
 		AND sn.topic_id = tor.topic_id
@@ -54,13 +54,13 @@ if ($releasing) {
         $template->assign_block_vars('released', array(
             'ROW_CLASS' => !($i % 2) ? 'row1' : 'row2',
             'FORUM_NAME' => htmlCHR($row['forum_name']),
-            'TOPIC_TITLE' => ($row['update_time']) ? $topic_title : "<s>$topic_title</s>",
+            'TOPIC_TITLE' => $row['update_time'] ? $topic_title : "<s>$topic_title</s>",
             'U_VIEW_FORUM' => FORUM_URL . $row['forum_id'],
             'U_VIEW_TOPIC' => TOPIC_URL . $row['topic_id'],
             'TOR_TYPE' => is_gold($row['tor_type']),
-            'TOPIC_SEEDERS' => ($row['seeders']) ?: 0,
-            'TOPIC_LEECHERS' => ($row['leechers']) ?: 0,
-            'SPEED_UP' => ($row['speed_up']) ? humn_size($row['speed_up'], 0, 'KB') . '/s' : '-',
+            'TOPIC_SEEDERS' => $row['seeders'] ?: 0,
+            'TOPIC_LEECHERS' => $row['leechers'] ?: 0,
+            'SPEED_UP' => $row['speed_up'] ? humn_size($row['speed_up'], 0, 'KB') . '/s' : '-',
         ));
 
         $releasing_count++;
@@ -74,13 +74,13 @@ if ($seeding) {
         $template->assign_block_vars('seed', array(
             'ROW_CLASS' => !($i % 2) ? 'row1' : 'row2',
             'FORUM_NAME' => htmlCHR($row['forum_name']),
-            'TOPIC_TITLE' => ($row['update_time']) ? $topic_title : "<s>$topic_title</s>",
+            'TOPIC_TITLE' => $row['update_time'] ? $topic_title : "<s>$topic_title</s>",
             'U_VIEW_FORUM' => FORUM_URL . $row['forum_id'],
             'U_VIEW_TOPIC' => TOPIC_URL . $row['topic_id'],
             'TOR_TYPE' => is_gold($row['tor_type']),
-            'TOPIC_SEEDERS' => ($row['seeders']) ?: 0,
-            'TOPIC_LEECHERS' => ($row['leechers']) ?: 0,
-            'SPEED_UP' => ($row['speed_up']) ? humn_size($row['speed_up'], 0, 'KB') . '/s' : '-',
+            'TOPIC_SEEDERS' => $row['seeders'] ?: 0,
+            'TOPIC_LEECHERS' => $row['leechers'] ?: 0,
+            'SPEED_UP' => $row['speed_up'] ? humn_size($row['speed_up'], 0, 'KB') . '/s' : '-',
         ));
 
         $seeding_count++;
@@ -90,20 +90,20 @@ if ($seeding) {
 if ($leeching) {
     foreach ($leeching as $i => $row) {
         $compl_size = ($row['remain'] && $row['size'] && $row['size'] > $row['remain']) ? ($row['size'] - $row['remain']) : 0;
-        $compl_perc = ($compl_size) ? floor($compl_size * 100 / $row['size']) : 0;
+        $compl_perc = $compl_size ? floor($compl_size * 100 / $row['size']) : 0;
         $topic_title = wbr($row['topic_title']);
 
         $template->assign_block_vars('leech', array(
             'ROW_CLASS' => !($i % 2) ? 'row1' : 'row2',
             'FORUM_NAME' => htmlCHR($row['forum_name']),
-            'TOPIC_TITLE' => ($row['update_time']) ? $topic_title : "<s>$topic_title</s>",
+            'TOPIC_TITLE' => $row['update_time'] ? $topic_title : "<s>$topic_title</s>",
             'U_VIEW_FORUM' => FORUM_URL . $row['forum_id'],
             'U_VIEW_TOPIC' => TOPIC_URL . $row['topic_id'],
             'COMPL_PERC' => $compl_perc,
             'TOR_TYPE' => is_gold($row['tor_type']),
-            'TOPIC_SEEDERS' => ($row['seeders']) ?: 0,
-            'TOPIC_LEECHERS' => ($row['leechers']) ?: 0,
-            'SPEED_DOWN' => ($row['speed_down']) ? humn_size($row['speed_down'], 0, 'KB') . '/s' : '-',
+            'TOPIC_SEEDERS' => $row['seeders'] ?: 0,
+            'TOPIC_LEECHERS' => $row['leechers'] ?: 0,
+            'SPEED_DOWN' => $row['speed_down'] ? humn_size($row['speed_down'], 0, 'KB') . '/s' : '-',
         ));
 
         $leeching_count++;

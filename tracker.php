@@ -25,7 +25,7 @@ $user->session_start(array('req_login' => config('tp.bt_tor_browse_only_reg')));
 
 set_die_append_msg();
 
-$tor_search_limit = (IS_AM) ? 2000 : 500;
+$tor_search_limit = IS_AM ? 2000 : 500;
 $forum_select_size = 25; // forum select box max rows
 $max_forum_name_len = 60; // inside forum select box
 $max_forums_selected = 50;
@@ -302,9 +302,9 @@ $tor_list_ary = array();
 $tor_list_sql = '';
 
 if ($search_id) {
-    $row = OLD_DB()->fetch_row("
+    $row = OLD_DB()->fetch_row('
 		SELECT search_array, search_settings
-		FROM " . BB_SEARCH . "
+		FROM ' . BB_SEARCH . "
 		WHERE session_id = '$session_id'
 			AND search_type = " . SEARCH_TYPE_TRACKER . "
 			AND search_id = '$search_id'
@@ -523,7 +523,7 @@ if ($allowed_forums) {
         $rg_id_sql = (int)$s_rg_val;
         $s_seen_time = $s_not_seen_opt[$s_not_seen_val]['sql'];
         $s_seen_sign = ($s_not_seen_val == $never) ? '=' : '<';
-        $s_seen_exclude = ($s_not_seen_val == $never) ? '' : "AND tor.seeder_last_seen != 0";
+        $s_seen_exclude = ($s_not_seen_val == $never) ? '' : 'AND tor.seeder_last_seen != 0';
         $order_by_peers = ($order_val == $ord_seeders || $order_val == $ord_leechers);
         $order_by_speed = ($order_val == $ord_sp_up || $order_val == $ord_sp_down);
 
@@ -535,7 +535,7 @@ if ($allowed_forums) {
         $SQL = OLD_DB()->get_empty_sql_array();
 
         // SELECT
-        $SQL['SELECT'][] = "tor.topic_id";
+        $SQL['SELECT'][] = 'tor.topic_id';
 
         // FROM
         $SQL['FROM'][] = $torrents_tbl;
@@ -587,13 +587,13 @@ if ($allowed_forums) {
             $SQL['WHERE'][] = "tor.poster_id = $user_id";
         }
         if ($only_active) {
-            $SQL['WHERE'][] = "sn.topic_id IS NOT NULL";
+            $SQL['WHERE'][] = 'sn.topic_id IS NOT NULL';
         }
         if ($seed_exist) {
-            $SQL['WHERE'][] = "sn.seeders >= 1";
+            $SQL['WHERE'][] = 'sn.seeders >= 1';
         }
         if ($tor_type) {
-            $SQL['WHERE'][] = "tor.tor_type IN(1,2)";
+            $SQL['WHERE'][] = 'tor.tor_type IN(1,2)';
         }
 
         // ORDER
@@ -628,7 +628,7 @@ if ($allowed_forums) {
             $columns = 'session_id,   search_type,   search_id,   search_time,   search_settings,  search_array';
             $values = "'$session_id', $search_type, '$search_id', " . TIMENOW . ", '$curr_set_sql', '$tor_list_sql'";
 
-            OLD_DB()->query("REPLACE INTO " . BB_SEARCH . " ($columns) VALUES ($values)");
+            OLD_DB()->query('REPLACE INTO ' . BB_SEARCH . " ($columns) VALUES ($values)");
         }
         unset($columns, $values, $curr_set_sql, $tor_list_sql);
 
@@ -639,16 +639,16 @@ if ($allowed_forums) {
         }
 
         // SELECT
-        $select = "
+        $select = '
 			SELECT
 				tor.topic_id, tor.post_id, tor.attach_id, tor.size, tor.reg_time, tor.complete_count, tor.seeder_last_seen, tor.tor_status, tor.tor_type,
 				t.topic_title, t.topic_time, t.topic_replies, t.topic_views, sn.seeders, sn.leechers, tor.info_hash
-		";
-        $select .= (!$hide_speed) ? ", sn.speed_up, sn.speed_down" : '';
-        $select .= (!$hide_forum) ? ", tor.forum_id" : '';
-        $select .= (!$hide_cat) ? ", f.cat_id" : '';
-        $select .= (!$hide_author) ? ", tor.poster_id, u.username, u.user_rank" : '';
-        $select .= (!IS_GUEST) ? ", dl.user_status AS dl_status" : '';
+		';
+        $select .= (!$hide_speed) ? ', sn.speed_up, sn.speed_down' : '';
+        $select .= (!$hide_forum) ? ', tor.forum_id' : '';
+        $select .= (!$hide_cat) ? ', f.cat_id' : '';
+        $select .= (!$hide_author) ? ', tor.poster_id, u.username, u.user_rank' : '';
+        $select .= (!IS_GUEST) ? ', dl.user_status AS dl_status' : '';
 
         // FROM
         $from = "
@@ -672,7 +672,7 @@ if ($allowed_forums) {
 		";
 
         // ORDER
-        $order = "ORDER BY " . $order_opt[$order_val]['sql'];
+        $order = 'ORDER BY ' . $order_opt[$order_val]['sql'];
 
         // SORT
         $sort = $sort_opt[$sort_val]['sql'];
@@ -689,7 +689,7 @@ if ($allowed_forums) {
 			$limit
 		";
 
-        $passkey = OLD_DB()->fetch_row("SELECT auth_key FROM " . BB_BT_USERS . " WHERE user_id = " . (int)$user_id . " LIMIT 1");
+        $passkey = OLD_DB()->fetch_row('SELECT auth_key FROM ' . BB_BT_USERS . ' WHERE user_id = ' . (int)$user_id . ' LIMIT 1');
         // Build torrents table
         foreach (OLD_DB()->fetch_rowset($sql) as $tor) {
             $dl = $tor['speed_down'] ?? 0;
@@ -702,8 +702,8 @@ if ($allowed_forums) {
             $size = $tor['size'];
             $tor_magnet = create_magnet($tor['info_hash'], $passkey['auth_key'], $userdata['session_logged_in']);
             $compl = $tor['complete_count'];
-            $dl_sp = ($dl) ? humn_size($dl, 0, 'KB') . '/s' : '0 KB/s';
-            $ul_sp = ($ul) ? humn_size($ul, 0, 'KB') . '/s' : '0 KB/s';
+            $dl_sp = $dl ? humn_size($dl, 0, 'KB') . '/s' : '0 KB/s';
+            $ul_sp = $ul ? humn_size($ul, 0, 'KB') . '/s' : '0 KB/s';
 
             $dl_class = isset($tor['dl_status']) ? $dl_link_css[$tor['dl_status']] : 'genmed';
             $row_class = !($row_num & 1) ? $row_class_1 : $row_class_2;
@@ -715,21 +715,21 @@ if ($allowed_forums) {
 
             $template->assign_block_vars('tor', array(
                 'CAT_ID' => $cat_id,
-                'CAT_TITLE' => ($cat_id) ? $cat_title_html[$cat_id] : '',
+                'CAT_TITLE' => $cat_id ? $cat_title_html[$cat_id] : '',
                 'FORUM_ID' => $forum_id,
-                'FORUM_NAME' => ($forum_id) ? $forum_name_html[$forum_id] : '',
+                'FORUM_NAME' => $forum_id ? $forum_name_html[$forum_id] : '',
                 'TOPIC_ID' => $tor['topic_id'],
                 'TOPIC_TITLE' => wbr($tor['topic_title']),
                 'TOPIC_TIME' => bb_date($tor['topic_time'], 'd-M-y') . ' <b>&middot;</b> ' . delta_time($tor['topic_time']),
                 'POST_ID' => $tor['post_id'],
                 'POSTER_ID' => $poster_id,
-                'USERNAME' => ($hide_author) ? '' : profile_url(array('username' => $tor['username'], 'user_rank' => $tor['user_rank'])),
+                'USERNAME' => $hide_author ? '' : profile_url(array('username' => $tor['username'], 'user_rank' => $tor['user_rank'])),
 
                 'ROW_CLASS' => $row_class,
                 'ROW_NUM' => $row_num,
                 'DL_CLASS' => $dl_class,
-                'IS_NEW' => (!IS_GUEST && $tor['reg_time'] > $lastvisit),
-                'USER_AUTHOR' => (!IS_GUEST && $poster_id == $user_id),
+                'IS_NEW' => !IS_GUEST && $tor['reg_time'] > $lastvisit,
+                'USER_AUTHOR' => !IS_GUEST && $poster_id == $user_id,
 
                 'ATTACH_ID' => $att_id,
                 'MAGNET' => $tor_magnet,
@@ -744,7 +744,7 @@ if ($allowed_forums) {
                 'UL_SPEED' => $ul_sp,
                 'DL_SPEED' => $dl_sp,
                 'SEEDS' => $seeds ?: 0,
-                'SEEDS_TITLE' => ($seeds) ? trans('messages.SEEDERS') : (trans('messages.SEED_NOT_SEEN') . ":\n " . (($s_last) ? bb_date($s_last, $date_format) : trans('messages.NEVER'))),
+                'SEEDS_TITLE' => $seeds ? trans('messages.SEEDERS') : (trans('messages.SEED_NOT_SEEN') . ":\n " . ($s_last ? bb_date($s_last, $date_format) : trans('messages.NEVER'))),
                 'LEECHS' => $leechs ?: 0,
                 'COMPLETED' => $compl ?: 0,
                 'REPLIES' => $tor['topic_replies'],
@@ -794,7 +794,7 @@ foreach ($cat_forum['c'] as $cat_id => $forums_ary) {
             $class .= isset($cat_forum['forums_with_sf'][$forum_id]) ? ' has_sf' : '';
             $style = " class=\"$class\"";
         }
-        $selected = (isset($search_in_forums_fary[$forum_id])) ? HTML_SELECTED : '';
+        $selected = isset($search_in_forums_fary[$forum_id]) ? HTML_SELECTED : '';
         $opt .= '<option id="fs-' . $forum_id . '" value="' . $forum_id . '"' . $style . $selected . '>' . (isset($cat_forum['subforums'][$forum_id]) ? HTML_SF_SPACER : '') . $forum_name . "&nbsp;</option>\n";
     }
 

@@ -24,15 +24,15 @@ OLD_DB()->lock(array(
 ));
 
 // Update user's session time
-OLD_DB()->query("
+OLD_DB()->query('
 	UPDATE
-		" . BB_USERS . " u,
-		" . BB_SESSIONS . " s
+		' . BB_USERS . ' u,
+		' . BB_SESSIONS . ' s
 	SET
 		u.user_session_time = IF(u.user_session_time < s.session_time, s.session_time, u.user_session_time)
 	WHERE
 				u.user_id = s.session_user_id
-		AND s.session_user_id != " . GUEST_UID . "
+		AND s.session_user_id != ' . GUEST_UID . "
 		AND (
 			(s.session_time < $user_session_expire_time AND s.session_admin = 0)
 			OR
@@ -44,9 +44,9 @@ OLD_DB()->unlock();
 // ############################ Tables UNLOCKED ##############################
 
 // Delete staled sessions
-OLD_DB()->query("
+OLD_DB()->query('
 	DELETE s
-	FROM " . BB_SESSIONS . " s
+	FROM ' . BB_SESSIONS . " s
 	WHERE
 		(s.session_time < $user_session_gc_time AND s.session_admin = 0)
 		OR

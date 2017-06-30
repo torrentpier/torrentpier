@@ -36,7 +36,7 @@ if (!$ranks = $datastore->get('ranks')) {
 
 $poster_rank = $rank_image = $rank_style = $rank_select = '';
 if ($user_rank = $profiledata['user_rank'] and isset($ranks[$user_rank])) {
-    $rank_image = ($ranks[$user_rank]['rank_image']) ? '<img src="' . $ranks[$user_rank]['rank_image'] . '" alt="" title="" border="0" />' : '';
+    $rank_image = $ranks[$user_rank]['rank_image'] ? '<img src="' . $ranks[$user_rank]['rank_image'] . '" alt="" title="" border="0" />' : '';
     $poster_rank = $ranks[$user_rank]['rank_title'];
     $rank_style = $ranks[$user_rank]['rank_style'];
 }
@@ -79,7 +79,7 @@ $template->assign_vars(array(
     'PROFILE_USER_ID' => $profiledata['user_id'],
     'PROFILE_USER' => $profile_user_id,
     'USER_REGDATE' => bb_date($profiledata['user_regdate'], 'Y-m-d H:i', false),
-    'POSTER_RANK' => ($poster_rank) ? "<span class=\"$rank_style\">" . $poster_rank . "</span>" : trans('messages.USER'),
+    'POSTER_RANK' => $poster_rank ? "<span class=\"$rank_style\">" . $poster_rank . '</span>' : trans('messages.USER'),
     'RANK_IMAGE' => $rank_image,
     'RANK_SELECT' => $rank_select,
     'POSTS' => $profiledata['user_posts'],
@@ -87,8 +87,8 @@ $template->assign_vars(array(
     'EMAIL' => $email,
     'WWW' => $profiledata['user_website'],
     'ICQ' => $profiledata['user_icq'],
-    'LAST_VISIT_TIME' => ($profiledata['user_lastvisit']) ? (bf($profiledata['user_opt'], 'user_opt', 'user_viewonline') && !IS_ADMIN) ? trans('messages.HIDDEN_USER') : bb_date($profiledata['user_lastvisit'], 'Y-m-d H:i', false) : trans('messages.NEVER'),
-    'LAST_ACTIVITY_TIME' => ($profiledata['user_session_time']) ? (bf($profiledata['user_opt'], 'user_opt', 'user_viewonline') && !IS_ADMIN) ? trans('messages.HIDDEN_USER') : bb_date($profiledata['user_session_time'], 'Y-m-d H:i', false) : trans('messages.NEVER'),
+    'LAST_VISIT_TIME' => $profiledata['user_lastvisit'] ? (bf($profiledata['user_opt'], 'user_opt', 'user_viewonline') && !IS_ADMIN) ? trans('messages.HIDDEN_USER') : bb_date($profiledata['user_lastvisit'], 'Y-m-d H:i', false) : trans('messages.NEVER'),
+    'LAST_ACTIVITY_TIME' => $profiledata['user_session_time'] ? (bf($profiledata['user_opt'], 'user_opt', 'user_viewonline') && !IS_ADMIN) ? trans('messages.HIDDEN_USER') : bb_date($profiledata['user_session_time'], 'Y-m-d H:i', false) : trans('messages.NEVER'),
 
     'USER_ACTIVE' => $profiledata['user_active'],
     'LOCATION' => $profiledata['user_from'],
@@ -111,18 +111,18 @@ $template->assign_vars(array(
     'AVATAR_IMG' => get_avatar($profiledata['user_id'], $profiledata['avatar_ext_id'], !bf($profiledata['user_opt'], 'user_opt', 'dis_avatar')),
 
     'SIGNATURE' => $signature,
-    'SHOW_PASSKEY' => (IS_ADMIN || $profile_user_id),
-    'SHOW_ROLE' => (IS_AM || $profile_user_id || $profiledata['user_active']),
+    'SHOW_PASSKEY' => IS_ADMIN || $profile_user_id,
+    'SHOW_ROLE' => IS_AM || $profile_user_id || $profiledata['user_active'],
     'GROUP_MEMBERSHIP' => false,
     'TRAF_STATS' => !(IS_AM || $profile_user_id),
 ));
 
 if (IS_ADMIN) {
     $group_membership = array();
-    $sql = "
+    $sql = '
 		SELECT COUNT(g.group_id) AS groups_cnt, g.group_single_user, ug.user_pending
-		FROM " . BB_USER_GROUP . " ug
-		LEFT JOIN " . BB_GROUPS . " g USING(group_id)
+		FROM ' . BB_USER_GROUP . ' ug
+		LEFT JOIN ' . BB_GROUPS . " g USING(group_id)
 		WHERE ug.user_id = {$profiledata['user_id']}
 		GROUP BY ug.user_id, g.group_single_user, ug.user_pending
 		ORDER BY NULL
@@ -155,7 +155,7 @@ if (IS_ADMIN) {
     ));
 } elseif (IS_MOD) {
     $template->assign_vars(array(
-        'SHOW_GROUP_MEMBERSHIP' => ($profiledata['user_level'] != USER),
+        'SHOW_GROUP_MEMBERSHIP' => $profiledata['user_level'] != USER,
     ));
 }
 

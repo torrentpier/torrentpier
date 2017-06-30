@@ -29,24 +29,24 @@ if ($t_data['seeders'] > 2) {
 
 $ban_user_id = [];
 
-$sql = OLD_DB()->fetch_rowset("SELECT ban_userid FROM " . BB_BANLIST . " WHERE ban_userid != 0");
+$sql = OLD_DB()->fetch_rowset('SELECT ban_userid FROM ' . BB_BANLIST . ' WHERE ban_userid != 0');
 
 foreach ($sql as $row) {
     $ban_user_id[] = ',' . $row['ban_userid'];
 }
 $ban_user_id = implode('', $ban_user_id);
 
-$user_list = OLD_DB()->fetch_rowset("
+$user_list = OLD_DB()->fetch_rowset('
 	SELECT DISTINCT dl.user_id, u.user_opt, tr.user_id as active_dl
-	FROM " . BB_BT_DLSTATUS . " dl
-	LEFT JOIN " . BB_USERS . " u  ON(u.user_id = dl.user_id)
-	LEFT JOIN " . BB_BT_TRACKER . " tr ON(tr.user_id = dl.user_id)
+	FROM ' . BB_BT_DLSTATUS . ' dl
+	LEFT JOIN ' . BB_USERS . ' u  ON(u.user_id = dl.user_id)
+	LEFT JOIN ' . BB_BT_TRACKER . " tr ON(tr.user_id = dl.user_id)
 	WHERE dl.topic_id = $topic_id
-		AND dl.user_status IN (" . DL_STATUS_COMPLETE . ", " . DL_STATUS_DOWN . ")
-		AND dl.user_id NOT IN ({$userdata['user_id']}, " . EXCLUDED_USERS . $ban_user_id . ")
+		AND dl.user_status IN (" . DL_STATUS_COMPLETE . ', ' . DL_STATUS_DOWN . ")
+		AND dl.user_id NOT IN ({$userdata['user_id']}, " . EXCLUDED_USERS . $ban_user_id . ')
 		AND u.user_active = 1
 	GROUP BY dl.user_id
-");
+');
 
 $subject = sprintf(trans('messages.CALLSEED_SUBJECT'), $t_data['topic_title']);
 $message = sprintf(trans('messages.CALLSEED_TEXT'), make_url(TOPIC_URL . $topic_id), $t_data['topic_title'], make_url(DOWNLOAD_URL . $t_data['attach_id']));
@@ -65,20 +65,20 @@ if ($user_list) {
     send_pm($t_data['poster_id'], $subject, $message, BOT_UID);
 }
 
-OLD_DB()->query("UPDATE " . BB_BT_TORRENTS . " SET call_seed_time = " . TIMENOW . " WHERE topic_id = $topic_id");
+OLD_DB()->query('UPDATE ' . BB_BT_TORRENTS . ' SET call_seed_time = ' . TIMENOW . " WHERE topic_id = $topic_id");
 
 meta_refresh(TOPIC_URL . $topic_id);
 bb_die(trans('messages.CALLSEED_MSG_OK'));
 
 function topic_info($topic_id)
 {
-    $sql = "
+    $sql = '
 		SELECT
 			tor.poster_id, tor.forum_id, tor.attach_id, tor.call_seed_time,
 			t.topic_title, sn.seeders
-		FROM      " . BB_BT_TORRENTS . " tor
-		LEFT JOIN " . BB_TOPICS . " t  USING(topic_id)
-		LEFT JOIN " . BB_BT_TRACKER_SNAP . " sn USING(topic_id)
+		FROM      ' . BB_BT_TORRENTS . ' tor
+		LEFT JOIN ' . BB_TOPICS . ' t  USING(topic_id)
+		LEFT JOIN ' . BB_BT_TRACKER_SNAP . " sn USING(topic_id)
 		WHERE tor.topic_id = $topic_id
 	";
 

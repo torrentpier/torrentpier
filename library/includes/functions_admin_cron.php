@@ -13,7 +13,7 @@ function run_jobs($jobs)
 
     define('IN_CRON', true);
 
-    $sql = "SELECT cron_script FROM " . BB_CRON . " WHERE cron_id IN ($jobs)";
+    $sql = 'SELECT cron_script FROM ' . BB_CRON . " WHERE cron_id IN ($jobs)";
     if (!$result = OLD_DB()->sql_query($sql)) {
         bb_die('Could not obtain cron script');
     }
@@ -21,10 +21,10 @@ function run_jobs($jobs)
     while ($row = OLD_DB()->sql_fetchrow($result)) {
         $job = $row['cron_script'];
         $job_script = INC_DIR . '/cron/jobs/' . $job;
-        require($job_script);
+        require $job_script;
     }
-    OLD_DB()->query("
-			UPDATE " . BB_CRON . " SET
+    OLD_DB()->query('
+			UPDATE ' . BB_CRON . " SET
 				last_run = NOW(),
 				run_counter = run_counter + 1,
 				next_run =
@@ -46,21 +46,17 @@ function run_jobs($jobs)
 			END
 			WHERE cron_id IN ($jobs)
 		");
-
-    return;
 }
 
 function delete_jobs($jobs)
 {
-    OLD_DB()->query("DELETE FROM " . BB_CRON . " WHERE cron_id IN ($jobs)");
-    return;
+    OLD_DB()->query('DELETE FROM ' . BB_CRON . " WHERE cron_id IN ($jobs)");
 }
 
 function toggle_active($jobs, $cron_action)
 {
     $active = ($cron_action == 'disable') ? 0 : 1;
-    OLD_DB()->query("UPDATE " . BB_CRON . " SET cron_active = $active WHERE cron_id IN ($jobs)");
-    return;
+    OLD_DB()->query('UPDATE ' . BB_CRON . " SET cron_active = $active WHERE cron_id IN ($jobs)");
 }
 
 function validate_cron_post($cron_arr)
@@ -85,7 +81,7 @@ function validate_cron_post($cron_arr)
 
 function insert_cron_job($cron_arr)
 {
-    $row = OLD_DB()->fetch_row("SELECT cron_title, cron_script FROM " . BB_CRON . " WHERE cron_title = '" . $_POST['cron_title'] . "' or cron_script = '" . $_POST['cron_script'] . "' ");
+    $row = OLD_DB()->fetch_row('SELECT cron_title, cron_script FROM ' . BB_CRON . " WHERE cron_title = '" . $_POST['cron_title'] . "' or cron_script = '" . $_POST['cron_script'] . "' ");
 
     if ($row) {
         if ($_POST['cron_script'] == $row['cron_script']) {
@@ -94,7 +90,7 @@ function insert_cron_job($cron_arr)
             $errMess = trans('messages.TITLE_DUPLICATE');
         }
 
-        $message = $errMess . "<br /><br />" . sprintf(trans('messages.CLICK_RETURN_JOBS_ADDED'), "<a href=\"javascript:history.back(-1)\">", "</a>") . "<br /><br />" . sprintf(trans('messages.CLICK_RETURN_JOBS'), "<a href=\"admin_cron.php?mode=list\">", "</a>") . "<br /><br />" . sprintf(trans('messages.CLICK_RETURN_ADMIN_INDEX'), "<a href=\"index.php?pane=right\">", "</a>");
+        $message = $errMess . '<br /><br />' . sprintf(trans('messages.CLICK_RETURN_JOBS_ADDED'), '<a href="javascript:history.back(-1)">', '</a>') . '<br /><br />' . sprintf(trans('messages.CLICK_RETURN_JOBS'), '<a href="admin_cron.php?mode=list">', '</a>') . '<br /><br />' . sprintf(trans('messages.CLICK_RETURN_ADMIN_INDEX'), '<a href="index.php?pane=right">', '</a>');
 
         bb_die($message);
     }
@@ -115,7 +111,7 @@ function insert_cron_job($cron_arr)
     $disable_board = $cron_arr['disable_board'];
     $run_counter = $cron_arr['run_counter'];
 
-    OLD_DB()->query("INSERT INTO " . BB_CRON . " (cron_active, cron_title, cron_script, schedule, run_day, run_time, run_order, last_run, next_run, run_interval, log_enabled, log_file, log_sql_queries, disable_board, run_counter) VALUES (
+    OLD_DB()->query('INSERT INTO ' . BB_CRON . " (cron_active, cron_title, cron_script, schedule, run_day, run_time, run_order, last_run, next_run, run_interval, log_enabled, log_file, log_sql_queries, disable_board, run_counter) VALUES (
 	$cron_active, '$cron_title', '$cron_script', '$schedule', '$run_day', '$run_time', '$run_order', '$last_run', '$next_run', '$run_interval', $log_enabled, '$log_file', $log_sql_queries, $disable_board, '$run_counter')");
 }
 
@@ -138,7 +134,7 @@ function update_cron_job($cron_arr)
     $disable_board = $cron_arr['disable_board'];
     $run_counter = $cron_arr['run_counter'];
 
-    OLD_DB()->query("UPDATE " . BB_CRON . " SET
+    OLD_DB()->query('UPDATE ' . BB_CRON . " SET
 		cron_active = '$cron_active',
 		cron_title = '$cron_title',
 		cron_script = '$cron_script',

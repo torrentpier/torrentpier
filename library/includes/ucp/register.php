@@ -55,7 +55,7 @@ switch ($mode) {
         if (!IS_ADMIN) {
             // Ограничение по ip
             if (config('tp.unique_ip')) {
-                if ($users = OLD_DB()->fetch_row("SELECT user_id, username FROM " . BB_USERS . " WHERE user_reg_ip = '" . USER_IP . "' LIMIT 1")) {
+                if ($users = OLD_DB()->fetch_row('SELECT user_id, username FROM ' . BB_USERS . " WHERE user_reg_ip = '" . USER_IP . "' LIMIT 1")) {
                     bb_die(sprintf(trans('messages.ALREADY_REG_IP'), '<a href="' . PROFILE_URL . $users['user_id'] . '"><b>' . $users['username'] . '</b></a>', config('tp.tech_admin_email')));
                 }
             }
@@ -104,7 +104,7 @@ switch ($mode) {
         // field => can_edit
         $profile_fields = array(
             'user_active' => IS_ADMIN,
-            'username' => (IS_ADMIN || config('tp.allow_namechange')),
+            'username' => IS_ADMIN || config('tp.allow_namechange'),
             'user_password' => true,
             'user_email' => true, // должен быть после user_password
             'user_lang' => true,
@@ -335,19 +335,19 @@ foreach ($profile_fields as $field => $can_edit) {
 
             $update_user_opt = array(
                 #	'user_opt_name'  => ($reg_mode) ? #reg_value : #in_login_change
-                'user_viewemail' => ($reg_mode) ? false : true,
-                'user_viewonline' => ($reg_mode) ? false : true,
-                'user_notify' => ($reg_mode) ? true : true,
-                'user_notify_pm' => ($reg_mode) ? true : true,
-                'user_porn_forums' => ($reg_mode) ? false : true,
-                'user_dls' => ($reg_mode) ? false : true,
-                'user_callseed' => ($reg_mode) ? true : true,
-                'user_retracker' => ($reg_mode) ? true : true,
+                'user_viewemail' => $reg_mode ? false : true,
+                'user_viewonline' => $reg_mode ? false : true,
+                'user_notify' => $reg_mode ? true : true,
+                'user_notify_pm' => $reg_mode ? true : true,
+                'user_porn_forums' => $reg_mode ? false : true,
+                'user_dls' => $reg_mode ? false : true,
+                'user_callseed' => $reg_mode ? true : true,
+                'user_retracker' => $reg_mode ? true : true,
             );
 
             foreach ($update_user_opt as $opt => $can_change_opt) {
                 if ($submit && (isset($_POST[$opt]) && $can_change_opt || $reg_mode)) {
-                    $change_opt = ($reg_mode) ? $can_change_opt : !empty($_POST[$opt]);
+                    $change_opt = $reg_mode ? $can_change_opt : !empty($_POST[$opt]);
                     setbit($user_opt, $bf['user_opt'][$opt], $change_opt);
                 }
                 $tp_data[strtoupper($opt)] = bf($user_opt, 'user_opt', $opt);
@@ -496,7 +496,7 @@ foreach ($profile_fields as $field => $can_edit) {
         case 'user_twitter':
             $twitter = isset($_POST['user_twitter']) ? (string)$_POST['user_twitter'] : $pr_data['user_twitter'];
             if ($submit && $twitter != $pr_data['user_twitter']) {
-                if ($twitter != '' && !preg_match("#^[a-zA-Z0-9_]{1,15}$#", $twitter)) {
+                if ($twitter != '' && !preg_match('#^[a-zA-Z0-9_]{1,15}$#', $twitter)) {
                     $errors[] = trans('messages.TWITTER_ERROR');
                 }
                 $pr_data['user_twitter'] = $twitter;
@@ -558,7 +558,7 @@ if ($submit && !$errors) {
 
         $sql_args = OLD_DB()->build_array('INSERT', $db_data);
 
-        OLD_DB()->query("INSERT INTO " . BB_USERS . $sql_args);
+        OLD_DB()->query('INSERT INTO ' . BB_USERS . $sql_args);
         $new_user_id = OLD_DB()->sql_nextid();
 
         if (IS_ADMIN) {
@@ -634,7 +634,7 @@ if ($submit && !$errors) {
 
             $sql_args = OLD_DB()->build_array('UPDATE', $db_data);
 
-            OLD_DB()->query("UPDATE " . BB_USERS . " SET $sql_args WHERE user_id = {$pr_data['user_id']}");
+            OLD_DB()->query('UPDATE ' . BB_USERS . " SET $sql_args WHERE user_id = {$pr_data['user_id']}");
 
             if ($pr_data['user_id'] != $userdata['user_id']) {
                 if ($pr_data['user_level'] == MOD && !empty($db_data['username'])) {
@@ -662,19 +662,19 @@ $template->assign_vars($tp_data);
 
 $template->assign_vars(array(
     'PAGE_TITLE' => ($mode == 'editprofile') ? trans('messages.EDIT_PROFILE') . ($adm_edit ? " :: {$pr_data['username']}" : '') : trans('messages.REGISTER'),
-    'SHOW_REG_AGREEMENT' => ($mode == 'register' && !IS_ADMIN),
-    'ERROR_MESSAGE' => ($errors) ? implode('<br />', array_unique($errors)) : '',
+    'SHOW_REG_AGREEMENT' => $mode == 'register' && !IS_ADMIN,
+    'ERROR_MESSAGE' => $errors ? implode('<br />', array_unique($errors)) : '',
     'MODE' => $mode,
-    'EDIT_PROFILE' => ($mode == 'editprofile'),
+    'EDIT_PROFILE' => $mode == 'editprofile',
     'ADM_EDIT' => $adm_edit,
-    'SHOW_PASS' => ($adm_edit || ($mode == 'register' && IS_ADMIN)),
-    'CAPTCHA_HTML' => ($need_captcha) ? bb_captcha('get') : '',
+    'SHOW_PASS' => $adm_edit || ($mode == 'register' && IS_ADMIN),
+    'CAPTCHA_HTML' => $need_captcha ? bb_captcha('get') : '',
 
     'LANGUAGE_SELECT' => language_select($pr_data['user_lang'], 'user_lang'),
     'TIMEZONE_SELECT' => tz_select($pr_data['user_timezone'], 'user_timezone'),
     'USER_TIMEZONE' => $pr_data['user_timezone'],
 
-    'AVATAR_EXPLAIN' => sprintf(trans('messages.AVATAR_EXPLAIN'), config('tp.avatars.max_width'), config('tp.avatars.max_height'), (round(config('tp.avatars.max_size') / 1024))),
+    'AVATAR_EXPLAIN' => sprintf(trans('messages.AVATAR_EXPLAIN'), config('tp.avatars.max_width'), config('tp.avatars.max_height'), round(config('tp.avatars.max_size') / 1024)),
     'AVATAR_DISALLOWED' => bf($pr_data['user_opt'], 'user_opt', 'dis_avatar'),
     'AVATAR_DIS_EXPLAIN' => sprintf(trans('messages.AVATAR_DISABLE'), config('tp.terms_and_conditions_url')),
     'AVATAR_IMG' => get_avatar($pr_data['user_id'], $pr_data['avatar_ext_id'], !bf($pr_data['user_opt'], 'user_opt', 'dis_avatar')),

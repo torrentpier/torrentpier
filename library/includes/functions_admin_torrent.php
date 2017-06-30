@@ -41,7 +41,6 @@ function update_table_bool($table_name, $key, $field_name, $field_def_val)
             }
         }
     }
-    return;
 }
 
 function set_tpl_vars($default_cfg, $cfg)
@@ -60,12 +59,12 @@ function set_tpl_vars_bool($default_cfg, $cfg)
     foreach ($default_cfg as $config_name => $config_value) {
         // YES/NO 'checked="checked"'
         $template->assign_vars(array(
-            strtoupper($config_name) . '_YES' => ($cfg[$config_name]) ? HTML_CHECKED : '',
+            strtoupper($config_name) . '_YES' => $cfg[$config_name] ? HTML_CHECKED : '',
             strtoupper($config_name) . '_NO' => (!$cfg[$config_name]) ? HTML_CHECKED : '',
         ));
         // YES/NO lang vars
         $template->assign_vars(array(
-            'L_' . strtoupper($config_name) . '_YES' => ($cfg[$config_name]) ? '<u>' . trans('messages.YES') . '</u>' : trans('messages.YES'),
+            'L_' . strtoupper($config_name) . '_YES' => $cfg[$config_name] ? '<u>' . trans('messages.YES') . '</u>' : trans('messages.YES'),
             'L_' . strtoupper($config_name) . '_NO' => (!$cfg[$config_name]) ? '<u>' . trans('messages.NO') . '</u>' : trans('messages.NO'),
         ));
     }
@@ -91,7 +90,7 @@ function update_config_table($table_name, $default_cfg, $cfg, $type)
             if ($type == 'str') {
                 $config_value = $_POST[$config_name];
             } elseif ($type == 'bool') {
-                $config_value = ($_POST[$config_name]) ? 1 : 0;
+                $config_value = $_POST[$config_name] ? 1 : 0;
             } elseif ($type == 'num') {
                 $config_value = abs((int)$_POST[$config_name]);
             } else {

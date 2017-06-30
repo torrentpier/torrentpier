@@ -46,7 +46,7 @@ function validate_topics($forum_id, &$req_topics, &$topic_titles)
     $valid_topics = $valid_titles = array();
 
     if ($topic_csv = get_id_csv($req_topics)) {
-        $sql = "SELECT topic_id, topic_title FROM " . BB_TOPICS . " WHERE topic_id IN($topic_csv) AND forum_id = $forum_id";
+        $sql = 'SELECT topic_id, topic_title FROM ' . BB_TOPICS . " WHERE topic_id IN($topic_csv) AND forum_id = $forum_id";
 
         foreach (OLD_DB()->fetch_rowset($sql) as $row) {
             $valid_topics[] = $row['topic_id'];
@@ -101,11 +101,11 @@ if (isset($_REQUEST['mode'])) {
 
 // Obtain relevant data
 if ($topic_id) {
-    $sql = "
+    $sql = '
 		SELECT
 			f.forum_id, f.forum_name, f.forum_topics, f.self_moderated,
 			t.topic_first_post_id, t.topic_poster
-		FROM " . BB_TOPICS . " t, " . BB_FORUMS . " f
+		FROM ' . BB_TOPICS . ' t, ' . BB_FORUMS . " f
 		WHERE t.topic_id = $topic_id
 			AND f.forum_id = t.forum_id
 		LIMIT 1
@@ -119,7 +119,7 @@ if ($topic_id) {
     $forum_name = $topic_row['forum_name'];
     $forum_topics = (!$topic_row['forum_topics']) ? 1 : $topic_row['forum_topics'];
 } elseif ($forum_id) {
-    $sql = "SELECT forum_name, forum_topics FROM " . BB_FORUMS . " WHERE forum_id = $forum_id LIMIT 1";
+    $sql = 'SELECT forum_name, forum_topics FROM ' . BB_FORUMS . " WHERE forum_id = $forum_id LIMIT 1";
 
     if (!$topic_row = OLD_DB()->fetch_row($sql)) {
         bb_die('Forum not exist');
@@ -139,14 +139,14 @@ if (isset($_POST['cancel']) || IS_GUEST) {
     $redirect = 'index.php';
 
     if ($topic_id || $forum_id) {
-        $redirect = ($topic_id) ? TOPIC_URL . $topic_id : FORUM_URL . $forum_id;
+        $redirect = $topic_id ? TOPIC_URL . $topic_id : FORUM_URL . $forum_id;
     }
     redirectToUrl($redirect);
 }
 
 // Start auth check
 $is_auth = auth_user(AUTH_ALL, $forum_id, $userdata);
-$is_moderator = (IS_AM);
+$is_moderator = IS_AM;
 
 if ($mode == 'ip') {
     // Moderator can view IP in all forums
@@ -237,13 +237,13 @@ switch ($mode) {
                 $datastore->update('network_news');
             }
 
-            $msg = ($result) ? trans('messages.TOPICS_REMOVED') : trans('messages.NO_TOPICS_REMOVED');
+            $msg = $result ? trans('messages.TOPICS_REMOVED') : trans('messages.NO_TOPICS_REMOVED');
             bb_die(return_msg_mcp($msg));
         } else {
             print_confirmation(array(
                 'QUESTION' => trans('messages.CONFIRM_DELETE_TOPIC'),
                 'ITEMS_LIST' => implode("\n</li>\n<li>\n", $topic_titles),
-                'FORM_ACTION' => "modcp.php",
+                'FORM_ACTION' => 'modcp.php',
                 'HIDDEN_FIELDS' => build_hidden_fields($hidden_fields),
             ));
         }
@@ -268,7 +268,7 @@ switch ($mode) {
                 $datastore->update('network_news');
             }
 
-            $msg = ($result) ? trans('messages.TOPICS_MOVED') : trans('messages.NO_TOPICS_MOVED');
+            $msg = $result ? trans('messages.TOPICS_MOVED') : trans('messages.NO_TOPICS_MOVED');
             bb_die(return_msg_mcp($msg));
         } else {
             if (IS_ADMIN) {
@@ -290,7 +290,7 @@ switch ($mode) {
                 'TOPIC_TITLES' => implode("\n</li>\n<li>\n", $topic_titles),
 
                 'S_FORUM_SELECT' => $forum_select,
-                'S_MODCP_ACTION' => "modcp.php",
+                'S_MODCP_ACTION' => 'modcp.php',
                 'S_HIDDEN_FIELDS' => build_hidden_fields($hidden_fields),
             ));
 
@@ -301,11 +301,11 @@ switch ($mode) {
     case 'lock':
     case 'unlock':
         $lock = ($mode == 'lock');
-        $new_topic_status = ($lock) ? TOPIC_LOCKED : TOPIC_UNLOCKED;
+        $new_topic_status = $lock ? TOPIC_LOCKED : TOPIC_UNLOCKED;
 
-        $sql = "
+        $sql = '
 			SELECT topic_id, topic_title
-			FROM " . BB_TOPICS . "
+			FROM ' . BB_TOPICS . "
 			WHERE topic_id IN($topic_csv)
 				AND forum_id = $forum_id
 				AND topic_status != " . TOPIC_MOVED . "
@@ -323,14 +323,14 @@ switch ($mode) {
             bb_die(trans('messages.NONE_SELECTED'));
         }
 
-        OLD_DB()->query("
-			UPDATE " . BB_TOPICS . " SET
+        OLD_DB()->query('
+			UPDATE ' . BB_TOPICS . " SET
 				topic_status = $new_topic_status
 			WHERE topic_id IN($topic_csv)
 		");
 
         // Log action
-        $type = ($lock) ? 'mod_topic_lock' : 'mod_topic_unlock';
+        $type = $lock ? 'mod_topic_lock' : 'mod_topic_unlock';
 
         foreach ($log_topics as $topic_id => $topic_title) {
             $log_action->mod($type, array(
@@ -340,7 +340,7 @@ switch ($mode) {
             ));
         }
 
-        $msg = ($lock) ? trans('messages.TOPICS_LOCKED') : trans('messages.TOPICS_UNLOCKED');
+        $msg = $lock ? trans('messages.TOPICS_LOCKED') : trans('messages.TOPICS_UNLOCKED');
         bb_die(return_msg_mcp($msg));
 
         break;
@@ -349,10 +349,10 @@ switch ($mode) {
     case 'set_download':
     case 'unset_download':
         $set_download = ($mode == 'set_download');
-        $new_dl_type = ($set_download) ? TOPIC_DL_TYPE_DL : TOPIC_DL_TYPE_NORMAL;
+        $new_dl_type = $set_download ? TOPIC_DL_TYPE_DL : TOPIC_DL_TYPE_NORMAL;
 
-        OLD_DB()->query("
-			UPDATE " . BB_TOPICS . " SET
+        OLD_DB()->query('
+			UPDATE ' . BB_TOPICS . " SET
 				topic_dl_type = $new_dl_type
 			WHERE topic_id IN($topic_csv)
 				AND forum_id = $forum_id
@@ -363,7 +363,7 @@ switch ($mode) {
             clear_dl_list($topic_csv);
         }
 
-        $msg = ($set_download) ? trans('messages.TOPICS_DOWN_SETS') : trans('messages.TOPICS_DOWN_UNSETS');
+        $msg = $set_download ? trans('messages.TOPICS_DOWN_SETS') : trans('messages.TOPICS_DOWN_UNSETS');
         bb_die(return_msg_mcp($msg));
 
         break;
@@ -386,8 +386,8 @@ switch ($mode) {
                 }
             }
             if ($req_post_id_sql = implode(',', $req_post_id_sql)) {
-                $sql = "SELECT post_id
-					FROM " . BB_POSTS . "
+                $sql = 'SELECT post_id
+					FROM ' . BB_POSTS . "
 					WHERE post_id IN($req_post_id_sql)
 						AND post_id != $topic_first_post_id
 						AND topic_id = $topic_id
@@ -408,8 +408,8 @@ switch ($mode) {
         if ($post_id_sql && $split) {
             //mpd end
 
-            $sql = "SELECT post_id, poster_id, topic_id, post_time
-				FROM " . BB_POSTS . "
+            $sql = 'SELECT post_id, poster_id, topic_id, post_time
+				FROM ' . BB_POSTS . "
 				WHERE post_id IN ($post_id_sql)
 				ORDER BY post_time ASC";
             if (!($result = OLD_DB()->sql_query($sql))) {
@@ -449,9 +449,9 @@ switch ($mode) {
 
                 $first_post_id = min(explode(',', $post_id_sql));
 
-                $sql = "INSERT INTO " . BB_TOPICS . " (topic_title, topic_poster, topic_time, forum_id, topic_status, topic_type, topic_first_post_id)
-					VALUES ('" . OLD_DB()->escape($post_subject) . "', $first_poster, " . $topic_time . ", $new_forum_id, " . TOPIC_UNLOCKED . ", " . POST_NORMAL . ", $first_post_id)";
-                if (!(OLD_DB()->sql_query($sql))) {
+                $sql = 'INSERT INTO ' . BB_TOPICS . " (topic_title, topic_poster, topic_time, forum_id, topic_status, topic_type, topic_first_post_id)
+					VALUES ('" . OLD_DB()->escape($post_subject) . "', $first_poster, " . $topic_time . ", $new_forum_id, " . TOPIC_UNLOCKED . ', ' . POST_NORMAL . ", $first_post_id)";
+                if (!OLD_DB()->sql_query($sql)) {
                     bb_die('Could not insert new topic');
                 }
 
@@ -459,7 +459,7 @@ switch ($mode) {
 
                 // Update topic watch table, switch users whose posts
                 // have moved, over to watching the new topic
-                $sql = "UPDATE " . BB_TOPICS_WATCH . "
+                $sql = 'UPDATE ' . BB_TOPICS_WATCH . "
 					SET topic_id = $new_topic_id
 					WHERE topic_id = $topic_id
 						AND user_id IN ($user_id_sql)";
@@ -469,7 +469,7 @@ switch ($mode) {
 
                 $sql_where = (!empty($_POST['split_type_beyond'])) ? " post_time >= $post_time AND topic_id = $topic_id" : "post_id IN ($post_id_sql)";
 
-                $sql = "UPDATE " . BB_POSTS . " SET topic_id = $new_topic_id, forum_id = $new_forum_id WHERE $sql_where";
+                $sql = 'UPDATE ' . BB_POSTS . " SET topic_id = $new_topic_id, forum_id = $new_forum_id WHERE $sql_where";
                 if (!OLD_DB()->sql_query($sql)) {
                     bb_die('Could not update posts table');
                 }
@@ -486,8 +486,8 @@ switch ($mode) {
                 sync('forum', array($forum_id, $new_forum_id));
 
                 //bot
-                $message = trans('messages.TOPIC_SPLIT') . '<br /><br /><a href="' . "viewtopic.php?" . POST_TOPIC_URL . "=$topic_id&amp;sid=" . $userdata['session_id'] . '">' . trans('messages.TOPIC_SPLIT_OLD') . '</a>';
-                $message .= ' &nbsp;::&nbsp; <a href="' . "viewtopic.php?" . POST_TOPIC_URL . "=$new_topic_id&amp;sid=" . $userdata['session_id'] . '">' . trans('messages.TOPIC_SPLIT_NEW') . '</a>';
+                $message = trans('messages.TOPIC_SPLIT') . '<br /><br /><a href="' . 'viewtopic.php?' . POST_TOPIC_URL . "=$topic_id&amp;sid=" . $userdata['session_id'] . '">' . trans('messages.TOPIC_SPLIT_OLD') . '</a>';
+                $message .= ' &nbsp;::&nbsp; <a href="' . 'viewtopic.php?' . POST_TOPIC_URL . "=$new_topic_id&amp;sid=" . $userdata['session_id'] . '">' . trans('messages.TOPIC_SPLIT_NEW') . '</a>';
 
                 // Log action
                 $log_action->mod('mod_topic_split', array(
@@ -509,11 +509,11 @@ switch ($mode) {
             // Delete posts
             $result = post_delete(explode(',', $post_id_sql));
 
-            $msg = ($result) ? trans('messages.DELETE_POSTS_SUCCESFULLY') : 'No posts were removed';
+            $msg = $result ? trans('messages.DELETE_POSTS_SUCCESFULLY') : 'No posts were removed';
             bb_die(return_msg_mcp($msg));
         } else {
-            $sql = "SELECT u.username, p.*, pt.post_text, p.post_username
-				FROM " . BB_POSTS . " p, " . BB_USERS . " u, " . BB_POSTS_TEXT . " pt
+            $sql = 'SELECT u.username, p.*, pt.post_text, p.post_username
+				FROM ' . BB_POSTS . ' p, ' . BB_USERS . ' u, ' . BB_POSTS_TEXT . " pt
 				WHERE p.topic_id = $topic_id
 					AND p.poster_id = u.user_id
 					AND p.post_id = pt.post_id
@@ -557,7 +557,7 @@ switch ($mode) {
                         'POSTER_NAME' => wbr($poster),
                         'POST_DATE' => $post_date,
                         'MESSAGE' => $message,
-                        'CHECKBOX' => (defined('BEGIN_CHECKBOX')) ? true : false,
+                        'CHECKBOX' => defined('BEGIN_CHECKBOX') ? true : false,
                         'POST_ID' => $post_id,
                         'ROW_ID' => $i,
                         'CB_ID' => 'cb_' . $i,
@@ -580,7 +580,7 @@ switch ($mode) {
         }
 
         // Look up relevant data for this post
-        $sql = "SELECT * FROM " . BB_POSTS . " WHERE post_id = $post_id AND forum_id = $forum_id";
+        $sql = 'SELECT * FROM ' . BB_POSTS . " WHERE post_id = $post_id AND forum_id = $forum_id";
         if (!($result = OLD_DB()->sql_query($sql))) {
             bb_die('Could not get poster IP information');
         }
@@ -598,7 +598,7 @@ switch ($mode) {
         $template->assign_vars(array(
             'TPL_MODCP_IP' => true,
             'IP' => $ip_this_post,
-            'U_LOOKUP_IP' => "modcp.php?mode=ip&amp;" . POST_POST_URL . "=$post_id&amp;" . POST_TOPIC_URL . "=$topic_id&amp;rdns=$ip_this_post&amp;sid=" . $userdata['session_id'],
+            'U_LOOKUP_IP' => 'modcp.php?mode=ip&amp;' . POST_POST_URL . "=$post_id&amp;" . POST_TOPIC_URL . "=$topic_id&amp;rdns=$ip_this_post&amp;sid=" . $userdata['session_id'],
         ));
 
         //
@@ -606,7 +606,7 @@ switch ($mode) {
         //
         $where_sql = ($poster_id == $anon) ? "post_username = '{$post_row['post_username']}'" : "poster_id = $poster_id";
 
-        $sql = "SELECT poster_ip, COUNT(*) AS postings FROM " . BB_POSTS . " WHERE $where_sql GROUP BY poster_ip ORDER BY postings DESC LIMIT 100";
+        $sql = 'SELECT poster_ip, COUNT(*) AS postings FROM ' . BB_POSTS . " WHERE $where_sql GROUP BY poster_ip ORDER BY postings DESC LIMIT 100";
         if (!($result = OLD_DB()->sql_query($sql))) {
             bb_die('Could not get IP information for this user');
         }
@@ -629,7 +629,7 @@ switch ($mode) {
                     'ROW_CLASS' => !($i % 2) ? 'row4' : 'row5',
                     'IP' => $ip,
                     'POSTS' => $row['postings'],
-                    'U_LOOKUP_IP' => "modcp.php?mode=ip&amp;" . POST_POST_URL . "=$post_id&amp;" . POST_TOPIC_URL . "=$topic_id&amp;rdns=" . $row['poster_ip'] . "&amp;sid=" . $userdata['session_id'],
+                    'U_LOOKUP_IP' => 'modcp.php?mode=ip&amp;' . POST_POST_URL . "=$post_id&amp;" . POST_TOPIC_URL . "=$topic_id&amp;rdns=" . $row['poster_ip'] . '&amp;sid=' . $userdata['session_id'],
                 ));
 
                 $i++;
@@ -643,7 +643,7 @@ switch ($mode) {
 				u.user_id,
 				IF(u.user_id = $anon, p.post_username, u.username) AS username,
 				COUNT(*) as postings
-			FROM " . BB_USERS . " u, " . BB_POSTS . " p
+			FROM " . BB_USERS . ' u, ' . BB_POSTS . " p
 			WHERE p.poster_id = u.user_id
 				AND p.poster_ip = '" . $post_row['poster_ip'] . "'
 			GROUP BY u.user_id, p.post_username
@@ -677,12 +677,12 @@ switch ($mode) {
     case 'post_pin':
     case 'post_unpin':
         $pin = ($mode == 'post_pin');
-        $new_topic_status = ($pin) ? 1 : 0;
+        $new_topic_status = $pin ? 1 : 0;
 
         if (count($topic_csv)) {
-            $sql = "
+            $sql = '
 				SELECT topic_id, topic_title
-				FROM " . BB_TOPICS . "
+				FROM ' . BB_TOPICS . "
 				WHERE topic_id IN($topic_csv)
 					AND forum_id = $forum_id
 					AND topic_show_first_post != " . TOPIC_MOVED . "
@@ -700,18 +700,18 @@ switch ($mode) {
                 bb_die(trans('messages.NONE_SELECTED'));
             }
 
-            OLD_DB()->query("
-				UPDATE " . BB_TOPICS . " SET
+            OLD_DB()->query('
+				UPDATE ' . BB_TOPICS . " SET
 					topic_show_first_post = $new_topic_status
 				WHERE topic_id IN($topic_csv)
 			");
 
-            $msg = ($pin) ? trans('messages.POST_PINNED') : trans('messages.POST_UNPINNED');
+            $msg = $pin ? trans('messages.POST_PINNED') : trans('messages.POST_UNPINNED');
             bb_die(return_msg_mcp($msg));
         } elseif ($topic_id) {
-            $sql = "
+            $sql = '
 				SELECT topic_id, topic_title
-				FROM " . BB_TOPICS . "
+				FROM ' . BB_TOPICS . "
 				WHERE topic_id = $topic_id
 					AND forum_id = $forum_id
 					AND topic_show_first_post != " . TOPIC_MOVED . "
@@ -730,13 +730,13 @@ switch ($mode) {
                 bb_die(trans('messages.NONE_SELECTED'));
             }
 
-            OLD_DB()->query("
-				UPDATE " . BB_TOPICS . " SET
+            OLD_DB()->query('
+				UPDATE ' . BB_TOPICS . " SET
 					topic_show_first_post = $new_topic_status
 				WHERE topic_id IN($topic_csv)
 			");
 
-            $msg = ($pin) ? trans('messages.POST_PINNED') : trans('messages.POST_UNPINNED');
+            $msg = $pin ? trans('messages.POST_PINNED') : trans('messages.POST_UNPINNED');
             bb_die(return_msg_mcp($msg));
         }
         break;
@@ -748,8 +748,8 @@ switch ($mode) {
 
 $template->assign_vars(array('PAGE_TITLE' => trans('messages.MOD_CP')));
 
-require(PAGE_HEADER);
+require PAGE_HEADER;
 
 $template->pparse('body');
 
-require(PAGE_FOOTER);
+require PAGE_FOOTER;

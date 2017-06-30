@@ -31,7 +31,7 @@ function send_file_to_browser($attachment, $upload_dir)
     $gotit = false;
 
     if (@!file_exists(@amod_realpath($filename))) {
-        bb_die(trans('messages.ERROR_NO_ATTACHMENT') . "<br /><br />" . $filename . "<br /><br />" . trans('messages.TOR_NOT_FOUND'));
+        bb_die(trans('messages.ERROR_NO_ATTACHMENT') . '<br /><br />' . $filename . '<br /><br />' . trans('messages.TOR_NOT_FOUND'));
     } else {
         $gotit = true;
     }
@@ -67,7 +67,7 @@ function send_file_to_browser($attachment, $upload_dir)
         }
         readfile($filename);
     } else {
-        bb_die(trans('messages.ERROR_NO_ATTACHMENT') . "<br /><br />" . $filename . "<br /><br />" . trans('messages.TOR_NOT_FOUND'));
+        bb_die(trans('messages.ERROR_NO_ATTACHMENT') . '<br /><br />' . $filename . '<br /><br />' . trans('messages.TOR_NOT_FOUND'));
     }
 
     exit;
@@ -200,8 +200,8 @@ if (IS_GUEST && !bb_captcha('check')) {
         'ERROR_MESSAGE' => $message,
     ));
 
-    require(PAGE_HEADER);
-    require(PAGE_FOOTER);
+    require PAGE_HEADER;
+    require PAGE_FOOTER;
 }
 
 send_file_to_browser($attachment, $upload_dir);

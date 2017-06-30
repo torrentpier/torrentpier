@@ -426,7 +426,7 @@ if ((empty($_POST) && !defined('IN_ADMIN') && !defined('IN_AJAX') && !file_exist
 
                 TorrentPier\Helpers\CronHelper::trackRunning('start');
 
-                require(CRON_DIR . 'cron_check.php');
+                require CRON_DIR . 'cron_check.php';
 
                 TorrentPier\Helpers\CronHelper::trackRunning('end');
             }

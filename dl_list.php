@@ -39,10 +39,10 @@ if ($mode == 'set_dl_status' || $mode == 'set_topics_dl_status') {
 $full_url = isset($_POST['full_url']) ? str_replace('&amp;', '&', htmlspecialchars($_POST['full_url'])) : '';
 
 if (isset($_POST['redirect_type']) && $_POST['redirect_type'] == 'search') {
-    $redirect_type = "search.php";
+    $redirect_type = 'search.php';
     $redirect = $full_url ?: "$dl_key=1";
 } else {
-    $redirect_type = (!$topic_id) ? "viewforum.php" : "viewtopic.php";
+    $redirect_type = (!$topic_id) ? 'viewforum.php' : 'viewtopic.php';
     $redirect = $full_url ?: ((!$topic_id) ? POST_FORUM_URL . "=$forum_id" : POST_TOPIC_URL . "=$topic_id");
 }
 
@@ -64,7 +64,7 @@ if (isset($_POST['cancel']) && $_POST['cancel']) {
 // Delete DL-list
 if ($mode == 'dl_delete' && $topic_id) {
     if (!IS_ADMIN) {
-        $sql = "SELECT forum_id FROM " . BB_TOPICS . " WHERE topic_id = $topic_id LIMIT 1";
+        $sql = 'SELECT forum_id FROM ' . BB_TOPICS . " WHERE topic_id = $topic_id LIMIT 1";
 
         if (!$row = OLD_DB()->sql_fetchrow(OLD_DB()->sql_query($sql))) {
             bb_die('Could not obtain forum_id for this topic');
@@ -112,7 +112,7 @@ if ($mode == 'set_topics_dl_status') {
 
 // Get existing topics
 if ($req_topics_sql = implode(',', $req_topics_ary)) {
-    $sql = "SELECT topic_id FROM " . BB_TOPICS . " WHERE topic_id IN($req_topics_sql)";
+    $sql = 'SELECT topic_id FROM ' . BB_TOPICS . " WHERE topic_id IN($req_topics_sql)";
 
     foreach (OLD_DB()->fetch_rowset($sql) as $row) {
         $topics_ary[] = $row['topic_id'];
@@ -131,9 +131,9 @@ if ($topics_ary && ($mode == 'set_dl_status' || $mode == 'set_topics_dl_status')
     }
     $new_dlstatus_sql = OLD_DB()->build_array('MULTI_INSERT', $new_dlstatus_ary);
 
-    OLD_DB()->query("REPLACE INTO " . BB_BT_DLSTATUS . " $new_dlstatus_sql");
+    OLD_DB()->query('REPLACE INTO ' . BB_BT_DLSTATUS . " $new_dlstatus_sql");
 
     redirectToUrl("$redirect_type?$redirect");
 }
 
-redirectToUrl("index.php");
+redirectToUrl('index.php');

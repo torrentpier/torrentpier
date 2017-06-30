@@ -16,7 +16,7 @@ if (!isset($this->request['attach_id'])) {
 }
 $attach_id = (int)$this->request['attach_id'];
 
-$torrent = OLD_DB()->fetch_row("SELECT attach_id, physical_filename FROM " . BB_ATTACHMENTS_DESC . " WHERE attach_id = $attach_id LIMIT 1");
+$torrent = OLD_DB()->fetch_row('SELECT attach_id, physical_filename FROM ' . BB_ATTACHMENTS_DESC . " WHERE attach_id = $attach_id LIMIT 1");
 if (!$torrent) {
     $this->ajax_die(trans('messages.ERROR_BUILD'));
 }

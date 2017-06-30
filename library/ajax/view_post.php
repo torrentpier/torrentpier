@@ -17,18 +17,18 @@ $post_id = (int)@$this->request['post_id'];
 $topic_id = (int)@$this->request['topic_id'];
 
 if (!$post_id) {
-    $post_id = OLD_DB()->fetch_row("SELECT topic_first_post_id FROM " . BB_TOPICS . " WHERE topic_id = $topic_id", 'topic_first_post_id');
+    $post_id = OLD_DB()->fetch_row('SELECT topic_first_post_id FROM ' . BB_TOPICS . " WHERE topic_id = $topic_id", 'topic_first_post_id');
 }
 
-$sql = "
+$sql = '
 	SELECT
 	  p.*,
 	  h.post_html, IF(h.post_html IS NULL, pt.post_text, NULL) AS post_text,
 	  f.auth_read
-	FROM       " . BB_POSTS . " p
-	INNER JOIN " . BB_POSTS_TEXT . " pt ON(pt.post_id = p.post_id)
-	 LEFT JOIN " . BB_POSTS_HTML . " h  ON(h.post_id = pt.post_id)
-	INNER JOIN " . BB_FORUMS . " f  ON(f.forum_id = p.forum_id)
+	FROM       ' . BB_POSTS . ' p
+	INNER JOIN ' . BB_POSTS_TEXT . ' pt ON(pt.post_id = p.post_id)
+	 LEFT JOIN ' . BB_POSTS_HTML . ' h  ON(h.post_id = pt.post_id)
+	INNER JOIN ' . BB_FORUMS . " f  ON(f.forum_id = p.forum_id)
 	WHERE
 	  p.post_id = $post_id
 	LIMIT 1

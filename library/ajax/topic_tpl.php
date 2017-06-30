@@ -29,7 +29,7 @@ switch ($mode) {
         if (!$tpl_id = (int)$this->request['tpl_id']) {
             $this->ajax_die('Выбранный шаблон не найден, создайте новый (empty tpl_id)');
         }
-        if (!$tpl_data = OLD_DB()->fetch_row("SELECT * FROM " . BB_TOPIC_TPL . " WHERE tpl_id = $tpl_id LIMIT 1")) {
+        if (!$tpl_data = OLD_DB()->fetch_row('SELECT * FROM ' . BB_TOPIC_TPL . " WHERE tpl_id = $tpl_id LIMIT 1")) {
             $this->ajax_die("Шаблон [id: $tpl_id] не найден в БД");
         }
         break;
@@ -109,13 +109,13 @@ switch ($mode) {
             $this->response['msg'] = 'Шаблоны в этом форуме отключены';
         } // включение
         else {
-            if (!$tpl_name = OLD_DB()->fetch_row("SELECT tpl_name FROM " . BB_TOPIC_TPL . " WHERE tpl_id = $tpl_id LIMIT 1", 'tpl_name')) {
+            if (!$tpl_name = OLD_DB()->fetch_row('SELECT tpl_name FROM ' . BB_TOPIC_TPL . " WHERE tpl_id = $tpl_id LIMIT 1", 'tpl_name')) {
                 $this->ajax_die("Шаблон [id: $tpl_id] не найден в БД");
             }
             $new_tpl_id = $tpl_id;
             $this->response['msg'] = "Включен шаблон $tpl_name";
         }
-        OLD_DB()->query("UPDATE " . BB_FORUMS . " SET forum_tpl_id = $new_tpl_id WHERE forum_id = $forum_id");
+        OLD_DB()->query('UPDATE ' . BB_FORUMS . " SET forum_tpl_id = $new_tpl_id WHERE forum_id = $forum_id");
         break;
 
     // сохранение изменений
@@ -126,7 +126,7 @@ switch ($mode) {
             $msg .= 'Шаблон был отредактирован: ' . html_entity_decode($last_edit_by_username) . ', ' . delta_time($tpl_data['tpl_last_edit_tm']) . " назад\n\n";
             $this->ajax_die($msg);
         }
-        $sql = "UPDATE " . BB_TOPIC_TPL . " SET " . OLD_DB()->build_array('UPDATE', $sql_args) . " WHERE tpl_id = $tpl_id";
+        $sql = 'UPDATE ' . BB_TOPIC_TPL . ' SET ' . OLD_DB()->build_array('UPDATE', $sql_args) . " WHERE tpl_id = $tpl_id";
         if (!@OLD_DB()->query($sql)) {
             $sql_error = OLD_DB()->sql_error();
         }
@@ -138,7 +138,7 @@ switch ($mode) {
 
     // создание нового шаблона
     case 'new':
-        $sql = "INSERT INTO " . BB_TOPIC_TPL . OLD_DB()->build_array('INSERT', $sql_args);
+        $sql = 'INSERT INTO ' . BB_TOPIC_TPL . OLD_DB()->build_array('INSERT', $sql_args);
         if (!@OLD_DB()->query($sql)) {
             $sql_error = OLD_DB()->sql_error();
         }

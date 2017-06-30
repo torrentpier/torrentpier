@@ -19,7 +19,7 @@ if (!function_exists('html_entity_decode')) {
     {
         $trans_table = array_flip(get_html_translation_table(HTML_SPECIALCHARS, $quote_style));
         $trans_table['&#39;'] = "'";
-        return (strtr($given_html, $trans_table));
+        return strtr($given_html, $trans_table);
     }
 }
 
@@ -345,9 +345,9 @@ function attachment_sync_topic($topics)
     $posts_without_attach = $topics_without_attach = [];
 
     // Check orphan post_attachment markers
-    $sql = "SELECT p.post_id
-		FROM " . BB_POSTS . " p
-		LEFT JOIN " . BB_ATTACHMENTS . " a USING(post_id)
+    $sql = 'SELECT p.post_id
+		FROM ' . BB_POSTS . ' p
+		LEFT JOIN ' . BB_ATTACHMENTS . " a USING(post_id)
 		WHERE p.topic_id IN($topics)
 			AND p.post_attachment = 1
 			AND a.post_id IS NULL";
@@ -357,13 +357,13 @@ function attachment_sync_topic($topics)
             $posts_without_attach[] = $row['post_id'];
         }
         if ($posts_sql = implode(',', $posts_without_attach)) {
-            OLD_DB()->query("UPDATE " . BB_POSTS . " SET post_attachment = 0 WHERE post_id IN($posts_sql)");
+            OLD_DB()->query('UPDATE ' . BB_POSTS . " SET post_attachment = 0 WHERE post_id IN($posts_sql)");
         }
     }
 
     // Update missing topic_attachment markers
-    OLD_DB()->query("
-		UPDATE " . BB_TOPICS . " t, " . BB_POSTS . " p SET
+    OLD_DB()->query('
+		UPDATE ' . BB_TOPICS . ' t, ' . BB_POSTS . " p SET
 			t.topic_attachment = 1
 		WHERE p.topic_id IN($topics)
 			AND p.post_attachment = 1
@@ -371,8 +371,8 @@ function attachment_sync_topic($topics)
 	");
 
     // Fix orphan topic_attachment markers
-    $sql = "SELECT t.topic_id
-		FROM " . BB_POSTS . " p, " . BB_TOPICS . " t
+    $sql = 'SELECT t.topic_id
+		FROM ' . BB_POSTS . ' p, ' . BB_TOPICS . " t
 		WHERE t.topic_id = p.topic_id
 			AND t.topic_id IN($topics)
 			AND t.topic_attachment = 1
@@ -384,7 +384,7 @@ function attachment_sync_topic($topics)
             $topics_without_attach[] = $row['topic_id'];
         }
         if ($topics_sql = implode(',', $topics_without_attach)) {
-            OLD_DB()->query("UPDATE " . BB_TOPICS . " SET topic_attachment = 0 WHERE topic_id IN($topics_sql)");
+            OLD_DB()->query('UPDATE ' . BB_TOPICS . " SET topic_attachment = 0 WHERE topic_id IN($topics_sql)");
         }
     }
 }
@@ -450,7 +450,7 @@ function user_in_group($user_id, $group_id)
  */
 function amod_realpath($path)
 {
-    return (function_exists('realpath')) ? realpath($path) : $path;
+    return function_exists('realpath') ? realpath($path) : $path;
 }
 
 /**
@@ -488,7 +488,7 @@ function get_var($var_name, $default, $multibyte = false)
     if (!isset($_REQUEST[$var_name]) ||
         (is_array($_REQUEST[$var_name]) && !is_array($default)) ||
         (is_array($default) && !is_array($_REQUEST[$var_name]))) {
-        return (is_array($default)) ? [] : $default;
+        return is_array($default) ? [] : $default;
     }
 
     $var = $_REQUEST[$var_name];
@@ -563,7 +563,7 @@ function attach_mod_sql_build_array($query, $assoc_ary = false)
             } elseif (is_array($var) && is_string($var[0])) {
                 $values[] = $var[0];
             } else {
-                $values[] = (is_bool($var)) ? (int)$var : $var;
+                $values[] = is_bool($var) ? (int)$var : $var;
             }
         }
 
@@ -578,7 +578,7 @@ function attach_mod_sql_build_array($query, $assoc_ary = false)
                 } elseif (is_string($var)) {
                     $values[] = "'" . attach_mod_sql_escape($var) . "'";
                 } else {
-                    $values[] = (is_bool($var)) ? (int)$var : $var;
+                    $values[] = is_bool($var) ? (int)$var : $var;
                 }
             }
             $ary[] = '(' . implode(', ', $values) . ')';
@@ -593,7 +593,7 @@ function attach_mod_sql_build_array($query, $assoc_ary = false)
             } elseif (is_string($var)) {
                 $values[] = "$key = '" . attach_mod_sql_escape($var) . "'";
             } else {
-                $values[] = (is_bool($var)) ? "$key = " . (int)$var : "$key = $var";
+                $values[] = is_bool($var) ? "$key = " . (int)$var : "$key = $var";
             }
         }
         $query = implode(($query == 'UPDATE') ? ', ' : ' AND ', $values);

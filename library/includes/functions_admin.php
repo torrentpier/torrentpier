@@ -13,7 +13,7 @@ if (!defined('BB_ROOT')) {
 
 function sync_all_forums()
 {
-    foreach (OLD_DB()->fetch_rowset("SELECT forum_id FROM " . BB_FORUMS) as $row) {
+    foreach (OLD_DB()->fetch_rowset('SELECT forum_id FROM ' . BB_FORUMS) as $row) {
         sync('forum', $row['forum_id']);
     }
 }
@@ -42,7 +42,7 @@ function sync($type, $id)
 
             // начальное обнуление значений
             $forum_ary = explode(',', $forum_csv);
-            OLD_DB()->query("REPLACE INTO $tmp_sync_forums (forum_id) VALUES(" . implode('),(', $forum_ary) . ")");
+            OLD_DB()->query("REPLACE INTO $tmp_sync_forums (forum_id) VALUES(" . implode('),(', $forum_ary) . ')');
 
             OLD_DB()->query("
 				REPLACE INTO $tmp_sync_forums
@@ -59,14 +59,14 @@ function sync($type, $id)
 
             OLD_DB()->query("
 				UPDATE
-					$tmp_sync_forums tmp, " . BB_FORUMS . " f
+					$tmp_sync_forums tmp, " . BB_FORUMS . ' f
 				SET
 					f.forum_last_post_id = tmp.forum_last_post_id,
 					f.forum_posts        = tmp.forum_posts,
 					f.forum_topics       = tmp.forum_topics
 				WHERE
 					f.forum_id = tmp.forum_id
-			");
+			');
 
             OLD_DB()->query("DROP TEMPORARY TABLE $tmp_sync_forums");
 
@@ -81,7 +81,7 @@ function sync($type, $id)
             }
 
             // Проверка на остаточные записи об уже удаленных топиках
-            OLD_DB()->query("DELETE FROM " . BB_TOPICS . " WHERE topic_first_post_id NOT IN (SELECT post_id FROM " . BB_POSTS . ")");
+            OLD_DB()->query('DELETE FROM ' . BB_TOPICS . ' WHERE topic_first_post_id NOT IN (SELECT post_id FROM ' . BB_POSTS . ')');
 
             $tmp_sync_topics = 'tmp_sync_topics';
 
@@ -109,17 +109,17 @@ function sync($type, $id)
 					MAX(p.post_id) AS topic_last_post_id,
 					MAX(p.post_time) AS topic_last_post_time,
 					IF(MAX(a.attach_id), 1, 0) AS topic_attachment
-				FROM      " . BB_TOPICS . " t
-				LEFT JOIN " . BB_POSTS . " p ON(p.topic_id = t.topic_id)
-				LEFT JOIN " . BB_ATTACHMENTS . " a ON(a.post_id = p.post_id)
-				WHERE t.topic_status != " . TOPIC_MOVED . "
+				FROM      " . BB_TOPICS . ' t
+				LEFT JOIN ' . BB_POSTS . ' p ON(p.topic_id = t.topic_id)
+				LEFT JOIN ' . BB_ATTACHMENTS . ' a ON(a.post_id = p.post_id)
+				WHERE t.topic_status != ' . TOPIC_MOVED . "
 					$where_sql
 				GROUP BY t.topic_id
 			");
 
             OLD_DB()->query("
 				UPDATE
-					$tmp_sync_topics tmp, " . BB_TOPICS . " t
+					$tmp_sync_topics tmp, " . BB_TOPICS . ' t
 				SET
 					t.topic_replies        = tmp.total_posts - 1,
 					t.topic_first_post_id  = tmp.topic_first_post_id,
@@ -128,9 +128,9 @@ function sync($type, $id)
 					t.topic_attachment     = tmp.topic_attachment
 				WHERE
 					t.topic_id = tmp.topic_id
-			");
+			');
 
-            if ($topics = OLD_DB()->fetch_rowset("SELECT topic_id FROM " . $tmp_sync_topics . " WHERE total_posts = 0", 'topic_id')) {
+            if ($topics = OLD_DB()->fetch_rowset('SELECT topic_id FROM ' . $tmp_sync_topics . ' WHERE total_posts = 0', 'topic_id')) {
                 topic_delete($topics);
             }
 
@@ -158,31 +158,31 @@ function sync($type, $id)
             OLD_DB()->add_shutdown_query("DROP TEMPORARY TABLE IF EXISTS $tmp_user_posts");
 
             // Set posts count = 0 and then update to real count
-            $where_user_sql = (!$all_users) ? "AND user_id IN($user_csv)" : "AND user_posts != 0";
+            $where_user_sql = (!$all_users) ? "AND user_id IN($user_csv)" : 'AND user_posts != 0';
             $where_post_sql = (!$all_users) ? "AND poster_id IN($user_csv)" : '';
 
             OLD_DB()->query("
 				REPLACE INTO $tmp_user_posts
 					SELECT user_id, 0
-					FROM " . BB_USERS . "
-					WHERE user_id != " . GUEST_UID . "
+					FROM " . BB_USERS . '
+					WHERE user_id != ' . GUEST_UID . "
 						$where_user_sql
 				UNION
 					SELECT poster_id, COUNT(*)
-					FROM " . BB_POSTS . "
-					WHERE poster_id != " . GUEST_UID . "
+					FROM " . BB_POSTS . '
+					WHERE poster_id != ' . GUEST_UID . "
 						$where_post_sql
 					GROUP BY poster_id
 			");
 
             OLD_DB()->query("
 				UPDATE
-					$tmp_user_posts tmp, " . BB_USERS . " u
+					$tmp_user_posts tmp, " . BB_USERS . ' u
 				SET
 					u.user_posts = tmp.user_posts
 				WHERE
 					u.user_id = tmp.user_id
-			");
+			');
 
             OLD_DB()->query("DROP TEMPORARY TABLE $tmp_user_posts");
 
@@ -207,9 +207,9 @@ function topic_delete($mode_or_topic_id, $forum_id = null, $prune_time = 0, $pru
     } else {
         $where_sql = ($forum_csv = get_id_csv($forum_id)) ? "AND forum_id IN($forum_csv)" : '';
 
-        $sql = "
+        $sql = '
 			SELECT topic_id, forum_id, topic_title, topic_status
-			FROM " . BB_TOPICS . "
+			FROM ' . BB_TOPICS . "
 			WHERE topic_id IN($topic_csv)
 				$where_sql
 		";
@@ -238,9 +238,9 @@ function topic_delete($mode_or_topic_id, $forum_id = null, $prune_time = 0, $pru
 	");
     OLD_DB()->add_shutdown_query("DROP TEMPORARY TABLE IF EXISTS $tmp_delete_topics");
 
-    $where_sql = ($prune) ? "forum_id = $forum_id" : "topic_id IN($topic_csv)";
+    $where_sql = $prune ? "forum_id = $forum_id" : "topic_id IN($topic_csv)";
     $where_sql .= ($prune && $prune_time) ? " AND topic_last_post_time < $prune_time" : '';
-    $where_sql .= ($prune && !$prune_all) ? " AND topic_type NOT IN(" . POST_ANNOUNCE . "," . POST_STICKY . ")" : '';
+    $where_sql .= ($prune && !$prune_all) ? ' AND topic_type NOT IN(' . POST_ANNOUNCE . ',' . POST_STICKY . ')' : '';
 
     OLD_DB()->query("INSERT INTO $tmp_delete_topics SELECT topic_id FROM " . BB_TOPICS . " WHERE $where_sql");
 
@@ -267,11 +267,11 @@ function topic_delete($mode_or_topic_id, $forum_id = null, $prune_time = 0, $pru
     OLD_DB()->query("
 		INSERT INTO $tmp_user_posts
 			SELECT p.poster_id, COUNT(p.post_id)
-			FROM " . $tmp_delete_topics . " del, " . BB_POSTS . " p
+			FROM " . $tmp_delete_topics . ' del, ' . BB_POSTS . ' p
 			WHERE p.topic_id = del.topic_id
-				AND p.poster_id != " . GUEST_UID . "
+				AND p.poster_id != ' . GUEST_UID . '
 			GROUP BY p.poster_id
-	");
+	');
 
     // Get array for atom update
     $atom_csv = array();
@@ -281,39 +281,39 @@ function topic_delete($mode_or_topic_id, $forum_id = null, $prune_time = 0, $pru
 
     OLD_DB()->query("
 		UPDATE
-			$tmp_user_posts tmp, " . BB_USERS . " u
+			$tmp_user_posts tmp, " . BB_USERS . ' u
 		SET
 			u.user_posts = u.user_posts - tmp.user_posts
 		WHERE
 			u.user_id = tmp.user_id
-	");
+	');
 
     OLD_DB()->query("DROP TEMPORARY TABLE $tmp_user_posts");
 
     // Delete votes
-    OLD_DB()->query("
+    OLD_DB()->query('
 		DELETE pv, pu
-		FROM      " . $tmp_delete_topics . " del
-		LEFT JOIN " . BB_POLL_VOTES . " pv USING(topic_id)
-		LEFT JOIN " . BB_POLL_USERS . " pu USING(topic_id)
-	");
+		FROM      ' . $tmp_delete_topics . ' del
+		LEFT JOIN ' . BB_POLL_VOTES . ' pv USING(topic_id)
+		LEFT JOIN ' . BB_POLL_USERS . ' pu USING(topic_id)
+	');
 
     // Delete attachments (from disk)
     $attach_dir = get_attachments_dir();
 
-    $result = OLD_DB()->query("
+    $result = OLD_DB()->query('
 		SELECT
 			d.physical_filename
 		FROM
-			" . $tmp_delete_topics . " del,
-			" . BB_POSTS . " p,
-			" . BB_ATTACHMENTS . " a,
-			" . BB_ATTACHMENTS_DESC . " d
+			' . $tmp_delete_topics . ' del,
+			' . BB_POSTS . ' p,
+			' . BB_ATTACHMENTS . ' a,
+			' . BB_ATTACHMENTS_DESC . ' d
 		WHERE
 			    p.topic_id = del.topic_id
 			AND a.post_id = p.post_id
 			AND d.attach_id = a.attach_id
-	");
+	');
 
     while ($row = OLD_DB()->fetch_next($result)) {
         if ($filename = basename($row['physical_filename'])) {
@@ -324,45 +324,43 @@ function topic_delete($mode_or_topic_id, $forum_id = null, $prune_time = 0, $pru
     unset($row, $result);
 
     // Delete posts, posts_text, attachments (from DB)
-    OLD_DB()->query("
+    OLD_DB()->query('
 		DELETE p, pt, ps, a, d, ph
-		FROM      " . $tmp_delete_topics . " del
-		LEFT JOIN " . BB_POSTS . " p  ON(p.topic_id = del.topic_id)
-		LEFT JOIN " . BB_POSTS_TEXT . " pt ON(pt.post_id = p.post_id)
-		LEFT JOIN " . BB_POSTS_HTML . " ph ON(ph.post_id = p.post_id)
-		LEFT JOIN " . BB_POSTS_SEARCH . " ps ON(ps.post_id = p.post_id)
-		LEFT JOIN " . BB_ATTACHMENTS . " a  ON(a.post_id = p.post_id)
-		LEFT JOIN " . BB_ATTACHMENTS_DESC . " d  ON(d.attach_id = a.attach_id)
-	");
+		FROM      ' . $tmp_delete_topics . ' del
+		LEFT JOIN ' . BB_POSTS . ' p  ON(p.topic_id = del.topic_id)
+		LEFT JOIN ' . BB_POSTS_TEXT . ' pt ON(pt.post_id = p.post_id)
+		LEFT JOIN ' . BB_POSTS_HTML . ' ph ON(ph.post_id = p.post_id)
+		LEFT JOIN ' . BB_POSTS_SEARCH . ' ps ON(ps.post_id = p.post_id)
+		LEFT JOIN ' . BB_ATTACHMENTS . ' a  ON(a.post_id = p.post_id)
+		LEFT JOIN ' . BB_ATTACHMENTS_DESC . ' d  ON(d.attach_id = a.attach_id)
+	');
 
     // Delete topics, topics watch
-    OLD_DB()->query("
+    OLD_DB()->query('
 		DELETE t, tw
-		FROM      " . $tmp_delete_topics . " del
-		LEFT JOIN " . BB_TOPICS . " t  USING(topic_id)
-		LEFT JOIN " . BB_TOPICS_WATCH . " tw USING(topic_id)
-	");
+		FROM      ' . $tmp_delete_topics . ' del
+		LEFT JOIN ' . BB_TOPICS . ' t  USING(topic_id)
+		LEFT JOIN ' . BB_TOPICS_WATCH . ' tw USING(topic_id)
+	');
 
     // Delete topic moved stubs
-    OLD_DB()->query("
+    OLD_DB()->query('
 		DELETE t
-		FROM " . $tmp_delete_topics . " del, " . BB_TOPICS . " t
+		FROM ' . $tmp_delete_topics . ' del, ' . BB_TOPICS . ' t
 		WHERE t.topic_moved_id = del.topic_id
-	");
+	');
 
     // Delete torrents
-    OLD_DB()->query("
+    OLD_DB()->query('
 		DELETE tor, tr, dl
-		FROM      " . $tmp_delete_topics . " del
-		LEFT JOIN " . BB_BT_TORRENTS . " tor USING(topic_id)
-		LEFT JOIN " . BB_BT_TRACKER . " tr  USING(topic_id)
-		LEFT JOIN " . BB_BT_DLSTATUS . " dl  USING(topic_id)
-	");
+		FROM      ' . $tmp_delete_topics . ' del
+		LEFT JOIN ' . BB_BT_TORRENTS . ' tor USING(topic_id)
+		LEFT JOIN ' . BB_BT_TRACKER . ' tr  USING(topic_id)
+		LEFT JOIN ' . BB_BT_DLSTATUS . ' dl  USING(topic_id)
+	');
 
     // Log action
-    if ($prune) {
-        // TODO
-    } else {
+    if (!$prune) {
         foreach ($log_topics as $row) {
             if ($row['topic_status'] == TOPIC_MOVED) {
                 $row['topic_title'] = '<i>' . trans('messages.TOPIC_MOVED') . '</i> ' . $row['topic_title'];
@@ -409,7 +407,7 @@ function topic_move($topic_id, $to_forum_id, $from_forum_id = null, $leave_shado
     // Get topics info
     $where_sql = ($forum_csv = get_id_csv($from_forum_id)) ? "AND forum_id IN($forum_csv)" : '';
 
-    $sql = "SELECT * FROM " . BB_TOPICS . " WHERE topic_id IN($topic_csv) AND topic_status != " . TOPIC_MOVED . " $where_sql";
+    $sql = 'SELECT * FROM ' . BB_TOPICS . " WHERE topic_id IN($topic_csv) AND topic_status != " . TOPIC_MOVED . " $where_sql";
 
     $topics = array();
     $sync_forums = array($to_forum_id => true);
@@ -447,13 +445,13 @@ function topic_move($topic_id, $to_forum_id, $from_forum_id = null, $leave_shado
             );
         }
         if ($sql_args = OLD_DB()->build_array('MULTI_INSERT', $shadows)) {
-            OLD_DB()->query("INSERT INTO " . BB_TOPICS . $sql_args);
+            OLD_DB()->query('INSERT INTO ' . BB_TOPICS . $sql_args);
         }
     }
 
-    OLD_DB()->query("UPDATE " . BB_TOPICS . " SET forum_id = $to_forum_id WHERE topic_id IN($topic_csv)");
-    OLD_DB()->query("UPDATE " . BB_POSTS . " SET forum_id = $to_forum_id WHERE topic_id IN($topic_csv)");
-    OLD_DB()->query("UPDATE " . BB_BT_TORRENTS . " SET forum_id = $to_forum_id WHERE topic_id IN($topic_csv)");
+    OLD_DB()->query('UPDATE ' . BB_TOPICS . " SET forum_id = $to_forum_id WHERE topic_id IN($topic_csv)");
+    OLD_DB()->query('UPDATE ' . BB_POSTS . " SET forum_id = $to_forum_id WHERE topic_id IN($topic_csv)");
+    OLD_DB()->query('UPDATE ' . BB_BT_TORRENTS . " SET forum_id = $to_forum_id WHERE topic_id IN($topic_csv)");
 
     // Bot
     if ($insert_bot_msg) {
@@ -498,7 +496,7 @@ function post_delete($mode_or_post_id, $user_id = null, $exclude_first = true)
 
         // фильтр заглавных сообщений в теме
         if ($exclude_first) {
-            $sql = "SELECT topic_first_post_id FROM " . BB_TOPICS . " WHERE topic_first_post_id IN($post_csv)";
+            $sql = 'SELECT topic_first_post_id FROM ' . BB_TOPICS . " WHERE topic_first_post_id IN($post_csv)";
 
             if ($first_posts = OLD_DB()->fetch_rowset($sql, 'topic_first_post_id')) {
                 $posts_without_first = array_diff(explode(',', $post_csv), $first_posts);
@@ -514,18 +512,18 @@ function post_delete($mode_or_post_id, $user_id = null, $exclude_first = true)
     $log_topics = $sync_forums = $sync_topics = $sync_users = array();
 
     if ($del_user_posts) {
-        $sync_topics = OLD_DB()->fetch_rowset("SELECT DISTINCT topic_id FROM " . BB_POSTS . " WHERE poster_id IN($user_csv)", 'topic_id');
+        $sync_topics = OLD_DB()->fetch_rowset('SELECT DISTINCT topic_id FROM ' . BB_POSTS . " WHERE poster_id IN($user_csv)", 'topic_id');
 
         if ($topic_csv = get_id_csv($sync_topics)) {
-            foreach (OLD_DB()->fetch_rowset("SELECT DISTINCT forum_id FROM " . BB_TOPICS . " WHERE topic_id IN($topic_csv)") as $row) {
+            foreach (OLD_DB()->fetch_rowset('SELECT DISTINCT forum_id FROM ' . BB_TOPICS . " WHERE topic_id IN($topic_csv)") as $row) {
                 $sync_forums[$row['forum_id']] = true;
             }
         }
         $sync_users = explode(',', $user_csv);
     } else {
-        $sql = "
+        $sql = '
 			SELECT p.topic_id, p.forum_id, t.topic_title
-			FROM " . BB_POSTS . " p, " . BB_TOPICS . " t
+			FROM ' . BB_POSTS . ' p, ' . BB_TOPICS . " t
 			WHERE p.post_id IN($post_csv)
 				AND t.topic_id = p.topic_id
 			GROUP BY t.topic_id
@@ -537,7 +535,7 @@ function post_delete($mode_or_post_id, $user_id = null, $exclude_first = true)
             $sync_forums[$row['forum_id']] = true;
         }
 
-        $sync_users = OLD_DB()->fetch_rowset("SELECT DISTINCT poster_id FROM " . BB_POSTS . " WHERE post_id IN($post_csv)", 'poster_id');
+        $sync_users = OLD_DB()->fetch_rowset('SELECT DISTINCT poster_id FROM ' . BB_POSTS . " WHERE post_id IN($post_csv)", 'poster_id');
     }
 
     // Get all post_id for deleting
@@ -555,7 +553,7 @@ function post_delete($mode_or_post_id, $user_id = null, $exclude_first = true)
         $where_sql = "poster_id IN($user_csv)";
 
         $exclude_posts_ary = array();
-        foreach (OLD_DB()->fetch_rowset("SELECT topic_first_post_id FROM " . BB_TOPICS . " WHERE topic_poster IN($user_csv)") as $row) {
+        foreach (OLD_DB()->fetch_rowset('SELECT topic_first_post_id FROM ' . BB_TOPICS . " WHERE topic_poster IN($user_csv)") as $row) {
             $exclude_posts_ary[] = $row['topic_first_post_id'];
         }
         if ($exclude_posts_csv = get_id_csv($exclude_posts_ary)) {
@@ -578,17 +576,17 @@ function post_delete($mode_or_post_id, $user_id = null, $exclude_first = true)
     // Delete attachments (from disk)
     $attach_dir = get_attachments_dir();
 
-    $result = OLD_DB()->query("
+    $result = OLD_DB()->query('
 		SELECT
 			d.physical_filename
 		FROM
-			" . $tmp_delete_posts . " del,
-			" . BB_ATTACHMENTS . " a,
-			" . BB_ATTACHMENTS_DESC . " d
+			' . $tmp_delete_posts . ' del,
+			' . BB_ATTACHMENTS . ' a,
+			' . BB_ATTACHMENTS_DESC . ' d
 		WHERE
 			    a.post_id = del.post_id
 			AND d.attach_id = a.attach_id
-	");
+	');
 
     while ($row = OLD_DB()->fetch_next($result)) {
         if ($filename = basename($row['physical_filename'])) {
@@ -599,17 +597,17 @@ function post_delete($mode_or_post_id, $user_id = null, $exclude_first = true)
     unset($row, $result);
 
     // Delete posts, posts_text, attachments (from DB)
-    OLD_DB()->query("
+    OLD_DB()->query('
 		DELETE p, pt, ps, tor, a, d, ph
-		FROM      " . $tmp_delete_posts . " del
-		LEFT JOIN " . BB_POSTS . " p   ON(p.post_id  = del.post_id)
-		LEFT JOIN " . BB_POSTS_TEXT . " pt  ON(pt.post_id  = del.post_id)
-		LEFT JOIN " . BB_POSTS_HTML . " ph  ON(ph.post_id  = del.post_id)
-		LEFT JOIN " . BB_POSTS_SEARCH . " ps  ON(ps.post_id  = del.post_id)
-		LEFT JOIN " . BB_BT_TORRENTS . " tor ON(tor.post_id = del.post_id)
-		LEFT JOIN " . BB_ATTACHMENTS . " a   ON(a.post_id  = del.post_id)
-		LEFT JOIN " . BB_ATTACHMENTS_DESC . " d   ON(d.attach_id = a.attach_id)
-	");
+		FROM      ' . $tmp_delete_posts . ' del
+		LEFT JOIN ' . BB_POSTS . ' p   ON(p.post_id  = del.post_id)
+		LEFT JOIN ' . BB_POSTS_TEXT . ' pt  ON(pt.post_id  = del.post_id)
+		LEFT JOIN ' . BB_POSTS_HTML . ' ph  ON(ph.post_id  = del.post_id)
+		LEFT JOIN ' . BB_POSTS_SEARCH . ' ps  ON(ps.post_id  = del.post_id)
+		LEFT JOIN ' . BB_BT_TORRENTS . ' tor ON(tor.post_id = del.post_id)
+		LEFT JOIN ' . BB_ATTACHMENTS . ' a   ON(a.post_id  = del.post_id)
+		LEFT JOIN ' . BB_ATTACHMENTS_DESC . ' d   ON(d.attach_id = a.attach_id)
+	');
 
     // Log action
     if ($del_user_posts) {
@@ -651,7 +649,7 @@ function user_delete($user_id, $delete_posts = false)
     if (!$user_csv = get_id_csv($user_id)) {
         return false;
     }
-    if (!$user_id = OLD_DB()->fetch_rowset("SELECT user_id FROM " . BB_USERS . " WHERE user_id IN($user_csv)", 'user_id')) {
+    if (!$user_id = OLD_DB()->fetch_rowset('SELECT user_id FROM ' . BB_USERS . " WHERE user_id IN($user_csv)", 'user_id')) {
         return false;
     }
     $user_csv = get_id_csv($user_id);
@@ -662,7 +660,7 @@ function user_delete($user_id, $delete_posts = false)
     ));
 
     // Avatar
-    $result = OLD_DB()->query("SELECT user_id, avatar_ext_id FROM " . BB_USERS . " WHERE avatar_ext_id > 0 AND user_id IN($user_csv)");
+    $result = OLD_DB()->query('SELECT user_id, avatar_ext_id FROM ' . BB_USERS . " WHERE avatar_ext_id > 0 AND user_id IN($user_csv)");
 
     while ($row = OLD_DB()->fetch_next($result)) {
         delete_avatar($row['user_id'], $row['avatar_ext_id']);
@@ -671,60 +669,60 @@ function user_delete($user_id, $delete_posts = false)
     if ($delete_posts) {
         post_delete('user', $user_id);
     } else {
-        OLD_DB()->query("UPDATE " . BB_POSTS . " SET poster_id = " . DELETED . " WHERE poster_id IN($user_csv)");
+        OLD_DB()->query('UPDATE ' . BB_POSTS . ' SET poster_id = ' . DELETED . " WHERE poster_id IN($user_csv)");
     }
 
-    OLD_DB()->query("UPDATE " . BB_GROUPS . " SET group_moderator = 2 WHERE group_single_user = 0 AND group_moderator IN($user_csv)");
-    OLD_DB()->query("UPDATE " . BB_TOPICS . " SET topic_poster = " . DELETED . " WHERE topic_poster IN($user_csv)");
-    OLD_DB()->query("UPDATE " . BB_BT_TORRENTS . " SET poster_id = " . DELETED . " WHERE poster_id IN($user_csv)");
+    OLD_DB()->query('UPDATE ' . BB_GROUPS . " SET group_moderator = 2 WHERE group_single_user = 0 AND group_moderator IN($user_csv)");
+    OLD_DB()->query('UPDATE ' . BB_TOPICS . ' SET topic_poster = ' . DELETED . " WHERE topic_poster IN($user_csv)");
+    OLD_DB()->query('UPDATE ' . BB_BT_TORRENTS . ' SET poster_id = ' . DELETED . " WHERE poster_id IN($user_csv)");
 
-    OLD_DB()->query("
+    OLD_DB()->query('
 		DELETE ug, g, a, qt1, qt2
-		FROM " . BB_USER_GROUP . " ug
-		LEFT JOIN " . BB_GROUPS . " g   ON(g.group_id = ug.group_id AND g.group_single_user = 1)
-		LEFT JOIN " . BB_AUTH_ACCESS . " a   ON(a.group_id = g.group_id)
-		LEFT JOIN " . BB_QUOTA . " qt1 ON(qt1.user_id = ug.user_id)
-		LEFT JOIN " . BB_QUOTA . " qt2 ON(qt2.group_id = g.group_id)
+		FROM ' . BB_USER_GROUP . ' ug
+		LEFT JOIN ' . BB_GROUPS . ' g   ON(g.group_id = ug.group_id AND g.group_single_user = 1)
+		LEFT JOIN ' . BB_AUTH_ACCESS . ' a   ON(a.group_id = g.group_id)
+		LEFT JOIN ' . BB_QUOTA . ' qt1 ON(qt1.user_id = ug.user_id)
+		LEFT JOIN ' . BB_QUOTA . " qt2 ON(qt2.group_id = g.group_id)
 		WHERE ug.user_id IN($user_csv)
 	");
 
-    OLD_DB()->query("
+    OLD_DB()->query('
 		DELETE u, ban, pu, s, tw, asn
-		FROM " . BB_USERS . " u
-		LEFT JOIN " . BB_BANLIST . " ban ON(ban.ban_userid = u.user_id)
-		LEFT JOIN " . BB_POLL_USERS . " pu  ON(pu.user_id = u.user_id)
-		LEFT JOIN " . BB_SESSIONS . " s   ON(s.session_user_id = u.user_id)
-		LEFT JOIN " . BB_TOPICS_WATCH . " tw  ON(tw.user_id = u.user_id)
-		LEFT JOIN " . BB_AUTH_ACCESS_SNAP . " asn ON(asn.user_id = u.user_id)
+		FROM ' . BB_USERS . ' u
+		LEFT JOIN ' . BB_BANLIST . ' ban ON(ban.ban_userid = u.user_id)
+		LEFT JOIN ' . BB_POLL_USERS . ' pu  ON(pu.user_id = u.user_id)
+		LEFT JOIN ' . BB_SESSIONS . ' s   ON(s.session_user_id = u.user_id)
+		LEFT JOIN ' . BB_TOPICS_WATCH . ' tw  ON(tw.user_id = u.user_id)
+		LEFT JOIN ' . BB_AUTH_ACCESS_SNAP . " asn ON(asn.user_id = u.user_id)
 		WHERE u.user_id IN($user_csv)
 	");
 
-    OLD_DB()->query("
+    OLD_DB()->query('
 		DELETE btu, tr
-		FROM " . BB_BT_USERS . " btu
-		LEFT JOIN " . BB_BT_TRACKER . " tr  ON(tr.user_id = btu.user_id)
+		FROM ' . BB_BT_USERS . ' btu
+		LEFT JOIN ' . BB_BT_TRACKER . " tr  ON(tr.user_id = btu.user_id)
 		WHERE btu.user_id IN($user_csv)
 	");
 
     // PM
-    OLD_DB()->query("
+    OLD_DB()->query('
 		DELETE pm, pmt
-		FROM " . BB_PRIVMSGS . " pm
-		LEFT JOIN " . BB_PRIVMSGS_TEXT . " pmt ON(pmt.privmsgs_text_id = pm.privmsgs_id)
+		FROM ' . BB_PRIVMSGS . ' pm
+		LEFT JOIN ' . BB_PRIVMSGS_TEXT . " pmt ON(pmt.privmsgs_text_id = pm.privmsgs_id)
 		WHERE pm.privmsgs_from_userid IN($user_csv)
-			AND pm.privmsgs_type IN(" . PRIVMSGS_SENT_MAIL . ',' . PRIVMSGS_SAVED_OUT_MAIL . ")
-	");
+			AND pm.privmsgs_type IN(" . PRIVMSGS_SENT_MAIL . ',' . PRIVMSGS_SAVED_OUT_MAIL . ')
+	');
 
-    OLD_DB()->query("
+    OLD_DB()->query('
 		DELETE pm, pmt
-		FROM " . BB_PRIVMSGS . " pm
-		LEFT JOIN " . BB_PRIVMSGS_TEXT . " pmt ON(pmt.privmsgs_text_id = pm.privmsgs_id)
+		FROM ' . BB_PRIVMSGS . ' pm
+		LEFT JOIN ' . BB_PRIVMSGS_TEXT . " pmt ON(pmt.privmsgs_text_id = pm.privmsgs_id)
 		WHERE pm.privmsgs_to_userid IN($user_csv)
-			AND pm.privmsgs_type IN(" . PRIVMSGS_READ_MAIL . ',' . PRIVMSGS_SAVED_IN_MAIL . ")
-	");
+			AND pm.privmsgs_type IN(" . PRIVMSGS_READ_MAIL . ',' . PRIVMSGS_SAVED_IN_MAIL . ')
+	');
 
-    OLD_DB()->query("UPDATE " . BB_PRIVMSGS . " SET privmsgs_from_userid = " . DELETED . " WHERE privmsgs_from_userid IN($user_csv)");
-    OLD_DB()->query("UPDATE " . BB_PRIVMSGS . " SET privmsgs_to_userid = " . DELETED . " WHERE privmsgs_to_userid IN($user_csv)");
+    OLD_DB()->query('UPDATE ' . BB_PRIVMSGS . ' SET privmsgs_from_userid = ' . DELETED . " WHERE privmsgs_from_userid IN($user_csv)");
+    OLD_DB()->query('UPDATE ' . BB_PRIVMSGS . ' SET privmsgs_to_userid = ' . DELETED . " WHERE privmsgs_to_userid IN($user_csv)");
 
     // Delete user feed
     foreach (explode(',', $user_csv) as $user_id) {
@@ -738,7 +736,7 @@ function get_usernames_for_log($user_id)
     $users_log_msg = array();
 
     if ($user_csv = get_id_csv($user_id)) {
-        $sql = "SELECT user_id, username FROM " . BB_USERS . " WHERE user_id IN($user_csv)";
+        $sql = 'SELECT user_id, username FROM ' . BB_USERS . " WHERE user_id IN($user_csv)";
 
         foreach (OLD_DB()->fetch_rowset($sql) as $row) {
             $users_log_msg[] = "<b>$row[username]</b> [$row[user_id]]";

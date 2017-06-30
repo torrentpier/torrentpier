@@ -14,7 +14,7 @@ if (!defined('BB_ROOT')) {
 define('IN_CRON', true);
 
 // Set SESSION vars
-OLD_DB()->query("
+OLD_DB()->query('
 	SET SESSION
 	  myisam_sort_buffer_size = 16*1024*1024
 	, bulk_insert_buffer_size =  8*1024*1024
@@ -24,10 +24,10 @@ OLD_DB()->query("
 	, sort_buffer_size        =  4*1024*1024
 	, tmp_table_size          = 80*1024*1024
 	, group_concat_max_len    =  1*1024*1024
-");
+');
 
 // Restore vars at shutdown
-OLD_DB()->add_shutdown_query("
+OLD_DB()->add_shutdown_query('
 	SET SESSION
 	  myisam_sort_buffer_size = DEFAULT
 	, bulk_insert_buffer_size = DEFAULT
@@ -37,7 +37,7 @@ OLD_DB()->add_shutdown_query("
 	, sort_buffer_size        = DEFAULT
 	, tmp_table_size          = DEFAULT
 	, group_concat_max_len    = DEFAULT
-");
+');
 
 // $cron_jobs obtained in cron_check.php
 foreach ($cron_jobs as $job) {
@@ -66,7 +66,7 @@ foreach ($cron_jobs as $job) {
         }
 
         set_time_limit(600);
-        require($job_script);
+        require $job_script;
 
         if ($job['log_sql_queries']) {
             OLD_DB()->log_next_query(0);
@@ -86,13 +86,13 @@ foreach ($cron_jobs as $job) {
             bb_log($msg . LOG_LF, CRON_LOG_DIR . '/' . CRON_LOG_FILE);
 
             if ($cron_runtime_log) {
-                $runtime_log_file = ($job['log_file']) ?: $job['cron_script'];
+                $runtime_log_file = $job['log_file'] ?: $job['cron_script'];
                 bb_log($cron_runtime_log . LOG_LF, CRON_LOG_DIR . '/' . basename($runtime_log_file));
             }
         }
 
-        OLD_DB()->query("
-			UPDATE " . BB_CRON . " SET
+        OLD_DB()->query('
+			UPDATE ' . BB_CRON . " SET
 				last_run = NOW(),
 				run_counter = run_counter + 1,
 				next_run =

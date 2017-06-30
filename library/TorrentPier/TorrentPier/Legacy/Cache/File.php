@@ -35,7 +35,7 @@ class File extends Common
         $this->debug('start');
 
         if (file_exists($filename)) {
-            require($filename);
+            require $filename;
         }
 
         $this->debug('stop');
@@ -91,7 +91,7 @@ class File extends Common
             if (is_dir($this->dir)) {
                 if ($dh = opendir($this->dir)) {
                     while (($file = readdir($dh)) !== false) {
-                        if ($file != "." && $file != "..") {
+                        if ($file != '.' && $file != '..') {
                             $filename = $this->dir . $file;
 
                             unlink($filename);
@@ -112,10 +112,10 @@ class File extends Common
         if (is_dir($this->dir)) {
             if ($dh = opendir($this->dir)) {
                 while (($file = readdir($dh)) !== false) {
-                    if ($file != "." && $file != "..") {
+                    if ($file != '.' && $file != '..') {
                         $filename = $this->dir . $file;
 
-                        require($filename);
+                        require $filename;
 
                         if (!empty($filecache['expire']) && ($filecache['expire'] < $expire_time)) {
                             unlink($filename);

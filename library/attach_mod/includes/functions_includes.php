@@ -19,8 +19,8 @@ function attach_build_auth_levels($is_auth, &$s_auth_can)
     }
 
     // If you want to have the rules window link within the forum view too, comment out the two lines, and comment the third line
-    $s_auth_can .= (($is_auth['auth_attachments']) ? trans('messages.RULES_ATTACH_CAN') : trans('messages.RULES_ATTACH_CANNOT')) . '<br />';
-    $s_auth_can .= (($is_auth['auth_download']) ? trans('messages.RULES_DOWNLOAD_CAN') : trans('messages.RULES_DOWNLOAD_CANNOT')) . '<br />';
+    $s_auth_can .= ($is_auth['auth_attachments'] ? trans('messages.RULES_ATTACH_CAN') : trans('messages.RULES_ATTACH_CANNOT')) . '<br />';
+    $s_auth_can .= ($is_auth['auth_download'] ? trans('messages.RULES_DOWNLOAD_CAN') : trans('messages.RULES_DOWNLOAD_CANNOT')) . '<br />';
 }
 
 /**
@@ -37,7 +37,7 @@ function attachment_quota_settings($admin_mode, $submit = false, $mode)
     }
 
     include ATTACH_DIR . '/includes/functions_selects.php';
-    if (!function_exists("process_quota_settings")) {
+    if (!function_exists('process_quota_settings')) {
         include ATTACH_DIR . '/includes/functions_admin.php';
     }
 
@@ -45,7 +45,7 @@ function attachment_quota_settings($admin_mode, $submit = false, $mode)
 
     if ($admin_mode == 'user') {
         // We overwrite submit here... to be sure
-        $submit = (isset($_POST['submit'])) ? true : false;
+        $submit = isset($_POST['submit']) ? true : false;
 
         if (!$submit && $mode != 'save') {
             $user_id = get_var(POST_USERS_URL, 0);

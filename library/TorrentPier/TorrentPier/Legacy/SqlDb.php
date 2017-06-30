@@ -394,7 +394,7 @@ class SqlDb
             case is_int($v):
                 return "$v";
             case is_bool($v):
-                return ($v) ? '1' : '0';
+                return $v ? '1' : '0';
             case is_float($v):
                 return "'$v'";
             case null === $v:
@@ -514,31 +514,31 @@ class SqlDb
         foreach ($sql_ary as $clause => $ary) {
             switch ($clause) {
                 case 'SELECT':
-                    $sql .= ($ary) ? ' SELECT ' . implode(' ', $sql_ary['select_options']) . ' ' . implode(', ', $ary) : '';
+                    $sql .= $ary ? ' SELECT ' . implode(' ', $sql_ary['select_options']) . ' ' . implode(', ', $ary) : '';
                     break;
                 case 'FROM':
-                    $sql .= ($ary) ? ' FROM ' . implode(', ', $ary) : '';
+                    $sql .= $ary ? ' FROM ' . implode(', ', $ary) : '';
                     break;
                 case 'INNER JOIN':
-                    $sql .= ($ary) ? ' INNER JOIN ' . implode(' INNER JOIN ', $ary) : '';
+                    $sql .= $ary ? ' INNER JOIN ' . implode(' INNER JOIN ', $ary) : '';
                     break;
                 case 'LEFT JOIN':
-                    $sql .= ($ary) ? ' LEFT JOIN ' . implode(' LEFT JOIN ', $ary) : '';
+                    $sql .= $ary ? ' LEFT JOIN ' . implode(' LEFT JOIN ', $ary) : '';
                     break;
                 case 'WHERE':
-                    $sql .= ($ary) ? ' WHERE ' . implode(' AND ', $ary) : '';
+                    $sql .= $ary ? ' WHERE ' . implode(' AND ', $ary) : '';
                     break;
                 case 'GROUP BY':
-                    $sql .= ($ary) ? ' GROUP BY ' . implode(', ', $ary) : '';
+                    $sql .= $ary ? ' GROUP BY ' . implode(', ', $ary) : '';
                     break;
                 case 'HAVING':
-                    $sql .= ($ary) ? ' HAVING ' . implode(' AND ', $ary) : '';
+                    $sql .= $ary ? ' HAVING ' . implode(' AND ', $ary) : '';
                     break;
                 case 'ORDER BY':
-                    $sql .= ($ary) ? ' ORDER BY ' . implode(', ', $ary) : '';
+                    $sql .= $ary ? ' ORDER BY ' . implode(', ', $ary) : '';
                     break;
                 case 'LIMIT':
-                    $sql .= ($ary) ? ' LIMIT ' . implode(', ', $ary) : '';
+                    $sql .= $ary ? ' LIMIT ' . implode(', ', $ary) : '';
                     break;
             }
         }
@@ -603,7 +603,7 @@ class SqlDb
 
         if (!empty($this->shutdown['post_html'])) {
             $post_html_sql = $this->build_array('MULTI_INSERT', $this->shutdown['post_html']);
-            $this->query("REPLACE INTO " . BB_POSTS_HTML . " $post_html_sql");
+            $this->query('REPLACE INTO ' . BB_POSTS_HTML . " $post_html_sql");
         }
 
         if (!empty($this->shutdown['__sql'])) {
@@ -642,7 +642,7 @@ class SqlDb
      */
     public function unlock()
     {
-        if ($this->locked && $this->sql_query("UNLOCK TABLES")) {
+        if ($this->locked && $this->sql_query('UNLOCK TABLES')) {
             $this->locked = false;
         }
 

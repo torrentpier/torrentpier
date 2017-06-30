@@ -102,15 +102,15 @@ switch ($mode) {
         if (!$forum_id) {
             bb_simple_die(trans('messages.FORUM_NOT_EXIST'));
         }
-        $sql = "SELECT * FROM " . BB_FORUMS . " WHERE forum_id = $forum_id LIMIT 1";
+        $sql = 'SELECT * FROM ' . BB_FORUMS . " WHERE forum_id = $forum_id LIMIT 1";
         break;
 
     case 'reply':
         if (!$topic_id) {
             bb_die(trans('messages.NO_TOPIC_ID'));
         }
-        $sql = "SELECT f.*, t.*
-			FROM " . BB_FORUMS . " f, " . BB_TOPICS . " t
+        $sql = 'SELECT f.*, t.*
+			FROM ' . BB_FORUMS . ' f, ' . BB_TOPICS . " t
 			WHERE t.topic_id = $topic_id
 				AND f.forum_id = t.forum_id
 			LIMIT 1";
@@ -126,18 +126,18 @@ switch ($mode) {
         $select_sql = 'SELECT f.*, t.*, p.*';
         $select_sql .= (!$submit) ? ', pt.*, u.username, u.user_id' : '';
 
-        $from_sql = "FROM " . BB_POSTS . " p, " . BB_TOPICS . " t, " . BB_FORUMS . " f";
-        $from_sql .= (!$submit) ? ", " . BB_POSTS_TEXT . " pt, " . BB_USERS . " u" : '';
+        $from_sql = 'FROM ' . BB_POSTS . ' p, ' . BB_TOPICS . ' t, ' . BB_FORUMS . ' f';
+        $from_sql .= (!$submit) ? ', ' . BB_POSTS_TEXT . ' pt, ' . BB_USERS . ' u' : '';
 
         $where_sql = "
 			WHERE p.post_id = $post_id
 			AND t.topic_id = p.topic_id
 			AND f.forum_id = p.forum_id
 		";
-        $where_sql .= (!$submit) ? "
+        $where_sql .= (!$submit) ? '
 			AND pt.post_id = p.post_id
 			AND u.user_id = p.poster_id
-		" : '';
+		' : '';
 
         $sql = "$select_sql $from_sql $where_sql LIMIT 1";
         break;
@@ -171,7 +171,7 @@ if ($post_info = OLD_DB()->fetch_row($sql)) {
         $post_data['poster_id'] = $post_info['poster_id'];
 
         $selected_rg = $post_info['poster_rg_id'];
-        $switch_rg_sig = ($post_info['attach_rg_sig']) ? true : false;
+        $switch_rg_sig = $post_info['attach_rg_sig'] ? true : false;
 
         // Can this user edit/delete the post?
         if ($post_info['poster_id'] != $userdata['user_id'] && !$is_auth['auth_mod']) {
@@ -221,13 +221,13 @@ if (!$is_auth[$is_auth_type]) {
         default:
             $redirect = '';
     }
-    redirectToUrl(LOGIN_URL . "?redirect=/" . POSTING_URL . "?$redirect");
+    redirectToUrl(LOGIN_URL . '?redirect=/' . POSTING_URL . "?$redirect");
 }
 
 if ($mode == 'new_rel') {
     if ($tor_status = implode(',', config('tp.tor_cannot_new'))) {
-        $sql = OLD_DB()->fetch_rowset("SELECT t.topic_title, t.topic_id, tor.tor_status
-			FROM " . BB_BT_TORRENTS . " tor, " . BB_TOPICS . " t
+        $sql = OLD_DB()->fetch_rowset('SELECT t.topic_title, t.topic_id, tor.tor_status
+			FROM ' . BB_BT_TORRENTS . ' tor, ' . BB_TOPICS . " t
 			WHERE poster_id = {$userdata['user_id']}
 				AND tor.topic_id = t.topic_id
 				AND tor.tor_status IN ($tor_status)
@@ -253,7 +253,7 @@ if ($submit || $refresh) {
     $notify_user = bf($userdata['user_opt'], 'user_opt', 'user_notify');
 
     if (!IS_GUEST && $mode != 'newtopic' && !$notify_user) {
-        $notify_user = (int)OLD_DB()->fetch_row("SELECT topic_id FROM " . BB_TOPICS_WATCH . " WHERE topic_id = $topic_id AND user_id = " . $userdata['user_id']);
+        $notify_user = (int)OLD_DB()->fetch_row('SELECT topic_id FROM ' . BB_TOPICS_WATCH . " WHERE topic_id = $topic_id AND user_id = " . $userdata['user_id']);
     }
 }
 
@@ -266,9 +266,9 @@ $topic_has_new_posts = false;
 
 if (!IS_GUEST && $mode != 'newtopic' && ($submit || $preview || $mode == 'quote' || $mode == 'reply') && isset($_COOKIE[COOKIE_TOPIC])) {
     if ($topic_last_read = max((int)(@$tracking_topics[$topic_id]), (int)(@$tracking_forums[$forum_id]))) {
-        $sql = "SELECT p.*, pt.post_text, u.username, u.user_rank
-			FROM " . BB_POSTS . " p, " . BB_POSTS_TEXT . " pt, " . BB_USERS . " u
-			WHERE p.topic_id = " . (int)$topic_id . "
+        $sql = 'SELECT p.*, pt.post_text, u.username, u.user_rank
+			FROM ' . BB_POSTS . ' p, ' . BB_POSTS_TEXT . ' pt, ' . BB_USERS . ' u
+			WHERE p.topic_id = ' . (int)$topic_id . "
 				AND u.user_id = p.poster_id
 				AND pt.post_id = p.post_id
 				AND p.post_time > $topic_last_read
@@ -367,14 +367,14 @@ if (($delete || $mode == 'delete') && !$confirm) {
 
         if (defined('TORRENT_ATTACH_ID') && config('tp.bt_newtopic_auto_reg') && !$error_msg) {
             include INC_DIR . '/functions_torrent.php';
-            if (!OLD_DB()->fetch_row("SELECT attach_id FROM " . BB_BT_TORRENTS . " WHERE attach_id = " . TORRENT_ATTACH_ID)) {
+            if (!OLD_DB()->fetch_row('SELECT attach_id FROM ' . BB_BT_TORRENTS . ' WHERE attach_id = ' . TORRENT_ATTACH_ID)) {
                 if (config('tp.premod')) {
                     // Получение списка id форумов начиная с parent
                     $forum_parent = $forum_id;
                     if ($post_info['forum_parent']) {
                         $forum_parent = $post_info['forum_parent'];
                     }
-                    $count_rowset = OLD_DB()->fetch_rowset("SELECT forum_id FROM " . BB_FORUMS . " WHERE forum_parent = $forum_parent");
+                    $count_rowset = OLD_DB()->fetch_rowset('SELECT forum_id FROM ' . BB_FORUMS . " WHERE forum_parent = $forum_parent");
                     $sub_forums = array();
                     foreach ($count_rowset as $count_row) {
                         if ($count_row['forum_id'] != $forum_id) {
@@ -384,14 +384,14 @@ if (($delete || $mode == 'delete') && !$confirm) {
                     $sub_forums[] = $forum_id;
                     $sub_forums = implode(',', $sub_forums);
                     // Подсчет проверенных релизов в форумах раздела
-                    $count_checked_releases = OLD_DB()->fetch_row("
+                    $count_checked_releases = OLD_DB()->fetch_row('
 						SELECT COUNT(*) AS checked_releases
-						FROM " . BB_BT_TORRENTS . "
-						WHERE poster_id  = " . $userdata['user_id'] . "
+						FROM ' . BB_BT_TORRENTS . '
+						WHERE poster_id  = ' . $userdata['user_id'] . "
 						  AND forum_id   IN($sub_forums)
-						  AND tor_status IN(" . TOR_APPROVED . "," . TOR_DOUBTFUL . "," . TOR_TMP . ")
+						  AND tor_status IN(" . TOR_APPROVED . ',' . TOR_DOUBTFUL . ',' . TOR_TMP . ')
 						LIMIT 1
-					", 'checked_releases');
+					', 'checked_releases');
                     if ($count_checked_releases || IS_AM) {
                         tracker_register(TORRENT_ATTACH_ID, 'newtopic', TOR_NOT_APPROVED);
                     } else {
@@ -443,13 +443,13 @@ if ($refresh || $error_msg || ($submit && $topic_has_new_posts)) {
 } else {
     // User default entry point
     if ($mode == 'newtopic') {
-        $username = ($userdata['session_logged_in']) ? $userdata['username'] : '';
+        $username = $userdata['session_logged_in'] ? $userdata['username'] : '';
         $subject = $message = '';
     } elseif ($mode == 'reply') {
-        $username = ($userdata['session_logged_in']) ? $userdata['username'] : '';
+        $username = $userdata['session_logged_in'] ? $userdata['username'] : '';
         $subject = $message = '';
     } elseif ($mode == 'quote' || $mode == 'editpost') {
-        $subject = ($post_data['first_post']) ? $post_info['topic_title'] : '';
+        $subject = $post_data['first_post'] ? $post_info['topic_title'] : '';
         $message = $post_info['post_text'];
 
         if ($mode == 'quote') {
@@ -533,10 +533,10 @@ if ($mode == 'newtopic' || ($mode == 'editpost' && $post_data['first_post'])) {
 $topic_dl_type = $post_info['topic_dl_type'] ?? 0;
 
 if ($post_info['allow_reg_tracker'] && $post_data['first_post'] && ($topic_dl_type || $is_auth['auth_mod'])) {
-    $sql = "
+    $sql = '
 		SELECT tor.attach_id
-		FROM " . BB_POSTS . " p
-		LEFT JOIN " . BB_BT_TORRENTS . " tor ON (p.post_id = tor.post_id)
+		FROM ' . BB_POSTS . ' p
+		LEFT JOIN ' . BB_BT_TORRENTS . " tor ON (p.post_id = tor.post_id)
 		WHERE p.post_id = $post_id
 	";
     $result = OLD_DB()->fetch_row($sql);
@@ -547,7 +547,7 @@ if ($post_info['allow_reg_tracker'] && $post_data['first_post'] && ($topic_dl_ty
 
         $dl_ds = $dl_ch = $dl_hid = '';
         $dl_type_name = 'topic_dl_type';
-        $dl_type_val = ($topic_dl_type) ? 1 : 0;
+        $dl_type_val = $topic_dl_type ? 1 : 0;
 
         if (!$post_info['allow_reg_tracker'] && !$is_auth['auth_mod']) {
             $dl_ds = ' disabled="disabled" ';
@@ -567,9 +567,9 @@ if ($post_info['allow_reg_tracker'] && $post_data['first_post'] && ($topic_dl_ty
 if ($userdata['user_level'] == GROUP_MEMBER || IS_AM) {
     $poster_rgroups = '';
 
-    $sql = "SELECT ug.group_id, g.group_name, g.release_group
-		FROM " . BB_USER_GROUP . " ug
-		INNER JOIN " . BB_GROUPS . " g ON(g.group_id = ug.group_id)
+    $sql = 'SELECT ug.group_id, g.group_name, g.release_group
+		FROM ' . BB_USER_GROUP . ' ug
+		INNER JOIN ' . BB_GROUPS . " g ON(g.group_id = ug.group_id)
 		WHERE ug.user_id = {$userdata['user_id']}
 			AND g.release_group = 1
 		ORDER BY g.group_name";
@@ -613,19 +613,19 @@ $template->assign_vars(array(
     'POSTING_TYPE_TITLE' => $page_title,
     'POSTING_TOPIC_ID' => ($mode != 'newtopic') ? $topic_id : '',
     'POSTING_TOPIC_TITLE' => ($mode != 'newtopic') ? wbr($post_info['topic_title']) : '',
-    'U_VIEW_FORUM' => "viewforum.php?" . POST_FORUM_URL . "=$forum_id",
+    'U_VIEW_FORUM' => 'viewforum.php?' . POST_FORUM_URL . "=$forum_id",
 
     'USERNAME' => @$username,
-    'CAPTCHA_HTML' => (IS_GUEST) ? bb_captcha('get') : '',
+    'CAPTCHA_HTML' => IS_GUEST ? bb_captcha('get') : '',
     'SUBJECT' => $subject,
     'MESSAGE' => $message,
 
     'POSTER_RGROUPS' => isset($poster_rgroups) && !empty($poster_rgroups) ? $poster_rgroups : '',
-    'ATTACH_RG_SIG' => ($switch_rg_sig) ?: false,
+    'ATTACH_RG_SIG' => $switch_rg_sig ?: false,
 
-    'U_VIEWTOPIC' => ($mode == 'reply') ? "viewtopic.php?" . POST_TOPIC_URL . "=$topic_id&amp;postorder=desc" : '',
+    'U_VIEWTOPIC' => ($mode == 'reply') ? 'viewtopic.php?' . POST_TOPIC_URL . "=$topic_id&amp;postorder=desc" : '',
 
-    'S_NOTIFY_CHECKED' => ($notify_user) ? 'checked="checked"' : '',
+    'S_NOTIFY_CHECKED' => $notify_user ? 'checked="checked"' : '',
     'S_TYPE_TOGGLE' => $topic_type_toggle,
     'S_TOPIC_ID' => $topic_id,
     'S_POST_ACTION' => POSTING_URL,
@@ -639,8 +639,8 @@ if ($mode == 'newtopic' || $post_data['first_post']) {
 // Update post time
 if ($mode == 'editpost' && $post_data['last_post'] && !$post_data['first_post']) {
     $template->assign_vars(array(
-        'SHOW_UPDATE_POST_TIME' => ($is_auth['auth_mod'] || ($post_data['poster_post'] && $post_info['post_time'] + 3600 * 3 > TIMENOW)),
-        'UPDATE_POST_TIME_CHECKED' => ($post_data['poster_post'] && ($post_info['post_time'] + 3600 * 2 > TIMENOW)),
+        'SHOW_UPDATE_POST_TIME' => $is_auth['auth_mod'] || ($post_data['poster_post'] && $post_info['post_time'] + 3600 * 3 > TIMENOW),
+        'UPDATE_POST_TIME_CHECKED' => $post_data['poster_post'] && ($post_info['post_time'] + 3600 * 2 > TIMENOW),
     ));
 }
 
@@ -649,8 +649,8 @@ if ($mode == 'reply' && $is_auth['auth_read']) {
     topic_review($topic_id);
 }
 
-require(PAGE_HEADER);
+require PAGE_HEADER;
 
 $template->pparse('body');
 
-require(PAGE_FOOTER);
+require PAGE_FOOTER;

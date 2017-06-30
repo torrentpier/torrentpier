@@ -370,7 +370,7 @@ class Attach
                             } else {
                                 $sql = 'UPDATE ' . BB_ATTACHMENTS_DESC . ' SET thumbnail = 0 WHERE attach_id = ' . (int)$actual_id_list[$i];
 
-                                if (!(OLD_DB()->sql_query($sql))) {
+                                if (!OLD_DB()->sql_query($sql)) {
                                     bb_die('Unable to update ' . BB_ATTACHMENTS_DESC);
                                 }
                             }
@@ -449,7 +449,7 @@ class Attach
                         $sql = 'UPDATE ' . BB_ATTACHMENTS_DESC . ' SET ' . attach_mod_sql_build_array('UPDATE', $sql_ary) . '
 							WHERE attach_id = ' . (int)$attachment_id;
 
-                        if (!(OLD_DB()->sql_query($sql))) {
+                        if (!OLD_DB()->sql_query($sql)) {
                             bb_die('Unable to update the attachment');
                         }
 
@@ -526,7 +526,7 @@ class Attach
         global $post_info, $userdata;
 
         $post_id = (int)$message_id;
-        $user_id_1 = (isset($post_info['poster_id'])) ? (int)$post_info['poster_id'] : 0;
+        $user_id_1 = isset($post_info['poster_id']) ? (int)$post_info['poster_id'] : 0;
 
         if (!$user_id_1) {
             $user_id_1 = (int)$userdata['user_id'];
@@ -546,7 +546,7 @@ class Attach
 						SET comment = '" . @attach_mod_sql_escape($this->attachment_comment_list[$i]) . "'
 						WHERE attach_id = " . $this->attachment_id_list[$i];
 
-                    if (!(OLD_DB()->sql_query($sql))) {
+                    if (!OLD_DB()->sql_query($sql)) {
                         bb_die('Unable to update the file comment');
                     }
                 } else {
@@ -568,7 +568,7 @@ class Attach
 
                     $sql = 'INSERT INTO ' . BB_ATTACHMENTS_DESC . ' ' . attach_mod_sql_build_array('INSERT', $sql_ary);
 
-                    if (!(OLD_DB()->sql_query($sql))) {
+                    if (!OLD_DB()->sql_query($sql)) {
                         bb_die('Could not store Attachment.<br />Your ' . $message_type . ' has been stored');
                     }
 
@@ -588,7 +588,7 @@ class Attach
 
                     $sql = 'INSERT INTO ' . BB_ATTACHMENTS . ' ' . attach_mod_sql_build_array('INSERT', $sql_ary);
 
-                    if (!(OLD_DB()->sql_query($sql))) {
+                    if (!OLD_DB()->sql_query($sql)) {
                         bb_die('Could not store Attachment.<br />Your ' . $message_type . ' has been stored');
                     }
                 }
@@ -614,7 +614,7 @@ class Attach
                 $sql = 'INSERT INTO ' . BB_ATTACHMENTS_DESC . ' ' . attach_mod_sql_build_array('INSERT', $sql_ary);
 
                 // Inform the user that his post has been created, but nothing is attached
-                if (!(OLD_DB()->sql_query($sql))) {
+                if (!OLD_DB()->sql_query($sql)) {
                     bb_die('Could not store Attachment.<br />Your ' . $message_type . ' has been stored');
                 }
 
@@ -628,7 +628,7 @@ class Attach
 
                 $sql = 'INSERT INTO ' . BB_ATTACHMENTS . ' ' . attach_mod_sql_build_array('INSERT', $sql_ary);
 
-                if (!(OLD_DB()->sql_query($sql))) {
+                if (!OLD_DB()->sql_query($sql)) {
                     bb_die('Could not store Attachment.<br />Your ' . $message_type . ' has been stored');
                 }
             }
@@ -847,7 +847,7 @@ class Attach
                     // Remove non-latin characters
                     $this->attach_filename = preg_replace('#([\xC2\xC3])([\x80-\xBF])#', 'chr(ord(\'$1\')<<6&0xC0|ord(\'$2\')&0x3F)', $this->attach_filename);
                     $this->attach_filename = rawurlencode($this->attach_filename);
-                    $this->attach_filename = preg_replace("/(%[0-9A-F]{1,2})/i", '', $this->attach_filename);
+                    $this->attach_filename = preg_replace('/(%[0-9A-F]{1,2})/i', '', $this->attach_filename);
                     $this->attach_filename = trim($this->attach_filename . time());
                 }
                 $this->attach_filename = str_replace(['&amp;', '&', ' '], '_', $this->attach_filename);

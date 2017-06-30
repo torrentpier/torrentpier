@@ -32,7 +32,7 @@ function manage_group(mode, value) {
 				<textarea cols="80" id="group_description" rows="6">{GROUP_DESCRIPTION}</textarea>
 			</p>
 			<p>
-				<input type="button" value="{L_AJAX_PREVIEW}" onclick="ajax.exec({ action: 'posts', type: 'view_message', message: $('textarea#group_description').val()});ajax.callback.posts=function(data){$('div#preview_description').html(data.message_html);initPostBBCode('div#preview_description')}">
+				<input type="button" value="{L_AJAX_PREVIEW}" onclick="ajax.exec({ action: 'posts', type: 'view_message', message: $('textarea#group_description').val()});ajax.callback.posts=function(data);{$('div#preview_description').html(data.message_html);initPostBBCode('div#preview_description')}">
 				<input type="button" value="{L_SAVE}" onclick="manage_group('group_description',$('textarea#group_description').val())">
 			</p>
 		</td>
@@ -44,7 +44,7 @@ function manage_group(mode, value) {
 				<textarea cols="80" id="group_signature" rows="3">{GROUP_SIGNATURE}</textarea>
 			</p>
 			<p>
-				<input type="button" value="{L_AJAX_PREVIEW}" onclick="ajax.exec({ action: 'posts', type: 'view_message', message: $('textarea#group_signature').val()});ajax.callback.posts=function(data){$('div#preview_signature').html(data.message_html);initPostBBCode('div#preview_signature')}">
+				<input type="button" value="{L_AJAX_PREVIEW}" onclick="ajax.exec({ action: 'posts', type: 'view_message', message: $('textarea#group_signature').val()});ajax.callback.posts=function(data);{$('div#preview_signature').html(data.message_html);initPostBBCode('div#preview_signature')}">
 				<input type="button" value="{L_SAVE}" onclick="manage_group('group_signature',$('textarea#group_signature').val())">
 			</p>
 		</td>

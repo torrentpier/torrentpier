@@ -54,7 +54,7 @@ class File extends Common
         if (is_dir($dir)) {
             if ($dh = opendir($dir)) {
                 while (($file = readdir($dh)) !== false) {
-                    if ($file != "." && $file != "..") {
+                    if ($file != '.' && $file != '..') {
                         $filename = $dir . $file;
 
                         unlink($filename);
@@ -82,7 +82,7 @@ class File extends Common
             $this->num_queries++;
 
             if (file_exists($filename)) {
-                require($filename);
+                require $filename;
 
                 $this->data[$item] = $filecache;
             }

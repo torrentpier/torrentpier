@@ -33,11 +33,11 @@ $anon = GUEST_UID;
 // Start session
 $user->session_start();
 
-$lastvisit = (IS_GUEST) ? TIMENOW : $userdata['user_lastvisit'];
+$lastvisit = IS_GUEST ? TIMENOW : $userdata['user_lastvisit'];
 
 // Caching output
 $req_page = "forum_f{$forum_id}";
-$req_page .= ($start) ? "_start{$start}" : '';
+$req_page .= $start ? "_start{$start}" : '';
 
 define('REQUESTED_PAGE', $req_page);
 caching_output(IS_GUEST, 'send', REQUESTED_PAGE . '_guest');
@@ -67,8 +67,8 @@ $moderation = (!empty($_REQUEST['mod']) && $is_auth['auth_mod']);
 
 if (!$is_auth['auth_view']) {
     if (IS_GUEST) {
-        $redirect = ($start) ? "&start=$start" : '';
-        redirectToUrl(LOGIN_URL . "?redirect=" . FORUM_URL . $forum_id . $redirect);
+        $redirect = $start ? "&start=$start" : '';
+        redirectToUrl(LOGIN_URL . '?redirect=' . FORUM_URL . $forum_id . $redirect);
     }
     // The user is not authed to read this forum ...
     $message = sprintf(trans('messages.SORRY_AUTH_VIEW'), $is_auth['auth_view_type']);
@@ -130,17 +130,17 @@ if ($forums['forum'][$forum_id]['allow_porno_topic'] && bf($userdata['user_opt']
 
 if (!$forum_data['forum_parent'] && isset($forums['f'][$forum_id]['subforums']) && $show_subforums) {
     $not_auth_forums = $user->get_excluded_forums(AUTH_VIEW);
-    $ignore_forum_sql = ($not_auth_forums) ? "AND f.forum_id NOT IN($not_auth_forums)" : '';
+    $ignore_forum_sql = $not_auth_forums ? "AND f.forum_id NOT IN($not_auth_forums)" : '';
 
     $sql = "
 		SELECT
 			f.forum_id, f.forum_status, f.forum_last_post_id, f.forum_posts, f.forum_topics,
 			t.topic_last_post_time, t.topic_id AS last_topic_id, t.topic_title AS last_topic_title,
 			p.poster_id AS sf_last_user_id, IF(p.poster_id = $anon, p.post_username, u.username) AS sf_last_username, u.user_rank
-		FROM      " . BB_FORUMS . " f
-		LEFT JOIN " . BB_TOPICS . " t ON(f.forum_last_post_id = t.topic_last_post_id)
-		LEFT JOIN " . BB_POSTS . " p ON(f.forum_last_post_id = p.post_id)
-		LEFT JOIN " . BB_USERS . " u ON(p.poster_id = u.user_id)
+		FROM      " . BB_FORUMS . ' f
+		LEFT JOIN ' . BB_TOPICS . ' t ON(f.forum_last_post_id = t.topic_last_post_id)
+		LEFT JOIN ' . BB_POSTS . ' p ON(f.forum_last_post_id = p.post_id)
+		LEFT JOIN ' . BB_USERS . " u ON(p.poster_id = u.user_id)
 		WHERE f.forum_parent = $forum_id
 			$only_new_sql
 			$ignore_forum_sql
@@ -242,12 +242,12 @@ $sel_previous_days = array(
 
 if (!empty($_REQUEST['topicdays'])) {
     if ($req_topic_days = abs((int)$_REQUEST['topicdays']) and isset($sel_previous_days[$req_topic_days])) {
-        $sql = "
+        $sql = '
 			SELECT COUNT(*) AS forum_topics
-			FROM " . BB_TOPICS . "
+			FROM ' . BB_TOPICS . "
 			WHERE forum_id = $forum_id
-				AND topic_last_post_time > " . (TIMENOW - 86400 * $req_topic_days) . "
-		";
+				AND topic_last_post_time > " . (TIMENOW - 86400 * $req_topic_days) . '
+		';
 
         if ($row = OLD_DB()->fetch_row($sql)) {
             $topic_days = $req_topic_days;
@@ -273,7 +273,7 @@ $order_method = get_forum_display_sort_option($order_value, 'field', 'order');
 
 $order_sql = "ORDER BY t.topic_type DESC, $sort_method $order_method";
 
-$limit_topics_time_sql = ($topic_days) ? "AND t.topic_last_post_time > " . (TIMENOW - 86400 * $topic_days) : '';
+$limit_topics_time_sql = $topic_days ? 'AND t.topic_last_post_time > ' . (TIMENOW - 86400 * $topic_days) : '';
 
 $select_tor_sql = $join_tor_sql = '';
 $join_dl = (config('tp.show_dl_status_in_forum') && !IS_GUEST);
@@ -288,14 +288,14 @@ if ($forum_data['allow_reg_tracker']) {
 		bt.auth_key, tor.info_hash, tor.size AS tor_size, tor.reg_time, tor.complete_count, tor.seeder_last_seen, tor.attach_id, tor.tor_status, tor.tor_type,
 		sn.seeders, sn.leechers
 	';
-    $select_tor_sql .= ($join_dl) ? ', dl.user_status AS dl_status' : '';
+    $select_tor_sql .= $join_dl ? ', dl.user_status AS dl_status' : '';
 
-    $join_tor_sql = "
-		LEFT JOIN " . BB_BT_TORRENTS . " tor ON(t.topic_id = tor.topic_id)
-		LEFT JOIN " . BB_BT_USERS . " bt  ON(bt.user_id = {$userdata['user_id']})
-		LEFT JOIN " . BB_BT_TRACKER_SNAP . " sn  ON(tor.topic_id = sn.topic_id)
-	";
-    $join_tor_sql .= ($join_dl) ? " LEFT JOIN " . BB_BT_DLSTATUS . " dl ON(dl.user_id = {$userdata['user_id']} AND dl.topic_id = t.topic_id)" : '';
+    $join_tor_sql = '
+		LEFT JOIN ' . BB_BT_TORRENTS . ' tor ON(t.topic_id = tor.topic_id)
+		LEFT JOIN ' . BB_BT_USERS . " bt  ON(bt.user_id = {$userdata['user_id']})
+		LEFT JOIN " . BB_BT_TRACKER_SNAP . ' sn  ON(tor.topic_id = sn.topic_id)
+	';
+    $join_tor_sql .= $join_dl ? ' LEFT JOIN ' . BB_BT_DLSTATUS . " dl ON(dl.user_id = {$userdata['user_id']} AND dl.topic_id = t.topic_id)" : '';
 }
 
 // Title match
@@ -316,9 +316,9 @@ if ($title_match =& $_REQUEST[$title_match_key]) {
 $topic_ids = $topic_rowset = array();
 
 // IDs
-$sql = "
+$sql = '
 	SELECT t.topic_id
-	FROM " . BB_TOPICS . " t
+	FROM ' . BB_TOPICS . " t
 	WHERE t.forum_id = $forum_id
 		$only_new_sql
 		$title_match_sql
@@ -339,11 +339,11 @@ if ($topics_csv = implode(',', $topic_ids)) {
 			p2.poster_id AS last_user_id, u2.user_rank as last_user_rank,
 			IF(p2.poster_id = $anon, p2.post_username, u2.username) AS last_username
 				$select_tor_sql
-		FROM      " . BB_TOPICS . " t
-		LEFT JOIN " . BB_POSTS . " p1 ON(t.topic_first_post_id = p1.post_id)
-		LEFT JOIN " . BB_USERS . " u1 ON(t.topic_poster = u1.user_id)
-		LEFT JOIN " . BB_POSTS . " p2 ON(t.topic_last_post_id = p2.post_id)
-		LEFT JOIN " . BB_USERS . " u2 ON(p2.poster_id = u2.user_id)
+		FROM      " . BB_TOPICS . ' t
+		LEFT JOIN ' . BB_POSTS . ' p1 ON(t.topic_first_post_id = p1.post_id)
+		LEFT JOIN ' . BB_USERS . ' u1 ON(t.topic_poster = u1.user_id)
+		LEFT JOIN ' . BB_POSTS . ' p2 ON(t.topic_last_post_id = p2.post_id)
+		LEFT JOIN ' . BB_USERS . " u2 ON(p2.poster_id = u2.user_id)
 			$join_tor_sql
 		WHERE t.topic_id IN($topics_csv)
 		    $where_tor_sql
@@ -376,14 +376,14 @@ $template->assign_vars(array(
 
 // User authorisation levels output
 $u_auth = array();
-$u_auth[] = ($is_auth['auth_post']) ? trans('messages.RULES_POST_CAN') : trans('messages.RULES_POST_CANNOT');
-$u_auth[] = ($is_auth['auth_reply']) ? trans('messages.RULES_REPLY_CAN') : trans('messages.RULES_REPLY_CANNOT');
-$u_auth[] = ($is_auth['auth_edit']) ? trans('messages.RULES_EDIT_CAN') : trans('messages.RULES_EDIT_CANNOT');
-$u_auth[] = ($is_auth['auth_delete']) ? trans('messages.RULES_DELETE_CAN') : trans('messages.RULES_DELETE_CANNOT');
-$u_auth[] = ($is_auth['auth_vote']) ? trans('messages.RULES_VOTE_CAN') : trans('messages.RULES_VOTE_CANNOT');
-$u_auth[] = ($is_auth['auth_attachments']) ? trans('messages.RULES_ATTACH_CAN') : trans('messages.RULES_ATTACH_CANNOT');
-$u_auth[] = ($is_auth['auth_download']) ? trans('messages.RULES_DOWNLOAD_CAN') : trans('messages.RULES_DOWNLOAD_CANNOT');
-$u_auth[] = ($is_auth['auth_mod']) ? trans('messages.RULES_MODERATE') : '';
+$u_auth[] = $is_auth['auth_post'] ? trans('messages.RULES_POST_CAN') : trans('messages.RULES_POST_CANNOT');
+$u_auth[] = $is_auth['auth_reply'] ? trans('messages.RULES_REPLY_CAN') : trans('messages.RULES_REPLY_CANNOT');
+$u_auth[] = $is_auth['auth_edit'] ? trans('messages.RULES_EDIT_CAN') : trans('messages.RULES_EDIT_CANNOT');
+$u_auth[] = $is_auth['auth_delete'] ? trans('messages.RULES_DELETE_CAN') : trans('messages.RULES_DELETE_CANNOT');
+$u_auth[] = $is_auth['auth_vote'] ? trans('messages.RULES_VOTE_CAN') : trans('messages.RULES_VOTE_CANNOT');
+$u_auth[] = $is_auth['auth_attachments'] ? trans('messages.RULES_ATTACH_CAN') : trans('messages.RULES_ATTACH_CANNOT');
+$u_auth[] = $is_auth['auth_download'] ? trans('messages.RULES_DOWNLOAD_CAN') : trans('messages.RULES_DOWNLOAD_CANNOT');
+$u_auth[] = $is_auth['auth_mod'] ? trans('messages.RULES_MODERATE') : '';
 $u_auth = implode("<br />\n", $u_auth);
 
 $template->assign_vars(array(
@@ -402,15 +402,15 @@ $template->assign_vars(array(
     'FOLDER_DOWNLOAD_IMG' => $images['folder_dl'],
 
     'SHOW_ONLY_NEW_MENU' => true,
-    'ONLY_NEW_POSTS_ON' => ($only_new == ONLY_NEW_POSTS),
-    'ONLY_NEW_TOPICS_ON' => ($only_new == ONLY_NEW_TOPICS),
+    'ONLY_NEW_POSTS_ON' => $only_new == ONLY_NEW_POSTS,
+    'ONLY_NEW_TOPICS_ON' => $only_new == ONLY_NEW_TOPICS,
 
     'TITLE_MATCH' => htmlCHR($title_match),
-    'SELECT_TPP' => ($select_tpp) ? build_select('tpp', $select_tpp, $topics_per_page, null, null, 'onchange="$(\'#tpp\').submit();"') : '',
+    'SELECT_TPP' => $select_tpp ? build_select('tpp', $select_tpp, $topics_per_page, null, null, 'onchange="$(\'#tpp\').submit();"') : '',
     'T_POST_NEW_TOPIC' => ($forum_data['forum_status'] == FORUM_LOCKED) ? trans('messages.FORUM_LOCKED') : $post_new_topic,
     'S_AUTH_LIST' => $u_auth,
     'U_VIEW_FORUM' => FORUM_URL . $forum_id,
-    'U_MARK_READ' => FORUM_URL . $forum_id . "&amp;mark=topics",
+    'U_MARK_READ' => FORUM_URL . $forum_id . '&amp;mark=topics',
     'U_SEARCH_SELF' => "search.php?uid={$userdata['user_id']}&f=$forum_id",
 ));
 
@@ -493,7 +493,7 @@ $pg_url = FORUM_URL . $forum_id;
 $pg_url .= $topic_days ? "&amp;topicdays=$topic_days" : '';
 $pg_url .= $sort_value ? "&amp;sort=$sort_value" : '';
 $pg_url .= $order_value ? "&amp;order=$order_value" : '';
-$pg_url .= $moderation ? "&amp;mod=1" : '';
+$pg_url .= $moderation ? '&amp;mod=1' : '';
 $pg_url .= ($topics_per_page != config('tp.topics_per_page')) ? "&amp;tpp=$topics_per_page" : '';
 
 if ($found_topics) {

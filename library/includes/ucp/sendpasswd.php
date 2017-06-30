@@ -24,7 +24,7 @@ if (isset($_POST['submit'])) {
         bb_die(trans('messages.CAPTCHA_WRONG'));
     }
     $email = (!empty($_POST['email'])) ? trim(strip_tags(htmlspecialchars($_POST['email']))) : '';
-    $sql = "SELECT * FROM " . BB_USERS . " WHERE user_email = '" . OLD_DB()->escape($email) . "'";
+    $sql = 'SELECT * FROM ' . BB_USERS . " WHERE user_email = '" . OLD_DB()->escape($email) . "'";
     if ($result = OLD_DB()->sql_query($sql)) {
         if ($row = OLD_DB()->sql_fetchrow($result)) {
             if (!$row['user_active']) {
@@ -40,7 +40,7 @@ if (isset($_POST['submit'])) {
             $user_actkey = make_rand_str(12);
             $user_password = make_rand_str(8);
 
-            $sql = "UPDATE " . BB_USERS . "
+            $sql = 'UPDATE ' . BB_USERS . "
 				SET user_newpasswd = '$user_password', user_actkey = '$user_actkey'
 				WHERE user_id = " . $row['user_id'];
             if (!OLD_DB()->sql_query($sql)) {
@@ -78,9 +78,9 @@ if (isset($_POST['submit'])) {
 $template->assign_vars(array(
     'USERNAME' => $username,
     'EMAIL' => $email,
-    'CAPTCHA_HTML' => ($need_captcha) ? bb_captcha('get') : '',
+    'CAPTCHA_HTML' => $need_captcha ? bb_captcha('get') : '',
     'S_HIDDEN_FIELDS' => '',
-    'S_PROFILE_ACTION' => "profile.php?mode=sendpassword",
+    'S_PROFILE_ACTION' => 'profile.php?mode=sendpassword',
 ));
 
 print_page('usercp_sendpasswd.tpl');

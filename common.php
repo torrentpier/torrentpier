@@ -198,7 +198,7 @@ function bb_log($msg, $file_name)
     if (is_array($msg)) {
         $msg = implode(LOG_LF, $msg);
     }
-    $file_name .= (LOG_EXT) ? '.' . LOG_EXT : '';
+    $file_name .= LOG_EXT ? '.' . LOG_EXT : '';
     return file_write($msg, LOG_DIR . '/' . $file_name);
 }
 
@@ -410,7 +410,7 @@ function log_request($file = '', $prepend_str = false, $add_post = true)
     }
 
     if (!empty($_POST) && $add_post) {
-        $str[] = "post: " . str_compact(urldecode(http_build_query($_POST)));
+        $str[] = 'post: ' . str_compact(urldecode(http_build_query($_POST)));
     }
     $str = implode("\t", $str) . "\n";
     bb_log($str, $file);

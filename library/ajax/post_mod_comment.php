@@ -20,10 +20,10 @@ if (!$mc_text = prepare_message($mc_text)) {
     $this->ajax_die(trans('messages.EMPTY_MESSAGE'));
 }
 
-$post = OLD_DB()->fetch_row("
+$post = OLD_DB()->fetch_row('
 	SELECT
 		p.post_id, p.poster_id
-	FROM      " . BB_POSTS . " p
+	FROM      ' . BB_POSTS . " p
 	WHERE p.post_id = $post_id
 ");
 if (!$post) {
@@ -31,12 +31,12 @@ if (!$post) {
 }
 
 $data = array(
-    'mc_comment' => ($mc_type) ? $mc_text : '',
+    'mc_comment' => $mc_type ? $mc_text : '',
     'mc_type' => $mc_type,
-    'mc_user_id' => ($mc_type) ? $userdata['user_id'] : 0,
+    'mc_user_id' => $mc_type ? $userdata['user_id'] : 0,
 );
 $sql_args = OLD_DB()->build_array('UPDATE', $data);
-OLD_DB()->query("UPDATE " . BB_POSTS . " SET $sql_args WHERE post_id = $post_id");
+OLD_DB()->query('UPDATE ' . BB_POSTS . " SET $sql_args WHERE post_id = $post_id");
 
 if ($mc_type && $post['poster_id'] != $userdata['user_id']) {
     $subject = sprintf(trans('messages.MC_COMMENT_PM_SUBJECT'), trans('messages.MC_COMMENT.' . $mc_type . '.type'));

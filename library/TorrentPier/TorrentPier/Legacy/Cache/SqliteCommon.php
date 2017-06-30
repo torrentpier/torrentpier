@@ -164,16 +164,16 @@ class SqliteCommon extends Common
     {
         if ($name) {
             $this->db->shard($this->prefix . $name);
-            $result = $this->db->query("DELETE FROM " . $this->cfg['table_name'] . " WHERE cache_name = '" . SQLite3::escapeString($this->prefix . $name) . "'");
+            $result = $this->db->query('DELETE FROM ' . $this->cfg['table_name'] . " WHERE cache_name = '" . SQLite3::escapeString($this->prefix . $name) . "'");
         } else {
-            $result = $this->db->query("DELETE FROM " . $this->cfg['table_name']);
+            $result = $this->db->query('DELETE FROM ' . $this->cfg['table_name']);
         }
         return (bool)$result;
     }
 
     public function gc($expire_time = TIMENOW)
     {
-        $result = $this->db->query("DELETE FROM " . $this->cfg['table_name'] . " WHERE cache_expire_time < $expire_time");
+        $result = $this->db->query('DELETE FROM ' . $this->cfg['table_name'] . " WHERE cache_expire_time < $expire_time");
         return $result ? sqlite_changes($this->db->dbh) : 0;
     }
 

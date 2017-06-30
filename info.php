@@ -77,7 +77,7 @@ $require = file_exists($html_dir . $info['src']) ? $html_dir . $info['src'] : $h
     <fieldset class="pad_6">
         <legend class="med bold mrg_2 warnColor1"><?php echo mb_strtoupper($info['title'], 'UTF-8'); ?></legend>
         <div class="bCenter">
-            <?php require($require); ?>
+            <?php require $require; ?>
         </div>
     </fieldset>
     <p class="gen tRight pad_6"><a href="javascript:window.close();" class="gen">[ <?php echo trans('messages.LOCK'); ?> ]</a>

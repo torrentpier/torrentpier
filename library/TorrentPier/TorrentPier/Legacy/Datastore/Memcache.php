@@ -35,7 +35,7 @@ class Memcache extends Common
 
     public function connect()
     {
-        $connect_type = ($this->cfg['pconnect']) ? 'pconnect' : 'connect';
+        $connect_type = $this->cfg['pconnect'] ? 'pconnect' : 'connect';
 
         $this->cur_query = $connect_type . ' ' . $this->cfg['host'] . ':' . $this->cfg['port'];
         $this->debug('start');

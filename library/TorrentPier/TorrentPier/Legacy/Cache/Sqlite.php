@@ -55,12 +55,12 @@ class Sqlite extends Common
         array_deep($name_sql, 'SQLite3::escapeString');
 
         // get available items
-        $rowset = $this->db->fetch_rowset("
+        $rowset = $this->db->fetch_rowset('
 			SELECT cache_name, cache_value
-			FROM " . $this->cfg['table_name'] . "
-			WHERE cache_name IN('$this->prefix_sql" . implode("','$this->prefix_sql", $name_sql) . "') AND cache_expire_time > " . TIMENOW . "
-			LIMIT " . count($name) . "
-		");
+			FROM ' . $this->cfg['table_name'] . "
+			WHERE cache_name IN('$this->prefix_sql" . implode("','$this->prefix_sql", $name_sql) . "') AND cache_expire_time > " . TIMENOW . '
+			LIMIT ' . count($name) . '
+		');
 
         $this->db->debug('start', 'unserialize()');
         foreach ($rowset as $row) {
@@ -90,7 +90,7 @@ class Sqlite extends Common
         $expire = TIMENOW + $ttl;
         $value_sql = SQLite3::escapeString(serialize($value));
 
-        $result = $this->db->query("REPLACE INTO " . $this->cfg['table_name'] . " (cache_name, cache_expire_time, cache_value) VALUES ('$name_sql', $expire, '$value_sql')");
+        $result = $this->db->query('REPLACE INTO ' . $this->cfg['table_name'] . " (cache_name, cache_expire_time, cache_value) VALUES ('$name_sql', $expire, '$value_sql')");
         return (bool)$result;
     }
 
@@ -98,16 +98,16 @@ class Sqlite extends Common
     {
         if ($name) {
             $this->db->shard($this->prefix . $name);
-            $result = $this->db->query("DELETE FROM " . $this->cfg['table_name'] . " WHERE cache_name = '" . SQLite3::escapeString($this->prefix . $name) . "'");
+            $result = $this->db->query('DELETE FROM ' . $this->cfg['table_name'] . " WHERE cache_name = '" . SQLite3::escapeString($this->prefix . $name) . "'");
         } else {
-            $result = $this->db->query("DELETE FROM " . $this->cfg['table_name']);
+            $result = $this->db->query('DELETE FROM ' . $this->cfg['table_name']);
         }
         return (bool)$result;
     }
 
     public function gc($expire_time = TIMENOW)
     {
-        $result = $this->db->query("DELETE FROM " . $this->cfg['table_name'] . " WHERE cache_expire_time < $expire_time");
+        $result = $this->db->query('DELETE FROM ' . $this->cfg['table_name'] . " WHERE cache_expire_time < $expire_time");
         return $result ? $this->db->changes() : 0;
     }
 }

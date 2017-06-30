@@ -26,11 +26,11 @@ function generate_user_info(&$row, $date_format, $group_mod, &$from, &$posts, &$
     $joined = bb_date($row['user_regdate']);
     $user_time = (!empty($row['user_time'])) ? bb_date($row['user_time']) : trans('messages.NONE');
     $posts = $row['user_posts'] ?: 0;
-    $pm = '<a class="txtb" href="' . (PM_URL . "?mode=post&amp;" . POST_USERS_URL . "=" . $row['user_id']) . '">' . trans('messages.SEND_PM_TXTB') . '</a>';
+    $pm = '<a class="txtb" href="' . (PM_URL . '?mode=post&amp;' . POST_USERS_URL . '=' . $row['user_id']) . '">' . trans('messages.SEND_PM_TXTB') . '</a>';
     $avatar = get_avatar($row['user_id'], $row['avatar_ext_id'], !bf($row['user_opt'], 'user_opt', 'dis_avatar'), '', 50, 50);
 
     if (bf($row['user_opt'], 'user_opt', 'user_viewemail') || $group_mod) {
-        $email_uri = config('tp.board_email_form') ? ("profile.php?mode=email&amp;" . POST_USERS_URL . "=" . $row['user_id']) : 'mailto:' . $row['user_email'];
+        $email_uri = config('tp.board_email_form') ? ('profile.php?mode=email&amp;' . POST_USERS_URL . '=' . $row['user_id']) : 'mailto:' . $row['user_email'];
         $email = '<a class="editable" href="' . $email_uri . '">' . $row['user_email'] . '</a>';
     } else {
         $email = '';
@@ -41,8 +41,6 @@ function generate_user_info(&$row, $date_format, $group_mod, &$from, &$posts, &$
     } else {
         $www = '';
     }
-
-    return;
 }
 
 $user->session_start(array('req_login' => true));
@@ -82,16 +80,16 @@ if (!$group_id) {
 			IF(g.group_moderator = ug.user_id, 1, 0) AS is_group_mod,
 			COUNT(ug2.user_id) AS members, SUM(ug2.user_pending) AS candidates
 		FROM
-			" . BB_GROUPS . " g
+			" . BB_GROUPS . ' g
 		LEFT JOIN
-			" . BB_USER_GROUP . " ug ON
+			' . BB_USER_GROUP . ' ug ON
 			    ug.group_id = g.group_id
-			AND ug.user_id = " . $userdata['user_id'] . "
+			AND ug.user_id = ' . $userdata['user_id'] . '
 		LEFT JOIN
-			" . BB_USER_GROUP . " ug2 ON
+			' . BB_USER_GROUP . ' ug2 ON
 			    ug2.group_id = g.group_id
 		LEFT JOIN
-			" . BB_USERS . " u ON g.group_moderator = u.user_id
+			' . BB_USERS . ' u ON g.group_moderator = u.user_id
 		WHERE
 			g.group_single_user = 0
 		GROUP BY g.group_id
@@ -100,7 +98,7 @@ if (!$group_id) {
 			membership   DESC,
 			g.group_type ASC,
 			g.group_name ASC
-	";
+	';
 
     foreach (OLD_DB()->fetch_rowset($sql) as $row) {
         if ($row['is_group_mod']) {
@@ -119,7 +117,7 @@ if (!$group_id) {
             continue;
         }
 
-        $data = array('id' => $row['group_id'], 'm' => ($row['members'] - $row['candidates']), 'c' => $row['candidates'], 'rg' => $row['release_group']);
+        $data = array('id' => $row['group_id'], 'm' => $row['members'] - $row['candidates'], 'c' => $row['candidates'], 'rg' => $row['release_group']);
 
         $groups[$type][$row['group_name']] = $data;
     }
@@ -131,11 +129,11 @@ if (!$group_id) {
         foreach ($params as $name => $data) {
             $text = htmlCHR(str_short(rtrim($name), HTML_SELECT_MAX_LENGTH));
 
-            $members = ($data['m']) ? trans('messages.MEMBERS_IN_GROUP') . ': ' . $data['m'] : trans('messages.NO_GROUP_MEMBERS');
-            $candidates = ($data['c']) ? trans('messages.PENDING_MEMBERS') . ': ' . $data['c'] : trans('messages.NO_PENDING_GROUP_MEMBERS');
+            $members = $data['m'] ? trans('messages.MEMBERS_IN_GROUP') . ': ' . $data['m'] : trans('messages.NO_GROUP_MEMBERS');
+            $candidates = $data['c'] ? trans('messages.PENDING_MEMBERS') . ': ' . $data['c'] : trans('messages.NO_PENDING_GROUP_MEMBERS');
 
             $options .= '<li class="pad_2"><a href="' . GROUP_URL . $data['id'] . '" class="med bold">' . $text . '</a></li>';
-            $options .= ($data['rg']) ? '<ul><li class="med">' . trans('messages.RELEASE_GROUP') . '</li>' : '<ul>';
+            $options .= $data['rg'] ? '<ul><li class="med">' . trans('messages.RELEASE_GROUP') . '</li>' : '<ul>';
             $options .= '<li class="seedmed">' . $members . '</li>';
             if (IS_AM) {
                 $options .= '<li class="leechmed">' . $candidates . '</li>';
@@ -173,14 +171,14 @@ if (!$group_id) {
         bb_die(trans('messages.THIS_CLOSED_GROUP'));
     }
 
-    $sql = "SELECT g.group_id, g.group_name, ug.user_id, u.user_email, u.username, u.user_lang
-		FROM " . BB_GROUPS . " g
-		LEFT JOIN " . BB_USERS . " u ON(u.user_id = g.group_moderator)
-		LEFT JOIN " . BB_USER_GROUP . " ug ON(ug.group_id = g.group_id AND ug.user_id = {$userdata['user_id']})
+    $sql = 'SELECT g.group_id, g.group_name, ug.user_id, u.user_email, u.username, u.user_lang
+		FROM ' . BB_GROUPS . ' g
+		LEFT JOIN ' . BB_USERS . ' u ON(u.user_id = g.group_moderator)
+		LEFT JOIN ' . BB_USER_GROUP . " ug ON(ug.group_id = g.group_id AND ug.user_id = {$userdata['user_id']})
 		WHERE g.group_id = $group_id
 			AND group_single_user = 0
-			AND g.group_type = " . GROUP_OPEN . "
-		LIMIT 1";
+			AND g.group_type = " . GROUP_OPEN . '
+		LIMIT 1';
 
     $row = $moderator = OLD_DB()->fetch_row($sql);
 
@@ -266,8 +264,8 @@ if (!$group_id) {
                 }
 
                 if (!empty($_POST['approve'])) {
-                    OLD_DB()->query("
-						UPDATE " . BB_USER_GROUP . " SET
+                    OLD_DB()->query('
+						UPDATE ' . BB_USER_GROUP . " SET
 							user_pending = 0
 						WHERE user_id IN($sql_in)
 							AND group_id = $group_id
@@ -275,8 +273,8 @@ if (!$group_id) {
 
                     update_user_level($sql_in);
                 } elseif (!empty($_POST['deny']) || !empty($_POST['remove'])) {
-                    OLD_DB()->query("
-						DELETE FROM " . BB_USER_GROUP . "
+                    OLD_DB()->query('
+						DELETE FROM ' . BB_USER_GROUP . "
 						WHERE user_id IN($sql_in)
 							AND group_id = $group_id
 					");
@@ -287,8 +285,8 @@ if (!$group_id) {
                 }
                 // Email users when they are approved
                 if (!empty($_POST['approve']) && config('tp.group_send_email')) {
-                    $sql_select = "SELECT username, user_email, user_lang
-						FROM " . BB_USERS . "
+                    $sql_select = 'SELECT username, user_email, user_lang
+						FROM ' . BB_USERS . "
 						WHERE user_id IN($sql_in)";
 
                     if (!$result = OLD_DB()->sql_query($sql_select)) {
@@ -319,20 +317,20 @@ if (!$group_id) {
     // END approve or deny
 
     // Get moderator details for this group
-    $group_moderator = OLD_DB()->fetch_row("
+    $group_moderator = OLD_DB()->fetch_row('
 		SELECT *
-		FROM " . BB_USERS . "
-		WHERE user_id = " . $group_info['group_moderator'] . "
-	");
+		FROM ' . BB_USERS . '
+		WHERE user_id = ' . $group_info['group_moderator'] . '
+	');
 
     // Current user membership
     $is_group_member = $is_group_pending_member = false;
 
-    $sql = "SELECT user_pending
-		FROM " . BB_USER_GROUP . "
+    $sql = 'SELECT user_pending
+		FROM ' . BB_USER_GROUP . "
 		WHERE group_id = $group_id
-			AND user_id = " . $userdata['user_id'] . "
-		LIMIT 1";
+			AND user_id = " . $userdata['user_id'] . '
+		LIMIT 1';
 
     if ($row = OLD_DB()->fetch_row($sql)) {
         if ($row['user_pending'] == 0) {
@@ -348,9 +346,9 @@ if (!$group_id) {
     } elseif ($is_group_member || $is_group_pending_member) {
         $template->assign_vars(array(
             'SHOW_UNSUBSCRIBE_CONTROLS' => true,
-            'CONTROL_NAME' => ($is_group_member) ? 'unsub' : 'unsubpending',
+            'CONTROL_NAME' => $is_group_member ? 'unsub' : 'unsubpending',
         ));
-        $group_details = ($is_group_pending_member) ? trans('messages.PENDING_THIS_GROUP') : trans('messages.MEMBER_THIS_GROUP');
+        $group_details = $is_group_pending_member ? trans('messages.PENDING_THIS_GROUP') : trans('messages.MEMBER_THIS_GROUP');
         $s_hidden_fields = '<input type="hidden" name="' . POST_GROUPS_URL . '" value="' . $group_id . '" />';
     } elseif (IS_GUEST) {
         $group_details = trans('messages.LOGIN_TO_JOIN');
@@ -405,12 +403,12 @@ if (!$group_id) {
         'MOD_EMAIL' => $email,
         'MOD_WWW' => $www,
         'MOD_TIME' => (!empty($group_info['mod_time'])) ? bb_date($group_info['mod_time']) : trans('messages.NONE'),
-        'U_SEARCH_USER' => "search.php?mode=searchuser",
+        'U_SEARCH_USER' => 'search.php?mode=searchuser',
         'U_SEARCH_RELEASES' => "tracker.php?srg=$group_id",
-        'U_GROUP_RELEASES' => "group.php?view=releases&amp;" . POST_GROUPS_URL . "=$group_id",
-        'U_GROUP_MEMBERS' => "group.php?view=members&amp;" . POST_GROUPS_URL . "=$group_id",
+        'U_GROUP_RELEASES' => 'group.php?view=releases&amp;' . POST_GROUPS_URL . "=$group_id",
+        'U_GROUP_MEMBERS' => 'group.php?view=members&amp;' . POST_GROUPS_URL . "=$group_id",
         'U_GROUP_CONFIG' => "group_edit.php?g=$group_id",
-        'RELEASE_GROUP' => ($group_info['release_group']) ? true : false,
+        'RELEASE_GROUP' => $group_info['release_group'] ? true : false,
         'GROUP_TYPE' => $group_type,
 
         'S_GROUP_OPEN_TYPE' => GROUP_OPEN,
@@ -423,7 +421,7 @@ if (!$group_id) {
         'S_MODE_SELECT' => $select_sort_mode,
         'S_ORDER_SELECT' => $select_sort_order,
 
-        'S_GROUP_ACTION' => "group.php?" . POST_GROUPS_URL . "=$group_id",
+        'S_GROUP_ACTION' => 'group.php?' . POST_GROUPS_URL . "=$group_id",
     ));
 
     switch ($view_mode) {
@@ -436,26 +434,26 @@ if (!$group_id) {
             }
 
             // Count releases for pagination
-            $all_releases = OLD_DB()->fetch_rowset("
+            $all_releases = OLD_DB()->fetch_rowset('
 				SELECT p.topic_id, p.forum_id, p.poster_id, t.topic_title, t.topic_time, f.forum_name, u.username, u.avatar_ext_id, u.user_opt, u.user_rank
-				FROM " . BB_POSTS . " p
-				LEFT JOIN " . BB_TOPICS . " t ON(p.topic_id = t.topic_id)
-				LEFT JOIN " . BB_FORUMS . " f ON(p.forum_id= f.forum_id)
-				LEFT JOIN " . BB_USERS . " u ON(p.poster_id = u.user_id)
+				FROM ' . BB_POSTS . ' p
+				LEFT JOIN ' . BB_TOPICS . ' t ON(p.topic_id = t.topic_id)
+				LEFT JOIN ' . BB_FORUMS . ' f ON(p.forum_id= f.forum_id)
+				LEFT JOIN ' . BB_USERS . " u ON(p.poster_id = u.user_id)
 				WHERE p.poster_rg_id = $group_id
 				ORDER BY t.topic_time DESC
 				LIMIT $rel_limit
 			");
             $count_releases = count($all_releases);
 
-            generate_pagination(GROUP_URL . $group_id . "&amp;view=releases", $count_releases, $per_page, $start);
+            generate_pagination(GROUP_URL . $group_id . '&amp;view=releases', $count_releases, $per_page, $start);
 
-            $sql = "
+            $sql = '
 				SELECT p.topic_id, p.forum_id, p.poster_id, t.topic_title, t.topic_time, f.forum_name, u.username, u.avatar_ext_id, u.user_opt, u.user_rank
-				FROM " . BB_POSTS . " p
-				LEFT JOIN " . BB_TOPICS . " t ON(p.topic_id = t.topic_id)
-				LEFT JOIN " . BB_FORUMS . " f ON(p.forum_id= f.forum_id)
-				LEFT JOIN " . BB_USERS . " u ON(p.poster_id = u.user_id)
+				FROM ' . BB_POSTS . ' p
+				LEFT JOIN ' . BB_TOPICS . ' t ON(p.topic_id = t.topic_id)
+				LEFT JOIN ' . BB_FORUMS . ' f ON(p.forum_id= f.forum_id)
+				LEFT JOIN ' . BB_USERS . " u ON(p.poster_id = u.user_id)
 				WHERE p.poster_rg_id = $group_id
 				ORDER BY t.topic_time DESC
 				LIMIT $start, $per_page
@@ -490,24 +488,24 @@ if (!$group_id) {
         default:
 
             // Members
-            $count_members = OLD_DB()->fetch_rowset("
+            $count_members = OLD_DB()->fetch_rowset('
 				SELECT u.username, u.user_rank, u.user_id, u.user_opt, u.user_posts, u.user_regdate, u.user_from, u.user_website, u.user_email, ug.user_pending, ug.user_time
-				FROM " . BB_USER_GROUP . " ug, " . BB_USERS . " u
+				FROM ' . BB_USER_GROUP . ' ug, ' . BB_USERS . " u
 				WHERE ug.group_id = $group_id
 					AND ug.user_pending = 0
-					AND ug.user_id <> " . $group_moderator['user_id'] . "
+					AND ug.user_id <> " . $group_moderator['user_id'] . '
 					AND u.user_id = ug.user_id
 				ORDER BY u.username
-			");
+			');
             $count_members = count($count_members);
 
             // Get user information for this group
             $modgroup_pending_count = 0;
 
             // Members
-            $group_members = OLD_DB()->fetch_rowset("
+            $group_members = OLD_DB()->fetch_rowset('
 				SELECT u.username, u.avatar_ext_id, u.user_rank, u.user_id, u.user_opt, u.user_posts, u.user_regdate, u.user_from, u.user_website, u.user_email, ug.user_pending, ug.user_time
-				FROM " . BB_USER_GROUP . " ug, " . BB_USERS . " u
+				FROM ' . BB_USER_GROUP . ' ug, ' . BB_USERS . " u
 				WHERE ug.group_id = $group_id
 					AND ug.user_pending = 0
 					AND ug.user_id <> " . $group_moderator['user_id'] . "
@@ -561,9 +559,9 @@ if (!$group_id) {
 
             // Pending
             if ($is_moderator) {
-                $modgroup_pending_list = OLD_DB()->fetch_rowset("
+                $modgroup_pending_list = OLD_DB()->fetch_rowset('
 					SELECT u.username, u.avatar_ext_id, u.user_rank, u.user_id, u.user_opt, u.user_posts, u.user_regdate, u.user_from, u.user_website, u.user_email
-					FROM " . BB_USER_GROUP . " ug, " . BB_USERS . " u
+					FROM ' . BB_USER_GROUP . ' ug, ' . BB_USERS . " u
 					WHERE ug.group_id = $group_id
 						AND ug.user_pending = 1
 						AND u.user_id = ug.user_id

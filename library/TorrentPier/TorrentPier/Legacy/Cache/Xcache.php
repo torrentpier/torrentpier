@@ -64,7 +64,6 @@ class Xcache extends Common
 
         xcache_clear_cache(XC_TYPE_PHP, 0);
         xcache_clear_cache(XC_TYPE_VAR, 0);
-        return;
     }
 
     public function is_installed()

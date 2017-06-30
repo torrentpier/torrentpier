@@ -69,7 +69,7 @@ $select_sort_order .= '</select>';
 $template->assign_vars(array(
     'S_MODE_SELECT' => $select_sort_mode,
     'S_ORDER_SELECT' => $select_sort_order,
-    'S_MODE_ACTION' => "memberlist.php",
+    'S_MODE_ACTION' => 'memberlist.php',
     'S_USERNAME' => $paginationusername,
 ));
 
@@ -126,18 +126,18 @@ if ($by_letter_req) {
 
 // ENG
 for ($i = ord('A'), $cnt = ord('Z'); $i <= $cnt; $i++) {
-    $select_letter .= ($by_letter == chr($i)) ? '<b>' . chr($i) . '</b>&nbsp;' : '<a class="genmed" href="' . ("memberlist.php?letter=" . chr($i) . "&amp;mode=$mode&amp;order=$sort_order") . '">' . chr($i) . '</a>&nbsp;';
+    $select_letter .= ($by_letter == chr($i)) ? '<b>' . chr($i) . '</b>&nbsp;' : '<a class="genmed" href="' . ('memberlist.php?letter=' . chr($i) . "&amp;mode=$mode&amp;order=$sort_order") . '">' . chr($i) . '</a>&nbsp;';
 }
 // RUS
 $select_letter .= ': ';
 for ($i = 224, $cnt = 255; $i <= $cnt; $i++) {
-    $select_letter .= ($by_letter == iconv('windows-1251', 'UTF-8', chr($i))) ? '<b>' . iconv('windows-1251', 'UTF-8', chr($i - 32)) . '</b>&nbsp;' : '<a class="genmed" href="' . ("memberlist.php?letter=%" . strtoupper(base_convert($i, 10, 16)) . "&amp;mode=$mode&amp;order=$sort_order") . '">' . iconv('windows-1251', 'UTF-8', chr($i - 32)) . '</a>&nbsp;';
+    $select_letter .= ($by_letter == iconv('windows-1251', 'UTF-8', chr($i))) ? '<b>' . iconv('windows-1251', 'UTF-8', chr($i - 32)) . '</b>&nbsp;' : '<a class="genmed" href="' . ('memberlist.php?letter=%' . strtoupper(base_convert($i, 10, 16)) . "&amp;mode=$mode&amp;order=$sort_order") . '">' . iconv('windows-1251', 'UTF-8', chr($i - 32)) . '</a>&nbsp;';
 }
 
 $select_letter .= ':&nbsp;';
-$select_letter .= ($by_letter == 'others') ? '<b>' . trans('messages.OTHERS') . '</b>&nbsp;' : '<a class="genmed" href="' . ("memberlist.php?letter=others&amp;mode=$mode&amp;order=$sort_order") . '">' . trans('messages.OTHERS') . '</a>&nbsp;';
+$select_letter .= ($by_letter == 'others') ? '<b>' . trans('messages.OTHERS') . '</b>&nbsp;' : '<a class="genmed" href="' . "memberlist.php?letter=others&amp;mode=$mode&amp;order=$sort_order" . '">' . trans('messages.OTHERS') . '</a>&nbsp;';
 $select_letter .= ':&nbsp;';
-$select_letter .= ($by_letter == 'all') ? '<b>' . trans('messages.ALL') . '</b>' : '<a class="genmed" href="' . ("memberlist.php?letter=all&amp;mode=$mode&amp;order=$sort_order") . '">' . trans('messages.ALL') . '</a>';
+$select_letter .= ($by_letter == 'all') ? '<b>' . trans('messages.ALL') . '</b>' : '<a class="genmed" href="' . "memberlist.php?letter=all&amp;mode=$mode&amp;order=$sort_order" . '">' . trans('messages.ALL') . '</a>';
 
 $template->assign_vars(array(
     'S_LETTER_SELECT' => $select_letter,
@@ -145,12 +145,12 @@ $template->assign_vars(array(
 ));
 
 // per-letter selection end
-$sql = "SELECT username, user_id, user_rank, user_opt, user_posts, user_regdate, user_from, user_website, user_email FROM " . BB_USERS . " WHERE user_id NOT IN(" . EXCLUDED_USERS . ")";
+$sql = 'SELECT username, user_id, user_rank, user_opt, user_posts, user_regdate, user_from, user_website, user_email FROM ' . BB_USERS . ' WHERE user_id NOT IN(' . EXCLUDED_USERS . ')';
 if ($username) {
     $username = preg_replace('/\*/', '%', clean_username($username));
     $letter_sql = "username LIKE '" . OLD_DB()->escape($username) . "'";
 }
-$sql .= ($letter_sql) ? " AND $letter_sql" : '';
+$sql .= $letter_sql ? " AND $letter_sql" : '';
 $sql .= " ORDER BY $order_by";
 
 if ($result = OLD_DB()->fetch_rowset($sql)) {
@@ -159,7 +159,7 @@ if ($result = OLD_DB()->fetch_rowset($sql)) {
         $from = $row['user_from'];
         $joined = bb_date($row['user_regdate'], config('tp.date_format'));
         $posts = $row['user_posts'];
-        $pm = '<a class="txtb" href="' . (PM_URL . "?mode=post&amp;" . POST_USERS_URL . "=$user_id") . '">' . trans('messages.SEND_PM_TXTB') . '</a>';
+        $pm = '<a class="txtb" href="' . (PM_URL . '?mode=post&amp;' . POST_USERS_URL . "=$user_id") . '">' . trans('messages.SEND_PM_TXTB') . '</a>';
 
         if (bf($row['user_opt'], 'user_opt', 'user_viewemail') || IS_ADMIN) {
             $email_uri = config('tp.board_email_form') ? ('profile.php?mode=email&amp;' . POST_USERS_URL . "=$user_id") : 'mailto:' . $row['user_email'];
@@ -200,8 +200,8 @@ if ($paginationusername) {
     $paginationurl .= "&amp;username=$paginationusername";
 }
 if ($mode != 'topten' || config('tp.topics_per_page') < 10) {
-    $sql = "SELECT COUNT(*) AS total FROM " . BB_USERS;
-    $sql .= ($letter_sql) ? " WHERE $letter_sql" : " WHERE user_id NOT IN(". EXCLUDED_USERS .")";
+    $sql = 'SELECT COUNT(*) AS total FROM ' . BB_USERS;
+    $sql .= $letter_sql ? " WHERE $letter_sql" : ' WHERE user_id NOT IN(' . EXCLUDED_USERS . ')';
     if (!$result = OLD_DB()->sql_query($sql)) {
         bb_die('Error getting total users');
     }

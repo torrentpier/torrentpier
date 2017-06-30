@@ -41,8 +41,7 @@ function prepare_post(&$mode, &$post_data, &$error_msg, &$username, &$subject, &
     }
 
     // Check message
-    if (!empty($message)) {
-    } elseif ($mode != 'delete') {
+    if (empty($message) && $mode != 'delete') {
         $error_msg .= (!empty($error_msg)) ? '<br />' . trans('messages.EMPTY_MESSAGE') : trans('messages.EMPTY_MESSAGE');
     }
 
@@ -71,10 +70,10 @@ function submit_post($mode, &$post_data, &$message, &$meta, &$forum_id, &$topic_
 
     // Flood control
     $row = null;
-    $where_sql = (IS_GUEST) ? "p.poster_ip = '" . USER_IP . "'" : "p.poster_id = {$userdata['user_id']}";
+    $where_sql = IS_GUEST ? "p.poster_ip = '" . USER_IP . "'" : "p.poster_id = {$userdata['user_id']}";
 
     if ($mode == 'newtopic' || $mode == 'reply') {
-        $sql = "SELECT MAX(p.post_time) AS last_post_time FROM " . BB_POSTS . " p WHERE $where_sql";
+        $sql = 'SELECT MAX(p.post_time) AS last_post_time FROM ' . BB_POSTS . " p WHERE $where_sql";
 
         if ($row = OLD_DB()->fetch_row($sql) && $row['last_post_time']) {
             if ($userdata['user_level'] == USER) {
@@ -87,15 +86,15 @@ function submit_post($mode, &$post_data, &$message, &$meta, &$forum_id, &$topic_
 
     // Double Post Control
     if ($mode != 'editpost' && !empty($row['last_post_time']) && !IS_AM) {
-        $sql = "
+        $sql = '
 			SELECT pt.post_text
-			FROM " . BB_POSTS . " p, " . BB_POSTS_TEXT . " pt
+			FROM ' . BB_POSTS . ' p, ' . BB_POSTS_TEXT . " pt
 			WHERE
 					$where_sql
-				AND p.post_time = " . (int)$row['last_post_time'] . "
+				AND p.post_time = " . (int)$row['last_post_time'] . '
 				AND pt.post_id = p.post_id
 			LIMIT 1
-		";
+		';
 
         if ($row = OLD_DB()->fetch_row($sql)) {
             $last_msg = OLD_DB()->escape($row['post_text']);
@@ -109,16 +108,16 @@ function submit_post($mode, &$post_data, &$message, &$meta, &$forum_id, &$topic_
     if ($mode == 'newtopic' || ($mode == 'editpost' && $post_data['first_post'])) {
         $topic_dl_type = (isset($_POST['topic_dl_type']) && ($post_info['allow_reg_tracker'] || $is_auth['auth_mod'])) ? TOPIC_DL_TYPE_DL : TOPIC_DL_TYPE_NORMAL;
 
-        $sql_insert = "
+        $sql_insert = '
 			INSERT INTO
-				" . BB_TOPICS . " (topic_title, topic_poster, topic_time, forum_id, topic_status, topic_type, topic_dl_type)
+				' . BB_TOPICS . " (topic_title, topic_poster, topic_time, forum_id, topic_status, topic_type, topic_dl_type)
 			VALUES
 				('$post_subject', " . $userdata['user_id'] . ", $current_time, $forum_id, " . TOPIC_UNLOCKED . ", $topic_type, $topic_dl_type)
 		";
 
-        $sql_update = "
+        $sql_update = '
 			UPDATE
-				" . BB_TOPICS . "
+				' . BB_TOPICS . "
 			SET
 				topic_title = '$post_subject',
 				topic_type = $topic_type,
@@ -127,7 +126,7 @@ function submit_post($mode, &$post_data, &$message, &$meta, &$forum_id, &$topic_
 				topic_id = $topic_id
 		";
 
-        $sql = ($mode != "editpost") ? $sql_insert : $sql_update;
+        $sql = ($mode != 'editpost') ? $sql_insert : $sql_update;
 
         if (!OLD_DB()->sql_query($sql)) {
             bb_die('Error in posting #1');
@@ -138,15 +137,15 @@ function submit_post($mode, &$post_data, &$message, &$meta, &$forum_id, &$topic_
         }
     }
 
-    $edited_sql = ($mode == 'editpost' && !$post_data['last_post'] && $post_data['poster_post']) ? ", post_edit_time = $current_time, post_edit_count = post_edit_count + 1" : "";
+    $edited_sql = ($mode == 'editpost' && !$post_data['last_post'] && $post_data['poster_post']) ? ", post_edit_time = $current_time, post_edit_count = post_edit_count + 1" : '';
 
     if ($update_post_time && $mode == 'editpost' && $post_data['last_post'] && !$post_data['first_post']) {
         $edited_sql .= ", post_time = $current_time ";
         //lpt
-        OLD_DB()->sql_query("UPDATE " . BB_TOPICS . " SET topic_last_post_time = $current_time WHERE topic_id = $topic_id");
+        OLD_DB()->sql_query('UPDATE ' . BB_TOPICS . " SET topic_last_post_time = $current_time WHERE topic_id = $topic_id");
     }
 
-    $sql = ($mode != "editpost") ? "INSERT INTO " . BB_POSTS . " (topic_id, forum_id, poster_id, post_username, post_time, poster_ip, poster_rg_id, attach_rg_sig) VALUES ($topic_id, $forum_id, " . $userdata['user_id'] . ", '$post_username', $current_time, '" . USER_IP . "', $poster_rg_id, $attach_rg_sig)" : "UPDATE " . BB_POSTS . " SET post_username = '$post_username'" . $edited_sql . ", poster_rg_id = $poster_rg_id, attach_rg_sig = $attach_rg_sig WHERE post_id = $post_id";
+    $sql = ($mode != 'editpost') ? 'INSERT INTO ' . BB_POSTS . " (topic_id, forum_id, poster_id, post_username, post_time, poster_ip, poster_rg_id, attach_rg_sig) VALUES ($topic_id, $forum_id, " . $userdata['user_id'] . ", '$post_username', $current_time, '" . USER_IP . "', $poster_rg_id, $attach_rg_sig)" : 'UPDATE ' . BB_POSTS . " SET post_username = '$post_username'" . $edited_sql . ", poster_rg_id = $poster_rg_id, attach_rg_sig = $attach_rg_sig WHERE post_id = $post_id";
     if (!OLD_DB()->sql_query($sql)) {
         bb_die('Error in posting #2');
     }
@@ -155,7 +154,7 @@ function submit_post($mode, &$post_data, &$message, &$meta, &$forum_id, &$topic_
         $post_id = OLD_DB()->sql_nextid();
     }
 
-    $sql = ($mode != 'editpost') ? "INSERT INTO " . BB_POSTS_TEXT . " (post_id, post_text) VALUES ($post_id, '$post_message')" : "UPDATE " . BB_POSTS_TEXT . " SET post_text = '$post_message' WHERE post_id = $post_id";
+    $sql = ($mode != 'editpost') ? 'INSERT INTO ' . BB_POSTS_TEXT . " (post_id, post_text) VALUES ($post_id, '$post_message')" : 'UPDATE ' . BB_POSTS_TEXT . " SET post_text = '$post_message' WHERE post_id = $post_id";
     if (!OLD_DB()->sql_query($sql)) {
         bb_die('Error in posting #3');
     }
@@ -210,8 +209,8 @@ function update_post_stats($mode, $post_data, $forum_id, $topic_id, $post_id, $u
             } else {
                 $topic_update_sql .= 'topic_replies = topic_replies - 1';
 
-                $sql = "SELECT MAX(post_id) AS last_post_id, MAX(post_time) AS topic_last_post_time
-					FROM " . BB_POSTS . "
+                $sql = 'SELECT MAX(post_id) AS last_post_id, MAX(post_time) AS topic_last_post_time
+					FROM ' . BB_POSTS . "
 					WHERE topic_id = $topic_id";
                 if (!($result = OLD_DB()->sql_query($sql))) {
                     bb_die('Error in deleting post #1');
@@ -223,19 +222,19 @@ function update_post_stats($mode, $post_data, $forum_id, $topic_id, $post_id, $u
             }
 
             if ($post_data['last_topic']) {
-                $sql = "SELECT MAX(post_id) AS last_post_id
-					FROM " . BB_POSTS . "
+                $sql = 'SELECT MAX(post_id) AS last_post_id
+					FROM ' . BB_POSTS . "
 					WHERE forum_id = $forum_id";
                 if (!($result = OLD_DB()->sql_query($sql))) {
                     bb_die('Error in deleting post #2');
                 }
 
                 if ($row = OLD_DB()->sql_fetchrow($result)) {
-                    $forum_update_sql .= ($row['last_post_id']) ? ', forum_last_post_id = ' . $row['last_post_id'] : ', forum_last_post_id = 0';
+                    $forum_update_sql .= $row['last_post_id'] ? ', forum_last_post_id = ' . $row['last_post_id'] : ', forum_last_post_id = 0';
                 }
             }
         } elseif ($post_data['first_post']) {
-            $sql = "SELECT MIN(post_id) AS first_post_id FROM " . BB_POSTS . " WHERE topic_id = $topic_id";
+            $sql = 'SELECT MIN(post_id) AS first_post_id FROM ' . BB_POSTS . " WHERE topic_id = $topic_id";
             if (!($result = OLD_DB()->sql_query($sql))) {
                 bb_die('Error in deleting post #3');
             }
@@ -247,23 +246,23 @@ function update_post_stats($mode, $post_data, $forum_id, $topic_id, $post_id, $u
             $topic_update_sql .= 'topic_replies = topic_replies - 1';
         }
     } else {
-        $forum_update_sql .= ", forum_last_post_id = $post_id" . (($mode == 'newtopic') ? ", forum_topics = forum_topics $sign" : "");
+        $forum_update_sql .= ", forum_last_post_id = $post_id" . (($mode == 'newtopic') ? ", forum_topics = forum_topics $sign" : '');
         $topic_update_sql = "topic_last_post_id = $post_id, topic_last_post_time = " . TIMENOW . (($mode == 'reply') ? ", topic_replies = topic_replies $sign" : ", topic_first_post_id = $post_id");
     }
 
-    $sql = "UPDATE " . BB_FORUMS . " SET $forum_update_sql WHERE forum_id = $forum_id";
+    $sql = 'UPDATE ' . BB_FORUMS . " SET $forum_update_sql WHERE forum_id = $forum_id";
     if (!OLD_DB()->sql_query($sql)) {
         bb_die('Error in posting #4');
     }
 
     if ($topic_update_sql != '') {
-        $sql = "UPDATE " . BB_TOPICS . " SET $topic_update_sql WHERE topic_id = $topic_id";
+        $sql = 'UPDATE ' . BB_TOPICS . " SET $topic_update_sql WHERE topic_id = $topic_id";
         if (!OLD_DB()->sql_query($sql)) {
             bb_die('Error in posting #5');
         }
     }
 
-    $sql = "UPDATE " . BB_USERS . " SET user_posts = user_posts $sign WHERE user_id = $user_id";
+    $sql = 'UPDATE ' . BB_USERS . " SET user_posts = user_posts $sign WHERE user_id = $user_id";
     if (!OLD_DB()->sql_query($sql)) {
         bb_die('Error in posting #6');
     }
@@ -295,22 +294,22 @@ function user_notification($mode, &$post_data, &$topic_title, &$forum_id, &$topi
         if ($mode == 'reply') {
             $update_watched_sql = $user_id_sql = array();
 
-            $sql = OLD_DB()->fetch_rowset("SELECT ban_userid FROM " . BB_BANLIST . " WHERE ban_userid != 0");
+            $sql = OLD_DB()->fetch_rowset('SELECT ban_userid FROM ' . BB_BANLIST . ' WHERE ban_userid != 0');
 
             foreach ($sql as $row) {
                 $user_id_sql[] = ',' . $row['ban_userid'];
             }
             $user_id_sql = implode('', $user_id_sql);
 
-            $watch_list = OLD_DB()->fetch_rowset("SELECT u.username, u.user_id, u.user_email, u.user_lang
-				FROM " . BB_TOPICS_WATCH . " tw, " . BB_USERS . " u
+            $watch_list = OLD_DB()->fetch_rowset('SELECT u.username, u.user_id, u.user_email, u.user_lang
+				FROM ' . BB_TOPICS_WATCH . ' tw, ' . BB_USERS . " u
 				WHERE tw.topic_id = $topic_id
-					AND tw.user_id NOT IN (" . $userdata['user_id'] . ", " . EXCLUDED_USERS . $user_id_sql . ")
-					AND tw.notify_status = " . TOPIC_WATCH_NOTIFIED . "
+					AND tw.user_id NOT IN (" . $userdata['user_id'] . ', ' . EXCLUDED_USERS . $user_id_sql . ')
+					AND tw.notify_status = ' . TOPIC_WATCH_NOTIFIED . '
 					AND u.user_id = tw.user_id
 					AND u.user_active = 1
 				ORDER BY u.user_id
-			");
+			');
 
             if ($watch_list) {
                 $orig_word = $replacement_word = array();
@@ -348,23 +347,23 @@ function user_notification($mode, &$post_data, &$topic_title, &$forum_id, &$topi
             }
 
             if ($update_watched_sql) {
-                OLD_DB()->query("UPDATE " . BB_TOPICS_WATCH . "
-					SET notify_status = " . TOPIC_WATCH_UNNOTIFIED . "
+                OLD_DB()->query('UPDATE ' . BB_TOPICS_WATCH . '
+					SET notify_status = ' . TOPIC_WATCH_UNNOTIFIED . "
 					WHERE topic_id = $topic_id
 						AND user_id IN ($update_watched_sql)
 				");
             }
         }
 
-        $topic_watch = OLD_DB()->fetch_row("SELECT topic_id FROM " . BB_TOPICS_WATCH . " WHERE topic_id = $topic_id AND user_id = {$userdata['user_id']}", 'topic_id');
+        $topic_watch = OLD_DB()->fetch_row('SELECT topic_id FROM ' . BB_TOPICS_WATCH . " WHERE topic_id = $topic_id AND user_id = {$userdata['user_id']}", 'topic_id');
 
         if (!$notify_user && !empty($topic_watch)) {
-            OLD_DB()->query("DELETE FROM " . BB_TOPICS_WATCH . " WHERE topic_id = $topic_id AND user_id = {$userdata['user_id']}");
+            OLD_DB()->query('DELETE FROM ' . BB_TOPICS_WATCH . " WHERE topic_id = $topic_id AND user_id = {$userdata['user_id']}");
         } elseif ($notify_user && empty($topic_watch)) {
-            OLD_DB()->query("
-				INSERT INTO " . BB_TOPICS_WATCH . " (user_id, topic_id, notify_status)
-				VALUES (" . $userdata['user_id'] . ", $topic_id, " . TOPIC_WATCH_NOTIFIED . ")
-			");
+            OLD_DB()->query('
+				INSERT INTO ' . BB_TOPICS_WATCH . ' (user_id, topic_id, notify_status)
+				VALUES (' . $userdata['user_id'] . ", $topic_id, " . TOPIC_WATCH_NOTIFIED . ')
+			');
         }
     }
 }
@@ -386,8 +385,8 @@ function insert_post($mode, $topic_id, $forum_id = '', $old_forum_id = '', $new_
             return;
         }
 
-        $sql = "SELECT forum_id, forum_name
-			FROM " . BB_FORUMS . "
+        $sql = 'SELECT forum_id, forum_name
+			FROM ' . BB_FORUMS . "
 			WHERE forum_id IN($forum_id, $old_forum_id)";
 
         $forum_names = array();
@@ -408,8 +407,8 @@ function insert_post($mode, $topic_id, $forum_id = '', $old_forum_id = '', $new_
         $poster_id = BOT_UID;
         $poster_ip = '7f000001';
     } elseif ($mode == 'after_split_to_new') {
-        $sql = "SELECT t.topic_title, p.post_time
-			FROM " . BB_TOPICS . " t, " . BB_POSTS . " p
+        $sql = 'SELECT t.topic_title, p.post_time
+			FROM ' . BB_TOPICS . ' t, ' . BB_POSTS . " p
 			WHERE t.topic_id = $old_topic_id
 				AND p.post_id = t.topic_first_post_id";
 
@@ -430,7 +429,7 @@ function insert_post($mode, $topic_id, $forum_id = '', $old_forum_id = '', $new_
     $post_columns = 'topic_id,  forum_id,  poster_id,   post_username,   post_time,   poster_ip';
     $post_values = "$topic_id, $forum_id, $poster_id, '$post_username', $post_time, '$poster_ip'";
 
-    OLD_DB()->query("INSERT INTO " . BB_POSTS . " ($post_columns) VALUES ($post_values)");
+    OLD_DB()->query('INSERT INTO ' . BB_POSTS . " ($post_columns) VALUES ($post_values)");
 
     $post_id = OLD_DB()->sql_nextid();
     $post_text = OLD_DB()->escape($post_text);
@@ -438,7 +437,7 @@ function insert_post($mode, $topic_id, $forum_id = '', $old_forum_id = '', $new_
     $post_text_columns = 'post_id,    post_text';
     $post_text_values = "$post_id, '$post_text'";
 
-    OLD_DB()->query("INSERT INTO " . BB_POSTS_TEXT . " ($post_text_columns) VALUES ($post_text_values)");
+    OLD_DB()->query('INSERT INTO ' . BB_POSTS_TEXT . " ($post_text_columns) VALUES ($post_text_values)");
 }
 
 function topic_review($topic_id)
@@ -446,18 +445,18 @@ function topic_review($topic_id)
     global $template;
 
     // Fetch posts data
-    $review_posts = OLD_DB()->fetch_rowset("
+    $review_posts = OLD_DB()->fetch_rowset('
 		SELECT
 			p.*, h.post_html, IF(h.post_html IS NULL, pt.post_text, NULL) AS post_text,
-			IF(p.poster_id = " . GUEST_UID . ", p.post_username, u.username) AS username, u.user_rank
-		FROM      " . BB_POSTS . " p
-		LEFT JOIN " . BB_USERS . " u  ON(u.user_id = p.poster_id)
-		LEFT JOIN " . BB_POSTS_TEXT . " pt ON(pt.post_id = p.post_id)
-		LEFT JOIN " . BB_POSTS_HTML . " h  ON(h.post_id = p.post_id)
-		WHERE p.topic_id = " . (int)$topic_id . "
+			IF(p.poster_id = ' . GUEST_UID . ', p.post_username, u.username) AS username, u.user_rank
+		FROM      ' . BB_POSTS . ' p
+		LEFT JOIN ' . BB_USERS . ' u  ON(u.user_id = p.poster_id)
+		LEFT JOIN ' . BB_POSTS_TEXT . ' pt ON(pt.post_id = p.post_id)
+		LEFT JOIN ' . BB_POSTS_HTML . ' h  ON(h.post_id = p.post_id)
+		WHERE p.topic_id = ' . (int)$topic_id . '
 		ORDER BY p.post_time DESC
-		LIMIT " . config('tp.posts_per_page') . "
-	");
+		LIMIT ' . config('tp.posts_per_page') . '
+	');
 
     // Topic posts block
     foreach ($review_posts as $i => $post) {

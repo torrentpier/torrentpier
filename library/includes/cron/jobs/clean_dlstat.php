@@ -32,54 +32,54 @@ foreach ($keeping_dlstat as $dl_status => $days_to_keep) {
 }
 
 if ($delete_dlstat_sql = implode(') OR (', $delete_dlstat_sql)) {
-    OLD_DB()->query("DELETE QUICK FROM " . BB_BT_DLSTATUS . " WHERE ($delete_dlstat_sql)");
+    OLD_DB()->query('DELETE QUICK FROM ' . BB_BT_DLSTATUS . " WHERE ($delete_dlstat_sql)");
 }
 
 // Delete orphans
-OLD_DB()->query("
+OLD_DB()->query('
 	DELETE QUICK dl
-	FROM " . BB_BT_DLSTATUS . " dl
-	LEFT JOIN " . BB_USERS . " u USING(user_id)
+	FROM ' . BB_BT_DLSTATUS . ' dl
+	LEFT JOIN ' . BB_USERS . ' u USING(user_id)
 	WHERE u.user_id IS NULL
-");
+');
 
-OLD_DB()->query("
+OLD_DB()->query('
 	DELETE QUICK dl
-	FROM " . BB_BT_DLSTATUS . " dl
-	LEFT JOIN " . BB_TOPICS . " t USING(topic_id)
+	FROM ' . BB_BT_DLSTATUS . ' dl
+	LEFT JOIN ' . BB_TOPICS . ' t USING(topic_id)
 	WHERE t.topic_id IS NULL
-");
+');
 
 // Tor-Stats cleanup
 if ($torstat_days_keep = (int)config('tp.torstat_days_keep')) {
-    OLD_DB()->query("DELETE QUICK FROM " . BB_BT_TORSTAT . " WHERE last_modified_torstat < DATE_SUB(NOW(), INTERVAL $torstat_days_keep DAY)");
+    OLD_DB()->query('DELETE QUICK FROM ' . BB_BT_TORSTAT . " WHERE last_modified_torstat < DATE_SUB(NOW(), INTERVAL $torstat_days_keep DAY)");
 }
 
-OLD_DB()->query("
+OLD_DB()->query('
 	DELETE QUICK tst
-	FROM " . BB_BT_TORSTAT . " tst
-	LEFT JOIN " . BB_BT_TORRENTS . " tor USING(topic_id)
+	FROM ' . BB_BT_TORSTAT . ' tst
+	LEFT JOIN ' . BB_BT_TORRENTS . ' tor USING(topic_id)
 	WHERE tor.topic_id IS NULL
-");
+');
 
-OLD_DB()->query("
+OLD_DB()->query('
 	UPDATE
-		" . BB_BT_USERS . "
+		' . BB_BT_USERS . '
 	SET
 		up_yesterday         = up_today,
 		down_yesterday       = down_today,
 		up_release_yesterday = up_release_today,
 		up_bonus_yesterday   = up_bonus_today,
 		points_yesterday     = points_today
-");
+');
 
-OLD_DB()->query("
+OLD_DB()->query('
 	UPDATE
-		" . BB_BT_USERS . "
+		' . BB_BT_USERS . '
 	SET
 		up_today             = 0,
 		down_today           = 0,
 		up_release_today     = 0,
 		up_bonus_today       = 0,
 		points_today         = 0
-");
+');

@@ -22,18 +22,18 @@ if (!isset($this->request['type'])) {
 $attach_id = (int)$this->request['attach_id'];
 $type = (string)$this->request['type'];
 
-$torrent = OLD_DB()->fetch_row("
+$torrent = OLD_DB()->fetch_row('
 		SELECT
 			a.post_id, d.physical_filename, d.extension, d.tracker_status,
 			t.topic_first_post_id,
 			p.poster_id, p.topic_id, p.forum_id,
 			f.allow_reg_tracker
 		FROM
-			" . BB_ATTACHMENTS . " a,
-			" . BB_ATTACHMENTS_DESC . " d,
-			" . BB_POSTS . " p,
-			" . BB_TOPICS . " t,
-			" . BB_FORUMS . " f
+			' . BB_ATTACHMENTS . ' a,
+			' . BB_ATTACHMENTS_DESC . ' d,
+			' . BB_POSTS . ' p,
+			' . BB_TOPICS . ' t,
+			' . BB_FORUMS . " f
 		WHERE
 			    a.attach_id = $attach_id
 			AND d.attach_id = $attach_id

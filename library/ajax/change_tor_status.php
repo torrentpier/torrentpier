@@ -24,12 +24,12 @@ if (config('tp.tor_comment')) {
     $comment = (string)$this->request['comment'];
 }
 
-$tor = OLD_DB()->fetch_row("
+$tor = OLD_DB()->fetch_row('
 	SELECT
 		tor.poster_id, tor.forum_id, tor.topic_id, tor.tor_status, tor.checked_time, tor.checked_user_id, f.cat_id, t.topic_title
-	FROM       " . BB_BT_TORRENTS . " tor
-	INNER JOIN " . BB_FORUMS . " f ON(f.forum_id = tor.forum_id)
-	INNER JOIN " . BB_TOPICS . " t ON(t.topic_id = tor.topic_id)
+	FROM       ' . BB_BT_TORRENTS . ' tor
+	INNER JOIN ' . BB_FORUMS . ' f ON(f.forum_id = tor.forum_id)
+	INNER JOIN ' . BB_TOPICS . " t ON(t.topic_id = tor.topic_id)
 	WHERE tor.attach_id = $attach_id
 	LIMIT 1
 ");
@@ -68,7 +68,7 @@ switch ($mode) {
             if (!IS_ADMIN) {
                 $this->verify_mod_rights($tor['forum_id']);
             }
-            OLD_DB()->query("UPDATE " . BB_TOPICS . " SET topic_status = " . TOPIC_UNLOCKED . " WHERE topic_id = {$tor['topic_id']}");
+            OLD_DB()->query('UPDATE ' . BB_TOPICS . ' SET topic_status = ' . TOPIC_UNLOCKED . " WHERE topic_id = {$tor['topic_id']}");
         } else {
             $this->verify_mod_rights($tor['forum_id']);
         }
@@ -77,7 +77,7 @@ switch ($mode) {
         if ($tor['tor_status'] != TOR_NOT_APPROVED && $tor['checked_user_id'] != $userdata['user_id'] && $tor['checked_time'] + 2 * 3600 > TIMENOW) {
             if (empty($this->request['confirmed'])) {
                 $msg = trans('messages.TOR_STATUS_OF') . ' ' . trans('messages.TOR_STATUS_NAME.' . $tor['tor_status']) . "\n\n";
-                $msg .= ($username = get_username($tor['checked_user_id'])) ? trans('messages.TOR_STATUS_CHANGED') . html_entity_decode($username) . ", " . delta_time($tor['checked_time']) . trans('messages.TOR_BACK') . "\n\n" : "";
+                $msg .= ($username = get_username($tor['checked_user_id'])) ? trans('messages.TOR_STATUS_CHANGED') . html_entity_decode($username) . ', ' . delta_time($tor['checked_time']) . trans('messages.TOR_BACK') . "\n\n" : '';
                 $msg .= trans('messages.PROCEED') . '?';
                 $this->prompt_for_confirm($msg);
             }

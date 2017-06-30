@@ -25,13 +25,13 @@ if (!empty($_GET[POST_USERS_URL]) || !empty($_POST[POST_USERS_URL])) {
 }
 
 if (!$userdata['session_logged_in']) {
-    redirectToUrl(LOGIN_URL . "?redirect=profile.php&mode=email&" . POST_USERS_URL . "=$user_id");
+    redirectToUrl(LOGIN_URL . '?redirect=profile.php&mode=email&' . POST_USERS_URL . "=$user_id");
 }
 
 $errors = array();
 
-$sql = "SELECT username, user_id, user_rank, user_email, user_lang
-	FROM " . BB_USERS . "
+$sql = 'SELECT username, user_id, user_rank, user_email, user_lang
+	FROM ' . BB_USERS . "
 	WHERE user_id = $user_id
 ";
 
@@ -77,8 +77,8 @@ if ($row = OLD_DB()->fetch_row($sql)) {
     $template->assign_vars(array(
         'USERNAME' => profile_url($row),
         'S_HIDDEN_FIELDS' => '',
-        'S_POST_ACTION' => "profile.php?mode=email&amp;" . POST_USERS_URL . "=$user_id",
-        'ERROR_MESSAGE' => ($errors) ? implode('<br />', array_unique($errors)) : '',
+        'S_POST_ACTION' => 'profile.php?mode=email&amp;' . POST_USERS_URL . "=$user_id",
+        'ERROR_MESSAGE' => $errors ? implode('<br />', array_unique($errors)) : '',
     ));
 
     print_page('usercp_email.tpl');
