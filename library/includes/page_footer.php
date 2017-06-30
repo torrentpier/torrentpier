@@ -87,7 +87,7 @@ echo '
 
 if (defined('REQUESTED_PAGE') && !defined('DISABLE_CACHING_OUTPUT')) {
     if (IS_GUEST === true) {
-        caching_output(true, 'store', REQUESTED_PAGE . '_guest_' . config('tp.default_lang'));
+        caching_output(true, 'store', REQUESTED_PAGE . '_guest_' . config('app.locale'));
     }
 }
 

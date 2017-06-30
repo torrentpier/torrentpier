@@ -30,7 +30,7 @@ $template_name = basename(__DIR__);
 
 $_img = BB_ROOT . 'styles/images/';
 $_main = BB_ROOT . 'styles/' . basename(TEMPLATES_DIR) . '/' . $template_name . '/images/';
-$_lang = $_main . 'lang/' . basename(config('tp.default_lang')) . '/';
+$_lang = $_main . 'lang/' . basename(config('app.locale')) . '/';
 
 // post_buttons
 $images['icon_quote'] = $_lang . 'icon_quote.gif';

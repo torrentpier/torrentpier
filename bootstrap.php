@@ -128,9 +128,6 @@ $container->singleton('config', function () {
         ],
     ]);
 
-    $config->set('app.locale', 'ru');
-    $config->set('app.fallback_locale', 'source');
-
     return $config;
 });
 

@@ -87,7 +87,7 @@ switch ($mode) {
             'user_password' => '',
             'user_email' => '',
             'user_timezone' => config('tp.board_timezone'),
-            'user_lang' => config('tp.default_lang'),
+            'user_lang' => config('app.locale'),
             'user_opt' => 0,
             'avatar_ext_id' => 0,
         );
@@ -282,7 +282,7 @@ foreach ($profile_fields as $field => $can_edit) {
         case 'user_timezone':
             $user_timezone = isset($_POST['user_timezone']) ? (int)$_POST['user_timezone'] : $pr_data['user_timezone'];
             if ($submit && ($user_timezone != $pr_data['user_timezone'] || $mode == 'register')) {
-                if (!empty(trans('messages.TZ.' . $user_timezone))) {
+                if (trans('messages.TZ.' . $user_timezone) !== 'messages.TZ.' . $user_timezone) {
                     $pr_data['user_timezone'] = $user_timezone;
                     $db_data['user_timezone'] = $user_timezone;
                 }

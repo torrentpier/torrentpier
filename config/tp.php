@@ -376,8 +376,6 @@ return [
     'copyright_holders_url' => 'info.php?show=copyright_holders',
     'advert_url' => 'info.php?show=advert',
 
-    'default_lang_dir' => LANG_ROOT_DIR . '/en/',
-
     /**
      * Extensions
      */

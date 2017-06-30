@@ -52,7 +52,7 @@ switch ($field) {
         if (!config('tp.gender')) {
             $this->ajax_die(trans('messages.MODULE_OFF'));
         }
-        if (empty(trans('messages.GENDER_SELECT.' . $value))) {
+        if (trans('messages.GENDER_SELECT.' . $value) === 'messages.GENDER_SELECT.' . $value) {
             $this->ajax_die(trans('messages.ERROR'));
         } else {
             $this->response['new_value'] = trans('messages.GENDER_SELECT.' . $value);

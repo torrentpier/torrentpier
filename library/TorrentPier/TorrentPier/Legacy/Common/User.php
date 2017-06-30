@@ -560,7 +560,7 @@ class User
             }
         }
 
-        $this->data['user_lang'] = config('tp.default_lang');
+        $this->data['user_lang'] = config('app.locale');
         $this->data['user_timezone'] = config('tp.board_timezone');
 
         setlocale(LC_ALL, config('language.lang.' . $this->data['user_lang'] . '.locale') ?? 'en_US.UTF-8');

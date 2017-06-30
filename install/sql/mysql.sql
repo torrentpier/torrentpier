@@ -512,7 +512,6 @@ INSERT INTO `bb_config` VALUES ('bt_tor_browse_only_reg', '0');
 INSERT INTO `bb_config` VALUES ('bt_unset_dltype_on_tor_unreg', '1');
 INSERT INTO `bb_config` VALUES ('cron_last_check', '0');
 INSERT INTO `bb_config` VALUES ('default_dateformat', 'Y-m-d H:i');
-INSERT INTO `bb_config` VALUES ('default_lang', 'ru');
 INSERT INTO `bb_config` VALUES ('flood_interval', '15');
 INSERT INTO `bb_config` VALUES ('hot_threshold', '300');
 INSERT INTO `bb_config` VALUES ('login_reset_time', '30');

@@ -124,14 +124,14 @@ class Emailer
     public function set_template($template_file, $template_lang = '')
     {
         if (!$template_lang) {
-            $template_lang = config('tp.default_lang');
+            $template_lang = config('app.locale');
         }
 
         if (empty($this->tpl_msg[$template_lang . $template_file])) {
             $tpl_file = LANG_ROOT_DIR . '/' . $template_lang . '/email/' . $template_file . '.html';
 
             if (!file_exists($tpl_file)) {
-                $tpl_file = LANG_ROOT_DIR . '/' . config('tp.default_lang') . '/email/' . $template_file . '.html';
+                $tpl_file = LANG_ROOT_DIR . '/' . config('app.fallback_locale') . '/email/' . $template_file . '.html';
 
                 /** @noinspection NotOptimalIfConditionsInspection */
                 if (!file_exists($tpl_file)) {

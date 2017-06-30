@@ -82,10 +82,6 @@
 	<td><input class="post" type="text" name="hot_threshold" size="5" maxlength="4" value="{HOT_TOPIC}" /></td>
 </tr>
 <tr>
-	<td><h4>{L_DEFAULT_LANGUAGE}</h4></td>
-	<td>{LANG_SELECT}</td>
-</tr>
-<tr>
 	<td><h4>{L_DATE_FORMAT}</h4><h6>{L_DATE_FORMAT_EXPLAIN}</h6></td>
 	<td><input class="post" type="text" name="default_dateformat" value="{DEFAULT_DATEFORMAT}" /></td>
 </tr>

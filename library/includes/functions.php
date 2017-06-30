@@ -1305,7 +1305,7 @@ function bb_die($msg_text)
     }
 
     // Check for lang variable
-    if (!empty(trans('messages.' . $msg_text))) {
+    if (trans('messages.' . $msg_text) !== 'messages.' . $msg_text) {
         $msg_text = trans('messages.' . $msg_text);
     }
 

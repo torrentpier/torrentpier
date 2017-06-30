@@ -21,7 +21,7 @@ switch ($mode) {
         $status = (int)$this->request['status'];
 
         // Валидность статуса
-        if (empty(trans('messages.TOR_STATUS_NAME.' . $status))) {
+        if (trans('messages.TOR_STATUS_NAME.' . $status) === 'messages.TOR_STATUS_NAME.' . $status) {
             $this->ajax_die(trans('messages.STATUS_DOES_EXIST') . $new_status);
         }
 

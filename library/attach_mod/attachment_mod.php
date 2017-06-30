@@ -38,9 +38,6 @@ function get_config()
         $attach_config[$row['config_name']] = trim($row['config_value']);
     }
 
-    // We assign the original default board language here, because it gets overwritten later with the users default language
-    $attach_config['board_lang'] = trim(config('tp.default_lang'));
-
     return $attach_config;
 }
 

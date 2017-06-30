@@ -44,7 +44,7 @@ $req_page = 'index_page';
 $req_page .= ($viewcat) ? "_c{$viewcat}" : '';
 
 define('REQUESTED_PAGE', $req_page);
-caching_output(IS_GUEST, 'send', REQUESTED_PAGE . '_guest_' . config('tp.default_lang'));
+caching_output(IS_GUEST, 'send', REQUESTED_PAGE . '_guest_' . config('app.locale'));
 
 $hide_cat_opt = isset($user->opt_js['h_cat']) ? (string)$user->opt_js['h_cat'] : 0;
 $hide_cat_user = array_flip(explode('-', $hide_cat_opt));
