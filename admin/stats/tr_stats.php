@@ -31,7 +31,7 @@ echo '<br /><br /><table border="1" cellspacing="0" cellpadding="6" align="cente
 
 foreach ($sql as $i => $query) {
     $row = mysqli_fetch_row(OLD_DB()->query($query));
-    echo "<tr><td>" . trans('messages.TR_STATS.' . $i) . "</td><td><b>{$row[0]}</b></td>";
+    echo '<tr><td>' . trans('messages.TR_STATS.' . $i) . "</td><td><b>{$row[0]}</b></td>";
 }
 
 echo '</table>';

@@ -23,9 +23,9 @@ if (config('tp.seed_bonus_enabled') && config('tp.seed_bonus_points') && config(
 
     $tor_size = (config('tp.seed_bonus_tor_size') * 1073741824);
 
-    OLD_DB()->query("INSERT INTO tmp_bonus
+    OLD_DB()->query('INSERT INTO tmp_bonus
 		SELECT bt.user_id, count(bt.seeder) AS release_count
-			FROM " . BB_BT_TRACKER . " bt, " . BB_BT_TORRENTS . " tor
+			FROM ' . BB_BT_TRACKER . ' bt, ' . BB_BT_TORRENTS . " tor
 			WHERE tor.topic_id = bt.topic_id
 				AND tor.size   > $tor_size
 				AND bt.seeder  > 0
@@ -44,8 +44,8 @@ if (config('tp.seed_bonus_enabled') && config('tp.seed_bonus_points') && config(
         $release = (int)$seed_release[$i];
         $user_regdate = (TIMENOW - config('tp.seed_bonus_user_regdate') * 86400);
 
-        OLD_DB()->query("
-			UPDATE " . BB_USERS . " u, " . BB_BT_USERS . " bu, tmp_bonus b
+        OLD_DB()->query('
+			UPDATE ' . BB_USERS . ' u, ' . BB_BT_USERS . " bu, tmp_bonus b
 			SET
 				u.user_points       = u.user_points + '$user_points',
 				bu.points_today     = bu.points_today + '$user_points',
@@ -56,9 +56,9 @@ if (config('tp.seed_bonus_enabled') && config('tp.seed_bonus_points') && config(
 				AND b.release_count <= $release
 				AND u.user_regdate  <  $user_regdate
 				AND u.user_active   =  1
-				AND u.user_id       not IN(" . EXCLUDED_USERS . ")
-		");
+				AND u.user_id       not IN(" . EXCLUDED_USERS . ')
+		');
     }
 
-    OLD_DB()->query("DROP TEMPORARY TABLE IF EXISTS tmp_bonus");
+    OLD_DB()->query('DROP TEMPORARY TABLE IF EXISTS tmp_bonus');
 }

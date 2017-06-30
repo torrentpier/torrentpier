@@ -78,7 +78,7 @@ $tor_auth_del = ($tor_auth && $tor_reged);
 $tracker_link = $tor_reged ? trans('messages.BT_REG_YES') : trans('messages.BT_REG_NO');
 
 $download_link = DOWNLOAD_URL . $attach_id;
-$description = $comment ?: preg_replace("#.torrent$#i", '', $display_name);
+$description = $comment ?: preg_replace('#.torrent$#i', '', $display_name);
 
 if ($tor_auth_reg || $tor_auth_del) {
     $reg_tor_url = '<a class="txtb" href="#" onclick="ajax.exec({ action: \'change_torrent\', attach_id : ' . $attach_id . ', type: \'reg\'}); return false;">' . trans('messages.BT_REG_ON_TRACKER') . '</a>';
@@ -107,9 +107,9 @@ if (!$tor_reged) {
         $template->assign_block_vars('postrow.attach.tor_not_reged.comment', array('COMMENT' => $comment));
     }
 } else {
-    $sql = "SELECT bt.*, u.user_id, u.username, u.user_rank
-		FROM " . BB_BT_TORRENTS . " bt
-		LEFT JOIN " . BB_USERS . " u ON(bt.checked_user_id = u.user_id)
+    $sql = 'SELECT bt.*, u.user_id, u.username, u.user_rank
+		FROM ' . BB_BT_TORRENTS . ' bt
+		LEFT JOIN ' . BB_USERS . " u ON(bt.checked_user_id = u.user_id)
 		WHERE bt.attach_id = $attach_id";
 
     if (!$result = OLD_DB()->sql_query($sql)) {
@@ -120,7 +120,7 @@ if (!$tor_reged) {
 }
 
 if ($tor_reged && !$tor_info) {
-    OLD_DB()->query("UPDATE " . BB_ATTACHMENTS_DESC . " SET tracker_status = 0 WHERE attach_id = $attach_id");
+    OLD_DB()->query('UPDATE ' . BB_ATTACHMENTS_DESC . " SET tracker_status = 0 WHERE attach_id = $attach_id");
 
     bb_die('Torrent status fixed');
 }
@@ -142,7 +142,7 @@ if ($tor_reged && $tor_info) {
     $tor_type = $tor_info['tor_type'];
 
     // Magnet link
-    $passkey = OLD_DB()->fetch_row("SELECT auth_key FROM " . BB_BT_USERS . " WHERE user_id = " . (int)$bt_user_id . " LIMIT 1");
+    $passkey = OLD_DB()->fetch_row('SELECT auth_key FROM ' . BB_BT_USERS . ' WHERE user_id = ' . (int)$bt_user_id . ' LIMIT 1');
     $tor_magnet = create_magnet($tor_info['info_hash'], $passkey['auth_key'], $userdata['session_logged_in']);
 
     // ratio limits
@@ -152,14 +152,14 @@ if ($tor_reged && $tor_info) {
     $user_ratio = 0;
 
     if (($min_ratio_dl || $min_ratio_warn) && $bt_user_id != $poster_id) {
-        $sql = "SELECT u.*, dl.user_status
-			FROM " . BB_BT_USERS . " u
-			LEFT JOIN " . BB_BT_DLSTATUS . " dl ON dl.user_id = $bt_user_id AND dl.topic_id = $bt_topic_id
+        $sql = 'SELECT u.*, dl.user_status
+			FROM ' . BB_BT_USERS . ' u
+			LEFT JOIN ' . BB_BT_DLSTATUS . " dl ON dl.user_id = $bt_user_id AND dl.topic_id = $bt_topic_id
 			WHERE u.user_id = $bt_user_id
 			LIMIT 1";
     } else {
-        $sql = "SELECT user_status
-			FROM " . BB_BT_DLSTATUS . "
+        $sql = 'SELECT user_status
+			FROM ' . BB_BT_DLSTATUS . "
 			WHERE user_id = $bt_user_id
 				AND topic_id = $bt_topic_id
 			LIMIT 1";
@@ -270,24 +270,24 @@ if ($tor_reged && $tor_info) {
         }
         // SQL for each mode
         if ($s_mode == 'count') {
-            $sql = "SELECT seeders, leechers, speed_up, speed_down
-				FROM " . BB_BT_TRACKER_SNAP . "
+            $sql = 'SELECT seeders, leechers, speed_up, speed_down
+				FROM ' . BB_BT_TRACKER_SNAP . "
 				WHERE topic_id = $tor_id
 				LIMIT 1";
         } elseif ($s_mode == 'names') {
-            $sql = "SELECT tr.user_id, tr.ip, tr.port, tr.remain, tr.seeder, u.username, u.user_rank
-				FROM " . BB_BT_TRACKER . " tr, " . BB_USERS . " u
+            $sql = 'SELECT tr.user_id, tr.ip, tr.port, tr.remain, tr.seeder, u.username, u.user_rank
+				FROM ' . BB_BT_TRACKER . ' tr, ' . BB_USERS . " u
 				WHERE tr.topic_id = $tor_id
 					AND u.user_id = tr.user_id
 				ORDER BY u.username
 				LIMIT $show_peers_limit";
         } else {
-            $sql = "SELECT
+            $sql = 'SELECT
 					tr.user_id, tr.ip, tr.port, tr.uploaded, tr.downloaded, tr.remain,
 					tr.seeder, tr.releaser, tr.speed_up, tr.speed_down, tr.update_time,
 					tr.complete_percent, u.username, u.user_rank
-				FROM " . BB_BT_TRACKER . " tr
-				LEFT JOIN " . BB_USERS . " u ON u.user_id = tr.user_id
+				FROM ' . BB_BT_TRACKER . ' tr
+				LEFT JOIN ' . BB_USERS . " u ON u.user_id = tr.user_id
 				WHERE tr.topic_id = $tor_id
 				ORDER BY $full_mode_order $full_mode_sort_dir
 				LIMIT $show_peers_limit";
@@ -362,7 +362,7 @@ if ($tor_reged && $tor_info) {
             }
 
             foreach ($peers as $pid => $peer) {
-                $u_prof_href = ($s_mode == 'count') ? '#' : "profile.php?mode=viewprofile&amp;u=" . $peer['user_id'] . "#torrent";
+                $u_prof_href = ($s_mode == 'count') ? '#' : 'profile.php?mode=viewprofile&amp;u=' . $peer['user_id'] . '#torrent';
 
                 // Full details mode
                 if ($s_mode == 'full') {
@@ -382,7 +382,7 @@ if ($tor_reged && $tor_info) {
 
                         if (!defined('SEEDER_EXIST')) {
                             define('SEEDER_EXIST', true);
-                            $seed_order_action = "viewtopic.php?" . POST_TOPIC_URL . "=$bt_topic_id&amp;spmode=full#seeders";
+                            $seed_order_action = 'viewtopic.php?' . POST_TOPIC_URL . "=$bt_topic_id&amp;spmode=full#seeders";
 
                             $template->assign_block_vars("$x_full", array(
                                 'SEED_ORD_ACT' => $seed_order_action,
@@ -404,7 +404,7 @@ if ($tor_reged && $tor_info) {
 
                         if (!defined('LEECHER_EXIST')) {
                             define('LEECHER_EXIST', true);
-                            $leech_order_action = "viewtopic.php?" . POST_TOPIC_URL . "=$bt_topic_id&amp;spmode=full#leechers";
+                            $leech_order_action = 'viewtopic.php?' . POST_TOPIC_URL . "=$bt_topic_id&amp;spmode=full#leechers";
 
                             $template->assign_block_vars("$x_full", array(
                                 'LEECH_ORD_ACT' => $leech_order_action,
@@ -514,7 +514,7 @@ if ($tor_reged && $tor_info) {
 if (config('tp.bt_allow_spmode_change') && $s_mode != 'full') {
     $template->assign_vars(array(
         'PEERS_FULL_LINK' => true,
-        'SPMODE_FULL_HREF' => "viewtopic.php?" . POST_TOPIC_URL . "=$bt_topic_id&amp;spmode=full#seeders",
+        'SPMODE_FULL_HREF' => 'viewtopic.php?' . POST_TOPIC_URL . "=$bt_topic_id&amp;spmode=full#seeders",
     ));
 }
 

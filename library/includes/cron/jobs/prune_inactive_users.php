@@ -21,12 +21,12 @@ while (true) {
     $prune_users = $not_activated_users = $not_active_users = array();
 
     if ($not_activated_days = (int)config('tp.user_not_activated_days_keep')) {
-        $sql = OLD_DB()->fetch_rowset("SELECT user_id FROM " . BB_USERS . "
+        $sql = OLD_DB()->fetch_rowset('SELECT user_id FROM ' . BB_USERS . '
 			WHERE user_level      = 0
 			AND user_lastvisit    = 0
 			AND user_session_time = 0
-			AND user_regdate      <= " . (TIMENOW - 86400 * $not_activated_days) . "
-			AND user_id           NOT IN(" . EXCLUDED_USERS . ")
+			AND user_regdate      <= ' . (TIMENOW - 86400 * $not_activated_days) . '
+			AND user_id           NOT IN(' . EXCLUDED_USERS . ")
 			LIMIT $users_per_cycle");
 
         foreach ($sql as $row) {
@@ -35,11 +35,11 @@ while (true) {
     }
 
     if ($not_active_days = (int)config('tp.user_not_active_days_keep')) {
-        $sql = OLD_DB()->fetch_rowset("SELECT user_id FROM " . BB_USERS . "
+        $sql = OLD_DB()->fetch_rowset('SELECT user_id FROM ' . BB_USERS . '
 			WHERE user_level   = 0
 			AND user_posts     = 0
-			AND user_lastvisit <= " . (TIMENOW - 86400 * $not_active_days) . "
-			AND user_id        NOT IN(" . EXCLUDED_USERS . ")
+			AND user_lastvisit <= ' . (TIMENOW - 86400 * $not_active_days) . '
+			AND user_id        NOT IN(' . EXCLUDED_USERS . ")
 			LIMIT $users_per_cycle");
 
         foreach ($sql as $row) {

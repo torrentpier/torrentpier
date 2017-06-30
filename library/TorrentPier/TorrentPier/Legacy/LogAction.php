@@ -84,7 +84,7 @@ class LogAction
         ];
         $sql_args = OLD_DB()->build_array('INSERT', $sql_ary);
 
-        OLD_DB()->query("INSERT INTO " . BB_LOG . " $sql_args");
+        OLD_DB()->query('INSERT INTO ' . BB_LOG . " $sql_args");
     }
 
     /**

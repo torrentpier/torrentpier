@@ -13,7 +13,7 @@ if (!defined('BB_ROOT')) {
 
 $log_days_keep = (int)config('tp.log_days_keep');
 
-OLD_DB()->query("
-	DELETE FROM " . BB_LOG . "
-	WHERE log_time < " . (TIMENOW - 86400 * $log_days_keep) . "
-");
+OLD_DB()->query('
+	DELETE FROM ' . BB_LOG . '
+	WHERE log_time < ' . (TIMENOW - 86400 * $log_days_keep) . '
+');

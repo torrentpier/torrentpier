@@ -68,7 +68,7 @@ switch ($mode) {
 
         if (isset($mod['mod_groups'][$forum_id])) {
             foreach ($mod['mod_groups'][$forum_id] as $group_id) {
-                $moderators[] = '<a href="' . "group.php?" . POST_GROUPS_URL . "=" . $group_id . '">' . $mod['name_groups'][$group_id] . '</a>';
+                $moderators[] = '<a href="' . 'group.php?' . POST_GROUPS_URL . '=' . $group_id . '">' . $mod['name_groups'][$group_id] . '</a>';
             }
         }
 
@@ -88,7 +88,7 @@ switch ($mode) {
         }
         if ($tz != config('tp.board_timezone')) {
             // Set current user timezone
-            OLD_DB()->query("UPDATE " . BB_USERS . " SET user_timezone = $tz WHERE user_id = " . $userdata['user_id']);
+            OLD_DB()->query('UPDATE ' . BB_USERS . " SET user_timezone = $tz WHERE user_id = " . $userdata['user_id']);
             config(['tp.board_timezone' => $tz]);
             cache_rm_user_sessions($userdata['user_id']);
         }

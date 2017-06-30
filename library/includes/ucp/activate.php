@@ -15,9 +15,9 @@ if (empty($_GET['u']) || empty($_GET['act_key'])) {
     bb_die('Bad request');
 }
 
-$sql = "SELECT user_active, user_id, username, user_email, user_newpasswd, user_lang, user_actkey
-	FROM " . BB_USERS . "
-	WHERE user_id = " . (int)$_GET[POST_USERS_URL];
+$sql = 'SELECT user_active, user_id, username, user_email, user_newpasswd, user_lang, user_actkey
+	FROM ' . BB_USERS . '
+	WHERE user_id = ' . (int)$_GET[POST_USERS_URL];
 if (!($result = OLD_DB()->sql_query($sql))) {
     bb_die('Could not obtain user information');
 }
@@ -28,9 +28,9 @@ if ($row = OLD_DB()->sql_fetchrow($result)) {
     } elseif ((trim($row['user_actkey']) == trim($_GET['act_key'])) && (trim($row['user_actkey']) != '')) {
         $sql_update_pass = ($row['user_newpasswd'] != '') ? ", user_password = '" . md5(md5($row['user_newpasswd'])) . "', user_newpasswd = ''" : '';
 
-        $sql = "UPDATE " . BB_USERS . "
-			SET user_active = 1, user_actkey = ''" . $sql_update_pass . "
-			WHERE user_id = " . $row['user_id'];
+        $sql = 'UPDATE ' . BB_USERS . "
+			SET user_active = 1, user_actkey = ''" . $sql_update_pass . '
+			WHERE user_id = ' . $row['user_id'];
         if (!($result = OLD_DB()->sql_query($sql))) {
             bb_die('Could not update users table');
         }

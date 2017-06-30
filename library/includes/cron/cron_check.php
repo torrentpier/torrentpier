@@ -14,12 +14,12 @@ if (!defined('BB_ROOT')) {
 bb_log(date('H:i:s - ') . getmypid() . ' --x- SELECT jobs' . LOG_LF, CRON_LOG_DIR . '/cron_check');
 
 // Get cron jobs
-$cron_jobs = OLD_DB()->fetch_rowset("
-	SELECT * FROM " . BB_CRON . "
+$cron_jobs = OLD_DB()->fetch_rowset('
+	SELECT * FROM ' . BB_CRON . '
 	WHERE cron_active = 1
 		AND next_run <= NOW()
 	ORDER BY run_order
-");
+');
 
 // Run cron jobs
 if ($cron_jobs) {

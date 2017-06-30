@@ -74,7 +74,7 @@ $only_new = $user->opt_js['only_new'];
 
 // Validate requested category id
 if ($viewcat && !($viewcat =& $forums['c'][$viewcat]['cat_id'])) {
-    redirectToUrl("index.php");
+    redirectToUrl('index.php');
 }
 
 // Forums
@@ -88,14 +88,14 @@ $forums_join_sql .= $excluded_forums_csv ? "
 " : '';
 
 // Posts
-$posts_join_sql = "p.post_id = f.forum_last_post_id";
+$posts_join_sql = 'p.post_id = f.forum_last_post_id';
 $posts_join_sql .= ($only_new == ONLY_NEW_POSTS) ? "
 	AND p.post_time > $lastvisit
 " : '';
 $join_p_type = ($only_new == ONLY_NEW_POSTS) ? 'INNER JOIN' : 'LEFT JOIN';
 
 // Topics
-$topics_join_sql = "t.topic_last_post_id = p.post_id";
+$topics_join_sql = 't.topic_last_post_id = p.post_id';
 $topics_join_sql .= ($only_new == ONLY_NEW_TOPICS) ? "
 	AND t.topic_time > $lastvisit
 " : '';
@@ -108,13 +108,13 @@ $sql = "
 		t.topic_id AS last_topic_id, t.topic_title AS last_topic_title,
 		u.user_id AS last_post_user_id, u.user_rank AS last_post_user_rank,
 		IF(p.poster_id = $anon, p.post_username, u.username) AS last_post_username
-	FROM         " . BB_CATEGORIES . " c
-	INNER JOIN   " . BB_FORUMS . " f ON($forums_join_sql)
+	FROM         " . BB_CATEGORIES . ' c
+	INNER JOIN   ' . BB_FORUMS . " f ON($forums_join_sql)
 	$join_p_type " . BB_POSTS . " p ON($posts_join_sql)
 	$join_t_type " . BB_TOPICS . " t ON($topics_join_sql)
-	LEFT JOIN    " . BB_USERS . " u ON(u.user_id = p.poster_id)
+	LEFT JOIN    " . BB_USERS . ' u ON(u.user_id = p.poster_id)
 	ORDER BY c.cat_order, f.forum_order
-";
+';
 
 $replace_in_parent = array(
     'last_post_id',
@@ -191,7 +191,7 @@ foreach ($cat_forums as $cid => $c) {
     $template->assign_block_vars('h_c', array(
         'H_C_ID' => $cid,
         'H_C_TITLE' => $cat_title_html[$cid],
-        'H_C_CHEKED' => in_array($cid, preg_split("/[-]+/", $hide_cat_opt)) ? 'checked' : '',
+        'H_C_CHEKED' => in_array($cid, preg_split('/[-]+/', $hide_cat_opt)) ? 'checked' : '',
     ));
 
     $template->assign_vars(array(
@@ -297,10 +297,10 @@ $template->assign_vars(array(
     'ONLY_NEW_POSTS_ON' => $only_new == ONLY_NEW_POSTS,
     'ONLY_NEW_TOPICS_ON' => $only_new == ONLY_NEW_TOPICS,
 
-    'U_SEARCH_NEW' => "search.php?new=1",
+    'U_SEARCH_NEW' => 'search.php?new=1',
     'U_SEARCH_SELF_BY_MY' => "search.php?uid={$userdata['user_id']}&amp;o=1",
-    'U_SEARCH_LATEST' => "search.php?search_id=latest",
-    'U_SEARCH_UNANSWERED' => "search.php?search_id=unanswered",
+    'U_SEARCH_LATEST' => 'search.php?search_id=latest',
+    'U_SEARCH_UNANSWERED' => 'search.php?search_id=unanswered',
 
     'SHOW_LAST_TOPIC' => $show_last_topic,
 ));

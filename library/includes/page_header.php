@@ -22,7 +22,7 @@ $logged_in = (int)!empty($userdata['session_logged_in']);
 
 // Generate logged in/logged out status
 if ($logged_in) {
-    $u_login_logout = BB_ROOT . LOGIN_URL . "?logout=1";
+    $u_login_logout = BB_ROOT . LOGIN_URL . '?logout=1';
 } else {
     $u_login_logout = BB_ROOT . LOGIN_URL;
 }
@@ -78,13 +78,13 @@ if ($logged_in && empty($gen_simple_header) && !defined('IN_ADMIN')) {
     if (!$have_new_pm && $userdata['user_unread_privmsg']) {
         // synch unread pm count
         if (defined('IN_PM')) {
-            $row = OLD_DB()->fetch_row("
+            $row = OLD_DB()->fetch_row('
 				SELECT COUNT(*) AS pm_count
-				FROM " . BB_PRIVMSGS . "
-				WHERE privmsgs_to_userid = " . $userdata['user_id'] . "
-					AND privmsgs_type = " . PRIVMSGS_UNREAD_MAIL . "
+				FROM ' . BB_PRIVMSGS . '
+				WHERE privmsgs_to_userid = ' . $userdata['user_id'] . '
+					AND privmsgs_type = ' . PRIVMSGS_UNREAD_MAIL . '
 				GROUP BY privmsgs_to_userid
-			");
+			');
 
             $real_unread_pm_count = (int)$row['pm_count'];
 
@@ -122,7 +122,7 @@ $template->assign_vars(array(
     'USE_TABLESORTER' => !empty($page_cfg['use_tablesorter']),
 
     'SITENAME' => config('tp.sitename'),
-    'U_INDEX' => BB_ROOT . "index.php",
+    'U_INDEX' => BB_ROOT . 'index.php',
     'T_INDEX' => sprintf(trans('messages.FORUM_INDEX'), config('tp.sitename')),
 
     'IS_GUEST' => IS_GUEST,
@@ -151,20 +151,20 @@ $template->assign_vars(array(
     'S_LOGIN_ACTION' => LOGIN_URL,
 
     'U_CUR_DOWNLOADS' => PROFILE_URL . $userdata['user_id'],
-    'U_FORUM' => "viewforum.php",
-    'U_GROUPS' => "group.php",
+    'U_FORUM' => 'viewforum.php',
+    'U_GROUPS' => 'group.php',
     'U_LOGIN_LOGOUT' => $u_login_logout,
-    'U_MEMBERLIST' => "memberlist.php",
-    'U_MODCP' => "modcp.php",
-    'U_OPTIONS' => "profile.php?mode=editprofile",
-    'U_PRIVATEMSGS' => PM_URL . "?folder=inbox",
+    'U_MEMBERLIST' => 'memberlist.php',
+    'U_MODCP' => 'modcp.php',
+    'U_OPTIONS' => 'profile.php?mode=editprofile',
+    'U_PRIVATEMSGS' => PM_URL . '?folder=inbox',
     'U_PROFILE' => PROFILE_URL . $userdata['user_id'],
-    'U_READ_PM' => PM_URL . "?folder=inbox" . (($userdata['user_newest_pm_id'] && $userdata['user_new_privmsg'] == 1) ? "&mode=read&p={$userdata['user_newest_pm_id']}" : ''),
-    'U_REGISTER' => "profile.php?mode=register",
-    'U_SEARCH' => "search.php",
-    'U_SEND_PASSWORD' => "profile.php?mode=sendpassword",
+    'U_READ_PM' => PM_URL . '?folder=inbox' . (($userdata['user_newest_pm_id'] && $userdata['user_new_privmsg'] == 1) ? "&mode=read&p={$userdata['user_newest_pm_id']}" : ''),
+    'U_REGISTER' => 'profile.php?mode=register',
+    'U_SEARCH' => 'search.php',
+    'U_SEND_PASSWORD' => 'profile.php?mode=sendpassword',
     'U_TERMS' => config('tp.terms_and_conditions_url'),
-    'U_TRACKER' => "tracker.php",
+    'U_TRACKER' => 'tracker.php',
 
     'SHOW_SIDEBAR1' => !empty(config('page.show_sidebar1.' . BB_SCRIPT)) || config('tp.show_sidebar1_on_every_page'),
     'SHOW_SIDEBAR2' => !empty(config('page.show_sidebar2.' . BB_SCRIPT)) || config('tp.show_sidebar2_on_every_page'),
@@ -260,12 +260,12 @@ if (!empty(config('page.show_torhelp.' . BB_SCRIPT)) && !empty($userdata['torhel
             bb_setcookie('torhelp', '', COOKIE_EXPIRED);
         }
 
-        $sql = "
+        $sql = '
 			SELECT topic_id, topic_title
-			FROM " . BB_TOPICS . "
-			WHERE topic_id IN(" . $userdata['torhelp'] . ")
+			FROM ' . BB_TOPICS . '
+			WHERE topic_id IN(' . $userdata['torhelp'] . ')
 			LIMIT 8
-		";
+		';
         $torhelp_topics = array();
 
         foreach (OLD_DB()->fetch_rowset($sql) as $row) {

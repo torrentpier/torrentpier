@@ -66,8 +66,8 @@ if ($topic_id && isset($_GET['view']) && ($_GET['view'] == 'next' || $_GET['view
     $sql_condition = ($_GET['view'] == 'next') ? '>' : '<';
     $sql_ordering = ($_GET['view'] == 'next') ? 'ASC' : 'DESC';
 
-    $sql = "SELECT t.topic_id
-		FROM " . BB_TOPICS . " t, " . BB_TOPICS . " t2
+    $sql = 'SELECT t.topic_id
+		FROM ' . BB_TOPICS . ' t, ' . BB_TOPICS . " t2
 		WHERE t2.topic_id = $topic_id
 			AND t.forum_id = t2.forum_id
 			AND t.topic_moved_id = 0
@@ -85,18 +85,18 @@ if ($topic_id && isset($_GET['view']) && ($_GET['view'] == 'next' || $_GET['view
 
 // Get forum/topic data
 if ($topic_id) {
-    $sql = "SELECT t.*, f.*, tw.notify_status
-		FROM " . BB_TOPICS . " t
-		LEFT JOIN " . BB_FORUMS . " f USING(forum_id)
-		LEFT JOIN " . BB_TOPICS_WATCH . " tw ON(tw.topic_id = t.topic_id AND tw.user_id = {$userdata['user_id']})
+    $sql = 'SELECT t.*, f.*, tw.notify_status
+		FROM ' . BB_TOPICS . ' t
+		LEFT JOIN ' . BB_FORUMS . ' f USING(forum_id)
+		LEFT JOIN ' . BB_TOPICS_WATCH . " tw ON(tw.topic_id = t.topic_id AND tw.user_id = {$userdata['user_id']})
 		WHERE t.topic_id = $topic_id
 	";
 } elseif ($post_id) {
-    $sql = "SELECT t.*, f.*, p.post_time, tw.notify_status
-		FROM " . BB_TOPICS . " t
-		LEFT JOIN " . BB_FORUMS . " f  USING(forum_id)
-		LEFT JOIN " . BB_POSTS . " p  USING(topic_id)
-		LEFT JOIN " . BB_TOPICS_WATCH . " tw ON(tw.topic_id = t.topic_id AND tw.user_id = {$userdata['user_id']})
+    $sql = 'SELECT t.*, f.*, p.post_time, tw.notify_status
+		FROM ' . BB_TOPICS . ' t
+		LEFT JOIN ' . BB_FORUMS . ' f  USING(forum_id)
+		LEFT JOIN ' . BB_POSTS . ' p  USING(topic_id)
+		LEFT JOIN ' . BB_TOPICS_WATCH . " tw ON(tw.topic_id = t.topic_id AND tw.user_id = {$userdata['user_id']})
 		WHERE p.post_id = $post_id
 	";
 } else {
@@ -135,8 +135,8 @@ if (($next_topic_id || @$_GET['view'] === 'newest') && !IS_GUEST && $topic_id) {
     $post_time = 'post_time >= ' . get_last_read($topic_id, $forum_id);
     $post_id_altern = $next_topic_id ? '' : ' OR post_id = ' . $t_data['topic_last_post_id'];
 
-    $sql = "SELECT post_id, post_time
-		FROM " . BB_POSTS . "
+    $sql = 'SELECT post_id, post_time
+		FROM ' . BB_POSTS . "
 		WHERE topic_id = $topic_id
 			AND ($post_time $post_id_altern)
 		ORDER BY post_time ASC
@@ -149,8 +149,8 @@ if (($next_topic_id || @$_GET['view'] === 'newest') && !IS_GUEST && $topic_id) {
 }
 
 if ($post_id && !empty($t_data['post_time']) && ($t_data['topic_replies'] + 1) > $posts_per_page) {
-    $sql = "SELECT COUNT(post_id) AS prev_posts
-		FROM " . BB_POSTS . "
+    $sql = 'SELECT COUNT(post_id) AS prev_posts
+		FROM ' . BB_POSTS . "
 		WHERE topic_id = $topic_id
 			AND post_time <= {$t_data['post_time']}";
 
@@ -237,7 +237,7 @@ if (config('tp.topic_notify_enabled')) {
                 if ($_GET['unwatch'] == 'topic') {
                     $is_watching_topic = 0;
 
-                    OLD_DB()->query("DELETE FROM " . BB_TOPICS_WATCH . " WHERE topic_id = $topic_id AND user_id = {$userdata['user_id']}");
+                    OLD_DB()->query('DELETE FROM ' . BB_TOPICS_WATCH . " WHERE topic_id = $topic_id AND user_id = {$userdata['user_id']}");
                 }
 
                 set_die_append_msg($forum_id, $topic_id);
@@ -246,7 +246,7 @@ if (config('tp.topic_notify_enabled')) {
                 $is_watching_topic = true;
 
                 if (!$t_data['notify_status']) {
-                    OLD_DB()->query("UPDATE " . BB_TOPICS_WATCH . " SET notify_status = " . TOPIC_WATCH_NOTIFIED . " WHERE topic_id = $topic_id AND user_id = {$userdata['user_id']}");
+                    OLD_DB()->query('UPDATE ' . BB_TOPICS_WATCH . ' SET notify_status = ' . TOPIC_WATCH_NOTIFIED . " WHERE topic_id = $topic_id AND user_id = {$userdata['user_id']}");
                 }
             }
         } else {
@@ -254,10 +254,10 @@ if (config('tp.topic_notify_enabled')) {
                 if ($_GET['watch'] == 'topic') {
                     $is_watching_topic = true;
 
-                    OLD_DB()->query("
-						INSERT INTO " . BB_TOPICS_WATCH . " (user_id, topic_id, notify_status)
-						VALUES (" . $userdata['user_id'] . ", $topic_id, " . TOPIC_WATCH_NOTIFIED . ")
-					");
+                    OLD_DB()->query('
+						INSERT INTO ' . BB_TOPICS_WATCH . ' (user_id, topic_id, notify_status)
+						VALUES (' . $userdata['user_id'] . ", $topic_id, " . TOPIC_WATCH_NOTIFIED . ')
+					');
                 }
 
                 set_die_append_msg($forum_id, $topic_id);
@@ -269,7 +269,7 @@ if (config('tp.topic_notify_enabled')) {
     } else {
         if (isset($_GET['unwatch'])) {
             if ($_GET['unwatch'] == 'topic') {
-                redirectToUrl(LOGIN_URL . "?redirect=" . TOPIC_URL . "$topic_id&unwatch=topic");
+                redirectToUrl(LOGIN_URL . '?redirect=' . TOPIC_URL . "$topic_id&unwatch=topic");
             }
         }
     }
@@ -289,8 +289,8 @@ if (!empty($_REQUEST['postdays'])) {
         }
         $min_post_time = TIMENOW - ($post_days * 86400);
 
-        $sql = "SELECT COUNT(p.post_id) AS num_posts
-			FROM " . BB_TOPICS . " t, " . BB_POSTS . " p
+        $sql = 'SELECT COUNT(p.post_id) AS num_posts
+			FROM ' . BB_TOPICS . ' t, ' . BB_POSTS . " p
 			WHERE t.topic_id = $topic_id
 				AND p.topic_id = t.topic_id
 				AND p.post_time > $min_post_time";
@@ -309,7 +309,7 @@ $post_order = (isset($_POST['postorder']) && $_POST['postorder'] !== 'asc') ? 'd
 // 1. Add first post of topic if it pinned and page of topic not first
 $first_post = false;
 if ($t_data['topic_show_first_post'] && $start) {
-    $first_post = OLD_DB()->fetch_rowset("
+    $first_post = OLD_DB()->fetch_rowset('
 		SELECT
 			u.username, u.user_id, u.user_rank, u.user_posts, u.user_from,
 			u.user_regdate, u.user_sig,
@@ -318,19 +318,19 @@ if ($t_data['topic_show_first_post'] && $start) {
 			p.*, g.group_name, g.group_id, g.group_signature, g.avatar_ext_id as rg_avatar_id,
 			u2.username as mc_username, u2.user_rank as mc_user_rank,
 			h.post_html, IF(h.post_html IS NULL, pt.post_text, NULL) AS post_text
-		FROM      " . BB_POSTS . " p
-		LEFT JOIN " . BB_USERS . " u  ON(u.user_id = p.poster_id)
-		LEFT JOIN " . BB_POSTS_TEXT . " pt ON(pt.post_id = p.post_id)
-		LEFT JOIN " . BB_POSTS_HTML . " h  ON(h.post_id = p.post_id)
-		LEFT JOIN " . BB_USERS . " u2 ON(u2.user_id = p.mc_user_id)
-		LEFT JOIN " . BB_GROUPS . " g ON(g.group_id = p.poster_rg_id)
+		FROM      ' . BB_POSTS . ' p
+		LEFT JOIN ' . BB_USERS . ' u  ON(u.user_id = p.poster_id)
+		LEFT JOIN ' . BB_POSTS_TEXT . ' pt ON(pt.post_id = p.post_id)
+		LEFT JOIN ' . BB_POSTS_HTML . ' h  ON(h.post_id = p.post_id)
+		LEFT JOIN ' . BB_USERS . ' u2 ON(u2.user_id = p.mc_user_id)
+		LEFT JOIN ' . BB_GROUPS . " g ON(g.group_id = p.poster_rg_id)
 		WHERE
 			p.post_id = {$t_data['topic_first_post_id']}
 		LIMIT 1
 	");
 }
 // 2. All others posts
-$sql = "
+$sql = '
 	SELECT
 		u.username, u.user_id, u.user_rank, u.user_posts, u.user_from,
 		u.user_regdate, u.user_sig,
@@ -339,12 +339,12 @@ $sql = "
 		p.*, g.group_name, g.group_id, g.group_signature, g.avatar_ext_id as rg_avatar_id,
 		u2.username as mc_username, u2.user_rank as mc_user_rank,
 		h.post_html, IF(h.post_html IS NULL, pt.post_text, NULL) AS post_text
-	FROM      " . BB_POSTS . " p
-	LEFT JOIN " . BB_USERS . " u  ON(u.user_id = p.poster_id)
-	LEFT JOIN " . BB_POSTS_TEXT . " pt ON(pt.post_id = p.post_id)
-	LEFT JOIN " . BB_POSTS_HTML . " h  ON(h.post_id = p.post_id)
-	LEFT JOIN " . BB_USERS . " u2 ON(u2.user_id = p.mc_user_id)
-	LEFT JOIN " . BB_GROUPS . " g ON(g.group_id = p.poster_rg_id)
+	FROM      ' . BB_POSTS . ' p
+	LEFT JOIN ' . BB_USERS . ' u  ON(u.user_id = p.poster_id)
+	LEFT JOIN ' . BB_POSTS_TEXT . ' pt ON(pt.post_id = p.post_id)
+	LEFT JOIN ' . BB_POSTS_HTML . ' h  ON(h.post_id = p.post_id)
+	LEFT JOIN ' . BB_USERS . ' u2 ON(u2.user_id = p.mc_user_id)
+	LEFT JOIN ' . BB_GROUPS . " g ON(g.group_id = p.poster_rg_id)
 	WHERE p.topic_id = $topic_id
 		$limit_posts_time
 	GROUP BY p.post_id
@@ -376,11 +376,11 @@ if (count($orig_word)) {
 }
 
 // Post, reply and other URL generation for templating vars
-$new_topic_url = POSTING_URL . "?mode=newtopic&amp;f=" . $forum_id;
-$reply_topic_url = POSTING_URL . "?mode=reply&amp;t=" . $topic_id;
+$new_topic_url = POSTING_URL . '?mode=newtopic&amp;f=' . $forum_id;
+$reply_topic_url = POSTING_URL . '?mode=reply&amp;t=' . $topic_id;
 $view_forum_url = FORUM_URL . $forum_id;
-$view_prev_topic_url = TOPIC_URL . $topic_id . "&amp;view=previous#newest";
-$view_next_topic_url = TOPIC_URL . $topic_id . "&amp;view=next#newest";
+$view_prev_topic_url = TOPIC_URL . $topic_id . '&amp;view=previous#newest';
+$view_next_topic_url = TOPIC_URL . $topic_id . '&amp;view=next#newest';
 
 $reply_img = ($t_data['forum_status'] == FORUM_LOCKED || $t_data['topic_status'] == TOPIC_LOCKED) ? $images['reply_locked'] : $images['reply_new'];
 $reply_alt = ($t_data['forum_status'] == FORUM_LOCKED || $t_data['topic_status'] == TOPIC_LOCKED) ? trans('messages.TOPIC_LOCKED_SHORT') : trans('messages.REPLY_TO_TOPIC');
@@ -403,31 +403,31 @@ $s_auth_can .= ($is_auth['auth_download'] ? trans('messages.RULES_DOWNLOAD_CAN')
 $topic_mod = '';
 if ($is_auth['auth_mod']) {
     $s_auth_can .= trans('messages.RULES_MODERATE');
-    $topic_mod .= "<a href=\"modcp.php?" . POST_TOPIC_URL . "=$topic_id&amp;mode=delete&amp;sid=" . $userdata['session_id'] . '"><img src="' . $images['topic_mod_delete'] . '" alt="' . trans('messages.DELETE_TOPIC') . '" title="' . trans('messages.DELETE_TOPIC') . '" border="0" /></a>&nbsp;';
-    $topic_mod .= "<a href=\"modcp.php?" . POST_TOPIC_URL . "=$topic_id&amp;mode=move&amp;sid=" . $userdata['session_id'] . '"><img src="' . $images['topic_mod_move'] . '" alt="' . trans('messages.MOVE_TOPIC') . '" title="' . trans('messages.MOVE_TOPIC') . '" border="0" /></a>&nbsp;';
-    $topic_mod .= ($t_data['topic_status'] == TOPIC_UNLOCKED) ? "<a href=\"modcp.php?" . POST_TOPIC_URL . "=$topic_id&amp;mode=lock&amp;sid=" . $userdata['session_id'] . '"><img src="' . $images['topic_mod_lock'] . '" alt="' . trans('messages.LOCK_TOPIC') . '" title="' . trans('messages.LOCK_TOPIC') . '" border="0" /></a>&nbsp;' : "<a href=\"modcp.php?" . POST_TOPIC_URL . "=$topic_id&amp;mode=unlock&amp;sid=" . $userdata['session_id'] . '"><img src="' . $images['topic_mod_unlock'] . '" alt="' . trans('messages.UNLOCK_TOPIC') . '" title="' . trans('messages.UNLOCK_TOPIC') . '" border="0" /></a>&nbsp;';
-    $topic_mod .= "<a href=\"modcp.php?" . POST_TOPIC_URL . "=$topic_id&amp;mode=split&amp;sid=" . $userdata['session_id'] . '"><img src="' . $images['topic_mod_split'] . '" alt="' . trans('messages.SPLIT_TOPIC') . '" title="' . trans('messages.SPLIT_TOPIC') . '" border="0" /></a>&nbsp;';
+    $topic_mod .= '<a href="modcp.php?' . POST_TOPIC_URL . "=$topic_id&amp;mode=delete&amp;sid=" . $userdata['session_id'] . '"><img src="' . $images['topic_mod_delete'] . '" alt="' . trans('messages.DELETE_TOPIC') . '" title="' . trans('messages.DELETE_TOPIC') . '" border="0" /></a>&nbsp;';
+    $topic_mod .= '<a href="modcp.php?' . POST_TOPIC_URL . "=$topic_id&amp;mode=move&amp;sid=" . $userdata['session_id'] . '"><img src="' . $images['topic_mod_move'] . '" alt="' . trans('messages.MOVE_TOPIC') . '" title="' . trans('messages.MOVE_TOPIC') . '" border="0" /></a>&nbsp;';
+    $topic_mod .= ($t_data['topic_status'] == TOPIC_UNLOCKED) ? '<a href="modcp.php?' . POST_TOPIC_URL . "=$topic_id&amp;mode=lock&amp;sid=" . $userdata['session_id'] . '"><img src="' . $images['topic_mod_lock'] . '" alt="' . trans('messages.LOCK_TOPIC') . '" title="' . trans('messages.LOCK_TOPIC') . '" border="0" /></a>&nbsp;' : '<a href="modcp.php?' . POST_TOPIC_URL . "=$topic_id&amp;mode=unlock&amp;sid=" . $userdata['session_id'] . '"><img src="' . $images['topic_mod_unlock'] . '" alt="' . trans('messages.UNLOCK_TOPIC') . '" title="' . trans('messages.UNLOCK_TOPIC') . '" border="0" /></a>&nbsp;';
+    $topic_mod .= '<a href="modcp.php?' . POST_TOPIC_URL . "=$topic_id&amp;mode=split&amp;sid=" . $userdata['session_id'] . '"><img src="' . $images['topic_mod_split'] . '" alt="' . trans('messages.SPLIT_TOPIC') . '" title="' . trans('messages.SPLIT_TOPIC') . '" border="0" /></a>&nbsp;';
 
     if ($t_data['allow_reg_tracker'] || $t_data['topic_dl_type'] == TOPIC_DL_TYPE_DL || IS_ADMIN) {
         if ($t_data['topic_dl_type'] == TOPIC_DL_TYPE_DL) {
-            $topic_mod .= "<a href=\"modcp.php?" . POST_TOPIC_URL . "=$topic_id&amp;mode=unset_download&amp;sid=" . $userdata['session_id'] . '"><img src="' . $images['topic_normal'] . '" alt="' . trans('messages.UNSET_DL_STATUS') . '" title="' . trans('messages.UNSET_DL_STATUS') . '" border="0" /></a>';
+            $topic_mod .= '<a href="modcp.php?' . POST_TOPIC_URL . "=$topic_id&amp;mode=unset_download&amp;sid=" . $userdata['session_id'] . '"><img src="' . $images['topic_normal'] . '" alt="' . trans('messages.UNSET_DL_STATUS') . '" title="' . trans('messages.UNSET_DL_STATUS') . '" border="0" /></a>';
         } else {
-            $topic_mod .= "<a href=\"modcp.php?" . POST_TOPIC_URL . "=$topic_id&amp;mode=set_download&amp;sid=" . $userdata['session_id'] . '"><img src="' . $images['topic_dl'] . '" alt="' . trans('messages.SET_DL_STATUS') . '" title="' . trans('messages.SET_DL_STATUS') . '" border="0" /></a>';
+            $topic_mod .= '<a href="modcp.php?' . POST_TOPIC_URL . "=$topic_id&amp;mode=set_download&amp;sid=" . $userdata['session_id'] . '"><img src="' . $images['topic_dl'] . '" alt="' . trans('messages.SET_DL_STATUS') . '" title="' . trans('messages.SET_DL_STATUS') . '" border="0" /></a>';
         }
     }
 } elseif (($t_data['topic_poster'] == $userdata['user_id']) && $userdata['session_logged_in'] && $t_data['self_moderated']) {
-    $topic_mod .= "<a href=\"modcp.php?" . POST_TOPIC_URL . "=$topic_id&amp;mode=move&amp;sid=" . $userdata['session_id'] . '"><img src="' . $images['topic_mod_move'] . '" alt="' . trans('messages.MOVE_TOPIC') . '" title="' . trans('messages.MOVE_TOPIC') . '" border="0" /></a>&nbsp;';
+    $topic_mod .= '<a href="modcp.php?' . POST_TOPIC_URL . "=$topic_id&amp;mode=move&amp;sid=" . $userdata['session_id'] . '"><img src="' . $images['topic_mod_move'] . '" alt="' . trans('messages.MOVE_TOPIC') . '" title="' . trans('messages.MOVE_TOPIC') . '" border="0" /></a>&nbsp;';
 }
 
 // Topic watch information
 $s_watching_topic = $s_watching_topic_img = '';
 if ($can_watch_topic) {
     if ($is_watching_topic) {
-        $s_watching_topic = "<a href=\"" . TOPIC_URL . $topic_id . "&amp;unwatch=topic&amp;start=$start&amp;sid=" . $userdata['session_id'] . '">' . trans('messages.STOP_WATCHING_TOPIC') . '</a>';
-        $s_watching_topic_img = isset($images['topic_un_watch']) ? "<a href=\"" . TOPIC_URL . "$topic_id&amp;unwatch=topic&amp;start=$start&amp;sid=" . $userdata['session_id'] . '"><img src="' . $images['topic_un_watch'] . '" alt="' . trans('messages.STOP_WATCHING_TOPIC') . '" title="' . trans('messages.STOP_WATCHING_TOPIC') . '" border="0"></a>' : '';
+        $s_watching_topic = '<a href="' . TOPIC_URL . $topic_id . "&amp;unwatch=topic&amp;start=$start&amp;sid=" . $userdata['session_id'] . '">' . trans('messages.STOP_WATCHING_TOPIC') . '</a>';
+        $s_watching_topic_img = isset($images['topic_un_watch']) ? '<a href="' . TOPIC_URL . "$topic_id&amp;unwatch=topic&amp;start=$start&amp;sid=" . $userdata['session_id'] . '"><img src="' . $images['topic_un_watch'] . '" alt="' . trans('messages.STOP_WATCHING_TOPIC') . '" title="' . trans('messages.STOP_WATCHING_TOPIC') . '" border="0"></a>' : '';
     } else {
-        $s_watching_topic = "<a href=\"" . TOPIC_URL . $topic_id . "&amp;watch=topic&amp;start=$start&amp;sid=" . $userdata['session_id'] . '">' . trans('messages.START_WATCHING_TOPIC') . '</a>';
-        $s_watching_topic_img = isset($images['Topic_watch']) ? "<a href=\"" . TOPIC_URL . "$topic_id&amp;watch=topic&amp;start=$start&amp;sid=" . $userdata['session_id'] . '"><img src="' . $images['Topic_watch'] . '" alt="' . trans('messages.START_WATCHING_TOPIC') . '" title="' . trans('messages.START_WATCHING_TOPIC') . '" border="0"></a>' : '';
+        $s_watching_topic = '<a href="' . TOPIC_URL . $topic_id . "&amp;watch=topic&amp;start=$start&amp;sid=" . $userdata['session_id'] . '">' . trans('messages.START_WATCHING_TOPIC') . '</a>';
+        $s_watching_topic_img = isset($images['Topic_watch']) ? '<a href="' . TOPIC_URL . "$topic_id&amp;watch=topic&amp;start=$start&amp;sid=" . $userdata['session_id'] . '"><img src="' . $images['Topic_watch'] . '" alt="' . trans('messages.START_WATCHING_TOPIC') . '" title="' . trans('messages.START_WATCHING_TOPIC') . '" border="0"></a>' : '';
     }
 }
 
@@ -435,8 +435,8 @@ if ($can_watch_topic) {
 $pg_url = TOPIC_URL . $topic_id;
 $pg_url .= $post_days ? "&amp;postdays=$post_days" : '';
 $pg_url .= ($post_order != 'asc') ? "&amp;postorder=$post_order" : '';
-$pg_url .= isset($_REQUEST['single']) ? "&amp;single=1" : '';
-$pg_url .= $moderation ? "&amp;mod=1" : '';
+$pg_url .= isset($_REQUEST['single']) ? '&amp;single=1' : '';
+$pg_url .= $moderation ? '&amp;mod=1' : '';
 $pg_url .= ($posts_per_page != config('tp.posts_per_page')) ? "&amp;ppp=$posts_per_page" : '';
 
 generate_pagination($pg_url, $total_replies, $posts_per_page, $start);
@@ -538,7 +538,7 @@ if ($topic_attachment) {
 //
 // Update the topic view counter
 //
-$sql = "INSERT INTO " . BUF_TOPIC_VIEW . " (topic_id,  topic_views) VALUES ($topic_id, 1) ON DUPLICATE KEY UPDATE topic_views = topic_views + 1";
+$sql = 'INSERT INTO ' . BUF_TOPIC_VIEW . " (topic_id,  topic_views) VALUES ($topic_id, 1) ON DUPLICATE KEY UPDATE topic_views = topic_views + 1";
 if (!OLD_DB()->sql_query($sql)) {
     bb_die('Could not update topic views');
 }
@@ -763,7 +763,7 @@ if (defined('SPLIT_FORM_START')) {
     $template->assign_vars(array(
         'SPLIT_FORM' => true,
         'START' => $start,
-        'S_SPLIT_ACTION' => "modcp.php",
+        'S_SPLIT_ACTION' => 'modcp.php',
         'POST_FORUM_URL' => POST_FORUM_URL,
         'POST_TOPIC_URL' => POST_TOPIC_URL,
     ));

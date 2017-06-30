@@ -37,7 +37,7 @@ function attachment_quota_settings($admin_mode, $submit = false, $mode)
     }
 
     include ATTACH_DIR . '/includes/functions_selects.php';
-    if (!function_exists("process_quota_settings")) {
+    if (!function_exists('process_quota_settings')) {
         include ATTACH_DIR . '/includes/functions_admin.php';
     }
 

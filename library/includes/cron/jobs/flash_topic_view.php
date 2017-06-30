@@ -18,18 +18,18 @@ OLD_DB()->lock(array(
 ));
 
 // Flash buffered records
-OLD_DB()->query("
+OLD_DB()->query('
 	UPDATE
-		" . BB_TOPICS . " t,
-		" . BUF_TOPIC_VIEW . " buf
+		' . BB_TOPICS . ' t,
+		' . BUF_TOPIC_VIEW . ' buf
 	SET
 		t.topic_views = t.topic_views + buf.topic_views
 	WHERE
 		t.topic_id = buf.topic_id
-");
+');
 
 // Delete buffered records
-OLD_DB()->query("DELETE buf FROM " . BUF_TOPIC_VIEW . " buf");
+OLD_DB()->query('DELETE buf FROM ' . BUF_TOPIC_VIEW . ' buf');
 
 // Unlock tables
 OLD_DB()->unlock();

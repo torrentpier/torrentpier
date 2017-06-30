@@ -345,9 +345,9 @@ function attachment_sync_topic($topics)
     $posts_without_attach = $topics_without_attach = [];
 
     // Check orphan post_attachment markers
-    $sql = "SELECT p.post_id
-		FROM " . BB_POSTS . " p
-		LEFT JOIN " . BB_ATTACHMENTS . " a USING(post_id)
+    $sql = 'SELECT p.post_id
+		FROM ' . BB_POSTS . ' p
+		LEFT JOIN ' . BB_ATTACHMENTS . " a USING(post_id)
 		WHERE p.topic_id IN($topics)
 			AND p.post_attachment = 1
 			AND a.post_id IS NULL";
@@ -357,13 +357,13 @@ function attachment_sync_topic($topics)
             $posts_without_attach[] = $row['post_id'];
         }
         if ($posts_sql = implode(',', $posts_without_attach)) {
-            OLD_DB()->query("UPDATE " . BB_POSTS . " SET post_attachment = 0 WHERE post_id IN($posts_sql)");
+            OLD_DB()->query('UPDATE ' . BB_POSTS . " SET post_attachment = 0 WHERE post_id IN($posts_sql)");
         }
     }
 
     // Update missing topic_attachment markers
-    OLD_DB()->query("
-		UPDATE " . BB_TOPICS . " t, " . BB_POSTS . " p SET
+    OLD_DB()->query('
+		UPDATE ' . BB_TOPICS . ' t, ' . BB_POSTS . " p SET
 			t.topic_attachment = 1
 		WHERE p.topic_id IN($topics)
 			AND p.post_attachment = 1
@@ -371,8 +371,8 @@ function attachment_sync_topic($topics)
 	");
 
     // Fix orphan topic_attachment markers
-    $sql = "SELECT t.topic_id
-		FROM " . BB_POSTS . " p, " . BB_TOPICS . " t
+    $sql = 'SELECT t.topic_id
+		FROM ' . BB_POSTS . ' p, ' . BB_TOPICS . " t
 		WHERE t.topic_id = p.topic_id
 			AND t.topic_id IN($topics)
 			AND t.topic_attachment = 1
@@ -384,7 +384,7 @@ function attachment_sync_topic($topics)
             $topics_without_attach[] = $row['topic_id'];
         }
         if ($topics_sql = implode(',', $topics_without_attach)) {
-            OLD_DB()->query("UPDATE " . BB_TOPICS . " SET topic_attachment = 0 WHERE topic_id IN($topics_sql)");
+            OLD_DB()->query('UPDATE ' . BB_TOPICS . " SET topic_attachment = 0 WHERE topic_id IN($topics_sql)");
         }
     }
 }

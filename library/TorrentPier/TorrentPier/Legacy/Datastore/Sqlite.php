@@ -47,14 +47,14 @@ class Sqlite extends Common
         $ds_title = SQLite3::escapeString($this->prefix . $item_name);
         $ds_data = SQLite3::escapeString(serialize($item_data));
 
-        $result = $this->db->query("REPLACE INTO " . $this->cfg['table_name'] . " (ds_title, ds_data) VALUES ('$ds_title', '$ds_data')");
+        $result = $this->db->query('REPLACE INTO ' . $this->cfg['table_name'] . " (ds_title, ds_data) VALUES ('$ds_title', '$ds_data')");
 
         return (bool)$result;
     }
 
     public function clean()
     {
-        $this->db->query("DELETE FROM " . $this->cfg['table_name']);
+        $this->db->query('DELETE FROM ' . $this->cfg['table_name']);
     }
 
     public function _fetch_from_store()
@@ -69,9 +69,9 @@ class Sqlite extends Common
         array_deep($items, 'SQLite3::escapeString');
         $items_list = $prefix_sql . implode("','$prefix_sql", $items);
 
-        $rowset = $this->db->fetch_rowset("SELECT ds_title, ds_data FROM " . $this->cfg['table_name'] . " WHERE ds_title IN ('$items_list')");
+        $rowset = $this->db->fetch_rowset('SELECT ds_title, ds_data FROM ' . $this->cfg['table_name'] . " WHERE ds_title IN ('$items_list')");
 
-        $this->db->debug('start', "unserialize()");
+        $this->db->debug('start', 'unserialize()');
         foreach ($rowset as $row) {
             $this->data[substr($row['ds_title'], $prefix_len)] = unserialize($row['ds_data']);
         }

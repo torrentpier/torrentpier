@@ -93,7 +93,7 @@ switch ($field) {
         break;
 
     case 'user_twitter':
-        if ($value && !preg_match("#^[a-zA-Z0-9_]{1,15}$#", $value)) {
+        if ($value && !preg_match('#^[a-zA-Z0-9_]{1,15}$#', $value)) {
             $this->ajax_die(trans('messages.TWITTER_ERROR'));
         }
         $this->response['new_value'] = $this->request['value'];

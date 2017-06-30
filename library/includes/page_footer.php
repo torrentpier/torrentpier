@@ -18,7 +18,7 @@ if (!empty($template)) {
         'SIMPLE_FOOTER' => !empty($gen_simple_header),
         'POWERED' => 'Tracker software by <a target="_blank" href="https://torrentpier.com">TorrentPier</a> &copy; 2005-' . date('Y'),
         'SHOW_ADMIN_LINK' => IS_ADMIN && !defined('IN_ADMIN'),
-        'ADMIN_LINK_HREF' => "admin/index.php",
+        'ADMIN_LINK_HREF' => 'admin/index.php',
     ));
 
     $template->set_filenames(array('page_footer' => 'page_footer.tpl'));
@@ -58,7 +58,7 @@ if ($show_dbg_info) {
         for ($i = 0; $i < 3; $i++) {
             $l[$i] = round($l[$i], 1);
         }
-        $stat .= " &nbsp;|&nbsp; " . trans('messages.LIMIT') . " $l[0] $l[1] $l[2]";
+        $stat .= ' &nbsp;|&nbsp; ' . trans('messages.LIMIT') . " $l[0] $l[1] $l[2]";
     }
 
     $stat .= ' &nbsp;]';

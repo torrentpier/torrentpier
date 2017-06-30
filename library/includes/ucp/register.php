@@ -55,7 +55,7 @@ switch ($mode) {
         if (!IS_ADMIN) {
             // Ограничение по ip
             if (config('tp.unique_ip')) {
-                if ($users = OLD_DB()->fetch_row("SELECT user_id, username FROM " . BB_USERS . " WHERE user_reg_ip = '" . USER_IP . "' LIMIT 1")) {
+                if ($users = OLD_DB()->fetch_row('SELECT user_id, username FROM ' . BB_USERS . " WHERE user_reg_ip = '" . USER_IP . "' LIMIT 1")) {
                     bb_die(sprintf(trans('messages.ALREADY_REG_IP'), '<a href="' . PROFILE_URL . $users['user_id'] . '"><b>' . $users['username'] . '</b></a>', config('tp.tech_admin_email')));
                 }
             }
@@ -496,7 +496,7 @@ foreach ($profile_fields as $field => $can_edit) {
         case 'user_twitter':
             $twitter = isset($_POST['user_twitter']) ? (string)$_POST['user_twitter'] : $pr_data['user_twitter'];
             if ($submit && $twitter != $pr_data['user_twitter']) {
-                if ($twitter != '' && !preg_match("#^[a-zA-Z0-9_]{1,15}$#", $twitter)) {
+                if ($twitter != '' && !preg_match('#^[a-zA-Z0-9_]{1,15}$#', $twitter)) {
                     $errors[] = trans('messages.TWITTER_ERROR');
                 }
                 $pr_data['user_twitter'] = $twitter;
@@ -558,7 +558,7 @@ if ($submit && !$errors) {
 
         $sql_args = OLD_DB()->build_array('INSERT', $db_data);
 
-        OLD_DB()->query("INSERT INTO " . BB_USERS . $sql_args);
+        OLD_DB()->query('INSERT INTO ' . BB_USERS . $sql_args);
         $new_user_id = OLD_DB()->sql_nextid();
 
         if (IS_ADMIN) {
@@ -634,7 +634,7 @@ if ($submit && !$errors) {
 
             $sql_args = OLD_DB()->build_array('UPDATE', $db_data);
 
-            OLD_DB()->query("UPDATE " . BB_USERS . " SET $sql_args WHERE user_id = {$pr_data['user_id']}");
+            OLD_DB()->query('UPDATE ' . BB_USERS . " SET $sql_args WHERE user_id = {$pr_data['user_id']}");
 
             if ($pr_data['user_id'] != $userdata['user_id']) {
                 if ($pr_data['user_level'] == MOD && !empty($db_data['username'])) {

@@ -302,9 +302,9 @@ $tor_list_ary = array();
 $tor_list_sql = '';
 
 if ($search_id) {
-    $row = OLD_DB()->fetch_row("
+    $row = OLD_DB()->fetch_row('
 		SELECT search_array, search_settings
-		FROM " . BB_SEARCH . "
+		FROM ' . BB_SEARCH . "
 		WHERE session_id = '$session_id'
 			AND search_type = " . SEARCH_TYPE_TRACKER . "
 			AND search_id = '$search_id'
@@ -523,7 +523,7 @@ if ($allowed_forums) {
         $rg_id_sql = (int)$s_rg_val;
         $s_seen_time = $s_not_seen_opt[$s_not_seen_val]['sql'];
         $s_seen_sign = ($s_not_seen_val == $never) ? '=' : '<';
-        $s_seen_exclude = ($s_not_seen_val == $never) ? '' : "AND tor.seeder_last_seen != 0";
+        $s_seen_exclude = ($s_not_seen_val == $never) ? '' : 'AND tor.seeder_last_seen != 0';
         $order_by_peers = ($order_val == $ord_seeders || $order_val == $ord_leechers);
         $order_by_speed = ($order_val == $ord_sp_up || $order_val == $ord_sp_down);
 
@@ -535,7 +535,7 @@ if ($allowed_forums) {
         $SQL = OLD_DB()->get_empty_sql_array();
 
         // SELECT
-        $SQL['SELECT'][] = "tor.topic_id";
+        $SQL['SELECT'][] = 'tor.topic_id';
 
         // FROM
         $SQL['FROM'][] = $torrents_tbl;
@@ -587,13 +587,13 @@ if ($allowed_forums) {
             $SQL['WHERE'][] = "tor.poster_id = $user_id";
         }
         if ($only_active) {
-            $SQL['WHERE'][] = "sn.topic_id IS NOT NULL";
+            $SQL['WHERE'][] = 'sn.topic_id IS NOT NULL';
         }
         if ($seed_exist) {
-            $SQL['WHERE'][] = "sn.seeders >= 1";
+            $SQL['WHERE'][] = 'sn.seeders >= 1';
         }
         if ($tor_type) {
-            $SQL['WHERE'][] = "tor.tor_type IN(1,2)";
+            $SQL['WHERE'][] = 'tor.tor_type IN(1,2)';
         }
 
         // ORDER
@@ -628,7 +628,7 @@ if ($allowed_forums) {
             $columns = 'session_id,   search_type,   search_id,   search_time,   search_settings,  search_array';
             $values = "'$session_id', $search_type, '$search_id', " . TIMENOW . ", '$curr_set_sql', '$tor_list_sql'";
 
-            OLD_DB()->query("REPLACE INTO " . BB_SEARCH . " ($columns) VALUES ($values)");
+            OLD_DB()->query('REPLACE INTO ' . BB_SEARCH . " ($columns) VALUES ($values)");
         }
         unset($columns, $values, $curr_set_sql, $tor_list_sql);
 
@@ -639,16 +639,16 @@ if ($allowed_forums) {
         }
 
         // SELECT
-        $select = "
+        $select = '
 			SELECT
 				tor.topic_id, tor.post_id, tor.attach_id, tor.size, tor.reg_time, tor.complete_count, tor.seeder_last_seen, tor.tor_status, tor.tor_type,
 				t.topic_title, t.topic_time, t.topic_replies, t.topic_views, sn.seeders, sn.leechers, tor.info_hash
-		";
-        $select .= (!$hide_speed) ? ", sn.speed_up, sn.speed_down" : '';
-        $select .= (!$hide_forum) ? ", tor.forum_id" : '';
-        $select .= (!$hide_cat) ? ", f.cat_id" : '';
-        $select .= (!$hide_author) ? ", tor.poster_id, u.username, u.user_rank" : '';
-        $select .= (!IS_GUEST) ? ", dl.user_status AS dl_status" : '';
+		';
+        $select .= (!$hide_speed) ? ', sn.speed_up, sn.speed_down' : '';
+        $select .= (!$hide_forum) ? ', tor.forum_id' : '';
+        $select .= (!$hide_cat) ? ', f.cat_id' : '';
+        $select .= (!$hide_author) ? ', tor.poster_id, u.username, u.user_rank' : '';
+        $select .= (!IS_GUEST) ? ', dl.user_status AS dl_status' : '';
 
         // FROM
         $from = "
@@ -672,7 +672,7 @@ if ($allowed_forums) {
 		";
 
         // ORDER
-        $order = "ORDER BY " . $order_opt[$order_val]['sql'];
+        $order = 'ORDER BY ' . $order_opt[$order_val]['sql'];
 
         // SORT
         $sort = $sort_opt[$sort_val]['sql'];
@@ -689,7 +689,7 @@ if ($allowed_forums) {
 			$limit
 		";
 
-        $passkey = OLD_DB()->fetch_row("SELECT auth_key FROM " . BB_BT_USERS . " WHERE user_id = " . (int)$user_id . " LIMIT 1");
+        $passkey = OLD_DB()->fetch_row('SELECT auth_key FROM ' . BB_BT_USERS . ' WHERE user_id = ' . (int)$user_id . ' LIMIT 1');
         // Build torrents table
         foreach (OLD_DB()->fetch_rowset($sql) as $tor) {
             $dl = $tor['speed_down'] ?? 0;

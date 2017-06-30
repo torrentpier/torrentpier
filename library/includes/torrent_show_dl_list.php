@@ -30,7 +30,7 @@ $show_dl_buttons = ($dl_topic && config('tp.bt_show_dl_list_buttons'));
 // link to clear DL-List
 $template->assign_vars(array('S_DL_DELETE' => false));
 if ($is_auth['auth_mod'] && ($t_data['topic_dl_type'] == TOPIC_DL_TYPE_DL)) {
-    $s_dl_delete = "<br /><a href=\"dl_list.php?mode=dl_delete&amp;" . POST_TOPIC_URL . "=$topic_id&amp;sid=" . $userdata['session_id'] . '">' . trans('messages.DL_LIST_DEL') . '</a>';
+    $s_dl_delete = '<br /><a href="dl_list.php?mode=dl_delete&amp;' . POST_TOPIC_URL . "=$topic_id&amp;sid=" . $userdata['session_id'] . '">' . trans('messages.DL_LIST_DEL') . '</a>';
     $template->assign_vars(array('S_DL_DELETE' => $s_dl_delete));
 }
 
@@ -43,12 +43,12 @@ if ($show_dl_list) {
     }
 
     if ($count_mode) {
-        $sql = "SELECT dl_status AS user_status, users_count AS username
-			FROM " . BB_BT_DLSTATUS_SNAP . "
+        $sql = 'SELECT dl_status AS user_status, users_count AS username
+			FROM ' . BB_BT_DLSTATUS_SNAP . "
 			WHERE topic_id = $topic_id";
     } else {
         $sql = "SELECT d.user_status, d.user_id, DATE_FORMAT(d.last_modified_dlstatus, '%Y-%m-%d') AS last_modified_dlstatus, u.username, u.user_rank
-			FROM " . BB_BT_DLSTATUS . " d, " . BB_USERS . " u
+			FROM " . BB_BT_DLSTATUS . ' d, ' . BB_USERS . " u
 			WHERE d.topic_id = $topic_id
 				AND d.user_id = u.user_id
 				AND d.user_status != " . DL_STATUS_RELEASER . "
@@ -70,7 +70,7 @@ if ($show_dl_list) {
                 $dl_cat[$u['user_status']] = $u['username'];
                 $dl_count[$u['user_status']] = $u['username'];
             } else {
-                $u_prof_href = ($u['user_id'] == GUEST_UID) ? '#' : "profile.php?mode=viewprofile&amp;u=" . $u['user_id'] . "#torrent";
+                $u_prof_href = ($u['user_id'] == GUEST_UID) ? '#' : 'profile.php?mode=viewprofile&amp;u=' . $u['user_id'] . '#torrent';
                 $dl_cat[$u['user_status']] .= '<nobr><a class="' . $u_link_class . '" href="' . $u_prof_href . '" title="' . $u['last_modified_dlstatus'] . '">' . profile_url(array('username' => $u['username'], 'user_rank' => $u['user_rank'])) . '</a></nobr>, ';
                 $dl_count[$u['user_status']]++;
             }
@@ -121,7 +121,7 @@ if ($show_dl_buttons) {
 
     $template->assign_vars(array(
         'DL_HIDDEN_FIELDS' => $dl_hidden_fields,
-        'S_DL_ACTION' => "dl_list.php?" . POST_TOPIC_URL . "=$topic_id",
+        'S_DL_ACTION' => 'dl_list.php?' . POST_TOPIC_URL . "=$topic_id",
     ));
 }
 

@@ -13,7 +13,7 @@ if (!defined('BB_ROOT')) {
 
 $smilies = [];
 
-$rowset = OLD_DB()->fetch_rowset("SELECT * FROM " . BB_SMILIES);
+$rowset = OLD_DB()->fetch_rowset('SELECT * FROM ' . BB_SMILIES);
 sort($rowset);
 
 foreach ($rowset as $smile) {

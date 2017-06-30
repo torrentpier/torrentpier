@@ -91,7 +91,7 @@ class File extends Common
             if (is_dir($this->dir)) {
                 if ($dh = opendir($this->dir)) {
                     while (($file = readdir($dh)) !== false) {
-                        if ($file != "." && $file != "..") {
+                        if ($file != '.' && $file != '..') {
                             $filename = $this->dir . $file;
 
                             unlink($filename);
@@ -112,7 +112,7 @@ class File extends Common
         if (is_dir($this->dir)) {
             if ($dh = opendir($this->dir)) {
                 while (($file = readdir($dh)) !== false) {
-                    if ($file != "." && $file != "..") {
+                    if ($file != '.' && $file != '..') {
                         $filename = $this->dir . $file;
 
                         require $filename;

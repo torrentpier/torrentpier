@@ -15,14 +15,14 @@ $can_edit_tpl = IS_SUPER_ADMIN;
 $edit_tpl_mode = ($can_edit_tpl && !empty($_REQUEST['edit_tpl']));
 
 // forum_data
-$sql = "SELECT forum_name, allow_reg_tracker, forum_tpl_id FROM " . BB_FORUMS . " WHERE forum_id = $forum_id LIMIT 1";
+$sql = 'SELECT forum_name, allow_reg_tracker, forum_tpl_id FROM ' . BB_FORUMS . " WHERE forum_id = $forum_id LIMIT 1";
 
 if (!$forum_id || !$f_data = OLD_DB()->fetch_row($sql)) {
     bb_die(trans('messages.FORUM_NOT_EXIST'));
 }
 // tpl_data
 $tpl_data = array();
-$sql = "SELECT * FROM " . BB_TOPIC_TPL . " WHERE tpl_id = {$f_data['forum_tpl_id']} LIMIT 1";
+$sql = 'SELECT * FROM ' . BB_TOPIC_TPL . " WHERE tpl_id = {$f_data['forum_tpl_id']} LIMIT 1";
 
 if (!$f_data['forum_tpl_id'] || !$tpl_data = OLD_DB()->fetch_row($sql)) {
     if (!$edit_tpl_mode) {
@@ -47,9 +47,9 @@ if ($tpl_data) {
     $tpl_rules_html = '';
 
     if ($tpl_data['tpl_rules_post_id']) {
-        if (!$tpl_rules_html = bbcode2html(OLD_DB()->fetch_row("SELECT post_text FROM " . BB_POSTS_TEXT . " WHERE post_id = " . $tpl_data['tpl_rules_post_id'], 'post_text'))) {
+        if (!$tpl_rules_html = bbcode2html(OLD_DB()->fetch_row('SELECT post_text FROM ' . BB_POSTS_TEXT . ' WHERE post_id = ' . $tpl_data['tpl_rules_post_id'], 'post_text'))) {
             $tpl_data['tpl_rules_post_id'] = 0;
-            OLD_DB()->query("UPDATE " . BB_TOPIC_TPL . " SET tpl_rules_post_id = 0 WHERE tpl_id = {$f_data['forum_tpl_id']}");
+            OLD_DB()->query('UPDATE ' . BB_TOPIC_TPL . " SET tpl_rules_post_id = 0 WHERE tpl_id = {$f_data['forum_tpl_id']}");
         }
     }
 

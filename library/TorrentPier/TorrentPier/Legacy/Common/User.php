@@ -110,23 +110,23 @@ class User
         if ($session_id || !$this->sessiondata['uk']) {
             $SQL = OLD_DB()->get_empty_sql_array();
 
-            $SQL['SELECT'][] = "u.*, s.*";
+            $SQL['SELECT'][] = 'u.*, s.*';
 
-            $SQL['FROM'][] = BB_SESSIONS . " s";
-            $SQL['INNER JOIN'][] = BB_USERS . " u ON(u.user_id = s.session_user_id)";
+            $SQL['FROM'][] = BB_SESSIONS . ' s';
+            $SQL['INNER JOIN'][] = BB_USERS . ' u ON(u.user_id = s.session_user_id)';
 
             if ($session_id) {
                 $SQL['WHERE'][] = "s.session_id = '$session_id'";
 
                 if (config('tp.torhelp_enabled')) {
-                    $SQL['SELECT'][] = "th.topic_id_csv AS torhelp";
-                    $SQL['LEFT JOIN'][] = BB_BT_TORHELP . " th ON(u.user_id = th.user_id)";
+                    $SQL['SELECT'][] = 'th.topic_id_csv AS torhelp';
+                    $SQL['LEFT JOIN'][] = BB_BT_TORHELP . ' th ON(u.user_id = th.user_id)';
                 }
 
                 $userdata_cache_id = $session_id;
             } else {
                 $SQL['WHERE'][] = "s.session_ip = '" . USER_IP . "'";
-                $SQL['WHERE'][] = "s.session_user_id = " . GUEST_UID;
+                $SQL['WHERE'][] = 's.session_user_id = ' . GUEST_UID;
 
                 $userdata_cache_id = USER_IP;
             }
@@ -159,9 +159,9 @@ class User
 
                 // Only update session a minute or so after last update
                 if ($update_sessions_table) {
-                    OLD_DB()->query("
-						UPDATE " . BB_SESSIONS . " SET
-							session_time = " . TIMENOW . "
+                    OLD_DB()->query('
+						UPDATE ' . BB_SESSIONS . ' SET
+							session_time = ' . TIMENOW . "
 						WHERE session_id = '$session_id'
 						LIMIT 1
 					");
@@ -234,7 +234,7 @@ class User
             $where_sql = 'ban_ip = ' . USER_IP;
             $where_sql .= $login ? " OR ban_userid = $user_id" : '';
 
-            $sql = "SELECT ban_id FROM " . BB_BANLIST . " WHERE $where_sql LIMIT 1";
+            $sql = 'SELECT ban_id FROM ' . BB_BANLIST . " WHERE $where_sql LIMIT 1";
 
             if (OLD_DB()->fetch_row($sql)) {
                 header('Location: https://torrentpier.com/banned/');
@@ -254,7 +254,7 @@ class User
                 'session_logged_in' => (int)$login,
                 'session_admin' => (int)$mod_admin_session,
             ]);
-            $sql = "INSERT INTO " . BB_SESSIONS . $args;
+            $sql = 'INSERT INTO ' . BB_SESSIONS . $args;
 
             if (OLD_DB()->query($sql)) {
                 break;
@@ -275,9 +275,9 @@ class User
             }
 
             if ($last_visit != $this->data['user_lastvisit']) {
-                OLD_DB()->query("
-					UPDATE " . BB_USERS . " SET
-						user_session_time = " . TIMENOW . ",
+                OLD_DB()->query('
+					UPDATE ' . BB_USERS . ' SET
+						user_session_time = ' . TIMENOW . ",
 						user_lastvisit = $last_visit,
 						user_last_ip = '" . USER_IP . "',
 						user_reg_ip = IF(user_reg_ip = '', '" . USER_IP . "', user_reg_ip)
@@ -326,17 +326,17 @@ class User
      */
     public function session_end($update_lastvisit = false, $set_cookie = true)
     {
-        OLD_DB()->query("
-			DELETE FROM " . BB_SESSIONS . "
+        OLD_DB()->query('
+			DELETE FROM ' . BB_SESSIONS . "
 			WHERE session_id = '{$this->data['session_id']}'
 		");
 
         if (!IS_GUEST) {
             if ($update_lastvisit) {
-                OLD_DB()->query("
-					UPDATE " . BB_USERS . " SET
-						user_session_time = " . TIMENOW . ",
-						user_lastvisit = " . TIMENOW . ",
+                OLD_DB()->query('
+					UPDATE ' . BB_USERS . ' SET
+						user_session_time = ' . TIMENOW . ',
+						user_lastvisit = ' . TIMENOW . ",
 						user_last_ip = '" . USER_IP . "',
 						user_reg_ip = IF(user_reg_ip = '', '" . USER_IP . "', user_reg_ip)
 					WHERE user_id = {$this->data['user_id']}
@@ -347,8 +347,8 @@ class User
             if (isset($_REQUEST['reset_autologin'])) {
                 $this->create_autologin_id($this->data, false);
 
-                OLD_DB()->query("
-					DELETE FROM " . BB_SESSIONS . "
+                OLD_DB()->query('
+					DELETE FROM ' . BB_SESSIONS . "
 					WHERE session_user_id = '{$this->data['user_id']}'
 				");
             }
@@ -376,15 +376,15 @@ class User
             $username_sql = str_replace("\\'", "''", $username);
             $password_sql = md5(md5($password));
 
-            $sql = "
+            $sql = '
 				SELECT *
-				FROM " . BB_USERS . "
+				FROM ' . BB_USERS . "
 				WHERE username = '$username_sql'
 				  AND user_password = '$password_sql'
 				  AND user_active = 1
-				  AND user_id != " . GUEST_UID . "
+				  AND user_id != " . GUEST_UID . '
 				LIMIT 1
-			";
+			';
 
             if ($userdata = OLD_DB()->fetch_row($sql)) {
                 if (!$userdata['username'] || !$userdata['user_password'] || $userdata['user_id'] == GUEST_UID || md5(md5($password)) !== $userdata['user_password'] || !$userdata['user_active']) {
@@ -393,10 +393,10 @@ class User
 
                 // Start mod/admin session
                 if ($mod_admin_login) {
-                    OLD_DB()->query("
-						UPDATE " . BB_SESSIONS . " SET
-							session_admin = " . $this->data['user_level'] . "
-						WHERE session_user_id = " . $this->data['user_id'] . "
+                    OLD_DB()->query('
+						UPDATE ' . BB_SESSIONS . ' SET
+							session_admin = ' . $this->data['user_level'] . '
+						WHERE session_user_id = ' . $this->data['user_id'] . "
 							AND session_id = '" . $this->data['session_id'] . "'
 					");
                     $this->data['session_admin'] = $this->data['user_level'];
@@ -407,15 +407,15 @@ class User
 
                 if ($new_session_userdata = $this->session_create($userdata, false)) {
                     // Removing guest sessions from this IP
-                    OLD_DB()->query("
-						DELETE FROM " . BB_SESSIONS . "
+                    OLD_DB()->query('
+						DELETE FROM ' . BB_SESSIONS . "
 						WHERE session_ip = '" . USER_IP . "'
-							AND session_user_id = " . GUEST_UID . "
-					");
+							AND session_user_id = " . GUEST_UID . '
+					');
 
                     return $new_session_userdata;
                 } else {
-                    trigger_error("Could not start session : login", E_USER_ERROR);
+                    trigger_error('Could not start session : login', E_USER_ERROR);
                 }
             }
         }
@@ -519,12 +519,12 @@ class User
     {
         $autologin_id = $create_new ? make_rand_str(LOGIN_KEY_LENGTH) : '';
 
-        OLD_DB()->query("
-			UPDATE " . BB_USERS . " SET
+        OLD_DB()->query('
+			UPDATE ' . BB_USERS . " SET
 				autologin_id = '$autologin_id'
-			WHERE user_id = " . (int)$userdata['user_id'] . "
+			WHERE user_id = " . (int)$userdata['user_id'] . '
 			LIMIT 1
-		");
+		');
 
         return $autologin_id;
     }
@@ -585,9 +585,9 @@ class User
     {
         if ($type === 'all_forums') {
             // Update session time
-            OLD_DB()->query("
-				UPDATE " . BB_SESSIONS . " SET
-					session_time = " . TIMENOW . "
+            OLD_DB()->query('
+				UPDATE ' . BB_SESSIONS . ' SET
+					session_time = ' . TIMENOW . "
 				WHERE session_id = '{$this->data['session_id']}'
 				LIMIT 1
 			");

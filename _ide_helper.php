@@ -8,7 +8,7 @@
  */
 
 namespace {
-    exit("This file should not be included, only analyzed by your IDE");
+    exit('This file should not be included, only analyzed by your IDE');
 
     class Eloquent extends \Illuminate\Database\Eloquent\Model{
 

@@ -79,7 +79,7 @@ $template->assign_vars(array(
     'PROFILE_USER_ID' => $profiledata['user_id'],
     'PROFILE_USER' => $profile_user_id,
     'USER_REGDATE' => bb_date($profiledata['user_regdate'], 'Y-m-d H:i', false),
-    'POSTER_RANK' => $poster_rank ? "<span class=\"$rank_style\">" . $poster_rank . "</span>" : trans('messages.USER'),
+    'POSTER_RANK' => $poster_rank ? "<span class=\"$rank_style\">" . $poster_rank . '</span>' : trans('messages.USER'),
     'RANK_IMAGE' => $rank_image,
     'RANK_SELECT' => $rank_select,
     'POSTS' => $profiledata['user_posts'],
@@ -119,10 +119,10 @@ $template->assign_vars(array(
 
 if (IS_ADMIN) {
     $group_membership = array();
-    $sql = "
+    $sql = '
 		SELECT COUNT(g.group_id) AS groups_cnt, g.group_single_user, ug.user_pending
-		FROM " . BB_USER_GROUP . " ug
-		LEFT JOIN " . BB_GROUPS . " g USING(group_id)
+		FROM ' . BB_USER_GROUP . ' ug
+		LEFT JOIN ' . BB_GROUPS . " g USING(group_id)
 		WHERE ug.user_id = {$profiledata['user_id']}
 		GROUP BY ug.user_id, g.group_single_user, ug.user_pending
 		ORDER BY NULL

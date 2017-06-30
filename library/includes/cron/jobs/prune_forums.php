@@ -14,7 +14,7 @@ if (!defined('BB_ROOT')) {
 require_once INC_DIR . '/functions_admin.php';
 
 if (config('tp.prune_enable')) {
-    $sql = "SELECT forum_id, prune_days FROM " . BB_FORUMS . " WHERE prune_days != 0";
+    $sql = 'SELECT forum_id, prune_days FROM ' . BB_FORUMS . ' WHERE prune_days != 0';
 
     foreach (OLD_DB()->fetch_rowset($sql) as $row) {
         topic_delete('prune', $row['forum_id'], TIMENOW - 86400 * $row['prune_days']);

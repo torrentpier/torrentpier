@@ -44,19 +44,19 @@ $forum_store_fields += array_flip(array(
 ));
 
 // Categories
-$sql = "SELECT * FROM " . BB_CATEGORIES . " ORDER BY cat_order";
+$sql = 'SELECT * FROM ' . BB_CATEGORIES . ' ORDER BY cat_order';
 
 foreach (OLD_DB()->fetch_rowset($sql) as $row) {
     $data['c'][$row['cat_id']] = $row;
     $data['cat_title_html'][$row['cat_id']] = htmlCHR($row['cat_title']);
 }
 
-$sql = "
+$sql = '
 	SELECT f.*
-	FROM " . BB_FORUMS . " f, " . BB_CATEGORIES . " c
+	FROM ' . BB_FORUMS . ' f, ' . BB_CATEGORIES . ' c
 	WHERE f.cat_id = c.cat_id
 	ORDER BY c.cat_order, f.forum_order
-";
+';
 
 foreach (OLD_DB()->fetch_rowset($sql) as $row) {
     $fid = $row['forum_id'];
@@ -131,9 +131,9 @@ $this->store('viewtopic_forum_select', $data);
 if (config('tp.show_latest_news') && $news_forum_ids = config('tp.latest_news_forum_id')) {
     $news_count = max(config('tp.latest_news_count'), 1);
 
-    $data = OLD_DB()->fetch_rowset("
+    $data = OLD_DB()->fetch_rowset('
 		SELECT topic_id, topic_time, topic_title, forum_id
-		FROM " . BB_TOPICS . "
+		FROM ' . BB_TOPICS . "
 		WHERE forum_id IN ($news_forum_ids)
 			AND topic_moved_id = 0
 		ORDER BY topic_time DESC
@@ -149,9 +149,9 @@ if (config('tp.show_latest_news') && $news_forum_ids = config('tp.latest_news_fo
 if (config('tp.show_network_news') && $net_forum_ids = config('tp.network_news_forum_id')) {
     $net_count = max(config('tp.network_news_count'), 1);
 
-    $data = OLD_DB()->fetch_rowset("
+    $data = OLD_DB()->fetch_rowset('
 		SELECT topic_id, topic_time, topic_title, forum_id
-		FROM " . BB_TOPICS . "
+		FROM ' . BB_TOPICS . "
 		WHERE forum_id IN ($net_forum_ids)
 			AND topic_moved_id = 0
 		ORDER BY topic_time DESC

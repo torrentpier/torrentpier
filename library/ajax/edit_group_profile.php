@@ -54,4 +54,4 @@ switch ($mode) {
 }
 
 $value_sql = OLD_DB()->escape($value, true);
-OLD_DB()->query("UPDATE " . BB_GROUPS . " SET $mode = $value_sql WHERE group_id = $group_id");
+OLD_DB()->query('UPDATE ' . BB_GROUPS . " SET $mode = $value_sql WHERE group_id = $group_id");

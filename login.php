@@ -21,10 +21,10 @@ if (!empty($_GET['logout'])) {
     if (!IS_GUEST) {
         $user->session_end();
     }
-    redirectToUrl("index.php");
+    redirectToUrl('index.php');
 }
 
-$redirect_url = "index.php";
+$redirect_url = 'index.php';
 $login_errors = array();
 
 // Requested redirect
@@ -37,14 +37,14 @@ if (preg_match('/^redirect=([a-z0-9\.#\/\?&=\+\-_]+)/si', $_SERVER['QUERY_STRING
 } elseif (!empty($_POST['redirect'])) {
     $redirect_url = str_replace('&amp;', '&', htmlspecialchars($_POST['redirect']));
 } elseif (!empty($_SERVER['HTTP_REFERER']) && ($parts = @parse_url($_SERVER['HTTP_REFERER']))) {
-    $redirect_url = ($parts['path'] ?? "index.php") . (isset($parts['query']) ? '?' . $parts['query'] : '');
+    $redirect_url = ($parts['path'] ?? 'index.php') . (isset($parts['query']) ? '?' . $parts['query'] : '');
 }
 
 $redirect_url = str_replace('&admin=1', '', $redirect_url);
 $redirect_url = str_replace('?admin=1', '', $redirect_url);
 
 if (!$redirect_url || false !== strpos(urldecode($redirect_url), "\n") || false !== strpos(urldecode($redirect_url), "\r") || false !== strpos(urldecode($redirect_url), ';url')) {
-    $redirect_url = "index.php";
+    $redirect_url = 'index.php';
 }
 
 $redirect_url = str_replace("&sid={$user->data['session_id']}", '', $redirect_url);

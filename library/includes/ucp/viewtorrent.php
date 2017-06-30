@@ -21,12 +21,12 @@ $not_auth_forums_sql = $excluded_forums_csv ? "
 	AND f.forum_parent NOT IN($excluded_forums_csv)
 " : '';
 
-$sql = OLD_DB()->fetch_rowset("
+$sql = OLD_DB()->fetch_rowset('
 	SELECT
 		f.forum_id, f.forum_name, t.topic_title,
 		tor.tor_type, tor.size,
 		sn.seeders, sn.leechers, tr.*
-	FROM " . BB_FORUMS . " f, " . BB_TOPICS . " t, " . BB_BT_TRACKER . " tr, " . BB_BT_TORRENTS . " tor, " . BB_BT_TRACKER_SNAP . " sn
+	FROM ' . BB_FORUMS . ' f, ' . BB_TOPICS . ' t, ' . BB_BT_TRACKER . ' tr, ' . BB_BT_TORRENTS . ' tor, ' . BB_BT_TRACKER_SNAP . " sn
 	WHERE tr.user_id = {$profiledata['user_id']}
 		AND tr.topic_id = tor.topic_id
 		AND sn.topic_id = tor.topic_id

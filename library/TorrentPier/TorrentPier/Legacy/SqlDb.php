@@ -603,7 +603,7 @@ class SqlDb
 
         if (!empty($this->shutdown['post_html'])) {
             $post_html_sql = $this->build_array('MULTI_INSERT', $this->shutdown['post_html']);
-            $this->query("REPLACE INTO " . BB_POSTS_HTML . " $post_html_sql");
+            $this->query('REPLACE INTO ' . BB_POSTS_HTML . " $post_html_sql");
         }
 
         if (!empty($this->shutdown['__sql'])) {
@@ -642,7 +642,7 @@ class SqlDb
      */
     public function unlock()
     {
-        if ($this->locked && $this->sql_query("UNLOCK TABLES")) {
+        if ($this->locked && $this->sql_query('UNLOCK TABLES')) {
             $this->locked = false;
         }
 

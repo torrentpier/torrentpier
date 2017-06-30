@@ -62,8 +62,8 @@ function cache_rm_user_sessions($user_id)
 {
     $user_id = get_id_csv($user_id);
 
-    $rowset = OLD_DB()->fetch_rowset("
-		SELECT session_id FROM " . BB_SESSIONS . " WHERE session_user_id IN($user_id)
+    $rowset = OLD_DB()->fetch_rowset('
+		SELECT session_id FROM ' . BB_SESSIONS . " WHERE session_user_id IN($user_id)
 	");
 
     foreach ($rowset as $row) {
@@ -83,7 +83,7 @@ function db_update_userdata($userdata, $sql_ary, $data_already_escaped = true)
     }
 
     $sql_args = OLD_DB()->build_array('UPDATE', $sql_ary, $data_already_escaped);
-    OLD_DB()->query("UPDATE " . BB_USERS . " SET $sql_args WHERE user_id = {$userdata['user_id']}");
+    OLD_DB()->query('UPDATE ' . BB_USERS . " SET $sql_args WHERE user_id = {$userdata['user_id']}");
 
     if (OLD_DB()->affected_rows()) {
         cache_rm_userdata($userdata);
@@ -96,7 +96,7 @@ function delete_user_sessions($user_id)
     cache_rm_user_sessions($user_id);
 
     $user_id = get_id_csv($user_id);
-    OLD_DB()->query("DELETE FROM " . BB_SESSIONS . " WHERE session_user_id IN($user_id)");
+    OLD_DB()->query('DELETE FROM ' . BB_SESSIONS . " WHERE session_user_id IN($user_id)");
 }
 
 // deprecated
