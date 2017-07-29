@@ -14,17 +14,17 @@
     {
       "name": "Exile",
       "email": "admin@torrentpier.com",
-      "homepage": "https://torrentpier.com/forum/members/exile.1/",
+      "homepage": "https://github.com/Exile37",
       "role": "Developer"
     },
     {
       "name": "Diolektor",
-      "homepage": "https://torrentpier.com/forum/members/diolektor.5765/",
+      "homepage": "https://github.com/VasyOk",
       "role": "Developer"
     },
     {
       "name": "PheRum",
-      "homepage": "https://torrentpier.com/forum/members/pherum.23/",
+      "homepage": "https://github.com/PheRum",
       "role": "Developer"
     }
   ],
@@ -41,7 +41,6 @@
     "gigablah/sphinxphp": "^2.0",
     "google/recaptcha": "^1.1",
     "longman/ip-tools": "^1.2",
-    "roave/security-advisories": "dev-master",
     "rych/bencode": "^1.0",
     "samdark/sitemap": "^2.0",
     "swiftmailer/swiftmailer": "^5.4",

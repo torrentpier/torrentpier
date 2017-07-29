@@ -68,7 +68,7 @@ class CronHelper
      */
     public static function touchLockFile($lock_file)
     {
-        file_write(make_rand_str(20), $lock_file, 0, true, true);
+        file_write('', $lock_file, 0, true, true);
     }
 
     /**
