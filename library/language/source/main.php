@@ -2757,6 +2757,8 @@ $lang['ATOM_SUBSCRIBE'] = 'Subscribe to the feed';
 $lang['ATOM_NO_MODE'] = 'Do not specify a mode for the feed';
 $lang['ATOM_NO_FORUM'] = 'This forum does not have a feed (no ongoing topics)';
 $lang['ATOM_NO_USER'] = 'This user does not have a feed (no ongoing topics)';
+$lang['ATOM_UPDATED'] = 'Updated';
+$lang['ATOM_GLOBAL_FEED'] = 'Global feed for all forums';
 
 $lang['HASH_INVALID'] = 'Hash %s is invalid';
 $lang['HASH_NOT_FOUND'] = 'Release with hash %s not found';

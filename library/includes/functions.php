@@ -1851,7 +1851,7 @@ function log_sphinx_error($err_type, $err_msg, $query = '')
     }
 }
 
-function get_title_match_topics($title_match_sql, array $forum_ids = array())
+function get_title_match_topics($title_match_sql, $forum_ids = [])
 {
     global $bb_cfg, $sphinx, $userdata, $title_match, $lang;
 
