@@ -46,15 +46,19 @@ function update_forum_feed($forum_id, $forum_data)
         $sql = "
 			SELECT
 				t.topic_id, t.topic_title, t.topic_status,
+				pt1.post_text,
 				u1.username AS first_username,
 				p1.post_time AS topic_first_post_time, p1.post_edit_time AS topic_first_post_edit_time,
 				p2.post_time AS topic_last_post_time, p2.post_edit_time AS topic_last_post_edit_time,
 				tor.size AS tor_size, tor.tor_status
+				
 			FROM      " . BB_BT_TORRENTS . " tor
 			LEFT JOIN " . BB_TOPICS . " t   ON(tor.topic_id = t.topic_id)
 			LEFT JOIN " . BB_USERS . " u1  ON(t.topic_poster = u1.user_id)
 			LEFT JOIN " . BB_POSTS . " p1  ON(t.topic_first_post_id = p1.post_id)
 			LEFT JOIN " . BB_POSTS . " p2  ON(t.topic_last_post_id = p2.post_id)
+			LEFT JOIN " . BB_POSTS_TEXT . " pt1 ON(t.topic_first_post_id = pt1.post_id)
+			LEFT JOIN " . BB_POSTS_TEXT . " pt2 ON(t.topic_last_post_id = pt2.post_id)
 			ORDER BY t.topic_last_post_time DESC
 			LIMIT 100
 		";
@@ -62,6 +66,7 @@ function update_forum_feed($forum_id, $forum_data)
         $sql = "
 			SELECT
 				t.topic_id, t.topic_title, t.topic_status,
+				pt1.post_text,
 				u1.username AS first_username,
 				p1.post_time AS topic_first_post_time, p1.post_edit_time AS topic_first_post_edit_time,
 				p2.post_time AS topic_last_post_time, p2.post_edit_time AS topic_last_post_edit_time
@@ -70,6 +75,8 @@ function update_forum_feed($forum_id, $forum_data)
 			LEFT JOIN " . BB_USERS . " u1  ON(t.topic_poster = u1.user_id)
 			LEFT JOIN " . BB_POSTS . " p1  ON(t.topic_first_post_id = p1.post_id)
 			LEFT JOIN " . BB_POSTS . " p2  ON(t.topic_last_post_id = p2.post_id)
+			LEFT JOIN " . BB_POSTS_TEXT . " pt1 ON(t.topic_first_post_id = pt1.post_id)
+			LEFT JOIN " . BB_POSTS_TEXT . " pt2 ON(t.topic_last_post_id = pt2.post_id)
 				$join_tor_sql
 			WHERE t.forum_id = $forum_id
 			ORDER BY t.topic_last_post_time DESC
@@ -109,6 +116,7 @@ function update_user_feed($user_id, $username)
     $sql = "
 		SELECT
 			t.topic_id, t.topic_title, t.topic_status,
+			pt1.post_text,
 			u1.username AS first_username,
 			p1.post_time AS topic_first_post_time, p1.post_edit_time AS topic_first_post_edit_time,
 			p2.post_time AS topic_last_post_time, p2.post_edit_time AS topic_last_post_edit_time,
@@ -117,6 +125,8 @@ function update_user_feed($user_id, $username)
 		LEFT JOIN " . BB_USERS . " u1  ON(t.topic_poster = u1.user_id)
 		LEFT JOIN " . BB_POSTS . " p1  ON(t.topic_first_post_id = p1.post_id)
 		LEFT JOIN " . BB_POSTS . " p2  ON(t.topic_last_post_id = p2.post_id)
+		LEFT JOIN " . BB_POSTS_TEXT . " pt1 ON(t.topic_first_post_id = pt1.post_id)
+		LEFT JOIN " . BB_POSTS_TEXT . " pt2 ON(t.topic_last_post_id = pt2.post_id)
 		LEFT JOIN " . BB_BT_TORRENTS . " tor ON(t.topic_id = tor.topic_id)
 		WHERE t.topic_poster = $user_id
 		ORDER BY t.topic_last_post_time DESC
@@ -168,11 +178,11 @@ function create_atom($file_path, $mode, $id, $title, $topics)
     }
     $atom = "";
     $atom .= "<?xml version=\"1.0\" encoding=\"utf-8\" ?>\n";
-    $atom .= "<feed xmlns=\"http://www.w3.org/2005/Atom\" xml:base=\"http://" . $bb_cfg['server_name'] . $bb_cfg['script_path'] . "\">\n";
+    $atom .= "<feed xmlns=\"http://www.w3.org/2005/Atom\" xml:base=\"https://" . $bb_cfg['server_name'] . $bb_cfg['script_path'] . "atom" . "/" . $mode . "/" . $id  . ".atom" . "\"  >\n";
     $atom .= "<title>$title</title>\n";
     $atom .= "<updated>" . $date . "T$time+00:00</updated>\n";
     $atom .= "<id>tag:rto.feed,2000:/$mode/$id</id>\n";
-    $atom .= "<link href=\"http://" . $bb_cfg['server_name'] . $bb_cfg['script_path'] . "\" />\n";
+    //$atom .= "<link href=\"http://" . $bb_cfg['server_name'] . $bb_cfg['script_path'] . "atom" . "/" . $mode . "/" . $id  . ".atom" . "\"  rel=\"self\"  />\n";
     foreach ($topics as $topic) {
         $topic_id = $topic['topic_id'];
         $tor_size = '';
@@ -180,6 +190,12 @@ function create_atom($file_path, $mode, $id, $title, $topics)
             $tor_size = str_replace('&nbsp;', ' ', ' [' . humn_size($topic['tor_size']) . ']');
         }
         $topic_title = $topic['topic_title'];
+        $post_text = mb_substr($topic['post_text'], 0, 500, 'UTF-8') . '...';
+        $post_text = preg_replace('/\[img.*?\](.*?)\[\/img\]/', '<br><img src="$1" ><br>', $post_text);
+        $post_text = str_replace('[b]', '<br>', $post_text);
+        $post_text = preg_replace('/\[.*?]/', '', $post_text);
+		$post_text = preg_replace('/\[.*/', '', $post_text);
+
         $orig_word = array();
         $replacement_word = array();
         obtain_word_list($orig_word, $replacement_word);
@@ -200,13 +216,15 @@ function create_atom($file_path, $mode, $id, $title, $topics)
             $updated = '[Обновлено] ';
         }
         $atom .= "<entry>\n";
-        $atom .= "	<title type=\"html\"><![CDATA[$updated$topic_title$tor_size]]></title>\n";
+        $atom .= "	<link href=\"https://ТВОЙ-САЙТ.ру/viewtopic.php?t=$topic_id\" />\n";
+		$atom .= "	<title type=\"html\"><![CDATA[$updated$topic_title$tor_size]]></title>\n";
+        $atom .= "	<content type=\"html\"><![CDATA[$post_text]]></content>\n";
         $atom .= "	<author>\n";
         $atom .= "		<name>$author_name</name>\n";
         $atom .= "	</author>\n";
         $atom .= "	<updated>" . $date . "T$time+00:00</updated>\n";
         $atom .= "	<id>tag:rto.feed," . $date . ":/t/$topic_id</id>\n";
-        $atom .= "	<link href=\"viewtopic.php?t=$topic_id\" />\n";
+        //$atom .= "	<link href=\"viewtopic.php?t=$topic_id\" />\n";
         $atom .= "</entry>\n";
     }
     $atom .= "</feed>";
