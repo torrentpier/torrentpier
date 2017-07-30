@@ -846,7 +846,7 @@ $lang['AUTH_ADMINISTRATORS'] = '<b>administrators</b>';
 $lang['NOT_MODERATOR'] = 'You are not a moderator of this forum.';
 $lang['NOT_AUTHORISED'] = 'Not Authorised';
 
-$lang['YOU_BEEN_BANNED'] = 'You have been banned from this forum.<br />Please contact the webmaster or board administrator for more information.';
+$lang['YOU_BEEN_BANNED'] = 'You have been banned from this forum. Please contact the board administrator for more information.';
 
 // Viewonline
 $lang['ONLINE_EXPLAIN'] = 'users active over the past five minutes';

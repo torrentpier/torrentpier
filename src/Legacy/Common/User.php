@@ -239,7 +239,7 @@ class User
      */
     public function session_create($userdata, $auto_created = false)
     {
-        global $bb_cfg;
+        global $bb_cfg, $lang;
 
         $this->data = $userdata;
         $session_id = $this->sessiondata['sid'];
@@ -254,10 +254,8 @@ class User
             $where_sql = 'ban_ip = ' . USER_IP;
             $where_sql .= $login ? " OR ban_userid = $user_id" : '';
 
-            $sql = "SELECT ban_id FROM " . BB_BANLIST . " WHERE $where_sql LIMIT 1";
-
-            if (DB()->fetch_row($sql)) {
-                header('Location: https://torrentpier.com/banned/');
+            if (DB()->fetch_row("SELECT ban_id FROM " . BB_BANLIST . " WHERE $where_sql LIMIT 1")) {
+                bb_simple_die($lang['YOU_BEEN_BANNED']);
             }
         }
 

@@ -22,11 +22,12 @@
  * SOFTWARE.
  */
 
+@import "normalize.css";
+@import "initial.css";
 @import "ajax.css";
 @import "alert.css";
 @import "globals.css";
 @import "images.css";
-@import "initial.css";
 @import "main_content.css";
 @import "menus.css";
 @import "misc.css";
