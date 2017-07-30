@@ -114,7 +114,7 @@ class TorrentFileList
                             $cur_files_ary[] = $this->build_file_item($name, $length);
                         }
                     }
-                    natsort($cur_files_ary);
+                    asort($cur_files_ary);
                 } else {
                     $name = $f['path'][0];
                     $this->files_ary['/'][] = $this->build_file_item($name, $length);
