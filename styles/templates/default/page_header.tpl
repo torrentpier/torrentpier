@@ -37,7 +37,7 @@ var BB_ROOT      = "{#BB_ROOT}";
 var cookieDomain = "{$bb_cfg['cookie_domain']}";
 var cookiePath   = "{$bb_cfg['script_path']}";
 var cookiePrefix = "{$bb_cfg['cookie_prefix']}";
-var cookieSecure = {$bb_cfg['cookie_secure']};
+var cookieSecure = "{$bb_cfg['cookie_secure']}";
 var LOGGED_IN    = {LOGGED_IN};
 var IWP          = 'HEIGHT=510,WIDTH=780,resizable=yes';
 var IWP_US       = 'HEIGHT=250,WIDTH=400,resizable=yes';
