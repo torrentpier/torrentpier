@@ -65,8 +65,6 @@ define('XS_TAG_ENDIF', 8);
 define('XS_TAG_BEGINELSE', 11);
 
 // Debug
-define('DBG_LOG', false);    // enable forum debug (off on production)
-define('DBG_TRACKER', false);    // enable tracker debug (off on production)
 define('COOKIE_DBG', 'bb_dbg'); // debug cookie name
 define('SQL_DEBUG', true);     // enable forum sql & cache debug
 define('SQL_LOG_ERRORS', true);     // all SQL_xxx options enabled only if SQL_DEBUG == TRUE

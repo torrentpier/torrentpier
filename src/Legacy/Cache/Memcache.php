@@ -61,10 +61,6 @@ class Memcache extends Common
             $this->connected = true;
         }
 
-        if (DBG_LOG) {
-            dbg_log(' ', 'CACHE-connect' . ($this->connected ? '' : '-FAIL'));
-        }
-
         if (!$this->connected && $this->cfg['con_required']) {
             die('Could not connect to memcached server');
         }
