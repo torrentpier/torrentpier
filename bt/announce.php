@@ -36,9 +36,6 @@ if (empty($_SERVER['HTTP_USER_AGENT'])) {
 
 // Ignore 'completed' event
 if (isset($_GET['event']) && $_GET['event'] === 'completed') {
-    if (DBG_LOG) {
-        dbg_log(' ', '!die-event-completed');
-    }
     dummy_exit(mt_rand(600, 1200));
 }
 
@@ -149,10 +146,6 @@ $peer_hash = md5(
 // Get cached peer info from previous announce (last peer info)
 $lp_info = CACHE('tr_cache')->get(PEER_HASH_PREFIX . $peer_hash);
 
-if (DBG_LOG) {
-    dbg_log(' ', '$lp_info-get_from-CACHE-' . ($lp_info ? 'hit' : 'miss'));
-}
-
 // Drop fast announce
 if ($lp_info && (!isset($event) || $event !== 'stopped')) {
     drop_fast_announce($lp_info);
@@ -174,10 +167,6 @@ function drop_fast_announce($lp_info)
 
 function msg_die($msg)
 {
-    if (DBG_LOG) {
-        dbg_log(' ', '!die-' . clean_filename($msg));
-    }
-
     $output = \Rych\Bencode\Bencode::encode([
         'min interval' => (int)1800,
         'failure reason' => (string)$msg,
@@ -196,9 +185,6 @@ $stopped = ($event === 'stopped');
 // Stopped event
 if ($stopped) {
     CACHE('tr_cache')->rm(PEER_HASH_PREFIX . $peer_hash);
-    if (DBG_LOG) {
-        dbg_log(' ', 'stopped');
-    }
 }
 
 // Get last peer info from DB
@@ -206,10 +192,6 @@ if (!CACHE('tr_cache')->used && !$lp_info) {
     $lp_info = DB()->fetch_row("
 		SELECT * FROM " . BB_BT_TRACKER . " WHERE peer_hash = '$peer_hash' LIMIT 1
 	");
-
-    if (DBG_LOG) {
-        dbg_log(' ', '$lp_info-get_from-DB-' . ($lp_info ? 'hit' : 'miss'));
-    }
 }
 
 if ($lp_info) {
@@ -312,7 +294,7 @@ if ($lp_info) {
 }
 
 // Up/Down speed
-$speed_up = $speed_down = $uploaded = $downloaded = 0;
+$speed_up = $speed_down = 0;
 
 if ($lp_info && $lp_info['update_time'] < TIMENOW) {
     if ($uploaded > $lp_info['uploaded']) {
@@ -358,8 +340,8 @@ if ($lp_info) {
     $sql .= ($downloaded != $lp_info['downloaded']) ? ", downloaded = $downloaded" : '';
     $sql .= ", remain = $left";
 
-    $sql .= ($up_add) ? ", up_add = up_add + $up_add" : '';
-    $sql .= ($down_add) ? ", down_add = down_add + $down_add" : '';
+    $sql .= $up_add ? ", up_add = up_add + $up_add" : '';
+    $sql .= $down_add ? ", down_add = down_add + $down_add" : '';
 
     $sql .= ", speed_up = $speed_up";
     $sql .= ", speed_down = $speed_down";
@@ -370,10 +352,6 @@ if ($lp_info) {
     DB()->query($sql);
 
     $peer_info_updated = DB()->affected_rows();
-
-    if (DBG_LOG) {
-        dbg_log(' ', 'this_peer-update' . ($peer_info_updated ? '' : '-FAIL'));
-    }
 }
 
 if (!$lp_info || !$peer_info_updated) {
@@ -381,10 +359,6 @@ if (!$lp_info || !$peer_info_updated) {
     $values = "'$peer_hash', $topic_id, $user_id, '$ip_sql', $port, $seeder, $releaser, $tor_type, $uploaded, $downloaded, $left, $speed_up, $speed_down, $up_add, $down_add, $update_time";
 
     DB()->query("REPLACE INTO " . BB_BT_TRACKER . " ($columns) VALUES ($values)");
-
-    if (DBG_LOG) {
-        dbg_log(' ', 'this_peer-insert');
-    }
 }
 
 // Exit if stopped
@@ -406,16 +380,8 @@ $lp_info = array(
 
 $lp_info_cached = CACHE('tr_cache')->set(PEER_HASH_PREFIX . $peer_hash, $lp_info, PEER_HASH_EXPIRE);
 
-if (DBG_LOG && !$lp_info_cached) {
-    dbg_log(' ', '$lp_info-caching-FAIL');
-}
-
 // Get cached output
 $output = CACHE('tr_cache')->get(PEERS_LIST_PREFIX . $topic_id);
-
-if (DBG_LOG) {
-    dbg_log(' ', '$output-get_from-CACHE-' . ($output !== false ? 'hit' : 'miss'));
-}
 
 if (!$output) {
     // Retrieve peers
@@ -471,14 +437,9 @@ if (!$output) {
     );
 
     $peers_list_cached = CACHE('tr_cache')->set(PEERS_LIST_PREFIX . $topic_id, $output, PEERS_LIST_EXPIRE);
-
-    if (DBG_LOG && !$peers_list_cached) {
-        dbg_log(' ', '$output-caching-FAIL');
-    }
 }
 
 // Return data to client
 echo \Rych\Bencode\Bencode::encode($output);
 
-tracker_exit();
 exit;

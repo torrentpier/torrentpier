@@ -58,7 +58,7 @@ if ($bb_cfg['tracker']['update_dlstat']) {
 			topic_id, user_id, IF(releaser, $releaser, seeder), SUM(up_add), SUM(down_add), IF(releaser, SUM(up_add), 0), SUM(speed_up), SUM(speed_down)
 		FROM " . BB_BT_TRACKER . "
 		WHERE (up_add != 0 OR down_add != 0)
-		GROUP BY topic_id, user_id, releaser, seeder
+		GROUP BY topic_id, user_id
 	");
 
     // Reset up/down additions in tracker

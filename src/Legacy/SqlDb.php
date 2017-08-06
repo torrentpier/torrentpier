@@ -805,7 +805,7 @@ class SqlDb
         $dbg =& $this->dbg[$id];
 
         if ($mode == 'start') {
-            if (SQL_CALC_QUERY_TIME || DBG_LOG || SQL_LOG_SLOW_QUERIES) {
+            if (SQL_CALC_QUERY_TIME || SQL_LOG_SLOW_QUERIES) {
                 $this->sql_starttime = utime();
             }
             if ($this->dbg_enabled) {
@@ -821,7 +821,7 @@ class SqlDb
                 $this->explain('start');
             }
         } elseif ($mode == 'stop') {
-            if (SQL_CALC_QUERY_TIME || DBG_LOG || SQL_LOG_SLOW_QUERIES) {
+            if (SQL_CALC_QUERY_TIME || SQL_LOG_SLOW_QUERIES) {
                 $this->cur_query_time = utime() - $this->sql_starttime;
                 $this->sql_timetotal += $this->cur_query_time;
                 $this->DBS['sql_timetotal'] += $this->cur_query_time;
@@ -855,13 +855,7 @@ class SqlDb
     public function trigger_error($msg = 'DB Error')
     {
         if (error_reporting()) {
-            if (DBG_LOG === true) {
-                $err = $this->sql_error();
-                $msg .= "\n" . trim(sprintf('#%06d %s', $err['code'], $err['message']));
-            } else {
-                $msg .= ' [' . $this->debug_find_source() . ']';
-            }
-
+            $msg .= ' [' . $this->debug_find_source() . ']';
             trigger_error($msg, E_USER_ERROR);
         }
     }

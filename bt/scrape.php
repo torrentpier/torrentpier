@@ -46,10 +46,6 @@ $info_hash = $_GET['info_hash'];
 
 function msg_die($msg)
 {
-    if (DBG_LOG) {
-        dbg_log(' ', '!die-' . clean_filename($msg));
-    }
-
     $output = \Rych\Bencode\Bencode::encode([
         'min interval' => (int)1800,
         'failure reason' => (string)$msg,
@@ -79,5 +75,4 @@ $output['files'][$info_hash] = array(
 
 echo \Rych\Bencode\Bencode::encode($output);
 
-tracker_exit();
 exit;
