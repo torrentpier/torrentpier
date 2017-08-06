@@ -87,37 +87,39 @@ if ($submit && $mode == 'user') {
     }
 
     // Make user an admin (if already user)
-    if ($_POST['userlevel'] === 'admin') {
-        if ($userdata['user_id'] == $user_id || $user_id == GUEST_UID || $user_id == BOT_UID) {
-            bb_die('Could not update admin status');
+    if (isset($_POST['userlevel'])) {
+        if ($_POST['userlevel'] === 'admin') {
+            if ($userdata['user_id'] == $user_id || $user_id == GUEST_UID || $user_id == BOT_UID) {
+                bb_die('Could not update admin status');
+            }
+
+            DB()->query('UPDATE ' . BB_USERS . ' SET user_level = ' . ADMIN . " WHERE user_id = $user_id");
+
+            // Delete any entries in auth_access, they are not required if user is becoming an admin
+            delete_permissions($group_id, $user_id);
+
+            $message = $lang['AUTH_UPDATED'] . '<br /><br />';
+            $message .= sprintf($lang['CLICK_RETURN_USERAUTH'], '<a href="admin_ug_auth.php?mode=' . $mode . '">', '</a>') . '<br /><br />';
+            $message .= sprintf($lang['CLICK_RETURN_ADMIN_INDEX'], '<a href="index.php?pane=right">', '</a>');
+
+            bb_die($message);
+        } // Make admin a user (if already admin)
+        elseif ($_POST['userlevel'] === 'user') {
+            // ignore if you're trying to change yourself from an admin to user!
+            if ($userdata['user_id'] == $user_id) {
+                bb_die('Could not update admin status<br /><br />Could not change yourself from an admin to user');
+            }
+            // Update users level, reset to USER
+            DB()->query('UPDATE ' . BB_USERS . ' SET user_level = ' . USER . " WHERE user_id = $user_id");
+
+            delete_permissions($group_id, $user_id);
+
+            $message = $lang['AUTH_UPDATED'] . '<br /><br />';
+            $message .= sprintf($lang['CLICK_RETURN_USERAUTH'], '<a href="admin_ug_auth.php?mode=' . $mode . '">', '</a>') . '<br /><br />';
+            $message .= sprintf($lang['CLICK_RETURN_ADMIN_INDEX'], '<a href="index.php?pane=right">', '</a>');
+
+            bb_die($message);
         }
-
-        DB()->query('UPDATE ' . BB_USERS . ' SET user_level = ' . ADMIN . " WHERE user_id = $user_id");
-
-        // Delete any entries in auth_access, they are not required if user is becoming an admin
-        delete_permissions($group_id, $user_id);
-
-        $message = $lang['AUTH_UPDATED'] . '<br /><br />';
-        $message .= sprintf($lang['CLICK_RETURN_USERAUTH'], '<a href="admin_ug_auth.php?mode=' . $mode . '">', '</a>') . '<br /><br />';
-        $message .= sprintf($lang['CLICK_RETURN_ADMIN_INDEX'], '<a href="index.php?pane=right">', '</a>');
-
-        bb_die($message);
-    } // Make admin a user (if already admin)
-    elseif ($_POST['userlevel'] === 'user') {
-        // ignore if you're trying to change yourself from an admin to user!
-        if ($userdata['user_id'] == $user_id) {
-            bb_die('Could not update admin status<br /><br />Could not change yourself from an admin to user');
-        }
-        // Update users level, reset to USER
-        DB()->query('UPDATE ' . BB_USERS . ' SET user_level = ' . USER . " WHERE user_id = $user_id");
-
-        delete_permissions($group_id, $user_id);
-
-        $message = $lang['AUTH_UPDATED'] . '<br /><br />';
-        $message .= sprintf($lang['CLICK_RETURN_USERAUTH'], '<a href="admin_ug_auth.php?mode=' . $mode . '">', '</a>') . '<br /><br />';
-        $message .= sprintf($lang['CLICK_RETURN_ADMIN_INDEX'], '<a href="index.php?pane=right">', '</a>');
-
-        bb_die($message);
     }
 
     //
