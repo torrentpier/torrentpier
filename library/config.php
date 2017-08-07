@@ -356,7 +356,7 @@ $bb_cfg['lang'] = [
 
 // Templates
 $bb_cfg['templates'] = [
-    'default' => 'Стандартный',
+    'default' => 'TorrentPier',
 ];
 
 $bb_cfg['tpl_name'] = 'default';

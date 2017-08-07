@@ -607,7 +607,7 @@ class User
         require(LANG_DIR . 'main.php');
         setlocale(LC_ALL, isset($bb_cfg['lang'][$this->data['user_lang']]['locale']) ?
             $bb_cfg['lang'][$this->data['user_lang']]['locale'] : 'en_US.UTF-8');
-        $lang = array_merge($lang, $source_lang);
+        $lang += $source_lang;
 
         $theme = setup_style();
         $DeltaTime = new DateDelta();

@@ -1,10 +1,30 @@
 # Change Log
 
-## [v2.2.2](https://github.com/torrentpier/torrentpier/tree/v2.2.2) (2017-06-23)
+## [v2.2.3](https://github.com/torrentpier/torrentpier/tree/v2.2.3) (2017-08-07)
+[Full Changelog](https://github.com/torrentpier/torrentpier/compare/v2.2.2...v2.2.3)
+
+**Merged pull requests:**
+
+- Release preparation. Crowdin language pack update [\#442](https://github.com/torrentpier/torrentpier/pull/442) ([Exile37](https://github.com/Exile37))
+- Unique topic page title, undefined language variables fix [\#441](https://github.com/torrentpier/torrentpier/pull/441) ([Exile37](https://github.com/Exile37))
+- Remove matching users with default IP from profile list [\#440](https://github.com/torrentpier/torrentpier/pull/440) ([Exile37](https://github.com/Exile37))
+- Broken announcer fix, announcer debug removed [\#439](https://github.com/torrentpier/torrentpier/pull/439) ([Exile37](https://github.com/Exile37))
+- Fix broken ajax [\#436](https://github.com/torrentpier/torrentpier/pull/436) ([Exile37](https://github.com/Exile37))
+- Some deprecations, normalize.css, torrent file content sort fix [\#434](https://github.com/torrentpier/torrentpier/pull/434) ([Exile37](https://github.com/Exile37))
+- Incorrect log file rotation regex [\#432](https://github.com/torrentpier/torrentpier/pull/432) ([Exile37](https://github.com/Exile37))
+- Various bug fixes described on the forum [\#431](https://github.com/torrentpier/torrentpier/pull/431) ([Exile37](https://github.com/Exile37))
+- Fixes \#412 - bug with dynamic language variables [\#430](https://github.com/torrentpier/torrentpier/pull/430) ([Exile37](https://github.com/Exile37))
+- Update .htaccess for new Apache 2.4 syntax [\#429](https://github.com/torrentpier/torrentpier/pull/429) ([Exile37](https://github.com/Exile37))
+- Crowdin language pack update for new project domain name [\#415](https://github.com/torrentpier/torrentpier/pull/415) ([Exile37](https://github.com/Exile37))
+- Composer support section error [\#414](https://github.com/torrentpier/torrentpier/pull/414) ([Exile37](https://github.com/Exile37))
+- New project domain name [\#413](https://github.com/torrentpier/torrentpier/pull/413) ([Exile37](https://github.com/Exile37))
+
+## [v2.2.2](https://github.com/torrentpier/torrentpier/tree/v2.2.2) (2017-06-22)
 [Full Changelog](https://github.com/torrentpier/torrentpier/compare/v2.2.1...v2.2.2)
 
 **Merged pull requests:**
 
+- Release 2.2.2 🌞 [\#410](https://github.com/torrentpier/torrentpier/pull/410) ([Exile37](https://github.com/Exile37))
 - Release preparation Crowdin language pack update [\#409](https://github.com/torrentpier/torrentpier/pull/409) ([Exile37](https://github.com/Exile37))
 - Display source language if no user language variable [\#408](https://github.com/torrentpier/torrentpier/pull/408) ([Exile37](https://github.com/Exile37))
 - Disable Bugsnag by default [\#407](https://github.com/torrentpier/torrentpier/pull/407) ([Exile37](https://github.com/Exile37))
