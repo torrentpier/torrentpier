@@ -77,6 +77,7 @@ $lang['SELECT_ACTION'] = 'Seleccione la acción';
 
 $lang['NEXT_PAGE'] = 'Siguiente';
 $lang['PREVIOUS_PAGE'] = 'Anterior';
+$lang['SHORT_PAGE'] = 'página';
 $lang['GOTO_PAGE'] = 'Ir a la página';
 $lang['GOTO_SHORT'] = 'Página';
 $lang['JOINED'] = 'Unido';
@@ -846,7 +847,7 @@ $lang['AUTH_ADMINISTRATORS'] = '<b>administrators</b>';
 $lang['NOT_MODERATOR'] = 'Usted no es un moderador de este foro.';
 $lang['NOT_AUTHORISED'] = 'No Autorizado';
 
-$lang['YOU_BEEN_BANNED'] = 'Has sido baneado de este foro.<br />Please en contacto con el webmaster o administrador del foro para más información.';
+$lang['YOU_BEEN_BANNED'] = 'Has sido baneado de este foro. Póngase en contacto con el administrador para obtener más información.';
 
 // Viewonline
 $lang['ONLINE_EXPLAIN'] = 'los usuarios activos en los últimos cinco minutos';
@@ -2014,7 +2015,6 @@ $lang['DELETE_DISALLOW_EXPLAIN'] = 'Usted puede eliminar un nombre de usuario no
 
 $lang['ADD_DISALLOW'] = 'Agregar';
 $lang['ADD_DISALLOW_TITLE'] = 'Agregar un nombre de usuario no permitido';
-$lang['ADD_DISALLOW_EXPLAIN'] = 'Usted puede desactivar un nombre de usuario utilizar el carácter comodín * para que coincida con cualquier personaje';
 
 $lang['NO_DISALLOWED'] = 'No Desestimado Los Nombres De Usuario';
 
@@ -2757,6 +2757,8 @@ $lang['ATOM_SUBSCRIBE'] = 'Suscribirse a la fuente';
 $lang['ATOM_NO_MODE'] = 'No se especifica un modo para la alimentación';
 $lang['ATOM_NO_FORUM'] = 'Este foro no tiene una fuente (no continuo temas)';
 $lang['ATOM_NO_USER'] = 'Este usuario no tiene una fuente (no continuo temas)';
+$lang['ATOM_UPDATED'] = 'Actualizado';
+$lang['ATOM_GLOBAL_FEED'] = 'Mundial de alimentación para todos los foros';
 
 $lang['HASH_INVALID'] = 'Hash %s no es válido';
 $lang['HASH_NOT_FOUND'] = 'Con la liberación de hash %s no se encuentra';

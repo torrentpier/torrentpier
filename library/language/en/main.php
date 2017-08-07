@@ -77,6 +77,7 @@ $lang['SELECT_ACTION'] = 'Select action';
 
 $lang['NEXT_PAGE'] = 'Next';
 $lang['PREVIOUS_PAGE'] = 'Previous';
+$lang['SHORT_PAGE'] = 'page';
 $lang['GOTO_PAGE'] = 'Go to page';
 $lang['GOTO_SHORT'] = 'Page';
 $lang['JOINED'] = 'Joined';
@@ -846,7 +847,7 @@ $lang['AUTH_ADMINISTRATORS'] = '<b>administrators</b>';
 $lang['NOT_MODERATOR'] = 'You are not a moderator of this forum.';
 $lang['NOT_AUTHORISED'] = 'Not Authorised';
 
-$lang['YOU_BEEN_BANNED'] = 'You have been banned from this forum.<br />Please contact the webmaster or board administrator for more information.';
+$lang['YOU_BEEN_BANNED'] = 'You have been banned from this forum. Please contact the board administrator for more information.';
 
 // Viewonline
 $lang['ONLINE_EXPLAIN'] = 'users active over the past five minutes';
@@ -2014,7 +2015,6 @@ $lang['DELETE_DISALLOW_EXPLAIN'] = 'You can remove a disallowed username by sele
 
 $lang['ADD_DISALLOW'] = 'Add';
 $lang['ADD_DISALLOW_TITLE'] = 'Add a disallowed username';
-$lang['ADD_DISALLOW_EXPLAIN'] = 'You can disallow a username using the wildcard character * to match any character';
 
 $lang['NO_DISALLOWED'] = 'No Disallowed Usernames';
 
@@ -2757,6 +2757,8 @@ $lang['ATOM_SUBSCRIBE'] = 'Subscribe to the feed';
 $lang['ATOM_NO_MODE'] = 'Do not specify a mode for the feed';
 $lang['ATOM_NO_FORUM'] = 'This forum does not have a feed (no ongoing topics)';
 $lang['ATOM_NO_USER'] = 'This user does not have a feed (no ongoing topics)';
+$lang['ATOM_UPDATED'] = 'Updated';
+$lang['ATOM_GLOBAL_FEED'] = 'Global feed for all forums';
 
 $lang['HASH_INVALID'] = 'Hash %s is invalid';
 $lang['HASH_NOT_FOUND'] = 'Release with hash %s not found';

@@ -77,6 +77,7 @@ $lang['SELECT_ACTION'] = 'Selectați acțiune';
 
 $lang['NEXT_PAGE'] = 'Următoarea';
 $lang['PREVIOUS_PAGE'] = 'Anterior';
+$lang['SHORT_PAGE'] = 'pagina';
 $lang['GOTO_PAGE'] = 'Du-te la pagina';
 $lang['GOTO_SHORT'] = 'Pagina';
 $lang['JOINED'] = 'S-au alăturat';
@@ -846,7 +847,7 @@ $lang['AUTH_ADMINISTRATORS'] = '<b>administrators</b>';
 $lang['NOT_MODERATOR'] = 'Nu sunt un moderator al acestui forum.';
 $lang['NOT_AUTHORISED'] = 'Nu Sunt Autorizate';
 
-$lang['YOU_BEEN_BANNED'] = 'Ai fost banat pe acest forum.<br />Please contactați webmaster-ul sau administratorul pentru mai multe informații.';
+$lang['YOU_BEEN_BANNED'] = 'Ați fost interzis din acest forum. Vă rugăm să contactați administratorul forumului pentru mai multe informații.';
 
 // Viewonline
 $lang['ONLINE_EXPLAIN'] = 'utilizatori activi în ultimele cinci minute';
@@ -2014,7 +2015,6 @@ $lang['DELETE_DISALLOW_EXPLAIN'] = 'Te poate elimina o nepermis de utilizator pr
 
 $lang['ADD_DISALLOW'] = 'Adauga';
 $lang['ADD_DISALLOW_TITLE'] = 'Adauga o nepermis de utilizator';
-$lang['ADD_DISALLOW_EXPLAIN'] = 'Puteți respinge un nume de utilizator folosind caracterul wildcard * pentru a se potrivi orice caracter';
 
 $lang['NO_DISALLOWED'] = 'Nu Nepermis De Utilizator';
 
@@ -2757,6 +2757,8 @@ $lang['ATOM_SUBSCRIBE'] = 'Aboneaza-te la feed';
 $lang['ATOM_NO_MODE'] = 'Nu specificați un modul pentru alimentare';
 $lang['ATOM_NO_FORUM'] = 'Acest forum nu are un flux (nr. în curs de desfășurare subiecte)';
 $lang['ATOM_NO_USER'] = 'Acest utilizator nu are o alimentare (nu in curs de desfasurare subiecte)';
+$lang['ATOM_UPDATED'] = 'Actualizat';
+$lang['ATOM_GLOBAL_FEED'] = 'Feed global pentru toate forumurile';
 
 $lang['HASH_INVALID'] = 'Hash %s este invalid';
 $lang['HASH_NOT_FOUND'] = 'Lansare cu hash %s nu a fost găsit';

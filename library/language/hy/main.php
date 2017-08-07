@@ -77,6 +77,7 @@ $lang['SELECT_ACTION'] = 'Ընտրեք գործողությունը';
 
 $lang['NEXT_PAGE'] = 'Ավելին';
 $lang['PREVIOUS_PAGE'] = 'Նախորդ';
+$lang['SHORT_PAGE'] = 'էջը';
 $lang['GOTO_PAGE'] = 'Անցնել էջը';
 $lang['GOTO_SHORT'] = 'Էջերը';
 $lang['JOINED'] = 'Միացել';
@@ -846,7 +847,7 @@ $lang['AUTH_ADMINISTRATORS'] = '<b>administrators</b>';
 $lang['NOT_MODERATOR'] = 'Դուք չեք մոդերատոր այս համաժողովից:';
 $lang['NOT_AUTHORISED'] = 'Չի Թույլատրվում';
 
-$lang['YOU_BEEN_BANNED'] = 'Դուք забанены այս համաժողովին:<br />Please դիմեք webmaster կամ ադմինիստրատորին համաժողովի լրացուցիչ տեղեկությունների համար.';
+$lang['YOU_BEEN_BANNED'] = 'Դուք արգելված եք այս ֆորումից: Լրացուցիչ տեղեկությունների համար դիմեք վարչության վարչարարին.';
 
 // Viewonline
 $lang['ONLINE_EXPLAIN'] = 'ակտիվ օգտատերերի վերջին հինգ րոպե';
@@ -2014,7 +2015,6 @@ $lang['DELETE_DISALLOW_EXPLAIN'] = 'Դուք կարող եք հեռացնել ա
 
 $lang['ADD_DISALLOW'] = 'Ավելացնել';
 $lang['ADD_DISALLOW_TITLE'] = 'Ավելացնել незасчитанный անունը';
-$lang['ADD_DISALLOW_EXPLAIN'] = 'Դուք կարող եք արգելել անունը, օգտագործելով подстановочный char * համապատասխանում է ցանկացած խորհրդանիշ';
 
 $lang['NO_DISALLOWED'] = 'Արգելված Լոգիններն';
 
@@ -2757,6 +2757,8 @@ $lang['ATOM_SUBSCRIBE'] = 'Բաժանորդագրվեք rss';
 $lang['ATOM_NO_MODE'] = 'Նշված ռեժիմը համար կեր';
 $lang['ATOM_NO_FORUM'] = 'Այս համաժողովը է կերակրել (ոչ ընթացիկ թեմաներ)';
 $lang['ATOM_NO_USER'] = 'Այս օգտագործողի չկա սննդի (ոչ մշտական թեմաները)';
+$lang['ATOM_UPDATED'] = 'Թարմացնել';
+$lang['ATOM_GLOBAL_FEED'] = 'Համաշխարհային ֆորում բոլոր ֆորումների համար';
 
 $lang['HASH_INVALID'] = 'Հաշ-%s է անվավեր';
 $lang['HASH_NOT_FOUND'] = 'Թողարկումը հետ հաշ-%s չի գտնվել';

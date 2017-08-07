@@ -77,6 +77,7 @@ $lang['SELECT_ACTION'] = 'Vali tegevus';
 
 $lang['NEXT_PAGE'] = 'Järgmine';
 $lang['PREVIOUS_PAGE'] = 'Eelmine';
+$lang['SHORT_PAGE'] = 'lehel';
 $lang['GOTO_PAGE'] = 'Mine lehele';
 $lang['GOTO_SHORT'] = 'Lehekülg';
 $lang['JOINED'] = 'Liitunud';
@@ -846,7 +847,7 @@ $lang['AUTH_ADMINISTRATORS'] = '<b>administrators</b>';
 $lang['NOT_MODERATOR'] = 'Sa pole moderaator selles foorumis.';
 $lang['NOT_AUTHORISED'] = 'Ei Ole Lubatud';
 
-$lang['YOU_BEEN_BANNED'] = 'Teil on keelatud siin foorumis.<br />Please kontakt webmaster või administraator rohkem infot.';
+$lang['YOU_BEEN_BANNED'] = 'Teil on see foorum keelatud. Lisateabe saamiseks võtke ühendust administraatori administraatoriga.';
 
 // Viewonline
 $lang['ONLINE_EXPLAIN'] = 'kasutajad aktiivne viimase viie minuti jooksul';
@@ -2014,7 +2015,6 @@ $lang['DELETE_DISALLOW_EXPLAIN'] = 'Võite eemaldada keelatud kasutajanimi valid
 
 $lang['ADD_DISALLOW'] = 'Lisa';
 $lang['ADD_DISALLOW_TITLE'] = 'Lisada keelatud kasutajanimi';
-$lang['ADD_DISALLOW_EXPLAIN'] = 'Võite keelata kasutajanime, kasutades metamärk * sobitada iga märk';
 
 $lang['NO_DISALLOWED'] = 'Nr Keelatud Kasutajanimed';
 
@@ -2757,6 +2757,8 @@ $lang['ATOM_SUBSCRIBE'] = 'Tellida sööda';
 $lang['ATOM_NO_MODE'] = 'Ei täpsusta režiim sööt';
 $lang['ATOM_NO_FORUM'] = 'See foorum ei ole sööda kohta (nr käimasolevad teemad)';
 $lang['ATOM_NO_USER'] = 'See kasutaja ei ole sööda kohta (nr käimasolevad teemad)';
+$lang['ATOM_UPDATED'] = 'Uuendus';
+$lang['ATOM_GLOBAL_FEED'] = 'Globaalne sööt kõikidele foorumitele';
 
 $lang['HASH_INVALID'] = 'Hash %s on kehtetu';
 $lang['HASH_NOT_FOUND'] = 'Pressiteade hash %s ei leitud';
