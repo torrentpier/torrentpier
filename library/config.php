@@ -27,8 +27,9 @@ if (!defined('BB_ROOT')) {
     die(basename(__FILE__));
 }
 
-$domain_name = 'torrentpier.me'; // enter here your primary domain name of your site
+$domain_name = 'torrentpier.com'; // enter here your primary domain name of your site
 $domain_name = (!empty($_SERVER['SERVER_NAME'])) ? $_SERVER['SERVER_NAME'] : $domain_name;
+$domain_ssl = false;
 
 $bb_cfg = [];
 
@@ -36,8 +37,8 @@ $bb_cfg = [];
 $bb_cfg['js_ver'] = $bb_cfg['css_ver'] = 1;
 
 // Version info
-$bb_cfg['tp_version'] = '2.2.2';
-$bb_cfg['tp_release_date'] = '23-06-2017';
+$bb_cfg['tp_version'] = '2.2.3';
+$bb_cfg['tp_release_date'] = '07-08-2017';
 $bb_cfg['tp_release_codename'] = 'Aurochs';
 
 // Database
@@ -355,7 +356,7 @@ $bb_cfg['lang'] = [
 
 // Templates
 $bb_cfg['templates'] = [
-    'default' => 'Стандартный',
+    'default' => 'TorrentPier',
 ];
 
 $bb_cfg['tpl_name'] = 'default';
@@ -366,7 +367,7 @@ $bb_cfg['show_sidebar2_on_every_page'] = false;
 
 // Cookie
 $bb_cfg['cookie_domain'] = in_array($domain_name, [getenv('SERVER_ADDR'), 'localhost'], true) ? '' : ".$domain_name";
-$bb_cfg['cookie_secure'] = !empty($_SERVER['HTTPS']) ? 1 : 0;
+$bb_cfg['cookie_secure'] = $domain_ssl ? true : (!empty($_SERVER['HTTPS']) ? true : false);
 $bb_cfg['cookie_prefix'] = 'bb_'; // 'bb_'
 
 // Sessions

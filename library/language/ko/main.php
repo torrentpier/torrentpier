@@ -77,6 +77,7 @@ $lang['SELECT_ACTION'] = '선택 작업';
 
 $lang['NEXT_PAGE'] = '다음';
 $lang['PREVIOUS_PAGE'] = '이전';
+$lang['SHORT_PAGE'] = '페이지';
 $lang['GOTO_PAGE'] = '페이지로 이동';
 $lang['GOTO_SHORT'] = '페이지';
 $lang['JOINED'] = '류';
@@ -846,7 +847,7 @@ $lang['AUTH_ADMINISTRATORS'] = '<b>administrators</b>';
 $lang['NOT_MODERATOR'] = '당신은하지 않는 중재자의 이 포럼도 있습니다.';
 $lang['NOT_AUTHORISED'] = '허가되지 않았';
 
-$lang['YOU_BEEN_BANNED'] = '당신은 금지되어 있습니다.<br />Please 연락처 웹마스터나 게시판 관리자에 대한 더 많은 정보를니다.';
+$lang['YOU_BEEN_BANNED'] = '이 포럼에서 금지되었습니다. 자세한 정보는 이사회 관리자에게 문의하십시오.';
 
 // Viewonline
 $lang['ONLINE_EXPLAIN'] = '사용자는 활동을 통해 지난 다섯 분';
@@ -2014,7 +2015,6 @@ $lang['DELETE_DISALLOW_EXPLAIN'] = '를 제거할 수 있습니다 허용되지 
 
 $lang['ADD_DISALLOW'] = '추가';
 $lang['ADD_DISALLOW_TITLE'] = '추가 허용되지 않는 사용자 이름';
-$lang['ADD_DISALLOW_EXPLAIN'] = '을 허용하지 않도록 설정할 수 있습는 사용자 이름을 사용하는 와일드카드 문자*모든 문자';
 
 $lang['NO_DISALLOWED'] = '아 허용하지 않는 사용자 이름';
 
@@ -2747,7 +2747,7 @@ $lang['SITEMAP_BING_1'] = '귀하의 사이트에 등록에서 <a href="https://
 $lang['SITEMAP_BING_2'] = '추가 사이트 맵의 사이트에 등록 설정합니다.';
 $lang['SITEMAP_ADD_TITLE'] = '추가 페이지가 사이트맵';
 $lang['SITEMAP_ADD_PAGE'] = '추가 페이지';
-$lang['SITEMAP_ADD_EXP_1'] = '지정할 수 있습니다 추가 페이지에서 당신의 사이트(예를 들어,<b>http://torrentpier 니다.me/memberlist 니다.php</b>)포함되어야하는 사이트에서 파일을 생성합니다.';
+$lang['SITEMAP_ADD_EXP_1'] = '지정할 수 있습니다 추가 페이지에서 당신의 사이트에 포함되어야하는 사이트맵 파일을 생성합니다.';
 $lang['SITEMAP_ADD_EXP_2'] = '각 참조로 시작해야 합 http(s)://고 새로운 라인!';
 
 $lang['FORUM_MAP'] = '포럼\'맵';
@@ -2757,6 +2757,8 @@ $lang['ATOM_SUBSCRIBE'] = '피드 구독';
 $lang['ATOM_NO_MODE'] = '를 지정하지 않은 모드에 대한 피드';
 $lang['ATOM_NO_FORUM'] = '이 포럼을 가지지 않 피드(지속적인 항목)';
 $lang['ATOM_NO_USER'] = '이 사용자가 없 피드(지속적인 항목)';
+$lang['ATOM_UPDATED'] = '업데이트되었습니다.';
+$lang['ATOM_GLOBAL_FEED'] = '모든 포럼의 글로벌 피드';
 
 $lang['HASH_INVALID'] = '해시가 잘못되었 %s';
 $lang['HASH_NOT_FOUND'] = '릴리스와 해시 %s 발견되지 않았';

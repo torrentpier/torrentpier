@@ -98,13 +98,13 @@ switch ($mode) {
 
         $reg_ip = DB()->fetch_rowset("SELECT username, user_id, user_rank FROM " . BB_USERS . "
 			WHERE user_reg_ip = '{$profiledata['user_reg_ip']}'
-				AND user_reg_ip != ''
+				AND user_reg_ip != 0
 				AND user_id != {$profiledata['user_id']}
 			ORDER BY username ASC");
 
         $last_ip = DB()->fetch_rowset("SELECT username, user_id, user_rank FROM " . BB_USERS . "
 			WHERE user_last_ip = '{$profiledata['user_last_ip']}'
-				AND user_last_ip != ''
+				AND user_last_ip != 0
 				AND user_id != {$profiledata['user_id']}");
 
         $link_reg_ip = $link_last_ip = '';

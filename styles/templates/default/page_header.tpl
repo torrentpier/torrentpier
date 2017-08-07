@@ -37,7 +37,7 @@ var BB_ROOT      = "{#BB_ROOT}";
 var cookieDomain = "{$bb_cfg['cookie_domain']}";
 var cookiePath   = "{$bb_cfg['script_path']}";
 var cookiePrefix = "{$bb_cfg['cookie_prefix']}";
-var cookieSecure = {$bb_cfg['cookie_secure']};
+var cookieSecure = "{$bb_cfg['cookie_secure']}";
 var LOGGED_IN    = {LOGGED_IN};
 var IWP          = 'HEIGHT=510,WIDTH=780,resizable=yes';
 var IWP_US       = 'HEIGHT=250,WIDTH=400,resizable=yes';
@@ -67,7 +67,7 @@ $(document).ready(function(){
 	');
 	$('#jumpbox-container').one('click', function(){
 		$('#jumpbox-title').html('&nbsp;&nbsp; {L_LOADING} ... &nbsp;');
-		var jumpbox_src = '{AJAX_HTML_DIR}' + ({LOGGED_IN} ? '/jumpbox_user.html' : '/jumpbox_guest.html');
+		var jumpbox_src = '/internal_data/ajax_html' + ({LOGGED_IN} ? '/jumpbox_user.html' : '/jumpbox_guest.html');
 		$(this).load(jumpbox_src);
 		$('#jumpbox-submit').click(function(){ window.location.href='{FORUM_URL}'+$('#jumpbox').val(); });
 	});

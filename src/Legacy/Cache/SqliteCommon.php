@@ -65,10 +65,6 @@ class SqliteCommon extends Common
             $this->connected = true;
         }
 
-        if (DBG_LOG) {
-            dbg_log(' ', $this->cfg['log_name'] . '-connect' . ($this->connected ? '' : '-FAIL'));
-        }
-
         if (!$this->connected && $this->cfg['con_required']) {
             trigger_error('SQLite not connected', E_USER_ERROR);
         }

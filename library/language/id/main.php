@@ -77,6 +77,7 @@ $lang['SELECT_ACTION'] = 'Pilih action';
 
 $lang['NEXT_PAGE'] = 'Berikutnya';
 $lang['PREVIOUS_PAGE'] = 'Sebelumnya';
+$lang['SHORT_PAGE'] = 'halaman';
 $lang['GOTO_PAGE'] = 'Pergi ke halaman';
 $lang['GOTO_SHORT'] = 'Halaman';
 $lang['JOINED'] = 'Bergabung';
@@ -846,7 +847,7 @@ $lang['AUTH_ADMINISTRATORS'] = '<b>administrators</b>';
 $lang['NOT_MODERATOR'] = 'Anda bukan moderator dari forum ini.';
 $lang['NOT_AUTHORISED'] = 'Tidak Resmi';
 
-$lang['YOU_BEEN_BANNED'] = 'Anda telah dilarang dari forum ini.<br />Please menghubungi webmaster atau administrator untuk informasi lebih lanjut.';
+$lang['YOU_BEEN_BANNED'] = 'Anda telah dilarang dari forum ini. Silahkan hubungi administrator forum untuk informasi lebih lanjut.';
 
 // Viewonline
 $lang['ONLINE_EXPLAIN'] = 'pengguna aktif lebih dari lima menit.';
@@ -2014,7 +2015,6 @@ $lang['DELETE_DISALLOW_EXPLAIN'] = 'Anda dapat menghapus batasan username dengan
 
 $lang['ADD_DISALLOW'] = 'Tambahkan';
 $lang['ADD_DISALLOW_TITLE'] = 'Menambahkan batasan username';
-$lang['ADD_DISALLOW_EXPLAIN'] = 'Anda dapat mengizinkan pengguna menggunakan karakter wildcard * untuk mencocokkan setiap karakter';
 
 $lang['NO_DISALLOWED'] = 'Tidak Ada Batasan Username';
 
@@ -2747,7 +2747,7 @@ $lang['SITEMAP_BING_1'] = 'Daftarkan situs anda di <a href="https://www.bing.com
 $lang['SITEMAP_BING_2'] = 'Menambahkan sitemap situs anda terdaftar dalam pengaturannya.';
 $lang['SITEMAP_ADD_TITLE'] = 'Halaman tambahan untuk sitemap';
 $lang['SITEMAP_ADD_PAGE'] = 'Halaman tambahan';
-$lang['SITEMAP_ADD_EXP_1'] = 'Anda dapat menentukan tambahan halaman di situs anda (misalnya, <b>http://torrentpier.me/anggota.php</b>) yang harus disertakan dalam file sitemap yang anda buat.';
+$lang['SITEMAP_ADD_EXP_1'] = 'Anda dapat menentukan tambahan halaman di situs anda yang harus disertakan dalam file sitemap yang anda buat.';
 $lang['SITEMAP_ADD_EXP_2'] = 'Setiap referensi harus dimulai dengan http(s):// dan baris baru!';
 
 $lang['FORUM_MAP'] = 'Forum peta';
@@ -2757,6 +2757,8 @@ $lang['ATOM_SUBSCRIBE'] = 'Berlangganan feed';
 $lang['ATOM_NO_MODE'] = 'Tidak menentukan mode untuk pakan';
 $lang['ATOM_NO_FORUM'] = 'Forum ini tidak memiliki pakan (tidak ada yang sedang berlangsung topik)';
 $lang['ATOM_NO_USER'] = 'Pengguna ini tidak memiliki pakan (tidak ada yang sedang berlangsung topik)';
+$lang['ATOM_UPDATED'] = 'Updated';
+$lang['ATOM_GLOBAL_FEED'] = 'Umpan global untuk semua forum';
 
 $lang['HASH_INVALID'] = 'Hash %s adalah tidak valid';
 $lang['HASH_NOT_FOUND'] = 'Rilis dengan hash %s tidak ditemukan';

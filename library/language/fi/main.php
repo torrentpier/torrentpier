@@ -77,6 +77,7 @@ $lang['SELECT_ACTION'] = 'Valitse toiminta';
 
 $lang['NEXT_PAGE'] = 'Seuraava';
 $lang['PREVIOUS_PAGE'] = 'Edellinen';
+$lang['SHORT_PAGE'] = 'sivulle';
 $lang['GOTO_PAGE'] = 'Siirry sivulle';
 $lang['GOTO_SHORT'] = 'Sivu';
 $lang['JOINED'] = 'Liittynyt';
@@ -846,7 +847,7 @@ $lang['AUTH_ADMINISTRATORS'] = '<b>administrators</b>';
 $lang['NOT_MODERATOR'] = 'Et ole moderaattori tällä foorumilla.';
 $lang['NOT_AUTHORISED'] = 'Ei Ole Sallittua';
 
-$lang['YOU_BEEN_BANNED'] = 'Sinulla on porttikielto tähän foorumiin.<br />Please yhteyttä webmaster tai ylläpitäjään saadaksesi lisätietoja.';
+$lang['YOU_BEEN_BANNED'] = 'Sinut on kielletty tästä foorumista. Ota yhteyttä ylläpitäjään lisätietoa.';
 
 // Viewonline
 $lang['ONLINE_EXPLAIN'] = 'aktiiviset käyttäjät viimeisen viiden minuutin';
@@ -2014,7 +2015,6 @@ $lang['DELETE_DISALLOW_EXPLAIN'] = 'Voit poistaa kieltänyt käyttäjätunnuksen
 
 $lang['ADD_DISALLOW'] = 'Lisää';
 $lang['ADD_DISALLOW_TITLE'] = 'Lisää kieltänyt käyttäjätunnus';
-$lang['ADD_DISALLOW_EXPLAIN'] = 'Voit estää käyttäjätunnusta käyttämällä jokerimerkkiä * vastaa mitä tahansa merkkiä';
 
 $lang['NO_DISALLOWED'] = 'Ei Kieltänyt Käyttäjätunnuksia';
 
@@ -2747,7 +2747,7 @@ $lang['SITEMAP_BING_1'] = 'Rekisteröidy sivuston milloin <a href="https://www.b
 $lang['SITEMAP_BING_2'] = 'Lisää sivukartta sivuston olet rekisteröitynyt sen asetukset.';
 $lang['SITEMAP_ADD_TITLE'] = 'Lisää sivuja sivukartta';
 $lang['SITEMAP_ADD_PAGE'] = 'Lisää sivuja';
-$lang['SITEMAP_ADD_EXP_1'] = 'Voit määrittää muita sivuja sivustosi (esimerkiksi <b>http://torrentpier.minua/käyttäjälistaa.php</b>), joka olisi sisällytettävä teidän sivustokarttatiedoston, että olet luomassa.';
+$lang['SITEMAP_ADD_EXP_1'] = 'Voit määrittää muita sivuja sivustosi, joka olisi sisällytettävä teidän sivustokarttatiedoston, että olet luomassa.';
 $lang['SITEMAP_ADD_EXP_2'] = 'Jokainen viittaus täytyy alkaa http(s):// ja uusi linja!';
 
 $lang['FORUM_MAP'] = 'Foorumeita kartta';
@@ -2757,6 +2757,8 @@ $lang['ATOM_SUBSCRIBE'] = 'Tilaa syöte';
 $lang['ATOM_NO_MODE'] = 'Älä määritä tila ruokkia';
 $lang['ATOM_NO_FORUM'] = 'Tämä foorumi ei ole ruokkia (ei käynnissä olevia aiheita)';
 $lang['ATOM_NO_USER'] = 'Tämä käyttäjä ei ole ruokkia (ei käynnissä olevia aiheita)';
+$lang['ATOM_UPDATED'] = 'Päivitetty';
+$lang['ATOM_GLOBAL_FEED'] = 'Maailmanlaajuinen rehu kaikille foorumeille';
 
 $lang['HASH_INVALID'] = 'Hash %s on virheellinen';
 $lang['HASH_NOT_FOUND'] = 'Julkaisu hash %s ei löytynyt';

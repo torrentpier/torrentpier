@@ -77,6 +77,7 @@ $lang['SELECT_ACTION'] = 'Velg handling';
 
 $lang['NEXT_PAGE'] = 'Neste';
 $lang['PREVIOUS_PAGE'] = 'Tidligere';
+$lang['SHORT_PAGE'] = 'side';
 $lang['GOTO_PAGE'] = 'Gå til side';
 $lang['GOTO_SHORT'] = 'Side';
 $lang['JOINED'] = 'Sluttet';
@@ -846,7 +847,7 @@ $lang['AUTH_ADMINISTRATORS'] = '<b>administrators</b>';
 $lang['NOT_MODERATOR'] = 'Du er ikke en moderator på dette forumet.';
 $lang['NOT_AUTHORISED'] = 'Ikke Godkjent';
 
-$lang['YOU_BEEN_BANNED'] = 'Du har blitt utestengt fra dette forumet.<br />Please kontakt webmaster eller styret systemansvarlig for mer informasjon.';
+$lang['YOU_BEEN_BANNED'] = 'Du har blitt utestengt fra dette forumet. Ta kontakt med styrets administrator for mer informasjon.';
 
 // Viewonline
 $lang['ONLINE_EXPLAIN'] = 'brukere aktive i løpet av de siste fem minutter';
@@ -2014,7 +2015,6 @@ $lang['DELETE_DISALLOW_EXPLAIN'] = 'Du kan fjerne en forbudt brukernavn ved å v
 
 $lang['ADD_DISALLOW'] = 'Legg til';
 $lang['ADD_DISALLOW_TITLE'] = 'Legg til en forbudt brukernavn';
-$lang['ADD_DISALLOW_EXPLAIN'] = 'Du kan nekte et brukernavn med jokertegnet * for å matche en hvilken som helst karakter';
 
 $lang['NO_DISALLOWED'] = 'Ingen Forbudt Brukernavn';
 
@@ -2747,7 +2747,7 @@ $lang['SITEMAP_BING_1'] = 'Registrer nettstedet ditt på <a href="https://www.bi
 $lang['SITEMAP_BING_2'] = 'Legg til sitemap av nettstedet du registrerte i sine innstillinger.';
 $lang['SITEMAP_ADD_TITLE'] = 'Flere sider for sidekart';
 $lang['SITEMAP_ADD_PAGE'] = 'Flere sider';
-$lang['SITEMAP_ADD_EXP_1'] = 'Du kan angi flere sider på nettstedet ditt (for eksempel <b>http://torrentpier.me/medlemslisten.php</b>) som bør inkluderes i sitemap-fil som du oppretter.';
+$lang['SITEMAP_ADD_EXP_1'] = 'Du kan angi flere sider på nettstedet ditt som bør være inkludert i din sitemap-fil som du oppretter.';
 $lang['SITEMAP_ADD_EXP_2'] = 'Hver referanse må begynne med http(s):// og en ny linje!';
 
 $lang['FORUM_MAP'] = 'Fora kart';
@@ -2757,6 +2757,8 @@ $lang['ATOM_SUBSCRIBE'] = 'Abonner på feed';
 $lang['ATOM_NO_MODE'] = 'Ikke angir en modus for mating';
 $lang['ATOM_NO_FORUM'] = 'Dette forumet har ikke en mate (ingen pågående emner)';
 $lang['ATOM_NO_USER'] = 'Denne brukeren har ikke en mate (ingen pågående emner)';
+$lang['ATOM_UPDATED'] = 'Oppdatert';
+$lang['ATOM_GLOBAL_FEED'] = 'Global feed for alle fora';
 
 $lang['HASH_INVALID'] = 'Hash %s er ugyldig';
 $lang['HASH_NOT_FOUND'] = 'Utgivelse med hash %s ikke funnet';

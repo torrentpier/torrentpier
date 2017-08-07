@@ -77,6 +77,7 @@ $lang['SELECT_ACTION'] = 'Pasirinkite veiksmą';
 
 $lang['NEXT_PAGE'] = 'Kitas';
 $lang['PREVIOUS_PAGE'] = 'Ankstesnis';
+$lang['SHORT_PAGE'] = 'puslapis';
 $lang['GOTO_PAGE'] = 'Eikite į puslapio';
 $lang['GOTO_SHORT'] = 'Puslapis';
 $lang['JOINED'] = 'Prisijungė';
@@ -846,7 +847,7 @@ $lang['AUTH_ADMINISTRATORS'] = '<b>administrators</b>';
 $lang['NOT_MODERATOR'] = 'Tu nesi moderatorius šiame forume.';
 $lang['NOT_AUTHORISED'] = 'Neleidžiama';
 
-$lang['YOU_BEEN_BANNED'] = 'Jūs buvote pašalintas iš šio forumo.<br />Please kreipkitės į administratorių arba valdybos administratorių, kuris suteiks daugiau informacijos.';
+$lang['YOU_BEEN_BANNED'] = 'Jūs esate uždrausta šiame forume. Norėdami gauti daugiau informacijos, susisiekite su valdybos administratoriumi.';
 
 // Viewonline
 $lang['ONLINE_EXPLAIN'] = 'vartotojai, aktyvūs per pastaruosius penkerius minutes';
@@ -2014,7 +2015,6 @@ $lang['DELETE_DISALLOW_EXPLAIN'] = 'Galite pašalinti nemokama, vartotojo vardas
 
 $lang['ADD_DISALLOW'] = 'Pridėti';
 $lang['ADD_DISALLOW_TITLE'] = 'Pridėti nemokama, vartotojo vardas';
-$lang['ADD_DISALLOW_EXPLAIN'] = 'Galite neleisti vartotojo vardą naudojant pakaitos simbolį * suderinti, bet kokio pobūdžio';
 
 $lang['NO_DISALLOWED'] = 'Nėra Nemokama, Vardai';
 
@@ -2747,7 +2747,7 @@ $lang['SITEMAP_BING_1'] = 'Užregistruokite savo svetainę <a href="https://www.
 $lang['SITEMAP_BING_2'] = 'Pridėti sitemap svetainėje, galite registruoti savo nustatymus.';
 $lang['SITEMAP_ADD_TITLE'] = 'Papildomi puslapiai sitemap';
 $lang['SITEMAP_ADD_PAGE'] = 'Papildomi puslapiai';
-$lang['SITEMAP_ADD_EXP_1'] = 'Jūs galite nurodyti papildomus puslapius į savo svetainę (pavyzdžiui, <b>http://torrentpier.mane/memberlist.php</b>), kuri turėtų būti įtraukta į jūsų svetainės failą, kad jums sukurti.';
+$lang['SITEMAP_ADD_EXP_1'] = 'Jūs galite nurodyti papildomus svetainės puslapius, kurie turėtų būti įtraukti į jūsų svetainės failą, kad jums sukurti.';
 $lang['SITEMAP_ADD_EXP_2'] = 'Kiekviena nuoroda turi prasidėti http(s):// ir naujos linijos!';
 
 $lang['FORUM_MAP'] = 'Forumuose " žemėlapį';
@@ -2757,6 +2757,8 @@ $lang['ATOM_SUBSCRIBE'] = 'Prenumeruoti informacijos santrauką,';
 $lang['ATOM_NO_MODE'] = 'Nėra nurodyta režimas pašarų';
 $lang['ATOM_NO_FORUM'] = 'Šis forumas neturi pašarų (joks temas)';
 $lang['ATOM_NO_USER'] = 'Šis vartotojas neturi pašarų (joks temas)';
+$lang['ATOM_UPDATED'] = 'Atnaujinta';
+$lang['ATOM_GLOBAL_FEED'] = 'Visuotinis informacijos šaltinis visiems forumuose';
 
 $lang['HASH_INVALID'] = 'Maišos %s negalioja';
 $lang['HASH_NOT_FOUND'] = 'Išleidimo su maišos %s nerasta';

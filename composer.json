@@ -8,31 +8,31 @@
     "torrent",
     "tracker"
   ],
-  "homepage": "https://torrentpier.me/",
+  "homepage": "https://torrentpier.com/",
   "license": "MIT",
   "authors": [
     {
       "name": "Exile",
-      "email": "admin@torrentpier.me",
-      "homepage": "https://torrentpier.me/forum/members/exile.1/",
+      "email": "admin@torrentpier.com",
+      "homepage": "https://github.com/Exile37",
       "role": "Developer"
     },
     {
       "name": "Diolektor",
-      "homepage": "https://torrentpier.me/forum/members/diolektor.5765/",
+      "homepage": "https://github.com/VasyOk",
       "role": "Developer"
     },
     {
       "name": "PheRum",
-      "homepage": "https://torrentpier.me/forum/members/pherum.23/",
+      "homepage": "https://github.com/PheRum",
       "role": "Developer"
     }
   ],
   "support": {
-    "email": "support@torrentpier.me",
+    "email": "support@torrentpier.com",
     "issues": "https://github.com/torrentpier/torrentpier/issues",
-    "forum": "https://torrentpier.me/forum/",
-    "docs": "https://docs.torrentpier.me/"
+    "forum": "https://torrentpier.com/forum/",
+    "docs": "https://docs.torrentpier.com/"
   },
   "require": {
     "php": "^5.6 || ^7.0",
@@ -41,7 +41,6 @@
     "gigablah/sphinxphp": "^2.0",
     "google/recaptcha": "^1.1",
     "longman/ip-tools": "^1.2",
-    "roave/security-advisories": "dev-master",
     "rych/bencode": "^1.0",
     "samdark/sitemap": "^2.0",
     "swiftmailer/swiftmailer": "^5.4",

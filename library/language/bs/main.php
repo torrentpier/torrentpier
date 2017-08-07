@@ -77,6 +77,7 @@ $lang['SELECT_ACTION'] = 'Odaberite akciju';
 
 $lang['NEXT_PAGE'] = 'Sljedeći';
 $lang['PREVIOUS_PAGE'] = 'Prethodni';
+$lang['SHORT_PAGE'] = 'stranica';
 $lang['GOTO_PAGE'] = 'Idem da stranica';
 $lang['GOTO_SHORT'] = 'Stranica';
 $lang['JOINED'] = 'Pridružio';
@@ -846,7 +847,7 @@ $lang['AUTH_ADMINISTRATORS'] = '<b>administrators</b>';
 $lang['NOT_MODERATOR'] = 'Nisi moderator ovo forum.';
 $lang['NOT_AUTHORISED'] = 'Ne Ovlašteni';
 
-$lang['YOU_BEEN_BANNED'] = 'Izbačen si iz ovog forum.<br />Please kontakt administrator ili odbor administrator za više informacija.';
+$lang['YOU_BEEN_BANNED'] = 'Zabranjeni ste sa ovog foruma. Za više informacija obratite se administratoru odbora.';
 
 // Viewonline
 $lang['ONLINE_EXPLAIN'] = 'korisnici aktivna u proteklih pet minuta';
@@ -2014,7 +2015,6 @@ $lang['DELETE_DISALLOW_EXPLAIN'] = 'Možete ukloniti dozvoljeno korisničko ime 
 
 $lang['ADD_DISALLOW'] = 'Dodaj';
 $lang['ADD_DISALLOW_TITLE'] = 'Dodaj dozvoljeno korisničko ime';
-$lang['ADD_DISALLOW_EXPLAIN'] = 'Možeš disallow korisnicko ime koristeći ludo lik * da se poklapa sa nekom liku';
 
 $lang['NO_DISALLOWED'] = 'Ne Dozvoljeno Usernames';
 
@@ -2747,7 +2747,7 @@ $lang['SITEMAP_BING_1'] = 'Registra tvog sajta na <a href="https://www.bing.com/
 $lang['SITEMAP_BING_2'] = 'Dodaj mapa sajta na sajt ti registrovana u svom okruženju.';
 $lang['SITEMAP_ADD_TITLE'] = 'Dodatne stranice za mapa sajta';
 $lang['SITEMAP_ADD_PAGE'] = 'Dodatne stranice';
-$lang['SITEMAP_ADD_EXP_1'] = 'Možeš navesti dodatne stranica o tvom sajtu (na primjer, <b>http://torrentpier.mi/memberlist.php</b>) koje bi trebalo da bude uključen u tvoje mapa sajta fajl koji si stvorio.';
+$lang['SITEMAP_ADD_EXP_1'] = 'Možeš navesti dodatne stranica o tvom sajtu kojim treba uključiti u vaš mapa sajta fajl koji si stvorio.';
 $lang['SITEMAP_ADD_EXP_2'] = 'Svaki reference mora početi sa http(s):// i novu liniju!';
 
 $lang['FORUM_MAP'] = 'Forumima\' karta';
@@ -2757,6 +2757,8 @@ $lang['ATOM_SUBSCRIBE'] = 'Pretplatite na nahrani';
 $lang['ATOM_NO_MODE'] = 'Ne odredi način za hraniti';
 $lang['ATOM_NO_FORUM'] = 'Ovo forum nema hrane (ne toku teme)';
 $lang['ATOM_NO_USER'] = 'Ovo korisnik nema hrane (ne toku teme)';
+$lang['ATOM_UPDATED'] = 'Updated';
+$lang['ATOM_GLOBAL_FEED'] = 'Globalna hrana za sve forume';
 
 $lang['HASH_INVALID'] = 'Hašiš %s je neispravan';
 $lang['HASH_NOT_FOUND'] = 'Oslobodi sa hašiš %s ne našao';

@@ -77,6 +77,7 @@ $lang['SELECT_ACTION'] = '选择操作';
 
 $lang['NEXT_PAGE'] = '继续';
 $lang['PREVIOUS_PAGE'] = '后退';
+$lang['SHORT_PAGE'] = '页';
 $lang['GOTO_PAGE'] = '转到页面';
 $lang['GOTO_SHORT'] = '页面';
 $lang['JOINED'] = '加入时间';
@@ -846,7 +847,7 @@ $lang['AUTH_ADMINISTRATORS'] = '<b>administrators</b>';
 $lang['NOT_MODERATOR'] = '你不是一个主持人的这一论坛。';
 $lang['NOT_AUTHORISED'] = '没有授权';
 
-$lang['YOU_BEEN_BANNED'] = '你已经被禁止从这个论坛。<br />Please联系网站管理员或董事会管理员更多的信息。';
+$lang['YOU_BEEN_BANNED'] = '您已被禁止从此论坛。有关详细信息，请联系董事会管理员。';
 
 // Viewonline
 $lang['ONLINE_EXPLAIN'] = '用户活动在过去五分钟';
@@ -2014,7 +2015,6 @@ $lang['DELETE_DISALLOW_EXPLAIN'] = '你可以除去一个不允许的用户名�
 
 $lang['ADD_DISALLOW'] = '添加';
 $lang['ADD_DISALLOW_TITLE'] = '增加一个允许用户名';
-$lang['ADD_DISALLOW_EXPLAIN'] = '你可以禁止一个用户名的使用通配符*匹配的任何角色';
 
 $lang['NO_DISALLOWED'] = '没有不允许的用户名';
 
@@ -2747,7 +2747,7 @@ $lang['SITEMAP_BING_1'] = '注册网站在<a href="https://www.bing.com/webmaste
 $lang['SITEMAP_BING_2'] = '添加的网站地图的网站的注册在其设置。';
 $lang['SITEMAP_ADD_TITLE'] = '其他网页的网站地图';
 $lang['SITEMAP_ADD_PAGE'] = '其他网页';
-$lang['SITEMAP_ADD_EXP_1'] = '你可以指定其他网站上的网页(例如，<b>http://torrentpier的。我memberlist。php</b>)应包括在你的网站地图文件。';
+$lang['SITEMAP_ADD_EXP_1'] = '你可以指定其他网站上的网页应该包括在你的网站地图文件。';
 $lang['SITEMAP_ADD_EXP_2'] = '每个基准必须开始与http(s)://和一个新的线!';
 
 $lang['FORUM_MAP'] = '论坛\'地图';
@@ -2757,6 +2757,8 @@ $lang['ATOM_SUBSCRIBE'] = '订阅料';
 $lang['ATOM_NO_MODE'] = '不要指定一个模式用于饲料';
 $lang['ATOM_NO_FORUM'] = '这个论坛不具有饲料(没有正在进行的主题)';
 $lang['ATOM_NO_USER'] = '这个用户不具有饲料(没有正在进行的主题)';
+$lang['ATOM_UPDATED'] = '已更新';
+$lang['ATOM_GLOBAL_FEED'] = '全球料的所有论坛';
 
 $lang['HASH_INVALID'] = '哈希%s是无效的';
 $lang['HASH_NOT_FOUND'] = '释放与哈希%s找不到';

@@ -77,6 +77,7 @@ $lang['SELECT_ACTION'] = 'Izberite dejanje';
 
 $lang['NEXT_PAGE'] = 'Naprej';
 $lang['PREVIOUS_PAGE'] = 'Prejšnji';
+$lang['SHORT_PAGE'] = 'strani';
 $lang['GOTO_PAGE'] = 'Pojdi na stran';
 $lang['GOTO_SHORT'] = 'Stran';
 $lang['JOINED'] = 'Pridružen';
@@ -846,7 +847,7 @@ $lang['AUTH_ADMINISTRATORS'] = '<b>administrators</b>';
 $lang['NOT_MODERATOR'] = 'Niste moderator tega foruma.';
 $lang['NOT_AUTHORISED'] = 'Ni Dovoljena';
 
-$lang['YOU_BEEN_BANNED'] = 'Ste bili izključeni iz tega foruma.<br />Please obrnete na spletnega skrbnika ali upravnega odbora skrbnik za več informacij.';
+$lang['YOU_BEEN_BANNED'] = 'Ste bili izključeni iz tega foruma. Obrnite odbora skrbnik za več informacij.';
 
 // Viewonline
 $lang['ONLINE_EXPLAIN'] = 'uporabniki aktivni zadnjih pet minut';
@@ -2014,7 +2015,6 @@ $lang['DELETE_DISALLOW_EXPLAIN'] = 'Lahko odstranjevanje nedovoljenih uporabniš
 
 $lang['ADD_DISALLOW'] = 'Dodaj';
 $lang['ADD_DISALLOW_TITLE'] = 'Dodajanje nedovoljenih uporabniško ime';
-$lang['ADD_DISALLOW_EXPLAIN'] = 'Lahko prepoveste uporabniško ime uporabo nadomestni znak * za ujemanje s katerim koli znak';
 
 $lang['NO_DISALLOWED'] = 'Ne Nedovoljenih Uporabniška Imena';
 
@@ -2747,7 +2747,7 @@ $lang['SITEMAP_BING_1'] = 'Registrirajte svoje mesto na <a href="https://www.bin
 $lang['SITEMAP_BING_2'] = 'Dodati kazalo spletnega mesta ste se registrirali, v svoje nastavitve.';
 $lang['SITEMAP_ADD_TITLE'] = 'Dodatne strani za sitemap';
 $lang['SITEMAP_ADD_PAGE'] = 'Dodatne strani';
-$lang['SITEMAP_ADD_EXP_1'] = 'Lahko določite dodatne strani na vašem spletnem mestu, na primer, <b>http://torrentpier.me/memberlist.php</b>), ki morajo biti vključeni v vaš sitemap datoteke, ki jo ustvarjajo.';
+$lang['SITEMAP_ADD_EXP_1'] = 'Lahko določite dodatne strani na vašem spletnem mestu, ki bi morali biti vključeni v vaš sitemap datoteke, ki jo ustvarjajo.';
 $lang['SITEMAP_ADD_EXP_2'] = 'Pri vsakem sklicevanju se mora začeti s http(s):// in novo linijo!';
 
 $lang['FORUM_MAP'] = 'Forumi\' zemljevid';
@@ -2757,6 +2757,8 @@ $lang['ATOM_SUBSCRIBE'] = 'Naročiti krme';
 $lang['ATOM_NO_MODE'] = 'Ne določite način za krmo';
 $lang['ATOM_NO_FORUM'] = 'Ta forum nima krme (brez tekočih vsebin)';
 $lang['ATOM_NO_USER'] = 'Ta uporabnik nima vira (brez tekočih vsebin)';
+$lang['ATOM_UPDATED'] = 'Posodobi';
+$lang['ATOM_GLOBAL_FEED'] = 'Svetovni vir za vse forumih';
 
 $lang['HASH_INVALID'] = 'Hash %s je neveljaven';
 $lang['HASH_NOT_FOUND'] = 'Sprostitev s hash %s ni mogoče najti';

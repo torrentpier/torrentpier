@@ -39,7 +39,7 @@ if (isset($_POST['add_name'])) {
     if ($disallowed_user == '') {
         bb_die($lang['FIELDS_EMPTY']);
     }
-    if (!validate_username($disallowed_user)) {
+    if (validate_username($disallowed_user)) {
         $message = $lang['DISALLOWED_ALREADY'];
     } else {
         $sql = 'INSERT INTO ' . BB_DISALLOW . " (disallow_username) VALUES('" . DB()->escape($disallowed_user) . "')";

@@ -77,6 +77,7 @@ $lang['SELECT_ACTION'] = 'tanlang harakat';
 
 $lang['NEXT_PAGE'] = 'Keyingi';
 $lang['PREVIOUS_PAGE'] = 'avvalgi';
+$lang['SHORT_PAGE'] = 'sahifa';
 $lang['GOTO_PAGE'] = 'sahifasiga o\'tish';
 $lang['GOTO_SHORT'] = 'bet';
 $lang['JOINED'] = 'Qo\'shilgan';
@@ -846,7 +847,7 @@ $lang['AUTH_ADMINISTRATORS'] = '<b>administrators</b>';
 $lang['NOT_MODERATOR'] = 'Siz ushbu forum moderator emas.';
 $lang['NOT_AUTHORISED'] = 'Vakolatli emas';
 
-$lang['YOU_BEEN_BANNED'] = 'Qo\'shimcha ma\'lumot olish uchun vebmaster yoki forum administratori bilan bog\'laning forum.<br />Please bu man etildi.';
+$lang['YOU_BEEN_BANNED'] = 'Ushbu forumdan sizni man qilishdi. Qo\'shimcha ma\'lumot olish uchun forum administratori bilan bog\'laning.';
 
 // Viewonline
 $lang['ONLINE_EXPLAIN'] = 'O\'tgan besh daqiqa davomida faol foydalanuvchilar';
@@ -2014,7 +2015,6 @@ $lang['DELETE_DISALLOW_EXPLAIN'] = 'Siz ushbu ro\'yxatdan nomingiz tanlash va ta
 
 $lang['ADD_DISALLOW'] = 'qo\'shish';
 $lang['ADD_DISALLOW_TITLE'] = 'Agar ruxsat etilmagan nomingiz qo\'shish';
-$lang['ADD_DISALLOW_EXPLAIN'] = 'Siz har qanday belgi mos joker belgilar *, bir foydalanuvchi nomi bermaslik mumkin';
 
 $lang['NO_DISALLOWED'] = 'Yo\'q, ruxsat etilmagan nomlaringiz';
 
@@ -2747,7 +2747,7 @@ $lang['SITEMAP_BING_1'] = 'Microsoft hisob qaydnomasidan foydalanib <a href="htt
 $lang['SITEMAP_BING_2'] = 'Agar uning sozlash ro\'yxatdan sayt Sayt xaritasi qo\'shing.';
 $lang['SITEMAP_ADD_TITLE'] = 'Sitemap uchun qo\'shimcha sahifalar';
 $lang['SITEMAP_ADD_PAGE'] = 'Qo\'shimcha sahifalar';
-$lang['SITEMAP_ADD_EXP_1'] = 'Agar yaratish sizning Sayt xaritasi fayli kiritilgan bo\'lishi kerak: (//torrentpier.me/memberlist.php</b> masalan, <b>http) Siz saytida qo\'shimcha sahifalarni ko\'rsatish mumkin.';
+$lang['SITEMAP_ADD_EXP_1'] = 'Siz yaratish sizning Sayt xaritasi fayli kiritilishi kerak saytida bo\'yicha qo\'shimcha sahifalarni ko\'rsatish mumkin.';
 $lang['SITEMAP_ADD_EXP_2'] = '// va yangi liniyasi: Har yozuvlar http (lar) bilan boshlash kerak!';
 
 $lang['FORUM_MAP'] = 'Forumlar xaritasi';
@@ -2757,6 +2757,8 @@ $lang['ATOM_SUBSCRIBE'] = 'tasmasiga obuna';
 $lang['ATOM_NO_MODE'] = 'Tasma holati ko`rsatilmagan';
 $lang['ATOM_NO_FORUM'] = 'Bu forum bir ovqatni (davom etgan har qanday sifatlar) yo\'q';
 $lang['ATOM_NO_USER'] = 'Ushbu foydalanuvchi bir ovqatni (davom etgan har qanday sifatlar) yo\'q';
+$lang['ATOM_UPDATED'] = 'Yangilandi';
+$lang['ATOM_GLOBAL_FEED'] = 'Barcha forumlar uchun global ovqatlanish';
 
 $lang['HASH_INVALID'] = 'Hash %s haqiqiy emas';
 $lang['HASH_NOT_FOUND'] = 'hash %s topilmadi bilan ozod';

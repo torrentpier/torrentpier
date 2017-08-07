@@ -77,6 +77,7 @@ $lang['SELECT_ACTION'] = 'Wählen Sie "Aktion"';
 
 $lang['NEXT_PAGE'] = 'Nächste';
 $lang['PREVIOUS_PAGE'] = 'Vorherige';
+$lang['SHORT_PAGE'] = 'seite';
 $lang['GOTO_PAGE'] = 'Gehen Sie auf die Seite';
 $lang['GOTO_SHORT'] = 'Seite';
 $lang['JOINED'] = 'Beigetreten';
@@ -846,7 +847,7 @@ $lang['AUTH_ADMINISTRATORS'] = '<b>administrators</b>';
 $lang['NOT_MODERATOR'] = 'Sie sind kein moderator dieses Forums.';
 $lang['NOT_AUTHORISED'] = 'Nicht Zugelassen';
 
-$lang['YOU_BEEN_BANNED'] = 'Sie wurden verbannt aus diesem forum.<br />Please Kontaktieren Sie den webmaster oder administrator für weitere Informationen.';
+$lang['YOU_BEEN_BANNED'] = 'Du bist aus diesem Forum verboten. Bitte kontaktieren Sie den Board-Administrator für weitere Informationen.';
 
 // Viewonline
 $lang['ONLINE_EXPLAIN'] = 'aktive Benutzer in den letzten fünf Minuten';
@@ -2014,7 +2015,6 @@ $lang['DELETE_DISALLOW_EXPLAIN'] = 'Sie können entfernen einer nicht zulässige
 
 $lang['ADD_DISALLOW'] = 'Hinzufügen';
 $lang['ADD_DISALLOW_TITLE'] = 'Hinzufügen eines unzulässigen Benutzernamen';
-$lang['ADD_DISALLOW_EXPLAIN'] = 'Sie können nicht zulassen, eine Benutzername verwenden Sie das Platzhalterzeichen *, um die Entsprechung ein beliebiges Zeichen';
 
 $lang['NO_DISALLOWED'] = 'Keine Unzulässigen Benutzernamen';
 
@@ -2747,7 +2747,7 @@ $lang['SITEMAP_BING_1'] = 'Registrieren Sie Ihre Website bei <a href="https://ww
 $lang['SITEMAP_BING_2'] = 'Hinzufügen sitemap der Website, die Sie registriert, die in Ihren Einstellungen.';
 $lang['SITEMAP_ADD_TITLE'] = 'Weitere Seiten für die sitemap';
 $lang['SITEMAP_ADD_PAGE'] = 'Weitere Seiten';
-$lang['SITEMAP_ADD_EXP_1'] = 'Können Sie zusätzliche Seiten auf Ihrer Website (zum Beispiel, <b>http://torrentpier.mir/Memberliste.php</b>), die aufgenommen werden sollten in Ihrer XML-sitemap-Datei, die Sie erstellen.';
+$lang['SITEMAP_ADD_EXP_1'] = 'Sie können angeben, zusätzliche Seiten auf Ihrer Website enthalten sein sollten in Ihrer Xml-sitemap-Datei, die Sie erstellen.';
 $lang['SITEMAP_ADD_EXP_2'] = 'Jede Referenz muss beginnen mit http(s):// und eine neue Zeile!';
 
 $lang['FORUM_MAP'] = 'Foren " Karte';
@@ -2757,6 +2757,8 @@ $lang['ATOM_SUBSCRIBE'] = 'Abonnieren Sie den feed';
 $lang['ATOM_NO_MODE'] = 'Tun nicht geben Sie einen Modus für den Vorschub';
 $lang['ATOM_NO_FORUM'] = 'Dieses forum nicht über einen feed (ohne laufende Themen)';
 $lang['ATOM_NO_USER'] = 'Diese Benutzer verfügen nicht über einen feed (ohne laufende Themen)';
+$lang['ATOM_UPDATED'] = 'Aktualisiert';
+$lang['ATOM_GLOBAL_FEED'] = 'Global feed für alle Foren';
 
 $lang['HASH_INVALID'] = 'Hash %s ist ungültig';
 $lang['HASH_NOT_FOUND'] = 'Version mit hash %s nicht gefunden';

@@ -77,6 +77,7 @@ $lang['SELECT_ACTION'] = 'Интихоб кунед амал';
 
 $lang['NEXT_PAGE'] = 'Баъдӣ';
 $lang['PREVIOUS_PAGE'] = 'гузашта';
+$lang['SHORT_PAGE'] = 'саҳифа';
 $lang['GOTO_PAGE'] = 'Бирав ба саҳифа';
 $lang['GOTO_SHORT'] = 'саҳифа';
 $lang['JOINED'] = 'ҳамроҳ';
@@ -846,7 +847,7 @@ $lang['AUTH_ADMINISTRATORS'] = '<b>administrators</b>';
 $lang['NOT_MODERATOR'] = 'Шумо як модератор ин форум нест.';
 $lang['NOT_AUTHORISED'] = 'ваколатдори не';
 
-$lang['YOU_BEEN_BANNED'] = 'Шуморо аз ин манъ карда шудааст forum.<br />Please дар тамос webmaster ё Шӯрои мудирон барои иттилооти бештар.';
+$lang['YOU_BEEN_BANNED'] = 'Шумо аз ин форум манъ карда шудааст. Лутфан, мудири шӯрои барои маълумоти бештар дар тамос шавед.';
 
 // Viewonline
 $lang['ONLINE_EXPLAIN'] = 'истифодабарандагони фаъол дар давоми панҷ дақиқа гузашта';
@@ -2014,7 +2015,6 @@ $lang['DELETE_DISALLOW_EXPLAIN'] = 'Шумо метавонед як номи к
 
 $lang['ADD_DISALLOW'] = 'илова кардан';
 $lang['ADD_DISALLOW_TITLE'] = 'Иловаи як номи корбарӣ disallowed';
-$lang['ADD_DISALLOW_EXPLAIN'] = 'Шумо метавонед бо як номи корбарӣ бо истифода аз ҳарфҳо * корти мувофиқ ба ҳамаи аломатҳои иозат';
 
 $lang['NO_DISALLOWED'] = 'Не Disallowed гузарвожаҳо';
 
@@ -2747,7 +2747,7 @@ $lang['SITEMAP_BING_1'] = 'Ба Реестри сомонаи Шумо дар <a
 $lang['SITEMAP_BING_2'] = 'Иловаи Харитаи сомона ба шумо дар танзимоти он қайд гирифта шудааст.';
 $lang['SITEMAP_ADD_TITLE'] = 'Саҳифаҳои иловагӣ барои талаф дод';
 $lang['SITEMAP_ADD_PAGE'] = 'Саҳифаҳои иловагӣ';
-$lang['SITEMAP_ADD_EXP_1'] = '(: //torrentpier.me/memberlist.php</b> масалан, <b>http), ки бояд дар файли талаф кунед, ки ба шумо ташкили дохил Шумо метавонед саҳифаҳои иловагӣ дар сайти худ муайян мекунад.';
+$lang['SITEMAP_ADD_EXP_1'] = 'Шумо метавонед саҳифаҳои иловагӣ дар сайти худ, ки бояд дар файли талаф кунед, ки ба шумо ташкили дохил намоед.';
 $lang['SITEMAP_ADD_EXP_2'] = '// ва хати нав: Ҳар истинод бояд бо HTTP (р) оғоз!';
 
 $lang['FORUM_MAP'] = 'Харитаи Форумҳо \'';
@@ -2757,6 +2757,8 @@ $lang['ATOM_SUBSCRIBE'] = 'Обуна ба хўроки';
 $lang['ATOM_NO_MODE'] = 'Оё як ҳолати барои хўроки чорво муайян карда наметавонед';
 $lang['ATOM_NO_FORUM'] = 'Ин баҳс надорад, хўроки (на мавзӯъҳои ҷорӣ) нест,';
 $lang['ATOM_NO_USER'] = 'Корбари мазкур ба як хўроки (на мавзӯъҳои ҷорӣ) нест,';
+$lang['ATOM_UPDATED'] = 'Updated';
+$lang['ATOM_GLOBAL_FEED'] = 'Хўроки Global барои ҳамаи форумҳо';
 
 $lang['HASH_INVALID'] = 'Шудаи %s нодуруст аст';
 $lang['HASH_NOT_FOUND'] = 'Озод бо шудаи %s ёфт нашуд';

@@ -77,6 +77,7 @@ $lang['SELECT_ACTION'] = 'Vyberte akce';
 
 $lang['NEXT_PAGE'] = 'Další';
 $lang['PREVIOUS_PAGE'] = 'Předchozí';
+$lang['SHORT_PAGE'] = 'stránka';
 $lang['GOTO_PAGE'] = 'Přejít na stránku';
 $lang['GOTO_SHORT'] = 'Stránka';
 $lang['JOINED'] = 'Připojil';
@@ -846,7 +847,7 @@ $lang['AUTH_ADMINISTRATORS'] = '<b>administrators</b>';
 $lang['NOT_MODERATOR'] = 'Nejste moderátor tohoto fóra.';
 $lang['NOT_AUTHORISED'] = 'Nejsou Povoleny';
 
-$lang['YOU_BEEN_BANNED'] = 'Byl jste vykázán z tohoto fóra.<br />Please kontaktujte webmastera nebo administrátora fóra pro více informací.';
+$lang['YOU_BEEN_BANNED'] = 'Byl jste zakázán z tohoto fóra. Pro více informací kontaktujte administrátora.';
 
 // Viewonline
 $lang['ONLINE_EXPLAIN'] = 'uživatelé aktivní v posledních pěti minutách';
@@ -2014,7 +2015,6 @@ $lang['DELETE_DISALLOW_EXPLAIN'] = 'Můžete odstranit nepovolené uživatelské
 
 $lang['ADD_DISALLOW'] = 'Přidat';
 $lang['ADD_DISALLOW_TITLE'] = 'Přidat nepovolené uživatelské jméno';
-$lang['ADD_DISALLOW_EXPLAIN'] = 'Můžete zakázat uživatelské jméno pomocí zástupného znaku *, aby odpovídala libovolný znak';
 
 $lang['NO_DISALLOWED'] = 'Žádné Zakázané Uživatelská Jména';
 
@@ -2747,7 +2747,7 @@ $lang['SITEMAP_BING_1'] = 'Zaregistrujte svůj web na <a href="https://www.bing.
 $lang['SITEMAP_BING_2'] = 'Přidat mapa stránek registrovaných v jeho nastavení.';
 $lang['SITEMAP_ADD_TITLE'] = 'Další stránky pro sitemap';
 $lang['SITEMAP_ADD_PAGE'] = 'Další stránky';
-$lang['SITEMAP_ADD_EXP_1'] = 'Můžete zadat další stránky na vašem webu (například, <b>http://torrentpier.mě se/seznam.php</b>), které by měly být zahrnuty v souboru sitemap soubor, který vytváříte.';
+$lang['SITEMAP_ADD_EXP_1'] = 'Můžete zadat další stránky na vašem webu, které by měly být zahrnuty v souboru sitemap soubor, který vytváříte.';
 $lang['SITEMAP_ADD_EXP_2'] = 'Každý odkaz musí začínat http(s):// a nový řádek!';
 
 $lang['FORUM_MAP'] = 'Fóra mapu';
@@ -2757,6 +2757,8 @@ $lang['ATOM_SUBSCRIBE'] = 'Přihlásit se k odběru krmiva';
 $lang['ATOM_NO_MODE'] = 'Zadat režim pro krmivo';
 $lang['ATOM_NO_FORUM'] = 'Toto fórum nemá krmit (ne probíhající témata)';
 $lang['ATOM_NO_USER'] = 'Tento uživatel nemá krmivo (žádné probíhající témata)';
+$lang['ATOM_UPDATED'] = 'Aktualizováno';
+$lang['ATOM_GLOBAL_FEED'] = 'Globální zdroj pro všechny fóra';
 
 $lang['HASH_INVALID'] = 'Hash %s je neplatný';
 $lang['HASH_NOT_FOUND'] = 'Zpráva s hash %s nebyl nalezen';

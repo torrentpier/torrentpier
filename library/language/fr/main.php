@@ -77,6 +77,7 @@ $lang['SELECT_ACTION'] = 'Sélectionnez l\'action';
 
 $lang['NEXT_PAGE'] = 'Prochaine';
 $lang['PREVIOUS_PAGE'] = 'Précédente';
+$lang['SHORT_PAGE'] = 'page';
 $lang['GOTO_PAGE'] = 'Aller à la page';
 $lang['GOTO_SHORT'] = 'Page';
 $lang['JOINED'] = 'Rejoint';
@@ -846,7 +847,7 @@ $lang['AUTH_ADMINISTRATORS'] = '<b>administrators</b>';
 $lang['NOT_MODERATOR'] = 'Vous n\'êtes pas modérateur de ce forum.';
 $lang['NOT_AUTHORISED'] = 'Pas Autorisé';
 
-$lang['YOU_BEEN_BANNED'] = 'Vous avez été banni de ce forum.<br />Please contacter le webmaster ou l\'administrateur du forum pour plus d\'informations.';
+$lang['YOU_BEEN_BANNED'] = 'Tu as été banni de ce forum. Veuillez contacter l\'administrateur du conseil pour plus d\'informations.';
 
 // Viewonline
 $lang['ONLINE_EXPLAIN'] = 'les utilisateurs actifs des cinq dernières minutes';
@@ -2014,7 +2015,6 @@ $lang['DELETE_DISALLOW_EXPLAIN'] = 'Vous pouvez supprimer refusés nom d\'utilis
 
 $lang['ADD_DISALLOW'] = 'Ajouter';
 $lang['ADD_DISALLOW_TITLE'] = 'Ajouter refusé de nom d\'utilisateur';
-$lang['ADD_DISALLOW_EXPLAIN'] = 'Vous pouvez interdire un nom d\'utilisateur en utilisant le caractère générique * pour correspondre à n\'importe quel caractère';
 
 $lang['NO_DISALLOWED'] = 'Pas Rejeté Les Noms D\'Utilisateur';
 
@@ -2747,7 +2747,7 @@ $lang['SITEMAP_BING_1'] = 'L\'inscription de votre site à <a href="https://www.
 $lang['SITEMAP_BING_2'] = 'Ajouter un sitemap du site que vous avez enregistré dans ses paramètres.';
 $lang['SITEMAP_ADD_TITLE'] = 'Des pages supplémentaires pour sitemap';
 $lang['SITEMAP_ADD_PAGE'] = 'Des pages supplémentaires';
-$lang['SITEMAP_ADD_EXP_1'] = 'Vous pouvez spécifier d\'autres pages de votre site (par exemple, <b>http://torrentpier.me/liste des membres.php</b>) qui devraient être inclus dans votre fichier sitemap que vous créez.';
+$lang['SITEMAP_ADD_EXP_1'] = 'Vous pouvez spécifier d\'autres pages de votre site, qui doit être inclus dans votre fichier sitemap que vous créez.';
 $lang['SITEMAP_ADD_EXP_2'] = 'Chaque référence doit commencer par http(s):// et une nouvelle ligne!';
 
 $lang['FORUM_MAP'] = 'Forums de la carte';
@@ -2757,6 +2757,8 @@ $lang['ATOM_SUBSCRIBE'] = 'Abonnez-vous au flux';
 $lang['ATOM_NO_MODE'] = 'Ne spécifiez pas un mode pour le nourrir';
 $lang['ATOM_NO_FORUM'] = 'Ce forum n\'a pas une alimentation (pas de cours les sujets)';
 $lang['ATOM_NO_USER'] = 'Cet utilisateur n\'a pas une alimentation (pas de cours les sujets)';
+$lang['ATOM_UPDATED'] = 'Mis à jour le';
+$lang['ATOM_GLOBAL_FEED'] = 'Flux mondiaux pour tous les forums';
 
 $lang['HASH_INVALID'] = 'Hachage %s est pas valide';
 $lang['HASH_NOT_FOUND'] = 'Version avec pommes de %s pas trouvé';

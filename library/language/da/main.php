@@ -77,6 +77,7 @@ $lang['SELECT_ACTION'] = 'Vælg handling';
 
 $lang['NEXT_PAGE'] = 'Næste';
 $lang['PREVIOUS_PAGE'] = 'Tidligere';
+$lang['SHORT_PAGE'] = 'side';
 $lang['GOTO_PAGE'] = 'Gå til side';
 $lang['GOTO_SHORT'] = 'Side';
 $lang['JOINED'] = 'Sluttede';
@@ -846,7 +847,7 @@ $lang['AUTH_ADMINISTRATORS'] = '<b>administrators</b>';
 $lang['NOT_MODERATOR'] = 'Du er ikke moderator i dette forum.';
 $lang['NOT_AUTHORISED'] = 'Ikke Godkendt';
 
-$lang['YOU_BEEN_BANNED'] = 'Du er blevet udelukket fra dette forum.<br />Please kontakt til bestyrelsen eller webmaster administrator for at få flere oplysninger.';
+$lang['YOU_BEEN_BANNED'] = 'Du er blevet forbudt fra dette forum. Kontakt venligst bestyrelsesadministratoren for yderligere information.';
 
 // Viewonline
 $lang['ONLINE_EXPLAIN'] = 'brugere aktive i de seneste fem minutter';
@@ -2014,7 +2015,6 @@ $lang['DELETE_DISALLOW_EXPLAIN'] = 'Du kan fjerne et ikke tilladt brugernavn ved
 
 $lang['ADD_DISALLOW'] = 'Tilføj';
 $lang['ADD_DISALLOW_TITLE'] = 'Tilføj et ikke tilladt brugernavn';
-$lang['ADD_DISALLOW_EXPLAIN'] = 'Du kan afvise et brugernavn bruge jokertegnet * til at matche et vilkårligt tegn';
 
 $lang['NO_DISALLOWED'] = 'Ikke-Tilladte Brugernavne';
 
@@ -2747,7 +2747,7 @@ $lang['SITEMAP_BING_1'] = 'Registrer dit websted på <a href="https://www.bing.c
 $lang['SITEMAP_BING_2'] = 'Tilføj sitemap websted, du er registreret på dens indstillinger.';
 $lang['SITEMAP_ADD_TITLE'] = 'Ekstra sider til sitemap';
 $lang['SITEMAP_ADD_PAGE'] = 'Ekstra sider';
-$lang['SITEMAP_ADD_EXP_1'] = 'Du kan angive yderligere sider på dit site (for eksempel, <b>http://torrentpier.mig/memberlist.php</b>), som bør indgå i din sitemap-fil, du opretter.';
+$lang['SITEMAP_ADD_EXP_1'] = 'Du kan angive ekstra sider på dit websted, som bør indgå i din sitemap-fil, du opretter.';
 $lang['SITEMAP_ADD_EXP_2'] = 'Hver reference skal starte med http(s):// og en ny linje!';
 
 $lang['FORUM_MAP'] = 'Fora\' kort';
@@ -2757,6 +2757,8 @@ $lang['ATOM_SUBSCRIBE'] = 'Abonnér på feed';
 $lang['ATOM_NO_MODE'] = 'Ikke angive en tilstand for foder';
 $lang['ATOM_NO_FORUM'] = 'Dette forum har ikke et feed (ingen løbende emner)';
 $lang['ATOM_NO_USER'] = 'Denne bruger har ikke et feed (ingen løbende emner)';
+$lang['ATOM_UPDATED'] = 'Updated';
+$lang['ATOM_GLOBAL_FEED'] = 'Globalt feed til alle fora';
 
 $lang['HASH_INVALID'] = 'Hash %s er ugyldig';
 $lang['HASH_NOT_FOUND'] = 'Udgivelse med hash %s ikke fundet';

@@ -77,6 +77,7 @@ $lang['SELECT_ACTION'] = 'Изаберите акцију';
 
 $lang['NEXT_PAGE'] = 'Даље';
 $lang['PREVIOUS_PAGE'] = 'Претходних';
+$lang['SHORT_PAGE'] = 'strana';
 $lang['GOTO_PAGE'] = 'Посетите веб-страницу';
 $lang['GOTO_SHORT'] = 'Странице';
 $lang['JOINED'] = 'Придружио';
@@ -846,7 +847,7 @@ $lang['AUTH_ADMINISTRATORS'] = '<b>administrators</b>';
 $lang['NOT_MODERATOR'] = 'Не модератор овог форума.';
 $lang['NOT_AUTHORISED'] = 'Није Дозвољено';
 
-$lang['YOU_BEEN_BANNED'] = 'Ви сте били забрањен на овом форуму.<br />Please односе на вебмастер или администратору форума за више информација.';
+$lang['YOU_BEEN_BANNED'] = 'Забрањени сте од овог форума. За више информација обратите се администратору одбора.';
 
 // Viewonline
 $lang['ONLINE_EXPLAIN'] = 'активних корисника у последњих пет минута';
@@ -2014,7 +2015,6 @@ $lang['DELETE_DISALLOW_EXPLAIN'] = 'Можете обрисати неважећ
 
 $lang['ADD_DISALLOW'] = 'Додајте';
 $lang['ADD_DISALLOW_TITLE'] = 'Додајте незасчитанный корисничко име';
-$lang['ADD_DISALLOW_EXPLAIN'] = 'Можете да забрани корисничко име, користећи џокер симбол * одговара било који знак';
 
 $lang['NO_DISALLOWED'] = 'Није Забрањено Пријаве';
 
@@ -2747,7 +2747,7 @@ $lang['SITEMAP_BING_1'] = 'Региструјте свој сајт у <a href="
 $lang['SITEMAP_BING_2'] = 'Додајте фајл ситемап сајта, регистровани у подешавањима.';
 $lang['SITEMAP_ADD_TITLE'] = 'Додатне странице за сајта';
 $lang['SITEMAP_ADD_PAGE'] = 'Додатне странице';
-$lang['SITEMAP_ADD_EXP_1'] = 'Можете да одредите додатне странице на вашем сајту (на пример, <b>http://сајт torrentpier.ме/memberlist.php</b>), који треба да буду укључени у ваш фајл ситемап, који сте креирали.';
+$lang['SITEMAP_ADD_EXP_1'] = 'Можете да одредите додатне странице на вашем сајту, који треба да буду укључени у ваш фајл ситемап, који сте креирали.';
 $lang['SITEMAP_ADD_EXP_2'] = 'Свака референца мора почињати са http(и):// и нове линије!';
 
 $lang['FORUM_MAP'] = 'Карта форума';
@@ -2757,6 +2757,8 @@ $lang['ATOM_SUBSCRIBE'] = 'Претплатите се на канал';
 $lang['ATOM_NO_MODE'] = 'Није унет је режим за храну';
 $lang['ATOM_NO_FORUM'] = 'Овај форум не храни (не тренутне теме)';
 $lang['ATOM_NO_USER'] = 'Овај корисник нема хране (нема сталне теме)';
+$lang['ATOM_UPDATED'] = 'Izmenjeno';
+$lang['ATOM_GLOBAL_FEED'] = 'Глобална храна за све форуме';
 
 $lang['HASH_INVALID'] = 'Хасх %s је неважећи';
 $lang['HASH_NOT_FOUND'] = 'Издање са хасх %s није пронађен';

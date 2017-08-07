@@ -77,6 +77,7 @@ $lang['SELECT_ACTION'] = 'Wybierz akcję';
 
 $lang['NEXT_PAGE'] = 'Dalej';
 $lang['PREVIOUS_PAGE'] = 'Poprzednie';
+$lang['SHORT_PAGE'] = 'strona';
 $lang['GOTO_PAGE'] = 'Przejść na stronę';
 $lang['GOTO_SHORT'] = 'Strony';
 $lang['JOINED'] = 'Dołączył';
@@ -846,7 +847,7 @@ $lang['AUTH_ADMINISTRATORS'] = '<b>administrators</b>';
 $lang['NOT_MODERATOR'] = 'Nie moderator tego forum.';
 $lang['NOT_AUTHORISED'] = 'Nie Wolno';
 
-$lang['YOU_BEEN_BANNED'] = 'Zostałeś zbanowany na tym forum.<br />Please skontaktuj się z webmaster lub administratorem forum w celu uzyskania dalszych informacji.';
+$lang['YOU_BEEN_BANNED'] = 'Zostałeś zabroniony przez to forum. Aby uzyskać więcej informacji, skontaktuj się z administratorem forum.';
 
 // Viewonline
 $lang['ONLINE_EXPLAIN'] = 'aktywnych użytkowników w ciągu ostatnich pięciu minut';
@@ -2014,7 +2015,6 @@ $lang['DELETE_DISALLOW_EXPLAIN'] = 'Możesz usunąć nieprawidłowe nazwa użytk
 
 $lang['ADD_DISALLOW'] = 'Dodać';
 $lang['ADD_DISALLOW_TITLE'] = 'Dodaj незасчитанный nazwa użytkownika';
-$lang['ADD_DISALLOW_EXPLAIN'] = 'Możesz wyłączyć nazwę użytkownika, korzystając z symbolem wieloznacznym * dopasowuje dowolny znak';
 
 $lang['NO_DISALLOWED'] = 'Nie Jest Zabronione Loginy';
 
@@ -2747,7 +2747,7 @@ $lang['SITEMAP_BING_1'] = 'Zarejestrować swoją stronę w <a href="https://www.
 $lang['SITEMAP_BING_2'] = 'Dodaj plik mapy witryny, zarejestrowany w ustawieniach.';
 $lang['SITEMAP_ADD_TITLE'] = 'Dodatkowe strony do strony';
 $lang['SITEMAP_ADD_PAGE'] = 'Dodatkowe strony';
-$lang['SITEMAP_ADD_EXP_1'] = 'Można określić dodatkowe strony na swojej stronie (na przykład, <b>http://www torrentpier.mnie/memberlist.php</b>), które muszą być zawarte w twój plik sitemap, który tworzysz.';
+$lang['SITEMAP_ADD_EXP_1'] = 'Można określić dodatkowe strony na swojej stronie internetowej, które powinny być zawarte w twój plik sitemap, który tworzysz.';
 $lang['SITEMAP_ADD_EXP_2'] = 'Każdy link musi zaczynać się od http(s):// i nowej linii!';
 
 $lang['FORUM_MAP'] = 'Mapa forum';
@@ -2757,6 +2757,8 @@ $lang['ATOM_SUBSCRIBE'] = 'Subskrybuj kanał';
 $lang['ATOM_NO_MODE'] = 'Nie określono tryb dla paszy';
 $lang['ATOM_NO_FORUM'] = 'To forum nie karmić (nie do bieżącego tematu)';
 $lang['ATOM_NO_USER'] = 'Ten użytkownik nie ma zasilania (nie ma stałej tematu)';
+$lang['ATOM_UPDATED'] = 'Zaktualizowano';
+$lang['ATOM_GLOBAL_FEED'] = 'Globalny kanał danych dla wszystkich forów';
 
 $lang['HASH_INVALID'] = 'Hash-%s jest nieważne';
 $lang['HASH_NOT_FOUND'] = 'Wydanie z hash-%s nie znaleziono';

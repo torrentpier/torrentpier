@@ -77,6 +77,7 @@ $lang['SELECT_ACTION'] = 'Välj åtgärder';
 
 $lang['NEXT_PAGE'] = 'Nästa';
 $lang['PREVIOUS_PAGE'] = 'Föregående';
+$lang['SHORT_PAGE'] = 'sida';
 $lang['GOTO_PAGE'] = 'Gå till sidan';
 $lang['GOTO_SHORT'] = 'Sida';
 $lang['JOINED'] = 'Gick';
@@ -846,7 +847,7 @@ $lang['AUTH_ADMINISTRATORS'] = '<b>administrators</b>';
 $lang['NOT_MODERATOR'] = 'Du är inte moderator i detta forum.';
 $lang['NOT_AUTHORISED'] = 'Inte Godkänd';
 
-$lang['YOU_BEEN_BANNED'] = 'Du har blivit avstängd från detta forum.<br />Please kontakta webbmastern eller forum administratören för mer information.';
+$lang['YOU_BEEN_BANNED'] = 'Du har blivit avstängd från detta forum. Kontakta administratören för mer information.';
 
 // Viewonline
 $lang['ONLINE_EXPLAIN'] = 'aktiva användare under de senaste fem minuter';
@@ -2014,7 +2015,6 @@ $lang['DELETE_DISALLOW_EXPLAIN'] = 'Du kan ta bort en otillåten användarnamn g
 
 $lang['ADD_DISALLOW'] = 'Lägg till';
 $lang['ADD_DISALLOW_TITLE'] = 'Lägg till en otillåten användarnamn';
-$lang['ADD_DISALLOW_EXPLAIN'] = 'Du kan ange ett användarnamn använda jokertecken * matcha valfritt tecken';
 
 $lang['NO_DISALLOWED'] = 'Inga Otillåtna Användarnamn';
 
@@ -2747,7 +2747,7 @@ $lang['SITEMAP_BING_1'] = 'Registrera din webbplats på <a href="https://www.bin
 $lang['SITEMAP_BING_2'] = 'Lägg till sajtkarta av webbplats du har registrerat i sina inställningar.';
 $lang['SITEMAP_ADD_TITLE'] = 'Ytterligare sidor för sitemap';
 $lang['SITEMAP_ADD_PAGE'] = 'Ytterligare sidor';
-$lang['SITEMAP_ADD_EXP_1'] = 'Du kan ange ytterligare sidor på din webbplats (till exempel, <b>http://torrentpier.mig/medlemslistan.php</b>) som bör ingå i din sitemap-fil som du skapar.';
+$lang['SITEMAP_ADD_EXP_1'] = 'Du kan ange ytterligare sidor på din webbplats som ska ingå i din sitemap-fil som du skapar.';
 $lang['SITEMAP_ADD_EXP_2'] = 'Varje referens måste börja med http(s):// och en ny linje!';
 
 $lang['FORUM_MAP'] = 'Forum\' karta';
@@ -2757,6 +2757,8 @@ $lang['ATOM_SUBSCRIBE'] = 'Prenumerera på feed';
 $lang['ATOM_NO_MODE'] = 'Inte anger ett läge för foder';
 $lang['ATOM_NO_FORUM'] = 'Detta forum inte har en feed (inga aktuella ämnen)';
 $lang['ATOM_NO_USER'] = 'Den här användaren har inte en feed (inga aktuella ämnen)';
+$lang['ATOM_UPDATED'] = 'Uppdaterad';
+$lang['ATOM_GLOBAL_FEED'] = 'Globala feed för alla forum';
 
 $lang['HASH_INVALID'] = 'Hash %s är ogiltig';
 $lang['HASH_NOT_FOUND'] = 'Release med hash %s inte hittas';

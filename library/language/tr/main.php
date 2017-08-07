@@ -77,6 +77,7 @@ $lang['SELECT_ACTION'] = 'Seçin eylem';
 
 $lang['NEXT_PAGE'] = 'Gelecek';
 $lang['PREVIOUS_PAGE'] = 'Önceki';
+$lang['SHORT_PAGE'] = 'sayfa';
 $lang['GOTO_PAGE'] = 'Sayfaya git';
 $lang['GOTO_SHORT'] = 'Sayfa';
 $lang['JOINED'] = 'Katıldı';
@@ -846,7 +847,7 @@ $lang['AUTH_ADMINISTRATORS'] = '<b>administrators</b>';
 $lang['NOT_MODERATOR'] = 'Bu forumun bir moderatör değilsin.';
 $lang['NOT_AUTHORISED'] = 'Yetkili Değil';
 
-$lang['YOU_BEEN_BANNED'] = 'Bu forumda yasaklandı mı?<br />Please daha fazla bilgi için webmaster ya da site yöneticisiyle iletişime geçin.';
+$lang['YOU_BEEN_BANNED'] = 'Bu forumda yasaklandı mı? Lütfen daha fazla bilgi için site yöneticisiyle iletişime geçin.';
 
 // Viewonline
 $lang['ONLINE_EXPLAIN'] = 'son beş dakika içinde kullanıcılar aktif';
@@ -2014,7 +2015,6 @@ $lang['DELETE_DISALLOW_EXPLAIN'] = 'Bu listeden bir kullanıcı adı seçerek iz
 
 $lang['ADD_DISALLOW'] = 'Ekle';
 $lang['ADD_DISALLOW_TITLE'] = 'İzin verilmeyen bir kullanıcı adı Ekle';
-$lang['ADD_DISALLOW_EXPLAIN'] = '* Joker karakterini kullanarak herhangi bir karakteri eşleştirmek için bir kullanıcı adı izin vermeme';
 
 $lang['NO_DISALLOWED'] = 'Hayır İzin Verilmeyen Kullanıcı Adlarını';
 
@@ -2747,7 +2747,7 @@ $lang['SITEMAP_BING_1'] = '<a href="https://www.bing.com/webmaster/" target="_bl
 $lang['SITEMAP_BING_2'] = 'Kendi ayarları kayıtlı site haritası ekleyebilirsiniz.';
 $lang['SITEMAP_ADD_TITLE'] = 'Site için ek sayfalar';
 $lang['SITEMAP_ADD_PAGE'] = 'Ek sayfalar';
-$lang['SITEMAP_ADD_EXP_1'] = '(Örneğin, <b>http://torrentpier sitenizde ek sayfaları belirtebilirsiniz./üye listesi.oluşturma bu site haritası dosyanızın dahil edilmesi gereken php</b>).';
+$lang['SITEMAP_ADD_EXP_1'] = 'Oluşturma bu site haritası dosyanızın dahil edilmesi gereken sitenizde ek sayfaları belirtebilirsiniz.';
 $lang['SITEMAP_ADD_EXP_2'] = 'Her referans(ler) http:// ve yeni bir çizgi ile başlamalıdır.';
 
 $lang['FORUM_MAP'] = 'Forum göster';
@@ -2757,6 +2757,8 @@ $lang['ATOM_SUBSCRIBE'] = 'Beslemesine abone';
 $lang['ATOM_NO_MODE'] = 'Yem için bir mod belirtin';
 $lang['ATOM_NO_FORUM'] = 'Bu forumda (devam eden konular)bir besleme yok';
 $lang['ATOM_NO_USER'] = 'Bu kullanıcı (devam eden konular)bir besleme yok';
+$lang['ATOM_UPDATED'] = 'Güncellenme Tarihi';
+$lang['ATOM_GLOBAL_FEED'] = 'Tüm forumlar için küresel besleme';
 
 $lang['HASH_INVALID'] = '%s karma geçersiz';
 $lang['HASH_NOT_FOUND'] = 'Karma %s değilim serbest bulundu';

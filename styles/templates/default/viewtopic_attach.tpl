@@ -223,11 +223,6 @@
 		<td>{L_SIZE}:</td>
 		<td>{postrow.attach.tor_reged.TORRENT_SIZE}</td>
 	</tr>
-	<!-- BEGIN comment -->
-	<tr class="row1 tCenter">
-		<td colspan="3">{postrow.attach.tor_reged.comment.COMMENT}</td>
-	</tr>
-	<!-- END comment -->
 	<tr class="row3 tCenter">
 		<td colspan="3">
 		<script type="text/javascript">

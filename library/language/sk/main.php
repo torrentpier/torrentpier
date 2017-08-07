@@ -77,6 +77,7 @@ $lang['SELECT_ACTION'] = 'Vyberte akcie';
 
 $lang['NEXT_PAGE'] = 'Ďalej';
 $lang['PREVIOUS_PAGE'] = 'Predchádzajúce';
+$lang['SHORT_PAGE'] = 'stránka';
 $lang['GOTO_PAGE'] = 'Prejsť na stránku';
 $lang['GOTO_SHORT'] = 'Stránka';
 $lang['JOINED'] = 'Pridal';
@@ -846,7 +847,7 @@ $lang['AUTH_ADMINISTRATORS'] = '<b>administrators</b>';
 $lang['NOT_MODERATOR'] = 'Nie ste moderátor tomto fóre.';
 $lang['NOT_AUTHORISED'] = 'Nie Je Povolené';
 
-$lang['YOU_BEEN_BANNED'] = 'Máte zakázaný vstup do tohto fóra.<br />Please obráťte sa na správcu webu alebo správnej rady o ďalšie informácie správcu.';
+$lang['YOU_BEEN_BANNED'] = 'Máte zakázaný vstup do tohto fóra. Prosím, obráťte sa na palube správcu pre viac informácií.';
 
 // Viewonline
 $lang['ONLINE_EXPLAIN'] = 'používateľov aktívnych počas posledných piatich minút';
@@ -2014,7 +2015,6 @@ $lang['DELETE_DISALLOW_EXPLAIN'] = 'Môžete odstrániť nepovolenej používate
 
 $lang['ADD_DISALLOW'] = 'Pridať';
 $lang['ADD_DISALLOW_TITLE'] = 'Pridať zakázané užívateľské meno';
-$lang['ADD_DISALLOW_EXPLAIN'] = 'Môžete zakázať meno pomocou zástupný znak * ak chcete priradiť ľubovoľnú postavu';
 
 $lang['NO_DISALLOWED'] = 'Žiadne Zakázané Mená';
 
@@ -2747,7 +2747,7 @@ $lang['SITEMAP_BING_1'] = 'Zaregistrujte svoje stránky na <a href="https://www.
 $lang['SITEMAP_BING_2'] = 'Pridať sitemap stránky máte registrované vo svojich nastaveniach.';
 $lang['SITEMAP_ADD_TITLE'] = 'Ďalšie stránky sitemap';
 $lang['SITEMAP_ADD_PAGE'] = 'Ďalšie stránky';
-$lang['SITEMAP_ADD_EXP_1'] = 'Môžete zadať ďalších stránok na vašej lokalite (napríklad <b>http://torrentpier.mi/memberlist.php</b>), ktoré by mali byť zahrnuté do vášho súboru sitemap súbor, ktorý chcete vytvoriť.';
+$lang['SITEMAP_ADD_EXP_1'] = 'Môžete zadať ďalších stránok na vašej lokalite, ktoré by mali byť zahrnuté do vášho súboru sitemap súbor, ktorý chcete vytvoriť.';
 $lang['SITEMAP_ADD_EXP_2'] = 'Každý odkaz musí začať s http(s):// nový riadok!';
 
 $lang['FORUM_MAP'] = 'Fórum\' mapa';
@@ -2757,6 +2757,8 @@ $lang['ATOM_SUBSCRIBE'] = 'Prihlásenie na odber informačných kanálov';
 $lang['ATOM_NO_MODE'] = 'Nie je uvedená v režime feed';
 $lang['ATOM_NO_FORUM'] = 'Toto fórum nemá krmív (bez prebieha témy)';
 $lang['ATOM_NO_USER'] = 'Tento používateľ nemá krmiva (č prebieha témy)';
+$lang['ATOM_UPDATED'] = 'Aktualizované';
+$lang['ATOM_GLOBAL_FEED'] = 'Globálne krmivo pre všetky fóra';
 
 $lang['HASH_INVALID'] = 'Hash %s je neplatný';
 $lang['HASH_NOT_FOUND'] = 'Prepustenie s hash %s nebol nájdený';

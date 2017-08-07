@@ -77,6 +77,7 @@ $lang['SELECT_ACTION'] = 'Seçin fəaliyyət';
 
 $lang['NEXT_PAGE'] = 'Daha sonra';
 $lang['PREVIOUS_PAGE'] = 'Əvvəlki';
+$lang['SHORT_PAGE'] = 'səhifə';
 $lang['GOTO_PAGE'] = 'Səhifə';
 $lang['GOTO_SHORT'] = 'Səhifə';
 $lang['JOINED'] = 'Qoşulub';
@@ -846,7 +847,7 @@ $lang['AUTH_ADMINISTRATORS'] = '<b>administrators</b>';
 $lang['NOT_MODERATOR'] = 'Siz bu forumun moderatoru var.';
 $lang['NOT_AUTHORISED'] = 'İcazə Verilmir';
 
-$lang['YOU_BEEN_BANNED'] = 'Siz забанены, bu forumda.<br />Please müraciət edin вебмастеру və ya administrator forumun daha ətraflı məlumat üçün.';
+$lang['YOU_BEEN_BANNED'] = 'Bu forumdan qadağan olunub. Daha ətraflı məlumat üçün idarə heyətinə müraciət edin.';
 
 // Viewonline
 $lang['ONLINE_EXPLAIN'] = 'aktiv istifadəçi, son beş dəqiqə';
@@ -2014,7 +2015,6 @@ $lang['DELETE_DISALLOW_EXPLAIN'] = 'Siz aradan qaldırılması üçün dözülm�
 
 $lang['ADD_DISALLOW'] = 'Əlavə etmək';
 $lang['ADD_DISALLOW_TITLE'] = 'Əlavə незасчитанный istifadəçi adı';
-$lang['ADD_DISALLOW_EXPLAIN'] = 'Siz qadağan istifadəçi adını istifadə edərək, подстановочный char * uyğun hər hansı bir simvolu';
 
 $lang['NO_DISALLOWED'] = 'Qadağan Deyil Giriş';
 
@@ -2747,7 +2747,7 @@ $lang['SITEMAP_BING_1'] = 'Qeydiyyatdan sizin sayta <a href="https://www.bing.co
 $lang['SITEMAP_BING_2'] = 'Əlavə fayl sitemap site, siz qeydiyyatdan ayarları.';
 $lang['SITEMAP_ADD_TITLE'] = 'Əlavə səhifə üçün site';
 $lang['SITEMAP_ADD_PAGE'] = 'Əlavə səhifə';
-$lang['SITEMAP_ADD_EXP_1'] = 'Siz qeyd edə əlavə səhifənin saytda (məsələn, <b>http://site torrentpier.məni/memberlist.php</b>) daxil olmaq sizin fayl sitemap ki, siz yaradırsınız.';
+$lang['SITEMAP_ADD_EXP_1'] = 'Siz qeyd edə əlavə səhifənin saytda olan daxil edilməlidir sizin fayl sitemap ki, siz yaradırsınız.';
 $lang['SITEMAP_ADD_EXP_2'] = 'Hər bir link ilə başlamalıdır http(s):// və yeni xətt!';
 
 $lang['FORUM_MAP'] = 'Kart forumların';
@@ -2757,6 +2757,8 @@ $lang['ATOM_SUBSCRIBE'] = 'Abunə kanal';
 $lang['ATOM_NO_MODE'] = 'Unknown rejimi üçün yem';
 $lang['ATOM_NO_FORUM'] = 'Bu forum qidalanma (cari mövzuları)';
 $lang['ATOM_NO_USER'] = 'Bu istifadəçi heç bir güc yoxdur (heç bir daimi mövzuları)';
+$lang['ATOM_UPDATED'] = 'Yenilə';
+$lang['ATOM_GLOBAL_FEED'] = 'Bütün forumlar üçün qlobal yem';
 
 $lang['HASH_INVALID'] = 'Hash %s etibarsızdır';
 $lang['HASH_NOT_FOUND'] = 'Məsələ ilə hash %s tapılmadı';

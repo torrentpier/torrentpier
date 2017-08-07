@@ -77,6 +77,7 @@ $lang['SELECT_ACTION'] = 'Odaberite akciju';
 
 $lang['NEXT_PAGE'] = 'Dalje';
 $lang['PREVIOUS_PAGE'] = 'Prethodni';
+$lang['SHORT_PAGE'] = 'stranice';
 $lang['GOTO_PAGE'] = 'Idi na stranicu';
 $lang['GOTO_SHORT'] = 'Stranice';
 $lang['JOINED'] = 'Pridružio se';
@@ -846,7 +847,7 @@ $lang['AUTH_ADMINISTRATORS'] = '<b>administrators</b>';
 $lang['NOT_MODERATOR'] = 'Niste moderator ovog foruma.';
 $lang['NOT_AUTHORISED'] = 'Nije Dopušteno';
 
-$lang['YOU_BEEN_BANNED'] = 'Vi ste bili zabranjen na ovom forumu.<br />Please kontaktirajte webmastera ili administratora foruma za više informacija.';
+$lang['YOU_BEEN_BANNED'] = 'Vi ste zabranjeni na ovom forumu. Više informacija zatražite od administratora odbora.';
 
 // Viewonline
 $lang['ONLINE_EXPLAIN'] = 'aktivnih korisnika u zadnjih pet minuta';
@@ -2014,7 +2015,6 @@ $lang['DELETE_DISALLOW_EXPLAIN'] = 'Možete ukloniti nedopuštene korisničko im
 
 $lang['ADD_DISALLOW'] = 'Dodaj';
 $lang['ADD_DISALLOW_TITLE'] = 'Dodaj незасчитанный korisničko ime';
-$lang['ADD_DISALLOW_EXPLAIN'] = 'Možete zabraniti korisničko ime, koristite zamjenski znak * odgovara bilo koji znak';
 
 $lang['NO_DISALLOWED'] = 'Ne Kućne Ljubimce Prijave';
 
@@ -2747,7 +2747,7 @@ $lang['SITEMAP_BING_1'] = 'Registrirati svoje web stranice u <a href="https://ww
 $lang['SITEMAP_BING_2'] = 'Dodaj svoj sitemap stranice, ste registrirani u postavkama.';
 $lang['SITEMAP_ADD_TITLE'] = 'Dodatne stranice za web stranice';
 $lang['SITEMAP_ADD_PAGE'] = 'Dodatne stranice';
-$lang['SITEMAP_ADD_EXP_1'] = 'Možete navesti i dodatne stranice na vašoj web stranici (na primjer, <b>http://stranice torrentpier.me/memberlist.php</b>), koji bi trebali biti uključeni u vaš sitemap, koji ste stvorili.';
+$lang['SITEMAP_ADD_EXP_1'] = 'Možete navesti i dodatne stranice na vašoj web stranici, koji bi trebali biti uključeni u vaš sitemap, koji ste stvorili.';
 $lang['SITEMAP_ADD_EXP_2'] = 'Svaki link mora početi sa http(s):// i novu liniju!';
 
 $lang['FORUM_MAP'] = 'Karta foruma';
@@ -2757,6 +2757,8 @@ $lang['ATOM_SUBSCRIBE'] = 'Pretplatite se na kanal';
 $lang['ATOM_NO_MODE'] = 'Nije naveden način za hranjenje';
 $lang['ATOM_NO_FORUM'] = 'Ovaj forum ne pase (ne aktualne teme)';
 $lang['ATOM_NO_USER'] = 'To ime nema napajanja (nema stalni teme)';
+$lang['ATOM_UPDATED'] = 'Ažuriraj';
+$lang['ATOM_GLOBAL_FEED'] = 'Globalni feed za sve forume';
 
 $lang['HASH_INVALID'] = 'Hash %s je nevažeća';
 $lang['HASH_NOT_FOUND'] = 'Izdanje s hash %s nije pronađen';

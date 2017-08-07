@@ -56,12 +56,6 @@ switch ($mode) {
             $html .= '<br />' . $lang['SITEMAP_NOTIFY_SEARCH'] . ' Google: <span style="color: red;">' . $lang['SITEMAP_ERROR'] . '</span> URL: <a href="http://google.com/webmasters/sitemaps/ping?sitemap=' . urlencode($map_link) . '" target="_blank">http://google.com/webmasters/sitemaps/ping?sitemap=' . $map_link . '</a>';
         }
 
-        if ($map->sendSitemap('http://ping.blogs.yandex.ru/ping?sitemap=', $map_link)) {
-            $html .= '<br />' . $lang['SITEMAP_NOTIFY_SEARCH'] . ' Yandex: <span style="color: green;">' . $lang['SITEMAP_SENT'] . '</span>';
-        } else {
-            $html .= '<br />' . $lang['SITEMAP_NOTIFY_SEARCH'] . ' Yandex: <span style="color: red;">' . $lang['SITEMAP_ERROR'] . '</span> URL: <a href="http://ping.blogs.yandex.ru/ping?sitemap=' . urlencode($map_link) . '" target="_blank">http://ping.blogs.yandex.ru/ping?sitemap=' . $map_link . '</a>';
-        }
-
         if ($map->sendSitemap('http://www.bing.com/ping?sitemap=', $map_link)) {
             $html .= '<br />' . $lang['SITEMAP_NOTIFY_SEARCH'] . ' Bing: <span style="color: green;">' . $lang['SITEMAP_SENT'] . '</span>';
         } else {

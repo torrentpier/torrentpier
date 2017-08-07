@@ -77,6 +77,7 @@ $lang['SELECT_ACTION'] = 'Válassza ki a műveletet';
 
 $lang['NEXT_PAGE'] = 'Következő';
 $lang['PREVIOUS_PAGE'] = 'Előző';
+$lang['SHORT_PAGE'] = 'oldal';
 $lang['GOTO_PAGE'] = 'Menj az oldal';
 $lang['GOTO_SHORT'] = 'Oldal';
 $lang['JOINED'] = 'Csatlakozott';
@@ -846,7 +847,7 @@ $lang['AUTH_ADMINISTRATORS'] = '<b>administrators</b>';
 $lang['NOT_MODERATOR'] = 'Nem egy moderátor a fórumon.';
 $lang['NOT_AUTHORISED'] = 'Nem Engedélyezett';
 
-$lang['YOU_BEEN_BANNED'] = 'Van kitiltva, ez a fórum.<br />Please kapcsolatba a webmesterrel, vagy az adminisztrátorral további információt.';
+$lang['YOU_BEEN_BANNED'] = 'Ön tiltott ezen a fórumon. További információért forduljon a fórum adminisztrátorához.';
 
 // Viewonline
 $lang['ONLINE_EXPLAIN'] = 'aktív felhasználók az elmúlt öt perc';
@@ -2014,7 +2015,6 @@ $lang['DELETE_DISALLOW_EXPLAIN'] = 'Eltávolíthatja a nem engedélyezett felhas
 
 $lang['ADD_DISALLOW'] = 'Add';
 $lang['ADD_DISALLOW_TITLE'] = 'Adjunk hozzá egy nem engedélyezett felhasználónév';
-$lang['ADD_DISALLOW_EXPLAIN'] = 'Lehet letiltja a felhasználónevet használja a helyettesítő karakter * a mérkőzés bármilyen karakter';
 
 $lang['NO_DISALLOWED'] = 'Nem Engedélyezett Felhasználónevek';
 
@@ -2747,7 +2747,7 @@ $lang['SITEMAP_BING_1'] = 'Regisztrálni a helyszínen <a href="https://www.bing
 $lang['SITEMAP_BING_2'] = 'Add oldaltérkép a honlap regisztrált a beállításokat.';
 $lang['SITEMAP_ADD_TITLE'] = 'További oldalak oldaltérkép';
 $lang['SITEMAP_ADD_PAGE'] = 'További oldalak';
-$lang['SITEMAP_ADD_EXP_1'] = 'Megadhat további oldalak a webhelyen (például <b>http://torrentpier.nekem/memberlist.php</b>), amely tartalmazza a sitemap-fájl létrehozása.';
+$lang['SITEMAP_ADD_EXP_1'] = 'Megadhat további oldalak a webhelyen, amely tartalmazza a sitemap-fájl létrehozása.';
 $lang['SITEMAP_ADD_EXP_2'] = 'Minden hivatkozást kell kezdeni a http(s)://, valamint egy új sort!';
 
 $lang['FORUM_MAP'] = 'Fórumok\' térkép';
@@ -2757,6 +2757,8 @@ $lang['ATOM_SUBSCRIBE'] = 'Iratkozz fel a feed';
 $lang['ATOM_NO_MODE'] = 'Nem határozza meg a módot, hogy a takarmány';
 $lang['ATOM_NO_FORUM'] = 'Ez a fórum nem egy feed (nincs folyamatban lévő témák)';
 $lang['ATOM_NO_USER'] = 'Ez a felhasználó nem rendelkezik takarmány (nincs folyamatban lévő témák)';
+$lang['ATOM_UPDATED'] = 'Módosítva';
+$lang['ATOM_GLOBAL_FEED'] = 'Globális hírcsatorna az összes fórum számára';
 
 $lang['HASH_INVALID'] = 'Hash %s érvénytelen';
 $lang['HASH_NOT_FOUND'] = 'Kiadás hash %s nem található';

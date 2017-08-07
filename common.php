@@ -263,9 +263,8 @@ function file_write($str, $file, $max_size = LOG_MAX_SIZE, $lock = true, $replac
     if ($max_size && file_exists($file) && filesize($file) >= $max_size) {
         $old_name = $file;
         $ext = '';
-        if (preg_match('#^(.+)(\.[^\\/]+)$#', $file, $matches)) {
-            $old_name = $matches[1];
-            $ext = $matches[2];
+        if (preg_match('#^(.+)(\.[^\\\/]+)$#', $file, $matches)) {
+            list($old_name, $ext) = $matches;
         }
         $new_name = $old_name . '_[old]_' . date('Y-m-d_H-i-s_') . getmypid() . $ext;
         clearstatcache();

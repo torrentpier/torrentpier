@@ -77,6 +77,7 @@ $lang['SELECT_ACTION'] = 'Seleccioneu acció';
 
 $lang['NEXT_PAGE'] = 'Següent';
 $lang['PREVIOUS_PAGE'] = 'Anteriors';
+$lang['SHORT_PAGE'] = 'pàgina';
 $lang['GOTO_PAGE'] = 'Anar a la pàgina';
 $lang['GOTO_SHORT'] = 'La pàgina';
 $lang['JOINED'] = 'Unit';
@@ -846,7 +847,7 @@ $lang['AUTH_ADMINISTRATORS'] = '<b>administrators</b>';
 $lang['NOT_MODERATOR'] = 'Vostè no és un moderador d\'aquest fòrum.';
 $lang['NOT_AUTHORISED'] = 'No S\'Autoritza';
 
-$lang['YOU_BEEN_BANNED'] = 'Vostè ha estat prohibit a aquest fòrum.<br />Please en contacte amb el webmaster o consell administrador per a més informació.';
+$lang['YOU_BEEN_BANNED'] = 'Has estat expulsat d\'aquest fòrum. Poseu-vos en contacte amb l\'administrador del taulell per obtenir més informació.';
 
 // Viewonline
 $lang['ONLINE_EXPLAIN'] = 'els usuaris actius durant els darrers cinc minuts';
@@ -2014,7 +2015,6 @@ $lang['DELETE_DISALLOW_EXPLAIN'] = 'Podeu eliminar un nom d\'usuari no permès p
 
 $lang['ADD_DISALLOW'] = 'Afegir';
 $lang['ADD_DISALLOW_TITLE'] = 'Afegir un nom d\'usuari no permès';
-$lang['ADD_DISALLOW_EXPLAIN'] = 'Vostè pot rebutjar un nom d\'usuari utilitzant el comodí * coincideix amb qualsevol caràcter';
 
 $lang['NO_DISALLOWED'] = 'No Hi Ha Noms D\'Usuari No Permès';
 
@@ -2747,7 +2747,7 @@ $lang['SITEMAP_BING_1'] = 'Registrar el seu lloc a <a href="https://www.bing.com
 $lang['SITEMAP_BING_2'] = 'Afegir el mapa de lloc que heu registrat en la seva configuració.';
 $lang['SITEMAP_ADD_TITLE'] = 'Pàgines addicionals per sitemap';
 $lang['SITEMAP_ADD_PAGE'] = 'Pàgines addicionals';
-$lang['SITEMAP_ADD_EXP_1'] = 'Podeu especificar altres pàgines al vostre lloc web (per exemple, <b>http://torrentpier.m\'/memberlist.php</b>) que han de ser inclosos en el vostre fitxer de sitemap que vostè de crear.';
+$lang['SITEMAP_ADD_EXP_1'] = 'Podeu especificar altres pàgines del vostre lloc que han de ser inclosos en el vostre fitxer de sitemap que vostè de crear.';
 $lang['SITEMAP_ADD_EXP_2'] = 'Cada referència s\'ha de començar amb http(s):// i una nova línia!';
 
 $lang['FORUM_MAP'] = 'Fòrums mapa';
@@ -2757,6 +2757,8 @@ $lang['ATOM_SUBSCRIBE'] = 'Subscriure\'s al feed';
 $lang['ATOM_NO_MODE'] = 'No especifica un mode per a l\'alimentació';
 $lang['ATOM_NO_FORUM'] = 'Aquest fòrum no tenen una alimentació (no continuada temes)';
 $lang['ATOM_NO_USER'] = 'Aquest usuari no té un feed (no continuada temes)';
+$lang['ATOM_UPDATED'] = 'Actualitzat';
+$lang['ATOM_GLOBAL_FEED'] = 'Feed global per a tots els fòrums';
 
 $lang['HASH_INVALID'] = 'Hash %s és invàlid';
 $lang['HASH_NOT_FOUND'] = 'Llançament de hash %s no trobat';

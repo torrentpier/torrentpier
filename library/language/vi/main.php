@@ -77,6 +77,7 @@ $lang['SELECT_ACTION'] = 'Chọn hành động';
 
 $lang['NEXT_PAGE'] = 'Tiếp theo';
 $lang['PREVIOUS_PAGE'] = 'Trước đó';
+$lang['SHORT_PAGE'] = 'trang';
 $lang['GOTO_PAGE'] = 'Đi tới trang';
 $lang['GOTO_SHORT'] = 'Trang';
 $lang['JOINED'] = 'Tham gia';
@@ -846,7 +847,7 @@ $lang['AUTH_ADMINISTRATORS'] = '<b>administrators</b>';
 $lang['NOT_MODERATOR'] = 'Bạn không phải là một người điều hành các diễn đàn này.';
 $lang['NOT_AUTHORISED'] = 'Không Được Ủy Quyền';
 
-$lang['YOU_BEEN_BANNED'] = 'Bạn đã bị cấm diễn đàn này.<br />Please liên hệ với người chủ hoặc ban quản trị cho thêm thông tin.';
+$lang['YOU_BEEN_BANNED'] = 'Bạn đã bị cấm diễn đàn này. Xin liên hệ với các hội đồng quản trị cho thêm thông tin.';
 
 // Viewonline
 $lang['ONLINE_EXPLAIN'] = 'người sử dụng hoạt động qua năm phút';
@@ -2014,7 +2015,6 @@ $lang['DELETE_DISALLOW_EXPLAIN'] = 'Bạn có thể bỏ không được phép m
 
 $lang['ADD_DISALLOW'] = 'Thêm';
 $lang['ADD_DISALLOW_TITLE'] = 'Thêm một tên không được phép';
-$lang['ADD_DISALLOW_EXPLAIN'] = 'Bạn có thể không cho phép một tên bằng các ký tự * để phù hợp với bất cứ nhân vật nào';
 
 $lang['NO_DISALLOWED'] = 'Không, Không Được Phép Tên';
 
@@ -2747,7 +2747,7 @@ $lang['SITEMAP_BING_1'] = 'Đăng ký trang web của bạn ở <a href="https:/
 $lang['SITEMAP_BING_2'] = 'Thêm đồ trang web của bạn đăng ký tại các thiết lập của nó.';
 $lang['SITEMAP_ADD_TITLE'] = 'Trang bổ sung cho sơ đồ';
 $lang['SITEMAP_ADD_PAGE'] = 'Các trang khác';
-$lang['SITEMAP_ADD_EXP_1'] = 'Bạn có thể xác định trang khác trên trang web của bạn (ví dụ, <b>http://torrentpier.tôi giữ.php</b>) đó nên bao gồm trong sơ đồ trang web của tập tin rằng anh tạo ra.';
+$lang['SITEMAP_ADD_EXP_1'] = 'Bạn có thể xác định trang khác trên trang web của bạn mà nên bao gồm trong sơ đồ trang web của tập tin rằng anh tạo ra.';
 $lang['SITEMAP_ADD_EXP_2'] = 'Mỗi tài liệu tham khảo phải bắt đầu với http(s):// và một dòng mới!';
 
 $lang['FORUM_MAP'] = 'Các diễn đàn\' bản đồ';
@@ -2757,6 +2757,8 @@ $lang['ATOM_SUBSCRIBE'] = 'Theo dõi các nguồn';
 $lang['ATOM_NO_MODE'] = 'Không chỉ định một chế độ ăn';
 $lang['ATOM_NO_FORUM'] = 'Diễn đàn này không có thức ăn (không liên tục chủ đề)';
 $lang['ATOM_NO_USER'] = 'Người này không có thức ăn (không liên tục chủ đề)';
+$lang['ATOM_UPDATED'] = 'Đã cập nhật';
+$lang['ATOM_GLOBAL_FEED'] = 'Thức ăn toàn cầu cho tất cả các diễn đàn';
 
 $lang['HASH_INVALID'] = 'Băm %s là không hợp lệ';
 $lang['HASH_NOT_FOUND'] = 'Phát hành với băm %s không tìm thấy';

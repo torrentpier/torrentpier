@@ -1,4 +1,4 @@
-<p align="center"><a href="https://torrentpier.me/"><img src="https://torrentpier.me/forum/styles/default/xenforo/bull-logo.svg" width="400px" /></a></p>
+<p align="center"><a href="https://torrentpier.com/"><img src="https://torrentpier.com/forum/styles/default/xenforo/bull-logo.svg" width="400px" /></a></p>
 <p align="center">
     <a href="http://torrentpier.herokuapp.com/"><img src="http://torrentpier.herokuapp.com/badge.svg" alt="Slack"></a>
     <a href="https://crowdin.com/project/torrentpier"><img src="https://d322cqt584bo4o.cloudfront.net/torrentpier/localized.svg" alt="Crowdin"></a>
@@ -15,7 +15,7 @@
 
 TorrentPier — bull-powered BitTorrent tracker engine, written in php. High speed, simple modification, high load 
 architecture, built-in support for alternative compiled announcers (Ocelot, XBT). In addition we have very helpful 
-[official support forum](https://torrentpier.me/forum), where among other things it is possible to test the live 
+[official support forum](https://torrentpier.com/forum), where among other things it is possible to test the live 
 demo, get any support and download modifications for engine.
 
 ## Current status
@@ -29,7 +29,7 @@ and go from there. The documentation will be translated into english in the near
 * Apache / nginx
 * MySQL / MariaDB / Percona
 * PHP: 5.6 / 7.0 / 7.1
-* PHP Extensions: bcmath, intl, tidy (optional)
+* PHP Extensions: bcmath, intl, tidy (optional), xml
 
 ## Installation
 
@@ -40,6 +40,7 @@ For installation you need to follow a few simple steps:
 1. Create database and import dump located at **install/sql/mysql.sql**
 1. Edit database configuration settings in the configuration file or a local copy (see below)
 1. Edit domain name in the configuration file or a local copy (see below)
+1. Edit domain ssl setting in the configuration file or a local copy (see below)
 1. Edit this files:
    1. **favicon.png** (change on your own)
    1. **robots.txt** (change the addresses in lines **Host** and **Sitemap** on your own)
@@ -65,7 +66,7 @@ and chmod 0644 for files in them. If you are not sure, leave it as is.
 ## The recommended way to run cron.php
 
 For significant tracker speed increase may be required to replace built-in cron.php by operating system daemon. For more 
-information about that you can read [this thread](https://torrentpier.me/forum/threads/52/) on our support forum.
+information about that you can read [this thread](https://torrentpier.com/forum/threads/52/) on our support forum.
 
 ## Local configuration copy
 
@@ -77,11 +78,11 @@ should not be available for reading to anyone by setting up access rights for yo
 
 We have built-in support for alternate compiled announcer — Ocelot. The configuration is in the file **library/config.php**,
 the announcer is in the repository [torrentpier/ocelot](https://github.com/torrentpier/ocelot). You can read assembly instructions
-on his repository or in [this thread](https://torrentpier.me/forum/threads/26078/) on our support forum.
+on his repository or in [this thread](https://torrentpier.com/forum/threads/26078/) on our support forum.
 
 ## Official documentation
 
-Documentation for TorrentPier can be found on the [TorrentPier docs website](https://docs.torrentpier.me).
+Documentation for TorrentPier can be found on the [TorrentPier docs website](https://docs.torrentpier.com).
 
 ## Contributing
 

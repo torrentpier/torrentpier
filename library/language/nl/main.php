@@ -77,6 +77,7 @@ $lang['SELECT_ACTION'] = 'Selecteer actie';
 
 $lang['NEXT_PAGE'] = 'Volgende';
 $lang['PREVIOUS_PAGE'] = 'Vorige';
+$lang['SHORT_PAGE'] = 'pagina';
 $lang['GOTO_PAGE'] = 'Ga naar pagina';
 $lang['GOTO_SHORT'] = 'Pagina';
 $lang['JOINED'] = 'Samengevoegd';
@@ -846,7 +847,7 @@ $lang['AUTH_ADMINISTRATORS'] = '<b>administrators</b>';
 $lang['NOT_MODERATOR'] = 'U bent geen moderator van dit forum.';
 $lang['NOT_AUTHORISED'] = 'Niet Toegelaten';
 
-$lang['YOU_BEEN_BANNED'] = 'Je bent verbannen van dit forum.<br />Please contact op met de webmaster of forum beheerder voor meer informatie.';
+$lang['YOU_BEEN_BANNED'] = 'U bent uit dit forum verbannen. Neem contact op met de bestuurder voor meer informatie.';
 
 // Viewonline
 $lang['ONLINE_EXPLAIN'] = 'gebruikers actief in de afgelopen vijf minuten';
@@ -2014,7 +2015,6 @@ $lang['DELETE_DISALLOW_EXPLAIN'] = 'U kunt het verwijderen van een niet toegesta
 
 $lang['ADD_DISALLOW'] = 'Toevoegen';
 $lang['ADD_DISALLOW_TITLE'] = 'Voeg een verboden gebruikersnaam';
-$lang['ADD_DISALLOW_EXPLAIN'] = 'U kunt weigeren een gebruikersnaam met het jokerteken * te combineren met elk karakter';
 
 $lang['NO_DISALLOWED'] = 'Geen Niet-Toegestane Gebruikersnamen';
 
@@ -2747,7 +2747,7 @@ $lang['SITEMAP_BING_1'] = 'Het registreren van uw site bij <a href="https://www.
 $lang['SITEMAP_BING_2'] = 'Toevoegen sitemap van de site die u geregistreerd heeft in haar instellingen.';
 $lang['SITEMAP_ADD_TITLE'] = 'Extra pagina \' s voor-sitemap';
 $lang['SITEMAP_ADD_PAGE'] = 'Extra pagina \' s';
-$lang['SITEMAP_ADD_EXP_1'] = 'U kunt extra pagina \' s op uw site (bijvoorbeeld, <b>http://torrentpier.me/ledenlijst.php</b>) die moet worden opgenomen in uw sitemap-bestand dat u maakt.';
+$lang['SITEMAP_ADD_EXP_1'] = 'U kunt extra pagina \' s op uw website die moeten worden opgenomen in uw sitemap-bestand dat u maakt.';
 $lang['SITEMAP_ADD_EXP_2'] = 'Elke referentie moet beginnen met http(s):// en een nieuwe lijn!';
 
 $lang['FORUM_MAP'] = 'Forums\' kaart';
@@ -2757,6 +2757,8 @@ $lang['ATOM_SUBSCRIBE'] = 'Abonneren op de feed';
 $lang['ATOM_NO_MODE'] = 'Geef geen modus voor de invoer';
 $lang['ATOM_NO_FORUM'] = 'Dit forum beschikt niet over een voeding (geen doorlopende onderwerpen)';
 $lang['ATOM_NO_USER'] = 'Deze gebruiker heeft geen voeding (geen doorlopende onderwerpen)';
+$lang['ATOM_UPDATED'] = 'Bijgewerkt';
+$lang['ATOM_GLOBAL_FEED'] = 'Globale feed voor alle forums';
 
 $lang['HASH_INVALID'] = 'Hash %s is ongeldig';
 $lang['HASH_NOT_FOUND'] = 'Release met hash %s niet gevonden';

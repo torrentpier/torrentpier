@@ -77,6 +77,7 @@ $lang['SELECT_ACTION'] = '選択行動';
 
 $lang['NEXT_PAGE'] = '次へ';
 $lang['PREVIOUS_PAGE'] = '前';
+$lang['SHORT_PAGE'] = 'ページ';
 $lang['GOTO_PAGE'] = 'くページ';
 $lang['GOTO_SHORT'] = 'ページ';
 $lang['JOINED'] = '入';
@@ -846,7 +847,7 @@ $lang['AUTH_ADMINISTRATORS'] = '<b>administrators</b>';
 $lang['NOT_MODERATOR'] = '外からガラス越しにテーブルがモデレーターのこのフォーラムです。';
 $lang['NOT_AUTHORISED'] = '許可されていない';
 
-$lang['YOU_BEEN_BANNED'] = 'て禁止されていたからこのフォーラムです。<br />Pleaseよりウェブマスター宛にご連絡またはボード管理者のための情報です。';
+$lang['YOU_BEEN_BANNED'] = 'あなたはこのフォーラムから禁止されています。詳細については、ボード管理者にお問い合わせください。';
 
 // Viewonline
 $lang['ONLINE_EXPLAIN'] = 'ユーザーの活動過去分';
@@ -2014,7 +2015,6 @@ $lang['DELETE_DISALLOW_EXPLAIN'] = 'を除去することができる許可し�
 
 $lang['ADD_DISALLOW'] = '追加';
 $lang['ADD_DISALLOW_TITLE'] = 'の追加を許可しないユーザー名';
-$lang['ADD_DISALLOW_EXPLAIN'] = 'できる可ユーザ名にワイルドカード文字*キャラにもベストマッチ';
 
 $lang['NO_DISALLOWED'] = '無許可ユーザ名';
 
@@ -2747,7 +2747,7 @@ $lang['SITEMAP_BING_1'] = '登録サイトで<a href="https://www.bing.com/webma
 $lang['SITEMAP_BING_2'] = 'サイトマップの追加のサイトにご登録いただいたに設定します。';
 $lang['SITEMAP_ADD_TITLE'] = '追加ページサイトマップ';
 $lang['SITEMAP_ADD_PAGE'] = '追加ページ';
-$lang['SITEMAP_ADD_EXP_1'] = 'を指定できる追加のページのサイト（例えば、<b>http://torrentpierます。me/memberlistます。php</b>）に含まれるべきものでごサイトマップファイルをまた作成します。';
+$lang['SITEMAP_ADD_EXP_1'] = 'を指定できる追加のページをごサイトに含まれるべきもので自サイトマップファイルをまた作成します。';
 $lang['SITEMAP_ADD_EXP_2'] = '各参照始めなければならなhttp(s)://新しい行ます！';
 
 $lang['FORUM_MAP'] = 'フォーラム"地図';
@@ -2757,6 +2757,8 @@ $lang['ATOM_SUBSCRIBE'] = '購読の飼料';
 $lang['ATOM_NO_MODE'] = '指定がないモードの飼料';
 $lang['ATOM_NO_FORUM'] = 'このフォーラムがない飼料(継続的な課題)';
 $lang['ATOM_NO_USER'] = 'このユーザーがない飼料(継続的な課題)';
+$lang['ATOM_UPDATED'] = '更新日時';
+$lang['ATOM_GLOBAL_FEED'] = 'すべてのフォーラムのグローバルフィード';
 
 $lang['HASH_INVALID'] = 'ハッシュ%sが無効';
 $lang['HASH_NOT_FOUND'] = 'コーポレートコミュニケーションのハッシュ%s見つかりませんで';
