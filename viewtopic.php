@@ -299,7 +299,7 @@ $limit_posts_time = '';
 $total_replies = $t_data['topic_replies'] + 1;
 
 if (!empty($_REQUEST['postdays'])) {
-    if ($post_days = (int) $_REQUEST['postdays']) {
+    if ($post_days = (int)$_REQUEST['postdays']) {
         if (!empty($_POST['postdays'])) {
             $start = 0;
         }
@@ -449,10 +449,10 @@ if ($can_watch_topic) {
 
 // If we've got a hightlight set pass it on to pagination,
 $pg_url = TOPIC_URL . $topic_id;
-$pg_url .= ($post_days) ? "&amp;postdays=$post_days" : '';
+$pg_url .= $post_days ? "&amp;postdays=$post_days" : '';
 $pg_url .= ($post_order != 'asc') ? "&amp;postorder=$post_order" : '';
 $pg_url .= isset($_REQUEST['single']) ? "&amp;single=1" : '';
-$pg_url .= ($moderation) ? "&amp;mod=1" : '';
+$pg_url .= $moderation ? "&amp;mod=1" : '';
 $pg_url .= ($posts_per_page != $bb_cfg['posts_per_page']) ? "&amp;ppp=$posts_per_page" : '';
 
 generate_pagination($pg_url, $total_replies, $posts_per_page, $start);
@@ -479,6 +479,9 @@ $poll_time_expired = ($t_data['topic_time'] < TIMENOW - $bb_cfg['poll_max_days']
 $can_manage_poll = ($t_data['topic_poster'] == $userdata['user_id'] || $is_auth['auth_mod']);
 $can_add_poll = ($can_manage_poll && !$topic_has_poll && !$poll_time_expired && !$start);
 
+$page_title = ((int)($start / $posts_per_page) === 0) ? $topic_title :
+    $topic_title . ' - ' . $lang['SHORT_PAGE'] . ' ' . (floor($start / $posts_per_page) + 1);
+
 //
 // Send vars to template
 //
@@ -491,7 +494,7 @@ $template->assign_vars(array(
     'FORUM_ID' => $forum_id,
     'FORUM_NAME' => htmlCHR($forum_name),
     'TOPIC_ID' => $topic_id,
-    'PAGE_TITLE' => $topic_title,
+    'PAGE_TITLE' => $page_title,
     'TOPIC_TITLE' => wbr($topic_title),
     'PORNO_FORUM' => $t_data['allow_porno_topic'],
     'REPLY_IMG' => $reply_img,

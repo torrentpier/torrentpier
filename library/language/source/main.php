@@ -77,6 +77,7 @@ $lang['SELECT_ACTION'] = 'Select action';
 
 $lang['NEXT_PAGE'] = 'Next';
 $lang['PREVIOUS_PAGE'] = 'Previous';
+$lang['SHORT_PAGE'] = 'page';
 $lang['GOTO_PAGE'] = 'Go to page';
 $lang['GOTO_SHORT'] = 'Page';
 $lang['JOINED'] = 'Joined';
