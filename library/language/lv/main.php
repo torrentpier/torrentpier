@@ -77,6 +77,7 @@ $lang['SELECT_ACTION'] = 'Izvēlieties darbība';
 
 $lang['NEXT_PAGE'] = 'Nākamā';
 $lang['PREVIOUS_PAGE'] = 'Iepriekšējā';
+$lang['SHORT_PAGE'] = 'lapa';
 $lang['GOTO_PAGE'] = 'Iet uz lapu';
 $lang['GOTO_SHORT'] = 'Lapa';
 $lang['JOINED'] = 'Pievienojies';
@@ -846,7 +847,7 @@ $lang['AUTH_ADMINISTRATORS'] = '<b>administrators</b>';
 $lang['NOT_MODERATOR'] = 'Jūs neesat moderators šo forumu.';
 $lang['NOT_AUTHORISED'] = 'Nav Atļauts';
 
-$lang['YOU_BEEN_BANNED'] = 'Jums ir aizliegts šajā forumā.<br />Please, sazinieties ar tīmekļa pārzini vai valdes administratoru, lai iegūtu plašāku informāciju.';
+$lang['YOU_BEEN_BANNED'] = 'Jūs esat aizliegts šajā forumā. Lai iegūtu plašāku informāciju, lūdzu, sazinieties ar padomes administratoru.';
 
 // Viewonline
 $lang['ONLINE_EXPLAIN'] = 'lietotāji aktīvo pēdējo piecu minūšu laikā';
@@ -2014,7 +2015,6 @@ $lang['DELETE_DISALLOW_EXPLAIN'] = 'Jūs varat noņemt atļauts lietotājvārdu 
 
 $lang['ADD_DISALLOW'] = 'Pievienot';
 $lang['ADD_DISALLOW_TITLE'] = 'Pievienot atļauts lietotājvārdu';
-$lang['ADD_DISALLOW_EXPLAIN'] = 'Jūs varat neatļaut lietotājvārdu, izmantojot aizstājējzīmi * atbilst jebkurai rakstzīmju';
 
 $lang['NO_DISALLOWED'] = 'Nav Atļauts Lietotājvārdu';
 
@@ -2757,6 +2757,8 @@ $lang['ATOM_SUBSCRIBE'] = 'Abonēt plūsmu,';
 $lang['ATOM_NO_MODE'] = 'Nav norādīts režīmā barības';
 $lang['ATOM_NO_FORUM'] = 'Šis forums nav barības (nav pastāvīgo tēmas)';
 $lang['ATOM_NO_USER'] = 'Šim lietotājam nav barības (nav pastāvīgo tēmas)';
+$lang['ATOM_UPDATED'] = 'Atjaunināt, Atjauninājums';
+$lang['ATOM_GLOBAL_FEED'] = 'Globālā plūsma visiem forumiem';
 
 $lang['HASH_INVALID'] = 'Hash %s nav derīgs';
 $lang['HASH_NOT_FOUND'] = 'Atbrīvot ar hash %s nav atrasts';

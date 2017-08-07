@@ -77,6 +77,7 @@ $lang['SELECT_ACTION'] = 'Selecione ação';
 
 $lang['NEXT_PAGE'] = 'Seguinte';
 $lang['PREVIOUS_PAGE'] = 'Anterior';
+$lang['SHORT_PAGE'] = 'página';
 $lang['GOTO_PAGE'] = 'Ir para a página';
 $lang['GOTO_SHORT'] = 'Página';
 $lang['JOINED'] = 'Entrou';
@@ -846,7 +847,7 @@ $lang['AUTH_ADMINISTRATORS'] = '<b>administrators</b>';
 $lang['NOT_MODERATOR'] = 'Você não é um moderador do fórum.';
 $lang['NOT_AUTHORISED'] = 'Não Autorizado';
 
-$lang['YOU_BEEN_BANNED'] = 'Você foi banido deste fórum.<br />Please em contato com o webmaster ou o administrador do fórum para mais informações.';
+$lang['YOU_BEEN_BANNED'] = 'Você foi banido por este fórum. Entre em contato com o administrador da placa para obter mais informações.';
 
 // Viewonline
 $lang['ONLINE_EXPLAIN'] = 'usuários ativos nos últimos cinco minutos';
@@ -2014,7 +2015,6 @@ $lang['DELETE_DISALLOW_EXPLAIN'] = 'Você pode remover um nome de usuário não 
 
 $lang['ADD_DISALLOW'] = 'Adicionar';
 $lang['ADD_DISALLOW_TITLE'] = 'Adicione um nome de usuário não permitido';
-$lang['ADD_DISALLOW_EXPLAIN'] = 'Você pode bloquear um nome de usuário usando o caractere curinga * para combinar com qualquer personagem';
 
 $lang['NO_DISALLOWED'] = 'Sem Nomes De Usuário Não Permitido';
 
@@ -2757,6 +2757,8 @@ $lang['ATOM_SUBSCRIBE'] = 'Assine o feed';
 $lang['ATOM_NO_MODE'] = 'Não especificar um modo para o feed';
 $lang['ATOM_NO_FORUM'] = 'Este fórum não tem um feed (não contínuo tópicos)';
 $lang['ATOM_NO_USER'] = 'Este usuário não tem um feed (não contínuo tópicos)';
+$lang['ATOM_UPDATED'] = 'Actualizada';
+$lang['ATOM_GLOBAL_FEED'] = 'Alimentação global para todos os fóruns';
 
 $lang['HASH_INVALID'] = 'Hash %s é inválida';
 $lang['HASH_NOT_FOUND'] = 'Lançamento com hash %s não encontrado';

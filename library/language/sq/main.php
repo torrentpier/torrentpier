@@ -77,6 +77,7 @@ $lang['SELECT_ACTION'] = 'Zgjidhni veprim';
 
 $lang['NEXT_PAGE'] = 'Tjetër';
 $lang['PREVIOUS_PAGE'] = 'E mëparshme';
+$lang['SHORT_PAGE'] = 'faqe';
 $lang['GOTO_PAGE'] = 'Shko tek faqja';
 $lang['GOTO_SHORT'] = 'Faqe';
 $lang['JOINED'] = 'U bashkuan';
@@ -846,7 +847,7 @@ $lang['AUTH_ADMINISTRATORS'] = '<b>administrators</b>';
 $lang['NOT_MODERATOR'] = 'Ju nuk jeni nje moderator i këtij forumi.';
 $lang['NOT_AUTHORISED'] = 'Jo I Autorizuar';
 
-$lang['YOU_BEEN_BANNED'] = 'Ju keni qenë të ndaluara nga ky forum.<br />Please kontaktoni webmasterin ose administratorin për më shumë informacion.';
+$lang['YOU_BEEN_BANNED'] = 'Ju jeni ndaluar nga ky forum. Ju lutemi të kontaktoni administratorin e bordit për më shumë informacion.';
 
 // Viewonline
 $lang['ONLINE_EXPLAIN'] = 'përdoruesit aktiv gjate pese minuta';
@@ -2014,7 +2015,6 @@ $lang['DELETE_DISALLOW_EXPLAIN'] = 'Ju mund të hiqni një palejueshme username 
 
 $lang['ADD_DISALLOW'] = 'Shtoni';
 $lang['ADD_DISALLOW_TITLE'] = 'Të shtoni një palejueshme emrin e përdoruesit';
-$lang['ADD_DISALLOW_EXPLAIN'] = 'Ju mund të ndaloni në një username duke përdorur wildcard karakterin * të përputhen çdo karakter';
 
 $lang['NO_DISALLOWED'] = 'Nuk E Palejueshme E Përdoruesve';
 
@@ -2757,6 +2757,8 @@ $lang['ATOM_SUBSCRIBE'] = 'Të regjistroheni për të ushqyer';
 $lang['ATOM_NO_MODE'] = 'Nuk e specifikon një mënyrë për të ushqyer';
 $lang['ATOM_NO_FORUM'] = 'Në këtë forum nuk ka një ushqim (jo të vazhdueshme tema)';
 $lang['ATOM_NO_USER'] = 'Ky përdorues nuk ka një ushqim (jo të vazhdueshme tema)';
+$lang['ATOM_UPDATED'] = 'Përditësim';
+$lang['ATOM_GLOBAL_FEED'] = 'Ushqim global për të gjitha forumet';
 
 $lang['HASH_INVALID'] = 'Hash %s është i pavlefshëm';
 $lang['HASH_NOT_FOUND'] = 'Lirimin me të hash %s nuk u gjet';

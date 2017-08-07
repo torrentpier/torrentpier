@@ -77,6 +77,7 @@ $lang['SELECT_ACTION'] = 'Sélectionnez l\'action';
 
 $lang['NEXT_PAGE'] = 'Prochaine';
 $lang['PREVIOUS_PAGE'] = 'Précédente';
+$lang['SHORT_PAGE'] = 'page';
 $lang['GOTO_PAGE'] = 'Aller à la page';
 $lang['GOTO_SHORT'] = 'Page';
 $lang['JOINED'] = 'Rejoint';
@@ -846,7 +847,7 @@ $lang['AUTH_ADMINISTRATORS'] = '<b>administrators</b>';
 $lang['NOT_MODERATOR'] = 'Vous n\'êtes pas modérateur de ce forum.';
 $lang['NOT_AUTHORISED'] = 'Pas Autorisé';
 
-$lang['YOU_BEEN_BANNED'] = 'Vous avez été banni de ce forum.<br />Please contacter le webmaster ou l\'administrateur du forum pour plus d\'informations.';
+$lang['YOU_BEEN_BANNED'] = 'Tu as été banni de ce forum. Veuillez contacter l\'administrateur du conseil pour plus d\'informations.';
 
 // Viewonline
 $lang['ONLINE_EXPLAIN'] = 'les utilisateurs actifs des cinq dernières minutes';
@@ -2014,7 +2015,6 @@ $lang['DELETE_DISALLOW_EXPLAIN'] = 'Vous pouvez supprimer refusés nom d\'utilis
 
 $lang['ADD_DISALLOW'] = 'Ajouter';
 $lang['ADD_DISALLOW_TITLE'] = 'Ajouter refusé de nom d\'utilisateur';
-$lang['ADD_DISALLOW_EXPLAIN'] = 'Vous pouvez interdire un nom d\'utilisateur en utilisant le caractère générique * pour correspondre à n\'importe quel caractère';
 
 $lang['NO_DISALLOWED'] = 'Pas Rejeté Les Noms D\'Utilisateur';
 
@@ -2757,6 +2757,8 @@ $lang['ATOM_SUBSCRIBE'] = 'Abonnez-vous au flux';
 $lang['ATOM_NO_MODE'] = 'Ne spécifiez pas un mode pour le nourrir';
 $lang['ATOM_NO_FORUM'] = 'Ce forum n\'a pas une alimentation (pas de cours les sujets)';
 $lang['ATOM_NO_USER'] = 'Cet utilisateur n\'a pas une alimentation (pas de cours les sujets)';
+$lang['ATOM_UPDATED'] = 'Mis à jour le';
+$lang['ATOM_GLOBAL_FEED'] = 'Flux mondiaux pour tous les forums';
 
 $lang['HASH_INVALID'] = 'Hachage %s est pas valide';
 $lang['HASH_NOT_FOUND'] = 'Version avec pommes de %s pas trouvé';

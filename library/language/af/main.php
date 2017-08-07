@@ -77,6 +77,7 @@ $lang['SELECT_ACTION'] = 'Kies aksie';
 
 $lang['NEXT_PAGE'] = 'volgende';
 $lang['PREVIOUS_PAGE'] = 'vorige';
+$lang['SHORT_PAGE'] = 'bladsy';
 $lang['GOTO_PAGE'] = 'Gaan na bladsy';
 $lang['GOTO_SHORT'] = 'Page';
 $lang['JOINED'] = 'Aangesluit';
@@ -846,7 +847,7 @@ $lang['AUTH_ADMINISTRATORS'] = '<b>administrators</b>';
 $lang['NOT_MODERATOR'] = 'Jy is nie \'n moderator van hierdie forum nie.';
 $lang['NOT_AUTHORISED'] = 'Nie gemagtig nie';
 
-$lang['YOU_BEEN_BANNED'] = 'U is uit hierdie forum verban.<br />Please kontak die webmeester of raad administrateur vir meer inligting.';
+$lang['YOU_BEEN_BANNED'] = 'U is verban uit hierdie forum. Kontak asseblief die bestuurder vir meer inligting.';
 
 // Viewonline
 $lang['ONLINE_EXPLAIN'] = 'Gebruikers wat die afgelope vyf minute aktief was';
@@ -2014,7 +2015,6 @@ $lang['DELETE_DISALLOW_EXPLAIN'] = 'U kan \'n ongeskikte gebruikersnaam verwyder
 
 $lang['ADD_DISALLOW'] = 'Voeg';
 $lang['ADD_DISALLOW_TITLE'] = 'Voeg \'n ongeskikte gebruikersnaam by';
-$lang['ADD_DISALLOW_EXPLAIN'] = 'U kan \'n gebruikersnaam ongedaan maak met die wildcard-karakter * om enige karakter te pas';
 
 $lang['NO_DISALLOWED'] = 'Geen ongebruikte gebruikersname';
 
@@ -2757,6 +2757,8 @@ $lang['ATOM_SUBSCRIBE'] = 'Teken in op die voer';
 $lang['ATOM_NO_MODE'] = 'Moenie \'n modus vir die voer spesifiseer nie';
 $lang['ATOM_NO_FORUM'] = 'Hierdie forum het geen feed (geen deurlopende onderwerpe)';
 $lang['ATOM_NO_USER'] = 'Hierdie gebruiker het geen feed (geen deurlopende onderwerpe)';
+$lang['ATOM_UPDATED'] = 'Updated';
+$lang['ATOM_GLOBAL_FEED'] = 'Globale voer vir alle forums';
 
 $lang['HASH_INVALID'] = 'Hash %s is ongeldig';
 $lang['HASH_NOT_FOUND'] = 'Vrylating met hash %s nie gevind nie';

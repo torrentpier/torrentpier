@@ -77,6 +77,7 @@ $lang['SELECT_ACTION'] = 'აირჩიეთ აქცია';
 
 $lang['NEXT_PAGE'] = 'შემდეგი';
 $lang['PREVIOUS_PAGE'] = 'წინა';
+$lang['SHORT_PAGE'] = 'გვერდი';
 $lang['GOTO_PAGE'] = 'გადასვლა გვერდზე';
 $lang['GOTO_SHORT'] = 'გვერდი';
 $lang['JOINED'] = 'შეუერთდა';
@@ -846,7 +847,7 @@ $lang['AUTH_ADMINISTRATORS'] = '<b>administrators</b>';
 $lang['NOT_MODERATOR'] = 'თქვენ არ ხართ ამ ფორუმის მოდერატორი.';
 $lang['NOT_AUTHORISED'] = 'არ უფლებამოსილი';
 
-$lang['YOU_BEEN_BANNED'] = 'თქვენ უკვე აეკრძალოს ამ ფორუმზე.<br />Please contact webmaster ან საბჭოს ადმინისტრატორს უფრო მეტი ინფორმაცია.';
+$lang['YOU_BEEN_BANNED'] = 'თქვენ ამ ფორუმს აკრძალა. დამატებითი ინფორმაციისთვის დაუკავშირდით გამგეობის ადმინისტრატორს.';
 
 // Viewonline
 $lang['ONLINE_EXPLAIN'] = 'მომხმარებლებს აქტიური ბოლო ხუთი წუთის განმავლობაში';
@@ -2014,7 +2015,6 @@ $lang['DELETE_DISALLOW_EXPLAIN'] = 'თქვენ შეგიძლიათ 
 
 $lang['ADD_DISALLOW'] = 'დამატება';
 $lang['ADD_DISALLOW_TITLE'] = 'რჩეულებში გააქტიურებამდე სახელი';
-$lang['ADD_DISALLOW_EXPLAIN'] = 'თქვენ შეგიძლიათ აუკრძალეთ სახელის გამოყენებით wildcard ხასიათი * ემთხვევა ნებისმიერი ხასიათის';
 
 $lang['NO_DISALLOWED'] = 'არ დაიშვება მომხმარებლის სახელი';
 
@@ -2757,6 +2757,8 @@ $lang['ATOM_SUBSCRIBE'] = 'გამოწერა არხი';
 $lang['ATOM_NO_MODE'] = 'არ მიუთითოთ რეჟიმი არხი';
 $lang['ATOM_NO_FORUM'] = 'ეს ფორუმი არ გაქვთ შესანახი (არა თემები მიმდინარე)';
 $lang['ATOM_NO_USER'] = 'ამ მომხმარებელს ჯერ არ შეუყვანია არხი (არა თემები მიმდინარე)';
+$lang['ATOM_UPDATED'] = 'განახლება';
+$lang['ATOM_GLOBAL_FEED'] = 'გლობალური საკვების ყველა ფორუმი';
 
 $lang['HASH_INVALID'] = 'Hash %s არასწორია';
 $lang['HASH_NOT_FOUND'] = 'გამოშვების hash %s არ მოიძებნა';

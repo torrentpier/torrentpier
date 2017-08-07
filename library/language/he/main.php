@@ -77,6 +77,7 @@ $lang['SELECT_ACTION'] = 'בחר פעולה';
 
 $lang['NEXT_PAGE'] = 'הבא';
 $lang['PREVIOUS_PAGE'] = 'הקודם';
+$lang['SHORT_PAGE'] = 'העמוד';
 $lang['GOTO_PAGE'] = 'עבור לדף';
 $lang['GOTO_SHORT'] = 'דף';
 $lang['JOINED'] = 'הצטרף';
@@ -846,7 +847,7 @@ $lang['AUTH_ADMINISTRATORS'] = '<b>administrators</b>';
 $lang['NOT_MODERATOR'] = 'אתה לא המנהל של הפורום הזה.';
 $lang['NOT_AUTHORISED'] = 'לא אושרה.';
 
-$lang['YOU_BEEN_BANNED'] = 'יש לך אסור בפורום זה.<br />Please קשר עם מנהל האתר, או המנהל הראשי של המערכת למידע נוסף.';
+$lang['YOU_BEEN_BANNED'] = 'נאסר עליך בפורום זה. פנה למנהל המערכת לקבלת מידע נוסף.';
 
 // Viewonline
 $lang['ONLINE_EXPLAIN'] = 'משתמשים פעילים במשך חמש דקות.';
@@ -2014,7 +2015,6 @@ $lang['DELETE_DISALLOW_EXPLAIN'] = 'אתה יכול להסיר אסורות שם
 
 $lang['ADD_DISALLOW'] = 'להוסיף';
 $lang['ADD_DISALLOW_TITLE'] = 'להוסיף אסורות שם המשתמש';
-$lang['ADD_DISALLOW_EXPLAIN'] = 'אתה יכול לאסור את שם המשתמש באמצעות תווים כלליים, תו * כדי להתאים לכל אופי';
 
 $lang['NO_DISALLOWED'] = 'לא אסורות שמות משתמש';
 
@@ -2757,6 +2757,8 @@ $lang['ATOM_SUBSCRIBE'] = 'הירשם ל-rss';
 $lang['ATOM_NO_MODE'] = 'לא לציין את מצב ההזנה';
 $lang['ATOM_NO_FORUM'] = 'הפורום הזה לא צריך להאכיל (לא שוטף נושאים)';
 $lang['ATOM_NO_USER'] = 'משתמש זה אינו חייב להאכיל (לא שוטף נושאים)';
+$lang['ATOM_UPDATED'] = 'עדכן';
+$lang['ATOM_GLOBAL_FEED'] = 'גלובל להאכיל עבור כל הפורומים';
 
 $lang['HASH_INVALID'] = 'חשיש %s אינו חוקי';
 $lang['HASH_NOT_FOUND'] = 'שחרור עם חשיש %s לא מצאתי';
