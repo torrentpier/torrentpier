@@ -114,8 +114,8 @@ $template->assign_vars(array(
     'TWITTER' => $profiledata['user_twitter'],
     'USER_POINTS' => $profiledata['user_points'],
     'GENDER' => ($bb_cfg['gender']) ? $lang['GENDER_SELECT'][$profiledata['user_gender']] : '',
-    'BIRTHDAY' => ($bb_cfg['birthday_enabled'] && $profiledata['user_birthday'] != '0000-00-00') ? $profiledata['user_birthday'] : '',
-    'AGE' => ($bb_cfg['birthday_enabled'] && $profiledata['user_birthday'] != '0000-00-00') ? birthday_age($profiledata['user_birthday']) : '',
+    'BIRTHDAY' => ($bb_cfg['birthday_enabled'] && !empty($profiledata['user_birthday']) && $profiledata['user_birthday'] != '0000-00-00') ? $profiledata['user_birthday'] : '',
+    'AGE' => ($bb_cfg['birthday_enabled'] && !empty($profiledata['user_birthday']) && $profiledata['user_birthday'] != '0000-00-00') ? birthday_age($profiledata['user_birthday']) : '',
 
     'L_VIEWING_PROFILE' => sprintf($lang['VIEWING_USER_PROFILE'], $profiledata['username']),
     'L_MY_PROFILE' => sprintf($lang['VIEWING_MY_PROFILE'], 'profile.php?mode=editprofile'),

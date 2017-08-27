@@ -321,9 +321,9 @@ foreach ($profile_fields as $field => $can_edit) {
          *  Возраст (edit)
          */
         case 'user_birthday':
-            $user_birthday = isset($_POST['user_birthday']) ? (string)$_POST['user_birthday'] : $pr_data['user_birthday'];
+            $user_birthday = !empty($_POST['user_birthday']) ? (string)$_POST['user_birthday'] : $pr_data['user_birthday'];
 
-            if ($submit && $user_birthday != $pr_data['user_birthday']) {
+            if ($submit && $user_birthday !== $pr_data['user_birthday']) {
                 $birthday_date = date_parse($user_birthday);
 
                 if (!empty($birthday_date['year'])) {

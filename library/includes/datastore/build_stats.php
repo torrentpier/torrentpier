@@ -76,6 +76,7 @@ if ($bb_cfg['birthday_check_day'] && $bb_cfg['birthday_enabled']) {
 		FROM " . BB_USERS . "
 		WHERE user_id NOT IN(" . EXCLUDED_USERS . ")
 			AND user_birthday != '0000-00-00'
+			AND user_birthday IS NOT NULL
 			AND user_active = 1
 		ORDER BY user_level DESC, username
 	");
