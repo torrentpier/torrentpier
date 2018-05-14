@@ -718,7 +718,8 @@ switch ($mode) {
 
             DB()->query("
 				UPDATE " . BB_TOPICS . " SET
-					topic_show_first_post = $new_topic_status
+					topic_show_first_post = $new_topic_status,
+                    topic_type = $new_topic_status
 				WHERE topic_id IN($topic_csv)
 			");
 
@@ -748,7 +749,8 @@ switch ($mode) {
 
             DB()->query("
 				UPDATE " . BB_TOPICS . " SET
-					topic_show_first_post = $new_topic_status
+					topic_show_first_post = $new_topic_status,
+                    topic_type = $new_topic_status
 				WHERE topic_id IN($topic_csv)
 			");
 
