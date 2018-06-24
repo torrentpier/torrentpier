@@ -77,7 +77,7 @@ $tor_auth_del = ($tor_auth && $tor_reged);
 
 $tracker_link = ($tor_reged) ? $lang['BT_REG_YES'] : $lang['BT_REG_NO'];
 
-$download_link = DOWNLOAD_URL . $attach_id;
+$download_link = DL_URL . $attach_id;
 $description = ($comment) ?: preg_replace("#.torrent$#i", '', $display_name);
 
 if ($tor_auth_reg || $tor_auth_del) {
