@@ -238,7 +238,7 @@ foreach ($cat_forums as $cid => $c) {
             'FORUM_DESC' => $f['forum_desc'],
             'POSTS' => commify($f['forum_posts']),
             'TOPICS' => commify($f['forum_topics']),
-            'LAST_SF_ID' => isset($f['last_sf_id']) ? $f['last_sf_id'] : null,
+            'LAST_SF_ID' => $f['last_sf_id'] ?? null,
             'MODERATORS' => isset($moderators[$fid]) ? implode(', ', $moderators[$fid]) : '',
             'FORUM_FOLDER_ALT' => ($new) ? $lang['NEW'] : $lang['OLD'],
         ));

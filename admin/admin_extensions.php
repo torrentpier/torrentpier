@@ -371,7 +371,7 @@ if ($mode == 'groups') {
 
     $template->assign_vars(array(
         'TPL_ATTACH_EXTENSION_GROUPS' => true,
-        'ADD_GROUP_NAME' => isset($extension_group) ? $extension_group : '',
+        'ADD_GROUP_NAME' => $extension_group ?? '',
         'MAX_FILESIZE' => $max_add_filesize,
         'S_FILESIZE' => size_select('add_size_select', $size),
         'S_ADD_DOWNLOAD_MODE' => download_select('add_download_mode'),

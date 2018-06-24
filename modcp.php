@@ -70,9 +70,9 @@ function validate_mode_condition($request_index, $mod_action = '')
 }
 
 // Obtain initial vars
-$forum_id = isset($_REQUEST['f']) ? $_REQUEST['f'] : 0;
-$topic_id = isset($_REQUEST['t']) ? $_REQUEST['t'] : 0;
-$post_id = isset($_REQUEST['p']) ? $_REQUEST['p'] : 0;
+$forum_id = $_REQUEST['f'] ?? 0;
+$topic_id = $_REQUEST['t'] ?? 0;
+$post_id = $_REQUEST['p'] ?? 0;
 
 $start = isset($_REQUEST['start']) ? abs((int)$_REQUEST['start']) : 0;
 $confirmed = isset($_POST['confirm']);
@@ -166,7 +166,7 @@ if (!$is_auth['auth_mod']) {
 
 // Redirect to login page if not admin session
 if ($is_moderator && !$userdata['session_admin']) {
-    $redirect = isset($_POST['redirect']) ? $_POST['redirect'] : $_SERVER['REQUEST_URI'];
+    $redirect = $_POST['redirect'] ?? $_SERVER['REQUEST_URI'];
     redirect(LOGIN_URL . "?redirect=$redirect&admin=1");
 }
 
@@ -189,7 +189,7 @@ switch ($mode) {
             bb_die($lang['NONE_SELECTED']);
         }
 
-        $req_topics = isset($_POST['topic_id_list']) ? $_POST['topic_id_list'] : $topic_id;
+        $req_topics = $_POST['topic_id_list'] ?? $topic_id;
         validate_topics($forum_id, $req_topics, $topic_titles);
 
         if (!$req_topics || !($topic_csv = get_id_csv($req_topics))) {
@@ -370,10 +370,10 @@ switch ($mode) {
         //mpd
         $delete_posts = isset($_POST['delete_posts']);
         $split = (isset($_POST['split_type_all']) || isset($_POST['split_type_beyond']));
-        $posts = (isset($_POST['post_id_list'])) ? $_POST['post_id_list'] : array();
+        $posts = $_POST['post_id_list'] ?? array();
         $start = /* (isset($_POST['start'])) ? intval($_POST['start']) : */
             0;
-        $topic_first_post_id = (isset($topic_row['topic_first_post_id'])) ? $topic_row['topic_first_post_id'] : '';
+        $topic_first_post_id = $topic_row['topic_first_post_id'] ?? '';
 
         $post_id_sql = $req_post_id_sql = array();
 

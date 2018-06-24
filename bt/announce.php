@@ -71,7 +71,7 @@ foreach ($input_vars_num as $var_name) {
     $$var_name = isset($_GET[$var_name]) ? (float)$_GET[$var_name] : null;
 }
 // Passkey
-$passkey = isset($$passkey_key) ? $$passkey_key : null;
+$passkey = $$passkey_key ?? null;
 
 // Verify request
 // Required params (info_hash, peer_id, port, uploaded, downloaded, left, passkey)
