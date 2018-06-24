@@ -599,13 +599,12 @@ class Torrent
 
             // Insert new row
             DB()->query("INSERT IGNORE INTO " . BB_BT_USERS . " (user_id, auth_key) VALUES ($user_id, '$passkey_val')");
-
             if (DB()->affected_rows() == 1) {
                 return $passkey_val;
             }
+
             // Update
             DB()->query("UPDATE IGNORE " . BB_BT_USERS . " SET auth_key = '$passkey_val' WHERE user_id = $user_id");
-
             if (DB()->affected_rows() == 1) {
                 // Ocelot
                 if ($bb_cfg['ocelot']['enabled']) {
