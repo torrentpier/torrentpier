@@ -22,7 +22,7 @@ switch ($mode) {
 
         if (empty($username)) {
             $html = '<img src="./styles/images/bad.gif"> <span class="leechmed bold">' . $lang['CHOOSE_A_NAME'] . '</span>';
-        } elseif ($err = validate_username($username)) {
+        } elseif ($err = \TorrentPier\Legacy\Validate::username($username)) {
             $html = '<img src="./styles/images/bad.gif"> <span class="leechmed bold">' . $err . '</span>';
         }
         break;
@@ -32,7 +32,7 @@ switch ($mode) {
 
         if (empty($email)) {
             $html = '<img src="./styles/images/bad.gif"> <span class="leechmed bold">' . $lang['CHOOSE_E_MAIL'] . '</span>';
-        } elseif ($err = validate_email($email)) {
+        } elseif ($err = \TorrentPier\Legacy\Validate::email($email)) {
             $html = '<img src="./styles/images/bad.gif"> <span class="leechmed bold">' . $err . '</span>';
         }
         break;

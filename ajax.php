@@ -31,14 +31,9 @@ if ($ajax->action != 'manage_admin') {
 // Load actions required modules
 switch ($ajax->action) {
     case 'view_post':
-        require INC_DIR . '/bbcode.php';
-        break;
-
     case 'posts':
     case 'post_mod_comment':
         require INC_DIR . '/bbcode.php';
-        require INC_DIR . '/functions_post.php';
-        require INC_DIR . '/functions_admin.php';
         break;
 
     case 'view_torrent':
@@ -47,21 +42,6 @@ switch ($ajax->action) {
     case 'change_torrent':
     case 'gen_passkey':
         require ATTACH_DIR . '/attachment_mod.php';
-        require INC_DIR . '/functions_torrent.php';
-        break;
-
-    case 'user_register':
-        require INC_DIR . '/functions_validate.php';
-        break;
-
-    case 'manage_user':
-    case 'manage_admin':
-        require INC_DIR . '/functions_admin.php';
-        break;
-
-    case 'group_membership':
-    case 'manage_group':
-        require INC_DIR . '/functions_group.php';
         break;
 }
 

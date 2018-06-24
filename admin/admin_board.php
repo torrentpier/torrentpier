@@ -13,7 +13,6 @@ if (!empty($setmodules)) {
     return;
 }
 require __DIR__ . '/pagestart.php';
-require INC_DIR . '/functions_selects.php';
 
 $mode = isset($_GET['mode']) ? $_GET['mode'] : '';
 
@@ -134,8 +133,8 @@ switch ($mode) {
             'POSTS_PER_PAGE' => $new['posts_per_page'],
             'HOT_TOPIC' => $new['hot_threshold'],
             'DEFAULT_DATEFORMAT' => $new['default_dateformat'],
-            'LANG_SELECT' => language_select($new['default_lang'], 'default_lang'),
-            'TIMEZONE_SELECT' => tz_select($new['board_timezone'], 'board_timezone'),
+            'LANG_SELECT' => \TorrentPier\Legacy\Select::language($new['default_lang'], 'default_lang'),
+            'TIMEZONE_SELECT' => \TorrentPier\Legacy\Select::timezone($new['board_timezone'], 'board_timezone'),
             'MAX_LOGIN_ATTEMPTS' => $new['max_login_attempts'],
             'LOGIN_RESET_TIME' => $new['login_reset_time'],
             'PRUNE_ENABLE' => $new['prune_enable'] ? true : false,

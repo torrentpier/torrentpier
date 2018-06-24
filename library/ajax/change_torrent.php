@@ -69,18 +69,18 @@ switch ($type) {
         } else {
             $tor_type = 0;
         }
-        change_tor_type($attach_id, $tor_type);
+        \TorrentPier\Legacy\Torrent::change_tor_type($attach_id, $tor_type);
         $title = $lang['CHANGE_TOR_TYPE'];
         $url = make_url(TOPIC_URL . $torrent['topic_id']);
         break;
 
     case 'reg':
-        tracker_register($attach_id);
+        \TorrentPier\Legacy\Torrent::tracker_register($attach_id);
         $url = (TOPIC_URL . $torrent['topic_id']);
         break;
 
     case 'unreg':
-        tracker_unregister($attach_id);
+        \TorrentPier\Legacy\Torrent::tracker_unregister($attach_id);
         $url = (TOPIC_URL . $torrent['topic_id']);
         break;
 
@@ -88,7 +88,7 @@ switch ($type) {
         if (empty($this->request['confirmed'])) {
             $this->prompt_for_confirm($lang['DEL_TORRENT']);
         }
-        delete_torrent($attach_id);
+        \TorrentPier\Legacy\Torrent::delete_torrent($attach_id);
         $url = make_url(TOPIC_URL . $torrent['topic_id']);
         break;
 
@@ -96,7 +96,7 @@ switch ($type) {
         if (empty($this->request['confirmed'])) {
             $this->prompt_for_confirm($lang['DEL_MOVE_TORRENT']);
         }
-        delete_torrent($attach_id);
+        \TorrentPier\Legacy\Torrent::delete_torrent($attach_id);
         $url = make_url("modcp.php?t={$torrent['topic_id']}&mode=move&sid={$userdata['session_id']}");
         break;
 }

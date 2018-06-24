@@ -15,8 +15,6 @@ require __DIR__ . '/pagestart.php';
 
 array_deep($_POST, 'trim');
 
-require INC_DIR . '/functions_selects.php';
-
 $total_sql = '';
 
 if (!isset($_REQUEST['dosearch'])) {
@@ -53,8 +51,8 @@ if (!isset($_REQUEST['dosearch'])) {
         }
     }
 
-    $language_list = language_select('', 'language_type');
-    $timezone_list = tz_select('', 'timezone_type');
+    $language_list = \TorrentPier\Legacy\Select::language('', 'language_type');
+    $timezone_list = \TorrentPier\Legacy\Select::timezone('', 'timezone_type');
 
     $sql = 'SELECT f.forum_id, f.forum_name, f.forum_parent, c.cat_id, c.cat_title
 				FROM ( ' . BB_FORUMS . ' AS f INNER JOIN ' . BB_CATEGORIES . ' AS c ON c.cat_id = f.cat_id )

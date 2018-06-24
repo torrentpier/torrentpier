@@ -390,11 +390,6 @@ function make_url($path = '')
  * Functions
  */
 require INC_DIR . '/functions.php';
-require INC_DIR . '/sessions.php';
-
-if (DBG_USER) {
-    require INC_DIR . '/functions_dev.php';
-}
 
 $bb_cfg = array_merge(bb_get_config(BB_CONFIG), $bb_cfg);
 

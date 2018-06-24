@@ -83,7 +83,7 @@ if (!empty($_COOKIE['explain'])) {
     }
 }
 
-$sql_log = !empty($_COOKIE['sql_log']) ? get_sql_log() : '';
+$sql_log = !empty($_COOKIE['sql_log']) ? \TorrentPier\Legacy\Dev::get_sql_log() : '';
 
 echo '
 <script type="text/javascript">

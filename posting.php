@@ -11,7 +11,6 @@ define('BB_SCRIPT', 'posting');
 define('BB_ROOT', './');
 require __DIR__ . '/common.php';
 require INC_DIR . '/bbcode.php';
-require INC_DIR . '/functions_post.php';
 require ATTACH_DIR . '/attachment_mod.php';
 
 $page_cfg['load_tpl_vars'] = array('post_icons');
@@ -328,12 +327,12 @@ if (($delete || $mode == 'delete') && !$confirm) {
             $attach_rg_sig = (isset($_POST['attach_rg_sig']) && isset($_POST['poster_rg']) && $_POST['poster_rg'] != -1) ? 1 : 0;
             $poster_rg_id = (isset($_POST['poster_rg']) && $_POST['poster_rg'] != -1) ? (int)$_POST['poster_rg'] : 0;
 
-            prepare_post($mode, $post_data, $error_msg, $username, $subject, $message);
+            \TorrentPier\Legacy\Post::prepare_post($mode, $post_data, $error_msg, $username, $subject, $message);
 
             if (!$error_msg) {
                 $topic_type = (isset($post_data['topic_type']) && $topic_type != $post_data['topic_type'] && !$is_auth['auth_sticky'] && !$is_auth['auth_announce']) ? $post_data['topic_type'] : $topic_type;
 
-                submit_post($mode, $post_data, $return_message, $return_meta, $forum_id, $topic_id, $post_id, $topic_type, DB()->escape($username), DB()->escape($subject), DB()->escape($message), $update_post_time, $poster_rg_id, $attach_rg_sig);
+                \TorrentPier\Legacy\Post::submit_post($mode, $post_data, $return_message, $return_meta, $forum_id, $topic_id, $post_id, $topic_type, DB()->escape($username), DB()->escape($subject), DB()->escape($message), $update_post_time, $poster_rg_id, $attach_rg_sig);
 
                 $post_url = POST_URL . "$post_id#$post_id";
                 $post_msg = ($mode == 'editpost') ? $lang['EDITED'] : $lang['STORED'];
@@ -345,20 +344,19 @@ if (($delete || $mode == 'delete') && !$confirm) {
             break;
 
         case 'delete':
-            require_once INC_DIR . '/functions_admin.php';
-            delete_post($mode, $post_data, $return_message, $return_meta, $forum_id, $topic_id, $post_id);
+            \TorrentPier\Legacy\Post::delete_post($mode, $post_data, $return_message, $return_meta, $forum_id, $topic_id, $post_id);
             break;
     }
 
     if (!$error_msg) {
         if (!in_array($mode, array('editpost', 'delete'))) {
             $user_id = ($mode == 'reply' || $mode == 'newtopic') ? $userdata['user_id'] : $post_data['poster_id'];
-            update_post_stats($mode, $post_data, $forum_id, $topic_id, $post_id, $user_id);
+            \TorrentPier\Legacy\Post::update_post_stats($mode, $post_data, $forum_id, $topic_id, $post_id, $user_id);
         }
         $attachment_mod['posting']->insert_attachment($post_id);
 
         if (!$error_msg) {
-            user_notification($mode, $post_data, $post_info['topic_title'], $forum_id, $topic_id, $notify_user);
+            \TorrentPier\Legacy\Post::user_notification($mode, $post_data, $post_info['topic_title'], $forum_id, $topic_id, $notify_user);
         }
 
         if ($mode == 'newtopic' || $mode == 'reply') {
@@ -366,7 +364,6 @@ if (($delete || $mode == 'delete') && !$confirm) {
         }
 
         if (defined('TORRENT_ATTACH_ID') && $bb_cfg['bt_newtopic_auto_reg'] && !$error_msg) {
-            include INC_DIR . '/functions_torrent.php';
             if (!DB()->fetch_row("SELECT attach_id FROM " . BB_BT_TORRENTS . " WHERE attach_id = " . TORRENT_ATTACH_ID)) {
                 if ($bb_cfg['premod']) {
                     // Получение списка id форумов начиная с parent
@@ -393,12 +390,12 @@ if (($delete || $mode == 'delete') && !$confirm) {
 						LIMIT 1
 					", 'checked_releases');
                     if ($count_checked_releases || IS_AM) {
-                        tracker_register(TORRENT_ATTACH_ID, 'newtopic', TOR_NOT_APPROVED);
+                        \TorrentPier\Legacy\Torrent::tracker_register(TORRENT_ATTACH_ID, 'newtopic', TOR_NOT_APPROVED);
                     } else {
-                        tracker_register(TORRENT_ATTACH_ID, 'newtopic', TOR_PREMOD);
+                        \TorrentPier\Legacy\Torrent::tracker_register(TORRENT_ATTACH_ID, 'newtopic', TOR_PREMOD);
                     }
                 } else {
-                    tracker_register(TORRENT_ATTACH_ID, 'newtopic', TOR_NOT_APPROVED);
+                    \TorrentPier\Legacy\Torrent::tracker_register(TORRENT_ATTACH_ID, 'newtopic', TOR_NOT_APPROVED);
                 }
             }
         }
@@ -646,7 +643,7 @@ if ($mode == 'editpost' && $post_data['last_post'] && !$post_data['first_post'])
 
 // Topic review
 if ($mode == 'reply' && $is_auth['auth_read']) {
-    topic_review($topic_id);
+    \TorrentPier\Legacy\Post::topic_review($topic_id);
 }
 
 require(PAGE_HEADER);

@@ -27,8 +27,7 @@ if (isset($_POST['bonus_id'])) {
     $btu = get_bt_userdata($user_id);
 
     if (empty($btu)) {
-        require INC_DIR . '/functions_torrent.php';
-        generate_passkey($user_id, true);
+        \TorrentPier\Legacy\Torrent::generate_passkey($user_id, true);
         $btu = get_bt_userdata($user_id);
     }
 
@@ -52,7 +51,7 @@ if (isset($_POST['bonus_id'])) {
 			AND u.user_id   = bu.user_id
 	");
 
-    cache_rm_user_sessions($user_id);
+    \TorrentPier\Legacy\Sessions::cache_rm_user_sessions($user_id);
     meta_refresh(BONUS_URL, 5);
 
     $message = sprintf($lang['BONUS_SUCCES'], humn_size($upload_row[$id] * 1024 * 1024 * 1024));

@@ -12,7 +12,6 @@ if (!empty($setmodules)) {
     return;
 }
 require __DIR__ . '/pagestart.php';
-require INC_DIR . '/functions_group.php';
 
 $group_id = isset($_REQUEST[POST_GROUPS_URL]) ? (int)$_REQUEST[POST_GROUPS_URL] : 0;
 $mode = isset($_REQUEST['mode']) ? (string)$_REQUEST['mode'] : '';
@@ -21,7 +20,7 @@ attachment_quota_settings('group', isset($_POST['group_update']), $mode);
 
 if (!empty($_POST['edit']) || !empty($_POST['new'])) {
     if (!empty($_POST['edit'])) {
-        if (!$row = get_group_data($group_id)) {
+        if (!$row = \TorrentPier\Legacy\Group::get_group_data($group_id)) {
             bb_die($lang['GROUP_NOT_EXIST']);
         }
         $group_info = array(
@@ -72,11 +71,11 @@ if (!empty($_POST['edit']) || !empty($_POST['new'])) {
     ));
 } elseif (!empty($_POST['group_update'])) {
     if (!empty($_POST['group_delete'])) {
-        if (!$group_info = get_group_data($group_id)) {
+        if (!$group_info = \TorrentPier\Legacy\Group::get_group_data($group_id)) {
             bb_die($lang['GROUP_NOT_EXIST']);
         }
         // Delete Group
-        delete_group($group_id);
+        \TorrentPier\Legacy\Group::delete_group($group_id);
 
         $message = $lang['DELETED_GROUP'] . '<br /><br />';
         $message .= sprintf($lang['CLICK_RETURN_GROUPSADMIN'], '<a href="admin_groups.php">', '</a>') . '<br /><br />';
@@ -111,18 +110,18 @@ if (!empty($_POST['edit']) || !empty($_POST['new'])) {
         );
 
         if ($mode == 'editgroup') {
-            if (!$group_info = get_group_data($group_id)) {
+            if (!$group_info = \TorrentPier\Legacy\Group::get_group_data($group_id)) {
                 bb_die($lang['GROUP_NOT_EXIST']);
             }
 
             if ($group_info['group_moderator'] != $group_moderator) {
                 // Create user_group for new group's moderator
-                add_user_into_group($group_id, $group_moderator);
+                \TorrentPier\Legacy\Group::add_user_into_group($group_id, $group_moderator);
                 $sql_ary['mod_time'] = TIMENOW;
 
                 // Delete old moderator's user_group
                 if (isset($_POST['delete_old_moderator'])) {
-                    delete_user_group($group_id, $group_info['group_moderator']);
+                    \TorrentPier\Legacy\Group::delete_user_group($group_id, $group_info['group_moderator']);
                 }
             }
 
@@ -145,7 +144,7 @@ if (!empty($_POST['edit']) || !empty($_POST['new'])) {
             $new_group_id = DB()->sql_nextid();
 
             // Create user_group for group's moderator
-            add_user_into_group($new_group_id, $group_moderator);
+            \TorrentPier\Legacy\Group::add_user_into_group($new_group_id, $group_moderator);
 
             $message = $lang['ADDED_NEW_GROUP'] . '<br /><br />';
             $message .= sprintf($lang['CLICK_RETURN_GROUPSADMIN'], '<a href="admin_groups.php">', '</a>') . '<br /><br />';

@@ -26,7 +26,7 @@ if ($rank_id != 0 && !isset($ranks[$rank_id])) {
 
 DB()->query("UPDATE " . BB_USERS . " SET user_rank = $rank_id WHERE user_id = $user_id");
 
-cache_rm_user_sessions($user_id);
+\TorrentPier\Legacy\Sessions::cache_rm_user_sessions($user_id);
 
 $user_rank = ($rank_id) ? '<span class="' . $ranks[$rank_id]['rank_style'] . '">' . $ranks[$rank_id]['rank_title'] . '</span>' : '';
 

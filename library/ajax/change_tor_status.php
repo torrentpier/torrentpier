@@ -83,7 +83,7 @@ switch ($mode) {
             }
         }
 
-        change_tor_status($attach_id, $new_status);
+        \TorrentPier\Legacy\Torrent::change_tor_status($attach_id, $new_status);
 
         $this->response['status'] = $bb_cfg['tor_icons'][$new_status] . ' <b> ' . $lang['TOR_STATUS_NAME'][$new_status] . '</b> &middot; ' . profile_url($userdata) . ' &middot; <i>' . delta_time(TIMENOW) . $lang['TOR_BACK'] . '</i>';
 
@@ -97,7 +97,7 @@ switch ($mode) {
                 }
 
                 send_pm($tor['poster_id'], $subject, $message, $userdata['user_id']);
-                cache_rm_user_sessions($tor['poster_id']);
+                \TorrentPier\Legacy\Sessions::cache_rm_user_sessions($tor['poster_id']);
             }
         }
         break;
@@ -115,7 +115,7 @@ switch ($mode) {
         }
 
         send_pm($tor['checked_user_id'], $subject, $message, $userdata['user_id']);
-        cache_rm_user_sessions($tor['checked_user_id']);
+        \TorrentPier\Legacy\Sessions::cache_rm_user_sessions($tor['checked_user_id']);
         break;
 }
 

@@ -97,9 +97,14 @@ define('TOR_TMP', 10); // временная
 define('TOR_PREMOD', 11); // премодерация
 define('TOR_REPLENISH', 12); // пополняемая
 
+// Cron
 define('CRON_LOG_ENABLED', true); // global ON/OFF
 define('CRON_FORCE_LOG', false); // always log regardless of job settings
 define('CRON_DIR', INC_DIR . '/cron/');
 define('CRON_JOB_DIR', CRON_DIR . 'jobs/');
 define('CRON_LOG_DIR', 'cron'); // inside LOG_DIR
 define('CRON_LOG_FILE', 'cron'); // without ext
+
+// Session variables
+define('ONLY_NEW_POSTS', 1);
+define('ONLY_NEW_TOPICS', 2);

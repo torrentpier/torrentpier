@@ -16,14 +16,12 @@ require __DIR__ . '/pagestart.php';
 $message = '';
 
 if (isset($_POST['add_name'])) {
-    include INC_DIR . '/functions_validate.php';
-
     $disallowed_user = isset($_POST['disallowed_user']) ? trim($_POST['disallowed_user']) : trim($_GET['disallowed_user']);
 
     if ($disallowed_user == '') {
         bb_die($lang['FIELDS_EMPTY']);
     }
-    if (validate_username($disallowed_user)) {
+    if (\TorrentPier\Legacy\Validate::username($disallowed_user)) {
         $message = $lang['DISALLOWED_ALREADY'];
     } else {
         $sql = 'INSERT INTO ' . BB_DISALLOW . " (disallow_username) VALUES('" . DB()->escape($disallowed_user) . "')";

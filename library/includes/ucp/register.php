@@ -35,8 +35,6 @@ $errors = array();
 $adm_edit = false; // редактирование админом чужого профиля
 
 require INC_DIR . '/bbcode.php';
-require INC_DIR . '/functions_validate.php';
-require INC_DIR . '/functions_selects.php';
 
 $pr_data = array();   // данные редактируемого либо регистрационного профиля
 $db_data = array();   // данные для базы: регистрационные либо измененные данные юзера
@@ -64,8 +62,7 @@ switch ($mode) {
                 bb_die($lang['NEW_USER_REG_DISABLED']);
             } // Ограничение по времени
             elseif ($bb_cfg['new_user_reg_restricted']) {
-                if (in_array(date('G'), array(0, /*1,2,3,4,5,6,7,8,11,12,13,14,15,16,*/
-                    17, 18, 19, 20, 21, 22, 23))) {
+                if (in_array(date('G'), $bb_cfg['new_user_reg_interval'], true)) {
                     bb_die($lang['REGISTERED_IN_TIME']);
                 }
             }
@@ -104,7 +101,7 @@ switch ($mode) {
         // field => can_edit
         $profile_fields = array(
             'user_active' => IS_ADMIN,
-            'username' => (IS_ADMIN || $bb_cfg['allow_namechange']),
+            'username' => IS_ADMIN || $bb_cfg['allow_namechange'],
             'user_password' => true,
             'user_email' => true, // должен быть после user_password
             'user_lang' => true,
@@ -183,7 +180,7 @@ foreach ($profile_fields as $field => $can_edit) {
             $username = !empty($_POST['username']) ? clean_username($_POST['username']) : $pr_data['username'];
 
             if ($submit) {
-                $err = validate_username($username);
+                $err = \TorrentPier\Legacy\Validate::username($username);
                 if (!$errors and $err && $mode == 'register') {
                     $errors[] = $err;
                 }
@@ -242,7 +239,7 @@ foreach ($profile_fields as $field => $can_edit) {
                     if (empty($email)) {
                         $errors[] = $lang['CHOOSE_E_MAIL'];
                     }
-                    if (!$errors and $err = validate_email($email)) {
+                    if (!$errors and $err = \TorrentPier\Legacy\Validate::email($email)) {
                         $errors[] = $err;
                     }
                     $db_data['user_email'] = $email;
@@ -252,7 +249,7 @@ foreach ($profile_fields as $field => $can_edit) {
                     if (!$cur_pass_valid) {
                         $errors[] = $lang['CONFIRM_PASSWORD_EXPLAIN'];
                     }
-                    if (!$errors and $err = validate_email($email)) {
+                    if (!$errors and $err = \TorrentPier\Legacy\Validate::email($email)) {
                         $errors[] = $err;
                     }
                     if ($bb_cfg['reg_email_activation']) {
@@ -520,7 +517,7 @@ foreach ($profile_fields as $field => $can_edit) {
                     }
                 }
             }
-            $tp_data['TEMPLATES_SELECT'] = templates_select($pr_data['tpl_name'], 'tpl_name');
+            $tp_data['TEMPLATES_SELECT'] = \TorrentPier\Legacy\Select::template($pr_data['tpl_name'], 'tpl_name');
             break;
 
         /**
@@ -641,7 +638,7 @@ if ($submit && !$errors) {
                 }
             }
 
-            cache_rm_user_sessions($pr_data['user_id']);
+            \TorrentPier\Legacy\Sessions::cache_rm_user_sessions($pr_data['user_id']);
 
             if ($adm_edit) {
                 bb_die($lang['PROFILE_USER'] . ' <b>' . profile_url($pr_data) . '</b> ' . $lang['GOOD_UPDATE']);
@@ -669,8 +666,8 @@ $template->assign_vars(array(
     'SHOW_PASS' => ($adm_edit || ($mode == 'register' && IS_ADMIN)),
     'CAPTCHA_HTML' => ($need_captcha) ? bb_captcha('get') : '',
 
-    'LANGUAGE_SELECT' => language_select($pr_data['user_lang'], 'user_lang'),
-    'TIMEZONE_SELECT' => tz_select($pr_data['user_timezone'], 'user_timezone'),
+    'LANGUAGE_SELECT' => \TorrentPier\Legacy\Select::language($pr_data['user_lang'], 'user_lang'),
+    'TIMEZONE_SELECT' => \TorrentPier\Legacy\Select::timezone($pr_data['user_timezone'], 'user_timezone'),
     'USER_TIMEZONE' => $pr_data['user_timezone'],
 
     'AVATAR_EXPLAIN' => sprintf($lang['AVATAR_EXPLAIN'], $bb_cfg['avatars']['max_width'], $bb_cfg['avatars']['max_height'], (round($bb_cfg['avatars']['max_size'] / 1024))),
