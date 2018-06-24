@@ -392,7 +392,7 @@ class SqlDb
             case is_string($v):
                 return "'" . $this->escape_string($v) . "'";
             case is_int($v):
-                return "$v";
+                return (string)$v;
             case is_bool($v):
                 return ($v) ? '1' : '0';
             case is_float($v):
@@ -733,7 +733,7 @@ class SqlDb
         }
 
         if ($this->link and $ext = mysqli_info($this->link)) {
-            $info[] = "$ext";
+            $info[] = (string)$ext;
         } elseif (!$num && ($aff = $this->affected_rows($this->result) and $aff != -1)) {
             $info[] = "$aff rows";
         }

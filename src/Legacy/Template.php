@@ -864,9 +864,9 @@ class Template
                         } elseif (!empty($m[4])) {
                             $token = ($tokens_cnt == 1) ? "!empty(\$V['{$m[4]}'])" : "\$V['{$m[4]}']";
                         } elseif (!empty($m[5])) {
-                            $token = ($tokens_cnt == 1) ? "!empty({$m[5]})" : "{$m[5]}";
+                            $token = ($tokens_cnt == 1) ? "!empty({$m[5]})" : (string)($m[5]);
                         } elseif (!empty($m[7])) {
-                            $token = ($tokens_cnt == 1) ? "defined('{$m[7]}') && {$m[7]}" : "{$m[7]}";
+                            $token = ($tokens_cnt == 1) ? "defined('{$m[7]}') && {$m[7]}" : (string)($m[7]);
                         }
                     }
                     break;

@@ -313,7 +313,7 @@ if (!isset($_REQUEST['dosearch'])) {
 
             $where_sql = '';
             $where_sql .= ($ip_in_sql != '') ? "poster_ip IN ($ip_in_sql)" : '';
-            $where_sql .= ($ip_like_sql != '') ? ($where_sql != '') ? " OR $ip_like_sql" : "$ip_like_sql" : '';
+            $where_sql .= ($ip_like_sql != '') ? ($where_sql != '') ? " OR $ip_like_sql" : (string)$ip_like_sql : '';
 
             if (!$where_sql) {
                 bb_die('invalid request');

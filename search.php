@@ -517,7 +517,7 @@ if ($post_mode) {
 
         $SQL['GROUP BY'][] = "item_id";
         $SQL['ORDER BY'][] = ($new_posts && $join_p) ? "p.topic_id ASC, p.post_time ASC" : "$order $sort";
-        $SQL['LIMIT'][] = "$search_limit";
+        $SQL['LIMIT'][] = (string)$search_limit;
 
         $items_display = fetch_search_ids($SQL);
     } elseif (!$items_display = array_slice($items_found, $start, $per_page)) {
@@ -726,7 +726,7 @@ else {
         }
 
         $SQL['GROUP BY'][] = "item_id";
-        $SQL['LIMIT'][] = "$search_limit";
+        $SQL['LIMIT'][] = (string)$search_limit;
 
         if ($egosearch) {
             $SQL['ORDER BY'][] = 'max_post_time DESC';
@@ -767,7 +767,7 @@ else {
         $SQL['WHERE'][] = "t.forum_id NOT IN($excluded_forums_csv)";
     }
 
-    $SQL['LIMIT'][] = "$per_page";
+    $SQL['LIMIT'][] = (string)$per_page;
 
     // Fetch topics data
     $topic_rows = array();

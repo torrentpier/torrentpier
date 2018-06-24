@@ -70,7 +70,7 @@ class LogAction
         }
 
         $sql_ary = [
-            'log_type_id' => (int)$this->log_type["$type_name"],
+            'log_type_id' => (int)$this->log_type[(string)$type_name],
             'log_user_id' => (int)$user_id,
             'log_user_ip' => (string)$session_ip,
             'log_forum_id' => (int)$forum_id,

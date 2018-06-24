@@ -384,7 +384,7 @@ if ($tor_reged && $tor_info) {
                             define('SEEDER_EXIST', true);
                             $seed_order_action = "viewtopic.php?" . POST_TOPIC_URL . "=$bt_topic_id&amp;spmode=full#seeders";
 
-                            $template->assign_block_vars("$x_full", array(
+                            $template->assign_block_vars((string)$x_full, array(
                                 'SEED_ORD_ACT' => $seed_order_action,
                                 'SEEDERS_UP_TOT' => humn_size($sp_up_tot[$x], 0, 'KB') . '/s'
                             ));
@@ -406,7 +406,7 @@ if ($tor_reged && $tor_info) {
                             define('LEECHER_EXIST', true);
                             $leech_order_action = "viewtopic.php?" . POST_TOPIC_URL . "=$bt_topic_id&amp;spmode=full#leechers";
 
-                            $template->assign_block_vars("$x_full", array(
+                            $template->assign_block_vars((string)$x_full, array(
                                 'LEECH_ORD_ACT' => $leech_order_action,
                                 'LEECHERS_UP_TOT' => humn_size($sp_up_tot[$x], 0, 'KB') . '/s',
                                 'LEECHERS_DOWN_TOT' => humn_size($sp_down_tot[$x], 0, 'KB') . '/s'

@@ -200,7 +200,7 @@ function strip_quotes($text)
     do {
         $pos = strpos($lowertext, '[quote', $curpos);
         if ($pos !== false) {
-            $start_pos["$pos"] = 'start';
+            $start_pos[(string)$pos] = 'start';
             $curpos = $pos + 6;
         }
     } while ($pos !== false);
@@ -215,7 +215,7 @@ function strip_quotes($text)
     do {
         $pos = strpos($lowertext, '[/quote', $curpos);
         if ($pos !== false) {
-            $end_pos["$pos"] = 'end';
+            $end_pos[(string)$pos] = 'end';
             $curpos = $pos + 8;
         }
     } while ($pos !== false);
@@ -259,7 +259,7 @@ function strip_quotes($text)
         // recursion.
         if ($stack) {
             foreach ($stack as $pos) {
-                unset($pos_list["$pos"]);
+                unset($pos_list[(string)$pos]);
             }
         }
     } while ($stack);
