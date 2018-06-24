@@ -68,7 +68,7 @@ function base64_unpack($string)
     for ($i = 1; $i <= $length; $i++) {
         $pos = $length - $i;
         $operand = strpos($chars, $string[$pos]);
-        $exponent = pow($base, $i - 1);
+        $exponent = $base ** ($i - 1);
         $decValue = $operand * $exponent;
         $number += $decValue;
     }
