@@ -22,7 +22,7 @@ class Cron
      */
     public static function run_jobs($jobs)
     {
-        define('IN_CRON', true);
+        \define('IN_CRON', true);
 
         $sql = "SELECT cron_script FROM " . BB_CRON . " WHERE cron_id IN ($jobs)";
         if (!$result = DB()->sql_query($sql)) {

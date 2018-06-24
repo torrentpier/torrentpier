@@ -74,6 +74,6 @@ class Xcache extends Common
 
     public function is_installed()
     {
-        return function_exists('xcache_get');
+        return \function_exists('xcache_get');
     }
 }

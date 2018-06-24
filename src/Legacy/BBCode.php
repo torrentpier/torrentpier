@@ -281,7 +281,7 @@ class BBCode
             $url = 'http://' . $url;
         }
 
-        if (in_array(parse_url($url, PHP_URL_HOST), $bb_cfg['nofollow']['allowed_url']) || $bb_cfg['nofollow']['disabled']) {
+        if (\in_array(parse_url($url, PHP_URL_HOST), $bb_cfg['nofollow']['allowed_url']) || $bb_cfg['nofollow']['disabled']) {
             $link = "<a href=\"$url\" class=\"postLink\">$url_name</a>";
         } else {
             $link = "<a href=\"$url\" class=\"postLink\" rel=\"nofollow\">$url_name</a>";
@@ -352,7 +352,7 @@ class BBCode
         $href = $m[1];
         $name = (mb_strlen($href, 'UTF-8') > $max_len) ? mb_substr($href, 0, $max_len - 19) . '...' . mb_substr($href, -16) : $href;
 
-        if (in_array(parse_url($href, PHP_URL_HOST), $bb_cfg['nofollow']['allowed_url']) || $bb_cfg['nofollow']['disabled']) {
+        if (\in_array(parse_url($href, PHP_URL_HOST), $bb_cfg['nofollow']['allowed_url']) || $bb_cfg['nofollow']['disabled']) {
             $link = "<a href=\"$href\" class=\"postLink\">$name</a>";
         } else {
             $link = "<a href=\"$href\" class=\"postLink\" rel=\"nofollow\">$name</a>";

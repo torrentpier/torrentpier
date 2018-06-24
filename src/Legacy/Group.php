@@ -24,7 +24,7 @@ class Group
     {
         global $datastore;
 
-        if (is_array($user_id)) {
+        if (\is_array($user_id)) {
             $user_id = implode(',', $user_id);
         }
         $user_groups_in = ($user_id !== 'all') ? "AND ug.user_id IN($user_id)" : '';
@@ -219,7 +219,7 @@ class Group
      */
     public static function store_permissions($group_id, $auth_ary)
     {
-        if (empty($auth_ary) || !is_array($auth_ary)) {
+        if (empty($auth_ary) || !\is_array($auth_ary)) {
             return;
         }
 
@@ -244,7 +244,7 @@ class Group
      */
     private static function update_user_permissions($user_id = 'all')
     {
-        if (is_array($user_id)) {
+        if (\is_array($user_id)) {
             $user_id = implode(',', $user_id);
         }
         $delete_in = ($user_id !== 'all') ? " WHERE user_id IN($user_id)" : '';

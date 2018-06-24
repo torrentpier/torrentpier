@@ -239,9 +239,10 @@ class Common
 				$where_sql
 		";
 
-            $topic_csv = array();
+            $topic_csv = [];
 
             foreach (DB()->fetch_rowset($sql) as $row) {
+                /** @noinspection UnsupportedStringOffsetOperationsInspection */
                 $topic_csv[] = $row['topic_id'];
                 $log_topics[] = $row;
                 $sync_forums[$row['forum_id']] = true;
@@ -660,7 +661,7 @@ class Common
             $log_action->admin('mod_post_delete', array(
                 'log_msg' => 'user: ' . self::get_usernames_for_log($user_id) . "<br />posts: $deleted_posts_count",
             ));
-        } elseif (!defined('IN_CRON')) {
+        } elseif (!\defined('IN_CRON')) {
             foreach ($log_topics as $row) {
                 $log_action->mod('mod_post_delete', array(
                     'forum_id' => $row['forum_id'],

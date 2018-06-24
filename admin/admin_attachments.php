@@ -133,23 +133,25 @@ $select_pm_size_mode = size_select('pm_size', $pm_size);
 if ($search_imagick) {
     $imagick = '';
 
-    if (preg_match('/convert/i', $imagick)) {
+    if (false !== stripos($imagick, "convert")) {
         return true;
-    } elseif ($imagick != 'none') {
-        if (!preg_match('/WIN/i', PHP_OS)) {
+    }
+
+    if ($imagick != 'none') {
+        if (!false !== stripos(PHP_OS, "WIN")) {
             $retval = @exec('whereis convert');
             $paths = explode(' ', $retval);
 
             if (is_array($paths)) {
-                for ($i = 0, $iMax = count($paths); $i < $iMax; $i++) {
+                foreach ($paths as $i => $iValue) {
                     $path = basename($paths[$i]);
 
                     if ($path == 'convert') {
-                        $imagick = $paths[$i];
+                        $imagick = $iValue;
                     }
                 }
             }
-        } elseif (preg_match('/WIN/i', PHP_OS)) {
+        } elseif (false !== stripos(PHP_OS, "WIN")) {
             $path = 'c:/imagemagick/convert.exe';
 
             if (!@file_exists(amod_realpath($path))) {
@@ -344,7 +346,9 @@ if ($check_image_cat) {
 
     // Does the target directory exist, is it a directory and writeable
     if (!@file_exists(amod_realpath($upload_dir))) {
-        mkdir($upload_dir, 0755);
+        if (!mkdir($upload_dir, 0755) && !is_dir($upload_dir)) {
+            throw new \RuntimeException(sprintf('Directory "%s" was not created', $upload_dir));
+        }
         @chmod($upload_dir, 0777);
 
         if (!@file_exists(amod_realpath($upload_dir))) {

@@ -158,8 +158,8 @@ if ($confirm && count($delete_id_list) > 0) {
     $hidden_fields .= '<input type="hidden" name="u_id" value="' . $uid . '" />';
     $hidden_fields .= '<input type="hidden" name="start" value="' . $start . '" />';
 
-    for ($i = 0, $iMax = count($delete_id_list); $i < $iMax; $i++) {
-        $hidden_fields .= '<input type="hidden" name="delete_id_list[]" value="' . $delete_id_list[$i] . '" />';
+    foreach ($delete_id_list as $iValue) {
+        $hidden_fields .= '<input type="hidden" name="delete_id_list[]" value="' . $iValue . '" />';
     }
 
     print_confirmation(array(
@@ -382,8 +382,8 @@ if ($view === 'attachments') {
         for ($i = 0, $iMax = count($attachments); $i < $iMax; $i++) {
             $delete_box = '<input type="checkbox" name="delete_id_list[]" value="' . (int)$attachments[$i]['attach_id'] . '" />';
 
-            for ($j = 0, $jMax = count($delete_id_list); $j < $jMax; $j++) {
-                if ($delete_id_list[$j] == $attachments[$i]['attach_id']) {
+            foreach ($delete_id_list as $jValue) {
+                if ($jValue == $attachments[$i]['attach_id']) {
                     $delete_box = '<input type="checkbox" name="delete_id_list[]" value="' . (int)$attachments[$i]['attach_id'] . '" checked="checked" />';
                     break;
                 }

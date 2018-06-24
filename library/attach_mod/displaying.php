@@ -25,7 +25,7 @@ function init_complete_extensions_data()
     global $allowed_extensions, $display_categories, $download_modes, $upload_icons;
 
     if (!$extension_informations = get_extension_informations()) {
-        $extension_informations = $GLOBALS['datastore']->update('attach_extensions'); //get_extension_informations()
+        $GLOBALS['datastore']->update('attach_extensions');
         $extension_informations = get_extension_informations();
     }
     $allowed_extensions = array();

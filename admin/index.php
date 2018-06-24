@@ -34,7 +34,7 @@ if (isset($_GET['pane']) && $_GET['pane'] == 'left') {
     ksort($module);
 
     foreach ($module as $cat => $action_array) {
-        $cat = (!empty($lang[$cat])) ? $lang[$cat] : preg_replace('/_/', ' ', $cat);
+        $cat = (!empty($lang[$cat])) ? $lang[$cat] : str_replace("_", ' ', $cat);
 
         $template->assign_block_vars('catrow', array(
             'ADMIN_CATEGORY' => $cat,
@@ -46,7 +46,7 @@ if (isset($_GET['pane']) && $_GET['pane'] == 'left') {
         foreach ($action_array as $action => $file) {
             $row_class = !($row_count % 2) ? 'row1' : 'row2';
 
-            $action = (!empty($lang[$action])) ? $lang[$action] : preg_replace('/_/', ' ', $action);
+            $action = (!empty($lang[$action])) ? $lang[$action] : str_replace("_", ' ', $action);
 
             $template->assign_block_vars('catrow.modulerow', array(
                 'ROW_CLASS' => $row_class,

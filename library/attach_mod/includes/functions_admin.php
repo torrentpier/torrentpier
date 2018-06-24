@@ -101,7 +101,7 @@ function sort_multi_array($sort_array, $key, $sort_order, $pre_string_sort = 0)
     for ($i = 0; $i < $last_element; $i++) {
         $num_iterations = $last_element - $i;
 
-        for ($j = 0; $j < $num_iterations; $j++) {
+        foreach ($sort_array as $j => $jValue) {
             // do checks based on key
             $switch = false;
             if (!$string_sort) {
@@ -117,7 +117,7 @@ function sort_multi_array($sort_array, $key, $sort_order, $pre_string_sort = 0)
             }
 
             if ($switch) {
-                $temp = $sort_array[$j];
+                $temp = $jValue;
                 $sort_array[$j] = $sort_array[$j + 1];
                 $sort_array[$j + 1] = $temp;
             }

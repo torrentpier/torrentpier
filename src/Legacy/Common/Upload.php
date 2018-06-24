@@ -112,7 +112,7 @@ class Upload
             }
         }
         // check ext
-        if ($uploaded_only && (!isset($this->ext_ids[$this->file_ext]) || !in_array($this->file_ext, $this->cfg['allowed_ext'], true))) {
+        if ($uploaded_only && (!isset($this->ext_ids[$this->file_ext]) || !\in_array($this->file_ext, $this->cfg['allowed_ext'], true))) {
             $this->errors[] = sprintf($lang['UPLOAD_ERROR_NOT_ALLOWED'], htmlCHR($this->file_ext));
             return false;
         }
@@ -137,9 +137,9 @@ class Upload
         if ($mode == 'attach') {
             $file_path = get_attach_path($params['topic_id']);
             return $this->_move($file_path);
-        } else {
-            trigger_error("Invalid upload mode: $mode", E_USER_ERROR);
         }
+
+        trigger_error("Invalid upload mode: $mode", E_USER_ERROR);
     }
 
     /**
@@ -148,7 +148,7 @@ class Upload
      */
     public function _move($file_path)
     {
-        $dir = dirname($file_path);
+        $dir = \dirname($file_path);
         if (!file_exists($dir)) {
             if (!bb_mkdir($dir)) {
                 $this->errors[] = "Cannot create dir: $dir";

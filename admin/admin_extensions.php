@@ -238,9 +238,9 @@ if ($submit && $mode == 'groups') {
 
     $allowed_list = array();
 
-    for ($i = 0, $iMax = count($group_allowed_list); $i < $iMax; $i++) {
+    foreach ($group_allowed_list as $iValue) {
         for ($j = 0, $jMax = count($group_change_list); $j < $jMax; $j++) {
-            if ($group_allowed_list[$i] == $group_change_list[$j]) {
+            if ($iValue == $group_change_list[$j]) {
                 $allowed_list[$j] = 1;
             }
         }
@@ -456,8 +456,8 @@ if ($add_forum && $e_mode == 'perm' && $group) {
     $add_forums_list = get_var('entries', array(0));
     $add_all_forums = false;
 
-    for ($i = 0, $iMax = count($add_forums_list); $i < $iMax; $i++) {
-        if ($add_forums_list[$i] == 0) {
+    foreach ($add_forums_list as $iValue) {
+        if ($iValue == 0) {
             $add_all_forums = true;
         }
     }
@@ -491,9 +491,9 @@ if ($add_forum && $e_mode == 'perm' && $group) {
         }
 
         // Generate array for Auth_Pack, do not add doubled forums
-        for ($i = 0, $iMax = count($add_forums_list); $i < $iMax; $i++) {
+        foreach ($add_forums_list as $i => $iValue) {
             if (!in_array($add_forums_list[$i], $auth_p)) {
-                $auth_p[] = $add_forums_list[$i];
+                $auth_p[] = $iValue;
             }
         }
 
@@ -528,9 +528,9 @@ if ($delete_forum && $e_mode == 'perm' && $group) {
     $auth_p = array();
 
     // Generate array for Auth_Pack, delete the chosen ones
-    for ($i = 0, $iMax = count($auth_p2); $i < $iMax; $i++) {
+    foreach ($auth_p2 as $i => $iValue) {
         if (!in_array($auth_p2[$i], $delete_forums_list)) {
-            $auth_p[] = $auth_p2[$i];
+            $auth_p[] = $iValue;
         }
     }
 

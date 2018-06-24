@@ -188,7 +188,7 @@ function quota_limit_select($select_name, $default_quota = 0)
     }
     DB()->sql_freeresult($result);
 
-    for ($i = 0, $iMax = count($quota_name); $i < $iMax; $i++) {
+    foreach ($quota_name as $i => $iValue) {
         $selected = ($quota_name[$i]['quota_limit_id'] == $default_quota) ? ' selected="selected"' : '';
         $quota_select .= '<option value="' . $quota_name[$i]['quota_limit_id'] . '"' . $selected . '>' . $quota_name[$i]['quota_desc'] . '</option>';
     }
@@ -219,7 +219,7 @@ function default_quota_limit_select($select_name, $default_quota = 0)
     }
     DB()->sql_freeresult($result);
 
-    for ($i = 0, $iMax = count($quota_name); $i < $iMax; $i++) {
+    foreach ($quota_name as $i => $iValue) {
         $selected = ($quota_name[$i]['quota_limit_id'] == $default_quota) ? ' selected="selected"' : '';
         $quota_select .= '<option value="' . $quota_name[$i]['quota_limit_id'] . '"' . $selected . '>' . $quota_name[$i]['quota_desc'] . '</option>';
     }

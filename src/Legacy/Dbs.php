@@ -51,7 +51,7 @@ class Dbs
     {
         $srv_name = $this->get_srv_name($srv_name_or_alias);
 
-        if (!is_object($this->srv[$srv_name])) {
+        if (!\is_object($this->srv[$srv_name])) {
             $this->srv[$srv_name] = new SqlDb($this->cfg[$srv_name]);
             $this->srv[$srv_name]->db_server = $srv_name;
         }

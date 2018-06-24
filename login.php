@@ -40,8 +40,7 @@ if (preg_match('/^redirect=([a-z0-9\.#\/\?&=\+\-_]+)/si', $_SERVER['QUERY_STRING
     $redirect_url = ($parts['path'] ?? "index.php") . (isset($parts['query']) ? '?' . $parts['query'] : '');
 }
 
-$redirect_url = str_replace('&admin=1', '', $redirect_url);
-$redirect_url = str_replace('?admin=1', '', $redirect_url);
+$redirect_url = str_replace(['&admin=1', '?admin=1'], '', $redirect_url);
 
 if (!$redirect_url || false !== strpos(urldecode($redirect_url), "\n") || false !== strpos(urldecode($redirect_url), "\r") || false !== strpos(urldecode($redirect_url), ';url')) {
     $redirect_url = "index.php";

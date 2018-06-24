@@ -84,7 +84,7 @@ class Atom
             }
             $topics[] = $topic;
         }
-        if (!count($topics)) {
+        if (!\count($topics)) {
             @unlink($file_path);
             return false;
         }
@@ -138,7 +138,7 @@ class Atom
             }
             $topics[] = $topic;
         }
-        if (!count($topics)) {
+        if (!\count($topics)) {
             @unlink($file_path);
             return false;
         }
@@ -163,7 +163,7 @@ class Atom
     private static function create_atom($file_path, $mode, $id, $title, $topics)
     {
         global $lang;
-        $dir = dirname($file_path);
+        $dir = \dirname($file_path);
         if (!file_exists($dir)) {
             if (!bb_mkdir($dir)) {
                 return false;
@@ -195,7 +195,7 @@ class Atom
             $orig_word = array();
             $replacement_word = array();
             obtain_word_list($orig_word, $replacement_word);
-            if (count($orig_word)) {
+            if (\count($orig_word)) {
                 $topic_title = preg_replace($orig_word, $replacement_word, $topic_title);
             }
             $topic_title = wbr($topic_title);

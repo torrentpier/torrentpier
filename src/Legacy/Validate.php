@@ -93,7 +93,7 @@ class Validate
         if (!$email || !filter_var($email, FILTER_VALIDATE_EMAIL)) {
             return $lang['EMAIL_INVALID'];
         }
-        if (strlen($email) > USEREMAIL_MAX_LENGTH) {
+        if (\strlen($email) > USEREMAIL_MAX_LENGTH) {
             return $lang['EMAIL_TOO_LONG'];
         }
 

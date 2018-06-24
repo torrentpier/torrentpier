@@ -20,7 +20,7 @@ if (empty($_SERVER['HTTP_USER_AGENT'])) {
 
 // Ignore 'completed' event
 if (isset($_GET['event']) && $_GET['event'] === 'completed') {
-    dummy_exit(mt_rand(600, 1200));
+    dummy_exit(random_int(600, 1200));
 }
 
 $announce_interval = $bb_cfg['announce_interval'];

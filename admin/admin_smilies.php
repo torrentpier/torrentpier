@@ -77,7 +77,7 @@ if (isset($_GET['import_pack']) || isset($_POST['import_pack'])) {
             bb_die('Could not read smiley pak file');
         }
 
-        for ($i = 0, $iMax = count($fcontents); $i < $iMax; $i++) {
+        foreach ($fcontents as $i => $iValue) {
             $smile_data = explode($delimeter, trim(addslashes($fcontents[$i])));
 
             for ($j = 2, $jMax = count($smile_data); $j < $jMax; $j++) {
@@ -239,8 +239,7 @@ if (isset($_GET['import_pack']) || isset($_POST['import_pack'])) {
             }
 
             // Convert < and > to proper htmlentities for parsing
-            $smile_code = str_replace('<', '&lt;', $smile_code);
-            $smile_code = str_replace('>', '&gt;', $smile_code);
+            $smile_code = str_replace(['<', '>'], ['&lt;', '&gt;'], $smile_code);
 
             // Proceed with updating the smiley table
             $sql = 'UPDATE ' . BB_SMILIES . "
@@ -269,8 +268,7 @@ if (isset($_GET['import_pack']) || isset($_POST['import_pack'])) {
             }
 
             // Convert < and > to proper htmlentities for parsing
-            $smile_code = str_replace('<', '&lt;', $smile_code);
-            $smile_code = str_replace('>', '&gt;', $smile_code);
+            $smile_code = str_replace(['<', '>'], ['&lt;', '&gt;'], $smile_code);
 
             // Save the data to the smiley table
             $sql = 'INSERT INTO ' . BB_SMILIES . " (code, smile_url, emoticon)

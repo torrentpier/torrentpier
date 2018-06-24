@@ -587,9 +587,9 @@ function bt_show_ip($ip, $port = '')
         $ip = decode_ip($ip);
         $ip .= ($port) ? ":$port" : '';
         return $ip;
-    } else {
-        return ($bb_cfg['bt_show_ip_only_moder']) ? false : decode_ip_xx($ip);
     }
+
+    return ($bb_cfg['bt_show_ip_only_moder']) ? false : decode_ip_xx($ip);
 }
 
 function bt_show_port($port)
@@ -598,9 +598,9 @@ function bt_show_port($port)
 
     if (IS_AM) {
         return $port;
-    } else {
-        return ($bb_cfg['bt_show_port_only_moder']) ? false : $port;
     }
+
+    return ($bb_cfg['bt_show_port_only_moder']) ? false : $port;
 }
 
 function decode_ip_xx($ip)
@@ -741,10 +741,10 @@ function get_username($user_id)
             $usernames[$row['user_id']] = $row['username'];
         }
         return $usernames;
-    } else {
-        $row = DB()->fetch_row("SELECT username FROM " . BB_USERS . " WHERE user_id = $user_id LIMIT 1");
-        return $row['username'];
     }
+
+    $row = DB()->fetch_row("SELECT username FROM " . BB_USERS . " WHERE user_id = $user_id LIMIT 1");
+    return $row['username'];
 }
 
 function get_user_id($username)
@@ -846,9 +846,9 @@ function get_attachments_dir($cfg = null)
 
     if ($cfg['upload_dir'][0] == '/' || ($cfg['upload_dir'][0] != '/' && $cfg['upload_dir'][1] == ':')) {
         return $cfg['upload_dir'];
-    } else {
-        return BB_ROOT . $cfg['upload_dir'];
     }
+
+    return BB_ROOT . $cfg['upload_dir'];
 }
 
 function bb_get_config($table, $from_db = false, $update_cache = true)
@@ -1453,9 +1453,9 @@ function get_forum_display_sort_option($selected_row = 0, $action = 'list', $lis
 
     // build list
     if ($action == 'list') {
-        for ($i = 0, $iMax = count($listrow['lang_key']); $i < $iMax; $i++) {
+        foreach ($listrow['lang_key'] as $i => $iValue) {
             $selected = ($i == $selected_row) ? ' selected="selected"' : '';
-            $l_value = $lang[$listrow['lang_key'][$i]] ?? $listrow['lang_key'][$i];
+            $l_value = $lang[$listrow['lang_key'][$i]] ?? $iValue;
             $res .= '<option value="' . $i . '"' . $selected . '>' . $l_value . '</option>';
         }
     } else {
@@ -1543,7 +1543,7 @@ if (!function_exists('array_intersect_key')) {
 
         // Check arrays
         $array_count = count($args);
-        for ($i = 0; $i !== $array_count; $i++) {
+        foreach ($args as $i => $iValue) {
             if (!is_array($args[$i])) {
                 user_error('array_intersect_key() Argument #' .
                     ($i + 1) . ' is not an array', E_USER_WARNING);
@@ -1789,8 +1789,7 @@ function clean_text_match($text, $ltrim_star = true, $die_if_empty = false)
     if ($bb_cfg['search_engine_type'] == 'sphinx') {
         $text = preg_replace('#(?<=\S)\-#u', ' ', $text);                 // "1-2-3" -> "1 2 3"
         $text = preg_replace('#[^0-9a-zA-Zа-яА-ЯёЁ\-_*|]#u', ' ', $text); // допустимые символы (кроме " которые отдельно)
-        $text = str_replace('-', ' -', $text);                            // - только в начале слова
-        $text = str_replace('*', '* ', $text);                            // * только в конце слова
+        $text = str_replace(['-', '*'], [' -', '* '], $text);                                // только в начале / конце слова
         $text = preg_replace('#\s*\|\s*#u', '|', $text);                  // "| " -> "|"
         $text = preg_replace('#\|+#u', ' | ', $text);                     // "||" -> "|"
         $text = preg_replace('#(?<=\s)[\-*]+\s#u', ' ', $text);           // одиночные " - ", " * "
@@ -1835,7 +1834,7 @@ function log_sphinx_error($err_type, $err_msg, $query = '')
     }
 }
 
-function get_title_match_topics($title_match_sql, $forum_ids = [])
+function get_title_match_topics($title_match_sql, array $forum_ids = [])
 {
     global $bb_cfg, $sphinx, $userdata, $title_match, $lang;
 
@@ -2010,10 +2009,6 @@ function profile_url($data)
 function get_avatar($user_id, $ext_id, $allow_avatar = true, $size = true, $height = '', $width = '')
 {
     global $bb_cfg;
-
-    if ($size) {
-        // TODO размеры: s, m, l + кеширование
-    }
 
     $height = !$height ? 'height="' . $height . '"' : '';
     $width = !$width ? 'width="' . $width . '"' : '';

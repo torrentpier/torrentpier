@@ -44,7 +44,7 @@ if (isset($_POST['submit'])) {
     if (isset($_POST['ban_email'])) {
         $email_list_temp = explode(',', $_POST['ban_email']);
 
-        for ($i = 0, $iMax = count($email_list_temp); $i < $iMax; $i++) {
+        foreach ($email_list_temp as $i => $iValue) {
             if (preg_match('/^(([a-z0-9&\'\.\-_\+])|(\*))+@(([a-z0-9\-])|(\*))+\.([a-z0-9\-]+\.)*?[a-z]+$/is', trim($email_list_temp[$i]))) {
                 $email_list[] = trim($email_list_temp[$i]);
             }

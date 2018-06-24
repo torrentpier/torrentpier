@@ -85,9 +85,9 @@ class Redis extends Common
             $this->num_queries++;
 
             return true;
-        } else {
-            return false;
         }
+
+        return false;
     }
 
     public function rm($name = '')
@@ -104,9 +104,9 @@ class Redis extends Common
             $this->num_queries++;
 
             return ($this->connected) ? $this->redis->del($this->prefix . $name) : false;
-        } else {
-            return ($this->connected) ? $this->redis->flushDB() : false;
         }
+
+        return ($this->connected) ? $this->redis->flushDB() : false;
     }
 
     public function is_installed()

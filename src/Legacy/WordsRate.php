@@ -46,7 +46,7 @@ class WordsRate
         $this->del_text_hl = $text;
 
         // длинное сообщение
-        if (strlen($text) > 600) {
+        if (\strlen($text) > 600) {
             return $this->words_rate;
         }
         // вырезаем цитаты если содержит +1

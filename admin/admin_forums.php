@@ -45,7 +45,7 @@ $forumname = '';
 if (isset($_REQUEST['addforum']) || isset($_REQUEST['addcategory'])) {
     $mode = isset($_REQUEST['addforum']) ? 'addforum' : 'addcat';
 
-    if ($mode == 'addforum' && isset($_POST['addforum']) && isset($_POST['forumname']) && is_array($_POST['addforum'])) {
+    if (isset($_POST['addforum'], $_POST['forumname']) && $mode == 'addforum' && is_array($_POST['addforum'])) {
         $req_cat_id = array_keys($_POST['addforum']);
         $cat_id = reset($req_cat_id);
         $forumname = stripslashes($_POST['forumname'][$cat_id]);
@@ -567,7 +567,9 @@ if ($mode) {
                 if ($forum_info['forum_parent'] && $prev_forum['forum_parent'] != $forum_info['forum_parent']) {
                     $show_main_page = true;
                     break;
-                } elseif ($move_down_forum_id = get_prev_root_forum_id($forums, $forum_order)) {
+                }
+
+                if ($move_down_forum_id = get_prev_root_forum_id($forums, $forum_order)) {
                     $move_up_forum_id = $forum_id;
                     $move_down_ord_val = (get_sf_count($forum_id) + 1) * 10;
                     $move_up_ord_val = ((get_sf_count($move_down_forum_id) + 1) * 10) + $move_down_ord_val;
@@ -578,7 +580,9 @@ if ($mode) {
                 if ($forum_info['forum_parent'] && $next_forum['forum_parent'] != $forum_info['forum_parent']) {
                     $show_main_page = true;
                     break;
-                } elseif ($move_up_forum_id = get_next_root_forum_id($forums, $forum_order)) {
+                }
+
+                if ($move_up_forum_id = get_next_root_forum_id($forums, $forum_order)) {
                     $move_down_forum_id = $forum_id;
                     $move_down_forum_order = $forum_order;
                     $move_down_ord_val = (get_sf_count($move_up_forum_id) + 1) * 10;

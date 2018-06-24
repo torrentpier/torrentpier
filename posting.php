@@ -324,7 +324,7 @@ if (($delete || $mode == 'delete') && !$confirm) {
             $username = (!empty($_POST['username'])) ? clean_username($_POST['username']) : '';
             $subject = (!empty($_POST['subject'])) ? clean_title($_POST['subject']) : '';
             $message = (!empty($_POST['message'])) ? prepare_message($_POST['message']) : '';
-            $attach_rg_sig = (isset($_POST['attach_rg_sig']) && isset($_POST['poster_rg']) && $_POST['poster_rg'] != -1) ? 1 : 0;
+            $attach_rg_sig = (isset($_POST['attach_rg_sig'], $_POST['poster_rg']) && $_POST['poster_rg'] != -1) ? 1 : 0;
             $poster_rg_id = (isset($_POST['poster_rg']) && $_POST['poster_rg'] != -1) ? (int)$_POST['poster_rg'] : 0;
 
             \TorrentPier\Legacy\Post::prepare_post($mode, $post_data, $error_msg, $username, $subject, $message);

@@ -338,9 +338,7 @@ function extract_search_words($text)
     $text = preg_replace('/(\w*?)&#?[0-9a-z]+;(\w*?)/iu', '', $text);
     // Remove URL's       ((www|ftp)\.[\w\#!$%&~/.\-;:=,?@а-яА-Я\[\]+]*?)
     $text = preg_replace('#\b[a-z0-9]+://[\w\#!$%&~/.\-;:=,?@а-яА-Я\[\]+]+(/[0-9a-z\?\.%_\-\+=&/]+)?#u', ' ', $text);
-    $text = str_replace('[url=', ' ', $text);
-    $text = str_replace('?', ' ', $text);
-    $text = str_replace('!', ' ', $text);
+    $text = str_replace(['[url=', '?', '!'], ' ', $text);
 
     $text = strip_bbcode($text);
 
