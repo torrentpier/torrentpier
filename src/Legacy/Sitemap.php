@@ -190,7 +190,7 @@ class Sitemap
     {
         $file = $url . urlencode($map);
 
-        if (function_exists('curl_init')) {
+        if (\function_exists('curl_init')) {
             $ch = curl_init();
 
             curl_setopt($ch, CURLOPT_URL, $file);

@@ -127,7 +127,7 @@ class SqlDb
         if (!$this->link) {
             $this->init();
         }
-        if (is_array($query)) {
+        if (\is_array($query)) {
             $query = $this->build_sql($query);
         }
         if (SQL_PREPEND_SRC_COMM) {
@@ -258,7 +258,7 @@ class SqlDb
         $row = mysqli_fetch_assoc($result);
 
         if ($field_name) {
-            return isset($row[$field_name]) ? $row[$field_name] : false;
+            return $row[$field_name] ?? false;
         }
 
         return $row;
@@ -389,13 +389,13 @@ class SqlDb
         }
 
         switch (true) {
-            case is_string($v):
+            case \is_string($v):
                 return "'" . $this->escape_string($v) . "'";
-            case is_int($v):
-                return "$v";
-            case is_bool($v):
+            case \is_int($v):
+                return (string)$v;
+            case \is_bool($v):
                 return ($v) ? '1' : '0';
-            case is_float($v):
+            case \is_float($v):
                 return "'$v'";
             case null === $v:
                 return 'NULL';
@@ -437,7 +437,7 @@ class SqlDb
         $dont_escape = $data_already_escaped;
         $check_type = $check_data_type_in_escape;
 
-        if (empty($input_ary) || !is_array($input_ary)) {
+        if (empty($input_ary) || !\is_array($input_ary)) {
             $this->trigger_error(__FUNCTION__ . ' - wrong params: $input_ary');
         }
 
@@ -733,7 +733,7 @@ class SqlDb
         }
 
         if ($this->link and $ext = mysqli_info($this->link)) {
-            $info[] = "$ext";
+            $info[] = (string)$ext;
         } elseif (!$num && ($aff = $this->affected_rows($this->result) and $aff != -1)) {
             $info[] = "$aff rows";
         }
@@ -767,8 +767,8 @@ class SqlDb
             }
         }
 
-        if (!defined('IN_FIRST_SLOW_QUERY')) {
-            define('IN_FIRST_SLOW_QUERY', true);
+        if (!\defined('IN_FIRST_SLOW_QUERY')) {
+            \define('IN_FIRST_SLOW_QUERY', true);
         }
 
         CACHE('bb_cache')->set('dont_log_slow_query', $new_priority, $ignoring_time);
@@ -898,7 +898,7 @@ class SqlDb
         $msg = implode(LOG_SEPR, $msg);
         $msg .= ($info = $this->query_info()) ? ' # ' . $info : '';
         $msg .= ' # ' . $this->debug_find_source() . ' ';
-        $msg .= defined('IN_CRON') ? 'cron' : basename($_SERVER['REQUEST_URI']);
+        $msg .= \defined('IN_CRON') ? 'cron' : basename($_SERVER['REQUEST_URI']);
         bb_log($msg . LOG_LF, $log_file);
     }
 
@@ -909,7 +909,7 @@ class SqlDb
      */
     public function log_slow_query($log_file = 'sql_slow_bb')
     {
-        if (!defined('IN_FIRST_SLOW_QUERY') && CACHE('bb_cache')->get('dont_log_slow_query')) {
+        if (!\defined('IN_FIRST_SLOW_QUERY') && CACHE('bb_cache')->get('dont_log_slow_query')) {
             return;
         }
         $this->log_query($log_file);
@@ -968,7 +968,7 @@ class SqlDb
                     $query = "SELECT * FROM $m[1] WHERE $m[2]";
                 }
 
-                if (preg_match('#^SELECT#', $query)) {
+                if (0 === strpos($query, "SELECT")) {
                     $html_table = false;
 
                     if ($result = mysqli_query($this->link, "EXPLAIN $query")) {

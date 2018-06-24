@@ -82,7 +82,7 @@ $mod_redirect_url = '';
 $tor_status = -1;  //  all by default
 
 if ($is_auth['auth_mod']) {
-    $redirect = isset($_POST['redirect']) ? $_POST['redirect'] : $_SERVER['REQUEST_URI'];
+    $redirect = $_POST['redirect'] ?? $_SERVER['REQUEST_URI'];
     $redirect = url_arg($redirect, 'mod', 1, '&');
     $mod_redirect_url = LOGIN_URL . "?redirect=$redirect&admin=1";
 
@@ -456,7 +456,7 @@ foreach ($topic_rowset as $topic) {
         'TOR_STATUS_ICON' => isset($topic['tor_status']) ? $bb_cfg['tor_icons'][$topic['tor_status']] : '',
         'TOR_STATUS_TEXT' => isset($topic['tor_status']) ? $lang['TOR_STATUS_NAME'][$topic['tor_status']] : '',
 
-        'ATTACH' => isset($topic['topic_attachment']) ? $topic['topic_attachment'] : false,
+        'ATTACH' => $topic['topic_attachment'] ?? false,
         'STATUS' => $topic['topic_status'],
         'TYPE' => $topic['topic_type'],
         'DL' => ($topic['topic_dl_type'] == TOPIC_DL_TYPE_DL && !$forum_data['allow_reg_tracker']),

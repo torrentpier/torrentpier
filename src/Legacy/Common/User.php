@@ -155,8 +155,8 @@ class User
             $ip_check_u = substr(USER_IP, 0, 6);
 
             if ($ip_check_s == $ip_check_u) {
-                if ($this->data['user_id'] != GUEST_UID && defined('IN_ADMIN')) {
-                    define('SID_GET', "sid={$this->data['session_id']}");
+                if ($this->data['user_id'] != GUEST_UID && \defined('IN_ADMIN')) {
+                    \define('SID_GET', "sid={$this->data['session_id']}");
                 }
                 $session_id = $this->sessiondata['sid'] = $this->data['session_id'];
 
@@ -194,13 +194,13 @@ class User
             $this->session_create($userdata, true);
         }
 
-        define('IS_GUEST', !$this->data['session_logged_in']);
-        define('IS_ADMIN', !IS_GUEST && (int)$this->data['user_level'] === ADMIN);
-        define('IS_MOD', !IS_GUEST && (int)$this->data['user_level'] === MOD);
-        define('IS_GROUP_MEMBER', !IS_GUEST && (int)$this->data['user_level'] === GROUP_MEMBER);
-        define('IS_USER', !IS_GUEST && (int)$this->data['user_level'] === USER);
-        define('IS_SUPER_ADMIN', IS_ADMIN && isset($bb_cfg['super_admins'][$this->data['user_id']]));
-        define('IS_AM', IS_ADMIN || IS_MOD);
+        \define('IS_GUEST', !$this->data['session_logged_in']);
+        \define('IS_ADMIN', !IS_GUEST && (int)$this->data['user_level'] === ADMIN);
+        \define('IS_MOD', !IS_GUEST && (int)$this->data['user_level'] === MOD);
+        \define('IS_GROUP_MEMBER', !IS_GUEST && (int)$this->data['user_level'] === GROUP_MEMBER);
+        \define('IS_USER', !IS_GUEST && (int)$this->data['user_level'] === USER);
+        \define('IS_SUPER_ADMIN', IS_ADMIN && isset($bb_cfg['super_admins'][$this->data['user_id']]));
+        \define('IS_AM', IS_ADMIN || IS_MOD);
 
         $this->set_shortcuts();
 
@@ -272,7 +272,7 @@ class User
 
             if (!$session_time = $this->data['user_session_time']) {
                 $last_visit = TIMENOW;
-                define('FIRST_LOGON', true);
+                \define('FIRST_LOGON', true);
             } elseif ($session_time < (TIMENOW - $bb_cfg['last_visit_update_intrv'])) {
                 $last_visit = max($session_time, (TIMENOW - 86400 * $bb_cfg['max_last_visit_days']));
             }
@@ -312,8 +312,8 @@ class User
 
         $this->set_session_cookies($user_id);
 
-        if ($login && (defined('IN_ADMIN') || $mod_admin_session)) {
-            define('SID_GET', "sid=$session_id");
+        if ($login && (\defined('IN_ADMIN') || $mod_admin_session)) {
+            \define('SID_GET', "sid=$session_id");
         }
 
         Sessions::cache_set_userdata($this->data);
@@ -406,7 +406,9 @@ class User
                     Sessions::cache_update_userdata($this->data);
 
                     return $this->data;
-                } elseif ($new_session_userdata = $this->session_create($userdata, false)) {
+                }
+
+                if ($new_session_userdata = $this->session_create($userdata, false)) {
                     // Removing guest sessions from this IP
                     DB()->query("
 						DELETE FROM " . BB_SESSIONS . "
@@ -415,9 +417,9 @@ class User
 					");
 
                     return $new_session_userdata;
-                } else {
-                    trigger_error("Could not start session : login", E_USER_ERROR);
                 }
+
+                trigger_error("Could not start session : login", E_USER_ERROR);
             }
         }
 
@@ -556,17 +558,17 @@ class User
     {
         global $bb_cfg, $theme, $source_lang, $DeltaTime;
 
-        if (defined('LANG_DIR')) {
+        if (\defined('LANG_DIR')) {
             return;
         }  // prevent multiple calling
 
-        define('DEFAULT_LANG_DIR', LANG_ROOT_DIR . '/' . $bb_cfg['default_lang'] . '/');
-        define('SOURCE_LANG_DIR', LANG_ROOT_DIR . '/source/');
+        \define('DEFAULT_LANG_DIR', LANG_ROOT_DIR . '/' . $bb_cfg['default_lang'] . '/');
+        \define('SOURCE_LANG_DIR', LANG_ROOT_DIR . '/source/');
 
         if ($this->data['user_id'] != GUEST_UID) {
             if ($this->data['user_lang'] && $this->data['user_lang'] != $bb_cfg['default_lang']) {
                 $bb_cfg['default_lang'] = basename($this->data['user_lang']);
-                define('LANG_DIR', LANG_ROOT_DIR . '/' . $bb_cfg['default_lang'] . '/');
+                \define('LANG_DIR', LANG_ROOT_DIR . '/' . $bb_cfg['default_lang'] . '/');
             }
 
             if (isset($this->data['user_timezone'])) {
@@ -577,8 +579,8 @@ class User
         $this->data['user_lang'] = $bb_cfg['default_lang'];
         $this->data['user_timezone'] = $bb_cfg['board_timezone'];
 
-        if (!defined('LANG_DIR')) {
-            define('LANG_DIR', DEFAULT_LANG_DIR);
+        if (!\defined('LANG_DIR')) {
+            \define('LANG_DIR', DEFAULT_LANG_DIR);
         }
 
         /** Temporary place source language to the global */
@@ -590,8 +592,7 @@ class User
         /** Place user language to the global */
         global $lang;
         require(LANG_DIR . 'main.php');
-        setlocale(LC_ALL, isset($bb_cfg['lang'][$this->data['user_lang']]['locale']) ?
-            $bb_cfg['lang'][$this->data['user_lang']]['locale'] : 'en_US.UTF-8');
+        setlocale(LC_ALL, $bb_cfg['lang'][$this->data['user_lang']]['locale'] ?? 'en_US.UTF-8');
         $lang += $source_lang;
 
         $theme = setup_style();
@@ -648,7 +649,7 @@ class User
         } elseif (!empty($_COOKIE['opt_js'])) {
             $opt_js = json_decode($_COOKIE['opt_js'], true);
 
-            if (is_array($opt_js)) {
+            if (\is_array($opt_js)) {
                 $this->opt_js = array_merge($this->opt_js, $opt_js);
             }
         }

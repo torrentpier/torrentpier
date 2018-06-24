@@ -331,14 +331,14 @@ foreach ($profile_fields as $field => $can_edit) {
 
             $update_user_opt = array(
                 #	'user_opt_name'  => ($reg_mode) ? #reg_value : #in_login_change
-                'user_viewemail' => ($reg_mode) ? false : true,
-                'user_viewonline' => ($reg_mode) ? false : true,
-                'user_notify' => ($reg_mode) ? true : true,
-                'user_notify_pm' => ($reg_mode) ? true : true,
-                'user_porn_forums' => ($reg_mode) ? false : true,
-                'user_dls' => ($reg_mode) ? false : true,
-                'user_callseed' => ($reg_mode) ? true : true,
-                'user_retracker' => ($reg_mode) ? true : true,
+                'user_viewemail' => $reg_mode ? false : true,
+                'user_viewonline' => $reg_mode ? false : true,
+                'user_notify' => $reg_mode ? true : true,
+                'user_notify_pm' => $reg_mode ? true : true,
+                'user_porn_forums' => $reg_mode ? false : true,
+                'user_dls' => $reg_mode ? false : true,
+                'user_callseed' => $reg_mode ? true : true,
+                'user_retracker' => $reg_mode ? true : true,
             );
 
             foreach ($update_user_opt as $opt => $can_change_opt) {

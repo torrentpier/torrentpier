@@ -38,7 +38,7 @@ class AttachPosting extends Attach
             $this->do_insert_attachment('attach_list', 'post', $post_id);
             $this->do_insert_attachment('last_attachment', 'post', $post_id);
 
-            if ((count($this->attachment_list) > 0 || $this->post_attach) && !isset($_POST['update_attachment'])) {
+            if ((\count($this->attachment_list) > 0 || $this->post_attach) && !isset($_POST['update_attachment'])) {
                 $sql = 'UPDATE ' . BB_POSTS . ' SET post_attachment = 1 WHERE post_id = ' . (int)$post_id;
 
                 if (!DB()->sql_query($sql)) {

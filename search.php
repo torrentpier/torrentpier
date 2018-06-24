@@ -70,7 +70,7 @@ $tracking_forums = get_tracks('forum');
 if ($mode =& $_REQUEST['mode']) {
     // This handles the simple windowed user search functions called from various other scripts
     if ($mode == 'searchuser') {
-        $username = isset($_POST['search_username']) ? $_POST['search_username'] : '';
+        $username = $_POST['search_username'] ?? '';
         username_search($username);
         exit;
     }
@@ -517,7 +517,7 @@ if ($post_mode) {
 
         $SQL['GROUP BY'][] = "item_id";
         $SQL['ORDER BY'][] = ($new_posts && $join_p) ? "p.topic_id ASC, p.post_time ASC" : "$order $sort";
-        $SQL['LIMIT'][] = "$search_limit";
+        $SQL['LIMIT'][] = (string)$search_limit;
 
         $items_display = fetch_search_ids($SQL);
     } elseif (!$items_display = array_slice($items_found, $start, $per_page)) {
@@ -726,7 +726,7 @@ else {
         }
 
         $SQL['GROUP BY'][] = "item_id";
-        $SQL['LIMIT'][] = "$search_limit";
+        $SQL['LIMIT'][] = (string)$search_limit;
 
         if ($egosearch) {
             $SQL['ORDER BY'][] = 'max_post_time DESC';
@@ -767,7 +767,7 @@ else {
         $SQL['WHERE'][] = "t.forum_id NOT IN($excluded_forums_csv)";
     }
 
-    $SQL['LIMIT'][] = "$per_page";
+    $SQL['LIMIT'][] = (string)$per_page;
 
     // Fetch topics data
     $topic_rows = array();
@@ -918,7 +918,7 @@ function username_search($search_match)
     $username_list = '';
 
     if (!empty($search_match)) {
-        $username_search = preg_replace('/\*/', '%', clean_username($search_match));
+        $username_search = str_replace("\*", '%', clean_username($search_match));
 
         $sql = "
 			SELECT username

@@ -73,6 +73,6 @@ class Apc extends Common
 
     public function is_installed()
     {
-        return function_exists('apc_fetch');
+        return \function_exists('apc_fetch');
     }
 }

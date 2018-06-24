@@ -97,9 +97,9 @@ class Memcache extends Common
             $this->num_queries++;
 
             return ($this->connected) ? $this->memcache->delete($this->prefix . $name, 0) : false;
-        } else {
-            return ($this->connected) ? $this->memcache->flush() : false;
         }
+
+        return ($this->connected) ? $this->memcache->flush() : false;
     }
 
     public function is_installed()

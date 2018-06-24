@@ -105,9 +105,9 @@ class Torrent
 
         foreach ($default_cfg as $config_name => $config_value) {
             $template->assign_vars(array(
-                'L_' . strtoupper($config_name) => isset($lang[$config_name]) ? $lang[$config_name] : '',
-                'L_' . strtoupper($config_name) . '_EXPL' => isset($lang[$config_name . '_expl']) ? $lang[$config_name . '_expl'] : '',
-                'L_' . strtoupper($config_name) . '_HEAD' => isset($lang[$config_name . '_head']) ? $lang[$config_name . '_head'] : '',
+                'L_' . strtoupper($config_name) => $lang[$config_name] ?? '',
+                'L_' . strtoupper($config_name) . '_EXPL' => $lang[$config_name . '_expl'] ?? '',
+                'L_' . strtoupper($config_name) . '_HEAD' => $lang[$config_name . '_head'] ?? '',
             ));
         }
     }

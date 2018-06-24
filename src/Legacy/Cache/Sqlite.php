@@ -44,11 +44,11 @@ class Sqlite extends Common
     public function get($name, $get_miss_key_callback = '', $ttl = 604800)
     {
         if (empty($name)) {
-            return is_array($name) ? array() : false;
+            return \is_array($name) ? array() : false;
         }
         $this->db->shard($name);
         $cached_items = array();
-        $this->prefix_len = strlen($this->prefix);
+        $this->prefix_len = \strlen($this->prefix);
         $this->prefix_sql = SQLite3::escapeString($this->prefix);
 
         $name_ary = $name_sql = (array)$name;
@@ -59,7 +59,7 @@ class Sqlite extends Common
 			SELECT cache_name, cache_value
 			FROM " . $this->cfg['table_name'] . "
 			WHERE cache_name IN('$this->prefix_sql" . implode("','$this->prefix_sql", $name_sql) . "') AND cache_expire_time > " . TIMENOW . "
-			LIMIT " . count($name) . "
+			LIMIT " . \count($name) . "
 		");
 
         $this->db->debug('start', 'unserialize()');
@@ -76,11 +76,11 @@ class Sqlite extends Common
             }
         }
         // return
-        if (is_array($this->prefix . $name)) {
+        if (\is_array($this->prefix . $name)) {
             return $cached_items;
-        } else {
-            return isset($cached_items[$name]) ? $cached_items[$name] : false;
         }
+
+        return $cached_items[$name] ?? false;
     }
 
     public function set($name, $value, $ttl = 604800)

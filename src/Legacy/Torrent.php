@@ -332,7 +332,7 @@ class Torrent
             $ann = (@$tor['announce']) ? $tor['announce'] : '';
             $announce_urls['main_url'] = $bb_cfg['bt_announce_url'];
 
-            if (!$ann || !in_array($ann, $announce_urls)) {
+            if (!$ann || !\in_array($ann, $announce_urls)) {
                 $msg = sprintf($lang['INVALID_ANN_URL'], htmlspecialchars($ann), $announce_urls['main_url']);
                 return self::torrent_error_exit($msg);
             }
@@ -340,7 +340,7 @@ class Torrent
 
         $info = (@$tor['info']) ? $tor['info'] : array();
 
-        if (!isset($info['name']) || !isset($info['piece length']) || !isset($info['pieces']) || strlen($info['pieces']) % 20 != 0) {
+        if (!isset($info['name'], $info['piece length'], $info['pieces']) || \strlen($info['pieces']) % 20 != 0) {
             return self::torrent_error_exit($lang['TORFILE_INVALID']);
         }
 
@@ -363,7 +363,7 @@ class Torrent
 
         if (isset($info['length'])) {
             $totallen = (float)$info['length'];
-        } elseif (isset($info['files']) && is_array($info['files'])) {
+        } elseif (isset($info['files']) && \is_array($info['files'])) {
             foreach ($info['files'] as $fn => $f) {
                 $totallen += (float)$f['length'];
             }
@@ -550,7 +550,7 @@ class Torrent
 
         if (!empty($_COOKIE['explain'])) {
             $out = "attach path: $filename<br /><br />";
-            $tor['info']['pieces'] = '[...] ' . strlen($tor['info']['pieces']) . ' bytes';
+            $tor['info']['pieces'] = '[...] ' . \strlen($tor['info']['pieces']) . ' bytes';
             $out .= print_r($tor, true);
             bb_die("<pre>$out</pre>");
         }

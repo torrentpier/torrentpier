@@ -40,7 +40,7 @@ $template->assign_vars(array(
 
 // Define show peers mode (count only || user names with complete % || full details)
 $cfg_sp_mode = $bb_cfg['bt_show_peers_mode'];
-$get_sp_mode = (isset($_GET['spmode'])) ? $_GET['spmode'] : '';
+$get_sp_mode = $_GET['spmode'] ?? '';
 
 $s_mode = 'count';
 
@@ -167,14 +167,14 @@ if ($tor_reged && $tor_info) {
 
     $bt_userdata = DB()->fetch_row($sql);
 
-    $user_status = isset($bt_userdata['user_status']) ? $bt_userdata['user_status'] : null;
+    $user_status = $bt_userdata['user_status'] ?? null;
 
     if (($min_ratio_dl || $min_ratio_warn) && $user_status != DL_STATUS_COMPLETE && $bt_user_id != $poster_id && $tor_type != TOR_TYPE_GOLD) {
         if (($user_ratio = get_bt_ratio($bt_userdata)) !== null) {
             $dl_allowed = ($user_ratio > $min_ratio_dl);
         }
 
-        if ((isset($user_ratio) && isset($min_ratio_warn) && $user_ratio < $min_ratio_warn && TR_RATING_LIMITS) || ($bt_userdata['u_down_total'] < MIN_DL_FOR_RATIO)) {
+        if ((isset($user_ratio, $min_ratio_warn) && $user_ratio < $min_ratio_warn && TR_RATING_LIMITS) || ($bt_userdata['u_down_total'] < MIN_DL_FOR_RATIO)) {
             $template->assign_vars(array(
                 'SHOW_RATIO_WARN' => true,
                 'RATIO_WARN_MSG' => sprintf($lang['BT_RATIO_WARNING_MSG'], $min_ratio_dl, $bb_cfg['ratio_url_help']),
@@ -384,7 +384,7 @@ if ($tor_reged && $tor_info) {
                             define('SEEDER_EXIST', true);
                             $seed_order_action = "viewtopic.php?" . POST_TOPIC_URL . "=$bt_topic_id&amp;spmode=full#seeders";
 
-                            $template->assign_block_vars("$x_full", array(
+                            $template->assign_block_vars((string)$x_full, array(
                                 'SEED_ORD_ACT' => $seed_order_action,
                                 'SEEDERS_UP_TOT' => humn_size($sp_up_tot[$x], 0, 'KB') . '/s'
                             ));
@@ -406,7 +406,7 @@ if ($tor_reged && $tor_info) {
                             define('LEECHER_EXIST', true);
                             $leech_order_action = "viewtopic.php?" . POST_TOPIC_URL . "=$bt_topic_id&amp;spmode=full#leechers";
 
-                            $template->assign_block_vars("$x_full", array(
+                            $template->assign_block_vars((string)$x_full, array(
                                 'LEECH_ORD_ACT' => $leech_order_action,
                                 'LEECHERS_UP_TOT' => humn_size($sp_up_tot[$x], 0, 'KB') . '/s',
                                 'LEECHERS_DOWN_TOT' => humn_size($sp_down_tot[$x], 0, 'KB') . '/s'

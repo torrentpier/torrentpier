@@ -63,7 +63,7 @@ class Sqlite extends Common
             return;
         }
 
-        $prefix_len = strlen($this->prefix);
+        $prefix_len = \strlen($this->prefix);
         $prefix_sql = SQLite3::escapeString($this->prefix);
 
         array_deep($items, 'SQLite3::escapeString');

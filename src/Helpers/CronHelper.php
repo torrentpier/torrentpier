@@ -107,8 +107,8 @@ class CronHelper
      */
     public static function trackRunning($mode)
     {
-        if (!defined('START_MARK')) {
-            define('START_MARK', TRIGGERS_DIR . '/cron_started_at_' . date('Y-m-d_H-i-s') . '_by_pid_' . getmypid());
+        if (!\defined('START_MARK')) {
+            \define('START_MARK', TRIGGERS_DIR . '/cron_started_at_' . date('Y-m-d_H-i-s') . '_by_pid_' . getmypid());
         }
 
         if ($mode === 'start') {

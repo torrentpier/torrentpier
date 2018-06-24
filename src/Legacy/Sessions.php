@@ -22,7 +22,7 @@ class Sessions
      */
     private static function ignore_cached_userdata()
     {
-        return defined('IN_PM') ? true : false;
+        return \defined('IN_PM') ? true : false;
     }
 
     /**

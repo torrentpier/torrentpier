@@ -70,7 +70,7 @@ class SqliteCommon extends Common
         if ($type == 'none') {
             return;
         }
-        if (is_array($name)) {
+        if (\is_array($name)) {
             trigger_error('cannot shard: $name is array', E_USER_ERROR);
         }
 
@@ -128,7 +128,7 @@ class SqliteCommon extends Common
     public function fetch_row($query)
     {
         $result = $this->query($query);
-        return is_resource($result) ? $result->fetchArray(SQLITE3_ASSOC) : false;
+        return \is_resource($result) ? $result->fetchArray(SQLITE3_ASSOC) : false;
     }
 
     public function fetch_rowset($query)
@@ -143,7 +143,7 @@ class SqliteCommon extends Common
 
     public function changes()
     {
-        return is_resource($this->dbh) ? $this->dbh->changes() : 0;
+        return \is_resource($this->dbh) ? $this->dbh->changes() : 0;
     }
 
     public function escape($str)
@@ -153,7 +153,7 @@ class SqliteCommon extends Common
 
     public function get_error_msg()
     {
-        return 'SQLite error #' . ($err_code = $this->dbh->lastErrorCode()) . ': ' . $this->dbh->lastErrorMsg();
+        return 'SQLite error #' . $this->dbh->lastErrorCode() . ': ' . $this->dbh->lastErrorMsg();
     }
 
     public function rm($name = '')

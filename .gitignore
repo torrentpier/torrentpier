@@ -2,7 +2,6 @@
 .idea
 .php_cs.cache
 composer.phar
-composer.lock
 configs/local.php
 data/avatars
 data/torrent_files

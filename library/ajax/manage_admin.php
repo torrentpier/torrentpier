@@ -47,7 +47,7 @@ switch ($mode) {
         $dir = $template->cachedir;
         $res = @opendir($dir);
         while (($file = readdir($res)) !== false) {
-            if (substr($file, 0, $match_len) === $match) {
+            if (0 === strpos($file, $match)) {
                 @unlink($dir . $file);
             }
         }

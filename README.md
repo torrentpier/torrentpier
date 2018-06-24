@@ -28,8 +28,8 @@ and go from there. The documentation will be translated into english in the near
 
 * Apache / nginx
 * MySQL / MariaDB / Percona
-* PHP: 5.6 / 7.0 / 7.1
-* PHP Extensions: bcmath, intl, tidy (optional), xml
+* PHP: 7.1 / 7.2 / 7.3
+* PHP Extensions: bcmath, intl, tidy (optional), xml, xmlwriter
 
 ## Installation
 

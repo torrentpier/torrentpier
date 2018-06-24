@@ -14,4 +14,5 @@ if (!empty($setmodules)) {
 
 require __DIR__ . '/pagestart.php';
 
+/** @noinspection ForgottenDebugOutputInspection */
 phpinfo();

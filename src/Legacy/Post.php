@@ -368,7 +368,7 @@ class Post
                     $orig_word = $replacement_word = array();
                     obtain_word_list($orig_word, $replacement_word);
 
-                    if (count($orig_word)) {
+                    if (\count($orig_word)) {
                         $topic_title = preg_replace($orig_word, $replacement_word, $topic_title);
                     }
 
@@ -376,8 +376,8 @@ class Post
                     $unwatch_topic = make_url(TOPIC_URL . "$topic_id&unwatch=topic");
 
                     foreach ($watch_list as $row) {
-                        /** @var TorrentPier\Legacy\Emailer() $emailer */
-                        $emailer = new TorrentPier\Legacy\Emailer();
+                        /** @var Emailer $emailer */
+                        $emailer = new Emailer;
 
                         $emailer->set_from([$bb_cfg['board_email'] => $bb_cfg['sitename']]);
                         $emailer->set_to([$row['user_email'] => $row['username']]);
@@ -442,9 +442,9 @@ class Post
             return;
         }
 
-        $post_username = $post_subject = $post_text = $poster_ip = '';
+        $post_username = $post_text = $poster_ip = '';
 
-        $post_time = $current_time = TIMENOW;
+        $post_time = TIMENOW;
 
         if ($mode == 'after_move') {
             if (!$forum_id || !$old_forum_id) {

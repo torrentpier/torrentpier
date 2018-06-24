@@ -251,7 +251,7 @@ if (!isset($_REQUEST['dosearch'])) {
 
             $text = sprintf($lang['SEARCH_FOR_USERNAME'], strip_tags(htmlspecialchars(stripslashes($username))));
 
-            $username = preg_replace('/\*/', '%', trim(strip_tags(strtolower($username))));
+            $username = str_replace("\*", '%', trim(strip_tags(strtolower($username))));
 
             if (false !== strpos($username, '%')) {
                 $op = 'LIKE';
@@ -272,7 +272,7 @@ if (!isset($_REQUEST['dosearch'])) {
 
             $text = sprintf($lang['SEARCH_FOR_EMAIL'], strip_tags(htmlspecialchars(stripslashes($email))));
 
-            $email = preg_replace('/\*/', '%', trim(strip_tags(strtolower($email))));
+            $email = str_replace("\*", '%', trim(strip_tags(strtolower($email))));
 
             if (false !== strpos($email, '%')) {
                 $op = 'LIKE';
@@ -313,7 +313,7 @@ if (!isset($_REQUEST['dosearch'])) {
 
             $where_sql = '';
             $where_sql .= ($ip_in_sql != '') ? "poster_ip IN ($ip_in_sql)" : '';
-            $where_sql .= ($ip_like_sql != '') ? ($where_sql != '') ? " OR $ip_like_sql" : "$ip_like_sql" : '';
+            $where_sql .= ($ip_like_sql != '') ? ($where_sql != '') ? " OR $ip_like_sql" : (string)$ip_like_sql : '';
 
             if (!$where_sql) {
                 bb_die('invalid request');
@@ -340,7 +340,7 @@ if (!isset($_REQUEST['dosearch'])) {
             }
             $where_sql = '';
             $where_sql .= ($ip_in_sql != '') ? "user_last_ip IN ($ip_in_sql)" : '';
-            $where_sql .= ($ip_like_sql_flylast != '') ? ($where_sql != '') ? " OR $ip_like_sql_flylast" : "$ip_like_sql_flylast" : '';
+            $where_sql .= ($ip_like_sql_flylast != '') ? ($where_sql != '') ? " OR $ip_like_sql_flylast" : (string)$ip_like_sql_flylast : '';
             $sql = 'SELECT user_id FROM ' . BB_USERS . ' WHERE user_id <> ' . GUEST_UID . " AND ($where_sql) GROUP BY user_id";
             if (!$result = DB()->sql_query($sql)) {
                 bb_die('Could not count users #2');
@@ -357,7 +357,7 @@ if (!isset($_REQUEST['dosearch'])) {
             }
             $where_sql = '';
             $where_sql .= ($ip_in_sql != '') ? "user_reg_ip IN ($ip_in_sql)" : '';
-            $where_sql .= ($ip_like_sql_flyreg != '') ? ($where_sql != '') ? " OR $ip_like_sql_flyreg" : "$ip_like_sql_flyreg" : '';
+            $where_sql .= ($ip_like_sql_flyreg != '') ? ($where_sql != '') ? " OR $ip_like_sql_flyreg" : (string)$ip_like_sql_flyreg : '';
             $sql = 'SELECT user_id FROM ' . BB_USERS . ' WHERE user_id <> ' . GUEST_UID . " AND ($where_sql) GROUP BY user_id";
             if (!$result = DB()->sql_query($sql)) {
                 bb_die('Could not count users #3');
@@ -567,7 +567,7 @@ if (!isset($_REQUEST['dosearch'])) {
 
             $text = strip_tags(htmlspecialchars(stripslashes($userfield_value)));
 
-            $userfield_value = preg_replace('/\*/', '%', trim(strip_tags(strtolower($userfield_value))));
+            $userfield_value = str_replace("\*", '%', trim(strip_tags(strtolower($userfield_value))));
 
             if (false !== strpos($userfield_value, '%')) {
                 $op = 'LIKE';

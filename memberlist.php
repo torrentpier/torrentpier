@@ -147,7 +147,7 @@ $template->assign_vars(array(
 // per-letter selection end
 $sql = "SELECT username, user_id, user_rank, user_opt, user_posts, user_regdate, user_from, user_website, user_email FROM " . BB_USERS . " WHERE user_id NOT IN(" . EXCLUDED_USERS . ")";
 if ($username) {
-    $username = preg_replace('/\*/', '%', clean_username($username));
+    $username = str_replace("\*", '%', clean_username($username));
     $letter_sql = "username LIKE '" . DB()->escape($username) . "'";
 }
 $sql .= ($letter_sql) ? " AND $letter_sql" : '';

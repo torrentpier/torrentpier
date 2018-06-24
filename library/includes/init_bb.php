@@ -14,8 +14,8 @@ if (!defined('BB_ROOT')) {
 /**
  * Check PHP version
  */
-if (version_compare(PHP_VERSION, '5.6', '<')) {
-    die('TorrentPier requires PHP version 5.6+. Your PHP version ' . PHP_VERSION);
+if (PHP_VERSION_ID < 70103) {
+    die('TorrentPier requires PHP version 7.1.3+. Your PHP version ' . PHP_VERSION);
 }
 
 /**

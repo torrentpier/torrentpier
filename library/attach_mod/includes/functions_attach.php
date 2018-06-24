@@ -68,7 +68,7 @@ function base64_unpack($string)
     for ($i = 1; $i <= $length; $i++) {
         $pos = $length - $i;
         $operand = strpos($chars, $string[$pos]);
-        $exponent = pow($base, $i - 1);
+        $exponent = $base ** ($i - 1);
         $decValue = $operand * $exponent;
         $number += $decValue;
     }
@@ -87,7 +87,7 @@ function auth_pack($auth_array)
     $one_char = $two_char = false;
     $auth_cache = '';
 
-    for ($i = 0, $iMax = count($auth_array); $i < $iMax; $i++) {
+    foreach ($auth_array as $i => $iValue) {
         $val = base64_pack((int)$auth_array[$i]);
         if (strlen($val) == 1 && !$one_char) {
             $auth_cache .= $one_char_encoding;
@@ -114,7 +114,7 @@ function auth_unpack($auth_cache)
     $auth = [];
     $auth_len = 1;
 
-    for ($pos = 0; $pos < strlen($auth_cache); $pos += $auth_len) {
+    for ($pos = 0, $posMax = strlen($auth_cache); $pos < $posMax; $pos += $auth_len) {
         $forum_auth = $auth_cache[$pos];
         if ($forum_auth == $one_char_encoding) {
             $auth_len = 1;
@@ -149,7 +149,7 @@ function is_forum_authed($auth_cache, $check_forum_id)
     $auth = [];
     $auth_len = 1;
 
-    for ($pos = 0; $pos < strlen($auth_cache); $pos += $auth_len) {
+    for ($pos = 0, $posMax = strlen($auth_cache); $pos < $posMax; $pos += $auth_len) {
         $forum_auth = $auth_cache[$pos];
         if ($forum_auth == $one_char_encoding) {
             $auth_len = 1;
@@ -266,7 +266,7 @@ function get_attachments_from_post($post_id_array)
         $post_id_array[] = $post_id;
     }
 
-    $post_id_array = implode(', ', array_map('intval', $post_id_array));
+    $post_id_array = implode(', ', array_map('\intval', $post_id_array));
 
     if ($post_id_array == '') {
         return $attachments;
@@ -304,7 +304,7 @@ function get_total_attach_filesize($attach_ids)
         return 0;
     }
 
-    $attach_ids = implode(', ', array_map('intval', $attach_ids));
+    $attach_ids = implode(', ', array_map('\intval', $attach_ids));
 
     if (!$attach_ids) {
         return 0;
@@ -412,7 +412,7 @@ function get_extension($filename)
  */
 function delete_extension($filename)
 {
-    return substr($filename, 0, strrpos(strtolower(trim($filename)), '.'));
+    return substr($filename, 0, strripos(trim($filename), '.'));
 }
 
 /**
@@ -535,7 +535,7 @@ function attach_mod_sql_escape($text)
         return DB()->escape_string($text);
     }
 
-    return str_replace("'", "''", str_replace('\\', '\\\\', $text));
+    return str_replace(['\\', "'"], ['\\\\', "''"], $text);
 }
 
 /**

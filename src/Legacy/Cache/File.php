@@ -46,7 +46,7 @@ class File extends Common
 
     public function set($name, $value, $ttl = 86400)
     {
-        if (!function_exists('var_export')) {
+        if (!\function_exists('var_export')) {
             return false;
         }
 
