@@ -12,7 +12,6 @@ if (!empty($setmodules)) {
     return;
 }
 require __DIR__ . '/pagestart.php';
-require INC_DIR . '/functions_selects.php';
 
 $sql = 'SELECT * FROM ' . BB_CONFIG;
 

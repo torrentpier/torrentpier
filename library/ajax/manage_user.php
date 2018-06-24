@@ -27,8 +27,8 @@ switch ($mode) {
         }
 
         if ($user_id != BOT_UID) {
-            delete_user_sessions($user_id);
-            user_delete($user_id);
+            \TorrentPier\Legacy\Sessions::delete_user_sessions($user_id);
+            \TorrentPier\Legacy\Admin\Common::user_delete($user_id);
 
             $this->response['info'] = $lang['USER_DELETED'];
         } else {
@@ -48,8 +48,8 @@ switch ($mode) {
 
         if (IS_ADMIN) {
             $user_topics = DB()->fetch_rowset("SELECT topic_id FROM " . BB_TOPICS . " WHERE topic_poster = $user_id", 'topic_id');
-            $deleted_topics = topic_delete($user_topics);
-            $deleted_posts = post_delete('user', $user_id);
+            $deleted_topics = \TorrentPier\Legacy\Admin\Common::topic_delete($user_topics);
+            $deleted_posts = \TorrentPier\Legacy\Admin\Common::post_delete('user', $user_id);
 
             $this->response['info'] = $lang['USER_DELETED_POSTS'];
         } else {
@@ -68,7 +68,7 @@ switch ($mode) {
         }
 
         if (IS_ADMIN) {
-            post_delete('user', $user_id);
+            \TorrentPier\Legacy\Admin\Common::post_delete('user', $user_id);
 
             $this->response['info'] = $lang['USER_DELETED_POSTS'];
         } else {
@@ -99,7 +99,7 @@ switch ($mode) {
         }
 
         DB()->query("UPDATE " . BB_USERS . " SET user_active = '0' WHERE user_id = " . $user_id);
-        delete_user_sessions($user_id);
+        \TorrentPier\Legacy\Sessions::delete_user_sessions($user_id);
 
         $this->response['info'] = $lang['USER_ACTIVATE_OFF'];
 

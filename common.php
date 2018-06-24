@@ -343,6 +343,10 @@ function hexhex($value)
     return dechex(hexdec($value));
 }
 
+/**
+ * @param string $str
+ * @return string
+ */
 function str_compact($str)
 {
     return preg_replace('#\s+#u', ' ', trim($str));

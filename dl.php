@@ -44,8 +44,7 @@ function send_file_to_browser($attachment, $upload_dir)
 
     //bt
     if (!(isset($_GET['original']) && !IS_USER)) {
-        include INC_DIR . '/functions_torrent.php';
-        send_torrent_with_passkey($filename);
+        \TorrentPier\Legacy\Torrent::send_torrent_with_passkey($filename);
     }
 
     // Now the tricky part... let's dance

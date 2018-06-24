@@ -12,7 +12,6 @@ define('IN_PM', true);
 define('BB_ROOT', './');
 require __DIR__ . '/common.php';
 require INC_DIR . '/bbcode.php';
-require INC_DIR . '/functions_post.php';
 
 $privmsg_sent_id = $l_box_name = $to_username = $privmsg_subject = $privmsg_message = $error_msg = '';
 
@@ -180,7 +179,7 @@ if ($mode == 'read') {
             bb_die('Could not update private message read status for user');
         }
         if (DB()->affected_rows()) {
-            cache_rm_userdata($userdata);
+            \TorrentPier\Legacy\Sessions::cache_rm_userdata($userdata);
         }
 
         $sql = "UPDATE " . BB_PRIVMSGS . "
@@ -898,7 +897,7 @@ if ($mode == 'read') {
                 bb_die('Could not update private message new / read status for user');
             }
 
-            cache_rm_user_sessions($to_userdata['user_id']);
+            \TorrentPier\Legacy\Sessions::cache_rm_user_sessions($to_userdata['user_id']);
 
             if (bf($to_userdata['user_opt'], 'user_opt', 'user_notify_pm') && $to_userdata['user_active'] && $bb_cfg['pm_notify_enabled']) {
                 /** @var TorrentPier\Legacy\Emailer() $emailer */
@@ -1151,7 +1150,7 @@ if ($mode == 'read') {
     //
     // Update unread status
     //
-    db_update_userdata($userdata, array(
+    \TorrentPier\Legacy\Sessions::db_update_userdata($userdata, array(
         'user_unread_privmsg' => 'user_unread_privmsg + user_new_privmsg',
         'user_new_privmsg' => 0,
         'user_last_privmsg' => $userdata['session_start'],

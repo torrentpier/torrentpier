@@ -11,8 +11,6 @@ define('BB_SCRIPT', 'tracker');
 define('BB_ROOT', './');
 require __DIR__ . '/common.php';
 
-require INC_DIR . '/functions_group.php';
-
 // Page config
 $page_cfg['include_bbcode_js'] = true;
 $page_cfg['use_tablesorter'] = true;
@@ -222,7 +220,7 @@ foreach ($s_not_seen_opt as $val => $opt) {
     $s_not_seen_select[$opt['lang']] = $val;
 }
 
-if ($release_groups = get_group_data('all')) {
+if ($release_groups = \TorrentPier\Legacy\Group::get_group_data('all')) {
     $s_rg_opt = array(
         $search_all => array(
             'lang' => $lang['CHOOSE_RELEASE_GROUP'],

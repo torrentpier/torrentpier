@@ -16,8 +16,6 @@ require __DIR__ . '/pagestart.php';
 $max_forum_name_len = 30;
 $max_forum_rows = 25;
 
-require INC_DIR . '/functions_admin_torrent.php';
-
 $submit = isset($_POST['submit']);
 $confirm = isset($_POST['confirm']);
 
@@ -78,12 +76,12 @@ $cfg = bb_get_config(BB_CONFIG, true, false);
  */
 if ($submit && $confirm) {
     foreach ($db_fields_bool as $field_name => $field_def_val) {
-        update_table_bool(BB_FORUMS, 'forum_id', $field_name, $field_def_val);
+        \TorrentPier\Legacy\Admin\Torrent::update_table_bool(BB_FORUMS, 'forum_id', $field_name, $field_def_val);
     }
 
-    update_config_table(BB_CONFIG, $default_cfg_str, $cfg, 'str');
-    update_config_table(BB_CONFIG, $default_cfg_bool, $cfg, 'bool');
-    update_config_table(BB_CONFIG, $default_cfg_num, $cfg, 'num');
+    \TorrentPier\Legacy\Admin\Torrent::update_config_table(BB_CONFIG, $default_cfg_str, $cfg, 'str');
+    \TorrentPier\Legacy\Admin\Torrent::update_config_table(BB_CONFIG, $default_cfg_bool, $cfg, 'bool');
+    \TorrentPier\Legacy\Admin\Torrent::update_config_table(BB_CONFIG, $default_cfg_num, $cfg, 'num');
 
     $datastore->update('cat_forums');
 
@@ -91,16 +89,16 @@ if ($submit && $confirm) {
 }
 
 // Set template vars
-set_tpl_vars($default_cfg_str, $cfg);
-set_tpl_vars_lang($default_cfg_str);
+\TorrentPier\Legacy\Admin\Torrent::set_tpl_vars($default_cfg_str, $cfg);
+\TorrentPier\Legacy\Admin\Torrent::set_tpl_vars_lang($default_cfg_str);
 
-set_tpl_vars_bool($default_cfg_bool, $cfg);
-set_tpl_vars_lang($default_cfg_bool);
+\TorrentPier\Legacy\Admin\Torrent::set_tpl_vars_bool($default_cfg_bool, $cfg);
+\TorrentPier\Legacy\Admin\Torrent::set_tpl_vars_lang($default_cfg_bool);
 
-set_tpl_vars($default_cfg_num, $cfg);
-set_tpl_vars_lang($default_cfg_num);
+\TorrentPier\Legacy\Admin\Torrent::set_tpl_vars($default_cfg_num, $cfg);
+\TorrentPier\Legacy\Admin\Torrent::set_tpl_vars_lang($default_cfg_num);
 
-set_tpl_vars_lang($db_fields_bool);
+\TorrentPier\Legacy\Admin\Torrent::set_tpl_vars_lang($db_fields_bool);
 
 // Get Forums list
 $sql = 'SELECT f.*

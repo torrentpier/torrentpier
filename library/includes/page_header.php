@@ -68,7 +68,7 @@ if ($logged_in && empty($gen_simple_header) && !defined('IN_ADMIN')) {
         if ($userdata['user_last_privmsg'] > $userdata['user_lastvisit'] && defined('IN_PM')) {
             $userdata['user_last_privmsg'] = $userdata['user_lastvisit'];
 
-            db_update_userdata($userdata, array(
+            \TorrentPier\Legacy\Sessions::db_update_userdata($userdata, array(
                 'user_last_privmsg' => $userdata['user_lastvisit'],
             ));
 
@@ -91,7 +91,7 @@ if ($logged_in && empty($gen_simple_header) && !defined('IN_ADMIN')) {
             if ($userdata['user_unread_privmsg'] != $real_unread_pm_count) {
                 $userdata['user_unread_privmsg'] = $real_unread_pm_count;
 
-                db_update_userdata($userdata, array(
+                \TorrentPier\Legacy\Sessions::db_update_userdata($userdata, array(
                     'user_unread_privmsg' => $real_unread_pm_count,
                 ));
             }

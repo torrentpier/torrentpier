@@ -13,7 +13,6 @@ define('IN_ADMIN', true);
 require dirname(__DIR__) . '/common.php';
 require ATTACH_DIR . '/attachment_mod.php';
 require ATTACH_DIR . '/includes/functions_admin.php';
-require_once INC_DIR . '/functions_admin.php';
 
 $user->session_start();
 

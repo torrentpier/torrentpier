@@ -10,6 +10,7 @@
 namespace TorrentPier\Legacy\Common;
 
 use TorrentPier\Legacy\DateDelta;
+use TorrentPier\Legacy\Sessions;
 
 /**
  * Class User
@@ -133,7 +134,7 @@ class User
                 $userdata_cache_id = USER_IP;
             }
 
-            if (!$this->data = cache_get_userdata($userdata_cache_id)) {
+            if (!$this->data = Sessions::cache_get_userdata($userdata_cache_id)) {
                 $this->data = DB()->fetch_row($SQL);
 
                 if ($this->data && (TIMENOW - $this->data['session_time']) > $bb_cfg['session_update_intrv']) {
@@ -141,7 +142,7 @@ class User
                     $update_sessions_table = true;
                 }
 
-                cache_set_userdata($this->data);
+                Sessions::cache_set_userdata($this->data);
             }
         }
 
@@ -315,7 +316,7 @@ class User
             define('SID_GET', "sid=$session_id");
         }
 
-        cache_set_userdata($this->data);
+        Sessions::cache_set_userdata($this->data);
 
         return $this->data;
     }
@@ -402,7 +403,7 @@ class User
 							AND session_id = '" . $this->data['session_id'] . "'
 					");
                     $this->data['session_admin'] = $this->data['user_level'];
-                    cache_update_userdata($this->data);
+                    Sessions::cache_update_userdata($this->data);
 
                     return $this->data;
                 } elseif ($new_session_userdata = $this->session_create($userdata, false)) {
@@ -625,7 +626,7 @@ class User
             $this->data['user_lastvisit'] = TIMENOW;
 
             // Update lastvisit
-            db_update_userdata($this->data, [
+            Sessions::db_update_userdata($this->data, [
                 'user_session_time' => $this->data['session_time'],
                 'user_lastvisit' => $this->data['user_lastvisit'],
             ]);

@@ -28,7 +28,7 @@ switch ($mode) {
         $topic_ids = DB()->fetch_rowset("SELECT attach_id FROM " . BB_BT_TORRENTS . " WHERE topic_id IN($topics)", 'attach_id');
 
         foreach ($topic_ids as $attach_id) {
-            change_tor_status($attach_id, $status);
+            \TorrentPier\Legacy\Torrent::change_tor_status($attach_id, $status);
         }
         $this->response['status'] = $bb_cfg['tor_icons'][$status];
         $this->response['topics'] = explode(',', $topics);

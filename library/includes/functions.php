@@ -1335,7 +1335,7 @@ function bb_die($msg_text)
 
     // If empty session
     if (empty($userdata)) {
-        $userdata = session_pagestart();
+        $userdata = \TorrentPier\Legacy\Sessions::session_pagestart();
     }
 
     // If the header hasn't been output then do it
@@ -2081,16 +2081,14 @@ function is_gold($type)
 
 function update_atom($type, $id)
 {
-    require_once INC_DIR . '/functions_atom.php';
-
     switch ($type) {
         case 'user':
-            update_user_feed($id, get_username($id));
+            \TorrentPier\Legacy\Atom::update_user_feed($id, get_username($id));
             break;
 
         case 'topic':
             $topic_poster = (int)DB()->fetch_row("SELECT topic_poster FROM " . BB_TOPICS . " WHERE topic_id = $id LIMIT 1", 'topic_poster');
-            update_user_feed($topic_poster, get_username($topic_poster));
+            \TorrentPier\Legacy\Atom::update_user_feed($topic_poster, get_username($topic_poster));
             break;
     }
 }

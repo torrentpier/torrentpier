@@ -11,8 +11,6 @@ if (!defined('BB_ROOT')) {
     die(basename(__FILE__));
 }
 
-require_once INC_DIR . '/functions_admin.php';
-
 $users_per_cycle = 1000;
 
 while (true) {
@@ -48,7 +46,7 @@ while (true) {
     }
 
     if ($prune_users = $not_activated_users + $not_active_users) {
-        user_delete($prune_users);
+        \TorrentPier\Legacy\Admin\Common::user_delete($prune_users);
     }
 
     if (count($prune_users) < $users_per_cycle) {

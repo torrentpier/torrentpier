@@ -156,7 +156,7 @@ class Ajax
         $this->response['action'] = $this->action;
 
         if (DBG_USER && SQL_DEBUG && !empty($_COOKIE['sql_log'])) {
-            $this->response['sql_log'] = get_sql_log();
+            $this->response['sql_log'] = Dev::get_sql_log();
         }
 
         // sending output will be handled by $this->ob_handler()
@@ -239,7 +239,7 @@ class Ajax
     /**
      * Verify mod rights
      *
-     * @param integer $forum_id
+     * @param int $forum_id
      */
     public function verify_mod_rights($forum_id)
     {

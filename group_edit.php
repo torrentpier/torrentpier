@@ -10,7 +10,6 @@
 define('BB_SCRIPT', 'group_edit');
 define('BB_ROOT', './');
 require __DIR__ . '/common.php';
-require INC_DIR . '/functions_group.php';
 
 $page_cfg['include_bbcode_js'] = true;
 
@@ -24,7 +23,7 @@ $is_moderator = false;
 $submit = !empty($_POST['submit']);
 
 if ($group_id) {
-    if (!$group_info = get_group_data($group_id)) {
+    if (!$group_info = \TorrentPier\Legacy\Group::get_group_data($group_id)) {
         bb_die($lang['GROUP_NOT_EXIST']);
     }
     if (!$group_info['group_id'] || !$group_info['group_moderator'] || !$group_info['moderator_name']) {

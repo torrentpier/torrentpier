@@ -25,18 +25,16 @@ $value = $this->request['value'] = (string)(isset($this->request['value'])) ? $t
 
 switch ($field) {
     case 'username':
-        require_once INC_DIR . '/functions_validate.php';
         $value = clean_username($value);
-        if ($err = validate_username($value)) {
+        if ($err = \TorrentPier\Legacy\Validate::username($value)) {
             $this->ajax_die(strip_tags($err));
         }
         $this->response['new_value'] = $this->request['value'];
         break;
 
     case 'user_email':
-        require_once INC_DIR . '/functions_validate.php';
         $value = htmlCHR($value);
-        if ($err = validate_email($value)) {
+        if ($err = \TorrentPier\Legacy\Validate::email($value)) {
             $this->ajax_die($err);
         }
         $this->response['new_value'] = $this->request['value'];
@@ -138,8 +136,7 @@ switch ($field) {
         $this->response['new_value'] = humn_size($value, null, null, ' ');
 
         if (!$btu = get_bt_userdata($user_id)) {
-            require INC_DIR . '/functions_torrent.php';
-            generate_passkey($user_id, true);
+            \TorrentPier\Legacy\Torrent::generate_passkey($user_id, true);
             $btu = get_bt_userdata($user_id);
         }
         $btu[$field] = $value;
@@ -147,7 +144,6 @@ switch ($field) {
         break;
 
     case 'user_points':
-        $value = htmlCHR($value);
         $value = (float)str_replace(',', '.', $this->request['value']);
         $value = sprintf('%.2f', $value);
         $this->response['new_value'] = $value;
@@ -160,6 +156,6 @@ switch ($field) {
 $value_sql = DB()->escape($value, true);
 DB()->query("UPDATE $table SET $field = $value_sql WHERE user_id = $user_id");
 
-cache_rm_user_sessions($user_id);
+\TorrentPier\Legacy\Sessions::cache_rm_user_sessions($user_id);
 
 $this->response['edit_id'] = $this->request['edit_id'];

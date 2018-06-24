@@ -60,7 +60,7 @@ class Poll
     /**
      * Добавление голосов в базу данных
      *
-     * @param integer $topic_id
+     * @param int $topic_id
      */
     public function insert_votes_into_db($topic_id)
     {
@@ -85,7 +85,7 @@ class Poll
     /**
      * Удаление голосования
      *
-     * @param integer $topic_id
+     * @param int $topic_id
      */
     public function delete_poll($topic_id)
     {
@@ -96,7 +96,7 @@ class Poll
     /**
      * Удаление информации о проголосовавших и голосов
      *
-     * @param integer $topic_id
+     * @param int $topic_id
      */
     public function delete_votes_data($topic_id)
     {
