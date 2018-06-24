@@ -178,7 +178,7 @@ $template->assign_vars(array(
     // Common urls
     'AVATARS_URL' => 'data/avatars',
     'CAT_URL' => BB_ROOT . CAT_URL,
-    'DOWNLOAD_URL' => BB_ROOT . DOWNLOAD_URL,
+    'DOWNLOAD_URL' => BB_ROOT . DL_URL,
     'FORUM_URL' => BB_ROOT . FORUM_URL,
     'GROUP_URL' => BB_ROOT . GROUP_URL,
     'LOGIN_URL' => $bb_cfg['login_url'],

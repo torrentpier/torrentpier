@@ -141,6 +141,7 @@ $bb_cfg['torhelp_enabled'] = false; // find dead torrents (without seeder) that 
 
 // URL's
 $bb_cfg['ajax_url'] = 'ajax.php'; # "http://{$_SERVER['SERVER_NAME']}/ajax.php"
+$bb_cfg['dl_url'] = 'dl.php?id='; # "http://{$domain_name}/dl.php?id="
 $bb_cfg['login_url'] = 'login.php'; # "http://{$domain_name}/login.php"
 $bb_cfg['posting_url'] = 'posting.php'; # "http://{$domain_name}/posting.php"
 $bb_cfg['pm_url'] = 'privmsg.php'; # "http://{$domain_name}/privmsg.php"

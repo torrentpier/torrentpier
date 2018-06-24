@@ -186,7 +186,7 @@ if (IS_GUEST && !bb_captcha('check')) {
     global $template;
 
     $redirect_url = $_POST['redirect_url'] ?? $_SERVER['HTTP_REFERER'] ?? '/';
-    $message = '<form action="' . DOWNLOAD_URL . $attachment['attach_id'] . '" method="post">';
+    $message = '<form action="' . DL_URL . $attachment['attach_id'] . '" method="post">';
     $message .= $lang['CAPTCHA'] . ':';
     $message .= '<div  class="mrg_10" align="center">' . bb_captcha('get') . '</div>';
     $message .= '<input type="hidden" name="redirect_url" value="' . $redirect_url . '" />';

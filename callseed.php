@@ -49,7 +49,7 @@ $user_list = DB()->fetch_rowset("
 ");
 
 $subject = sprintf($lang['CALLSEED_SUBJECT'], $t_data['topic_title']);
-$message = sprintf($lang['CALLSEED_TEXT'], make_url(TOPIC_URL . $topic_id), $t_data['topic_title'], make_url(DOWNLOAD_URL . $t_data['attach_id']));
+$message = sprintf($lang['CALLSEED_TEXT'], make_url(TOPIC_URL . $topic_id), $t_data['topic_title'], make_url(DL_URL . $t_data['attach_id']));
 
 if ($user_list) {
     foreach ($user_list as $row) {

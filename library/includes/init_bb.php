@@ -282,7 +282,7 @@ define('PAGE_HEADER', INC_DIR . '/page_header.php');
 define('PAGE_FOOTER', INC_DIR . '/page_footer.php');
 
 define('CAT_URL', 'index.php?c=');
-define('DOWNLOAD_URL', 'dl.php?id=');
+define('DL_URL', $bb_cfg['dl_url']);
 define('FORUM_URL', 'viewforum.php?f=');
 define('GROUP_URL', 'group.php?g=');
 define('LOGIN_URL', $bb_cfg['login_url']);
