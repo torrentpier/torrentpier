@@ -237,7 +237,7 @@ if ($mode == 'new_rel') {
         foreach ($sql as $row) {
             $topics .= $bb_cfg['tor_icons'][$row['tor_status']] . '<a href="' . TOPIC_URL . $row['topic_id'] . '">' . $row['topic_title'] . '</a><div class="spacer_12"></div>';
         }
-        if ($topics) {
+        if ($topics && !(IS_SUPER_ADMIN && !empty($_REQUEST['edit_tpl']))) {
             bb_die($topics . $lang['UNEXECUTED_RELEASE']);
         }
     }
