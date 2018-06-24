@@ -32,3 +32,9 @@ ALTER TABLE `bb_banlist` CHANGE `ban_ip` `ban_ip` varchar(42) NOT NULL DEFAULT '
 // 2.2.2
 ALTER TABLE `bb_ranks` DROP `rank_min`;
 ALTER TABLE `bb_ranks` DROP `rank_special`;
+
+// 2.3.0
+ALTER TABLE `bb_cron` CHANGE `last_run` `last_run` DATETIME NOT NULL DEFAULT '1900-01-01 00:00:00';
+ALTER TABLE `bb_cron` CHANGE `next_run` `next_run` DATETIME NOT NULL DEFAULT '1900-01-01 00:00:00';
+ALTER TABLE `bb_users` CHANGE `user_birthday` `user_birthday` DATE NOT NULL DEFAULT '1900-01-01';
+ALTER TABLE `bb_posts` CHANGE `mc_comment` `mc_comment` TEXT NOT NULL DEFAULT '';
