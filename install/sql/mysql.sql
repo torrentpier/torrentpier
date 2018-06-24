@@ -569,8 +569,8 @@ CREATE TABLE IF NOT EXISTS `bb_cron` (
   `run_day`         ENUM ('1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '20', '21', '22', '23', '24', '25', '26', '27', '28') DEFAULT NULL,
   `run_time`        TIME                                                                                                                                                                 DEFAULT '04:00:00',
   `run_order`       TINYINT(4) UNSIGNED                                       NOT NULL                                                                                                   DEFAULT '0',
-  `last_run`        DATETIME                                                  NOT NULL                                                                                                   DEFAULT '0000-00-00 00:00:00',
-  `next_run`        DATETIME                                                  NOT NULL                                                                                                   DEFAULT '0000-00-00 00:00:00',
+  `last_run`        DATETIME                                                  NOT NULL                                                                                                   DEFAULT '1900-01-01 00:00:00',
+  `next_run`        DATETIME                                                  NOT NULL                                                                                                   DEFAULT '1900-01-01 00:00:00',
   `run_interval`    TIME                                                                                                                                                                 DEFAULT NULL DEFAULT '0',
   `log_enabled`     TINYINT(1)                                                NOT NULL                                                                                                   DEFAULT '0',
   `log_file`        CHAR(120)                                                 NOT NULL                                                                                                   DEFAULT '',
@@ -896,7 +896,7 @@ CREATE TABLE IF NOT EXISTS `bb_posts` (
   `post_edit_count` SMALLINT(5) UNSIGNED  NOT NULL DEFAULT '0',
   `post_attachment` TINYINT(1)            NOT NULL DEFAULT '0',
   `user_post`       TINYINT(1)            NOT NULL DEFAULT '1',
-  `mc_comment`      TEXT                  NOT NULL,
+  `mc_comment`      TEXT                  NOT NULL DEFAULT '',
   `mc_type`         TINYINT(1)            NOT NULL DEFAULT '0',
   `mc_user_id`      MEDIUMINT(8)          NOT NULL DEFAULT '0',
   PRIMARY KEY (`post_id`),
@@ -1297,7 +1297,7 @@ CREATE TABLE IF NOT EXISTS `bb_users` (
   `user_rank`           INT(11)               NOT NULL DEFAULT '0',
   `avatar_ext_id`       TINYINT(4)            NOT NULL DEFAULT '0',
   `user_gender`         TINYINT(1)            NOT NULL DEFAULT '0',
-  `user_birthday`       DATE                  NOT NULL DEFAULT '0000-00-00',
+  `user_birthday`       DATE                  NOT NULL DEFAULT '1900-01-01',
   `user_email`          VARCHAR(255)          NOT NULL DEFAULT '',
   `user_skype`          VARCHAR(32)           NOT NULL DEFAULT '',
   `user_twitter`        VARCHAR(15)           NOT NULL DEFAULT '',
@@ -1331,21 +1331,21 @@ INSERT INTO `bb_users` VALUES
                                                                                                            '0', '0',
                                                                                                            '0', '0',
                                                                                                            '0', '0',
-                                                                                                           '0000-00-00',
+                                                                                                           '1900-01-01',
     '', '', '', '', '', '', '', '', '', '', '', '', '0', '0.00', 'default');
 INSERT INTO `bb_users` VALUES
   ('-746', '0', 'bot', 'd41d8cd98f00b204e9800998ecf8427e', '0', '0', '0', UNIX_TIMESTAMP(), '0', '0', '0', '', 'ru', '0',
                                                                                                            '0', '0',
                                                                                                            '144', '0',
                                                                                                            '0', '0',
-                                                                                                           '0000-00-00',
+                                                                                                           '1900-01-01',
     'bot@torrentpier.com', '', '', '', '', '', '', '', '', '', '', '', '0', '0.00', 'default');
 INSERT INTO `bb_users` VALUES
   ('2', '1', 'admin', 'c3284d0f94606de1fd2af172aba15bf3', '0', '0', '0', UNIX_TIMESTAMP(), '0', '1', '1', '', 'ru', '0',
                                                                                                           '0', '0',
                                                                                                           '304', '1',
                                                                                                           '0', '0',
-                                                                                                          '0000-00-00',
+                                                                                                          '1900-01-01',
     'admin@torrentpier.com', '', '', '', '', '', '', '', '', '', '', '', '0', '0.00', 'default');
 
 -- ----------------------------
