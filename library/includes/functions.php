@@ -689,13 +689,13 @@ function request_var($var_name, $default, $multibyte = false, $cookie = false)
     if (!is_array($default)) {
         $type = gettype($default);
     } else {
-        list($key_type, $type) = $default;
+        [$key_type, $type] = $default;
         $type = gettype($type);
         $key_type = gettype($key_type);
         if ($type == 'array') {
             reset($default);
             $default = current($default);
-            list($sub_key_type, $sub_type) = $default;
+            [$sub_key_type, $sub_type] = $default;
             $sub_type = gettype($sub_type);
             $sub_type = ($sub_type == 'array') ? 'NULL' : $sub_type;
             $sub_key_type = gettype($sub_key_type);
