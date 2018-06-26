@@ -11,10 +11,10 @@ if (!defined('BB_ROOT')) {
     die(basename(__FILE__));
 }
 
-$datastore->enqueue(array(
+$datastore->enqueue([
     'smile_replacements',
     'cat_forums',
-));
+]);
 
 $page_cfg['include_bbcode_js'] = true;
 
@@ -23,7 +23,7 @@ $page_cfg['include_bbcode_js'] = true;
 //
 function get_bbcode_tpl()
 {
-    $bbcode_tpl = array();
+    $bbcode_tpl = [];
 
 // Quote
     $bbcode_tpl['quote_open'] = <<<HTML
@@ -120,7 +120,7 @@ function generate_smilies($mode)
 
     if ($sql = $data['smile']) {
         $num_smilies = 0;
-        $rowset = array();
+        $rowset = [];
         foreach ($sql as $row) {
             if (empty($rowset[$row['smile_url']])) {
                 $rowset[$row['smile_url']]['code'] = addslashes($row['code']);
@@ -130,7 +130,6 @@ function generate_smilies($mode)
         }
 
         if ($num_smilies) {
-            $smilies_count = ($mode == 'inline') ? min(19, $num_smilies) : $num_smilies;
             $smilies_split_row = ($mode == 'inline') ? $inline_columns - 1 : $window_columns - 1;
 
             $s_colspan = 0;
@@ -139,14 +138,14 @@ function generate_smilies($mode)
 
             foreach ($rowset as $smile_url => $data) {
                 if (!$col) {
-                    $template->assign_block_vars('smilies_row', array());
+                    $template->assign_block_vars('smilies_row', []);
                 }
 
-                $template->assign_block_vars('smilies_row.smilies_col', array(
+                $template->assign_block_vars('smilies_row.smilies_col', [
                     'SMILEY_CODE' => $data['code'],
                     'SMILEY_IMG' => $bb_cfg['smilies_path'] . '/' . $smile_url,
                     'SMILEY_DESC' => $data['emoticon'],
-                ));
+                ]);
 
                 $s_colspan = max($s_colspan, $col + 1);
 
@@ -162,17 +161,17 @@ function generate_smilies($mode)
             }
 
             if ($mode == 'inline' && $num_smilies > $inline_rows * $inline_columns) {
-                $template->assign_block_vars('switch_smilies_extra', array());
+                $template->assign_block_vars('switch_smilies_extra', []);
 
-                $template->assign_vars(array(
+                $template->assign_vars([
                     'U_MORE_SMILIES' => POSTING_URL . "?mode=smilies",
-                ));
+                ]);
             }
 
-            $template->assign_vars(array(
+            $template->assign_vars([
                 'PAGE_TITLE' => $lang['EMOTICONS'],
                 'S_SMILIES_COLSPAN' => $s_colspan,
-            ));
+            ]);
         }
     }
 
@@ -345,9 +344,6 @@ function extract_search_words($text)
     // Filter out characters like ^, $, &, change "it's" to "its"
     $text = preg_replace('#[.,:;]#u', ' ', $text);
 
-    // short & long words
-    // $text = preg_replace('#(?<=^|\s)(\S{1,'.$min_word_len.'}|\S{'.$max_word_len.',}|\W*)(?=$|\s)#u', ' ', $text);
-
     // Trim 1+ spaces to one space and split this string into unique words
     $text = array_unique(explode(' ', str_compact($text)));
 
@@ -361,7 +357,6 @@ function extract_search_words($text)
     $text = $text_out;
 
     if (count($text) > $max_words_count) {
-        #		shuffle($text);
         $text = array_splice($text, 0, $max_words_count);
     }
 
@@ -387,7 +382,6 @@ function add_search_words($post_id, $post_message, $topic_title = '', $only_retu
 }
 
 /**
- * @deprecated bb_code
  * Dirty class removed from here since 2.2.0
  * To add new bbcodes see at src/Legacy/BBCode.php
  */
