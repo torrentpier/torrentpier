@@ -1,9 +1,7 @@
 ### TorrentPier ###
 .idea
 .php_cs.cache
-bower_components
 composer.phar
-composer.lock
 configs/local.php
 data/avatars
 data/torrent_files
@@ -14,13 +12,10 @@ internal_data/log
 internal_data/sitemap
 internal_data/triggers
 library/config.local.php
-node_modules
 vendor
-yarn.lock
 
 ### Archives ###
 *.log
-*.zip
 *.rar
 *.tar
 *.gz

@@ -1,26 +1,10 @@
 <?php
 /**
- * MIT License
+ * TorrentPier – Bull-powered BitTorrent tracker engine
  *
- * Copyright (c) 2005-2017 TorrentPier
- *
- * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to deal
- * in the Software without restriction, including without limitation the rights
- * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following conditions:
- *
- * The above copyright notice and this permission notice shall be included in all
- * copies or substantial portions of the Software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
- * SOFTWARE.
+ * @copyright Copyright (c) 2005-2018 TorrentPier (https://torrentpier.com)
+ * @link      https://github.com/torrentpier/torrentpier for the canonical source repository
+ * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
  */
 
 if (!empty($setmodules)) {
@@ -32,7 +16,7 @@ require __DIR__ . '/pagestart.php';
 
 // Check to see what mode we should operate in
 if (isset($_POST['mode']) || isset($_GET['mode'])) {
-    $mode = isset($_POST['mode']) ? $_POST['mode'] : $_GET['mode'];
+    $mode = $_POST['mode'] ?? $_GET['mode'];
     $mode = htmlspecialchars($mode);
 } else {
     $mode = '';
@@ -93,7 +77,7 @@ if (isset($_GET['import_pack']) || isset($_POST['import_pack'])) {
             bb_die('Could not read smiley pak file');
         }
 
-        for ($i = 0, $iMax = count($fcontents); $i < $iMax; $i++) {
+        foreach ($fcontents as $i => $iValue) {
             $smile_data = explode($delimeter, trim(addslashes($fcontents[$i])));
 
             for ($j = 2, $jMax = count($smile_data); $j < $jMax; $j++) {
@@ -255,8 +239,7 @@ if (isset($_GET['import_pack']) || isset($_POST['import_pack'])) {
             }
 
             // Convert < and > to proper htmlentities for parsing
-            $smile_code = str_replace('<', '&lt;', $smile_code);
-            $smile_code = str_replace('>', '&gt;', $smile_code);
+            $smile_code = str_replace(['<', '>'], ['&lt;', '&gt;'], $smile_code);
 
             // Proceed with updating the smiley table
             $sql = 'UPDATE ' . BB_SMILIES . "
@@ -271,10 +254,10 @@ if (isset($_GET['import_pack']) || isset($_POST['import_pack'])) {
             break;
 
         case 'savenew':
-            $smile_code = isset($_POST['smile_code']) ? $_POST['smile_code'] : $_GET['smile_code'];
-            $smile_url = isset($_POST['smile_url']) ? $_POST['smile_url'] : $_GET['smile_url'];
+            $smile_code = $_POST['smile_code'] ?? $_GET['smile_code'];
+            $smile_url = $_POST['smile_url'] ?? $_GET['smile_url'];
             $smile_url = bb_ltrim(basename($smile_url), "'");
-            $smile_emotion = isset($_POST['smile_emotion']) ? $_POST['smile_emotion'] : $_GET['smile_emotion'];
+            $smile_emotion = $_POST['smile_emotion'] ?? $_GET['smile_emotion'];
             $smile_code = trim($smile_code);
             $smile_url = trim($smile_url);
             $smile_emotion = trim($smile_emotion);
@@ -285,8 +268,7 @@ if (isset($_GET['import_pack']) || isset($_POST['import_pack'])) {
             }
 
             // Convert < and > to proper htmlentities for parsing
-            $smile_code = str_replace('<', '&lt;', $smile_code);
-            $smile_code = str_replace('>', '&gt;', $smile_code);
+            $smile_code = str_replace(['<', '>'], ['&lt;', '&gt;'], $smile_code);
 
             // Save the data to the smiley table
             $sql = 'INSERT INTO ' . BB_SMILIES . " (code, smile_url, emoticon)

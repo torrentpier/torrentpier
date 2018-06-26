@@ -1,26 +1,10 @@
 <?php
 /**
- * MIT License
+ * TorrentPier – Bull-powered BitTorrent tracker engine
  *
- * Copyright (c) 2005-2017 TorrentPier
- *
- * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to deal
- * in the Software without restriction, including without limitation the rights
- * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following conditions:
- *
- * The above copyright notice and this permission notice shall be included in all
- * copies or substantial portions of the Software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
- * SOFTWARE.
+ * @copyright Copyright (c) 2005-2018 TorrentPier (https://torrentpier.com)
+ * @link      https://github.com/torrentpier/torrentpier for the canonical source repository
+ * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
  */
 
 if (!defined('IN_AJAX')) {
@@ -41,18 +25,16 @@ $value = $this->request['value'] = (string)(isset($this->request['value'])) ? $t
 
 switch ($field) {
     case 'username':
-        require_once INC_DIR . '/functions_validate.php';
         $value = clean_username($value);
-        if ($err = validate_username($value)) {
+        if ($err = \TorrentPier\Legacy\Validate::username($value)) {
             $this->ajax_die(strip_tags($err));
         }
         $this->response['new_value'] = $this->request['value'];
         break;
 
     case 'user_email':
-        require_once INC_DIR . '/functions_validate.php';
         $value = htmlCHR($value);
-        if ($err = validate_email($value)) {
+        if ($err = \TorrentPier\Legacy\Validate::email($value)) {
             $this->ajax_die($err);
         }
         $this->response['new_value'] = $this->request['value'];
@@ -146,7 +128,7 @@ switch ($field) {
 
         foreach (array('KB' => 1, 'MB' => 2, 'GB' => 3, 'TB' => 4) as $s => $m) {
             if (strpos($this->request['value'], $s) !== false) {
-                $value *= pow(1024, $m);
+                $value *= (1024 ** $m);
                 break;
             }
         }
@@ -154,8 +136,7 @@ switch ($field) {
         $this->response['new_value'] = humn_size($value, null, null, ' ');
 
         if (!$btu = get_bt_userdata($user_id)) {
-            require INC_DIR . '/functions_torrent.php';
-            generate_passkey($user_id, true);
+            \TorrentPier\Legacy\Torrent::generate_passkey($user_id, true);
             $btu = get_bt_userdata($user_id);
         }
         $btu[$field] = $value;
@@ -163,7 +144,6 @@ switch ($field) {
         break;
 
     case 'user_points':
-        $value = htmlCHR($value);
         $value = (float)str_replace(',', '.', $this->request['value']);
         $value = sprintf('%.2f', $value);
         $this->response['new_value'] = $value;
@@ -176,6 +156,6 @@ switch ($field) {
 $value_sql = DB()->escape($value, true);
 DB()->query("UPDATE $table SET $field = $value_sql WHERE user_id = $user_id");
 
-cache_rm_user_sessions($user_id);
+\TorrentPier\Legacy\Sessions::cache_rm_user_sessions($user_id);
 
 $this->response['edit_id'] = $this->request['edit_id'];

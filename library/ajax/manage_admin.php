@@ -1,26 +1,10 @@
 <?php
 /**
- * MIT License
+ * TorrentPier – Bull-powered BitTorrent tracker engine
  *
- * Copyright (c) 2005-2017 TorrentPier
- *
- * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to deal
- * in the Software without restriction, including without limitation the rights
- * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following conditions:
- *
- * The above copyright notice and this permission notice shall be included in all
- * copies or substantial portions of the Software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
- * SOFTWARE.
+ * @copyright Copyright (c) 2005-2018 TorrentPier (https://torrentpier.com)
+ * @link      https://github.com/torrentpier/torrentpier for the canonical source repository
+ * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
  */
 
 if (!defined('IN_AJAX')) {
@@ -63,7 +47,7 @@ switch ($mode) {
         $dir = $template->cachedir;
         $res = @opendir($dir);
         while (($file = readdir($res)) !== false) {
-            if (substr($file, 0, $match_len) === $match) {
+            if (0 === strpos($file, $match)) {
                 @unlink($dir . $file);
             }
         }
@@ -96,9 +80,7 @@ switch ($mode) {
 
     case 'update_user_level':
 
-        require INC_DIR . '/functions_group.php';
-
-        update_user_level('all');
+        \TorrentPier\Legacy\Group::update_user_level('all');
 
         $this->response['update_user_level_html'] = '<span class="seed bold">' . $lang['USER_LEVELS_UPDATED'] . '</span>';
 
@@ -106,8 +88,8 @@ switch ($mode) {
 
     case 'sync_topics':
 
-        sync('topic', 'all');
-        sync_all_forums();
+        \TorrentPier\Legacy\Admin\Common::sync('topic', 'all');
+        \TorrentPier\Legacy\Admin\Common::sync_all_forums();
 
         $this->response['sync_topics_html'] = '<span class="seed bold">' . $lang['TOPICS_DATA_SYNCHRONIZED'] . '</span>';
 
@@ -115,7 +97,7 @@ switch ($mode) {
 
     case 'sync_user_posts':
 
-        sync('user_posts', 'all');
+        \TorrentPier\Legacy\Admin\Common::sync('user_posts', 'all');
 
         $this->response['sync_user_posts_html'] = '<span class="seed bold">' . $lang['USER_POSTS_COUNT_SYNCHRONIZED'] . '</span>';
 
@@ -123,7 +105,7 @@ switch ($mode) {
 
     case 'unlock_cron':
 
-        TorrentPier\Helpers\CronHelper::enableBoard();
+        \TorrentPier\Helpers\CronHelper::enableBoard();
 
         $this->response['unlock_cron_html'] = '<span class="seed bold">' . $lang['ADMIN_UNLOCKED'] . '</span>';
 

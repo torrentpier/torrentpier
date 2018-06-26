@@ -1,26 +1,10 @@
 <?php
 /**
- * MIT License
+ * TorrentPier – Bull-powered BitTorrent tracker engine
  *
- * Copyright (c) 2005-2017 TorrentPier
- *
- * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to deal
- * in the Software without restriction, including without limitation the rights
- * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following conditions:
- *
- * The above copyright notice and this permission notice shall be included in all
- * copies or substantial portions of the Software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
- * SOFTWARE.
+ * @copyright Copyright (c) 2005-2018 TorrentPier (https://torrentpier.com)
+ * @link      https://github.com/torrentpier/torrentpier for the canonical source repository
+ * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
  */
 
 namespace TorrentPier\Legacy;
@@ -87,7 +71,7 @@ class Ajax
         // Check that requested action is valid
         $action = $this->action;
 
-        if (!$action || !is_string($action)) {
+        if (!$action || !\is_string($action)) {
             $this->ajax_die('no action specified');
         } elseif (!$action_params =& $this->valid_actions[$action]) {
             $this->ajax_die('invalid action: ' . $action);
@@ -172,7 +156,7 @@ class Ajax
         $this->response['action'] = $this->action;
 
         if (DBG_USER && SQL_DEBUG && !empty($_COOKIE['sql_log'])) {
-            $this->response['sql_log'] = get_sql_log();
+            $this->response['sql_log'] = Dev::get_sql_log();
         }
 
         // sending output will be handled by $this->ob_handler()
@@ -195,8 +179,8 @@ class Ajax
 
         $response_js = json_encode($this->response);
 
-        if (GZIP_OUTPUT_ALLOWED && !defined('NO_GZIP')) {
-            if (UA_GZIP_SUPPORTED && strlen($response_js) > 2000) {
+        if (GZIP_OUTPUT_ALLOWED && !\defined('NO_GZIP')) {
+            if (UA_GZIP_SUPPORTED && \strlen($response_js) > 2000) {
                 header('Content-Encoding: gzip');
                 $response_js = gzencode($response_js, 1);
             }
@@ -255,7 +239,7 @@ class Ajax
     /**
      * Verify mod rights
      *
-     * @param integer $forum_id
+     * @param int $forum_id
      */
     public function verify_mod_rights($forum_id)
     {

@@ -1,26 +1,10 @@
 <?php
 /**
- * MIT License
+ * TorrentPier – Bull-powered BitTorrent tracker engine
  *
- * Copyright (c) 2005-2017 TorrentPier
- *
- * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to deal
- * in the Software without restriction, including without limitation the rights
- * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following conditions:
- *
- * The above copyright notice and this permission notice shall be included in all
- * copies or substantial portions of the Software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
- * SOFTWARE.
+ * @copyright Copyright (c) 2005-2018 TorrentPier (https://torrentpier.com)
+ * @link      https://github.com/torrentpier/torrentpier for the canonical source repository
+ * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
  */
 
 define('BB_SCRIPT', 'dl');
@@ -60,8 +44,7 @@ function send_file_to_browser($attachment, $upload_dir)
 
     //bt
     if (!(isset($_GET['original']) && !IS_USER)) {
-        include INC_DIR . '/functions_torrent.php';
-        send_torrent_with_passkey($filename);
+        \TorrentPier\Legacy\Torrent::send_torrent_with_passkey($filename);
     }
 
     // Now the tricky part... let's dance
@@ -145,7 +128,6 @@ for ($i = 0; $i < $num_auth_pages && $authorised == false; $i++) {
         $topic_id = $row['topic_id'];
         $forum_id = $row['forum_id'];
 
-        $is_auth = array();
         $is_auth = auth(AUTH_ALL, $forum_id, $userdata);
         set_die_append_msg($forum_id, $topic_id);
 
@@ -198,27 +180,27 @@ if ($download_mode == PHYSICAL_LINK) {
     $url = make_url($upload_dir . '/' . $attachment['physical_filename']);
     header('Location: ' . $url);
     exit;
-} else {
-    if (IS_GUEST && !bb_captcha('check')) {
-        global $template;
-
-        $redirect_url = isset($_POST['redirect_url']) ? $_POST['redirect_url'] : (isset($_SERVER['HTTP_REFERER']) ? $_SERVER['HTTP_REFERER'] : '/');
-        $message = '<form action="' . DOWNLOAD_URL . $attachment['attach_id'] . '" method="post">';
-        $message .= $lang['CAPTCHA'] . ':';
-        $message .= '<div  class="mrg_10" align="center">' . bb_captcha('get') . '</div>';
-        $message .= '<input type="hidden" name="redirect_url" value="' . $redirect_url . '" />';
-        $message .= '<input type="submit" class="bold" value="' . $lang['SUBMIT'] . '" /> &nbsp;';
-        $message .= '<input type="button" class="bold" value="' . $lang['GO_BACK'] . '" onclick="document.location.href = \'' . $redirect_url . '\';" />';
-        $message .= '</form>';
-
-        $template->assign_vars(array(
-            'ERROR_MESSAGE' => $message,
-        ));
-
-        require(PAGE_HEADER);
-        require(PAGE_FOOTER);
-    }
-
-    send_file_to_browser($attachment, $upload_dir);
-    exit;
 }
+
+if (IS_GUEST && !bb_captcha('check')) {
+    global $template;
+
+    $redirect_url = $_POST['redirect_url'] ?? $_SERVER['HTTP_REFERER'] ?? '/';
+    $message = '<form action="' . DL_URL . $attachment['attach_id'] . '" method="post">';
+    $message .= $lang['CAPTCHA'] . ':';
+    $message .= '<div  class="mrg_10" align="center">' . bb_captcha('get') . '</div>';
+    $message .= '<input type="hidden" name="redirect_url" value="' . $redirect_url . '" />';
+    $message .= '<input type="submit" class="bold" value="' . $lang['SUBMIT'] . '" /> &nbsp;';
+    $message .= '<input type="button" class="bold" value="' . $lang['GO_BACK'] . '" onclick="document.location.href = \'' . $redirect_url . '\';" />';
+    $message .= '</form>';
+
+    $template->assign_vars(array(
+        'ERROR_MESSAGE' => $message,
+    ));
+
+    require(PAGE_HEADER);
+    require(PAGE_FOOTER);
+}
+
+send_file_to_browser($attachment, $upload_dir);
+exit;

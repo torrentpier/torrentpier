@@ -1,26 +1,10 @@
 <?php
 /**
- * MIT License
+ * TorrentPier – Bull-powered BitTorrent tracker engine
  *
- * Copyright (c) 2005-2017 TorrentPier
- *
- * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to deal
- * in the Software without restriction, including without limitation the rights
- * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following conditions:
- *
- * The above copyright notice and this permission notice shall be included in all
- * copies or substantial portions of the Software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
- * SOFTWARE.
+ * @copyright Copyright (c) 2005-2018 TorrentPier (https://torrentpier.com)
+ * @link      https://github.com/torrentpier/torrentpier for the canonical source repository
+ * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
  */
 
 define('BB_SCRIPT', 'topic');
@@ -198,7 +182,7 @@ $moderation = (!empty($_REQUEST['mod']) && $is_auth['auth_mod']);
 $mod_redirect_url = '';
 
 if ($is_auth['auth_mod']) {
-    $redirect = isset($_POST['redirect']) ? $_POST['redirect'] : @$_SERVER['REQUEST_URI'];
+    $redirect = $_POST['redirect'] ?? @$_SERVER['REQUEST_URI'];
     $redirect = url_arg($redirect, 'mod', 1, '&');
     $mod_redirect_url = LOGIN_URL . "?redirect=$redirect&admin=1";
 
@@ -587,7 +571,8 @@ $this_date = bb_date(TIMENOW, 'md', false);
 for ($i = 0; $i < $total_posts; $i++) {
     $poster_id = $postrow[$i]['user_id'];
     $poster = ($poster_id == GUEST_UID) ? $lang['GUEST'] : $postrow[$i]['username'];
-    $poster_birthday = ($poster_id != GUEST_UID && $postrow[$i]['user_birthday'] != '0000-00-00') ? date('md', strtotime($postrow[$i]['user_birthday'])) : '';
+    $poster_birthday = ($poster_id != GUEST_UID && !empty($postrow[$i]['user_birthday']) && $postrow[$i]['user_birthday'] != '1900-01-01')
+        ? date('md', strtotime($postrow[$i]['user_birthday'])) : '';
     $post_date = bb_date($postrow[$i]['post_time'], $bb_cfg['post_date_format']);
     $max_post_time = max($max_post_time, $postrow[$i]['post_time']);
     $poster_posts = ($poster_id != GUEST_UID) ? $postrow[$i]['user_posts'] : '';
@@ -813,7 +798,7 @@ foreach ($is_auth as $name => $is) {
 }
 
 $template->assign_vars(array(
-    'PG_ROW_CLASS' => isset($pg_row_class) ? $pg_row_class : 'row1',
+    'PG_ROW_CLASS' => $pg_row_class ?? 'row1',
 ));
 
 if (IS_ADMIN) {

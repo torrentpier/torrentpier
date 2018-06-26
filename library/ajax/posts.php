@@ -1,26 +1,10 @@
 <?php
 /**
- * MIT License
+ * TorrentPier – Bull-powered BitTorrent tracker engine
  *
- * Copyright (c) 2005-2017 TorrentPier
- *
- * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to deal
- * in the Software without restriction, including without limitation the rights
- * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following conditions:
- *
- * The above copyright notice and this permission notice shall be included in all
- * copies or substantial portions of the Software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
- * SOFTWARE.
+ * @copyright Copyright (c) 2005-2018 TorrentPier (https://torrentpier.com)
+ * @link      https://github.com/torrentpier/torrentpier for the canonical source repository
+ * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
  */
 
 if (!defined('IN_AJAX')) {
@@ -76,7 +60,7 @@ switch ($this->request['type']) {
             if (empty($this->request['confirmed'])) {
                 $this->prompt_for_confirm($lang['CONFIRM_DELETE']);
             }
-            post_delete($post_id);
+            \TorrentPier\Legacy\Admin\Common::post_delete($post_id);
 
             // Update atom feed
             update_atom('topic', (int)$this->request['topic_id']);
@@ -287,7 +271,7 @@ switch ($this->request['type']) {
         $post_id = DB()->sql_nextid();
         DB()->sql_query("INSERT INTO " . BB_POSTS_TEXT . " (post_id, post_text) VALUES ($post_id, '" . DB()->escape($message) . "')");
 
-        update_post_stats('reply', $post, $post['forum_id'], $topic_id, $post_id, $userdata['user_id']);
+        \TorrentPier\Legacy\Post::update_post_stats('reply', $post, $post['forum_id'], $topic_id, $post_id, $userdata['user_id']);
 
         $s_message = str_replace('\n', "\n", $message);
         $s_topic_title = str_replace('\n', "\n", $post['topic_title']);
@@ -299,7 +283,7 @@ switch ($this->request['type']) {
 
         if ($bb_cfg['topic_notify_enabled']) {
             $notify = !empty($this->request['notify']);
-            user_notification('reply', $post, $post['topic_title'], $post['forum_id'], $topic_id, $notify);
+            \TorrentPier\Legacy\Post::user_notification('reply', $post, $post['topic_title'], $post['forum_id'], $topic_id, $notify);
         }
 
         // Update atom feed

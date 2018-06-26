@@ -1,26 +1,10 @@
 <?php
 /**
- * MIT License
+ * TorrentPier – Bull-powered BitTorrent tracker engine
  *
- * Copyright (c) 2005-2017 TorrentPier
- *
- * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to deal
- * in the Software without restriction, including without limitation the rights
- * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following conditions:
- *
- * The above copyright notice and this permission notice shall be included in all
- * copies or substantial portions of the Software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
- * SOFTWARE.
+ * @copyright Copyright (c) 2005-2018 TorrentPier (https://torrentpier.com)
+ * @link      https://github.com/torrentpier/torrentpier for the canonical source repository
+ * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
  */
 
 if (!empty($setmodules)) {
@@ -31,8 +15,6 @@ if (!empty($setmodules)) {
 require __DIR__ . '/pagestart.php';
 
 $max_forum_name_length = 50;
-
-require INC_DIR . '/functions_group.php';
 
 $yes_sign = '&radic;';
 $no_sign = 'x';
@@ -79,7 +61,7 @@ if ($submit && $mode == 'user') {
     if ($row = DB()->fetch_row($sql)) {
         $group_id = $row['group_id'];
     } else {
-        $group_id = create_user_group($user_id);
+        $group_id = \TorrentPier\Legacy\Group::create_user_group($user_id);
     }
 
     if (!$group_id || !$user_id || null === $this_user_level) {
@@ -96,7 +78,7 @@ if ($submit && $mode == 'user') {
             DB()->query('UPDATE ' . BB_USERS . ' SET user_level = ' . ADMIN . " WHERE user_id = $user_id");
 
             // Delete any entries in auth_access, they are not required if user is becoming an admin
-            delete_permissions($group_id, $user_id);
+            \TorrentPier\Legacy\Group::delete_permissions($group_id, $user_id);
 
             $message = $lang['AUTH_UPDATED'] . '<br /><br />';
             $message .= sprintf($lang['CLICK_RETURN_USERAUTH'], '<a href="admin_ug_auth.php?mode=' . $mode . '">', '</a>') . '<br /><br />';
@@ -112,7 +94,7 @@ if ($submit && $mode == 'user') {
             // Update users level, reset to USER
             DB()->query('UPDATE ' . BB_USERS . ' SET user_level = ' . USER . " WHERE user_id = $user_id");
 
-            delete_permissions($group_id, $user_id);
+            \TorrentPier\Legacy\Group::delete_permissions($group_id, $user_id);
 
             $message = $lang['AUTH_UPDATED'] . '<br /><br />';
             $message .= sprintf($lang['CLICK_RETURN_USERAUTH'], '<a href="admin_ug_auth.php?mode=' . $mode . '">', '</a>') . '<br /><br />';
@@ -137,10 +119,9 @@ if ($submit && $mode == 'user') {
         }
     }
 
-    delete_permissions($group_id, null, $cat_id);
-    store_permissions($group_id, $auth);
-
-    update_user_level($user_id);
+    \TorrentPier\Legacy\Group::delete_permissions($group_id, null, $cat_id);
+    \TorrentPier\Legacy\Group::store_permissions($group_id, $auth);
+    \TorrentPier\Legacy\Group::update_user_level($user_id);
 
     $l_auth_return = ($mode == 'user') ? $lang['CLICK_RETURN_USERAUTH'] : $lang['CLICK_RETURN_GROUPAUTH'];
     $message = $lang['AUTH_UPDATED'] . '<br /><br />';
@@ -153,7 +134,7 @@ if ($submit && $mode == 'user') {
 // Submit new GROUP permissions
 //
 elseif ($submit && $mode == 'group' && is_array($_POST['auth'])) {
-    if (!$group_data = get_group_data($group_id)) {
+    if (!$group_data = \TorrentPier\Legacy\Group::get_group_data($group_id)) {
         bb_die($lang['GROUP_NOT_EXIST']);
     }
 
@@ -166,10 +147,9 @@ elseif ($submit && $mode == 'group' && is_array($_POST['auth'])) {
         }
     }
 
-    delete_permissions($group_id, null, $cat_id);
-    store_permissions($group_id, $auth);
-
-    update_user_level('all');
+    \TorrentPier\Legacy\Group::delete_permissions($group_id, null, $cat_id);
+    \TorrentPier\Legacy\Group::store_permissions($group_id, $auth);
+    \TorrentPier\Legacy\Group::update_user_level('all');
 
     $l_auth_return = $lang['CLICK_RETURN_GROUPAUTH'];
     $message = $lang['AUTH_UPDATED'] . '<br /><br />';
@@ -310,7 +290,7 @@ if ($mode == 'user' && (!empty($_POST['username']) || $user_id)) {
 } elseif ($mode == 'group' && $group_id) {
     $page_cfg['quirks_mode'] = true;
 
-    if (!$group_data = get_group_data($group_id)) {
+    if (!$group_data = \TorrentPier\Legacy\Group::get_group_data($group_id)) {
         bb_die($lang['GROUP_NOT_EXIST']);
     }
 

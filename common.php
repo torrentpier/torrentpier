@@ -1,26 +1,10 @@
 <?php
 /**
- * MIT License
+ * TorrentPier – Bull-powered BitTorrent tracker engine
  *
- * Copyright (c) 2005-2017 TorrentPier
- *
- * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to deal
- * in the Software without restriction, including without limitation the rights
- * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following conditions:
- *
- * The above copyright notice and this permission notice shall be included in all
- * copies or substantial portions of the Software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
- * SOFTWARE.
+ * @copyright Copyright (c) 2005-2018 TorrentPier (https://torrentpier.com)
+ * @link      https://github.com/torrentpier/torrentpier for the canonical source repository
+ * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
  */
 
 if (isset($_REQUEST['GLOBALS'])) {
@@ -209,14 +193,6 @@ switch ($bb_cfg['datastore_type']) {
         $datastore = new TorrentPier\Legacy\Datastore\Redis($bb_cfg['cache']['redis'], $bb_cfg['cache']['prefix']);
         break;
 
-    case 'apc':
-        $datastore = new TorrentPier\Legacy\Datastore\Apc($bb_cfg['cache']['prefix']);
-        break;
-
-    case 'xcache':
-        $datastore = new TorrentPier\Legacy\Datastore\Xcache($bb_cfg['cache']['prefix']);
-        break;
-
     case 'filecache':
     default:
         $datastore = new TorrentPier\Legacy\Datastore\File($bb_cfg['cache']['db_dir'] . 'datastore/', $bb_cfg['cache']['prefix']);
@@ -264,7 +240,7 @@ function file_write($str, $file, $max_size = LOG_MAX_SIZE, $lock = true, $replac
         $old_name = $file;
         $ext = '';
         if (preg_match('#^(.+)(\.[^\\\/]+)$#', $file, $matches)) {
-            list($old_name, $ext) = $matches;
+            [$old_name, $ext] = $matches;
         }
         $new_name = $old_name . '_[old]_' . date('Y-m-d_H-i-s_') . getmypid() . $ext;
         clearstatcache();
@@ -359,6 +335,10 @@ function hexhex($value)
     return dechex(hexdec($value));
 }
 
+/**
+ * @param string $str
+ * @return string
+ */
 function str_compact($str)
 {
     return preg_replace('#\s+#u', ' ', trim($str));
@@ -406,10 +386,10 @@ function sys($param)
             return function_exists('sys_getloadavg') ? implode(' ', sys_getloadavg()) : 0;
             break;
         case 'mem':
-            return function_exists('memory_get_usage') ? memory_get_usage() : 0;
+            return memory_get_usage();
             break;
         case 'mem_peak':
-            return function_exists('memory_get_peak_usage') ? memory_get_peak_usage() : 0;
+            return memory_get_peak_usage();
             break;
         default:
             trigger_error("invalid param: $param", E_USER_ERROR);
@@ -473,7 +453,7 @@ function log_request($file = '', $prepend_str = false, $add_post = true)
 if (!defined('IN_TRACKER')) {
     require INC_DIR . '/init_bb.php';
 } else {
-    define('DUMMY_PEER', pack('Nn', ip2long($_SERVER['REMOTE_ADDR']), !empty($_GET['port']) ? (int)$_GET['port'] : mt_rand(1000, 65000)));
+    define('DUMMY_PEER', pack('Nn', ip2long($_SERVER['REMOTE_ADDR']), !empty($_GET['port']) ? (int)$_GET['port'] : random_int(1000, 65000)));
 
     function dummy_exit($interval = 1800)
     {
@@ -492,7 +472,7 @@ if (!defined('IN_TRACKER')) {
     if (!defined('IN_ADMIN')) {
         // Exit if tracker is disabled via ON/OFF trigger
         if (file_exists(BB_DISABLED)) {
-            dummy_exit(mt_rand(60, 2400));
+            dummy_exit(random_int(60, 2400));
         }
     }
 }

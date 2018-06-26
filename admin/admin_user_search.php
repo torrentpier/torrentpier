@@ -1,26 +1,10 @@
 <?php
 /**
- * MIT License
+ * TorrentPier – Bull-powered BitTorrent tracker engine
  *
- * Copyright (c) 2005-2017 TorrentPier
- *
- * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to deal
- * in the Software without restriction, including without limitation the rights
- * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following conditions:
- *
- * The above copyright notice and this permission notice shall be included in all
- * copies or substantial portions of the Software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
- * SOFTWARE.
+ * @copyright Copyright (c) 2005-2018 TorrentPier (https://torrentpier.com)
+ * @link      https://github.com/torrentpier/torrentpier for the canonical source repository
+ * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
  */
 
 if (!empty($setmodules)) {
@@ -30,8 +14,6 @@ if (!empty($setmodules)) {
 require __DIR__ . '/pagestart.php';
 
 array_deep($_POST, 'trim');
-
-require INC_DIR . '/functions_selects.php';
 
 $total_sql = '';
 
@@ -69,8 +51,8 @@ if (!isset($_REQUEST['dosearch'])) {
         }
     }
 
-    $language_list = language_select('', 'language_type');
-    $timezone_list = tz_select('', 'timezone_type');
+    $language_list = \TorrentPier\Legacy\Select::language('', 'language_type');
+    $timezone_list = \TorrentPier\Legacy\Select::timezone('', 'timezone_type');
 
     $sql = 'SELECT f.forum_id, f.forum_name, f.forum_parent, c.cat_id, c.cat_title
 				FROM ( ' . BB_FORUMS . ' AS f INNER JOIN ' . BB_CATEGORIES . ' AS c ON c.cat_id = f.cat_id )
@@ -269,7 +251,7 @@ if (!isset($_REQUEST['dosearch'])) {
 
             $text = sprintf($lang['SEARCH_FOR_USERNAME'], strip_tags(htmlspecialchars(stripslashes($username))));
 
-            $username = preg_replace('/\*/', '%', trim(strip_tags(strtolower($username))));
+            $username = str_replace("\*", '%', trim(strip_tags(strtolower($username))));
 
             if (false !== strpos($username, '%')) {
                 $op = 'LIKE';
@@ -290,7 +272,7 @@ if (!isset($_REQUEST['dosearch'])) {
 
             $text = sprintf($lang['SEARCH_FOR_EMAIL'], strip_tags(htmlspecialchars(stripslashes($email))));
 
-            $email = preg_replace('/\*/', '%', trim(strip_tags(strtolower($email))));
+            $email = str_replace("\*", '%', trim(strip_tags(strtolower($email))));
 
             if (false !== strpos($email, '%')) {
                 $op = 'LIKE';
@@ -331,7 +313,7 @@ if (!isset($_REQUEST['dosearch'])) {
 
             $where_sql = '';
             $where_sql .= ($ip_in_sql != '') ? "poster_ip IN ($ip_in_sql)" : '';
-            $where_sql .= ($ip_like_sql != '') ? ($where_sql != '') ? " OR $ip_like_sql" : "$ip_like_sql" : '';
+            $where_sql .= ($ip_like_sql != '') ? ($where_sql != '') ? " OR $ip_like_sql" : (string)$ip_like_sql : '';
 
             if (!$where_sql) {
                 bb_die('invalid request');
@@ -358,7 +340,7 @@ if (!isset($_REQUEST['dosearch'])) {
             }
             $where_sql = '';
             $where_sql .= ($ip_in_sql != '') ? "user_last_ip IN ($ip_in_sql)" : '';
-            $where_sql .= ($ip_like_sql_flylast != '') ? ($where_sql != '') ? " OR $ip_like_sql_flylast" : "$ip_like_sql_flylast" : '';
+            $where_sql .= ($ip_like_sql_flylast != '') ? ($where_sql != '') ? " OR $ip_like_sql_flylast" : (string)$ip_like_sql_flylast : '';
             $sql = 'SELECT user_id FROM ' . BB_USERS . ' WHERE user_id <> ' . GUEST_UID . " AND ($where_sql) GROUP BY user_id";
             if (!$result = DB()->sql_query($sql)) {
                 bb_die('Could not count users #2');
@@ -375,7 +357,7 @@ if (!isset($_REQUEST['dosearch'])) {
             }
             $where_sql = '';
             $where_sql .= ($ip_in_sql != '') ? "user_reg_ip IN ($ip_in_sql)" : '';
-            $where_sql .= ($ip_like_sql_flyreg != '') ? ($where_sql != '') ? " OR $ip_like_sql_flyreg" : "$ip_like_sql_flyreg" : '';
+            $where_sql .= ($ip_like_sql_flyreg != '') ? ($where_sql != '') ? " OR $ip_like_sql_flyreg" : (string)$ip_like_sql_flyreg : '';
             $sql = 'SELECT user_id FROM ' . BB_USERS . ' WHERE user_id <> ' . GUEST_UID . " AND ($where_sql) GROUP BY user_id";
             if (!$result = DB()->sql_query($sql)) {
                 bb_die('Could not count users #3');
@@ -585,7 +567,7 @@ if (!isset($_REQUEST['dosearch'])) {
 
             $text = strip_tags(htmlspecialchars(stripslashes($userfield_value)));
 
-            $userfield_value = preg_replace('/\*/', '%', trim(strip_tags(strtolower($userfield_value))));
+            $userfield_value = str_replace("\*", '%', trim(strip_tags(strtolower($userfield_value))));
 
             if (false !== strpos($userfield_value, '%')) {
                 $op = 'LIKE';

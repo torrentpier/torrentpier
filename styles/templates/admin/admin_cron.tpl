@@ -121,7 +121,7 @@ tr.hl-tr:hover td { background-color: #CFC !important; }
 <!-- ENDIF / TPL_CRON_LIST -->
 
 <!-- IF TPL_CRON_EDIT -->
-<h1>{L_CRON_EDIT_HEAD}</h1>
+<h1>{L_CRON_EDIT_HEAD_EDIT}</h1>
 
 <a href="admin_cron.php?mode=list">{L_CRON_LIST}</a>
 <br /><br />
@@ -133,7 +133,7 @@ tr.hl-tr:hover td { background-color: #CFC !important; }
 <col class="row1" width="60%">
 <col class="row2">
 <tr>
-	<th colspan="2">{L_CRON_EDIT_HEAD}</th>
+	<th colspan="2">{L_CRON_EDIT_HEAD_EDIT}</th>
 </tr>
 <tr>
 	<td><h4>{L_CRON_ID}</h4></td>

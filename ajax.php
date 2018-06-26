@@ -1,26 +1,10 @@
 <?php
 /**
- * MIT License
+ * TorrentPier – Bull-powered BitTorrent tracker engine
  *
- * Copyright (c) 2005-2017 TorrentPier
- *
- * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to deal
- * in the Software without restriction, including without limitation the rights
- * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following conditions:
- *
- * The above copyright notice and this permission notice shall be included in all
- * copies or substantial portions of the Software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
- * SOFTWARE.
+ * @copyright Copyright (c) 2005-2018 TorrentPier (https://torrentpier.com)
+ * @link      https://github.com/torrentpier/torrentpier for the canonical source repository
+ * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
  */
 
 define('BB_SCRIPT', 'ajax');
@@ -47,14 +31,9 @@ if ($ajax->action != 'manage_admin') {
 // Load actions required modules
 switch ($ajax->action) {
     case 'view_post':
-        require INC_DIR . '/bbcode.php';
-        break;
-
     case 'posts':
     case 'post_mod_comment':
         require INC_DIR . '/bbcode.php';
-        require INC_DIR . '/functions_post.php';
-        require INC_DIR . '/functions_admin.php';
         break;
 
     case 'view_torrent':
@@ -63,21 +42,6 @@ switch ($ajax->action) {
     case 'change_torrent':
     case 'gen_passkey':
         require ATTACH_DIR . '/attachment_mod.php';
-        require INC_DIR . '/functions_torrent.php';
-        break;
-
-    case 'user_register':
-        require INC_DIR . '/functions_validate.php';
-        break;
-
-    case 'manage_user':
-    case 'manage_admin':
-        require INC_DIR . '/functions_admin.php';
-        break;
-
-    case 'group_membership':
-    case 'manage_group':
-        require INC_DIR . '/functions_group.php';
         break;
 }
 

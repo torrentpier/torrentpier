@@ -1,26 +1,10 @@
 <?php
 /**
- * MIT License
+ * TorrentPier – Bull-powered BitTorrent tracker engine
  *
- * Copyright (c) 2005-2017 TorrentPier
- *
- * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to deal
- * in the Software without restriction, including without limitation the rights
- * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following conditions:
- *
- * The above copyright notice and this permission notice shall be included in all
- * copies or substantial portions of the Software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
- * SOFTWARE.
+ * @copyright Copyright (c) 2005-2018 TorrentPier (https://torrentpier.com)
+ * @link      https://github.com/torrentpier/torrentpier for the canonical source repository
+ * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
  */
 
 if (!defined('BB_ROOT')) {
@@ -43,8 +27,7 @@ if (isset($_POST['bonus_id'])) {
     $btu = get_bt_userdata($user_id);
 
     if (empty($btu)) {
-        require INC_DIR . '/functions_torrent.php';
-        generate_passkey($user_id, true);
+        \TorrentPier\Legacy\Torrent::generate_passkey($user_id, true);
         $btu = get_bt_userdata($user_id);
     }
 
@@ -68,7 +51,7 @@ if (isset($_POST['bonus_id'])) {
 			AND u.user_id   = bu.user_id
 	");
 
-    cache_rm_user_sessions($user_id);
+    \TorrentPier\Legacy\Sessions::cache_rm_user_sessions($user_id);
     meta_refresh(BONUS_URL, 5);
 
     $message = sprintf($lang['BONUS_SUCCES'], humn_size($upload_row[$id] * 1024 * 1024 * 1024));

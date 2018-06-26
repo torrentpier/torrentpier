@@ -1,26 +1,10 @@
 <?php
 /**
- * MIT License
+ * TorrentPier – Bull-powered BitTorrent tracker engine
  *
- * Copyright (c) 2005-2017 TorrentPier
- *
- * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to deal
- * in the Software without restriction, including without limitation the rights
- * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following conditions:
- *
- * The above copyright notice and this permission notice shall be included in all
- * copies or substantial portions of the Software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
- * SOFTWARE.
+ * @copyright Copyright (c) 2005-2018 TorrentPier (https://torrentpier.com)
+ * @link      https://github.com/torrentpier/torrentpier for the canonical source repository
+ * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
  */
 
 if (!empty($setmodules)) {
@@ -30,11 +14,11 @@ if (!empty($setmodules)) {
     return;
 }
 
-$mode = isset($_GET['mode']) ? $_GET['mode'] : '';
+$mode = $_GET['mode'] ?? '';
 $job_id = isset($_GET['id']) ? (int)$_GET['id'] : '';
 $submit = isset($_POST['submit']);
 $jobs = isset($_POST['select']) ? implode(',', $_POST['select']) : '';
-$cron_action = isset($_POST['cron_action']) ? $_POST['cron_action'] : '';
+$cron_action = $_POST['cron_action'] ?? '';
 
 if ($mode == 'run' && !$job_id) {
     define('BB_ROOT', './../');
@@ -49,9 +33,6 @@ if (!IS_SUPER_ADMIN) {
     bb_die($lang['NOT_ADMIN']);
 }
 
-require INC_DIR . '/functions_admin_torrent.php';
-require INC_DIR . '/functions_admin_cron.php';
-
 $sql = DB()->fetch_rowset('SELECT * FROM ' . BB_CONFIG . " WHERE config_name = 'cron_enabled' OR config_name = 'cron_check_interval'");
 
 foreach ($sql as $row) {
@@ -59,7 +40,7 @@ foreach ($sql as $row) {
     $config_value = $row['config_value'];
     $default_config[$config_name] = $config_value;
 
-    $new[$config_name] = isset($_POST[$config_name]) ? $_POST[$config_name] : $default_config[$config_name];
+    $new[$config_name] = $_POST[$config_name] ?? $default_config[$config_name];
 
     if (isset($_POST['submit']) && $row['config_value'] != $new[$config_name]) {
         bb_update_config(array($config_name => $new[$config_name]));
@@ -113,7 +94,7 @@ switch ($mode) {
         break;
 
     case 'run':
-        run_jobs($job_id);
+        \TorrentPier\Legacy\Admin\Cron::run_jobs($job_id);
         redirect('admin/' . basename(__FILE__) . '?mode=list');
         break;
 
@@ -184,8 +165,8 @@ switch ($mode) {
             'CRON_SCRIPT' => '',
             'RUN_TIME' => '',
             'RUN_ORDER' => 255,
-            'LAST_RUN' => '0000-00-00 00:00:00',
-            'NEXT_RUN' => '0000-00-00 00:00:00',
+            'LAST_RUN' => '1900-01-01 00:00:00',
+            'NEXT_RUN' => '1900-01-01 00:00:00',
             'RUN_INTERVAL' => '',
             'LOG_ENABLED' => 0,
             'LOG_FILE' => '',
@@ -196,7 +177,7 @@ switch ($mode) {
         break;
 
     case 'delete':
-        delete_jobs($job_id);
+        \TorrentPier\Legacy\Admin\Cron::delete_jobs($job_id);
         bb_die($lang['JOB_REMOVED'] . '<br /><br />' . sprintf($lang['CLICK_RETURN_JOBS'], '<a href="admin_cron.php?mode=list">', '</a>') . '<br /><br />' . sprintf($lang['CLICK_RETURN_ADMIN_INDEX'], '<a href="index.php?pane=right">', '</a>'));
         break;
 }
@@ -204,25 +185,25 @@ switch ($mode) {
 if ($submit) {
     if ($_POST['mode'] == 'list') {
         if ($cron_action == 'run' && $jobs) {
-            run_jobs($jobs);
+            \TorrentPier\Legacy\Admin\Cron::run_jobs($jobs);
         } elseif ($cron_action == 'delete' && $jobs) {
-            delete_jobs($jobs);
+            \TorrentPier\Legacy\Admin\Cron::delete_jobs($jobs);
         } elseif (($cron_action == 'disable' || $cron_action == 'enable') && $jobs) {
-            toggle_active($jobs, $cron_action);
+            \TorrentPier\Legacy\Admin\Cron::toggle_active($jobs, $cron_action);
         }
         redirect('admin/' . basename(__FILE__) . '?mode=list');
-    } elseif (validate_cron_post($_POST) == 1) {
+    } elseif (\TorrentPier\Legacy\Admin\Cron::validate_cron_post($_POST) == 1) {
         if ($_POST['mode'] == 'edit') {
-            update_cron_job($_POST);
+            \TorrentPier\Legacy\Admin\Cron::update_cron_job($_POST);
         } elseif ($_POST['mode'] == 'add') {
-            insert_cron_job($_POST);
+            \TorrentPier\Legacy\Admin\Cron::insert_cron_job($_POST);
         } else {
             bb_die('Mode error');
         }
 
         redirect('admin/' . basename(__FILE__) . '?mode=list');
     } else {
-        bb_die(validate_cron_post($_POST));
+        bb_die(\TorrentPier\Legacy\Admin\Cron::validate_cron_post($_POST));
     }
 }
 

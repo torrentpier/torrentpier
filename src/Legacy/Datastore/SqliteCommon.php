@@ -1,26 +1,10 @@
 <?php
 /**
- * MIT License
+ * TorrentPier – Bull-powered BitTorrent tracker engine
  *
- * Copyright (c) 2005-2017 TorrentPier
- *
- * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to deal
- * in the Software without restriction, including without limitation the rights
- * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following conditions:
- *
- * The above copyright notice and this permission notice shall be included in all
- * copies or substantial portions of the Software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
- * SOFTWARE.
+ * @copyright Copyright (c) 2005-2018 TorrentPier (https://torrentpier.com)
+ * @link      https://github.com/torrentpier/torrentpier for the canonical source repository
+ * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
  */
 
 namespace TorrentPier\Legacy\Datastore;
@@ -86,7 +70,7 @@ class SqliteCommon extends Common
         if ($type == 'none') {
             return;
         }
-        if (is_array($name)) {
+        if (\is_array($name)) {
             trigger_error('cannot shard: $name is array', E_USER_ERROR);
         }
 
@@ -144,7 +128,7 @@ class SqliteCommon extends Common
     public function fetch_row($query)
     {
         $result = $this->query($query);
-        return is_resource($result) ? $result->fetchArray(SQLITE3_ASSOC) : false;
+        return \is_resource($result) ? $result->fetchArray(SQLITE3_ASSOC) : false;
     }
 
     public function fetch_rowset($query)
@@ -159,7 +143,7 @@ class SqliteCommon extends Common
 
     public function changes()
     {
-        return is_resource($this->dbh) ? $this->dbh->changes() : 0;
+        return \is_resource($this->dbh) ? $this->dbh->changes() : 0;
     }
 
     public function escape($str)
@@ -169,7 +153,7 @@ class SqliteCommon extends Common
 
     public function get_error_msg()
     {
-        return 'SQLite error #' . ($err_code = $this->dbh->lastErrorCode()) . ': ' . $this->dbh->lastErrorMsg();
+        return 'SQLite error #' . $this->dbh->lastErrorCode() . ': ' . $this->dbh->lastErrorMsg();
     }
 
     public function rm($name = '')

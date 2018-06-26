@@ -1,33 +1,16 @@
 <?php
 /**
- * MIT License
+ * TorrentPier – Bull-powered BitTorrent tracker engine
  *
- * Copyright (c) 2005-2017 TorrentPier
- *
- * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to deal
- * in the Software without restriction, including without limitation the rights
- * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following conditions:
- *
- * The above copyright notice and this permission notice shall be included in all
- * copies or substantial portions of the Software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
- * SOFTWARE.
+ * @copyright Copyright (c) 2005-2018 TorrentPier (https://torrentpier.com)
+ * @link      https://github.com/torrentpier/torrentpier for the canonical source repository
+ * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
  */
 
 define('BB_SCRIPT', 'group');
 define('BB_ROOT', './');
 require __DIR__ . '/common.php';
 require INC_DIR . '/bbcode.php';
-require INC_DIR . '/functions_group.php';
 
 $page_cfg['use_tablesorter'] = true;
 
@@ -57,8 +40,6 @@ function generate_user_info(&$row, $date_format, $group_mod, &$from, &$posts, &$
     } else {
         $www = '';
     }
-
-    return;
 }
 
 $user->session_start(array('req_login' => true));
@@ -75,7 +56,7 @@ $group_info = array();
 $is_moderator = false;
 
 if ($group_id) {
-    if (!$group_info = get_group_data($group_id)) {
+    if (!$group_info = \TorrentPier\Legacy\Group::get_group_data($group_id)) {
         bb_die($lang['GROUP_NOT_EXIST']);
     }
     if (!$group_info['group_id'] || !$group_info['group_moderator'] || !$group_info['moderator_name']) {
@@ -209,7 +190,7 @@ if (!$group_id) {
         bb_die($lang['ALREADY_MEMBER_GROUP']);
     }
 
-    add_user_into_group($group_id, $userdata['user_id'], 1, TIMENOW);
+    \TorrentPier\Legacy\Group::add_user_into_group($group_id, $userdata['user_id'], 1, TIMENOW);
 
     if ($bb_cfg['group_send_email']) {
         /** @var TorrentPier\Legacy\Emailer() $emailer */
@@ -233,7 +214,7 @@ if (!$group_id) {
     set_die_append_msg(false, false, $group_id);
     bb_die($lang['GROUP_JOINED']);
 } elseif (!empty($_POST['unsub']) || !empty($_POST['unsubpending'])) {
-    delete_user_group($group_id, $userdata['user_id']);
+    \TorrentPier\Legacy\Group::delete_user_group($group_id, $userdata['user_id']);
 
     set_die_append_msg(false, false, $group_id);
     bb_die($lang['UNSUB_SUCCESS']);
@@ -251,7 +232,7 @@ if (!$group_id) {
                 bb_die($lang['COULD_NOT_ADD_USER']);
             }
 
-            add_user_into_group($group_id, $row['user_id']);
+            \TorrentPier\Legacy\Group::add_user_into_group($group_id, $row['user_id']);
 
             if ($bb_cfg['group_send_email']) {
                 /** @var TorrentPier\Legacy\Emailer() $emailer */
@@ -290,7 +271,7 @@ if (!$group_id) {
 							AND group_id = $group_id
 					");
 
-                    update_user_level($sql_in);
+                    \TorrentPier\Legacy\Group::update_user_level($sql_in);
                 } elseif (!empty($_POST['deny']) || !empty($_POST['remove'])) {
                     DB()->query("
 						DELETE FROM " . BB_USER_GROUP . "
@@ -299,7 +280,7 @@ if (!$group_id) {
 					");
 
                     if (!empty($_POST['remove'])) {
-                        update_user_level($sql_in);
+                        \TorrentPier\Legacy\Group::update_user_level($sql_in);
                     }
                 }
                 // Email users when they are approved

@@ -1,26 +1,10 @@
 <?php
 /**
- * MIT License
+ * TorrentPier – Bull-powered BitTorrent tracker engine
  *
- * Copyright (c) 2005-2017 TorrentPier
- *
- * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to deal
- * in the Software without restriction, including without limitation the rights
- * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following conditions:
- *
- * The above copyright notice and this permission notice shall be included in all
- * copies or substantial portions of the Software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
- * SOFTWARE.
+ * @copyright Copyright (c) 2005-2018 TorrentPier (https://torrentpier.com)
+ * @link      https://github.com/torrentpier/torrentpier for the canonical source repository
+ * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
  */
 
 define('BB_SCRIPT', 'search');
@@ -86,7 +70,7 @@ $tracking_forums = get_tracks('forum');
 if ($mode =& $_REQUEST['mode']) {
     // This handles the simple windowed user search functions called from various other scripts
     if ($mode == 'searchuser') {
-        $username = isset($_POST['search_username']) ? $_POST['search_username'] : '';
+        $username = $_POST['search_username'] ?? '';
         username_search($username);
         exit;
     }
@@ -533,7 +517,7 @@ if ($post_mode) {
 
         $SQL['GROUP BY'][] = "item_id";
         $SQL['ORDER BY'][] = ($new_posts && $join_p) ? "p.topic_id ASC, p.post_time ASC" : "$order $sort";
-        $SQL['LIMIT'][] = "$search_limit";
+        $SQL['LIMIT'][] = (string)$search_limit;
 
         $items_display = fetch_search_ids($SQL);
     } elseif (!$items_display = array_slice($items_found, $start, $per_page)) {
@@ -742,7 +726,7 @@ else {
         }
 
         $SQL['GROUP BY'][] = "item_id";
-        $SQL['LIMIT'][] = "$search_limit";
+        $SQL['LIMIT'][] = (string)$search_limit;
 
         if ($egosearch) {
             $SQL['ORDER BY'][] = 'max_post_time DESC';
@@ -783,7 +767,7 @@ else {
         $SQL['WHERE'][] = "t.forum_id NOT IN($excluded_forums_csv)";
     }
 
-    $SQL['LIMIT'][] = "$per_page";
+    $SQL['LIMIT'][] = (string)$per_page;
 
     // Fetch topics data
     $topic_rows = array();
@@ -934,7 +918,7 @@ function username_search($search_match)
     $username_list = '';
 
     if (!empty($search_match)) {
-        $username_search = preg_replace('/\*/', '%', clean_username($search_match));
+        $username_search = str_replace("\*", '%', clean_username($search_match));
 
         $sql = "
 			SELECT username

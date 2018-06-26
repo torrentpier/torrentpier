@@ -1,26 +1,10 @@
 <?php
 /**
- * MIT License
+ * TorrentPier – Bull-powered BitTorrent tracker engine
  *
- * Copyright (c) 2005-2017 TorrentPier
- *
- * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to deal
- * in the Software without restriction, including without limitation the rights
- * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following conditions:
- *
- * The above copyright notice and this permission notice shall be included in all
- * copies or substantial portions of the Software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
- * SOFTWARE.
+ * @copyright Copyright (c) 2005-2018 TorrentPier (https://torrentpier.com)
+ * @link      https://github.com/torrentpier/torrentpier for the canonical source repository
+ * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
  */
 
 define('BB_SCRIPT', 'pm');
@@ -28,7 +12,6 @@ define('IN_PM', true);
 define('BB_ROOT', './');
 require __DIR__ . '/common.php';
 require INC_DIR . '/bbcode.php';
-require INC_DIR . '/functions_post.php';
 
 $privmsg_sent_id = $l_box_name = $to_username = $privmsg_subject = $privmsg_message = $error_msg = '';
 
@@ -196,7 +179,7 @@ if ($mode == 'read') {
             bb_die('Could not update private message read status for user');
         }
         if (DB()->affected_rows()) {
-            cache_rm_userdata($userdata);
+            \TorrentPier\Legacy\Sessions::cache_rm_userdata($userdata);
         }
 
         $sql = "UPDATE " . BB_PRIVMSGS . "
@@ -796,9 +779,7 @@ if ($mode == 'read') {
 
     if ($submit) {
         if (!empty($_POST['username'])) {
-            $to_username = clean_username($_POST['username']);
-            $to_username_sql = DB()->escape($to_username);
-            $to_userdata = get_userdata($to_username_sql);
+            $to_userdata = get_userdata($_POST['username']);
 
             if (!$to_userdata || $to_userdata['user_id'] == GUEST_UID) {
                 $error = true;
@@ -914,7 +895,7 @@ if ($mode == 'read') {
                 bb_die('Could not update private message new / read status for user');
             }
 
-            cache_rm_user_sessions($to_userdata['user_id']);
+            \TorrentPier\Legacy\Sessions::cache_rm_user_sessions($to_userdata['user_id']);
 
             if (bf($to_userdata['user_opt'], 'user_opt', 'user_notify_pm') && $to_userdata['user_active'] && $bb_cfg['pm_notify_enabled']) {
                 /** @var TorrentPier\Legacy\Emailer() $emailer */
@@ -1063,7 +1044,6 @@ if ($mode == 'read') {
         $replacement_word = array();
         obtain_word_list($orig_word, $replacement_word);
 
-        $preview_message = htmlCHR($privmsg_message, false, ENT_NOQUOTES);
         $preview_message = bbcode2html($privmsg_message);
 
         if (count($orig_word)) {
@@ -1167,7 +1147,7 @@ if ($mode == 'read') {
     //
     // Update unread status
     //
-    db_update_userdata($userdata, array(
+    \TorrentPier\Legacy\Sessions::db_update_userdata($userdata, array(
         'user_unread_privmsg' => 'user_unread_privmsg + user_new_privmsg',
         'user_new_privmsg' => 0,
         'user_last_privmsg' => $userdata['session_start'],
@@ -1304,7 +1284,7 @@ if ($mode == 'read') {
     $previous_days_text = array($lang['ALL_POSTS'], $lang['1_DAY'], $lang['7_DAYS'], $lang['2_WEEKS'], $lang['1_MONTH'], $lang['3_MONTHS'], $lang['6_MONTHS'], $lang['1_YEAR']);
 
     $select_msg_days = '';
-    for ($i = 0; $i < count($previous_days); $i++) {
+    for ($i = 0, $iMax = count($previous_days); $i < $iMax; $i++) {
         $selected = ($msg_days == $previous_days[$i]) ? ' selected="selected"' : '';
         $select_msg_days .= '<option value="' . $previous_days[$i] . '"' . $selected . '>' . $previous_days_text[$i] . '</option>';
     }

@@ -1,26 +1,10 @@
 <?php
 /**
- * MIT License
+ * TorrentPier – Bull-powered BitTorrent tracker engine
  *
- * Copyright (c) 2005-2017 TorrentPier
- *
- * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to deal
- * in the Software without restriction, including without limitation the rights
- * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following conditions:
- *
- * The above copyright notice and this permission notice shall be included in all
- * copies or substantial portions of the Software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
- * SOFTWARE.
+ * @copyright Copyright (c) 2005-2018 TorrentPier (https://torrentpier.com)
+ * @link      https://github.com/torrentpier/torrentpier for the canonical source repository
+ * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
  */
 
 namespace TorrentPier\Legacy\Common;
@@ -82,7 +66,7 @@ class Html
         foreach ($params as $opt_name => $opt_val) {
             $opt_name = rtrim($opt_name);
 
-            if (is_array($opt_val)) {
+            if (\is_array($opt_val)) {
                 $this->cur_attr =& $this->cur_attr[$opt_name];
 
                 $label = htmlCHR(str_short($opt_name, $this->max_length));
@@ -128,7 +112,7 @@ class Html
     public function _array2html_rec($array, $ul, $li)
     {
         foreach ($array as $k => $v) {
-            if (is_array($v)) {
+            if (\is_array($v)) {
                 $this->out .= "<$li><span class=\"b\">$k</span><$ul>";
                 $this->_array2html_rec($v, $ul, $li);
                 $this->out .= "</$ul></$li>";

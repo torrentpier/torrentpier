@@ -1,26 +1,10 @@
 <?php
 /**
- * MIT License
+ * TorrentPier – Bull-powered BitTorrent tracker engine
  *
- * Copyright (c) 2005-2017 TorrentPier
- *
- * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to deal
- * in the Software without restriction, including without limitation the rights
- * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following conditions:
- *
- * The above copyright notice and this permission notice shall be included in all
- * copies or substantial portions of the Software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
- * SOFTWARE.
+ * @copyright Copyright (c) 2005-2018 TorrentPier (https://torrentpier.com)
+ * @link      https://github.com/torrentpier/torrentpier for the canonical source repository
+ * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
  */
 
 define('BB_SCRIPT', 'login');
@@ -53,11 +37,10 @@ if (preg_match('/^redirect=([a-z0-9\.#\/\?&=\+\-_]+)/si', $_SERVER['QUERY_STRING
 } elseif (!empty($_POST['redirect'])) {
     $redirect_url = str_replace('&amp;', '&', htmlspecialchars($_POST['redirect']));
 } elseif (!empty($_SERVER['HTTP_REFERER']) && ($parts = @parse_url($_SERVER['HTTP_REFERER']))) {
-    $redirect_url = (isset($parts['path']) ? $parts['path'] : "index.php") . (isset($parts['query']) ? '?' . $parts['query'] : '');
+    $redirect_url = ($parts['path'] ?? "index.php") . (isset($parts['query']) ? '?' . $parts['query'] : '');
 }
 
-$redirect_url = str_replace('&admin=1', '', $redirect_url);
-$redirect_url = str_replace('?admin=1', '', $redirect_url);
+$redirect_url = str_replace(['&admin=1', '?admin=1'], '', $redirect_url);
 
 if (!$redirect_url || false !== strpos(urldecode($redirect_url), "\n") || false !== strpos(urldecode($redirect_url), "\r") || false !== strpos(urldecode($redirect_url), ';url')) {
     $redirect_url = "index.php";
@@ -72,8 +55,8 @@ if (isset($_REQUEST['admin']) && !IS_AM) {
 $mod_admin_login = (IS_AM && !$user->data['session_admin']);
 
 // login username & password
-$login_username = ($mod_admin_login) ? $userdata['username'] : (isset($_POST['login_username']) ? $_POST['login_username'] : '');
-$login_password = isset($_POST['login_password']) ? $_POST['login_password'] : '';
+$login_username = ($mod_admin_login) ? $userdata['username'] : ($_POST['login_username'] ?? '');
+$login_password = $_POST['login_password'] ?? '';
 
 // Проверка на неверную комбинацию логин/пароль
 $need_captcha = false;

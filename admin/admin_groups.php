@@ -1,26 +1,10 @@
 <?php
 /**
- * MIT License
+ * TorrentPier – Bull-powered BitTorrent tracker engine
  *
- * Copyright (c) 2005-2017 TorrentPier
- *
- * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to deal
- * in the Software without restriction, including without limitation the rights
- * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following conditions:
- *
- * The above copyright notice and this permission notice shall be included in all
- * copies or substantial portions of the Software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
- * SOFTWARE.
+ * @copyright Copyright (c) 2005-2018 TorrentPier (https://torrentpier.com)
+ * @link      https://github.com/torrentpier/torrentpier for the canonical source repository
+ * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
  */
 
 if (!empty($setmodules)) {
@@ -28,7 +12,6 @@ if (!empty($setmodules)) {
     return;
 }
 require __DIR__ . '/pagestart.php';
-require INC_DIR . '/functions_group.php';
 
 $group_id = isset($_REQUEST[POST_GROUPS_URL]) ? (int)$_REQUEST[POST_GROUPS_URL] : 0;
 $mode = isset($_REQUEST['mode']) ? (string)$_REQUEST['mode'] : '';
@@ -37,7 +20,7 @@ attachment_quota_settings('group', isset($_POST['group_update']), $mode);
 
 if (!empty($_POST['edit']) || !empty($_POST['new'])) {
     if (!empty($_POST['edit'])) {
-        if (!$row = get_group_data($group_id)) {
+        if (!$row = \TorrentPier\Legacy\Group::get_group_data($group_id)) {
             bb_die($lang['GROUP_NOT_EXIST']);
         }
         $group_info = array(
@@ -88,11 +71,11 @@ if (!empty($_POST['edit']) || !empty($_POST['new'])) {
     ));
 } elseif (!empty($_POST['group_update'])) {
     if (!empty($_POST['group_delete'])) {
-        if (!$group_info = get_group_data($group_id)) {
+        if (!$group_info = \TorrentPier\Legacy\Group::get_group_data($group_id)) {
             bb_die($lang['GROUP_NOT_EXIST']);
         }
         // Delete Group
-        delete_group($group_id);
+        \TorrentPier\Legacy\Group::delete_group($group_id);
 
         $message = $lang['DELETED_GROUP'] . '<br /><br />';
         $message .= sprintf($lang['CLICK_RETURN_GROUPSADMIN'], '<a href="admin_groups.php">', '</a>') . '<br /><br />';
@@ -104,7 +87,7 @@ if (!empty($_POST['edit']) || !empty($_POST['new'])) {
         $release_group = isset($_POST['release_group']) ? (int)$_POST['release_group'] : 0;
         $group_name = isset($_POST['group_name']) ? trim($_POST['group_name']) : '';
         $group_desc = isset($_POST['group_description']) ? trim($_POST['group_description']) : '';
-        $group_moderator = isset($_POST['username']) ? $_POST['username'] : '';
+        $group_moderator = $_POST['username'] ?? '';
 
         if ($group_name === '') {
             bb_die($lang['NO_GROUP_NAME']);
@@ -127,18 +110,18 @@ if (!empty($_POST['edit']) || !empty($_POST['new'])) {
         );
 
         if ($mode == 'editgroup') {
-            if (!$group_info = get_group_data($group_id)) {
+            if (!$group_info = \TorrentPier\Legacy\Group::get_group_data($group_id)) {
                 bb_die($lang['GROUP_NOT_EXIST']);
             }
 
             if ($group_info['group_moderator'] != $group_moderator) {
                 // Create user_group for new group's moderator
-                add_user_into_group($group_id, $group_moderator);
+                \TorrentPier\Legacy\Group::add_user_into_group($group_id, $group_moderator);
                 $sql_ary['mod_time'] = TIMENOW;
 
                 // Delete old moderator's user_group
                 if (isset($_POST['delete_old_moderator'])) {
-                    delete_user_group($group_id, $group_info['group_moderator']);
+                    \TorrentPier\Legacy\Group::delete_user_group($group_id, $group_info['group_moderator']);
                 }
             }
 
@@ -161,7 +144,7 @@ if (!empty($_POST['edit']) || !empty($_POST['new'])) {
             $new_group_id = DB()->sql_nextid();
 
             // Create user_group for group's moderator
-            add_user_into_group($new_group_id, $group_moderator);
+            \TorrentPier\Legacy\Group::add_user_into_group($new_group_id, $group_moderator);
 
             $message = $lang['ADDED_NEW_GROUP'] . '<br /><br />';
             $message .= sprintf($lang['CLICK_RETURN_GROUPSADMIN'], '<a href="admin_groups.php">', '</a>') . '<br /><br />';

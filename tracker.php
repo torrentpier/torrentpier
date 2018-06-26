@@ -1,33 +1,15 @@
 <?php
 /**
- * MIT License
+ * TorrentPier – Bull-powered BitTorrent tracker engine
  *
- * Copyright (c) 2005-2017 TorrentPier
- *
- * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to deal
- * in the Software without restriction, including without limitation the rights
- * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following conditions:
- *
- * The above copyright notice and this permission notice shall be included in all
- * copies or substantial portions of the Software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
- * SOFTWARE.
+ * @copyright Copyright (c) 2005-2018 TorrentPier (https://torrentpier.com)
+ * @link      https://github.com/torrentpier/torrentpier for the canonical source repository
+ * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
  */
 
 define('BB_SCRIPT', 'tracker');
 define('BB_ROOT', './');
 require __DIR__ . '/common.php';
-
-require INC_DIR . '/functions_group.php';
 
 // Page config
 $page_cfg['include_bbcode_js'] = true;
@@ -238,7 +220,7 @@ foreach ($s_not_seen_opt as $val => $opt) {
     $s_not_seen_select[$opt['lang']] = $val;
 }
 
-if ($release_groups = get_group_data('all')) {
+if ($release_groups = \TorrentPier\Legacy\Group::get_group_data('all')) {
     $s_rg_opt = array(
         $search_all => array(
             'lang' => $lang['CHOOSE_RELEASE_GROUP'],
@@ -708,15 +690,15 @@ if ($allowed_forums) {
         $passkey = DB()->fetch_row("SELECT auth_key FROM " . BB_BT_USERS . " WHERE user_id = " . (int)$user_id . " LIMIT 1");
         // Build torrents table
         foreach (DB()->fetch_rowset($sql) as $tor) {
-            $dl = isset($tor['speed_down']) ? $tor['speed_down'] : 0;
-            $ul = isset($tor['speed_up']) ? $tor['speed_up'] : 0;
+            $dl = $tor['speed_down'] ?? 0;
+            $ul = $tor['speed_up'] ?? 0;
 
             $seeds = $tor['seeders'];
             $leechs = $tor['leechers'];
             $s_last = $tor['seeder_last_seen'];
             $att_id = $tor['attach_id'];
             $size = $tor['size'];
-            $tor_magnet = create_magnet($tor['info_hash'], $passkey['auth_key'], $userdata['session_logged_in']);
+            $tor_magnet = create_magnet($tor['info_hash'], $passkey['auth_key']);
             $compl = $tor['complete_count'];
             $dl_sp = ($dl) ? humn_size($dl, 0, 'KB') . '/s' : '0 KB/s';
             $ul_sp = ($ul) ? humn_size($ul, 0, 'KB') . '/s' : '0 KB/s';

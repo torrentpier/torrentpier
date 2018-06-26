@@ -1,26 +1,10 @@
 <?php
 /**
- * MIT License
+ * TorrentPier – Bull-powered BitTorrent tracker engine
  *
- * Copyright (c) 2005-2017 TorrentPier
- *
- * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to deal
- * in the Software without restriction, including without limitation the rights
- * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following conditions:
- *
- * The above copyright notice and this permission notice shall be included in all
- * copies or substantial portions of the Software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
- * SOFTWARE.
+ * @copyright Copyright (c) 2005-2018 TorrentPier (https://torrentpier.com)
+ * @link      https://github.com/torrentpier/torrentpier for the canonical source repository
+ * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
  */
 
 if (!empty($setmodules)) {
@@ -31,8 +15,6 @@ require __DIR__ . '/pagestart.php';
 
 $max_forum_name_len = 30;
 $max_forum_rows = 25;
-
-require INC_DIR . '/functions_admin_torrent.php';
 
 $submit = isset($_POST['submit']);
 $confirm = isset($_POST['confirm']);
@@ -94,12 +76,12 @@ $cfg = bb_get_config(BB_CONFIG, true, false);
  */
 if ($submit && $confirm) {
     foreach ($db_fields_bool as $field_name => $field_def_val) {
-        update_table_bool(BB_FORUMS, 'forum_id', $field_name, $field_def_val);
+        \TorrentPier\Legacy\Admin\Torrent::update_table_bool(BB_FORUMS, 'forum_id', $field_name, $field_def_val);
     }
 
-    update_config_table(BB_CONFIG, $default_cfg_str, $cfg, 'str');
-    update_config_table(BB_CONFIG, $default_cfg_bool, $cfg, 'bool');
-    update_config_table(BB_CONFIG, $default_cfg_num, $cfg, 'num');
+    \TorrentPier\Legacy\Admin\Torrent::update_config_table(BB_CONFIG, $default_cfg_str, $cfg, 'str');
+    \TorrentPier\Legacy\Admin\Torrent::update_config_table(BB_CONFIG, $default_cfg_bool, $cfg, 'bool');
+    \TorrentPier\Legacy\Admin\Torrent::update_config_table(BB_CONFIG, $default_cfg_num, $cfg, 'num');
 
     $datastore->update('cat_forums');
 
@@ -107,16 +89,16 @@ if ($submit && $confirm) {
 }
 
 // Set template vars
-set_tpl_vars($default_cfg_str, $cfg);
-set_tpl_vars_lang($default_cfg_str);
+\TorrentPier\Legacy\Admin\Torrent::set_tpl_vars($default_cfg_str, $cfg);
+\TorrentPier\Legacy\Admin\Torrent::set_tpl_vars_lang($default_cfg_str);
 
-set_tpl_vars_bool($default_cfg_bool, $cfg);
-set_tpl_vars_lang($default_cfg_bool);
+\TorrentPier\Legacy\Admin\Torrent::set_tpl_vars_bool($default_cfg_bool, $cfg);
+\TorrentPier\Legacy\Admin\Torrent::set_tpl_vars_lang($default_cfg_bool);
 
-set_tpl_vars($default_cfg_num, $cfg);
-set_tpl_vars_lang($default_cfg_num);
+\TorrentPier\Legacy\Admin\Torrent::set_tpl_vars($default_cfg_num, $cfg);
+\TorrentPier\Legacy\Admin\Torrent::set_tpl_vars_lang($default_cfg_num);
 
-set_tpl_vars_lang($db_fields_bool);
+\TorrentPier\Legacy\Admin\Torrent::set_tpl_vars_lang($db_fields_bool);
 
 // Get Forums list
 $sql = 'SELECT f.*

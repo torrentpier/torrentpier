@@ -1,26 +1,10 @@
 <?php
 /**
- * MIT License
+ * TorrentPier – Bull-powered BitTorrent tracker engine
  *
- * Copyright (c) 2005-2017 TorrentPier
- *
- * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to deal
- * in the Software without restriction, including without limitation the rights
- * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following conditions:
- *
- * The above copyright notice and this permission notice shall be included in all
- * copies or substantial portions of the Software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
- * SOFTWARE.
+ * @copyright Copyright (c) 2005-2018 TorrentPier (https://torrentpier.com)
+ * @link      https://github.com/torrentpier/torrentpier for the canonical source repository
+ * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
  */
 
 if (!empty($setmodules)) {
@@ -28,7 +12,6 @@ if (!empty($setmodules)) {
     return;
 }
 require __DIR__ . '/pagestart.php';
-require INC_DIR . '/functions_group.php';
 
 array_deep($_POST, 'trim');
 
@@ -62,7 +45,7 @@ $forumname = '';
 if (isset($_REQUEST['addforum']) || isset($_REQUEST['addcategory'])) {
     $mode = isset($_REQUEST['addforum']) ? 'addforum' : 'addcat';
 
-    if ($mode == 'addforum' && isset($_POST['addforum']) && isset($_POST['forumname']) && is_array($_POST['addforum'])) {
+    if (isset($_POST['addforum'], $_POST['forumname']) && $mode == 'addforum' && is_array($_POST['addforum'])) {
         $req_cat_id = array_keys($_POST['addforum']);
         $cat_id = reset($req_cat_id);
         $forumname = stripslashes($_POST['forumname'][$cat_id]);
@@ -448,7 +431,7 @@ if ($mode) {
 
             if ($to_id == -1) {
                 // Delete everything from forum
-                topic_delete('prune', $from_id, 0, true);
+                \TorrentPier\Legacy\Admin\Common::topic_delete('prune', $from_id, 0, true);
             } else {
                 // Move all posts
                 $sql = 'SELECT * FROM ' . BB_FORUMS . " WHERE forum_id IN($from_id, $to_id)";
@@ -477,7 +460,7 @@ if ($mode) {
                     $start_id += $per_cycle;
                 }
 
-                sync('forum', $to_id);
+                \TorrentPier\Legacy\Admin\Common::sync('forum', $to_id);
             }
 
             DB()->query('DELETE FROM ' . BB_FORUMS . " WHERE forum_id = $from_id");
@@ -486,7 +469,7 @@ if ($mode) {
 
             $cat_forums = get_cat_forums();
             fix_orphan_sf();
-            update_user_level('all');
+            \TorrentPier\Legacy\Group::update_user_level('all');
             $datastore->update('cat_forums');
             CACHE('bb_cache')->rm();
 
@@ -576,15 +559,17 @@ if ($mode) {
             $move_down_forum_id = false;
             $forums = $cat_forums[$cat_id]['f_ord'];
             $forum_order = $forum_info['forum_order'];
-            $prev_forum = isset($forums[$forum_order - 10]) ? $forums[$forum_order - 10] : false;
-            $next_forum = isset($forums[$forum_order + 10]) ? $forums[$forum_order + 10] : false;
+            $prev_forum = $forums[$forum_order - 10] ?? false;
+            $next_forum = $forums[$forum_order + 10] ?? false;
 
             // move selected forum ($forum_id) UP
             if ($move < 0 && $prev_forum) {
                 if ($forum_info['forum_parent'] && $prev_forum['forum_parent'] != $forum_info['forum_parent']) {
                     $show_main_page = true;
                     break;
-                } elseif ($move_down_forum_id = get_prev_root_forum_id($forums, $forum_order)) {
+                }
+
+                if ($move_down_forum_id = get_prev_root_forum_id($forums, $forum_order)) {
                     $move_up_forum_id = $forum_id;
                     $move_down_ord_val = (get_sf_count($forum_id) + 1) * 10;
                     $move_up_ord_val = ((get_sf_count($move_down_forum_id) + 1) * 10) + $move_down_ord_val;
@@ -595,7 +580,9 @@ if ($mode) {
                 if ($forum_info['forum_parent'] && $next_forum['forum_parent'] != $forum_info['forum_parent']) {
                     $show_main_page = true;
                     break;
-                } elseif ($move_up_forum_id = get_next_root_forum_id($forums, $forum_order)) {
+                }
+
+                if ($move_up_forum_id = get_next_root_forum_id($forums, $forum_order)) {
                     $move_down_forum_id = $forum_id;
                     $move_down_forum_order = $forum_order;
                     $move_down_ord_val = (get_sf_count($move_up_forum_id) + 1) * 10;
@@ -652,7 +639,7 @@ if ($mode) {
             break;
 
         case 'forum_sync':
-            sync('forum', (int)$_GET['f']);
+            \TorrentPier\Legacy\Admin\Common::sync('forum', (int)$_GET['f']);
             $datastore->update('cat_forums');
             CACHE('bb_cache')->rm();
 

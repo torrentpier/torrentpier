@@ -1,26 +1,10 @@
 <?php
 /**
- * MIT License
+ * TorrentPier – Bull-powered BitTorrent tracker engine
  *
- * Copyright (c) 2005-2017 TorrentPier
- *
- * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to deal
- * in the Software without restriction, including without limitation the rights
- * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following conditions:
- *
- * The above copyright notice and this permission notice shall be included in all
- * copies or substantial portions of the Software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
- * SOFTWARE.
+ * @copyright Copyright (c) 2005-2018 TorrentPier (https://torrentpier.com)
+ * @link      https://github.com/torrentpier/torrentpier for the canonical source repository
+ * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
  */
 
 if (!defined('BB_ROOT')) {
@@ -28,7 +12,7 @@ if (!defined('BB_ROOT')) {
 }
 
 $domain_name = 'torrentpier.com'; // enter here your primary domain name of your site
-$domain_name = (!empty($_SERVER['SERVER_NAME'])) ? $_SERVER['SERVER_NAME'] : $domain_name;
+$domain_name = !empty($_SERVER['SERVER_NAME']) ? $_SERVER['SERVER_NAME'] : $domain_name;
 $domain_ssl = false;
 
 $bb_cfg = [];
@@ -37,9 +21,9 @@ $bb_cfg = [];
 $bb_cfg['js_ver'] = $bb_cfg['css_ver'] = 1;
 
 // Version info
-$bb_cfg['tp_version'] = '2.2.3';
-$bb_cfg['tp_release_date'] = '07-08-2017';
-$bb_cfg['tp_release_codename'] = 'Aurochs';
+$bb_cfg['tp_version'] = '2.3.0';
+$bb_cfg['tp_release_date'] = '26-06-2018';
+$bb_cfg['tp_release_codename'] = 'Bison';
 
 // Database
 // Настройка баз данных ['db']['srv_name'] => (array) srv_cfg;
@@ -71,7 +55,7 @@ $bb_cfg['db_alias'] = [
 $bb_cfg['cache'] = [
     'pconnect' => true,
     'db_dir' => realpath(BB_ROOT) . '/internal_data/cache/filecache/',
-    'prefix' => 'tp_', // Префикс кеша ('tp_')
+    'prefix' => 'tp_',
     'memcache' => [
         'host' => '127.0.0.1',
         'port' => 11211,
@@ -83,7 +67,7 @@ $bb_cfg['cache'] = [
         'port' => 6379,
         'con_required' => true,
     ],
-    // Available cache types: memcache, sqlite, redis, apc, xcache (default of filecache)
+    // Available cache types: memcache, sqlite, redis, (filecache by default)
     'engines' => [
         'bb_cache' => ['filecache', []],
         'bb_config' => ['filecache', []],
@@ -96,12 +80,12 @@ $bb_cfg['cache'] = [
 ];
 
 // Datastore
-// Available datastore types: memcache, sqlite, redis, apc, xcache  (default filecache)
+// Available datastore types: memcache, sqlite, redis (filecache by default)
 $bb_cfg['datastore_type'] = 'filecache';
 
 // Server
 $bb_cfg['server_name'] = $domain_name; // The domain name from which this board runs
-$bb_cfg['server_port'] = (!empty($_SERVER['SERVER_PORT'])) ? $_SERVER['SERVER_PORT'] : 80; // The port your server is running on
+$bb_cfg['server_port'] = !empty($_SERVER['SERVER_PORT']) ? $_SERVER['SERVER_PORT'] : 80; // The port your server is running on
 $bb_cfg['script_path'] = '/'; // The path where FORUM is located relative to the domain name
 
 // GZip
@@ -157,6 +141,7 @@ $bb_cfg['torhelp_enabled'] = false; // find dead torrents (without seeder) that 
 
 // URL's
 $bb_cfg['ajax_url'] = 'ajax.php'; # "http://{$_SERVER['SERVER_NAME']}/ajax.php"
+$bb_cfg['dl_url'] = 'dl.php?id='; # "http://{$domain_name}/dl.php?id="
 $bb_cfg['login_url'] = 'login.php'; # "http://{$domain_name}/login.php"
 $bb_cfg['posting_url'] = 'posting.php'; # "http://{$domain_name}/posting.php"
 $bb_cfg['pm_url'] = 'privmsg.php'; # "http://{$domain_name}/privmsg.php"
@@ -383,7 +368,8 @@ $bb_cfg['last_visit_update_intrv'] = 3600; // sec
 $bb_cfg['invalid_logins'] = 5; // Количество неверных попыток ввода пароля, перед выводом проверки капчей
 $bb_cfg['new_user_reg_disabled'] = false; // Запретить регистрацию новых учетных записей
 $bb_cfg['unique_ip'] = false; // Запретить регистрацию нескольких учетных записей с одного ip
-$bb_cfg['new_user_reg_restricted'] = false; // Ограничить регистрацию новых пользователей по времени с 01:00 до 17:00
+$bb_cfg['new_user_reg_restricted'] = false; // Ограничить регистрацию новых пользователей по времени по указанному ниже интервалу
+$bb_cfg['new_user_reg_interval'] = [0, 1, 2, 3, 4, 5, 6, 7, 8, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23]; // Допустимые часы регистрации
 $bb_cfg['reg_email_activation'] = true; // Требовать активацию учетной записи по email
 
 // Email
@@ -471,7 +457,7 @@ $bb_cfg['use_ajax_posts'] = true;
 $bb_cfg['search_engine_type'] = 'mysql'; // none, mysql, sphinx
 $bb_cfg['sphinx_topic_titles_host'] = '127.0.0.1';
 $bb_cfg['sphinx_topic_titles_port'] = 3312;
-$bb_cfg['sphinx_config_path'] = realpath("../install/sphinx/sphinx.conf");
+$bb_cfg['sphinx_config_path'] = '../install/sphinx/sphinx.conf';
 $bb_cfg['disable_ft_search_in_posts'] = false; // disable searching in post bodies
 $bb_cfg['disable_search_for_guest'] = true;
 $bb_cfg['allow_search_in_bool_mode'] = true;
@@ -508,7 +494,7 @@ $bb_cfg['group_members_per_page'] = 50;
 $bb_cfg['tidy_post'] = (!in_array('tidy', get_loaded_extensions(), true)) ? false : true;
 
 // Misc
-$bb_cfg['mem_on_start'] = MEM_USAGE ? memory_get_usage() : 0;
+$bb_cfg['mem_on_start'] = memory_get_usage();
 $bb_cfg['translate_dates'] = true; // in displaying time
 $bb_cfg['use_word_censor'] = true;
 

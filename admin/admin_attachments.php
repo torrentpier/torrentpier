@@ -1,26 +1,10 @@
 <?php
 /**
- * MIT License
+ * TorrentPier – Bull-powered BitTorrent tracker engine
  *
- * Copyright (c) 2005-2017 TorrentPier
- *
- * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to deal
- * in the Software without restriction, including without limitation the rights
- * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following conditions:
- *
- * The above copyright notice and this permission notice shall be included in all
- * copies or substantial portions of the Software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
- * SOFTWARE.
+ * @copyright Copyright (c) 2005-2018 TorrentPier (https://torrentpier.com)
+ * @link      https://github.com/torrentpier/torrentpier for the canonical source repository
+ * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
  */
 
 if (!empty($setmodules)) {
@@ -149,23 +133,25 @@ $select_pm_size_mode = size_select('pm_size', $pm_size);
 if ($search_imagick) {
     $imagick = '';
 
-    if (preg_match('/convert/i', $imagick)) {
+    if (false !== stripos($imagick, "convert")) {
         return true;
-    } elseif ($imagick != 'none') {
-        if (!preg_match('/WIN/i', PHP_OS)) {
+    }
+
+    if ($imagick != 'none') {
+        if (!false !== stripos(PHP_OS, "WIN")) {
             $retval = @exec('whereis convert');
             $paths = explode(' ', $retval);
 
             if (is_array($paths)) {
-                for ($i = 0, $iMax = count($paths); $i < $iMax; $i++) {
+                foreach ($paths as $i => $iValue) {
                     $path = basename($paths[$i]);
 
                     if ($path == 'convert') {
-                        $imagick = $paths[$i];
+                        $imagick = $iValue;
                     }
                 }
             }
-        } elseif (preg_match('/WIN/i', PHP_OS)) {
+        } elseif (false !== stripos(PHP_OS, "WIN")) {
             $path = 'c:/imagemagick/convert.exe';
 
             if (!@file_exists(amod_realpath($path))) {
@@ -360,7 +346,9 @@ if ($check_image_cat) {
 
     // Does the target directory exist, is it a directory and writeable
     if (!@file_exists(amod_realpath($upload_dir))) {
-        mkdir($upload_dir, 0755);
+        if (!mkdir($upload_dir, 0755) && !is_dir($upload_dir)) {
+            throw new \RuntimeException(sprintf('Directory "%s" was not created', $upload_dir));
+        }
         @chmod($upload_dir, 0777);
 
         if (!@file_exists(amod_realpath($upload_dir))) {

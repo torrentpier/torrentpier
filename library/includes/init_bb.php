@@ -1,26 +1,10 @@
 <?php
 /**
- * MIT License
+ * TorrentPier – Bull-powered BitTorrent tracker engine
  *
- * Copyright (c) 2005-2017 TorrentPier
- *
- * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to deal
- * in the Software without restriction, including without limitation the rights
- * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following conditions:
- *
- * The above copyright notice and this permission notice shall be included in all
- * copies or substantial portions of the Software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
- * SOFTWARE.
+ * @copyright Copyright (c) 2005-2018 TorrentPier (https://torrentpier.com)
+ * @link      https://github.com/torrentpier/torrentpier for the canonical source repository
+ * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
  */
 
 if (!defined('BB_ROOT')) {
@@ -30,8 +14,8 @@ if (!defined('BB_ROOT')) {
 /**
  * Check PHP version
  */
-if (version_compare(PHP_VERSION, '5.6', '<')) {
-    die('TorrentPier requires PHP version 5.6+. Your PHP version ' . PHP_VERSION);
+if (PHP_VERSION_ID < 70103) {
+    die('TorrentPier requires PHP version 7.1.3+. Your PHP version ' . PHP_VERSION);
 }
 
 /**
@@ -298,7 +282,7 @@ define('PAGE_HEADER', INC_DIR . '/page_header.php');
 define('PAGE_FOOTER', INC_DIR . '/page_footer.php');
 
 define('CAT_URL', 'index.php?c=');
-define('DOWNLOAD_URL', 'dl.php?id=');
+define('DL_URL', $bb_cfg['dl_url']);
 define('FORUM_URL', 'viewforum.php?f=');
 define('GROUP_URL', 'group.php?g=');
 define('LOGIN_URL', $bb_cfg['login_url']);
@@ -406,11 +390,6 @@ function make_url($path = '')
  * Functions
  */
 require INC_DIR . '/functions.php';
-require INC_DIR . '/sessions.php';
-
-if (DBG_USER) {
-    require INC_DIR . '/functions_dev.php';
-}
 
 $bb_cfg = array_merge(bb_get_config(BB_CONFIG), $bb_cfg);
 

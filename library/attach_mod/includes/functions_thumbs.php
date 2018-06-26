@@ -1,26 +1,10 @@
 <?php
 /**
- * MIT License
+ * TorrentPier – Bull-powered BitTorrent tracker engine
  *
- * Copyright (c) 2005-2017 TorrentPier
- *
- * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to deal
- * in the Software without restriction, including without limitation the rights
- * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following conditions:
- *
- * The above copyright notice and this permission notice shall be included in all
- * copies or substantial portions of the Software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
- * SOFTWARE.
+ * @copyright Copyright (c) 2005-2018 TorrentPier (https://torrentpier.com)
+ * @link      https://github.com/torrentpier/torrentpier for the canonical source repository
+ * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
  */
 
 if (!defined('BB_ROOT')) {
@@ -42,12 +26,12 @@ function get_img_size_format($width, $height)
             round($width * ($max_width / $width)),
             round($height * ($max_width / $width))
         );
-    } else {
-        return array(
-            round($width * ($max_width / $height)),
-            round($height * ($max_width / $height))
-        );
     }
+
+    return array(
+        round($width * ($max_width / $height)),
+        round($height * ($max_width / $height))
+    );
 }
 
 /**
@@ -60,9 +44,9 @@ function is_imagick()
     if ($attach_config['img_imagick'] != '') {
         $imagick = $attach_config['img_imagick'];
         return true;
-    } else {
-        return false;
     }
+
+    return false;
 }
 
 /**
@@ -119,15 +103,13 @@ function create_thumbnail($source, $new_file, $mimetype)
         return false;
     }
 
-    list($width, $height, $type, ) = getimagesize($source);
+    [$width, $height, $type,] = getimagesize($source);
 
     if (!$width || !$height) {
         return false;
     }
 
-    list($new_width, $new_height) = get_img_size_format($width, $height);
-
-    $tmp_path = $old_file = '';
+    [$new_width, $new_height] = get_img_size_format($width, $height);
 
     $used_imagick = false;
 

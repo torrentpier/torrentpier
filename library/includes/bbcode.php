@@ -1,26 +1,10 @@
 <?php
 /**
- * MIT License
+ * TorrentPier – Bull-powered BitTorrent tracker engine
  *
- * Copyright (c) 2005-2017 TorrentPier
- *
- * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to deal
- * in the Software without restriction, including without limitation the rights
- * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following conditions:
- *
- * The above copyright notice and this permission notice shall be included in all
- * copies or substantial portions of the Software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
- * SOFTWARE.
+ * @copyright Copyright (c) 2005-2018 TorrentPier (https://torrentpier.com)
+ * @link      https://github.com/torrentpier/torrentpier for the canonical source repository
+ * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
  */
 
 if (!defined('BB_ROOT')) {
@@ -216,7 +200,7 @@ function strip_quotes($text)
     do {
         $pos = strpos($lowertext, '[quote', $curpos);
         if ($pos !== false) {
-            $start_pos["$pos"] = 'start';
+            $start_pos[(string)$pos] = 'start';
             $curpos = $pos + 6;
         }
     } while ($pos !== false);
@@ -231,7 +215,7 @@ function strip_quotes($text)
     do {
         $pos = strpos($lowertext, '[/quote', $curpos);
         if ($pos !== false) {
-            $end_pos["$pos"] = 'end';
+            $end_pos[(string)$pos] = 'end';
             $curpos = $pos + 8;
         }
     } while ($pos !== false);
@@ -275,7 +259,7 @@ function strip_quotes($text)
         // recursion.
         if ($stack) {
             foreach ($stack as $pos) {
-                unset($pos_list["$pos"]);
+                unset($pos_list[(string)$pos]);
             }
         }
     } while ($stack);
@@ -354,9 +338,7 @@ function extract_search_words($text)
     $text = preg_replace('/(\w*?)&#?[0-9a-z]+;(\w*?)/iu', '', $text);
     // Remove URL's       ((www|ftp)\.[\w\#!$%&~/.\-;:=,?@а-яА-Я\[\]+]*?)
     $text = preg_replace('#\b[a-z0-9]+://[\w\#!$%&~/.\-;:=,?@а-яА-Я\[\]+]+(/[0-9a-z\?\.%_\-\+=&/]+)?#u', ' ', $text);
-    $text = str_replace('[url=', ' ', $text);
-    $text = str_replace('?', ' ', $text);
-    $text = str_replace('!', ' ', $text);
+    $text = str_replace(['[url=', '?', '!'], ' ', $text);
 
     $text = strip_bbcode($text);
 

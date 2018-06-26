@@ -1,26 +1,10 @@
 <?php
 /**
- * MIT License
+ * TorrentPier – Bull-powered BitTorrent tracker engine
  *
- * Copyright (c) 2005-2017 TorrentPier
- *
- * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to deal
- * in the Software without restriction, including without limitation the rights
- * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following conditions:
- *
- * The above copyright notice and this permission notice shall be included in all
- * copies or substantial portions of the Software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
- * SOFTWARE.
+ * @copyright Copyright (c) 2005-2018 TorrentPier (https://torrentpier.com)
+ * @link      https://github.com/torrentpier/torrentpier for the canonical source repository
+ * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
  */
 
 if (!defined('BB_ROOT')) {
@@ -41,7 +25,7 @@ function init_complete_extensions_data()
     global $allowed_extensions, $display_categories, $download_modes, $upload_icons;
 
     if (!$extension_informations = get_extension_informations()) {
-        $extension_informations = $GLOBALS['datastore']->update('attach_extensions'); //get_extension_informations()
+        $GLOBALS['datastore']->update('attach_extensions');
         $extension_informations = get_extension_informations();
     }
     $allowed_extensions = array();
@@ -229,7 +213,7 @@ function display_attachments($post_id)
 
             if (@(int)$display_categories[$attachments['_' . $post_id][$i]['extension']] == IMAGE_CAT && (int)$attach_config['img_display_inlined']) {
                 if ((int)$attach_config['img_link_width'] != 0 || (int)$attach_config['img_link_height'] != 0) {
-                    list($width, $height) = image_getdimension($filename);
+                    [$width, $height] = image_getdimension($filename);
 
                     if ($width == 0 && $height == 0) {
                         $image = true;
@@ -255,7 +239,7 @@ function display_attachments($post_id)
             if ($image) {
                 // Images
                 if ($attach_config['upload_dir'][0] == '/' || ($attach_config['upload_dir'][0] != '/' && $attach_config['upload_dir'][1] == ':')) {
-                    $img_source = BB_ROOT . DOWNLOAD_URL . $attachments['_' . $post_id][$i]['attach_id'];
+                    $img_source = BB_ROOT . DL_URL . $attachments['_' . $post_id][$i]['attach_id'];
                     $download_link = true;
                 } else {
                     $img_source = $filename;
@@ -285,7 +269,7 @@ function display_attachments($post_id)
             if ($thumbnail) {
                 // Images, but display Thumbnail
                 if ($attach_config['upload_dir'][0] == '/' || ($attach_config['upload_dir'][0] != '/' && $attach_config['upload_dir'][1] == ':')) {
-                    $thumb_source = BB_ROOT . DOWNLOAD_URL . $attachments['_' . $post_id][$i]['attach_id'] . '&thumb=1';
+                    $thumb_source = BB_ROOT . DL_URL . $attachments['_' . $post_id][$i]['attach_id'] . '&thumb=1';
                 } else {
                     $thumb_source = $thumbnail_filename;
                 }
@@ -293,7 +277,7 @@ function display_attachments($post_id)
                 $template->assign_block_vars('postrow.attach.cat_thumb_images', array(
                     'DOWNLOAD_NAME' => $display_name,
                     'S_UPLOAD_IMAGE' => $upload_image,
-                    'IMG_SRC' => BB_ROOT . DOWNLOAD_URL . $attachments['_' . $post_id][$i]['attach_id'],
+                    'IMG_SRC' => BB_ROOT . DL_URL . $attachments['_' . $post_id][$i]['attach_id'],
                     'IMG_THUMB_SRC' => $thumb_source,
                     'FILESIZE' => $filesize,
                     'COMMENT' => $comment,
@@ -308,7 +292,7 @@ function display_attachments($post_id)
 
                 // display attachment
                 $template->assign_block_vars('postrow.attach.attachrow', array(
-                    'U_DOWNLOAD_LINK' => BB_ROOT . DOWNLOAD_URL . $attachments['_' . $post_id][$i]['attach_id'],
+                    'U_DOWNLOAD_LINK' => BB_ROOT . DL_URL . $attachments['_' . $post_id][$i]['attach_id'],
                     'S_UPLOAD_IMAGE' => $upload_image,
                     'DOWNLOAD_NAME' => $display_name,
                     'FILESIZE' => $filesize,

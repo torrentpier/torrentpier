@@ -1,26 +1,10 @@
 <?php
 /**
- * MIT License
+ * TorrentPier – Bull-powered BitTorrent tracker engine
  *
- * Copyright (c) 2005-2017 TorrentPier
- *
- * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to deal
- * in the Software without restriction, including without limitation the rights
- * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following conditions:
- *
- * The above copyright notice and this permission notice shall be included in all
- * copies or substantial portions of the Software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
- * SOFTWARE.
+ * @copyright Copyright (c) 2005-2018 TorrentPier (https://torrentpier.com)
+ * @link      https://github.com/torrentpier/torrentpier for the canonical source repository
+ * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
  */
 
 if (!defined('BB_ROOT')) {
@@ -84,7 +68,7 @@ if ($logged_in && empty($gen_simple_header) && !defined('IN_ADMIN')) {
         if ($userdata['user_last_privmsg'] > $userdata['user_lastvisit'] && defined('IN_PM')) {
             $userdata['user_last_privmsg'] = $userdata['user_lastvisit'];
 
-            db_update_userdata($userdata, array(
+            \TorrentPier\Legacy\Sessions::db_update_userdata($userdata, array(
                 'user_last_privmsg' => $userdata['user_lastvisit'],
             ));
 
@@ -107,7 +91,7 @@ if ($logged_in && empty($gen_simple_header) && !defined('IN_ADMIN')) {
             if ($userdata['user_unread_privmsg'] != $real_unread_pm_count) {
                 $userdata['user_unread_privmsg'] = $real_unread_pm_count;
 
-                db_update_userdata($userdata, array(
+                \TorrentPier\Legacy\Sessions::db_update_userdata($userdata, array(
                     'user_unread_privmsg' => $real_unread_pm_count,
                 ));
             }
@@ -194,7 +178,7 @@ $template->assign_vars(array(
     // Common urls
     'AVATARS_URL' => 'data/avatars',
     'CAT_URL' => BB_ROOT . CAT_URL,
-    'DOWNLOAD_URL' => BB_ROOT . DOWNLOAD_URL,
+    'DOWNLOAD_URL' => BB_ROOT . DL_URL,
     'FORUM_URL' => BB_ROOT . FORUM_URL,
     'GROUP_URL' => BB_ROOT . GROUP_URL,
     'LOGIN_URL' => $bb_cfg['login_url'],

@@ -1,34 +1,16 @@
 <?php
 /**
- * MIT License
+ * TorrentPier – Bull-powered BitTorrent tracker engine
  *
- * Copyright (c) 2005-2017 TorrentPier
- *
- * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to deal
- * in the Software without restriction, including without limitation the rights
- * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following conditions:
- *
- * The above copyright notice and this permission notice shall be included in all
- * copies or substantial portions of the Software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
- * SOFTWARE.
+ * @copyright Copyright (c) 2005-2018 TorrentPier (https://torrentpier.com)
+ * @link      https://github.com/torrentpier/torrentpier for the canonical source repository
+ * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
  */
 
 define('BB_SCRIPT', 'modcp');
 define('BB_ROOT', './');
 require __DIR__ . '/common.php';
 require INC_DIR . '/bbcode.php';
-require INC_DIR . '/functions_post.php';
-require_once INC_DIR . '/functions_admin.php';
 
 //
 // Functions
@@ -88,9 +70,9 @@ function validate_mode_condition($request_index, $mod_action = '')
 }
 
 // Obtain initial vars
-$forum_id = isset($_REQUEST['f']) ? $_REQUEST['f'] : 0;
-$topic_id = isset($_REQUEST['t']) ? $_REQUEST['t'] : 0;
-$post_id = isset($_REQUEST['p']) ? $_REQUEST['p'] : 0;
+$forum_id = $_REQUEST['f'] ?? 0;
+$topic_id = $_REQUEST['t'] ?? 0;
+$post_id = $_REQUEST['p'] ?? 0;
 
 $start = isset($_REQUEST['start']) ? abs((int)$_REQUEST['start']) : 0;
 $confirmed = isset($_POST['confirm']);
@@ -184,7 +166,7 @@ if (!$is_auth['auth_mod']) {
 
 // Redirect to login page if not admin session
 if ($is_moderator && !$userdata['session_admin']) {
-    $redirect = isset($_POST['redirect']) ? $_POST['redirect'] : $_SERVER['REQUEST_URI'];
+    $redirect = $_POST['redirect'] ?? $_SERVER['REQUEST_URI'];
     redirect(LOGIN_URL . "?redirect=$redirect&admin=1");
 }
 
@@ -207,7 +189,7 @@ switch ($mode) {
             bb_die($lang['NONE_SELECTED']);
         }
 
-        $req_topics = isset($_POST['topic_id_list']) ? $_POST['topic_id_list'] : $topic_id;
+        $req_topics = $_POST['topic_id_list'] ?? $topic_id;
         validate_topics($forum_id, $req_topics, $topic_titles);
 
         if (!$req_topics || !($topic_csv = get_id_csv($req_topics))) {
@@ -238,7 +220,7 @@ switch ($mode) {
         }
 
         if ($confirmed) {
-            $result = topic_delete($req_topics, $forum_id);
+            $result = \TorrentPier\Legacy\Admin\Common::topic_delete($req_topics, $forum_id);
 
             //Обновление кеша новостей на главной
             $news_forums = array_flip(explode(',', $bb_cfg['latest_news_forum_id']));
@@ -269,7 +251,7 @@ switch ($mode) {
 
         if ($confirmed) {
             $new_forum_id = (int)$_POST['new_forum'];
-            $result = topic_move($req_topics, $new_forum_id, $forum_id, isset($_POST['move_leave_shadow']), isset($_POST['insert_bot_msg']));
+            $result = \TorrentPier\Legacy\Admin\Common::topic_move($req_topics, $new_forum_id, $forum_id, isset($_POST['move_leave_shadow']), isset($_POST['insert_bot_msg']));
 
             //Обновление кеша новостей на главной
             $news_forums = array_flip(explode(',', $bb_cfg['latest_news_forum_id']));
@@ -388,10 +370,10 @@ switch ($mode) {
         //mpd
         $delete_posts = isset($_POST['delete_posts']);
         $split = (isset($_POST['split_type_all']) || isset($_POST['split_type_beyond']));
-        $posts = (isset($_POST['post_id_list'])) ? $_POST['post_id_list'] : array();
+        $posts = $_POST['post_id_list'] ?? array();
         $start = /* (isset($_POST['start'])) ? intval($_POST['start']) : */
             0;
-        $topic_first_post_id = (isset($topic_row['topic_first_post_id'])) ? $topic_row['topic_first_post_id'] : '';
+        $topic_first_post_id = $topic_row['topic_first_post_id'] ?? '';
 
         $post_id_sql = $req_post_id_sql = array();
 
@@ -492,14 +474,14 @@ switch ($mode) {
 
                 //bot
                 if (isset($_POST['after_split_to_old'])) {
-                    insert_post('after_split_to_old', $topic_id, $forum_id, '', $new_topic_id, trim($_POST['subject']));
+                    \TorrentPier\Legacy\Post::insert_post('after_split_to_old', $topic_id, $forum_id, '', $new_topic_id, trim($_POST['subject']));
                 }
                 if (isset($_POST['after_split_to_new'])) {
-                    insert_post('after_split_to_new', $new_topic_id, $new_forum_id, $forum_id, $new_topic_id, '', $topic_id);
+                    \TorrentPier\Legacy\Post::insert_post('after_split_to_new', $new_topic_id, $new_forum_id, $forum_id, $new_topic_id, '', $topic_id);
                 }
 
-                sync('topic', array($topic_id, $new_topic_id));
-                sync('forum', array($forum_id, $new_forum_id));
+                \TorrentPier\Legacy\Admin\Common::sync('topic', array($topic_id, $new_topic_id));
+                \TorrentPier\Legacy\Admin\Common::sync('forum', array($forum_id, $new_forum_id));
 
                 //bot
                 $message = $lang['TOPIC_SPLIT'] . '<br /><br /><a href="' . "viewtopic.php?" . POST_TOPIC_URL . "=$topic_id&amp;sid=" . $userdata['session_id'] . '">' . $lang['TOPIC_SPLIT_OLD'] . '</a>';
@@ -523,7 +505,7 @@ switch ($mode) {
             }
 
             // Delete posts
-            $result = post_delete(explode(',', $post_id_sql));
+            $result = \TorrentPier\Legacy\Admin\Common::post_delete(explode(',', $post_id_sql));
 
             $msg = ($result) ? $lang['DELETE_POSTS_SUCCESFULLY'] : 'No posts were removed';
             bb_die(return_msg_mcp($msg));

@@ -1,26 +1,10 @@
 <?php
 /**
- * MIT License
+ * TorrentPier – Bull-powered BitTorrent tracker engine
  *
- * Copyright (c) 2005-2017 TorrentPier
- *
- * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to deal
- * in the Software without restriction, including without limitation the rights
- * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following conditions:
- *
- * The above copyright notice and this permission notice shall be included in all
- * copies or substantial portions of the Software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
- * SOFTWARE.
+ * @copyright Copyright (c) 2005-2018 TorrentPier (https://torrentpier.com)
+ * @link      https://github.com/torrentpier/torrentpier for the canonical source repository
+ * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
  */
 
 if (!empty($setmodules)) {
@@ -174,8 +158,8 @@ if ($confirm && count($delete_id_list) > 0) {
     $hidden_fields .= '<input type="hidden" name="u_id" value="' . $uid . '" />';
     $hidden_fields .= '<input type="hidden" name="start" value="' . $start . '" />';
 
-    for ($i = 0, $iMax = count($delete_id_list); $i < $iMax; $i++) {
-        $hidden_fields .= '<input type="hidden" name="delete_id_list[]" value="' . $delete_id_list[$i] . '" />';
+    foreach ($delete_id_list as $iValue) {
+        $hidden_fields .= '<input type="hidden" name="delete_id_list[]" value="' . $iValue . '" />';
     }
 
     print_confirmation(array(
@@ -398,8 +382,8 @@ if ($view === 'attachments') {
         for ($i = 0, $iMax = count($attachments); $i < $iMax; $i++) {
             $delete_box = '<input type="checkbox" name="delete_id_list[]" value="' . (int)$attachments[$i]['attach_id'] . '" />';
 
-            for ($j = 0, $jMax = count($delete_id_list); $j < $jMax; $j++) {
-                if ($delete_id_list[$j] == $attachments[$i]['attach_id']) {
+            foreach ($delete_id_list as $jValue) {
+                if ($jValue == $attachments[$i]['attach_id']) {
                     $delete_box = '<input type="checkbox" name="delete_id_list[]" value="' . (int)$attachments[$i]['attach_id'] . '" checked="checked" />';
                     break;
                 }
@@ -468,7 +452,7 @@ if ($view === 'attachments') {
 
                 'S_DELETE_BOX' => $delete_box,
                 'S_HIDDEN' => $hidden_field,
-                'U_VIEW_ATTACHMENT' => BB_ROOT . DOWNLOAD_URL . $attachments[$i]['attach_id'],
+                'U_VIEW_ATTACHMENT' => BB_ROOT . DL_URL . $attachments[$i]['attach_id'],
             ));
         }
     }

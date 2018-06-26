@@ -1,43 +1,15 @@
 <?php
 /**
- * MIT License
+ * TorrentPier – Bull-powered BitTorrent tracker engine
  *
- * Copyright (c) 2005-2017 TorrentPier
- *
- * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to deal
- * in the Software without restriction, including without limitation the rights
- * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following conditions:
- *
- * The above copyright notice and this permission notice shall be included in all
- * copies or substantial portions of the Software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
- * SOFTWARE.
+ * @copyright Copyright (c) 2005-2018 TorrentPier (https://torrentpier.com)
+ * @link      https://github.com/torrentpier/torrentpier for the canonical source repository
+ * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
  */
 
 /**
  * All Attachment Functions needed everywhere
  */
-
-/**
- * html_entity_decode replacement (from php manual)
- */
-if (!function_exists('html_entity_decode')) {
-    function html_entity_decode($given_html, $quote_style = ENT_QUOTES)
-    {
-        $trans_table = array_flip(get_html_translation_table(HTML_SPECIALCHARS, $quote_style));
-        $trans_table['&#39;'] = "'";
-        return (strtr($given_html, $trans_table));
-    }
-}
 
 /**
  * A simple dectobase64 function
@@ -84,7 +56,7 @@ function base64_unpack($string)
     for ($i = 1; $i <= $length; $i++) {
         $pos = $length - $i;
         $operand = strpos($chars, $string[$pos]);
-        $exponent = pow($base, $i - 1);
+        $exponent = $base ** ($i - 1);
         $decValue = $operand * $exponent;
         $number += $decValue;
     }
@@ -103,7 +75,7 @@ function auth_pack($auth_array)
     $one_char = $two_char = false;
     $auth_cache = '';
 
-    for ($i = 0, $iMax = count($auth_array); $i < $iMax; $i++) {
+    foreach ($auth_array as $i => $iValue) {
         $val = base64_pack((int)$auth_array[$i]);
         if (strlen($val) == 1 && !$one_char) {
             $auth_cache .= $one_char_encoding;
@@ -130,7 +102,7 @@ function auth_unpack($auth_cache)
     $auth = [];
     $auth_len = 1;
 
-    for ($pos = 0; $pos < strlen($auth_cache); $pos += $auth_len) {
+    for ($pos = 0, $posMax = strlen($auth_cache); $pos < $posMax; $pos += $auth_len) {
         $forum_auth = $auth_cache[$pos];
         if ($forum_auth == $one_char_encoding) {
             $auth_len = 1;
@@ -165,7 +137,7 @@ function is_forum_authed($auth_cache, $check_forum_id)
     $auth = [];
     $auth_len = 1;
 
-    for ($pos = 0; $pos < strlen($auth_cache); $pos += $auth_len) {
+    for ($pos = 0, $posMax = strlen($auth_cache); $pos < $posMax; $pos += $auth_len) {
         $forum_auth = $auth_cache[$pos];
         if ($forum_auth == $one_char_encoding) {
             $auth_len = 1;
@@ -282,7 +254,7 @@ function get_attachments_from_post($post_id_array)
         $post_id_array[] = $post_id;
     }
 
-    $post_id_array = implode(', ', array_map('intval', $post_id_array));
+    $post_id_array = implode(', ', array_map('\intval', $post_id_array));
 
     if ($post_id_array == '') {
         return $attachments;
@@ -320,7 +292,7 @@ function get_total_attach_filesize($attach_ids)
         return 0;
     }
 
-    $attach_ids = implode(', ', array_map('intval', $attach_ids));
+    $attach_ids = implode(', ', array_map('\intval', $attach_ids));
 
     if (!$attach_ids) {
         return 0;
@@ -428,7 +400,7 @@ function get_extension($filename)
  */
 function delete_extension($filename)
 {
-    return substr($filename, 0, strrpos(strtolower(trim($filename)), '.'));
+    return substr($filename, 0, strripos(trim($filename), '.'));
 }
 
 /**
@@ -551,7 +523,7 @@ function attach_mod_sql_escape($text)
         return DB()->escape_string($text);
     }
 
-    return str_replace("'", "''", str_replace('\\', '\\\\', $text));
+    return str_replace(['\\', "'"], ['\\\\', "''"], $text);
 }
 
 /**

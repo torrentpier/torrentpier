@@ -1,31 +1,16 @@
 <?php
 /**
- * MIT License
+ * TorrentPier – Bull-powered BitTorrent tracker engine
  *
- * Copyright (c) 2005-2017 TorrentPier
- *
- * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to deal
- * in the Software without restriction, including without limitation the rights
- * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following conditions:
- *
- * The above copyright notice and this permission notice shall be included in all
- * copies or substantial portions of the Software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
- * SOFTWARE.
+ * @copyright Copyright (c) 2005-2018 TorrentPier (https://torrentpier.com)
+ * @link      https://github.com/torrentpier/torrentpier for the canonical source repository
+ * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
  */
 
 namespace TorrentPier\Legacy\Common;
 
 use TorrentPier\Legacy\DateDelta;
+use TorrentPier\Legacy\Sessions;
 
 /**
  * Class User
@@ -149,7 +134,7 @@ class User
                 $userdata_cache_id = USER_IP;
             }
 
-            if (!$this->data = cache_get_userdata($userdata_cache_id)) {
+            if (!$this->data = Sessions::cache_get_userdata($userdata_cache_id)) {
                 $this->data = DB()->fetch_row($SQL);
 
                 if ($this->data && (TIMENOW - $this->data['session_time']) > $bb_cfg['session_update_intrv']) {
@@ -157,7 +142,7 @@ class User
                     $update_sessions_table = true;
                 }
 
-                cache_set_userdata($this->data);
+                Sessions::cache_set_userdata($this->data);
             }
         }
 
@@ -170,8 +155,8 @@ class User
             $ip_check_u = substr(USER_IP, 0, 6);
 
             if ($ip_check_s == $ip_check_u) {
-                if ($this->data['user_id'] != GUEST_UID && defined('IN_ADMIN')) {
-                    define('SID_GET', "sid={$this->data['session_id']}");
+                if ($this->data['user_id'] != GUEST_UID && \defined('IN_ADMIN')) {
+                    \define('SID_GET', "sid={$this->data['session_id']}");
                 }
                 $session_id = $this->sessiondata['sid'] = $this->data['session_id'];
 
@@ -209,13 +194,13 @@ class User
             $this->session_create($userdata, true);
         }
 
-        define('IS_GUEST', !$this->data['session_logged_in']);
-        define('IS_ADMIN', !IS_GUEST && (int)$this->data['user_level'] === ADMIN);
-        define('IS_MOD', !IS_GUEST && (int)$this->data['user_level'] === MOD);
-        define('IS_GROUP_MEMBER', !IS_GUEST && (int)$this->data['user_level'] === GROUP_MEMBER);
-        define('IS_USER', !IS_GUEST && (int)$this->data['user_level'] === USER);
-        define('IS_SUPER_ADMIN', IS_ADMIN && isset($bb_cfg['super_admins'][$this->data['user_id']]));
-        define('IS_AM', IS_ADMIN || IS_MOD);
+        \define('IS_GUEST', !$this->data['session_logged_in']);
+        \define('IS_ADMIN', !IS_GUEST && (int)$this->data['user_level'] === ADMIN);
+        \define('IS_MOD', !IS_GUEST && (int)$this->data['user_level'] === MOD);
+        \define('IS_GROUP_MEMBER', !IS_GUEST && (int)$this->data['user_level'] === GROUP_MEMBER);
+        \define('IS_USER', !IS_GUEST && (int)$this->data['user_level'] === USER);
+        \define('IS_SUPER_ADMIN', IS_ADMIN && isset($bb_cfg['super_admins'][$this->data['user_id']]));
+        \define('IS_AM', IS_ADMIN || IS_MOD);
 
         $this->set_shortcuts();
 
@@ -287,7 +272,7 @@ class User
 
             if (!$session_time = $this->data['user_session_time']) {
                 $last_visit = TIMENOW;
-                define('FIRST_LOGON', true);
+                \define('FIRST_LOGON', true);
             } elseif ($session_time < (TIMENOW - $bb_cfg['last_visit_update_intrv'])) {
                 $last_visit = max($session_time, (TIMENOW - 86400 * $bb_cfg['max_last_visit_days']));
             }
@@ -327,11 +312,11 @@ class User
 
         $this->set_session_cookies($user_id);
 
-        if ($login && (defined('IN_ADMIN') || $mod_admin_session)) {
-            define('SID_GET', "sid=$session_id");
+        if ($login && (\defined('IN_ADMIN') || $mod_admin_session)) {
+            \define('SID_GET', "sid=$session_id");
         }
 
-        cache_set_userdata($this->data);
+        Sessions::cache_set_userdata($this->data);
 
         return $this->data;
     }
@@ -418,10 +403,12 @@ class User
 							AND session_id = '" . $this->data['session_id'] . "'
 					");
                     $this->data['session_admin'] = $this->data['user_level'];
-                    cache_update_userdata($this->data);
+                    Sessions::cache_update_userdata($this->data);
 
                     return $this->data;
-                } elseif ($new_session_userdata = $this->session_create($userdata, false)) {
+                }
+
+                if ($new_session_userdata = $this->session_create($userdata, false)) {
                     // Removing guest sessions from this IP
                     DB()->query("
 						DELETE FROM " . BB_SESSIONS . "
@@ -430,9 +417,9 @@ class User
 					");
 
                     return $new_session_userdata;
-                } else {
-                    trigger_error("Could not start session : login", E_USER_ERROR);
                 }
+
+                trigger_error("Could not start session : login", E_USER_ERROR);
             }
         }
 
@@ -571,17 +558,17 @@ class User
     {
         global $bb_cfg, $theme, $source_lang, $DeltaTime;
 
-        if (defined('LANG_DIR')) {
+        if (\defined('LANG_DIR')) {
             return;
         }  // prevent multiple calling
 
-        define('DEFAULT_LANG_DIR', LANG_ROOT_DIR . '/' . $bb_cfg['default_lang'] . '/');
-        define('SOURCE_LANG_DIR', LANG_ROOT_DIR . '/source/');
+        \define('DEFAULT_LANG_DIR', LANG_ROOT_DIR . '/' . $bb_cfg['default_lang'] . '/');
+        \define('SOURCE_LANG_DIR', LANG_ROOT_DIR . '/source/');
 
         if ($this->data['user_id'] != GUEST_UID) {
             if ($this->data['user_lang'] && $this->data['user_lang'] != $bb_cfg['default_lang']) {
                 $bb_cfg['default_lang'] = basename($this->data['user_lang']);
-                define('LANG_DIR', LANG_ROOT_DIR . '/' . $bb_cfg['default_lang'] . '/');
+                \define('LANG_DIR', LANG_ROOT_DIR . '/' . $bb_cfg['default_lang'] . '/');
             }
 
             if (isset($this->data['user_timezone'])) {
@@ -592,8 +579,8 @@ class User
         $this->data['user_lang'] = $bb_cfg['default_lang'];
         $this->data['user_timezone'] = $bb_cfg['board_timezone'];
 
-        if (!defined('LANG_DIR')) {
-            define('LANG_DIR', DEFAULT_LANG_DIR);
+        if (!\defined('LANG_DIR')) {
+            \define('LANG_DIR', DEFAULT_LANG_DIR);
         }
 
         /** Temporary place source language to the global */
@@ -605,8 +592,7 @@ class User
         /** Place user language to the global */
         global $lang;
         require(LANG_DIR . 'main.php');
-        setlocale(LC_ALL, isset($bb_cfg['lang'][$this->data['user_lang']]['locale']) ?
-            $bb_cfg['lang'][$this->data['user_lang']]['locale'] : 'en_US.UTF-8');
+        setlocale(LC_ALL, $bb_cfg['lang'][$this->data['user_lang']]['locale'] ?? 'en_US.UTF-8');
         $lang += $source_lang;
 
         $theme = setup_style();
@@ -641,7 +627,7 @@ class User
             $this->data['user_lastvisit'] = TIMENOW;
 
             // Update lastvisit
-            db_update_userdata($this->data, [
+            Sessions::db_update_userdata($this->data, [
                 'user_session_time' => $this->data['session_time'],
                 'user_lastvisit' => $this->data['user_lastvisit'],
             ]);
@@ -663,7 +649,7 @@ class User
         } elseif (!empty($_COOKIE['opt_js'])) {
             $opt_js = json_decode($_COOKIE['opt_js'], true);
 
-            if (is_array($opt_js)) {
+            if (\is_array($opt_js)) {
                 $this->opt_js = array_merge($this->opt_js, $opt_js);
             }
         }

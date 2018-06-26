@@ -1,26 +1,10 @@
 <?php
 /**
- * MIT License
+ * TorrentPier – Bull-powered BitTorrent tracker engine
  *
- * Copyright (c) 2005-2017 TorrentPier
- *
- * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to deal
- * in the Software without restriction, including without limitation the rights
- * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following conditions:
- *
- * The above copyright notice and this permission notice shall be included in all
- * copies or substantial portions of the Software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
- * SOFTWARE.
+ * @copyright Copyright (c) 2005-2018 TorrentPier (https://torrentpier.com)
+ * @link      https://github.com/torrentpier/torrentpier for the canonical source repository
+ * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
  */
 
 namespace TorrentPier\Legacy\Common;
@@ -108,7 +92,7 @@ class Upload
         // img
         if ($this->cfg['max_width'] || $this->cfg['max_height']) {
             if ($img_info = getimagesize($this->file['tmp_name'])) {
-                list($width, $height, $type, $attr) = $img_info;
+                [$width, $height, $type, $attr] = $img_info;
 
                 // redefine ext
                 if (!$width || !$height || !$type || !isset($this->img_types[$type])) {
@@ -128,7 +112,7 @@ class Upload
             }
         }
         // check ext
-        if ($uploaded_only && (!isset($this->ext_ids[$this->file_ext]) || !in_array($this->file_ext, $this->cfg['allowed_ext'], true))) {
+        if ($uploaded_only && (!isset($this->ext_ids[$this->file_ext]) || !\in_array($this->file_ext, $this->cfg['allowed_ext'], true))) {
             $this->errors[] = sprintf($lang['UPLOAD_ERROR_NOT_ALLOWED'], htmlCHR($this->file_ext));
             return false;
         }
@@ -153,9 +137,9 @@ class Upload
         if ($mode == 'attach') {
             $file_path = get_attach_path($params['topic_id']);
             return $this->_move($file_path);
-        } else {
-            trigger_error("Invalid upload mode: $mode", E_USER_ERROR);
         }
+
+        trigger_error("Invalid upload mode: $mode", E_USER_ERROR);
     }
 
     /**
@@ -164,7 +148,7 @@ class Upload
      */
     public function _move($file_path)
     {
-        $dir = dirname($file_path);
+        $dir = \dirname($file_path);
         if (!file_exists($dir)) {
             if (!bb_mkdir($dir)) {
                 $this->errors[] = "Cannot create dir: $dir";

@@ -1,26 +1,10 @@
 <?php
 /**
- * MIT License
+ * TorrentPier – Bull-powered BitTorrent tracker engine
  *
- * Copyright (c) 2005-2017 TorrentPier
- *
- * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to deal
- * in the Software without restriction, including without limitation the rights
- * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following conditions:
- *
- * The above copyright notice and this permission notice shall be included in all
- * copies or substantial portions of the Software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
- * SOFTWARE.
+ * @copyright Copyright (c) 2005-2018 TorrentPier (https://torrentpier.com)
+ * @link      https://github.com/torrentpier/torrentpier for the canonical source repository
+ * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
  */
 
 if (!defined('BB_ROOT')) {
@@ -30,21 +14,21 @@ if (!defined('BB_ROOT')) {
 function get_path_from_id($id, $ext_id, $base_path, $first_div, $sec_div)
 {
     global $bb_cfg;
-    $ext = isset($bb_cfg['file_id_ext'][$ext_id]) ? $bb_cfg['file_id_ext'][$ext_id] : '';
+    $ext = $bb_cfg['file_id_ext'][$ext_id] ?? '';
     return ($base_path ? "$base_path/" : '') . floor($id / $first_div) . '/' . ($id % $sec_div) . '/' . $id . ($ext ? ".$ext" : '');
 }
 
 function get_avatar_path($id, $ext_id, $base_path = null, $first_div = 10000, $sec_div = 100)
 {
     global $bb_cfg;
-    $base_path = isset($base_path) ? $base_path : $bb_cfg['avatars']['upload_path'];
+    $base_path = $base_path ?? $bb_cfg['avatars']['upload_path'];
     return get_path_from_id($id, $ext_id, $base_path, $first_div, $sec_div);
 }
 
 function get_attach_path($id, $ext_id = '', $base_path = null, $first_div = 10000, $sec_div = 100)
 {
     global $bb_cfg;
-    $base_path = isset($base_path) ? $base_path : $bb_cfg['attach']['upload_path'];
+    $base_path = $base_path ?? $bb_cfg['attach']['upload_path'];
     return get_path_from_id($id, $ext_id, $base_path, $first_div, $sec_div);
 }
 
@@ -120,8 +104,8 @@ function get_last_read($topic_id = 0, $forum_id = 0)
 {
     global $tracking_topics, $tracking_forums, $user;
 
-    $t = isset($tracking_topics[$topic_id]) ? $tracking_topics[$topic_id] : 0;
-    $f = isset($tracking_forums[$forum_id]) ? $tracking_forums[$forum_id] : 0;
+    $t = $tracking_topics[$topic_id] ?? 0;
+    $f = $tracking_forums[$forum_id] ?? 0;
     return max($t, $f, $user->data['user_lastvisit']);
 }
 
@@ -603,9 +587,9 @@ function bt_show_ip($ip, $port = '')
         $ip = decode_ip($ip);
         $ip .= ($port) ? ":$port" : '';
         return $ip;
-    } else {
-        return ($bb_cfg['bt_show_ip_only_moder']) ? false : decode_ip_xx($ip);
     }
+
+    return ($bb_cfg['bt_show_ip_only_moder']) ? false : decode_ip_xx($ip);
 }
 
 function bt_show_port($port)
@@ -614,9 +598,9 @@ function bt_show_port($port)
 
     if (IS_AM) {
         return $port;
-    } else {
-        return ($bb_cfg['bt_show_port_only_moder']) ? false : $port;
     }
+
+    return ($bb_cfg['bt_show_port_only_moder']) ? false : $port;
 }
 
 function decode_ip_xx($ip)
@@ -694,7 +678,7 @@ function request_var($var_name, $default, $multibyte = false, $cookie = false)
         if (!isset($_GET[$var_name]) && !isset($_POST[$var_name])) {
             return (is_array($default)) ? array() : $default;
         }
-        $_REQUEST[$var_name] = isset($_POST[$var_name]) ? $_POST[$var_name] : $_GET[$var_name];
+        $_REQUEST[$var_name] = $_POST[$var_name] ?? $_GET[$var_name];
     }
 
     if (!isset($_REQUEST[$var_name]) || (is_array($_REQUEST[$var_name]) && !is_array($default)) || (is_array($default) && !is_array($_REQUEST[$var_name]))) {
@@ -705,13 +689,13 @@ function request_var($var_name, $default, $multibyte = false, $cookie = false)
     if (!is_array($default)) {
         $type = gettype($default);
     } else {
-        list($key_type, $type) = $default;
+        [$key_type, $type] = $default;
         $type = gettype($type);
         $key_type = gettype($key_type);
         if ($type == 'array') {
             reset($default);
             $default = current($default);
-            list($sub_key_type, $sub_type) = $default;
+            [$sub_key_type, $sub_type] = $default;
             $sub_type = gettype($sub_type);
             $sub_type = ($sub_type == 'array') ? 'NULL' : $sub_type;
             $sub_key_type = gettype($sub_key_type);
@@ -757,10 +741,10 @@ function get_username($user_id)
             $usernames[$row['user_id']] = $row['username'];
         }
         return $usernames;
-    } else {
-        $row = DB()->fetch_row("SELECT username FROM " . BB_USERS . " WHERE user_id = $user_id LIMIT 1");
-        return $row['username'];
     }
+
+    $row = DB()->fetch_row("SELECT username FROM " . BB_USERS . " WHERE user_id = $user_id LIMIT 1");
+    return $row['username'];
 }
 
 function get_user_id($username)
@@ -862,9 +846,9 @@ function get_attachments_dir($cfg = null)
 
     if ($cfg['upload_dir'][0] == '/' || ($cfg['upload_dir'][0] != '/' && $cfg['upload_dir'][1] == ':')) {
         return $cfg['upload_dir'];
-    } else {
-        return BB_ROOT . $cfg['upload_dir'];
     }
+
+    return BB_ROOT . $cfg['upload_dir'];
 }
 
 function bb_get_config($table, $from_db = false, $update_cache = true)
@@ -1351,7 +1335,7 @@ function bb_die($msg_text)
 
     // If empty session
     if (empty($userdata)) {
-        $userdata = session_pagestart();
+        $userdata = \TorrentPier\Legacy\Sessions::session_pagestart();
     }
 
     // If the header hasn't been output then do it
@@ -1402,7 +1386,7 @@ function bb_realpath($path)
 
 function login_redirect($url = '')
 {
-    redirect(LOGIN_URL . '?redirect=' . (($url) ?: (isset($_SERVER['REQUEST_URI']) ? $_SERVER['REQUEST_URI'] : '/')));
+    redirect(LOGIN_URL . '?redirect=' . (($url) ?: ($_SERVER['REQUEST_URI'] ?? '/')));
 }
 
 function meta_refresh($url, $time = 5)
@@ -1469,9 +1453,9 @@ function get_forum_display_sort_option($selected_row = 0, $action = 'list', $lis
 
     // build list
     if ($action == 'list') {
-        for ($i = 0, $iMax = count($listrow['lang_key']); $i < $iMax; $i++) {
+        foreach ($listrow['lang_key'] as $i => $iValue) {
             $selected = ($i == $selected_row) ? ' selected="selected"' : '';
-            $l_value = (isset($lang[$listrow['lang_key'][$i]])) ? $lang[$listrow['lang_key'][$i]] : $listrow['lang_key'][$i];
+            $l_value = $lang[$listrow['lang_key'][$i]] ?? $iValue;
             $res .= '<option value="' . $i . '"' . $selected . '>' . $l_value . '</option>';
         }
     } else {
@@ -1489,98 +1473,6 @@ function topic_attachment_image($switch_attachment)
         return '';
     }
     return '<img src="styles/images/icon_clip.gif" alt="" border="0" /> ';
-}
-
-/**
- * array_combine()
- *
- * @package  PHP_Compat
- * @link     http://php.net/function.array_combine
- * @author   Aidan Lister <aidan@php.net>
- * @version  $Revision: 1.21 $
- * @since    PHP 5
- */
-if (!function_exists('array_combine')) {
-    function array_combine($keys, $values)
-    {
-        if (!is_array($keys)) {
-            user_error('array_combine() expects parameter 1 to be array, ' .
-                gettype($keys) . ' given', E_USER_WARNING);
-            return;
-        }
-
-        if (!is_array($values)) {
-            user_error('array_combine() expects parameter 2 to be array, ' .
-                gettype($values) . ' given', E_USER_WARNING);
-            return;
-        }
-
-        $key_count = count($keys);
-        $value_count = count($values);
-        if ($key_count !== $value_count) {
-            user_error('array_combine() both parameters should have equal number of elements', E_USER_WARNING);
-            return false;
-        }
-
-        if ($key_count === 0 || $value_count === 0) {
-            user_error('array_combine() both parameters should have number of elements at least 0', E_USER_WARNING);
-            return false;
-        }
-
-        $keys = array_values($keys);
-        $values = array_values($values);
-
-        $combined = array();
-        for ($i = 0; $i < $key_count; $i++) {
-            $combined[$keys[$i]] = $values[$i];
-        }
-
-        return $combined;
-    }
-}
-
-/**
- * array_intersect_key()
- *
- * @package     PHP_Compat
- * @link        http://php.net/function.array_intersect_key
- * @author      Tom Buskens <ortega@php.net>
- * @version     $Revision: 1.4 $
- * @since       PHP 5.0.2
- */
-if (!function_exists('array_intersect_key')) {
-    function array_intersect_key()
-    {
-        $args = func_get_args();
-        if (count($args) < 2) {
-            user_error('Wrong parameter count for array_intersect_key()', E_USER_WARNING);
-            return;
-        }
-
-        // Check arrays
-        $array_count = count($args);
-        for ($i = 0; $i !== $array_count; $i++) {
-            if (!is_array($args[$i])) {
-                user_error('array_intersect_key() Argument #' .
-                    ($i + 1) . ' is not an array', E_USER_WARNING);
-                return;
-            }
-        }
-
-        // Compare entries
-        $result = array();
-        foreach ($args[0] as $key1 => $value1) {
-            for ($i = 1; $i !== $array_count; $i++) {
-                foreach ($args[$i] as $key2 => $value2) {
-                    if ((string)$key1 === (string)$key2) {
-                        $result[$key1] = $value1;
-                    }
-                }
-            }
-        }
-
-        return $result;
-    }
 }
 
 function clear_dl_list($topics_csv)
@@ -1628,7 +1520,7 @@ function get_topic_icon($topic, $is_unread = null)
     global $bb_cfg, $images;
 
     $t_hot = ($topic['topic_replies'] >= $bb_cfg['hot_threshold']);
-    $is_unread = null === $is_unread ? is_unread($topic['topic_last_post_time'], $topic['topic_id'], $topic['forum_id']) : $is_unread;
+    $is_unread = $is_unread ?? is_unread($topic['topic_last_post_time'], $topic['topic_id'], $topic['forum_id']);
 
     if ($topic['topic_status'] == TOPIC_MOVED) {
         $folder_image = $images['folder'];
@@ -1805,8 +1697,7 @@ function clean_text_match($text, $ltrim_star = true, $die_if_empty = false)
     if ($bb_cfg['search_engine_type'] == 'sphinx') {
         $text = preg_replace('#(?<=\S)\-#u', ' ', $text);                 // "1-2-3" -> "1 2 3"
         $text = preg_replace('#[^0-9a-zA-Zа-яА-ЯёЁ\-_*|]#u', ' ', $text); // допустимые символы (кроме " которые отдельно)
-        $text = str_replace('-', ' -', $text);                            // - только в начале слова
-        $text = str_replace('*', '* ', $text);                            // * только в конце слова
+        $text = str_replace(['-', '*'], [' -', '* '], $text);                                // только в начале / конце слова
         $text = preg_replace('#\s*\|\s*#u', '|', $text);                  // "| " -> "|"
         $text = preg_replace('#\|+#u', ' | ', $text);                     // "||" -> "|"
         $text = preg_replace('#(?<=\s)[\-*]+\s#u', ' ', $text);           // одиночные " - ", " * "
@@ -1851,7 +1742,7 @@ function log_sphinx_error($err_type, $err_msg, $query = '')
     }
 }
 
-function get_title_match_topics($title_match_sql, $forum_ids = [])
+function get_title_match_topics($title_match_sql, array $forum_ids = [])
 {
     global $bb_cfg, $sphinx, $userdata, $title_match, $lang;
 
@@ -1929,11 +1820,30 @@ function pad_with_space($str)
     return $str ? " $str " : $str;
 }
 
-function create_magnet($infohash, $auth_key, $logged_in)
+/**
+ * Create magnet link
+ *
+ * @param string $infohash
+ * @param string|bool $auth_key
+ *
+ * @return string
+ */
+function create_magnet($infohash, $auth_key)
 {
-    global $bb_cfg, $_GET, $images;
+    global $bb_cfg, $images, $lang, $userdata;
 
-    $passkey_url = ((!$logged_in || isset($_GET['no_passkey'])) && $bb_cfg['bt_tor_browse_only_reg']) ? '' : "?{$bb_cfg['passkey_key']}=$auth_key";
+    if (IS_GUEST && $bb_cfg['bt_tor_browse_only_reg']) {
+        $passkey = '';
+    } elseif (empty($auth_key)) {
+        if (!$passkey = \TorrentPier\Legacy\Torrent::generate_passkey($userdata['user_id'], true)) {
+            bb_die($lang['PASSKEY_ERR_EMPTY']);
+        }
+    } else {
+        $passkey = $auth_key;
+    }
+
+    $passkey_url = $passkey ? "?{$bb_cfg['passkey_key']}=$auth_key" : '';
+
     return '<a href="magnet:?xt=urn:btih:' . bin2hex($infohash) . '&tr=' . urlencode($bb_cfg['bt_announce_url'] . $passkey_url) . '"><img src="' . $images['icon_magnet'] . '" width="12" height="12" border="0" /></a>';
 }
 
@@ -2027,10 +1937,6 @@ function get_avatar($user_id, $ext_id, $allow_avatar = true, $size = true, $heig
 {
     global $bb_cfg;
 
-    if ($size) {
-        // TODO размеры: s, m, l + кеширование
-    }
-
     $height = !$height ? 'height="' . $height . '"' : '';
     $width = !$width ? 'width="' . $width . '"' : '';
 
@@ -2097,16 +2003,14 @@ function is_gold($type)
 
 function update_atom($type, $id)
 {
-    require_once INC_DIR . '/functions_atom.php';
-
     switch ($type) {
         case 'user':
-            update_user_feed($id, get_username($id));
+            \TorrentPier\Legacy\Atom::update_user_feed($id, get_username($id));
             break;
 
         case 'topic':
             $topic_poster = (int)DB()->fetch_row("SELECT topic_poster FROM " . BB_TOPICS . " WHERE topic_id = $id LIMIT 1", 'topic_poster');
-            update_user_feed($topic_poster, get_username($topic_poster));
+            \TorrentPier\Legacy\Atom::update_user_feed($topic_poster, get_username($topic_poster));
             break;
     }
 }

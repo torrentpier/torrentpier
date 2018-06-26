@@ -1,26 +1,10 @@
 <?php
 /**
- * MIT License
+ * TorrentPier – Bull-powered BitTorrent tracker engine
  *
- * Copyright (c) 2005-2017 TorrentPier
- *
- * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to deal
- * in the Software without restriction, including without limitation the rights
- * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following conditions:
- *
- * The above copyright notice and this permission notice shall be included in all
- * copies or substantial portions of the Software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
- * SOFTWARE.
+ * @copyright Copyright (c) 2005-2018 TorrentPier (https://torrentpier.com)
+ * @link      https://github.com/torrentpier/torrentpier for the canonical source repository
+ * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
  */
 
 if (!defined('BB_ROOT')) {
@@ -56,7 +40,7 @@ $template->assign_vars(array(
 
 // Define show peers mode (count only || user names with complete % || full details)
 $cfg_sp_mode = $bb_cfg['bt_show_peers_mode'];
-$get_sp_mode = (isset($_GET['spmode'])) ? $_GET['spmode'] : '';
+$get_sp_mode = $_GET['spmode'] ?? '';
 
 $s_mode = 'count';
 
@@ -93,7 +77,7 @@ $tor_auth_del = ($tor_auth && $tor_reged);
 
 $tracker_link = ($tor_reged) ? $lang['BT_REG_YES'] : $lang['BT_REG_NO'];
 
-$download_link = DOWNLOAD_URL . $attach_id;
+$download_link = DL_URL . $attach_id;
 $description = ($comment) ?: preg_replace("#.torrent$#i", '', $display_name);
 
 if ($tor_auth_reg || $tor_auth_del) {
@@ -159,7 +143,7 @@ if ($tor_reged && $tor_info) {
 
     // Magnet link
     $passkey = DB()->fetch_row("SELECT auth_key FROM " . BB_BT_USERS . " WHERE user_id = " . (int)$bt_user_id . " LIMIT 1");
-    $tor_magnet = create_magnet($tor_info['info_hash'], $passkey['auth_key'], $userdata['session_logged_in']);
+    $tor_magnet = create_magnet($tor_info['info_hash'], $passkey['auth_key']);
 
     // ratio limits
     $min_ratio_dl = $bb_cfg['bt_min_ratio_allow_dl_tor'];
@@ -183,14 +167,14 @@ if ($tor_reged && $tor_info) {
 
     $bt_userdata = DB()->fetch_row($sql);
 
-    $user_status = isset($bt_userdata['user_status']) ? $bt_userdata['user_status'] : null;
+    $user_status = $bt_userdata['user_status'] ?? null;
 
     if (($min_ratio_dl || $min_ratio_warn) && $user_status != DL_STATUS_COMPLETE && $bt_user_id != $poster_id && $tor_type != TOR_TYPE_GOLD) {
         if (($user_ratio = get_bt_ratio($bt_userdata)) !== null) {
             $dl_allowed = ($user_ratio > $min_ratio_dl);
         }
 
-        if ((isset($user_ratio) && isset($min_ratio_warn) && $user_ratio < $min_ratio_warn && TR_RATING_LIMITS) || ($bt_userdata['u_down_total'] < MIN_DL_FOR_RATIO)) {
+        if ((isset($user_ratio, $min_ratio_warn) && $user_ratio < $min_ratio_warn && TR_RATING_LIMITS) || ($bt_userdata['u_down_total'] < MIN_DL_FOR_RATIO)) {
             $template->assign_vars(array(
                 'SHOW_RATIO_WARN' => true,
                 'RATIO_WARN_MSG' => sprintf($lang['BT_RATIO_WARNING_MSG'], $min_ratio_dl, $bb_cfg['ratio_url_help']),
@@ -400,7 +384,7 @@ if ($tor_reged && $tor_info) {
                             define('SEEDER_EXIST', true);
                             $seed_order_action = "viewtopic.php?" . POST_TOPIC_URL . "=$bt_topic_id&amp;spmode=full#seeders";
 
-                            $template->assign_block_vars("$x_full", array(
+                            $template->assign_block_vars((string)$x_full, array(
                                 'SEED_ORD_ACT' => $seed_order_action,
                                 'SEEDERS_UP_TOT' => humn_size($sp_up_tot[$x], 0, 'KB') . '/s'
                             ));
@@ -422,7 +406,7 @@ if ($tor_reged && $tor_info) {
                             define('LEECHER_EXIST', true);
                             $leech_order_action = "viewtopic.php?" . POST_TOPIC_URL . "=$bt_topic_id&amp;spmode=full#leechers";
 
-                            $template->assign_block_vars("$x_full", array(
+                            $template->assign_block_vars((string)$x_full, array(
                                 'LEECH_ORD_ACT' => $leech_order_action,
                                 'LEECHERS_UP_TOT' => humn_size($sp_up_tot[$x], 0, 'KB') . '/s',
                                 'LEECHERS_DOWN_TOT' => humn_size($sp_down_tot[$x], 0, 'KB') . '/s'
