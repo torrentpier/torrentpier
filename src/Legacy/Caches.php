@@ -71,20 +71,6 @@ class Caches
                         $this->ref[$cache_name] =& $this->obj[$cache_name];
                         break;
 
-                    case 'apc':
-                        if (!isset($this->obj[$cache_name])) {
-                            $this->obj[$cache_name] = new Cache\Apc($this->cfg['prefix']);
-                        }
-                        $this->ref[$cache_name] =& $this->obj[$cache_name];
-                        break;
-
-                    case 'xcache':
-                        if (!isset($this->obj[$cache_name])) {
-                            $this->obj[$cache_name] = new Cache\Xcache($this->cfg['prefix']);
-                        }
-                        $this->ref[$cache_name] =& $this->obj[$cache_name];
-                        break;
-
                     default: //filecache
                         if (!isset($this->obj[$cache_name])) {
                             $this->obj[$cache_name] = new Cache\File($this->cfg['db_dir'] . $cache_name . '/', $this->cfg['prefix']);

@@ -193,14 +193,6 @@ switch ($bb_cfg['datastore_type']) {
         $datastore = new TorrentPier\Legacy\Datastore\Redis($bb_cfg['cache']['redis'], $bb_cfg['cache']['prefix']);
         break;
 
-    case 'apc':
-        $datastore = new TorrentPier\Legacy\Datastore\Apc($bb_cfg['cache']['prefix']);
-        break;
-
-    case 'xcache':
-        $datastore = new TorrentPier\Legacy\Datastore\Xcache($bb_cfg['cache']['prefix']);
-        break;
-
     case 'filecache':
     default:
         $datastore = new TorrentPier\Legacy\Datastore\File($bb_cfg['cache']['db_dir'] . 'datastore/', $bb_cfg['cache']['prefix']);
@@ -394,10 +386,10 @@ function sys($param)
             return function_exists('sys_getloadavg') ? implode(' ', sys_getloadavg()) : 0;
             break;
         case 'mem':
-            return function_exists('memory_get_usage') ? memory_get_usage() : 0;
+            return memory_get_usage();
             break;
         case 'mem_peak':
-            return function_exists('memory_get_peak_usage') ? memory_get_peak_usage() : 0;
+            return memory_get_peak_usage();
             break;
         default:
             trigger_error("invalid param: $param", E_USER_ERROR);

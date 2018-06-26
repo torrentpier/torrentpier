@@ -75,9 +75,6 @@ define('BB_DISABLED', TRIGGERS_DIR . '/$off');
 define('CRON_ALLOWED', TRIGGERS_DIR . '/cron_allowed');
 define('CRON_RUNNING', TRIGGERS_DIR . '/cron_running');
 
-// Misc
-define('MEM_USAGE', function_exists('memory_get_usage'));
-
 // Gzip
 define('GZIP_OUTPUT_ALLOWED', extension_loaded('zlib') && !ini_get('zlib.output_compression'));
 define('UA_GZIP_SUPPORTED', isset($_SERVER['HTTP_ACCEPT_ENCODING']) && strpos($_SERVER['HTTP_ACCEPT_ENCODING'], 'gzip') !== false);
