@@ -21,8 +21,8 @@ $bb_cfg = [];
 $bb_cfg['js_ver'] = $bb_cfg['css_ver'] = 1;
 
 // Version info
-$bb_cfg['tp_version'] = '2.3.0';
-$bb_cfg['tp_release_date'] = '26-06-2018';
+$bb_cfg['tp_version'] = '2.3.0.1';
+$bb_cfg['tp_release_date'] = '27-06-2018';
 $bb_cfg['tp_release_codename'] = 'Bison';
 
 // Database
@@ -465,11 +465,10 @@ $bb_cfg['max_search_words_per_post'] = 200;
 $bb_cfg['search_min_word_len'] = 3;
 $bb_cfg['search_max_word_len'] = 35;
 $bb_cfg['limit_max_search_results'] = false;
-$bb_cfg['spam_filter_file_path'] = ''; // BB_PATH .'/misc/spam_filter_words.txt';
 
 // Posting
 $bb_cfg['prevent_multiposting'] = true; // replace "reply" with "edit last msg" if user (not admin or mod) is last topic poster
-$bb_cfg['max_smilies'] = 10; // Максимальное число смайлов в посте (0 - без ограничения)
+$bb_cfg['max_smilies'] = 25; // Максимальное число смайлов в посте (0 - без ограничения)
 
 // PM
 $bb_cfg['privmsg_disable'] = false; // отключить систему личных сообщений на форуме

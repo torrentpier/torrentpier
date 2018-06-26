@@ -15,10 +15,13 @@ namespace TorrentPier\Legacy;
  */
 class BBCode
 {
-    public $tpl = []; // шаблоны для замены тегов
-    public $smilies;    // смайлы
-    public $found_spam;    // найденные спам "слова"
-    public $del_words = []; // см. get_words_rate()
+    /** @var array $tpl Replacements for some code elements */
+    public $tpl = [];
+
+    /** @var array $smilies Replacements for smilies */
+    public $smilies;
+
+    /** @var array $tidy_cfg Tidy preprocessor configuration */
     public $tidy_cfg = [
         'drop-empty-paras' => false,
         'fix-uri' => false,
@@ -37,6 +40,8 @@ class BBCode
         'show-warnings' => false,
         'wrap' => 0,
     ];
+
+    /** @var array $block_tags Define some elements as block-processed */
     public $block_tags = [
         'align',
         'br',
@@ -47,6 +52,7 @@ class BBCode
         'quote',
         'spoiler',
     ];
+
     public $preg = [];
     public $str = [];
     public $preg_search = [];
@@ -65,9 +71,9 @@ class BBCode
     }
 
     /**
-     * init_replacements
+     * Initialize replacements for elements
      */
-    public function init_replacements()
+    private function init_replacements(): void
     {
         $tpl = $this->tpl;
         $img_exp = '(https?:)?//[^\s\?&;=\#\"<>]+?\.(jpg|jpeg|gif|png)([a-z0-9/?&%;][^\[\]]*)?';
@@ -126,48 +132,21 @@ class BBCode
     }
 
     /**
-     * bbcode2html
+     * Convert bbcodes to html. Text must be prepared with htmlCHR
      *
-     * @param string $text должен быть уже обработан htmlCHR($text, false, ENT_NOQUOTES)
+     * @param string $text
+     *
      * @return string
      */
-    public function bbcode2html($text)
+    public function bbcode2html($text): string
     {
         global $bb_cfg;
 
-        $text = " $text ";
-        $text = static::clean_up($text);
-        $text = $this->spam_filter($text);
-
-        // Tag parse
-        if (strpos($text, '[') !== false) {
-            // [code]
-            $text = preg_replace_callback('#(\s*)\[code\](.+?)\[/code\](\s*)#s', [&$this, 'code_callback'], $text);
-
-            // Escape tags inside tiltes in [quote="tilte"]
-            $text = preg_replace_callback('#(\[(quote|spoiler)=")(.+?)("\])#', [&$this, 'escape_tiltes_callback'], $text);
-
-            // [url]
-            $url_exp = '[\w\#!$%&~/.\-;:=,?@а-яА-Я()\[\]+]+?';
-            $text = preg_replace_callback("#\[url\]((?:https?://)?$url_exp)\[/url\]#isu", [&$this, 'url_callback'], $text);
-            $text = preg_replace_callback("#\[url\](www\.$url_exp)\[/url\]#isu", [&$this, 'url_callback'], $text);
-            $text = preg_replace_callback("#\[url=((?:https?://)?$url_exp)\]([^?\n\t].*?)\[/url\]#isu", [&$this, 'url_callback'], $text);
-            $text = preg_replace_callback("#\[url=(www\.$url_exp)\]([^?\n\t].*?)\[/url\]#isu", [&$this, 'url_callback'], $text);
-
-            // Normalize block level tags wrapped with new lines
-            $block_tags = implode('|', $this->block_tags);
-            $text = str_replace("\n\n[hr]\n\n", '[br][hr][br]', $text);
-            $text = preg_replace("#(\s*)(\[/?($block_tags)(.*?)\])(\s*)#", '$2', $text);
-
-            // Tag replacements
-            $text = preg_replace($this->preg_search, $this->preg_repl, $text);
-            $text = str_replace($this->str_search, $this->str_repl, $text);
-        }
-
+        $text = self::clean_up($text);
+        $text = $this->parse($text);
         $text = $this->make_clickable($text);
         $text = $this->smilies_pass($text);
         $text = $this->new_line2html($text);
-        $text = trim($text);
 
         if ($bb_cfg['tidy_post']) {
             $text = $this->tidy($text);
@@ -177,84 +156,68 @@ class BBCode
     }
 
     /**
-     * Clean up
+     * Parse elements in the text
      *
      * @param string $text
+     *
      * @return string
      */
-    public static function clean_up($text)
+    private function parse($text): string
+    {
+        // Tag parse
+        if (strpos($text, '[') === false) {
+            return $text;
+        }
+
+        // [code]
+        $text = preg_replace_callback('#(\s*)\[code\](.+?)\[/code\](\s*)#s', [&$this, 'code_callback'], $text);
+
+        // Escape tags inside titles in [quote="tilte"]
+        $text = preg_replace_callback('#(\[(quote|spoiler)=")(.+?)("\])#', [&$this, 'escape_titles_callback'], $text);
+
+        // [url]
+        $url_exp = '[\w\#!$%&~/.\-;:=,?@а-яА-Я()\[\]+]+?';
+        $text = preg_replace_callback("#\[url\]((?:https?://)?$url_exp)\[/url\]#isu", [&$this, 'url_callback'], $text);
+        $text = preg_replace_callback("#\[url\](www\.$url_exp)\[/url\]#isu", [&$this, 'url_callback'], $text);
+        $text = preg_replace_callback("#\[url=((?:https?://)?$url_exp)\]([^?\n\t].*?)\[/url\]#isu", [&$this, 'url_callback'], $text);
+        $text = preg_replace_callback("#\[url=(www\.$url_exp)\]([^?\n\t].*?)\[/url\]#isu", [&$this, 'url_callback'], $text);
+
+        // Normalize block level tags wrapped with new lines
+        $block_tags = implode('|', $this->block_tags);
+        $text = str_replace("\n\n[hr]\n\n", '[br][hr][br]', $text);
+        $text = preg_replace("#(\s*)(\[/?($block_tags)(.*?)\])(\s*)#", '$2', $text);
+
+        // Tag replacements
+        $text = preg_replace($this->preg_search, $this->preg_repl, $text);
+        $text = str_replace($this->str_search, $this->str_repl, $text);
+
+        return $text;
+    }
+
+    /**
+     * Clean up test from trailing spaces and more
+     *
+     * @param string $text
+     *
+     * @return string
+     */
+    public static function clean_up($text): string
     {
         $text = trim($text);
         $text = str_replace("\r", '', $text);
-        $text = preg_replace('#[ \t]+$#m', '', $text); // trailing spaces
+        $text = preg_replace('#[ \t]+$#m', '', $text);
         $text = preg_replace('#\n{3,}#', "\n\n", $text);
         return $text;
     }
 
     /**
-     * Spam filter
-     *
-     * @param string $text
-     * @return string
-     */
-    private function spam_filter($text)
-    {
-        global $bb_cfg;
-        static $spam_words = null;
-        static $spam_replace = ' СПАМ';
-
-        if (isset($this)) {
-            $found_spam =& $this->found_spam;
-        }
-
-        // set $spam_words and $spam_replace
-        if (!$bb_cfg['spam_filter_file_path']) {
-            return $text;
-        }
-        if (null === $spam_words) {
-            $spam_words = file_get_contents($bb_cfg['spam_filter_file_path']);
-            $spam_words = strtolower($spam_words);
-            $spam_words = explode("\n", $spam_words);
-        }
-
-        $found_spam = [];
-
-        $msg_decoded = $text;
-        $msg_decoded = html_entity_decode($msg_decoded);
-        $msg_decoded = urldecode($msg_decoded);
-        $msg_decoded = str_replace('&', ' &', $msg_decoded);
-
-        $msg_search = strtolower($msg_decoded);
-
-        foreach ($spam_words as $spam_str) {
-            if (!$spam_str = trim($spam_str)) {
-                continue;
-            }
-            if (strpos($msg_search, $spam_str) !== false) {
-                $found_spam[] = $spam_str;
-            }
-        }
-        if ($found_spam) {
-            $spam_exp = [];
-            foreach ($found_spam as $keyword) {
-                $spam_exp[] = preg_quote($keyword, '/');
-            }
-            $spam_exp = implode('|', $spam_exp);
-
-            $text = preg_replace("/($spam_exp)(\S*)/i", $spam_replace, $msg_decoded);
-            $text = htmlCHR($text, false, ENT_NOQUOTES);
-        }
-
-        return $text;
-    }
-
-    /**
-     * [code] callback
+     * Callback to [code]
      *
      * @param string $m
+     *
      * @return string
      */
-    public function code_callback($m)
+    private function code_callback($m): string
     {
         $code = trim($m[2]);
         $code = str_replace('  ', '&nbsp; ', $code);
@@ -265,12 +228,13 @@ class BBCode
     }
 
     /**
-     * [url] callback
+     * Callback to [url]
      *
      * @param string $m
+     *
      * @return string
      */
-    public function url_callback($m)
+    private function url_callback($m): string
     {
         global $bb_cfg;
 
@@ -291,12 +255,13 @@ class BBCode
     }
 
     /**
-     * Escape tags inside titles in [quote="title"]
+     * Callback to escape titles in block elements
      *
      * @param string $m
+     *
      * @return string
      */
-    public function escape_tiltes_callback($m)
+    private function escape_titles_callback($m): string
     {
         $tilte = substr($m[3], 0, 250);
         $tilte = str_replace(['[', ']', ':', ')', '"'], ['&#91;', '&#93;', '&#58;', '&#41;', '&#34;'], $tilte);
@@ -306,12 +271,13 @@ class BBCode
     }
 
     /**
-     * Make clickable
+     * Callback to make text clickable
      *
-     * @param $text
+     * @param string $text
+     *
      * @return string
      */
-    public function make_clickable($text)
+    private function make_clickable($text): string
     {
         $url_regexp = "#
 			(?<![\"'=])
@@ -335,16 +301,17 @@ class BBCode
         // Remove our padding..
         $ret = substr(substr($ret, 0, -1), 1);
 
-        return ($ret);
+        return $ret;
     }
 
     /**
-     * Make url clickable
+     * Callback to make URL clickable
      *
      * @param string $m
+     *
      * @return string
      */
-    public function make_url_clickable_callback($m)
+    private function make_url_clickable_callback($m): string
     {
         global $bb_cfg;
 
@@ -362,33 +329,38 @@ class BBCode
     }
 
     /**
-     * Add smilies
+     * Replace smilies to images in text
      *
      * @param string $text
+     *
      * @return string
      */
-    public function smilies_pass($text)
+    private function smilies_pass($text): string
     {
-        global $datastore;
+        global $bb_cfg, $datastore;
 
         if (null === $this->smilies) {
             $this->smilies = $datastore->get('smile_replacements');
         }
+
         if ($this->smilies) {
-            $parsed_text = preg_replace($this->smilies['orig'], $this->smilies['repl'], $text, 101, $smilies_cnt);
-            $text = ($smilies_cnt <= 100) ? $parsed_text : $text;
+            /** @noinspection NestedPositiveIfStatementsInspection */
+            if ($parsed_text = preg_replace($this->smilies['orig'], $this->smilies['repl'], $text, 101, $smilies_cnt)) {
+                return (($smilies_cnt <= $bb_cfg['max_smilies']) && $bb_cfg['max_smilies'] > 0) ? $parsed_text : $text;
+            }
         }
 
         return $text;
     }
 
     /**
-     * Replace new line code to html
+     * Replace text new line to html
      *
      * @param string $text
+     *
      * @return string
      */
-    public function new_line2html($text)
+    private function new_line2html($text): string
     {
         $text = preg_replace('#\n{2,}#', '<span class="post-br"><br /></span>', $text);
         $text = str_replace("\n", '<br />', $text);
@@ -396,12 +368,13 @@ class BBCode
     }
 
     /**
-     * Tidy
+     * Prepare post text with tidy preprocessor
      *
      * @param string $text
+     *
      * @return string
      */
-    public function tidy($text)
+    private function tidy($text): string
     {
         $text = tidy_repair_string($text, $this->tidy_cfg, 'utf8');
         return $text;
