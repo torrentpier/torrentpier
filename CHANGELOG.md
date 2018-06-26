@@ -1,5 +1,13 @@
 # Change Log
 
+## [v2.3.0.1](https://github.com/torrentpier/torrentpier/tree/v2.3.0.1) (2018-06-27)
+[Full Changelog](https://github.com/torrentpier/torrentpier/compare/v2.3.0...v2.3.0.1)
+
+**Merged pull requests:**
+
+- Fix cron jobs fail without global config variable [\#471](https://github.com/torrentpier/torrentpier/pull/471) ([Exileum](https://github.com/Exileum))
+- Cleanup BBCode class [\#470](https://github.com/torrentpier/torrentpier/pull/470) ([Exileum](https://github.com/Exileum))
+
 ## [v2.3.0](https://github.com/torrentpier/torrentpier/tree/v2.3.0) (2018-06-26)
 [Full Changelog](https://github.com/torrentpier/torrentpier/compare/v2.2.3...v2.3.0)
 
