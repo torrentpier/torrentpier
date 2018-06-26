@@ -717,7 +717,6 @@ class Torrent
 
         $header = "GET /$get HTTP/1.1\r\nConnection: Close\r\n\r\n";
         $attempts = $success = $response = 0;
-        $start_time = microtime(true);
 
         while (!$success && $attempts++ < $max_attempts) {
 
@@ -737,14 +736,10 @@ class Torrent
             while (!feof($file)) {
                 $response .= fread($file, 1024);
             }
-            $data_start = strpos($response, "\r\n\r\n") + 4;
+
             $data_end = strrpos($response, "\n");
-            if ($data_end > $data_start) {
-                $data = substr($response, $data_start, $data_end - $data_start);
-            } else {
-                $data = "";
-            }
             $status = substr($response, $data_end + 1);
+
             if ($status == "success") {
                 $success = true;
             }

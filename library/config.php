@@ -55,7 +55,7 @@ $bb_cfg['db_alias'] = [
 $bb_cfg['cache'] = [
     'pconnect' => true,
     'db_dir' => realpath(BB_ROOT) . '/internal_data/cache/filecache/',
-    'prefix' => 'tp_', // Префикс кеша ('tp_')
+    'prefix' => 'tp_',
     'memcache' => [
         'host' => '127.0.0.1',
         'port' => 11211,
@@ -67,7 +67,7 @@ $bb_cfg['cache'] = [
         'port' => 6379,
         'con_required' => true,
     ],
-    // Available cache types: memcache, sqlite, redis, apc, xcache (default of filecache)
+    // Available cache types: memcache, sqlite, redis, (filecache by default)
     'engines' => [
         'bb_cache' => ['filecache', []],
         'bb_config' => ['filecache', []],
@@ -80,12 +80,12 @@ $bb_cfg['cache'] = [
 ];
 
 // Datastore
-// Available datastore types: memcache, sqlite, redis, apc, xcache  (default filecache)
+// Available datastore types: memcache, sqlite, redis (filecache by default)
 $bb_cfg['datastore_type'] = 'filecache';
 
 // Server
 $bb_cfg['server_name'] = $domain_name; // The domain name from which this board runs
-$bb_cfg['server_port'] = (!empty($_SERVER['SERVER_PORT'])) ? $_SERVER['SERVER_PORT'] : 80; // The port your server is running on
+$bb_cfg['server_port'] = !empty($_SERVER['SERVER_PORT']) ? $_SERVER['SERVER_PORT'] : 80; // The port your server is running on
 $bb_cfg['script_path'] = '/'; // The path where FORUM is located relative to the domain name
 
 // GZip
@@ -494,7 +494,7 @@ $bb_cfg['group_members_per_page'] = 50;
 $bb_cfg['tidy_post'] = (!in_array('tidy', get_loaded_extensions(), true)) ? false : true;
 
 // Misc
-$bb_cfg['mem_on_start'] = MEM_USAGE ? memory_get_usage() : 0;
+$bb_cfg['mem_on_start'] = memory_get_usage();
 $bb_cfg['translate_dates'] = true; // in displaying time
 $bb_cfg['use_word_censor'] = true;
 

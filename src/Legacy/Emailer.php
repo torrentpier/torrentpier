@@ -26,12 +26,12 @@ class Emailer
     /**
      * Обычное текстовое сообщение
      */
-    const FORMAT_TEXT = 'text/plain';
+    public const FORMAT_TEXT = 'text/plain';
 
     /**
      * HTML-сообщение
      */
-    const FORMAT_HTML = 'text/html';
+    public const FORMAT_HTML = 'text/html';
 
     /** @var string текст сообщения */
     private $message;

@@ -37,11 +37,11 @@ $user->session_start();
 
 // Init main vars
 $viewcat = isset($_GET['c']) ? (int)$_GET['c'] : 0;
-$lastvisit = (IS_GUEST) ? TIMENOW : $userdata['user_lastvisit'];
+$lastvisit = IS_GUEST ? TIMENOW : $userdata['user_lastvisit'];
 
 // Caching output
 $req_page = 'index_page';
-$req_page .= ($viewcat) ? "_c{$viewcat}" : '';
+$req_page .= $viewcat ? "_c{$viewcat}" : '';
 
 define('REQUESTED_PAGE', $req_page);
 caching_output(IS_GUEST, 'send', REQUESTED_PAGE . '_guest_' . $bb_cfg['default_lang']);
@@ -74,28 +74,28 @@ $only_new = $user->opt_js['only_new'];
 
 // Validate requested category id
 if ($viewcat && !($viewcat =& $forums['c'][$viewcat]['cat_id'])) {
-    redirect("index.php");
+    redirect('index.php');
 }
 
 // Forums
 $forums_join_sql = 'f.cat_id = c.cat_id';
-$forums_join_sql .= ($viewcat) ? "
+$forums_join_sql .= $viewcat ? "
 	AND f.cat_id = $viewcat
 " : '';
-$forums_join_sql .= ($excluded_forums_csv) ? "
+$forums_join_sql .= $excluded_forums_csv ? "
 	AND f.forum_id NOT IN($excluded_forums_csv)
 	AND f.forum_parent NOT IN($excluded_forums_csv)
 " : '';
 
 // Posts
-$posts_join_sql = "p.post_id = f.forum_last_post_id";
+$posts_join_sql = 'p.post_id = f.forum_last_post_id';
 $posts_join_sql .= ($only_new == ONLY_NEW_POSTS) ? "
 	AND p.post_time > $lastvisit
 " : '';
 $join_p_type = ($only_new == ONLY_NEW_POSTS) ? 'INNER JOIN' : 'LEFT JOIN';
 
 // Topics
-$topics_join_sql = "t.topic_last_post_id = p.post_id";
+$topics_join_sql = 't.topic_last_post_id = p.post_id';
 $topics_join_sql .= ($only_new == ONLY_NEW_TOPICS) ? "
 	AND t.topic_time > $lastvisit
 " : '';
@@ -108,13 +108,13 @@ $sql = "
 		t.topic_id AS last_topic_id, t.topic_title AS last_topic_title,
 		u.user_id AS last_post_user_id, u.user_rank AS last_post_user_rank,
 		IF(p.poster_id = $anon, p.post_username, u.username) AS last_post_username
-	FROM         " . BB_CATEGORIES . " c
-	INNER JOIN   " . BB_FORUMS . " f ON($forums_join_sql)
+	FROM         " . BB_CATEGORIES . ' c
+	INNER JOIN   ' . BB_FORUMS . " f ON($forums_join_sql)
 	$join_p_type " . BB_POSTS . " p ON($posts_join_sql)
 	$join_t_type " . BB_TOPICS . " t ON($topics_join_sql)
-	LEFT JOIN    " . BB_USERS . " u ON(u.user_id = p.poster_id)
+	LEFT JOIN    " . BB_USERS . ' u ON(u.user_id = p.poster_id)
 	ORDER BY c.cat_order, f.forum_order
-";
+';
 
 $replace_in_parent = array(
     'last_post_id',
@@ -191,11 +191,11 @@ foreach ($cat_forums as $cid => $c) {
     $template->assign_block_vars('h_c', array(
         'H_C_ID' => $cid,
         'H_C_TITLE' => $cat_title_html[$cid],
-        'H_C_CHEKED' => in_array($cid, preg_split("/[-]+/", $hide_cat_opt)) ? 'checked' : '',
+        'H_C_CHEKED' => in_array($cid, preg_split('/[-]+/', $hide_cat_opt)) ? 'checked' : '',
     ));
 
     $template->assign_vars(array(
-        'H_C_AL_MESS' => ($hide_cat_opt && !$showhide),
+        'H_C_AL_MESS' => $hide_cat_opt && !$showhide,
     ));
 
     if (!$showhide && isset($hide_cat_user[$cid]) && !$viewcat) {
@@ -216,10 +216,10 @@ foreach ($cat_forums as $cid => $c) {
 
         $forums_count++;
         $new = is_unread($f['last_post_time'], $f['last_topic_id'], $f['forum_id']) ? '_new' : '';
-        $folder_image = ($is_sf) ? $images["icon_minipost{$new}"] : $images["forum{$new}"];
+        $folder_image = $is_sf ? $images["icon_minipost{$new}"] : $images["forum{$new}"];
 
         if ($f['forum_status'] == FORUM_LOCKED) {
-            $folder_image = ($is_sf) ? $images['icon_minipost'] : $images['forum_locked'];
+            $folder_image = $is_sf ? $images['icon_minipost'] : $images['forum_locked'];
         }
 
         if ($is_sf) {
@@ -240,7 +240,7 @@ foreach ($cat_forums as $cid => $c) {
             'TOPICS' => commify($f['forum_topics']),
             'LAST_SF_ID' => $f['last_sf_id'] ?? null,
             'MODERATORS' => isset($moderators[$fid]) ? implode(', ', $moderators[$fid]) : '',
-            'FORUM_FOLDER_ALT' => ($new) ? $lang['NEW'] : $lang['OLD'],
+            'FORUM_FOLDER_ALT' => $new ? $lang['NEW'] : $lang['OLD'],
         ));
 
         if ($f['last_post_id']) {
@@ -257,9 +257,9 @@ foreach ($cat_forums as $cid => $c) {
 
 $template->assign_vars(array(
     'SHOW_FORUMS' => $forums_count,
-    'SHOW_MAP' => (isset($_GET['map']) && !IS_GUEST),
-    'PAGE_TITLE' => ($viewcat) ? $cat_title_html[$viewcat] : $lang['HOME'],
-    'NO_FORUMS_MSG' => ($only_new) ? $lang['NO_NEW_POSTS'] : $lang['NO_FORUMS'],
+    'SHOW_MAP' => isset($_GET['map']) && !IS_GUEST,
+    'PAGE_TITLE' => $viewcat ? $cat_title_html[$viewcat] : $lang['HOME'],
+    'NO_FORUMS_MSG' => $only_new ? $lang['NO_NEW_POSTS'] : $lang['NO_FORUMS'],
 
     'TOTAL_TOPICS' => sprintf($lang['POSTED_TOPICS_TOTAL'], $stats['topiccount']),
     'TOTAL_POSTS' => sprintf($lang['POSTED_ARTICLES_TOTAL'], $stats['postcount']),
@@ -294,13 +294,13 @@ $template->assign_vars(array(
     'FORUM_LOCKED_IMG' => $images['forum_locked'],
 
     'SHOW_ONLY_NEW_MENU' => true,
-    'ONLY_NEW_POSTS_ON' => ($only_new == ONLY_NEW_POSTS),
-    'ONLY_NEW_TOPICS_ON' => ($only_new == ONLY_NEW_TOPICS),
+    'ONLY_NEW_POSTS_ON' => $only_new == ONLY_NEW_POSTS,
+    'ONLY_NEW_TOPICS_ON' => $only_new == ONLY_NEW_TOPICS,
 
-    'U_SEARCH_NEW' => "search.php?new=1",
+    'U_SEARCH_NEW' => 'search.php?new=1',
     'U_SEARCH_SELF_BY_MY' => "search.php?uid={$userdata['user_id']}&amp;o=1",
-    'U_SEARCH_LATEST' => "search.php?search_id=latest",
-    'U_SEARCH_UNANSWERED' => "search.php?search_id=unanswered",
+    'U_SEARCH_LATEST' => 'search.php?search_id=latest',
+    'U_SEARCH_UNANSWERED' => 'search.php?search_id=unanswered',
 
     'SHOW_LAST_TOPIC' => $show_last_topic,
 ));
@@ -365,7 +365,7 @@ if ($bb_cfg['birthday_check_day'] && $bb_cfg['birthday_enabled']) {
             }
             $week_list[] = profile_url($week) . ' <span class="small">(' . birthday_age($week['user_birthday']) . ')</span>';
         }
-        $week_all = ($week_all) ? '&nbsp;<a class="txtb" href="#" onclick="ajax.exec({action: \'index_data\', mode: \'birthday_week\'}); return false;" title="' . $lang['ALL'] . '">...</a>' : '';
+        $week_all = $week_all ? '&nbsp;<a class="txtb" href="#" onclick="ajax.exec({action: \'index_data\', mode: \'birthday_week\'}); return false;" title="' . $lang['ALL'] . '">...</a>' : '';
         $week_list = sprintf($lang['BIRTHDAY_WEEK'], $bb_cfg['birthday_check_day'], implode(', ', $week_list)) . $week_all;
     } else {
         $week_list = sprintf($lang['NOBIRTHDAY_WEEK'], $bb_cfg['birthday_check_day']);
@@ -380,7 +380,7 @@ if ($bb_cfg['birthday_check_day'] && $bb_cfg['birthday_enabled']) {
             }
             $today_list[] = profile_url($today) . ' <span class="small">(' . birthday_age($today['user_birthday']) . ')</span>';
         }
-        $today_all = ($today_all) ? '&nbsp;<a class="txtb" href="#" onclick="ajax.exec({action: \'index_data\', mode: \'birthday_today\'}); return false;" title="' . $lang['ALL'] . '">...</a>' : '';
+        $today_all = $today_all ? '&nbsp;<a class="txtb" href="#" onclick="ajax.exec({action: \'index_data\', mode: \'birthday_today\'}); return false;" title="' . $lang['ALL'] . '">...</a>' : '';
         $today_list = $lang['BIRTHDAY_TODAY'] . implode(', ', $today_list) . $today_all;
     } else {
         $today_list = $lang['NOBIRTHDAY_TODAY'];
