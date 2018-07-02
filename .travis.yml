@@ -1,0 +1,47 @@
+language: php
+
+php:
+  - 7.1
+  - 7.2
+
+env:
+  global:
+    # Codacy
+    - secure: "SGpMIBqxA+7L3aDPuBWjoCZDrZh/cpxAkY7CWd7I+k/VVAgLWhUiYHWAf0FqzLjzogfgvQCZyWRJWKAXPv/gVRXsJkmpQu9+gzLuOOwW6WZUwE0w8L3+xV9vupZpeMhe4QkWxxHzH/B2X8R6oqQdc7dJXl7Q8+Gwag6wavBsU+k="
+    # Code Climate
+    - secure: "A3c2mhe9lws+R40F4eltU0dzZfnra/h4fGXIYIhHvNfNWdhn88xp1tsuH/CGgj7gcNtp7nliwKQFyO8fPWr3LfpQFn9Vol3NSW8mJcg/8KCBPWTJmR9w9h3tPzJMW3q5w+TvUwXEFekyPIYgQ1k3DSzSi2fTNUWrsKMofiGJUqc="
+  matrix:
+    - COMPOSER_FLAGS="--prefer-lowest"
+    - COMPOSER_FLAGS=""
+
+matrix:
+  allow_failures:
+    - php: hhvm
+
+notifications:
+  slack:
+    secure: "ManLobpQIesTlURzcGocIlRLLRfxMcAgnzZOJu9OiEGB3+usgmforhEv5cXIexyy6HnOA1S0NMrUlWnCL90kViT3vlLC+afMPjcUBA1IyiP2ITRqLzFrgB3PhhiZGjNUarKDElj/b+9a5eWRHvOTYnbRK9vTakNOtid83V05CJ8="
+
+before_script:
+  - travis_retry composer self-update
+  - travis_retry composer install --no-interaction --prefer-dist
+
+script:
+    - mkdir -p build/logs
+    - vendor/bin/phpunit --configuration phpunit.xml --coverage-clover=build/logs/clover.xml
+
+after_script:
+    - if [ $TRAVIS_PULL_REQUEST = 'false' ]; then php vendor/bin/codacycoverage clover build/logs/clover.xml; fi
+    - php vendor/bin/ocular code-coverage:upload --format=php-clover build/logs/clover.xml
+    - php vendor/bin/php-coveralls -v
+    - if [ $TRAVIS_PULL_REQUEST = 'false' ]; then php vendor/bin/test-reporter; fi
+
+after_success:
+    - bash <(curl -s https://codecov.io/bash)
+
+addons:
+  hosts:
+  - tp.dev
+  - xn--o1af.xn--b1add
+  code_climate:
+    repo_token: $CODECLIMATE_REPO_TOKEN
