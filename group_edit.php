@@ -38,13 +38,13 @@ if ($is_moderator) {
         if (!empty($_FILES['avatar']['name']) && $bb_cfg['group_avatars']['up_allowed']) {
             $upload = new TorrentPier\Legacy\Common\Upload();
 
-            if ($upload->init($bb_cfg['group_avatars'], $_FILES['avatar']) and $upload->store('avatar', array("user_id" => GROUP_AVATAR_MASK . $group_id, "avatar_ext_id" => $group_info['avatar_ext_id']))) {
+            if ($upload->init($bb_cfg['group_avatars'], $_FILES['avatar']) && $upload->store('avatar', array("user_id" => GROUP_AVATAR_MASK . $group_id, "avatar_ext_id" => $group_info['avatar_ext_id']))) {
                 $avatar_ext_id = (int)$upload->file_ext_id;
             } else {
                 bb_die(implode($upload->errors));
             }
 
-            DB()->query("UPDATE " . BB_GROUPS . " SET avatar_ext_id = $avatar_ext_id WHERE group_id = $group_id");
+            DB()->query("UPDATE " . BB_GROUPS . " SET avatar_ext_id = $avatar_ext_id WHERE group_id = $group_id LIMIT 1");
         }
     }
 

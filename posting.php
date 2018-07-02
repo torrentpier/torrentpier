@@ -11,7 +11,6 @@ define('BB_SCRIPT', 'posting');
 define('BB_ROOT', './');
 require __DIR__ . '/common.php';
 require INC_DIR . '/bbcode.php';
-require ATTACH_DIR . '/attachment_mod.php';
 
 $page_cfg['load_tpl_vars'] = array('post_icons');
 
@@ -196,8 +195,8 @@ if ($post_info = DB()->fetch_row($sql)) {
     bb_die($lang['NO_SUCH_POST']);
 }
 
-// The user is not authed, if they're not logged in then redirect
-// them, else show them an error message
+$attach_allowed_ext = $post_info['allow_reg_tracker'] ? $bb_cfg['tor_forums_allowed_ext'] : $bb_cfg['gen_forums_allowed_ext'];
+
 if (!$is_auth[$is_auth_type]) {
     if (!IS_GUEST) {
         bb_die(sprintf($lang['SORRY_' . strtoupper($is_auth_type)], $is_auth[$is_auth_type . '_type']));
@@ -258,13 +257,11 @@ if ($submit || $refresh) {
 
 $update_post_time = !empty($_POST['update_post_time']);
 
-execute_posting_attachment_handling();
-
 // если за время пока вы писали ответ, в топике появились новые сообщения, перед тем как ваше сообщение будет отправлено, выводится предупреждение с обзором этих сообщений
 $topic_has_new_posts = false;
 
 if (!IS_GUEST && $mode != 'newtopic' && ($submit || $preview || $mode == 'quote' || $mode == 'reply') && isset($_COOKIE[COOKIE_TOPIC])) {
-    if ($topic_last_read = max((int)(@$tracking_topics[$topic_id]), (int)(@$tracking_forums[$forum_id]))) {
+    if ($topic_last_read = max((int)$tracking_topics[$topic_id], (int)$tracking_forums[$forum_id])) {
         $sql = "SELECT p.*, pt.post_text, u.username, u.user_rank
 			FROM " . BB_POSTS . " p, " . BB_POSTS_TEXT . " pt, " . BB_USERS . " u
 			WHERE p.topic_id = " . (int)$topic_id . "
@@ -603,7 +600,6 @@ $template->set_filenames(array(
     'body' => 'posting.tpl',
 ));
 
-// Output the data to the template
 $template->assign_vars(array(
     'FORUM_NAME' => htmlCHR($forum_name),
     'PAGE_TITLE' => $page_title,

@@ -73,7 +73,7 @@ switch ($mode) {
         }
 
         $html = ':&nbsp;';
-        $html .= ($moderators) ? implode(', ', $moderators) : $lang['NONE'];
+        $html .= $moderators ? implode(', ', $moderators) : $lang['NONE'];
         unset($moderators, $mod);
         $datastore->rm('moderators');
         break;
@@ -88,7 +88,7 @@ switch ($mode) {
         }
         if ($tz != $bb_cfg['board_timezone']) {
             // Set current user timezone
-            DB()->query("UPDATE " . BB_USERS . " SET user_timezone = $tz WHERE user_id = " . $userdata['user_id']);
+            DB()->query('UPDATE ' . BB_USERS . " SET user_timezone = $tz WHERE user_id = " . $userdata['user_id'] . ' LIMIT 1');
             $bb_cfg['board_timezone'] = $tz;
             \TorrentPier\Legacy\Sessions::cache_rm_user_sessions($userdata['user_id']);
         }
@@ -110,7 +110,7 @@ switch ($mode) {
 				<th>' . $lang['UPLOADED'] . '</th>
 				<th>' . $lang['RELEASED'] . '</th>
 				<th>' . $lang['BONUS'] . '</th>';
-        $html .= ($bb_cfg['seed_bonus_enabled']) ? '<th>' . $lang['SEED_BONUS'] . '</th>' : '';
+        $html .= $bb_cfg['seed_bonus_enabled'] ? '<th>' . $lang['SEED_BONUS'] . '</th>' : '';
         $html .= '</tr>
 			<tr class="row1">
 				<td>' . $lang['TOTAL_TRAF'] . '</td>
@@ -118,13 +118,13 @@ switch ($mode) {
 				<td id="u_up_total"><span class="editable bold seedmed">' . humn_size($btu['u_up_total']) . '</span></td>
 				<td id="u_up_release"><span class="editable bold seedmed">' . humn_size($btu['u_up_release']) . '</span></td>
 				<td id="u_up_bonus"><span class="editable bold seedmed">' . humn_size($btu['u_up_bonus']) . '</span></td>';
-        $html .= ($bb_cfg['seed_bonus_enabled']) ? '<td id="user_points"><span class="editable bold points">' . $profiledata['user_points'] . '</b></td>' : '';
+        $html .= $bb_cfg['seed_bonus_enabled'] ? '<td id="user_points"><span class="editable bold points">' . $profiledata['user_points'] . '</b></td>' : '';
         $html .= '</tr>
 			<tr class="row5">
 				<td colspan="1">' . $lang['MAX_SPEED'] . '</td>
 				<td colspan="2">' . $lang['DL_DL_SPEED'] . ': ' . $speed_down . '</span></td>
 				<td colspan="2">' . $lang['DL_UL_SPEED'] . ': ' . $speed_up . '</span></td>';
-        $html .= ($bb_cfg['seed_bonus_enabled']) ? '<td colspan="1"></td>' : '';
+        $html .= $bb_cfg['seed_bonus_enabled'] ? '<td colspan="1"></td>' : '';
         $html .= '</tr>';
 
         $this->response['user_ratio'] = '

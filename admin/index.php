@@ -119,7 +119,7 @@ if (isset($_GET['pane']) && $_GET['pane'] == 'left') {
 
         // Get users online information.
         $sql = 'SELECT u.user_id, u.username, u.user_rank, s.session_time AS user_session_time, u.user_opt, s.session_logged_in, s.session_ip, s.session_start
-			FROM ' . BB_USERS . ' u, ' . BB_SESSIONS . ' s
+			FROM ' . BB_USERS . ' u, bb_sessions s
 			WHERE s.session_logged_in = 1
 				AND u.user_id = s.session_user_id
 				AND u.user_id <> ' . GUEST_UID . '
@@ -131,7 +131,7 @@ if (isset($_GET['pane']) && $_GET['pane'] == 'left') {
         $onlinerow_reg = DB()->sql_fetchrowset($result);
 
         $sql = 'SELECT session_logged_in, session_time, session_ip, session_start
-			FROM ' . BB_SESSIONS . '
+			FROM bb_sessions
 			WHERE session_logged_in = 0
 				AND session_time >= ' . (TIMENOW - 300) . '
 			ORDER BY session_ip ASC, session_time DESC';

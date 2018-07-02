@@ -42,10 +42,6 @@
 	<td><label for="bt_disable_dht1"><input type="radio" name="bt_disable_dht" id="bt_disable_dht1" value="1" {BT_DISABLE_DHT_YES} /> {L_BT_DISABLE_DHT_YES}&nbsp;</label><label for="bt_disable_dht2">&nbsp;<input type="radio" name="bt_disable_dht" id="bt_disable_dht2" value="0" {BT_DISABLE_DHT_NO} /> {L_BT_DISABLE_DHT_NO} &nbsp;</label></td>
 </tr>
 <tr>
-	<td><h4>{L_BT_CHECK_ANNOUNCE_URL}</h4><h6>{L_BT_CHECK_ANNOUNCE_URL_EXPL}</h6></td>
-	<td><label for="bt_check_announce_url1"><input type="radio" name="bt_check_announce_url" id="bt_check_announce_url1" value="1" {BT_CHECK_ANNOUNCE_URL_YES} /> {L_BT_CHECK_ANNOUNCE_URL_YES}&nbsp;</label><label for="bt_check_announce_url2">&nbsp;<input type="radio" name="bt_check_announce_url" id="bt_check_announce_url2" value="0" {BT_CHECK_ANNOUNCE_URL_NO} /> {L_BT_CHECK_ANNOUNCE_URL_NO} &nbsp;</label></td>
-</tr>
-<tr>
 	<td><h4>{L_BT_REPLACE_ANN_URL}</h4><h6>{L_BT_REPLACE_ANN_URL_EXPL}</h6></td>
 	<td><label for="bt_replace_ann_url1"><input type="radio" name="bt_replace_ann_url" id="bt_replace_ann_url1" value="1" {BT_REPLACE_ANN_URL_YES} /> {L_BT_REPLACE_ANN_URL_YES}&nbsp;</label><label for="bt_replace_ann_url2">&nbsp;<input type="radio" name="bt_replace_ann_url" id="bt_replace_ann_url2" value="0" {BT_REPLACE_ANN_URL_NO} /> {L_BT_REPLACE_ANN_URL_NO} &nbsp;</label></td>
 </tr>

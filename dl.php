@@ -11,10 +11,8 @@ define('BB_SCRIPT', 'dl');
 define('NO_GZIP', true);
 define('BB_ROOT', './');
 require __DIR__ . '/common.php';
-require ATTACH_DIR . '/attachment_mod.php';
 
 $datastore->enqueue(array(
-    'attach_extensions',
     'cat_forums',
 ));
 
@@ -24,13 +22,13 @@ $thumbnail = request_var('thumb', 0);
 // Send file to browser
 function send_file_to_browser($attachment, $upload_dir)
 {
-    global $bb_cfg, $lang, $userdata;
+    global $bb_cfg, $lang;
 
     $filename = ($upload_dir == '') ? $attachment['physical_filename'] : $upload_dir . '/' . $attachment['physical_filename'];
 
     $gotit = false;
 
-    if (@!file_exists(@amod_realpath($filename))) {
+    if (!file_exists($filename)) {
         bb_die($lang['ERROR_NO_ATTACHMENT'] . "<br /><br />" . $filename . "<br /><br />" . $lang['TOR_NOT_FOUND']);
     } else {
         $gotit = true;
@@ -146,7 +144,6 @@ $datastore->rm('cat_forums');
 //
 // Get Information on currently allowed Extensions
 //
-$rows = get_extension_informations();
 $num_rows = count($rows);
 
 for ($i = 0; $i < $num_rows; $i++) {

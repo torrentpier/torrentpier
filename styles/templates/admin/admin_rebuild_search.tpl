@@ -124,9 +124,9 @@ var label = "{L_PROCESSING}";
 // update the button description/status
 function updateButton()
 {
-	if ( ticker >= 0)
+	if (ticker >= 0)
 	{
-		if ( ticker == 0 )
+		if (ticker === 0)
 		{
 			document.form_rebuild_progress.submit_button.value = label;
 			document.form_rebuild_progress.submit_button.disabled = true;
@@ -134,8 +134,7 @@ function updateButton()
 		else
 		{
 			document.form_rebuild_progress.submit_button.value = label_next + " (" + ticker + ")";
-
-			ticker--;;
+			ticker--;
 			refresh = setTimeout("updateButton()", 1000);
 		}
 	}

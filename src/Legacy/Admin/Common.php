@@ -91,7 +91,7 @@ class Common
 
                 $all_topics = ($id === 'all');
 
-                if (!$all_topics and !$topic_csv = get_id_csv($id)) {
+                if (!$all_topics && !($topic_csv = get_id_csv($id))) {
                     break;
                 }
 
@@ -107,7 +107,6 @@ class Common
 					topic_first_post_id  INT UNSIGNED NOT NULL DEFAULT '0',
 					topic_last_post_id   INT UNSIGNED NOT NULL DEFAULT '0',
 					topic_last_post_time INT UNSIGNED NOT NULL DEFAULT '0',
-					topic_attachment     INT UNSIGNED NOT NULL DEFAULT '0',
 					PRIMARY KEY (topic_id)
 				) ENGINE = MEMORY
 			");
@@ -122,11 +121,9 @@ class Common
 					COUNT(p.post_id) AS total_posts,
 					MIN(p.post_id) AS topic_first_post_id,
 					MAX(p.post_id) AS topic_last_post_id,
-					MAX(p.post_time) AS topic_last_post_time,
-					IF(MAX(a.attach_id), 1, 0) AS topic_attachment
+					MAX(p.post_time) AS topic_last_post_time
 				FROM      " . BB_TOPICS . " t
 				LEFT JOIN " . BB_POSTS . " p ON(p.topic_id = t.topic_id)
-				LEFT JOIN " . BB_ATTACHMENTS . " a ON(a.post_id = p.post_id)
 				WHERE t.topic_status != " . TOPIC_MOVED . "
 					$where_sql
 				GROUP BY t.topic_id
@@ -139,8 +136,7 @@ class Common
 					t.topic_replies        = tmp.total_posts - 1,
 					t.topic_first_post_id  = tmp.topic_first_post_id,
 					t.topic_last_post_id   = tmp.topic_last_post_id,
-					t.topic_last_post_time = tmp.topic_last_post_time,
-					t.topic_attachment     = tmp.topic_attachment
+					t.topic_last_post_time = tmp.topic_last_post_time
 				WHERE
 					t.topic_id = tmp.topic_id
 			");
@@ -157,7 +153,7 @@ class Common
 
                 $all_users = ($id === 'all');
 
-                if (!$all_users and !$user_csv = get_id_csv($id)) {
+                if (!$all_users && !($user_csv = get_id_csv($id))) {
                     break;
                 }
 
@@ -221,7 +217,7 @@ class Common
 
         $prune = ($mode_or_topic_id === 'prune');
 
-        if (!$prune and !$topic_csv = get_id_csv($mode_or_topic_id)) {
+        if (!$prune && !($topic_csv = get_id_csv($mode_or_topic_id))) {
             return false;
         }
 
@@ -324,41 +320,14 @@ class Common
 		LEFT JOIN " . BB_POLL_USERS . " pu USING(topic_id)
 	");
 
-        // Delete attachments (from disk)
-        $attach_dir = get_attachments_dir();
-
-        $result = DB()->query("
-		SELECT
-			d.physical_filename
-		FROM
-			" . $tmp_delete_topics . " del,
-			" . BB_POSTS . " p,
-			" . BB_ATTACHMENTS . " a,
-			" . BB_ATTACHMENTS_DESC . " d
-		WHERE
-			    p.topic_id = del.topic_id
-			AND a.post_id = p.post_id
-			AND d.attach_id = a.attach_id
-	");
-
-        while ($row = DB()->fetch_next($result)) {
-            if ($filename = basename($row['physical_filename'])) {
-                @unlink("$attach_dir/" . $filename);
-                @unlink("$attach_dir/" . THUMB_DIR . '/t_' . $filename);
-            }
-        }
-        unset($row, $result);
-
         // Delete posts, posts_text, attachments (from DB)
         DB()->query("
-		DELETE p, pt, ps, a, d, ph
+		DELETE p, pt, ps, ph
 		FROM      " . $tmp_delete_topics . " del
 		LEFT JOIN " . BB_POSTS . " p  ON(p.topic_id = del.topic_id)
 		LEFT JOIN " . BB_POSTS_TEXT . " pt ON(pt.post_id = p.post_id)
 		LEFT JOIN " . BB_POSTS_HTML . " ph ON(ph.post_id = p.post_id)
 		LEFT JOIN " . BB_POSTS_SEARCH . " ps ON(ps.post_id = p.post_id)
-		LEFT JOIN " . BB_ATTACHMENTS . " a  ON(a.post_id = p.post_id)
-		LEFT JOIN " . BB_ATTACHMENTS_DESC . " d  ON(d.attach_id = a.attach_id)
 	");
 
         // Delete topics, topics watch
@@ -386,9 +355,7 @@ class Common
 	");
 
         // Log action
-        if ($prune) {
-            // TODO
-        } else {
+        if (!$prune) {
             foreach ($log_topics as $row) {
                 if ($row['topic_status'] == TOPIC_MOVED) {
                     $row['topic_title'] = '<i>' . $lang['TOPIC_MOVED'] . '</i> ' . $row['topic_title'];
@@ -458,7 +425,7 @@ class Common
             }
         }
 
-        if (!$topics or !$topic_csv = get_id_csv(array_keys($topics))) {
+        if (!$topics || !($topic_csv = get_id_csv(array_keys($topics)))) {
             return false;
         }
 
@@ -620,40 +587,14 @@ class Common
             return 0;
         }
 
-        // Delete attachments (from disk)
-        $attach_dir = get_attachments_dir();
-
-        $result = DB()->query("
-		SELECT
-			d.physical_filename
-		FROM
-			" . $tmp_delete_posts . " del,
-			" . BB_ATTACHMENTS . " a,
-			" . BB_ATTACHMENTS_DESC . " d
-		WHERE
-			    a.post_id = del.post_id
-			AND d.attach_id = a.attach_id
-	");
-
-        while ($row = DB()->fetch_next($result)) {
-            if ($filename = basename($row['physical_filename'])) {
-                @unlink("$attach_dir/" . $filename);
-                @unlink("$attach_dir/" . THUMB_DIR . '/t_' . $filename);
-            }
-        }
-        unset($row, $result);
-
-        // Delete posts, posts_text, attachments (from DB)
+        // Delete posts, posts_text
         DB()->query("
-		DELETE p, pt, ps, tor, a, d, ph
+		DELETE p, pt, ps, ph
 		FROM      " . $tmp_delete_posts . " del
 		LEFT JOIN " . BB_POSTS . " p   ON(p.post_id  = del.post_id)
 		LEFT JOIN " . BB_POSTS_TEXT . " pt  ON(pt.post_id  = del.post_id)
 		LEFT JOIN " . BB_POSTS_HTML . " ph  ON(ph.post_id  = del.post_id)
 		LEFT JOIN " . BB_POSTS_SEARCH . " ps  ON(ps.post_id  = del.post_id)
-		LEFT JOIN " . BB_BT_TORRENTS . " tor ON(tor.post_id = del.post_id)
-		LEFT JOIN " . BB_ATTACHMENTS . " a   ON(a.post_id  = del.post_id)
-		LEFT JOIN " . BB_ATTACHMENTS_DESC . " d   ON(d.attach_id = a.attach_id)
 	");
 
         // Log action
@@ -732,12 +673,10 @@ class Common
         DB()->query("UPDATE " . BB_BT_TORRENTS . " SET poster_id = " . DELETED . " WHERE poster_id IN($user_csv)");
 
         DB()->query("
-		DELETE ug, g, a, qt1, qt2
+		DELETE ug, g, a
 		FROM " . BB_USER_GROUP . " ug
 		LEFT JOIN " . BB_GROUPS . " g   ON(g.group_id = ug.group_id AND g.group_single_user = 1)
 		LEFT JOIN " . BB_AUTH_ACCESS . " a   ON(a.group_id = g.group_id)
-		LEFT JOIN " . BB_QUOTA . " qt1 ON(qt1.user_id = ug.user_id)
-		LEFT JOIN " . BB_QUOTA . " qt2 ON(qt2.group_id = g.group_id)
 		WHERE ug.user_id IN($user_csv)
 	");
 
@@ -746,7 +685,7 @@ class Common
 		FROM " . BB_USERS . " u
 		LEFT JOIN " . BB_BANLIST . " ban ON(ban.ban_userid = u.user_id)
 		LEFT JOIN " . BB_POLL_USERS . " pu  ON(pu.user_id = u.user_id)
-		LEFT JOIN " . BB_SESSIONS . " s   ON(s.session_user_id = u.user_id)
+		LEFT JOIN bb_sessions s   ON(s.session_user_id = u.user_id)
 		LEFT JOIN " . BB_TOPICS_WATCH . " tw  ON(tw.user_id = u.user_id)
 		LEFT JOIN " . BB_AUTH_ACCESS_SNAP . " asn ON(asn.user_id = u.user_id)
 		WHERE u.user_id IN($user_csv)

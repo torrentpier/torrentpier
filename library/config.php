@@ -536,7 +536,7 @@ $bb_cfg['attach'] = [
 ];
 
 $bb_cfg['tor_forums_allowed_ext'] = ['torrent', 'zip', 'rar']; // для разделов с раздачами
-$bb_cfg['gen_forums_allowed_ext'] = ['zip', 'rar']; // для обычных разделов
+$bb_cfg['gen_forums_allowed_ext'] = ['torrent', 'zip', 'rar']; // для обычных разделов
 
 // Avatars
 $bb_cfg['avatars'] = [

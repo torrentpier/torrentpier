@@ -115,7 +115,7 @@ switch ($mode) {
             $new_tpl_id = $tpl_id;
             $this->response['msg'] = "Включен шаблон $tpl_name";
         }
-        DB()->query("UPDATE " . BB_FORUMS . " SET forum_tpl_id = $new_tpl_id WHERE forum_id = $forum_id");
+        DB()->query("UPDATE " . BB_FORUMS . " SET forum_tpl_id = $new_tpl_id WHERE forum_id = $forum_id LIMIT 1");
         break;
 
     // сохранение изменений
@@ -126,8 +126,8 @@ switch ($mode) {
             $msg .= 'Шаблон был отредактирован: ' . html_entity_decode($last_edit_by_username) . ', ' . delta_time($tpl_data['tpl_last_edit_tm']) . " назад\n\n";
             $this->ajax_die($msg);
         }
-        $sql = "UPDATE " . BB_TOPIC_TPL . " SET " . DB()->build_array('UPDATE', $sql_args) . " WHERE tpl_id = $tpl_id";
-        if (!@DB()->query($sql)) {
+        $sql = "UPDATE " . BB_TOPIC_TPL . " SET " . DB()->build_array('UPDATE', $sql_args) . " WHERE tpl_id = $tpl_id LIMIT 1";
+        if (!DB()->query($sql)) {
             $sql_error = DB()->sql_error();
         }
         $this->response['tpl_id'] = $tpl_id;
@@ -139,7 +139,7 @@ switch ($mode) {
     // создание нового шаблона
     case 'new':
         $sql = "INSERT INTO " . BB_TOPIC_TPL . DB()->build_array('INSERT', $sql_args);
-        if (!@DB()->query($sql)) {
+        if (!DB()->query($sql)) {
             $sql_error = DB()->sql_error();
         }
         break;

@@ -35,12 +35,18 @@ function get_attach_path($id, $ext_id = '', $base_path = null, $first_div = 1000
 function delete_avatar($user_id, $avatar_ext_id)
 {
     $avatar_file = $avatar_ext_id ? get_avatar_path($user_id, $avatar_ext_id) : '';
-    return ($avatar_file && file_exists($avatar_file)) ? @unlink($avatar_file) : false;
+    return ($avatar_file && file_exists($avatar_file)) ? unlink($avatar_file) : false;
+}
+
+function delete_attach($topic_id, $attach_ext_id)
+{
+    $attach_file = $attach_ext_id ? get_attach_path($topic_id, $attach_ext_id) : '';
+    return ($attach_file && file_exists($attach_file)) ? unlink($attach_file) : false;
 }
 
 function get_tracks($type)
 {
-    static $pattern = '#^a:\d+:{[i:;\d]+}$#';
+    $c_name = '';
 
     switch ($type) {
         case 'topic':
@@ -55,7 +61,7 @@ function get_tracks($type)
         default:
             trigger_error(__FUNCTION__ . ": invalid type '$type'", E_USER_ERROR);
     }
-    $tracks = !empty($_COOKIE[$c_name]) ? @unserialize($_COOKIE[$c_name]) : false;
+    $tracks = !empty($_COOKIE[$c_name]) ? unserialize($_COOKIE[$c_name]) : false;
     return $tracks ?: [];
 }
 
@@ -176,7 +182,7 @@ $bf['user_opt'] = array(
     'dis_passkey' => 7,  // Запрет на добавление passkey, он же запрет на скачивание торрентов
     'user_porn_forums' => 8,  // Скрывать контент 18+
     'user_callseed' => 9,  // Позвать скачавших
-    'user_empty' => 10, // Запрет на показ рекламы (не используется)
+    'user_empty' => 10, // Не используется
     'dis_topic' => 11, // Запрет на создание новых тем
     'dis_post' => 12, // Запрет на отправку сообщений
     'dis_post_edit' => 13, // Запрет на редактирование сообщений
@@ -249,7 +255,7 @@ function auth($type, $forum_id, $ug_data, array $f_access = array(), $group_perm
 
     $is_guest = true;
     $is_admin = false;
-    $auth = $auth_fields = $u_access = array();
+    $auth = $auth_fields = $u_access = [];
     $add_auth_type_desc = ($forum_id != AUTH_LIST_ALL);
 
     //
@@ -419,7 +425,8 @@ function delta_time($timestamp_1, $timestamp_2 = TIMENOW, $granularity = 'auto')
 
 function get_select($select, $selected = null, $return_as = 'html', $first_opt = '&raquo;&raquo; Выбрать ')
 {
-    $select_ary = array();
+    $select_name = '';
+    $select_ary = [];
 
     switch ($select) {
         case 'groups':
@@ -468,6 +475,10 @@ function replace_quote($str, $double = true, $single = true)
 
 /**
  * Build simple hidden fields from array
+ *
+ * @param $fields_ary
+ *
+ * @return string
  */
 function build_hidden_fields($fields_ary)
 {
@@ -554,8 +565,8 @@ function commify($number)
  */
 function humn_size($size, $rounder = null, $min = null, $space = '&nbsp;')
 {
-    static $sizes = array('B', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB');
-    static $rounders = array(0, 0, 0, 2, 3, 3, 3, 3, 3);
+    static $sizes = ['B', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'];
+    static $rounders = [0, 0, 0, 2, 3, 3, 3, 3, 3];
 
     $size = (float)$size;
     $ext = $sizes[0];
@@ -652,7 +663,7 @@ function set_var(&$result, $var, $type, $multibyte = false, $strip = true)
     $result = $var;
 
     if ($type == 'string') {
-        $result = trim(htmlspecialchars(str_replace(array("\r\n", "\r"), array("\n", "\n"), $result)));
+        $result = trim(htmlspecialchars(str_replace(["\r\n", "\r"], ["\n", "\n"], $result)));
 
         if (!empty($result)) {
             // Make sure multibyte characters are wellformed
@@ -674,15 +685,17 @@ function set_var(&$result, $var, $type, $multibyte = false, $strip = true)
  */
 function request_var($var_name, $default, $multibyte = false, $cookie = false)
 {
+    $key_type = $sub_key_type = $sub_type = '';
+
     if (!$cookie && isset($_COOKIE[$var_name])) {
         if (!isset($_GET[$var_name]) && !isset($_POST[$var_name])) {
-            return (is_array($default)) ? array() : $default;
+            return is_array($default) ? [] : $default;
         }
         $_REQUEST[$var_name] = $_POST[$var_name] ?? $_GET[$var_name];
     }
 
     if (!isset($_REQUEST[$var_name]) || (is_array($_REQUEST[$var_name]) && !is_array($default)) || (is_array($default) && !is_array($_REQUEST[$var_name]))) {
-        return (is_array($default)) ? array() : $default;
+        return is_array($default) ? [] : $default;
     }
 
     $var = $_REQUEST[$var_name];
@@ -704,7 +717,7 @@ function request_var($var_name, $default, $multibyte = false, $cookie = false)
 
     if (is_array($var)) {
         $_var = $var;
-        $var = array();
+        $var = [];
 
         foreach ($_var as $k => $v) {
             set_var($k, $k, $key_type);
@@ -733,10 +746,10 @@ function request_var($var_name, $default, $multibyte = false, $cookie = false)
 function get_username($user_id)
 {
     if (empty($user_id)) {
-        return is_array($user_id) ? array() : false;
+        return is_array($user_id) ? [] : false;
     }
     if (is_array($user_id)) {
-        $usernames = array();
+        $usernames = [];
         foreach (DB()->fetch_rowset("SELECT user_id, username FROM " . BB_USERS . " WHERE user_id IN(" . get_id_csv($user_id) . ")") as $row) {
             $usernames[$row['user_id']] = $row['username'];
         }
@@ -838,19 +851,6 @@ function show_bt_userdata($user_id)
     ));
 }
 
-function get_attachments_dir($cfg = null)
-{
-    if (!$cfg and !$cfg = $GLOBALS['attach_config']) {
-        $cfg = bb_get_config(BB_ATTACH_CONFIG, true, false);
-    }
-
-    if ($cfg['upload_dir'][0] == '/' || ($cfg['upload_dir'][0] != '/' && $cfg['upload_dir'][1] == ':')) {
-        return $cfg['upload_dir'];
-    }
-
-    return BB_ROOT . $cfg['upload_dir'];
-}
-
 function bb_get_config($table, $from_db = false, $update_cache = true)
 {
     if ($from_db or !$cfg = CACHE('bb_config')->get("config_{$table}")) {
@@ -867,7 +867,7 @@ function bb_get_config($table, $from_db = false, $update_cache = true)
 
 function bb_update_config($params, $table = BB_CONFIG)
 {
-    $updates = array();
+    $updates = [];
     foreach ($params as $name => $val) {
         $updates[] = array(
             'config_name' => $name,
@@ -967,7 +967,7 @@ function get_userdata($u, $force_name = false, $allow_guest = false)
         }
     }
 
-    $u_data = array();
+    $u_data = [];
     $name_search = false;
     $exclude_anon_sql = (!$allow_guest) ? "AND user_id != " . GUEST_UID : '';
 
@@ -1163,7 +1163,7 @@ function birthday_age($date)
 {
     global $bb_cfg;
     if (!$date) {
-        return;
+        return false;
     }
 
     $tz = TIMENOW + (3600 * $bb_cfg['board_timezone']);
@@ -1305,7 +1305,6 @@ function obtain_word_list(&$orig_word, &$replacement_word)
     }
 
     foreach ($sql as $row) {
-        //$orig_word[] = '#(?<!\S)(' . str_replace('\*', '\S*?', preg_quote($row['word'], '#')) . ')(?!\S)#iu';
         $orig_word[] = '#(?<![\p{Nd}\p{L}_])(' . str_replace('\*', '[\p{Nd}\p{L}_]*?', preg_quote($row['word'], '#')) . ')(?![\p{Nd}\p{L}_])#iu';
         $replacement_word[] = $row['replacement'];
     }
@@ -1386,7 +1385,7 @@ function bb_realpath($path)
 
 function login_redirect($url = '')
 {
-    redirect(LOGIN_URL . '?redirect=' . (($url) ?: ($_SERVER['REQUEST_URI'] ?? '/')));
+    redirect(LOGIN_URL . '?redirect=' . ($url ?: ($_SERVER['REQUEST_URI'] ?? '/')));
 }
 
 function meta_refresh($url, $time = 5)
@@ -1409,7 +1408,7 @@ function redirect($url)
     }
 
     $url = trim($url);
-    $server_protocol = ($bb_cfg['cookie_secure']) ? 'https://' : 'http://';
+    $server_protocol = $bb_cfg['cookie_secure'] ? 'https://' : 'http://';
 
     $server_name = preg_replace('#^\/?(.*?)\/?$#', '\1', trim($bb_cfg['server_name']));
     $server_port = ($bb_cfg['server_port'] <> 80) ? ':' . trim($bb_cfg['server_port']) : '';
@@ -1463,16 +1462,6 @@ function get_forum_display_sort_option($selected_row = 0, $action = 'list', $lis
         $res = $listrow['fields'][$selected_row];
     }
     return $res;
-}
-
-function topic_attachment_image($switch_attachment)
-{
-    global $is_auth;
-
-    if (!$switch_attachment || !($is_auth['auth_download'] && $is_auth['auth_view'])) {
-        return '';
-    }
-    return '<img src="styles/images/icon_clip.gif" alt="" border="0" /> ';
 }
 
 function clear_dl_list($topics_csv)
@@ -1537,12 +1526,12 @@ function get_topic_icon($topic, $is_unread = null)
         } elseif ($topic['topic_status'] == TOPIC_LOCKED) {
             $folder = $images['folder_locked'];
             $folder_new = $images['folder_locked_new'];
-        } elseif ($topic['topic_dl_type'] == TOPIC_DL_TYPE_DL) {
-            $folder = ($t_hot) ? $images['folder_dl_hot'] : $images['folder_dl'];
-            $folder_new = ($t_hot) ? $images['folder_dl_hot_new'] : $images['folder_dl_new'];
+        } elseif (isset($topic['tracker_status'])) {
+            $folder = $t_hot ? $images['folder_dl_hot'] : $images['folder_dl'];
+            $folder_new = $t_hot ? $images['folder_dl_hot_new'] : $images['folder_dl_new'];
         }
 
-        $folder_image = ($is_unread) ? $folder_new : $folder;
+        $folder_image = $is_unread ? $folder_new : $folder;
     }
 
     return $folder_image;
@@ -1578,9 +1567,9 @@ function build_topic_pagination($url, $replies, $per_page)
 function get_poll_data_items_js($topic_id)
 {
     if (!$topic_id_csv = get_id_csv($topic_id)) {
-        return is_array($topic_id) ? array() : false;
+        return is_array($topic_id) ? [] : false;
     }
-    $items = array();
+    $items = [];
 
     if (!$poll_data = CACHE('bb_poll_data')->get("poll_$topic_id")) {
         $poll_data = DB()->fetch_rowset("

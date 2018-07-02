@@ -1,110 +1,6 @@
 SET SQL_MODE = "";
 
 -- ----------------------------
--- Table structure for `bb_attachments`
--- ----------------------------
-DROP TABLE IF EXISTS `bb_attachments`;
-CREATE TABLE IF NOT EXISTS `bb_attachments` (
-  `attach_id` MEDIUMINT(8) UNSIGNED NOT NULL DEFAULT '0',
-  `post_id`   MEDIUMINT(8) UNSIGNED NOT NULL DEFAULT '0',
-  `user_id_1` MEDIUMINT(8)          NOT NULL DEFAULT '0',
-  PRIMARY KEY (`attach_id`, `post_id`)
-)
-  ENGINE = MyISAM
-  DEFAULT CHARSET = utf8;
-
--- ----------------------------
--- Records of bb_attachments
--- ----------------------------
-
--- ----------------------------
--- Table structure for `bb_attachments_config`
--- ----------------------------
-DROP TABLE IF EXISTS `bb_attachments_config`;
-CREATE TABLE IF NOT EXISTS `bb_attachments_config` (
-  `config_name`  VARCHAR(255) NOT NULL DEFAULT '',
-  `config_value` VARCHAR(255) NOT NULL DEFAULT '',
-  PRIMARY KEY (`config_name`)
-)
-  ENGINE = MyISAM
-  DEFAULT CHARSET = utf8;
-
--- ----------------------------
--- Records of bb_attachments_config
--- ----------------------------
-INSERT INTO `bb_attachments_config` VALUES ('upload_dir', 'data/torrent_files');
-INSERT INTO `bb_attachments_config` VALUES ('upload_img', 'styles/images/icon_clip.gif');
-INSERT INTO `bb_attachments_config` VALUES ('topic_icon', 'styles/images/icon_clip.gif');
-INSERT INTO `bb_attachments_config` VALUES ('display_order', '0');
-INSERT INTO `bb_attachments_config` VALUES ('max_filesize', '262144');
-INSERT INTO `bb_attachments_config` VALUES ('attachment_quota', '52428800');
-INSERT INTO `bb_attachments_config` VALUES ('max_filesize_pm', '262144');
-INSERT INTO `bb_attachments_config` VALUES ('max_attachments', '1');
-INSERT INTO `bb_attachments_config` VALUES ('max_attachments_pm', '1');
-INSERT INTO `bb_attachments_config` VALUES ('disable_mod', '0');
-INSERT INTO `bb_attachments_config` VALUES ('allow_pm_attach', '1');
-INSERT INTO `bb_attachments_config` VALUES ('attach_version', '2.3.14');
-INSERT INTO `bb_attachments_config` VALUES ('default_upload_quota', '0');
-INSERT INTO `bb_attachments_config` VALUES ('default_pm_quota', '0');
-INSERT INTO `bb_attachments_config` VALUES ('img_display_inlined', '1');
-INSERT INTO `bb_attachments_config` VALUES ('img_max_width', '200');
-INSERT INTO `bb_attachments_config` VALUES ('img_max_height', '200');
-INSERT INTO `bb_attachments_config` VALUES ('img_link_width', '0');
-INSERT INTO `bb_attachments_config` VALUES ('img_link_height', '0');
-INSERT INTO `bb_attachments_config` VALUES ('img_create_thumbnail', '0');
-INSERT INTO `bb_attachments_config` VALUES ('img_min_thumb_filesize', '12000');
-INSERT INTO `bb_attachments_config` VALUES ('img_imagick', '/usr/bin/convert');
-INSERT INTO `bb_attachments_config` VALUES ('use_gd2', '1');
-INSERT INTO `bb_attachments_config` VALUES ('wma_autoplay', '0');
-INSERT INTO `bb_attachments_config` VALUES ('flash_autoplay', '0');
-
--- ----------------------------
--- Table structure for `bb_attachments_desc`
--- ----------------------------
-DROP TABLE IF EXISTS `bb_attachments_desc`;
-CREATE TABLE IF NOT EXISTS `bb_attachments_desc` (
-  `attach_id`         MEDIUMINT(8) UNSIGNED NOT NULL AUTO_INCREMENT,
-  `physical_filename` VARCHAR(255)          NOT NULL DEFAULT '',
-  `real_filename`     VARCHAR(255)          NOT NULL DEFAULT '',
-  `download_count`    MEDIUMINT(8) UNSIGNED NOT NULL DEFAULT '0',
-  `comment`           VARCHAR(255)          NOT NULL DEFAULT '',
-  `extension`         VARCHAR(100)          NOT NULL DEFAULT '',
-  `mimetype`          VARCHAR(100)          NOT NULL DEFAULT '',
-  `filesize`          INT(20)               NOT NULL DEFAULT '0',
-  `filetime`          INT(11)               NOT NULL DEFAULT '0',
-  `thumbnail`         TINYINT(1)            NOT NULL DEFAULT '0',
-  `tracker_status`    TINYINT(1)            NOT NULL DEFAULT '0',
-  PRIMARY KEY (`attach_id`),
-  KEY `filetime` (`filetime`),
-  KEY `filesize` (`filesize`),
-  KEY `physical_filename` (`physical_filename`(10))
-)
-  ENGINE = MyISAM
-  DEFAULT CHARSET = utf8;
-
--- ----------------------------
--- Records of bb_attachments_desc
--- ----------------------------
-
--- ----------------------------
--- Table structure for `bb_attach_quota`
--- ----------------------------
-DROP TABLE IF EXISTS `bb_attach_quota`;
-CREATE TABLE IF NOT EXISTS `bb_attach_quota` (
-  `user_id`        MEDIUMINT(8) UNSIGNED NOT NULL DEFAULT '0',
-  `group_id`       MEDIUMINT(8) UNSIGNED NOT NULL DEFAULT '0',
-  `quota_type`     SMALLINT(2)           NOT NULL DEFAULT '0',
-  `quota_limit_id` MEDIUMINT(8) UNSIGNED NOT NULL DEFAULT '0',
-  KEY `quota_type` (`quota_type`)
-)
-  ENGINE = MyISAM
-  DEFAULT CHARSET = utf8;
-
--- ----------------------------
--- Records of bb_attach_quota
--- ----------------------------
-
--- ----------------------------
 -- Table structure for `bb_auth_access`
 -- ----------------------------
 DROP TABLE IF EXISTS `bb_auth_access`;
@@ -260,11 +156,9 @@ CREATE TABLE IF NOT EXISTS `bb_bt_torhelp` (
 DROP TABLE IF EXISTS `bb_bt_torrents`;
 CREATE TABLE IF NOT EXISTS `bb_bt_torrents` (
   `info_hash`        VARBINARY(20)         NOT NULL DEFAULT '',
-  `post_id`          MEDIUMINT(8) UNSIGNED NOT NULL DEFAULT '0',
   `poster_id`        MEDIUMINT(9)          NOT NULL DEFAULT '0',
   `topic_id`         MEDIUMINT(8) UNSIGNED NOT NULL DEFAULT '0',
   `forum_id`         SMALLINT(5) UNSIGNED  NOT NULL DEFAULT '0',
-  `attach_id`        MEDIUMINT(8) UNSIGNED NOT NULL DEFAULT '0',
   `size`             BIGINT(20) UNSIGNED   NOT NULL DEFAULT '0',
   `reg_time`         INT(11)               NOT NULL DEFAULT '0',
   `call_seed_time`   INT(11)               NOT NULL DEFAULT '0',
@@ -277,9 +171,7 @@ CREATE TABLE IF NOT EXISTS `bb_bt_torrents` (
   `speed_up`         INT(11)               NOT NULL DEFAULT '0',
   `speed_down`       INT(11)               NOT NULL DEFAULT '0',
   PRIMARY KEY (`info_hash`),
-  UNIQUE KEY `post_id` (`post_id`),
   UNIQUE KEY `topic_id` (`topic_id`),
-  UNIQUE KEY `attach_id` (`attach_id`),
   KEY `reg_time` (`reg_time`),
   KEY `forum_id` (`forum_id`),
   KEY `poster_id` (`poster_id`)
@@ -316,7 +208,6 @@ DROP TABLE IF EXISTS `bb_bt_tor_dl_stat`;
 CREATE TABLE IF NOT EXISTS `bb_bt_tor_dl_stat` (
   `topic_id`      MEDIUMINT(8) UNSIGNED NOT NULL DEFAULT '0',
   `user_id`       MEDIUMINT(9)          NOT NULL DEFAULT '0',
-  `attach_id`     MEDIUMINT(8) UNSIGNED NOT NULL DEFAULT '0',
   `t_up_total`    BIGINT(20) UNSIGNED   NOT NULL DEFAULT '0',
   `t_down_total`  BIGINT(20) UNSIGNED   NOT NULL DEFAULT '0',
   `t_bonus_total` BIGINT(20) UNSIGNED   NOT NULL DEFAULT '0',
@@ -489,7 +380,6 @@ INSERT INTO `bb_config` VALUES ('bt_add_auth_key', '1');
 INSERT INTO `bb_config` VALUES ('bt_allow_spmode_change', '1');
 INSERT INTO `bb_config` VALUES ('bt_announce_url', 'https://demo.torrentpier.com/bt/announce.php');
 INSERT INTO `bb_config` VALUES ('bt_disable_dht', '0');
-INSERT INTO `bb_config` VALUES ('bt_check_announce_url', '0');
 INSERT INTO `bb_config` VALUES ('bt_del_addit_ann_urls', '1');
 INSERT INTO `bb_config` VALUES ('bt_dl_list_only_1st_page', '1');
 INSERT INTO `bb_config` VALUES ('bt_dl_list_only_count', '1');
@@ -588,9 +478,6 @@ CREATE TABLE IF NOT EXISTS `bb_cron` (
 -- Records of bb_cron
 -- ----------------------------
 INSERT INTO `bb_cron` VALUES
-  ('', '1', 'Attach maintenance', 'attach_maintenance.php', 'daily', '', '05:00:00', '40', '', '', '', '1', '', '0',
-   '1', '0');
-INSERT INTO `bb_cron` VALUES
   ('', '1', 'Board maintenance', 'board_maintenance.php', 'daily', '', '05:00:00', '40', '', '', '', '1', '', '0', '1',
    '0');
 INSERT INTO `bb_cron`
@@ -662,79 +549,6 @@ CREATE TABLE IF NOT EXISTS `bb_disallow` (
 -- ----------------------------
 -- Records of bb_disallow
 -- ----------------------------
-
--- ----------------------------
--- Table structure for `bb_extensions`
--- ----------------------------
-DROP TABLE IF EXISTS `bb_extensions`;
-CREATE TABLE IF NOT EXISTS `bb_extensions` (
-  `ext_id`    MEDIUMINT(8) UNSIGNED NOT NULL AUTO_INCREMENT,
-  `group_id`  MEDIUMINT(8) UNSIGNED NOT NULL DEFAULT '0',
-  `extension` VARCHAR(100)          NOT NULL DEFAULT '',
-  `comment`   VARCHAR(100)          NOT NULL DEFAULT '',
-  PRIMARY KEY (`ext_id`)
-)
-  ENGINE = MyISAM
-  DEFAULT CHARSET = utf8;
-
--- ----------------------------
--- Records of bb_extensions
--- ----------------------------
-INSERT INTO `bb_extensions` VALUES ('', '1', 'gif', '');
-INSERT INTO `bb_extensions` VALUES ('', '1', 'png', '');
-INSERT INTO `bb_extensions` VALUES ('', '1', 'jpeg', '');
-INSERT INTO `bb_extensions` VALUES ('', '1', 'jpg', '');
-INSERT INTO `bb_extensions` VALUES ('', '1', 'tif', '');
-INSERT INTO `bb_extensions` VALUES ('', '1', 'tga', '');
-INSERT INTO `bb_extensions` VALUES ('', '2', 'gtar', '');
-INSERT INTO `bb_extensions` VALUES ('', '2', 'gz', '');
-INSERT INTO `bb_extensions` VALUES ('', '2', 'tar', '');
-INSERT INTO `bb_extensions` VALUES ('', '2', 'zip', '');
-INSERT INTO `bb_extensions` VALUES ('', '2', 'rar', '');
-INSERT INTO `bb_extensions` VALUES ('', '2', 'ace', '');
-INSERT INTO `bb_extensions` VALUES ('', '3', 'txt', '');
-INSERT INTO `bb_extensions` VALUES ('', '3', 'c', '');
-INSERT INTO `bb_extensions` VALUES ('', '3', 'h', '');
-INSERT INTO `bb_extensions` VALUES ('', '3', 'cpp', '');
-INSERT INTO `bb_extensions` VALUES ('', '3', 'hpp', '');
-INSERT INTO `bb_extensions` VALUES ('', '3', 'diz', '');
-INSERT INTO `bb_extensions` VALUES ('', '4', 'xls', '');
-INSERT INTO `bb_extensions` VALUES ('', '4', 'doc', '');
-INSERT INTO `bb_extensions` VALUES ('', '4', 'dot', '');
-INSERT INTO `bb_extensions` VALUES ('', '4', 'pdf', '');
-INSERT INTO `bb_extensions` VALUES ('', '4', 'ai', '');
-INSERT INTO `bb_extensions` VALUES ('', '4', 'ps', '');
-INSERT INTO `bb_extensions` VALUES ('', '4', 'ppt', '');
-INSERT INTO `bb_extensions` VALUES ('', '5', 'rm', '');
-INSERT INTO `bb_extensions` VALUES ('', '6', 'torrent', '');
-
--- ----------------------------
--- Table structure for `bb_extension_groups`
--- ----------------------------
-DROP TABLE IF EXISTS `bb_extension_groups`;
-CREATE TABLE IF NOT EXISTS `bb_extension_groups` (
-  `group_id`          MEDIUMINT(8)        NOT NULL AUTO_INCREMENT,
-  `group_name`        VARCHAR(20)         NOT NULL DEFAULT '',
-  `cat_id`            TINYINT(2)          NOT NULL DEFAULT '0',
-  `allow_group`       TINYINT(1)          NOT NULL DEFAULT '0',
-  `download_mode`     TINYINT(1) UNSIGNED NOT NULL DEFAULT '1',
-  `upload_icon`       VARCHAR(100)        NOT NULL DEFAULT '',
-  `max_filesize`      INT(20)             NOT NULL DEFAULT '0',
-  `forum_permissions` TEXT                NOT NULL,
-  PRIMARY KEY (`group_id`)
-)
-  ENGINE = MyISAM
-  DEFAULT CHARSET = utf8;
-
--- ----------------------------
--- Records of bb_extension_groups
--- ----------------------------
-INSERT INTO `bb_extension_groups` VALUES ('', 'Images', '1', '1', '1', '', '262144', '');
-INSERT INTO `bb_extension_groups` VALUES ('', 'Archives', '0', '1', '1', '', '262144', '');
-INSERT INTO `bb_extension_groups` VALUES ('', 'Plain text', '0', '0', '1', '', '262144', '');
-INSERT INTO `bb_extension_groups` VALUES ('', 'Documents', '0', '0', '1', '', '262144', '');
-INSERT INTO `bb_extension_groups` VALUES ('', 'Real media', '0', '0', '2', '', '262144', '');
-INSERT INTO `bb_extension_groups` VALUES ('', 'Torrent', '0', '1', '1', '', '122880', '');
 
 -- ----------------------------
 -- Table structure for `bb_forums`
@@ -894,7 +708,6 @@ CREATE TABLE IF NOT EXISTS `bb_posts` (
   `post_username`   VARCHAR(25)           NOT NULL DEFAULT '',
   `post_edit_time`  INT(11)               NOT NULL DEFAULT '0',
   `post_edit_count` SMALLINT(5) UNSIGNED  NOT NULL DEFAULT '0',
-  `post_attachment` TINYINT(1)            NOT NULL DEFAULT '0',
   `user_post`       TINYINT(1)            NOT NULL DEFAULT '1',
   `mc_comment`      TEXT                  NOT NULL DEFAULT '',
   `mc_type`         TINYINT(1)            NOT NULL DEFAULT '0',
@@ -912,7 +725,7 @@ CREATE TABLE IF NOT EXISTS `bb_posts` (
 -- Records of bb_posts
 -- ----------------------------
 INSERT INTO `bb_posts`
-VALUES ('1', '1', '1', '2', UNIX_TIMESTAMP(), '0', '0', '0', '', '0', '0', '0', '1', '', '0', '0');
+VALUES ('1', '1', '1', '2', UNIX_TIMESTAMP(), '0', '0', '0', '', '0', '0', '1', '', '0', '0');
 
 -- ----------------------------
 -- Table structure for `bb_posts_html`
@@ -1004,26 +817,6 @@ CREATE TABLE IF NOT EXISTS `bb_privmsgs_text` (
 -- ----------------------------
 -- Records of bb_privmsgs_text
 -- ----------------------------
-
--- ----------------------------
--- Table structure for `bb_quota_limits`
--- ----------------------------
-DROP TABLE IF EXISTS `bb_quota_limits`;
-CREATE TABLE IF NOT EXISTS `bb_quota_limits` (
-  `quota_limit_id` MEDIUMINT(8) UNSIGNED NOT NULL AUTO_INCREMENT,
-  `quota_desc`     VARCHAR(20)           NOT NULL DEFAULT '',
-  `quota_limit`    BIGINT(20) UNSIGNED   NOT NULL DEFAULT '0',
-  PRIMARY KEY (`quota_limit_id`)
-)
-  ENGINE = MyISAM
-  DEFAULT CHARSET = utf8;
-
--- ----------------------------
--- Records of bb_quota_limits
--- ----------------------------
-INSERT INTO `bb_quota_limits` VALUES ('1', 'Low', '262144');
-INSERT INTO `bb_quota_limits` VALUES ('2', 'Medium', '10485760');
-INSERT INTO `bb_quota_limits` VALUES ('3', 'High', '15728640');
 
 -- ----------------------------
 -- Table structure for `bb_ranks`
@@ -1207,8 +1000,10 @@ CREATE TABLE IF NOT EXISTS `bb_topics` (
   `topic_first_post_id`   MEDIUMINT(8) UNSIGNED NOT NULL DEFAULT '0',
   `topic_last_post_id`    MEDIUMINT(8) UNSIGNED NOT NULL DEFAULT '0',
   `topic_moved_id`        MEDIUMINT(8) UNSIGNED NOT NULL DEFAULT '0',
-  `topic_attachment`      TINYINT(1)            NOT NULL DEFAULT '0',
   `topic_dl_type`         TINYINT(1)            NOT NULL DEFAULT '0',
+  `attach_ext_id`         TINYINT(4)            NOT NULL DEFAULT '0',
+  `attach_dl_cnt`         MEDIUMINT(8) UNSIGNED NOT NULL DEFAULT '0',
+  `filesize`              MEDIUMINT(8) UNSIGNED NOT NULL DEFAULT '0',
   `topic_last_post_time`  INT(11)               NOT NULL DEFAULT '0',
   `topic_show_first_post` TINYINT(1) UNSIGNED   NOT NULL DEFAULT '0',
   PRIMARY KEY (`topic_id`),
@@ -1225,7 +1020,7 @@ CREATE TABLE IF NOT EXISTS `bb_topics` (
 -- ----------------------------
 INSERT INTO `bb_topics` VALUES
   ('1', '1', 'Добро пожаловать в TorrentPier Bison', '2', UNIX_TIMESTAMP(), '2', '0', '0', '0', '0', '1', '1', '0', '0',
-   '0', '1414658247', '0');
+   '0', '0', '0', '1414658247', '0');
 
 -- ----------------------------
 -- Table structure for `bb_topics_watch`
