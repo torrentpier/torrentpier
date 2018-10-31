@@ -14,7 +14,7 @@ if (!defined('IN_AJAX')) {
 global $bb_cfg, $lang, $userdata, $datastore;
 
 $mode = (string)$this->request['mode'];
-$html = '';
+$html = array ();
 
 switch ($mode) {
     case 'birthday_week':
