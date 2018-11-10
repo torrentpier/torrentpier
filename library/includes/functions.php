@@ -1089,7 +1089,11 @@ function setup_style()
         }
     }
 
-    $template = new TorrentPier\Legacy\Template(TEMPLATES_DIR . '/' . $tpl_dir_name);
+    /** @var TorrentPier\Template\Template $template */
+    $template = \TorrentPier\Di::getInstance()->template;
+    $template->addDirectory($tpl_dir_name, '__main__');
+
+//    $template = new TorrentPier\Legacy\Template(TEMPLATES_DIR . '/' . $tpl_dir_name);
     $css_dir = 'styles/' . basename(TEMPLATES_DIR) . '/' . $tpl_dir_name . '/css/';
 
     $template->assign_vars(array(
@@ -1341,7 +1345,11 @@ function bb_die($msg_text)
     // If the header hasn't been output then do it
     if (!defined('PAGE_HEADER_SENT')) {
         if (empty($template)) {
-            $template = new TorrentPier\Legacy\Template(BB_ROOT . "templates/{$bb_cfg['tpl_name']}");
+            /** @var TorrentPier\Template\Template $template */
+            $template = \TorrentPier\Di::getInstance()->template;
+            $template->addDirectory($bb_cfg['tpl_name'], '__main__');
+
+//            $template = new TorrentPier\Legacy\Template(BB_ROOT . "templates/{$bb_cfg['tpl_name']}");
         }
         if (empty($theme)) {
             $theme = setup_style();
@@ -1641,15 +1649,21 @@ function print_confirmation($tpl_vars)
  */
 function print_page($args, $type = '', $mode = '')
 {
+    /** @var $template \TorrentPier\Template\Template */
+
     global $template, $gen_simple_header;
 
     $tpl = (is_array($args) && !empty($args['tpl'])) ? $args['tpl'] : $args;
-    $tpl = ($type === 'admin') ? ADMIN_TPL_DIR . $tpl : $tpl;
+    $tpl = ($type === 'admin') ? '@admin/' . $tpl : $tpl;
 
     $gen_simple_header = (is_array($args) && !empty($args['simple']) or $type === 'simple') ? true : $gen_simple_header;
 
     if ($mode !== 'no_header') {
         require(PAGE_HEADER);
+    }
+
+    if ($type === 'admin') {
+        $template->addDirectory('admin', 'admin');
     }
 
     $template->set_filenames(array('body' => $tpl));
