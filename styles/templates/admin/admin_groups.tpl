@@ -51,14 +51,6 @@
 	<td>{L_GROUP_DELETE}:</td>
 	<td><input type="checkbox" name="group_delete" value="1"> {L_GROUP_DELETE_CHECK}</td>
 </tr>
-<tr>
-	<td>{L_UPLOAD_QUOTA}</td>
-	<td>{S_SELECT_UPLOAD_QUOTA}</td>
-</tr>
-<tr>
-	<td>{L_PM_QUOTA}</td>
-	<td>{S_SELECT_PM_QUOTA}</td>
-</tr>
 <!-- END group_edit -->
 <tr>
 	<td class="catBottom" colspan="2">

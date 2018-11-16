@@ -147,7 +147,7 @@ if ($bb_cfg['torhelp_enabled']) {
     // Select users
     $sql = "
 		SELECT DISTINCT session_user_id AS uid
-		FROM " . BB_SESSIONS . "
+		FROM bb_sessions
 		WHERE session_time > (UNIX_TIMESTAMP() - $user_last_seen_online*60)
 		  AND session_user_id != " . GUEST_UID . "
 		ORDER BY session_time DESC

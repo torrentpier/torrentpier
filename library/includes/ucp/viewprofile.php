@@ -35,7 +35,7 @@ if (!$ranks = $datastore->get('ranks')) {
 }
 
 $poster_rank = $rank_image = $rank_style = $rank_select = '';
-if ($user_rank = $profiledata['user_rank'] and isset($ranks[$user_rank])) {
+if (($user_rank = $profiledata['user_rank']) && isset($ranks[$user_rank])) {
     $rank_image = ($ranks[$user_rank]['rank_image']) ? '<img src="' . $ranks[$user_rank]['rank_image'] . '" alt="" title="" border="0" />' : '';
     $poster_rank = $ranks[$user_rank]['rank_title'];
     $rank_style = $ranks[$user_rank]['rank_style'];
@@ -49,7 +49,7 @@ if (IS_ADMIN) {
 }
 
 if (bf($profiledata['user_opt'], 'user_opt', 'user_viewemail') || $profiledata['user_id'] == $userdata['user_id'] || IS_AM) {
-    $email_uri = ($bb_cfg['board_email_form']) ? 'profile.php?mode=email&amp;' . POST_USERS_URL . '=' . $profiledata['user_id'] : 'mailto:' . $profiledata['user_email'];
+    $email_uri = $bb_cfg['board_email_form'] ? 'profile.php?mode=email&amp;' . POST_USERS_URL . '=' . $profiledata['user_id'] : 'mailto:' . $profiledata['user_email'];
     $email = '<a class="editable" href="' . $email_uri . '">' . $profiledata['user_email'] . '</a>';
 } else {
     $email = '';

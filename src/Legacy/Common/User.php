@@ -115,7 +115,7 @@ class User
 
             $SQL['SELECT'][] = "u.*, s.*";
 
-            $SQL['FROM'][] = BB_SESSIONS . " s";
+            $SQL['FROM'][] = "bb_sessions s";
             $SQL['INNER JOIN'][] = BB_USERS . " u ON(u.user_id = s.session_user_id)";
 
             if ($session_id) {
@@ -163,7 +163,7 @@ class User
                 // Only update session a minute or so after last update
                 if ($update_sessions_table) {
                     DB()->query("
-						UPDATE " . BB_SESSIONS . " SET
+						UPDATE bb_sessions SET
 							session_time = " . TIMENOW . "
 						WHERE session_id = '$session_id'
 						LIMIT 1
@@ -257,7 +257,7 @@ class User
                 'session_logged_in' => (int)$login,
                 'session_admin' => (int)$mod_admin_session,
             ]);
-            $sql = "INSERT INTO " . BB_SESSIONS . $args;
+            $sql = "INSERT INTO bb_sessions "  . $args;
 
             if (DB()->query($sql)) {
                 break;
@@ -330,7 +330,7 @@ class User
     public function session_end($update_lastvisit = false, $set_cookie = true)
     {
         DB()->query("
-			DELETE FROM " . BB_SESSIONS . "
+			DELETE FROM bb_sessions
 			WHERE session_id = '{$this->data['session_id']}'
 		");
 
@@ -351,7 +351,7 @@ class User
                 $this->create_autologin_id($this->data, false);
 
                 DB()->query("
-					DELETE FROM " . BB_SESSIONS . "
+					DELETE FROM bb_sessions
 					WHERE session_user_id = '{$this->data['user_id']}'
 				");
             }
@@ -397,7 +397,7 @@ class User
                 // Start mod/admin session
                 if ($mod_admin_login) {
                     DB()->query("
-						UPDATE " . BB_SESSIONS . " SET
+						UPDATE bb_sessions SET
 							session_admin = " . $this->data['user_level'] . "
 						WHERE session_user_id = " . $this->data['user_id'] . "
 							AND session_id = '" . $this->data['session_id'] . "'
@@ -411,7 +411,7 @@ class User
                 if ($new_session_userdata = $this->session_create($userdata, false)) {
                     // Removing guest sessions from this IP
                     DB()->query("
-						DELETE FROM " . BB_SESSIONS . "
+						DELETE FROM bb_sessions
 						WHERE session_ip = '" . USER_IP . "'
 							AND session_user_id = " . GUEST_UID . "
 					");
@@ -616,7 +616,7 @@ class User
         if ($type === 'all_forums') {
             // Update session time
             DB()->query("
-				UPDATE " . BB_SESSIONS . " SET
+				UPDATE bb_sessions SET
 					session_time = " . TIMENOW . "
 				WHERE session_id = '{$this->data['session_id']}'
 				LIMIT 1

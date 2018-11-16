@@ -112,10 +112,6 @@ function generate_smilies($mode)
     $inline_rows = 7;
     $window_columns = 8;
 
-    if ($mode == 'window') {
-        $user->session_start();
-    }
-
     $data = $datastore->get('smile_replacements');
 
     if ($sql = $data['smile']) {
@@ -400,15 +396,6 @@ function bbcode2html($text)
         $text = preg_replace($orig_word, $replacement_word, $text);
     }
     return $bbcode->bbcode2html($text);
-}
-
-function get_words_rate($text)
-{
-    static $wr = null;
-    if (!isset($wr)) {
-        $wr = new TorrentPier\Legacy\WordsRate();
-    }
-    return $wr->get_words_rate($text);
 }
 
 function hide_passkey($str)

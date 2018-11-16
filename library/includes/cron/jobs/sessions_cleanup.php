@@ -20,14 +20,14 @@ $admin_session_gc_time = $admin_session_expire_time;
 // ############################ Tables LOCKED ################################
 DB()->lock(array(
     BB_USERS . ' u',
-    BB_SESSIONS . ' s',
+    'bb_sessions s',
 ));
 
 // Update user's session time
 DB()->query("
 	UPDATE
 		" . BB_USERS . " u,
-		" . BB_SESSIONS . " s
+		bb_sessions s
 	SET
 		u.user_session_time = IF(u.user_session_time < s.session_time, s.session_time, u.user_session_time)
 	WHERE
@@ -46,7 +46,7 @@ DB()->unlock();
 // Delete staled sessions
 DB()->query("
 	DELETE s
-	FROM " . BB_SESSIONS . " s
+	FROM bb_sessions s
 	WHERE
 		(s.session_time < $user_session_gc_time AND s.session_admin = 0)
 		OR

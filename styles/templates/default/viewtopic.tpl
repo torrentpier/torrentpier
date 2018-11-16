@@ -420,10 +420,48 @@ function build_poll_add_form (src_el)
 						<div id="mc_comment_{postrow.POST_ID}">{postrow.MC_COMMENT}</div>
 					</div>
 				</div>
-				{postrow.ATTACHMENTS}
+
+				<!-- IF postrow.IS_FIRST_POST -->
+					<!-- IF SHOW_GUEST_DL_STUB -->
+
+							<!-- INCLUDE viewtopic_tor_guest.tpl -->
+
+					<!-- ELSEIF SHOW_TOR_NOT_REGGED -->
+
+						<div class="clear"></div>
+						<div class="spacer_8"></div>
+						<fieldset class="attach">
+							<legend>{TOPIC_ATTACH_ICON} {L_ATTACHMENT}</legend>
+							<p class="attach_link"><b>Торрент не зарегистрирован на трекере</b> <!-- IF TRACKER_REG_LINK -->&nbsp;[ {TRACKER_REG_LINK} ]<!-- ENDIF --></p>
+						</fieldset>
+						<div class="spacer_12"></div>
+
+					<!-- ELSEIF SHOW_TOR_REGGED -->
+
+						<!-- INCLUDE viewtopic_tor_attach.tpl -->
+
+					<!-- ELSEIF SHOW_ATTACH_DL_LINK -->
+
+						<div class="clear"></div>
+						<div class="spacer_8"></div>
+						<fieldset class="attach">
+							<legend>{TOPIC_ATTACH_ICON} {L_ATTACHMENT}</legend>
+							<p class="attach_link"><a href="{$di->config->get('dl_url')}{TOPIC_ID}" class="dl-stub"><b>Скачать прикреплённый файл</b></a> &nbsp;<span class="med">({ATTACH_FILESIZE})</span></p>
+						</fieldset>
+
+					<!-- ELSEIF IS_GUEST -->
+
+						<div class="clear"></div>
+						<div class="spacer_6"></div>
+
+					<!-- ENDIF -->
+				<!-- ENDIF / IS_FIRST_POST -->
+
 			</div><!--/post_wrap-->
-			<!-- IF postrow.SIGNATURE -->{postrow.SIGNATURE}<!-- ENDIF -->
-			<!-- IF postrow.EDITED_MESSAGE --><div class="last_edited">{postrow.EDITED_MESSAGE}</div><!-- ENDIF -->
+			<!-- IF not postrow.IS_FIRST_POST -->
+				<!-- IF postrow.SIGNATURE -->{postrow.SIGNATURE}<!-- ENDIF -->
+				<!-- IF postrow.EDITED_MESSAGE --><div class="last_edited">{postrow.EDITED_MESSAGE}</div><!-- ENDIF -->
+			<!-- ENDIF -->
 		</div><!--/post_body-->
 
 		<!-- IF AUTH_MOD -->
@@ -619,25 +657,19 @@ function build_poll_add_form (src_el)
 
 <table width="100%">
 <tr>
-	<td width="40%" valign="top" nowrap="nowrap"><span class="small">{S_WATCH_TOPIC}</span><br />
-	<div class="small">
-<!-- IF S_TOPIC_ADMIN -->
-		<br clear="all" />
-		<div style="float: left;">{S_TOPIC_ADMIN}</div>
-<!-- ENDIF -->
-<!-- IF IS_ADMIN -->
-		<div class="med" style="float: right;">
-		Admin:&nbsp;
-		<a href="{U_LOGS}">{L_LOGS}</a>&nbsp;
+	<td valign="top" nowrap="nowrap">
+		<div class="small">
+			<!-- IF S_TOPIC_ADMIN -->
+			<br clear="all" />
+			<div style="float: left;">{L_MANAGE}: {S_TOPIC_ADMIN}</div>
+			<!-- ENDIF -->
+			<br clear="all" />
+			<div style="float: left;">{S_WATCH_TOPIC}</div>
+			<!-- IF IS_ADMIN -->
+			<br clear="all" />
+			<div style="float: left;"><a href="{U_LOGS}">{L_LOGS}</a></div>
+			<!-- ENDIF -->
 		</div>
-<!-- ENDIF -->
-<!-- IF S_DL_DELETE -->
-		<br clear="all" />
-		<div style="float: left;">{S_DL_DELETE}</div>
-<!-- ENDIF -->
-		<br clear="all" />
-		<div style="float: left;">{S_AUTH_LIST}</div>
-	</div>
 	</td>
 </tr>
 </table>

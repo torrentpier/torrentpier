@@ -181,7 +181,7 @@ foreach ($profile_fields as $field => $can_edit) {
 
             if ($submit) {
                 $err = \TorrentPier\Legacy\Validate::username($username);
-                if (!$errors and $err && $mode == 'register') {
+                if (!$errors && $err && ($mode == 'register')) {
                     $errors[] = $err;
                 }
                 if ($can_edit && $username != $pr_data['username'] || $mode == 'register') {
@@ -198,9 +198,9 @@ foreach ($profile_fields as $field => $can_edit) {
          */
         case 'user_password':
             if ($submit) {
-                $cur_pass = (string)@$_POST['cur_pass'];
-                $new_pass = (string)@$_POST['new_pass'];
-                $cfm_pass = (string)@$_POST['cfm_pass'];
+                $cur_pass = (string)$_POST['cur_pass'];
+                $new_pass = (string)$_POST['new_pass'];
+                $cfm_pass = (string)$_POST['cfm_pass'];
 
                 // пароль для гостя и при смене пароля юзером
                 if (!empty($new_pass)) {
@@ -239,7 +239,7 @@ foreach ($profile_fields as $field => $can_edit) {
                     if (empty($email)) {
                         $errors[] = $lang['CHOOSE_E_MAIL'];
                     }
-                    if (!$errors and $err = \TorrentPier\Legacy\Validate::email($email)) {
+                    if (!$errors && ($err = \TorrentPier\Legacy\Validate::email($email))) {
                         $errors[] = $err;
                     }
                     $db_data['user_email'] = $email;
@@ -249,7 +249,7 @@ foreach ($profile_fields as $field => $can_edit) {
                     if (!$cur_pass_valid) {
                         $errors[] = $lang['CONFIRM_PASSWORD_EXPLAIN'];
                     }
-                    if (!$errors and $err = \TorrentPier\Legacy\Validate::email($email)) {
+                    if (!$errors && ($err = \TorrentPier\Legacy\Validate::email($email))) {
                         $errors[] = $err;
                     }
                     if ($bb_cfg['reg_email_activation']) {
@@ -366,7 +366,7 @@ foreach ($profile_fields as $field => $can_edit) {
                 } elseif (!empty($_FILES['avatar']['name']) && $bb_cfg['avatars']['up_allowed']) {
                     $upload = new TorrentPier\Legacy\Common\Upload();
 
-                    if ($upload->init($bb_cfg['avatars'], $_FILES['avatar']) and $upload->store('avatar', $pr_data)) {
+                    if ($upload->init($bb_cfg['avatars'], $_FILES['avatar']) && $upload->store('avatar', $pr_data)) {
                         $pr_data['avatar_ext_id'] = $upload->file_ext_id;
                         $db_data['avatar_ext_id'] = (int)$upload->file_ext_id;
                     } else {

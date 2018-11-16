@@ -110,7 +110,7 @@ switch ($this->request['type']) {
         $message = htmlCHR($message, false, ENT_NOQUOTES);
 
         $this->response['message_html'] = bbcode2html($message);
-        $this->response['res_id'] = @$this->request['res_id'];
+        $this->response['res_id'] = $this->request['res_id'];
         break;
 
     case 'edit':
@@ -121,7 +121,7 @@ switch ($this->request['type']) {
         if ($post['poster_id'] != $userdata['user_id'] && !$is_auth['auth_mod']) {
             $this->ajax_die($lang['EDIT_OWN_POSTS']);
         }
-        if ((mb_strlen($post['post_text'], 'UTF-8') > 1000) || $post['post_attachment'] || ($post['topic_first_post_id'] == $post_id)) {
+        if ((mb_strlen($post['post_text'], 'UTF-8') > 1000) || $post['attach_ext_id'] || ($post['topic_first_post_id'] == $post_id)) {
             $this->response['redirect'] = make_url(POSTING_URL . '?mode=editpost&p=' . $post_id);
         } elseif ($this->request['type'] == 'editor') {
             $text = (string)$this->request['text'];
@@ -135,9 +135,9 @@ switch ($this->request['type']) {
                             $this->ajax_die(sprintf($lang['MAX_SMILIES_PER_POST'], $bb_cfg['max_smilies']));
                         }
                     }
-                    DB()->query("UPDATE " . BB_POSTS_TEXT . " SET post_text = '" . DB()->escape($text) . "' WHERE post_id = $post_id");
+                    DB()->query("UPDATE " . BB_POSTS_TEXT . " SET post_text = '" . DB()->escape($text) . "' WHERE post_id = $post_id LIMIT 1");
                     if ($post['topic_last_post_id'] != $post['post_id'] && $userdata['user_id'] == $post['poster_id']) {
-                        DB()->query("UPDATE " . BB_POSTS . " SET post_edit_time = '" . TIMENOW . "', post_edit_count = post_edit_count + 1 WHERE post_id = $post_id");
+                        DB()->query("UPDATE " . BB_POSTS . " SET post_edit_time = '" . TIMENOW . "', post_edit_count = post_edit_count + 1 WHERE post_id = $post_id LIMIT 1");
                     }
                     $s_text = str_replace('\n', "\n", $text);
                     $s_topic_title = str_replace('\n', "\n", $post['topic_title']);
@@ -232,7 +232,7 @@ switch ($this->request['type']) {
         $where_sql = (IS_GUEST) ? "p.poster_ip = '" . USER_IP . "'" : "p.poster_id = {$userdata['user_id']}";
 
         $sql = "SELECT MAX(p.post_time) AS last_post_time FROM " . BB_POSTS . " p WHERE $where_sql";
-        if ($row = DB()->fetch_row($sql) and $row['last_post_time']) {
+        if (($row = DB()->fetch_row($sql)) && $row['last_post_time']) {
             if ($userdata['user_level'] == USER) {
                 if (TIMENOW - $row['last_post_time'] < $bb_cfg['flood_interval']) {
                     $this->ajax_die($lang['FLOOD_ERROR']);

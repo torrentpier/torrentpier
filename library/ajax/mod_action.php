@@ -25,13 +25,13 @@ switch ($mode) {
             $this->ajax_die($lang['STATUS_DOES_EXIST'] . $new_status);
         }
 
-        $topic_ids = DB()->fetch_rowset("SELECT attach_id FROM " . BB_BT_TORRENTS . " WHERE topic_id IN($topics)", 'attach_id');
+        $topic_ids = explode(',', $topics);
 
-        foreach ($topic_ids as $attach_id) {
-            \TorrentPier\Legacy\Torrent::change_tor_status($attach_id, $status);
+        foreach ($topic_ids as $topic_id) {
+            \TorrentPier\Legacy\Torrent::change_tor_status($topic_id, $status);
         }
         $this->response['status'] = $bb_cfg['tor_icons'][$status];
-        $this->response['topics'] = explode(',', $topics);
+        $this->response['topics'] = $topic_ids;
         break;
 
     case 'edit_topic_title':
@@ -53,7 +53,7 @@ switch ($mode) {
 
         $topic_title_sql = DB()->escape($new_title);
 
-        DB()->query("UPDATE " . BB_TOPICS . " SET topic_title = '$topic_title_sql' WHERE topic_id = $topic_id");
+        DB()->query("UPDATE " . BB_TOPICS . " SET topic_title = '$topic_title_sql' WHERE topic_id = $topic_id LIMIT 1");
 
         // Обновление кеша новостей на главной
         $news_forums = array_flip(explode(',', $bb_cfg['latest_news_forum_id']));

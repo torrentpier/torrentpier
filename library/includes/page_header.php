@@ -16,13 +16,13 @@ if (defined('PAGE_HEADER_SENT')) {
 
 // Parse and show the overall page header
 
-global $page_cfg, $userdata, $user, $ads, $bb_cfg, $template, $lang, $images;
+global $page_cfg, $userdata, $user, $bb_cfg, $template, $lang, $images;
 
 $logged_in = (int)!empty($userdata['session_logged_in']);
 
 // Generate logged in/logged out status
 if ($logged_in) {
-    $u_login_logout = BB_ROOT . LOGIN_URL . "?logout=1";
+    $u_login_logout = BB_ROOT . LOGIN_URL . '?logout=1';
 } else {
     $u_login_logout = BB_ROOT . LOGIN_URL;
 }
@@ -32,11 +32,11 @@ if (defined('SHOW_ONLINE') && SHOW_ONLINE) {
     $online_full = !empty($_REQUEST['online_full']);
     $online_list = $online_full ? 'online_' . $userdata['user_lang'] : 'online_short_' . $userdata['user_lang'];
 
-    ${$online_list} = array(
+    ${$online_list} = [
         'stat' => '',
         'userlist' => '',
         'cnt' => '',
-    );
+    ];
 
     if (defined('IS_GUEST') && !(IS_GUEST || IS_USER)) {
         $template->assign_var('SHOW_ONLINE_LIST');

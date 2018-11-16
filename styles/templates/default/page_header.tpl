@@ -319,21 +319,41 @@ $(document).ready(function() {
 	</td>
 	<td width="50%" class="tRight">
 		<a href="{U_OPTIONS}"><b>{L_OPTIONS}</b></a> &#0183;
-		<a href="{U_CUR_DOWNLOADS}">{L_PROFILE}</a> <a href="#dls-menu" class="menu-root menu-alt1">&#9660;</a>
+		<a href="{U_CUR_DOWNLOADS}">{L_PROFILE}</a> <a href="#dls-menu" class="menu-root menu-alt1">{OPEN_MENU_IMG_ALT}</a> &#0183;
+		<a href="{U_SEARCH_SELF_BY_LAST}" class="med">{L_SEARCH_SELF}</a> <a href="#search-my-posts" class="menu-root menu-alt1">{OPEN_MENU_IMG_ALT}</a>
 	</td>
 </tr>
 </table>
 </div>
 <!--/logout-->
 
-<div class="menu-sub" id="dls-menu">
-	<div class="menu-a bold nowrap">
-		<a class="med" href="{U_TRACKER}?rid={SESSION_USER_ID}#results">{L_CUR_UPLOADS}</a>
-		<a class="med" href="{U_SEARCH}?dlu={SESSION_USER_ID}&dlc=1">{L_SEARCH_DL_COMPLETE_DOWNLOADS}</a>
-		<a class="med" href="{U_SEARCH}?dlu={SESSION_USER_ID}&dlw=1">{L_SEARCH_DL_WILL_DOWNLOADS}</a>
-		<a class="med" href="{U_WATCHED_TOPICS}">{L_WATCHED_TOPICS}</a>
-	</div>
-</div>
+  <div class="menu-sub" id="search-my-posts">
+    <table cellspacing="1" cellpadding="4">
+      <tr>
+        <th>{L_SEARCH_SELF}</th>
+      </tr>
+      <tr>
+        <td>
+          <fieldset id="search-my">
+            <legend>{L_SORT_BY}</legend>
+            <div class="bold nowrap pad_2">
+              <p class="mrg_4"><a class="med" href="{U_SEARCH_SELF_BY_LAST}">{L_SEARCH_SELF_BY_LAST}</a></p>
+              <p class="mrg_4"><a class="med" href="{U_SEARCH_SELF_BY_MY}">{L_SEARCH_SELF_BY_MY}</a></p>
+            </div>
+          </fieldset>
+        </td>
+      </tr>
+    </table>
+  </div><!--/search-my-posts-->
+
+  <div class="menu-sub" id="dls-menu">
+    <div class="menu-a bold nowrap">
+      <a class="med" href="{U_TRACKER}?rid={SESSION_USER_ID}#results">{L_CUR_UPLOADS}</a>
+      <a class="med" href="{U_SEARCH}?dlu={SESSION_USER_ID}&dlc=1">{L_SEARCH_DL_COMPLETE_DOWNLOADS}</a>
+      <a class="med" href="{U_SEARCH}?dlu={SESSION_USER_ID}&dlw=1">{L_SEARCH_DL_WILL_DOWNLOADS}</a>
+      <a class="med" href="{U_WATCHED_TOPICS}">{L_WATCHED_TOPICS}</a>
+    </div>
+  </div>
 <!-- ELSE -->
 
 <!--login form-->

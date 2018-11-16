@@ -47,7 +47,7 @@ if (!$forums = $datastore->get('cat_forums')) {
     $datastore->update('cat_forums');
     $forums = $datastore->get('cat_forums');
 }
-if (!$forum_id or !$forum_data = @$forums['forum'][$forum_id]) {
+if (!$forum_id || !($forum_data = $forums['forum'][$forum_id])) {
     bb_die($lang['FORUM_NOT_EXIST']);
 }
 
@@ -215,7 +215,7 @@ $topics_per_page = $bb_cfg['topics_per_page'];
 $select_tpp = '';
 
 if ($is_auth['auth_mod']) {
-    if ($req_tpp = abs((int)(@$_REQUEST['tpp'])) and in_array($req_tpp, $bb_cfg['allowed_topics_per_page'])) {
+    if (($req_tpp = abs((int)(@$_REQUEST['tpp']))) && in_array($req_tpp, $bb_cfg['allowed_topics_per_page'])) {
         $topics_per_page = $req_tpp;
     }
 
@@ -285,7 +285,7 @@ if ($forum_data['allow_reg_tracker']) {
     }
 
     $select_tor_sql = ',
-		bt.auth_key, tor.info_hash, tor.size AS tor_size, tor.reg_time, tor.complete_count, tor.seeder_last_seen, tor.attach_id, tor.tor_status, tor.tor_type,
+		bt.auth_key, tor.info_hash, tor.size AS tor_size, tor.reg_time, tor.complete_count, tor.seeder_last_seen, tor.tor_status, tor.tor_type,
 		sn.seeders, sn.leechers
 	';
     $select_tor_sql .= ($join_dl) ? ', dl.user_status AS dl_status' : '';
@@ -374,18 +374,6 @@ $template->assign_vars(array(
     'S_DISPLAY_ORDER' => $s_display_order,
 ));
 
-// User authorisation levels output
-$u_auth = array();
-$u_auth[] = ($is_auth['auth_post']) ? $lang['RULES_POST_CAN'] : $lang['RULES_POST_CANNOT'];
-$u_auth[] = ($is_auth['auth_reply']) ? $lang['RULES_REPLY_CAN'] : $lang['RULES_REPLY_CANNOT'];
-$u_auth[] = ($is_auth['auth_edit']) ? $lang['RULES_EDIT_CAN'] : $lang['RULES_EDIT_CANNOT'];
-$u_auth[] = ($is_auth['auth_delete']) ? $lang['RULES_DELETE_CAN'] : $lang['RULES_DELETE_CANNOT'];
-$u_auth[] = ($is_auth['auth_vote']) ? $lang['RULES_VOTE_CAN'] : $lang['RULES_VOTE_CANNOT'];
-$u_auth[] = ($is_auth['auth_attachments']) ? $lang['RULES_ATTACH_CAN'] : $lang['RULES_ATTACH_CANNOT'];
-$u_auth[] = ($is_auth['auth_download']) ? $lang['RULES_DOWNLOAD_CAN'] : $lang['RULES_DOWNLOAD_CANNOT'];
-$u_auth[] = ($is_auth['auth_mod']) ? $lang['RULES_MODERATE'] : '';
-$u_auth = implode("<br />\n", $u_auth);
-
 $template->assign_vars(array(
     'SHOW_JUMPBOX' => true,
     'PAGE_TITLE' => htmlCHR($forum_data['forum_name']),
@@ -408,7 +396,6 @@ $template->assign_vars(array(
     'TITLE_MATCH' => htmlCHR($title_match),
     'SELECT_TPP' => ($select_tpp) ? build_select('tpp', $select_tpp, $topics_per_page, null, null, 'onchange="$(\'#tpp\').submit();"') : '',
     'T_POST_NEW_TOPIC' => ($forum_data['forum_status'] == FORUM_LOCKED) ? $lang['FORUM_LOCKED'] : $post_new_topic,
-    'S_AUTH_LIST' => $u_auth,
     'U_VIEW_FORUM' => FORUM_URL . $forum_id,
     'U_MARK_READ' => FORUM_URL . $forum_id . "&amp;mark=topics",
     'U_SEARCH_SELF' => "search.php?uid={$userdata['user_id']}&f=$forum_id",
@@ -441,12 +428,12 @@ foreach ($topic_rowset as $topic) {
     $template->assign_block_vars('t', array(
         'FORUM_ID' => $forum_id,
         'TOPIC_ID' => $topic_id,
-        'HREF_TOPIC_ID' => ($moved) ? $topic['topic_moved_id'] : $topic['topic_id'],
+        'HREF_TOPIC_ID' => $moved ? $topic['topic_moved_id'] : $topic['topic_id'],
         'TOPIC_TITLE' => wbr($topic['topic_title']),
         'TOPICS_SEPARATOR' => $separator,
         'IS_UNREAD' => $is_unread,
         'TOPIC_ICON' => get_topic_icon($topic, $is_unread),
-        'PAGINATION' => ($moved) ? '' : build_topic_pagination(TOPIC_URL . $topic_id, $replies, $bb_cfg['posts_per_page']),
+        'PAGINATION' => $moved ? '' : build_topic_pagination(TOPIC_URL . $topic_id, $replies, $bb_cfg['posts_per_page']),
         'REPLIES' => $replies,
         'VIEWS' => $topic['topic_views'],
         'TOR_STALED' => ($forum_data['allow_reg_tracker'] && !($t_type == POST_ANNOUNCE || $t_type == POST_STICKY || $topic['tor_size'])),
@@ -456,10 +443,10 @@ foreach ($topic_rowset as $topic) {
         'TOR_STATUS_ICON' => isset($topic['tor_status']) ? $bb_cfg['tor_icons'][$topic['tor_status']] : '',
         'TOR_STATUS_TEXT' => isset($topic['tor_status']) ? $lang['TOR_STATUS_NAME'][$topic['tor_status']] : '',
 
-        'ATTACH' => $topic['topic_attachment'] ?? false,
+        'ATTACH' => $topic['attach_ext_id'],
         'STATUS' => $topic['topic_status'],
         'TYPE' => $topic['topic_type'],
-        'DL' => ($topic['topic_dl_type'] == TOPIC_DL_TYPE_DL && !$forum_data['allow_reg_tracker']),
+        'DL' => isset($topic['tracker_status']) && !$forum_data['allow_reg_tracker'],
         'POLL' => $topic['topic_vote'],
         'DL_CLASS' => isset($topic['dl_status']) ? $dl_link_css[$topic['dl_status']] : '',
 
@@ -477,7 +464,6 @@ foreach ($topic_rowset as $topic) {
             'LEECHERS' => (int)$topic['leechers'],
             'TOR_SIZE' => humn_size($topic['tor_size']),
             'COMPL_CNT' => (int)$topic['complete_count'],
-            'ATTACH_ID' => $topic['attach_id'],
             'MAGNET' => $tor_magnet,
         ));
     }

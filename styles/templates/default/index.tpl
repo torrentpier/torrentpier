@@ -12,8 +12,8 @@
 <!-- IF LOGGED_IN -->
 <div id="forums_top_links">
 	<div class="floatL">
+		<a href="{U_SEARCH_NEW}" class="med bold">{L_NEW_POSTS}</a> &#0183;
 		<a href="{U_SEARCH_LATEST}" class="med">{L_SEARCH_LATEST}</a> &#0183;
-		<a href="{U_SEARCH_SELF_BY_LAST}" class="med">{L_SEARCH_SELF}</a> <a href="#search-my-posts" class="menu-root menu-alt1">{OPEN_MENU_IMG_ALT}</a> &#0183;
 		<a href="{SITE_URL}internal_data/atom/f/0.atom" class="med">{FEED_IMG} {L_LATEST_RELEASES}</a> &#0183;
 		<a href="{U_INDEX}?map=1" class="med bold">{FEED_IMG} {L_FORUM_MAP}</a>
 	</div>
@@ -23,24 +23,6 @@
 	<div class="clear"></div>
 </div><!--/forums_top_links-->
 
-<div class="menu-sub" id="search-my-posts">
-	<table cellspacing="1" cellpadding="4">
-	<tr>
-		<th>{L_SEARCH_SELF}</th>
-	</tr>
-	<tr>
-		<td>
-			<fieldset id="search-my">
-			<legend>{L_SORT_BY}</legend>
-			<div class="bold nowrap pad_2">
-				<p class="mrg_4"><a class="med" href="{U_SEARCH_SELF_BY_LAST}">{L_SEARCH_SELF_BY_LAST}</a></p>
-				<p class="mrg_4"><a class="med" href="{U_SEARCH_SELF_BY_MY}">{L_SEARCH_SELF_BY_MY}</a></p>
-			</div>
-			</fieldset>
-		</td>
-	</tr>
-	</table>
-</div><!--/search-my-posts-->
 <!-- ENDIF -->
 
 <img width="540" class="spacer" src="{SPACER}" alt="" />
@@ -154,7 +136,6 @@
 
 <!-- IF LOGGED_IN and SHOW_FORUMS -->
 <div id="mark_all_forums_read">
-	<a href="{U_SEARCH_NEW}" class="med">{L_SEARCH_NEW}</a> &#0183;
 	<a href="{U_INDEX}" class="med" onclick="setCookie('{COOKIE_MARK}', 'all_forums');">{L_MARK_ALL_FORUMS_READ}</a>
 </div>
 <!-- ENDIF -->

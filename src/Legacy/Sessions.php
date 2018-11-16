@@ -87,7 +87,7 @@ class Sessions
     {
         $user_id = get_id_csv($user_id);
 
-        $rowset = DB()->fetch_rowset("SELECT session_id FROM " . BB_SESSIONS . " WHERE session_user_id IN($user_id)");
+        $rowset = DB()->fetch_rowset("SELECT session_id FROM bb_sessions WHERE session_user_id IN($user_id)");
 
         foreach ($rowset as $row) {
             CACHE('session_cache')->rm($row['session_id']);
@@ -141,7 +141,7 @@ class Sessions
         self::cache_rm_user_sessions($user_id);
 
         $user_id = get_id_csv($user_id);
-        DB()->query("DELETE FROM " . BB_SESSIONS . " WHERE session_user_id IN($user_id)");
+        DB()->query("DELETE FROM bb_sessions WHERE session_user_id IN($user_id)");
     }
 
     /**

@@ -13,7 +13,7 @@ if (!defined('IN_AJAX')) {
 
 global $bb_cfg, $lang;
 
-if (!$user_id = (int)$this->request['user_id'] or !$profiledata = get_userdata($user_id)) {
+if (!($user_id = (int)$this->request['user_id']) || !($profiledata = get_userdata($user_id))) {
     $this->ajax_die($lang['NO_USER_ID_SPECIFIED']);
 }
 if (!$field = (string)$this->request['field']) {
@@ -109,7 +109,7 @@ switch ($field) {
     case 'user_regdate':
     case 'user_lastvisit':
         $tz = TIMENOW + (3600 * $bb_cfg['board_timezone']);
-        if (($value = strtotime($value, $tz)) < $bb_cfg['board_startdate'] or $value > TIMENOW) {
+        if ((($value = strtotime($value, $tz)) < $bb_cfg['board_startdate']) || ($value > TIMENOW)) {
             $this->ajax_die($lang['INVALID_DATE'] . $this->request['value']);
         }
         $this->response['new_value'] = bb_date($value, 'Y-m-d H:i', false);
@@ -154,7 +154,7 @@ switch ($field) {
 }
 
 $value_sql = DB()->escape($value, true);
-DB()->query("UPDATE $table SET $field = $value_sql WHERE user_id = $user_id");
+DB()->query("UPDATE $table SET $field = $value_sql WHERE user_id = $user_id LIMIT 1");
 
 \TorrentPier\Legacy\Sessions::cache_rm_user_sessions($user_id);
 

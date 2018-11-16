@@ -56,10 +56,9 @@
 	<!-- IF POSTING_TOPIC_ID --><em>&raquo;</em> <a class="normal" href="{TOPIC_URL}{POSTING_TOPIC_ID}">{POSTING_TOPIC_TITLE}</a><!-- ENDIF -->
 </p>
 
-<form action="{S_POST_ACTION}" method="post" name="post" onsubmit="if(checkForm(this)){ dis_submit_btn(); }else{ return false; }" {S_FORM_ENCTYPE}>
+<form method="post" action="{S_POST_ACTION}" name="post" {S_FORM_ENCTYPE} class="tokenized" onsubmit="if(checkForm(this)){ dis_submit_btn(); }else{ return false; }">
 {S_HIDDEN_FORM_FIELDS}
-{ADD_ATTACH_HIDDEN_FIELDS}
-{POSTED_ATTACHMENTS_HIDDEN_FIELDS}
+<!-- IF TOR_REQUIRED --><input type="hidden" name="tor_required" value="1" /><!-- ENDIF -->
 
 <table class="bordered">
 <col class="row1">
@@ -195,3 +194,41 @@
 
 <!--========================================================================-->
 <!-- ENDIF / TPL_TOPIC_REVIEW -->
+
+<script type="text/javascript">
+	$(document).ready(function(){
+		<!-- IF FILE_ATTACHED -->
+		$('#file-up-box').html( $('#file-up-del').html() );
+		<!-- ELSE -->
+		show_load_file_link();
+		<!-- ENDIF -->
+		$('#file-up').show();
+		$('#post-preview-btn').click(function(){
+			if ( $('#file-up-btn').val() ) {
+				return window.confirm('Вы можете прикрепить файл только вместе с отправкой сообщения.\n\nОтменить загрузку файла?\n ');
+			}
+		});
+	});
+
+	function show_load_file_link ()
+	{
+		$('#file-up-box').html( $('#file-up-new').html() );
+		$('#file-up-desc').show();
+	}
+	function show_file_up_input ()
+	{
+		$('#file-up-box').html( $('#file-up-input').html() );
+		$('#file-up-desc').html('выберите нужный файл, он будет загружен автоматически при отправке сообщения');
+	}
+
+	ajax.del_attach = function() {
+		ajax.exec({
+			action   : 'del_attach',
+			topic_id : '{POSTING_TOPIC_ID}'
+		});
+	};
+	ajax.callback.del_attach = function(data){
+		show_load_file_link();
+	}
+</script>
+<!-- ENDIF / SHOW_ATTACH -->

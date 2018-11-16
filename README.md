@@ -7,7 +7,6 @@
     <br />
     <a href="https://insight.sensiolabs.com/projects/1a5d5098-e0b0-45c2-816a-020dfd50acaf"><img src="https://img.shields.io/sensiolabs/i/1a5d5098-e0b0-45c2-816a-020dfd50acaf.svg" alt="SensioLabs Insight"></a>
     <a href="https://travis-ci.org/torrentpier/torrentpier"><img src="https://img.shields.io/travis/torrentpier/torrentpier/master.svg" alt="Travis"></a>
-    <a href="https://circleci.com/gh/torrentpier/torrentpier"><img src="https://img.shields.io/circleci/project/github/torrentpier/torrentpier/master.svg" alt="CircleCI"></a>
     <a href="https://codecov.io/gh/torrentpier/torrentpier"><img src="https://img.shields.io/codecov/c/github/torrentpier/torrentpier/master.svg" alt="Codecov"></a>
 </p>
 

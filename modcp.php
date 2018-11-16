@@ -347,7 +347,7 @@ switch ($mode) {
     case 'set_download':
     case 'unset_download':
         $set_download = ($mode == 'set_download');
-        $new_dl_type = ($set_download) ? TOPIC_DL_TYPE_DL : TOPIC_DL_TYPE_NORMAL;
+        $new_dl_type = $set_download ? 1 : 0;
 
         DB()->query("
 			UPDATE " . BB_TOPICS . " SET
@@ -596,7 +596,7 @@ switch ($mode) {
         $template->assign_vars(array(
             'TPL_MODCP_IP' => true,
             'IP' => $ip_this_post,
-            'U_LOOKUP_IP' => "modcp.php?mode=ip&amp;" . POST_POST_URL . "=$post_id&amp;" . POST_TOPIC_URL . "=$topic_id&amp;rdns=$ip_this_post&amp;sid=" . $userdata['session_id'],
+            'U_LOOKUP_IP' => "modcp.php?mode=ip&amp;" . POST_POST_URL . "=$post_id&amp;" . POST_TOPIC_URL . "=$topic_id&amp;rdns=" . $ip_this_post,
         ));
 
         //
@@ -627,7 +627,7 @@ switch ($mode) {
                     'ROW_CLASS' => !($i % 2) ? 'row4' : 'row5',
                     'IP' => $ip,
                     'POSTS' => $row['postings'],
-                    'U_LOOKUP_IP' => "modcp.php?mode=ip&amp;" . POST_POST_URL . "=$post_id&amp;" . POST_TOPIC_URL . "=$topic_id&amp;rdns=" . $row['poster_ip'] . "&amp;sid=" . $userdata['session_id'],
+                    'U_LOOKUP_IP' => "modcp.php?mode=ip&amp;" . POST_POST_URL . "=$post_id&amp;" . POST_TOPIC_URL . "=$topic_id&amp;rdns=" . $row['poster_ip'],
                 ));
 
                 $i++;

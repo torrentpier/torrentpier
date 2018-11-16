@@ -14,10 +14,6 @@ env:
     - COMPOSER_FLAGS="--prefer-lowest"
     - COMPOSER_FLAGS=""
 
-matrix:
-  allow_failures:
-    - php: hhvm
-
 notifications:
   slack:
     secure: "ManLobpQIesTlURzcGocIlRLLRfxMcAgnzZOJu9OiEGB3+usgmforhEv5cXIexyy6HnOA1S0NMrUlWnCL90kViT3vlLC+afMPjcUBA1IyiP2ITRqLzFrgB3PhhiZGjNUarKDElj/b+9a5eWRHvOTYnbRK9vTakNOtid83V05CJ8="

@@ -38,7 +38,6 @@ $default_cfg_bool = array(
     'bt_replace_ann_url' => 1,
     'bt_show_ip_only_moder' => 1,
     'bt_show_port_only_moder' => 1,
-    'bt_check_announce_url' => 0,
     'bt_show_dl_list_buttons' => 1,
     'bt_show_dl_but_will' => 1,
     'bt_show_dl_but_down' => 0,

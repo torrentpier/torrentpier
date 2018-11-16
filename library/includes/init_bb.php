@@ -22,7 +22,7 @@ if (PHP_VERSION_ID < 70103) {
  * Define some basic configuration arrays
  */
 unset($stopwords, $synonyms_match, $synonyms_replace);
-$userdata = $theme = $images = $lang = $nav_links = $bf = $attach_config = [];
+$userdata = $theme = $images = $lang = $nav_links = $bf = [];
 $gen_simple_header = false;
 $user = null;
 
@@ -168,22 +168,9 @@ define('POST_POST_URL', 'p');
 define('POST_TOPIC_URL', 't');
 define('POST_USERS_URL', 'u');
 
-// Download Modes
-define('INLINE_LINK', 1);
-define('PHYSICAL_LINK', 2);
-
 // Categories
 define('NONE_CAT', 0);
 define('IMAGE_CAT', 1);
-
-// Misc
-define('ADMIN_MAX_ATTACHMENTS', 50);
-define('THUMB_DIR', 'thumbs');
-define('MODE_THUMBNAIL', 1);
-
-// Quota Types
-define('QUOTA_UPLOAD_LIMIT', 1);
-define('QUOTA_PM_LIMIT', 2);
 
 // Torrents
 define('TOR_STATUS_NORMAL', 0);
@@ -201,28 +188,9 @@ define('POLL_FINISHED', 2);
 // Group avatars
 define('GROUP_AVATAR_MASK', 999000);
 
-$dl_link_css = [
-    DL_STATUS_RELEASER => 'genmed',
-    DL_STATUS_WILL => 'dlWill',
-    DL_STATUS_DOWN => 'leechmed',
-    DL_STATUS_COMPLETE => 'seedmed',
-    DL_STATUS_CANCEL => 'dlCancel',
-];
-
-$dl_status_css = [
-    DL_STATUS_RELEASER => 'genmed',
-    DL_STATUS_WILL => 'dlWill',
-    DL_STATUS_DOWN => 'dlDown',
-    DL_STATUS_COMPLETE => 'dlComplete',
-    DL_STATUS_CANCEL => 'dlCancel',
-];
-
 // Table names
 define('BUF_TOPIC_VIEW', 'buf_topic_view');
 define('BUF_LAST_SEEDER', 'buf_last_seeder');
-define('BB_ATTACH_CONFIG', 'bb_attachments_config');
-define('BB_ATTACHMENTS_DESC', 'bb_attachments_desc');
-define('BB_ATTACHMENTS', 'bb_attachments');
 define('BB_AUTH_ACCESS_SNAP', 'bb_auth_access_snap');
 define('BB_AUTH_ACCESS', 'bb_auth_access');
 define('BB_BANLIST', 'bb_banlist');
@@ -236,8 +204,6 @@ define('BB_CATEGORIES', 'bb_categories');
 define('BB_CONFIG', 'bb_config');
 define('BB_CRON', 'bb_cron');
 define('BB_DISALLOW', 'bb_disallow');
-define('BB_EXTENSION_GROUPS', 'bb_extension_groups');
-define('BB_EXTENSIONS', 'bb_extensions');
 define('BB_FORUMS', 'bb_forums');
 define('BB_GROUPS', 'bb_groups');
 define('BB_LOG', 'bb_log');
@@ -249,12 +215,9 @@ define('BB_POSTS_TEXT', 'bb_posts_text');
 define('BB_POSTS_HTML', 'bb_posts_html');
 define('BB_PRIVMSGS', 'bb_privmsgs');
 define('BB_PRIVMSGS_TEXT', 'bb_privmsgs_text');
-define('BB_QUOTA_LIMITS', 'bb_quota_limits');
-define('BB_QUOTA', 'bb_attach_quota');
 define('BB_RANKS', 'bb_ranks');
 define('BB_SEARCH_REBUILD', 'bb_search_rebuild');
 define('BB_SEARCH', 'bb_search_results');
-define('BB_SESSIONS', 'bb_sessions');
 define('BB_SMILIES', 'bb_smilies');
 define('BB_TOPIC_TPL', 'bb_topic_tpl');
 define('BB_TOPICS', 'bb_topics');
@@ -262,11 +225,6 @@ define('BB_TOPICS_WATCH', 'bb_topics_watch');
 define('BB_USER_GROUP', 'bb_user_group');
 define('BB_USERS', 'bb_users');
 define('BB_WORDS', 'bb_words');
-
-define('TORRENT_EXT', 'torrent');
-
-define('TOPIC_DL_TYPE_NORMAL', 0);
-define('TOPIC_DL_TYPE_DL', 1);
 
 define('SHOW_PEERS_COUNT', 1);
 define('SHOW_PEERS_NAMES', 2);
@@ -318,7 +276,25 @@ define('REQUEST', 4);
 define('CHBOX', 5);
 define('SELECT', 6);
 
-// Functions
+$dl_link_css = [
+    DL_STATUS_RELEASER => 'genmed',
+    DL_STATUS_WILL => 'dlWill',
+    DL_STATUS_DOWN => 'leechmed',
+    DL_STATUS_COMPLETE => 'seedmed',
+    DL_STATUS_CANCEL => 'dlCancel',
+];
+
+$dl_status_css = [
+    DL_STATUS_RELEASER => 'genmed',
+    DL_STATUS_WILL => 'dlWill',
+    DL_STATUS_DOWN => 'dlDown',
+    DL_STATUS_COMPLETE => 'dlComplete',
+    DL_STATUS_CANCEL => 'dlCancel',
+];
+
+/**
+ * Отправка заголовков без кеша
+ */
 function send_no_cache_headers()
 {
     header('Expires: Mon, 26 Jul 1997 05:00:00 GMT');

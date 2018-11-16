@@ -104,7 +104,7 @@ if (isset($_POST['submit'])) {
 
     // Now we'll delete all entries from the session table
     if ($kill_session_sql != '') {
-        $sql = 'DELETE FROM ' . BB_SESSIONS . " WHERE $kill_session_sql";
+        $sql = "DELETE FROM bb_sessions WHERE $kill_session_sql";
         if (!DB()->sql_query($sql)) {
             bb_die('Could not delete banned sessions from database');
         }
