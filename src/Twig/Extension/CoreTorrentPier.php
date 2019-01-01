@@ -2,6 +2,7 @@
 
 namespace TorrentPier\Twig\Extension;
 
+use TorrentPier\Twig\Node\Expression\Binary\Not;
 use Twig_ExpressionParser;
 
 class CoreTorrentPier extends \Twig_Extension
@@ -10,6 +11,7 @@ class CoreTorrentPier extends \Twig_Extension
     {
         return [
             new \Twig_Function('lang', [$this, 'lang']),
+            new \Twig_Function('html_insert', [$this, 'htmlInsert'], ['is_safe' => ['html']]),
         ];
     }
 
@@ -18,6 +20,11 @@ class CoreTorrentPier extends \Twig_Extension
         global $lang;
 
         return $lang[$name];
+    }
+
+    public function htmlInsert($path)
+    {
+        return file_get_contents($path);
     }
 
     public function getOperators()
@@ -86,8 +93,9 @@ class CoreTorrentPier extends \Twig_Extension
                     'associativity' => Twig_ExpressionParser::OPERATOR_LEFT
                 ],
                 '!' => [
-                    'precedence' => 100,
-                    'associativity' => Twig_ExpressionParser::OPERATOR_LEFT
+                    'precedence' => 20,
+                    'class' => Not::class,// 'Twig_Node_Expression_Binary_Not',
+                    'associativity' => Twig_ExpressionParser::OPERATOR_RIGHT
                 ],
             ],
         ];
