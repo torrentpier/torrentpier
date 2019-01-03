@@ -31,11 +31,7 @@ class CoreTorrentPier extends \Twig_Extension
     {
         $vars = $env->getGlobals();
 
-        if (isset($vars['lang'])) {
-            return $vars['lang'][$name];
-        }
-
-        return $name;
+        return $vars['app']['lang'][$name] ?? $name;
     }
 
     public function htmlInsert($path)
