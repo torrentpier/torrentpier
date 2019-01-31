@@ -126,12 +126,12 @@ if ($by_letter_req) {
 
 // ENG
 for ($i = ord('A'), $cnt = ord('Z'); $i <= $cnt; $i++) {
-    $select_letter .= ($by_letter == chr($i)) ? '<b>' . chr($i) . '</b>&nbsp;' : '<a class="genmed" href="' . ("memberlist.php?letter=" . chr($i) . "&amp;mode=$mode&amp;order=$sort_order") . '">' . chr($i) . '</a>&nbsp;';
+    $select_letter .= (strtoupper($by_letter) == chr($i)) ? '<b>' . chr($i) . '</b>&nbsp;' : '<a class="genmed" href="' . ("memberlist.php?letter=" . chr($i) . "&amp;mode=$mode&amp;order=$sort_order") . '">' . chr($i) . '</a>&nbsp;';
 }
 // RUS
 $select_letter .= ': ';
 for ($i = 224, $cnt = 255; $i <= $cnt; $i++) {
-    $select_letter .= ($by_letter == iconv('windows-1251', 'UTF-8', chr($i))) ? '<b>' . iconv('windows-1251', 'UTF-8', chr($i - 32)) . '</b>&nbsp;' : '<a class="genmed" href="' . ("memberlist.php?letter=%" . strtoupper(base_convert($i, 10, 16)) . "&amp;mode=$mode&amp;order=$sort_order") . '">' . iconv('windows-1251', 'UTF-8', chr($i - 32)) . '</a>&nbsp;';
+    $select_letter .= (strtoupper($by_letter) == iconv('windows-1251', 'UTF-8', chr($i))) ? '<b>' . iconv('windows-1251', 'UTF-8', chr($i - 32)) . '</b>&nbsp;' : '<a class="genmed" href="' . ("memberlist.php?letter=%" . strtoupper(base_convert($i, 10, 16)) . "&amp;mode=$mode&amp;order=$sort_order") . '">' . iconv('windows-1251', 'UTF-8', chr($i - 32)) . '</a>&nbsp;';
 }
 
 $select_letter .= ':&nbsp;';
