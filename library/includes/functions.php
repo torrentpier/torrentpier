@@ -1658,12 +1658,12 @@ function print_page($args, $type = '', $mode = '')
 
     $gen_simple_header = (is_array($args) && !empty($args['simple']) or $type === 'simple') ? true : $gen_simple_header;
 
-    if ($mode !== 'no_header') {
-        require(PAGE_HEADER);
-    }
-
     if ($type === 'admin') {
         $template->addDirectory('admin', 'admin');
+    }
+
+    if ($mode !== 'no_header') {
+        require(PAGE_HEADER);
     }
 
     $template->set_filenames(array('body' => $tpl));

@@ -185,7 +185,7 @@ class Lexer extends Twig_Lexer
             );
             $body = $this->prepareBlockLoop($body, $parents);
 
-            return "{% for {$name} in {$parent} %}{$body}{% endfor %}";
+            return "{% if {$parent} is defined %}{% for {$name} in {$parent} %}{$body}{% endfor %}{% endif %}";
         };
 
         return preg_replace_callback(

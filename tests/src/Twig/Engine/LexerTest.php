@@ -17,15 +17,15 @@ class LexerTest extends TestCase
         return [
             [
                 'code'   => '<!-- BEGIN v1 --> ...code... <!-- END v1 -->',
-                'result' => '{% for v1 in v1 %} ...code... {% endfor %}',
+                'result' => '{% if v1 is defined %}{% for v1 in v1 %} ...code... {% endfor %}{% endif %}',
             ],
             [
                 'code'   => '<!-- BEGIN v1 --> ...code... <!-- BEGIN v2 --> <!-- END v2 --> <!-- END v1 -->',
-                'result' => '{% for v1 in v1 %} ...code... {% for v2 in v1.v2 %} {% endfor %} {% endfor %}',
+                'result' => '{% if v1 is defined %}{% for v1 in v1 %} ...code... {% if v1.v2 is defined %}{% for v2 in v1.v2 %} {% endfor %}{% endif %} {% endfor %}{% endif %}',
             ],
             [
                 'code'   => '<!-- BEGIN v1 --> <!-- BEGIN ELSE --> <!-- END v1 -->',
-                'result' => '{% for v1 in v1 %} {% else %} {% endfor %}',
+                'result' => '{% if v1 is defined %}{% for v1 in v1 %} {% else %} {% endfor %}{% endif %}',
             ],
         ];
     }
