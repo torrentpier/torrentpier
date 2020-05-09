@@ -30,4 +30,5 @@ $di->register(new ServiceProviders\ConfigServiceProvider, [
 $di->register(new ServiceProviders\CaptchaServiceProvider());
 $di->register(new ServiceProviders\LogServiceProvider());
 $di->register(new ServiceProviders\RequestServiceProvider());
+$di->register(new ServiceProviders\TemplateServiceContainer());
 $di->register(new ServiceProviders\ResponseServiceProvider());
