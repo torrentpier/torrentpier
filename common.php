@@ -48,7 +48,6 @@ require_once __DIR__ . '/library/defines.php';
 if (!file_exists(__DIR__ . '/vendor/autoload.php')) {
     die('Please <a href="https://getcomposer.org/download/" target="_blank" rel="noreferrer" style="color:#0a25bb;">install composer</a> and run <code style="background:#222;color:#00e01f;padding:2px 6px;border-radius:3px;">composer install</code>');
 }
-require_once __DIR__ . '/vendor/autoload.php';
 
 /**
  * Gets the value of an environment variable. Supports boolean, empty and null.
@@ -60,7 +59,11 @@ require_once __DIR__ . '/vendor/autoload.php';
 function env($key, $default = null)
 {
     $value = getenv($key);
-    if (!$value) return value($default);
+
+    if (!$value) {
+        return value($default);
+    }
+
     switch (strtolower($value)) {
         case 'true':
         case '(true)':
@@ -87,13 +90,15 @@ function value($value)
     return $value instanceof Closure ? $value() : $value;
 }
 
-// Get initial config
-if (!getenv('APP_DEBUG') && file_exists(__DIR__ . '/.env')) {
-    (new Symfony\Component\Dotenv\Dotenv())->load(__DIR__ . '/.env');
-}
-require_once __DIR__ . '/library/config.php';
+/**
+ * Application bootstrap
+ */
+require_once __DIR__ . '/bootstrap.php';
 
-// Local config
+/**
+ * Legacy config
+ */
+require_once __DIR__ . '/library/config.php';
 if (file_exists(__DIR__ . '/library/config.local.php')) {
     require_once __DIR__ . '/library/config.local.php';
 }
@@ -105,7 +110,7 @@ define('FULL_URL', $server_protocol . $bb_cfg['server_name'] . $server_port . $b
 unset($server_protocol, $server_port);
 
 // Debug options
-define('DBG_USER', (isset($_COOKIE[COOKIE_DBG])));
+define('DBG_USER', isset($_COOKIE[COOKIE_DBG]));
 
 // Board / tracker shared constants and functions
 define('BB_BT_TORRENTS', 'bb_bt_torrents');
@@ -208,10 +213,8 @@ function short_query($sql, $esc_html = false)
     $max_len = 100;
     $sql = str_compact($sql);
 
-    if (!empty($_COOKIE['sql_log_full'])) {
-        if (mb_strlen($sql, 'UTF-8') > $max_len) {
-            $sql = mb_substr($sql, 0, 50) . ' [...cut...] ' . mb_substr($sql, -50);
-        }
+    if (!empty($_COOKIE['sql_log_full']) && mb_strlen($sql, 'UTF-8') > $max_len) {
+        $sql = mb_substr($sql, 0, 50) . ' [...cut...] ' . mb_substr($sql, -50);
     }
 
     return $esc_html ? htmlCHR($sql, true) : $sql;
@@ -248,7 +251,7 @@ function file_write($str, $file, $max_size = LOG_MAX_SIZE, $lock = true, $replac
             rename($file, $new_name);
         }
     }
-    if (file_exists($file) && $dir_created = bb_mkdir(dirname($file))) {
+    if (!file_exists($file) && $dir_created = bb_mkdir(dirname($file))) {
         $fp = fopen($file, 'ab+');
     }
     if (isset($fp)) {
@@ -443,7 +446,7 @@ function log_request($file = '', $prepend_str = false, $add_post = true)
     }
 
     if (!empty($_POST) && $add_post) {
-        $str[] = "post: " . str_compact(urldecode(http_build_query($_POST)));
+        $str[] = 'Post: ' . str_compact(urldecode(http_build_query($_POST)));
     }
     $str = implode("\t", $str) . "\n";
     bb_log($str, $file);
@@ -460,7 +463,7 @@ if (!defined('IN_TRACKER')) {
         $output = \Rych\Bencode\Bencode::encode([
             'interval' => (int)$interval,
             'min interval' => (int)$interval,
-            'peers' => (string)DUMMY_PEER,
+            'peers' => DUMMY_PEER,
         ]);
 
         die($output);
