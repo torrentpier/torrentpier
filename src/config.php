@@ -36,3 +36,10 @@ $config['log'] = [
         }
     ],
 ];
+
+$config['template'] = [
+    'legacy_engine_disabled' => true,
+    'debug' => true,
+    'path'  => __DIR__ . '/../styles/templates',
+    'cache' => __DIR__ . '/../internal_data/cache',
+];

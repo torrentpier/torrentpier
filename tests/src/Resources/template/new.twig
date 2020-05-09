@@ -1,0 +1,15 @@
+{% if c is defined %}{% for c in c %}
+    ..body.. {{ c.U_VIEWCAT|raw }} ..body..
+    {% if c.f is defined %}{% for f in c.f %}
+        {% if f.FORUM_DESC  %}
+        {{ f.FORUM_DESC|raw }}
+        {% endif %}
+        {% if f.sf is defined %}{% for sf in f.sf %}
+        ..body.. {{ sf.SF_NAME|raw }} ..body..
+        {% endfor %}{% endif %}
+    {% endfor %}{% endif %}
+{% endfor %}{% endif %}
+
+<script>
+    var $jsVar = $('tag').length;
+</script>
