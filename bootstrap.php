@@ -11,6 +11,11 @@ if (!defined('BB_ROOT')) {
     die(basename(__FILE__));
 }
 
+// Composer
+if (!file_exists(__DIR__ . '/vendor/autoload.php')) {
+    die('Please <a href="https://getcomposer.org/download/" target="_blank" rel="noreferrer" style="color:#0a25bb;">install composer</a> and run <code style="background:#222;color:#00e01f;padding:2px 6px;border-radius:3px;">composer install</code>');
+}
+
 require_once __DIR__ . '/vendor/autoload.php';
 
 use TorrentPier\Di;
