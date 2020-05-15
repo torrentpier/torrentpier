@@ -5,7 +5,10 @@ namespace TorrentPier\ServiceProviders;
 use Pimple\Container;
 use Pimple\ServiceProviderInterface;
 use TorrentPier\Template\Template;
+use TorrentPier\Twig\Engine\Lexer;
 use TorrentPier\Twig\Extension\CoreTorrentPier;
+use Twig\Environment;
+use Twig\Loader\FilesystemLoader;
 
 class TemplateServiceContainer implements ServiceProviderInterface
 {
@@ -17,27 +20,20 @@ class TemplateServiceContainer implements ServiceProviderInterface
         $container['template'] = function (Container $container) {
             global $bb_cfg, $lang;
 
-            if ($container['config']->get('template.legacy_engine_disabled')) {
-                $loader = new \Twig_Loader_Filesystem([], $container['config']->get('template.path'));
+            $loader = new FilesystemLoader([], $container['config']->get('template.path'));
 
-                $twig = new \Twig_Environment($loader, [
-                    'debug' => $container['config']->get('template.debug'),
-                    'cache' => $container['config']->get('template.cache'),
-                ]);
-                $twig->addGlobal('app', [
-                    'bb_cfg' => $bb_cfg,
-                    'lang'   => $lang,
-                ]);
-                $twig->addExtension(new CoreTorrentPier());
-                $twig->setLexer(new \TorrentPier\Twig\Engine\Lexer($twig));
+            $twig = new Environment($loader, [
+                'debug' => $container['config']->get('template.debug'),
+                'cache' => $container['config']->get('template.cache'),
+            ]);
+            $twig->addGlobal('app', [
+                'bb_cfg' => $bb_cfg,
+                'lang'   => $lang,
+            ]);
+            $twig->addExtension(new CoreTorrentPier());
+            $twig->setLexer(new Lexer($twig));
 
-                return new Template($twig);
-            }
-
-            return new \TorrentPier\Legacy\Template(
-                $container['config']->get('template.path'),
-                $container['config']->get('template.cache')
-            );
+            return new Template($twig);
         };
     }
 }

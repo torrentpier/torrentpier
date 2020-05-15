@@ -2,10 +2,10 @@
 
 namespace TorrentPier\Template;
 
-use Twig_Environment;
-use Twig_Error_Loader;
-use Twig_Error_Runtime;
-use Twig_Error_Syntax;
+use Twig\Environment;
+use Twig\Error\LoaderError;
+use Twig\Error\RuntimeError;
+use Twig\Error\SyntaxError;
 
 /**
  * Wrapper for the obsolete template engine
@@ -15,7 +15,7 @@ class Template
     use LegacyApiTrait;
 
     /**
-     * @var Twig_Environment
+     * @var Environment
      */
     protected $engine;
 
@@ -26,9 +26,9 @@ class Template
 
     /**
      * Template constructor.
-     * @param Twig_Environment $twig
+     * @param Environment $twig
      */
-    public function __construct(Twig_Environment $twig)
+    public function __construct(Environment $twig)
     {
         $this->engine = $twig;
     }
@@ -54,9 +54,9 @@ class Template
     /**
      * @param string $templateName
      * @param array $contextData
-     * @throws Twig_Error_Loader
-     * @throws Twig_Error_Runtime
-     * @throws Twig_Error_Syntax
+     * @throws LoaderError
+     * @throws RuntimeError
+     * @throws SyntaxError
      */
     public function display(string $templateName, array $contextData = []): void
     {

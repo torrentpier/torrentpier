@@ -12,6 +12,8 @@ namespace TorrentPier\Legacy;
 /**
  * Class Template
  * @package TorrentPier\Legacy
+ *
+ * @deprecated
  */
 class Template
 {

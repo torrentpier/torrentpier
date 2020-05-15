@@ -11,5 +11,5 @@
 <!-- END c -->
 
 <script>
-    var $jsVar = $('tag').length;
+    var $jsVar = $('#tag').length;
 </script>

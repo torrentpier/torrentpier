@@ -9,23 +9,23 @@
 
 namespace TorrentPier\Twig\Engine;
 
-use Twig_Error_Syntax;
-use Twig_Lexer;
-use Twig_Source;
-use Twig_TokenStream;
+use Twig\Error\SyntaxError;
+use Twig\Lexer as BaseLexer;
+use Twig\Source;
+use Twig\TokenStream;
 use function count;
 use function end;
 use function preg_replace;
 use function preg_replace_callback;
 
-class Lexer extends Twig_Lexer
+class Lexer extends BaseLexer
 {
     /**
-     * @param Twig_Source $source
-     * @return Twig_TokenStream
-     * @throws Twig_Error_Syntax
+     * @param Source $source
+     * @return TokenStream
+     * @throws SyntaxError
      */
-    public function tokenize(Twig_Source $source): Twig_TokenStream
+    public function tokenize(Source $source): TokenStream
     {
         $code = $source->getCode();
 
@@ -34,7 +34,7 @@ class Lexer extends Twig_Lexer
         $code = $this->convertBlocksIf($code);
         $code = $this->convertBlocksInclude($code);
 
-        return parent::tokenize(new Twig_Source($code, $source->getName(), $source->getPath()));
+        return parent::tokenize(new Source($code, $source->getName(), $source->getPath()));
     }
 
     /**

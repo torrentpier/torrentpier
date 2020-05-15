@@ -9,15 +9,19 @@
 
 namespace TorrentPier\Twig\Node\Expression\Binary;
 
-use Twig_Compiler;
+use PhpParser\Node\Expr\BinaryOp;
+use Twig\Compiler;
+use Twig\Node\Expression\Binary\NotEqualBinary;
 
-class Not extends \Twig_Node_Expression_Binary
+class Not extends BinaryOp
 {
-    /**
-     * {@inheritdoc}
-     */
-    public function operator(Twig_Compiler $compiler): void
+    public function getOperatorSigil(): string
     {
-        $compiler->raw('!');
+        return '!';
+    }
+
+    public function getType(): string
+    {
+        return 'Expr_BinaryOp_Not';
     }
 }
