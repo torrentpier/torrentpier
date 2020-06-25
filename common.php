@@ -14,6 +14,12 @@ if (isset($_REQUEST['GLOBALS'])) {
 define('TIMESTART', utime());
 define('TIMENOW', time());
 
+/**
+ * Application bootstrap
+ */
+require_once __DIR__ . '/bootstrap.php';
+
+
 if (empty($_SERVER['REMOTE_ADDR'])) {
     $_SERVER['REMOTE_ADDR'] = '127.0.0.1';
 }
@@ -43,11 +49,6 @@ if (isset($_SERVER['HTTP_CF_CONNECTING_IP'])) {
 
 // Get all constants
 require_once __DIR__ . '/library/defines.php';
-
-// Composer
-if (!file_exists(__DIR__ . '/vendor/autoload.php')) {
-    die('Please <a href="https://getcomposer.org/download/" target="_blank" rel="noreferrer" style="color:#0a25bb;">install composer</a> and run <code style="background:#222;color:#00e01f;padding:2px 6px;border-radius:3px;">composer install</code>');
-}
 
 /**
  * Gets the value of an environment variable. Supports boolean, empty and null.
@@ -89,11 +90,6 @@ function value($value)
 {
     return $value instanceof Closure ? $value() : $value;
 }
-
-/**
- * Application bootstrap
- */
-require_once __DIR__ . '/bootstrap.php';
 
 /**
  * Legacy config
@@ -251,7 +247,8 @@ function file_write($str, $file, $max_size = LOG_MAX_SIZE, $lock = true, $replac
             rename($file, $new_name);
         }
     }
-    if (!file_exists($file) && $dir_created = bb_mkdir(dirname($file))) {
+
+    if (!file_exists($file) && bb_mkdir(dirname($file))) {
         $fp = fopen($file, 'ab+');
     }
     if (isset($fp)) {

@@ -28,11 +28,17 @@ $config['captcha'] = [
  */
 $config['log'] = [
     'handlers' => [
-        function () {
+        static function () {
             return new \Monolog\Handler\StreamHandler(
                 __DIR__ . '/../internal_data/log/app.log',
                 \Monolog\Logger::DEBUG
             );
         }
     ],
+];
+
+$config['template'] = [
+    'debug' => env('APP_DEBUG'),
+    'path'  => __DIR__ . '/../styles/templates',
+    'cache' => __DIR__ . '/../internal_data/cache/twig',
 ];
