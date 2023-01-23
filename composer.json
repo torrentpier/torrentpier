@@ -53,7 +53,8 @@
     "samdark/sitemap": "*",
     "swiftmailer/swiftmailer": "*",
     "symfony/dotenv": "4.*",
-    "symfony/var-dumper": "4.*"
+    "symfony/var-dumper": "4.*",
+    "symfony/polyfill": "*"
   },
   "autoload": {
     "psr-4": {
