@@ -378,7 +378,7 @@ function build_poll_add_form (src_el)
 		<div class="post_head">
 			<p style="float: left;<!-- IF TEXT_BUTTONS --> padding: 4px 0 3px;<!-- ELSE --> padding-top: 5px;<!-- ENDIF -->">
 				<!-- IF postrow.IS_UNREAD -->{MINIPOST_IMG_NEW}<!-- ELSE -->{MINIPOST_IMG}<!-- ENDIF -->
-				<a class="small" href="{POST_URL}{postrow.POST_ID}#{postrow.POST_ID}" title="{L_POST_LINK}">{postrow.POST_DATE}</a>
+				<a class="small" href="{POST_URL}{postrow.POST_ID}#{postrow.POST_ID}" title="{L_POST_LINK}">{postrow.POST_DATE}&nbsp;|&nbsp;#{postrow.POST_NUMBER}</a>
 				<!-- IF postrow.POSTED_AFTER -->
 					<span class="posted_since">({L_POSTED_AFTER} {postrow.POSTED_AFTER})</span>
 				<!-- ENDIF -->
