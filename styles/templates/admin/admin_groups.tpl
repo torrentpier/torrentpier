@@ -3,7 +3,7 @@
 
 <h1>{L_GROUP_ADMINISTRATION}</h1>
 
-<form action="{S_GROUP_ACTION}" method="post">
+<form action="{S_GROUP_ACTION}" method="post" name="post">
 {S_HIDDEN_FIELDS}
 
 <table class="forumline wAuto">
