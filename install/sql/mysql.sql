@@ -1187,7 +1187,7 @@ INSERT INTO `bb_smilies` VALUES ('', ':bz:', 'bz.gif', 'bz');
 INSERT INTO `bb_smilies` VALUES ('', ':ca:', 'ca.gif', 'ca');
 INSERT INTO `bb_smilies` VALUES ('', ':cb:', 'cb.gif', 'cb');
 INSERT INTO `bb_smilies` VALUES ('', ':cc:', 'cc.gif', 'cc');
-INSERT INTO `bb_smilies` VALUES ('', ':сd:', 'сd.gif', 'сd');
+INSERT INTO `bb_smilies` VALUES ('', ':cd:', 'cd.gif', 'cd');
 
 -- ----------------------------
 -- Table structure for `bb_topics`
@@ -1224,8 +1224,8 @@ CREATE TABLE IF NOT EXISTS `bb_topics` (
 -- Records of bb_topics
 -- ----------------------------
 INSERT INTO `bb_topics` VALUES
-  ('1', '1', 'Добро пожаловать в TorrentPier Bison', '2', UNIX_TIMESTAMP(), '2', '0', '0', '0', '0', '1', '1', '0', '0',
-   '0', '1414658247', '0');
+  ('1', '1', 'Добро пожаловать в TorrentPier Bison', '2', UNIX_TIMESTAMP(), '0', '0', '0', '0', '0', '1', '1', '0', '0',
+   '0', UNIX_TIMESTAMP(), '0');
 
 -- ----------------------------
 -- Table structure for `bb_topics_watch`
