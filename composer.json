@@ -26,6 +26,11 @@
       "name": "PheRum",
       "homepage": "https://github.com/PheRum",
       "role": "Developer"
+    },
+    {
+      "name": "belomaxorka",
+      "homepage": "https://github.com/belomaxorka",
+      "role": "Developer"
     }
   ],
   "support": {
@@ -36,24 +41,28 @@
   },
   "require": {
     "php": "^7.1.3",
-    "bugsnag/bugsnag": "3.13.0",
-    "filp/whoops": "^2.2.0",
-    "gigablah/sphinxphp": "2.0.8",
-    "google/recaptcha": "1.1.3",
-    "longman/ip-tools": "1.2.1",
-    "rych/bencode": "1.0.0",
-    "samdark/sitemap": "2.2.0",
-    "swiftmailer/swiftmailer": "6.0.2",
-    "symfony/dotenv": "4.1.0",
-    "symfony/var-dumper": "4.1.0"
-  },
-  "require-dev": {
-    "roave/security-advisories": "dev-master"
+    "bugsnag/bugsnag": "*",
+    "egulias/email-validator": "2.*",
+    "filp/whoops": "*",
+    "gigablah/sphinxphp": "*",
+    "google/recaptcha": "*",
+    "guzzlehttp/guzzle": "6.*",
+    "guzzlehttp/psr7": "1.*",
+    "longman/ip-tools": "*",
+    "rych/bencode": "*",
+    "samdark/sitemap": "*",
+    "swiftmailer/swiftmailer": "*",
+    "symfony/dotenv": "4.*",
+    "symfony/var-dumper": "4.*"
   },
   "autoload": {
     "psr-4": {
       "TorrentPier\\": "src/"
     }
+  },
+  "config": {
+    "sort-packages": true,
+    "optimize-autoloader": false
   },
   "minimum-stability": "stable",
   "prefer-stable": true
