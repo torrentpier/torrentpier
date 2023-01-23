@@ -9,7 +9,7 @@ internal_data/ajax_html
 internal_data/atom
 internal_data/cache
 internal_data/log
-internal_data/sitemap
+sitemap
 internal_data/triggers
 library/config.local.php
 vendor
