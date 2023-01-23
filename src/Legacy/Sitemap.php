@@ -95,7 +95,7 @@ class Sitemap
             $urls = explode("\n", $bb_cfg['static_sitemap']);
             foreach ($urls as $url) {
                 /** @var string $url проверяем что адрес валиден и с указанными протоколом */
-                if (filter_var(trim($url), FILTER_VALIDATE_URL, FILTER_FLAG_SCHEME_REQUIRED)) {
+                if (filter_var(trim($url), FILTER_VALIDATE_URL)) {
                     $staticUrls[] = [
                         'url' => trim($url),
                     ];
