@@ -1,5 +1,23 @@
 # Change Log
 
+## [v2.3.0.2](https://github.com/torrentpier/torrentpier/tree/v2.3.0.2) (2023-01-23)
+[Full Changelog](https://github.com/torrentpier/torrentpier/compare/v2.3.0.1...v2.3.0.2)
+
+**Merged pull requests:**
+
+- Fixed PHP 7.3: Deprecate FILTER_FLAG_SCHEME_REQUIRED and FILTER_FLAG_HOST_REQUIRED flags used with FILTER_VALIDATE_URL [\#507](https://github.com/torrentpier/torrentpier/pull/507) ([belomaxorka](https://github.com/belomaxorka))
+- Fixed broken user search in admin_groups [\#508](https://github.com/torrentpier/torrentpier/pull/508) ([belomaxorka](https://github.com/belomaxorka))
+- Fix some bugs with MySQL strict mode [\#509](https://github.com/torrentpier/torrentpier/pull/509) ([belomaxorka](https://github.com/belomaxorka))
+- Fixed and improvements for SQL [\#510](https://github.com/torrentpier/torrentpier/pull/510) ([belomaxorka](https://github.com/belomaxorka))
+- Added showing post number in viewtopic [\#511](https://github.com/torrentpier/torrentpier/pull/511) ([belomaxorka](https://github.com/belomaxorka))
+- Updated composer dependencies [\#512](https://github.com/torrentpier/torrentpier/pull/512) ([belomaxorka](https://github.com/belomaxorka))
+- Added symfony/polyfill [\#513](https://github.com/torrentpier/torrentpier/pull/513) ([belomaxorka](https://github.com/belomaxorka))
+- Updated jQuery up to 1.12.4 [\#514](https://github.com/torrentpier/torrentpier/pull/514) ([belomaxorka](https://github.com/belomaxorka))
+- Updated normalize css up to 8.0.1 [\#515](https://github.com/torrentpier/torrentpier/pull/515) ([belomaxorka](https://github.com/belomaxorka))
+- Misc code improvements [\#516](https://github.com/torrentpier/torrentpier/pull/516) ([belomaxorka](https://github.com/belomaxorka))
+- Fixed broken file_write() function [\#517](https://github.com/torrentpier/torrentpier/pull/517) ([belomaxorka](https://github.com/belomaxorka))
+- Fixed array multi sorting [\#518](https://github.com/torrentpier/torrentpier/pull/518) ([belomaxorka](https://github.com/belomaxorka))
+
 ## [v2.3.0.1](https://github.com/torrentpier/torrentpier/tree/v2.3.0.1) (2018-06-27)
 [Full Changelog](https://github.com/torrentpier/torrentpier/compare/v2.3.0...v2.3.0.1)
 
