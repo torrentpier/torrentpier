@@ -2,7 +2,7 @@
 /**
  * TorrentPier – Bull-powered BitTorrent tracker engine
  *
- * @copyright Copyright (c) 2005-2018 TorrentPier (https://torrentpier.com)
+ * @copyright Copyright (c) 2005-2023 TorrentPier (https://torrentpier.com)
  * @link      https://github.com/torrentpier/torrentpier for the canonical source repository
  * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
  */
@@ -20,7 +20,12 @@ $ajax->init();
 $user->session_start();
 
 // Exit if board is disabled via ON/OFF trigger or by admin
-if ($ajax->action != 'manage_admin') {
+$exclusion_actions = [
+    'manage_admin',
+    'sitemap'
+];
+
+if (!in_array($ajax->action, $exclusion_actions)) {
     if ($bb_cfg['board_disable']) {
         $ajax->ajax_die($lang['BOARD_DISABLE']);
     } elseif (file_exists(BB_DISABLED)) {

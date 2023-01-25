@@ -1,4 +1,4 @@
-<p align="center"><a href="https://torrentpier.com/"><img src="https://torrentpier.com/forum/styles/default/xenforo/bull-logo.svg" width="400px" /></a></p>
+<p align="center"><a href="https://torrentpier.com/"><img src="https://i.ibb.co/52MC943/117716624.png" width="200px" style="max-width: 100%;"></a></p>
 <h3 align="center">TorrentPier</h3>
 
 <p align="center">
