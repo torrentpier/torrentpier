@@ -20,7 +20,12 @@ $ajax->init();
 $user->session_start();
 
 // Exit if board is disabled via ON/OFF trigger or by admin
-if ($ajax->action != 'manage_admin') {
+$exclusion_actions = [
+    'manage_admin',
+    'sitemap'
+];
+
+if (!in_array($ajax->action, $exclusion_actions)) {
     if ($bb_cfg['board_disable']) {
         $ajax->ajax_die($lang['BOARD_DISABLE']);
     } elseif (file_exists(BB_DISABLED)) {
