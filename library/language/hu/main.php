@@ -991,7 +991,6 @@ $lang['DESCRIPTION'] = 'Leírás'; // used in Administration Panel too...
 $lang['DOWNLOAD'] = 'Letöltés'; // this Language Variable is defined in admin.php too, but we are unable to access it from the main Language File
 $lang['FILESIZE'] = 'Fájlméretet';
 $lang['VIEWED'] = 'Megtekinthető';
-$lang['DOWNLOAD_NUMBER'] = '%d alkalommal'; // replace %d with count
 $lang['EXTENSION_DISABLED_AFTER_POSTING'] = 'A Kiterjesztés \'%s\' volt kapcsolva egy fórumon admin, ezért ezt a Mellékletet nem jelenik meg.'; // used in Posts and PM's, replace %s with mime type
 
 $lang['ATTACHMENT'] = 'Mellékletek';

@@ -991,7 +991,6 @@ $lang['DESCRIPTION'] = 'Aprašymas'; // used in Administration Panel too...
 $lang['DOWNLOAD'] = 'Atsisiųsti'; // this Language Variable is defined in admin.php too, but we are unable to access it from the main Language File
 $lang['FILESIZE'] = 'Failo dydis';
 $lang['VIEWED'] = 'Peržiūrėti';
-$lang['DOWNLOAD_NUMBER'] = '%d kartus'; // replace %d with count
 $lang['EXTENSION_DISABLED_AFTER_POSTING'] = 'Pratęsimo \'%s" buvo išimtas ūkio valdybos admin, todėl šis priedas yra nerodomas.'; // used in Posts and PM's, replace %s with mime type
 
 $lang['ATTACHMENT'] = 'Priedai';

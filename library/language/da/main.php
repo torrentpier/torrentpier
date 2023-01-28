@@ -991,7 +991,6 @@ $lang['DESCRIPTION'] = 'Beskrivelse'; // used in Administration Panel too...
 $lang['DOWNLOAD'] = 'Download'; // this Language Variable is defined in admin.php too, but we are unable to access it from the main Language File
 $lang['FILESIZE'] = 'Fil størrelse';
 $lang['VIEWED'] = 'Set';
-$lang['DOWNLOAD_NUMBER'] = '%d gange'; // replace %d with count
 $lang['EXTENSION_DISABLED_AFTER_POSTING'] = 'Endelsen \'%s\' blev deaktiveret af en bestyrelse admin, og derfor er denne Vedhæftede fil ikke vises.'; // used in Posts and PM's, replace %s with mime type
 
 $lang['ATTACHMENT'] = 'Vedhæftede filer';

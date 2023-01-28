@@ -991,7 +991,6 @@ $lang['DESCRIPTION'] = '説明'; // used in Administration Panel too...
 $lang['DOWNLOAD'] = 'ダウンロード'; // this Language Variable is defined in admin.php too, but we are unable to access it from the main Language File
 $lang['FILESIZE'] = 'Filesize';
 $lang['VIEWED'] = '閲覧';
-$lang['DOWNLOAD_NUMBER'] = '%d回'; // replace %d with count
 $lang['EXTENSION_DISABLED_AFTER_POSTING'] = '拡張子によ%s"が無効化される板の管理者は、そのためこの添付が表示されません。'; // used in Posts and PM's, replace %s with mime type
 
 $lang['ATTACHMENT'] = '添付';

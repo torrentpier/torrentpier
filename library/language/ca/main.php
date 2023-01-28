@@ -991,7 +991,6 @@ $lang['DESCRIPTION'] = 'Descripció'; // used in Administration Panel too...
 $lang['DOWNLOAD'] = 'Descarregar'; // this Language Variable is defined in admin.php too, but we are unable to access it from the main Language File
 $lang['FILESIZE'] = 'Filesize';
 $lang['VIEWED'] = 'Vist';
-$lang['DOWNLOAD_NUMBER'] = '%d vegades'; // replace %d with count
 $lang['EXTENSION_DISABLED_AFTER_POSTING'] = 'L\'Extensió %s\' va ser desactivat per un consell d\'administració, per tant, aquesta unió no es mostra.'; // used in Posts and PM's, replace %s with mime type
 
 $lang['ATTACHMENT'] = 'Arxius adjunts';

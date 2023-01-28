@@ -991,7 +991,6 @@ $lang['DESCRIPTION'] = 'Тавсифи'; // used in Administration Panel too...
 $lang['DOWNLOAD'] = 'Download'; // this Language Variable is defined in admin.php too, but we are unable to access it from the main Language File
 $lang['FILESIZE'] = 'Filesize';
 $lang['VIEWED'] = 'Пурбинандатаринҳо';
-$lang['DOWNLOAD_NUMBER'] = '%d маротиба'; // replace %d with count
 $lang['EXTENSION_DISABLED_AFTER_POSTING'] = 'Дар Тамдиди \'%s\' аз тарафи администратор Шӯрои хомуш шуд, бинобар ин дар ин Замимаи аст, нишон дода нашавад.'; // used in Posts and PM's, replace %s with mime type
 
 $lang['ATTACHMENT'] = 'замимаҳо';

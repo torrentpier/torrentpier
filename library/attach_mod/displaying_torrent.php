@@ -99,7 +99,7 @@ if (!$tor_reged) {
         'U_DOWNLOAD_LINK' => $download_link,
         'FILESIZE' => $tor_file_size,
 
-        'DOWNLOAD_COUNT' => sprintf($lang['DOWNLOAD_NUMBER'], $download_count),
+        'DOWNLOAD_COUNT' => declension((int)$download_count, 'times'),
         'POSTED_TIME' => $tor_file_time,
     ));
 
@@ -211,11 +211,11 @@ if ($tor_reged && $tor_info) {
             'FILESIZE' => $tor_file_size,
             'MAGNET' => $tor_magnet,
             'HASH' => strtoupper(bin2hex($tor_info['info_hash'])),
-            'DOWNLOAD_COUNT' => sprintf($lang['DOWNLOAD_NUMBER'], $download_count),
+            'DOWNLOAD_COUNT' => declension((int)$download_count, 'times'),
             'REGED_TIME' => bb_date($tor_info['reg_time']),
             'REGED_DELTA' => delta_time($tor_info['reg_time']),
             'TORRENT_SIZE' => humn_size($tor_size),
-            'COMPLETED' => sprintf($lang['DOWNLOAD_NUMBER'], $tor_info['complete_count']),
+            'COMPLETED' => declension((int)$tor_info['complete_count'], 'times'),
         ));
 
         if ($comment) {

@@ -991,7 +991,6 @@ $lang['DESCRIPTION'] = 'Նկարագրություն'; // used in Administration
 $lang['DOWNLOAD'] = 'Ներբեռնել'; // this Language Variable is defined in admin.php too, but we are unable to access it from the main Language File
 $lang['FILESIZE'] = 'Չափ';
 $lang['VIEWED'] = 'Դիտարկել';
-$lang['DOWNLOAD_NUMBER'] = '%d անգամ'; // replace %d with count
 $lang['EXTENSION_DISABLED_AFTER_POSTING'] = 'Ընդլայնմամբ \'%s\' անջատված էր վարչական հանձնաժողովին, ուստի այդ ներդրումը չի ցուցադրվում.'; // used in Posts and PM's, replace %s with mime type
 
 $lang['ATTACHMENT'] = 'Ներդրումները';

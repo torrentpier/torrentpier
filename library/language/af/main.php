@@ -991,7 +991,6 @@ $lang['DESCRIPTION'] = 'beskrywing'; // used in Administration Panel too...
 $lang['DOWNLOAD'] = 'Aflaai'; // this Language Variable is defined in admin.php too, but we are unable to access it from the main Language File
 $lang['FILESIZE'] = 'filesize';
 $lang['VIEWED'] = 'beskou';
-$lang['DOWNLOAD_NUMBER'] = '%d keer'; // replace %d with count
 $lang['EXTENSION_DISABLED_AFTER_POSTING'] = 'Die uitbreiding \'%s\' is gedeaktiveer deur \'n direksie admin, daarom word hierdie aanhangsel nie vertoon nie.'; // used in Posts and PM's, replace %s with mime type
 
 $lang['ATTACHMENT'] = 'aanhegsels';

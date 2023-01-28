@@ -991,7 +991,6 @@ $lang['DESCRIPTION'] = 'תיאור'; // used in Administration Panel too...
 $lang['DOWNLOAD'] = 'הורד'; // this Language Variable is defined in admin.php too, but we are unable to access it from the main Language File
 $lang['FILESIZE'] = 'גודל קובץ';
 $lang['VIEWED'] = 'צפו';
-$lang['DOWNLOAD_NUMBER'] = '%d פעמים'; // replace %d with count
 $lang['EXTENSION_DISABLED_AFTER_POSTING'] = 'הסיומת \'%s\' הייתה מנוטרלת על-ידי לוח admin, לכן קובץ מצורף זה לא מוצג.'; // used in Posts and PM's, replace %s with mime type
 
 $lang['ATTACHMENT'] = 'קבצים מצורפים';
