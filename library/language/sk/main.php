@@ -991,7 +991,6 @@ $lang['DESCRIPTION'] = 'Popis'; // used in Administration Panel too...
 $lang['DOWNLOAD'] = 'Stiahnuť'; // this Language Variable is defined in admin.php too, but we are unable to access it from the main Language File
 $lang['FILESIZE'] = 'Filesize';
 $lang['VIEWED'] = 'Pozrieť';
-$lang['DOWNLOAD_NUMBER'] = '%d krát'; // replace %d with count
 $lang['EXTENSION_DISABLED_AFTER_POSTING'] = 'Rozšírenie \'%s" bol deaktivovaný on board admin, preto túto Prílohu nie je zobrazený.'; // used in Posts and PM's, replace %s with mime type
 
 $lang['ATTACHMENT'] = 'Prílohy';

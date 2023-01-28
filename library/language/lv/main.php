@@ -991,7 +991,6 @@ $lang['DESCRIPTION'] = 'Apraksts'; // used in Administration Panel too...
 $lang['DOWNLOAD'] = 'Lejupielādēt'; // this Language Variable is defined in admin.php too, but we are unable to access it from the main Language File
 $lang['FILESIZE'] = 'Izmērs';
 $lang['VIEWED'] = 'Skatīts';
-$lang['DOWNLOAD_NUMBER'] = '%d reizes'; // replace %d with count
 $lang['EXTENSION_DISABLED_AFTER_POSTING'] = 'Paplašinājuma \'%s" tika deaktivizēts ar valdes admin, tāpēc ar šo Pielikumu, netiek parādīts.'; // used in Posts and PM's, replace %s with mime type
 
 $lang['ATTACHMENT'] = 'Pielikumi';

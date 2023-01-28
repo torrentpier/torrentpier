@@ -991,7 +991,6 @@ $lang['DESCRIPTION'] = 'Kirjeldus'; // used in Administration Panel too...
 $lang['DOWNLOAD'] = 'Lae alla'; // this Language Variable is defined in admin.php too, but we are unable to access it from the main Language File
 $lang['FILESIZE'] = 'Filesize';
 $lang['VIEWED'] = 'Vaadatud';
-$lang['DOWNLOAD_NUMBER'] = '%d korda'; // replace %d with count
 $lang['EXTENSION_DISABLED_AFTER_POSTING'] = 'Faililaiendiga \'%s" oli välja lülitatud poolt juhatuse admin, seega see adapter ei kuvata.'; // used in Posts and PM's, replace %s with mime type
 
 $lang['ATTACHMENT'] = 'Manuseid';

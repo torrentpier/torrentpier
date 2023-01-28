@@ -991,7 +991,6 @@ $lang['DESCRIPTION'] = 'Përshkrimi'; // used in Administration Panel too...
 $lang['DOWNLOAD'] = 'Shkarkuar'; // this Language Variable is defined in admin.php too, but we are unable to access it from the main Language File
 $lang['FILESIZE'] = 'Si kartela';
 $lang['VIEWED'] = 'Shihet';
-$lang['DOWNLOAD_NUMBER'] = '%d herë'; // replace %d with count
 $lang['EXTENSION_DISABLED_AFTER_POSTING'] = 'Zgjerimi \'%s\' ishte çaktivizuar nga një bord admin, prandaj kjo Shtojcë nuk është shfaqur.'; // used in Posts and PM's, replace %s with mime type
 
 $lang['ATTACHMENT'] = 'Të bashkëngjitni skedarë';

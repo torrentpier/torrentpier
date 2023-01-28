@@ -991,7 +991,6 @@ $lang['DESCRIPTION'] = 'Опис'; // used in Administration Panel too...
 $lang['DOWNLOAD'] = 'Довнлоад'; // this Language Variable is defined in admin.php too, but we are unable to access it from the main Language File
 $lang['FILESIZE'] = 'Величина';
 $lang['VIEWED'] = 'Посматрати';
-$lang['DOWNLOAD_NUMBER'] = '%d пут'; // replace %d with count
 $lang['EXTENSION_DISABLED_AFTER_POSTING'] = 'Ширењем %s\' је онемогућен административну комисију, тако да је овај прилог се не приказује.'; // used in Posts and PM's, replace %s with mime type
 
 $lang['ATTACHMENT'] = 'Прилог';

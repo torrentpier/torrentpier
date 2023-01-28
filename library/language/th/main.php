@@ -991,7 +991,6 @@ $lang['DESCRIPTION'] = 'รายละเอียด'; // used in Administrati
 $lang['DOWNLOAD'] = 'ดาวน์โหลด'; // this Language Variable is defined in admin.php too, but we are unable to access it from the main Language File
 $lang['FILESIZE'] = 'ขนาดแฟ้มได้';
 $lang['VIEWED'] = 'ดู';
-$lang['DOWNLOAD_NUMBER'] = '%d ครั้ง'; // replace %d with count
 $lang['EXTENSION_DISABLED_AFTER_POSTING'] = 'ส่วนขยายแฟ้ม\'%s\'ถูกปิดการใช้งานโดยการแอดมิน,ดังนั้นนี่คือสิ่งที่แนบมาด้วยไม่ถูกแสดงให้เห็น'; // used in Posts and PM's, replace %s with mime type
 
 $lang['ATTACHMENT'] = 'สิ่งที่แนบมาด้วย';

@@ -991,7 +991,6 @@ $lang['DESCRIPTION'] = 'сипаттамасы'; // used in Administration Panel
 $lang['DOWNLOAD'] = 'жүктеу'; // this Language Variable is defined in admin.php too, but we are unable to access it from the main Language File
 $lang['FILESIZE'] = 'файл мөлшері';
 $lang['VIEWED'] = 'белгілілері';
-$lang['DOWNLOAD_NUMBER'] = '%d рет'; // replace %d with count
 $lang['EXTENSION_DISABLED_AFTER_POSTING'] = 'Кеңейтім «%s Сондықтан осы Толықтырудың көрсетілмейді, бір басқарма әкімші арқылы ажыратылған болатын.'; // used in Posts and PM's, replace %s with mime type
 
 $lang['ATTACHMENT'] = 'Тіркемелер';

@@ -991,7 +991,6 @@ $lang['DESCRIPTION'] = 'აღწერა'; // used in Administration Panel too
 $lang['DOWNLOAD'] = 'უფასო'; // this Language Variable is defined in admin.php too, but we are unable to access it from the main Language File
 $lang['FILESIZE'] = 'ზომა';
 $lang['VIEWED'] = 'გახსნილია';
-$lang['DOWNLOAD_NUMBER'] = '%d ჯერ'; // replace %d with count
 $lang['EXTENSION_DISABLED_AFTER_POSTING'] = 'გაფართოება \'%s" იყო გაუქმდება მიერ საბჭოს admin, ამიტომ, აღნიშნული დანართი არ არის ნაჩვენები.'; // used in Posts and PM's, replace %s with mime type
 
 $lang['ATTACHMENT'] = 'Attachments';

@@ -991,7 +991,6 @@ $lang['DESCRIPTION'] = 'विवरण'; // used in Administration Panel too...
 $lang['DOWNLOAD'] = 'डाउनलोड'; // this Language Variable is defined in admin.php too, but we are unable to access it from the main Language File
 $lang['FILESIZE'] = 'फाइल का आकार';
 $lang['VIEWED'] = 'देखा गया';
-$lang['DOWNLOAD_NUMBER'] = '%d बार'; // replace %d with count
 $lang['EXTENSION_DISABLED_AFTER_POSTING'] = 'बोर्ड के व्यवस्थापक द्वारा एक्सटेंशन \'%s\' को निष्क्रिय कर दिया गया था, इसलिए यह अनुलग्नक प्रदर्शित नहीं किया गया है।'; // used in Posts and PM's, replace %s with mime type
 
 $lang['ATTACHMENT'] = 'संलग्नक';

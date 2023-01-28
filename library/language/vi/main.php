@@ -991,7 +991,6 @@ $lang['DESCRIPTION'] = 'Mô tả'; // used in Administration Panel too...
 $lang['DOWNLOAD'] = 'Tải về'; // this Language Variable is defined in admin.php too, but we are unable to access it from the main Language File
 $lang['FILESIZE'] = 'Kích cỡ';
 $lang['VIEWED'] = 'Xem';
-$lang['DOWNLOAD_NUMBER'] = '%d lần'; // replace %d with count
 $lang['EXTENSION_DISABLED_AFTER_POSTING'] = 'Mở Rộng \'%s\' đã được kích hoạt bởi một hội đồng quản trị, vì thế này đính Kèm không hiển thị.'; // used in Posts and PM's, replace %s with mime type
 
 $lang['ATTACHMENT'] = 'Đính kèm';

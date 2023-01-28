@@ -991,7 +991,6 @@ $lang['DESCRIPTION'] = 'Descrição'; // used in Administration Panel too...
 $lang['DOWNLOAD'] = 'Baixar'; // this Language Variable is defined in admin.php too, but we are unable to access it from the main Language File
 $lang['FILESIZE'] = 'Tamanho do arquivo';
 $lang['VIEWED'] = 'Visto';
-$lang['DOWNLOAD_NUMBER'] = '%d vezes'; // replace %d with count
 $lang['EXTENSION_DISABLED_AFTER_POSTING'] = 'A Extensão \'%s\' foi desativado por um conselho de administração, portanto, este Anexo não é exibido.'; // used in Posts and PM's, replace %s with mime type
 
 $lang['ATTACHMENT'] = 'Anexos';
