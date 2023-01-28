@@ -79,7 +79,7 @@ if (isset($_GET['pane']) && $_GET['pane'] == 'left') {
     if ($avatar_dir = opendir($bb_cfg['avatars']['upload_path'])) {
         while ($file = readdir($avatar_dir)) {
             if ($file != '.' && $file != '..') {
-                $avatar_dir_size += @filesize(BB_ROOT . $bb_cfg['avatar_path'] . '/' . $file);
+                $avatar_dir_size += @filesize($bb_cfg['avatars']['upload_path'] . $file);
             }
         }
         closedir($avatar_dir);
