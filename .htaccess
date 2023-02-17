@@ -14,5 +14,5 @@ RedirectMatch 404 /\\.git(/|$)
 
 ## deny access to system files
 <FilesMatch "\.(.*sql|tpl|db|inc|log|md|env)|(config|common).php$">
-deny from all
+Require all denied
 </FilesMatch>
