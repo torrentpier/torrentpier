@@ -11,56 +11,6 @@ if (!defined('BB_ROOT')) {
     die(basename(__FILE__));
 }
 
-/**
- * Clean all template cache
- *
- * @return void
- */
-function clean_tpl_cache(): void
-{
-    global $template;
-
-    $match = XS_TPL_PREFIX;
-    $dir = $template->cachedir;
-    $res = @opendir($dir);
-
-    while (($file = readdir($res)) !== false) {
-        if (0 === strpos($file, $match)) {
-            @unlink($dir . $file);
-        }
-    }
-
-    closedir($res);
-}
-
-/**
- * Clean all datastore items
- *
- * @return void
- */
-function clean_datastore(): void
-{
-    global $datastore;
-
-    $datastore->clean();
-}
-
-/**
- * Clean all cache items
- *
- * @return void
- */
-function clean_cache(): void
-{
-    global $bb_cfg;
-
-    foreach ($bb_cfg['cache']['engines'] as $cache_name => $cache_val) {
-        if (!in_array('db_sqlite', $cache_val)) {
-            CACHE($cache_name)->rm();
-        }
-    }
-}
-
 function get_path_from_id($id, $ext_id, $base_path, $first_div, $sec_div)
 {
     global $bb_cfg;
