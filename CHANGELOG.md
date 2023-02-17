@@ -1,5 +1,18 @@
 # Change Log
 
+## [v2.3.0.3](https://github.com/torrentpier/torrentpier/tree/v2.3.0.3) (2023-02-18)
+[Full Changelog](https://github.com/torrentpier/torrentpier/compare/v2.3.0.2...v2.3.0.3)
+
+**Merged pull requests:**
+
+- Updated copyright year [\#525](https://github.com/torrentpier/torrentpier/pull/525) ([belomaxorka](https://github.com/belomaxorka))
+- Update README.md (Fixed incorrect logo path) [\#526](https://github.com/torrentpier/torrentpier/pull/526) ([belomaxorka](https://github.com/belomaxorka))
+- Fixed broken getting avatars directory size [\#527](https://github.com/torrentpier/torrentpier/pull/527) ([belomaxorka](https://github.com/belomaxorka))
+- Added declensions for count of downloads [\#528](https://github.com/torrentpier/torrentpier/pull/528) ([belomaxorka](https://github.com/belomaxorka))
+- Use XS_TPL_PREFIX instead of 'tpl_' [\#529](https://github.com/torrentpier/torrentpier/pull/529) ([belomaxorka](https://github.com/belomaxorka))
+- Removed useless .htaccess files [\#530](https://github.com/torrentpier/torrentpier/pull/530) ([belomaxorka](https://github.com/belomaxorka))
+- Replaced "deny from all" with "Require all denied" [\#531](https://github.com/torrentpier/torrentpier/pull/531) ([belomaxorka](https://github.com/belomaxorka))
+
 ## [v2.3.0.2](https://github.com/torrentpier/torrentpier/tree/v2.3.0.2) (2023-01-23)
 [Full Changelog](https://github.com/torrentpier/torrentpier/compare/v2.3.0.1...v2.3.0.2)
 

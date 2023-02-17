@@ -21,8 +21,8 @@ $bb_cfg = [];
 $bb_cfg['js_ver'] = $bb_cfg['css_ver'] = 1;
 
 // Version info
-$bb_cfg['tp_version'] = '2.3.0.2';
-$bb_cfg['tp_release_date'] = '23-01-2023';
+$bb_cfg['tp_version'] = '2.3.0.3';
+$bb_cfg['tp_release_date'] = '18-02-2023';
 $bb_cfg['tp_release_codename'] = 'Bison';
 
 // Database
