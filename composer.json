@@ -8,7 +8,7 @@
     "torrent",
     "tracker"
   ],
-  "homepage": "https://torrentpier.com/",
+  "homepage": "https://torrentpier.com",
   "license": "MIT",
   "authors": [
     {
@@ -37,7 +37,7 @@
   "support": {
     "email": "support@torrentpier.com",
     "issues": "https://github.com/torrentpier/torrentpier/issues",
-    "forum": "https://torrentpier.com/forum/",
+    "forum": "https://torrentpier.com",
     "docs": "https://docs.torrentpier.com/"
   },
   "require": {
