@@ -9,6 +9,12 @@
 
 namespace TorrentPier\Legacy;
 
+use Egulias\EmailValidator\EmailValidator;
+use Egulias\EmailValidator\Validation\DNSCheckValidation;
+use Egulias\EmailValidator\Validation\MultipleValidationWithAnd;
+use Egulias\EmailValidator\Validation\RFCValidation;
+use Egulias\EmailValidator\Validation\SpoofCheckValidation;
+
 /**
  * Class Validate
  * @package TorrentPier\Legacy
@@ -88,13 +94,28 @@ class Validate
      */
     public static function email($email, $check_ban_and_taken = true)
     {
-        global $lang, $userdata;
+        global $lang, $userdata, $bb_cfg;
 
         if (!$email || !filter_var($email, FILTER_VALIDATE_EMAIL)) {
             return $lang['EMAIL_INVALID'];
         }
         if (\strlen($email) > USEREMAIL_MAX_LENGTH) {
             return $lang['EMAIL_TOO_LONG'];
+        }
+
+        // Extended email validation
+        if ($bb_cfg['extended_email_validation']) {
+            $validator = new EmailValidator();
+
+            $multipleValidations = new MultipleValidationWithAnd([
+                new RFCValidation(), // Standard RFC-like email validation.
+                new DNSCheckValidation(), // Will check if there are DNS records that signal that the server accepts emails. This does not entail that the email exists.
+                new SpoofCheckValidation() // Will check for multi-utf-8 chars that can signal an erroneous email name.
+            ]);
+
+            if (!$validator->isValid($email, $multipleValidations)) {
+                return $lang['EMAIL_INVALID'];
+            }
         }
 
         if ($check_ban_and_taken) {

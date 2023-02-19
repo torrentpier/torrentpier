@@ -384,6 +384,7 @@ $bb_cfg['emailer'] = [
     ],
     'ssl_type' => '', // SMTP ssl type (ssl or tls)
 ];
+$bb_cfg['extended_email_validation'] = true; // DNS & RFC checks for entered email addresses
 
 $bb_cfg['board_email'] = "noreply@$domain_name"; // admin email address
 $bb_cfg['board_email_form'] = false; // can users send email to each other via board
