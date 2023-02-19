@@ -236,9 +236,11 @@ function go_to_page ()
 	<b>{L_OLD_BROWSER}</b>
 </div>
 <script>
-if ( (typeof(window.opera) != "undefined" && window.opera.version() < 12) || (window.attachEvent && !window.addEventListener) /* IE < 9 */ ) {
-	document.getElementById('old-browser-warn').style.display = '';
-}
+  var Detector = new oldBrowserDetector(null, function () {
+    $('#old-browser-warn').show();
+  });
+
+  Detector.detect();
 </script>
 
 <!--main_nav-->
