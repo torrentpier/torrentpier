@@ -42,17 +42,6 @@ if (!defined('BB_ROOT')) {
         cursor: pointer;
     }
 
-    .sqlLogHead {
-        text-align: right;
-        float: right;
-        width: 100%;
-    }
-
-    .sqlLogHead fieldset {
-        float: right;
-        margin-right: 4px;
-    }
-
     .sqlLogWrapped {
         white-space: normal;
         overflow: visible;
@@ -74,7 +63,6 @@ if (!defined('BB_ROOT')) {
 </style>
 
 <?php
-
 if (!empty($_COOKIE['explain'])) {
     foreach ($DBS->srv as $srv_name => $db_obj) {
         if (!empty($db_obj->do_explain)) {
@@ -85,32 +73,17 @@ if (!empty($_COOKIE['explain'])) {
 
 $sql_log = !empty($_COOKIE['sql_log']) ? \TorrentPier\Legacy\Dev::get_sql_log() : '';
 
-echo '
-<script type="text/javascript">
-function fixSqlLog() {
-	if ($("#sqlLog").height() > 400) {
-		$("#sqlLog").height(400);
-	}
-	$("#sqlLog div.sqlLogRow")
-		.hover(
-			function(){ $(this).addClass("sqlHover"); },
-			function(){ $(this).removeClass("sqlHover"); }
-		)
-		.click(
-			function(){ $(this).toggleClass("sqlHighlight"); }
-		)
-	;
-}
-</script>
-	<div class="sqlLogHead">
-';
-
-echo '</div><!-- / sqlLogHead -->';
-
 if ($sql_log) {
     echo '<div class="sqlLog" id="sqlLog">' . ($sql_log ?: '') . '</div><!-- / sqlLog --><br clear="all" />';
 }
 ?>
+
 <script type="text/javascript">
+    function fixSqlLog() {
+        if ($("#sqlLog").height() > 400) {
+            $("#sqlLog").height(400);
+        }
+    }
+
     $(document).ready(fixSqlLog);
 </script>
