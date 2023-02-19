@@ -59,7 +59,7 @@ class Sqlite extends Common
 			SELECT cache_name, cache_value
 			FROM " . $this->cfg['table_name'] . "
 			WHERE cache_name IN('$this->prefix_sql" . implode("','$this->prefix_sql", $name_sql) . "') AND cache_expire_time > " . TIMENOW . "
-			LIMIT " . \count($name) . "
+			LIMIT " . \count($name_sql) . "
 		");
 
         $this->db->debug('start', 'unserialize()');
