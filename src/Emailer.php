@@ -2,20 +2,22 @@
 /**
  * TorrentPier – Bull-powered BitTorrent tracker engine
  *
- * @copyright Copyright (c) 2005-2023 TorrentPier (https://torrentpier.com)
- * @link      https://github.com/torrentpier/torrentpier for the canonical source repository
- * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
+ * @copyright Copyright (c) 2005-2023 TorrentPier (https://torrentpier.site)
+ * @link      https://github.com/TorrentPeer/TorrentPier for the canonical source repository
+ * @license   https://github.com/TorrentPeer/TorrentPier/blob/main/LICENSE MIT License
  */
 
-namespace TorrentPier\Legacy;
+namespace TorrentPier;
 
-use Swift_Mailer;
-use Swift_Message;
-use Swift_SendmailTransport;
-use Swift_SmtpTransport;
+use Exception;
+
+use Symfony\Component\Mailer\Exception\TransportExceptionInterface;
+use Symfony\Component\Mailer\Mailer;
+use Symfony\Component\Mailer\Transport;
+use Symfony\Component\Mime\Email;
 
 /**
- * Имплементация старого класса Emailer с заменой отправки на SwiftMailer
+ * Имплементация старого класса SwiftMailer с заменой отправки на Symfony Mailer
  * Переписать при дальнейшем переходе проекта на контейнерную структуру
  *
  * Class Emailer
@@ -24,14 +26,20 @@ use Swift_SmtpTransport;
 class Emailer
 {
     /**
-     * Обычное текстовое сообщение
+     * MIME типы
      */
-    public const FORMAT_TEXT = 'text/plain';
+    private const MIME_TYPES = [
+        'text' => 'text/plain', // Обычное текстовое сообщение
+        'html' => 'text/html' // HTML-сообщение
+    ];
 
     /**
-     * HTML-сообщение
+     * Настройки шаблонизатора писем
      */
-    public const FORMAT_HTML = 'text/html';
+    private const TPL_CONFIG = [
+        'dir' => '/email/',
+        'ext' => '.html'
+    ];
 
     /** @var string текст сообщения */
     private $message;
@@ -57,9 +65,9 @@ class Emailer
     /** @var array переменные, подменяемые в шаблонах писем */
     private $vars = [];
 
-    /** @var string кодировка отправляемых сообщений */
-    private $encoding;
-
+    /**
+     * Emailer constructor.
+     */
     public function __construct()
     {
         global $bb_cfg;
@@ -72,7 +80,7 @@ class Emailer
      *
      * @param string $subject
      */
-    public function set_subject($subject)
+    public function set_subject(string $subject)
     {
         $this->subject = $subject;
     }
@@ -122,8 +130,9 @@ class Emailer
      *
      * @param string $template_file имя шаблона
      * @param string $template_lang язык шаблона
+     * @throws Exception
      */
-    public function set_template($template_file, $template_lang = '')
+    public function set_template(string $template_file, string $template_lang = '')
     {
         global $bb_cfg;
 
@@ -132,10 +141,10 @@ class Emailer
         }
 
         if (empty($this->tpl_msg[$template_lang . $template_file])) {
-            $tpl_file = LANG_ROOT_DIR . '/' . $template_lang . '/email/' . $template_file . '.html';
+            $tpl_file = LANG_ROOT_DIR . '/' . $template_lang . self::TPL_CONFIG['dir'] . $template_file . self::TPL_CONFIG['ext'];
 
             if (!file_exists($tpl_file)) {
-                $tpl_file = LANG_ROOT_DIR . '/' . $bb_cfg['default_lang'] . '/email/' . $template_file . '.html';
+                $tpl_file = LANG_ROOT_DIR . '/' . $bb_cfg['default_lang'] . self::TPL_CONFIG['dir'] . $template_file . self::TPL_CONFIG['ext'];
 
                 /** @noinspection NotOptimalIfConditionsInspection */
                 if (!file_exists($tpl_file)) {
@@ -155,15 +164,17 @@ class Emailer
     }
 
     /**
-     * Отправка сообщения получателям через SwiftMailer
+     * Отправка сообщения получателям через Symfony Mailer
      *
      * @param string $email_format
      * @return bool
+     * @throws Exception
      */
-    public function send($email_format = self::FORMAT_TEXT)
+    public function send(string $email_format = self::MIME_TYPES['text']): bool
     {
-        global $bb_cfg, $lang, $userdata;
+        global $bb_cfg, $lang;
 
+        /** check if mailer enabled */
         if (!$bb_cfg['emailer']['enabled']) {
             return false;
         }
@@ -174,64 +185,52 @@ class Emailer
             $this->message = preg_replace(sprintf('/\$\{?%s\}?/', $key), $val, $this->message);
         }
         $this->message = trim($this->message);
-
-        /** Set some variables */
         $this->subject = !empty($this->subject) ? $this->subject : $lang['EMAILER_SUBJECT']['EMPTY'];
-        $this->encoding = $bb_cfg['charset'];
+        $charset = $bb_cfg['charset'];
 
-        /** Prepare message */
-        if ($bb_cfg['emailer']['smtp']['enabled']) {
-            if (!empty($bb_cfg['emailer']['smtp']['host'])) {
-                if (empty($bb_cfg['emailer']['ssl_type'])) {
-                    /** @var Swift_SmtpTransport $transport external SMTP without ssl */
-                    $transport = (new Swift_SmtpTransport(
-                        $bb_cfg['emailer']['smtp']['host'],
-                        $bb_cfg['emailer']['smtp']['port']
-                    ))
-                        ->setUsername($bb_cfg['emailer']['smtp']['username'])
-                        ->setPassword($bb_cfg['emailer']['smtp']['password']);
-                } else {
-                    /** @var Swift_SmtpTransport $transport external SMTP with ssl */
-                    $transport = (new Swift_SmtpTransport(
-                        $bb_cfg['emailer']['smtp']['host'],
-                        $bb_cfg['emailer']['smtp']['port'],
-                        $bb_cfg['emailer']['ssl_type']
-                    ))
-                        ->setUsername($bb_cfg['emailer']['smtp']['username'])
-                        ->setPassword($bb_cfg['emailer']['smtp']['password']);
-                }
-            } else {
-                /** @var Swift_SmtpTransport $transport local SMTP */
-                $transport = new Swift_SmtpTransport('localhost', 25);
+        /** @var $transport
+         * инициализируем Symfony Mailer
+         */
+        $transport = Transport::fromDsn($bb_cfg['emailer']['dsn']);
+        $mailer = new Mailer($transport);
+
+        /** @var $email
+         * настройка мейлера
+         */
+        $email = (new Email())
+            ->from($this->from)
+            ->returnPath($bb_cfg['bounce_email'])
+            ->to($this->to)
+            ->replyTo($this->reply)
+            ->subject($this->subject);
+
+        /** выбор типа письма */
+        switch ($email_format) {
+            case 'html':
+            {
+                $email->html($this->message, $charset);
+                break;
             }
-        } else {
-            /** @var Swift_SendmailTransport $transport local SendMail */
-            $transport = new Swift_SendmailTransport('/usr/sbin/sendmail -bs');
+            default:
+            case 'text':
+            {
+                $email->text($this->message, $charset);
+                break;
+            }
         }
 
-        /** @var Swift_Mailer $mailer */
-        $mailer = new Swift_Mailer($transport);
-
-        /** @var Swift_Message $message */
-        $message = (new Swift_Message())
-            ->setSubject($this->subject)
-            ->setReturnPath($bb_cfg['bounce_email'])
-            ->setFrom($this->from)
-            ->setTo($this->to)
-            ->setReplyTo($this->reply)
-            ->setBody($this->message, $email_format)
-            ->setCharset($this->encoding);
-
+        /** включать ли адрес для копии */
         if (!empty($this->cc)) {
-            $message->setCc($this->cc);
+            $email->cc($this->cc);
         }
 
-        /** Send message */
-        if (!$result = $mailer->send($message)) {
-            bb_die('Failed sending email: ' . $result);
+        /** проверка на успешную отправку */
+        try {
+            $mailer->send($email);
+            return true;
+        } catch (TransportExceptionInterface $e) {
+            throw new Exception($e->getMessage());
         }
-
-        return true;
     }
 
     /**

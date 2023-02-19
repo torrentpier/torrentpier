@@ -9,6 +9,7 @@
 
 namespace TorrentPier\Legacy;
 
+use TorrentPier\Emailer;
 use TorrentPier\Legacy\Admin\Common;
 
 /**
@@ -379,8 +380,8 @@ class Post
                         /** @var Emailer $emailer */
                         $emailer = new Emailer;
 
-                        $emailer->set_from([$bb_cfg['board_email'] => $bb_cfg['sitename']]);
-                        $emailer->set_to([$row['user_email'] => $row['username']]);
+                        $emailer->set_from($bb_cfg['board_email']);
+                        $emailer->set_to($row['user_email']);
                         $emailer->set_subject(sprintf($lang['EMAILER_SUBJECT']['TOPIC_NOTIFY'], $topic_title));
 
                         $emailer->set_template('topic_notify', $row['user_lang']);

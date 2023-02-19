@@ -571,11 +571,11 @@ if ($submit && !$errors) {
                 $email_template = 'user_welcome';
             }
 
-            /** @var TorrentPier\Legacy\Emailer() $emailer */
-            $emailer = new TorrentPier\Legacy\Emailer();
+            /** @var TorrentPier\Emailer() $emailer */
+            $emailer = new TorrentPier\Emailer();
 
-            $emailer->set_from([$bb_cfg['board_email'] => $bb_cfg['sitename']]);
-            $emailer->set_to([$email => $username]);
+            $emailer->set_from($bb_cfg['board_email']);
+            $emailer->set_to($email);
             $emailer->set_subject($email_subject);
 
             $emailer->set_template($email_template, $user_lang);
@@ -604,11 +604,11 @@ if ($submit && !$errors) {
                 $pr_data['user_actkey'] = $user_actkey;
                 $db_data['user_actkey'] = $user_actkey;
 
-                /** @var TorrentPier\Legacy\Emailer() $emailer */
-                $emailer = new TorrentPier\Legacy\Emailer();
+                /** @var TorrentPier\Emailer() $emailer */
+                $emailer = new TorrentPier\Emailer();
 
-                $emailer->set_from([$bb_cfg['board_email'] => $bb_cfg['sitename']]);
-                $emailer->set_to([$email => $username]);
+                $emailer->set_from($bb_cfg['board_email']);
+                $emailer->set_to($email);
                 $emailer->set_subject($subject);
                 $emailer->set_subject($lang['EMAILER_SUBJECT']['USER_ACTIVATE']);
 

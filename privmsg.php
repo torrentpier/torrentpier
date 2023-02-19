@@ -898,11 +898,11 @@ if ($mode == 'read') {
             \TorrentPier\Legacy\Sessions::cache_rm_user_sessions($to_userdata['user_id']);
 
             if (bf($to_userdata['user_opt'], 'user_opt', 'user_notify_pm') && $to_userdata['user_active'] && $bb_cfg['pm_notify_enabled']) {
-                /** @var TorrentPier\Legacy\Emailer() $emailer */
-                $emailer = new TorrentPier\Legacy\Emailer();
+                /** @var TorrentPier\Emailer() $emailer */
+                $emailer = new TorrentPier\Emailer();
 
-                $emailer->set_from([$bb_cfg['board_email'] => $bb_cfg['sitename']]);
-                $emailer->set_to([$to_userdata['user_email'] => $to_userdata['username']]);
+                $emailer->set_from($bb_cfg['board_email']);
+                $emailer->set_to($to_userdata['user_email']);
                 $emailer->set_subject($lang['EMAILER_SUBJECT']['PRIVMSG_NOTIFY']);
 
                 $emailer->set_template('privmsg_notify', $to_userdata['user_lang']);

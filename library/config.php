@@ -375,14 +375,7 @@ $bb_cfg['reg_email_activation'] = true; // Требовать активацию
 // Email
 $bb_cfg['emailer'] = [
     'enabled' => true,
-    'smtp' => [
-        'enabled' => false, // send email via external SMTP server
-        'host' => '', // SMTP server host
-        'port' => 25, // SMTP server port
-        'username' => '', // SMTP username (if server requires it)
-        'password' => '', // SMTP password (if server requires it)
-    ],
-    'ssl_type' => '', // SMTP ssl type (ssl or tls)
+    'dsn' => 'smtp://user:pass@smtp.example.com:25'
 ];
 $bb_cfg['extended_email_validation'] = true; // DNS & RFC checks for entered email addresses
 

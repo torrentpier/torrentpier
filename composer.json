@@ -50,11 +50,14 @@
     "guzzlehttp/guzzle": "6.*",
     "guzzlehttp/psr7": "1.*",
     "longman/ip-tools": "*",
+    "psr/container": "1.0.0",
     "rych/bencode": "*",
     "samdark/sitemap": "*",
-    "swiftmailer/swiftmailer": "*",
     "symfony/dotenv": "4.*",
-    "symfony/polyfill": "*"
+    "symfony/mailer": "4.*",
+    "symfony/mime": "4.*",
+    "symfony/polyfill": "*",
+    "symfony/service-contracts": "1.*"
   },
   "require-dev": {
     "phpstan/phpstan": "*",

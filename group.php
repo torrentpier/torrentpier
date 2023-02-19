@@ -193,11 +193,11 @@ if (!$group_id) {
     \TorrentPier\Legacy\Group::add_user_into_group($group_id, $userdata['user_id'], 1, TIMENOW);
 
     if ($bb_cfg['group_send_email']) {
-        /** @var TorrentPier\Legacy\Emailer() $emailer */
-        $emailer = new TorrentPier\Legacy\Emailer();
+        /** @var TorrentPier\Emailer() $emailer */
+        $emailer = new TorrentPier\Emailer();
 
-        $emailer->set_from([$bb_cfg['board_email'] => $bb_cfg['sitename']]);
-        $emailer->set_to([$moderator['user_email'] => $moderator['username']]);
+        $emailer->set_from($bb_cfg['board_email']);
+        $emailer->set_to($moderator['user_email']);
         $emailer->set_subject($lang['EMAILER_SUBJECT']['GROUP_REQUEST']);
 
         $emailer->set_template('group_request', $moderator['user_lang']);
@@ -235,11 +235,11 @@ if (!$group_id) {
             \TorrentPier\Legacy\Group::add_user_into_group($group_id, $row['user_id']);
 
             if ($bb_cfg['group_send_email']) {
-                /** @var TorrentPier\Legacy\Emailer() $emailer */
-                $emailer = new TorrentPier\Legacy\Emailer();
+                /** @var TorrentPier\Emailer() $emailer */
+                $emailer = new TorrentPier\Emailer();
 
-                $emailer->set_from([$bb_cfg['board_email'] => $bb_cfg['sitename']]);
-                $emailer->set_to([$row['user_email'] => $row['username']]);
+                $emailer->set_from($bb_cfg['board_email']);
+                $emailer->set_to($row['user_email']);
                 $emailer->set_subject($lang['EMAILER_SUBJECT']['GROUP_ADDED']);
 
                 $emailer->set_template('group_added', $row['user_lang']);
@@ -285,7 +285,7 @@ if (!$group_id) {
                 }
                 // Email users when they are approved
                 if (!empty($_POST['approve']) && $bb_cfg['group_send_email']) {
-                    $sql_select = "SELECT username, user_email, user_lang
+                    $sql_select = "SELECT user_email, user_lang
 						FROM " . BB_USERS . "
 						WHERE user_id IN($sql_in)";
 
@@ -294,11 +294,11 @@ if (!$group_id) {
                     }
 
                     foreach (DB()->fetch_rowset($sql_select) as $row) {
-                        /** @var TorrentPier\Legacy\Emailer() $emailer */
-                        $emailer = new TorrentPier\Legacy\Emailer();
+                        /** @var TorrentPier\Emailer() $emailer */
+                        $emailer = new TorrentPier\Emailer();
 
-                        $emailer->set_from([$bb_cfg['board_email'] => $bb_cfg['sitename']]);
-                        $emailer->set_to([$row['user_email'] => $row['username']]);
+                        $emailer->set_from($bb_cfg['board_email']);
+                        $emailer->set_to($row['user_email']);
                         $emailer->set_subject($lang['EMAILER_SUBJECT']['GROUP_APPROVED']);
 
                         $emailer->set_template('group_approved', $row['user_lang']);

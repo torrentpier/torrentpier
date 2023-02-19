@@ -43,7 +43,7 @@ if (isset($_POST['submit'])) {
 
         if ($group_id != -1) {
             $user_list = DB()->fetch_rowset('
-				SELECT u.username, u.user_email, u.user_lang
+				SELECT u.user_email, u.user_lang
 				FROM ' . BB_USERS . ' u, ' . BB_USER_GROUP . " ug
 				WHERE ug.group_id = $group_id
 					AND ug.user_pending = 0
@@ -53,7 +53,7 @@ if (isset($_POST['submit'])) {
 			');
         } else {
             $user_list = DB()->fetch_rowset('
-				SELECT username, user_email, user_lang
+				SELECT user_email, user_lang
 				FROM ' . BB_USERS . '
 				WHERE user_active = 1
 					AND user_id NOT IN(' . EXCLUDED_USERS . $user_id_sql . ')
@@ -61,11 +61,11 @@ if (isset($_POST['submit'])) {
         }
 
         foreach ($user_list as $i => $row) {
-            /** @var TorrentPier\Legacy\Emailer() $emailer */
-            $emailer = new TorrentPier\Legacy\Emailer();
+            /** @var TorrentPier\Emailer() $emailer */
+            $emailer = new TorrentPier\Emailer();
 
-            $emailer->set_from([$bb_cfg['board_email'] => $bb_cfg['sitename']]);
-            $emailer->set_to([$row['user_email'] => $row['username']]);
+            $emailer->set_from($bb_cfg['board_email']);
+            $emailer->set_to($row['user_email']);
             $emailer->set_subject($subject);
 
             $emailer->set_template('admin_send_email');

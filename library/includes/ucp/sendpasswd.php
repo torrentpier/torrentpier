@@ -47,11 +47,11 @@ if (isset($_POST['submit'])) {
                 bb_die('Could not update new password information');
             }
 
-            /** @var TorrentPier\Legacy\Emailer() $emailer */
-            $emailer = new TorrentPier\Legacy\Emailer();
+            /** @var TorrentPier\Emailer() $emailer */
+            $emailer = new TorrentPier\Emailer();
 
-            $emailer->set_from([$bb_cfg['board_email'] => $bb_cfg['sitename']]);
-            $emailer->set_to([$row['user_email'] => $username]);
+            $emailer->set_from($bb_cfg['board_email']);
+            $emailer->set_to($row['user_email']);
             $emailer->set_subject($lang['EMAILER_SUBJECT']['USER_ACTIVATE_PASSWD']);
 
             $emailer->set_template('user_activate_passwd', $row['user_lang']);
