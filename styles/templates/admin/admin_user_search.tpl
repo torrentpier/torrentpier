@@ -13,7 +13,7 @@
 		<th>{L_SEARCH_USERS_ADVANCED}</th>
 	</tr>
 	<tr>
-		<td class="row1"><span class="gen"><b>{L_USERNAME}:</b>&nbsp;<input class="post" type="text" name="username" maxlength="255" size="25" />&nbsp;<input type="submit" class="post2" name="search_username" value="{L_SEARCH}" /></span><br /><span class="small">{L_SEARCH_USERNAME_EXPLAIN}</span></td>
+		<td class="row1"><span class="gen"><b>{L_USERNAME}:</b>&nbsp;<input class="post" type="text" name="username" maxlength="255" size="25" />&nbsp;<input type="submit" name="usersubmit" value="{L_FIND_USERNAME}" onclick="window.open('{U_SEARCH_USER}', '_bbsearch', 'HEIGHT=250,resizable=yes,WIDTH=400');return false;" />&nbsp;<input type="submit" class="post2" name="search_username" value="{L_SEARCH}" /></span><br /><span class="small">{L_SEARCH_USERNAME_EXPLAIN}</span></td>
 	</tr>
 	<tr>
 		<td class="row2">&nbsp;</td>
@@ -91,7 +91,7 @@
 	</tr>
 	<!-- END forums_exist -->
 	<tr>
-		<td class="row1"><span class="gen"><select name="misc" class="post"><option value="admins" selected="selected">{L_ADMINISTRATORS}</option><option value="mods">{L_MODERATORS}</option><option value="banned">{L_BANNED_USERS}</option><option value="disabled">{L_DISABLED_USERS}</option></select>&nbsp;<input type="submit" class="post2" class="post2" name="search_misc" value="{L_SEARCH}" /></span><br /><span class="small">{L_SEARCH_USERS_MISC_EXPLAIN}</span></td>
+		<td class="row1"><span class="gen"><select name="misc" class="post"><option value="admins" selected="selected">{L_ADMINISTRATORS}</option><option value="mods">{L_MODERATORS}</option><option value="banned">{L_BANNED_USERS}</option><option value="disabled">{L_DISABLED_USERS}</option></select>&nbsp;<input type="submit" class="post2" name="search_misc" value="{L_SEARCH}" /></span><br /><span class="small">{L_SEARCH_USERS_MISC_EXPLAIN}</span></td>
 	</tr>
 	<tr>
 		<td class="row2">&nbsp;</td>
