@@ -566,13 +566,9 @@ if ($topic_has_poll) {
 
 $prev_post_time = $max_post_time = 0;
 
-$this_date = bb_date(TIMENOW, 'md', false);
-
 for ($i = 0; $i < $total_posts; $i++) {
     $poster_id = $postrow[$i]['user_id'];
     $poster = ($poster_id == GUEST_UID) ? $lang['GUEST'] : $postrow[$i]['username'];
-    $poster_birthday = ($poster_id != GUEST_UID && !empty($postrow[$i]['user_birthday']) && $postrow[$i]['user_birthday'] != '1900-01-01')
-        ? date('md', strtotime($postrow[$i]['user_birthday'])) : '';
     $post_date = bb_date($postrow[$i]['post_time'], $bb_cfg['post_date_format']);
     $max_post_time = max($max_post_time, $postrow[$i]['post_time']);
     $poster_posts = ($poster_id != GUEST_UID) ? $postrow[$i]['user_posts'] : '';
@@ -732,7 +728,7 @@ for ($i = 0; $i < $total_posts; $i++) {
         'DELETE' => $delpost_btn,
         'IP' => $ip_btn,
 
-        'POSTER_BIRTHDAY' => ($bb_cfg['birthday_enabled'] && $this_date == $poster_birthday) ? '<img src="' . $images['icon_birthday'] . '" alt="" title="' . $lang['HAPPY_BIRTHDAY'] . '" border="0" />' : '',
+        'POSTER_BIRTHDAY' => user_birthday_icon($postrow[$i]['user_birthday'], $postrow[$i]['user_id']),
 
         'MC_COMMENT' => ($mc_type) ? bbcode2html($mc_comment) : '',
         'MC_BBCODE' => ($mc_type) ? $mc_comment : '',
