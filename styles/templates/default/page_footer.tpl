@@ -64,6 +64,8 @@
 
 <!-- ENDIF -->
 
+<script type="text/javascript">new ClipboardJS('.copyElement');</script>
+
 <!-- IF ONLOAD_FOCUS_ID -->
 <script type="text/javascript">
 $p('{ONLOAD_FOCUS_ID}').focus();
