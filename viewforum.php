@@ -391,6 +391,7 @@ $template->assign_vars(array(
     'PAGE_TITLE' => htmlCHR($forum_data['forum_name']),
     'FORUM_ID' => $forum_id,
     'FORUM_NAME' => htmlCHR($forum_data['forum_name']),
+    'FORUM_DESC' => htmlCHR($forum_data['forum_desc']),
     'TORRENTS' => $forum_data['allow_reg_tracker'],
     'POST_IMG' => ($forum_data['forum_status'] == FORUM_LOCKED) ? $images['post_locked'] : $post_img,
 
