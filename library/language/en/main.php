@@ -344,6 +344,8 @@ $lang['POST_STICKY'] = 'Sticky';
 $lang['POST_NORMAL'] = 'Normal';
 $lang['POST_DOWNLOAD'] = 'Download';
 
+$lang['PRINT_PAGE'] = 'Print page';
+
 $lang['CONFIRM_DELETE'] = 'Are you sure you want to delete this post?';
 $lang['CONFIRM_DELETE_POLL'] = 'Are you sure you want to delete this poll?';
 

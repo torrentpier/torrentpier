@@ -240,6 +240,8 @@ function build_poll_add_form (src_el)
 			<!-- IF IN_MODERATION -->{L_MODERATE_TOPIC}<!-- ELSE --><a href="{PAGE_URL}&amp;mod=1&amp;start={PAGE_START}" class="small bold">{L_MODERATE_TOPIC}</a><!-- ENDIF -->
 			&nbsp;<span style="color:#CDCDCD;">|</span>&nbsp;
 			<a class="small bold" href="{PIN_HREF}">{PIN_TITLE}</a>
+      &nbsp;<span style="color:#CDCDCD;">|</span>&nbsp;
+      <a class="small bold" href="#" onclick="$('#main_content').printThis(); return false;">{L_PRINT_PAGE}</a>
 		</td>
 		<!-- IF SELECT_PPP -->
 		<td class="med" style="padding: 0 4px 2px 4px;">|</td>
