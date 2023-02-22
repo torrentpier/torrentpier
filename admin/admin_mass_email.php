@@ -14,6 +14,10 @@ if (!empty($setmodules)) {
 
 require __DIR__ . '/pagestart.php';
 
+if (!$bb_cfg['emailer']['enabled']) {
+    bb_die($lang['EMAILER_DISABLED']);
+}
+
 set_time_limit(1200);
 
 $subject = (string)trim(request_var('subject', ''));
