@@ -30,7 +30,7 @@ and go from there. The documentation will be translated into english in the near
 ## Requirements
 
 * Apache / nginx
-* MySQL / MariaDB / Percona
+* MySQL (5.*, 6.*, 7.*) / MariaDB / Percona
 * PHP: 7.1 / 7.2 / 7.3
 * PHP Extensions: bcmath, intl, tidy (optional), xml, xmlwriter
 
