@@ -1,5 +1,25 @@
 # Change Log
 
+## [v2.3.0.4-beta](https://github.com/torrentpier/torrentpier/tree/v2.3.0.4-beta) (2023-02-22)
+[Full Changelog](https://github.com/torrentpier/torrentpier/compare/v2.3.0.3...v2.3.0.4-beta)
+
+**Merged pull requests:**
+
+- docs: change official forum path [\#532](https://github.com/torrentpier/torrentpier/pull/532) ([Exileum](https://github.com/Exileum))
+- Fixed broken sql log selecting in debug-panel [\#533](https://github.com/torrentpier/torrentpier/pull/533) ([belomaxorka](https://github.com/belomaxorka))
+- New implementation of old browser detector [\#534](https://github.com/torrentpier/torrentpier/pull/534) ([belomaxorka](https://github.com/belomaxorka))
+- Fixed SQLite caching issue [\#535](https://github.com/torrentpier/torrentpier/pull/535) ([belomaxorka](https://github.com/belomaxorka))
+- Extended email validation [\#536](https://github.com/torrentpier/torrentpier/pull/536) ([belomaxorka](https://github.com/belomaxorka))
+- Admin panel adjustments [\#538](https://github.com/torrentpier/torrentpier/pull/538) ([belomaxorka](https://github.com/belomaxorka))
+- Added user birthday icon in profile [\#539](https://github.com/torrentpier/torrentpier/pull/539) ([belomaxorka](https://github.com/belomaxorka))
+- Added forum description in viewforum page [\#540](https://github.com/torrentpier/torrentpier/pull/540) ([belomaxorka](https://github.com/belomaxorka))
+- Fixed broken copy log from debug-panel [\#541](https://github.com/torrentpier/torrentpier/pull/541) ([belomaxorka](https://github.com/belomaxorka))
+- Added copy button in viewforum page [\#542](https://github.com/torrentpier/torrentpier/pull/542) ([belomaxorka](https://github.com/belomaxorka))
+- Added current topic url copy button in viewtopic [\#543](https://github.com/torrentpier/torrentpier/pull/543) ([belomaxorka](https://github.com/belomaxorka))
+- Added ``$bb_cfg['emailer']['enabled']`` check in admin_mass_email.php [\#545](https://github.com/torrentpier/torrentpier/pull/545) ([belomaxorka](https://github.com/belomaxorka))
+- Updated scrollTo up to 1.4.6 [\#547](https://github.com/torrentpier/torrentpier/pull/547) ([belomaxorka](https://github.com/belomaxorka))
+- Updated quicksearch up to Feb 21, 2018 commit [\#548](https://github.com/torrentpier/torrentpier/pull/548) ([belomaxorka](https://github.com/belomaxorka))
+
 ## [v2.3.0.3](https://github.com/torrentpier/torrentpier/tree/v2.3.0.3) (2023-02-18)
 [Full Changelog](https://github.com/torrentpier/torrentpier/compare/v2.3.0.2...v2.3.0.3)
 
