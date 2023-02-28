@@ -102,8 +102,7 @@ $topics_join_sql .= ($only_new == ONLY_NEW_TOPICS) ? "
 $join_t_type = ($only_new == ONLY_NEW_TOPICS) ? 'INNER JOIN' : 'LEFT JOIN';
 
 $sql = "
-	SELECT SQL_CACHE
-		f.cat_id, f.forum_id, f.forum_status, f.forum_parent, f.show_on_index,
+	SELECT f.cat_id, f.forum_id, f.forum_status, f.forum_parent, f.show_on_index,
 		p.post_id AS last_post_id, p.post_time AS last_post_time,
 		t.topic_id AS last_topic_id, t.topic_title AS last_topic_title,
 		u.user_id AS last_post_user_id, u.user_rank AS last_post_user_rank,

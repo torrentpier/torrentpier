@@ -338,7 +338,7 @@ function auth($type, $forum_id, $ug_data, array $f_access = array(), $group_perm
             }
         } else {
             if (!$is_guest && !$is_admin) {
-                $sql = "SELECT SQL_CACHE aa.forum_id, aa.forum_perm
+                $sql = "SELECT aa.forum_id, aa.forum_perm
 					FROM " . BB_AUTH_ACCESS_SNAP . " aa
 					WHERE aa.user_id = " . (int)$ug_data['user_id'] . "
 						$forum_match_sql";
