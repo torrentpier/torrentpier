@@ -43,3 +43,6 @@ ALTER TABLE `bb_posts` CHANGE `mc_comment` `mc_comment` TEXT NOT NULL DEFAULT ''
 ALTER TABLE `bb_users` CHANGE `user_sig` `user_sig` TEXT NOT NULL DEFAULT '';
 ALTER TABLE `bb_groups` CHANGE `group_signature` `group_signature` TEXT NOT NULL DEFAULT '';
 ALTER TABLE `bb_groups` CHANGE `group_description` `group_description` TEXT NOT NULL DEFAULT '';
+
+// 2.3.0.4
+SET GLOBAL SQL_MODE = "";
