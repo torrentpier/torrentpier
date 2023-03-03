@@ -67,7 +67,7 @@ foreach ($peers_in_last_minutes as $t) {
 }
 // Last xx seconds
 $peers_in_last_sec = array();
-$rowset = DB()->fetch_rowset('SELECT COUNT(*) AS peers FROM ' . TMP_TRACKER_TABLE . " GROUP BY update_time DESC LIMIT $peers_in_last_sec_limit");
+$rowset = DB()->fetch_rowset('SELECT COUNT(*) AS peers FROM ' . TMP_TRACKER_TABLE . ' GROUP BY update_time ORDER BY update_time DESC LIMIT ' . $peers_in_last_sec_limit);
 foreach ($rowset as $cnt => $row) {
     $peers_in_last_sec[] = sprintf('%3s', $row['peers']) . (($cnt && !(++$cnt % 15)) ? "  \n" : '');
 }
