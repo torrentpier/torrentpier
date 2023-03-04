@@ -5,7 +5,7 @@
 // 2.2.0
 UPDATE `bb_config` SET `config_value` = 'http://whatismyipaddress.com/ip/' WHERE `config_name` = 'whois_info';
 DELETE FROM `bb_smilies` WHERE `code` = ':ad:';
-INSERT INTO `bb_smilies` VALUES ('', ':сd:', 'сd.gif', 'сd');
+INSERT INTO `bb_smilies` (`code`, `smile_url`, `emoticon`) VALUES (':сd:', 'сd.gif', 'сd');
 DROP TABLE IF EXISTS `bb_ads`;
 DELETE FROM `bb_config` WHERE `config_name` = 'active_ads';
 ALTER TABLE `bb_log` DROP COLUMN `log_username`;
