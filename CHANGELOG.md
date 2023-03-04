@@ -1,5 +1,18 @@
 # Change Log
 
+## [v2.3.0.4-beta2](https://github.com/torrentpier/torrentpier/tree/v2.3.0.4-beta2) (2023-03-04)
+[Full Changelog](https://github.com/torrentpier/torrentpier/compare/v2.3.0.4-beta...v2.3.0.4-beta2)
+
+**Merged pull requests:**
+
+- Updated treeview up to 1.4.2 [\#549](https://github.com/torrentpier/torrentpier/pull/549) ([belomaxorka](https://github.com/belomaxorka))
+- Removed ugly copyright in indexer [\#546](https://github.com/torrentpier/torrentpier/pull/546) ([belomaxorka](https://github.com/belomaxorka))
+- Added ability to print page [\#544](https://github.com/torrentpier/torrentpier/pull/544) ([belomaxorka](https://github.com/belomaxorka))
+- Removed deprecated SQL_CACHE [\#554](https://github.com/torrentpier/torrentpier/pull/554) ([belomaxorka](https://github.com/belomaxorka))
+- Added min required mysql / mariadb version [\#555](https://github.com/torrentpier/torrentpier/pull/555) ([belomaxorka](https://github.com/belomaxorka))
+- Added needed "ORDER BY" in sql query [\#557](https://github.com/torrentpier/torrentpier/pull/557) ([belomaxorka](https://github.com/belomaxorka))
+- Added missing sql query in changes.txt [\#558](https://github.com/torrentpier/torrentpier/pull/558) ([belomaxorka](https://github.com/belomaxorka))
+
 ## [v2.3.0.4-beta](https://github.com/torrentpier/torrentpier/tree/v2.3.0.4-beta) (2023-02-22)
 [Full Changelog](https://github.com/torrentpier/torrentpier/compare/v2.3.0.3...v2.3.0.4-beta)
 
