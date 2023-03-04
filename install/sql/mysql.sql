@@ -1,4 +1,4 @@
-SET GLOBAL SQL_MODE = "";
+SET SQL_MODE = "";
 
 -- ----------------------------
 -- Table structure for `bb_attachments`

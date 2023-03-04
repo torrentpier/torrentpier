@@ -44,6 +44,3 @@ ALTER TABLE `bb_users` CHANGE `user_sig` `user_sig` TEXT NOT NULL DEFAULT '';
 ALTER TABLE `bb_groups` CHANGE `group_signature` `group_signature` TEXT NOT NULL DEFAULT '';
 ALTER TABLE `bb_groups` CHANGE `group_description` `group_description` TEXT NOT NULL DEFAULT '';
 UPDATE `bb_smilies` SET `code` = ':cd:', `smile_url` = 'cd.gif', `emoticon` = 'cd' WHERE `code` = ':сd:' AND `smile_url` = 'сd.gif' AND `emoticon` = 'сd';
-
-// 2.3.0.4
-SET GLOBAL SQL_MODE = "";
