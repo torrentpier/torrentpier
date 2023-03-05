@@ -300,6 +300,7 @@ $template->assign_vars(array(
     'U_SEARCH_SELF_BY_MY' => "search.php?uid={$userdata['user_id']}&amp;o=1",
     'U_SEARCH_LATEST' => 'search.php?search_id=latest',
     'U_SEARCH_UNANSWERED' => 'search.php?search_id=unanswered',
+    'U_ATOM_FEED' => file_exists($bb_cfg['atom']['path'] . '/f/0.atom') ? make_url($bb_cfg['atom']['url'] . '/f/0.atom') : false,
 
     'SHOW_LAST_TOPIC' => $show_last_topic,
 ));
