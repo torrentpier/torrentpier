@@ -4,7 +4,8 @@ SET SQL_MODE = "";
 -- Table structure for `bb_attachments`
 -- ----------------------------
 DROP TABLE IF EXISTS `bb_attachments`;
-CREATE TABLE IF NOT EXISTS `bb_attachments` (
+CREATE TABLE IF NOT EXISTS `bb_attachments`
+(
   `attach_id` MEDIUMINT(8) UNSIGNED NOT NULL DEFAULT '0',
   `post_id`   MEDIUMINT(8) UNSIGNED NOT NULL DEFAULT '0',
   `user_id_1` MEDIUMINT(8)          NOT NULL DEFAULT '0',
@@ -21,7 +22,8 @@ CREATE TABLE IF NOT EXISTS `bb_attachments` (
 -- Table structure for `bb_attachments_config`
 -- ----------------------------
 DROP TABLE IF EXISTS `bb_attachments_config`;
-CREATE TABLE IF NOT EXISTS `bb_attachments_config` (
+CREATE TABLE IF NOT EXISTS `bb_attachments_config`
+(
   `config_name`  VARCHAR(255) NOT NULL DEFAULT '',
   `config_value` VARCHAR(255) NOT NULL DEFAULT '',
   PRIMARY KEY (`config_name`)
@@ -32,37 +34,39 @@ CREATE TABLE IF NOT EXISTS `bb_attachments_config` (
 -- ----------------------------
 -- Records of bb_attachments_config
 -- ----------------------------
-INSERT INTO `bb_attachments_config` VALUES ('upload_dir', 'data/torrent_files');
-INSERT INTO `bb_attachments_config` VALUES ('upload_img', 'styles/images/icon_clip.gif');
-INSERT INTO `bb_attachments_config` VALUES ('topic_icon', 'styles/images/icon_clip.gif');
-INSERT INTO `bb_attachments_config` VALUES ('display_order', '0');
-INSERT INTO `bb_attachments_config` VALUES ('max_filesize', '262144');
-INSERT INTO `bb_attachments_config` VALUES ('attachment_quota', '52428800');
-INSERT INTO `bb_attachments_config` VALUES ('max_filesize_pm', '262144');
-INSERT INTO `bb_attachments_config` VALUES ('max_attachments', '1');
-INSERT INTO `bb_attachments_config` VALUES ('max_attachments_pm', '1');
-INSERT INTO `bb_attachments_config` VALUES ('disable_mod', '0');
-INSERT INTO `bb_attachments_config` VALUES ('allow_pm_attach', '1');
-INSERT INTO `bb_attachments_config` VALUES ('attach_version', '2.3.14');
-INSERT INTO `bb_attachments_config` VALUES ('default_upload_quota', '0');
-INSERT INTO `bb_attachments_config` VALUES ('default_pm_quota', '0');
-INSERT INTO `bb_attachments_config` VALUES ('img_display_inlined', '1');
-INSERT INTO `bb_attachments_config` VALUES ('img_max_width', '200');
-INSERT INTO `bb_attachments_config` VALUES ('img_max_height', '200');
-INSERT INTO `bb_attachments_config` VALUES ('img_link_width', '0');
-INSERT INTO `bb_attachments_config` VALUES ('img_link_height', '0');
-INSERT INTO `bb_attachments_config` VALUES ('img_create_thumbnail', '0');
-INSERT INTO `bb_attachments_config` VALUES ('img_min_thumb_filesize', '12000');
-INSERT INTO `bb_attachments_config` VALUES ('img_imagick', '/usr/bin/convert');
-INSERT INTO `bb_attachments_config` VALUES ('use_gd2', '1');
-INSERT INTO `bb_attachments_config` VALUES ('wma_autoplay', '0');
-INSERT INTO `bb_attachments_config` VALUES ('flash_autoplay', '0');
+INSERT INTO `bb_attachments_config`
+VALUES ('upload_dir', 'data/torrent_files'),
+       ('upload_img', 'styles/images/icon_clip.gif'),
+       ('topic_icon', 'styles/images/icon_clip.gif'),
+       ('display_order', '0'),
+       ('max_filesize', '262144'),
+       ('attachment_quota', '52428800'),
+       ('max_filesize_pm', '262144'),
+       ('max_attachments', '1'),
+       ('max_attachments_pm', '1'),
+       ('disable_mod', '0'),
+       ('allow_pm_attach', '1'),
+       ('attach_version', '2.3.14'),
+       ('default_upload_quota', '0'),
+       ('default_pm_quota', '0'),
+       ('img_display_inlined', '1'),
+       ('img_max_width', '200'),
+       ('img_max_height', '200'),
+       ('img_link_width', '0'),
+       ('img_link_height', '0'),
+       ('img_create_thumbnail', '0'),
+       ('img_min_thumb_filesize', '12000'),
+       ('img_imagick', '/usr/bin/convert'),
+       ('use_gd2', '1'),
+       ('wma_autoplay', '0'),
+       ('flash_autoplay', '0');
 
 -- ----------------------------
 -- Table structure for `bb_attachments_desc`
 -- ----------------------------
 DROP TABLE IF EXISTS `bb_attachments_desc`;
-CREATE TABLE IF NOT EXISTS `bb_attachments_desc` (
+CREATE TABLE IF NOT EXISTS `bb_attachments_desc`
+(
   `attach_id`         MEDIUMINT(8) UNSIGNED NOT NULL AUTO_INCREMENT,
   `physical_filename` VARCHAR(255)          NOT NULL DEFAULT '',
   `real_filename`     VARCHAR(255)          NOT NULL DEFAULT '',
@@ -90,7 +94,8 @@ CREATE TABLE IF NOT EXISTS `bb_attachments_desc` (
 -- Table structure for `bb_attach_quota`
 -- ----------------------------
 DROP TABLE IF EXISTS `bb_attach_quota`;
-CREATE TABLE IF NOT EXISTS `bb_attach_quota` (
+CREATE TABLE IF NOT EXISTS `bb_attach_quota`
+(
   `user_id`        MEDIUMINT(8) UNSIGNED NOT NULL DEFAULT '0',
   `group_id`       MEDIUMINT(8) UNSIGNED NOT NULL DEFAULT '0',
   `quota_type`     SMALLINT(2)           NOT NULL DEFAULT '0',
@@ -108,7 +113,8 @@ CREATE TABLE IF NOT EXISTS `bb_attach_quota` (
 -- Table structure for `bb_auth_access`
 -- ----------------------------
 DROP TABLE IF EXISTS `bb_auth_access`;
-CREATE TABLE IF NOT EXISTS `bb_auth_access` (
+CREATE TABLE IF NOT EXISTS `bb_auth_access`
+(
   `group_id`   MEDIUMINT(8)         NOT NULL DEFAULT '0',
   `forum_id`   SMALLINT(5) UNSIGNED NOT NULL DEFAULT '0',
   `forum_perm` INT(11)              NOT NULL DEFAULT '0',
@@ -126,7 +132,8 @@ CREATE TABLE IF NOT EXISTS `bb_auth_access` (
 -- Table structure for `bb_auth_access_snap`
 -- ----------------------------
 DROP TABLE IF EXISTS `bb_auth_access_snap`;
-CREATE TABLE IF NOT EXISTS `bb_auth_access_snap` (
+CREATE TABLE IF NOT EXISTS `bb_auth_access_snap`
+(
   `user_id`    MEDIUMINT(9) NOT NULL DEFAULT '0',
   `forum_id`   SMALLINT(6)  NOT NULL DEFAULT '0',
   `forum_perm` INT(11)      NOT NULL DEFAULT '0',
@@ -143,7 +150,8 @@ CREATE TABLE IF NOT EXISTS `bb_auth_access_snap` (
 -- Table structure for `bb_banlist`
 -- ----------------------------
 DROP TABLE IF EXISTS `bb_banlist`;
-CREATE TABLE IF NOT EXISTS `bb_banlist` (
+CREATE TABLE IF NOT EXISTS `bb_banlist`
+(
   `ban_id`     MEDIUMINT(8) UNSIGNED NOT NULL AUTO_INCREMENT,
   `ban_userid` MEDIUMINT(8)          NOT NULL DEFAULT '0',
   `ban_ip`     VARCHAR(42)           NOT NULL DEFAULT '0',
@@ -162,7 +170,8 @@ CREATE TABLE IF NOT EXISTS `bb_banlist` (
 -- Table structure for `bb_bt_dlstatus`
 -- ----------------------------
 DROP TABLE IF EXISTS `bb_bt_dlstatus`;
-CREATE TABLE IF NOT EXISTS `bb_bt_dlstatus` (
+CREATE TABLE IF NOT EXISTS `bb_bt_dlstatus`
+(
   `user_id`                MEDIUMINT(9)          NOT NULL DEFAULT '0',
   `topic_id`               MEDIUMINT(8) UNSIGNED NOT NULL DEFAULT '0',
   `user_status`            TINYINT(1)            NOT NULL DEFAULT '0',
@@ -181,7 +190,8 @@ CREATE TABLE IF NOT EXISTS `bb_bt_dlstatus` (
 -- Table structure for `bb_bt_dlstatus_snap`
 -- ----------------------------
 DROP TABLE IF EXISTS `bb_bt_dlstatus_snap`;
-CREATE TABLE IF NOT EXISTS `bb_bt_dlstatus_snap` (
+CREATE TABLE IF NOT EXISTS `bb_bt_dlstatus_snap`
+(
   `topic_id`    MEDIUMINT(8) UNSIGNED NOT NULL DEFAULT '0',
   `dl_status`   TINYINT(4)            NOT NULL DEFAULT '0',
   `users_count` SMALLINT(5) UNSIGNED  NOT NULL DEFAULT '0',
@@ -198,7 +208,8 @@ CREATE TABLE IF NOT EXISTS `bb_bt_dlstatus_snap` (
 -- Table structure for `bb_bt_last_torstat`
 -- ----------------------------
 DROP TABLE IF EXISTS `bb_bt_last_torstat`;
-CREATE TABLE IF NOT EXISTS `bb_bt_last_torstat` (
+CREATE TABLE IF NOT EXISTS `bb_bt_last_torstat`
+(
   `topic_id`    MEDIUMINT(8) UNSIGNED NOT NULL DEFAULT '0',
   `user_id`     MEDIUMINT(9)          NOT NULL DEFAULT '0',
   `dl_status`   TINYINT(1)            NOT NULL DEFAULT '0',
@@ -221,7 +232,8 @@ CREATE TABLE IF NOT EXISTS `bb_bt_last_torstat` (
 -- Table structure for `bb_bt_last_userstat`
 -- ----------------------------
 DROP TABLE IF EXISTS `bb_bt_last_userstat`;
-CREATE TABLE IF NOT EXISTS `bb_bt_last_userstat` (
+CREATE TABLE IF NOT EXISTS `bb_bt_last_userstat`
+(
   `user_id`     MEDIUMINT(9)        NOT NULL DEFAULT '0',
   `up_add`      BIGINT(20) UNSIGNED NOT NULL DEFAULT '0',
   `down_add`    BIGINT(20) UNSIGNED NOT NULL DEFAULT '0',
@@ -242,7 +254,8 @@ CREATE TABLE IF NOT EXISTS `bb_bt_last_userstat` (
 -- Table structure for `bb_bt_torhelp`
 -- ----------------------------
 DROP TABLE IF EXISTS `bb_bt_torhelp`;
-CREATE TABLE IF NOT EXISTS `bb_bt_torhelp` (
+CREATE TABLE IF NOT EXISTS `bb_bt_torhelp`
+(
   `user_id`      MEDIUMINT(9) NOT NULL DEFAULT '0',
   `topic_id_csv` TEXT         NOT NULL,
   PRIMARY KEY (`user_id`)
@@ -258,7 +271,8 @@ CREATE TABLE IF NOT EXISTS `bb_bt_torhelp` (
 -- Table structure for `bb_bt_torrents`
 -- ----------------------------
 DROP TABLE IF EXISTS `bb_bt_torrents`;
-CREATE TABLE IF NOT EXISTS `bb_bt_torrents` (
+CREATE TABLE IF NOT EXISTS `bb_bt_torrents`
+(
   `info_hash`        VARBINARY(20)         NOT NULL DEFAULT '',
   `post_id`          MEDIUMINT(8) UNSIGNED NOT NULL DEFAULT '0',
   `poster_id`        MEDIUMINT(9)          NOT NULL DEFAULT '0',
@@ -295,7 +309,8 @@ CREATE TABLE IF NOT EXISTS `bb_bt_torrents` (
 -- Table structure for `bb_bt_torstat`
 -- ----------------------------
 DROP TABLE IF EXISTS `bb_bt_torstat`;
-CREATE TABLE IF NOT EXISTS `bb_bt_torstat` (
+CREATE TABLE IF NOT EXISTS `bb_bt_torstat`
+(
   `topic_id`              MEDIUMINT(8) UNSIGNED NOT NULL DEFAULT '0',
   `user_id`               MEDIUMINT(9)          NOT NULL DEFAULT '0',
   `last_modified_torstat` TIMESTAMP             NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
@@ -313,7 +328,8 @@ CREATE TABLE IF NOT EXISTS `bb_bt_torstat` (
 -- Table structure for `bb_bt_tor_dl_stat`
 -- ----------------------------
 DROP TABLE IF EXISTS `bb_bt_tor_dl_stat`;
-CREATE TABLE IF NOT EXISTS `bb_bt_tor_dl_stat` (
+CREATE TABLE IF NOT EXISTS `bb_bt_tor_dl_stat`
+(
   `topic_id`      MEDIUMINT(8) UNSIGNED NOT NULL DEFAULT '0',
   `user_id`       MEDIUMINT(9)          NOT NULL DEFAULT '0',
   `attach_id`     MEDIUMINT(8) UNSIGNED NOT NULL DEFAULT '0',
@@ -333,10 +349,11 @@ CREATE TABLE IF NOT EXISTS `bb_bt_tor_dl_stat` (
 -- Table structure for `bb_bt_tracker`
 -- ----------------------------
 DROP TABLE IF EXISTS `bb_bt_tracker`;
-CREATE TABLE IF NOT EXISTS `bb_bt_tracker` (
+CREATE TABLE IF NOT EXISTS `bb_bt_tracker`
+(
   `peer_hash`        VARCHAR(32)
-                     CHARACTER SET utf8
-                     COLLATE utf8_bin      NOT NULL DEFAULT '',
+                       CHARACTER SET utf8
+                         COLLATE utf8_bin  NOT NULL DEFAULT '',
   `topic_id`         MEDIUMINT(8) UNSIGNED NOT NULL DEFAULT '0',
   `peer_id`          VARCHAR(20)           NOT NULL DEFAULT '0',
   `user_id`          MEDIUMINT(9)          NOT NULL DEFAULT '0',
@@ -372,7 +389,8 @@ CREATE TABLE IF NOT EXISTS `bb_bt_tracker` (
 -- Table structure for `bb_bt_tracker_snap`
 -- ----------------------------
 DROP TABLE IF EXISTS `bb_bt_tracker_snap`;
-CREATE TABLE IF NOT EXISTS `bb_bt_tracker_snap` (
+CREATE TABLE IF NOT EXISTS `bb_bt_tracker_snap`
+(
   `topic_id`   MEDIUMINT(8) UNSIGNED NOT NULL DEFAULT '0',
   `seeders`    MEDIUMINT(8) UNSIGNED NOT NULL DEFAULT '0',
   `leechers`   MEDIUMINT(8) UNSIGNED NOT NULL DEFAULT '0',
@@ -391,11 +409,12 @@ CREATE TABLE IF NOT EXISTS `bb_bt_tracker_snap` (
 -- Table structure for `bb_bt_users`
 -- ----------------------------
 DROP TABLE IF EXISTS `bb_bt_users`;
-CREATE TABLE IF NOT EXISTS `bb_bt_users` (
+CREATE TABLE IF NOT EXISTS `bb_bt_users`
+(
   `user_id`              MEDIUMINT(9)          NOT NULL DEFAULT '0',
   `auth_key`             CHAR(10)
-                         CHARACTER SET utf8
-                         COLLATE utf8_bin      NOT NULL DEFAULT '',
+                           CHARACTER SET utf8
+                             COLLATE utf8_bin  NOT NULL DEFAULT '',
   `u_up_total`           BIGINT(20) UNSIGNED   NOT NULL DEFAULT '0',
   `u_down_total`         BIGINT(20) UNSIGNED   NOT NULL DEFAULT '0',
   `u_up_release`         BIGINT(20) UNSIGNED   NOT NULL DEFAULT '0',
@@ -424,7 +443,8 @@ CREATE TABLE IF NOT EXISTS `bb_bt_users` (
 -- Table structure for `bb_bt_user_settings`
 -- ----------------------------
 DROP TABLE IF EXISTS `bb_bt_user_settings`;
-CREATE TABLE IF NOT EXISTS `bb_bt_user_settings` (
+CREATE TABLE IF NOT EXISTS `bb_bt_user_settings`
+(
   `user_id`        MEDIUMINT(9) NOT NULL DEFAULT '0',
   `tor_search_set` TEXT         NOT NULL,
   `last_modified`  INT(11)      NOT NULL DEFAULT '0',
@@ -441,7 +461,8 @@ CREATE TABLE IF NOT EXISTS `bb_bt_user_settings` (
 -- Table structure for `bb_categories`
 -- ----------------------------
 DROP TABLE IF EXISTS `bb_categories`;
-CREATE TABLE IF NOT EXISTS `bb_categories` (
+CREATE TABLE IF NOT EXISTS `bb_categories`
+(
   `cat_id`    SMALLINT(5) UNSIGNED NOT NULL AUTO_INCREMENT,
   `cat_title` VARCHAR(100)         NOT NULL DEFAULT '',
   `cat_order` SMALLINT(5) UNSIGNED NOT NULL DEFAULT '0',
@@ -454,13 +475,15 @@ CREATE TABLE IF NOT EXISTS `bb_categories` (
 -- ----------------------------
 -- Records of bb_categories
 -- ----------------------------
-INSERT INTO `bb_categories` VALUES ('1', 'Ваша первая категория', '10');
+INSERT INTO `bb_categories`
+VALUES ('1', 'Ваша первая категория', '10');
 
 -- ----------------------------
 -- Table structure for `bb_config`
 -- ----------------------------
 DROP TABLE IF EXISTS `bb_config`;
-CREATE TABLE IF NOT EXISTS `bb_config` (
+CREATE TABLE IF NOT EXISTS `bb_config`
+(
   `config_name`  VARCHAR(255) NOT NULL DEFAULT '',
   `config_value` TEXT         NOT NULL,
   PRIMARY KEY (`config_name`)
@@ -471,97 +494,99 @@ CREATE TABLE IF NOT EXISTS `bb_config` (
 -- ----------------------------
 -- Records of bb_config
 -- ----------------------------
-INSERT INTO `bb_config` VALUES ('allow_autologin', '1');
-INSERT INTO `bb_config` VALUES ('allow_bbcode', '1');
-INSERT INTO `bb_config` VALUES ('allow_namechange', '0');
-INSERT INTO `bb_config` VALUES ('allow_sig', '1');
-INSERT INTO `bb_config` VALUES ('allow_smilies', '1');
-INSERT INTO `bb_config` VALUES ('board_disable', '0');
-INSERT INTO `bb_config` VALUES ('board_startdate', UNIX_TIMESTAMP());
-INSERT INTO `bb_config` VALUES ('board_timezone', '0');
-INSERT INTO `bb_config` VALUES ('bonus_upload', '');
-INSERT INTO `bb_config` VALUES ('bonus_upload_price', '');
-INSERT INTO `bb_config` VALUES ('birthday_enabled', '1');
-INSERT INTO `bb_config` VALUES ('birthday_max_age', '99');
-INSERT INTO `bb_config` VALUES ('birthday_min_age', '10');
-INSERT INTO `bb_config` VALUES ('birthday_check_day', '7');
-INSERT INTO `bb_config` VALUES ('bt_add_auth_key', '1');
-INSERT INTO `bb_config` VALUES ('bt_allow_spmode_change', '1');
-INSERT INTO `bb_config` VALUES ('bt_announce_url', 'https://demo.torrentpier.com/bt/announce.php');
-INSERT INTO `bb_config` VALUES ('bt_disable_dht', '0');
-INSERT INTO `bb_config` VALUES ('bt_check_announce_url', '0');
-INSERT INTO `bb_config` VALUES ('bt_del_addit_ann_urls', '1');
-INSERT INTO `bb_config` VALUES ('bt_dl_list_only_1st_page', '1');
-INSERT INTO `bb_config` VALUES ('bt_dl_list_only_count', '1');
-INSERT INTO `bb_config` VALUES ('bt_newtopic_auto_reg', '1');
-INSERT INTO `bb_config` VALUES ('bt_replace_ann_url', '1');
-INSERT INTO `bb_config` VALUES ('bt_search_bool_mode', '1');
-INSERT INTO `bb_config` VALUES ('bt_set_dltype_on_tor_reg', '1');
-INSERT INTO `bb_config` VALUES ('bt_show_dl_but_cancel', '1');
-INSERT INTO `bb_config` VALUES ('bt_show_dl_but_compl', '1');
-INSERT INTO `bb_config` VALUES ('bt_show_dl_but_down', '0');
-INSERT INTO `bb_config` VALUES ('bt_show_dl_but_will', '1');
-INSERT INTO `bb_config` VALUES ('bt_show_dl_list', '0');
-INSERT INTO `bb_config` VALUES ('bt_show_dl_list_buttons', '1');
-INSERT INTO `bb_config` VALUES ('bt_show_dl_stat_on_index', '1');
-INSERT INTO `bb_config` VALUES ('bt_show_ip_only_moder', '1');
-INSERT INTO `bb_config` VALUES ('bt_show_peers', '1');
-INSERT INTO `bb_config` VALUES ('bt_show_peers_mode', '1');
-INSERT INTO `bb_config` VALUES ('bt_show_port_only_moder', '1');
-INSERT INTO `bb_config` VALUES ('bt_tor_browse_only_reg', '0');
-INSERT INTO `bb_config` VALUES ('bt_unset_dltype_on_tor_unreg', '1');
-INSERT INTO `bb_config` VALUES ('cron_last_check', '0');
-INSERT INTO `bb_config` VALUES ('default_dateformat', 'Y-m-d H:i');
-INSERT INTO `bb_config` VALUES ('default_lang', 'ru');
-INSERT INTO `bb_config` VALUES ('flood_interval', '15');
-INSERT INTO `bb_config` VALUES ('hot_threshold', '300');
-INSERT INTO `bb_config` VALUES ('login_reset_time', '30');
-INSERT INTO `bb_config` VALUES ('max_autologin_time', '10');
-INSERT INTO `bb_config` VALUES ('max_login_attempts', '5');
-INSERT INTO `bb_config` VALUES ('max_poll_options', '6');
-INSERT INTO `bb_config` VALUES ('max_sig_chars', '255');
-INSERT INTO `bb_config` VALUES ('posts_per_page', '15');
-INSERT INTO `bb_config` VALUES ('prune_enable', '1');
-INSERT INTO `bb_config` VALUES ('record_online_date', UNIX_TIMESTAMP());
-INSERT INTO `bb_config` VALUES ('record_online_users', '0');
-INSERT INTO `bb_config` VALUES ('seed_bonus_enabled', '1');
-INSERT INTO `bb_config` VALUES ('seed_bonus_release', '');
-INSERT INTO `bb_config` VALUES ('seed_bonus_points', '');
-INSERT INTO `bb_config` VALUES ('seed_bonus_tor_size', '0');
-INSERT INTO `bb_config` VALUES ('seed_bonus_user_regdate', '0');
-INSERT INTO `bb_config` VALUES ('site_desc', 'A little text to describe your forum');
-INSERT INTO `bb_config` VALUES ('sitemap_time', '');
-INSERT INTO `bb_config` VALUES ('sitename', 'TorrentPier - Bull-powered BitTorrent tracker engine');
-INSERT INTO `bb_config` VALUES ('smilies_path', 'styles/images/smiles');
-INSERT INTO `bb_config` VALUES ('static_sitemap', '');
-INSERT INTO `bb_config` VALUES ('topics_per_page', '50');
-INSERT INTO `bb_config` VALUES ('xs_use_cache', '1');
-INSERT INTO `bb_config` VALUES ('cron_enabled', '1');
-INSERT INTO `bb_config` VALUES ('cron_check_interval', '180');
-INSERT INTO `bb_config` VALUES ('magnet_links_enabled', '1');
-INSERT INTO `bb_config` VALUES ('gender', '1');
-INSERT INTO `bb_config` VALUES ('callseed', '0');
-INSERT INTO `bb_config` VALUES ('tor_stats', '1');
-INSERT INTO `bb_config` VALUES ('show_latest_news', '1');
-INSERT INTO `bb_config` VALUES ('max_news_title', '50');
-INSERT INTO `bb_config` VALUES ('latest_news_count', '5');
-INSERT INTO `bb_config` VALUES ('latest_news_forum_id', '1');
-INSERT INTO `bb_config` VALUES ('show_network_news', '1');
-INSERT INTO `bb_config` VALUES ('max_net_title', '50');
-INSERT INTO `bb_config` VALUES ('network_news_count', '5');
-INSERT INTO `bb_config` VALUES ('network_news_forum_id', '2');
-INSERT INTO `bb_config` VALUES ('whois_info', 'http://whatismyipaddress.com/ip/');
-INSERT INTO `bb_config` VALUES ('show_mod_index', '0');
-INSERT INTO `bb_config` VALUES ('premod', '0');
-INSERT INTO `bb_config` VALUES ('tor_comment', '1');
-INSERT INTO `bb_config` VALUES ('terms', '');
+INSERT INTO `bb_config`
+VALUES ('allow_autologin', '1'),
+       ('allow_bbcode', '1'),
+       ('allow_namechange', '0'),
+       ('allow_sig', '1'),
+       ('allow_smilies', '1'),
+       ('board_disable', '0'),
+       ('board_startdate', UNIX_TIMESTAMP()),
+       ('board_timezone', '0'),
+       ('bonus_upload', ''),
+       ('bonus_upload_price', ''),
+       ('birthday_enabled', '1'),
+       ('birthday_max_age', '99'),
+       ('birthday_min_age', '10'),
+       ('birthday_check_day', '7'),
+       ('bt_add_auth_key', '1'),
+       ('bt_allow_spmode_change', '1'),
+       ('bt_announce_url', 'https://demo.torrentpier.com/bt/announce.php'),
+       ('bt_disable_dht', '0'),
+       ('bt_check_announce_url', '0'),
+       ('bt_del_addit_ann_urls', '1'),
+       ('bt_dl_list_only_1st_page', '1'),
+       ('bt_dl_list_only_count', '1'),
+       ('bt_newtopic_auto_reg', '1'),
+       ('bt_replace_ann_url', '1'),
+       ('bt_search_bool_mode', '1'),
+       ('bt_set_dltype_on_tor_reg', '1'),
+       ('bt_show_dl_but_cancel', '1'),
+       ('bt_show_dl_but_compl', '1'),
+       ('bt_show_dl_but_down', '0'),
+       ('bt_show_dl_but_will', '1'),
+       ('bt_show_dl_list', '0'),
+       ('bt_show_dl_list_buttons', '1'),
+       ('bt_show_dl_stat_on_index', '1'),
+       ('bt_show_ip_only_moder', '1'),
+       ('bt_show_peers', '1'),
+       ('bt_show_peers_mode', '1'),
+       ('bt_show_port_only_moder', '1'),
+       ('bt_tor_browse_only_reg', '0'),
+       ('bt_unset_dltype_on_tor_unreg', '1'),
+       ('cron_last_check', '0'),
+       ('default_dateformat', 'Y-m-d H:i'),
+       ('default_lang', 'ru'),
+       ('flood_interval', '15'),
+       ('hot_threshold', '300'),
+       ('login_reset_time', '30'),
+       ('max_autologin_time', '10'),
+       ('max_login_attempts', '5'),
+       ('max_poll_options', '6'),
+       ('max_sig_chars', '255'),
+       ('posts_per_page', '15'),
+       ('prune_enable', '1'),
+       ('record_online_date', UNIX_TIMESTAMP()),
+       ('record_online_users', '0'),
+       ('seed_bonus_enabled', '1'),
+       ('seed_bonus_release', ''),
+       ('seed_bonus_points', ''),
+       ('seed_bonus_tor_size', '0'),
+       ('seed_bonus_user_regdate', '0'),
+       ('site_desc', 'A little text to describe your forum'),
+       ('sitemap_time', ''),
+       ('sitename', 'TorrentPier - Bull-powered BitTorrent tracker engine'),
+       ('smilies_path', 'styles/images/smiles'),
+       ('static_sitemap', ''),
+       ('topics_per_page', '50'),
+       ('xs_use_cache', '1'),
+       ('cron_enabled', '1'),
+       ('cron_check_interval', '180'),
+       ('magnet_links_enabled', '1'),
+       ('gender', '1'),
+       ('callseed', '0'),
+       ('tor_stats', '1'),
+       ('show_latest_news', '1'),
+       ('max_news_title', '50'),
+       ('latest_news_count', '5'),
+       ('latest_news_forum_id', '1'),
+       ('show_network_news', '1'),
+       ('max_net_title', '50'),
+       ('network_news_count', '5'),
+       ('network_news_forum_id', '2'),
+       ('whois_info', 'http://whatismyipaddress.com/ip/'),
+       ('show_mod_index', '0'),
+       ('premod', '0'),
+       ('tor_comment', '1'),
+       ('terms', '');
 
 -- ----------------------------
 -- Table structure for `bb_cron`
 -- ----------------------------
 DROP TABLE IF EXISTS `bb_cron`;
-CREATE TABLE IF NOT EXISTS `bb_cron` (
-  `cron_id`         SMALLINT(5) UNSIGNED                                      NOT NULL                                                                                                   AUTO_INCREMENT,
+CREATE TABLE IF NOT EXISTS `bb_cron`
+(
+  `cron_id`         SMALLINT(5) UNSIGNED                                      NOT NULL AUTO_INCREMENT,
   `cron_active`     TINYINT(4)                                                NOT NULL                                                                                                   DEFAULT '1',
   `cron_title`      CHAR(120)                                                 NOT NULL                                                                                                   DEFAULT '',
   `cron_script`     CHAR(120)                                                 NOT NULL                                                                                                   DEFAULT '',
@@ -587,71 +612,60 @@ CREATE TABLE IF NOT EXISTS `bb_cron` (
 -- ----------------------------
 -- Records of bb_cron
 -- ----------------------------
-INSERT INTO `bb_cron` VALUES
-  ('', '1', 'Attach maintenance', 'attach_maintenance.php', 'daily', '', '05:00:00', '40', '', '', '', '1', '', '0',
-   '1', '0');
-INSERT INTO `bb_cron` VALUES
-  ('', '1', 'Board maintenance', 'board_maintenance.php', 'daily', '', '05:00:00', '40', '', '', '', '1', '', '0', '1',
-   '0');
-INSERT INTO `bb_cron`
-VALUES ('', '1', 'Prune forums', 'prune_forums.php', 'daily', '', '05:00:00', '50', '', '', '', '1', '', '0', '1', '0');
-INSERT INTO `bb_cron` VALUES
-  ('', '1', 'Prune topic moved stubs', 'prune_topic_moved.php', 'daily', '', '05:00:00', '60', '', '', '', '1', '', '0',
-   '1', '0');
-INSERT INTO `bb_cron`
-VALUES ('', '1', 'Logs cleanup', 'clean_log.php', 'daily', '', '05:00:00', '70', '', '', '', '1', '', '0', '1', '0');
-INSERT INTO `bb_cron` VALUES
-  ('', '1', 'Tracker maintenance', 'tr_maintenance.php', 'daily', '', '05:00:00', '90', '', '', '', '1', '', '0', '1',
-   '0');
-INSERT INTO `bb_cron` VALUES
-  ('', '1', 'Clean dlstat', 'clean_dlstat.php', 'daily', '', '05:00:00', '100', '', '', '', '1', '', '0', '1', '0');
-INSERT INTO `bb_cron` VALUES
-  ('', '1', 'Prune inactive users', 'prune_inactive_users.php', 'daily', '', '05:00:00', '110', '', '', '', '1', '',
-   '0', '1', '0');
-INSERT INTO `bb_cron` VALUES
-  ('', '1', 'Sessions cleanup', 'sessions_cleanup.php', 'interval', '', '', '255', '', '', '00:03:00', '0', '', '0',
-   '0', '0');
-INSERT INTO `bb_cron` VALUES
-  ('', '1', 'DS update cat_forums', 'ds_update_cat_forums.php', 'interval', '', '', '255', '', '', '00:05:00', '0', '',
-   '0', '0', '0');
-INSERT INTO `bb_cron` VALUES
-  ('', '1', 'DS update stats', 'ds_update_stats.php', 'interval', '', '', '255', '', '', '00:10:00', '0', '', '0', '0',
-   '0');
-INSERT INTO `bb_cron` VALUES
-  ('', '1', 'Flash topic view', 'flash_topic_view.php', 'interval', '', '', '255', '', '', '00:10:00', '0', '', '0',
-   '0', '0');
-INSERT INTO `bb_cron` VALUES
-  ('', '1', 'Clean search results', 'clean_search_results.php', 'interval', '', '', '255', '', '', '00:10:00', '0', '',
-   '0', '0', '0');
-INSERT INTO `bb_cron` VALUES
-  ('', '1', 'Tracker cleanup and dlstat', 'tr_cleanup_and_dlstat.php', 'interval', '', '', '20', '', '', '00:15:00',
-   '0', '', '0', '0', '0');
-INSERT INTO `bb_cron` VALUES
-  ('', '1', 'Accrual seedbonus', 'tr_seed_bonus.php', 'interval', '', '', '25', '', '', '00:15:00', '0', '', '0', '0',
-   '0');
-INSERT INTO `bb_cron` VALUES
-  ('', '1', 'Make tracker snapshot', 'tr_make_snapshot.php', 'interval', '', '', '10', '', '', '00:10:00', '0', '', '0',
-   '0', '0');
-INSERT INTO `bb_cron` VALUES
-  ('', '1', 'Seeder last seen', 'tr_update_seeder_last_seen.php', 'interval', '', '', '255', '', '', '01:00:00', '0',
-   '', '0', '0', '0');
-INSERT INTO `bb_cron` VALUES
-  ('', '1', 'Tracker dl-complete count', 'tr_complete_count.php', 'interval', '', '', '255', '', '', '06:00:00', '0',
-   '', '0', '0', '0');
-INSERT INTO `bb_cron` VALUES
-  ('', '1', 'Cache garbage collector', 'cache_gc.php', 'interval', '', '', '255', '', '', '00:05:00', '0', '', '0', '0',
-   '0');
-INSERT INTO `bb_cron`
-VALUES ('', '1', 'Sitemap update', 'sitemap.php', 'daily', '', '06:00:00', '30', '', '', '', '0', '', '0', '0', '0');
-INSERT INTO `bb_cron` VALUES
-  ('', '1', 'Update forums atom', 'update_forums_atom.php', 'interval', '', '', '255', '', '', '00:15:00', '0', '', '0',
-   '0', '0');
+INSERT INTO `bb_cron` (`cron_active`, `cron_title`, `cron_script`, `schedule`, `run_day`, `run_time`, `run_order`,
+                       `last_run`, `next_run`, `run_interval`, `log_enabled`, `log_file`, `log_sql_queries`,
+                       `disable_board`, `run_counter`)
+VALUES ('1', 'Attach maintenance', 'attach_maintenance.php', 'daily', '', '05:00:00', '40', '', '', '', '1', '', '0',
+        '1', '0'),
+
+       ('1', 'Board maintenance', 'board_maintenance.php', 'daily', '', '05:00:00', '40', '', '', '', '1', '', '0', '1',
+        '0'),
+
+       ('1', 'Prune forums', 'prune_forums.php', 'daily', '', '05:00:00', '50', '', '', '', '1', '', '0', '1', '0'),
+       ('1', 'Prune topic moved stubs', 'prune_topic_moved.php', 'daily', '', '05:00:00', '60', '', '', '', '1', '',
+        '0',
+        '1', '0'),
+       ('1', 'Logs cleanup', 'clean_log.php', 'daily', '', '05:00:00', '70', '', '', '', '1', '', '0', '1', '0'),
+       ('1', 'Tracker maintenance', 'tr_maintenance.php', 'daily', '', '05:00:00', '90', '', '', '', '1', '', '0', '1',
+        '0'),
+       ('1', 'Clean dlstat', 'clean_dlstat.php', 'daily', '', '05:00:00', '100', '', '', '', '1', '', '0', '1', '0'),
+       ('1', 'Prune inactive users', 'prune_inactive_users.php', 'daily', '', '05:00:00', '110', '', '', '', '1', '',
+        '0', '1', '0'),
+       ('1', 'Sessions cleanup', 'sessions_cleanup.php', 'interval', '', '', '255', '', '', '00:03:00', '0', '', '0',
+        '0', '0'),
+       ('1', 'DS update cat_forums', 'ds_update_cat_forums.php', 'interval', '', '', '255', '', '', '00:05:00', '0', '',
+        '0', '0', '0'),
+       ('1', 'DS update stats', 'ds_update_stats.php', 'interval', '', '', '255', '', '', '00:10:00', '0', '', '0', '0',
+        '0'),
+       ('1', 'Flash topic view', 'flash_topic_view.php', 'interval', '', '', '255', '', '', '00:10:00', '0', '', '0',
+        '0', '0'),
+       ('1', 'Clean search results', 'clean_search_results.php', 'interval', '', '', '255', '', '', '00:10:00', '0', '',
+        '0', '0', '0'),
+       ('1', 'Tracker cleanup and dlstat', 'tr_cleanup_and_dlstat.php', 'interval', '', '', '20', '', '', '00:15:00',
+        '0', '', '0', '0', '0'),
+       ('1', 'Accrual seedbonus', 'tr_seed_bonus.php', 'interval', '', '', '25', '', '', '00:15:00', '0', '', '0', '0',
+        '0'),
+       ('1', 'Make tracker snapshot', 'tr_make_snapshot.php', 'interval', '', '', '10', '', '', '00:10:00', '0', '',
+        '0',
+        '0', '0'),
+       ('1', 'Seeder last seen', 'tr_update_seeder_last_seen.php', 'interval', '', '', '255', '', '', '01:00:00', '0',
+        '', '0', '0', '0'),
+       ('1', 'Tracker dl-complete count', 'tr_complete_count.php', 'interval', '', '', '255', '', '', '06:00:00', '0',
+        '', '0', '0', '0'),
+       ('1', 'Cache garbage collector', 'cache_gc.php', 'interval', '', '', '255', '', '', '00:05:00', '0', '', '0',
+        '0',
+        '0'),
+       ('1', 'Sitemap update', 'sitemap.php', 'daily', '', '06:00:00', '30', '', '', '', '0', '', '0', '0', '0'),
+       ('1', 'Update forums atom', 'update_forums_atom.php', 'interval', '', '', '255', '', '', '00:15:00', '0', '',
+        '0',
+        '0', '0');
 
 -- ----------------------------
 -- Table structure for `bb_disallow`
 -- ----------------------------
 DROP TABLE IF EXISTS `bb_disallow`;
-CREATE TABLE IF NOT EXISTS `bb_disallow` (
+CREATE TABLE IF NOT EXISTS `bb_disallow`
+(
   `disallow_id`       MEDIUMINT(8) UNSIGNED NOT NULL AUTO_INCREMENT,
   `disallow_username` VARCHAR(25)           NOT NULL DEFAULT '',
   PRIMARY KEY (`disallow_id`)
@@ -667,7 +681,8 @@ CREATE TABLE IF NOT EXISTS `bb_disallow` (
 -- Table structure for `bb_extensions`
 -- ----------------------------
 DROP TABLE IF EXISTS `bb_extensions`;
-CREATE TABLE IF NOT EXISTS `bb_extensions` (
+CREATE TABLE IF NOT EXISTS `bb_extensions`
+(
   `ext_id`    MEDIUMINT(8) UNSIGNED NOT NULL AUTO_INCREMENT,
   `group_id`  MEDIUMINT(8) UNSIGNED NOT NULL DEFAULT '0',
   `extension` VARCHAR(100)          NOT NULL DEFAULT '',
@@ -680,39 +695,41 @@ CREATE TABLE IF NOT EXISTS `bb_extensions` (
 -- ----------------------------
 -- Records of bb_extensions
 -- ----------------------------
-INSERT INTO `bb_extensions` VALUES ('', '1', 'gif', '');
-INSERT INTO `bb_extensions` VALUES ('', '1', 'png', '');
-INSERT INTO `bb_extensions` VALUES ('', '1', 'jpeg', '');
-INSERT INTO `bb_extensions` VALUES ('', '1', 'jpg', '');
-INSERT INTO `bb_extensions` VALUES ('', '1', 'tif', '');
-INSERT INTO `bb_extensions` VALUES ('', '1', 'tga', '');
-INSERT INTO `bb_extensions` VALUES ('', '2', 'gtar', '');
-INSERT INTO `bb_extensions` VALUES ('', '2', 'gz', '');
-INSERT INTO `bb_extensions` VALUES ('', '2', 'tar', '');
-INSERT INTO `bb_extensions` VALUES ('', '2', 'zip', '');
-INSERT INTO `bb_extensions` VALUES ('', '2', 'rar', '');
-INSERT INTO `bb_extensions` VALUES ('', '2', 'ace', '');
-INSERT INTO `bb_extensions` VALUES ('', '3', 'txt', '');
-INSERT INTO `bb_extensions` VALUES ('', '3', 'c', '');
-INSERT INTO `bb_extensions` VALUES ('', '3', 'h', '');
-INSERT INTO `bb_extensions` VALUES ('', '3', 'cpp', '');
-INSERT INTO `bb_extensions` VALUES ('', '3', 'hpp', '');
-INSERT INTO `bb_extensions` VALUES ('', '3', 'diz', '');
-INSERT INTO `bb_extensions` VALUES ('', '4', 'xls', '');
-INSERT INTO `bb_extensions` VALUES ('', '4', 'doc', '');
-INSERT INTO `bb_extensions` VALUES ('', '4', 'dot', '');
-INSERT INTO `bb_extensions` VALUES ('', '4', 'pdf', '');
-INSERT INTO `bb_extensions` VALUES ('', '4', 'ai', '');
-INSERT INTO `bb_extensions` VALUES ('', '4', 'ps', '');
-INSERT INTO `bb_extensions` VALUES ('', '4', 'ppt', '');
-INSERT INTO `bb_extensions` VALUES ('', '5', 'rm', '');
-INSERT INTO `bb_extensions` VALUES ('', '6', 'torrent', '');
+INSERT INTO `bb_extensions` (`group_id`, `extension`, `comment`)
+VALUES ('1', 'gif', ''),
+       ('1', 'png', ''),
+       ('1', 'jpeg', ''),
+       ('1', 'jpg', ''),
+       ('1', 'tif', ''),
+       ('1', 'tga', ''),
+       ('2', 'gtar', ''),
+       ('2', 'gz', ''),
+       ('2', 'tar', ''),
+       ('2', 'zip', ''),
+       ('2', 'rar', ''),
+       ('2', 'ace', ''),
+       ('3', 'txt', ''),
+       ('3', 'c', ''),
+       ('3', 'h', ''),
+       ('3', 'cpp', ''),
+       ('3', 'hpp', ''),
+       ('3', 'diz', ''),
+       ('4', 'xls', ''),
+       ('4', 'doc', ''),
+       ('4', 'dot', ''),
+       ('4', 'pdf', ''),
+       ('4', 'ai', ''),
+       ('4', 'ps', ''),
+       ('4', 'ppt', ''),
+       ('5', 'rm', ''),
+       ('6', 'torrent', '');
 
 -- ----------------------------
 -- Table structure for `bb_extension_groups`
 -- ----------------------------
 DROP TABLE IF EXISTS `bb_extension_groups`;
-CREATE TABLE IF NOT EXISTS `bb_extension_groups` (
+CREATE TABLE IF NOT EXISTS `bb_extension_groups`
+(
   `group_id`          MEDIUMINT(8)        NOT NULL AUTO_INCREMENT,
   `group_name`        VARCHAR(20)         NOT NULL DEFAULT '',
   `cat_id`            TINYINT(2)          NOT NULL DEFAULT '0',
@@ -729,18 +746,21 @@ CREATE TABLE IF NOT EXISTS `bb_extension_groups` (
 -- ----------------------------
 -- Records of bb_extension_groups
 -- ----------------------------
-INSERT INTO `bb_extension_groups` VALUES ('', 'Images', '1', '1', '1', '', '262144', '');
-INSERT INTO `bb_extension_groups` VALUES ('', 'Archives', '0', '1', '1', '', '262144', '');
-INSERT INTO `bb_extension_groups` VALUES ('', 'Plain text', '0', '0', '1', '', '262144', '');
-INSERT INTO `bb_extension_groups` VALUES ('', 'Documents', '0', '0', '1', '', '262144', '');
-INSERT INTO `bb_extension_groups` VALUES ('', 'Real media', '0', '0', '2', '', '262144', '');
-INSERT INTO `bb_extension_groups` VALUES ('', 'Torrent', '0', '1', '1', '', '122880', '');
+INSERT INTO `bb_extension_groups` (`group_name`, `cat_id`, `allow_group`, `download_mode`, `upload_icon`,
+                                   `max_filesize`, `forum_permissions`)
+VALUES ('Images', '1', '1', '1', '', '262144', ''),
+       ('Archives', '0', '1', '1', '', '262144', ''),
+       ('Plain text', '0', '0', '1', '', '262144', ''),
+       ('Documents', '0', '0', '1', '', '262144', ''),
+       ('Real media', '0', '0', '2', '', '262144', ''),
+       ('Torrent', '0', '1', '1', '', '122880', '');
 
 -- ----------------------------
 -- Table structure for `bb_forums`
 -- ----------------------------
 DROP TABLE IF EXISTS `bb_forums`;
-CREATE TABLE IF NOT EXISTS `bb_forums` (
+CREATE TABLE IF NOT EXISTS `bb_forums`
+(
   `forum_id`            SMALLINT(5) UNSIGNED  NOT NULL AUTO_INCREMENT,
   `cat_id`              SMALLINT(5) UNSIGNED  NOT NULL DEFAULT '0',
   `forum_name`          VARCHAR(150)          NOT NULL DEFAULT '',
@@ -783,18 +803,20 @@ CREATE TABLE IF NOT EXISTS `bb_forums` (
 -- ----------------------------
 -- Records of bb_forums
 -- ----------------------------
-INSERT INTO `bb_forums` VALUES
-  ('1', '1', 'Ваш первый форум', 'Описание вашего первого форума.', '0', '10', '1', '1', '1', '0', '0', '0', '0', '1',
-                                                                                                        '1', '1', '1',
-                                                                                                        '3', '3', '1',
-                                                                                                        '1', '1', '1',
-   '0', '0', '0', '0', '1', '0', '0');
+INSERT INTO `bb_forums`
+VALUES ('1', '1', 'Ваш первый форум', 'Описание вашего первого форума.', '0', '10', '1', '1', '1', '0', '0', '0', '0',
+        '1',
+        '1', '1', '1',
+        '3', '3', '1',
+        '1', '1', '1',
+        '0', '0', '0', '0', '1', '0', '0');
 
 -- ----------------------------
 -- Table structure for `bb_groups`
 -- ----------------------------
 DROP TABLE IF EXISTS `bb_groups`;
-CREATE TABLE IF NOT EXISTS `bb_groups` (
+CREATE TABLE IF NOT EXISTS `bb_groups`
+(
   `group_id`          MEDIUMINT(8) NOT NULL AUTO_INCREMENT,
   `avatar_ext_id`     INT(15)      NOT NULL DEFAULT '0',
   `group_time`        INT(11)      NOT NULL DEFAULT '0',
@@ -820,7 +842,8 @@ CREATE TABLE IF NOT EXISTS `bb_groups` (
 -- Table structure for `bb_log`
 -- ----------------------------
 DROP TABLE IF EXISTS `bb_log`;
-CREATE TABLE IF NOT EXISTS `bb_log` (
+CREATE TABLE IF NOT EXISTS `bb_log`
+(
   `log_type_id`         MEDIUMINT(8) UNSIGNED NOT NULL DEFAULT '0',
   `log_user_id`         MEDIUMINT(9)          NOT NULL DEFAULT '0',
   `log_user_ip`         VARCHAR(42)           NOT NULL DEFAULT '0',
@@ -846,7 +869,8 @@ CREATE TABLE IF NOT EXISTS `bb_log` (
 -- Table structure for `bb_poll_users`
 -- ----------------------------
 DROP TABLE IF EXISTS `bb_poll_users`;
-CREATE TABLE IF NOT EXISTS `bb_poll_users` (
+CREATE TABLE IF NOT EXISTS `bb_poll_users`
+(
   `topic_id` INT(10) UNSIGNED NOT NULL,
   `user_id`  INT(11)          NOT NULL,
   `vote_ip`  VARCHAR(42)      NOT NULL DEFAULT '0',
@@ -864,7 +888,8 @@ CREATE TABLE IF NOT EXISTS `bb_poll_users` (
 -- Table structure for `bb_poll_votes`
 -- ----------------------------
 DROP TABLE IF EXISTS `bb_poll_votes`;
-CREATE TABLE IF NOT EXISTS `bb_poll_votes` (
+CREATE TABLE IF NOT EXISTS `bb_poll_votes`
+(
   `topic_id`    INT(10) UNSIGNED      NOT NULL,
   `vote_id`     TINYINT(4) UNSIGNED   NOT NULL,
   `vote_text`   VARCHAR(255)          NOT NULL,
@@ -882,7 +907,8 @@ CREATE TABLE IF NOT EXISTS `bb_poll_votes` (
 -- Table structure for `bb_posts`
 -- ----------------------------
 DROP TABLE IF EXISTS `bb_posts`;
-CREATE TABLE IF NOT EXISTS `bb_posts` (
+CREATE TABLE IF NOT EXISTS `bb_posts`
+(
   `post_id`         MEDIUMINT(8) UNSIGNED NOT NULL AUTO_INCREMENT,
   `topic_id`        MEDIUMINT(8) UNSIGNED NOT NULL DEFAULT '0',
   `forum_id`        SMALLINT(5) UNSIGNED  NOT NULL DEFAULT '0',
@@ -918,7 +944,8 @@ VALUES ('1', '1', '1', '2', UNIX_TIMESTAMP(), '0', '0', '0', '', '0', '0', '0', 
 -- Table structure for `bb_posts_html`
 -- ----------------------------
 DROP TABLE IF EXISTS `bb_posts_html`;
-CREATE TABLE IF NOT EXISTS `bb_posts_html` (
+CREATE TABLE IF NOT EXISTS `bb_posts_html`
+(
   `post_id`        MEDIUMINT(9) NOT NULL DEFAULT '0',
   `post_html_time` TIMESTAMP    NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `post_html`      MEDIUMTEXT   NOT NULL DEFAULT '',
@@ -935,7 +962,8 @@ CREATE TABLE IF NOT EXISTS `bb_posts_html` (
 -- Table structure for `bb_posts_search`
 -- ----------------------------
 DROP TABLE IF EXISTS `bb_posts_search`;
-CREATE TABLE IF NOT EXISTS `bb_posts_search` (
+CREATE TABLE IF NOT EXISTS `bb_posts_search`
+(
   `post_id`      MEDIUMINT(8) UNSIGNED NOT NULL DEFAULT '0',
   `search_words` TEXT                  NOT NULL,
   PRIMARY KEY (`post_id`),
@@ -952,7 +980,8 @@ CREATE TABLE IF NOT EXISTS `bb_posts_search` (
 -- Table structure for `bb_posts_text`
 -- ----------------------------
 DROP TABLE IF EXISTS `bb_posts_text`;
-CREATE TABLE IF NOT EXISTS `bb_posts_text` (
+CREATE TABLE IF NOT EXISTS `bb_posts_text`
+(
   `post_id`   MEDIUMINT(8) UNSIGNED NOT NULL DEFAULT '0',
   `post_text` TEXT                  NOT NULL,
   PRIMARY KEY (`post_id`)
@@ -963,14 +992,16 @@ CREATE TABLE IF NOT EXISTS `bb_posts_text` (
 -- ----------------------------
 -- Records of bb_posts_text
 -- ----------------------------
-INSERT INTO `bb_posts_text` VALUES ('1',
-                                    'Благодарим вас за установку новой версии TorrentPier Bison!\n\nЧто делать дальше? Сперва настройте ваш сайт в администраторском разделе. Измените базовые опции: заголовок сайта, число сообщений на страницу, часовой пояс, язык по-умолчанию, настройки сидбонусов, дней рождения и т.д. Создайте несколько форумов, а также не забудьте переименовать или удалить этот. Обязательно настройте возможность создания релизов в созданных вами разделах и добавьте [url=https://torrentpier.com/threads/25867/]шаблоны оформления раздач[/url] для них. Если у вас возникнут вопросы или потребность в дополнительных модификациях, [url=https://torrentpier.com/]посетите наш форум[/url].\n\nТакже напоминаем, что у проекта TorrentPier есть несколько сайтов, которые могут оказаться полезны для вас:\n[list]\n[*]Форум: https://torrentpier.com/\n[*]Демо-версия: https://demo.torrentpier.com/\n[*]Инструкция: https://docs.torrentpier.com/\n[*]Перевод на другие языки: https://crowdin.com/project/torrentpier\n[/list]\nНе забудьте добавить их себе в закладки и регулярно проверять наличие новых версий движка на нашем форуме, для своевременного обновления.\n\nНе сомневаемся, вам под силу создать самый лучший трекер. Удачи!');
+INSERT INTO `bb_posts_text`
+VALUES ('1',
+        'Благодарим вас за установку новой версии TorrentPier Bison!\n\nЧто делать дальше? Сперва настройте ваш сайт в администраторском разделе. Измените базовые опции: заголовок сайта, число сообщений на страницу, часовой пояс, язык по-умолчанию, настройки сидбонусов, дней рождения и т.д. Создайте несколько форумов, а также не забудьте переименовать или удалить этот. Обязательно настройте возможность создания релизов в созданных вами разделах и добавьте [url=https://torrentpier.com/threads/25867/]шаблоны оформления раздач[/url] для них. Если у вас возникнут вопросы или потребность в дополнительных модификациях, [url=https://torrentpier.com/]посетите наш форум[/url].\n\nТакже напоминаем, что у проекта TorrentPier есть несколько сайтов, которые могут оказаться полезны для вас:\n[list]\n[*]Форум: https://torrentpier.com/\n[*]Демо-версия: https://demo.torrentpier.com/\n[*]Инструкция: https://docs.torrentpier.com/\n[*]Перевод на другие языки: https://crowdin.com/project/torrentpier\n[/list]\nНе забудьте добавить их себе в закладки и регулярно проверять наличие новых версий движка на нашем форуме, для своевременного обновления.\n\nНе сомневаемся, вам под силу создать самый лучший трекер. Удачи!');
 
 -- ----------------------------
 -- Table structure for `bb_privmsgs`
 -- ----------------------------
 DROP TABLE IF EXISTS `bb_privmsgs`;
-CREATE TABLE IF NOT EXISTS `bb_privmsgs` (
+CREATE TABLE IF NOT EXISTS `bb_privmsgs`
+(
   `privmsgs_id`          MEDIUMINT(8) UNSIGNED NOT NULL AUTO_INCREMENT,
   `privmsgs_type`        TINYINT(4)            NOT NULL DEFAULT '0',
   `privmsgs_subject`     VARCHAR(255)          NOT NULL DEFAULT '0',
@@ -993,7 +1024,8 @@ CREATE TABLE IF NOT EXISTS `bb_privmsgs` (
 -- Table structure for `bb_privmsgs_text`
 -- ----------------------------
 DROP TABLE IF EXISTS `bb_privmsgs_text`;
-CREATE TABLE IF NOT EXISTS `bb_privmsgs_text` (
+CREATE TABLE IF NOT EXISTS `bb_privmsgs_text`
+(
   `privmsgs_text_id` MEDIUMINT(8) UNSIGNED NOT NULL DEFAULT '0',
   `privmsgs_text`    TEXT                  NOT NULL,
   PRIMARY KEY (`privmsgs_text_id`)
@@ -1009,7 +1041,8 @@ CREATE TABLE IF NOT EXISTS `bb_privmsgs_text` (
 -- Table structure for `bb_quota_limits`
 -- ----------------------------
 DROP TABLE IF EXISTS `bb_quota_limits`;
-CREATE TABLE IF NOT EXISTS `bb_quota_limits` (
+CREATE TABLE IF NOT EXISTS `bb_quota_limits`
+(
   `quota_limit_id` MEDIUMINT(8) UNSIGNED NOT NULL AUTO_INCREMENT,
   `quota_desc`     VARCHAR(20)           NOT NULL DEFAULT '',
   `quota_limit`    BIGINT(20) UNSIGNED   NOT NULL DEFAULT '0',
@@ -1021,19 +1054,21 @@ CREATE TABLE IF NOT EXISTS `bb_quota_limits` (
 -- ----------------------------
 -- Records of bb_quota_limits
 -- ----------------------------
-INSERT INTO `bb_quota_limits` VALUES ('1', 'Low', '262144');
-INSERT INTO `bb_quota_limits` VALUES ('2', 'Medium', '10485760');
-INSERT INTO `bb_quota_limits` VALUES ('3', 'High', '15728640');
+INSERT INTO `bb_quota_limits` (`quota_desc`, `quota_limit`)
+VALUES ('Low', '262144'),
+       ('Medium', '10485760'),
+       ('High', '15728640');
 
 -- ----------------------------
 -- Table structure for `bb_ranks`
 -- ----------------------------
 DROP TABLE IF EXISTS `bb_ranks`;
-CREATE TABLE IF NOT EXISTS `bb_ranks` (
-  `rank_id`      SMALLINT(5) UNSIGNED NOT NULL AUTO_INCREMENT,
-  `rank_title`   VARCHAR(50)          NOT NULL DEFAULT '',
-  `rank_image`   VARCHAR(255)         NOT NULL DEFAULT '',
-  `rank_style`   VARCHAR(255)         NOT NULL DEFAULT '',
+CREATE TABLE IF NOT EXISTS `bb_ranks`
+(
+  `rank_id`    SMALLINT(5) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `rank_title` VARCHAR(50)          NOT NULL DEFAULT '',
+  `rank_image` VARCHAR(255)         NOT NULL DEFAULT '',
+  `rank_style` VARCHAR(255)         NOT NULL DEFAULT '',
   PRIMARY KEY (`rank_id`)
 )
   ENGINE = MyISAM
@@ -1042,13 +1077,15 @@ CREATE TABLE IF NOT EXISTS `bb_ranks` (
 -- ----------------------------
 -- Records of bb_ranks
 -- ----------------------------
-INSERT INTO `bb_ranks` VALUES ('', 'Администратор', 'styles/images/ranks/admin.png', 'colorAdmin');
+INSERT INTO `bb_ranks` (`rank_title`, `rank_image`, `rank_style`)
+VALUES ('Администратор', 'styles/images/ranks/admin.png', 'colorAdmin');
 
 -- ----------------------------
 -- Table structure for `bb_search_rebuild`
 -- ----------------------------
 DROP TABLE IF EXISTS `bb_search_rebuild`;
-CREATE TABLE IF NOT EXISTS `bb_search_rebuild` (
+CREATE TABLE IF NOT EXISTS `bb_search_rebuild`
+(
   `rebuild_session_id`     MEDIUMINT(8) UNSIGNED NOT NULL AUTO_INCREMENT,
   `start_post_id`          MEDIUMINT(8) UNSIGNED NOT NULL DEFAULT '0',
   `end_post_id`            MEDIUMINT(8) UNSIGNED NOT NULL DEFAULT '0',
@@ -1073,17 +1110,18 @@ CREATE TABLE IF NOT EXISTS `bb_search_rebuild` (
 -- Table structure for `bb_search_results`
 -- ----------------------------
 DROP TABLE IF EXISTS `bb_search_results`;
-CREATE TABLE IF NOT EXISTS `bb_search_results` (
+CREATE TABLE IF NOT EXISTS `bb_search_results`
+(
   `session_id`      CHAR(20)
-                    CHARACTER SET utf8
-                    COLLATE utf8_bin NOT NULL DEFAULT '',
-  `search_type`     TINYINT(4)       NOT NULL DEFAULT '0',
+                      CHARACTER SET utf8
+                        COLLATE utf8_bin NOT NULL DEFAULT '',
+  `search_type`     TINYINT(4)           NOT NULL DEFAULT '0',
   `search_id`       VARCHAR(12)
-                    CHARACTER SET utf8
-                    COLLATE utf8_bin NOT NULL DEFAULT '',
-  `search_time`     INT(11)          NOT NULL DEFAULT '0',
-  `search_settings` TEXT             NOT NULL,
-  `search_array`    TEXT             NOT NULL,
+                      CHARACTER SET utf8
+                        COLLATE utf8_bin NOT NULL DEFAULT '',
+  `search_time`     INT(11)              NOT NULL DEFAULT '0',
+  `search_settings` TEXT                 NOT NULL,
+  `search_array`    TEXT                 NOT NULL,
   PRIMARY KEY (`session_id`, `search_type`)
 )
   ENGINE = MyISAM
@@ -1097,16 +1135,17 @@ CREATE TABLE IF NOT EXISTS `bb_search_results` (
 -- Table structure for `bb_sessions`
 -- ----------------------------
 DROP TABLE IF EXISTS `bb_sessions`;
-CREATE TABLE IF NOT EXISTS `bb_sessions` (
+CREATE TABLE IF NOT EXISTS `bb_sessions`
+(
   `session_id`        CHAR(20)
-                      CHARACTER SET utf8
-                      COLLATE utf8_bin NOT NULL DEFAULT '',
-  `session_user_id`   MEDIUMINT(8)     NOT NULL DEFAULT '0',
-  `session_start`     INT(11)          NOT NULL DEFAULT '0',
-  `session_time`      INT(11)          NOT NULL DEFAULT '0',
-  `session_ip`        VARCHAR(42)      NOT NULL DEFAULT '0',
-  `session_logged_in` TINYINT(1)       NOT NULL DEFAULT '0',
-  `session_admin`     TINYINT(2)       NOT NULL DEFAULT '0',
+                        CHARACTER SET utf8
+                          COLLATE utf8_bin NOT NULL DEFAULT '',
+  `session_user_id`   MEDIUMINT(8)         NOT NULL DEFAULT '0',
+  `session_start`     INT(11)              NOT NULL DEFAULT '0',
+  `session_time`      INT(11)              NOT NULL DEFAULT '0',
+  `session_ip`        VARCHAR(42)          NOT NULL DEFAULT '0',
+  `session_logged_in` TINYINT(1)           NOT NULL DEFAULT '0',
+  `session_admin`     TINYINT(2)           NOT NULL DEFAULT '0',
   PRIMARY KEY (`session_id`)
 )
   ENGINE = MyISAM
@@ -1120,7 +1159,8 @@ CREATE TABLE IF NOT EXISTS `bb_sessions` (
 -- Table structure for `bb_smilies`
 -- ----------------------------
 DROP TABLE IF EXISTS `bb_smilies`;
-CREATE TABLE IF NOT EXISTS `bb_smilies` (
+CREATE TABLE IF NOT EXISTS `bb_smilies`
+(
   `smilies_id` SMALLINT(5) UNSIGNED NOT NULL AUTO_INCREMENT,
   `code`       VARCHAR(50)          NOT NULL DEFAULT '',
   `smile_url`  VARCHAR(100)         NOT NULL DEFAULT '',
@@ -1133,67 +1173,69 @@ CREATE TABLE IF NOT EXISTS `bb_smilies` (
 -- ----------------------------
 -- Records of bb_smilies
 -- ----------------------------
-INSERT INTO `bb_smilies` VALUES ('', ':aa:', 'aa.gif', 'aa');
-INSERT INTO `bb_smilies` VALUES ('', ':ab:', 'ab.gif', 'ab');
-INSERT INTO `bb_smilies` VALUES ('', ':ac:', 'ac.gif', 'ac');
-INSERT INTO `bb_smilies` VALUES ('', ':ae:', 'ae.gif', 'ae');
-INSERT INTO `bb_smilies` VALUES ('', ':af:', 'af.gif', 'af');
-INSERT INTO `bb_smilies` VALUES ('', ':ag:', 'ag.gif', 'ag');
-INSERT INTO `bb_smilies` VALUES ('', ':ah:', 'ah.gif', 'ah');
-INSERT INTO `bb_smilies` VALUES ('', ':ai:', 'ai.gif', 'ai');
-INSERT INTO `bb_smilies` VALUES ('', ':aj:', 'aj.gif', 'aj');
-INSERT INTO `bb_smilies` VALUES ('', ':ak:', 'ak.gif', 'ak');
-INSERT INTO `bb_smilies` VALUES ('', ':al:', 'al.gif', 'al');
-INSERT INTO `bb_smilies` VALUES ('', ':am:', 'am.gif', 'am');
-INSERT INTO `bb_smilies` VALUES ('', ':an:', 'an.gif', 'an');
-INSERT INTO `bb_smilies` VALUES ('', ':ao:', 'ao.gif', 'ao');
-INSERT INTO `bb_smilies` VALUES ('', ':ap:', 'ap.gif', 'ap');
-INSERT INTO `bb_smilies` VALUES ('', ':aq:', 'aq.gif', 'aq');
-INSERT INTO `bb_smilies` VALUES ('', ':ar:', 'ar.gif', 'ar');
-INSERT INTO `bb_smilies` VALUES ('', ':as:', 'as.gif', 'as');
-INSERT INTO `bb_smilies` VALUES ('', ':at:', 'at.gif', 'at');
-INSERT INTO `bb_smilies` VALUES ('', ':au:', 'au.gif', 'au');
-INSERT INTO `bb_smilies` VALUES ('', ':av:', 'av.gif', 'av');
-INSERT INTO `bb_smilies` VALUES ('', ':aw:', 'aw.gif', 'aw');
-INSERT INTO `bb_smilies` VALUES ('', ':ax:', 'ax.gif', 'ax');
-INSERT INTO `bb_smilies` VALUES ('', ':ay:', 'ay.gif', 'ay');
-INSERT INTO `bb_smilies` VALUES ('', ':az:', 'az.gif', 'az');
-INSERT INTO `bb_smilies` VALUES ('', ':ba:', 'ba.gif', 'ba');
-INSERT INTO `bb_smilies` VALUES ('', ':bb:', 'bb.gif', 'bb');
-INSERT INTO `bb_smilies` VALUES ('', ':bc:', 'bc.gif', 'bc');
-INSERT INTO `bb_smilies` VALUES ('', ':bd:', 'bd.gif', 'bd');
-INSERT INTO `bb_smilies` VALUES ('', ':be:', 'be.gif', 'be');
-INSERT INTO `bb_smilies` VALUES ('', ':bf:', 'bf.gif', 'bf');
-INSERT INTO `bb_smilies` VALUES ('', ':bg:', 'bg.gif', 'bg');
-INSERT INTO `bb_smilies` VALUES ('', ':bh:', 'bh.gif', 'bh');
-INSERT INTO `bb_smilies` VALUES ('', ':bi:', 'bi.gif', 'bi');
-INSERT INTO `bb_smilies` VALUES ('', ':bj:', 'bj.gif', 'bj');
-INSERT INTO `bb_smilies` VALUES ('', ':bk:', 'bk.gif', 'bk');
-INSERT INTO `bb_smilies` VALUES ('', ':bl:', 'bl.gif', 'bl');
-INSERT INTO `bb_smilies` VALUES ('', ':bm:', 'bm.gif', 'bm');
-INSERT INTO `bb_smilies` VALUES ('', ':bn:', 'bn.gif', 'bn');
-INSERT INTO `bb_smilies` VALUES ('', ':bo:', 'bo.gif', 'bo');
-INSERT INTO `bb_smilies` VALUES ('', ':bp:', 'bp.gif', 'bp');
-INSERT INTO `bb_smilies` VALUES ('', ':bq:', 'bq.gif', 'bq');
-INSERT INTO `bb_smilies` VALUES ('', ':br:', 'br.gif', 'br');
-INSERT INTO `bb_smilies` VALUES ('', ':bs:', 'bs.gif', 'bs');
-INSERT INTO `bb_smilies` VALUES ('', ':bt:', 'bt.gif', 'bt');
-INSERT INTO `bb_smilies` VALUES ('', ':bu:', 'bu.gif', 'bu');
-INSERT INTO `bb_smilies` VALUES ('', ':bv:', 'bv.gif', 'bv');
-INSERT INTO `bb_smilies` VALUES ('', ':bw:', 'bw.gif', 'bw');
-INSERT INTO `bb_smilies` VALUES ('', ':bx:', 'bx.gif', 'bx');
-INSERT INTO `bb_smilies` VALUES ('', ':by:', 'by.gif', 'by');
-INSERT INTO `bb_smilies` VALUES ('', ':bz:', 'bz.gif', 'bz');
-INSERT INTO `bb_smilies` VALUES ('', ':ca:', 'ca.gif', 'ca');
-INSERT INTO `bb_smilies` VALUES ('', ':cb:', 'cb.gif', 'cb');
-INSERT INTO `bb_smilies` VALUES ('', ':cc:', 'cc.gif', 'cc');
-INSERT INTO `bb_smilies` VALUES ('', ':cd:', 'cd.gif', 'cd');
+INSERT INTO `bb_smilies` (`code`, `smile_url`, `emoticon`)
+VALUES (':aa:', 'aa.gif', 'aa'),
+       (':ab:', 'ab.gif', 'ab'),
+       (':ac:', 'ac.gif', 'ac'),
+       (':ae:', 'ae.gif', 'ae'),
+       (':af:', 'af.gif', 'af'),
+       (':ag:', 'ag.gif', 'ag'),
+       (':ah:', 'ah.gif', 'ah'),
+       (':ai:', 'ai.gif', 'ai'),
+       (':aj:', 'aj.gif', 'aj'),
+       (':ak:', 'ak.gif', 'ak'),
+       (':al:', 'al.gif', 'al'),
+       (':am:', 'am.gif', 'am'),
+       (':an:', 'an.gif', 'an'),
+       (':ao:', 'ao.gif', 'ao'),
+       (':ap:', 'ap.gif', 'ap'),
+       (':aq:', 'aq.gif', 'aq'),
+       (':ar:', 'ar.gif', 'ar'),
+       (':as:', 'as.gif', 'as'),
+       (':at:', 'at.gif', 'at'),
+       (':au:', 'au.gif', 'au'),
+       (':av:', 'av.gif', 'av'),
+       (':aw:', 'aw.gif', 'aw'),
+       (':ax:', 'ax.gif', 'ax'),
+       (':ay:', 'ay.gif', 'ay'),
+       (':az:', 'az.gif', 'az'),
+       (':ba:', 'ba.gif', 'ba'),
+       (':bb:', 'bb.gif', 'bb'),
+       (':bc:', 'bc.gif', 'bc'),
+       (':bd:', 'bd.gif', 'bd'),
+       (':be:', 'be.gif', 'be'),
+       (':bf:', 'bf.gif', 'bf'),
+       (':bg:', 'bg.gif', 'bg'),
+       (':bh:', 'bh.gif', 'bh'),
+       (':bi:', 'bi.gif', 'bi'),
+       (':bj:', 'bj.gif', 'bj'),
+       (':bk:', 'bk.gif', 'bk'),
+       (':bl:', 'bl.gif', 'bl'),
+       (':bm:', 'bm.gif', 'bm'),
+       (':bn:', 'bn.gif', 'bn'),
+       (':bo:', 'bo.gif', 'bo'),
+       (':bp:', 'bp.gif', 'bp'),
+       (':bq:', 'bq.gif', 'bq'),
+       (':br:', 'br.gif', 'br'),
+       (':bs:', 'bs.gif', 'bs'),
+       (':bt:', 'bt.gif', 'bt'),
+       (':bu:', 'bu.gif', 'bu'),
+       (':bv:', 'bv.gif', 'bv'),
+       (':bw:', 'bw.gif', 'bw'),
+       (':bx:', 'bx.gif', 'bx'),
+       (':by:', 'by.gif', 'by'),
+       (':bz:', 'bz.gif', 'bz'),
+       (':ca:', 'ca.gif', 'ca'),
+       (':cb:', 'cb.gif', 'cb'),
+       (':cc:', 'cc.gif', 'cc'),
+       (':cd:', 'cd.gif', 'cd');
 
 -- ----------------------------
 -- Table structure for `bb_topics`
 -- ----------------------------
 DROP TABLE IF EXISTS `bb_topics`;
-CREATE TABLE IF NOT EXISTS `bb_topics` (
+CREATE TABLE IF NOT EXISTS `bb_topics`
+(
   `topic_id`              MEDIUMINT(8) UNSIGNED NOT NULL AUTO_INCREMENT,
   `forum_id`              SMALLINT(8) UNSIGNED  NOT NULL DEFAULT '0',
   `topic_title`           VARCHAR(250)          NOT NULL DEFAULT '',
@@ -1223,15 +1265,17 @@ CREATE TABLE IF NOT EXISTS `bb_topics` (
 -- ----------------------------
 -- Records of bb_topics
 -- ----------------------------
-INSERT INTO `bb_topics` VALUES
-  ('1', '1', 'Добро пожаловать в TorrentPier Bison', '2', UNIX_TIMESTAMP(), '0', '0', '0', '0', '0', '1', '1', '0', '0',
-   '0', UNIX_TIMESTAMP(), '0');
+INSERT INTO `bb_topics`
+VALUES ('1', '1', 'Добро пожаловать в TorrentPier Bison', '2', UNIX_TIMESTAMP(), '0', '0', '0', '0', '0', '1', '1', '0',
+        '0',
+        '0', UNIX_TIMESTAMP(), '0');
 
 -- ----------------------------
 -- Table structure for `bb_topics_watch`
 -- ----------------------------
 DROP TABLE IF EXISTS `bb_topics_watch`;
-CREATE TABLE IF NOT EXISTS `bb_topics_watch` (
+CREATE TABLE IF NOT EXISTS `bb_topics_watch`
+(
   `topic_id`      MEDIUMINT(8) UNSIGNED NOT NULL DEFAULT '0',
   `user_id`       MEDIUMINT(8)          NOT NULL DEFAULT '0',
   `notify_status` TINYINT(1)            NOT NULL DEFAULT '0',
@@ -1250,7 +1294,8 @@ CREATE TABLE IF NOT EXISTS `bb_topics_watch` (
 -- Table structure for `bb_topic_tpl`
 -- ----------------------------
 DROP TABLE IF EXISTS `bb_topic_tpl`;
-CREATE TABLE IF NOT EXISTS `bb_topic_tpl` (
+CREATE TABLE IF NOT EXISTS `bb_topic_tpl`
+(
   `tpl_id`            SMALLINT(6)      NOT NULL AUTO_INCREMENT,
   `tpl_name`          VARCHAR(60)      NOT NULL DEFAULT '',
   `tpl_src_form`      TEXT             NOT NULL,
@@ -1274,13 +1319,14 @@ CREATE TABLE IF NOT EXISTS `bb_topic_tpl` (
 -- Table structure for `bb_users`
 -- ----------------------------
 DROP TABLE IF EXISTS `bb_users`;
-CREATE TABLE IF NOT EXISTS `bb_users` (
+CREATE TABLE IF NOT EXISTS `bb_users`
+(
   `user_id`             MEDIUMINT(8)          NOT NULL AUTO_INCREMENT,
   `user_active`         TINYINT(1)            NOT NULL DEFAULT '1',
   `username`            VARCHAR(25)           NOT NULL DEFAULT '',
   `user_password`       VARCHAR(32)
-                        CHARACTER SET utf8
-                        COLLATE utf8_bin      NOT NULL DEFAULT '',
+                          CHARACTER SET utf8
+                            COLLATE utf8_bin  NOT NULL DEFAULT '',
   `user_session_time`   INT(11)               NOT NULL DEFAULT '0',
   `user_lastvisit`      INT(11)               NOT NULL DEFAULT '0',
   `user_last_ip`        VARCHAR(42)           NOT NULL DEFAULT '0',
@@ -1310,8 +1356,8 @@ CREATE TABLE IF NOT EXISTS `bb_users` (
   `user_actkey`         VARCHAR(32)           NOT NULL DEFAULT '',
   `user_newpasswd`      VARCHAR(32)           NOT NULL DEFAULT '',
   `autologin_id`        VARCHAR(12)
-                        CHARACTER SET utf8
-                        COLLATE utf8_bin      NOT NULL DEFAULT '',
+                          CHARACTER SET utf8
+                            COLLATE utf8_bin  NOT NULL DEFAULT '',
   `user_newest_pm_id`   MEDIUMINT(8)          NOT NULL DEFAULT '0',
   `user_points`         FLOAT(16, 2)          NOT NULL DEFAULT '0.00',
   `tpl_name`            VARCHAR(255)          NOT NULL DEFAULT 'default',
@@ -1326,33 +1372,37 @@ CREATE TABLE IF NOT EXISTS `bb_users` (
 -- ----------------------------
 -- Records of bb_users
 -- ----------------------------
-INSERT INTO `bb_users` VALUES
-  ('-1', '0', 'Guest', 'd41d8cd98f00b204e9800998ecf8427e', '0', '0', '0', UNIX_TIMESTAMP(), '0', '0', '0', '', 'ru', '0',
-                                                                                                           '0', '0',
-                                                                                                           '0', '0',
-                                                                                                           '0', '0',
-                                                                                                           '1900-01-01',
-    '', '', '', '', '', '', '', '', '', '', '', '', '0', '0.00', 'default');
-INSERT INTO `bb_users` VALUES
-  ('-746', '0', 'bot', 'd41d8cd98f00b204e9800998ecf8427e', '0', '0', '0', UNIX_TIMESTAMP(), '0', '0', '0', '', 'ru', '0',
-                                                                                                           '0', '0',
-                                                                                                           '144', '0',
-                                                                                                           '0', '0',
-                                                                                                           '1900-01-01',
-    'bot@torrentpier.com', '', '', '', '', '', '', '', '', '', '', '', '0', '0.00', 'default');
-INSERT INTO `bb_users` VALUES
-  ('2', '1', 'admin', 'c3284d0f94606de1fd2af172aba15bf3', '0', '0', '0', UNIX_TIMESTAMP(), '0', '1', '1', '', 'ru', '0',
-                                                                                                          '0', '0',
-                                                                                                          '304', '1',
-                                                                                                          '0', '0',
-                                                                                                          '1900-01-01',
-    'admin@torrentpier.com', '', '', '', '', '', '', '', '', '', '', '', '0', '0.00', 'default');
+INSERT INTO `bb_users`
+VALUES ('-1', '0', 'Guest', 'd41d8cd98f00b204e9800998ecf8427e', '0', '0', '0', UNIX_TIMESTAMP(), '0', '0', '0', '',
+        'ru', '0',
+        '0', '0',
+        '0', '0',
+        '0', '0',
+        '1900-01-01',
+        '', '', '', '', '', '', '', '', '', '', '', '', '0', '0.00', 'default');
+INSERT INTO `bb_users`
+VALUES ('-746', '0', 'bot', 'd41d8cd98f00b204e9800998ecf8427e', '0', '0', '0', UNIX_TIMESTAMP(), '0', '0', '0', '',
+        'ru', '0',
+        '0', '0',
+        '144', '0',
+        '0', '0',
+        '1900-01-01',
+        'bot@torrentpier.com', '', '', '', '', '', '', '', '', '', '', '', '0', '0.00', 'default');
+INSERT INTO `bb_users`
+VALUES ('2', '1', 'admin', 'c3284d0f94606de1fd2af172aba15bf3', '0', '0', '0', UNIX_TIMESTAMP(), '0', '1', '1', '', 'ru',
+        '0',
+        '0', '0',
+        '304', '1',
+        '0', '0',
+        '1900-01-01',
+        'admin@torrentpier.com', '', '', '', '', '', '', '', '', '', '', '', '0', '0.00', 'default');
 
 -- ----------------------------
 -- Table structure for `bb_user_group`
 -- ----------------------------
 DROP TABLE IF EXISTS `bb_user_group`;
-CREATE TABLE IF NOT EXISTS `bb_user_group` (
+CREATE TABLE IF NOT EXISTS `bb_user_group`
+(
   `group_id`     MEDIUMINT(8) NOT NULL DEFAULT '0',
   `user_id`      MEDIUMINT(8) NOT NULL DEFAULT '0',
   `user_pending` TINYINT(1)   NOT NULL DEFAULT '0',
@@ -1371,7 +1421,8 @@ CREATE TABLE IF NOT EXISTS `bb_user_group` (
 -- Table structure for `bb_words`
 -- ----------------------------
 DROP TABLE IF EXISTS `bb_words`;
-CREATE TABLE IF NOT EXISTS `bb_words` (
+CREATE TABLE IF NOT EXISTS `bb_words`
+(
   `word_id`     MEDIUMINT(8) UNSIGNED NOT NULL AUTO_INCREMENT,
   `word`        CHAR(100)             NOT NULL DEFAULT '',
   `replacement` CHAR(100)             NOT NULL DEFAULT '',
@@ -1388,7 +1439,8 @@ CREATE TABLE IF NOT EXISTS `bb_words` (
 -- Table structure for `buf_last_seeder`
 -- ----------------------------
 DROP TABLE IF EXISTS `buf_last_seeder`;
-CREATE TABLE IF NOT EXISTS `buf_last_seeder` (
+CREATE TABLE IF NOT EXISTS `buf_last_seeder`
+(
   `topic_id`         MEDIUMINT(8) UNSIGNED NOT NULL DEFAULT '0',
   `seeder_last_seen` INT(11)               NOT NULL DEFAULT '0',
   PRIMARY KEY (`topic_id`)
@@ -1404,7 +1456,8 @@ CREATE TABLE IF NOT EXISTS `buf_last_seeder` (
 -- Table structure for `buf_topic_view`
 -- ----------------------------
 DROP TABLE IF EXISTS `buf_topic_view`;
-CREATE TABLE IF NOT EXISTS `buf_topic_view` (
+CREATE TABLE IF NOT EXISTS `buf_topic_view`
+(
   `topic_id`    MEDIUMINT(8) UNSIGNED NOT NULL DEFAULT '0',
   `topic_views` MEDIUMINT(8) UNSIGNED NOT NULL DEFAULT '0',
   PRIMARY KEY (`topic_id`)
