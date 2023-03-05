@@ -11,12 +11,12 @@ if (!defined('BB_ROOT')) {
     die(basename(__FILE__));
 }
 
-// Ratio limits
-define('TR_RATING_LIMITS', true);        // ON/OFF
-define('MIN_DL_FOR_RATIO', 10737418240); // 10 GB in bytes, 0 - disable
+// Root path
+$rootPath = __DIR__;
+if (DIRECTORY_SEPARATOR != '/') $rootPath = str_replace(DIRECTORY_SEPARATOR, '/', $rootPath);
+define('BB_PATH', dirname($rootPath));
 
 // Path (trailing slash '/' at the end: XX_PATH - without, XX_DIR - with)
-define('BB_PATH', dirname(__DIR__));
 define('ADMIN_DIR', BB_PATH . '/admin');
 define('DATA_DIR', BB_PATH . '/data');
 define('INT_DATA_DIR', BB_PATH . '/internal_data');
@@ -105,3 +105,7 @@ define('CRON_LOG_FILE', 'cron'); // without ext
 // Session variables
 define('ONLY_NEW_POSTS', 1);
 define('ONLY_NEW_TOPICS', 2);
+
+// Ratio limits
+define('TR_RATING_LIMITS', true);        // ON/OFF
+define('MIN_DL_FOR_RATIO', 10737418240); // 10 GB in bytes, 0 - disable
