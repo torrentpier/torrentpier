@@ -617,10 +617,8 @@ INSERT INTO `bb_cron` (`cron_active`, `cron_title`, `cron_script`, `schedule`, `
                        `disable_board`, `run_counter`)
 VALUES ('1', 'Attach maintenance', 'attach_maintenance.php', 'daily', '', '05:00:00', '40', '', '', '', '1', '', '0',
         '1', '0'),
-
        ('1', 'Board maintenance', 'board_maintenance.php', 'daily', '', '05:00:00', '40', '', '', '', '1', '', '0', '1',
         '0'),
-
        ('1', 'Prune forums', 'prune_forums.php', 'daily', '', '05:00:00', '50', '', '', '', '1', '', '0', '1', '0'),
        ('1', 'Prune topic moved stubs', 'prune_topic_moved.php', 'daily', '', '05:00:00', '60', '', '', '', '1', '',
         '0',
@@ -1379,17 +1377,15 @@ VALUES ('-1', '0', 'Guest', 'd41d8cd98f00b204e9800998ecf8427e', '0', '0', '0', U
         '0', '0',
         '0', '0',
         '1900-01-01',
-        '', '', '', '', '', '', '', '', '', '', '', '', '0', '0.00', 'default');
-INSERT INTO `bb_users`
-VALUES ('-746', '0', 'bot', 'd41d8cd98f00b204e9800998ecf8427e', '0', '0', '0', UNIX_TIMESTAMP(), '0', '0', '0', '',
+        '', '', '', '', '', '', '', '', '', '', '', '', '0', '0.00', 'default'),
+       ('-746', '0', 'bot', 'd41d8cd98f00b204e9800998ecf8427e', '0', '0', '0', UNIX_TIMESTAMP(), '0', '0', '0', '',
         'ru', '0',
         '0', '0',
         '144', '0',
         '0', '0',
         '1900-01-01',
-        'bot@torrentpier.com', '', '', '', '', '', '', '', '', '', '', '', '0', '0.00', 'default');
-INSERT INTO `bb_users`
-VALUES ('2', '1', 'admin', 'c3284d0f94606de1fd2af172aba15bf3', '0', '0', '0', UNIX_TIMESTAMP(), '0', '1', '1', '', 'ru',
+        'bot@torrentpier.com', '', '', '', '', '', '', '', '', '', '', '', '0', '0.00', 'default'),
+       ('2', '1', 'admin', 'c3284d0f94606de1fd2af172aba15bf3', '0', '0', '0', UNIX_TIMESTAMP(), '0', '1', '1', '', 'ru',
         '0',
         '0', '0',
         '304', '1',
