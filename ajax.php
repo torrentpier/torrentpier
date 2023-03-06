@@ -13,20 +13,10 @@ define('IN_AJAX', true);
 require __DIR__ . '/common.php';
 
 $ajax = new TorrentPier\Legacy\Ajax();
-
 $ajax->init();
 
 // Init userdata
 $user->session_start();
-
-// Exit if board is disabled via ON/OFF trigger or by admin
-if ($ajax->action != 'manage_admin') {
-    if ($bb_cfg['board_disable']) {
-        $ajax->ajax_die($lang['BOARD_DISABLE']);
-    } elseif (file_exists(BB_DISABLED)) {
-        $ajax->ajax_die($lang['BOARD_DISABLE_CRON']);
-    }
-}
 
 // Load actions required modules
 switch ($ajax->action) {
@@ -44,9 +34,6 @@ switch ($ajax->action) {
         require ATTACH_DIR . '/attachment_mod.php';
         break;
 }
-
-// Position in $ajax->valid_actions['xxx']
-define('AJAX_AUTH', 0); // 'guest', 'user', 'mod', 'admin', 'super_admin'
 
 $ajax->exec();
 
