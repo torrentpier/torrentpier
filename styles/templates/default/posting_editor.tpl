@@ -51,6 +51,8 @@ ajax.callback.posts = function(data) {
 	<option value="20">&nbsp;size=20</option>
 	<option value="22">&nbsp;size=22</option>
 	<option value="24" class="em">{L_FONT_HUGE}</option>
+  <option value="26">&nbsp;size=26</option>
+  <option value="28">&nbsp;size=28</option>
 </select>
 &nbsp;
 <select name="codeAlign" class="text_size">
