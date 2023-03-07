@@ -50,7 +50,7 @@ class Common
     ];
 
     /**
-     * @param  array (item1_title, item2_title...) or single item's title
+     * @param array (item1_title, item2_title...) or single item's title
      */
     public function enqueue($items)
     {
