@@ -198,6 +198,11 @@ switch ($bb_cfg['datastore_type']) {
         $datastore = new TorrentPier\Legacy\Datastore\File($bb_cfg['cache']['db_dir'] . 'datastore/', $bb_cfg['cache']['prefix']);
 }
 
+function is_ajax(): bool
+{
+    return (!empty($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) == 'xmlhttprequest');
+}
+
 function sql_dbg_enabled()
 {
     return (SQL_DEBUG && DBG_USER && !empty($_COOKIE['sql_log']));
