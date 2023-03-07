@@ -53,8 +53,8 @@ require_once __DIR__ . '/vendor/autoload.php';
 /**
  * Gets the value of an environment variable. Supports boolean, empty and null.
  *
- * @param  string $key
- * @param  mixed $default
+ * @param string $key
+ * @param mixed $default
  * @return mixed
  */
 function env($key, $default = null)
@@ -79,7 +79,7 @@ function env($key, $default = null)
 /**
  * Return the default value of the given value.
  *
- * @param  mixed $value
+ * @param mixed $value
  * @return mixed
  */
 function value($value)

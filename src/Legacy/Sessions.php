@@ -146,13 +146,13 @@ class Sessions
 
     /**
      * Start user session on page header
-     * @deprecated
-     *
      * @param string $user_ip
      * @param int $page_id
      * @param bool $req_login
      *
      * @return array
+     * @deprecated
+     *
      */
     public static function session_pagestart($user_ip = USER_IP, $page_id = 0, $req_login = false)
     {

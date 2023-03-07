@@ -201,7 +201,7 @@ if ($paginationusername) {
 }
 if ($mode != 'topten' || $bb_cfg['topics_per_page'] < 10) {
     $sql = "SELECT COUNT(*) AS total FROM " . BB_USERS;
-    $sql .= ($letter_sql) ? " WHERE $letter_sql" : " WHERE user_id NOT IN(". EXCLUDED_USERS .")";
+    $sql .= ($letter_sql) ? " WHERE $letter_sql" : " WHERE user_id NOT IN(" . EXCLUDED_USERS . ")";
     if (!$result = DB()->sql_query($sql)) {
         bb_die('Error getting total users');
     }

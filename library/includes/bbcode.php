@@ -185,7 +185,7 @@ function generate_smilies($mode)
 /**
  * Strips away [quote] tags and their contents from the specified string
  *
- * @param    string    Text to be stripped of quote tags
+ * @param string    Text to be stripped of quote tags
  *
  * @return    string
  */
@@ -270,9 +270,9 @@ function strip_quotes($text)
 /**
  * Strips away bbcode from a given string, leaving plain text
  *
- * @param    string    Text to be stripped of bbcode tags
- * @param    boolean    If true, strip away quote tags AND their contents
- * @param    boolean    If true, use the fast-and-dirty method rather than the shiny and nice method
+ * @param string    Text to be stripped of bbcode tags
+ * @param boolean    If true, strip away quote tags AND their contents
+ * @param boolean    If true, use the fast-and-dirty method rather than the shiny and nice method
  *
  * @return    string
  */
