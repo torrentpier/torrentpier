@@ -19,13 +19,13 @@ class Ajax
     public $response = [];
 
     public $valid_actions = [
-        // ACTION NAME         AJAX_AUTH
+        // ACTION NAME => [AJAX_AUTH, IN_ADMIN_CP (optional)]
         'edit_user_profile' => ['admin'],
         'change_user_rank' => ['admin'],
         'change_user_opt' => ['admin'],
         'manage_user' => ['admin'],
-        'manage_admin' => ['admin'],
-        'sitemap' => ['admin'],
+        'manage_admin' => ['admin', true],
+        'sitemap' => ['admin', true],
 
         'mod_action' => ['mod'],
         'topic_tpl' => ['mod'],
@@ -61,7 +61,7 @@ class Ajax
      */
     public function exec()
     {
-        global $lang;
+        global $lang, $bb_cfg;
 
         // Exit if we already have errors
         if (!empty($this->response['error_code'])) {
@@ -71,14 +71,26 @@ class Ajax
         // Check that requested action is valid
         $action = $this->action;
 
+        // Action params
+        $action_params = null;
+
         if (!$action || !\is_string($action)) {
             $this->ajax_die('no action specified');
         } elseif (!$action_params =& $this->valid_actions[$action]) {
             $this->ajax_die('invalid action: ' . $action);
         }
 
+        // Exit if board is disabled via ON/OFF trigger or by admin
+        if ($action_params[1] !== true) {
+            if ($bb_cfg['board_disable']) {
+                $this->ajax_die($lang['BOARD_DISABLE']);
+            } elseif (file_exists(BB_DISABLED)) {
+                $this->ajax_die($lang['BOARD_DISABLE_CRON']);
+            }
+        }
+
         // Auth check
-        switch ($action_params[AJAX_AUTH]) {
+        switch ($action_params[0]) {
             // GUEST
             case 'guest':
                 break;
