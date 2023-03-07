@@ -26,10 +26,10 @@ $poll = new TorrentPier\Legacy\Poll();
 
 // проверка валидности $topic_id
 if (!$topic_id) {
-    bb_die('Invalid topic_id');
+    bb_die($lang['INVALID_TOPIC_ID']);
 }
 if (!$t_data = DB()->fetch_row("SELECT * FROM " . BB_TOPICS . " WHERE topic_id = $topic_id LIMIT 1")) {
-    bb_die('Topic not found');
+    bb_die($lang['INVALID_TOPIC_ID_DB']);
 }
 
 // проверка прав
