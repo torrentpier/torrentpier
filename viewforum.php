@@ -370,7 +370,7 @@ if ($forum_data['allow_reg_tracker']) {
 $template->assign_vars(array(
     'U_POST_NEW_TOPIC' => $post_new_topic_url,
     'S_SELECT_TOPIC_DAYS' => build_select('topicdays', array_flip($sel_previous_days), $topic_days),
-    'S_POST_DAYS_ACTION' => "viewforum.php?f=$forum_id&amp;start=$start",
+    'S_POST_DAYS_ACTION' => FORUM_URL . "$forum_id&amp;start=$start",
     'S_DISPLAY_ORDER' => $s_display_order,
 ));
 
