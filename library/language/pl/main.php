@@ -1,26 +1,10 @@
 <?php
 /**
- * MIT License
+ * TorrentPier – Bull-powered BitTorrent tracker engine
  *
- * Copyright (c) 2005-2017 TorrentPier
- *
- * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to deal
- * in the Software without restriction, including without limitation the rights
- * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following conditions:
- *
- * The above copyright notice and this permission notice shall be included in all
- * copies or substantial portions of the Software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
- * SOFTWARE.
+ * @copyright Copyright (c) 2005-2023 TorrentPier (https://torrentpier.com)
+ * @link      https://github.com/torrentpier/torrentpier for the canonical source repository
+ * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
  */
 
 // Common, these terms are used extensively on several pages
@@ -343,6 +327,8 @@ $lang['POST_ANNOUNCEMENT'] = 'Ogłoszenie';
 $lang['POST_STICKY'] = 'Lepki';
 $lang['POST_NORMAL'] = 'Normalny';
 $lang['POST_DOWNLOAD'] = 'Pobierz';
+
+$lang['PRINT_PAGE'] = 'Print page';
 
 $lang['CONFIRM_DELETE'] = 'Jesteś pewien, że chcesz usunąć ten post?';
 $lang['CONFIRM_DELETE_POLL'] = 'Jesteś pewien, że chcesz usunąć ten sondaż?';
@@ -1135,10 +1121,13 @@ $lang['STATUS_DOES_EXIST'] = 'Takiego statusu nie istnieje: ';
 
 // tor_comment
 $lang['TOR_MOD_TITLE'] = 'Zmiana statusu rozdania - %s';
-$lang['TOR_MOD_MSG'] = "Witam, %s.\\stan p\n [URL=%s]rozkład your[/url] zmienia się na [b]%s[/b]";
+$lang['TOR_MOD_MSG'] = "Witam, %s.\\stan p
+ [URL=%s]rozkład your[/url] zmienia się na [b]%s[/b]";
 
 $lang['TOR_AUTH_TITLE'] = 'Zmiany w projekcie - %s';
-$lang['TOR_AUTH_MSG'] = "Witam, %s.\n\n sprawia, że moje rozdanie zmianie - z [URL=%s]%s[/url]\\N\\N proszę, sprawdź go.";
+$lang['TOR_AUTH_MSG'] = "Witam, %s.
+
+ sprawia, że moje rozdanie zmianie - z [URL=%s]%s[/url]\\N\\N proszę, sprawdź go.";
 $lang['TOR_AUTH_FIXED'] = 'Poprawiono';
 $lang['TOR_AUTH_SENT_COMMENT'] = ' &middot; <span class="seed bold">The informacje wysłana moderatorowi. Się spodziewać.</span>';
 
@@ -2702,7 +2691,8 @@ $lang['MC_TITLE'] = 'Komentarz Do Moderacji';
 $lang['MC_LEGEND'] = 'Wpisz komentarz';
 $lang['MC_FAQ'] = 'Wpisany tekst będzie wyświetlany pod tym komunikatem';
 $lang['MC_COMMENT_PM_SUBJECT'] = "%s w swoim komunikacie";
-$lang['MC_COMMENT_PM_MSG'] = "Witam,\\[b]%s[/b] nModerator zostawił w swoim komunikacie z [URL=%s]\\[b]%s[/b][/url][quote]\n%s n[/quote]";
+$lang['MC_COMMENT_PM_MSG'] = "Witam,\\[b]%s[/b] nModerator zostawił w swoim komunikacie z [URL=%s]\\[b]%s[/b][/url][quote]
+%s n[/quote]";
 $lang['MC_COMMENT'] = array(
     0 => array(
         'title' => '',
