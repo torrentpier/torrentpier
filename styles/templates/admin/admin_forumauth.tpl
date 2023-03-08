@@ -32,7 +32,7 @@
 <!-- IF TPL_EDIT_FORUM_AUTH -->
 <!--========================================================================-->
 
-<h2>{L_FORUM}: {FORUM_NAME}</h2>
+<h2>{L_FORUM}: <a href="{U_VIEWFORUM}">{FORUM_NAME}</a></h2>
 
 <form method="post" action="{S_FORUMAUTH_ACTION}">
 {S_HIDDEN_FIELDS}
