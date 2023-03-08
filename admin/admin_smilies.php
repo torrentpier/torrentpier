@@ -229,7 +229,7 @@ if (isset($_GET['import_pack']) || isset($_POST['import_pack'])) {
         case 'save':
             $smile_code = isset($_POST['smile_code']) ? trim($_POST['smile_code']) : trim($_GET['smile_code']);
             $smile_url = isset($_POST['smile_url']) ? trim($_POST['smile_url']) : trim($_GET['smile_url']);
-            $smile_url = ltrim(basename($smile_url), "'");
+            $smile_url = bb_ltrim(basename($smile_url), "'");
             $smile_emotion = isset($_POST['smile_emotion']) ? trim($_POST['smile_emotion']) : trim($_GET['smile_emotion']);
             $smile_id = isset($_POST['smile_id']) ? (int)$_POST['smile_id'] : (int)$_GET['smile_id'];
 
@@ -256,7 +256,7 @@ if (isset($_GET['import_pack']) || isset($_POST['import_pack'])) {
         case 'savenew':
             $smile_code = $_POST['smile_code'] ?? $_GET['smile_code'];
             $smile_url = $_POST['smile_url'] ?? $_GET['smile_url'];
-            $smile_url = ltrim(basename($smile_url), "'");
+            $smile_url = bb_ltrim(basename($smile_url), "'");
             $smile_emotion = $_POST['smile_emotion'] ?? $_GET['smile_emotion'];
             $smile_code = trim($smile_code);
             $smile_url = trim($smile_url);
