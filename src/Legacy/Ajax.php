@@ -74,6 +74,10 @@ class Ajax
         // Action params
         $action_params = null;
 
+        if (!is_ajax()) {
+            $this->ajax_die('Not AJAX request', E_AJAX_NOT_REQUEST);
+        }
+
         if (!$action || !\is_string($action)) {
             $this->ajax_die('no action specified');
         } elseif (!$action_params =& $this->valid_actions[$action]) {
