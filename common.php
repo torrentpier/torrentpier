@@ -344,13 +344,19 @@ function str_compact($str)
     return preg_replace('#\s+#u', ' ', trim($str));
 }
 
-function make_rand_str($len = 10)
+/**
+ * Generate a "random" alphanumeric string.
+ *
+ * Should not be considered sufficient for cryptography, etc.
+ *
+ * @param int|string $length
+ * @return string
+ */
+function make_rand_str($length = 10): string
 {
-    $str = '';
-    while (strlen($str) < $len) {
-        $str .= str_shuffle(preg_replace('#[^0-9a-zA-Z]#', '', password_hash(uniqid(mt_rand(), true), PASSWORD_BCRYPT)));
-    }
-    return substr($str, 0, $len);
+    $pool = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+
+    return substr(str_shuffle(str_repeat($pool, (int)$length)), 0, $length);
 }
 
 function array_deep(&$var, $fn, $one_dimensional = false, $array_only = false)
