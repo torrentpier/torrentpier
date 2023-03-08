@@ -109,7 +109,7 @@ if ($submit && $mode == 'user') {
     //
     $auth = array();
 
-    if (is_array($_POST['auth'])) {
+    if (!empty($_POST['auth']) && is_array($_POST['auth'])) {
         array_deep($_POST['auth'], 'intval');
 
         foreach ($_POST['auth'] as $f_id => $bf_ary) {
@@ -133,7 +133,7 @@ if ($submit && $mode == 'user') {
 //
 // Submit new GROUP permissions
 //
-elseif ($submit && $mode == 'group' && is_array($_POST['auth'])) {
+elseif ($submit && $mode == 'group' && (!empty($_POST['auth']) && is_array($_POST['auth']))) {
     if (!$group_data = \TorrentPier\Legacy\Group::get_group_data($group_id)) {
         bb_die($lang['GROUP_NOT_EXIST']);
     }
@@ -279,7 +279,7 @@ if ($mode == 'user' && (!empty($_POST['username']) || $user_id)) {
 
     $template->assign_vars(array(
         'TPL_AUTH_UG_MAIN' => true,
-        'USER_OR_GROUPNAME' => $this_userdata['username'],
+        'USER_OR_GROUPNAME' => profile_url($this_userdata),
         'USER_LEVEL' => $lang['USER_LEVEL'] . ' : ' . $s_user_type,
         'T_USER_OR_GROUPNAME' => $lang['USERNAME'],
         'T_AUTH_TITLE' => $lang['AUTH_CONTROL_USER'],
@@ -384,7 +384,7 @@ if ($mode == 'user' && (!empty($_POST['username']) || $user_id)) {
         'USER_LEVEL' => false,
         'T_AUTH_TITLE' => $lang['AUTH_CONTROL_GROUP'],
         'T_AUTH_EXPLAIN' => $lang['GROUP_AUTH_EXPLAIN'],
-        'USER_OR_GROUPNAME' => htmlCHR($group_data['group_name']),
+        'USER_OR_GROUPNAME' => ('<span class="gen">' . htmlCHR($group_data['group_name']) . '</span>'),
         'S_COLUMN_SPAN' => $s_column_span,
         'S_HIDDEN_FIELDS' => $s_hidden_fields,
     ));
