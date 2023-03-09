@@ -328,7 +328,7 @@ $lang['POST_STICKY'] = 'Ljepljive';
 $lang['POST_NORMAL'] = 'Normalan';
 $lang['POST_DOWNLOAD'] = 'Preuzimanje';
 
-$lang['PRINT_PAGE'] = 'Print page';
+$lang['PRINT_PAGE'] = 'Odštampaj stranicu';
 
 $lang['CONFIRM_DELETE'] = 'Jesi li sigurna da želiš da izbrisati ovo mjesto?';
 $lang['CONFIRM_DELETE_POLL'] = 'Jesi li sigurna da želiš da izbrišete ovu anketu?';
