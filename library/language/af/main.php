@@ -328,7 +328,7 @@ $lang['POST_STICKY'] = 'Sticky';
 $lang['POST_NORMAL'] = 'Normaal';
 $lang['POST_DOWNLOAD'] = 'Aflaai';
 
-$lang['PRINT_PAGE'] = 'Print page';
+$lang['PRINT_PAGE'] = 'Druk bladsy';
 
 $lang['CONFIRM_DELETE'] = 'Is jy seker jy wil hierdie plasing uitvee?';
 $lang['CONFIRM_DELETE_POLL'] = 'Is jy seker jy wil hierdie poll uitvee?';
