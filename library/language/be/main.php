@@ -328,7 +328,7 @@ $lang['POST_STICKY'] = 'Ліпкі';
 $lang['POST_NORMAL'] = 'Нармальны';
 $lang['POST_DOWNLOAD'] = 'Спампаваць';
 
-$lang['PRINT_PAGE'] = 'Print page';
+$lang['PRINT_PAGE'] = 'Раздрукаваць старонку';
 
 $lang['CONFIRM_DELETE'] = 'Вы ўпэўненыя, што хочаце выдаліць гэты пост?';
 $lang['CONFIRM_DELETE_POLL'] = 'Вы ўпэўненыя, што жадаеце выдаліць гэтае апытанне?';
