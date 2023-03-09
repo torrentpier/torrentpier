@@ -328,7 +328,7 @@ $lang['POST_STICKY'] = 'yopishqoq';
 $lang['POST_NORMAL'] = 'oddiy';
 $lang['POST_DOWNLOAD'] = 'Yuklash';
 
-$lang['PRINT_PAGE'] = 'Print page';
+$lang['PRINT_PAGE'] = 'Sahifani chop etish';
 
 $lang['CONFIRM_DELETE'] = 'Agar bu post o\'chirishni istaysizmi?';
 $lang['CONFIRM_DELETE_POLL'] = 'Agar bu so\'rovnomada o\'chirishni istaysizmi?';
