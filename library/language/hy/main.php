@@ -328,7 +328,7 @@ $lang['POST_STICKY'] = 'Կպչուն';
 $lang['POST_NORMAL'] = 'Նորմալ է';
 $lang['POST_DOWNLOAD'] = 'Ներբեռնել';
 
-$lang['PRINT_PAGE'] = 'Print page';
+$lang['PRINT_PAGE'] = 'Տպել էջը';
 
 $lang['CONFIRM_DELETE'] = 'Դուք համոզված եք, որ ցանկանում եք ջնջել այս գրառումը?';
 $lang['CONFIRM_DELETE_POLL'] = 'Դուք համոզված եք, որ ցանկանում եք հեռացնել այս հարցում?';
