@@ -1933,12 +1933,12 @@ function profile_url($data)
     return $profile;
 }
 
-function get_avatar($user_id, $ext_id, $allow_avatar = true, $size = true, $height = '', $width = '')
+function get_avatar($user_id, $ext_id, $allow_avatar = true, $height = 100, $width = 100)
 {
     global $bb_cfg;
 
-    $height = !$height ? 'height="' . $height . '"' : '';
-    $width = !$width ? 'width="' . $width . '"' : '';
+    $height = $height ? 'height="' . $height . '"' : '';
+    $width = $width ? 'width="' . $width . '"' : '';
 
     $user_avatar = '<img src="' . make_url($bb_cfg['avatars']['display_path'] . $bb_cfg['avatars']['no_avatar']) . '" alt="' . $user_id . '" ' . $height . ' ' . $width . ' />';
 
