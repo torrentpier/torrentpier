@@ -26,7 +26,7 @@ function generate_user_info(&$row, $date_format, $group_mod, &$from, &$posts, &$
     $user_time = (!empty($row['user_time'])) ? bb_date($row['user_time']) : $lang['NONE'];
     $posts = $row['user_posts'] ?: 0;
     $pm = $bb_cfg['text_buttons'] ? '<a class="txtb" href="' . (PM_URL . "?mode=post&amp;" . POST_USERS_URL . "=" . $row['user_id']) . '">' . $lang['SEND_PM_TXTB'] . '</a>' : '<a href="' . (PM_URL . "?mode=post&amp;" . POST_USERS_URL . "=" . $row['user_id']) . '"><img src="' . $images['icon_pm'] . '" alt="' . $lang['SEND_PRIVATE_MESSAGE'] . '" title="' . $lang['SEND_PRIVATE_MESSAGE'] . '" border="0" /></a>';
-    $avatar = get_avatar($row['user_id'], $row['avatar_ext_id'], !bf($row['user_opt'], 'user_opt', 'dis_avatar'), '', 50, 50);
+    $avatar = get_avatar($row['user_id'], $row['avatar_ext_id'], !bf($row['user_opt'], 'user_opt', 'dis_avatar'), 50, 50);
 
     if (bf($row['user_opt'], 'user_opt', 'user_viewemail') || $group_mod) {
         $email_uri = ($bb_cfg['board_email_form']) ? ("profile.php?mode=email&amp;" . POST_USERS_URL . "=" . $row['user_id']) : 'mailto:' . $row['user_email'];
@@ -391,7 +391,7 @@ if (!$group_id) {
         'GROUP_NAME' => htmlCHR($group_info['group_name']),
         'GROUP_DESCRIPTION' => bbcode2html($group_info['group_description']),
         'GROUP_SIGNATURE' => bbcode2html($group_info['group_signature']),
-        'GROUP_AVATAR' => get_avatar(GROUP_AVATAR_MASK . $group_id, $group_info['avatar_ext_id'], true),
+        'GROUP_AVATAR' => get_avatar(GROUP_AVATAR_MASK . $group_id, $group_info['avatar_ext_id']),
         'GROUP_DETAILS' => $group_details,
         'GROUP_TIME' => (!empty($group_info['group_time'])) ? sprintf('%s <span class="posted_since">(%s)</span>', bb_date($group_info['group_time']), delta_time($group_info['group_time'])) : $lang['NONE'],
         'MOD_USER' => profile_url($group_moderator),
@@ -471,7 +471,7 @@ if (!$group_id) {
                     'ROW_NUMBER' => $i + ($start + 1),
                     'ROW_CLASS' => $row_class,
                     'RELEASER' => profile_url(array('user_id' => $release['poster_id'], 'username' => $release['username'], 'user_rank' => $release['user_rank'])),
-                    'AVATAR_IMG' => get_avatar($release['poster_id'], $release['avatar_ext_id'], !bf($release['user_opt'], 'user_opt', 'dis_avatar'), '', 50, 50),
+                    'AVATAR_IMG' => get_avatar($release['poster_id'], $release['avatar_ext_id'], !bf($release['user_opt'], 'user_opt', 'dis_avatar'), 50, 50),
                     'RELEASE_NAME' => sprintf('<a href="%s">%s</a>', TOPIC_URL . $release['topic_id'], htmlCHR($release['topic_title'])),
                     'RELEASE_TIME' => bb_date($release['topic_time']),
                     'RELEASE_FORUM' => sprintf('<a href="%s">%s</a>', FORUM_URL . $release['forum_id'], htmlCHR($release['forum_name'])),
