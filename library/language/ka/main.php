@@ -328,7 +328,7 @@ $lang['POST_STICKY'] = 'Sticky';
 $lang['POST_NORMAL'] = 'ნორმალური';
 $lang['POST_DOWNLOAD'] = 'უფასო';
 
-$lang['PRINT_PAGE'] = 'Print page';
+$lang['PRINT_PAGE'] = 'გვერდის დაბეჭდვა';
 
 $lang['CONFIRM_DELETE'] = 'დარწმუნებული ხართ, რომ გსურთ წაშალოთ ეს პოსტი?';
 $lang['CONFIRM_DELETE_POLL'] = 'დარწმუნებული ხართ, რომ გსურთ წაშალოთ ეს გამოკითხვა?';
