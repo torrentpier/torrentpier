@@ -328,7 +328,7 @@ $lang['POST_STICKY'] = 'Kleepuv';
 $lang['POST_NORMAL'] = 'Tavaline';
 $lang['POST_DOWNLOAD'] = 'Lae alla';
 
-$lang['PRINT_PAGE'] = 'Print page';
+$lang['PRINT_PAGE'] = 'Prindi leht';
 
 $lang['CONFIRM_DELETE'] = 'Oled sa kindel, et tahad kustutada seda posti?';
 $lang['CONFIRM_DELETE_POLL'] = 'Oled sa kindel, et tahad kustutada seda küsitlust?';
