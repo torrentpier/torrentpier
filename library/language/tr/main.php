@@ -328,7 +328,7 @@ $lang['POST_STICKY'] = 'Yapışkan';
 $lang['POST_NORMAL'] = 'Normal';
 $lang['POST_DOWNLOAD'] = 'İndir';
 
-$lang['PRINT_PAGE'] = 'Print page';
+$lang['PRINT_PAGE'] = 'Sayfayı yazdır';
 
 $lang['CONFIRM_DELETE'] = 'Bu yazı silmek istediğinizden emin misiniz?';
 $lang['CONFIRM_DELETE_POLL'] = 'Bu anketi silmek istediğinize emin misiniz?';
