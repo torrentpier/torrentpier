@@ -328,7 +328,7 @@ $lang['POST_STICKY'] = 'Sticky';
 $lang['POST_NORMAL'] = 'Normálna';
 $lang['POST_DOWNLOAD'] = 'Stiahnuť';
 
-$lang['PRINT_PAGE'] = 'Print page';
+$lang['PRINT_PAGE'] = 'Tlač stránky';
 
 $lang['CONFIRM_DELETE'] = 'Ste si istý, že chcete vymazať tento príspevok?';
 $lang['CONFIRM_DELETE_POLL'] = 'Ste si istý, že chcete odstrániť túto anketu?';
