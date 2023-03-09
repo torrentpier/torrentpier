@@ -328,7 +328,7 @@ $lang['POST_STICKY'] = 'Lepljive';
 $lang['POST_NORMAL'] = 'Normalno';
 $lang['POST_DOWNLOAD'] = 'Download';
 
-$lang['PRINT_PAGE'] = 'Print page';
+$lang['PRINT_PAGE'] = 'Natisni stran';
 
 $lang['CONFIRM_DELETE'] = 'Ali ste prepričani, da želite izbrisati ta post?';
 $lang['CONFIRM_DELETE_POLL'] = 'Ali ste prepričani, da želite izbrisati ta raziskava?';
