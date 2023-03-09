@@ -328,7 +328,7 @@ $lang['POST_STICKY'] = 'مثبت';
 $lang['POST_NORMAL'] = 'عادي';
 $lang['POST_DOWNLOAD'] = 'تحميل';
 
-$lang['PRINT_PAGE'] = 'Print page';
+$lang['PRINT_PAGE'] = 'طباعة الصفحة';
 
 $lang['CONFIRM_DELETE'] = 'هل أنت متأكد من أنك تريد حذف هذا المنصب ؟ ';
 $lang['CONFIRM_DELETE_POLL'] = 'هل أنت متأكد من أنك تريد حذف هذه الانتخابات ؟ ';
