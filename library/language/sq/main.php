@@ -328,7 +328,7 @@ $lang['POST_STICKY'] = 'Ngjitet';
 $lang['POST_NORMAL'] = 'Normale';
 $lang['POST_DOWNLOAD'] = 'Shkarkuar';
 
-$lang['PRINT_PAGE'] = 'Print page';
+$lang['PRINT_PAGE'] = 'Printo Faqen';
 
 $lang['CONFIRM_DELETE'] = 'Jeni i sigurt që dëshironi të fshini këtë post?';
 $lang['CONFIRM_DELETE_POLL'] = 'Jeni i sigurt se doni të fshini të këtij sondazhi?';
