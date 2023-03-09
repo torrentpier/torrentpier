@@ -328,7 +328,7 @@ $lang['POST_STICKY'] = 'चिपचिपा';
 $lang['POST_NORMAL'] = 'साधारण';
 $lang['POST_DOWNLOAD'] = 'डाउनलोड';
 
-$lang['PRINT_PAGE'] = 'Print page';
+$lang['PRINT_PAGE'] = 'परचे को छापें';
 
 $lang['CONFIRM_DELETE'] = 'क्या आप वाकई इस पोस्ट को हटाना चाहते हैं?';
 $lang['CONFIRM_DELETE_POLL'] = 'क्या आप वाकई इस सर्वेक्षण को हटाना चाहते हैं?';
