@@ -328,7 +328,7 @@ $lang['POST_STICKY'] = 'Жабысқақ';
 $lang['POST_NORMAL'] = 'қалыпты';
 $lang['POST_DOWNLOAD'] = 'жүктеу';
 
-$lang['PRINT_PAGE'] = 'Print page';
+$lang['PRINT_PAGE'] = 'Бетті басып шығару';
 
 $lang['CONFIRM_DELETE'] = 'Егер сіз осы лауазымға жойғыңыз келгені рас па?';
 $lang['CONFIRM_DELETE_POLL'] = 'Егер сіз осы сауалнама жойғыңыз келгені рас па?';
