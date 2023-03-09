@@ -34,17 +34,17 @@ switch ($mode) {
 
         $map_link = make_url('sitemap/sitemap.xml');
 
-        if ($map->sendSitemap('http://google.com/webmasters/sitemaps/ping?sitemap=', $map_link)) {
-            $html .= '<br />' . $lang['SITEMAP_NOTIFY_SEARCH'] . ' Google: <span style="color: green;">' . $lang['SITEMAP_SENT'] . '</span>';
-        } else {
-            $html .= '<br />' . $lang['SITEMAP_NOTIFY_SEARCH'] . ' Google: <span style="color: red;">' . $lang['SITEMAP_ERROR'] . '</span> URL: <a href="http://google.com/webmasters/sitemaps/ping?sitemap=' . urlencode($map_link) . '" target="_blank">http://google.com/webmasters/sitemaps/ping?sitemap=' . $map_link . '</a>';
+        foreach ($bb_cfg['sitemap_sending'] as $source_name => $source_link) {
+            if ($map->sendSitemap($source_link, $map_link)) {
+                $html .= '<br />' . $lang['SITEMAP_NOTIFY_SEARCH'] . '&nbsp;' . $source_name . ' : <span style="color: green;">' . $lang['SITEMAP_SENT'] . '</span>';
+            } else {
+                $html .= '<br />' . $lang['SITEMAP_NOTIFY_SEARCH'] . '&nbsp;' . $source_name . ' : <span style="color: red;">' . $lang['SITEMAP_ERROR'] . '</span> URL: <a href="' . $source_link . urlencode($map_link) . '" target="_blank">' . $source_link . $map_link . '</a>';
+            }
         }
+        break;
 
-        if ($map->sendSitemap('http://www.bing.com/ping?sitemap=', $map_link)) {
-            $html .= '<br />' . $lang['SITEMAP_NOTIFY_SEARCH'] . ' Bing: <span style="color: green;">' . $lang['SITEMAP_SENT'] . '</span>';
-        } else {
-            $html .= '<br />' . $lang['SITEMAP_NOTIFY_SEARCH'] . ' Bing: <span style="color: red;">' . $lang['SITEMAP_ERROR'] . '</span> URL: <a href="http://www.bing.com/ping?sitemap=' . urlencode($map_link) . '" target="_blank">http://www.bing.com/ping?sitemap=' . $map_link . '</a>';
-        }
+    default:
+        $this->ajax_die("Invalid mode: $mode");
 }
 
 $this->response['html'] = $html;
