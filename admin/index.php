@@ -142,13 +142,13 @@ if (isset($_GET['pane']) && $_GET['pane'] == 'left') {
         $onlinerow_guest = DB()->sql_fetchrowset($result);
 
         // Reg users
-        $reg_userid_ary = array();
         if (count($onlinerow_reg)) {
+            $reg_userid_ary = array();
+
             for ($i = 0, $iMax = count($onlinerow_reg); $i < $iMax; $i++) {
                 if (!in_array($onlinerow_reg[$i]['user_id'], $reg_userid_ary)) {
                     if ($onlinerow_reg[$i]['user_id'] == $userdata['user_id'] || !bf($onlinerow_reg[$i]['user_opt'], 'user_opt', 'user_viewonline')) {
                         $reg_userid_ary[] = $onlinerow_reg[$i]['user_id'];
-                        $username = $onlinerow_reg[$i]['username'];
                         $row_class = 'row1';
                         $reg_ip = decode_ip($onlinerow_reg[$i]['session_ip']);
 
