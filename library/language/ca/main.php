@@ -328,7 +328,7 @@ $lang['POST_STICKY'] = 'Sticky';
 $lang['POST_NORMAL'] = 'Normal';
 $lang['POST_DOWNLOAD'] = 'Descarregar';
 
-$lang['PRINT_PAGE'] = 'Print page';
+$lang['PRINT_PAGE'] = 'Imprimeix la pàgina';
 
 $lang['CONFIRM_DELETE'] = 'Esteu segur que voleu suprimir aquest post?';
 $lang['CONFIRM_DELETE_POLL'] = 'Esteu segur que voleu suprimir aquesta enquesta?';
