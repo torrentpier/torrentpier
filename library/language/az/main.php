@@ -328,7 +328,7 @@ $lang['POST_STICKY'] = 'Yapışqan';
 $lang['POST_NORMAL'] = 'Normal';
 $lang['POST_DOWNLOAD'] = 'Download';
 
-$lang['PRINT_PAGE'] = 'Print page';
+$lang['PRINT_PAGE'] = 'Səhifəni çap edin';
 
 $lang['CONFIRM_DELETE'] = 'Siz əmin deyilsinizsə aradan qaldırılması, bu post?';
 $lang['CONFIRM_DELETE_POLL'] = 'Siz əmin deyilsinizsə aradan qaldırılması, bu sorğu?';
