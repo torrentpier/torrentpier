@@ -328,7 +328,7 @@ $lang['POST_STICKY'] = 'Lipni';
 $lang['POST_NORMAL'] = 'Normalus';
 $lang['POST_DOWNLOAD'] = 'Atsisiųsti';
 
-$lang['PRINT_PAGE'] = 'Print page';
+$lang['PRINT_PAGE'] = 'Spausdinti puslapį';
 
 $lang['CONFIRM_DELETE'] = 'Ar jūs tikrai norite ištrinti šį įrašą?';
 $lang['CONFIRM_DELETE_POLL'] = 'Ar jūs tikrai norite ištrinti šią apklausą?';
