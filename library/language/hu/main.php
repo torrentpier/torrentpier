@@ -328,7 +328,7 @@ $lang['POST_STICKY'] = 'Ragadós';
 $lang['POST_NORMAL'] = 'Normál';
 $lang['POST_DOWNLOAD'] = 'Letöltés';
 
-$lang['PRINT_PAGE'] = 'Print page';
+$lang['PRINT_PAGE'] = 'Oldal nyomtatása';
 
 $lang['CONFIRM_DELETE'] = 'Biztos, hogy törölni akarja ezt a bejegyzést?';
 $lang['CONFIRM_DELETE_POLL'] = 'Biztos, hogy törölni akarja ezt a felmérést?';
