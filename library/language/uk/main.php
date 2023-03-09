@@ -328,7 +328,7 @@ $lang['POST_STICKY'] = 'Прикріплена';
 $lang['POST_NORMAL'] = 'Звичайна';
 $lang['POST_DOWNLOAD'] = 'Стягнути';
 
-$lang['PRINT_PAGE'] = 'Print page';
+$lang['PRINT_PAGE'] = 'Друкувати сторінку';
 
 $lang['CONFIRM_DELETE'] = 'Ви справді бажаєте вилучити цей допис?';
 $lang['CONFIRM_DELETE_POLL'] = 'Ви впевнені, що хочете видалити це опитування?';
