@@ -328,7 +328,7 @@ $lang['POST_STICKY'] = 'Лепљив';
 $lang['POST_NORMAL'] = 'Нормално';
 $lang['POST_DOWNLOAD'] = 'Довнлоад';
 
-$lang['PRINT_PAGE'] = 'Print page';
+$lang['PRINT_PAGE'] = 'Одштампај страницу';
 
 $lang['CONFIRM_DELETE'] = 'Да ли сте сигурни да желите да избришете овај пост?';
 $lang['CONFIRM_DELETE_POLL'] = 'Да ли сте сигурни да желите да обришете ову анкету?';
