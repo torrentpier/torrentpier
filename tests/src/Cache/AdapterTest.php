@@ -40,8 +40,10 @@ class AdapterTest extends \PHPUnit_Framework_TestCase
      */
     public function setUp()
     {
-        $this->cacheProvider = $this->getMock(CacheProvider::class,
-            ['doFetch', 'doContains', 'doSave', 'doDelete', 'doFlush', 'doGetStats']);
+        $this->cacheProvider = $this->getMock(
+            CacheProvider::class,
+            ['doFetch', 'doContains', 'doSave', 'doDelete', 'doFlush', 'doGetStats']
+        );
 
         $this->adapter = $this->getMock(Adapter::class, ['getProvider', 'getType']);
         $this->adapter->method('getProvider')->willReturn($this->cacheProvider);

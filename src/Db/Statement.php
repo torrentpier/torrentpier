@@ -39,7 +39,8 @@ class Statement extends PDOStatement
     }
 
     public function execute(/** @noinspection PhpSignatureMismatchDuringInheritanceInspection */
-        $input = null)
+        $input = null
+    )
     {
         try {
             if (isset($this->db->logger) && strncasecmp($this->queryString, 'EXPLAIN', 7)) {
