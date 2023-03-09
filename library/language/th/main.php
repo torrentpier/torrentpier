@@ -328,7 +328,7 @@ $lang['POST_STICKY'] = 'ปักหมุด';
 $lang['POST_NORMAL'] = 'ธรรมดา';
 $lang['POST_DOWNLOAD'] = 'ดาวน์โหลด';
 
-$lang['PRINT_PAGE'] = 'Print page';
+$lang['PRINT_PAGE'] = 'พิมพ์หน้า';
 
 $lang['CONFIRM_DELETE'] = 'คุณแน่ใจหรือว่าต้องการจะลบมันโพสต์?';
 $lang['CONFIRM_DELETE_POLL'] = 'คุณแน่ใจหรือว่าคุณต้องการจะลบนนี้ตรวจสอบการอ?';
