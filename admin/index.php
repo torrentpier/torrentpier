@@ -130,6 +130,7 @@ if (isset($_GET['pane']) && $_GET['pane'] == 'left') {
         }
         $onlinerow_reg = DB()->sql_fetchrowset($result);
 
+        // Get guests online information.
         $sql = 'SELECT session_logged_in, session_time, session_ip, session_start
 			FROM ' . BB_SESSIONS . '
 			WHERE session_logged_in = 0
@@ -140,37 +141,26 @@ if (isset($_GET['pane']) && $_GET['pane'] == 'left') {
         }
         $onlinerow_guest = DB()->sql_fetchrowset($result);
 
-        $reg_userid_ary = array();
-
+        // Reg users
         if (count($onlinerow_reg)) {
-            $registered_users = $hidden_users = 0;
+            $reg_userid_ary = array();
 
             for ($i = 0, $iMax = count($onlinerow_reg); $i < $iMax; $i++) {
                 if (!in_array($onlinerow_reg[$i]['user_id'], $reg_userid_ary)) {
-                    $reg_userid_ary[] = $onlinerow_reg[$i]['user_id'];
+                    if ($onlinerow_reg[$i]['user_id'] == $userdata['user_id'] || !bf($onlinerow_reg[$i]['user_opt'], 'user_opt', 'user_viewonline')) {
+                        $reg_userid_ary[] = $onlinerow_reg[$i]['user_id'];
+                        $row_class = 'row1';
+                        $reg_ip = decode_ip($onlinerow_reg[$i]['session_ip']);
 
-                    $username = $onlinerow_reg[$i]['username'];
-
-                    if (bf($onlinerow_reg[$i]['user_opt'], 'user_opt', 'user_viewonline')) {
-                        $hidden_users++;
-                        $hidden = true;
-                    } else {
-                        $registered_users++;
-                        $hidden = false;
+                        $template->assign_block_vars('reg_user_row', array(
+                            'ROW_CLASS' => $row_class,
+                            'USER' => profile_url($onlinerow_reg[$i]),
+                            'STARTED' => bb_date($onlinerow_reg[$i]['session_start'], 'H:i', false),
+                            'LASTUPDATE' => bb_date($onlinerow_reg[$i]['user_session_time'], 'H:i', false),
+                            'IP_ADDRESS' => $reg_ip,
+                            'U_WHOIS_IP' => $bb_cfg['whois_info'] . $reg_ip,
+                        ));
                     }
-
-                    $row_class = 'row1';
-
-                    $reg_ip = decode_ip($onlinerow_reg[$i]['session_ip']);
-
-                    $template->assign_block_vars('reg_user_row', array(
-                        'ROW_CLASS' => $row_class,
-                        'USER' => profile_url($onlinerow_reg[$i]),
-                        'STARTED' => bb_date($onlinerow_reg[$i]['session_start'], 'H:i', false),
-                        'LASTUPDATE' => bb_date($onlinerow_reg[$i]['user_session_time'], 'H:i', false),
-                        'IP_ADDRESS' => $reg_ip,
-                        'U_WHOIS_IP' => $bb_cfg['whois_info'] . $reg_ip,
-                    ));
                 }
             }
         }
@@ -182,9 +172,7 @@ if (isset($_GET['pane']) && $_GET['pane'] == 'left') {
             for ($i = 0, $iMax = count($onlinerow_guest); $i < $iMax; $i++) {
                 $guest_userip_ary[] = $onlinerow_guest[$i]['session_ip'];
                 $guest_users++;
-
                 $row_class = 'row2';
-
                 $guest_ip = decode_ip($onlinerow_guest[$i]['session_ip']);
 
                 $template->assign_block_vars('guest_user_row', array(

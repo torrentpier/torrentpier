@@ -517,6 +517,11 @@ $bb_cfg['user_agreement_url'] = 'info.php?show=user_agreement';
 $bb_cfg['copyright_holders_url'] = 'info.php?show=copyright_holders';
 $bb_cfg['advert_url'] = 'info.php?show=advert';
 
+$bb_cfg['sitemap_sending'] = [
+#   'Source name' => 'http://ping_url'
+    'Google' => 'http://google.com/webmasters/sitemaps/ping?sitemap=',
+];
+
 // Extensions
 $bb_cfg['file_id_ext'] = [
     1 => 'gif',
