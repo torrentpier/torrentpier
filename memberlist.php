@@ -145,7 +145,7 @@ $template->assign_vars(array(
 ));
 
 // per-letter selection end
-$sql = "SELECT username, user_id, user_rank, user_opt, user_posts, user_regdate, user_from, user_website, user_email FROM " . BB_USERS . " WHERE user_id NOT IN(" . EXCLUDED_USERS . ")";
+$sql = "SELECT username, user_id, user_rank, user_opt, user_posts, user_regdate, user_from, user_website, user_email, avatar_ext_id FROM " . BB_USERS . " WHERE user_id NOT IN(" . EXCLUDED_USERS . ")";
 if ($username) {
     $username = str_replace("\*", '%', clean_username($username));
     $letter_sql = "username LIKE '" . DB()->escape($username) . "'";
@@ -179,6 +179,7 @@ if ($result = DB()->fetch_rowset($sql)) {
             'ROW_NUMBER' => $i + ($start + 1),
             'ROW_CLASS' => $row_class,
             'USER' => profile_url($row),
+            'AVATAR' => get_avatar($row['user_id'], $row['avatar_ext_id'], !bf($row['user_opt'], 'user_opt', 'dis_avatar'), 50, 50),
             'FROM' => $from,
             'JOINED_RAW' => $row['user_regdate'],
             'JOINED' => $joined,
