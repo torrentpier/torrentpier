@@ -328,7 +328,7 @@ $lang['POST_STICKY'] = 'Lipīga';
 $lang['POST_NORMAL'] = 'Normāls';
 $lang['POST_DOWNLOAD'] = 'Lejupielādēt';
 
-$lang['PRINT_PAGE'] = 'Print page';
+$lang['PRINT_PAGE'] = 'Drukāt lapu';
 
 $lang['CONFIRM_DELETE'] = 'Vai jūs esat pārliecināts, ka vēlaties dzēst šo amatu?';
 $lang['CONFIRM_DELETE_POLL'] = 'Vai jūs esat pārliecināts, ka vēlaties dzēst šo aptauju?';
