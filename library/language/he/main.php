@@ -328,7 +328,7 @@ $lang['POST_STICKY'] = 'דביק';
 $lang['POST_NORMAL'] = 'נורמלי';
 $lang['POST_DOWNLOAD'] = 'הורד';
 
-$lang['PRINT_PAGE'] = 'Print page';
+$lang['PRINT_PAGE'] = 'הדפס דף';
 
 $lang['CONFIRM_DELETE'] = 'אתה בטוח שאתה רוצה למחוק הודעה זו?';
 $lang['CONFIRM_DELETE_POLL'] = 'אתה בטוח שאתה רוצה למחוק את הסקר הזה?';
