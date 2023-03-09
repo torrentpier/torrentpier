@@ -328,7 +328,7 @@ $lang['POST_STICKY'] = '스티커';
 $lang['POST_NORMAL'] = '일반';
 $lang['POST_DOWNLOAD'] = '다운로드';
 
-$lang['PRINT_PAGE'] = 'Print page';
+$lang['PRINT_PAGE'] = '페이지 인쇄';
 
 $lang['CONFIRM_DELETE'] = 'Are you sure you want to delete 이 게시물을까?';
 $lang['CONFIRM_DELETE_POLL'] = 'Are you sure you want to delete 이 poll?';
