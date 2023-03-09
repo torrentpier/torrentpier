@@ -328,7 +328,7 @@ $lang['POST_STICKY'] = 'часпонак';
 $lang['POST_NORMAL'] = 'оддӣ';
 $lang['POST_DOWNLOAD'] = 'Download';
 
-$lang['PRINT_PAGE'] = 'Print page';
+$lang['PRINT_PAGE'] = 'Саҳифаи чоп';
 
 $lang['CONFIRM_DELETE'] = 'Оё мутмаинед, ки мехоҳед ин баъди ба ҳузф кунед?';
 $lang['CONFIRM_DELETE_POLL'] = 'Оё мутмаинед, ки мехоҳед, ба нест кардани ин пурсиш?';
