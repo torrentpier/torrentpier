@@ -328,7 +328,7 @@ $lang['POST_STICKY'] = 'Lengket';
 $lang['POST_NORMAL'] = 'Normal';
 $lang['POST_DOWNLOAD'] = 'Download';
 
-$lang['PRINT_PAGE'] = 'Print page';
+$lang['PRINT_PAGE'] = 'Cetak halaman';
 
 $lang['CONFIRM_DELETE'] = 'Apakah anda yakin anda ingin menghapus posting ini?';
 $lang['CONFIRM_DELETE_POLL'] = 'Apakah anda yakin anda ingin menghapus jajak pendapat ini?';
