@@ -328,7 +328,7 @@ $lang['POST_STICKY'] = 'Dính';
 $lang['POST_NORMAL'] = 'Bình thường';
 $lang['POST_DOWNLOAD'] = 'Tải về';
 
-$lang['PRINT_PAGE'] = 'Print page';
+$lang['PRINT_PAGE'] = 'Trang in';
 
 $lang['CONFIRM_DELETE'] = 'Bạn có chắc chắn muốn loại bỏ bài này?';
 $lang['CONFIRM_DELETE_POLL'] = 'Cậu có chắc chắn để hủy bỏ cuộc thăm dò này?';
