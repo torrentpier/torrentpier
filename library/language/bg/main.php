@@ -1,26 +1,10 @@
 <?php
 /**
- * MIT License
+ * TorrentPier – Bull-powered BitTorrent tracker engine
  *
- * Copyright (c) 2005-2017 TorrentPier
- *
- * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to deal
- * in the Software without restriction, including without limitation the rights
- * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following conditions:
- *
- * The above copyright notice and this permission notice shall be included in all
- * copies or substantial portions of the Software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
- * SOFTWARE.
+ * @copyright Copyright (c) 2005-2023 TorrentPier (https://torrentpier.com)
+ * @link      https://github.com/torrentpier/torrentpier for the canonical source repository
+ * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
  */
 
 // Common, these terms are used extensively on several pages
@@ -343,6 +327,8 @@ $lang['POST_ANNOUNCEMENT'] = 'Обява';
 $lang['POST_STICKY'] = 'Лепкава';
 $lang['POST_NORMAL'] = 'Нормален';
 $lang['POST_DOWNLOAD'] = 'Изтегли';
+
+$lang['PRINT_PAGE'] = 'Print page';
 
 $lang['CONFIRM_DELETE'] = 'Сигурни ли сте, че искате да изтриете този пост?';
 $lang['CONFIRM_DELETE_POLL'] = 'Сигурни ли сте, че искате да изтриете тази анкета?';
@@ -1138,7 +1124,9 @@ $lang['TOR_MOD_TITLE'] = 'Промяна на статута на ръката -
 $lang['TOR_MOD_MSG'] = "Здравейте, %s.\\състоянието n\\н с [URL=%s]разпределение на your[/url] се променя на [b]%s[/b]";
 
 $lang['TOR_AUTH_TITLE'] = 'Предложения за промени в дизайна - %s';
-$lang['TOR_AUTH_MSG'] = "Здравейте, %s.\n\n прави моята ръка променена - с [URL=%s]%s[/url]\\N\\N моля, проверете го.";
+$lang['TOR_AUTH_MSG'] = "Здравейте, %s.
+
+ прави моята ръка променена - с [URL=%s]%s[/url]\\N\\N моля, проверете го.";
 $lang['TOR_AUTH_FIXED'] = 'Фиксирана';
 $lang['TOR_AUTH_SENT_COMMENT'] = ' &middot; <span class="seed bold">The информация изпратена от модератора. Очаквате.</span>';
 
@@ -2702,7 +2690,8 @@ $lang['MC_TITLE'] = 'Коментар Модератор';
 $lang['MC_LEGEND'] = 'Напишете коментар';
 $lang['MC_FAQ'] = 'Въведеният текст ще се появи под това съобщение';
 $lang['MC_COMMENT_PM_SUBJECT'] = "%s в комуникацията";
-$lang['MC_COMMENT_PM_MSG'] = "Здравейте,\\[b]%s[/b] nModerator остави в комуникацията с [URL=%s]\\[b]%s[/b][/url][quote]\n%s n[/quote]";
+$lang['MC_COMMENT_PM_MSG'] = "Здравейте,\\[b]%s[/b] nModerator остави в комуникацията с [URL=%s]\\[b]%s[/b][/url][quote]
+%s n[/quote]";
 $lang['MC_COMMENT'] = array(
     0 => array(
         'title' => '',
