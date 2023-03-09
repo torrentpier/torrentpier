@@ -328,7 +328,7 @@ $lang['POST_STICKY'] = '粘粘的';
 $lang['POST_NORMAL'] = '正常';
 $lang['POST_DOWNLOAD'] = '下载';
 
-$lang['PRINT_PAGE'] = 'Print page';
+$lang['PRINT_PAGE'] = '打印頁面';
 
 $lang['CONFIRM_DELETE'] = '您确定要删除此贴吗？';
 $lang['CONFIRM_DELETE_POLL'] = '您确定要删除这项调查吗？';
