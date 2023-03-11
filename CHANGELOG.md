@@ -14,7 +14,7 @@
 - Added optional parameter in $valid_actions [AJAX] [\#567](https://github.com/torrentpier/torrentpier/pull/567) ([belomaxorka](https://github.com/belomaxorka))
 - Check if request is ajax [\#569](https://github.com/torrentpier/torrentpier/pull/569) ([belomaxorka](https://github.com/belomaxorka))
 - Fixed code-style in some files [\#570](https://github.com/torrentpier/torrentpier/pull/570) ([belomaxorka](https://github.com/belomaxorka))
-- Minor adjustments [\#571](https://github.com/torrentpier/torrentpier/pull/571), [\#580](https://github.com/torrentpier/torrentpier/pull/580) ([belomaxorka](https://github.com/belomaxorka))
+- Minor adjustments [\#571](https://github.com/torrentpier/torrentpier/pull/571), [\#584](https://github.com/torrentpier/torrentpier/pull/584) ([belomaxorka](https://github.com/belomaxorka))
 - Added link to forum in admin_forumauth.tpl [\#574](https://github.com/torrentpier/torrentpier/pull/574) ([belomaxorka](https://github.com/belomaxorka))
 - Simplified make_rand_str function [\#575](https://github.com/torrentpier/torrentpier/pull/575) ([belomaxorka](https://github.com/belomaxorka))
 - Redesigned admin_ug_auth [\#576](https://github.com/torrentpier/torrentpier/pull/576) ([belomaxorka](https://github.com/belomaxorka))
