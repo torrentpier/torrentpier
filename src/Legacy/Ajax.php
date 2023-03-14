@@ -101,14 +101,14 @@ class Ajax
             case 'guest':
                 break;
 
-            // USER
+                // USER
             case 'user':
                 if (IS_GUEST) {
                     $this->ajax_die($lang['NEED_TO_LOGIN_FIRST']);
                 }
                 break;
 
-            // MOD
+                // MOD
             case 'mod':
                 if (!IS_AM) {
                     $this->ajax_die($lang['ONLY_FOR_MOD']);
@@ -116,7 +116,7 @@ class Ajax
                 $this->check_admin_session();
                 break;
 
-            // ADMIN
+                // ADMIN
             case 'admin':
                 if (!IS_ADMIN) {
                     $this->ajax_die($lang['ONLY_FOR_ADMIN']);
@@ -124,7 +124,7 @@ class Ajax
                 $this->check_admin_session();
                 break;
 
-            // SUPER_ADMIN
+                // SUPER_ADMIN
             case 'super_admin':
                 if (!IS_SUPER_ADMIN) {
                     $this->ajax_die($lang['ONLY_FOR_SUPER_ADMIN']);
