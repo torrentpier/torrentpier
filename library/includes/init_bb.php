@@ -159,8 +159,6 @@ define('PRIVMSGS_UNREAD_MAIL', 5);
 define('HAVE_UNREAD_PM', 1);
 define('HAVE_NEW_PM', 2);
 
-define('USERNAME_MIN_LENGTH', 3);
-
 // URL PARAMETERS (hardcoding allowed)
 define('POST_CAT_URL', 'c');
 define('POST_FORUM_URL', 'f');
@@ -277,8 +275,11 @@ define('SEARCH_ID_LENGTH', 12);
 define('ACTKEY_LENGHT', 32);
 define('SID_LENGTH', 20);
 define('LOGIN_KEY_LENGTH', 32);
+define('USERNAME_MIN_LENGTH', 3);
 define('USERNAME_MAX_LENGTH', 25);
 define('USEREMAIL_MAX_LENGTH', 40);
+define('PASSWORD_MIN_LENGTH', 8);
+define('PASSWORD_MAX_LENGTH', 24);
 
 define('PAGE_HEADER', INC_DIR . '/page_header.php');
 define('PAGE_FOOTER', INC_DIR . '/page_footer.php');

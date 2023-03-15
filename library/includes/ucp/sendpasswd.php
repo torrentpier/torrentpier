@@ -38,7 +38,7 @@ if (isset($_POST['submit'])) {
             $user_id = $row['user_id'];
 
             $user_actkey = make_rand_str(ACTKEY_LENGHT);
-            $user_password = make_rand_str(8);
+            $user_password = make_rand_str(PASSWORD_MIN_LENGTH);
 
             $sql = "UPDATE " . BB_USERS . "
 				SET user_newpasswd = '$user_password', user_actkey = '$user_actkey'
