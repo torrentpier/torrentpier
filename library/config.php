@@ -29,14 +29,7 @@ $bb_cfg['tp_release_codename'] = 'Bison';
 // Настройка баз данных ['db']['srv_name'] => (array) srv_cfg;
 // порядок параметров srv_cfg (хост, название базы, пользователь, пароль, charset, pconnect);
 $bb_cfg['db'] = [
-    'db' => [
-        env('DB_HOST', 'localhost'),
-        env('DB_DATABASE', 'torrentpier'),
-        env('DB_USERNAME', 'root'),
-        env('DB_PASSWORD', 'pass'),
-        'utf8',
-        false
-    ],
+    'db' => ['localhost', 'torrentpier', 'root', 'root', 'utf8', false],
 ];
 
 $bb_cfg['db_alias'] = [
