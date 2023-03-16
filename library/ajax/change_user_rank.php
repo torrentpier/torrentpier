@@ -17,7 +17,7 @@ $ranks = $datastore->get('ranks');
 $rank_id = (int)$this->request['rank_id'];
 
 if (!$user_id = (int)$this->request['user_id'] or !$profiledata = get_userdata($user_id)) {
-    $this->ajax_die("invalid user_id: $user_id");
+    $this->ajax_die($lang['NO_USER_ID_SPECIFIED']);
 }
 
 if ($rank_id != 0 && !isset($ranks[$rank_id])) {
