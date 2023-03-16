@@ -1593,7 +1593,6 @@ $lang['USERS'] = 'Uživatel Admin';
 $lang['GROUPS'] = 'Skupina Admin';
 $lang['FORUMS'] = 'Fórum Admin';
 $lang['MODS'] = 'Změny';
-$lang['TP'] = 'TorrentPier';
 
 $lang['CONFIGURATION'] = 'Konfigurace';
 $lang['MANAGE'] = 'Řízení';

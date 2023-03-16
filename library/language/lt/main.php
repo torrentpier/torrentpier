@@ -1593,7 +1593,6 @@ $lang['USERS'] = 'Vartotojo Admin';
 $lang['GROUPS'] = 'Grupė: Admin';
 $lang['FORUMS'] = 'Forumo Admin';
 $lang['MODS'] = 'Pakeitimai';
-$lang['TP'] = 'TorrentPier';
 
 $lang['CONFIGURATION'] = 'Konfigūracija';
 $lang['MANAGE'] = 'Valdymas';

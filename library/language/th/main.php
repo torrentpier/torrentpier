@@ -1593,7 +1593,6 @@ $lang['USERS'] = 'แอดมิของผู้ใช้';
 $lang['GROUPS'] = 'กลุ่มผู้ดูแด';
 $lang['FORUMS'] = 'ชุแอดมิ';
 $lang['MODS'] = 'การแก้ไข';
-$lang['TP'] = 'TorrentPier';
 
 $lang['CONFIGURATION'] = 'การปรับแต่ง';
 $lang['MANAGE'] = 'การจัดการ';

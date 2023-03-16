@@ -1593,7 +1593,6 @@ $lang['USERS'] = 'მომხმარებლის Admin';
 $lang['GROUPS'] = 'ჯგუფი Admin';
 $lang['FORUMS'] = 'ფორუმის Admin';
 $lang['MODS'] = 'ცვლილებები';
-$lang['TP'] = 'TorrentPier';
 
 $lang['CONFIGURATION'] = 'კონფიგურაცია';
 $lang['MANAGE'] = 'მენეჯმენტი';

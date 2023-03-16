@@ -1593,7 +1593,6 @@ $lang['USERS'] = 'Օգտագործողը Admin';
 $lang['GROUPS'] = 'Խմբի Ադմինիստրատոր';
 $lang['FORUMS'] = 'Ֆորումի Admin';
 $lang['MODS'] = 'Փոփոխություն';
-$lang['TP'] = 'Կայքը torrentpier';
 
 $lang['CONFIGURATION'] = 'Կոնֆիգուրացիա';
 $lang['MANAGE'] = 'Կառավարում';

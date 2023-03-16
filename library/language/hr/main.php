@@ -1593,7 +1593,6 @@ $lang['USERS'] = 'Korisnik Je Admin';
 $lang['GROUPS'] = 'Administrator Grupe';
 $lang['FORUMS'] = 'Admin Foruma';
 $lang['MODS'] = 'Modifikacija';
-$lang['TP'] = 'Web stranice torrentpier';
 
 $lang['CONFIGURATION'] = 'Konfiguracije';
 $lang['MANAGE'] = 'Upravljanje';

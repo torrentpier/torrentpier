@@ -1593,7 +1593,6 @@ $lang['USERS'] = 'Käyttäjä Admin';
 $lang['GROUPS'] = 'Ryhmän Admin';
 $lang['FORUMS'] = 'Forum Admin';
 $lang['MODS'] = 'Muutokset';
-$lang['TP'] = 'TorrentPier';
 
 $lang['CONFIGURATION'] = 'Kokoonpano';
 $lang['MANAGE'] = 'Hallinta';

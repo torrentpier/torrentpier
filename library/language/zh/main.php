@@ -1593,7 +1593,6 @@ $lang['USERS'] = '用户的管理';
 $lang['GROUPS'] = '小组管理员';
 $lang['FORUMS'] = '论坛的管理';
 $lang['MODS'] = '修改';
-$lang['TP'] = 'TorrentPier';
 
 $lang['CONFIGURATION'] = '配置';
 $lang['MANAGE'] = '管理';

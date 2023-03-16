@@ -1593,7 +1593,6 @@ $lang['USERS'] = 'Usuari Admin';
 $lang['GROUPS'] = 'Grup Admin';
 $lang['FORUMS'] = 'Fòrum Admin';
 $lang['MODS'] = 'Modificacions';
-$lang['TP'] = 'TorrentPier';
 
 $lang['CONFIGURATION'] = 'Configuració';
 $lang['MANAGE'] = 'Gestió';

@@ -1593,7 +1593,6 @@ $lang['USERS'] = 'Người Quản Trị';
 $lang['GROUPS'] = 'Nhóm Quản Trị';
 $lang['FORUMS'] = 'Diễn Đàn Quản Trị';
 $lang['MODS'] = 'Thay đổi';
-$lang['TP'] = 'TorrentPier';
 
 $lang['CONFIGURATION'] = 'Cấu hình';
 $lang['MANAGE'] = 'Quản lý';

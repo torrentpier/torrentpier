@@ -1593,7 +1593,6 @@ $lang['USERS'] = '사용자 관리';
 $lang['GROUPS'] = '그룹 관리';
 $lang['FORUMS'] = '관리자 포럼';
 $lang['MODS'] = '정';
-$lang['TP'] = 'TorrentPier';
 
 $lang['CONFIGURATION'] = '구성';
 $lang['MANAGE'] = '관리';
