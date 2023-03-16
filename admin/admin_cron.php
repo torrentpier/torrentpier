@@ -9,7 +9,7 @@
 
 if (!empty($setmodules)) {
     if (IS_SUPER_ADMIN) {
-        $module['TP']['CRON'] = basename(__FILE__) . '?mode=list';
+        $module[env('APP_NAME', 'TorrentPier')]['CRON'] = basename(__FILE__) . '?mode=list';
     }
     return;
 }
