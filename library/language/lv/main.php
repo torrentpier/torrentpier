@@ -1579,7 +1579,6 @@ $lang['USERS'] = 'Lietotāja Admin';
 $lang['GROUPS'] = 'Grupas Admin';
 $lang['FORUMS'] = 'Forumā Admin';
 $lang['MODS'] = 'Izmaiņas';
-$lang['TP'] = 'TorrentPier';
 
 $lang['CONFIGURATION'] = 'Konfigurācija';
 $lang['MANAGE'] = 'Vadība';

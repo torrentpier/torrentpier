@@ -1579,7 +1579,6 @@ $lang['USERS'] = 'उपयोगकर्ता व्यवस्थापक'
 $lang['GROUPS'] = 'समूह प्रशासन';
 $lang['FORUMS'] = 'फ़ोरम व्यवस्थापक';
 $lang['MODS'] = 'संशोधन';
-$lang['TP'] = 'TorrentPier';
 
 $lang['CONFIGURATION'] = 'विन्यास';
 $lang['MANAGE'] = 'प्रबंध';

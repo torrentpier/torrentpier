@@ -1579,7 +1579,6 @@ $lang['USERS'] = 'Пользователи';
 $lang['GROUPS'] = 'Группы';
 $lang['FORUMS'] = 'Форумы';
 $lang['MODS'] = 'Модификации';
-$lang['TP'] = 'TorrentPier';
 
 $lang['CONFIGURATION'] = 'Конфигурация';
 $lang['MANAGE'] = 'Управление';

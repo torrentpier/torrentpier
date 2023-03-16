@@ -1579,7 +1579,6 @@ $lang['USERS'] = 'Brukeren Er Admin';
 $lang['GROUPS'] = 'Gruppe: Admin';
 $lang['FORUMS'] = 'Forum Admin';
 $lang['MODS'] = 'Endringer';
-$lang['TP'] = 'TorrentPier';
 
 $lang['CONFIGURATION'] = 'Konfigurasjon';
 $lang['MANAGE'] = 'Ledelse';

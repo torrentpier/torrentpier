@@ -1582,7 +1582,6 @@ $lang['USERS'] = 'Użytkownik Admin';
 $lang['GROUPS'] = 'Administrator Grupy';
 $lang['FORUMS'] = 'Admin Forum';
 $lang['MODS'] = 'Modyfikacje';
-$lang['TP'] = 'Strona torrentpier';
 
 $lang['CONFIGURATION'] = 'Konfiguracji';
 $lang['MANAGE'] = 'Zarządzanie';

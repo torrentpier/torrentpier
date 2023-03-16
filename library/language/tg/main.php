@@ -1579,7 +1579,6 @@ $lang['USERS'] = 'корбар Admin';
 $lang['GROUPS'] = 'Гурӯҳи Admin';
 $lang['FORUMS'] = 'Форуми Admin';
 $lang['MODS'] = 'тағйирот';
-$lang['TP'] = 'TorrentPier';
 
 $lang['CONFIGURATION'] = 'Танзимот';
 $lang['MANAGE'] = 'идоракунии';
