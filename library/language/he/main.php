@@ -1579,7 +1579,6 @@ $lang['USERS'] = 'המשתמש Admin';
 $lang['GROUPS'] = 'קבוצת Admin';
 $lang['FORUMS'] = 'הפורום Admin';
 $lang['MODS'] = 'שינויים';
-$lang['TP'] = 'TorrentPier';
 
 $lang['CONFIGURATION'] = 'תצורה';
 $lang['MANAGE'] = 'ניהול';
