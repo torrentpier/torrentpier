@@ -1582,7 +1582,6 @@ $lang['USERS'] = 'İstifadəçi Admin';
 $lang['GROUPS'] = 'Admin Qrupu';
 $lang['FORUMS'] = 'Forumun Admin';
 $lang['MODS'] = 'Dəyişikliklər';
-$lang['TP'] = 'Veb torrentpier';
 
 $lang['CONFIGURATION'] = 'Konfiqurasiya';
 $lang['MANAGE'] = 'İdarə';
