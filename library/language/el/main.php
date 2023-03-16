@@ -1579,7 +1579,6 @@ $lang['USERS'] = 'Από Το Χρήστη Admin';
 $lang['GROUPS'] = 'Ομάδα Admin';
 $lang['FORUMS'] = 'Forum Admin';
 $lang['MODS'] = 'Τροποποιήσεις';
-$lang['TP'] = 'TorrentPier';
 
 $lang['CONFIGURATION'] = 'Διαμόρφωση';
 $lang['MANAGE'] = 'Διαχείριση';
