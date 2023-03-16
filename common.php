@@ -50,10 +50,50 @@ if (!file_exists(__DIR__ . '/vendor/autoload.php')) {
 }
 require_once __DIR__ . '/vendor/autoload.php';
 
+/**
+ * Gets the value of an environment variable. Supports boolean, empty and null.
+ *
+ * @param string $key
+ * @param mixed $default
+ * @return mixed
+ */
+function env($key, $default = null)
+{
+    $value = getenv($key);
+    if (!$value) return value($default);
+    switch (strtolower($value)) {
+        case 'true':
+        case '(true)':
+            return true;
+        case 'false':
+        case '(false)':
+            return false;
+        case '(null)':
+            return null;
+        case '(empty)':
+            return '';
+    }
+    return $value;
+}
+
+/**
+ * Return the default value of the given value.
+ *
+ * @param mixed $value
+ * @return mixed
+ */
+function value($value)
+{
+    return $value instanceof Closure ? $value() : $value;
+}
+
 // Get initial config
+if (!getenv('APP_DEBUG') && file_exists(__DIR__ . '/.env')) {
+    (new Symfony\Component\Dotenv\Dotenv())->load(__DIR__ . '/.env');
+}
 require_once __DIR__ . '/library/config.php';
 
-// Get local config
+// Local config
 if (file_exists(__DIR__ . '/library/config.local.php')) {
     require_once __DIR__ . '/library/config.local.php';
 }
@@ -96,9 +136,11 @@ define('BOT_UID', -746);
  * Progressive error reporting
  */
 if ($bb_cfg['bugsnag']['enabled']) {
-    /** @var Bugsnag\Handler $bugsnag */
-    $bugsnag = Bugsnag\Client::make($bb_cfg['bugsnag']['api_key']);
-    Bugsnag\Handler::register($bugsnag);
+    if (env('APP_ENV', 'production') !== 'local') {
+        /** @var Bugsnag\Handler $bugsnag */
+        $bugsnag = Bugsnag\Client::make($bb_cfg['bugsnag']['api_key']);
+        Bugsnag\Handler::register($bugsnag);
+    }
 } else {
     if (DBG_USER) {
         /** @var Whoops\Run $whoops */
