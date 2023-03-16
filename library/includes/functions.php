@@ -779,6 +779,31 @@ function wbr($text, $max_word_length = HTML_WBR_LENGTH)
     return preg_replace("/([\w\->;:.,~!?(){}@#$%^*\/\\\\]{" . $max_word_length . "})/ui", '$1<wbr>', $text);
 }
 
+function generate_user_info(&$row, $date_format, &$avatar, &$from, &$posts, &$joined, &$pm, &$email, &$www, &$user_time = null, $group_mod = null)
+{
+    global $lang, $images, $bb_cfg;
+
+    $from = (!empty($row['user_from'])) ? $row['user_from'] : $lang['NOSELECT'];
+    $joined = bb_date($row['user_regdate']);
+    $user_time ?: ((!empty($row['user_time'])) ? bb_date($row['user_time']) : $lang['NONE']);
+    $posts = $row['user_posts'] ?: 0;
+    $pm = $bb_cfg['text_buttons'] ? '<a class="txtb" href="' . (PM_URL . "?mode=post&amp;" . POST_USERS_URL . "=" . $row['user_id']) . '">' . $lang['SEND_PM_TXTB'] . '</a>' : '<a href="' . (PM_URL . "?mode=post&amp;" . POST_USERS_URL . "=" . $row['user_id']) . '"><img src="' . $images['icon_pm'] . '" alt="' . $lang['SEND_PRIVATE_MESSAGE'] . '" title="' . $lang['SEND_PRIVATE_MESSAGE'] . '" border="0" /></a>';
+    $avatar = get_avatar($row['user_id'], $row['avatar_ext_id'], !bf($row['user_opt'], 'user_opt', 'dis_avatar'), 50, 50);
+
+    if (bf($row['user_opt'], 'user_opt', 'user_viewemail') || ($group_mod || IS_ADMIN)) {
+        $email_uri = ($bb_cfg['board_email_form']) ? ("profile.php?mode=email&amp;" . POST_USERS_URL . "=" . $row['user_id']) : 'mailto:' . $row['user_email'];
+        $email = '<a class="editable" href="' . $email_uri . '">' . $row['user_email'] . '</a>';
+    } else {
+        $email = $lang['NOSELECT'];
+    }
+
+    if ($row['user_website']) {
+        $www = $bb_cfg['text_buttons'] ? '<a class="txtb" href="' . $row['user_website'] . '"  target="_userwww">' . $lang['VISIT_WEBSITE_TXTB'] . '</a>' : '<a class="txtb" href="' . $row['user_website'] . '" target="_userwww"><img src="' . $images['icon_www'] . '" alt="' . $lang['VISIT_WEBSITE'] . '" title="' . $lang['VISIT_WEBSITE'] . '" border="0" /></a>';
+    } else {
+        $www = $lang['NOSELECT'];
+    }
+}
+
 function get_bt_userdata($user_id)
 {
     if (!$btu = CACHE('bb_cache')->get('btu_' . $user_id)) {
