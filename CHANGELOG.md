@@ -1,5 +1,28 @@
 # Change Log
 
+## [v2.3.1-rc1](https://github.com/torrentpier/torrentpier/tree/v2.3.1-rc1) (2023-03-10)
+[Full Changelog](https://github.com/torrentpier/torrentpier/compare/v2.3.0.4-beta2...v2.3.1-rc1)
+
+**Merged pull requests:**
+
+- Minor adjustments in sql dumps [\#560](https://github.com/torrentpier/torrentpier/pull/560), [\#561](https://github.com/torrentpier/torrentpier/pull/561) ([belomaxorka](https://github.com/belomaxorka))
+- New BB_PATH implementation [\#562](https://github.com/torrentpier/torrentpier/pull/562) ([belomaxorka](https://github.com/belomaxorka))
+- Use constants instead of string literals [\#563](https://github.com/torrentpier/torrentpier/pull/563), [\#573](https://github.com/torrentpier/torrentpier/pull/573) ([belomaxorka](https://github.com/belomaxorka))
+- Hide feed button if feed file doesn't exist [\#564](https://github.com/torrentpier/torrentpier/pull/564) ([belomaxorka](https://github.com/belomaxorka))
+- Added some new fonts in bbcode editor [\#565](https://github.com/torrentpier/torrentpier/pull/565) ([belomaxorka](https://github.com/belomaxorka))
+- Added some new font sizes in bbcode editor [\#566](https://github.com/torrentpier/torrentpier/pull/566) ([belomaxorka](https://github.com/belomaxorka))
+- Added optional parameter in $valid_actions [AJAX] [\#567](https://github.com/torrentpier/torrentpier/pull/567) ([belomaxorka](https://github.com/belomaxorka))
+- Check if request is ajax [\#569](https://github.com/torrentpier/torrentpier/pull/569) ([belomaxorka](https://github.com/belomaxorka))
+- Fixed code-style in some files [\#570](https://github.com/torrentpier/torrentpier/pull/570) ([belomaxorka](https://github.com/belomaxorka))
+- Minor adjustments [\#571](https://github.com/torrentpier/torrentpier/pull/571), [\#584](https://github.com/torrentpier/torrentpier/pull/584) ([belomaxorka](https://github.com/belomaxorka))
+- Added link to forum in admin_forumauth.tpl [\#574](https://github.com/torrentpier/torrentpier/pull/574) ([belomaxorka](https://github.com/belomaxorka))
+- Simplified make_rand_str function [\#575](https://github.com/torrentpier/torrentpier/pull/575) ([belomaxorka](https://github.com/belomaxorka))
+- Redesigned admin_ug_auth [\#576](https://github.com/torrentpier/torrentpier/pull/576) ([belomaxorka](https://github.com/belomaxorka))
+- Fixed broken "user_viewonline" in admin panel [\#579](https://github.com/torrentpier/torrentpier/pull/579) ([belomaxorka](https://github.com/belomaxorka))
+- Make sitemap sending configurable [\#585](https://github.com/torrentpier/torrentpier/pull/585) ([belomaxorka](https://github.com/belomaxorka))
+- Fixed get_avatar method [\#586](https://github.com/torrentpier/torrentpier/pull/586) ([belomaxorka](https://github.com/belomaxorka))
+- Added show avatar in memberlist [\#587](https://github.com/torrentpier/torrentpier/pull/587) ([belomaxorka](https://github.com/belomaxorka))
+
 ## [v2.3.0.4-beta2](https://github.com/torrentpier/torrentpier/tree/v2.3.0.4-beta2) (2023-03-04)
 [Full Changelog](https://github.com/torrentpier/torrentpier/compare/v2.3.0.4-beta...v2.3.0.4-beta2)
 
