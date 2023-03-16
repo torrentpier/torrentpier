@@ -1,26 +1,10 @@
 <?php
 /**
- * MIT License
+ * TorrentPier – Bull-powered BitTorrent tracker engine
  *
- * Copyright (c) 2005-2017 TorrentPier
- *
- * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to deal
- * in the Software without restriction, including without limitation the rights
- * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following conditions:
- *
- * The above copyright notice and this permission notice shall be included in all
- * copies or substantial portions of the Software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
- * SOFTWARE.
+ * @copyright Copyright (c) 2005-2023 TorrentPier (https://torrentpier.com)
+ * @link      https://github.com/torrentpier/torrentpier for the canonical source repository
+ * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
  */
 
 // Common, these terms are used extensively on several pages
@@ -343,6 +327,8 @@ $lang['POST_ANNOUNCEMENT'] = 'Oglas';
 $lang['POST_STICKY'] = 'Ljepljiv';
 $lang['POST_NORMAL'] = 'Normalan';
 $lang['POST_DOWNLOAD'] = 'Preuzimanje';
+
+$lang['PRINT_PAGE'] = 'Ispis stranice';
 
 $lang['CONFIRM_DELETE'] = 'Jeste li sigurni da želite izbrisati ovaj post?';
 $lang['CONFIRM_DELETE_POLL'] = 'Jeste li sigurni da želite ukloniti ovu anketu?';
@@ -1135,10 +1121,13 @@ $lang['STATUS_DOES_EXIST'] = 'Takav status ne postoji: ';
 
 // tor_comment
 $lang['TOR_MOD_TITLE'] = 'Promjena statusa iz ruke - %s';
-$lang['TOR_MOD_MSG'] = "Pozdrav, %s.\\stanje n\n [URL=%s distribuciju]your[/url] mijenja na [b]%s[/b]";
+$lang['TOR_MOD_MSG'] = "Pozdrav, %s.\\stanje n
+ [URL=%s distribuciju]your[/url] mijenja na [b]%s[/b]";
 
 $lang['TOR_AUTH_TITLE'] = 'Promjene u dizajnu - %s';
-$lang['TOR_AUTH_MSG'] = "Pozdrav, %s.\n\n čini moja ruka promijeniti - [URL=%s]%s[/url]\\N\\N molimo vas, provjerite ga.";
+$lang['TOR_AUTH_MSG'] = "Pozdrav, %s.
+
+ čini moja ruka promijeniti - [URL=%s]%s[/url]\\N\\N molimo vas, provjerite ga.";
 $lang['TOR_AUTH_FIXED'] = 'Fiksni';
 $lang['TOR_AUTH_SENT_COMMENT'] = ' &middot; <span class="seed bold">The informacije poslan moderatora. Očekivati.</span>';
 
@@ -2702,7 +2691,8 @@ $lang['MC_TITLE'] = 'Komentar Umjerenost';
 $lang['MC_LEGEND'] = 'Unesite komentar';
 $lang['MC_FAQ'] = 'Upisani tekst će biti prikazan ispod ovom porukom';
 $lang['MC_COMMENT_PM_SUBJECT'] = "%s u vašoj poruci";
-$lang['MC_COMMENT_PM_MSG'] = "Bok,\\[b]%s[/b] nModerator ostavio u vašoj komunikaciji sa [URL=%s]\\[b]%s[/b][/url][quote]\n%s n[/quote]";
+$lang['MC_COMMENT_PM_MSG'] = "Bok,\\[b]%s[/b] nModerator ostavio u vašoj komunikaciji sa [URL=%s]\\[b]%s[/b][/url][quote]
+%s n[/quote]";
 $lang['MC_COMMENT'] = array(
     0 => array(
         'title' => '',

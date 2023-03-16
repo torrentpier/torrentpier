@@ -1,26 +1,10 @@
 <?php
 /**
- * MIT License
+ * TorrentPier – Bull-powered BitTorrent tracker engine
  *
- * Copyright (c) 2005-2017 TorrentPier
- *
- * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to deal
- * in the Software without restriction, including without limitation the rights
- * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following conditions:
- *
- * The above copyright notice and this permission notice shall be included in all
- * copies or substantial portions of the Software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
- * SOFTWARE.
+ * @copyright Copyright (c) 2005-2023 TorrentPier (https://torrentpier.com)
+ * @link      https://github.com/torrentpier/torrentpier for the canonical source repository
+ * @license   https://github.com/torrentpier/torrentpier/blob/master/LICENSE MIT License
  */
 
 // Common, these terms are used extensively on several pages
@@ -343,6 +327,8 @@ $lang['POST_ANNOUNCEMENT'] = 'Reklam';
 $lang['POST_STICKY'] = 'Yapışqan';
 $lang['POST_NORMAL'] = 'Normal';
 $lang['POST_DOWNLOAD'] = 'Download';
+
+$lang['PRINT_PAGE'] = 'Səhifəni çap edin';
 
 $lang['CONFIRM_DELETE'] = 'Siz əmin deyilsinizsə aradan qaldırılması, bu post?';
 $lang['CONFIRM_DELETE_POLL'] = 'Siz əmin deyilsinizsə aradan qaldırılması, bu sorğu?';
@@ -1135,10 +1121,13 @@ $lang['STATUS_DOES_EXIST'] = 'Belə statusu yoxdur: ';
 
 // tor_comment
 $lang['TOR_MOD_TITLE'] = 'Status paylanması - %s';
-$lang['TOR_MOD_MSG'] = "Salam, %s.\\statusu n\n [URL=%s]paylanması your[/url] dəyişir [b]%s[/b]";
+$lang['TOR_MOD_MSG'] = "Salam, %s.\\statusu n
+ [URL=%s]paylanması your[/url] dəyişir [b]%s[/b]";
 
 $lang['TOR_AUTH_TITLE'] = 'Dəyişikliklərin edilməsi dizayn - %s';
-$lang['TOR_AUTH_MSG'] = "Salam, %s.\n\n edir, mənim paylanması dəyişib - ilə [URL=%s]%s[/url]\\N\\N kontrol edin.";
+$lang['TOR_AUTH_MSG'] = "Salam, %s.
+
+ edir, mənim paylanması dəyişib - ilə [URL=%s]%s[/url]\\N\\N kontrol edin.";
 $lang['TOR_AUTH_FIXED'] = 'Sabit';
 $lang['TOR_AUTH_SENT_COMMENT'] = ' &middot; <span class="seed bold">The məlumat göndərilib bölmənin moderatoru. Gözləmək.</span>';
 
@@ -2702,7 +2691,8 @@ $lang['MC_TITLE'] = 'Şərh Модерации';
 $lang['MC_LEGEND'] = 'Şərhinizi yazın';
 $lang['MC_FAQ'] = 'Sizin daxil etdiyiniz mətn göstərilir altında bu mesajı';
 $lang['MC_COMMENT_PM_SUBJECT'] = "%s sizin bildirir ki,";
-$lang['MC_COMMENT_PM_MSG'] = "Salam,\\[b]%s[/b] nModerator saxlayıb sizin məlumatında ilə [URL=%s]\\[b]%s[/b][/url][quote]\n%s n[/quote]";
+$lang['MC_COMMENT_PM_MSG'] = "Salam,\\[b]%s[/b] nModerator saxlayıb sizin məlumatında ilə [URL=%s]\\[b]%s[/b][/url][quote]
+%s n[/quote]";
 $lang['MC_COMMENT'] = array(
     0 => array(
         'title' => '',
