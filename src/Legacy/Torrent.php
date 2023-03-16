@@ -719,7 +719,6 @@ class Torrent
         $attempts = $success = $response = 0;
 
         while (!$success && $attempts++ < $max_attempts) {
-
             // Send request
             $file = fsockopen($bb_cfg['ocelot']['host'], $bb_cfg['ocelot']['port'], $error_num, $error_string);
             if ($file) {
