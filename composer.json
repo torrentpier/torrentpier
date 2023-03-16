@@ -53,7 +53,6 @@
     "rych/bencode": "v1.0.0",
     "samdark/sitemap": "2.4.0",
     "swiftmailer/swiftmailer": "v6.3.0",
-    "symfony/dotenv": "4.*",
     "symfony/polyfill": "v1.27.0"
   },
   "require-dev": {
