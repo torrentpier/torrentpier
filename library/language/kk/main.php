@@ -1579,7 +1579,6 @@ $lang['USERS'] = 'пайдаланушы Admin';
 $lang['GROUPS'] = 'Group Admin';
 $lang['FORUMS'] = 'Админ';
 $lang['MODS'] = 'модификациялар';
-$lang['TP'] = 'TorrentPier';
 
 $lang['CONFIGURATION'] = 'конфигурация';
 $lang['MANAGE'] = 'Басқару';
