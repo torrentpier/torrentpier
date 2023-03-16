@@ -1579,7 +1579,6 @@ $lang['USERS'] = 'Карыстальнік Admin';
 $lang['GROUPS'] = 'Адміністратар Групы';
 $lang['FORUMS'] = 'Адмін Форуму';
 $lang['MODS'] = 'Мадыфікацыі';
-$lang['TP'] = 'Сайт torrentpier';
 
 $lang['CONFIGURATION'] = 'Канфігурацыі';
 $lang['MANAGE'] = 'Кіраванне';
