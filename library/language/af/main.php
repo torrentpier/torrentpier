@@ -12,8 +12,8 @@ $lang['ADMIN'] = 'administrasie';
 $lang['FORUM'] = 'Forum';
 $lang['CATEGORY'] = 'kategorie';
 $lang['HIDE_CAT'] = 'Versteek kategorieë';
-$lang['HIDE_CAT_MESS'] = 'Some categories are hidden by customized display options';
-$lang['SHOW_ALL'] = 'Show all';
+$lang['HIDE_CAT_MESS'] = 'Sommige kategorieë word versteek deur gepasmaakte vertoonopsies';
+$lang['SHOW_ALL'] = 'Wys alles';
 $lang['TOPIC'] = 'onderwerp';
 $lang['TOPICS'] = 'onderwerpe';
 $lang['TOPICS_SHORT'] = 'onderwerpe';
@@ -1509,9 +1509,9 @@ $lang['ITALIC'] = 'Kursiewe teks: [i]text[/i] (Ctrl + I)';
 $lang['UNDERLINE'] = 'Onderstreep teks: [u]text[/u] (Ctrl + U)';
 $lang['STRIKEOUT'] = 'Strikeout-teks: [s]text[/s] (Ctrl + S)';
 $lang['QUOTE_TITLE'] = 'Aanhalingstekst: [quote]text[/quote] (Ctrl + Q)';
-$lang['IMG_TITLE'] = 'Insert image: [img]https://image_url[/img] (Ctrl+R)';
+$lang['IMG_TITLE'] = 'Voeg prent in: [img]https://image_url[/img] (Ctrl+R)';
 $lang['URL'] = 'Url';
-$lang['URL_TITLE'] = 'Insert URL: [url]https://url[/url] or [url=https://url]URL text[/url] (Ctrl+W)';
+$lang['URL_TITLE'] = 'Voeg URL in: [url]https://url[/url] of [url=https://url]URL-teks[/url] (Ctrl+W)';
 $lang['CODE_TITLE'] = 'Kode vertoon: [code]code[/code] (Ctrl + K)';
 $lang['LIST'] = 'lys';
 $lang['LIST_TITLE'] = 'Lys: [list]text[/list] (Ctrl + l)';
@@ -2057,7 +2057,7 @@ $lang['TRACKER_STATS'] = 'Statistiek op die spoorsnyer';
 $lang['WHOIS_INFO'] = 'Inligting oor IP-adres';
 $lang['SHOW_MOD_HOME_PAGE'] = 'Wys op moderators die index.php';
 $lang['PREMOD_HELP'] = '<h4><span class="tor-icon tor-dup">&#8719;</span> Voormoderering</h4> <h6>Indien u nie verspreidings het na die status van v, # of T in hierdie afdeling, insluitend onderafdelings nie, sal die verspreiding hierdie status outomaties</h6> ontvang';
-$lang['TOR_COMMENT'] = '<h4>Comment on the status of a distribution</h4> <h6>The comment allows you to point out the errors made to the releaser. If the statuses are incomplete, a release response form is available to the release manager to correct the release</h6>';
+$lang['TOR_COMMENT'] = '<h4>Lewer kommentaar op die status van \'n verspreiding</h4> <h6>Die opmerking laat jou toe om die foute wat aan die vrysteller gemaak is, uit te wys. As die statusse onvolledig is, is \'n vrystelling-antwoordvorm beskikbaar vir die vrystellingbestuurder om die vrystelling</h6>reg te stel';
 $lang['SEED_BONUS_ADD'] = '<h4>Adding saad bonus </h4> <h6> Aantal verdelings word uitgedeel deur die gebruiker en die grootte van bonusse vir hulle (laai tye per uur) </h6>';
 $lang['SEED_BONUS_RELEASE'] = 'Na N-nommer van vrystellings';
 $lang['SEED_BONUS_POINTS'] = 'Bonusse in \'n uur';
@@ -2124,7 +2124,7 @@ $lang['EMPTY_FILE_ENTRY'] = 'Leë lêerinskrywing';
 
 // Attachments -> Sync
 $lang['SYNC_THUMBNAIL_RESETTED'] = 'Thumbnail gereset vir Aanhegsel: %s'; // replace %s with physical Filename
-$lang['ATTACH_SYNC_FINISHED'] = 'Attachment Synchronization Finished.';
+$lang['ATTACH_SYNC_FINISHED'] = 'Aanhegselsinchronisasie voltooi.';
 $lang['SYNC_TOPICS'] = 'Sinkroniseer-onderwerpe';
 $lang['SYNC_POSTS'] = 'Sync Posts';
 $lang['SYNC_THUMBNAILS'] = 'Sinkroniseer Thumbnails';
@@ -2386,7 +2386,7 @@ $lang['CRON_NEXT_RUN'] = 'Volgende Begin';
 $lang['CRON_RUN_COUNT'] = 'lopies';
 $lang['CRON_MANAGE'] = 'bestuur';
 $lang['CRON_OPTIONS'] = 'Cron opsies';
-$lang['CRON_DISABLED_WARNING'] = 'Warning! Running cron scripts is disabled. To enable it, set the APP_CRON_ENABLED variable.';
+$lang['CRON_DISABLED_WARNING'] = 'Waarskuwing! Die uitvoer van cron-skrifte is gedeaktiveer. Om dit te aktiveer, stel die APP_CRON_ENABLED veranderlike.';
 
 $lang['CRON_ENABLED'] = 'Cron aangeskakel';
 $lang['CRON_CHECK_INTERVAL'] = 'Cron tjek interval (sekonde)';
@@ -2576,7 +2576,7 @@ $lang['RELEASES'] = 'vrystellings';
 
 $lang['BACK'] = 'terug';
 $lang['ERROR_FORM'] = 'Ongeldige velde';
-$lang['RELEASE_WELCOME'] = 'Please fill in the release form';
+$lang['RELEASE_WELCOME'] = 'Vul asseblief die vrystellingsvorm in';
 $lang['NEW_RELEASE'] = 'Nuwe weergawe';
 $lang['NEXT'] = 'Aanhou';
 $lang['OTHER'] = 'ander';
@@ -2584,8 +2584,8 @@ $lang['OTHER'] = 'ander';
 $lang['TPL_EMPTY_FIELD'] = 'Jy moet die veld <b>%s</b> invul';
 $lang['TPL_EMPTY_SEL'] = 'Jy moet kies <b>%s</b>';
 $lang['TPL_NOT_NUM'] = '<b>%s</b> - Nie \'n nommer nie';
-$lang['TPL_NOT_URL'] = '<b>%s</b> - Must be https:// URL';
-$lang['TPL_NOT_IMG_URL'] = '<b>%s</b> - Must be https:// IMG_URL';
+$lang['TPL_NOT_URL'] = '<b>%s</b> - Moet https:// URL wees';
+$lang['TPL_NOT_IMG_URL'] = '<b>%s</b> - Moet https:// IMG_URL wees';
 $lang['TPL_PUT_INTO_SUBJECT'] = 'Sit in die vak';
 $lang['TPL_POSTER'] = 'plakkaat';
 $lang['TPL_REQ_FILLING'] = 'Vereis vulling';
@@ -2599,15 +2599,15 @@ $lang['TPL_SPOILER'] = 'verwoester';
 $lang['TPL_IN_LINE'] = 'In dieselfde lyn';
 $lang['TPL_HEADER_ONLY'] = 'Net in \'n titel';
 
-$lang['SEARCH_INVALID_USERNAME'] = 'Invalid username entered to search';
-$lang['SEARCH_INVALID_EMAIL'] = 'Invalid email address entered to search';
-$lang['SEARCH_INVALID_IP'] = 'Invalid IP-address entered to search';
-$lang['SEARCH_INVALID_GROUP'] = 'Invalid group entered to search';
-$lang['SEARCH_INVALID_RANK'] = 'Invalid rank entered to search';
-$lang['SEARCH_INVALID_DATE'] = 'Invalid date entered to search';
-$lang['SEARCH_INVALID_POSTCOUNT'] = 'Invalid post count entered to search';
+$lang['SEARCH_INVALID_USERNAME'] = 'Ongeldige gebruikernaam is ingevoer om te soek';
+$lang['SEARCH_INVALID_EMAIL'] = 'Ongeldige e-posadres ingevoer om te soek';
+$lang['SEARCH_INVALID_IP'] = 'Ongeldige IP-adres is ingevoer om te soek';
+$lang['SEARCH_INVALID_GROUP'] = 'Ongeldige groep is ingevoer om te soek';
+$lang['SEARCH_INVALID_RANK'] = 'Ongeldige rangorde ingevoer om te soek';
+$lang['SEARCH_INVALID_DATE'] = 'Ongeldige datum ingevoer om te soek';
+$lang['SEARCH_INVALID_POSTCOUNT'] = 'Ongeldige plasingtelling is ingevoer om te soek';
 $lang['SEARCH_INVALID_USERFIELD'] = 'Ongeldige gebruikersveld data ingevoer';
-$lang['SEARCH_INVALID_LASTVISITED'] = 'Invalid date entered for last visited search';
+$lang['SEARCH_INVALID_LASTVISITED'] = 'Ongeldige datum ingevoer vir soektog wat laas besoek is';
 $lang['SEARCH_INVALID_LANGUAGE'] = 'Ongeldige taal geselekteer';
 $lang['SEARCH_INVALID_TIMEZONE'] = 'Ongeldige tydsone geselekteer';
 $lang['SEARCH_INVALID_MODERATORS'] = 'Ongeldige forum gekies';
@@ -2658,12 +2658,12 @@ $lang['SEARCH_USERS_GROUPS_EXPLAIN'] = 'Bekyk alle lede van die gekose groep.';
 $lang['SEARCH_USERS_RANKS_EXPLAIN'] = 'Bekyk alle draers van die geselekteerde rang.';
 $lang['BANNED_USERS'] = 'Verbode gebruikers';
 $lang['DISABLED_USERS'] = 'Gestremde gebruikers';
-$lang['SEARCH_USERS_MISC_EXPLAIN'] = 'Administrators - All users with Administrator powers; Moderators - All forum moderators; Banned Users - All accounts that have been banned on these forums; Disabled Users - All users with disabled accounts (either manually disabled or never verified their email address); Users with disabled PMs - Selects users who have the Private Messages privileges removed (Done via User Management)';
-$lang['POSTCOUNT'] = 'Post count';
+$lang['SEARCH_USERS_MISC_EXPLAIN'] = 'Administrateurs - Alle gebruikers met administrateur magte; Moderators - Alle forum moderators; Verbande gebruikers - Alle rekeninge wat op hierdie forums verban is; Gestremde gebruikers - Alle gebruikers met gedeaktiveerde rekeninge (óf met die hand gedeaktiveer of nooit hul e-posadres geverifieer nie); Gebruikers met gedeaktiveerde PM\'e - Kies gebruikers wat die Privaatboodskap-voorregte verwyder het (Gedoen via gebruikersbestuur)';
+$lang['POSTCOUNT'] = 'Postelling';
 $lang['EQUALS'] = 'Gelykes';
 $lang['GREATER_THAN'] = 'Groter as';
 $lang['LESS_THAN'] = 'Minder as';
-$lang['SEARCH_USERS_POSTCOUNT_EXPLAIN'] = 'You can search for users based on the post count value. You can either search by a specific value, greater than or lesser than a value or between two values. To do the range search, select "Equals" then put the beginning and ending values of the range separated by a dash (-), e.g. 10-15';
+$lang['SEARCH_USERS_POSTCOUNT_EXPLAIN'] = 'Jy kan soek vir gebruikers op grond van die plasingtellingwaarde. Jy kan óf soek volgens \'n spesifieke waarde, groter as of kleiner as \'n waarde of tussen twee waardes. Om die reekssoektog te doen, kies "Gelyk aan" en plaas dan die begin- en eindwaardes van die reeks geskei deur \'n streep (-), bv. 10-15';
 $lang['USERFIELD'] = 'Userfield';
 $lang['SEARCH_USERS_USERFIELD_EXPLAIN'] = 'Soek vir gebruikers gebaseer op verskillende profiel velde. Wildcards word ondersteun deur \'n asterix (*) te gebruik.';
 $lang['SEARCH_USERS_LASTVISITED_EXPLAIN'] = 'U kan op soek na gebruikers op grond van hul laaste inskrywing datum soek deur hierdie soektog te gebruik';
@@ -2671,7 +2671,7 @@ $lang['SEARCH_USERS_LANGUAGE_EXPLAIN'] = 'Dit sal gebruikers vertoon wat \'n spe
 $lang['SEARCH_USERS_TIMEZONE_EXPLAIN'] = 'Gebruikers wat \'n spesifieke tydsone in hul profiel gekies het';
 $lang['SEARCH_USERS_STYLE_EXPLAIN'] = 'Wys gebruikers wat \'n spesifieke styl gekies het.';
 $lang['MODERATORS_OF'] = 'Moderators van';
-$lang['SEARCH_USERS_MODERATORS_EXPLAIN'] = 'Search for users with Moderating permissions to a specific forum. Moderating permissions are recognised either by User Permissions or by being in a Group with the right Group Permissions.';
+$lang['SEARCH_USERS_MODERATORS_EXPLAIN'] = 'Soek vir gebruikers met modereringstoestemmings vir \'n spesifieke forum. Modereringstoestemmings word herken óf deur gebruikertoestemmings óf deur in \'n groep te wees met die regte groeptoestemmings.';
 
 $lang['SEARCH_USERS_NEW'] = '%s het %d resultaat (s) opgelewer. Voer <a href="%s">aangesoek</a> uit.';
 $lang['BANNED'] = 'Verban';
@@ -2749,7 +2749,7 @@ $lang['ATOM_GLOBAL_FEED'] = 'Globale voer vir alle forums';
 $lang['HASH_INVALID'] = 'Hash %s is ongeldig';
 $lang['HASH_NOT_FOUND'] = 'Vrylating met hash %s nie gevind nie';
 
-$lang['TERMS_EMPTY_TEXT'] = '[align=center]The text of this page is edited at: [url=https://%s/admin/admin_terms.php]admin/admin_terms.php[/url]. This line can see only administrators.[/align]';
+$lang['TERMS_EMPTY_TEXT'] = '[align=center]Die teks van hierdie bladsy is geredigeer by: [url=https://%s/admin/admin_terms.php]admin/admin_terms.php[/url]. Hierdie lyn kan slegs administrateurs sien.[/align]';
 $lang['TERMS_EXPLAIN'] = 'Op hierdie bladsy kan u die teks van die basiese reëls van die bron spesifiseer vir gebruikers.';
 
 $lang['TR_STATS'] = array(
@@ -2808,14 +2808,14 @@ $lang['CAPTCHA_SETTINGS'] = '<h2>ReCaptcha nie ten volle gekonfigureer nie</h2><
 
 // Sending email
 $lang['EMAILER_SUBJECT'] = [
-    'EMPTY' => 'No subject',
-    'GROUP_ADDED' => 'You have been added to the user group',
-    'GROUP_APPROVED' => 'Your request to join the user group has been granted',
-    'GROUP_REQUEST' => 'A request to join your user group',
-    'PRIVMSG_NOTIFY' => 'New private message',
-    'TOPIC_NOTIFY' => 'Notification of response in the thread %s',
-    'USER_ACTIVATE' => 'Account reactivation',
-    'USER_ACTIVATE_PASSWD' => 'Confirming a new password',
-    'USER_WELCOME' => 'Welcome to the site %s',
-    'USER_WELCOME_INACTIVE' => 'Welcome to the site %s',
+    'EMPTY' => 'Geen onderwerp',
+    'GROUP_ADDED' => 'Jy is by die gebruikersgroep gevoeg',
+    'GROUP_APPROVED' => 'Jou versoek om by die gebruikersgroep aan te sluit is toegestaan',
+    'GROUP_REQUEST' => '\'n Versoek om by jou gebruikersgroep aan te sluit',
+    'PRIVMSG_NOTIFY' => 'Nuwe privaat boodskap',
+    'TOPIC_NOTIFY' => 'Kennisgewing van reaksie in die draad %s',
+    'USER_ACTIVATE' => 'Rekening heraktivering',
+    'USER_ACTIVATE_PASSWD' => 'Bevestiging van \'n nuwe wagwoord',
+    'USER_WELCOME' => 'Welkom by die webwerf %s',
+    'USER_WELCOME_INACTIVE' => 'Welkom by die webwerf %s',
 ];
