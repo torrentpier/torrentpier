@@ -2386,6 +2386,7 @@ $lang['CRON_NEXT_RUN'] = 'Chạy Tiếp Theo';
 $lang['CRON_RUN_COUNT'] = 'Chạy';
 $lang['CRON_MANAGE'] = 'Quản lý';
 $lang['CRON_OPTIONS'] = 'Định kỳ lựa chọn';
+$lang['CRON_DISABLED_WARNING'] = 'Warning! Running cron scripts is disabled. To enable it, set the APP_CRON_ENABLED variable.';
 
 $lang['CRON_ENABLED'] = 'Định kỳ được kích hoạt';
 $lang['CRON_CHECK_INTERVAL'] = 'Kiểm tra định kỳ khoảng thời gian (giây)';
