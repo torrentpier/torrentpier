@@ -2386,6 +2386,7 @@ $lang['CRON_NEXT_RUN'] = 'Kitą Paleisti';
 $lang['CRON_RUN_COUNT'] = 'Veikia';
 $lang['CRON_MANAGE'] = 'Valdyti';
 $lang['CRON_OPTIONS'] = 'Cron funkcijos';
+$lang['CRON_DISABLED_WARNING'] = 'Warning! Running cron scripts is disabled. To enable it, set the APP_CRON_ENABLED variable.';
 
 $lang['CRON_ENABLED'] = 'Cron įjungtas';
 $lang['CRON_CHECK_INTERVAL'] = 'Cron tikrinimo interval (sek)';
