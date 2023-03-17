@@ -12,7 +12,8 @@ $lang['ADMIN'] = 'Quản trị';
 $lang['FORUM'] = 'Forum';
 $lang['CATEGORY'] = 'Mục';
 $lang['HIDE_CAT'] = 'Hide loại';
-$lang['HIDE_CAT_MESS'] = 'Một phần của loại được ẩn "lựa chọn Show" &middot; <a href="index.php?sh=1">Show All</a>';
+$lang['HIDE_CAT_MESS'] = 'Some categories are hidden by customized display options';
+$lang['SHOW_ALL'] = 'Show all';
 $lang['TOPIC'] = 'Chủ đề';
 $lang['TOPICS'] = 'Chủ đề';
 $lang['TOPICS_SHORT'] = 'Chủ đề';
@@ -82,7 +83,7 @@ $lang['SKYPE_ERROR'] = 'Bạn bước vào một không đăng nhập Skype';
 $lang['TWITTER'] = 'Twitter';
 $lang['TWITTER_ERROR'] = 'Bạn bước vào một hợp Twitter login';
 
-$lang['FORUM_INDEX'] = '%s Diễn Đàn Chỉ Số'; // eg. sitename Forum Index, %s can be removed if you prefer
+$lang['FORUM_INDEX'] = '%s Diễn Đàn Chỉ Số'; // e.g. sitename Forum Index, %s can be removed if you prefer
 
 $lang['POST_NEW_TOPIC'] = 'Bài mới chủ đề';
 $lang['POST_NEW_RELEASE'] = 'Bài mới phát hành';
@@ -301,7 +302,7 @@ $lang['SELECT_POSTS_PER_PAGE'] = 'bài mỗi trang';
 // Posting/Replying (Not private messaging!)
 $lang['TOPIC_REVIEW'] = 'Chủ đề xét';
 
-$lang['NO_POST_MODE'] = 'Không có chế độ bài lựa chọn'; // If posting.php is called without a mode (newtopic/reply/delete/etc, shouldn't be shown normaly)
+$lang['NO_POST_MODE'] = 'Không có chế độ bài lựa chọn'; // If posting.php is called without a mode (newtopic/reply/delete/etc., shouldn't be shown normally)
 
 $lang['POST_A_NEW_TOPIC'] = 'Bài mới chủ đề';
 $lang['POST_A_REPLY'] = 'Bài mới trả lời';
@@ -489,7 +490,7 @@ $lang['UNMARK_ALL'] = 'Bỏ tất cả';
 $lang['CONFIRM_DELETE_PM'] = 'Anh có chắc là muốn để xóa tin nhắn này?';
 $lang['CONFIRM_DELETE_PMS'] = 'Bạn có chắc chắn muốn xóa các tin nhắn?';
 
-$lang['INBOX_SIZE'] = 'Hộp thư của bạn is<br /><b>%d%%</b> đầy đủ'; // eg. Your Inbox is 50% full
+$lang['INBOX_SIZE'] = 'Hộp thư của bạn is<br /><b>%d%%</b> đầy đủ'; // e.g. Your Inbox is 50% full
 $lang['SENTBOX_SIZE'] = 'Bạn nghị không đứng đắn is<br /><b>%d%%</b> đầy đủ';
 $lang['SAVEBOX_SIZE'] = 'Bạn Discountcow is<br /><b>%d%%</b> đầy đủ';
 
@@ -571,7 +572,7 @@ $lang['YEARS'] = 'Năm';
 $lang['NO_THEMES'] = 'Không có chủ Đề Trong cơ sở dữ liệu';
 $lang['TIMEZONE'] = 'Múi giờ';
 $lang['DATE_FORMAT_PROFILE'] = 'Ngày dạng';
-$lang['DATE_FORMAT_EXPLAIN'] = 'Cú pháp sử dụng là giống hệt nhau để tập <a href=\'http://www.php.net/date\' target=\'_other\'>date()</a> chức năng.';
+$lang['DATE_FORMAT_EXPLAIN'] = 'The syntax used is identical to the PHP <a href=\'https://www.php.net/manual/en/function.date.php\' target=\'_other\'>date()</a> function.';
 $lang['SIGNATURE'] = 'Chữ ký';
 $lang['SIGNATURE_EXPLAIN'] = 'Đây là một khối văn bản đó có thể được thêm vào bài bạn làm cho. Đó là một %d nhân vật giới hạn';
 $lang['SIGNATURE_DISABLE'] = 'Ký cho vi phạm nội quy';
@@ -802,8 +803,8 @@ $lang['BRIEFLY'] = 'Một thời gian ngắn';
 $lang['NO_SEARCHABLE_FORUMS'] = 'Bạn không có quyền để tìm bất kỳ đàn trên trang web này.';
 
 $lang['NO_SEARCH_MATCH'] = 'Không có chủ đề hoặc bài gặp chí tìm kiếm';
-$lang['FOUND_SEARCH_MATCH'] = 'Tìm thấy %d trận đấu'; // eg. Search found 1 match
-$lang['FOUND_SEARCH_MATCHES'] = 'Tìm thấy %d trận đấu'; // eg. Search found 24 matches
+$lang['FOUND_SEARCH_MATCH'] = 'Tìm thấy %d trận đấu'; // e.g. Search found 1 match
+$lang['FOUND_SEARCH_MATCHES'] = 'Tìm thấy %d trận đấu'; // e.g. Search found 24 matches
 $lang['TOO_MANY_SEARCH_RESULTS'] = 'Quá nhiều kết quả có thể được tìm thấy, hãy cố gắng để cụ thể hơn';
 
 $lang['CLOSE_WINDOW'] = 'Đóng Cửa Sổ';
@@ -1508,9 +1509,9 @@ $lang['ITALIC'] = 'Nghiêng văn bản: [i]text[/i] (Ctrl+I)';
 $lang['UNDERLINE'] = 'Nhấn mạnh chữ: [u]text[/u] (Ctrl+U)';
 $lang['STRIKEOUT'] = 'Gạch văn bản: [s]text[/s] (Ctrl+S)';
 $lang['QUOTE_TITLE'] = 'Báo văn bản: [quote]text[/quote] (Ctrl+Q)';
-$lang['IMG_TITLE'] = 'Chèn ảnh: [img]http://image_url[/img] (Ctrl+R)';
+$lang['IMG_TITLE'] = 'Insert image: [img]https://image_url[/img] (Ctrl+R)';
 $lang['URL'] = 'Url';
-$lang['URL_TITLE'] = 'Chèn ĐỊA [url]http://url[/url] hoặc [bạn, http://date]URL text[/url] (Ctrl+W)';
+$lang['URL_TITLE'] = 'Insert URL: [url]https://url[/url] or [url=https://url]URL text[/url] (Ctrl+W)';
 $lang['CODE_TITLE'] = 'Mã hiển thị: [code]code[/code] (Ctrl+K)';
 $lang['LIST'] = 'Danh sách';
 $lang['LIST_TITLE'] = 'Danh sách: [list]text[/list] (Ctrl+l)';
@@ -2056,7 +2057,7 @@ $lang['TRACKER_STATS'] = 'Số liệu thống kê trên theo dõi';
 $lang['WHOIS_INFO'] = 'Thông tin về địa chỉ IP';
 $lang['SHOW_MOD_HOME_PAGE'] = 'Hiển thị trên các điều hành viên index.php';
 $lang['PREMOD_HELP'] = '<h4><span class="tor-icon tor-dup">&#8719;</span> Pre-moderation</h4> <h6>If bạn không có phân phối cho tình trạng của v, #, hoặc T trong phần này, bao gồm cả các phần phụ, sự phân bố sẽ tự động nhận được điều này status</h6>';
-$lang['TOR_COMMENT'] = '<h4>Commentary về tình trạng của distribution</h4> <h6>Comment thành công cho phép anh để xác định quản trị sai lầm. Khi nedooformlennyh trạng thái quản trị có hình thành những phản ứng của các chỉnh release</h6>';
+$lang['TOR_COMMENT'] = '<h4>Comment on the status of a distribution</h4> <h6>The comment allows you to point out the errors made to the releaser. If the statuses are incomplete, a release response form is available to the release manager to correct the release</h6>';
 $lang['SEED_BONUS_ADD'] = '<h4>Adding giống thưởng </h4> <h6> Số lượng của phân phối được đưa ra bởi người sử dụng và kích thước của tiền thưởng cho họ (sạc lần trong một giờ) </h6>';
 $lang['SEED_BONUS_RELEASE'] = 'để N-số phát hành';
 $lang['SEED_BONUS_POINTS'] = 'tiền thưởng trong một giờ';
@@ -2084,7 +2085,7 @@ $lang['ATTACH_NUMBER_SETTINGS'] = 'Đính Kèm Số Cài Đặt';
 $lang['ATTACH_OPTIONS_SETTINGS'] = 'Đính Kèm Lựa Chọn';
 
 $lang['UPLOAD_DIRECTORY'] = 'Thư Mục Tải Lên';
-$lang['UPLOAD_DIRECTORY_EXPLAIN'] = 'Nhập tương đối con đường từ TorrentPier cài đặt để đính Kèm tải lên mục. Ví dụ, enter \'các tập tin, nếu bạn TorrentPier Cài đặt nằm xuống http://www.yourdomain.com/torrentpier và sự Gắn Lên Mục là nằm xuống http://www.yourdomain.com/torrentpier/files.';
+$lang['UPLOAD_DIRECTORY_EXPLAIN'] = 'Enter the relative path from your TorrentPier installation to the Attachments upload directory. For example, enter \'files\' if your TorrentPier Installation is located at https://www.yourdomain.com/torrentpier and the Attachment Upload Directory is located at https://www.yourdomain.com/torrentpier/files.';
 $lang['ATTACH_IMG_PATH'] = 'Đính Kèm Gửi Biểu Tượng';
 $lang['ATTACH_IMG_PATH_EXPLAIN'] = 'Hình Ảnh này được hiển thị tiếp theo để Gắn Kết trong Đăng cá nhân. Để lĩnh vực này trống rỗng, nếu bạn không muốn một biểu tượng được hiển thị. Thiết Lập này sẽ được ghi đè bởi các thiết Lập trong Nhóm mở Rộng Quản lý.';
 $lang['ATTACH_TOPIC_ICON'] = 'Đính Kèm Chủ Đề Biểu Tượng';
@@ -2123,7 +2124,7 @@ $lang['EMPTY_FILE_ENTRY'] = 'Tập Tin Rỗng Nhập';
 
 // Attachments -> Sync
 $lang['SYNC_THUMBNAIL_RESETTED'] = 'Thu nhỏ đặt lại cho đính Kèm: %s'; // replace %s with physical Filename
-$lang['ATTACH_SYNC_FINISHED'] = 'Đính Kèm Đồng Bộ Hóa Hoàn Thành.';
+$lang['ATTACH_SYNC_FINISHED'] = 'Attachment Synchronization Finished.';
 $lang['SYNC_TOPICS'] = 'Sync Chủ Đề';
 $lang['SYNC_POSTS'] = 'Đồng Bộ Bài';
 $lang['SYNC_THUMBNAILS'] = 'Sync Hình Thu Nhỏ';
@@ -2574,7 +2575,7 @@ $lang['RELEASES'] = 'Phát hành';
 
 $lang['BACK'] = 'Trở lại';
 $lang['ERROR_FORM'] = 'Không hợp lệ lĩnh vực';
-$lang['RELEASE_WELCOME'] = 'Xin điền vào mẫu releae';
+$lang['RELEASE_WELCOME'] = 'Please fill in the release form';
 $lang['NEW_RELEASE'] = 'Mới phát hành';
 $lang['NEXT'] = 'Tiếp tục';
 $lang['OTHER'] = 'Khác';
@@ -2582,8 +2583,8 @@ $lang['OTHER'] = 'Khác';
 $lang['TPL_EMPTY_FIELD'] = 'Anh phải điền vào lĩnh vực này <b>%s</b>';
 $lang['TPL_EMPTY_SEL'] = 'Bạn phải chọn <b>%s</b>';
 $lang['TPL_NOT_NUM'] = '<b>%s</b> - Không phải là một.';
-$lang['TPL_NOT_URL'] = '<b>%s</b> - Phải http:// DATE';
-$lang['TPL_NOT_IMG_URL'] = '<b>%s</b> - Phải http:// IMG_URL';
+$lang['TPL_NOT_URL'] = '<b>%s</b> - Must be https:// URL';
+$lang['TPL_NOT_IMG_URL'] = '<b>%s</b> - Must be https:// IMG_URL';
 $lang['TPL_PUT_INTO_SUBJECT'] = 'đưa vào cơ thể';
 $lang['TPL_POSTER'] = 'áp phích';
 $lang['TPL_REQ_FILLING'] = 'yêu cầu đầy';
@@ -2597,15 +2598,15 @@ $lang['TPL_SPOILER'] = 'gió';
 $lang['TPL_IN_LINE'] = 'trong cùng một dòng';
 $lang['TPL_HEADER_ONLY'] = 'chỉ trong một tiêu đề';
 
-$lang['SEARCH_INVALID_USERNAME'] = 'Không hợp lệ tên nhập để Tìm kiếm';
-$lang['SEARCH_INVALID_EMAIL'] = 'Không hợp lệ địa chỉ email đã nhập để Tìm kiếm';
-$lang['SEARCH_INVALID_IP'] = 'Không hợp lệ địa chỉ IP vào để Tìm kiếm';
-$lang['SEARCH_INVALID_GROUP'] = 'Không gia nhập để Tìm kiếm';
-$lang['SEARCH_INVALID_RANK'] = 'Không hợp lệ bậc nhập để Tìm kiếm';
-$lang['SEARCH_INVALID_DATE'] = 'Không hợp lệ Ngày nhập để Tìm kiếm';
-$lang['SEARCH_INVALID_POSTCOUNT'] = 'Không hợp lệ Bài Đếm bước đến Tìm kiếm';
+$lang['SEARCH_INVALID_USERNAME'] = 'Invalid username entered to search';
+$lang['SEARCH_INVALID_EMAIL'] = 'Invalid email address entered to search';
+$lang['SEARCH_INVALID_IP'] = 'Invalid IP-address entered to search';
+$lang['SEARCH_INVALID_GROUP'] = 'Invalid group entered to search';
+$lang['SEARCH_INVALID_RANK'] = 'Invalid rank entered to search';
+$lang['SEARCH_INVALID_DATE'] = 'Invalid date entered to search';
+$lang['SEARCH_INVALID_POSTCOUNT'] = 'Invalid post count entered to search';
 $lang['SEARCH_INVALID_USERFIELD'] = 'Không hợp lệ Userfield dữ liệu vào';
-$lang['SEARCH_INVALID_LASTVISITED'] = 'Không hợp lệ dữ liệu vào cho đến Thăm lần Cuối tìm kiếm';
+$lang['SEARCH_INVALID_LASTVISITED'] = 'Invalid date entered for last visited search';
 $lang['SEARCH_INVALID_LANGUAGE'] = 'Không Hợp Lệ Ngôn Ngữ Lựa Chọn';
 $lang['SEARCH_INVALID_TIMEZONE'] = 'Sai Múi Giờ Lựa Chọn';
 $lang['SEARCH_INVALID_MODERATORS'] = 'Không Hợp Lệ Diễn Đàn Lựa Chọn';
@@ -2656,12 +2657,12 @@ $lang['SEARCH_USERS_GROUPS_EXPLAIN'] = 'Xem tất cả thành viên của nhóm 
 $lang['SEARCH_USERS_RANKS_EXPLAIN'] = 'Xem tất cả các hãng của các lựa chọn xếp hạng.';
 $lang['BANNED_USERS'] = 'Người Bị Cấm';
 $lang['DISABLED_USERS'] = 'Người Dùng Vô Hiệu Hóa';
-$lang['SEARCH_USERS_MISC_EXPLAIN'] = 'Quản trị - tất Cả người sử dụng với quản Trị quyền hạn, Điều phối viên - tất Cả các diễn đàn điều hành viên; Người bị Cấm - tất Cả các tài khoản đó đã bị cấm vào các diễn đàn này; vô hiệu hóa Người sử dụng tất Cả người sử dụng với người khuyết tật tài khoản (hai tay vô hiệu hóa hoặc không bao giờ được xác nhận địa chỉ email của họ); Người khuyết tật PMs - Chọn những ai có tin Nhắn priviliges bỏ (Thực hiện thông qua Người Quản lý)';
-$lang['POSTCOUNT'] = 'Postcount';
+$lang['SEARCH_USERS_MISC_EXPLAIN'] = 'Administrators - All users with Administrator powers; Moderators - All forum moderators; Banned Users - All accounts that have been banned on these forums; Disabled Users - All users with disabled accounts (either manually disabled or never verified their email address); Users with disabled PMs - Selects users who have the Private Messages privileges removed (Done via User Management)';
+$lang['POSTCOUNT'] = 'Post count';
 $lang['EQUALS'] = 'Bằng';
 $lang['GREATER_THAN'] = 'Lớn hơn';
 $lang['LESS_THAN'] = 'Ít hơn';
-$lang['SEARCH_USERS_POSTCOUNT_EXPLAIN'] = 'Bạn có thể tìm kiếm người dựa trên Postcount giá trị. Bạn có thể tìm kiếm một giá trị cụ thể hơn hay ít hơn một giá trị hoặc giữa hai giá trị. Để làm người phạm vi tìm kiếm, chọn "Bằng" sau đó đưa bắt đầu và kết thúc giá trị của các bộ tách ra bởi một chút (-), ví dụ như 10-15';
+$lang['SEARCH_USERS_POSTCOUNT_EXPLAIN'] = 'You can search for users based on the post count value. You can either search by a specific value, greater than or lesser than a value or between two values. To do the range search, select "Equals" then put the beginning and ending values of the range separated by a dash (-), e.g. 10-15';
 $lang['USERFIELD'] = 'Userfield';
 $lang['SEARCH_USERS_USERFIELD_EXPLAIN'] = 'Tìm kiếm người dựa vào các hồ sơ lĩnh vực. Kí hiệu được hỗ trợ bằng cách sử dụng một câu (*).';
 $lang['SEARCH_USERS_LASTVISITED_EXPLAIN'] = 'Bạn có thể tìm kiếm người dựa trên cuối cùng của họ đăng nhập ngày sử tìm kiếm này lựa chọn';
@@ -2669,7 +2670,7 @@ $lang['SEARCH_USERS_LANGUAGE_EXPLAIN'] = 'Điều này sẽ hiển thị sử d�
 $lang['SEARCH_USERS_TIMEZONE_EXPLAIN'] = 'Những ai đã chọn một cụ thể múi giờ trong hồ sơ của họ';
 $lang['SEARCH_USERS_STYLE_EXPLAIN'] = 'Hiển thị người dùng đã chọn một phong cách cụ thể.';
 $lang['MODERATORS_OF'] = 'Ban điều hành';
-$lang['SEARCH_USERS_MODERATORS_EXPLAIN'] = 'Tìm kiếm người sử dụng với Quản lí quyền cụ thể diễn đàn này. Quản quyền được recoginised hoặc bởi Quyền Sử dụng hoặc là trong một Nhóm với Nhóm phải Permssions.';
+$lang['SEARCH_USERS_MODERATORS_EXPLAIN'] = 'Search for users with Moderating permissions to a specific forum. Moderating permissions are recognised either by User Permissions or by being in a Group with the right Group Permissions.';
 
 $lang['SEARCH_USERS_NEW'] = '%s mang lại %d quả(s). Thực hiện <a href="%s">another search</a>.';
 $lang['BANNED'] = 'Cấm';
@@ -2723,10 +2724,10 @@ $lang['SITEMAP_OPTIONS'] = 'Lựa chọn';
 $lang['SITEMAP_CREATE'] = 'Tạo bản đồ';
 $lang['SITEMAP_NOTIFY'] = 'Thông báo cho công cụ tìm kiếm về phiên bản mới của sơ đồ';
 $lang['SITEMAP_WHAT_NEXT'] = 'Phải làm gì tiếp theo?';
-$lang['SITEMAP_GOOGLE_1'] = 'Đăng ký trang web của bạn ở <a href="http://www.google.com/webmasters/" target="_blank">Google Webmaster</a> sử dụng tài khoản Google.';
+$lang['SITEMAP_GOOGLE_1'] = 'Register your site at <a href="https://www.google.com/webmasters/" target="_blank">Google Webmaster</a> using your Google account.';
 $lang['SITEMAP_GOOGLE_2'] = '<a href="https://www.google.com/webmasters/tools/sitemap-list" target="_blank">Add sitemap</a> trang web của bạn đăng ký.';
-$lang['SITEMAP_YANDEX_1'] = 'Đăng ký trang web của bạn ở <a href="http://webmaster.yandex.ru/sites/" target="_blank">Yandex Webmaster</a> sử dụng tài khoản Yandex.';
-$lang['SITEMAP_YANDEX_2'] = '<a href="http://webmaster.yandex.ru/site/map.xml" target="_blank">Add sitemap</a> trang web của bạn đăng ký.';
+$lang['SITEMAP_YANDEX_1'] = 'Register your site at <a href="https://webmaster.yandex.ru/sites/" target="_blank">Yandex Webmaster</a> using your Yandex account.';
+$lang['SITEMAP_YANDEX_2'] = '<a href="https://webmaster.yandex.ru/site/map.xml" target="_blank">Add sitemap</a> of site you registered.';
 $lang['SITEMAP_BING_1'] = 'Đăng ký trang web của bạn ở <a href="https://www.bing.com/webmaster/" target="_blank">Bing Webmaster</a> sử dụng tài khoản Microsoft.';
 $lang['SITEMAP_BING_2'] = 'Thêm đồ trang web của bạn đăng ký tại các thiết lập của nó.';
 $lang['SITEMAP_ADD_TITLE'] = 'Trang bổ sung cho sơ đồ';
@@ -2747,7 +2748,7 @@ $lang['ATOM_GLOBAL_FEED'] = 'Thức ăn toàn cầu cho tất cả các diễn �
 $lang['HASH_INVALID'] = 'Băm %s là không hợp lệ';
 $lang['HASH_NOT_FOUND'] = 'Phát hành với băm %s không tìm thấy';
 
-$lang['TERMS_EMPTY_TEXT'] = '[sắp xếp=trung tâm]Các văn bản của trang này được chỉnh sửa tại: [url=http://%s/admin/admin_terms.php]quản trị/admin_terms.php[/url]. Dòng này có thể nhìn thấy chỉ quản trị.[/align]';
+$lang['TERMS_EMPTY_TEXT'] = '[align=center]The text of this page is edited at: [url=https://%s/admin/admin_terms.php]admin/admin_terms.php[/url]. This line can see only administrators.[/align]';
 $lang['TERMS_EXPLAIN'] = 'Trên trang này, anh có thể xác định danh văn bản của các quy tắc cơ bản của các nguồn tài nguyên được hiển thị sử dụng.';
 
 $lang['TR_STATS'] = array(
@@ -2804,16 +2805,16 @@ $lang['CAPTCHA'] = 'Kiểm tra đó bạn không phải là một robot';
 $lang['CAPTCHA_WRONG'] = 'Bạn không thể xác nhận rằng anh không phải là một robot';
 $lang['CAPTCHA_SETTINGS'] = '<h2>ReCaptcha không được đầy đủ configured</h2><p>if bạn đã không tạo ra chìa khóa, bạn có thể làm nó trên <a href="https://www.google.com/recaptcha/admin">https://.google.com/recaptcha/admin</a>.<br />After bạn tạo ra chìa khóa, bạn cần phải đưa họ tại các tập tin thư viện/cấu hình.# .</p>';
 
-// Emailer
+// Sending email
 $lang['EMAILER_SUBJECT'] = [
-    'EMPTY' => 'Không Thể',
-    'GROUP_ADDED' => 'Bạn đã được thêm vào nhóm làm việc này',
-    'GROUP_APPROVED' => 'Yêu cầu được chấp thuận',
-    'GROUP_REQUEST' => 'Một yêu cầu phải tham gia nhóm của bạn đã được thực hiện',
-    'PRIVMSG_NOTIFY' => 'Tin Nhắn mới đã đến',
-    'TOPIC_NOTIFY' => 'Chủ Đề Trả Lời Thông Báo %s',
-    'USER_ACTIVATE' => 'Kích hoạt lại tài khoản',
-    'USER_ACTIVATE_PASSWD' => 'Mật khẩu mới kích hoạt',
-    'USER_WELCOME' => 'Chào mừng bạn đến %s Forums',
-    'USER_WELCOME_INACTIVE' => 'Chào mừng bạn đến %s Forums',
+    'EMPTY' => 'No subject',
+    'GROUP_ADDED' => 'You have been added to the user group',
+    'GROUP_APPROVED' => 'Your request to join the user group has been granted',
+    'GROUP_REQUEST' => 'A request to join your user group',
+    'PRIVMSG_NOTIFY' => 'New private message',
+    'TOPIC_NOTIFY' => 'Notification of response in the thread %s',
+    'USER_ACTIVATE' => 'Account reactivation',
+    'USER_ACTIVATE_PASSWD' => 'Confirming a new password',
+    'USER_WELCOME' => 'Welcome to the site %s',
+    'USER_WELCOME_INACTIVE' => 'Welcome to the site %s',
 ];
