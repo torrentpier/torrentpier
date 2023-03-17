@@ -2386,6 +2386,7 @@ $lang['CRON_NEXT_RUN'] = 'Next Run';
 $lang['CRON_RUN_COUNT'] = 'Runs';
 $lang['CRON_MANAGE'] = 'Manage';
 $lang['CRON_OPTIONS'] = 'Cron options';
+$lang['CRON_DISABLED_WARNING'] = 'Warning! Running cron scripts is disabled. To enable it, set the APP_CRON_ENABLED variable.';
 
 $lang['CRON_ENABLED'] = 'Cron enabled';
 $lang['CRON_CHECK_INTERVAL'] = 'Cron check interval (sec)';
