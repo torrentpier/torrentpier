@@ -12,8 +12,8 @@ $lang['ADMIN'] = 'Gestionar la';
 $lang['FORUM'] = 'Fòrum';
 $lang['CATEGORY'] = 'Categoria';
 $lang['HIDE_CAT'] = 'Amagar categories';
-$lang['HIDE_CAT_MESS'] = 'Some categories are hidden by customized display options';
-$lang['SHOW_ALL'] = 'Show all';
+$lang['HIDE_CAT_MESS'] = 'Algunes categories estan ocultes per opcions de visualització personalitzades';
+$lang['SHOW_ALL'] = 'Mostrar tots';
 $lang['TOPIC'] = 'Tema';
 $lang['TOPICS'] = 'Temes';
 $lang['TOPICS_SHORT'] = 'Temes';
@@ -1509,9 +1509,9 @@ $lang['ITALIC'] = 'El text en cursiva: [i]text[/i] (Ctrl+I)';
 $lang['UNDERLINE'] = 'Underline text: [u]text[/u] (Ctrl+U)';
 $lang['STRIKEOUT'] = 'Ratllat text: [s]text[/s] (Ctrl+S)';
 $lang['QUOTE_TITLE'] = 'Cita de text: [quote]text[/quote] (Ctrl+Q)';
-$lang['IMG_TITLE'] = 'Insert image: [img]https://image_url[/img] (Ctrl+R)';
+$lang['IMG_TITLE'] = 'Insereix imatge: [img]https://image_url[/img] (Ctrl+R)';
 $lang['URL'] = 'Url';
-$lang['URL_TITLE'] = 'Insert URL: [url]https://url[/url] or [url=https://url]URL text[/url] (Ctrl+W)';
+$lang['URL_TITLE'] = 'Insereix URL: [url]https://url[/url] o [url=https://url]text URL[/url] (Ctrl+W)';
 $lang['CODE_TITLE'] = 'Codi mostra: [code]code[/code] (Ctrl+K)';
 $lang['LIST'] = 'Llista';
 $lang['LIST_TITLE'] = 'Llista: [list]text[/list] (Ctrl+l)';
@@ -2057,7 +2057,7 @@ $lang['TRACKER_STATS'] = 'Les estadístiques sobre el tracker';
 $lang['WHOIS_INFO'] = 'Informació sobre l\'adreça IP';
 $lang['SHOW_MOD_HOME_PAGE'] = 'Mostra sobre els moderadors index.php';
 $lang['PREMOD_HELP'] = '<h4><span class="tor-icon tor-dup">&#8719;</span> Pre-moderation</h4> <h6>If que no tenen distribucions a l\'estat de v, # o T en aquesta secció, incloent subseccions, la distribució rebrà automàticament aquest status</h6>';
-$lang['TOR_COMMENT'] = '<h4>Comment on the status of a distribution</h4> <h6>The comment allows you to point out the errors made to the releaser. If the statuses are incomplete, a release response form is available to the release manager to correct the release</h6>';
+$lang['TOR_COMMENT'] = '<h4>Comentari sobre l\'estat d\'una distribució</h4> <h6>El comentari permet assenyalar els errors comesos al llançador. Si els estats són incomplets, el gestor de llançaments disposarà d\'un formulari de resposta de llançament per corregir la versió</h6>';
 $lang['SEED_BONUS_ADD'] = '<h4>Adding llavor de bonificació </h4> <h6> Nombre de distribucions són lliurats per l\'usuari i la mida de bonificacions per a ells (càrrega vegades una hora) </h6>';
 $lang['SEED_BONUS_RELEASE'] = 'a N-el nombre de llançaments';
 $lang['SEED_BONUS_POINTS'] = 'les bonificacions en una hora';
@@ -2124,7 +2124,7 @@ $lang['EMPTY_FILE_ENTRY'] = 'Fitxer Buit Entrada';
 
 // Attachments -> Sync
 $lang['SYNC_THUMBNAIL_RESETTED'] = 'Miniatura resetted per a fitxer Adjunt: %s'; // replace %s with physical Filename
-$lang['ATTACH_SYNC_FINISHED'] = 'Attachment Synchronization Finished.';
+$lang['ATTACH_SYNC_FINISHED'] = 'S\'ha acabat la sincronització dels fitxers adjunts.';
 $lang['SYNC_TOPICS'] = 'Sincronització Temes';
 $lang['SYNC_POSTS'] = 'Sincronització De Missatges';
 $lang['SYNC_THUMBNAILS'] = 'Sincronització De Miniatures';
@@ -2386,7 +2386,7 @@ $lang['CRON_NEXT_RUN'] = 'Seguidament Executeu';
 $lang['CRON_RUN_COUNT'] = 'Corre';
 $lang['CRON_MANAGE'] = 'Gestionar';
 $lang['CRON_OPTIONS'] = 'Cron opcions';
-$lang['CRON_DISABLED_WARNING'] = 'Warning! Running cron scripts is disabled. To enable it, set the APP_CRON_ENABLED variable.';
+$lang['CRON_DISABLED_WARNING'] = 'Avís! L\'execució de scripts cron està desactivada. Per activar-lo, configureu la variable APP_CRON_ENABLED.';
 
 $lang['CRON_ENABLED'] = 'Cron activat';
 $lang['CRON_CHECK_INTERVAL'] = 'Cron interval de comprovació (sec)';
@@ -2576,7 +2576,7 @@ $lang['RELEASES'] = 'Comunicats';
 
 $lang['BACK'] = 'Tornar';
 $lang['ERROR_FORM'] = 'Invalid camps';
-$lang['RELEASE_WELCOME'] = 'Please fill in the release form';
+$lang['RELEASE_WELCOME'] = 'Si us plau, ompliu el formulari d\'alliberament';
 $lang['NEW_RELEASE'] = 'Nova versió';
 $lang['NEXT'] = 'Continuar';
 $lang['OTHER'] = 'Altres';
@@ -2584,8 +2584,8 @@ $lang['OTHER'] = 'Altres';
 $lang['TPL_EMPTY_FIELD'] = 'Heu d\'omplir el camp <b>%s</b>';
 $lang['TPL_EMPTY_SEL'] = 'Heu de seleccionar com <b>%s</b>';
 $lang['TPL_NOT_NUM'] = '<b>%s</b> - No una num';
-$lang['TPL_NOT_URL'] = '<b>%s</b> - Must be https:// URL';
-$lang['TPL_NOT_IMG_URL'] = '<b>%s</b> - Must be https:// IMG_URL';
+$lang['TPL_NOT_URL'] = '<b>%s</b> - Ha de ser https:// URL';
+$lang['TPL_NOT_IMG_URL'] = '<b>%s</b> - Ha de ser https:// IMG_URL';
 $lang['TPL_PUT_INTO_SUBJECT'] = 'posar en el tema';
 $lang['TPL_POSTER'] = 'cartell';
 $lang['TPL_REQ_FILLING'] = 'requereix omplir';
@@ -2599,15 +2599,15 @@ $lang['TPL_SPOILER'] = 'spoiler';
 $lang['TPL_IN_LINE'] = 'en la mateixa línia';
 $lang['TPL_HEADER_ONLY'] = 'només en un títol';
 
-$lang['SEARCH_INVALID_USERNAME'] = 'Invalid username entered to search';
-$lang['SEARCH_INVALID_EMAIL'] = 'Invalid email address entered to search';
-$lang['SEARCH_INVALID_IP'] = 'Invalid IP-address entered to search';
-$lang['SEARCH_INVALID_GROUP'] = 'Invalid group entered to search';
-$lang['SEARCH_INVALID_RANK'] = 'Invalid rank entered to search';
-$lang['SEARCH_INVALID_DATE'] = 'Invalid date entered to search';
-$lang['SEARCH_INVALID_POSTCOUNT'] = 'Invalid post count entered to search';
+$lang['SEARCH_INVALID_USERNAME'] = 'S\'ha introduït un nom d\'usuari no vàlid per cercar';
+$lang['SEARCH_INVALID_EMAIL'] = 'S\'ha introduït una adreça electrònica no vàlida per cercar';
+$lang['SEARCH_INVALID_IP'] = 'S\'ha introduït una adreça IP no vàlida per cercar';
+$lang['SEARCH_INVALID_GROUP'] = 'S\'ha introduït un grup no vàlid per cercar';
+$lang['SEARCH_INVALID_RANK'] = 'S\'ha introduït una classificació no vàlida per cercar';
+$lang['SEARCH_INVALID_DATE'] = 'S\'ha introduït una data no vàlida per cercar';
+$lang['SEARCH_INVALID_POSTCOUNT'] = 'S\'ha introduït un recompte de publicacions no vàlid per cercar';
 $lang['SEARCH_INVALID_USERFIELD'] = 'Invalid Userfield dades introduïdes';
-$lang['SEARCH_INVALID_LASTVISITED'] = 'Invalid date entered for last visited search';
+$lang['SEARCH_INVALID_LASTVISITED'] = 'S\'ha introduït una data no vàlida per a la darrera cerca visitada';
 $lang['SEARCH_INVALID_LANGUAGE'] = 'Idioma No Vàlid Seleccionat';
 $lang['SEARCH_INVALID_TIMEZONE'] = 'Invalid Seleccionat El Fus Horari';
 $lang['SEARCH_INVALID_MODERATORS'] = 'Invalid Fòrum Seleccionat';
@@ -2658,12 +2658,12 @@ $lang['SEARCH_USERS_GROUPS_EXPLAIN'] = 'Veure tots els membres del grup seleccio
 $lang['SEARCH_USERS_RANKS_EXPLAIN'] = 'Veure tots els portadors del rang seleccionat.';
 $lang['BANNED_USERS'] = 'Prohibit Als Usuaris';
 $lang['DISABLED_USERS'] = 'Persones Discapacitades';
-$lang['SEARCH_USERS_MISC_EXPLAIN'] = 'Administrators - All users with Administrator powers; Moderators - All forum moderators; Banned Users - All accounts that have been banned on these forums; Disabled Users - All users with disabled accounts (either manually disabled or never verified their email address); Users with disabled PMs - Selects users who have the Private Messages privileges removed (Done via User Management)';
-$lang['POSTCOUNT'] = 'Post count';
+$lang['SEARCH_USERS_MISC_EXPLAIN'] = 'Administradors: tots els usuaris amb poders d\'administrador; Moderadors: tots els moderadors del fòrum; Usuaris prohibits: tots els comptes que han estat prohibits en aquests fòrums; Usuaris desactivats: tots els usuaris amb comptes desactivats (desactivats manualment o mai verificats la seva adreça de correu electrònic); Usuaris amb PM desactivats: selecciona usuaris que tenen els privilegis de missatges privats eliminats (Fet mitjançant Gestió d\'usuaris)';
+$lang['POSTCOUNT'] = 'Recompte de publicacions';
 $lang['EQUALS'] = 'És igual';
 $lang['GREATER_THAN'] = 'Superior';
 $lang['LESS_THAN'] = 'Menys de';
-$lang['SEARCH_USERS_POSTCOUNT_EXPLAIN'] = 'You can search for users based on the post count value. You can either search by a specific value, greater than or lesser than a value or between two values. To do the range search, select "Equals" then put the beginning and ending values of the range separated by a dash (-), e.g. 10-15';
+$lang['SEARCH_USERS_POSTCOUNT_EXPLAIN'] = 'Podeu cercar usuaris segons el valor del recompte de publicacions. Podeu cercar per un valor específic, major o menor que un valor o entre dos valors. Per fer la cerca d\'interval, seleccioneu "Igual" i després poseu els valors inicial i final de l\'interval separats per un guió (-), per exemple, 10-15';
 $lang['USERFIELD'] = 'Userfield';
 $lang['SEARCH_USERS_USERFIELD_EXPLAIN'] = 'Cerca per als usuaris en funció de diferents perfil camps. Els comodins són compatibles amb un astèrix (*).';
 $lang['SEARCH_USERS_LASTVISITED_EXPLAIN'] = 'Podeu cercar usuaris basats en la seva última data d\'inici de sessió utilitzant aquesta opció de cerca';
@@ -2671,7 +2671,7 @@ $lang['SEARCH_USERS_LANGUAGE_EXPLAIN'] = 'Aquesta mostrarà els usuaris a qui he
 $lang['SEARCH_USERS_TIMEZONE_EXPLAIN'] = 'Els usuaris que hagin seleccionat una determinada zona horària en el seu perfil';
 $lang['SEARCH_USERS_STYLE_EXPLAIN'] = 'Mostrar els usuaris que hagin seleccionat un estil concret.';
 $lang['MODERATORS_OF'] = 'Els moderadors de';
-$lang['SEARCH_USERS_MODERATORS_EXPLAIN'] = 'Search for users with Moderating permissions to a specific forum. Moderating permissions are recognised either by User Permissions or by being in a Group with the right Group Permissions.';
+$lang['SEARCH_USERS_MODERATORS_EXPLAIN'] = 'Cerqueu usuaris amb permisos de moderació per a un fòrum específic. Els permisos de moderació es reconeixen ja sigui pels permisos d\'usuari o per estar en un grup amb els permisos de grup adequats.';
 
 $lang['SEARCH_USERS_NEW'] = '%s cedit %d resultat(s). Realitzar <a href="%s">another search</a>.';
 $lang['BANNED'] = 'Prohibit';
@@ -2749,7 +2749,7 @@ $lang['ATOM_GLOBAL_FEED'] = 'Feed global per a tots els fòrums';
 $lang['HASH_INVALID'] = 'Hash %s és invàlid';
 $lang['HASH_NOT_FOUND'] = 'Llançament de hash %s no trobat';
 
-$lang['TERMS_EMPTY_TEXT'] = '[align=center]The text of this page is edited at: [url=https://%s/admin/admin_terms.php]admin/admin_terms.php[/url]. This line can see only administrators.[/align]';
+$lang['TERMS_EMPTY_TEXT'] = '[align=center]El text d\'aquesta pàgina està editat a: [url=https://%s/admin/admin_terms.php]admin/admin_terms.php[/url]. Aquesta línia només pot veure els administradors.[/align]';
 $lang['TERMS_EXPLAIN'] = 'En aquesta pàgina, es pot especificar el text de les normes bàsiques de recurs es mostra als usuaris.';
 
 $lang['TR_STATS'] = array(
@@ -2808,14 +2808,14 @@ $lang['CAPTCHA_SETTINGS'] = '<h2>ReCaptcha no ser totalment configured</h2><p>if
 
 // Sending email
 $lang['EMAILER_SUBJECT'] = [
-    'EMPTY' => 'No subject',
-    'GROUP_ADDED' => 'You have been added to the user group',
-    'GROUP_APPROVED' => 'Your request to join the user group has been granted',
-    'GROUP_REQUEST' => 'A request to join your user group',
-    'PRIVMSG_NOTIFY' => 'New private message',
-    'TOPIC_NOTIFY' => 'Notification of response in the thread %s',
-    'USER_ACTIVATE' => 'Account reactivation',
-    'USER_ACTIVATE_PASSWD' => 'Confirming a new password',
-    'USER_WELCOME' => 'Welcome to the site %s',
-    'USER_WELCOME_INACTIVE' => 'Welcome to the site %s',
+    'EMPTY' => 'Cap tema',
+    'GROUP_ADDED' => 'Heu estat afegit al grup d\'usuaris',
+    'GROUP_APPROVED' => 'La teva sol·licitud per unir-te al grup d\'usuaris ha estat acceptada',
+    'GROUP_REQUEST' => 'Una sol·licitud per unir-se al vostre grup d\'usuaris',
+    'PRIVMSG_NOTIFY' => 'Nou missatge privat',
+    'TOPIC_NOTIFY' => 'Notificació de resposta al fil %s',
+    'USER_ACTIVATE' => 'Reactivació del compte',
+    'USER_ACTIVATE_PASSWD' => 'Confirmació d\'una nova contrasenya',
+    'USER_WELCOME' => 'Benvingut al lloc %s',
+    'USER_WELCOME_INACTIVE' => 'Benvingut al lloc %s',
 ];
