@@ -12,7 +12,8 @@ $lang['ADMIN'] = 'Administrera';
 $lang['FORUM'] = 'Forum';
 $lang['CATEGORY'] = 'Kategori';
 $lang['HIDE_CAT'] = 'Dölja kategorier';
-$lang['HIDE_CAT_MESS'] = 'En del av kategorierna är dolda "Visa alternativ" &middot; <a href="index.php?sh=1">Show All</a>';
+$lang['HIDE_CAT_MESS'] = 'Some categories are hidden by customized display options';
+$lang['SHOW_ALL'] = 'Show all';
 $lang['TOPIC'] = 'Ämne';
 $lang['TOPICS'] = 'Ämnen';
 $lang['TOPICS_SHORT'] = 'Ämnen';
@@ -82,7 +83,7 @@ $lang['SKYPE_ERROR'] = 'Du angav ett ogiltigt Skype logga in';
 $lang['TWITTER'] = 'Twitter';
 $lang['TWITTER_ERROR'] = 'Du angav ett ogiltigt Twitter logga in';
 
-$lang['FORUM_INDEX'] = '%s Forum Index'; // eg. sitename Forum Index, %s can be removed if you prefer
+$lang['FORUM_INDEX'] = '%s Forum Index'; // e.g. sitename Forum Index, %s can be removed if you prefer
 
 $lang['POST_NEW_TOPIC'] = 'Skapa nytt ämne';
 $lang['POST_NEW_RELEASE'] = 'Post-ny utgåva';
@@ -301,7 +302,7 @@ $lang['SELECT_POSTS_PER_PAGE'] = 'inlägg per sida';
 // Posting/Replying (Not private messaging!)
 $lang['TOPIC_REVIEW'] = 'Ämne recension';
 
-$lang['NO_POST_MODE'] = 'Inga inlägg läget som är valt'; // If posting.php is called without a mode (newtopic/reply/delete/etc, shouldn't be shown normaly)
+$lang['NO_POST_MODE'] = 'Inga inlägg läget som är valt'; // If posting.php is called without a mode (newtopic/reply/delete/etc., shouldn't be shown normally)
 
 $lang['POST_A_NEW_TOPIC'] = 'Skapa nytt ämne';
 $lang['POST_A_REPLY'] = 'Inlägget nytt svar';
@@ -489,7 +490,7 @@ $lang['UNMARK_ALL'] = 'Avmarkera alla';
 $lang['CONFIRM_DELETE_PM'] = 'Är du säker på att du vill ta bort det här meddelandet?';
 $lang['CONFIRM_DELETE_PMS'] = 'Är du säker på att du vill ta bort dessa meddelanden?';
 
-$lang['INBOX_SIZE'] = 'Din Inkorg full is<br /><b>%d%%</b>'; // eg. Your Inbox is 50% full
+$lang['INBOX_SIZE'] = 'Din Inkorg full is<br /><b>%d%%</b>'; // e.g. Your Inbox is 50% full
 $lang['SENTBOX_SIZE'] = 'Din Sentbox is<br /><b>%d%%</b> full';
 $lang['SAVEBOX_SIZE'] = 'Din Säkerhetsbox full is<br /><b>%d%%</b>';
 
@@ -571,7 +572,7 @@ $lang['YEARS'] = 'År';
 $lang['NO_THEMES'] = 'Några Teman I databasen';
 $lang['TIMEZONE'] = 'Tidszon';
 $lang['DATE_FORMAT_PROFILE'] = 'Datum format';
-$lang['DATE_FORMAT_EXPLAIN'] = 'Den syntax som används är identiska till PHP <a href=\'http://www.php.net/date\' target=\'_other\'>date()</a> funktion.';
+$lang['DATE_FORMAT_EXPLAIN'] = 'The syntax used is identical to the PHP <a href=\'https://www.php.net/manual/en/function.date.php\' target=\'_other\'>date()</a> function.';
 $lang['SIGNATURE'] = 'Signatur';
 $lang['SIGNATURE_EXPLAIN'] = 'Detta är ett stycke text som kan läggas till i inlägg du gör. Det är en %d tecken';
 $lang['SIGNATURE_DISABLE'] = 'Undertecknat av för brott mot regler för forumet';
@@ -802,8 +803,8 @@ $lang['BRIEFLY'] = 'Kortfattat';
 $lang['NO_SEARCHABLE_FORUMS'] = 'Om du inte har behörighet att söka till något forum på denna webbplats.';
 
 $lang['NO_SEARCH_MATCH'] = 'Inga trådar eller inlägg som träffade din sökkriterier';
-$lang['FOUND_SEARCH_MATCH'] = 'Sökning hittade %d match'; // eg. Search found 1 match
-$lang['FOUND_SEARCH_MATCHES'] = 'Sökning hittade %d matcher'; // eg. Search found 24 matches
+$lang['FOUND_SEARCH_MATCH'] = 'Sökning hittade %d match'; // e.g. Search found 1 match
+$lang['FOUND_SEARCH_MATCHES'] = 'Sökning hittade %d matcher'; // e.g. Search found 24 matches
 $lang['TOO_MANY_SEARCH_RESULTS'] = 'För många resultat kan hittas, var god försök att vara mer specifik';
 
 $lang['CLOSE_WINDOW'] = 'Stäng Fönstret';
@@ -1508,9 +1509,9 @@ $lang['ITALIC'] = 'Kursiv text: [i]text[/i] (Ctrl+I)';
 $lang['UNDERLINE'] = 'Understruken text: [u]text[/u] (Ctrl+U)';
 $lang['STRIKEOUT'] = 'Genomstruken text: [s]text[/s] (Ctrl+S)';
 $lang['QUOTE_TITLE'] = 'Citera text: [quote]text[/quote] (Ctrl+Q)';
-$lang['IMG_TITLE'] = 'Infoga bild: [img]http://image_url[/img] (Ctrl+R)';
+$lang['IMG_TITLE'] = 'Insert image: [img]https://image_url[/img] (Ctrl+R)';
 $lang['URL'] = 'Url';
-$lang['URL_TITLE'] = 'Infoga URL: [url]http://url[/url] eller [url=http://url]URL text[/url] (Ctrl+W)';
+$lang['URL_TITLE'] = 'Insert URL: [url]https://url[/url] or [url=https://url]URL text[/url] (Ctrl+W)';
 $lang['CODE_TITLE'] = 'Kod display: [code]code[/code] (Ctrl+K)';
 $lang['LIST'] = 'Listan';
 $lang['LIST_TITLE'] = 'Lista: [list]text[/list] (Ctrl+l)';
@@ -2056,7 +2057,7 @@ $lang['TRACKER_STATS'] = 'Statistik om tracker';
 $lang['WHOIS_INFO'] = 'Information om IP-adress';
 $lang['SHOW_MOD_HOME_PAGE'] = 'Visa på den moderatorer index.php';
 $lang['PREMOD_HELP'] = '<h4><span class="tor-icon tor-dup">&#8719;</span> Pre-moderation</h4> <h6>If du inte har utdelning till status av v, #, eller T i detta avsnitt, inklusive avsnitt, fördelningen kommer automatiskt att få detta status</h6>';
-$lang['TOR_COMMENT'] = '<h4>Commentary om status för distribution</h4> <h6>Comment framgångsrikt kan du ange releasers misstag. När nedooformlennyh status releasers tillgänglig form av svar korrigering release</h6>';
+$lang['TOR_COMMENT'] = '<h4>Comment on the status of a distribution</h4> <h6>The comment allows you to point out the errors made to the releaser. If the statuses are incomplete, a release response form is available to the release manager to correct the release</h6>';
 $lang['SEED_BONUS_ADD'] = '<h4>Adding utsäde bonus </h4> <h6> Antal olika distributioner som delas ut av användaren och storleken på bonusar för dem (laddning gånger i timmen) </h6>';
 $lang['SEED_BONUS_RELEASE'] = 'till N-antal utgåvor';
 $lang['SEED_BONUS_POINTS'] = 'bonusar i en timme';
@@ -2084,7 +2085,7 @@ $lang['ATTACH_NUMBER_SETTINGS'] = 'Bilaga Antalet Inställningar';
 $lang['ATTACH_OPTIONS_SETTINGS'] = 'Bilaga Alternativ';
 
 $lang['UPLOAD_DIRECTORY'] = 'Ladda Upp Katalogen';
-$lang['UPLOAD_DIRECTORY_EXPLAIN'] = 'Ange en relativ sökväg från din TorrentPier installation till Bilagor upload katalogen. Ange till exempel "filer" om din TorrentPier Installation ligger på http://www.yourdomain.com/torrentpier och den Bifogade filen Upload Katalogen ligger på http://www.yourdomain.com/torrentpier/files.';
+$lang['UPLOAD_DIRECTORY_EXPLAIN'] = 'Enter the relative path from your TorrentPier installation to the Attachments upload directory. For example, enter \'files\' if your TorrentPier Installation is located at https://www.yourdomain.com/torrentpier and the Attachment Upload Directory is located at https://www.yourdomain.com/torrentpier/files.';
 $lang['ATTACH_IMG_PATH'] = 'Posta Bifogade Ikonen';
 $lang['ATTACH_IMG_PATH_EXPLAIN'] = 'Denna Bild visas bredvid Bifogade Länkar i enskilda Inlägg. Lämna det här fältet tomt om du inte vill att en ikon ska visas. Denna Inställning kommer att skrivas över av de Inställningar som i Förlängningen Grupper Förvaltning.';
 $lang['ATTACH_TOPIC_ICON'] = 'Bilaga Ämne Ikonen';
@@ -2123,7 +2124,7 @@ $lang['EMPTY_FILE_ENTRY'] = 'Tom Fil Inlägg';
 
 // Attachments -> Sync
 $lang['SYNC_THUMBNAIL_RESETTED'] = 'Miniatyr resetted för Fastsättning: %s'; // replace %s with physical Filename
-$lang['ATTACH_SYNC_FINISHED'] = 'Bifogad Fil Synkronisering Klar.';
+$lang['ATTACH_SYNC_FINISHED'] = 'Attachment Synchronization Finished.';
 $lang['SYNC_TOPICS'] = 'Sync Ämnen';
 $lang['SYNC_POSTS'] = 'Sync Inlägg';
 $lang['SYNC_THUMBNAILS'] = 'Sync Miniatyrer';
@@ -2574,7 +2575,7 @@ $lang['RELEASES'] = 'Släpper';
 
 $lang['BACK'] = 'Tillbaka';
 $lang['ERROR_FORM'] = 'Ogiltigt fält';
-$lang['RELEASE_WELCOME'] = 'Pleae fyll i releae form';
+$lang['RELEASE_WELCOME'] = 'Please fill in the release form';
 $lang['NEW_RELEASE'] = 'Ny utgåva';
 $lang['NEXT'] = 'Fortsätt';
 $lang['OTHER'] = 'Andra';
@@ -2582,8 +2583,8 @@ $lang['OTHER'] = 'Andra';
 $lang['TPL_EMPTY_FIELD'] = 'Du måste fylla i fältet <b>%s</b>';
 $lang['TPL_EMPTY_SEL'] = 'Du måste välja <b>%s</b>';
 $lang['TPL_NOT_NUM'] = '<b>%s</b> - Inte en numerisk';
-$lang['TPL_NOT_URL'] = '<b>%s</b> - Måste vara http:// - URL';
-$lang['TPL_NOT_IMG_URL'] = '<b>%s</b> - Måste vara http:// IMG_URL';
+$lang['TPL_NOT_URL'] = '<b>%s</b> - Must be https:// URL';
+$lang['TPL_NOT_IMG_URL'] = '<b>%s</b> - Must be https:// IMG_URL';
 $lang['TPL_PUT_INTO_SUBJECT'] = 'lägg till ämnet';
 $lang['TPL_POSTER'] = 'affisch';
 $lang['TPL_REQ_FILLING'] = 'kräver fyllning';
@@ -2597,15 +2598,15 @@ $lang['TPL_SPOILER'] = 'spoiler';
 $lang['TPL_IN_LINE'] = 'i samma linje';
 $lang['TPL_HEADER_ONLY'] = 'endast i en titel';
 
-$lang['SEARCH_INVALID_USERNAME'] = 'Ogiltigt användarnamn in till Sök';
-$lang['SEARCH_INVALID_EMAIL'] = 'Ogiltig e-postadress som anges till Sök';
-$lang['SEARCH_INVALID_IP'] = 'Ogiltig IP-adress anges till Sök';
-$lang['SEARCH_INVALID_GROUP'] = 'Ogiltig Grupp in för att Söka';
-$lang['SEARCH_INVALID_RANK'] = 'Ogiltiga rank in till Sök';
-$lang['SEARCH_INVALID_DATE'] = 'Ogiltigt Datum anmälda till Sök';
-$lang['SEARCH_INVALID_POSTCOUNT'] = 'Ogiltig Post Räknas in till Sök';
+$lang['SEARCH_INVALID_USERNAME'] = 'Invalid username entered to search';
+$lang['SEARCH_INVALID_EMAIL'] = 'Invalid email address entered to search';
+$lang['SEARCH_INVALID_IP'] = 'Invalid IP-address entered to search';
+$lang['SEARCH_INVALID_GROUP'] = 'Invalid group entered to search';
+$lang['SEARCH_INVALID_RANK'] = 'Invalid rank entered to search';
+$lang['SEARCH_INVALID_DATE'] = 'Invalid date entered to search';
+$lang['SEARCH_INVALID_POSTCOUNT'] = 'Invalid post count entered to search';
 $lang['SEARCH_INVALID_USERFIELD'] = 'Ogiltiga Userfield data in';
-$lang['SEARCH_INVALID_LASTVISITED'] = 'Ogiltiga data anges för Senast Besökte sök';
+$lang['SEARCH_INVALID_LASTVISITED'] = 'Invalid date entered for last visited search';
 $lang['SEARCH_INVALID_LANGUAGE'] = 'Ogiltiga Valda Språket';
 $lang['SEARCH_INVALID_TIMEZONE'] = 'Ogiltiga Vald Tidszon';
 $lang['SEARCH_INVALID_MODERATORS'] = 'Ogiltiga Valda Forumet';
@@ -2656,12 +2657,12 @@ $lang['SEARCH_USERS_GROUPS_EXPLAIN'] = 'Visa alla medlemmar i den valda gruppen.
 $lang['SEARCH_USERS_RANKS_EXPLAIN'] = 'Visa alla bärare av den valda rang.';
 $lang['BANNED_USERS'] = 'Bannad Användare';
 $lang['DISABLED_USERS'] = 'Funktionshindrade Användare';
-$lang['SEARCH_USERS_MISC_EXPLAIN'] = 'Administratörer - användare och Administratör befogenheter. Moderatorer - Alla moderatorerna; Bannad Användare - Alla konton som har varit förbjudna på dessa forum, Funktionshindrade Användare, Alla användare med inaktiverade konton (antingen manuellt funktionshindrade eller aldrig verifierat sin e-post adress); Användare med funktionshinder PMs - Väljer användare som har den Privata Meddelanden privilegier tas bort (Görs via User Management)';
-$lang['POSTCOUNT'] = 'Postcount';
+$lang['SEARCH_USERS_MISC_EXPLAIN'] = 'Administrators - All users with Administrator powers; Moderators - All forum moderators; Banned Users - All accounts that have been banned on these forums; Disabled Users - All users with disabled accounts (either manually disabled or never verified their email address); Users with disabled PMs - Selects users who have the Private Messages privileges removed (Done via User Management)';
+$lang['POSTCOUNT'] = 'Post count';
 $lang['EQUALS'] = 'Lika med';
 $lang['GREATER_THAN'] = 'Större än';
 $lang['LESS_THAN'] = 'Mindre än';
-$lang['SEARCH_USERS_POSTCOUNT_EXPLAIN'] = 'Du kan söka efter användare baserat på Postcount värde. Du kan antingen söka efter ett specifikt värde större än eller mindre än ett värde eller mellan två värden. För att göra utbudet sökning, välj "Lika" för att sedan sätta den börjar och slutar värden i intervallet separerade med ett bindestreck (-), exempelvis 10-15';
+$lang['SEARCH_USERS_POSTCOUNT_EXPLAIN'] = 'You can search for users based on the post count value. You can either search by a specific value, greater than or lesser than a value or between two values. To do the range search, select "Equals" then put the beginning and ending values of the range separated by a dash (-), e.g. 10-15';
 $lang['USERFIELD'] = 'Userfield';
 $lang['SEARCH_USERS_USERFIELD_EXPLAIN'] = 'Söka efter användare baserat på olika fält i profilen. Jokertecken stöds med hjälp av en asterix (*).';
 $lang['SEARCH_USERS_LASTVISITED_EXPLAIN'] = 'Du kan söka efter användare baserat på deras senaste logga in datum med hjälp av det här alternativet sök';
@@ -2669,7 +2670,7 @@ $lang['SEARCH_USERS_LANGUAGE_EXPLAIN'] = 'Detta kommer att visa användare som h
 $lang['SEARCH_USERS_TIMEZONE_EXPLAIN'] = 'Användare som har valt en viss tidszon i sin profil';
 $lang['SEARCH_USERS_STYLE_EXPLAIN'] = 'Visa användare som har valt en specifik stil.';
 $lang['MODERATORS_OF'] = 'Moderatorer';
-$lang['SEARCH_USERS_MODERATORS_EXPLAIN'] = 'Söka efter användare med Sjunkande behörighet till ett specifikt forum. Moderator behörigheter är recoginised antingen av Användaren Behörighet eller genom att vara i en Grupp med rätt Grupp Permssions.';
+$lang['SEARCH_USERS_MODERATORS_EXPLAIN'] = 'Search for users with Moderating permissions to a specific forum. Moderating permissions are recognised either by User Permissions or by being in a Group with the right Group Permissions.';
 
 $lang['SEARCH_USERS_NEW'] = '%s gav %d träff(ar). Utföra <a href="%s">another search</a>.';
 $lang['BANNED'] = 'Förbjudna';
@@ -2723,10 +2724,10 @@ $lang['SITEMAP_OPTIONS'] = 'Alternativ';
 $lang['SITEMAP_CREATE'] = 'Skapa / uppdatera sitemap';
 $lang['SITEMAP_NOTIFY'] = 'Meddela sökmotorer om nya versionen av sitemap';
 $lang['SITEMAP_WHAT_NEXT'] = 'Vad göra härnäst?';
-$lang['SITEMAP_GOOGLE_1'] = 'Registrera din webbplats på <a href="http://www.google.com/webmasters/" target="_blank">Google Webmaster</a> med ditt Google-konto.';
+$lang['SITEMAP_GOOGLE_1'] = 'Register your site at <a href="https://www.google.com/webmasters/" target="_blank">Google Webmaster</a> using your Google account.';
 $lang['SITEMAP_GOOGLE_2'] = '<a href="https://www.google.com/webmasters/tools/sitemap-list" target="_blank">Add sitemap</a> av webbplatsen att du registrerat dig.';
-$lang['SITEMAP_YANDEX_1'] = 'Registrera din webbplats på <a href="http://webmaster.yandex.ru/sites/" target="_blank">Yandex Webmaster</a> med hjälp av ditt Google-konto.';
-$lang['SITEMAP_YANDEX_2'] = '<a href="http://webmaster.yandex.ru/site/map.xml" target="_blank">Add sitemap</a> av webbplatsen att du registrerat dig.';
+$lang['SITEMAP_YANDEX_1'] = 'Register your site at <a href="https://webmaster.yandex.ru/sites/" target="_blank">Yandex Webmaster</a> using your Yandex account.';
+$lang['SITEMAP_YANDEX_2'] = '<a href="https://webmaster.yandex.ru/site/map.xml" target="_blank">Add sitemap</a> of site you registered.';
 $lang['SITEMAP_BING_1'] = 'Registrera din webbplats på <a href="https://www.bing.com/webmaster/" target="_blank">Bing Webmaster</a> med ditt Microsoft-konto.';
 $lang['SITEMAP_BING_2'] = 'Lägg till sajtkarta av webbplats du har registrerat i sina inställningar.';
 $lang['SITEMAP_ADD_TITLE'] = 'Ytterligare sidor för sitemap';
@@ -2747,7 +2748,7 @@ $lang['ATOM_GLOBAL_FEED'] = 'Globala feed för alla forum';
 $lang['HASH_INVALID'] = 'Hash %s är ogiltig';
 $lang['HASH_NOT_FOUND'] = 'Release med hash %s inte hittas';
 
-$lang['TERMS_EMPTY_TEXT'] = '[align=center]texten på denna sida är redigerad: [url=http://%s/admin/admin_terms.php]admin/admin_terms.php[/url]. Denna linje kan bara se administratörer.[/align]';
+$lang['TERMS_EMPTY_TEXT'] = '[align=center]The text of this page is edited at: [url=https://%s/admin/admin_terms.php]admin/admin_terms.php[/url]. This line can see only administrators.[/align]';
 $lang['TERMS_EXPLAIN'] = 'På den här sidan kan du ange texten i de grundläggande reglerna för resursen visas för användare.';
 
 $lang['TR_STATS'] = array(
@@ -2804,16 +2805,16 @@ $lang['CAPTCHA'] = 'Kontrollera att du inte är en robot';
 $lang['CAPTCHA_WRONG'] = 'Du kan inte bekräfta att du inte är en robot';
 $lang['CAPTCHA_SETTINGS'] = '<h2>ReCaptcha inte helt configured</h2><p>if du inte redan genererade nycklar, kan du göra det på <a href="https://www.google.com/recaptcha/admin">https://www.google.kom/recaptcha/admin</a>.<br />After du generera nycklar du behöver för att sätta dem på arkiv-bibliotek/config.php.</p>';
 
-// Emailer
+// Sending email
 $lang['EMAILER_SUBJECT'] = [
-    'EMPTY' => 'Inget Ämne',
-    'GROUP_ADDED' => 'Du har lagts till denna användargrupp',
-    'GROUP_APPROVED' => 'Din begäran har godkänts',
-    'GROUP_REQUEST' => 'En begäran att ansluta sig till din grupp har gjorts',
-    'PRIVMSG_NOTIFY' => 'Nytt Privat Meddelande har anlänt',
-    'TOPIC_NOTIFY' => 'Ämne Svar Anmälan %s',
-    'USER_ACTIVATE' => 'Aktivera ditt konto',
-    'USER_ACTIVATE_PASSWD' => 'Nytt lösenord aktivering',
-    'USER_WELCOME' => 'Välkommen till %s Forum',
-    'USER_WELCOME_INACTIVE' => 'Välkommen till %s Forum',
+    'EMPTY' => 'No subject',
+    'GROUP_ADDED' => 'You have been added to the user group',
+    'GROUP_APPROVED' => 'Your request to join the user group has been granted',
+    'GROUP_REQUEST' => 'A request to join your user group',
+    'PRIVMSG_NOTIFY' => 'New private message',
+    'TOPIC_NOTIFY' => 'Notification of response in the thread %s',
+    'USER_ACTIVATE' => 'Account reactivation',
+    'USER_ACTIVATE_PASSWD' => 'Confirming a new password',
+    'USER_WELCOME' => 'Welcome to the site %s',
+    'USER_WELCOME_INACTIVE' => 'Welcome to the site %s',
 ];
