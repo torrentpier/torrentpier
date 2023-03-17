@@ -405,7 +405,12 @@ $userdata =& $user->data;
 /**
  * Cron
  */
-if ((empty($_POST) && !defined('IN_ADMIN') && !defined('IN_AJAX') && !file_exists(CRON_RUNNING) && ($bb_cfg['cron_enabled'] || defined('START_CRON'))) || defined('FORCE_CRON')) {
+if (
+    empty($_POST) &&
+    !defined('IN_ADMIN') && !defined('IN_AJAX') &&
+    !file_exists(CRON_RUNNING) &&
+    (TorrentPier\Helpers\CronHelper::isEnabled() || defined('START_CRON'))
+) {
     if (TIMENOW - $bb_cfg['cron_last_check'] > $bb_cfg['cron_check_interval']) {
 
         /** Update cron_last_check */

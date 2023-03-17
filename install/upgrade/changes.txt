@@ -45,6 +45,9 @@ ALTER TABLE `bb_groups` CHANGE `group_signature` `group_signature` TEXT NOT NULL
 ALTER TABLE `bb_groups` CHANGE `group_description` `group_description` TEXT NOT NULL DEFAULT '';
 UPDATE `bb_smilies` SET `code` = ':cd:', `smile_url` = 'cd.gif', `emoticon` = 'cd' WHERE `code` = ':сd:' AND `smile_url` = 'сd.gif' AND `emoticon` = 'сd';
 
-2.3.1-rc2
+// 2.3.1-rc2
 ALTER TABLE `bb_search_results` CHANGE `search_id` `search_id` VARCHAR(255) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL DEFAULT '';
 ALTER TABLE `bb_users` CHANGE `autologin_id` `autologin_id` VARCHAR(255) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL DEFAULT '';
+
+// 2.3.1-rc3
+DELETE FROM `bb_config` WHERE `config_name` = 'cron_enabled';
