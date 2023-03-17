@@ -156,37 +156,22 @@ $sql .= " ORDER BY $order_by";
 if ($result = DB()->fetch_rowset($sql)) {
     foreach ($result as $i => $row) {
         $user_id = $row['user_id'];
-        $from = $row['user_from'];
-        $joined = bb_date($row['user_regdate'], $bb_cfg['date_format']);
-        $posts = $row['user_posts'];
-        $pm = $bb_cfg['text_buttons'] ? '<a class="txtb" href="' . (PM_URL . "?mode=post&amp;" . POST_USERS_URL . "=$user_id") . '">' . $lang['SEND_PM_TXTB'] . '</a>' : '<a href="' . (PM_URL . "?mode=post&amp;" . POST_USERS_URL . "=$user_id") . '"><img src="' . $images['icon_pm'] . '" alt="' . $lang['SEND_PRIVATE_MESSAGE'] . '" title="' . $lang['SEND_PRIVATE_MESSAGE'] . '" border="0" /></a>';
 
-        if (bf($row['user_opt'], 'user_opt', 'user_viewemail') || IS_ADMIN) {
-            $email_uri = $bb_cfg['board_email_form'] ? ("profile.php?mode=email&amp;" . POST_USERS_URL . "=$user_id") : 'mailto:' . $row['user_email'];
-            $email = '<a class="editable" href="' . $email_uri . '">' . $row['user_email'] . '</a>';
-        } else {
-            $email = '';
-        }
-
-        if ($row['user_website']) {
-            $www = $bb_cfg['text_buttons'] ? '<a class="txtb" href="' . $row['user_website'] . '"  target="_userwww">' . $lang['VISIT_WEBSITE_TXTB'] . '</a>' : '<a class="txtb" href="' . $row['user_website'] . '" target="_userwww"><img src="' . $images['icon_www'] . '" alt="' . $lang['VISIT_WEBSITE'] . '" title="' . $lang['VISIT_WEBSITE'] . '" border="0" /></a>';
-        } else {
-            $www = '';
-        }
+        $user_info = generate_user_info($row);
 
         $row_class = !($i % 2) ? 'row1' : 'row2';
         $template->assign_block_vars('memberrow', array(
             'ROW_NUMBER' => $i + ($start + 1),
             'ROW_CLASS' => $row_class,
             'USER' => profile_url($row),
-            'AVATAR' => get_avatar($row['user_id'], $row['avatar_ext_id'], !bf($row['user_opt'], 'user_opt', 'dis_avatar'), 50, 50),
-            'FROM' => $from,
+            'AVATAR' => $user_info['avatar'],
+            'FROM' => $user_info['from'],
             'JOINED_RAW' => $row['user_regdate'],
-            'JOINED' => $joined,
-            'POSTS' => $posts,
-            'PM' => $pm,
-            'EMAIL' => $email,
-            'WWW' => $www,
+            'JOINED' => $user_info['joined'],
+            'POSTS' => $user_info['posts'],
+            'PM' => $user_info['pm'],
+            'EMAIL' => $user_info['email'],
+            'WWW' => $user_info['www'],
             'U_VIEWPROFILE' => PROFILE_URL . $user_id,
         ));
     }
