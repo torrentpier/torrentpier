@@ -12,7 +12,8 @@ $lang['ADMIN'] = '運営';
 $lang['FORUM'] = 'フォーラム';
 $lang['CATEGORY'] = 'カテゴリ';
 $lang['HIDE_CAT'] = '隠しカテゴリ';
-$lang['HIDE_CAT_MESS'] = '一部のカテゴリーで"隠れオプションショー"&middot; <a href="index.php?sh=1">Show All</a>';
+$lang['HIDE_CAT_MESS'] = 'Some categories are hidden by customized display options';
+$lang['SHOW_ALL'] = 'Show all';
 $lang['TOPIC'] = '話題';
 $lang['TOPICS'] = 'Topics';
 $lang['TOPICS_SHORT'] = 'Topics';
@@ -82,7 +83,7 @@ $lang['SKYPE_ERROR'] = '入力された無効なSkypeにログイン';
 $lang['TWITTER'] = 'Twitter';
 $lang['TWITTER_ERROR'] = '入力された無効Twitterにログイン';
 
-$lang['FORUM_INDEX'] = '%sフォーラム指数'; // eg. sitename Forum Index, %s can be removed if you prefer
+$lang['FORUM_INDEX'] = '%sフォーラム指数'; // e.g. sitename Forum Index, %s can be removed if you prefer
 
 $lang['POST_NEW_TOPIC'] = '後の新たな課題';
 $lang['POST_NEW_RELEASE'] = 'ポスト新発売';
@@ -301,7 +302,7 @@ $lang['SELECT_POSTS_PER_PAGE'] = '投稿ページあたりの';
 // Posting/Replying (Not private messaging!)
 $lang['TOPIC_REVIEW'] = '話題の検討';
 
-$lang['NO_POST_MODE'] = 'ポリマーのマトリックスモードの選択'; // If posting.php is called without a mode (newtopic/reply/delete/etc, shouldn't be shown normaly)
+$lang['NO_POST_MODE'] = 'ポリマーのマトリックスモードの選択'; // If posting.php is called without a mode (newtopic/reply/delete/etc., shouldn't be shown normally)
 
 $lang['POST_A_NEW_TOPIC'] = '後の新たな課題';
 $lang['POST_A_REPLY'] = '新規投稿に返信';
@@ -489,7 +490,7 @@ $lang['UNMARK_ALL'] = 'すべてのマーク解除';
 $lang['CONFIRM_DELETE_PM'] = 'Are you sure you want to deleteこのメッセージは？';
 $lang['CONFIRM_DELETE_PMS'] = 'Are you sure you want to deleteこれらのメッセージです。';
 
-$lang['INBOX_SIZE'] = 'メールの受信をごis<br /><b>%d%%</b>フル'; // eg. Your Inbox is 50% full
+$lang['INBOX_SIZE'] = 'メールの受信をごis<br /><b>%d%%</b>フル'; // e.g. Your Inbox is 50% full
 $lang['SENTBOX_SIZE'] = 'おSentbox is<br /><b>%d%%</b>フル';
 $lang['SAVEBOX_SIZE'] = 'おSavebox is<br /><b>%d%%</b>フル';
 
@@ -571,7 +572,7 @@ $lang['YEARS'] = '年';
 $lang['NO_THEMES'] = 'なテーマでのデータベース';
 $lang['TIMEZONE'] = 'タイムゾーン';
 $lang['DATE_FORMAT_PROFILE'] = '日付フォーマット';
-$lang['DATE_FORMAT_EXPLAIN'] = '構文の使用と同一であPHP<a href=\'http://www.php.net/date\' target=\'_other\'>date()</a>機能します。';
+$lang['DATE_FORMAT_EXPLAIN'] = 'The syntax used is identical to the PHP <a href=\'https://www.php.net/manual/en/function.date.php\' target=\'_other\'>date()</a> function.';
 $lang['SIGNATURE'] = '署名';
 $lang['SIGNATURE_EXPLAIN'] = 'このブロックのテキストを追加することがで投稿することができます。 あ%d文字制限';
 $lang['SIGNATURE_DISABLE'] = '締切違反のフォーラムの規則';
@@ -802,8 +803,8 @@ $lang['BRIEFLY'] = '簡単に';
 $lang['NO_SEARCHABLE_FORUMS'] = 'いないアクセス権を検索フォーラムこのサイトです。';
 
 $lang['NO_SEARCH_MATCH'] = 'ないトピックまたは投稿た検索条件';
-$lang['FOUND_SEARCH_MATCH'] = '検索した%d合'; // eg. Search found 1 match
-$lang['FOUND_SEARCH_MATCHES'] = '検索した%d合'; // eg. Search found 24 matches
+$lang['FOUND_SEARCH_MATCH'] = '検索した%d合'; // e.g. Search found 1 match
+$lang['FOUND_SEARCH_MATCHES'] = '検索した%d合'; // e.g. Search found 24 matches
 $lang['TOO_MANY_SEARCH_RESULTS'] = '多くの結果が見つからしてみてください具体的';
 
 $lang['CLOSE_WINDOW'] = 'ウィンドウを閉';
@@ -1512,9 +1513,9 @@ $lang['ITALIC'] = 'テキストを斜体:[i]text[/i](Ctrl+I)';
 $lang['UNDERLINE'] = '下線文:[u]text[/u](Ctrl+U)';
 $lang['STRIKEOUT'] = 'Strikeout文:[s]text[/s](Ctrl+S)';
 $lang['QUOTE_TITLE'] = '引用文:[quote]text[/quote](Ctrl+Q)';
-$lang['IMG_TITLE'] = '挿入イメージ：[img]http://image_url[/img](Ctrl+R)';
+$lang['IMG_TITLE'] = 'Insert image: [img]https://image_url[/img] (Ctrl+R)';
 $lang['URL'] = 'Url';
-$lang['URL_TITLE'] = 'Insert URL:[url]http://url[/url][url=http://url]URL text[/url](Ctrl+W)';
+$lang['URL_TITLE'] = 'Insert URL: [url]https://url[/url] or [url=https://url]URL text[/url] (Ctrl+W)';
 $lang['CODE_TITLE'] = 'コード表示[code]code[/code](Ctrl+K)';
 $lang['LIST'] = 'リスト';
 $lang['LIST_TITLE'] = 'リスト：[list]text[/list](Ctrl+l)';
@@ -2060,7 +2061,7 @@ $lang['TRACKER_STATS'] = '統計のトラッカー';
 $lang['WHOIS_INFO'] = 'に関する情報IPアドレス';
 $lang['SHOW_MOD_HOME_PAGE'] = 'ショーのモデレーターのindex.php';
 $lang['PREMOD_HELP'] = '<h4><span class="tor-icon tor-dup">&#8719;</span>前moderation</h4> <h6>Ifできない分布の状況v#,またはTをとことん追究しながら、同時に処分布を自動的に受け取るこstatus</h6>';
-$lang['TOR_COMMENT'] = '<h4>Commentaryの状況distribution</h4> <h6>Comment成功を指定することができreleasersます。 時nedooformlennyh状況releasers利用形態に対応する補正release</h6>';
+$lang['TOR_COMMENT'] = '<h4>Comment on the status of a distribution</h4> <h6>The comment allows you to point out the errors made to the releaser. If the statuses are incomplete, a release response form is available to the release manager to correct the release</h6>';
 $lang['SEED_BONUS_ADD'] = '<h4>Adding種ボーナス</h4> <h6>数の分布には、ユーザのサイズの賞与（充電倍時)</h6>';
 $lang['SEED_BONUS_RELEASE'] = 'N-スリリース';
 $lang['SEED_BONUS_POINTS'] = '賞与引当金は、時間';
@@ -2088,7 +2089,7 @@ $lang['ATTACH_NUMBER_SETTINGS'] = '添付番号の設定';
 $lang['ATTACH_OPTIONS_SETTINGS'] = '取付オプション';
 
 $lang['UPLOAD_DIRECTORY'] = 'ディレクトリにアップロード';
-$lang['UPLOAD_DIRECTORY_EXPLAIN'] = '入力の相対パスからTorrentPierるメールの添付ファイルアップロードをクリックします。 例えば、入力\'のファイルの場合TorrentPier設置http://www.yourdomain.com/torrentpier は、別紙をアップロードディレクトリにあhttp://www.yourdomain.com/torrentpier/filesます。';
+$lang['UPLOAD_DIRECTORY_EXPLAIN'] = 'Enter the relative path from your TorrentPier installation to the Attachments upload directory. For example, enter \'files\' if your TorrentPier Installation is located at https://www.yourdomain.com/torrentpier and the Attachment Upload Directory is located at https://www.yourdomain.com/torrentpier/files.';
 $lang['ATTACH_IMG_PATH'] = '投稿の添付のアイコン';
 $lang['ATTACH_IMG_PATH_EXPLAIN'] = 'この画像を表示の隣の付着のリンクを個々の投稿です。 このフィールドを空白のない場合はアイコンが表示されます。 この設定の書き換えの設定を拡張団体が管理します。';
 $lang['ATTACH_TOPIC_ICON'] = '添付話題アイコン';
@@ -2127,7 +2128,7 @@ $lang['EMPTY_FILE_ENTRY'] = '空のファイルのエントリ';
 
 // Attachments -> Sync
 $lang['SYNC_THUMBNAIL_RESETTED'] = 'サムネイルresettedのためのアタッチメント：%s'; // replace %s with physical Filename
-$lang['ATTACH_SYNC_FINISHED'] = '添付Syncronization終了しました。';
+$lang['ATTACH_SYNC_FINISHED'] = 'Attachment Synchronization Finished.';
 $lang['SYNC_TOPICS'] = '同期Topics';
 $lang['SYNC_POSTS'] = '同期の投稿';
 $lang['SYNC_THUMBNAILS'] = '同期のサムネイル';
@@ -2578,7 +2579,7 @@ $lang['RELEASES'] = 'リリース';
 
 $lang['BACK'] = '裏';
 $lang['ERROR_FORM'] = '無効な分野';
-$lang['RELEASE_WELCOME'] = 'Pleaeのreleae形';
+$lang['RELEASE_WELCOME'] = 'Please fill in the release form';
 $lang['NEW_RELEASE'] = '新しいリリース';
 $lang['NEXT'] = '続き';
 $lang['OTHER'] = 'その他';
@@ -2586,8 +2587,8 @@ $lang['OTHER'] = 'その他';
 $lang['TPL_EMPTY_FIELD'] = '必分野に<b>%s</b>';
 $lang['TPL_EMPTY_SEL'] = 'を選択してください<b>%s</b>';
 $lang['TPL_NOT_NUM'] = '<b>%s</b>-num';
-$lang['TPL_NOT_URL'] = '<b>%s</b>なければhttp://URL';
-$lang['TPL_NOT_IMG_URL'] = '<b>%s</b>なければhttp://IMG_URL';
+$lang['TPL_NOT_URL'] = '<b>%s</b> - Must be https:// URL';
+$lang['TPL_NOT_IMG_URL'] = '<b>%s</b> - Must be https:// IMG_URL';
 $lang['TPL_PUT_INTO_SUBJECT'] = 'の対象';
 $lang['TPL_POSTER'] = 'ポスター';
 $lang['TPL_REQ_FILLING'] = '要する充填';
@@ -2601,15 +2602,15 @@ $lang['TPL_SPOILER'] = 'アンダースポイラー';
 $lang['TPL_IN_LINE'] = '同じライン';
 $lang['TPL_HEADER_ONLY'] = 'のみのタイトル';
 
-$lang['SEARCH_INVALID_USERNAME'] = '無効なユーザー名を入力して検索';
-$lang['SEARCH_INVALID_EMAIL'] = '無効なメールアドレスを入力して検索';
-$lang['SEARCH_INVALID_IP'] = '無効なIPアドレスを入力して検索';
-$lang['SEARCH_INVALID_GROUP'] = '無効なグループ入力した検索';
-$lang['SEARCH_INVALID_RANK'] = '無効にランク入力した検索';
-$lang['SEARCH_INVALID_DATE'] = '無効な日付を入力して検索';
-$lang['SEARCH_INVALID_POSTCOUNT'] = '無効なポストカウントを入力して検索';
+$lang['SEARCH_INVALID_USERNAME'] = 'Invalid username entered to search';
+$lang['SEARCH_INVALID_EMAIL'] = 'Invalid email address entered to search';
+$lang['SEARCH_INVALID_IP'] = 'Invalid IP-address entered to search';
+$lang['SEARCH_INVALID_GROUP'] = 'Invalid group entered to search';
+$lang['SEARCH_INVALID_RANK'] = 'Invalid rank entered to search';
+$lang['SEARCH_INVALID_DATE'] = 'Invalid date entered to search';
+$lang['SEARCH_INVALID_POSTCOUNT'] = 'Invalid post count entered to search';
 $lang['SEARCH_INVALID_USERFIELD'] = '無効Userfieldデータ入力';
-$lang['SEARCH_INVALID_LASTVISITED'] = '無効なデータ入力のための最後の訪問を検索';
+$lang['SEARCH_INVALID_LASTVISITED'] = 'Invalid date entered for last visited search';
 $lang['SEARCH_INVALID_LANGUAGE'] = '無効な言語を選択';
 $lang['SEARCH_INVALID_TIMEZONE'] = '無効なタイムゾーン選択';
 $lang['SEARCH_INVALID_MODERATORS'] = '無効なフォーラム選択';
@@ -2660,12 +2661,12 @@ $lang['SEARCH_USERS_GROUPS_EXPLAIN'] = 'すべての会員に選択したグル�
 $lang['SEARCH_USERS_RANKS_EXPLAIN'] = 'すべてのキャリアを選択します。';
 $lang['BANNED_USERS'] = 'ユーザーの禁止';
 $lang['DISABLED_USERS'] = '障害者のユーザー';
-$lang['SEARCH_USERS_MISC_EXPLAIN'] = '管理者が全ユーザーに管理者権限は、モデレーター-フォーラムのモデレーターは、禁止ユーザーのすべてのアカウントを調べることが禁止されているこれらのフォーラム障害者のユーザー-すべてのユーザと障害者口座のいずれかを手動で無効にな確認メールアドレス）は、ユーザーを無効にPMs-選択したユーザーのプライベートメッセージpriviliges削除されることができるようになりました経由でのユーザーの管理）';
-$lang['POSTCOUNT'] = 'Postcount';
+$lang['SEARCH_USERS_MISC_EXPLAIN'] = 'Administrators - All users with Administrator powers; Moderators - All forum moderators; Banned Users - All accounts that have been banned on these forums; Disabled Users - All users with disabled accounts (either manually disabled or never verified their email address); Users with disabled PMs - Selects users who have the Private Messages privileges removed (Done via User Management)';
+$lang['POSTCOUNT'] = 'Post count';
 $lang['EQUALS'] = 'Equals';
 $lang['GREATER_THAN'] = '以上';
 $lang['LESS_THAN'] = '以上';
-$lang['SEARCH_USERS_POSTCOUNT_EXPLAIN'] = 'できるユーザを検索に基づくPostcount値です。 また検索により特定の値以上で誰でも多かれ少なかれ以上の価値又は数値を指定します。 な範囲の検索を選択し、"Equals"そして、初期値の範囲で区切られたダッシュ(-)などにより10-15';
+$lang['SEARCH_USERS_POSTCOUNT_EXPLAIN'] = 'You can search for users based on the post count value. You can either search by a specific value, greater than or lesser than a value or between two values. To do the range search, select "Equals" then put the beginning and ending values of the range separated by a dash (-), e.g. 10-15';
 $lang['USERFIELD'] = 'Userfield';
 $lang['SEARCH_USERS_USERFIELD_EXPLAIN'] = '検索ユーザーに基づき、数種類のプロフィール分野です。 ワイルドカードには対応して使用する際はブラウザ設定でjavascriptを有効にします(※)。';
 $lang['SEARCH_USERS_LASTVISITED_EXPLAIN'] = '検索できますユーザーのログインの際には、最終ログイン日時をこの検索のオプション';
@@ -2673,7 +2674,7 @@ $lang['SEARCH_USERS_LANGUAGE_EXPLAIN'] = 'この表示ユーザーを選択し�
 $lang['SEARCH_USERS_TIMEZONE_EXPLAIN'] = 'ユーザーに選定した特定のタイムゾーンはプロフィール';
 $lang['SEARCH_USERS_STYLE_EXPLAIN'] = '表示ユーザを選択した特定のスタイルです。';
 $lang['MODERATORS_OF'] = 'モデレーターの';
-$lang['SEARCH_USERS_MODERATORS_EXPLAIN'] = '検索ユーザーが減速する権限を特定のフォーラムです。 緩和にアクセス権recoginisedのいずれかによりユーザーの権限またはグループのグループPermssionsます。';
+$lang['SEARCH_USERS_MODERATORS_EXPLAIN'] = 'Search for users with Moderating permissions to a specific forum. Moderating permissions are recognised either by User Permissions or by being in a Group with the right Group Permissions.';
 
 $lang['SEARCH_USERS_NEW'] = '%sた%d結果(s)です。 を行う<a href="%s">another search</a>ます。';
 $lang['BANNED'] = '禁止';
@@ -2727,10 +2728,10 @@ $lang['SITEMAP_OPTIONS'] = 'オプション';
 $lang['SITEMAP_CREATE'] = 'の作成-更新、サイトマップ';
 $lang['SITEMAP_NOTIFY'] = '通知の検索エンジンの最新版のサイトマップ';
 $lang['SITEMAP_WHAT_NEXT'] = 'いうのは次のどれですか。';
-$lang['SITEMAP_GOOGLE_1'] = '登録サイトで<a href="http://www.google.com/webmasters/" target="_blank">Google Webmaster</a>利用のお客様のGoogleアカウントします。';
+$lang['SITEMAP_GOOGLE_1'] = 'Register your site at <a href="https://www.google.com/webmasters/" target="_blank">Google Webmaster</a> using your Google account.';
 $lang['SITEMAP_GOOGLE_2'] = '<a href="https://www.google.com/webmasters/tools/sitemap-list" target="_blank">Add sitemap</a>のサイトにご登録いただいたします。';
-$lang['SITEMAP_YANDEX_1'] = '登録サイトで<a href="http://webmaster.yandex.ru/sites/" target="_blank">Yandex Webmaster</a>ご利用のYandexます。';
-$lang['SITEMAP_YANDEX_2'] = '<a href="http://webmaster.yandex.ru/site/map.xml" target="_blank">Add sitemap</a>のサイトにご登録いただいたします。';
+$lang['SITEMAP_YANDEX_1'] = 'Register your site at <a href="https://webmaster.yandex.ru/sites/" target="_blank">Yandex Webmaster</a> using your Yandex account.';
+$lang['SITEMAP_YANDEX_2'] = '<a href="https://webmaster.yandex.ru/site/map.xml" target="_blank">Add sitemap</a> of site you registered.';
 $lang['SITEMAP_BING_1'] = '登録サイトで<a href="https://www.bing.com/webmaster/" target="_blank">Bing Webmaster</a>をMicrosoftアカウントします。';
 $lang['SITEMAP_BING_2'] = 'サイトマップの追加のサイトにご登録いただいたに設定します。';
 $lang['SITEMAP_ADD_TITLE'] = '追加ページサイトマップ';
@@ -2751,7 +2752,7 @@ $lang['ATOM_GLOBAL_FEED'] = 'すべてのフォーラムのグローバルフィ
 $lang['HASH_INVALID'] = 'ハッシュ%sが無効';
 $lang['HASH_NOT_FOUND'] = 'コーポレートコミュニケーションのハッシュ%s見つかりませんで';
 
-$lang['TERMS_EMPTY_TEXT'] = '[align=center]のテキストのページを編集:[url=http://%s/admin/admin_terms.php]admin/admin_termsます。php[/url]ます。 このラインでもよく見かけます。[/align]';
+$lang['TERMS_EMPTY_TEXT'] = '[align=center]The text of this page is edited at: [url=https://%s/admin/admin_terms.php]admin/admin_terms.php[/url]. This line can see only administrators.[/align]';
 $lang['TERMS_EXPLAIN'] = 'このページでご指定いただくことができますテキストの基本的なルールのリソースが表示されます。';
 
 $lang['TR_STATS'] = array(
@@ -2808,16 +2809,16 @@ $lang['CAPTCHA'] = 'ることを確認等の無断転載は固くお断りいロ
 $lang['CAPTCHA_WRONG'] = 'できないことを確認等の無断転載は固くお断りいロボット';
 $lang['CAPTCHA_SETTINGS'] = '<h2>ReCaptcha十分ではconfigured</h2><p>ifていなかったとしたら既に生成したキーの取得ができないことがあり上<a href="https://www.google.com/recaptcha/admin">https://wwwします。googleです。com/recaptcha/admin</a>ます。<br />Afterを生成するキーが必要ということは、ファイルライブラリ/config.クリアしました。</p>';
 
-// Emailer
+// Sending email
 $lang['EMAILER_SUBJECT'] = [
-    'EMPTY' => 'の更な',
-    'GROUP_ADDED' => 'きのこusergroup',
-    'GROUP_APPROVED' => 'ご承認を得た',
-    'GROUP_REQUEST' => '請求をすごしてい',
-    'PRIVMSG_NOTIFY' => '新しいプライベートメッセージ到着',
-    'TOPIC_NOTIFY' => '話題の返信通知%s',
-    'USER_ACTIVATE' => '再座',
-    'USER_ACTIVATE_PASSWD' => '新しいパスワードの活性化',
-    'USER_WELCOME' => 'ウ%sフォーラム',
-    'USER_WELCOME_INACTIVE' => 'ウ%sフォーラム',
+    'EMPTY' => 'No subject',
+    'GROUP_ADDED' => 'You have been added to the user group',
+    'GROUP_APPROVED' => 'Your request to join the user group has been granted',
+    'GROUP_REQUEST' => 'A request to join your user group',
+    'PRIVMSG_NOTIFY' => 'New private message',
+    'TOPIC_NOTIFY' => 'Notification of response in the thread %s',
+    'USER_ACTIVATE' => 'Account reactivation',
+    'USER_ACTIVATE_PASSWD' => 'Confirming a new password',
+    'USER_WELCOME' => 'Welcome to the site %s',
+    'USER_WELCOME_INACTIVE' => 'Welcome to the site %s',
 ];
