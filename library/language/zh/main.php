@@ -12,7 +12,8 @@ $lang['ADMIN'] = '管理';
 $lang['FORUM'] = '论坛';
 $lang['CATEGORY'] = '分类';
 $lang['HIDE_CAT'] = '隐藏分类';
-$lang['HIDE_CAT_MESS'] = '一部分分类被隐藏 "显示选项" &middot; <a href="index.php?sh=1">全部显示</a>';
+$lang['HIDE_CAT_MESS'] = '自定義顯示選項隱藏了一些類別';
+$lang['SHOW_ALL'] = '顯示所有';
 $lang['TOPIC'] = '主题';
 $lang['TOPICS'] = '主题';
 $lang['TOPICS_SHORT'] = '主题';
@@ -82,7 +83,7 @@ $lang['SKYPE_ERROR'] = '您输入了一个无效的 Skype 账号';
 $lang['TWITTER'] = '推特';
 $lang['TWITTER_ERROR'] = '您输入了一个无效的 Twitter 账号';
 
-$lang['FORUM_INDEX'] = '%s 论坛索引'; // eg. sitename Forum Index, %s can be removed if you prefer
+$lang['FORUM_INDEX'] = '%s 论坛索引'; // e.g. sitename Forum Index, %s can be removed if you prefer
 
 $lang['POST_NEW_TOPIC'] = '发布新的主题';
 $lang['POST_NEW_RELEASE'] = '发布新的种子';
@@ -301,7 +302,7 @@ $lang['SELECT_POSTS_PER_PAGE'] = '每页的职位';
 // Posting/Replying (Not private messaging!)
 $lang['TOPIC_REVIEW'] = '专题审查';
 
-$lang['NO_POST_MODE'] = '没有职位选择的模式'; // If posting.php is called without a mode (newtopic/reply/delete/etc, shouldn't be shown normaly)
+$lang['NO_POST_MODE'] = '没有职位选择的模式'; // If posting.php is called without a mode (newtopic/reply/delete/etc., shouldn't be shown normally)
 
 $lang['POST_A_NEW_TOPIC'] = '发布新的主题';
 $lang['POST_A_REPLY'] = '后新的答复';
@@ -489,7 +490,7 @@ $lang['UNMARK_ALL'] = '取消所有';
 $lang['CONFIRM_DELETE_PM'] = '你确定要删除这个消息？';
 $lang['CONFIRM_DELETE_PMS'] = '你确定要删除这些消息吗?';
 
-$lang['INBOX_SIZE'] = '你的电子邮件收件箱is<br /><b>%d%%</b>全'; // eg. Your Inbox is 50% full
+$lang['INBOX_SIZE'] = '你的电子邮件收件箱is<br /><b>%d%%</b>全'; // e.g. Your Inbox is 50% full
 $lang['SENTBOX_SIZE'] = '你Sentbox is<br /><b>%d%%</b>全';
 $lang['SAVEBOX_SIZE'] = '你Savebox is<br /><b>%d%%</b>全';
 
@@ -571,7 +572,7 @@ $lang['YEARS'] = '年';
 $lang['NO_THEMES'] = '没有主题数据库';
 $lang['TIMEZONE'] = '时区';
 $lang['DATE_FORMAT_PROFILE'] = '日期格式';
-$lang['DATE_FORMAT_EXPLAIN'] = '语法使用的是相同的PHP<a href=\'http://www.php.net/date\' target=\'_other\'>date()</a>功能。';
+$lang['DATE_FORMAT_EXPLAIN'] = '语法使用的是相同的PHP<a href=\'https://www.php.net/manual/en/function.date.php\' target=\'_other\'>date()</a>功能。';
 $lang['SIGNATURE'] = '签名';
 $lang['SIGNATURE_EXPLAIN'] = '这是一块的文本，可以添加的员额。 有一个%d字符的限制';
 $lang['SIGNATURE_DISABLE'] = '签署关于违反论坛的规则';
@@ -802,8 +803,8 @@ $lang['BRIEFLY'] = '简要地说';
 $lang['NO_SEARCHABLE_FORUMS'] = '你没有权搜索任何论坛，在这个网站。';
 
 $lang['NO_SEARCH_MATCH'] = '没有主题或职位见到了你的搜索标准';
-$lang['FOUND_SEARCH_MATCH'] = '搜索发现%d匹配'; // eg. Search found 1 match
-$lang['FOUND_SEARCH_MATCHES'] = '搜索发现%d匹配'; // eg. Search found 24 matches
+$lang['FOUND_SEARCH_MATCH'] = '搜索发现%d匹配'; // e.g. Search found 1 match
+$lang['FOUND_SEARCH_MATCHES'] = '搜索发现%d匹配'; // e.g. Search found 24 matches
 $lang['TOO_MANY_SEARCH_RESULTS'] = '太多的结果可以发现，请尝试的更具体的';
 
 $lang['CLOSE_WINDOW'] = '靠近窗户';
@@ -1508,9 +1509,9 @@ $lang['ITALIC'] = '斜体文字：[i]text[/i](Ctrl+I)';
 $lang['UNDERLINE'] = '下划线的案文：[u]text[/u](Ctrl+U)';
 $lang['STRIKEOUT'] = '删除线文本：[s]text[/s](Ctrl+S)';
 $lang['QUOTE_TITLE'] = '引文：[quote]text[/quote](Ctrl+Q)';
-$lang['IMG_TITLE'] = '插入图片：[img]http://image_url[/img](Ctrl+R)';
+$lang['IMG_TITLE'] = '插入圖片： [img]https://image_url[/img] (Ctrl+R)';
 $lang['URL'] = 'Url';
-$lang['URL_TITLE'] = '插入网址：[url]http://url[/url]或[url=http://url]URL text[/url](Ctrl+W)';
+$lang['URL_TITLE'] = '插入 URL： [url]https://url[/url] 或 [url=https://url]URL 文本[/url] (Ctrl+W)';
 $lang['CODE_TITLE'] = '代码显示：[code]code[/code](Ctrl+K)';
 $lang['LIST'] = '列表';
 $lang['LIST_TITLE'] = '列表：[list]text[/list](Ctrl+l)';
@@ -2056,7 +2057,7 @@ $lang['TRACKER_STATS'] = '统计数据的跟踪器';
 $lang['WHOIS_INFO'] = '信息有关的IP地址';
 $lang['SHOW_MOD_HOME_PAGE'] = '显示在主持人的index.php';
 $lang['PREMOD_HELP'] = '<h4><span class="tor-icon tor-dup">&#8719;</span>预moderation</h4> <h6>If你没有分布状态的v,#,或在本部分，包括小节，分布将自动收到这status</h6>';
-$lang['TOR_COMMENT'] = '<h4>Commentary地位distribution</h4> <h6>Comment成功地允许指定长激素释放剂的错误。 当nedooformlennyh状态长激素释放剂可用的形式响应的修正release</h6>';
+$lang['TOR_COMMENT'] = '<h4>對分發狀態的評論</h4> <h6>評論允許您向發布者指出錯誤。如果狀態不完整，發布經理可以使用發布響應表來更正發布</h6>';
 $lang['SEED_BONUS_ADD'] = '<h4>Adding种奖金</h4> <h6>数的分配交给了由用户和大小的奖金(费时间一个小时)</h6>';
 $lang['SEED_BONUS_RELEASE'] = 'N-数量的释放';
 $lang['SEED_BONUS_POINTS'] = '奖金一个小时';
@@ -2084,7 +2085,7 @@ $lang['ATTACH_NUMBER_SETTINGS'] = '附件些设置';
 $lang['ATTACH_OPTIONS_SETTINGS'] = '附件的选择';
 
 $lang['UPLOAD_DIRECTORY'] = '上传目录';
-$lang['UPLOAD_DIRECTORY_EXPLAIN'] = '进入相对路径从你的TorrentPier安装的附件载录。 例如，该文件如果你TorrentPier安装位于http://www.yourdomain.com/torrentpier 并附上目录是位于http://www.yourdomain.com/torrentpier/files中。';
+$lang['UPLOAD_DIRECTORY_EXPLAIN'] = '进入相对路径从你的TorrentPier安装的附件载录。 例如，该文件如果你TorrentPier安装位于https://www.yourdomain.com/torrentpier 并附上目录是位于https://www.yourdomain.com/torrentpier/files中。';
 $lang['ATTACH_IMG_PATH'] = '附件张贴标';
 $lang['ATTACH_IMG_PATH_EXPLAIN'] = '这个图像显示附件的链接在个人投稿。 离开这个领域的空白如果你不想要一个图标来显示的。 这种设置将被复盖，通过设置在扩展集团管理。';
 $lang['ATTACH_TOPIC_ICON'] = '附件一主题的图标';
@@ -2385,6 +2386,7 @@ $lang['CRON_NEXT_RUN'] = '下运行';
 $lang['CRON_RUN_COUNT'] = '运行';
 $lang['CRON_MANAGE'] = '管理';
 $lang['CRON_OPTIONS'] = 'Cron的选择';
+$lang['CRON_DISABLED_WARNING'] = '警告！運行 cron 腳本被禁用。要啟用它，請設置 APP_CRON_ENABLED 變量。';
 
 $lang['CRON_ENABLED'] = 'Cron启用';
 $lang['CRON_CHECK_INTERVAL'] = 'Cron检查间隔的时间(秒)';
@@ -2574,7 +2576,7 @@ $lang['RELEASES'] = '释放';
 
 $lang['BACK'] = '回';
 $lang['ERROR_FORM'] = '无效的领域';
-$lang['RELEASE_WELCOME'] = '请填写releae形式';
+$lang['RELEASE_WELCOME'] = '請填寫發布表格';
 $lang['NEW_RELEASE'] = '新的释放';
 $lang['NEXT'] = '继续';
 $lang['OTHER'] = '其他的';
@@ -2582,8 +2584,8 @@ $lang['OTHER'] = '其他的';
 $lang['TPL_EMPTY_FIELD'] = '你必须填补的领域<b>%s</b>';
 $lang['TPL_EMPTY_SEL'] = '你必须选择<b>%s</b>';
 $lang['TPL_NOT_NUM'] = '<b>%s</b>-不num';
-$lang['TPL_NOT_URL'] = '<b>%s</b>-必须http://URL';
-$lang['TPL_NOT_IMG_URL'] = '<b>%s</b>-必须http://IMG_URL';
+$lang['TPL_NOT_URL'] = '<b>%s</b> - 必須是 https:// 網址';
+$lang['TPL_NOT_IMG_URL'] = '<b>%s</b> - 必須是 https:// IMG_URL';
 $lang['TPL_PUT_INTO_SUBJECT'] = '投入的主题';
 $lang['TPL_POSTER'] = '海报';
 $lang['TPL_REQ_FILLING'] = '需要填';
@@ -2597,15 +2599,15 @@ $lang['TPL_SPOILER'] = '扰流片';
 $lang['TPL_IN_LINE'] = '在同一路线';
 $lang['TPL_HEADER_ONLY'] = '只有在一个标题';
 
-$lang['SEARCH_INVALID_USERNAME'] = '无效的用户名输入搜索';
-$lang['SEARCH_INVALID_EMAIL'] = '无效的电子邮件地址输入搜索';
-$lang['SEARCH_INVALID_IP'] = '无效的IP地址输入搜索';
-$lang['SEARCH_INVALID_GROUP'] = '无效的集团进入搜索';
-$lang['SEARCH_INVALID_RANK'] = '无效的排名已输入搜索';
-$lang['SEARCH_INVALID_DATE'] = '无效的日期进入搜索';
-$lang['SEARCH_INVALID_POSTCOUNT'] = '无效的后数输入搜索';
+$lang['SEARCH_INVALID_USERNAME'] = '輸入的搜索用戶名無效';
+$lang['SEARCH_INVALID_EMAIL'] = '輸入的電子郵件地址無效以進行搜索';
+$lang['SEARCH_INVALID_IP'] = '輸入的 IP 地址無效以進行搜索';
+$lang['SEARCH_INVALID_GROUP'] = '輸入的搜索組無效';
+$lang['SEARCH_INVALID_RANK'] = '輸入的搜索排名無效';
+$lang['SEARCH_INVALID_DATE'] = '輸入的搜索日期無效';
+$lang['SEARCH_INVALID_POSTCOUNT'] = '輸入搜索的帖子數無效';
 $lang['SEARCH_INVALID_USERFIELD'] = '无效Userfield数据输入';
-$lang['SEARCH_INVALID_LASTVISITED'] = '无效的数据输入搜索的最后一次访问';
+$lang['SEARCH_INVALID_LASTVISITED'] = '為上次訪問的搜索輸入的日期無效';
 $lang['SEARCH_INVALID_LANGUAGE'] = '无效选择的语言';
 $lang['SEARCH_INVALID_TIMEZONE'] = '无效的时间选择';
 $lang['SEARCH_INVALID_MODERATORS'] = '无效的论坛选择';
@@ -2656,12 +2658,12 @@ $lang['SEARCH_USERS_GROUPS_EXPLAIN'] = '查看所有成员的选小组。';
 $lang['SEARCH_USERS_RANKS_EXPLAIN'] = '查看所有运营商的选择排名。';
 $lang['BANNED_USERS'] = '被禁止的用户';
 $lang['DISABLED_USERS'] = '残疾人用户';
-$lang['SEARCH_USERS_MISC_EXPLAIN'] = '管理员-所有用户有管理员权力；主持人-所有论坛主持人;禁止的用户，所有账户已被禁止在这些论坛；残疾人用户--所有用户有残疾人的账户(无论是手动禁用或从未证实他们的电子邮件地址)；用户与残疾PMs--选择的用户，私人消息的权限移(通过用户管理)';
-$lang['POSTCOUNT'] = 'Postcount';
+$lang['SEARCH_USERS_MISC_EXPLAIN'] = '管理員 - 所有具有管理員權限的用戶；版主 - 所有論壇版主；被禁止的用戶——所有在這些論壇上被禁止的帳戶；禁用用戶——所有帳戶被禁用的用戶（手動禁用或從未驗證過他們的電子郵件地址）；禁用 PM 的用戶 - 選擇已刪除私人消息權限的用戶（通過用戶管理完成）';
+$lang['POSTCOUNT'] = '帖子數';
 $lang['EQUALS'] = '等于';
 $lang['GREATER_THAN'] = '大于';
 $lang['LESS_THAN'] = '不到';
-$lang['SEARCH_USERS_POSTCOUNT_EXPLAIN'] = '你可以搜索的用户基础上Postcount值。 你可以搜索的一个具体的值，大于或小于一个值之间或两个价值观。 要做到的范围内搜索，选择"等于"然后把开始和结束的价值观的范围内分离出一个破折号(-)，例如10至15';
+$lang['SEARCH_USERS_POSTCOUNT_EXPLAIN'] = '您可以根據帖子計數值搜索用戶。您可以按特定值、大於或小於某個值或介於兩個值之間的值進行搜索。要進行範圍搜索，請選擇“等於”，然後將範圍的起始值和結束值用破折號 (-) 分隔，例如 10-15';
 $lang['USERFIELD'] = 'Userfield';
 $lang['SEARCH_USERS_USERFIELD_EXPLAIN'] = '搜索的用户基础的各种档案领域。 通配符的支持使用一个星号(*).';
 $lang['SEARCH_USERS_LASTVISITED_EXPLAIN'] = '你可以搜索的用户根据其最后的登录的日期使用这一搜索选项';
@@ -2669,7 +2671,7 @@ $lang['SEARCH_USERS_LANGUAGE_EXPLAIN'] = '这将显示用户的人已经选择�
 $lang['SEARCH_USERS_TIMEZONE_EXPLAIN'] = '用户选定一个具体的时区在他们的个人资料';
 $lang['SEARCH_USERS_STYLE_EXPLAIN'] = '显示用户必须选择一特定的风格。';
 $lang['MODERATORS_OF'] = '主持人';
-$lang['SEARCH_USERS_MODERATORS_EXPLAIN'] = '搜索的用户与缓和权限的一个具体的论坛。 缓和权限recoginised无论是通过用户的权限或被在一个组中，与权利组Permssions的。';
+$lang['SEARCH_USERS_MODERATORS_EXPLAIN'] = '搜索對特定論壇具有審核權限的用戶。審核權限由用戶權限或在具有正確組權限的組中識別。';
 
 $lang['SEARCH_USERS_NEW'] = '%s取得了%d结果(s)。 执行<a href="%s">another search</a>的。';
 $lang['BANNED'] = '禁止';
@@ -2723,10 +2725,10 @@ $lang['SITEMAP_OPTIONS'] = '选项';
 $lang['SITEMAP_CREATE'] = '创建/更新的网站地图';
 $lang['SITEMAP_NOTIFY'] = '通知搜索引擎新版本的地图';
 $lang['SITEMAP_WHAT_NEXT'] = '接下来做什么？';
-$lang['SITEMAP_GOOGLE_1'] = '注册网站在<a href="http://www.google.com/webmasters/" target="_blank">Google Webmaster</a>使用谷歌的帐户。';
+$lang['SITEMAP_GOOGLE_1'] = '注册网站在<a href="https://www.google.com/webmasters/" target="_blank">Google Webmaster</a>使用谷歌的帐户。';
 $lang['SITEMAP_GOOGLE_2'] = '<a href="https://www.google.com/webmasters/tools/sitemap-list" target="_blank">Add sitemap</a>的网站，你有注册。';
-$lang['SITEMAP_YANDEX_1'] = '注册网站在<a href="http://webmaster.yandex.ru/sites/" target="_blank">Yandex Webmaster</a>用你该应帐户。';
-$lang['SITEMAP_YANDEX_2'] = '<a href="http://webmaster.yandex.ru/site/map.xml" target="_blank">Add sitemap</a>的网站，你有注册。';
+$lang['SITEMAP_YANDEX_1'] = '注册网站在<a href="https://webmaster.yandex.ru/sites/" target="_blank">Yandex Webmaster</a>用你该应帐户。';
+$lang['SITEMAP_YANDEX_2'] = '<a href="https://webmaster.yandex.ru/site/map.xml" target="_blank">Add sitemap</a>的网站，你有注册。';
 $lang['SITEMAP_BING_1'] = '注册网站在<a href="https://www.bing.com/webmaster/" target="_blank">Bing Webmaster</a>使用Microsoft帐户。';
 $lang['SITEMAP_BING_2'] = '添加的网站地图的网站的注册在其设置。';
 $lang['SITEMAP_ADD_TITLE'] = '其他网页的网站地图';
@@ -2747,7 +2749,7 @@ $lang['ATOM_GLOBAL_FEED'] = '全球料的所有论坛';
 $lang['HASH_INVALID'] = '哈希%s是无效的';
 $lang['HASH_NOT_FOUND'] = '释放与哈希%s找不到';
 
-$lang['TERMS_EMPTY_TEXT'] = '[align=中心]文的这一页上编辑：[url=http://%s/admin/admin_terms.php]管理员/admin_terms的。php[/url]的。 这条线可以看到的唯一管理员。[/align]';
+$lang['TERMS_EMPTY_TEXT'] = '[align=center]本頁文字編輯於：[url=https://%s/admin/admin_terms.php]admin/admin_terms.php[/url]。這一行只能看到管理員。[/align]';
 $lang['TERMS_EXPLAIN'] = '在这一页面，可以指定的案文的基本规则的资源显示用户使用。';
 
 $lang['TR_STATS'] = array(
@@ -2804,16 +2806,16 @@ $lang['CAPTCHA'] = '检查你是不是机器人';
 $lang['CAPTCHA_WRONG'] = '你不能确认你不是一个机器人';
 $lang['CAPTCHA_SETTINGS'] = '<h2>ReCaptcha没有得到充分configured</h2><p>if你有没有已经产生的钥匙，你可以做<a href="https://www.google.com/recaptcha/admin">https://www.谷歌。com/验证码/admin</a>的。<br />After你产生的钥匙，你需要把它们放在该文件的图书馆/config。php.</p>';
 
-// Emailer
+// Sending email
 $lang['EMAILER_SUBJECT'] = [
-    'EMPTY' => '没有问题',
-    'GROUP_ADDED' => '你已被添加到这个用户组',
-    'GROUP_APPROVED' => '你的请求已获批准',
-    'GROUP_REQUEST' => '请求参加你的小组已做了',
-    'PRIVMSG_NOTIFY' => '新的私人收到了信息',
-    'TOPIC_NOTIFY' => '主题答复通知%s',
-    'USER_ACTIVATE' => '重新启动您的账户',
-    'USER_ACTIVATE_PASSWD' => '新激活密码',
-    'USER_WELCOME' => '欢迎来到%s论坛',
-    'USER_WELCOME_INACTIVE' => '欢迎来到%s论坛',
+    'EMPTY' => '無主題',
+    'GROUP_ADDED' => '您已被添加到用戶組',
+    'GROUP_APPROVED' => '您加入用戶組的請求已被批准',
+    'GROUP_REQUEST' => '加入您的用戶組的請求',
+    'PRIVMSG_NOTIFY' => '新私信',
+    'TOPIC_NOTIFY' => '線程 %s中的響應通知',
+    'USER_ACTIVATE' => '帳戶重新激活',
+    'USER_ACTIVATE_PASSWD' => '確認新密碼',
+    'USER_WELCOME' => '歡迎來到網站 %s',
+    'USER_WELCOME_INACTIVE' => '歡迎來到網站 %s',
 ];

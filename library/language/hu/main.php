@@ -12,7 +12,8 @@ $lang['ADMIN'] = 'Adminisztrálása';
 $lang['FORUM'] = 'Fórum';
 $lang['CATEGORY'] = 'Kategória';
 $lang['HIDE_CAT'] = 'Elrejteni kategóriák';
-$lang['HIDE_CAT_MESS'] = 'Része kategóriák rejtett "opciók Show" &middot; <a href="index.php?sh=1">Show All</a>';
+$lang['HIDE_CAT_MESS'] = 'Egyes kategóriákat a testreszabott megjelenítési beállítások rejtenek el';
+$lang['SHOW_ALL'] = 'Mutasd az összeset';
 $lang['TOPIC'] = 'Téma';
 $lang['TOPICS'] = 'Témák';
 $lang['TOPICS_SHORT'] = 'Témák';
@@ -82,7 +83,7 @@ $lang['SKYPE_ERROR'] = 'Hogy érvénytelen a Skype bejelentkezési';
 $lang['TWITTER'] = 'Twitter';
 $lang['TWITTER_ERROR'] = 'Te érvénytelen Twitter login';
 
-$lang['FORUM_INDEX'] = '%s Index Fórum'; // eg. sitename Forum Index, %s can be removed if you prefer
+$lang['FORUM_INDEX'] = '%s Index Fórum'; // e.g. sitename Forum Index, %s can be removed if you prefer
 
 $lang['POST_NEW_TOPIC'] = 'Felad új téma';
 $lang['POST_NEW_RELEASE'] = 'Post-új kiadás';
@@ -301,7 +302,7 @@ $lang['SELECT_POSTS_PER_PAGE'] = 'hozzászólás / oldal';
 // Posting/Replying (Not private messaging!)
 $lang['TOPIC_REVIEW'] = 'Téma felülvizsgálat';
 
-$lang['NO_POST_MODE'] = 'Nem a post kiválasztott mód'; // If posting.php is called without a mode (newtopic/reply/delete/etc, shouldn't be shown normaly)
+$lang['NO_POST_MODE'] = 'Nem a post kiválasztott mód'; // If posting.php is called without a mode (newtopic/reply/delete/etc., shouldn't be shown normally)
 
 $lang['POST_A_NEW_TOPIC'] = 'Felad új téma';
 $lang['POST_A_REPLY'] = 'Post új válasz';
@@ -489,7 +490,7 @@ $lang['UNMARK_ALL'] = 'Szüntesse meg minden';
 $lang['CONFIRM_DELETE_PM'] = 'Biztos, hogy törölni akarja ezt az üzenetet?';
 $lang['CONFIRM_DELETE_PMS'] = 'Biztos, hogy törölni szeretné ezeket az üzeneteket?';
 
-$lang['INBOX_SIZE'] = 'A Bejövő is<br /><b>%d%%</b> teljes'; // eg. Your Inbox is 50% full
+$lang['INBOX_SIZE'] = 'A Bejövő is<br /><b>%d%%</b> teljes'; // e.g. Your Inbox is 50% full
 $lang['SENTBOX_SIZE'] = 'A Sentbox is<br /><b>%d%%</b> teljes';
 $lang['SAVEBOX_SIZE'] = 'A Savebox is<br /><b>%d%%</b> teljes';
 
@@ -571,7 +572,7 @@ $lang['YEARS'] = 'Év';
 $lang['NO_THEMES'] = 'Nem Témák adatbázis';
 $lang['TIMEZONE'] = 'Időzóna';
 $lang['DATE_FORMAT_PROFILE'] = 'Dátum formátum';
-$lang['DATE_FORMAT_EXPLAIN'] = 'A használt szintaxis azonos a PHP <a href=\'http://www.php.net/date\' target=\'_other\'>date()</a> funkció.';
+$lang['DATE_FORMAT_EXPLAIN'] = 'A használt szintaxis azonos a PHP <a href=\'https://www.php.net/manual/en/function.date.php\' target=\'_other\'>date()</a> funkció.';
 $lang['SIGNATURE'] = 'Aláírás';
 $lang['SIGNATURE_EXPLAIN'] = 'Ez egy szövegblokk lehet hozzá hozzászólás. Van egy %d karakter limit';
 $lang['SIGNATURE_DISABLE'] = 'Aláírta a megsértése fórum szabályok';
@@ -802,8 +803,8 @@ $lang['BRIEFLY'] = 'Röviden';
 $lang['NO_SEARCHABLE_FORUMS'] = 'Nincs jogosultsága, hogy egy keresés fórum ezen az oldalon.';
 
 $lang['NO_SEARCH_MATCH'] = 'Nem téma, vagy hozzászólás találkoztam a keresési feltételeket';
-$lang['FOUND_SEARCH_MATCH'] = 'Keresés talált %d mérkőzés'; // eg. Search found 1 match
-$lang['FOUND_SEARCH_MATCHES'] = 'Keresés talált %d mérkőzések'; // eg. Search found 24 matches
+$lang['FOUND_SEARCH_MATCH'] = 'Keresés talált %d mérkőzés'; // e.g. Search found 1 match
+$lang['FOUND_SEARCH_MATCHES'] = 'Keresés talált %d mérkőzések'; // e.g. Search found 24 matches
 $lang['TOO_MANY_SEARCH_RESULTS'] = 'Túl sok a találat megtalálható, kérjük, próbálkozz, hogy több egyedi';
 
 $lang['CLOSE_WINDOW'] = 'Ablak Bezárása';
@@ -1508,9 +1509,9 @@ $lang['ITALIC'] = 'Dőlt szöveg: [i]text[/i] (Ctrl+I)';
 $lang['UNDERLINE'] = 'Aláhúzott szöveg: [u]text[/u] (Ctrl+U)';
 $lang['STRIKEOUT'] = 'Strikeout szöveg: [s]text[/s] (Ctrl+S)';
 $lang['QUOTE_TITLE'] = 'Idézet szövege: [quote]text[/quote] (Ctrl+Q)';
-$lang['IMG_TITLE'] = 'Kép beszúrása: [img]http://image_url[/img] (Ctrl+R)';
+$lang['IMG_TITLE'] = 'Kép beszúrása: [img]https://image_url[/img] (Ctrl+R)';
 $lang['URL'] = 'Url';
-$lang['URL_TITLE'] = 'Illessze be az URL-t: [url]http://url[/url] vagy a [url=http://url]URL text[/url] (Ctrl+W)';
+$lang['URL_TITLE'] = 'URL beszúrása: [url]https://url[/url] vagy [url=https://url]URL szövege[/url] (Ctrl+W)';
 $lang['CODE_TITLE'] = 'Kód kijelző: [code]code[/code] (Ctrl+K)';
 $lang['LIST'] = 'Lista';
 $lang['LIST_TITLE'] = 'Lista: [list]text[/list] (Ctrl+l)';
@@ -2056,7 +2057,7 @@ $lang['TRACKER_STATS'] = 'A statisztikák a tracker';
 $lang['WHOIS_INFO'] = 'Információ IP cím';
 $lang['SHOW_MOD_HOME_PAGE'] = 'Mutasd meg a moderátorok a index.php';
 $lang['PREMOD_HELP'] = '<h4><span class="tor-icon tor-dup">&#8719;</span> Előre moderation</h4> <h6>If nem disztribúciók, hogy a status v, #, vagy T ebben a részben, beleértve alfejezetek, az engedély automatikusan megkapja ezt a status</h6>';
-$lang['TOR_COMMENT'] = '<h4>Commentary jogállásáról szóló distribution</h4> <h6>Comment sikeresen lehetővé teszi, hogy meghatározza törjenek-csal hibákat. Amikor nedooformlennyh állapotok törjenek-csal elérhető formában a válasz a korrekció release</h6>';
+$lang['TOR_COMMENT'] = '<h4>Megjegyzés egy disztribúció állapotához</h4> <h6>A megjegyzés lehetővé teszi, hogy rámutasson a kiadónak az elkövetett hibákra. Ha az állapotok hiányosak, a kiadáskezelő rendelkezésére áll egy kiadási válaszűrlap a</h6>kiadás javításához';
 $lang['SEED_BONUS_ADD'] = '<h4>Adding mag bónusz </h4> <h6> Száma disztribúciók vannak adta ki a felhasználó által a méret bónuszokat őket (töltési idő egy óra) </h6>';
 $lang['SEED_BONUS_RELEASE'] = 'N-számú kiadások';
 $lang['SEED_BONUS_POINTS'] = 'bónuszok egy óra múlva';
@@ -2084,7 +2085,7 @@ $lang['ATTACH_NUMBER_SETTINGS'] = 'Melléklet Száma Beállítások';
 $lang['ATTACH_OPTIONS_SETTINGS'] = 'Csatlakoztatási Lehetőségek';
 
 $lang['UPLOAD_DIRECTORY'] = 'Feltöltés Könyvtár';
-$lang['UPLOAD_DIRECTORY_EXPLAIN'] = 'Adja meg a relatív elérési utat a TorrentPier telepítés a Mellékletek feltöltési könyvtár. Például írja be a fájlok\', ha a TorrentPier Létesítmény található http://www.yourdomain.com/torrentpier a Melléklet Feltöltése Könyvtárban található http://www.yourdomain.com/torrentpier/files.';
+$lang['UPLOAD_DIRECTORY_EXPLAIN'] = 'Adja meg a relatív elérési utat a TorrentPier telepítés a Mellékletek feltöltési könyvtár. Például írja be a fájlok\', ha a TorrentPier Létesítmény található https://www.yourdomain.com/torrentpier a Melléklet Feltöltése Könyvtárban található https://www.yourdomain.com/torrentpier/files.';
 $lang['ATTACH_IMG_PATH'] = 'Melléklet Kiküldetés Ikonra';
 $lang['ATTACH_IMG_PATH_EXPLAIN'] = 'Ez a Kép jelenik meg a következő Mellékletet Linkek az egyes Hozzászólásokat. Ezt a mezőt hagyja üresen, ha nem akarod, egy ikon jelenik meg. Ez a Beállítás felülírja a Beállítások Kiterjesztését Csoportok Kezelése.';
 $lang['ATTACH_TOPIC_ICON'] = 'Melléklet Téma Ikonra';
@@ -2123,7 +2124,7 @@ $lang['EMPTY_FILE_ENTRY'] = 'Üres Fájlt Bejegyzés';
 
 // Attachments -> Sync
 $lang['SYNC_THUMBNAIL_RESETTED'] = 'Miniatűr resetted Mellékletet: %s'; // replace %s with physical Filename
-$lang['ATTACH_SYNC_FINISHED'] = 'Melléklet Syncronization Kész.';
+$lang['ATTACH_SYNC_FINISHED'] = 'A melléklet szinkronizálása befejeződött.';
 $lang['SYNC_TOPICS'] = 'Fordította: Témák';
 $lang['SYNC_POSTS'] = 'Fordította: Hozzászólások';
 $lang['SYNC_THUMBNAILS'] = 'Fordította: Miniatűrök';
@@ -2385,6 +2386,7 @@ $lang['CRON_NEXT_RUN'] = 'Következő Futam';
 $lang['CRON_RUN_COUNT'] = 'Fut';
 $lang['CRON_MANAGE'] = 'Kezelése';
 $lang['CRON_OPTIONS'] = 'Cron lehetőségek';
+$lang['CRON_DISABLED_WARNING'] = 'Figyelem! A cron szkriptek futtatása le van tiltva. Az engedélyezéséhez állítsa be az APP_CRON_ENABLED változót.';
 
 $lang['CRON_ENABLED'] = 'Cron engedélyezve';
 $lang['CRON_CHECK_INTERVAL'] = 'Cron check-intervallum (másodperc)';
@@ -2574,7 +2576,7 @@ $lang['RELEASES'] = 'Kiadások';
 
 $lang['BACK'] = 'Vissza';
 $lang['ERROR_FORM'] = 'Érvénytelen mező';
-$lang['RELEASE_WELCOME'] = 'Ilona töltse ki a releae formában';
+$lang['RELEASE_WELCOME'] = 'Kérjük, töltse ki a kiadási űrlapot';
 $lang['NEW_RELEASE'] = 'Új kiadás';
 $lang['NEXT'] = 'Tovább';
 $lang['OTHER'] = 'Egyéb';
@@ -2582,8 +2584,8 @@ $lang['OTHER'] = 'Egyéb';
 $lang['TPL_EMPTY_FIELD'] = 'Töltse ki a mezőt <b>%s</b>';
 $lang['TPL_EMPTY_SEL'] = 'Válassza ki <b>%s</b>';
 $lang['TPL_NOT_NUM'] = '<b>%s</b> - Nem num';
-$lang['TPL_NOT_URL'] = '<b>%s</b> - http:// URL -';
-$lang['TPL_NOT_IMG_URL'] = '<b>%s</b> - http:// IMG_URL';
+$lang['TPL_NOT_URL'] = '<b>%s</b> – https:// URL-nek kell lennie';
+$lang['TPL_NOT_IMG_URL'] = '<b>%s</b> – https:// IMG_URL kell lennie';
 $lang['TPL_PUT_INTO_SUBJECT'] = 'tegye be a témában';
 $lang['TPL_POSTER'] = 'plakát';
 $lang['TPL_REQ_FILLING'] = 'kell kitölteniük';
@@ -2597,15 +2599,15 @@ $lang['TPL_SPOILER'] = 'spoiler';
 $lang['TPL_IN_LINE'] = 'ugyanabban a sorban';
 $lang['TPL_HEADER_ONLY'] = 'csak egy cím';
 
-$lang['SEARCH_INVALID_USERNAME'] = 'Hibás becenév megadott Keresés';
-$lang['SEARCH_INVALID_EMAIL'] = 'Érvénytelen e-mail címet adott meg a Kereséshez';
-$lang['SEARCH_INVALID_IP'] = 'Érvénytelen IP-címet adott meg a Kereséshez';
-$lang['SEARCH_INVALID_GROUP'] = 'Érvénytelen Csoport megadott Keresés';
-$lang['SEARCH_INVALID_RANK'] = 'Érvénytelen rangot megadott Keresés';
-$lang['SEARCH_INVALID_DATE'] = 'Érvénytelen Dátum megadott Keresés';
-$lang['SEARCH_INVALID_POSTCOUNT'] = 'Érvénytelen Post Gróf megadott Keresés';
+$lang['SEARCH_INVALID_USERNAME'] = 'Érvénytelen felhasználónév lett megadva a kereséshez';
+$lang['SEARCH_INVALID_EMAIL'] = 'Érvénytelen e-mail címet adott meg a kereséshez';
+$lang['SEARCH_INVALID_IP'] = 'Érvénytelen IP-címet adott meg a kereséshez';
+$lang['SEARCH_INVALID_GROUP'] = 'Érvénytelen csoport lett megadva a kereséshez';
+$lang['SEARCH_INVALID_RANK'] = 'A kereséshez érvénytelen rangot adtak meg';
+$lang['SEARCH_INVALID_DATE'] = 'Érvénytelen dátumot adott meg a kereséshez';
+$lang['SEARCH_INVALID_POSTCOUNT'] = 'Érvénytelen bejegyzések száma a kereséshez';
 $lang['SEARCH_INVALID_USERFIELD'] = 'Érvénytelen felhasználó mező bevitt adatok';
-$lang['SEARCH_INVALID_LASTVISITED'] = 'Érvénytelen adatok lépett be Utoljára Látogatott keresés';
+$lang['SEARCH_INVALID_LASTVISITED'] = 'Érvénytelen dátumot adott meg az utoljára látogatott kereséshez';
 $lang['SEARCH_INVALID_LANGUAGE'] = 'Érvénytelen Kiválasztott Nyelv';
 $lang['SEARCH_INVALID_TIMEZONE'] = 'Érvénytelen Kiválasztott Időzóna';
 $lang['SEARCH_INVALID_MODERATORS'] = 'Érvénytelen Kiválasztott Fórum';
@@ -2656,12 +2658,12 @@ $lang['SEARCH_USERS_GROUPS_EXPLAIN'] = 'Tekintse meg az összes tagjai a kivála
 $lang['SEARCH_USERS_RANKS_EXPLAIN'] = 'Tekintse meg az összes fuvarozók a kiválasztott rangot.';
 $lang['BANNED_USERS'] = 'Letiltott Felhasználók';
 $lang['DISABLED_USERS'] = 'A Fogyatékkal Élő Felhasználók Számára';
-$lang['SEARCH_USERS_MISC_EXPLAIN'] = 'A rendszergazdák - Minden felhasználó Rendszergazdai hatalma; Moderátorok - fórum moderátorok; letiltott Felhasználók - fiókok betiltottak ezeken a fórumokon; a Fogyatékkal élő Felhasználók számára - Minden felhasználó számára a fogyatékkal élő számlák (manuális vagy fogyatékkal élő, vagy soha nem ellenőrizte az e-mail cím); a Felhasználók a fogyatékkal élő PMs - Kiválasztja a felhasználók, akik a Privát Üzenetek priviliges távolítani (keresztül történik, a Felhasználó Management)';
-$lang['POSTCOUNT'] = 'Postcount';
+$lang['SEARCH_USERS_MISC_EXPLAIN'] = 'Rendszergazdák – Minden rendszergazdai jogosultsággal rendelkező felhasználó; Moderátorok - Minden fórum moderátor; Tiltott felhasználók – Minden fiók, amely kitiltva van ezeken a fórumokon; Fogyatékkal élő felhasználók – Minden olyan felhasználó, akinek letiltott fiókja van (vagy manuálisan letiltva, vagy soha nem ellenőrizte e-mail címét); Felhasználók letiltott PM-ekkel – Kiválasztja azokat a felhasználókat, akiktől eltávolították a privát üzenetek jogosultságát (a Felhasználókezelésen keresztül)';
+$lang['POSTCOUNT'] = 'Hozzászólások száma';
 $lang['EQUALS'] = 'Egyenlő';
 $lang['GREATER_THAN'] = 'Nagyobb, mint';
 $lang['LESS_THAN'] = 'Kevesebb, mint';
-$lang['SEARCH_USERS_POSTCOUNT_EXPLAIN'] = 'Kereshet a felhasználók alapján a Postcount érték. Vagy keressen egy adott érték nagyobb vagy kisebb, mint egy érték vagy két érték között. A tartomány keresése válassza ki az "Egyenlő", akkor tegye a kezdet, befejezés értékek a tartomány elválasztva egy kötőjel (-), pl. 10-15';
+$lang['SEARCH_USERS_POSTCOUNT_EXPLAIN'] = 'A bejegyzések számának értéke alapján kereshet felhasználókat. Kereshet egy adott érték alapján, egy értéknél nagyobb vagy kisebb, vagy két érték között. A tartománykereséshez válassza az "Egyenlő" lehetőséget, majd tegye a tartomány kezdő és záró értékét kötőjellel (-) elválasztva, pl. 10-15';
 $lang['USERFIELD'] = 'Felhasználó mező';
 $lang['SEARCH_USERS_USERFIELD_EXPLAIN'] = 'Keresés a felhasználók alapján különböző profil mezők. Helyettesítő karakterek használata támogatott segítségével egy csillag (*).';
 $lang['SEARCH_USERS_LASTVISITED_EXPLAIN'] = 'Kereshet a felhasználók alapján az utolsó bejelentkezés dátuma használja ezt a keresési lehetőséget';
@@ -2669,7 +2671,7 @@ $lang['SEARCH_USERS_LANGUAGE_EXPLAIN'] = 'Ez jelenik meg a felhasználók, akike
 $lang['SEARCH_USERS_TIMEZONE_EXPLAIN'] = 'A felhasználók, akik már kiválasztott egy adott időzóna a profilját';
 $lang['SEARCH_USERS_STYLE_EXPLAIN'] = 'Kijelző a felhasználók, akik már kiválasztott egy adott stílus.';
 $lang['MODERATORS_OF'] = 'Moderátorok';
-$lang['SEARCH_USERS_MODERATORS_EXPLAIN'] = 'Keresés a felhasználók számára a Moderátori engedéllyel, egy speciális fórumon. Moderátori engedélyek recoginised vagy a Felhasználói Jogosultságokat, vagy azzal, hogy egy Csoport a megfelelő Csoport Permssions.';
+$lang['SEARCH_USERS_MODERATORS_EXPLAIN'] = 'Moderálási engedéllyel rendelkező felhasználók keresése egy adott fórumhoz. A moderálási engedélyeket vagy a felhasználói engedélyek, vagy a megfelelő csoportengedélyekkel rendelkező csoportok ismerik fel.';
 
 $lang['SEARCH_USERS_NEW'] = '%s hozott %d eredmény(ok). Végre <a href="%s">another search</a>.';
 $lang['BANNED'] = 'Tiltott';
@@ -2723,10 +2725,10 @@ $lang['SITEMAP_OPTIONS'] = 'Lehetőségek';
 $lang['SITEMAP_CREATE'] = 'Létrehozás / frissítés a sitemap';
 $lang['SITEMAP_NOTIFY'] = 'Értesíti a keresőmotorok az új változat oldaltérkép';
 $lang['SITEMAP_WHAT_NEXT'] = 'Mi a következő teendő?';
-$lang['SITEMAP_GOOGLE_1'] = 'Regisztrálni a helyszínen <a href="http://www.google.com/webmasters/" target="_blank">Google Webmaster</a> Google fiókja használatával.';
+$lang['SITEMAP_GOOGLE_1'] = 'Regisztrálni a helyszínen <a href="https://www.google.com/webmasters/" target="_blank">Google Webmaster</a> Google fiókja használatával.';
 $lang['SITEMAP_GOOGLE_2'] = '<a href="https://www.google.com/webmasters/tools/sitemap-list" target="_blank">Add sitemap</a> az oldalon regisztrált.';
-$lang['SITEMAP_YANDEX_1'] = 'Regisztrálni a helyszínen <a href="http://webmaster.yandex.ru/sites/" target="_blank">Yandex Webmaster</a> használja a Yandex fiók.';
-$lang['SITEMAP_YANDEX_2'] = '<a href="http://webmaster.yandex.ru/site/map.xml" target="_blank">Add sitemap</a> az oldalon regisztrált.';
+$lang['SITEMAP_YANDEX_1'] = 'Regisztrálni a helyszínen <a href="https://webmaster.yandex.ru/sites/" target="_blank">Yandex Webmaster</a> használja a Yandex fiók.';
+$lang['SITEMAP_YANDEX_2'] = '<a href="https://webmaster.yandex.ru/site/map.xml" target="_blank">Add sitemap</a> az oldalon regisztrált.';
 $lang['SITEMAP_BING_1'] = 'Regisztrálni a helyszínen <a href="https://www.bing.com/webmaster/" target="_blank">Bing Webmaster</a> a Microsoft-fiókjával.';
 $lang['SITEMAP_BING_2'] = 'Add oldaltérkép a honlap regisztrált a beállításokat.';
 $lang['SITEMAP_ADD_TITLE'] = 'További oldalak oldaltérkép';
@@ -2747,7 +2749,7 @@ $lang['ATOM_GLOBAL_FEED'] = 'Globális hírcsatorna az összes fórum számára'
 $lang['HASH_INVALID'] = 'Hash %s érvénytelen';
 $lang['HASH_NOT_FOUND'] = 'Kiadás hash %s nem található';
 
-$lang['TERMS_EMPTY_TEXT'] = '[align=center]A szöveg ezt az oldalt szerkesztette: [url=http://%s/admin/admin_terms.php]admin/admin_terms.php[/url]. Ezt a sort csak rendszergazdák.[/align]';
+$lang['TERMS_EMPTY_TEXT'] = '[align=center]Az oldal szövegét a következő címen szerkesztették: [url=https://%s/admin/admin_terms.php]admin/admin_terms.php[/url]. Ez a sor csak a rendszergazdákat láthatja.[/align]';
 $lang['TERMS_EXPLAIN'] = 'Ezen az oldalon adhatja meg, hogy a szöveg az alapvető szabályokat, az erőforrás jelenik meg a felhasználók számára.';
 
 $lang['TR_STATS'] = array(
@@ -2804,16 +2806,16 @@ $lang['CAPTCHA'] = 'Ellenőrizze, hogy nem egy robot';
 $lang['CAPTCHA_WRONG'] = 'Azt nem tudta megerősíteni, hogy nem egy robot';
 $lang['CAPTCHA_SETTINGS'] = '<h2>ReCaptcha nem teljesen configured</h2><p>if még nem generált a kulcsokat, meg tudod csinálni <a href="https://www.google.com/recaptcha/admin">https://www.a google.com/recaptcha/admin</a>.<br />After generál a kulcsokat, meg kell tenni őket a fájl könyvtár/config.php.</p>';
 
-// Emailer
+// Sending email
 $lang['EMAILER_SUBJECT'] = [
-    'EMPTY' => 'Nincs Tárgy',
-    'GROUP_ADDED' => 'Van már hozzá, hogy ez a felhasznalok',
-    'GROUP_APPROVED' => 'A kérelmet jóváhagyták',
-    'GROUP_REQUEST' => 'Egy kérést, hogy csatlakozz a csoporthoz történt',
-    'PRIVMSG_NOTIFY' => 'Új Privát Üzenet érkezett',
-    'TOPIC_NOTIFY' => 'A Témában Válasz Értesítés %s',
-    'USER_ACTIVATE' => 'Aktiválja fiókját',
-    'USER_ACTIVATE_PASSWD' => 'Új jelszó aktiválása',
-    'USER_WELCOME' => 'Üdv %s Fórumok',
-    'USER_WELCOME_INACTIVE' => 'Üdv %s Fórumok',
+    'EMPTY' => 'Nincs tárgy',
+    'GROUP_ADDED' => 'Önt hozzáadták a felhasználói csoporthoz',
+    'GROUP_APPROVED' => 'A felhasználói csoporthoz való csatlakozási kérelmét elfogadtuk',
+    'GROUP_REQUEST' => 'Kérés a felhasználói csoporthoz való csatlakozásra',
+    'PRIVMSG_NOTIFY' => 'Új privát üzenet',
+    'TOPIC_NOTIFY' => 'Értesítés a válaszról a %sszálban',
+    'USER_ACTIVATE' => 'Fiók újraaktiválása',
+    'USER_ACTIVATE_PASSWD' => 'Új jelszó megerősítése',
+    'USER_WELCOME' => 'Üdvözöljük az oldalon %s',
+    'USER_WELCOME_INACTIVE' => 'Üdvözöljük az oldalon %s',
 ];

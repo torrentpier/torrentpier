@@ -12,7 +12,8 @@ $lang['ADMIN'] = 'Kureeriva';
 $lang['FORUM'] = 'Foorum';
 $lang['CATEGORY'] = 'Kategooria';
 $lang['HIDE_CAT'] = 'Peida kategooria';
-$lang['HIDE_CAT_MESS'] = 'Osa kategooriad on peidetud "valikud Näitus" &middot; <a href="index.php?sh=1">Show All</a>';
+$lang['HIDE_CAT_MESS'] = 'Mõned kategooriad on peidetud kohandatud kuvamisvalikutega';
+$lang['SHOW_ALL'] = 'Näita kõike';
 $lang['TOPIC'] = 'Teema';
 $lang['TOPICS'] = 'Teemasid';
 $lang['TOPICS_SHORT'] = 'Teemasid';
@@ -82,7 +83,7 @@ $lang['SKYPE_ERROR'] = 'Sisestatud kehtetu Skype \' i sisse logida';
 $lang['TWITTER'] = 'Twitter';
 $lang['TWITTER_ERROR'] = 'Sisestatud kehtetu Twitter login';
 
-$lang['FORUM_INDEX'] = '%s Foorum Indeks'; // eg. sitename Forum Index, %s can be removed if you prefer
+$lang['FORUM_INDEX'] = '%s Foorum Indeks'; // e.g. sitename Forum Index, %s can be removed if you prefer
 
 $lang['POST_NEW_TOPIC'] = 'Postita uus teema';
 $lang['POST_NEW_RELEASE'] = 'Postitada uusi pressiteade';
@@ -301,7 +302,7 @@ $lang['SELECT_POSTS_PER_PAGE'] = 'postitused lehekülje kohta';
 // Posting/Replying (Not private messaging!)
 $lang['TOPIC_REVIEW'] = 'Teema ülevaade';
 
-$lang['NO_POST_MODE'] = 'Nr post režiim valitud'; // If posting.php is called without a mode (newtopic/reply/delete/etc, shouldn't be shown normaly)
+$lang['NO_POST_MODE'] = 'Nr post režiim valitud'; // If posting.php is called without a mode (newtopic/reply/delete/etc., shouldn't be shown normally)
 
 $lang['POST_A_NEW_TOPIC'] = 'Postita uus teema';
 $lang['POST_A_REPLY'] = 'Postitada uusi vastus';
@@ -489,7 +490,7 @@ $lang['UNMARK_ALL'] = 'Tühista kõik';
 $lang['CONFIRM_DELETE_PM'] = 'Olete kindel, et soovite kustutada selle sõnumi?';
 $lang['CONFIRM_DELETE_PMS'] = 'Olete kindel, et soovite kustutada need kirjad?';
 
-$lang['INBOX_SIZE'] = 'Teie Sisendkausta is<br /><b>%d%%</b> täis'; // eg. Your Inbox is 50% full
+$lang['INBOX_SIZE'] = 'Teie Sisendkausta is<br /><b>%d%%</b> täis'; // e.g. Your Inbox is 50% full
 $lang['SENTBOX_SIZE'] = 'Teie Sentbox is<br /><b>%d%%</b> täis';
 $lang['SAVEBOX_SIZE'] = 'Teie Savebox is<br /><b>%d%%</b> täis';
 
@@ -571,7 +572,7 @@ $lang['YEARS'] = 'Aasta';
 $lang['NO_THEMES'] = 'Nr Teemad andmebaasist';
 $lang['TIMEZONE'] = 'Timezone';
 $lang['DATE_FORMAT_PROFILE'] = 'Kuupäeva vorming';
-$lang['DATE_FORMAT_EXPLAIN'] = 'Süntaks on kasutatud identne PHP <a href=\'http://www.php.net/date\' target=\'_other\'>date()</a> funktsioon.';
+$lang['DATE_FORMAT_EXPLAIN'] = 'Süntaks on kasutatud identne PHP <a href=\'https://www.php.net/manual/en/function.date.php\' target=\'_other\'>date()</a> funktsioon.';
 $lang['SIGNATURE'] = 'Allkiri';
 $lang['SIGNATURE_EXPLAIN'] = 'See on tekstiosa, mida saab lisada, et postitused, mida teete. Seal on %d tähemärgipiirang';
 $lang['SIGNATURE_DISABLE'] = 'Allkirjastatud maha rikkumise eest foorumi reeglid';
@@ -802,8 +803,8 @@ $lang['BRIEFLY'] = 'Lühidalt';
 $lang['NO_SEARCHABLE_FORUMS'] = 'Sul ei ole õigusi, et otsida mis tahes foorum, selles kohas.';
 
 $lang['NO_SEARCH_MATCH'] = 'Nr teemade või ametikohad täidetud teie otsingu kriteeriumitele';
-$lang['FOUND_SEARCH_MATCH'] = 'Otsing leidis %d vaste'; // eg. Search found 1 match
-$lang['FOUND_SEARCH_MATCHES'] = 'Otsing leidis %d sobib'; // eg. Search found 24 matches
+$lang['FOUND_SEARCH_MATCH'] = 'Otsing leidis %d vaste'; // e.g. Search found 1 match
+$lang['FOUND_SEARCH_MATCHES'] = 'Otsing leidis %d sobib'; // e.g. Search found 24 matches
 $lang['TOO_MANY_SEARCH_RESULTS'] = 'Liiga palju tulemusi, võib leitud, palun proovige olla täpsem';
 
 $lang['CLOSE_WINDOW'] = 'Sulge Aken';
@@ -1508,9 +1509,9 @@ $lang['ITALIC'] = 'Kaldkirjas tekst: [i]text[/i] (Ctrl+I)';
 $lang['UNDERLINE'] = 'Allajoonitud tekst: [u]text[/u] (Ctrl+U)';
 $lang['STRIKEOUT'] = 'Strikeout tekst: [s]text[/s] (Ctrl+S)';
 $lang['QUOTE_TITLE'] = 'Tsiteerin teksti: [quote]text[/quote] (Ctrl+Q)';
-$lang['IMG_TITLE'] = 'Lisa pilt: [img]http://image_url[/img] (Ctrl+R)';
+$lang['IMG_TITLE'] = 'Sisesta pilt: [img]https://image_url[/img] (Ctrl+R)';
 $lang['URL'] = 'Url';
-$lang['URL_TITLE'] = 'Sisestada URL: [url]http://url[/url] või [url=http://url]URL text[/url] (Ctrl+W)';
+$lang['URL_TITLE'] = 'Sisesta URL: [url]https://url[/url] või [url=https://url]URL-i tekst[/url] (Ctrl+W)';
 $lang['CODE_TITLE'] = 'Kood ekraan: [code]code[/code] (Ctrl+K)';
 $lang['LIST'] = 'Nimekiri';
 $lang['LIST_TITLE'] = 'Nimekiri: [list]text[/list] (Ctrl+l)';
@@ -2056,7 +2057,7 @@ $lang['TRACKER_STATS'] = 'Statistika tracker';
 $lang['WHOIS_INFO'] = 'Teave IP aadress';
 $lang['SHOW_MOD_HOME_PAGE'] = 'Näita, et moderaatorid index.php';
 $lang['PREMOD_HELP'] = '<h4><span class="tor-icon tor-dup">&#8719;</span> Pre-moderation</h4> <h6>If sul ei ole väljamaksed staatuse v, #, või T käesolevas jaos, sealhulgas punktide jagamine automaatselt selle saada status</h6>';
-$lang['TOR_COMMENT'] = '<h4>Commentary staatuse distribution</h4> <h6>Comment edukalt võimaldab määrata puhastusvahendite vigu. Kui nedooformlennyh staatus puhastusvahendite saadaval vorm vastuse korrigeerimise release</h6>';
+$lang['TOR_COMMENT'] = '<h4>Kommentaar distributsiooni oleku kohta</h4> <h6>Kommentaar võimaldab väljastajale välja tuua tehtud vead. Kui olekud on puudulikud, on väljalaskehalduril saadaval väljalase vastuse vorm, et versiooni</h6>parandada';
 $lang['SEED_BONUS_ADD'] = '<h4>Adding seemne boonus </h4> <h6> Arv väljamakseid on tehtud läbi kasutaja ja suuruse kohta, preemiad neile (laadimine korda tunnis) </h6>';
 $lang['SEED_BONUS_RELEASE'] = 'N-arv pressiteated';
 $lang['SEED_BONUS_POINTS'] = 'soodustused tund';
@@ -2084,7 +2085,7 @@ $lang['ATTACH_NUMBER_SETTINGS'] = 'Manus Number Seaded';
 $lang['ATTACH_OPTIONS_SETTINGS'] = 'Manus Valikud';
 
 $lang['UPLOAD_DIRECTORY'] = 'Üleslaadimise Kataloog';
-$lang['UPLOAD_DIRECTORY_EXPLAIN'] = 'Sisestage suhteline tee oma TorrentPier paigaldus Manuste üleslaadimise kataloog. Näiteks, märkida "failid", kui teie TorrentPier Paigaldus asub http://www.yourdomain.com/torrentpier ja Manus üles Laadida Kataloogi asukoht http://www.yourdomain.com/torrentpier/files.';
+$lang['UPLOAD_DIRECTORY_EXPLAIN'] = 'Sisestage suhteline tee oma TorrentPier paigaldus Manuste üleslaadimise kataloog. Näiteks, märkida "failid", kui teie TorrentPier Paigaldus asub https://www.yourdomain.com/torrentpier ja Manus üles Laadida Kataloogi asukoht https://www.yourdomain.com/torrentpier/files.';
 $lang['ATTACH_IMG_PATH'] = 'Manuse Postitamise Ikooni';
 $lang['ATTACH_IMG_PATH_EXPLAIN'] = 'See Pilt kuvatakse Manuse Lingid üksikud Postitused. Jäta see väli tühjaks, kui sa ei taha ikoon kuvatakse. See Seade kirjutatakse Seaded Laiendi Gruppide Juhtimine.';
 $lang['ATTACH_TOPIC_ICON'] = 'Manus Teema Ikooni';
@@ -2123,7 +2124,7 @@ $lang['EMPTY_FILE_ENTRY'] = 'Tühi Fail Kanne';
 
 // Attachments -> Sync
 $lang['SYNC_THUMBNAIL_RESETTED'] = 'Pisipilt resetted arestimiseks: %s'; // replace %s with physical Filename
-$lang['ATTACH_SYNC_FINISHED'] = 'Manus Sünkroonimine Lõpetanud.';
+$lang['ATTACH_SYNC_FINISHED'] = 'Manuse sünkroonimine on lõpetatud.';
 $lang['SYNC_TOPICS'] = 'Sync Teemasid';
 $lang['SYNC_POSTS'] = 'Sync Postitusi';
 $lang['SYNC_THUMBNAILS'] = 'Sync Pisipildid';
@@ -2385,6 +2386,7 @@ $lang['CRON_NEXT_RUN'] = 'Järgmine Run';
 $lang['CRON_RUN_COUNT'] = 'Jookseb';
 $lang['CRON_MANAGE'] = 'Hallata';
 $lang['CRON_OPTIONS'] = 'Cron valikud';
+$lang['CRON_DISABLED_WARNING'] = 'Hoiatus! Cron-skriptide käitamine on keelatud. Selle lubamiseks määrake muutuja APP_CRON_ENABLED.';
 
 $lang['CRON_ENABLED'] = 'Cron on lubatud';
 $lang['CRON_CHECK_INTERVAL'] = 'Cron kontrollimise intervall (sek)';
@@ -2574,7 +2576,7 @@ $lang['RELEASES'] = 'Pressiteated';
 
 $lang['BACK'] = 'Tagasi';
 $lang['ERROR_FORM'] = 'Kehtetu väljad';
-$lang['RELEASE_WELCOME'] = 'Pleae täitke releae vorm';
+$lang['RELEASE_WELCOME'] = 'Palun täitke vabastusvorm';
 $lang['NEW_RELEASE'] = 'Uus pressiteade';
 $lang['NEXT'] = 'Jätka';
 $lang['OTHER'] = 'Muud';
@@ -2582,8 +2584,8 @@ $lang['OTHER'] = 'Muud';
 $lang['TPL_EMPTY_FIELD'] = 'Tuleb täita väli <b>%s</b>';
 $lang['TPL_EMPTY_SEL'] = 'Teil tuleb valida <b>%s</b>';
 $lang['TPL_NOT_NUM'] = '<b>%s</b> - Ei ole numbrit';
-$lang['TPL_NOT_URL'] = '<b>%s</b> - Peab olema http:// URL-i';
-$lang['TPL_NOT_IMG_URL'] = '<b>%s</b> - Peab olema http:// IMG_URL';
+$lang['TPL_NOT_URL'] = '<b>%s</b> – URL peab olema https://';
+$lang['TPL_NOT_IMG_URL'] = '<b>%s</b> – Peab olema https:// IMG_URL';
 $lang['TPL_PUT_INTO_SUBJECT'] = 'pannakse teema';
 $lang['TPL_POSTER'] = 'plakat';
 $lang['TPL_REQ_FILLING'] = 'tuleb täita';
@@ -2597,15 +2599,15 @@ $lang['TPL_SPOILER'] = 'spoiler';
 $lang['TPL_IN_LINE'] = 'samas reas';
 $lang['TPL_HEADER_ONLY'] = 'ainult pealkiri';
 
-$lang['SEARCH_INVALID_USERNAME'] = 'Kehtetu kasutajanimi sisestada Otsing';
-$lang['SEARCH_INVALID_EMAIL'] = 'Vigane e-posti aadress sisestada Otsing';
-$lang['SEARCH_INVALID_IP'] = 'Vigane IP aadress on sisestatud Otsing';
-$lang['SEARCH_INVALID_GROUP'] = 'Kehtetu Rühma sisestada Otsing';
-$lang['SEARCH_INVALID_RANK'] = 'Kehtetu auaste sisestada Otsing';
-$lang['SEARCH_INVALID_DATE'] = 'Kehtetu Kuupäev sisestada Otsing';
-$lang['SEARCH_INVALID_POSTCOUNT'] = 'Kehtetu Post Count sisestada Otsing';
+$lang['SEARCH_INVALID_USERNAME'] = 'Otsinguks sisestatud vale kasutajanimi';
+$lang['SEARCH_INVALID_EMAIL'] = 'Otsinguks sisestatud vale e-posti aadress';
+$lang['SEARCH_INVALID_IP'] = 'Otsinguks sisestatud vale IP-aadress';
+$lang['SEARCH_INVALID_GROUP'] = 'Otsinguks sisestatud vigane grupp';
+$lang['SEARCH_INVALID_RANK'] = 'Otsingule sisestatud vale auaste';
+$lang['SEARCH_INVALID_DATE'] = 'Otsinguks sisestatud vale kuupäev';
+$lang['SEARCH_INVALID_POSTCOUNT'] = 'Otsinguks sisestatud vale postituste arv';
 $lang['SEARCH_INVALID_USERFIELD'] = 'Kehtetu Userfield registrisse kantud andmetele';
-$lang['SEARCH_INVALID_LASTVISITED'] = 'Kehtetud andmed on sisestatud Viimati Külastas otsing';
+$lang['SEARCH_INVALID_LASTVISITED'] = 'Viimase külastuse otsingu jaoks sisestatud vale kuupäev';
 $lang['SEARCH_INVALID_LANGUAGE'] = 'Kehtetu Keel Valitud';
 $lang['SEARCH_INVALID_TIMEZONE'] = 'Kehtetu Ajavöönd Valitud';
 $lang['SEARCH_INVALID_MODERATORS'] = 'Kehtetu Foorumi Valitud';
@@ -2656,12 +2658,12 @@ $lang['SEARCH_USERS_GROUPS_EXPLAIN'] = 'Vaata kõiki liikmeid valitud rühmale.'
 $lang['SEARCH_USERS_RANKS_EXPLAIN'] = 'Vaata kõiki vedajad valitud auaste.';
 $lang['BANNED_USERS'] = 'Keelatud Kasutajad';
 $lang['DISABLED_USERS'] = 'Puuetega Inimestele';
-$lang['SEARCH_USERS_MISC_EXPLAIN'] = 'Administraatorid - Kõik kasutajate Administraatori volitused; Moderaatorid - Kõik foorumi moderaatorid; Keelatud Kasutajad - Kõik kontod, mis on keelustatud need foorumid; Puudega Kasutajad - Kõik kasutajad, kellel on puudega accounts (kas käsitsi või puudega kunagi kontrollinud oma e-posti aadress); Kasutajate puudega PMs - Valib kasutajaid, kes on privaatsed Sõnumid käsku kõrvaldada (Teha via Kasutajate Haldus)';
-$lang['POSTCOUNT'] = 'Postcount';
+$lang['SEARCH_USERS_MISC_EXPLAIN'] = 'Administraatorid – kõik administraatoriõigustega kasutajad; Moderaatorid – kõik foorumi moderaatorid; Keelatud kasutajad – kõik kontod, mis on nendes foorumites keelatud; Puuetega kasutajad – kõik kasutajad, kellel on keelatud kontod (kas käsitsi keelatud või pole kunagi oma e-posti aadressi kinnitanud); Kasutajad, kellel on keelatud PM-id – valib kasutajad, kellelt on privaatsõnumite õigused eemaldatud (kasutajahalduse kaudu)';
+$lang['POSTCOUNT'] = 'Postituste arv';
 $lang['EQUALS'] = 'Võrdub';
 $lang['GREATER_THAN'] = 'Suurem kui';
 $lang['LESS_THAN'] = 'Vähem kui';
-$lang['SEARCH_USERS_POSTCOUNT_EXPLAIN'] = 'Saate otsida kasutajad põhineb Postcount väärtus. Kas saate otsida konkreetseid väärtus, mis on suurem või väiksem väärtus või kahe väärtuse vahel. Et teha valikut search valige "Võrdub" siis pane algab ja lõpeb väärtused vahemikus eraldatud sidekriipsuga (-), nt 10-15';
+$lang['SEARCH_USERS_POSTCOUNT_EXPLAIN'] = 'Saate kasutajaid otsida postituste arvu väärtuse alusel. Saate otsida kindla väärtuse järgi, mis on väärtusest suurem või väiksem, või kahe väärtuse vahel. Vahemikuotsingu tegemiseks valige "Võrdub", seejärel eraldage vahemiku algus- ja lõppväärtused sidekriipsuga (-), nt 10-15';
 $lang['USERFIELD'] = 'Userfield';
 $lang['SEARCH_USERS_USERFIELD_EXPLAIN'] = 'Kasutajate otsing põhineb erinevate profiili väljad. Metamärgid on toetatud kasutades asterix (*).';
 $lang['SEARCH_USERS_LASTVISITED_EXPLAIN'] = 'Saate otsida kasutajatele põhinevad nende viimase sisselogimise kuupäeva, kasutades selle otsingu võimalus';
@@ -2669,7 +2671,7 @@ $lang['SEARCH_USERS_LANGUAGE_EXPLAIN'] = 'See näitab kasutajatele, kellele on v
 $lang['SEARCH_USERS_TIMEZONE_EXPLAIN'] = 'Kasutajad, kes on valitud konkreetse ajavööndi järgi oma profiili';
 $lang['SEARCH_USERS_STYLE_EXPLAIN'] = 'Ekraan kasutajad, kes on valitud konkreetne stiil.';
 $lang['MODERATORS_OF'] = 'Moderaatorid';
-$lang['SEARCH_USERS_MODERATORS_EXPLAIN'] = 'Otsingu kasutajatele Alanes õigused konkreetne foorum. Alanes õigused on recoginised kas Kasutaja Õigused või on Kontserni õigus Rühm Permssions.';
+$lang['SEARCH_USERS_MODERATORS_EXPLAIN'] = 'Otsige kasutajaid, kellel on konkreetse foorumi modereerimisõigused. Modereerimisõigused tuvastatakse kas kasutajaõiguste või õigete rühmaõigustega grupis olemise kaudu.';
 
 $lang['SEARCH_USERS_NEW'] = '%s andnud %d tulemus(s). Täita <a href="%s">another search</a>.';
 $lang['BANNED'] = 'Keelatud';
@@ -2723,10 +2725,10 @@ $lang['SITEMAP_OPTIONS'] = 'Valikud';
 $lang['SITEMAP_CREATE'] = 'Koostada / uuendada sitemap';
 $lang['SITEMAP_NOTIFY'] = 'Teatama hakukoneita uus versioon sitemap';
 $lang['SITEMAP_WHAT_NEXT'] = 'Mida teha edasi?';
-$lang['SITEMAP_GOOGLE_1'] = 'Registreeri oma sait kell <a href="http://www.google.com/webmasters/" target="_blank">Google Webmaster</a> kasutades oma Google \' i konto.';
+$lang['SITEMAP_GOOGLE_1'] = 'Registreeri oma sait kell <a href="https://www.google.com/webmasters/" target="_blank">Google Webmaster</a> kasutades oma Google \' i konto.';
 $lang['SITEMAP_GOOGLE_2'] = '<a href="https://www.google.com/webmasters/tools/sitemap-list" target="_blank">Add sitemap</a> saidi te registreeritud.';
-$lang['SITEMAP_YANDEX_1'] = 'Registreeri oma sait kell <a href="http://webmaster.yandex.ru/sites/" target="_blank">Yandex Webmaster</a> kasutades oma Yandex konto.';
-$lang['SITEMAP_YANDEX_2'] = '<a href="http://webmaster.yandex.ru/site/map.xml" target="_blank">Add sitemap</a> saidi te registreeritud.';
+$lang['SITEMAP_YANDEX_1'] = 'Registreeri oma sait kell <a href="https://webmaster.yandex.ru/sites/" target="_blank">Yandex Webmaster</a> kasutades oma Yandex konto.';
+$lang['SITEMAP_YANDEX_2'] = '<a href="https://webmaster.yandex.ru/site/map.xml" target="_blank">Add sitemap</a> saidi te registreeritud.';
 $lang['SITEMAP_BING_1'] = 'Registreeri oma sait kell <a href="https://www.bing.com/webmaster/" target="_blank">Bing Webmaster</a> oma Microsofti konto abil.';
 $lang['SITEMAP_BING_2'] = 'Lisada sitemap saidi registreerisite oma seaded.';
 $lang['SITEMAP_ADD_TITLE'] = 'Täiendavaid lehekülgi sitemap';
@@ -2747,7 +2749,7 @@ $lang['ATOM_GLOBAL_FEED'] = 'Globaalne sööt kõikidele foorumitele';
 $lang['HASH_INVALID'] = 'Hash %s on kehtetu';
 $lang['HASH_NOT_FOUND'] = 'Pressiteade hash %s ei leitud';
 
-$lang['TERMS_EMPTY_TEXT'] = '[align=center]tekst see leht on redigeeritud: [url=http://%s/admin/admin_terms.php]admin/admin_terms.php[/url]. See liin näevad ainult administraatorid.[/align]';
+$lang['TERMS_EMPTY_TEXT'] = '[align=center]Selle lehe teksti on muudetud aadressil: [url=https://%s/admin/admin_terms.php]admin/admin_terms.php[/url]. Sellel real on näha ainult administraatorid.[/align]';
 $lang['TERMS_EXPLAIN'] = 'Sellel lehel saate määrata teksti põhireeglid ressurss on kuvatud kasutajad.';
 
 $lang['TR_STATS'] = array(
@@ -2804,16 +2806,16 @@ $lang['CAPTCHA'] = 'Kontrollige, et te ei ole robot';
 $lang['CAPTCHA_WRONG'] = 'Sa ei suutnud kinnitada, et sa ei ole robot';
 $lang['CAPTCHA_SETTINGS'] = '<h2>ReCaptcha ei ole täielikult configured</h2><p>if te pole juba genereeritud võtmete abil saate teha seda <a href="https://www.google.com/recaptcha/admin">https://www.google.kom/recaptcha/admin</a>.<br />After te luua võtmed, teil on vaja panna neid faili library/config.php.</p>';
 
-// Emailer
+// Sending email
 $lang['EMAILER_SUBJECT'] = [
-    'EMPTY' => 'Ei Ole Teema',
-    'GROUP_ADDED' => 'Teil on olnud, mis on lisatud käesoleva usergroup',
-    'GROUP_APPROVED' => 'Teie taotlus on heaks kiidetud',
-    'GROUP_REQUEST' => 'Taotluse liituda teie grupiga on tehtud',
-    'PRIVMSG_NOTIFY' => 'Uus isiklik Sõnum on saabunud',
-    'TOPIC_NOTIFY' => 'Teema Vastuse Teatamise %s',
-    'USER_ACTIVATE' => 'Uuesti aktiveerida teie konto',
-    'USER_ACTIVATE_PASSWD' => 'Uus parooli aktiveerimine',
-    'USER_WELCOME' => 'Tere tulemast %s Foorumid',
-    'USER_WELCOME_INACTIVE' => 'Tere tulemast %s Foorumid',
+    'EMPTY' => 'Teemat pole',
+    'GROUP_ADDED' => 'Olete lisatud kasutajagruppi',
+    'GROUP_APPROVED' => 'Teie taotlus kasutajagrupiga liitumiseks on rahuldatud',
+    'GROUP_REQUEST' => 'Taotlus liituda teie kasutajagrupiga',
+    'PRIVMSG_NOTIFY' => 'Uus privaatsõnum',
+    'TOPIC_NOTIFY' => 'Vastuse teatis lõimes %s',
+    'USER_ACTIVATE' => 'Konto taasaktiveerimine',
+    'USER_ACTIVATE_PASSWD' => 'Uue parooli kinnitamine',
+    'USER_WELCOME' => 'Tere tulemast saidile %s',
+    'USER_WELCOME_INACTIVE' => 'Tere tulemast saidile %s',
 ];

@@ -12,7 +12,8 @@ $lang['ADMIN'] = 'Pengadministrasian';
 $lang['FORUM'] = 'Forum';
 $lang['CATEGORY'] = 'Kategori';
 $lang['HIDE_CAT'] = 'Menyembunyikan kategori';
-$lang['HIDE_CAT_MESS'] = 'Bagian dari kategori tersembunyi "pilihan Menunjukkan" &middot; <a href="index.php?sh=1">Show All</a>';
+$lang['HIDE_CAT_MESS'] = 'Beberapa kategori disembunyikan oleh opsi tampilan yang disesuaikan';
+$lang['SHOW_ALL'] = 'Tunjukkan semua';
 $lang['TOPIC'] = 'Topik';
 $lang['TOPICS'] = 'Topik';
 $lang['TOPICS_SHORT'] = 'Topik';
@@ -82,7 +83,7 @@ $lang['SKYPE_ERROR'] = 'Anda masukkan tidak valid login Skype';
 $lang['TWITTER'] = 'Twitter';
 $lang['TWITTER_ERROR'] = 'Anda masukkan tidak valid Twitter login';
 
-$lang['FORUM_INDEX'] = '%s Forum Index'; // eg. sitename Forum Index, %s can be removed if you prefer
+$lang['FORUM_INDEX'] = '%s Forum Index'; // e.g. sitename Forum Index, %s can be removed if you prefer
 
 $lang['POST_NEW_TOPIC'] = 'Posting topik baru';
 $lang['POST_NEW_RELEASE'] = 'Pasca rilis baru';
@@ -301,7 +302,7 @@ $lang['SELECT_POSTS_PER_PAGE'] = 'posting per halaman';
 // Posting/Replying (Not private messaging!)
 $lang['TOPIC_REVIEW'] = 'Topik review';
 
-$lang['NO_POST_MODE'] = 'Tidak ada post mode yang dipilih'; // If posting.php is called without a mode (newtopic/reply/delete/etc, shouldn't be shown normaly)
+$lang['NO_POST_MODE'] = 'Tidak ada post mode yang dipilih'; // If posting.php is called without a mode (newtopic/reply/delete/etc., shouldn't be shown normally)
 
 $lang['POST_A_NEW_TOPIC'] = 'Posting topik baru';
 $lang['POST_A_REPLY'] = 'Post new reply';
@@ -489,7 +490,7 @@ $lang['UNMARK_ALL'] = 'Hapus semua tanda';
 $lang['CONFIRM_DELETE_PM'] = 'Apakah anda yakin anda ingin menghapus pesan ini?';
 $lang['CONFIRM_DELETE_PMS'] = 'Apakah anda yakin anda ingin menghapus pesan-pesan ini?';
 
-$lang['INBOX_SIZE'] = 'Kotak Masuk anda is<br /><b>%d%%</b> penuh'; // eg. Your Inbox is 50% full
+$lang['INBOX_SIZE'] = 'Kotak Masuk anda is<br /><b>%d%%</b> penuh'; // e.g. Your Inbox is 50% full
 $lang['SENTBOX_SIZE'] = 'Anda Sentbox is<br /><b>%d%%</b> penuh';
 $lang['SAVEBOX_SIZE'] = 'Anda Savebox is<br /><b>%d%%</b> penuh';
 
@@ -571,7 +572,7 @@ $lang['YEARS'] = 'Tahun';
 $lang['NO_THEMES'] = 'Tidak ada Tema Di database';
 $lang['TIMEZONE'] = 'Timezone';
 $lang['DATE_FORMAT_PROFILE'] = 'Format tanggal';
-$lang['DATE_FORMAT_EXPLAIN'] = 'Sintaks yang digunakan adalah identik dengan PHP <a href=\'http://www.php.net/date\' target=\'_other\'>date()</a> fungsi.';
+$lang['DATE_FORMAT_EXPLAIN'] = 'Sintaks yang digunakan adalah identik dengan PHP <a href=\'https://www.php.net/manual/en/function.date.php\' target=\'_other\'>date()</a> fungsi.';
 $lang['SIGNATURE'] = 'Tanda tangan';
 $lang['SIGNATURE_EXPLAIN'] = 'Ini adalah sebuah blok teks yang dapat ditambahkan ke posting yang anda buat. Ada %d batas karakter';
 $lang['SIGNATURE_DISABLE'] = 'Ditandatangani untuk melanggar aturan forum';
@@ -802,8 +803,8 @@ $lang['BRIEFLY'] = 'Secara singkat';
 $lang['NO_SEARCHABLE_FORUMS'] = 'Anda tidak memiliki izin untuk cari forum di situs ini.';
 
 $lang['NO_SEARCH_MATCH'] = 'Tidak ada topik atau pesan yang memenuhi kriteria pencarian anda';
-$lang['FOUND_SEARCH_MATCH'] = 'Pencarian ditemukan %d pertandingan'; // eg. Search found 1 match
-$lang['FOUND_SEARCH_MATCHES'] = 'Pencarian ditemukan %d pertandingan'; // eg. Search found 24 matches
+$lang['FOUND_SEARCH_MATCH'] = 'Pencarian ditemukan %d pertandingan'; // e.g. Search found 1 match
+$lang['FOUND_SEARCH_MATCHES'] = 'Pencarian ditemukan %d pertandingan'; // e.g. Search found 24 matches
 $lang['TOO_MANY_SEARCH_RESULTS'] = 'Terlalu banyak hasil yang mungkin ditemukan, silahkan mencoba untuk lebih spesifik';
 
 $lang['CLOSE_WINDOW'] = 'Tutup Jendela';
@@ -1508,9 +1509,9 @@ $lang['ITALIC'] = 'Italic text: [i]text[/i] (Ctrl+I)';
 $lang['UNDERLINE'] = 'Menggarisbawahi teks: [u]text[/u] (Ctrl+U)';
 $lang['STRIKEOUT'] = 'Teks coret: [s]text[/s] (Ctrl+S)';
 $lang['QUOTE_TITLE'] = 'Kutipan teks: [quote]text[/quote] (Ctrl+Q)';
-$lang['IMG_TITLE'] = 'Menyisipkan gambar: [img]http://image_url[/img] (Ctrl+R)';
+$lang['IMG_TITLE'] = 'Sisipkan gambar: [img]https://image_url[/img] (Ctrl+R)';
 $lang['URL'] = 'Url';
-$lang['URL_TITLE'] = 'Menyisipkan URL: [url]http://url[/url] atau [url=http://url]URL text[/url] (Ctrl+W)';
+$lang['URL_TITLE'] = 'Sisipkan URL: [url]https://url[/url] atau [url=https://url]Teks URL[/url] (Ctrl+W)';
 $lang['CODE_TITLE'] = 'Kode display: [code]code[/code] (Ctrl+K)';
 $lang['LIST'] = 'Daftar';
 $lang['LIST_TITLE'] = 'Daftar: [list]text[/list] (Ctrl+l)';
@@ -2056,7 +2057,7 @@ $lang['TRACKER_STATS'] = 'Statistik tracker';
 $lang['WHOIS_INFO'] = 'Informasi tentang alamat IP';
 $lang['SHOW_MOD_HOME_PAGE'] = 'Menunjukkan pada moderator index.php';
 $lang['PREMOD_HELP'] = '<h4><span class="tor-icon tor-dup">&#8719;</span> Pra-moderation</h4> <h6>If anda tidak memiliki distribusi status v, #, atau T pada bagian ini, termasuk subbagian, distribusi otomatis akan menerima ini status</h6>';
-$lang['TOR_COMMENT'] = '<h4>Commentary pada status distribution</h4> <h6>Comment berhasil memungkinkan anda untuk menentukan releasers kesalahan. Ketika nedooformlennyh status releasers tersedia bentuk respon koreksi release</h6>';
+$lang['TOR_COMMENT'] = '<h4>Mengomentari status distribusi</h4> <h6>Komentar memungkinkan Anda menunjukkan kesalahan yang dibuat pada penerbit. Jika status tidak lengkap, formulir respons rilis tersedia untuk manajer rilis untuk memperbaiki rilis</h6>';
 $lang['SEED_BONUS_ADD'] = '<h4>Adding benih bonus </h4> <h6> Jumlah distro yang diberikan oleh pengguna dan ukuran bonus untuk mereka (pengisian kali dalam satu jam) </h6>';
 $lang['SEED_BONUS_RELEASE'] = 'untuk N-jumlah rilis';
 $lang['SEED_BONUS_POINTS'] = 'bonus dalam satu jam';
@@ -2084,7 +2085,7 @@ $lang['ATTACH_NUMBER_SETTINGS'] = 'Lampiran Nomor Setelan';
 $lang['ATTACH_OPTIONS_SETTINGS'] = 'Lampiran Pilihan';
 
 $lang['UPLOAD_DIRECTORY'] = 'Direktori Upload';
-$lang['UPLOAD_DIRECTORY_EXPLAIN'] = 'Masukkan path relatif dari TorrentPier instalasi untuk meng-upload Lampiran direktori. Misalnya, memasukkan \'file\' jika anda TorrentPier Instalasi yang terletak di http://www.yourdomain.com/torrentpier dan Lampiran meng-Upload Direktori ini terletak di http://www.yourdomain.com/torrentpier/files.';
+$lang['UPLOAD_DIRECTORY_EXPLAIN'] = 'Masukkan path relatif dari TorrentPier instalasi untuk meng-upload Lampiran direktori. Misalnya, memasukkan \'file\' jika anda TorrentPier Instalasi yang terletak di https://www.yourdomain.com/torrentpier dan Lampiran meng-Upload Direktori ini terletak di https://www.yourdomain.com/torrentpier/files.';
 $lang['ATTACH_IMG_PATH'] = 'Lampiran Posting Icon';
 $lang['ATTACH_IMG_PATH_EXPLAIN'] = 'Gambar ini ditampilkan di sebelah Tautan Lampiran di Posting individu. Biarkan bidang ini kosong jika anda tidak ingin ikon yang akan ditampilkan. Pengaturan ini akan ditimpa oleh Pengaturan di Ekstensi Manajemen Grup.';
 $lang['ATTACH_TOPIC_ICON'] = 'Lampiran Topik Ikon';
@@ -2123,7 +2124,7 @@ $lang['EMPTY_FILE_ENTRY'] = 'File Kosong Entri';
 
 // Attachments -> Sync
 $lang['SYNC_THUMBNAIL_RESETTED'] = 'Thumbnail menunjukkan total hit: untuk Lampiran: %s'; // replace %s with physical Filename
-$lang['ATTACH_SYNC_FINISHED'] = 'Lampiran Sinkronisasi Selesai.';
+$lang['ATTACH_SYNC_FINISHED'] = 'Sinkronisasi Lampiran Selesai.';
 $lang['SYNC_TOPICS'] = 'Sync Topik';
 $lang['SYNC_POSTS'] = 'Sync Posting';
 $lang['SYNC_THUMBNAILS'] = 'Sync Thumbnail';
@@ -2385,6 +2386,7 @@ $lang['CRON_NEXT_RUN'] = 'Berikutnya Jalankan';
 $lang['CRON_RUN_COUNT'] = 'Berjalan';
 $lang['CRON_MANAGE'] = 'Mengelola';
 $lang['CRON_OPTIONS'] = 'Cron pilihan';
+$lang['CRON_DISABLED_WARNING'] = 'Peringatan! Menjalankan skrip cron dinonaktifkan. Untuk mengaktifkannya, atur variabel APP_CRON_ENABLED.';
 
 $lang['CRON_ENABLED'] = 'Cron memungkinkan';
 $lang['CRON_CHECK_INTERVAL'] = 'Cron check interval (sec)';
@@ -2574,7 +2576,7 @@ $lang['RELEASES'] = 'Rilis';
 
 $lang['BACK'] = 'Kembali';
 $lang['ERROR_FORM'] = 'Tidak valid bidang';
-$lang['RELEASE_WELCOME'] = 'Pleae mengisi releae bentuk';
+$lang['RELEASE_WELCOME'] = 'Silakan isi formulir rilis';
 $lang['NEW_RELEASE'] = 'Baru rilis';
 $lang['NEXT'] = 'Terus';
 $lang['OTHER'] = 'Lainnya';
@@ -2582,8 +2584,8 @@ $lang['OTHER'] = 'Lainnya';
 $lang['TPL_EMPTY_FIELD'] = 'Anda harus mengisi field <b>%s</b>';
 $lang['TPL_EMPTY_SEL'] = 'Anda harus memilih <b>%s</b>';
 $lang['TPL_NOT_NUM'] = '<b>%s</b> - num';
-$lang['TPL_NOT_URL'] = '<b>%s</b> - Harus URL http:// ';
-$lang['TPL_NOT_IMG_URL'] = '<b>%s</b> - Harus http:// IMG_URL';
+$lang['TPL_NOT_URL'] = '<b>%s</b> - Harus https:// URL';
+$lang['TPL_NOT_IMG_URL'] = '<b>%s</b> - Harus https:// IMG_URL';
 $lang['TPL_PUT_INTO_SUBJECT'] = 'dimasukkan ke subjek';
 $lang['TPL_POSTER'] = 'poster';
 $lang['TPL_REQ_FILLING'] = 'membutuhkan mengisi';
@@ -2597,15 +2599,15 @@ $lang['TPL_SPOILER'] = 'spoiler';
 $lang['TPL_IN_LINE'] = 'di baris yang sama';
 $lang['TPL_HEADER_ONLY'] = 'hanya di judul';
 
-$lang['SEARCH_INVALID_USERNAME'] = 'Tidak valid username yang dimasukkan untuk Pencarian';
-$lang['SEARCH_INVALID_EMAIL'] = 'Alamat email tidak valid masuk ke Pencarian';
-$lang['SEARCH_INVALID_IP'] = 'Tidak valid alamat IP yang dimasukkan untuk Pencarian';
-$lang['SEARCH_INVALID_GROUP'] = 'Grup tidak valid masuk ke Pencarian';
-$lang['SEARCH_INVALID_RANK'] = 'Tidak valid pangkat dimasukkan untuk Pencarian';
-$lang['SEARCH_INVALID_DATE'] = 'Tanggal yang tidak valid masuk ke Pencarian';
-$lang['SEARCH_INVALID_POSTCOUNT'] = 'Tidak valid Post Count masuk ke Pencarian';
+$lang['SEARCH_INVALID_USERNAME'] = 'Nama pengguna tidak valid dimasukkan untuk mencari';
+$lang['SEARCH_INVALID_EMAIL'] = 'Alamat email yang dimasukkan tidak valid untuk menelusuri';
+$lang['SEARCH_INVALID_IP'] = 'Alamat IP tidak valid dimasukkan untuk mencari';
+$lang['SEARCH_INVALID_GROUP'] = 'Grup yang tidak valid dimasukkan untuk menelusuri';
+$lang['SEARCH_INVALID_RANK'] = 'Peringkat tidak valid dimasukkan untuk mencari';
+$lang['SEARCH_INVALID_DATE'] = 'Tanggal yang dimasukkan untuk menelusuri tidak valid';
+$lang['SEARCH_INVALID_POSTCOUNT'] = 'Jumlah posting yang tidak valid dimasukkan untuk mencari';
 $lang['SEARCH_INVALID_USERFIELD'] = 'Tidak valid Userfield data yang dimasukkan';
-$lang['SEARCH_INVALID_LASTVISITED'] = 'Data yang tidak valid yang dimasukkan untuk pencarian Terakhir Dikunjungi';
+$lang['SEARCH_INVALID_LASTVISITED'] = 'Tanggal yang dimasukkan untuk pencarian yang terakhir dikunjungi tidak valid';
 $lang['SEARCH_INVALID_LANGUAGE'] = 'Bahasa Yang Dipilih Tidak Valid';
 $lang['SEARCH_INVALID_TIMEZONE'] = 'Tidak Valid Zona Waktu Yang Dipilih';
 $lang['SEARCH_INVALID_MODERATORS'] = 'Forum Valid Dipilih';
@@ -2656,12 +2658,12 @@ $lang['SEARCH_USERS_GROUPS_EXPLAIN'] = 'Melihat semua anggota kelompok yang dipi
 $lang['SEARCH_USERS_RANKS_EXPLAIN'] = 'Lihat semua operator yang dipilih peringkat.';
 $lang['BANNED_USERS'] = 'Pengguna Dilarang';
 $lang['DISABLED_USERS'] = 'Pengguna Cacat';
-$lang['SEARCH_USERS_MISC_EXPLAIN'] = 'Administrator - Semua pengguna dengan kekuasaan Administrator; Moderator - moderator forum; Pengguna yang Dilarang - Semua account yang telah dilarang di forum ini; Pengguna Cacat - Semua pengguna dengan akun yang dinonaktifkan (baik secara manual dinonaktifkan atau tidak pernah memverifikasi alamat email mereka); Pengguna dengan keluarga PMs - Memilih pengguna yang memiliki Pesan Pribadi priviliges dihapus (Dilakukan melalui Manajemen User)';
-$lang['POSTCOUNT'] = 'Postcount';
+$lang['SEARCH_USERS_MISC_EXPLAIN'] = 'Administrator - Semua pengguna dengan kekuatan Administrator; Moderator - Semua moderator forum; Pengguna yang Dilarang - Semua akun yang telah dilarang di forum ini; Pengguna yang Dinonaktifkan - Semua pengguna dengan akun yang dinonaktifkan (baik yang dinonaktifkan secara manual atau tidak pernah memverifikasi alamat email mereka); Pengguna dengan PM yang dinonaktifkan - Memilih pengguna yang hak istimewa Pesan Pribadinya dihapus (Selesai melalui Manajemen Pengguna)';
+$lang['POSTCOUNT'] = 'Jumlah posting';
 $lang['EQUALS'] = 'Sama';
 $lang['GREATER_THAN'] = 'Lebih besar dari';
 $lang['LESS_THAN'] = 'Kurang dari';
-$lang['SEARCH_USERS_POSTCOUNT_EXPLAIN'] = 'Anda dapat mencari pengguna berdasarkan Postcount nilai. Anda dapat mencari dengan nilai tertentu, lebih besar dari atau lebih kecil dari nilai a atau antara dua nilai. Untuk melakukan berbagai pencarian, pilih "Sama dengan", kemudian dimasukkan awal dan akhir nilai-nilai dari berbagai dipisahkan dengan dash (-), misalnya 10-15';
+$lang['SEARCH_USERS_POSTCOUNT_EXPLAIN'] = 'Anda dapat mencari pengguna berdasarkan nilai jumlah posting. Anda dapat mencari berdasarkan nilai tertentu, lebih besar atau lebih kecil dari nilai, atau di antara dua nilai. Untuk melakukan pencarian rentang, pilih "Sama Dengan" lalu masukkan nilai awal dan akhir rentang yang dipisahkan oleh tanda hubung (-), misalnya 10-15';
 $lang['USERFIELD'] = 'Userfield';
 $lang['SEARCH_USERS_USERFIELD_EXPLAIN'] = 'Pencarian untuk pengguna berdasarkan berbagai bidang profil. Wildcard yang didukung menggunakan asterix (*).';
 $lang['SEARCH_USERS_LASTVISITED_EXPLAIN'] = 'Anda dapat mencari pengguna berdasarkan tanggal login terakhir menggunakan opsi pencarian ini';
@@ -2669,7 +2671,7 @@ $lang['SEARCH_USERS_LANGUAGE_EXPLAIN'] = 'Ini akan menampilkan pengguna yang tel
 $lang['SEARCH_USERS_TIMEZONE_EXPLAIN'] = 'Pengguna yang telah memilih zona waktu tertentu dalam profil mereka';
 $lang['SEARCH_USERS_STYLE_EXPLAIN'] = 'Tampilan pengguna yang telah memilih gaya tertentu.';
 $lang['MODERATORS_OF'] = 'Moderator';
-$lang['SEARCH_USERS_MODERATORS_EXPLAIN'] = 'Mencari pengguna dengan Moderating izin ke forum tertentu. Moderator izin recoginised baik dengan Izin Pengguna atau Kelompok dengan Kelompok yang tepat Permssions.';
+$lang['SEARCH_USERS_MODERATORS_EXPLAIN'] = 'Cari pengguna dengan izin Moderasi ke forum tertentu. Izin moderasi diakui baik oleh Izin Pengguna atau dengan berada di Grup dengan Izin Grup yang tepat.';
 
 $lang['SEARCH_USERS_NEW'] = '%s menghasilkan %d hasil(s). Melakukan <a href="%s">another search</a>.';
 $lang['BANNED'] = 'Dilarang';
@@ -2723,10 +2725,10 @@ $lang['SITEMAP_OPTIONS'] = 'Pilihan';
 $lang['SITEMAP_CREATE'] = 'Membuat / update sitemap';
 $lang['SITEMAP_NOTIFY'] = 'Memberitahu mesin pencari tentang versi baru dari sitemap';
 $lang['SITEMAP_WHAT_NEXT'] = 'Apa yang harus dilakukan selanjutnya?';
-$lang['SITEMAP_GOOGLE_1'] = 'Daftarkan situs anda di <a href="http://www.google.com/webmasters/" target="_blank">Google Webmaster</a> menggunakan akun Google anda.';
+$lang['SITEMAP_GOOGLE_1'] = 'Daftarkan situs anda di <a href="https://www.google.com/webmasters/" target="_blank">Google Webmaster</a> menggunakan akun Google anda.';
 $lang['SITEMAP_GOOGLE_2'] = '<a href="https://www.google.com/webmasters/tools/sitemap-list" target="_blank">Add sitemap</a> dari situs anda terdaftar.';
-$lang['SITEMAP_YANDEX_1'] = 'Daftarkan situs anda di <a href="http://webmaster.yandex.ru/sites/" target="_blank">Yandex Webmaster</a> menggunakan akun Yandex.';
-$lang['SITEMAP_YANDEX_2'] = '<a href="http://webmaster.yandex.ru/site/map.xml" target="_blank">Add sitemap</a> dari situs anda terdaftar.';
+$lang['SITEMAP_YANDEX_1'] = 'Daftarkan situs anda di <a href="https://webmaster.yandex.ru/sites/" target="_blank">Yandex Webmaster</a> menggunakan akun Yandex.';
+$lang['SITEMAP_YANDEX_2'] = '<a href="https://webmaster.yandex.ru/site/map.xml" target="_blank">Add sitemap</a> dari situs anda terdaftar.';
 $lang['SITEMAP_BING_1'] = 'Daftarkan situs anda di <a href="https://www.bing.com/webmaster/" target="_blank">Bing Webmaster</a> menggunakan akun Microsoft anda.';
 $lang['SITEMAP_BING_2'] = 'Menambahkan sitemap situs anda terdaftar dalam pengaturannya.';
 $lang['SITEMAP_ADD_TITLE'] = 'Halaman tambahan untuk sitemap';
@@ -2747,7 +2749,7 @@ $lang['ATOM_GLOBAL_FEED'] = 'Umpan global untuk semua forum';
 $lang['HASH_INVALID'] = 'Hash %s adalah tidak valid';
 $lang['HASH_NOT_FOUND'] = 'Rilis dengan hash %s tidak ditemukan';
 
-$lang['TERMS_EMPTY_TEXT'] = '[align=center]teks dari halaman ini diedit di: [url=http://%s/admin/admin_terms.php]admin/admin_terms.php[/url]. Baris ini dapat melihat hanya administrator.[/align]';
+$lang['TERMS_EMPTY_TEXT'] = '[align=center]Teks halaman ini diedit di: [url=https://%s/admin/admin_terms.php]admin/admin_terms.php[/url]. Baris ini hanya dapat melihat administrator.[/align]';
 $lang['TERMS_EXPLAIN'] = 'Pada halaman ini, anda dapat menentukan teks aturan dasar dari sumber daya ditampilkan kepada pengguna.';
 
 $lang['TR_STATS'] = array(
@@ -2804,16 +2806,16 @@ $lang['CAPTCHA'] = 'Periksa bahwa anda bukan robot';
 $lang['CAPTCHA_WRONG'] = 'Anda tidak bisa mengkonfirmasi bahwa anda bukan robot';
 $lang['CAPTCHA_SETTINGS'] = '<h2>ReCaptcha tidak sepenuhnya configured</h2><p>if anda belum dihasilkan tombol, anda dapat melakukannya pada <a href="https://www.google.com/recaptcha/admin">https://www.google.com/recaptcha/admin</a>.<br />After anda menghasilkan kunci, anda perlu untuk menempatkan mereka di file library/config.php.</p>';
 
-// Emailer
+// Sending email
 $lang['EMAILER_SUBJECT'] = [
-    'EMPTY' => 'Tidak Ada Subjek',
-    'GROUP_ADDED' => 'Anda telah ditambahkan usergroup',
-    'GROUP_APPROVED' => 'Permintaan anda telah disetujui',
-    'GROUP_REQUEST' => 'Permintaan untuk bergabung dengan grup anda telah dibuat',
-    'PRIVMSG_NOTIFY' => 'Pesan Pribadi baru telah tiba',
-    'TOPIC_NOTIFY' => 'Topik Balasan Pemberitahuan %s',
-    'USER_ACTIVATE' => 'Mengaktifkan kembali account anda',
-    'USER_ACTIVATE_PASSWD' => 'New password aktivasi',
-    'USER_WELCOME' => 'Selamat datang di Forum %s',
-    'USER_WELCOME_INACTIVE' => 'Selamat datang di Forum %s',
+    'EMPTY' => 'Tidak ada subjek',
+    'GROUP_ADDED' => 'Anda telah ditambahkan ke grup pengguna',
+    'GROUP_APPROVED' => 'Permintaan Anda untuk bergabung dengan grup pengguna telah dikabulkan',
+    'GROUP_REQUEST' => 'Permintaan untuk bergabung dengan grup pengguna Anda',
+    'PRIVMSG_NOTIFY' => 'Pesan pribadi baru',
+    'TOPIC_NOTIFY' => 'Pemberitahuan tanggapan di utas %s',
+    'USER_ACTIVATE' => 'Pengaktifan kembali akun',
+    'USER_ACTIVATE_PASSWD' => 'Mengonfirmasi kata sandi baru',
+    'USER_WELCOME' => 'Selamat datang di situs %s',
+    'USER_WELCOME_INACTIVE' => 'Selamat datang di situs %s',
 ];

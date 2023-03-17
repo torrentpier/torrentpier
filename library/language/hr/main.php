@@ -12,7 +12,8 @@ $lang['ADMIN'] = 'Upravljanje';
 $lang['FORUM'] = 'Forum';
 $lang['CATEGORY'] = 'Vrsta';
 $lang['HIDE_CAT'] = 'Sakriti kategorije';
-$lang['HIDE_CAT_MESS'] = 'Dio kategorije skrivene "opcije" &middot; <a href="index.php?sh=1">Show All</a>';
+$lang['HIDE_CAT_MESS'] = 'Neke su kategorije skrivene prilagođenim opcijama prikaza';
+$lang['SHOW_ALL'] = 'Pokaži sve';
 $lang['TOPIC'] = 'Tema';
 $lang['TOPICS'] = 'Teme';
 $lang['TOPICS_SHORT'] = 'Teme';
@@ -82,7 +83,7 @@ $lang['SKYPE_ERROR'] = 'Unijeli ste netočan Skype login';
 $lang['TWITTER'] = 'Twitter';
 $lang['TWITTER_ERROR'] = 'Unijeli ste netočan prijavu Twittera';
 
-$lang['FORUM_INDEX'] = 'Indeks Foruma %s'; // eg. sitename Forum Index, %s can be removed if you prefer
+$lang['FORUM_INDEX'] = 'Indeks Foruma %s'; // e.g. sitename Forum Index, %s can be removed if you prefer
 
 $lang['POST_NEW_TOPIC'] = 'Post nove teme';
 $lang['POST_NEW_RELEASE'] = 'Nakon Novih izdanja';
@@ -301,7 +302,7 @@ $lang['SELECT_POSTS_PER_PAGE'] = 'poruka na stranici';
 // Posting/Replying (Not private messaging!)
 $lang['TOPIC_REVIEW'] = 'Tema pregleda';
 
-$lang['NO_POST_MODE'] = 'Ne postoji način post izabran'; // If posting.php is called without a mode (newtopic/reply/delete/etc, shouldn't be shown normaly)
+$lang['NO_POST_MODE'] = 'Ne postoji način post izabran'; // If posting.php is called without a mode (newtopic/reply/delete/etc., shouldn't be shown normally)
 
 $lang['POST_A_NEW_TOPIC'] = 'Post nove teme';
 $lang['POST_A_REPLY'] = 'Post novi odgovor';
@@ -489,7 +490,7 @@ $lang['UNMARK_ALL'] = 'Uklonite sve';
 $lang['CONFIRM_DELETE_PM'] = 'Jeste li sigurni da želite ukloniti ovu poruku?';
 $lang['CONFIRM_DELETE_PMS'] = 'Jeste li sigurni da želite izbrisati ove poruke?';
 
-$lang['INBOX_SIZE'] = 'Vaš poštanski is<br /><b>%d%%</b> puni'; // eg. Your Inbox is 50% full
+$lang['INBOX_SIZE'] = 'Vaš poštanski is<br /><b>%d%%</b> puni'; // e.g. Your Inbox is 50% full
 $lang['SENTBOX_SIZE'] = 'Vaše poslane is<br /><b>%d%%</b> puni';
 $lang['SAVEBOX_SIZE'] = 'Svoje nekretnine is<br /><b>%d%%</b> puni';
 
@@ -571,7 +572,7 @@ $lang['YEARS'] = 'Godina';
 $lang['NO_THEMES'] = 'Nema tema u bazi podataka';
 $lang['TIMEZONE'] = 'Vremenska zona';
 $lang['DATE_FORMAT_PROFILE'] = 'Format datuma';
-$lang['DATE_FORMAT_EXPLAIN'] = 'Koristi se sintaksa je identičan <a href=\'http://www.php.net/date\' target=\'_other\'>date na PHP()funkcija </a>.';
+$lang['DATE_FORMAT_EXPLAIN'] = 'Koristi se sintaksa je identičan <a href=\'https://www.php.net/manual/en/function.date.php\' target=\'_other\'>date na PHP()funkcija </a>.';
 $lang['SIGNATURE'] = 'Potpis';
 $lang['SIGNATURE_EXPLAIN'] = 'To je blok teksta koji se mogu dodavati porukama. Postoji ograničenje %d karakter';
 $lang['SIGNATURE_DISABLE'] = 'Zbog kršenja pravila foruma';
@@ -802,8 +803,8 @@ $lang['BRIEFLY'] = 'Ukratko';
 $lang['NO_SEARCHABLE_FORUMS'] = 'Nemate prava da traži bilo kojem forumu na ovoj stranici.';
 
 $lang['NO_SEARCH_MATCH'] = 'Ni jedne teme ili postove zadovoljavaju kriterije pretraživanja';
-$lang['FOUND_SEARCH_MATCH'] = 'Traži našao utakmicu %d'; // eg. Search found 1 match
-$lang['FOUND_SEARCH_MATCHES'] = 'Traži %d pronađeno utakmice'; // eg. Search found 24 matches
+$lang['FOUND_SEARCH_MATCH'] = 'Traži našao utakmicu %d'; // e.g. Search found 1 match
+$lang['FOUND_SEARCH_MATCHES'] = 'Traži %d pronađeno utakmice'; // e.g. Search found 24 matches
 $lang['TOO_MANY_SEARCH_RESULTS'] = 'Previše rezultata može se naći, molimo vas, pokušajte biti precizniji';
 
 $lang['CLOSE_WINDOW'] = 'Zatvori Prozor';
@@ -1511,9 +1512,9 @@ $lang['ITALIC'] = 'Курсивный tekst: [i]text[/i] (Ctrl+i)';
 $lang['UNDERLINE'] = 'Podvlačenje teksta: [u]text[/u] (Ctrl+U)';
 $lang['STRIKEOUT'] = 'Prekriženo tekst: [s]text[/s] (Ctrl+s)';
 $lang['QUOTE_TITLE'] = 'Citiram tekst: [quote]text[/quote] (Ctrl+M)';
-$lang['IMG_TITLE'] = 'Umetanje slike: [img]http://image_url[/img] (Ctrl+P)';
+$lang['IMG_TITLE'] = 'Umetni sliku: [img]https://image_url[/img] (Ctrl+R)';
 $lang['URL'] = 'URL adresa';
-$lang['URL_TITLE'] = 'Zalijepite URL: [url]http://url[/url] ili [URL=http://adresa]URL text[/url] (Ctrl+f)';
+$lang['URL_TITLE'] = 'Umetnite URL: [url]https://url[/url] ili [url=https://url]URL tekst[/url] (Ctrl+W)';
 $lang['CODE_TITLE'] = 'Prikaz šifra: [code]code[/code] (Ctrl+s)';
 $lang['LIST'] = 'Popis';
 $lang['LIST_TITLE'] = 'Popis: [list]text[/list] (Ctrl+l)';
@@ -2059,7 +2060,7 @@ $lang['TRACKER_STATS'] = 'Statistika na adresi';
 $lang['WHOIS_INFO'] = 'Informacije o IP adresi';
 $lang['SHOW_MOD_HOME_PAGE'] = 'Prikaži moderatora index.php';
 $lang['PREMOD_HELP'] = '<h4><span class="tor-icon tor-dup">&#8719;</span> pre moderation</h4> <h6>If nemaju distribucije status u, # ili t, u ovom poglavlju, uključujući rubrike, onda ruka automatski dobiva ovom status</h6>';
-$lang['TOR_COMMENT'] = '<h4>Commentary o stanju distribution</h4> <h6>Comment uspješno omogućuje vam da odredite pogreške релизером. Kada nedooformlennyh statusi релизером dostupan oblik odgovor korekcije release</h6>';
+$lang['TOR_COMMENT'] = '<h4>Komentar statusa distribucije</h4> <h6>Komentar vam omogućuje da ukažete na pogreške učinjene izdavaču. Ako su statusi nepotpuni, obrazac za odgovor na izdanje dostupan je upravitelju izdanja za ispravljanje izdanja</h6>';
 $lang['SEED_BONUS_ADD'] = '<h4>Adding bonus sjeme </h4> <h6> Broj distribucija izdaje korisnik i veličina bonusa za njih (put punjenje sat) </h6>';
 $lang['SEED_BONUS_RELEASE'] = 'N-broj izdanja';
 $lang['SEED_BONUS_POINTS'] = 'bonus na sat';
@@ -2087,7 +2088,7 @@ $lang['ATTACH_NUMBER_SETTINGS'] = 'Parametri Broj Priloga';
 $lang['ATTACH_OPTIONS_SETTINGS'] = 'Mogućnosti Za Pričvršćivanje';
 
 $lang['UPLOAD_DIRECTORY'] = 'Preuzmi Katalog';
-$lang['UPLOAD_DIRECTORY_EXPLAIN'] = 'Unesite relativni put od postavljanja stranice torrentpier za ulaganja upload direktorij. Unesite, na primjer, \'datoteke\' ako je Instalacija web stranice torrentpier se nalazi u http://www.yourdomain.com/torrentpier i Katalog privitak preuzimanje je u http://www.yourdomain.com/torrentpier/files.';
+$lang['UPLOAD_DIRECTORY_EXPLAIN'] = 'Unesite relativni put od postavljanja stranice torrentpier za ulaganja upload direktorij. Unesite, na primjer, \'datoteke\' ako je Instalacija web stranice torrentpier se nalazi u https://www.yourdomain.com/torrentpier i Katalog privitak preuzimanje je u https://www.yourdomain.com/torrentpier/files.';
 $lang['ATTACH_IMG_PATH'] = 'Ikonu Privitka Ožičenje';
 $lang['ATTACH_IMG_PATH_EXPLAIN'] = 'Ova slika se prikazuje uz investicija jedne u pojedinim Постингах. Ostavite ovo polje prazno, ako ne želite da se ikona. Ovaj parametar će biti prebrisana postavkama u proširenje grupe za upravljanje.';
 $lang['ATTACH_TOPIC_ICON'] = 'Ikona Tema Ljubavi';
@@ -2126,7 +2127,7 @@ $lang['EMPTY_FILE_ENTRY'] = 'Prazan Zapis Datoteke';
 
 // Attachments -> Sync
 $lang['SYNC_THUMBNAIL_RESETTED'] = 'Skica обнулился za pričvršćivanje: %s'; // replace %s with physical Filename
-$lang['ATTACH_SYNC_FINISHED'] = 'Privitak Sinkronizacija Je Gotova.';
+$lang['ATTACH_SYNC_FINISHED'] = 'Sinkronizacija privitaka završena.';
 $lang['SYNC_TOPICS'] = 'Teme Za Sinkronizaciju';
 $lang['SYNC_POSTS'] = 'Poruke Sinkronizaciju';
 $lang['SYNC_THUMBNAILS'] = 'Skice Za Sinkronizaciju';
@@ -2388,6 +2389,7 @@ $lang['CRON_NEXT_RUN'] = 'Sljedeći Lansiranje';
 $lang['CRON_RUN_COUNT'] = 'Radi';
 $lang['CRON_MANAGE'] = 'Upravljanje';
 $lang['CRON_OPTIONS'] = 'Mogućnosti baba';
+$lang['CRON_DISABLED_WARNING'] = 'Upozorenje! Pokretanje cron skripti je onemogućeno. Da biste ga omogućili, postavite varijablu APP_CRON_ENABLED.';
 
 $lang['CRON_ENABLED'] = 'Baba inclusive';
 $lang['CRON_CHECK_INTERVAL'] = 'Baba interval (sek)';
@@ -2577,7 +2579,7 @@ $lang['RELEASES'] = 'Javnost';
 
 $lang['BACK'] = 'Natrag';
 $lang['ERROR_FORM'] = 'Nevažeća polja';
-$lang['RELEASE_WELCOME'] = 'Molimo vas da ispunite obrazac izdavanja';
+$lang['RELEASE_WELCOME'] = 'Molimo ispunite obrazac za objavu';
 $lang['NEW_RELEASE'] = 'Novo izdanje';
 $lang['NEXT'] = 'Nastavak';
 $lang['OTHER'] = 'Drugi';
@@ -2585,8 +2587,8 @@ $lang['OTHER'] = 'Drugi';
 $lang['TPL_EMPTY_FIELD'] = 'Morate ispuniti polje <b>%s</b>';
 $lang['TPL_EMPTY_SEL'] = 'Morate odabrati <b>%s</b>';
 $lang['TPL_NOT_NUM'] = '<b>%s</b> - ne чис';
-$lang['TPL_NOT_URL'] = '<b>%s</b> - mora biti http:// URL)';
-$lang['TPL_NOT_IMG_URL'] = '<b>%s</b> - mora biti http:// IMG_URL';
+$lang['TPL_NOT_URL'] = '<b>%s</b> - Mora biti https:// URL';
+$lang['TPL_NOT_IMG_URL'] = '<b>%s</b> - Mora biti https:// IMG_URL';
 $lang['TPL_PUT_INTO_SUBJECT'] = 'staviti u temi';
 $lang['TPL_POSTER'] = 'plakat';
 $lang['TPL_REQ_FILLING'] = 'zahtijeva ispunjavanje';
@@ -2600,15 +2602,15 @@ $lang['TPL_SPOILER'] = 'spojler';
 $lang['TPL_IN_LINE'] = 'u istom retku';
 $lang['TPL_HEADER_ONLY'] = 'samo u naslovu';
 
-$lang['SEARCH_INVALID_USERNAME'] = 'Neispravno korisničko ime uveli pretraživanje';
-$lang['SEARCH_INVALID_EMAIL'] = 'Navedena pogrešna adresa e-pošte za pretraživanje';
-$lang['SEARCH_INVALID_IP'] = 'Neispravno IP adresom, upisanim u pretraživanje';
-$lang['SEARCH_INVALID_GROUP'] = 'Nepravilna Grupa ušla u pretraživanje';
-$lang['SEARCH_INVALID_RANK'] = 'Neispravan čin uveli pretraživanje';
-$lang['SEARCH_INVALID_DATE'] = 'Uveden je neispravna Datum na pretraživanje';
-$lang['SEARCH_INVALID_POSTCOUNT'] = 'Neispravno računajući post prave traži';
+$lang['SEARCH_INVALID_USERNAME'] = 'Uneseno je nevažeće korisničko ime za pretraživanje';
+$lang['SEARCH_INVALID_EMAIL'] = 'Unesena je nevažeća adresa e-pošte za pretraživanje';
+$lang['SEARCH_INVALID_IP'] = 'Unesena je nevažeća IP adresa za pretraživanje';
+$lang['SEARCH_INVALID_GROUP'] = 'Unesena je nevažeća grupa za pretraživanje';
+$lang['SEARCH_INVALID_RANK'] = 'Za pretraživanje je unesen nevažeći rang';
+$lang['SEARCH_INVALID_DATE'] = 'Unesen je nevažeći datum za pretraživanje';
+$lang['SEARCH_INVALID_POSTCOUNT'] = 'Za pretraživanje je unesen nevažeći broj postova';
 $lang['SEARCH_INVALID_USERFIELD'] = 'Pogrešne podatke Userfield ušao';
-$lang['SEARCH_INVALID_LASTVISITED'] = 'Unosite štetne podataka na zahtjev';
+$lang['SEARCH_INVALID_LASTVISITED'] = 'Unesen je nevažeći datum za zadnje posjećeno pretraživanje';
 $lang['SEARCH_INVALID_LANGUAGE'] = 'Pogrešan Jezik Koji Ste Odabrali';
 $lang['SEARCH_INVALID_TIMEZONE'] = 'Neispravno Vremenska Zona Odabrana';
 $lang['SEARCH_INVALID_MODERATORS'] = 'Krivi Forum Izabrali';
@@ -2659,12 +2661,12 @@ $lang['SEARCH_USERS_GROUPS_EXPLAIN'] = 'Pogledajte sve članove odabrane skupine
 $lang['SEARCH_USERS_RANKS_EXPLAIN'] = 'Pogledajte sve medije odabrane vrijednosti.';
 $lang['BANNED_USERS'] = 'Zabranio Korisnicima';
 $lang['DISABLED_USERS'] = 'Korisnicima S Invaliditetom';
-$lang['SEARCH_USERS_MISC_EXPLAIN'] = 'Administratori - svi korisnici s Administratorom ovlasti; Moderator - sve moderiranja foruma; kućne ljubimce korisnika - svi računi koji su bili zabranjen na ovim forumima; osobe s invaliditetom Korisnici: svi korisnici s onemogućene računima (bilo ručno isključeno ili nikada nije provjerio adresu e-pošte); korisnici s invalidnošću PMS - izbor za korisnike koji imaju osobne poruke opa nestaje (učinili kroz "Upravljanje korisnicima")';
-$lang['POSTCOUNT'] = 'Postcount';
+$lang['SEARCH_USERS_MISC_EXPLAIN'] = 'Administratori - Svi korisnici s ovlastima administratora; Moderatori - Svi moderatori foruma; Zabranjeni korisnici - Svi računi koji su zabranjeni na ovim forumima; Onesposobljeni korisnici - Svi korisnici s onemogućenim računima (ili ručno onemogućeni ili nikada nisu potvrdili svoju adresu e-pošte); Korisnici s onemogućenim PM-ovima - odabire korisnike kojima su uklonjene privilegije za privatne poruke (obavljeno putem upravljanja korisnicima)';
+$lang['POSTCOUNT'] = 'Broj postova';
 $lang['EQUALS'] = 'Jednako je';
 $lang['GREATER_THAN'] = 'Više';
 $lang['LESS_THAN'] = 'Manje';
-$lang['SEARCH_USERS_POSTCOUNT_EXPLAIN'] = 'Možete tražiti korisnika, na temelju vrijednosti Postcount. Možete pronaći bilo određeno značenje, veći ili manji, nego što je vrijednost ili između dvije vrijednosti. Kako biste potražili, odaberite "dalje", a zatim izložiti početna i konačna vrijednost raspona odvaja se crticom (-), na primjer, 10-15';
+$lang['SEARCH_USERS_POSTCOUNT_EXPLAIN'] = 'Možete tražiti korisnike na temelju vrijednosti broja postova. Možete pretraživati prema određenoj vrijednosti, većoj ili manjoj od vrijednosti ili između dvije vrijednosti. Za pretraživanje raspona, odaberite "Jednako" zatim stavite početnu i završnu vrijednost raspona odvojene crticom (-), npr. 10-15';
 $lang['USERFIELD'] = 'Userfield';
 $lang['SEARCH_USERS_USERFIELD_EXPLAIN'] = 'Pretraživanje korisnika na temelju različitih specijaliziranih područja. Podržani predloške, koristeći zvjezdicom (*).';
 $lang['SEARCH_USERS_LASTVISITED_EXPLAIN'] = 'Možete tražiti korisnika po datumu zadnje prijate, koristeći ovu opciju traži';
@@ -2672,7 +2674,7 @@ $lang['SEARCH_USERS_LANGUAGE_EXPLAIN'] = 'Ovo će prikazati korisnicima koji su 
 $lang['SEARCH_USERS_TIMEZONE_EXPLAIN'] = 'Korisnici koji su izabrali određenu Vremensku zonu u vašem profilu';
 $lang['SEARCH_USERS_STYLE_EXPLAIN'] = 'Prikazuju se korisnicima koji su odabrali određeni stil.';
 $lang['MODERATORS_OF'] = 'Moderatori';
-$lang['SEARCH_USERS_MODERATORS_EXPLAIN'] = 'Pretraživanje korisnika s Модераторством dozvole na određeni forum. Модераторство dozvole recoginised kojeg korisnika dozvole ili u grupi s pravo grupe prava pristupa.';
+$lang['SEARCH_USERS_MODERATORS_EXPLAIN'] = 'Potražite korisnike s dopuštenjima za moderiranje određenog foruma. Dopuštenja za moderiranje prepoznaju se ili po korisničkim dopuštenjima ili po pripadnosti grupi s odgovarajućim dopuštenjima grupe.';
 
 $lang['SEARCH_USERS_NEW'] = '%s dalo rezultat %d(ova). Analizirati <a href="%s">another search</a>.';
 $lang['BANNED'] = 'Zabranjen';
@@ -2727,10 +2729,10 @@ $lang['SITEMAP_OPTIONS'] = 'Mogućnosti';
 $lang['SITEMAP_CREATE'] = 'Izrada / ažuriranje web stranice';
 $lang['SITEMAP_NOTIFY'] = 'Obavijestiti tražilicama o novoj verziji stranice';
 $lang['SITEMAP_WHAT_NEXT'] = 'Što učiniti dalje?';
-$lang['SITEMAP_GOOGLE_1'] = 'Registrirati svoje web stranice u <a href="http://www.google.com/webmasters/" target="_blank">Google Webmaster</a> pomoću Google računa.';
+$lang['SITEMAP_GOOGLE_1'] = 'Registrirati svoje web stranice u <a href="https://www.google.com/webmasters/" target="_blank">Google Webmaster</a> pomoću Google računa.';
 $lang['SITEMAP_GOOGLE_2'] = '<a href="https://www.google.com/webmasters/tools/sitemap-list" target="_blank">Add sitemap</a> stranice ste se registrirali.';
-$lang['SITEMAP_YANDEX_1'] = 'Registrirati svoje web stranice u <a href="http://webmaster.yandex.ru/sites/" target="_blank">Yandex Webmaster</a> koristeći vaš račun Yandex.';
-$lang['SITEMAP_YANDEX_2'] = '<a href="http://webmaster.yandex.ru/site/map.xml" target="_blank">Add sitemap</a> stranice ste se registrirali.';
+$lang['SITEMAP_YANDEX_1'] = 'Registrirati svoje web stranice u <a href="https://webmaster.yandex.ru/sites/" target="_blank">Yandex Webmaster</a> koristeći vaš račun Yandex.';
+$lang['SITEMAP_YANDEX_2'] = '<a href="https://webmaster.yandex.ru/site/map.xml" target="_blank">Add sitemap</a> stranice ste se registrirali.';
 $lang['SITEMAP_BING_1'] = 'Registrirati svoje web stranice u <a href="https://www.bing.com/webmaster/" target="_blank">Bing Webmaster</a> pomoću Microsoftova računa.';
 $lang['SITEMAP_BING_2'] = 'Dodaj svoj sitemap stranice, ste registrirani u postavkama.';
 $lang['SITEMAP_ADD_TITLE'] = 'Dodatne stranice za web stranice';
@@ -2751,7 +2753,7 @@ $lang['ATOM_GLOBAL_FEED'] = 'Globalni feed za sve forume';
 $lang['HASH_INVALID'] = 'Hash %s je nevažeća';
 $lang['HASH_NOT_FOUND'] = 'Izdanje s hash %s nije pronađen';
 
-$lang['TERMS_EMPTY_TEXT'] = '[poravnati=center]tekst ovog stranicu uređuje: [url=http://%s/admin/admin_terms.php]admin/admin_terms.php[/url]. Ova linija može vidjeti samo administratori.[/align]';
+$lang['TERMS_EMPTY_TEXT'] = '[align=center]Tekst ove stranice uređen je na: [url=https://%s/admin/admin_terms.php]admin/admin_terms.php[/url]. Ovu liniju mogu vidjeti samo administratori.[/align]';
 $lang['TERMS_EXPLAIN'] = 'Na ovoj stranici možete postaviti tekst, osnovna pravila resursa prikazani za korisnike.';
 
 $lang['TR_STATS'] = array(
@@ -2808,16 +2810,16 @@ $lang['CAPTCHA'] = 'Provjerite da niste robot';
 $lang['CAPTCHA_WRONG'] = 'Vi ne bi mogli potvrditi da niste robot';
 $lang['CAPTCHA_SETTINGS'] = '<h2>ReCaptcha ne bude potpuno configured</h2><p>if se još nije ostvario tragove, možete to učiniti na <a href="https://www.google.com/recaptcha/admin">https://VSP.google.com/рекапчу/admin</a>.<br />After ste generira ključeve, morate ih staviti u datoteku Library/konfigur.u PHP-u.</p>';
 
-// Emailer
+// Sending email
 $lang['EMAILER_SUBJECT'] = [
-    'EMPTY' => 'Bez Teme',
-    'GROUP_ADDED' => 'Te su dodani u ovu grupu',
-    'GROUP_APPROVED' => 'Vaš upit je odobren od strane',
-    'GROUP_REQUEST' => 'Molimo vas da se pridruže vašoj grupi je postalo',
-    'PRIVMSG_NOTIFY' => 'Stigla je nova privatnu poruku i',
-    'TOPIC_NOTIFY' => 'Tema Obavijest Odgovor %s',
-    'USER_ACTIVATE' => 'Aktivirati svoj račun',
-    'USER_ACTIVATE_PASSWD' => 'Novu lozinku za aktivaciju',
-    'USER_WELCOME' => 'Dobrodošli u %s foruma',
-    'USER_WELCOME_INACTIVE' => 'Dobrodošli u %s foruma',
+    'EMPTY' => 'Bez predmeta',
+    'GROUP_ADDED' => 'Dodani ste u korisničku grupu',
+    'GROUP_APPROVED' => 'Vaš zahtjev za pridruživanje grupi korisnika je odobren',
+    'GROUP_REQUEST' => 'Zahtjev za pridruživanje vašoj korisničkoj grupi',
+    'PRIVMSG_NOTIFY' => 'Nova privatna poruka',
+    'TOPIC_NOTIFY' => 'Obavijest o odgovoru u temi %s',
+    'USER_ACTIVATE' => 'Ponovna aktivacija računa',
+    'USER_ACTIVATE_PASSWD' => 'Potvrđivanje nove lozinke',
+    'USER_WELCOME' => 'Dobrodošli na stranicu %s',
+    'USER_WELCOME_INACTIVE' => 'Dobrodošli na stranicu %s',
 ];

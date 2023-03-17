@@ -12,7 +12,8 @@ $lang['ADMIN'] = 'Kontroliavimą';
 $lang['FORUM'] = 'Forumas';
 $lang['CATEGORY'] = 'Kategorijos';
 $lang['HIDE_CAT'] = 'Paslėpti kategorijos';
-$lang['HIDE_CAT_MESS'] = 'Dalis kategorijos yra paslėptas "funkcijos Šou" &middot; <a href="index.php?sh=1">Show All</a>';
+$lang['HIDE_CAT_MESS'] = 'Kai kurios kategorijos yra paslėptos dėl tinkintų rodymo parinkčių';
+$lang['SHOW_ALL'] = 'Rodyti viską';
 $lang['TOPIC'] = 'Temos';
 $lang['TOPICS'] = 'Temos';
 $lang['TOPICS_SHORT'] = 'Temos';
@@ -82,7 +83,7 @@ $lang['SKYPE_ERROR'] = 'Įvedėte neteisingą Skype login';
 $lang['TWITTER'] = '"Twitter"';
 $lang['TWITTER_ERROR'] = 'Įvedėte neteisingą "Twitter" login';
 
-$lang['FORUM_INDEX'] = '%s Forume Indeksas'; // eg. sitename Forum Index, %s can be removed if you prefer
+$lang['FORUM_INDEX'] = '%s Forume Indeksas'; // e.g. sitename Forum Index, %s can be removed if you prefer
 
 $lang['POST_NEW_TOPIC'] = 'Po naujų temų';
 $lang['POST_NEW_RELEASE'] = 'Rašyti naujų spaudai';
@@ -301,7 +302,7 @@ $lang['SELECT_POSTS_PER_PAGE'] = 'pranešimų per puslapis';
 // Posting/Replying (Not private messaging!)
 $lang['TOPIC_REVIEW'] = 'Temos peržiūra';
 
-$lang['NO_POST_MODE'] = 'Ne po rėžimas'; // If posting.php is called without a mode (newtopic/reply/delete/etc, shouldn't be shown normaly)
+$lang['NO_POST_MODE'] = 'Ne po rėžimas'; // If posting.php is called without a mode (newtopic/reply/delete/etc., shouldn't be shown normally)
 
 $lang['POST_A_NEW_TOPIC'] = 'Po naujų temų';
 $lang['POST_A_REPLY'] = 'Rašyti naujų atsakyti';
@@ -489,7 +490,7 @@ $lang['UNMARK_ALL'] = 'Atžymėti visi';
 $lang['CONFIRM_DELETE_PM'] = 'Ar jūs tikrai norite ištrinti šį pranešimą.';
 $lang['CONFIRM_DELETE_PMS'] = 'Ar jūs tikrai norite ištrinti šiuos pranešimus?';
 
-$lang['INBOX_SIZE'] = 'Savo pašto dėžutę is<br /><b>%d%%</b> visiškai'; // eg. Your Inbox is 50% full
+$lang['INBOX_SIZE'] = 'Savo pašto dėžutę is<br /><b>%d%%</b> visiškai'; // e.g. Your Inbox is 50% full
 $lang['SENTBOX_SIZE'] = 'Jūsų Sentbox is<br /><b>%d%%</b> visiškai';
 $lang['SAVEBOX_SIZE'] = 'Jūsų Savebox is<br /><b>%d%%</b> visiškai';
 
@@ -571,7 +572,7 @@ $lang['YEARS'] = 'Metų';
 $lang['NO_THEMES'] = 'Nėra Temų duomenų bazėje';
 $lang['TIMEZONE'] = 'Laiko juosta';
 $lang['DATE_FORMAT_PROFILE'] = 'Datos formatas';
-$lang['DATE_FORMAT_EXPLAIN'] = 'Kad naudojama sintaksė identiška PHP <a href=\'http://www.php.net/date\' target=\'_other\'>date()</a> funkcija.';
+$lang['DATE_FORMAT_EXPLAIN'] = 'Kad naudojama sintaksė identiška PHP <a href=\'https://www.php.net/manual/en/function.date.php\' target=\'_other\'>date()</a> funkcija.';
 $lang['SIGNATURE'] = 'Parašas';
 $lang['SIGNATURE_EXPLAIN'] = 'Tai yra blokas teksto, kad gali būti pridėta prie pranešimų jūs padaryti. Yra %d simbolių limitas';
 $lang['SIGNATURE_DISABLE'] = 'Parašais pažeidžia forumo taisyklės';
@@ -802,8 +803,8 @@ $lang['BRIEFLY'] = 'Trumpai';
 $lang['NO_SEARCHABLE_FORUMS'] = 'Jūs neturite teises paieška, bet forumo šioje svetainėje.';
 
 $lang['NO_SEARCH_MATCH'] = 'Nėra jokių temų arba pranešimų atitiko jūsų paieškos kriterijus';
-$lang['FOUND_SEARCH_MATCH'] = 'Paieška rado %d rungtynės'; // eg. Search found 1 match
-$lang['FOUND_SEARCH_MATCHES'] = 'Paieška rado %d rungtynes'; // eg. Search found 24 matches
+$lang['FOUND_SEARCH_MATCH'] = 'Paieška rado %d rungtynės'; // e.g. Search found 1 match
+$lang['FOUND_SEARCH_MATCHES'] = 'Paieška rado %d rungtynes'; // e.g. Search found 24 matches
 $lang['TOO_MANY_SEARCH_RESULTS'] = 'Per daug rezultatų, galima rasti, pabandykite tiksliau';
 
 $lang['CLOSE_WINDOW'] = 'Uždaryti Langą';
@@ -1508,9 +1509,9 @@ $lang['ITALIC'] = 'Pasvirasis tekstas: [i]text[/i] (Ctrl+I)';
 $lang['UNDERLINE'] = 'Pabrėžiama tekstas: [u]text[/u] (Ctrl+U)';
 $lang['STRIKEOUT'] = 'Strikeout tekstas: [s]text[/s] (Ctrl+S)';
 $lang['QUOTE_TITLE'] = 'Citata tekstas: [quote]text[/quote] (Ctrl+Q)';
-$lang['IMG_TITLE'] = 'Įterpti atvaizdą: [img]http://image_url[/img] (Ctrl+R)';
+$lang['IMG_TITLE'] = 'Įterpti vaizdą: [img]https://image_url[/img] (Ctrl+R)';
 $lang['URL'] = 'Url';
-$lang['URL_TITLE'] = 'Įterpti URL: [url]http://url[/url] arba [url=http://url]URL text[/url] (Ctrl+W)';
+$lang['URL_TITLE'] = 'Įterpti URL: [url]https://url[/url] arba [url=https://url]URL tekstas[/url] (Ctrl+W)';
 $lang['CODE_TITLE'] = 'Kodas: ekranas: [code]code[/code] (Ctrl+K)';
 $lang['LIST'] = 'Sąrašas';
 $lang['LIST_TITLE'] = 'Sąrašas: [list]text[/list] (Ctrl+l)';
@@ -2056,7 +2057,7 @@ $lang['TRACKER_STATS'] = 'Statistika tracker';
 $lang['WHOIS_INFO'] = 'Informacijos apie IP adresą';
 $lang['SHOW_MOD_HOME_PAGE'] = 'Rodyti moderatoriai, kad index.php';
 $lang['PREMOD_HELP'] = '<h4><span class="tor-icon tor-dup">&#8719;</span> iš Anksto moderation</h4> <h6>If jūs neturite paskirstymo statusą, v, #, ar T, šiame skirsnyje, įskaitant poskirsniuose, paskirstymo automatiškai gauti šį status</h6>';
-$lang['TOR_COMMENT'] = '<h4>Commentary statusas distribution</h4> <h6>Comment sėkmingai leidžia jums nurodyti releasers klaidų. Kai nedooformlennyh būsenos releasers prieinama forma atsako korekcijos release</h6>';
+$lang['TOR_COMMENT'] = '<h4>Komentaras apie platinimo būseną</h4> <h6>Komentaras leidžia nurodyti leidėjui padarytas klaidas. Jei būsenos neužbaigtos, leidimo tvarkyklei pateikiama atsakymo forma, kad ištaisytų</h6>leidimą';
 $lang['SEED_BONUS_ADD'] = '<h4>Adding sėklos bonus </h4> <h6> Skaičiaus pasiskirstymas yra išdalinta vartotojo ir dydžio premijas už juos (įkrovimo laikas valandą) </h6>';
 $lang['SEED_BONUS_RELEASE'] = 'N-skaičius spaudai';
 $lang['SEED_BONUS_POINTS'] = 'premijas per valandą';
@@ -2084,7 +2085,7 @@ $lang['ATTACH_NUMBER_SETTINGS'] = 'Tvirtinimo Numeris Parametrai';
 $lang['ATTACH_OPTIONS_SETTINGS'] = 'Tvirtinimo Funkcijos';
 
 $lang['UPLOAD_DIRECTORY'] = 'Įkėlimo Kataloge';
-$lang['UPLOAD_DIRECTORY_EXPLAIN'] = 'Įveskite santykinis kelio iš jūsų TorrentPier įrengimo įkelti Priedų katalogą. Pavyzdžiui, enter "files", jei jūsų TorrentPier Įrengimas yra įsikūręs ne http://www.yourdomain.com/torrentpier ir priedo Įkelti Katalogas yra čia http://www.yourdomain.com/torrentpier/files.';
+$lang['UPLOAD_DIRECTORY_EXPLAIN'] = 'Įveskite santykinis kelio iš jūsų TorrentPier įrengimo įkelti Priedų katalogą. Pavyzdžiui, enter "files", jei jūsų TorrentPier Įrengimas yra įsikūręs ne https://www.yourdomain.com/torrentpier ir priedo Įkelti Katalogas yra čia https://www.yourdomain.com/torrentpier/files.';
 $lang['ATTACH_IMG_PATH'] = 'Tvirtinimo Parašėte Piktogramą';
 $lang['ATTACH_IMG_PATH_EXPLAIN'] = 'Šis paveikslėlis yra rodomas šalia Priedą Nuorodos į atskirus Skelbimus. Palikti šį lauką tuščią jeigu nenorite piktograma būtų rodoma. Šis Parametras bus pakeisti Parametrus Pratęsimo Grupių Valdymas.';
 $lang['ATTACH_TOPIC_ICON'] = 'Tvirtinimo Tema Piktogramos';
@@ -2123,7 +2124,7 @@ $lang['EMPTY_FILE_ENTRY'] = 'Tuščias Įrašo';
 
 // Attachments -> Sync
 $lang['SYNC_THUMBNAIL_RESETTED'] = 'Vaizdelis resetted Arešto: %s'; // replace %s with physical Filename
-$lang['ATTACH_SYNC_FINISHED'] = 'Tvirtinimo Syncronization Baigtas.';
+$lang['ATTACH_SYNC_FINISHED'] = 'Priedo sinchronizavimas baigtas.';
 $lang['SYNC_TOPICS'] = 'Sync Temos';
 $lang['SYNC_POSTS'] = 'Sync Pranešimų';
 $lang['SYNC_THUMBNAILS'] = 'Sync Miniatiūros';
@@ -2385,6 +2386,7 @@ $lang['CRON_NEXT_RUN'] = 'Kitą Paleisti';
 $lang['CRON_RUN_COUNT'] = 'Veikia';
 $lang['CRON_MANAGE'] = 'Valdyti';
 $lang['CRON_OPTIONS'] = 'Cron funkcijos';
+$lang['CRON_DISABLED_WARNING'] = 'Įspėjimas! Cron scenarijų vykdymas išjungtas. Norėdami jį įjungti, nustatykite kintamąjį APP_CRON_ENABLED.';
 
 $lang['CRON_ENABLED'] = 'Cron įjungtas';
 $lang['CRON_CHECK_INTERVAL'] = 'Cron tikrinimo interval (sek)';
@@ -2574,7 +2576,7 @@ $lang['RELEASES'] = 'Spaudai';
 
 $lang['BACK'] = 'Atgal';
 $lang['ERROR_FORM'] = 'Neteisingas laukų';
-$lang['RELEASE_WELCOME'] = 'Pleae užpildykite releae forma';
+$lang['RELEASE_WELCOME'] = 'Prašome užpildyti atleidimo formą';
 $lang['NEW_RELEASE'] = 'Nauja versija';
 $lang['NEXT'] = 'Toliau';
 $lang['OTHER'] = 'Kita';
@@ -2582,8 +2584,8 @@ $lang['OTHER'] = 'Kita';
 $lang['TPL_EMPTY_FIELD'] = 'Jūs turite užpildyti lauką <b>%s</b>';
 $lang['TPL_EMPTY_SEL'] = 'Turite pasirinkti <b>%s</b>';
 $lang['TPL_NOT_NUM'] = '<b>%s</b> - Ne num';
-$lang['TPL_NOT_URL'] = '<b>%s</b> - Turi būti http:// URL';
-$lang['TPL_NOT_IMG_URL'] = '<b>%s</b> - Turi būti http:// IMG_URL';
+$lang['TPL_NOT_URL'] = '<b>%s</b> – turi būti https:// URL';
+$lang['TPL_NOT_IMG_URL'] = '<b>%s</b> – Turi būti https:// IMG_URL';
 $lang['TPL_PUT_INTO_SUBJECT'] = 'įdėti į temą';
 $lang['TPL_POSTER'] = 'plakatas';
 $lang['TPL_REQ_FILLING'] = 'būtina užpildyti';
@@ -2597,15 +2599,15 @@ $lang['TPL_SPOILER'] = 'spoileris';
 $lang['TPL_IN_LINE'] = 'toje pačioje eilutėje';
 $lang['TPL_HEADER_ONLY'] = 'tik pavadinimas';
 
-$lang['SEARCH_INVALID_USERNAME'] = 'Neteisingas vartotojo vardas įrašytas į Paieškos';
-$lang['SEARCH_INVALID_EMAIL'] = 'Neteisingas el. pašto adresą įvedėte į Paieškos';
-$lang['SEARCH_INVALID_IP'] = 'Neteisingas IP adresas, įrašytas į Paieškos';
-$lang['SEARCH_INVALID_GROUP'] = 'Neteisingas Grupė atvyko į Paieškos';
-$lang['SEARCH_INVALID_RANK'] = 'Neteisingas reitingas įvesti Paieškos';
-$lang['SEARCH_INVALID_DATE'] = 'Neteisingas Datos, įrašytos į Paieškos';
-$lang['SEARCH_INVALID_POSTCOUNT'] = 'Neteisingas Post Count įvesti Paieškos';
+$lang['SEARCH_INVALID_USERNAME'] = 'Paieškoje įvestas neteisingas vartotojo vardas';
+$lang['SEARCH_INVALID_EMAIL'] = 'Įvestas neteisingas el. pašto adresas paieškai';
+$lang['SEARCH_INVALID_IP'] = 'Ieškant įvestas neteisingas IP adresas';
+$lang['SEARCH_INVALID_GROUP'] = 'Netinkama grupė įvesta paieškai';
+$lang['SEARCH_INVALID_RANK'] = 'Paieškoje įvestas neteisingas reitingas';
+$lang['SEARCH_INVALID_DATE'] = 'Įvesta neteisinga paieškos data';
+$lang['SEARCH_INVALID_POSTCOUNT'] = 'Paieškoje įvestas neteisingas pranešimų skaičius';
 $lang['SEARCH_INVALID_USERFIELD'] = 'Neteisingas Userfield įvestus duomenis';
-$lang['SEARCH_INVALID_LASTVISITED'] = 'Neteisingas įvesti duomenys Paskutinės paieškos Lankėsi';
+$lang['SEARCH_INVALID_LASTVISITED'] = 'Įvesta neteisinga paskutinės lankytos paieškos data';
 $lang['SEARCH_INVALID_LANGUAGE'] = 'Neteisingas Pasirinktą Kalbą';
 $lang['SEARCH_INVALID_TIMEZONE'] = 'Neteisingas Pasirinktą Laiko Juostą';
 $lang['SEARCH_INVALID_MODERATORS'] = 'Neteisingas Išrinktas Forumas';
@@ -2656,12 +2658,12 @@ $lang['SEARCH_USERS_GROUPS_EXPLAIN'] = 'Peržiūrėti visus nariai pasirinktą g
 $lang['SEARCH_USERS_RANKS_EXPLAIN'] = 'Peržiūrėti visus vežėjų pasirinktą reitingas.';
 $lang['BANNED_USERS'] = 'Uždrausta Vartotojai';
 $lang['DISABLED_USERS'] = 'Neįgaliesiems';
-$lang['SEARCH_USERS_MISC_EXPLAIN'] = 'Administratoriai - Visi vartotojai su Administratoriaus įgaliojimai; Moderatoriai - Visų forumo moderatoriai; Uždrausta Vartotojai - Visi abonementus, kurie buvo uždraustas dėl šių forumų; Neįgaliems Vartotojams - Visiems vartotojams su negalia sąskaitų (arba rankiniu būdu su negalia arba niekada patikrinti savo elektroninio pašto adresas); Vartotojams su negalia PMs - Parenka vartotojai, kurie yra Privačias Žinutes priviliges pašalintas (Padaryti per Vartotojo Valdymo)';
-$lang['POSTCOUNT'] = 'Postcount';
+$lang['SEARCH_USERS_MISC_EXPLAIN'] = 'Administratoriai – visi vartotojai, turintys administratoriaus teises; Moderatoriai – visi forumo moderatoriai; Uždrausti vartotojai – visos paskyros, kurios buvo uždraustos šiuose forumuose; Neįgalūs vartotojai – visi vartotojai, kurių paskyros išjungtos (rankiniu būdu išjungtos arba niekada nepatvirtino savo el. pašto adreso); Vartotojai su išjungtais PM – pasirenka vartotojus, kuriems pašalintos privačių pranešimų privilegijos (atliekama naudojant naudotojų valdymą)';
+$lang['POSTCOUNT'] = 'Pašto skaičius';
 $lang['EQUALS'] = 'Lygus';
 $lang['GREATER_THAN'] = 'Didesnis nei';
 $lang['LESS_THAN'] = 'Mažiau nei';
-$lang['SEARCH_USERS_POSTCOUNT_EXPLAIN'] = 'Jūs galite ieškoti vartotojų, remiantis Postcount vertę. Galite ieškoti pagal konkrečią vertę, yra didesnis nei arba mažiau nei vertės, arba tarp dviejų verčių. Daryti asortimentą paiešką, pasirinkite "Lygu" tada įdėti pradžios ir pabaigos verčių diapazonas atskirtas brūkšneliu (-), pvz., 10-15';
+$lang['SEARCH_USERS_POSTCOUNT_EXPLAIN'] = 'Galite ieškoti vartotojų pagal įrašų skaičių. Galite ieškoti pagal konkrečią reikšmę, didesnę ar mažesnę už reikšmę arba tarp dviejų reikšmių. Norėdami atlikti diapazono paiešką, pasirinkite „Equals“, tada įveskite diapazono pradžios ir pabaigos reikšmes, atskirtas brūkšneliu (-), pvz., 10–15';
 $lang['USERFIELD'] = 'Userfield';
 $lang['SEARCH_USERS_USERFIELD_EXPLAIN'] = 'Ieškoti vartotojų, remiantis įvairių profilio srityse. Wildcards palaikomi naudojant asteriksas (*).';
 $lang['SEARCH_USERS_LASTVISITED_EXPLAIN'] = 'Jūs galite ieškoti vartotojams, remiantis jų paskutinio prisijungimo data naudojantis šia paieška parinktis';
@@ -2669,7 +2671,7 @@ $lang['SEARCH_USERS_LANGUAGE_EXPLAIN'] = 'Rodys vartotojams, kuriems pasirinkote
 $lang['SEARCH_USERS_TIMEZONE_EXPLAIN'] = 'Vartotojai, kurie yra pasirinkę konkretaus laiko juosta savo profilio';
 $lang['SEARCH_USERS_STYLE_EXPLAIN'] = 'Ekranas vartotojai, kurie yra pasirinkę konkretaus stiliaus.';
 $lang['MODERATORS_OF'] = 'Moderatoriai';
-$lang['SEARCH_USERS_MODERATORS_EXPLAIN'] = 'Ieškoti vartotojai, turintys Atitinkamus leidimus, į specialią forume. Atitinkamus leidimus yra recoginised arba Vartotojo Teises arba yra Grupė, turinti teisę Grupė Permssions.';
+$lang['SEARCH_USERS_MODERATORS_EXPLAIN'] = 'Ieškokite naudotojų, turinčių konkretaus forumo moderavimo leidimus. Moderavimo leidimai atpažįstami pagal vartotojo leidimus arba priklausant grupei su tinkamais grupės leidimais.';
 
 $lang['SEARCH_USERS_NEW'] = '%s davė %d rezultatai (- ų). Atlikti <a href="%s">another search</a>.';
 $lang['BANNED'] = 'Uždraustas';
@@ -2723,10 +2725,10 @@ $lang['SITEMAP_OPTIONS'] = 'Funkcijos';
 $lang['SITEMAP_CREATE'] = 'Sukurti / atnaujinti sitemap';
 $lang['SITEMAP_NOTIFY'] = 'Pranešti apie paieškos nauja versija, sitemap';
 $lang['SITEMAP_WHAT_NEXT'] = 'Ką daryti toliau?';
-$lang['SITEMAP_GOOGLE_1'] = 'Užregistruokite savo svetainę <a href="http://www.google.com/webmasters/" target="_blank">Google Webmaster</a> naudodami savo "Google" paskyros.';
+$lang['SITEMAP_GOOGLE_1'] = 'Užregistruokite savo svetainę <a href="https://www.google.com/webmasters/" target="_blank">Google Webmaster</a> naudodami savo "Google" paskyros.';
 $lang['SITEMAP_GOOGLE_2'] = '<a href="https://www.google.com/webmasters/tools/sitemap-list" target="_blank">Add sitemap</a> svetainės užsiregistravote.';
-$lang['SITEMAP_YANDEX_1'] = 'Užregistruokite savo svetainę <a href="http://webmaster.yandex.ru/sites/" target="_blank">Yandex Webmaster</a>, naudojant jūsų Yandex sąskaitą.';
-$lang['SITEMAP_YANDEX_2'] = '<a href="http://webmaster.yandex.ru/site/map.xml" target="_blank">Add sitemap</a> svetainės užsiregistravote.';
+$lang['SITEMAP_YANDEX_1'] = 'Užregistruokite savo svetainę <a href="https://webmaster.yandex.ru/sites/" target="_blank">Yandex Webmaster</a>, naudojant jūsų Yandex sąskaitą.';
+$lang['SITEMAP_YANDEX_2'] = '<a href="https://webmaster.yandex.ru/site/map.xml" target="_blank">Add sitemap</a> svetainės užsiregistravote.';
 $lang['SITEMAP_BING_1'] = 'Užregistruokite savo svetainę <a href="https://www.bing.com/webmaster/" target="_blank">Bing Webmaster</a> naudodami savo "Microsoft" abonementą.';
 $lang['SITEMAP_BING_2'] = 'Pridėti sitemap svetainėje, galite registruoti savo nustatymus.';
 $lang['SITEMAP_ADD_TITLE'] = 'Papildomi puslapiai sitemap';
@@ -2747,7 +2749,7 @@ $lang['ATOM_GLOBAL_FEED'] = 'Visuotinis informacijos šaltinis visiems forumuose
 $lang['HASH_INVALID'] = 'Maišos %s negalioja';
 $lang['HASH_NOT_FOUND'] = 'Išleidimo su maišos %s nerasta';
 
-$lang['TERMS_EMPTY_TEXT'] = '[align=center]tekstas šiame puslapyje yra redagavo: [url=http://%s/admin/admin_terms.php]admin/admin_terms.php[/url]. Ši linija gali matyti tik administratoriai.[/align]';
+$lang['TERMS_EMPTY_TEXT'] = '[align=center]Šio puslapio tekstas redaguojamas adresu: [url=https://%s/admin/admin_terms.php]admin/admin_terms.php[/url]. Ši eilutė gali matyti tik administratorius.[/align]';
 $lang['TERMS_EXPLAIN'] = 'Šiame puslapyje jūs galite nurodyti tekstą iš pagrindinių taisyklių, ištekliai rodomas naudotojams.';
 
 $lang['TR_STATS'] = array(
@@ -2804,16 +2806,16 @@ $lang['CAPTCHA'] = 'Patikrinkite, kad jūs esate ne robotas';
 $lang['CAPTCHA_WRONG'] = 'Jūs negalėjo patvirtinti, kad jūs esate ne robotas';
 $lang['CAPTCHA_SETTINGS'] = '<h2>ReCaptcha ne visiškai configured</h2><p>if jūs neturite jau sukurtas klavišus, galite tai padaryti dėl <a href="https://www.google.com/recaptcha/admin">https://www."google".com/recaptcha/admin</a>.<br />After galite generuoti klavišus, jums reikia įdėti juos į failą, biblioteka/config.php.</p>';
 
-// Emailer
+// Sending email
 $lang['EMAILER_SUBJECT'] = [
-    'EMPTY' => 'Ne Tema',
-    'GROUP_ADDED' => 'Jums buvo pridėta prie kokios nors vartotojų grupės',
-    'GROUP_APPROVED' => 'Jūsų prašymas buvo patvirtintas',
-    'GROUP_REQUEST' => 'Prašymą prisijungti prie savo grupės ir buvo padaryta',
-    'PRIVMSG_NOTIFY' => 'Naują asmeninį Pranešimą atvyko',
-    'TOPIC_NOTIFY' => 'Atsakymo Tema Pranešimo %s',
-    'USER_ACTIVATE' => 'Aktyvuoti savo sąskaitą',
-    'USER_ACTIVATE_PASSWD' => 'Naują slaptažodį įjungimo',
-    'USER_WELCOME' => 'Sveiki atvykę į %s Forumuose',
-    'USER_WELCOME_INACTIVE' => 'Sveiki atvykę į %s Forumuose',
+    'EMPTY' => 'Nėra temos',
+    'GROUP_ADDED' => 'Jūs buvote įtraukti į vartotojų grupę',
+    'GROUP_APPROVED' => 'Jūsų prašymas prisijungti prie vartotojų grupės buvo patenkintas',
+    'GROUP_REQUEST' => 'Prašymas prisijungti prie jūsų vartotojų grupės',
+    'PRIVMSG_NOTIFY' => 'Nauja asmenine žinute',
+    'TOPIC_NOTIFY' => 'Pranešimas apie atsakymą gijoje %s',
+    'USER_ACTIVATE' => 'Paskyros aktyvinimas iš naujo',
+    'USER_ACTIVATE_PASSWD' => 'Naujo slaptažodžio patvirtinimas',
+    'USER_WELCOME' => 'Sveiki atvykę į svetainę %s',
+    'USER_WELCOME_INACTIVE' => 'Sveiki atvykę į svetainę %s',
 ];

@@ -12,7 +12,8 @@ $lang['ADMIN'] = 'Administrarea';
 $lang['FORUM'] = 'Forum';
 $lang['CATEGORY'] = 'Categorie';
 $lang['HIDE_CAT'] = 'Ascunde categorii';
-$lang['HIDE_CAT_MESS'] = 'Parte din categoriile sunt ascunse "opțiuni Show" &middot; <a href="index.php?sh=1">Show All</a>';
+$lang['HIDE_CAT_MESS'] = 'Unele categorii sunt ascunse de opțiuni de afișare personalizate';
+$lang['SHOW_ALL'] = 'Arata tot';
 $lang['TOPIC'] = 'Subiect';
 $lang['TOPICS'] = 'Subiecte';
 $lang['TOPICS_SHORT'] = 'Subiecte';
@@ -82,7 +83,7 @@ $lang['SKYPE_ERROR'] = 'Ai intrat într-un invalid login Skype';
 $lang['TWITTER'] = 'Twitter';
 $lang['TWITTER_ERROR'] = 'Ai intrat într-un invalid de autentificare Twitter';
 
-$lang['FORUM_INDEX'] = '%s Forum Index'; // eg. sitename Forum Index, %s can be removed if you prefer
+$lang['FORUM_INDEX'] = '%s Forum Index'; // e.g. sitename Forum Index, %s can be removed if you prefer
 
 $lang['POST_NEW_TOPIC'] = 'Mesaj subiect nou';
 $lang['POST_NEW_RELEASE'] = 'Postare noua versiune';
@@ -301,7 +302,7 @@ $lang['SELECT_POSTS_PER_PAGE'] = 'mesaje pe pagina';
 // Posting/Replying (Not private messaging!)
 $lang['TOPIC_REVIEW'] = 'Subiect comentariu';
 
-$lang['NO_POST_MODE'] = 'Nici un post de modul selectat'; // If posting.php is called without a mode (newtopic/reply/delete/etc, shouldn't be shown normaly)
+$lang['NO_POST_MODE'] = 'Nici un post de modul selectat'; // If posting.php is called without a mode (newtopic/reply/delete/etc., shouldn't be shown normally)
 
 $lang['POST_A_NEW_TOPIC'] = 'Mesaj subiect nou';
 $lang['POST_A_REPLY'] = 'Post nou răspuns';
@@ -489,7 +490,7 @@ $lang['UNMARK_ALL'] = 'Anulați marcarea casetei toate';
 $lang['CONFIRM_DELETE_PM'] = 'Ești sigur că doriți să ștergeți acest mesaj?';
 $lang['CONFIRM_DELETE_PMS'] = 'Ești sigur că doriți să ștergeți aceste mesaje?';
 
-$lang['INBOX_SIZE'] = 'Inbox plin is<br /><b>%d%%</b>'; // eg. Your Inbox is 50% full
+$lang['INBOX_SIZE'] = 'Inbox plin is<br /><b>%d%%</b>'; // e.g. Your Inbox is 50% full
 $lang['SENTBOX_SIZE'] = 'Ta Sentbox is<br /><b>%d%%</b> plin';
 $lang['SAVEBOX_SIZE'] = 'Ta Savebox is<br /><b>%d%%</b> plin';
 
@@ -571,7 +572,7 @@ $lang['YEARS'] = 'Ani';
 $lang['NO_THEMES'] = 'Nu Temele În baza de date';
 $lang['TIMEZONE'] = 'Fusul orar';
 $lang['DATE_FORMAT_PROFILE'] = 'Formatul datei';
-$lang['DATE_FORMAT_EXPLAIN'] = 'Sintaxa utilizată este identică cu PHP <a href=\'http://www.php.net/date\' target=\'_other\'>date()</a> funcție.';
+$lang['DATE_FORMAT_EXPLAIN'] = 'Sintaxa utilizată este identică cu PHP <a href=\'https://www.php.net/manual/en/function.date.php\' target=\'_other\'>date()</a> funcție.';
 $lang['SIGNATURE'] = 'Semnătura';
 $lang['SIGNATURE_EXPLAIN'] = 'Acesta este un bloc de text care poate fi adăugat la posturile pe care le face. Există o %d limita de caractere';
 $lang['SIGNATURE_DISABLE'] = 'A semnat pentru încălcare de reguli pe forum';
@@ -802,8 +803,8 @@ $lang['BRIEFLY'] = 'Pe scurt';
 $lang['NO_SEARCHABLE_FORUMS'] = 'Nu aveți permisiuni pentru a căuta orice forum pe acest site.';
 
 $lang['NO_SEARCH_MATCH'] = 'Nu există subiecte sau mesaje întâlnit criteriilor dumneavoastră de căutare';
-$lang['FOUND_SEARCH_MATCH'] = 'Căutarea a găsit %d meci'; // eg. Search found 1 match
-$lang['FOUND_SEARCH_MATCHES'] = 'Căutarea a găsit %d meciuri'; // eg. Search found 24 matches
+$lang['FOUND_SEARCH_MATCH'] = 'Căutarea a găsit %d meci'; // e.g. Search found 1 match
+$lang['FOUND_SEARCH_MATCHES'] = 'Căutarea a găsit %d meciuri'; // e.g. Search found 24 matches
 $lang['TOO_MANY_SEARCH_RESULTS'] = 'Prea multe rezultate ar putea fi găsit, vă rugăm să încercați pentru a fi mai specific';
 
 $lang['CLOSE_WINDOW'] = 'Închideți Fereastra';
@@ -1508,9 +1509,9 @@ $lang['ITALIC'] = 'Italic text: [i]text[/i] (Ctrl+I)';
 $lang['UNDERLINE'] = 'Subliniere text: [u]text[/u] (Ctrl+U)';
 $lang['STRIKEOUT'] = 'Ratari text: [s]text[/s] (Ctrl+S)';
 $lang['QUOTE_TITLE'] = 'Text citat: [quote]text[/quote] (Ctrl+Q)';
-$lang['IMG_TITLE'] = 'Inserare imagine: [img]http://image_url[/img] (Ctrl+R)';
+$lang['IMG_TITLE'] = 'Inserați imaginea: [img]https://image_url[/img] (Ctrl+R)';
 $lang['URL'] = 'Url';
-$lang['URL_TITLE'] = 'Introduceți URL-ul: [url]http://url[/url] sau [url=http://url]URL text[/url] (Ctrl+W)';
+$lang['URL_TITLE'] = 'Inserați adresa URL: [url]https://url[/url] sau [url=https://url]text URL[/url] (Ctrl+W)';
 $lang['CODE_TITLE'] = 'Cod display: [code]code[/code] (Ctrl+K)';
 $lang['LIST'] = 'Lista';
 $lang['LIST_TITLE'] = 'Lista: [list]text[/list] (Ctrl+l)';
@@ -2056,7 +2057,7 @@ $lang['TRACKER_STATS'] = 'Statisticile pe tracker';
 $lang['WHOIS_INFO'] = 'Informații despre adresa IP';
 $lang['SHOW_MOD_HOME_PAGE'] = 'Spectacol pe la moderatori index.php';
 $lang['PREMOD_HELP'] = '<h4><span class="tor-icon tor-dup">&#8719;</span> Pre-moderation</h4> <h6>If nu au distribuții la statutul de v, #, sau T în această secțiune, inclusiv subcapitole, distribuția va primi automat acest status</h6>';
-$lang['TOR_COMMENT'] = '<h4>Commentary privind statutul distribution</h4> <h6>Comment cu succes vă permite să specificați declanșatoare la greșeli. Când nedooformlennyh stări declanșatoare disponibile formă de răspuns de corecție release</h6>';
+$lang['TOR_COMMENT'] = '<h4>Comentariu despre starea unei distribuții</h4> <h6>Comentariul vă permite să subliniați erorile făcute la eliberator. Dacă stările sunt incomplete, un formular de răspuns la eliberare este disponibil pentru managerul de ediție pentru a corecta ediția</h6>';
 $lang['SEED_BONUS_ADD'] = '<h4>Adding semințe bonus </h4> <h6> Număr de distribuții sunt înmânate de către utilizator și dimensiunea de bonusuri pentru ei (de încărcare de ori pe oră) </h6>';
 $lang['SEED_BONUS_RELEASE'] = 'să N-numărul de comunicate de';
 $lang['SEED_BONUS_POINTS'] = 'bonusuri într-o oră';
@@ -2084,7 +2085,7 @@ $lang['ATTACH_NUMBER_SETTINGS'] = 'Atașament Număr De Setări';
 $lang['ATTACH_OPTIONS_SETTINGS'] = 'Opțiuni De Fixare';
 
 $lang['UPLOAD_DIRECTORY'] = 'Incarca Director';
-$lang['UPLOAD_DIRECTORY_EXPLAIN'] = 'Introduceți calea relativă la TorrentPier de instalare de echipamente încărca director. De exemplu, introduceți "fișiere" dacă TorrentPier de Instalare este situat la http://www.yourdomain.com/torrentpier și Atașament Incarca Director este situat la http://www.yourdomain.com/torrentpier/files.';
+$lang['UPLOAD_DIRECTORY_EXPLAIN'] = 'Introduceți calea relativă la TorrentPier de instalare de echipamente încărca director. De exemplu, introduceți "fișiere" dacă TorrentPier de Instalare este situat la https://www.yourdomain.com/torrentpier și Atașament Incarca Director este situat la https://www.yourdomain.com/torrentpier/files.';
 $lang['ATTACH_IMG_PATH'] = 'Atașament Postarea Icon';
 $lang['ATTACH_IMG_PATH_EXPLAIN'] = 'Această Imagine este afișată lângă Atașamentul Link-uri la Postări individuale. Lăsați acest câmp gol, dacă nu doriți o pictogramă pentru a fi afișate. Această Setare va fi suprascrise de Setările în Extensie Grupuri de Management.';
 $lang['ATTACH_TOPIC_ICON'] = 'Atașament Subiect Icon';
@@ -2123,7 +2124,7 @@ $lang['EMPTY_FILE_ENTRY'] = 'Gol Fișierul De Intrare';
 
 // Attachments -> Sync
 $lang['SYNC_THUMBNAIL_RESETTED'] = 'Miniatură resetat pentru Fixare: %s'; // replace %s with physical Filename
-$lang['ATTACH_SYNC_FINISHED'] = 'Atașament Sincronizare A Terminat.';
+$lang['ATTACH_SYNC_FINISHED'] = 'Sincronizarea atașamentului s-a terminat.';
 $lang['SYNC_TOPICS'] = 'Traducerea Subiecte';
 $lang['SYNC_POSTS'] = 'Traducerea Posturi';
 $lang['SYNC_THUMBNAILS'] = 'Traducerea Miniaturi';
@@ -2385,6 +2386,7 @@ $lang['CRON_NEXT_RUN'] = 'Următoarea Cursă';
 $lang['CRON_RUN_COUNT'] = 'Ruleaza';
 $lang['CRON_MANAGE'] = 'Gestiona';
 $lang['CRON_OPTIONS'] = 'Cron opțiuni';
+$lang['CRON_DISABLED_WARNING'] = 'Avertizare! Rularea scripturilor cron este dezactivată. Pentru a-l activa, setați variabila APP_CRON_ENABLED.';
 
 $lang['CRON_ENABLED'] = 'Cron activat';
 $lang['CRON_CHECK_INTERVAL'] = 'Cron interval de verificare (sec)';
@@ -2574,7 +2576,7 @@ $lang['RELEASES'] = 'Comunicate de';
 
 $lang['BACK'] = 'Înapoi';
 $lang['ERROR_FORM'] = 'Invalid domenii';
-$lang['RELEASE_WELCOME'] = 'Pleae umple în releae forma';
+$lang['RELEASE_WELCOME'] = 'Vă rugăm să completați formularul de eliberare';
 $lang['NEW_RELEASE'] = 'Noua versiune';
 $lang['NEXT'] = 'Continua';
 $lang['OTHER'] = 'Alte';
@@ -2582,8 +2584,8 @@ $lang['OTHER'] = 'Alte';
 $lang['TPL_EMPTY_FIELD'] = 'Trebuie să completați câmpul <b>%s</b>';
 $lang['TPL_EMPTY_SEL'] = 'Trebuie să selectați <b>%s</b>';
 $lang['TPL_NOT_NUM'] = '<b>%s</b> - Nu num';
-$lang['TPL_NOT_URL'] = '<b>%s</b> - Trebuie să fie URL http:// ';
-$lang['TPL_NOT_IMG_URL'] = '<b>%s</b> - Trebuie să fie http:// IMG_URL';
+$lang['TPL_NOT_URL'] = '<b>%s</b> - Trebuie să fie https:// URL';
+$lang['TPL_NOT_IMG_URL'] = '<b>%s</b> - Trebuie să fie https:// IMG_URL';
 $lang['TPL_PUT_INTO_SUBJECT'] = 'pune în subiect';
 $lang['TPL_POSTER'] = 'poster';
 $lang['TPL_REQ_FILLING'] = 'necesită umplerea';
@@ -2597,15 +2599,15 @@ $lang['TPL_SPOILER'] = 'spoiler';
 $lang['TPL_IN_LINE'] = 'în aceeași linie';
 $lang['TPL_HEADER_ONLY'] = 'numai într-un titlu';
 
-$lang['SEARCH_INVALID_USERNAME'] = 'Numele de utilizator introdus pentru Căutare';
-$lang['SEARCH_INVALID_EMAIL'] = 'Invalid adresa de e-mail introduse pentru a Căuta';
-$lang['SEARCH_INVALID_IP'] = 'Invalid IP address introdus pentru Căutare';
-$lang['SEARCH_INVALID_GROUP'] = 'Invalid de Grupa introdus pentru Căutare';
-$lang['SEARCH_INVALID_RANK'] = 'Invalid de gradul introdus pentru Căutare';
-$lang['SEARCH_INVALID_DATE'] = 'Invalid Data introdus pentru Căutare';
-$lang['SEARCH_INVALID_POSTCOUNT'] = 'Invalid Post Count introdus pentru Căutare';
+$lang['SEARCH_INVALID_USERNAME'] = 'Nume de utilizator introdus pentru căutare nevalid';
+$lang['SEARCH_INVALID_EMAIL'] = 'Adresă de e-mail nevalidă introdusă pentru căutare';
+$lang['SEARCH_INVALID_IP'] = 'Adresă IP nevalidă introdusă pentru căutare';
+$lang['SEARCH_INVALID_GROUP'] = 'Grup nevalid introdus pentru căutare';
+$lang['SEARCH_INVALID_RANK'] = 'Clasament nevalid introdus pentru căutare';
+$lang['SEARCH_INVALID_DATE'] = 'S-a introdus o dată nevalidă pentru căutare';
+$lang['SEARCH_INVALID_POSTCOUNT'] = 'Numărul de postări introdus pentru căutare nu este valid';
 $lang['SEARCH_INVALID_USERFIELD'] = 'Invalid camp utilizator datele introduse';
-$lang['SEARCH_INVALID_LASTVISITED'] = 'Date invalide intrat pentru Ultima Vizitat de căutare';
+$lang['SEARCH_INVALID_LASTVISITED'] = 'Data introdusă nevalidă pentru ultima căutare vizitată';
 $lang['SEARCH_INVALID_LANGUAGE'] = 'Invalid Limba Selectată';
 $lang['SEARCH_INVALID_TIMEZONE'] = 'Invalid De Fus Orar Selectat';
 $lang['SEARCH_INVALID_MODERATORS'] = 'Invalid Forum Selectate';
@@ -2656,12 +2658,12 @@ $lang['SEARCH_USERS_GROUPS_EXPLAIN'] = 'Vezi toți membrii grupului selectat.';
 $lang['SEARCH_USERS_RANKS_EXPLAIN'] = 'Vezi toate mijloacele de transport selectat de rang.';
 $lang['BANNED_USERS'] = 'Interzis Utilizatorilor';
 $lang['DISABLED_USERS'] = 'Utilizatorii Cu Handicap';
-$lang['SEARCH_USERS_MISC_EXPLAIN'] = 'Administratorii - Toți utilizatorii cu Administratorul puteri; Moderatori - moderatori de forum; Interzis Utilizatori - Toate conturile care au fost interzise pe aceste forumuri; Utilizatorii cu Handicap - Toți utilizatorii cu conturi cu handicap (fie manual dezactivat sau nu verificat adresa de e-mail); Utilizatorii cu handicap PMs - Selectează utilizatorii care au Mesaje Private privilegiile eliminat (efectuate prin Management de Utilizator)';
-$lang['POSTCOUNT'] = 'Postcount';
+$lang['SEARCH_USERS_MISC_EXPLAIN'] = 'Administratori - Toți utilizatorii cu atribuții de Administrator; Moderatori - Toți moderatorii forumului; Utilizatori interziși - Toate conturile care au fost interzise pe aceste forumuri; Utilizatori dezactivați - Toți utilizatorii cu conturi dezactivate (fie dezactivați manual, fie nu și-au verificat niciodată adresa de e-mail); Utilizatori cu PM-uri dezactivate - Selectează utilizatorii cărora le-au eliminat privilegiile Mesaje private (Efectuat prin Gestionarea utilizatorilor)';
+$lang['POSTCOUNT'] = 'Numărarea postărilor';
 $lang['EQUALS'] = 'Este egal cu';
 $lang['GREATER_THAN'] = 'Mai mult';
 $lang['LESS_THAN'] = 'Mai puțin decât';
-$lang['SEARCH_USERS_POSTCOUNT_EXPLAIN'] = 'Puteți căuta pentru utilizatori bazat pe Postcount valoare. Puteți căuta fie prin o anumită valoare, mai mare sau mai mică decât o valoare sau între două valori. Pentru a face gama de căutare, selectați "Egal" apoi a pus începutul și sfârșitul valorile intervalului separate printr-o liniuță (-), de exemplu, 10-15';
+$lang['SEARCH_USERS_POSTCOUNT_EXPLAIN'] = 'Puteți căuta utilizatori pe baza valorii numărului de postări. Puteți căuta fie după o anumită valoare, mai mare sau mai mică decât o valoare, fie între două valori. Pentru a căuta în interval, selectați „Egal”, apoi puneți valorile de început și de sfârșit ale intervalului, separate printr-o liniuță (-), de exemplu 10-15';
 $lang['USERFIELD'] = 'Camp utilizator';
 $lang['SEARCH_USERS_USERFIELD_EXPLAIN'] = 'Căutare pentru utilizatori bazat pe diverse domenii de profil. Metacaracterele sunt acceptate folosind un asterix (*).';
 $lang['SEARCH_USERS_LASTVISITED_EXPLAIN'] = 'Puteți căuta pentru utilizatori pe baza lor ultima conectare zi, folosind această opțiune de căutare';
@@ -2669,7 +2671,7 @@ $lang['SEARCH_USERS_LANGUAGE_EXPLAIN'] = 'Aceasta va afișa utilizatorii care au
 $lang['SEARCH_USERS_TIMEZONE_EXPLAIN'] = 'Utilizatorii care au selectat un anumit fus orar în profilul lor';
 $lang['SEARCH_USERS_STYLE_EXPLAIN'] = 'Display utilizatorilor care au ales un stil specific.';
 $lang['MODERATORS_OF'] = 'Moderatorii';
-$lang['SEARCH_USERS_MODERATORS_EXPLAIN'] = 'Căutare pentru utilizatorii cu permisiuni de Moderare la un anumit forum. Moderarea permisiuni sunt recoginised fie de Permisiuni de Utilizator sau de a fi într-un Grup cu Grup Permssions.';
+$lang['SEARCH_USERS_MODERATORS_EXPLAIN'] = 'Căutați utilizatori cu permisiuni de Moderare pentru un anumit forum. Permisiunile de moderare sunt recunoscute fie de permisiunile utilizatorului, fie de a fi într-un grup cu permisiunile de grup potrivite.';
 
 $lang['SEARCH_USERS_NEW'] = '%s dat %d rezultatul(rezultatele). Efectua <a href="%s">another search</a>.';
 $lang['BANNED'] = 'Interzis';
@@ -2723,10 +2725,10 @@ $lang['SITEMAP_OPTIONS'] = 'Opțiuni';
 $lang['SITEMAP_CREATE'] = 'Creare / actualizare sitemap';
 $lang['SITEMAP_NOTIFY'] = 'Anunta motoarele de căutare despre noua versiune de sitemap';
 $lang['SITEMAP_WHAT_NEXT'] = 'Ce să faci în continuare?';
-$lang['SITEMAP_GOOGLE_1'] = 'Iti inscrii site-ul la <a href="http://www.google.com/webmasters/" target="_blank">Google Webmaster</a> folosind contul Google.';
+$lang['SITEMAP_GOOGLE_1'] = 'Iti inscrii site-ul la <a href="https://www.google.com/webmasters/" target="_blank">Google Webmaster</a> folosind contul Google.';
 $lang['SITEMAP_GOOGLE_2'] = '<a href="https://www.google.com/webmasters/tools/sitemap-list" target="_blank">Add sitemap</a> de site-ați înregistrat.';
-$lang['SITEMAP_YANDEX_1'] = 'Iti inscrii site-ul la <a href="http://webmaster.yandex.ru/sites/" target="_blank">Yandex Webmaster</a> cu ajutorul contului Yandex.';
-$lang['SITEMAP_YANDEX_2'] = '<a href="http://webmaster.yandex.ru/site/map.xml" target="_blank">Add sitemap</a> de site-ați înregistrat.';
+$lang['SITEMAP_YANDEX_1'] = 'Iti inscrii site-ul la <a href="https://webmaster.yandex.ru/sites/" target="_blank">Yandex Webmaster</a> cu ajutorul contului Yandex.';
+$lang['SITEMAP_YANDEX_2'] = '<a href="https://webmaster.yandex.ru/site/map.xml" target="_blank">Add sitemap</a> de site-ați înregistrat.';
 $lang['SITEMAP_BING_1'] = 'Iti inscrii site-ul la <a href="https://www.bing.com/webmaster/" target="_blank">Bing Webmaster</a> folosind contul Microsoft.';
 $lang['SITEMAP_BING_2'] = 'Adauga sitemap al site-ului v-ați înregistrat în setările sale.';
 $lang['SITEMAP_ADD_TITLE'] = 'Pagini suplimentare pentru sitemap';
@@ -2747,7 +2749,7 @@ $lang['ATOM_GLOBAL_FEED'] = 'Feed global pentru toate forumurile';
 $lang['HASH_INVALID'] = 'Hash %s este invalid';
 $lang['HASH_NOT_FOUND'] = 'Lansare cu hash %s nu a fost găsit';
 
-$lang['TERMS_EMPTY_TEXT'] = '[align=center]textul din aceasta pagina este editată la: url=http://%s/admin/admin_terms.php]admin/admin_terms.php[/url]. Această linie poate vedea doar administratorii.[/align]';
+$lang['TERMS_EMPTY_TEXT'] = '[align=center]Textul acestei pagini este editat la: [url=https://%s/admin/admin_terms.php]admin/admin_terms.php[/url]. Această linie poate vedea numai administratorii.[/align]';
 $lang['TERMS_EXPLAIN'] = 'Pe această pagină, puteți specifica textul de regulile de bază de resurse este afișat pentru utilizatori.';
 
 $lang['TR_STATS'] = array(
@@ -2804,16 +2806,16 @@ $lang['CAPTCHA'] = 'Verificați că nu sunt un robot';
 $lang['CAPTCHA_WRONG'] = 'Tu nu a putut confirma că nu sunt un robot';
 $lang['CAPTCHA_SETTINGS'] = '<h2>ReCaptcha a nu fi pe deplin configured</h2><p>if nu te-ai generat deja cheile, o poti face pe <a href="https://www.google.com/recaptcha/admin">https://www.google.com/recaptcha/admin</a>.<br />After genera cheile, trebuie să le pună la fișierul bibliotecă/config.php.</p>';
 
-// Emailer
+// Sending email
 $lang['EMAILER_SUBJECT'] = [
-    'EMPTY' => 'Nu Pot',
-    'GROUP_ADDED' => 'Ai fost adăugată la acest grup de utilizatori',
-    'GROUP_APPROVED' => 'Cererea dvs. a fost aprobată',
-    'GROUP_REQUEST' => 'O cerere să se alăture grupului a fost făcut',
-    'PRIVMSG_NOTIFY' => 'Mesaj Privat nou a sosit',
-    'TOPIC_NOTIFY' => 'Subiect Răspuns Notificare %s',
-    'USER_ACTIVATE' => 'Reactiveze contul dvs.',
-    'USER_ACTIVATE_PASSWD' => 'Noua parolă de activare',
-    'USER_WELCOME' => 'Bine ati venit la %s Forumuri',
-    'USER_WELCOME_INACTIVE' => 'Bine ati venit la %s Forumuri',
+    'EMPTY' => 'Fără subiect',
+    'GROUP_ADDED' => 'Ai fost adăugat la grupul de utilizatori',
+    'GROUP_APPROVED' => 'Solicitarea dvs. de a vă alătura grupului de utilizatori a fost acceptată',
+    'GROUP_REQUEST' => 'O solicitare de a vă alătura grupului dvs. de utilizatori',
+    'PRIVMSG_NOTIFY' => 'Mesaj privat nou',
+    'TOPIC_NOTIFY' => 'Notificarea răspunsului în firul %s',
+    'USER_ACTIVATE' => 'Reactivarea contului',
+    'USER_ACTIVATE_PASSWD' => 'Confirmarea unei noi parole',
+    'USER_WELCOME' => 'Bun venit pe site-ul %s',
+    'USER_WELCOME_INACTIVE' => 'Bun venit pe site-ul %s',
 ];
