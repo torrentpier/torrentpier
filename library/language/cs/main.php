@@ -12,8 +12,8 @@ $lang['ADMIN'] = 'Administrace';
 $lang['FORUM'] = 'Fórum';
 $lang['CATEGORY'] = 'Kategorie';
 $lang['HIDE_CAT'] = 'Skrýt kategorie';
-$lang['HIDE_CAT_MESS'] = 'Some categories are hidden by customized display options';
-$lang['SHOW_ALL'] = 'Show all';
+$lang['HIDE_CAT_MESS'] = 'Některé kategorie jsou skryté pomocí přizpůsobených možností zobrazení';
+$lang['SHOW_ALL'] = 'Ukázat vše';
 $lang['TOPIC'] = 'Téma';
 $lang['TOPICS'] = 'Témata';
 $lang['TOPICS_SHORT'] = 'Témata';
@@ -1509,9 +1509,9 @@ $lang['ITALIC'] = 'Italic text: [i]text[/i] (Ctrl+I)';
 $lang['UNDERLINE'] = 'Podtržení textu: [u]text[/u] (Ctrl+U)';
 $lang['STRIKEOUT'] = 'Přeškrtnutí textu: [s]text[/s] (Ctrl+S)';
 $lang['QUOTE_TITLE'] = 'Cituji text: [quote]text[/quote] (Ctrl+Q)';
-$lang['IMG_TITLE'] = 'Insert image: [img]https://image_url[/img] (Ctrl+R)';
+$lang['IMG_TITLE'] = 'Vložit obrázek: [img]https://image_url[/img] (Ctrl+R)';
 $lang['URL'] = 'Url';
-$lang['URL_TITLE'] = 'Insert URL: [url]https://url[/url] or [url=https://url]URL text[/url] (Ctrl+W)';
+$lang['URL_TITLE'] = 'Vložit URL: [url]https://url[/url] nebo [url=https://url]text URL[/url] (Ctrl+W)';
 $lang['CODE_TITLE'] = 'Kód displej: [code]code[/code] (Ctrl+K)';
 $lang['LIST'] = 'Seznam';
 $lang['LIST_TITLE'] = 'Seznam: [list]text[/list] (Ctrl+l)';
@@ -2057,7 +2057,7 @@ $lang['TRACKER_STATS'] = 'Statistiky tracker';
 $lang['WHOIS_INFO'] = 'Informace o IP adrese';
 $lang['SHOW_MOD_HOME_PAGE'] = 'Ukázat na moderátorů index.php';
 $lang['PREMOD_HELP'] = '<h4><span class="tor-icon tor-dup">&#8719;</span> Pre-moderation</h4> <h6>If nemáte rozdělení na stav v, #, nebo T v této sekci včetně podsekcí, distribuce automaticky obdrží tento status</h6>';
-$lang['TOR_COMMENT'] = '<h4>Comment on the status of a distribution</h4> <h6>The comment allows you to point out the errors made to the releaser. If the statuses are incomplete, a release response form is available to the release manager to correct the release</h6>';
+$lang['TOR_COMMENT'] = '<h4>Komentář ke stavu distribuce</h4> <h6>Komentář umožňuje upozornit vydavatele na chyby, kterých se dopustil. Pokud jsou stavy neúplné, má správce vydání k dispozici formulář pro odpověď na vydání, který opraví vydání</h6>';
 $lang['SEED_BONUS_ADD'] = '<h4>Adding seed bonus </h4> <h6> Počet distribucí jsou předány uživatelem a velikost bonusů pro ně (doba nabíjení, hodiny) </h6>';
 $lang['SEED_BONUS_RELEASE'] = 'N-počet vydání';
 $lang['SEED_BONUS_POINTS'] = 'bonusy za hodinu';
@@ -2124,7 +2124,7 @@ $lang['EMPTY_FILE_ENTRY'] = 'Prázdná Položka Souboru';
 
 // Attachments -> Sync
 $lang['SYNC_THUMBNAIL_RESETTED'] = 'Náhled resetováno pro Upevnění: %s'; // replace %s with physical Filename
-$lang['ATTACH_SYNC_FINISHED'] = 'Attachment Synchronization Finished.';
+$lang['ATTACH_SYNC_FINISHED'] = 'Synchronizace přílohy dokončena.';
 $lang['SYNC_TOPICS'] = 'Synchronizace Témata';
 $lang['SYNC_POSTS'] = 'Synchronizovat Příspěvky';
 $lang['SYNC_THUMBNAILS'] = 'Synchronizace Miniatur';
@@ -2386,7 +2386,7 @@ $lang['CRON_NEXT_RUN'] = 'Další Běh';
 $lang['CRON_RUN_COUNT'] = 'Běží';
 $lang['CRON_MANAGE'] = 'Spravovat';
 $lang['CRON_OPTIONS'] = 'Cron možnosti';
-$lang['CRON_DISABLED_WARNING'] = 'Warning! Running cron scripts is disabled. To enable it, set the APP_CRON_ENABLED variable.';
+$lang['CRON_DISABLED_WARNING'] = 'Varování! Spouštění cron skriptů je zakázáno. Chcete-li to povolit, nastavte proměnnou APP_CRON_ENABLED.';
 
 $lang['CRON_ENABLED'] = 'Cron povoleno';
 $lang['CRON_CHECK_INTERVAL'] = 'Cron check interval (sec)';
@@ -2576,7 +2576,7 @@ $lang['RELEASES'] = 'Zprávy';
 
 $lang['BACK'] = 'Zpět';
 $lang['ERROR_FORM'] = 'Neplatná pole';
-$lang['RELEASE_WELCOME'] = 'Please fill in the release form';
+$lang['RELEASE_WELCOME'] = 'Vyplňte prosím formulář uvolnění';
 $lang['NEW_RELEASE'] = 'Nové vydání';
 $lang['NEXT'] = 'Pokračovat';
 $lang['OTHER'] = 'Další';
@@ -2584,8 +2584,8 @@ $lang['OTHER'] = 'Další';
 $lang['TPL_EMPTY_FIELD'] = 'Musíte vyplnit pole <b>%s</b>';
 $lang['TPL_EMPTY_SEL'] = 'Musíte vybrat <b>%s</b>';
 $lang['TPL_NOT_NUM'] = '<b>%s</b> - Ne a num';
-$lang['TPL_NOT_URL'] = '<b>%s</b> - Must be https:// URL';
-$lang['TPL_NOT_IMG_URL'] = '<b>%s</b> - Must be https:// IMG_URL';
+$lang['TPL_NOT_URL'] = '<b>%s</b> – Musí být https:// URL';
+$lang['TPL_NOT_IMG_URL'] = '<b>%s</b> – Musí být https:// IMG_URL';
 $lang['TPL_PUT_INTO_SUBJECT'] = 'dát do předmětu';
 $lang['TPL_POSTER'] = 'plakát';
 $lang['TPL_REQ_FILLING'] = 'vyžaduje plnění';
@@ -2599,15 +2599,15 @@ $lang['TPL_SPOILER'] = 'spoiler';
 $lang['TPL_IN_LINE'] = 've stejné linii';
 $lang['TPL_HEADER_ONLY'] = 'pouze v názvu';
 
-$lang['SEARCH_INVALID_USERNAME'] = 'Invalid username entered to search';
-$lang['SEARCH_INVALID_EMAIL'] = 'Invalid email address entered to search';
-$lang['SEARCH_INVALID_IP'] = 'Invalid IP-address entered to search';
-$lang['SEARCH_INVALID_GROUP'] = 'Invalid group entered to search';
-$lang['SEARCH_INVALID_RANK'] = 'Invalid rank entered to search';
-$lang['SEARCH_INVALID_DATE'] = 'Invalid date entered to search';
-$lang['SEARCH_INVALID_POSTCOUNT'] = 'Invalid post count entered to search';
+$lang['SEARCH_INVALID_USERNAME'] = 'Do vyhledávání bylo zadáno neplatné uživatelské jméno';
+$lang['SEARCH_INVALID_EMAIL'] = 'Pro vyhledávání byla zadána neplatná e-mailová adresa';
+$lang['SEARCH_INVALID_IP'] = 'Pro vyhledávání byla zadána neplatná IP adresa';
+$lang['SEARCH_INVALID_GROUP'] = 'Do hledání byla zadána neplatná skupina';
+$lang['SEARCH_INVALID_RANK'] = 'Pro vyhledávání byla zadána neplatná hodnost';
+$lang['SEARCH_INVALID_DATE'] = 'Pro vyhledávání bylo zadáno neplatné datum';
+$lang['SEARCH_INVALID_POSTCOUNT'] = 'Do vyhledávání byl zadán neplatný počet příspěvků';
 $lang['SEARCH_INVALID_USERFIELD'] = 'Neplatná Userfield údaje zadané';
-$lang['SEARCH_INVALID_LASTVISITED'] = 'Invalid date entered for last visited search';
+$lang['SEARCH_INVALID_LASTVISITED'] = 'Neplatné datum zadané pro poslední navštívené vyhledávání';
 $lang['SEARCH_INVALID_LANGUAGE'] = 'Neplatný Jazyk Vybrané';
 $lang['SEARCH_INVALID_TIMEZONE'] = 'Neplatné Časové Pásmo Vybrané';
 $lang['SEARCH_INVALID_MODERATORS'] = 'Neplatná Fórum Vybrané';
@@ -2658,12 +2658,12 @@ $lang['SEARCH_USERS_GROUPS_EXPLAIN'] = 'Zobrazit všechny členy vybrané skupin
 $lang['SEARCH_USERS_RANKS_EXPLAIN'] = 'Zobrazit všechny nosiče z vybrané kategorie.';
 $lang['BANNED_USERS'] = 'Zakázaných Uživatelů';
 $lang['DISABLED_USERS'] = 'Zdravotně Postižené Uživatele';
-$lang['SEARCH_USERS_MISC_EXPLAIN'] = 'Administrators - All users with Administrator powers; Moderators - All forum moderators; Banned Users - All accounts that have been banned on these forums; Disabled Users - All users with disabled accounts (either manually disabled or never verified their email address); Users with disabled PMs - Selects users who have the Private Messages privileges removed (Done via User Management)';
-$lang['POSTCOUNT'] = 'Post count';
+$lang['SEARCH_USERS_MISC_EXPLAIN'] = 'Správci – všichni uživatelé s oprávněními správce; Moderátoři - Všichni moderátoři fóra; Zakázaní uživatelé – všechny účty, které byly na těchto fórech zakázány; Deaktivovaní uživatelé – všichni uživatelé s deaktivovanými účty (buď ručně deaktivovanými nebo nikdy neověřili svou e-mailovou adresu); Uživatelé s zakázanými PM – vybere uživatele, kteří mají odebrána oprávnění k soukromým zprávám (provedeno prostřednictvím správy uživatelů)';
+$lang['POSTCOUNT'] = 'Počet příspěvků';
 $lang['EQUALS'] = 'Rovná';
 $lang['GREATER_THAN'] = 'Větší než';
 $lang['LESS_THAN'] = 'Méně než';
-$lang['SEARCH_USERS_POSTCOUNT_EXPLAIN'] = 'You can search for users based on the post count value. You can either search by a specific value, greater than or lesser than a value or between two values. To do the range search, select "Equals" then put the beginning and ending values of the range separated by a dash (-), e.g. 10-15';
+$lang['SEARCH_USERS_POSTCOUNT_EXPLAIN'] = 'Uživatele můžete vyhledávat na základě hodnoty počtu příspěvků. Můžete vyhledávat podle konkrétní hodnoty, větší nebo menší než hodnota nebo mezi dvěma hodnotami. Chcete-li provést vyhledávání rozsahu, vyberte „Rovno“ a poté vložte počáteční a koncové hodnoty rozsahu oddělené pomlčkou (-), např. 10-15';
 $lang['USERFIELD'] = 'Userfield';
 $lang['SEARCH_USERS_USERFIELD_EXPLAIN'] = 'Hledat pro uživatele na základě různých profilových oborů. Zástupné znaky jsou podporovány pomocí asterix (*).';
 $lang['SEARCH_USERS_LASTVISITED_EXPLAIN'] = 'Můžete hledat pro uživatele na základě jejich posledního přihlášení pomocí této možnosti vyhledávání';
@@ -2671,7 +2671,7 @@ $lang['SEARCH_USERS_LANGUAGE_EXPLAIN'] = 'To bude zobrazovat uživatelům, kter�
 $lang['SEARCH_USERS_TIMEZONE_EXPLAIN'] = 'Uživatelé, kteří mají vybrané konkrétní časové pásmo v profilu';
 $lang['SEARCH_USERS_STYLE_EXPLAIN'] = 'Zobrazení uživatelů, kteří mají vybraný konkrétní styl.';
 $lang['MODERATORS_OF'] = 'Moderátoři';
-$lang['SEARCH_USERS_MODERATORS_EXPLAIN'] = 'Search for users with Moderating permissions to a specific forum. Moderating permissions are recognised either by User Permissions or by being in a Group with the right Group Permissions.';
+$lang['SEARCH_USERS_MODERATORS_EXPLAIN'] = 'Vyhledejte uživatele s oprávněním k moderování v konkrétním fóru. Oprávnění k moderování jsou rozpoznána buď uživatelskými oprávněními, nebo tím, že jsou ve skupině se správnými oprávněními skupiny.';
 
 $lang['SEARCH_USERS_NEW'] = '%s přineslo %d výsledek(y). Provádět <a href="%s">another search</a>.';
 $lang['BANNED'] = 'Zakázány';
@@ -2749,7 +2749,7 @@ $lang['ATOM_GLOBAL_FEED'] = 'Globální zdroj pro všechny fóra';
 $lang['HASH_INVALID'] = 'Hash %s je neplatný';
 $lang['HASH_NOT_FOUND'] = 'Zpráva s hash %s nebyl nalezen';
 
-$lang['TERMS_EMPTY_TEXT'] = '[align=center]The text of this page is edited at: [url=https://%s/admin/admin_terms.php]admin/admin_terms.php[/url]. This line can see only administrators.[/align]';
+$lang['TERMS_EMPTY_TEXT'] = '[align=center]Text této stránky je upraven na: [url=https://%s/admin/admin_terms.php]admin/admin_terms.php[/url]. Tento řádek vidí pouze správci.[/align]';
 $lang['TERMS_EXPLAIN'] = 'Na této stránce můžete zadat text ze základních pravidel, zdroje se zobrazí uživatelům.';
 
 $lang['TR_STATS'] = array(
@@ -2808,14 +2808,14 @@ $lang['CAPTCHA_SETTINGS'] = '<h2>ReCaptcha není plně configured</h2><p>if jste
 
 // Sending email
 $lang['EMAILER_SUBJECT'] = [
-    'EMPTY' => 'No subject',
-    'GROUP_ADDED' => 'You have been added to the user group',
-    'GROUP_APPROVED' => 'Your request to join the user group has been granted',
-    'GROUP_REQUEST' => 'A request to join your user group',
-    'PRIVMSG_NOTIFY' => 'New private message',
-    'TOPIC_NOTIFY' => 'Notification of response in the thread %s',
-    'USER_ACTIVATE' => 'Account reactivation',
-    'USER_ACTIVATE_PASSWD' => 'Confirming a new password',
-    'USER_WELCOME' => 'Welcome to the site %s',
-    'USER_WELCOME_INACTIVE' => 'Welcome to the site %s',
+    'EMPTY' => 'Žádný předmět',
+    'GROUP_ADDED' => 'Byli jste přidáni do uživatelské skupiny',
+    'GROUP_APPROVED' => 'Vaše žádost o připojení k uživatelské skupině byla schválena',
+    'GROUP_REQUEST' => 'Žádost o připojení k vaší uživatelské skupině',
+    'PRIVMSG_NOTIFY' => 'Nová soukromá zpráva',
+    'TOPIC_NOTIFY' => 'Oznámení o odpovědi ve vláknu %s',
+    'USER_ACTIVATE' => 'Reaktivace účtu',
+    'USER_ACTIVATE_PASSWD' => 'Potvrzení nového hesla',
+    'USER_WELCOME' => 'Vítejte na stránkách %s',
+    'USER_WELCOME_INACTIVE' => 'Vítejte na stránkách %s',
 ];
