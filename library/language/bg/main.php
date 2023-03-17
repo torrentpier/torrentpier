@@ -12,8 +12,8 @@ $lang['ADMIN'] = 'Управление';
 $lang['FORUM'] = 'Форум';
 $lang['CATEGORY'] = 'Категория';
 $lang['HIDE_CAT'] = 'Скрий категориите';
-$lang['HIDE_CAT_MESS'] = 'Some categories are hidden by customized display options';
-$lang['SHOW_ALL'] = 'Show all';
+$lang['HIDE_CAT_MESS'] = 'Някои категории са скрити от персонализирани опции за показване';
+$lang['SHOW_ALL'] = 'Покажи всички';
 $lang['TOPIC'] = 'Тема';
 $lang['TOPICS'] = 'Теми';
 $lang['TOPICS_SHORT'] = 'Теми';
@@ -1511,9 +1511,9 @@ $lang['ITALIC'] = 'Курсивный текст: [i]text[/i] (Ctrl+i)';
 $lang['UNDERLINE'] = 'Подчертаване на текст: [u]text[/u] (Ctrl+U)';
 $lang['STRIKEOUT'] = 'Зачертан текст: [s]text[/s] (Ctrl+c)';
 $lang['QUOTE_TITLE'] = 'Цитирам текст: [quote]text[/quote] (комбинация от клавиши Ctrl+M)';
-$lang['IMG_TITLE'] = 'Insert image: [img]https://image_url[/img] (Ctrl+R)';
+$lang['IMG_TITLE'] = 'Вмъкване на изображение: [img]https://image_url[/img] (Ctrl+R)';
 $lang['URL'] = 'URL-адрес';
-$lang['URL_TITLE'] = 'Insert URL: [url]https://url[/url] or [url=https://url]URL text[/url] (Ctrl+W)';
+$lang['URL_TITLE'] = 'Въведете URL: [url]https://url[/url] или [url=https://url]URL текст[/url] (Ctrl+W)';
 $lang['CODE_TITLE'] = 'Дисплей код: [code]code[/code] (Ctrl+k)';
 $lang['LIST'] = 'Списък';
 $lang['LIST_TITLE'] = 'Списък: [list]text[/list] (клавишна комбинация Ctrl+л)';
@@ -2059,7 +2059,7 @@ $lang['TRACKER_STATS'] = 'Статистика на трекере';
 $lang['WHOIS_INFO'] = 'Информация за IP адрес';
 $lang['SHOW_MOD_HOME_PAGE'] = 'Покажи модератори index.php';
 $lang['PREMOD_HELP'] = '<h4><span class="tor-icon tor-dup">&#8719;</span> предварително moderation</h4> <h6>If не разполагат с разпределение статут, # или t в този раздел, включително и подраздели, а след това раздаване автоматично получава този status</h6>';
-$lang['TOR_COMMENT'] = '<h4>Comment on the status of a distribution</h4> <h6>The comment allows you to point out the errors made to the releaser. If the statuses are incomplete, a release response form is available to the release manager to correct the release</h6>';
+$lang['TOR_COMMENT'] = '<h4>Коментар за статуса на разпространение</h4> <h6>Коментарът ви позволява да посочите грешките, направени на освобождаващия. Ако статусите са непълни, на мениджъра на освобождаването е достъпен формуляр за отговор за освобождаване, за да коригира издание</h6>';
 $lang['SEED_BONUS_ADD'] = '<h4>Adding бонус семена </h4> <h6> Брой дистрибуции дава на потребителя и размера на бонусите за тях (път такса на час) </h6>';
 $lang['SEED_BONUS_RELEASE'] = 'до N-брой на пресата';
 $lang['SEED_BONUS_POINTS'] = 'бонуси в час';
@@ -2126,7 +2126,7 @@ $lang['EMPTY_FILE_ENTRY'] = 'Празни Запис На Файла';
 
 // Attachments -> Sync
 $lang['SYNC_THUMBNAIL_RESETTED'] = 'Скица обнулился за прикрепване: %s'; // replace %s with physical Filename
-$lang['ATTACH_SYNC_FINISHED'] = 'Attachment Synchronization Finished.';
+$lang['ATTACH_SYNC_FINISHED'] = 'Синхронизирането на прикачени файлове приключи.';
 $lang['SYNC_TOPICS'] = 'Теми За Синхронизация';
 $lang['SYNC_POSTS'] = 'Съобщения Синхронизация';
 $lang['SYNC_THUMBNAILS'] = 'Скици На Синхронизация';
@@ -2388,7 +2388,7 @@ $lang['CRON_NEXT_RUN'] = 'Следващия Стартиране';
 $lang['CRON_RUN_COUNT'] = 'Работи';
 $lang['CRON_MANAGE'] = 'Управлява';
 $lang['CRON_OPTIONS'] = 'Варианти на cron';
-$lang['CRON_DISABLED_WARNING'] = 'Warning! Running cron scripts is disabled. To enable it, set the APP_CRON_ENABLED variable.';
+$lang['CRON_DISABLED_WARNING'] = 'Внимание! Изпълнението на cron скриптове е деактивирано. За да го активирате, задайте променливата APP_CRON_ENABLED.';
 
 $lang['CRON_ENABLED'] = 'Cron inclusive';
 $lang['CRON_CHECK_INTERVAL'] = 'Cron интервал за проверка (сек)';
@@ -2578,7 +2578,7 @@ $lang['RELEASES'] = 'Пресата';
 
 $lang['BACK'] = 'Обратно';
 $lang['ERROR_FORM'] = 'Невалиден полета';
-$lang['RELEASE_WELCOME'] = 'Please fill in the release form';
+$lang['RELEASE_WELCOME'] = 'Моля, попълнете формуляра за освобождаване';
 $lang['NEW_RELEASE'] = 'В новия брой на';
 $lang['NEXT'] = 'Продължи';
 $lang['OTHER'] = 'Други';
@@ -2586,8 +2586,8 @@ $lang['OTHER'] = 'Други';
 $lang['TPL_EMPTY_FIELD'] = 'Вие трябва да попълните полето <b>%s</b>';
 $lang['TPL_EMPTY_SEL'] = 'Вие трябва да изберете <b>%s</b>';
 $lang['TPL_NOT_NUM'] = '<b>%s</b> - не n';
-$lang['TPL_NOT_URL'] = '<b>%s</b> - Must be https:// URL';
-$lang['TPL_NOT_IMG_URL'] = '<b>%s</b> - Must be https:// IMG_URL';
+$lang['TPL_NOT_URL'] = '<b>%s</b> - Трябва да е https:// URL';
+$lang['TPL_NOT_IMG_URL'] = '<b>%s</b> - Трябва да е https:// IMG_URL';
 $lang['TPL_PUT_INTO_SUBJECT'] = 'сложи в темата';
 $lang['TPL_POSTER'] = 'плакат';
 $lang['TPL_REQ_FILLING'] = 'изисква попълване на';
@@ -2601,15 +2601,15 @@ $lang['TPL_SPOILER'] = 'спойлер';
 $lang['TPL_IN_LINE'] = 'в една и съща линия';
 $lang['TPL_HEADER_ONLY'] = 'само в името на';
 
-$lang['SEARCH_INVALID_USERNAME'] = 'Invalid username entered to search';
-$lang['SEARCH_INVALID_EMAIL'] = 'Invalid email address entered to search';
-$lang['SEARCH_INVALID_IP'] = 'Invalid IP-address entered to search';
-$lang['SEARCH_INVALID_GROUP'] = 'Invalid group entered to search';
-$lang['SEARCH_INVALID_RANK'] = 'Invalid rank entered to search';
-$lang['SEARCH_INVALID_DATE'] = 'Invalid date entered to search';
-$lang['SEARCH_INVALID_POSTCOUNT'] = 'Invalid post count entered to search';
+$lang['SEARCH_INVALID_USERNAME'] = 'Въведено е невалидно потребителско име за търсене';
+$lang['SEARCH_INVALID_EMAIL'] = 'Въведен е невалиден имейл адрес за търсене';
+$lang['SEARCH_INVALID_IP'] = 'Въведен е невалиден IP адрес за търсене';
+$lang['SEARCH_INVALID_GROUP'] = 'Въведена е невалидна група за търсене';
+$lang['SEARCH_INVALID_RANK'] = 'Въведен е невалиден ранг за търсене';
+$lang['SEARCH_INVALID_DATE'] = 'Въведената невалидна дата за търсене';
+$lang['SEARCH_INVALID_POSTCOUNT'] = 'Въведен е невалиден брой публикации за търсене';
 $lang['SEARCH_INVALID_USERFIELD'] = 'Грешни данни Userfield влезе';
-$lang['SEARCH_INVALID_LASTVISITED'] = 'Invalid date entered for last visited search';
+$lang['SEARCH_INVALID_LASTVISITED'] = 'Въведената невалидна дата за последно посетено търсене';
 $lang['SEARCH_INVALID_LANGUAGE'] = 'Неправилен Език, Избран';
 $lang['SEARCH_INVALID_TIMEZONE'] = 'Грешна Часова Зона, Избрана';
 $lang['SEARCH_INVALID_MODERATORS'] = 'Грешен Форум Избрали';
@@ -2660,12 +2660,12 @@ $lang['SEARCH_USERS_GROUPS_EXPLAIN'] = 'Преглед на всички чле�
 $lang['SEARCH_USERS_RANKS_EXPLAIN'] = 'Вижте всички носители на избрания ранг.';
 $lang['BANNED_USERS'] = 'Забранява На Потребителите';
 $lang['DISABLED_USERS'] = 'Потребители С Увреждания';
-$lang['SEARCH_USERS_MISC_EXPLAIN'] = 'Administrators - All users with Administrator powers; Moderators - All forum moderators; Banned Users - All accounts that have been banned on these forums; Disabled Users - All users with disabled accounts (either manually disabled or never verified their email address); Users with disabled PMs - Selects users who have the Private Messages privileges removed (Done via User Management)';
-$lang['POSTCOUNT'] = 'Post count';
+$lang['SEARCH_USERS_MISC_EXPLAIN'] = 'Администратори - Всички потребители с права на администратор; Модератори - Всички модератори на форума; Забранени потребители - Всички акаунти, които са били забранени в тези форуми; Потребители с увреждания - Всички потребители с деактивирани акаунти (или ръчно деактивирани, или никога не са потвърждавали своя имейл адрес); Потребители с деактивирани PM - Избира потребители, които имат премахнати привилегии за лични съобщения (извършва се чрез управление на потребители)';
+$lang['POSTCOUNT'] = 'Брой публикации';
 $lang['EQUALS'] = 'Се равнява на';
 $lang['GREATER_THAN'] = 'Повече';
 $lang['LESS_THAN'] = 'По-малко';
-$lang['SEARCH_USERS_POSTCOUNT_EXPLAIN'] = 'You can search for users based on the post count value. You can either search by a specific value, greater than or lesser than a value or between two values. To do the range search, select "Equals" then put the beginning and ending values of the range separated by a dash (-), e.g. 10-15';
+$lang['SEARCH_USERS_POSTCOUNT_EXPLAIN'] = 'Можете да търсите потребители въз основа на стойността на броя публикации. Можете или да търсите по конкретна стойност, по-голяма или по-малка от стойност или между две стойности. За да извършите търсене в диапазона, изберете „Равно“, след което поставете началната и крайната стойност на диапазона, разделени с тире (-), напр. 10-15';
 $lang['USERFIELD'] = 'Userfield';
 $lang['SEARCH_USERS_USERFIELD_EXPLAIN'] = 'Търсене на потребителите въз основа на различни профилни области. Поддържат се модели, с помощта звездичка (*).';
 $lang['SEARCH_USERS_LASTVISITED_EXPLAIN'] = 'Можете да търсите потребители на датата на последното ви влизане в системата, използвайки тази опция търсене';
@@ -2673,7 +2673,7 @@ $lang['SEARCH_USERS_LANGUAGE_EXPLAIN'] = 'Това ще покаже на пот
 $lang['SEARCH_USERS_TIMEZONE_EXPLAIN'] = 'Потребителите, които са избрали конкретен Часови пояс в своя профил';
 $lang['SEARCH_USERS_STYLE_EXPLAIN'] = 'Показват се потребители, които са избрали определен стил.';
 $lang['MODERATORS_OF'] = 'Модератори';
-$lang['SEARCH_USERS_MODERATORS_EXPLAIN'] = 'Search for users with Moderating permissions to a specific forum. Moderating permissions are recognised either by User Permissions or by being in a Group with the right Group Permissions.';
+$lang['SEARCH_USERS_MODERATORS_EXPLAIN'] = 'Търсене на потребители с разрешения за модериране на конкретен форум. Разрешенията за модериране се разпознават или чрез потребителски разрешения, или като сте в група с правилните групови разрешения.';
 
 $lang['SEARCH_USERS_NEW'] = '%s даде резултат %d(и). Анализира <a href="%s">another search</a>.';
 $lang['BANNED'] = 'Забранени';
@@ -2752,7 +2752,7 @@ $lang['ATOM_GLOBAL_FEED'] = 'Глобални емисии за всички ф�
 $lang['HASH_INVALID'] = 'Хеш-%s е невалиден';
 $lang['HASH_NOT_FOUND'] = 'Проблем с хеш-%s не е намерено';
 
-$lang['TERMS_EMPTY_TEXT'] = '[align=center]The text of this page is edited at: [url=https://%s/admin/admin_terms.php]admin/admin_terms.php[/url]. This line can see only administrators.[/align]';
+$lang['TERMS_EMPTY_TEXT'] = '[align=center]Текстът на тази страница е редактиран на: [url=https://%s/admin/admin_terms.php]admin/admin_terms.php[/url]. Този ред може да вижда само администратори.[/align]';
 $lang['TERMS_EXPLAIN'] = 'На тази страница можете да зададете текст, основните правила ресурс показва на потребителите.';
 
 $lang['TR_STATS'] = array(
@@ -2811,14 +2811,14 @@ $lang['CAPTCHA_SETTINGS'] = '<h2>ReCaptcha тъй като не е напълн�
 
 // Sending email
 $lang['EMAILER_SUBJECT'] = [
-    'EMPTY' => 'No subject',
-    'GROUP_ADDED' => 'You have been added to the user group',
-    'GROUP_APPROVED' => 'Your request to join the user group has been granted',
-    'GROUP_REQUEST' => 'A request to join your user group',
-    'PRIVMSG_NOTIFY' => 'New private message',
-    'TOPIC_NOTIFY' => 'Notification of response in the thread %s',
-    'USER_ACTIVATE' => 'Account reactivation',
-    'USER_ACTIVATE_PASSWD' => 'Confirming a new password',
-    'USER_WELCOME' => 'Welcome to the site %s',
-    'USER_WELCOME_INACTIVE' => 'Welcome to the site %s',
+    'EMPTY' => 'Без тема',
+    'GROUP_ADDED' => 'Вие сте добавени към потребителската група',
+    'GROUP_APPROVED' => 'Молбата ви за присъединяване към потребителската група е удовлетворена',
+    'GROUP_REQUEST' => 'Заявка за присъединяване към вашата потребителска група',
+    'PRIVMSG_NOTIFY' => 'Ново лично съобщение',
+    'TOPIC_NOTIFY' => 'Известие за отговор в нишката %s',
+    'USER_ACTIVATE' => 'Повторно активиране на акаунта',
+    'USER_ACTIVATE_PASSWD' => 'Потвърждаване на нова парола',
+    'USER_WELCOME' => 'Добре дошли в сайта %s',
+    'USER_WELCOME_INACTIVE' => 'Добре дошли в сайта %s',
 ];
