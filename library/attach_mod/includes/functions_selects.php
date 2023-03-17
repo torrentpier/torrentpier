@@ -98,6 +98,7 @@ function download_select($select_name, $group_id = 0)
 function category_select($select_name, $group_id = 0)
 {
     global $types_category, $modes_category;
+    $category_type = null;
 
     $sql = 'SELECT group_id, cat_id FROM ' . BB_EXTENSION_GROUPS;
 
@@ -172,6 +173,7 @@ function size_select($select_name, $size_compare)
 function quota_limit_select($select_name, $default_quota = 0)
 {
     global $lang;
+    $quota_name = [];
 
     $sql = 'SELECT quota_limit_id, quota_desc FROM ' . BB_QUOTA_LIMITS . ' ORDER BY quota_limit ASC';
 
@@ -203,6 +205,7 @@ function quota_limit_select($select_name, $default_quota = 0)
 function default_quota_limit_select($select_name, $default_quota = 0)
 {
     global $lang;
+    $quota_name = [];
 
     $sql = 'SELECT quota_limit_id, quota_desc FROM ' . BB_QUOTA_LIMITS . ' ORDER BY quota_limit ASC';
 

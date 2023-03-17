@@ -144,7 +144,7 @@ class Torrent
             if ($row = DB()->fetch_row("SELECT info_hash FROM " . BB_BT_TORRENTS . " WHERE attach_id = $attach_id LIMIT 1")) {
                 $info_hash = $row['info_hash'];
             }
-            self::ocelot_update_tracker('delete_torrent', array('info_hash' => rawurlencode($info_hash), 'id' => $topic_id));
+            self::ocelot_update_tracker('delete_torrent', ['info_hash' => rawurlencode($info_hash), 'id' => $topic_id]);
         }
 
         // Delete torrent
@@ -257,7 +257,7 @@ class Torrent
             if ($row = DB()->fetch_row("SELECT info_hash FROM " . BB_BT_TORRENTS . " WHERE topic_id = $topic_id LIMIT 1")) {
                 $info_hash = $row['info_hash'];
             }
-            self::ocelot_update_tracker('update_torrent', array('info_hash' => rawurlencode($info_hash), 'freetorrent' => $tor_status_gold));
+            self::ocelot_update_tracker('update_torrent', ['info_hash' => rawurlencode($info_hash), 'freetorrent' => $tor_status_gold]);
         }
     }
 
@@ -275,6 +275,7 @@ class Torrent
     {
         global $bb_cfg, $lang, $reg_mode;
 
+        $announce_urls = [];
         $attach_id = (int)$attach_id;
         $reg_mode = $mode;
 
@@ -338,7 +339,7 @@ class Torrent
             }
         }
 
-        $info = (@$tor['info']) ? $tor['info'] : array();
+        $info = (@$tor['info']) ? $tor['info'] : [];
 
         if (!isset($info['name'], $info['piece length'], $info['pieces']) || \strlen($info['pieces']) % 20 != 0) {
             return self::torrent_error_exit($lang['TORFILE_INVALID']);
@@ -350,7 +351,7 @@ class Torrent
 
         // Ocelot
         if ($bb_cfg['ocelot']['enabled']) {
-            self::ocelot_update_tracker('add_torrent', array('info_hash' => rawurlencode($info_hash), 'id' => $topic_id, 'freetorrent' => 0));
+            self::ocelot_update_tracker('add_torrent', ['info_hash' => rawurlencode($info_hash), 'id' => $topic_id, 'freetorrent' => 0]);
         }
 
         if ($row = DB()->fetch_row("SELECT topic_id FROM " . BB_BT_TORRENTS . " WHERE info_hash = '$info_hash_sql' LIMIT 1")) {
@@ -468,7 +469,7 @@ class Torrent
             $passkey_val = $bt_userdata['auth_key'];
 
             if ($bb_cfg['ocelot']['enabled']) {
-                self::ocelot_update_tracker('add_user', array('id' => $user_id, 'passkey' => $passkey_val));
+                self::ocelot_update_tracker('add_user', ['id' => $user_id, 'passkey' => $passkey_val]);
             }
         }
 
@@ -510,19 +511,16 @@ class Torrent
         if ($bb_cfg['bt_del_addit_ann_urls'] || $bb_cfg['bt_disable_dht']) {
             unset($tor['announce-list']);
         } elseif (isset($tor['announce-list'])) {
-            $tor['announce-list'] = array_merge($tor['announce-list'], array(array($announce)));
+            $tor['announce-list'] = array_merge($tor['announce-list'], [[$announce]]);
         }
 
         // Add retracker
         if (isset($bb_cfg['tracker']['retracker']) && $bb_cfg['tracker']['retracker']) {
             if (bf($userdata['user_opt'], 'user_opt', 'user_retracker') || IS_GUEST) {
                 if (!isset($tor['announce-list'])) {
-                    $tor['announce-list'] = array(
-                        array($announce),
-                        array($bb_cfg['tracker']['retracker_host'])
-                    );
+                    $tor['announce-list'] = [[$announce], [$bb_cfg['tracker']['retracker_host']]];
                 } else {
-                    $tor['announce-list'] = array_merge($tor['announce-list'], array(array($bb_cfg['tracker']['retracker_host'])));
+                    $tor['announce-list'] = array_merge($tor['announce-list'], [[$bb_cfg['tracker']['retracker_host']]]);
                 }
             }
         }
@@ -604,7 +602,7 @@ class Torrent
             if (DB()->affected_rows() == 1) {
                 // Ocelot
                 if ($bb_cfg['ocelot']['enabled']) {
-                    self::ocelot_update_tracker('change_passkey', array('oldpasskey' => $old_passkey, 'newpasskey' => $passkey_val));
+                    self::ocelot_update_tracker('change_passkey', ['oldpasskey' => $old_passkey, 'newpasskey' => $passkey_val]);
                 }
                 return $passkey_val;
             }

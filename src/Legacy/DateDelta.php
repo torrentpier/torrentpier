@@ -97,6 +97,7 @@ class DateDelta
      */
     public function getDelta($first, $last)
     {
+        $delta = [];
         if ($last < $first) {
             return false;
         }

@@ -158,7 +158,7 @@ class Sessions
     {
         global $user;
 
-        $user->session_start(array('req_login' => $req_login));
+        $user->session_start(['req_login' => $req_login]);
 
         return $user->data;
     }

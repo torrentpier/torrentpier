@@ -219,13 +219,14 @@ class Common
     {
         global $lang, $log_action;
 
+        $topic_csv = [];
         $prune = ($mode_or_topic_id === 'prune');
 
         if (!$prune and !$topic_csv = get_id_csv($mode_or_topic_id)) {
             return false;
         }
 
-        $log_topics = $sync_forums = array();
+        $log_topics = $sync_forums = [];
 
         if ($prune) {
             $sync_forums[$forum_id] = true;
@@ -300,7 +301,7 @@ class Common
 	");
 
         // Get array for atom update
-        $atom_csv = array();
+        $atom_csv = [];
         foreach (DB()->fetch_rowset('SELECT user_id FROM ' . $tmp_user_posts) as $at) {
             $atom_csv[] = $at['user_id'];
         }
@@ -394,11 +395,11 @@ class Common
                     $row['topic_title'] = '<i>' . $lang['TOPIC_MOVED'] . '</i> ' . $row['topic_title'];
                 }
 
-                $log_action->mod('mod_topic_delete', array(
+                $log_action->mod('mod_topic_delete', [
                     'forum_id' => $row['forum_id'],
                     'topic_id' => $row['topic_id'],
                     'topic_title' => $row['topic_title'],
-                ));
+                ]);
             }
         }
 
@@ -448,8 +449,8 @@ class Common
 
         $sql = "SELECT * FROM " . BB_TOPICS . " WHERE topic_id IN($topic_csv) AND topic_status != " . TOPIC_MOVED . " $where_sql";
 
-        $topics = array();
-        $sync_forums = array($to_forum_id => true);
+        $topics = [];
+        $sync_forums = [$to_forum_id => true];
 
         foreach (DB()->fetch_rowset($sql) as $row) {
             if ($row['forum_id'] != $to_forum_id) {
@@ -464,10 +465,10 @@ class Common
 
         // Insert topic in the old forum that indicates that the topic has moved
         if ($leave_shadow) {
-            $shadows = array();
+            $shadows = [];
 
             foreach ($topics as $topic_id => $row) {
-                $shadows[] = array(
+                $shadows[] = [
                     'forum_id' => $row['forum_id'],
                     'topic_title' => $row['topic_title'],
                     'topic_poster' => $row['topic_poster'],
@@ -481,7 +482,7 @@ class Common
                     'topic_last_post_id' => $row['topic_last_post_id'],
                     'topic_moved_id' => $topic_id,
                     'topic_last_post_time' => $row['topic_last_post_time'],
-                );
+                ];
             }
             if ($sql_args = DB()->build_array('MULTI_INSERT', $shadows)) {
                 DB()->query("INSERT INTO " . BB_TOPICS . $sql_args);
@@ -505,12 +506,12 @@ class Common
 
         // Log action
         foreach ($topics as $topic_id => $row) {
-            $log_action->mod('mod_topic_move', array(
+            $log_action->mod('mod_topic_move', [
                 'forum_id' => $row['forum_id'],
                 'forum_id_new' => $to_forum_id,
                 'topic_id' => $topic_id,
                 'topic_title' => $row['topic_title'],
-            ));
+            ]);
         }
 
         return true;
@@ -556,7 +557,7 @@ class Common
         }
 
         // Collect data for logs, sync..
-        $log_topics = $sync_forums = $sync_topics = $sync_users = array();
+        $log_topics = $sync_forums = $sync_topics = $sync_users = [];
 
         if ($del_user_posts) {
             $sync_topics = DB()->fetch_rowset("SELECT DISTINCT topic_id FROM " . BB_POSTS . " WHERE poster_id IN($user_csv)", 'topic_id');
@@ -599,7 +600,7 @@ class Common
         if ($del_user_posts) {
             $where_sql = "poster_id IN($user_csv)";
 
-            $exclude_posts_ary = array();
+            $exclude_posts_ary = [];
             foreach (DB()->fetch_rowset("SELECT topic_first_post_id FROM " . BB_TOPICS . " WHERE topic_poster IN($user_csv)") as $row) {
                 $exclude_posts_ary[] = $row['topic_first_post_id'];
             }
@@ -658,16 +659,10 @@ class Common
 
         // Log action
         if ($del_user_posts) {
-            $log_action->admin('mod_post_delete', array(
-                'log_msg' => 'user: ' . self::get_usernames_for_log($user_id) . "<br />posts: $deleted_posts_count",
-            ));
+            $log_action->admin('mod_post_delete', ['log_msg' => 'user: ' . self::get_usernames_for_log($user_id) . "<br />posts: $deleted_posts_count"]);
         } elseif (!\defined('IN_CRON')) {
             foreach ($log_topics as $row) {
-                $log_action->mod('mod_post_delete', array(
-                    'forum_id' => $row['forum_id'],
-                    'topic_id' => $row['topic_id'],
-                    'topic_title' => $row['topic_title'],
-                ));
+                $log_action->mod('mod_post_delete', ['forum_id' => $row['forum_id'], 'topic_id' => $row['topic_id'], 'topic_title' => $row['topic_title']]);
             }
         }
 
@@ -710,9 +705,7 @@ class Common
         $user_csv = get_id_csv($user_id);
 
         // LOG
-        $log_action->admin('adm_user_delete', array(
-            'log_msg' => self::get_usernames_for_log($user_id),
-        ));
+        $log_action->admin('adm_user_delete', ['log_msg' => self::get_usernames_for_log($user_id)]);
 
         // Avatar
         $result = DB()->query("SELECT user_id, avatar_ext_id FROM " . BB_USERS . " WHERE avatar_ext_id > 0 AND user_id IN($user_csv)");
@@ -795,7 +788,7 @@ class Common
      */
     private static function get_usernames_for_log($user_id)
     {
-        $users_log_msg = array();
+        $users_log_msg = [];
 
         if ($user_csv = get_id_csv($user_id)) {
             $sql = "SELECT user_id, username FROM " . BB_USERS . " WHERE user_id IN($user_csv)";

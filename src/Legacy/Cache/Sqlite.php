@@ -20,7 +20,7 @@ class Sqlite extends Common
     public $used = true;
     public $db;
     public $prefix;
-    public $cfg = array(
+    public $cfg = [
         'db_file_path' => '/path/to/cache.db.sqlite',
         'table_name' => 'cache',
         'table_schema' => 'CREATE TABLE cache (
@@ -32,7 +32,7 @@ class Sqlite extends Common
         'pconnect' => true,
         'con_required' => true,
         'log_name' => 'CACHE',
-    );
+    ];
 
     public function __construct($cfg, $prefix = null)
     {
@@ -44,10 +44,10 @@ class Sqlite extends Common
     public function get($name, $get_miss_key_callback = '', $ttl = 604800)
     {
         if (empty($name)) {
-            return \is_array($name) ? array() : false;
+            return \is_array($name) ? [] : false;
         }
         $this->db->shard($name);
-        $cached_items = array();
+        $cached_items = [];
         $this->prefix_len = \strlen($this->prefix);
         $this->prefix_sql = SQLite3::escapeString($this->prefix);
 

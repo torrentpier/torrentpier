@@ -17,16 +17,16 @@ use SQLite3;
  */
 class SqliteCommon extends Common
 {
-    public $cfg = array(
+    public $cfg = [
         'db_file_path' => 'sqlite.db',
         'table_name' => 'table_name',
         'table_schema' => 'CREATE TABLE table_name (...)',
         'pconnect' => true,
         'con_required' => true,
         'log_name' => 'SQLite',
-        'shard_type' => 'none',     #  none, string, int (тип перевичного ключа для шардинга)
-        'shard_val' => 0,          #  для string - кол. начальных символов, для int - делитель (будет использован остаток от деления)
-    );
+        'shard_type' => 'none', #  none, string, int (тип перевичного ключа для шардинга)
+        'shard_val' => 0, # для string - кол. начальных символов, для int - делитель (будет использован остаток от деления)
+    ];
     public $engine = 'SQLite';
     public $dbh;
     public $connected = false;
@@ -134,7 +134,7 @@ class SqliteCommon extends Common
     public function fetch_rowset($query)
     {
         $result = $this->query($query);
-        $rowset = array();
+        $rowset = [];
         while ($row = $result->fetchArray(SQLITE3_ASSOC)) {
             $rowset[] = $row;
         }

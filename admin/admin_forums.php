@@ -767,6 +767,8 @@ print_page('admin_forums.tpl', 'admin');
  */
 function get_info($mode, $id)
 {
+    $table = null;
+    $idfield = null;
     switch ($mode) {
         case 'category':
             $table = BB_CATEGORIES;
@@ -812,6 +814,10 @@ function get_info($mode, $id)
  */
 function get_list($mode, $id, $select)
 {
+    $table = null;
+    $idfield = null;
+    $order = null;
+    $namefield = null;
     switch ($mode) {
         case 'category':
             $table = BB_CATEGORIES;
@@ -861,6 +867,10 @@ function get_list($mode, $id, $select)
  */
 function renumber_order($mode, $cat = 0)
 {
+    $table = null;
+    $catfield = null;
+    $orderfield = null;
+    $idfield = null;
     switch ($mode) {
         case 'category':
             $table = BB_CATEGORIES;

@@ -473,6 +473,7 @@ function _set_var(&$result, $var, $type, $multibyte = false)
  */
 function get_var($var_name, $default, $multibyte = false)
 {
+    $type = null;
     if (!isset($_REQUEST[$var_name]) ||
         (is_array($_REQUEST[$var_name]) && !is_array($default)) ||
         (is_array($default) && !is_array($_REQUEST[$var_name]))) {

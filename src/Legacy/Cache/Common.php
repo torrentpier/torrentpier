@@ -25,7 +25,7 @@ class Common
         if ($get_miss_key_callback) {
             return $get_miss_key_callback($name);
         }
-        return \is_array($name) ? array() : false;
+        return \is_array($name) ? [] : false;
     }
 
     /**
@@ -50,7 +50,7 @@ class Common
     public $sql_timetotal = 0;
     public $cur_query_time = 0;
 
-    public $dbg = array();
+    public $dbg = [];
     public $dbg_id = 0;
     public $dbg_enabled = false;
     public $cur_query;

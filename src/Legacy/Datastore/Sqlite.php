@@ -20,7 +20,7 @@ class Sqlite extends Common
     public $engine = 'SQLite';
     public $db;
     public $prefix;
-    public $cfg = array(
+    public $cfg = [
         'db_file_path' => '/path/to/datastore.db.sqlite',
         'table_name' => 'datastore',
         'table_schema' => 'CREATE TABLE datastore (
@@ -31,7 +31,7 @@ class Sqlite extends Common
         'pconnect' => true,
         'con_required' => true,
         'log_name' => 'DATASTORE',
-    );
+    ];
 
     public function __construct($cfg, $prefix = null)
     {

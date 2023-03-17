@@ -60,7 +60,7 @@ class Dev
         $log = '';
 
         foreach ($db_obj->dbg as $i => $dbg) {
-            $id = "sql_{$i}_" . mt_rand();
+            $id = "sql_{$i}_" . random_int(0, mt_getrandmax());
             $sql = short_query($dbg['sql'], true);
             $time = sprintf('%.4f', $dbg['time']);
             $perc = @sprintf('[%2d]', $dbg['time'] * 100 / $db_obj->sql_timetotal);
