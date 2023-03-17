@@ -26,11 +26,6 @@ if (isset($_POST['bonus_id'])) {
 
     $btu = get_bt_userdata($user_id);
 
-    if (empty($btu)) {
-        \TorrentPier\Legacy\Torrent::generate_passkey($user_id, true);
-        $btu = get_bt_userdata($user_id);
-    }
-
     $upload = $upload_row[$id] * 1024 * 1024 * 1024;
     $points = $price_row[$id];
 
