@@ -2386,6 +2386,7 @@ $lang['CRON_NEXT_RUN'] = 'تشغيل المقبل';
 $lang['CRON_RUN_COUNT'] = 'يعمل';
 $lang['CRON_MANAGE'] = 'إدارة';
 $lang['CRON_OPTIONS'] = 'كرون الخيارات';
+$lang['CRON_DISABLED_WARNING'] = 'Warning! Running cron scripts is disabled. To enable it, set the APP_CRON_ENABLED variable.';
 
 $lang['CRON_ENABLED'] = 'كرون تمكين';
 $lang['CRON_CHECK_INTERVAL'] = 'كرون تحقق الفاصل (sec)';
