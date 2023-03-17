@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title><!-- IF PAGE_TITLE -->{PAGE_TITLE} :: {SITENAME}<!-- ELSE -->{SITENAME}<!-- ENDIF --></title>
+<title><!-- IF HAVE_NEW_PM -->({HAVE_NEW_PM}) <!-- ENDIF --><!-- IF PAGE_TITLE -->{PAGE_TITLE} :: {SITENAME}<!-- ELSE -->{SITENAME}<!-- ENDIF --></title>
 <meta http-equiv="Content-Type" content="text/html; charset={CONTENT_ENCODING}" />
 <meta http-equiv="Content-Style-Type" content="text/css" />
 <meta property="og:image" content="{SITE_URL}styles/images/logo/logo.png" />
