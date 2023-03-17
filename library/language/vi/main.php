@@ -12,8 +12,8 @@ $lang['ADMIN'] = 'Quản trị';
 $lang['FORUM'] = 'Forum';
 $lang['CATEGORY'] = 'Mục';
 $lang['HIDE_CAT'] = 'Hide loại';
-$lang['HIDE_CAT_MESS'] = 'Some categories are hidden by customized display options';
-$lang['SHOW_ALL'] = 'Show all';
+$lang['HIDE_CAT_MESS'] = 'Một số danh mục bị ẩn bởi các tùy chọn hiển thị tùy chỉnh';
+$lang['SHOW_ALL'] = 'Hiển thị tất cả';
 $lang['TOPIC'] = 'Chủ đề';
 $lang['TOPICS'] = 'Chủ đề';
 $lang['TOPICS_SHORT'] = 'Chủ đề';
@@ -1509,9 +1509,9 @@ $lang['ITALIC'] = 'Nghiêng văn bản: [i]text[/i] (Ctrl+I)';
 $lang['UNDERLINE'] = 'Nhấn mạnh chữ: [u]text[/u] (Ctrl+U)';
 $lang['STRIKEOUT'] = 'Gạch văn bản: [s]text[/s] (Ctrl+S)';
 $lang['QUOTE_TITLE'] = 'Báo văn bản: [quote]text[/quote] (Ctrl+Q)';
-$lang['IMG_TITLE'] = 'Insert image: [img]https://image_url[/img] (Ctrl+R)';
+$lang['IMG_TITLE'] = 'Chèn hình ảnh: [img]https://image_url[/img] (Ctrl+R)';
 $lang['URL'] = 'Url';
-$lang['URL_TITLE'] = 'Insert URL: [url]https://url[/url] or [url=https://url]URL text[/url] (Ctrl+W)';
+$lang['URL_TITLE'] = 'Chèn URL: [url]https://url[/url] hoặc [url=https://url]URL văn bản[/url] (Ctrl+W)';
 $lang['CODE_TITLE'] = 'Mã hiển thị: [code]code[/code] (Ctrl+K)';
 $lang['LIST'] = 'Danh sách';
 $lang['LIST_TITLE'] = 'Danh sách: [list]text[/list] (Ctrl+l)';
@@ -2057,7 +2057,7 @@ $lang['TRACKER_STATS'] = 'Số liệu thống kê trên theo dõi';
 $lang['WHOIS_INFO'] = 'Thông tin về địa chỉ IP';
 $lang['SHOW_MOD_HOME_PAGE'] = 'Hiển thị trên các điều hành viên index.php';
 $lang['PREMOD_HELP'] = '<h4><span class="tor-icon tor-dup">&#8719;</span> Pre-moderation</h4> <h6>If bạn không có phân phối cho tình trạng của v, #, hoặc T trong phần này, bao gồm cả các phần phụ, sự phân bố sẽ tự động nhận được điều này status</h6>';
-$lang['TOR_COMMENT'] = '<h4>Comment on the status of a distribution</h4> <h6>The comment allows you to point out the errors made to the releaser. If the statuses are incomplete, a release response form is available to the release manager to correct the release</h6>';
+$lang['TOR_COMMENT'] = '<h4>Nhận xét về trạng thái của bản phân phối</h4> <h6>Nhận xét cho phép bạn chỉ ra các lỗi đối với người phát hành. Nếu các trạng thái không đầy đủ, người quản lý phát hành sẽ có biểu mẫu phản hồi phát hành để sửa bản phát hành</h6>';
 $lang['SEED_BONUS_ADD'] = '<h4>Adding giống thưởng </h4> <h6> Số lượng của phân phối được đưa ra bởi người sử dụng và kích thước của tiền thưởng cho họ (sạc lần trong một giờ) </h6>';
 $lang['SEED_BONUS_RELEASE'] = 'để N-số phát hành';
 $lang['SEED_BONUS_POINTS'] = 'tiền thưởng trong một giờ';
@@ -2124,7 +2124,7 @@ $lang['EMPTY_FILE_ENTRY'] = 'Tập Tin Rỗng Nhập';
 
 // Attachments -> Sync
 $lang['SYNC_THUMBNAIL_RESETTED'] = 'Thu nhỏ đặt lại cho đính Kèm: %s'; // replace %s with physical Filename
-$lang['ATTACH_SYNC_FINISHED'] = 'Attachment Synchronization Finished.';
+$lang['ATTACH_SYNC_FINISHED'] = 'Đồng bộ hóa tệp đính kèm đã hoàn tất.';
 $lang['SYNC_TOPICS'] = 'Sync Chủ Đề';
 $lang['SYNC_POSTS'] = 'Đồng Bộ Bài';
 $lang['SYNC_THUMBNAILS'] = 'Sync Hình Thu Nhỏ';
@@ -2386,7 +2386,7 @@ $lang['CRON_NEXT_RUN'] = 'Chạy Tiếp Theo';
 $lang['CRON_RUN_COUNT'] = 'Chạy';
 $lang['CRON_MANAGE'] = 'Quản lý';
 $lang['CRON_OPTIONS'] = 'Định kỳ lựa chọn';
-$lang['CRON_DISABLED_WARNING'] = 'Warning! Running cron scripts is disabled. To enable it, set the APP_CRON_ENABLED variable.';
+$lang['CRON_DISABLED_WARNING'] = 'Cảnh báo! Chạy tập lệnh cron bị vô hiệu hóa. Để bật nó, hãy đặt biến APP_CRON_ENABLED.';
 
 $lang['CRON_ENABLED'] = 'Định kỳ được kích hoạt';
 $lang['CRON_CHECK_INTERVAL'] = 'Kiểm tra định kỳ khoảng thời gian (giây)';
@@ -2576,7 +2576,7 @@ $lang['RELEASES'] = 'Phát hành';
 
 $lang['BACK'] = 'Trở lại';
 $lang['ERROR_FORM'] = 'Không hợp lệ lĩnh vực';
-$lang['RELEASE_WELCOME'] = 'Please fill in the release form';
+$lang['RELEASE_WELCOME'] = 'Vui lòng điền vào mẫu phát hành';
 $lang['NEW_RELEASE'] = 'Mới phát hành';
 $lang['NEXT'] = 'Tiếp tục';
 $lang['OTHER'] = 'Khác';
@@ -2584,8 +2584,8 @@ $lang['OTHER'] = 'Khác';
 $lang['TPL_EMPTY_FIELD'] = 'Anh phải điền vào lĩnh vực này <b>%s</b>';
 $lang['TPL_EMPTY_SEL'] = 'Bạn phải chọn <b>%s</b>';
 $lang['TPL_NOT_NUM'] = '<b>%s</b> - Không phải là một.';
-$lang['TPL_NOT_URL'] = '<b>%s</b> - Must be https:// URL';
-$lang['TPL_NOT_IMG_URL'] = '<b>%s</b> - Must be https:// IMG_URL';
+$lang['TPL_NOT_URL'] = '<b>%s</b> - Phải là https:// URL';
+$lang['TPL_NOT_IMG_URL'] = '<b>%s</b> - Phải là https:// IMG_URL';
 $lang['TPL_PUT_INTO_SUBJECT'] = 'đưa vào cơ thể';
 $lang['TPL_POSTER'] = 'áp phích';
 $lang['TPL_REQ_FILLING'] = 'yêu cầu đầy';
@@ -2599,15 +2599,15 @@ $lang['TPL_SPOILER'] = 'gió';
 $lang['TPL_IN_LINE'] = 'trong cùng một dòng';
 $lang['TPL_HEADER_ONLY'] = 'chỉ trong một tiêu đề';
 
-$lang['SEARCH_INVALID_USERNAME'] = 'Invalid username entered to search';
-$lang['SEARCH_INVALID_EMAIL'] = 'Invalid email address entered to search';
-$lang['SEARCH_INVALID_IP'] = 'Invalid IP-address entered to search';
-$lang['SEARCH_INVALID_GROUP'] = 'Invalid group entered to search';
-$lang['SEARCH_INVALID_RANK'] = 'Invalid rank entered to search';
-$lang['SEARCH_INVALID_DATE'] = 'Invalid date entered to search';
-$lang['SEARCH_INVALID_POSTCOUNT'] = 'Invalid post count entered to search';
+$lang['SEARCH_INVALID_USERNAME'] = 'Tên người dùng không hợp lệ được nhập để tìm kiếm';
+$lang['SEARCH_INVALID_EMAIL'] = 'Địa chỉ email không hợp lệ được nhập để tìm kiếm';
+$lang['SEARCH_INVALID_IP'] = 'Địa chỉ IP không hợp lệ được nhập để tìm kiếm';
+$lang['SEARCH_INVALID_GROUP'] = 'Nhóm không hợp lệ được nhập để tìm kiếm';
+$lang['SEARCH_INVALID_RANK'] = 'Thứ hạng không hợp lệ được nhập để tìm kiếm';
+$lang['SEARCH_INVALID_DATE'] = 'Ngày không hợp lệ được nhập để tìm kiếm';
+$lang['SEARCH_INVALID_POSTCOUNT'] = 'Số lượng bài đăng không hợp lệ được nhập để tìm kiếm';
 $lang['SEARCH_INVALID_USERFIELD'] = 'Không hợp lệ Userfield dữ liệu vào';
-$lang['SEARCH_INVALID_LASTVISITED'] = 'Invalid date entered for last visited search';
+$lang['SEARCH_INVALID_LASTVISITED'] = 'Ngày đã nhập không hợp lệ cho tìm kiếm được truy cập lần cuối';
 $lang['SEARCH_INVALID_LANGUAGE'] = 'Không Hợp Lệ Ngôn Ngữ Lựa Chọn';
 $lang['SEARCH_INVALID_TIMEZONE'] = 'Sai Múi Giờ Lựa Chọn';
 $lang['SEARCH_INVALID_MODERATORS'] = 'Không Hợp Lệ Diễn Đàn Lựa Chọn';
@@ -2658,12 +2658,12 @@ $lang['SEARCH_USERS_GROUPS_EXPLAIN'] = 'Xem tất cả thành viên của nhóm 
 $lang['SEARCH_USERS_RANKS_EXPLAIN'] = 'Xem tất cả các hãng của các lựa chọn xếp hạng.';
 $lang['BANNED_USERS'] = 'Người Bị Cấm';
 $lang['DISABLED_USERS'] = 'Người Dùng Vô Hiệu Hóa';
-$lang['SEARCH_USERS_MISC_EXPLAIN'] = 'Administrators - All users with Administrator powers; Moderators - All forum moderators; Banned Users - All accounts that have been banned on these forums; Disabled Users - All users with disabled accounts (either manually disabled or never verified their email address); Users with disabled PMs - Selects users who have the Private Messages privileges removed (Done via User Management)';
-$lang['POSTCOUNT'] = 'Post count';
+$lang['SEARCH_USERS_MISC_EXPLAIN'] = 'Quản trị viên - Tất cả người dùng có quyền Quản trị viên; Người điều hành - Tất cả người điều hành diễn đàn; Người dùng bị cấm - Tất cả các tài khoản đã bị cấm trên các diễn đàn này; Người dùng bị vô hiệu hóa - Tất cả người dùng có tài khoản bị vô hiệu hóa (bị vô hiệu hóa theo cách thủ công hoặc chưa bao giờ xác minh địa chỉ email của họ); Người dùng có PM bị vô hiệu hóa - Chọn người dùng đã xóa đặc quyền Tin nhắn riêng tư (Thực hiện qua Quản lý người dùng)';
+$lang['POSTCOUNT'] = 'Số lượng bài viết';
 $lang['EQUALS'] = 'Bằng';
 $lang['GREATER_THAN'] = 'Lớn hơn';
 $lang['LESS_THAN'] = 'Ít hơn';
-$lang['SEARCH_USERS_POSTCOUNT_EXPLAIN'] = 'You can search for users based on the post count value. You can either search by a specific value, greater than or lesser than a value or between two values. To do the range search, select "Equals" then put the beginning and ending values of the range separated by a dash (-), e.g. 10-15';
+$lang['SEARCH_USERS_POSTCOUNT_EXPLAIN'] = 'Bạn có thể tìm kiếm người dùng dựa trên giá trị số lượng bài đăng. Bạn có thể tìm kiếm theo một giá trị cụ thể, lớn hơn hoặc nhỏ hơn một giá trị hoặc giữa hai giá trị. Để thực hiện tìm kiếm phạm vi, chọn "Bằng", sau đó đặt các giá trị đầu và cuối của phạm vi được phân tách bằng dấu gạch ngang (-), ví dụ: 10-15';
 $lang['USERFIELD'] = 'Userfield';
 $lang['SEARCH_USERS_USERFIELD_EXPLAIN'] = 'Tìm kiếm người dựa vào các hồ sơ lĩnh vực. Kí hiệu được hỗ trợ bằng cách sử dụng một câu (*).';
 $lang['SEARCH_USERS_LASTVISITED_EXPLAIN'] = 'Bạn có thể tìm kiếm người dựa trên cuối cùng của họ đăng nhập ngày sử tìm kiếm này lựa chọn';
@@ -2671,7 +2671,7 @@ $lang['SEARCH_USERS_LANGUAGE_EXPLAIN'] = 'Điều này sẽ hiển thị sử d�
 $lang['SEARCH_USERS_TIMEZONE_EXPLAIN'] = 'Những ai đã chọn một cụ thể múi giờ trong hồ sơ của họ';
 $lang['SEARCH_USERS_STYLE_EXPLAIN'] = 'Hiển thị người dùng đã chọn một phong cách cụ thể.';
 $lang['MODERATORS_OF'] = 'Ban điều hành';
-$lang['SEARCH_USERS_MODERATORS_EXPLAIN'] = 'Search for users with Moderating permissions to a specific forum. Moderating permissions are recognised either by User Permissions or by being in a Group with the right Group Permissions.';
+$lang['SEARCH_USERS_MODERATORS_EXPLAIN'] = 'Tìm kiếm người dùng có quyền Kiểm duyệt đối với một diễn đàn cụ thể. Quyền kiểm duyệt được công nhận bởi Quyền của người dùng hoặc bằng cách ở trong Nhóm có Quyền nhóm phù hợp.';
 
 $lang['SEARCH_USERS_NEW'] = '%s mang lại %d quả(s). Thực hiện <a href="%s">another search</a>.';
 $lang['BANNED'] = 'Cấm';
@@ -2749,7 +2749,7 @@ $lang['ATOM_GLOBAL_FEED'] = 'Thức ăn toàn cầu cho tất cả các diễn �
 $lang['HASH_INVALID'] = 'Băm %s là không hợp lệ';
 $lang['HASH_NOT_FOUND'] = 'Phát hành với băm %s không tìm thấy';
 
-$lang['TERMS_EMPTY_TEXT'] = '[align=center]The text of this page is edited at: [url=https://%s/admin/admin_terms.php]admin/admin_terms.php[/url]. This line can see only administrators.[/align]';
+$lang['TERMS_EMPTY_TEXT'] = '[align=center]Văn bản của trang này được chỉnh sửa tại: [url=https://%s/admin/admin_terms.php]admin/admin_terms.php[/url]. Dòng này chỉ có thể nhìn thấy quản trị viên.[/align]';
 $lang['TERMS_EXPLAIN'] = 'Trên trang này, anh có thể xác định danh văn bản của các quy tắc cơ bản của các nguồn tài nguyên được hiển thị sử dụng.';
 
 $lang['TR_STATS'] = array(
@@ -2808,14 +2808,14 @@ $lang['CAPTCHA_SETTINGS'] = '<h2>ReCaptcha không được đầy đủ configur
 
 // Sending email
 $lang['EMAILER_SUBJECT'] = [
-    'EMPTY' => 'No subject',
-    'GROUP_ADDED' => 'You have been added to the user group',
-    'GROUP_APPROVED' => 'Your request to join the user group has been granted',
-    'GROUP_REQUEST' => 'A request to join your user group',
-    'PRIVMSG_NOTIFY' => 'New private message',
-    'TOPIC_NOTIFY' => 'Notification of response in the thread %s',
-    'USER_ACTIVATE' => 'Account reactivation',
-    'USER_ACTIVATE_PASSWD' => 'Confirming a new password',
-    'USER_WELCOME' => 'Welcome to the site %s',
-    'USER_WELCOME_INACTIVE' => 'Welcome to the site %s',
+    'EMPTY' => 'Không chủ đề',
+    'GROUP_ADDED' => 'Bạn đã được thêm vào nhóm người dùng',
+    'GROUP_APPROVED' => 'Yêu cầu tham gia nhóm người dùng của bạn đã được cấp',
+    'GROUP_REQUEST' => 'Yêu cầu tham gia nhóm người dùng của bạn',
+    'PRIVMSG_NOTIFY' => 'Tin nhắn riêng mới',
+    'TOPIC_NOTIFY' => 'Thông báo phản hồi trong chủ đề %s',
+    'USER_ACTIVATE' => 'kích hoạt lại tài khoản',
+    'USER_ACTIVATE_PASSWD' => 'Xác nhận mật khẩu mới',
+    'USER_WELCOME' => 'Chào mừng đến với trang web %s',
+    'USER_WELCOME_INACTIVE' => 'Chào mừng đến với trang web %s',
 ];
