@@ -12,8 +12,8 @@ $lang['ADMIN'] = 'Administrating';
 $lang['FORUM'] = 'Форуми';
 $lang['CATEGORY'] = 'категория';
 $lang['HIDE_CAT'] = 'Пинҳон кардани категорияҳои';
-$lang['HIDE_CAT_MESS'] = 'Some categories are hidden by customized display options';
-$lang['SHOW_ALL'] = 'Show all';
+$lang['HIDE_CAT_MESS'] = 'Баъзе категорияҳо бо имконоти намоиши фармоишӣ пинҳон карда мешаванд';
+$lang['SHOW_ALL'] = 'Ҳама нишон диҳед';
 $lang['TOPIC'] = 'мавзӯъ';
 $lang['TOPICS'] = 'Мавзӯҳо';
 $lang['TOPICS_SHORT'] = 'Мавзӯҳо';
@@ -1509,9 +1509,9 @@ $lang['ITALIC'] = 'Матни Italic: [i]text[/i] (Ctrl + I)';
 $lang['UNDERLINE'] = 'Таъкид матн: [u]text[/u] (Ctrl + U)';
 $lang['STRIKEOUT'] = 'Матни Strikeout: [s]text[/s] (Ctrl + S)';
 $lang['QUOTE_TITLE'] = 'Матни Quote: [quote]text[/quote] (Ctrl + Q)';
-$lang['IMG_TITLE'] = 'Insert image: [img]https://image_url[/img] (Ctrl+R)';
+$lang['IMG_TITLE'] = 'Ворид кардани тасвир: [img]https://image_url[/img] (Ctrl+R)';
 $lang['URL'] = 'Url';
-$lang['URL_TITLE'] = 'Insert URL: [url]https://url[/url] or [url=https://url]URL text[/url] (Ctrl+W)';
+$lang['URL_TITLE'] = 'Ҷойгир кардани URL: [url]https://url[/url] ё [url=https://url]URL матни[/url] (Ctrl+W)';
 $lang['CODE_TITLE'] = 'Намоиши Кодекс: [code]code[/code] (Ctrl + K)';
 $lang['LIST'] = 'рӯйхат';
 $lang['LIST_TITLE'] = 'Рӯйхати: [list]text[/list] (Ctrl + л)';
@@ -2057,7 +2057,7 @@ $lang['TRACKER_STATS'] = 'Омор оид ба Назоратчии';
 $lang['WHOIS_INFO'] = 'Маълумот дар бораи адреси IP';
 $lang['SHOW_MOD_HOME_PAGE'] = 'Нишон оид ба модератори ба index.php';
 $lang['PREMOD_HELP'] = '<h4><span class="tor-icon tor-dup">&#8719;</span> Пеш moderation</h4> <h6>If шумо таќсимоти ба мақоми V, #, ё T дар ин бахш, аз ҷумла зербахшҳои надорад, тақсимоти таври худкор ба ин status</h6> қабул';
-$lang['TOR_COMMENT'] = '<h4>Comment on the status of a distribution</h4> <h6>The comment allows you to point out the errors made to the releaser. If the statuses are incomplete, a release response form is available to the release manager to correct the release</h6>';
+$lang['TOR_COMMENT'] = '<h4>Шарҳ дар бораи ҳолати тақсимот</h4> <h6>Шарҳ ба шумо имкон медиҳад, ки хатогиҳоеро, ки ба нашркунанда дода шудаанд, нишон диҳед. Агар вазъҳо нопурра бошанд, варақаи ҷавоби релиз барои ислоҳи релиз дастрас аст</h6>';
 $lang['SEED_BONUS_ADD'] = 'насли <h4>Adding бонус </h4> <h6> Шумораи таќсимоти аз тарафи истифодабаранда ва андозаи мукофотпулӣ барои онҳо (дар экрани маротиба дар як соат), супорида </h6>';
 $lang['SEED_BONUS_RELEASE'] = 'Ба N-шумораи Варақаҳои';
 $lang['SEED_BONUS_POINTS'] = 'мукофотпулӣ дар як соат';
@@ -2124,7 +2124,7 @@ $lang['EMPTY_FILE_ENTRY'] = 'Дохилшавӣ File холӣ';
 
 // Attachments -> Sync
 $lang['SYNC_THUMBNAIL_RESETTED'] = 'Акси бандангуштӣ аз resetted барои Замимаи: %s'; // replace %s with physical Filename
-$lang['ATTACH_SYNC_FINISHED'] = 'Attachment Synchronization Finished.';
+$lang['ATTACH_SYNC_FINISHED'] = 'Синхронизатсияи замима анҷом ёфт.';
 $lang['SYNC_TOPICS'] = 'Мавзӯҳо Ҳмҳнг';
 $lang['SYNC_POSTS'] = 'Ҳмҳнг Posts';
 $lang['SYNC_THUMBNAILS'] = 'Ҳмҳнг ва ангораи';
@@ -2386,7 +2386,7 @@ $lang['CRON_NEXT_RUN'] = 'Next Иҷроиши';
 $lang['CRON_RUN_COUNT'] = 'медавад';
 $lang['CRON_MANAGE'] = 'идора кардан';
 $lang['CRON_OPTIONS'] = 'имконоти Cron';
-$lang['CRON_DISABLED_WARNING'] = 'Warning! Running cron scripts is disabled. To enable it, set the APP_CRON_ENABLED variable.';
+$lang['CRON_DISABLED_WARNING'] = 'Огоҳӣ! Иҷрои скриптҳои cron ғайрифаъол аст. Барои фаъол кардани он, тағирёбандаи APP_CRON_ENABLED -ро таъин кунед.';
 
 $lang['CRON_ENABLED'] = 'Cron фаъол';
 $lang['CRON_CHECK_INTERVAL'] = 'Фосилаи Тафтиши Cron (сония)';
@@ -2576,7 +2576,7 @@ $lang['RELEASES'] = 'Варақаи';
 
 $lang['BACK'] = 'Бозгашт';
 $lang['ERROR_FORM'] = 'майдонҳои нодурусти';
-$lang['RELEASE_WELCOME'] = 'Please fill in the release form';
+$lang['RELEASE_WELCOME'] = 'Лутфан варақаи нашрро пур кунед';
 $lang['NEW_RELEASE'] = 'озод нав';
 $lang['NEXT'] = 'давом додан';
 $lang['OTHER'] = 'дигар';
@@ -2584,8 +2584,8 @@ $lang['OTHER'] = 'дигар';
 $lang['TPL_EMPTY_FIELD'] = 'Шумо бояд дар соҳаи пур <b>%s</b>';
 $lang['TPL_EMPTY_SEL'] = 'Шумо бояд <b>%s</b>-ро интихоб кунед';
 $lang['TPL_NOT_NUM'] = '<b>%s</b> - Ҳатто як Ад';
-$lang['TPL_NOT_URL'] = '<b>%s</b> - Must be https:// URL';
-$lang['TPL_NOT_IMG_URL'] = '<b>%s</b> - Must be https:// IMG_URL';
+$lang['TPL_NOT_URL'] = '<b>%s</b> - Бояд https:// URL бошад';
+$lang['TPL_NOT_IMG_URL'] = '<b>%s</b> - Бояд https:// IMG_URL бошад';
 $lang['TPL_PUT_INTO_SUBJECT'] = 'сохта, ба мавзӯи';
 $lang['TPL_POSTER'] = 'эълон';
 $lang['TPL_REQ_FILLING'] = 'талаб пур';
@@ -2599,15 +2599,15 @@ $lang['TPL_SPOILER'] = 'spoiler';
 $lang['TPL_IN_LINE'] = 'дар хати ҳамин';
 $lang['TPL_HEADER_ONLY'] = 'танҳо дар унвони';
 
-$lang['SEARCH_INVALID_USERNAME'] = 'Invalid username entered to search';
-$lang['SEARCH_INVALID_EMAIL'] = 'Invalid email address entered to search';
-$lang['SEARCH_INVALID_IP'] = 'Invalid IP-address entered to search';
-$lang['SEARCH_INVALID_GROUP'] = 'Invalid group entered to search';
-$lang['SEARCH_INVALID_RANK'] = 'Invalid rank entered to search';
-$lang['SEARCH_INVALID_DATE'] = 'Invalid date entered to search';
-$lang['SEARCH_INVALID_POSTCOUNT'] = 'Invalid post count entered to search';
+$lang['SEARCH_INVALID_USERNAME'] = 'Номи корбарии нодуруст барои ҷустуҷӯ ворид карда шуд';
+$lang['SEARCH_INVALID_EMAIL'] = 'Суроғаи почтаи электронии нодуруст барои ҷустуҷӯ ворид карда шуд';
+$lang['SEARCH_INVALID_IP'] = 'IP-адреси нодуруст барои ҷустуҷӯ ворид карда шуд';
+$lang['SEARCH_INVALID_GROUP'] = 'Гурӯҳи нодуруст барои ҷустуҷӯ ворид карда шуд';
+$lang['SEARCH_INVALID_RANK'] = 'Барои ҷустуҷӯ рутбаи нодуруст ворид карда шуд';
+$lang['SEARCH_INVALID_DATE'] = 'Барои ҷустуҷӯ санаи нодуруст ворид карда шуд';
+$lang['SEARCH_INVALID_POSTCOUNT'] = 'Шумораи паёмҳои нодуруст барои ҷустуҷӯ ворид карда шуд';
 $lang['SEARCH_INVALID_USERFIELD'] = 'маълумоти Userfield нодуруст ворид';
-$lang['SEARCH_INVALID_LASTVISITED'] = 'Invalid date entered for last visited search';
+$lang['SEARCH_INVALID_LASTVISITED'] = 'Санаи беэътибор барои ҷустуҷӯи охирин воридшуда';
 $lang['SEARCH_INVALID_LANGUAGE'] = 'Ба забони интихобшудаи нодурусти';
 $lang['SEARCH_INVALID_TIMEZONE'] = 'Омехтани доираи вакти нодурусти интихобшуда';
 $lang['SEARCH_INVALID_MODERATORS'] = 'Нодурусти Форуми интихобшуда';
@@ -2658,12 +2658,12 @@ $lang['SEARCH_USERS_GROUPS_EXPLAIN'] = 'Дидани ҳамаи аъзоёни �
 $lang['SEARCH_USERS_RANKS_EXPLAIN'] = 'Дидани ҳамаи наылкунандагон аз рутбаи интихобшуда.';
 $lang['BANNED_USERS'] = 'Истифодабарандагон мамнӯъ';
 $lang['DISABLED_USERS'] = 'Истифодабарандагон маъюб';
-$lang['SEARCH_USERS_MISC_EXPLAIN'] = 'Administrators - All users with Administrator powers; Moderators - All forum moderators; Banned Users - All accounts that have been banned on these forums; Disabled Users - All users with disabled accounts (either manually disabled or never verified their email address); Users with disabled PMs - Selects users who have the Private Messages privileges removed (Done via User Management)';
-$lang['POSTCOUNT'] = 'Post count';
+$lang['SEARCH_USERS_MISC_EXPLAIN'] = 'Администраторҳо - Ҳама корбарон дорои ваколатҳои администратор; Модераторҳо - Ҳамаи модераторҳои форум; Истифодабарандагони мамнӯъ - Ҳама ҳисобҳое, ки дар ин форумҳо мамнӯъ шудаанд; Истифодабарандагони маъюб - Ҳама корбароне, ки ҳисобҳои ғайрифаъол доранд (ё дастӣ ғайрифаъол шудаанд ё ҳеҷ гоҳ суроғаи почтаи электронии худро тасдиқ накардаанд); Корбарони дорои PM-ҳои маъюб - Корбаронеро интихоб мекунад, ки имтиёзҳои паёмҳои хусусиро хориҷ кардаанд (Тавассути идоракунии корбар анҷом дода мешавад)';
+$lang['POSTCOUNT'] = 'Шумораи паёмҳо';
 $lang['EQUALS'] = 'Натиҷа';
 $lang['GREATER_THAN'] = 'бузургтар аз';
 $lang['LESS_THAN'] = 'Камтар аз';
-$lang['SEARCH_USERS_POSTCOUNT_EXPLAIN'] = 'You can search for users based on the post count value. You can either search by a specific value, greater than or lesser than a value or between two values. To do the range search, select "Equals" then put the beginning and ending values of the range separated by a dash (-), e.g. 10-15';
+$lang['SEARCH_USERS_POSTCOUNT_EXPLAIN'] = 'Шумо метавонед корбаронро дар асоси арзиши шумораи паёмҳо ҷустуҷӯ кунед. Шумо метавонед ё аз рӯи арзиши мушаххас, бузургтар ё камтар аз арзиш ё байни ду арзиш ҷустуҷӯ кунед. Барои анҷом додани ҷустуҷӯи диапазон, "Баробар" -ро интихоб кунед ва арзишҳои ибтидоӣ ва охири диапазонро бо тире (-) ҷудо кунед, масалан 10-15';
 $lang['USERFIELD'] = 'Userfield';
 $lang['SEARCH_USERS_USERFIELD_EXPLAIN'] = 'Ҷустуҷӯ барои истифодабарандагон дар асоси соҳаҳои гуногуни намуди. Қолибҳо, бо истифода аз asterix (*) дастгирӣ карда мешаванд.';
 $lang['SEARCH_USERS_LASTVISITED_EXPLAIN'] = 'Шумо метавонед барои истифодабарандагон дар асоси санаи охирини воридшавии онҳо бо истифода аз ин хосият Ҷустуҷӯи Ҷустуҷӯи';
@@ -2671,7 +2671,7 @@ $lang['SEARCH_USERS_LANGUAGE_EXPLAIN'] = 'Ин истифодабарандаг�
 $lang['SEARCH_USERS_TIMEZONE_EXPLAIN'] = 'Истифодабарандагон, ки Омехтани доираи вакти муайян дар профили худ интихоб кардаанд,';
 $lang['SEARCH_USERS_STYLE_EXPLAIN'] = 'Намоиши корбарон, ки як сабки махсуси интихоб кардаанд.';
 $lang['MODERATORS_OF'] = 'модератори аз';
-$lang['SEARCH_USERS_MODERATORS_EXPLAIN'] = 'Search for users with Moderating permissions to a specific forum. Moderating permissions are recognised either by User Permissions or by being in a Group with the right Group Permissions.';
+$lang['SEARCH_USERS_MODERATORS_EXPLAIN'] = 'Ҷустуҷӯи корбарон бо иҷозати модератсия ба форуми мушаххас. Иҷозатҳои модераторӣ аз ҷониби Иҷозатҳои корбар ё дар гурӯҳ будан бо Иҷозатҳои дурусти гурӯҳӣ эътироф карда мешаванд.';
 
 $lang['SEARCH_USERS_NEW'] = '%s сабзид %d натиҷа (р). Иҷро search</a> <a href="%s">another.';
 $lang['BANNED'] = 'манъ';
@@ -2749,7 +2749,7 @@ $lang['ATOM_GLOBAL_FEED'] = 'Хўроки Global барои ҳамаи фору�
 $lang['HASH_INVALID'] = 'Шудаи %s нодуруст аст';
 $lang['HASH_NOT_FOUND'] = 'Озод бо шудаи %s ёфт нашуд';
 
-$lang['TERMS_EMPTY_TEXT'] = '[align=center]The text of this page is edited at: [url=https://%s/admin/admin_terms.php]admin/admin_terms.php[/url]. This line can see only administrators.[/align]';
+$lang['TERMS_EMPTY_TEXT'] = '[align=center]Матни ин саҳифа дар таҳрир карда шудааст: [url=https://%s/admin/admin_terms.php]admin/admin_terms.php[/url]. Ин сатр танҳо маъмуронро дида метавонад.[/align]';
 $lang['TERMS_EXPLAIN'] = 'Дар ин саҳифа шумо метавонед муайян кунед, ки матни қоидаҳои асосии захираҳои аст, ба истифодабарандагон нишон дода мешавад.';
 
 $lang['TR_STATS'] = array(
@@ -2808,14 +2808,14 @@ $lang['CAPTCHA_SETTINGS'] = '<h2>ReCaptcha будан нест, пурра confi
 
 // Sending email
 $lang['EMAILER_SUBJECT'] = [
-    'EMPTY' => 'No subject',
-    'GROUP_ADDED' => 'You have been added to the user group',
-    'GROUP_APPROVED' => 'Your request to join the user group has been granted',
-    'GROUP_REQUEST' => 'A request to join your user group',
-    'PRIVMSG_NOTIFY' => 'New private message',
-    'TOPIC_NOTIFY' => 'Notification of response in the thread %s',
-    'USER_ACTIVATE' => 'Account reactivation',
-    'USER_ACTIVATE_PASSWD' => 'Confirming a new password',
-    'USER_WELCOME' => 'Welcome to the site %s',
-    'USER_WELCOME_INACTIVE' => 'Welcome to the site %s',
+    'EMPTY' => 'Мавзӯъ нест',
+    'GROUP_ADDED' => 'Шумо ба гурӯҳи корбарон илова кардаед',
+    'GROUP_APPROVED' => 'Дархости шумо барои ҳамроҳ шудан ба гурӯҳи корбарон қабул шуд',
+    'GROUP_REQUEST' => 'Дархост барои ҳамроҳ шудан ба гурӯҳи корбарии шумо',
+    'PRIVMSG_NOTIFY' => 'Паёми нави хусусӣ',
+    'TOPIC_NOTIFY' => 'Огоҳӣ дар бораи посух дар риштаи %s',
+    'USER_ACTIVATE' => 'Аз нав фаъол кардани ҳисоб',
+    'USER_ACTIVATE_PASSWD' => 'Тасдиқи пароли нав',
+    'USER_WELCOME' => 'Хуш омадед ба сайт %s',
+    'USER_WELCOME_INACTIVE' => 'Хуш омадед ба сайт %s',
 ];
